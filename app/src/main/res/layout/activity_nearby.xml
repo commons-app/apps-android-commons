@@ -23,22 +23,40 @@
             <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="horizontal"
+                android:layout_below="@id/toolbar"
                 android:gravity="center_vertical"
-                android:layout_below="@id/toolbar">
-
-                <ProgressBar
-                    android:id="@+id/progressBar"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_centerInParent="true" />
-
-                <FrameLayout
-                    android:id="@+id/container"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"></FrameLayout>
-
-            </LinearLayout>
+                android:orientation="horizontal">
+            <ProgressBar
+                android:id="@+id/progressBar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+            <android.support.v4.widget.SwipeRefreshLayout
+                android:id="@+id/swipe_container"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+            <FrameLayout
+                android:id="@+id/container"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+            </android.support.v4.widget.SwipeRefreshLayout>
+        </LinearLayout>
+            <android.support.design.widget.FloatingActionButton
+                android:id="@+id/fab_list"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:fabSize="mini"
+                android:layout_alignBottom="@id/toolbar"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="28dp"
+                android:layout_marginBottom="-96dp"
+                android:visibility="invisible"
+                app:elevation="6dp"
+                app:pressedTranslationZ="12dp"
+                android:backgroundTint="@color/button_blue"
+                android:clickable="true"
+                app:srcCompat="@drawable/ic_list_white_24dp"
+                android:scaleType="center"
+                />
             <View
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -47,8 +65,8 @@
                 android:background="#aa969696"
                 android:elevation="6dp"
                 />
-        </RelativeLayout>
 
+    </RelativeLayout>
         <include layout="@layout/bottom_sheet_nearby" />
         <include layout="@layout/bottom_sheet_details" android:id="@+id/bottom_sheet_details" />
 

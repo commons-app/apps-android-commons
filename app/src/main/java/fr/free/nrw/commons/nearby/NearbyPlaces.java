@@ -32,7 +32,7 @@ public class NearbyPlaces {
 
     public NearbyPlaces() {
         try {
-            wikidataQuery = FileUtils.readFromResource("/assets/queries/nearby_query.rq");
+            wikidataQuery = FileUtils.readFromResource("/queries/nearby_query.rq");
             Timber.v(wikidataQuery);
         } catch (IOException e) {
             throw new RuntimeException(e);

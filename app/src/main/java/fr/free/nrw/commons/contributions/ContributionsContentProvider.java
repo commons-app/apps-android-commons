@@ -1,6 +1,5 @@
 package fr.free.nrw.commons.contributions;
 
-import android.content.ContentProvider;
 import android.content.ContentValues;
 import android.content.UriMatcher;
 import android.database.Cursor;
@@ -12,27 +11,27 @@ import android.text.TextUtils;
 
 import javax.inject.Inject;
 
-import dagger.android.AndroidInjection;
 import fr.free.nrw.commons.data.DBOpenHelper;
+import fr.free.nrw.commons.di.CommonsDaggerContentProvider;
 import timber.log.Timber;
 
 import static android.content.UriMatcher.NO_MATCH;
-import static fr.free.nrw.commons.contributions.Contribution.Table.ALL_FIELDS;
-import static fr.free.nrw.commons.contributions.Contribution.Table.TABLE_NAME;
+import static fr.free.nrw.commons.contributions.ContributionDao.Table.ALL_FIELDS;
+import static fr.free.nrw.commons.contributions.ContributionDao.Table.TABLE_NAME;
 
-public class ContributionsContentProvider extends ContentProvider {
+public class ContributionsContentProvider extends CommonsDaggerContentProvider {
 
     private static final int CONTRIBUTIONS = 1;
     private static final int CONTRIBUTIONS_ID = 2;
     private static final String BASE_PATH = "contributions";
     private static final UriMatcher uriMatcher = new UriMatcher(NO_MATCH);
-    public static final String AUTHORITY = "fr.free.nrw.commons.contributions.contentprovider";
+    public static final String CONTRIBUTION_AUTHORITY = "fr.free.nrw.commons.contributions.contentprovider";
 
-    public static final Uri BASE_URI = Uri.parse("content://" + AUTHORITY + "/" + BASE_PATH);
+    public static final Uri BASE_URI = Uri.parse("content://" + CONTRIBUTION_AUTHORITY + "/" + BASE_PATH);
 
     static {
-        uriMatcher.addURI(AUTHORITY, BASE_PATH, CONTRIBUTIONS);
-        uriMatcher.addURI(AUTHORITY, BASE_PATH + "/#", CONTRIBUTIONS_ID);
+        uriMatcher.addURI(CONTRIBUTION_AUTHORITY, BASE_PATH, CONTRIBUTIONS);
+        uriMatcher.addURI(CONTRIBUTION_AUTHORITY, BASE_PATH + "/#", CONTRIBUTIONS_ID);
     }
 
     public static Uri uriForId(int id) {
@@ -40,12 +39,6 @@ public class ContributionsContentProvider extends ContentProvider {
     }
 
     @Inject DBOpenHelper dbOpenHelper;
-
-    @Override
-    public boolean onCreate() {
-        AndroidInjection.inject(this);
-        return true;
-    }
 
     @SuppressWarnings("ConstantConditions")
     @Override
@@ -93,7 +86,7 @@ public class ContributionsContentProvider extends ContentProvider {
     public Uri insert(@NonNull Uri uri, ContentValues contentValues) {
         int uriType = uriMatcher.match(uri);
         SQLiteDatabase sqlDB = dbOpenHelper.getWritableDatabase();
-        long id = 0;
+        long id;
         switch (uriType) {
             case CONTRIBUTIONS:
                 id = sqlDB.insert(TABLE_NAME, null, contentValues);
@@ -165,7 +158,7 @@ public class ContributionsContentProvider extends ContentProvider {
          */
         int uriType = uriMatcher.match(uri);
         SQLiteDatabase sqlDB = dbOpenHelper.getWritableDatabase();
-        int rowsUpdated = 0;
+        int rowsUpdated;
         switch (uriType) {
             case CONTRIBUTIONS:
                 rowsUpdated = sqlDB.update(TABLE_NAME, contentValues, selection, selectionArgs);
@@ -176,7 +169,7 @@ public class ContributionsContentProvider extends ContentProvider {
                 if (TextUtils.isEmpty(selection)) {
                     rowsUpdated = sqlDB.update(TABLE_NAME,
                             contentValues,
-                            Contribution.Table.COLUMN_ID + " = ?",
+                            ContributionDao.Table.COLUMN_ID + " = ?",
                             new String[]{String.valueOf(id)});
                 } else {
                     throw new IllegalArgumentException(

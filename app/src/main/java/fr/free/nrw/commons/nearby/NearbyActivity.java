@@ -7,7 +7,9 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomSheetBehavior;
+
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.Menu;
@@ -71,6 +73,7 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
     private static final String TAG_RETAINED_MAP_FRAGMENT = NearbyMapFragment.class.getSimpleName();
     private static final String TAG_RETAINED_LIST_FRAGMENT = NearbyListFragment.class.getSimpleName();
 
+    @BindView(R.id.swipe_container) SwipeRefreshLayout swipeLayout;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -78,6 +81,8 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
         ButterKnife.bind(this);
         resumeFragment();
         bundle = new Bundle();
+
+        initBottomSheetBehaviour();
         initDrawer();
     }
 
@@ -90,6 +95,14 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
     private void initBottomSheetBehaviour() {
 
         transparentView.setAlpha(0);
+        swipeLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                lockNearbyView(false);
+                refreshView(true);
+            }
+        });
+
         bottomSheet.getLayoutParams().height = getWindowManager()
                 .getDefaultDisplay().getHeight() / 16 * 9;
         bottomSheetBehavior = BottomSheetBehavior.from(bottomSheet);

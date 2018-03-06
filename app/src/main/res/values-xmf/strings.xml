@@ -20,9 +20,9 @@
   <string name="upload_progress_notification_title_finishing">ეხარგუაშ თება %1$</string>
   <string name="upload_failed_notification_title">%1$ ეხარგუაქ ვემიხუჯინუ</string>
   <string name="upload_failed_notification_subtitle">ოძირაფალო ქეგუწკანტეთ</string>
-  <plurals name="uploads_pending_notification_indicator">
-    <item quantity="one">%d ფაილი იხარგუ</item>
-    <item quantity="other">%d ფაილი იხარგუ</item>
+  <plurals name="uploads_pending_notification_indicator" fuzzy="true">
+    <item quantity="one">%1$d ფაილი იხარგუ</item>
+    <item quantity="other">%1$d ფაილი იხარგუ</item>
   </plurals>
   <string name="title_activity_contributions">ჩქიმი ბოლო ეხარგუეფი</string>
   <string name="contribution_state_queued">რადი</string>
@@ -56,16 +56,16 @@
   <string name="contributions_subtitle_zero">ეხარგუეფი ვა რე</string>
   <plurals name="contributions_subtitle">
     <item quantity="zero">\@string/contributions_subtitle_zero</item>
-    <item quantity="one">%d ეხარგუა</item>
-    <item quantity="other">%d ეხარგუა</item>
+    <item quantity="one">%1$d ეხარგუა</item>
+    <item quantity="other">%1$d ეხარგუა</item>
   </plurals>
   <plurals name="starting_multiple_uploads">
-    <item quantity="one">იჭყაფუ %d ეხარგუა</item>
-    <item quantity="other">იჭყაფუ %d ეხარგუა</item>
+    <item quantity="one">იჭყაფუ %1$d ეხარგუა</item>
+    <item quantity="other">იჭყაფუ %1$d ეხარგუა</item>
   </plurals>
-  <plurals name="multiple_uploads_title">
-    <item quantity="one">%d ეხარგუა</item>
-    <item quantity="other">%d ეხარგუა</item>
+  <plurals name="multiple_uploads_title" fuzzy="true">
+    <item quantity="one">%1$d ეხარგუა</item>
+    <item quantity="other">%1$d ეხარგუა</item>
   </plurals>
   <string name="categories_activity_title">კატეგორია</string>
   <string name="title_activity_settings">პარამეტრეფი</string>
@@ -105,7 +105,7 @@
   <string name="tutorial_3_text">ქორთხინთ ვეხარგათ:</string>
   <string name="tutorial_3_subtext">- სელფი ვარდა მაჸალეეფიშ სურათეფი\n- ინტერნეტშე გჷმოხარგილი ფოტოეფი\n- ვადუდიშული აპლიკაციეფიშ სკრინშოტეფი</string>
   <string name="tutorial_4_text">ეხარგუაშ მინუში:</string>
-  <string name="tutorial_4_subtext">- დუდჯოხო: სიდნეიშ ოპერაშ თეატრი\n- ეჭარუა: სიდნეიშ ოპერაშ თეატრიშ მიოჯინი ლუბაშე\n- კატეგორიეფი: Sydney Opera House, Sydney Opera House from the west, Sydney Opera House remote views</string>
+  <string name="tutorial_4_subtext" fuzzy="true">- დუდჯოხო: სიდნეიშ ოპერაშ თეატრი\n- ეჭარუა: სიდნეიშ ოპერაშ თეატრიშ მიოჯინი ლუბაშე\n- კატეგორიეფი: Sydney Opera House, Sydney Opera House from the west, Sydney Opera House remote views</string>
   <string name="welcome_wikipedia_text">გეხარგეთ თქვანი ფოტოეფი. ქემეხვარით ვიკიპედიაშ სტატიეფიშ გაჭყანიერებას!</string>
   <string name="welcome_wikipedia_subtext">ვიკიპედიაშ ფოტოეფი ვიკიოწკარუეს იჩუალუაფუ.</string>
   <string name="welcome_copyright_text">თქვანი სურათეფი კათაშ გონათუას ოხვარუ ედომუშამ მოსოფელს.</string>

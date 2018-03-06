@@ -5,7 +5,7 @@
   <string name="password">Password</string>
   <string name="login">Idħol</string>
   <string name="logging_in_title">Dieħel</string>
-  <string name="logging_in_message">Jekk jogħġbok stenna…</string>
+  <string name="logging_in_message" fuzzy="true">Jekk jogħġbok stenna…</string>
   <string name="login_success">Dħalt b\'suċċess!</string>
   <string name="login_failed">Id-dħul fil-kont ma rnexxiex!</string>
   <string name="authentication_failed">L-awtentikar falla!</string>
@@ -17,7 +17,7 @@
   <string name="upload_progress_notification_title_finishing">It-tlugħ ta\' %1$s spiċċa</string>
   <string name="upload_failed_notification_title">It-tlugħ ta\' %1$s ma rnexxiex</string>
   <string name="upload_failed_notification_subtitle">Agħfas biex tara</string>
-  <string name="title_activity_contributions">It-tlugħ tiegħi</string>
+  <string name="title_activity_contributions" fuzzy="true">It-tlugħ tiegħi</string>
   <string name="contribution_state_queued">Fil-kju</string>
   <string name="contribution_state_failed">Ma rnexxiex</string>
   <string name="contribution_state_in_progress">%1$d%% komplut</string>
@@ -38,18 +38,13 @@
   <string name="categories_search_text_hint">Fittex fil-kategoriji</string>
   <string name="menu_save_categories">Salva</string>
   <string name="categories_not_found">L-ebda kategorija ma nstabet li għandha %1$s</string>
-  <string name="categories_skip_explanation">Żid kategoriji sabiex l-istampi tiegħek ikunu skoperti iktar fuq Wikimedia Commons.
-
-Ibda ikteb sabiex iżżid kategoriji.
-Agħfas fuq dan il-messaġġ (jew mur lura) sabiex taqbeż dan il-pass.</string>
+  <string name="categories_skip_explanation" fuzzy="true">Żid kategoriji sabiex l-istampi tiegħek ikunu skoperti iktar fuq Wikimedia Commons.\n\nIbda ikteb sabiex iżżid kategoriji.\nAgħfas fuq dan il-messaġġ (jew mur lura) sabiex taqbeż dan il-pass.</string>
   <string name="categories_activity_title">Kategoriji</string>
-  <string name="preference_tracking">Rapporti tal-użu</string>
-  <string name="preference_tracking_summary">Ibgħat ir-rapporti tal-użu lill-Wikimedia sabiex tgħinna ntejbdu l-app</string>
   <string name="title_activity_settings">Issettjar</string>
   <string name="menu_about">Dwar</string>
   <string name="about_license" fuzzy="true">Softwer ta\' sors miftuħ rilaxxat taħt il-&lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/COPYING\"&gt;Liċenzja Apache v2&lt;/a&gt;</string>
   <string name="about_improve" fuzzy="true">Sors fuq &lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;GitHub&lt;/a&gt;. Żbalji fuq &lt;a href=\" https://github.com/commons-app/apps-android-commons/issues\"&gt;Github&lt;/a&gt;.</string>
-  <string name="about_privacy_policy">&lt;a href=\"https://wikimediafoundation.org/wiki/Privacy_policy\"&gt;Politika tal-privatezza&lt;/a&gt;</string>
+  <string name="about_privacy_policy" fuzzy="true">&lt;a href=\"https://wikimediafoundation.org/wiki/Privacy_policy\"&gt;Politika tal-privatezza&lt;/a&gt;</string>
   <string name="title_activity_about">Dwar</string>
   <string name="provider_categories">Kategoriji wżati riċentament</string>
   <string name="no_uploads_yet">Għadek ma tellgħajt l-ebda ritratt.</string>

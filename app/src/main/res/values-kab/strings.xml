@@ -21,8 +21,8 @@
   <string name="upload_failed_notification_title">Asali n  %1$s ur yeddi ara</string>
   <string name="upload_failed_notification_subtitle">Senned akken ad sekneḍ</string>
   <plurals name="uploads_pending_notification_indicator">
-    <item quantity="one">%d n ufaylu yezga yettali</item>
-    <item quantity="other">%d n ifuyla zgan ttalin</item>
+    <item quantity="one">%1$d n ufaylu yezga yettali</item>
+    <item quantity="other">%1$d n ifuyla zgan ttalin</item>
   </plurals>
   <string name="title_activity_contributions">Ifuyla yulin melmi kan</string>
   <string name="contribution_state_queued">Ttraǧun</string>
@@ -56,16 +56,16 @@
   <string name="contributions_subtitle_zero">Usla ayen yulin</string>
   <plurals name="contributions_subtitle">
     <item quantity="zero">\@string/contributions_subtitle_zero</item>
-    <item quantity="one">%d n usali</item>
-    <item quantity="other">%d n usali</item>
+    <item quantity="one">%1$d n usali</item>
+    <item quantity="other">%1$d n usali</item>
   </plurals>
   <plurals name="starting_multiple_uploads">
-    <item quantity="one">Beddu n %d n usali</item>
-    <item quantity="other">Beddu n %d n usali</item>
+    <item quantity="one">Beddu n %1$d n usali</item>
+    <item quantity="other">Beddu n %1$d n usali</item>
   </plurals>
   <plurals name="multiple_uploads_title">
-    <item quantity="one">%d n usali</item>
-    <item quantity="other">%d n usali</item>
+    <item quantity="one">%1$d n usali</item>
+    <item quantity="other">%1$d n usali</item>
   </plurals>
   <string name="categories_not_found">Ulac taggayin imenṭaḍen akked %1$s i yettwafen</string>
   <string name="categories_skip_explanation">Rnu taggayin akken ad terreḍ tugniwin-ik sehlent i tifin di Wikimedia Commons.\n\nBdu timerna n taggayin.</string>
@@ -74,7 +74,7 @@
   <string name="title_activity_signup">Jerred</string>
   <string name="menu_about">Ɣef</string>
   <string name="about_license">Asnas Wikipedia Commons d asnas n uɣbalu yeldin i d-yennulfan udiɣ yettwarfed sɣur iwiziwen d wid i t-iḍemnen n tmezdagnut Wikimedia. Tasbeddit Wikimedia ur tetteka ara deg usnulfu-is, tanfelit-is, neɣ aseggem n usnas.</string>
-  <string name="about_improve">&lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;Iɣbula&lt;/a&gt; akked &lt;a href=\"https://commons-app.github.io/\"&gt;usmel web&lt;/a&gt; di GitHub. Rnu &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;tummla GitHub&lt;/a&gt; tamaynut akken ad temmleḍ ibugen neɣ ad d-mudded isumar.</string>
+  <string name="about_improve">Rnu &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;tummla tamaynut GitHub&lt;/a&gt; akken ad temmleḍ ibugen neɣ ad d-mudded isumar.</string>
   <string name="about_privacy_policy">&lt;a href=\"https://github.com/commons-app/apps-android-commons/wiki/Privacy-policy\"&gt;Tasertit n tbaḍnit&lt;/a&gt;</string>
   <string name="about_credits">&lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/CREDITS\"&gt;Ismaden&lt;/a&gt;</string>
   <string name="title_activity_about">Ɣef</string>
@@ -121,7 +121,7 @@
   <string name="tutorial_3_text">UR salay ara:</string>
   <string name="tutorial_3_subtext">- isilfiyen neɣ tugniwin n yimdakkal-ik \n- tugniwin i d-sidreḍ si Internet\n- inɣal n ugdil n yisnasen yesɛan imawlan</string>
   <string name="tutorial_4_text">Amedya n usali:</string>
-  <string name="tutorial_4_subtext">- Azwel: Tazqqa Opera n Sydney\n- Aglam : Tazeqqa Opera n Sydney seg ilel\n- Taggayin: Tazeqqa Opera n Sydney, Tazeqqa Opera n Sydney seg umalu, timeẓriyin s lebɛid n Tazeqqa Opera n Sydney.</string>
+  <string name="tutorial_4_subtext">- Azwel: Tazqqa Opera n Sydney\n- Aglam : Tazeqqa Opera n Sydney seg ilel\n- Taggayin: Tazeqqa Opera n Sydney, Tazeqqa Opera n Sydney seg umalu, timeẓriyin s lebɛid n Tazeqqa Opera n Sydney</string>
   <string name="welcome_wikipedia_text">Ttekki s tugniwin-ik. Snerni imagraden n Wikipedia!</string>
   <string name="welcome_wikipedia_subtext">Tugniwin ɣef Wikipedia ttasent-d si Wikimedia Commons.</string>
   <string name="welcome_copyright_text">Tugniwin-ik ad slemdent imdanen deg umaḍal.</string>
@@ -164,6 +164,9 @@
   <string name="login_failed_2fa_not_supported">Asesteb s snat n tarrayin ur yettusefrak ara akka tura.</string>
   <string name="logout_verification">Tabɣiḍ ad teffɣeḍ?</string>
   <string name="commons_logo">Alugu Commons</string>
+  <string name="commons_website">Asmel wen n Commons</string>
+  <string name="commons_facebook">Asmel Facebook n Commons</string>
+  <string name="commons_github">Tangalt aɣbalu Github n Commons</string>
   <string name="background_image">Tugna n ugilal</string>
   <string name="mediaimage_failed">Tugna n midya ur teddi ara</string>
   <string name="no_image_found">Ulac tugna</string>
@@ -188,6 +191,7 @@
   <string name="navigation_item_feedback">Tikti</string>
   <string name="navigation_item_logout">Tuffɣa</string>
   <string name="navigation_item_info">Atuṭuryel</string>
+  <string name="navigation_item_notification">Ilɣa</string>
   <string name="nearby_needs_permissions">Imḍiqen iqerben zemren ur ttwaskanen ara ma yella ur tebḍiḍ ara adig-ik arakal.</string>
   <string name="no_description_found">ulac aglam yettwafen</string>
   <string name="nearby_info_menu_commons_article">Asebter n ifuyla yettwasnen</string>
@@ -198,10 +202,16 @@
   <string name="give_permission">Mudd tasiregt</string>
   <string name="use_external_storage">Seqdec asekles azɣaray</string>
   <string name="use_external_storage_summary">Sekles tiwlafin yettwaṭṭfen s tkamirat yellan deg ibenk</string>
+  <string name="login_to_your_account">Qqen ar umiḍan-ik</string>
   <string name="send_log_file">Azen afaylu n uɣmis</string>
   <string name="send_log_file_description">Azen afaylu n uɣmis i yinermisen s yimayl</string>
-  <string name="login_to_your_account">Qqen ar umiḍan-ik</string>
   <string name="nearby_location_has_not_changed">Adeg ur ibeddel ara.</string>
   <string name="nearby_location_not_available">Ulac adeg</string>
   <string name="location_permission_rationale_nearby">Ilaq usireg i uskan tabdart n wadigen iqerben</string>
+  <string name="get_directions">AWI IWELLIHEN</string>
+  <string name="read_article">ƔER AMAGRAD</string>
+  <string name="notifications_welcome">Anṣuf ar Wikimedia Commons, %1$s! Nefreḥ yes-k dagi.</string>
+  <string name="notifications_talk_page_message">%1$syeǧǧa-d izen deg usenter n uskasi</string>
+  <string name="notifications_thank_you_edit">Tanemmirt ɣef ubeddel</string>
+  <string name="notifications_mention">%1$s yemmel-ak-id deg %2$s .</string>
 </resources>

@@ -20,9 +20,9 @@
   <string name="upload_progress_notification_title_finishing">Méréskeun unjalan %1$s</string>
   <string name="upload_failed_notification_title">Ngunjal %1$s gagal</string>
   <string name="upload_failed_notification_subtitle">Toél pikeun nempo</string>
-  <plurals name="uploads_pending_notification_indicator">
-    <item quantity="one">ngunjal %d berkas</item>
-    <item quantity="other">ngunjal %d berkas</item>
+  <plurals name="uploads_pending_notification_indicator" fuzzy="true">
+    <item quantity="one">ngunjal %1$d berkas</item>
+    <item quantity="other">ngunjal %1$d berkas</item>
   </plurals>
   <string name="title_activity_contributions">Unjalan panungtung kuring</string>
   <string name="contribution_state_queued">Antrian</string>
@@ -56,16 +56,16 @@
   <string name="contributions_subtitle_zero">Can aya nu diunjal</string>
   <plurals name="contributions_subtitle">
     <item quantity="zero">\@string/contributions_subtitle_zero</item>
-    <item quantity="one">%d unjalan</item>
-    <item quantity="other">%d unjalan</item>
+    <item quantity="one">%1$d unjalan</item>
+    <item quantity="other">%1$d unjalan</item>
   </plurals>
   <plurals name="starting_multiple_uploads">
     <item quantity="one">Ngamimitian saunjalan</item>
-    <item quantity="other">Ngamimitian %d unjalan</item>
+    <item quantity="other">Ngamimitian %1$d unjalan</item>
   </plurals>
-  <plurals name="multiple_uploads_title">
+  <plurals name="multiple_uploads_title" fuzzy="true">
     <item quantity="one">saunjalan</item>
-    <item quantity="other">%d unjalan</item>
+    <item quantity="other">%1$d unjalan</item>
   </plurals>
   <string name="categories_not_found">Teu mendak kategori anu cocog jeung %1$s</string>
   <string name="categories_skip_explanation" fuzzy="true">Tambahkeun kategori hambéh gambar anjeun beuki gampang katarana di Wikimédia Commons.\n\nMimitian ku ngetik kategori.\nToél ieu talatah (atawa toél deui) pikeun ngaliwatkeun ieu bagęan.</string>
@@ -74,7 +74,7 @@
   <string name="title_activity_signup">Daptar</string>
   <string name="menu_about">Ngeunaan</string>
   <string name="about_license">Aplikasi Wikimédia Commons mangrupa aplikasi sumber nembrak nu dijieun jeung dikokolakeun ku panampa hibah sarta rélawan komunitas Wikimédia. Wikimedia Foundation teu pépérodeun dina nyieun, ngamekarkeun, atawa mulasara ieu aplikasi.</string>
-  <string name="about_improve">&lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;Sumber&lt;/a&gt; sarta &lt;a href=\"https://commons-app.github.io/\"&gt;situ wéb&lt;/a&gt; dina GitHub. Jieun anyar &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;perkara GitHub&lt;/a&gt; pikeun saran jeung laporan kutu.</string>
+  <string name="about_improve" fuzzy="true">&lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;Sumber&lt;/a&gt; sarta &lt;a href=\"https://commons-app.github.io/\"&gt;situ wéb&lt;/a&gt; dina GitHub. Jieun anyar &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;perkara GitHub&lt;/a&gt; pikeun saran jeung laporan kutu.</string>
   <string name="about_privacy_policy">&lt;a href=\"https://github.com/commons-app/apps-android-commons/wiki/Privacy-policy\"&gt;Kawijakan privasi&lt;/a&gt;</string>
   <string name="about_credits">&lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/CREDITS\"&gt;Pangajén&lt;/a&gt;</string>
   <string name="title_activity_about">Ngeunaan</string>
@@ -121,7 +121,7 @@
   <string name="tutorial_3_text">Wayahna ULAH ngunjal:</string>
   <string name="tutorial_3_subtext">- Sélpi atawa poto sobat anjeun\n- Poto anu diundeur ti Internét\n- Poto layar aplikasi</string>
   <string name="tutorial_4_text">Conto unjalan:</string>
-  <string name="tutorial_4_subtext">- Judul: Gedung Opera Sydney\n- Pedaran: Gedung Opera Sydney (Sydney Opera House) ditempo ti basisir peuntas\n- Kategori: Sydney Opera House, Sydney Opera House from the west, Sydney Opera House remote views</string>
+  <string name="tutorial_4_subtext" fuzzy="true">- Judul: Gedung Opera Sydney\n- Pedaran: Gedung Opera Sydney (Sydney Opera House) ditempo ti basisir peuntas\n- Kategori: Sydney Opera House, Sydney Opera House from the west, Sydney Opera House remote views</string>
   <string name="welcome_wikipedia_text">Sumbangkeun gambar Anjeun. Bantuan ngahirupkeun artikel Wikipédia!</string>
   <string name="welcome_wikipedia_subtext">Gambar di Wikipédia asalna ti Wikimedia Commons.</string>
   <string name="welcome_copyright_text">Gambar-gambar anjeun ngabantu ngatik jalma di sakuliah dunya.</string>
@@ -198,7 +198,7 @@
   <string name="give_permission">Béré idin</string>
   <string name="use_external_storage">Paké panyimpenan éksternal</string>
   <string name="use_external_storage_summary">Simpen gambar nu nyomotna ku aplikasi kaména na parangkat anjeun</string>
+  <string name="login_to_your_account">Asup log kana akun anjeun</string>
   <string name="send_log_file">Kirim berkas log</string>
   <string name="send_log_file_description">Kirim berkas log ka pamekar liwat surélék</string>
-  <string name="login_to_your_account">Asup log kana akun anjeun</string>
 </resources>

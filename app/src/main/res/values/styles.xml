@@ -13,6 +13,7 @@
         <item name="buttonBackground">@color/button_background_dark</item>
         <item name="uploadOverlayBackground">@color/upload_overlay_background_dark</item>
         <item name="spinnerTheme">@style/DarkSpinnerTheme</item>
+        <item name="iconsTheme">@color/main_background_light</item>
         <item name="bottomBar">@color/bottom_bar_dark</item>
         <item name="buttonBackgroundFocused">@color/focused_button_dark</item>
         <item name="buttonBackgroundPressed">@color/pressed_button_dark</item>
@@ -32,6 +33,7 @@
         <item name="buttonBackground">@color/button_background_light</item>
         <item name="uploadOverlayBackground">@color/upload_overlay_background_light</item>
         <item name="spinnerTheme">@style/LightSpinnerTheme</item>
+        <item name="iconsTheme">@color/main_background_dark</item>
         <item name="bottomBar">@color/bottom_bar_light</item>
         <item name="buttonBackgroundFocused">@color/focused_button_light</item>
         <item name="buttonBackgroundPressed">@color/pressed_button_light</item>

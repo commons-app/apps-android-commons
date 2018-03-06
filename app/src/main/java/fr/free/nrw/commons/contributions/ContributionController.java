@@ -80,11 +80,20 @@ public class ContributionController {
         //FIXME: Starts gallery (opens Google Photos)
         Intent pickImageIntent = new Intent(ACTION_GET_CONTENT);
         pickImageIntent.setType("image/*");
+<<<<<<< HEAD
         Timber.d("startGalleryPick() called with pickImageIntent");
         // See https://stackoverflow.com/questions/22366596/android-illegalstateexception-fragment-not-attached-to-activity-webview
         if (!fragment.isAdded()) {
             return;
         }
+=======
+        // See https://stackoverflow.com/questions/22366596/android-illegalstateexception-fragment-not-attached-to-activity-webview
+        if (!fragment.isAdded()) {
+            Timber.d("Fragment is not added, startActivityForResult cannot be called");
+            return;
+        }
+        Timber.d("startGalleryPick() called with pickImageIntent");
+>>>>>>> directNearbyUploadsNewLocal
         fragment.startActivityForResult(pickImageIntent, SELECT_FROM_GALLERY);
     }
 
@@ -105,12 +114,20 @@ public class ContributionController {
                 }
                 break;
             case SELECT_FROM_CAMERA:
-                shareIntent.setType("image/jpeg"); //FIXME: Find out appropriate mime type
+                //FIXME: Find out appropriate mime type
+                // AFAIK this is the right type for a JPEG image
+                // https://developer.android.com/training/sharing/send.html#send-binary-content
+                shareIntent.setType("image/jpeg");
                 shareIntent.putExtra(EXTRA_STREAM, lastGeneratedCaptureUri);
                 shareIntent.putExtra(EXTRA_SOURCE, SOURCE_CAMERA);
                 if (isDirectUpload) {
                     shareIntent.putExtra("isDirectUpload", true);
                 }
+<<<<<<< HEAD
+=======
+                break;
+            default:
+>>>>>>> directNearbyUploadsNewLocal
                 break;
         }
         Timber.i("Image selected");
@@ -132,5 +149,4 @@ public class ContributionController {
             lastGeneratedCaptureUri = savedInstanceState.getParcelable("lastGeneratedCaptureURI");
         }
     }
-
 }

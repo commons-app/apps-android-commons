@@ -51,7 +51,7 @@
   <plurals name="contributions_subtitle" fuzzy="true">
     <item quantity="zero">Oraindik igoerarik ez</item>
     <item quantity="one">igoera 1</item>
-    <item quantity="other">%d igoera</item>
+    <item quantity="other">%1$d igoera</item>
   </plurals>
   <string name="categories_not_found">Ez da kategoriak aukritu %1$s izenarekin</string>
   <string name="categories_skip_explanation" fuzzy="true">Gehitu kategoriak zure argazkiak Wikimedia Commonsen aurkitzen errazagoak izan daitezen.</string>
@@ -60,7 +60,7 @@
   <string name="title_activity_signup">Eman izena</string>
   <string name="menu_about">Honi buruz</string>
   <string name="about_license" fuzzy="true">Open Source softwarea &lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/COPYING\"&gt;Apache v2 Lizentziaren&lt;/a&gt; pean egina. Wikimedia Commons eta bere logoa Wikimedia Fundazioaren marka erregistratuak dira eta Wikimedia Fundazioaren baimenarekin erabiltzen dira. Ez gaude Wikimedia Fundaziora afiliatuta.</string>
-  <string name="about_improve">GitHub-eko &lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;Iturria&lt;/a&gt; eta &lt;a href=\"https://commons-app.github.io/\"&gt;webgunea&lt;/a&gt;. &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;GitHub-eko gai&lt;/a&gt; berria sortu erroreen berri emateko.</string>
+  <string name="about_improve" fuzzy="true">GitHub-eko &lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;Iturria&lt;/a&gt; eta &lt;a href=\"https://commons-app.github.io/\"&gt;webgunea&lt;/a&gt;. &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;GitHub-eko gai&lt;/a&gt; berria sortu erroreen berri emateko.</string>
   <string name="about_privacy_policy" fuzzy="true">&lt;a href=\"https://wikimediafoundation.org/wiki/Privacy_policy\"&gt;Pribatutasun politika&lt;/a&gt;</string>
   <string name="title_activity_about">Honi buruz</string>
   <string name="menu_feedback">Bidali zure iritzia (e-posta bidez)</string>
@@ -124,6 +124,7 @@
   <string name="become_a_tester_title">Beta testatzaile bihurtu</string>
   <string name="use_wikidata">Wikidata erabili</string>
   <string name="use_wikidata_summary">(Erne:hau kentzeak mugikorrak datu asko kontsumitzea ekar dezake)</string>
+  <string name="_2fa_code">2FA Kodea</string>
   <string name="maximum_limit">Gehienezko muga</string>
   <string name="maximum_limit_alert">500 baino gehiago ezin dira erakutsi</string>
   <string name="commons_logo">Commonsen logoa</string>
@@ -155,4 +156,8 @@
   <string name="nearby_info_menu_commons_article">Artxibo orrialde komuna</string>
   <string name="nearby_info_menu_wikidata_article">Wikidata itema</string>
   <string name="error_while_cache">Argazkiak hartzerakoan sortutako akatsa</string>
+  <string name="give_permission">Baimena eman</string>
+  <string name="login_to_your_account">Zure kontuan saioa hasi</string>
+  <string name="get_directions">NORABIDEAK JASO</string>
+  <string name="read_article">IRAKURRI ARTIKULUA</string>
 </resources>

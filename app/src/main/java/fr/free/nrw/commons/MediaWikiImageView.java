@@ -14,6 +14,7 @@ import com.facebook.drawee.view.SimpleDraweeView;
 
 import javax.inject.Inject;
 
+import fr.free.nrw.commons.di.ApplicationlessInjection;
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
 import timber.log.Timber;
 
@@ -38,6 +39,10 @@ public class MediaWikiImageView extends SimpleDraweeView {
         init();
     }
 
+    /**
+     * Sets the media. Fetches its thumbnail if necessary.
+     * @param media the new media
+     */
     public void setMedia(Media media) {
         if (currentThumbnailTask != null) {
             currentThumbnailTask.cancel(true);
@@ -63,8 +68,15 @@ public class MediaWikiImageView extends SimpleDraweeView {
         super.onDetachedFromWindow();
     }
 
+    /**
+     * Initializes MediaWikiImageView.
+     */
     private void init() {
-        ((CommonsApplication) getContext().getApplicationContext()).injector().inject(this);
+        ApplicationlessInjection
+                .getInstance(getContext()
+                        .getApplicationContext())
+                .getCommonsApplicationComponent()
+                .inject(this);
         setHierarchy(GenericDraweeHierarchyBuilder
                 .newInstance(getResources())
                 .setPlaceholderImage(VectorDrawableCompat.create(getResources(),
@@ -74,6 +86,10 @@ public class MediaWikiImageView extends SimpleDraweeView {
                 .build());
     }
 
+    /**
+     * Displays the image from the URL.
+     * @param url the URL of the image
+     */
     private void setImageUrl(@Nullable String url) {
         setImageURI(url);
     }

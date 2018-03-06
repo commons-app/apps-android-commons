@@ -30,20 +30,40 @@ public class LocationServiceManager implements LocationListener {
     private final List<LocationUpdateListener> locationListeners = new CopyOnWriteArrayList<>();
     private boolean isLocationManagerRegistered = false;
 
+    /**
+     * Constructs a new instance of LocationServiceManager.
+     *
+     * @param context the context
+     */
     public LocationServiceManager(Context context) {
         this.context = context;
         this.locationManager = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
     }
 
+    /**
+     * Returns the current status of the GPS provider.
+     *
+     * @return true if the GPS provider is enabled
+     */
     public boolean isProviderEnabled() {
         return locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
     }
 
+    /**
+     * Returns whether the location permission is granted.
+     *
+     * @return true if the location permission is granted
+     */
     public boolean isLocationPermissionGranted() {
         return ContextCompat.checkSelfPermission(context,
                 Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED;
     }
 
+    /**
+     * Requests the location permission to be granted.
+     *
+     * @param activity the activity
+     */
     public void requestPermissions(Activity activity) {
         if (activity.isFinishing()) {
             return;
@@ -54,11 +74,9 @@ public class LocationServiceManager implements LocationListener {
     }
 
     public boolean isPermissionExplanationRequired(Activity activity) {
-        if (activity.isFinishing()) {
-            return false;
-        }
-        return ActivityCompat.shouldShowRequestPermissionRationale(activity,
-                Manifest.permission.ACCESS_FINE_LOCATION);
+        return !activity.isFinishing() &&
+                ActivityCompat.shouldShowRequestPermissionRationale(activity,
+                        Manifest.permission.ACCESS_FINE_LOCATION);
     }
 
     public LatLng getLastLocation() {
@@ -68,7 +86,8 @@ public class LocationServiceManager implements LocationListener {
         return LatLng.from(lastLocation);
     }
 
-    /** Registers a LocationManager to listen for current location.
+    /**
+     * Registers a LocationManager to listen for current location.
      */
     public void registerLocationManager() {
         if (!isLocationManagerRegistered)
@@ -76,6 +95,12 @@ public class LocationServiceManager implements LocationListener {
                     && requestLocationUpdatesFromProvider(LocationManager.GPS_PROVIDER);
     }
 
+    /**
+     * Requests location updates from the specified provider.
+     *
+     * @param locationProvider the location provider
+     * @return true if successful
+     */
     private boolean requestLocationUpdatesFromProvider(String locationProvider) {
         try {
             locationManager.requestLocationUpdates(locationProvider,
@@ -92,7 +117,16 @@ public class LocationServiceManager implements LocationListener {
         }
     }
 
+    /**
+     * Returns whether a given location is better than the current best location.
+     *
+     * @param location            the location to be tested
+     * @param currentBestLocation the current best location
+     * @return LOCATION_SIGNIFICANTLY_CHANGED if location changed significantly
+     * LOCATION_SLIGHTLY_CHANGED if location changed slightly
+     */
     protected LocationChangeType isBetterLocation(Location location, Location currentBestLocation) {
+
         if (currentBestLocation == null) {
             // A new location is always better than no location
             return LocationChangeType.LOCATION_SIGNIFICANTLY_CHANGED;
@@ -148,7 +182,8 @@ public class LocationServiceManager implements LocationListener {
         return provider1.equals(provider2);
     }
 
-    /** Unregisters location manager.
+    /**
+     * Unregisters location manager.
      */
     public void unregisterLocationManager() {
         isLocationManagerRegistered = false;
@@ -159,12 +194,22 @@ public class LocationServiceManager implements LocationListener {
         }
     }
 
+    /**
+     * Adds a new listener to the list of location listeners.
+     *
+     * @param listener the new listener
+     */
     public void addLocationListener(LocationUpdateListener listener) {
         if (!locationListeners.contains(listener)) {
             locationListeners.add(listener);
         }
     }
 
+    /**
+     * Removes a listener from the list of location listeners.
+     *
+     * @param listener the listener to be removed
+     */
     public void removeLocationListener(LocationUpdateListener listener) {
         locationListeners.remove(listener);
     }

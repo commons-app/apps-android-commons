@@ -3,6 +3,7 @@ package fr.free.nrw.commons.nearby;
 import android.animation.ObjectAnimator;
 import android.animation.TypeEvaluator;
 import android.animation.ValueAnimator;
+
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
@@ -15,7 +16,6 @@ import android.support.design.widget.BottomSheetBehavior;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.FloatingActionButton;
 
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -115,7 +115,6 @@ public class NearbyMapFragment extends DaggerFragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Bundle bundle = this.getArguments();
-
         Gson gson = new GsonBuilder()
                 .registerTypeAdapter(Uri.class, new UriDeserializer())
                 .create();
@@ -388,6 +387,8 @@ public class NearbyMapFragment extends DaggerFragment {
     private void setupMapView(Bundle savedInstanceState) {
         MapboxMapOptions options = new MapboxMapOptions()
                 .styleUrl(Style.OUTDOORS)
+                .logoEnabled(false)
+                .attributionEnabled(false)
                 .camera(new CameraPosition.Builder()
                         .target(new LatLng(curLatLng.getLatitude(), curLatLng.getLongitude()))
                         .zoom(11)
@@ -546,6 +547,8 @@ public class NearbyMapFragment extends DaggerFragment {
 
         icon.setImageResource(place.getLabel().getIcon());
 
+        title.setText(place.name);
+        distance.setText(place.distance);
         description.setText(place.getLongDescription());
         title.setText(place.name.toString());
         distance.setText(place.distance.toString());
@@ -553,7 +556,8 @@ public class NearbyMapFragment extends DaggerFragment {
         fabCamera.setOnClickListener(view -> {
             Timber.d("Camera button tapped. Image title: " + place.getName() + "Image desc: " + place.getLongDescription());
             controller = new ContributionController(this);
-            DirectUpload directUpload = new DirectUpload(this, controller, prefs);
+
+            DirectUpload directUpload = new DirectUpload(this, controller);
             storeSharedPrefs();
             directUpload.initiateCameraUpload();
         });
@@ -561,9 +565,14 @@ public class NearbyMapFragment extends DaggerFragment {
         fabGallery.setOnClickListener(view -> {
             Timber.d("Gallery button tapped. Image title: " + place.getName() + "Image desc: " + place.getLongDescription());
             controller = new ContributionController(this);
-            DirectUpload directUpload = new DirectUpload(this, controller, prefs);
+
+            DirectUpload directUpload = new DirectUpload(this, controller);
             storeSharedPrefs();
             directUpload.initiateGalleryUpload();
+
+            //TODO: App crashes after image upload completes
+            //TODO: Handle onRequestPermissionsResult
+
         });
     }
 

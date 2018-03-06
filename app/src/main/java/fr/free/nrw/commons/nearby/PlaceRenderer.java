@@ -1,7 +1,10 @@
 package fr.free.nrw.commons.nearby;
 
 import android.content.Intent;
+
 import android.net.Uri;
+import android.content.SharedPreferences;
+import android.support.v4.app.Fragment;
 import android.support.transition.TransitionManager;
 import android.support.v7.widget.PopupMenu;
 import android.util.Log;
@@ -17,11 +20,17 @@ import com.pedrogomez.renderers.Renderer;
 
 import java.util.ArrayList;
 
+import javax.inject.Inject;
+import javax.inject.Named;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.R;
+import fr.free.nrw.commons.contributions.ContributionController;
+import timber.log.Timber;
 
-class PlaceRenderer extends Renderer<Place> {
+public class PlaceRenderer extends Renderer<Place> {
 
     @BindView(R.id.tvName) TextView tvName;
     @BindView(R.id.tvDesc) TextView tvDesc;
@@ -29,11 +38,13 @@ class PlaceRenderer extends Renderer<Place> {
     @BindView(R.id.icon) ImageView icon;
     @BindView(R.id.buttonLayout) LinearLayout buttonLayout;
     @BindView(R.id.cameraButton) LinearLayout cameraButton;
-    @BindView(R.id.galeryButton) LinearLayout galeryButton;
+
+    @BindView(R.id.galleryButton) LinearLayout galleryButton;
     @BindView(R.id.directionsButton) LinearLayout directionsButton;
     @BindView(R.id.iconOverflow) LinearLayout iconOverflow;
     @BindView(R.id.cameraButtonText) TextView cameraButtonText;
-    @BindView(R.id.galeryButtonText) TextView galeryButtonText;
+    @BindView(R.id.galleryButtonText) TextView galleryButtonText;
+
     @BindView(R.id.directionsButtonText) TextView directionsButtonText;
     @BindView(R.id.iconOverflowText) TextView iconOverflowText;
 
@@ -41,8 +52,20 @@ class PlaceRenderer extends Renderer<Place> {
     private static ArrayList<LinearLayout> openedItems;
     private Place place;
 
+    private Fragment fragment;
+    private ContributionController controller;
 
-    PlaceRenderer(){
+
+    @Inject @Named("prefs") SharedPreferences prefs;
+    @Inject @Named("direct_nearby_upload_prefs") SharedPreferences directPrefs;
+
+    public PlaceRenderer(){
+        openedItems = new ArrayList<>();
+    }
+
+    public PlaceRenderer(Fragment fragment, ContributionController controller) {
+        this.fragment = fragment;
+        this.controller = controller;
         openedItems = new ArrayList<>();
     }
 
@@ -81,7 +104,28 @@ class PlaceRenderer extends Renderer<Place> {
             }
         });
 
-        //TODO: Set onClickListeners for camera and gallery in list here
+        cameraButton.setOnClickListener(view2 -> {
+            Timber.d("Camera button tapped. Image title: " + place.getName() + "Image desc: " + place.getLongDescription());
+            DirectUpload directUpload = new DirectUpload(fragment, controller);
+            storeSharedPrefs();
+            directUpload.initiateCameraUpload();
+        });
+
+        galleryButton.setOnClickListener(view3 -> {
+            Timber.d("Gallery button tapped. Image title: " + place.getName() + "Image desc: " + place.getLongDescription());
+            DirectUpload directUpload = new DirectUpload(fragment, controller);
+            storeSharedPrefs();
+            directUpload.initiateGalleryUpload();
+        });
+    }
+
+    private void storeSharedPrefs() {
+        SharedPreferences.Editor editor = directPrefs.edit();
+        Timber.d("directPrefs stored");
+        editor.putString("Title", place.getName());
+        editor.putString("Desc", place.getLongDescription());
+        editor.apply();
+
     }
 
     private void closeLayout(LinearLayout buttonLayout){
@@ -94,9 +138,11 @@ class PlaceRenderer extends Renderer<Place> {
 
     @Override
     public void render() {
+
         place = getContent();
         tvName.setText(place.name);
-        String descriptionText = place.getLabel().getText();
+        String descriptionText = place.getLongDescription();
+
         if (descriptionText.equals("?")) {
             descriptionText = getContext().getString(R.string.no_description_found);
         }
@@ -114,6 +160,7 @@ class PlaceRenderer extends Renderer<Place> {
 
         iconOverflow.setVisibility(showMenu() ? View.VISIBLE : View.GONE);
         iconOverflow.setOnClickListener(v -> popupMenuListener());
+
     }
 
     private void popupMenuListener() {

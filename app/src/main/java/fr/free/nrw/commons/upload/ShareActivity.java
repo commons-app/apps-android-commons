@@ -16,7 +16,9 @@ import android.support.annotation.RequiresApi;
 import android.support.design.widget.Snackbar;
 import android.support.graphics.drawable.VectorDrawableCompat;
 import android.support.v4.app.ActivityCompat;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.app.AlertDialog;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
@@ -46,10 +48,16 @@ import fr.free.nrw.commons.caching.CacheController;
 import fr.free.nrw.commons.category.CategorizationFragment;
 import fr.free.nrw.commons.category.OnCategoriesSaveHandler;
 import fr.free.nrw.commons.contributions.Contribution;
+import fr.free.nrw.commons.contributions.ContributionsActivity;
 import fr.free.nrw.commons.modifications.CategoryModifier;
 import fr.free.nrw.commons.modifications.ModificationsContentProvider;
 import fr.free.nrw.commons.modifications.ModifierSequence;
+import fr.free.nrw.commons.modifications.ModifierSequenceDao;
 import fr.free.nrw.commons.modifications.TemplateRemoveModifier;
+<<<<<<< HEAD
+=======
+import fr.free.nrw.commons.utils.ImageUtils;
+>>>>>>> directNearbyUploadsNewLocal
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
 import timber.log.Timber;
 
@@ -60,10 +68,10 @@ import static fr.free.nrw.commons.upload.ExistingFileAsync.Result.NO_DUPLICATE;
  * Activity for the title/desc screen after image is selected. Also starts processing image
  * GPS coordinates or user location (if enabled in Settings) for category suggestions.
  */
-public  class      ShareActivity
-        extends    AuthenticatedActivity
+public class ShareActivity
+        extends AuthenticatedActivity
         implements SingleUploadFragment.OnUploadActionInitiated,
-        OnCategoriesSaveHandler {
+        OnCategoriesSaveHandler,SimilarImageDialogFragment.onResponse {
 
     private static final int REQUEST_PERM_ON_CREATE_STORAGE = 1;
     private static final int REQUEST_PERM_ON_CREATE_LOCATION = 2;
@@ -71,11 +79,19 @@ public  class      ShareActivity
     private static final int REQUEST_PERM_ON_SUBMIT_STORAGE = 4;
     private CategorizationFragment categorizationFragment;
 
-    @Inject MediaWikiApi mwApi;
-    @Inject CacheController cacheController;
-    @Inject SessionManager sessionManager;
-    @Inject UploadController uploadController;
-    @Inject @Named("default_preferences") SharedPreferences prefs;
+    @Inject
+    MediaWikiApi mwApi;
+    @Inject
+    CacheController cacheController;
+    @Inject
+    SessionManager sessionManager;
+    @Inject
+    UploadController uploadController;
+    @Inject
+    ModifierSequenceDao modifierSequenceDao;
+    @Inject
+    @Named("default_preferences")
+    SharedPreferences prefs;
 
     private String source;
     private String mimeType;
@@ -87,6 +103,7 @@ public  class      ShareActivity
     private boolean cacheFound;
 
     private GPSExtractor imageObj;
+    private GPSExtractor tempImageObj;
     private String decimalCoords;
 
     private boolean useNewPermissions = false;
@@ -97,9 +114,14 @@ public  class      ShareActivity
     private String description;
     private Snackbar snackbar;
     private boolean duplicateCheckPassed = false;
+<<<<<<< HEAD
 
     private boolean isNearbyUpload = false;
 
+=======
+    private boolean haveCheckedForOtherImages = false;
+    private boolean isNearbyUpload = false;
+>>>>>>> directNearbyUploadsNewLocal
     /**
      * Called when user taps the submit button.
      */
@@ -167,13 +189,12 @@ public  class      ShareActivity
 
             categoriesSequence.queueModifier(new CategoryModifier(categories.toArray(new String[]{})));
             categoriesSequence.queueModifier(new TemplateRemoveModifier("Uncategorized"));
-            categoriesSequence.setContentProviderClient(getContentResolver().acquireContentProviderClient(ModificationsContentProvider.AUTHORITY));
-            categoriesSequence.save();
+            modifierSequenceDao.save(categoriesSequence);
         }
 
         // FIXME: Make sure that the content provider is up
         // This is the wrong place for it, but bleh - better than not having it turned on by default for people who don't go throughl ogin
-        ContentResolver.setSyncAutomatically(sessionManager.getCurrentAccount(), ModificationsContentProvider.AUTHORITY, true); // Enable sync by default!
+        ContentResolver.setSyncAutomatically(sessionManager.getCurrentAccount(), ModificationsContentProvider.MODIFICATIONS_AUTHORITY, true); // Enable sync by default!
 
         finish();
     }
@@ -221,7 +242,7 @@ public  class      ShareActivity
         //Receive intent from ContributionController.java when user selects picture to upload
         Intent intent = getIntent();
 
-        if (intent.getAction().equals(Intent.ACTION_SEND)) {
+        if (Intent.ACTION_SEND.equals(intent.getAction())) {
             mediaUri = intent.getParcelableExtra(Intent.EXTRA_STREAM);
             if (intent.hasExtra(UploadService.EXTRA_SOURCE)) {
                 source = intent.getStringExtra(UploadService.EXTRA_SOURCE);
@@ -287,7 +308,7 @@ public  class      ShareActivity
                         REQUEST_PERM_ON_CREATE_LOCATION);
             }
         }
-        performPreuploadProcessingOfFile();
+        performPreUploadProcessingOfFile();
 
 
         SingleUploadFragment shareView = (SingleUploadFragment) getSupportFragmentManager().findFragmentByTag("shareView");
@@ -311,7 +332,7 @@ public  class      ShareActivity
                         && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     backgroundImageView.setImageURI(mediaUri);
                     storagePermitted = true;
-                    performPreuploadProcessingOfFile();
+                    performPreUploadProcessingOfFile();
                 }
                 return;
             }
@@ -319,7 +340,7 @@ public  class      ShareActivity
                 if (grantResults.length >= 1
                         && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     locationPermitted = true;
-                    performPreuploadProcessingOfFile();
+                    performPreUploadProcessingOfFile();
                 }
                 return;
             }
@@ -328,12 +349,12 @@ public  class      ShareActivity
                         && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     backgroundImageView.setImageURI(mediaUri);
                     storagePermitted = true;
-                    performPreuploadProcessingOfFile();
+                    performPreUploadProcessingOfFile();
                 }
                 if (grantResults.length >= 2
                         && grantResults[1] == PackageManager.PERMISSION_GRANTED) {
                     locationPermitted = true;
-                    performPreuploadProcessingOfFile();
+                    performPreUploadProcessingOfFile();
                 }
                 return;
             }
@@ -344,7 +365,7 @@ public  class      ShareActivity
                         && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     //It is OK to call this at both (1) and (4) because if perm had been granted at
                     //snackbar, user should not be prompted at submit button
-                    performPreuploadProcessingOfFile();
+                    performPreUploadProcessingOfFile();
 
                     //Uploading only begins if storage permission granted from arrow icon
                     uploadBegins();
@@ -355,7 +376,7 @@ public  class      ShareActivity
         }
     }
 
-    private void performPreuploadProcessingOfFile() {
+    private void performPreUploadProcessingOfFile() {
         if (!useNewPermissions || storagePermitted) {
             if (!duplicateCheckPassed) {
                 //Test SHA1 of image to see if it matches SHA1 of a file on Commons
@@ -370,7 +391,17 @@ public  class      ShareActivity
                                 Timber.d("%s duplicate check: %s", mediaUri.toString(), result);
                                 duplicateCheckPassed = (result == DUPLICATE_PROCEED
                                         || result == NO_DUPLICATE);
-                            }, mwApi);
+                                /*
+                                 TODO: 16/9/17 should we run DetectUnwantedPicturesAsync if DUPLICATE_PROCEED is returned? Since that means
+                                 we are processing images that are already on server???...
+                                */
+
+                                if (duplicateCheckPassed) {
+                                    //image can be uploaded, so now check if its a useless picture or not
+                                    performUnwantedPictureDetectionProcess();
+                                }
+
+                            },mwApi);
                     fileAsyncTask.execute();
                 } catch (IOException e) {
                     Timber.d(e, "IO Exception: ");
@@ -382,6 +413,37 @@ public  class      ShareActivity
             Timber.w("not ready for preprocessing: useNewPermissions=%s storage=%s location=%s",
                     useNewPermissions, storagePermitted, locationPermitted);
         }
+    }
+
+    private void performUnwantedPictureDetectionProcess() {
+        String imageMediaFilePath = FileUtils.getPath(this,mediaUri);
+        DetectUnwantedPicturesAsync detectUnwantedPicturesAsync = new DetectUnwantedPicturesAsync(imageMediaFilePath, result -> {
+
+            if (result != ImageUtils.Result.IMAGE_OK) {
+                //show appropriate error message
+                String errorMessage = result == ImageUtils.Result.IMAGE_DARK ? getString(R.string.upload_image_too_dark) : getString(R.string.upload_image_blurry);
+                AlertDialog.Builder errorDialogBuilder = new AlertDialog.Builder(this);
+                errorDialogBuilder.setMessage(errorMessage);
+                errorDialogBuilder.setTitle(getString(R.string.warning));
+                errorDialogBuilder.setPositiveButton(getString(R.string.no), (dialogInterface, i) -> {
+                    //user does not wish to upload the picture, take them back to ContributionsActivity
+                    Intent intent = new Intent(ShareActivity.this, ContributionsActivity.class);
+                    dialogInterface.dismiss();
+                    startActivity(intent);
+                });
+                errorDialogBuilder.setNegativeButton(getString(R.string.yes), (dialogInterface, i) -> {
+                    //user wishes to go ahead with the upload of this picture, just dismiss this dialog
+                    dialogInterface.dismiss();
+                });
+
+                AlertDialog errorDialog = errorDialogBuilder.create();
+                if (!isFinishing()) {
+                    errorDialog.show();
+                }
+            }
+        });
+
+        detectUnwantedPicturesAsync.execute();
     }
 
     private Snackbar requestPermissionUsingSnackBar(String rationale,
@@ -461,11 +523,91 @@ public  class      ShareActivity
             if (imageObj != null) {
                 // Gets image coords from exif data or user location
                 decimalCoords = imageObj.getCoords(gpsEnabled);
-                useImageCoords();
+                if(decimalCoords==null || !imageObj.imageCoordsExists){
+//                  Check if the location is from GPS or EXIF
+//                  Find other photos taken around the same time which has gps coordinates
+                    Timber.d("EXIF:false");
+                    Timber.d("EXIF call"+(imageObj==tempImageObj));
+                    if(!haveCheckedForOtherImages)
+                        findOtherImages(gpsEnabled);// Do not do repeat the process
+                }
+                else {
+//                  As the selected image has GPS data in EXIF go ahead with the same.
+                    useImageCoords();
+                }
             }
         } catch (FileNotFoundException e) {
             Timber.w("File not found: " + mediaUri, e);
         }
+    }
+
+    private void findOtherImages(boolean gpsEnabled) {
+        Timber.d("filePath"+getPathOfMediaOrCopy());
+        String filePath = getPathOfMediaOrCopy();
+        long timeOfCreation = new File(filePath).lastModified();//Time when the original image was created
+        File folder = new File(filePath.substring(0,filePath.lastIndexOf('/')));
+        File[] files = folder.listFiles();
+        Timber.d("folderTime Number:"+files.length);
+
+        for(File file : files){
+            if(file.lastModified()-timeOfCreation<=(120*1000) && file.lastModified()-timeOfCreation>=-(120*1000)){
+                //Make sure the photos were taken within 20seconds
+                Timber.d("fild date:"+file.lastModified()+ " time of creation"+timeOfCreation);
+                tempImageObj = null;//Temporary GPSExtractor to extract coords from these photos
+                ParcelFileDescriptor descriptor
+                        = null;
+                try {
+                    descriptor = getContentResolver().openFileDescriptor(Uri.parse(file.getAbsolutePath()), "r");
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                }
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                    if (descriptor != null) {
+                        tempImageObj = new GPSExtractor(descriptor.getFileDescriptor(),this, prefs);
+                    }
+                } else {
+                    if (filePath != null) {
+                        tempImageObj = new GPSExtractor(file.getAbsolutePath(), this, prefs);
+                    }
+                }
+
+                if(tempImageObj!=null){
+                    Timber.d("not null fild EXIF"+tempImageObj.imageCoordsExists +" coords"+tempImageObj.getCoords(gpsEnabled));
+                    if(tempImageObj.getCoords(gpsEnabled)!=null && tempImageObj.imageCoordsExists){
+//                       Current image has gps coordinates and it's not current gps locaiton
+                        Timber.d("This fild has image coords:"+ file.getAbsolutePath());
+//                       Create a dialog fragment for the suggestion
+                        FragmentManager fragmentManager = getSupportFragmentManager();
+                        SimilarImageDialogFragment newFragment = new SimilarImageDialogFragment();
+                        Bundle args = new Bundle();
+                        args.putString("originalImagePath",filePath);
+                        args.putString("possibleImagePath",file.getAbsolutePath());
+                        newFragment.setArguments(args);
+                        newFragment.show(fragmentManager, "dialog");
+                        break;
+                    }
+
+                }
+
+            }
+        }
+        haveCheckedForOtherImages = true; //Finished checking for other images
+        return;
+    }
+
+    @Override
+    public void onPostiveResponse() {
+        imageObj = tempImageObj;
+        decimalCoords = imageObj.getCoords(false);// Not necessary to use gps as image already ha EXIF data
+        Timber.d("EXIF from tempImageObj");
+        useImageCoords();
+    }
+
+    @Override
+    public void onNegativeResponse() {
+        Timber.d("EXIF from imageObj");
+        useImageCoords();
+
     }
 
     /**
@@ -475,6 +617,7 @@ public  class      ShareActivity
     public void useImageCoords() {
         if (decimalCoords != null) {
             Timber.d("Decimal coords of image: %s", decimalCoords);
+            Timber.d("is EXIF data present:"+imageObj.imageCoordsExists+" from findOther image:"+(imageObj==tempImageObj));
 
             // Only set cache for this point if image has coords
             if (imageObj.imageCoordsExists) {
@@ -498,7 +641,10 @@ public  class      ShareActivity
                 Timber.d("Cache found, setting categoryList in MwVolleyApi to %s", displayCatList);
                 MwVolleyApi.setGpsCat(displayCatList);
             }
+        }else{
+            Timber.d("EXIF: no coords");
         }
+
     }
 
     @Override

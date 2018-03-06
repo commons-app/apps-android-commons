@@ -13,16 +13,14 @@ import static android.Manifest.permission.READ_EXTERNAL_STORAGE;
 import static android.Manifest.permission.WRITE_EXTERNAL_STORAGE;
 import static android.content.pm.PackageManager.PERMISSION_GRANTED;
 
-public class DirectUpload {
+class DirectUpload {
 
     private ContributionController controller;
     private Fragment fragment;
-    private SharedPreferences prefs;
 
-    DirectUpload(Fragment fragment, ContributionController controller, SharedPreferences prefs) {
+    DirectUpload(Fragment fragment, ContributionController controller) {
         this.fragment = fragment;
         this.controller = controller;
-        this.prefs = prefs;
     }
 
     void initiateCameraUpload() {
