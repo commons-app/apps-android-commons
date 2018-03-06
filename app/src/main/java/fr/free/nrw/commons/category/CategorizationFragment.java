@@ -1,6 +1,8 @@
 package fr.free.nrw.commons.category;
 
 
+import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
@@ -21,14 +23,9 @@ import android.widget.TextView;
 
 import com.jakewharton.rxbinding2.view.RxView;
 import com.jakewharton.rxbinding2.widget.RxTextView;
-import com.pedrogomez.renderers.RVRendererAdapter;
 
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Comparator;
-import java.util.Date;
 import java.util.HashMap;
-import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import javax.inject.Inject;
@@ -39,8 +36,6 @@ import butterknife.ButterKnife;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
-import fr.free.nrw.commons.upload.GpsCategoryModel;
-import fr.free.nrw.commons.utils.StringSortingUtils;
 import fr.free.nrw.commons.utils.ViewUtil;
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -55,8 +50,6 @@ import static android.view.KeyEvent.KEYCODE_BACK;
  */
 public class CategorizationFragment extends CommonsDaggerSupportFragment {
 
-    public static final int SEARCH_CATS_LIMIT = 25;
-
     @BindView(R.id.categoriesListBox)
     RecyclerView categoriesList;
     @BindView(R.id.categoriesSearchBox)
@@ -68,29 +61,18 @@ public class CategorizationFragment extends CommonsDaggerSupportFragment {
     @BindView(R.id.categoriesExplanation)
     TextView categoriesSkip;
 
+    @Inject CategoriesModel categoriesModel;
     @Inject MediaWikiApi mwApi;
     @Inject @Named("default_preferences") SharedPreferences prefs;
     @Inject @Named("prefs") SharedPreferences prefsPrefs;
     @Inject @Named("direct_nearby_upload_prefs") SharedPreferences directPrefs;
     @Inject CategoryDao categoryDao;
-    @Inject GpsCategoryModel gpsCategoryModel;
 
-    private RVRendererAdapter<CategoryItem> categoriesAdapter;
+    private CategoryRendererAdapter categoriesAdapter;
     private OnCategoriesSaveHandler onCategoriesSaveHandler;
-    private HashMap<String, ArrayList<String>> categoriesCache;
-    private List<CategoryItem> selectedCategories = new ArrayList<>();
     private TitleTextWatcher textWatcher = new TitleTextWatcher();
-    private boolean hasDirectCategories = false;
 
-    private final CategoriesAdapterFactory adapterFactory = new CategoriesAdapterFactory(item -> {
-        if (item.isSelected()) {
-            selectedCategories.add(item);
-            updateCategoryCount(item);
-        } else {
-            selectedCategories.remove(item);
-        }
-    });
-
+    @SuppressLint("CheckResult")
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -100,17 +82,23 @@ public class CategorizationFragment extends CommonsDaggerSupportFragment {
         categoriesList.setLayoutManager(new LinearLayoutManager(getContext()));
 
         ArrayList<CategoryItem> items = new ArrayList<>();
-        categoriesCache = new HashMap<>();
         if (savedInstanceState != null) {
             items.addAll(savedInstanceState.getParcelableArrayList("currentCategories"));
             //noinspection unchecked
-            categoriesCache.putAll((HashMap<String, ArrayList<String>>) savedInstanceState
+            categoriesModel.cacheAll((HashMap<String, ArrayList<String>>) savedInstanceState
                     .getSerializable("categoriesCache"));
         }
 
+        CategoriesAdapterFactory adapterFactory = new CategoriesAdapterFactory(item -> {
+            if (item.isSelected()) {
+                categoriesModel.selectCategory(item);
+                categoriesModel.updateCategoryCount(item);
+            } else {
+                categoriesModel.unselectCategory(item);
+            }
+        });
         categoriesAdapter = adapterFactory.create(items);
         categoriesList.setAdapter(categoriesAdapter);
-
 
         categoriesFilter.addTextChangedListener(textWatcher);
 
@@ -162,22 +150,17 @@ public class CategorizationFragment extends CommonsDaggerSupportFragment {
     @Override
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        int itemCount = categoriesAdapter.getItemCount();
-        ArrayList<CategoryItem> items = new ArrayList<>(itemCount);
-        for (int i = 0; i < itemCount; i++) {
-            items.add(categoriesAdapter.getItem(i));
-        }
-        outState.putParcelableArrayList("currentCategories", items);
-        outState.putSerializable("categoriesCache", categoriesCache);
+        outState.putParcelableArrayList("currentCategories", categoriesAdapter.allItems());
+        outState.putSerializable("categoriesCache", categoriesModel.getCategoriesCache());
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem menuItem) {
         switch (menuItem.getItemId()) {
             case R.id.menu_save_categories:
-                if (selectedCategories.size() > 0) {
+                if (categoriesModel.selectedCategoriesCount() > 0) {
                     //Some categories selected, proceed to submission
-                    onCategoriesSaveHandler.onCategoriesSave(getStringList(selectedCategories));
+                    onCategoriesSaveHandler.onCategoriesSave(categoriesModel.getCategoryStringList());
                 } else {
                     //No categories selected, prompt the user to select some
                     showConfirmationDialog();
@@ -196,8 +179,9 @@ public class CategorizationFragment extends CommonsDaggerSupportFragment {
         getActivity().setTitle(R.string.categories_activity_title);
     }
 
+    @SuppressLint({"StringFormatInvalid", "CheckResult"})
     private void updateCategoryList(String filter) {
-        Observable.fromIterable(selectedCategories)
+        Observable.fromIterable(categoriesModel.getSelectedCategories())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .doOnSubscribe(disposable -> {
@@ -208,14 +192,14 @@ public class CategorizationFragment extends CommonsDaggerSupportFragment {
                 })
                 .observeOn(Schedulers.io())
                 .concatWith(
-                        searchAll(filter)
-                                .mergeWith(searchCategories(filter))
+                        categoriesModel.searchAll(filter)
+                                .mergeWith(categoriesModel.searchCategories(filter))
                                 .concatWith(TextUtils.isEmpty(filter)
-                                        ? defaultCategories() : Observable.empty())
+                                        ? categoriesModel.defaultCategories() : Observable.empty())
                 )
-                .filter(categoryItem -> !containsYear(categoryItem.getName()))
+                .filter(categoryItem -> !categoriesModel.containsYear(categoryItem.getName()))
                 .distinct()
-                .sorted(sortBySimilarity(filter))
+                .sorted(categoriesModel.sortBySimilarity(filter))
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
                         s -> categoriesAdapter.add(s),
@@ -224,7 +208,7 @@ public class CategorizationFragment extends CommonsDaggerSupportFragment {
                             categoriesAdapter.notifyDataSetChanged();
                             categoriesSearchInProgress.setVisibility(View.GONE);
 
-                            if (categoriesAdapter.getItemCount() == selectedCategories.size()) {
+                            if (categoriesAdapter.getItemCount() == categoriesModel.selectedCategoriesCount()) {
                                 // There are no suggestions
                                 if (TextUtils.isEmpty(filter)) {
                                     // Allow to send image with no categories
@@ -237,136 +221,6 @@ public class CategorizationFragment extends CommonsDaggerSupportFragment {
                             }
                         }
                 );
-    }
-
-    private Comparator<CategoryItem> sortBySimilarity(final String filter) {
-        Comparator<String> stringSimilarityComparator = StringSortingUtils.sortBySimilarity(filter);
-        return (firstItem, secondItem) -> stringSimilarityComparator
-                .compare(firstItem.getName(), secondItem.getName());
-    }
-
-    private List<String> getStringList(List<CategoryItem> input) {
-        List<String> output = new ArrayList<>();
-        for (CategoryItem item : input) {
-            output.add(item.getName());
-        }
-        return output;
-    }
-
-    private Observable<CategoryItem> defaultCategories() {
-        Observable<CategoryItem> directCat = directCategories();
-        if (hasDirectCategories) {
-            Timber.d("Image has direct Cat");
-            return directCat
-                    .concatWith(gpsCategories())
-                    .concatWith(titleCategories())
-                    .concatWith(recentCategories());
-        }
-        else {
-            Timber.d("Image has no direct Cat");
-            return gpsCategories()
-                    .concatWith(titleCategories())
-                    .concatWith(recentCategories());
-        }
-    }
-
-    private Observable<CategoryItem> directCategories() {
-        String directCategory = directPrefs.getString("Category", "");
-        // Strip newlines to prevent blank categories, and to tidy existing categories
-        directCategory = directCategory.replace("\n", "");
-
-        List<String> categoryList = new ArrayList<>();
-        Timber.d("Direct category found: " + "'" + directCategory + "'");
-
-        if (!directCategory.equals("")) {
-            hasDirectCategories = true;
-            categoryList.add(directCategory);
-            Timber.d("DirectCat does not equal emptyString. Direct Cat list has " + categoryList);
-        }
-        return Observable.fromIterable(categoryList).map(name -> new CategoryItem(name, false));
-    }
-
-    private Observable<CategoryItem> gpsCategories() {
-        return Observable.fromIterable(gpsCategoryModel.getCategoryList())
-                .map(name -> new CategoryItem(name, false));
-    }
-
-    private Observable<CategoryItem> titleCategories() {
-        //Retrieve the title that was saved when user tapped submit icon
-        String title = prefs.getString("Title", "");
-
-        return mwApi
-                .searchTitles(title, SEARCH_CATS_LIMIT)
-                .map(name -> new CategoryItem(name, false));
-    }
-
-    private Observable<CategoryItem> recentCategories() {
-        return Observable.fromIterable(categoryDao.recentCategories(SEARCH_CATS_LIMIT))
-                .map(s -> new CategoryItem(s, false));
-    }
-
-    private Observable<CategoryItem> searchAll(String term) {
-        //If user hasn't typed anything in yet, get GPS and recent items
-        if (TextUtils.isEmpty(term)) {
-            return Observable.empty();
-        }
-
-        //if user types in something that is in cache, return cached category
-        if (categoriesCache.containsKey(term)) {
-            return Observable.fromIterable(categoriesCache.get(term))
-                    .map(name -> new CategoryItem(name, false));
-        }
-
-        //otherwise, search API for matching categories
-        return mwApi
-                .allCategories(term, SEARCH_CATS_LIMIT)
-                .map(name -> new CategoryItem(name, false));
-    }
-
-    private Observable<CategoryItem> searchCategories(String term) {
-        //If user hasn't typed anything in yet, get GPS and recent items
-        if (TextUtils.isEmpty(term)) {
-            return Observable.empty();
-        }
-
-        return mwApi
-                .searchCategories(term, SEARCH_CATS_LIMIT)
-                .map(s -> new CategoryItem(s, false));
-    }
-
-    private boolean containsYear(String item) {
-        //Check for current and previous year to exclude these categories from removal
-        Calendar now = Calendar.getInstance();
-        int year = now.get(Calendar.YEAR);
-        String yearInString = String.valueOf(year);
-
-        int prevYear = year - 1;
-        String prevYearInString = String.valueOf(prevYear);
-        Timber.d("Previous year: %s", prevYearInString);
-
-        //Check if item contains a 4-digit word anywhere within the string (.* is wildcard)
-        //And that item does not equal the current year or previous year
-        //And if it is an irrelevant category such as Media_needing_categories_as_of_16_June_2017(Issue #750)
-        //Check if the year in the form of XX(X)0s is relevant, i.e. in the 2000s or 2010s as stated in Issue #1029
-        return ((item.matches(".*(19|20)\\d{2}.*") && !item.contains(yearInString) && !item.contains(prevYearInString))
-                || item.matches("(.*)needing(.*)") || item.matches("(.*)taken on(.*)")
-                || (item.matches(".*0s.*") && !item.matches(".*(200|201)0s.*")));
-    }
-
-    private void updateCategoryCount(CategoryItem item) {
-        Category category = categoryDao.find(item.getName());
-
-        // Newly used category...
-        if (category == null) {
-            category = new Category(null, item.getName(), new Date(), 0);
-        }
-
-        category.incTimesUsed();
-        categoryDao.save(category);
-    }
-
-    public int getCurrentSelectedCount() {
-        return selectedCategories.size();
     }
 
     /**
@@ -396,7 +250,7 @@ public class CategorizationFragment extends CommonsDaggerSupportFragment {
                 })
                 .setNegativeButton(android.R.string.yes, (dialog, id) -> {
                     //Proceed to submission
-                    onCategoriesSaveHandler.onCategoriesSave(getStringList(selectedCategories));
+                    onCategoriesSaveHandler.onCategoriesSave(categoriesModel.getCategoryStringList());
                 })
                 .create()
                 .show();
