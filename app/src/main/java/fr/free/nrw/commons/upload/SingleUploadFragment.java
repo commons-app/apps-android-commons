@@ -1,10 +1,8 @@
 package fr.free.nrw.commons.upload;
 
 import android.annotation.SuppressLint;
-<<<<<<< HEAD
-=======
 import android.app.Activity;
->>>>>>> directNearbyUploadsNewLocal
+
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;

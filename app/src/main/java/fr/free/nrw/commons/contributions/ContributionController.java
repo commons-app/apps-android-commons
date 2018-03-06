@@ -80,20 +80,13 @@ public class ContributionController {
         //FIXME: Starts gallery (opens Google Photos)
         Intent pickImageIntent = new Intent(ACTION_GET_CONTENT);
         pickImageIntent.setType("image/*");
-<<<<<<< HEAD
-        Timber.d("startGalleryPick() called with pickImageIntent");
-        // See https://stackoverflow.com/questions/22366596/android-illegalstateexception-fragment-not-attached-to-activity-webview
-        if (!fragment.isAdded()) {
-            return;
-        }
-=======
         // See https://stackoverflow.com/questions/22366596/android-illegalstateexception-fragment-not-attached-to-activity-webview
         if (!fragment.isAdded()) {
             Timber.d("Fragment is not added, startActivityForResult cannot be called");
             return;
         }
         Timber.d("startGalleryPick() called with pickImageIntent");
->>>>>>> directNearbyUploadsNewLocal
+
         fragment.startActivityForResult(pickImageIntent, SELECT_FROM_GALLERY);
     }
 
@@ -123,11 +116,9 @@ public class ContributionController {
                 if (isDirectUpload) {
                     shareIntent.putExtra("isDirectUpload", true);
                 }
-<<<<<<< HEAD
-=======
+
                 break;
             default:
->>>>>>> directNearbyUploadsNewLocal
                 break;
         }
         Timber.i("Image selected");

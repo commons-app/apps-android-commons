@@ -54,10 +54,8 @@ import fr.free.nrw.commons.modifications.ModificationsContentProvider;
 import fr.free.nrw.commons.modifications.ModifierSequence;
 import fr.free.nrw.commons.modifications.ModifierSequenceDao;
 import fr.free.nrw.commons.modifications.TemplateRemoveModifier;
-<<<<<<< HEAD
-=======
+
 import fr.free.nrw.commons.utils.ImageUtils;
->>>>>>> directNearbyUploadsNewLocal
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
 import timber.log.Timber;
 
@@ -114,14 +112,10 @@ public class ShareActivity
     private String description;
     private Snackbar snackbar;
     private boolean duplicateCheckPassed = false;
-<<<<<<< HEAD
 
-    private boolean isNearbyUpload = false;
-
-=======
     private boolean haveCheckedForOtherImages = false;
     private boolean isNearbyUpload = false;
->>>>>>> directNearbyUploadsNewLocal
+
     /**
      * Called when user taps the submit button.
      */

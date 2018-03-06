@@ -99,7 +99,7 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
             @Override
             public void onRefresh() {
                 lockNearbyView(false);
-                refreshView(true);
+                refreshView(false, LocationServiceManager.LocationChangeType.LOCATION_SIGNIFICANTLY_CHANGED);
             }
         });
 
