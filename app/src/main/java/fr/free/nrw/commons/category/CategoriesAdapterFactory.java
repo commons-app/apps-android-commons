@@ -1,7 +1,6 @@
 package fr.free.nrw.commons.category;
 
 import com.pedrogomez.renderers.ListAdapteeCollection;
-import com.pedrogomez.renderers.RVRendererAdapter;
 import com.pedrogomez.renderers.RendererBuilder;
 
 import java.util.Collections;
@@ -14,11 +13,11 @@ class CategoriesAdapterFactory {
         this.listener = listener;
     }
 
-    public RVRendererAdapter<CategoryItem> create(List<CategoryItem> placeList) {
+    public CategoryRendererAdapter create(List<CategoryItem> placeList) {
         RendererBuilder<CategoryItem> builder = new RendererBuilder<CategoryItem>()
                 .bind(CategoryItem.class, new CategoriesRenderer(listener));
         ListAdapteeCollection<CategoryItem> collection = new ListAdapteeCollection<>(
                 placeList != null ? placeList : Collections.<CategoryItem>emptyList());
-        return new RVRendererAdapter<>(builder, collection);
+        return new CategoryRendererAdapter(builder, collection);
     }
 }
