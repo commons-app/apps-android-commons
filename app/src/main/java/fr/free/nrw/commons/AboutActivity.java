@@ -86,7 +86,11 @@ public class AboutActivity extends NavigationBaseActivity {
         }
     }
 
-  
+    @OnClick(R.id.about_donation)
+    public void launchDonation(View view) {
+        Utils.handleWebUrl(this, Uri.parse("https://wikimediafoundation.org/wiki/Ways_to_Give"));
+    }
+
     @OnClick(R.id.about_credits)
     public void launchCredits(View view) {
         Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://github.com/commons-app/apps-android-commons/blob/master/CREDITS/\\"));
