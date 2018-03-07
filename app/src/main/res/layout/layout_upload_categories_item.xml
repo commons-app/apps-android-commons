@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<CheckedTextView xmlns:android="http://schemas.android.com/apk/res/android"
+<CheckBox xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/tvName"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -7,6 +7,4 @@
     android:checked="false"
     android:gravity="center_vertical"
     android:padding="@dimen/tiny_gap"
-    android:textColor="@color/primaryDarkColor">
-
-</CheckedTextView>
+    android:textColor="@color/primaryDarkColor" />

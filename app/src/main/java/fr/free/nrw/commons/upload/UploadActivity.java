@@ -1,24 +1,33 @@
 package fr.free.nrw.commons.upload;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.design.widget.TextInputLayout;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ViewFlipper;
 
 import com.facebook.drawee.view.SimpleDraweeView;
+import com.jakewharton.rxbinding2.view.RxView;
+import com.jakewharton.rxbinding2.widget.RxTextView;
+import com.pedrogomez.renderers.RVRendererAdapter;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import javax.inject.Inject;
 
@@ -26,9 +35,18 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.auth.AuthenticatedActivity;
+import fr.free.nrw.commons.category.CategoriesModel;
+import fr.free.nrw.commons.category.CategoryItem;
 import fr.free.nrw.commons.contributions.Contribution;
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
 import fr.free.nrw.commons.utils.AbstractTextWatcher;
+import io.reactivex.Observable;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.CompositeDisposable;
+import io.reactivex.schedulers.Schedulers;
+import timber.log.Timber;
+
+import static fr.free.nrw.commons.category.CategoriesModel.sortBySimilarity;
 
 public class UploadActivity extends AuthenticatedActivity implements UploadView {
     @Inject
@@ -39,6 +57,8 @@ public class UploadActivity extends AuthenticatedActivity implements UploadView 
     UploadPresenter presenter;
     @Inject
     UploadThumbnailsAdapterFactory adapterFactory;
+    @Inject
+    CategoriesModel categoriesModel;
 
     // Main GUI
     @BindView(R.id.backgroundImage)
@@ -79,6 +99,14 @@ public class UploadActivity extends AuthenticatedActivity implements UploadView 
     Button categoryNext;
     @BindView(R.id.category_previous)
     Button categoryPrevious;
+    @BindView(R.id.categoriesSearchInProgress)
+    ProgressBar categoriesSearchInProgress;
+    @BindView(R.id.category_search)
+    EditText categoriesSearch;
+    @BindView(R.id.category_search_container)
+    TextInputLayout categoriesSearchContainer;
+    @BindView(R.id.categories)
+    RecyclerView categoriesList;
 
     // Final Submission
     @BindView(R.id.license_title)
@@ -88,8 +116,19 @@ public class UploadActivity extends AuthenticatedActivity implements UploadView 
     @BindView(R.id.license_previous)
     Button licensePrevious;
 
+    private RVRendererAdapter<CategoryItem> categoriesAdapter;
+    private final UploadCategoriesAdapterFactory categoryAdapterFactory = new UploadCategoriesAdapterFactory(item -> {
+        if (item.isSelected()) {
+            categoriesModel.selectCategory(item);
+            categoriesModel.updateCategoryCount(item);
+        } else {
+            categoriesModel.unselectCategory(item);
+        }
+    });
+
     private AbstractTextWatcher titleWatcher;
     private AbstractTextWatcher descriptionWatcher;
+    private CompositeDisposable compositeDisposable;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -112,6 +151,17 @@ public class UploadActivity extends AuthenticatedActivity implements UploadView 
         licensePrevious.setOnClickListener(v -> presenter.handlePrevious());
         submit.setOnClickListener(v -> presenter.handleSubmit());
 
+        ArrayList<CategoryItem> items = new ArrayList<>();
+        if (savedInstanceState != null) {
+            items.addAll(savedInstanceState.getParcelableArrayList("currentCategories"));
+            //noinspection unchecked
+            categoriesModel.cacheAll((HashMap<String, ArrayList<String>>) savedInstanceState
+                    .getSerializable("categoriesCache"));
+        }
+        categoriesAdapter = categoryAdapterFactory.create(items);
+        categoriesList.setLayoutManager(new LinearLayoutManager(this));
+        categoriesList.setAdapter(categoriesAdapter);
+
         presenter.init(savedInstanceState);
         receiveSharedItems();
     }
@@ -119,9 +169,65 @@ public class UploadActivity extends AuthenticatedActivity implements UploadView 
     @Override
     protected void onResume() {
         super.onResume();
+        compositeDisposable = new CompositeDisposable();
         presenter.addView(this);
         imageTitle.addTextChangedListener(titleWatcher);
         imageDescription.addTextChangedListener(descriptionWatcher);
+        compositeDisposable.add(
+                RxTextView.textChanges(categoriesSearch)
+                        .doOnEach(v -> categoriesSearchContainer.setError(null))
+                        .takeUntil(RxView.detaches(categoriesSearch))
+                        .debounce(500, TimeUnit.MILLISECONDS)
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribe(filter -> updateCategoryList(filter.toString()))
+        );
+    }
+
+    @SuppressLint("CheckResult")
+    private void updateCategoryList(String filter) {
+        Observable.fromIterable(categoriesModel.getSelectedCategories())
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .doOnSubscribe(disposable -> {
+                    categoriesSearchInProgress.setVisibility(View.VISIBLE);
+                    categoriesSearchContainer.setError(null);
+//                    categoriesNotFoundView.setVisibility(View.GONE);
+//                    categoriesSkip.setVisibility(View.GONE);
+                    categoriesAdapter.clear();
+                })
+                .observeOn(Schedulers.io())
+                .concatWith(
+                        categoriesModel.searchAll(filter)
+                                .mergeWith(categoriesModel.searchCategories(filter))
+                                .concatWith(TextUtils.isEmpty(filter)
+                                        ? categoriesModel.defaultCategories() : Observable.empty())
+                )
+                .filter(categoryItem -> !CategoriesModel.containsYear(categoryItem.getName()))
+                .distinct()
+                .sorted(sortBySimilarity(filter))
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(
+                        s -> categoriesAdapter.add(s),
+                        Timber::e,
+                        () -> {
+                            categoriesAdapter.notifyDataSetChanged();
+                            categoriesSearchInProgress.setVisibility(View.GONE);
+
+                            if (categoriesAdapter.getItemCount() == categoriesModel.selectedCategoriesCount()
+                                    && !categoriesSearch.getText().toString().isEmpty()) {
+                                // There are no suggestions
+//                                if (TextUtils.isEmpty(filter)) {
+//                                    // Allow to send image with no categories
+//                                    categoriesSkip.setVisibility(View.VISIBLE);
+//                                } else {
+//                                    // Inform the user that the searched term matches  no category
+//                                    categoriesNotFoundView.setText(getString(R.string.categories_not_found, filter));
+//                                    categoriesNotFoundView.setVisibility(View.VISIBLE);
+//                                }
+                                categoriesSearchContainer.setError("No categories found");
+                            }
+                        }
+                );
     }
 
     @Override
@@ -129,6 +235,7 @@ public class UploadActivity extends AuthenticatedActivity implements UploadView 
         presenter.removeView();
         imageTitle.removeTextChangedListener(titleWatcher);
         imageDescription.removeTextChangedListener(descriptionWatcher);
+        compositeDisposable.dispose();
         super.onPause();
     }
 
@@ -232,6 +339,13 @@ public class UploadActivity extends AuthenticatedActivity implements UploadView 
         super.onSaveInstanceState(outState);
         Bundle state = presenter.getSavedState();
         outState.putAll(state);
+        int itemCount = categoriesAdapter.getItemCount();
+        ArrayList<CategoryItem> items = new ArrayList<>(itemCount);
+        for (int i = 0; i < itemCount; i++) {
+            items.add(categoriesAdapter.getItem(i));
+        }
+        outState.putParcelableArrayList("currentCategories", items);
+        outState.putSerializable("categoriesCache", categoriesModel.getCategoriesCache());
     }
 
     @Override
