@@ -1,28 +1,30 @@
-package fr.free.nrw.commons.category;
+package fr.free.nrw.commons.upload;
 
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.CheckedTextView;
+import android.widget.CheckBox;
 
 import com.pedrogomez.renderers.Renderer;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import fr.free.nrw.commons.R;
+import fr.free.nrw.commons.category.CategoryClickedListener;
+import fr.free.nrw.commons.category.CategoryItem;
 
-public class CategoriesRenderer extends Renderer<CategoryItem> {
-    @BindView(R.id.tvName) CheckedTextView checkedView;
+public class UploadCategoriesRenderer extends Renderer<CategoryItem> {
+    @BindView(R.id.tvName) CheckBox checkedView;
     private final CategoryClickedListener listener;
 
-    CategoriesRenderer(CategoryClickedListener listener) {
+    UploadCategoriesRenderer(CategoryClickedListener listener) {
         this.listener = listener;
     }
 
     @Override
     protected View inflate(LayoutInflater layoutInflater, ViewGroup viewGroup) {
-        return layoutInflater.inflate(R.layout.layout_categories_item, viewGroup, false);
+        return layoutInflater.inflate(R.layout.layout_upload_categories_item, viewGroup, false);
     }
 
     @Override

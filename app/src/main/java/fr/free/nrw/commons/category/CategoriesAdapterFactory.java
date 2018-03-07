@@ -6,10 +6,10 @@ import com.pedrogomez.renderers.RendererBuilder;
 import java.util.Collections;
 import java.util.List;
 
-class CategoriesAdapterFactory {
-    private final CategoriesRenderer.CategoryClickedListener listener;
+public class CategoriesAdapterFactory {
+    private final CategoryClickedListener listener;
 
-    CategoriesAdapterFactory(CategoriesRenderer.CategoryClickedListener listener) {
+    public CategoriesAdapterFactory(CategoryClickedListener listener) {
         this.listener = listener;
     }
 
