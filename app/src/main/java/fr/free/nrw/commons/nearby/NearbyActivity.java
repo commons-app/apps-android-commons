@@ -134,10 +134,6 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle item selection
         switch (item.getItemId()) {
-            case R.id.action_refresh:
-                lockNearbyView(false);
-                refreshView(true);
-                return true;
             case R.id.action_display_list:
                 bottomSheetBehaviorForDetails.setState(BottomSheetBehavior.STATE_HIDDEN);
                 bottomSheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
@@ -158,7 +154,7 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
         switch (requestCode) {
             case LOCATION_REQUEST: {
                 if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    refreshView(false);
+                    refreshView();
                 } else {
                     //If permission not granted, go to page that says Nearby Places cannot be displayed
                     hideProgressBar();
@@ -213,7 +209,7 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
     private void checkLocationPermission() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             if (locationManager.isLocationPermissionGranted()) {
-                refreshView(false);
+                refreshView();
             } else {
                 // Should we show an explanation?
                 if (locationManager.isPermissionExplanationRequired(this)) {
@@ -239,7 +235,7 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
                 }
             }
         } else {
-            refreshView(false);
+            refreshView();
         }
     }
 
@@ -248,7 +244,7 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == 1) {
             Timber.d("User is back from Settings page");
-            refreshView(false);
+            refreshView();
         }
     }
 
@@ -298,18 +294,15 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
     /**
      * This method should be the single point to load/refresh nearby places
      *
-     * @param isHardRefresh Should display a toast if the location hasn't changed
      */
-    private void refreshView(boolean isHardRefresh) {
+    private void refreshView() {
         if (lockNearbyView) {
             return;
         }
         locationManager.registerLocationManager();
         LatLng lastLocation = locationManager.getLastLocation();
         if (curLatLang != null && curLatLang.equals(lastLocation)) { //refresh view only if location has changed
-            if (isHardRefresh) {
-                ViewUtil.showLongToast(this, R.string.nearby_location_has_not_changed);
-            }
+
             return;
         }
         curLatLang = lastLocation;
@@ -394,7 +387,7 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
 
     @Override
     public void onLocationChanged(LatLng latLng) {
-        refreshView(false);
+        refreshView();
     }
 
     public void prepareViewsForSheetPosition(int bottomSheetState) {
