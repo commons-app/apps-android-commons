@@ -49,7 +49,7 @@ public class CommonsApplication extends Application {
     @Inject @Named("application_preferences") SharedPreferences applicationPrefs;
     @Inject @Named("prefs") SharedPreferences otherPrefs;
 
-    public static final String DEFAULT_EDIT_SUMMARY = "Uploaded using Android Commons app";
+    public static final String DEFAULT_EDIT_SUMMARY = "Uploaded using [[COM:MOA|Commons Mobile App]]";
 
     public static final String FEEDBACK_EMAIL = "commons-app-android@googlegroups.com";
 

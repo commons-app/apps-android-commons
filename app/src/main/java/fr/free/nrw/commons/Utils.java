@@ -165,6 +165,16 @@ public class Utils {
         return stringBuilder.toString();
     }
 
+    public static void rateApp(Context context) {
+        final String appPackageName = BuildConfig.class.getPackage().getName();
+        try {
+            context.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=" + appPackageName)));
+        }
+        catch (android.content.ActivityNotFoundException anfe) {
+            context.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=" + appPackageName)));
+        }
+    }
+
     public static void handleWebUrl(Context context,Uri url){
         CustomTabsIntent.Builder builder = new CustomTabsIntent.Builder();
         builder.setToolbarColor(ContextCompat.getColor(context, R.color.primaryColor));
