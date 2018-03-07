@@ -70,7 +70,6 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
     private NearbyMapFragment nearbyMapFragment;
     private static final String TAG_RETAINED_FRAGMENT = "RetainedFragment";
 
-    @BindView(R.id.swipe_container) SwipeRefreshLayout swipeLayout;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -81,13 +80,6 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
 
         initBottomSheetBehaviour();
         initDrawer();
-        swipeLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                lockNearbyView(false);
-                refreshView(true);
-            }
-        });
     }
 
     private void resumeFragment() {
@@ -357,7 +349,6 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
         setListFragment();
 
         hideProgressBar();
-        swipeLayout.setRefreshing(false);
     }
 
     private void lockNearbyView(boolean lock) {
