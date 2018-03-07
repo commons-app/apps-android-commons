@@ -96,5 +96,6 @@ public class WelcomePagerAdapter extends PagerAdapter {
                 callback.onYesClicked();
             }
         }
+
     }
 }

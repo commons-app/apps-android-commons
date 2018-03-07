@@ -240,5 +240,5 @@
   <string name="notifications_mention">%1$s mentioned you on %2$s.</string>
   <string name="toggle_view_button">Toggle view</string>
   <string name="about_rate_us"><u>Rate Us</u></string>
-    <string name="welcome_skip_button">Skip</string>
+    <string name="welcome_skip_button">Skip Tutorial</string>
 </resources>
