@@ -27,6 +27,7 @@ import javax.inject.Named;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import fr.free.nrw.commons.BuildConfig;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
 import fr.free.nrw.commons.nearby.NearbyActivity;
@@ -88,8 +89,12 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment {
 
     public void setAdapter(ListAdapter adapter) {
         this.contributionsList.setAdapter(adapter);
-        Timber.d("ContributionsListFragment -> " + adapter.getCount());
-        ((ContributionsActivity) getActivity()).setUploadCount(adapter.getCount());
+        Timber.d("" + adapter.getCount());
+
+        if(BuildConfig.FLAVOR.equalsIgnoreCase("beta")){
+            Timber.d("betaBuild : adapter count -> " + adapter.getCount());
+            ((ContributionsActivity) getActivity()).betaSetUploadCount(adapter.getCount());
+        }
     }
 
     public void changeProgressBarVisibility(boolean isVisible) {

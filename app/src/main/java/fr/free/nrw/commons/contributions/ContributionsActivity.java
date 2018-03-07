@@ -26,6 +26,7 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 import butterknife.ButterKnife;
+import fr.free.nrw.commons.BuildConfig;
 import fr.free.nrw.commons.HandlerService;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.R;
@@ -139,6 +140,12 @@ public  class       ContributionsActivity
         requestAuthToken();
         initDrawer();
         setTitle(getString(R.string.title_activity_contributions));
+
+        if(!BuildConfig.FLAVOR.equalsIgnoreCase("beta")){
+            Timber.d("setUploadCount()");
+            setUploadCount();
+        }
+
     }
 
     @Override
@@ -265,10 +272,25 @@ public  class       ContributionsActivity
     }
 
     @SuppressWarnings("ConstantConditions")
-    public void setUploadCount(int uploadCount) {
-        getSupportActionBar().setSubtitle(getResources()
-                .getQuantityString(R.plurals.contributions_subtitle, uploadCount, uploadCount));
+    private void setUploadCount() {
+        compositeDisposable.add(mediaWikiApi
+                .getUploadCount(sessionManager.getCurrentAccount().name)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(
+                        uploadCount -> getSupportActionBar().setSubtitle(getResources()
+                                .getQuantityString(R.plurals.contributions_subtitle,
+                                        uploadCount, uploadCount)),
+                        t -> Timber.e(t, "Fetching upload count failed")
+                ));
     }
+
+    public void betaSetUploadCount(int betaUploadCount){
+        Timber.d("" + betaUploadCount);
+        getSupportActionBar().setSubtitle(getResources()
+                .getQuantityString(R.plurals.contributions_subtitle, betaUploadCount, betaUploadCount));
+    }
+
 
     @Override
     public void notifyDatasetChanged() {
