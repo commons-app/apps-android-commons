@@ -1,5 +1,6 @@
 package fr.free.nrw.commons.notification;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 
 import org.w3c.dom.Element;
@@ -33,23 +34,52 @@ public class NotificationUtils {
         NotificationType type = getNotificationType(document);
 
         String notificationText = "";
-        String link = getNotificationLink(document);
+        String link = getPrimaryLink(document);
         String description = getNotificationDescription(document);
+        String iconUrl = getNotificationIconUrl(document);
+
         switch (type) {
             case THANK_YOU_EDIT:
                 notificationText = context.getString(R.string.notifications_thank_you_edit);
                 break;
             case EDIT_USER_TALK:
-                notificationText = getUserTalkMessage(context, document);
+                notificationText = getNotificationHeader(document);
                 break;
             case MENTION:
                 notificationText = getMentionMessage(context, document);
+                description = getMentionDescription(document);
                 break;
             case WELCOME:
                 notificationText = getWelcomeMessage(context, document);
                 break;
         }
-        return new Notification(type, notificationText, getTimestamp(document), description, link);
+        return new Notification(type, notificationText, getTimestamp(document), description, link, iconUrl);
+    }
+
+    private static String getNotificationHeader(Node document) {
+        Node body = getNode(getModel(document), "header");
+        if (body != null) {
+            String textContent = body.getTextContent();
+            return textContent.replace("<strong>", "").replace("</strong>", "");
+        } else {
+            return "";
+        }
+    }
+
+    private static String getMentionDescription(Node document) {
+        Node body = getNode(getModel(document), "body");
+        return body != null ? body.getTextContent() : "";
+    }
+
+    private static String getNotificationIconUrl(Node document) {
+        String format = "%s%s";
+        Node iconUrl = getNode(getModel(document), "iconUrl");
+        if(iconUrl == null) {
+            return null;
+        } else {
+            String url = iconUrl.getTextContent();
+            return String.format(format, BuildConfig.COMMONS_URL, url);
+        }
     }
 
     public static String getMentionMessage(Context context, Node document) {
@@ -57,14 +87,29 @@ public class NotificationUtils {
         return String.format(format, getAgent(document), getNotificationDescription(document));
     }
 
+    @SuppressLint("StringFormatMatches")
     public static String getUserTalkMessage(Context context, Node document) {
         String format = context.getString(R.string.notifications_talk_page_message);
         return String.format(format, getAgent(document));
     }
 
+    @SuppressLint("StringFormatInvalid")
     public static String getWelcomeMessage(Context context, Node document) {
         String welcomeMessageFormat = context.getString(R.string.notifications_welcome);
         return String.format(welcomeMessageFormat, getAgent(document));
+    }
+
+    private static String getPrimaryLink(Node document) {
+        Node links = getNode(getModel(document), "links");
+        Element primaryLink = (Element) getNode(links, "primary");
+        if (primaryLink != null) {
+            return primaryLink.getAttribute("url");
+        }
+        return "";
+    }
+
+    private static Node getModel(Node document) {
+        return getNode(document, "_.2A.");
     }
 
     private static String getAgent(Node document) {
@@ -79,16 +124,6 @@ public class NotificationUtils {
         Element timestampElement = (Element) getNode(document, "timestamp");
         if (timestampElement != null) {
             return timestampElement.getAttribute("date");
-        }
-        return "";
-    }
-
-    private static String getNotificationLink(Node document) {
-        String format = "%s%s";
-        Element titleElement = (Element) getNode(document, "title");
-        if (titleElement != null) {
-            String fullName = titleElement.getAttribute("full");
-            return String.format(format, BuildConfig.HOME_URL, fullName);
         }
         return "";
     }

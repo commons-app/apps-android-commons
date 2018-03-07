@@ -434,7 +434,8 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
                     .param("notprop", "list")
                     .param("format", "xml")
                     .param("meta", "notifications")
-                    .param("notfilter", "!read")
+                    .param("notformat", "model")
+                    //.param("notfilter", "!read")
                     .get()
                     .getNode("/api/query/notifications/list");
         } catch (IOException e) {
