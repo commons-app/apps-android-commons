@@ -141,7 +141,7 @@
                 android:textColor="@color/primaryColor"
                 android:layout_marginTop="@dimen/standard_gap"
                 android:gravity="center"
-                android:text="@string/about_faq" />
+                />
 
             <TextView
                 android:id="@+id/about_uploads_to"
