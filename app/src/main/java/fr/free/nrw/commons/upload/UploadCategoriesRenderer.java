@@ -1,6 +1,5 @@
 package fr.free.nrw.commons.upload;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -47,7 +46,6 @@ public class UploadCategoriesRenderer extends Renderer<CategoryItem> {
     @Override
     public void render() {
         CategoryItem item = getContent();
-        Log.e("Commons", "Rendering: "+item);
         checkedView.setChecked(item.isSelected());
         checkedView.setText(item.getName());
     }

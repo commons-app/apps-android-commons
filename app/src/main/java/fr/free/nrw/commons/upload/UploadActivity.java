@@ -49,83 +49,45 @@ import timber.log.Timber;
 import static fr.free.nrw.commons.category.CategoriesModel.sortBySimilarity;
 
 public class UploadActivity extends AuthenticatedActivity implements UploadView {
-    @Inject
-    InputMethodManager inputMethodManager;
-    @Inject
-    MediaWikiApi mwApi;
-    @Inject
-    UploadPresenter presenter;
-    @Inject
-    UploadThumbnailsAdapterFactory adapterFactory;
-    @Inject
-    CategoriesModel categoriesModel;
+    @Inject InputMethodManager inputMethodManager;
+    @Inject MediaWikiApi mwApi;
+    @Inject UploadPresenter presenter;
+    @Inject CategoriesModel categoriesModel;
 
     // Main GUI
-    @BindView(R.id.backgroundImage)
-    SimpleDraweeView background;
-    @BindView(R.id.view_flipper)
-    ViewFlipper viewFlipper;
+    @BindView(R.id.backgroundImage) SimpleDraweeView background;
+    @BindView(R.id.view_flipper) ViewFlipper viewFlipper;
 
     // Top Card
-    @BindView(R.id.top_card)
-    CardView topCard;
-    @BindView(R.id.top_card_expand_button)
-    ImageView topCardExpandButton;
-    @BindView(R.id.top_card_title)
-    TextView topCardTitle;
-    @BindView(R.id.top_card_thumbnails)
-    RecyclerView topCardThumbnails;
+    @BindView(R.id.top_card) CardView topCard;
+    @BindView(R.id.top_card_expand_button) ImageView topCardExpandButton;
+    @BindView(R.id.top_card_title) TextView topCardTitle;
+    @BindView(R.id.top_card_thumbnails) RecyclerView topCardThumbnails;
 
     // Bottom Card
-    @BindView(R.id.bottom_card_expand_button)
-    ImageView bottomCardExpandButton;
-    @BindView(R.id.bottom_card_title)
-    TextView bottomCardTitle;
-    @BindView(R.id.bottom_card_content)
-    View bottomCardContent;
-    @BindView(R.id.bottom_card_next)
-    Button next;
-    @BindView(R.id.bottom_card_previous)
-    Button previous;
-    @BindView(R.id.image_title)
-    EditText imageTitle;
-    @BindView(R.id.image_description)
-    EditText imageDescription;
+    @BindView(R.id.bottom_card_expand_button) ImageView bottomCardExpandButton;
+    @BindView(R.id.bottom_card_title) TextView bottomCardTitle;
+    @BindView(R.id.bottom_card_content) View bottomCardContent;
+    @BindView(R.id.bottom_card_next) Button next;
+    @BindView(R.id.bottom_card_previous) Button previous;
+    @BindView(R.id.image_title) EditText imageTitle;
+    @BindView(R.id.image_description) EditText imageDescription;
 
     // Category Search
-    @BindView(R.id.categories_title)
-    TextView categoryTitle;
-    @BindView(R.id.category_next)
-    Button categoryNext;
-    @BindView(R.id.category_previous)
-    Button categoryPrevious;
-    @BindView(R.id.categoriesSearchInProgress)
-    ProgressBar categoriesSearchInProgress;
-    @BindView(R.id.category_search)
-    EditText categoriesSearch;
-    @BindView(R.id.category_search_container)
-    TextInputLayout categoriesSearchContainer;
-    @BindView(R.id.categories)
-    RecyclerView categoriesList;
+    @BindView(R.id.categories_title) TextView categoryTitle;
+    @BindView(R.id.category_next) Button categoryNext;
+    @BindView(R.id.category_previous) Button categoryPrevious;
+    @BindView(R.id.categoriesSearchInProgress) ProgressBar categoriesSearchInProgress;
+    @BindView(R.id.category_search) EditText categoriesSearch;
+    @BindView(R.id.category_search_container) TextInputLayout categoriesSearchContainer;
+    @BindView(R.id.categories) RecyclerView categoriesList;
 
     // Final Submission
-    @BindView(R.id.license_title)
-    TextView licenseTitle;
-    @BindView(R.id.submit)
-    Button submit;
-    @BindView(R.id.license_previous)
-    Button licensePrevious;
+    @BindView(R.id.license_title) TextView licenseTitle;
+    @BindView(R.id.submit) Button submit;
+    @BindView(R.id.license_previous) Button licensePrevious;
 
     private RVRendererAdapter<CategoryItem> categoriesAdapter;
-    private final UploadCategoriesAdapterFactory categoryAdapterFactory = new UploadCategoriesAdapterFactory(item -> {
-        if (item.isSelected()) {
-            categoriesModel.selectCategory(item);
-            categoriesModel.updateCategoryCount(item);
-        } else {
-            categoriesModel.unselectCategory(item);
-        }
-    });
-
     private AbstractTextWatcher titleWatcher;
     private AbstractTextWatcher descriptionWatcher;
     private CompositeDisposable compositeDisposable;
@@ -136,33 +98,13 @@ public class UploadActivity extends AuthenticatedActivity implements UploadView 
         setContentView(R.layout.activity_upload);
         ButterKnife.bind(this);
 
-        topCardThumbnails.setLayoutManager(new LinearLayoutManager(this,
-                LinearLayoutManager.HORIZONTAL, false));
-
-        titleWatcher = new AbstractTextWatcher(this::handleImageTitleChanged);
-        descriptionWatcher = new AbstractTextWatcher(this::handleImageDescriptionChanged);
-        adapterFactory.setListener(presenter::thumbnailClicked);
-        topCardExpandButton.setOnClickListener(v -> presenter.toggleTopCardState());
-        bottomCardExpandButton.setOnClickListener(v -> presenter.toggleBottomCardState());
-        next.setOnClickListener(v -> presenter.handleNext());
-        previous.setOnClickListener(v -> presenter.handlePrevious());
-        categoryNext.setOnClickListener(v -> presenter.handleNext());
-        categoryPrevious.setOnClickListener(v -> presenter.handlePrevious());
-        licensePrevious.setOnClickListener(v -> presenter.handlePrevious());
-        submit.setOnClickListener(v -> presenter.handleSubmit());
-
-        ArrayList<CategoryItem> items = new ArrayList<>();
-        if (savedInstanceState != null) {
-            items.addAll(savedInstanceState.getParcelableArrayList("currentCategories"));
-            //noinspection unchecked
-            categoriesModel.cacheAll((HashMap<String, ArrayList<String>>) savedInstanceState
-                    .getSerializable("categoriesCache"));
-        }
-        categoriesAdapter = categoryAdapterFactory.create(items);
-        categoriesList.setLayoutManager(new LinearLayoutManager(this));
-        categoriesList.setAdapter(categoriesAdapter);
+        configureCategories(savedInstanceState);
+        configureTopCard();
+        configureBottomCard();
+        configureNavigationButtons();
 
         presenter.init(savedInstanceState);
+
         receiveSharedItems();
     }
 
@@ -183,53 +125,6 @@ public class UploadActivity extends AuthenticatedActivity implements UploadView 
         );
     }
 
-    @SuppressLint("CheckResult")
-    private void updateCategoryList(String filter) {
-        Observable.fromIterable(categoriesModel.getSelectedCategories())
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .doOnSubscribe(disposable -> {
-                    categoriesSearchInProgress.setVisibility(View.VISIBLE);
-                    categoriesSearchContainer.setError(null);
-//                    categoriesNotFoundView.setVisibility(View.GONE);
-//                    categoriesSkip.setVisibility(View.GONE);
-                    categoriesAdapter.clear();
-                })
-                .observeOn(Schedulers.io())
-                .concatWith(
-                        categoriesModel.searchAll(filter)
-                                .mergeWith(categoriesModel.searchCategories(filter))
-                                .concatWith(TextUtils.isEmpty(filter)
-                                        ? categoriesModel.defaultCategories() : Observable.empty())
-                )
-                .filter(categoryItem -> !CategoriesModel.containsYear(categoryItem.getName()))
-                .distinct()
-                .sorted(sortBySimilarity(filter))
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(
-                        s -> categoriesAdapter.add(s),
-                        Timber::e,
-                        () -> {
-                            categoriesAdapter.notifyDataSetChanged();
-                            categoriesSearchInProgress.setVisibility(View.GONE);
-
-                            if (categoriesAdapter.getItemCount() == categoriesModel.selectedCategoriesCount()
-                                    && !categoriesSearch.getText().toString().isEmpty()) {
-                                // There are no suggestions
-//                                if (TextUtils.isEmpty(filter)) {
-//                                    // Allow to send image with no categories
-//                                    categoriesSkip.setVisibility(View.VISIBLE);
-//                                } else {
-//                                    // Inform the user that the searched term matches  no category
-//                                    categoriesNotFoundView.setText(getString(R.string.categories_not_found, filter));
-//                                    categoriesNotFoundView.setVisibility(View.VISIBLE);
-//                                }
-                                categoriesSearchContainer.setError("No categories found");
-                            }
-                        }
-                );
-    }
-
     @Override
     protected void onPause() {
         presenter.removeView();
@@ -242,7 +137,7 @@ public class UploadActivity extends AuthenticatedActivity implements UploadView 
     @Override
     public void updateThumbnails(List<UploadModel.UploadItem> uploads) {
         int uploadCount = uploads.size();
-        topCardThumbnails.setAdapter(adapterFactory.create(uploads));
+        topCardThumbnails.setAdapter(new UploadThumbnailsAdapterFactory(presenter::thumbnailClicked).create(uploads));
         topCardTitle.setText(getResources().getQuantityString(R.plurals.upload_count_title, uploadCount, uploadCount));
     }
 
@@ -314,26 +209,6 @@ public class UploadActivity extends AuthenticatedActivity implements UploadView 
         inputMethodManager.hideSoftInputFromWindow(imageTitle.getWindowToken(), 0);
     }
 
-    private void receiveSharedItems() {
-        Intent intent = getIntent();
-        String mimeType = intent.getType();
-        String source;
-
-        if (intent.hasExtra(UploadService.EXTRA_SOURCE)) {
-            source = intent.getStringExtra(UploadService.EXTRA_SOURCE);
-        } else {
-            source = Contribution.SOURCE_EXTERNAL;
-        }
-
-        if (Intent.ACTION_SEND.equals(intent.getAction())) {
-            Uri mediaUri = intent.getParcelableExtra(Intent.EXTRA_STREAM);
-            presenter.receive(mediaUri, mimeType, source);
-        } else if (Intent.ACTION_SEND_MULTIPLE.equals(intent.getAction())) {
-            ArrayList<Uri> urisList = intent.getParcelableArrayListExtra(Intent.EXTRA_STREAM);
-            presenter.receive(urisList, mimeType, source);
-        }
-    }
-
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
@@ -360,22 +235,107 @@ public class UploadActivity extends AuthenticatedActivity implements UploadView 
         finish();
     }
 
-    private void handleImageDescriptionChanged() {
-        presenter.descriptionChanged(imageDescription.getText().toString());
+    private void configureTopCard() {
+        topCardExpandButton.setOnClickListener(v -> presenter.toggleTopCardState());
+        topCardThumbnails.setLayoutManager(new LinearLayoutManager(this,
+                LinearLayoutManager.HORIZONTAL, false));
     }
 
-    private void handleImageTitleChanged() {
-        presenter.imageTitleChanged(imageTitle.getText().toString());
+    private void configureBottomCard() {
+        bottomCardExpandButton.setOnClickListener(v -> presenter.toggleBottomCardState());
+        titleWatcher = new AbstractTextWatcher(presenter::imageTitleChanged);
+        descriptionWatcher = new AbstractTextWatcher(presenter::descriptionChanged);
+    }
+
+    private void configureNavigationButtons() {
+        // Navigation next / previous for each image as we're collecting title + description
+        next.setOnClickListener(v -> presenter.handleNext());
+        previous.setOnClickListener(v -> presenter.handlePrevious());
+
+        // Next / previous for the category selection page
+        categoryNext.setOnClickListener(v -> presenter.handleNext());
+        categoryPrevious.setOnClickListener(v -> presenter.handlePrevious());
+
+        // Finally, the previous / submit buttons on the final page of the wizard
+        licensePrevious.setOnClickListener(v -> presenter.handlePrevious());
+        submit.setOnClickListener(v -> presenter.handleSubmit());
+    }
+
+    private void configureCategories(Bundle savedInstanceState) {
+        ArrayList<CategoryItem> items = new ArrayList<>();
+        if (savedInstanceState != null) {
+            items.addAll(savedInstanceState.getParcelableArrayList("currentCategories"));
+            //noinspection unchecked
+            categoriesModel.cacheAll((HashMap<String, ArrayList<String>>) savedInstanceState
+                    .getSerializable("categoriesCache"));
+        }
+        categoriesAdapter = new UploadCategoriesAdapterFactory(categoriesModel).create(items);
+        categoriesList.setLayoutManager(new LinearLayoutManager(this));
+        categoriesList.setAdapter(categoriesAdapter);
+    }
+
+    @SuppressLint("CheckResult")
+    private void updateCategoryList(String filter) {
+        Observable.fromIterable(categoriesModel.getSelectedCategories())
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .doOnSubscribe(disposable -> {
+                    categoriesSearchInProgress.setVisibility(View.VISIBLE);
+                    categoriesSearchContainer.setError(null);
+                    categoriesAdapter.clear();
+                })
+                .observeOn(Schedulers.io())
+                .concatWith(
+                        categoriesModel.searchAll(filter)
+                                .mergeWith(categoriesModel.searchCategories(filter))
+                                .concatWith(TextUtils.isEmpty(filter)
+                                        ? categoriesModel.defaultCategories() : Observable.empty())
+                )
+                .filter(categoryItem -> !CategoriesModel.containsYear(categoryItem.getName()))
+                .distinct()
+                .sorted(sortBySimilarity(filter))
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(
+                        s -> categoriesAdapter.add(s),
+                        Timber::e,
+                        () -> {
+                            categoriesAdapter.notifyDataSetChanged();
+                            categoriesSearchInProgress.setVisibility(View.GONE);
+
+                            if (categoriesAdapter.getItemCount() == categoriesModel.selectedCategoriesCount()
+                                    && !categoriesSearch.getText().toString().isEmpty()) {
+                                categoriesSearchContainer.setError("No categories found");
+                            }
+                        }
+                );
+    }
+
+    private void receiveSharedItems() {
+        Intent intent = getIntent();
+        String mimeType = intent.getType();
+        String source;
+
+        if (intent.hasExtra(UploadService.EXTRA_SOURCE)) {
+            source = intent.getStringExtra(UploadService.EXTRA_SOURCE);
+        } else {
+            source = Contribution.SOURCE_EXTERNAL;
+        }
+
+        if (Intent.ACTION_SEND.equals(intent.getAction())) {
+            Uri mediaUri = intent.getParcelableExtra(Intent.EXTRA_STREAM);
+            presenter.receive(mediaUri, mimeType, source);
+        } else if (Intent.ACTION_SEND_MULTIPLE.equals(intent.getAction())) {
+            ArrayList<Uri> urisList = intent.getParcelableArrayListExtra(Intent.EXTRA_STREAM);
+            presenter.receive(urisList, mimeType, source);
+        }
     }
 
     private void updateCardState(boolean state, ImageView button, View... content) {
         button.setImageResource(state
-                ? R.drawable.ic_expand_less_black_24dp
-                : R.drawable.ic_expand_more_black_24dp);
+                ? R.drawable.ic_expand_less_black_24dp : R.drawable.ic_expand_more_black_24dp);
         if (content != null) {
             for (View view : content) {
-                view.setVisibility(state
-                        ? View.VISIBLE : View.GONE);
+                view.setVisibility(state ? View.VISIBLE : View.GONE);
             }
         }
     }
