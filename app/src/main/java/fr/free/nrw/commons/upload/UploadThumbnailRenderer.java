@@ -46,7 +46,4 @@ class UploadThumbnailRenderer extends Renderer<UploadModel.UploadItem> {
         error.setVisibility(content.visited && content.error ? View.VISIBLE : View.GONE);
     }
 
-    public interface ThumbnailClickedListener {
-        void thumbnailClicked(UploadModel.UploadItem content);
-    }
 }

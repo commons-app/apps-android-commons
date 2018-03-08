@@ -10,10 +10,10 @@ import java.util.List;
 import javax.inject.Inject;
 
 public class UploadThumbnailsAdapterFactory {
-    private UploadThumbnailRenderer.ThumbnailClickedListener listener;
+    private ThumbnailClickedListener listener;
 
-    @Inject
-    UploadThumbnailsAdapterFactory() {
+    UploadThumbnailsAdapterFactory(ThumbnailClickedListener listener) {
+        this.listener = listener;
     }
 
     public RVRendererAdapter<UploadModel.UploadItem> create(List<UploadModel.UploadItem> placeList) {
@@ -22,9 +22,5 @@ public class UploadThumbnailsAdapterFactory {
         ListAdapteeCollection<UploadModel.UploadItem> collection = new ListAdapteeCollection<>(
                 placeList != null ? placeList : Collections.emptyList());
         return new RVRendererAdapter<>(builder, collection);
-    }
-
-    public void setListener(UploadThumbnailRenderer.ThumbnailClickedListener listener) {
-        this.listener = listener;
     }
 }

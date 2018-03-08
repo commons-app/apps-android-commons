@@ -17,7 +17,7 @@ public class AbstractTextWatcher implements TextWatcher {
 
     @Override
     public void onTextChanged(CharSequence s, int start, int before, int count) {
-        textChange.onTextChanged();
+        textChange.onTextChanged(s.toString());
     }
 
     @Override
@@ -25,6 +25,6 @@ public class AbstractTextWatcher implements TextWatcher {
     }
 
     public interface TextChange {
-        void onTextChanged();
+        void onTextChanged(String value);
     }
 }
