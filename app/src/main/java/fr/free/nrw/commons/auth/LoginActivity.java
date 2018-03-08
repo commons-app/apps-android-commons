@@ -129,8 +129,7 @@ public class LoginActivity extends AccountAuthenticatorActivity {
     }
 
     private void forgotPassword() {
-        Intent launchBrowser = new Intent(Intent.ACTION_VIEW, Uri.parse(BuildConfig.FORGOT_PASSWORD_URL));
-        startActivity(launchBrowser);
+        Utils.handleWebUrl(this, Uri.parse(BuildConfig.FORGOT_PASSWORD_URL));
     }
 
 
