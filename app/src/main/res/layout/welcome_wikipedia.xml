@@ -57,6 +57,7 @@
         android:text="@string/welcome_skip_button"
         android:id="@+id/welcomeYesButton"
         android:textSize="@dimen/normal_text"
+        android:visibility="gone"
         android:layout_gravity="right"
         android:layout_alignParentRight="true"
         android:textColor="#fff"
