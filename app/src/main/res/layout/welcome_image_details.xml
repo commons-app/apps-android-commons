@@ -1,12 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#0c609c"
     android:gravity="center_vertical"
     >
-
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#0c609c"
+        android:gravity="center_vertical"
+        >
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -127,6 +133,20 @@
             android:textColor="@android:color/white"
             />
 
+        </LinearLayout>
     </LinearLayout>
-
-</LinearLayout>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/overflow_button_dimen"
+        android:layout_marginTop="@dimen/standard_gap"
+        android:layout_marginRight="@dimen/standard_gap"
+        android:text="@string/welcome_skip_button"
+        android:id="@+id/welcomeYesButton"
+        android:textSize="@dimen/normal_text"
+        android:visibility="gone"
+        android:layout_gravity="right"
+        android:layout_alignParentRight="true"
+        android:textColor="#fff"
+        android:textStyle="bold"
+        />
+</RelativeLayout>
