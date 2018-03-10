@@ -46,6 +46,7 @@ import io.reactivex.Observable;
 import io.reactivex.Single;
 import timber.log.Timber;
 
+import static fr.free.nrw.commons.notification.NotificationType.THANK_YOU_EDIT;
 import static fr.free.nrw.commons.notification.NotificationType.UNKNOWN;
 import static fr.free.nrw.commons.notification.NotificationUtils.getNotificationFromApiResult;
 import static fr.free.nrw.commons.notification.NotificationUtils.getNotificationType;
@@ -453,7 +454,8 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
         for (int i = 0; i < childNodes.getLength(); i++) {
             Node node = childNodes.item(i);
             if (isCommonsNotification(node)
-                    && !getNotificationType(node).equals(UNKNOWN)) {
+                    && !getNotificationType(node).equals(UNKNOWN)
+                    && !getNotificationType(node).equals(THANK_YOU_EDIT)) {
                 notifications.add(getNotificationFromApiResult(context, node));
             }
         }

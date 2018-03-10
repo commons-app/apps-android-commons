@@ -102,12 +102,6 @@ dependencies {
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
 }
 
-repositories {
-    mavenCentral()
-    google()
-}
-
-
 android {
     compileSdkVersion project.compileSdkVersion
     buildToolsVersion project.buildToolsVersion
