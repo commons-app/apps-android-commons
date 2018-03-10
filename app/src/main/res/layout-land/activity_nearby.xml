@@ -13,20 +13,7 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
-                <android.support.design.widget.FloatingActionButton
-                    android:id="@+id/fab_plus"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="16dp"
-                    android:clickable="true"
-                    android:visibility="invisible"
-                    app:backgroundTint="@color/button_blue"
-                    app:elevation="6dp"
-                    app:fabSize="normal"
-                    app:layout_anchor="@id/bottom_sheet_details"
-                    app:layout_anchorGravity="top|right|end"
-                    app:pressedTranslationZ="12dp"
-                    app:srcCompat="@drawable/ic_add_white_24dp" />
+
             
             <include
                 android:id="@+id/toolbar"
@@ -61,6 +48,22 @@
                 android:background="#aa969696"
                 android:elevation="6dp"
                 />
+            <android.support.design.widget.FloatingActionButton
+                android:id="@+id/fab_recenter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_below="@+id/toolbar"
+                android:layout_marginRight="12dp"
+                android:layout_marginTop="6dp"
+                android:clickable="true"
+                android:visibility="invisible"
+                app:backgroundTint="@color/main_background_light"
+                app:elevation="6dp"
+                app:fabSize="normal"
+                app:layout_anchorGravity="top|right|end"
+                app:srcCompat="@drawable/ic_my_location_black_24dp" />
         </RelativeLayout>
 
         <include layout="@layout/bottom_sheet_nearby" />
