@@ -163,8 +163,6 @@
             />
 
     </LinearLayout>
-
-
     </LinearLayout>
     <TextView
         android:layout_width="wrap_content"
@@ -180,6 +178,5 @@
         android:textColor="#fff"
         android:textStyle="bold"
         />
-
 
 </RelativeLayout>
