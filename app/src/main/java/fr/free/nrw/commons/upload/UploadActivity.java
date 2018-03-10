@@ -11,10 +11,13 @@ import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ViewFlipper;
@@ -34,6 +37,7 @@ import javax.inject.Inject;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import fr.free.nrw.commons.R;
+import fr.free.nrw.commons.Utils;
 import fr.free.nrw.commons.auth.AuthenticatedActivity;
 import fr.free.nrw.commons.category.CategoriesModel;
 import fr.free.nrw.commons.category.CategoryItem;
@@ -84,6 +88,9 @@ public class UploadActivity extends AuthenticatedActivity implements UploadView 
 
     // Final Submission
     @BindView(R.id.license_title) TextView licenseTitle;
+    @BindView(R.id.share_license_summary) TextView licenseSummary;
+    @BindView(R.id.media_upload_policy) TextView licensePolicy;
+    @BindView(R.id.license_list) Spinner licenseSpinner;
     @BindView(R.id.submit) Button submit;
     @BindView(R.id.license_previous) Button licensePrevious;
 
@@ -99,6 +106,7 @@ public class UploadActivity extends AuthenticatedActivity implements UploadView 
         ButterKnife.bind(this);
 
         configureCategories(savedInstanceState);
+        configureLicenses();
         configureTopCard();
         configureBottomCard();
         configureNavigationButtons();
@@ -152,6 +160,29 @@ public class UploadActivity extends AuthenticatedActivity implements UploadView 
     }
 
     @Override
+    public void updateLicenses(List<String> licenses, String selectedLicense) {
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, licenses);
+        licenseSpinner.setAdapter(adapter);
+
+        int position = licenses.indexOf(getString(Utils.licenseNameFor(selectedLicense)));
+
+        // Check position is valid
+        if (position < 0) {
+            Timber.d("Invalid position: %d. Using default license", position);
+            position = licenses.size() - 1;
+        }
+
+        Timber.d("Position: %d %s", position, getString(Utils.licenseNameFor(selectedLicense)));
+        licenseSpinner.setSelection(position);
+    }
+
+    @Override
+    @SuppressLint("StringFormatInvalid")
+    public void updateLicenseSummary(String selectedLicense) {
+        licenseSummary.setText(getString(R.string.share_license_summary, getString(Utils.licenseNameFor(selectedLicense))));
+    }
+
+    @Override
     public void updateTopCardContent() {
         RecyclerView.Adapter adapter = topCardThumbnails.getAdapter();
         if (adapter != null) {
@@ -163,6 +194,10 @@ public class UploadActivity extends AuthenticatedActivity implements UploadView 
     public void setNextEnabled(boolean available) {
         next.setEnabled(available);
         categoryNext.setEnabled(available);
+    }
+
+    @Override
+    public void setSubmitEnabled(boolean available) {
         submit.setEnabled(available);
     }
 
@@ -233,6 +268,21 @@ public class UploadActivity extends AuthenticatedActivity implements UploadView 
         Toast failureToast = Toast.makeText(this, R.string.authentication_failed, Toast.LENGTH_LONG);
         failureToast.show();
         finish();
+    }
+
+    private void configureLicenses() {
+        licenseSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                String licenseName = parent.getItemAtPosition(position).toString();
+                presenter.selectLicense(licenseName);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                presenter.selectLicense(null);
+            }
+        });
     }
 
     private void configureTopCard() {

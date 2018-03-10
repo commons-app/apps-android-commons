@@ -23,16 +23,42 @@
         android:textStyle="bold"
         tools:text="Step 1 of 15" />
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/categories"
+    <Spinner
+        android:id="@+id/license_list"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/standard_gap"
         android:layout_marginLeft="@dimen/standard_gap"
+        android:layout_marginTop="@dimen/standard_gap"
         android:layout_marginEnd="@dimen/standard_gap"
         android:layout_marginRight="@dimen/standard_gap"
-        android:layout_above="@+id/button_divider"
         android:layout_below="@id/license_title" />
+
+    <TextView
+        android:id="@+id/share_license_summary"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/standard_gap"
+        android:layout_marginLeft="@dimen/standard_gap"
+        android:layout_marginTop="@dimen/standard_gap"
+        android:layout_marginEnd="@dimen/standard_gap"
+        android:layout_marginRight="@dimen/standard_gap"
+        android:layout_below="@id/license_list"
+        android:text="@string/share_license_summary" />
+
+    <fr.free.nrw.commons.ui.widget.HtmlTextView
+        android:id="@+id/media_upload_policy"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/standard_gap"
+        android:layout_marginLeft="@dimen/standard_gap"
+        android:layout_marginTop="@dimen/standard_gap"
+        android:layout_marginEnd="@dimen/standard_gap"
+        android:layout_marginRight="@dimen/standard_gap"
+        android:layout_marginBottom="@dimen/standard_gap"
+        android:layout_above="@+id/button_divider"
+        android:gravity="start"
+        android:text="@string/media_upload_policy" />
 
     <View
         android:id="@+id/button_divider"

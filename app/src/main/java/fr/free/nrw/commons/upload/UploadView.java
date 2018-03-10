@@ -10,6 +10,8 @@ import java.util.List;
 import static java.lang.annotation.RetentionPolicy.SOURCE;
 
 public interface UploadView {
+    // Dummy implementation of the view interface to allow us to have a 'null object pattern'
+    // in the presenter and avoid constant NULL checking.
     UploadView DUMMY = (UploadView) Proxy.newProxyInstance(UploadView.class.getClassLoader(),
             new Class[]{UploadView.class}, (proxy, method, methodArgs) -> null);
 
@@ -25,6 +27,8 @@ public interface UploadView {
 
     void setNextEnabled(boolean available);
 
+    void setSubmitEnabled(boolean available);
+
     void setPreviousEnabled(boolean available);
 
     void setTopCardState(boolean state);
@@ -38,6 +42,10 @@ public interface UploadView {
     void setBottomCardVisibility(@UploadPage int page);
 
     void updateBottomCardContent(int currentStep, int stepCount, UploadModel.UploadItem uploadItem);
+
+    void updateLicenses(List<String> licenses, String selectedLicense);
+
+    void updateLicenseSummary(String selectedLicense);
 
     void updateTopCardContent();
 
