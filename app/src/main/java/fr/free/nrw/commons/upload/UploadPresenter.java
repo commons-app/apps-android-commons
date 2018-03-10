@@ -36,6 +36,11 @@ public class UploadPresenter {
         view.updateTopCardContent();
     }
 
+    public void selectLicense(String licenseName) {
+        uploadModel.setSelectedLicense(licenseName);
+        view.updateLicenseSummary(uploadModel.getSelectedLicense());
+    }
+
     public void descriptionChanged(String text) {
         uploadModel.getCurrentItem().description = text;
     }
@@ -56,6 +61,10 @@ public class UploadPresenter {
     public void thumbnailClicked(UploadModel.UploadItem item) {
         uploadModel.jumpTo(item);
         updateContent();
+    }
+
+    public void handleSubmit() {
+
     }
     //endregion
 
@@ -99,12 +108,17 @@ public class UploadPresenter {
         view.setTopCardState(uploadModel.isTopCardState());
         view.setBottomCardState(uploadModel.isBottomCardState());
 
+        String selectedLicense = uploadModel.getSelectedLicense();
+        view.updateLicenses(uploadModel.getLicenses(), selectedLicense);
+        view.updateLicenseSummary(selectedLicense);
+
         updateContent();
     }
 
     private void updateContent() {
         view.setNextEnabled(uploadModel.isNextAvailable());
         view.setPreviousEnabled(uploadModel.isPreviousAvailable());
+        view.setSubmitEnabled(uploadModel.isSubmitAvailable());
 
         view.setBackground(uploadModel.getCurrentItem().mediaUri);
 
@@ -124,10 +138,6 @@ public class UploadPresenter {
             page = UploadView.LICENSE;
         }
         view.setBottomCardVisibility(page);
-    }
-
-    public void handleSubmit() {
-
     }
     //endregion
 }

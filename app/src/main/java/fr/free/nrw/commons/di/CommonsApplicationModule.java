@@ -8,6 +8,11 @@ import android.preference.PreferenceManager;
 import android.support.v4.util.LruCache;
 import android.view.inputmethod.InputMethodManager;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import com.google.gson.Gson;
 
 import javax.inject.Named;
@@ -16,7 +21,7 @@ import javax.inject.Singleton;
 import dagger.Module;
 import dagger.Provides;
 import fr.free.nrw.commons.BuildConfig;
-import fr.free.nrw.commons.CommonsApplication;
+import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.auth.AccountUtil;
 import fr.free.nrw.commons.auth.SessionManager;
 import fr.free.nrw.commons.caching.CacheController;
@@ -25,6 +30,7 @@ import fr.free.nrw.commons.location.LocationServiceManager;
 import fr.free.nrw.commons.mwapi.ApacheHttpClientMediaWikiApi;
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
 import fr.free.nrw.commons.nearby.NearbyPlaces;
+import fr.free.nrw.commons.settings.Prefs;
 import fr.free.nrw.commons.upload.UploadController;
 
 import static android.content.Context.MODE_PRIVATE;
@@ -51,6 +57,30 @@ public class CommonsApplicationModule {
     @Provides
     public InputMethodManager provideInputMethodManager() {
         return (InputMethodManager) applicationContext.getSystemService(Activity.INPUT_METHOD_SERVICE);
+    }
+
+    @Provides
+    @Named("licenses")
+    public List<String> provideLicenses(Context context) {
+        List<String> licenseItems = new ArrayList<>();
+        licenseItems.add(context.getString(R.string.license_name_cc0));
+        licenseItems.add(context.getString(R.string.license_name_cc_by));
+        licenseItems.add(context.getString(R.string.license_name_cc_by_sa));
+        licenseItems.add(context.getString(R.string.license_name_cc_by_four));
+        licenseItems.add(context.getString(R.string.license_name_cc_by_sa_four));
+        return licenseItems;
+    }
+
+    @Provides
+    @Named("licenses_by_name")
+    public Map<String, String> provideLicensesByName(Context context) {
+        Map<String, String> byName = new HashMap<>();
+        byName.put(context.getString(R.string.license_name_cc0), Prefs.Licenses.CC0);
+        byName.put(context.getString(R.string.license_name_cc_by), Prefs.Licenses.CC_BY_3);
+        byName.put(context.getString(R.string.license_name_cc_by_sa), Prefs.Licenses.CC_BY_SA_3);
+        byName.put(context.getString(R.string.license_name_cc_by_four), Prefs.Licenses.CC_BY_4);
+        byName.put(context.getString(R.string.license_name_cc_by_sa_four), Prefs.Licenses.CC_BY_SA_4);
+        return byName;
     }
 
     @Provides
