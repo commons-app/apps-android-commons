@@ -45,7 +45,7 @@ class PlaceRenderer extends Renderer<Place> {
         tvName.setText(place.name);
         String descriptionText = place.getLongDescription();
         if (descriptionText.equals("?")) {
-            descriptionText = getContext().getString(R.string.no_description_found);
+            descriptionText = "";
         }
         tvDesc.setText(descriptionText);
         distance.setText(place.distance);
