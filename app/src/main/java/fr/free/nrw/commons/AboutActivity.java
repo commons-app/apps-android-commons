@@ -4,6 +4,8 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.text.SpannableString;
+import android.text.style.UnderlineSpan;
 import android.util.Log;
 import android.support.customtabs.CustomTabsIntent;
 import android.support.v4.content.ContextCompat;
@@ -25,6 +27,7 @@ import static android.widget.Toast.LENGTH_SHORT;
 public class AboutActivity extends NavigationBaseActivity {
     @BindView(R.id.about_version) TextView versionText;
     @BindView(R.id.about_license) HtmlTextView aboutLicenseText;
+    @BindView(R.id.about_faq) TextView faqText;
 
     /**
      * This method helps in the creation About screen
@@ -40,7 +43,9 @@ public class AboutActivity extends NavigationBaseActivity {
         ButterKnife.bind(this);
         String aboutText = getString(R.string.about_license);
         aboutLicenseText.setHtmlText(aboutText);
-
+        SpannableString content = new SpannableString(getString(R.string.about_faq));
+        content.setSpan(new UnderlineSpan(), 0, content.length(), 0);
+        faqText.setText(content);
         versionText.setText(BuildConfig.VERSION_NAME);
         initDrawer();
     }
@@ -111,6 +116,11 @@ public class AboutActivity extends NavigationBaseActivity {
             Toast toast = Toast.makeText(this, getString(R.string.no_web_browser), LENGTH_SHORT);
             toast.show();
         }
+    }
+
+    @OnClick(R.id.about_faq)
+    public void launchFrequentlyAskedQuesions(View view) {
+        Utils.handleWebUrl(this,Uri.parse("https://github.com/commons-app/apps-android-commons/wiki/Frequently-Asked-Questions\\"));
     }
 
 }

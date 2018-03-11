@@ -134,6 +134,16 @@
                 android:text="@string/about_credits" />
 
             <TextView
+                android:id="@+id/about_faq"
+                style="?android:textAppearanceSmall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/primaryColor"
+                android:layout_marginTop="@dimen/standard_gap"
+                android:gravity="center"
+                />
+
+            <TextView
                 android:id="@+id/about_uploads_to"
                 style="?android:textAppearanceSmall"
                 android:layout_width="wrap_content"
