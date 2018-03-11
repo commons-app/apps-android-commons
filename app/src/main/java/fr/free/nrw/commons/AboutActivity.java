@@ -92,5 +92,6 @@ public class AboutActivity extends NavigationBaseActivity {
     public void launchFrequentlyAskedQuesions(View view) {
         Utils.handleWebUrl(this,Uri.parse("https://github.com/commons-app/apps-android-commons/wiki/Frequently-Asked-Questions\\"));
     }
+    
 
 }
