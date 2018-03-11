@@ -80,7 +80,6 @@ public class SingleUploadFragment extends CommonsDaggerSupportFragment {
                 }
 
                 String title = titleEdit.getText().toString();
-                title = title.replaceAll("^[\\p{Alpha}]]", "").replaceAll(" ", "_");
                 String desc = descEdit.getText().toString().trim();
 
                 //Save the title/desc in short-lived cache so next time this fragment is loaded, we can access these
