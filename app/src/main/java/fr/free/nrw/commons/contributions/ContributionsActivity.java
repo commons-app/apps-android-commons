@@ -142,7 +142,6 @@ public  class       ContributionsActivity
         setTitle(getString(R.string.title_activity_contributions));
 
         if(!BuildConfig.FLAVOR.equalsIgnoreCase("beta")){
-            Timber.d("setUploadCount()");
             setUploadCount();
         }
 
@@ -286,7 +285,6 @@ public  class       ContributionsActivity
     }
 
     public void betaSetUploadCount(int betaUploadCount){
-        Timber.d("" + betaUploadCount);
         getSupportActionBar().setSubtitle(getResources()
                 .getQuantityString(R.plurals.contributions_subtitle, betaUploadCount, betaUploadCount));
     }

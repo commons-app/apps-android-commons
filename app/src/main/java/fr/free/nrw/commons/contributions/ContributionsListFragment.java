@@ -89,10 +89,8 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment {
 
     public void setAdapter(ListAdapter adapter) {
         this.contributionsList.setAdapter(adapter);
-        Timber.d("" + adapter.getCount());
 
         if(BuildConfig.FLAVOR.equalsIgnoreCase("beta")){
-            Timber.d("betaBuild : adapter count -> " + adapter.getCount());
             ((ContributionsActivity) getActivity()).betaSetUploadCount(adapter.getCount());
         }
     }
