@@ -8,6 +8,7 @@ import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.ColorRes;
 import android.support.annotation.NonNull;
@@ -27,6 +28,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.io.IOException;
 
@@ -44,6 +46,7 @@ import fr.free.nrw.commons.contributions.ContributionsActivity;
 import fr.free.nrw.commons.di.ApplicationlessInjection;
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
 import fr.free.nrw.commons.theme.NavigationBaseActivity;
+import fr.free.nrw.commons.ui.widget.HtmlTextView;
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
@@ -73,7 +76,9 @@ public class LoginActivity extends AccountAuthenticatorActivity {
     @BindView(R.id.error_message_container) ViewGroup errorMessageContainer;
     @BindView(R.id.error_message) TextView errorMessage;
     @BindView(R.id.login_credentials) TextView loginCredentials;
-    @BindView(R.id.two_factor_container)TextInputLayout twoFactorContainer;
+    @BindView(R.id.two_factor_container) TextInputLayout twoFactorContainer;
+    @BindView(R.id.forgotPassword) HtmlTextView forgotPasswordText;
+
     ProgressDialog progressDialog;
     private AppCompatDelegate delegate;
     private LoginTextWatcher textWatcher = new LoginTextWatcher();
@@ -114,11 +119,17 @@ public class LoginActivity extends AccountAuthenticatorActivity {
         loginButton.setOnClickListener(view -> performLogin());
         signupButton.setOnClickListener(view -> signUp());
 
+        forgotPasswordText.setOnClickListener(view -> forgotPassword());
+
         if(BuildConfig.FLAVOR == "beta"){
             loginCredentials.setText(getString(R.string.login_credential));
         } else {
             loginCredentials.setVisibility(View.GONE);
         }
+    }
+
+    private void forgotPassword() {
+        Utils.handleWebUrl(this, Uri.parse(BuildConfig.FORGOT_PASSWORD_URL));
     }
 
 

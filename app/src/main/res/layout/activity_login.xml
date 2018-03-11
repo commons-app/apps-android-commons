@@ -7,7 +7,7 @@
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
+        android:layout_gravity="center_vertical"
         android:layout_marginTop="@dimen/small_gap">
 
         <android.support.v7.widget.CardView
@@ -193,17 +193,29 @@
                 </LinearLayout>
 
                 <fr.free.nrw.commons.ui.widget.HtmlTextView
+                    android:visibility="visible"
+                    android:id="@+id/forgotPassword"
+                    android:layout_width="match_parent"
+                    android:gravity="center_horizontal"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/buttonFrame"
+                    android:layout_marginBottom="@dimen/standard_gap"
+                    android:text="@string/forgot_password"
+                    android:textColor="@color/status_bar_blue" />
+
+                <fr.free.nrw.commons.ui.widget.HtmlTextView
                     android:id="@+id/about_privacy_policy"
                     style="?android:textAppearanceSmall"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@id/buttonFrame"
+                    android:layout_below="@id/forgotPassword"
                     android:layout_centerHorizontal="true"
                     android:layout_gravity="center_horizontal"
                     android:layout_marginBottom="@dimen/standard_gap"
                     android:text="@string/about_privacy_policy" />
 
             </RelativeLayout>
+
         </android.support.v7.widget.CardView>
 
         <android.support.v7.widget.AppCompatImageView
@@ -222,7 +234,6 @@
             android:elevation="8dp"
             app:srcCompat="@drawable/commons_logo_large"
             tools:ignore="UnusedAttribute" />
-
     </FrameLayout>
 
 </ScrollView>
