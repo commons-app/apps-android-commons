@@ -45,7 +45,7 @@ dependencies {
     compile 'com.jakewharton.rxbinding2:rxbinding-appcompat-v7:2.0.0'
     compile 'com.jakewharton.rxbinding2:rxbinding-design:2.0.0'
 
-    compile 'com.facebook.fresco:fresco:1.3.0'
+    compile 'com.facebook.fresco:fresco:1.5.0'
     compile 'com.facebook.stetho:stetho:1.5.0'
 
     compile 'com.android.support:multidex:1.0.3'
@@ -59,9 +59,9 @@ dependencies {
     androidTestCompile "com.android.support:support-annotations:${project.SUPPORT_LIB_VERSION}"
     androidTestCompile 'com.android.support.test.espresso:espresso-core:3.0.1'
 
-    debugCompile 'com.squareup.leakcanary:leakcanary-android:1.5.1'
-    releaseCompile 'com.squareup.leakcanary:leakcanary-android-no-op:1.5.1'
-    testCompile 'com.squareup.leakcanary:leakcanary-android-no-op:1.5.1'
+    debugCompile 'com.squareup.leakcanary:leakcanary-android:1.5.4'
+    releaseCompile 'com.squareup.leakcanary:leakcanary-android-no-op:1.5.4'
+    testCompile 'com.squareup.leakcanary:leakcanary-android-no-op:1.5.4'
     implementation 'io.reactivex.rxjava2:rxjava:2.1.2'
     implementation 'com.jakewharton.rxbinding2:rxbinding:2.0.0'
     implementation 'com.jakewharton.rxbinding2:rxbinding-support-v4:2.0.0'
