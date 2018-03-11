@@ -203,10 +203,7 @@ public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment imple
                         JSONObject JObjectPages = JObjectQuery.getJSONObject("pages");
                         String firstkey = "";
                         Iterator<?> keys = JObjectPages.keys();
-                        while(keys.hasNext()){
-                            firstkey = (String)keys.next();
-                            break;
-                        }
+                        firstkey = (String)keys.next();
                         JSONObject JObjectFinal = JObjectPages.getJSONObject(firstkey);
                         JSONArray imageinfo = JObjectFinal.getJSONArray("imageinfo");
                         JSONObject imageinfo0 = imageinfo.getJSONObject(0);
