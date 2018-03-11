@@ -5,6 +5,7 @@ import android.preference.PreferenceManager;
 import android.support.test.espresso.Espresso;
 import android.support.test.espresso.action.ViewActions;
 import android.support.test.espresso.assertion.ViewAssertions;
+import android.support.test.espresso.matcher.PreferenceMatchers;
 import android.support.test.espresso.matcher.ViewMatchers;
 import android.support.test.filters.LargeTest;
 import android.support.test.rule.ActivityTestRule;
@@ -61,7 +62,7 @@ public class SettingsActivityTest {
     @Test
     public void oneLicenseIsChecked() {
         // click "License" (the first item)
-        Espresso.onData(Matchers.anything())
+        Espresso.onData(PreferenceMatchers.withKey("defaultLicense"))
                 .inAdapterView(ViewMatchers.withId(android.R.id.list))
                 .atPosition(0)
                 .perform(ViewActions.click());
@@ -74,7 +75,7 @@ public class SettingsActivityTest {
     @Test
     public void afterClickingCcby4ItWillStay() {
         // click "License" (the first item)
-        Espresso.onData(Matchers.anything())
+        Espresso.onData(PreferenceMatchers.withKey("defaultLicense"))
                 .inAdapterView(ViewMatchers.withId(android.R.id.list))
                 .atPosition(0)
                 .perform(ViewActions.click());
@@ -85,7 +86,7 @@ public class SettingsActivityTest {
         ).perform(ViewActions.click());
 
         // click "License" (the first item)
-        Espresso.onData(Matchers.anything())
+        Espresso.onData(PreferenceMatchers.withKey("defaultLicense"))
                 .inAdapterView(ViewMatchers.withId(android.R.id.list))
                 .atPosition(0)
                 .perform(ViewActions.click());

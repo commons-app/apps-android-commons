@@ -91,7 +91,11 @@ public class AboutActivity extends NavigationBaseActivity {
         }
     }
 
-  
+    @OnClick(R.id.about_rate_us)
+    public void launchRatings(View view){
+        Utils.rateApp(this);
+    }
+
     @OnClick(R.id.about_credits)
     public void launchCredits(View view) {
         Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://github.com/commons-app/apps-android-commons/blob/master/CREDITS/\\"));

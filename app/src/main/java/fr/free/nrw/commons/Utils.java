@@ -166,14 +166,13 @@ public class Utils {
     }
 
     public static void rateApp(Context context) {
-        final String appPackageName = context.getPackageName();
+        final String appPackageName = BuildConfig.class.getPackage().getName();
         try {
             context.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=" + appPackageName)));
         }
         catch (android.content.ActivityNotFoundException anfe) {
             context.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=" + appPackageName)));
         }
-        return ;
     }
 
     public static void handleWebUrl(Context context,Uri url){
