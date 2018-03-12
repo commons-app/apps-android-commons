@@ -71,12 +71,9 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
         bundle = new Bundle();
         initDrawer();
         initViewState();
-        swipeLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                lockNearbyView(false);
-                refreshView(true);
-            }
+        swipeLayout.setOnRefreshListener(() -> {
+            lockNearbyView(false);
+            refreshView(true);
         });
     }
 
@@ -268,6 +265,7 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
      */
     private void refreshView(boolean isHardRefresh) {
         if (lockNearbyView) {
+            abortRefresh();
             return;
         }
         locationManager.registerLocationManager();
@@ -276,12 +274,14 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
             if (isHardRefresh) {
                 ViewUtil.showLongToast(this, R.string.nearby_location_has_not_changed);
             }
+            abortRefresh();
             return;
         }
         curLatLang = lastLocation;
 
         if (curLatLang == null) {
             Timber.d("Skipping update of nearby places as location is unavailable");
+            abortRefresh();
             return;
         }
 
@@ -291,6 +291,13 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(this::populatePlaces);
+    }
+
+    /**
+     *  for now hides the , can be extended
+     */
+    private void abortRefresh() {
+        swipeLayout.setRefreshing(false);
     }
 
     private void populatePlaces(List<Place> placeList) {
