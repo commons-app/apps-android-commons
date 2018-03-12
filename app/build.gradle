@@ -48,8 +48,11 @@ dependencies {
     compile 'com.facebook.fresco:fresco:1.3.0'
     compile 'com.facebook.stetho:stetho:1.5.0'
 
+    compile 'com.android.support:multidex:1.0.3'
+
     testCompile 'junit:junit:4.12'
     testCompile 'org.robolectric:robolectric:3.7.1'
+    testCompile "org.robolectric:multidex:3.4.2"
 
     testCompile 'com.squareup.okhttp3:mockwebserver:3.8.1'
     androidTestCompile 'com.squareup.okhttp3:mockwebserver:3.8.1'
@@ -94,6 +97,8 @@ dependencies {
     implementation "com.google.dagger:dagger-android-support:$DAGGER_VERSION"
     kapt "com.google.dagger:dagger-compiler:$DAGGER_VERSION"
     kapt "com.google.dagger:dagger-android-processor:$DAGGER_VERSION"
+
+    compile 'com.borjabravo:readmoretextview:2.1.0'
 }
 
 android {

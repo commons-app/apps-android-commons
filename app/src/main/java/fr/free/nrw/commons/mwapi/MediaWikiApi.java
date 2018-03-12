@@ -38,6 +38,12 @@ public interface MediaWikiApi {
     @Nullable
     String edit(String editToken, String processedPageContent, String filename, String summary) throws IOException;
 
+    @Nullable
+    String prependEdit(String editToken, String processedPageContent, String filename, String summary) throws IOException;
+
+    @Nullable
+    String appendEdit(String editToken, String processedPageContent, String filename, String summary) throws IOException;
+
     @NonNull
     MediaResult fetchMediaByFilename(String filename) throws IOException;
 
@@ -57,8 +63,6 @@ public interface MediaWikiApi {
     String revisionsByFilename(String filename) throws IOException;
 
     boolean existingFile(String fileSha1) throws IOException;
-
-
 
     @NonNull
     LogEventResult logEvents(String user, String lastModified, String queryContinue, int limit) throws IOException;

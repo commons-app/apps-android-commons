@@ -251,19 +251,15 @@
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/small_gap" />
 
-                <LinearLayout
+                <Button
+                    android:id="@+id/nominateDeletion"
+                    style="?android:attr/buttonBarButtonStyle"
+                    android:textColor="@color/deleteTextColor"
+                    android:layout_margin="@dimen/standard_gap"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:padding="@dimen/standard_gap">
-                    <Button
-                        android:id="@+id/nominateDeletion"
-                        style="?android:attr/buttonBarButtonStyle"
-                        android:textColor="@color/deleteTextColor"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="@string/nominate_deletion"/>
-                </LinearLayout>
+                    android:text="@string/nominate_deletion"
+                    android:visibility="gone"/>
             </LinearLayout>
         </LinearLayout>
     </ScrollView>

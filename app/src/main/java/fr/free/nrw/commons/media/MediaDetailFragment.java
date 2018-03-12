@@ -1,18 +1,22 @@
 package fr.free.nrw.commons.media;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.DataSetObserver;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.app.FragmentTransaction;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
@@ -34,12 +38,13 @@ import fr.free.nrw.commons.MediaDataExtractor;
 import fr.free.nrw.commons.MediaWikiImageView;
 import fr.free.nrw.commons.PageTitle;
 import fr.free.nrw.commons.R;
-import fr.free.nrw.commons.contributions.Contribution;
-import fr.free.nrw.commons.delete.DeleteActivity;
+import fr.free.nrw.commons.delete.DeleteTask;
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
 import fr.free.nrw.commons.location.LatLng;
 import fr.free.nrw.commons.ui.widget.CompatTextView;
 import timber.log.Timber;
+
+import static android.widget.Toast.LENGTH_SHORT;
 
 public class MediaDetailFragment extends CommonsDaggerSupportFragment {
 
@@ -187,12 +192,6 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
             Timber.d("MediaDetailFragment ready to display details");
             displayMediaDetails(media);
         }
-        if (media instanceof Contribution) {
-            Contribution c = (Contribution) media;
-            if (c.getState()!= Contribution.STATE_COMPLETED) {
-                delete.setVisibility(View.GONE);
-            }
-        }
     }
 
     private void displayMediaDetails(final Media media) {
@@ -283,6 +282,8 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
             categoryNames.add(getString(R.string.detail_panel_cats_none));
         }
         rebuildCatList();
+
+        delete.setVisibility(View.VISIBLE);
     }
 
     private void setOnClickListeners(final Media media) {
@@ -295,13 +296,60 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
         if (media.getCoordinates() != null) {
             coordinates.setOnClickListener(v -> openMap(media.getCoordinates()));
         }
-        if (delete.getVisibility()!=View.GONE){
+        if (delete.getVisibility()==View.VISIBLE){
             delete.setOnClickListener(v -> {
-                Timber.d("clicked delete");
-                Bundle bundle = new Bundle();
-                bundle.putParcelable("media",media);
-                Intent deleteIntent = new Intent(getActivity(), DeleteActivity.class);
-                startActivity(deleteIntent);
+                AlertDialog alert;
+                AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+                builder.setMessage("Sure you want to delete?");
+                builder.setCancelable(true);
+                builder.setPositiveButton(
+                        R.string.yes,
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                AlertDialog.Builder alert = new AlertDialog.Builder(getActivity());
+                                alert.setTitle("Why should this file be deleted?");
+                                final EditText input = new EditText(getActivity());
+                                alert.setView(input);
+                                alert.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int whichButton) {
+                                        String reason = input.getText().toString();
+                                        DeleteTask deleteTask = new DeleteTask(getActivity(), media, reason);
+                                        deleteTask.execute();
+                                    }
+                                });
+                                alert.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int whichButton) {}
+                                });
+                                AlertDialog d = alert.create();
+                                input.addTextChangedListener(new TextWatcher() {
+                                    private void handleText() {
+                                        final Button okButton = d.getButton(AlertDialog.BUTTON_POSITIVE);
+                                        if(input.getText().length() == 0) {
+                                            okButton.setEnabled(false);
+                                        } else {
+                                            okButton.setEnabled(true);
+                                        }
+                                    }
+                                    @Override
+                                    public void afterTextChanged(Editable arg0) {
+                                        handleText();
+                                    }
+                                    @Override
+                                    public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+                                    @Override
+                                    public void onTextChanged(CharSequence s, int start, int before, int count) {}
+                                });
+                                d.show();
+                                d.getButton(AlertDialog.BUTTON_POSITIVE).setEnabled(false);
+                            }
+                        });
+                builder.setNegativeButton(
+                        R.string.no,
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {}
+                        });
+                alert = builder.create();
+                alert.show();
             });
         }
     }
@@ -326,7 +374,13 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
                 Intent viewIntent = new Intent();
                 viewIntent.setAction(Intent.ACTION_VIEW);
                 viewIntent.setData(new PageTitle(selectedCategoryTitle).getCanonicalUri());
-                startActivity(viewIntent);
+                //check if web browser available
+                if(viewIntent.resolveActivity(getActivity().getPackageManager()) != null){
+                    startActivity(viewIntent);
+                } else {
+                    Toast toast = Toast.makeText(getContext(), getString(R.string.no_web_browser), LENGTH_SHORT);
+                    toast.show();
+                }
             });
         }
         return item;
@@ -406,7 +460,14 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
 
     private void openWebBrowser(String url) {
         Intent browser = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
-        startActivity(browser);
+        //check if web browser available
+        if (browser.resolveActivity(getActivity().getPackageManager()) != null) {
+            startActivity(browser);
+        } else {
+            Toast toast = Toast.makeText(getContext(), getString(R.string.no_web_browser), LENGTH_SHORT);
+            toast.show();
+        }
+
     }
 
     private void openMap(LatLng coordinates) {

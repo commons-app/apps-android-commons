@@ -205,6 +205,7 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
                 .getNodes("/api/query/pages/page/imageinfo").size() > 0;
     }
 
+
     @Override
     @Nullable
     public String edit(String editToken, String processedPageContent, String filename, String summary) throws IOException {
@@ -212,6 +213,31 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
                 .param("title", filename)
                 .param("token", editToken)
                 .param("text", processedPageContent)
+                .param("summary", summary)
+                .post()
+                .getString("/api/edit/@result");
+    }
+
+
+    @Override
+    @Nullable
+    public String appendEdit(String editToken, String processedPageContent, String filename, String summary) throws IOException {
+        return api.action("edit")
+                .param("title", filename)
+                .param("token", editToken)
+                .param("appendtext", processedPageContent)
+                .param("summary", summary)
+                .post()
+                .getString("/api/edit/@result");
+    }
+
+    @Override
+    @Nullable
+    public String prependEdit(String editToken, String processedPageContent, String filename, String summary) throws IOException {
+        return api.action("edit")
+                .param("title", filename)
+                .param("token", editToken)
+                .param("prependtext", processedPageContent)
                 .param("summary", summary)
                 .post()
                 .getString("/api/edit/@result");
