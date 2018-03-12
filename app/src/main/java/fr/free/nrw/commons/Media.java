@@ -43,7 +43,6 @@ public class Media implements Parcelable {
     protected String license;
     protected String creator;
     protected ArrayList<String> categories; // as loaded at runtime?
-    protected boolean requestedDeletion;
     private Map<String, String> descriptions; // multilingual descriptions as loaded
     private HashMap<String, Object> tags = new HashMap<>();
     private @Nullable LatLng coordinates;
@@ -54,7 +53,6 @@ public class Media implements Parcelable {
     protected Media() {
         this.categories = new ArrayList<>();
         this.descriptions = new HashMap<>();
-        this.requestedDeletion = false;
     }
 
     /**
@@ -417,13 +415,5 @@ public class Media implements Parcelable {
         parcel.writeString(license);
         parcel.writeStringList(categories);
         parcel.writeMap(descriptions);
-    }
-
-    public void setRequestedDeletion(){
-        requestedDeletion = true;
-    }
-
-    public boolean getRequestedDeletion(){
-        return requestedDeletion;
     }
 }
