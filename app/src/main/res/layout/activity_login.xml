@@ -2,12 +2,17 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:fillViewport="true"
     android:layout_height="match_parent">
-
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
+        android:layout_centerInParent="true"
+        android:layout_gravity="center_vertical"
         android:layout_marginTop="@dimen/small_gap">
 
         <android.support.v7.widget.CardView
@@ -193,17 +198,17 @@
                 </LinearLayout>
 
                 <fr.free.nrw.commons.ui.widget.HtmlTextView
-                    android:id="@+id/about_privacy_policy"
-                    style="?android:textAppearanceSmall"
-                    android:layout_width="wrap_content"
+                    android:visibility="visible"
+                    android:id="@+id/forgotPassword"
+                    android:layout_width="match_parent"
+                    android:gravity="center_horizontal"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/buttonFrame"
-                    android:layout_centerHorizontal="true"
-                    android:layout_gravity="center_horizontal"
                     android:layout_marginBottom="@dimen/standard_gap"
-                    android:text="@string/about_privacy_policy" />
+                    android:text="@string/forgot_password" />
 
             </RelativeLayout>
+
         </android.support.v7.widget.CardView>
 
         <android.support.v7.widget.AppCompatImageView
@@ -222,7 +227,19 @@
             android:elevation="8dp"
             app:srcCompat="@drawable/commons_logo_large"
             tools:ignore="UnusedAttribute" />
-
     </FrameLayout>
+
+    <fr.free.nrw.commons.ui.widget.HtmlTextView
+        android:id="@+id/about_privacy_policy"
+        style="?android:textAppearanceSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="@dimen/normal_text"
+        android:textColor="@color/status_bar_blue"
+        android:text="@string/about_privacy_policy" />
+
+    </RelativeLayout>
 
 </ScrollView>
