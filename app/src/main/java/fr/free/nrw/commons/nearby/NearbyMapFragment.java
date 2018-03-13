@@ -251,7 +251,7 @@ public class NearbyMapFragment extends DaggerFragment {
                                 new LatLng(curMapBoxLatLng.getLatitude()- CAMERA_TARGET_SHIFT_FACTOR,
                                         curMapBoxLatLng.getLongitude())
                                 : curMapBoxLatLng ) // Sets the new camera position
-                        .zoom(11) // Same zoom level
+                        .zoom(mapboxMap.getCameraPosition().zoom) // Same zoom level
                         .build();
 
                 mapboxMap.animateCamera(CameraUpdateFactory
@@ -270,7 +270,7 @@ public class NearbyMapFragment extends DaggerFragment {
                         .target(new LatLng(curLatLng.getLatitude() - CAMERA_TARGET_SHIFT_FACTOR,
                                 curLatLng.getLongitude())) // Sets the new camera target above
                         // current to make it visible when sheet is expanded
-                        .zoom(11) // Same zoom level
+                        .zoom(mapboxMap.getCameraPosition().zoom) // Same zoom level
                         .build();
 
             } else {
@@ -278,7 +278,7 @@ public class NearbyMapFragment extends DaggerFragment {
                 position = new CameraPosition.Builder()
                         .target(new LatLng(curLatLng.getLatitude(),
                                 curLatLng.getLongitude())) // Sets the new camera target to curLatLng
-                        .zoom(11) // Same zoom level
+                        .zoom(mapboxMap.getCameraPosition().zoom) // Same zoom level
                         .build();
             }
             mapboxMap.animateCamera(CameraUpdateFactory
