@@ -2,15 +2,22 @@ package fr.free.nrw.commons.notification;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.support.annotation.NonNull;
 
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.annotation.Nullable;
 
 import fr.free.nrw.commons.BuildConfig;
 import fr.free.nrw.commons.R;
+
+import static fr.free.nrw.commons.notification.NotificationType.THANK_YOU_EDIT;
+import static fr.free.nrw.commons.notification.NotificationType.UNKNOWN;
 
 public class NotificationUtils {
 
@@ -30,6 +37,56 @@ public class NotificationUtils {
         return NotificationType.handledValueOf(type);
     }
 
+    public static List<Notification> getNotificationsFromBundle(Context context, Node document) {
+        Element bundledNotifications = getBundledNotifications(document);
+        NodeList childNodes = bundledNotifications.getChildNodes();
+
+        List<Notification> notifications = new ArrayList<>();
+        for (int i = 0; i < childNodes.getLength(); i++) {
+            Node node = childNodes.item(i);
+            if (isUsefulNotification(node)) {
+                notifications.add(getNotificationFromApiResult(context, node));
+            }
+        }
+        return notifications;
+    }
+
+    @NonNull
+    public static List<Notification> getNotificationsFromList(Context context, NodeList childNodes) {
+        List<Notification> notifications = new ArrayList<>();
+        for (int i = 0; i < childNodes.getLength(); i++) {
+            Node node = childNodes.item(i);
+            if (isUsefulNotification(node)) {
+                if (isBundledNotification(node)) {
+                    notifications.addAll(getNotificationsFromBundle(context, node));
+                } else {
+                    notifications.add(getNotificationFromApiResult(context, node));
+                }
+            }
+        }
+
+        return notifications;
+    }
+
+    private static boolean isUsefulNotification(Node node) {
+        return isCommonsNotification(node)
+                && !getNotificationType(node).equals(UNKNOWN)
+                && !getNotificationType(node).equals(THANK_YOU_EDIT);
+    }
+
+    public static boolean isBundledNotification(Node document) {
+        Element bundleElement = getBundledNotifications(document);
+        if (bundleElement == null) {
+            return false;
+        }
+
+        return bundleElement.getChildNodes().getLength() > 0;
+    }
+
+    private static Element getBundledNotifications(Node document) {
+        return (Element) getNode(document, "bundledNotifications");
+    }
+
     public static Notification getNotificationFromApiResult(Context context, Node document) {
         NotificationType type = getNotificationType(document);
 
@@ -43,7 +100,7 @@ public class NotificationUtils {
                 notificationText = context.getString(R.string.notifications_thank_you_edit);
                 break;
             case EDIT_USER_TALK:
-                notificationText = getNotificationHeader(document);
+                notificationText = getNotificationText(document);
                 break;
             case MENTION:
                 notificationText = getMentionMessage(context, document);
@@ -56,8 +113,26 @@ public class NotificationUtils {
         return new Notification(type, notificationText, getTimestamp(document), description, link, iconUrl);
     }
 
+    private static String getNotificationText(Node document) {
+        String notificationBody = getNotificationBody(document);
+        if (notificationBody == null || notificationBody.trim().equals("")) {
+            return getNotificationHeader(document);
+        }
+        return notificationBody;
+    }
+
     private static String getNotificationHeader(Node document) {
         Node body = getNode(getModel(document), "header");
+        if (body != null) {
+            String textContent = body.getTextContent();
+            return textContent.replace("<strong>", "").replace("</strong>", "");
+        } else {
+            return "";
+        }
+    }
+
+    private static String getNotificationBody(Node document) {
+        Node body = getNode(getModel(document), "body");
         if (body != null) {
             String textContent = body.getTextContent();
             return textContent.replace("<strong>", "").replace("</strong>", "");

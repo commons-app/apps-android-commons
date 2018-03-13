@@ -9,9 +9,12 @@ import android.os.Bundle;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
+import android.widget.ProgressBar;
 
 import com.pedrogomez.renderers.RVRendererAdapter;
 
+import java.util.Collections;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -34,6 +37,8 @@ public class NotificationActivity extends NavigationBaseActivity {
     NotificationAdapterFactory notificationAdapterFactory;
 
     @BindView(R.id.listView) RecyclerView recyclerView;
+    @BindView(R.id.progressBar)
+    ProgressBar progressBar;
 
     @Inject NotificationController controller;
 
@@ -63,14 +68,21 @@ public class NotificationActivity extends NavigationBaseActivity {
         Timber.d("Add notifications");
 
         if(mNotificationWorkerFragment == null){
-            Observable.fromCallable(() -> controller.getNotifications())
+            Observable.fromCallable(() -> {
+                progressBar.setVisibility(View.VISIBLE);
+                return controller.getNotifications();
+            })
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe(notificationList -> {
+                        Collections.reverse(notificationList);
                         Timber.d("Number of notifications is %d", notificationList.size());
-                        initializeAndSetNotificationList(notificationList);
                         setAdapter(notificationList);
-                    }, throwable -> Timber.e(throwable, "Error occurred while loading notifications"));
+                        progressBar.setVisibility(View.GONE);
+                    }, throwable -> {
+                        Timber.e(throwable, "Error occurred while loading notifications");
+                        progressBar.setVisibility(View.GONE);
+                    });
         } else {
             setAdapter(mNotificationWorkerFragment.getNotificationList());
         }

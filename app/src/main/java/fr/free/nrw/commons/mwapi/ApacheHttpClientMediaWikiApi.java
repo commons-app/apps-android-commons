@@ -41,6 +41,7 @@ import java.util.concurrent.Callable;
 import fr.free.nrw.commons.BuildConfig;
 import fr.free.nrw.commons.PageTitle;
 import fr.free.nrw.commons.notification.Notification;
+import fr.free.nrw.commons.notification.NotificationUtils;
 import in.yuvi.http.fluent.Http;
 import io.reactivex.Observable;
 import io.reactivex.Single;
@@ -50,6 +51,8 @@ import static fr.free.nrw.commons.notification.NotificationType.THANK_YOU_EDIT;
 import static fr.free.nrw.commons.notification.NotificationType.UNKNOWN;
 import static fr.free.nrw.commons.notification.NotificationUtils.getNotificationFromApiResult;
 import static fr.free.nrw.commons.notification.NotificationUtils.getNotificationType;
+import static fr.free.nrw.commons.notification.NotificationUtils.getNotificationsFromBundle;
+import static fr.free.nrw.commons.notification.NotificationUtils.isBundledNotification;
 import static fr.free.nrw.commons.notification.NotificationUtils.isCommonsNotification;
 
 /**
@@ -447,22 +450,9 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
             return new ArrayList<>();
         }
 
-        List<Notification> notifications = new ArrayList<>();
-
         NodeList childNodes = notificationNode.getDocument().getChildNodes();
-
-        for (int i = 0; i < childNodes.getLength(); i++) {
-            Node node = childNodes.item(i);
-            if (isCommonsNotification(node)
-                    && !getNotificationType(node).equals(UNKNOWN)
-                    && !getNotificationType(node).equals(THANK_YOU_EDIT)) {
-                notifications.add(getNotificationFromApiResult(context, node));
-            }
-        }
-
-        return notifications;
+        return NotificationUtils.getNotificationsFromList(context, childNodes);
     }
-
 
     @Override
     public boolean existingFile(String fileSha1) throws IOException {
