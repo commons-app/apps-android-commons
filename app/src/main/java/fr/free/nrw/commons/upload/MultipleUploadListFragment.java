@@ -11,7 +11,6 @@ import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.util.DisplayMetrics;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -32,7 +31,6 @@ import com.facebook.drawee.view.SimpleDraweeView;
 
 import dagger.android.support.AndroidSupportInjection;
 import fr.free.nrw.commons.R;
-import fr.free.nrw.commons.ZoomHandler;
 import fr.free.nrw.commons.contributions.Contribution;
 import fr.free.nrw.commons.media.MediaDetailPagerFragment;
 
