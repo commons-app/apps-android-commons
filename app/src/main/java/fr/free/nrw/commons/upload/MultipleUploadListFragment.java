@@ -32,6 +32,7 @@ import com.facebook.drawee.view.SimpleDraweeView;
 
 import dagger.android.support.AndroidSupportInjection;
 import fr.free.nrw.commons.R;
+import fr.free.nrw.commons.ZoomHandler;
 import fr.free.nrw.commons.contributions.Contribution;
 import fr.free.nrw.commons.media.MediaDetailPagerFragment;
 
