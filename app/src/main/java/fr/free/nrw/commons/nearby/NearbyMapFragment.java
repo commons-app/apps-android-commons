@@ -251,7 +251,7 @@ public class NearbyMapFragment extends DaggerFragment {
                                 new LatLng(curMapBoxLatLng.getLatitude()- CAMERA_TARGET_SHIFT_FACTOR,
                                         curMapBoxLatLng.getLongitude())
                                 : curMapBoxLatLng ) // Sets the new camera position
-                        .zoom(mapboxMap.getMaxZoomLevel()) // Same zoom level
+                        .zoom(11) // Same zoom level
                         .build();
 
                 mapboxMap.animateCamera(CameraUpdateFactory
@@ -270,7 +270,7 @@ public class NearbyMapFragment extends DaggerFragment {
                         .target(new LatLng(curLatLng.getLatitude() - CAMERA_TARGET_SHIFT_FACTOR,
                                 curLatLng.getLongitude())) // Sets the new camera target above
                         // current to make it visible when sheet is expanded
-                        .zoom(mapboxMap.getMaxZoomLevel()) // Same zoom level
+                        .zoom(11) // Same zoom level
                         .build();
 
             } else {
@@ -278,7 +278,7 @@ public class NearbyMapFragment extends DaggerFragment {
                 position = new CameraPosition.Builder()
                         .target(new LatLng(curLatLng.getLatitude(),
                                 curLatLng.getLongitude())) // Sets the new camera target to curLatLng
-                        .zoom(mapboxMap.getMaxZoomLevel()) // Same zoom level
+                        .zoom(11) // Same zoom level
                         .build();
             }
             mapboxMap.animateCamera(CameraUpdateFactory
@@ -391,7 +391,7 @@ public class NearbyMapFragment extends DaggerFragment {
                 .attributionEnabled(false)
                 .camera(new CameraPosition.Builder()
                         .target(new LatLng(curLatLng.getLatitude(), curLatLng.getLongitude()))
-                        .zoom(11) //Initial zoom level choosen
+                        .zoom(11)
                         .build());
 
         // create map
