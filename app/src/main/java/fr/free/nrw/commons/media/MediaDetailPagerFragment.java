@@ -2,6 +2,7 @@ package fr.free.nrw.commons.media;
 
 import android.annotation.SuppressLint;
 import android.app.DownloadManager;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.DataSetObserver;
@@ -26,6 +27,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
+import java.net.URL;
+import java.util.Iterator;
+
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -36,8 +45,18 @@ import fr.free.nrw.commons.contributions.Contribution;
 import fr.free.nrw.commons.contributions.ContributionsActivity;
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.HttpUrl;
+import okhttp3.MediaType;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.RequestBody;
+import okhttp3.Response;
+import timber.log.Timber;
 
 import static android.Manifest.permission.READ_EXTERNAL_STORAGE;
+import static android.Manifest.permission.REQUEST_COMPANION_RUN_IN_BACKGROUND;
 import static android.content.Context.DOWNLOAD_SERVICE;
 import static android.content.Intent.ACTION_VIEW;
 import static android.content.pm.PackageManager.PERMISSION_GRANTED;
@@ -55,10 +74,13 @@ public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment imple
 
     private ViewPager pager;
     private Boolean editable;
-
+    private String responseStr = "";
+    public static final MediaType JSON = MediaType.parse("application/json; charset=utf-8");
+    public String downURL;
     public MediaDetailPagerFragment() {
         this(false);
     }
+    OkHttpClient client = new OkHttpClient();
 
     @SuppressLint("ValidFragment")
     public MediaDetailPagerFragment(Boolean editable) {
@@ -155,19 +177,53 @@ public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment imple
      * @param m Media file to download
      */
     private void downloadMedia(Media m) {
-        String imageUrl = m.getImageUrl(),
-                fileName = m.getFilename();
 
-        if (imageUrl == null || fileName == null) {
-            return;
-        }
+        String filename = m.getFilename().toString();
+        HttpUrl.Builder urlBuilder = HttpUrl.parse("https://commons.wikimedia.beta.wmflabs.org/w/api.php?action=query").newBuilder();
+        urlBuilder.addQueryParameter("format", "json");
+        urlBuilder.addQueryParameter("prop", "imageinfo");
+        urlBuilder.addQueryParameter("iiprop", "url");
+        urlBuilder.addQueryParameter("titles", filename);
+        String url = urlBuilder.build().toString();
 
-        // Strip 'File:' from beginning of filename, we really shouldn't store it
-        fileName = fileName.replaceFirst("^File:", "");
+        post(url, "", new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                e.printStackTrace();
+            }
 
-        Uri imageUri = Uri.parse(imageUrl);
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                if (response.isSuccessful()) {
+                    responseStr = response.body().string();
+                    try {
+                        //Extracting the download URL of the image from the json obtained
+                        JSONObject JObject = new JSONObject(responseStr);
+                        JSONObject JObjectQuery = JObject.getJSONObject("query");
+                        JSONObject JObjectPages = JObjectQuery.getJSONObject("pages");
+                        String firstkey = "";
+                        Iterator<?> keys = JObjectPages.keys();
+                        firstkey = (String)keys.next();
+                        JSONObject JObjectFinal = JObjectPages.getJSONObject(firstkey);
+                        JSONArray imageinfo = JObjectFinal.getJSONArray("imageinfo");
+                        JSONObject imageinfo0 = imageinfo.getJSONObject(0);
+                        downURL = imageinfo0.getString("url");
+                        //call to the downloadImage function
+                        downloadImage(m, filename, Uri.parse(downURL));
 
-        DownloadManager.Request req = new DownloadManager.Request(imageUri);
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+
+                }
+            }
+        });
+
+    }
+
+    public void downloadImage(Media m, String fileName, Uri uri){
+
+        DownloadManager.Request req = new DownloadManager.Request(uri);
         //These are not the image title and description fields, they are download descs for notifications
         req.setDescription(getString(R.string.app_name));
         req.setTitle(m.getDisplayTitle());
@@ -192,6 +248,18 @@ public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment imple
             }
         }
     }
+
+    private Call post(String url, String json, Callback callback) {
+        RequestBody body = RequestBody.create(JSON, json);
+        Request request = new Request.Builder()
+                .url(url)
+                .post(body)
+                .build();
+        Call call = client.newCall(request);
+        call.enqueue(callback);
+        return call;
+    }
+
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {

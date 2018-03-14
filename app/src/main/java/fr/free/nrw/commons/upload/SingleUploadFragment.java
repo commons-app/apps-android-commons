@@ -80,7 +80,7 @@ public class SingleUploadFragment extends CommonsDaggerSupportFragment {
                 }
 
                 String title = titleEdit.getText().toString();
-                String desc = descEdit.getText().toString();
+                String desc = descEdit.getText().toString().trim();
 
                 //Save the title/desc in short-lived cache so next time this fragment is loaded, we can access these
                 prefs.edit()
