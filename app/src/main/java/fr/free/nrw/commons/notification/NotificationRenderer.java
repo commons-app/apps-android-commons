@@ -20,7 +20,6 @@ import fr.free.nrw.commons.R;
 
 public class NotificationRenderer extends Renderer<Notification> {
     @BindView(R.id.title) ReadMoreTextView title;
-    @BindView(R.id.description) ReadMoreTextView description;
     @BindView(R.id.time) TextView time;
     @BindView(R.id.icon) ImageView icon;
     private NotificationClicked listener;
@@ -49,12 +48,9 @@ public class NotificationRenderer extends Renderer<Notification> {
     public void render() {
         Notification notification = getContent();
         StringBuilder str = new StringBuilder(notification.notificationText);
-        str.append(" " );
+        str.append(" ");
         title.setText(str);
         time.setText(notification.date);
-        StringBuilder desc = new StringBuilder(notification.description);
-        desc.append(" ");
-        description.setText(desc);
         switch (notification.notificationType) {
             case THANK_YOU_EDIT:
                 icon.setImageResource(R.drawable.ic_edit_black_24dp);

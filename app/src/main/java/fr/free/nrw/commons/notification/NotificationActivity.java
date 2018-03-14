@@ -24,6 +24,7 @@ import butterknife.ButterKnife;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.Utils;
 import fr.free.nrw.commons.theme.NavigationBaseActivity;
+import fr.free.nrw.commons.utils.ViewUtil;
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
@@ -81,6 +82,7 @@ public class NotificationActivity extends NavigationBaseActivity {
                         progressBar.setVisibility(View.GONE);
                     }, throwable -> {
                         Timber.e(throwable, "Error occurred while loading notifications");
+                        ViewUtil.showSnackbar(this, R.string.error_notifications);
                         progressBar.setVisibility(View.GONE);
                     });
         } else {

@@ -23,7 +23,6 @@ import org.apache.http.params.CoreProtocolPNames;
 import org.apache.http.util.EntityUtils;
 import org.mediawiki.api.ApiResult;
 import org.mediawiki.api.MWApi;
-import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 import java.io.IOException;
@@ -46,14 +45,6 @@ import in.yuvi.http.fluent.Http;
 import io.reactivex.Observable;
 import io.reactivex.Single;
 import timber.log.Timber;
-
-import static fr.free.nrw.commons.notification.NotificationType.THANK_YOU_EDIT;
-import static fr.free.nrw.commons.notification.NotificationType.UNKNOWN;
-import static fr.free.nrw.commons.notification.NotificationUtils.getNotificationFromApiResult;
-import static fr.free.nrw.commons.notification.NotificationUtils.getNotificationType;
-import static fr.free.nrw.commons.notification.NotificationUtils.getNotificationsFromBundle;
-import static fr.free.nrw.commons.notification.NotificationUtils.isBundledNotification;
-import static fr.free.nrw.commons.notification.NotificationUtils.isCommonsNotification;
 
 /**
  * @author Addshore
@@ -439,14 +430,16 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
                     .param("format", "xml")
                     .param("meta", "notifications")
                     .param("notformat", "model")
-                    //.param("notfilter", "!read")
                     .get()
                     .getNode("/api/query/notifications/list");
         } catch (IOException e) {
             Timber.e("Failed to obtain searchCategories", e);
         }
 
-        if (notificationNode == null) {
+        if (notificationNode == null
+                || notificationNode.getDocument() == null
+                || notificationNode.getDocument().getChildNodes() == null
+                || notificationNode.getDocument().getChildNodes().getLength() == 0) {
             return new ArrayList<>();
         }
 
