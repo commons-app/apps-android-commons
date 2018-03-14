@@ -36,4 +36,4 @@ Can be created by pressing the Volume Down and Power Button at the same time on 
 
 **Would you like to work on the issue?**
 
-Please let us know if you can work on it or the issue should be assigned to someone else.
+Please let us know whether you want to fix the issue by yourself. If not, anyone can get the issue assigned to them.
