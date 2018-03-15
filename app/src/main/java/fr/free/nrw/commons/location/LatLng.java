@@ -159,3 +159,4 @@ public class LatLng {
         return Uri.parse("geo:0,0?q=" + latitude + "," + longitude);
     }
 }
+

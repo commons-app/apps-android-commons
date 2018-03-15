@@ -1,5 +1,6 @@
 package fr.free.nrw.commons.nearby;
 
+
 import android.support.v4.app.Fragment;
 
 import com.pedrogomez.renderers.ListAdapteeCollection;
@@ -31,5 +32,10 @@ class NearbyAdapterFactory {
         ListAdapteeCollection<Place> collection = new ListAdapteeCollection<>(
                 placeList != null ? placeList : Collections.emptyList());
         return new RVRendererAdapter<>(builder, collection);
+    }
+
+    public void updateAdapterData(List<Place> newPlaceList, RVRendererAdapter<Place> rendererAdapter) {
+        rendererAdapter.notifyDataSetChanged();
+        rendererAdapter.diffUpdate(newPlaceList);
     }
 }

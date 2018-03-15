@@ -8,6 +8,8 @@
     app:layout_behavior="@string/bottom_sheet_behavior"
     app:behavior_peekHeight="72dp"
     app:behavior_hideable="true"
+    android:visibility="gone"
+
     >
 
     <LinearLayout

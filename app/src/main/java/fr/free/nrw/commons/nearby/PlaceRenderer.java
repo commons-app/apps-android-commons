@@ -1,10 +1,11 @@
 package fr.free.nrw.commons.nearby;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
+
 import android.net.Uri;
-import android.support.transition.TransitionManager;
+import android.content.SharedPreferences;
 import android.support.v4.app.Fragment;
+import android.support.transition.TransitionManager;
 import android.support.v7.widget.PopupMenu;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -37,17 +38,20 @@ public class PlaceRenderer extends Renderer<Place> {
     @BindView(R.id.icon) ImageView icon;
     @BindView(R.id.buttonLayout) LinearLayout buttonLayout;
     @BindView(R.id.cameraButton) LinearLayout cameraButton;
+
     @BindView(R.id.galleryButton) LinearLayout galleryButton;
     @BindView(R.id.directionsButton) LinearLayout directionsButton;
     @BindView(R.id.iconOverflow) LinearLayout iconOverflow;
     @BindView(R.id.cameraButtonText) TextView cameraButtonText;
     @BindView(R.id.galleryButtonText) TextView galleryButtonText;
+
     @BindView(R.id.directionsButtonText) TextView directionsButtonText;
     @BindView(R.id.iconOverflowText) TextView iconOverflowText;
 
     private View view;
     private static ArrayList<LinearLayout> openedItems;
     private Place place;
+
     private Fragment fragment;
     private ContributionController controller;
 
@@ -83,9 +87,9 @@ public class PlaceRenderer extends Renderer<Place> {
             Log.d("Renderer", "clicked");
             TransitionManager.beginDelayedTransition(buttonLayout);
 
-            if(buttonLayout.isShown()) {
+            if(buttonLayout.isShown()){
                 closeLayout(buttonLayout);
-            } else {
+            }else {
                 openLayout(buttonLayout);
             }
 
@@ -121,6 +125,7 @@ public class PlaceRenderer extends Renderer<Place> {
         editor.putString("Title", place.getName());
         editor.putString("Desc", place.getLongDescription());
         editor.apply();
+
     }
 
     private void closeLayout(LinearLayout buttonLayout){
@@ -133,10 +138,11 @@ public class PlaceRenderer extends Renderer<Place> {
 
     @Override
     public void render() {
-//        ((CommonsApplication) getContext().getApplicationContext()).injector().inject(this);
+
         place = getContent();
         tvName.setText(place.name);
         String descriptionText = place.getLongDescription();
+
         if (descriptionText.equals("?")) {
             descriptionText = getContext().getString(R.string.no_description_found);
         }
@@ -154,6 +160,7 @@ public class PlaceRenderer extends Renderer<Place> {
 
         iconOverflow.setVisibility(showMenu() ? View.VISIBLE : View.GONE);
         iconOverflow.setOnClickListener(v -> popupMenuListener());
+
     }
 
     private void popupMenuListener() {

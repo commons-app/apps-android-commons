@@ -54,6 +54,7 @@ import fr.free.nrw.commons.modifications.ModificationsContentProvider;
 import fr.free.nrw.commons.modifications.ModifierSequence;
 import fr.free.nrw.commons.modifications.ModifierSequenceDao;
 import fr.free.nrw.commons.modifications.TemplateRemoveModifier;
+
 import fr.free.nrw.commons.utils.ImageUtils;
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
 import timber.log.Timber;
@@ -111,8 +112,10 @@ public class ShareActivity
     private String description;
     private Snackbar snackbar;
     private boolean duplicateCheckPassed = false;
+
     private boolean haveCheckedForOtherImages = false;
     private boolean isNearbyUpload = false;
+
     /**
      * Called when user taps the submit button.
      */

@@ -62,6 +62,7 @@
                 android:background="#aa969696"
                 android:elevation="6dp"
                 />
+
     </RelativeLayout>
         <include layout="@layout/bottom_sheet_nearby" />
         <include layout="@layout/bottom_sheet_details" android:id="@+id/bottom_sheet_details" />

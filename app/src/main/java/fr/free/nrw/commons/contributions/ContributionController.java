@@ -86,6 +86,7 @@ public class ContributionController {
             return;
         }
         Timber.d("startGalleryPick() called with pickImageIntent");
+
         fragment.startActivityForResult(pickImageIntent, SELECT_FROM_GALLERY);
     }
 
@@ -115,6 +116,7 @@ public class ContributionController {
                 if (isDirectUpload) {
                     shareIntent.putExtra("isDirectUpload", true);
                 }
+
                 break;
             default:
                 break;

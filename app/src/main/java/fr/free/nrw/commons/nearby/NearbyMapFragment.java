@@ -1,5 +1,9 @@
 package fr.free.nrw.commons.nearby;
 
+import android.animation.ObjectAnimator;
+import android.animation.TypeEvaluator;
+import android.animation.ValueAnimator;
+
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
@@ -11,6 +15,7 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.BottomSheetBehavior;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.FloatingActionButton;
+
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -29,11 +34,13 @@ import com.mapbox.mapboxsdk.annotations.Marker;
 import com.mapbox.mapboxsdk.annotations.MarkerOptions;
 import com.mapbox.mapboxsdk.annotations.PolygonOptions;
 import com.mapbox.mapboxsdk.camera.CameraPosition;
+import com.mapbox.mapboxsdk.camera.CameraUpdateFactory;
 import com.mapbox.mapboxsdk.constants.Style;
 import com.mapbox.mapboxsdk.geometry.LatLng;
 import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.MapboxMapOptions;
+import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
 import com.mapbox.services.android.telemetry.MapboxTelemetry;
 
 import java.lang.reflect.Type;
@@ -57,6 +64,8 @@ public class NearbyMapFragment extends DaggerFragment {
     private MapView mapView;
     private List<NearbyBaseMarker> baseMarkerOptions;
     private fr.free.nrw.commons.location.LatLng curLatLng;
+    public fr.free.nrw.commons.location.LatLng[] boundaryCoordinates;
+
     private View bottomSheetList;
     private View bottomSheetDetails;
 
@@ -89,6 +98,12 @@ public class NearbyMapFragment extends DaggerFragment {
 
     private Place place;
     private Marker selected;
+    private Marker currentLocationMarker;
+    private MapboxMap mapboxMap;
+    private PolygonOptions currentLocationPolygonOptions;
+
+    private boolean isBottomListSheetExpanded;
+    private final double CAMERA_TARGET_SHIFT_FACTOR = 0.06;
 
     @Inject @Named("prefs") SharedPreferences prefs;
     @Inject @Named("direct_nearby_upload_prefs") SharedPreferences directPrefs;
@@ -100,22 +115,23 @@ public class NearbyMapFragment extends DaggerFragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Bundle bundle = this.getArguments();
-        initViews();
-        setListeners();
         Gson gson = new GsonBuilder()
                 .registerTypeAdapter(Uri.class, new UriDeserializer())
                 .create();
         if (bundle != null) {
             String gsonPlaceList = bundle.getString("PlaceList");
             String gsonLatLng = bundle.getString("CurLatLng");
+            String gsonBoundaryCoordinates = bundle.getString("BoundaryCoord");
             Type listType = new TypeToken<List<Place>>() {}.getType();
             List<Place> placeList = gson.fromJson(gsonPlaceList, listType);
             Type curLatLngType = new TypeToken<fr.free.nrw.commons.location.LatLng>() {}.getType();
+            Type gsonBoundaryCoordinatesType = new TypeToken<fr.free.nrw.commons.location.LatLng[]>() {}.getType();
             curLatLng = gson.fromJson(gsonLatLng, curLatLngType);
             baseMarkerOptions = NearbyController
                     .loadAttractionsFromLocationToBaseMarkerOptions(curLatLng,
                             placeList,
                             getActivity());
+            boundaryCoordinates = gson.fromJson(gsonBoundaryCoordinates, gsonBoundaryCoordinatesType);
         }
         Mapbox.getInstance(getActivity(),
                 getString(R.string.mapbox_commons_app_token));
@@ -160,12 +176,123 @@ public class NearbyMapFragment extends DaggerFragment {
         });
     }
 
+    public void updateMapSlightly() {
+        // Get arguments from bundle for new location
+        Bundle bundle = this.getArguments();
+        if (mapboxMap != null) {
+            Gson gson = new GsonBuilder()
+                    .registerTypeAdapter(Uri.class, new UriDeserializer())
+                    .create();
+            if (bundle != null) {
+                String gsonLatLng = bundle.getString("CurLatLng");
+                Type curLatLngType = new TypeToken<fr.free.nrw.commons.location.LatLng>() {}.getType();
+                curLatLng = gson.fromJson(gsonLatLng, curLatLngType);
+            }
+            updateMapToTrackPosition();
+        }
+
+    }
+
+    public void updateMapSignificantly() {
+
+        Bundle bundle = this.getArguments();
+        if (mapboxMap != null) {
+            if (bundle != null) {
+                Gson gson = new GsonBuilder()
+                        .registerTypeAdapter(Uri.class, new UriDeserializer())
+                        .create();
+
+                String gsonPlaceList = bundle.getString("PlaceList");
+                String gsonLatLng = bundle.getString("CurLatLng");
+                String gsonBoundaryCoordinates = bundle.getString("BoundaryCoord");
+                Type listType = new TypeToken<List<Place>>() {}.getType();
+                List<Place> placeList = gson.fromJson(gsonPlaceList, listType);
+                Type curLatLngType = new TypeToken<fr.free.nrw.commons.location.LatLng>() {}.getType();
+                Type gsonBoundaryCoordinatesType = new TypeToken<fr.free.nrw.commons.location.LatLng[]>() {}.getType();
+                curLatLng = gson.fromJson(gsonLatLng, curLatLngType);
+                baseMarkerOptions = NearbyController
+                        .loadAttractionsFromLocationToBaseMarkerOptions(curLatLng,
+                                placeList,
+                                getActivity());
+                boundaryCoordinates = gson.fromJson(gsonBoundaryCoordinates, gsonBoundaryCoordinatesType);
+            }
+            mapboxMap.clear();
+            addCurrentLocationMarker(mapboxMap);
+            updateMapToTrackPosition();
+            addNearbyMarkerstoMapBoxMap();
+        }
+    }
+
+    // Only update current position marker and camera view
+    private void updateMapToTrackPosition() {
+
+        if (currentLocationMarker != null) {
+            LatLng curMapBoxLatLng = new LatLng(curLatLng.getLatitude(),curLatLng.getLongitude());
+            ValueAnimator markerAnimator = ObjectAnimator.ofObject(currentLocationMarker, "position",
+                    new LatLngEvaluator(), currentLocationMarker.getPosition(),
+                    curMapBoxLatLng);
+            markerAnimator.setDuration(1000);
+            markerAnimator.start();
+
+            List<LatLng> circle = createCircleArray(curLatLng.getLatitude(), curLatLng.getLongitude(),
+                    curLatLng.getAccuracy() * 2, 100);
+            if (currentLocationPolygonOptions != null){
+                mapboxMap.removePolygon(currentLocationPolygonOptions.getPolygon());
+                currentLocationPolygonOptions = new PolygonOptions()
+                        .addAll(circle)
+                        .strokeColor(Color.parseColor("#55000000"))
+                        .fillColor(Color.parseColor("#11000000"));
+                mapboxMap.addPolygon(currentLocationPolygonOptions);
+            }
+
+                // Make camera to follow user on location change
+                CameraPosition position = new CameraPosition.Builder()
+                        .target(isBottomListSheetExpanded ?
+                                new LatLng(curMapBoxLatLng.getLatitude()- CAMERA_TARGET_SHIFT_FACTOR,
+                                        curMapBoxLatLng.getLongitude())
+                                : curMapBoxLatLng ) // Sets the new camera position
+                        .zoom(mapboxMap.getCameraPosition().zoom) // Same zoom level
+                        .build();
+
+                mapboxMap.animateCamera(CameraUpdateFactory
+                        .newCameraPosition(position), 1000);
+
+        }
+    }
+
+    private void updateMapCameraAccordingToBottomSheet(boolean isBottomListSheetExpanded) {
+        CameraPosition position;
+        this.isBottomListSheetExpanded = isBottomListSheetExpanded;
+        if (mapboxMap != null && curLatLng != null) {
+            if (isBottomListSheetExpanded) {
+                // Make camera to follow user on location change
+                position = new CameraPosition.Builder()
+                        .target(new LatLng(curLatLng.getLatitude() - CAMERA_TARGET_SHIFT_FACTOR,
+                                curLatLng.getLongitude())) // Sets the new camera target above
+                        // current to make it visible when sheet is expanded
+                        .zoom(mapboxMap.getCameraPosition().zoom) // Same zoom level
+                        .build();
+
+            } else {
+                // Make camera to follow user on location change
+                position = new CameraPosition.Builder()
+                        .target(new LatLng(curLatLng.getLatitude(),
+                                curLatLng.getLongitude())) // Sets the new camera target to curLatLng
+                        .zoom(mapboxMap.getCameraPosition().zoom) // Same zoom level
+                        .build();
+            }
+            mapboxMap.animateCamera(CameraUpdateFactory
+                    .newCameraPosition(position), 1000);
+        }
+    }
+
     private void initViews() {
         bottomSheetList = getActivity().findViewById(R.id.bottom_sheet);
         bottomSheetListBehavior = BottomSheetBehavior.from(bottomSheetList);
         bottomSheetDetails = getActivity().findViewById(R.id.bottom_sheet_details);
         bottomSheetDetailsBehavior = BottomSheetBehavior.from(bottomSheetDetails);
         bottomSheetDetailsBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
+        bottomSheetDetails.setVisibility(View.VISIBLE);
 
         fabPlus = getActivity().findViewById(R.id.fab_plus);
         fabCamera = getActivity().findViewById(R.id.fab_camera);
@@ -233,6 +360,9 @@ public class NearbyMapFragment extends DaggerFragment {
             public void onStateChanged(@NonNull View bottomSheet, int newState) {
                 if (newState == BottomSheetBehavior.STATE_EXPANDED){
                     bottomSheetDetailsBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
+                    updateMapCameraAccordingToBottomSheet(true);
+                } else {
+                    updateMapCameraAccordingToBottomSheet(false);
                 }
             }
 
@@ -267,30 +397,13 @@ public class NearbyMapFragment extends DaggerFragment {
         // create map
         mapView = new MapView(getActivity(), options);
         mapView.onCreate(savedInstanceState);
-        mapView.getMapAsync(mapboxMap -> {
-            mapboxMap.addMarkers(baseMarkerOptions);
-
-            mapboxMap.setOnInfoWindowCloseListener(marker -> {
-                if (marker == selected){
-                    bottomSheetDetailsBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
-                }
-            });
-
-            mapboxMap.setOnMarkerClickListener(marker -> {
-                if (marker instanceof NearbyMarker) {
-                    this.selected = marker;
-                    NearbyMarker nearbyMarker = (NearbyMarker) marker;
-                    Place place = nearbyMarker.getNearbyBaseMarker().getPlace();
-                    passInfoToSheet(place);
-                    bottomSheetListBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
-                    bottomSheetDetailsBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
-                }
-                return false;
-            });
-
-            addCurrentLocationMarker(mapboxMap);
+        mapView.getMapAsync(new OnMapReadyCallback() {
+            @Override
+            public void onMapReady(MapboxMap mapboxMap) {
+                NearbyMapFragment.this.mapboxMap = mapboxMap;
+                updateMapSignificantly();
+            }
         });
-
         mapView.setStyleUrl("asset://mapstyle.json");
     }
 
@@ -299,22 +412,54 @@ public class NearbyMapFragment extends DaggerFragment {
      * circle which uses the accuracy * 2, to draw a circle
      * which represents the user's position with an accuracy
      * of 95%.
+     *
+     * Should be called only on creation of mapboxMap, there
+     * is other method to update markers location with users
+     * move.
      */
     private void addCurrentLocationMarker(MapboxMap mapboxMap) {
-        MarkerOptions currentLocationMarker = new MarkerOptions()
+        if (currentLocationMarker != null) {
+            currentLocationMarker.remove(); // Remove previous marker, we are not Hansel and Gretel
+        }
+        MarkerOptions currentLocationMarkerOptions = new MarkerOptions()
                 .position(new LatLng(curLatLng.getLatitude(), curLatLng.getLongitude()));
-        mapboxMap.addMarker(currentLocationMarker);
+        currentLocationMarker = mapboxMap.addMarker(currentLocationMarkerOptions);
+
 
         List<LatLng> circle = createCircleArray(curLatLng.getLatitude(), curLatLng.getLongitude(),
                 curLatLng.getAccuracy() * 2, 100);
 
-        mapboxMap.addPolygon(
-                new PolygonOptions()
-                        .addAll(circle)
-                        .strokeColor(Color.parseColor("#55000000"))
-                        .fillColor(Color.parseColor("#11000000"))
-        );
+        currentLocationPolygonOptions = new PolygonOptions()
+                .addAll(circle)
+                .strokeColor(Color.parseColor("#55000000"))
+                .fillColor(Color.parseColor("#11000000"));
+        mapboxMap.addPolygon(currentLocationPolygonOptions);
     }
+
+    private void addNearbyMarkerstoMapBoxMap() {
+
+        mapboxMap.addMarkers(baseMarkerOptions);
+        mapboxMap.setOnInfoWindowCloseListener(marker -> {
+            if (marker == selected){
+                bottomSheetDetailsBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
+            }
+        });
+
+        mapboxMap.setOnMarkerClickListener(marker -> {
+            if (marker instanceof NearbyMarker) {
+                this.selected = marker;
+                NearbyMarker nearbyMarker = (NearbyMarker) marker;
+                Place place = nearbyMarker.getNearbyBaseMarker().getPlace();
+                passInfoToSheet(place);
+                bottomSheetListBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
+                bottomSheetDetailsBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
+            }
+            return false;
+        });
+
+    }
+
+
 
     /**
      * Creates a series of points that create a circle on the map.
@@ -401,6 +546,7 @@ public class NearbyMapFragment extends DaggerFragment {
         commonsButton.setOnClickListener(view -> openWebView(place.siteLinks.getCommonsLink()));
 
         icon.setImageResource(place.getLabel().getIcon());
+
         title.setText(place.name);
         distance.setText(place.distance);
         description.setText(place.getLongDescription());
@@ -410,6 +556,7 @@ public class NearbyMapFragment extends DaggerFragment {
         fabCamera.setOnClickListener(view -> {
             Timber.d("Camera button tapped. Image title: " + place.getName() + "Image desc: " + place.getLongDescription());
             controller = new ContributionController(this);
+
             DirectUpload directUpload = new DirectUpload(this, controller);
             storeSharedPrefs();
             directUpload.initiateCameraUpload();
@@ -418,12 +565,14 @@ public class NearbyMapFragment extends DaggerFragment {
         fabGallery.setOnClickListener(view -> {
             Timber.d("Gallery button tapped. Image title: " + place.getName() + "Image desc: " + place.getLongDescription());
             controller = new ContributionController(this);
+
             DirectUpload directUpload = new DirectUpload(this, controller);
             storeSharedPrefs();
             directUpload.initiateGalleryUpload();
 
-//TODO: App crashes after image upload completes
-//TODO: Handle onRequestPermissionsResult
+            //TODO: App crashes after image upload completes
+            //TODO: Handle onRequestPermissionsResult
+
         });
     }
 
@@ -523,10 +672,14 @@ public class NearbyMapFragment extends DaggerFragment {
 
     @Override
     public void onResume() {
+        super.onResume();
         if (mapView != null) {
             mapView.onResume();
         }
-        super.onResume();
+        initViews();
+        setListeners();
+        transparentView.setClickable(false);
+        transparentView.setAlpha(0);
     }
 
     @Override
@@ -544,4 +697,19 @@ public class NearbyMapFragment extends DaggerFragment {
         }
         super.onDestroyView();
     }
+
+    private static class LatLngEvaluator implements TypeEvaluator<LatLng> {
+        // Method is used to interpolate the marker animation.
+        private LatLng latLng = new LatLng();
+
+        @Override
+        public LatLng evaluate(float fraction, LatLng startValue, LatLng endValue) {
+            latLng.setLatitude(startValue.getLatitude()
+                    + ((endValue.getLatitude() - startValue.getLatitude()) * fraction));
+            latLng.setLongitude(startValue.getLongitude()
+                    + ((endValue.getLongitude() - startValue.getLongitude()) * fraction));
+            return latLng;
+        }
+    }
 }
+

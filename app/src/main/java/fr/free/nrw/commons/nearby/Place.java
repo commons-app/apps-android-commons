@@ -34,11 +34,11 @@ public class Place {
         this.siteLinks = siteLinks;
     }
 
+    public String getName() { return name; }
+
     public Label getLabel() {
         return label;
     }
-
-    public String getName() { return name; }
 
     public String getLongDescription() { return longDescription; }
 
