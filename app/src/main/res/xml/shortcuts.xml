@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shortcuts xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+    <shortcut
+        android:enabled="true"
+        android:icon="@drawable/app_shortcut_nearby"
+        android:shortcutDisabledMessage="@string/menu_nearby"
+        android:shortcutId="Nearby"
+        android:shortcutLongLabel="@string/menu_nearby"
+        android:shortcutShortLabel="@string/menu_nearby"
+        tools:ignore="UnusedAttribute">
+        <intent
+            android:action="android.intent.action.VIEW"
+            android:targetClass="fr.free.nrw.nearby.NearbyActivity"
+            android:targetPackage="fr.free.nrw.commons" />
+        <categories android:name="android.shortcut.conversation" />
+    </shortcut>
+    <shortcut
+        android:enabled="true"
+        android:icon="@drawable/app_shortcut_settings"
+        android:shortcutDisabledMessage="@string/menu_settings"
+        android:shortcutId="Settings"
+        android:shortcutLongLabel="@string/menu_settings"
+        android:shortcutShortLabel="@string/menu_settings"
+        tools:ignore="UnusedAttribute">
+        <intent
+            android:action="android.intent.action.VIEW"
+            android:targetClass="fr.free.nrw.commons.settings.SettingsActivity"
+            android:targetPackage="fr.free.nrw.commons" />
+        <categories android:name="android.shortcut.conversation" />
+    </shortcut>
+    <shortcut
+        android:enabled="true"
+        android:icon="@drawable/app_shortcut_notifications"
+        android:shortcutDisabledMessage="@string/navigation_item_notification"
+        android:shortcutId="Notifications"
+        android:shortcutLongLabel="@string/navigation_item_notification"
+        android:shortcutShortLabel="@string/navigation_item_notification"
+        tools:ignore="UnusedAttribute">
+        <intent
+            android:action="androidr.intent.action.VIEW"
+            android:targetClass="fr.free.nrw.commons.notification.NotificationActivity"
+            android:targetPackage="fr.free.nrw.commons" />
+        <categories android:name="android.shortcut.conversation" />
+    </shortcut>
+</shortcuts>
+
+
+

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:bottom="2dp"
+        android:drawable="@drawable/app_shortcut_circle"
+        android:left="2dp"
+        android:right="2dp"
+        android:top="2dp" />
+    <item
+        android:bottom="8dp"
+        android:drawable="@drawable/ic_notifications_blue_24dp"
+        android:left="8dp"
+        android:right="8dp"
+        android:top="8dp" />
+</layer-list>
