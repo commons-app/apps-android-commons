@@ -114,6 +114,9 @@ public class SingleUploadFragment extends CommonsDaggerSupportFragment {
         if (isNearbyUpload) {
             String imageTitle = directPrefs.getString("Title", "");
             String imageDesc = directPrefs.getString("Desc", "");
+            //TODO: Remove this later, this fragment does not need to know categories
+            String imageCats = directPrefs.getString("Category", "");
+            Timber.d("Image title: " + imageTitle + ", image desc: " + imageDesc + ", image categories: " + imageCats);
             titleEdit.setText(imageTitle);
             descEdit.setText(imageDesc);
         }
