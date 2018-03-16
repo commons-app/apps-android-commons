@@ -39,6 +39,7 @@ public interface CommonsApplicationComponent extends AndroidInjector<Application
 
     @Override
     void inject(ApplicationlessInjection instance);
+
     void inject(PlaceRenderer placeRenderer);
 
     @Component.Builder

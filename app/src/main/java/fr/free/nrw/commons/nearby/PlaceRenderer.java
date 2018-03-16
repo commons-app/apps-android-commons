@@ -140,7 +140,7 @@ public class PlaceRenderer extends Renderer<Place> {
 
     @Override
     public void render() {
-
+        ((CommonsApplication) getContext().getApplicationContext()).injector().inject(this);
         place = getContent();
         tvName.setText(place.name);
         String descriptionText = place.getLongDescription();
