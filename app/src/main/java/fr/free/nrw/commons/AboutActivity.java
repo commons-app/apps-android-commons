@@ -29,6 +29,16 @@ public class AboutActivity extends NavigationBaseActivity {
     @BindView(R.id.about_license) HtmlTextView aboutLicenseText;
     @BindView(R.id.about_faq) TextView faqText;
 
+    String language[] = { "Kazakh", "Afrikaans", "Arabic", "Bengali", "Asturianu", "azərbaycanca", "Bikol Central",
+    "Bulgarain", "বাংলা", "Bosanski", "Brezhoneg","català","کوردی", " čeština", " kaszëbsczi", "Cymraeg", "dansk", "Deutsch"
+    ,"Zazaki", "डोटेली","Ελληνικά","euskara","español","فارسی","suomi", "français" ,"Nordfriisk", "galego", "Hawaiʻi"
+    ,"हिन्दी","Hunsrik","עברית","hornjoserbsce","magyar","interlingua","Bahasa Indonesia", "íslenska","Italian","japanese",
+    "Basa Jawa", "ქართული", " ភាសាខ្មែរ","ಕನ್ನಡ", "한국어","къарачай-малкъар","Кыргызча", "latina", "Lëtzebuergesch", "lietuvių",
+    "latviešu", "Malagasy", "македонски"," മലയാളം","монгол","मराठी","Bahasa Melayu","Malti", "नेपाली",  "norsk bokmål",
+    " Nederlands","occitan","ଓଡ଼ିଆ","ਪੰਜਾਬੀ","polsk","Piemontèis","پښتو","português","română","русский"," سنڌي", " සිංහල",
+    "slovenčina"," سرائیکی", "svenska", "தமிழ்", "ತುಳು"," తెలుగు"," ไทย", "Türkçe","українська", "اردو", "Tiếng Việt",
+    " მარგალური","ייִדיש",};
+
     /**
      * This method helps in the creation About screen
      *
