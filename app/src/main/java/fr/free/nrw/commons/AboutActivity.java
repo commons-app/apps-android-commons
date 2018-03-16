@@ -1,6 +1,8 @@
 package fr.free.nrw.commons;
 
 import android.annotation.SuppressLint;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -10,6 +12,9 @@ import android.util.Log;
 import android.support.customtabs.CustomTabsIntent;
 import android.support.v4.content.ContextCompat;
 import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.LinearLayout;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -102,6 +107,37 @@ public class AboutActivity extends NavigationBaseActivity {
     public void launchFrequentlyAskedQuesions(View view) {
         Utils.handleWebUrl(this,Uri.parse("https://github.com/commons-app/apps-android-commons/wiki/Frequently-Asked-Questions\\"));
     }
-    
+
+    @OnClick(R.id.about_translate)
+    public void launchTranslate(View view) {
+        final ArrayAdapter<String> languageAdapter = new ArrayAdapter<String>(AboutActivity.this,
+                android.R.layout.simple_spinner_item, language);
+        final Spinner spinner = new Spinner(AboutActivity.this);
+        spinner.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT));
+        spinner.setAdapter(languageAdapter);
+        spinner.setGravity(17);
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(AboutActivity.this);
+        builder.setView(spinner);
+        builder.setTitle(R.string.about_translate_title)
+                .setMessage(R.string.about_translate_message)
+                .setPositiveButton(R.string.about_translate_proceed, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        String languageSelected = spinner.getSelectedItem().toString();
+                        TokensTranslations tokensTranslations = new TokensTranslations();
+                        String token = tokensTranslations.getTranslationToken(languageSelected);
+                        Utils.handleWebUrl(AboutActivity.this,Uri.parse("https://translatewiki.net/w/i.php?title=Special:Translate&language="+token+"&group=commons-android-strings&filter=%21translated&action=translate ?"));
+                    }
+                });
+        builder.setNegativeButton(R.string.about_translate_cancel, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                finish();
+            }
+        });
+        builder.create().show();
+
+    }
 
 }

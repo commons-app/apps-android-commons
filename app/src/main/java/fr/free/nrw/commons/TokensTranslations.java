@@ -8,7 +8,6 @@ import java.util.HashMap;
 
 public class TokensTranslations {
     private static HashMap<String,String> translationToken;
-    private static HashMap<String,String> License_selectionToken;
 
     TokensTranslations() {
         translationToken.put("Kazakh", "ab");
@@ -98,11 +97,9 @@ public class TokensTranslations {
         translationToken.put("Tiếng Việt","vi");
         translationToken.put(" მარგალური", "xmf");
         translationToken.put("ייִדיש","yi");
-        translationToken.put();
-        translationToken.put();
-        translationToken.put();
-        translationToken.put();
-        translationToken.put();
+    }
 
+    public String getTranslationToken ( String language){
+        return translationToken.get(language);
     }
 }

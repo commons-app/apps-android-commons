@@ -246,5 +246,9 @@
   <string name="about_faq">Frequently Asked Questions</string>
   <string name="welcome_skip_button">Skip Tutorial</string>
   <string name="about_translate"><u>Translate</u></string>
+    <string name="about_translate_title">Languages</string>
+  <string name="about_translate_message">Select the langauge you want translations for ?</string>
+  <string name="about_translate_proceed">Proceed</string>
+  <string name="about_translate_cancel">Cancel</string>
 
 </resources>
