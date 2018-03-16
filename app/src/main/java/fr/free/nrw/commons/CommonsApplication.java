@@ -7,6 +7,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.support.multidex.MultiDexApplication;
 
 import com.facebook.drawee.backends.pipeline.Fresco;
+import com.facebook.imagepipeline.core.ImagePipelineConfig;
 import com.facebook.stetho.Stetho;
 import com.squareup.leakcanary.LeakCanary;
 import com.squareup.leakcanary.RefWatcher;
@@ -25,7 +26,6 @@ import fr.free.nrw.commons.category.CategoryDao;
 import fr.free.nrw.commons.contributions.ContributionDao;
 import fr.free.nrw.commons.data.DBOpenHelper;
 import fr.free.nrw.commons.di.ApplicationlessInjection;
-import fr.free.nrw.commons.di.CommonsApplicationComponent;
 import fr.free.nrw.commons.modifications.ModifierSequenceDao;
 import fr.free.nrw.commons.utils.FileUtils;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -72,8 +72,11 @@ public class CommonsApplication extends MultiDexApplication {
                 .getInstance(this)
                 .getCommonsApplicationComponent()
                 .inject(this);
-
-        Fresco.initialize(this);
+//        Set DownsampleEnabled to True to downsample the image in case it's heavy
+        ImagePipelineConfig config = ImagePipelineConfig.newBuilder(this)
+                .setDownsampleEnabled(true)
+                .build();
+        Fresco.initialize(this,config);
         if (setupLeakCanary() == RefWatcher.DISABLED) {
             return;
         }
