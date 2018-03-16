@@ -120,6 +120,7 @@ public class PlaceRenderer extends Renderer<Place> {
         Timber.d("directPrefs stored");
         editor.putString("Title", place.getName());
         editor.putString("Desc", place.getLongDescription());
+        editor.putString("Category", place.getCategory());
         editor.apply();
     }
 

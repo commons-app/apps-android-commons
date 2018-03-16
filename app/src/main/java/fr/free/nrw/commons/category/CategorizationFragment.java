@@ -244,6 +244,8 @@ public class CategorizationFragment extends DaggerFragment {
                 .concatWith(recentCategories());
     }
 
+    //TODO: Add category suggestions for direct uploads here
+
     private Observable<CategoryItem> gpsCategories() {
         return Observable.fromIterable(
                 MwVolleyApi.GpsCatExists.getGpsCatExists()
