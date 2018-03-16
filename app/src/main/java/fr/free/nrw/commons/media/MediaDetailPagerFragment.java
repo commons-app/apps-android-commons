@@ -219,9 +219,7 @@ public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment imple
      *
      * @param m Media file to download
      */
-    private void downloadImage(Media m, String filename, Uri uri) {
-
-        String fileName = m.getFilename();
+    private void downloadImage(Media m, String fileName, Uri uri) {
 
         DownloadManager.Request req = new DownloadManager.Request(uri);
         //These are not the image title and description fields, they are download descs for notifications
