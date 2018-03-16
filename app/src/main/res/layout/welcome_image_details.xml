@@ -1,12 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#0c609c"
     android:gravity="center_vertical"
     >
-
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#0c609c"
+        android:gravity="center_vertical"
+        >
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -32,15 +38,115 @@
         android:textColor="@android:color/white"
         />
 
-    <TextView
-        android:layout_width="278dp"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:maxWidth="240dp"
-        android:text="@string/tutorial_4_subtext"
-        android:layout_gravity="center"
-        android:textAlignment="textStart"
-        android:paddingTop="@dimen/standard_gap"
-        android:gravity="start"
-        android:textColor="@android:color/white"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/bullet"
+            android:paddingRight="4dp"
+            android:textSize="16sp"
+            android:paddingTop="@dimen/standard_gap"
+            android:textColor="@android:color/white"/>
+
+        <TextView
+            android:layout_width="295dp"
+            android:layout_height="wrap_content"
+            android:maxWidth="240dp"
+            android:text="@string/tutorial_4_subtext_1"
+            android:layout_gravity="center"
+            android:textAlignment="textStart"
+            android:paddingTop="@dimen/standard_gap"
+            android:gravity="start"
+            android:textColor="@android:color/white"
+            />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="top">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/bullet"
+                android:paddingRight="4dp"
+                android:textSize="16sp"
+                android:textColor="@android:color/white"/>
+
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="295dp"
+            android:layout_height="wrap_content"
+            android:maxWidth="240dp"
+            android:text="@string/tutorial_4_subtext_2"
+            android:layout_gravity="center"
+            android:textAlignment="textStart"
+            android:gravity="start"
+            android:textColor="@android:color/white"
+            />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="top">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/bullet"
+                android:paddingRight="4dp"
+                android:textSize="16sp"
+                android:textColor="@android:color/white"/>
+
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="295dp"
+            android:layout_height="wrap_content"
+            android:maxWidth="240dp"
+            android:text="@string/tutorial_4_subtext_3"
+            android:layout_gravity="center"
+            android:textAlignment="textStart"
+            android:gravity="start"
+            android:textColor="@android:color/white"
+            />
+
+        </LinearLayout>
+    </LinearLayout>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/overflow_button_dimen"
+        android:layout_marginTop="@dimen/standard_gap"
+        android:layout_marginRight="@dimen/standard_gap"
+        android:text="@string/welcome_skip_button"
+        android:id="@+id/welcomeYesButton"
+        android:textSize="@dimen/normal_text"
+        android:visibility="gone"
+        android:layout_gravity="right"
+        android:layout_alignParentRight="true"
+        android:textColor="#fff"
+        android:textStyle="bold"
         />
-</LinearLayout>
+</RelativeLayout>

@@ -9,6 +9,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
+import android.support.v4.view.ViewCompat;
 import android.support.v7.app.AlertDialog;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -27,6 +28,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -64,9 +66,6 @@ public class SingleUploadFragment extends CommonsDaggerSupportFragment {
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         inflater.inflate(R.menu.activity_share, menu);
-        if (titleEdit != null) {
-            menu.findItem(R.id.menu_upload_single).setEnabled(titleEdit.getText().length() != 0);
-        }
     }
 
     @Override
@@ -74,6 +73,11 @@ public class SingleUploadFragment extends CommonsDaggerSupportFragment {
         switch (item.getItemId()) {
             //What happens when the 'submit' icon is tapped
             case R.id.menu_upload_single:
+
+                if (titleEdit.getText().toString().isEmpty()) {
+                    Toast.makeText(getContext(), R.string.add_title_toast, Toast.LENGTH_LONG).show();
+                    return false;
+                }
 
                 String title = titleEdit.getText().toString();
                 String desc = descEdit.getText().toString();
@@ -96,6 +100,14 @@ public class SingleUploadFragment extends CommonsDaggerSupportFragment {
            Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_single_upload, container, false);
         ButterKnife.bind(this, rootView);
+
+        Intent activityIntent = getActivity().getIntent();
+        if (activityIntent.hasExtra("title")) {
+            titleEdit.setText(activityIntent.getStringExtra("title"));
+        }
+        if (activityIntent.hasExtra("description")) {
+            descEdit.setText(activityIntent.getStringExtra("description"));
+        }
 
         ArrayList<String> licenseItems = new ArrayList<>();
         licenseItems.add(getString(R.string.license_name_cc0));
@@ -228,35 +240,40 @@ public class SingleUploadFragment extends CommonsDaggerSupportFragment {
      */
     @OnTouch(R.id.titleEdit)
     boolean titleInfo(View view, MotionEvent motionEvent) {
-        //Should replace right with end to support different right-to-left languages as well
-        final int value = titleEdit.getRight() - titleEdit.getCompoundDrawables()[2].getBounds().width();
-
-        if (motionEvent.getAction() == ACTION_UP && motionEvent.getRawX() >= value) {
-            new AlertDialog.Builder(getContext())
-                    .setTitle(R.string.media_detail_title)
-                    .setMessage(R.string.title_info)
-                    .setCancelable(true)
-                    .setNeutralButton(android.R.string.ok, (dialog, id) -> dialog.cancel())
-                    .create()
-                    .show();
-            return true;
+        final int value;
+        if (ViewCompat.getLayoutDirection(getView()) == ViewCompat.LAYOUT_DIRECTION_LTR) {
+            value = titleEdit.getRight() - titleEdit.getCompoundDrawables()[2].getBounds().width();
+            if (motionEvent.getAction() == ACTION_UP && motionEvent.getRawX() >= value) {
+                showInfoAlert(R.string.media_detail_title, R.string.title_info);
+                return true;
+            }
+        }
+        else {
+            value = titleEdit.getLeft() + titleEdit.getCompoundDrawables()[0].getBounds().width();
+            if (motionEvent.getAction() == ACTION_UP && motionEvent.getRawX() <= value) {
+                showInfoAlert(R.string.media_detail_title, R.string.title_info);
+                return true;
+            }
         }
         return false;
     }
 
     @OnTouch(R.id.descEdit)
     boolean descriptionInfo(View view, MotionEvent motionEvent) {
-        final int value = descEdit.getRight() - descEdit.getCompoundDrawables()[2].getBounds().width();
-
-        if (motionEvent.getAction() == ACTION_UP && motionEvent.getRawX() >= value) {
-            new AlertDialog.Builder(getContext())
-                    .setTitle(R.string.media_detail_description)
-                    .setMessage(R.string.description_info)
-                    .setCancelable(true)
-                    .setNeutralButton(android.R.string.ok, (dialog, id) -> dialog.cancel())
-                    .create()
-                    .show();
-            return true;
+        final int value;
+        if (ViewCompat.getLayoutDirection(getView()) == ViewCompat.LAYOUT_DIRECTION_LTR) {
+            value = descEdit.getRight() - descEdit.getCompoundDrawables()[2].getBounds().width();
+            if (motionEvent.getAction() == ACTION_UP && motionEvent.getRawX() >= value) {
+                showInfoAlert(R.string.media_detail_description,R.string.description_info);
+                return true;
+            }
+        }
+        else{
+            value = descEdit.getLeft() + descEdit.getCompoundDrawables()[0].getBounds().width();
+            if (motionEvent.getAction() == ACTION_UP && motionEvent.getRawX() <= value) {
+                showInfoAlert(R.string.media_detail_description,R.string.description_info);
+                return true;
+            }
         }
         return false;
     }
@@ -320,5 +337,15 @@ public class SingleUploadFragment extends CommonsDaggerSupportFragment {
                 getActivity().invalidateOptionsMenu();
             }
         }
+    }
+
+    private void showInfoAlert (int titleStringID, int messageStringID){
+        new AlertDialog.Builder(getContext())
+                .setTitle(titleStringID)
+                .setMessage(messageStringID)
+                .setCancelable(true)
+                .setNeutralButton(android.R.string.ok, (dialog, id) -> dialog.cancel())
+                .create()
+                .show();
     }
 }
