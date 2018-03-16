@@ -120,6 +120,7 @@ public class PlaceRenderer extends Renderer<Place> {
     }
 
     private void storeSharedPrefs() {
+        //FIXME: This line crashes on list, but not on map
         SharedPreferences.Editor editor = directPrefs.edit();
         Timber.d("directPrefs stored");
         editor.putString("Title", place.getName());
