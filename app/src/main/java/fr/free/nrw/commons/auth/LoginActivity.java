@@ -84,6 +84,9 @@ public class LoginActivity extends AccountAuthenticatorActivity {
     private AppCompatDelegate delegate;
     private LoginTextWatcher textWatcher = new LoginTextWatcher();
 
+    private Boolean loginCurrentlyInProgress = false;
+    private static final String LOGING_IN = "logingIn";
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         setTheme(Utils.isDarkTheme(this) ? R.style.DarkAppTheme : R.style.LightAppTheme);
@@ -180,6 +183,7 @@ public class LoginActivity extends AccountAuthenticatorActivity {
     }
 
     private void performLogin() {
+        loginCurrentlyInProgress = true;
         Timber.d("Login to start!");
         final String username = canonicializeUsername(usernameEdit.getText().toString());
         final String password = passwordEdit.getText().toString();
@@ -210,6 +214,7 @@ public class LoginActivity extends AccountAuthenticatorActivity {
         if (result.equals("PASS")) {
             handlePassResult(username, password);
         } else {
+            loginCurrentlyInProgress = false;
             handleOtherResults(result);
         }
     }
@@ -330,6 +335,21 @@ public class LoginActivity extends AccountAuthenticatorActivity {
     @NonNull
     public MenuInflater getMenuInflater() {
         return getDelegate().getMenuInflater();
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putBoolean(LOGING_IN, loginCurrentlyInProgress);
+    }
+
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+        loginCurrentlyInProgress = savedInstanceState.getBoolean(LOGING_IN, false);
+        if(loginCurrentlyInProgress){
+            performLogin();
+        }
     }
 
     public void askUserForTwoFactorAuth() {
