@@ -37,6 +37,7 @@ import javax.inject.Named;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import fr.free.nrw.commons.BuildConfig;
 import fr.free.nrw.commons.PageTitle;
 import fr.free.nrw.commons.R;
@@ -132,6 +133,10 @@ public class LoginActivity extends AccountAuthenticatorActivity {
         Utils.handleWebUrl(this, Uri.parse(BuildConfig.FORGOT_PASSWORD_URL));
     }
 
+    @OnClick(R.id.about_privacy_policy)
+    void onPrivacyPolicyClicked() {
+        Utils.handleWebUrl(this,Uri.parse("https://github.com/commons-app/apps-android-commons/wiki/Privacy-policy\\"));
+    }
 
     public void hideKeyboard(View view) {
         InputMethodManager inputMethodManager =(InputMethodManager)this.getSystemService(Activity.INPUT_METHOD_SERVICE);
