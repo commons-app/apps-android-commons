@@ -1,42 +1,72 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="horizontal"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#0c609c"
     android:gravity="center"
-    >
+    android:orientation="horizontal">
 
-    <ImageView
+    <TextView
+        android:id="@+id/welcomeYesButton"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/sydney_opera_house"
-        android:paddingLeft="@dimen/large_gap"
-        android:paddingRight="@dimen/standard_gap"
-        android:paddingTop="@dimen/large_gap"
-        android:paddingBottom="@dimen/large_gap"
-        android:adjustViewBounds="true"
-        android:layout_gravity="center"
-        android:contentDescription="@string/welcome_image_sydney_opera_house"
-        />
+        android:layout_height="@dimen/overflow_button_dimen"
+        android:layout_marginEnd="@dimen/standard_gap"
+        android:layout_marginRight="@dimen/standard_gap"
+        android:layout_marginTop="@dimen/standard_gap"
+        android:text="@string/welcome_skip_button"
+        android:textColor="#fff"
+        android:textSize="@dimen/normal_text"
+        android:textStyle="bold"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-    <LinearLayout android:orientation="vertical"
+    <android.support.constraint.Guideline
+        android:id="@+id/center_guideline"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:gravity="center_vertical"
-        >
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.60" />
+
+    <ImageView
+        android:layout_width="370dp"
+        android:layout_height="wrap_content"
+        android:adjustViewBounds="true"
+        android:contentDescription="@string/welcome_image_sydney_opera_house"
+        android:paddingBottom="@dimen/large_gap"
+        android:paddingLeft="@dimen/tiny_gap"
+        android:paddingStart="@dimen/tiny_gap"
+        android:paddingRight="@dimen/standard_gap"
+        android:paddingEnd="@dimen/standard_gap"
+        android:paddingTop="@dimen/large_gap"
+        android:src="@drawable/sydney_opera_house"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/center_guideline"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginEnd="@dimen/standard_gap"
+        android:layout_marginRight="@dimen/standard_gap"
+        app:layout_constraintStart_toEndOf="@id/center_guideline"
+        app:layout_constraintTop_toTopOf="parent">
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center_horizontal"
             android:maxWidth="240dp"
             android:text="@string/tutorial_4_text"
-            android:layout_gravity="center"
-            android:textStyle="bold"
             android:textAlignment="center"
+            android:textColor="@android:color/white"
             android:textSize="@dimen/normal_text"
-            android:gravity="center_horizontal"
-            android:textColor="@android:color/white"/>
+            android:textStyle="bold" />
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -47,23 +77,22 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/bullet"
                 android:paddingRight="4dp"
-                android:textSize="16sp"
                 android:paddingTop="@dimen/standard_gap"
-                android:textColor="@android:color/white"/>
+                android:text="@string/bullet"
+                android:textColor="@android:color/white"
+                android:textSize="16sp" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:maxWidth="240dp"
-                android:text="@string/tutorial_4_subtext_1"
                 android:layout_gravity="center"
-                android:textAlignment="textStart"
-                android:paddingTop="@dimen/standard_gap"
                 android:gravity="start"
-                android:textColor="@android:color/white"
-                />
+                android:maxWidth="240dp"
+                android:paddingTop="@dimen/standard_gap"
+                android:text="@string/tutorial_4_subtext_1"
+                android:textAlignment="textStart"
+                android:textColor="@android:color/white" />
 
         </LinearLayout>
 
@@ -76,21 +105,20 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/bullet"
                 android:paddingRight="4dp"
-                android:textSize="16sp"
-                android:textColor="@android:color/white"/>
+                android:text="@string/bullet"
+                android:textColor="@android:color/white"
+                android:textSize="16sp" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="start"
                 android:maxWidth="240dp"
                 android:text="@string/tutorial_4_subtext_2"
-                android:layout_gravity="center"
                 android:textAlignment="textStart"
-                android:gravity="start"
-                android:textColor="@android:color/white"
-                />
+                android:textColor="@android:color/white" />
 
         </LinearLayout>
 
@@ -103,24 +131,23 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/bullet"
                 android:paddingRight="4dp"
-                android:textSize="16sp"
-                android:textColor="@android:color/white"/>
+                android:text="@string/bullet"
+                android:textColor="@android:color/white"
+                android:textSize="16sp" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="start"
                 android:maxWidth="240dp"
                 android:text="@string/tutorial_4_subtext_3"
-                android:layout_gravity="center"
                 android:textAlignment="textStart"
-                android:gravity="start"
-                android:textColor="@android:color/white"
-                />
+                android:textColor="@android:color/white" />
 
         </LinearLayout>
 
     </LinearLayout>
 
-</LinearLayout>
+</android.support.constraint.ConstraintLayout>

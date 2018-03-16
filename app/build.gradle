@@ -99,6 +99,7 @@ dependencies {
     kapt "com.google.dagger:dagger-android-processor:$DAGGER_VERSION"
 
     compile 'com.borjabravo:readmoretextview:2.1.0'
+    compile 'com.android.support.constraint:constraint-layout:1.0.2'
 }
 
 android {
