@@ -8,6 +8,7 @@ import java.io.InputStreamReader;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
@@ -99,14 +100,24 @@ public class NearbyPlaces {
                 continue;
             }
 
+
+            // Fields: ["Point(153.073 -27.6111)"^^<http://www.opengis.net/ont/geosparql#wktLiteral>, <http://www.wikidata.org/entity/Q7271010>, "Queensland State Archives"@en, <http://www.wikidata.org/entity/Q327333>, "government agency"@en, , , Images from the Queensland State Archives, <https://en.wikipedia.org/wiki/Queensland_State_Archives>, <https://commons.wikimedia.org/wiki/Category:Images_from_the_Queensland_State_Archives>
+             // Produces: 02-11 21:32:45.015: V/NearbyPlaces(9300): Name: Queensland State Archives, type: government agency, category: Images from the Queensland State Archives, wikipediaSitelink: <https://en.wikipedia.org/wiki/Queensland_State_Archives>, commonsSitelink: <https://commons.wikimedia.org/wiki/Category:Images_from_the_Queensland_State_Archives>
+
+             //TODO: What about items with more than 1 Commons category??? Might need to rearrange categories to the end of the string
+
             String[] fields = line.split("\t");
+            Timber.v("Fields: " + Arrays.toString(fields));
             String point = fields[0];
+            String wikiDataLink = Utils.stripLocalizedString(fields[1]);
             String name = Utils.stripLocalizedString(fields[2]);
             String type = Utils.stripLocalizedString(fields[4]);
-            String wikipediaSitelink = Utils.stripLocalizedString(fields[7]);
-            String commonsSitelink = Utils.stripLocalizedString(fields[8]);
-            String wikiDataLink = Utils.stripLocalizedString(fields[1]);
             String icon = fields[5];
+            String category = Utils.stripLocalizedString(fields[7]);
+            String wikipediaSitelink = Utils.stripLocalizedString(fields[8]);
+            String commonsSitelink = Utils.stripLocalizedString(fields[9]);
+
+            Timber.v("Name: " + name + ", type: " + type + ", category: " + category + ", wikipediaSitelink: " + wikipediaSitelink + ", commonsSitelink: " + commonsSitelink);
 
             double latitude;
             double longitude;
@@ -128,6 +139,7 @@ public class NearbyPlaces {
                     type, // details
                     Uri.parse(icon),
                     new LatLng(latitude, longitude, 0),
+                    category,
                     new Sitelinks.Builder()
                             .setWikipediaLink(wikipediaSitelink)
                             .setCommonsLink(commonsSitelink)
