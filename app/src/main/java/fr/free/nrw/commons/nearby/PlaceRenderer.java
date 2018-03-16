@@ -140,6 +140,7 @@ public class PlaceRenderer extends Renderer<Place> {
 
     @Override
     public void render() {
+        //FIXME: injector() method has been removed from CommonsApplication.java
         ((CommonsApplication) getContext().getApplicationContext()).injector().inject(this);
         place = getContent();
         tvName.setText(place.name);
