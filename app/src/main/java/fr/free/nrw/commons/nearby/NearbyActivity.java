@@ -274,7 +274,7 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
         LatLng lastLocation = locationManager.getLastLocation();
         if (curLatLang != null && curLatLang.equals(lastLocation)) { //refresh view only if location has changed
             if (isHardRefresh) {
-                ViewUtil.showLongToast(this, R.string.nearby_location_has_not_changed);
+                ViewUtil.showSnackbar(findViewById(R.id.container), R.string.nearby_location_has_not_changed);
             }
             return;
         }
@@ -301,9 +301,7 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
         String gsonCurLatLng = gson.toJson(curLatLang);
 
         if (placeList.size() == 0) {
-            int duration = Toast.LENGTH_SHORT;
-            Toast toast = Toast.makeText(this, R.string.no_nearby, duration);
-            toast.show();
+            ViewUtil.showSnackbar(findViewById(R.id.container), R.string.no_nearby);
         }
 
         bundle.clear();

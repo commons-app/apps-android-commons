@@ -26,6 +26,7 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 import butterknife.ButterKnife;
+import fr.free.nrw.commons.BuildConfig;
 import fr.free.nrw.commons.HandlerService;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.R;
@@ -139,7 +140,11 @@ public  class       ContributionsActivity
         requestAuthToken();
         initDrawer();
         setTitle(getString(R.string.title_activity_contributions));
-        setUploadCount();
+
+        if(!BuildConfig.FLAVOR.equalsIgnoreCase("beta")){
+            setUploadCount();
+        }
+
     }
 
     @Override
@@ -278,6 +283,12 @@ public  class       ContributionsActivity
                         t -> Timber.e(t, "Fetching upload count failed")
                 ));
     }
+
+    public void betaSetUploadCount(int betaUploadCount){
+        getSupportActionBar().setSubtitle(getResources()
+                .getQuantityString(R.plurals.contributions_subtitle, betaUploadCount, betaUploadCount));
+    }
+
 
     @Override
     public void notifyDatasetChanged() {

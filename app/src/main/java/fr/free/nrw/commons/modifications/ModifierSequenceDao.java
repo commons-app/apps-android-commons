@@ -54,12 +54,12 @@ public class ModifierSequenceDao {
         // Hardcoding column positions!
         ModifierSequence ms;
         try {
-            ms = new ModifierSequence(Uri.parse(cursor.getString(1)),
-                    new JSONObject(cursor.getString(2)));
+            ms = new ModifierSequence(Uri.parse(cursor.getString(cursor.getColumnIndex(Table.COLUMN_MEDIA_URI))),
+                    new JSONObject(cursor.getString(cursor.getColumnIndex(Table.COLUMN_DATA))));
         } catch (JSONException e) {
             throw new RuntimeException(e);
         }
-        ms.setContentUri( ModificationsContentProvider.uriForId(cursor.getInt(0)));
+        ms.setContentUri( ModificationsContentProvider.uriForId(cursor.getInt(cursor.getColumnIndex(Table.COLUMN_ID))));
 
         return ms;
     }

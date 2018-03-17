@@ -1,6 +1,7 @@
 package fr.free.nrw.commons.notification;
 
 import android.annotation.SuppressLint;
+import android.app.FragmentManager;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
@@ -12,7 +13,6 @@ import android.widget.Toast;
 
 import com.pedrogomez.renderers.RVRendererAdapter;
 
-import java.util.Collections;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -39,12 +39,16 @@ public class NotificationActivity extends NavigationBaseActivity {
 
     @Inject NotificationController controller;
 
+    private static final String TAG_NOTIFICATION_WORKER_FRAGMENT = "NotificationWorkerFragment";
+    private NotificationWorkerFragment mNotificationWorkerFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_notification);
         ButterKnife.bind(this);
+        mNotificationWorkerFragment = (NotificationWorkerFragment) getFragmentManager()
+                                      .findFragmentByTag(TAG_NOTIFICATION_WORKER_FRAGMENT);
         initListView();
         initDrawer();
     }
@@ -60,14 +64,18 @@ public class NotificationActivity extends NavigationBaseActivity {
     private void addNotifications() {
         Timber.d("Add notifications");
 
-        Observable.fromCallable(() -> controller.getNotifications())
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(notificationList -> {
-                    Collections.reverse(notificationList);
-                    Timber.d("Number of notifications is %d", notificationList.size());
-                    setAdapter(notificationList);
-                }, throwable -> Timber.e(throwable, "Error occurred while loading notifications"));
+        if(mNotificationWorkerFragment == null){
+            Observable.fromCallable(() -> controller.getNotifications())
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe(notificationList -> {
+                        Timber.d("Number of notifications is %d", notificationList.size());
+                        initializeAndSetNotificationList(notificationList);
+                        setAdapter(notificationList);
+                    }, throwable -> Timber.e(throwable, "Error occurred while loading notifications"));
+        } else {
+            setAdapter(mNotificationWorkerFragment.getNotificationList());
+        }
     }
 
     private void handleUrl(String url) {
@@ -97,5 +105,13 @@ public class NotificationActivity extends NavigationBaseActivity {
         Intent intent = new Intent(context, NotificationActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
         context.startActivity(intent);
+    }
+
+    private void initializeAndSetNotificationList(List<Notification> notificationList){
+        FragmentManager fm = getFragmentManager();
+        mNotificationWorkerFragment = new NotificationWorkerFragment();
+        fm.beginTransaction().add(mNotificationWorkerFragment, TAG_NOTIFICATION_WORKER_FRAGMENT)
+                .commit();
+        mNotificationWorkerFragment.setNotificationList(notificationList);
     }
 }

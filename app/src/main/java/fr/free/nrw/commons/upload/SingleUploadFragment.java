@@ -101,6 +101,14 @@ public class SingleUploadFragment extends CommonsDaggerSupportFragment {
         View rootView = inflater.inflate(R.layout.fragment_single_upload, container, false);
         ButterKnife.bind(this, rootView);
 
+        Intent activityIntent = getActivity().getIntent();
+        if (activityIntent.hasExtra("title")) {
+            titleEdit.setText(activityIntent.getStringExtra("title"));
+        }
+        if (activityIntent.hasExtra("description")) {
+            descEdit.setText(activityIntent.getStringExtra("description"));
+        }
+
         ArrayList<String> licenseItems = new ArrayList<>();
         licenseItems.add(getString(R.string.license_name_cc0));
         licenseItems.add(getString(R.string.license_name_cc_by));

@@ -37,6 +37,7 @@ import javax.inject.Named;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import fr.free.nrw.commons.BuildConfig;
 import fr.free.nrw.commons.PageTitle;
 import fr.free.nrw.commons.R;
@@ -82,6 +83,9 @@ public class LoginActivity extends AccountAuthenticatorActivity {
     ProgressDialog progressDialog;
     private AppCompatDelegate delegate;
     private LoginTextWatcher textWatcher = new LoginTextWatcher();
+
+    private Boolean loginCurrentlyInProgress = false;
+    private static final String LOGING_IN = "logingIn";
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -132,6 +136,10 @@ public class LoginActivity extends AccountAuthenticatorActivity {
         Utils.handleWebUrl(this, Uri.parse(BuildConfig.FORGOT_PASSWORD_URL));
     }
 
+    @OnClick(R.id.about_privacy_policy)
+    void onPrivacyPolicyClicked() {
+        Utils.handleWebUrl(this,Uri.parse("https://github.com/commons-app/apps-android-commons/wiki/Privacy-policy\\"));
+    }
 
     public void hideKeyboard(View view) {
         InputMethodManager inputMethodManager =(InputMethodManager)this.getSystemService(Activity.INPUT_METHOD_SERVICE);
@@ -175,6 +183,7 @@ public class LoginActivity extends AccountAuthenticatorActivity {
     }
 
     private void performLogin() {
+        loginCurrentlyInProgress = true;
         Timber.d("Login to start!");
         final String username = canonicializeUsername(usernameEdit.getText().toString());
         final String password = passwordEdit.getText().toString();
@@ -205,6 +214,7 @@ public class LoginActivity extends AccountAuthenticatorActivity {
         if (result.equals("PASS")) {
             handlePassResult(username, password);
         } else {
+            loginCurrentlyInProgress = false;
             handleOtherResults(result);
         }
     }
@@ -325,6 +335,21 @@ public class LoginActivity extends AccountAuthenticatorActivity {
     @NonNull
     public MenuInflater getMenuInflater() {
         return getDelegate().getMenuInflater();
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putBoolean(LOGING_IN, loginCurrentlyInProgress);
+    }
+
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+        loginCurrentlyInProgress = savedInstanceState.getBoolean(LOGING_IN, false);
+        if(loginCurrentlyInProgress){
+            performLogin();
+        }
     }
 
     public void askUserForTwoFactorAuth() {
