@@ -252,13 +252,13 @@
   <string name="nearby_wikidata">WIKIDATA</string>
   <string name="nearby_wikipedia">WIKIPEDIA</string>
   <string name="nearby_commons">COMMONS</string>
-
   <string name="about_rate_us"><![CDATA[<u>Rate us</u>]]></string>
   <string name="about_faq"><![CDATA[<u>FAQ</u>]]></string>
   <string name="welcome_skip_button">Skip Tutorial</string>
   
   <string name="no_internet">Internet unavailable</string>
   <string name="internet_established">Internet available</string>
+
   <string name="error_notifications">Error fetching notifications</string>
   <string name="no_notifications">No notifications found</string>
 

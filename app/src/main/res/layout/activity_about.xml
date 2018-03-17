@@ -158,9 +158,10 @@
                 style="?android:textAppearanceSmall"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/large_gap"
-                android:alpha="0.2"
-                android:gravity="center" />
+                android:textColor="@color/primaryColor"
+                android:layout_marginTop="@dimen/standard_gap"
+                android:text="@string/about_upload_to"
+                android:gravity="center"/>
 
         </LinearLayout>
         </RelativeLayout>
