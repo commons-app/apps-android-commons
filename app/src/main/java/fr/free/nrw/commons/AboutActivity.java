@@ -126,6 +126,7 @@ public class AboutActivity extends NavigationBaseActivity {
                     public void onClick(DialogInterface dialog, int which) {
                         String languageSelected = spinner.getSelectedItem().toString();
                         TokensTranslations tokensTranslations = new TokensTranslations();
+                        tokensTranslations.initailize();
                         String token = tokensTranslations.getTranslationToken(languageSelected);
                         Utils.handleWebUrl(AboutActivity.this,Uri.parse("https://translatewiki.net/w/i.php?title=Special:Translate&language="+token+"&group=commons-android-strings&filter=%21translated&action=translate ?"));
                     }
