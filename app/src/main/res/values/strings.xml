@@ -255,18 +255,14 @@
   <string name="about_rate_us"><![CDATA[<u>Rate us</u>]]></string>
   <string name="about_faq"><![CDATA[<u>FAQ</u>]]></string>
   <string name="welcome_skip_button">Skip Tutorial</string>
-  
   <string name="no_internet">Internet unavailable</string>
   <string name="internet_established">Internet available</string>
-
   <string name="error_notifications">Error fetching notifications</string>
   <string name="no_notifications">No notifications found</string>
-
   <string name="about_translate"><![CDATA[<u>Translate</u>]]></string>
   <string name="about_translate_title">Languages</string>
   <string name="about_translate_message">Select the language that you would like to submit translations for</string>
   <string name="about_translate_proceed">Proceed</string>
   <string name="about_translate_cancel">Cancel</string>
   <string name="retry">Retry</string>
-
 </resources>
