@@ -1,10 +1,10 @@
 package fr.free.nrw.commons.delete;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.AsyncTask;
-import android.widget.Button;
-import android.widget.Toast;
-
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Locale;
@@ -12,14 +12,19 @@ import java.util.Locale;
 import javax.inject.Inject;
 
 import fr.free.nrw.commons.Media;
+import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.auth.SessionManager;
 import fr.free.nrw.commons.di.ApplicationlessInjection;
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
 import timber.log.Timber;
 
-import static android.view.View.GONE;
+import static android.support.v4.content.ContextCompat.startActivity;
 
-public class DeleteTask extends AsyncTask<Void, Void, Boolean> {
+public class DeleteTask extends AsyncTask<Void, Void, Integer> {
+
+    private static final int SUCCESS = 0;
+    private static final int FAILED = -1;
+    private static final int ALREADY_DELETED = -2;
 
     @Inject MediaWikiApi mwApi;
     @Inject SessionManager sessionManager;
@@ -43,7 +48,7 @@ public class DeleteTask extends AsyncTask<Void, Void, Boolean> {
     }
 
     @Override
-    protected Boolean doInBackground(Void ...voids) {
+    protected Integer doInBackground(Void ...voids) {
         String editToken;
         String authCookie;
         String summary = "Nominating " + media.getFilename() +" for deletion.";
@@ -51,15 +56,25 @@ public class DeleteTask extends AsyncTask<Void, Void, Boolean> {
         authCookie = sessionManager.getAuthCookie();
         mwApi.setAuthCookie(authCookie);
 
+        try{
+            if (mwApi.pageExists("Commons:Deletion_requests/"+media.getFilename())){
+                return ALREADY_DELETED;
+            }
+        }
+        catch (Exception e) {
+            Timber.d(e.getMessage());
+            return FAILED;
+        }
+
         try {
             editToken = mwApi.getEditToken();
         }
         catch (Exception e){
             Timber.d(e.getMessage());
-            return false;
+            return FAILED;
         }
         if (editToken.equals("+\\")) {
-            return false;
+            return FAILED;
         }
 
         Calendar calendar = Calendar.getInstance();
@@ -75,7 +90,7 @@ public class DeleteTask extends AsyncTask<Void, Void, Boolean> {
         }
         catch (Exception e) {
             Timber.d(e.getMessage());
-            return false;
+            return FAILED;
         }
 
         String subpageString = "=== [[:" + media.getFilename() + "]] ===\n" +
@@ -83,11 +98,11 @@ public class DeleteTask extends AsyncTask<Void, Void, Boolean> {
                 " ~~~~";
         try{
             mwApi.edit(editToken,subpageString+"\n",
-                    "Commons:Deletion requests/"+media.getFilename(),summary);
+                    "Commons:Deletion_requests/"+media.getFilename(),summary);
         }
         catch (Exception e) {
             Timber.d(e.getMessage());
-            return false;
+            return FAILED;
         }
 
         String logPageString = "\n{{Commons:Deletion requests/" + media.getFilename() +
@@ -96,11 +111,11 @@ public class DeleteTask extends AsyncTask<Void, Void, Boolean> {
         String date = sdf.format(calendar.getTime());
         try{
             mwApi.appendEdit(editToken,logPageString+"\n",
-                    "Commons:Deletion requests/"+date,summary);
+                    "Commons:Deletion_requests/"+date,summary);
         }
         catch (Exception e) {
             Timber.d(e.getMessage());
-            return false;
+            return FAILED;
         }
 
         String userPageString = "\n{{subst:idw|" + media.getFilename() +
@@ -111,20 +126,49 @@ public class DeleteTask extends AsyncTask<Void, Void, Boolean> {
         }
         catch (Exception e) {
             Timber.d(e.getMessage());
-            return false;
+            return FAILED;
         }
-        return true;
+        return SUCCESS;
     }
 
     @Override
-    protected void onPostExecute(Boolean result) {
-        String toastText = "";
-        if (result) {
-            toastText = "Successfully requested deletion.";
+    protected void onPostExecute(Integer result) {
+        String message = "";
+        String title = "";
+        switch (result){
+            case SUCCESS:
+                title = "Success";
+                message = "Successfully nominated " + media.getDisplayTitle() + " deletion.\n" +
+                        "Check the webpage for more details";
+                break;
+            case FAILED:
+                title = "Failed";
+                message = "Could not request deletion. Something went wrong.";
+                break;
+            case ALREADY_DELETED:
+                title = "Already Nominated";
+                message = media.getDisplayTitle() + " has already been nominated for deletion.\n" +
+                        "Check the webpage for more details";
+                break;
         }
-        else{
-            toastText = "Could not request deletion.";
-        }
-        Toast.makeText(context, toastText, Toast.LENGTH_SHORT).show();
+        AlertDialog alert;
+        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        builder.setTitle(title);
+        builder.setMessage(message);
+        builder.setCancelable(true);
+        builder.setPositiveButton(
+                R.string.ok,
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {}
+                });
+        builder.setNeutralButton(R.string.view_browser,
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        Intent browserIntent = new Intent(Intent.ACTION_VIEW, media.getFilePageTitle().getMobileUri());
+                        startActivity(context,browserIntent,null);
+                    }
+                });
+        alert = builder.create();
+        alert.show();
     }
 }

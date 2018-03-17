@@ -28,6 +28,8 @@ public interface MediaWikiApi {
 
     boolean fileExistsWithName(String fileName) throws IOException;
 
+    boolean pageExists(String pageName) throws IOException;
+
     String findThumbnailByFilename(String filename) throws IOException;
 
     boolean logEvents(LogBuilder[] logBuilders);

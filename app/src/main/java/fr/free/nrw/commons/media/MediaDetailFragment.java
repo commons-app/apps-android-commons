@@ -15,6 +15,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -298,58 +299,48 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
         }
         if (delete.getVisibility()==View.VISIBLE){
             delete.setOnClickListener(v -> {
-                AlertDialog alert;
-                AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-                builder.setMessage("Sure you want to delete?");
-                builder.setCancelable(true);
-                builder.setPositiveButton(
-                        R.string.yes,
-                        new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int id) {
-                                AlertDialog.Builder alert = new AlertDialog.Builder(getActivity());
-                                alert.setTitle("Why should this file be deleted?");
-                                final EditText input = new EditText(getActivity());
-                                alert.setView(input);
-                                alert.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
-                                    public void onClick(DialogInterface dialog, int whichButton) {
-                                        String reason = input.getText().toString();
-                                        DeleteTask deleteTask = new DeleteTask(getActivity(), media, reason);
-                                        deleteTask.execute();
-                                    }
-                                });
-                                alert.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
-                                    public void onClick(DialogInterface dialog, int whichButton) {}
-                                });
-                                AlertDialog d = alert.create();
-                                input.addTextChangedListener(new TextWatcher() {
-                                    private void handleText() {
-                                        final Button okButton = d.getButton(AlertDialog.BUTTON_POSITIVE);
-                                        if(input.getText().length() == 0) {
-                                            okButton.setEnabled(false);
-                                        } else {
-                                            okButton.setEnabled(true);
-                                        }
-                                    }
-                                    @Override
-                                    public void afterTextChanged(Editable arg0) {
-                                        handleText();
-                                    }
-                                    @Override
-                                    public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
-                                    @Override
-                                    public void onTextChanged(CharSequence s, int start, int before, int count) {}
-                                });
-                                d.show();
-                                d.getButton(AlertDialog.BUTTON_POSITIVE).setEnabled(false);
-                            }
-                        });
-                builder.setNegativeButton(
-                        R.string.no,
-                        new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int id) {}
-                        });
-                alert = builder.create();
-                alert.show();
+                AlertDialog.Builder alert = new AlertDialog.Builder(getActivity());
+                alert.setMessage("Why should this file be deleted?");
+                final EditText input = new EditText(getActivity());
+                alert.setView(input);
+                input.requestFocus();
+                alert.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int whichButton) {
+                        String reason = input.getText().toString();
+                        DeleteTask deleteTask = new DeleteTask(getActivity(), media, reason);
+                        deleteTask.execute();
+                    }
+                });
+                alert.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int whichButton) {
+                    }
+                });
+                AlertDialog d = alert.create();
+                input.addTextChangedListener(new TextWatcher() {
+                    private void handleText() {
+                        final Button okButton = d.getButton(AlertDialog.BUTTON_POSITIVE);
+                        if (input.getText().length() == 0) {
+                            okButton.setEnabled(false);
+                        } else {
+                            okButton.setEnabled(true);
+                        }
+                    }
+
+                    @Override
+                    public void afterTextChanged(Editable arg0) {
+                        handleText();
+                    }
+
+                    @Override
+                    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                    }
+
+                    @Override
+                    public void onTextChanged(CharSequence s, int start, int before, int count) {
+                    }
+                });
+                d.show();
+                d.getButton(AlertDialog.BUTTON_POSITIVE).setEnabled(false);
             });
         }
     }
