@@ -16,6 +16,8 @@ import android.support.design.widget.BottomSheetBehavior;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.FloatingActionButton;
 
+import android.util.Log;
+import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -508,22 +510,54 @@ public class NearbyMapFragment extends DaggerFragment {
     }
 
     private void hideFAB() {
-        //get rid of anchors
-        //Somehow this was the only way https://stackoverflow.com/questions/32732932/floatingactionbutton-visible-for-sometime-even-if-visibility-is-set-to-gone
-        CoordinatorLayout.LayoutParams p = (CoordinatorLayout.LayoutParams) fabPlus
-                .getLayoutParams();
-        p.setAnchorId(View.NO_ID);
-        fabPlus.setLayoutParams(p);
+
+        removeAnchorFromFABs(fabPlus);
         fabPlus.hide();
+
+        removeAnchorFromFABs(fabCamera);
         fabCamera.hide();
+
+        removeAnchorFromFABs(fabGallery);
         fabGallery.hide();
+
+    }
+
+    /*
+    * We are not able to hide FABs without removing anchors, this method removes anchors
+    * */
+    private void removeAnchorFromFABs(FloatingActionButton floatingActionButton) {
+        //get rid of anchors
+        //Somehow this was the only way https://stackoverflow.com/questions/32732932
+        // /floatingactionbutton-visible-for-sometime-even-if-visibility-is-set-to-gone
+        CoordinatorLayout.LayoutParams param = (CoordinatorLayout.LayoutParams) floatingActionButton
+                .getLayoutParams();
+        param.setAnchorId(View.NO_ID);
+        // If we don't set them to zero, then they become visible for a moment on upper left side
+        param.width = 0;
+        param.height = 0;
+        floatingActionButton.setLayoutParams(param);
     }
 
     private void showFAB() {
-        CoordinatorLayout.LayoutParams p = (CoordinatorLayout.LayoutParams) fabPlus.getLayoutParams();
-        p.setAnchorId(getActivity().findViewById(R.id.bottom_sheet_details).getId());
-        fabPlus.setLayoutParams(p);
+
+        addAnchorToFABs(fabPlus, getActivity().findViewById(R.id.bottom_sheet_details).getId());
         fabPlus.show();
+
+        addAnchorToFABs(fabGallery, getActivity().findViewById(R.id.empty_view).getId());
+
+        addAnchorToFABs(fabCamera, getActivity().findViewById(R.id.empty_view1).getId());
+
+    }
+
+    /*
+    * Add amnchors back before making them visible again.
+    * */
+    private void addAnchorToFABs(FloatingActionButton floatingActionButton, int anchorID) {
+        CoordinatorLayout.LayoutParams params = new CoordinatorLayout.LayoutParams
+                (ViewGroup.LayoutParams.WRAP_CONTENT,ViewGroup.LayoutParams.WRAP_CONTENT);
+        params.setAnchorId(anchorID);
+        params.anchorGravity = Gravity.TOP|Gravity.RIGHT|Gravity.END;
+        floatingActionButton.setLayoutParams(params);
     }
 
     private void passInfoToSheet(Place place) {
@@ -554,25 +588,28 @@ public class NearbyMapFragment extends DaggerFragment {
         distance.setText(place.distance.toString());
 
         fabCamera.setOnClickListener(view -> {
-            Timber.d("Camera button tapped. Image title: " + place.getName() + "Image desc: " + place.getLongDescription());
-            controller = new ContributionController(this);
+            if (fabCamera.isShown()) {
+                Timber.d("Camera button tapped. Image title: " + place.getName() + "Image desc: " + place.getLongDescription());
+                controller = new ContributionController(this);
 
-            DirectUpload directUpload = new DirectUpload(this, controller);
-            storeSharedPrefs();
-            directUpload.initiateCameraUpload();
+                DirectUpload directUpload = new DirectUpload(this, controller);
+                storeSharedPrefs();
+                directUpload.initiateCameraUpload();
+            }
         });
 
         fabGallery.setOnClickListener(view -> {
-            Timber.d("Gallery button tapped. Image title: " + place.getName() + "Image desc: " + place.getLongDescription());
-            controller = new ContributionController(this);
+            if (fabGallery.isShown()) {
+                Timber.d("Gallery button tapped. Image title: " + place.getName() + "Image desc: " + place.getLongDescription());
+                controller = new ContributionController(this);
 
-            DirectUpload directUpload = new DirectUpload(this, controller);
-            storeSharedPrefs();
-            directUpload.initiateGalleryUpload();
+                DirectUpload directUpload = new DirectUpload(this, controller);
+                storeSharedPrefs();
+                directUpload.initiateGalleryUpload();
 
-            //TODO: App crashes after image upload completes
-            //TODO: Handle onRequestPermissionsResult
-
+                //TODO: App crashes after image upload completes
+                //TODO: Handle onRequestPermissionsResult
+            }
         });
     }
 
@@ -627,20 +664,22 @@ public class NearbyMapFragment extends DaggerFragment {
     }
 
     private void animateFAB(boolean isFabOpen) {
-        if (isFabOpen) {
-            fabPlus.startAnimation(rotate_backward);
-            fabCamera.startAnimation(fab_close);
-            fabGallery.startAnimation(fab_close);
-            fabCamera.hide();
-            fabGallery.hide();
-        } else {
-            fabPlus.startAnimation(rotate_forward);
-            fabCamera.startAnimation(fab_open);
-            fabGallery.startAnimation(fab_open);
-            fabCamera.show();
-            fabGallery.show();
+        if (fabPlus.isShown()){
+            if (isFabOpen) {
+                fabPlus.startAnimation(rotate_backward);
+                fabCamera.startAnimation(fab_close);
+                fabGallery.startAnimation(fab_close);
+                fabCamera.hide();
+                fabGallery.hide();
+            } else {
+                fabPlus.startAnimation(rotate_forward);
+                fabCamera.startAnimation(fab_open);
+                fabGallery.startAnimation(fab_open);
+                fabCamera.show();
+                fabGallery.show();
+            }
+            this.isFabOpen=!isFabOpen;
         }
-        this.isFabOpen=!isFabOpen;
     }
 
     private void closeFabs(boolean isFabOpen){
