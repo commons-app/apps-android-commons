@@ -28,6 +28,7 @@ import butterknife.ButterKnife;
 import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.contributions.ContributionController;
+import fr.free.nrw.commons.di.ApplicationlessInjection;
 import timber.log.Timber;
 
 public class PlaceRenderer extends Renderer<Place> {
@@ -141,7 +142,9 @@ public class PlaceRenderer extends Renderer<Place> {
     @Override
     public void render() {
         //FIXME: injector() method has been removed from CommonsApplication.java
-        ((CommonsApplication) getContext().getApplicationContext()).injector().inject(this);
+        ApplicationlessInjection.getInstance(getContext().getApplicationContext())
+                .getCommonsApplicationComponent().inject(this);
+        //((CommonsApplication) getContext().getApplicationContext()).injector().inject(this);
         place = getContent();
         tvName.setText(place.name);
         String descriptionText = place.getLongDescription();
