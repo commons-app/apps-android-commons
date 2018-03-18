@@ -70,19 +70,11 @@ public class CategorizationFragment extends CommonsDaggerSupportFragment {
     @BindView(R.id.categoriesExplanation)
     TextView categoriesSkip;
 
-    @Inject
-    MediaWikiApi mwApi;
-    @Inject
-    @Named("default_preferences")
-    SharedPreferences prefs;
-    @Inject
-    @Named("prefs")
-    SharedPreferences prefsPrefs;
-    @Inject
-    @Named("direct_nearby_upload_prefs")
-    SharedPreferences directPrefs;
-    @Inject
-    CategoryDao categoryDao;
+    @Inject MediaWikiApi mwApi;
+    @Inject @Named("default_preferences") SharedPreferences prefs;
+    @Inject @Named("prefs") SharedPreferences prefsPrefs;
+    @Inject @Named("direct_nearby_upload_prefs") SharedPreferences directPrefs;
+    @Inject CategoryDao categoryDao;
 
     private RVRendererAdapter<CategoryItem> categoriesAdapter;
     private OnCategoriesSaveHandler onCategoriesSaveHandler;
