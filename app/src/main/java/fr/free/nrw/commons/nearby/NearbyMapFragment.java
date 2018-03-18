@@ -270,7 +270,7 @@ public class NearbyMapFragment extends DaggerFragment {
                         .target(new LatLng(curLatLng.getLatitude() - CAMERA_TARGET_SHIFT_FACTOR,
                                 curLatLng.getLongitude())) // Sets the new camera target above
                         // current to make it visible when sheet is expanded
-                        .zoom(mapboxMap.getCameraPosition().zoom) // Same zoom level
+                        .zoom(11) // Same zoom level
                         .build();
 
             } else {
