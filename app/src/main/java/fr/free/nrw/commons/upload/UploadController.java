@@ -195,7 +195,7 @@ public class UploadController {
             protected void onPostExecute(Contribution contribution) {
                 super.onPostExecute(contribution);
                 //Starts the upload. If commented out, user can proceed to next Fragment but upload doesn't happen
-                //uploadService.queue(UploadService.ACTION_UPLOAD_FILE, contribution);
+                uploadService.queue(UploadService.ACTION_UPLOAD_FILE, contribution);
                 onComplete.onUploadStarted(contribution);
             }
         }.executeOnExecutor(Executors.newFixedThreadPool(1)); // TODO remove this by using a sensible thread handling strategy
