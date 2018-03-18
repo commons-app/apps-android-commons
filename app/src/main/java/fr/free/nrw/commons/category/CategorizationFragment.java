@@ -271,16 +271,15 @@ public class CategorizationFragment extends CommonsDaggerSupportFragment {
                 .concatWith(titleCategories())
                 .concatWith(recentCategories())
                 .concatWith(directCategories());
-        //TODO: Add category suggestions for direct uploads here
     }
 
-    //TODO: Add category suggestions for direct uploads here
     private Observable<CategoryItem> directCategories() {
         String directCategory = directPrefs.getString("Category", "");
         Timber.d("Direct category found: " + directCategory);
-        //String[] myStringArray = {directCategory};
+
         List<String> categoryList = new ArrayList<>();
         categoryList.add(directCategory);
+
         return Observable.fromIterable(categoryList).map(name -> new CategoryItem(name, false));
     }
 
