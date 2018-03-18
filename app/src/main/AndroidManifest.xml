@@ -79,10 +79,6 @@
             android:parentActivityName=".contributions.ContributionsActivity" />
 
         <activity
-            android:name=".auth.SignupActivity"
-            android:label="@string/title_activity_signup" />
-
-        <activity
             android:name=".nearby.NearbyActivity"
             android:label="@string/title_activity_nearby"
             android:parentActivityName=".contributions.ContributionsActivity" />

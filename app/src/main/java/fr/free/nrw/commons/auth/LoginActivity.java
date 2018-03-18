@@ -50,6 +50,7 @@ import fr.free.nrw.commons.ui.widget.HtmlTextView;
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
+import okhttp3.internal.Util;
 import timber.log.Timber;
 
 import static android.view.KeyEvent.KEYCODE_ENTER;
@@ -117,7 +118,10 @@ public class LoginActivity extends AccountAuthenticatorActivity {
         passwordEdit.setOnEditorActionListener(newLoginInputActionListener());
 
         loginButton.setOnClickListener(view -> performLogin());
-        signupButton.setOnClickListener(view -> signUp());
+        signupButton.setOnClickListener(view -> {
+            Utils.handleWebUrl(this,Uri.parse(BuildConfig.SIGNUP_LANDING_URL));
+        }
+        );
 
         forgotPasswordText.setOnClickListener(view -> forgotPassword());
 
@@ -352,11 +356,6 @@ public class LoginActivity extends AccountAuthenticatorActivity {
     public void startMainActivity() {
         NavigationBaseActivity.startActivityWithFlags(this, ContributionsActivity.class, Intent.FLAG_ACTIVITY_CLEAR_TOP);
         finish();
-    }
-
-    private void signUp() {
-        Intent intent = new Intent(this, SignupActivity.class);
-        startActivity(intent);
     }
 
     private TextView.OnEditorActionListener newLoginInputActionListener() {
