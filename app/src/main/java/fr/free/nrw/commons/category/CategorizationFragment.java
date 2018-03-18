@@ -268,10 +268,21 @@ public class CategorizationFragment extends CommonsDaggerSupportFragment {
     }
 
     private Observable<CategoryItem> defaultCategories() {
-        return directCategories()
-                .concatWith(gpsCategories())
-                .concatWith(titleCategories())
-                .concatWith(recentCategories());
+
+        Observable<CategoryItem> directCat = directCategories();
+        if (hasDirectCategories) {
+            Timber.d("Image has direct Cat");
+            return directCat
+                    .concatWith(gpsCategories())
+                    .concatWith(titleCategories())
+                    .concatWith(recentCategories());
+        }
+        else {
+            Timber.d("Image has no direct Cat");
+            return gpsCategories()
+                    .concatWith(titleCategories())
+                    .concatWith(recentCategories());
+        }
     }
 
     private Observable<CategoryItem> directCategories() {
@@ -282,6 +293,7 @@ public class CategorizationFragment extends CommonsDaggerSupportFragment {
         if (!directCategory.equals("")) {
             hasDirectCategories = true;
             categoryList.add(directCategory);
+            Timber.d("DirectCat does not equal emptyString. Direct Cat list has " + categoryList);
         }
         return Observable.fromIterable(categoryList).map(name -> new CategoryItem(name, false));
     }
