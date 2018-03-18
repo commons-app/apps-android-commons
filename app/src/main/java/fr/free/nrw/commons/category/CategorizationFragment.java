@@ -89,6 +89,7 @@ public class CategorizationFragment extends CommonsDaggerSupportFragment {
     private HashMap<String, ArrayList<String>> categoriesCache;
     private List<CategoryItem> selectedCategories = new ArrayList<>();
     private TitleTextWatcher textWatcher = new TitleTextWatcher();
+    private boolean hasDirectCategories = false;
 
     private final CategoriesAdapterFactory adapterFactory = new CategoriesAdapterFactory(item -> {
         if (item.isSelected()) {
@@ -275,11 +276,13 @@ public class CategorizationFragment extends CommonsDaggerSupportFragment {
 
     private Observable<CategoryItem> directCategories() {
         String directCategory = directPrefs.getString("Category", "");
+        List<String> categoryList = new ArrayList<>();
         Timber.d("Direct category found: " + directCategory);
 
-        List<String> categoryList = new ArrayList<>();
-        categoryList.add(directCategory);
-
+        if (!directCategory.equals("")) {
+            hasDirectCategories = true;
+            categoryList.add(directCategory);
+        }
         return Observable.fromIterable(categoryList).map(name -> new CategoryItem(name, false));
     }
 
