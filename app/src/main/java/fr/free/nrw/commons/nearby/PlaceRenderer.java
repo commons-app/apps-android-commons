@@ -121,14 +121,12 @@ public class PlaceRenderer extends Renderer<Place> {
     }
 
     private void storeSharedPrefs() {
-        //FIXME: This line crashes on list, but not on map
         SharedPreferences.Editor editor = directPrefs.edit();
         Timber.d("directPrefs stored");
         editor.putString("Title", place.getName());
         editor.putString("Desc", place.getLongDescription());
         editor.putString("Category", place.getCategory());
         editor.apply();
-
     }
 
     private void closeLayout(LinearLayout buttonLayout){
@@ -141,10 +139,8 @@ public class PlaceRenderer extends Renderer<Place> {
 
     @Override
     public void render() {
-        //FIXME: injector() method has been removed from CommonsApplication.java
         ApplicationlessInjection.getInstance(getContext().getApplicationContext())
                 .getCommonsApplicationComponent().inject(this);
-        //((CommonsApplication) getContext().getApplicationContext()).injector().inject(this);
         place = getContent();
         tvName.setText(place.name);
         String descriptionText = place.getLongDescription();
