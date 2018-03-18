@@ -267,8 +267,8 @@ public class CategorizationFragment extends CommonsDaggerSupportFragment {
     }
 
     private Observable<CategoryItem> defaultCategories() {
-        return gpsCategories()
-                .concatWith(directCategories())
+        return directCategories()
+                .concatWith(gpsCategories())
                 .concatWith(titleCategories())
                 .concatWith(recentCategories());
     }
