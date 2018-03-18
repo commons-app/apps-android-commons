@@ -70,9 +70,19 @@ public class CategorizationFragment extends CommonsDaggerSupportFragment {
     @BindView(R.id.categoriesExplanation)
     TextView categoriesSkip;
 
-    @Inject MediaWikiApi mwApi;
-    @Inject @Named("default_preferences") SharedPreferences prefs;
-    @Inject CategoryDao categoryDao;
+    @Inject
+    MediaWikiApi mwApi;
+    @Inject
+    @Named("default_preferences")
+    SharedPreferences prefs;
+    @Inject
+    @Named("prefs")
+    SharedPreferences prefsPrefs;
+    @Inject
+    @Named("direct_nearby_upload_prefs")
+    SharedPreferences directPrefs;
+    @Inject
+    CategoryDao categoryDao;
 
     private RVRendererAdapter<CategoryItem> categoriesAdapter;
     private OnCategoriesSaveHandler onCategoriesSaveHandler;
@@ -127,7 +137,7 @@ public class CategorizationFragment extends CommonsDaggerSupportFragment {
     }
 
     public void hideKeyboard(View view) {
-        InputMethodManager inputMethodManager =(InputMethodManager)getActivity().getSystemService(Activity.INPUT_METHOD_SERVICE);
+        InputMethodManager inputMethodManager = (InputMethodManager) getActivity().getSystemService(Activity.INPUT_METHOD_SERVICE);
         inputMethodManager.hideSoftInputFromWindow(view.getWindowToken(), 0);
     }
 
@@ -222,7 +232,7 @@ public class CategorizationFragment extends CommonsDaggerSupportFragment {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
                         s -> categoriesAdapter.add(s),
-                         Timber::e,
+                        Timber::e,
                         () -> {
                             categoriesAdapter.notifyDataSetChanged();
                             categoriesSearchInProgress.setVisibility(View.GONE);
@@ -259,12 +269,21 @@ public class CategorizationFragment extends CommonsDaggerSupportFragment {
     private Observable<CategoryItem> defaultCategories() {
         return gpsCategories()
                 .concatWith(titleCategories())
-                .concatWith(recentCategories());
+                .concatWith(recentCategories())
+                .concatWith(directCategories());
         //TODO: Add category suggestions for direct uploads here
     }
 
     //TODO: Add category suggestions for direct uploads here
-    
+    private Observable<CategoryItem> directCategories() {
+        String directCategory = directPrefs.getString("Category", "");
+        Timber.d("Direct category found: " + directCategory);
+        //String[] myStringArray = {directCategory};
+        List<String> categoryList = new ArrayList<>();
+        categoryList.add(directCategory);
+        return Observable.fromIterable(categoryList).map(name -> new CategoryItem(name, false));
+    }
+
     private Observable<CategoryItem> gpsCategories() {
         return Observable.fromIterable(
                 MwVolleyApi.GpsCatExists.getGpsCatExists()
