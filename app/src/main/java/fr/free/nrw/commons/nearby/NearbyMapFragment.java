@@ -32,6 +32,8 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 import com.mapbox.mapboxsdk.Mapbox;
+import com.mapbox.mapboxsdk.annotations.Icon;
+import com.mapbox.mapboxsdk.annotations.IconFactory;
 import com.mapbox.mapboxsdk.annotations.Marker;
 import com.mapbox.mapboxsdk.annotations.MarkerOptions;
 import com.mapbox.mapboxsdk.annotations.PolygonOptions;
@@ -423,10 +425,14 @@ public class NearbyMapFragment extends DaggerFragment {
         if (currentLocationMarker != null) {
             currentLocationMarker.remove(); // Remove previous marker, we are not Hansel and Gretel
         }
+
+        Icon icon = IconFactory.getInstance(getContext()).fromResource(R.drawable.current_location_marker);
+
         MarkerOptions currentLocationMarkerOptions = new MarkerOptions()
                 .position(new LatLng(curLatLng.getLatitude(), curLatLng.getLongitude()));
-        currentLocationMarker = mapboxMap.addMarker(currentLocationMarkerOptions);
+        currentLocationMarkerOptions.setIcon(icon); // Set custom icon
 
+        currentLocationMarker = mapboxMap.addMarker(currentLocationMarkerOptions);
 
         List<LatLng> circle = createCircleArray(curLatLng.getLatitude(), curLatLng.getLongitude(),
                 curLatLng.getAccuracy() * 2, 100);
