@@ -1,10 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+  <string name="preference_category_appearance">Wygląd</string>
+  <string name="preference_category_general">Ogólne</string>
+  <string name="preference_category_feedback">Opinia</string>
+  <string name="preference_category_location">Lokalizacja</string>
   <string name="app_name">Commons</string>
+  <string name="bullet">•</string>
   <string name="menu_settings">Ustawienia</string>
   <string name="username">Nazwa użytkownika</string>
   <string name="password">Hasło</string>
   <string name="login">Zaloguj się</string>
+  <string name="forgot_password">Nie pamiętasz hasła?</string>
   <string name="signup">Zarejestruj się</string>
   <string name="logging_in_title">Logowanie</string>
   <string name="logging_in_message">Proszę czekać…</string>
@@ -75,8 +81,8 @@
   <string name="menu_about">O aplikacji</string>
   <string name="about_license" fuzzy="true">Oprogramowanie Open Source, wydane na licencji &lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/COPYING\"&gt;Apache License v2&lt;/a&gt;. Wikimedia Commons i jego logo są znakami towarowymi Wikimedia Foundation i są wykorzystywane za zgodą Wikimedia Foundation. Nie jesteśmy powiązani z Wikimedia Foundation.</string>
   <string name="about_improve" fuzzy="true">&lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;Kod źródłowy&lt;/a&gt; oraz &lt;a href=\"https://commons-app.github.io/\"&gt;strona internetowa&lt;/a&gt; na GitHub. Aby zgłosić błąd lub sugestię, utwórz nowe &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;zgłoszenie na GitHub&lt;/a&gt;.</string>
-  <string name="about_privacy_policy" fuzzy="true">&lt;a href=\"https://wikimediafoundation.org/wiki/Privacy_policy\"&gt;Polityka prywatności&lt;/a&gt;</string>
-  <string name="about_credits">&lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/CREDITS\"&gt;Twórcy&lt;/a&gt;</string>
+  <string name="about_privacy_policy">&lt;u&gt;Polityka prywatności&lt;/u&gt;</string>
+  <string name="about_credits">&lt;u&gt;Twórcy&lt;/u&gt;</string>
   <string name="title_activity_about">O aplikacji</string>
   <string name="menu_feedback">Wyślij opinię (przez e-mail)</string>
   <string name="no_email_client">Klient e-mail nie jest zainstalowany</string>
@@ -87,7 +93,7 @@
   <string name="menu_cancel_upload">Anuluj</string>
   <string name="share_license_summary">Ten obraz będzie udostępniany na licencji %1$s</string>
   <string name="menu_download">Pobieranie</string>
-  <string name="preference_license">Licencja</string>
+  <string name="preference_license">Domyślna licencja</string>
   <string name="use_previous">Użyj poprzedniego tytułu/opisu</string>
   <string name="allow_gps">Automatycznie uzyskaj bieżącą lokalizację</string>
   <string name="allow_gps_summary">Pobierz aktualną lokalizację, aby uzyskać propozycje kategorii, jeśli obraz nie zawiera znaczników geograficznych</string>
@@ -116,7 +122,10 @@
   <string name="tutorial_1_text">Wikimedia Commons przechowuje większość ilustracji wykorzystywanych w Wikipedii.</string>
   <string name="tutorial_1_subtext">Twoje ilustracje pomogą edukować ludzi na całym świecie!</string>
   <string name="tutorial_2_text">Możesz przesyłać zdjęcia lub obrazy stworzone samodzielnie przez Ciebie:</string>
-  <string name="tutorial_2_subtext">- Natura (kwiaty, zwierzęta, góry)\n- Przydatne przedmioty (rowery, dworce kolejowe)\n- Znani ludzie, których spotkałeś (burmistrz, olimpijczyk)</string>
+  <string name="tutorial_2_subtext">Obiekty naturalne (kwiaty, zwierzęta, góry)\n• Przydatne przedmioty (rowery, dworce kolejowe)\n• Znani ludzie, których spotkałeś (burmistrz, olimpijczyk)</string>
+  <string name="tutorial_2_subtext_1">Obiekty naturalne (kwiaty, zwierzęta, góry)</string>
+  <string name="tutorial_2_subtext_2">Przydatne obiekty (rowery, stacje kolejowe)</string>
+  <string name="tutorial_2_subtext_3">Znani ludzie, których spotkałeś (burmistrz, olimpijczyk)</string>
   <string name="tutorial_3_text">Prosimy NIE wysyłać:</string>
   <string name="tutorial_3_subtext">- Zdjęć przedstawiających siebie lub znajomych\n- Zdjęć pobranych z Internetu\n- Zrzutów ekranów płatnych aplikacji</string>
   <string name="tutorial_4_text">Przykład przesłania pliku:</string>
@@ -151,7 +160,6 @@
   <string name="media_detail_coordinates">Współrzędne</string>
   <string name="become_a_tester_title">Zostań beta-testerem</string>
   <string name="become_a_tester_description">Dołącz do kanału bety w Google Play i dostań wczesny dostęp do nowych funkcji i łatek</string>
-  <string name="use_wikidata">Użyj Wikidanych</string>
   <string name="_2fa_code">Kod 2FA</string>
   <string name="maximum_limit">Górna Granica</string>
   <string name="maximum_limit_alert">Nie można wyświetlić ponad 500</string>
@@ -179,10 +187,16 @@
   <string name="navigation_item_feedback">Opinie</string>
   <string name="navigation_item_logout">Wyloguj</string>
   <string name="navigation_item_info">Samouczek</string>
+  <string name="navigation_item_notification">Powiadomienia</string>
   <string name="no_description_found">nie znaleziono opisu</string>
   <string name="nearby_info_menu_wikidata_article">Element Wikidanych</string>
   <string name="title_info">Podaj krótką, opisową i unikalną nazwę, która będzie służyła jako nazwa pliku. Możesz używać prostego języka i spacji. Nie dodawaj rozszerzenia pliku.</string>
   <string name="login_to_your_account">Zaloguj się na swoje konto</string>
+  <string name="null_url">Błąd! Nie znaleziono adresu URL</string>
   <string name="notifications_welcome">Witamy w Wikimedia Commons, %1$s! Cieszymy się, że tu jesteś.</string>
+  <string name="notifications_thank_you_edit">Dziękujemy za dokonanie edycji</string>
   <string name="notifications_mention">%1$s wspomniał o Tobie w %2$s.</string>
+  <string name="toggle_view_button">Przełącz widok</string>
+  <string name="about_faq">Najczęściej zadawane pytania</string>
+  <string name="welcome_skip_button">Pomiń samouczek</string>
 </resources>

@@ -36,7 +36,7 @@
   <string name="menu_retry_upload">Дубора саъй кунед</string>
   <string name="menu_cancel_upload">Лағв</string>
   <string name="menu_download">Дарёфт</string>
-  <string name="preference_license">Иҷозатнома</string>
+  <string name="preference_license" fuzzy="true">Иҷозатнома</string>
   <string name="license_name_cc_by" fuzzy="true">CC Attribution 3.0</string>
   <string name="license_name_cc0">CC0</string>
   <string name="license_name_cc_by_sa_3_0">CC BY-SA 3.0</string>
@@ -62,7 +62,6 @@
   <string name="detail_license_empty">Иҷозатномаи ношинос</string>
   <string name="media_detail_license">Иҷозатнома</string>
   <string name="media_detail_coordinates">Координатҳо</string>
-  <string name="use_wikidata">Истифодаи Викидода</string>
   <string name="nearby_info_menu_wikidata_article">Унсури Викидода</string>
   <string name="error_while_cache">Хатогӣ ҳангоми кэшкунии тасвир</string>
 </resources>

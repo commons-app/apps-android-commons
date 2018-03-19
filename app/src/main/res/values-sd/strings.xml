@@ -71,7 +71,7 @@
   <string name="title_activity_settings">ترتيبون</string>
   <string name="title_activity_signup">کاتو کوليو</string>
   <string name="menu_about">بابت</string>
-  <string name="about_privacy_policy">&lt;a href=\"https://github.com/commons-app/apps-android-commons/wiki/Privacy-policy\"&gt;ذاتيات پاليسي&lt;/a&gt;</string>
+  <string name="about_privacy_policy" fuzzy="true">&lt;a href=\"https://github.com/commons-app/apps-android-commons/wiki/Privacy-policy\"&gt;ذاتيات پاليسي&lt;/a&gt;</string>
   <string name="title_activity_about">بابت</string>
   <string name="menu_feedback">پذيرائي موڪليو (برقٽپال ذريعي)</string>
   <string name="no_email_client">ڪوبہ برقٽپال ڪلائينٽ تنصيبيل ناھي</string>
@@ -82,7 +82,7 @@
   <string name="menu_cancel_upload">رد</string>
   <string name="share_license_summary">ھن عڪس کي %1$s جي تحت لائسنس ٿيندو</string>
   <string name="menu_download">لاھيو</string>
-  <string name="preference_license">لائسنس</string>
+  <string name="preference_license" fuzzy="true">لائسنس</string>
   <string name="use_previous">گذريل عنوان/تشريح استعمال ڪريو</string>
   <string name="allow_gps">خوبخود ھاڻوڪي مڪانيت وٺو</string>
   <string name="allow_gps_summary">ھاڻوڪي مڪانيت لھو زمرن جون تجويزون پيش ڪرڻ لاءِ جيڪڏھن عڪس تي جيوٽيگ ناھي لڳل</string>
@@ -111,7 +111,7 @@
   <string name="tutorial_1_text">وڪيپيڊيا تي استعمال ٿيندڙ گھڻن عڪسن جي وڪيميڊيا العام ميزباني ڪري ٿو.</string>
   <string name="tutorial_1_subtext">توھان جا عڪس سڄي دنيا جي ماڻھن کي تعليم يافتا ڪرڻ ۾ مدد ڪن ٿا</string>
   <string name="tutorial_2_text">براءِ مھرباني اھي تصويرون چاڙھيو مڪمل طور تي توھان پاران ڪڍيل يا تخليقيل آھن:</string>
-  <string name="tutorial_2_subtext">u2022 قدرتي شيون (گل، جانور، جبل) \nu2022 استعمال جوڳيون شيون (سائيڪلون، ٽرين اسٽيشنون) \nu2022 مشھور شخصيتون (توھان جو ناظم، اولمپڪ رانديگر جنھن سان توھان مليئو)</string>
+  <string name="tutorial_2_subtext" fuzzy="true">u2022 قدرتي شيون (گل، جانور، جبل) \nu2022 استعمال جوڳيون شيون (سائيڪلون، ٽرين اسٽيشنون) \nu2022 مشھور شخصيتون (توھان جو ناظم، اولمپڪ رانديگر جنھن سان توھان مليئو)</string>
   <string name="tutorial_3_text">براءِ مھرباني نہ چاڙھيو:</string>
   <string name="tutorial_3_subtext">u2022 سيلفيون يا پنھنجي دوستن جو تصويرون \nu2022 اھي تصويرون جيڪي توھان انٽرنيٽ تان ڊائونلوڊ ڪيون \nu2022 پروپرائيٽري ايپس جا اسڪرين شاٽ</string>
   <string name="tutorial_4_text">مثال چاڙھ:</string>
@@ -142,7 +142,6 @@
   <string name="media_detail_uploaded_date">چاڙھيل تاريخ</string>
   <string name="media_detail_license">لائسنس (اجازت نامو)</string>
   <string name="become_a_tester_title">آزمائشي آزمائيندڙ ٿيو</string>
-  <string name="use_wikidata">وڪيڊيٽا استعماڪ ڪريو</string>
   <string name="number_of_uploads">منهنجي تازي چاڙهڻ (اَپلوڊ) جي حد (لِمٽ)</string>
   <string name="maximum_limit">وڌ ۾ وڌ حد (ميگزيمم لِمٽ)</string>
   <string name="maximum_limit_alert">500 کان ٿي ڏيکارڻ کان قاصر آھي</string>

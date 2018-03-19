@@ -73,7 +73,7 @@
   <string name="menu_about">Ngenani</string>
   <string name="about_improve" fuzzy="true">&lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;Sumber&lt;/a&gt; lan &lt;a href=\"https://commons-app.github.io/\"&gt;situs jaringan&lt;/a&gt; ing GitHub. Gawé anyar &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;bab GitHub&lt;/a&gt; ngenani lapuran ama lan saran.</string>
   <string name="about_privacy_policy" fuzzy="true">&lt;a href=\"https://wikimediafoundation.org/wiki/Privacy_policy\"&gt;Pranatan priangga&lt;/a&gt;</string>
-  <string name="about_credits">&lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/CREDITS\"&gt;Krèdhit&lt;/a&gt;</string>
+  <string name="about_credits" fuzzy="true">&lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/CREDITS\"&gt;Krèdhit&lt;/a&gt;</string>
   <string name="title_activity_about">Ngenani</string>
   <string name="menu_feedback">Kirim Pamrayoga (lumantar Layang-Èl)</string>
   <string name="no_email_client">Ora ana klièn layang-èl sing dipasang</string>
@@ -84,7 +84,7 @@
   <string name="menu_cancel_upload">Wurung</string>
   <string name="share_license_summary">Gambar iki bakal dilisènsèkaké nganggo %1$s</string>
   <string name="menu_download">Undhuh</string>
-  <string name="preference_license">Lisènsi</string>
+  <string name="preference_license" fuzzy="true">Lisènsi</string>
   <string name="use_previous">Anggo sesirah/wedharan sadurungé</string>
   <string name="allow_gps">Otomatis masang lokasi saiki</string>
   <string name="preference_theme">Modhe wengi</string>
@@ -133,7 +133,6 @@
   <string name="media_detail_description">Wedharan</string>
   <string name="media_detail_uploaded_date">Tanggal ngunggah</string>
   <string name="become_a_tester_title">Dadi Pangetès Béta</string>
-  <string name="use_wikidata">Anggo Wikidata</string>
   <string name="_2fa_code">Kodhe 2FA</string>
   <string name="number_of_uploads">Watesan Unggahan Anyarku</string>
   <string name="maximum_limit">Watesan Akèh Dhéwé</string>

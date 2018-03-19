@@ -83,7 +83,7 @@
   <string name="menu_cancel_upload">අවලංගු කරන්න</string>
   <string name="share_license_summary">මෙම පින්තූරය %1$s යටතේ වලංගු වනු ඇත</string>
   <string name="menu_download">බාගන්න</string>
-  <string name="preference_license">බලපත්‍රය</string>
+  <string name="preference_license" fuzzy="true">බලපත්‍රය</string>
   <string name="use_previous">පෙර මාතෘකාව/විස්තරය භාවිතා කරන්න</string>
   <string name="allow_gps">වත්මන් ස්ථානය ස්වයංක්රීයව ලබාගන්න</string>
   <string name="preference_theme">රාත්‍රී ආකාරය</string>
@@ -137,7 +137,6 @@
   <string name="media_detail_license">බලපත්‍රය</string>
   <string name="media_detail_coordinates">ඛණ්ඩාංක</string>
   <string name="media_detail_coordinates_empty">කිසිවක් සපයා නොමැත</string>
-  <string name="use_wikidata">විකිදත්ත භාවිතා කරන්න</string>
   <string name="_2fa_code">දිවිත්ව තහවුරු කිරීමේ කේතය</string>
   <string name="number_of_uploads">මගේ අලුත්ම උඩුගත කිරීම් පෙන්වීමේ සීමාව</string>
   <string name="maximum_limit">උපරිම සීමාව</string>

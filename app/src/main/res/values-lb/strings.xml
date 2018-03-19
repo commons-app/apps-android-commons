@@ -1,10 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+  <string name="preference_category_appearance">Ausgesinn</string>
+  <string name="preference_category_general">Allgemeng</string>
+  <string name="preference_category_feedback">Feedback</string>
+  <string name="preference_category_location">Plaz</string>
   <string name="app_name">Commons</string>
+  <string name="bullet">•</string>
   <string name="menu_settings">Astellungen</string>
   <string name="username">Benotzernumm</string>
   <string name="password">Passwuert</string>
+  <string name="login_credential">Loggt Iech an Äre Commons-Beta-Benotzerkont an</string>
   <string name="login">Aloggen</string>
+  <string name="forgot_password">Passwuert vergiess?</string>
   <string name="signup">Schreift Iech an</string>
   <string name="logging_in_title">Aloggen</string>
   <string name="logging_in_message">Waart w.e.g. …</string>
@@ -67,15 +74,15 @@
     <item quantity="other">%1$d Fichieren eropgelueden</item>
   </plurals>
   <string name="categories_not_found">D\'Kategorie %1$s gouf net fonnt</string>
-  <string name="categories_skip_explanation">Setzt Kategorien dobäi fir datt Är Biller méi einfach op Wikimedia Commons ze fanne sinn.\n\nFänkt u mat Tippe fir Kategorien dobäizesetzen.</string>
+  <string name="categories_skip_explanation">Setzt Kategorien derbäi fir datt Är Biller méi einfach op Wikimedia Commons ze fanne sinn.\n\nFänkt u mat Kategorien derbäizesetzen.</string>
   <string name="categories_activity_title">Kategorien</string>
   <string name="title_activity_settings">Astellungen</string>
   <string name="title_activity_signup">Mellt Iech un</string>
   <string name="menu_about">Iwwer</string>
   <string name="about_license">D\'App Wikimedia Commons ass eng \'Open-Source-App\' déi vu Fräiwëllege vun der Wikimedia Foundation entwéckelt gouf an och vun hinnen ënnerhal gëtt. D\'Wikimedia Foundation ass net an d\'Entwécklung oder den Ënnerhalt vun der App implizéiert.</string>
   <string name="about_improve">Leet w.e.g. &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt; e GitHub Problem&lt;/a&gt; fir Problemer ze mellen a Proposen ze maachen.</string>
-  <string name="about_privacy_policy">&lt;a href=\"https://github.com/commons-app/apps-android-commons/wiki/Privacy-policy\"&gt;Dateschutzerklärung&lt;/a&gt;</string>
-  <string name="about_credits">&lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/CREDITS\"&gt;Merci&lt;/a&gt;</string>
+  <string name="about_privacy_policy">&lt;u&gt;Dateschutzrichtlinn&lt;/u&gt;</string>
+  <string name="about_credits" fuzzy="true">&lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/CREDITS\"&gt;Merci&lt;/a&gt;</string>
   <string name="title_activity_about">Iwwer</string>
   <string name="menu_feedback">Feedback schécken (per E-Mail)</string>
   <string name="no_email_client">Keen E-Mail-Client installéiert</string>
@@ -86,7 +93,7 @@
   <string name="menu_cancel_upload">Ofbriechen</string>
   <string name="share_license_summary">Dëst Bild gëtt ënner %1$s lizenzéiert</string>
   <string name="menu_download">Eroflueden</string>
-  <string name="preference_license">Lizenz</string>
+  <string name="preference_license">Standardlizenz</string>
   <string name="use_previous">Viregen Titel/Beschreiwung benotzen</string>
   <string name="allow_gps">Automatesch déi aktuell Plaz kréien</string>
   <string name="allow_gps_summary">Aktuell Plaz ofruffe fir Propose fir Kategorien ze erméigleche wann d\'Bild keng Geotaggen huet</string>
@@ -115,11 +122,17 @@
   <string name="tutorial_1_text">Wikimedia Commons späichert déi meescht Biller, déi op Wikipedia benotzt ginn.</string>
   <string name="tutorial_1_subtext">Är Biller hëllefe Leit op der ganzer Welt ze forméieren!</string>
   <string name="tutorial_2_text">Lued w.e.g. Biller erop déi komplett vun Iech opgeholl oder gemaacht goufen:</string>
-  <string name="tutorial_2_subtext">- Natierlech Objeten (Blummen, Déieren, Bierger)\n- Nëtzlech Objeten (Vëloen, Garen)\n- Berühmt Persounen (Äre Buergermeeschter, olympesch Athleten, déi Dir begéint hutt)</string>
+  <string name="tutorial_2_subtext">Natierlech Objeten (Blummen, Déieren, Bierger)\n• Nëtzlech Objeten (Vëloen, Garen)\n• Berühmt Persounen (Äre Buergermeeschter, olympesch Athleten, déi Dir begéint hutt)</string>
+  <string name="tutorial_2_subtext_1">Natierlech Objeten (Blummen, Déieren, Bierger)</string>
+  <string name="tutorial_2_subtext_2">Nëtzlech Objeten (Vëloen, Garen)</string>
+  <string name="tutorial_2_subtext_3">Berühmt Leit (Äre Buergermeeschter, Olympioniken deenen Dir begéint sidd)</string>
   <string name="tutorial_3_text">W.e.g. NET eroplueden:</string>
   <string name="tutorial_3_subtext">- Selfien oder Biller vun Äre Frënn\n- Biller déi Dir aus dem Internet erofgelueden hutt\n- Screenshots vu proprietäre Programmer</string>
+  <string name="tutorial_3_subtext_1">Selfien oder Biller vun Äre Frënn</string>
+  <string name="tutorial_3_subtext_2">Biller déi Dir aus dem Internet erofgelueden hutt</string>
   <string name="tutorial_4_text">Beispill-Upload:</string>
   <string name="tutorial_4_subtext">- Titel: Sydney Opera House\n- Beschreiwung: Sydney Opera House vun der Bay aus gesinn\n- Kategorien: Sydney Opera House, Sydney Opera House vu Westen, Sydney Opera House vu wäitem</string>
+  <string name="tutorial_4_subtext_2">Beschreiwung:Oper vu Sydney esou wéi ee se vun der Bucht aus gesäit</string>
   <string name="welcome_wikipedia_text">Maacht mat mat Äre Biller. Hëlleft Wikipedia-Artikele méi lieweg ze maachen!</string>
   <string name="welcome_wikipedia_subtext">Biller op Wikipedia komme vu Wikimedia Commons.</string>
   <string name="welcome_copyright_text">Är Biller hëllefe Leit op der ganzer Welt ze forméieren.</string>
@@ -151,8 +164,6 @@
   <string name="media_detail_coordinates_empty">Keng uginn</string>
   <string name="become_a_tester_title">Beta-Tester ginn</string>
   <string name="become_a_tester_description">Schreift Iech op GooglePlay a fir eise Beta-Kanal a kritt fréi Zougang zu neie Funktiounen a Verbesserunge vu Feeler</string>
-  <string name="use_wikidata">Wikidata benotzen</string>
-  <string name="use_wikidata_summary">(Opgepasst: D\'Ausschalte kann zu engem héije mobilen Date-Konsum féieren)</string>
   <string name="_2fa_code">2FA-Code</string>
   <string name="maximum_limit">Maximal Limite</string>
   <string name="maximum_limit_alert">Et kënnen der net méi wéi 500 gewise ginn</string>
@@ -192,10 +203,14 @@
   <string name="login_to_your_account">An Äre Benotzerkont aloggen</string>
   <string name="send_log_file">Log-Fichier schécken</string>
   <string name="send_log_file_description">Log-Fichier per E-Mail un d\'Entwéckler schécken</string>
+  <string name="null_url">Feeler! URL net fonnt</string>
+  <string name="nominate_deletion">Nominéiere fir ze Läschen</string>
+  <string name="view_browser">Am Browser weisen</string>
   <string name="nearby_location_has_not_changed">De Plaz huet net geännert.</string>
   <string name="nearby_location_not_available">Plaz ass net disponibel.</string>
   <string name="read_article">ARTIKEL LIESEN</string>
   <string name="notifications_welcome">Wëllkomm op Wikimedia Commons, %1$s! Mir si frou datt Dir hei sidd.</string>
   <string name="notifications_thank_you_edit">Merci datt Dir eng Ännerung gemaach hutt</string>
   <string name="notifications_mention">%1$s huet Iech op %2$s ernimmt.</string>
+  <string name="about_faq">Dacks gestallt Froen</string>
 </resources>

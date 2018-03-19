@@ -25,7 +25,7 @@
     <item quantity="few">%1$d fișiere se încarcă</item>
     <item quantity="other">%1$d de fișiere se încarcă</item>
   </plurals>
-  <string name="title_activity_contributions" fuzzy="true">Încărcările mele</string>
+  <string name="title_activity_contributions">Încărcările mele recente</string>
   <string name="contribution_state_queued">În așteptare</string>
   <string name="contribution_state_failed">Nu a reușit</string>
   <string name="contribution_state_in_progress">%1$d%% finalizat</string>
@@ -41,8 +41,9 @@
   <string name="login_failed_network">Autentificare nereușită – defecțiune de rețea</string>
   <string name="login_failed_username">Autentificare nereușită – verificați-vă numele de utilizator</string>
   <string name="login_failed_password">Autentificare nereușită – verificați-vă parola</string>
-  <string name="login_failed_throttled" fuzzy="true">Prea multe încercări nereușite. Încercați din nou peste câteva minute</string>
+  <string name="login_failed_throttled">Prea multe încercări nereușite. Încercați din nou peste câteva minute.</string>
   <string name="login_failed_blocked">Ne pare rău, acest utilizator a fost blocat la Commons</string>
+  <string name="login_failed_2fa_needed">Trebuie să introduceți tokenul de autentificare.</string>
   <string name="login_failed_generic">Autentificare nereușită</string>
   <string name="share_upload_button">Încărcare</string>
   <string name="multiple_share_base_title">Dați un nume acestui set</string>
@@ -50,6 +51,10 @@
   <string name="menu_upload_single">Încărcare</string>
   <string name="categories_search_text_hint">Căutare categorii</string>
   <string name="menu_save_categories">Salvare</string>
+  <string name="refresh_button">Reîncarcă</string>
+  <string name="gps_disabled">GPS-ul este dezactivat pe device-ul dumneavoastră. Doriți să-l activați?</string>
+  <string name="enable_gps">Activează GPS</string>
+  <string name="contributions_subtitle_zero">Niciun fișier încă!</string>
   <plurals name="contributions_subtitle">
     <item quantity="zero">\@string/contributions_subtitle_zero</item>
     <item quantity="one">%1$d încărcare</item>
@@ -61,22 +66,23 @@
     <item quantity="few">Se pornesc %1$d încărcări</item>
     <item quantity="other">Se pornesc %1$d de încărcări</item>
   </plurals>
-  <plurals name="multiple_uploads_title" fuzzy="true">
+  <plurals name="multiple_uploads_title">
     <item quantity="one">1 încărcare</item>
     <item quantity="few">%1$d încărcări</item>
     <item quantity="other">%1$d de încărcări</item>
   </plurals>
   <string name="categories_not_found">Nu s-a găsit nicio categorie corespunzătoare cu %1$s</string>
-  <string name="categories_skip_explanation" fuzzy="true">Adăugați categorii pentru a facilita găsirea imaginilor dumneavoastră la Wikimedia Commons.\n\nÎncepeți să tastați pentru a adăuga categorii.\nAtingeți acest mesaj (sau mergeți înapoi) pentru a omite acest pas.</string>
+  <string name="categories_skip_explanation">Adăugați categorii pentru a facilita găsirea imaginilor dumneavoastră la Wikimedia Commons.\n\nÎncepeți să tastați pentru a adăuga categorii.</string>
   <string name="categories_activity_title">Categorii</string>
   <string name="title_activity_settings">Setări</string>
   <string name="title_activity_signup">Înregistrare</string>
   <string name="menu_about">Despre</string>
-  <string name="about_license" fuzzy="true">Software cu sursă deschisă lansat sub &lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/COPYING\"&gt;Licența Apache v2&lt;/a&gt;</string>
-  <string name="about_improve" fuzzy="true">&lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;Sursa&lt;/a&gt; și &lt;a href=\"https://commons-app.github.io/\"&gt;pagina web&lt;/a&gt; pe GitHub. Deschide un nou &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;ticket pe GitHub&lt;/a&gt; pentru a raporta un bug sau a oferi o sugestie.</string>
-  <string name="about_privacy_policy" fuzzy="true">&lt;a href=\"https://wikimediafoundation.org/wiki/Privacy_policy\"&gt;Politica de confidențialitate&lt;/a&gt;</string>
+  <string name="about_license">Aplicația Wikimedia Commons este un software cu sursă deschisă creat și menținut de bursieri și voluntari ai comunității Wikimedia. Fundația Wikimedia nu este implicată în crearea, dezvoltarea sau mentenanța aplicației.</string>
+  <string name="about_improve">Creați un nou &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;tichet pe GitHub&lt;/a&gt; pentru a raporta buguri sau sugestii.</string>
+  <string name="about_privacy_policy" fuzzy="true">&lt;a href=\"https://github.com/commons-app/apps-android-commons/wiki/Privacy-policy\"&gt;Politica de confidențialitate&lt;/a&gt;</string>
   <string name="title_activity_about">Despre</string>
   <string name="menu_feedback">Trimitere reacții (prin e-mail)</string>
+  <string name="no_email_client">Niciun client de email instalat</string>
   <string name="provider_categories">Categorii utilizate recent</string>
   <string name="waiting_first_sync">Se așteaptă prima sincronizare…</string>
   <string name="no_uploads_yet">Încă nu ați încărcat nicio fotografie.</string>
@@ -84,7 +90,7 @@
   <string name="menu_cancel_upload">Revocare</string>
   <string name="share_license_summary">Această imagine va fi licențiată sub %1$s</string>
   <string name="menu_download">Descarcă</string>
-  <string name="preference_license">Licență</string>
+  <string name="preference_license" fuzzy="true">Licență</string>
   <string name="allow_gps">Obține în mod automat locația curentă</string>
   <string name="license_name_cc_by_sa_four">Atribuire și distribuire în condiții identice 4.0</string>
   <string name="license_name_cc_by_four">Atribuire 4.0</string>
@@ -131,4 +137,31 @@
   <string name="media_detail_description_explanation">Descrierea fișierului vine aici. Aceasta poate fi destul de lungă și va trebuie distribuită pe mai multe linii. Sperăm totuși că arată bine.</string>
   <string name="become_a_tester_title">Deveniți beta-tester</string>
   <string name="become_a_tester_description">Abonați-vă la canalul nostru beta pe Google Play și a obține acces rapid la noi caracteristici și corecții de erori</string>
+  <string name="_2fa_code">Code 2FA</string>
+  <string name="commons_logo">Logoul Commons</string>
+  <string name="commons_website">Site-ul Commons</string>
+  <string name="commons_facebook">Pagina de Facebook a Commons</string>
+  <string name="background_image">Imagine de fundal</string>
+  <string name="no_image_found">Nicio Imagine găsită</string>
+  <string name="upload_image">Încarcă imagine</string>
+  <string name="welcome_image_mount_zao">Muntele Zao</string>
+  <string name="welcome_image_llamas">Llamas</string>
+  <string name="welcome_image_rainbow_bridge">Rainbow Bridge</string>
+  <string name="welcome_image_tulip">Lalea</string>
+  <string name="welcome_image_no_selfies">Fără selfie-uri</string>
+  <string name="welcome_image_proprietary">Imagine proprietară</string>
+  <string name="welcome_image_sydney_opera_house">Opera din Sydney</string>
+  <string name="cancel">Revocare</string>
+  <string name="navigation_drawer_open">Deschide</string>
+  <string name="navigation_drawer_close">Închide</string>
+  <string name="navigation_item_home">Acasă</string>
+  <string name="navigation_item_upload">Încarcă</string>
+  <string name="navigation_item_nearby">În apropiere</string>
+  <string name="navigation_item_about">Despre</string>
+  <string name="navigation_item_settings">Setări</string>
+  <string name="navigation_item_feedback">Feedback</string>
+  <string name="navigation_item_logout">Închide sesiunea</string>
+  <string name="navigation_item_info">Tutorial</string>
+  <string name="navigation_item_notification">Notificări</string>
+  <string name="nearby_info_menu_wikidata_article">Element Wikidata</string>
 </resources>

@@ -62,7 +62,7 @@
   <string name="provider_categories">לעצטיק־געניצטע קאטעגאריעס</string>
   <string name="menu_cancel_upload">אַנולירן</string>
   <string name="menu_download">אראָפלאָדן</string>
-  <string name="preference_license">ליצענץ</string>
+  <string name="preference_license" fuzzy="true">ליצענץ</string>
   <string name="license_name_cc_by_sa">Attribution-ShareAlike 3.0</string>
   <string name="license_name_cc_by">Attribution 3.0</string>
   <string name="license_name_cc0">CC0</string>
