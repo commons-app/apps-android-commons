@@ -72,6 +72,8 @@ public class CategorizationFragment extends CommonsDaggerSupportFragment {
 
     @Inject MediaWikiApi mwApi;
     @Inject @Named("default_preferences") SharedPreferences prefs;
+    @Inject @Named("prefs") SharedPreferences prefsPrefs;
+    @Inject @Named("direct_nearby_upload_prefs") SharedPreferences directPrefs;
     @Inject CategoryDao categoryDao;
 
     private RVRendererAdapter<CategoryItem> categoriesAdapter;
@@ -79,6 +81,7 @@ public class CategorizationFragment extends CommonsDaggerSupportFragment {
     private HashMap<String, ArrayList<String>> categoriesCache;
     private List<CategoryItem> selectedCategories = new ArrayList<>();
     private TitleTextWatcher textWatcher = new TitleTextWatcher();
+    private boolean hasDirectCategories = false;
 
     private final CategoriesAdapterFactory adapterFactory = new CategoriesAdapterFactory(item -> {
         if (item.isSelected()) {
@@ -127,7 +130,7 @@ public class CategorizationFragment extends CommonsDaggerSupportFragment {
     }
 
     public void hideKeyboard(View view) {
-        InputMethodManager inputMethodManager =(InputMethodManager)getActivity().getSystemService(Activity.INPUT_METHOD_SERVICE);
+        InputMethodManager inputMethodManager = (InputMethodManager) getActivity().getSystemService(Activity.INPUT_METHOD_SERVICE);
         inputMethodManager.hideSoftInputFromWindow(view.getWindowToken(), 0);
     }
 
@@ -222,7 +225,7 @@ public class CategorizationFragment extends CommonsDaggerSupportFragment {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
                         s -> categoriesAdapter.add(s),
-                         Timber::e,
+                        Timber::e,
                         () -> {
                             categoriesAdapter.notifyDataSetChanged();
                             categoriesSearchInProgress.setVisibility(View.GONE);
@@ -257,9 +260,34 @@ public class CategorizationFragment extends CommonsDaggerSupportFragment {
     }
 
     private Observable<CategoryItem> defaultCategories() {
-        return gpsCategories()
-                .concatWith(titleCategories())
-                .concatWith(recentCategories());
+
+        Observable<CategoryItem> directCat = directCategories();
+        if (hasDirectCategories) {
+            Timber.d("Image has direct Cat");
+            return directCat
+                    .concatWith(gpsCategories())
+                    .concatWith(titleCategories())
+                    .concatWith(recentCategories());
+        }
+        else {
+            Timber.d("Image has no direct Cat");
+            return gpsCategories()
+                    .concatWith(titleCategories())
+                    .concatWith(recentCategories());
+        }
+    }
+
+    private Observable<CategoryItem> directCategories() {
+        String directCategory = directPrefs.getString("Category", "");
+        List<String> categoryList = new ArrayList<>();
+        Timber.d("Direct category found: " + directCategory);
+
+        if (!directCategory.equals("")) {
+            hasDirectCategories = true;
+            categoryList.add(directCategory);
+            Timber.d("DirectCat does not equal emptyString. Direct Cat list has " + categoryList);
+        }
+        return Observable.fromIterable(categoryList).map(name -> new CategoryItem(name, false));
     }
 
     private Observable<CategoryItem> gpsCategories() {

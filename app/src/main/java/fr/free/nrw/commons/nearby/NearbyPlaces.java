@@ -8,6 +8,7 @@ import java.io.InputStreamReader;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
@@ -100,13 +101,17 @@ public class NearbyPlaces {
             }
 
             String[] fields = line.split("\t");
+            Timber.v("Fields: " + Arrays.toString(fields));
             String point = fields[0];
+            String wikiDataLink = Utils.stripLocalizedString(fields[1]);
             String name = Utils.stripLocalizedString(fields[2]);
             String type = Utils.stripLocalizedString(fields[4]);
+            String icon = fields[5];
             String wikipediaSitelink = Utils.stripLocalizedString(fields[7]);
             String commonsSitelink = Utils.stripLocalizedString(fields[8]);
-            String wikiDataLink = Utils.stripLocalizedString(fields[1]);
-            String icon = fields[5];
+            String category = Utils.stripLocalizedString(fields[9]);
+
+            Timber.v("Name: " + name + ", type: " + type + ", category: " + category + ", wikipediaSitelink: " + wikipediaSitelink + ", commonsSitelink: " + commonsSitelink);
 
             double latitude;
             double longitude;
@@ -128,6 +133,7 @@ public class NearbyPlaces {
                     type, // details
                     Uri.parse(icon),
                     new LatLng(latitude, longitude, 0),
+                    category,
                     new Sitelinks.Builder()
                             .setWikipediaLink(wikipediaSitelink)
                             .setCommonsLink(commonsSitelink)

@@ -28,6 +28,7 @@ import butterknife.ButterKnife;
 import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.contributions.ContributionController;
+import fr.free.nrw.commons.di.ApplicationlessInjection;
 import timber.log.Timber;
 
 public class PlaceRenderer extends Renderer<Place> {
@@ -124,8 +125,8 @@ public class PlaceRenderer extends Renderer<Place> {
         Timber.d("directPrefs stored");
         editor.putString("Title", place.getName());
         editor.putString("Desc", place.getLongDescription());
+        editor.putString("Category", place.getCategory());
         editor.apply();
-
     }
 
     private void closeLayout(LinearLayout buttonLayout){
@@ -138,7 +139,8 @@ public class PlaceRenderer extends Renderer<Place> {
 
     @Override
     public void render() {
-
+        ApplicationlessInjection.getInstance(getContext().getApplicationContext())
+                .getCommonsApplicationComponent().inject(this);
         place = getContent();
         tvName.setText(place.name);
         String descriptionText = place.getLongDescription();
