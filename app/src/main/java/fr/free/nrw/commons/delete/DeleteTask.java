@@ -5,6 +5,8 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
+import android.widget.Toast;
+
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Locale;
@@ -19,12 +21,9 @@ import fr.free.nrw.commons.mwapi.MediaWikiApi;
 import timber.log.Timber;
 
 import static android.support.v4.content.ContextCompat.startActivity;
+import static android.widget.Toast.LENGTH_SHORT;
 
-public class DeleteTask extends AsyncTask<Void, Void, Integer> {
-
-    private static final int SUCCESS = 0;
-    private static final int FAILED = -1;
-    private static final int ALREADY_DELETED = -2;
+public class DeleteTask extends AsyncTask<Void, Void, Boolean> {
 
     @Inject MediaWikiApi mwApi;
     @Inject SessionManager sessionManager;
@@ -48,7 +47,7 @@ public class DeleteTask extends AsyncTask<Void, Void, Integer> {
     }
 
     @Override
-    protected Integer doInBackground(Void ...voids) {
+    protected Boolean doInBackground(Void ...voids) {
         String editToken;
         String authCookie;
         String summary = "Nominating " + media.getFilename() +" for deletion.";
@@ -56,25 +55,15 @@ public class DeleteTask extends AsyncTask<Void, Void, Integer> {
         authCookie = sessionManager.getAuthCookie();
         mwApi.setAuthCookie(authCookie);
 
-        try{
-            if (mwApi.pageExists("Commons:Deletion_requests/"+media.getFilename())){
-                return ALREADY_DELETED;
-            }
-        }
-        catch (Exception e) {
-            Timber.d(e.getMessage());
-            return FAILED;
-        }
-
         try {
             editToken = mwApi.getEditToken();
         }
         catch (Exception e){
             Timber.d(e.getMessage());
-            return FAILED;
+            return false;
         }
         if (editToken.equals("+\\")) {
-            return FAILED;
+            return false;
         }
 
         Calendar calendar = Calendar.getInstance();
@@ -90,7 +79,7 @@ public class DeleteTask extends AsyncTask<Void, Void, Integer> {
         }
         catch (Exception e) {
             Timber.d(e.getMessage());
-            return FAILED;
+            return false;
         }
 
         String subpageString = "=== [[:" + media.getFilename() + "]] ===\n" +
@@ -102,7 +91,7 @@ public class DeleteTask extends AsyncTask<Void, Void, Integer> {
         }
         catch (Exception e) {
             Timber.d(e.getMessage());
-            return FAILED;
+            return false;
         }
 
         String logPageString = "\n{{Commons:Deletion requests/" + media.getFilename() +
@@ -115,7 +104,7 @@ public class DeleteTask extends AsyncTask<Void, Void, Integer> {
         }
         catch (Exception e) {
             Timber.d(e.getMessage());
-            return FAILED;
+            return false;
         }
 
         String userPageString = "\n{{subst:idw|" + media.getFilename() +
@@ -126,30 +115,23 @@ public class DeleteTask extends AsyncTask<Void, Void, Integer> {
         }
         catch (Exception e) {
             Timber.d(e.getMessage());
-            return FAILED;
+            return false;
         }
-        return SUCCESS;
+        return true;
     }
 
     @Override
-    protected void onPostExecute(Integer result) {
+    protected void onPostExecute(Boolean result) {
         String message = "";
         String title = "";
-        switch (result){
-            case SUCCESS:
-                title = "Success";
-                message = "Successfully nominated " + media.getDisplayTitle() + " deletion.\n" +
-                        "Check the webpage for more details";
-                break;
-            case FAILED:
-                title = "Failed";
-                message = "Could not request deletion. Something went wrong.";
-                break;
-            case ALREADY_DELETED:
-                title = "Already Nominated";
-                message = media.getDisplayTitle() + " has already been nominated for deletion.\n" +
-                        "Check the webpage for more details";
-                break;
+        if (result){
+            title = "Success";
+            message = "Successfully nominated " + media.getDisplayTitle() + " deletion.\n" +
+                    "Check the webpage for more details";
+        }
+        else {
+            title = "Failed";
+            message = "Could not request deletion. Something went wrong.";
         }
         AlertDialog alert;
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
@@ -165,7 +147,12 @@ public class DeleteTask extends AsyncTask<Void, Void, Integer> {
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         Intent browserIntent = new Intent(Intent.ACTION_VIEW, media.getFilePageTitle().getMobileUri());
-                        startActivity(context,browserIntent,null);
+                        if (browserIntent.resolveActivity(context.getPackageManager()) != null) {
+                            startActivity(context,browserIntent,null);
+                        } else {
+                            Toast toast = Toast.makeText(context, R.string.no_web_browser, LENGTH_SHORT);
+                            toast.show();
+                        }
                     }
                 });
         alert = builder.create();

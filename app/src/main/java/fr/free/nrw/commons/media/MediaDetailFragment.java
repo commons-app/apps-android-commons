@@ -15,7 +15,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
-import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -42,6 +41,7 @@ import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.delete.DeleteTask;
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
 import fr.free.nrw.commons.location.LatLng;
+import fr.free.nrw.commons.mwapi.MediaWikiApi;
 import fr.free.nrw.commons.ui.widget.CompatTextView;
 import timber.log.Timber;
 
@@ -69,6 +69,9 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
 
     @Inject
     Provider<MediaDataExtractor> mediaDataExtractorProvider;
+    @Inject
+    MediaWikiApi mwApi;
+
 
     private MediaWikiImageView image;
     private MediaDetailSpacer spacer;
@@ -79,6 +82,7 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
     private TextView license;
     private TextView coordinates;
     private TextView uploadedDate;
+    private TextView nominatedforDeletion;
     private LinearLayout categoryContainer;
     private Button delete;
     private ScrollView scrollView;
@@ -133,6 +137,7 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
         license = (TextView) view.findViewById(R.id.mediaDetailLicense);
         coordinates = (TextView) view.findViewById(R.id.mediaDetailCoordinates);
         uploadedDate = (TextView) view.findViewById(R.id.mediaDetailuploadeddate);
+        nominatedforDeletion = (TextView) view.findViewById(R.id.nominatedDeletionBanner);
         delete = (Button) view.findViewById(R.id.nominateDeletion);
         categoryContainer = (LinearLayout) view.findViewById(R.id.mediaDetailCategoryContainer);
 
@@ -231,7 +236,6 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
 
                 if (success) {
                     extractor.fill(media);
-
                     setTextFields(media);
                     setOnClickListeners(media);
                 } else {
@@ -284,21 +288,22 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
         }
         rebuildCatList();
 
-        delete.setVisibility(View.VISIBLE);
+        checkDeletion(media);
     }
 
     private void setOnClickListeners(final Media media) {
         if (licenseLink(media) != null) {
             license.setOnClickListener(v -> openWebBrowser(licenseLink(media)));
-            } else {
+        } else {
             Toast toast = Toast.makeText(getContext(), getString(R.string.null_url), Toast.LENGTH_SHORT);
             toast.show();
-            }
+        }
         if (media.getCoordinates() != null) {
             coordinates.setOnClickListener(v -> openMap(media.getCoordinates()));
         }
-        if (delete.getVisibility()==View.VISIBLE){
+        if (delete.getVisibility() == View.VISIBLE) {
             delete.setOnClickListener(v -> {
+                delete.setEnabled(false);
                 AlertDialog.Builder alert = new AlertDialog.Builder(getActivity());
                 alert.setMessage("Why should this file be deleted?");
                 final EditText input = new EditText(getActivity());
@@ -343,6 +348,11 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
                 d.getButton(AlertDialog.BUTTON_POSITIVE).setEnabled(false);
             });
         }
+        if (nominatedforDeletion.getVisibility() == View.VISIBLE){
+            nominatedforDeletion.setOnClickListener(v -> {
+                openWebBrowser(media.getFilePageTitle().getMobileUri().toString());
+            });
+        }
     }
 
     private void rebuildCatList() {
@@ -366,7 +376,7 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
                 viewIntent.setAction(Intent.ACTION_VIEW);
                 viewIntent.setData(new PageTitle(selectedCategoryTitle).getCanonicalUri());
                 //check if web browser available
-                if(viewIntent.resolveActivity(getActivity().getPackageManager()) != null){
+                if (viewIntent.resolveActivity(getActivity().getPackageManager()) != null) {
                     startActivity(viewIntent);
                 } else {
                     Toast toast = Toast.makeText(getContext(), getString(R.string.no_web_browser), LENGTH_SHORT);
@@ -434,6 +444,16 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
         return media.getCoordinates().getPrettyCoordinateString();
     }
 
+    private void checkDeletion(Media media){
+        if (media.getRequestedDeletion()){
+            delete.setVisibility(View.GONE);
+            nominatedforDeletion.setVisibility(View.VISIBLE);
+        }
+        else{
+            delete.setVisibility(View.VISIBLE);
+            nominatedforDeletion.setVisibility(View.GONE);
+        }
+    }
 
     private @Nullable
     String licenseLink(Media media) {

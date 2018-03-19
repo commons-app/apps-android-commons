@@ -251,10 +251,24 @@
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/small_gap" />
 
+                <TextView
+                    android:id="@+id/nominatedDeletionBanner"
+                    android:background="@color/deleteBackgroundColor"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingBottom="@dimen/tiny_gap"
+                    android:gravity="center"
+                    android:text="@string/nominated_for_deletion"
+                    android:textColor="@color/primaryTextColor"
+                    android:padding="@dimen/standard_gap"
+                    android:textSize="@dimen/normal_text"
+                    android:textStyle="bold"
+                    android:visibility="gone"/>
+
                 <Button
                     android:id="@+id/nominateDeletion"
-                    style="?android:attr/buttonBarButtonStyle"
-                    android:textColor="@color/deleteTextColor"
+                    android:textColor="@color/primaryTextColor"
+                    android:background="@drawable/bg_delete_button"
                     android:layout_margin="@dimen/standard_gap"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

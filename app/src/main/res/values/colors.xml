@@ -15,7 +15,8 @@
     <color name="primaryTextColor">#ffffff</color>
     <color name="secondaryTextColor">#000000</color>
 
-    <color name="deleteTextColor">#d50000</color>
+    <color name="deleteBackgroundColor">#90960a0a</color>
+    <color name="deleteButtonColor">#44000000</color>
 
     <!-- Some colours are same for dark/light themes. They are written two times in case
     we want to change light ones later.
