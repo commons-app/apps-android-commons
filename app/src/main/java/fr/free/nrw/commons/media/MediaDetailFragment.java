@@ -306,6 +306,7 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
         if (delete.getVisibility() == View.VISIBLE) {
             delete.setOnClickListener(v -> {
                 delete.setEnabled(false);
+                delete.setTextColor(getResources().getColor(R.color.deleteButtonLight));
                 AlertDialog.Builder alert = new AlertDialog.Builder(getActivity());
                 alert.setMessage("Why should this file be deleted?");
                 final EditText input = new EditText(getActivity());

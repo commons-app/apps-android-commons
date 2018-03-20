@@ -253,7 +253,7 @@
 
                 <LinearLayout
                     android:id="@+id/nominatedDeletionBanner"
-                    android:background="@color/deleteBackgroundColor"
+                    android:background="@color/deleteRed"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
@@ -281,8 +281,8 @@
 
                 <Button
                     android:id="@+id/nominateDeletion"
-                    android:textColor="@color/primaryTextColor"
                     android:background="@drawable/bg_delete_button"
+                    android:textColor="@color/primaryTextColor"
                     android:layout_margin="@dimen/standard_gap"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
