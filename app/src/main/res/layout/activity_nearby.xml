@@ -49,7 +49,7 @@
                 android:visibility="invisible"
                 app:elevation="6dp"
                 app:pressedTranslationZ="12dp"
-                android:backgroundTint="@color/button_blue"
+                app:backgroundTint="@color/button_blue"
                 android:clickable="true"
                 app:srcCompat="@drawable/ic_list_white_24dp"
                 android:scaleType="center"
