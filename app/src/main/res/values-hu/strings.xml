@@ -4,6 +4,7 @@
   <string name="menu_settings">Beállítások</string>
   <string name="username">Felhasználónév</string>
   <string name="password">Jelszó</string>
+  <string name="login_credential">Jelentkezz be a Commons Béta fiókoddal</string>
   <string name="login">Bejelentkezés</string>
   <string name="signup">Regisztráció</string>
   <string name="logging_in_title">Belépés…</string>
@@ -75,8 +76,8 @@
   <string name="menu_about">Névjegy</string>
   <string name="about_license">A Wikimedia Commons applikáció egy nyílt forráskódú szoftver, amit a Wikimedia-közösség önkéntesei készítettek és tartanak karban. A Wikimédia Alapítvány nem vesz részt az applikáció megalkotásában, fejlesztésében és üzemeltetésében.</string>
   <string name="about_improve">Nyiss egy új &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;GitHub-problémát&lt;/a&gt; hibabejelentéssel vagy fejlesztési javaslattal.</string>
-  <string name="about_privacy_policy">&lt;a href=\"https://github.com/commons-app/apps-android-commons/wiki/Privacy-policy\"&gt;Adatvédelmi irányelvek&lt;/a&gt;</string>
-  <string name="about_credits">&lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/CREDITS\"&gt;Köszönetnyilvánítás&lt;/a&gt;</string>
+  <string name="about_privacy_policy" fuzzy="true">&lt;a href=\"https://github.com/commons-app/apps-android-commons/wiki/Privacy-policy\"&gt;Adatvédelmi irányelvek&lt;/a&gt;</string>
+  <string name="about_credits" fuzzy="true">&lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/CREDITS\"&gt;Köszönetnyilvánítás&lt;/a&gt;</string>
   <string name="title_activity_about">Névjegy</string>
   <string name="menu_feedback">Visszajelzés küldése (e-mailben)</string>
   <string name="no_email_client">Nincs telepített levelezőprogram</string>
@@ -88,7 +89,7 @@
   <string name="share_license_summary">Ez a kép %1$s licenc alatt kerül feltöltésre</string>
   <string name="media_upload_policy">A kép feltöltésével kijelentem, hogy ez a saját munkám és nem tartalmaz jogvédett anyagot, nem szelfi és megfelel a&lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines\"&gt;Wikimedia Commons irányelveinek&lt;/a&gt;.</string>
   <string name="menu_download">Letöltés</string>
-  <string name="preference_license">Licenc</string>
+  <string name="preference_license" fuzzy="true">Licenc</string>
   <string name="use_previous">Előző cím/leírás használata</string>
   <string name="allow_gps">Automatikusan megkapja a jelenlegi helyet</string>
   <string name="allow_gps_summary">Lekéri a jelenlegi helyet, hogy lehetőség legyen kategóriajavaslatokra a nem földrajzi címkézett képeknél.</string>
@@ -99,7 +100,7 @@
   <string name="license_name_cc_by_sa">Nevezd meg! – Így add tovább! 3.0</string>
   <string name="license_name_cc_by">Attribution 3.0</string>
   <string name="license_name_cc0">CC0</string>
-  <string name="license_name_cc_by_sa_3_0">CC-BY-SA 3.0</string>
+  <string name="license_name_cc_by_sa_3_0">CC BY-SA 3.0</string>
   <string name="license_name_cc_by_sa_3_0_at">CC BY-SA 3.0 (Ausztria)</string>
   <string name="license_name_cc_by_sa_3_0_de">CC BY-SA 3.0 (Németország)</string>
   <string name="license_name_cc_by_sa_3_0_ee">CC BY-SA 3.0 (Észtország)</string>
@@ -117,7 +118,7 @@
   <string name="tutorial_1_text">A Wikimédia Commons tárolja a Wikipédián használt képek többségét.</string>
   <string name="tutorial_1_subtext">A képeid segítik az ismeretterjesztést az egész világon!</string>
   <string name="tutorial_2_text">Kérjük, tölts fel képeket, amelyeket teljes mértékben te fotóztál vagy készítettél:</string>
-  <string name="tutorial_2_subtext">- Természeti tárgyak (virágok, állatok, hegyek)\n- Hasznos tárgyak (kerékpárok, vasútállomások)\n- Híres emberek (a polgármestered, olimpikonok, akikkel találkoztál)</string>
+  <string name="tutorial_2_subtext" fuzzy="true">- Természeti tárgyak (virágok, állatok, hegyek)\n- Hasznos tárgyak (kerékpárok, vasútállomások)\n- Híres emberek (a polgármestered, olimpikonok, akikkel találkoztál)</string>
   <string name="tutorial_3_text">Kérjük, NE tölts fel:</string>
   <string name="tutorial_3_subtext">- Szelfiket vagy képeket a barátaidról\n- Internetröl letöltött képeket\n- Kereskedelmi alkalmazások képernyőképeit</string>
   <string name="tutorial_4_text">Példa feltöltés:</string>
@@ -154,8 +155,6 @@
   <string name="media_detail_coordinates_empty">Nincs megadva</string>
   <string name="become_a_tester_title">Béta tesztelővé válás</string>
   <string name="become_a_tester_description">Jelentkezz a béta csatornánkra a Google Playen, hogy hamarabb megkapd a hibajavításokat és az új funkciókat</string>
-  <string name="use_wikidata">Wikidata használata</string>
-  <string name="use_wikidata_summary">(Figyelmeztetés: a kikapcsolása nagy mobiladat-forgalmat eredményezhet)</string>
   <string name="_2fa_code">2LH kód</string>
   <string name="number_of_uploads">Legutóbbi feltöltéseim korlátja</string>
   <string name="maximum_limit">Legnagyobb korlát</string>
@@ -164,6 +163,8 @@
   <string name="login_failed_2fa_not_supported">A kétlépcsős hitelesítés jelenleg nem támogatott.</string>
   <string name="logout_verification">Kilépsz?</string>
   <string name="commons_logo">Commons Logo</string>
+  <string name="commons_website">Commons weboldal</string>
+  <string name="commons_facebook">Commons Facebook-oldal</string>
   <string name="background_image">Háttérkép</string>
   <string name="no_image_found">Nem található kép</string>
   <string name="upload_image">Kép feltöltése</string>
@@ -186,6 +187,7 @@
   <string name="navigation_item_feedback">Visszajelzés</string>
   <string name="navigation_item_logout">Kijelentkezés</string>
   <string name="navigation_item_info">Bevezető</string>
+  <string name="navigation_item_notification">Értesítések</string>
   <string name="nearby_needs_permissions">Közeli helyek nem megjeleníthetőek a helyadatokhoz való hozzáférés engedélyezése nélkül</string>
   <string name="no_description_found">nincs leírás</string>
   <string name="nearby_info_menu_commons_article">Commons leírólap</string>
@@ -201,4 +203,6 @@
   <string name="send_log_file_description">Naplófájlok küldése e-mailben a fejlesztőknek</string>
   <string name="nearby_location_has_not_changed">A hely nem változott.</string>
   <string name="nearby_location_not_available">A hely nem érhető el.</string>
+  <string name="notifications_welcome">Üdvözlünk a Wikimedia Commonson, %1$s! Örülünk, hogy itt vagy.</string>
+  <string name="notifications_thank_you_edit">Köszönjük a szerkesztésedet!</string>
 </resources>

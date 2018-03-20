@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+  <string name="crash_dialog_title">Commons xira bû</string>
+  <string name="crash_dialog_text">Haho. Tiştek nerast bû!</string>
   <string name="crash_dialog_ok_toast">Spas!</string>
 </resources>

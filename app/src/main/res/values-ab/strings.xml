@@ -44,7 +44,7 @@
   <string name="menu_retry_upload">Еиҭаҟаҵатәуп</string>
   <string name="menu_cancel_upload">Аҟәыхра</string>
   <string name="menu_download">Иҭыгатәуп</string>
-  <string name="preference_license">Алицензиа</string>
+  <string name="preference_license" fuzzy="true">Алицензиа</string>
   <string name="preference_theme">Уахынлатәи арежим</string>
   <string name="preference_theme_summary">Ихархәатәуп еиқәаҵәоу атема</string>
   <string name="license_name_cc_by_sa_four"> Attribution-ShareAlike 4.0</string>
@@ -58,8 +58,8 @@
   <string name="license_name_cc_by_sa_3_0_ee">CC BY-SA 3.0 (Естониа)</string>
   <string name="license_name_cc_by_sa_3_0_es">CC BY-SA 3.0 (Испаниа)</string>
   <string name="license_name_cc_by_sa_3_0_hr">CC BY-SA 3.0 (Хорватиа)</string>
-  <string name="license_name_cc_by_sa_3_0_lu">CC-BY-SA 3.0 (Лиуксембург)</string>
-  <string name="license_name_cc_by_sa_3_0_nl">CC-BY-SA 3.0 (Нидерланды)</string>
+  <string name="license_name_cc_by_sa_3_0_lu">CC BY-SA 3.0 (Лиуксембург)</string>
+  <string name="license_name_cc_by_sa_3_0_nl">CC BY-SA 3.0 (Нидерланды)</string>
   <string name="license_name_cc_by_sa_3_0_no">CC BY-SA 3.0 (Норвегиа)</string>
   <string name="license_name_cc_by_sa_3_0_pl">CC BY-SA 3.0 (Польша)</string>
   <string name="license_name_cc_by_sa_3_0_ro">CC BY-SA 3.0 (Румыниа)</string>

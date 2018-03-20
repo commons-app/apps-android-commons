@@ -1,10 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+  <string name="preference_category_appearance">स्वरूप</string>
+  <string name="preference_category_general">सामान्य</string>
+  <string name="preference_category_feedback">अभिप्राय</string>
+  <string name="preference_category_location">स्थान</string>
   <string name="app_name">कॉमन्स</string>
+  <string name="bullet">•</string>
   <string name="menu_settings">सेटिंग्स</string>
   <string name="username">सदस्यनाव</string>
   <string name="password">परवलीचा शब्द(पासवर्ड)</string>
+  <string name="login_credential">तुमच्या कॉमन्सच्या बीटा खात्यात प्रवेश करा.</string>
   <string name="login">सनोंद-प्रवेश करा</string>
+  <string name="forgot_password">पासवर्ड विसरला?</string>
   <string name="signup">नोंदणी करा</string>
   <string name="logging_in_title">सनोंद प्रवेश करीत आहे</string>
   <string name="logging_in_message">कृपया थांबा…</string>
@@ -36,6 +43,7 @@
   <string name="menu_share">सहभाग करा</string>
   <string name="menu_open_in_browser">न्याहाळकात उघडा</string>
   <string name="share_title_hint">शीर्षक</string>
+  <string name="add_title_toast">कृपया या फाईलसाठी शीर्षक प्रदान करा</string>
   <string name="share_description_hint">वर्णन</string>
   <string name="login_failed_network">सनोंद प्रवेश अशक्य - नेटवर्क नाही</string>
   <string name="login_failed_username">सनोंद प्रवेश अशक्य - कृपया आपले सदस्यनाव तपासा</string>
@@ -75,8 +83,8 @@
   <string name="menu_about">आमच्याबद्दल</string>
   <string name="about_license">विकीमिडीया कॉमन्स अॅप हे एक मुक्तस्त्रोत अॅप असून ते विकीमिडीया समुदायातील स्वयंसेवकांनी आणि अनुदानित सदस्यांकडून निर्माण आणि सांभाळले जाते. विकीमिडीया फ़ांउंडेशनचा ह्या अॅपच्या निर्मिती,सांभाळामध्ये सहभाग नाही.</string>
   <string name="about_improve">नव्याने तयार करा &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;GitHub issue&lt;/a&gt; त्रुटी अहवालांसाठी आणि सुचनांसाठी.</string>
-  <string name="about_privacy_policy">&lt;a href=\"https://github.com/commons-app/apps-android-commons/wiki/Privacy-policy\"&gt;Privacy policy&lt;/a&gt;</string>
-  <string name="about_credits">&lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/CREDITS\"&gt;Credits&lt;/a&gt;</string>
+  <string name="about_privacy_policy">&lt;u&gt;गोपनीयता धोरण&lt;/u&gt;</string>
+  <string name="about_credits">&lt;u&gt;श्रेय&lt;/u&gt;</string>
   <string name="title_activity_about">च्या विषयी</string>
   <string name="menu_feedback">प्रतिसाद पाठवा (विपत्राद्वारे)</string>
   <string name="no_email_client">कोणतेही ईमेल क्लायंट स्थापित नाहीत</string>
@@ -88,7 +96,7 @@
   <string name="share_license_summary">ही संचिका %1$s या परवान्यांतर्गत राहील</string>
   <string name="media_upload_policy">हे चित्र इथे चढवत असताना, मी हे घोषीत करतो की हे माझेच काम आहे आणि ह्या कामावर इतर कुणाचाही प्रताधिकार नाही तसेच हे सेल्फ़ी नाहीये, म्हणून हे काम ह्या संकेतांचे पालन करेल &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines\"&gt;Wikimedia Commons policies&lt;/a&gt;.</string>
   <string name="menu_download">अधिभारण करा</string>
-  <string name="preference_license">परवाना</string>
+  <string name="preference_license">डिफॉल्ट परवाना</string>
   <string name="use_previous">मागील शीर्षक/वर्णन वापरा</string>
   <string name="allow_gps">आपोआप सध्याचे स्थान मिळवा</string>
   <string name="allow_gps_summary">जर छायाचित्राला जिओटॅग नसल्यास तुम्ही तुमच्या स्थानाची निश्चिती करा जेणे करुन संबंधीत वर्ग सुचवले जातील</string>
@@ -117,11 +125,20 @@
   <string name="tutorial_1_text">विकिपीडियात वापरल्या जाणाऱ्या बहुतेक चित्रांचे यजमानत्व विकिमिडिया कॉमन्स स्वीकारते.</string>
   <string name="tutorial_1_subtext">जगातल्या अनेक लोकांना आपल्या चित्राद्वारे शिकता येते!</string>
   <string name="tutorial_2_text">कृपया निव्वळ आपण घेतलेल्या किंवा तयार केलेल्या चित्रांचेच अपभारण करा:</string>
-  <string name="tutorial_2_subtext">- नैसर्गिक गोष्टी (फुले, प्राणी, पर्वत)\n- नित्योपयोगी गोष्टी (दुचाकी, रेल्वे स्थानके)\n- प्रसिद्ध व्यक्ति (आपले महापौर, आपणास भेटलेले ऑलिंपिक खेळाडू)</string>
+  <string name="tutorial_2_subtext">नैसर्गिक गोष्टी (फुले, प्राणी, पर्वत)\n• नित्योपयोगी गोष्टी (दुचाकी, रेल्वे स्थानके)\n• प्रसिद्ध व्यक्ति (आपले महापौर, आपणास भेटलेले ऑलिंपिक खेळाडू)</string>
+  <string name="tutorial_2_subtext_1">नैसर्गिक वस्तू (फुले, प्राणी, पर्वत)</string>
+  <string name="tutorial_2_subtext_2">उपयुक्त वस्तू (सायकली, रेल्वे स्टेशन)</string>
+  <string name="tutorial_2_subtext_3">प्रसिद्ध लोक (आपले महापौर, आपण भेटलेले ऑलिम्पिक खेळाडू)</string>
   <string name="tutorial_3_text">कृपया अपभारण करू \'\'\'नका\'\'\':</string>
   <string name="tutorial_3_subtext">-आपल्या किंवा मित्रांच्या सेल्फी\n-आपण आंतरजाल (इंटरनेट) वरुन अधिभारण केलेली चित्रे\n-प्रोप्रायटरी अॅप्सचे स्क्रिनशॉट</string>
+  <string name="tutorial_3_subtext_1">सेल्फी किंवा आपल्या मित्रांच्या चित्रे</string>
+  <string name="tutorial_3_subtext_2">आपण इंटरनेटवरून डाउनलोड केलेली चित्रे</string>
+  <string name="tutorial_3_subtext_3">प्रोप्रायटरी अॅप्सचे स्क्रीनशॉट्स</string>
   <string name="tutorial_4_text">उदाहरणादाखल अपभारण:</string>
   <string name="tutorial_4_subtext">- शीर्षक: Sydney Opera House\n- वर्णन: Sydney Opera House as viewed from across the bay\n- वर्ग: Sydney Opera House, Sydney Opera House from the west, Sydney Opera House remote views</string>
+  <string name="tutorial_4_subtext_1">Title: सिडनी ओपेरा हाऊस</string>
+  <string name="tutorial_4_subtext_2">Description: सिडनी ऑपेरा हाऊस उपसागरातून दिसत आहे</string>
+  <string name="tutorial_4_subtext_3">Categories: पश्चिमेकडून सिडनी ओपेरा हाऊस, सिडनी ऑपेरा हाऊस दुर्गम दृश्य</string>
   <string name="welcome_wikipedia_text">आपली चित्रे जोडा. विकिपीडियावरील लेखात जीवंतपणा आणा!</string>
   <string name="welcome_wikipedia_subtext">विकिपीडियावरची चित्रे विकिमिडिया कॉमन्सवरुन येतात.</string>
   <string name="welcome_copyright_text">जगातल्या अनेक लोकांना आपल्या चित्राद्वारे शिकता येते.</string>
@@ -154,8 +171,6 @@
   <string name="media_detail_coordinates_empty">दिलेले नाही</string>
   <string name="become_a_tester_title">बिटा आवृत्तीचे तपासक बना</string>
   <string name="become_a_tester_description">गुगल प्ले वरील आमच्या बिटा चॅनलचा पाठलाग करा आणि आमच्या नव्या सेवा-सुविधांचा तसाच त्रुटी-निरसनांचा फ़ायदा घ्या.</string>
-  <string name="use_wikidata">विकीडाटा वापरा</string>
-  <string name="use_wikidata_summary">(ताकीद: हे बंद केल्यामुळे तुम्हांला मोठ्याप्रमाणात डेटा खर्च करावा लागेल)</string>
   <string name="_2fa_code">2FA कोड</string>
   <string name="number_of_uploads">माझ्या अलिकडच्या अपभरणाची मर्यादा</string>
   <string name="maximum_limit">जास्तीची मर्यादा</string>
@@ -207,6 +222,8 @@
   <string name="login_to_your_account">तुमच्या खात्यावरुन सनोंद प्रवेश करा</string>
   <string name="send_log_file">लॉग फ़ाईल पाठवा</string>
   <string name="send_log_file_description">विकसकांना लॉग फ़ाईल विपत्राने पाठवा</string>
+  <string name="no_web_browser">URL उघडण्यासाठी कोणतेही वेब ब्राउझर आढळले नाही</string>
+  <string name="null_url">त्रुटी! URL आढळली नाही</string>
   <string name="nearby_location_has_not_changed">लोकेशन बदलली नाहीये.</string>
   <string name="nearby_location_not_available">ही लोकेशन उपलब्ध नाही</string>
   <string name="location_permission_rationale_nearby">जवळपासच्या ठिकाणांची यादी दाखवण्यासाठी आपली परवानगी आवश्यक आहे</string>
@@ -217,4 +234,7 @@
   <string name="notifications_thank_you_edit">तुमच्या संपादनासाठी तुमचे आभार !</string>
   <string name="notifications_mention">%1$s यांनी तुमचा उल्लेख %2$s येथे केला.</string>
   <string name="toggle_view_button">टॉगल दृश्य</string>
+  <string name="about_rate_us"/>
+  <string name="about_faq">सतत विचारले जाणारे प्रश्न</string>
+  <string name="welcome_skip_button">ट्यूटोरियल वगळा</string>
 </resources>

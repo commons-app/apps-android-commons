@@ -75,8 +75,8 @@
   <string name="menu_about">Ɣef</string>
   <string name="about_license">Asnas Wikipedia Commons d asnas n uɣbalu yeldin i d-yennulfan udiɣ yettwarfed sɣur iwiziwen d wid i t-iḍemnen n tmezdagnut Wikimedia. Tasbeddit Wikimedia ur tetteka ara deg usnulfu-is, tanfelit-is, neɣ aseggem n usnas.</string>
   <string name="about_improve">Rnu &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;tummla tamaynut GitHub&lt;/a&gt; akken ad temmleḍ ibugen neɣ ad d-mudded isumar.</string>
-  <string name="about_privacy_policy">&lt;a href=\"https://github.com/commons-app/apps-android-commons/wiki/Privacy-policy\"&gt;Tasertit n tbaḍnit&lt;/a&gt;</string>
-  <string name="about_credits">&lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/CREDITS\"&gt;Ismaden&lt;/a&gt;</string>
+  <string name="about_privacy_policy" fuzzy="true">&lt;a href=\"https://github.com/commons-app/apps-android-commons/wiki/Privacy-policy\"&gt;Tasertit n tbaḍnit&lt;/a&gt;</string>
+  <string name="about_credits" fuzzy="true">&lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/CREDITS\"&gt;Ismaden&lt;/a&gt;</string>
   <string name="title_activity_about">Ɣef</string>
   <string name="menu_feedback">Azen tikti (s yimayl)</string>
   <string name="no_email_client">Ulac amsaɣ n yimayl ibedden</string>
@@ -88,7 +88,7 @@
   <string name="share_license_summary">Tugna-agi ad tili daw n turagt %1$s</string>
   <string name="media_upload_policy">S tuzna n tygna-agi, ad d-wekkdeɣ d akken d ayla-w, ur tegbir ara aferdis yettwaḥerzen s izerfan n umeskar, udiɣ tqudeṛ &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines\"&gt;Tisertiyin n Wikimedia Commons&lt;/a&gt;.</string>
   <string name="menu_download">Sider</string>
-  <string name="preference_license">Turagt</string>
+  <string name="preference_license" fuzzy="true">Turagt</string>
   <string name="use_previous">Seqdec azwel neɣ aglam yezrin</string>
   <string name="allow_gps">Awi s wudem awurman adig amiran</string>
   <string name="allow_gps_summary">Awi adig amiran akken ad tsumreḍ taggayt ma yella tugna ur tettwacreḍ ara di tirakalt</string>
@@ -117,7 +117,7 @@
   <string name="tutorial_1_text">Wikimedia Commons tettmuddu tanezduɣt i tugett n tugniwin ara yettwasqedcen di Wikipedia.</string>
   <string name="tutorial_1_subtext">Tugniwin-ik ad d-muddent afus i useklem n yimdanen deg umaḍal meṛṛa.</string>
   <string name="tutorial_2_text">Sali tugniwin yettwaṭṭfen neɣ yettwarnan kan sɣuṛ-k.</string>
-  <string name="tutorial_2_subtext">- Tiɣawsiwin n ugama (tijeggigin, iɣrsiwen, idurar) \n- Tiɣawsiwin ilaqen (iviluten, tiɣsar n tmacinin) \n- Imdanen yettwasnen(aselway n tɣiwant, inaddalen ulimpiken i d-muggreḍ)</string>
+  <string name="tutorial_2_subtext" fuzzy="true">- Tiɣawsiwin n ugama (tijeggigin, iɣrsiwen, idurar) \n- Tiɣawsiwin ilaqen (iviluten, tiɣsar n tmacinin) \n- Imdanen yettwasnen(aselway n tɣiwant, inaddalen ulimpiken i d-muggreḍ)</string>
   <string name="tutorial_3_text">UR salay ara:</string>
   <string name="tutorial_3_subtext">- isilfiyen neɣ tugniwin n yimdakkal-ik \n- tugniwin i d-sidreḍ si Internet\n- inɣal n ugdil n yisnasen yesɛan imawlan</string>
   <string name="tutorial_4_text">Amedya n usali:</string>
@@ -154,8 +154,6 @@
   <string name="media_detail_coordinates_empty">Ur d-ittunef ara</string>
   <string name="become_a_tester_title">Uɣal d amsekyad Beta</string>
   <string name="become_a_tester_description">Jerred ar ubadu-nneɣ Beta di Google Play sakin awi anekcum uzwir ar tmahilin timaynutin akked useɣti n ibugen.</string>
-  <string name="use_wikidata">Seqdec Wikipedia</string>
-  <string name="use_wikidata_summary">(Ɣur-k: asensi n waya yezmer ad d-yeglu s waṭas n ussuder n isefka deg uziraz-ik)</string>
   <string name="_2fa_code">Tangalt 2FA</string>
   <string name="number_of_uploads">Talast-iw n usali n melmi kan</string>
   <string name="maximum_limit">Talast tafellayt</string>

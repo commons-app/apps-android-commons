@@ -76,7 +76,7 @@
   <string name="menu_cancel_upload">റദ്ദാക്കുക</string>
   <string name="share_license_summary">ചിത്രം %1$s പ്രകാരം അനുമതി നൽകപ്പെടുന്നതാണ്</string>
   <string name="menu_download">ഡൗൺലോഡ്</string>
-  <string name="preference_license">അനുമതി</string>
+  <string name="preference_license" fuzzy="true">അനുമതി</string>
   <string name="license_name_cc_by_sa" fuzzy="true">സി.സി. ആട്രിബ്യൂഷൻ-ഷെയർ‌എലൈക് 3.0</string>
   <string name="license_name_cc_by" fuzzy="true">സി.സി. ആട്രിബ്യൂഷൻ 3.0</string>
   <string name="license_name_cc0">സി.സി.0</string>

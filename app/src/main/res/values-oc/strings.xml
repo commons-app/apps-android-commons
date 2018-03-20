@@ -80,7 +80,7 @@
   <string name="menu_cancel_upload">Anullar</string>
   <string name="share_license_summary">Aqueste imatge serà jos licéncia %1$s</string>
   <string name="menu_download">Telecargar</string>
-  <string name="preference_license">Licéncia</string>
+  <string name="preference_license" fuzzy="true">Licéncia</string>
   <string name="preference_theme">Mòde de nuèit</string>
   <string name="preference_theme_summary">Utilizar un tèma escur</string>
   <string name="license_name_cc_by_sa_four"> Atribucion-PartimentIdentic 4.0</string>
