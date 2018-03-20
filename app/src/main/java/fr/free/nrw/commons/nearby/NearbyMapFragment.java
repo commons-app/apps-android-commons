@@ -546,23 +546,36 @@ public class NearbyMapFragment extends DaggerFragment {
 
     private void showFAB() {
 
-        addAnchorToFABs(fabPlus, getActivity().findViewById(R.id.bottom_sheet_details).getId());
+        addAnchorToBigFABs(fabPlus, getActivity().findViewById(R.id.bottom_sheet_details).getId());
         fabPlus.show();
 
-        addAnchorToFABs(fabGallery, getActivity().findViewById(R.id.empty_view).getId());
+        addAnchorToSmallFABs(fabGallery, getActivity().findViewById(R.id.empty_view).getId());
 
-        addAnchorToFABs(fabCamera, getActivity().findViewById(R.id.empty_view1).getId());
+        addAnchorToSmallFABs(fabCamera, getActivity().findViewById(R.id.empty_view1).getId());
 
     }
+
 
     /*
     * Add amnchors back before making them visible again.
     * */
-    private void addAnchorToFABs(FloatingActionButton floatingActionButton, int anchorID) {
+    private void addAnchorToBigFABs(FloatingActionButton floatingActionButton, int anchorID) {
         CoordinatorLayout.LayoutParams params = new CoordinatorLayout.LayoutParams
                 (ViewGroup.LayoutParams.WRAP_CONTENT,ViewGroup.LayoutParams.WRAP_CONTENT);
         params.setAnchorId(anchorID);
         params.anchorGravity = Gravity.TOP|Gravity.RIGHT|Gravity.END;
+        floatingActionButton.setLayoutParams(params);
+    }
+
+    /*
+    * Add amnchors back before making them visible again. Big and small fabs have different anchor
+    * gravities, therefore the are two methods.
+    * */
+    private void addAnchorToSmallFABs(FloatingActionButton floatingActionButton, int anchorID) {
+        CoordinatorLayout.LayoutParams params = new CoordinatorLayout.LayoutParams
+                (ViewGroup.LayoutParams.WRAP_CONTENT,ViewGroup.LayoutParams.WRAP_CONTENT);
+        params.setAnchorId(anchorID);
+        params.anchorGravity = Gravity.CENTER_HORIZONTAL;
         floatingActionButton.setLayoutParams(params);
     }
 
