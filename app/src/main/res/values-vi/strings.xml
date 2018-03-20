@@ -66,7 +66,7 @@
   <string name="about_license" fuzzy="true">Phần mềm mã nguồn mở được phát hành theo &lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/COPYING\"&gt;Giấy phép Apache v2&lt;/a&gt;. %1$s và biểu trưng của nó là nhãn hiệu của Quỹ Wikimedia và được sử dụng do Quỹ Wikimedia cho phép. Chúng tôi không được Quỹ Wikimedia ủng hộ hoặc nhận làm chi nhánh.</string>
   <string name="about_improve" fuzzy="true">&lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;Mã nguồn&lt;/a&gt; và &lt;a href=\"https://commons-app.github.io/\"&gt;trang chủ&lt;/a&gt; tại GitHub. &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;Tạo vấn đề GitHub mới&lt;/a&gt; để báo cáo lỗi hoặc gợi ý thay đổi.</string>
   <string name="about_privacy_policy" fuzzy="true"/>
-  <string name="about_credits">&lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/CREDITS\"&gt;Công trạng&lt;/a&gt;</string>
+  <string name="about_credits" fuzzy="true">&lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/CREDITS\"&gt;Công trạng&lt;/a&gt;</string>
   <string name="title_activity_about">Giới thiệu</string>
   <string name="menu_feedback">Gửi Phản hồi (qua Thư điện tử)</string>
   <string name="no_email_client">Không có chương trình thư điện tử nào được cài đặt</string>
@@ -78,7 +78,7 @@
   <string name="share_license_summary">Hình này sẽ được phát hành theo giấy phép %1$s</string>
   <string name="media_upload_policy">Với việc đăng hình này, tôi tuyên bố rằng nó là tác phẩm của chính mình, rằng nó không chứa nội dung có bản quyền hoặc ảnh tự chụp, và về mặt khác thì hoàn toàn tuân theo &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines?uselang=vi\"&gt;các quy định Wikimedia Commons&lt;/a&gt;.</string>
   <string name="menu_download">Tải về</string>
-  <string name="preference_license">Giấy phép</string>
+  <string name="preference_license" fuzzy="true">Giấy phép</string>
   <string name="use_previous">Sử dụng tiêu đề/miêu tả trước</string>
   <string name="allow_gps">Lấy vị trí hiện tại tự động</string>
   <string name="allow_gps_summary">Định vị hiện tại để nhận gợi ý thể loại trong trường hợp hình ảnh chưa được gắn thẻ địa lý</string>
@@ -107,7 +107,7 @@
   <string name="tutorial_1_text">Wikimedia Commons là nơi lưu giữ phần nhiều hình ảnh xuất hiện trong Wikipedia.</string>
   <string name="tutorial_1_subtext">Các hình ảnh của bạn giúp giáo dục người dân trên khắp thế giới!</string>
   <string name="tutorial_2_text">Xin hãy tải lên các hình ảnh do chính bạn chụp hoặc vẽ:</string>
-  <string name="tutorial_2_subtext">- Thiên nhiên (bông hoa, thú vật, cảnh núi)\n- Vật nhân tạo (xe đạp, nhà ga, món ăn)\n- Nhân vật nổi tiếng (thị trưởng của bạn, cầu thủ đội tuyển mà bạn gặp)</string>
+  <string name="tutorial_2_subtext" fuzzy="true">- Thiên nhiên (bông hoa, thú vật, cảnh núi)\n- Vật nhân tạo (xe đạp, nhà ga, món ăn)\n- Nhân vật nổi tiếng (thị trưởng của bạn, cầu thủ đội tuyển mà bạn gặp)</string>
   <string name="tutorial_3_text">Xin DỪNG tải lên:</string>
   <string name="tutorial_3_subtext">- Hình tự sướng hoặc hình bạn bè\n- Hình ảnh tải về từ Internet\n- Ảnh chụp màn hình của ứng dụng thương mại</string>
   <string name="tutorial_4_text">Tập tin tải lên ví dụ:</string>
@@ -144,8 +144,6 @@
   <string name="media_detail_coordinates_empty">Không cung cấp</string>
   <string name="become_a_tester_title">Trở thành người dùng thử nghiệm</string>
   <string name="become_a_tester_description">Tham gia kênh thử nghiệm của chúng tôi trên Google Play và nhận các tính năng mới cùng những bản sửa lỗi sớm hơn</string>
-  <string name="use_wikidata">Dùng Wikidata</string>
-  <string name="use_wikidata_summary">(Cảnh báo: tắt đi có thể tăng sử dụng dữ liệu di động rất lớn)</string>
   <string name="_2fa_code">Mã Hai Nhân tố</string>
   <string name="number_of_uploads">Giới hạn Tải lên Gần đây của Tôi</string>
   <string name="maximum_limit">Tối đa</string>

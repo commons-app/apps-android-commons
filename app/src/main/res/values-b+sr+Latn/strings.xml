@@ -75,8 +75,8 @@
   <string name="menu_about">O aplikaciji</string>
   <string name="about_license">Softver otvorenog koda dostupan pod licencom &lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/COPYING\"&gt;Apache ver. 2&lt;/a&gt; Vikimedijina Ostava i njen logo su zaštitni znaci Vikimedijine Fondacije i koriste se sa dozvolom Vikimedijine Fondacine. Mi ne odobravamo ili podržavmo Vikimedijinu Fondaciju.\n\nAplikacija za Vikimedijinu ostavu je aplikacija otvorenog koda koja je napravljena i koja se održava pomoću grantova i volontera Vikimedijine zajednice. Zadužbina Vikimedija nije uključena u stvaranje, razvoj ili održavanje aplikacije.</string>
   <string name="about_improve" fuzzy="true">&lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;Izvorni kôd&lt;/a&gt; i &lt;a href=\"https://commons-app.github.io/\"&gt;veb-sajt&lt;/a&gt; na GitHub-u. Napravite novi &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;zahtev na GitHub-u&lt;/a&gt; da biste prijavili greške ili dali predloge.</string>
-  <string name="about_privacy_policy">&lt;a href=\"https://github.com/commons-app/apps-android-commons/wiki/Privacy-policy\"&gt;Politika privatnosti&lt;/a&gt;</string>
-  <string name="about_credits">&lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/CREDITS\"&gt;Zasluge&lt;/a&gt;</string>
+  <string name="about_privacy_policy" fuzzy="true">&lt;a href=\"https://github.com/commons-app/apps-android-commons/wiki/Privacy-policy\"&gt;Politika privatnosti&lt;/a&gt;</string>
+  <string name="about_credits" fuzzy="true">&lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/CREDITS\"&gt;Zasluge&lt;/a&gt;</string>
   <string name="title_activity_about">O aplikaciji</string>
   <string name="menu_feedback">Pošaljite povratne informacije (putem e-pošte)</string>
   <string name="no_email_client">Nije instaliran imejl klijent</string>
@@ -88,7 +88,7 @@
   <string name="share_license_summary">Slika će se voditi pod licencom %1$s</string>
   <string name="media_upload_policy">Slanjem ove slike, ja tvrdim da je u pitanju moj rad, da ne sadrži materijal ili selfije zaštićene autorskim pravima, te da je na ostale načine u skladu sa &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines\"&gt;smernicama Vikimedijine ostave&lt;/a&gt;.</string>
   <string name="menu_download">Preuzmi</string>
-  <string name="preference_license">Licenca</string>
+  <string name="preference_license" fuzzy="true">Licenca</string>
   <string name="use_previous">Koristi prethodan naslov/opis</string>
   <string name="allow_gps">Automatski detektuj trenutnu lokaciju</string>
   <string name="allow_gps_summary">Primi trenutnu lokaciju da bi predložili kategoriju ako slika nije geografski označena</string>
@@ -117,7 +117,7 @@
   <string name="tutorial_1_text">Vikimedijina Ostava sadrži većinu slika koja se koristi na Vikipediji.</string>
   <string name="tutorial_1_subtext">Vaše slike pomažu u obrazovanju ljudi širom sveta.</string>
   <string name="tutorial_2_text">Molimo Vas da postavite slike koje ste preuzeli ili kreirali u potpunosti sami:</string>
-  <string name="tutorial_2_subtext">- Prirodne objekte (cveće, životinje, planine)\n- Korisne objekte (bicikle, železničke stanice)\n- Poznate ljude (vaš gradonačelnik, Olimpijce koje ste sreli)</string>
+  <string name="tutorial_2_subtext" fuzzy="true">- Prirodne objekte (cveće, životinje, planine)\n- Korisne objekte (bicikle, železničke stanice)\n- Poznate ljude (vaš gradonačelnik, Olimpijce koje ste sreli)</string>
   <string name="tutorial_3_text">Molimo NE otpremajte:</string>
   <string name="tutorial_3_subtext">- Selfije i slike tvojih prijatelja\n- Slike koje ste preuzeli sa interneta\n- Skrinšotove iz sopstvenih aplikacija</string>
   <string name="tutorial_4_text">Primer otpremanja:</string>
@@ -154,8 +154,6 @@
   <string name="media_detail_coordinates_empty">Ništa nije uneto</string>
   <string name="become_a_tester_title">Postani Beta Tester</string>
   <string name="become_a_tester_description">Priključite se na naš beta kanal na Gugl pleju i pristupajte novim informacijama i popravkama bagova</string>
-  <string name="use_wikidata">Koristi Vikipodatke</string>
-  <string name="use_wikidata_summary">(Upozorenje: onemogućavanjem ovoga može se izazvati velika potrošnja mobilnih podataka)</string>
   <string name="_2fa_code">2FA kod</string>
   <string name="number_of_uploads">Moj limit za skorašnja otpremanja</string>
   <string name="maximum_limit">Maksimalni limit</string>

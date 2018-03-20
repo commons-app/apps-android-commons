@@ -1,10 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+  <string name="preference_category_appearance">보이기</string>
+  <string name="preference_category_general">일반</string>
+  <string name="preference_category_feedback">피드백</string>
+  <string name="preference_category_location">위치</string>
   <string name="app_name">공용</string>
+  <string name="bullet">•</string>
   <string name="menu_settings">설정</string>
   <string name="username">사용자 이름</string>
   <string name="password">비밀번호</string>
+  <string name="login_credential">공용 베타 계정으로 로그인합니다</string>
   <string name="login">로그인</string>
+  <string name="forgot_password">비밀번호를 잊으셨나요?</string>
   <string name="signup">가입하기</string>
   <string name="logging_in_title">로그인 중</string>
   <string name="logging_in_message">기다려 주세요…</string>
@@ -36,6 +43,7 @@
   <string name="menu_share">공유</string>
   <string name="menu_open_in_browser">브라우저로 보기</string>
   <string name="share_title_hint">제목</string>
+  <string name="add_title_toast">이 파일의 제목을 지정해 주십시오</string>
   <string name="share_description_hint">설명</string>
   <string name="login_failed_network">로그인할 수 없습니다 - 네트워크 오류입니다</string>
   <string name="login_failed_username">로그인할 수 없습니다 - 사용자 이름을 확인하세요</string>
@@ -73,8 +81,8 @@
   <string name="menu_about">정보</string>
   <string name="about_license">위키미디어 공용 앱은 오픈 소스 애플리케이션이며 위키미디어 공동체 내의 자원봉사자에 의해 유지됩니다. 위키미디어 재단은 애플리케이션의 생성, 개발, 유지보수에 관여하지 않습니다.</string>
   <string name="about_improve" fuzzy="true">소스 코드는 &lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;GitHub&lt;/a&gt;에 있으며, 웹사이트는 &lt;a href=\"https://commons-app.github.io/\"&gt;GitHub&lt;/a&gt;에 있습니다. 버그나 기타 제안은 &lt;a href=\" https://github.com/commons-app/apps-android-commons/issues\"&gt;GitHub&lt;/a&gt;에 보고해주세요.</string>
-  <string name="about_privacy_policy">&lt;a href=\"https://github.com/commons-app/apps-android-commons/wiki/Privacy-policy\"&gt;개인정보 정책&lt;/a&gt;</string>
-  <string name="about_credits">&lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/CREDITS\"&gt;제작진&lt;/a&gt;</string>
+  <string name="about_privacy_policy">&lt;u&gt;개인정보 정책&lt;/u&gt;</string>
+  <string name="about_credits">&lt;u&gt;제작진&lt;/u&gt;</string>
   <string name="title_activity_about">정보</string>
   <string name="menu_feedback">(이메일로) 피드백 보내기</string>
   <string name="no_email_client">설치된 이메일 클라이언트가 없습니다</string>
@@ -86,7 +94,7 @@
   <string name="share_license_summary">이 그림은 %1$s에 따라 사용이 허가됩니다</string>
   <string name="media_upload_policy">이 이미지에 대해서, 이것이 본인이 창작한 저작물이며, 저작권에 위배되는 것이 포함되지 않았으며, &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines\"&gt;위키미디어 공용 정책&lt;/a&gt;에 위배되지 않는다는 것에 동의합니다.</string>
   <string name="menu_download">다운로드</string>
-  <string name="preference_license">라이선스</string>
+  <string name="preference_license">기본 라이선스</string>
   <string name="use_previous">이전의 제목/설명을 사용하기</string>
   <string name="allow_gps">자동으로 현재 위치 가져오기</string>
   <string name="allow_gps_summary">이미지에 위치 정보가 태그되어 있지 않다면, 현재 위치를 검색하여 분류를 제안해 주십시오</string>
@@ -115,9 +123,15 @@
   <string name="tutorial_1_text">위키미디어 공용은 위키백과에 쓰이는 대부분의 이미지를 호스팅합니다.</string>
   <string name="tutorial_1_subtext">당신의 그림은 전 세계 사람들을 교육하는 데 도움이 됩니다!</string>
   <string name="tutorial_2_text">전적으로 자신이 찍거나 만든 사진만 업로드해 주십시오:</string>
-  <string name="tutorial_2_subtext">- 자연물 (꽃, 동물, 산)\n- 유용한 사물 (자전거, 기차역)\n- 유명인 (시장, 만난 적 있는 올림픽 운동 선수)</string>
+  <string name="tutorial_2_subtext">자연물 (꽃, 동물, 산)\n• 유용한 사물 (자전거, 기차역)\n• 유명인 (시장, 만난 적 있는 올림픽 운동 선수)</string>
+  <string name="tutorial_2_subtext_1">자연물 (꽃, 동물, 산)</string>
+  <string name="tutorial_2_subtext_2">유용한 물체 (자전거, 기차역)</string>
+  <string name="tutorial_2_subtext_3">유명 인사 (시장, 직접 만난 올림픽 선수)</string>
   <string name="tutorial_3_text">업로드하지 마십시오:</string>
   <string name="tutorial_3_subtext">- 자기 자신 또는 친구의 사진\n- 인터넷에서 다운로드한 사진\n- 사유 앱의 스크린샷</string>
+  <string name="tutorial_3_subtext_1">셀카나 친구의 사진</string>
+  <string name="tutorial_3_subtext_2">인터넷에서 다운로드한 사진</string>
+  <string name="tutorial_3_subtext_3">사유 앱의 스크린샷</string>
   <string name="tutorial_4_text">업로드 예시:</string>
   <string name="tutorial_4_subtext">- 제목: 시드니 오페라 하우스\n- 설명: 항만 건너편에서 바라본 시드니 오페라 하우스\n- 분류: 시드니 오페라 하우스, 서쪽에서 본 시드니 오페라 하우스, 시드니 오페라 하우스 원경</string>
   <string name="welcome_wikipedia_text">당신의 그림을 기여하세요. 위키백과 문서의 생명이 오는 데 도와주세요!</string>
@@ -152,8 +166,6 @@
   <string name="media_detail_coordinates_empty">제공되지 않음</string>
   <string name="become_a_tester_title">베타 테스터가 되세요</string>
   <string name="become_a_tester_description">구글 플레이 베타 채널에서 메일 발송을 허가해서 새로운 기능이나 버그 수정에 대한 정보를 빨리 얻어보세요</string>
-  <string name="use_wikidata">위키데이터 사용</string>
-  <string name="use_wikidata_summary">(경고: 이것을 끄면 대량의 모바일 데이터를 소비할 수 있습니다)</string>
   <string name="_2fa_code">2FA 코드</string>
   <string name="number_of_uploads">내 최근 업로드 제한</string>
   <string name="maximum_limit">최대 제한</string>
@@ -200,11 +212,15 @@
   <string name="login_to_your_account">자신의 계정으로 로그인</string>
   <string name="send_log_file">로그 파일 보내기</string>
   <string name="send_log_file_description">이메일로 개발자에게 로그 파일 보내기</string>
+  <string name="no_web_browser">URL을 열기 위한 웹 브라우저를 찾지 못했습니다</string>
+  <string name="null_url">오류! URL을 찾을 수 없습니다</string>
   <string name="nearby_location_has_not_changed">위치가 변경되지 않았습니다.</string>
   <string name="nearby_location_not_available">위치를 사용할 수 없습니다.</string>
   <string name="location_permission_rationale_nearby">주변 장소의 목록을 표시하기 위한 권한이 필요합니다.</string>
   <string name="notifications_welcome">%1$s님, 위키미디어 공용에 오신 것을 환영합니다! 반갑습니다.</string>
   <string name="notifications_talk_page_message">%1$s님이 당신의 사용자 토론 문서에 글을 남겼습니다</string>
   <string name="notifications_thank_you_edit">편집해 주셔서 감사합니다</string>
-  <string name="notifications_mention">%1$s님이 %2$s에서 당신을 언급했습니다.</string>
+  <string name="notifications_mention">%1$s님이 %2$s에서 나를 언급했습니다.</string>
+  <string name="about_faq">자주 묻는 질문</string>
+  <string name="welcome_skip_button">강좌 건너뛰기</string>
 </resources>

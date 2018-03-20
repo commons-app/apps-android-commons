@@ -73,7 +73,7 @@
   <string name="title_activity_signup">Wregistrëjë sã</string>
   <string name="menu_about">Ò aplikacëji</string>
   <string name="about_privacy_policy" fuzzy="true">&lt;a href=\"https://wikimediafoundation.org/wiki/Privacy_policy\"&gt;Pòlitika priwatnotë&lt;/a&gt;</string>
-  <string name="about_credits">&lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/CREDITS\"&gt;Ùsôdzcë&lt;/a&gt;</string>
+  <string name="about_credits" fuzzy="true">&lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/CREDITS\"&gt;Ùsôdzcë&lt;/a&gt;</string>
   <string name="title_activity_about">Ò aplikacëji</string>
   <string name="menu_feedback">Sélôj òpinijã (przez e-mail)</string>
   <string name="no_email_client">Felënk wjinstalowónegò e-mailowégò klienta</string>
@@ -84,7 +84,7 @@
   <string name="menu_cancel_upload">Òprzestóń</string>
   <string name="share_license_summary">Nen òbrôzk bãdze ùprzistãpniony wedle licencëji %1$s</string>
   <string name="menu_download">Zladënk</string>
-  <string name="preference_license">Licencëjô</string>
+  <string name="preference_license" fuzzy="true">Licencëjô</string>
   <string name="use_previous">Ùżëjë slédnegò titla/òpisënka</string>
   <string name="allow_gps">Aùtomatno dobëjë aktualną lokalizacëjã</string>
   <string name="preference_theme">Nocny trib</string>
@@ -130,7 +130,6 @@
   <string name="media_detail_coordinates">Kòòrdinatë</string>
   <string name="media_detail_coordinates_empty">Felënk pòdôwków</string>
   <string name="become_a_tester_title">Bãdze beta-testerã</string>
-  <string name="use_wikidata">Ùżëjë Wikipòdôwków</string>
   <string name="_2fa_code">Kòd 2FA</string>
   <string name="logout_verification">Pò prôwdze chcesz sã wëlogòwac?</string>
   <string name="commons_logo">Logò Commons</string>

@@ -1,10 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+  <string name="preference_category_appearance">Aparensa</string>
+  <string name="preference_category_general">General</string>
+  <string name="preference_category_feedback">Sugeriment</string>
+  <string name="preference_category_location">Locassion</string>
   <string name="app_name">Comun</string>
+  <string name="bullet">•</string>
   <string name="menu_settings">Paràmeter</string>
   <string name="username">Stranòm</string>
   <string name="password">Ciav</string>
+  <string name="login_credential">Ch\'a intra an sò cont Comun beta</string>
   <string name="login">Intré ant ël sistema</string>
+  <string name="forgot_password">Ciav dësmentià?</string>
   <string name="signup">Anscriv-se</string>
   <string name="logging_in_title">Conession</string>
   <string name="logging_in_message">Ch\'a l\'abia passiensa…</string>
@@ -36,6 +43,7 @@
   <string name="menu_share">Partagé</string>
   <string name="menu_open_in_browser">Smon-e ant ël navigador</string>
   <string name="share_title_hint">Tìtol</string>
+  <string name="add_title_toast">Për piasì, ch\'a-j buta \'n tìtol a s\'archivi</string>
   <string name="share_description_hint">Descrission</string>
   <string name="login_failed_network">Impossìbil rintré ant ël sistema - la rej a marcia nen</string>
   <string name="login_failed_username">Impossìbil rintré ant ël sistema - për piasì, ch\'a verìfica sò stranòm</string>
@@ -75,8 +83,8 @@
   <string name="menu_about">A propòsit</string>
   <string name="about_license">L\'aplicassion Wikimedia Commons a l\'é n\'aplicassion a sorgiss duverta creà e mantnùa da \'d përson-e pagà e da \'d volontari ëd la comunità Wikimedia. La Fondassion Wikimedia a l\'é nen amplicà ant la creassion, ël dësvlup, o la manutension dl\'aplicassion.</string>
   <string name="about_improve">Creé na neuva &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;signalassion GitHub&lt;/a&gt; për signalé dij givo e dij sugeriment.</string>
-  <string name="about_privacy_policy">&lt;a href=\"https://github.com/commons-app/apps-android-commons/wiki/Privacy-policy\"&gt;Régole ëd confidensialità&lt;/a&gt;</string>
-  <string name="about_credits">&lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/CREDITS\"&gt;Ringrassiament&lt;/a&gt;</string>
+  <string name="about_privacy_policy">&lt;u&gt;Régole ëd confidensialità&lt;/u&gt;</string>
+  <string name="about_credits">&lt;u&gt;Aringrassiament&lt;/u&gt;</string>
   <string name="title_activity_about">A propòsit</string>
   <string name="menu_feedback">Mandé dij coment (për pòsta eletrònica)</string>
   <string name="no_email_client">Gnun clien ëd pòsta eletrònica anstalà</string>
@@ -88,7 +96,7 @@
   <string name="share_license_summary">Costa plancia a sarà sota la licensa %1$s</string>
   <string name="media_upload_policy">An mandand costa plancia, i diciaro ch\'a l\'é euvra ëd mè travaj, ch\'a conten nen d\'element sota drit d\'autor o d\'àutoscat, e che comsëssìa a l\'é conforma a &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines\"&gt;le régole ëd Wikimedia Commons&lt;/a&gt;.</string>
   <string name="menu_download">Dëscarié</string>
-  <string name="preference_license">Licensa</string>
+  <string name="preference_license">Licensa dë stàndard</string>
   <string name="use_previous">Dovré ël tìtol o la descrission precedent</string>
   <string name="allow_gps">Oten-e an automàtich la posission atual</string>
   <string name="allow_gps_summary">Arcuperé la posission atual për propon-e dij sugeriment ëd categorìa si la plancia a l\'é nen marcà da na mira geogràfica</string>
@@ -117,11 +125,20 @@
   <string name="tutorial_1_text">Wikimedia Comun a òspita la pipart ëd le plance ch\'a son dovrà an Wikipedia.</string>
   <string name="tutorial_1_subtext">Soe plance a giuto a eduché la gent daspërtut ant ël mond!</string>
   <string name="tutorial_2_text">Për piasì, ch\'a caria dle fòto ch\'a son ëstàite scatà o creà tute da chiel:</string>
-  <string name="tutorial_2_subtext">- Oget naturaj (fior, animaj, montagne) \n- Oget ùtij (biciclëtte, stassion feroviarie)\n- Përson-e arnomà (sò sìndich, j\'atleta olìmpich che chiel a l\'ha rancontrà)</string>
+  <string name="tutorial_2_subtext">Oget naturaj (fior, animaj, montagne) \n• Oget ùtij (biciclëtte, stassion feroviarie) \n• Përson-e arnomà (sò sìndich, j\'atleta olìmpich che chiel a l\'ha rancontrà)</string>
+  <string name="tutorial_2_subtext_1">Oget naturaj (fior, animaj, montagne)</string>
+  <string name="tutorial_2_subtext_2">Oget ùtij (biciclëtte, stassion feroviarie)</string>
+  <string name="tutorial_2_subtext_3">Përson-e arnomà (sò sìndich, j\'atleta olìmpich che chiel a l\'ha rancontrà)</string>
   <string name="tutorial_3_text">Për piasì, ch\'a caria NEN:</string>
   <string name="tutorial_3_subtext">- dj\'àuto-scat o dle fòto dij sò amis\n- dle fòto ch\'a l\'ha dëscarià d\'an sl\'Aragnà\n- Plance d\'aplicassion sota drit d\'autor</string>
+  <string name="tutorial_3_subtext_1">Fotografìe ëd chiel-midem o dij sò amis</string>
+  <string name="tutorial_3_subtext_2">Plance ch\'a l\'ha dëscarià da \'n sl\'aragnà</string>
+  <string name="tutorial_3_subtext_3">Schërmà d\'aplicassion sota drit d\'autor</string>
   <string name="tutorial_4_text">Esempi ëd cariament:</string>
   <string name="tutorial_4_subtext">- Tìtol: Ël teatro dl\'òpera ëd Sidney\n- Descrission: Ël teatro dl\'òpera ëd Sidney s-ciairà dëdlà dl\'ansen\n- Categorìe: Teatro dl\'òpera ëd Sidney da ponent, viste a distansa dël Teatro dl\'òpera ëd Sydney</string>
+  <string name="tutorial_4_subtext_1">Tìtol: Teatro dl\'òpera ëd Sidney</string>
+  <string name="tutorial_4_subtext_2">Descrission: Teatro dl\'Òpera ëd Sidney s-ciairà da l\'àutra part ëd l\'ansen</string>
+  <string name="tutorial_4_subtext_3">Categorìe: Teatro dl\'òpera ëd Sidney da ponent, Viste da leugn dël Teatro dl\'òpera ëd Sidney</string>
   <string name="welcome_wikipedia_text">Ch\'a contribuissa con soe plance. Ch\'a giuta a j\'artìcoj ëd Wikipedia a pijé vita!</string>
   <string name="welcome_wikipedia_subtext">Le plance su Wikipedia a ven-o da Wikimedia Commons.</string>
   <string name="welcome_copyright_text">Soe plance a giuto a eduché la gent daspërtut ant ël mond.</string>
@@ -154,8 +171,6 @@
   <string name="media_detail_coordinates_empty">Nen fornì</string>
   <string name="become_a_tester_title">Dventé në sperimentador Beta</string>
   <string name="become_a_tester_description">Anscriv-se a nòstr canal beta su Google Play a oten-e n\'acess antissipà a le neuve fonsionalità e coression ëd givo</string>
-  <string name="use_wikidata">Dovré Wikidàit</string>
-  <string name="use_wikidata_summary">(Atension: disabilité sòn a podrìa provoché un gròss consum ëd dàit con ël sacociàbil)</string>
   <string name="_2fa_code">Còdes 2FA</string>
   <string name="number_of_uploads">Mè lìmit ëd cariament recent</string>
   <string name="maximum_limit">Lìmit màssim</string>
@@ -207,6 +222,8 @@
   <string name="login_to_your_account">Ch\'as colega a sò cont</string>
   <string name="send_log_file">Mandé l\'archivi d\'argistr</string>
   <string name="send_log_file_description">Mandé l\'archivi d\'argistr ai dësvlupator për pòsta eletrònica</string>
+  <string name="no_web_browser">Gnun navigador trovà për duverté l\'adrëssa an sl\'aragnà</string>
+  <string name="null_url">Eror! Liura nen trovà</string>
   <string name="nearby_location_has_not_changed">Ël leu a l\'é nen cangià.</string>
   <string name="nearby_location_not_available">Leu nen disponìbil.</string>
   <string name="location_permission_rationale_nearby">A-i é da manca dël përmess pr\'ësmon-e na lista dij pòst davzin</string>
@@ -217,4 +234,6 @@
   <string name="notifications_thank_you_edit">Mersì d\'avèj fàit na modìfica</string>
   <string name="notifications_mention">%1$s a l\'ha massionalo su %2$s .</string>
   <string name="toggle_view_button">Cangé la visualisassion</string>
+  <string name="about_faq">Chestion frequente</string>
+  <string name="welcome_skip_button">Sauté lë spiegon</string>
 </resources>

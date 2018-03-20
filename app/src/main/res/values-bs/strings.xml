@@ -76,7 +76,7 @@
   <string name="about_license" fuzzy="true">Program otvorenog kod objavljen pod licencom &lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/COPYING\"&gt;Apache v2&lt;/a&gt;. Wikimedia Commons i njen logo zaštitni su znaci Zadužbine Wikimedia i koriste se s njenom dozvolom. Nismo povezani niti nas podržava Zadužbina Wikimedia.</string>
   <string name="about_improve" fuzzy="true">&lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;Izvorni kod&lt;/a&gt; i &lt;a href=\"https://commons-app.github.io/\"&gt;veb-sajt&lt;/a&gt; na GitHubu. Započnite novi &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;slučaj na GitHubu&lt;/a&gt; da biste prijavili greške i dali prijedloge.</string>
   <string name="about_privacy_policy" fuzzy="true">&lt;a href=\"https://wikimediafoundation.org/wiki/Privacy_policy\"&gt;Politika privatnosti&lt;/a&gt;</string>
-  <string name="about_credits">&lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/CREDITS\"&gt;Zasluge&lt;/a&gt;</string>
+  <string name="about_credits" fuzzy="true">&lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/CREDITS\"&gt;Zasluge&lt;/a&gt;</string>
   <string name="title_activity_about">O</string>
   <string name="menu_feedback">Pošalji povratne informacije (putem e-pošte)</string>
   <string name="no_email_client">Nemate instaliranu aplikaciju za e-poštu</string>
@@ -87,7 +87,7 @@
   <string name="menu_cancel_upload">Otkaži</string>
   <string name="share_license_summary">Slika će se voditi pod licencom %1$s</string>
   <string name="menu_download">Preuzmi</string>
-  <string name="preference_license">Licenca</string>
+  <string name="preference_license" fuzzy="true">Licenca</string>
   <string name="use_previous">Koristi prethodni naziv/opis</string>
   <string name="allow_gps">Automatski dobavi trenutnu lokaciju</string>
   <string name="allow_gps_summary">Dobavi trenutnu lokaciju za davanje prijedloga o kategorijama ako nema geooznaku</string>
@@ -116,7 +116,7 @@
   <string name="tutorial_1_text">Wikimedia Commons skladišti većinu slika koje se koriste na Wikipediji.</string>
   <string name="tutorial_1_subtext">Vaše slike pomažu u obrazovanju ljudi širom svijeta!</string>
   <string name="tutorial_2_text">Postavljajte slike koje su u potpunosti Vaše djelo:</string>
-  <string name="tutorial_2_subtext">– Stvari iz prirode (cvijeće, životinje, planine)\n– Korisne stvari (bicikli, željezničke stanice)\n– Poznate osobe (Vaš gradonačelnik, olimpijski sportisti koje sretnete)</string>
+  <string name="tutorial_2_subtext" fuzzy="true">– Stvari iz prirode (cvijeće, životinje, planine)\n– Korisne stvari (bicikli, željezničke stanice)\n– Poznate osobe (Vaš gradonačelnik, olimpijski sportisti koje sretnete)</string>
   <string name="tutorial_3_text">NE postavljajte:</string>
   <string name="tutorial_3_subtext">– Vlastite slike ili slike svojih prijatelja\n– Slike koje ste preuzeli s interneta\n– Slike ekrana neslobodnih aplikacija</string>
   <string name="tutorial_4_text">Primjer postavljanja:</string>
@@ -149,8 +149,6 @@
   <string name="media_detail_uploaded_date">Datum postavljanja</string>
   <string name="become_a_tester_title">Postanite beta-tester</string>
   <string name="become_a_tester_description">Prijavite se na naš beta-kanal na Google Playu i dobijte raniji pristup novim mogućnostima i ispravkama grešaka</string>
-  <string name="use_wikidata">Koristi Wikipodatke</string>
-  <string name="use_wikidata_summary">(Upozorenje: isključivanje ovoga moglo bi dovesti do velike potrošnje mobilnih podataka)</string>
   <string name="_2fa_code">Kôd za provjeru u 2 koraka</string>
   <string name="number_of_uploads">Moje ograničenje za nedavna postavljanja</string>
   <string name="maximum_limit">Krajnja granica</string>

@@ -75,7 +75,7 @@
   <string name="menu_cancel_upload">გოუქვაფა</string>
   <string name="share_license_summary">თე სურათი გიბჟინუ %1$s ლიცენზიათ</string>
   <string name="menu_download">გინოჭარუა</string>
-  <string name="preference_license">ლიცენზია</string>
+  <string name="preference_license" fuzzy="true">ლიცენზია</string>
   <string name="use_previous">წჷმი სათაურიშ/ეჭარუაშ გჷმორინაფა</string>
   <string name="allow_gps">ასეიანი ორენიშ ავტომატური მეღება</string>
   <string name="preference_theme">სერიშ რეჟიმი</string>
@@ -101,7 +101,7 @@
   <string name="license_name_cc_by_4_0">CC BY 4.0</string>
   <string name="license_name_cc_zero">CC Zero</string>
   <string name="tutorial_2_text">ქორთხინთ გეხარგეთ, ხვალე თქვანით ინოღალირი ვარდა აკოქიმინელი სურათეფი:</string>
-  <string name="tutorial_2_subtext">- ორთაშობური ობიექტეფი (პიოლეფი, ჩხოლარეფი, გვალეფი)\n- ორგებელი ობიექტეფი (ველოსიპედეფი, მახინწალიშ დგჷმიელფი)\n- ჩინებული ადამიერეფი (თქვანი ნოღაშ მერი, ოლიმპიარი სპორტსმენეფი, ნამუეფსჷთ შეხვალამუთჷნ)</string>
+  <string name="tutorial_2_subtext" fuzzy="true">- ორთაშობური ობიექტეფი (პიოლეფი, ჩხოლარეფი, გვალეფი)\n- ორგებელი ობიექტეფი (ველოსიპედეფი, მახინწალიშ დგჷმიელფი)\n- ჩინებული ადამიერეფი (თქვანი ნოღაშ მერი, ოლიმპიარი სპორტსმენეფი, ნამუეფსჷთ შეხვალამუთჷნ)</string>
   <string name="tutorial_3_text">ქორთხინთ ვეხარგათ:</string>
   <string name="tutorial_3_subtext">- სელფი ვარდა მაჸალეეფიშ სურათეფი\n- ინტერნეტშე გჷმოხარგილი ფოტოეფი\n- ვადუდიშული აპლიკაციეფიშ სკრინშოტეფი</string>
   <string name="tutorial_4_text">ეხარგუაშ მინუში:</string>
@@ -129,7 +129,6 @@
   <string name="media_detail_license">ლიცენზია</string>
   <string name="media_detail_coordinates">კოორდინატეფი</string>
   <string name="become_a_tester_title">ბეტა ტესტირებას კათაფი</string>
-  <string name="use_wikidata">ვიკიმუნაჩემეფიშ გჷმორინაფა</string>
   <string name="_2fa_code">2ფა კოდი</string>
   <string name="number_of_uploads">ჩქიმი ბოლო ეხარგუეფიშ ლიმიტი</string>
   <string name="maximum_limit">მაქსიმალური ლიმიტი</string>

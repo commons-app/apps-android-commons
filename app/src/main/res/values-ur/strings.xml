@@ -75,8 +75,8 @@
   <string name="menu_about">بابت</string>
   <string name="about_license">ویکیمیڈیا کامنز ایپ ایک اوپن سورس ایپ ہے جو موہوب الیہ اور رضاکاروں کی جانب سے برقرار رکھی جاتی اور بنائی گئی ہے۔ ویکیمیڈیا فاؤنڈیش کا اس ایپ کی برقراری اور تخلیق سے کوئی واسطہ نہیں ہے۔</string>
   <string name="about_improve">&lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;ماخذ&lt;/a&gt; اور &lt;a href=\"https://commons-app.github.io/\"&gt;ویب سائٹ&lt;/a&gt; در گٹ ہب۔&lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;نیا گٹ ہب اجرا بنائیں&lt;/a&gt; تاکہ آپ bug شکایتیں اور تجایز دیں سکیں</string>
-  <string name="about_privacy_policy">&lt;a href=\"https://github.com/commons-app/apps-android-commons/wiki/Privacy-policy\"&gt;سرگرمی کی تدبیر&lt;/a&gt;</string>
-  <string name="about_credits">&lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/CREDITS\"&gt;کریڈٹ&lt;/a&gt;</string>
+  <string name="about_privacy_policy" fuzzy="true">&lt;a href=\"https://github.com/commons-app/apps-android-commons/wiki/Privacy-policy\"&gt;سرگرمی کی تدبیر&lt;/a&gt;</string>
+  <string name="about_credits" fuzzy="true">&lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/CREDITS\"&gt;کریڈٹ&lt;/a&gt;</string>
   <string name="title_activity_about">تعارف</string>
   <string name="menu_feedback">فیڈبیک بھیجیے (براستہ ای میل)</string>
   <string name="no_email_client">ای میل کلائنٹ انسٹال نہیں</string>
@@ -88,7 +88,7 @@
   <string name="share_license_summary">%1$s تلے یہ تصویر لائسنس یافتہ ہو گی</string>
   <string name="media_upload_policy">اس تصویر کو درج کر کے، میں اقرار کرتا ہوں کہ یہ میرا اپنا کام ہے، اس ميں کاپی رائٹ مواد یا سیلفیاں نہیں ہیں، اور بصورت دیگر میں &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines\"&gt;ویکیمیڈیا کامنز پالیسیوں&lt;/a&gt; کا پابند ہوں۔</string>
   <string name="menu_download">ڈاؤنلوڈ</string>
-  <string name="preference_license">اجازت نامہ</string>
+  <string name="preference_license" fuzzy="true">اجازت نامہ</string>
   <string name="use_previous">گزشتہ عنوان/وضاحت استعمال کریں</string>
   <string name="allow_gps">خودکارانہ طریقے سے حالیہ جگہ حاصل کریں</string>
   <string name="allow_gps_summary">اگر تصویر جغرافیائی نہیں ہے تو قسم کے تجاویز پیش کرنے کیلئے موجودہ مقام کو دوبارہ حاصل کریں</string>
