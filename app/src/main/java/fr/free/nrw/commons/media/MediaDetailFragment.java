@@ -82,7 +82,8 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
     private TextView license;
     private TextView coordinates;
     private TextView uploadedDate;
-    private TextView nominatedforDeletion;
+    private TextView seeMore;
+    private LinearLayout nominatedforDeletion;
     private LinearLayout categoryContainer;
     private Button delete;
     private ScrollView scrollView;
@@ -137,7 +138,8 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
         license = (TextView) view.findViewById(R.id.mediaDetailLicense);
         coordinates = (TextView) view.findViewById(R.id.mediaDetailCoordinates);
         uploadedDate = (TextView) view.findViewById(R.id.mediaDetailuploadeddate);
-        nominatedforDeletion = (TextView) view.findViewById(R.id.nominatedDeletionBanner);
+        seeMore = (TextView) view.findViewById(R.id.seeMore);
+        nominatedforDeletion = (LinearLayout) view.findViewById(R.id.nominatedDeletionBanner);
         delete = (Button) view.findViewById(R.id.nominateDeletion);
         categoryContainer = (LinearLayout) view.findViewById(R.id.mediaDetailCategoryContainer);
 
@@ -349,7 +351,7 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
             });
         }
         if (nominatedforDeletion.getVisibility() == View.VISIBLE){
-            nominatedforDeletion.setOnClickListener(v -> {
+            seeMore.setOnClickListener(v -> {
                 openWebBrowser(media.getFilePageTitle().getMobileUri().toString());
             });
         }

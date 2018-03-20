@@ -251,19 +251,33 @@
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/small_gap" />
 
-                <TextView
+                <LinearLayout
                     android:id="@+id/nominatedDeletionBanner"
                     android:background="@color/deleteBackgroundColor"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:paddingBottom="@dimen/tiny_gap"
-                    android:gravity="center"
-                    android:text="@string/nominated_for_deletion"
-                    android:textColor="@color/primaryTextColor"
+                    android:orientation="vertical"
                     android:padding="@dimen/standard_gap"
-                    android:textSize="@dimen/normal_text"
-                    android:textStyle="bold"
-                    android:visibility="gone"/>
+                    android:visibility="gone">
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="@string/nominated_for_deletion"
+                        android:textColor="@color/primaryTextColor"
+                        android:textSize="@dimen/normal_text"
+                        android:textStyle="bold"/>
+                    <TextView
+                        android:id="@+id/seeMore"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="@string/nominated_see_more"
+                        android:paddingTop="@dimen/standard_gap"
+                        android:textColor="@color/primaryTextColor"
+                        android:textSize="@dimen/normal_text"
+                        android:textStyle="bold"/>
+                </LinearLayout>
 
                 <Button
                     android:id="@+id/nominateDeletion"
