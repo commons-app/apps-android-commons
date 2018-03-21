@@ -1,5 +1,6 @@
 package fr.free.nrw.commons.category;
 
+
 import android.app.Activity;
 import android.content.SharedPreferences;
 import android.os.Bundle;

@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+  <string name="preference_category_appearance">Aparença</string>
+  <string name="preference_category_location">Ubicació</string>
   <string name="app_name">Commons</string>
   <string name="menu_settings">Configuració</string>
   <string name="username">Nom d\'usuari</string>
@@ -86,7 +88,7 @@
   <string name="menu_cancel_upload">Cancel·la</string>
   <string name="share_license_summary">Aquesta imatge es llicenciarà sota %1$s</string>
   <string name="menu_download">Baixa</string>
-  <string name="preference_license">Llicència</string>
+  <string name="preference_license">Llicència per defecte</string>
   <string name="use_previous">Utilitza títol i descripció anteriors</string>
   <string name="preference_theme">Mode nocturn</string>
   <string name="preference_theme_summary">Utilitza el tema fosc</string>
@@ -111,6 +113,7 @@
   <string name="license_name_cc_by_4_0">CC BY 4.0</string>
   <string name="license_name_cc_zero">CC Zero</string>
   <string name="tutorial_3_text">NO carregueu:</string>
+  <string name="tutorial_3_subtext_2">Imatges baixades des de la Internet</string>
   <string name="tutorial_4_text">Exemple de càrrega:</string>
   <string name="welcome_wikipedia_text">Doneu les vostres imatges. Ajudeu a donar vida als articles de la Viquipèdia!</string>
   <string name="welcome_wikipedia_subtext">Les imatges de la Viquipèdia vénen de la Wikimedia Commons.</string>
@@ -138,7 +141,6 @@
   <string name="media_detail_license">Llicència</string>
   <string name="media_detail_coordinates">Coordenades</string>
   <string name="media_detail_coordinates_empty">No s\'ha proporcionat cap</string>
-  <string name="use_wikidata">Utilitza Wikidata</string>
   <string name="_2fa_code">Codi 2FA</string>
   <string name="maximum_limit">Límit màxim</string>
   <string name="logout_verification">Realment voleu finalitzar la sessió?</string>
@@ -179,4 +181,5 @@
   <string name="read_article">LLEGIU L’ARTICLE</string>
   <string name="notifications_thank_you_edit">Gràcies per fer una modificació</string>
   <string name="notifications_mention" fuzzy="true">%1$s us ha mencionat a %2$s.</string>
+  <string name="about_faq">Preguntes freqüents</string>
 </resources>

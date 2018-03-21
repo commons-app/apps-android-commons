@@ -8,6 +8,7 @@ import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.ColorRes;
 import android.support.annotation.NonNull;
@@ -27,6 +28,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.io.IOException;
 
@@ -35,6 +37,7 @@ import javax.inject.Named;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import fr.free.nrw.commons.BuildConfig;
 import fr.free.nrw.commons.PageTitle;
 import fr.free.nrw.commons.R;
@@ -44,6 +47,7 @@ import fr.free.nrw.commons.contributions.ContributionsActivity;
 import fr.free.nrw.commons.di.ApplicationlessInjection;
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
 import fr.free.nrw.commons.theme.NavigationBaseActivity;
+import fr.free.nrw.commons.ui.widget.HtmlTextView;
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
@@ -73,10 +77,15 @@ public class LoginActivity extends AccountAuthenticatorActivity {
     @BindView(R.id.error_message_container) ViewGroup errorMessageContainer;
     @BindView(R.id.error_message) TextView errorMessage;
     @BindView(R.id.login_credentials) TextView loginCredentials;
-    @BindView(R.id.two_factor_container)TextInputLayout twoFactorContainer;
+    @BindView(R.id.two_factor_container) TextInputLayout twoFactorContainer;
+    @BindView(R.id.forgotPassword) HtmlTextView forgotPasswordText;
+
     ProgressDialog progressDialog;
     private AppCompatDelegate delegate;
     private LoginTextWatcher textWatcher = new LoginTextWatcher();
+
+    private Boolean loginCurrentlyInProgress = false;
+    private static final String LOGING_IN = "logingIn";
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -114,6 +123,8 @@ public class LoginActivity extends AccountAuthenticatorActivity {
         loginButton.setOnClickListener(view -> performLogin());
         signupButton.setOnClickListener(view -> signUp());
 
+        forgotPasswordText.setOnClickListener(view -> forgotPassword());
+
         if(BuildConfig.FLAVOR == "beta"){
             loginCredentials.setText(getString(R.string.login_credential));
         } else {
@@ -121,6 +132,14 @@ public class LoginActivity extends AccountAuthenticatorActivity {
         }
     }
 
+    private void forgotPassword() {
+        Utils.handleWebUrl(this, Uri.parse(BuildConfig.FORGOT_PASSWORD_URL));
+    }
+
+    @OnClick(R.id.about_privacy_policy)
+    void onPrivacyPolicyClicked() {
+        Utils.handleWebUrl(this,Uri.parse("https://github.com/commons-app/apps-android-commons/wiki/Privacy-policy\\"));
+    }
 
     public void hideKeyboard(View view) {
         InputMethodManager inputMethodManager =(InputMethodManager)this.getSystemService(Activity.INPUT_METHOD_SERVICE);
@@ -164,6 +183,7 @@ public class LoginActivity extends AccountAuthenticatorActivity {
     }
 
     private void performLogin() {
+        loginCurrentlyInProgress = true;
         Timber.d("Login to start!");
         final String username = canonicializeUsername(usernameEdit.getText().toString());
         final String password = passwordEdit.getText().toString();
@@ -194,6 +214,7 @@ public class LoginActivity extends AccountAuthenticatorActivity {
         if (result.equals("PASS")) {
             handlePassResult(username, password);
         } else {
+            loginCurrentlyInProgress = false;
             handleOtherResults(result);
         }
     }
@@ -314,6 +335,21 @@ public class LoginActivity extends AccountAuthenticatorActivity {
     @NonNull
     public MenuInflater getMenuInflater() {
         return getDelegate().getMenuInflater();
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putBoolean(LOGING_IN, loginCurrentlyInProgress);
+    }
+
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+        loginCurrentlyInProgress = savedInstanceState.getBoolean(LOGING_IN, false);
+        if(loginCurrentlyInProgress){
+            performLogin();
+        }
     }
 
     public void askUserForTwoFactorAuth() {

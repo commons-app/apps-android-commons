@@ -1,12 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+  <string name="preference_category_appearance">Εμφάνιση</string>
+  <string name="preference_category_general">Γενικά</string>
+  <string name="preference_category_feedback">Ανατροφοδότηση</string>
+  <string name="preference_category_location">Τοποθεσία</string>
   <string name="app_name">Commons</string>
+  <string name="bullet">•</string>
   <string name="menu_settings">Ρυθμίσεις</string>
   <string name="username">Όνομα χρήστη</string>
   <string name="password">Κωδικός πρόσβασης</string>
+  <string name="login_credential">Συνδεθείτε στο λογαριασμό σας στο Commons Beta</string>
   <string name="login">Σύνδεση</string>
+  <string name="forgot_password">Ξεχάσατε τον κωδικό σας;</string>
   <string name="signup">Εγγραφή</string>
-  <string name="logging_in_title">Συνδέεται</string>
+  <string name="logging_in_title">Γίνεται σύνδεση…</string>
   <string name="logging_in_message">Παρακαλούμε περιμένετε…</string>
   <string name="login_success">Επιτυχής σύνδεση!</string>
   <string name="login_failed">Η είσοδος απέτυχε!</string>
@@ -17,7 +24,7 @@
   <string name="upload_completed_notification_text">Πατήστε για να προβάλλετε την αποστολή</string>
   <string name="upload_progress_notification_title_start">Έναρξη  %1$s  επιφορτώθηκε</string>
   <string name="upload_progress_notification_title_in_progress">%1$s επιφορτώνεται</string>
-  <string name="upload_progress_notification_title_finishing">Αποπεράτωση επιφόρτωσης %1$s</string>
+  <string name="upload_progress_notification_title_finishing">Ολοκλήρωση επιφόρτωσης %1$s</string>
   <string name="upload_failed_notification_title">Ανέβασμα του %1$s απέτυχε</string>
   <string name="upload_failed_notification_subtitle">Πατήστε για να δείτε</string>
   <plurals name="uploads_pending_notification_indicator">
@@ -36,6 +43,7 @@
   <string name="menu_share">Κοινοποίηση</string>
   <string name="menu_open_in_browser">Προβολή στον περιηγητή</string>
   <string name="share_title_hint">Τίτλος</string>
+  <string name="add_title_toast">Παρακαλώ παρέχετε ένα τίτλο για αυτό το αρχείο</string>
   <string name="share_description_hint">Περιγραφή</string>
   <string name="login_failed_network">Δεν είναι δυνατή η σύνδεση - αποτυχία του δικτύου</string>
   <string name="login_failed_username">Δεν είναι δυνατή η σύνδεση - ελέγξτε το όνομα χρήστη σας</string>
@@ -53,7 +61,7 @@
   <string name="refresh_button">Ανανέωση</string>
   <string name="gps_disabled">Το GPS στην συσκευή είναι απενεργοποιημένο. Θέλετε να το ενεργοποιήσετε;</string>
   <string name="enable_gps">  Ενεργοποιήσετε το GPS</string>
-  <string name="contributions_subtitle_zero">Δεν υπάρχουν ακόμα φορτωμένα αρχεία</string>
+  <string name="contributions_subtitle_zero">Δεν έχουν ακόμη επιφορτωθεί αρχεία</string>
   <plurals name="contributions_subtitle">
     <item quantity="zero">Δεν υπάρχουν επιφορτώσεις ακόμη</item>
     <item quantity="one">%1$d επιφόρτωση</item>
@@ -75,8 +83,8 @@
   <string name="menu_about">Σχετικά</string>
   <string name="about_license">Λογισμικό ανοικτού κωδικού που κυκλοφορεί υπό την &lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/COPYING\"&gt;Άδεια Apache v2&lt;/a&gt;. Το Wikimedia Commons και το λογότυπο είναι εμπορικά σήματα του Ιδρύματος Wikimedia και χρησιμοποιούνται με άδεια από το Ίδρυμα Wikimedia. Δεν συμμετέχουμε  στην δημιουργία, ανάπτυξη ή συντήρηση  του Ιδρύματος  Wikimedia.</string>
   <string name="about_improve">Δημιουργήστε ένα νέο &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;GitHub θέμα&lt;/a&gt; για αναφορές σφαλμάτων και προτάσεις.</string>
-  <string name="about_privacy_policy">&lt;a href=\"https://wikimediafoundation.org/wiki/Privacy_policy\"&gt;Πολιτική Απορρήτου και προσωπικών δεδομένων&lt;/a&gt;</string>
-  <string name="about_credits">&lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/CREDITS\"&gt;CREDITS&lt;/a&gt;</string>
+  <string name="about_privacy_policy">&lt;u&gt;Πολιτική απορρήτου&lt;/u&gt;</string>
+  <string name="about_credits">&lt;u&gt;Συντελεστές&lt;/u&gt;</string>
   <string name="title_activity_about">Σχετικά</string>
   <string name="menu_feedback">Αποστολή σχολίων (μέσω Email)</string>
   <string name="no_email_client">Δεν υπάρχει εγκατεστημένη εφαρμογή ηλεκτρονικού ταχυδρομείου</string>
@@ -88,7 +96,7 @@
   <string name="share_license_summary">Αυτή η εικόνα θα έχει άδεια στα πλαίσια του %1$s</string>
   <string name="media_upload_policy">Αποστέλλοντας αυτήν την εικόνα, δηλώνω πως αυτή η εργασία είναι δική μου, και δεν περιέχει υλικό άλλου συγγραφέα, και εκτός αυτού πρόσκειται στο , thathref=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines\"&gt;Κοινές πολιτικές της Wikipedia&lt;/a&gt;.</string>
   <string name="menu_download">Λήψη</string>
-  <string name="preference_license">Άδεια χρήσης</string>
+  <string name="preference_license">Προεπιλεγμένη άδεια</string>
   <string name="use_previous">Χρήση προηγούμενου τίτλου/περιγραφής</string>
   <string name="allow_gps">Αυτόματη ανάκτηση τρέχουσας θέσης</string>
   <string name="allow_gps_summary">Ανάκτηση τρέχουσας τοποθεσία για να σας προσφέρουμε προτάσεις κατηγοριών αν η εικόνα δεν είναι γεωσεσημασμένη.</string>
@@ -117,16 +125,25 @@
   <string name="tutorial_1_text">Το Wikimedia Commons φιλοξενεί τις περισσότερες από τις εικόνες που χρησιμοποιούνται στη Wikipedia.</string>
   <string name="tutorial_1_subtext">Οι εικόνες σας βοηθούν να μορφωθούν άνθρωποι σε όλο τον κόσμο!</string>
   <string name="tutorial_2_text">Παρακαλούμε ανεβάστε εικόνες που έχουν ληφθεί ή δημιουργηθεί εξ ολοκλήρου από τον εαυτό σας:</string>
-  <string name="tutorial_2_subtext">- Φυσικά αντικείμενα (λουλούδια, ζώα, βουνά)\n- Χρήσιμα αντικείμενα (ποδήλατα, σταθμοί τρένων)\n- Διάσημοι άνθρωποι (ο δήμαρχος, αθλητές Ολυμπιακών αγώνων που συναντήσατε)</string>
+  <string name="tutorial_2_subtext">Φυσικά αντικείμενα (λουλούδια, ζώα, βουνά)\n• Χρήσιμα αντικείμενα (ποδήλατα, σταθμοί τρένων)\n• Διάσημοι άνθρωποι (ο δήμαρχος, αθλητές Ολυμπιακών αγώνων που συναντήσατε)</string>
+  <string name="tutorial_2_subtext_1">Φυσικά αντικείμενα (λουλούδια, ζώα, βουνά)</string>
+  <string name="tutorial_2_subtext_2">Χρήσιμα αντικείμενα (ποδήλατα, σταθμοί τρένων)</string>
+  <string name="tutorial_2_subtext_3">Διάσημοι άνθρωποι (ο δήμαρχος, αθλητές Ολυμπιακών αγώνων που συναντήσατε)</string>
   <string name="tutorial_3_text">Παρακαλούμε ΜΗΝ ανεβάσετε:</string>
   <string name="tutorial_3_subtext">- Selfies ή φωτογραφίες των φίλων σας\n- Εικόνες που έχετε κατεβάσει από το Internet\n- Στιγμιότυπα από ιδιοταγείς εφαρμογές</string>
+  <string name="tutorial_3_subtext_1">Σέλφι ή φωτογραφίες των φίλων σας</string>
+  <string name="tutorial_3_subtext_2">Φωτογραφίες που κατεβάσατε από το διαδίκτυο</string>
+  <string name="tutorial_3_subtext_3">Στιγμιότυπα ιδιόκτητων εφαρμογών</string>
   <string name="tutorial_4_text">Παράδειγμα ανεβάσματος:</string>
   <string name="tutorial_4_subtext">- Τίτλος: Όπερα Του Σίδνεϊ\n- Περιγραφή: Η Όπερα του Σίδνεϊ όπως φαίνεται απέναντι από τον κόλπο\n- Κατηγορίες: Sydney Opera House, Sydney Opera House from the west, Sydney Opera House remote views</string>
+  <string name="tutorial_4_subtext_1">Τίτλος: Όπερα του Σίδνεϋ</string>
+  <string name="tutorial_4_subtext_2">Περιγραφή: Η Όπερα του Σίδνεϋ όπως φαίνεται κατά μήκος του κόλπου</string>
+  <string name="tutorial_4_subtext_3">Κατηγορία: η Όπερα του Σίδνεϋ από τα δυτικά, απομακρυσμένες προβολές της Όπερας του Σίδνεϋ</string>
   <string name="welcome_wikipedia_text">Συνεισφέρετε τις εικόνες σας. Βοηθείστε τα λήμματα της Wikipedia να έρθουν στη ζωή!</string>
   <string name="welcome_wikipedia_subtext">Οι εικόνες στη Wikipedia προέρχονται από το Wikimedia Commons.</string>
   <string name="welcome_copyright_text">Οι εικόνες σας βοηθούν να εκπαιδευτούν άνθρωποι σε όλο τον κόσμο.</string>
   <string name="welcome_copyright_subtext">Αποφύγετε προστατευμένο υλικό  που βρήκατε από το Internet, καθώς και εικόνες, αφίσες, εξώφυλλα βιβλίων, κλπ.</string>
-  <string name="welcome_final_text">Νομίζεις ότι έχεις;</string>
+  <string name="welcome_final_text">Τι λες, μπορείς;</string>
   <string name="welcome_final_button_text">Ναι!</string>
   <string name="detail_panel_cats_label">Κατηγορίες</string>
   <string name="detail_panel_cats_loading">Φόρτωση…</string>
@@ -154,8 +171,6 @@
   <string name="media_detail_coordinates_empty">Δεν δόθηκε τίποτα</string>
   <string name="become_a_tester_title">Γίνετε Δοκιμαστής Beta</string>
   <string name="become_a_tester_description">Συμμετέχετε στο κανάλι beta μας στο Google Play και αποκτήστε πρώιμη πρόσβαση σε νέες λειτουργίες και διορθώσεις σφαλμάτων</string>
-  <string name="use_wikidata">χρήση wikidata</string>
-  <string name="use_wikidata_summary">(Προσοχή: η απενεργοποίηση αυτή μπορεί να προκαλέσει μεγάλη κατανάλωση κινητὠν δεδομένων)</string>
   <string name="_2fa_code">Κωδικός 2FA</string>
   <string name="number_of_uploads">To Όριο του Πρόσφατα Φορτωμένου Αρχείου μου</string>
   <string name="maximum_limit">Μέγιστο Όριο</string>
@@ -207,6 +222,10 @@
   <string name="login_to_your_account">Συνδεθείτε στο λογαριασμό σας.</string>
   <string name="send_log_file">Αποστείλατε τον φάκελλο σύνδεσης</string>
   <string name="send_log_file_description">Στείλατε τον φάκελλο σύνδεσης στους δημιουργούς μέσω email</string>
+  <string name="no_web_browser">Δεν βρέθηκε φυλλομετρητής για το άνοιγμα της διευθύνσεως URL</string>
+  <string name="null_url">Σφάλμα! Η διεύθυνση URL δεν βρέθηκε</string>
+  <string name="nominate_deletion">Προτείνετε για διαγραφή</string>
+  <string name="view_browser">Προβολή στον περιηγητή</string>
   <string name="nearby_location_has_not_changed">Ο εντοπισμός δεν έχει αλλάξει.</string>
   <string name="nearby_location_not_available">Ο τόπος δεν είναι διαθέσιμος.</string>
   <string name="location_permission_rationale_nearby">Απαιτείται άδεια για την εμφάνιση λίστας κοντινών σημείων</string>
@@ -217,4 +236,7 @@
   <string name="notifications_thank_you_edit">Ευχαριστούμε που κάνατε μια επεξεργασία</string>
   <string name="notifications_mention">Ο %1$s σας ανέφερε στο %2$s.</string>
   <string name="toggle_view_button">Μεταβολή προβολής</string>
+  <string name="about_rate_us"/>
+  <string name="about_faq">Συχνές ερωτήσεις</string>
+  <string name="welcome_skip_button">Παράβλεψη εισαγωγής</string>
 </resources>

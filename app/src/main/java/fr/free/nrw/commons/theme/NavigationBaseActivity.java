@@ -23,6 +23,7 @@ import fr.free.nrw.commons.AboutActivity;
 import fr.free.nrw.commons.BuildConfig;
 import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.R;
+import fr.free.nrw.commons.Utils;
 import fr.free.nrw.commons.WelcomeActivity;
 import fr.free.nrw.commons.auth.AccountUtil;
 import fr.free.nrw.commons.auth.LoginActivity;
@@ -87,8 +88,11 @@ public abstract class NavigationBaseActivity extends BaseActivity
 
     private void setDrawerPaneWidth() {
         ViewGroup.LayoutParams params = navigationView.getLayoutParams();
-        // set width to lowerBound of 80% of the screen size
-        params.width = (getResources().getDisplayMetrics().widthPixels * 70) / 100;
+        // set width to lowerBound of 70% of the screen size in portrait mode
+        // set width to lowerBound of 50% of the screen size in landscape mode
+        int percentageWidth = getResources().getInteger(R.integer.drawer_width);
+
+        params.width = (getResources().getDisplayMetrics().widthPixels * percentageWidth) / 100;
         navigationView.setLayoutParams(params);
     }
 

@@ -57,7 +57,7 @@
   <string name="no_uploads_yet">Je hebben nog gien aofbeeldingen op-estuurd.</string>
   <string name="share_license_summary">Disse aofbeelding völt onder de lisensie %1$s</string>
   <string name="menu_download">Neerlaojen</string>
-  <string name="preference_license">Lisensie</string>
+  <string name="preference_license" fuzzy="true">Lisensie</string>
   <string name="license_name_cc_by_sa" fuzzy="true">CC Naamsvermelding-Gelieke Delen</string>
   <string name="license_name_cc_by" fuzzy="true">CC Naamsvermelding</string>
   <string name="license_name_cc0">CC0</string>

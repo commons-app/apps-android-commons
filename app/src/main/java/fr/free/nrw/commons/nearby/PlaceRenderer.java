@@ -144,9 +144,9 @@ public class PlaceRenderer extends Renderer<Place> {
         place = getContent();
         tvName.setText(place.name);
         String descriptionText = place.getLongDescription();
-
         if (descriptionText.equals("?")) {
             descriptionText = getContext().getString(R.string.no_description_found);
+            tvDesc.setVisibility(View.INVISIBLE);
         }
         tvDesc.setText(descriptionText);
         distance.setText(place.distance);

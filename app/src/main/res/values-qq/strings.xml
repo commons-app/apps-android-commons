@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+  <string name="preference_category_general">{{Identical|General}}</string>
   <string name="app_name">The name of the application. A short form of \"Wikimedia Commons\". It is used in the app\'s launcher icon.\n{{Identical|Wikimedia Commons}}</string>
   <string name="menu_settings">Label for menu item to show settings.\n{{Identical|Settings}}</string>
   <string name="username">{{Identical|Username}}</string>
@@ -113,4 +114,5 @@
   <string name="navigation_item_upload">{{Identical|Upload}}</string>
   <string name="navigation_item_nearby">{{Identical|Nearby}}</string>
   <string name="navigation_item_info">{{Identical|Tutorial}}</string>
+  <string name="about_rate_us">\'\'This message is empty, and it\'s probably invalid. See bug report: https://github.com/commons-app/apps-android-commons/issues/1333 .\'\'</string>
 </resources>

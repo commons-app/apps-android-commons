@@ -45,7 +45,7 @@ public class ModifierSequence {
         for (PageModifier modifier: modifiers) {
             editSummary.append(modifier.getEditSumary()).append(" ");
         }
-        editSummary.append("Via Commons Mobile App");
+        editSummary.append("Using [[COM:MOA|Commons Mobile App]]");
         return editSummary.toString();
     }
 
