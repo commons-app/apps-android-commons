@@ -8,6 +8,7 @@ SELECT
      (SAMPLE(COALESCE(?emoji0, ?emoji1)) as ?emoji)
      ?wikipediaArticle
      ?commonsArticle
+     (SAMPLE(?Commons_category) as ?Commons_category)
    WHERE {
      # Around given location...
      SERVICE wikibase:around {
@@ -23,6 +24,9 @@ SELECT
      OPTIONAL {?item rdfs:label ?item_label_preferred_language. FILTER (lang(?item_label_preferred_language) = "${LANG}")}
      OPTIONAL {?item rdfs:label ?item_label_any_language}
 
+     # Get Commons category (P373)
+     OPTIONAL { ?item wdt:P373 ?Commons_category. }
+
      # Get the class label in the preferred language of the user, or any other language if no label is available in that language.
      OPTIONAL {
        ?item p:P31/ps:P31 ?classId.
@@ -35,10 +39,6 @@ SELECT
        # Get emoji
        OPTIONAL { ?classId wdt:P487 ?emoji0. }
        OPTIONAL { ?classId wdt:P279*/wdt:P487 ?emoji1. }
-       OPTIONAL {
-          ?sitelink schema:about ?item .
-          ?sitelink schema:inLanguage "en"
-       }
        OPTIONAL {
            ?wikipediaArticle   schema:about ?item ;
                                schema:isPartOf <https://en.wikipedia.org/> .

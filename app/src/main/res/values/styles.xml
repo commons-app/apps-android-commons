@@ -14,6 +14,11 @@
         <item name="uploadOverlayBackground">@color/upload_overlay_background_dark</item>
         <item name="spinnerTheme">@style/DarkSpinnerTheme</item>
         <item name="iconsTheme">@color/main_background_light</item>
+        <item name="bottomBar">@color/bottom_bar_dark</item>
+        <item name="buttonBackgroundFocused">@color/focused_button_dark</item>
+        <item name="buttonBackgroundPressed">@color/pressed_button_dark</item>
+        <item name="textDisabled">@color/disabled_button_text_color_dark</item>
+        <item name="textEnabled">@color/enabled_button_text_color_dark</item>
     </style>
 
     <style name="LightAppTheme" parent="Theme.AppCompat.Light.NoActionBar">
@@ -29,6 +34,11 @@
         <item name="uploadOverlayBackground">@color/upload_overlay_background_light</item>
         <item name="spinnerTheme">@style/LightSpinnerTheme</item>
         <item name="iconsTheme">@color/main_background_dark</item>
+        <item name="bottomBar">@color/bottom_bar_light</item>
+        <item name="buttonBackgroundFocused">@color/focused_button_light</item>
+        <item name="buttonBackgroundPressed">@color/pressed_button_light</item>
+        <item name="textDisabled">@color/disabled_button_text_color_light</item>
+        <item name="textEnabled">@color/enabled_button_text_color_light</item>
     </style>
 
     <style name="DarkSpinnerTheme" parent="DarkAppTheme">
