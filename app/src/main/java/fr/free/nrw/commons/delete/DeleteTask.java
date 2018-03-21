@@ -23,7 +23,7 @@ import timber.log.Timber;
 import static android.support.v4.content.ContextCompat.startActivity;
 import static android.widget.Toast.LENGTH_SHORT;
 
-public class DeleteTask extends AsyncTask<Void, Void, Boolean> {
+public class DeleteTask extends AsyncTask<Void, Integer, Boolean> {
 
     @Inject MediaWikiApi mwApi;
     @Inject SessionManager sessionManager;
@@ -55,17 +55,6 @@ public class DeleteTask extends AsyncTask<Void, Void, Boolean> {
         authCookie = sessionManager.getAuthCookie();
         mwApi.setAuthCookie(authCookie);
 
-        try {
-            editToken = mwApi.getEditToken();
-        }
-        catch (Exception e){
-            Timber.d(e.getMessage());
-            return false;
-        }
-        if (editToken.equals("+\\")) {
-            return false;
-        }
-
         Calendar calendar = Calendar.getInstance();
         String fileDeleteString = "{{delete|reason=" + reason +
                 "|subpage=" +media.getFilename() +
@@ -73,43 +62,38 @@ public class DeleteTask extends AsyncTask<Void, Void, Boolean> {
                 "|month=" + calendar.getDisplayName(Calendar.MONTH,Calendar.LONG, Locale.getDefault()) +
                 "|year=" + calendar.get(Calendar.YEAR) +
                 "}}";
-        try{
-            mwApi.prependEdit(editToken,fileDeleteString+"\n",
-                    media.getFilename(),summary);
-        }
-        catch (Exception e) {
-            Timber.d(e.getMessage());
-            return false;
-        }
 
         String subpageString = "=== [[:" + media.getFilename() + "]] ===\n" +
                 reason +
                 " ~~~~";
-        try{
-            mwApi.edit(editToken,subpageString+"\n",
-                    "Commons:Deletion_requests/"+media.getFilename(),summary);
-        }
-        catch (Exception e) {
-            Timber.d(e.getMessage());
-            return false;
-        }
 
         String logPageString = "\n{{Commons:Deletion requests/" + media.getFilename() +
                 "}}\n";
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
         String date = sdf.format(calendar.getTime());
-        try{
-            mwApi.appendEdit(editToken,logPageString+"\n",
-                    "Commons:Deletion_requests/"+date,summary);
-        }
-        catch (Exception e) {
-            Timber.d(e.getMessage());
-            return false;
-        }
 
         String userPageString = "\n{{subst:idw|" + media.getFilename() +
                 "}} ~~~~";
-        try{
+
+        try {
+            editToken = mwApi.getEditToken();
+            if (editToken.equals("+\\")) {
+                return false;
+            }
+            publishProgress(1);
+
+            mwApi.prependEdit(editToken,fileDeleteString+"\n",
+                    media.getFilename(),summary);
+            publishProgress(2);
+
+            mwApi.edit(editToken,subpageString+"\n",
+                    "Commons:Deletion_requests/"+media.getFilename(),summary);
+            publishProgress(3);
+
+            mwApi.appendEdit(editToken,logPageString+"\n",
+                    "Commons:Deletion_requests/"+date,summary);
+            publishProgress(4);
+
             mwApi.appendEdit(editToken,userPageString+"\n",
                     "User_Talk:"+sessionManager.getCurrentAccount().name,summary);
         }
@@ -121,9 +105,15 @@ public class DeleteTask extends AsyncTask<Void, Void, Boolean> {
     }
 
     @Override
+    protected void onProgressUpdate (Integer... values){
+
+    }
+
+    @Override
     protected void onPostExecute(Boolean result) {
         String message = "";
         String title = "";
+
         if (result){
             title = "Success";
             message = "Successfully nominated " + media.getDisplayTitle() + " deletion.\n" +
@@ -133,6 +123,7 @@ public class DeleteTask extends AsyncTask<Void, Void, Boolean> {
             title = "Failed";
             message = "Could not request deletion. Something went wrong.";
         }
+
         AlertDialog alert;
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
         builder.setTitle(title);
