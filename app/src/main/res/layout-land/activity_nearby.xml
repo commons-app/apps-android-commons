@@ -4,17 +4,17 @@
     android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-
     <android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:id="@+id/coordinator_layout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
+        android:layout_height="match_parent"
+        >
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
+            
             <include
                 android:id="@+id/toolbar"
                 layout="@layout/toolbar"
@@ -24,51 +24,30 @@
             <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:orientation="horizontal"
                 android:gravity="center_vertical"
-                android:orientation="horizontal">
-
+                android:layout_below="@id/toolbar">
 
                 <ProgressBar
                     android:id="@+id/progressBar"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true" />
 
                 <FrameLayout
                     android:id="@+id/container"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent" />
-        </LinearLayout>
-            <android.support.design.widget.FloatingActionButton
-                android:id="@+id/fab_list"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:fabSize="mini"
-                android:layout_alignBottom="@id/toolbar"
-                android:layout_alignParentRight="true"
-                android:layout_marginRight="28dp"
-                android:layout_marginBottom="-96dp"
-                android:visibility="invisible"
-                app:elevation="6dp"
-                app:pressedTranslationZ="12dp"
-                app:backgroundTint="@color/button_blue"
-                android:clickable="true"
-                app:srcCompat="@drawable/ic_list_white_24dp"
-                android:scaleType="center"
-                />
+                    android:layout_height="match_parent"></FrameLayout>
 
+            </LinearLayout>
             <View
-                android:id="@+id/transparentView"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentTop="true"
-                android:layout_marginTop="18dp"
+                android:id="@+id/transparentView"
+                android:layout_below="@id/toolbar"
                 android:background="#aa969696"
-                android:elevation="6dp">
-
-            </View>
-
+                android:elevation="6dp"
+                />
             <android.support.design.widget.FloatingActionButton
                 android:id="@+id/fab_recenter"
                 android:layout_width="wrap_content"
@@ -85,103 +64,93 @@
                 app:fabSize="normal"
                 app:layout_anchorGravity="top|right|end"
                 app:srcCompat="@drawable/ic_my_location_black_24dp" />
-
-
         </RelativeLayout>
-        
+
         <include layout="@layout/bottom_sheet_nearby" />
-
-        <include
-            android:id="@+id/bottom_sheet_details"
-            layout="@layout/bottom_sheet_details" />
-
+        <include layout="@layout/bottom_sheet_details" android:id="@+id/bottom_sheet_details" />
 
         <android.support.design.widget.FloatingActionButton
             android:id="@+id/fab_plus"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentRight="true"
-            android:layout_marginEnd="12dp"
-            android:layout_marginRight="12dp"
-            android:clickable="true"
-            android:visibility="invisible"
-            app:backgroundTint="@color/button_blue"
-            app:elevation="6dp"
             app:fabSize="normal"
+            android:layout_margin="16dp"
+            android:visibility="invisible"
+            android:clickable="true"
+            app:elevation="6dp"
+            app:pressedTranslationZ="12dp"
+            app:backgroundTint="@color/button_blue"
             app:layout_anchor="@id/bottom_sheet_details"
             app:layout_anchorGravity="top|right|end"
-            app:pressedTranslationZ="12dp"
-            app:srcCompat="@drawable/ic_add_white_24dp" />
-
+            app:srcCompat="@drawable/ic_add_white_24dp"/>
         <View
-            android:id="@+id/empty_view2"
-            android:layout_width="56dp"
-            android:layout_height="306dip"
+            android:id = "@+id/empty_view2"
+            android:layout_height = "306dip"
+            android:layout_width = "56dp"
             android:visibility="invisible"
             app:layout_anchor="@id/fab_plus"
-            app:layout_anchorGravity="center_horizontal" />
-
+            app:layout_anchorGravity="center_horizontal"
+            />
         <View
-            android:id="@+id/empty_view1"
-            android:layout_width="56dp"
-            android:layout_height="186dip"
+            android:id = "@+id/empty_view1"
+            android:layout_height = "186dip"
+            android:layout_width = "56dp"
             android:visibility="invisible"
             app:layout_anchor="@id/fab_plus"
-            app:layout_anchorGravity="center_horizontal" />
-
+            app:layout_anchorGravity="center_horizontal"
+            />
         <View
-            android:id="@+id/empty_view"
-            android:layout_width="56dp"
-            android:layout_height="66dip"
+            android:id = "@+id/empty_view"
+            android:layout_height = "66dip"
+            android:layout_width = "56dp"
             android:visibility="invisible"
             app:layout_anchor="@id/fab_plus"
-            app:layout_anchorGravity="center_horizontal" />
-
+            app:layout_anchorGravity="center_horizontal"
+            />
         <android.support.design.widget.FloatingActionButton
             android:id="@+id/fab_camera"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:scaleType="center"
-            android:tint="@color/button_blue"
+            app:fabSize="mini"
             android:visibility="invisible"
             app:backgroundTint="@color/main_background_light"
             app:elevation="6dp"
-            app:fabSize="mini"
+            app:pressedTranslationZ="12dp"
             app:layout_anchor="@id/empty_view1"
             app:layout_anchorGravity="center_horizontal"
-            app:pressedTranslationZ="12dp"
-            app:srcCompat="@drawable/ic_photo_camera_white_24dp" />
-
+            app:srcCompat="@drawable/ic_photo_camera_white_24dp"
+            android:tint="@color/button_blue"
+            android:scaleType="center"/>
         <android.support.design.widget.FloatingActionButton
             android:id="@+id/fab_galery"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:scaleType="center"
-            android:tint="@color/button_blue"
+            app:fabSize="mini"
             android:visibility="invisible"
             app:backgroundTint="@color/main_background_light"
             app:elevation="6dp"
-            app:fabSize="mini"
+            app:pressedTranslationZ="12dp"
             app:layout_anchor="@id/empty_view"
             app:layout_anchorGravity="center_horizontal"
-            app:pressedTranslationZ="12dp"
-            app:srcCompat="@drawable/ic_photo_white_24dp" />
-
+            app:srcCompat="@drawable/ic_photo_white_24dp"
+            android:tint="@color/button_blue"
+            android:scaleType="center"
+            />
         <android.support.design.widget.FloatingActionButton
             android:id="@+id/fab_commons_page"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:scaleType="center"
+            app:fabSize="mini"
             android:visibility="invisible"
             app:backgroundTint="@color/main_background_light"
             app:elevation="6dp"
-            app:fabSize="mini"
+            app:pressedTranslationZ="12dp"
             app:layout_anchor="@id/empty_view2"
             app:layout_anchorGravity="center_horizontal"
-            app:pressedTranslationZ="12dp"
-            app:srcCompat="@drawable/ic_commons_icon_vector" />
+            app:srcCompat="@drawable/ic_commons_icon_vector"
+            android:scaleType="center"
+            />
+
     </android.support.design.widget.CoordinatorLayout>
 
 
@@ -191,6 +160,6 @@
         android:layout_height="match_parent"
         android:layout_gravity="start"
         app:headerLayout="@layout/drawer_header"
-        app:menu="@menu/drawer" />
+        app:menu="@menu/drawer"/>
 
 </android.support.v4.widget.DrawerLayout>
