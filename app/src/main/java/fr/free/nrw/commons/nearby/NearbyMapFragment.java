@@ -27,6 +27,7 @@ import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -108,7 +109,7 @@ public class NearbyMapFragment extends DaggerFragment {
 
     private boolean isBottomListSheetExpanded;
     private final double CAMERA_TARGET_SHIFT_FACTOR = 0.06;
-    private final int MIN_TEXTVIEW_WIDTH=100;
+    private final int MIN_TEXTVIEW_WIDTH=175;
 
     @Inject @Named("prefs") SharedPreferences prefs;
     @Inject @Named("direct_nearby_upload_prefs") SharedPreferences directPrefs;
@@ -377,16 +378,7 @@ public class NearbyMapFragment extends DaggerFragment {
             }
         });
 
-        // Remove texts if size of textview is very small
-        if (wikipediaButtonText.getWidth() < MIN_TEXTVIEW_WIDTH
-                || wikidataButtonText.getWidth() < MIN_TEXTVIEW_WIDTH
-                || commonsButtonText.getWidth() < MIN_TEXTVIEW_WIDTH
-                || directionsButtonText.getWidth() < MIN_TEXTVIEW_WIDTH ) {
-            wikipediaButtonText.setVisibility(View.GONE);
-            wikidataButtonText.setVisibility(View.GONE);
-            commonsButtonText.setVisibility(View.GONE);
-            directionsButtonText.setVisibility(View.GONE);
-        }
+
     }
 
     private void setupMapView(Bundle savedInstanceState) {
@@ -631,6 +623,18 @@ public class NearbyMapFragment extends DaggerFragment {
                 //TODO: Handle onRequestPermissionsResult
             }
         });
+
+        
+        // Remove texts if size of textview is very small
+        if (wikipediaButtonText.getWidth() < MIN_TEXTVIEW_WIDTH
+                || wikidataButtonText.getWidth() < MIN_TEXTVIEW_WIDTH
+                || commonsButtonText.getWidth() < MIN_TEXTVIEW_WIDTH
+                || directionsButtonText.getWidth() < MIN_TEXTVIEW_WIDTH ) {
+            wikipediaButtonText.setVisibility(View.GONE);
+            wikidataButtonText.setVisibility(View.GONE);
+            commonsButtonText.setVisibility(View.GONE);
+            directionsButtonText.setVisibility(View.GONE);
+        }
     }
 
     void storeSharedPrefs() {

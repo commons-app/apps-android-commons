@@ -83,7 +83,7 @@
                 android:textColor="@color/text_color_selector"
                 android:layout_gravity="center_horizontal"
                 android:text="@string/nearby_directions"
-                android:textSize="12sp"
+                android:textSize="10sp"
                 android:singleLine="true"
                 />
         </LinearLayout>
@@ -112,7 +112,7 @@
                 android:textColor="@color/text_color_selector"
                 android:layout_gravity="center_horizontal"
                 android:text="@string/nearby_wikidata"
-                android:textSize="12sp"
+                android:textSize="10sp"
                 android:singleLine="true"
                 />
         </LinearLayout>
@@ -173,7 +173,7 @@
                 android:textColor="@color/text_color_selector"
                 android:layout_gravity="center_horizontal"
                 android:text="@string/nearby_commons"
-                android:textSize="12sp"
+                android:textSize="10sp"
                 android:singleLine="true"
                 />
         </LinearLayout>
