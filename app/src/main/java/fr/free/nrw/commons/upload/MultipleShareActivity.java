@@ -166,7 +166,8 @@ public class MultipleShareActivity extends AuthenticatedActivity
         View target = getCurrentFocus();
         if (target != null) {
             InputMethodManager imm = (InputMethodManager) target.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
-            imm.hideSoftInputFromWindow(target.getWindowToken(), 0);
+            if (imm != null)
+                imm.hideSoftInputFromWindow(target.getWindowToken(), 0);
         }
         getSupportFragmentManager().beginTransaction()
                 .add(R.id.uploadsFragmentContainer, categorizationFragment, "categorization")
