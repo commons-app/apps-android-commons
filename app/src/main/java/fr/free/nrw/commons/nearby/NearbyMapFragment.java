@@ -108,6 +108,7 @@ public class NearbyMapFragment extends DaggerFragment {
 
     private boolean isBottomListSheetExpanded;
     private final double CAMERA_TARGET_SHIFT_FACTOR = 0.06;
+    private final int MIN_TEXTVIEW_WIDTH=100;
 
     @Inject @Named("prefs") SharedPreferences prefs;
     @Inject @Named("direct_nearby_upload_prefs") SharedPreferences directPrefs;
@@ -376,11 +377,11 @@ public class NearbyMapFragment extends DaggerFragment {
             }
         });
 
-        // Remove texts if it doesnt fit
-        if (wikipediaButtonText.getLineCount() > 1
-                || wikidataButtonText.getLineCount() > 1
-                || commonsButtonText.getLineCount() > 1
-                || directionsButtonText.getLineCount() > 1) {
+        // Remove texts if size of textview is very small
+        if (wikipediaButtonText.getWidth() < MIN_TEXTVIEW_WIDTH
+                || wikidataButtonText.getWidth() < MIN_TEXTVIEW_WIDTH
+                || commonsButtonText.getWidth() < MIN_TEXTVIEW_WIDTH
+                || directionsButtonText.getWidth() < MIN_TEXTVIEW_WIDTH ) {
             wikipediaButtonText.setVisibility(View.GONE);
             wikidataButtonText.setVisibility(View.GONE);
             commonsButtonText.setVisibility(View.GONE);
