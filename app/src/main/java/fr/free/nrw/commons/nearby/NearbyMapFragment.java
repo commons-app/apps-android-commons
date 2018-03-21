@@ -56,6 +56,7 @@ import javax.inject.Named;
 
 import dagger.android.support.DaggerFragment;
 import fr.free.nrw.commons.R;
+import fr.free.nrw.commons.Utils;
 import fr.free.nrw.commons.contributions.ContributionController;
 import fr.free.nrw.commons.utils.UriDeserializer;
 import timber.log.Timber;
@@ -679,8 +680,7 @@ public class NearbyMapFragment extends DaggerFragment {
     }
 
     private void openWebView(Uri link) {
-        Intent browserIntent = new Intent(Intent.ACTION_VIEW, link);
-        startActivity(browserIntent);
+        Utils.handleWebUrl(getContext(), link);
     }
 
     private void animateFAB(boolean isFabOpen) {
