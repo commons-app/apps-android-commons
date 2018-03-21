@@ -47,7 +47,7 @@ public class NotificationRenderer extends Renderer<Notification> {
     @Override
     public void render() {
         Notification notification = getContent();
-        StringBuilder str = new StringBuilder(notification.notificationText);
+        StringBuilder str = new StringBuilder(notification.notificationText.trim());
         str.append(" ");
         title.setText(str);
         time.setText(notification.date);

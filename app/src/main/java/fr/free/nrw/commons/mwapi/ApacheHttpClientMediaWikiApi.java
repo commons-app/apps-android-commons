@@ -429,6 +429,7 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
                     .param("notprop", "list")
                     .param("format", "xml")
                     .param("meta", "notifications")
+//                    .param("meta", "notifications")
                     .param("notformat", "model")
                     .get()
                     .getNode("/api/query/notifications/list");

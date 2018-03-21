@@ -249,4 +249,5 @@
   <string name="welcome_skip_button">Skip Tutorial</string>
 
   <string name="error_notifications">Error fetching notifications</string>
+  <string name="no_notifications">No notifications found</string>
 </resources>

@@ -11,6 +11,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 
 import com.pedrogomez.renderers.RVRendererAdapter;
 
@@ -38,8 +39,8 @@ public class NotificationActivity extends NavigationBaseActivity {
     NotificationAdapterFactory notificationAdapterFactory;
 
     @BindView(R.id.listView) RecyclerView recyclerView;
-    @BindView(R.id.progressBar)
-    ProgressBar progressBar;
+    @BindView(R.id.progressBar) ProgressBar progressBar;
+    @BindView(R.id.container) RelativeLayout relativeLayout;
 
     @Inject NotificationController controller;
 
@@ -82,7 +83,7 @@ public class NotificationActivity extends NavigationBaseActivity {
                         progressBar.setVisibility(View.GONE);
                     }, throwable -> {
                         Timber.e(throwable, "Error occurred while loading notifications");
-                        ViewUtil.showSnackbar(this, R.string.error_notifications);
+                        ViewUtil.showSnackbar(relativeLayout, R.string.error_notifications);
                         progressBar.setVisibility(View.GONE);
                     });
         } else {
@@ -98,6 +99,10 @@ public class NotificationActivity extends NavigationBaseActivity {
     }
 
     private void setAdapter(List<Notification> notificationList) {
+        if(notificationList == null || notificationList.isEmpty()) {
+            ViewUtil.showSnackbar(relativeLayout, R.string.no_notifications);
+            return;
+        }
         notificationAdapterFactory = new NotificationAdapterFactory(notification -> {
             Timber.d("Notification clicked %s", notification.link);
             handleUrl(notification.link);
