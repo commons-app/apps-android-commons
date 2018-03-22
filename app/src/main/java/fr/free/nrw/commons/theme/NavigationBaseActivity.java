@@ -138,6 +138,16 @@ public abstract class NavigationBaseActivity extends BaseActivity
                     Toast.makeText(this, R.string.no_email_client, Toast.LENGTH_SHORT).show();
                 }
                 return true;
+
+            case R.id.action_share:
+                drawerLayout.closeDrawer(navigationView);
+                Intent sendIntent = new Intent();
+                sendIntent.setAction(Intent.ACTION_SEND);
+                sendIntent.putExtra(Intent.EXTRA_TEXT, "Download Wikimedia Commons app");
+                sendIntent.setType("text/plain");
+                startActivity(Intent.createChooser(sendIntent, "Share using..."));
+                return true;
+
             case R.id.action_logout:
                 new AlertDialog.Builder(this)
                         .setMessage(R.string.logout_verification)
