@@ -57,7 +57,7 @@
   <string name="no_uploads_yet">Ika dae pa nakapagkarga nin anuman na mga litrato.</string>
   <string name="share_license_summary">Ining imahe magin lisensiyada sa lindong kan %1$s</string>
   <string name="menu_download">Kargahon</string>
-  <string name="preference_license">Lisensiya</string>
+  <string name="preference_license" fuzzy="true">Lisensiya</string>
   <string name="license_name_cc_by_sa" fuzzy="true">CC Panungdanan-HerasPararehas</string>
   <string name="license_name_cc_by" fuzzy="true">CC Panungdanan</string>
   <string name="license_name_cc0">CC0</string>

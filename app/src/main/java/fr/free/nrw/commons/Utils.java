@@ -7,6 +7,7 @@ import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.customtabs.CustomTabsIntent;
 import android.support.v4.content.ContextCompat;
+import android.widget.Toast;
 
 import org.apache.commons.codec.binary.Hex;
 import org.apache.commons.codec.digest.DigestUtils;
@@ -15,7 +16,6 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
-import java.net.URL;
 import java.net.URLEncoder;
 import java.util.Locale;
 import java.util.regex.Matcher;
@@ -23,6 +23,8 @@ import java.util.regex.Pattern;
 
 import fr.free.nrw.commons.settings.Prefs;
 import timber.log.Timber;
+
+import static android.widget.Toast.LENGTH_SHORT;
 
 public class Utils {
 
@@ -176,6 +178,13 @@ public class Utils {
     }
 
     public static void handleWebUrl(Context context,Uri url){
+        Intent browserIntent = new Intent(Intent.ACTION_VIEW, url);
+        if (browserIntent.resolveActivity(context.getPackageManager()) == null) {
+            Toast toast = Toast.makeText(context, context.getString(R.string.no_web_browser), LENGTH_SHORT);
+            toast.show();
+            return;
+        }
+
         CustomTabsIntent.Builder builder = new CustomTabsIntent.Builder();
         builder.setToolbarColor(ContextCompat.getColor(context, R.color.primaryColor));
         builder.setSecondaryToolbarColor(ContextCompat.getColor(context, R.color.primaryDarkColor));

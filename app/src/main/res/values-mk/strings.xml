@@ -1,10 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+  <string name="preference_category_appearance">Изглед</string>
+  <string name="preference_category_general">Општи</string>
+  <string name="preference_category_feedback">Мислења</string>
+  <string name="preference_category_location">Место</string>
   <string name="app_name">Ризница</string>
+  <string name="bullet">•</string>
   <string name="menu_settings">Поставки</string>
   <string name="username">Корисничко име</string>
   <string name="password">Лозинка</string>
+  <string name="login_credential">Најавете се на бета-сметката</string>
   <string name="login">Најава</string>
+  <string name="forgot_password">Ја заборавивте лозинката?</string>
   <string name="signup">Регистрација</string>
   <string name="logging_in_title">Најава</string>
   <string name="logging_in_message">Почекајте…</string>
@@ -36,6 +43,7 @@
   <string name="menu_share">Сподели</string>
   <string name="menu_open_in_browser">Погледај во прелистувач</string>
   <string name="share_title_hint">Наслов</string>
+  <string name="add_title_toast">Ставете ѝ наслов на податотеката</string>
   <string name="share_description_hint">Опис</string>
   <string name="login_failed_network">Не можам да Ве најавам — мрежата не работи</string>
   <string name="login_failed_username">Не можам да Ве најавам — проверете си го корисничкото име</string>
@@ -51,6 +59,7 @@
   <string name="categories_search_text_hint">Пребарај категории</string>
   <string name="menu_save_categories">Зачувај</string>
   <string name="refresh_button">Превчитај</string>
+  <string name="display_list_button">Список</string>
   <string name="gps_disabled">ГПС е исклучен на уредов. Дали сакате да го вклучите?</string>
   <string name="enable_gps">Вклучи ГПС</string>
   <string name="contributions_subtitle_zero">Сè уште нема подигања</string>
@@ -75,8 +84,8 @@
   <string name="menu_about">За извршникот</string>
   <string name="about_license">Прилогот на Ризницата има отворен код. Негови творци и одржувачи се примателите на наменските средства од Викимедиината заедница како и членовите на заедницата. Фондацијата Викимедија нема учество во нејзиното создавање, разработка и одржување.</string>
   <string name="about_improve">Создајте нов &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;проблем на GitHub&lt;/a&gt; за пријавување на грешки и давање предлози.</string>
-  <string name="about_privacy_policy">&lt;a href=\"https://github.com/commons-app/apps-android-commons/wiki/Privacy-policy\"&gt;Заштита на личните податоци&lt;/a&gt;</string>
-  <string name="about_credits">&lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/CREDITS\"&gt;Заслуги&lt;/a&gt;</string>
+  <string name="about_privacy_policy">&lt;u&gt;Заштита на личните податоци&lt;/u&gt;</string>
+  <string name="about_credits">&lt;u&gt;Заслуги&lt;/u&gt;</string>
   <string name="title_activity_about">За извршникот</string>
   <string name="menu_feedback">Испратете Ваше мислење (по е-пошта)</string>
   <string name="no_email_client">Немате воспоставено клиент за е-пошта</string>
@@ -88,7 +97,7 @@
   <string name="share_license_summary">Сликава ќе се води под лиценцата %1$s</string>
   <string name="media_upload_policy">Поднесувајќи ја сликава, изјавувам дека истата е мое сопствено дело, дека не содржи никаков материјал заштитен со авторски права, не содржи самослици, и дека на секој друг начин е во склад со &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines/mk?uselang=mk\"&gt;правилата на Ризницата&lt;/a&gt;.</string>
   <string name="menu_download">Преземи</string>
-  <string name="preference_license">Лиценца</string>
+  <string name="preference_license">Стандардна лиценца</string>
   <string name="use_previous">Користи претходен наслов/опис</string>
   <string name="allow_gps">Автоматски давај тековна местоположба</string>
   <string name="allow_gps_summary">Добивање на тековната местоположба за да се дадат предлози за категории, доколку сликата нема геоознаки</string>
@@ -117,11 +126,20 @@
   <string name="tutorial_1_text">Ризницата е вдомувач на највеќето слики што се користат на Википедија.</string>
   <string name="tutorial_1_subtext">Со вашите слики помагате во образованието\nна луѓето ширум светот!</string>
   <string name="tutorial_2_text">Подигајте слики кои се наполно ваше дело:</string>
-  <string name="tutorial_2_subtext">u2022 Природни објекти (цвеќиња, животни, планини) \nu2022 Наменски објекти (велосипеди, железнички станици) \nu2022 Познати личности (вашиот градоначалник, олимписки спортисти што ќе ги сретнете)</string>
+  <string name="tutorial_2_subtext">Природни објекти (цвеќиња, животни, планини) \n• Наменски објекти (велосипеди, железнички станици) \n• Познати личности (вашиот градоначалник, олимписки спортисти што ќе ги сретнете)</string>
+  <string name="tutorial_2_subtext_1">Корисни предмети (цвеќиња, животни, планини)</string>
+  <string name="tutorial_2_subtext_2">Корисни предмети (велосипеди, железнички станици)</string>
+  <string name="tutorial_2_subtext_3">Познати личности (вашиот градоначалник, олимпијци кои сте ги запознале)</string>
   <string name="tutorial_3_text">НЕ подигајте:</string>
   <string name="tutorial_3_subtext">u2022 Слики од вас или вашите пријатели \nu2022 Слики што сте ги презеле од семрежјето \nu2022 Екрански снимки на неслободни прилози (апликации)</string>
+  <string name="tutorial_3_subtext_1">Самослици или слики од вашите пријатели</string>
+  <string name="tutorial_3_subtext_2">Слики што сте ги презеле од семрежјето</string>
+  <string name="tutorial_3_subtext_3">Екрански снимки на сопственички прилози</string>
   <string name="tutorial_4_text">Пример за подигање:</string>
   <string name="tutorial_4_subtext">- Наслов: Сиднејска опера \n- Опис: Поглед на Сиднејската опера преку заливот\n- Категорија: Сиднејска опера, Сиднејската опера од запад, Сиднејската опера од далеку</string>
+  <string name="tutorial_4_subtext_1">Наслов: Сиднејска опера</string>
+  <string name="tutorial_4_subtext_2">Опис: Сиднејската опера гледана од преку заливот</string>
+  <string name="tutorial_4_subtext_3">Категории: Сиднејската опера од запад, Сиднејската опера оддалеку</string>
   <string name="welcome_wikipedia_text">Споделете ги Вашите слики. Да ги оживееме статиите на Википедија!</string>
   <string name="welcome_wikipedia_subtext">Сликите на Википедија доаѓаат од Ризницата.</string>
   <string name="welcome_copyright_text">Со Вашите слики помагате во образованието на луѓето ширум светот.</string>
@@ -154,8 +172,6 @@
   <string name="media_detail_coordinates_empty">не се укажани</string>
   <string name="become_a_tester_title">Станете бета-испробувач</string>
   <string name="become_a_tester_description">Пријавете се на нашиот бета-канал на Google Play и добивајте ран пристап до нови можности и исправки на грешки</string>
-  <string name="use_wikidata">Користи Википодатоци</string>
-  <string name="use_wikidata_summary">(Предупредување: исклучувањето може да доведе до голема потрошувачка на мобилни податоци)</string>
   <string name="_2fa_code">2ЧЗ-код</string>
   <string name="number_of_uploads">Мое ограничување на скорешните подигања</string>
   <string name="maximum_limit">Крајна граница</string>
@@ -196,6 +212,7 @@
   <string name="no_description_found">не најдов описи</string>
   <string name="nearby_info_menu_commons_article">Податотечна страница</string>
   <string name="nearby_info_menu_wikidata_article">Предмет на Википодатоците</string>
+  <string name="nearby_info_menu_wikipedia_article">Статија на Википедија</string>
   <string name="error_while_cache">Грешка при меѓускладирање на сликите</string>
   <string name="title_info">Краток и единствен наслов на податотеката, кој ќе служи како нејзин назив. Можете да користите прост јазик со меѓупростор, но не пишувајте ја податотечната наставка</string>
   <string name="description_info">Објаснете ја податотеката што подобро можете: Каде е направена? Што е прикажано на неа? Кој е контекстот? Опишете ги предметите, објектите и личностите. Дајте сознанија што не можат лесно да се погодат, како на пр. време од денот ако се работи за природен предел. Ако на неа е претставено нешто необично, објаснете зошто прикажаното е необично.</string>
@@ -207,6 +224,10 @@
   <string name="login_to_your_account">Најавете се со вашата сметка</string>
   <string name="send_log_file">Испрати дневничка податотека</string>
   <string name="send_log_file_description">Испрати дневничка податотека на разработувачите по е-пошта</string>
+  <string name="no_web_browser">Не најдов прелистувач за да ја отворам URL</string>
+  <string name="null_url">Грешка! Не ја пронајдов URL</string>
+  <string name="nominate_deletion">Предложи за бришење</string>
+  <string name="view_browser">Погледај во прелистувач</string>
   <string name="nearby_location_has_not_changed">Местоположбата не е сменета.</string>
   <string name="nearby_location_not_available">Местоположбата е недостапна.</string>
   <string name="location_permission_rationale_nearby">Се бара дозвола за приказ на список на околни места</string>
@@ -217,4 +238,10 @@
   <string name="notifications_thank_you_edit">Ви благодариме за уредувањето</string>
   <string name="notifications_mention">%1$s ве спомна на %2$s.</string>
   <string name="toggle_view_button">Смени поглед</string>
+  <string name="nearby_directions">НАСОКИ</string>
+  <string name="nearby_wikidata">ВИКИПОДАТОЦИ</string>
+  <string name="nearby_wikipedia">ВИКИПЕДИЈА</string>
+  <string name="nearby_commons">РИЗНИЦА</string>
+  <string name="about_faq">Често поставувани прашања</string>
+  <string name="welcome_skip_button">Прескокни упатство</string>
 </resources>

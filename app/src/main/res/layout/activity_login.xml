@@ -2,11 +2,16 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:fillViewport="true"
     android:layout_height="match_parent">
-
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
         android:layout_gravity="center_vertical"
         android:layout_marginTop="@dimen/small_gap">
 
@@ -200,19 +205,7 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@id/buttonFrame"
                     android:layout_marginBottom="@dimen/standard_gap"
-                    android:text="@string/forgot_password"
-                    android:textColor="@color/status_bar_blue" />
-
-                <fr.free.nrw.commons.ui.widget.HtmlTextView
-                    android:id="@+id/about_privacy_policy"
-                    style="?android:textAppearanceSmall"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/forgotPassword"
-                    android:layout_centerHorizontal="true"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_marginBottom="@dimen/standard_gap"
-                    android:text="@string/about_privacy_policy" />
+                    android:text="@string/forgot_password" />
 
             </RelativeLayout>
 
@@ -235,5 +228,18 @@
             app:srcCompat="@drawable/commons_logo_large"
             tools:ignore="UnusedAttribute" />
     </FrameLayout>
+
+    <fr.free.nrw.commons.ui.widget.HtmlTextView
+        android:id="@+id/about_privacy_policy"
+        style="?android:textAppearanceSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="@dimen/normal_text"
+        android:textColor="@color/status_bar_blue"
+        android:text="@string/about_privacy_policy" />
+
+    </RelativeLayout>
 
 </ScrollView>

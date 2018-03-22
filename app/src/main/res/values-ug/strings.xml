@@ -53,7 +53,7 @@
   <string name="menu_about">ھەققىدە</string>
   <string name="menu_cancel_upload">ۋاز كەچ</string>
   <string name="menu_download">چۈشۈرۈڭ</string>
-  <string name="preference_license">ئىجازەتنامە</string>
+  <string name="preference_license" fuzzy="true">ئىجازەتنامە</string>
   <string name="license_name_cc_by_sa">ئوخشاش  ئىمزالىق ئورتاق  ھەمبەھىرلىنىش</string>
   <string name="license_name_cc_by">ئىمزا قويۇش</string>
   <string name="license_name_cc0">CC0</string>
@@ -89,8 +89,6 @@
   <string name="media_detail_coordinates_empty">تەمىنلىمەيدۇ</string>
   <string name="become_a_tester_title">سىناق نۇسخىدىكى سىناق قىلغۇچى بولۇپ قالدى</string>
   <string name="become_a_tester_description">بىز كىرگەن Google Play، ئۈستىدىكى ئۆلچەش قانىلى ، ھەمدە تېخىمۇ بالدۇر يېڭى ئىقتىدارى ۋە خاتا ئەسلىگە كەلتۈرۈش</string>
-  <string name="use_wikidata">ئىشلەتكۈچى ۋىكى سانلىق مەلۇماتى</string>
-  <string name="use_wikidata_summary">( ئەسكەرتىش : بۇ ئىقتىدارى بەلكىم زور مىقداردا مەنئى قىلىنغان كۆچمە سانلىق مەلۇمات ئېقىم مىقدارى ھەققى )</string>
   <string name="_2fa_code">2FAكودى</string>
   <string name="number_of_uploads">مېنىڭ يېقىندىن بۇيان يۇقىرىغا يوللاش چەكلەش</string>
   <string name="maximum_limit">ئەڭ چوڭ چەكلەش</string>

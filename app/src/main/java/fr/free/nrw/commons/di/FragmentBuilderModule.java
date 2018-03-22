@@ -7,6 +7,7 @@ import fr.free.nrw.commons.contributions.ContributionsListFragment;
 import fr.free.nrw.commons.media.MediaDetailFragment;
 import fr.free.nrw.commons.media.MediaDetailPagerFragment;
 import fr.free.nrw.commons.nearby.NearbyListFragment;
+import fr.free.nrw.commons.nearby.NearbyMapFragment;
 import fr.free.nrw.commons.nearby.NoPermissionsFragment;
 import fr.free.nrw.commons.settings.SettingsFragment;
 import fr.free.nrw.commons.upload.MultipleUploadListFragment;
@@ -30,6 +31,9 @@ public abstract class FragmentBuilderModule {
 
     @ContributesAndroidInjector
     abstract NearbyListFragment bindNearbyListFragment();
+
+    @ContributesAndroidInjector
+    abstract NearbyMapFragment bindNearbyMapFragment();
 
     @ContributesAndroidInjector
     abstract NoPermissionsFragment bindNoPermissionsFragment();

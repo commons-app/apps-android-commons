@@ -39,11 +39,7 @@ dependencies {
     implementation 'io.reactivex.rxjava2:rxandroid:2.0.1'
     // Because RxAndroid releases are few and far between, it is recommended you also
     // explicitly depend on RxJava's latest version for bug fixes and new features.
-    compile 'io.reactivex.rxjava2:rxjava:2.1.2'
-    compile 'com.jakewharton.rxbinding2:rxbinding:2.0.0'
-    compile 'com.jakewharton.rxbinding2:rxbinding-support-v4:2.0.0'
-    compile 'com.jakewharton.rxbinding2:rxbinding-appcompat-v7:2.0.0'
-    compile 'com.jakewharton.rxbinding2:rxbinding-design:2.0.0'
+    implementation 'com.android.support:multidex:1.0.3'
 
     compile 'com.facebook.fresco:fresco:1.5.0'
     compile 'com.facebook.stetho:stetho:1.5.0'
@@ -62,6 +58,7 @@ dependencies {
     debugCompile 'com.squareup.leakcanary:leakcanary-android:1.5.4'
     releaseCompile 'com.squareup.leakcanary:leakcanary-android-no-op:1.5.4'
     testCompile 'com.squareup.leakcanary:leakcanary-android-no-op:1.5.4'
+
     implementation 'io.reactivex.rxjava2:rxjava:2.1.2'
     implementation 'com.jakewharton.rxbinding2:rxbinding:2.0.0'
     implementation 'com.jakewharton.rxbinding2:rxbinding-support-v4:2.0.0'
@@ -98,7 +95,8 @@ dependencies {
     kapt "com.google.dagger:dagger-compiler:$DAGGER_VERSION"
     kapt "com.google.dagger:dagger-android-processor:$DAGGER_VERSION"
 
-    compile 'com.borjabravo:readmoretextview:2.1.0'
+    implementation 'com.borjabravo:readmoretextview:2.1.0'
+    implementation 'com.android.support.constraint:constraint-layout:1.0.2'
 }
 
 android {
@@ -119,6 +117,12 @@ android {
         vectorDrawables.useSupportLibrary = true
 
         multiDexEnabled true
+    }
+
+    testOptions {
+        unitTests.all {
+            jvmArgs '-noverify'
+        }
     }
 
     sourceSets {
