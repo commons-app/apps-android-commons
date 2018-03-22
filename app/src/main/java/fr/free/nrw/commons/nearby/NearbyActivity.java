@@ -1,6 +1,9 @@
 package fr.free.nrw.commons.nearby;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Build;
@@ -16,7 +19,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
-import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -28,6 +30,8 @@ import javax.inject.Inject;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
+import fr.free.nrw.commons.utils.NetworkStateChangeReceiver;
+import fr.free.nrw.commons.utils.NetworkUtils;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.location.LatLng;
 import fr.free.nrw.commons.location.LocationServiceManager;
@@ -47,7 +51,6 @@ import timber.log.Timber;
 public class NearbyActivity extends NavigationBaseActivity implements LocationUpdateListener {
 
     private static final int LOCATION_REQUEST = 1;
-
     @BindView(R.id.progressBar)
     ProgressBar progressBar;
 
@@ -73,7 +76,8 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
     private NearbyListFragment nearbyListFragment;
     private static final String TAG_RETAINED_MAP_FRAGMENT = NearbyMapFragment.class.getSimpleName();
     private static final String TAG_RETAINED_LIST_FRAGMENT = NearbyListFragment.class.getSimpleName();
-
+    private final String NETWORK_INTENT_ACTION="android.net.conn.CONNECTIVITY_CHANGE";
+    public static NearbyActivity currentNearbyActivity;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -81,11 +85,16 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
         ButterKnife.bind(this);
         resumeFragment();
         bundle = new Bundle();
-
+        currentNearbyActivity=this;
+        initNetworkReceiver();
         initBottomSheetBehaviour();
         initDrawer();
     }
+    private void initNetworkReceiver() {
+        IntentFilter intentFilter = new IntentFilter(NETWORK_INTENT_ACTION);
+        registerReceiver(new NetworkStateChangeReceiver("NearbyActivity"),intentFilter);
 
+    }
     private void resumeFragment() {
         // Find the retained fragment on activity restarts
         nearbyMapFragment = getMapFragment();
@@ -294,6 +303,10 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
      * @param locationChangeType defines if location shanged significantly or slightly
      */
     private void refreshView(LocationServiceManager.LocationChangeType locationChangeType) {
+
+        if(!NetworkUtils.haveNetworkConnection(getApplicationContext())) {
+            return;
+        }
         if (lockNearbyView) {
             return;
         }
@@ -374,7 +387,7 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
         }
     }
 
-    private void hideProgressBar() {
+    public void hideProgressBar() {
         if (progressBar != null) {
             progressBar.setVisibility(View.GONE);
         }
@@ -495,4 +508,7 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
     public void prepareViewsForSheetPosition(int bottomSheetState) {
         // TODO
     }
+
+
+
 }
