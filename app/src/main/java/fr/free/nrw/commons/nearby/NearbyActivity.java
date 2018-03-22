@@ -297,7 +297,7 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
 
         if(!NetworkUtils.haveNetworkConnection(getApplicationContext()))
         {
-            ViewUtil.showLongToast(getApplicationContext(),getResources().getString(R.string.no_internet));
+            ViewUtil.showSnackbar(findViewById(R.id.container),R.string.no_internet);
             hideProgressBar();
             return;
         }
