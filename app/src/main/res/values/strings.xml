@@ -253,4 +253,7 @@
   <string name="about_rate_us"><u>Rate Us</u></string>
   <string name="about_faq">Frequently Asked Questions</string>
   <string name="welcome_skip_button">Skip Tutorial</string>
+
+  <string name="no_internet">Internet unavailable</string>
+  <string name="internet_established">Internet available</string>
 </resources>
