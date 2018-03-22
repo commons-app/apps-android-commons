@@ -1,10 +1,11 @@
 package fr.free.nrw.commons.delete;
 
-import android.app.AlertDialog;
+import android.app.NotificationManager;
 import android.content.Context;
-import android.content.DialogInterface;
-import android.content.Intent;
 import android.os.AsyncTask;
+import android.support.v4.app.NotificationCompat;
+import android.support.v4.app.NotificationCompat.Builder;
+import android.view.Gravity;
 import android.widget.Toast;
 
 import java.text.SimpleDateFormat;
@@ -20,14 +21,18 @@ import fr.free.nrw.commons.di.ApplicationlessInjection;
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
 import timber.log.Timber;
 
-import static android.support.v4.content.ContextCompat.startActivity;
-import static android.widget.Toast.LENGTH_SHORT;
+import static android.support.v4.app.NotificationCompat.DEFAULT_ALL;
+import static android.support.v4.app.NotificationCompat.PRIORITY_HIGH;
 
 public class DeleteTask extends AsyncTask<Void, Integer, Boolean> {
 
     @Inject MediaWikiApi mwApi;
     @Inject SessionManager sessionManager;
 
+    public static final int NOTIFICATION_DELETE = 1;
+
+    private NotificationManager notificationManager;
+    private Builder notificationBuilder;
     private Context context;
     private Media media;
     private String reason;
@@ -44,10 +49,19 @@ public class DeleteTask extends AsyncTask<Void, Integer, Boolean> {
                 .getInstance(context.getApplicationContext())
                 .getCommonsApplicationComponent()
                 .inject(this);
+
+        notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
+        notificationBuilder = new NotificationCompat.Builder(context);
+        Toast toast = new Toast(context);
+        toast.setGravity(Gravity.CENTER,0,0);
+        toast = Toast.makeText(context,"Trying to nominate "+media.getDisplayTitle()+ " for deletion",Toast.LENGTH_SHORT);
+        toast.show();
     }
 
     @Override
     protected Boolean doInBackground(Void ...voids) {
+        publishProgress(0);
+
         String editToken;
         String authCookie;
         String summary = "Nominating " + media.getFilename() +" for deletion.";
@@ -96,6 +110,7 @@ public class DeleteTask extends AsyncTask<Void, Integer, Boolean> {
 
             mwApi.appendEdit(editToken,userPageString+"\n",
                     "User_Talk:"+sessionManager.getCurrentAccount().name,summary);
+            publishProgress(5);
         }
         catch (Exception e) {
             Timber.d(e.getMessage());
@@ -106,47 +121,61 @@ public class DeleteTask extends AsyncTask<Void, Integer, Boolean> {
 
     @Override
     protected void onProgressUpdate (Integer... values){
+        super.onProgressUpdate(values);
 
+        String message = "";
+        switch (values[0]){
+            case 0:
+                message = "Getting token";
+                break;
+            case 1:
+                message = "Adding delete message to file";
+                break;
+            case 2:
+                message = "Creating Delete requests sub-page";
+                break;
+            case 3:
+                message = "Adding file to Delete requests log";
+                break;
+            case 4:
+                message = "Notifying User on Talk page";
+                break;
+            case 5:
+                message = "Done";
+                break;
+        }
+
+        notificationBuilder.setContentTitle("Nominating "+media.getDisplayTitle()+" for deletion")
+                .setStyle(new NotificationCompat.BigTextStyle()
+                        .bigText(message))
+                .setSmallIcon(R.drawable.ic_launcher)
+                .setProgress(5, values[0], false)
+                .setOngoing(true);
+        notificationManager.notify(NOTIFICATION_DELETE, notificationBuilder.build());
     }
 
     @Override
     protected void onPostExecute(Boolean result) {
         String message = "";
-        String title = "";
+        String title = "Nominating for Deletion";
 
         if (result){
-            title = "Success";
-            message = "Successfully nominated " + media.getDisplayTitle() + " deletion.\n" +
-                    "Check the webpage for more details";
+            title += ": Success";
+            message = "Successfully nominated " + media.getDisplayTitle() + " deletion.";
         }
         else {
-            title = "Failed";
-            message = "Could not request deletion. Something went wrong.";
+            title += ": Failed";
+            message = "Could not request deletion.";
         }
 
-        AlertDialog alert;
-        AlertDialog.Builder builder = new AlertDialog.Builder(context);
-        builder.setTitle(title);
-        builder.setMessage(message);
-        builder.setCancelable(true);
-        builder.setPositiveButton(
-                R.string.ok,
-                new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {}
-                });
-        builder.setNeutralButton(R.string.view_browser,
-                new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-                        Intent browserIntent = new Intent(Intent.ACTION_VIEW, media.getFilePageTitle().getMobileUri());
-                        if (browserIntent.resolveActivity(context.getPackageManager()) != null) {
-                            startActivity(context,browserIntent,null);
-                        } else {
-                            Toast toast = Toast.makeText(context, R.string.no_web_browser, LENGTH_SHORT);
-                            toast.show();
-                        }
-                    }
-                });
-        alert = builder.create();
-        alert.show();
+        notificationBuilder.setDefaults(DEFAULT_ALL)
+                .setContentTitle(title)
+                .setStyle(new NotificationCompat.BigTextStyle()
+                        .bigText(message))
+                .setSmallIcon(R.drawable.ic_launcher)
+                .setProgress(0,0,false)
+                .setOngoing(false)
+                .setPriority(PRIORITY_HIGH);
+        notificationManager.notify(NOTIFICATION_DELETE, notificationBuilder.build());
     }
 }
