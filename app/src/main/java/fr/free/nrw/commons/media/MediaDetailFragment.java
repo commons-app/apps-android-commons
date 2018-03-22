@@ -1,16 +1,23 @@
 package fr.free.nrw.commons.media;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.DataSetObserver;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
+import android.view.WindowManager;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
@@ -32,6 +39,7 @@ import fr.free.nrw.commons.MediaDataExtractor;
 import fr.free.nrw.commons.MediaWikiImageView;
 import fr.free.nrw.commons.PageTitle;
 import fr.free.nrw.commons.R;
+import fr.free.nrw.commons.delete.DeleteTask;
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
 import fr.free.nrw.commons.location.LatLng;
 import fr.free.nrw.commons.ui.widget.CompatTextView;
@@ -72,6 +80,7 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
     private TextView coordinates;
     private TextView uploadedDate;
     private LinearLayout categoryContainer;
+    private Button delete;
     private ScrollView scrollView;
     private ArrayList<String> categoryNames;
     private boolean categoriesLoaded = false;
@@ -124,6 +133,7 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
         license = (TextView) view.findViewById(R.id.mediaDetailLicense);
         coordinates = (TextView) view.findViewById(R.id.mediaDetailCoordinates);
         uploadedDate = (TextView) view.findViewById(R.id.mediaDetailuploadeddate);
+        delete = (Button) view.findViewById(R.id.nominateDeletion);
         categoryContainer = (LinearLayout) view.findViewById(R.id.mediaDetailCategoryContainer);
 
         licenseList = new LicenseList(getActivity());
@@ -273,6 +283,8 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
             categoryNames.add(getString(R.string.detail_panel_cats_none));
         }
         rebuildCatList();
+
+        delete.setVisibility(View.VISIBLE);
     }
 
     private void setOnClickListeners(final Media media) {
@@ -284,6 +296,52 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
             }
         if (media.getCoordinates() != null) {
             coordinates.setOnClickListener(v -> openMap(media.getCoordinates()));
+        }
+        if (delete.getVisibility()==View.VISIBLE){
+            delete.setOnClickListener(v -> {
+                AlertDialog.Builder alert = new AlertDialog.Builder(getActivity());
+                alert.setMessage("Why should this file be deleted?");
+                final EditText input = new EditText(getActivity());
+                alert.setView(input);
+                input.requestFocus();
+                alert.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int whichButton) {
+                        String reason = input.getText().toString();
+                        DeleteTask deleteTask = new DeleteTask(getActivity(), media, reason);
+                        deleteTask.execute();
+                    }
+                });
+                alert.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int whichButton) {
+                    }
+                });
+                AlertDialog d = alert.create();
+                input.addTextChangedListener(new TextWatcher() {
+                    private void handleText() {
+                        final Button okButton = d.getButton(AlertDialog.BUTTON_POSITIVE);
+                        if (input.getText().length() == 0) {
+                            okButton.setEnabled(false);
+                        } else {
+                            okButton.setEnabled(true);
+                        }
+                    }
+
+                    @Override
+                    public void afterTextChanged(Editable arg0) {
+                        handleText();
+                    }
+
+                    @Override
+                    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                    }
+
+                    @Override
+                    public void onTextChanged(CharSequence s, int start, int before, int count) {
+                    }
+                });
+                d.show();
+                d.getButton(AlertDialog.BUTTON_POSITIVE).setEnabled(false);
+            });
         }
     }
 

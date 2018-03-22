@@ -64,5 +64,4 @@
             android:summary="@string/send_log_file_description"/>
 
     </PreferenceCategory>
-
 </PreferenceScreen>

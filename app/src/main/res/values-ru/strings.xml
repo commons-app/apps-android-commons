@@ -1,10 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+  <string name="preference_category_appearance">Внешний вид</string>
+  <string name="preference_category_general">Общие</string>
+  <string name="preference_category_feedback">Обратная связь</string>
+  <string name="preference_category_location">Местоположение</string>
   <string name="app_name">Викисклад</string>
+  <string name="bullet">•</string>
   <string name="menu_settings">Настройки</string>
   <string name="username">Имя пользователя</string>
   <string name="password">Пароль</string>
+  <string name="login_credential">Войдите в свою учётную запись Commons Beta</string>
   <string name="login">Войти</string>
+  <string name="forgot_password">Забыли пароль?</string>
   <string name="signup">Зарегистрироваться</string>
   <string name="logging_in_title">Вход в систему</string>
   <string name="logging_in_message">Пожалуйста, подождите…</string>
@@ -37,6 +44,7 @@
   <string name="menu_share">Поделиться</string>
   <string name="menu_open_in_browser">Открыть в браузере</string>
   <string name="share_title_hint">Название</string>
+  <string name="add_title_toast">Пожалуйста, укажите название этого файла</string>
   <string name="share_description_hint">Описание</string>
   <string name="login_failed_network">Не удаётся войти — сбой сети</string>
   <string name="login_failed_username">Не удалось войти — пожалуйста, проверьте своё имя пользователя</string>
@@ -79,8 +87,8 @@
   <string name="menu_about">О приложении</string>
   <string name="about_license">Приложение «Викисклад» - это программа с открытым кодом, которую создали волонтёры и участники грантов Викимедиа. Фонд Викимедиа не участвует в создании, разработке или обслуживании этого приложения.</string>
   <string name="about_improve">Вы можете создать &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;запрос на GitHub&lt;/a&gt;, чтобы сообщить об ошибке или внести предложение.</string>
-  <string name="about_privacy_policy">&lt;a href=\"https://github.com/commons-app/apps-android-commons/wiki/Privacy-policy\"&gt;Политика конфиденциальности&lt;/a&gt;</string>
-  <string name="about_credits">&lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/CREDITS\"&gt;Благодарности&lt;/a&gt;</string>
+  <string name="about_privacy_policy">&lt;u&gt;Политика конфиденциальности&lt;/u&gt;</string>
+  <string name="about_credits">&lt;u&gt;Благодарности&lt;/u&gt;</string>
   <string name="title_activity_about">О приложении</string>
   <string name="menu_feedback">Отправить отзыв (по эл. почте)</string>
   <string name="no_email_client">Почтовый клиент не установлен</string>
@@ -92,8 +100,8 @@
   <string name="share_license_summary">Это изображение будет лицензировано под %1$s</string>
   <string name="media_upload_policy">Отправляя это изображение, я подтверждаю, что это моя собственная работа, которая не содержит защищённых авторским правом материалов или селфи, а также отвечает &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines/ru\"&gt;правилам Викисклада&lt;/a&gt;.</string>
   <string name="menu_download">Скачать</string>
-  <string name="preference_license">Лицензия</string>
-  <string name="use_previous">Использовать предыдущие заголовок/описание</string>
+  <string name="preference_license">Лицензия по умолчанию</string>
+  <string name="use_previous">Использовать предыдущие название/описание</string>
   <string name="allow_gps">Автоматически получить текущее местоположение</string>
   <string name="allow_gps_summary">Получить текущее местоположение, чтобы были предложены категории, если изображение не содержит геотегов</string>
   <string name="preference_theme">Ночной режим</string>
@@ -109,8 +117,8 @@
   <string name="license_name_cc_by_sa_3_0_ee">CC BY-SA 3.0 (Эстония)</string>
   <string name="license_name_cc_by_sa_3_0_es">CC BY-SA 3.0 (Испания)</string>
   <string name="license_name_cc_by_sa_3_0_hr">CC BY-SA 3.0 (Хорватия)</string>
-  <string name="license_name_cc_by_sa_3_0_lu">CC-BY-SA 3.0 (Люксембург)</string>
-  <string name="license_name_cc_by_sa_3_0_nl">CC-BY-SA 3.0 (Нидерланды)</string>
+  <string name="license_name_cc_by_sa_3_0_lu">CC BY-SA 3.0 (Люксембург)</string>
+  <string name="license_name_cc_by_sa_3_0_nl">CC BY-SA 3.0 (Нидерланды)</string>
   <string name="license_name_cc_by_sa_3_0_no">CC BY-SA 3.0 (Норвегия)</string>
   <string name="license_name_cc_by_sa_3_0_pl">CC BY-SA 3.0 (Польша)</string>
   <string name="license_name_cc_by_sa_3_0_ro">CC BY-SA 3.0 (Румыния)</string>
@@ -121,11 +129,20 @@
   <string name="tutorial_1_text">Викисклад содержит большую часть изображений, которые используются в Википедии.</string>
   <string name="tutorial_1_subtext">Ваши изображения помогают образованию людей во всём мире!</string>
   <string name="tutorial_2_text">Пожалуйста, загрузите фотографии, которые были сняты или созданы исключительно вами:</string>
-  <string name="tutorial_2_subtext">— Природные объекты (например, цветы, животные, горы)\n— Полезные предметы (например, велосипеды, вокзалы)\n— Известные люди (например, ваш мэр, спортсмены-олимпийцы, которых вы встретили)</string>
+  <string name="tutorial_2_subtext">Природные объекты (например, цветы, животные, горы)\n• Полезные предметы (например, велосипеды, вокзалы)\n• Известные люди (например, ваш мэр, спортсмены-олимпийцы, которых вы встретили)</string>
+  <string name="tutorial_2_subtext_1">Природные объекты (например, цветы, животные, горы)</string>
+  <string name="tutorial_2_subtext_2">Полезные предметы (например, велосипеды, вокзалы)</string>
+  <string name="tutorial_2_subtext_3">Известные люди (например, ваш мэр, спортсмены-олимпийцы, которых вы встретили)</string>
   <string name="tutorial_3_text">Пожалуйста, НЕ загружайте:</string>
   <string name="tutorial_3_subtext">— Селфи или фотографии ваших друзей\n— Фотографии, которые вы скачали из Интернета\n— Скриншоты несвободных приложений</string>
+  <string name="tutorial_3_subtext_1">Селфи или фотографии ваших друзей</string>
+  <string name="tutorial_3_subtext_2">Фотографии, которые вы скачали из Интернета</string>
+  <string name="tutorial_3_subtext_3">Скриншоты несвободных приложений</string>
   <string name="tutorial_4_text">Пример загрузки:</string>
   <string name="tutorial_4_subtext">— Название: Сиднейский оперный театр\n— Описание: Сиднейский оперный театр, вид через залив\n— Категории: Sydney Opera House from the west, Sydney Opera House remote views</string>
+  <string name="tutorial_4_subtext_1">Название: Сиднейский оперный театр</string>
+  <string name="tutorial_4_subtext_2">Описание: Сиднейский оперный театр, вид через залив</string>
+  <string name="tutorial_4_subtext_3">Категории: Sydney Opera House from the west, Sydney Opera House remote views</string>
   <string name="welcome_wikipedia_text">Загрузите свои изображения. Помогите Википедии оживить статьи!</string>
   <string name="welcome_wikipedia_subtext">Изображения в Википедии хранятся на Викискладе.</string>
   <string name="welcome_copyright_text">Ваши изображения помогают образованию людей во всём мире.</string>
@@ -158,8 +175,6 @@
   <string name="media_detail_coordinates_empty">Не предоставлены</string>
   <string name="become_a_tester_title">Стать бета-тестером</string>
   <string name="become_a_tester_description">Подпишитесь на наш канал бета-версии на Google Play и получите ранний доступ к новым функциям и исправлениям ошибок</string>
-  <string name="use_wikidata">Использовать Викиданные</string>
-  <string name="use_wikidata_summary">(Предупреждение: отключение может привести к значительному расходу мобильных данных)</string>
   <string name="_2fa_code">Код 2ФА</string>
   <string name="number_of_uploads">Лимит моих недавних загрузок</string>
   <string name="maximum_limit">Максимальный лимит</string>
@@ -211,6 +226,10 @@
   <string name="login_to_your_account">Войдите в свою учётную запись</string>
   <string name="send_log_file">Выслать лог-файл</string>
   <string name="send_log_file_description">Выслать лог-файл разработчикам по е-мейлу</string>
+  <string name="no_web_browser">Не найден браузер, чтобы открыть ссылку</string>
+  <string name="null_url">Ошибка! Ссылка не найдена</string>
+  <string name="nominate_deletion">Номинировать к удалению</string>
+  <string name="view_browser">Просмотреть в браузере</string>
   <string name="nearby_location_has_not_changed">Местоположение не изменено.</string>
   <string name="nearby_location_not_available">Местоположение недоступно.</string>
   <string name="location_permission_rationale_nearby">Необходимо разрешение для отображения списка мест поблизости</string>
@@ -221,4 +240,7 @@
   <string name="notifications_thank_you_edit">Спасибо за правку</string>
   <string name="notifications_mention">%1$s упомянул вас на %2$s.</string>
   <string name="toggle_view_button">Переключить режим просмотра</string>
+  <string name="about_rate_us">*</string>
+  <string name="about_faq">Часто задаваемые вопросы</string>
+  <string name="welcome_skip_button">Пропустить руководство</string>
 </resources>

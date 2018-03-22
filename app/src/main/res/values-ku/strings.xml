@@ -1,10 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+  <string name="preference_category_appearance">Xuyabûn</string>
+  <string name="preference_category_general">Giştî</string>
+  <string name="preference_category_feedback">Paşragihandin</string>
+  <string name="preference_category_location">Cih</string>
   <string name="app_name">Commons</string>
+  <string name="bullet">•</string>
   <string name="menu_settings">Eyar</string>
   <string name="username">Navê bikarhêner</string>
   <string name="password">Şîfre</string>
+  <string name="login_credential">Têkeve hesabê xwe ya Commons Betayê</string>
   <string name="login">Têkeve</string>
+  <string name="forgot_password">Te şîfreya xwe ji bîr kir?</string>
   <string name="signup">Hesabek nû çêke</string>
   <string name="logging_in_title">Têdikeve</string>
   <string name="logging_in_message">Ji kerema xwere bisekine ...</string>
@@ -37,7 +44,9 @@
   <string name="categories_activity_title">Kategorî</string>
   <string name="title_activity_settings">Eyar</string>
   <string name="title_activity_signup">Hesabek nû çêke</string>
-  <string name="about_privacy_policy">&lt;a href=\"https://github.com/commons-app/apps-android-commons/wiki/Privacy-policy\"&gt;Siyaseta Veşarîtiyê&lt;/a&gt;</string>
+  <string name="about_privacy_policy">&lt;u&gt;Siyaseta Veşarîtiyê&lt;/u&gt;</string>
+  <string name="title_activity_about">Derbar</string>
+  <string name="menu_feedback">Paşragihandinê bişîne (bi rêya e-peyamê)</string>
   <string name="menu_retry_upload">Dîsa hewl bide</string>
   <string name="menu_cancel_upload">Betal bike</string>
   <string name="menu_download">Daxe</string>
@@ -48,11 +57,19 @@
   <string name="license_name_cc_zero">CC Zero</string>
   <string name="welcome_final_button_text">Erê!</string>
   <string name="detail_panel_cats_label">Kategorî</string>
-  <string name="detail_panel_cats_loading" fuzzy="true">Tê barkirin…</string>
+  <string name="detail_panel_cats_loading">Tê barkirin…</string>
   <string name="menu_refresh">Nû bike</string>
   <string name="ok">Baş e</string>
   <string name="warning">Hişyarî</string>
   <string name="yes">Erê</string>
   <string name="no">Na</string>
+  <string name="media_detail_coordinates">Koordînat</string>
+  <string name="cancel">Betal bike</string>
+  <string name="navigation_drawer_open">Veke</string>
+  <string name="navigation_drawer_close">Bigre</string>
+  <string name="navigation_item_feedback">Paşragihandin</string>
+  <string name="navigation_item_logout">Derkeve</string>
   <string name="give_permission">Destûr bide</string>
+  <string name="about_faq">Pirsên ku pir têne pirsîn</string>
+  <string name="welcome_skip_button">Rênîşandanê derbas bike</string>
 </resources>

@@ -74,7 +74,7 @@
   <string name="about_license" fuzzy="true">ਅਜ਼ਾਦ ਸਰੋਤ ਸਾਫ਼ਟਵੇਅਰ ਨੂੰ &lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/COPYING\"&gt;Apache License v2&lt;/a&gt; ਅਧੀਨ ਜਾਰੀ ਕੀਤਾ ਗਿਆ ਹੈ</string>
   <string name="about_improve" fuzzy="true">ਸਰੋਤ &lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;GitHub&lt;/a&gt; ਉੱਤੇ। ਮੁਸ਼ਕਲਾਂ &lt;a href=\" https://github.com/commons-app/apps-android-commons/issues\"&gt;Github&lt;/a&gt; ਉੱਤੇ।</string>
   <string name="about_privacy_policy" fuzzy="true">&lt;a href=\"https://wikimediafoundation.org/wiki/Privacy_policy\"&gt;Privacy policy&lt;/a&gt;</string>
-  <string name="about_credits">&lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/CREDITS\"&gt;ਕਰੈਡਿਟਸ&lt;/a&gt;</string>
+  <string name="about_credits" fuzzy="true">&lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/CREDITS\"&gt;ਕਰੈਡਿਟਸ&lt;/a&gt;</string>
   <string name="title_activity_about">ਇਸ ਬਾਰੇ</string>
   <string name="menu_feedback">ਵਿਚਾਰ ਭੇਜੋ (ਈਮੇਲ ਰਾਹੀਂ)</string>
   <string name="no_email_client">ਕੋਈ ਈਮੇਲ ਸਾਧਨ ਇੰਸਟਾਲ ਨਹੀਂ ਕੀਤਾ ਗਿਆ</string>
@@ -86,7 +86,7 @@
   <string name="share_license_summary">ਇਹ ਤਸਵੀਰ ਦਾ %1$s ਹੇਠ ਲਸੰਸ ਜਾਰੀ ਕੀਤੀ ਜਾਵੇਗਾ</string>
   <string name="media_upload_policy">ਇਹ ਤਸਵੀਰ ਅੱਪਲੋਡ ਕਰਨ ਨਾਲ ਹੀ ਮੈਂ ਦਾਅਵਾ ਕਰਦਾ ਹਾਂ/ਕਰਦੀ ਹਾਂ ਕਿ ਇਹ ਮੇਰਾ ਆਪਣਾ ਕਾਰਜ ਹੈ, ਕਿ ਇਸ ਤਹਿਤ ਕੋਈ ਕਾਪੀਰਾਈਟ ਉਲੰਘਣਾ ਨਹੀਂ ਕੀਤੀ ਗਈ ਅਤੇ &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines\"&gt;ਵਿਕੀਮੀਡੀਆ ਕਾਮਨਜ਼ ਨੀਤੀਆਂ&lt;/a&gt; ਮੁਤਾਬਿਕ ਇਹ ਠੀਕ ਹੈ।</string>
   <string name="menu_download">ਡਾਊਨਲੋਡ</string>
-  <string name="preference_license">ਲਸੰਸ</string>
+  <string name="preference_license" fuzzy="true">ਲਸੰਸ</string>
   <string name="use_previous">ਪਹਿਲਾਂ ਵਾਲਾ ਸਿਰਲੇਖ/ਜਾਣਕਾਰੀ ਵਰਤੋ</string>
   <string name="allow_gps">ਆਟੋਮੈਟਿਕ ਮੌਜੂਦਾ ਸਥਿਤੀ ਦਾ ਪਤਾ</string>
   <string name="preference_theme">ਰਾਤ ਦਾ ਅੰਦਾਜ਼</string>
@@ -114,7 +114,7 @@
   <string name="tutorial_1_text">ਵਿਕੀਮੀਡੀਆ ਕਾਮਨਜ਼ ਜ਼ਿਆਦਾਤਰ ਉਹ ਤਸਵੀਰਾਂ ਦਾ ਭੰਡਾਰ ਹੈ ਜੋ ਵਿਕੀਪੀਡੀਆ \'ਤੇ ਵਰਤੀਆਂ ਜਾਂਦੀਆਂ ਹਨ।</string>
   <string name="tutorial_1_subtext">ਤੁਹਾਡੀਆਂ ਤਸਵੀਰਾਂ ਵਿਸ਼ਵ ਦੇ ਬਾਕੀ ਲੋਕਾਂ ਨੂੰ ਸਿੱਖਿਅਤ ਕਰਨ ਲਈ ਸਹਾਈ ਹਨ!</string>
   <string name="tutorial_2_text">ਕਿਰਪਾ ਕਰਕੇ ਉਹ ਤਸਵੀਰਾਂ ਅਪਲੋਡ ਕਰੋ ਜੋ ਤੁਹਾਡੇ ਦੁਆਰਾ ਲਈਆਂ ਗਈਆਂ ਹਨ ਜਾਂ ਬਣਾਈਆਂ ਗਈਆਂ ਹਨ:</string>
-  <string name="tutorial_2_subtext">- ਕੁਦਰਤੀ ਇਕਾਈ (ਫੁੱਲ, ਜਾਨਵਰ, ਪਰਬਤ)\n- ਲਾਹੇਵੰਦ ਇਕਾਈਆਂ (ਸਾਇਕਲ, ਰੇਲਵੇ ਸਟੇਸ਼ਨ)\n- ਪ੍ਰਸਿੱਧ ਲੋਕ (ਤੁਹਾਡਾ ਮੇਅਰ, ਅਥਲੀਟ)</string>
+  <string name="tutorial_2_subtext" fuzzy="true">- ਕੁਦਰਤੀ ਇਕਾਈ (ਫੁੱਲ, ਜਾਨਵਰ, ਪਰਬਤ)\n- ਲਾਹੇਵੰਦ ਇਕਾਈਆਂ (ਸਾਇਕਲ, ਰੇਲਵੇ ਸਟੇਸ਼ਨ)\n- ਪ੍ਰਸਿੱਧ ਲੋਕ (ਤੁਹਾਡਾ ਮੇਅਰ, ਅਥਲੀਟ)</string>
   <string name="tutorial_3_text">ਕਿਰਪਾ ਕਰਕੇ ਅਪਲੋਡ ਨਾ ਕਰੋ:</string>
   <string name="tutorial_3_subtext">- ਸੈਲਫ਼ੀਆਂ ਜਾਂ ਤੁਹਾਡੇ ਦੋਸਤਾਂ ਦੀਆਂ ਤਸਵੀਰਾਂ\n- ਜੋ ਤਸਵੀਰਾਂ ਤੁਸੀਂ ਇੰਟਰਨੈੱਟ ਤੋਂ ਡਾਊਨਲੋਡ ਕੀਤੀਆਂ ਹਨ\n- ਨਿੱਜੀ ਐਪਲੀਕੇਸ਼ਨਾਂ ਦੇ ਸਕਰੀਨਸ਼ੌਟ</string>
   <string name="tutorial_4_text">ਉਦਾਹਰਣ ਵਜੋਂ ਇਹ ਅਪਲੋਡ:</string>
@@ -146,7 +146,6 @@
   <string name="media_detail_license">ਲਸੰਸ</string>
   <string name="media_detail_coordinates">ਗੁਣਕ</string>
   <string name="media_detail_coordinates_empty">ਕੋਈ ਉਪਲਬਧ ਨਹੀਂ</string>
-  <string name="use_wikidata">ਵਿਕੀਡਾਟਾ ਵਰਤੋ</string>
   <string name="_2fa_code">2FA ਕੋਡ</string>
   <string name="maximum_limit">ਵੱਧ ਤੋਂ ਵੱਧ ਹੱਦ</string>
   <string name="maximum_limit_alert">500 ਤੋਂ ਵੱਧ ਵਿਖਾਉਣ ਵਿੱਚ ਅਸਮਰੱਥ</string>

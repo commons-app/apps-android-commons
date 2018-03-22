@@ -59,7 +59,7 @@
   <string name="menu_about">O aplikácii</string>
   <string name="about_license" fuzzy="true">Open Source softvér dostupný za podmienok &lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/COPYING\"&gt;Apache License v2&lt;/a&gt;</string>
   <string name="about_improve" fuzzy="true">Zdroj na &lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;GitHub&lt;/a&gt;. Bugy na &lt;a href=\" https://github.com/commons-app/apps-android-commons/issues\"&gt;Github&lt;/a&gt;.</string>
-  <string name="about_privacy_policy">&lt;a href=\"https://github.com/commons-app/apps-android-commons/wiki/Privacy-policy\"&gt;Zásady ochrany súkromia&lt;/a&gt;</string>
+  <string name="about_privacy_policy" fuzzy="true">&lt;a href=\"https://github.com/commons-app/apps-android-commons/wiki/Privacy-policy\"&gt;Zásady ochrany súkromia&lt;/a&gt;</string>
   <string name="title_activity_about">O aplikácii</string>
   <string name="menu_feedback">Odoslať spätnú väzbu (emailom)</string>
   <string name="no_email_client">Nemáte nainštalovaného žiadneho e-mailového klienta</string>
@@ -70,7 +70,7 @@
   <string name="menu_cancel_upload">Zrušiť</string>
   <string name="share_license_summary">Tento obrázok bude licencovaný podľa %1$s</string>
   <string name="menu_download">Stiahnuť</string>
-  <string name="preference_license">Licencia</string>
+  <string name="preference_license" fuzzy="true">Licencia</string>
   <string name="use_previous">Použiť predchádzajúci názov/popis</string>
   <string name="allow_gps">Automaticky získať súčasnú polohu</string>
   <string name="preference_theme">Nočný režim</string>
@@ -98,7 +98,7 @@
   <string name="tutorial_1_text">Na Wikimedia Commons sa nachádza väčšina obrázkov, ktoré sa používajú na Wikipédii.</string>
   <string name="tutorial_1_subtext">Váš obrázok pomáha vzdelávať ľudí po celom svete!</string>
   <string name="tutorial_2_text">Prosím, nahrávajte obrázky, ktoré ste odfotili alebo vytvorili vy:</string>
-  <string name="tutorial_2_subtext">- Prírodu (kvety, zvieratá, hory)\n- Užitočné objekty (bicykle, železničné stanice)\n- Slávni ľudia (starosta, olympionici, s ktorými ste sa stretli)</string>
+  <string name="tutorial_2_subtext" fuzzy="true">- Prírodu (kvety, zvieratá, hory)\n- Užitočné objekty (bicykle, železničné stanice)\n- Slávni ľudia (starosta, olympionici, s ktorými ste sa stretli)</string>
   <string name="tutorial_3_text">Prosím NENAHRÁVAJTE:</string>
   <string name="tutorial_3_subtext">- Selfies alebo fotky vašich priateľov\n- Obrázky prevzaté z internetu\n- Snímky obrazovky proprietárnych aplikácii</string>
   <string name="tutorial_4_text">Príklad nahratia:</string>
@@ -129,7 +129,6 @@
   <string name="media_detail_coordinates">Súradnice</string>
   <string name="media_detail_coordinates_empty">neposkytnuté</string>
   <string name="become_a_tester_title">Staňte sa beta testerom</string>
-  <string name="use_wikidata">Použiť Wikiúdaje</string>
   <string name="logout_verification">Naozaj sa chcete odhlásiť?</string>
   <string name="commons_logo">Logo Commons</string>
   <string name="background_image">Obrázok pozadia</string>
