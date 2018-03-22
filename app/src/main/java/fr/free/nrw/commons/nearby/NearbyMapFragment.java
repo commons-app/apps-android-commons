@@ -3,7 +3,6 @@ package fr.free.nrw.commons.nearby;
 import android.animation.ObjectAnimator;
 import android.animation.TypeEvaluator;
 import android.animation.ValueAnimator;
-
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
@@ -15,8 +14,6 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.BottomSheetBehavior;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.FloatingActionButton;
-
-import android.util.Log;
 import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -82,6 +79,7 @@ public class NearbyMapFragment extends DaggerFragment {
     private FloatingActionButton fabPlus;
     private FloatingActionButton fabCamera;
     private FloatingActionButton fabGallery;
+    private FloatingActionButton fabRecenter;
     private View transparentView;
     private TextView description;
     private TextView title;
@@ -93,7 +91,7 @@ public class NearbyMapFragment extends DaggerFragment {
     private TextView commonsButtonText;
     private TextView directionsButtonText;
 
-    private boolean isFabOpen=false;
+    private boolean isFabOpen = false;
     private Animation rotate_backward;
     private Animation fab_close;
     private Animation fab_open;
@@ -109,8 +107,12 @@ public class NearbyMapFragment extends DaggerFragment {
     private boolean isBottomListSheetExpanded;
     private final double CAMERA_TARGET_SHIFT_FACTOR = 0.06;
 
-    @Inject @Named("prefs") SharedPreferences prefs;
-    @Inject @Named("direct_nearby_upload_prefs") SharedPreferences directPrefs;
+    @Inject
+    @Named("prefs")
+    SharedPreferences prefs;
+    @Inject
+    @Named("direct_nearby_upload_prefs")
+    SharedPreferences directPrefs;
 
     public NearbyMapFragment() {
     }
@@ -125,10 +127,12 @@ public class NearbyMapFragment extends DaggerFragment {
         if (bundle != null) {
             String gsonPlaceList = bundle.getString("PlaceList");
             String gsonLatLng = bundle.getString("CurLatLng");
+            Type listType = new TypeToken<List<Place>>() {
+            }.getType();
             String gsonBoundaryCoordinates = bundle.getString("BoundaryCoord");
-            Type listType = new TypeToken<List<Place>>() {}.getType();
             List<Place> placeList = gson.fromJson(gsonPlaceList, listType);
-            Type curLatLngType = new TypeToken<fr.free.nrw.commons.location.LatLng>() {}.getType();
+            Type curLatLngType = new TypeToken<fr.free.nrw.commons.location.LatLng>() {
+            }.getType();
             Type gsonBoundaryCoordinatesType = new TypeToken<fr.free.nrw.commons.location.LatLng[]>() {}.getType();
             curLatLng = gson.fromJson(gsonLatLng, curLatLngType);
             baseMarkerOptions = NearbyController
@@ -163,16 +167,15 @@ public class NearbyMapFragment extends DaggerFragment {
         this.getView().requestFocus();
         this.getView().setOnKeyListener((v, keyCode, event) -> {
             if (keyCode == KeyEvent.KEYCODE_BACK) {
-                if(bottomSheetDetailsBehavior.getState() == BottomSheetBehavior
+                if (bottomSheetDetailsBehavior.getState() == BottomSheetBehavior
                         .STATE_EXPANDED) {
                     bottomSheetDetailsBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
                     return true;
-                }
-                else if (bottomSheetDetailsBehavior.getState() == BottomSheetBehavior
+                } else if (bottomSheetDetailsBehavior.getState() == BottomSheetBehavior
                         .STATE_COLLAPSED) {
                     bottomSheetDetailsBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
                     mapView.getMapAsync(MapboxMap::deselectMarkers);
-                    selected=null;
+                    selected = null;
                     return true;
                 }
             }
@@ -301,11 +304,12 @@ public class NearbyMapFragment extends DaggerFragment {
         fabPlus = getActivity().findViewById(R.id.fab_plus);
         fabCamera = getActivity().findViewById(R.id.fab_camera);
         fabGallery = getActivity().findViewById(R.id.fab_galery);
+        fabRecenter = getActivity().findViewById(R.id.fab_recenter);
 
         fab_open = AnimationUtils.loadAnimation(getActivity(), R.anim.fab_open);
-        fab_close = AnimationUtils.loadAnimation(getActivity(),R.anim.fab_close);
-        rotate_forward = AnimationUtils.loadAnimation(getActivity(),R.anim.rotate_forward);
-        rotate_backward = AnimationUtils.loadAnimation(getActivity(),R.anim.rotate_backward);
+        fab_close = AnimationUtils.loadAnimation(getActivity(), R.anim.fab_close);
+        rotate_forward = AnimationUtils.loadAnimation(getActivity(), R.anim.rotate_forward);
+        rotate_backward = AnimationUtils.loadAnimation(getActivity(), R.anim.rotate_backward);
 
         transparentView = getActivity().findViewById(R.id.transparentView);
 
@@ -330,11 +334,25 @@ public class NearbyMapFragment extends DaggerFragment {
         fabPlus.setOnClickListener(view -> animateFAB(isFabOpen));
 
         bottomSheetDetails.setOnClickListener(view -> {
-            if(bottomSheetDetailsBehavior.getState() == BottomSheetBehavior.STATE_COLLAPSED) {
+            if (bottomSheetDetailsBehavior.getState() == BottomSheetBehavior.STATE_COLLAPSED) {
                 bottomSheetDetailsBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
-            }
-            else{
+            } else {
                 bottomSheetDetailsBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
+            }
+        });
+
+        fabRecenter.setOnClickListener(view -> {
+            if (curLatLng != null) {
+                mapView.getMapAsync(mapboxMap -> {
+                    CameraPosition position = new CameraPosition.Builder()
+                            .target(new LatLng(curLatLng.getLatitude(), curLatLng.getLongitude())) // Sets the new camera position
+                            .zoom(11) // Sets the zoom
+                            .build(); // Creates a CameraPosition from the builder
+
+                    mapboxMap.animateCamera(CameraUpdateFactory
+                            .newCameraPosition(position), 1000);
+
+                });
             }
         });
 
@@ -351,7 +369,7 @@ public class NearbyMapFragment extends DaggerFragment {
                     transparentView.setAlpha(slideOffset);
                     if (slideOffset == 1) {
                         transparentView.setClickable(true);
-                    } else if (slideOffset == 0){
+                    } else if (slideOffset == 0) {
                         transparentView.setClickable(false);
                     }
                 }
@@ -362,7 +380,7 @@ public class NearbyMapFragment extends DaggerFragment {
                 .BottomSheetCallback() {
             @Override
             public void onStateChanged(@NonNull View bottomSheet, int newState) {
-                if (newState == BottomSheetBehavior.STATE_EXPANDED){
+                if (newState == BottomSheetBehavior.STATE_EXPANDED) {
                     bottomSheetDetailsBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
                     updateMapCameraAccordingToBottomSheet(true);
                 } else {
@@ -448,25 +466,33 @@ public class NearbyMapFragment extends DaggerFragment {
 
         mapboxMap.addMarkers(baseMarkerOptions);
         mapboxMap.setOnInfoWindowCloseListener(marker -> {
-            if (marker == selected){
+            if (marker == selected) {
                 bottomSheetDetailsBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
             }
         });
+        mapView.getMapAsync(mapboxMap -> {
+            mapboxMap.addMarkers(baseMarkerOptions);
+            fabRecenter.setVisibility(View.VISIBLE);
+            mapboxMap.setOnInfoWindowCloseListener(marker -> {
+                if (marker == selected) {
+                    bottomSheetDetailsBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
+                }
+            });
 
-        mapboxMap.setOnMarkerClickListener(marker -> {
-            if (marker instanceof NearbyMarker) {
-                this.selected = marker;
-                NearbyMarker nearbyMarker = (NearbyMarker) marker;
-                Place place = nearbyMarker.getNearbyBaseMarker().getPlace();
-                passInfoToSheet(place);
-                bottomSheetListBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
-                bottomSheetDetailsBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
-            }
-            return false;
+            mapboxMap.setOnMarkerClickListener(marker -> {
+                if (marker instanceof NearbyMarker) {
+                    this.selected = marker;
+                    NearbyMarker nearbyMarker = (NearbyMarker) marker;
+                    Place place = nearbyMarker.getNearbyBaseMarker().getPlace();
+                    passInfoToSheet(place);
+                    bottomSheetListBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
+                    bottomSheetDetailsBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
+                }
+                return false;
+            });
+
         });
-
     }
-
 
 
     /**
@@ -653,7 +679,7 @@ public class NearbyMapFragment extends DaggerFragment {
                 }
             }
             break;
-            
+
             // 3 = "Write external storage" allowed when camera selected
             case 3: {
                 if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
@@ -684,6 +710,7 @@ public class NearbyMapFragment extends DaggerFragment {
     }
 
     private void animateFAB(boolean isFabOpen) {
+            this.isFabOpen = !isFabOpen;
         if (fabPlus.isShown()){
             if (isFabOpen) {
                 fabPlus.startAnimation(rotate_backward);
@@ -702,14 +729,14 @@ public class NearbyMapFragment extends DaggerFragment {
         }
     }
 
-    private void closeFabs(boolean isFabOpen){
+        private void closeFabs ( boolean isFabOpen){
         if (isFabOpen) {
             fabPlus.startAnimation(rotate_backward);
             fabCamera.startAnimation(fab_close);
             fabGallery.startAnimation(fab_close);
             fabCamera.hide();
             fabGallery.hide();
-            this.isFabOpen=!isFabOpen;
+            this.isFabOpen = !isFabOpen;
         }
     }
 

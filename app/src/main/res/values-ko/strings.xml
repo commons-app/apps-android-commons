@@ -214,6 +214,7 @@
   <string name="send_log_file_description">이메일로 개발자에게 로그 파일 보내기</string>
   <string name="no_web_browser">URL을 열기 위한 웹 브라우저를 찾지 못했습니다</string>
   <string name="null_url">오류! URL을 찾을 수 없습니다</string>
+  <string name="view_browser">브라우저에서 보기</string>
   <string name="nearby_location_has_not_changed">위치가 변경되지 않았습니다.</string>
   <string name="nearby_location_not_available">위치를 사용할 수 없습니다.</string>
   <string name="location_permission_rationale_nearby">주변 장소의 목록을 표시하기 위한 권한이 필요합니다.</string>

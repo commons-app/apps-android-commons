@@ -59,6 +59,7 @@
   <string name="categories_search_text_hint">Kategorien durchsuchen</string>
   <string name="menu_save_categories">Speichern</string>
   <string name="refresh_button">Aktualisieren</string>
+  <string name="display_list_button">Liste</string>
   <string name="gps_disabled">GPS ist auf deinem Gerät deaktiviert. Möchtest du es aktivieren?</string>
   <string name="enable_gps">GPS aktivieren</string>
   <string name="contributions_subtitle_zero">Noch keine hochgeladenen Dateien</string>
@@ -211,6 +212,7 @@
   <string name="no_description_found">Keine Beschreibung gefunden</string>
   <string name="nearby_info_menu_commons_article">Commons-Dateiseite</string>
   <string name="nearby_info_menu_wikidata_article">Wikidata-Objekt</string>
+  <string name="nearby_info_menu_wikipedia_article">Wikipedia-Artikel</string>
   <string name="error_while_cache">Fehler beim Zwischenspeichern der Bilder</string>
   <string name="title_info">Ein eindeutiger beschreibender Titel für die Datei, der als Dateiname dient. Du kannst Klartext mit Leerzeichen verwenden. Gib nicht die Dateierweiterung mit an.</string>
   <string name="description_info">Bitte beschreibe das Medium so gut wie möglich: Wo wurde es aufgenommen? Was zeigt es? Was ist der Kontext? Bitte beschreibe die Objekte oder Personen. Zeige Informationen auf, die nicht einfach erraten werden können, zum Beispiel die Tageszeit, falls es eine Landschaft ist. Falls das Medium etwas Ungewöhnliches zeigt, erkläre bitte, was es ungewöhnlich macht.</string>
@@ -236,6 +238,10 @@
   <string name="notifications_thank_you_edit">Vielen Dank für deine Bearbeitung</string>
   <string name="notifications_mention">%1$s erwähnte dich auf %2$s.</string>
   <string name="toggle_view_button">Ansicht wechseln</string>
+  <string name="nearby_directions">RICHTUNGEN</string>
+  <string name="nearby_wikidata">WIKIDATA</string>
+  <string name="nearby_wikipedia">WIKIPEDIA</string>
+  <string name="nearby_commons">COMMONS</string>
   <string name="about_rate_us"/>
   <string name="about_faq">Häufig gestellte Fragen</string>
   <string name="welcome_skip_button">Tutorial überspringen</string>
