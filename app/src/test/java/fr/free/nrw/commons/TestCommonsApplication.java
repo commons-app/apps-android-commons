@@ -9,6 +9,9 @@ import com.squareup.leakcanary.RefWatcher;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
+import javax.inject.Named;
+
+import dagger.Provides;
 import fr.free.nrw.commons.auth.AccountUtil;
 import fr.free.nrw.commons.auth.SessionManager;
 import fr.free.nrw.commons.caching.CacheController;
@@ -79,7 +82,7 @@ public class TestCommonsApplication extends CommonsApplication {
                         }
 
                         @Override
-                        public UploadController providesUploadController(Context context, SessionManager sessionManager, SharedPreferences sharedPreferences) {
+                        public UploadController providesUploadController(SessionManager sessionManager, SharedPreferences sharedPreferences, Context context) {
                             return uploadController;
                         }
 

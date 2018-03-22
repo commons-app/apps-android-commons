@@ -33,7 +33,6 @@ public class CommonsApplicationModule {
     public static final String CATEGORY_AUTHORITY = "fr.free.nrw.commons.categories.contentprovider";
     public static final long OK_HTTP_CACHE_SIZE = 10 * 1024 * 1024;
 
-    private CommonsApplication application;
     private Context applicationContext;
 
     public CommonsApplicationModule(Context applicationContext) {
@@ -87,9 +86,13 @@ public class CommonsApplicationModule {
     }
 
     @Provides
-    public UploadController providesUploadController(Context context,
-                                                     SessionManager sessionManager,
-                                                     @Named("default_preferences") SharedPreferences sharedPreferences) {
+    @Named("direct_nearby_upload_prefs")
+    public SharedPreferences providesDirectNearbyUploadPreferences(Context context) {
+        return context.getSharedPreferences("direct_nearby_upload_prefs", MODE_PRIVATE);
+    }
+
+    @Provides
+    public UploadController providesUploadController(SessionManager sessionManager, @Named("default_preferences") SharedPreferences sharedPreferences, Context context) {
         return new UploadController(sessionManager, context, sharedPreferences);
     }
 

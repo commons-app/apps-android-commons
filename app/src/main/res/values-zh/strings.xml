@@ -224,6 +224,8 @@
   <string name="send_log_file_description">通过电子邮件将日志文件发送给开发人员</string>
   <string name="no_web_browser">找不到可以打开URL的网页浏览器</string>
   <string name="null_url">错误！找不到URL</string>
+  <string name="nominate_deletion">提交删除</string>
+  <string name="view_browser">在浏览器中预览</string>
   <string name="nearby_location_has_not_changed">位置没有更新。</string>
   <string name="nearby_location_not_available">位置不可用。</string>
   <string name="location_permission_rationale_nearby">需要权限以显示附近地点列表</string>

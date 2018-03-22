@@ -185,4 +185,6 @@
   <string name="description_info">Xin vui lòng miêu tả phương tiện càng đầy đủ càng tốt: Chụp ở đâu? Trong hình có gì? Bối cảnh làm sao? Xin vui lòng miêu tả các đối tượng và người trong hình. Cho biết những thông tin khó đoán ra, chẳng hạn giờ trong ngày nếu là phong cảnh. Nếu phương tiện có gì kỳ lạ, xin vui lòng giải thích tại sao nó kỳ lạ.</string>
   <string name="use_external_storage">Sử dụng thiết bị lưu trữ bên ngoài</string>
   <string name="use_external_storage_summary">Lưu các hình ảnh được chụp bằng máy chụp hình trong ứng dụng vào thiết bị của bạn</string>
+  <string name="nominate_deletion">Bầu chọn để xóa</string>
+  <string name="view_browser">Hiện lên ở trang xem browse</string>
 </resources>

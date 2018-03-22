@@ -59,6 +59,7 @@
   <string name="categories_search_text_hint">Αναζήτηση κατηγοριών</string>
   <string name="menu_save_categories">Αποθήκευση</string>
   <string name="refresh_button">Ανανέωση</string>
+  <string name="display_list_button">Κατάλογος</string>
   <string name="gps_disabled">Το GPS στην συσκευή είναι απενεργοποιημένο. Θέλετε να το ενεργοποιήσετε;</string>
   <string name="enable_gps">  Ενεργοποιήσετε το GPS</string>
   <string name="contributions_subtitle_zero">Δεν έχουν ακόμη επιφορτωθεί αρχεία</string>
@@ -211,6 +212,7 @@
   <string name="no_description_found">δεν βρέθηκε περιγραφή</string>
   <string name="nearby_info_menu_commons_article">Σελίδα φακέλλου κοινής χρήσης</string>
   <string name="nearby_info_menu_wikidata_article">Τεμάχιο Wikidata</string>
+  <string name="nearby_info_menu_wikipedia_article">Λήμμα Βικιπαίδειας</string>
   <string name="error_while_cache">Υπήρξε σφάλμα κατά την σκίαση εικόνων</string>
   <string name="title_info">Ένας μοναδικός τίτλος περιγραφής του φακέλλου, που θα χρησιμεύσει ως όνομα φακέλλου. Μπορείτε να χρησιμοποιήσετε τις ήδη υπάρχουσες γλώσσες με διαστήματα. Μην συμπεριλάβετε την επέκταση φακέλλου</string>
   <string name="description_info">\nΠαρακαλώ περιγράψετε τα μέσα το δυνατό περισσότερο : Πού οδηγήθηκε αυτό; Τι δείχνει; Ποιο είναι το περιεχόμενο του; Παρακαλώ περιγράψετε τα αντικείμενα ή τα πρόσωπα. Αποκαλύψετε πληροφορίες που δεν μπορούν εύκολο να μαντέψει κανείς, για παράδειγμα την ώρα εντός της ημέρας αν πρόκειται για τοπίο. Αν τα μέσα δείξουν κάτι ασύνηθες, παρακαλώ εξηγήστε τι το καθιστά μη συνηθισμένα.</string>
@@ -236,6 +238,10 @@
   <string name="notifications_thank_you_edit">Ευχαριστούμε που κάνατε μια επεξεργασία</string>
   <string name="notifications_mention">Ο %1$s σας ανέφερε στο %2$s.</string>
   <string name="toggle_view_button">Μεταβολή προβολής</string>
+  <string name="nearby_directions">Κατευθύνσεις</string>
+  <string name="nearby_wikidata">Βικιδεδομένα</string>
+  <string name="nearby_wikipedia">Βικιπαίδεια</string>
+  <string name="nearby_commons">Κοινά</string>
   <string name="about_rate_us"/>
   <string name="about_faq">Συχνές ερωτήσεις</string>
   <string name="welcome_skip_button">Παράβλεψη εισαγωγής</string>
