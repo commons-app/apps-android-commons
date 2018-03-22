@@ -2,6 +2,10 @@ package fr.free.nrw.commons.upload;
 
 import android.Manifest;
 import android.app.Activity;
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
+import android.animation.AnimatorSet;
+import android.animation.ObjectAnimator;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -65,10 +69,7 @@ import fr.free.nrw.commons.modifications.ModificationsContentProvider;
 import fr.free.nrw.commons.modifications.ModifierSequence;
 import fr.free.nrw.commons.modifications.ModifierSequenceDao;
 import fr.free.nrw.commons.modifications.TemplateRemoveModifier;
-<<<<<<< HEAD
 
-=======
->>>>>>>  Pinch Zoom added
 import fr.free.nrw.commons.utils.ImageUtils;
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
 import timber.log.Timber;
@@ -131,6 +132,11 @@ public class ShareActivity
 
     private boolean haveCheckedForOtherImages = false;
     private boolean isNearbyUpload = false;
+
+    private Animator CurrentAnimator;
+    private long ShortAnimationDuration;
+    private FloatingActionButton zoomInButton;
+    private FloatingActionButton zoomOutButton;
 
 
     /**
