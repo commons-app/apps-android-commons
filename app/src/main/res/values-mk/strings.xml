@@ -59,6 +59,7 @@
   <string name="categories_search_text_hint">Пребарај категории</string>
   <string name="menu_save_categories">Зачувај</string>
   <string name="refresh_button">Превчитај</string>
+  <string name="display_list_button">Список</string>
   <string name="gps_disabled">ГПС е исклучен на уредов. Дали сакате да го вклучите?</string>
   <string name="enable_gps">Вклучи ГПС</string>
   <string name="contributions_subtitle_zero">Сè уште нема подигања</string>
@@ -211,6 +212,7 @@
   <string name="no_description_found">не најдов описи</string>
   <string name="nearby_info_menu_commons_article">Податотечна страница</string>
   <string name="nearby_info_menu_wikidata_article">Предмет на Википодатоците</string>
+  <string name="nearby_info_menu_wikipedia_article">Статија на Википедија</string>
   <string name="error_while_cache">Грешка при меѓускладирање на сликите</string>
   <string name="title_info">Краток и единствен наслов на податотеката, кој ќе служи како нејзин назив. Можете да користите прост јазик со меѓупростор, но не пишувајте ја податотечната наставка</string>
   <string name="description_info">Објаснете ја податотеката што подобро можете: Каде е направена? Што е прикажано на неа? Кој е контекстот? Опишете ги предметите, објектите и личностите. Дајте сознанија што не можат лесно да се погодат, како на пр. време од денот ако се работи за природен предел. Ако на неа е претставено нешто необично, објаснете зошто прикажаното е необично.</string>
@@ -224,6 +226,8 @@
   <string name="send_log_file_description">Испрати дневничка податотека на разработувачите по е-пошта</string>
   <string name="no_web_browser">Не најдов прелистувач за да ја отворам URL</string>
   <string name="null_url">Грешка! Не ја пронајдов URL</string>
+  <string name="nominate_deletion">Предложи за бришење</string>
+  <string name="view_browser">Погледај во прелистувач</string>
   <string name="nearby_location_has_not_changed">Местоположбата не е сменета.</string>
   <string name="nearby_location_not_available">Местоположбата е недостапна.</string>
   <string name="location_permission_rationale_nearby">Се бара дозвола за приказ на список на околни места</string>
@@ -234,6 +238,10 @@
   <string name="notifications_thank_you_edit">Ви благодариме за уредувањето</string>
   <string name="notifications_mention">%1$s ве спомна на %2$s.</string>
   <string name="toggle_view_button">Смени поглед</string>
+  <string name="nearby_directions">НАСОКИ</string>
+  <string name="nearby_wikidata">ВИКИПОДАТОЦИ</string>
+  <string name="nearby_wikipedia">ВИКИПЕДИЈА</string>
+  <string name="nearby_commons">РИЗНИЦА</string>
   <string name="about_faq">Често поставувани прашања</string>
   <string name="welcome_skip_button">Прескокни упатство</string>
 </resources>

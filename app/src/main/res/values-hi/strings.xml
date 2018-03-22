@@ -51,6 +51,7 @@
   <string name="categories_search_text_hint">श्रेणियाँ खोजें</string>
   <string name="menu_save_categories">सहेजें</string>
   <string name="refresh_button">ताजा करें</string>
+  <string name="display_list_button">सूची</string>
   <string name="gps_disabled">आपके डिवाइस में जीपीएस अक्षम है। क्या आप इसे सक्षम करना चाहेंगे?</string>
   <string name="enable_gps">जीपीएस सक्षम करें</string>
   <string name="contributions_subtitle_zero">अभी तक कोई अपलोड नहीं</string>
@@ -193,6 +194,7 @@
   <string name="no_description_found">कोई विवरण नहीं मिला</string>
   <string name="nearby_info_menu_commons_article">कॉमन्स फाइल पृष्ठ</string>
   <string name="nearby_info_menu_wikidata_article">विकिडाटा वस्तु</string>
+  <string name="nearby_info_menu_wikipedia_article">विकीपीडिया लेख</string>
   <string name="error_while_cache">चित्र कैशिंग करते समय त्रुटि</string>
   <string name="title_info">फ़ाइल के लिए एक अद्वितीय वर्णनात्मक शीर्षक, जो एक फ़ाइल नाम के रूप में काम करेगा। आप रिक्त स्थान के साथ सादे भाषा का उपयोग कर सकते हैं। फ़ाइल विस्तार शामिल न करें</string>
   <string name="description_info">कृपया मीडिया जितना संभव हो उतना बताएं: यह कहां लिया गया? यह क्या दिखाता है? संदर्भ क्या है? कृपया वस्तुओं या व्यक्तियों का वर्णन करें। ऐसी जानकारी का खुलासा करें जिसे आसानी से अनुमानित नहीं किया जा सकता, उदाहरण के लिए दिन का समय यदि यह परिदृश्य है। अगर मीडिया कुछ असामान्य दिखाता है, तो कृपया बताएं कि इसे क्या असामान्य बनाता है।</string>
@@ -212,4 +214,8 @@
   <string name="notifications_talk_page_message" fuzzy="true">%1$s ने आपके वार्ता पृष्ठ पर सन्देश छोड़ा है</string>
   <string name="notifications_thank_you_edit">सम्पादन करने के लिए धन्यवाद</string>
   <string name="notifications_mention" fuzzy="true">%1$s ने %2$s में आपका उल्लेख किया है</string>
+  <string name="nearby_directions">दिशा-निर्देश</string>
+  <string name="nearby_wikidata">विकीडाटा</string>
+  <string name="nearby_wikipedia">विकीपीडिया</string>
+  <string name="nearby_commons">कॉमन्स</string>
 </resources>
