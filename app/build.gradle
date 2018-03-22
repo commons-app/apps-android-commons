@@ -41,7 +41,23 @@ dependencies {
     // explicitly depend on RxJava's latest version for bug fixes and new features.
     implementation 'com.android.support:multidex:1.0.3'
 
-    testImplementation "org.robolectric:multidex:3.4.2"
+    compile 'com.facebook.fresco:fresco:1.5.0'
+    compile 'com.facebook.stetho:stetho:1.5.0'
+
+    compile 'com.android.support:multidex:1.0.3'
+
+    testCompile 'junit:junit:4.12'
+    testCompile 'org.robolectric:robolectric:3.7.1'
+    testCompile "org.robolectric:multidex:3.4.2"
+
+    testCompile 'com.squareup.okhttp3:mockwebserver:3.8.1'
+    androidTestCompile 'com.squareup.okhttp3:mockwebserver:3.8.1'
+    androidTestCompile "com.android.support:support-annotations:${project.SUPPORT_LIB_VERSION}"
+    androidTestCompile 'com.android.support.test.espresso:espresso-core:3.0.1'
+
+    debugCompile 'com.squareup.leakcanary:leakcanary-android:1.5.4'
+    releaseCompile 'com.squareup.leakcanary:leakcanary-android-no-op:1.5.4'
+    testCompile 'com.squareup.leakcanary:leakcanary-android-no-op:1.5.4'
 
     implementation 'io.reactivex.rxjava2:rxjava:2.1.2'
     implementation 'com.jakewharton.rxbinding2:rxbinding:2.0.0'
