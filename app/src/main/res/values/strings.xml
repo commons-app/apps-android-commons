@@ -192,6 +192,7 @@
   <string name="background_image">Background Image</string>
   <string name="mediaimage_failed">Media Image Failed</string>
   <string name="no_image_found">No Image Found</string>
+  <string name="no_internet">No internet available</string>
   <string name="upload_image">Upload Image</string>
   <string name="welcome_image_mount_zao">Mount Zao</string>
   <string name="welcome_image_llamas">Llamas</string>
