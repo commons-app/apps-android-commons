@@ -59,6 +59,7 @@
   <string name="categories_search_text_hint">搜尋分類</string>
   <string name="menu_save_categories">儲存</string>
   <string name="refresh_button">重新整理</string>
+  <string name="display_list_button">清單</string>
   <string name="gps_disabled">您的設備停用了 GPS。要啟用嗎？</string>
   <string name="enable_gps">啟用 GPS</string>
   <string name="contributions_subtitle_zero">尚未上傳</string>
@@ -211,6 +212,7 @@
   <string name="no_description_found">找不到說明</string>
   <string name="nearby_info_menu_commons_article">共享資源檔案頁面</string>
   <string name="nearby_info_menu_wikidata_article">維基數據項目</string>
+  <string name="nearby_info_menu_wikipedia_article">維基百科條目</string>
   <string name="error_while_cache">在快取圖片時發生錯誤</string>
   <string name="title_info">用於本檔案的唯一描述性標題。您可以使用帶有空格的簡明語言，另外請不要包含副檔名。</string>
   <string name="description_info">請盡可能說明媒體內容：拍攝於何處？是顯示什麼事物？有什麼脈絡？請描述對象或人物。透露出一些較不易猜測的訊息，例如是風景的話，可以是一天裡的時間。如果媒體顯示出一些不正常的事物，請說明出造成不正常原因。</string>
@@ -236,6 +238,10 @@
   <string name="notifications_thank_you_edit">感謝您所做的編輯</string>
   <string name="notifications_mention">%1$s 在 %2$s 提到了您。</string>
   <string name="toggle_view_button">切換檢視</string>
+  <string name="nearby_directions">重新導向</string>
+  <string name="nearby_wikidata">維基數據</string>
+  <string name="nearby_wikipedia">維基百科</string>
+  <string name="nearby_commons">維基共享資源</string>
   <string name="about_faq">常見問題</string>
   <string name="welcome_skip_button">跳過敎程</string>
 </resources>
