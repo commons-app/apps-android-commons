@@ -83,7 +83,7 @@
   <string name="menu_cancel_upload">Annuleren</string>
   <string name="share_license_summary">Deze afbeelding wordt gelicenseerd onder %1$s</string>
   <string name="menu_download">Downloaden</string>
-  <string name="preference_license">Licentie</string>
+  <string name="preference_license" fuzzy="true">Licentie</string>
   <string name="use_previous">Vorige naam/beschrijving gebruiken</string>
   <string name="allow_gps">Automatisch huidige locatie ophalen</string>
   <string name="allow_gps_summary">Huidige locatie ophalen om categoriesuggesties te maken als het beeld geen geotags heeft</string>
@@ -112,7 +112,7 @@
   <string name="tutorial_1_text">Op Wikimedia Commons staan de meeste afbeeldingen die worden gebruikt in Wikipedia.</string>
   <string name="tutorial_1_subtext">Uw afbeeldingen helpen mensen over de hele wereld met kennis opdoen!</string>
   <string name="tutorial_2_text">Upload alstublieft alleen afbeeldingen die volledig door uzelf gemaakt zijn:</string>
-  <string name="tutorial_2_subtext">- Natuurlijke objecten (bloemen, dieren, bergen)\n- Nuttige objecten (fietsen, treinstations)\n- Beroemde mensen (uw burgemeester, Olympische atleten u hebt ontmoet)</string>
+  <string name="tutorial_2_subtext" fuzzy="true">- Natuurlijke objecten (bloemen, dieren, bergen)\n- Nuttige objecten (fietsen, treinstations)\n- Beroemde mensen (uw burgemeester, Olympische atleten u hebt ontmoet)</string>
   <string name="tutorial_3_text">Gelieve NIET te uploaden:</string>
   <string name="tutorial_3_subtext">- Selfies of foto\'s van uw vrienden\n- Foto\'s die u hebt gedownload van het Internet\n- Screenshots van eigen apps</string>
   <string name="tutorial_4_text">Voorbeeld van een upload:</string>
@@ -141,7 +141,6 @@
   <string name="media_detail_media_title">Titel van het bestand</string>
   <string name="media_detail_description">Beschrijving</string>
   <string name="media_detail_uploaded_date">Uploaddatum</string>
-  <string name="use_wikidata">Wikidata gebruiken</string>
   <string name="_2fa_code">2FA-code</string>
   <string name="welcome_image_no_selfies">Geen selfies</string>
   <string name="cancel">Annuleren</string>

@@ -1,10 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+  <string name="preference_category_appearance">Vzhled</string>
+  <string name="preference_category_general">Obecné</string>
+  <string name="preference_category_feedback">Zpětná vazba</string>
+  <string name="preference_category_location">Lokace</string>
   <string name="app_name">Commons</string>
+  <string name="bullet">•</string>
   <string name="menu_settings">Nastavení</string>
   <string name="username">Uživatelské jméno</string>
   <string name="password">Heslo</string>
+  <string name="login_credential">Přihlásit se do svého Commons Beta účtu</string>
   <string name="login">Přihlásit se</string>
+  <string name="forgot_password">Zapomněli jste heslo?</string>
   <string name="signup">Zaregistrovat se</string>
   <string name="logging_in_title">Přihlášení</string>
   <string name="logging_in_message">Čekejte prosím…</string>
@@ -36,6 +43,7 @@
   <string name="menu_share">Sdílet</string>
   <string name="menu_open_in_browser">Zobrazit v prohlížeči</string>
   <string name="share_title_hint">Název</string>
+  <string name="add_title_toast">Vložte prosím název tohoto souboru</string>
   <string name="share_description_hint">Popis</string>
   <string name="login_failed_network">Nelze se přihlásit - selhání sítě</string>
   <string name="login_failed_username">Nelze se přihlásit - prosím zkontrolujte své uživatelské jméno</string>
@@ -75,8 +83,8 @@
   <string name="menu_about">O aplikaci</string>
   <string name="about_license">Aplikace Wikimedia Commons je open source software vytvářený a spravovaný členy komunity Wikimedia. Nadace Wikimedia se neúčastní tvorby, vývoje či správy aplikace.</string>
   <string name="about_improve">Otevřete nové &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;hlášení na GitHubu&lt;/a&gt; pro nahlášení chyb a návrhů.</string>
-  <string name="about_privacy_policy">&lt;a href=\"https://github.com/commons-app/apps-android-commons/wiki/Privacy-policy\"&gt;Ochrana osobních údajů&lt;/a&gt;</string>
-  <string name="about_credits">&lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/CREDITS\"&gt;Autoři&lt;/a&gt;</string>
+  <string name="about_privacy_policy">&lt;u&gt;Ochrana osobních údajů&lt;/u&gt;</string>
+  <string name="about_credits">&lt;u&gt;Autoři&lt;/u&gt;</string>
   <string name="title_activity_about">O aplikaci</string>
   <string name="menu_feedback">Poslat názory (e-mailem)</string>
   <string name="no_email_client">Není nainstalován žádný e-mailový klient</string>
@@ -88,7 +96,7 @@
   <string name="share_license_summary">Tento obrázek bude zveřejněn pod licencí %1$s</string>
   <string name="media_upload_policy">Odesláním tohoto souboru potvrzuji, že je mým vlastním dílem, neobsahuje autorskoprávně chráněný materiál a nejedná se o selfie a ani jinak neporušuje &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines\"&gt;pravidla a doporučení Wikimedia Commons&lt;/a&gt;.</string>
   <string name="menu_download">Stáhnout</string>
-  <string name="preference_license">Licence</string>
+  <string name="preference_license">Výchozí licence</string>
   <string name="use_previous">Použít předchozí název a popis</string>
   <string name="allow_gps">Automaticky získat aktuální polohu</string>
   <string name="allow_gps_summary">Nabídnout kategorie na základě aktuální polohy (pokud není obrázek opatřen souřadnicemi)</string>
@@ -117,11 +125,20 @@
   <string name="tutorial_1_text">Wikimedia Commons je úložištěm většiny obrázků, které jsou používány na Wikipedii.</string>
   <string name="tutorial_1_subtext">Vaše obrázky pomáhají vzdělávat lidi po celém světě</string>
   <string name="tutorial_2_text">Prosím, nahrávejte obrázky které jste vyfotil nebo nahrál sám:</string>
-  <string name="tutorial_2_subtext">- Přírodní objekty (květiny, zvířata, hory)\n- Užitkové předměty (jízdní kola, vlakové nádraží)\n- Slavní lidé (starosta, olympjští sportovci)</string>
+  <string name="tutorial_2_subtext">Přírodní objekty (květiny, zvířata, hory)\n• Užitkové předměty (kola, vlaková nádraží)\n• Slavní lidé (váš starosta, olympjští atleti, které jste potkal/a)</string>
+  <string name="tutorial_2_subtext_1">Přírodní objekty (květiny, zvířata, hory)</string>
+  <string name="tutorial_2_subtext_2">Užitkové předměty (kola, vlaková nádraží)</string>
+  <string name="tutorial_2_subtext_3">Slavní lidé (váš starosta, olympjští atleti, které jste potkal/a)</string>
   <string name="tutorial_3_text">Prosím NENAHRÁVEJTE:</string>
   <string name="tutorial_3_subtext">- Selfie nebo obrázky vašich přátel\n- Obrázky stažené z Internetu\n- Screenshoty z proprietárních aplikací</string>
+  <string name="tutorial_3_subtext_1">Selfie nebo obrázky vašich přátel</string>
+  <string name="tutorial_3_subtext_2">Obrázky, které jste nahrál/a z internetu</string>
+  <string name="tutorial_3_subtext_3">Snímky obrazovky proprietárních aplikací</string>
   <string name="tutorial_4_text">Příklad nahraného souboru:</string>
   <string name="tutorial_4_subtext">- Název: Opera v Sydney\n- Popis: Opera v Sydney, pohled přes záliv\n- Kategorie: Sydney Opera House from the west, Sydney Opera House remote views</string>
+  <string name="tutorial_4_subtext_1">Název: Budova Opery v Sydney</string>
+  <string name="tutorial_4_subtext_2">Popis: Budova Opery v Sydney, zobrazená přes záliv</string>
+  <string name="tutorial_4_subtext_3">Kategorie:Budova Opery v Sydney ze západu, Vzdálený pohled na budovu Opery v Sydney</string>
   <string name="welcome_wikipedia_text">Přispějte svými obrázky. Pomozte oživit články na Wikipedii.</string>
   <string name="welcome_wikipedia_subtext">Obrázky na Wikipedii pochází \nz Wikimedia Commons.</string>
   <string name="welcome_copyright_text">Vaše obrázky pomáhají vzdělávat lidi po celém světě.</string>
@@ -154,8 +171,6 @@
   <string name="media_detail_coordinates_empty">Žádné vložené souřadnice</string>
   <string name="become_a_tester_title">Staňte se beta testery</string>
   <string name="become_a_tester_description">Přihlásit se do našeho beta kanálu na Google Play a dostávat včasný přístup k novinkám a opravám chyb</string>
-  <string name="use_wikidata">Použít Wikidata</string>
-  <string name="use_wikidata_summary">(Varování: vypnutí tohoto režimu může vést k velké spotřebě dat)</string>
   <string name="_2fa_code">Kód pro dvoufázové ověření (2FA)</string>
   <string name="number_of_uploads">Můj limit zobrazených souborů</string>
   <string name="maximum_limit">Maximum</string>
@@ -207,6 +222,10 @@
   <string name="login_to_your_account">Přihlásit se k účtu</string>
   <string name="send_log_file">Odeslat log</string>
   <string name="send_log_file_description">Odeslat log vývojářům e-mailem</string>
+  <string name="no_web_browser">Nebyl nalezen žádný webový prohlížeč k otevření URL</string>
+  <string name="null_url">Chyba! URL nenalezeno</string>
+  <string name="nominate_deletion">Navrhnout na smazání</string>
+  <string name="view_browser">Zobrazit v prohlížeči</string>
   <string name="nearby_location_has_not_changed">Vaše umístění se nezměnilo.</string>
   <string name="nearby_location_not_available">Umístění není dostupné.</string>
   <string name="location_permission_rationale_nearby">Vyžadováno povolení k zobrazení seznamu blízkých míst</string>
@@ -217,4 +236,6 @@
   <string name="notifications_thank_you_edit">Děkujeme za vaši editaci</string>
   <string name="notifications_mention">%1$s vás zmínil na %2$s.</string>
   <string name="toggle_view_button">Přepnout pohled</string>
+  <string name="about_faq">Často kladené dotazy</string>
+  <string name="welcome_skip_button">Přeskočit úvod</string>
 </resources>

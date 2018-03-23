@@ -8,6 +8,13 @@
     <attr name="uploadOverlayBackground" format="reference"/>
     <attr name="spinnerTheme" format="reference"/>
     <attr name="iconsTheme" format="reference"/>
+    <attr name="bottomBar" format="reference"/>
+    <attr name="buttonBackgroundFocused" format="reference"/>
+    <attr name="buttonBackgroundPressed" format="reference"/>
+    <attr name="buttonFocused" format="reference"/>
+    <attr name="buttonPressed" format="reference"/>
+    <attr name="textDisabled" format="reference"/>
+    <attr name="textEnabled" format="reference"/>
 
     <declare-styleable name="CompatTextView">
         <attr name="drawablePadding" format="dimension"/>

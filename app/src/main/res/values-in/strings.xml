@@ -80,7 +80,7 @@
   <string name="menu_cancel_upload">Batal</string>
   <string name="share_license_summary">Gambar ini akan diberi lisensi %1$s</string>
   <string name="menu_download">Unduh</string>
-  <string name="preference_license">Lisensi</string>
+  <string name="preference_license" fuzzy="true">Lisensi</string>
   <string name="use_previous">Gunakan judul/deskripsi sebelumnya</string>
   <string name="allow_gps">Dapatkan lokasi secara otomatis</string>
   <string name="license_name_cc_by_sa_four">Atribusi-BerbagiSerupa 4.0</string>

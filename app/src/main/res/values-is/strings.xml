@@ -1,10 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+  <string name="preference_category_appearance">Útlit</string>
+  <string name="preference_category_general">Almennt</string>
+  <string name="preference_category_feedback">Umsagnir</string>
+  <string name="preference_category_location">Staðsetning</string>
   <string name="app_name">Commons</string>
+  <string name="bullet">•</string>
   <string name="menu_settings">Stillingar</string>
   <string name="username">Notandanafn</string>
   <string name="password">Lykilorð</string>
+  <string name="login_credential">Skráðu inn á Beta-prófunaraðgang Commons</string>
   <string name="login">Skrá inn</string>
+  <string name="forgot_password">Gleymt lykilorð?</string>
   <string name="signup">Nýskrá</string>
   <string name="logging_in_title">Innskráning í gangi</string>
   <string name="logging_in_message">Hinkraðu aðeins…</string>
@@ -36,6 +43,7 @@
   <string name="menu_share">Deila</string>
   <string name="menu_open_in_browser">Skoða í vafra</string>
   <string name="share_title_hint">Titill</string>
+  <string name="add_title_toast">Gefðu þessari skrá einhvern titil</string>
   <string name="share_description_hint">Lýsing</string>
   <string name="login_failed_network">Innskráning mistókst - bilun í neti</string>
   <string name="login_failed_username">Innskráning mistókst. Athugaðu notandanafnið þitt</string>
@@ -75,8 +83,8 @@
   <string name="menu_about">Um</string>
   <string name="about_license">Wikimedia Commons forritið er opinn og frjáls hugbúnaður sem gerður er og viðhaldið af stuðningsaðilum og sjálfboðaliðum Wikimedia samfélagsins. Wikimedia Foundation sjálfseignarstofnunin kemur ekki að gerð, forritun eða viðhaldi forritsins. \</string>
   <string name="about_improve">Útbúðu nýjar &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;GitHub tilkynningar (issue)&lt;/a&gt; til að koma villum og uppástungum á framfæri.</string>
-  <string name="about_privacy_policy">&lt;a href=\"https://github.com/commons-app/apps-android-commons/wiki/Privacy-policy\"&gt;Meðferð persónuupplýsinga&lt;/a&gt;</string>
-  <string name="about_credits">&lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/CREDITS\"&gt;Framlög&lt;/a&gt;</string>
+  <string name="about_privacy_policy">&lt;u&gt;Meðferð persónuupplýsinga&lt;/u&gt;</string>
+  <string name="about_credits">&lt;u&gt;Framlög&lt;/u&gt;</string>
   <string name="title_activity_about">Um</string>
   <string name="menu_feedback">Senda umsögn (með tölvupósti)</string>
   <string name="no_email_client">Ekkert tölvupóstforrit er uppsett</string>
@@ -88,7 +96,7 @@
   <string name="share_license_summary">Þessi mynd verður birt með %1$s notkunarleyfi</string>
   <string name="media_upload_policy">Með því að senda inn þessa mynd, lýsi ég því hér með yfir að þetta er mitt eigið verk, það inniheldur ekkert höfundarréttarvarið efni eða sjálfsmyndir, og að það samræmist á allan hátt við &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines\"&gt;stefnu Wikimedia Commons varðandi notkun efnis&lt;/a&gt;.</string>
   <string name="menu_download">Sækja</string>
-  <string name="preference_license">Notkunarleyfi</string>
+  <string name="preference_license">Sjálfgefið notkunarleyfi</string>
   <string name="use_previous">Nota fyrri titil/lýsingu</string>
   <string name="allow_gps">Ná sjálfvirkt í núverandi staðsetningu</string>
   <string name="allow_gps_summary">Lesa núverandi staðsetningu til að geta stungið upp á flokkum ef myndin er ekki með hnattstaðsetningarhnitum</string>
@@ -117,11 +125,20 @@
   <string name="tutorial_1_text">Wikimedia Commons hýsir mest af því myndefni sem notað er á Wikipedia.</string>
   <string name="tutorial_1_subtext">Myndirnar þínar hjálpa fólki um allan heim að læra!</string>
   <string name="tutorial_2_text">Sendu inn myndir sem þú hefur tekið eða sem eru algerlega eftir þig sjálfa(n):</string>
-  <string name="tutorial_2_subtext">- Náttúruleg fyrirbæri (blóm, dýr, fjöll)\n- Notadrjúgir hlutir (reiðhjól, lestarstöðvar)\n- Frægt fólk (sveitarstjórinn þinn, ólympíufarar sem þú hefur hitt)</string>
+  <string name="tutorial_2_subtext">- Náttúruleg fyrirbæri (blóm, dýr, fjöll)\n• Notadrjúgir hlutir (reiðhjól, lestarstöðvar)\n• Frægt fólk (sveitarstjórinn þinn, ólympíufarar sem þú hefur hitt)</string>
+  <string name="tutorial_2_subtext_1">Náttúruleg fyrirbæri (blóm, dýr, fjöll)</string>
+  <string name="tutorial_2_subtext_2">Notadrjúgir hlutir (reiðhjól, lestarstöðvar)</string>
+  <string name="tutorial_2_subtext_3">Frægt fólk (sveitarstjórinn þinn, ólympíufarar sem þú hefur hitt)</string>
   <string name="tutorial_3_text">EKKI senda inn:</string>
   <string name="tutorial_3_subtext">- Sjálfsmyndir eða myndir af vinum þínum\n- Myndir sem þú náðir í á Internetinu\n- Skjámyndir af séreignahugbúnaði</string>
+  <string name="tutorial_3_subtext_1">Sjálfsmyndir eða myndir af vinum þínum</string>
+  <string name="tutorial_3_subtext_2">Myndir sem þú náðir í á Internetinu</string>
+  <string name="tutorial_3_subtext_3">Skjámyndir af séreignahugbúnaði</string>
   <string name="tutorial_4_text">Dæmi um innsent efni:</string>
   <string name="tutorial_4_subtext">- Titill: Óperuhúsið í Sydney\n- Lýsing: Óperuhúsið í Sydney séð að handan yfir flóann\n- Flokkar: Óperuhúsið í Sydney séð úr vestri, Óperuhúsið í Sydney séð úr fjarlægð</string>
+  <string name="tutorial_4_subtext_1">Titill: Óperuhúsið í Sydney</string>
+  <string name="tutorial_4_subtext_2">Lýsing: Óperuhúsið í Sydney séð að handan yfir flóann</string>
+  <string name="tutorial_4_subtext_3">Flokkar: Óperuhúsið í Sydney séð úr vestri, Óperuhúsið í Sydney séð úr fjarlægð</string>
   <string name="welcome_wikipedia_text">Bjóddu fram myndirnar þínar. Blástu lífi í greinar á Wikipedia!</string>
   <string name="welcome_wikipedia_subtext">Myndir á Wikipedia koma frá Wikimedia Commons..</string>
   <string name="welcome_copyright_text">Myndirnar þínar hjálpa fólki um allan heim að læra.</string>
@@ -154,8 +171,6 @@
   <string name="media_detail_coordinates_empty">Ekkert uppgefið</string>
   <string name="become_a_tester_title">Taktu þátt í beta-forprófunum</string>
   <string name="become_a_tester_description">Veldu að taka þátt í beta-forprófunarrásinni á Google Play og fáðu snemmbúinn aðgang að nýjum eiginleikum og villuleiðréttingum</string>
-  <string name="use_wikidata">Nota Wikidata</string>
-  <string name="use_wikidata_summary">(Aðvörun: ef þetta er óvirkt getur það leitt til mikillar notkunar á gagnamagni)</string>
   <string name="_2fa_code">2FA-kóði</string>
   <string name="number_of_uploads">Nýleg sendingartakmörk mín</string>
   <string name="maximum_limit">Hámark</string>
@@ -207,6 +222,8 @@
   <string name="login_to_your_account">Skrá inn á aðganginn þinn</string>
   <string name="send_log_file">Senda atvikaskrá</string>
   <string name="send_log_file_description">Senda atvikaskrá til forritaranna með tölvupósti</string>
+  <string name="no_web_browser">Gat ekki ræst vefvafra til að opna slóð</string>
+  <string name="null_url">Villa: Slóð fannst ekki</string>
   <string name="nearby_location_has_not_changed">Staðsetning hefur ekki breyst.</string>
   <string name="nearby_location_not_available">Staðsetning ekki tiltæk.</string>
   <string name="location_permission_rationale_nearby">Heimild þarf til að birta lista yfir staði í nágrenninu</string>
@@ -217,4 +234,6 @@
   <string name="notifications_thank_you_edit">Takk fyrir að hafa gert breytingar</string>
   <string name="notifications_mention">%1$s minntist á þig á %2$s.</string>
   <string name="toggle_view_button">Víxla sýn</string>
+  <string name="about_faq">Algengar spurningar</string>
+  <string name="welcome_skip_button">Sleppa kennslu</string>
 </resources>

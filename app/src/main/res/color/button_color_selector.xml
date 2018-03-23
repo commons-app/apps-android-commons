@@ -1,0 +1,7 @@
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:state_enabled="false"
+        android:color="@color/opak_middle_grey" />
+    <item
+        android:color="@color/status_bar_blue" />
+</selector>

@@ -1,10 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+  <string name="preference_category_appearance">Apariencia</string>
+  <string name="preference_category_general">Generales</string>
+  <string name="preference_category_feedback">Sugerencias</string>
+  <string name="preference_category_location">Ubicación</string>
   <string name="app_name">Commons</string>
+  <string name="bullet">•</string>
   <string name="menu_settings">Configuración</string>
   <string name="username">Nombre de usuario</string>
   <string name="password">Contraseña</string>
+  <string name="login_credential">Accede a tu cuenta de Commons Beta</string>
   <string name="login">Acceder</string>
+  <string name="forgot_password">¿Olvidaste la contraseña?</string>
   <string name="signup">Regístrate</string>
   <string name="logging_in_title">Accediendo</string>
   <string name="logging_in_message">Espera un momento…</string>
@@ -36,6 +43,7 @@
   <string name="menu_share">Compartir</string>
   <string name="menu_open_in_browser">Ver en el navegador</string>
   <string name="share_title_hint">Título</string>
+  <string name="add_title_toast">Proporciona un título para este archivo</string>
   <string name="share_description_hint">Descripción</string>
   <string name="login_failed_network">No se pudo iniciar sesión: falla de red</string>
   <string name="login_failed_username">No se pudo iniciar sesión: revisa tu nombre de usuario</string>
@@ -75,8 +83,8 @@
   <string name="menu_about">Acerca de</string>
   <string name="about_license">La aplicación de código abierto Wikimedia Commons fue creada por, y recibe mantenimiento de, cesionarios y voluntarios de la comunidad de Wikimedia. La Fundación Wikimedia no está involucrada en la creación, el desarrollo ni el mantenimiento de la aplicación.</string>
   <string name="about_improve">Notifica de problemas y sugerencias en &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;GitHub&lt;/a&gt;.</string>
-  <string name="about_privacy_policy">&lt;a href=\"https://github.com/commons-app/apps-android-commons/wiki/Privacy-policy\"&gt;Normativa de privacidad&lt;/a&gt;</string>
-  <string name="about_credits">&lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/CREDITS\"&gt;Créditos&lt;/a&gt;</string>
+  <string name="about_privacy_policy">&lt;u&gt;Normativa de privacidad&lt;/u&gt;</string>
+  <string name="about_credits">&lt;u&gt;Créditos&lt;/u&gt;</string>
   <string name="title_activity_about">Acerca de</string>
   <string name="menu_feedback">Enviar comentarios (por correo)</string>
   <string name="no_email_client">No se ha instalado ningún cliente de correo</string>
@@ -88,7 +96,7 @@
   <string name="share_license_summary">Esta imagen se publicará bajo la licencia %1$s</string>
   <string name="media_upload_policy">El presentar esta imagen, declaro que es una obra propia, que no contiene material o \"selfies\" con derecho de autor, y que adhiere a las &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines\"&gt;políticas de Wikimedia Commons&lt;/a&gt;.</string>
   <string name="menu_download">Descargar</string>
-  <string name="preference_license">Licencia</string>
+  <string name="preference_license">Licencia predeterminada</string>
   <string name="use_previous">Usar título/descripción anteriores</string>
   <string name="allow_gps">Obtener ubicación actual automáticamente</string>
   <string name="allow_gps_summary">Recuperar ubicación actual para ofrecer sugerencias de categorías si la imagen no tiene etiquetas geográficas</string>
@@ -117,11 +125,19 @@
   <string name="tutorial_1_text">Wikimedia Commons aloja la mayoría de las imágenes utilizadas en Wikipedia.</string>
   <string name="tutorial_1_subtext">¡Tus imágenes ayudan a instruir a personas de todo el mundo!</string>
   <string name="tutorial_2_text">Carga únicamente imágenes capturadas o creadas por ti.</string>
-  <string name="tutorial_2_subtext">- Objetos naturales (flores, animales, montañas)\n- Objetos útiles (bicicletas, estaciones de tren)\n- Personas famosas (tu alcalde, algún atleta olímpico que conociste)</string>
+  <string name="tutorial_2_subtext" fuzzy="true">- Objetos naturales (flores, animales, montañas)\n- Objetos útiles (bicicletas, estaciones de tren)\n- Personas famosas (tu alcalde, algún atleta olímpico que conociste)</string>
+  <string name="tutorial_2_subtext_1">Naturaleza (flores, animales, montañas)</string>
+  <string name="tutorial_2_subtext_2">Objetos utilitarios (bicicletas, estaciones de tren)</string>
+  <string name="tutorial_2_subtext_3">Gente famosa (tu regente, algún atleta que hayas conocido…)</string>
   <string name="tutorial_3_text">NO cargues:</string>
   <string name="tutorial_3_subtext">- Autorretratos o fotos de tus amigos\n- Imágenes que hayas descargado de Internet\n- Capturas de pantalla de aplicaciones privativas</string>
+  <string name="tutorial_3_subtext_1">Autorretratos o fotos de tus amigos</string>
+  <string name="tutorial_3_subtext_2">Imágenes descargadas de Internet</string>
+  <string name="tutorial_3_subtext_3">Capturas de pantalla de aplicaciones privativas</string>
   <string name="tutorial_4_text">Ejemplo de carga:</string>
   <string name="tutorial_4_subtext">- Título: Casa de la Ópera de Sídney\n- Descripción: Casa de la Ópera de Sídney vista desde el otro lado de la bahía\n- Categorías: Casa de la Ópera de Sídney desde el oeste, Vistas a distancia de la Casa de la Ópera de Sídney</string>
+  <string name="tutorial_4_subtext_1">Título: Ópera de Sídney</string>
+  <string name="tutorial_4_subtext_2">Descripción: La Ópera de Sídney, vista desde el otro lado de la bahía</string>
   <string name="welcome_wikipedia_text">Contribuye con tus imágenes.\n¡Ayuda a que los artículos de Wikipedia tengan vida!</string>
   <string name="welcome_wikipedia_subtext">Las imágenes en Wikipedia proceden de\nWikimedia Commons.</string>
   <string name="welcome_copyright_text">Tus imágenes ayudan a educar a la gente\nalrededor del mundo.</string>
@@ -154,8 +170,6 @@
   <string name="media_detail_coordinates_empty">No se proporcionaron</string>
   <string name="become_a_tester_title">Prueba la versión beta</string>
   <string name="become_a_tester_description">Apúntate a nuestro canal beta en Google Play y obtén acceso a funcionalidades nuevas y correcciones de errores</string>
-  <string name="use_wikidata">Utilizar Wikidata</string>
-  <string name="use_wikidata_summary">(Advertencia: desactivar esto puede ocasionar un gran consumo de datos del móvil)</string>
   <string name="_2fa_code">Código de autenticación de 2 pasos</string>
   <string name="number_of_uploads">Mi límite de subidas recientes</string>
   <string name="maximum_limit">Límite máximo</string>
@@ -207,6 +221,10 @@
   <string name="login_to_your_account">Accede a tu cuenta</string>
   <string name="send_log_file">Enviar archivo de registro</string>
   <string name="send_log_file_description">Enviar archivo de registro a los desarrolladores por correo electrónico</string>
+  <string name="no_web_browser">No se encontró ningún navegador con el que abrir el URL</string>
+  <string name="null_url">Error: no se encontró el URL</string>
+  <string name="nominate_deletion">Nominar para borrado</string>
+  <string name="view_browser">Ver en navegador</string>
   <string name="nearby_location_has_not_changed">La ubicación no ha cambiado.</string>
   <string name="nearby_location_not_available">La ubicación no está disponible.</string>
   <string name="location_permission_rationale_nearby">Se necesita permiso para mostrar una lista de lugares cercanos</string>
@@ -216,4 +234,5 @@
   <string name="notifications_talk_page_message">%1$s dejó un mensaje en tu página de discusión</string>
   <string name="notifications_thank_you_edit">Gracias por realizar una edición</string>
   <string name="notifications_mention">%1$s te ha mencionado en %2$s.</string>
+  <string name="about_faq">Preguntas frecuentes</string>
 </resources>

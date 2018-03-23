@@ -1,10 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+  <string name="preference_category_appearance">Ulkoasu</string>
+  <string name="preference_category_general">Yleinen</string>
+  <string name="preference_category_feedback">Palaute</string>
+  <string name="preference_category_location">Sijainti</string>
   <string name="app_name">Commons</string>
+  <string name="bullet">•</string>
   <string name="menu_settings">Asetukset</string>
   <string name="username">Käyttäjätunnus</string>
   <string name="password">Salasana</string>
+  <string name="login_credential">Kirjaudu Commons Beta-tilillesi</string>
   <string name="login">Kirjaudu sisään</string>
+  <string name="forgot_password">Unohtuiko salasana?</string>
   <string name="signup">Rekisteröidy</string>
   <string name="logging_in_title">Kirjaudutaan</string>
   <string name="logging_in_message">Odota…</string>
@@ -36,6 +43,7 @@
   <string name="menu_share">Jaa</string>
   <string name="menu_open_in_browser">Näytä selaimessa</string>
   <string name="share_title_hint">Otsikko</string>
+  <string name="add_title_toast">Anna tälle tiedostolle otsikko</string>
   <string name="share_description_hint">Kuvaus</string>
   <string name="login_failed_network">Kirjautuminen epäonnistui - verkkovirhe</string>
   <string name="login_failed_username">Kirjautuminen epäonnistui - tarkista käyttäjätunnus</string>
@@ -54,16 +62,16 @@
   <string name="gps_disabled">GPS ei ole käytössä. Haluatko ottaa sen käyttöön?</string>
   <string name="enable_gps">Ota GPS käyttöön</string>
   <string name="contributions_subtitle_zero">Ei tallennuksia vielä</string>
-  <plurals name="contributions_subtitle" fuzzy="true">
+  <plurals name="contributions_subtitle">
     <item quantity="zero">\@string/contributions_subtitle_zero</item>
     <item quantity="one">%1$d tallennus</item>
     <item quantity="other">%1$d tallennusta</item>
   </plurals>
-  <plurals name="starting_multiple_uploads" fuzzy="true">
-    <item quantity="one">aloitetaan %1$d tallennus</item>
-    <item quantity="other">aloitetaan %1$d tallennusta</item>
+  <plurals name="starting_multiple_uploads">
+    <item quantity="one">Aloitetaan %1$d tallennus</item>
+    <item quantity="other">Aloitetaan %1$d tallennusta</item>
   </plurals>
-  <plurals name="multiple_uploads_title" fuzzy="true">
+  <plurals name="multiple_uploads_title">
     <item quantity="one">%1$d tallennus</item>
     <item quantity="other">%1$d tallennusta</item>
   </plurals>
@@ -73,10 +81,10 @@
   <string name="title_activity_settings">Asetukset</string>
   <string name="title_activity_signup">Rekisteröidy</string>
   <string name="menu_about">Tietoja</string>
-  <string name="about_license" fuzzy="true">Tämä on vapaan lähdekoodin ohjelmisto, joka on julkaistu &lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/COPYING\"&gt;Apache License v2&lt;/a&gt; -lisenssin alaisena. Wikimedia Commons ja sen logo ovat Wikimedia Foundationin tavaramerkkejä ja niitä käytetään Wikimedia Foundationin luvalla. Emme ole hyväksyttyjä tai sidoksissa Wikimedia Foundationioniin.</string>
-  <string name="about_improve" fuzzy="true">&lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;Lähde&lt;/a&gt; ja &lt;a href=\"https://commons-app.github.io/\"&gt;nettisivusto&lt;/a&gt; GitHubissa. Luo uusi &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;GitHub-issue&lt;/a&gt; bugiraporteille ja ehdotuksille.</string>
-  <string name="about_privacy_policy">&lt;a href=\"https://github.com/commons-app/apps-android-commons/wiki/Privacy-policy\"&gt;Yksityisyydensuoja&lt;/a&gt;</string>
-  <string name="about_credits">&lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/CREDITS\"&gt;Tekijät&lt;/a&gt;</string>
+  <string name="about_license">Wikimedia Commons -sovellus on vapaan lähdekoodin ohjelmisto, joka on luotu ja ylläpidetty Wikimedia-yhteisön apurahoilla ja vapaaehtoisilla. Wikimedia Foundation ei ole sitoutunut sovelluksen luomiseen, kehittämiseen tai ylläpitoon.</string>
+  <string name="about_improve">Luo uusi &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;GitHub-issue&lt;/a&gt; bugiraporteille ja ehdotuksille.</string>
+  <string name="about_privacy_policy">&lt;u&gt;Yksityisyydensuoja&lt;/u&gt;</string>
+  <string name="about_credits">&lt;u&gt;Tekijät&lt;/u&gt;</string>
   <string name="title_activity_about">Tietoja</string>
   <string name="menu_feedback">Lähetä palautetta (sähköpostitse)</string>
   <string name="no_email_client">Sähköpostiohjelmaa ei ole asennettu</string>
@@ -88,7 +96,7 @@
   <string name="share_license_summary">Tiedosto tallennetaan lisenssin %1$s ehtojen mukaisesti.</string>
   <string name="media_upload_policy">Lisäämällä kuvan, ilmoitan tämän olevan oma työ ja että se ei sisällä tekijänoikeuden alaista materiaalia tai selfietä ja muuten noudattaa &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines\"&gt;Wikimedia Commons policies&lt;/a&gt;.</string>
   <string name="menu_download">Lataa</string>
-  <string name="preference_license">Lisenssi</string>
+  <string name="preference_license">Oletuslisenssi</string>
   <string name="use_previous">Käytä edellistä otsikkoa/kuvausta</string>
   <string name="allow_gps">Hae tämänhetkinen sijainti automaattisesti</string>
   <string name="allow_gps_summary">Nouda nykyinen sijainti asettaaksesi käyttöön luokkaehdotuksia jos kuva ei ole paikkamerkitty</string>
@@ -117,11 +125,18 @@
   <string name="tutorial_1_text">Wikimedia Commonsiin on tallennettu lähes kaikki Wikipediassa käytetyt kuvat.</string>
   <string name="tutorial_1_subtext">Kuvasi auttavat ihmisiä kaikkialta maailmasta ymmärtämään maailmaa!</string>
   <string name="tutorial_2_text">Tallenna kuvia, jotka sinä itse olet ottanut tai luonut:</string>
-  <string name="tutorial_2_subtext">- Luontokohteet (kukat, eläimet, vuoret)\n- Hyödylliset esineet (polkupyörät, rautatieasemat)\n- Kuuluisat henkilöt (kaupunginjohtajasi, tapaamasi olympiaurheilijat)</string>
+  <string name="tutorial_2_subtext">Luontokohteet (kukat, eläimet, vuoret)\n• Hyödylliset esineet (polkupyörät, rautatieasemat)\n• Kuuluisat henkilöt (kaupunginjohtajasi, tapaamasi olympiaurheilijat)</string>
+  <string name="tutorial_2_subtext_1">Luontokohteet (kukat, eläimet, vuoret)</string>
+  <string name="tutorial_2_subtext_2">Hyödylliset esineet (polkupyörät, rautatieasemat)</string>
+  <string name="tutorial_2_subtext_3">Kuuluisat henkilöt (kaupunginjohtajasi, tapaamasi olympiaurheilijat)</string>
   <string name="tutorial_3_text">ÄLÄ tallenna seuraavia:</string>
   <string name="tutorial_3_subtext">- Selfiet tai kuvat ystävistäsi\n- Netistä ladatut kuvat\n- Kuvakaappaukset kaupallisista sovelluksista</string>
+  <string name="tutorial_3_subtext_1">Selfiet tai kuvat ystävistäsi</string>
+  <string name="tutorial_3_subtext_2">Kuvia, jotka olet ladannut Internetistä</string>
+  <string name="tutorial_3_subtext_3">Kuvakaappaukset omistamistasi sovelluksista</string>
   <string name="tutorial_4_text">Tallennusesimerkki:</string>
   <string name="tutorial_4_subtext">- Otsikko: Sydneyn oopperatalo\n- Kuvaus: Sydneyn oopperatalo katsottuna lahden toiselta puolelta\n- Luokat: Sydneyn oopperatalo, Sydneyn oopperatalo lännestä, Sydneyn oopperatalon etänäkymät</string>
+  <string name="tutorial_4_subtext_1">Otsikko: Sydneyn oopperatalo</string>
   <string name="welcome_wikipedia_text">Herätä Wikipedia-artikkelit eloon kuvillasi! Tuo kuvasi Wikipediaan.</string>
   <string name="welcome_wikipedia_subtext">Wikipedian kuvat tulevat Wikimedia Commonsista.</string>
   <string name="welcome_copyright_text">Kuvasi auttavat useita ihmisiä ympäri maailmaa artikkeleiden ymmärtämisessä.</string>
@@ -135,6 +150,7 @@
   <string name="detail_license_empty">Tuntematon lisenssi</string>
   <string name="menu_refresh">Päivitä</string>
   <string name="read_storage_permission_rationale">Vaadittu oikeus: Ulkoisen tallennustilan luku. Appi ei toimi ilman tätä oikeutta.</string>
+  <string name="write_storage_permission_rationale">Vaadittava lupa: Kirjoita ulkoiseen tallennustilaan. Sovellus ei voi toimia ilman tätä.</string>
   <string name="location_permission_rationale">Valinnainen lupa: Saada tämänhetkinen sijainti loukkasuosituksia varten.</string>
   <string name="ok">OK</string>
   <string name="title_activity_nearby">Lähellä olevat paikat</string>
@@ -146,13 +162,13 @@
   <string name="media_detail_title">Otsikko</string>
   <string name="media_detail_media_title">Median otsikko</string>
   <string name="media_detail_description">Kuvaus</string>
+  <string name="media_detail_description_explanation">Median kuvaus menee tänne. Tämä voi mahdollisesti olla melko pitkä, ja sen täytyy kääriä poikittain useita rivejä. Toivomme, että se näyttää silti hyvältä.</string>
   <string name="media_detail_uploaded_date">Tallennuspäivämäärä</string>
   <string name="media_detail_license">Lisenssi</string>
   <string name="media_detail_coordinates">Koordinaatit</string>
   <string name="media_detail_coordinates_empty">ei annettu</string>
   <string name="become_a_tester_title">Ryhdy beetatestaajaksi</string>
-  <string name="use_wikidata">Käytä Wikidataa</string>
-  <string name="use_wikidata_summary">(Varoitus: poiskytkeminen voi aiheuttaa suuren mobiilidatankäytön)</string>
+  <string name="become_a_tester_description">Valitse beta-kanavamme Google Playssa ja hanki varhainen pääsy uusiin ominaisuuksiin ja virheenkorjauksiin</string>
   <string name="_2fa_code">2FA koodi</string>
   <string name="number_of_uploads">Tuorein latausrajani</string>
   <string name="maximum_limit">Maksimimäärä</string>
@@ -160,8 +176,12 @@
   <string name="set_limit">Aseta tuore latausraja</string>
   <string name="login_failed_2fa_not_supported">Kaksivaiheinen tunnistus ei ole vielä tuettu.</string>
   <string name="logout_verification">Haluatko varmasti kirjautua ulos?</string>
-  <string name="commons_logo">Commons Logo</string>
+  <string name="commons_logo">Commons-logo</string>
+  <string name="commons_website">Commons-verkkosivu</string>
+  <string name="commons_facebook">Commons Facebook-sivu</string>
+  <string name="commons_github">Commons Github lähdekoodi</string>
   <string name="background_image">Taustakuva</string>
+  <string name="mediaimage_failed">Mediakuva epäonnistui</string>
   <string name="no_image_found">Kuvaa ei löytynyt</string>
   <string name="upload_image">Lataa kuva</string>
   <string name="welcome_image_mount_zao">Zao-vuori</string>
@@ -189,13 +209,28 @@
   <string name="no_description_found">kuvausta ei löytynyt</string>
   <string name="nearby_info_menu_commons_article">Commons-tiedostosivu</string>
   <string name="nearby_info_menu_wikidata_article">Wikidata-kohde</string>
+  <string name="error_while_cache">Virhe varastoidessa kuvia</string>
   <string name="title_info">Tiedoston yksilöllinen ja kuvaava otsikko, jota käytetään tiedostonimenä. Voit käyttää tavallista kieltä välilyönnein. Älä sisällytä tiedoston päätettä.</string>
+  <string name="description_info">Kuvaile mediaa niin paljon kuin mahdollista: Missä se otettiin? Mitä se esittää? Mikä on asiayhteys? Kuvaile esineitä tai henkilöitä. Tuo ilmi tietoja, joita ei ole helppo arvailla, esimerkiksi vuorokaudenaika, jos se on maisema. Jos media esittää jotain epätavallista, selitä, mikä tekee siitä epätavallisen.</string>
+  <string name="upload_image_too_dark">Tämä kuva on liian tumma, haluatko varmasti ladata sen? Wikimedia Commons on vain kuville, joilla on tietosanakirja-arvo.</string>
+  <string name="upload_image_blurry">Tämä kuva on epäselvä, haluatko varmasti ladata sen? Wikimedia Commons on vain kuville, joilla on tietosanakirja-arvo.</string>
   <string name="give_permission">Anna lupa</string>
   <string name="use_external_storage">Käytä ulkoista tallennustilaa</string>
+  <string name="use_external_storage_summary">Tallenna sovelluksen sisäisen kameran kanssa otetut kuvat laitteellesi</string>
   <string name="login_to_your_account">Kirjaudu tilillesi</string>
   <string name="send_log_file">Lähetä lokitiedosto</string>
-  <string name="send_log_file_description">Lähetä logitiedosto kehittäjille sähköpostin kautta</string>
+  <string name="send_log_file_description">Lähetä lokitiedosto kehittäjille sähköpostin kautta</string>
+  <string name="null_url">Virhe! URL-osoitetta ei löytynyt</string>
   <string name="nearby_location_has_not_changed">Sijainti ei ole muuttunut.</string>
   <string name="nearby_location_not_available">Sijainti ei käytettävissä.</string>
+  <string name="location_permission_rationale_nearby">Lupa vaaditaan läheisten paikkojen luettelon näyttämiseen</string>
+  <string name="get_directions">HANKI OHJEET</string>
   <string name="read_article">LUE ARTIKKELI</string>
+  <string name="notifications_welcome">Tervetuloa Wikimedia Commonsiin, %1$s! Olemme iloisia että olet täällä.</string>
+  <string name="notifications_talk_page_message">%1$s jätti viestin keskustelusivullesi</string>
+  <string name="notifications_thank_you_edit">Kiitos muokkaamisestasi</string>
+  <string name="notifications_mention">%1$s mainitsi sinut %2$s.</string>
+  <string name="toggle_view_button">Vaihda näkymä</string>
+  <string name="about_faq">Usein Kysytyt Kysymykset</string>
+  <string name="welcome_skip_button">Ohita opetus</string>
 </resources>
