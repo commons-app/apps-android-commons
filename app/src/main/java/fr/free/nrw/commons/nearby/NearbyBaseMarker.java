@@ -37,7 +37,7 @@ public class NearbyBaseMarker extends BaseMarkerOptions<NearbyMarker, NearbyBase
                 .registerTypeAdapter(Uri.class, new UriDeserializer())
                 .create();
 
-        position((LatLng) in.readParcelable(LatLng.class.getClassLoader()));
+        position(in.readParcelable(LatLng.class.getClassLoader()));
         snippet(in.readString());
         String iconId = in.readString();
         Bitmap iconBitmap = in.readParcelable(Bitmap.class.getClassLoader());

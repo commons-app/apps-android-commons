@@ -1,6 +1,7 @@
 package fr.free.nrw.commons.location;
 
 import android.location.Location;
+import android.net.Uri;
 import android.support.annotation.NonNull;
 
 /**
@@ -11,15 +12,15 @@ public class LatLng {
     private final double latitude;
     private final double longitude;
     private final float accuracy;
-    
+
     /**
      * Accepts latitude and longitude.
      * North and South values are cut off at 90°
-     * 
+     *
      * @param latitude the latitude
      * @param longitude the longitude
      * @param accuracy the accuracy
-     * 
+     *
      * Examples:
      * the Statue of Liberty is located at 40.69° N, 74.04° W
      * The Statue of Liberty could be constructed as LatLng(40.69, -74.04, 1.0)
@@ -43,7 +44,7 @@ public class LatLng {
     public static LatLng from(@NonNull Location location) {
         return new LatLng(location.getLatitude(), location.getLongitude(), location.getAccuracy());
     }
-    
+
     /**
      * creates a hash code for the longitude and longitude
      */
@@ -153,4 +154,9 @@ public class LatLng {
     public double getLatitude() {
         return latitude;
     }
+
+    public Uri getGmmIntentUri() {
+        return Uri.parse("geo:0,0?q=" + latitude + "," + longitude);
+    }
 }
+

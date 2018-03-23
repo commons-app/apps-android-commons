@@ -59,6 +59,7 @@
   <string name="categories_search_text_hint">Search categories</string>
   <string name="menu_save_categories">Save</string>
   <string name="refresh_button">Refresh</string>
+  <string name="display_list_button">List</string>
   <string name="gps_disabled">GPS is disabled in your device. Would you like to enable it?</string>
   <string name="enable_gps">Enable GPS</string>
   <string name="contributions_subtitle_zero">No uploads yet</string>
@@ -217,6 +218,7 @@
   <string name="no_description_found">no description found</string>
   <string name="nearby_info_menu_commons_article">Commons file page</string>
   <string name="nearby_info_menu_wikidata_article">Wikidata item</string>
+  <string name="nearby_info_menu_wikipedia_article">Wikipedia article</string>
   <string name="error_while_cache">Error while caching pictures</string>
   <string name="title_info">A unique descriptive title for the file, which will serve as a filename. You may use plain language with spaces. Do not include the file extension</string>
   <string name="description_info">Please describe the media as much as possible: Where was it taken? What does it show? What is the context? Please describe the objects or persons. Reveal information that can not be easily guessed, for instance the time of day if it is a landscape. If the media shows something unusual, please explain what makes it unusual.</string>
@@ -246,7 +248,17 @@
   <string name="notifications_thank_you_edit">Thank you for making an edit</string>
   <string name="notifications_mention">%1$s mentioned you on %2$s.</string>
   <string name="toggle_view_button">Toggle view</string>
+  <string name="nearby_directions">DIRECTIONS</string>
+  <string name="nearby_wikidata">WIKIDATA</string>
+  <string name="nearby_wikipedia">WIKIPEDIA</string>
+  <string name="nearby_commons">COMMONS</string>
   <string name="about_rate_us"><u>Rate Us</u></string>
   <string name="about_faq">Frequently Asked Questions</string>
   <string name="welcome_skip_button">Skip Tutorial</string>
+  <string name="about_translate"><u>Translate</u></string>
+    <string name="about_translate_title">Languages</string>
+  <string name="about_translate_message">Select the langauge you want translations for ?</string>
+  <string name="about_translate_proceed">Proceed</string>
+  <string name="about_translate_cancel">Cancel</string>
+
 </resources>
