@@ -91,6 +91,10 @@
             android:name=".notification.NotificationActivity"
             android:label="@string/navigation_item_notification" />
 
+        <activity
+            android:name=".featured.FeaturedImagesActivity"
+            android:label="@string/title_activity_featured_images" />
+
         <service android:name=".upload.UploadService" />
 
         <service
