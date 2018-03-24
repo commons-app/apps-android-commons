@@ -81,8 +81,7 @@ import fr.free.nrw.commons.mwapi.MediaWikiApi;
 import fr.free.nrw.commons.utils.ViewUtil;
 import timber.log.Timber;
 
-
-
+import android.support.design.widget.FloatingActionButton;
 import static fr.free.nrw.commons.upload.ExistingFileAsync.Result.DUPLICATE_PROCEED;
 import static fr.free.nrw.commons.upload.ExistingFileAsync.Result.NO_DUPLICATE;
 import static java.lang.Long.min;
@@ -122,6 +121,7 @@ public class ShareActivity
     private Uri mediaUri;
     private Contribution contribution;
     private SimpleDraweeView backgroundImageView;
+    private FloatingActionButton maps_fragment;
 
     private boolean cacheFound;
 
@@ -358,6 +358,21 @@ public class ShareActivity
                     .commitAllowingStateLoss();
         }
         uploadController.prepareService();
+
+        maps_fragment = (FloatingActionButton) findViewById(R.id.media_map);
+        maps_fragment.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if( imageObj != null || imageObj.imageCoordsExists == true) {
+                    Uri gmmIntentUri = Uri.parse("google.streetview:cbll=" + imageObj.getDecLatitude() + "," + imageObj.getDecLongitude());
+                    Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
+                    mapIntent.setPackage("com.google.android.apps.maps");
+                    startActivity(mapIntent);
+                } else {
+                    Toast toast = Toast.makeText(ShareActivity.this,R.string.share_coordinates_not_present,Toast.LENGTH_LONG);
+                }
+            }
+        });
     }
 
     @Override

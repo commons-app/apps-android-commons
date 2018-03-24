@@ -41,8 +41,6 @@
 
         </FrameLayout>
 
-
-
         <android.support.design.widget.FloatingActionButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -62,6 +60,16 @@
             android:layout_marginBottom="@dimen/standard_gap"
             android:src="@drawable/ic_zoom_out_white_24dp"
             android:id="@+id/media_upload_zoom_out"/>
+        <android.support.design.widget.FloatingActionButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginRight="@dimen/standard_gap"
+            android:layout_marginBottom="@dimen/standard_gap"
+            app:srcCompat="@drawable/ic_map_white_24dp"
+            android:id="@+id/media_map"/>
+
     </RelativeLayout>
 
     <android.support.design.widget.NavigationView
