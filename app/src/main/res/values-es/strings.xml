@@ -223,6 +223,8 @@
   <string name="send_log_file_description">Enviar archivo de registro a los desarrolladores por correo electrónico</string>
   <string name="no_web_browser">No se encontró ningún navegador con el que abrir el URL</string>
   <string name="null_url">Error: no se encontró el URL</string>
+  <string name="nominate_deletion">Nominar para borrado</string>
+  <string name="view_browser">Ver en navegador</string>
   <string name="nearby_location_has_not_changed">La ubicación no ha cambiado.</string>
   <string name="nearby_location_not_available">La ubicación no está disponible.</string>
   <string name="location_permission_rationale_nearby">Se necesita permiso para mostrar una lista de lugares cercanos</string>
