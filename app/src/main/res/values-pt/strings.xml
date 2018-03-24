@@ -4,6 +4,7 @@
   <string name="menu_settings">Configurações</string>
   <string name="username">Nome de utilizador(a)</string>
   <string name="password">Palavra-passe</string>
+  <string name="login_credential">Entre com a sua conta do Commons Beta</string>
   <string name="login">Iniciar sessão</string>
   <string name="signup">Registar-se</string>
   <string name="logging_in_title">A iniciar sessão</string>
@@ -21,8 +22,8 @@
   <string name="upload_failed_notification_title">O carregamento de %1$s falhou</string>
   <string name="upload_failed_notification_subtitle">Toque para ver</string>
   <plurals name="uploads_pending_notification_indicator">
-    <item quantity="one">%d a carregar um ficheiro</item>
-    <item quantity="other">a carregar %d ficheiros</item>
+    <item quantity="one">%1$d a carregar um ficheiro</item>
+    <item quantity="other">a carregar %1$d ficheiros</item>
   </plurals>
   <string name="title_activity_contributions">Meus carregamentos recentes</string>
   <string name="contribution_state_queued">Em espera</string>
@@ -56,16 +57,16 @@
   <string name="contributions_subtitle_zero">Ainda não foram enviados ficheiros</string>
   <plurals name="contributions_subtitle">
     <item quantity="zero">\@string/contributions_subtitle_zero</item>
-    <item quantity="one">%d carregamento</item>
-    <item quantity="other">%d carregamentos</item>
+    <item quantity="one">%1$d carregamento</item>
+    <item quantity="other">%1$d carregamentos</item>
   </plurals>
   <plurals name="starting_multiple_uploads">
-    <item quantity="one">A iniciar %d carregamento</item>
-    <item quantity="other">A iniciar %d carregamentos</item>
+    <item quantity="one">A iniciar %1$d carregamento</item>
+    <item quantity="other">A iniciar %1$d carregamentos</item>
   </plurals>
   <plurals name="multiple_uploads_title">
-    <item quantity="one">%d carregamento</item>
-    <item quantity="other">%d carregamentos</item>
+    <item quantity="one">%1$d carregamento</item>
+    <item quantity="other">%1$d carregamentos</item>
   </plurals>
   <string name="categories_not_found">Nenhuma categoria correspondente %1$s encontrada</string>
   <string name="categories_skip_explanation">Adicione categorias para tornar as suas imagens mais fáceis de encontrar no Wikimedia Commons.\nComece a digitar para adicionar categorias.</string>
@@ -73,10 +74,10 @@
   <string name="title_activity_settings">Configurações</string>
   <string name="title_activity_signup">Registar-se</string>
   <string name="menu_about">Sobre</string>
-  <string name="about_license">A aplicação do Wikimedia Commons é uma aplicação de código aberto criada e mantida por beneficiários e voluntários da comunidade Wikimedia. A Fundação Wikimedia não está envolvida na criação, programação ou manutenção da aplicação.</string>
-  <string name="about_improve">&lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;Fonte&lt;/a&gt; e &lt;a href=\"https://commons-app.github.io/\"&gt;sítio&lt;/a&gt; no GitHub. Criar uma nova &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;publicação no GitHub&lt;/a&gt; para informar erros e sugestões.</string>
-  <string name="about_privacy_policy">&lt;a href=\"https://github.com/commons-app/apps-android-commons/wiki/Privacy-policy\"&gt;Política de privacidade&lt;/a&gt;</string>
-  <string name="about_credits">&lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/CREDITS\"&gt;Créditos&lt;/a&gt;</string>
+  <string name="about_license">A aplicação do Wikimedia Commons é uma aplicação de código aberto criada e mantida por bolseiros e voluntários da comunidade Wikimedia. A Wikimedia Foundation não está envolvida na criação, desenvolvimento ou manutenção da aplicação.</string>
+  <string name="about_improve">Criar uma nova &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;incidência no GitHub&lt;/a&gt; para reportar erros e sugestões.</string>
+  <string name="about_privacy_policy" fuzzy="true">&lt;a href=\"https://github.com/commons-app/apps-android-commons/wiki/Privacy-policy\"&gt;Política de privacidade&lt;/a&gt;</string>
+  <string name="about_credits" fuzzy="true">&lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/CREDITS\"&gt;Créditos&lt;/a&gt;</string>
   <string name="title_activity_about">Sobre</string>
   <string name="menu_feedback">Enviar comentários (por e-mail)</string>
   <string name="no_email_client">Não foi instalado nenhum cliente de correio eletrónico</string>
@@ -88,7 +89,7 @@
   <string name="share_license_summary">Essa imagem será licenciada sob %1$s</string>
   <string name="media_upload_policy">Ao carregar esta imagem, declaro que esta é a minha própria obra, que não contém material protegido ou selfies, e que adere às &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines/pt\"&gt;políticas do Wikimedia Commons&lt;/a&gt;.</string>
   <string name="menu_download">Descarregar</string>
-  <string name="preference_license">Licença</string>
+  <string name="preference_license" fuzzy="true">Licença</string>
   <string name="use_previous">Usar título/descrição anteriores</string>
   <string name="allow_gps">Obter automaticamente a localização atual</string>
   <string name="allow_gps_summary">Recuperar localização atual para oferecer sugestões da categoria se a imagem não é georreferenciada</string>
@@ -117,7 +118,7 @@
   <string name="tutorial_1_text">Wikimedia Commons armazena a maioria das imagens que são usadas na Wikipédia.</string>
   <string name="tutorial_1_subtext">As suas imagens ajudam a educar pessoas em todo o mundo!</string>
   <string name="tutorial_2_text">Por favor, carregue apenas imagens tiradas ou criadas exclusivamente por si:</string>
-  <string name="tutorial_2_subtext">- Objetos naturais (flores, animais, montanhas)\n- Objetos úteis (bicicletas, estações de comboio)\n- Pessoas famosas (o seu presidente da câmara, atletas olímpicos que conheça)</string>
+  <string name="tutorial_2_subtext" fuzzy="true">- Objetos naturais (flores, animais, montanhas)\n- Objetos úteis (bicicletas, estações de comboio)\n- Pessoas famosas (o seu presidente da câmara, atletas olímpicos que conheça)</string>
   <string name="tutorial_3_text">Por favor, NÃO carregue:</string>
   <string name="tutorial_3_subtext">- Autorretratos ou imagens dos seus amigos\n- Imagens descarregadas da Internet\n- Capturas de ecrã de aplicações com direitos de autor</string>
   <string name="tutorial_4_text">Exemplo de carregamento:</string>
@@ -154,8 +155,6 @@
   <string name="media_detail_coordinates_empty">Não fornecido</string>
   <string name="become_a_tester_title">Torne-se um Testador Beta</string>
   <string name="become_a_tester_description">Opte pelo nosso canal beta no Google Play e obtenha acesso antecipado a novas funcionalidades e a correções de erros</string>
-  <string name="use_wikidata">Utilizar o Wikidata</string>
-  <string name="use_wikidata_summary">(Aviso: desativar isto pode causar um grande consumo de dados móveis)</string>
   <string name="_2fa_code">Código de autenticação de dois fatores</string>
   <string name="number_of_uploads">O meu limite de carregamentos recentes</string>
   <string name="maximum_limit">Limite máximo</string>
@@ -164,6 +163,9 @@
   <string name="login_failed_2fa_not_supported">Atualmente, a autenticação de dois fatores não é suportada.</string>
   <string name="logout_verification">Deseja realmente sair?</string>
   <string name="commons_logo">Logótipo do Commons</string>
+  <string name="commons_website">Sítio do Commons</string>
+  <string name="commons_facebook">Página do Commons no Facebook</string>
+  <string name="commons_github">Código-fonte do Commons no Github</string>
   <string name="background_image">Imagem de fundo</string>
   <string name="mediaimage_failed">Falha na imagem de média</string>
   <string name="no_image_found">Nenhuma imagem encontrada</string>
@@ -196,15 +198,22 @@
   <string name="error_while_cache">Erro ao colocar imagens na cache</string>
   <string name="title_info">Um título descritivo exclusivo para o ficheiro, que servirá como um nome de ficheiro. Pode utilizar uma linguagem simples com espaços. Não inclua a extensão do ficheiro</string>
   <string name="description_info">Por favor, descreva o ficheiro da melhor forma possível: Onde foi tirado? O que isso mostra? Qual é o contexto? Por favor, descreva os objetos ou as pessoas. Indique as informações que não podem ser facilmente adivinhadas, por exemplo, a hora do dia, se for uma paisagem. Se o ficheiro mostrar algo incomum, explique o que torna incomum.</string>
+  <string name="upload_image_too_dark">Esta imagem está demasiada escura; tem a certeza de que deseja carregá-la? A wiki Wikimedia Commons só aceita as imagens de valor enciclopédico.</string>
+  <string name="upload_image_blurry">Esta imagem está desfocada; tem a certeza de que deseja carregá-la? A wiki Wikimedia Commons serve apenas para imagens de valor enciclopédico.</string>
   <string name="give_permission">Permitir</string>
   <string name="use_external_storage">Utilizar a armazenagem externa</string>
   <string name="use_external_storage_summary">Gravar as fotografias tiradas com a câmara da aplicação no seu dispositivo</string>
+  <string name="login_to_your_account">Inicie sessão na sua conta</string>
   <string name="send_log_file">Enviar ficheiro de registo</string>
   <string name="send_log_file_description">Enviar o ficheiro de registo aos programadores por correio eletrónico</string>
-  <string name="login_to_your_account">Inicie sessão na sua conta</string>
   <string name="nearby_location_has_not_changed">A localização não foi alterada.</string>
   <string name="nearby_location_not_available">A localização não está disponível.</string>
   <string name="location_permission_rationale_nearby">É necessária a permissão para mostrar uma lista dos sítios aqui perto</string>
   <string name="get_directions">OBTER DIREÇÕES</string>
   <string name="read_article">LER ARTIGO</string>
+  <string name="notifications_welcome">Bem-vindo ao Wikimedia Commons, %1$s! É um prazer tê-lo aqui.</string>
+  <string name="notifications_talk_page_message">%1$s deixou uma mensagem na sua página de discussão</string>
+  <string name="notifications_thank_you_edit">Obrigado por ter realizado uma edição</string>
+  <string name="notifications_mention">%1$s fez menção a si em %2$s.</string>
+  <string name="toggle_view_button">Alternar modo de visionamento</string>
 </resources>

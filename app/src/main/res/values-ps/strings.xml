@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+  <string name="preference_category_location">ځای</string>
   <string name="app_name">ويکي خونديځ</string>
+  <string name="bullet">•</string>
   <string name="menu_settings">امستنې</string>
   <string name="username">کارن-نوم</string>
   <string name="password">پټنوم</string>
@@ -14,7 +16,9 @@
   <string name="uploading_started">پورته کېدنه پيل شوه!</string>
   <string name="upload_completed_notification_title">%1$s پورته شوی!</string>
   <string name="upload_progress_notification_title_in_progress">د %1$s پورته کول</string>
-  <string name="title_activity_contributions" fuzzy="true">زما پورته کېدنې</string>
+  <string name="title_activity_contributions">زما تازه پورته کېدنې</string>
+  <string name="contribution_state_queued">لږ</string>
+  <string name="contribution_state_failed">نابريال شو</string>
   <string name="contribution_state_in_progress">%1$d%% بشپړ</string>
   <string name="contribution_state_starting">د برسېرېدلو په حال کې…</string>
   <string name="menu_from_gallery">له انځورتون څخه</string>
@@ -24,7 +28,13 @@
   <string name="menu_share">شريکول</string>
   <string name="menu_open_in_browser">په کتنمل کې کتل</string>
   <string name="share_title_hint">سرليک</string>
+  <string name="add_title_toast">مهرباني وکړئ د دې دوتنې لپاره سرلیک چمتو کړئ</string>
   <string name="share_description_hint">څرگندونه</string>
+  <string name="login_failed_network">د ننوتلو توان نلري - د شبکې ناکامي</string>
+  <string name="login_failed_username">د ننوتلو توان نلري - لطفاً خپل کارن نوم وګورئ</string>
+  <string name="login_failed_password">د ننوتلو توان نلري - لطفاً خپل پټنوم وګورئ</string>
+  <string name="login_failed_throttled">ډیری ناکامه هڅې. لطفا څو دقیقې وروسته بیا هڅه وکړئ.</string>
+  <string name="login_failed_blocked">بخښنه غواړو، په دي کارن د کامنز لخوا بنديز ولګول شو</string>
   <string name="login_failed_generic">غونډال کې ننوتنه نابريالې شوه</string>
   <string name="share_upload_button">پورته کول</string>
   <string name="provider_modifications">بدلونونه</string>
@@ -32,15 +42,15 @@
   <string name="categories_search_text_hint">وېشنيزې پلټل</string>
   <string name="menu_save_categories">خوندي کول</string>
   <string name="refresh_button">بياتازه کول</string>
-  <plurals name="multiple_uploads_title">
+  <plurals name="multiple_uploads_title" fuzzy="true">
     <item quantity="one">1 پورته کول</item>
-    <item quantity="other">%d پورته کول</item>
+    <item quantity="other">%1$d پورته کول</item>
   </plurals>
   <string name="categories_activity_title">وېشنيزې</string>
   <string name="title_activity_settings">امستنې</string>
   <string name="title_activity_signup">نومليکنه</string>
   <string name="menu_about">په اړه</string>
-  <string name="about_privacy_policy">&lt;a href=\"https://wikimediafoundation.org/wiki/Privacy_policy\"&gt;د پټنتيا تگلاره&lt;/a&gt;</string>
+  <string name="about_privacy_policy" fuzzy="true">&lt;a href=\"https://wikimediafoundation.org/wiki/Privacy_policy\"&gt;د پټنتيا تگلاره&lt;/a&gt;</string>
   <string name="title_activity_about">په اړه</string>
   <string name="provider_categories">وروستۍ کارېدلې وېشنيزې</string>
   <string name="no_uploads_yet">تاسې تر اوسه کوم انځور نه دی پورته کړی.</string>
@@ -48,7 +58,9 @@
   <string name="menu_cancel_upload">ناگارل</string>
   <string name="share_license_summary">دا انځور به د %1$s په منښتليک سمبال وي.</string>
   <string name="menu_download">ښکته کول</string>
-  <string name="preference_license">منښتليک</string>
+  <string name="preference_license">تلواليز منښتليک</string>
+  <string name="preference_theme">د شپې بڼه</string>
+  <string name="preference_theme_summary">تیارې والا موضوع وکاروئ</string>
   <string name="license_name_cc_by_sa_3_0_at">CC BY-SA 3.0 (اتريش)</string>
   <string name="license_name_cc_by_sa_3_0_de">CC BY-SA 3.0 (جرمني)</string>
   <string name="license_name_cc_by_sa_3_0_ee">CC BY-SA 3.0 (اېسټونيا)</string>
@@ -63,11 +75,20 @@
   <string name="license_name_cc_zero">CC صفر</string>
   <string name="welcome_final_button_text">هو</string>
   <string name="detail_panel_cats_label">وېشنيزې</string>
-  <string name="detail_panel_cats_loading" fuzzy="true">برسېرېدنې کې دی…</string>
+  <string name="detail_panel_cats_loading">رابرسېرېږي...</string>
+  <string name="detail_panel_cats_none">هېڅ هم نه دی ټاکل شوی</string>
+  <string name="detail_description_empty">څرگندونه نشته</string>
+  <string name="detail_license_empty">نامعلوم جواز</string>
+  <string name="menu_refresh">تازه کول</string>
   <string name="ok">ښه</string>
+  <string name="title_activity_nearby">نږدې ځایونه</string>
+  <string name="no_nearby">نږدې ځایونه ونه موندل شول</string>
+  <string name="warning">گواښنه</string>
   <string name="yes">هو</string>
   <string name="no">نه</string>
   <string name="media_detail_title">سرليک</string>
+  <string name="media_detail_description">څرگندونه</string>
+  <string name="media_detail_coordinates">کورډيناټونه</string>
   <string name="welcome_image_welcome_wikipedia">ويکيپېډياښه راغلئ</string>
   <string name="cancel">ناگارل</string>
   <string name="navigation_drawer_open">پرانيستل</string>

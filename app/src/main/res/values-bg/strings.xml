@@ -32,8 +32,8 @@
   <string name="menu_upload_single">Качване</string>
   <string name="menu_save_categories">Съхраняване</string>
   <plurals name="multiple_uploads_title">
-    <item quantity="one">%d качване</item>
-    <item quantity="other">%d качвания</item>
+    <item quantity="one">%1$d качване</item>
+    <item quantity="other">%1$d качвания</item>
   </plurals>
   <string name="categories_activity_title">Категории</string>
   <string name="title_activity_settings">Настройки</string>
@@ -44,7 +44,7 @@
   <string name="menu_retry_upload">Повторен опит</string>
   <string name="menu_cancel_upload">Отказване</string>
   <string name="menu_download">Изтегляне</string>
-  <string name="preference_license">Лиценз</string>
+  <string name="preference_license" fuzzy="true">Лиценз</string>
   <string name="preference_theme">Нощен режим</string>
   <string name="license_name_cc0">CC0</string>
   <string name="license_name_cc_by_sa_3_0">CC BY-SA 3.0</string>

@@ -3,14 +3,17 @@ package fr.free.nrw.commons.settings;
 import android.Manifest;
 import android.app.AlertDialog;
 import android.content.ActivityNotFoundException;
+import android.content.ComponentName;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.preference.CheckBoxPreference;
+import android.preference.SwitchPreference;
 import android.preference.EditTextPreference;
 import android.preference.ListPreference;
 import android.preference.Preference;
@@ -21,15 +24,17 @@ import android.support.v4.content.FileProvider;
 import android.widget.Toast;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.inject.Inject;
 import javax.inject.Named;
 
-import dagger.android.AndroidInjection;
 import fr.free.nrw.commons.BuildConfig;
 import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.Utils;
+import fr.free.nrw.commons.di.ApplicationlessInjection;
 import fr.free.nrw.commons.utils.FileUtils;
 
 public class SettingsFragment extends PreferenceFragment {
@@ -40,8 +45,11 @@ public class SettingsFragment extends PreferenceFragment {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
-        AndroidInjection.inject(this);
         super.onCreate(savedInstanceState);
+        ApplicationlessInjection
+                .getInstance(getActivity().getApplicationContext())
+                .getCommonsApplicationComponent()
+                .inject(this);
 
         // Load the preferences from an XML resource
         addPreferencesFromResource(R.xml.preferences);
@@ -56,7 +64,7 @@ public class SettingsFragment extends PreferenceFragment {
             return true;
         });
 
-        CheckBoxPreference themePreference = (CheckBoxPreference) findPreference("theme");
+        SwitchPreference themePreference = (SwitchPreference) findPreference("theme");
         themePreference.setOnPreferenceChangeListener((preference, newValue) -> {
             getActivity().recreate();
             return true;
@@ -67,7 +75,12 @@ public class SettingsFragment extends PreferenceFragment {
         uploadLimit.setText(uploads + "");
         uploadLimit.setSummary(uploads + "");
         uploadLimit.setOnPreferenceChangeListener((preference, newValue) -> {
-            int value = Integer.parseInt(newValue.toString());
+            int value;
+            try {
+                value = Integer.parseInt(newValue.toString());
+            } catch(Exception e) {
+                value = 100; //Default number
+            }
             final SharedPreferences.Editor editor = prefs.edit();
             if (value > 500) {
                 new AlertDialog.Builder(getActivity())
@@ -81,9 +94,9 @@ public class SettingsFragment extends PreferenceFragment {
                 uploadLimit.setSummary(500 + "");
                 uploadLimit.setText(500 + "");
             } else {
-                editor.putInt(Prefs.UPLOADS_SHOWING, Integer.parseInt(newValue.toString()));
+                editor.putInt(Prefs.UPLOADS_SHOWING, value);
                 editor.putBoolean(Prefs.IS_CONTRIBUTION_COUNT_CHANGED,true);
-                uploadLimit.setSummary(newValue.toString());
+                uploadLimit.setSummary(String.valueOf(value));
             }
             editor.apply();
             return true;
@@ -133,19 +146,24 @@ public class SettingsFragment extends PreferenceFragment {
                 appLogsFile
         );
 
-        Intent feedbackIntent = new Intent(Intent.ACTION_SEND);
-        feedbackIntent.setType("message/rfc822");
-        feedbackIntent.putExtra(Intent.EXTRA_EMAIL,
-                new String[]{CommonsApplication.LOGS_PRIVATE_EMAIL});
-        feedbackIntent.putExtra(Intent.EXTRA_SUBJECT,
-                String.format(CommonsApplication.FEEDBACK_EMAIL_SUBJECT,
-                        BuildConfig.VERSION_NAME));
-        feedbackIntent.putExtra(Intent.EXTRA_STREAM,appLogsFilePath);
+        //initialize the emailSelectorIntent
+        Intent emailSelectorIntent = new Intent(Intent.ACTION_SENDTO);
+        emailSelectorIntent.setData(Uri.parse("mailto:"));
+        //initialize the emailIntent
+        final Intent emailIntent = new Intent(Intent.ACTION_SEND);
+        emailIntent.putExtra(Intent.EXTRA_EMAIL, new String[]{CommonsApplication.FEEDBACK_EMAIL});
+        emailIntent.putExtra(Intent.EXTRA_SUBJECT, String.format(CommonsApplication.FEEDBACK_EMAIL_SUBJECT, BuildConfig.VERSION_NAME));
+        emailIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+        emailIntent.addFlags(Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
+        emailIntent.setSelector( emailSelectorIntent );
+        //adding the attachment to the intent
+        emailIntent.putExtra(Intent.EXTRA_STREAM, appLogsFilePath);
 
         try {
-            startActivity(feedbackIntent);
+            startActivity(Intent.createChooser(emailIntent, "Send mail.."));
         } catch (ActivityNotFoundException e) {
             Toast.makeText(getActivity(), R.string.no_email_client, Toast.LENGTH_SHORT).show();
         }
     }
+
 }

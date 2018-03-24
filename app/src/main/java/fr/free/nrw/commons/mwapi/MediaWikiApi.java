@@ -5,11 +5,15 @@ import android.support.annotation.Nullable;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.List;
 
+import fr.free.nrw.commons.notification.Notification;
 import io.reactivex.Observable;
 import io.reactivex.Single;
 
 public interface MediaWikiApi {
+    String getUserAgent();
+
     String getAuthCookie();
 
     void setAuthCookie(String authCookie);
@@ -24,6 +28,8 @@ public interface MediaWikiApi {
 
     boolean fileExistsWithName(String fileName) throws IOException;
 
+    boolean pageExists(String pageName) throws IOException;
+
     String findThumbnailByFilename(String filename) throws IOException;
 
     boolean logEvents(LogBuilder[] logBuilders);
@@ -34,6 +40,12 @@ public interface MediaWikiApi {
     @Nullable
     String edit(String editToken, String processedPageContent, String filename, String summary) throws IOException;
 
+    @Nullable
+    String prependEdit(String editToken, String processedPageContent, String filename, String summary) throws IOException;
+
+    @Nullable
+    String appendEdit(String editToken, String processedPageContent, String filename, String summary) throws IOException;
+
     @NonNull
     MediaResult fetchMediaByFilename(String filename) throws IOException;
 
@@ -42,6 +54,9 @@ public interface MediaWikiApi {
 
     @NonNull
     Observable<String> allCategories(String filter, int searchCatsLimit);
+
+    @NonNull
+    List<Notification> getNotifications() throws IOException;
 
     @NonNull
     Observable<String> searchTitles(String title, int searchCatsLimit);

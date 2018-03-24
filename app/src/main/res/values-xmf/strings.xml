@@ -20,9 +20,9 @@
   <string name="upload_progress_notification_title_finishing">ეხარგუაშ თება %1$</string>
   <string name="upload_failed_notification_title">%1$ ეხარგუაქ ვემიხუჯინუ</string>
   <string name="upload_failed_notification_subtitle">ოძირაფალო ქეგუწკანტეთ</string>
-  <plurals name="uploads_pending_notification_indicator">
-    <item quantity="one">%d ფაილი იხარგუ</item>
-    <item quantity="other">%d ფაილი იხარგუ</item>
+  <plurals name="uploads_pending_notification_indicator" fuzzy="true">
+    <item quantity="one">%1$d ფაილი იხარგუ</item>
+    <item quantity="other">%1$d ფაილი იხარგუ</item>
   </plurals>
   <string name="title_activity_contributions">ჩქიმი ბოლო ეხარგუეფი</string>
   <string name="contribution_state_queued">რადი</string>
@@ -56,16 +56,16 @@
   <string name="contributions_subtitle_zero">ეხარგუეფი ვა რე</string>
   <plurals name="contributions_subtitle">
     <item quantity="zero">\@string/contributions_subtitle_zero</item>
-    <item quantity="one">%d ეხარგუა</item>
-    <item quantity="other">%d ეხარგუა</item>
+    <item quantity="one">%1$d ეხარგუა</item>
+    <item quantity="other">%1$d ეხარგუა</item>
   </plurals>
   <plurals name="starting_multiple_uploads">
-    <item quantity="one">იჭყაფუ %d ეხარგუა</item>
-    <item quantity="other">იჭყაფუ %d ეხარგუა</item>
+    <item quantity="one">იჭყაფუ %1$d ეხარგუა</item>
+    <item quantity="other">იჭყაფუ %1$d ეხარგუა</item>
   </plurals>
-  <plurals name="multiple_uploads_title">
-    <item quantity="one">%d ეხარგუა</item>
-    <item quantity="other">%d ეხარგუა</item>
+  <plurals name="multiple_uploads_title" fuzzy="true">
+    <item quantity="one">%1$d ეხარგუა</item>
+    <item quantity="other">%1$d ეხარგუა</item>
   </plurals>
   <string name="categories_activity_title">კატეგორია</string>
   <string name="title_activity_settings">პარამეტრეფი</string>
@@ -75,7 +75,7 @@
   <string name="menu_cancel_upload">გოუქვაფა</string>
   <string name="share_license_summary">თე სურათი გიბჟინუ %1$s ლიცენზიათ</string>
   <string name="menu_download">გინოჭარუა</string>
-  <string name="preference_license">ლიცენზია</string>
+  <string name="preference_license" fuzzy="true">ლიცენზია</string>
   <string name="use_previous">წჷმი სათაურიშ/ეჭარუაშ გჷმორინაფა</string>
   <string name="allow_gps">ასეიანი ორენიშ ავტომატური მეღება</string>
   <string name="preference_theme">სერიშ რეჟიმი</string>
@@ -101,7 +101,7 @@
   <string name="license_name_cc_by_4_0">CC BY 4.0</string>
   <string name="license_name_cc_zero">CC Zero</string>
   <string name="tutorial_2_text">ქორთხინთ გეხარგეთ, ხვალე თქვანით ინოღალირი ვარდა აკოქიმინელი სურათეფი:</string>
-  <string name="tutorial_2_subtext">- ორთაშობური ობიექტეფი (პიოლეფი, ჩხოლარეფი, გვალეფი)\n- ორგებელი ობიექტეფი (ველოსიპედეფი, მახინწალიშ დგჷმიელფი)\n- ჩინებული ადამიერეფი (თქვანი ნოღაშ მერი, ოლიმპიარი სპორტსმენეფი, ნამუეფსჷთ შეხვალამუთჷნ)</string>
+  <string name="tutorial_2_subtext" fuzzy="true">- ორთაშობური ობიექტეფი (პიოლეფი, ჩხოლარეფი, გვალეფი)\n- ორგებელი ობიექტეფი (ველოსიპედეფი, მახინწალიშ დგჷმიელფი)\n- ჩინებული ადამიერეფი (თქვანი ნოღაშ მერი, ოლიმპიარი სპორტსმენეფი, ნამუეფსჷთ შეხვალამუთჷნ)</string>
   <string name="tutorial_3_text">ქორთხინთ ვეხარგათ:</string>
   <string name="tutorial_3_subtext">- სელფი ვარდა მაჸალეეფიშ სურათეფი\n- ინტერნეტშე გჷმოხარგილი ფოტოეფი\n- ვადუდიშული აპლიკაციეფიშ სკრინშოტეფი</string>
   <string name="tutorial_4_text">ეხარგუაშ მინუში:</string>
@@ -129,7 +129,6 @@
   <string name="media_detail_license">ლიცენზია</string>
   <string name="media_detail_coordinates">კოორდინატეფი</string>
   <string name="become_a_tester_title">ბეტა ტესტირებას კათაფი</string>
-  <string name="use_wikidata">ვიკიმუნაჩემეფიშ გჷმორინაფა</string>
   <string name="_2fa_code">2ფა კოდი</string>
   <string name="number_of_uploads">ჩქიმი ბოლო ეხარგუეფიშ ლიმიტი</string>
   <string name="maximum_limit">მაქსიმალური ლიმიტი</string>

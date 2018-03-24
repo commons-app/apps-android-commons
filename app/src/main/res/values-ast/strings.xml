@@ -1,10 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+  <string name="preference_category_appearance">Aspeutu</string>
+  <string name="preference_category_general">Xeneral</string>
+  <string name="preference_category_feedback">La to opinión</string>
+  <string name="preference_category_location">Allugamientu</string>
   <string name="app_name">Commons</string>
+  <string name="bullet">•</string>
   <string name="menu_settings">Configuración</string>
   <string name="username">Nome d\'usuariu</string>
   <string name="password">Contraseña</string>
+  <string name="login_credential">Anicia sesión na to cuenta de Commons Beta</string>
   <string name="login">Identificase</string>
+  <string name="forgot_password">¿Escaecisti la contraseña?</string>
   <string name="signup">Date d\'alta</string>
   <string name="logging_in_title">Aniciando sesión</string>
   <string name="logging_in_message">Espera…</string>
@@ -22,7 +29,7 @@
   <string name="upload_failed_notification_subtitle">Toque pa velo</string>
   <plurals name="uploads_pending_notification_indicator">
     <item quantity="one">Xubiendo un ficheru</item>
-    <item quantity="other">Xubiendo %d ficheros</item>
+    <item quantity="other">Xubiendo %1$d ficheros</item>
   </plurals>
   <string name="title_activity_contributions">Les mios xubes recién</string>
   <string name="contribution_state_queued">En cola</string>
@@ -36,6 +43,7 @@
   <string name="menu_share">Compartir</string>
   <string name="menu_open_in_browser">Ver nel navegador</string>
   <string name="share_title_hint">Títulu</string>
+  <string name="add_title_toast">Apurre un títulu pa esti ficheru</string>
   <string name="share_description_hint">Descripción</string>
   <string name="login_failed_network">Nun se pudo aniciar sesión – error de rede</string>
   <string name="login_failed_username">Nun se pudo aniciar sesión – por favor compruebe\'l so nome d\'usuariu</string>
@@ -56,16 +64,16 @@
   <string name="contributions_subtitle_zero">Inda nun hai xubes</string>
   <plurals name="contributions_subtitle">
     <item quantity="zero">\@string/contributions_subtitle_zero</item>
-    <item quantity="one">1 carga</item>
-    <item quantity="other">%d cargues</item>
+    <item quantity="one">%1$d carga</item>
+    <item quantity="other">%1$d cargues</item>
   </plurals>
   <plurals name="starting_multiple_uploads">
-    <item quantity="one">Principiando 1 carga</item>
-    <item quantity="other">Principiando %d cargues</item>
+    <item quantity="one">Principiando %1$d carga</item>
+    <item quantity="other">Principiando %1$d cargues</item>
   </plurals>
   <plurals name="multiple_uploads_title">
-    <item quantity="one">1 carga</item>
-    <item quantity="other">%d cargues</item>
+    <item quantity="one">%1$d carga</item>
+    <item quantity="other">%1$d cargues</item>
   </plurals>
   <string name="categories_not_found">Nun s\'alcontró denguna categoría que case con %1$s</string>
   <string name="categories_skip_explanation">Amiesta categoríes pa facer les imaxes más fáciles d\'alcontrar en Wikimedia Commons.\nPrincipia a escribir p\'amestar categoríes.</string>
@@ -74,9 +82,9 @@
   <string name="title_activity_signup">Date d\'alta</string>
   <string name="menu_about">Tocante a</string>
   <string name="about_license">La app de Wikimedia Commons ye software de códigu abiertu, creáu y calteníu por becaos y voluntarios de la comunidá de Wikimedia. La Fundación Wikimedia nun participa na creación, desendolcu nin caltenimientu de la app.</string>
-  <string name="about_improve">El &lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;códigu fonte&lt;/a&gt; ya\'l &lt;a href=\"https://commons-app.github.io/\"&gt;sitiu web&lt;/a&gt; tán en GitHub. Crea una nueva &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;incidencia en GitHub&lt;/a&gt; pa informar de problemes y suxerencies.</string>
-  <string name="about_privacy_policy">&lt;a href=\"https://github.com/commons-app/apps-android-commons/wiki/Privacy-policy\"&gt;Política d\'intimidá&lt;/a&gt;</string>
-  <string name="about_credits">&lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/CREDITS\"&gt;Créditos&lt;/a&gt;</string>
+  <string name="about_improve">Crea una nueva &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;incidencia en GitHub&lt;/a&gt; pa informar de problemes y suxerencies.</string>
+  <string name="about_privacy_policy">&lt;u&gt;Política d\'intimidá&lt;/u&gt;</string>
+  <string name="about_credits">&lt;u&gt;Créditos&lt;/u&gt;</string>
   <string name="title_activity_about">Tocante a</string>
   <string name="menu_feedback">Unviar comentarios (per corréu)</string>
   <string name="no_email_client">Nun s\'instaló nengún veceru de corréu</string>
@@ -88,7 +96,7 @@
   <string name="share_license_summary">Esta imaxe quedará baxo la llicencia %1$s</string>
   <string name="media_upload_policy">El presentar esta imaxe, declaro que ye una obra propia, que nun contien material con derechu d\'autor o «selfies», y que s\'atien a les &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines\"&gt;polítiques de Wikimedia Commons&lt;/a&gt;.</string>
   <string name="menu_download">Descargar</string>
-  <string name="preference_license">Llicencia</string>
+  <string name="preference_license">Llicencia predeterminada</string>
   <string name="use_previous">Usar un títulu/descripción anterior</string>
   <string name="allow_gps">Llograr automáticamente l\'allugamientu actual</string>
   <string name="allow_gps_summary">Recuperar l\'allugamientu actual pa ufiertar suxerencies de categoríes si la imaxe nun tien etiquetes xeográfiques</string>
@@ -117,11 +125,20 @@
   <string name="tutorial_1_text">Wikimedia Commons agospia la mayoría de les imáxenes que s\'usen en Wikipedia.</string>
   <string name="tutorial_1_subtext">¡Les tos imáxenes ayuden a instruir a persones de tol mundu!</string>
   <string name="tutorial_2_text">Xube namái imáxenes que tomasti o creasti tu mesmu:</string>
-  <string name="tutorial_2_subtext">- Oxetos naturales (flores, animales, montes)\n- Oxetos útiles (bicicletes, estaciones de tren)\n- Persones famoses (l\'alcalde, dalgún atleta olímpicu que conoces)</string>
+  <string name="tutorial_2_subtext">Oxetos naturales (flores, animales, montes)\n• Oxetos útiles (bicicletes, estaciones de tren)\n• Persones famoses (l\'alcalde, dalgún atleta olímpicu que conoces)</string>
+  <string name="tutorial_2_subtext_1">Oxetos naturales (flores, animales, montes)</string>
+  <string name="tutorial_2_subtext_2">Oxetos útiles (bicicletes, estaciones de tren)</string>
+  <string name="tutorial_2_subtext_3">Persones famoses (l\'alcalde, dalgún atleta olímpicu que conoces)</string>
   <string name="tutorial_3_text">NUN xubas:</string>
   <string name="tutorial_3_subtext">- Selfies o semeyes de los tos amigos\n- Imáxenes que descargasti d\'Internet\n- Imáxenes de pantalla d\'aplicaciones propietaries</string>
+  <string name="tutorial_3_subtext_1">Selfies o semeyes de los collacios</string>
+  <string name="tutorial_3_subtext_2">Semeyes que descargasti d\'Internet</string>
+  <string name="tutorial_3_subtext_3">Pantallazos d\'aplicaciones privatives</string>
   <string name="tutorial_4_text">Exemplu de carga:</string>
   <string name="tutorial_4_subtext">- Títulu: Ópera de Sidney\n- Descripción: Teatru de la Ópera de Sidney vistu dende l\'otru llau de la badea\n- Categoríes: Ópera de Sidney dende l\'oeste, Vistes a distancia de la Ópera de Sidney</string>
+  <string name="tutorial_4_subtext_1">Títulu: Palaciu de la Ópera de Sydney</string>
+  <string name="tutorial_4_subtext_2">Descripción: Palaciu de la Ópera de Sydney vistu dende l\'otru llau de la badea</string>
+  <string name="tutorial_4_subtext_3">Categoríes: Palaciu de la Ópera de Sydney dende l\'oeste, vistes remotes del Palaciu de la Ópera de Sydney</string>
   <string name="welcome_wikipedia_text">Collabore coles sos imaxes. ¡Ayude a que los artículos de Wikipedia tengan vida!</string>
   <string name="welcome_wikipedia_subtext">Les imaxes de Wikipedia vienen de\nWikimedia Commons.</string>
   <string name="welcome_copyright_text">Les sos imaxes ayuden a educar a la xente alredor del mundu.</string>
@@ -154,8 +171,6 @@
   <string name="media_detail_coordinates_empty">Nun se dio</string>
   <string name="become_a_tester_title">Faete probador beta</string>
   <string name="become_a_tester_description">Escueye\'l nuesu canal beta en Google Play y ten accesu tempranu a carauterístiques nueves ya igües de fallos</string>
-  <string name="use_wikidata">Usar Wikidata</string>
-  <string name="use_wikidata_summary">(Avisu: desactivar esto pue causar un gran consumu de datos nel móvil)</string>
   <string name="_2fa_code">Códigu I2F</string>
   <string name="number_of_uploads">Mio llende de xubes recién</string>
   <string name="maximum_limit">Llende máxima</string>
@@ -164,6 +179,9 @@
   <string name="login_failed_2fa_not_supported">Anguaño nun hai encontu pa autenticación de dos factores.</string>
   <string name="logout_verification">¿Confirmes que quies salir?</string>
   <string name="commons_logo">Logo de Commons</string>
+  <string name="commons_website">Sitiu web de Commons</string>
+  <string name="commons_facebook">Páxina de Facebook de Commons</string>
+  <string name="commons_github">Códigu fonte de Commons en GitHub</string>
   <string name="background_image">Imaxe de fondu</string>
   <string name="mediaimage_failed">Falló la imaxe multimedia</string>
   <string name="no_image_found">Nun s\'atopó nenguna imaxe</string>
@@ -196,15 +214,26 @@
   <string name="error_while_cache">Error al poner les fotos na caché</string>
   <string name="title_info">Un títulu descriptivu únicu pal ficheru, que sirvirá para da-y nome al ficheru. Se pue usar llinguax normal con espacios. Nun amiestes la estensión del ficheru</string>
   <string name="description_info">Por favor, describi l\'elementu multimedia tantu como sía posible: ¿ónde se tomó?, ¿qué amuesa?, ¿cuál ye\'l contestu? Por favor, describi los oxetos o persones. Revela la información que nun pueda aldovinase de mou cenciellu, por casu el momentu del día si ye un paisaxe. Si\'l mediu amuesa daqué desacostumao, esplica qué lo fai raro.</string>
+  <string name="upload_image_too_dark">Esta imaxe ye escura enforma, ¿tas seguru de que quies xubila? Wikimedia Commons ye sólo pa imáxenes con valor enciclopédicu.</string>
+  <string name="upload_image_blurry">Esta imaxe ta borrosa, ¿tas seguru de que quies xubila? Wikimedia Commons ye sólo pa imáxenes con valor enciclopédicu.</string>
   <string name="give_permission">Dar permisu</string>
   <string name="use_external_storage">Usar almacenamientu esternu</string>
   <string name="use_external_storage_summary">Guardar nel preséu les imaxes tomaes cola cámara de la app</string>
+  <string name="login_to_your_account">Anicia sesión na to cuenta</string>
   <string name="send_log_file">Unviar ficheru de rexistru</string>
   <string name="send_log_file_description">Unviar ficheru de rexistru a los desendolcadores per corréu electrónicu</string>
-  <string name="login_to_your_account">Anicia sesión na to cuenta</string>
+  <string name="no_web_browser">Nun s\'alcontró un restolador p\'abrir la URL</string>
+  <string name="null_url">¡Error! Nun s\'alcontró la URL</string>
   <string name="nearby_location_has_not_changed">L\'allugamientu nun camudó.</string>
   <string name="nearby_location_not_available">L\'allugamientu nun ta disponible.</string>
   <string name="location_permission_rationale_nearby">Ríquese permisu p\'amosar una llista de llugares cercanos</string>
   <string name="get_directions">CÓMO LLEGAR</string>
   <string name="read_article">LLEER L\'ARTÍCULU</string>
+  <string name="notifications_welcome">¡Afáyate\'n Wikimedia Commons, %1$s! Préstanos que teas equí.</string>
+  <string name="notifications_talk_page_message">%1$s dexó un mensaxe na to páxina d\'alderique</string>
+  <string name="notifications_thank_you_edit">Gracies por facer una edición</string>
+  <string name="notifications_mention">%1$s te mentó en %2$s.</string>
+  <string name="toggle_view_button">Alternar vista</string>
+  <string name="about_faq">Entrugues más frecuentes</string>
+  <string name="welcome_skip_button">Saltar el tutorial</string>
 </resources>

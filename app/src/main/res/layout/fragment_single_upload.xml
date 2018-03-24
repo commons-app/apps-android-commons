@@ -1,71 +1,88 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_gravity="fill"
-    android:orientation="vertical"
     android:background="?attr/fragmentCategorisationBackground"
+    android:clickable="true"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
     android:paddingBottom="@dimen/small_gap"
-    android:paddingLeft="@dimen/standard_gap"
-    android:paddingStart="@dimen/standard_gap"
-    android:paddingRight="@dimen/standard_gap"
     android:paddingEnd="@dimen/standard_gap"
+    android:paddingLeft="@dimen/standard_gap"
+    android:paddingRight="@dimen/standard_gap"
+    android:paddingStart="@dimen/standard_gap"
     android:paddingTop="@dimen/small_gap"
-    android:theme="@style/DarkAppTheme"
-    >
+    android:theme="@style/DarkAppTheme">
 
-    <EditText
-        android:id="@+id/titleEdit"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:drawableEnd="@drawable/mapbox_info_icon_default"
-        android:drawableRight="@drawable/mapbox_info_icon_default"
-        android:scrollHorizontally="false"
-        android:inputType="textMultiLine"
-        android:hint="@string/share_title_hint"
-        android:imeOptions="flagNoExtractUi" />
+        android:layout_gravity="fill"
+        android:orientation="vertical">
 
-    <EditText
-        android:id="@+id/descEdit"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:drawableEnd="@drawable/mapbox_info_icon_default"
-        android:drawableRight="@drawable/mapbox_info_icon_default"
-        android:inputType="textMultiLine"
-        android:hint="@string/share_description_hint"
-        android:imeOptions="flagNoExtractUi" />
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-    <Spinner
-        android:id="@+id/licenseSpinner"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:theme="?attr/spinnerTheme"
-        />
+            <EditText
+                android:id="@+id/titleEdit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:drawableEnd="@drawable/mapbox_info_icon_default"
+                android:drawableRight="@drawable/mapbox_info_icon_default"
+                android:maxLines="1"
+                android:maxLength="80"
+                android:hint="@string/share_title_hint"
+                android:imeOptions="flagNoExtractUi"
+                android:inputType="text"
+                android:scrollHorizontally="false" />
+        </android.support.design.widget.TextInputLayout>
 
-    <Button
-        android:text="@string/use_previous"
-        android:background="?attr/buttonBackground"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/titleDescButton"
-        />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/share_license_summary"
-        android:id="@+id/share_license_summary"
-        android:gravity="center"
-        android:layout_marginTop="@dimen/standard_gap"
-        />
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-    <fr.free.nrw.commons.ui.widget.HtmlTextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/media_upload_policy"
-        android:text="@string/media_upload_policy"
-        android:gravity="start"
-        android:layout_marginTop="@dimen/standard_gap"
-        />
+            <EditText
+                android:id="@+id/descEdit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:drawableEnd="@drawable/mapbox_info_icon_default"
+                android:drawableRight="@drawable/mapbox_info_icon_default"
+                android:hint="@string/share_description_hint"
+                android:imeOptions="flagNoExtractUi"
+                android:inputType="textMultiLine" />
+        </android.support.design.widget.TextInputLayout>
 
-</LinearLayout>
+
+        <Spinner
+            android:id="@+id/licenseSpinner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:theme="?attr/spinnerTheme" />
+
+        <Button
+            android:id="@+id/titleDescButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="?attr/buttonBackground"
+            android:text="@string/use_previous" />
+
+        <TextView
+            android:id="@+id/share_license_summary"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/standard_gap"
+            android:gravity="center"
+            android:text="@string/share_license_summary" />
+
+        <fr.free.nrw.commons.ui.widget.HtmlTextView
+            android:id="@+id/media_upload_policy"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/standard_gap"
+            android:gravity="start"
+            android:text="@string/media_upload_policy" />
+
+    </LinearLayout>
+</ScrollView>

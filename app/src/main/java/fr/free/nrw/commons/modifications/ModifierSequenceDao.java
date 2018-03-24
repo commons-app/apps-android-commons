@@ -11,46 +11,57 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import javax.inject.Inject;
+import javax.inject.Named;
+import javax.inject.Provider;
+
 public class ModifierSequenceDao {
 
-    private final ContentProviderClient client;
+    private final Provider<ContentProviderClient> clientProvider;
 
-    public ModifierSequenceDao(ContentProviderClient client) {
-        this.client = client;
-    }
-
-    public static ModifierSequence fromCursor(Cursor cursor) {
-        // Hardcoding column positions!
-        ModifierSequence ms = null;
-        try {
-            ms = new ModifierSequence(Uri.parse(cursor.getString(1)),
-                new JSONObject(cursor.getString(2)));
-        } catch (JSONException e) {
-            throw new RuntimeException(e);
-        }
-        ms.setContentUri( ModificationsContentProvider.uriForId(cursor.getInt(0)));
-
-        return ms;
+    @Inject
+    public ModifierSequenceDao(@Named("modification") Provider<ContentProviderClient> clientProvider) {
+        this.clientProvider = clientProvider;
     }
 
     public void save(ModifierSequence sequence) {
+        ContentProviderClient db = clientProvider.get();
         try {
             if (sequence.getContentUri() == null) {
-                sequence.setContentUri(client.insert(ModificationsContentProvider.BASE_URI, toContentValues(sequence)));
+                sequence.setContentUri(db.insert(ModificationsContentProvider.BASE_URI, toContentValues(sequence)));
             } else {
-                client.update(sequence.getContentUri(), toContentValues(sequence), null, null);
+                db.update(sequence.getContentUri(), toContentValues(sequence), null, null);
             }
         } catch (RemoteException e) {
             throw new RuntimeException(e);
+        } finally {
+            db.release();
         }
     }
 
     public void delete(ModifierSequence sequence) {
+        ContentProviderClient db = clientProvider.get();
         try {
-            client.delete(sequence.getContentUri(), null, null);
+            db.delete(sequence.getContentUri(), null, null);
         } catch (RemoteException e) {
             throw new RuntimeException(e);
+        } finally {
+            db.release();
         }
+    }
+
+    ModifierSequence fromCursor(Cursor cursor) {
+        // Hardcoding column positions!
+        ModifierSequence ms;
+        try {
+            ms = new ModifierSequence(Uri.parse(cursor.getString(cursor.getColumnIndex(Table.COLUMN_MEDIA_URI))),
+                    new JSONObject(cursor.getString(cursor.getColumnIndex(Table.COLUMN_DATA))));
+        } catch (JSONException e) {
+            throw new RuntimeException(e);
+        }
+        ms.setContentUri( ModificationsContentProvider.uriForId(cursor.getInt(cursor.getColumnIndex(Table.COLUMN_ID))));
+
+        return ms;
     }
 
     private JSONObject toJSON(ModifierSequence sequence) {

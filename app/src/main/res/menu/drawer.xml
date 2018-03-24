@@ -11,6 +11,11 @@
         android:title="@string/navigation_item_nearby"/>
 
     <item
+        android:id="@+id/action_notifications"
+        android:icon="@drawable/ic_notifications_black_24dp"
+        android:title="@string/navigation_item_notification"/>
+
+    <item
         android:id="@+id/action_about"
         android:icon="@drawable/ic_info_outline_black_24dp"
         android:title="@string/navigation_item_about"/>
@@ -22,7 +27,7 @@
 
     <item
         android:id="@+id/action_introduction"
-        android:icon="@drawable/ic_info_outline_black_24dp"
+        android:icon="@drawable/ic_help_black_24dp"
         android:title="@string/navigation_item_info"/>
 
     <item
@@ -36,14 +41,7 @@
         android:title="@string/navigation_item_logout"/>
 
     <item
-        android:id="@+id/action_notifications"
-        android:icon="@drawable/ic_notifications_black_24dp"
-        android:title="@string/navigation_item_notification"/>
-
-    <item
         android:id="@+id/action_featured_images"
         android:icon="@drawable/ic_star_black_24dp"
         android:title="@string/navigation_item_featured_images"/>
-
-
 </menu>

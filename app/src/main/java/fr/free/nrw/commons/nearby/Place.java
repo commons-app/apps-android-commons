@@ -13,10 +13,11 @@ import fr.free.nrw.commons.location.LatLng;
 public class Place {
 
     public final String name;
-    private final Description description;
+    private final Label label;
     private final String longDescription;
     private final Uri secondaryImageUrl;
     public final LatLng location;
+    private final String category;
 
     public Bitmap image;
     public Bitmap secondaryImage;
@@ -24,22 +25,41 @@ public class Place {
     public final Sitelinks siteLinks;
 
 
-    public Place(String name, Description description, String longDescription,
-                 Uri secondaryImageUrl, LatLng location, Sitelinks siteLinks) {
+    public Place(String name, Label label, String longDescription,
+                 Uri secondaryImageUrl, LatLng location, String category, Sitelinks siteLinks) {
         this.name = name;
-        this.description = description;
+        this.label = label;
         this.longDescription = longDescription;
         this.secondaryImageUrl = secondaryImageUrl;
         this.location = location;
+        this.category = category;
         this.siteLinks = siteLinks;
     }
 
-    public Description getDescription() {
-        return description;
+    public String getName() { return name; }
+
+    public Label getLabel() {
+        return label;
     }
+
+    public String getLongDescription() { return longDescription; }
+
+    public String getCategory() {return category; }
 
     public void setDistance(String distance) {
         this.distance = distance;
+    }
+
+    public boolean hasWikipediaLink() {
+        return !(siteLinks == null || Uri.EMPTY.equals(siteLinks.getWikipediaLink()));
+    }
+
+    public boolean hasWikidataLink() {
+        return !(siteLinks == null || Uri.EMPTY.equals(siteLinks.getWikidataLink()));
+    }
+
+    public boolean hasCommonsLink() {
+        return !(siteLinks == null || Uri.EMPTY.equals(siteLinks.getCommonsLink()));
     }
 
     @Override
@@ -67,10 +87,8 @@ public class Place {
      * Most common types of desc: building, house, cottage, farmhouse,
      * village, civil parish, church, railway station,
      * gatehouse, milestone, inn, secondary school, hotel
-     *
-     * TODO Give a more accurate class name (see issue #742).
      */
-    public enum Description {
+    public enum Label {
 
         BUILDING("building", R.drawable.round_icon_generic_building),
         HOUSE("house", R.drawable.round_icon_house),
@@ -95,19 +113,19 @@ public class Place {
         WATERFALL("waterfall", R.drawable.round_icon_waterfall),
         UNKNOWN("?", R.drawable.round_icon_unknown);
 
-        private static final Map<String, Description> TEXT_TO_DESCRIPTION
-                = new HashMap<>(Description.values().length);
+        private static final Map<String, Label> TEXT_TO_DESCRIPTION
+                = new HashMap<>(Label.values().length);
 
         static {
-            for (Description description : values()) {
-                TEXT_TO_DESCRIPTION.put(description.text, description);
+            for (Label label : values()) {
+                TEXT_TO_DESCRIPTION.put(label.text, label);
             }
         }
 
         private final String text;
         @DrawableRes private final int icon;
 
-        Description(String text, @DrawableRes int icon) {
+        Label(String text, @DrawableRes int icon) {
             this.text = text;
             this.icon = icon;
         }
@@ -121,9 +139,9 @@ public class Place {
             return icon;
         }
 
-        public static Description fromText(String text) {
-            Description description = TEXT_TO_DESCRIPTION.get(text);
-            return description == null ? UNKNOWN : description;
+        public static Label fromText(String text) {
+            Label label = TEXT_TO_DESCRIPTION.get(text);
+            return label == null ? UNKNOWN : label;
         }
     }
 }

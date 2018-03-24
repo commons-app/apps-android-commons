@@ -1,10 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+  <string name="preference_category_appearance">অবয়ব</string>
+  <string name="preference_category_general">সাধারণ</string>
+  <string name="preference_category_feedback">প্রতিক্রিয়া</string>
+  <string name="preference_category_location">অবস্থান</string>
   <string name="app_name">কমন্স</string>
+  <string name="bullet">•</string>
   <string name="menu_settings">সেটিং</string>
   <string name="username">ব্যবহারকারী নাম</string>
   <string name="password">পাসওয়ার্ড</string>
+  <string name="login_credential">আপনার কমন্স বিটা অ্যাকাউন্টে প্রবেশ করুন</string>
   <string name="login">প্রবেশ</string>
+  <string name="forgot_password">পাসওয়ার্ড ভুলে গেছেন?</string>
   <string name="signup">নিবন্ধন</string>
   <string name="logging_in_title">প্রবেশ হচ্ছে</string>
   <string name="logging_in_message">অনুগ্রহ করে অপেক্ষা করুন...</string>
@@ -21,8 +28,8 @@
   <string name="upload_failed_notification_title">%1$s আপলোড ব্যর্থ</string>
   <string name="upload_failed_notification_subtitle">দেখার জন্য টোকা দিন</string>
   <plurals name="uploads_pending_notification_indicator">
-    <item quantity="one">%dটি ফাইল আপলোড হচ্ছে</item>
-    <item quantity="other">%dটি ফাইল আপলোড হচ্ছে</item>
+    <item quantity="one">%1$dটি ফাইল আপলোড হচ্ছে</item>
+    <item quantity="other">%1$dটি ফাইল আপলোড হচ্ছে</item>
   </plurals>
   <string name="title_activity_contributions">আমার সাম্প্রতিক আপলোড</string>
   <string name="contribution_state_queued">অপেক্ষারত</string>
@@ -36,6 +43,7 @@
   <string name="menu_share">বণ্টন</string>
   <string name="menu_open_in_browser">ব্রাউজারে দেখুন</string>
   <string name="share_title_hint">শিরোনাম</string>
+  <string name="add_title_toast">এই ফাইলটির জন্য একটি শিরোনাম প্রদান করুন</string>
   <string name="share_description_hint">বিবরণ</string>
   <string name="login_failed_network">প্রবেশ করা যাচ্ছে না - নেটওয়ার্ক ব্যর্থতা</string>
   <string name="login_failed_username">প্রবেশ করা যাচ্ছে না - অনুগ্রহ করে আপনার ব্যবহারকারী নাম পরীক্ষা করুন।</string>
@@ -56,16 +64,16 @@
   <string name="contributions_subtitle_zero">এখনো কোন আপলোড নেই</string>
   <plurals name="contributions_subtitle">
     <item quantity="zero">\@string/contributions_subtitle_zero</item>
-    <item quantity="one">%dটি আপলোড</item>
-    <item quantity="other">%dটি আপলোড</item>
+    <item quantity="one">%1$dটি আপলোড</item>
+    <item quantity="other">%1$dটি আপলোড</item>
   </plurals>
   <plurals name="starting_multiple_uploads">
-    <item quantity="one">%dটি আপলোড শুরু হয়েছে</item>
-    <item quantity="other">%dটি আপলোড শুরু হয়েছে</item>
+    <item quantity="one">%1$dটি আপলোড শুরু হয়েছে</item>
+    <item quantity="other">%1$dটি আপলোড শুরু হয়েছে</item>
   </plurals>
   <plurals name="multiple_uploads_title">
-    <item quantity="one">%dটি আপলোড</item>
-    <item quantity="other">%dটি আপলোড</item>
+    <item quantity="one">%1$dটি আপলোড</item>
+    <item quantity="other">%1$dটি আপলোড</item>
   </plurals>
   <string name="categories_not_found">%1$s-এর সাথে মিলে এমন কোন বিষয়শ্রেণী পাওয়া যায়নি</string>
   <string name="categories_skip_explanation">উইকিমিডিয়া কমন্স থেকে আপনার মিডিয়া ফাইলটি সহজে খুঁজে পেতে বিষয়শ্রেণী যুক্ত করুন।\n\nবিষয়শ্রেণী যোগ করার জন্য টাইপিং শুরু করুন।</string>
@@ -74,9 +82,9 @@
   <string name="title_activity_signup">নিবন্ধন করুন</string>
   <string name="menu_about">পরিচিতি</string>
   <string name="about_license">উইকিমিডিয়া কমন্স অ্যাপ হচ্ছে একটি উন্মুক্ত উৎস সম্বলিত অ্যাপ যা উইকিমিডিয়া সম্প্রদায়ের ব্যবহারকারী ও সেচ্ছাসেবকবৃন্দ কর্তৃক তৈরিকৃত এবং পরিচালিত। উইকিমিডিয়া ফাউন্ডেশন এই অ্যাপ তৈরি, উন্নয়ন বা রক্ষণাবেক্ষণে জড়িত নয়।</string>
-  <string name="about_improve">&lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;উৎস&lt;/a&gt; ও &lt;a href=\"https://commons-app.github.io/\"&gt;ওয়েবসাইট&lt;/a&gt; GitHub এ&lt;/a&gt;। কোন সমস্যা ও পরামর্শের জন্য &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;গিটহাব ইস্যু&lt;/a&gt; তৈরি করুন।</string>
-  <string name="about_privacy_policy">&lt;a href=\"https://github.com/commons-app/apps-android-commons/wiki/Privacy-policy\"&gt;গোপনীয়তার নীতি&lt;/a&gt;</string>
-  <string name="about_credits">&lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/CREDITS\"&gt;কৃতিত্ব&lt;/a&gt;</string>
+  <string name="about_improve">কোন সমস্যা ও পরামর্শের জন্য &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;গিটহাব ইস্যু&lt;/a&gt; তৈরি করুন।</string>
+  <string name="about_privacy_policy">&lt;u&gt;গোপনীয়তার নীতি&lt;/u&gt;</string>
+  <string name="about_credits">&lt;u&gt;কৃতিত্ব&lt;/u&gt;</string>
   <string name="title_activity_about">পরিচিতি</string>
   <string name="menu_feedback">প্রতিক্রিয়া পাঠান (ইমেইলের মাধ্যমে)</string>
   <string name="no_email_client">কোন ই-মেইল ক্লায়েন্ট ইনস্টল করা নেই</string>
@@ -88,7 +96,7 @@
   <string name="share_license_summary">এই ছবিটি %1$s এর অধীনে লাইসেন্স করা হবে</string>
   <string name="media_upload_policy">এই চিত্র জমা দেয়ার দ্বারা, আমি ঘোষণা দিচ্ছি যে এটি আমার নিজস্ব কাজ, এতে কপিরাইটযুক্ত উপাদান নেই বা এটই সেলফি নয়, এবং &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines/bn\"&gt;উইকিমিডিয়া কমন্স নীতি&lt;/a&gt; অনুসরণ করে।</string>
   <string name="menu_download">ডাউনলোড</string>
-  <string name="preference_license">লাইসেন্স</string>
+  <string name="preference_license">পূর্বনির্ধারিত লাইসেন্স</string>
   <string name="use_previous">পূর্ববর্তী শিরোনাম/বিবরণ ব্যবহার করুন</string>
   <string name="allow_gps">স্বয়ংক্রিয়ভাবে বর্তমান অবস্থান পান</string>
   <string name="allow_gps_summary">বিষয়শ্রেণীর পরামর্শ দিতে বর্তমান অবস্থান পান যদি ছবিতে ভূ-ট্যাগ না থেকে থাকে</string>
@@ -117,11 +125,19 @@
   <string name="tutorial_1_text">উইকিমিডিয়া কমন্স উইকিপিডিয়ায় ব্যবহৃত প্রায় সব ছবি হোস্ট করে।</string>
   <string name="tutorial_1_subtext">আপনার ছবি সারা বিশ্বের মানুষকে শিক্ষিত করতে সাহায্য করবে!</string>
   <string name="tutorial_2_text">দয়া করে যে ছবিটি আপনি নিজে তুলেছেন বা সম্পূর্ণভাবে নিজে তৈরি করেছে সে ছবি আপলোড করুন:</string>
-  <string name="tutorial_2_subtext">- প্রাকৃতিক বস্তু (ফুল, প্রাণী, পর্বত)\n- দরকারী বস্তু (সাইকেল, রেল স্টেশন)\n- বিখ্যাত ব্যক্তি (আপনার মেয়র, আপনার সাথে দেখা অলিম্পিক ক্রীড়াবিদ)</string>
+  <string name="tutorial_2_subtext">প্রাকৃতিক বস্তু (ফুল, প্রাণী, পর্বত)\n• দরকারী বস্তু (সাইকেল, রেল স্টেশন)\n• বিখ্যাত ব্যক্তি (আপনার মেয়র, আপনার সাথে দেখা হওয়া অলিম্পিক ক্রীড়াবিদ)</string>
+  <string name="tutorial_2_subtext_1">প্রাকৃতিক বস্তু (ফুল, প্রাণী, পাহাড়)</string>
+  <string name="tutorial_2_subtext_2">দরকারী বস্তু (বাইসাইকেল, রেল স্টেশন)</string>
+  <string name="tutorial_2_subtext_3">বিখ্যাত ব্যক্তি (আপনার মেয়র, আপনার সাথে দেখা হওয়া অলিম্পিক ক্রীড়াবিদ)</string>
   <string name="tutorial_3_text">দয়া করে আপলোড করবেন না:</string>
   <string name="tutorial_3_subtext">u2022 আপনার বন্ধুর সেলফি বা ছবি \nu2022 ইন্টারনেট থেকে ডাউনলোড করা ছবি \nu2022 মালিকানাযুক্ত অ্যাপসমূহের স্ক্রীনশট</string>
+  <string name="tutorial_3_subtext_1">সেলফি বা আপনার বন্ধুদের ছবি</string>
+  <string name="tutorial_3_subtext_2">ছবি যা আপনি ইন্টারনেট থেকে ডাউনলোড করেছেন</string>
+  <string name="tutorial_3_subtext_3">মালিকানাযুক্ত অ্যাপের স্ক্রীনশট</string>
   <string name="tutorial_4_text">আপলোডের উদাহরণ:</string>
-  <string name="tutorial_4_subtext" fuzzy="true">u2022 শিরোনাম: সিডনি অপেরা হাউস \nu2022 বিবরণ: উপসাগর থেকে দেখা সিডনি অপেরা হাউস\nu2022 বিষয়শ্রেণী: সিডনি অপেরা হাউস, পশ্চিম দিক থেকে সিডনি অপেরা হাউস, সিডনি অপেরা হাউসের দূরবর্তী দৃশ্য</string>
+  <string name="tutorial_4_subtext">- শিরোনাম: সিডনি অপেরা হাউস \n- বিবরণ: উপসাগর থেকে দেখা সিডনি অপেরা হাউস\n- বিষয়শ্রেণী: সিডনি অপেরা হাউস, পশ্চিম দিক থেকে সিডনি অপেরা হাউস, সিডনি অপেরা হাউসের দূরবর্তী দৃশ্য</string>
+  <string name="tutorial_4_subtext_1">শিরোনাম: সিডনি অপেরা হাউস</string>
+  <string name="tutorial_4_subtext_2">বিবরণ: উপসাগর থেকে দেখা সিডনি অপেরা হাউস</string>
   <string name="welcome_wikipedia_text">আপনার ছবি দিয়ে অবদান রাখুন। উইকিপিডিয়ার নিবন্ধগুলিকে নতুন রূপ দিতে সাহায্য করুন!</string>
   <string name="welcome_wikipedia_subtext">উইকিপিডিয়াতে চিত্র উইকিমিডিয়া কমন্স থেকে এসেছে।</string>
   <string name="welcome_copyright_text">আপনার ছবি সারা বিশ্বের শিক্ষিত মানুষকে সাহায্য করবে।</string>
@@ -154,8 +170,6 @@
   <string name="media_detail_coordinates_empty">কিছু দেয়া হয়নি</string>
   <string name="become_a_tester_title">বিটা টেস্টার হোন</string>
   <string name="become_a_tester_description">গুগল প্লেতে আমাদের বেটা চ্যানেলে যুক্ত হন! এতে নতুন বৈশিষ্ট্যের পাশাপাশি পুরানো বাগগুলো\'র সংশোধিত রুপ সবার আগে ব্যবহারের সুযোগ পাবেন</string>
-  <string name="use_wikidata">উইকিউপাত্ত ব্যবহার করুন</string>
-  <string name="use_wikidata_summary">(সতর্কতা: এটি নিষ্ক্রিয় করা অধিক পরিমাণে মোবাইল ডেটা খরচ হওয়ার কারণ হতে পারে)</string>
   <string name="_2fa_code">2FA কোড</string>
   <string name="number_of_uploads">আমার সাম্প্রতিক আপলোড সীমা</string>
   <string name="maximum_limit">সর্বোচ্চ সীমা</string>
@@ -164,6 +178,9 @@
   <string name="login_failed_2fa_not_supported">দুটি স্তরের প্রমাণীকরণ বর্তমানে সমর্থিত নয়।</string>
   <string name="logout_verification">আপনি কি সত্যিই প্রস্থান করতে চান?</string>
   <string name="commons_logo">কমন্সের লোগো</string>
+  <string name="commons_website">কমন্স ওয়েবসাইট</string>
+  <string name="commons_facebook">কমন্সের ফেসবুক পাতা</string>
+  <string name="commons_github">কমন্স গিটহাব উৎস কোড</string>
   <string name="background_image">পটভূমির চিত্র</string>
   <string name="mediaimage_failed">মিডিয়া চিত্র ব্যর্থ হয়েছে</string>
   <string name="no_image_found">কোন চিত্র পাওয়া যায়নি</string>
@@ -188,6 +205,7 @@
   <string name="navigation_item_feedback">প্রতিক্রিয়া</string>
   <string name="navigation_item_logout">প্রস্থান</string>
   <string name="navigation_item_info">ভূমিকা</string>
+  <string name="navigation_item_notification">বিজ্ঞপ্তি</string>
   <string name="nearby_needs_permissions">অবস্থানের অনুমতি ছাড়া কাছাকাছি জায়গাগুলি প্রদর্শন করা যাবে না</string>
   <string name="no_description_found">কোন বিবরণ পাওয়া যায়নি</string>
   <string name="nearby_info_menu_commons_article">কমন্সে ফাইলের পাতা</string>
@@ -195,13 +213,24 @@
   <string name="error_while_cache">ছবি আনার সময় ত্রুটি</string>
   <string name="title_info">ফাইলের একটি স্বতন্ত্র বর্ণনামূলক নাম যা ফাইলের নাম হিসাবে কাজ করবে। অাপনি সাধারণ ভাষা ব্যবহার করতে পারেন শূন্যস্থানসহ। ফাইলের এক্সটেনশন যুক্ত করবেন না।</string>
   <string name="description_info">যতটা সম্ভব মিডিয়াটি বর্ণনা করুন: এটি কোথায় ধারণ করা হয়েছিল? এটি কি প্রদর্শন করে? এটির প্রসঙ্গ কি? ধারণকৃত বস্তু অথবা ব্যক্তির বর্ণনা করুন। সহজে অনুমান করা যায়না সেরকম তথ্য উদঘাটন করুন, উদাহরণস্বরূপ, যদি ল্যান্ডস্কেপ হয় তাহলে দিবসকালের সময় দিন।</string>
+  <string name="upload_image_too_dark">এই ছবিটি খুবই অন্ধকারময়, আপনি কি এটি আপলোড করতে চান? উইকিমিডিয়া কমন্স শুধুমাত্র বিশ্বকোষীয় মানের ছবির জন্য।</string>
+  <string name="upload_image_blurry">এই ছবিটি অস্পষ্ট, আপনি কি এটি আপলোড করতে চান? উইকিমিডিয়া কমন্স শুধুমাত্র বিশ্বকোষীয় মানের ছবির জন্য।</string>
   <string name="give_permission">অনুমতি দিন</string>
   <string name="use_external_storage">বাহ্যিক সঞ্চয়স্থান ব্যবহার করুন</string>
   <string name="use_external_storage_summary">অাপনার ডিভাইসের নিজস্ব ক্যামেরায় ধারণকৃত ছবি সংরক্ষণ করুন</string>
+  <string name="login_to_your_account">আপনার অ্যাকাউন্টে প্রবেশ করুন</string>
   <string name="send_log_file">লগ ফাইল পাঠান</string>
   <string name="send_log_file_description">ইমেইলের মাধ্যমে উন্নয়নকারীর কাছে লগ ফাইল পাঠান</string>
-  <string name="login_to_your_account">আপনার অ্যাকাউন্টে প্রবেশ করুন</string>
+  <string name="null_url">ত্রুটি! ইউআরএল পাওয়া যায়নি</string>
   <string name="nearby_location_has_not_changed">অবস্থান পরিবর্তন হয়নি।</string>
   <string name="nearby_location_not_available">অবস্থান উপলব্ধ নয়।</string>
   <string name="location_permission_rationale_nearby">কাছাকাছি স্থানসমূহের একটি তালিকা প্রদর্শন করতে অনুমতি প্রয়োজন</string>
+  <string name="get_directions">নির্দেশনা পান</string>
+  <string name="read_article">নিবন্ধ পড়ুন</string>
+  <string name="notifications_welcome">উইকিমিডিয়া কমন্সে স্বাগতম, %1$s! আপনাকে এখানে পেয়ে আমরা আনন্দিত।</string>
+  <string name="notifications_talk_page_message">%1$s আপনার আলাপ পাতায় একটি বার্তা দিয়েছেন</string>
+  <string name="notifications_thank_you_edit">একটি সম্পাদনা করার জন্য আপনাকে ধন্যবাদ</string>
+  <string name="notifications_mention">%1$s আপনাকে %2$s-এ উল্লেখ করেছেন।</string>
+  <string name="about_faq">প্রায়শই জিজ্ঞাসিত প্রশ্নসমূহ</string>
+  <string name="welcome_skip_button">টিউটোরিয়াল এড়ান</string>
 </resources>

@@ -1,5 +1,8 @@
 package fr.free.nrw.commons.upload;
 
+import android.annotation.SuppressLint;
+import android.app.Activity;
+
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -8,9 +11,11 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
+import android.support.v4.view.ViewCompat;
 import android.support.v7.app.AlertDialog;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -25,6 +30,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -36,16 +42,16 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.OnItemSelected;
 import butterknife.OnTouch;
-import dagger.android.support.DaggerFragment;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.Utils;
+import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
 import fr.free.nrw.commons.settings.Prefs;
 import timber.log.Timber;
 
 import static android.view.MotionEvent.ACTION_DOWN;
 import static android.view.MotionEvent.ACTION_UP;
 
-public class SingleUploadFragment extends DaggerFragment {
+public class SingleUploadFragment extends CommonsDaggerSupportFragment {
 
     @BindView(R.id.titleEdit) EditText titleEdit;
     @BindView(R.id.descEdit) EditText descEdit;
@@ -54,6 +60,7 @@ public class SingleUploadFragment extends DaggerFragment {
     @BindView(R.id.licenseSpinner) Spinner licenseSpinner;
 
     @Inject @Named("default_preferences") SharedPreferences prefs;
+    @Inject @Named("direct_nearby_upload_prefs") SharedPreferences directPrefs;
 
     private String license;
     private OnUploadActionInitiated uploadActionInitiatedHandler;
@@ -62,9 +69,6 @@ public class SingleUploadFragment extends DaggerFragment {
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         inflater.inflate(R.menu.activity_share, menu);
-        if (titleEdit != null) {
-            menu.findItem(R.id.menu_upload_single).setEnabled(titleEdit.getText().length() != 0);
-        }
     }
 
     @Override
@@ -72,6 +76,11 @@ public class SingleUploadFragment extends DaggerFragment {
         switch (item.getItemId()) {
             //What happens when the 'submit' icon is tapped
             case R.id.menu_upload_single:
+
+                if (titleEdit.getText().toString().isEmpty()) {
+                    Toast.makeText(getContext(), R.string.add_title_toast, Toast.LENGTH_LONG).show();
+                    return false;
+                }
 
                 String title = titleEdit.getText().toString();
                 String desc = descEdit.getText().toString();
@@ -84,7 +93,6 @@ public class SingleUploadFragment extends DaggerFragment {
 
                 uploadActionInitiatedHandler.uploadActionInitiated(title, desc);
                 return true;
-
         }
         return super.onOptionsItemSelected(item);
     }
@@ -95,6 +103,14 @@ public class SingleUploadFragment extends DaggerFragment {
         View rootView = inflater.inflate(R.layout.fragment_single_upload, container, false);
         ButterKnife.bind(this, rootView);
 
+        Intent activityIntent = getActivity().getIntent();
+        if (activityIntent.hasExtra("title")) {
+            titleEdit.setText(activityIntent.getStringExtra("title"));
+        }
+        if (activityIntent.hasExtra("description")) {
+            descEdit.setText(activityIntent.getStringExtra("description"));
+        }
+
         ArrayList<String> licenseItems = new ArrayList<>();
         licenseItems.add(getString(R.string.license_name_cc0));
         licenseItems.add(getString(R.string.license_name_cc_by));
@@ -103,6 +119,18 @@ public class SingleUploadFragment extends DaggerFragment {
         licenseItems.add(getString(R.string.license_name_cc_by_sa_four));
 
         license = prefs.getString(Prefs.DEFAULT_LICENSE, Prefs.Licenses.CC_BY_SA_3);
+
+        // If this is a direct upload from Nearby, autofill title and desc fields with the Place's values
+        boolean isNearbyUpload = ((ShareActivity) getActivity()).isNearbyUpload();
+
+        if (isNearbyUpload) {
+            String imageTitle = directPrefs.getString("Title", "");
+            String imageDesc = directPrefs.getString("Desc", "");
+            String imageCats = directPrefs.getString("Category", "");
+            Timber.d("Image title: " + imageTitle + ", image desc: " + imageDesc + ", image categories: " + imageCats);
+            titleEdit.setText(imageTitle);
+            descEdit.setText(imageDesc);
+        }
 
         // check if this is the first time we have uploaded
         if (prefs.getString("Title", "").trim().length() == 0
@@ -136,9 +164,27 @@ public class SingleUploadFragment extends DaggerFragment {
 
         titleEdit.addTextChangedListener(textWatcher);
 
+        titleEdit.setOnFocusChangeListener((v, hasFocus) -> {
+            if (!hasFocus) {
+                hideKeyboard(v);
+            }
+        });
+
+        descEdit.setOnFocusChangeListener((v, hasFocus) -> {
+            if(!hasFocus){
+                hideKeyboard(v);
+            }
+        });
+
         setLicenseSummary(license);
 
         return rootView;
+    }
+
+    public void hideKeyboard(View view) {
+        Log.i("hide", "hideKeyboard: ");
+        InputMethodManager inputMethodManager =(InputMethodManager)getActivity().getSystemService(Activity.INPUT_METHOD_SERVICE);
+        inputMethodManager.hideSoftInputFromWindow(view.getWindowToken(), 0);
     }
 
     @Override
@@ -208,39 +254,45 @@ public class SingleUploadFragment extends DaggerFragment {
      */
     @OnTouch(R.id.titleEdit)
     boolean titleInfo(View view, MotionEvent motionEvent) {
-        //Should replace right with end to support different right-to-left languages as well
-        final int value = titleEdit.getRight() - titleEdit.getCompoundDrawables()[2].getBounds().width();
-
-        if (motionEvent.getAction() == ACTION_UP && motionEvent.getRawX() >= value) {
-            new AlertDialog.Builder(getContext())
-                    .setTitle(R.string.media_detail_title)
-                    .setMessage(R.string.title_info)
-                    .setCancelable(true)
-                    .setNeutralButton(android.R.string.ok, (dialog, id) -> dialog.cancel())
-                    .create()
-                    .show();
-            return true;
+        final int value;
+        if (ViewCompat.getLayoutDirection(getView()) == ViewCompat.LAYOUT_DIRECTION_LTR) {
+            value = titleEdit.getRight() - titleEdit.getCompoundDrawables()[2].getBounds().width();
+            if (motionEvent.getAction() == ACTION_UP && motionEvent.getRawX() >= value) {
+                showInfoAlert(R.string.media_detail_title, R.string.title_info);
+                return true;
+            }
+        }
+        else {
+            value = titleEdit.getLeft() + titleEdit.getCompoundDrawables()[0].getBounds().width();
+            if (motionEvent.getAction() == ACTION_UP && motionEvent.getRawX() <= value) {
+                showInfoAlert(R.string.media_detail_title, R.string.title_info);
+                return true;
+            }
         }
         return false;
     }
 
     @OnTouch(R.id.descEdit)
     boolean descriptionInfo(View view, MotionEvent motionEvent) {
-        final int value = descEdit.getRight() - descEdit.getCompoundDrawables()[2].getBounds().width();
-
-        if (motionEvent.getAction() == ACTION_UP && motionEvent.getRawX() >= value) {
-            new AlertDialog.Builder(getContext())
-                    .setTitle(R.string.media_detail_description)
-                    .setMessage(R.string.description_info)
-                    .setCancelable(true)
-                    .setNeutralButton(android.R.string.ok, (dialog, id) -> dialog.cancel())
-                    .create()
-                    .show();
-            return true;
+        final int value;
+        if (ViewCompat.getLayoutDirection(getView()) == ViewCompat.LAYOUT_DIRECTION_LTR) {
+            value = descEdit.getRight() - descEdit.getCompoundDrawables()[2].getBounds().width();
+            if (motionEvent.getAction() == ACTION_UP && motionEvent.getRawX() >= value) {
+                showInfoAlert(R.string.media_detail_description,R.string.description_info);
+                return true;
+            }
+        }
+        else{
+            value = descEdit.getLeft() + descEdit.getCompoundDrawables()[0].getBounds().width();
+            if (motionEvent.getAction() == ACTION_UP && motionEvent.getRawX() <= value) {
+                showInfoAlert(R.string.media_detail_description,R.string.description_info);
+                return true;
+            }
         }
         return false;
     }
 
+    @SuppressLint("StringFormatInvalid")
     private void setLicenseSummary(String license) {
         licenseSummaryView.setText(getString(R.string.share_license_summary, getString(Utils.licenseNameFor(license))));
     }
@@ -300,5 +352,15 @@ public class SingleUploadFragment extends DaggerFragment {
                 getActivity().invalidateOptionsMenu();
             }
         }
+    }
+
+    private void showInfoAlert (int titleStringID, int messageStringID){
+        new AlertDialog.Builder(getContext())
+                .setTitle(titleStringID)
+                .setMessage(messageStringID)
+                .setCancelable(true)
+                .setNeutralButton(android.R.string.ok, (dialog, id) -> dialog.cancel())
+                .create()
+                .show();
     }
 }

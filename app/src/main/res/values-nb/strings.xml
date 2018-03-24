@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+  <string name="preference_category_appearance">Utseende</string>
+  <string name="preference_category_feedback">Tilbakemelding</string>
   <string name="app_name">Commons</string>
+  <string name="bullet">•</string>
   <string name="menu_settings">Innstillinger</string>
   <string name="username">Brukernavn</string>
   <string name="password">Passord</string>
@@ -21,8 +24,8 @@
   <string name="upload_failed_notification_title">Opplastingen av %1$s feilet</string>
   <string name="upload_failed_notification_subtitle">Trykk for å vise</string>
   <plurals name="uploads_pending_notification_indicator">
-    <item quantity="one">%d fil lastes opp</item>
-    <item quantity="other">%d filer lastes opp</item>
+    <item quantity="one">%1$d fil lastes opp</item>
+    <item quantity="other">%1$d filer lastes opp</item>
   </plurals>
   <string name="title_activity_contributions">Mine nylige opplastinger</string>
   <string name="contribution_state_queued">I ventekø</string>
@@ -56,16 +59,16 @@
   <string name="contributions_subtitle_zero">Ingen opplastinger ennå</string>
   <plurals name="contributions_subtitle">
     <item quantity="zero">\@string/contributions_subtitle_zero</item>
-    <item quantity="one">%d opplasting</item>
-    <item quantity="other">%d opplastinger</item>
+    <item quantity="one">%1$d opplasting</item>
+    <item quantity="other">%1$d opplastinger</item>
   </plurals>
   <plurals name="starting_multiple_uploads">
-    <item quantity="one">Starter %d opplasting</item>
-    <item quantity="other">Starter %d opplastinger</item>
+    <item quantity="one">Starter %1$d opplasting</item>
+    <item quantity="other">Starter %1$d opplastinger</item>
   </plurals>
   <plurals name="multiple_uploads_title">
-    <item quantity="one">%d opplasting</item>
-    <item quantity="other">%d opplastinger</item>
+    <item quantity="one">%1$d opplasting</item>
+    <item quantity="other">%1$d opplastinger</item>
   </plurals>
   <string name="categories_not_found">Ingen kategorier som stemte overens med %1$s funnet</string>
   <string name="categories_skip_explanation">Legg til kategorier for å gjøre bildene dine lettere å finne på Wikimedia Commons.\n\nBegynn å skrive navnet på kategoriene.</string>
@@ -74,9 +77,9 @@
   <string name="title_activity_signup">Registrer deg</string>
   <string name="menu_about">Om</string>
   <string name="about_license">Wikimedia Commons-appen er åpen kildekode og er skapt og vedlikeholdt av stipendiater og frivillige fra Wikimedia-fellesskapet. Wikimedia Foundation er ikke involvert i utviklingen eller vedlikeholdet av appen.</string>
-  <string name="about_improve">&lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;Kildekode&lt;/a&gt; og &lt;a href=\"https://commons-app.github.io/\"&gt;nettside&lt;/a&gt; på GitHub. Opprett en ny &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;GitHub-sak&lt;/a&gt; for feilrapporter og forslag.</string>
-  <string name="about_privacy_policy">&lt;a href=\"https://github.com/commons-app/apps-android-commons/wiki/Privacy-policy\"&gt;Personvernpolicy&lt;/a&gt;</string>
-  <string name="about_credits">&lt;a href=\"https://github.com/commons-app/apps-android-comons/blob/master/CREDITS\"&gt;Bidragsytere&lt;/a&gt;</string>
+  <string name="about_improve">Opprett en ny &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;GitHub-sak&lt;/a&gt; for feilrapporter og forslag.</string>
+  <string name="about_privacy_policy" fuzzy="true">&lt;a href=\"https://github.com/commons-app/apps-android-commons/wiki/Privacy-policy\"&gt;Personvernpolicy&lt;/a&gt;</string>
+  <string name="about_credits" fuzzy="true">&lt;a href=\"https://github.com/commons-app/apps-android-comons/blob/master/CREDITS\"&gt;Bidragsytere&lt;/a&gt;</string>
   <string name="title_activity_about">Om</string>
   <string name="menu_feedback">Send tilbakemelding (via Epost)</string>
   <string name="no_email_client">Ingen epostklient installert</string>
@@ -88,7 +91,7 @@
   <string name="share_license_summary">Dette bildet vil bli lisensiert under %1$s</string>
   <string name="media_upload_policy">Ved å laste opp dette bildet erklærer jeg at dette er mitt eget verk, og at det ikke inneholder opphavsrettsbeskyttet materiale eller selvportretter, og ellers er i samsvar med &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines\"&gt;Wikimedia Commons\' retningslinjer&lt;/a&gt;.</string>
   <string name="menu_download">Last ned</string>
-  <string name="preference_license">Lisens</string>
+  <string name="preference_license">Standardlisens</string>
   <string name="use_previous">Bruk forrige tittel/beskrivelse</string>
   <string name="allow_gps">Hent automatisk nåværende plassering</string>
   <string name="allow_gps_summary">Hent nåværende plassering for å tilby kategoriforslag om bildet ikke er geotagget</string>
@@ -117,11 +120,17 @@
   <string name="tutorial_1_text">Wikimedia Commons lagrer de fleste bildene som brukes på Wikipedia.</string>
   <string name="tutorial_1_subtext">Dine bilder hjelper til å utdanne mennesker verden over!</string>
   <string name="tutorial_2_text">Last opp bilder som er tatt eller skapt av deg:</string>
-  <string name="tutorial_2_subtext">– Naturlige objekter (blomster, dyr, fjell)\n– Nyttige objekter (sykler, togstasjoner)\n– Berømte personer (ordføreren din, OL-deltakere du har møtt)</string>
+  <string name="tutorial_2_subtext">– Naturlige objekter (blomster, dyr, fjell)\n– Nyttige objekter (sykler, jernbanestasjoner)\n– Berømte personer (ordføreren din, OL-deltakere du har møtt)</string>
+  <string name="tutorial_2_subtext_1">Naturlige objekter (blomster, dyr, fjell)</string>
+  <string name="tutorial_2_subtext_3">Berømte personer (din ordfører, OL-deltakere du møtte)</string>
   <string name="tutorial_3_text">Vennligst IKKE last opp:</string>
   <string name="tutorial_3_subtext">- Selfies eller bilder av vennene dine\n- Bilder som du har lastet ned fra internet\n- Skjermbilder tatt fra proprietære apper</string>
+  <string name="tutorial_3_subtext_1">Selvportrett eller bilder av dine venner</string>
+  <string name="tutorial_3_subtext_2">Bilder du lastet ned fra Internett</string>
   <string name="tutorial_4_text">Opplastingseksempel:</string>
   <string name="tutorial_4_subtext">- Tittel: Sydneys operahus\n- Beskrivelse: Operahuset i Sydney sett fra andre siden av bukten\n- Kategorier: Operahuset i Sydney ifra vest, Operahuset i Sydney utenfra</string>
+  <string name="tutorial_4_subtext_1">Tittel: Operahuset i Sydney</string>
+  <string name="tutorial_4_subtext_2">Beskrivelse: Operahuset i Sydney som det sees fra motsatt side av bukten</string>
   <string name="welcome_wikipedia_text">Bidra med dine bilder. Hjelp til med å blåse liv i Wikipedias artikler!</string>
   <string name="welcome_wikipedia_subtext">Bilder på Wikipedia kommer fra Wikimedia Commons.</string>
   <string name="welcome_copyright_text">Bildene dine kan være til hjelp for mennesker over hele verden som søker kunnskap og dannelse.</string>
@@ -154,8 +163,6 @@
   <string name="media_detail_coordinates_empty">Ingen oppgitt</string>
   <string name="become_a_tester_title">Bli betatester</string>
   <string name="become_a_tester_description">Registrer deg på vår betakanal på Google Play og få tidlig tilgang til nye funksjoner og feilrettinger</string>
-  <string name="use_wikidata">Bruk Wikidata</string>
-  <string name="use_wikidata_summary">(Advarsel: Store mengder mobildata kan bli brukt om denne slås av)</string>
   <string name="_2fa_code">2FA-kode</string>
   <string name="number_of_uploads">Grense for mine seneste opplastinger</string>
   <string name="maximum_limit">Maksimumsgrense</string>
@@ -164,6 +171,9 @@
   <string name="login_failed_2fa_not_supported">Tofaktorautentisering støttes ikke ennå.</string>
   <string name="logout_verification">Ønsker du virkelig å logge ut?</string>
   <string name="commons_logo">Commons-logo</string>
+  <string name="commons_website">Commons-nettsted</string>
+  <string name="commons_facebook">Commons\' Facebook-side</string>
+  <string name="commons_github">Commons\' kildekode på GitHub</string>
   <string name="background_image">Bakgrunnsbilde</string>
   <string name="mediaimage_failed">Mediebilde feilet</string>
   <string name="no_image_found">Intet bilde funnet</string>
@@ -188,6 +198,7 @@
   <string name="navigation_item_feedback">Tilbakemeldinger</string>
   <string name="navigation_item_logout">Logg ut</string>
   <string name="navigation_item_info">Veiviser</string>
+  <string name="navigation_item_notification">Varsler</string>
   <string name="nearby_needs_permissions">Steder i nærheten kan ikke vises uten tillatelse for stedsbestemmelse</string>
   <string name="no_description_found">ingen beskrivelse funnet</string>
   <string name="nearby_info_menu_commons_article">Commons-filside</string>
@@ -195,15 +206,24 @@
   <string name="error_while_cache">Feil under mellomlagring av bilder</string>
   <string name="title_info">En unik beskrivende tittel for fila, som vil fungere som filnavn. Du kan bruke vanlig språk med mellomrom. Ikke ta med filendelsen</string>
   <string name="description_info">Beskriv bidraget så mye som mulig: Hvor ble det tatt? Hva viser det? Hva er konteksten? Beskriv objektene eller personene. Gi informasjon som ikke kan gjettes lett, for eksempel når på dagen bildet ble tatt om det er et landskapsbilde. Om bildet viser noe uvanlig, forklar hva som gjør det uvanlig.</string>
+  <string name="upload_image_too_dark">Dette bildet er for mørkt, er du sikker på at du ønsker å laste det opp? Wikimedia Commons er kun for bilder med ensyklopedisk verdi.</string>
+  <string name="upload_image_blurry">Dette bildet er uklart, er du sikker på at du ønsker å laste det opp? Wikimedia Commons er bare for bilder med ensyklopedisk verdi.</string>
   <string name="give_permission">Gi tillatelse</string>
   <string name="use_external_storage">Bruk ekstern lagring</string>
   <string name="use_external_storage_summary">Lagre bilder som er tatt med kameraet i appen på enheten din</string>
+  <string name="login_to_your_account">Logg inn med kontoen din</string>
   <string name="send_log_file">Send loggfil</string>
   <string name="send_log_file_description">Send loggfil til utviklerne via epost</string>
-  <string name="login_to_your_account">Logg inn med kontoen din</string>
+  <string name="no_web_browser">Ingen internettleser funnet som kan åpne lenken</string>
   <string name="nearby_location_has_not_changed">Stedet har ikke blitt endret.</string>
   <string name="nearby_location_not_available">Sted ikke tilgjengelig.</string>
   <string name="location_permission_rationale_nearby">Tillatelse kreves for å vise listen over steder i nærheten</string>
   <string name="get_directions">FÅ VEIBESKRIVELSE</string>
   <string name="read_article">LES ARTIKKEL</string>
+  <string name="notifications_welcome">Velkommen til Wikimedia Commons, %1$s! Vi er glade for at du er her.</string>
+  <string name="notifications_talk_page_message">%1$s la igjen en beskjed på diskusjonssiden din</string>
+  <string name="notifications_thank_you_edit">Takk for at du har gjort en redigering</string>
+  <string name="notifications_mention">%1$s nevnte deg på %2$s.</string>
+  <string name="toggle_view_button">Skift visning</string>
+  <string name="about_faq">Ofte stilte spørsmål</string>
 </resources>

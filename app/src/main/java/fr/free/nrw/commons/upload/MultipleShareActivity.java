@@ -2,7 +2,6 @@ package fr.free.nrw.commons.upload;
 
 import android.Manifest;
 import android.app.ProgressDialog;
-import android.content.ContentProviderClient;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
@@ -12,7 +11,9 @@ import android.database.DataSetObserver;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.ParcelFileDescriptor;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.content.ContextCompat;
@@ -22,6 +23,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.Toast;
 
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -52,16 +54,25 @@ public class MultipleShareActivity extends AuthenticatedActivity
         MultipleUploadListFragment.OnMultipleUploadInitiatedHandler,
         OnCategoriesSaveHandler {
 
-    @Inject MediaWikiApi mwApi;
-    @Inject SessionManager sessionManager;
-    @Inject UploadController uploadController;
-    @Inject @Named("default_preferences") SharedPreferences prefs;
+    @Inject
+    MediaWikiApi mwApi;
+    @Inject
+    SessionManager sessionManager;
+    @Inject
+    UploadController uploadController;
+    @Inject
+    ModifierSequenceDao modifierSequenceDao;
+    @Inject
+    @Named("default_preferences")
+    SharedPreferences prefs;
 
     private ArrayList<Contribution> photosList = null;
 
     private MultipleUploadListFragment uploadsList;
     private MediaDetailPagerFragment mediaDetails;
     private CategorizationFragment categorizationFragment;
+
+    private boolean locationPermitted = false;
 
     @Override
     public Media getMediaAtPosition(int i) {
@@ -166,19 +177,18 @@ public class MultipleShareActivity extends AuthenticatedActivity
     @Override
     public void onCategoriesSave(List<String> categories) {
         if (categories.size() > 0) {
-            ModifierSequenceDao dao = new ModifierSequenceDao(getContentResolver().acquireContentProviderClient(ModificationsContentProvider.AUTHORITY));
             for (Contribution contribution : photosList) {
                 ModifierSequence categoriesSequence = new ModifierSequence(contribution.getContentUri());
 
                 categoriesSequence.queueModifier(new CategoryModifier(categories.toArray(new String[]{})));
                 categoriesSequence.queueModifier(new TemplateRemoveModifier("Uncategorized"));
 
-                dao.save(categoriesSequence);
+                modifierSequenceDao.save(categoriesSequence);
             }
         }
         // FIXME: Make sure that the content provider is up
         // This is the wrong place for it, but bleh - better than not having it turned on by default for people who don't go throughl ogin
-        ContentResolver.setSyncAutomatically(sessionManager.getCurrentAccount(), ModificationsContentProvider.AUTHORITY, true); // Enable sync by default!
+        ContentResolver.setSyncAutomatically(sessionManager.getCurrentAccount(), ModificationsContentProvider.MODIFICATIONS_AUTHORITY, true); // Enable sync by default!
         finish();
     }
 
@@ -208,6 +218,14 @@ public class MultipleShareActivity extends AuthenticatedActivity
 
         getSupportFragmentManager().addOnBackStackChangedListener(this);
         requestAuthToken();
+
+        //TODO: 15/10/17 should location permission be explicitly requested if not provided?
+        //check if location permission is enabled
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            if (ContextCompat.checkSelfPermission(this,Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+                locationPermitted = true;
+            }
+        }
     }
 
     @Override
@@ -241,7 +259,7 @@ public class MultipleShareActivity extends AuthenticatedActivity
         mwApi.setAuthCookie(authCookie);
         Intent intent = getIntent();
 
-        if (intent.getAction().equals(Intent.ACTION_SEND_MULTIPLE)) {
+        if (Intent.ACTION_SEND_MULTIPLE.equals(intent.getAction())) {
             if (photosList == null) {
                 photosList = new ArrayList<>();
                 ArrayList<Uri> urisList = intent.getParcelableArrayListExtra(Intent.EXTRA_STREAM);
@@ -253,6 +271,11 @@ public class MultipleShareActivity extends AuthenticatedActivity
                     up.setTag("sequence", i);
                     up.setSource(Contribution.SOURCE_EXTERNAL);
                     up.setMultiple(true);
+                    String imageGpsCoordinates = extractImageGpsData(uri);
+                    if (imageGpsCoordinates != null) {
+                        Timber.d("GPS data for image found!");
+                        up.setDecimalCoords(imageGpsCoordinates);
+                    }
                     photosList.add(up);
                 }
             }
@@ -279,7 +302,49 @@ public class MultipleShareActivity extends AuthenticatedActivity
 
     @Override
     public void onBackStackChanged() {
-        getSupportActionBar().setDisplayHomeAsUpEnabled(mediaDetails != null && mediaDetails.isVisible()) ;
+        getSupportActionBar().setDisplayHomeAsUpEnabled(mediaDetails != null && mediaDetails.isVisible());
     }
 
+    /**
+     * Will attempt to extract the gps coordinates using exif data or by using the current
+     * location if available for the image who's imageUri has been provided.
+     * @param imageUri The uri of the image who's GPS coordinates data we wish to extract
+     * @return GPS coordinates as a String as is returned by {@link GPSExtractor}
+     */
+    @Nullable
+    private String extractImageGpsData(Uri imageUri) {
+        Timber.d("Entering extractImagesGpsData");
+
+        if (imageUri == null) {
+            //now why would you do that???
+            return null;
+        }
+
+        GPSExtractor gpsExtractor = null;
+
+        try {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                ParcelFileDescriptor fd = getContentResolver().openFileDescriptor(imageUri,"r");
+                if (fd != null) {
+                    gpsExtractor = new GPSExtractor(fd.getFileDescriptor(),this,prefs);
+                }
+            } else {
+                String filePath = FileUtils.getPath(this,imageUri);
+                if (filePath != null) {
+                    gpsExtractor = new GPSExtractor(filePath,this,prefs);
+                }
+            }
+
+            if (gpsExtractor != null) {
+                //get image coordinates from exif data or user location
+                return gpsExtractor.getCoords(locationPermitted);
+            }
+
+        } catch (FileNotFoundException fnfe) {
+            Timber.w(fnfe);
+            return null;
+        }
+
+        return null;
+    }
 }

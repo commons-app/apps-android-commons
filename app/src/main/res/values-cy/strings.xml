@@ -20,11 +20,11 @@
   <string name="upload_progress_notification_title_finishing">Yn gorffen uwchlwytho %1$s</string>
   <string name="upload_failed_notification_title">Methwyd uwchlwytho %1$s</string>
   <string name="upload_failed_notification_subtitle">Tapiwch i weld</string>
-  <plurals name="uploads_pending_notification_indicator" fuzzy="true">
-    <item quantity="one">1 ffeil yn uwchlwytho</item>
-    <item quantity="other">%d ffeil yn uwchlwytho</item>
+  <plurals name="uploads_pending_notification_indicator">
+    <item quantity="one">%1$d ffeil yn uwchlwytho</item>
+    <item quantity="other">%1$d ffeil yn uwchlwytho</item>
   </plurals>
-  <string name="title_activity_contributions" fuzzy="true">Fy uwchlwythiadau</string>
+  <string name="title_activity_contributions">Fy Uwchlwythiadau Diweddaraf</string>
   <string name="contribution_state_queued">Yn y ciw</string>
   <string name="contribution_state_failed">Methiant</string>
   <string name="contribution_state_in_progress">Wedi cwblhau %1$d%%</string>
@@ -42,6 +42,7 @@
   <string name="login_failed_password">Yn methu mewngofnodi - gwirwch eich cyfrinair</string>
   <string name="login_failed_throttled">Cafwyd gormod o ymgeision aflwyddiannus. Oedwch ennyd cyn ceisio eto.</string>
   <string name="login_failed_blocked">Ymddiheurwn. Mae\'r defnyddiwr hwn wedi ei flocio ar Gomin Wikimedia</string>
+  <string name="login_failed_2fa_needed">Mae\'n rhaid i chi roi eich cod adnabod 2 ffactor.</string>
   <string name="login_failed_generic">Methodd y mewngofnodi</string>
   <string name="share_upload_button">Uwchlwyther</string>
   <string name="multiple_share_base_title">Enwch y set hwn</string>
@@ -49,28 +50,33 @@
   <string name="menu_upload_single">Uwchlwytho</string>
   <string name="categories_search_text_hint">Archwilio\'r categorïau</string>
   <string name="menu_save_categories">Cadw</string>
-  <plurals name="contributions_subtitle" fuzzy="true">
-    <item quantity="zero">Dim Uwchlwythiadau eto</item>
-    <item quantity="one">1 uwchlwythiad</item>
-    <item quantity="other">%d uwchlwythiad</item>
+  <string name="refresh_button">Ailgyrchu</string>
+  <string name="gps_disabled">Ataliwyd GPS ar eich dyfais. Ydych chi am ei droi\'n weithredol?</string>
+  <string name="enable_gps">Gweithredu\'r GPS</string>
+  <string name="contributions_subtitle_zero">Heb uwchlwytho eto</string>
+  <plurals name="contributions_subtitle">
+    <item quantity="zero">\@string/contributions_subtitle_zero</item>
+    <item quantity="one">%1$d upload</item>
+    <item quantity="other">%1$d uwchlwythiad</item>
   </plurals>
-  <plurals name="starting_multiple_uploads" fuzzy="true">
-    <item quantity="one">Cychwyn uwchlwytho 1 ffeil</item>
-    <item quantity="other">Cychwyn uwchlwytho %d ffeil</item>
+  <plurals name="starting_multiple_uploads">
+    <item quantity="one">Cychwyn %1$d uwchlwythiad</item>
+    <item quantity="other">Cychwyn uwchlwytho %1$d ffeil</item>
   </plurals>
-  <plurals name="multiple_uploads_title" fuzzy="true">
-    <item quantity="one">1 uwchlwythiad</item>
-    <item quantity="other">%d uwchlwythiad</item>
+  <plurals name="multiple_uploads_title">
+    <item quantity="one">%1$d uwchlwythiad</item>
+    <item quantity="other">%1$d uwchlwythiad</item>
   </plurals>
   <string name="categories_not_found">Dim categori\'n cyfateb i %1$s ar gael</string>
-  <string name="categories_skip_explanation" fuzzy="true">Cychwynwch deipio i ychwanegu categoriau.\nCyffyrddwch y neges hon (neu ddewis Nôl) i fynd i\'r cam nesaf.</string>
+  <string name="categories_skip_explanation">Ychwanegwch gategori/au er mwyn i bobl fedru canfod eich ffeiliau ar Gomin Wicimedia.\n\nCychwynwch deipio i ychwanegu categori/au.</string>
   <string name="categories_activity_title">Categorïau</string>
   <string name="title_activity_settings">Gosodiadau</string>
   <string name="title_activity_signup">Cofrestru</string>
   <string name="menu_about">Amdanom</string>
-  <string name="about_license" fuzzy="true">Meddalwedd Cynnwys Agored wedi\'i rhyddhau o dan &lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/COPYING\"&gt;Drwydded Apache v2&lt;/a&gt; Mae logo a nod masnach Comin Wicimedia yn eiddo i Sefydliad Wicimedia ac fe\'u defnyddir gyda chaniatad y Sefydliad hwnnw. Nid ydym ni wedi cael sêl bendith y sefydliad nac yn perthyn iddyn nhw.</string>
-  <string name="about_improve">&lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;Mae\'r codau ffynhonnell ar wefanau&lt;/a&gt; Comin a &lt;a href=\"https://commons-app.github.io/\"&gt;gwefan &lt;/a&gt; GitHub. Gellwch greu &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;Ymholiad Github&lt;/a&gt; os gwelwch byg, neu i awgrymu gwelliannau.</string>
-  <string name="about_privacy_policy" fuzzy="true">&lt;a href=\"https://wikimediafoundation.org/wiki/Privacy_policy\"&gt;Polisi preifatrwydd&lt;/a&gt;</string>
+  <string name="about_license">Ap Cynnwys Agored a grewyd ac a gefnogir gan wirfoddolwyr cymuned Wicimedia yw ap Comin Wicimedia. Does a wnelo Sefydliad Wicimedia ddim byd ag e (ei greu, ei gynnal na\'i ddatblygu).</string>
+  <string name="about_improve">\n\nCrewch &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;ymholiad GitHub&lt;/a&gt; os oes gennych fyg, broblem neu awgrym.</string>
+  <string name="about_privacy_policy" fuzzy="true">&lt;a href=\"https://github.com/commons-app/apps-android-commons/wiki/Privacy-policy\"&gt;Polisi Preifatrwydd&lt;/a&gt;</string>
+  <string name="about_credits" fuzzy="true">&lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/CREDITS\"&gt;Clod&lt;/a&gt;</string>
   <string name="title_activity_about">Amdanom</string>
   <string name="menu_feedback">Danfonwch Adborth (drwy Ebost)</string>
   <string name="no_email_client">Dim ebost client wedi\'i ganfod</string>
@@ -80,10 +86,16 @@
   <string name="menu_retry_upload">Ailgynnig</string>
   <string name="menu_cancel_upload">Diddymer</string>
   <string name="share_license_summary">Caiff y ddelwedd hon ei thrwyddedu yn ôl termau\'r drwydded %1$s.</string>
+  <string name="media_upload_policy">Wrth gynnig y llun yma, rwy\'n datgan mai fy ngwaith i ydyw ac nad yw\'n cynnwys unrhyw beth dan hawlfrain, na hunlun, a\'i fod yn cadw at &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines\"&gt;Bolisiau Comin Wicimedia&lt;/a&gt;.</string>
   <string name="menu_download">Lawrlwytho</string>
-  <string name="preference_license">Trwydded</string>
+  <string name="preference_license" fuzzy="true">Trwydded</string>
   <string name="use_previous">Defnydiwch y teitl/disgrifiad blaenorol</string>
   <string name="allow_gps">Defnyddiwch y lleoliad cyfredol</string>
+  <string name="allow_gps_summary">Canfyddwch eich lleoliad, er mwyn i ni gynnig categori (os nad ydych wedi nodi\'r cyfesurynnau).</string>
+  <string name="preference_theme">Modd fin nos</string>
+  <string name="preference_theme_summary">Defnyddiwch thema tywyll</string>
+  <string name="license_name_cc_by_sa_four"> Attribution-ShareAlike 4.0</string>
+  <string name="license_name_cc_by_four"> Attribution 4.0</string>
   <string name="license_name_cc_by_sa">CC Attribution-ShareAlike 3.0</string>
   <string name="license_name_cc_by">CC Attribution 3.0</string>
   <string name="license_name_cc0">CC0</string>
@@ -99,7 +111,15 @@
   <string name="license_name_cc_by_sa_3_0_pl">CC BY-SA 3.0 (Gwlad Pwyl)</string>
   <string name="license_name_cc_by_sa_3_0_ro">CC BY-SA 3.0 (Romania)</string>
   <string name="license_name_cc_by_3_0">CC BY 3.0</string>
+  <string name="license_name_cc_by_sa_4_0">CC BY-SA 4.0</string>
+  <string name="license_name_cc_by_4_0">CC BY 4.0</string>
   <string name="license_name_cc_zero">CC Zero</string>
+  <string name="tutorial_1_text">Cyhelir llawer o luniau ar Gomin Wicimedia sy\'n cael eu defnyddio ar Wicipedia.</string>
+  <string name="tutorial_1_subtext">Mae eich lluniau\'n gymorth i addysgu pobl drwy\'r byd mawr crwn!</string>
+  <string name="tutorial_2_text">Uwchlwythwch lluniau a dynnoch eich hun:</string>
+  <string name="tutorial_2_subtext" fuzzy="true">- Natur (blodau, anifeiliaid, mynyddoedd)\n- Pethau defnyddiol (beic, tren, gorsaf drenau)\n- Enwogion (beirdd, athletwyr, blogwyr)</string>
+  <string name="tutorial_3_text">Peidiwch ag uwchlwytho:</string>
+  <string name="tutorial_3_subtext">- hunanluniau ohonoch chi na\'ch ffrindiau\n- lluniau a gawsoch o\'r we\n- sgrinluniau o apiau masnachol</string>
   <string name="welcome_wikipedia_text">Cyfranwch luniau. Cynorthwywch Wicipedia i roi bywyd yn yr erthyglau!</string>
   <string name="welcome_wikipedia_subtext">Mae\'r delweddau ar Wicipedia\'n dod o\nGomin Wikimedia.</string>
   <string name="welcome_copyright_text">Mae eich delweddau\'n cynorthwyo i addysgu pobl ledled y byd.</string>

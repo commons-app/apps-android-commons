@@ -1,18 +1,23 @@
 package fr.free.nrw.commons.category;
 
-import android.content.ContentProviderClient;
+
+import android.app.Activity;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.Editable;
 import android.text.TextUtils;
+import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -34,12 +39,11 @@ import javax.inject.Named;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import dagger.android.support.DaggerFragment;
 import fr.free.nrw.commons.R;
-import fr.free.nrw.commons.data.Category;
-import fr.free.nrw.commons.data.CategoryDao;
+import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
 import fr.free.nrw.commons.upload.MwVolleyApi;
+import fr.free.nrw.commons.upload.SingleUploadFragment;
 import fr.free.nrw.commons.utils.StringSortingUtils;
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -48,12 +52,11 @@ import timber.log.Timber;
 
 import static android.view.KeyEvent.ACTION_UP;
 import static android.view.KeyEvent.KEYCODE_BACK;
-import static fr.free.nrw.commons.category.CategoryContentProvider.AUTHORITY;
 
 /**
  * Displays the category suggestion and selection screen. Category search is initiated here.
  */
-public class CategorizationFragment extends DaggerFragment {
+public class CategorizationFragment extends CommonsDaggerSupportFragment {
 
     public static final int SEARCH_CATS_LIMIT = 25;
 
@@ -70,12 +73,16 @@ public class CategorizationFragment extends DaggerFragment {
 
     @Inject MediaWikiApi mwApi;
     @Inject @Named("default_preferences") SharedPreferences prefs;
+    @Inject @Named("prefs") SharedPreferences prefsPrefs;
+    @Inject @Named("direct_nearby_upload_prefs") SharedPreferences directPrefs;
+    @Inject CategoryDao categoryDao;
 
     private RVRendererAdapter<CategoryItem> categoriesAdapter;
     private OnCategoriesSaveHandler onCategoriesSaveHandler;
     private HashMap<String, ArrayList<String>> categoriesCache;
     private List<CategoryItem> selectedCategories = new ArrayList<>();
-    private ContentProviderClient databaseClient;
+    private TitleTextWatcher textWatcher = new TitleTextWatcher();
+    private boolean hasDirectCategories = false;
 
     private final CategoriesAdapterFactory adapterFactory = new CategoriesAdapterFactory(item -> {
         if (item.isSelected()) {
@@ -106,6 +113,15 @@ public class CategorizationFragment extends DaggerFragment {
         categoriesAdapter = adapterFactory.create(items);
         categoriesList.setAdapter(categoriesAdapter);
 
+
+        categoriesFilter.addTextChangedListener(textWatcher);
+
+        categoriesFilter.setOnFocusChangeListener((v, hasFocus) -> {
+            if (!hasFocus) {
+                hideKeyboard(v);
+            }
+        });
+
         RxTextView.textChanges(categoriesFilter)
                 .takeUntil(RxView.detaches(categoriesFilter))
                 .debounce(500, TimeUnit.MILLISECONDS)
@@ -113,6 +129,18 @@ public class CategorizationFragment extends DaggerFragment {
                 .subscribe(filter -> updateCategoryList(filter.toString()));
         return rootView;
     }
+
+    public void hideKeyboard(View view) {
+        InputMethodManager inputMethodManager = (InputMethodManager) getActivity().getSystemService(Activity.INPUT_METHOD_SERVICE);
+        inputMethodManager.hideSoftInputFromWindow(view.getWindowToken(), 0);
+    }
+
+    @Override
+    public void onDestroyView() {
+        categoriesFilter.removeTextChangedListener(textWatcher);
+        super.onDestroyView();
+    }
+
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
@@ -136,12 +164,6 @@ public class CategorizationFragment extends DaggerFragment {
                 return false;
             });
         }
-    }
-
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        databaseClient.release();
     }
 
     @Override
@@ -179,7 +201,6 @@ public class CategorizationFragment extends DaggerFragment {
         setHasOptionsMenu(true);
         onCategoriesSaveHandler = (OnCategoriesSaveHandler) getActivity();
         getActivity().setTitle(R.string.categories_activity_title);
-        databaseClient = getActivity().getContentResolver().acquireContentProviderClient(AUTHORITY);
     }
 
     private void updateCategoryList(String filter) {
@@ -205,7 +226,7 @@ public class CategorizationFragment extends DaggerFragment {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
                         s -> categoriesAdapter.add(s),
-                         Timber::e,
+                        Timber::e,
                         () -> {
                             categoriesAdapter.notifyDataSetChanged();
                             categoriesSearchInProgress.setVisibility(View.GONE);
@@ -240,9 +261,34 @@ public class CategorizationFragment extends DaggerFragment {
     }
 
     private Observable<CategoryItem> defaultCategories() {
-        return gpsCategories()
-                .concatWith(titleCategories())
-                .concatWith(recentCategories());
+
+        Observable<CategoryItem> directCat = directCategories();
+        if (hasDirectCategories) {
+            Timber.d("Image has direct Cat");
+            return directCat
+                    .concatWith(gpsCategories())
+                    .concatWith(titleCategories())
+                    .concatWith(recentCategories());
+        }
+        else {
+            Timber.d("Image has no direct Cat");
+            return gpsCategories()
+                    .concatWith(titleCategories())
+                    .concatWith(recentCategories());
+        }
+    }
+
+    private Observable<CategoryItem> directCategories() {
+        String directCategory = directPrefs.getString("Category", "");
+        List<String> categoryList = new ArrayList<>();
+        Timber.d("Direct category found: " + directCategory);
+
+        if (!directCategory.equals("")) {
+            hasDirectCategories = true;
+            categoryList.add(directCategory);
+            Timber.d("DirectCat does not equal emptyString. Direct Cat list has " + categoryList);
+        }
+        return Observable.fromIterable(categoryList).map(name -> new CategoryItem(name, false));
     }
 
     private Observable<CategoryItem> gpsCategories() {
@@ -262,7 +308,7 @@ public class CategorizationFragment extends DaggerFragment {
     }
 
     private Observable<CategoryItem> recentCategories() {
-        return Observable.fromIterable(new CategoryDao(databaseClient).recentCategories(SEARCH_CATS_LIMIT))
+        return Observable.fromIterable(categoryDao.recentCategories(SEARCH_CATS_LIMIT))
                 .map(s -> new CategoryItem(s, false));
     }
 
@@ -308,12 +354,13 @@ public class CategorizationFragment extends DaggerFragment {
         //Check if item contains a 4-digit word anywhere within the string (.* is wildcard)
         //And that item does not equal the current year or previous year
         //And if it is an irrelevant category such as Media_needing_categories_as_of_16_June_2017(Issue #750)
+        //Check if the year in the form of XX(X)0s is relevant, i.e. in the 2000s or 2010s as stated in Issue #1029
         return ((item.matches(".*(19|20)\\d{2}.*") && !item.contains(yearInString) && !item.contains(prevYearInString))
-                || item.matches("(.*)needing(.*)") || item.matches("(.*)taken on(.*)"));
+                || item.matches("(.*)needing(.*)") || item.matches("(.*)taken on(.*)")
+                || (item.matches(".*0s.*") && !item.matches(".*(200|201)0s.*")));
     }
 
     private void updateCategoryCount(CategoryItem item) {
-        CategoryDao categoryDao = new CategoryDao(databaseClient);
         Category category = categoryDao.find(item.getName());
 
         // Newly used category...
@@ -360,5 +407,22 @@ public class CategorizationFragment extends DaggerFragment {
                 })
                 .create()
                 .show();
+    }
+
+    private class TitleTextWatcher implements TextWatcher {
+        @Override
+        public void beforeTextChanged(CharSequence charSequence, int i, int i2, int i3) {
+        }
+
+        @Override
+        public void onTextChanged(CharSequence charSequence, int i, int i2, int i3) {
+        }
+
+        @Override
+        public void afterTextChanged(Editable editable) {
+            if (getActivity() != null) {
+                getActivity().invalidateOptionsMenu();
+            }
+        }
     }
 }

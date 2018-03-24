@@ -8,47 +8,85 @@ import android.net.Uri;
 import android.os.RemoteException;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
+import android.util.Log;
 
 import java.util.Date;
 
+import javax.inject.Inject;
+import javax.inject.Named;
+import javax.inject.Provider;
+
 import fr.free.nrw.commons.settings.Prefs;
 
+import static fr.free.nrw.commons.contributions.ContributionDao.Table.ALL_FIELDS;
 import static fr.free.nrw.commons.contributions.ContributionsContentProvider.BASE_URI;
 import static fr.free.nrw.commons.contributions.ContributionsContentProvider.uriForId;
 
 public class ContributionDao {
-    private final ContentProviderClient client;
+    /*
+        This sorts in the following order:
+        Currently Uploading
+        Failed (Sorted in ascending order of time added - FIFO)
+        Queued to Upload (Sorted in ascending order of time added - FIFO)
+        Completed (Sorted in descending order of time added)
 
-    public ContributionDao(ContentProviderClient client) {
-        this.client = client;
+        This is why Contribution.STATE_COMPLETED is -1.
+     */
+    static final String CONTRIBUTION_SORT = Table.COLUMN_STATE + " DESC, "
+            + Table.COLUMN_UPLOADED + " DESC , ("
+            + Table.COLUMN_TIMESTAMP + " * "
+            + Table.COLUMN_STATE + ")";
+
+    private final Provider<ContentProviderClient> clientProvider;
+
+    @Inject
+    public ContributionDao(@Named("contribution") Provider<ContentProviderClient> clientProvider) {
+        this.clientProvider = clientProvider;
+    }
+
+    Cursor loadAllContributions() {
+        ContentProviderClient db = clientProvider.get();
+        try {
+            return db.query(BASE_URI, ALL_FIELDS, "", null, CONTRIBUTION_SORT);
+        } catch (RemoteException e) {
+            return null;
+        } finally {
+            db.release();
+        }
     }
 
     public void save(Contribution contribution) {
+        ContentProviderClient db = clientProvider.get();
         try {
             if (contribution.getContentUri() == null) {
-                contribution.setContentUri(client.insert(BASE_URI, toContentValues(contribution)));
+                contribution.setContentUri(db.insert(BASE_URI, toContentValues(contribution)));
             } else {
-                client.update(contribution.getContentUri(), toContentValues(contribution), null, null);
+                db.update(contribution.getContentUri(), toContentValues(contribution), null, null);
             }
         } catch (RemoteException e) {
             throw new RuntimeException(e);
+        } finally {
+            db.release();
         }
     }
 
     public void delete(Contribution contribution) {
+        ContentProviderClient db = clientProvider.get();
         try {
             if (contribution.getContentUri() == null) {
                 // noooo
                 throw new RuntimeException("tried to delete item with no content URI");
             } else {
-                client.delete(contribution.getContentUri(), null, null);
+                db.delete(contribution.getContentUri(), null, null);
             }
         } catch (RemoteException e) {
             throw new RuntimeException(e);
+        } finally {
+            db.release();
         }
     }
 
-    public static ContentValues toContentValues(Contribution contribution) {
+    ContentValues toContentValues(Contribution contribution) {
         ContentValues cv = new ContentValues();
         cv.put(Table.COLUMN_FILENAME, contribution.getFilename());
         if (contribution.getLocalUri() != null) {
@@ -74,27 +112,34 @@ public class ContributionDao {
         return cv;
     }
 
-    public static Contribution fromCursor(Cursor cursor) {
+    public Contribution fromCursor(Cursor cursor) {
         // Hardcoding column positions!
         //Check that cursor has a value to avoid CursorIndexOutOfBoundsException
         if (cursor.getCount() > 0) {
+            int index;
+            if (cursor.getColumnIndex(Table.COLUMN_LICENSE) == -1){
+                index = 15;
+            } else {
+                index = cursor.getColumnIndex(Table.COLUMN_LICENSE);
+            }
             return new Contribution(
-                    uriForId(cursor.getInt(0)),
-                    cursor.getString(1),
-                    parseUri(cursor.getString(2)),
-                    cursor.getString(3),
-                    parseTimestamp(cursor.getLong(4)),
-                    cursor.getInt(5),
-                    cursor.getLong(6),
-                    parseTimestamp(cursor.getLong(7)),
-                    cursor.getLong(8),
-                    cursor.getString(9),
-                    cursor.getString(10),
-                    cursor.getString(11),
-                    cursor.getInt(12) == 1,
-                    cursor.getInt(13),
-                    cursor.getInt(14),
-                    cursor.getString(15));
+                    uriForId(cursor.getInt(cursor.getColumnIndex(Table.COLUMN_ID))),
+                    cursor.getString(cursor.getColumnIndex(Table.COLUMN_FILENAME)),
+                    parseUri(cursor.getString(cursor.getColumnIndex(Table.COLUMN_LOCAL_URI))),
+                    cursor.getString(cursor.getColumnIndex(Table.COLUMN_IMAGE_URL)),
+                    parseTimestamp(cursor.getLong(cursor.getColumnIndex(Table.COLUMN_TIMESTAMP))),
+                    cursor.getInt(cursor.getColumnIndex(Table.COLUMN_STATE)),
+                    cursor.getLong(cursor.getColumnIndex(Table.COLUMN_LENGTH)),
+                    parseTimestamp(cursor.getLong(cursor.getColumnIndex(Table.COLUMN_UPLOADED))),
+                    cursor.getLong(cursor.getColumnIndex(Table.COLUMN_TRANSFERRED)),
+                    cursor.getString(cursor.getColumnIndex(Table.COLUMN_SOURCE)),
+                    cursor.getString(cursor.getColumnIndex(Table.COLUMN_DESCRIPTION)),
+                    cursor.getString(cursor.getColumnIndex(Table.COLUMN_CREATOR)),
+                    cursor.getInt(cursor.getColumnIndex(Table.COLUMN_MULTIPLE)) == 1,
+                    cursor.getInt(cursor.getColumnIndex(Table.COLUMN_WIDTH)),
+                    cursor.getInt(cursor.getColumnIndex(Table.COLUMN_HEIGHT)),
+                    cursor.getString(index)
+            );
         }
 
         return null;

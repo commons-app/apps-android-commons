@@ -1,10 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+  <string name="preference_category_appearance">Aparência</string>
+  <string name="preference_category_general">Geral</string>
+  <string name="preference_category_feedback">Comentário</string>
+  <string name="preference_category_location">Localização</string>
   <string name="app_name">Commons</string>
+  <string name="bullet">•</string>
   <string name="menu_settings">Configurações</string>
   <string name="username">Nome de usuário</string>
   <string name="password">Senha</string>
+  <string name="login_credential">Entre com a sua conta do Commons Beta</string>
   <string name="login">Autenticar-se</string>
+  <string name="forgot_password">Esqueceu a senha?</string>
   <string name="signup">Cadastre-se</string>
   <string name="logging_in_title">Efetuar login</string>
   <string name="logging_in_message">Aguarde…</string>
@@ -22,7 +29,7 @@
   <string name="upload_failed_notification_subtitle">Toque para ver</string>
   <plurals name="uploads_pending_notification_indicator">
     <item quantity="one">carregando arquivo</item>
-    <item quantity="other">carregando %d arquivos</item>
+    <item quantity="other">carregando %1$d arquivos</item>
   </plurals>
   <string name="title_activity_contributions">Meus envios recentes</string>
   <string name="contribution_state_queued">Na fila</string>
@@ -36,6 +43,7 @@
   <string name="menu_share">Compartilhar</string>
   <string name="menu_open_in_browser">Ver no navegador</string>
   <string name="share_title_hint">Título</string>
+  <string name="add_title_toast">Forneça um título para este arquivo</string>
   <string name="share_description_hint">Descrição</string>
   <string name="login_failed_network">Erro ao efetuar o login - falha na rede</string>
   <string name="login_failed_username">Erro ao efetuar o login - confira seu nome de usuário</string>
@@ -56,16 +64,16 @@
   <string name="contributions_subtitle_zero">Ainda não carregado</string>
   <plurals name="contributions_subtitle">
     <item quantity="zero">\@string/contributions_subtitle_zero</item>
-    <item quantity="one">%d envio</item>
-    <item quantity="other">%d envios</item>
+    <item quantity="one">%1$d envio</item>
+    <item quantity="other">%1$d envios</item>
   </plurals>
   <plurals name="starting_multiple_uploads">
-    <item quantity="one">Iniciando 1 carregamento</item>
-    <item quantity="other">Iniciando %d carregamentos</item>
+    <item quantity="one">Iniciando %1$d carregamento</item>
+    <item quantity="other">Iniciando %1$d carregamentos</item>
   </plurals>
   <plurals name="multiple_uploads_title">
-    <item quantity="one">1 carregamento</item>
-    <item quantity="other">%d carregamentos</item>
+    <item quantity="one">%1$d carregamento</item>
+    <item quantity="other">%1$d carregamentos</item>
   </plurals>
   <string name="categories_not_found">Nenhuma categoria correspondente %1$s encontrada</string>
   <string name="categories_skip_explanation">Adicione categorias para fazer suas imagens mais vistas no Wikimedia Commons. \n\nComece a digitar para adicionar categorias.\nAperte nesta mensagem (ou aperte para voltar) para pular este passo</string>
@@ -74,9 +82,9 @@
   <string name="title_activity_signup">Criar conta</string>
   <string name="menu_about">Sobre</string>
   <string name="about_license">O Wikimedia Commons é um aplicativo de código aberto criado e mantido por beneficiários e voluntários da comunidade Wikimedia. A Wikimedia Foundation não está envolvida na criação, desenvolvimento ou manutenção do aplicativo.</string>
-  <string name="about_improve">&lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;Fonte&lt;/a&gt; e &lt;a href=\"https://commons-app.github.io/\"&gt;site&lt;/a&gt; em GitHub. Crie um novo &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;GitHub issue&lt;/a&gt; para relatórios de bugs e sugestões.</string>
-  <string name="about_privacy_policy">&lt;a href=\"https://github.com/commons-app/apps-android-commons/wiki/Privacy-policy\"&gt;Política de privacidade&lt;/a&gt;</string>
-  <string name="about_credits">&lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/CREDITS\"&gt;Créditos&lt;/a&gt;</string>
+  <string name="about_improve">Criar uma nova &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;publicação no GitHub&lt;/a&gt; para informar erros e sugestões.</string>
+  <string name="about_privacy_policy">&lt;u&gt;Política de Privacidade&lt;/u&gt;</string>
+  <string name="about_credits">&lt;u&gt;Créditos&lt;/u&gt;</string>
   <string name="title_activity_about">Sobre</string>
   <string name="menu_feedback">Enviar comentários (por e-mail)</string>
   <string name="no_email_client">Nenhum cliente de e-mail instalado</string>
@@ -88,7 +96,7 @@
   <string name="share_license_summary">Essa imagem será licenciada sob %1$s</string>
   <string name="media_upload_policy">Ao enviar esta imagem, declaro que este é o meu próprio trabalho, que não contém material protegido ou selfies, e, de outra forma, adere a &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines\"&gt;Políticas do Wikimedia Commons&lt;/a&gt;.</string>
   <string name="menu_download">Download</string>
-  <string name="preference_license">Licença</string>
+  <string name="preference_license">Licença padrão</string>
   <string name="use_previous">Usar o título/descrição anterior</string>
   <string name="allow_gps">Obter automaticamente a localização atual</string>
   <string name="allow_gps_summary">Recuperar o local atual para oferecer sugestões de categoria se a imagem não tiver geo-tagged</string>
@@ -117,11 +125,20 @@
   <string name="tutorial_1_text">Wikimedia Commons hospeda a maioria das imagens que são usadas na Wikipedia</string>
   <string name="tutorial_1_subtext">Suas imagens ajudam a educar as pessoas ao redor do mundo!</string>
   <string name="tutorial_2_text">Carregue as fotografias tiradas ou criadas inteiramente por você:</string>
-  <string name="tutorial_2_subtext">- Objetos naturais (flores, animais, montanhas)\n- Objetos úteis (bicicletas, estações de trem)\n- Pessoas famosas (seu prefeito, atletas olímpicos que você conheceu)</string>
+  <string name="tutorial_2_subtext">• Objetos naturais (flores, animais, montanhas)\n• Objetos úteis (bicicletas, estações de trem)\n• Pessoas famosas (seu prefeito, atletas olímpicos que você conheceu)</string>
+  <string name="tutorial_2_subtext_1">Objetos naturais (flores, animais, montanhas)</string>
+  <string name="tutorial_2_subtext_2">Objetos úteis (bicicletas, estações de trem)</string>
+  <string name="tutorial_2_subtext_3">Pessoas famosas (seu prefeito, atletas olímpicos que conheceu)</string>
   <string name="tutorial_3_text">Por favor NÃO carregue:</string>
   <string name="tutorial_3_subtext">- Selfies ou fotos de seus amigos\n- Imagens que você baixou da Internet\n- Imagens de aplicativos proprietários</string>
+  <string name="tutorial_3_subtext_1">Autorretratos ou fotos de seus amigos</string>
+  <string name="tutorial_3_subtext_2">Imagens que você baixou da Internet</string>
+  <string name="tutorial_3_subtext_3">Capturas de tela de aplicativos proprietários</string>
   <string name="tutorial_4_text">Exemplo de upload:</string>
   <string name="tutorial_4_subtext">- Título: Ópera de Sydney\n- Descrição: Ópera de Sydney como visto de toda a baía\n- =Categorias: =Ópera de Sydney, =Ópera de Sydney a partir do oeste, Ópera de Sydney vistas remotas</string>
+  <string name="tutorial_4_subtext_1">Título: Ópera de Sydney</string>
+  <string name="tutorial_4_subtext_2">Descrição: Ópera de Sydney como visto do outro lado da baía</string>
+  <string name="tutorial_4_subtext_3">Categorias: Teatro da Ópera de Sydney a partir do oeste, visões remotas da Ópera de Sydney</string>
   <string name="welcome_wikipedia_text">Contribua com suas imagens. Ajude artigos da Wikipédia a ganharem vida!</string>
   <string name="welcome_wikipedia_subtext">Imagens na Wikipédia vem do Wikimedia Commons.</string>
   <string name="welcome_copyright_text">Suas imagens ajudam a educar pessoas pelo mundo.</string>
@@ -154,8 +171,6 @@
   <string name="media_detail_coordinates_empty">Nenhum fornecido</string>
   <string name="become_a_tester_title">Seja um Testador Beta</string>
   <string name="become_a_tester_description">Entre no nosso canal beta no Google Play e receba acesso prévio a novos recursos e correções de erros</string>
-  <string name="use_wikidata">Usa Wikidata</string>
-  <string name="use_wikidata_summary">(Aviso: desabilitar isso pode causar grande consumo de dados móveis)</string>
   <string name="_2fa_code">Código 2FA</string>
   <string name="number_of_uploads">Meu limite de upload recente</string>
   <string name="maximum_limit">Limite máximo</string>
@@ -164,6 +179,9 @@
   <string name="login_failed_2fa_not_supported">Dois fatores de autenticação não são suportados.</string>
   <string name="logout_verification">Quer realmente sair ?</string>
   <string name="commons_logo">Logotipo do Commons</string>
+  <string name="commons_website">Site do Commons</string>
+  <string name="commons_facebook">Página do Commons no Facebook</string>
+  <string name="commons_github">Código fonte do Commons no Github</string>
   <string name="background_image">Imagem de fundo</string>
   <string name="mediaimage_failed">Falha na imagem de mídia</string>
   <string name="no_image_found">Nenhuma imagem encontrada</string>
@@ -196,15 +214,28 @@
   <string name="error_while_cache">Erro durante o cache de imagens</string>
   <string name="title_info">Um título descritivo exclusivo para o arquivo, que servirá como um nome de arquivo. Você pode usar linguagem simples com espaços. Não inclua a extensão do arquivo</string>
   <string name="description_info">Por favor, descreva a mídia tanto quanto possível: onde foi tomada? O que isso mostra? Qual é o contexto? Descreva os objetos ou pessoas. Revelar informações que não podem ser facilmente adivinhadas, por exemplo, a hora do dia, se for uma paisagem. Se a mídia mostrar algo incomum, explique o que torna incomum.</string>
+  <string name="upload_image_too_dark">Esta foto está muito escura, você tem certeza de que deseja enviá-la? O Wikimedia Commons é apenas para imagens com valor enciclopédico.</string>
+  <string name="upload_image_blurry">Esta foto está embaçada, tem certeza de que deseja enviá-la? O Wikimedia Commons é apenas para imagens com valor enciclopédico.</string>
   <string name="give_permission">Dar permissão</string>
   <string name="use_external_storage">Usar o armazenamento externo</string>
   <string name="use_external_storage_summary">Salvar as fotos tiradas com a câmera no aplicativo no seu dispositivo</string>
+  <string name="login_to_your_account">Faça login na sua conta</string>
   <string name="send_log_file">Enviar arquivo de registro</string>
   <string name="send_log_file_description">Enviar arquivo de log para desenvolvedores por e-mail</string>
-  <string name="login_to_your_account">Faça login na sua conta</string>
+  <string name="no_web_browser">Nenhum navegador da Web foi encontrado para abrir o URL</string>
+  <string name="null_url">Erro! URL não encontrado</string>
+  <string name="nominate_deletion">Nomear para a exclusão</string>
+  <string name="view_browser">Exibir no navegador</string>
   <string name="nearby_location_has_not_changed">O local não mudou.</string>
   <string name="nearby_location_not_available">Localização não disponível.</string>
   <string name="location_permission_rationale_nearby">Permissão necessária para exibir uma lista de locais próximos</string>
   <string name="get_directions">OBTER DIREÇÕES</string>
   <string name="read_article">LER ARTIGO</string>
+  <string name="notifications_welcome">Bem-vindo ao Wikimedia Commons, %1$s! É um prazer tê-lo aqui.</string>
+  <string name="notifications_talk_page_message">%1$s deixou uma mensagem na sua página de discussão</string>
+  <string name="notifications_thank_you_edit">Obrigado por ter realizado uma edição</string>
+  <string name="notifications_mention">%1$s fez menção a você em %2$s.</string>
+  <string name="toggle_view_button">Visualização de alternância</string>
+  <string name="about_faq">Perguntas mais frequentes</string>
+  <string name="welcome_skip_button">Pular tutoril</string>
 </resources>

@@ -1,5 +1,7 @@
 package fr.free.nrw.commons.mwapi;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -21,6 +23,8 @@ import org.apache.http.params.CoreProtocolPNames;
 import org.apache.http.util.EntityUtils;
 import org.mediawiki.api.ApiResult;
 import org.mediawiki.api.MWApi;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -36,10 +40,16 @@ import java.util.concurrent.Callable;
 
 import fr.free.nrw.commons.BuildConfig;
 import fr.free.nrw.commons.PageTitle;
+import fr.free.nrw.commons.notification.Notification;
 import in.yuvi.http.fluent.Http;
 import io.reactivex.Observable;
 import io.reactivex.Single;
 import timber.log.Timber;
+
+import static fr.free.nrw.commons.notification.NotificationType.UNKNOWN;
+import static fr.free.nrw.commons.notification.NotificationUtils.getNotificationFromApiResult;
+import static fr.free.nrw.commons.notification.NotificationUtils.getNotificationType;
+import static fr.free.nrw.commons.notification.NotificationUtils.isCommonsNotification;
 
 /**
  * @author Addshore
@@ -50,17 +60,27 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
     private static final String THUMB_SIZE = "640";
     private AbstractHttpClient httpClient;
     private MWApi api;
+    private Context context;
+    private SharedPreferences sharedPreferences;
 
-    public ApacheHttpClientMediaWikiApi(String apiURL) {
+    public ApacheHttpClientMediaWikiApi(Context context, String apiURL, SharedPreferences sharedPreferences) {
+        this.context = context;
         BasicHttpParams params = new BasicHttpParams();
         SchemeRegistry schemeRegistry = new SchemeRegistry();
         schemeRegistry.register(new Scheme("http", PlainSocketFactory.getSocketFactory(), 80));
         final SSLSocketFactory sslSocketFactory = SSLSocketFactory.getSocketFactory();
         schemeRegistry.register(new Scheme("https", sslSocketFactory, 443));
         ClientConnectionManager cm = new ThreadSafeClientConnManager(params, schemeRegistry);
-        params.setParameter(CoreProtocolPNames.USER_AGENT, "Commons/" + BuildConfig.VERSION_NAME + " (https://mediawiki.org/wiki/Apps/Commons) Android/" + Build.VERSION.RELEASE);
+        params.setParameter(CoreProtocolPNames.USER_AGENT, getUserAgent());
         httpClient = new DefaultHttpClient(cm, params);
         api = new MWApi(apiURL, httpClient);
+        this.sharedPreferences = sharedPreferences;
+    }
+
+    @Override
+    @NonNull
+    public String getUserAgent() {
+        return "Commons/" + BuildConfig.VERSION_NAME + " (https://mediawiki.org/wiki/Apps/Commons) Android/" + Build.VERSION.RELEASE;
     }
 
     @VisibleForTesting
@@ -75,11 +95,13 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
      * @throws IOException On api request IO issue
      */
     public String login(String username, String password) throws IOException {
+        String loginToken = getLoginToken();
+        Timber.d("Login token is %s", loginToken);
         return getErrorCodeToReturn(api.action("clientlogin")
                 .param("rememberMe", "1")
                 .param("username", username)
                 .param("password", password)
-                .param("logintoken", getLoginToken())
+                .param("logintoken", loginToken)
                 .param("loginreturnurl", "https://commons.wikimedia.org")
                 .post());
     }
@@ -92,12 +114,14 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
      * @throws IOException On api request IO issue
      */
     public String login(String username, String password, String twoFactorCode) throws IOException {
+        String loginToken = getLoginToken();
+        Timber.d("Login token is %s", loginToken);
         return getErrorCodeToReturn(api.action("clientlogin")
-                .param("rememberMe", "1")
+                .param("rememberMe", "true")
                 .param("username", username)
                 .param("password", password)
-                .param("logintoken", getLoginToken())
-                .param("logincontinue", "1")
+                .param("logintoken", loginToken)
+                .param("logincontinue", "true")
                 .param("OATHToken", twoFactorCode)
                 .post());
     }
@@ -122,19 +146,34 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
         String status = loginApiResult.getString("/api/clientlogin/@status");
         if (status.equals("PASS")) {
             api.isLoggedIn = true;
+            setAuthCookieOnLogin(true);
             return status;
         } else if (status.equals("FAIL")) {
+            setAuthCookieOnLogin(false);
             return loginApiResult.getString("/api/clientlogin/@messagecode");
         } else if (
                 status.equals("UI")
                         && loginApiResult.getString("/api/clientlogin/requests/_v/@id").equals("TOTPAuthenticationRequest")
                         && loginApiResult.getString("/api/clientlogin/requests/_v/@provider").equals("Two-factor authentication (OATH).")
                 ) {
+            setAuthCookieOnLogin(false);
             return "2FA";
         }
 
         // UI, REDIRECT, RESTART
         return "genericerror-" + status;
+    }
+
+    private void setAuthCookieOnLogin(boolean isLoggedIn) {
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        if (isLoggedIn) {
+            editor.putBoolean("isUserLoggedIn", true);
+            editor.putString("getAuthCookie", api.getAuthCookie());
+        } else {
+            editor.putBoolean("isUserLoggedIn", false);
+            editor.remove("getAuthCookie");
+        }
+        editor.apply();
     }
 
     @Override
@@ -167,12 +206,45 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
     }
 
     @Override
+    public boolean pageExists(String pageName) throws IOException {
+        return Double.parseDouble( api.action("query")
+                .param("titles", pageName)
+                .get()
+                .getString("/api/query/pages/page/@_idx")) != -1;
+    }
+
+    @Override
     @Nullable
     public String edit(String editToken, String processedPageContent, String filename, String summary) throws IOException {
         return api.action("edit")
                 .param("title", filename)
                 .param("token", editToken)
                 .param("text", processedPageContent)
+                .param("summary", summary)
+                .post()
+                .getString("/api/edit/@result");
+    }
+
+
+    @Override
+    @Nullable
+    public String appendEdit(String editToken, String processedPageContent, String filename, String summary) throws IOException {
+        return api.action("edit")
+                .param("title", filename)
+                .param("token", editToken)
+                .param("appendtext", processedPageContent)
+                .param("summary", summary)
+                .post()
+                .getString("/api/edit/@result");
+    }
+
+    @Override
+    @Nullable
+    public String prependEdit(String editToken, String processedPageContent, String filename, String summary) throws IOException {
+        return api.action("edit")
+                .param("title", filename)
+                .param("token", editToken)
+                .param("prependtext", processedPageContent)
                 .param("summary", summary)
                 .post()
                 .getString("/api/edit/@result");
@@ -352,6 +424,42 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
                 .get()
                 .getString("/api/query/pages/page/revisions/rev");
     }
+
+    @Override
+    @NonNull
+    public List<Notification> getNotifications() {
+        ApiResult notificationNode = null;
+        try {
+            notificationNode = api.action("query")
+                    .param("notprop", "list")
+                    .param("format", "xml")
+                    .param("meta", "notifications")
+                    .param("notfilter", "!read")
+                    .get()
+                    .getNode("/api/query/notifications/list");
+        } catch (IOException e) {
+            Timber.e("Failed to obtain searchCategories", e);
+        }
+
+        if (notificationNode == null) {
+            return new ArrayList<>();
+        }
+
+        List<Notification> notifications = new ArrayList<>();
+
+        NodeList childNodes = notificationNode.getDocument().getChildNodes();
+
+        for (int i = 0; i < childNodes.getLength(); i++) {
+            Node node = childNodes.item(i);
+            if (isCommonsNotification(node)
+                    && !getNotificationType(node).equals(UNKNOWN)) {
+                notifications.add(getNotificationFromApiResult(context, node));
+            }
+        }
+
+        return notifications;
+    }
+
 
     @Override
     public boolean existingFile(String fileSha1) throws IOException {

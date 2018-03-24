@@ -1,6 +1,7 @@
 package fr.free.nrw.commons.location;
 
 import android.location.Location;
+import android.net.Uri;
 import android.support.annotation.NonNull;
 
 /**
@@ -11,15 +12,15 @@ public class LatLng {
     private final double latitude;
     private final double longitude;
     private final float accuracy;
-    
+
     /**
      * Accepts latitude and longitude.
      * North and South values are cut off at 90°
-     * 
+     *
      * @param latitude the latitude
      * @param longitude the longitude
      * @param accuracy the accuracy
-     * 
+     *
      * Examples:
      * the Statue of Liberty is located at 40.69° N, 74.04° W
      * The Statue of Liberty could be constructed as LatLng(40.69, -74.04, 1.0)
@@ -38,23 +39,22 @@ public class LatLng {
     /**
      * gets the latitude and longitude of a given non-null location
      * @param location the non-null location of the user
-     * @return
+     * @return LatLng the Latitude and Longitude of a given location
      */
     public static LatLng from(@NonNull Location location) {
         return new LatLng(location.getLatitude(), location.getLongitude(), location.getAccuracy());
     }
-    
+
     /**
      * creates a hash code for the longitude and longitude
      */
     public int hashCode() {
-        boolean var1 = true;
-        byte var2 = 1;
-        long var3 = Double.doubleToLongBits(this.latitude);
-        int var5 = 31 * var2 + (int)(var3 ^ var3 >>> 32);
-        var3 = Double.doubleToLongBits(this.longitude);
-        var5 = 31 * var5 + (int)(var3 ^ var3 >>> 32);
-        return var5;
+        byte var1 = 1;
+        long var2 = Double.doubleToLongBits(this.latitude);
+        int var3 = 31 * var1 + (int)(var2 ^ var2 >>> 32);
+        var2 = Double.doubleToLongBits(this.longitude);
+        var3 = 31 * var3 + (int)(var2 ^ var2 >>> 32);
+        return var3;
     }
 
     /**
@@ -154,4 +154,9 @@ public class LatLng {
     public double getLatitude() {
         return latitude;
     }
+
+    public Uri getGmmIntentUri() {
+        return Uri.parse("geo:0,0?q=" + latitude + "," + longitude);
+    }
 }
+

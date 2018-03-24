@@ -1,6 +1,5 @@
 package fr.free.nrw.commons.category;
 
-import android.content.ContentProvider;
 import android.content.ContentValues;
 import android.content.UriMatcher;
 import android.database.Cursor;
@@ -12,16 +11,16 @@ import android.text.TextUtils;
 
 import javax.inject.Inject;
 
-import dagger.android.AndroidInjection;
 import fr.free.nrw.commons.data.DBOpenHelper;
+import fr.free.nrw.commons.di.CommonsDaggerContentProvider;
 import timber.log.Timber;
 
 import static android.content.UriMatcher.NO_MATCH;
-import static fr.free.nrw.commons.data.CategoryDao.Table.ALL_FIELDS;
-import static fr.free.nrw.commons.data.CategoryDao.Table.COLUMN_ID;
-import static fr.free.nrw.commons.data.CategoryDao.Table.TABLE_NAME;
+import static fr.free.nrw.commons.category.CategoryDao.Table.ALL_FIELDS;
+import static fr.free.nrw.commons.category.CategoryDao.Table.COLUMN_ID;
+import static fr.free.nrw.commons.category.CategoryDao.Table.TABLE_NAME;
 
-public class CategoryContentProvider extends ContentProvider {
+public class CategoryContentProvider extends CommonsDaggerContentProvider {
 
     public static final String AUTHORITY = "fr.free.nrw.commons.categories.contentprovider";
     // For URI matcher
@@ -43,12 +42,6 @@ public class CategoryContentProvider extends ContentProvider {
     }
 
     @Inject DBOpenHelper dbOpenHelper;
-
-    @Override
-    public boolean onCreate() {
-        AndroidInjection.inject(this);
-        return false;
-    }
 
     @SuppressWarnings("ConstantConditions")
     @Override

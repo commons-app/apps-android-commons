@@ -1,11 +1,13 @@
 package fr.free.nrw.commons.notification;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.borjabravo.readmoretextview.ReadMoreTextView;
 import com.pedrogomez.renderers.Renderer;
 
 import butterknife.BindView;
@@ -17,8 +19,8 @@ import fr.free.nrw.commons.R;
  */
 
 public class NotificationRenderer extends Renderer<Notification> {
-    @BindView(R.id.title) TextView title;
-    @BindView(R.id.description) TextView description;
+    @BindView(R.id.title) ReadMoreTextView title;
+    @BindView(R.id.description) ReadMoreTextView description;
     @BindView(R.id.time) TextView time;
     @BindView(R.id.icon) ImageView icon;
     private NotificationClicked listener;
@@ -45,23 +47,21 @@ public class NotificationRenderer extends Renderer<Notification> {
 
     @Override
     public void render() {
-            Notification notification = getContent();
-            title.setText(notification.notificationText);
-            time.setText("3d");
-            description.setText("Example notification description");
-            switch (notification.notificationType) {
-                case edit:
-                    icon.setImageResource(R.drawable.ic_edit_black_24dp);
-                    break;
-                case message:
-                    icon.setImageResource(R.drawable.ic_message_black_24dp);
-                    break;
-                case mention:
-                    icon.setImageResource(R.drawable.ic_chat_bubble_black_24px);
-                    break;
-                default:
-                    icon.setImageResource(R.drawable.round_icon_unknown);
-            }
+        Notification notification = getContent();
+        StringBuilder str = new StringBuilder(notification.notificationText);
+        str.append(" " );
+        title.setText(str);
+        time.setText(notification.date);
+        StringBuilder desc = new StringBuilder(notification.description);
+        desc.append(" ");
+        description.setText(desc);
+        switch (notification.notificationType) {
+            case THANK_YOU_EDIT:
+                icon.setImageResource(R.drawable.ic_edit_black_24dp);
+                break;
+            default:
+                icon.setImageResource(R.drawable.round_icon_unknown);
+        }
     }
 
     public interface NotificationClicked{

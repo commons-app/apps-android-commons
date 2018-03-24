@@ -31,10 +31,13 @@ import static fr.free.nrw.commons.contributions.Contribution.SOURCE_CAMERA;
 import static fr.free.nrw.commons.contributions.Contribution.SOURCE_GALLERY;
 import static fr.free.nrw.commons.contributions.Contribution.STATE_COMPLETED;
 import static fr.free.nrw.commons.contributions.Contribution.STATE_QUEUED;
-import static fr.free.nrw.commons.contributions.ContributionDao.*;
+import static fr.free.nrw.commons.contributions.ContributionDao.Table;
 import static fr.free.nrw.commons.contributions.ContributionsContentProvider.BASE_URI;
 import static fr.free.nrw.commons.contributions.ContributionsContentProvider.uriForId;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.eq;
 import static org.mockito.Matchers.isA;
@@ -49,22 +52,22 @@ public class ContributionDaoTest {
 
     private static final String LOCAL_URI = "http://example.com/";
     @Mock
-    ContentProviderClient client;
+    private ContentProviderClient client;
     @Mock
-    SQLiteDatabase database;
+    private SQLiteDatabase database;
     @Captor
-    ArgumentCaptor<ContentValues> captor;
+    private ArgumentCaptor<ContentValues> captor;
 
     private Uri contentUri;
     private ContributionDao testObject;
 
     @Before
-    public void setUp() throws Exception {
+    public void setUp() {
         MockitoAnnotations.initMocks(this);
 
         contentUri = uriForId(111);
 
-        testObject = new ContributionDao(client);
+        testObject = new ContributionDao(() -> client);
     }
 
     @Test
@@ -288,7 +291,7 @@ public class ContributionDaoTest {
         long uploaded = 456L;
         MatrixCursor mc = createCursor(created, uploaded, false, LOCAL_URI);
 
-        Contribution c = ContributionDao.fromCursor(mc);
+        Contribution c = testObject.fromCursor(mc);
 
         assertEquals(uriForId(111), c.getContentUri());
         assertEquals("file", c.getFilename());
@@ -312,7 +315,7 @@ public class ContributionDaoTest {
     public void createFromCursor_nullableTimestamps() {
         MatrixCursor mc = createCursor(0L, 0L, false, LOCAL_URI);
 
-        Contribution c = ContributionDao.fromCursor(mc);
+        Contribution c = testObject.fromCursor(mc);
 
         assertNull(c.getTimestamp());
         assertNull(c.getDateCreated());
@@ -323,7 +326,7 @@ public class ContributionDaoTest {
     public void createFromCursor_nullableLocalUri() {
         MatrixCursor mc = createCursor(0L, 0L, false, "");
 
-        Contribution c = ContributionDao.fromCursor(mc);
+        Contribution c = testObject.fromCursor(mc);
 
         assertNull(c.getLocalUri());
         assertNull(c.getDateCreated());
@@ -333,10 +336,10 @@ public class ContributionDaoTest {
     @Test
     public void createFromCursor_booleanEncoding() {
         MatrixCursor mcFalse = createCursor(0L, 0L, false, LOCAL_URI);
-        assertFalse(ContributionDao.fromCursor(mcFalse).getMultiple());
+        assertFalse(testObject.fromCursor(mcFalse).getMultiple());
 
         MatrixCursor mcHammer = createCursor(0L, 0L, true, LOCAL_URI);
-        assertTrue(ContributionDao.fromCursor(mcHammer).getMultiple());
+        assertTrue(testObject.fromCursor(mcHammer).getMultiple());
     }
 
     @NonNull

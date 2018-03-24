@@ -1,14 +1,17 @@
 package fr.free.nrw.commons.upload;
 
+import android.app.Activity;
 import android.content.Context;
 import android.graphics.Point;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.graphics.drawable.VectorDrawableCompat;
+import android.support.v4.app.Fragment;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -27,12 +30,12 @@ import android.widget.TextView;
 import com.facebook.drawee.generic.GenericDraweeHierarchyBuilder;
 import com.facebook.drawee.view.SimpleDraweeView;
 
-import dagger.android.support.DaggerFragment;
+import dagger.android.support.AndroidSupportInjection;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.contributions.Contribution;
 import fr.free.nrw.commons.media.MediaDetailPagerFragment;
 
-public class MultipleUploadListFragment extends DaggerFragment {
+public class MultipleUploadListFragment extends Fragment {
 
     public interface OnMultipleUploadInitiatedHandler {
         void OnMultipleUploadInitiated();
@@ -54,6 +57,12 @@ public class MultipleUploadListFragment extends DaggerFragment {
         private SimpleDraweeView image;
         private TextView title;
         private RelativeLayout overlay;
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        AndroidSupportInjection.inject(this);
+        super.onAttach(context);
     }
 
     private class PhotoDisplayAdapter extends BaseAdapter {
@@ -170,7 +179,19 @@ public class MultipleUploadListFragment extends DaggerFragment {
         photosGrid.setColumnWidth(photoSize.x);
 
         baseTitle.addTextChangedListener(textWatcher);
+
+        baseTitle.setOnFocusChangeListener((v, hasFocus) -> {
+            if (!hasFocus) {
+                hideKeyboard(v);
+            }
+        });
+
         return view;
+    }
+
+    public void hideKeyboard(View view) {
+        InputMethodManager inputMethodManager =(InputMethodManager)getActivity().getSystemService(Activity.INPUT_METHOD_SERVICE);
+        inputMethodManager.hideSoftInputFromWindow(view.getWindowToken(), 0);
     }
 
     @Override

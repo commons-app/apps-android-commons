@@ -21,8 +21,8 @@
   <string name="upload_failed_notification_title">Het uploaden van %1$s is mislukt</string>
   <string name="upload_failed_notification_subtitle">Wijs aan om te bekijken</string>
   <plurals name="uploads_pending_notification_indicator" fuzzy="true">
-    <item quantity="one">%d bestand aan het uploaden</item>
-    <item quantity="other">%d bestanden aan het uploaden</item>
+    <item quantity="one">%1$d bestand aan het uploaden</item>
+    <item quantity="other">%1$d bestanden aan het uploaden</item>
   </plurals>
   <string name="title_activity_contributions" fuzzy="true">Mijn uploads</string>
   <string name="contribution_state_queued">In wachtrij</string>
@@ -54,15 +54,15 @@
   <plurals name="contributions_subtitle" fuzzy="true">
     <item quantity="zero">Nog geen uploads</item>
     <item quantity="one">1 upload</item>
-    <item quantity="other">%d uploads</item>
+    <item quantity="other">%1$d uploads</item>
   </plurals>
   <plurals name="starting_multiple_uploads" fuzzy="true">
     <item quantity="one">Bezig met 1 upload</item>
-    <item quantity="other">Bezig met %d uploads</item>
+    <item quantity="other">Bezig met %1$d uploads</item>
   </plurals>
   <plurals name="multiple_uploads_title" fuzzy="true">
     <item quantity="one">1 upload</item>
-    <item quantity="other">%d uploads</item>
+    <item quantity="other">%1$d uploads</item>
   </plurals>
   <string name="categories_not_found">Er zijn geen categorieën met \"%1$s\" gevonden</string>
   <string name="categories_skip_explanation" fuzzy="true">Voeg categorieën toe om uw afbeeldingen makkelijker te vinden te maken op Wikimedia Commons.\n\nBegin met het toevoegen van categorieën.\n\nKlik op dit bericht, of ga terug, om deze stap over te slaan.</string>
@@ -71,7 +71,7 @@
   <string name="title_activity_signup">Registreren</string>
   <string name="menu_about">Over</string>
   <string name="about_license" fuzzy="true">Opensourcesoftware vrijgegeven onder de &lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/COPYING\"&gt;Apache License v2&lt;/a&gt;. Wikimedia Commons en haar logo zijn handelsmerken van de Wikimedia Foundation en worden gebruikt met toestemming van de Wikimedia Foundation. We worden niet bekrachtigd door en zijn niet verbonden met de Wikimedia Foundation.</string>
-  <string name="about_improve">&lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;Broncode&lt;/a&gt; en &lt;a href=\"https://commons-app.github.io/\"&gt;website&lt;/a&gt; op GitHub. Maak een nieuwe &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;melding op GitHub&lt;/a&gt; voor bugs en suggesties.</string>
+  <string name="about_improve" fuzzy="true">&lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;Broncode&lt;/a&gt; en &lt;a href=\"https://commons-app.github.io/\"&gt;website&lt;/a&gt; op GitHub. Maak een nieuwe &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;melding op GitHub&lt;/a&gt; voor bugs en suggesties.</string>
   <string name="about_privacy_policy" fuzzy="true">&lt;a href=\"https://wikimediafoundation.org/wiki/Privacy_policy\"&gt;Privacybeleid&lt;/a&gt;</string>
   <string name="title_activity_about">Over</string>
   <string name="menu_feedback">Terugkoppeling geven (via e-mail)</string>
@@ -83,7 +83,7 @@
   <string name="menu_cancel_upload">Annuleren</string>
   <string name="share_license_summary">Deze afbeelding wordt gelicenseerd onder %1$s</string>
   <string name="menu_download">Downloaden</string>
-  <string name="preference_license">Licentie</string>
+  <string name="preference_license" fuzzy="true">Licentie</string>
   <string name="use_previous">Vorige naam/beschrijving gebruiken</string>
   <string name="allow_gps">Automatisch huidige locatie ophalen</string>
   <string name="allow_gps_summary">Huidige locatie ophalen om categoriesuggesties te maken als het beeld geen geotags heeft</string>
@@ -112,7 +112,7 @@
   <string name="tutorial_1_text">Op Wikimedia Commons staan de meeste afbeeldingen die worden gebruikt in Wikipedia.</string>
   <string name="tutorial_1_subtext">Uw afbeeldingen helpen mensen over de hele wereld met kennis opdoen!</string>
   <string name="tutorial_2_text">Upload alstublieft alleen afbeeldingen die volledig door uzelf gemaakt zijn:</string>
-  <string name="tutorial_2_subtext">- Natuurlijke objecten (bloemen, dieren, bergen)\n- Nuttige objecten (fietsen, treinstations)\n- Beroemde mensen (uw burgemeester, Olympische atleten u hebt ontmoet)</string>
+  <string name="tutorial_2_subtext" fuzzy="true">- Natuurlijke objecten (bloemen, dieren, bergen)\n- Nuttige objecten (fietsen, treinstations)\n- Beroemde mensen (uw burgemeester, Olympische atleten u hebt ontmoet)</string>
   <string name="tutorial_3_text">Gelieve NIET te uploaden:</string>
   <string name="tutorial_3_subtext">- Selfies of foto\'s van uw vrienden\n- Foto\'s die u hebt gedownload van het Internet\n- Screenshots van eigen apps</string>
   <string name="tutorial_4_text">Voorbeeld van een upload:</string>
@@ -141,7 +141,6 @@
   <string name="media_detail_media_title">Titel van het bestand</string>
   <string name="media_detail_description">Beschrijving</string>
   <string name="media_detail_uploaded_date">Uploaddatum</string>
-  <string name="use_wikidata">Wikidata gebruiken</string>
   <string name="_2fa_code">2FA-code</string>
   <string name="welcome_image_no_selfies">Geen selfies</string>
   <string name="cancel">Annuleren</string>

@@ -18,7 +18,7 @@
   <string name="upload_progress_notification_title_finishing">%1$s upload хийж дуусаж байна</string>
   <string name="upload_failed_notification_title">%1$s upload хийхэд алдаа</string>
   <string name="upload_failed_notification_subtitle">Энд дарж харна</string>
-  <string name="title_activity_contributions">Миний хийсэн upload</string>
+  <string name="title_activity_contributions" fuzzy="true">Миний хийсэн upload</string>
   <string name="contribution_state_queued">Жагсаалтад орууллаа</string>
   <string name="contribution_state_failed">Алдаа гарлаа</string>
   <string name="contribution_state_in_progress">%1$d%% хийгдсэн</string>
@@ -42,7 +42,6 @@
   <string name="categories_search_text_hint">Нэр төрлөөр хайх</string>
   <string name="menu_save_categories">Хадгалах</string>
   <string name="categories_activity_title">Нэр төрөл</string>
-  <string name="preference_tracking">Хэрэглээний мэдээлэл:</string>
   <string name="title_activity_settings">Тохиргоо</string>
   <string name="menu_about">Тухай</string>
   <string name="title_activity_about">Тухай</string>

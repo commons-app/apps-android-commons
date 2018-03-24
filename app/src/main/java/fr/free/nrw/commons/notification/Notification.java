@@ -7,20 +7,15 @@ package fr.free.nrw.commons.notification;
 public class Notification {
     public NotificationType notificationType;
     public String notificationText;
+    public String date;
+    public String description;
+    public String link;
 
-
-    Notification (NotificationType notificationType, String notificationText) {
+    public Notification(NotificationType notificationType, String notificationText, String date, String description, String link) {
         this.notificationType = notificationType;
         this.notificationText = notificationText;
-    }
-
-
-    public enum NotificationType {
-        /* Added for test purposes, needs to be rescheduled after implementing
-         fetching notifications from server */
-        edit,
-        mention,
-        message,
-        block;
+        this.date = date;
+        this.description = description;
+        this.link = link;
     }
 }

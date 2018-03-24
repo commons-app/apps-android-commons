@@ -21,8 +21,8 @@
   <string name="upload_failed_notification_title">Įkelti %1$s nepavyko</string>
   <string name="upload_failed_notification_subtitle">Bakstelėkite norėdami Rodyti</string>
   <plurals name="uploads_pending_notification_indicator">
-    <item quantity="one">%d keliamas failas</item>
-    <item quantity="other">%d keliamų failų</item>
+    <item quantity="one">%1$d keliamas failas</item>
+    <item quantity="other">%1$d keliami failai</item>
   </plurals>
   <string name="title_activity_contributions">Naujausi mano įkėlimai</string>
   <string name="contribution_state_queued">Eilėje</string>
@@ -53,18 +53,18 @@
   <string name="gps_disabled">GPS išjungta jūsų įrenginyje. Ar norite įjungti?</string>
   <string name="enable_gps">Išjungti GPS</string>
   <string name="contributions_subtitle_zero">Nėra įkėlimų kol kas</string>
-  <plurals name="contributions_subtitle" fuzzy="true">
-    <item quantity="zero">Dar nėra įkėlimų</item>
+  <plurals name="contributions_subtitle">
+    <item quantity="zero">\@string/contributions_subtitle_zero</item>
     <item quantity="one">1 įkėlimas</item>
-    <item quantity="other">%d įkėlimai</item>
+    <item quantity="other">%1$d įkėlimai</item>
   </plurals>
   <plurals name="starting_multiple_uploads">
-    <item quantity="one">Pradedamas %d įkėlimas</item>
-    <item quantity="other">Pradedami %d įkėlimai</item>
+    <item quantity="one">Pradedamas %1$d įkėlimas</item>
+    <item quantity="other">Pradedami %1$d įkėlimai</item>
   </plurals>
   <plurals name="multiple_uploads_title">
-    <item quantity="one">%d įkėlimas</item>
-    <item quantity="other">%d įkėlimai</item>
+    <item quantity="one">%1$d įkėlimas</item>
+    <item quantity="other">%1$d įkėlimai</item>
   </plurals>
   <string name="categories_not_found">Nerasta kategorijų, atitinkančiu %1$s</string>
   <string name="categories_skip_explanation" fuzzy="true">Pridėkite kategorijas, kad jūsų paveikslėliai būtų lengviau randami Vikimedija Commons.\n -\n -Pradėkite rašyti, kad pridėtumėte kategorijas.</string>
@@ -72,7 +72,7 @@
   <string name="title_activity_settings">Nustatymai</string>
   <string name="title_activity_signup">Užsiregistruoti</string>
   <string name="menu_about">Apie</string>
-  <string name="about_privacy_policy">&lt;a href=\"https://github.com/commons-app/apps-android-commons/wiki/Privacy-policy\"&gt;Privatumo politika&lt;/a&gt;</string>
+  <string name="about_privacy_policy" fuzzy="true">&lt;a href=\"https://github.com/commons-app/apps-android-commons/wiki/Privacy-policy\"&gt;Privatumo politika&lt;/a&gt;</string>
   <string name="title_activity_about">Apie</string>
   <string name="menu_feedback">Siųsti Atsiliepimą (El. paštu)</string>
   <string name="no_email_client">Nėra įdiegtos el. pašto tvarkyklės</string>
@@ -83,7 +83,7 @@
   <string name="menu_cancel_upload">Atšaukti</string>
   <string name="share_license_summary">Šio paveikslėlio licencija bus %1$s</string>
   <string name="menu_download">Parsisiųsti</string>
-  <string name="preference_license">Licencija</string>
+  <string name="preference_license" fuzzy="true">Licencija</string>
   <string name="use_previous">Naudoti ankstesnį pavadinimą/aprašymą</string>
   <string name="allow_gps">Automatiškai gauti dabartinę vietą</string>
   <string name="allow_gps_summary">Gauti dabartinę vietove, kad būtų pasiūlytos kategorijos, jei paveikslėlis neturi geografinės žymės</string>
@@ -94,7 +94,7 @@
   <string name="tutorial_1_text">Vikimedija Commons talpina daugumą paveikslėlių, kurie yra naudojami Vikipedijoje.</string>
   <string name="tutorial_1_subtext">Jūsų paveikslėliai padeda šviesti žmones visame pasaulyje!</string>
   <string name="tutorial_2_text">Prašome kelti nuotraukos, kurios yra padarytos ar sukurtos tik jūsų:</string>
-  <string name="tutorial_2_subtext">- Gamtos objektai (gėlės, gyvūnai, kalnai)\n- Naudingi objektai (dviračiai, traukinių stotys)\n- Įžymūs žmonės (merai, Olimpiniai atletai)</string>
+  <string name="tutorial_2_subtext" fuzzy="true">- Gamtos objektai (gėlės, gyvūnai, kalnai)\n- Naudingi objektai (dviračiai, traukinių stotys)\n- Įžymūs žmonės (merai, Olimpiniai atletai)</string>
   <string name="tutorial_3_text">Prašome NEkelti:</string>
   <string name="tutorial_4_text">Pavyzdinis įkėlimas:</string>
   <string name="welcome_wikipedia_text">Įkelkite savo paveikslėlius. Padėkite Vikipedijos straipsniams būti spalvingesniems!</string>
@@ -136,4 +136,7 @@
   <string name="navigation_item_logout">Atsijungti</string>
   <string name="give_permission">Suteikti leidimą</string>
   <string name="login_to_your_account">Prisijunkite prie savo paskyros</string>
+  <string name="notifications_talk_page_message">%1$s paliko žinutę jūsų aptarimo puslapyje</string>
+  <string name="notifications_thank_you_edit">Dėkoja jums už atliktą pakeitimą</string>
+  <string name="notifications_mention">%1$s jus paminėjo %2$s.</string>
 </resources>

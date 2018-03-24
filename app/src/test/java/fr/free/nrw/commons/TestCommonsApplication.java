@@ -1,5 +1,6 @@
 package fr.free.nrw.commons;
 
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.support.v4.util.LruCache;
 
@@ -8,6 +9,9 @@ import com.squareup.leakcanary.RefWatcher;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
+import javax.inject.Named;
+
+import dagger.Provides;
 import fr.free.nrw.commons.auth.AccountUtil;
 import fr.free.nrw.commons.auth.SessionManager;
 import fr.free.nrw.commons.caching.CacheController;
@@ -54,57 +58,46 @@ public class TestCommonsApplication extends CommonsApplication {
     @Override
     public void onCreate() {
         MockitoAnnotations.initMocks(this);
-        super.onCreate();
-    }
-
-    @Override
-    protected RefWatcher setupLeakCanary() {
-        // No leakcanary in unit tests.
-        return RefWatcher.DISABLED;
-    }
-
-    @Override
-    public CommonsApplicationComponent injector() {
         if (mockApplicationComponent == null) {
             mockApplicationComponent = DaggerCommonsApplicationComponent.builder()
                     .appModule(new CommonsApplicationModule(this) {
                         @Override
-                        public AccountUtil providesAccountUtil() {
+                        public AccountUtil providesAccountUtil(Context context) {
                             return accountUtil;
                         }
 
                         @Override
-                        public SharedPreferences providesApplicationSharedPreferences() {
+                        public SharedPreferences providesApplicationSharedPreferences(Context context) {
                             return appSharedPreferences;
                         }
 
                         @Override
-                        public SharedPreferences providesDefaultSharedPreferences() {
+                        public SharedPreferences providesDefaultSharedPreferences(Context context) {
                             return defaultSharedPreferences;
                         }
 
                         @Override
-                        public SharedPreferences providesOtherSharedPreferences() {
+                        public SharedPreferences providesOtherSharedPreferences(Context context) {
                             return otherSharedPreferences;
                         }
 
                         @Override
-                        public UploadController providesUploadController(SessionManager sessionManager, SharedPreferences sharedPreferences) {
+                        public UploadController providesUploadController(SessionManager sessionManager, SharedPreferences sharedPreferences, Context context) {
                             return uploadController;
                         }
 
                         @Override
-                        public SessionManager providesSessionManager(MediaWikiApi mediaWikiApi) {
+                        public SessionManager providesSessionManager(Context context, MediaWikiApi mediaWikiApi, SharedPreferences sharedPreferences) {
                             return sessionManager;
                         }
 
                         @Override
-                        public MediaWikiApi provideMediaWikiApi() {
+                        public MediaWikiApi provideMediaWikiApi(Context context, SharedPreferences sharedPreferences) {
                             return mediaWikiApi;
                         }
 
                         @Override
-                        public LocationServiceManager provideLocationServiceManager() {
+                        public LocationServiceManager provideLocationServiceManager(Context context) {
                             return locationServiceManager;
                         }
 
@@ -114,7 +107,7 @@ public class TestCommonsApplication extends CommonsApplication {
                         }
 
                         @Override
-                        public DBOpenHelper provideDBOpenHelper() {
+                        public DBOpenHelper provideDBOpenHelper(Context context) {
                             return dbOpenHelper;
                         }
 
@@ -129,7 +122,13 @@ public class TestCommonsApplication extends CommonsApplication {
                         }
                     }).build();
         }
-        return mockApplicationComponent;
+        super.onCreate();
+    }
+
+    @Override
+    protected RefWatcher setupLeakCanary() {
+        // No leakcanary in unit tests.
+        return RefWatcher.DISABLED;
     }
 
     public AccountUtil getAccountUtil() {

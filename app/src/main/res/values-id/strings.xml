@@ -20,7 +20,7 @@
   <string name="upload_failed_notification_subtitle">Tekan untuk melihat</string>
   <plurals name="uploads_pending_notification_indicator">
     <item quantity="one">Mengunggah 1 berkas</item>
-    <item quantity="other">Mengunggah %d berkas</item>
+    <item quantity="other">Mengunggah %1$d berkas</item>
   </plurals>
   <string name="title_activity_contributions">Unggahan saya</string>
   <string name="contribution_state_queued">Antrean</string>
@@ -49,15 +49,15 @@
   <plurals name="contributions_subtitle">
     <item quantity="zero">Tidak ada unggahan</item>
     <item quantity="one">1 unggahan</item>
-    <item quantity="other">%d unggahan</item>
+    <item quantity="other">%1$d unggahan</item>
   </plurals>
   <plurals name="starting_multiple_uploads">
     <item quantity="one">Memulai 1 unggahan</item>
-    <item quantity="other">Memulai %d unggahan</item>
+    <item quantity="other">Memulai %1$d unggahan</item>
   </plurals>
   <plurals name="multiple_uploads_title">
     <item quantity="one">1 unggahan</item>
-    <item quantity="other">%d unggahan</item>
+    <item quantity="other">%1$d unggahan</item>
   </plurals>
   <string name="categories_not_found">Tidak ada kategori yang cocok dengan %1$s</string>
   <string name="categories_skip_explanation">Tambahkan kategori agar foto Anda lebih mudah ditemukan di Wikimedia Commons.

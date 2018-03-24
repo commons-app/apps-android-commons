@@ -30,15 +30,17 @@ import static org.junit.Assert.assertNotNull;
 @Config(constants = BuildConfig.class, sdk = 21, application = TestCommonsApplication.class)
 public class NearbyAdapterFactoryTest {
 
-    private static final Place PLACE = new Place("name", Place.Description.AIRPORT,
-            "desc", null, new LatLng(38.6270, -90.1994, 0), null);
-    private static final Place UNKNOWN_PLACE = new Place("name", Place.Description.UNKNOWN,
-            "desc", null, new LatLng(39.7392, -104.9903, 0), null);
+    private static final Place PLACE = new Place("name", Place.Label.AIRPORT,
+            "desc", null, new LatLng(38.6270, -90.1994, 0), null, null);
+
+    private static final Place UNKNOWN_PLACE = new Place("name", Place.Label.UNKNOWN,
+            "desc", null, new LatLng(39.7392, -104.9903, 0), null, null);
+
     private Place clickedPlace;
 
     @Test
     public void factoryHandlesNullListAndNullListener() {
-        NearbyAdapterFactory testObject = new NearbyAdapterFactory(null);
+        NearbyAdapterFactory testObject = new NearbyAdapterFactory();
         RVRendererAdapter<Place> result = testObject.create(null);
         assertNotNull(result);
         assertEquals(0, result.getItemCount());
@@ -46,7 +48,7 @@ public class NearbyAdapterFactoryTest {
 
     @Test
     public void factoryHandlesEmptyListAndNullListener() {
-        NearbyAdapterFactory testObject = new NearbyAdapterFactory(null);
+        NearbyAdapterFactory testObject = new NearbyAdapterFactory();
         RVRendererAdapter<Place> result = testObject.create(Collections.<Place>emptyList());
         assertNotNull(result);
         assertEquals(0, result.getItemCount());
@@ -54,7 +56,7 @@ public class NearbyAdapterFactoryTest {
 
     @Test
     public void factoryHandlesNonEmptyListAndNullListener() {
-        NearbyAdapterFactory testObject = new NearbyAdapterFactory(null);
+        NearbyAdapterFactory testObject = new NearbyAdapterFactory();
         RVRendererAdapter<Place> result = testObject.create(Collections.singletonList(PLACE));
         assertNotNull(result);
         assertEquals(1, result.getItemCount());
@@ -63,17 +65,18 @@ public class NearbyAdapterFactoryTest {
 
     @Test
     public void rendererCorrectlyBound() {
-        NearbyAdapterFactory testObject = new NearbyAdapterFactory(null);
+        NearbyAdapterFactory testObject = new NearbyAdapterFactory();
         RVRendererAdapter<Place> result = testObject.create(Collections.singletonList(PLACE));
 
         RendererViewHolder viewHolder = renderComponent(result);
 
+        // test that the values we gave are actually rendered
         assertNotNull(viewHolder.itemView.findViewById(R.id.tvName));
-        assertEquals("name",
+        assertEquals(PLACE.name,
                 ((TextView) viewHolder.itemView.findViewById(R.id.tvName)).getText().toString());
 
         assertNotNull(viewHolder.itemView.findViewById(R.id.tvDesc));
-        assertEquals("airport",
+        assertEquals(PLACE.getLongDescription(),
                 ((TextView) viewHolder.itemView.findViewById(R.id.tvDesc)).getText().toString());
 
         assertNotNull(viewHolder.itemView.findViewById(R.id.distance));
@@ -88,13 +91,13 @@ public class NearbyAdapterFactoryTest {
 
     @Test
     public void rendererCorrectlyBoundForUnknownPlace() {
-        NearbyAdapterFactory testObject = new NearbyAdapterFactory(null);
+        NearbyAdapterFactory testObject = new NearbyAdapterFactory();
         RVRendererAdapter<Place> result = testObject.create(Collections.singletonList(UNKNOWN_PLACE));
 
         RendererViewHolder viewHolder = renderComponent(result);
 
         assertNotNull(viewHolder.itemView.findViewById(R.id.tvDesc));
-        assertEquals("no description found",
+        assertEquals(RuntimeEnvironment.application.getString(R.string.no_description_found),
                 ((TextView) viewHolder.itemView.findViewById(R.id.tvDesc)).getText().toString());
 
         assertNotNull(viewHolder.itemView.findViewById(R.id.icon));
@@ -105,7 +108,7 @@ public class NearbyAdapterFactoryTest {
 
     @Test
     public void clickView() {
-        NearbyAdapterFactory testObject = new NearbyAdapterFactory(new MockPlaceClickedListener());
+        NearbyAdapterFactory testObject = new NearbyAdapterFactory();
         RVRendererAdapter<Place> result = testObject.create(Collections.singletonList(PLACE));
         RendererViewHolder viewHolder = renderComponent(result);
 
@@ -122,12 +125,5 @@ public class NearbyAdapterFactoryTest {
         assertNotNull(viewHolder);
         result.bindViewHolder(viewHolder, 0);
         return viewHolder;
-    }
-
-    private class MockPlaceClickedListener implements PlaceRenderer.PlaceClickedListener {
-        @Override
-        public void placeClicked(Place place) {
-            clickedPlace = place;
-        }
     }
 }

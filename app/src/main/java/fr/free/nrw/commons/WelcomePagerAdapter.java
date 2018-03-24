@@ -5,6 +5,7 @@ import android.support.v4.view.PagerAdapter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -54,10 +55,18 @@ public class WelcomePagerAdapter extends PagerAdapter {
     public Object instantiateItem(ViewGroup container, int position) {
         LayoutInflater inflater = LayoutInflater.from(container.getContext());
         ViewGroup layout = (ViewGroup) inflater.inflate(PAGE_LAYOUTS[position], container, false);
-
-        if (position == PAGE_FINAL) {
+        if( BuildConfig.FLAVOR == "beta"){
+            TextView textView = (TextView) layout.findViewById(R.id.welcomeYesButton);
+            if( textView.getVisibility() != View.VISIBLE){
+                textView.setVisibility(View.VISIBLE);
+            }
             ViewHolder holder = new ViewHolder(layout);
             layout.setTag(holder);
+        } else {
+            if (position == PAGE_FINAL) {
+                ViewHolder holder = new ViewHolder(layout);
+                layout.setTag(holder);
+            }
         }
         container.addView(layout);
         return layout;
@@ -92,5 +101,6 @@ public class WelcomePagerAdapter extends PagerAdapter {
                 callback.onYesClicked();
             }
         }
+
     }
 }

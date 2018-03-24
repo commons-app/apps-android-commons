@@ -10,19 +10,18 @@ import android.location.LocationManager;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
+import android.util.Log;
 
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
-
-import javax.inject.Inject;
-import javax.inject.Singleton;
 
 import timber.log.Timber;
 
 public class LocationServiceManager implements LocationListener {
     public static final int LOCATION_REQUEST = 1;
 
-    private static final long MIN_LOCATION_UPDATE_REQUEST_TIME_IN_MILLIS = 2 * 60 * 1000;
+    // Maybe these values can be improved for efficiency
+    private static final long MIN_LOCATION_UPDATE_REQUEST_TIME_IN_MILLIS = 2 * 60 * 100;
     private static final long MIN_LOCATION_UPDATE_REQUEST_DISTANCE_IN_METERS = 10;
 
     private Context context;
@@ -33,6 +32,7 @@ public class LocationServiceManager implements LocationListener {
 
     /**
      * Constructs a new instance of LocationServiceManager.
+     *
      * @param context the context
      */
     public LocationServiceManager(Context context) {
@@ -42,6 +42,7 @@ public class LocationServiceManager implements LocationListener {
 
     /**
      * Returns the current status of the GPS provider.
+     *
      * @return true if the GPS provider is enabled
      */
     public boolean isProviderEnabled() {
@@ -50,6 +51,7 @@ public class LocationServiceManager implements LocationListener {
 
     /**
      * Returns whether the location permission is granted.
+     *
      * @return true if the location permission is granted
      */
     public boolean isLocationPermissionGranted() {
@@ -59,6 +61,7 @@ public class LocationServiceManager implements LocationListener {
 
     /**
      * Requests the location permission to be granted.
+     *
      * @param activity the activity
      */
     public void requestPermissions(Activity activity) {
@@ -71,11 +74,9 @@ public class LocationServiceManager implements LocationListener {
     }
 
     public boolean isPermissionExplanationRequired(Activity activity) {
-        if (activity.isFinishing()) {
-            return false;
-        }
-        return ActivityCompat.shouldShowRequestPermissionRationale(activity,
-                Manifest.permission.ACCESS_FINE_LOCATION);
+        return !activity.isFinishing() &&
+                ActivityCompat.shouldShowRequestPermissionRationale(activity,
+                        Manifest.permission.ACCESS_FINE_LOCATION);
     }
 
     public LatLng getLastLocation() {
@@ -85,7 +86,8 @@ public class LocationServiceManager implements LocationListener {
         return LatLng.from(lastLocation);
     }
 
-    /** Registers a LocationManager to listen for current location.
+    /**
+     * Registers a LocationManager to listen for current location.
      */
     public void registerLocationManager() {
         if (!isLocationManagerRegistered)
@@ -95,6 +97,7 @@ public class LocationServiceManager implements LocationListener {
 
     /**
      * Requests location updates from the specified provider.
+     *
      * @param locationProvider the location provider
      * @return true if successful
      */
@@ -116,14 +119,17 @@ public class LocationServiceManager implements LocationListener {
 
     /**
      * Returns whether a given location is better than the current best location.
-     * @param location the location to be tested
+     *
+     * @param location            the location to be tested
      * @param currentBestLocation the current best location
-     * @return true if the given location is better
+     * @return LOCATION_SIGNIFICANTLY_CHANGED if location changed significantly
+     * LOCATION_SLIGHTLY_CHANGED if location changed slightly
      */
-    protected boolean isBetterLocation(Location location, Location currentBestLocation) {
+    protected LocationChangeType isBetterLocation(Location location, Location currentBestLocation) {
+
         if (currentBestLocation == null) {
             // A new location is always better than no location
-            return true;
+            return LocationChangeType.LOCATION_SIGNIFICANTLY_CHANGED;
         }
 
         // Check whether the new location fix is newer or older
@@ -131,15 +137,6 @@ public class LocationServiceManager implements LocationListener {
         boolean isSignificantlyNewer = timeDelta > MIN_LOCATION_UPDATE_REQUEST_TIME_IN_MILLIS;
         boolean isSignificantlyOlder = timeDelta < -MIN_LOCATION_UPDATE_REQUEST_TIME_IN_MILLIS;
         boolean isNewer = timeDelta > 0;
-
-        // If it's been more than two minutes since the current location, use the new location
-        // because the user has likely moved
-        if (isSignificantlyNewer) {
-            return true;
-            // If the new location is more than two minutes older, it must be worse
-        } else if (isSignificantlyOlder) {
-            return false;
-        }
 
         // Check whether the new location fix is more or less accurate
         int accuracyDelta = (int) (location.getAccuracy() - currentBestLocation.getAccuracy());
@@ -151,15 +148,28 @@ public class LocationServiceManager implements LocationListener {
         boolean isFromSameProvider = isSameProvider(location.getProvider(),
                 currentBestLocation.getProvider());
 
-        // Determine location quality using a combination of timeliness and accuracy
-        if (isMoreAccurate) {
-            return true;
-        } else if (isNewer && !isLessAccurate) {
-            return true;
-        } else if (isNewer && !isSignificantlyLessAccurate && isFromSameProvider) {
-            return true;
+        float[] results = new float[5];
+        Location.distanceBetween(
+                        currentBestLocation.getLatitude(),
+                        currentBestLocation.getLongitude(),
+                        location.getLatitude(),
+                        location.getLongitude(),
+                        results);
+
+        // If it's been more than two minutes since the current location, use the new location
+        // because the user has likely moved
+        if (isSignificantlyNewer
+                || isMoreAccurate
+                || (isNewer && !isLessAccurate)
+                || (isNewer && !isSignificantlyLessAccurate && isFromSameProvider)) {
+            if (results[0] < 1000) { // Means change is smaller than 1000 meter
+                return LocationChangeType.LOCATION_SLIGHTLY_CHANGED;
+            } else {
+                return LocationChangeType.LOCATION_SIGNIFICANTLY_CHANGED;
+            }
+        } else{
+            return LocationChangeType.LOCATION_NOT_CHANGED;
         }
-        return false;
     }
 
     /**
@@ -172,7 +182,8 @@ public class LocationServiceManager implements LocationListener {
         return provider1.equals(provider2);
     }
 
-    /** Unregisters location manager.
+    /**
+     * Unregisters location manager.
      */
     public void unregisterLocationManager() {
         isLocationManagerRegistered = false;
@@ -185,6 +196,7 @@ public class LocationServiceManager implements LocationListener {
 
     /**
      * Adds a new listener to the list of location listeners.
+     *
      * @param listener the new listener
      */
     public void addLocationListener(LocationUpdateListener listener) {
@@ -195,6 +207,7 @@ public class LocationServiceManager implements LocationListener {
 
     /**
      * Removes a listener from the list of location listeners.
+     *
      * @param listener the listener to be removed
      */
     public void removeLocationListener(LocationUpdateListener listener) {
@@ -203,12 +216,19 @@ public class LocationServiceManager implements LocationListener {
 
     @Override
     public void onLocationChanged(Location location) {
-        if (isBetterLocation(location, lastLocation)) {
-            lastLocation = location;
-            for (LocationUpdateListener listener : locationListeners) {
-                listener.onLocationChanged(LatLng.from(lastLocation));
+            if (isBetterLocation(location, lastLocation)
+                    .equals(LocationChangeType.LOCATION_SIGNIFICANTLY_CHANGED)) {
+                lastLocation = location;
+                for (LocationUpdateListener listener : locationListeners) {
+                    listener.onLocationChangedSignificantly(LatLng.from(lastLocation));
+                }
+            } else if (isBetterLocation(location, lastLocation)
+                    .equals(LocationChangeType.LOCATION_SLIGHTLY_CHANGED)) {
+                lastLocation = location;
+                for (LocationUpdateListener listener : locationListeners) {
+                    listener.onLocationChangedSlightly(LatLng.from(lastLocation));
+                }
             }
-        }
     }
 
     @Override
@@ -224,5 +244,11 @@ public class LocationServiceManager implements LocationListener {
     @Override
     public void onProviderDisabled(String provider) {
         Timber.d("Provider %s disabled", provider);
+    }
+
+    public enum LocationChangeType{
+        LOCATION_SIGNIFICANTLY_CHANGED, //Went out of borders of nearby markers
+        LOCATION_SLIGHTLY_CHANGED,      //User might be walking or driving
+        LOCATION_NOT_CHANGED
     }
 }

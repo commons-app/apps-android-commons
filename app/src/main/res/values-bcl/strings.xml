@@ -43,15 +43,13 @@
   <string name="categories_search_text_hint">Hanapa an mga kategoriya</string>
   <string name="menu_save_categories">Itagama</string>
   <string name="categories_not_found">Mayong mga kategoriya an mainukno sa %1$s an nanagboan</string>
-  <string name="categories_skip_explanation">Magpoon sa pagtipa tanganing magdugang nin mga kategoriya.\nTaptapon ining mensahe (o pinduta an ibalik) tanganing luksuhan ining panuntungan.</string>
+  <string name="categories_skip_explanation" fuzzy="true">Magpoon sa pagtipa tanganing magdugang nin mga kategoriya.\nTaptapon ining mensahe (o pinduta an ibalik) tanganing luksuhan ining panuntungan.</string>
   <string name="categories_activity_title">Mga Kategoriya</string>
-  <string name="preference_tracking">Mga talaan nin paggagamit</string>
-  <string name="preference_tracking_summary">Ipadara an mga talaan nin paggagamit sa Wikimidya sa pagtabang samuya na mapakarhay an app</string>
   <string name="title_activity_settings">Mga Panuytoy</string>
   <string name="menu_about">Panunungod</string>
   <string name="about_license" fuzzy="true">Bukas na Ginikanang panuklob ipinaghaya na sa lindong kan  &lt;a href=\" https://github.com/commons-app/apps-android-commons/blob/master/COPYING\"&gt;Apache License v2&lt;/a&gt;</string>
   <string name="about_improve" fuzzy="true">Ginikanan sa &lt;a href=\"https://github.com/commons-app/android-commons\"&gt;GitHub&lt;/a&gt;. Mga kubol sa &lt;a href=\"https://bugzilla.wikimedia.org/enter_bug.cgi?product=Commons%20App\"&gt;Bugzilla&lt;/a&gt;.</string>
-  <string name="about_privacy_policy">Ano ini?</string>
+  <string name="about_privacy_policy" fuzzy="true">Ano ini?</string>
   <string name="title_activity_about">Panunungod</string>
   <string name="menu_feedback">Ipadara an balik-simbag (sa paagi nin E-surat)</string>
   <string name="provider_categories">Dae pa sana nahaloy na pinaggamit na mga kategoriya</string>
@@ -59,7 +57,7 @@
   <string name="no_uploads_yet">Ika dae pa nakapagkarga nin anuman na mga litrato.</string>
   <string name="share_license_summary">Ining imahe magin lisensiyada sa lindong kan %1$s</string>
   <string name="menu_download">Kargahon</string>
-  <string name="preference_license">Lisensiya</string>
+  <string name="preference_license" fuzzy="true">Lisensiya</string>
   <string name="license_name_cc_by_sa" fuzzy="true">CC Panungdanan-HerasPararehas</string>
   <string name="license_name_cc_by" fuzzy="true">CC Panungdanan</string>
   <string name="license_name_cc0">CC0</string>

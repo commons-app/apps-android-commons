@@ -1,10 +1,13 @@
 package fr.free.nrw.commons;
 
+import android.app.Application;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.database.sqlite.SQLiteDatabase;
+import android.support.multidex.MultiDexApplication;
 
 import com.facebook.drawee.backends.pipeline.Fresco;
+import com.facebook.imagepipeline.core.ImagePipelineConfig;
 import com.facebook.stetho.Stetho;
 import com.squareup.leakcanary.LeakCanary;
 import com.squareup.leakcanary.RefWatcher;
@@ -18,15 +21,11 @@ import java.io.File;
 import javax.inject.Inject;
 import javax.inject.Named;
 
-import dagger.android.AndroidInjector;
-import dagger.android.DaggerApplication;
 import fr.free.nrw.commons.auth.SessionManager;
+import fr.free.nrw.commons.category.CategoryDao;
 import fr.free.nrw.commons.contributions.ContributionDao;
-import fr.free.nrw.commons.data.CategoryDao;
 import fr.free.nrw.commons.data.DBOpenHelper;
-import fr.free.nrw.commons.di.CommonsApplicationComponent;
-import fr.free.nrw.commons.di.CommonsApplicationModule;
-import fr.free.nrw.commons.di.DaggerCommonsApplicationComponent;
+import fr.free.nrw.commons.di.ApplicationlessInjection;
 import fr.free.nrw.commons.modifications.ModifierSequenceDao;
 import fr.free.nrw.commons.utils.FileUtils;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -42,15 +41,16 @@ import timber.log.Timber;
         resDialogCommentPrompt = R.string.crash_dialog_comment_prompt,
         resDialogOkToast = R.string.crash_dialog_ok_toast
 )
-public class CommonsApplication extends DaggerApplication {
+public class CommonsApplication extends MultiDexApplication {
 
     @Inject SessionManager sessionManager;
     @Inject DBOpenHelper dbOpenHelper;
+
     @Inject @Named("default_preferences") SharedPreferences defaultPrefs;
     @Inject @Named("application_preferences") SharedPreferences applicationPrefs;
     @Inject @Named("prefs") SharedPreferences otherPrefs;
 
-    public static final String DEFAULT_EDIT_SUMMARY = "Uploaded using Android Commons app";
+    public static final String DEFAULT_EDIT_SUMMARY = "Uploaded using [[COM:MOA|Commons Mobile App]]";
 
     public static final String FEEDBACK_EMAIL = "commons-app-android@googlegroups.com";
 
@@ -58,8 +58,8 @@ public class CommonsApplication extends DaggerApplication {
 
     public static final String FEEDBACK_EMAIL_SUBJECT = "Commons Android App (%s) Feedback";
 
-    private CommonsApplicationComponent component;
     private RefWatcher refWatcher;
+
 
     /**
      * Used to declare and initialize various components and dependencies
@@ -68,7 +68,15 @@ public class CommonsApplication extends DaggerApplication {
     public void onCreate() {
         super.onCreate();
 
-        Fresco.initialize(this);
+        ApplicationlessInjection
+                .getInstance(this)
+                .getCommonsApplicationComponent()
+                .inject(this);
+//        Set DownsampleEnabled to True to downsample the image in case it's heavy
+        ImagePipelineConfig config = ImagePipelineConfig.newBuilder(this)
+                .setDownsampleEnabled(true)
+                .build();
+        Fresco.initialize(this,config);
         if (setupLeakCanary() == RefWatcher.DISABLED) {
             return;
         }
@@ -84,6 +92,7 @@ public class CommonsApplication extends DaggerApplication {
         // Fire progress callbacks for every 3% of uploaded content
         System.setProperty("in.yuvi.http.fluent.PROGRESS_TRIGGER_THRESHOLD", "3.0");
     }
+
 
     /**
      * Helps in setting up LeakCanary library
@@ -105,28 +114,6 @@ public class CommonsApplication extends DaggerApplication {
     public static RefWatcher getRefWatcher(Context context) {
         CommonsApplication application = (CommonsApplication) context.getApplicationContext();
         return application.refWatcher;
-    }
-
-    /**
-    * Helps in injecting dependency library Dagger
-    * @return Dagger injector
-    */
-    @Override
-    protected AndroidInjector<? extends DaggerApplication> applicationInjector() {
-        return injector();
-    }
-
-    /**
-     * used to create injector of application component
-     * @return Application component of Dagger
-     */
-    public CommonsApplicationComponent injector() {
-        if (component == null) {
-            component = DaggerCommonsApplicationComponent.builder()
-                    .appModule(new CommonsApplicationModule(this))
-                    .build();
-        }
-        return component;
     }
 
     /**
@@ -152,9 +139,10 @@ public class CommonsApplication extends DaggerApplication {
                 .subscribe(() -> {
                     Timber.d("All accounts have been removed");
                     //TODO: fix preference manager
-                    defaultPrefs.edit().clear().commit();
-                    applicationPrefs.edit().clear().commit();
-                    applicationPrefs.edit().putBoolean("firstrun", false).apply();otherPrefs.edit().clear().commit();
+                    defaultPrefs.edit().clear().apply();
+                    applicationPrefs.edit().clear().apply();
+                    applicationPrefs.edit().putBoolean("firstrun", false).apply();
+                    otherPrefs.edit().clear().apply();
                     updateAllDatabases();
 
                     logoutListener.onLogoutComplete();

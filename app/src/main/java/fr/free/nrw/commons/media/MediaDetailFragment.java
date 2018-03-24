@@ -1,19 +1,27 @@
 package fr.free.nrw.commons.media;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.DataSetObserver;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
+import android.view.WindowManager;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;
@@ -24,7 +32,6 @@ import java.util.Locale;
 import javax.inject.Inject;
 import javax.inject.Provider;
 
-import dagger.android.support.DaggerFragment;
 import fr.free.nrw.commons.License;
 import fr.free.nrw.commons.LicenseList;
 import fr.free.nrw.commons.Media;
@@ -32,12 +39,15 @@ import fr.free.nrw.commons.MediaDataExtractor;
 import fr.free.nrw.commons.MediaWikiImageView;
 import fr.free.nrw.commons.PageTitle;
 import fr.free.nrw.commons.R;
+import fr.free.nrw.commons.delete.DeleteTask;
+import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
 import fr.free.nrw.commons.location.LatLng;
-import fr.free.nrw.commons.mwapi.MediaWikiApi;
 import fr.free.nrw.commons.ui.widget.CompatTextView;
 import timber.log.Timber;
 
-public class MediaDetailFragment extends DaggerFragment {
+import static android.widget.Toast.LENGTH_SHORT;
+
+public class MediaDetailFragment extends CommonsDaggerSupportFragment {
 
     private boolean editable;
     private boolean isFeaturedMedia;
@@ -74,6 +84,7 @@ public class MediaDetailFragment extends DaggerFragment {
     private TextView uploadedDate;
     private LinearLayout categoryContainer;
     private LinearLayout authorLayout;
+    private Button delete;
     private ScrollView scrollView;
     private ArrayList<String> categoryNames;
     private boolean categoriesLoaded = false;
@@ -81,7 +92,7 @@ public class MediaDetailFragment extends DaggerFragment {
     private ViewTreeObserver.OnGlobalLayoutListener layoutListener; // for layout stuff, only used once!
     private ViewTreeObserver.OnScrollChangedListener scrollListener;
     private DataSetObserver dataObserver;
-    private AsyncTask<Void,Void,Boolean> detailFetchTask;
+    private AsyncTask<Void, Void, Boolean> detailFetchTask;
     private LicenseList licenseList;
 
     @Override
@@ -101,7 +112,7 @@ public class MediaDetailFragment extends DaggerFragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        detailProvider = (MediaDetailPagerFragment.MediaDetailProvider)getActivity();
+        detailProvider = (MediaDetailPagerFragment.MediaDetailProvider) getActivity();
 
         if (savedInstanceState != null) {
             editable = savedInstanceState.getBoolean("editable");
@@ -131,6 +142,7 @@ public class MediaDetailFragment extends DaggerFragment {
         license = (TextView) view.findViewById(R.id.mediaDetailLicense);
         coordinates = (TextView) view.findViewById(R.id.mediaDetailCoordinates);
         uploadedDate = (TextView) view.findViewById(R.id.mediaDetailuploadeddate);
+        delete = (Button) view.findViewById(R.id.nominateDeletion);
         categoryContainer = (LinearLayout) view.findViewById(R.id.mediaDetailCategoryContainer);
         authorLayout = (LinearLayout) view.findViewById(R.id.authorLinearLayout);
 
@@ -173,7 +185,8 @@ public class MediaDetailFragment extends DaggerFragment {
         return view;
     }
 
-    @Override public void onResume() {
+    @Override
+    public void onResume() {
         super.onResume();
         Media media = detailProvider.getMediaAtPosition(index);
         if (media == null) {
@@ -255,13 +268,13 @@ public class MediaDetailFragment extends DaggerFragment {
             detailFetchTask.cancel(true);
             detailFetchTask = null;
         }
-        if (layoutListener != null) {
+        if (layoutListener != null && getView() != null) {
             getView().getViewTreeObserver().removeGlobalOnLayoutListener(layoutListener); // old Android was on crack. CRACK IS WHACK
             layoutListener = null;
         }
-        if (scrollListener != null) {
+        if (scrollListener != null && getView() != null) {
             getView().getViewTreeObserver().removeOnScrollChangedListener(scrollListener);
-            scrollListener  = null;
+            scrollListener = null;
         }
         if (dataObserver != null) {
             detailProvider.unregisterDataSetObserver(dataObserver);
@@ -286,12 +299,65 @@ public class MediaDetailFragment extends DaggerFragment {
             categoryNames.add(getString(R.string.detail_panel_cats_none));
         }
         rebuildCatList();
+
+        delete.setVisibility(View.VISIBLE);
     }
 
     private void setOnClickListeners(final Media media) {
-        license.setOnClickListener(v -> openWebBrowser(licenseLink(media)));
+        if (licenseLink(media) != null) {
+            license.setOnClickListener(v -> openWebBrowser(licenseLink(media)));
+            } else {
+            Toast toast = Toast.makeText(getContext(), getString(R.string.null_url), Toast.LENGTH_SHORT);
+            toast.show();
+            }
         if (media.getCoordinates() != null) {
             coordinates.setOnClickListener(v -> openMap(media.getCoordinates()));
+        }
+        if (delete.getVisibility()==View.VISIBLE){
+            delete.setOnClickListener(v -> {
+                AlertDialog.Builder alert = new AlertDialog.Builder(getActivity());
+                alert.setMessage("Why should this file be deleted?");
+                final EditText input = new EditText(getActivity());
+                alert.setView(input);
+                input.requestFocus();
+                alert.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int whichButton) {
+                        String reason = input.getText().toString();
+                        DeleteTask deleteTask = new DeleteTask(getActivity(), media, reason);
+                        deleteTask.execute();
+                    }
+                });
+                alert.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int whichButton) {
+                    }
+                });
+                AlertDialog d = alert.create();
+                input.addTextChangedListener(new TextWatcher() {
+                    private void handleText() {
+                        final Button okButton = d.getButton(AlertDialog.BUTTON_POSITIVE);
+                        if (input.getText().length() == 0) {
+                            okButton.setEnabled(false);
+                        } else {
+                            okButton.setEnabled(true);
+                        }
+                    }
+
+                    @Override
+                    public void afterTextChanged(Editable arg0) {
+                        handleText();
+                    }
+
+                    @Override
+                    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                    }
+
+                    @Override
+                    public void onTextChanged(CharSequence s, int start, int before, int count) {
+                    }
+                });
+                d.show();
+                d.getButton(AlertDialog.BUTTON_POSITIVE).setEnabled(false);
+            });
         }
     }
 
@@ -306,7 +372,7 @@ public class MediaDetailFragment extends DaggerFragment {
 
     private View buildCatLabel(final String catName, ViewGroup categoryContainer) {
         final View item = LayoutInflater.from(getContext()).inflate(R.layout.detail_category_item, categoryContainer, false);
-        final CompatTextView textView = (CompatTextView)item.findViewById(R.id.mediaDetailCategoryItemText);
+        final CompatTextView textView = (CompatTextView) item.findViewById(R.id.mediaDetailCategoryItemText);
 
         textView.setText(catName);
         if (categoriesLoaded && categoriesPresent) {
@@ -315,7 +381,13 @@ public class MediaDetailFragment extends DaggerFragment {
                 Intent viewIntent = new Intent();
                 viewIntent.setAction(Intent.ACTION_VIEW);
                 viewIntent.setData(new PageTitle(selectedCategoryTitle).getCanonicalUri());
-                startActivity(viewIntent);
+                //check if web browser available
+                if(viewIntent.resolveActivity(getActivity().getPackageManager()) != null){
+                    startActivity(viewIntent);
+                } else {
+                    Toast toast = Toast.makeText(getContext(), getString(R.string.no_web_browser), LENGTH_SHORT);
+                    toast.show();
+                }
             });
         }
         return item;
@@ -325,7 +397,7 @@ public class MediaDetailFragment extends DaggerFragment {
         // You must face the darkness alone
         int scrollY = scrollView.getScrollY();
         int scrollMax = getView().getHeight();
-        float scrollPercentage = (float)scrollY / (float)scrollMax;
+        float scrollPercentage = (float) scrollY / (float) scrollMax;
         final float transparencyMax = 0.75f;
         if (scrollPercentage > transparencyMax) {
             scrollPercentage = transparencyMax;
@@ -379,7 +451,8 @@ public class MediaDetailFragment extends DaggerFragment {
     }
 
 
-    private @Nullable String licenseLink(Media media) {
+    private @Nullable
+    String licenseLink(Media media) {
         String licenseKey = media.getLicense();
         if (licenseKey == null || licenseKey.equals("")) {
             return null;
@@ -394,7 +467,14 @@ public class MediaDetailFragment extends DaggerFragment {
 
     private void openWebBrowser(String url) {
         Intent browser = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
-        startActivity(browser);
+        //check if web browser available
+        if (browser.resolveActivity(getActivity().getPackageManager()) != null) {
+            startActivity(browser);
+        } else {
+            Toast toast = Toast.makeText(getContext(), getString(R.string.no_web_browser), LENGTH_SHORT);
+            toast.show();
+        }
+
     }
 
     private void openMap(LatLng coordinates) {
