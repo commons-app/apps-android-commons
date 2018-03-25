@@ -107,7 +107,7 @@ public class DeleteTask extends AsyncTask<Void, Void, Integer> {
 
         String logPageString = "\n{{Commons:Deletion requests/" + media.getFilename() +
                 "}}\n";
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd", Locale.getDefault());
         String date = sdf.format(calendar.getTime());
         try{
             mwApi.appendEdit(editToken,logPageString+"\n",
