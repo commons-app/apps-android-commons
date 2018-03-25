@@ -1,7 +1,9 @@
 package fr.free.nrw.commons.upload;
 
 import android.Manifest;
+import android.app.Activity;
 import android.content.ContentResolver;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -32,6 +34,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
+import java.lang.ref.WeakReference;
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -55,7 +58,7 @@ import fr.free.nrw.commons.modifications.ModificationsContentProvider;
 import fr.free.nrw.commons.modifications.ModifierSequence;
 import fr.free.nrw.commons.modifications.ModifierSequenceDao;
 import fr.free.nrw.commons.modifications.TemplateRemoveModifier;
-import fr.free.nrw.commons.mwapi.EventLog;
+
 import fr.free.nrw.commons.utils.ImageUtils;
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
 import timber.log.Timber;
@@ -113,7 +116,10 @@ public class ShareActivity
     private String description;
     private Snackbar snackbar;
     private boolean duplicateCheckPassed = false;
+
     private boolean haveCheckedForOtherImages = false;
+    private boolean isNearbyUpload = false;
+
     /**
      * Called when user taps the submit button.
      */
@@ -211,6 +217,10 @@ public class ShareActivity
         finish();
     }
 
+    protected boolean isNearbyUpload() {
+        return isNearbyUpload;
+    }
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -236,6 +246,10 @@ public class ShareActivity
                 source = intent.getStringExtra(UploadService.EXTRA_SOURCE);
             } else {
                 source = Contribution.SOURCE_EXTERNAL;
+            }
+            if (intent.hasExtra("isDirectUpload")) {
+                Timber.d("This was initiated by a direct upload from Nearby");
+                isNearbyUpload = true;
             }
             mimeType = intent.getType();
         }
@@ -371,7 +385,7 @@ public class ShareActivity
                     Timber.d("File SHA1 is: %s", fileSHA1);
 
                     ExistingFileAsync fileAsyncTask =
-                            new ExistingFileAsync(fileSHA1, this, result -> {
+                            new ExistingFileAsync(new WeakReference<Activity>(this), fileSHA1, new WeakReference<Context>(this), result -> {
                                 Timber.d("%s duplicate check: %s", mediaUri.toString(), result);
                                 duplicateCheckPassed = (result == DUPLICATE_PROCEED
                                         || result == NO_DUPLICATE);

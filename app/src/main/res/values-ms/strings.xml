@@ -70,7 +70,7 @@
   <string name="menu_cancel_upload">Batalkan</string>
   <string name="share_license_summary">Gambar ini akan dilesenkan di bawah %1$s</string>
   <string name="menu_download">Muat Turun</string>
-  <string name="preference_license">Lesen</string>
+  <string name="preference_license" fuzzy="true">Lesen</string>
   <string name="license_name_cc_by_sa" fuzzy="true">CC Attribution-ShareAlike 3.0</string>
   <string name="license_name_cc_by" fuzzy="true">CC Attribution 3.0</string>
   <string name="license_name_cc0">CC0</string>

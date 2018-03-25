@@ -50,7 +50,7 @@
   <string name="menu_retry_upload">ನನೊರ ಪ್ರಯತ್ನ ಮಾನ್ಪುಲೇ</string>
   <string name="menu_cancel_upload">ವಜಾ ಮಲ್ಪುಲೆ</string>
   <string name="menu_download">ಡೌನ್‍ಲೋಡ್</string>
-  <string name="preference_license">ಪರವಾನಗಿ</string>
+  <string name="preference_license" fuzzy="true">ಪರವಾನಗಿ</string>
   <string name="preference_theme">ಕತ್ತಲೆದ ಕ್ರಮೊ</string>
   <string name="license_name_cc0">CC0</string>
   <string name="license_name_cc_by_sa_3_0">CC BY-SA 3.0</string>

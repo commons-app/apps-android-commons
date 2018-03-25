@@ -1,6 +1,8 @@
 package fr.free.nrw.commons.upload;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
+
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -28,6 +30,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -57,6 +60,7 @@ public class SingleUploadFragment extends CommonsDaggerSupportFragment {
     @BindView(R.id.licenseSpinner) Spinner licenseSpinner;
 
     @Inject @Named("default_preferences") SharedPreferences prefs;
+    @Inject @Named("direct_nearby_upload_prefs") SharedPreferences directPrefs;
 
     private String license;
     private OnUploadActionInitiated uploadActionInitiatedHandler;
@@ -65,9 +69,6 @@ public class SingleUploadFragment extends CommonsDaggerSupportFragment {
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         inflater.inflate(R.menu.activity_share, menu);
-        if (titleEdit != null) {
-            menu.findItem(R.id.menu_upload_single).setEnabled(titleEdit.getText().length() != 0);
-        }
     }
 
     @Override
@@ -75,6 +76,11 @@ public class SingleUploadFragment extends CommonsDaggerSupportFragment {
         switch (item.getItemId()) {
             //What happens when the 'submit' icon is tapped
             case R.id.menu_upload_single:
+
+                if (titleEdit.getText().toString().isEmpty()) {
+                    Toast.makeText(getContext(), R.string.add_title_toast, Toast.LENGTH_LONG).show();
+                    return false;
+                }
 
                 String title = titleEdit.getText().toString();
                 String desc = descEdit.getText().toString();
@@ -87,7 +93,6 @@ public class SingleUploadFragment extends CommonsDaggerSupportFragment {
 
                 uploadActionInitiatedHandler.uploadActionInitiated(title, desc);
                 return true;
-
         }
         return super.onOptionsItemSelected(item);
     }
@@ -98,6 +103,14 @@ public class SingleUploadFragment extends CommonsDaggerSupportFragment {
         View rootView = inflater.inflate(R.layout.fragment_single_upload, container, false);
         ButterKnife.bind(this, rootView);
 
+        Intent activityIntent = getActivity().getIntent();
+        if (activityIntent.hasExtra("title")) {
+            titleEdit.setText(activityIntent.getStringExtra("title"));
+        }
+        if (activityIntent.hasExtra("description")) {
+            descEdit.setText(activityIntent.getStringExtra("description"));
+        }
+
         ArrayList<String> licenseItems = new ArrayList<>();
         licenseItems.add(getString(R.string.license_name_cc0));
         licenseItems.add(getString(R.string.license_name_cc_by));
@@ -106,6 +119,18 @@ public class SingleUploadFragment extends CommonsDaggerSupportFragment {
         licenseItems.add(getString(R.string.license_name_cc_by_sa_four));
 
         license = prefs.getString(Prefs.DEFAULT_LICENSE, Prefs.Licenses.CC_BY_SA_3);
+
+        // If this is a direct upload from Nearby, autofill title and desc fields with the Place's values
+        boolean isNearbyUpload = ((ShareActivity) getActivity()).isNearbyUpload();
+
+        if (isNearbyUpload) {
+            String imageTitle = directPrefs.getString("Title", "");
+            String imageDesc = directPrefs.getString("Desc", "");
+            String imageCats = directPrefs.getString("Category", "");
+            Timber.d("Image title: " + imageTitle + ", image desc: " + imageDesc + ", image categories: " + imageCats);
+            titleEdit.setText(imageTitle);
+            descEdit.setText(imageDesc);
+        }
 
         // check if this is the first time we have uploaded
         if (prefs.getString("Title", "").trim().length() == 0
@@ -267,6 +292,7 @@ public class SingleUploadFragment extends CommonsDaggerSupportFragment {
         return false;
     }
 
+    @SuppressLint("StringFormatInvalid")
     private void setLicenseSummary(String license) {
         licenseSummaryView.setText(getString(R.string.share_license_summary, getString(Utils.licenseNameFor(license))));
     }

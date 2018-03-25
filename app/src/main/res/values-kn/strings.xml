@@ -61,7 +61,7 @@
   <string name="menu_retry_upload">ಪುನಃ ಪ್ರಯತ್ನಿಸಿ</string>
   <string name="menu_cancel_upload">ರದ್ದುಮಾಡಿ</string>
   <string name="menu_download">ನಕಲಿಳಿಸಿ</string>
-  <string name="preference_license">ಪರವಾನಗಿ</string>
+  <string name="preference_license" fuzzy="true">ಪರವಾನಗಿ</string>
   <string name="welcome_final_button_text">ಹೌದು!</string>
   <string name="detail_panel_cats_label">ವರ್ಗಗಳು</string>
   <string name="detail_panel_cats_loading">ತುಂಬಿಸಲಾಗುತ್ತಿದೆ….</string>

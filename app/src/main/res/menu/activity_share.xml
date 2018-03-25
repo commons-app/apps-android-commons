@@ -3,6 +3,6 @@
     <item android:id="@+id/menu_upload_single"
         android:title="@string/menu_upload_single"
         android:icon="@drawable/ic_send_white_24dp"
-        android:enabled="false"
+        android:enabled="true"
         app:showAsAction="always" />
 </menu>

@@ -27,6 +27,7 @@ import javax.inject.Named;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import fr.free.nrw.commons.BuildConfig;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
 import fr.free.nrw.commons.nearby.NearbyActivity;
@@ -55,6 +56,7 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment {
     SharedPreferences defaultPrefs;
 
     private ContributionController controller;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -87,6 +89,10 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment {
 
     public void setAdapter(ListAdapter adapter) {
         this.contributionsList.setAdapter(adapter);
+
+        if(BuildConfig.FLAVOR.equalsIgnoreCase("beta")){
+            ((ContributionsActivity) getActivity()).betaSetUploadCount(adapter.getCount());
+        }
     }
 
     public void changeProgressBarVisibility(boolean isVisible) {
@@ -111,7 +117,7 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment {
         if (resultCode == RESULT_OK) {
             Timber.d("OnActivityResult() parameters: Req code: %d Result code: %d Data: %s",
                     requestCode, resultCode, data);
-            controller.handleImagePicked(requestCode, data);
+            controller.handleImagePicked(requestCode, data, false);
         } else {
             Timber.e("OnActivityResult() parameters: Req code: %d Result code: %d Data: %s",
                     requestCode, resultCode, data);

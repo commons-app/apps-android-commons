@@ -23,7 +23,6 @@ import org.apache.http.params.CoreProtocolPNames;
 import org.apache.http.util.EntityUtils;
 import org.mediawiki.api.ApiResult;
 import org.mediawiki.api.MWApi;
-import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 import java.io.IOException;
@@ -41,15 +40,11 @@ import java.util.concurrent.Callable;
 import fr.free.nrw.commons.BuildConfig;
 import fr.free.nrw.commons.PageTitle;
 import fr.free.nrw.commons.notification.Notification;
+import fr.free.nrw.commons.notification.NotificationUtils;
 import in.yuvi.http.fluent.Http;
 import io.reactivex.Observable;
 import io.reactivex.Single;
 import timber.log.Timber;
-
-import static fr.free.nrw.commons.notification.NotificationType.UNKNOWN;
-import static fr.free.nrw.commons.notification.NotificationUtils.getNotificationFromApiResult;
-import static fr.free.nrw.commons.notification.NotificationUtils.getNotificationType;
-import static fr.free.nrw.commons.notification.NotificationUtils.isCommonsNotification;
 
 /**
  * @author Addshore
@@ -206,12 +201,45 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
     }
 
     @Override
+    public boolean pageExists(String pageName) throws IOException {
+        return Double.parseDouble( api.action("query")
+                .param("titles", pageName)
+                .get()
+                .getString("/api/query/pages/page/@_idx")) != -1;
+    }
+
+    @Override
     @Nullable
     public String edit(String editToken, String processedPageContent, String filename, String summary) throws IOException {
         return api.action("edit")
                 .param("title", filename)
                 .param("token", editToken)
                 .param("text", processedPageContent)
+                .param("summary", summary)
+                .post()
+                .getString("/api/edit/@result");
+    }
+
+
+    @Override
+    @Nullable
+    public String appendEdit(String editToken, String processedPageContent, String filename, String summary) throws IOException {
+        return api.action("edit")
+                .param("title", filename)
+                .param("token", editToken)
+                .param("appendtext", processedPageContent)
+                .param("summary", summary)
+                .post()
+                .getString("/api/edit/@result");
+    }
+
+    @Override
+    @Nullable
+    public String prependEdit(String editToken, String processedPageContent, String filename, String summary) throws IOException {
+        return api.action("edit")
+                .param("title", filename)
+                .param("token", editToken)
+                .param("prependtext", processedPageContent)
                 .param("summary", summary)
                 .post()
                 .getString("/api/edit/@result");
@@ -401,32 +429,24 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
                     .param("notprop", "list")
                     .param("format", "xml")
                     .param("meta", "notifications")
-                    .param("notfilter", "!read")
+//                    .param("meta", "notifications")
+                    .param("notformat", "model")
                     .get()
                     .getNode("/api/query/notifications/list");
         } catch (IOException e) {
             Timber.e("Failed to obtain searchCategories", e);
         }
 
-        if (notificationNode == null) {
+        if (notificationNode == null
+                || notificationNode.getDocument() == null
+                || notificationNode.getDocument().getChildNodes() == null
+                || notificationNode.getDocument().getChildNodes().getLength() == 0) {
             return new ArrayList<>();
         }
 
-        List<Notification> notifications = new ArrayList<>();
-
         NodeList childNodes = notificationNode.getDocument().getChildNodes();
-
-        for (int i = 0; i < childNodes.getLength(); i++) {
-            Node node = childNodes.item(i);
-            if (isCommonsNotification(node)
-                    && !getNotificationType(node).equals(UNKNOWN)) {
-                notifications.add(getNotificationFromApiResult(context, node));
-            }
-        }
-
-        return notifications;
+        return NotificationUtils.getNotificationsFromList(context, childNodes);
     }
-
 
     @Override
     public boolean existingFile(String fileSha1) throws IOException {

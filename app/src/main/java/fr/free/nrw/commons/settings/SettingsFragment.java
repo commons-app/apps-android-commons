@@ -3,14 +3,17 @@ package fr.free.nrw.commons.settings;
 import android.Manifest;
 import android.app.AlertDialog;
 import android.content.ActivityNotFoundException;
+import android.content.ComponentName;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.preference.CheckBoxPreference;
+import android.preference.SwitchPreference;
 import android.preference.EditTextPreference;
 import android.preference.ListPreference;
 import android.preference.Preference;
@@ -21,6 +24,8 @@ import android.support.v4.content.FileProvider;
 import android.widget.Toast;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -59,7 +64,7 @@ public class SettingsFragment extends PreferenceFragment {
             return true;
         });
 
-        CheckBoxPreference themePreference = (CheckBoxPreference) findPreference("theme");
+        SwitchPreference themePreference = (SwitchPreference) findPreference("theme");
         themePreference.setOnPreferenceChangeListener((preference, newValue) -> {
             getActivity().recreate();
             return true;
@@ -141,19 +146,24 @@ public class SettingsFragment extends PreferenceFragment {
                 appLogsFile
         );
 
-        Intent feedbackIntent = new Intent(Intent.ACTION_SEND);
-        feedbackIntent.setType("message/rfc822");
-        feedbackIntent.putExtra(Intent.EXTRA_EMAIL,
-                new String[]{CommonsApplication.LOGS_PRIVATE_EMAIL});
-        feedbackIntent.putExtra(Intent.EXTRA_SUBJECT,
-                String.format(CommonsApplication.FEEDBACK_EMAIL_SUBJECT,
-                        BuildConfig.VERSION_NAME));
-        feedbackIntent.putExtra(Intent.EXTRA_STREAM,appLogsFilePath);
+        //initialize the emailSelectorIntent
+        Intent emailSelectorIntent = new Intent(Intent.ACTION_SENDTO);
+        emailSelectorIntent.setData(Uri.parse("mailto:"));
+        //initialize the emailIntent
+        final Intent emailIntent = new Intent(Intent.ACTION_SEND);
+        emailIntent.putExtra(Intent.EXTRA_EMAIL, new String[]{CommonsApplication.FEEDBACK_EMAIL});
+        emailIntent.putExtra(Intent.EXTRA_SUBJECT, String.format(CommonsApplication.FEEDBACK_EMAIL_SUBJECT, BuildConfig.VERSION_NAME));
+        emailIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+        emailIntent.addFlags(Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
+        emailIntent.setSelector( emailSelectorIntent );
+        //adding the attachment to the intent
+        emailIntent.putExtra(Intent.EXTRA_STREAM, appLogsFilePath);
 
         try {
-            startActivity(feedbackIntent);
+            startActivity(Intent.createChooser(emailIntent, "Send mail.."));
         } catch (ActivityNotFoundException e) {
             Toast.makeText(getActivity(), R.string.no_email_client, Toast.LENGTH_SHORT).show();
         }
     }
+
 }

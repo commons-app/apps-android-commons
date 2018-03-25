@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+  <string name="preference_category_appearance">شکل و صورت</string>
+  <string name="preference_category_general">عمومی</string>
+  <string name="preference_category_feedback">تہاڈی رائے</string>
+  <string name="preference_category_location">محل وقوع</string>
   <string name="app_name">کامنز</string>
+  <string name="bullet">•</string>
   <string name="menu_settings">ترتیباں</string>
   <string name="username">ورتݨ آلا ناں</string>
   <string name="password">پاس ورڈ</string>
@@ -51,7 +56,7 @@
   <string name="menu_retry_upload">ولدا کوشش کرو</string>
   <string name="menu_cancel_upload">منسوخ</string>
   <string name="menu_download">ڈاؤن لوڈ ، لہاوݨ</string>
-  <string name="preference_license">لائیسنس</string>
+  <string name="preference_license">پہلے طے تھیا لائسنس</string>
   <string name="preference_theme">رات آلا مزاج</string>
   <string name="preference_theme_summary">گھاٹا تھیم ورتو</string>
   <string name="license_name_cc0">سی سی او</string>
@@ -83,7 +88,6 @@
   <string name="media_detail_license">لائیسنس</string>
   <string name="media_detail_coordinates">کوآرڈینیٹ</string>
   <string name="media_detail_coordinates_empty">کجھ نی ݙسیا</string>
-  <string name="use_wikidata">وکی ڈیٹا ورتو</string>
   <string name="number_of_uploads">میݙے حالیہ اپ لوڈ دی حد</string>
   <string name="maximum_limit">زیادہ حد</string>
   <string name="set_limit">حالیہ اپ لوڈ دی حد مقرر کرو</string>

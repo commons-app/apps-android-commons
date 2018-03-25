@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+  <string name="preference_category_appearance">Utseende</string>
+  <string name="preference_category_feedback">Tilbakemelding</string>
   <string name="app_name">Commons</string>
+  <string name="bullet">•</string>
   <string name="menu_settings">Innstillinger</string>
   <string name="username">Brukernavn</string>
   <string name="password">Passord</string>
@@ -75,8 +78,8 @@
   <string name="menu_about">Om</string>
   <string name="about_license">Wikimedia Commons-appen er åpen kildekode og er skapt og vedlikeholdt av stipendiater og frivillige fra Wikimedia-fellesskapet. Wikimedia Foundation er ikke involvert i utviklingen eller vedlikeholdet av appen.</string>
   <string name="about_improve">Opprett en ny &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;GitHub-sak&lt;/a&gt; for feilrapporter og forslag.</string>
-  <string name="about_privacy_policy">&lt;a href=\"https://github.com/commons-app/apps-android-commons/wiki/Privacy-policy\"&gt;Personvernpolicy&lt;/a&gt;</string>
-  <string name="about_credits">&lt;a href=\"https://github.com/commons-app/apps-android-comons/blob/master/CREDITS\"&gt;Bidragsytere&lt;/a&gt;</string>
+  <string name="about_privacy_policy" fuzzy="true">&lt;a href=\"https://github.com/commons-app/apps-android-commons/wiki/Privacy-policy\"&gt;Personvernpolicy&lt;/a&gt;</string>
+  <string name="about_credits" fuzzy="true">&lt;a href=\"https://github.com/commons-app/apps-android-comons/blob/master/CREDITS\"&gt;Bidragsytere&lt;/a&gt;</string>
   <string name="title_activity_about">Om</string>
   <string name="menu_feedback">Send tilbakemelding (via Epost)</string>
   <string name="no_email_client">Ingen epostklient installert</string>
@@ -88,7 +91,7 @@
   <string name="share_license_summary">Dette bildet vil bli lisensiert under %1$s</string>
   <string name="media_upload_policy">Ved å laste opp dette bildet erklærer jeg at dette er mitt eget verk, og at det ikke inneholder opphavsrettsbeskyttet materiale eller selvportretter, og ellers er i samsvar med &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines\"&gt;Wikimedia Commons\' retningslinjer&lt;/a&gt;.</string>
   <string name="menu_download">Last ned</string>
-  <string name="preference_license">Lisens</string>
+  <string name="preference_license">Standardlisens</string>
   <string name="use_previous">Bruk forrige tittel/beskrivelse</string>
   <string name="allow_gps">Hent automatisk nåværende plassering</string>
   <string name="allow_gps_summary">Hent nåværende plassering for å tilby kategoriforslag om bildet ikke er geotagget</string>
@@ -117,11 +120,17 @@
   <string name="tutorial_1_text">Wikimedia Commons lagrer de fleste bildene som brukes på Wikipedia.</string>
   <string name="tutorial_1_subtext">Dine bilder hjelper til å utdanne mennesker verden over!</string>
   <string name="tutorial_2_text">Last opp bilder som er tatt eller skapt av deg:</string>
-  <string name="tutorial_2_subtext">– Naturlige objekter (blomster, dyr, fjell)\n– Nyttige objekter (sykler, togstasjoner)\n– Berømte personer (ordføreren din, OL-deltakere du har møtt)</string>
+  <string name="tutorial_2_subtext">– Naturlige objekter (blomster, dyr, fjell)\n– Nyttige objekter (sykler, jernbanestasjoner)\n– Berømte personer (ordføreren din, OL-deltakere du har møtt)</string>
+  <string name="tutorial_2_subtext_1">Naturlige objekter (blomster, dyr, fjell)</string>
+  <string name="tutorial_2_subtext_3">Berømte personer (din ordfører, OL-deltakere du møtte)</string>
   <string name="tutorial_3_text">Vennligst IKKE last opp:</string>
   <string name="tutorial_3_subtext">- Selfies eller bilder av vennene dine\n- Bilder som du har lastet ned fra internet\n- Skjermbilder tatt fra proprietære apper</string>
+  <string name="tutorial_3_subtext_1">Selvportrett eller bilder av dine venner</string>
+  <string name="tutorial_3_subtext_2">Bilder du lastet ned fra Internett</string>
   <string name="tutorial_4_text">Opplastingseksempel:</string>
   <string name="tutorial_4_subtext">- Tittel: Sydneys operahus\n- Beskrivelse: Operahuset i Sydney sett fra andre siden av bukten\n- Kategorier: Operahuset i Sydney ifra vest, Operahuset i Sydney utenfra</string>
+  <string name="tutorial_4_subtext_1">Tittel: Operahuset i Sydney</string>
+  <string name="tutorial_4_subtext_2">Beskrivelse: Operahuset i Sydney som det sees fra motsatt side av bukten</string>
   <string name="welcome_wikipedia_text">Bidra med dine bilder. Hjelp til med å blåse liv i Wikipedias artikler!</string>
   <string name="welcome_wikipedia_subtext">Bilder på Wikipedia kommer fra Wikimedia Commons.</string>
   <string name="welcome_copyright_text">Bildene dine kan være til hjelp for mennesker over hele verden som søker kunnskap og dannelse.</string>
@@ -154,8 +163,6 @@
   <string name="media_detail_coordinates_empty">Ingen oppgitt</string>
   <string name="become_a_tester_title">Bli betatester</string>
   <string name="become_a_tester_description">Registrer deg på vår betakanal på Google Play og få tidlig tilgang til nye funksjoner og feilrettinger</string>
-  <string name="use_wikidata">Bruk Wikidata</string>
-  <string name="use_wikidata_summary">(Advarsel: Store mengder mobildata kan bli brukt om denne slås av)</string>
   <string name="_2fa_code">2FA-kode</string>
   <string name="number_of_uploads">Grense for mine seneste opplastinger</string>
   <string name="maximum_limit">Maksimumsgrense</string>
@@ -207,6 +214,7 @@
   <string name="login_to_your_account">Logg inn med kontoen din</string>
   <string name="send_log_file">Send loggfil</string>
   <string name="send_log_file_description">Send loggfil til utviklerne via epost</string>
+  <string name="no_web_browser">Ingen internettleser funnet som kan åpne lenken</string>
   <string name="nearby_location_has_not_changed">Stedet har ikke blitt endret.</string>
   <string name="nearby_location_not_available">Sted ikke tilgjengelig.</string>
   <string name="location_permission_rationale_nearby">Tillatelse kreves for å vise listen over steder i nærheten</string>
@@ -217,4 +225,5 @@
   <string name="notifications_thank_you_edit">Takk for at du har gjort en redigering</string>
   <string name="notifications_mention">%1$s nevnte deg på %2$s.</string>
   <string name="toggle_view_button">Skift visning</string>
+  <string name="about_faq">Ofte stilte spørsmål</string>
 </resources>
