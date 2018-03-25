@@ -7,7 +7,6 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.content.ContextCompat;
-import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -48,8 +47,6 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment {
     TextView waitingMessage;
     @BindView(R.id.loadingContributionsProgressBar)
     ProgressBar progressBar;
-    @BindView(R.id.swipeRefreshContributions)
-    SwipeRefreshLayout swipeRefreshLayout;
 
     @Inject
     @Named("prefs")
@@ -83,13 +80,6 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment {
         }
 
         changeProgressBarVisibility(true);
-        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                ((ContributionsListAdapter)contributionsList.getAdapter()).notifyDataSetChanged();
-                swipeRefreshLayout.setRefreshing(false);
-            }
-        });
         return v;
     }
 
