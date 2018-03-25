@@ -61,7 +61,6 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
     private NearbyActivityMode viewMode;
     private Disposable placesDisposable;
     private boolean lockNearbyView; //Determines if the nearby places needs to be refreshed
-    private boolean isPlaceListEmpty=true;
     @BindView(R.id.swipe_container) SwipeRefreshLayout swipeLayout;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,7 +76,6 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
             public void onRefresh() {
                 lockNearbyView(false);
                 refreshView(true);
-                swipeLayout.setRefreshing(false);
             }
         });
     }
@@ -274,7 +272,7 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
         }
         locationManager.registerLocationManager();
         LatLng lastLocation = locationManager.getLastLocation();
-        if (!isPlaceListEmpty && curLatLang != null && curLatLang.equals(lastLocation)) { //refresh view only if location has changed
+        if (curLatLang != null && curLatLang.equals(lastLocation)) { //refresh view only if location has changed
             if (isHardRefresh) {
                 ViewUtil.showSnackbar(findViewById(R.id.container), R.string.nearby_location_has_not_changed);
             }
@@ -303,10 +301,7 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
         String gsonCurLatLng = gson.toJson(curLatLang);
 
         if (placeList.size() == 0) {
-            isPlaceListEmpty = true;
             ViewUtil.showSnackbar(findViewById(R.id.container), R.string.no_nearby);
-        } else {
-            isPlaceListEmpty = false;
         }
 
         bundle.clear();
