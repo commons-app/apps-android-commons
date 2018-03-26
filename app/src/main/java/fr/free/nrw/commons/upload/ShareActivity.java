@@ -751,7 +751,7 @@ public class ShareActivity
             scaled = Bitmap.createScaledBitmap(bitmap, 3000, 3000, true);
         } catch (IOException e) {
         } catch (NullPointerException e){
-            
+            scaled = bitmap;
         }
         // Load the high-resolution "zoomed-in" image.
         PhotoView expandedImageView = (PhotoView) findViewById(
