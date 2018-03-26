@@ -394,7 +394,8 @@ public class NearbyMapFragment extends DaggerFragment {
             }
         });
 
-        // Remove texts if it doesnt fit
+        // Remove button text if they exceed 1 line or if internal layout has not been built
+        // Only need to check for directions button because it is the longest
         if (directionsButtonText.getLineCount() > 1 || directionsButtonText.getLineCount() == 0) {
             wikipediaButtonText.setVisibility(View.GONE);
             wikidataButtonText.setVisibility(View.GONE);
