@@ -233,6 +233,8 @@
   <string name="no_web_browser">No web browser found to open URL</string>
   <string name="null_url">Error! URL not found</string>
   <string name="nominate_deletion">Nominate for Deletion</string>
+  <string name="nominated_for_deletion">This image has been nominated for deletion.</string>
+  <string name="nominated_see_more"><u>See webpage for details</u></string>
   <string name="view_browser">View in Browser</string>
 
   <string name="nearby_location_has_not_changed">Location has not changed.</string>
