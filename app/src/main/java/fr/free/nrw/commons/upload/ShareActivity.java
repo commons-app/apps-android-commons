@@ -748,9 +748,10 @@ public class ShareActivity
         try {
             //Compress the Image
             bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), imageuri);
-
             scaled = Bitmap.createScaledBitmap(bitmap, 3000, 3000, true);
         } catch (IOException e) {
+        } catch (NullPointerException e){
+            
         }
         // Load the high-resolution "zoomed-in" image.
         PhotoView expandedImageView = (PhotoView) findViewById(
