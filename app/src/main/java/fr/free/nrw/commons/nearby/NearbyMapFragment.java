@@ -395,10 +395,7 @@ public class NearbyMapFragment extends DaggerFragment {
         });
 
         // Remove texts if it doesnt fit
-        if (wikipediaButtonText.getLineCount() > 1
-                || wikidataButtonText.getLineCount() > 1
-                || commonsButtonText.getLineCount() > 1
-                || directionsButtonText.getLineCount() > 1) {
+        if (directionsButtonText.getLineCount() > 1 || directionsButtonText.getLineCount() == 0) {
             wikipediaButtonText.setVisibility(View.GONE);
             wikidataButtonText.setVisibility(View.GONE);
             commonsButtonText.setVisibility(View.GONE);
