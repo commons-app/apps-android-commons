@@ -583,7 +583,7 @@ public class NearbyMapFragment extends DaggerFragment {
 
 
     /*
-    * Add amnchors back before making them visible again.
+    * Add anchors back before making them visible again.
     * */
     private void addAnchorToBigFABs(FloatingActionButton floatingActionButton, int anchorID) {
         CoordinatorLayout.LayoutParams params = new CoordinatorLayout.LayoutParams
@@ -594,7 +594,7 @@ public class NearbyMapFragment extends DaggerFragment {
     }
 
     /*
-    * Add amnchors back before making them visible again. Big and small fabs have different anchor
+    * Add anchors back before making them visible again. Big and small fabs have different anchor
     * gravities, therefore the are two methods.
     * */
     private void addAnchorToSmallFABs(FloatingActionButton floatingActionButton, int anchorID) {
@@ -651,9 +651,6 @@ public class NearbyMapFragment extends DaggerFragment {
                 DirectUpload directUpload = new DirectUpload(this, controller);
                 storeSharedPrefs();
                 directUpload.initiateGalleryUpload();
-
-                //TODO: App crashes after image upload completes
-                //TODO: Handle onRequestPermissionsResult
             }
         });
     }
