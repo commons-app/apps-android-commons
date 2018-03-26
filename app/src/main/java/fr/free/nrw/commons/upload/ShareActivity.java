@@ -12,6 +12,8 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.BitmapRegionDecoder;
 import android.graphics.Point;
 import android.graphics.Rect;
 import android.net.Uri;
@@ -19,6 +21,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.ParcelFileDescriptor;
+import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
@@ -728,16 +731,36 @@ public class ShareActivity
         if (CurrentAnimator != null) {
             CurrentAnimator.cancel();
         }
+        InputStream input = null;
+        Bitmap scaled = null;
+        try {
+            input = this.getContentResolver().openInputStream(imageuri);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        BitmapRegionDecoder decoder = null;
+        try {
+            decoder = BitmapRegionDecoder.newInstance(input, false);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        Bitmap bitmap = decoder.decodeRegion(new Rect(10, 10, 50, 50), null);
+        try {
+            //Compress the Image
+            bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), imageuri);
 
-    // Load the high-resolution "zoomed-in" image.
+            scaled = Bitmap.createScaledBitmap(bitmap, 3000, 3000, true);
+        } catch (IOException e) {
+        }
+        // Load the high-resolution "zoomed-in" image.
         PhotoView expandedImageView = (PhotoView) findViewById(
                 R.id.expanded_image);
-        expandedImageView.setImageURI(imageuri);
+        expandedImageView.setImageBitmap(scaled);
 
 
         
-    // Calculate the starting and ending bounds for the zoomed-in image.
-    // This step involves lots of math. Yay, math.
+        // Calculate the starting and ending bounds for the zoomed-in image.
+        // This step involves lots of math. Yay, math.
         final Rect startBounds = new Rect();
         final Rect finalBounds = new Rect();
         final Point globalOffset = new Point();
@@ -757,10 +780,10 @@ public class ShareActivity
         // bounds using the "center crop" technique. This prevents undesirable
         // stretching during the animation. Also calculate the start scaling
         // factor (the end scaling factor is always 1.0).
-        float startScale;
+       float startScale;
         if ((float) finalBounds.width() / finalBounds.height()
                 > (float) startBounds.width() / startBounds.height()) {
-            // Extend start bounds horizontally
+        // Extend start bounds horizontally
             startScale = (float) startBounds.height() / finalBounds.height();
             float startWidth = startScale * finalBounds.width();
             float deltaWidth = (startWidth - startBounds.width()) / 2;
@@ -817,9 +840,9 @@ public class ShareActivity
         set.start();
         CurrentAnimator = set;
 
-// Upon clicking the zoomed-in image, it should zoom back down
-// to the original bounds and show the thumbnail instead of
-// the expanded image.
+        // Upon clicking the zoomed-in image, it should zoom back down
+        // to the original bounds and show the thumbnail instead of
+        // the expanded image.
         final float startScaleFinal = startScale;
         zoomOutButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -854,16 +877,18 @@ public class ShareActivity
                         CurrentAnimator = null;
                     }
 
-                    @Override
+                   @Override
                     public void onAnimationCancel(Animator animation) {
-                        thumbView.setAlpha(1f);
-                        expandedImageView.setVisibility(View.GONE);
+                       thumbView.setAlpha(1f);
+                       expandedImageView.setVisibility(View.GONE);
                         CurrentAnimator = null;
                     }
                 });
                 set.start();
                 CurrentAnimator = set;
+
             }
+
         });
     }
 
