@@ -131,6 +131,7 @@ public class AboutActivity extends NavigationBaseActivity {
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
 
     @OnClick(R.id.about_translate)
     public void launchTranslate(View view) {
