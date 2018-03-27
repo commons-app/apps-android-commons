@@ -65,17 +65,9 @@ public class NotificationActivity extends NavigationBaseActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         DividerItemDecoration itemDecor = new DividerItemDecoration(recyclerView.getContext(), DividerItemDecoration.VERTICAL);
         recyclerView.addItemDecoration(itemDecor);
-        if (!NetworkUtils.isInternetConnectionEstablished(this)) {
-            progressBar.setVisibility(View.GONE);
-            Snackbar.make(relativeLayout , R.string.no_internet, Snackbar.LENGTH_INDEFINITE)
-                    .setAction(R.string.retry, view -> {
-                        refresh();
-            }).show();
-        }else {
-            addNotifications();
-        }
-
+        refresh();
     }
+
     private void refresh() {
         if (!NetworkUtils.isInternetConnectionEstablished(this)) {
             progressBar.setVisibility(View.GONE);
