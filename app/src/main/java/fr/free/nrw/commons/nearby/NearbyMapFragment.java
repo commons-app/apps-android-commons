@@ -262,7 +262,9 @@ public class NearbyMapFragment extends DaggerFragment {
                                     new LatLng(curMapBoxLatLng.getLatitude()- CAMERA_TARGET_SHIFT_FACTOR_PORTRAIT,
                                             curMapBoxLatLng.getLongitude())
                                     : curMapBoxLatLng ) // Sets the new camera position
-                            .zoom(mapboxMap.getCameraPosition().zoom) // Same zoom level
+                            .zoom(isBottomListSheetExpanded ?
+                                    11 // zoom level is fixed to 11 when bottom sheet is expanded
+                                    :mapboxMap.getCameraPosition().zoom) // Same zoom level
                             .build();
                 }else {
                     position = new CameraPosition.Builder()
@@ -270,7 +272,9 @@ public class NearbyMapFragment extends DaggerFragment {
                                     new LatLng(curMapBoxLatLng.getLatitude()- CAMERA_TARGET_SHIFT_FACTOR_LANDSCAPE,
                                             curMapBoxLatLng.getLongitude())
                                     : curMapBoxLatLng ) // Sets the new camera position
-                            .zoom(mapboxMap.getCameraPosition().zoom) // Same zoom level
+                            .zoom(isBottomListSheetExpanded ?
+                                    11 // zoom level is fixed to 11 when bottom sheet is expanded
+                                    :mapboxMap.getCameraPosition().zoom) // Same zoom level
                             .build();
                 }
 
@@ -291,14 +295,14 @@ public class NearbyMapFragment extends DaggerFragment {
                             .target(new LatLng(curLatLng.getLatitude() - CAMERA_TARGET_SHIFT_FACTOR_PORTRAIT,
                                     curLatLng.getLongitude())) // Sets the new camera target above
                             // current to make it visible when sheet is expanded
-                            .zoom(11) // Same zoom level
+                            .zoom(11) // Fixed zoom level
                             .build();
                 } else {
                     position = new CameraPosition.Builder()
                             .target(new LatLng(curLatLng.getLatitude() - CAMERA_TARGET_SHIFT_FACTOR_LANDSCAPE,
                                     curLatLng.getLongitude())) // Sets the new camera target above
                             // current to make it visible when sheet is expanded
-                            .zoom(11) // Same zoom level
+                            .zoom(11) // Fixed zoom level
                             .build();
                 }
 
@@ -366,10 +370,29 @@ public class NearbyMapFragment extends DaggerFragment {
         fabRecenter.setOnClickListener(view -> {
             if (curLatLng != null) {
                 mapView.getMapAsync(mapboxMap -> {
-                    CameraPosition position = new CameraPosition.Builder()
-                            .target(new LatLng(curLatLng.getLatitude(), curLatLng.getLongitude())) // Sets the new camera position
-                            .zoom(11) // Sets the zoom
-                            .build(); // Creates a CameraPosition from the builder
+                    CameraPosition position;
+
+                    if(ViewUtil.isPortrait(getActivity())){
+                        position = new CameraPosition.Builder()
+                                .target(isBottomListSheetExpanded ?
+                                        new LatLng(curLatLng.getLatitude()- CAMERA_TARGET_SHIFT_FACTOR_PORTRAIT,
+                                                curLatLng.getLongitude())
+                                        : new LatLng(curLatLng.getLatitude(), curLatLng.getLongitude(), 0)) // Sets the new camera position
+                                .zoom(isBottomListSheetExpanded ?
+                                        11 // zoom level is fixed to 11 when bottom sheet is expanded
+                                        :mapboxMap.getCameraPosition().zoom) // Same zoom level
+                                .build();
+                    }else {
+                        position = new CameraPosition.Builder()
+                                .target(isBottomListSheetExpanded ?
+                                        new LatLng(curLatLng.getLatitude()- CAMERA_TARGET_SHIFT_FACTOR_LANDSCAPE,
+                                                curLatLng.getLongitude())
+                                        : new LatLng(curLatLng.getLatitude(), curLatLng.getLongitude(), 0)) // Sets the new camera position
+                                .zoom(isBottomListSheetExpanded ?
+                                        11 // zoom level is fixed to 11 when bottom sheet is expanded
+                                        :mapboxMap.getCameraPosition().zoom) // Same zoom level
+                                .build();
+                    }
 
                     mapboxMap.animateCamera(CameraUpdateFactory
                             .newCameraPosition(position), 1000);
