@@ -55,6 +55,7 @@ import dagger.android.support.DaggerFragment;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.contributions.ContributionController;
 import fr.free.nrw.commons.utils.UriDeserializer;
+import fr.free.nrw.commons.utils.ViewUtil;
 import timber.log.Timber;
 
 import static android.app.Activity.RESULT_OK;
@@ -105,7 +106,8 @@ public class NearbyMapFragment extends DaggerFragment {
     private PolygonOptions currentLocationPolygonOptions;
 
     private boolean isBottomListSheetExpanded;
-    private final double CAMERA_TARGET_SHIFT_FACTOR = 0.06;
+    private final double CAMERA_TARGET_SHIFT_FACTOR_PORTRAIT = 0.06;
+    private final double CAMERA_TARGET_SHIFT_FACTOR_LANDSCAPE = 0.04;
 
     @Inject
     @Named("prefs")
@@ -253,13 +255,24 @@ public class NearbyMapFragment extends DaggerFragment {
             }
 
                 // Make camera to follow user on location change
-                CameraPosition position = new CameraPosition.Builder()
-                        .target(isBottomListSheetExpanded ?
-                                new LatLng(curMapBoxLatLng.getLatitude()- CAMERA_TARGET_SHIFT_FACTOR,
-                                        curMapBoxLatLng.getLongitude())
-                                : curMapBoxLatLng ) // Sets the new camera position
-                        .zoom(mapboxMap.getCameraPosition().zoom) // Same zoom level
-                        .build();
+                CameraPosition position ;
+                if(ViewUtil.isPortrait(getActivity())){
+                    position = new CameraPosition.Builder()
+                            .target(isBottomListSheetExpanded ?
+                                    new LatLng(curMapBoxLatLng.getLatitude()- CAMERA_TARGET_SHIFT_FACTOR_PORTRAIT,
+                                            curMapBoxLatLng.getLongitude())
+                                    : curMapBoxLatLng ) // Sets the new camera position
+                            .zoom(mapboxMap.getCameraPosition().zoom) // Same zoom level
+                            .build();
+                }else {
+                    position = new CameraPosition.Builder()
+                            .target(isBottomListSheetExpanded ?
+                                    new LatLng(curMapBoxLatLng.getLatitude()- CAMERA_TARGET_SHIFT_FACTOR_LANDSCAPE,
+                                            curMapBoxLatLng.getLongitude())
+                                    : curMapBoxLatLng ) // Sets the new camera position
+                            .zoom(mapboxMap.getCameraPosition().zoom) // Same zoom level
+                            .build();
+                }
 
                 mapboxMap.animateCamera(CameraUpdateFactory
                         .newCameraPosition(position), 1000);
@@ -273,12 +286,21 @@ public class NearbyMapFragment extends DaggerFragment {
         if (mapboxMap != null && curLatLng != null) {
             if (isBottomListSheetExpanded) {
                 // Make camera to follow user on location change
-                position = new CameraPosition.Builder()
-                        .target(new LatLng(curLatLng.getLatitude() - CAMERA_TARGET_SHIFT_FACTOR,
-                                curLatLng.getLongitude())) // Sets the new camera target above
-                        // current to make it visible when sheet is expanded
-                        .zoom(11) // Same zoom level
-                        .build();
+                if(ViewUtil.isPortrait(getActivity())) {
+                    position = new CameraPosition.Builder()
+                            .target(new LatLng(curLatLng.getLatitude() - CAMERA_TARGET_SHIFT_FACTOR_PORTRAIT,
+                                    curLatLng.getLongitude())) // Sets the new camera target above
+                            // current to make it visible when sheet is expanded
+                            .zoom(11) // Same zoom level
+                            .build();
+                } else {
+                    position = new CameraPosition.Builder()
+                            .target(new LatLng(curLatLng.getLatitude() - CAMERA_TARGET_SHIFT_FACTOR_LANDSCAPE,
+                                    curLatLng.getLongitude())) // Sets the new camera target above
+                            // current to make it visible when sheet is expanded
+                            .zoom(11) // Same zoom level
+                            .build();
+                }
 
             } else {
                 // Make camera to follow user on location change
