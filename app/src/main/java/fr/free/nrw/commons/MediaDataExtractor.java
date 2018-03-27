@@ -35,6 +35,7 @@ import timber.log.Timber;
 public class MediaDataExtractor {
     private final MediaWikiApi mediaWikiApi;
     private boolean fetched;
+    private boolean deletionStatus;
     private ArrayList<String> categories;
     private Map<String, String> descriptions;
     private String license;
@@ -57,6 +58,14 @@ public class MediaDataExtractor {
     public void fetch(String filename, LicenseList licenseList) throws IOException {
         if (fetched) {
             throw new IllegalStateException("Tried to call MediaDataExtractor.fetch() again.");
+        }
+
+        try{
+            Timber.d("Nominated for deletion: " + mediaWikiApi.pageExists("Commons:Deletion_requests/"+filename));
+            deletionStatus = mediaWikiApi.pageExists("Commons:Deletion_requests/"+filename);
+        }
+        catch (Exception e){
+            Timber.d(e.getMessage());
         }
 
         MediaResult result = mediaWikiApi.fetchMediaByFilename(filename);
@@ -295,6 +304,9 @@ public class MediaDataExtractor {
         media.setCoordinates(coordinates);
         if (license != null) {
             media.setLicense(license);
+        }
+        if (deletionStatus){
+            media.setRequestedDeletion();
         }
 
         // add author, date, etc fields
