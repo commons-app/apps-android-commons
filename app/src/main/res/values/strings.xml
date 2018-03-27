@@ -233,6 +233,8 @@
   <string name="no_web_browser">No web browser found to open URL</string>
   <string name="null_url">Error! URL not found</string>
   <string name="nominate_deletion">Nominate for Deletion</string>
+  <string name="nominated_for_deletion">This image has been nominated for deletion.</string>
+  <string name="nominated_see_more"><u>See webpage for details</u></string>
   <string name="view_browser">View in Browser</string>
 
   <string name="nearby_location_has_not_changed">Location has not changed.</string>
@@ -250,8 +252,9 @@
   <string name="nearby_wikidata">WIKIDATA</string>
   <string name="nearby_wikipedia">WIKIPEDIA</string>
   <string name="nearby_commons">COMMONS</string>
-  <string name="about_rate_us"><u>Rate Us</u></string>
-  <string name="about_faq">Frequently Asked Questions</string>
+
+  <string name="about_rate_us"><u>Rate us</u></string>
+  <string name="about_faq">FAQ</string>
   <string name="welcome_skip_button">Skip Tutorial</string>
   
   <string name="no_internet">Internet unavailable</string>
@@ -261,7 +264,7 @@
 
   <string name="about_translate"><u>Translate</u></string>
   <string name="about_translate_title">Languages</string>
-  <string name="about_translate_message">Select the langauge you want translations for ?</string>
+  <string name="about_translate_message">Select the language that you would like to submit translations for</string>
   <string name="about_translate_proceed">Proceed</string>
   <string name="about_translate_cancel">Cancel</string>
 

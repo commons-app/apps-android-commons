@@ -394,11 +394,9 @@ public class NearbyMapFragment extends DaggerFragment {
             }
         });
 
-        // Remove texts if it doesnt fit
-        if (wikipediaButtonText.getLineCount() > 1
-                || wikidataButtonText.getLineCount() > 1
-                || commonsButtonText.getLineCount() > 1
-                || directionsButtonText.getLineCount() > 1) {
+        // Remove button text if they exceed 1 line or if internal layout has not been built
+        // Only need to check for directions button because it is the longest
+        if (directionsButtonText.getLineCount() > 1 || directionsButtonText.getLineCount() == 0) {
             wikipediaButtonText.setVisibility(View.GONE);
             wikidataButtonText.setVisibility(View.GONE);
             commonsButtonText.setVisibility(View.GONE);
@@ -583,7 +581,7 @@ public class NearbyMapFragment extends DaggerFragment {
 
 
     /*
-    * Add amnchors back before making them visible again.
+    * Add anchors back before making them visible again.
     * */
     private void addAnchorToBigFABs(FloatingActionButton floatingActionButton, int anchorID) {
         CoordinatorLayout.LayoutParams params = new CoordinatorLayout.LayoutParams
@@ -594,7 +592,7 @@ public class NearbyMapFragment extends DaggerFragment {
     }
 
     /*
-    * Add amnchors back before making them visible again. Big and small fabs have different anchor
+    * Add anchors back before making them visible again. Big and small fabs have different anchor
     * gravities, therefore the are two methods.
     * */
     private void addAnchorToSmallFABs(FloatingActionButton floatingActionButton, int anchorID) {
@@ -651,9 +649,6 @@ public class NearbyMapFragment extends DaggerFragment {
                 DirectUpload directUpload = new DirectUpload(this, controller);
                 storeSharedPrefs();
                 directUpload.initiateGalleryUpload();
-
-                //TODO: App crashes after image upload completes
-                //TODO: Handle onRequestPermissionsResult
             }
         });
     }
