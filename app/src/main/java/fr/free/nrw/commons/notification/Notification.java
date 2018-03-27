@@ -10,12 +10,14 @@ public class Notification {
     public String date;
     public String description;
     public String link;
+    public String iconUrl;
 
-    public Notification(NotificationType notificationType, String notificationText, String date, String description, String link) {
+    public Notification(NotificationType notificationType, String notificationText, String date, String description, String link, String iconUrl) {
         this.notificationType = notificationType;
         this.notificationText = notificationText;
         this.date = date;
         this.description = description;
         this.link = link;
+        this.iconUrl = iconUrl;
     }
 }

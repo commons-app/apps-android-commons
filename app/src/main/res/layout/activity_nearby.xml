@@ -21,9 +21,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 
-            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layout_below="@id/toolbar"
                 android:gravity="center_vertical"
                 android:orientation="horizontal">
 
@@ -37,7 +38,7 @@
                     android:id="@+id/container"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent" />
-        </LinearLayout>
+            </LinearLayout>
             <android.support.design.widget.FloatingActionButton
                 android:id="@+id/fab_list"
                 android:layout_width="wrap_content"
@@ -88,7 +89,7 @@
 
 
         </RelativeLayout>
-        
+
         <include layout="@layout/bottom_sheet_nearby" />
 
         <include

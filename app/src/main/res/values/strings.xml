@@ -233,14 +233,14 @@
   <string name="no_web_browser">No web browser found to open URL</string>
   <string name="null_url">Error! URL not found</string>
   <string name="nominate_deletion">Nominate for Deletion</string>
+  <string name="nominated_for_deletion">This image has been nominated for deletion.</string>
+  <string name="nominated_see_more"><u>See webpage for details</u></string>
   <string name="view_browser">View in Browser</string>
-
   <string name="nearby_location_has_not_changed">Location has not changed.</string>
   <string name="nearby_location_not_available">Location not available.</string>
   <string name="location_permission_rationale_nearby">Permission required to display a list of nearby places</string>
   <string name="get_directions">GET DIRECTIONS</string>
   <string name="read_article">READ ARTICLE</string>
-
   <string name="notifications_welcome" formatted="false">Welcome to Wikimedia Commons, %1$s! We\'re glad you\'re here.</string>
   <string name="notifications_talk_page_message">%1$s left a message on your talk page</string>
   <string name="notifications_thank_you_edit">Thank you for making an edit</string>
@@ -256,6 +256,10 @@
   <string name="about_translate"><![CDATA[<u>Translate</u>]]></string>
     <string name="about_translate_title">Languages</string>
   <string name="about_translate_message">Select the langauge you want translations for ?</string>
+    <string name="no_internet">Internet unavailable</string>
+  <string name="internet_established">Internet available</string>
+  <string name="error_notifications">Error fetching notifications</string>
+  <string name="no_notifications">No notifications found</string>
   <string name="about_translate_proceed">Proceed</string>
   <string name="about_translate_cancel">Cancel</string>
 
