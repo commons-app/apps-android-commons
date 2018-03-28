@@ -9,17 +9,21 @@ import java.util.List;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
+import fr.free.nrw.commons.contributions.Contribution;
+
 @Singleton
 public class UploadPresenter {
     private static final String TOP_CARD_STATE = "fr.free.nrw.commons.upload.top_card_state";
     private static final String BOTTOM_CARD_STATE = "fr.free.nrw.commons.upload.bottom_card_state";
 
     private final UploadModel uploadModel;
+    private final UploadController uploadController;
     private UploadView view = UploadView.DUMMY;
 
     @Inject
-    public UploadPresenter(UploadModel uploadModel) {
+    public UploadPresenter(UploadModel uploadModel, UploadController uploadController) {
         this.uploadModel = uploadModel;
+        this.uploadController = uploadController;
     }
 
     public void receive(Uri mediaUri, String mimeType, String source) {
@@ -64,7 +68,10 @@ public class UploadPresenter {
     }
 
     public void handleSubmit() {
-
+        List<Contribution> contributions = uploadModel.toContributions();
+        for (Contribution contribution : contributions) {
+            uploadController.startUpload(contribution);
+        }
     }
     //endregion
 
@@ -78,12 +85,19 @@ public class UploadPresenter {
         uploadModel.setBottomCardState(!uploadModel.isBottomCardState());
         view.setBottomCardState(uploadModel.isBottomCardState());
     }
+    //endregion
 
+    //region View / Lifecycle management
     public void init(Bundle state) {
         if (state != null) {
             uploadModel.setTopCardState(state.getBoolean(TOP_CARD_STATE, true));
             uploadModel.setBottomCardState(state.getBoolean(BOTTOM_CARD_STATE, true));
         }
+        uploadController.prepareService();
+    }
+
+    public void cleanup() {
+        uploadController.cleanup();
     }
 
     public Bundle getSavedState() {
@@ -92,9 +106,7 @@ public class UploadPresenter {
         bundle.putBoolean(BOTTOM_CARD_STATE, uploadModel.isBottomCardState());
         return bundle;
     }
-    //endregion
 
-    //region View management
     public void removeView() {
         this.view = UploadView.DUMMY;
     }
