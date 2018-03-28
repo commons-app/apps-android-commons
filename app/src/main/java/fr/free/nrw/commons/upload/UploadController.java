@@ -106,6 +106,10 @@ public class UploadController {
         startUpload(contribution, onComplete);
     }
 
+    public void startUpload(Contribution contribution) {
+        startUpload(contribution, c -> {});
+    }
+
     /**
      * Starts a new upload task.
      *

@@ -11,6 +11,7 @@ import java.util.Map;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import fr.free.nrw.commons.contributions.Contribution;
 import fr.free.nrw.commons.settings.Prefs;
 
 public class UploadModel {
@@ -151,6 +152,10 @@ public class UploadModel {
 
     public void setSelectedLicense(String licenseName) {
         this.license = licensesByName.get(licenseName);
+    }
+
+    public List<Contribution> toContributions() {
+        return null;
     }
 
     @SuppressWarnings("WeakerAccess")

@@ -117,6 +117,12 @@ public class UploadActivity extends AuthenticatedActivity implements UploadView 
     }
 
     @Override
+    protected void onDestroy() {
+        presenter.cleanup();
+        super.onDestroy();
+    }
+
+    @Override
     protected void onResume() {
         super.onResume();
         compositeDisposable = new CompositeDisposable();
