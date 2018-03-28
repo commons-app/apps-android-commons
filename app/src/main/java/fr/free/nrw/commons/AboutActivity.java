@@ -12,6 +12,9 @@ import android.text.style.UnderlineSpan;
 import android.util.Log;
 import android.support.customtabs.CustomTabsIntent;
 import android.support.v4.content.ContextCompat;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
@@ -121,6 +124,28 @@ public class AboutActivity extends NavigationBaseActivity {
         Utils.handleWebUrl(this,Uri.parse("https://github.com/commons-app/apps-android-commons/wiki/Frequently-Asked-Questions\\"));
     }
 
+FixingCrash
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_about, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.share_app_icon:
+                Intent sendIntent = new Intent();
+                sendIntent.setAction(Intent.ACTION_SEND);
+                sendIntent.putExtra(Intent.EXTRA_TEXT, "http://play.google.com/store/apps/details?id=fr.free.nrw.commons");
+                sendIntent.setType("text/plain");
+                startActivity(Intent.createChooser(sendIntent, "Share app via..."));
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+
     @OnClick(R.id.about_translate)
     public void launchTranslate(View view) {
         final ArrayAdapter<String> languageAdapter = new ArrayAdapter<String>(AboutActivity.this,
@@ -151,7 +176,7 @@ public class AboutActivity extends NavigationBaseActivity {
             }
         });
         builder.create().show();
-
+master
     }
 
 }
