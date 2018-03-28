@@ -267,5 +267,6 @@
   <string name="about_translate_message">Select the language that you would like to submit translations for</string>
   <string name="about_translate_proceed">Proceed</string>
   <string name="about_translate_cancel">Cancel</string>
+  <string name="retry">Retry</string>
 
 </resources>
