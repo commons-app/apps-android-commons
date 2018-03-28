@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <android.support.design.widget.CoordinatorLayout
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:id="@+id/coordinator_layout"
         android:layout_width="match_parent"
@@ -39,32 +39,13 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent" />
             </LinearLayout>
-            <android.support.design.widget.FloatingActionButton
-                android:id="@+id/fab_list"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:fabSize="mini"
-                android:layout_alignBottom="@id/toolbar"
-                android:layout_alignParentRight="true"
-                android:layout_marginRight="28dp"
-                android:layout_marginBottom="-96dp"
-                android:visibility="invisible"
-                app:elevation="6dp"
-                app:pressedTranslationZ="12dp"
-                app:backgroundTint="@color/button_blue"
-                android:clickable="true"
-                app:srcCompat="@drawable/ic_list_white_24dp"
-                android:scaleType="center"
-                />
 
             <View
                 android:id="@+id/transparentView"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentTop="true"
-                android:layout_marginTop="18dp"
+                android:layout_below="@id/toolbar"
                 android:background="#aa969696"
                 android:elevation="6dp">
 
