@@ -6,6 +6,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.text.Html;
 import android.text.SpannableString;
 import android.text.style.UnderlineSpan;
 import android.util.Log;
@@ -62,6 +63,18 @@ public class AboutActivity extends NavigationBaseActivity {
         content.setSpan(new UnderlineSpan(), 0, content.length(), 0);
         faqText.setText(content);
         versionText.setText(BuildConfig.VERSION_NAME);
+        TextView rate_us = findViewById(R.id.about_rate_us);
+        TextView privacy_policy = findViewById(R.id.about_privacy_policy);
+        TextView translate = findViewById(R.id.about_translate);
+        TextView credits = findViewById(R.id.about_credits);
+        TextView faq = findViewById(R.id.about_faq);
+
+        rate_us.setText(Html.fromHtml(getString(R.string.about_rate_us)));
+        privacy_policy.setText(Html.fromHtml(getString(R.string.about_privacy_policy)));
+        translate.setText(Html.fromHtml(getString(R.string.about_translate)));
+        credits.setText(Html.fromHtml(getString(R.string.about_credits)));
+        faq.setText(Html.fromHtml(getString(R.string.about_faq)));
+
         initDrawer();
     }
 
