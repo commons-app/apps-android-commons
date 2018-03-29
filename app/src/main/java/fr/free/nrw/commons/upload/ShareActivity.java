@@ -31,11 +31,14 @@ import android.support.graphics.drawable.VectorDrawableCompat;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.graphics.BitmapCompat;
 import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.WindowManager;
 import android.view.animation.DecelerateInterpolator;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -81,6 +84,7 @@ import timber.log.Timber;
 
 import static fr.free.nrw.commons.upload.ExistingFileAsync.Result.DUPLICATE_PROCEED;
 import static fr.free.nrw.commons.upload.ExistingFileAsync.Result.NO_DUPLICATE;
+import static java.lang.Long.min;
 
 /**
  * Activity for the title/desc screen after image is selected. Also starts processing image
@@ -731,6 +735,7 @@ public class ShareActivity
         if (CurrentAnimator != null) {
             CurrentAnimator.cancel();
         }
+        hideKeyboard(ShareActivity.this);
         InputStream input = null;
         Bitmap scaled = null;
         try {
@@ -747,8 +752,16 @@ public class ShareActivity
         Bitmap bitmap = decoder.decodeRegion(new Rect(10, 10, 50, 50), null);
         try {
             //Compress the Image
+            System.gc();
+            Runtime rt = Runtime.getRuntime();
+            long maxMemory = rt.freeMemory();
             bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), imageuri);
-            scaled = Bitmap.createScaledBitmap(bitmap, 3000, 3000, true);
+            int bitmapByteCount= BitmapCompat.getAllocationByteCount(bitmap);
+            long height = bitmap.getHeight();
+            long width = bitmap.getWidth();
+            long calHeight = (long) ((height * maxMemory)/(bitmapByteCount * 1.1));
+            long calWidth = (long) ((width * maxMemory)/(bitmapByteCount * 1.1));
+            scaled = Bitmap.createScaledBitmap(bitmap,(int) min(width,calWidth), (int) min(height,calHeight), true);
         } catch (IOException e) {
         } catch (NullPointerException e){
             scaled = bitmap;
@@ -891,6 +904,13 @@ public class ShareActivity
             }
 
         });
+    }
+    public static void hideKeyboard(Activity activity) {
+        View view = activity.findViewById(R.id.titleEdit | R.id.descEdit);
+        if (view != null) {
+            InputMethodManager imm = (InputMethodManager) activity.getSystemService(Context.INPUT_METHOD_SERVICE);
+            imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+        }
     }
 
 }
