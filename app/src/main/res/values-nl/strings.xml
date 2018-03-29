@@ -50,18 +50,19 @@
   <string name="categories_search_text_hint">Categorieën zoeken</string>
   <string name="menu_save_categories">Opslaan</string>
   <string name="refresh_button">Vernieuwen</string>
+  <string name="display_list_button">Lijst</string>
   <string name="contributions_subtitle_zero">Nog geen uploads</string>
-  <plurals name="contributions_subtitle" fuzzy="true">
-    <item quantity="zero">Nog geen uploads</item>
-    <item quantity="one">1 upload</item>
+  <plurals name="contributions_subtitle">
+    <item quantity="zero">\@string/contributions_subtitle_zero</item>
+    <item quantity="one">%1$d upload</item>
     <item quantity="other">%1$d uploads</item>
   </plurals>
   <plurals name="starting_multiple_uploads" fuzzy="true">
     <item quantity="one">Bezig met 1 upload</item>
     <item quantity="other">Bezig met %1$d uploads</item>
   </plurals>
-  <plurals name="multiple_uploads_title" fuzzy="true">
-    <item quantity="one">1 upload</item>
+  <plurals name="multiple_uploads_title">
+    <item quantity="one">%1$d upload</item>
     <item quantity="other">%1$d uploads</item>
   </plurals>
   <string name="categories_not_found">Er zijn geen categorieën met \"%1$s\" gevonden</string>
@@ -152,5 +153,20 @@
   <string name="navigation_item_settings">Instellingen</string>
   <string name="navigation_item_feedback">Terugkoppeling</string>
   <string name="navigation_item_logout">Afmelden</string>
+  <string name="nearby_info_menu_wikipedia_article">Wikipedia-artikel</string>
   <string name="error_while_cache">Error tijdens het laden van de afbeeldingen</string>
+  <string name="nominate_deletion">Nomineer voor Verwijdering</string>
+  <string name="nominated_for_deletion">Deze afbeelding is genomineerd voor verwijdering.</string>
+  <string name="view_browser">Bekijk in Browser</string>
+  <string name="nearby_directions">VERWIJZINGEN</string>
+  <string name="nearby_wikidata">WIKIDATA</string>
+  <string name="about_faq" fuzzy="true">Vaak gestelde vragen</string>
+  <string name="no_internet">Geen internet</string>
+  <string name="internet_established">Internet beschikbaar</string>
+  <string name="error_notifications">Fout bij ophalen berichten.</string>
+  <string name="no_notifications">Geen berichten.</string>
+  <string name="about_translate_title">Talen</string>
+  <string name="about_translate_message">Selecteer de taal waarvoor u vertalingen wil indienen</string>
+  <string name="about_translate_proceed">Ga door</string>
+  <string name="about_translate_cancel">Annuleren</string>
 </resources>
