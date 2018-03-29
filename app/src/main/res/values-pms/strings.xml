@@ -59,6 +59,7 @@
   <string name="categories_search_text_hint">Sërché dle categorìe</string>
   <string name="menu_save_categories">Argistré</string>
   <string name="refresh_button">Agiorné</string>
+  <string name="display_list_button">Lista</string>
   <string name="gps_disabled">Ël GPS a l\'é disabilità su sò angign. Veul-lo ativelo?</string>
   <string name="enable_gps">Ativé ël GPS</string>
   <string name="contributions_subtitle_zero">Ancor gnun cariament</string>
@@ -211,6 +212,7 @@
   <string name="no_description_found">gnun-a descrission trovà</string>
   <string name="nearby_info_menu_commons_article">Pàgina dj\'archivi ëd Comun</string>
   <string name="nearby_info_menu_wikidata_article">Element ëd WikiData</string>
+  <string name="nearby_info_menu_wikipedia_article">Artìcol ëd Wikipedia</string>
   <string name="error_while_cache">Eror antramentre ch\'as butavo le plance an memòria local</string>
   <string name="title_info">Un tìtol dëscritiv ùnich për l\'archivi, che a servirà com nòm d\'archivi. A peul dovré un lengagi sempi con djë spassi. Ch\'a ancluda pa l\'estension dl\'archivi</string>
   <string name="description_info">Për piasì, ch\'a descriva ël mojen mej ch\'a peul: Andoa a l\'é stàit fàit? Për piasì, ch\'a descriva j\'oget o le përson-e. Ch\'a arvela j\'anformassion ch\'a l\'é nen belfé andviné, për esempi l\'ora dël dì, s\'a l\'é un panorama. Si ël mojen a smon cheicòs ëd foravìa, për piasì ch\'a spiega lòn ch\'a lo rend foravìa.</string>
@@ -236,6 +238,12 @@
   <string name="notifications_thank_you_edit">Mersì d\'avèj fàit na modìfica</string>
   <string name="notifications_mention">%1$s a l\'ha massionalo su %2$s .</string>
   <string name="toggle_view_button">Cangé la visualisassion</string>
-  <string name="about_faq">Chestion frequente</string>
+  <string name="nearby_directions">DIRESSION</string>
+  <string name="nearby_wikidata">WIKIDATA</string>
+  <string name="nearby_wikipedia">WIKIPEDIA</string>
+  <string name="nearby_commons">COMUN</string>
+  <string name="about_faq" fuzzy="true">Chestion frequente</string>
   <string name="welcome_skip_button">Sauté lë spiegon</string>
+  <string name="about_translate_title">Lenghe</string>
+  <string name="about_translate_message" fuzzy="true">Selessioné la lenga për la qual a veul le tradussion?</string>
 </resources>

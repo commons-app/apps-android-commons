@@ -226,7 +226,8 @@
   <string name="send_log_file_description">經由電子郵件寄送日誌檔案給開發人員</string>
   <string name="no_web_browser">找不到可以打開 URL 的網頁瀏覽器</string>
   <string name="null_url">錯誤！查無 URL</string>
-  <string name="nominate_deletion">刪除指定</string>
+  <string name="nominate_deletion">提名刪除</string>
+  <string name="nominated_for_deletion">此圖片已被提名刪除。</string>
   <string name="view_browser">於瀏覽器檢視</string>
   <string name="nearby_location_has_not_changed">位置無法更改。</string>
   <string name="nearby_location_not_available">位置無效。</string>
@@ -242,6 +243,16 @@
   <string name="nearby_wikidata">維基數據</string>
   <string name="nearby_wikipedia">維基百科</string>
   <string name="nearby_commons">維基共享資源</string>
-  <string name="about_faq">常見問題</string>
+  <string name="about_rate_us">&lt;u&gt;為我們評分&lt;/u&gt;</string>
+  <string name="about_faq">&lt;u&gt;常見問題&lt;/u&gt;</string>
   <string name="welcome_skip_button">跳過敎程</string>
+  <string name="no_internet">網路不可用</string>
+  <string name="internet_established">網路可用</string>
+  <string name="error_notifications">索取通知時錯誤</string>
+  <string name="no_notifications">查無通知</string>
+  <string name="about_translate">&lt;u&gt;翻譯&lt;/u&gt;</string>
+  <string name="about_translate_title">語言</string>
+  <string name="about_translate_message">選擇您想要提交翻譯的語言</string>
+  <string name="about_translate_proceed">已進行</string>
+  <string name="about_translate_cancel">取消</string>
 </resources>

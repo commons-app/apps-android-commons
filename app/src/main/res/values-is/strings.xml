@@ -234,6 +234,6 @@
   <string name="notifications_thank_you_edit">Takk fyrir að hafa gert breytingar</string>
   <string name="notifications_mention">%1$s minntist á þig á %2$s.</string>
   <string name="toggle_view_button">Víxla sýn</string>
-  <string name="about_faq">Algengar spurningar</string>
+  <string name="about_faq" fuzzy="true">Algengar spurningar</string>
   <string name="welcome_skip_button">Sleppa kennslu</string>
 </resources>

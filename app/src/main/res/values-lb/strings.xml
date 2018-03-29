@@ -57,6 +57,7 @@
   <string name="categories_search_text_hint">Kategorie sichen</string>
   <string name="menu_save_categories">Späicheren</string>
   <string name="refresh_button">Aktualiséieren</string>
+  <string name="display_list_button">Lëscht</string>
   <string name="gps_disabled">GPS ass op Ärem Apparat ausgeschalt. Wëllt Dir en aktivéieren?</string>
   <string name="enable_gps">GPS aktivéieren</string>
   <string name="contributions_subtitle_zero">Nach keng eropgeluede Fichieren</string>
@@ -132,6 +133,7 @@
   <string name="tutorial_3_subtext_2">Biller déi Dir aus dem Internet erofgelueden hutt</string>
   <string name="tutorial_4_text">Beispill-Upload:</string>
   <string name="tutorial_4_subtext">- Titel: Sydney Opera House\n- Beschreiwung: Sydney Opera House vun der Bay aus gesinn\n- Kategorien: Sydney Opera House, Sydney Opera House vu Westen, Sydney Opera House vu wäitem</string>
+  <string name="tutorial_4_subtext_1">Titel: Oper vu Sydney</string>
   <string name="tutorial_4_subtext_2">Beschreiwung:Oper vu Sydney esou wéi ee se vun der Bucht aus gesäit</string>
   <string name="welcome_wikipedia_text">Maacht mat mat Äre Biller. Hëlleft Wikipedia-Artikele méi lieweg ze maachen!</string>
   <string name="welcome_wikipedia_subtext">Biller op Wikipedia komme vu Wikimedia Commons.</string>
@@ -197,6 +199,7 @@
   <string name="no_description_found">keng Beschreiwung fonnt</string>
   <string name="nearby_info_menu_commons_article">Commons-Fichierssäit</string>
   <string name="nearby_info_menu_wikidata_article">Wikidata-Element</string>
+  <string name="nearby_info_menu_wikipedia_article">Wikipedia-Artikel</string>
   <string name="give_permission">Autorisatioun ginn</string>
   <string name="use_external_storage">Externe Späicher benotzen</string>
   <string name="use_external_storage_summary">Biller späicheren déi mat der in-app Kamera vun Ärem Apparat gemaach goufen</string>
@@ -205,6 +208,7 @@
   <string name="send_log_file_description">Log-Fichier per E-Mail un d\'Entwéckler schécken</string>
   <string name="null_url">Feeler! URL net fonnt</string>
   <string name="nominate_deletion">Nominéiere fir ze Läschen</string>
+  <string name="nominated_for_deletion">Dëst Bild gouf virgeschloe fir geläscht ze ginn.</string>
   <string name="view_browser">Am Browser weisen</string>
   <string name="nearby_location_has_not_changed">De Plaz huet net geännert.</string>
   <string name="nearby_location_not_available">Plaz ass net disponibel.</string>
@@ -212,5 +216,19 @@
   <string name="notifications_welcome">Wëllkomm op Wikimedia Commons, %1$s! Mir si frou datt Dir hei sidd.</string>
   <string name="notifications_thank_you_edit">Merci datt Dir eng Ännerung gemaach hutt</string>
   <string name="notifications_mention">%1$s huet Iech op %2$s ernimmt.</string>
-  <string name="about_faq">Dacks gestallt Froen</string>
+  <string name="nearby_directions">RICHTUNGEN</string>
+  <string name="nearby_wikidata">WIKIDATA</string>
+  <string name="nearby_wikipedia">WIKIPEDIA</string>
+  <string name="nearby_commons">COMMONS</string>
+  <string name="about_rate_us">&lt;u&gt;Bewäert eis&lt;/u&gt;</string>
+  <string name="about_faq">&lt;u&gt;FAQ&lt;/u&gt;</string>
+  <string name="no_internet">Internet net disponibel</string>
+  <string name="internet_established">Internet disponibel</string>
+  <string name="error_notifications">Feeler beim Ofruffe vun den Notifikatiounen</string>
+  <string name="no_notifications">Keng Notifikatioune fonnt</string>
+  <string name="about_translate">&lt;u&gt;Iwwersetzen&lt;/u&gt;</string>
+  <string name="about_translate_title">Sproochen</string>
+  <string name="about_translate_message">Sicht déi Sprooch eraus Fir déi Dir Iwwersetzunge maache wëllt</string>
+  <string name="about_translate_cancel">Ofbriechen</string>
+  <string name="retry">Nach eng Kéier probéieren</string>
 </resources>
