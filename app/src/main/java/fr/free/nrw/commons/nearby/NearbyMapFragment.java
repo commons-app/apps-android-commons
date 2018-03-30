@@ -579,7 +579,9 @@ public class NearbyMapFragment extends DaggerFragment {
                 transparentView.setAlpha(0);
                 closeFabs(isFabOpen);
                 hideFAB();
-                this.getView().requestFocus();
+                if (this.getView() != null) {
+                    this.getView().requestFocus();
+                }
                 break;
         }
     }
@@ -821,6 +823,9 @@ public class NearbyMapFragment extends DaggerFragment {
         if (mapView != null) {
             mapView.onDestroy();
         }
+        selected = null;
+        currentLocationMarker = null;
+
         super.onDestroyView();
     }
 
