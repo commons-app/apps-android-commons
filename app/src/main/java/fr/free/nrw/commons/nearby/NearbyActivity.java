@@ -262,8 +262,6 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
     @Override
     protected void onStop() {
         super.onStop();
-        locationManager.removeLocationListener(this);
-        locationManager.unregisterLocationManager();
     }
 
     @Override
@@ -292,8 +290,13 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
             // to the retained fragment object to perform its own cleanup.
             removeMapFragment();
             removeListFragment();
-            unregisterReceiver(broadcastReceiver);
+
         }
+        unregisterReceiver(broadcastReceiver);
+        broadcastReceiver = null;
+        locationManager.removeLocationListener(this);
+        locationManager.unregisterLocationManager();
+
     }
 
     private void addNetworkBroadcastReceiver() {
@@ -422,6 +425,7 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
         if (nearbyMapFragment != null) {
             android.support.v4.app.FragmentManager fm = getSupportFragmentManager();
             fm.beginTransaction().remove(nearbyMapFragment).commit();
+            nearbyMapFragment = null;
         }
     }
 
@@ -433,6 +437,7 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
         if (nearbyListFragment != null) {
             android.support.v4.app.FragmentManager fm = getSupportFragmentManager();
             fm.beginTransaction().remove(nearbyListFragment).commit();
+            nearbyListFragment = null;
         }
     }
 
