@@ -94,6 +94,9 @@ public class UploadActivity extends AuthenticatedActivity implements UploadView 
     @BindView(R.id.submit) Button submit;
     @BindView(R.id.license_previous) Button licensePrevious;
 
+    private int expandLessIcon;
+    private int expandMoreIcons;
+
     private RVRendererAdapter<CategoryItem> categoriesAdapter;
     private AbstractTextWatcher titleWatcher;
     private AbstractTextWatcher descriptionWatcher;
@@ -102,6 +105,7 @@ public class UploadActivity extends AuthenticatedActivity implements UploadView 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        configureTheme();
         setContentView(R.layout.activity_upload);
         ButterKnife.bind(this);
 
@@ -276,6 +280,11 @@ public class UploadActivity extends AuthenticatedActivity implements UploadView 
         finish();
     }
 
+    private void configureTheme() {
+        expandLessIcon = currentTheme ? R.drawable.ic_expand_less_white_24dp : R.drawable.ic_expand_less_black_24dp;
+        expandMoreIcons = currentTheme ? R.drawable.ic_expand_more_white_24dp : R.drawable.ic_expand_more_black_24dp;
+    }
+
     private void configureLicenses() {
         licenseSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -387,8 +396,7 @@ public class UploadActivity extends AuthenticatedActivity implements UploadView 
     }
 
     private void updateCardState(boolean state, ImageView button, View... content) {
-        button.setImageResource(state
-                ? R.drawable.ic_expand_less_black_24dp : R.drawable.ic_expand_more_black_24dp);
+        button.setImageResource(state ? expandLessIcon : expandMoreIcons);
         if (content != null) {
             for (View view : content) {
                 view.setVisibility(state ? View.VISIBLE : View.GONE);
