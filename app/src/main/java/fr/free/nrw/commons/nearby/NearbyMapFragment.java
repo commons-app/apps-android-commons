@@ -823,6 +823,9 @@ public class NearbyMapFragment extends DaggerFragment {
         if (mapView != null) {
             mapView.onDestroy();
         }
+        selected = null;
+        currentLocationMarker = null;
+
         super.onDestroyView();
     }
 

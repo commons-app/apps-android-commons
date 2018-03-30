@@ -415,31 +415,9 @@ public class ShareActivity
 
     private void performUnwantedPictureDetectionProcess() {
         String imageMediaFilePath = FileUtils.getPath(this,mediaUri);
-        DetectUnwantedPicturesAsync detectUnwantedPicturesAsync = new DetectUnwantedPicturesAsync(imageMediaFilePath, result -> {
-
-            if (result != ImageUtils.Result.IMAGE_OK) {
-                //show appropriate error message
-                String errorMessage = result == ImageUtils.Result.IMAGE_DARK ? getString(R.string.upload_image_too_dark) : getString(R.string.upload_image_blurry);
-                AlertDialog.Builder errorDialogBuilder = new AlertDialog.Builder(this);
-                errorDialogBuilder.setMessage(errorMessage);
-                errorDialogBuilder.setTitle(getString(R.string.warning));
-                errorDialogBuilder.setPositiveButton(getString(R.string.no), (dialogInterface, i) -> {
-                    //user does not wish to upload the picture, take them back to ContributionsActivity
-                    Intent intent = new Intent(ShareActivity.this, ContributionsActivity.class);
-                    dialogInterface.dismiss();
-                    startActivity(intent);
-                });
-                errorDialogBuilder.setNegativeButton(getString(R.string.yes), (dialogInterface, i) -> {
-                    //user wishes to go ahead with the upload of this picture, just dismiss this dialog
-                    dialogInterface.dismiss();
-                });
-
-                AlertDialog errorDialog = errorDialogBuilder.create();
-                if (!isFinishing()) {
-                    errorDialog.show();
-                }
-            }
-        });
+        DetectUnwantedPicturesAsync detectUnwantedPicturesAsync
+                = new DetectUnwantedPicturesAsync(new WeakReference<Activity>(this)
+                                                                , imageMediaFilePath);
 
         detectUnwantedPicturesAsync.execute();
     }
