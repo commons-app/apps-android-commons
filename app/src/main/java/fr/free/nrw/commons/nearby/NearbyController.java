@@ -54,41 +54,47 @@ public class NearbyController {
         }
         List<Place> places = nearbyPlaces.getFromWikidataQuery(curLatLng, Locale.getDefault().getLanguage());
 
-        LatLng[] boundaryCoordinates = {places.get(0).location,   // south
-                                        places.get(0).location, // north
-                                        places.get(0).location, // west
-                                        places.get(0).location};// east, init with a random location
+        if (places.size() > 0) {
+            LatLng[] boundaryCoordinates = {places.get(0).location,   // south
+                    places.get(0).location, // north
+                    places.get(0).location, // west
+                    places.get(0).location};// east, init with a random location
 
-        if (curLatLng != null) {
-            Timber.d("Sorting places by distance...");
-            final Map<Place, Double> distances = new HashMap<>();
-            for (Place place: places) {
-                distances.put(place, computeDistanceBetween(place.location, curLatLng));
-                // Find boundaries with basic find max approach
-                if (place.location.getLatitude() < boundaryCoordinates[0].getLatitude()) {
-                    boundaryCoordinates[0] = place.location;
-                }
-                if (place.location.getLatitude() > boundaryCoordinates[1].getLatitude()) {
-                    boundaryCoordinates[1] = place.location;
-                }
-                if (place.location.getLongitude() < boundaryCoordinates[2].getLongitude()) {
-                    boundaryCoordinates[2] = place.location;
-                }
-                if (place.location.getLongitude() > boundaryCoordinates[3].getLongitude()) {
-                    boundaryCoordinates[3] = place.location;
-                }
-            }
-            Collections.sort(places,
-                    (lhs, rhs) -> {
-                        double lhsDistance = distances.get(lhs);
-                        double rhsDistance = distances.get(rhs);
-                        return (int) (lhsDistance - rhsDistance);
+
+            if (curLatLng != null) {
+                Timber.d("Sorting places by distance...");
+                final Map<Place, Double> distances = new HashMap<>();
+                for (Place place : places) {
+                    distances.put(place, computeDistanceBetween(place.location, curLatLng));
+                    // Find boundaries with basic find max approach
+                    if (place.location.getLatitude() < boundaryCoordinates[0].getLatitude()) {
+                        boundaryCoordinates[0] = place.location;
                     }
-            );
+                    if (place.location.getLatitude() > boundaryCoordinates[1].getLatitude()) {
+                        boundaryCoordinates[1] = place.location;
+                    }
+                    if (place.location.getLongitude() < boundaryCoordinates[2].getLongitude()) {
+                        boundaryCoordinates[2] = place.location;
+                    }
+                    if (place.location.getLongitude() > boundaryCoordinates[3].getLongitude()) {
+                        boundaryCoordinates[3] = place.location;
+                    }
+                }
+                Collections.sort(places,
+                        (lhs, rhs) -> {
+                            double lhsDistance = distances.get(lhs);
+                            double rhsDistance = distances.get(rhs);
+                            return (int) (lhsDistance - rhsDistance);
+                        }
+                );
+            }
+            nearbyPlacesInfo.placeList = places;
+            nearbyPlacesInfo.boundaryCoordinates = boundaryCoordinates;
+            return nearbyPlacesInfo;
         }
-        nearbyPlacesInfo.placeList = places;
-        nearbyPlacesInfo.boundaryCoordinates = boundaryCoordinates;
-        return nearbyPlacesInfo;
+        else {
+            return null;
+        }
     }
 
     /**

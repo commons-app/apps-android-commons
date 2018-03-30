@@ -70,6 +70,6 @@
   <string name="navigation_item_feedback">Paşragihandin</string>
   <string name="navigation_item_logout">Derkeve</string>
   <string name="give_permission">Destûr bide</string>
-  <string name="about_faq">Pirsên ku pir têne pirsîn</string>
+  <string name="about_faq">&lt;u&gt;Pirsên ku pir têne pirsîn&lt;/u&gt;</string>
   <string name="welcome_skip_button">Rênîşandanê derbas bike</string>
 </resources>

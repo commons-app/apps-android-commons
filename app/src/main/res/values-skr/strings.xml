@@ -10,6 +10,7 @@
   <string name="username">ورتݨ آلا ناں</string>
   <string name="password">پاس ورڈ</string>
   <string name="login">لاگ ان تھیوو</string>
+  <string name="forgot_password">پاسورڈ بھل ڳئے ہو؟</string>
   <string name="signup">سائن اپ</string>
   <string name="logging_in_title">لاگ ان تھیندا پئے</string>
   <string name="logging_in_message">انتظار کرو۔۔۔</string>
@@ -45,6 +46,7 @@
   <string name="categories_search_text_hint">قسماں دی ڳول</string>
   <string name="menu_save_categories">بچاؤ</string>
   <string name="refresh_button">سجرا، تازہ کرو</string>
+  <string name="display_list_button">فہرست</string>
   <string name="enable_gps">جی پی ایس چلاؤ</string>
   <string name="contributions_subtitle_zero">اڄݨ ککھ وی اپ لوڈ نی تھیا</string>
   <string name="categories_activity_title">قسماں، زمرے</string>
@@ -109,7 +111,15 @@
   <string name="navigation_item_logout">لاگ آؤٹ</string>
   <string name="navigation_item_info">ٹیٹوریل</string>
   <string name="nearby_info_menu_wikidata_article">وکی ڈیٹا آئٹم</string>
+  <string name="nearby_info_menu_wikipedia_article">وکی پیڈیا دا مضمون</string>
   <string name="give_permission">اجازت ݙیوو</string>
   <string name="login_to_your_account">آپݨے کھاتے وچ لاگ ان تھیوو</string>
   <string name="send_log_file">لاگ فائل بھیجو</string>
+  <string name="nearby_wikidata">وکی ڈیٹا</string>
+  <string name="nearby_wikipedia">وکی پیڈیا</string>
+  <string name="nearby_commons">عام</string>
+  <string name="about_faq" fuzzy="true">عام طور تے پچھے ونڄݨ آلے سوال</string>
+  <string name="about_translate_title">زباناں</string>
+  <string name="about_translate_proceed">اڳوں تے تھیوو</string>
+  <string name="about_translate_cancel">منسوخ</string>
 </resources>

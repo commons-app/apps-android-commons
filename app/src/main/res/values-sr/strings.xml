@@ -235,6 +235,6 @@
   <string name="notifications_mention">%1$s Вас је поменуо на страници %2$s.</string>
   <string name="toggle_view_button">Пребаци приказ</string>
   <string name="about_rate_us"/>
-  <string name="about_faq">Често постављана питања</string>
+  <string name="about_faq" fuzzy="true">Често постављана питања</string>
   <string name="welcome_skip_button">Прескочи туторијал</string>
 </resources>
