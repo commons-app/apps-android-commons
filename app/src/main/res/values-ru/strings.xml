@@ -60,6 +60,7 @@
   <string name="categories_search_text_hint">Выбор категорий</string>
   <string name="menu_save_categories">Сохранить</string>
   <string name="refresh_button">Обновить</string>
+  <string name="display_list_button">Список</string>
   <string name="gps_disabled">GPS отключён в вашем устройстве. Хотите включить его?</string>
   <string name="enable_gps">Включить GPS</string>
   <string name="contributions_subtitle_zero">Загрузок пока нет</string>
@@ -215,6 +216,7 @@
   <string name="no_description_found">описание не найдено</string>
   <string name="nearby_info_menu_commons_article">Страница файла на Викискладе</string>
   <string name="nearby_info_menu_wikidata_article">Элемент Викиданных</string>
+  <string name="nearby_info_menu_wikipedia_article">Статья Википедии</string>
   <string name="error_while_cache">Ошибка при кэшировании картинок</string>
   <string name="title_info">Уникальное описание, которое будет сохранено как имя файла. Вы можете использовать естественный язык, разделяя слова пробелами. Пожалуйста, не указывайте расширение файла.</string>
   <string name="description_info">Пожалуйста, подробно опишите загружаемый файл: где он был снят? что на нём изображено? каков его контекст? Пожалуйста опишите изображённых персон или объекты. Добавьте информацию, о которой нельзя легко догадаться, например, время суток, когда снимался файл. Если снято что-то необычное, постарайтесь пояснить, что именно в этом необычного.</string>
@@ -240,7 +242,15 @@
   <string name="notifications_thank_you_edit">Спасибо за правку</string>
   <string name="notifications_mention">%1$s упомянул вас на %2$s.</string>
   <string name="toggle_view_button">Переключить режим просмотра</string>
+  <string name="nearby_directions">НАПРАВЛЕНИЯ</string>
+  <string name="nearby_wikidata">ВИКИДАННЫЕ</string>
+  <string name="nearby_wikipedia">ВИКИПЕДИЯ</string>
+  <string name="nearby_commons">ВИКИСКЛАД</string>
   <string name="about_rate_us">*</string>
-  <string name="about_faq">Часто задаваемые вопросы</string>
+  <string name="about_faq" fuzzy="true">Часто задаваемые вопросы</string>
   <string name="welcome_skip_button">Пропустить руководство</string>
+  <string name="about_translate_title">Языки</string>
+  <string name="about_translate_message" fuzzy="true">Выбрать язык, переводы на который вы хотели бы видеть?</string>
+  <string name="about_translate_proceed">Выполняется</string>
+  <string name="about_translate_cancel">Отмена</string>
 </resources>

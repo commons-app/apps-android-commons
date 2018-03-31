@@ -59,6 +59,7 @@
   <string name="categories_search_text_hint">분류 검색</string>
   <string name="menu_save_categories">저장</string>
   <string name="refresh_button">새로 고침</string>
+  <string name="display_list_button">목록</string>
   <string name="gps_disabled">장치에서 GPS가 꺼져 있습니다. 켜시겠습니까?</string>
   <string name="enable_gps">GPS 사용</string>
   <string name="contributions_subtitle_zero">아직 올린 항목이 없습니다</string>
@@ -204,6 +205,7 @@
   <string name="no_description_found">설명이 없습니다</string>
   <string name="nearby_info_menu_commons_article">공용 파일 문서</string>
   <string name="nearby_info_menu_wikidata_article">위키데이터 항목</string>
+  <string name="nearby_info_menu_wikipedia_article">위키백과 문서</string>
   <string name="error_while_cache">그림 캐시 처리 오류</string>
   <string name="title_info">이 파일을 설명할 수 있는 제목으로, 파일 이름으로 사용됩니다. 띄어쓰기를 포함한 일반적인 단어를 사용할 수 있습니다. 파일 확장자는 포함하지 마세요</string>
   <string name="give_permission">권한 부여</string>
@@ -214,6 +216,8 @@
   <string name="send_log_file_description">이메일로 개발자에게 로그 파일 보내기</string>
   <string name="no_web_browser">URL을 열기 위한 웹 브라우저를 찾지 못했습니다</string>
   <string name="null_url">오류! URL을 찾을 수 없습니다</string>
+  <string name="nominate_deletion">삭제 신청</string>
+  <string name="nominated_for_deletion">이 그림은 삭제가 신청되었습니다.</string>
   <string name="view_browser">브라우저에서 보기</string>
   <string name="nearby_location_has_not_changed">위치가 변경되지 않았습니다.</string>
   <string name="nearby_location_not_available">위치를 사용할 수 없습니다.</string>
@@ -222,6 +226,18 @@
   <string name="notifications_talk_page_message">%1$s님이 당신의 사용자 토론 문서에 글을 남겼습니다</string>
   <string name="notifications_thank_you_edit">편집해 주셔서 감사합니다</string>
   <string name="notifications_mention">%1$s님이 %2$s에서 나를 언급했습니다.</string>
-  <string name="about_faq">자주 묻는 질문</string>
+  <string name="nearby_directions">방향</string>
+  <string name="nearby_wikidata">위키데이터</string>
+  <string name="nearby_wikipedia">위키백과</string>
+  <string name="nearby_commons">공용</string>
+  <string name="about_faq" fuzzy="true">FAQ</string>
   <string name="welcome_skip_button">강좌 건너뛰기</string>
+  <string name="no_internet">인터넷 사용 불가</string>
+  <string name="internet_established">인터넷 사용 가능</string>
+  <string name="error_notifications">알림 가져오기 오류</string>
+  <string name="no_notifications">알림이 없습니다</string>
+  <string name="about_translate_title">언어</string>
+  <string name="about_translate_message">번역 제출을 위한 언어를 선택하십시오</string>
+  <string name="about_translate_proceed">진행</string>
+  <string name="about_translate_cancel">취소</string>
 </resources>
