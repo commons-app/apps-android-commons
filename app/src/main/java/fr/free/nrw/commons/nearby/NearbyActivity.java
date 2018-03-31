@@ -68,7 +68,7 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
     @Inject
     NearbyController nearbyController;
 
-    private LatLng curLatLang;
+    private LatLng curLatLng;
     private Bundle bundle;
     private Disposable placesDisposable;
     private boolean lockNearbyView; //Determines if the nearby places needs to be refreshed
@@ -337,12 +337,12 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
         locationManager.registerLocationManager();
         LatLng lastLocation = locationManager.getLastLocation();
 
-        if (curLatLang != null && curLatLang.equals(lastLocation)) { //refresh view only if location has changed
+        if (curLatLng != null && curLatLng.equals(lastLocation)) { //refresh view only if location has changed
             return;
         }
-        curLatLang = lastLocation;
+        curLatLng = lastLocation;
 
-        if (curLatLang == null) {
+        if (curLatLng == null) {
             Timber.d("Skipping update of nearby places as location is unavailable");
             return;
         }
@@ -351,7 +351,7 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
                 .equals(LocationServiceManager.LocationChangeType.LOCATION_SIGNIFICANTLY_CHANGED)) {
             progressBar.setVisibility(View.VISIBLE);
             placesDisposable = Observable.fromCallable(() -> nearbyController
-                    .loadAttractionsFromLocation(curLatLang))
+                    .loadAttractionsFromLocation(curLatLng))
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe(this::populatePlaces);
@@ -360,7 +360,7 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
             Gson gson = new GsonBuilder()
                     .registerTypeAdapter(Uri.class, new UriSerializer())
                     .create();
-            String gsonCurLatLng = gson.toJson(curLatLang);
+            String gsonCurLatLng = gson.toJson(curLatLng);
             bundle.putString("CurLatLng", gsonCurLatLng);
             updateMapFragment(true);
         }
@@ -373,7 +373,7 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
                 .registerTypeAdapter(Uri.class, new UriSerializer())
                 .create();
         String gsonPlaceList = gson.toJson(placeList);
-        String gsonCurLatLng = gson.toJson(curLatLang);
+        String gsonCurLatLng = gson.toJson(curLatLng);
         String gsonBoundaryCoordinates = gson.toJson(boundaryCoordinates);
 
         if (placeList.size() == 0) {
@@ -452,20 +452,20 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
 
         NearbyMapFragment nearbyMapFragment = getMapFragment();
 
-        if (nearbyMapFragment != null && curLatLang != null) {
+        if (nearbyMapFragment != null && curLatLng != null) {
             hideProgressBar(); // In case it is visible (this happens, not an impossible case)
             /*
             * If we are close to nearby places boundaries, we need a significant update to
             * get new nearby places. Check order is south, north, west, east
             * */
             if (nearbyMapFragment.boundaryCoordinates != null
-                    && (curLatLang.getLatitude() <= nearbyMapFragment.boundaryCoordinates[0].getLatitude()
-                    || curLatLang.getLatitude() >= nearbyMapFragment.boundaryCoordinates[1].getLatitude()
-                    || curLatLang.getLongitude() <= nearbyMapFragment.boundaryCoordinates[2].getLongitude()
-                    || curLatLang.getLongitude() >= nearbyMapFragment.boundaryCoordinates[3].getLongitude())) {
+                    && (curLatLng.getLatitude() <= nearbyMapFragment.boundaryCoordinates[0].getLatitude()
+                    || curLatLng.getLatitude() >= nearbyMapFragment.boundaryCoordinates[1].getLatitude()
+                    || curLatLng.getLongitude() <= nearbyMapFragment.boundaryCoordinates[2].getLongitude()
+                    || curLatLng.getLongitude() >= nearbyMapFragment.boundaryCoordinates[3].getLongitude())) {
                 // populate places
                 placesDisposable = Observable.fromCallable(() -> nearbyController
-                        .loadAttractionsFromLocation(curLatLang))
+                        .loadAttractionsFromLocation(curLatLng))
                         .subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())
                         .subscribe(this::populatePlaces);
