@@ -5,7 +5,7 @@
     android:layout_height="wrap_content"
     android:background="?attr/mainBackground"
     android:orientation="vertical"
-    android:visibility="visible"
+    android:visibility="gone"
     app:behavior_hideable="true"
     app:behavior_peekHeight="72dp"
     app:layout_behavior="@string/bottom_sheet_behavior">
