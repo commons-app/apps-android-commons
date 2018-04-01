@@ -222,15 +222,14 @@ public class MultipleShareActivity extends AuthenticatedActivity
 
         //TODO: 15/10/17 should location permission be explicitly requested if not provided?
         //check if location permission is enabled
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            if (hasLocationPermission()) {
-                locationPermitted = true;
-            }
+        if (hasLocationPermission()) {
+            locationPermitted = true;
         }
     }
 
     private boolean hasLocationPermission() {
-        return ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED;
+        return Build.VERSION.SDK_INT >= Build.VERSION_CODES.M &&
+                ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED;
     }
 
     @Override
