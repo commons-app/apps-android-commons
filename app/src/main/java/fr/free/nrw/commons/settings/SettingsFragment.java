@@ -151,6 +151,7 @@ public class SettingsFragment extends PreferenceFragment {
         emailSelectorIntent.setData(Uri.parse("mailto:"));
         //initialize the emailIntent
         final Intent emailIntent = new Intent(Intent.ACTION_SEND);
+        // Logs must be sent to the PRIVATE email. Please do not modify this without good reason!
         emailIntent.putExtra(Intent.EXTRA_EMAIL, new String[]{CommonsApplication.LOGS_PRIVATE_EMAIL});
         emailIntent.putExtra(Intent.EXTRA_SUBJECT, String.format(CommonsApplication.LOGS_PRIVATE_EMAIL_SUBJECT, BuildConfig.VERSION_NAME));
         emailIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
