@@ -153,15 +153,6 @@
                 android:gravity="center"
                 />
 
-            <TextView
-                android:id="@+id/about_uploads_to"
-                style="?android:textAppearanceSmall"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/large_gap"
-                android:alpha="0.2"
-                android:gravity="center" />
-
         </LinearLayout>
         </RelativeLayout>
     </ScrollView>
