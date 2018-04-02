@@ -13,8 +13,8 @@ import com.squareup.leakcanary.LeakCanary;
 import com.squareup.leakcanary.RefWatcher;
 
 import org.acra.ACRA;
-import org.acra.ReportingInteractionMode;
-import org.acra.annotation.ReportsCrashes;
+import org.acra.annotation.AcraDialog;
+import org.acra.annotation.AcraMailSender;
 
 import java.io.File;
 
@@ -33,14 +33,10 @@ import io.reactivex.schedulers.Schedulers;
 import timber.log.Timber;
 
 // TODO: Use ProGuard to rip out reporting when publishing
-@ReportsCrashes(
-        mailTo = "commons-app-android-private@googlegroups.com",
-        mode = ReportingInteractionMode.DIALOG,
-        resDialogText = R.string.crash_dialog_text,
-        resDialogTitle = R.string.crash_dialog_title,
-        resDialogCommentPrompt = R.string.crash_dialog_comment_prompt,
-        resDialogOkToast = R.string.crash_dialog_ok_toast
-)
+@AcraMailSender(mailTo = "commons-app-android-private@googlegroups.com")
+@AcraDialog(resText = R.string.crash_dialog_text,
+        resCommentPrompt = R.string.crash_dialog_comment_prompt)
+
 public class CommonsApplication extends MultiDexApplication {
 
     @Inject SessionManager sessionManager;
