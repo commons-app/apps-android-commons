@@ -69,6 +69,7 @@ public class UploadActivity extends AuthenticatedActivity implements UploadView 
     @BindView(R.id.top_card_thumbnails) RecyclerView topCardThumbnails;
 
     // Bottom Card
+    @BindView(R.id.bottom_card) CardView bottomCard;
     @BindView(R.id.bottom_card_expand_button) ImageView bottomCardExpandButton;
     @BindView(R.id.bottom_card_title) TextView bottomCardTitle;
     @BindView(R.id.bottom_card_content) View bottomCardContent;
@@ -115,7 +116,7 @@ public class UploadActivity extends AuthenticatedActivity implements UploadView 
         configureBottomCard();
         configureNavigationButtons();
 
-        presenter.init(savedInstanceState);
+        presenter.initFromSavedState(savedInstanceState);
 
         receiveSharedItems();
     }
@@ -229,6 +230,11 @@ public class UploadActivity extends AuthenticatedActivity implements UploadView 
     }
 
     @Override
+    public void setBottomCardVisibility(boolean visible) {
+        bottomCard.setVisibility(visible ? View.VISIBLE : View.GONE);
+    }
+
+    @Override
     public void setBottomCardVisibility(@UploadPage int page) {
         if (page == TITLE_CARD) {
             viewFlipper.setDisplayedChild(0);
@@ -236,6 +242,8 @@ public class UploadActivity extends AuthenticatedActivity implements UploadView 
             viewFlipper.setDisplayedChild(1);
         } else if (page == LICENSE) {
             viewFlipper.setDisplayedChild(2);
+        } else if (page == PLEASE_WAIT) {
+            viewFlipper.setDisplayedChild(3);
         }
     }
 

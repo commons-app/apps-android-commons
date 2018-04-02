@@ -45,6 +45,8 @@
 
                 <include layout="@layout/activity_upload_license" />
 
+                <include layout="@layout/activity_upload_please_wait" />
+
             </ViewFlipper>
         </LinearLayout>
 
