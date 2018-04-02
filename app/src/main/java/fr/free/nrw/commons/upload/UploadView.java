@@ -16,12 +16,13 @@ public interface UploadView {
             new Class[]{UploadView.class}, (proxy, method, methodArgs) -> null);
 
     @Retention(SOURCE)
-    @IntDef({TITLE_CARD, CATEGORIES, LICENSE})
+    @IntDef({PLEASE_WAIT, TITLE_CARD, CATEGORIES, LICENSE})
     @interface UploadPage {}
 
-    int TITLE_CARD = 0;
-    int CATEGORIES = 1;
-    int LICENSE = 2;
+    int PLEASE_WAIT = 0;
+    int TITLE_CARD = 1;
+    int CATEGORIES = 2;
+    int LICENSE = 3;
 
     void updateThumbnails(List<UploadModel.UploadItem> uploads);
 
@@ -38,6 +39,8 @@ public interface UploadView {
     void setBackground(Uri mediaUri);
 
     void setTopCardVisibility(boolean visible);
+
+    void setBottomCardVisibility(boolean visible);
 
     void setBottomCardVisibility(@UploadPage int page);
 

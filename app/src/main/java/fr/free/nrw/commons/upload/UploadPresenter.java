@@ -1,15 +1,20 @@
 package fr.free.nrw.commons.upload;
 
+import android.annotation.SuppressLint;
 import android.net.Uri;
 import android.os.Bundle;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.concurrent.Callable;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
 import fr.free.nrw.commons.contributions.Contribution;
+import io.reactivex.Single;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.schedulers.Schedulers;
 
 @Singleton
 public class UploadPresenter {
@@ -27,11 +32,25 @@ public class UploadPresenter {
     }
 
     public void receive(Uri mediaUri, String mimeType, String source) {
-        uploadModel.receive(Collections.singletonList(mediaUri), mimeType, source);
+        receive(Collections.singletonList(mediaUri), mimeType, source);
     }
 
-    public void receive(List<Uri> mediaUri, String mimeType, String source) {
-        uploadModel.receive(mediaUri, mimeType, source);
+    @SuppressLint("CheckResult")
+    public void receive(List<Uri> media, String mimeType, String source) {
+        cacheFileUploads(media).doOnSuccess(
+                uris -> uploadModel.receive(uris, mimeType, source)
+        ).flatMap(
+                uris -> Single.fromCallable(() -> performQualityCheck(uris))
+        ).subscribeOn(
+                Schedulers.io()
+        ).observeOn(
+                AndroidSchedulers.mainThread()
+        ).subscribe(
+                uploadItems -> {
+                    updateCards(view);
+                    updateLicenses(view);
+                    updateContent();
+                });
     }
 
     public void imageTitleChanged(String text) {
@@ -88,7 +107,7 @@ public class UploadPresenter {
     //endregion
 
     //region View / Lifecycle management
-    public void init(Bundle state) {
+    public void initFromSavedState(Bundle state) {
         if (state != null) {
             uploadModel.setTopCardState(state.getBoolean(TOP_CARD_STATE, true));
             uploadModel.setBottomCardState(state.getBoolean(BOTTOM_CARD_STATE, true));
@@ -114,20 +133,26 @@ public class UploadPresenter {
     public void addView(UploadView view) {
         this.view = view;
 
-        view.updateThumbnails(uploadModel.getUploads());
-        view.setTopCardVisibility(uploadModel.getCount() > 1);
-
-        view.setTopCardState(uploadModel.isTopCardState());
-        view.setBottomCardState(uploadModel.isBottomCardState());
-
-        String selectedLicense = uploadModel.getSelectedLicense();
-        view.updateLicenses(uploadModel.getLicenses(), selectedLicense);
-        view.updateLicenseSummary(selectedLicense);
-
+        updateCards(view);
+        updateLicenses(view);
         updateContent();
     }
 
-    private void updateContent() {
+    void updateCards(UploadView view) {
+        view.updateThumbnails(uploadModel.getUploads());
+        view.setTopCardVisibility(uploadModel.getCount() > 1);
+        view.setBottomCardVisibility(uploadModel.getCount() > 0);
+        view.setTopCardState(uploadModel.isTopCardState());
+        view.setBottomCardState(uploadModel.isBottomCardState());
+    }
+
+    void updateLicenses(UploadView view) {
+        String selectedLicense = uploadModel.getSelectedLicense();
+        view.updateLicenses(uploadModel.getLicenses(), selectedLicense);
+        view.updateLicenseSummary(selectedLicense);
+    }
+
+    void updateContent() {
         view.setNextEnabled(uploadModel.isNextAvailable());
         view.setPreviousEnabled(uploadModel.isPreviousAvailable());
         view.setSubmitEnabled(uploadModel.isSubmitAvailable());
@@ -140,9 +165,11 @@ public class UploadPresenter {
         showCorrectBottomCard(uploadModel.getCurrentStep(), uploadModel.getCount());
     }
 
-    private void showCorrectBottomCard(int currentStep, int uploadCount) {
+    void showCorrectBottomCard(int currentStep, int uploadCount) {
         @UploadView.UploadPage int page;
-        if (currentStep <= uploadCount) {
+        if (uploadCount == 0) {
+            page = UploadView.PLEASE_WAIT;
+        } else if (currentStep <= uploadCount) {
             page = UploadView.TITLE_CARD;
         } else if (currentStep == uploadCount + 1) {
             page = UploadView.CATEGORIES;
@@ -150,6 +177,23 @@ public class UploadPresenter {
             page = UploadView.LICENSE;
         }
         view.setBottomCardVisibility(page);
+    }
+    //endregion
+
+    //region Quality checking for shared items
+    private Single<List<Uri>> cacheFileUploads(List<Uri> media) {
+        //Copy files into local storage and return URIs
+        return Single.fromCallable(new Callable<List<Uri>>() {
+            @Override
+            public List<Uri> call() throws Exception {
+                return media;
+            }
+        });
+    }
+
+    private List<Uri> performQualityCheck(List<Uri> uris) {
+        // Perform quality check on the files
+        return uris;
     }
     //endregion
 }
