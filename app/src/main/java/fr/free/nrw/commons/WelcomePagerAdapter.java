@@ -109,7 +109,6 @@ public class WelcomePagerAdapter extends PagerAdapter {
         @Optional
         @OnClick(R.id.welcomeHelpButton)
         void onHelpClicked () {
-            System.out.println("Fn called");
             try {
                 Utils.handleWebUrl(container.getContext(),Uri.parse("https://commons.wikimedia.org/wiki/Help:Contents" ));
             } catch (Exception e) {
