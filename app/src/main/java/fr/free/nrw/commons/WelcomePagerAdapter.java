@@ -1,5 +1,6 @@
 package fr.free.nrw.commons;
 
+import android.net.Uri;
 import android.support.annotation.Nullable;
 import android.support.v4.view.PagerAdapter;
 import android.view.LayoutInflater;
@@ -9,6 +10,7 @@ import android.widget.TextView;
 
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import butterknife.Optional;
 
 public class WelcomePagerAdapter extends PagerAdapter {
     static final int[] PAGE_LAYOUTS = new int[]{
@@ -20,6 +22,7 @@ public class WelcomePagerAdapter extends PagerAdapter {
     };
     private static final int PAGE_FINAL = 4;
     private Callback callback;
+    private ViewGroup container;
 
     /**
      * Changes callback to provided one
@@ -53,6 +56,7 @@ public class WelcomePagerAdapter extends PagerAdapter {
 
     @Override
     public Object instantiateItem(ViewGroup container, int position) {
+        this.container=container;
         LayoutInflater inflater = LayoutInflater.from(container.getContext());
         ViewGroup layout = (ViewGroup) inflater.inflate(PAGE_LAYOUTS[position], container, false);
         if( BuildConfig.FLAVOR == "beta"){
@@ -99,6 +103,17 @@ public class WelcomePagerAdapter extends PagerAdapter {
         void onClicked() {
             if (callback != null) {
                 callback.onYesClicked();
+            }
+        }
+
+        @Optional
+        @OnClick(R.id.welcomeHelpButton)
+        void onHelpClicked () {
+            System.out.println("Fn called");
+            try {
+                Utils.handleWebUrl(container.getContext(),Uri.parse("https://commons.wikimedia.org/wiki/Help:Contents" ));
+            } catch (Exception e) {
+                e.printStackTrace();
             }
         }
 

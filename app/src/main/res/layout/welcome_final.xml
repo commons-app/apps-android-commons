@@ -59,5 +59,17 @@
         android:textColor="#0c609c"
         android:textStyle="bold"
         />
+    <Button
+        android:layout_width="120dp"
+        android:layout_height="@dimen/overflow_button_dimen"
+        android:layout_marginTop="@dimen/standard_gap"
+        android:text="@string/welcome_help_button_text"
+        android:id="@+id/welcomeHelpButton"
+        android:textSize="@dimen/normal_text"
+        android:layout_gravity="center"
+        android:background="@android:color/white"
+        android:textColor="#0c609c"
+        android:textStyle="bold"
+        />
 
 </LinearLayout>
