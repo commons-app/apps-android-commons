@@ -41,6 +41,7 @@ import timber.log.Timber;
         resDialogCommentPrompt = R.string.crash_dialog_comment_prompt,
         resDialogOkToast = R.string.crash_dialog_ok_toast
 )
+
 public class CommonsApplication extends MultiDexApplication {
 
     @Inject SessionManager sessionManager;
