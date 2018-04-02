@@ -84,7 +84,7 @@ public class CommonsApplication extends MultiDexApplication {
 
         Timber.plant(new Timber.DebugTree());
 
-        if (BuildConfig.DEBUG) {
+        if (!BuildConfig.DEBUG) {
             ACRA.init(this);
         } else {
             Stetho.initializeWithDefaults(this);
