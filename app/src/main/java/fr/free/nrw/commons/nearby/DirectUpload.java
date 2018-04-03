@@ -26,18 +26,18 @@ class DirectUpload {
     void initiateCameraUpload() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             if (ContextCompat.checkSelfPermission(fragment.getActivity(), WRITE_EXTERNAL_STORAGE) != PERMISSION_GRANTED) {
-                if (fragment.getActivity().shouldShowRequestPermissionRationale(WRITE_EXTERNAL_STORAGE)) {
+                if (fragment.shouldShowRequestPermissionRationale(WRITE_EXTERNAL_STORAGE)) {
                     new AlertDialog.Builder(fragment.getActivity())
                             .setMessage(fragment.getActivity().getString(R.string.write_storage_permission_rationale))
                             .setPositiveButton("OK", (dialog, which) -> {
-                                fragment.getActivity().requestPermissions(new String[]{WRITE_EXTERNAL_STORAGE}, 3);
+                                fragment.requestPermissions(new String[]{WRITE_EXTERNAL_STORAGE}, 3);
                                 dialog.dismiss();
                             })
                             .setNegativeButton("Cancel", null)
                             .create()
                             .show();
                 } else {
-                    fragment.getActivity().requestPermissions(new String[]{WRITE_EXTERNAL_STORAGE}, 3);
+                    fragment.requestPermissions(new String[]{WRITE_EXTERNAL_STORAGE}, 3);
                 }
             } else {
                 controller.startCameraCapture();
@@ -50,18 +50,18 @@ class DirectUpload {
     void initiateGalleryUpload() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             if (ContextCompat.checkSelfPermission(fragment.getActivity(), READ_EXTERNAL_STORAGE) != PERMISSION_GRANTED) {
-                if (fragment.getActivity().shouldShowRequestPermissionRationale(READ_EXTERNAL_STORAGE)) {
+                if (fragment.shouldShowRequestPermissionRationale(READ_EXTERNAL_STORAGE)) {
                     new AlertDialog.Builder(fragment.getActivity())
                             .setMessage(fragment.getActivity().getString(R.string.read_storage_permission_rationale))
                             .setPositiveButton("OK", (dialog, which) -> {
-                                fragment.getActivity().requestPermissions(new String[]{READ_EXTERNAL_STORAGE}, 1);
+                                fragment.requestPermissions(new String[]{READ_EXTERNAL_STORAGE}, 1);
                                 dialog.dismiss();
                             })
                             .setNegativeButton("Cancel", null)
                             .create()
                             .show();
                 } else {
-                    fragment.getActivity().requestPermissions(new String[]{READ_EXTERNAL_STORAGE},
+                    fragment.requestPermissions(new String[]{READ_EXTERNAL_STORAGE},
                             1);
                 }
             } else {
