@@ -8,6 +8,7 @@ import android.support.v7.app.AlertDialog;
 
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.contributions.ContributionController;
+import timber.log.Timber;
 
 import static android.Manifest.permission.READ_EXTERNAL_STORAGE;
 import static android.Manifest.permission.WRITE_EXTERNAL_STORAGE;
@@ -54,6 +55,7 @@ class DirectUpload {
                     new AlertDialog.Builder(fragment.getActivity())
                             .setMessage(fragment.getActivity().getString(R.string.read_storage_permission_rationale))
                             .setPositiveButton("OK", (dialog, which) -> {
+                                Timber.d("Requesting permissions for read external storage");
                                 fragment.requestPermissions(new String[]{READ_EXTERNAL_STORAGE}, 1);
                                 dialog.dismiss();
                             })
