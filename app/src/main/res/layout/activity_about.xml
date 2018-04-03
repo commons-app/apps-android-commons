@@ -111,7 +111,7 @@
                 android:layout_marginTop="@dimen/standard_gap"
                 android:gravity="center"
                 android:textColor="@color/primaryColor"
-                android:text="@string/about_rate_us" />
+                />
           
             <TextView
                 android:id="@+id/about_privacy_policy"
@@ -121,7 +121,7 @@
                 android:layout_marginTop="@dimen/standard_gap"
                 android:textColor="@color/primaryColor"
                 android:gravity="center"
-                android:text="@string/about_privacy_policy" />
+                />
 
             <TextView
                 android:id="@+id/about_translate"
@@ -131,7 +131,7 @@
                 android:textColor="@color/primaryColor"
                 android:layout_marginTop="@dimen/standard_gap"
                 android:gravity="center"
-                android:text="@string/about_translate" />
+                />
 
             <TextView
                 android:id="@+id/about_credits"
@@ -141,7 +141,7 @@
                 android:textColor="@color/primaryColor"
                 android:layout_marginTop="@dimen/standard_gap"
                 android:gravity="center"
-                android:text="@string/about_credits" />
+                />
 
             <TextView
                 android:id="@+id/about_faq"

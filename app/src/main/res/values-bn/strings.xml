@@ -59,6 +59,7 @@
   <string name="categories_search_text_hint">বিষয়শ্রেণী অনুসন্ধান</string>
   <string name="menu_save_categories">সংরক্ষণ</string>
   <string name="refresh_button">পুনঃসতেজ</string>
+  <string name="display_list_button">তালিকা</string>
   <string name="gps_disabled">GPS আপনার ডিভাইসে অক্ষম করা আছে। আপনি কি এটি সক্ষম করতে চান?</string>
   <string name="enable_gps">GPS সক্রিয় করুন</string>
   <string name="contributions_subtitle_zero">এখনো কোন আপলোড নেই</string>
@@ -210,6 +211,7 @@
   <string name="no_description_found">কোন বিবরণ পাওয়া যায়নি</string>
   <string name="nearby_info_menu_commons_article">কমন্সে ফাইলের পাতা</string>
   <string name="nearby_info_menu_wikidata_article">উইকিউপাত্ত পদ</string>
+  <string name="nearby_info_menu_wikipedia_article">উইকিপিডিয়া নিবন্ধ</string>
   <string name="error_while_cache">ছবি আনার সময় ত্রুটি</string>
   <string name="title_info">ফাইলের একটি স্বতন্ত্র বর্ণনামূলক নাম যা ফাইলের নাম হিসাবে কাজ করবে। অাপনি সাধারণ ভাষা ব্যবহার করতে পারেন শূন্যস্থানসহ। ফাইলের এক্সটেনশন যুক্ত করবেন না।</string>
   <string name="description_info">যতটা সম্ভব মিডিয়াটি বর্ণনা করুন: এটি কোথায় ধারণ করা হয়েছিল? এটি কি প্রদর্শন করে? এটির প্রসঙ্গ কি? ধারণকৃত বস্তু অথবা ব্যক্তির বর্ণনা করুন। সহজে অনুমান করা যায়না সেরকম তথ্য উদঘাটন করুন, উদাহরণস্বরূপ, যদি ল্যান্ডস্কেপ হয় তাহলে দিবসকালের সময় দিন।</string>
@@ -222,6 +224,8 @@
   <string name="send_log_file">লগ ফাইল পাঠান</string>
   <string name="send_log_file_description">ইমেইলের মাধ্যমে উন্নয়নকারীর কাছে লগ ফাইল পাঠান</string>
   <string name="null_url">ত্রুটি! ইউআরএল পাওয়া যায়নি</string>
+  <string name="nominate_deletion">অপসারণের জন্য মনোনীত</string>
+  <string name="view_browser">ব্রাউজারে দেখুন</string>
   <string name="nearby_location_has_not_changed">অবস্থান পরিবর্তন হয়নি।</string>
   <string name="nearby_location_not_available">অবস্থান উপলব্ধ নয়।</string>
   <string name="location_permission_rationale_nearby">কাছাকাছি স্থানসমূহের একটি তালিকা প্রদর্শন করতে অনুমতি প্রয়োজন</string>
@@ -231,6 +235,12 @@
   <string name="notifications_talk_page_message">%1$s আপনার আলাপ পাতায় একটি বার্তা দিয়েছেন</string>
   <string name="notifications_thank_you_edit">একটি সম্পাদনা করার জন্য আপনাকে ধন্যবাদ</string>
   <string name="notifications_mention">%1$s আপনাকে %2$s-এ উল্লেখ করেছেন।</string>
-  <string name="about_faq">প্রায়শই জিজ্ঞাসিত প্রশ্নসমূহ</string>
+  <string name="nearby_directions">দিকনির্দেশ</string>
+  <string name="nearby_wikidata">উইকিউপাত্ত</string>
+  <string name="nearby_wikipedia">উইকিপিডিয়া</string>
+  <string name="nearby_commons">কমন্স</string>
+  <string name="about_faq" fuzzy="true">প্রায়শই জিজ্ঞাসিত প্রশ্নসমূহ</string>
   <string name="welcome_skip_button">টিউটোরিয়াল এড়ান</string>
+  <string name="no_internet">ইন্টারনেট অনুপলব্ধ</string>
+  <string name="internet_established">ইন্টারনেট উপলব্ধ</string>
 </resources>

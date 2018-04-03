@@ -227,6 +227,8 @@
   <string name="no_web_browser">Zum Öffnen der URL wurde kein Webbrowser gefunden</string>
   <string name="null_url">Fehler! URL nicht gefunden</string>
   <string name="nominate_deletion">Zur Löschung vorschlagen</string>
+  <string name="nominated_for_deletion">Dieses Bild wurde zur Löschung vorgeschlagen.</string>
+  <string name="nominated_see_more"/>
   <string name="view_browser">Im Browser ansehen</string>
   <string name="nearby_location_has_not_changed">Der Standort hat sich nicht geändert.</string>
   <string name="nearby_location_not_available">Der Standort ist nicht verfügbar.</string>
@@ -242,7 +244,16 @@
   <string name="nearby_wikidata">WIKIDATA</string>
   <string name="nearby_wikipedia">WIKIPEDIA</string>
   <string name="nearby_commons">COMMONS</string>
-  <string name="about_rate_us"/>
-  <string name="about_faq">Häufig gestellte Fragen</string>
+  <string name="about_rate_us">&lt;u&gt;Bewerte uns&lt;/u&gt;</string>
+  <string name="about_faq">&lt;u&gt;Häufig gestellte Fragen&lt;/u&gt;</string>
   <string name="welcome_skip_button">Tutorial überspringen</string>
+  <string name="no_internet">Internet nicht verfügbar</string>
+  <string name="internet_established">Internet verfügbar</string>
+  <string name="error_notifications">Fehler beim Abruf der Benachrichtigungen</string>
+  <string name="no_notifications">Keine Benachrichtigungen gefunden</string>
+  <string name="about_translate">&lt;u&gt;Übersetzen&lt;/u&gt;</string>
+  <string name="about_translate_title">Sprachen</string>
+  <string name="about_translate_message">Wähle die Sprache aus, für die du Übersetzungen durchführen möchtest.</string>
+  <string name="about_translate_proceed">Fortfahren</string>
+  <string name="about_translate_cancel">Abbrechen</string>
 </resources>

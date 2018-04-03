@@ -227,6 +227,8 @@
   <string name="no_web_browser">Δεν βρέθηκε φυλλομετρητής για το άνοιγμα της διευθύνσεως URL</string>
   <string name="null_url">Σφάλμα! Η διεύθυνση URL δεν βρέθηκε</string>
   <string name="nominate_deletion">Προτείνετε για διαγραφή</string>
+  <string name="nominated_for_deletion">Αυτή εικόνα έχει προταθεί για διαγραφή.</string>
+  <string name="nominated_see_more"/>
   <string name="view_browser">Προβολή στον περιηγητή</string>
   <string name="nearby_location_has_not_changed">Ο εντοπισμός δεν έχει αλλάξει.</string>
   <string name="nearby_location_not_available">Ο τόπος δεν είναι διαθέσιμος.</string>
@@ -243,6 +245,15 @@
   <string name="nearby_wikipedia">Βικιπαίδεια</string>
   <string name="nearby_commons">Κοινά</string>
   <string name="about_rate_us"/>
-  <string name="about_faq">Συχνές ερωτήσεις</string>
+  <string name="about_faq" fuzzy="true">Συχνές ερωτήσεις</string>
   <string name="welcome_skip_button">Παράβλεψη εισαγωγής</string>
+  <string name="no_internet">Το διαδίκτυο δεν είναι διαθέσιμο</string>
+  <string name="internet_established">Το διαδίκτυο είναι διαθέσιμο</string>
+  <string name="error_notifications">Σφάλμα κατά την συγκέντρωση ειδοποιήσεων</string>
+  <string name="no_notifications">Δεν βρέθηκαν ειδοποιήσεις</string>
+  <string name="about_translate"/>
+  <string name="about_translate_title">Γλώσσες</string>
+  <string name="about_translate_message">Επιλέξτε την γλώσσα που θα θέλατε να υποβάλετε μεταφράσεις για αυτή</string>
+  <string name="about_translate_proceed">Συνέχεια</string>
+  <string name="about_translate_cancel">Ακύρωση</string>
 </resources>
