@@ -28,7 +28,7 @@ public class LocationServiceManager implements LocationListener {
     private LocationManager locationManager;
     private Location lastLocation;
     private final List<LocationUpdateListener> locationListeners = new CopyOnWriteArrayList<>();
-    private boolean isLocationManagerRegistered = false;
+    public boolean isLocationManagerRegistered = false;
 
     /**
      * Constructs a new instance of LocationServiceManager.
@@ -90,9 +90,13 @@ public class LocationServiceManager implements LocationListener {
      * Registers a LocationManager to listen for current location.
      */
     public void registerLocationManager() {
-        if (!isLocationManagerRegistered)
+        if (!isLocationManagerRegistered) {
             isLocationManagerRegistered = requestLocationUpdatesFromProvider(LocationManager.NETWORK_PROVIDER)
                     && requestLocationUpdatesFromProvider(LocationManager.GPS_PROVIDER);
+            if (isLocationManagerRegistered == false) { //If it couldnt registered means permissin required
+                requestPermissions((Activity) context);
+            }
+        }
     }
 
     /**
@@ -102,19 +106,23 @@ public class LocationServiceManager implements LocationListener {
      * @return true if successful
      */
     private boolean requestLocationUpdatesFromProvider(String locationProvider) {
-        try {
-            locationManager.requestLocationUpdates(locationProvider,
-                    MIN_LOCATION_UPDATE_REQUEST_TIME_IN_MILLIS,
-                    MIN_LOCATION_UPDATE_REQUEST_DISTANCE_IN_METERS,
-                    this);
-            return true;
-        } catch (IllegalArgumentException e) {
-            Timber.e(e, "Illegal argument exception");
-            return false;
-        } catch (SecurityException e) {
-            Timber.e(e, "Security exception");
-            return false;
-        }
+       if (isLocationPermissionGranted()) {
+           try {
+               locationManager.requestLocationUpdates(locationProvider,
+                       MIN_LOCATION_UPDATE_REQUEST_TIME_IN_MILLIS,
+                       MIN_LOCATION_UPDATE_REQUEST_DISTANCE_IN_METERS,
+                       this);
+               return true;
+           } catch (IllegalArgumentException e) {
+               Timber.e(e, "Illegal argument exception");
+               return false;
+           } catch (SecurityException e) {
+               Timber.e(e, "Security exception");
+               return false;
+           }
+       } else {
+           return false;
+       }
     }
 
     /**

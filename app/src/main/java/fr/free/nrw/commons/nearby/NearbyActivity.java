@@ -157,13 +157,18 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         switch (requestCode) {
             case LOCATION_REQUEST: {
-                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    refreshView(LocationServiceManager.LocationChangeType.LOCATION_SIGNIFICANTLY_CHANGED);
+                if (!locationManager.isLocationManagerRegistered) { //If it couldn't registered due to permission problems, register it
+                    locationManager.registerLocationManager();
                 } else {
-                    //If permission not granted, go to page that says Nearby Places cannot be displayed
-                    hideProgressBar();
-                    showLocationPermissionDeniedErrorDialog();
+                    if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                        refreshView(LocationServiceManager.LocationChangeType.LOCATION_SIGNIFICANTLY_CHANGED);
+                    } else {
+                        //If permission not granted, go to page that says Nearby Places cannot be displayed
+                        hideProgressBar();
+                        showLocationPermissionDeniedErrorDialog();
+                    }
                 }
+
             }
         }
     }
