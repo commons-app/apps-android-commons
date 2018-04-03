@@ -98,6 +98,7 @@ public class NearbyMapFragment extends DaggerFragment {
     private Animation fab_open;
     private Animation rotate_forward;
     private ContributionController controller;
+    private DirectUpload directUpload;
 
     private Place place;
     private Marker selected;
@@ -122,6 +123,10 @@ public class NearbyMapFragment extends DaggerFragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        directUpload = new DirectUpload(this, controller);
+        controller = new ContributionController(this);
+
         Bundle bundle = this.getArguments();
         Gson gson = new GsonBuilder()
                 .registerTypeAdapter(Uri.class, new UriDeserializer())
@@ -680,9 +685,7 @@ public class NearbyMapFragment extends DaggerFragment {
         fabCamera.setOnClickListener(view -> {
             if (fabCamera.isShown()) {
                 Timber.d("Camera button tapped. Image title: " + place.getName() + "Image desc: " + place.getLongDescription());
-                controller = new ContributionController(this);
 
-                DirectUpload directUpload = new DirectUpload(this, controller);
                 storeSharedPrefs();
                 directUpload.initiateCameraUpload();
             }
@@ -691,9 +694,8 @@ public class NearbyMapFragment extends DaggerFragment {
         fabGallery.setOnClickListener(view -> {
             if (fabGallery.isShown()) {
                 Timber.d("Gallery button tapped. Image title: " + place.getName() + "Image desc: " + place.getLongDescription());
-                controller = new ContributionController(this);
 
-                DirectUpload directUpload = new DirectUpload(this, controller);
+
                 storeSharedPrefs();
                 directUpload.initiateGalleryUpload();
             }
