@@ -28,7 +28,7 @@ public class LocationServiceManager implements LocationListener {
     private LocationManager locationManager;
     private Location lastLocation;
     private final List<LocationUpdateListener> locationListeners = new CopyOnWriteArrayList<>();
-    public boolean isLocationManagerRegistered = false;
+    private boolean isLocationManagerRegistered = false;
 
     /**
      * Constructs a new instance of LocationServiceManager.
