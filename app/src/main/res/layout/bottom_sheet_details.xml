@@ -1,42 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="?attr/mainBackground"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    android:visibility="gone"
-    app:behavior_hideable="true"
+    android:background="?attr/mainBackground"
+    app:layout_behavior="@string/bottom_sheet_behavior"
     app:behavior_peekHeight="72dp"
-    app:layout_behavior="@string/bottom_sheet_behavior">
+    app:behavior_hideable="true"
+    android:visibility="visible"
+
+    >
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="72dp"
         android:layout_marginVertical="8dp"
         android:gravity="center_vertical"
-        android:layout_marginTop="12dp"
-        android:layout_marginBottom="8dp"
         >
 
         <ImageView
             android:id="@+id/icon"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:layout_marginLeft="16dp"/>
+            android:layout_marginLeft="16dp">
+        </ImageView>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:orientation="vertical"
             android:layout_marginLeft="16dp"
-            android:layout_marginRight="16dp"
-            android:orientation="vertical">
+            android:layout_marginRight="16dp">
 
             <TextView
                 android:id="@+id/title"
-                android:layout_width="230dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="16sp" />
+                android:textSize="16sp"
+                android:layout_marginRight="50dp"
+                android:maxLines="2"
+                android:ellipsize="end"
+                />
             <TextView
                 android:id="@+id/category"
                 android:layout_width="wrap_content"
@@ -44,73 +49,71 @@
                 android:textSize="14sp" />
         </LinearLayout>
     </LinearLayout>
-
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:layout_marginBottom="8dp"
         android:layout_marginTop="7dp"
-        android:background="@android:color/darker_gray" />
-
+        android:layout_marginBottom="8dp"
+        android:background="@android:color/darker_gray"/>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        >
 
         <LinearLayout
             android:id="@+id/directionsButton"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:background="@drawable/button_background_selector"
+            android:padding="16dp"
             android:clickable="true"
+            android:background="@drawable/button_background_selector"
             android:orientation="vertical"
-            android:padding="16dp">
-
+            >
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:duplicateParentState="true"
                 app:srcCompat="@drawable/ic_directions_black_24dp" />
-
             <TextView
-                android:id="@+id/directionsButtonText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:duplicateParentState="true"
+                android:id="@+id/directionsButtonText"
                 android:paddingTop="8dp"
+                android:duplicateParentState="true"
+                android:textColor="@color/text_color_selector"
+                android:layout_gravity="center_horizontal"
                 android:text="@string/nearby_directions"
-                android:textColor="@color/text_color_selector" />
+                />
         </LinearLayout>
-
         <LinearLayout
             android:id="@+id/wikidataButton"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:background="@drawable/button_background_selector"
+            android:padding="16dp"
             android:clickable="true"
+            android:background="@drawable/button_background_selector"
             android:orientation="vertical"
-            android:padding="16dp">
-
+            >
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:duplicateParentState="true"
                 app:srcCompat="@drawable/ic_wikidata_logo_24dp" />
-
             <TextView
-                android:id="@+id/wikidataButtonText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:duplicateParentState="true"
+                android:id="@+id/wikidataButtonText"
                 android:paddingTop="8dp"
+                android:duplicateParentState="true"
+                android:textColor="@color/text_color_selector"
+                android:layout_gravity="center_horizontal"
                 android:text="@string/nearby_wikidata"
-                android:textColor="@color/text_color_selector" />
+                />
         </LinearLayout>
 
         <LinearLayout
@@ -118,27 +121,29 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:background="@drawable/button_background_selector"
+            android:padding="16dp"
             android:clickable="true"
+            android:background="@drawable/button_background_selector"
             android:orientation="vertical"
-            android:padding="16dp">
-
+            >
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:duplicateParentState="true"
-                app:srcCompat="@drawable/ic_wikipedia_logo_24dp" />
-
+                app:srcCompat="@drawable/ic_wikipedia_logo_24dp"
+                />
             <TextView
-                android:id="@+id/wikipediaButtonText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:duplicateParentState="true"
+                android:id="@+id/wikipediaButtonText"
                 android:paddingTop="8dp"
+                android:duplicateParentState="true"
+                android:textColor="@color/text_color_selector"
+                android:layout_gravity="center_horizontal"
                 android:text="@string/nearby_wikipedia"
-                android:textColor="@color/text_color_selector" />
+
+                />
         </LinearLayout>
 
         <LinearLayout
@@ -146,44 +151,44 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:background="@drawable/button_background_selector"
+            android:padding="16dp"
             android:clickable="true"
+            android:background="@drawable/button_background_selector"
             android:orientation="vertical"
-            android:padding="16dp">
-
+            >
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:duplicateParentState="true"
-                app:srcCompat="@drawable/ic_commons_icon_vector" />
-
+                app:srcCompat="@drawable/ic_commons_icon_vector"
+                />
             <TextView
-                android:id="@+id/commonsButtonText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:duplicateParentState="true"
+                android:id="@+id/commonsButtonText"
                 android:paddingTop="8dp"
+                android:duplicateParentState="true"
+                android:textColor="@color/text_color_selector"
+                android:layout_gravity="center_horizontal"
                 android:text="@string/nearby_commons"
-                android:textColor="@color/text_color_selector" />
+
+                />
         </LinearLayout>
     </LinearLayout>
-
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:layout_marginBottom="8dp"
         android:layout_marginTop="7dp"
-        android:background="@android:color/darker_gray" />
-
+        android:layout_marginBottom="8dp"
+        android:background="@android:color/darker_gray"/>
     <TextView
         android:id="@+id/description"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
         android:layout_marginLeft="72dp"
         android:layout_marginRight="16dp"
+        android:layout_marginBottom="16dp"
         android:textSize="16sp" />
 
 
