@@ -31,6 +31,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.IOException;
+import java.util.Locale;
 
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -266,18 +267,18 @@ public class LoginActivity extends AccountAuthenticatorActivity {
         if (result.equals("NetworkFailure")) {
             // Matches NetworkFailure which is created by the doInBackground method
             showMessageAndCancelDialog(R.string.login_failed_network);
-        } else if (result.toLowerCase().contains("nosuchuser".toLowerCase()) || result.toLowerCase().contains("noname".toLowerCase())) {
+        } else if (result.toLowerCase(Locale.getDefault()).contains("nosuchuser".toLowerCase()) || result.toLowerCase().contains("noname".toLowerCase())) {
             // Matches nosuchuser, nosuchusershort, noname
             showMessageAndCancelDialog(R.string.login_failed_username);
             emptySensitiveEditFields();
-        } else if (result.toLowerCase().contains("wrongpassword".toLowerCase())) {
+        } else if (result.toLowerCase(Locale.getDefault()).contains("wrongpassword".toLowerCase())) {
             // Matches wrongpassword, wrongpasswordempty
             showMessageAndCancelDialog(R.string.login_failed_password);
             emptySensitiveEditFields();
-        } else if (result.toLowerCase().contains("throttle".toLowerCase())) {
+        } else if (result.toLowerCase(Locale.getDefault()).contains("throttle".toLowerCase())) {
             // Matches unknown throttle error codes
             showMessageAndCancelDialog(R.string.login_failed_throttled);
-        } else if (result.toLowerCase().contains("userblocked".toLowerCase())) {
+        } else if (result.toLowerCase(Locale.getDefault()).contains("userblocked".toLowerCase())) {
             // Matches login-userblocked
             showMessageAndCancelDialog(R.string.login_failed_blocked);
         } else if (result.equals("2FA")) {
