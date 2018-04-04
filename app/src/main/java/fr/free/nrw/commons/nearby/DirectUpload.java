@@ -74,6 +74,4 @@ class DirectUpload {
             controller.startCameraCapture();
         }
     }
-
-
 }
