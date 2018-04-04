@@ -166,7 +166,9 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
                 }
             }
             break;
+
             default:
+                // This is needed to allow the request codes from the Fragments to be routed appropriately
                 super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         }
     }
