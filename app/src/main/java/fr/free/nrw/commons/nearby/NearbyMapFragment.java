@@ -123,9 +123,9 @@ public class NearbyMapFragment extends DaggerFragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        directUpload = new DirectUpload(this, controller);
+        
         controller = new ContributionController(this);
+        directUpload = new DirectUpload(this, controller);
 
         Bundle bundle = this.getArguments();
         Gson gson = new GsonBuilder()
