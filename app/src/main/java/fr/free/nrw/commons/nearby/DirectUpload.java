@@ -24,6 +24,8 @@ class DirectUpload {
         this.controller = controller;
     }
 
+    // These permission requests will be handled by the Fragments.
+    // Do not use requestCode 1 as it will conflict with NearbyActivity's requestCodes
     void initiateGalleryUpload() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             if (ContextCompat.checkSelfPermission(fragment.getActivity(), READ_EXTERNAL_STORAGE) != PERMISSION_GRANTED) {
