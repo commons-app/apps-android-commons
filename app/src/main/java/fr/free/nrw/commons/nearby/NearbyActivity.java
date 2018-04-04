@@ -165,6 +165,9 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
                     showLocationPermissionDeniedErrorDialog();
                 }
             }
+            break;
+            default:
+                super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         }
     }
 
