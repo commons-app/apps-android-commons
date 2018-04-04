@@ -24,30 +24,6 @@ class DirectUpload {
         this.controller = controller;
     }
 
-    void initiateCameraUpload() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            if (ContextCompat.checkSelfPermission(fragment.getActivity(), WRITE_EXTERNAL_STORAGE) != PERMISSION_GRANTED) {
-                if (fragment.shouldShowRequestPermissionRationale(WRITE_EXTERNAL_STORAGE)) {
-                    new AlertDialog.Builder(fragment.getActivity())
-                            .setMessage(fragment.getActivity().getString(R.string.write_storage_permission_rationale))
-                            .setPositiveButton("OK", (dialog, which) -> {
-                                fragment.requestPermissions(new String[]{WRITE_EXTERNAL_STORAGE}, 3);
-                                dialog.dismiss();
-                            })
-                            .setNegativeButton("Cancel", null)
-                            .create()
-                            .show();
-                } else {
-                    fragment.requestPermissions(new String[]{WRITE_EXTERNAL_STORAGE}, 3);
-                }
-            } else {
-                controller.startCameraCapture();
-            }
-        } else {
-            controller.startCameraCapture();
-        }
-    }
-
     void initiateGalleryUpload() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             if (ContextCompat.checkSelfPermission(fragment.getActivity(), READ_EXTERNAL_STORAGE) != PERMISSION_GRANTED) {
@@ -56,7 +32,7 @@ class DirectUpload {
                             .setMessage(fragment.getActivity().getString(R.string.read_storage_permission_rationale))
                             .setPositiveButton("OK", (dialog, which) -> {
                                 Timber.d("Requesting permissions for read external storage");
-                                fragment.requestPermissions(new String[]{READ_EXTERNAL_STORAGE}, 1);
+                                fragment.requestPermissions(new String[]{READ_EXTERNAL_STORAGE}, 4);
                                 dialog.dismiss();
                             })
                             .setNegativeButton("Cancel", null)
@@ -64,7 +40,7 @@ class DirectUpload {
                             .show();
                 } else {
                     fragment.requestPermissions(new String[]{READ_EXTERNAL_STORAGE},
-                            1);
+                            4);
                 }
             } else {
                 controller.startGalleryPick();
@@ -74,4 +50,30 @@ class DirectUpload {
             controller.startGalleryPick();
         }
     }
+
+    void initiateCameraUpload() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            if (ContextCompat.checkSelfPermission(fragment.getActivity(), WRITE_EXTERNAL_STORAGE) != PERMISSION_GRANTED) {
+                if (fragment.shouldShowRequestPermissionRationale(WRITE_EXTERNAL_STORAGE)) {
+                    new AlertDialog.Builder(fragment.getActivity())
+                            .setMessage(fragment.getActivity().getString(R.string.write_storage_permission_rationale))
+                            .setPositiveButton("OK", (dialog, which) -> {
+                                fragment.requestPermissions(new String[]{WRITE_EXTERNAL_STORAGE}, 5);
+                                dialog.dismiss();
+                            })
+                            .setNegativeButton("Cancel", null)
+                            .create()
+                            .show();
+                } else {
+                    fragment.requestPermissions(new String[]{WRITE_EXTERNAL_STORAGE}, 5);
+                }
+            } else {
+                controller.startCameraCapture();
+            }
+        } else {
+            controller.startCameraCapture();
+        }
+    }
+
+
 }

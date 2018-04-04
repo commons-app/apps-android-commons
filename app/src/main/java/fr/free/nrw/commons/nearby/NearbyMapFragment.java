@@ -715,8 +715,8 @@ public class NearbyMapFragment extends DaggerFragment {
         Timber.d("onRequestPermissionsResult: req code = " + " perm = " + permissions + " grant =" + grantResults);
 
         switch (requestCode) {
-            // 1 = "Read external storage" allowed when gallery selected
-            case 1: {
+            // 4 = "Read external storage" allowed when gallery selected
+            case 4: {
                 if (grantResults.length > 0 && grantResults[0] == PERMISSION_GRANTED) {
                     Timber.d("Call controller.startGalleryPick()");
                     controller.startGalleryPick();
@@ -724,8 +724,8 @@ public class NearbyMapFragment extends DaggerFragment {
             }
             break;
 
-            // 3 = "Write external storage" allowed when camera selected
-            case 3: {
+            // 5 = "Write external storage" allowed when camera selected
+            case 5: {
                 if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     Timber.d("Call controller.startCameraCapture()");
                     controller.startCameraCapture();
