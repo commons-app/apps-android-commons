@@ -54,9 +54,11 @@ public class CommonsApplication extends MultiDexApplication {
 
     public static final String FEEDBACK_EMAIL = "commons-app-android@googlegroups.com";
 
+    public static final String FEEDBACK_EMAIL_SUBJECT = "Commons Android App (%s) Feedback";
+
     public static final String LOGS_PRIVATE_EMAIL = "commons-app-android-private@googlegroups.com";
 
-    public static final String FEEDBACK_EMAIL_SUBJECT = "Commons Android App (%s) Feedback";
+    public static final String LOGS_PRIVATE_EMAIL_SUBJECT = "Commons Android App (%s) Logs";
 
     private RefWatcher refWatcher;
 
