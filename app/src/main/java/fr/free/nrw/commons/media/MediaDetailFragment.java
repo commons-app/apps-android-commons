@@ -305,8 +305,8 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
         }
         if (delete.getVisibility() == View.VISIBLE) {
             delete.setOnClickListener(v -> {
-                delete.setEnabled(false);
-                delete.setTextColor(getResources().getColor(R.color.deleteButtonLight));
+                enableDeleteButton(false);
+
                 AlertDialog.Builder alert = new AlertDialog.Builder(getActivity());
                 alert.setMessage("Why should this file be deleted?");
                 final EditText input = new EditText(getActivity());
@@ -321,6 +321,7 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
                 });
                 alert.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int whichButton) {
+                        enableDeleteButton(true);
                     }
                 });
                 AlertDialog d = alert.create();
@@ -355,6 +356,15 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
             seeMore.setOnClickListener(v -> {
                 openWebBrowser(media.getFilePageTitle().getMobileUri().toString());
             });
+        }
+    }
+
+    private void enableDeleteButton(boolean visibility) {
+        delete.setEnabled(visibility);
+        if(visibility) {
+            delete.setTextColor(getResources().getColor(R.color.primaryTextColor));
+        } else {
+            delete.setTextColor(getResources().getColor(R.color.deleteButtonLight));
         }
     }
 
