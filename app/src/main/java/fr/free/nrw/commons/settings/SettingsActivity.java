@@ -47,9 +47,6 @@ public class SettingsActivity extends NavigationBaseActivity {
             settingsDelegate = AppCompatDelegate.create(this, null);
         }
         settingsDelegate.onPostCreate(savedInstanceState);
-
-        //Get an up button
-        //settingsDelegate.getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
     
     /**
