@@ -456,6 +456,8 @@ public class NearbyMapFragment extends DaggerFragment {
 
     private void setupMapView(Bundle savedInstanceState) {
         MapboxMapOptions options = new MapboxMapOptions()
+                .compassGravity(Gravity.BOTTOM | Gravity.LEFT)
+                .compassMargins(new int[]{12, 0, 0, 24})
                 .styleUrl(Style.OUTDOORS)
                 .logoEnabled(false)
                 .attributionEnabled(false)
