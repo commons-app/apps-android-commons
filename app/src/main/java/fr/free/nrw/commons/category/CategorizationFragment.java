@@ -280,10 +280,12 @@ public class CategorizationFragment extends CommonsDaggerSupportFragment {
 
     private Observable<CategoryItem> directCategories() {
         String directCategory = directPrefs.getString("Category", "");
+        directCategory = directCategory.replace("\n", "");
+
         List<String> categoryList = new ArrayList<>();
         Timber.d("Direct category found: " + "'" + directCategory + "'");
 
-        if (!directCategory.equals("") && !directCategory.equals("\n")) {
+        if (!directCategory.equals("")) {
             hasDirectCategories = true;
             categoryList.add(directCategory);
             Timber.d("DirectCat does not equal emptyString. Direct Cat list has " + categoryList);
