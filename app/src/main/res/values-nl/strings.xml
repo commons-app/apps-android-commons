@@ -1,4 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- Authors:
+* Festina90
+* Mainframe98
+* Mar(c)
+* Patio
+* Siebrand
+* Sjoerddebruin
+* Smile4ever
+-->
 <resources>
   <string name="app_name">Commons</string>
   <string name="menu_settings">Instellingen</string>

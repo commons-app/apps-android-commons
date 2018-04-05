@@ -1,4 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- Authors:
+* Aalam
+* Babanwalia
+* Jimidar
+* Sony dandiwal
+-->
 <resources>
   <string name="app_name" fuzzy="true">ਵਿਕੀਮੀਡੀਆ ਕਾਮਨਜ਼</string>
   <string name="menu_settings">ਸੈਟਿੰਗ</string>

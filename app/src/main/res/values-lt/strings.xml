@@ -1,4 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- Authors:
+* Eitvys200
+* Mantak111
+* Manvydasz
+* Nersip
+* Zygimantus
+-->
 <resources>
   <string name="app_name">Vikiteka</string>
   <string name="menu_settings">Nustatymai</string>

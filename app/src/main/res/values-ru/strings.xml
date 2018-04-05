@@ -1,4 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- Authors:
+* Alexandr Efremov
+* Av6
+* Eleferen
+* Envlh
+* Facenapalm
+* Gazimagomedov
+* Iluvatar
+* Kaganer
+* MaxBioHazard
+* Movses
+* Nitch
+* Okras
+* Redredsonia
+* Rubin16
+* Wirbel78
+* ОйЛ
+-->
 <resources>
   <string name="preference_category_appearance">Внешний вид</string>
   <string name="preference_category_general">Общие</string>
@@ -231,6 +249,7 @@
   <string name="no_web_browser">Не найден браузер, чтобы открыть ссылку</string>
   <string name="null_url">Ошибка! Ссылка не найдена</string>
   <string name="nominate_deletion">Номинировать к удалению</string>
+  <string name="nominated_for_deletion">Этот файл был вынесен на удаление.</string>
   <string name="view_browser">Просмотреть в браузере</string>
   <string name="nearby_location_has_not_changed">Местоположение не изменено.</string>
   <string name="nearby_location_not_available">Местоположение недоступно.</string>
@@ -247,10 +266,16 @@
   <string name="nearby_wikipedia">ВИКИПЕДИЯ</string>
   <string name="nearby_commons">ВИКИСКЛАД</string>
   <string name="about_rate_us">*</string>
-  <string name="about_faq" fuzzy="true">Часто задаваемые вопросы</string>
+  <string name="about_faq">&lt;u&gt;Часто задаваемые вопросы&lt;/u&gt;</string>
   <string name="welcome_skip_button">Пропустить руководство</string>
+  <string name="no_internet">Интернет недоступен</string>
+  <string name="internet_established">Интернет доступен</string>
+  <string name="error_notifications">Ошибка при получении уведомления</string>
+  <string name="no_notifications">Уведомлений нет</string>
+  <string name="about_translate">&lt;u&gt;Перевести&lt;/u&gt;</string>
   <string name="about_translate_title">Языки</string>
-  <string name="about_translate_message" fuzzy="true">Выбрать язык, переводы на который вы хотели бы видеть?</string>
+  <string name="about_translate_message">Выберите язык, переводы на который вы хотели бы видеть</string>
   <string name="about_translate_proceed">Выполняется</string>
   <string name="about_translate_cancel">Отмена</string>
+  <string name="retry">Повторить</string>
 </resources>

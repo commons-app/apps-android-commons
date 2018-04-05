@@ -1,4 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- Authors:
+* Alluk.
+* Crt
+* Nike
+* Olli
+* Pahkiqaz
+* Pyscowicz
+* SMAUG
+* Samoasambia
+* Silvonen
+* Stryn
+-->
 <resources>
   <string name="preference_category_appearance">Ulkoasu</string>
   <string name="preference_category_general">Yleinen</string>

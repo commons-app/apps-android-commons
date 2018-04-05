@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- Authors:
+* Silovan
+-->
 <resources>
   <string name="crash_dialog_title">ვიკიოწკარუექ აკორთუ</string>
   <string name="crash_dialog_text">უი. მუდგაინქ ქჷმოხვადუǃ</string>

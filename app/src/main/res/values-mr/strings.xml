@@ -1,4 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- Authors:
+* Sureshkhole
+* Susheelkasab
+* Tiven2240
+* V.narsikar
+* अभय नातू
+-->
 <resources>
   <string name="preference_category_appearance">स्वरूप</string>
   <string name="preference_category_general">सामान्य</string>

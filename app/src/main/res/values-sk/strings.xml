@@ -1,4 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- Authors:
+* AtonX
+* Kusavica
+* Sudo77(new)
+-->
 <resources>
   <string name="app_name">Commons</string>
   <string name="menu_settings">Nastavenia</string>

@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- Authors:
+* Iluvatar
+-->
 <resources>
   <string name="crash_dialog_title">Сбой</string>
   <string name="crash_dialog_text">Ой. Что-то пошло не так!</string>

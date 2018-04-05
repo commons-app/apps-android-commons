@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- Authors:
+* Papuass
+-->
 <resources>
   <string name="crash_dialog_text">Ups. Kaut kas nogāja greizi!</string>
   <string name="crash_dialog_ok_toast">Paldies!</string>

@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- Authors:
+* Zoranzoki21
+-->
 <resources>
   <string name="crash_dialog_title">Ostava se srušila</string>
   <string name="crash_dialog_text">Ups! Nešto je pošlo naopako.</string>

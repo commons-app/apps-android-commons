@@ -1,4 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- Authors:
+* Nike
+* Olli
+* Silvonen
+-->
 <resources>
   <string name="crash_dialog_title">Commons app on kaatunut</string>
   <string name="crash_dialog_text">Pahoittelemme, virhe tapahtui.</string>

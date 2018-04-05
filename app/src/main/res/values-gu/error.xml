@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- Authors:
+* KartikMistry
+-->
 <resources>
   <string name="crash_dialog_title">કોમન્સ ભાંગી પડ્યું છે</string>
   <string name="crash_dialog_text">ઉપ્સ. કંઇક ખરાબ થયું છે!</string>

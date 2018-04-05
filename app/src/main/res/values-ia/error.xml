@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- Authors:
+* McDutchie
+-->
 <resources>
   <string name="crash_dialog_title">Commons: crash</string>
   <string name="crash_dialog_text">Ups. Qualcosa ha facite fiasco!</string>

@@ -1,4 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- Authors:
+* Cedric31
+* Guilhelma
+* Unuaiga
+-->
 <resources>
   <string name="app_name">Commons</string>
   <string name="menu_settings">Paramètres</string>
@@ -133,4 +138,5 @@
   <string name="no_notifications">Cap de notificacion trobada.</string>
   <string name="about_translate">&lt;u&gt;Revirar&lt;/u&gt;</string>
   <string name="about_translate_message">Seleccionatz la lenga dins la quala volriatz sometre de traduccions</string>
+  <string name="retry">Tornar ensajar</string>
 </resources>

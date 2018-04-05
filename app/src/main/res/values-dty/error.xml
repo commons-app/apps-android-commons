@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- Authors:
+* Nirajan pant
+-->
 <resources>
   <string name="crash_dialog_text">हैत्मरा। केइचीज गलत भयो।</string>
   <string name="crash_dialog_ok_toast">धन्यवाद!</string>

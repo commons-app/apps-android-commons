@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- Authors:
+* Aefgh39622
+-->
 <resources>
   <string name="crash_dialog_title">คอมมอนส์หยุดทำงาน</string>
   <string name="crash_dialog_text">อ๊ะ มีบางอย่างผิดพลาดไป!</string>

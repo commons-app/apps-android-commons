@@ -1,4 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- Authors:
+* Danmichaelo
+* JohSan65
+* Jon Harald Søby
+* Laaknor
+* SuperPotato
+-->
 <resources>
   <string name="preference_category_appearance">Utseende</string>
   <string name="preference_category_feedback">Tilbakemelding</string>

@@ -1,4 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- Authors:
+* Astralnet
+* Evropi
+* Geraki
+* Glavkos
+* KATRINE1992
+* ManosHacker
+* Nikosgranturismogt
+* Nikosguard
+* Tgkarounos
+-->
 <resources>
   <string name="preference_category_appearance">Εμφάνιση</string>
   <string name="preference_category_general">Γενικά</string>
@@ -245,7 +256,7 @@
   <string name="nearby_wikipedia">Βικιπαίδεια</string>
   <string name="nearby_commons">Κοινά</string>
   <string name="about_rate_us"/>
-  <string name="about_faq" fuzzy="true">Συχνές ερωτήσεις</string>
+  <string name="about_faq">&lt;u&gt;Συχνές ερωτήσεις&lt;/u&gt;</string>
   <string name="welcome_skip_button">Παράβλεψη εισαγωγής</string>
   <string name="no_internet">Το διαδίκτυο δεν είναι διαθέσιμο</string>
   <string name="internet_established">Το διαδίκτυο είναι διαθέσιμο</string>
@@ -256,4 +267,5 @@
   <string name="about_translate_message">Επιλέξτε την γλώσσα που θα θέλατε να υποβάλετε μεταφράσεις για αυτή</string>
   <string name="about_translate_proceed">Συνέχεια</string>
   <string name="about_translate_cancel">Ακύρωση</string>
+  <string name="retry">Ξαναπροσπαθήστε</string>
 </resources>

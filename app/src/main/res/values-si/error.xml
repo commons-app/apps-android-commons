@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- Authors:
+* හරිත
+-->
 <resources>
   <string name="crash_dialog_title">කොමන්ස් බිඳ වැටී ඇත</string>
   <string name="crash_dialog_text">අපොයි. යමක් වැරදිලා ගිහින්!</string>

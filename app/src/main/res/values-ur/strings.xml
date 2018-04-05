@@ -1,4 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- Authors:
+* Abdulq
+* BukhariSaeed
+* Muhammad Shuaib
+* Noor2020
+* Sayam Asjad
+-->
 <resources>
   <string name="app_name">کامنز</string>
   <string name="menu_settings">ترتیبات</string>
@@ -51,6 +58,7 @@
   <string name="categories_search_text_hint">زمرہ جات تلاش کریں</string>
   <string name="menu_save_categories">محفوظ کریں</string>
   <string name="refresh_button">تازہ کریں</string>
+  <string name="display_list_button">فہرست</string>
   <string name="gps_disabled">جی پی ایس آپ کے آلے میں غیر فعال ہے۔ آپ اس کو فعال کرنا چاہینگے؟</string>
   <string name="enable_gps">جی پی ایس فعال کریں</string>
   <string name="contributions_subtitle_zero">ابھی تک کوئی اپلوڈ نہیں</string>
@@ -124,4 +132,9 @@
   <string name="navigation_item_feedback">آپ کی رائے</string>
   <string name="navigation_item_logout">لاگ آوٹ</string>
   <string name="navigation_item_info">معلمی</string>
+  <string name="nearby_directions">ہدایات</string>
+  <string name="nearby_commons">عام</string>
+  <string name="no_internet">انٹرنیٹ دستیاب نہیں</string>
+  <string name="internet_established">انٹرنیٹ دستیاب</string>
+  <string name="retry">دوبارہ کوشش کریں</string>
 </resources>

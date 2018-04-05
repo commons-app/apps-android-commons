@@ -1,4 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- Authors:
+* Ahmed-Najib-Biabani-Ibrahimkhel
+* Baloch Khan
+* Ibrahim khashrowdi
+* Saraiki
+-->
 <resources>
   <string name="preference_category_location">ځای</string>
   <string name="app_name">ويکي خونديځ</string>
