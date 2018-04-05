@@ -98,6 +98,7 @@ public class NearbyMapFragment extends DaggerFragment {
     private Animation fab_open;
     private Animation rotate_forward;
     private ContributionController controller;
+    private DirectUpload directUpload;
 
     private Place place;
     private Marker selected;
@@ -122,6 +123,10 @@ public class NearbyMapFragment extends DaggerFragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        controller = new ContributionController(this);
+        directUpload = new DirectUpload(this, controller);
+
         Bundle bundle = this.getArguments();
         Gson gson = new GsonBuilder()
                 .registerTypeAdapter(Uri.class, new UriDeserializer())
@@ -680,9 +685,6 @@ public class NearbyMapFragment extends DaggerFragment {
         fabCamera.setOnClickListener(view -> {
             if (fabCamera.isShown()) {
                 Timber.d("Camera button tapped. Image title: " + place.getName() + "Image desc: " + place.getLongDescription());
-                controller = new ContributionController(this);
-
-                DirectUpload directUpload = new DirectUpload(this, controller);
                 storeSharedPrefs();
                 directUpload.initiateCameraUpload();
             }
@@ -691,9 +693,6 @@ public class NearbyMapFragment extends DaggerFragment {
         fabGallery.setOnClickListener(view -> {
             if (fabGallery.isShown()) {
                 Timber.d("Gallery button tapped. Image title: " + place.getName() + "Image desc: " + place.getLongDescription());
-                controller = new ContributionController(this);
-
-                DirectUpload directUpload = new DirectUpload(this, controller);
                 storeSharedPrefs();
                 directUpload.initiateGalleryUpload();
             }
@@ -712,9 +711,10 @@ public class NearbyMapFragment extends DaggerFragment {
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         Timber.d("onRequestPermissionsResult: req code = " + " perm = " + permissions + " grant =" + grantResults);
 
+        // Do not use requestCode 1 as it will conflict with NearbyActivity's requestCodes
         switch (requestCode) {
-            // 1 = "Read external storage" allowed when gallery selected
-            case 1: {
+            // 4 = "Read external storage" allowed when gallery selected
+            case 4: {
                 if (grantResults.length > 0 && grantResults[0] == PERMISSION_GRANTED) {
                     Timber.d("Call controller.startGalleryPick()");
                     controller.startGalleryPick();
@@ -722,8 +722,8 @@ public class NearbyMapFragment extends DaggerFragment {
             }
             break;
 
-            // 3 = "Write external storage" allowed when camera selected
-            case 3: {
+            // 5 = "Write external storage" allowed when camera selected
+            case 5: {
                 if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     Timber.d("Call controller.startCameraCapture()");
                     controller.startCameraCapture();
