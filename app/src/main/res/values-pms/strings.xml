@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- Authors:
+* Borichèt
+-->
 <resources>
   <string name="preference_category_appearance">Aparensa</string>
   <string name="preference_category_general">General</string>

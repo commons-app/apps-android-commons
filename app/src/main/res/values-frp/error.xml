@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- Authors:
+* ChrisPtDe
+-->
 <resources>
   <string name="crash_dialog_ok_toast">Grant-marci !</string>
 </resources>

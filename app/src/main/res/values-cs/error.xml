@@ -1,4 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- Authors:
+* Chmee2
+* Ilimanaq29
+-->
 <resources>
   <string name="crash_dialog_title">Commons spadly</string>
   <string name="crash_dialog_text">Něco se pokazilo!</string>

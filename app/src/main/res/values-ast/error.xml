@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- Authors:
+* Xuacu
+-->
 <resources>
   <string name="crash_dialog_title">Commons colgóse</string>
   <string name="crash_dialog_text">Vaya. ¡Daqué funcionó mal!</string>

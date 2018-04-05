@@ -1,4 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- Authors:
+* Les Meloures
+* Robby
+* Soued031
+-->
 <resources>
   <string name="preference_category_appearance">Ausgesinn</string>
   <string name="preference_category_general">Allgemeng</string>
@@ -229,6 +234,7 @@
   <string name="about_translate">&lt;u&gt;Iwwersetzen&lt;/u&gt;</string>
   <string name="about_translate_title">Sproochen</string>
   <string name="about_translate_message">Sicht déi Sprooch eraus Fir déi Dir Iwwersetzunge maache wëllt</string>
+  <string name="about_translate_proceed">Virufueren</string>
   <string name="about_translate_cancel">Ofbriechen</string>
   <string name="retry">Nach eng Kéier probéieren</string>
 </resources>

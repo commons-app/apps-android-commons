@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- Authors:
+* Bjankuloski06
+-->
 <resources>
   <string name="crash_dialog_title">Ризницата се урна</string>
   <string name="crash_dialog_text">Упс. Нешто не е во ред!</string>

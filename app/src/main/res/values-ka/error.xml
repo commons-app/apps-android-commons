@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- Authors:
+* David1010
+-->
 <resources>
   <string name="crash_dialog_title">ვიკისაწყობი გაითიშა</string>
   <string name="crash_dialog_text">ვაი. რაღაც მოხდა!</string>

@@ -1,4 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- Authors:
+* CYAN
+* Garam
+* Jerrykim306
+* Kwj2772
+* Naramoksu
+* Nuevo Paso
+* Revi
+* Ykhwong
+* 아라
+-->
 <resources>
   <string name="preference_category_appearance">보이기</string>
   <string name="preference_category_general">일반</string>
@@ -230,14 +241,17 @@
   <string name="nearby_wikidata">위키데이터</string>
   <string name="nearby_wikipedia">위키백과</string>
   <string name="nearby_commons">공용</string>
-  <string name="about_faq" fuzzy="true">FAQ</string>
+  <string name="about_rate_us">&lt;u&gt;평가&lt;/u&gt;</string>
+  <string name="about_faq">&lt;u&gt;FAQ&lt;/u&gt;</string>
   <string name="welcome_skip_button">강좌 건너뛰기</string>
   <string name="no_internet">인터넷 사용 불가</string>
   <string name="internet_established">인터넷 사용 가능</string>
   <string name="error_notifications">알림 가져오기 오류</string>
   <string name="no_notifications">알림이 없습니다</string>
+  <string name="about_translate">&lt;u&gt;번역&lt;/u&gt;</string>
   <string name="about_translate_title">언어</string>
   <string name="about_translate_message">번역 제출을 위한 언어를 선택하십시오</string>
   <string name="about_translate_proceed">진행</string>
   <string name="about_translate_cancel">취소</string>
+  <string name="retry">다시 시도</string>
 </resources>

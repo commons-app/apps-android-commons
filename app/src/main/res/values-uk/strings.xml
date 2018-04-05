@@ -1,4 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- Authors:
+* Alex Khimich
+* Andriykopanytsia
+* Base
+* Movses
+* Mykola Swarnyk
+* Piramidion
+* SimondR
+* Ата
+-->
 <resources>
   <string name="preference_category_appearance">Зовнішній вигляд</string>
   <string name="preference_category_general">Загальні</string>

@@ -1,4 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- Authors:
+* Aftabuzzaman
+* Bellayet
+* Elias Ahmmad
+* Leemon2010
+* Mohammed Galib Hasan
+* Muktogayn
+* Rasal Lia
+* Sankarshan
+* Tauhid16
+-->
 <resources>
   <string name="preference_category_appearance">অবয়ব</string>
   <string name="preference_category_general">সাধারণ</string>

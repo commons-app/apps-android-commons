@@ -1,4 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- Authors:
+* Aktron
+* Chmee2
+* Dvorapa
+* Frettie
+* Ilimanaq29
+* Jkjk
+* Leanes
+* Matěj Suchánek
+* Mormegil
+* Spotter
+* Vojtěch Dostál
+* Walter Klosse
+-->
 <resources>
   <string name="preference_category_appearance">Vzhled</string>
   <string name="preference_category_general">Obecné</string>
@@ -225,6 +239,7 @@
   <string name="no_web_browser">Nebyl nalezen žádný webový prohlížeč k otevření URL</string>
   <string name="null_url">Chyba! URL nenalezeno</string>
   <string name="nominate_deletion">Navrhnout na smazání</string>
+  <string name="nominated_for_deletion">Tento obrázek byl nominován na smazání.</string>
   <string name="view_browser">Zobrazit v prohlížeči</string>
   <string name="nearby_location_has_not_changed">Vaše umístění se nezměnilo.</string>
   <string name="nearby_location_not_available">Umístění není dostupné.</string>
@@ -236,6 +251,11 @@
   <string name="notifications_thank_you_edit">Děkujeme za vaši editaci</string>
   <string name="notifications_mention">%1$s vás zmínil na %2$s.</string>
   <string name="toggle_view_button">Přepnout pohled</string>
-  <string name="about_faq" fuzzy="true">Často kladené otázky</string>
+  <string name="about_rate_us">&lt;u&gt;Ohodnoť nás&lt;/u&gt;</string>
+  <string name="about_faq">&lt;u&gt;Často kladené otázky&lt;/u&gt;</string>
   <string name="welcome_skip_button">Přeskočit úvod</string>
+  <string name="no_internet">Internet je nedostupný</string>
+  <string name="internet_established">Internet je dostupný</string>
+  <string name="about_translate">&lt;u&gt;Přeložit&lt;/u&gt;</string>
+  <string name="retry">Zkusit znovu</string>
 </resources>

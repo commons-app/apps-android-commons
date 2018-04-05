@@ -1,4 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- Authors:
+* Envlh
+* Inkowik
+* Kghbln
+* Metalhead64
+* Sujan
+-->
 <resources>
   <string name="preference_category_appearance">Erscheinung</string>
   <string name="preference_category_general">Allgemein</string>
@@ -256,4 +263,5 @@
   <string name="about_translate_message">Wähle die Sprache aus, für die du Übersetzungen durchführen möchtest.</string>
   <string name="about_translate_proceed">Fortfahren</string>
   <string name="about_translate_cancel">Abbrechen</string>
+  <string name="retry">Erneut versuchen</string>
 </resources>

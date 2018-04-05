@@ -1,4 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- Authors:
+* Dishual
+* Fohanno
+* Fulup
+* Gwenn-Ael
+* Y-M D
+-->
 <resources>
   <string name="preference_category_appearance">Neuz</string>
   <string name="preference_category_general">Hollek</string>

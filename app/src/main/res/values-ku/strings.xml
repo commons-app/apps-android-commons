@@ -1,4 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- Authors:
+* Bikarhêner
+* Cûndûllah el-Kurdî
+* George Animal
+* Ghybu
+-->
 <resources>
   <string name="preference_category_appearance">Xuyabûn</string>
   <string name="preference_category_general">Giştî</string>

@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- Authors:
+* ArslanX
+-->
 <resources>
   <string name="crash_dialog_text">Вагь. Бир зат чы терс гетди!</string>
   <string name="crash_dialog_comment_prompt">Этгенигизни язып бизге электрон почгъа йибери. О масъаланы чечме кёмек этежек!</string>

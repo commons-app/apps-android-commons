@@ -1,4 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- Authors:
+* Abbedabb
+* Ainali
+* Jopparn
+* Skalman
+* Tor.klingberg
+* WikiPhoenix
+-->
 <resources>
   <string name="preference_category_appearance">Utseende</string>
   <string name="preference_category_general">Allmänt</string>

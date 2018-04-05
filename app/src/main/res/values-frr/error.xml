@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- Authors:
+* Murma174
+-->
 <resources>
   <string name="crash_dialog_title">Commons as ufstört</string>
   <string name="crash_dialog_text">Uups, diar as wat skiaf gingen!</string>

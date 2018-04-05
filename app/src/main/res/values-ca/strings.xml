@@ -1,4 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- Authors:
+* Alvaro Vidal-Abarca
+* Fitoschido
+* Kippelboy
+* MarionaDSR
+* Pintor Smeargle
+* Pitort
+* Toniher
+* XVEC
+-->
 <resources>
   <string name="preference_category_appearance">Aparença</string>
   <string name="preference_category_location">Ubicació</string>

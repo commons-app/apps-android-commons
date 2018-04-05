@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- Authors:
+* Wisdom
+-->
 <resources>
   <string name="crash_dialog_ok_toast">Баярлалаа!</string>
 </resources>

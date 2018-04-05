@@ -1,4 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- Authors:
+* Ademo
+* Amire80
+* Barakolo
+* Deborahjay
+* ExampleTomer
+* Guycn2
+* Inkbug
+* Nurick
+* Uziel302
+* YaronSh
+-->
 <resources>
   <string name="preference_category_appearance">מראה</string>
   <string name="preference_category_general">כללי</string>

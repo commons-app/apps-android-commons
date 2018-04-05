@@ -1,4 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- Authors:
+* Delim
+* Garam
+-->
 <resources>
   <string name="app_name">공용</string>
   <string name="menu_settings">설정</string>

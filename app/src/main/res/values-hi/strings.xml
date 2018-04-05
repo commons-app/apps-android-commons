@@ -1,4 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- Authors:
+* Anamdas
+* Anandra
+* Bhatakati aatma
+* Nitin1485
+* Rajatkatiyar10
+* Rishi.Singh
+* Sachinkatiyar
+* Sfic
+* Shypoetess
+* Siddhartha Ghai
+* Smtchahal
+* Swapnil.Karambelkar
+* चक्रपाणी
+-->
 <resources>
   <string name="app_name">कॉमन्स</string>
   <string name="menu_settings">सेटिंग्स</string>
@@ -222,4 +237,8 @@
   <string name="internet_established">इंटरनेट उपलब्ध</string>
   <string name="error_notifications">सूचनाएं लाने में त्रुटि</string>
   <string name="no_notifications">कोई सूचनाएँ नहीं मिलीं</string>
+  <string name="about_translate_title">भाषाएँ</string>
+  <string name="about_translate_proceed">आगे बढ़ें</string>
+  <string name="about_translate_cancel">रद्द करें</string>
+  <string name="retry">पुनः प्रयास करें</string>
 </resources>

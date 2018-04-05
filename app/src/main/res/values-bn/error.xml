@@ -1,4 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- Authors:
+* Aftabuzzaman
+* Bellayet
+* Sankarshan
+-->
 <resources>
   <string name="crash_dialog_title">কমন্স ক্র্যাশ করেছে</string>
   <string name="crash_dialog_text">ওহ, কিছু একটা ত্রুটি হয়েছে!</string>

@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- Authors:
+* Saraiki
+-->
 <resources>
   <string name="preference_category_appearance">شکل و صورت</string>
   <string name="preference_category_general">عمومی</string>
@@ -118,8 +121,9 @@
   <string name="nearby_wikidata">وکی ڈیٹا</string>
   <string name="nearby_wikipedia">وکی پیڈیا</string>
   <string name="nearby_commons">عام</string>
-  <string name="about_faq" fuzzy="true">عام طور تے پچھے ونڄݨ آلے سوال</string>
+  <string name="about_faq">&lt;u&gt;عام طور تے پچھے ونڄݨ آلے سوال&lt;/u&gt;</string>
   <string name="about_translate_title">زباناں</string>
   <string name="about_translate_proceed">اڳوں تے تھیوو</string>
   <string name="about_translate_cancel">منسوخ</string>
+  <string name="retry">ولدا کوشش کرو</string>
 </resources>

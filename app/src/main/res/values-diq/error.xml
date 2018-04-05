@@ -1,4 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- Authors:
+* 1917 Ekim Devrimi
+* Gorizon
+* Marmase
+-->
 <resources>
   <string name="crash_dialog_title">Commons lığiya</string>
   <string name="crash_dialog_text">Oops. Thebayo nigurweyino!</string>
