@@ -283,7 +283,7 @@ public class CategorizationFragment extends CommonsDaggerSupportFragment {
         List<String> categoryList = new ArrayList<>();
         Timber.d("Direct category found: " + "'" + directCategory + "'");
 
-        if (!directCategory.equals("")) {
+        if (!directCategory.equals("") && !directCategory.equals("\n")) {
             hasDirectCategories = true;
             categoryList.add(directCategory);
             Timber.d("DirectCat does not equal emptyString. Direct Cat list has " + categoryList);
