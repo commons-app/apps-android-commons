@@ -28,7 +28,7 @@ public class LocationServiceManager implements LocationListener {
     private LocationManager locationManager;
     private Location lastLocation;
     private final List<LocationUpdateListener> locationListeners = new CopyOnWriteArrayList<>();
-    private boolean isLocationManagerRegistered = false;
+    public boolean isLocationManagerRegistered = false;
 
     /**
      * Constructs a new instance of LocationServiceManager.
@@ -89,12 +89,12 @@ public class LocationServiceManager implements LocationListener {
     /**
      * Registers a LocationManager to listen for current location.
      */
-    public void registerLocationManager() {
+    public void registerLocationManager(Activity activity) {
         if (!isLocationManagerRegistered) {
             isLocationManagerRegistered = requestLocationUpdatesFromProvider(LocationManager.NETWORK_PROVIDER)
                     && requestLocationUpdatesFromProvider(LocationManager.GPS_PROVIDER);
-            if (isLocationManagerRegistered == false) { //If it couldnt registered means permissin required
-                requestPermissions((Activity) context);
+            if (isLocationManagerRegistered == false) { //If it couldnt registered means permission required
+                requestPermissions(activity);
             }
         }
     }

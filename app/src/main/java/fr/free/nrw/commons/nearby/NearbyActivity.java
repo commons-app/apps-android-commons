@@ -158,7 +158,7 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
         switch (requestCode) {
             case LOCATION_REQUEST: {
                 if (!locationManager.isLocationManagerRegistered) { //If it couldn't registered due to permission problems, register it
-                    locationManager.registerLocationManager();
+                    locationManager.registerLocationManager(this);
                 } else {
                     if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                         refreshView(LocationServiceManager.LocationChangeType.LOCATION_SIGNIFICANTLY_CHANGED);
@@ -261,7 +261,7 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
     protected void onStart() {
         super.onStart();
         locationManager.addLocationListener(this);
-        locationManager.registerLocationManager();
+        locationManager.registerLocationManager(this);
     }
 
     @Override
@@ -339,7 +339,7 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
             return;
         }
 
-        locationManager.registerLocationManager();
+        locationManager.registerLocationManager(this);
         LatLng lastLocation = locationManager.getLastLocation();
 
         if (curLatLang != null && curLatLang.equals(lastLocation)) { //refresh view only if location has changed
@@ -411,7 +411,7 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
             locationManager.removeLocationListener(this);
         } else {
             lockNearbyView = false;
-            locationManager.registerLocationManager();
+            locationManager.registerLocationManager(this);
             locationManager.addLocationListener(this);
         }
     }
