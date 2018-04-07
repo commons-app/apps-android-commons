@@ -50,8 +50,6 @@ import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.schedulers.Schedulers;
 import timber.log.Timber;
 
-import static fr.free.nrw.commons.category.CategoriesModel.sortBySimilarity;
-
 public class UploadActivity extends AuthenticatedActivity implements UploadView {
     @Inject InputMethodManager inputMethodManager;
     @Inject MediaWikiApi mwApi;
@@ -364,9 +362,9 @@ public class UploadActivity extends AuthenticatedActivity implements UploadView 
                                 .concatWith(TextUtils.isEmpty(filter)
                                         ? categoriesModel.defaultCategories() : Observable.empty())
                 )
-                .filter(categoryItem -> !CategoriesModel.containsYear(categoryItem.getName()))
+                .filter(categoryItem -> !categoriesModel.containsYear(categoryItem.getName()))
                 .distinct()
-                .sorted(sortBySimilarity(filter))
+                .sorted(categoriesModel.sortBySimilarity(filter))
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
                         s -> categoriesAdapter.add(s),
