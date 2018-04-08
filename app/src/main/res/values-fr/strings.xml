@@ -1,4 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- Authors:
+* Fitoschido
+* Gomoko
+* Jean-Frédéric
+* KATRINE1992
+* Metroitendo
+* Nicolas Raoul
+* Orikrin1998
+* Patrick Star
+* Sherbrooke
+* Thibaut120094
+* Tpt
+* Urhixidur
+* VIGNERON
+* Wladek92
+* Y-M D
+-->
 <resources>
   <string name="preference_category_appearance">Apparence</string>
   <string name="preference_category_general">Général</string>
@@ -244,14 +261,16 @@
   <string name="nearby_wikipedia">WIKIPÉDIA</string>
   <string name="nearby_commons">COMMUNS</string>
   <string name="about_rate_us"/>
-  <string name="about_faq" fuzzy="true">FAQ</string>
+  <string name="about_faq">&lt;u&gt;FAQ&lt;/u&gt;</string>
   <string name="welcome_skip_button">Sauter le tutoriel</string>
   <string name="no_internet">Internet indisponible</string>
   <string name="internet_established">Internet disponible</string>
   <string name="error_notifications">Erreur sur recherche des notifications</string>
   <string name="no_notifications">Pas de notification trouvée</string>
+  <string name="about_translate">&lt;u&gt;Traduire&lt;/u&gt;</string>
   <string name="about_translate_title">Langues</string>
   <string name="about_translate_message">Sélectionner la langue pour laquelle vous voulez soumettre des traductions</string>
   <string name="about_translate_proceed">Continuer</string>
   <string name="about_translate_cancel">Annuler</string>
+  <string name="retry">Réessayer</string>
 </resources>

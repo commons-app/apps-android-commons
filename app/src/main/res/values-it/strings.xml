@@ -1,4 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- Authors:
+* Ale.salmo
+* Beta16
+* Davio
+* Nemo bis
+* S4b1nuz E.656
+* Una giornata uggiosa '94
+* Wim b
+-->
 <resources>
   <string name="preference_category_appearance">Aspetto</string>
   <string name="preference_category_general">Generale</string>
@@ -203,9 +212,10 @@
   <string name="nearby_wikidata">WIKIDATA</string>
   <string name="nearby_wikipedia">WIKIPEDIA</string>
   <string name="nearby_commons">COMMONS</string>
-  <string name="about_faq" fuzzy="true">Domande frequenti</string>
+  <string name="about_faq">&lt;u&gt;Domande frequenti&lt;/u&gt;</string>
   <string name="no_internet">Internet non disponibile</string>
   <string name="internet_established">Internet disponibile</string>
   <string name="about_translate_title">Lingue</string>
   <string name="about_translate_cancel">Annulla</string>
+  <string name="retry">Riprova</string>
 </resources>

@@ -1,4 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- Authors:
+* Akhilan
+* Praveenp
+* Santhosh.thottingal
+-->
 <resources>
   <string name="app_name" fuzzy="true">വിക്കിമീഡിയ കോമൺസ്</string>
   <string name="menu_settings">സജ്ജീകരണങ്ങൾ</string>

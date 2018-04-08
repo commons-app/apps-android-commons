@@ -1,4 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- Authors:
+* Athena in Wonderland
+* Banjo
+* Chairego apc
+* Elisardojm
+* Toliño
+* Vivaelcelta
+-->
 <resources>
   <string name="preference_category_appearance">Aparencia</string>
   <string name="preference_category_general">Xeral</string>

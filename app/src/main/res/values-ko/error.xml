@@ -1,4 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- Authors:
+* Revi
+* 아라
+-->
 <resources>
   <string name="crash_dialog_title">공용 애플리케이션이 작동을 멈췄습니다</string>
   <string name="crash_dialog_text">이런. 무언가가 잘못됐습니다!</string>

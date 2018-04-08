@@ -1,4 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- Authors:
+* Justincheng12345
+* Kly
+* LNDDYL
+* Liuxinyu970226
+* Simon Shek
+* StephDC
+* Wwycheuk
+* 和平奮鬥救地球
+* 烈羽
+-->
 <resources>
   <string name="preference_category_appearance">外觀</string>
   <string name="preference_category_general">一般</string>
@@ -255,4 +266,5 @@
   <string name="about_translate_message">選擇您想要提交翻譯的語言</string>
   <string name="about_translate_proceed">已進行</string>
   <string name="about_translate_cancel">取消</string>
+  <string name="retry">重試</string>
 </resources>

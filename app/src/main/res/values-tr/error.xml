@@ -1,4 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- Authors:
+* Emperyan
+* Sayginer
+-->
 <resources>
   <string name="crash_dialog_title">Commons çöktü</string>
   <string name="crash_dialog_text">Hay Aksi! Bir şeyler yanlış gitti!</string>

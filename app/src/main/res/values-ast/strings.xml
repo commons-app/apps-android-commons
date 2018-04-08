@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- Authors:
+* Xuacu
+-->
 <resources>
   <string name="preference_category_appearance">Aspeutu</string>
   <string name="preference_category_general">Xeneral</string>
@@ -59,6 +62,7 @@
   <string name="categories_search_text_hint">Guetar categoríes</string>
   <string name="menu_save_categories">Guardar</string>
   <string name="refresh_button">Refrescar</string>
+  <string name="display_list_button">Llista</string>
   <string name="gps_disabled">El GPS ta desactiváu nel preséu. ¿Quiés activalu?</string>
   <string name="enable_gps">Activar GPS</string>
   <string name="contributions_subtitle_zero">Inda nun hai xubes</string>
@@ -211,6 +215,7 @@
   <string name="no_description_found">nun s\'atoparon descripciones</string>
   <string name="nearby_info_menu_commons_article">Páxina del ficheru en Commons</string>
   <string name="nearby_info_menu_wikidata_article">Elementu de WikiData</string>
+  <string name="nearby_info_menu_wikipedia_article">Artículu de Wikipedia</string>
   <string name="error_while_cache">Error al poner les fotos na caché</string>
   <string name="title_info">Un títulu descriptivu únicu pal ficheru, que sirvirá para da-y nome al ficheru. Se pue usar llinguax normal con espacios. Nun amiestes la estensión del ficheru</string>
   <string name="description_info">Por favor, describi l\'elementu multimedia tantu como sía posible: ¿ónde se tomó?, ¿qué amuesa?, ¿cuál ye\'l contestu? Por favor, describi los oxetos o persones. Revela la información que nun pueda aldovinase de mou cenciellu, por casu el momentu del día si ye un paisaxe. Si\'l mediu amuesa daqué desacostumao, esplica qué lo fai raro.</string>
@@ -224,6 +229,9 @@
   <string name="send_log_file_description">Unviar ficheru de rexistru a los desendolcadores per corréu electrónicu</string>
   <string name="no_web_browser">Nun s\'alcontró un restolador p\'abrir la URL</string>
   <string name="null_url">¡Error! Nun s\'alcontró la URL</string>
+  <string name="nominate_deletion">Marcada pa desaniciar</string>
+  <string name="nominated_for_deletion">Esta imaxe marcóse pa desaniciar.</string>
+  <string name="view_browser">Ver nel restolador</string>
   <string name="nearby_location_has_not_changed">L\'allugamientu nun camudó.</string>
   <string name="nearby_location_not_available">L\'allugamientu nun ta disponible.</string>
   <string name="location_permission_rationale_nearby">Ríquese permisu p\'amosar una llista de llugares cercanos</string>
@@ -234,6 +242,21 @@
   <string name="notifications_thank_you_edit">Gracies por facer una edición</string>
   <string name="notifications_mention">%1$s te mentó en %2$s.</string>
   <string name="toggle_view_button">Alternar vista</string>
-  <string name="about_faq" fuzzy="true">Entrugues más frecuentes</string>
+  <string name="nearby_directions">CÓMO LLEGAR</string>
+  <string name="nearby_wikidata">WIKIDATA</string>
+  <string name="nearby_wikipedia">WIKIPEDIA</string>
+  <string name="nearby_commons">COMMONS</string>
+  <string name="about_rate_us">&lt;u&gt;Puntúanos&lt;/u&gt;</string>
+  <string name="about_faq">&lt;u&gt;EMF&lt;/u&gt;</string>
   <string name="welcome_skip_button">Saltar el tutorial</string>
+  <string name="no_internet">Internet nun ta disponible</string>
+  <string name="internet_established">Internet ta disponible</string>
+  <string name="error_notifications">Error al llograr les notificaciones</string>
+  <string name="no_notifications">Nun s\'alcontraron notificaciones</string>
+  <string name="about_translate">&lt;u&gt;Traducir&lt;/u&gt;</string>
+  <string name="about_translate_title">Llingües</string>
+  <string name="about_translate_message">Escueye l\'idioma pal que quies unviar traducciones</string>
+  <string name="about_translate_proceed">Siguir</string>
+  <string name="about_translate_cancel">Encaboxar</string>
+  <string name="retry">Retentar</string>
 </resources>

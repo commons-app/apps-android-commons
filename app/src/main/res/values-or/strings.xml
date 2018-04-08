@@ -1,4 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- Authors:
+* Ansumang
+* Psubhashish
+-->
 <resources>
   <string name="app_name" fuzzy="true">ଉଇକିମିଡ଼ିଆ କମନ୍ସ</string>
   <string name="menu_settings">ସଂରଚନା</string>

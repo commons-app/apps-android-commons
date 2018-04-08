@@ -1,4 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- Authors:
+* Acamicamacaraca
+* Milicevic01
+* Obsuser
+* Rancher
+* Vukasin005
+* Zoranzoki21
+* Милан Јелисавчић
+-->
 <resources>
   <string name="preference_category_appearance">Изглед</string>
   <string name="preference_category_general">Опште</string>

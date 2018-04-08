@@ -1,4 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- Authors:
+* Aefgh39622
+* Hydra
+* Kuailong
+* Liuxinyu970226
+* Qiyue2001
+* Shizhao
+* Yfdyh000
+-->
 <resources>
   <string name="preference_category_appearance">外观</string>
   <string name="preference_category_general">一般</string>

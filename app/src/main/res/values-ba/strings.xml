@@ -1,4 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- Authors:
+* Lizalizaufa
+* Sagan
+* Рустам Нурыев
+-->
 <resources>
   <string name="preference_category_appearance">Тышҡы күренеш</string>
   <string name="preference_category_general">Ғәҙәти</string>

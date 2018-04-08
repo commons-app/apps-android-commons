@@ -1,4 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- Authors:
+* Athena in Wonderland
+* Fúlvio
+* Giro720
+* Hamilton Abreu
+* Imperadeiro98
+* Lijealso
+* Luckas
+* Malafaya
+* Sarilho1
+* Vitorvicentevalente
+-->
 <resources>
   <string name="preference_category_appearance">Aparência</string>
   <string name="preference_category_general">Geral</string>

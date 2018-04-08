@@ -1,4 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- Authors:
+* Anakmalaysia
+* Aurora
+* Muhdnurhidayat
+-->
 <resources>
   <string name="app_name" fuzzy="true">Wikimedia Commons</string>
   <string name="menu_settings">Tetapan</string>
