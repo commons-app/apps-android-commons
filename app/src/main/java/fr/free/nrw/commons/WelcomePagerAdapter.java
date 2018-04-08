@@ -107,7 +107,7 @@ public class WelcomePagerAdapter extends PagerAdapter {
         }
 
         @Optional
-        @OnClick(R.id.welcomeHelpButton)
+        @OnClick(R.id.welcomeInfo)
         void onHelpClicked () {
             try {
                 Utils.handleWebUrl(container.getContext(),Uri.parse("https://commons.wikimedia.org/wiki/Help:Contents" ));

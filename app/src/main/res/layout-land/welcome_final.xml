@@ -1,13 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:orientation="horizontal"
+              android:orientation="vertical"
               android:layout_width="match_parent"
               android:layout_height="match_parent"
               android:background="#0c609c"
-              android:gravity="center"
-        >
 
+        >
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/welcome_help_button_text"
+        android:id="@+id/welcomeInfo"
+        android:layout_gravity="end|top"
+        android:layout_marginTop="@dimen/standard_gap"
+        android:layout_marginRight="@dimen/standard_gap"
+        android:layout_marginEnd="@dimen/standard_gap"
+        android:textSize="@dimen/normal_text"
+        android:textColor="@android:color/white"
+        />
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal"
+    android:gravity="center">
     <!-- Sorry about the hardcoded sizes here. They're image-related. -->
     <LinearLayout
             android:layout_width="wrap_content"
@@ -59,18 +75,8 @@
                 android:textColor="#0c609c"
                 android:textStyle="bold"
                 />
-        <Button
-            android:layout_width="120dp"
-            android:layout_height="@dimen/overflow_button_dimen"
-            android:layout_marginTop="@dimen/standard_gap"
-            android:text="@string/welcome_help_button_text"
-            android:id="@+id/welcomeHelpButton"
-            android:textSize="@dimen/normal_text"
-            android:layout_gravity="center"
-            android:background="@android:color/white"
-            android:textColor="#0c609c"
-            android:textStyle="bold"
-            />
+
+    </LinearLayout>
     </LinearLayout>
 
 </LinearLayout>

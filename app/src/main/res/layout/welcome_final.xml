@@ -4,11 +4,26 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#0c609c"
-    android:gravity="center_vertical"
     >
-
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="top|end"
+        android:layout_marginTop="@dimen/standard_gap"
+        android:layout_marginRight="@dimen/standard_gap"
+        android:layout_marginEnd="@dimen/standard_gap"
+        android:id="@+id/welcomeInfo"
+        android:textSize="@dimen/normal_text"
+        android:textColor="@android:color/white"
+        android:text="@string/welcome_help_button_text"
+        />
     <LinearLayout
-        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center_vertical">
+    <LinearLayout
+        android:gravity="center_vertical"
         android:layout_width="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_height="180dp"
@@ -59,17 +74,6 @@
         android:textColor="#0c609c"
         android:textStyle="bold"
         />
-    <Button
-        android:layout_width="120dp"
-        android:layout_height="@dimen/overflow_button_dimen"
-        android:layout_marginTop="@dimen/standard_gap"
-        android:text="@string/welcome_help_button_text"
-        android:id="@+id/welcomeHelpButton"
-        android:textSize="@dimen/normal_text"
-        android:layout_gravity="center"
-        android:background="@android:color/white"
-        android:textColor="#0c609c"
-        android:textStyle="bold"
-        />
 
+    </LinearLayout>
 </LinearLayout>
