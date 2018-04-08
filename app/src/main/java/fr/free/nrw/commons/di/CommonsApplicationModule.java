@@ -4,29 +4,21 @@ import android.content.ContentProviderClient;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
-import android.support.annotation.NonNull;
 import android.support.v4.util.LruCache;
-
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 
 import javax.inject.Named;
 import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;
-import fr.free.nrw.commons.BuildConfig;
 import fr.free.nrw.commons.auth.AccountUtil;
 import fr.free.nrw.commons.auth.SessionManager;
 import fr.free.nrw.commons.caching.CacheController;
 import fr.free.nrw.commons.data.DBOpenHelper;
 import fr.free.nrw.commons.location.LocationServiceManager;
-import fr.free.nrw.commons.mwapi.ApacheHttpClientMediaWikiApi;
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
 import fr.free.nrw.commons.nearby.NearbyPlaces;
 import fr.free.nrw.commons.upload.UploadController;
-import okhttp3.HttpUrl;
-import okhttp3.OkHttpClient;
 
 import static android.content.Context.MODE_PRIVATE;
 import static fr.free.nrw.commons.contributions.ContributionsContentProvider.CONTRIBUTION_AUTHORITY;
@@ -36,7 +28,6 @@ import static fr.free.nrw.commons.modifications.ModificationsContentProvider.MOD
 @SuppressWarnings({"WeakerAccess", "unused"})
 public class CommonsApplicationModule {
     public static final String CATEGORY_AUTHORITY = "fr.free.nrw.commons.categories.contentprovider";
-    public static final long OK_HTTP_CACHE_SIZE = 10 * 1024 * 1024;
 
     private Context applicationContext;
 
@@ -70,12 +61,6 @@ public class CommonsApplicationModule {
     @Named("modification")
     public ContentProviderClient provideModificationContentProviderClient(Context context) {
         return context.getContentResolver().acquireContentProviderClient(MODIFICATIONS_AUTHORITY);
-    }
-
-    @Provides
-    @Singleton
-    public OkHttpClient provideOkHttpClient() {
-        return new OkHttpClient.Builder().build();
     }
 
     @Provides
@@ -128,35 +113,8 @@ public class CommonsApplicationModule {
 
     @Provides
     @Singleton
-    public MediaWikiApi provideMediaWikiApi(Context context,
-                                            @Named("default_preferences") SharedPreferences defaultPreferences,
-                                            @Named("category_prefs") SharedPreferences categoryPrefs,
-                                            Gson gson) {
-        return new ApacheHttpClientMediaWikiApi(context, BuildConfig.WIKIMEDIA_API_HOST, defaultPreferences, categoryPrefs, gson);
-    }
-
-    @Provides
-    @Named("commons_mediawiki_url")
-    @NonNull
-    @SuppressWarnings("ConstantConditions")
-    public  HttpUrl provideMwUrl() {
-        return HttpUrl.parse("https://commons.wikimedia.org/");
-    }
-
-    @Provides
-    @Singleton
     public LocationServiceManager provideLocationServiceManager(Context context) {
         return new LocationServiceManager(context);
-    }
-
-    /**
-     * Gson objects are very heavy. The app should ideally be using just one instance of it instead of creating new instances everywhere.
-     * @return returns a singleton Gson instance
-     */
-    @Provides
-    @Singleton
-    public Gson provideGson() {
-        return new GsonBuilder().create();
     }
 
     @Provides
