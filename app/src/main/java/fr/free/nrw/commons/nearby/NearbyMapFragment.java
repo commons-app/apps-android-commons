@@ -98,6 +98,7 @@ public class NearbyMapFragment extends DaggerFragment {
     private Animation fab_open;
     private Animation rotate_forward;
     private ContributionController controller;
+    private DirectUpload directUpload;
 
     private Place place;
     private Marker selected;
@@ -108,6 +109,8 @@ public class NearbyMapFragment extends DaggerFragment {
     private boolean isBottomListSheetExpanded;
     private final double CAMERA_TARGET_SHIFT_FACTOR_PORTRAIT = 0.06;
     private final double CAMERA_TARGET_SHIFT_FACTOR_LANDSCAPE = 0.04;
+
+    private Bundle bundleForUpdtes;// Carry information from activity about changed nearby places and current location
 
     @Inject
     @Named("prefs")
@@ -122,6 +125,10 @@ public class NearbyMapFragment extends DaggerFragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        controller = new ContributionController(this);
+        directUpload = new DirectUpload(this, controller);
+
         Bundle bundle = this.getArguments();
         Gson gson = new GsonBuilder()
                 .registerTypeAdapter(Uri.class, new UriDeserializer())
@@ -186,14 +193,12 @@ public class NearbyMapFragment extends DaggerFragment {
     }
 
     public void updateMapSlightly() {
-        // Get arguments from bundle for new location
-        Bundle bundle = this.getArguments();
         if (mapboxMap != null) {
             Gson gson = new GsonBuilder()
                     .registerTypeAdapter(Uri.class, new UriDeserializer())
                     .create();
-            if (bundle != null) {
-                String gsonLatLng = bundle.getString("CurLatLng");
+            if (bundleForUpdtes != null) {
+                String gsonLatLng = bundleForUpdtes.getString("CurLatLng");
                 Type curLatLngType = new TypeToken<fr.free.nrw.commons.location.LatLng>() {}.getType();
                 curLatLng = gson.fromJson(gsonLatLng, curLatLngType);
             }
@@ -203,17 +208,15 @@ public class NearbyMapFragment extends DaggerFragment {
     }
 
     public void updateMapSignificantly() {
-
-        Bundle bundle = this.getArguments();
         if (mapboxMap != null) {
-            if (bundle != null) {
+            if (bundleForUpdtes != null) {
                 Gson gson = new GsonBuilder()
                         .registerTypeAdapter(Uri.class, new UriDeserializer())
                         .create();
 
-                String gsonPlaceList = bundle.getString("PlaceList");
-                String gsonLatLng = bundle.getString("CurLatLng");
-                String gsonBoundaryCoordinates = bundle.getString("BoundaryCoord");
+                String gsonPlaceList = bundleForUpdtes.getString("PlaceList");
+                String gsonLatLng = bundleForUpdtes.getString("CurLatLng");
+                String gsonBoundaryCoordinates = bundleForUpdtes.getString("BoundaryCoord");
                 Type listType = new TypeToken<List<Place>>() {}.getType();
                 List<Place> placeList = gson.fromJson(gsonPlaceList, listType);
                 Type curLatLngType = new TypeToken<fr.free.nrw.commons.location.LatLng>() {}.getType();
@@ -451,6 +454,8 @@ public class NearbyMapFragment extends DaggerFragment {
 
     private void setupMapView(Bundle savedInstanceState) {
         MapboxMapOptions options = new MapboxMapOptions()
+                .compassGravity(Gravity.BOTTOM | Gravity.LEFT)
+                .compassMargins(new int[]{12, 0, 0, 24})
                 .styleUrl(Style.OUTDOORS)
                 .logoEnabled(false)
                 .attributionEnabled(false)
@@ -680,9 +685,6 @@ public class NearbyMapFragment extends DaggerFragment {
         fabCamera.setOnClickListener(view -> {
             if (fabCamera.isShown()) {
                 Timber.d("Camera button tapped. Image title: " + place.getName() + "Image desc: " + place.getLongDescription());
-                controller = new ContributionController(this);
-
-                DirectUpload directUpload = new DirectUpload(this, controller);
                 storeSharedPrefs();
                 directUpload.initiateCameraUpload();
             }
@@ -691,9 +693,6 @@ public class NearbyMapFragment extends DaggerFragment {
         fabGallery.setOnClickListener(view -> {
             if (fabGallery.isShown()) {
                 Timber.d("Gallery button tapped. Image title: " + place.getName() + "Image desc: " + place.getLongDescription());
-                controller = new ContributionController(this);
-
-                DirectUpload directUpload = new DirectUpload(this, controller);
                 storeSharedPrefs();
                 directUpload.initiateGalleryUpload();
             }
@@ -712,9 +711,10 @@ public class NearbyMapFragment extends DaggerFragment {
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         Timber.d("onRequestPermissionsResult: req code = " + " perm = " + permissions + " grant =" + grantResults);
 
+        // Do not use requestCode 1 as it will conflict with NearbyActivity's requestCodes
         switch (requestCode) {
-            // 1 = "Read external storage" allowed when gallery selected
-            case 1: {
+            // 4 = "Read external storage" allowed when gallery selected
+            case 4: {
                 if (grantResults.length > 0 && grantResults[0] == PERMISSION_GRANTED) {
                     Timber.d("Call controller.startGalleryPick()");
                     controller.startGalleryPick();
@@ -722,8 +722,8 @@ public class NearbyMapFragment extends DaggerFragment {
             }
             break;
 
-            // 3 = "Write external storage" allowed when camera selected
-            case 3: {
+            // 5 = "Write external storage" allowed when camera selected
+            case 5: {
                 if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     Timber.d("Call controller.startCameraCapture()");
                     controller.startCameraCapture();
@@ -771,7 +771,7 @@ public class NearbyMapFragment extends DaggerFragment {
         }
     }
 
-        private void closeFabs ( boolean isFabOpen){
+    private void closeFabs ( boolean isFabOpen){
         if (isFabOpen) {
             fabPlus.startAnimation(rotate_backward);
             fabCamera.startAnimation(fab_close);
@@ -781,6 +781,11 @@ public class NearbyMapFragment extends DaggerFragment {
             this.isFabOpen = !isFabOpen;
         }
     }
+
+    public void setBundleForUpdtes(Bundle bundleForUpdtes) {
+        this.bundleForUpdtes = bundleForUpdtes;
+    }
+
 
     @Override
     public void onStart() {
