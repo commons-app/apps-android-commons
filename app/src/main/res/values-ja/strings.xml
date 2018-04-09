@@ -143,8 +143,8 @@
   <string name="detail_description_empty">説明はありません。</string>
   <string name="detail_license_empty">不明なライセンス</string>
   <string name="menu_refresh">更新</string>
-  <string name="read_storage_permission_rationale">必要な権限：外部ストレージを読み込みます。これがなければアプリは機能しません。</string>
-  <string name="write_storage_permission_rationale">必要な権限:外部ストレージを作成します。これがなければアプリは機能しません。</string>
+  <string name="read_storage_permission_rationale" fuzzy="true">必要な権限：外部ストレージを読み込みます。これがなければアプリは機能しません。</string>
+  <string name="write_storage_permission_rationale" fuzzy="true">必要な権限:外部ストレージを作成します。これがなければアプリは機能しません。</string>
   <string name="location_permission_rationale">オプションの権限：カテゴリ候補の現在の位置を取得する</string>
   <string name="ok">承認</string>
   <string name="title_activity_nearby">周りの場所</string>

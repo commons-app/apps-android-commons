@@ -2,6 +2,7 @@
 <!-- Authors:
 * Fitoschido
 * Gomoko
+* Happy13241
 * Jean-Frédéric
 * KATRINE1992
 * Metroitendo
@@ -169,8 +170,8 @@
   <string name="detail_description_empty">Aucune description</string>
   <string name="detail_license_empty">Licence inconnue</string>
   <string name="menu_refresh">Rafraîchir</string>
-  <string name="read_storage_permission_rationale">Autorisation nécessaire : Lire un stockage externe. L’application ne peut pas fonctionner sans cela.</string>
-  <string name="write_storage_permission_rationale">Permission obligatoire : Écriture sur stockage externe. L’application ne peut pas fonctionner sans cela.</string>
+  <string name="read_storage_permission_rationale">Autorisation nécessaire : Lire un stockage externe. L’application ne peut pas accéder à votre galerie sans cela.</string>
+  <string name="write_storage_permission_rationale">Permission obligatoire : Écriture sur stockage externe. L’application ne peut pas accéder à votre appareil photo sans cela.</string>
   <string name="location_permission_rationale">Autorisation facultative : Obtenir l’emplacement actuel pour des suggestions de catégorie</string>
   <string name="ok">OK</string>
   <string name="title_activity_nearby">Endroits à proximité</string>
@@ -245,6 +246,7 @@
   <string name="null_url">Erreur! URL non trouvée</string>
   <string name="nominate_deletion">Proposer pour suppression</string>
   <string name="nominated_for_deletion">Cette image a été citée pour suppression.</string>
+  <string name="nominated_see_more"/>
   <string name="view_browser">Afficher dans le navigateur</string>
   <string name="nearby_location_has_not_changed">L\'emplacement n\'a pas changé.</string>
   <string name="nearby_location_not_available">Emplacement non disponible.</string>

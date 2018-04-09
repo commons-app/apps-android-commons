@@ -6,6 +6,7 @@
 * Envlh
 * Facenapalm
 * Gazimagomedov
+* Happy13241
 * Iluvatar
 * Kaganer
 * MaxBioHazard
@@ -174,8 +175,8 @@
   <string name="detail_description_empty">Нет описания</string>
   <string name="detail_license_empty">Неизвестная лицензия</string>
   <string name="menu_refresh">Обновить</string>
-  <string name="read_storage_permission_rationale">Требуемые разрешения: чтение с внешнего хранилища. Приложение не сможет функционировать без этого.</string>
-  <string name="write_storage_permission_rationale">Требуемые разрешения: запись на внешнее хранилище. Приложение не сможет функционировать без этого.</string>
+  <string name="read_storage_permission_rationale">Требуемые разрешения: чтение с внешнего хранилища. Приложение не сможет доступ ваша галерея без этой.</string>
+  <string name="write_storage_permission_rationale">Требуемые разрешения: запись на внешнее хранилище. Приложение не сможет доступ ваша камера без этой.</string>
   <string name="location_permission_rationale">Необязательное разрешение: получение текущего местоположения для предложения категорий</string>
   <string name="ok">OK</string>
   <string name="title_activity_nearby">Места поблизости</string>
@@ -250,6 +251,7 @@
   <string name="null_url">Ошибка! Ссылка не найдена</string>
   <string name="nominate_deletion">Номинировать к удалению</string>
   <string name="nominated_for_deletion">Этот файл был вынесен на удаление.</string>
+  <string name="nominated_see_more"/>
   <string name="view_browser">Просмотреть в браузере</string>
   <string name="nearby_location_has_not_changed">Местоположение не изменено.</string>
   <string name="nearby_location_not_available">Местоположение недоступно.</string>
@@ -265,7 +267,7 @@
   <string name="nearby_wikidata">ВИКИДАННЫЕ</string>
   <string name="nearby_wikipedia">ВИКИПЕДИЯ</string>
   <string name="nearby_commons">ВИКИСКЛАД</string>
-  <string name="about_rate_us">*</string>
+  <string name="about_rate_us">&lt;u&gt;Оцените нас&lt;/u&gt;</string>
   <string name="about_faq">&lt;u&gt;Часто задаваемые вопросы&lt;/u&gt;</string>
   <string name="welcome_skip_button">Пропустить руководство</string>
   <string name="no_internet">Интернет недоступен</string>

@@ -150,8 +150,8 @@
   <string name="detail_description_empty">Ingen beskrivelse</string>
   <string name="detail_license_empty">Ukjent lisens</string>
   <string name="menu_refresh">Gjenoppfrisk</string>
-  <string name="read_storage_permission_rationale">Nødvendig tillatelse: Lese ekstern lagring. Appen virker ikke uten dette.</string>
-  <string name="write_storage_permission_rationale">Påkrevd tillatelse: Skriv til ekstern lagring. Appen fungerer ikke uten dette.</string>
+  <string name="read_storage_permission_rationale" fuzzy="true">Nødvendig tillatelse: Lese ekstern lagring. Appen virker ikke uten dette.</string>
+  <string name="write_storage_permission_rationale" fuzzy="true">Påkrevd tillatelse: Skriv til ekstern lagring. Appen fungerer ikke uten dette.</string>
   <string name="location_permission_rationale">Valgfri tillatelse: Hent nåværende posisjon for kategoriforslag</string>
   <string name="ok">OK</string>
   <string name="title_activity_nearby">Plasser i nærheten</string>

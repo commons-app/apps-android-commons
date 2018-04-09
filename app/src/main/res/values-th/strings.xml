@@ -112,8 +112,8 @@
   <string name="detail_description_empty">ไม่มีคำอธิบาย</string>
   <string name="detail_license_empty">สัญญาอนุญาตที่ไม่รู้จัก</string>
   <string name="menu_refresh">รีเฟรช</string>
-  <string name="read_storage_permission_rationale">สิทธิที่ต้องการ: อ่านที่เก็บข้อมูลภายนอก แอปไม่สามารถทำงานได้โดยไม่มีสิทธินี้</string>
-  <string name="write_storage_permission_rationale">สิทธิที่ต้องการ: เขียนที่เก็บข้อมูลภายนอก แอปไม่สามารถทำงานได้โดยไม่มีสิทธินี้</string>
+  <string name="read_storage_permission_rationale" fuzzy="true">สิทธิที่ต้องการ: อ่านที่เก็บข้อมูลภายนอก แอปไม่สามารถทำงานได้โดยไม่มีสิทธินี้</string>
+  <string name="write_storage_permission_rationale" fuzzy="true">สิทธิที่ต้องการ: เขียนที่เก็บข้อมูลภายนอก แอปไม่สามารถทำงานได้โดยไม่มีสิทธินี้</string>
   <string name="location_permission_rationale">สิทธิทางเลือก: รับข้อมูลตำแหน่งที่ตั้งปัจจุบันสำหรับข้อเสนอแนะหมวดหมู่</string>
   <string name="ok">ตกลง</string>
   <string name="title_activity_nearby">สถานที่ใกล้เคียง</string>

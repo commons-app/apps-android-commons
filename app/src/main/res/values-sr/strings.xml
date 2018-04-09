@@ -160,8 +160,8 @@
   <string name="detail_description_empty">Нема описа</string>
   <string name="detail_license_empty">Непозната лиценца</string>
   <string name="menu_refresh">Освежи</string>
-  <string name="read_storage_permission_rationale">Потребна дозвола: читање спољашње меморије. \nАпликација не може да функционише без овога.</string>
-  <string name="write_storage_permission_rationale">Потребна дозвола: писање у спољашњој меморији. \nАпликација не може да функционише без овога.</string>
+  <string name="read_storage_permission_rationale" fuzzy="true">Потребна дозвола: читање спољашње меморије. \nАпликација не може да функционише без овога.</string>
+  <string name="write_storage_permission_rationale" fuzzy="true">Потребна дозвола: писање у спољашњој меморији. \nАпликација не може да функционише без овога.</string>
   <string name="location_permission_rationale">Необавезна дозвола: преузми тренутну локацију за предлоге категорија</string>
   <string name="ok">У реду</string>
   <string name="title_activity_nearby">Места у близини</string>

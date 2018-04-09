@@ -154,8 +154,8 @@
   <string name="detail_description_empty">Engin lýsing</string>
   <string name="detail_license_empty">Óþekkt notkunarleyfi</string>
   <string name="menu_refresh">Endurlesa</string>
-  <string name="read_storage_permission_rationale">Nauðsynlegar heimildir: Lesa ytri gagnageymslu. Forritið virkar ekki án þess.</string>
-  <string name="write_storage_permission_rationale">Nauðsynlegar heimildir: Skrifa í ytri gagnageymslu. Forritið virkar ekki án þess.</string>
+  <string name="read_storage_permission_rationale" fuzzy="true">Nauðsynlegar heimildir: Lesa ytri gagnageymslu. Forritið virkar ekki án þess.</string>
+  <string name="write_storage_permission_rationale" fuzzy="true">Nauðsynlegar heimildir: Skrifa í ytri gagnageymslu. Forritið virkar ekki án þess.</string>
   <string name="location_permission_rationale">Nauðsynlegar heimildir: Lesa núverandi staðsetningu til að geta stungið upp á flokkum</string>
   <string name="ok">Í lagi</string>
   <string name="title_activity_nearby">Staðir í nágrenninu</string>

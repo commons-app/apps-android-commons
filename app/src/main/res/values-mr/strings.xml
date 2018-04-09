@@ -158,8 +158,8 @@
   <string name="detail_description_empty">वर्णन नाही.</string>
   <string name="detail_license_empty">अनोळखी परवाना</string>
   <string name="menu_refresh">ताजेतवाने करा</string>
-  <string name="read_storage_permission_rationale">परवानगी आवश्यक:बाह्य भंडारण वाचन. याशिवाय अॅप काम करू शकत नाही.</string>
-  <string name="write_storage_permission_rationale">परवानगी आवश्यक:बाह्य भंडारण वाचन. याशिवाय अॅप काम करू शकत नाही.</string>
+  <string name="read_storage_permission_rationale" fuzzy="true">परवानगी आवश्यक:बाह्य भंडारण वाचन. याशिवाय अॅप काम करू शकत नाही.</string>
+  <string name="write_storage_permission_rationale" fuzzy="true">परवानगी आवश्यक:बाह्य भंडारण वाचन. याशिवाय अॅप काम करू शकत नाही.</string>
   <string name="location_permission_rationale">ऐच्छिक परवानगी:वर्ग सुचवण्यांसाठी सध्याचे स्थान मिळवा</string>
   <string name="ok">ठीक आहे</string>
   <string name="title_activity_nearby">जवळपासची स्थाने</string>

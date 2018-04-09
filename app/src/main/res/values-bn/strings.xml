@@ -162,8 +162,8 @@
   <string name="detail_description_empty">বিবরণ নেই</string>
   <string name="detail_license_empty">অজানা লাইসেন্স</string>
   <string name="menu_refresh">পুনঃসতেজ</string>
-  <string name="read_storage_permission_rationale">প্রয়োজনীয় অনুমতি: বহিঃস্ত সঞ্চয়স্থান পড়া। এটি ছাড়া অ্যাপ কাজ করবে না।</string>
-  <string name="write_storage_permission_rationale">অনুমতি প্রয়োজন: অালাদাভাবে সংযুক্ত স্টোরেজ লিখুন। এটি ছাড়া অ্যাপটি চলতে পারেনা।</string>
+  <string name="read_storage_permission_rationale" fuzzy="true">প্রয়োজনীয় অনুমতি: বহিঃস্ত সঞ্চয়স্থান পড়া। এটি ছাড়া অ্যাপ কাজ করবে না।</string>
+  <string name="write_storage_permission_rationale" fuzzy="true">অনুমতি প্রয়োজন: অালাদাভাবে সংযুক্ত স্টোরেজ লিখুন। এটি ছাড়া অ্যাপটি চলতে পারেনা।</string>
   <string name="location_permission_rationale">ঐচ্ছিক অনুমতি: বিষয়শ্রেণী পরামর্শের জন্য বর্তমান অবস্থান নেয়</string>
   <string name="ok">ঠিক আছে</string>
   <string name="title_activity_nearby">কাছাকাছি স্থান</string>
@@ -254,4 +254,6 @@
   <string name="welcome_skip_button">টিউটোরিয়াল এড়ান</string>
   <string name="no_internet">ইন্টারনেট অনুপলব্ধ</string>
   <string name="internet_established">ইন্টারনেট উপলব্ধ</string>
+  <string name="no_notifications">কোন বিজ্ঞপ্তি পাওয়া যায়নি</string>
+  <string name="retry">পুনঃচেষ্টা করুন</string>
 </resources>
