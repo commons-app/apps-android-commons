@@ -10,11 +10,14 @@ import android.location.LocationManager;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
+import java.lang.ref.WeakReference;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
+import fr.free.nrw.commons.nearby.NearbyActivity;
 import timber.log.Timber;
 
 public class LocationServiceManager implements LocationListener {
@@ -29,6 +32,7 @@ public class LocationServiceManager implements LocationListener {
     private Location lastLocation;
     private final List<LocationUpdateListener> locationListeners = new CopyOnWriteArrayList<>();
     public boolean isLocationManagerRegistered = false;
+    public boolean isLocationRequesting = false;
 
     /**
      * Constructs a new instance of LocationServiceManager.
@@ -65,6 +69,7 @@ public class LocationServiceManager implements LocationListener {
      * @param activity the activity
      */
     public void requestPermissions(Activity activity) {
+        isLocationRequesting = true;
         if (activity.isFinishing()) {
             return;
         }
@@ -89,11 +94,13 @@ public class LocationServiceManager implements LocationListener {
     /**
      * Registers a LocationManager to listen for current location.
      */
-    public void registerLocationManager(Activity activity) {
-        if (!isLocationManagerRegistered) {
+    public void registerLocationManager(WeakReference<AppCompatActivity> activityReference) {
+        Activity activity = activityReference.get();
+        if (activity != null) {
+
             isLocationManagerRegistered = requestLocationUpdatesFromProvider(LocationManager.NETWORK_PROVIDER)
                     && requestLocationUpdatesFromProvider(LocationManager.GPS_PROVIDER);
-            if (isLocationManagerRegistered == false) { //If it couldnt registered means permission required
+            if (isLocationManagerRegistered == false && !isLocationRequesting) { //If it couldnt registered means permission required
                 requestPermissions(activity);
             }
         }

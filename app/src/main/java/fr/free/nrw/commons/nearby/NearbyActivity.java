@@ -13,6 +13,7 @@ import android.support.design.widget.BottomSheetBehavior;
 
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AlertDialog;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -25,6 +26,7 @@ import android.widget.Toast;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
+import java.lang.ref.WeakReference;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -33,6 +35,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 import fr.free.nrw.commons.R;
+import fr.free.nrw.commons.contributions.ContributionsActivity;
 import fr.free.nrw.commons.location.LatLng;
 import fr.free.nrw.commons.location.LocationServiceManager;
 import fr.free.nrw.commons.location.LocationUpdateListener;
@@ -157,18 +160,19 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         switch (requestCode) {
             case LOCATION_REQUEST: {
-                if (!locationManager.isLocationManagerRegistered) { //If it couldn't registered due to permission problems, register it
-                    locationManager.registerLocationManager(this);
-                } else {
-                    if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                        refreshView(LocationServiceManager.LocationChangeType.LOCATION_SIGNIFICANTLY_CHANGED);
-                    } else {
-                        //If permission not granted, go to page that says Nearby Places cannot be displayed
-                        hideProgressBar();
-                        showLocationPermissionDeniedErrorDialog();
-                    }
-                }
 
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    locationManager.isLocationManagerRegistered = true;
+                    locationManager.isLocationRequesting = false;
+                    refreshView(LocationServiceManager.LocationChangeType.LOCATION_SIGNIFICANTLY_CHANGED);
+                } else {
+                    //If permission not granted, go to page that says Nearby Places cannot be displayed
+                    locationManager.isLocationManagerRegistered = false;
+                    locationManager.isLocationRequesting = false;
+                    Intent intent = new Intent(this, ContributionsActivity.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    startActivity(intent);
+                }
             }
         }
     }
@@ -190,7 +194,7 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
                 .show();
     }
 
-    private void checkGps() {
+    public void checkGps() {
         if (!locationManager.isProviderEnabled()) {
             Timber.d("GPS is not enabled");
             new AlertDialog.Builder(this)
@@ -216,7 +220,7 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
     }
 
     private void checkLocationPermission() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && !locationManager.isLocationRequesting) {
             if (locationManager.isLocationPermissionGranted()) {
                 refreshView(LocationServiceManager.LocationChangeType.LOCATION_SIGNIFICANTLY_CHANGED);
             } else {
@@ -261,7 +265,7 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
     protected void onStart() {
         super.onStart();
         locationManager.addLocationListener(this);
-        locationManager.registerLocationManager(this);
+        locationManager.registerLocationManager(new WeakReference<AppCompatActivity>(this));
     }
 
     @Override
@@ -339,7 +343,7 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
             return;
         }
 
-        locationManager.registerLocationManager(this);
+        locationManager.registerLocationManager(new WeakReference<AppCompatActivity>(this));
         LatLng lastLocation = locationManager.getLastLocation();
 
         if (curLatLang != null && curLatLang.equals(lastLocation)) { //refresh view only if location has changed
@@ -411,7 +415,7 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
             locationManager.removeLocationListener(this);
         } else {
             lockNearbyView = false;
-            locationManager.registerLocationManager(this);
+            locationManager.registerLocationManager(new WeakReference<AppCompatActivity>(this));
             locationManager.addLocationListener(this);
         }
     }
