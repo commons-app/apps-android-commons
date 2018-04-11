@@ -327,7 +327,7 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
                 input.addTextChangedListener(new TextWatcher() {
                     private void handleText() {
                         final Button okButton = d.getButton(AlertDialog.BUTTON_POSITIVE);
-                        if (input.getText().length() == 0) {
+                        if (input.getText().toString().trim().isEmpty()) {
                             okButton.setEnabled(false);
                         } else {
                             okButton.setEnabled(true);
