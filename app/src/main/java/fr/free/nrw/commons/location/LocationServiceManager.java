@@ -12,9 +12,11 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.util.Log;
 
+import java.lang.ref.WeakReference;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
+import fr.free.nrw.commons.nearby.NearbyActivity;
 import timber.log.Timber;
 
 public class LocationServiceManager implements LocationListener {
@@ -89,10 +91,17 @@ public class LocationServiceManager implements LocationListener {
     /**
      * Registers a LocationManager to listen for current location.
      */
-    public void registerLocationManager() {
-        if (!isLocationManagerRegistered)
+    public void registerLocationManager(WeakReference<Activity> activityWeakReference) {
+        NearbyActivity nearbyActivity = (NearbyActivity) activityWeakReference.get();
+        if (!isLocationManagerRegistered) {
             isLocationManagerRegistered = requestLocationUpdatesFromProvider(LocationManager.NETWORK_PROVIDER)
                     && requestLocationUpdatesFromProvider(LocationManager.GPS_PROVIDER);
+
+            if (!isLocationManagerRegistered) {
+                nearbyActivity.checkGps();
+            }
+        }
+
     }
 
     /**
