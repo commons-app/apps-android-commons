@@ -304,8 +304,9 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
             coordinates.setOnClickListener(v -> openMap(media.getCoordinates()));
         }
         if (delete.getVisibility() == View.VISIBLE) {
+            enableDeleteButton(true);
+
             delete.setOnClickListener(v -> {
-                enableDeleteButton(false);
 
                 AlertDialog.Builder alert = new AlertDialog.Builder(getActivity());
                 alert.setMessage("Why should this file be deleted?");
@@ -317,11 +318,11 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
                         String reason = input.getText().toString();
                         DeleteTask deleteTask = new DeleteTask(getActivity(), media, reason);
                         deleteTask.execute();
+                        enableDeleteButton(false);
                     }
                 });
                 alert.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int whichButton) {
-                        enableDeleteButton(true);
                     }
                 });
                 AlertDialog d = alert.create();
