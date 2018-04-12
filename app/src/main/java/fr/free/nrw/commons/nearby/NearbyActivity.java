@@ -21,7 +21,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
-import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -221,17 +220,14 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
     }
 
     private void showLocationPermissionDeniedErrorDialog() {
-        if (!locationPermissionDeniedAlert.isShowing()) {
             locationPermissionDeniedAlert.show();
-        }
     }
 
     public void checkGps() {
         if (!locationManager.isProviderEnabled()) {
             Timber.d("GPS is not enabled");
-            if (!gpsDisabledAlert.isShowing()) {
-                gpsDisabledAlert.show();
-            }
+            gpsDisabledAlert.show();
+
 
         } else {
             Timber.d("GPS is enabled");
@@ -241,7 +237,9 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
 
     private void checkLocationPermission() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+
             if (locationManager.isLocationPermissionGranted()) {
+
                 refreshView(LocationServiceManager.LocationChangeType.LOCATION_SIGNIFICANTLY_CHANGED);
             } else {
                 // Should we show an explanation?
@@ -249,16 +247,14 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
                     // Show an explanation to the user *asynchronously* -- don't block
                     // this thread waiting for the user's response! After the user
                     // sees the explanation, try again to request the permission.
-                    if (!locationPermissionDeniedAlert.isShowing()) {
                         locationPermissionExplanationAlert.show();
-                    }
 
                 } else {
                     // No explanation needed, we can request the permission.
                     requestLocationPermissions();
                 }
             }
-        } else {
+        } else if (locationManager.isLocationPermissionGranted()){
             refreshView(LocationServiceManager.LocationChangeType.LOCATION_SIGNIFICANTLY_CHANGED);
         }
     }
@@ -543,11 +539,13 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
 
     @Override
     public void onLocationChangedSignificantly(LatLng latLng) {
+        if (locationManager.isLocationPermissionGranted())
         refreshView(LocationServiceManager.LocationChangeType.LOCATION_SIGNIFICANTLY_CHANGED);
     }
 
     @Override
     public void onLocationChangedSlightly(LatLng latLng) {
+        if (locationManager.isLocationPermissionGranted())
         refreshView(LocationServiceManager.LocationChangeType.LOCATION_SLIGHTLY_CHANGED);
     }
 
