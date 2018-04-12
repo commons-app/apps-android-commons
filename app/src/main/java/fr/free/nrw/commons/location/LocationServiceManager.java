@@ -4,13 +4,13 @@ import android.Manifest;
 import android.app.Activity;
 import android.content.Context;
 import android.content.pm.PackageManager;
+import android.location.Criteria;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
-import android.util.Log;
 
 import java.lang.ref.WeakReference;
 import java.util.List;
@@ -30,7 +30,7 @@ public class LocationServiceManager implements LocationListener {
     private LocationManager locationManager;
     private Location lastLocation;
     private final List<LocationUpdateListener> locationListeners = new CopyOnWriteArrayList<>();
-    private boolean isLocationManagerRegistered = false;
+    public LocationRequestResultType locationMaganerRegisterStatus = LocationRequestResultType.NON_REGISTERED;
 
     /**
      * Constructs a new instance of LocationServiceManager.
@@ -93,15 +93,31 @@ public class LocationServiceManager implements LocationListener {
      */
     public void registerLocationManager(WeakReference<Activity> activityWeakReference) {
         NearbyActivity nearbyActivity = (NearbyActivity) activityWeakReference.get();
-        if (!isLocationManagerRegistered) {
-            isLocationManagerRegistered = requestLocationUpdatesFromProvider(LocationManager.NETWORK_PROVIDER)
-                    && requestLocationUpdatesFromProvider(LocationManager.GPS_PROVIDER);
 
-            if (!isLocationManagerRegistered) {
-                nearbyActivity.checkGps();
-            }
+        Criteria criteria = new Criteria();
+        criteria.setAccuracy(Criteria.ACCURACY_FINE);
+
+        String bestProvider = locationManager.getBestProvider(criteria, true);
+
+        locationMaganerRegisterStatus = requestLocationUpdatesFromProvider(bestProvider);
+
+        if (bestProvider == null) { // If there are no best provider, choose GPS_PROVIDER
+            locationMaganerRegisterStatus = requestLocationUpdatesFromProvider(LocationManager.GPS_PROVIDER);
         }
 
+        if (locationMaganerRegisterStatus != LocationRequestResultType.NO_ERROR) {
+
+            // If network provider is best provider but, we dont have permission, then try GPS provider
+            if (locationMaganerRegisterStatus == LocationRequestResultType.ILLEGAL_ARGUMENT_EXCEPTION) {
+                // try with GPS_PROVIDER
+                locationMaganerRegisterStatus = requestLocationUpdatesFromProvider(LocationManager.GPS_PROVIDER);
+
+                // If there is security exception, then get permission via checking GPS
+            } else if (locationMaganerRegisterStatus == LocationRequestResultType.SECURITY_EXCEPTION) {
+                nearbyActivity.checkGps();
+            }
+
+         }
     }
 
     /**
@@ -110,19 +126,19 @@ public class LocationServiceManager implements LocationListener {
      * @param locationProvider the location provider
      * @return true if successful
      */
-    private boolean requestLocationUpdatesFromProvider(String locationProvider) {
+    private LocationRequestResultType requestLocationUpdatesFromProvider(String locationProvider) {
         try {
             locationManager.requestLocationUpdates(locationProvider,
                     MIN_LOCATION_UPDATE_REQUEST_TIME_IN_MILLIS,
                     MIN_LOCATION_UPDATE_REQUEST_DISTANCE_IN_METERS,
                     this);
-            return true;
+            return LocationRequestResultType.NO_ERROR;
         } catch (IllegalArgumentException e) {
             Timber.e(e, "Illegal argument exception");
-            return false;
+            return LocationRequestResultType.ILLEGAL_ARGUMENT_EXCEPTION;
         } catch (SecurityException e) {
             Timber.e(e, "Security exception");
-            return false;
+            return LocationRequestResultType.SECURITY_EXCEPTION;
         }
     }
 
@@ -195,7 +211,7 @@ public class LocationServiceManager implements LocationListener {
      * Unregisters location manager.
      */
     public void unregisterLocationManager() {
-        isLocationManagerRegistered = false;
+        locationMaganerRegisterStatus = LocationRequestResultType.NON_REGISTERED;
         try {
             locationManager.removeUpdates(this);
         } catch (SecurityException e) {
@@ -255,9 +271,16 @@ public class LocationServiceManager implements LocationListener {
         Timber.d("Provider %s disabled", provider);
     }
 
-    public enum LocationChangeType{
+    public enum LocationChangeType {
         LOCATION_SIGNIFICANTLY_CHANGED, //Went out of borders of nearby markers
         LOCATION_SLIGHTLY_CHANGED,      //User might be walking or driving
         LOCATION_NOT_CHANGED
+    }
+
+    public enum LocationRequestResultType {
+        SECURITY_EXCEPTION,
+        ILLEGAL_ARGUMENT_EXCEPTION,
+        NO_ERROR,
+        NON_REGISTERED
     }
 }
