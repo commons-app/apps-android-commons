@@ -252,14 +252,14 @@
   <string name="nearby_wikidata">维基数据</string>
   <string name="nearby_wikipedia">维基百科</string>
   <string name="nearby_commons">共享资源</string>
-  <string name="about_rate_us"/>
+  <string name="about_rate_us">&lt;u&gt;评价我们&lt;/u&gt;</string>
   <string name="about_faq">&lt;u&gt;常见问题&lt;/u&gt;</string>
   <string name="welcome_skip_button">跳过指导</string>
   <string name="no_internet">互联网不可用</string>
   <string name="internet_established">互联网可用</string>
   <string name="error_notifications">检索通知时出错</string>
   <string name="no_notifications">找不到通知</string>
-  <string name="about_translate"/>
+  <string name="about_translate">&lt;u&gt;翻译&lt;/u&gt;</string>
   <string name="about_translate_title">语言</string>
   <string name="about_translate_message">选择您希望提交翻译的语言</string>
   <string name="about_translate_proceed">已处理</string>

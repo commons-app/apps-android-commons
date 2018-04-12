@@ -3,6 +3,7 @@
 * Abbedabb
 * Ainali
 * Jopparn
+* Liuxinyu970226
 * Skalman
 * Tor.klingberg
 * WikiPhoenix
@@ -252,14 +253,14 @@
   <string name="nearby_wikidata">WIKIDATA</string>
   <string name="nearby_wikipedia">WIKIPEDIA</string>
   <string name="nearby_commons">COMMONS</string>
-  <string name="about_rate_us"/>
+  <string name="about_rate_us" fuzzy="true"/>
   <string name="about_faq">&lt;u&gt;Vanliga frågor&lt;/u&gt;</string>
   <string name="welcome_skip_button">Hoppa över övning</string>
   <string name="no_internet">Uppkopplingen bröts</string>
   <string name="internet_established">Uppkopplingen återupprättades</string>
   <string name="error_notifications">Fel uppstod när aviseringar hämtades</string>
   <string name="no_notifications">Inga aviseringar hittades</string>
-  <string name="about_translate"/>
+  <string name="about_translate" fuzzy="true"/>
   <string name="about_translate_title">Språk</string>
   <string name="about_translate_message">Välj språket som du vill skicka in översättningar för</string>
   <string name="about_translate_proceed">Fortsätt</string>

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Authors:
 * Danmichaelo
+* Imre Eilertsen
 * JohSan65
 * Jon Harald Søby
 * Laaknor
@@ -233,4 +234,7 @@
   <string name="notifications_mention">%1$s nevnte deg på %2$s.</string>
   <string name="toggle_view_button">Skift visning</string>
   <string name="about_faq" fuzzy="true">Ofte stilte spørsmål</string>
+  <string name="no_internet">Internett er utilgjengelig</string>
+  <string name="about_translate">&lt;u&gt;Oversett&lt;/u&gt;</string>
+  <string name="retry">Prøv igjen</string>
 </resources>

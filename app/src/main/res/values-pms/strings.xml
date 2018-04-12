@@ -155,8 +155,8 @@
   <string name="detail_description_empty">Gnun-a descrission</string>
   <string name="detail_license_empty">Licensa sconossùa</string>
   <string name="menu_refresh">Rinfrësché</string>
-  <string name="read_storage_permission_rationale" fuzzy="true">Autorisassion necessaria: Lese n\'anmagasinament estern. L\'aplicassion a peul pa marcé sensa lòn.</string>
-  <string name="write_storage_permission_rationale" fuzzy="true">Autorisassion necessaria: Scrive n\'anmagasinament estern. L\'aplicassion a peul pa marcé sensa \'d lòn.</string>
+  <string name="read_storage_permission_rationale">Autorisassion necessaria: Lese n\'anmagasinament estern. L\'aplicassion a peul pa acede a soa galarìa sensa \'d lòn.</string>
+  <string name="write_storage_permission_rationale">Autorisassion necessaria: Scrive an sn\'anmagasinament estern. L\'aplicassion a peul pa acede a soa màchina fòto sensa \'d lòn.</string>
   <string name="location_permission_rationale">Autorisassion facoltativa: Oten-e la posission atual për dij sugeriment ëd categorìa</string>
   <string name="ok">Va bin</string>
   <string name="title_activity_nearby">Pòst davzin</string>
@@ -230,6 +230,7 @@
   <string name="no_web_browser">Gnun navigador trovà për duverté l\'adrëssa an sl\'aragnà</string>
   <string name="null_url">Eror! Liura nen trovà</string>
   <string name="nominate_deletion">Propon-e për la scancelassion</string>
+  <string name="nominated_for_deletion">Sa plancia a l\'é stàita nominà për ël dëscancelament.</string>
   <string name="view_browser">Smon-e ant ël navigador</string>
   <string name="nearby_location_has_not_changed">Ël leu a l\'é nen cangià.</string>
   <string name="nearby_location_not_available">Leu nen disponìbil.</string>
@@ -245,8 +246,17 @@
   <string name="nearby_wikidata">WIKIDATA</string>
   <string name="nearby_wikipedia">WIKIPEDIA</string>
   <string name="nearby_commons">COMUN</string>
-  <string name="about_faq" fuzzy="true">Chestion frequente</string>
+  <string name="about_rate_us">&lt;u&gt;Ch\'an vàluta&lt;/u&gt;</string>
+  <string name="about_faq">&lt;u&gt;Chestion frequente&lt;/u&gt;</string>
   <string name="welcome_skip_button">Sauté lë spiegon</string>
+  <string name="no_internet">Aragnà nen disponìbil</string>
+  <string name="internet_established">Aragnà disponìbil</string>
+  <string name="error_notifications">Eror an sl\'arserca dle notìfiche</string>
+  <string name="no_notifications">Gnun-e notìfiche trovà</string>
+  <string name="about_translate">&lt;u&gt;Volté&lt;/u&gt;</string>
   <string name="about_translate_title">Lenghe</string>
-  <string name="about_translate_message" fuzzy="true">Selessioné la lenga për la qual a veul le tradussion?</string>
+  <string name="about_translate_message">Selessioné la lenga për la qual a veul mandé dle tradussion</string>
+  <string name="about_translate_proceed">Andé anans</string>
+  <string name="about_translate_cancel">Anulé</string>
+  <string name="retry">Prové torna</string>
 </resources>
