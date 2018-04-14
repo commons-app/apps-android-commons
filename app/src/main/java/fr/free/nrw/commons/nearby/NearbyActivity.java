@@ -365,6 +365,13 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
         if (locationChangeType.equals(LocationServiceManager.LocationChangeType.LOCATION_SIGNIFICANTLY_CHANGED)
                 || locationChangeType.equals(LocationServiceManager.LocationChangeType.PERMISSION_JUST_GRANTED)) {
             progressBar.setVisibility(View.VISIBLE);
+
+            Gson gson = new GsonBuilder()
+                    .registerTypeAdapter(Uri.class, new UriSerializer())
+                    .create();
+            String gsonCurLatLng = gson.toJson(curLatLang);
+            bundle.putString("CurLatLng", gsonCurLatLng);
+
             placesDisposable = Observable.fromCallable(() -> nearbyController
                     .loadAttractionsFromLocation(curLatLang))
                     .subscribeOn(Schedulers.io())
@@ -396,9 +403,9 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
             ViewUtil.showSnackbar(findViewById(R.id.container), R.string.no_nearby);
         }
 
-        bundle.clear();
+        //bundle.clear();
         bundle.putString("PlaceList", gsonPlaceList);
-        bundle.putString("CurLatLng", gsonCurLatLng);
+        //bundle.putString("CurLatLng", gsonCurLatLng);
         bundle.putString("BoundaryCoord", gsonBoundaryCoordinates);
 
         // First time to init fragments
