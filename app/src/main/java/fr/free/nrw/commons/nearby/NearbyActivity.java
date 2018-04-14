@@ -161,9 +161,7 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
             case LOCATION_REQUEST: {
                 if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     Timber.d("Location permission granted, refreshing view");
-                    lockNearbyView = false;
                     checkGps();
-                    addNetworkBroadcastReceiver();
                     lastKN = locationManager.getLKN();
                     refreshView(LocationServiceManager.LocationChangeType.PERMISSION_JUST_GRANTED);
                 } else {
@@ -405,6 +403,7 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
 
         // First time to init fragments
         if (nearbyMapFragment == null) {
+            Timber.d("Init map fragment for the first time");
             lockNearbyView(true);
             setMapFragment();
             setListFragment();
@@ -412,6 +411,7 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
             lockNearbyView(false);
         } else {
             // There are fragments, just update the map and list
+            Timber.d("Map fragment already exists, just update the map and list");
             updateMapFragment(false);
             updateListFragment();
         }
