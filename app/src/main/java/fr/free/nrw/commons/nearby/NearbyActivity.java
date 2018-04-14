@@ -347,15 +347,15 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
         locationManager.registerLocationManager();
         LatLng lastLocation = locationManager.getLastLocation();
 
-        if (locationChangeType.equals(LocationServiceManager.LocationChangeType.PERMISSION_JUST_GRANTED)) {
-            lastLocation = lastKN;
-            Timber.d("Permission was just granted, lastKnownLocation is " + lastKN.toString());
-        }
-
         if (curLatLang != null && curLatLang.equals(lastLocation)) { //refresh view only if location has changed
             return;
         }
         curLatLang = lastLocation;
+
+        if (locationChangeType.equals(LocationServiceManager.LocationChangeType.PERMISSION_JUST_GRANTED)) {
+            curLatLang = lastKN;
+            Timber.d("Permission was just granted, lastKnownLocation is " + lastKN.toString());
+        }
 
         if (curLatLang == null) {
             Timber.d("Skipping update of nearby places as location is unavailable");
