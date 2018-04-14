@@ -125,6 +125,7 @@ public class NearbyMapFragment extends DaggerFragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Timber.d("Nearby map fragment created");
 
         controller = new ContributionController(this);
         directUpload = new DirectUpload(this, controller);
@@ -162,7 +163,9 @@ public class NearbyMapFragment extends DaggerFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
+        Timber.d("onCreateView called");
         if (curLatLng != null) {
+            Timber.d("curLatLng found, setting up map view...");
             setupMapView(savedInstanceState);
         }
 
