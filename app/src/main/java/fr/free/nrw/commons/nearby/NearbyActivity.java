@@ -474,17 +474,17 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
                         .subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())
                         .subscribe(this::populatePlaces);
-                nearbyMapFragment.setArguments(bundle);
+                nearbyMapFragment.setBundleForUpdtes(bundle);
                 nearbyMapFragment.updateMapSignificantly();
                 updateListFragment();
                 return;
             }
 
             if (isSlightUpdate) {
-                nearbyMapFragment.setArguments(bundle);
+                nearbyMapFragment.setBundleForUpdtes(bundle);
                 nearbyMapFragment.updateMapSlightly();
             } else {
-                nearbyMapFragment.setArguments(bundle);
+                nearbyMapFragment.setBundleForUpdtes(bundle);
                 nearbyMapFragment.updateMapSignificantly();
                 updateListFragment();
             }
@@ -498,7 +498,7 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
     }
 
     private void updateListFragment() {
-        nearbyListFragment.setArguments(bundle);
+        nearbyListFragment.setBundleForUpdates(bundle);
         nearbyListFragment.updateNearbyListSignificantly();
     }
 
