@@ -10,17 +10,14 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomSheetBehavior;
-
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AlertDialog;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
-import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -31,7 +28,6 @@ import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.location.LatLng;
 import fr.free.nrw.commons.location.LocationServiceManager;
@@ -39,13 +35,11 @@ import fr.free.nrw.commons.location.LocationUpdateListener;
 import fr.free.nrw.commons.theme.NavigationBaseActivity;
 import fr.free.nrw.commons.utils.NetworkUtils;
 import fr.free.nrw.commons.utils.UriSerializer;
-
 import fr.free.nrw.commons.utils.ViewUtil;
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
-
 import timber.log.Timber;
 
 
@@ -81,7 +75,7 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
 
     private final String NETWORK_INTENT_ACTION = "android.net.conn.CONNECTIVITY_CHANGE";
     private BroadcastReceiver broadcastReceiver;
-
+    boolean opened;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -92,6 +86,7 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
 
         initBottomSheetBehaviour();
         initDrawer();
+        opened=false;
     }
 
     private void resumeFragment() {
@@ -136,11 +131,19 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+
         // Handle item selection
         switch (item.getItemId()) {
             case R.id.action_display_list:
-                bottomSheetBehaviorForDetails.setState(BottomSheetBehavior.STATE_HIDDEN);
-                bottomSheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
+                if(!opened){
+                    bottomSheetBehaviorForDetails.setState(BottomSheetBehavior.STATE_HIDDEN);
+                    bottomSheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
+                    opened=true;
+                }else{
+                    bottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
+                    opened=false;
+                }
+
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
