@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.PackageManager;
+import android.location.Location;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -81,6 +82,7 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
 
     private final String NETWORK_INTENT_ACTION = "android.net.conn.CONNECTIVITY_CHANGE";
     private BroadcastReceiver broadcastReceiver;
+    private LatLng lastKN;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -162,7 +164,8 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
                     lockNearbyView = false;
                     checkGps();
                     addNetworkBroadcastReceiver();
-                    refreshView(LocationServiceManager.LocationChangeType.LOCATION_SIGNIFICANTLY_CHANGED);
+                    lastKN = locationManager.getLKN();
+                    refreshView(LocationServiceManager.LocationChangeType.PERMISSION_JUST_GRANTED);
                 } else {
                     //If permission not granted, go to page that says Nearby Places cannot be displayed
                     hideProgressBar();
@@ -346,6 +349,11 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
         locationManager.registerLocationManager();
         LatLng lastLocation = locationManager.getLastLocation();
 
+        if (locationChangeType.equals(LocationServiceManager.LocationChangeType.PERMISSION_JUST_GRANTED)) {
+            lastLocation = lastKN;
+            Timber.d("Permission was just granted, lastKnownLocation is " + lastKN.toString());
+        }
+
         if (curLatLang != null && curLatLang.equals(lastLocation)) { //refresh view only if location has changed
             return;
         }
@@ -356,15 +364,16 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
             return;
         }
 
-        if (locationChangeType
-                .equals(LocationServiceManager.LocationChangeType.LOCATION_SIGNIFICANTLY_CHANGED)) {
+        if (locationChangeType.equals(LocationServiceManager.LocationChangeType.LOCATION_SIGNIFICANTLY_CHANGED)
+                || locationChangeType.equals(LocationServiceManager.LocationChangeType.PERMISSION_JUST_GRANTED)) {
             progressBar.setVisibility(View.VISIBLE);
             placesDisposable = Observable.fromCallable(() -> nearbyController
                     .loadAttractionsFromLocation(curLatLang))
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe(this::populatePlaces);
-        } else if (locationChangeType
+        }
+        else if (locationChangeType
                 .equals(LocationServiceManager.LocationChangeType.LOCATION_SLIGHTLY_CHANGED)) {
             Gson gson = new GsonBuilder()
                     .registerTypeAdapter(Uri.class, new UriSerializer())
