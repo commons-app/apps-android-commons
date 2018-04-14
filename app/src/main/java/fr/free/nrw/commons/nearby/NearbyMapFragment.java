@@ -150,9 +150,11 @@ public class NearbyMapFragment extends DaggerFragment {
                             getActivity());
             boundaryCoordinates = gson.fromJson(gsonBoundaryCoordinates, gsonBoundaryCoordinatesType);
         }
-        Mapbox.getInstance(getActivity(),
-                getString(R.string.mapbox_commons_app_token));
-        MapboxTelemetry.getInstance().setTelemetryEnabled(false);
+        if (curLatLng != null) {
+            Mapbox.getInstance(getActivity(),
+                    getString(R.string.mapbox_commons_app_token));
+            MapboxTelemetry.getInstance().setTelemetryEnabled(false);
+        }
         setRetainInstance(true);
     }
 
