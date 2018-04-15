@@ -8,7 +8,6 @@ import com.nhaarman.mockito_kotlin.mock
 import com.squareup.leakcanary.RefWatcher
 import fr.free.nrw.commons.auth.AccountUtil
 import fr.free.nrw.commons.auth.SessionManager
-import fr.free.nrw.commons.caching.CacheController
 import fr.free.nrw.commons.data.DBOpenHelper
 import fr.free.nrw.commons.di.CommonsApplicationComponent
 import fr.free.nrw.commons.di.CommonsApplicationModule
@@ -42,7 +41,6 @@ class MockCommonsApplicationModule(appContext: Context) : CommonsApplicationModu
     val uploadController: UploadController = mock()
     val mockSessionManager: SessionManager = mock()
     val locationServiceManager: LocationServiceManager = mock()
-    val cacheController: CacheController = mock()
     val mockDbOpenHelper: DBOpenHelper = mock()
     val nearbyPlaces: NearbyPlaces = mock()
     val lruCache: LruCache<String, String> = mock()
@@ -72,8 +70,6 @@ class MockCommonsApplicationModule(appContext: Context) : CommonsApplicationModu
     override fun providesSessionManager(context: Context, mediaWikiApi: MediaWikiApi, sharedPreferences: SharedPreferences): SessionManager = mockSessionManager
 
     override fun provideLocationServiceManager(context: Context): LocationServiceManager = locationServiceManager
-
-    override fun provideCacheController(): CacheController = cacheController
 
     override fun provideDBOpenHelper(context: Context): DBOpenHelper = mockDbOpenHelper
 
