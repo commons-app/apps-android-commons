@@ -39,6 +39,12 @@ SELECT
        # Get emoji
        OPTIONAL { ?classId wdt:P487 ?emoji0. }
        OPTIONAL { ?classId wdt:P279*/wdt:P487 ?emoji1. }
+
+       OPTIONAL {
+           ?wikipediaArticle   schema:about ?item ;
+                               schema:isPartOf <https://${LANG}.wikipedia.org/> .
+           SERVICE wikibase:label { bd:serviceParam wikibase:language "${LANG}" }
+         }
        OPTIONAL {
            ?wikipediaArticle   schema:about ?item ;
                                schema:isPartOf <https://en.wikipedia.org/> .
