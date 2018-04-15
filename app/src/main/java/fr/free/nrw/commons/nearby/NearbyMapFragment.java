@@ -666,7 +666,7 @@ public class NearbyMapFragment extends DaggerFragment {
 
         directionsButton.setOnClickListener(view -> {
             //Open map app at given position
-            Intent mapIntent = new Intent(Intent.ACTION_VIEW, place.location.getGmmIntentUri());
+            Intent mapIntent = new Intent(Intent.ACTION_VIEW, this.place.location.getGmmIntentUri());
             if (mapIntent.resolveActivity(getActivity().getPackageManager()) != null) {
                 startActivity(mapIntent);
             }
