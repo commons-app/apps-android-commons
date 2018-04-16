@@ -761,7 +761,7 @@ public class ShareActivity
             long width = bitmap.getWidth();
             long calHeight = (long) ((height * maxMemory)/(bitmapByteCount * 1.1));
             long calWidth = (long) ((width * maxMemory)/(bitmapByteCount * 1.1));
-            scaled = Bitmap.createScaledBitmap(bitmap,(int) min(width,calWidth), (int) min(height,calHeight), true);
+            scaled = Bitmap.createScaledBitmap(bitmap,(int) Math.min(width,calWidth), (int) Math.min(height,calHeight), true);
         } catch (IOException e) {
         } catch (NullPointerException e){
             scaled = bitmap;
