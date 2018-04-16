@@ -294,8 +294,8 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
     }
 
     private void setOnClickListeners(final Media media) {
-        if (licenseLink(media) != null) {
-            license.setOnClickListener(v -> openWebBrowser(licenseLink(media)));
+        if (licenseLink(media) != null && !licenseLink(media).equals("")) {
+            license.setOnClickListener((View v) -> openWebBrowser(licenseLink(media)));
         } else {
             Toast toast = Toast.makeText(getContext(), getString(R.string.null_url), Toast.LENGTH_SHORT);
             toast.show();
