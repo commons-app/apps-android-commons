@@ -1,5 +1,6 @@
 package fr.free.nrw.commons.nearby;
 
+import android.app.Activity;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -20,11 +21,11 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
-import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
+import java.lang.ref.WeakReference;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -82,6 +83,10 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
     private final String NETWORK_INTENT_ACTION = "android.net.conn.CONNECTIVITY_CHANGE";
     private BroadcastReceiver broadcastReceiver;
 
+    private AlertDialog locationPermissionDeniedAlert;
+    private AlertDialog gpsDisabledAlert;
+    private AlertDialog locationPermissionExplanationAlert;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -92,6 +97,7 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
 
         initBottomSheetBehaviour();
         initDrawer();
+        initPermissionWarnings();
     }
 
     private void resumeFragment() {
@@ -124,6 +130,51 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
         bottomSheetBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
         bottomSheetBehaviorForDetails = BottomSheetBehavior.from(bottomSheetDetails);
         bottomSheetBehaviorForDetails.setState(BottomSheetBehavior.STATE_HIDDEN);
+    }
+
+    private void initPermissionWarnings() {
+        locationPermissionDeniedAlert = new AlertDialog.Builder(this)
+                .setMessage(R.string.nearby_needs_permissions)
+                .setCancelable(false)
+                .setPositiveButton(R.string.give_permission, (dialog, which) -> {
+                    //will ask for the location permission again
+                    checkGps();
+                })
+                .setNegativeButton(R.string.cancel, (dialog, which) -> {
+                    //dismiss dialog and finish activity
+                    dialog.cancel();
+                    finish();
+                })
+                .create();
+
+        gpsDisabledAlert = new AlertDialog.Builder(this)
+                .setMessage(R.string.gps_disabled)
+                .setCancelable(false)
+                .setPositiveButton(R.string.enable_gps,
+                        (dialog, id) -> {
+                            Intent callGPSSettingIntent = new Intent(
+                                    android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+                            Timber.d("Loaded settings page");
+                            startActivityForResult(callGPSSettingIntent, 1);
+                        })
+                .setNegativeButton(R.string.menu_cancel_upload, (dialog, id) -> {
+                    showLocationPermissionDeniedErrorDialog();
+                    dialog.cancel();
+                })
+                .create();
+
+        locationPermissionExplanationAlert =  new AlertDialog.Builder(this)
+                .setMessage(getString(R.string.location_permission_rationale_nearby))
+                .setPositiveButton("OK", (dialog, which) -> {
+                    requestLocationPermissions();
+                    dialog.dismiss();
+                })
+                .setNegativeButton("Cancel", (dialog, id) -> {
+                    showLocationPermissionDeniedErrorDialog();
+                    dialog.cancel();
+                })
+                .create();
+
     }
 
     @Override
@@ -174,41 +225,15 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
     }
 
     private void showLocationPermissionDeniedErrorDialog() {
-        new AlertDialog.Builder(this)
-                .setMessage(R.string.nearby_needs_permissions)
-                .setCancelable(false)
-                .setPositiveButton(R.string.give_permission, (dialog, which) -> {
-                    //will ask for the location permission again
-                    checkGps();
-                })
-                .setNegativeButton(R.string.cancel, (dialog, which) -> {
-                    //dismiss dialog and finish activity
-                    dialog.cancel();
-                    finish();
-                })
-                .create()
-                .show();
+            locationPermissionDeniedAlert.show();
     }
 
-    private void checkGps() {
+    public void checkGps() {
         if (!locationManager.isProviderEnabled()) {
             Timber.d("GPS is not enabled");
-            new AlertDialog.Builder(this)
-                    .setMessage(R.string.gps_disabled)
-                    .setCancelable(false)
-                    .setPositiveButton(R.string.enable_gps,
-                            (dialog, id) -> {
-                                Intent callGPSSettingIntent = new Intent(
-                                        android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS);
-                                Timber.d("Loaded settings page");
-                                startActivityForResult(callGPSSettingIntent, 1);
-                            })
-                    .setNegativeButton(R.string.menu_cancel_upload, (dialog, id) -> {
-                        showLocationPermissionDeniedErrorDialog();
-                        dialog.cancel();
-                    })
-                    .create()
-                    .show();
+            gpsDisabledAlert.show();
+
+
         } else {
             Timber.d("GPS is enabled");
             checkLocationPermission();
@@ -217,7 +242,9 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
 
     private void checkLocationPermission() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+
             if (locationManager.isLocationPermissionGranted()) {
+
                 refreshView(LocationServiceManager.LocationChangeType.LOCATION_SIGNIFICANTLY_CHANGED);
             } else {
                 // Should we show an explanation?
@@ -225,25 +252,14 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
                     // Show an explanation to the user *asynchronously* -- don't block
                     // this thread waiting for the user's response! After the user
                     // sees the explanation, try again to request the permission.
-                    new AlertDialog.Builder(this)
-                            .setMessage(getString(R.string.location_permission_rationale_nearby))
-                            .setPositiveButton("OK", (dialog, which) -> {
-                                requestLocationPermissions();
-                                dialog.dismiss();
-                            })
-                            .setNegativeButton("Cancel", (dialog, id) -> {
-                                showLocationPermissionDeniedErrorDialog();
-                                dialog.cancel();
-                            })
-                            .create()
-                            .show();
+                        locationPermissionExplanationAlert.show();
 
                 } else {
                     // No explanation needed, we can request the permission.
                     requestLocationPermissions();
                 }
             }
-        } else {
+        } else if (locationManager.isLocationPermissionGranted()){
             refreshView(LocationServiceManager.LocationChangeType.LOCATION_SIGNIFICANTLY_CHANGED);
         }
     }
@@ -261,7 +277,7 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
     protected void onStart() {
         super.onStart();
         locationManager.addLocationListener(this);
-        locationManager.registerLocationManager();
+        locationManager.registerLocationManager(new WeakReference<Activity>(this));
     }
 
     @Override
@@ -339,7 +355,7 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
             return;
         }
 
-        locationManager.registerLocationManager();
+        locationManager.registerLocationManager(new WeakReference<Activity>(this));
         LatLng lastLocation = locationManager.getLastLocation();
 
         if (curLatLang != null && curLatLang.equals(lastLocation)) { //refresh view only if location has changed
@@ -411,7 +427,7 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
             locationManager.removeLocationListener(this);
         } else {
             lockNearbyView = false;
-            locationManager.registerLocationManager();
+            locationManager.registerLocationManager(new WeakReference<Activity>(this));
             locationManager.addLocationListener(this);
         }
     }
@@ -528,11 +544,13 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
 
     @Override
     public void onLocationChangedSignificantly(LatLng latLng) {
+        if (locationManager.isLocationPermissionGranted())
         refreshView(LocationServiceManager.LocationChangeType.LOCATION_SIGNIFICANTLY_CHANGED);
     }
 
     @Override
     public void onLocationChangedSlightly(LatLng latLng) {
+        if (locationManager.isLocationPermissionGranted())
         refreshView(LocationServiceManager.LocationChangeType.LOCATION_SLIGHTLY_CHANGED);
     }
 
