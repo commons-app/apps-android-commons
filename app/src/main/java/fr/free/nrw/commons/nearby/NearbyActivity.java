@@ -75,7 +75,7 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
 
     private final String NETWORK_INTENT_ACTION = "android.net.conn.CONNECTIVITY_CHANGE";
     private BroadcastReceiver broadcastReceiver;
-    boolean opened;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -86,7 +86,6 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
 
         initBottomSheetBehaviour();
         initDrawer();
-        opened=false;
     }
 
     private void resumeFragment() {
@@ -135,13 +134,11 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
         // Handle item selection
         switch (item.getItemId()) {
             case R.id.action_display_list:
-                if(!opened){
+                if(bottomSheetBehavior.getState()==BottomSheetBehavior.STATE_COLLAPSED || bottomSheetBehavior.getState()==BottomSheetBehavior.STATE_HIDDEN){
                     bottomSheetBehaviorForDetails.setState(BottomSheetBehavior.STATE_HIDDEN);
                     bottomSheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
-                    opened=true;
-                }else{
+                }else if(bottomSheetBehavior.getState()==BottomSheetBehavior.STATE_EXPANDED){
                     bottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
-                    opened=false;
                 }
 
                 return true;
