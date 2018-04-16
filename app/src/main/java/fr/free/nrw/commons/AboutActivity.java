@@ -6,11 +6,15 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.text.Html;
 import android.text.SpannableString;
 import android.text.style.UnderlineSpan;
 import android.util.Log;
 import android.support.customtabs.CustomTabsIntent;
 import android.support.v4.content.ContextCompat;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
@@ -62,6 +66,18 @@ public class AboutActivity extends NavigationBaseActivity {
         content.setSpan(new UnderlineSpan(), 0, content.length(), 0);
         faqText.setText(content);
         versionText.setText(BuildConfig.VERSION_NAME);
+        TextView rate_us = findViewById(R.id.about_rate_us);
+        TextView privacy_policy = findViewById(R.id.about_privacy_policy);
+        TextView translate = findViewById(R.id.about_translate);
+        TextView credits = findViewById(R.id.about_credits);
+        TextView faq = findViewById(R.id.about_faq);
+
+        rate_us.setText(Html.fromHtml(getString(R.string.about_rate_us)));
+        privacy_policy.setText(Html.fromHtml(getString(R.string.about_privacy_policy)));
+        translate.setText(Html.fromHtml(getString(R.string.about_translate)));
+        credits.setText(Html.fromHtml(getString(R.string.about_credits)));
+        faq.setText(Html.fromHtml(getString(R.string.about_faq)));
+
         initDrawer();
     }
 
@@ -106,6 +122,28 @@ public class AboutActivity extends NavigationBaseActivity {
     @OnClick(R.id.about_faq)
     public void launchFrequentlyAskedQuesions(View view) {
         Utils.handleWebUrl(this,Uri.parse("https://github.com/commons-app/apps-android-commons/wiki/Frequently-Asked-Questions\\"));
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_about, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.share_app_icon:
+                Intent sendIntent = new Intent();
+                sendIntent.setAction(Intent.ACTION_SEND);
+                sendIntent.putExtra(Intent.EXTRA_TEXT, "http://play.google.com/store/apps/details?id=fr.free.nrw.commons");
+                sendIntent.setType("text/plain");
+                startActivity(Intent.createChooser(sendIntent, "Share app via..."));
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 
     @OnClick(R.id.about_translate)

@@ -304,9 +304,10 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
             coordinates.setOnClickListener(v -> openMap(media.getCoordinates()));
         }
         if (delete.getVisibility() == View.VISIBLE) {
+            enableDeleteButton(true);
+
             delete.setOnClickListener(v -> {
-                delete.setEnabled(false);
-                delete.setTextColor(getResources().getColor(R.color.deleteButtonLight));
+
                 AlertDialog.Builder alert = new AlertDialog.Builder(getActivity());
                 alert.setMessage("Why should this file be deleted?");
                 final EditText input = new EditText(getActivity());
@@ -317,6 +318,7 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
                         String reason = input.getText().toString();
                         DeleteTask deleteTask = new DeleteTask(getActivity(), media, reason);
                         deleteTask.execute();
+                        enableDeleteButton(false);
                     }
                 });
                 alert.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
@@ -355,6 +357,15 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
             seeMore.setOnClickListener(v -> {
                 openWebBrowser(media.getFilePageTitle().getMobileUri().toString());
             });
+        }
+    }
+
+    private void enableDeleteButton(boolean visibility) {
+        delete.setEnabled(visibility);
+        if(visibility) {
+            delete.setTextColor(getResources().getColor(R.color.primaryTextColor));
+        } else {
+            delete.setTextColor(getResources().getColor(R.color.deleteButtonLight));
         }
     }
 
