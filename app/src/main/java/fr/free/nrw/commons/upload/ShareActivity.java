@@ -373,8 +373,6 @@ public class ShareActivity
                     Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
                     mapIntent.setPackage("com.google.android.apps.maps");
                     startActivity(mapIntent);
-                } else {
-                    Toast toast = Toast.makeText(ShareActivity.this,R.string.share_coordinates_not_present,Toast.LENGTH_LONG);
                 }
             }
         });
