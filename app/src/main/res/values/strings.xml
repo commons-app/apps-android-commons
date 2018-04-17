@@ -271,5 +271,6 @@
   <string name="about_translate_cancel">Cancel</string>
   <string name="retry">Retry</string>
   <string name="share_app_title">Share App</string>
+  <string name="share_coordinates_not_present">Coordinates were not specified during image selection</string>
 
 </resources>
