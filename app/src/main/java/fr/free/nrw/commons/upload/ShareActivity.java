@@ -358,8 +358,13 @@ public class ShareActivity
                     .commitAllowingStateLoss();
         }
         uploadController.prepareService();
-
         maps_fragment = (FloatingActionButton) findViewById(R.id.media_map);
+        maps_fragment.setVisibility(View.VISIBLE);
+        if( imageObj == null || imageObj.imageCoordsExists != true){
+            maps_fragment.setVisibility(View.INVISIBLE);
+        }
+
+
         maps_fragment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
