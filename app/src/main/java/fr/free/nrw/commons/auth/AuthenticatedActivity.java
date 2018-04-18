@@ -24,6 +24,8 @@ public abstract class AuthenticatedActivity extends NavigationBaseActivity {
         authCookie = sessionManager.getAuthCookie();
         if (authCookie != null) {
             onAuthCookieAcquired(authCookie);
+        } else {
+            sessionManager.forceLogin(AuthenticatedActivity.this);
         }
     }
 

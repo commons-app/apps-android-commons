@@ -4,6 +4,7 @@ import android.accounts.Account;
 import android.accounts.AccountManager;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.support.annotation.Nullable;
 
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
 import io.reactivex.Completable;
@@ -60,6 +61,11 @@ public class SessionManager {
         return true;
     }
 
+    /**
+     * Anyone calling this function should check if the auth cookie was returned and accordingly handle exceptional scenario.
+     * @return
+     */
+    @Nullable
     public String getAuthCookie() {
         boolean isLoggedIn = sharedPreferences.getBoolean("isUserLoggedIn", false);
 
@@ -67,11 +73,25 @@ public class SessionManager {
             Timber.e("User is not logged in");
             return null;
         } else {
-            String authCookie = sharedPreferences.getString("getAuthCookie", null);
+            String authCookie = getGetAuthCookieFromStorage();
             if (authCookie == null) {
-                Timber.e("Auth cookie is null even after login");
+                if (revalidateAuthToken()) {
+                    return getGetAuthCookieFromStorage();
+                } else {
+                    Timber.e("Auth cookie is null even after login");
+                }
             }
             return authCookie;
+        }
+    }
+
+    private String getGetAuthCookieFromStorage() {
+        return sharedPreferences.getString("getAuthCookie", null);
+    }
+
+    public void forceLogin(Context context) {
+        if (context != null) {
+            LoginActivity.startYourself(context);
         }
     }
 

@@ -160,10 +160,14 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
     }
 
     private void setAuthCookieOnLogin(boolean isLoggedIn) {
+        saveAuthCookie(isLoggedIn, api.getAuthCookie());
+    }
+
+    private void saveAuthCookie(boolean isLoggedIn, String authCookie) {
         SharedPreferences.Editor editor = sharedPreferences.edit();
         if (isLoggedIn) {
             editor.putBoolean("isUserLoggedIn", true);
-            editor.putString("getAuthCookie", api.getAuthCookie());
+            editor.putString("getAuthCookie", authCookie);
         } else {
             editor.putBoolean("isUserLoggedIn", false);
             editor.remove("getAuthCookie");
@@ -179,6 +183,7 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
     @Override
     public void setAuthCookie(String authCookie) {
         api.setAuthCookie(authCookie);
+        saveAuthCookie(true, authCookie);
     }
 
     @Override
