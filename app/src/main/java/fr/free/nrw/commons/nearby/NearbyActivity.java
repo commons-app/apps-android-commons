@@ -352,7 +352,6 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
 
         if (locationChangeType.equals(LocationServiceManager.LocationChangeType.PERMISSION_JUST_GRANTED)) {
             curLatLang = lastKnownLocation;
-            Timber.d("Permission was just granted, lastKnownLocation is " + lastKnownLocation.toString());
         }
 
         if (curLatLang == null) {
