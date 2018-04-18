@@ -51,5 +51,6 @@
         app:colorClickableText="#969494"
         android:textAppearance="@style/TextAppearance.AppCompat.Body2"
         tools:text="@string/placeholder_place_name"
+        android:padding="12dp"
         />
 </RelativeLayout>

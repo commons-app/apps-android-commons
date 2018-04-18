@@ -218,4 +218,8 @@
   <string name="nearby_wikidata">विकीडाटा</string>
   <string name="nearby_wikipedia">विकीपीडिया</string>
   <string name="nearby_commons">कॉमन्स</string>
+  <string name="no_internet">इंटरनेट उपलब्ध नहीं</string>
+  <string name="internet_established">इंटरनेट उपलब्ध</string>
+  <string name="error_notifications">सूचनाएं लाने में त्रुटि</string>
+  <string name="no_notifications">कोई सूचनाएँ नहीं मिलीं</string>
 </resources>

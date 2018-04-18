@@ -59,6 +59,7 @@
   <string name="categories_search_text_hint">搜索分类</string>
   <string name="menu_save_categories">保存</string>
   <string name="refresh_button">刷新</string>
+  <string name="display_list_button">列表</string>
   <string name="gps_disabled">您的设备禁用了GPS。您是否要启用它？</string>
   <string name="enable_gps">启用GPS</string>
   <string name="contributions_subtitle_zero">尚无上传</string>
@@ -211,6 +212,7 @@
   <string name="no_description_found">找不到描述</string>
   <string name="nearby_info_menu_commons_article">共享资源文件页面</string>
   <string name="nearby_info_menu_wikidata_article">维基数据项</string>
+  <string name="nearby_info_menu_wikipedia_article">维基百科条目</string>
   <string name="error_while_cache">缓存图片时出错</string>
   <string name="title_info">用于文件的唯一描述性标题，它将作为文件名使用。您可以使用有空格的简明语言。请不要包含文件扩展名</string>
   <string name="description_info">请尽可能详细地描述媒体：拍摄在何地？显示什么？例文是什么？请描述对象或个人。透露一些不易猜想到的信息，例如这幅风景画的具体日期时间。如果媒体显示了一些不寻常的事物，请说明为什么它显得不寻常。</string>
@@ -225,6 +227,7 @@
   <string name="no_web_browser">找不到可以打开URL的网页浏览器</string>
   <string name="null_url">错误！找不到URL</string>
   <string name="nominate_deletion">提交删除</string>
+  <string name="nominated_for_deletion">此图片已被提交删除。</string>
   <string name="view_browser">在浏览器中预览</string>
   <string name="nearby_location_has_not_changed">位置没有更新。</string>
   <string name="nearby_location_not_available">位置不可用。</string>
@@ -236,6 +239,21 @@
   <string name="notifications_thank_you_edit">感谢您做出编辑</string>
   <string name="notifications_mention">%1$s在%2$s提到了您。</string>
   <string name="toggle_view_button">切换视图</string>
-  <string name="about_faq">常见问题</string>
+  <string name="nearby_directions">方向</string>
+  <string name="nearby_wikidata">维基数据</string>
+  <string name="nearby_wikipedia">维基百科</string>
+  <string name="nearby_commons">共享资源</string>
+  <string name="about_rate_us"/>
+  <string name="about_faq">&lt;u&gt;常见问题&lt;/u&gt;</string>
   <string name="welcome_skip_button">跳过指导</string>
+  <string name="no_internet">互联网不可用</string>
+  <string name="internet_established">互联网可用</string>
+  <string name="error_notifications">检索通知时出错</string>
+  <string name="no_notifications">找不到通知</string>
+  <string name="about_translate"/>
+  <string name="about_translate_title">语言</string>
+  <string name="about_translate_message">选择您希望提交翻译的语言</string>
+  <string name="about_translate_proceed">已处理</string>
+  <string name="about_translate_cancel">取消</string>
+  <string name="retry">重试</string>
 </resources>

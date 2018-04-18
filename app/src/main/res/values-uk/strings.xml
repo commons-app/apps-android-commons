@@ -45,6 +45,7 @@
   <string name="menu_share">Поділитися</string>
   <string name="menu_open_in_browser">Відкрити у браузері</string>
   <string name="share_title_hint">Назва</string>
+  <string name="add_title_toast">Будь ласка, вкажіть назву цього файлу</string>
   <string name="share_description_hint">Опис</string>
   <string name="login_failed_network">Неможливо увійти — збій у мережі</string>
   <string name="login_failed_username">Неможливо увійти — будь ласка, перевірте своє ім\'я користувача</string>
@@ -60,6 +61,7 @@
   <string name="categories_search_text_hint">Пошук категорій</string>
   <string name="menu_save_categories">Зберегти</string>
   <string name="refresh_button">Оновити</string>
+  <string name="display_list_button">Список</string>
   <string name="gps_disabled">GPS вимкнено на Вашому пристрої. Бажаєте увімкнути його?</string>
   <string name="enable_gps">Увімкнути GPS</string>
   <string name="contributions_subtitle_zero">Ще нема завантажень</string>
@@ -133,10 +135,19 @@
   <string name="tutorial_1_subtext">Ваші зображення допомагають освіті людей по всьому світу!</string>
   <string name="tutorial_2_text">Будь ласка, завантажуйте зображення, повністю виконані або створені Вами:</string>
   <string name="tutorial_2_subtext">Природні об\'єкти (квіти, тварини, гори) \n• Корисні об\'єкти (велосипеди, залізничні вокзали) \n• Відомі люди (Ваш мер, олімпійські атлети, яких Ви зустрічали)</string>
+  <string name="tutorial_2_subtext_1">Природні об\'єкти (квіти, тварини, гори)</string>
+  <string name="tutorial_2_subtext_2">Корисні об\'єкти (велосипеди, залізничні станції)</string>
+  <string name="tutorial_2_subtext_3">Відомі люди (ваш мер, спортсмен-олімпієць, якого ви зустріли)</string>
   <string name="tutorial_3_text">Будь ласка, НЕ завантажуйте:</string>
   <string name="tutorial_3_subtext">u2022 Селфі або фото своїх друзів \nu2022 Зображення, які Ви завантажили з інтернету \nu2022 Скріншоти патентованих програм</string>
+  <string name="tutorial_3_subtext_1">Селфі чи фото ваших друзів</string>
+  <string name="tutorial_3_subtext_2">Зображення, які ви завантажили з інтернету</string>
+  <string name="tutorial_3_subtext_3">Знімки екрану пропрієтарних програм</string>
   <string name="tutorial_4_text">Приклад завантаження:</string>
   <string name="tutorial_4_subtext">- Назва: Сіднейський оперний театр \n- Опис: Вид на Сіднейський оперний театр з боку бухти \n- Категорії: Sydney Opera House, Sydney Opera House from the west, Sydney Opera House remote views</string>
+  <string name="tutorial_4_subtext_1">Назва: Сіднейський оперний театр</string>
+  <string name="tutorial_4_subtext_2">Опис: Сіднейський оперний театр, вид через затоку</string>
+  <string name="tutorial_4_subtext_3">Категорії: Sydney Opera House from the west, Sydney Opera House remote views</string>
   <string name="welcome_wikipedia_text">Надсилайте Ваші зображення. Допоможіть оживити статті Вікіпедії!</string>
   <string name="welcome_wikipedia_subtext">Зображення у Вікіпедії надходять з Вікісховища.</string>
   <string name="welcome_copyright_text">Ваші зображення допомагають освіті людей у всьому світі.</string>
@@ -209,6 +220,7 @@
   <string name="no_description_found">опис не знайдено</string>
   <string name="nearby_info_menu_commons_article">Сторінка файлу у Вікісховищі</string>
   <string name="nearby_info_menu_wikidata_article">Елемент Вікіданих</string>
+  <string name="nearby_info_menu_wikipedia_article">Стаття Вікіпедії</string>
   <string name="error_while_cache">Помилка кешування зображень</string>
   <string name="title_info">Унікальна описова назва файлу. Ви можете використовувати простий текст з пробілами. Не вказуйте розширення файлу</string>
   <string name="description_info">Будь ласка, докладно опишіть файл: де його було зроблено? що на ньому зображено? який контекст? Будь ласка, опишіть об\'єкти чи осіб. Додайте інформацію, яку не можна легко здогадатися, наприклад, пору доби для фотографії пейзажу. Якщо зображено щось незвичайне, постарайтеся пояснити, що робить його незвичайним.</string>
@@ -220,6 +232,10 @@
   <string name="login_to_your_account">Увійдіть у свій обліковий запис</string>
   <string name="send_log_file">Надіслати лог-файл</string>
   <string name="send_log_file_description">Надіслати лог-файл розробникам електронною поштою</string>
+  <string name="no_web_browser">Не знайдено браузера, щоб відкрити посилання</string>
+  <string name="null_url">Помилка! Посилання не знайдено</string>
+  <string name="nominate_deletion">Номінувати на вилучення</string>
+  <string name="view_browser">Переглянути в браузері</string>
   <string name="nearby_location_has_not_changed">Розташування не змінено</string>
   <string name="nearby_location_not_available">Місцезнаходження недоступне</string>
   <string name="location_permission_rationale_nearby">Потрібний дозвіл для показу списку місць поблизу</string>
@@ -230,4 +246,10 @@
   <string name="notifications_thank_you_edit">Дякуємо за правку</string>
   <string name="notifications_mention">%1$s згадав вас на %2$s.</string>
   <string name="toggle_view_button">Перемкнути режим перегляду</string>
+  <string name="nearby_directions">НАПРЯМКИ</string>
+  <string name="nearby_wikidata">ВІКІДАНІ</string>
+  <string name="nearby_wikipedia">ВІКІПЕДІЯ</string>
+  <string name="nearby_commons">ВІКІСХОВИЩЕ</string>
+  <string name="about_faq" fuzzy="true">Часті запитання</string>
+  <string name="welcome_skip_button">Пропустити інструкцію</string>
 </resources>
