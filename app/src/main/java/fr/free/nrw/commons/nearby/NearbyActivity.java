@@ -374,9 +374,7 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe(this::populatePlaces);
-        }
-        else if (locationChangeType
-                .equals(LocationServiceManager.LocationChangeType.LOCATION_SLIGHTLY_CHANGED)) {
+        } else if (locationChangeType.equals(LocationServiceManager.LocationChangeType.LOCATION_SLIGHTLY_CHANGED)) {
             Gson gson = new GsonBuilder()
                     .registerTypeAdapter(Uri.class, new UriSerializer())
                     .create();
@@ -400,6 +398,7 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
             ViewUtil.showSnackbar(findViewById(R.id.container), R.string.no_nearby);
         }
 
+        //TODO: This hack inserts curLatLng before populatePlaces is called (see #1440). Ideally a proper fix should be found
         //bundle.clear();
         bundle.putString("PlaceList", gsonPlaceList);
         //bundle.putString("CurLatLng", gsonCurLatLng);
