@@ -81,10 +81,11 @@ public class LocationServiceManager implements LocationListener {
 
     public LatLng getLKL() {
         if (ContextCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
-            //TODO: Check for network provider as well?
             Location lastKL = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
-            LatLng lastLatLng = LatLng.from(lastKL);
-            return lastLatLng;
+            if (lastKL == null) {
+                lastKL = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
+            }
+            return LatLng.from(lastKL);
         } else {
             return null;
         }
