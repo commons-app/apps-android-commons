@@ -79,6 +79,11 @@ public class LocationServiceManager implements LocationListener {
                         Manifest.permission.ACCESS_FINE_LOCATION);
     }
 
+    /**
+     * Gets the last known location in cases where there wasn't time to register a listener
+     * (e.g. when Location permission just granted)
+     * @return last known LatLng
+     */
     public LatLng getLKL() {
         if (ContextCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
             Location lastKL = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
