@@ -158,6 +158,7 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
             case LOCATION_REQUEST: {
                 if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     Timber.d("Location permission granted, refreshing view");
+                    //Still need to check if GPS is enabled
                     checkGps();
                     lastKnownLocation = locationManager.getLKL();
                     refreshView(LocationServiceManager.LocationChangeType.PERMISSION_JUST_GRANTED);
