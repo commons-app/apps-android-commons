@@ -363,10 +363,12 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
                 || locationChangeType.equals(LocationServiceManager.LocationChangeType.PERMISSION_JUST_GRANTED)) {
             progressBar.setVisibility(View.VISIBLE);
 
+            //TODO: This hack inserts curLatLng before populatePlaces is called (see #1440). Ideally a proper fix should be found
             Gson gson = new GsonBuilder()
                     .registerTypeAdapter(Uri.class, new UriSerializer())
                     .create();
             String gsonCurLatLng = gson.toJson(curLatLang);
+            bundle.clear();
             bundle.putString("CurLatLng", gsonCurLatLng);
 
             placesDisposable = Observable.fromCallable(() -> nearbyController
@@ -397,9 +399,7 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
         if (placeList.size() == 0) {
             ViewUtil.showSnackbar(findViewById(R.id.container), R.string.no_nearby);
         }
-
-        //TODO: This hack inserts curLatLng before populatePlaces is called (see #1440). Ideally a proper fix should be found
-        //bundle.clear();
+        
         bundle.putString("PlaceList", gsonPlaceList);
         //bundle.putString("CurLatLng", gsonCurLatLng);
         bundle.putString("BoundaryCoord", gsonBoundaryCoordinates);
