@@ -5,7 +5,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.PackageManager;
-import android.location.Location;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -14,14 +13,12 @@ import android.support.design.widget.BottomSheetBehavior;
 
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AlertDialog;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
-import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -82,7 +79,7 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
 
     private final String NETWORK_INTENT_ACTION = "android.net.conn.CONNECTIVITY_CHANGE";
     private BroadcastReceiver broadcastReceiver;
-    private LatLng lastKN;
+    private LatLng lastKnownLocation;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -162,7 +159,7 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
                 if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     Timber.d("Location permission granted, refreshing view");
                     checkGps();
-                    lastKN = locationManager.getLKN();
+                    lastKnownLocation = locationManager.getLKL();
                     refreshView(LocationServiceManager.LocationChangeType.PERMISSION_JUST_GRANTED);
                 } else {
                     //If permission not granted, go to page that says Nearby Places cannot be displayed
@@ -353,8 +350,8 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
         curLatLang = lastLocation;
 
         if (locationChangeType.equals(LocationServiceManager.LocationChangeType.PERMISSION_JUST_GRANTED)) {
-            curLatLang = lastKN;
-            Timber.d("Permission was just granted, lastKnownLocation is " + lastKN.toString());
+            curLatLang = lastKnownLocation;
+            Timber.d("Permission was just granted, lastKnownLocation is " + lastKnownLocation.toString());
         }
 
         if (curLatLang == null) {
