@@ -251,8 +251,6 @@ public class LocationServiceManager implements LocationListener {
     @Override
     public void onStatusChanged(String provider, int status, Bundle extras) {
         Timber.d("%s's status changed to %d", provider, status);
-        //TODO: Check what status is
-        requestLocationUpdatesFromProvider(LocationManager.NETWORK_PROVIDER);
     }
 
     @Override
