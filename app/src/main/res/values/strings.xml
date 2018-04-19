@@ -270,4 +270,7 @@
   <string name="about_translate_proceed">Proceed</string>
   <string name="about_translate_cancel">Cancel</string>
   <string name="retry">Retry</string>
+
+  <string name="no_featured_images">No featured images found</string>
+  <string name="error_featured_images">Error fetching featured images</string>
 </resources>

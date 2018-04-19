@@ -38,7 +38,9 @@ import java.util.Locale;
 import java.util.concurrent.Callable;
 
 import fr.free.nrw.commons.BuildConfig;
+import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.PageTitle;
+import fr.free.nrw.commons.category.CategoryImageUtils;
 import fr.free.nrw.commons.notification.Notification;
 import fr.free.nrw.commons.notification.NotificationUtils;
 import in.yuvi.http.fluent.Http;
@@ -446,6 +448,36 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
 
         NodeList childNodes = notificationNode.getDocument().getChildNodes();
         return NotificationUtils.getNotificationsFromList(context, childNodes);
+    }
+
+    @Override
+    @NonNull
+    public List<Media> getCategoryImages(String categoryName) {
+        ApiResult categoryImagesNode = null;
+        try {
+            categoryImagesNode = api.action("query")
+                    .param("generator", "categorymembers")
+                    .param("format", "xml")
+                    .param("gcmtype", "file")
+                    .param("gcmtitle", categoryName)
+                    .param("prop", "imageinfo")
+                    .param("gcmlimit", "10")
+                    .param("iiprop", "extmetadata")
+                    .get()
+                    .getNode("/api/query/pages");
+        } catch (IOException e) {
+            Timber.e("Failed to obtain searchCategories", e);
+        }
+
+        if (categoryImagesNode == null
+                || categoryImagesNode.getDocument() == null
+                || categoryImagesNode.getDocument().getChildNodes() == null
+                || categoryImagesNode.getDocument().getChildNodes().getLength() == 0) {
+            return new ArrayList<>();
+        }
+
+        NodeList childNodes = categoryImagesNode.getDocument().getChildNodes();
+        return CategoryImageUtils.getMediaList(context, childNodes);
     }
 
     @Override

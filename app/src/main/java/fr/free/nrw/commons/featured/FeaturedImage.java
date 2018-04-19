@@ -18,6 +18,12 @@ public class FeaturedImage {
         this.fileName = fileName;
     }
 
+    public FeaturedImage(Media media) {
+        this.image = media;
+        this.author = media.getCreator();
+        this.fileName = media.getFilename();
+    }
+
     public Media getImage() {
         return image;
     }

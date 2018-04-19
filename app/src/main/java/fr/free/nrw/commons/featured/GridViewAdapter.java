@@ -8,7 +8,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import fr.free.nrw.commons.MediaWikiImageView;
 import fr.free.nrw.commons.R;
@@ -17,14 +17,12 @@ import fr.free.nrw.commons.R;
  * This is created to only display UI implementation. Needs to be changed in real implementation
  */
 
-public class MockGridViewAdapter extends ArrayAdapter {
+public class GridViewAdapter extends ArrayAdapter {
     private Context context;
-    private int layoutResourceId;
-    private ArrayList<FeaturedImage> data = new ArrayList();
+    private List<FeaturedImage> data;
 
-    public MockGridViewAdapter(Context context, int layoutResourceId, ArrayList<FeaturedImage> data) {
+    public GridViewAdapter(Context context, int layoutResourceId, List<FeaturedImage> data) {
         super(context, layoutResourceId, data);
-        this.layoutResourceId = layoutResourceId;
         this.context = context;
         this.data = data;
     }
@@ -41,10 +39,18 @@ public class MockGridViewAdapter extends ArrayAdapter {
         MediaWikiImageView imageView = convertView.findViewById(R.id.featuredImageView);
         TextView fileName = convertView.findViewById(R.id.featuredImageTitle);
         TextView author = convertView.findViewById(R.id.featuredImageAuthor);
-        fileName.setText("Test file name");
-        author.setText("Uploaded by: Test user name");
+        fileName.setText(item.getFileName());
+        setAuthorView(item, author);
         imageView.setMedia(item.getImage());
         return convertView;
+    }
+
+    private void setAuthorView(FeaturedImage item, TextView author) {
+        if (item.getAuthor() != null && !item.getAuthor().equals("")) {
+            author.setText(String.format("Uploaded by: %s", item.getAuthor()));
+        } else {
+            author.setVisibility(View.GONE);
+        }
     }
 
 }
