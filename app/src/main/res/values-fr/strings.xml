@@ -46,8 +46,8 @@
   <string name="upload_failed_notification_title">Le téléversement de %1$s a échoué</string>
   <string name="upload_failed_notification_subtitle">Appuyer pour afficher</string>
   <plurals name="uploads_pending_notification_indicator">
-    <item quantity="one">%1$d fichier en cours de téléchargement</item>
-    <item quantity="other">%1$d fichiers en cours de téléchargement</item>
+    <item quantity="one">%1$d fichier en cours de téléversement</item>
+    <item quantity="other">%1$d fichiers en cours de téléversement</item>
   </plurals>
   <string name="title_activity_contributions">Mes téléversements récents</string>
   <string name="contribution_state_queued">Mis en file d\'attente</string>
@@ -83,16 +83,16 @@
   <string name="contributions_subtitle_zero">Encore aucun téléversement</string>
   <plurals name="contributions_subtitle">
     <item quantity="zero">\@string/contributions_subtitle_zero</item>
-    <item quantity="one">%1$d téléchargement</item>
-    <item quantity="other">%1$d téléchargements</item>
+    <item quantity="one">%1$d téléversement</item>
+    <item quantity="other">%1$d téléversements</item>
   </plurals>
   <plurals name="starting_multiple_uploads">
-    <item quantity="one">%1$d téléchargement démarré</item>
-    <item quantity="other">%1$d téléchargements démarrés</item>
+    <item quantity="one">%1$d téléversement démarré</item>
+    <item quantity="other">%1$d téléversements démarrés</item>
   </plurals>
   <plurals name="multiple_uploads_title">
-    <item quantity="one">%1$d téléchargement</item>
-    <item quantity="other">%1$d téléchargements</item>
+    <item quantity="one">%1$d téléversement</item>
+    <item quantity="other">%1$d téléversements</item>
   </plurals>
   <string name="categories_not_found">Aucune catégorie correspondant à %1$s trouvée</string>
   <string name="categories_skip_explanation">Ajoutez des catégories pour rendre vos images plus simples à trouver sur Wikimedia Commons. \nCommencer à ajouter des catégories.</string>
@@ -246,7 +246,7 @@
   <string name="null_url">Erreur! URL non trouvée</string>
   <string name="nominate_deletion">Proposer pour suppression</string>
   <string name="nominated_for_deletion">Cette image a été citée pour suppression.</string>
-  <string name="nominated_see_more" fuzzy="true"/>
+  <string name="nominated_see_more"/>
   <string name="view_browser">Afficher dans le navigateur</string>
   <string name="nearby_location_has_not_changed">L\'emplacement n\'a pas changé.</string>
   <string name="nearby_location_not_available">Emplacement non disponible.</string>

@@ -127,7 +127,9 @@
   <string name="navigation_item_upload">{{Identical|Upload}}</string>
   <string name="navigation_item_nearby">{{Identical|Nearby}}</string>
   <string name="navigation_item_info">{{Identical|Tutorial}}</string>
+  <string name="navigation_item_notification">{{Identical|Notification}}</string>
   <string name="nominated_see_more">\'\'This message is empty, and it\'s probably invalid. See bug report: https://github.com/commons-app/apps-android-commons/issues/1333 .\'\'</string>
+  <string name="nearby_wikidata">{{Identical|Wikidata}}</string>
   <string name="nearby_wikipedia">{{Identical|Wikipedia}}</string>
   <string name="about_rate_us">Link text with underline.</string>
   <string name="about_translate">Link text with underline.\n{{Identical|Translate}}</string>

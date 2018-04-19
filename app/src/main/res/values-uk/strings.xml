@@ -171,7 +171,7 @@
   <string name="detail_license_empty">Невідома ліцензія</string>
   <string name="menu_refresh">Оновити</string>
   <string name="read_storage_permission_rationale">Обов\'язковий дозвіл: читання зовнішньої пам\'яті. Без цього дозволу програма не зможе отримати доступ до вашої галереї.</string>
-  <string name="write_storage_permission_rationale" fuzzy="true">Обов\'язковий дозвіл: записування на зовнішнє сховище. Програма не може працювати без цього.</string>
+  <string name="write_storage_permission_rationale">Обов\'язковий дозвіл: записування на зовнішнє сховище. Програма не зможе отримати доступ до камери без цього дозволу.</string>
   <string name="location_permission_rationale">Додатковий дозвіл: отримувати поточне розташування для підказок категорій</string>
   <string name="ok">Гаразд</string>
   <string name="title_activity_nearby">Місця поблизу</string>
@@ -246,6 +246,7 @@
   <string name="null_url">Помилка! Посилання не знайдено</string>
   <string name="nominate_deletion">Номінувати на вилучення</string>
   <string name="nominated_for_deletion">Цей файл номіновано на вилучення.</string>
+  <string name="nominated_see_more"/>
   <string name="view_browser">Переглянути в браузері</string>
   <string name="nearby_location_has_not_changed">Розташування не змінено</string>
   <string name="nearby_location_not_available">Місцезнаходження недоступне</string>
@@ -261,6 +262,17 @@
   <string name="nearby_wikidata">ВІКІДАНІ</string>
   <string name="nearby_wikipedia">ВІКІПЕДІЯ</string>
   <string name="nearby_commons">ВІКІСХОВИЩЕ</string>
+  <string name="about_rate_us">&lt;u&gt;Оцініть нас&lt;/u&gt;</string>
   <string name="about_faq">Часті запитання</string>
   <string name="welcome_skip_button">Пропустити інструкцію</string>
+  <string name="no_internet">Інтернет недоступний</string>
+  <string name="internet_established">Інтернет доступний</string>
+  <string name="error_notifications">Помилка при отриманні сповіщення</string>
+  <string name="no_notifications">Сповіщень немає</string>
+  <string name="about_translate">&lt;u&gt;Перекласти&lt;/u&gt;</string>
+  <string name="about_translate_title">Мови</string>
+  <string name="about_translate_message">Виберіть мову, переклади якою ви хочете відправити</string>
+  <string name="about_translate_proceed">Виконується</string>
+  <string name="about_translate_cancel">Скасувати</string>
+  <string name="retry">Повторити</string>
 </resources>

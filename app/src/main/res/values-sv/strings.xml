@@ -161,8 +161,8 @@
   <string name="detail_description_empty">Ingen beskrivning</string>
   <string name="detail_license_empty">Okänd licens</string>
   <string name="menu_refresh">Uppdatera</string>
-  <string name="read_storage_permission_rationale" fuzzy="true">Nödvändig behörighet: Läsa extern lagring. Appen fungerar inte utan detta.</string>
-  <string name="write_storage_permission_rationale" fuzzy="true">Nödvändig behörighet: Skriva till extern lagring. Appen kan inte fungera så här.</string>
+  <string name="read_storage_permission_rationale">Nödvändig behörighet: Läsa extern lagring. Appen kan inte komma åt ditt galleri utan detta.</string>
+  <string name="write_storage_permission_rationale">Nödvändig behörighet: Skriva till extern lagring. Appen kan inte komma åt din kamera utan detta.</string>
   <string name="location_permission_rationale">Valfri behörighet: Hämta aktuell plats för kategoriförslag</string>
   <string name="ok">OK</string>
   <string name="title_activity_nearby">Platser i närheten</string>
@@ -253,14 +253,14 @@
   <string name="nearby_wikidata">WIKIDATA</string>
   <string name="nearby_wikipedia">WIKIPEDIA</string>
   <string name="nearby_commons">COMMONS</string>
-  <string name="about_rate_us" fuzzy="true"/>
+  <string name="about_rate_us">&lt;u&gt;Betygsätt oss&lt;/u&gt;</string>
   <string name="about_faq">&lt;u&gt;Vanliga frågor&lt;/u&gt;</string>
   <string name="welcome_skip_button">Hoppa över övning</string>
   <string name="no_internet">Uppkopplingen bröts</string>
   <string name="internet_established">Uppkopplingen återupprättades</string>
   <string name="error_notifications">Fel uppstod när aviseringar hämtades</string>
   <string name="no_notifications">Inga aviseringar hittades</string>
-  <string name="about_translate" fuzzy="true"/>
+  <string name="about_translate">&lt;u&gt;Översätt&lt;/u&gt;</string>
   <string name="about_translate_title">Språk</string>
   <string name="about_translate_message">Välj språket som du vill skicka in översättningar för</string>
   <string name="about_translate_proceed">Fortsätt</string>

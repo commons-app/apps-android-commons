@@ -240,6 +240,7 @@
   <string name="null_url">Erro! Não foi possível encontrar o URL</string>
   <string name="nominate_deletion">Nomear para eliminação</string>
   <string name="nominated_for_deletion">Esta imagem foi nomeada para eliminação.</string>
+  <string name="nominated_see_more"/>
   <string name="view_browser">Ver no navegador</string>
   <string name="nearby_location_has_not_changed">A localização não foi alterada.</string>
   <string name="nearby_location_not_available">A localização não está disponível.</string>

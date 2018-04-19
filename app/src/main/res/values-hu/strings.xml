@@ -13,12 +13,16 @@
 * ViDam
 -->
 <resources>
+  <string name="preference_category_feedback">Visszajelzés</string>
+  <string name="preference_category_location">Helyszín</string>
   <string name="app_name">Commons</string>
+  <string name="bullet">•</string>
   <string name="menu_settings">Beállítások</string>
   <string name="username">Felhasználónév</string>
   <string name="password">Jelszó</string>
   <string name="login_credential">Jelentkezz be a Commons Béta fiókoddal</string>
   <string name="login">Bejelentkezés</string>
+  <string name="forgot_password">Elfelejtett jelszó:</string>
   <string name="signup">Regisztráció</string>
   <string name="logging_in_title">Belépés…</string>
   <string name="logging_in_message">Kérlek várj…</string>
@@ -65,6 +69,7 @@
   <string name="categories_search_text_hint">Keresés a kategóriák között</string>
   <string name="menu_save_categories">Mentés</string>
   <string name="refresh_button">Frissítés</string>
+  <string name="display_list_button">Lista</string>
   <string name="gps_disabled">A GPS le van tiltva az eszközén. Szeretné engedélyezni?</string>
   <string name="enable_gps">GPS engedélyezése</string>
   <string name="contributions_subtitle_zero">Még nincsenek feltöltések</string>
@@ -102,7 +107,7 @@
   <string name="share_license_summary">Ez a kép %1$s licenc alatt kerül feltöltésre</string>
   <string name="media_upload_policy">A kép feltöltésével kijelentem, hogy ez a saját munkám és nem tartalmaz jogvédett anyagot, nem szelfi és megfelel a&lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines\"&gt;Wikimedia Commons irányelveinek&lt;/a&gt;.</string>
   <string name="menu_download">Letöltés</string>
-  <string name="preference_license" fuzzy="true">Licenc</string>
+  <string name="preference_license">Alapértelmezett licenc</string>
   <string name="use_previous">Előző cím/leírás használata</string>
   <string name="allow_gps">Automatikusan megkapja a jelenlegi helyet</string>
   <string name="allow_gps_summary">Lekéri a jelenlegi helyet, hogy lehetőség legyen kategóriajavaslatokra a nem földrajzi címkézett képeknél.</string>
@@ -136,6 +141,7 @@
   <string name="tutorial_3_subtext">- Szelfiket vagy képeket a barátaidról\n- Internetröl letöltött képeket\n- Kereskedelmi alkalmazások képernyőképeit</string>
   <string name="tutorial_4_text">Példa feltöltés:</string>
   <string name="tutorial_4_subtext">- Cím: Sydney-i Operaház\n- Leírás: A Sydney-i Operaház az öböl túlpartjáról\n- Kategóriák: Sydney Opera House from the west, Sydney Opera House remote views</string>
+  <string name="tutorial_4_subtext_1">Cím: Sydney-i Operaház</string>
   <string name="welcome_wikipedia_text">Tedd közzé a képeidet! Segíts életre kelteni a Wikipédia-szócikkeket!</string>
   <string name="welcome_wikipedia_subtext">A Wikipédián található képek a Wikimédia Commonsből származnak.</string>
   <string name="welcome_copyright_text">A képeid segítenek a világ minden táján élő emberek oktatásában.</string>
@@ -205,6 +211,7 @@
   <string name="no_description_found">nincs leírás</string>
   <string name="nearby_info_menu_commons_article">Commons leírólap</string>
   <string name="nearby_info_menu_wikidata_article">Wikidata-elem</string>
+  <string name="nearby_info_menu_wikipedia_article">Wikipédia-cikk</string>
   <string name="error_while_cache">Hiba a képek gyorsítótárazásakor</string>
   <string name="title_info">Egy egyedi, leíró cím a fájlnak, ami fájlnévként fog szolgálni. Egyszerű nyelvezetet használhatsz szóközökkel. Ne tedd bele a kiterjesztést.</string>
   <string name="description_info">Kérlek a lehető legteljesebb módon írd le a fájlt: hol készült, mit ábrázol, mi a kontextus? Kérlek add meg az objektumokat vagy személyeket a képen, valamint a nehezen kitalálható információkat (például a kép készítésének dátumát, ha az egy tájkép). Amennyiben a média valami szokatlant ábrázol, kérlek fejtsd ki, hogy mi teszi szokatlanná.</string>
@@ -214,6 +221,8 @@
   <string name="login_to_your_account">Bejelentkezés a fiókodba</string>
   <string name="send_log_file">Naplófájlok küldése</string>
   <string name="send_log_file_description">Naplófájlok küldése e-mailben a fejlesztőknek</string>
+  <string name="null_url">Hiba! URL nem található.</string>
+  <string name="nominate_deletion">Törlésre jelölés</string>
   <string name="nearby_location_has_not_changed">A hely nem változott.</string>
   <string name="nearby_location_not_available">A hely nem érhető el.</string>
   <string name="notifications_welcome">Üdvözlünk a Wikimedia Commonson, %1$s! Örülünk, hogy itt vagy.</string>

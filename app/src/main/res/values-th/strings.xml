@@ -5,11 +5,18 @@
 * Octahedron80
 -->
 <resources>
+  <string name="preference_category_appearance">การแสดงผล</string>
+  <string name="preference_category_general">ทั่วไป</string>
+  <string name="preference_category_feedback">คำติชม</string>
+  <string name="preference_category_location">ที่ตั้ง</string>
   <string name="app_name">คอมมอนส์</string>
+  <string name="bullet">•</string>
   <string name="menu_settings">การตั้งค่า</string>
   <string name="username">ชื่อผู้ใช้</string>
   <string name="password">รหัสผ่าน</string>
-  <string name="login">เข้าสู่ระบบ</string>
+  <string name="login_credential">ลงชื่อเข้าระบบบัญชีคอมมอนส์บีตาของคุณ</string>
+  <string name="login">ลงชื่อเข้า</string>
+  <string name="forgot_password">ลืมรหัสผ่านหรือ?</string>
   <string name="signup">สมัครสมาชิก</string>
   <string name="logging_in_title">กำลังเข้าสู่ระบบ</string>
   <string name="logging_in_message">กรุณารอสักครู่…</string>
@@ -38,6 +45,7 @@
   <string name="menu_share">แชร์</string>
   <string name="menu_open_in_browser">ดูในเบราว์เซอร์</string>
   <string name="share_title_hint">ชื่อเรื่อง</string>
+  <string name="add_title_toast">กรุณาระบุชืิ่อเรื่องของไฟล์นี้</string>
   <string name="share_description_hint">คำอธิบาย</string>
   <string name="login_failed_network">ไม่สามารถเข้าสู่ระบบได้ - ความล้มเหลวของเครือข่าย</string>
   <string name="login_failed_username">ไม่สามารถเข้าสู่ระบบได้ - กรุณาตรวจสอบชื่อผู้ใช้ของคุณ</string>
@@ -53,6 +61,7 @@
   <string name="categories_search_text_hint">ค้นหาหมวดหมู่</string>
   <string name="menu_save_categories">บันทึก</string>
   <string name="refresh_button">รีเฟรช</string>
+  <string name="display_list_button">รายการ</string>
   <string name="gps_disabled">GPS ถูกปิดใช้งานในอุปกรณ์ของคุณอยู่ คุณต้องการเปิดใช้งานหรือไม่?</string>
   <string name="enable_gps">เปิดใช้งาน GPS</string>
   <string name="contributions_subtitle_zero">ยังไม่มีการอัปโหลด</string>
@@ -73,8 +82,8 @@
   <string name="menu_about">เกี่ยวกับ</string>
   <string name="about_license">แอปวิกิมีเดียคอมมอนส์เป็นแอปโอเพนซอร์สที่สร้างขึ้นและดูแลโดยผู้มีสิทธิและอาสาสมัครของชุมชนวิกิมีเดีย มูลนิธิวิกิมีเดียไม่มีส่วนเกี่ยวข้องในการสร้าง พัฒนา หรือการบำรุงรักษาแอปใดๆ ทั้งสิ้น</string>
   <string name="about_improve">สร้าง &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;GitHub issue&lt;/a&gt; ใหม่เพื่อรายงานบั๊กและส่งข้อเสนอแนะ</string>
-  <string name="about_privacy_policy" fuzzy="true">&lt;a href=\"https://github.com/commons-app/apps-android-commons/wiki/Privacy-policy\"&gt;นโยบายความเป็นส่วนตัว&lt;/a&gt;</string>
-  <string name="about_credits" fuzzy="true">&lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/CREDITS\"&gt;เครดิต&lt;/a&gt;</string>
+  <string name="about_privacy_policy">&lt;u&gt;นโยบายความเป็นส่วนตัว&lt;/u&gt;</string>
+  <string name="about_credits">&lt;u&gt;เครดิต&lt;/u&gt;</string>
   <string name="title_activity_about">เกี่ยวกับ</string>
   <string name="menu_feedback">ส่งคำติชม (ผ่านทางอีเมล)</string>
   <string name="no_email_client">ไม่ได้ติดตั้งไคลเอนต์อีเมล</string>
@@ -86,20 +95,49 @@
   <string name="share_license_summary">รูปภาพนี้จะอนุญาตให้ใช้ได้ภายใต้สัญญาอนุญาต %1$s</string>
   <string name="media_upload_policy">โดยการส่งรูปภาพนี้ ฉันยืนยันว่านี่เป็นงานของฉันเอง ซึ่งไม่ประกอบด้วยเนื้อหาที่ละเมิดลิขสิทธิ์หรือภาพเซลฟี หรืออื่นๆ ตามที่ระบุใน&lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines\"&gt;นโยบายของ Wikimedia Commons&lt;/a&gt;</string>
   <string name="menu_download">ดาวน์โหลด</string>
-  <string name="preference_license" fuzzy="true">สัญญาอนุญาต</string>
+  <string name="preference_license">สัญญาอนุญาตปริยาย</string>
   <string name="use_previous">ใช้ชื่อเรื่อง/คำอธิบายก่อนหน้านี้</string>
   <string name="allow_gps">รับข้อมูลตำแหน่งที่ตั้งปัจจุบันโดยอัตโนมัติ</string>
   <string name="allow_gps_summary">ดึงข้อมูลตำแหน่งที่ตั้งปัจจุบันเพื่อรับข้อเสนอแนะเกี่ยวกับหมวดหมู่ถ้ารูปภาพไม่ได้ติดแท็กตำแหน่งที่ตั้งเอาไว้</string>
   <string name="preference_theme">โหมดกลางคืน</string>
   <string name="preference_theme_summary">ใช้ธีมสีเข้ม</string>
+  <string name="license_name_cc_by_sa_four"> Attribution-ShareAlike 4.0</string>
+  <string name="license_name_cc_by_four"> Attribution 4.0</string>
+  <string name="license_name_cc_by_sa"> Attribution-ShareAlike 3.0</string>
+  <string name="license_name_cc_by"> Attribution 3.0</string>
+  <string name="license_name_cc0">CC0</string>
+  <string name="license_name_cc_by_sa_3_0">CC BY-SA 3.0</string>
+  <string name="license_name_cc_by_sa_3_0_at">CC BY-SA 3.0 (ออสเตรีย)</string>
+  <string name="license_name_cc_by_sa_3_0_de">CC BY-SA 3.0 (เยอรมนี)</string>
+  <string name="license_name_cc_by_sa_3_0_ee">CC BY-SA 3.0 (เอสโตเนีย)</string>
+  <string name="license_name_cc_by_sa_3_0_es">CC BY-SA 3.0 (สเปน)</string>
+  <string name="license_name_cc_by_sa_3_0_hr">CC BY-SA 3.0 (โครเอเชีย)</string>
+  <string name="license_name_cc_by_sa_3_0_lu">CC BY-SA 3.0 (ลักเซมเบิร์ก)</string>
+  <string name="license_name_cc_by_sa_3_0_nl">CC BY-SA 3.0 (เนเธอร์แลนด์)</string>
+  <string name="license_name_cc_by_sa_3_0_no">CC BY-SA 3.0 (นอร์เวย์)</string>
+  <string name="license_name_cc_by_sa_3_0_pl">CC BY-SA 3.0 (โปแลนด์)</string>
+  <string name="license_name_cc_by_sa_3_0_ro">CC BY-SA 3.0 (โรมาเนีย)</string>
+  <string name="license_name_cc_by_3_0">CC BY 3.0</string>
+  <string name="license_name_cc_by_sa_4_0">CC BY-SA 4.0</string>
+  <string name="license_name_cc_by_4_0">CC BY 4.0</string>
+  <string name="license_name_cc_zero">CC Zero</string>
   <string name="tutorial_1_text">วิกิมีเดียคอมมอนส์เก็บรูปภาพทั้งหมดที่ถูกใช้ในวิกิพีเดีย</string>
   <string name="tutorial_1_subtext">รูปภาพของคุณช่วยให้ความรู้แก่ผู้คนทั่วโลก!</string>
   <string name="tutorial_2_text">โปรดอัปโหลดรูปภาพที่ถ่ายหรือสร้างด้วยตัวคุณเองทั้งหมด:</string>
-  <string name="tutorial_2_subtext" fuzzy="true">- วัตถุธรรมชาติ (ดอกไม้ สัตว์ ภูเขา)\n- วัตถุที่สามารถใช้งานได้ (จักรยาน สถานีรถไฟ)\n- บุคคลที่มีชื่อเสียง (นายกเทศมนตรีของคุณ นักกีฬาโอลิมปิกที่คุณรู้จัก)</string>
+  <string name="tutorial_2_subtext">วัตถุธรรมชาติ (ดอกไม้ สัตว์ ภูเขา)\n• วัตถุที่สามารถใช้งานได้ (จักรยาน สถานีรถไฟ)\n• บุคคลที่มีชื่อเสียง (นายกเทศมนตรีของคุณ นักกีฬาโอลิมปิกที่คุณรู้จัก)</string>
+  <string name="tutorial_2_subtext_1">วัตถุธรรมชาติ (ดอกไม้ สัตว์ ภูเขา)</string>
+  <string name="tutorial_2_subtext_2">วัตถุที่สามารถใช้งานได้ (จักรยาน สถานีรถไฟ)</string>
+  <string name="tutorial_2_subtext_3">บุคคลที่มีชื่อเสียง (นายกเทศมนตรีของคุณ นักกีฬาโอลิมปิกที่คุณรู้จัก)</string>
   <string name="tutorial_3_text">โปรดอย่าอัปโหลด:</string>
   <string name="tutorial_3_subtext">- ภาพเซลฟีหรือภาพที่มีเพื่อนของคุณ\n- ภาพที่คุณดาวน์โหลดจากอินเทอร์เน็ต\n- ภาพหน้าจอแอปที่เป็นซอฟต์แวร์กรรมสิทธิ์</string>
+  <string name="tutorial_3_subtext_1">ภาพเซลฟีหรือภาพที่มีเพื่อนของคุณ</string>
+  <string name="tutorial_3_subtext_2">ภาพที่คุณดาวน์โหลดจากอินเทอร์เน็ต</string>
+  <string name="tutorial_3_subtext_3">ภาพหน้าจอแอปที่เป็นซอฟต์แวร์กรรมสิทธิ์</string>
   <string name="tutorial_4_text">ตัวอย่างการอัปโหลด:</string>
   <string name="tutorial_4_subtext">- ชื่อเรื่อง: โรงอุปรากรซิดนีย์\n- คำอธิบาย: โรงอุปรากรซิดนีย์เมื่อมองจากบริเวณอ่าวซิดนีย์\n- หมวดหมู่: โรงอุปรากรเมื่อมองจากทิศตะวันตก, ทิวทัศน์โรงอุปรากรซิดนีย์จากระยะไกล</string>
+  <string name="tutorial_4_subtext_1">ชื่อเรื่อง: โรงอุปรากรซิดนีย์</string>
+  <string name="tutorial_4_subtext_2">คำอธิบาย: โรงอุปรากรซิดนีย์เมื่อมองจากบริเวณอ่าวซิดนีย์</string>
+  <string name="tutorial_4_subtext_3">หมวดหมู่: โรงอุปรากรเมื่อมองจากทิศตะวันตก, ทิวทัศน์โรงอุปรากรซิดนีย์จากระยะไกล</string>
   <string name="welcome_wikipedia_text">ลงรูปของคุณ ช่วยให้บทความวิกิพีเดียมีชีวิตชีวา!</string>
   <string name="welcome_wikipedia_subtext">รูปภาพบนวิกิพีเดียมาจากวิกิพีเดียคอมมอนส์</string>
   <string name="welcome_copyright_text">รูปภาพของคุณช่วยให้การศึกษาแก่ผู้คนทั่วโลก</string>
@@ -112,8 +150,8 @@
   <string name="detail_description_empty">ไม่มีคำอธิบาย</string>
   <string name="detail_license_empty">สัญญาอนุญาตที่ไม่รู้จัก</string>
   <string name="menu_refresh">รีเฟรช</string>
-  <string name="read_storage_permission_rationale" fuzzy="true">สิทธิที่ต้องการ: อ่านที่เก็บข้อมูลภายนอก แอปไม่สามารถทำงานได้โดยไม่มีสิทธินี้</string>
-  <string name="write_storage_permission_rationale" fuzzy="true">สิทธิที่ต้องการ: เขียนที่เก็บข้อมูลภายนอก แอปไม่สามารถทำงานได้โดยไม่มีสิทธินี้</string>
+  <string name="read_storage_permission_rationale">สิทธิที่ต้องการ: อ่านที่เก็บข้อมูลภายนอก แอปไม่สามารถเข้าถึงคลังภาพได้โดยไม่มีสิทธินี้</string>
+  <string name="write_storage_permission_rationale">สิทธิที่ต้องการ: เขียนที่เก็บข้อมูลภายนอก แอปไม่สามารถเข้าถึงกล้องของคุณได้โดยไม่มีสิทธินี้</string>
   <string name="location_permission_rationale">สิทธิทางเลือก: รับข้อมูลตำแหน่งที่ตั้งปัจจุบันสำหรับข้อเสนอแนะหมวดหมู่</string>
   <string name="ok">ตกลง</string>
   <string name="title_activity_nearby">สถานที่ใกล้เคียง</string>
@@ -142,14 +180,19 @@
   <string name="commons_logo">โลโก้คอมมอนส์</string>
   <string name="commons_website">เว็บไซต์คอมมอนส์</string>
   <string name="commons_facebook">หน้าเฟซบุ๊กคอมมอนส์</string>
+  <string name="commons_github">ซอร์สโค้ดคอมมอนส์บน GitHub</string>
   <string name="background_image">ภาพพื้นหลัง</string>
+  <string name="mediaimage_failed">ภาพสื่อล้มเหลว</string>
   <string name="no_image_found">ไม่พบรูปภาพ</string>
   <string name="upload_image">อัปโหลดรูปภาพ</string>
   <string name="welcome_image_mount_zao">ภูเขาซะโอ</string>
   <string name="welcome_image_llamas">ยามา</string>
   <string name="welcome_image_rainbow_bridge">สะพานสายรุ้ง</string>
   <string name="welcome_image_tulip">ทิวลิป</string>
+  <string name="welcome_image_no_selfies">ไม่มีภาพเซลฟี</string>
+  <string name="welcome_image_proprietary">ภาพกรรมสิทธิ์</string>
   <string name="welcome_image_welcome_wikipedia">ยินดีต้อนรับสู่วิกิพีเดีย</string>
+  <string name="welcome_image_welcome_copyright">ลิขสิทธิ์ต้อนรับ</string>
   <string name="welcome_image_sydney_opera_house">โรงอุปรากรซิดนีย์</string>
   <string name="cancel">ยกเลิก</string>
   <string name="navigation_drawer_open">เปิด</string>
@@ -165,16 +208,50 @@
   <string name="navigation_item_notification">การแจ้งเตือน</string>
   <string name="nearby_needs_permissions">ไม่สามารถแสดงสถานที่ใกล้เคียงได้โดยขาดสิทธิ์การเข้าถึงตำแหน่ง</string>
   <string name="no_description_found">ไม่พบคำอธิบาย</string>
+  <string name="nearby_info_menu_commons_article">หน้าไฟล์คอมมอนส์</string>
   <string name="nearby_info_menu_wikidata_article">รายการวิกิสนเทศ</string>
+  <string name="nearby_info_menu_wikipedia_article">บทความวิกิพีเดีย</string>
   <string name="error_while_cache">ข้อผิดพลาดขณะแคชภาพ</string>
   <string name="title_info">ชื่อเรื่องที่อธิบายลักษณะเฉพาะของไฟล์ ซึ่งจะใช้เป็นชื่อไฟล์ คุณอาจใช้ภาษาธรรมดาที่มีเว้นวรรคก็ได้ อย่ารวมนามสกุลไฟล์</string>
   <string name="description_info">โปรดอธิบายสื่อดังกล่าวให้มากที่สุดเท่าที่จะได้: สื่อนี้ถูกถ่ายที่ไหน? สื่อนี้แสดงถึงอะไร? บริบทคืออะไร? โปรดอธิบายถึงวัตถุหรือบุคคล เปิดเผยข้อมูลที่ไม่อาจคาดเดาได้อย่างง่ายดาย เช่น เวลาที่ถ่าย หากเป็นภาพทิวทัศน์ หากสื่อแสดงถึงสิ่งที่ไม่ธรรมดา โปรดอธิบายว่าอะไรทำให้สื่อดังกล่าวไม่ธรรมดา</string>
+  <string name="upload_image_too_dark">ภาพนี้มืดเกินไป คุณแน่ใจหรือว่าคุณต้องการอัปโหลดภาพนี้? วิกิมีเดียคอมมอนส์นั้นมีไว้สำหรับรูปภาพที่มีคุณค่าในทางสารานุกรมเท่านั้น</string>
+  <string name="upload_image_blurry">ภาพนี้มัว คุณแน่ใจหรือว่าคุณต้องการอัปโหลดภาพนี้? วิกิมีเดียคอมมอนส์นั้นมีไว้สำหรับรูปภาพที่มีคุณค่าในทางสารานุกรมเท่านั้น</string>
   <string name="give_permission">ให้สิทธิ์</string>
   <string name="use_external_storage">ใช้ที่จัดเก็บข้อมูลภายนอก</string>
   <string name="use_external_storage_summary">บันทึกรูปภาพที่ถ่ายด้วยกล้องในแอปบนอุปกรณ์ของคุณ</string>
   <string name="login_to_your_account">ลงชื่อเข้าใช้บัญชีของคุณ</string>
   <string name="send_log_file">ส่งไฟล์ปูม</string>
   <string name="send_log_file_description">ส่งไฟล์ปูมไปยังนักพัฒนาผ่านทางอีเมล</string>
+  <string name="no_web_browser">ไม่พบเว็บเบราว์เซอร์ที่จะเปิด URL</string>
+  <string name="null_url">ข้อผิดพลาด! ไม่พบ URL</string>
+  <string name="nominate_deletion">เสนอการลบ</string>
+  <string name="nominated_for_deletion">ภาพนี้ถูกเสนอการลบแล้ว</string>
+  <string name="view_browser">ดูในเบราว์เซอร์</string>
   <string name="nearby_location_has_not_changed">ไม่ได้เปลี่ยนตำแหน่งที่ตั้ง</string>
   <string name="nearby_location_not_available">ตำแหน่งที่ตั้งไม่พร้อมใช้งาน</string>
+  <string name="location_permission_rationale_nearby">ต้องการสิทธิเพื่อแสดงรายการสถานที่ใกล้เคียง</string>
+  <string name="get_directions">สอบถามเส้นทาง</string>
+  <string name="read_article">อ่านบทความ</string>
+  <string name="notifications_welcome">ยินดีต้อนรับสู่วิกิมีเดียคอมมอนส์ %1$s! เราดีใจที่คุณอยู่ที่นี่</string>
+  <string name="notifications_talk_page_message">%1$s ส่งสารบนหน้าคุยของคุณ</string>
+  <string name="notifications_thank_you_edit">ขอบคุณที่ร่วมแก้ไข</string>
+  <string name="notifications_mention">%1$s ได้กล่าวถึงคุณบน %2$s</string>
+  <string name="toggle_view_button">สลับมุมมอง</string>
+  <string name="nearby_directions">เส้นทาง</string>
+  <string name="nearby_wikidata">วิกิสนเทศ</string>
+  <string name="nearby_wikipedia">วิกิพีเดีย</string>
+  <string name="nearby_commons">คอมมอนส์</string>
+  <string name="about_rate_us">&lt;u&gt;ให้คะแนนเรา&lt;/u&gt;</string>
+  <string name="about_faq">&lt;u&gt;FAQ&lt;/u&gt;</string>
+  <string name="welcome_skip_button">ข้ามบทช่วยสอน</string>
+  <string name="no_internet">อินเทอร์เน็ตไม่พร้อมใช้งาน</string>
+  <string name="internet_established">อินเทอร์เน็ตพร้อมใช้งาน</string>
+  <string name="error_notifications">เกิดข้อผิดพลาดในการดึงข้อมูลการแจ้งความ</string>
+  <string name="no_notifications">ไม่พบการแจ้งความ</string>
+  <string name="about_translate">&lt;u&gt;แปล&lt;/u&gt;</string>
+  <string name="about_translate_title">ภาษา</string>
+  <string name="about_translate_message">เลือกภาษาที่คุณต้องการส่งการแปล</string>
+  <string name="about_translate_proceed">ดำเนินการต่อ</string>
+  <string name="about_translate_cancel">ยกเลิก</string>
+  <string name="retry">ลองใหม่</string>
 </resources>
