@@ -61,18 +61,24 @@ public class SessionManager {
     }
 
     public String getAuthCookie() {
-        boolean isLoggedIn = sharedPreferences.getBoolean("isUserLoggedIn", false);
-
-        if (!isLoggedIn) {
+        if (!isUserLoggedIn()) {
             Timber.e("User is not logged in");
             return null;
         } else {
-            String authCookie = sharedPreferences.getString("getAuthCookie", null);
+            String authCookie = getCachedAuthCookie();
             if (authCookie == null) {
                 Timber.e("Auth cookie is null even after login");
             }
             return authCookie;
         }
+    }
+
+    public String getCachedAuthCookie() {
+        return sharedPreferences.getString("getAuthCookie", null);
+    }
+
+    public boolean isUserLoggedIn() {
+        return sharedPreferences.getBoolean("isUserLoggedIn", false);
     }
 
     public Completable clearAllAccounts() {
