@@ -82,6 +82,7 @@
   <string name="categories_activity_title">Categories</string>
   <string name="title_activity_settings">Settings</string>
   <string name="title_activity_signup">Sign Up</string>
+  <string name="title_activity_featured_images">Featured Images</string>
   <string name="menu_about">About</string>
   <string name="about_license">The Wikimedia Commons app is an open-source app created and maintained by grantees and volunteers of the Wikimedia community. The Wikimedia Foundation is not involved in the creation, development, or maintenance of the app. </string>
   <string name="trademarked_name" translatable="false">Wikimedia Commons</string>
@@ -168,6 +169,8 @@
   <string name="media_detail_media_title">Title of the media</string>
   <string name="media_detail_description">Description</string>
   <string name="media_detail_description_explanation">Description of the media goes here. This can potentially be fairly long, and will need to wrap across multiple lines. We hope it looks nice though.</string>
+  <string name="media_detail_author">Author</string>
+  <string name="media_detail_author_explanation">Featured image author user name goes here.</string>
   <string name="media_detail_uploaded_date">Uploaded date</string>
   <string name="media_detail_license">License</string>
   <string name="media_detail_coordinates">Coordinates</string>
@@ -214,6 +217,7 @@
   <string name="navigation_item_logout">Logout</string>
   <string name="navigation_item_info">Tutorial</string>
   <string name="navigation_item_notification">Notifications</string>
+  <string name="navigation_item_featured_images">Featured</string>
   <string name="nearby_needs_permissions">Nearby places cannot be displayed without location permissions</string>
   <string name="no_description_found">no description found</string>
   <string name="nearby_info_menu_commons_article">Commons file page</string>

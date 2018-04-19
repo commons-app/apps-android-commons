@@ -4,6 +4,7 @@ import dagger.Module;
 import dagger.android.ContributesAndroidInjector;
 import fr.free.nrw.commons.category.CategorizationFragment;
 import fr.free.nrw.commons.contributions.ContributionsListFragment;
+import fr.free.nrw.commons.featured.FeaturedImagesListFragment;
 import fr.free.nrw.commons.media.MediaDetailFragment;
 import fr.free.nrw.commons.media.MediaDetailPagerFragment;
 import fr.free.nrw.commons.nearby.NearbyListFragment;
@@ -46,5 +47,8 @@ public abstract class FragmentBuilderModule {
 
     @ContributesAndroidInjector
     abstract SingleUploadFragment bindSingleUploadFragment();
+
+    @ContributesAndroidInjector
+    abstract FeaturedImagesListFragment bindFeaturedImagesListFragment();
 
 }
