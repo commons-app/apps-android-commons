@@ -1,5 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- Authors:
+* Aefgh39622
+* Dude1717
+* Hinaloe
+* Nicolas Raoul
+* Omotecho
+* Otokoume
+* Shirayuki
+* Takot
+* Whym
+* Yusuke1109
+-->
 <resources>
+  <string name="preference_category_feedback">フィードバック</string>
+  <string name="preference_category_location">場所</string>
   <string name="app_name">コモンズ</string>
   <string name="menu_settings">設定</string>
   <string name="username">利用者名</string>
@@ -71,8 +85,8 @@
   <string name="menu_about">このアプリについて</string>
   <string name="about_license">ウィキメディア・コモンズ・アプリはウィキメディア・コミュニティの助成金受給者とボランティアによって製作・メンテナンスされているオープンソースソフトウェアです。ウィキメディア財団はこのアプリの製作・開発・メンテナンスに関与していません。</string>
   <string name="about_improve">バグとアイディアは &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;Github&lt;/a&gt; へ。</string>
-  <string name="about_privacy_policy" fuzzy="true">&lt;a href=\"https://github.com/commons-app/apps-android-commons/wiki/プライバシー・ポリシー\"&gt;プライバシー・ポリシー&lt;/a&gt;</string>
-  <string name="about_credits" fuzzy="true">&lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/CREDITS\"&gt;クレジット&lt;/a&gt;</string>
+  <string name="about_privacy_policy">&lt;u&gt;プライバシー・ポリシー&lt;/u&gt;</string>
+  <string name="about_credits">&lt;u&gt;クレジット&lt;/u&gt;</string>
   <string name="title_activity_about">このアプリについて</string>
   <string name="menu_feedback">フィードバックをメールで送信</string>
   <string name="no_email_client">メールアプリケーションが見つかりません</string>
@@ -83,7 +97,7 @@
   <string name="menu_cancel_upload">キャンセル</string>
   <string name="share_license_summary">この画像が %1$s ライセンスでアップロードされます。</string>
   <string name="menu_download">ダウンロード</string>
-  <string name="preference_license" fuzzy="true">ライセンス</string>
+  <string name="preference_license">既定のライセンス</string>
   <string name="use_previous">前回のタイトルと記述を使用</string>
   <string name="allow_gps">現在の位置を自動的に取得</string>
   <string name="allow_gps_summary">画像にジオタグが付いていない場合、現在の位置を取得してカテゴリを提案</string>
@@ -129,8 +143,8 @@
   <string name="detail_description_empty">説明はありません。</string>
   <string name="detail_license_empty">不明なライセンス</string>
   <string name="menu_refresh">更新</string>
-  <string name="read_storage_permission_rationale">必要な権限：外部ストレージを読み込みます。これがなければアプリは機能しません。</string>
-  <string name="write_storage_permission_rationale">必要な権限:外部ストレージを作成します。これがなければアプリは機能しません。</string>
+  <string name="read_storage_permission_rationale" fuzzy="true">必要な権限：外部ストレージを読み込みます。これがなければアプリは機能しません。</string>
+  <string name="write_storage_permission_rationale" fuzzy="true">必要な権限:外部ストレージを作成します。これがなければアプリは機能しません。</string>
   <string name="location_permission_rationale">オプションの権限：カテゴリ候補の現在の位置を取得する</string>
   <string name="ok">承認</string>
   <string name="title_activity_nearby">周りの場所</string>
@@ -183,6 +197,7 @@
   <string name="nearby_needs_permissions">場所の権限がないと、近くの場所を表示できません</string>
   <string name="no_description_found">説明がありません</string>
   <string name="nearby_info_menu_wikidata_article">ウィキデータ項目</string>
+  <string name="nearby_info_menu_wikipedia_article">ウィキペディアの記事</string>
   <string name="error_while_cache">画像をキャッシュする際のエラー</string>
   <string name="title_info">ファイル固有の説明的な表題。ファイル名として使われます。平易な言葉を使い、空白を入れることができます。拡張子は含めないでください。</string>
   <string name="description_info">可能な限りメディアを説明してください:どこで撮られましたか?それは何を示していますか?文脈とは何ですか?物や人を説明してください。容易に推測できない情報、例えば風景の場合の時刻を明らかにする。メディアに珍しいことがある場合は、何が珍しいのかを説明してください。</string>
@@ -192,6 +207,15 @@
   <string name="login_to_your_account">自分のアカウントにログイン</string>
   <string name="send_log_file">ログファイルを送信する</string>
   <string name="send_log_file_description">メールで開発者にログファイルを送信する</string>
+  <string name="view_browser">ブラウザーで表示</string>
   <string name="nearby_location_has_not_changed">場所は変更されていません。</string>
   <string name="nearby_location_not_available">位置が無効です。</string>
+  <string name="read_article">記事を読む</string>
+  <string name="about_rate_us">&lt;u&gt;評価する&lt;/u&gt;</string>
+  <string name="about_faq">&lt;u&gt;FAQ&lt;/u&gt;</string>
+  <string name="welcome_skip_button">チュートリアルをスキップする</string>
+  <string name="about_translate">&lt;u&gt;翻訳&lt;/u&gt;</string>
+  <string name="about_translate_title">言語</string>
+  <string name="about_translate_cancel">キャンセル</string>
+  <string name="retry">再試行</string>
 </resources>

@@ -1,4 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- Authors:
+* Acamicamacaraca
+* BadDog
+* Liuxinyu970226
+* Milicevic01
+* Obsuser
+* Rancher
+* Vukasin005
+* Zoranzoki21
+* Милан Јелисавчић
+-->
 <resources>
   <string name="preference_category_appearance">Изглед</string>
   <string name="preference_category_general">Опште</string>
@@ -151,8 +162,8 @@
   <string name="detail_description_empty">Нема описа</string>
   <string name="detail_license_empty">Непозната лиценца</string>
   <string name="menu_refresh">Освежи</string>
-  <string name="read_storage_permission_rationale">Потребна дозвола: читање спољашње меморије. \nАпликација не може да функционише без овога.</string>
-  <string name="write_storage_permission_rationale">Потребна дозвола: писање у спољашњој меморији. \nАпликација не може да функционише без овога.</string>
+  <string name="read_storage_permission_rationale" fuzzy="true">Потребна дозвола: читање спољашње меморије. \nАпликација не може да функционише без овога.</string>
+  <string name="write_storage_permission_rationale" fuzzy="true">Потребна дозвола: писање у спољашњој меморији. \nАпликација не може да функционише без овога.</string>
   <string name="location_permission_rationale">Необавезна дозвола: преузми тренутну локацију за предлоге категорија</string>
   <string name="ok">У реду</string>
   <string name="title_activity_nearby">Места у близини</string>
@@ -234,7 +245,7 @@
   <string name="notifications_thank_you_edit">Хвала Вам за прављење измене</string>
   <string name="notifications_mention">%1$s Вас је поменуо на страници %2$s.</string>
   <string name="toggle_view_button">Пребаци приказ</string>
-  <string name="about_rate_us"/>
-  <string name="about_faq">Често постављана питања</string>
+  <string name="about_rate_us">&lt;u&gt;Оцените нас&lt;/u&gt;</string>
+  <string name="about_faq" fuzzy="true">Често постављана питања</string>
   <string name="welcome_skip_button">Прескочи туторијал</string>
 </resources>

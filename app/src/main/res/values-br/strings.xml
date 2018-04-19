@@ -1,4 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- Authors:
+* Dishual
+* Fohanno
+* Fulup
+* Gwenn-Ael
+* Y-M D
+-->
 <resources>
   <string name="preference_category_appearance">Neuz</string>
   <string name="preference_category_general">Hollek</string>
@@ -146,8 +153,8 @@
   <string name="detail_description_empty">Deskrivadur ebet</string>
   <string name="detail_license_empty">Aotre-implijout dizanv</string>
   <string name="menu_refresh">Freskaat</string>
-  <string name="read_storage_permission_rationale">Aotre rekis : lenn ur stokañ diavaez. Hep se, n\'hall ket an arload mont en-dro.</string>
-  <string name="write_storage_permission_rationale">Aotre ret ; skrivañ war al lec\'h stokañ diavaez. Ne c\'hall ket an arload mont en-dro hep an dra-se.</string>
+  <string name="read_storage_permission_rationale" fuzzy="true">Aotre rekis : lenn ur stokañ diavaez. Hep se, n\'hall ket an arload mont en-dro.</string>
+  <string name="write_storage_permission_rationale" fuzzy="true">Aotre ret ; skrivañ war al lec\'h stokañ diavaez. Ne c\'hall ket an arload mont en-dro hep an dra-se.</string>
   <string name="location_permission_rationale">Aotre diret : kaout al lec\'hiadur red evit kinnig rummadoù</string>
   <string name="ok">Mat eo</string>
   <string name="title_activity_nearby">Lec\'hioù nes</string>

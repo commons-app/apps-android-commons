@@ -1,4 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- Authors:
+* Envlh
+* Inkowik
+* Kghbln
+* Metalhead64
+* Sujan
+-->
 <resources>
   <string name="preference_category_appearance">Erscheinung</string>
   <string name="preference_category_general">Allgemein</string>
@@ -152,8 +159,8 @@
   <string name="detail_description_empty">Keine Beschreibung</string>
   <string name="detail_license_empty">Unbekannte Lizenz</string>
   <string name="menu_refresh">Aktualisieren</string>
-  <string name="read_storage_permission_rationale">Erforderliche Berechtigung: Externen Speicher lesen. Die App funktioniert ohne diese Berechtigung nicht.</string>
-  <string name="write_storage_permission_rationale">Erforderliche Berechtigung: Externen Speicher beschreiben. Die App kann ohne dies nicht funktionieren.</string>
+  <string name="read_storage_permission_rationale">Erforderliche Berechtigung: Externen Speicher lesen. Die App kann ohne diese Berechtigung nicht auf deine Galerie zugreifen.</string>
+  <string name="write_storage_permission_rationale">Erforderliche Berechtigung: Externen Speicher beschreiben. Die App kann ohne diese Berechtigung nicht auf deine Kamera zugreifen.</string>
   <string name="location_permission_rationale">Optionale Berechtigung: Ruft den aktuellen Standort für Kategorievorschläge ab</string>
   <string name="ok">Okay</string>
   <string name="title_activity_nearby">Orte in der Nähe</string>
@@ -227,6 +234,8 @@
   <string name="no_web_browser">Zum Öffnen der URL wurde kein Webbrowser gefunden</string>
   <string name="null_url">Fehler! URL nicht gefunden</string>
   <string name="nominate_deletion">Zur Löschung vorschlagen</string>
+  <string name="nominated_for_deletion">Dieses Bild wurde zur Löschung vorgeschlagen.</string>
+  <string name="nominated_see_more"/>
   <string name="view_browser">Im Browser ansehen</string>
   <string name="nearby_location_has_not_changed">Der Standort hat sich nicht geändert.</string>
   <string name="nearby_location_not_available">Der Standort ist nicht verfügbar.</string>
@@ -242,7 +251,17 @@
   <string name="nearby_wikidata">WIKIDATA</string>
   <string name="nearby_wikipedia">WIKIPEDIA</string>
   <string name="nearby_commons">COMMONS</string>
-  <string name="about_rate_us"/>
-  <string name="about_faq">Häufig gestellte Fragen</string>
+  <string name="about_rate_us">&lt;u&gt;Bewerte uns&lt;/u&gt;</string>
+  <string name="about_faq">&lt;u&gt;Häufig gestellte Fragen&lt;/u&gt;</string>
   <string name="welcome_skip_button">Tutorial überspringen</string>
+  <string name="no_internet">Internet nicht verfügbar</string>
+  <string name="internet_established">Internet verfügbar</string>
+  <string name="error_notifications">Fehler beim Abruf der Benachrichtigungen</string>
+  <string name="no_notifications">Keine Benachrichtigungen gefunden</string>
+  <string name="about_translate">&lt;u&gt;Übersetzen&lt;/u&gt;</string>
+  <string name="about_translate_title">Sprachen</string>
+  <string name="about_translate_message">Wähle die Sprache aus, für die du Übersetzungen durchführen möchtest.</string>
+  <string name="about_translate_proceed">Fortfahren</string>
+  <string name="about_translate_cancel">Abbrechen</string>
+  <string name="retry">Erneut versuchen</string>
 </resources>

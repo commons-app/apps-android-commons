@@ -1,4 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- Authors:
+* Alvaro Vidal-Abarca
+* Fitoschido
+* Kippelboy
+* MarionaDSR
+* Pintor Smeargle
+* Pitort
+* Toniher
+* XVEC
+-->
 <resources>
   <string name="preference_category_appearance">Aparença</string>
   <string name="preference_category_location">Ubicació</string>
@@ -181,5 +191,5 @@
   <string name="read_article">LLEGIU L’ARTICLE</string>
   <string name="notifications_thank_you_edit">Gràcies per fer una modificació</string>
   <string name="notifications_mention" fuzzy="true">%1$s us ha mencionat a %2$s.</string>
-  <string name="about_faq">Preguntes freqüents</string>
+  <string name="about_faq" fuzzy="true">Preguntes freqüents</string>
 </resources>

@@ -1,4 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- Authors:
+* 1917 Ekim Devrimi
+* Envlh
+* Gambollar
+* Gorizon
+* Gırd
+* Marmase
+* Mirzali
+-->
 <resources>
   <string name="app_name">Commons</string>
   <string name="menu_settings">Eyari</string>
@@ -26,7 +35,7 @@
   </plurals>
   <string name="title_activity_contributions">Barkerdışê mınê peyêni</string>
   <string name="contribution_state_queued">Ratneya</string>
-  <string name="contribution_state_failed">Nêbı</string>
+  <string name="contribution_state_failed">Ebe ser nêkewt</string>
   <string name="contribution_state_in_progress">%1$d%% temamya</string>
   <string name="contribution_state_starting">Bar beno</string>
   <string name="menu_from_gallery">Galeri ra</string>

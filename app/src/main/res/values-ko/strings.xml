@@ -1,4 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- Authors:
+* CYAN
+* Garam
+* Jerrykim306
+* Kwj2772
+* Naramoksu
+* Nuevo Paso
+* Revi
+* Ykhwong
+* 아라
+-->
 <resources>
   <string name="preference_category_appearance">보이기</string>
   <string name="preference_category_general">일반</string>
@@ -59,6 +70,7 @@
   <string name="categories_search_text_hint">분류 검색</string>
   <string name="menu_save_categories">저장</string>
   <string name="refresh_button">새로 고침</string>
+  <string name="display_list_button">목록</string>
   <string name="gps_disabled">장치에서 GPS가 꺼져 있습니다. 켜시겠습니까?</string>
   <string name="enable_gps">GPS 사용</string>
   <string name="contributions_subtitle_zero">아직 올린 항목이 없습니다</string>
@@ -80,7 +92,7 @@
   <string name="title_activity_signup">가입하기</string>
   <string name="menu_about">정보</string>
   <string name="about_license">위키미디어 공용 앱은 오픈 소스 애플리케이션이며 위키미디어 공동체 내의 자원봉사자에 의해 유지됩니다. 위키미디어 재단은 애플리케이션의 생성, 개발, 유지보수에 관여하지 않습니다.</string>
-  <string name="about_improve" fuzzy="true">소스 코드는 &lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;GitHub&lt;/a&gt;에 있으며, 웹사이트는 &lt;a href=\"https://commons-app.github.io/\"&gt;GitHub&lt;/a&gt;에 있습니다. 버그나 기타 제안은 &lt;a href=\" https://github.com/commons-app/apps-android-commons/issues\"&gt;GitHub&lt;/a&gt;에 보고해주세요.</string>
+  <string name="about_improve">버그나 기타 제안은 &lt;a href=\" https://github.com/commons-app/apps-android-commons/issues\"&gt;GitHub&lt;/a&gt;에 보고해주세요.</string>
   <string name="about_privacy_policy">&lt;u&gt;개인정보 정책&lt;/u&gt;</string>
   <string name="about_credits">&lt;u&gt;제작진&lt;/u&gt;</string>
   <string name="title_activity_about">정보</string>
@@ -134,6 +146,9 @@
   <string name="tutorial_3_subtext_3">사유 앱의 스크린샷</string>
   <string name="tutorial_4_text">업로드 예시:</string>
   <string name="tutorial_4_subtext">- 제목: 시드니 오페라 하우스\n- 설명: 항만 건너편에서 바라본 시드니 오페라 하우스\n- 분류: 시드니 오페라 하우스, 서쪽에서 본 시드니 오페라 하우스, 시드니 오페라 하우스 원경</string>
+  <string name="tutorial_4_subtext_1">제목: 시드니 오페라 하우스</string>
+  <string name="tutorial_4_subtext_2">설명: 강 건너에서 바라본 시드니 오페라 하우스</string>
+  <string name="tutorial_4_subtext_3">분류: Sydney Opera House from the west, Sydney Opera House remote views</string>
   <string name="welcome_wikipedia_text">당신의 그림을 기여하세요. 위키백과 문서의 생명이 오는 데 도와주세요!</string>
   <string name="welcome_wikipedia_subtext">위키백과의 그림은 위키미디어 공용에서 옵니다.</string>
   <string name="welcome_copyright_text">당신의 그림은 전 세계 사람들을 교육하는 데 도움이 됩니다.</string>
@@ -146,8 +161,8 @@
   <string name="detail_description_empty">설명 없음</string>
   <string name="detail_license_empty">알 수 없는 라이선스</string>
   <string name="menu_refresh">새로 고침</string>
-  <string name="read_storage_permission_rationale">권한 필요: 외부 저장소 읽기. 이것이 없으면 앱은 동작하지 않습니다.</string>
-  <string name="write_storage_permission_rationale">권한 필요: 외부 저장소 쓰기. 이것이 없으면 앱은 동작하지 않습니다.</string>
+  <string name="read_storage_permission_rationale">권한 필요: 외부 저장소 읽기. 이것이 없으면 앱은 갤러리에 접근할 수 없습니다.</string>
+  <string name="write_storage_permission_rationale">권한 필요: 외부 저장소 쓰기. 이것이 없으면 앱은 카메라에 접근할 수 없습니다.</string>
   <string name="location_permission_rationale">선택적 권한: 분류 추천을 위해 현재 위치 정보를 가져옵니다.</string>
   <string name="ok">확인</string>
   <string name="title_activity_nearby">근처의 장소</string>
@@ -175,6 +190,8 @@
   <string name="logout_verification">정말 로그아웃하시겠습니까?</string>
   <string name="commons_logo">공용 로고</string>
   <string name="commons_website">공용 웹사이트</string>
+  <string name="commons_facebook">공용 페이스북 페이지</string>
+  <string name="commons_github">공용 GitHub 소스 코드</string>
   <string name="background_image">배경 그림</string>
   <string name="mediaimage_failed">미디어 그림 실패</string>
   <string name="no_image_found">그림이 없습니다</string>
@@ -204,8 +221,11 @@
   <string name="no_description_found">설명이 없습니다</string>
   <string name="nearby_info_menu_commons_article">공용 파일 문서</string>
   <string name="nearby_info_menu_wikidata_article">위키데이터 항목</string>
+  <string name="nearby_info_menu_wikipedia_article">위키백과 문서</string>
   <string name="error_while_cache">그림 캐시 처리 오류</string>
   <string name="title_info">이 파일을 설명할 수 있는 제목으로, 파일 이름으로 사용됩니다. 띄어쓰기를 포함한 일반적인 단어를 사용할 수 있습니다. 파일 확장자는 포함하지 마세요</string>
+  <string name="upload_image_too_dark">사진이 너무 어둡습니다. 정말 업로드하겠습니까? 위키미디어 공용은 사전적인 가치가 있는 사진을 위한 공간입니다.</string>
+  <string name="upload_image_blurry">사진이 흐릿합니다. 정말 업로드하겠습니까? 위키미디어 공용은 사전적인 가치가 있는 사진을 위한 공간입니다.</string>
   <string name="give_permission">권한 부여</string>
   <string name="use_external_storage">외부 저장소 사용하기</string>
   <string name="use_external_storage_summary">장치의 인앱 카메라로 찍은 사진 저장하기</string>
@@ -214,6 +234,8 @@
   <string name="send_log_file_description">이메일로 개발자에게 로그 파일 보내기</string>
   <string name="no_web_browser">URL을 열기 위한 웹 브라우저를 찾지 못했습니다</string>
   <string name="null_url">오류! URL을 찾을 수 없습니다</string>
+  <string name="nominate_deletion">삭제 신청</string>
+  <string name="nominated_for_deletion">이 그림은 삭제가 신청되었습니다.</string>
   <string name="view_browser">브라우저에서 보기</string>
   <string name="nearby_location_has_not_changed">위치가 변경되지 않았습니다.</string>
   <string name="nearby_location_not_available">위치를 사용할 수 없습니다.</string>
@@ -222,6 +244,21 @@
   <string name="notifications_talk_page_message">%1$s님이 당신의 사용자 토론 문서에 글을 남겼습니다</string>
   <string name="notifications_thank_you_edit">편집해 주셔서 감사합니다</string>
   <string name="notifications_mention">%1$s님이 %2$s에서 나를 언급했습니다.</string>
-  <string name="about_faq">자주 묻는 질문</string>
+  <string name="nearby_directions">방향</string>
+  <string name="nearby_wikidata">위키데이터</string>
+  <string name="nearby_wikipedia">위키백과</string>
+  <string name="nearby_commons">공용</string>
+  <string name="about_rate_us">&lt;u&gt;평가&lt;/u&gt;</string>
+  <string name="about_faq">&lt;u&gt;FAQ&lt;/u&gt;</string>
   <string name="welcome_skip_button">강좌 건너뛰기</string>
+  <string name="no_internet">인터넷 사용 불가</string>
+  <string name="internet_established">인터넷 사용 가능</string>
+  <string name="error_notifications">알림 가져오기 오류</string>
+  <string name="no_notifications">알림이 없습니다</string>
+  <string name="about_translate">&lt;u&gt;번역&lt;/u&gt;</string>
+  <string name="about_translate_title">언어</string>
+  <string name="about_translate_message">번역 제출을 위한 언어를 선택하십시오</string>
+  <string name="about_translate_proceed">진행</string>
+  <string name="about_translate_cancel">취소</string>
+  <string name="retry">다시 시도</string>
 </resources>

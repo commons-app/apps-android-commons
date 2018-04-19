@@ -1,4 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- Authors:
+* Cedric31
+* Guilhelma
+* Unuaiga
+-->
 <resources>
   <string name="app_name">Commons</string>
   <string name="menu_settings">Paramètres</string>
@@ -124,4 +129,14 @@
   <string name="media_detail_media_title">Títol del mèdia</string>
   <string name="media_detail_description">Descripcion</string>
   <string name="become_a_tester_title">Venir un bèta-testaire</string>
+  <string name="nominated_for_deletion">Aqueste imatge es estat designat per supression</string>
+  <string name="about_rate_us">&lt;u&gt;Nos notar&lt;/u&gt;</string>
+  <string name="about_faq">&lt;u&gt;FAQ&lt;/u&gt;</string>
+  <string name="no_internet">Internet pas disponible</string>
+  <string name="internet_established">Internet disponible</string>
+  <string name="error_notifications">Error en anant cercar las notificacions.</string>
+  <string name="no_notifications">Cap de notificacion trobada.</string>
+  <string name="about_translate">&lt;u&gt;Revirar&lt;/u&gt;</string>
+  <string name="about_translate_message">Seleccionatz la lenga dins la quala volriatz sometre de traduccions</string>
+  <string name="retry">Tornar ensajar</string>
 </resources>

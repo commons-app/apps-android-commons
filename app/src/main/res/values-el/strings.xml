@@ -1,4 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- Authors:
+* Astralnet
+* Evropi
+* Geraki
+* Glavkos
+* KATRINE1992
+* ManosHacker
+* Nikosgranturismogt
+* Nikosguard
+* Tgkarounos
+-->
 <resources>
   <string name="preference_category_appearance">Εμφάνιση</string>
   <string name="preference_category_general">Γενικά</string>
@@ -152,8 +163,8 @@
   <string name="detail_description_empty">Καμία περιγραφή</string>
   <string name="detail_license_empty">Άγνωστη άδεια</string>
   <string name="menu_refresh">Ανανέωση</string>
-  <string name="read_storage_permission_rationale">Απαιτούμενη άδεια: Ανάγνωση εξωτερικής αποθήκευσης. Η εφαρμογή δεν μπορεί να λειτουργήσει χωρίς αυτή.</string>
-  <string name="write_storage_permission_rationale">Απαιτούμενη άδεια: Με εξωτερική αποθήκευση.Το πρόγραμμα δεν μπορεί να λειτουργήσει με αυτήν.</string>
+  <string name="read_storage_permission_rationale">Απαιτούμενη άδεια: Ανάγνωση εξωτερικής αποθήκευσης. Η εφαρμογή δεν μπορεί να έχει πρόσβαση στην συλλογή σας χωρίς αυτή.</string>
+  <string name="write_storage_permission_rationale">Απαιτούμενη άδεια: Με εξωτερική αποθήκευση. Το πρόγραμμα δεν μπορεί να έχει πρόσβαση στην κάμερα σας χωρίς αυτήν.</string>
   <string name="location_permission_rationale">Προαιρετική άδεια: Ανάκτηση τρέχουσας θέσης σας για προτάσεις κατηγοριών</string>
   <string name="ok">Εντάξει</string>
   <string name="title_activity_nearby">Κοντινοί Τόποι</string>
@@ -227,6 +238,8 @@
   <string name="no_web_browser">Δεν βρέθηκε φυλλομετρητής για το άνοιγμα της διευθύνσεως URL</string>
   <string name="null_url">Σφάλμα! Η διεύθυνση URL δεν βρέθηκε</string>
   <string name="nominate_deletion">Προτείνετε για διαγραφή</string>
+  <string name="nominated_for_deletion">Αυτή εικόνα έχει προταθεί για διαγραφή.</string>
+  <string name="nominated_see_more"/>
   <string name="view_browser">Προβολή στον περιηγητή</string>
   <string name="nearby_location_has_not_changed">Ο εντοπισμός δεν έχει αλλάξει.</string>
   <string name="nearby_location_not_available">Ο τόπος δεν είναι διαθέσιμος.</string>
@@ -242,7 +255,17 @@
   <string name="nearby_wikidata">Βικιδεδομένα</string>
   <string name="nearby_wikipedia">Βικιπαίδεια</string>
   <string name="nearby_commons">Κοινά</string>
-  <string name="about_rate_us"/>
-  <string name="about_faq">Συχνές ερωτήσεις</string>
+  <string name="about_rate_us">&lt;u&gt;Βαθμολογήστε μας&lt;/u&gt;</string>
+  <string name="about_faq">&lt;u&gt;Συχνές ερωτήσεις&lt;/u&gt;</string>
   <string name="welcome_skip_button">Παράβλεψη εισαγωγής</string>
+  <string name="no_internet">Το διαδίκτυο δεν είναι διαθέσιμο</string>
+  <string name="internet_established">Το διαδίκτυο είναι διαθέσιμο</string>
+  <string name="error_notifications">Σφάλμα κατά την συγκέντρωση ειδοποιήσεων</string>
+  <string name="no_notifications">Δεν βρέθηκαν ειδοποιήσεις</string>
+  <string name="about_translate">&lt;u&gt;Μεταφράστε&lt;/u&gt;</string>
+  <string name="about_translate_title">Γλώσσες</string>
+  <string name="about_translate_message">Επιλέξτε την γλώσσα που θα θέλατε να υποβάλετε μεταφράσεις για αυτή</string>
+  <string name="about_translate_proceed">Συνέχεια</string>
+  <string name="about_translate_cancel">Ακύρωση</string>
+  <string name="retry">Ξαναπροσπαθήστε</string>
 </resources>

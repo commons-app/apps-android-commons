@@ -1,4 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- Authors:
+* Fohanno
+* Gwenn-Ael
+-->
 <resources>
   <string name="crash_dialog_title">Commons zo aet er c\'hleuz</string>
   <string name="crash_dialog_text">Hopala ! Un dra bennak a-dreuz zo bet !</string>

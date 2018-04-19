@@ -284,10 +284,38 @@
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/small_gap" />
 
+                <LinearLayout
+                    android:id="@+id/nominatedDeletionBanner"
+                    android:background="@color/deleteRed"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="@dimen/standard_gap"
+                    android:visibility="gone">
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="@string/nominated_for_deletion"
+                        android:textColor="@color/primaryTextColor"
+                        android:textSize="@dimen/normal_text"
+                        android:textStyle="bold"/>
+                    <TextView
+                        android:id="@+id/seeMore"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="@string/nominated_see_more"
+                        android:paddingTop="@dimen/standard_gap"
+                        android:textColor="@color/primaryTextColor"
+                        android:textSize="@dimen/normal_text"
+                        android:textStyle="bold"/>
+                </LinearLayout>
+
                 <Button
                     android:id="@+id/nominateDeletion"
-                    style="?android:attr/buttonBarButtonStyle"
-                    android:textColor="@color/deleteTextColor"
+                    android:background="@drawable/bg_delete_button"
+                    android:textColor="@color/primaryTextColor"
                     android:layout_margin="@dimen/standard_gap"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- Authors:
+* Tuliouel
+-->
 <resources>
   <string name="crash_dialog_title">Commons travou</string>
   <string name="crash_dialog_text">Opa. Algo deu errado!</string>

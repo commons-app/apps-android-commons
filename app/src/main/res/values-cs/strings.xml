@@ -1,4 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- Authors:
+* Aktron
+* Chmee2
+* Dvorapa
+* Frettie
+* Ilimanaq29
+* Jkjk
+* Leanes
+* Matěj Suchánek
+* Mormegil
+* Patriccck
+* Spotter
+* Vojtěch Dostál
+* Walter Klosse
+-->
 <resources>
   <string name="preference_category_appearance">Vzhled</string>
   <string name="preference_category_general">Obecné</string>
@@ -59,6 +74,7 @@
   <string name="categories_search_text_hint">Hledání kategorií</string>
   <string name="menu_save_categories">Uložit</string>
   <string name="refresh_button">Obnovit</string>
+  <string name="display_list_button">Seznam</string>
   <string name="gps_disabled">GPS ve vašem zařízení není povoleno. Chtěli byste ho spustit?</string>
   <string name="enable_gps">Spustit GPS</string>
   <string name="contributions_subtitle_zero">Žádné nahrané soubory</string>
@@ -151,8 +167,8 @@
   <string name="detail_description_empty">Bez popisu</string>
   <string name="detail_license_empty">Neznámá licence</string>
   <string name="menu_refresh">Obnovit</string>
-  <string name="read_storage_permission_rationale">Požadováno oprávnění ke čtení externího úložiště. Aplikace bez toho nemůže pracovat.</string>
-  <string name="write_storage_permission_rationale">Požadováno oprávnění k zápisu do externího úložiště. Aplikace bez toho nemůže pracovat.</string>
+  <string name="read_storage_permission_rationale">Požadované oprávnění: Čtení externího úložiště. Aplikace bez toho nemůže pracovat.</string>
+  <string name="write_storage_permission_rationale">Požadované oprávnění: Zapisování do externího úložiště. Aplikace bez toho nemůže pracovat.</string>
   <string name="location_permission_rationale">Volitelně: Umožněte aplikaci, aby získávala aktuální polohu a nabízela na jejím základě kategorie</string>
   <string name="ok">OK</string>
   <string name="title_activity_nearby">Místa v okolí</string>
@@ -211,6 +227,7 @@
   <string name="no_description_found">nebyl nalezen žádný popisek</string>
   <string name="nearby_info_menu_commons_article">Stránka souboru na Commons</string>
   <string name="nearby_info_menu_wikidata_article">Položka Wikidat</string>
+  <string name="nearby_info_menu_wikipedia_article">Článek na Wikipedii</string>
   <string name="error_while_cache">Chyba při meziukládání obrázků</string>
   <string name="title_info">Unikátní a popisný název pro daný soubor, který bude sloužit jako název souboru. Můžete použít běžný psaný jazyk s mezerami; nezahrnujte koncovku souboru.</string>
   <string name="description_info">Popište prosím obrázek, jak jen to je možné: Kde byl pořízen? Co znázorňuje? Jaký je kontext obrázku? Popisujte prosím významné předměty nebo osoby na obrázku a nezapomeňte na informace, které není možné snadno odhadnout ze samotného obrázku, jako je například denní doba, pokud jde o krajinu. Pokud je na obrázku něco neobvyklého, popište, co to dělá neobvyklým.</string>
@@ -225,6 +242,8 @@
   <string name="no_web_browser">Nebyl nalezen žádný webový prohlížeč k otevření URL</string>
   <string name="null_url">Chyba! URL nenalezeno</string>
   <string name="nominate_deletion">Navrhnout na smazání</string>
+  <string name="nominated_for_deletion">Tento obrázek byl nominován na smazání.</string>
+  <string name="nominated_see_more">                              .</string>
   <string name="view_browser">Zobrazit v prohlížeči</string>
   <string name="nearby_location_has_not_changed">Vaše umístění se nezměnilo.</string>
   <string name="nearby_location_not_available">Umístění není dostupné.</string>
@@ -236,6 +255,21 @@
   <string name="notifications_thank_you_edit">Děkujeme za vaši editaci</string>
   <string name="notifications_mention">%1$s vás zmínil na %2$s.</string>
   <string name="toggle_view_button">Přepnout pohled</string>
-  <string name="about_faq">Často kladené dotazy</string>
+  <string name="nearby_directions">POKYNY</string>
+  <string name="nearby_wikidata">WIKIDATA</string>
+  <string name="nearby_wikipedia">WIKIPEDIE</string>
+  <string name="nearby_commons">COMMONS</string>
+  <string name="about_rate_us">&lt;u&gt;Ohodnoť nás&lt;/u&gt;</string>
+  <string name="about_faq">&lt;u&gt;Často kladené otázky&lt;/u&gt;</string>
   <string name="welcome_skip_button">Přeskočit úvod</string>
+  <string name="no_internet">Internet je nedostupný</string>
+  <string name="internet_established">Internet je dostupný</string>
+  <string name="error_notifications">Při načítání oznámení došlo k chybě</string>
+  <string name="no_notifications">Nebyly nalezeny žádné oznámení</string>
+  <string name="about_translate">&lt;u&gt;Přeložit&lt;/u&gt;</string>
+  <string name="about_translate_title">Jazyky</string>
+  <string name="about_translate_message">Vyberte jazyk, pro který chcete odeslat překlady</string>
+  <string name="about_translate_proceed">Pokračovat</string>
+  <string name="about_translate_cancel">Zrušit</string>
+  <string name="retry">Zkusit znovu</string>
 </resources>

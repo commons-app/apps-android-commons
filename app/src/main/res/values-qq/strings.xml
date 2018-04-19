@@ -1,4 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- Authors:
+* Amire80
+* Liuxinyu970226
+* Minh Nguyen
+* Robby
+* Shirayuki
+* Siebrand
+* Whym
+* Woytecr
+* Yuvipanda
+* Ата
+-->
 <resources>
   <string name="preference_category_general">{{Identical|General}}</string>
   <string name="app_name">The name of the application. A short form of \"Wikimedia Commons\". It is used in the app\'s launcher icon.\n{{Identical|Wikimedia Commons}}</string>
@@ -50,6 +62,7 @@
   <string name="categories_search_text_hint">This message is followed by a list of the categories.\n{{Identical|Search category}}</string>
   <string name="menu_save_categories">Hint text on menu item to save selected categories.\n{{Identical|Save}}</string>
   <string name="refresh_button">{{Identical|Refresh}}</string>
+  <string name="display_list_button">{{Identical|List}}</string>
   <string name="multiple_uploads_title">{{Identical|Upload}}</string>
   <string name="categories_not_found">Message shown to the user when no category matching what they searched for was found. %1$s represents the category name</string>
   <string name="categories_skip_explanation">Text explaining to users why and how to add categories to images. Users can also tap this message to skip adding categories.</string>
@@ -114,5 +127,13 @@
   <string name="navigation_item_upload">{{Identical|Upload}}</string>
   <string name="navigation_item_nearby">{{Identical|Nearby}}</string>
   <string name="navigation_item_info">{{Identical|Tutorial}}</string>
-  <string name="about_rate_us">\'\'This message is empty, and it\'s probably invalid. See bug report: https://github.com/commons-app/apps-android-commons/issues/1333 .\'\'</string>
+  <string name="navigation_item_notification">{{Identical|Notification}}</string>
+  <string name="nominated_see_more">\'\'This message is empty, and it\'s probably invalid. See bug report: https://github.com/commons-app/apps-android-commons/issues/1333 .\'\'</string>
+  <string name="nearby_wikidata">{{Identical|Wikidata}}</string>
+  <string name="nearby_wikipedia">{{Identical|Wikipedia}}</string>
+  <string name="about_rate_us">Link text with underline.</string>
+  <string name="about_translate">Link text with underline.\n{{Identical|Translate}}</string>
+  <string name="about_translate_title">{{Identical|Language}}</string>
+  <string name="about_translate_cancel">{{Identical|Cancel}}</string>
+  <string name="retry">{{Identical|Retry}}</string>
 </resources>

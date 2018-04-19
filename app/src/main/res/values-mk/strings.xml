@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- Authors:
+* Bjankuloski06
+-->
 <resources>
   <string name="preference_category_appearance">Изглед</string>
   <string name="preference_category_general">Општи</string>
@@ -152,8 +155,8 @@
   <string name="detail_description_empty">Нема опис</string>
   <string name="detail_license_empty">Непозната лиценца</string>
   <string name="menu_refresh">Превчитај</string>
-  <string name="read_storage_permission_rationale">Потребна дозвола: Треба да се прочита од надворешен склад. Прилогот не може да работи без ова.</string>
-  <string name="write_storage_permission_rationale">Потребна дозвола: Треба да се запише на надворешен склад. Прилогот не може да работи без ова.</string>
+  <string name="read_storage_permission_rationale">Потребна дозвола: Треба да се прочита од надворешен склад. Прилогот без ова нема пристап до вашата галерија.</string>
+  <string name="write_storage_permission_rationale">Потребна дозвола: Треба да се запише на надворешен склад. Прилогот без ова нема пристап до вашата камера.</string>
   <string name="location_permission_rationale">Дозвола по желба: Утврдување на тековната местоположба за предлагање категории</string>
   <string name="ok">ОК</string>
   <string name="title_activity_nearby">Околни места</string>
@@ -227,6 +230,7 @@
   <string name="no_web_browser">Не најдов прелистувач за да ја отворам URL</string>
   <string name="null_url">Грешка! Не ја пронајдов URL</string>
   <string name="nominate_deletion">Предложи за бришење</string>
+  <string name="nominated_for_deletion">Сликава е предложена за бришење.</string>
   <string name="view_browser">Погледај во прелистувач</string>
   <string name="nearby_location_has_not_changed">Местоположбата не е сменета.</string>
   <string name="nearby_location_not_available">Местоположбата е недостапна.</string>
@@ -242,6 +246,17 @@
   <string name="nearby_wikidata">ВИКИПОДАТОЦИ</string>
   <string name="nearby_wikipedia">ВИКИПЕДИЈА</string>
   <string name="nearby_commons">РИЗНИЦА</string>
-  <string name="about_faq">Често поставувани прашања</string>
+  <string name="about_rate_us">&lt;u&gt;Оценете нè&lt;/u&gt;</string>
+  <string name="about_faq">&lt;u&gt;ЧПП&lt;/u&gt;</string>
   <string name="welcome_skip_button">Прескокни упатство</string>
+  <string name="no_internet">Нема семрежен пристап</string>
+  <string name="internet_established">Има семрежен пристап</string>
+  <string name="error_notifications">Грешка при добивањето на известувањата</string>
+  <string name="no_notifications">Не пронајдов известувања</string>
+  <string name="about_translate">&lt;u&gt;Преведи&lt;/u&gt;</string>
+  <string name="about_translate_title">Јазици</string>
+  <string name="about_translate_message">Изберете за кој јазик сакате да поднесете преводи</string>
+  <string name="about_translate_proceed">Продолжи</string>
+  <string name="about_translate_cancel">Откажи</string>
+  <string name="retry">Пробај пак</string>
 </resources>

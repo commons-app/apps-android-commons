@@ -1,4 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- Authors:
+* Dipusparaga
+* Kandar
+* Uchup19
+-->
 <resources>
   <string name="app_name">Commons</string>
   <string name="menu_settings">Séting</string>
@@ -134,8 +139,8 @@
   <string name="detail_description_empty">Tanpa pedaran</string>
   <string name="detail_license_empty">Lisénsi teu dipikanyaho</string>
   <string name="menu_refresh">Segerkeun</string>
-  <string name="read_storage_permission_rationale">Merlukeun widi: Baca simpenan éksternal. Aplikasi teu bisa jalan tanpa ieu.</string>
-  <string name="write_storage_permission_rationale">Merlukeun widi: Baca simpenan éksternal. Aplikasi teu bisa jalan tanpa ieu.</string>
+  <string name="read_storage_permission_rationale" fuzzy="true">Merlukeun widi: Baca simpenan éksternal. Aplikasi teu bisa jalan tanpa ieu.</string>
+  <string name="write_storage_permission_rationale" fuzzy="true">Merlukeun widi: Baca simpenan éksternal. Aplikasi teu bisa jalan tanpa ieu.</string>
   <string name="location_permission_rationale">Idin pilihan: Paké lokasi kiwari pikeun usulan kategori</string>
   <string name="ok">Oké</string>
   <string name="title_activity_nearby">Tempat Sabudeureun</string>

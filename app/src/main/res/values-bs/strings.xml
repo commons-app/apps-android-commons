@@ -1,4 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- Authors:
+* CERminator
+* DzWiki
+* Srdjan m
+-->
 <resources>
   <string name="app_name">Commons</string>
   <string name="menu_settings">Postavke</string>
@@ -133,7 +138,7 @@
   <string name="detail_description_empty">Nema opisa</string>
   <string name="detail_license_empty">Nepoznata licenca</string>
   <string name="menu_refresh">Osvježi</string>
-  <string name="read_storage_permission_rationale">Potrebna dozvola: Čitanje vanjske memorije. Aplikacija ne može raditi bez ovog.</string>
+  <string name="read_storage_permission_rationale" fuzzy="true">Potrebna dozvola: Čitanje vanjske memorije. Aplikacija ne može raditi bez ovog.</string>
   <string name="location_permission_rationale">Neobavezna dozvola: Dobavljanje trenutne lokacije za predlaganje kategorija</string>
   <string name="ok">U redu</string>
   <string name="title_activity_nearby">Mjesta u blizini</string>

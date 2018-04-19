@@ -1,4 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- Authors:
+* Anamdas
+* Anandra
+* Bhatakati aatma
+* Nitin1485
+* Rajatkatiyar10
+* Rishi.Singh
+* Sachinkatiyar
+* Sfic
+* Shypoetess
+* Siddhartha Ghai
+* Smtchahal
+* Swapnil.Karambelkar
+* चक्रपाणी
+-->
 <resources>
   <string name="app_name">कॉमन्स</string>
   <string name="menu_settings">सेटिंग्स</string>
@@ -134,8 +149,8 @@
   <string name="detail_description_empty">कोई विवरण नहीं</string>
   <string name="detail_license_empty">अज्ञात लाइसेन्स</string>
   <string name="menu_refresh">ताजा करें</string>
-  <string name="read_storage_permission_rationale">अनिवार्य अनुमति: बाहरी स्मृति पढ़ें। एप इसके बिना कार्य नहीं करेगा।</string>
-  <string name="write_storage_permission_rationale">अनिवार्य अनुमति:बाहरी कंप्यूटर स्टोरेज लिखना|इसके बिना एप कार्य नहीं करेगा।</string>
+  <string name="read_storage_permission_rationale" fuzzy="true">अनिवार्य अनुमति: बाहरी स्मृति पढ़ें। एप इसके बिना कार्य नहीं करेगा।</string>
+  <string name="write_storage_permission_rationale" fuzzy="true">अनिवार्य अनुमति:बाहरी कंप्यूटर स्टोरेज लिखना|इसके बिना एप कार्य नहीं करेगा।</string>
   <string name="location_permission_rationale">वैकल्पिक अनुमति: श्रेणी सुझाव हेतु वर्तमान स्थान ज्ञात करें</string>
   <string name="ok">ठीक है</string>
   <string name="title_activity_nearby">आसपास के स्थान</string>
@@ -218,4 +233,12 @@
   <string name="nearby_wikidata">विकीडाटा</string>
   <string name="nearby_wikipedia">विकीपीडिया</string>
   <string name="nearby_commons">कॉमन्स</string>
+  <string name="no_internet">इंटरनेट उपलब्ध नहीं</string>
+  <string name="internet_established">इंटरनेट उपलब्ध</string>
+  <string name="error_notifications">सूचनाएं लाने में त्रुटि</string>
+  <string name="no_notifications">कोई सूचनाएँ नहीं मिलीं</string>
+  <string name="about_translate_title">भाषाएँ</string>
+  <string name="about_translate_proceed">आगे बढ़ें</string>
+  <string name="about_translate_cancel">रद्द करें</string>
+  <string name="retry">पुनः प्रयास करें</string>
 </resources>

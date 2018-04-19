@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- Authors:
+* Sveinn í Felli
+-->
 <resources>
   <string name="preference_category_appearance">Útlit</string>
   <string name="preference_category_general">Almennt</string>
@@ -59,6 +62,7 @@
   <string name="categories_search_text_hint">Leita í flokkum</string>
   <string name="menu_save_categories">Vista</string>
   <string name="refresh_button">Endurlesa</string>
+  <string name="display_list_button">Listi</string>
   <string name="gps_disabled">GPS er óvirkt í tækinu þínu. Viltu virkja það?</string>
   <string name="enable_gps">Virkja GPS</string>
   <string name="contributions_subtitle_zero">Engar innsendingar ennþá</string>
@@ -151,8 +155,8 @@
   <string name="detail_description_empty">Engin lýsing</string>
   <string name="detail_license_empty">Óþekkt notkunarleyfi</string>
   <string name="menu_refresh">Endurlesa</string>
-  <string name="read_storage_permission_rationale">Nauðsynlegar heimildir: Lesa ytri gagnageymslu. Forritið virkar ekki án þess.</string>
-  <string name="write_storage_permission_rationale">Nauðsynlegar heimildir: Skrifa í ytri gagnageymslu. Forritið virkar ekki án þess.</string>
+  <string name="read_storage_permission_rationale">Nauðsynlegar heimildir: Lesa ytri gagnageymslu. Forritið fær ekki aðgang að myndasafni ekki án þessa.</string>
+  <string name="write_storage_permission_rationale">Nauðsynlegar heimildir: Skrifa í ytri gagnageymslu. Forritið nær ekki sambandi við myndavél ekki án þessa.</string>
   <string name="location_permission_rationale">Nauðsynlegar heimildir: Lesa núverandi staðsetningu til að geta stungið upp á flokkum</string>
   <string name="ok">Í lagi</string>
   <string name="title_activity_nearby">Staðir í nágrenninu</string>
@@ -211,6 +215,7 @@
   <string name="no_description_found">engin lýsing fannst</string>
   <string name="nearby_info_menu_commons_article">Síða Commons-skrár</string>
   <string name="nearby_info_menu_wikidata_article">Wikidata-atriði</string>
+  <string name="nearby_info_menu_wikipedia_article">Wikipedia-grein</string>
   <string name="error_while_cache">Villa kom upp í skyndiminni mynda</string>
   <string name="title_info">Einstakur og lýsandi titill, sem mun verða skráarheiti. Þú mátt nota einfaldan texta með bilum. Ekki hafa með neina skráarendingu</string>
   <string name="description_info">Lýstu gögnunum eins vel og auðið er: Hvar er myndin tekin? Hvað sýnir hún? Hvert er samhengið? Lýstu fólki og fyrirbærum. Gefðu upp þær upplýsingar sem ekki er auðvelt að giska á, til dæmis á hvaða tíma dags myndin er tekin ef hún sýnir landslag. Ef gögnin sýna eitthvað óvenjulegt, útskýrðu þá hvað það er sem sé sérstakt.</string>
@@ -224,6 +229,9 @@
   <string name="send_log_file_description">Senda atvikaskrá til forritaranna með tölvupósti</string>
   <string name="no_web_browser">Gat ekki ræst vefvafra til að opna slóð</string>
   <string name="null_url">Villa: Slóð fannst ekki</string>
+  <string name="nominate_deletion">Tilnefna til eyðingar</string>
+  <string name="nominated_for_deletion">Þessi mynd hefur verið valin til eyðingar.</string>
+  <string name="view_browser">Skoða í vafra</string>
   <string name="nearby_location_has_not_changed">Staðsetning hefur ekki breyst.</string>
   <string name="nearby_location_not_available">Staðsetning ekki tiltæk.</string>
   <string name="location_permission_rationale_nearby">Heimild þarf til að birta lista yfir staði í nágrenninu</string>
@@ -234,6 +242,21 @@
   <string name="notifications_thank_you_edit">Takk fyrir að hafa gert breytingar</string>
   <string name="notifications_mention">%1$s minntist á þig á %2$s.</string>
   <string name="toggle_view_button">Víxla sýn</string>
-  <string name="about_faq">Algengar spurningar</string>
+  <string name="nearby_directions">STEFNUR</string>
+  <string name="nearby_wikidata">WIKIDATA</string>
+  <string name="nearby_wikipedia">WIKIPEDIA</string>
+  <string name="nearby_commons">COMMONS</string>
+  <string name="about_rate_us">&lt;u&gt;Gefðu okkur einkunn&lt;/u&gt;</string>
+  <string name="about_faq">&lt;u&gt;Algengar spurningar&lt;/u&gt;</string>
   <string name="welcome_skip_button">Sleppa kennslu</string>
+  <string name="no_internet">Nettenging ekki tiltæk</string>
+  <string name="internet_established">Nettenging í boði</string>
+  <string name="error_notifications">Villa við að sækja tilkynningar</string>
+  <string name="no_notifications">Engar tilkynningar fundust</string>
+  <string name="about_translate">&lt;u&gt;Þýða&lt;/u&gt;</string>
+  <string name="about_translate_title">Tungumál</string>
+  <string name="about_translate_message">Veldu tungumálið sem þú vill senda inn þýðingar fyrir</string>
+  <string name="about_translate_proceed">Halda áfram</string>
+  <string name="about_translate_cancel">Hætta við</string>
+  <string name="retry">Reyna aftur</string>
 </resources>

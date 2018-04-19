@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- Authors:
+* NoiX180
+-->
 <resources>
   <string name="app_name">Commons</string>
   <string name="menu_settings">Setèlan</string>
@@ -119,7 +122,7 @@
   <string name="detail_description_empty">Tanpa katerangan</string>
   <string name="detail_license_empty">Lisènsi ora kaweruhan</string>
   <string name="menu_refresh">Anyarana</string>
-  <string name="read_storage_permission_rationale">Butuh palilah: Maca panyimpenan njaba. Aplikasi mokal mlaku yèn tanpa iki.</string>
+  <string name="read_storage_permission_rationale" fuzzy="true">Butuh palilah: Maca panyimpenan njaba. Aplikasi mokal mlaku yèn tanpa iki.</string>
   <string name="location_permission_rationale">Palilah manasuka: Njupuk pernah saiki kanggo saran ing kategori</string>
   <string name="ok">Oké</string>
   <string name="title_activity_nearby">Papan Cedhak Kéné</string>

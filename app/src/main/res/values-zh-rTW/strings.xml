@@ -1,4 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- Authors:
+* Justincheng12345
+* Kly
+* LNDDYL
+* Liuxinyu970226
+* Simon Shek
+* StephDC
+* Wwycheuk
+* 和平奮鬥救地球
+* 烈羽
+-->
 <resources>
   <string name="preference_category_appearance">外觀</string>
   <string name="preference_category_general">一般</string>
@@ -152,8 +163,8 @@
   <string name="detail_description_empty">無說明</string>
   <string name="detail_license_empty">不明授權</string>
   <string name="menu_refresh">重新整理</string>
-  <string name="read_storage_permission_rationale">必要權限：讀取外部存儲裝置。應用程式必須此功能，才能進行正確運作。</string>
-  <string name="write_storage_permission_rationale">必要權限：寫入外部存儲裝置。應用程式必須此功能，才能進行正確運作。</string>
+  <string name="read_storage_permission_rationale">必要權限：讀取外部存儲裝置。否則應用程式無法存取您的圖庫。</string>
+  <string name="write_storage_permission_rationale">必要權限：寫入外部存儲裝置。否則應用程式無法取用您的相機。</string>
   <string name="location_permission_rationale">可有可無的權限：獲取目前的地理位置，以用於分類建議</string>
   <string name="ok">好</string>
   <string name="title_activity_nearby">附近地點</string>
@@ -226,7 +237,8 @@
   <string name="send_log_file_description">經由電子郵件寄送日誌檔案給開發人員</string>
   <string name="no_web_browser">找不到可以打開 URL 的網頁瀏覽器</string>
   <string name="null_url">錯誤！查無 URL</string>
-  <string name="nominate_deletion">刪除指定</string>
+  <string name="nominate_deletion">提名刪除</string>
+  <string name="nominated_for_deletion">此圖片已被提名刪除。</string>
   <string name="view_browser">於瀏覽器檢視</string>
   <string name="nearby_location_has_not_changed">位置無法更改。</string>
   <string name="nearby_location_not_available">位置無效。</string>
@@ -242,6 +254,17 @@
   <string name="nearby_wikidata">維基數據</string>
   <string name="nearby_wikipedia">維基百科</string>
   <string name="nearby_commons">維基共享資源</string>
-  <string name="about_faq">常見問題</string>
+  <string name="about_rate_us">&lt;u&gt;為我們評分&lt;/u&gt;</string>
+  <string name="about_faq">&lt;u&gt;常見問題&lt;/u&gt;</string>
   <string name="welcome_skip_button">跳過敎程</string>
+  <string name="no_internet">網路不可用</string>
+  <string name="internet_established">網路可用</string>
+  <string name="error_notifications">索取通知時錯誤</string>
+  <string name="no_notifications">查無通知</string>
+  <string name="about_translate">&lt;u&gt;翻譯&lt;/u&gt;</string>
+  <string name="about_translate_title">語言</string>
+  <string name="about_translate_message">選擇您想要提交翻譯的語言</string>
+  <string name="about_translate_proceed">已進行</string>
+  <string name="about_translate_cancel">取消</string>
+  <string name="retry">重試</string>
 </resources>

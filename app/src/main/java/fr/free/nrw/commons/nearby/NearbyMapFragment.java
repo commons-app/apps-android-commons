@@ -53,8 +53,10 @@ import javax.inject.Named;
 
 import dagger.android.support.DaggerFragment;
 import fr.free.nrw.commons.R;
+import fr.free.nrw.commons.Utils;
 import fr.free.nrw.commons.contributions.ContributionController;
 import fr.free.nrw.commons.utils.UriDeserializer;
+import fr.free.nrw.commons.utils.ViewUtil;
 import timber.log.Timber;
 
 import static android.app.Activity.RESULT_OK;
@@ -97,6 +99,7 @@ public class NearbyMapFragment extends DaggerFragment {
     private Animation fab_open;
     private Animation rotate_forward;
     private ContributionController controller;
+    private DirectUpload directUpload;
 
     private Place place;
     private Marker selected;
@@ -105,7 +108,10 @@ public class NearbyMapFragment extends DaggerFragment {
     private PolygonOptions currentLocationPolygonOptions;
 
     private boolean isBottomListSheetExpanded;
-    private final double CAMERA_TARGET_SHIFT_FACTOR = 0.06;
+    private final double CAMERA_TARGET_SHIFT_FACTOR_PORTRAIT = 0.06;
+    private final double CAMERA_TARGET_SHIFT_FACTOR_LANDSCAPE = 0.04;
+
+    private Bundle bundleForUpdtes;// Carry information from activity about changed nearby places and current location
 
     @Inject
     @Named("prefs")
@@ -120,6 +126,10 @@ public class NearbyMapFragment extends DaggerFragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        controller = new ContributionController(this);
+        directUpload = new DirectUpload(this, controller);
+
         Bundle bundle = this.getArguments();
         Gson gson = new GsonBuilder()
                 .registerTypeAdapter(Uri.class, new UriDeserializer())
@@ -184,14 +194,12 @@ public class NearbyMapFragment extends DaggerFragment {
     }
 
     public void updateMapSlightly() {
-        // Get arguments from bundle for new location
-        Bundle bundle = this.getArguments();
         if (mapboxMap != null) {
             Gson gson = new GsonBuilder()
                     .registerTypeAdapter(Uri.class, new UriDeserializer())
                     .create();
-            if (bundle != null) {
-                String gsonLatLng = bundle.getString("CurLatLng");
+            if (bundleForUpdtes != null) {
+                String gsonLatLng = bundleForUpdtes.getString("CurLatLng");
                 Type curLatLngType = new TypeToken<fr.free.nrw.commons.location.LatLng>() {}.getType();
                 curLatLng = gson.fromJson(gsonLatLng, curLatLngType);
             }
@@ -201,17 +209,15 @@ public class NearbyMapFragment extends DaggerFragment {
     }
 
     public void updateMapSignificantly() {
-
-        Bundle bundle = this.getArguments();
         if (mapboxMap != null) {
-            if (bundle != null) {
+            if (bundleForUpdtes != null) {
                 Gson gson = new GsonBuilder()
                         .registerTypeAdapter(Uri.class, new UriDeserializer())
                         .create();
 
-                String gsonPlaceList = bundle.getString("PlaceList");
-                String gsonLatLng = bundle.getString("CurLatLng");
-                String gsonBoundaryCoordinates = bundle.getString("BoundaryCoord");
+                String gsonPlaceList = bundleForUpdtes.getString("PlaceList");
+                String gsonLatLng = bundleForUpdtes.getString("CurLatLng");
+                String gsonBoundaryCoordinates = bundleForUpdtes.getString("BoundaryCoord");
                 Type listType = new TypeToken<List<Place>>() {}.getType();
                 List<Place> placeList = gson.fromJson(gsonPlaceList, listType);
                 Type curLatLngType = new TypeToken<fr.free.nrw.commons.location.LatLng>() {}.getType();
@@ -253,13 +259,28 @@ public class NearbyMapFragment extends DaggerFragment {
             }
 
                 // Make camera to follow user on location change
-                CameraPosition position = new CameraPosition.Builder()
-                        .target(isBottomListSheetExpanded ?
-                                new LatLng(curMapBoxLatLng.getLatitude()- CAMERA_TARGET_SHIFT_FACTOR,
-                                        curMapBoxLatLng.getLongitude())
-                                : curMapBoxLatLng ) // Sets the new camera position
-                        .zoom(mapboxMap.getCameraPosition().zoom) // Same zoom level
-                        .build();
+                CameraPosition position ;
+                if(ViewUtil.isPortrait(getActivity())){
+                    position = new CameraPosition.Builder()
+                            .target(isBottomListSheetExpanded ?
+                                    new LatLng(curMapBoxLatLng.getLatitude()- CAMERA_TARGET_SHIFT_FACTOR_PORTRAIT,
+                                            curMapBoxLatLng.getLongitude())
+                                    : curMapBoxLatLng ) // Sets the new camera position
+                            .zoom(isBottomListSheetExpanded ?
+                                    11 // zoom level is fixed to 11 when bottom sheet is expanded
+                                    :mapboxMap.getCameraPosition().zoom) // Same zoom level
+                            .build();
+                }else {
+                    position = new CameraPosition.Builder()
+                            .target(isBottomListSheetExpanded ?
+                                    new LatLng(curMapBoxLatLng.getLatitude()- CAMERA_TARGET_SHIFT_FACTOR_LANDSCAPE,
+                                            curMapBoxLatLng.getLongitude())
+                                    : curMapBoxLatLng ) // Sets the new camera position
+                            .zoom(isBottomListSheetExpanded ?
+                                    11 // zoom level is fixed to 11 when bottom sheet is expanded
+                                    :mapboxMap.getCameraPosition().zoom) // Same zoom level
+                            .build();
+                }
 
                 mapboxMap.animateCamera(CameraUpdateFactory
                         .newCameraPosition(position), 1000);
@@ -273,12 +294,21 @@ public class NearbyMapFragment extends DaggerFragment {
         if (mapboxMap != null && curLatLng != null) {
             if (isBottomListSheetExpanded) {
                 // Make camera to follow user on location change
-                position = new CameraPosition.Builder()
-                        .target(new LatLng(curLatLng.getLatitude() - CAMERA_TARGET_SHIFT_FACTOR,
-                                curLatLng.getLongitude())) // Sets the new camera target above
-                        // current to make it visible when sheet is expanded
-                        .zoom(11) // Same zoom level
-                        .build();
+                if(ViewUtil.isPortrait(getActivity())) {
+                    position = new CameraPosition.Builder()
+                            .target(new LatLng(curLatLng.getLatitude() - CAMERA_TARGET_SHIFT_FACTOR_PORTRAIT,
+                                    curLatLng.getLongitude())) // Sets the new camera target above
+                            // current to make it visible when sheet is expanded
+                            .zoom(11) // Fixed zoom level
+                            .build();
+                } else {
+                    position = new CameraPosition.Builder()
+                            .target(new LatLng(curLatLng.getLatitude() - CAMERA_TARGET_SHIFT_FACTOR_LANDSCAPE,
+                                    curLatLng.getLongitude())) // Sets the new camera target above
+                            // current to make it visible when sheet is expanded
+                            .zoom(11) // Fixed zoom level
+                            .build();
+                }
 
             } else {
                 // Make camera to follow user on location change
@@ -344,10 +374,29 @@ public class NearbyMapFragment extends DaggerFragment {
         fabRecenter.setOnClickListener(view -> {
             if (curLatLng != null) {
                 mapView.getMapAsync(mapboxMap -> {
-                    CameraPosition position = new CameraPosition.Builder()
-                            .target(new LatLng(curLatLng.getLatitude(), curLatLng.getLongitude())) // Sets the new camera position
-                            .zoom(11) // Sets the zoom
-                            .build(); // Creates a CameraPosition from the builder
+                    CameraPosition position;
+
+                    if(ViewUtil.isPortrait(getActivity())){
+                        position = new CameraPosition.Builder()
+                                .target(isBottomListSheetExpanded ?
+                                        new LatLng(curLatLng.getLatitude()- CAMERA_TARGET_SHIFT_FACTOR_PORTRAIT,
+                                                curLatLng.getLongitude())
+                                        : new LatLng(curLatLng.getLatitude(), curLatLng.getLongitude(), 0)) // Sets the new camera position
+                                .zoom(isBottomListSheetExpanded ?
+                                        11 // zoom level is fixed to 11 when bottom sheet is expanded
+                                        :mapboxMap.getCameraPosition().zoom) // Same zoom level
+                                .build();
+                    }else {
+                        position = new CameraPosition.Builder()
+                                .target(isBottomListSheetExpanded ?
+                                        new LatLng(curLatLng.getLatitude()- CAMERA_TARGET_SHIFT_FACTOR_LANDSCAPE,
+                                                curLatLng.getLongitude())
+                                        : new LatLng(curLatLng.getLatitude(), curLatLng.getLongitude(), 0)) // Sets the new camera position
+                                .zoom(isBottomListSheetExpanded ?
+                                        11 // zoom level is fixed to 11 when bottom sheet is expanded
+                                        :mapboxMap.getCameraPosition().zoom) // Same zoom level
+                                .build();
+                    }
 
                     mapboxMap.animateCamera(CameraUpdateFactory
                             .newCameraPosition(position), 1000);
@@ -394,11 +443,9 @@ public class NearbyMapFragment extends DaggerFragment {
             }
         });
 
-        // Remove texts if it doesnt fit
-        if (wikipediaButtonText.getLineCount() > 1
-                || wikidataButtonText.getLineCount() > 1
-                || commonsButtonText.getLineCount() > 1
-                || directionsButtonText.getLineCount() > 1) {
+        // Remove button text if they exceed 1 line or if internal layout has not been built
+        // Only need to check for directions button because it is the longest
+        if (directionsButtonText.getLineCount() > 1 || directionsButtonText.getLineCount() == 0) {
             wikipediaButtonText.setVisibility(View.GONE);
             wikidataButtonText.setVisibility(View.GONE);
             commonsButtonText.setVisibility(View.GONE);
@@ -408,6 +455,8 @@ public class NearbyMapFragment extends DaggerFragment {
 
     private void setupMapView(Bundle savedInstanceState) {
         MapboxMapOptions options = new MapboxMapOptions()
+                .compassGravity(Gravity.BOTTOM | Gravity.LEFT)
+                .compassMargins(new int[]{12, 0, 0, 24})
                 .styleUrl(Style.OUTDOORS)
                 .logoEnabled(false)
                 .attributionEnabled(false)
@@ -536,7 +585,9 @@ public class NearbyMapFragment extends DaggerFragment {
                 transparentView.setAlpha(0);
                 closeFabs(isFabOpen);
                 hideFAB();
-                this.getView().requestFocus();
+                if (this.getView() != null) {
+                    this.getView().requestFocus();
+                }
                 break;
         }
     }
@@ -583,7 +634,7 @@ public class NearbyMapFragment extends DaggerFragment {
 
 
     /*
-    * Add amnchors back before making them visible again.
+    * Add anchors back before making them visible again.
     * */
     private void addAnchorToBigFABs(FloatingActionButton floatingActionButton, int anchorID) {
         CoordinatorLayout.LayoutParams params = new CoordinatorLayout.LayoutParams
@@ -594,7 +645,7 @@ public class NearbyMapFragment extends DaggerFragment {
     }
 
     /*
-    * Add amnchors back before making them visible again. Big and small fabs have different anchor
+    * Add anchors back before making them visible again. Big and small fabs have different anchor
     * gravities, therefore the are two methods.
     * */
     private void addAnchorToSmallFABs(FloatingActionButton floatingActionButton, int anchorID) {
@@ -615,7 +666,7 @@ public class NearbyMapFragment extends DaggerFragment {
 
         directionsButton.setOnClickListener(view -> {
             //Open map app at given position
-            Intent mapIntent = new Intent(Intent.ACTION_VIEW, place.location.getGmmIntentUri());
+            Intent mapIntent = new Intent(Intent.ACTION_VIEW, this.place.location.getGmmIntentUri());
             if (mapIntent.resolveActivity(getActivity().getPackageManager()) != null) {
                 startActivity(mapIntent);
             }
@@ -635,9 +686,6 @@ public class NearbyMapFragment extends DaggerFragment {
         fabCamera.setOnClickListener(view -> {
             if (fabCamera.isShown()) {
                 Timber.d("Camera button tapped. Image title: " + place.getName() + "Image desc: " + place.getLongDescription());
-                controller = new ContributionController(this);
-
-                DirectUpload directUpload = new DirectUpload(this, controller);
                 storeSharedPrefs();
                 directUpload.initiateCameraUpload();
             }
@@ -646,14 +694,8 @@ public class NearbyMapFragment extends DaggerFragment {
         fabGallery.setOnClickListener(view -> {
             if (fabGallery.isShown()) {
                 Timber.d("Gallery button tapped. Image title: " + place.getName() + "Image desc: " + place.getLongDescription());
-                controller = new ContributionController(this);
-
-                DirectUpload directUpload = new DirectUpload(this, controller);
                 storeSharedPrefs();
                 directUpload.initiateGalleryUpload();
-
-                //TODO: App crashes after image upload completes
-                //TODO: Handle onRequestPermissionsResult
             }
         });
     }
@@ -670,9 +712,10 @@ public class NearbyMapFragment extends DaggerFragment {
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         Timber.d("onRequestPermissionsResult: req code = " + " perm = " + permissions + " grant =" + grantResults);
 
+        // Do not use requestCode 1 as it will conflict with NearbyActivity's requestCodes
         switch (requestCode) {
-            // 1 = "Read external storage" allowed when gallery selected
-            case 1: {
+            // 4 = "Read external storage" allowed when gallery selected
+            case 4: {
                 if (grantResults.length > 0 && grantResults[0] == PERMISSION_GRANTED) {
                     Timber.d("Call controller.startGalleryPick()");
                     controller.startGalleryPick();
@@ -680,8 +723,8 @@ public class NearbyMapFragment extends DaggerFragment {
             }
             break;
 
-            // 3 = "Write external storage" allowed when camera selected
-            case 3: {
+            // 5 = "Write external storage" allowed when camera selected
+            case 5: {
                 if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     Timber.d("Call controller.startCameraCapture()");
                     controller.startCameraCapture();
@@ -705,8 +748,7 @@ public class NearbyMapFragment extends DaggerFragment {
     }
 
     private void openWebView(Uri link) {
-        Intent browserIntent = new Intent(Intent.ACTION_VIEW, link);
-        startActivity(browserIntent);
+        Utils.handleWebUrl(getContext(), link);
     }
 
     private void animateFAB(boolean isFabOpen) {
@@ -729,7 +771,7 @@ public class NearbyMapFragment extends DaggerFragment {
         }
     }
 
-        private void closeFabs ( boolean isFabOpen){
+    private void closeFabs ( boolean isFabOpen){
         if (isFabOpen) {
             fabPlus.startAnimation(rotate_backward);
             fabCamera.startAnimation(fab_close);
@@ -739,6 +781,11 @@ public class NearbyMapFragment extends DaggerFragment {
             this.isFabOpen = !isFabOpen;
         }
     }
+
+    public void setBundleForUpdtes(Bundle bundleForUpdtes) {
+        this.bundleForUpdtes = bundleForUpdtes;
+    }
+
 
     @Override
     public void onStart() {
@@ -781,6 +828,9 @@ public class NearbyMapFragment extends DaggerFragment {
         if (mapView != null) {
             mapView.onDestroy();
         }
+        selected = null;
+        currentLocationMarker = null;
+
         super.onDestroyView();
     }
 

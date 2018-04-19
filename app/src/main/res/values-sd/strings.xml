@@ -1,4 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- Authors:
+* Indus Asia
+* Mehtab ahmed
+-->
 <resources>
   <string name="app_name">العام</string>
   <string name="menu_settings">ترتيبون</string>
@@ -128,7 +132,7 @@
   <string name="detail_description_empty">ڪا تشريح ناھي</string>
   <string name="detail_license_empty">اڻڄاتل لائسنس</string>
   <string name="menu_refresh">تازو ڪريو</string>
-  <string name="read_storage_permission_rationale">گھربل اجازت: خارجي اسٽوريج پڙھڻ. ايپ ھن کانسواءِ فنڪشن نٿي ڪري سگھي.</string>
+  <string name="read_storage_permission_rationale" fuzzy="true">گھربل اجازت: خارجي اسٽوريج پڙھڻ. ايپ ھن کانسواءِ فنڪشن نٿي ڪري سگھي.</string>
   <string name="location_permission_rationale">چونڊ اجازت: زمرن جي تجويزن لاءِ ھاڻوڪي مڪانيت وٺو</string>
   <string name="ok">ٺيڪ</string>
   <string name="title_activity_nearby">ويجھڙائيءَ ۾ جڳھون</string>

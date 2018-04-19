@@ -1,4 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- Authors:
+* Danmichaelo
+* Imre Eilertsen
+* JohSan65
+* Jon Harald Søby
+* Laaknor
+* SuperPotato
+-->
 <resources>
   <string name="preference_category_appearance">Utseende</string>
   <string name="preference_category_feedback">Tilbakemelding</string>
@@ -143,8 +151,8 @@
   <string name="detail_description_empty">Ingen beskrivelse</string>
   <string name="detail_license_empty">Ukjent lisens</string>
   <string name="menu_refresh">Gjenoppfrisk</string>
-  <string name="read_storage_permission_rationale">Nødvendig tillatelse: Lese ekstern lagring. Appen virker ikke uten dette.</string>
-  <string name="write_storage_permission_rationale">Påkrevd tillatelse: Skriv til ekstern lagring. Appen fungerer ikke uten dette.</string>
+  <string name="read_storage_permission_rationale" fuzzy="true">Nødvendig tillatelse: Lese ekstern lagring. Appen virker ikke uten dette.</string>
+  <string name="write_storage_permission_rationale" fuzzy="true">Påkrevd tillatelse: Skriv til ekstern lagring. Appen fungerer ikke uten dette.</string>
   <string name="location_permission_rationale">Valgfri tillatelse: Hent nåværende posisjon for kategoriforslag</string>
   <string name="ok">OK</string>
   <string name="title_activity_nearby">Plasser i nærheten</string>
@@ -225,5 +233,8 @@
   <string name="notifications_thank_you_edit">Takk for at du har gjort en redigering</string>
   <string name="notifications_mention">%1$s nevnte deg på %2$s.</string>
   <string name="toggle_view_button">Skift visning</string>
-  <string name="about_faq">Ofte stilte spørsmål</string>
+  <string name="about_faq" fuzzy="true">Ofte stilte spørsmål</string>
+  <string name="no_internet">Internett er utilgjengelig</string>
+  <string name="about_translate">&lt;u&gt;Oversett&lt;/u&gt;</string>
+  <string name="retry">Prøv igjen</string>
 </resources>

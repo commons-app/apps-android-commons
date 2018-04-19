@@ -1,4 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- Authors:
+* Ale.salmo
+* Beta16
+* Davio
+* Nemo bis
+* S4b1nuz E.656
+* Una giornata uggiosa '94
+* Wim b
+-->
 <resources>
   <string name="preference_category_appearance">Aspetto</string>
   <string name="preference_category_general">Generale</string>
@@ -56,6 +65,7 @@
   <string name="categories_search_text_hint">Cerca categorie</string>
   <string name="menu_save_categories">Salva</string>
   <string name="refresh_button">Aggiorna</string>
+  <string name="display_list_button">Elenco</string>
   <string name="gps_disabled">Il GPS è disabilitato nel dispositivo. Vuoi attivarlo?</string>
   <string name="enable_gps">Attiva GPS</string>
   <string name="contributions_subtitle_zero">Non è stato ancora caricato niente</string>
@@ -186,9 +196,11 @@
   <string name="no_description_found">nessuna descrizione trovata</string>
   <string name="nearby_info_menu_commons_article">Pagina di Commons del file</string>
   <string name="nearby_info_menu_wikidata_article">Elemento Wikidata</string>
+  <string name="nearby_info_menu_wikipedia_article">Voce Wikipedia</string>
   <string name="give_permission">Dai autorizzazione</string>
   <string name="login_to_your_account">Accedi alla tua utenza</string>
   <string name="null_url">Errore! URL non trovato</string>
+  <string name="nominated_for_deletion">Questa immagine è stata proposta per la cancellazione.</string>
   <string name="nearby_location_has_not_changed">La posizione non è cambiata.</string>
   <string name="nearby_location_not_available">Posizione non disponibile.</string>
   <string name="get_directions">OTTIENI DIREZIONI</string>
@@ -197,5 +209,13 @@
   <string name="notifications_talk_page_message">%1$s ti ha lasciato un messaggio nella tua pagina di discussione</string>
   <string name="notifications_thank_you_edit">Grazie per aver fatto una modifica</string>
   <string name="notifications_mention">%1$s ti ha menzionato su %2$s.</string>
-  <string name="about_faq">Domande frequenti</string>
+  <string name="nearby_wikidata">WIKIDATA</string>
+  <string name="nearby_wikipedia">WIKIPEDIA</string>
+  <string name="nearby_commons">COMMONS</string>
+  <string name="about_faq">&lt;u&gt;Domande frequenti&lt;/u&gt;</string>
+  <string name="no_internet">Internet non disponibile</string>
+  <string name="internet_established">Internet disponibile</string>
+  <string name="about_translate_title">Lingue</string>
+  <string name="about_translate_cancel">Annulla</string>
+  <string name="retry">Riprova</string>
 </resources>

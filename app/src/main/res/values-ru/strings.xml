@@ -1,4 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- Authors:
+* Alexandr Efremov
+* Av6
+* Eleferen
+* Envlh
+* Facenapalm
+* Gazimagomedov
+* Happy13241
+* Iluvatar
+* Kaganer
+* MaxBioHazard
+* Movses
+* Nitch
+* Okras
+* Redredsonia
+* Rubin16
+* Wirbel78
+* ОйЛ
+-->
 <resources>
   <string name="preference_category_appearance">Внешний вид</string>
   <string name="preference_category_general">Общие</string>
@@ -60,6 +79,7 @@
   <string name="categories_search_text_hint">Выбор категорий</string>
   <string name="menu_save_categories">Сохранить</string>
   <string name="refresh_button">Обновить</string>
+  <string name="display_list_button">Список</string>
   <string name="gps_disabled">GPS отключён в вашем устройстве. Хотите включить его?</string>
   <string name="enable_gps">Включить GPS</string>
   <string name="contributions_subtitle_zero">Загрузок пока нет</string>
@@ -155,8 +175,8 @@
   <string name="detail_description_empty">Нет описания</string>
   <string name="detail_license_empty">Неизвестная лицензия</string>
   <string name="menu_refresh">Обновить</string>
-  <string name="read_storage_permission_rationale">Требуемые разрешения: чтение с внешнего хранилища. Приложение не сможет функционировать без этого.</string>
-  <string name="write_storage_permission_rationale">Требуемые разрешения: запись на внешнее хранилище. Приложение не сможет функционировать без этого.</string>
+  <string name="read_storage_permission_rationale">Требуемые разрешения: чтение с внешнего хранилища. Приложение не сможет получить доступ к вашей галерее без этого разрешения.</string>
+  <string name="write_storage_permission_rationale">Требуемые разрешения: запись на внешнее хранилище. Приложение не сможет получить доступ к камере без этого разрешения.</string>
   <string name="location_permission_rationale">Необязательное разрешение: получение текущего местоположения для предложения категорий</string>
   <string name="ok">OK</string>
   <string name="title_activity_nearby">Места поблизости</string>
@@ -215,6 +235,7 @@
   <string name="no_description_found">описание не найдено</string>
   <string name="nearby_info_menu_commons_article">Страница файла на Викискладе</string>
   <string name="nearby_info_menu_wikidata_article">Элемент Викиданных</string>
+  <string name="nearby_info_menu_wikipedia_article">Статья Википедии</string>
   <string name="error_while_cache">Ошибка при кэшировании картинок</string>
   <string name="title_info">Уникальное описание, которое будет сохранено как имя файла. Вы можете использовать естественный язык, разделяя слова пробелами. Пожалуйста, не указывайте расширение файла.</string>
   <string name="description_info">Пожалуйста, подробно опишите загружаемый файл: где он был снят? что на нём изображено? каков его контекст? Пожалуйста опишите изображённых персон или объекты. Добавьте информацию, о которой нельзя легко догадаться, например, время суток, когда снимался файл. Если снято что-то необычное, постарайтесь пояснить, что именно в этом необычного.</string>
@@ -229,6 +250,8 @@
   <string name="no_web_browser">Не найден браузер, чтобы открыть ссылку</string>
   <string name="null_url">Ошибка! Ссылка не найдена</string>
   <string name="nominate_deletion">Номинировать к удалению</string>
+  <string name="nominated_for_deletion">Этот файл был вынесен на удаление.</string>
+  <string name="nominated_see_more"/>
   <string name="view_browser">Просмотреть в браузере</string>
   <string name="nearby_location_has_not_changed">Местоположение не изменено.</string>
   <string name="nearby_location_not_available">Местоположение недоступно.</string>
@@ -240,7 +263,21 @@
   <string name="notifications_thank_you_edit">Спасибо за правку</string>
   <string name="notifications_mention">%1$s упомянул вас на %2$s.</string>
   <string name="toggle_view_button">Переключить режим просмотра</string>
-  <string name="about_rate_us">*</string>
-  <string name="about_faq">Часто задаваемые вопросы</string>
+  <string name="nearby_directions">НАПРАВЛЕНИЯ</string>
+  <string name="nearby_wikidata">ВИКИДАННЫЕ</string>
+  <string name="nearby_wikipedia">ВИКИПЕДИЯ</string>
+  <string name="nearby_commons">ВИКИСКЛАД</string>
+  <string name="about_rate_us">&lt;u&gt;Оцените нас&lt;/u&gt;</string>
+  <string name="about_faq">&lt;u&gt;Часто задаваемые вопросы&lt;/u&gt;</string>
   <string name="welcome_skip_button">Пропустить руководство</string>
+  <string name="no_internet">Интернет недоступен</string>
+  <string name="internet_established">Интернет доступен</string>
+  <string name="error_notifications">Ошибка при получении уведомления</string>
+  <string name="no_notifications">Уведомлений нет</string>
+  <string name="about_translate">&lt;u&gt;Перевести&lt;/u&gt;</string>
+  <string name="about_translate_title">Языки</string>
+  <string name="about_translate_message">Выберите язык, переводы на который вы хотели бы видеть</string>
+  <string name="about_translate_proceed">Выполняется</string>
+  <string name="about_translate_cancel">Отмена</string>
+  <string name="retry">Повторить</string>
 </resources>
