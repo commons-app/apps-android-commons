@@ -72,6 +72,7 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
     private NearbyListFragment nearbyListFragment;
     private static final String TAG_RETAINED_MAP_FRAGMENT = NearbyMapFragment.class.getSimpleName();
     private static final String TAG_RETAINED_LIST_FRAGMENT = NearbyListFragment.class.getSimpleName();
+    private View listButton; // Reference to list button to use in tutorial
 
     private final String NETWORK_INTENT_ACTION = "android.net.conn.CONNECTIVITY_CHANGE";
     private BroadcastReceiver broadcastReceiver;
@@ -124,6 +125,7 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.menu_nearby, menu);
+        listButton = menu.findItem(R.id.action_display_list).getActionView();
 
         return super.onCreateOptionsMenu(menu);
     }
@@ -402,6 +404,10 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
             updateMapFragment(false);
             updateListFragment();
         }
+
+        NearbyMaterialShowcaseSequence sequence = new NearbyMaterialShowcaseSequence(this, "SEQUENCE_ID");
+        sequence.addSequenceItem(listButton, "testing1", "testing2");
+        sequence.start();
     }
 
     private void lockNearbyView(boolean lock) {
