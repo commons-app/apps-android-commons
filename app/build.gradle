@@ -24,6 +24,8 @@ dependencies {
         transitive=true
     }
 
+    implementation "com.github.deano2390:MaterialShowcaseView:1.2.0"
+
     implementation "com.android.support:support-v4:$SUPPORT_LIB_VERSION"
     implementation "com.android.support:appcompat-v7:$SUPPORT_LIB_VERSION"
     implementation "com.android.support:design:$SUPPORT_LIB_VERSION"
