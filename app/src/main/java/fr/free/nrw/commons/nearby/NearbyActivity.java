@@ -75,6 +75,7 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
 
     private final String NETWORK_INTENT_ACTION = "android.net.conn.CONNECTIVITY_CHANGE";
     private BroadcastReceiver broadcastReceiver;
+    private LatLng lastKnownLocation;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -158,7 +159,11 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
         switch (requestCode) {
             case LOCATION_REQUEST: {
                 if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    refreshView(LocationServiceManager.LocationChangeType.LOCATION_SIGNIFICANTLY_CHANGED);
+                    Timber.d("Location permission granted, refreshing view");
+                    //Still need to check if GPS is enabled
+                    checkGps();
+                    lastKnownLocation = locationManager.getLKL();
+                    refreshView(LocationServiceManager.LocationChangeType.PERMISSION_JUST_GRANTED);
                 } else {
                     //If permission not granted, go to page that says Nearby Places cannot be displayed
                     hideProgressBar();
@@ -347,21 +352,33 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
         }
         curLatLng = lastLocation;
 
+        if (locationChangeType.equals(LocationServiceManager.LocationChangeType.PERMISSION_JUST_GRANTED)) {
+            curLatLng = lastKnownLocation;
+        }
+
         if (curLatLng == null) {
             Timber.d("Skipping update of nearby places as location is unavailable");
             return;
         }
 
-        if (locationChangeType
-                .equals(LocationServiceManager.LocationChangeType.LOCATION_SIGNIFICANTLY_CHANGED)) {
+        if (locationChangeType.equals(LocationServiceManager.LocationChangeType.LOCATION_SIGNIFICANTLY_CHANGED)
+                || locationChangeType.equals(LocationServiceManager.LocationChangeType.PERMISSION_JUST_GRANTED)) {
             progressBar.setVisibility(View.VISIBLE);
+
+            //TODO: This hack inserts curLatLng before populatePlaces is called (see #1440). Ideally a proper fix should be found
+            Gson gson = new GsonBuilder()
+                    .registerTypeAdapter(Uri.class, new UriSerializer())
+                    .create();
+            String gsonCurLatLng = gson.toJson(curLatLang);
+            bundle.clear();
+            bundle.putString("CurLatLng", gsonCurLatLng);
+
             placesDisposable = Observable.fromCallable(() -> nearbyController
                     .loadAttractionsFromLocation(curLatLng))
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe(this::populatePlaces);
-        } else if (locationChangeType
-                .equals(LocationServiceManager.LocationChangeType.LOCATION_SLIGHTLY_CHANGED)) {
+        } else if (locationChangeType.equals(LocationServiceManager.LocationChangeType.LOCATION_SLIGHTLY_CHANGED)) {
             Gson gson = new GsonBuilder()
                     .registerTypeAdapter(Uri.class, new UriSerializer())
                     .create();
@@ -384,14 +401,14 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
         if (placeList.size() == 0) {
             ViewUtil.showSnackbar(findViewById(R.id.container), R.string.no_nearby);
         }
-
-        bundle.clear();
+        
         bundle.putString("PlaceList", gsonPlaceList);
-        bundle.putString("CurLatLng", gsonCurLatLng);
+        //bundle.putString("CurLatLng", gsonCurLatLng);
         bundle.putString("BoundaryCoord", gsonBoundaryCoordinates);
 
         // First time to init fragments
         if (nearbyMapFragment == null) {
+            Timber.d("Init map fragment for the first time");
             lockNearbyView(true);
             setMapFragment();
             setListFragment();
@@ -399,6 +416,7 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
             lockNearbyView(false);
         } else {
             // There are fragments, just update the map and list
+            Timber.d("Map fragment already exists, just update the map and list");
             updateMapFragment(false);
             updateListFragment();
         }

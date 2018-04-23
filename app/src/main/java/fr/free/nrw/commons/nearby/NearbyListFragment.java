@@ -82,8 +82,11 @@ public class NearbyListFragment extends DaggerFragment {
     }
 
     public void updateNearbyListSignificantly() {
-        adapterFactory.updateAdapterData(getPlaceListFromBundle(bundleForUpdates),
-                (RVRendererAdapter<Place>) recyclerView.getAdapter());
+        try {
+            adapterFactory.updateAdapterData(getPlaceListFromBundle(bundleForUpdates), (RVRendererAdapter<Place>) recyclerView.getAdapter());
+        } catch (NullPointerException e) {
+            Timber.e("Null pointer exception from calling recyclerView.getAdapter()");
+        }
     }
 
     private List<Place> getPlaceListFromBundle(Bundle bundle) {
