@@ -59,6 +59,7 @@
   </plurals>
   <string name="categories_activity_title">קאַטעגאריעס</string>
   <string name="title_activity_settings">איינשטעלונגען</string>
+  <string name="title_activity_featured_images">רעקאמענדירטע בילדער</string>
   <string name="menu_about">וועגן</string>
   <string name="title_activity_about">וועגן</string>
   <string name="menu_feedback">שיקן פֿידבעק (דורך בליצפאסט)</string>
@@ -95,6 +96,7 @@
   <string name="warning">ווארענונג</string>
   <string name="yes">יא</string>
   <string name="no">ניין</string>
+  <string name="media_detail_author">מחבר</string>
   <string name="media_detail_license">ליצענץ</string>
   <string name="media_detail_coordinates">קאארדינאטן</string>
   <string name="welcome_image_tulip">טולפאן</string>
@@ -108,4 +110,5 @@
   <string name="navigation_item_settings">איינשטעלונגען</string>
   <string name="navigation_item_feedback">פֿידבעק</string>
   <string name="navigation_item_logout">אַרויסלאָגירן</string>
+  <string name="navigation_item_featured_images">רעקאמנדירט</string>
 </resources>

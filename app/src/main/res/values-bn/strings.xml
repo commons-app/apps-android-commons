@@ -92,6 +92,7 @@
   <string name="categories_activity_title">বিষয়শ্রেণীসমূহ</string>
   <string name="title_activity_settings">সেটিং</string>
   <string name="title_activity_signup">নিবন্ধন করুন</string>
+  <string name="title_activity_featured_images">নির্বাচিত ছবি</string>
   <string name="menu_about">পরিচিতি</string>
   <string name="about_license">উইকিমিডিয়া কমন্স অ্যাপ হচ্ছে একটি উন্মুক্ত উৎস সম্বলিত অ্যাপ যা উইকিমিডিয়া সম্প্রদায়ের ব্যবহারকারী ও সেচ্ছাসেবকবৃন্দ কর্তৃক তৈরিকৃত এবং পরিচালিত। উইকিমিডিয়া ফাউন্ডেশন এই অ্যাপ তৈরি, উন্নয়ন বা রক্ষণাবেক্ষণে জড়িত নয়।</string>
   <string name="about_improve">কোন সমস্যা ও পরামর্শের জন্য &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;গিটহাব ইস্যু&lt;/a&gt; তৈরি করুন।</string>
@@ -176,6 +177,7 @@
   <string name="media_detail_media_title">মিডিয়ার শিরোনাম</string>
   <string name="media_detail_description">বিবরণ</string>
   <string name="media_detail_description_explanation">মিডিয়ার বিবরণ এখানে যাবে। এই মোটামুটি দীর্ঘ হতে পারে এবং একাধিক লাইনে লিখতে হতে পারে। আমরা আশা করি এটি দেখতে সুন্দর হবে।</string>
+  <string name="media_detail_author">স্রষ্টা</string>
   <string name="media_detail_uploaded_date">আপলোডের তারিখ</string>
   <string name="media_detail_license">লাইসেন্স</string>
   <string name="media_detail_coordinates">স্থানাঙ্কসমূহ</string>
@@ -218,6 +220,7 @@
   <string name="navigation_item_logout">প্রস্থান</string>
   <string name="navigation_item_info">ভূমিকা</string>
   <string name="navigation_item_notification">বিজ্ঞপ্তি</string>
+  <string name="navigation_item_featured_images">নির্বাচিত</string>
   <string name="nearby_needs_permissions">অবস্থানের অনুমতি ছাড়া কাছাকাছি জায়গাগুলি প্রদর্শন করা যাবে না</string>
   <string name="no_description_found">কোন বিবরণ পাওয়া যায়নি</string>
   <string name="nearby_info_menu_commons_article">কমন্সে ফাইলের পাতা</string>

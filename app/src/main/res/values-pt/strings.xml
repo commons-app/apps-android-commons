@@ -93,6 +93,7 @@
   <string name="categories_activity_title">Categorias</string>
   <string name="title_activity_settings">Configurações</string>
   <string name="title_activity_signup">Registar-se</string>
+  <string name="title_activity_featured_images">Imagens destacadas</string>
   <string name="menu_about">Sobre</string>
   <string name="about_license">A aplicação do Wikimedia Commons é uma aplicação de código aberto criada e mantida por bolseiros e voluntários da comunidade Wikimedia. A Wikimedia Foundation não está envolvida na criação, desenvolvimento ou manutenção da aplicação.</string>
   <string name="about_improve">Criar uma nova &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;incidência no GitHub&lt;/a&gt; para reportar erros e sugestões.</string>
@@ -178,6 +179,8 @@
   <string name="media_detail_media_title">Título do ficheiro multimédia</string>
   <string name="media_detail_description">Descrição</string>
   <string name="media_detail_description_explanation">A descrição do ficheiro multimédia é colocada aqui. Ela pode ser bastante longa e precisar de ser dividida em várias linhas. No entanto, esperamos que tenha bom aspeto.</string>
+  <string name="media_detail_author">Autor</string>
+  <string name="media_detail_author_explanation">O nome de utilizador do autor da imagem destacada fica aqui.</string>
   <string name="media_detail_uploaded_date">Data de carregamento</string>
   <string name="media_detail_license">Licença</string>
   <string name="media_detail_coordinates">Coordenadas</string>
@@ -220,6 +223,7 @@
   <string name="navigation_item_logout">Sair</string>
   <string name="navigation_item_info">Tutorial</string>
   <string name="navigation_item_notification">Notificações</string>
+  <string name="navigation_item_featured_images">Destacadas</string>
   <string name="nearby_needs_permissions">Os sítios aqui perto não podem ser apresentados sem permissões de localização</string>
   <string name="no_description_found">não foi encontrada nenhuma descrição</string>
   <string name="nearby_info_menu_commons_article">Página do ficheiro no Commons</string>

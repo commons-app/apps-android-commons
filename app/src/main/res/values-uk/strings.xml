@@ -99,6 +99,7 @@
   <string name="categories_activity_title">Категорії</string>
   <string name="title_activity_settings">Налаштування</string>
   <string name="title_activity_signup">Зареєструватися</string>
+  <string name="title_activity_featured_images">Вибрані зображення</string>
   <string name="menu_about">Про програму</string>
   <string name="about_license">Додаток «Вікісховище» — це програма з відкритим кодом, яку створили отримувачі грантів та волонтери спільноти Вікімедіа. Фонд Вікімедіа не брав участі у створенні, розробці чи обслуговуванні цього додатка.</string>
   <string name="about_improve">Ви можете створити новий &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;запит на GitHub&lt;/a&gt;, щоб повідомити про помилки, або висловити пропозиції.</string>
@@ -184,6 +185,8 @@
   <string name="media_detail_media_title">Назва медіафайлу</string>
   <string name="media_detail_description">Опис</string>
   <string name="media_detail_description_explanation">Сюди потрапляє опис медіафайлу. Він потенційно може бути досить довгим і розтягнутися на декілька рядків. Однак ми сподіваємось, що він виглядатиме гарно.</string>
+  <string name="media_detail_author">Автор</string>
+  <string name="media_detail_author_explanation">Тут вказується ім\'я автора вибраного зображеня</string>
   <string name="media_detail_uploaded_date">Дата завантаження</string>
   <string name="media_detail_license">Ліцензія</string>
   <string name="media_detail_coordinates">Координати</string>
@@ -226,6 +229,7 @@
   <string name="navigation_item_logout">Вийти</string>
   <string name="navigation_item_info">Посібник</string>
   <string name="navigation_item_notification">Сповіщення</string>
+  <string name="navigation_item_featured_images">Вибране</string>
   <string name="nearby_needs_permissions">Місця поблизу неможливо показати без дозволу на визначення місця розташування.</string>
   <string name="no_description_found">опис не знайдено</string>
   <string name="nearby_info_menu_commons_article">Сторінка файлу у Вікісховищі</string>

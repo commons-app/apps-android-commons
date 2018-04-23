@@ -160,6 +160,7 @@
   <string name="media_detail_title">Titolo</string>
   <string name="media_detail_media_title">Titolo del file multimediale</string>
   <string name="media_detail_description">Descrizione</string>
+  <string name="media_detail_author">Autore</string>
   <string name="media_detail_uploaded_date">Data di caricamento</string>
   <string name="media_detail_license">Licenza</string>
   <string name="media_detail_coordinates">Coordinate</string>

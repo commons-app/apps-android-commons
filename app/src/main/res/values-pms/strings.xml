@@ -84,6 +84,7 @@
   <string name="categories_activity_title">Categorìe</string>
   <string name="title_activity_settings">Paràmeter</string>
   <string name="title_activity_signup">Marchesse</string>
+  <string name="title_activity_featured_images">Plance an evidensa</string>
   <string name="menu_about">A propòsit</string>
   <string name="about_license">L\'aplicassion Wikimedia Commons a l\'é n\'aplicassion a sorgiss duverta creà e mantnùa da \'d përson-e pagà e da \'d volontari ëd la comunità Wikimedia. La Fondassion Wikimedia a l\'é nen amplicà ant la creassion, ël dësvlup, o la manutension dl\'aplicassion.</string>
   <string name="about_improve">Creé na neuva &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;signalassion GitHub&lt;/a&gt; për signalé dij givo e dij sugeriment.</string>
@@ -169,6 +170,8 @@
   <string name="media_detail_media_title">Tìtol dël mojen</string>
   <string name="media_detail_description">Descrission</string>
   <string name="media_detail_description_explanation">La descrission dël mojen a va ambelessì. Sòn a podrìa esse potensialman longh, e a dovrà esse spantià su vàire linie. I speroma comsëssìa ch\'a ven-a grassios.</string>
+  <string name="media_detail_author">Autor</string>
+  <string name="media_detail_author_explanation">Lë stranòm ëd l\'autor ëd na plancia an evidensa a va ambelessì.</string>
   <string name="media_detail_uploaded_date">Dàita ëd cariament</string>
   <string name="media_detail_license">Licensa</string>
   <string name="media_detail_coordinates">Coordinà</string>
@@ -211,6 +214,7 @@
   <string name="navigation_item_logout">Seurte dal sistema</string>
   <string name="navigation_item_info">Cors d\'antrodussion</string>
   <string name="navigation_item_notification">Notìfiche</string>
+  <string name="navigation_item_featured_images">Butà an evidensa</string>
   <string name="nearby_needs_permissions">Ij pòst ant j\'anviron a peulo nen esse smonù sensa ij përmess ëd localisassion</string>
   <string name="no_description_found">gnun-a descrission trovà</string>
   <string name="nearby_info_menu_commons_article">Pàgina dj\'archivi ëd Comun</string>
