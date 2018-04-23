@@ -1,4 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- Authors:
+* Christian List
+* Envlh
+* Joedalton
+* Jsmakaayb
+* Luckas
+* Overlaet
+-->
 <resources>
   <string name="preference_category_appearance">Udseende</string>
   <string name="preference_category_general">Generelt</string>
@@ -151,8 +159,8 @@
   <string name="detail_description_empty">Ingen beskrivelse</string>
   <string name="detail_license_empty">Ukendt licens</string>
   <string name="menu_refresh">Opdater</string>
-  <string name="read_storage_permission_rationale">Krævet tilladelse: Læs eksternt lager. Programmet kan ikke fungere uden denne tilladelse.</string>
-  <string name="write_storage_permission_rationale">Krævet tilladelse: Skriv til eksternt lager. Program kan ikke fungere uden denne funktion.</string>
+  <string name="read_storage_permission_rationale" fuzzy="true">Krævet tilladelse: Læs eksternt lager. Programmet kan ikke fungere uden denne tilladelse.</string>
+  <string name="write_storage_permission_rationale" fuzzy="true">Krævet tilladelse: Skriv til eksternt lager. Program kan ikke fungere uden denne funktion.</string>
   <string name="location_permission_rationale">Valgfri tilladelse: Hent nuværende position for kategoriforslag</string>
   <string name="ok">O.k.</string>
   <string name="title_activity_nearby">Steder i nærheden</string>
@@ -236,6 +244,6 @@
   <string name="notifications_thank_you_edit">Tak fordi du lavede en redigering</string>
   <string name="notifications_mention">%1$s nævnte dig på %2$s.</string>
   <string name="toggle_view_button">Skift visning</string>
-  <string name="about_faq">Ofte stillede spørgsmål</string>
+  <string name="about_faq" fuzzy="true">Ofte stillede spørgsmål</string>
   <string name="welcome_skip_button">Udelad øvelse</string>
 </resources>

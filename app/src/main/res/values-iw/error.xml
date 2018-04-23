@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- Authors:
+* Amire80
+-->
 <resources>
   <string name="crash_dialog_title">יישום ויקישיתוף קרס</string>
   <string name="crash_dialog_text">אוי, משהו השתבש!</string>

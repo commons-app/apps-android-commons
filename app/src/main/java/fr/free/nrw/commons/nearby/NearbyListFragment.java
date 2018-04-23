@@ -33,6 +33,8 @@ import static android.app.Activity.RESULT_OK;
 import static android.content.pm.PackageManager.PERMISSION_GRANTED;
 
 public class NearbyListFragment extends DaggerFragment {
+    private Bundle bundleForUpdates; // Carry information from activity about changed nearby places and current location
+
     private static final Type LIST_TYPE = new TypeToken<List<Place>>() {
     }.getType();
     private static final Type CUR_LAT_LNG_TYPE = new TypeToken<LatLng>() {
@@ -80,8 +82,7 @@ public class NearbyListFragment extends DaggerFragment {
     }
 
     public void updateNearbyListSignificantly() {
-        Bundle bundle = this.getArguments();
-        adapterFactory.updateAdapterData(getPlaceListFromBundle(bundle),
+        adapterFactory.updateAdapterData(getPlaceListFromBundle(bundleForUpdates),
                 (RVRendererAdapter<Place>) recyclerView.getAdapter());
     }
 
@@ -106,8 +107,8 @@ public class NearbyListFragment extends DaggerFragment {
         Timber.d("onRequestPermissionsResult: req code = " + " perm = " + permissions + " grant =" + grantResults);
 
         switch (requestCode) {
-            // 1 = "Read external storage" allowed when gallery selected
-            case 1: {
+            // 4 = "Read external storage" allowed when gallery selected
+            case 4: {
                 if (grantResults.length > 0 && grantResults[0] == PERMISSION_GRANTED) {
                     Timber.d("Call controller.startGalleryPick()");
                     controller.startGalleryPick();
@@ -115,8 +116,8 @@ public class NearbyListFragment extends DaggerFragment {
             }
             break;
 
-            // 3 = "Write external storage" allowed when camera selected
-            case 3: {
+            // 5 = "Write external storage" allowed when camera selected
+            case 5: {
                 if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     Timber.d("Call controller.startCameraCapture()");
                     controller.startCameraCapture();
@@ -138,6 +139,10 @@ public class NearbyListFragment extends DaggerFragment {
             Timber.e("OnActivityResult() parameters: Req code: %d Result code: %d Data: %s",
                     requestCode, resultCode, data);
         }
+    }
+
+    public void setBundleForUpdates(Bundle bundleForUpdates) {
+        this.bundleForUpdates = bundleForUpdates;
     }
 
 }

@@ -1,4 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- Authors:
+* Lizalizaufa
+* Sagan
+* Рустам Нурыев
+-->
 <resources>
   <string name="preference_category_appearance">Тышҡы күренеш</string>
   <string name="preference_category_general">Ғәҙәти</string>
@@ -149,8 +154,8 @@
   <string name="detail_description_empty">Һүрәтләүе юҡ</string>
   <string name="detail_license_empty">Билдәһеҙ лицензия</string>
   <string name="menu_refresh">Яңыртып алыу</string>
-  <string name="read_storage_permission_rationale">Кәрәкле рөхсәт: тышҡы һаҡлағыстан алып уҡыу. Ҡушымта шунһыҙ эшләмәйәсәк.</string>
-  <string name="write_storage_permission_rationale">Кәрәкле рөхсәт: тышҡы һаҡлағысҡа яҙыу. Ҡушымта шунһыҙ эшләмәйәсәк.</string>
+  <string name="read_storage_permission_rationale" fuzzy="true">Кәрәкле рөхсәт: тышҡы һаҡлағыстан алып уҡыу. Ҡушымта шунһыҙ эшләмәйәсәк.</string>
+  <string name="write_storage_permission_rationale" fuzzy="true">Кәрәкле рөхсәт: тышҡы һаҡлағысҡа яҙыу. Ҡушымта шунһыҙ эшләмәйәсәк.</string>
   <string name="location_permission_rationale">Мотлаҡ булмаған рөхсәт: категория тәҡдиме өсөн ошо урынды алыу</string>
   <string name="title_activity_nearby">Яҡындағы урындар</string>
   <string name="no_nearby">Яҡындағы урындар табылманы</string>

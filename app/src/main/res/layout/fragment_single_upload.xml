@@ -74,6 +74,8 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/standard_gap"
             android:gravity="center"
+            android:clickable="true"
+            android:textColorLink="@color/button_blue"
             android:text="@string/share_license_summary" />
 
         <fr.free.nrw.commons.ui.widget.HtmlTextView

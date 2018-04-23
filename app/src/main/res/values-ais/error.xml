@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- Authors:
+* Akamycoco
+-->
 <resources>
   <string name="crash_dialog_ok_toast">kukay</string>
 </resources>

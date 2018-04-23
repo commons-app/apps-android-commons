@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -15,6 +16,7 @@ import android.widget.RelativeLayout;
 
 import com.pedrogomez.renderers.RVRendererAdapter;
 
+import java.lang.ref.WeakReference;
 import java.util.Collections;
 import java.util.List;
 
@@ -25,6 +27,7 @@ import butterknife.ButterKnife;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.Utils;
 import fr.free.nrw.commons.theme.NavigationBaseActivity;
+import fr.free.nrw.commons.utils.NetworkUtils;
 import fr.free.nrw.commons.utils.ViewUtil;
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -62,8 +65,22 @@ public class NotificationActivity extends NavigationBaseActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         DividerItemDecoration itemDecor = new DividerItemDecoration(recyclerView.getContext(), DividerItemDecoration.VERTICAL);
         recyclerView.addItemDecoration(itemDecor);
-        addNotifications();
+        refresh();
     }
+
+    private void refresh() {
+        if (!NetworkUtils.isInternetConnectionEstablished(this)) {
+            progressBar.setVisibility(View.GONE);
+            Snackbar.make(relativeLayout , R.string.no_internet, Snackbar.LENGTH_INDEFINITE)
+                    .setAction(R.string.retry, view -> {
+                        refresh();
+                    }).show();
+        }else {
+            progressBar.setVisibility(View.VISIBLE);
+            addNotifications();
+        }
+    }
+
 
     @SuppressLint("CheckResult")
     private void addNotifications() {

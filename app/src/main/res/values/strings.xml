@@ -82,12 +82,13 @@
   <string name="categories_activity_title">Categories</string>
   <string name="title_activity_settings">Settings</string>
   <string name="title_activity_signup">Sign Up</string>
+  <string name="title_activity_featured_images">Featured Images</string>
   <string name="menu_about">About</string>
   <string name="about_license">The Wikimedia Commons app is an open-source app created and maintained by grantees and volunteers of the Wikimedia community. The Wikimedia Foundation is not involved in the creation, development, or maintenance of the app. </string>
   <string name="trademarked_name" translatable="false">Wikimedia Commons</string>
   <string name="about_improve">Create a new &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;GitHub issue&lt;/a&gt; for bug reports and suggestions.</string>
-  <string name="about_privacy_policy"><u>Privacy policy</u></string>
-  <string name="about_credits"><u>Credits</u></string>
+  <string name="about_privacy_policy"><![CDATA[<u>Privacy policy</u>]]></string>
+  <string name="about_credits"><![CDATA[<u>Credits</u>]]></string>
   <string name="title_activity_about">About</string>
   <string name="menu_feedback">Send Feedback (via Email)</string>
   <string name="no_email_client">No email client installed</string>
@@ -154,8 +155,8 @@
   <string name="detail_description_empty">No description</string>
   <string name="detail_license_empty">Unknown license</string>
   <string name="menu_refresh">Refresh</string>
-  <string name="read_storage_permission_rationale">Required permission: Read external storage. App cannot function without this.</string>
-  <string name="write_storage_permission_rationale">Required permission: Write external storage. App cannot function without this.</string>
+  <string name="read_storage_permission_rationale">Required permission: Read external storage. App cannot access your gallery without this.</string>
+  <string name="write_storage_permission_rationale">Required permission: Write external storage. App cannot access your camera without this.</string>
   <string name="location_permission_rationale">Optional permission: Get current location for category suggestions</string>
   <string name="ok">OK</string>
   <string name="title_activity_nearby">Nearby Places</string>
@@ -168,6 +169,8 @@
   <string name="media_detail_media_title">Title of the media</string>
   <string name="media_detail_description">Description</string>
   <string name="media_detail_description_explanation">Description of the media goes here. This can potentially be fairly long, and will need to wrap across multiple lines. We hope it looks nice though.</string>
+  <string name="media_detail_author">Author</string>
+  <string name="media_detail_author_explanation">Featured image author user name goes here.</string>
   <string name="media_detail_uploaded_date">Uploaded date</string>
   <string name="media_detail_license">License</string>
   <string name="media_detail_coordinates">Coordinates</string>
@@ -214,6 +217,7 @@
   <string name="navigation_item_logout">Logout</string>
   <string name="navigation_item_info">Tutorial</string>
   <string name="navigation_item_notification">Notifications</string>
+  <string name="navigation_item_featured_images">Featured</string>
   <string name="nearby_needs_permissions">Nearby places cannot be displayed without location permissions</string>
   <string name="no_description_found">no description found</string>
   <string name="nearby_info_menu_commons_article">Commons file page</string>
@@ -252,20 +256,17 @@
   <string name="nearby_wikidata">WIKIDATA</string>
   <string name="nearby_wikipedia">WIKIPEDIA</string>
   <string name="nearby_commons">COMMONS</string>
-
-  <string name="about_rate_us"><u>Rate us</u></string>
-  <string name="about_faq">FAQ</string>
+  <string name="about_rate_us"><![CDATA[<u>Rate us</u>]]></string>
+  <string name="about_faq"><![CDATA[<u>FAQ</u>]]></string>
   <string name="welcome_skip_button">Skip Tutorial</string>
-  
   <string name="no_internet">Internet unavailable</string>
   <string name="internet_established">Internet available</string>
   <string name="error_notifications">Error fetching notifications</string>
   <string name="no_notifications">No notifications found</string>
-
-  <string name="about_translate"><u>Translate</u></string>
+  <string name="about_translate"><![CDATA[<u>Translate</u>]]></string>
   <string name="about_translate_title">Languages</string>
   <string name="about_translate_message">Select the language that you would like to submit translations for</string>
   <string name="about_translate_proceed">Proceed</string>
   <string name="about_translate_cancel">Cancel</string>
-
+  <string name="retry">Retry</string>
 </resources>

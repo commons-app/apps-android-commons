@@ -1,11 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- Authors:
+* Arash.pt
+* Ebraminio
+* Mjbmr
+* Omidh
+* Ommmmid
+* Reza1615
+* Yoosef Pooranvary
+* جواد
+-->
 <resources>
+  <string name="preference_category_appearance">نمایش صفحه</string>
+  <string name="preference_category_general">عمومی</string>
+  <string name="preference_category_feedback">بازخورد</string>
+  <string name="preference_category_location">مکان</string>
   <string name="app_name">ویکی‌انبار</string>
+  <string name="bullet">•</string>
   <string name="menu_settings">تنظیمات</string>
   <string name="username">نام کاربری</string>
   <string name="password">گذرواژه</string>
   <string name="login_credential">به حساب کاربری ویکی‌انبار آزمایشی وارد شوید</string>
   <string name="login">ورود</string>
+  <string name="forgot_password">رمز خود را فراموش کرده‌اید؟</string>
   <string name="signup">ثبت نام</string>
   <string name="logging_in_title">واردشدن</string>
   <string name="logging_in_message">شکیبا باشید...</string>
@@ -37,6 +53,7 @@
   <string name="menu_share">به اشتراک‌گذاشتن</string>
   <string name="menu_open_in_browser">مشاهده در مرورگر</string>
   <string name="share_title_hint">عنوان</string>
+  <string name="add_title_toast">لطفاً نامی را برای این پرونده انتخاب کنید</string>
   <string name="share_description_hint">توضیحات</string>
   <string name="login_failed_network">قادر به ورود نیست - شکست شبکه‌ای</string>
   <string name="login_failed_username">ناتوانی در ورود - لطفاً نام کاربریتان را بررسی کنید</string>
@@ -52,6 +69,7 @@
   <string name="categories_search_text_hint">جستجوی رده‌ها</string>
   <string name="menu_save_categories">ذخیره</string>
   <string name="refresh_button">تازه کردن</string>
+  <string name="display_list_button">فهرست</string>
   <string name="gps_disabled">مکان‌یاب در دستگاه شما خاموش است. آیا دوست دارید فعال شود؟</string>
   <string name="enable_gps">فعال کردن مکان‌یاب</string>
   <string name="contributions_subtitle_zero">هنوز هیچ بارگذاری</string>
@@ -72,8 +90,8 @@
   <string name="menu_about">درباره</string>
   <string name="about_license">اپلیکیشن ویکی‌انبار بنیاد ویکی‌مدیا یک نرم‌افزار آزاد است که توسط کاربران داوطلب و پاداش‌بگیر ایجاد و نگهداری می‌شود. بنیاد ویکی‌مدیا در ایجاد، نگهداری و توسعهٔ آن دخالتی ندارد.</string>
   <string name="about_improve">ایجاد یک &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;درخواست در گیت‌هاب&lt;/a&gt; برای گزارش باگ و یا پیشنهاد یک خصوصیت جدید.</string>
-  <string name="about_privacy_policy" fuzzy="true">&lt;a href=\"https://github.com/commons-app/apps-android-commons/wiki/Privacy-policy\"&gt;سیاست حفظ حریم خصوصی&lt;/a&gt;</string>
-  <string name="about_credits" fuzzy="true">&lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/CREDITS\"&gt;مجوز&lt;/a&gt;</string>
+  <string name="about_privacy_policy">&lt;u&gt;سیاست حفظ حریم خصوصی&lt;/u&gt;</string>
+  <string name="about_credits">&lt;u&gt;مجوز&lt;/u&gt;</string>
   <string name="title_activity_about">درباره</string>
   <string name="menu_feedback">ارسال بازخورد (از طریق ایمیل)</string>
   <string name="no_email_client">نرم‌افزار ایمیل نصب نیست</string>
@@ -85,7 +103,7 @@
   <string name="share_license_summary">این نگاره تحت مجوز %1$s است</string>
   <string name="media_upload_policy">با بارگذاری این تصویر، تأیید می‌کنم که این اثر کار خودم است و از محتوای دارای حق تکثیر یا سلفی برای ایجاد آن استفاده نکرده‌ام و شرایط ذکر شده در By submitting this picture, I declare that this is my own work, that it does not contain copyrighted material or selfies, and otherwise adheres to &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines\"&gt;سیاست‌های ویکی‌انبار&lt;/a&gt; را رعایت می‌کند.</string>
   <string name="menu_download">دریافت</string>
-  <string name="preference_license" fuzzy="true">مجوز</string>
+  <string name="preference_license">مجوز پیش‌فرض</string>
   <string name="use_previous">از عنوان/توضیحات پیشین استفاده کنید</string>
   <string name="allow_gps">دریافت خودکار موقعیت کنونی</string>
   <string name="allow_gps_summary">درحال دریافت موقعیت برای پیشنهاد رده در صورتی که برچسب جغرافیایی وجود نداشته باشد.</string>
@@ -114,7 +132,7 @@
   <string name="tutorial_1_text">ویکی‌انبار اکثر پرونده‌هایی که در ویکی‌پدیا استفاده می‌شوند را در خود نگه می‌دارد.</string>
   <string name="tutorial_1_subtext">تصاویر شما به مردم در اقصی نقاط دنیا کمک می‌کند!</string>
   <string name="tutorial_2_text">لطفاً تصاویری که توسط خودتان گرفته شده‌اند یا ایجاد شده‌اند را بارگذاری کنید:</string>
-  <string name="tutorial_2_subtext" fuzzy="true">-اجسام طبیعی (گیاه، جانور، کوه)\n-اجسام کاربردی (دوچرخه، ایستگاه قطار)\n-افراد مشهور (شهردار، قهرمانان المپیک)</string>
+  <string name="tutorial_2_subtext">•اجسام طبیعی (گیاه، جانور، کوه)\n•اجسام کاربردی (دوچرخه، ایستگاه قطار)\n•افراد مشهور (شهردار، قهرمانان المپیک)</string>
   <string name="tutorial_3_text">لطفاً بارگذاری نکنید:</string>
   <string name="tutorial_3_subtext">-سلفی خودتان یا تصویر دوستانتان\n-تصاویری که از اینترنت دانلود کردید\n-نماگرفت از دیگر اپلیکیشن‌‌ها</string>
   <string name="tutorial_4_text">نمونه بارگذاری:</string>
@@ -131,8 +149,8 @@
   <string name="detail_description_empty">بدون توضیحات</string>
   <string name="detail_license_empty">مجوز ناشناخته</string>
   <string name="menu_refresh">تازه‌کردن</string>
-  <string name="read_storage_permission_rationale">اجازه‌های مورد نیاز: مطالعهٔ حافظهٔ خارجی. اپلیکیشن بدون آن نمی‌تواند کار کند.</string>
-  <string name="write_storage_permission_rationale">اجازه‌های مورد نیاز: نوشتن حافظهٔ خارجی. اپلیکیشن بدون آن نمی‌تواند کار کند.</string>
+  <string name="read_storage_permission_rationale" fuzzy="true">اجازه‌های مورد نیاز: مطالعهٔ حافظهٔ خارجی. اپلیکیشن بدون آن نمی‌تواند کار کند.</string>
+  <string name="write_storage_permission_rationale" fuzzy="true">اجازه‌های مورد نیاز: نوشتن حافظهٔ خارجی. اپلیکیشن بدون آن نمی‌تواند کار کند.</string>
   <string name="location_permission_rationale">اجازه‌های اختیاری: دریافت موقعیت برای پیشنهاد رده</string>
   <string name="ok">تأیید</string>
   <string name="title_activity_nearby">مکان‌‌های اطراف</string>
@@ -202,6 +220,8 @@
   <string name="login_to_your_account">ورود به حساب کاربریتان</string>
   <string name="send_log_file">ارسال فایل سیاهه</string>
   <string name="send_log_file_description">ارسال فایل سیاهه به‌وسیلهٔ ایمیل برای توسعه‌دهندگان</string>
+  <string name="nominated_see_more"> .</string>
+  <string name="view_browser">مشاهده در مرورگر</string>
   <string name="nearby_location_has_not_changed">مکان تغییر نکرده‌است.</string>
   <string name="nearby_location_not_available">مکان موجود نیست.</string>
   <string name="location_permission_rationale_nearby">برای نمایش مکان‌ّای اطراف نیاز به اجازه است.</string>
@@ -212,4 +232,18 @@
   <string name="notifications_thank_you_edit">برای ویرایش ممنون</string>
   <string name="notifications_mention">%1$s در %2$s به شما اشاره کرده‌است.</string>
   <string name="toggle_view_button">دکمه نمایش</string>
+  <string name="nearby_directions">جهت‌ها</string>
+  <string name="nearby_wikidata">ویکی‌داده</string>
+  <string name="nearby_wikipedia">ویکی‌پدیا</string>
+  <string name="nearby_commons">ویکی‌انبار</string>
+  <string name="about_rate_us">&lt;u&gt;رتبه ما&lt;/u&gt;</string>
+  <string name="about_faq">&lt;u&gt;سوال‌های متداول&lt;/u&gt;</string>
+  <string name="welcome_skip_button">رهاکردن آموزش</string>
+  <string name="no_internet">اینترنت در دسترس نیست</string>
+  <string name="internet_established">اینترنت در دسترس است</string>
+  <string name="about_translate">&lt;u&gt;ترجمه&lt;/u&gt;</string>
+  <string name="about_translate_title">زبان‌ها</string>
+  <string name="about_translate_proceed">ادامه</string>
+  <string name="about_translate_cancel">لغو</string>
+  <string name="retry">سعى دوباره</string>
 </resources>

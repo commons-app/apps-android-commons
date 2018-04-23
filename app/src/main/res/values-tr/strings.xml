@@ -1,10 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- Authors:
+* Chansey
+* Emperyan
+* Hedda
+* Incelemeelemani
+* McAang
+* Neslihan Turan
+* Sayginer
+* Trockya
+* VikipediBilgini
+-->
 <resources>
+  <string name="preference_category_appearance">Görünüm</string>
+  <string name="preference_category_general">Genel</string>
+  <string name="preference_category_feedback">Geri bildirim</string>
+  <string name="preference_category_location">Konum</string>
   <string name="app_name">Commons</string>
   <string name="menu_settings">Ayarlar</string>
   <string name="username">Kullanıcı adı</string>
   <string name="password">Parola</string>
+  <string name="login_credential">Commons Beta hesabına giriş yap</string>
   <string name="login">Oturum aç</string>
+  <string name="forgot_password">Parolamı Unuttum</string>
   <string name="signup">Kaydol</string>
   <string name="logging_in_title">Oturum açılıyor</string>
   <string name="logging_in_message">Lütfen bekleyin…</string>
@@ -36,6 +53,7 @@
   <string name="menu_share">Paylaş</string>
   <string name="menu_open_in_browser">Tarayıcıda görüntüle</string>
   <string name="share_title_hint">Başlık</string>
+  <string name="add_title_toast">Lütfen bu dosya için bir başlık ekleyin</string>
   <string name="share_description_hint">Açıklama</string>
   <string name="login_failed_network">Oturum açılamıyor - ağ hatası</string>
   <string name="login_failed_username">Oturum açılamıyor - lütfen kullanıcı adınızı kontrol edin</string>
@@ -51,19 +69,20 @@
   <string name="categories_search_text_hint">Kategorileri ara</string>
   <string name="menu_save_categories">Kaydet</string>
   <string name="refresh_button">Yenile</string>
+  <string name="display_list_button">Liste</string>
   <string name="gps_disabled">GPS, cihazınızda devre dışı bırakılmıştır. Etkinleştirmek ister misiniz?</string>
   <string name="enable_gps">GPS\'i etkinleştir</string>
   <string name="contributions_subtitle_zero">Henüz yüklenmedi</string>
-  <plurals name="contributions_subtitle" fuzzy="true">
+  <plurals name="contributions_subtitle">
     <item quantity="zero">\@string/contributions_subtitle_zero</item>
     <item quantity="one">%1$d yükleme</item>
     <item quantity="other">%1$d yükleme</item>
   </plurals>
-  <plurals name="starting_multiple_uploads" fuzzy="true">
+  <plurals name="starting_multiple_uploads">
     <item quantity="one">%1$d yüklenmeye başlanıyor</item>
     <item quantity="other">%1$d yüklenmeye başlanıyor</item>
   </plurals>
-  <plurals name="multiple_uploads_title" fuzzy="true">
+  <plurals name="multiple_uploads_title">
     <item quantity="one">%1$d yükleme</item>
     <item quantity="other">%1$d yükleme</item>
   </plurals>
@@ -74,9 +93,9 @@
   <string name="title_activity_signup">Kaydol</string>
   <string name="menu_about">Hakkında</string>
   <string name="about_license">Wikimedia Commons uygulaması, Wikimedia topluluğunun imtiyaz sahibi ve gönüllüleri tarafından oluşturulmuş ve sürdürülmüş açık kaynak kodlu bir uygulamadır. Vikipedi Vakfı, uygulamanın oluşturulması, geliştirilmesi veya bakımına dahil değildir.</string>
-  <string name="about_improve" fuzzy="true">GitHub üzerinde &lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;Kaynak&lt;/a&gt; ve &lt;a href=\"https://commons-app.github.io/\"&gt;website&lt;/a&gt;. Hata raporları ve önerileri için yeni bir &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;GitHub sorunu&lt;/a&gt; oluştur.</string>
-  <string name="about_privacy_policy" fuzzy="true">&lt;a href=\"https://github.com/commons-app/apps-android-commons/wiki/Privacy-policy\"&gt;Gizlilik Politikası&lt;/a&gt;</string>
-  <string name="about_credits" fuzzy="true">&lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/CREDITS\"&gt;Katkıda bulunanlar&lt;/a&gt;</string>
+  <string name="about_improve">GitHub üzerinde &lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;Kaynak&lt;/a&gt; ve &lt;a href=\"https://commons-app.github.io/\"&gt;website&lt;/a&gt;. Hata raporları ve önerileri için yeni bir &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;GitHub sorunu&lt;/a&gt; oluştur.</string>
+  <string name="about_privacy_policy">&lt;a href=\"https://github.com/commons-app/apps-android-commons/wiki/Privacy-policy\"&gt;Gizlilik Politikası&lt;/a&gt;</string>
+  <string name="about_credits">&lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/CREDITS\"&gt;Katkıda bulunanlar&lt;/a&gt;</string>
   <string name="title_activity_about">Hakkında</string>
   <string name="menu_feedback">Geri Bildirim Gönder (E-posta ile)</string>
   <string name="no_email_client">Yüklü bir e-posta istemcisi yok</string>
@@ -88,7 +107,7 @@
   <string name="share_license_summary">Bu resmi %1$s lisansı altında olacak.</string>
   <string name="media_upload_policy">Bu resmi göndererek bunun kendi eserim olduğumu, telif hakkıyla korunan materyal veya selfie içermediğini ve aksi takdirde &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines\"&gt;Wikimedia Commons politikalarına&lt;/a&gt; uyduğunu beyan ederim.</string>
   <string name="menu_download">İndir</string>
-  <string name="preference_license" fuzzy="true">Lisans</string>
+  <string name="preference_license">Varsayılan lisans</string>
   <string name="use_previous">Önceki başlığı/açıklamayı kullan</string>
   <string name="allow_gps">Otomatik olarak mevcut konumu al</string>
   <string name="allow_gps_summary">Resim koordinat olarak etiketlendirilmemişse kategori önerileri için mevcut konum bulun</string>
@@ -117,11 +136,19 @@
   <string name="tutorial_1_text">Wikimedia Commons, Vikipedi\'de kullanılan resimlerin çoğunu barındırır.</string>
   <string name="tutorial_1_subtext">Resimleriniz dünyanın dört bir yanındaki insanlara eğitim vermeye yardımcı olur!</string>
   <string name="tutorial_2_text">Lütfen tamamen kendiniz çektiğiniz veya oluşturduğunuz resimleri yükleyin:</string>
-  <string name="tutorial_2_subtext" fuzzy="true">- Doğal nesneler (çiçekler, hayvanlar, dağlar)\n- Faydalı nesneler (bisiklet, tren istasyonları)\n- Ünlü insanlar (belediye başkanınız, tanıştığınız Olimpik atletler)</string>
+  <string name="tutorial_2_subtext">Doğal nesneler (çiçekler, hayvanlar, dağlar)\n- Faydalı nesneler (bisiklet, tren istasyonları)\n- Ünlü insanlar (belediye başkanınız, tanıştığınız Olimpik atletler)</string>
+  <string name="tutorial_2_subtext_1">Doğal objeler (çiçekler, hayvanlar, dağlar)</string>
+  <string name="tutorial_2_subtext_2">Kullanışlı objeler (bisikletler, tren istasyonları)</string>
+  <string name="tutorial_2_subtext_3">Ünlü kişiler (belediye başkanınız, tanıştığınız Olimpik atletler)</string>
   <string name="tutorial_3_text">Lütfen şunları YÜKLEMEYİN:</string>
   <string name="tutorial_3_subtext">- Öz çekimlerinizi ya da arkadaşlarınızın fotoğraflarını\n- İnternetten indirdiğiniz resimleri\n- Tescilli uygulamaların ekran görüntülerini</string>
+  <string name="tutorial_3_subtext_1">Selfiler veya arkadaşlarınızın fotoğrafları</string>
+  <string name="tutorial_3_subtext_2">İnternet\'ten indirdiğiniz fotoğraflar</string>
+  <string name="tutorial_3_subtext_3">Özel mülk uygulamaların ekran görüntüleri</string>
   <string name="tutorial_4_text">Yüklenebileceklere örnekler:</string>
   <string name="tutorial_4_subtext">- Başlık: Sydney Opera Binası\n- Tanım: Körfezin genelinden bakıldığında Sydney Opera Binası\n- Kategoriler: Sydney Opera Binası, batıdan Sydney Opera Binası</string>
+  <string name="tutorial_4_subtext_1">Başlık: Sidney Opera Binası</string>
+  <string name="tutorial_4_subtext_2">Açıklama: Sidney Opera Binası\'nın körfezin karşısından görünümü</string>
   <string name="welcome_wikipedia_text">Resimleriniz ile Vikipedi maddelerinin canlandırılmasına katkıda bulunabilirsiniz!</string>
   <string name="welcome_wikipedia_subtext">Vikipedi\'ye Wikimedia Commons\'tan gelen görüntüler.</string>
   <string name="welcome_copyright_text">Görüntüler dünya insanlarının eğitiminde yardımcı olur.</string>
@@ -134,8 +161,8 @@
   <string name="detail_description_empty">Açıklama yok</string>
   <string name="detail_license_empty">Bilinmeyen lisans</string>
   <string name="menu_refresh">Yenile</string>
-  <string name="read_storage_permission_rationale">Gerekli izinler: Harici depolama biriminin okunması. Uygulama buna izin verilmeden çalışmaz.</string>
-  <string name="write_storage_permission_rationale">Gerekli izin: Harici depolama birimi üzerine yazma. Uygulama buna izin verilmeden çalışmaz.</string>
+  <string name="read_storage_permission_rationale" fuzzy="true">Gerekli izinler: Harici depolama biriminin okunması. Uygulama buna izin verilmeden çalışmaz.</string>
+  <string name="write_storage_permission_rationale" fuzzy="true">Gerekli izin: Harici depolama birimi üzerine yazma. Uygulama buna izin verilmeden çalışmaz.</string>
   <string name="location_permission_rationale">İsteğe bağlı izin: Kategori önerileri için geçerli konum alma</string>
   <string name="ok">Tamam</string>
   <string name="title_activity_nearby">Yakındaki yerler</string>
@@ -162,6 +189,9 @@
   <string name="login_failed_2fa_not_supported">İki faktörlü kimlik doğrulama şu anda desteklenmiyor.</string>
   <string name="logout_verification">Gerçekten çıkış yapmak istiyor musunuz?</string>
   <string name="commons_logo">Commons Logo</string>
+  <string name="commons_website">Commons Websitesi</string>
+  <string name="commons_facebook">Commons Facebook Sayfası</string>
+  <string name="commons_github">Commons Github Kaynak Kodu</string>
   <string name="background_image">Arka plan görüntüsü</string>
   <string name="mediaimage_failed">Medya Görüntüsü Başarısız Oldu</string>
   <string name="no_image_found">Resim Bulunamadı</string>
@@ -191,18 +221,30 @@
   <string name="no_description_found">hiçbir açıklama bulunamadı</string>
   <string name="nearby_info_menu_commons_article">Commons dosya sayfası</string>
   <string name="nearby_info_menu_wikidata_article">Vikiveri ögesi</string>
+  <string name="nearby_info_menu_wikipedia_article">Wikipedia makalesi</string>
   <string name="error_while_cache">Resimler önbelleğe alınırken hata oluştu</string>
   <string name="title_info">Dosya için dosya adı olarak kullanılacak benzersiz açıklayıcı bir başlık olmalıdır. Boşluk bırakarak sade bir dil kullanabilirsiniz. Dosya uzantısını dahil etmeyin</string>
   <string name="description_info">Lütfen medyayı mümkün olduğunca açıklayın: Nerede çekildi? Ne gösteriyor? Bağlam nedir? Lütfen nesneleri veya kişileri tanımlayın. Kolay tahmin edilemeyen bilgileri açıklayın, örneğin bir manzara ise günün saatini belirtin. Medya alışılmadık bir şey gösteriyorsa lütfen olağandışı yapan şeyleri açıklayın.</string>
+  <string name="upload_image_too_dark">Bu fotoğraf çok karanlık, yine de yüklemek istiyor musunuz? Wikimedia Commons yalnızca ansiklopedik değeri olan fotoğraflar içindir.</string>
+  <string name="upload_image_blurry">Bu fotoğraf bulanık, yine de yüklemek istiyor musunuz? Wikimedia Commons yalnızca ansiklopedik değeri olan fotoğraflar içindir.</string>
   <string name="give_permission">İzin ver</string>
   <string name="use_external_storage">Harici depolamayı kullanın</string>
   <string name="use_external_storage_summary">Uygulama kamerası kullanıldığında çekilen fotoğrafları cihazına kaydedin</string>
   <string name="login_to_your_account">Hesabınızda oturum açın</string>
   <string name="send_log_file">Kayıt dosyasını gönder</string>
   <string name="send_log_file_description">Kayıt dosyasını, e-posta aracılığıyla geliştiricilere gönderin</string>
+  <string name="no_web_browser">URL\'yi açabilecek bir tarayıcı bulunamadı</string>
+  <string name="null_url">Hata! URL bulunamadı</string>
+  <string name="nominate_deletion">Silinmesi için aday göster</string>
+  <string name="nominated_for_deletion">Bu görsel silinmesi için aday gösterildi.</string>
+  <string name="view_browser">Tarayıcıda görüntüle</string>
   <string name="nearby_location_has_not_changed">Konum değiştirilmedi</string>
   <string name="nearby_location_not_available">Konum kullanılamıyor.</string>
   <string name="location_permission_rationale_nearby">Yakındaki yerler listesini görüntülemek için izin vermeniz gerekiyor</string>
   <string name="get_directions">TALİMATLAR</string>
   <string name="read_article">MADDE OKU</string>
+  <string name="notifications_welcome">Wikimedia Commons\'a hoşgedin %1$s! Burada olduğun için mutluyuz.</string>
+  <string name="notifications_thank_you_edit">Düzenlemeniz için teşekkürler</string>
+  <string name="notifications_mention">%1$s , %2$s \'de senden bahsetti</string>
+  <string name="nearby_directions">YOL TARİFİ</string>
 </resources>

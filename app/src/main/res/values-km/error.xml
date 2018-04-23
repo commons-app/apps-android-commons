@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- Authors:
+* វ័ណថារិទ្ធ
+-->
 <resources>
   <string name="crash_dialog_title">Commons ត្រូវបានគាំង</string>
   <string name="crash_dialog_text">Opps. មានអ្វីមួយកំពុងមានបញ្ហា-កំហុស!</string>

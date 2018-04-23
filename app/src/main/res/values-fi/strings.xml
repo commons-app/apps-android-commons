@@ -1,4 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- Authors:
+* Alluk.
+* Crt
+* Nike
+* Olli
+* Pahkiqaz
+* Pyscowicz
+* SMAUG
+* Samoasambia
+* Silvonen
+* Stryn
+-->
 <resources>
   <string name="preference_category_appearance">Ulkoasu</string>
   <string name="preference_category_general">Yleinen</string>
@@ -149,8 +161,8 @@
   <string name="detail_description_empty">Ei kuvausta</string>
   <string name="detail_license_empty">Tuntematon lisenssi</string>
   <string name="menu_refresh">Päivitä</string>
-  <string name="read_storage_permission_rationale">Vaadittu oikeus: Ulkoisen tallennustilan luku. Appi ei toimi ilman tätä oikeutta.</string>
-  <string name="write_storage_permission_rationale">Vaadittava lupa: Kirjoita ulkoiseen tallennustilaan. Sovellus ei voi toimia ilman tätä.</string>
+  <string name="read_storage_permission_rationale" fuzzy="true">Vaadittu oikeus: Ulkoisen tallennustilan luku. Appi ei toimi ilman tätä oikeutta.</string>
+  <string name="write_storage_permission_rationale" fuzzy="true">Vaadittava lupa: Kirjoita ulkoiseen tallennustilaan. Sovellus ei voi toimia ilman tätä.</string>
   <string name="location_permission_rationale">Valinnainen lupa: Saada tämänhetkinen sijainti loukkasuosituksia varten.</string>
   <string name="ok">OK</string>
   <string name="title_activity_nearby">Lähellä olevat paikat</string>
@@ -231,6 +243,6 @@
   <string name="notifications_thank_you_edit">Kiitos muokkaamisestasi</string>
   <string name="notifications_mention">%1$s mainitsi sinut %2$s.</string>
   <string name="toggle_view_button">Vaihda näkymä</string>
-  <string name="about_faq">Usein Kysytyt Kysymykset</string>
+  <string name="about_faq" fuzzy="true">Usein Kysytyt Kysymykset</string>
   <string name="welcome_skip_button">Ohita opetus</string>
 </resources>

@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- Authors:
+* Armeniki
+-->
 <resources>
   <string name="crash_dialog_ok_toast">Շնորհակալութիւն:</string>
 </resources>

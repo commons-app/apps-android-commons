@@ -1,4 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- Authors:
+* Envlh
+* Inkowik
+* Kghbln
+* Metalhead64
+* Sujan
+-->
 <resources>
   <string name="preference_category_appearance">Erscheinung</string>
   <string name="preference_category_general">Allgemein</string>
@@ -81,6 +88,7 @@
   <string name="categories_activity_title">Kategorien</string>
   <string name="title_activity_settings">Einstellungen</string>
   <string name="title_activity_signup">Registrieren</string>
+  <string name="title_activity_featured_images">Vorgestellte Bilder</string>
   <string name="menu_about">Über</string>
   <string name="about_license">Die Wikimedia-Commons-App ist eine Open-Source-App, entwickelt und gewartet von Freiwilligen der Wikimedia-Gemeinschaft. Die Wikimedia Foundation ist nicht bei der Erstellung, Entwicklung oder Wartung der App beteiligt.</string>
   <string name="about_improve">Einen neuen &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;GitHub-Eintrag&lt;/a&gt; für Fehlerberichte und Vorschläge erstellen.</string>
@@ -152,8 +160,8 @@
   <string name="detail_description_empty">Keine Beschreibung</string>
   <string name="detail_license_empty">Unbekannte Lizenz</string>
   <string name="menu_refresh">Aktualisieren</string>
-  <string name="read_storage_permission_rationale">Erforderliche Berechtigung: Externen Speicher lesen. Die App funktioniert ohne diese Berechtigung nicht.</string>
-  <string name="write_storage_permission_rationale">Erforderliche Berechtigung: Externen Speicher beschreiben. Die App kann ohne dies nicht funktionieren.</string>
+  <string name="read_storage_permission_rationale">Erforderliche Berechtigung: Externen Speicher lesen. Die App kann ohne diese Berechtigung nicht auf deine Galerie zugreifen.</string>
+  <string name="write_storage_permission_rationale">Erforderliche Berechtigung: Externen Speicher beschreiben. Die App kann ohne diese Berechtigung nicht auf deine Kamera zugreifen.</string>
   <string name="location_permission_rationale">Optionale Berechtigung: Ruft den aktuellen Standort für Kategorievorschläge ab</string>
   <string name="ok">Okay</string>
   <string name="title_activity_nearby">Orte in der Nähe</string>
@@ -166,6 +174,8 @@
   <string name="media_detail_media_title">Titel des Mediums</string>
   <string name="media_detail_description">Beschreibung</string>
   <string name="media_detail_description_explanation">Hier folgt die Beschreibung des Mediums. Diese kann möglicherweise ziemlich lang sein und erfordert dann einen Umbruch auf mehreren Zeilen. Wir hoffen, dass sie dennoch gut aussieht.</string>
+  <string name="media_detail_author">Autor</string>
+  <string name="media_detail_author_explanation">Hier steht der Benutzername des Autors des vorgestellten Bildes.</string>
   <string name="media_detail_uploaded_date">Hochgeladen am</string>
   <string name="media_detail_license">Lizenz</string>
   <string name="media_detail_coordinates">Koordinaten</string>
@@ -208,6 +218,7 @@
   <string name="navigation_item_logout">Abmelden</string>
   <string name="navigation_item_info">Anleitung</string>
   <string name="navigation_item_notification">Benachrichtigungen</string>
+  <string name="navigation_item_featured_images">Vorgestellt</string>
   <string name="nearby_needs_permissions">Orte in der Nähe können ohne Berechtigung zur Standortbestimmung nicht ermittelt werden</string>
   <string name="no_description_found">Keine Beschreibung gefunden</string>
   <string name="nearby_info_menu_commons_article">Commons-Dateiseite</string>
@@ -227,6 +238,8 @@
   <string name="no_web_browser">Zum Öffnen der URL wurde kein Webbrowser gefunden</string>
   <string name="null_url">Fehler! URL nicht gefunden</string>
   <string name="nominate_deletion">Zur Löschung vorschlagen</string>
+  <string name="nominated_for_deletion">Dieses Bild wurde zur Löschung vorgeschlagen.</string>
+  <string name="nominated_see_more"/>
   <string name="view_browser">Im Browser ansehen</string>
   <string name="nearby_location_has_not_changed">Der Standort hat sich nicht geändert.</string>
   <string name="nearby_location_not_available">Der Standort ist nicht verfügbar.</string>
@@ -242,7 +255,17 @@
   <string name="nearby_wikidata">WIKIDATA</string>
   <string name="nearby_wikipedia">WIKIPEDIA</string>
   <string name="nearby_commons">COMMONS</string>
-  <string name="about_rate_us"/>
-  <string name="about_faq">Häufig gestellte Fragen</string>
+  <string name="about_rate_us">&lt;u&gt;Bewerte uns&lt;/u&gt;</string>
+  <string name="about_faq">&lt;u&gt;Häufig gestellte Fragen&lt;/u&gt;</string>
   <string name="welcome_skip_button">Tutorial überspringen</string>
+  <string name="no_internet">Internet nicht verfügbar</string>
+  <string name="internet_established">Internet verfügbar</string>
+  <string name="error_notifications">Fehler beim Abruf der Benachrichtigungen</string>
+  <string name="no_notifications">Keine Benachrichtigungen gefunden</string>
+  <string name="about_translate">&lt;u&gt;Übersetzen&lt;/u&gt;</string>
+  <string name="about_translate_title">Sprachen</string>
+  <string name="about_translate_message">Wähle die Sprache aus, für die du Übersetzungen durchführen möchtest.</string>
+  <string name="about_translate_proceed">Fortfahren</string>
+  <string name="about_translate_cancel">Abbrechen</string>
+  <string name="retry">Erneut versuchen</string>
 </resources>

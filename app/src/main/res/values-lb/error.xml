@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- Authors:
+* Robby
+-->
 <resources>
   <string name="crash_dialog_title">Commons ass down</string>
   <string name="crash_dialog_text">Ups. Elo ass eppes schif gaang!</string>

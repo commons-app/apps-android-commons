@@ -1,12 +1,18 @@
 package fr.free.nrw.commons.upload;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.BitmapRegionDecoder;
 import android.net.Uri;
 import android.os.AsyncTask;
+import android.support.v7.app.AlertDialog;
 
 import java.io.IOException;
+import java.lang.ref.WeakReference;
 
+import fr.free.nrw.commons.R;
+import fr.free.nrw.commons.contributions.ContributionsActivity;
 import fr.free.nrw.commons.utils.ImageUtils;
 import timber.log.Timber;
 
@@ -21,16 +27,13 @@ import timber.log.Timber;
 
 public class DetectUnwantedPicturesAsync extends AsyncTask<Void, Void, ImageUtils.Result> {
 
-    interface Callback {
-        void onResult(ImageUtils.Result result);
-    }
-
-    private final Callback callback;
     private final String imageMediaFilePath;
+    public final WeakReference<Activity> activityWeakReference;
 
-    DetectUnwantedPicturesAsync(String imageMediaFilePath, Callback callback) {
-        this.callback = callback;
+    DetectUnwantedPicturesAsync(WeakReference<Activity> activityWeakReference, String imageMediaFilePath) {
+        //this.callback = callback;
         this.imageMediaFilePath = imageMediaFilePath;
+        this.activityWeakReference = activityWeakReference;
     }
 
     @Override
@@ -53,7 +56,29 @@ public class DetectUnwantedPicturesAsync extends AsyncTask<Void, Void, ImageUtil
     @Override
     protected void onPostExecute(ImageUtils.Result result) {
         super.onPostExecute(result);
-        //callback to UI so that it can take necessary decision based on the result obtained
-        callback.onResult(result);
+        Activity activity = activityWeakReference.get();
+
+        if (result != ImageUtils.Result.IMAGE_OK) {
+            //show appropriate error message
+            String errorMessage = result == ImageUtils.Result.IMAGE_DARK ? activity.getString(R.string.upload_image_too_dark) : activity.getString(R.string.upload_image_blurry);
+            AlertDialog.Builder errorDialogBuilder = new AlertDialog.Builder(activity);
+            errorDialogBuilder.setMessage(errorMessage);
+            errorDialogBuilder.setTitle(activity.getString(R.string.warning));
+            errorDialogBuilder.setPositiveButton(activity.getString(R.string.no), (dialogInterface, i) -> {
+                //user does not wish to upload the picture, take them back to ContributionsActivity
+                Intent intent = new Intent(activity, ContributionsActivity.class);
+                dialogInterface.dismiss();
+                activity.startActivity(intent);
+            });
+            errorDialogBuilder.setNegativeButton(activity.getString(R.string.yes), (dialogInterface, i) -> {
+                //user wishes to go ahead with the upload of this picture, just dismiss this dialog
+                dialogInterface.dismiss();
+            });
+
+            AlertDialog errorDialog = errorDialogBuilder.create();
+            if (!activity.isFinishing()) {
+                errorDialog.show();
+            }
+        }
     }
 }

@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- Authors:
+* Servien
+-->
 <resources>
   <string name="crash_dialog_title">Commons is vasteleupen</string>
   <string name="crash_dialog_text">Oeps. Der gung iets mis.</string>

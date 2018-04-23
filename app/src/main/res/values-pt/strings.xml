@@ -1,11 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- Authors:
+* Athena in Wonderland
+* Fúlvio
+* Giro720
+* Hamilton Abreu
+* Imperadeiro98
+* Lijealso
+* Luckas
+* Malafaya
+* Sarilho1
+* Vitorvicentevalente
+-->
 <resources>
+  <string name="preference_category_appearance">Aparência</string>
+  <string name="preference_category_general">Geral</string>
+  <string name="preference_category_feedback">Comentários</string>
+  <string name="preference_category_location">Localização</string>
   <string name="app_name">Wikimedia Commons</string>
+  <string name="bullet">•</string>
   <string name="menu_settings">Configurações</string>
   <string name="username">Nome de utilizador(a)</string>
   <string name="password">Palavra-passe</string>
   <string name="login_credential">Entre com a sua conta do Commons Beta</string>
   <string name="login">Iniciar sessão</string>
+  <string name="forgot_password">Esqueceu-se da palavra-passe?</string>
   <string name="signup">Registar-se</string>
   <string name="logging_in_title">A iniciar sessão</string>
   <string name="logging_in_message">Aguarde, por favor…</string>
@@ -37,6 +55,7 @@
   <string name="menu_share">Partilhar</string>
   <string name="menu_open_in_browser">Ver no navegador</string>
   <string name="share_title_hint">Título</string>
+  <string name="add_title_toast">Forneça um título para este ficheiro, por favor</string>
   <string name="share_description_hint">Descrição</string>
   <string name="login_failed_network">Não foi possível iniciar sessão - falha de rede</string>
   <string name="login_failed_username">Não foi possível iniciar sessão - verifique o seu nome de utilizador(a)</string>
@@ -52,6 +71,7 @@
   <string name="categories_search_text_hint">Pesquisar categorias</string>
   <string name="menu_save_categories">Gravar</string>
   <string name="refresh_button">Atualizar</string>
+  <string name="display_list_button">Lista</string>
   <string name="gps_disabled">O GPS está desativado no seu dispositivo. Gostarias de ativá-lo?</string>
   <string name="enable_gps">Ativar GPS</string>
   <string name="contributions_subtitle_zero">Ainda não foram enviados ficheiros</string>
@@ -73,11 +93,12 @@
   <string name="categories_activity_title">Categorias</string>
   <string name="title_activity_settings">Configurações</string>
   <string name="title_activity_signup">Registar-se</string>
+  <string name="title_activity_featured_images">Imagens destacadas</string>
   <string name="menu_about">Sobre</string>
   <string name="about_license">A aplicação do Wikimedia Commons é uma aplicação de código aberto criada e mantida por bolseiros e voluntários da comunidade Wikimedia. A Wikimedia Foundation não está envolvida na criação, desenvolvimento ou manutenção da aplicação.</string>
   <string name="about_improve">Criar uma nova &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;incidência no GitHub&lt;/a&gt; para reportar erros e sugestões.</string>
-  <string name="about_privacy_policy" fuzzy="true">&lt;a href=\"https://github.com/commons-app/apps-android-commons/wiki/Privacy-policy\"&gt;Política de privacidade&lt;/a&gt;</string>
-  <string name="about_credits" fuzzy="true">&lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/CREDITS\"&gt;Créditos&lt;/a&gt;</string>
+  <string name="about_privacy_policy">&lt;u&gt;Política de privacidade&lt;/u&gt;</string>
+  <string name="about_credits">&lt;u&gt;Créditos&lt;/u&gt;</string>
   <string name="title_activity_about">Sobre</string>
   <string name="menu_feedback">Enviar comentários (por e-mail)</string>
   <string name="no_email_client">Não foi instalado nenhum cliente de correio eletrónico</string>
@@ -89,7 +110,7 @@
   <string name="share_license_summary">Essa imagem será licenciada sob %1$s</string>
   <string name="media_upload_policy">Ao carregar esta imagem, declaro que esta é a minha própria obra, que não contém material protegido ou selfies, e que adere às &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines/pt\"&gt;políticas do Wikimedia Commons&lt;/a&gt;.</string>
   <string name="menu_download">Descarregar</string>
-  <string name="preference_license" fuzzy="true">Licença</string>
+  <string name="preference_license">Licença padrão</string>
   <string name="use_previous">Usar título/descrição anteriores</string>
   <string name="allow_gps">Obter automaticamente a localização atual</string>
   <string name="allow_gps_summary">Recuperar localização atual para oferecer sugestões da categoria se a imagem não é georreferenciada</string>
@@ -118,11 +139,20 @@
   <string name="tutorial_1_text">Wikimedia Commons armazena a maioria das imagens que são usadas na Wikipédia.</string>
   <string name="tutorial_1_subtext">As suas imagens ajudam a educar pessoas em todo o mundo!</string>
   <string name="tutorial_2_text">Por favor, carregue apenas imagens tiradas ou criadas exclusivamente por si:</string>
-  <string name="tutorial_2_subtext" fuzzy="true">- Objetos naturais (flores, animais, montanhas)\n- Objetos úteis (bicicletas, estações de comboio)\n- Pessoas famosas (o seu presidente da câmara, atletas olímpicos que conheça)</string>
+  <string name="tutorial_2_subtext">Objetos naturais (flores, animais, montanhas)\n• Objetos úteis (bicicletas, estações de comboio)\n• Pessoas famosas (o seu presidente da câmara, atletas olímpicos que conheça)</string>
+  <string name="tutorial_2_subtext_1">Objetos naturais (flores, animais, montanhas)</string>
+  <string name="tutorial_2_subtext_2">Objetos úteis (bicicletas, estações de comboio)</string>
+  <string name="tutorial_2_subtext_3">Pessoas famosas (o seu presidente da câmara, atletas olímpicos que conheça)</string>
   <string name="tutorial_3_text">Por favor, NÃO carregue:</string>
   <string name="tutorial_3_subtext">- Autorretratos ou imagens dos seus amigos\n- Imagens descarregadas da Internet\n- Capturas de ecrã de aplicações com direitos de autor</string>
+  <string name="tutorial_3_subtext_1">Autorretratos ou fotografias dos seus amigos</string>
+  <string name="tutorial_3_subtext_2">As imagens que descarregou da Internet</string>
+  <string name="tutorial_3_subtext_3">Capturas de ecrã de aplicações proprietárias</string>
   <string name="tutorial_4_text">Exemplo de carregamento:</string>
   <string name="tutorial_4_subtext">- Título: Ópera de Sydney\n- Descrição: A Ópera de Sydney vista do outro lado da baía\n- Categorias: Ópera de Sydney vista do ocidente, Vistas à distância da Ópera de Sydney</string>
+  <string name="tutorial_4_subtext_1">Título: Ópera de Sydney</string>
+  <string name="tutorial_4_subtext_2">Descrição: A Ópera de Sydney vista do outro lado da baía</string>
+  <string name="tutorial_4_subtext_3">Categorias: Ópera de Sydney vista do ocidente, vistas à distância da Ópera de Sydney</string>
   <string name="welcome_wikipedia_text">Contribua com as suas imagens. Ajude os artigos da Wikipédia a ganhar vida!</string>
   <string name="welcome_wikipedia_subtext">As imagens na Wikipédia provêm do Wikimedia Commons.</string>
   <string name="welcome_copyright_text">As suas imagens ajudam a educar as pessoas em todo o mundo.</string>
@@ -135,8 +165,8 @@
   <string name="detail_description_empty">Sem descrição</string>
   <string name="detail_license_empty">Licença desconhecida</string>
   <string name="menu_refresh">Actualizar</string>
-  <string name="read_storage_permission_rationale">Permissão necessária: Ler a armazenagem externa. A aplicação não pode funcionar sem isto.</string>
-  <string name="write_storage_permission_rationale">Permissão necessária: Escrever na armazenagem externa. A aplicação não pode funcionar sem isto.</string>
+  <string name="read_storage_permission_rationale">Permissão necessária: Ler a armazenagem externa. A aplicação não pode aceder à sua galeria sem isto.</string>
+  <string name="write_storage_permission_rationale">Permissão necessária: Escrever na armazenagem externa. A aplicação não pode aceder à sua câmara sem isto.</string>
   <string name="location_permission_rationale">Permissão opcional: Obter a localização atual para sugestões de categoria</string>
   <string name="ok">OK</string>
   <string name="title_activity_nearby">Locais Próximos</string>
@@ -149,6 +179,8 @@
   <string name="media_detail_media_title">Título do ficheiro multimédia</string>
   <string name="media_detail_description">Descrição</string>
   <string name="media_detail_description_explanation">A descrição do ficheiro multimédia é colocada aqui. Ela pode ser bastante longa e precisar de ser dividida em várias linhas. No entanto, esperamos que tenha bom aspeto.</string>
+  <string name="media_detail_author">Autor</string>
+  <string name="media_detail_author_explanation">O nome de utilizador do autor da imagem destacada fica aqui.</string>
   <string name="media_detail_uploaded_date">Data de carregamento</string>
   <string name="media_detail_license">Licença</string>
   <string name="media_detail_coordinates">Coordenadas</string>
@@ -191,10 +223,12 @@
   <string name="navigation_item_logout">Sair</string>
   <string name="navigation_item_info">Tutorial</string>
   <string name="navigation_item_notification">Notificações</string>
+  <string name="navigation_item_featured_images">Destacadas</string>
   <string name="nearby_needs_permissions">Os sítios aqui perto não podem ser apresentados sem permissões de localização</string>
   <string name="no_description_found">não foi encontrada nenhuma descrição</string>
   <string name="nearby_info_menu_commons_article">Página do ficheiro no Commons</string>
   <string name="nearby_info_menu_wikidata_article">Item do Wikidata</string>
+  <string name="nearby_info_menu_wikipedia_article">Artigo na Wikipédia</string>
   <string name="error_while_cache">Erro ao colocar imagens na cache</string>
   <string name="title_info">Um título descritivo exclusivo para o ficheiro, que servirá como um nome de ficheiro. Pode utilizar uma linguagem simples com espaços. Não inclua a extensão do ficheiro</string>
   <string name="description_info">Por favor, descreva o ficheiro da melhor forma possível: Onde foi tirado? O que isso mostra? Qual é o contexto? Por favor, descreva os objetos ou as pessoas. Indique as informações que não podem ser facilmente adivinhadas, por exemplo, a hora do dia, se for uma paisagem. Se o ficheiro mostrar algo incomum, explique o que torna incomum.</string>
@@ -206,6 +240,12 @@
   <string name="login_to_your_account">Inicie sessão na sua conta</string>
   <string name="send_log_file">Enviar ficheiro de registo</string>
   <string name="send_log_file_description">Enviar o ficheiro de registo aos programadores por correio eletrónico</string>
+  <string name="no_web_browser">Não foi encontrado nenhum navegador da Internet para abrir o URL</string>
+  <string name="null_url">Erro! Não foi possível encontrar o URL</string>
+  <string name="nominate_deletion">Nomear para eliminação</string>
+  <string name="nominated_for_deletion">Esta imagem foi nomeada para eliminação.</string>
+  <string name="nominated_see_more"/>
+  <string name="view_browser">Ver no navegador</string>
   <string name="nearby_location_has_not_changed">A localização não foi alterada.</string>
   <string name="nearby_location_not_available">A localização não está disponível.</string>
   <string name="location_permission_rationale_nearby">É necessária a permissão para mostrar uma lista dos sítios aqui perto</string>
@@ -216,4 +256,21 @@
   <string name="notifications_thank_you_edit">Obrigado por ter realizado uma edição</string>
   <string name="notifications_mention">%1$s fez menção a si em %2$s.</string>
   <string name="toggle_view_button">Alternar modo de visionamento</string>
+  <string name="nearby_directions">DIREÇÕES</string>
+  <string name="nearby_wikidata">WIKIDATA</string>
+  <string name="nearby_wikipedia">WIKIPÉDIA</string>
+  <string name="nearby_commons">COMMONS</string>
+  <string name="about_rate_us">&lt;u&gt;Avalie-nos&lt;/u&gt;</string>
+  <string name="about_faq">&lt;u&gt;FAQ&lt;/u&gt;</string>
+  <string name="welcome_skip_button">Saltar a explicação</string>
+  <string name="no_internet">A Internet não está disponível</string>
+  <string name="internet_established">A Internet está disponível</string>
+  <string name="error_notifications">Erro ao tentar obter as notificações</string>
+  <string name="no_notifications">Não foram encontradas notificações</string>
+  <string name="about_translate">&lt;u&gt;Traduzir&lt;/u&gt;</string>
+  <string name="about_translate_title">Línguas</string>
+  <string name="about_translate_message">Selecione a língua para a qual quer enviar as traduções</string>
+  <string name="about_translate_proceed">Avançar</string>
+  <string name="about_translate_cancel">Cancelar</string>
+  <string name="retry">Tentar novamente</string>
 </resources>

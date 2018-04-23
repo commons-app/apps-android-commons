@@ -1,4 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- Authors:
+* Toniher
+* XVEC
+-->
 <resources>
   <string name="crash_dialog_title">El Commons s\'ha penjat</string>
   <string name="crash_dialog_text">Uups ! Quelcom ha anat malament !</string>

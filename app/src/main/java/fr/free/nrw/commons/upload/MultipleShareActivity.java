@@ -237,7 +237,7 @@ public class MultipleShareActivity extends AuthenticatedActivity
 
     private void showDetail(int i) {
         if (mediaDetails == null || !mediaDetails.isVisible()) {
-            mediaDetails = new MediaDetailPagerFragment(true);
+            mediaDetails = new MediaDetailPagerFragment(true, false);
             getSupportFragmentManager()
                     .beginTransaction()
                     .replace(R.id.uploadsFragmentContainer, mediaDetails)

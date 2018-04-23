@@ -1,4 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- Authors:
+* Liuxinyu970226
+* Sureshkhole
+* Susheelkasab
+* Tiven2240
+* V.narsikar
+* अभय नातू
+-->
 <resources>
   <string name="preference_category_appearance">स्वरूप</string>
   <string name="preference_category_general">सामान्य</string>
@@ -151,8 +159,8 @@
   <string name="detail_description_empty">वर्णन नाही.</string>
   <string name="detail_license_empty">अनोळखी परवाना</string>
   <string name="menu_refresh">ताजेतवाने करा</string>
-  <string name="read_storage_permission_rationale">परवानगी आवश्यक:बाह्य भंडारण वाचन. याशिवाय अॅप काम करू शकत नाही.</string>
-  <string name="write_storage_permission_rationale">परवानगी आवश्यक:बाह्य भंडारण वाचन. याशिवाय अॅप काम करू शकत नाही.</string>
+  <string name="read_storage_permission_rationale" fuzzy="true">परवानगी आवश्यक:बाह्य भंडारण वाचन. याशिवाय अॅप काम करू शकत नाही.</string>
+  <string name="write_storage_permission_rationale" fuzzy="true">परवानगी आवश्यक:बाह्य भंडारण वाचन. याशिवाय अॅप काम करू शकत नाही.</string>
   <string name="location_permission_rationale">ऐच्छिक परवानगी:वर्ग सुचवण्यांसाठी सध्याचे स्थान मिळवा</string>
   <string name="ok">ठीक आहे</string>
   <string name="title_activity_nearby">जवळपासची स्थाने</string>
@@ -234,7 +242,7 @@
   <string name="notifications_thank_you_edit">तुमच्या संपादनासाठी तुमचे आभार !</string>
   <string name="notifications_mention">%1$s यांनी तुमचा उल्लेख %2$s येथे केला.</string>
   <string name="toggle_view_button">टॉगल दृश्य</string>
-  <string name="about_rate_us"/>
-  <string name="about_faq">सतत विचारले जाणारे प्रश्न</string>
+  <string name="about_rate_us" fuzzy="true"/>
+  <string name="about_faq" fuzzy="true">सतत विचारले जाणारे प्रश्न</string>
   <string name="welcome_skip_button">ट्यूटोरियल वगळा</string>
 </resources>

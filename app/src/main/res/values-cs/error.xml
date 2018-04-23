@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- Authors:
+* Chmee2
+* Ilimanaq29
+* Patriccck
+-->
 <resources>
-  <string name="crash_dialog_title">Commons spadly</string>
+  <string name="crash_dialog_title">Aplikace Commons spadla</string>
   <string name="crash_dialog_text">Něco se pokazilo!</string>
   <string name="crash_dialog_comment_prompt">Řekněte nám, co jste dělali a dejte nám to vědět e-mailem. Pomůže sjednat nápravu!</string>
   <string name="crash_dialog_ok_toast">Děkujeme vám!</string>

@@ -10,17 +10,14 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomSheetBehavior;
-
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AlertDialog;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
-import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -31,7 +28,6 @@ import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.location.LatLng;
 import fr.free.nrw.commons.location.LocationServiceManager;
@@ -39,13 +35,11 @@ import fr.free.nrw.commons.location.LocationUpdateListener;
 import fr.free.nrw.commons.theme.NavigationBaseActivity;
 import fr.free.nrw.commons.utils.NetworkUtils;
 import fr.free.nrw.commons.utils.UriSerializer;
-
 import fr.free.nrw.commons.utils.ViewUtil;
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
-
 import timber.log.Timber;
 
 
@@ -68,7 +62,7 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
     @Inject
     NearbyController nearbyController;
 
-    private LatLng curLatLang;
+    private LatLng curLatLng;
     private Bundle bundle;
     private Disposable placesDisposable;
     private boolean lockNearbyView; //Determines if the nearby places needs to be refreshed
@@ -136,11 +130,17 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+
         // Handle item selection
         switch (item.getItemId()) {
             case R.id.action_display_list:
-                bottomSheetBehaviorForDetails.setState(BottomSheetBehavior.STATE_HIDDEN);
-                bottomSheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
+                if(bottomSheetBehavior.getState()==BottomSheetBehavior.STATE_COLLAPSED || bottomSheetBehavior.getState()==BottomSheetBehavior.STATE_HIDDEN){
+                    bottomSheetBehaviorForDetails.setState(BottomSheetBehavior.STATE_HIDDEN);
+                    bottomSheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
+                }else if(bottomSheetBehavior.getState()==BottomSheetBehavior.STATE_EXPANDED){
+                    bottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
+                }
+
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -165,6 +165,11 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
                     showLocationPermissionDeniedErrorDialog();
                 }
             }
+            break;
+
+            default:
+                // This is needed to allow the request codes from the Fragments to be routed appropriately
+                super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         }
     }
 
@@ -262,8 +267,6 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
     @Override
     protected void onStop() {
         super.onStop();
-        locationManager.removeLocationListener(this);
-        locationManager.unregisterLocationManager();
     }
 
     @Override
@@ -292,8 +295,13 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
             // to the retained fragment object to perform its own cleanup.
             removeMapFragment();
             removeListFragment();
-            unregisterReceiver(broadcastReceiver);
+
         }
+        unregisterReceiver(broadcastReceiver);
+        broadcastReceiver = null;
+        locationManager.removeLocationListener(this);
+        locationManager.unregisterLocationManager();
+
     }
 
     private void addNetworkBroadcastReceiver() {
@@ -334,12 +342,12 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
         locationManager.registerLocationManager();
         LatLng lastLocation = locationManager.getLastLocation();
 
-        if (curLatLang != null && curLatLang.equals(lastLocation)) { //refresh view only if location has changed
+        if (curLatLng != null && curLatLng.equals(lastLocation)) { //refresh view only if location has changed
             return;
         }
-        curLatLang = lastLocation;
+        curLatLng = lastLocation;
 
-        if (curLatLang == null) {
+        if (curLatLng == null) {
             Timber.d("Skipping update of nearby places as location is unavailable");
             return;
         }
@@ -348,7 +356,7 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
                 .equals(LocationServiceManager.LocationChangeType.LOCATION_SIGNIFICANTLY_CHANGED)) {
             progressBar.setVisibility(View.VISIBLE);
             placesDisposable = Observable.fromCallable(() -> nearbyController
-                    .loadAttractionsFromLocation(curLatLang))
+                    .loadAttractionsFromLocation(curLatLng))
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe(this::populatePlaces);
@@ -357,7 +365,7 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
             Gson gson = new GsonBuilder()
                     .registerTypeAdapter(Uri.class, new UriSerializer())
                     .create();
-            String gsonCurLatLng = gson.toJson(curLatLang);
+            String gsonCurLatLng = gson.toJson(curLatLng);
             bundle.putString("CurLatLng", gsonCurLatLng);
             updateMapFragment(true);
         }
@@ -370,7 +378,7 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
                 .registerTypeAdapter(Uri.class, new UriSerializer())
                 .create();
         String gsonPlaceList = gson.toJson(placeList);
-        String gsonCurLatLng = gson.toJson(curLatLang);
+        String gsonCurLatLng = gson.toJson(curLatLng);
         String gsonBoundaryCoordinates = gson.toJson(boundaryCoordinates);
 
         if (placeList.size() == 0) {
@@ -422,6 +430,7 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
         if (nearbyMapFragment != null) {
             android.support.v4.app.FragmentManager fm = getSupportFragmentManager();
             fm.beginTransaction().remove(nearbyMapFragment).commit();
+            nearbyMapFragment = null;
         }
     }
 
@@ -433,6 +442,7 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
         if (nearbyListFragment != null) {
             android.support.v4.app.FragmentManager fm = getSupportFragmentManager();
             fm.beginTransaction().remove(nearbyListFragment).commit();
+            nearbyListFragment = null;
         }
     }
 
@@ -447,34 +457,34 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
 
         NearbyMapFragment nearbyMapFragment = getMapFragment();
 
-        if (nearbyMapFragment != null && curLatLang != null) {
+        if (nearbyMapFragment != null && curLatLng != null) {
             hideProgressBar(); // In case it is visible (this happens, not an impossible case)
             /*
             * If we are close to nearby places boundaries, we need a significant update to
             * get new nearby places. Check order is south, north, west, east
             * */
             if (nearbyMapFragment.boundaryCoordinates != null
-                    && (curLatLang.getLatitude() <= nearbyMapFragment.boundaryCoordinates[0].getLatitude()
-                    || curLatLang.getLatitude() >= nearbyMapFragment.boundaryCoordinates[1].getLatitude()
-                    || curLatLang.getLongitude() <= nearbyMapFragment.boundaryCoordinates[2].getLongitude()
-                    || curLatLang.getLongitude() >= nearbyMapFragment.boundaryCoordinates[3].getLongitude())) {
+                    && (curLatLng.getLatitude() <= nearbyMapFragment.boundaryCoordinates[0].getLatitude()
+                    || curLatLng.getLatitude() >= nearbyMapFragment.boundaryCoordinates[1].getLatitude()
+                    || curLatLng.getLongitude() <= nearbyMapFragment.boundaryCoordinates[2].getLongitude()
+                    || curLatLng.getLongitude() >= nearbyMapFragment.boundaryCoordinates[3].getLongitude())) {
                 // populate places
                 placesDisposable = Observable.fromCallable(() -> nearbyController
-                        .loadAttractionsFromLocation(curLatLang))
+                        .loadAttractionsFromLocation(curLatLng))
                         .subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())
                         .subscribe(this::populatePlaces);
-                nearbyMapFragment.setArguments(bundle);
+                nearbyMapFragment.setBundleForUpdtes(bundle);
                 nearbyMapFragment.updateMapSignificantly();
                 updateListFragment();
                 return;
             }
 
             if (isSlightUpdate) {
-                nearbyMapFragment.setArguments(bundle);
+                nearbyMapFragment.setBundleForUpdtes(bundle);
                 nearbyMapFragment.updateMapSlightly();
             } else {
-                nearbyMapFragment.setArguments(bundle);
+                nearbyMapFragment.setBundleForUpdtes(bundle);
                 nearbyMapFragment.updateMapSignificantly();
                 updateListFragment();
             }
@@ -488,7 +498,7 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
     }
 
     private void updateListFragment() {
-        nearbyListFragment.setArguments(bundle);
+        nearbyListFragment.setBundleForUpdates(bundle);
         nearbyListFragment.updateNearbyListSignificantly();
     }
 

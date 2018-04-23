@@ -1,4 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- Authors:
+* Eitvys200
+* Mantak111
+* Manvydasz
+* Nersip
+* Zygimantus
+-->
 <resources>
   <string name="app_name">Vikiteka</string>
   <string name="menu_settings">Nustatymai</string>
@@ -109,7 +116,7 @@
   <string name="detail_description_empty">Nėra aprašymo</string>
   <string name="detail_license_empty">Nežinoma licencija</string>
   <string name="menu_refresh">Atnaujinti</string>
-  <string name="read_storage_permission_rationale">Reikalinga teisė: Skaityti išorinę talpyklą. Programėle be to negali funkcionuoti.</string>
+  <string name="read_storage_permission_rationale" fuzzy="true">Reikalinga teisė: Skaityti išorinę talpyklą. Programėle be to negali funkcionuoti.</string>
   <string name="location_permission_rationale">Neprivaloma teisė: Gauti dabartinę vietovę, kad būtų pasiūlomos kategorijos</string>
   <string name="ok">Gerai</string>
   <string name="title_activity_nearby">Netoliese Esančios Vietos</string>

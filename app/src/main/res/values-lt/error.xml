@@ -1,4 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- Authors:
+* Eitvys200
+* Mantak111
+* Zygimantus
+-->
 <resources>
   <string name="crash_dialog_title">Vikiteka užstrigo</string>
   <string name="crash_dialog_text">Oi. Kažkas nutiko!</string>

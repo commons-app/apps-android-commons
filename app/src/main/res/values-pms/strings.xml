@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- Authors:
+* Borichèt
+-->
 <resources>
   <string name="preference_category_appearance">Aparensa</string>
   <string name="preference_category_general">General</string>
@@ -59,6 +62,7 @@
   <string name="categories_search_text_hint">Sërché dle categorìe</string>
   <string name="menu_save_categories">Argistré</string>
   <string name="refresh_button">Agiorné</string>
+  <string name="display_list_button">Lista</string>
   <string name="gps_disabled">Ël GPS a l\'é disabilità su sò angign. Veul-lo ativelo?</string>
   <string name="enable_gps">Ativé ël GPS</string>
   <string name="contributions_subtitle_zero">Ancor gnun cariament</string>
@@ -80,6 +84,7 @@
   <string name="categories_activity_title">Categorìe</string>
   <string name="title_activity_settings">Paràmeter</string>
   <string name="title_activity_signup">Marchesse</string>
+  <string name="title_activity_featured_images">Plance an evidensa</string>
   <string name="menu_about">A propòsit</string>
   <string name="about_license">L\'aplicassion Wikimedia Commons a l\'é n\'aplicassion a sorgiss duverta creà e mantnùa da \'d përson-e pagà e da \'d volontari ëd la comunità Wikimedia. La Fondassion Wikimedia a l\'é nen amplicà ant la creassion, ël dësvlup, o la manutension dl\'aplicassion.</string>
   <string name="about_improve">Creé na neuva &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;signalassion GitHub&lt;/a&gt; për signalé dij givo e dij sugeriment.</string>
@@ -151,8 +156,8 @@
   <string name="detail_description_empty">Gnun-a descrission</string>
   <string name="detail_license_empty">Licensa sconossùa</string>
   <string name="menu_refresh">Rinfrësché</string>
-  <string name="read_storage_permission_rationale">Autorisassion necessaria: Lese n\'anmagasinament estern. L\'aplicassion a peul pa marcé sensa lòn.</string>
-  <string name="write_storage_permission_rationale">Autorisassion necessaria: Scrive n\'anmagasinament estern. L\'aplicassion a peul pa marcé sensa \'d lòn.</string>
+  <string name="read_storage_permission_rationale">Autorisassion necessaria: Lese n\'anmagasinament estern. L\'aplicassion a peul pa acede a soa galarìa sensa \'d lòn.</string>
+  <string name="write_storage_permission_rationale">Autorisassion necessaria: Scrive an sn\'anmagasinament estern. L\'aplicassion a peul pa acede a soa màchina fòto sensa \'d lòn.</string>
   <string name="location_permission_rationale">Autorisassion facoltativa: Oten-e la posission atual për dij sugeriment ëd categorìa</string>
   <string name="ok">Va bin</string>
   <string name="title_activity_nearby">Pòst davzin</string>
@@ -165,6 +170,8 @@
   <string name="media_detail_media_title">Tìtol dël mojen</string>
   <string name="media_detail_description">Descrission</string>
   <string name="media_detail_description_explanation">La descrission dël mojen a va ambelessì. Sòn a podrìa esse potensialman longh, e a dovrà esse spantià su vàire linie. I speroma comsëssìa ch\'a ven-a grassios.</string>
+  <string name="media_detail_author">Autor</string>
+  <string name="media_detail_author_explanation">Lë stranòm ëd l\'autor ëd na plancia an evidensa a va ambelessì.</string>
   <string name="media_detail_uploaded_date">Dàita ëd cariament</string>
   <string name="media_detail_license">Licensa</string>
   <string name="media_detail_coordinates">Coordinà</string>
@@ -207,10 +214,12 @@
   <string name="navigation_item_logout">Seurte dal sistema</string>
   <string name="navigation_item_info">Cors d\'antrodussion</string>
   <string name="navigation_item_notification">Notìfiche</string>
+  <string name="navigation_item_featured_images">Butà an evidensa</string>
   <string name="nearby_needs_permissions">Ij pòst ant j\'anviron a peulo nen esse smonù sensa ij përmess ëd localisassion</string>
   <string name="no_description_found">gnun-a descrission trovà</string>
   <string name="nearby_info_menu_commons_article">Pàgina dj\'archivi ëd Comun</string>
   <string name="nearby_info_menu_wikidata_article">Element ëd WikiData</string>
+  <string name="nearby_info_menu_wikipedia_article">Artìcol ëd Wikipedia</string>
   <string name="error_while_cache">Eror antramentre ch\'as butavo le plance an memòria local</string>
   <string name="title_info">Un tìtol dëscritiv ùnich për l\'archivi, che a servirà com nòm d\'archivi. A peul dovré un lengagi sempi con djë spassi. Ch\'a ancluda pa l\'estension dl\'archivi</string>
   <string name="description_info">Për piasì, ch\'a descriva ël mojen mej ch\'a peul: Andoa a l\'é stàit fàit? Për piasì, ch\'a descriva j\'oget o le përson-e. Ch\'a arvela j\'anformassion ch\'a l\'é nen belfé andviné, për esempi l\'ora dël dì, s\'a l\'é un panorama. Si ël mojen a smon cheicòs ëd foravìa, për piasì ch\'a spiega lòn ch\'a lo rend foravìa.</string>
@@ -225,6 +234,7 @@
   <string name="no_web_browser">Gnun navigador trovà për duverté l\'adrëssa an sl\'aragnà</string>
   <string name="null_url">Eror! Liura nen trovà</string>
   <string name="nominate_deletion">Propon-e për la scancelassion</string>
+  <string name="nominated_for_deletion">Sa plancia a l\'é stàita nominà për ël dëscancelament.</string>
   <string name="view_browser">Smon-e ant ël navigador</string>
   <string name="nearby_location_has_not_changed">Ël leu a l\'é nen cangià.</string>
   <string name="nearby_location_not_available">Leu nen disponìbil.</string>
@@ -236,6 +246,21 @@
   <string name="notifications_thank_you_edit">Mersì d\'avèj fàit na modìfica</string>
   <string name="notifications_mention">%1$s a l\'ha massionalo su %2$s .</string>
   <string name="toggle_view_button">Cangé la visualisassion</string>
-  <string name="about_faq">Chestion frequente</string>
+  <string name="nearby_directions">DIRESSION</string>
+  <string name="nearby_wikidata">WIKIDATA</string>
+  <string name="nearby_wikipedia">WIKIPEDIA</string>
+  <string name="nearby_commons">COMUN</string>
+  <string name="about_rate_us">&lt;u&gt;Ch\'an vàluta&lt;/u&gt;</string>
+  <string name="about_faq">&lt;u&gt;Chestion frequente&lt;/u&gt;</string>
   <string name="welcome_skip_button">Sauté lë spiegon</string>
+  <string name="no_internet">Aragnà nen disponìbil</string>
+  <string name="internet_established">Aragnà disponìbil</string>
+  <string name="error_notifications">Eror an sl\'arserca dle notìfiche</string>
+  <string name="no_notifications">Gnun-e notìfiche trovà</string>
+  <string name="about_translate">&lt;u&gt;Volté&lt;/u&gt;</string>
+  <string name="about_translate_title">Lenghe</string>
+  <string name="about_translate_message">Selessioné la lenga për la qual a veul mandé dle tradussion</string>
+  <string name="about_translate_proceed">Andé anans</string>
+  <string name="about_translate_cancel">Anulé</string>
+  <string name="retry">Prové torna</string>
 </resources>

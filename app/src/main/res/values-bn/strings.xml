@@ -1,4 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- Authors:
+* Aftabuzzaman
+* Bellayet
+* Elias Ahmmad
+* Leemon2010
+* Mohammed Galib Hasan
+* Muktogayn
+* Rasal Lia
+* Sankarshan
+* Tauhid16
+-->
 <resources>
   <string name="preference_category_appearance">অবয়ব</string>
   <string name="preference_category_general">সাধারণ</string>
@@ -59,6 +70,7 @@
   <string name="categories_search_text_hint">বিষয়শ্রেণী অনুসন্ধান</string>
   <string name="menu_save_categories">সংরক্ষণ</string>
   <string name="refresh_button">পুনঃসতেজ</string>
+  <string name="display_list_button">তালিকা</string>
   <string name="gps_disabled">GPS আপনার ডিভাইসে অক্ষম করা আছে। আপনি কি এটি সক্ষম করতে চান?</string>
   <string name="enable_gps">GPS সক্রিয় করুন</string>
   <string name="contributions_subtitle_zero">এখনো কোন আপলোড নেই</string>
@@ -80,6 +92,7 @@
   <string name="categories_activity_title">বিষয়শ্রেণীসমূহ</string>
   <string name="title_activity_settings">সেটিং</string>
   <string name="title_activity_signup">নিবন্ধন করুন</string>
+  <string name="title_activity_featured_images">নির্বাচিত ছবি</string>
   <string name="menu_about">পরিচিতি</string>
   <string name="about_license">উইকিমিডিয়া কমন্স অ্যাপ হচ্ছে একটি উন্মুক্ত উৎস সম্বলিত অ্যাপ যা উইকিমিডিয়া সম্প্রদায়ের ব্যবহারকারী ও সেচ্ছাসেবকবৃন্দ কর্তৃক তৈরিকৃত এবং পরিচালিত। উইকিমিডিয়া ফাউন্ডেশন এই অ্যাপ তৈরি, উন্নয়ন বা রক্ষণাবেক্ষণে জড়িত নয়।</string>
   <string name="about_improve">কোন সমস্যা ও পরামর্শের জন্য &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;গিটহাব ইস্যু&lt;/a&gt; তৈরি করুন।</string>
@@ -150,8 +163,8 @@
   <string name="detail_description_empty">বিবরণ নেই</string>
   <string name="detail_license_empty">অজানা লাইসেন্স</string>
   <string name="menu_refresh">পুনঃসতেজ</string>
-  <string name="read_storage_permission_rationale">প্রয়োজনীয় অনুমতি: বহিঃস্ত সঞ্চয়স্থান পড়া। এটি ছাড়া অ্যাপ কাজ করবে না।</string>
-  <string name="write_storage_permission_rationale">অনুমতি প্রয়োজন: অালাদাভাবে সংযুক্ত স্টোরেজ লিখুন। এটি ছাড়া অ্যাপটি চলতে পারেনা।</string>
+  <string name="read_storage_permission_rationale" fuzzy="true">প্রয়োজনীয় অনুমতি: বহিঃস্ত সঞ্চয়স্থান পড়া। এটি ছাড়া অ্যাপ কাজ করবে না।</string>
+  <string name="write_storage_permission_rationale" fuzzy="true">অনুমতি প্রয়োজন: অালাদাভাবে সংযুক্ত স্টোরেজ লিখুন। এটি ছাড়া অ্যাপটি চলতে পারেনা।</string>
   <string name="location_permission_rationale">ঐচ্ছিক অনুমতি: বিষয়শ্রেণী পরামর্শের জন্য বর্তমান অবস্থান নেয়</string>
   <string name="ok">ঠিক আছে</string>
   <string name="title_activity_nearby">কাছাকাছি স্থান</string>
@@ -164,6 +177,7 @@
   <string name="media_detail_media_title">মিডিয়ার শিরোনাম</string>
   <string name="media_detail_description">বিবরণ</string>
   <string name="media_detail_description_explanation">মিডিয়ার বিবরণ এখানে যাবে। এই মোটামুটি দীর্ঘ হতে পারে এবং একাধিক লাইনে লিখতে হতে পারে। আমরা আশা করি এটি দেখতে সুন্দর হবে।</string>
+  <string name="media_detail_author">স্রষ্টা</string>
   <string name="media_detail_uploaded_date">আপলোডের তারিখ</string>
   <string name="media_detail_license">লাইসেন্স</string>
   <string name="media_detail_coordinates">স্থানাঙ্কসমূহ</string>
@@ -206,10 +220,12 @@
   <string name="navigation_item_logout">প্রস্থান</string>
   <string name="navigation_item_info">ভূমিকা</string>
   <string name="navigation_item_notification">বিজ্ঞপ্তি</string>
+  <string name="navigation_item_featured_images">নির্বাচিত</string>
   <string name="nearby_needs_permissions">অবস্থানের অনুমতি ছাড়া কাছাকাছি জায়গাগুলি প্রদর্শন করা যাবে না</string>
   <string name="no_description_found">কোন বিবরণ পাওয়া যায়নি</string>
   <string name="nearby_info_menu_commons_article">কমন্সে ফাইলের পাতা</string>
   <string name="nearby_info_menu_wikidata_article">উইকিউপাত্ত পদ</string>
+  <string name="nearby_info_menu_wikipedia_article">উইকিপিডিয়া নিবন্ধ</string>
   <string name="error_while_cache">ছবি আনার সময় ত্রুটি</string>
   <string name="title_info">ফাইলের একটি স্বতন্ত্র বর্ণনামূলক নাম যা ফাইলের নাম হিসাবে কাজ করবে। অাপনি সাধারণ ভাষা ব্যবহার করতে পারেন শূন্যস্থানসহ। ফাইলের এক্সটেনশন যুক্ত করবেন না।</string>
   <string name="description_info">যতটা সম্ভব মিডিয়াটি বর্ণনা করুন: এটি কোথায় ধারণ করা হয়েছিল? এটি কি প্রদর্শন করে? এটির প্রসঙ্গ কি? ধারণকৃত বস্তু অথবা ব্যক্তির বর্ণনা করুন। সহজে অনুমান করা যায়না সেরকম তথ্য উদঘাটন করুন, উদাহরণস্বরূপ, যদি ল্যান্ডস্কেপ হয় তাহলে দিবসকালের সময় দিন।</string>
@@ -222,6 +238,8 @@
   <string name="send_log_file">লগ ফাইল পাঠান</string>
   <string name="send_log_file_description">ইমেইলের মাধ্যমে উন্নয়নকারীর কাছে লগ ফাইল পাঠান</string>
   <string name="null_url">ত্রুটি! ইউআরএল পাওয়া যায়নি</string>
+  <string name="nominate_deletion">অপসারণের জন্য মনোনীত</string>
+  <string name="view_browser">ব্রাউজারে দেখুন</string>
   <string name="nearby_location_has_not_changed">অবস্থান পরিবর্তন হয়নি।</string>
   <string name="nearby_location_not_available">অবস্থান উপলব্ধ নয়।</string>
   <string name="location_permission_rationale_nearby">কাছাকাছি স্থানসমূহের একটি তালিকা প্রদর্শন করতে অনুমতি প্রয়োজন</string>
@@ -231,6 +249,14 @@
   <string name="notifications_talk_page_message">%1$s আপনার আলাপ পাতায় একটি বার্তা দিয়েছেন</string>
   <string name="notifications_thank_you_edit">একটি সম্পাদনা করার জন্য আপনাকে ধন্যবাদ</string>
   <string name="notifications_mention">%1$s আপনাকে %2$s-এ উল্লেখ করেছেন।</string>
-  <string name="about_faq">প্রায়শই জিজ্ঞাসিত প্রশ্নসমূহ</string>
+  <string name="nearby_directions">দিকনির্দেশ</string>
+  <string name="nearby_wikidata">উইকিউপাত্ত</string>
+  <string name="nearby_wikipedia">উইকিপিডিয়া</string>
+  <string name="nearby_commons">কমন্স</string>
+  <string name="about_faq" fuzzy="true">প্রায়শই জিজ্ঞাসিত প্রশ্নসমূহ</string>
   <string name="welcome_skip_button">টিউটোরিয়াল এড়ান</string>
+  <string name="no_internet">ইন্টারনেট অনুপলব্ধ</string>
+  <string name="internet_established">ইন্টারনেট উপলব্ধ</string>
+  <string name="no_notifications">কোন বিজ্ঞপ্তি পাওয়া যায়নি</string>
+  <string name="retry">পুনঃচেষ্টা করুন</string>
 </resources>

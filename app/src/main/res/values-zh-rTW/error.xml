@@ -1,4 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- Authors:
+* Simon Shek
+* 烈羽
+-->
 <resources>
   <string name="crash_dialog_title">共享資源已當機</string>
   <string name="crash_dialog_text">哎呀。出了錯 ！</string>

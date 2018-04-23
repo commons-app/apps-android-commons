@@ -14,7 +14,9 @@ import android.support.annotation.NonNull;
 import android.support.v4.view.ViewCompat;
 import android.support.v7.app.AlertDialog;
 import android.text.Editable;
+import android.text.Html;
 import android.text.TextWatcher;
+import android.text.method.LinkMovementMethod;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -225,18 +227,6 @@ public class SingleUploadFragment extends CommonsDaggerSupportFragment {
                 .commit();
     }
 
-    @OnTouch(R.id.share_license_summary)
-    boolean showLicence(View view, MotionEvent motionEvent) {
-        if (motionEvent.getActionMasked() == ACTION_DOWN) {
-            Intent intent = new Intent();
-            intent.setAction(Intent.ACTION_VIEW);
-            intent.setData(Uri.parse(licenseUrlFor(license)));
-            startActivity(intent);
-            return true;
-        } else {
-            return false;
-        }
-    }
 
     @OnClick(R.id.titleDescButton)
     void setTitleDescButton() {
@@ -294,8 +284,10 @@ public class SingleUploadFragment extends CommonsDaggerSupportFragment {
 
     @SuppressLint("StringFormatInvalid")
     private void setLicenseSummary(String license) {
-        licenseSummaryView.setText(getString(R.string.share_license_summary, getString(Utils.licenseNameFor(license))));
-    }
+        String licenseHyperLink = "<a href='" + licenseUrlFor(license)+"'>"+ getString(Utils.licenseNameFor(license)) + "</a><br>";
+        licenseSummaryView.setMovementMethod(LinkMovementMethod.getInstance());
+        licenseSummaryView.setText(Html.fromHtml(getString(R.string.share_license_summary, licenseHyperLink)));
+ }
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {

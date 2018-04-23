@@ -1,5 +1,15 @@
 # Wikimedia Commons for Android
 
+## v2.7.0
+- New Nearby Places UI with direct uploads (and associated category suggestions)
+- Added two-factor authentication login
+- Added Notifications activity to display user talk messages
+- Added real-time location tracking in Nearby
+- Added "rate us", "translate", and FB link in About
+- Improvements to UI of navigation drawer, tutorial, media details view, login activity and Settings
+- Added option to nominate picture for deletion in media details view
+- Too many bug and crash fixes to mention!
+
 ## v2.6.7
 - Added null checks to prevent frequent crashes in ModificationsSyncAdapter
 

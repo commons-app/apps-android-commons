@@ -1,4 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- Authors:
+* Anaclaudiaml
+* Caio1478
+* Eduardo Addad de Oliveira
+* Fúlvio
+* Gusta
+* HenriqueCrang
+* Legionibus
+* Leosls
+* Luckas
+* Maxan
+* TheEduGobi
+* TheGabrielZaum
+* Tuliouel
+-->
 <resources>
   <string name="preference_category_appearance">Aparência</string>
   <string name="preference_category_general">Geral</string>
@@ -59,6 +74,7 @@
   <string name="categories_search_text_hint">Procurar categorias</string>
   <string name="menu_save_categories">Salvar</string>
   <string name="refresh_button">Atualizar</string>
+  <string name="display_list_button">Lista</string>
   <string name="gps_disabled">O GPS está desligado no seu aparelho. Gostarias de ligá-lo ?</string>
   <string name="enable_gps">GPS inapto.</string>
   <string name="contributions_subtitle_zero">Ainda não carregado</string>
@@ -80,6 +96,7 @@
   <string name="categories_activity_title">Categorias</string>
   <string name="title_activity_settings">Configurações</string>
   <string name="title_activity_signup">Criar conta</string>
+  <string name="title_activity_featured_images">Imagens destacadas</string>
   <string name="menu_about">Sobre</string>
   <string name="about_license">O Wikimedia Commons é um aplicativo de código aberto criado e mantido por beneficiários e voluntários da comunidade Wikimedia. A Wikimedia Foundation não está envolvida na criação, desenvolvimento ou manutenção do aplicativo.</string>
   <string name="about_improve">Criar uma nova &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;publicação no GitHub&lt;/a&gt; para informar erros e sugestões.</string>
@@ -151,8 +168,8 @@
   <string name="detail_description_empty">Sem descrição</string>
   <string name="detail_license_empty">Licença desconhecida</string>
   <string name="menu_refresh">Atualizar</string>
-  <string name="read_storage_permission_rationale">Permissão necessária: Ler armazenamento externo. O aplicativo não pode funcionar sem isso.</string>
-  <string name="write_storage_permission_rationale">Permissão necessária: Escreva armazenamento externo. A aplicação não pode funcionar sem isso.</string>
+  <string name="read_storage_permission_rationale">Permissão necessária: leia o armazenamento externo. App não pode acessar sua galeria sem isso.</string>
+  <string name="write_storage_permission_rationale">Permissão necessária: escreva o armazenamento externo. App não pode acessar sua câmera sem isso.</string>
   <string name="location_permission_rationale">Permissão opcional: Obter a localização atual de sugestões de categoria</string>
   <string name="ok">OK</string>
   <string name="title_activity_nearby">Lugares próximos</string>
@@ -165,6 +182,8 @@
   <string name="media_detail_media_title">Título da mídia</string>
   <string name="media_detail_description">Descrição</string>
   <string name="media_detail_description_explanation">Descrição da mídia aqui. Isso pode ser potencialmente longo e precisará envolver múltiplas linhas. Esperamos que seja agradável.</string>
+  <string name="media_detail_author">Autor</string>
+  <string name="media_detail_author_explanation">O nome de usuário do autor da imagem destacada fica aqui.</string>
   <string name="media_detail_uploaded_date">Data de envio.</string>
   <string name="media_detail_license">Licença</string>
   <string name="media_detail_coordinates">Coordenadas</string>
@@ -207,10 +226,12 @@
   <string name="navigation_item_logout">Sair</string>
   <string name="navigation_item_info">Tutorial</string>
   <string name="navigation_item_notification">Notificações</string>
+  <string name="navigation_item_featured_images">Destacado</string>
   <string name="nearby_needs_permissions">Os locais próximos não podem ser exibidos sem permissões de localização</string>
   <string name="no_description_found">Nenhuma descrição encontrada</string>
   <string name="nearby_info_menu_commons_article">Página de arquivo do Commons</string>
   <string name="nearby_info_menu_wikidata_article">Item do Wikidata</string>
+  <string name="nearby_info_menu_wikipedia_article">Artigo na Wikipédia</string>
   <string name="error_while_cache">Erro durante o cache de imagens</string>
   <string name="title_info">Um título descritivo exclusivo para o arquivo, que servirá como um nome de arquivo. Você pode usar linguagem simples com espaços. Não inclua a extensão do arquivo</string>
   <string name="description_info">Por favor, descreva a mídia tanto quanto possível: onde foi tomada? O que isso mostra? Qual é o contexto? Descreva os objetos ou pessoas. Revelar informações que não podem ser facilmente adivinhadas, por exemplo, a hora do dia, se for uma paisagem. Se a mídia mostrar algo incomum, explique o que torna incomum.</string>
@@ -225,6 +246,7 @@
   <string name="no_web_browser">Nenhum navegador da Web foi encontrado para abrir o URL</string>
   <string name="null_url">Erro! URL não encontrado</string>
   <string name="nominate_deletion">Nomear para a exclusão</string>
+  <string name="nominated_for_deletion">Esta imagem foi nomeada para eliminação.</string>
   <string name="view_browser">Exibir no navegador</string>
   <string name="nearby_location_has_not_changed">O local não mudou.</string>
   <string name="nearby_location_not_available">Localização não disponível.</string>
@@ -236,6 +258,21 @@
   <string name="notifications_thank_you_edit">Obrigado por ter realizado uma edição</string>
   <string name="notifications_mention">%1$s fez menção a você em %2$s.</string>
   <string name="toggle_view_button">Visualização de alternância</string>
-  <string name="about_faq">Perguntas mais frequentes</string>
+  <string name="nearby_directions">DIREÇÕES</string>
+  <string name="nearby_wikidata">WIKIDATA</string>
+  <string name="nearby_wikipedia">WIKIPÉDIA</string>
+  <string name="nearby_commons">COMMONS</string>
+  <string name="about_rate_us">&lt;u&gt;Avalie-nos&lt;/u&gt;</string>
+  <string name="about_faq">&lt;u&gt;FAQ&lt;/u&gt;</string>
   <string name="welcome_skip_button">Pular tutoril</string>
+  <string name="no_internet">A Internet não está disponível</string>
+  <string name="internet_established">A Internet está disponível</string>
+  <string name="error_notifications">Erro ao tentar obter as notificações</string>
+  <string name="no_notifications">Não foram encontradas notificações</string>
+  <string name="about_translate">&lt;u&gt;Traduzir&lt;/u&gt;</string>
+  <string name="about_translate_title">Idiomas</string>
+  <string name="about_translate_message">Selecione o idioma para a qual quer enviar as traduções</string>
+  <string name="about_translate_proceed">Avançar</string>
+  <string name="about_translate_cancel">Cancelar</string>
+  <string name="retry">Tentar novamente</string>
 </resources>

@@ -1,4 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- Authors:
+* Alex Khimich
+* Andriykopanytsia
+* Base
+* Movses
+* Mykola Swarnyk
+* Piramidion
+* SimondR
+* Ата
+-->
 <resources>
   <string name="preference_category_appearance">Зовнішній вигляд</string>
   <string name="preference_category_general">Загальні</string>
@@ -45,6 +55,7 @@
   <string name="menu_share">Поділитися</string>
   <string name="menu_open_in_browser">Відкрити у браузері</string>
   <string name="share_title_hint">Назва</string>
+  <string name="add_title_toast">Будь ласка, вкажіть назву цього файлу</string>
   <string name="share_description_hint">Опис</string>
   <string name="login_failed_network">Неможливо увійти — збій у мережі</string>
   <string name="login_failed_username">Неможливо увійти — будь ласка, перевірте своє ім\'я користувача</string>
@@ -60,6 +71,7 @@
   <string name="categories_search_text_hint">Пошук категорій</string>
   <string name="menu_save_categories">Зберегти</string>
   <string name="refresh_button">Оновити</string>
+  <string name="display_list_button">Список</string>
   <string name="gps_disabled">GPS вимкнено на Вашому пристрої. Бажаєте увімкнути його?</string>
   <string name="enable_gps">Увімкнути GPS</string>
   <string name="contributions_subtitle_zero">Ще нема завантажень</string>
@@ -87,6 +99,7 @@
   <string name="categories_activity_title">Категорії</string>
   <string name="title_activity_settings">Налаштування</string>
   <string name="title_activity_signup">Зареєструватися</string>
+  <string name="title_activity_featured_images">Вибрані зображення</string>
   <string name="menu_about">Про програму</string>
   <string name="about_license">Додаток «Вікісховище» — це програма з відкритим кодом, яку створили отримувачі грантів та волонтери спільноти Вікімедіа. Фонд Вікімедіа не брав участі у створенні, розробці чи обслуговуванні цього додатка.</string>
   <string name="about_improve">Ви можете створити новий &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;запит на GitHub&lt;/a&gt;, щоб повідомити про помилки, або висловити пропозиції.</string>
@@ -133,10 +146,19 @@
   <string name="tutorial_1_subtext">Ваші зображення допомагають освіті людей по всьому світу!</string>
   <string name="tutorial_2_text">Будь ласка, завантажуйте зображення, повністю виконані або створені Вами:</string>
   <string name="tutorial_2_subtext">Природні об\'єкти (квіти, тварини, гори) \n• Корисні об\'єкти (велосипеди, залізничні вокзали) \n• Відомі люди (Ваш мер, олімпійські атлети, яких Ви зустрічали)</string>
+  <string name="tutorial_2_subtext_1">Природні об\'єкти (квіти, тварини, гори)</string>
+  <string name="tutorial_2_subtext_2">Корисні об\'єкти (велосипеди, залізничні станції)</string>
+  <string name="tutorial_2_subtext_3">Відомі люди (ваш мер, спортсмен-олімпієць, якого ви зустріли)</string>
   <string name="tutorial_3_text">Будь ласка, НЕ завантажуйте:</string>
   <string name="tutorial_3_subtext">u2022 Селфі або фото своїх друзів \nu2022 Зображення, які Ви завантажили з інтернету \nu2022 Скріншоти патентованих програм</string>
+  <string name="tutorial_3_subtext_1">Селфі чи фото ваших друзів</string>
+  <string name="tutorial_3_subtext_2">Зображення, які ви завантажили з інтернету</string>
+  <string name="tutorial_3_subtext_3">Знімки екрану пропрієтарних програм</string>
   <string name="tutorial_4_text">Приклад завантаження:</string>
   <string name="tutorial_4_subtext">- Назва: Сіднейський оперний театр \n- Опис: Вид на Сіднейський оперний театр з боку бухти \n- Категорії: Sydney Opera House, Sydney Opera House from the west, Sydney Opera House remote views</string>
+  <string name="tutorial_4_subtext_1">Назва: Сіднейський оперний театр</string>
+  <string name="tutorial_4_subtext_2">Опис: Сіднейський оперний театр, вид через затоку</string>
+  <string name="tutorial_4_subtext_3">Категорії: Sydney Opera House from the west, Sydney Opera House remote views</string>
   <string name="welcome_wikipedia_text">Надсилайте Ваші зображення. Допоможіть оживити статті Вікіпедії!</string>
   <string name="welcome_wikipedia_subtext">Зображення у Вікіпедії надходять з Вікісховища.</string>
   <string name="welcome_copyright_text">Ваші зображення допомагають освіті людей у всьому світі.</string>
@@ -149,8 +171,8 @@
   <string name="detail_description_empty">Немає опису</string>
   <string name="detail_license_empty">Невідома ліцензія</string>
   <string name="menu_refresh">Оновити</string>
-  <string name="read_storage_permission_rationale">Обов\'язковий дозвіл: читання зовнішньої пам\'яті. Програма не може працювати без цього.</string>
-  <string name="write_storage_permission_rationale">Обов\'язковий дозвіл: записування на зовнішнє сховище. Програма не може працювати без цього.</string>
+  <string name="read_storage_permission_rationale">Обов\'язковий дозвіл: читання зовнішньої пам\'яті. Без цього дозволу програма не зможе отримати доступ до вашої галереї.</string>
+  <string name="write_storage_permission_rationale">Обов\'язковий дозвіл: записування на зовнішнє сховище. Програма не зможе отримати доступ до камери без цього дозволу.</string>
   <string name="location_permission_rationale">Додатковий дозвіл: отримувати поточне розташування для підказок категорій</string>
   <string name="ok">Гаразд</string>
   <string name="title_activity_nearby">Місця поблизу</string>
@@ -163,6 +185,8 @@
   <string name="media_detail_media_title">Назва медіафайлу</string>
   <string name="media_detail_description">Опис</string>
   <string name="media_detail_description_explanation">Сюди потрапляє опис медіафайлу. Він потенційно може бути досить довгим і розтягнутися на декілька рядків. Однак ми сподіваємось, що він виглядатиме гарно.</string>
+  <string name="media_detail_author">Автор</string>
+  <string name="media_detail_author_explanation">Тут вказується ім\'я автора вибраного зображеня</string>
   <string name="media_detail_uploaded_date">Дата завантаження</string>
   <string name="media_detail_license">Ліцензія</string>
   <string name="media_detail_coordinates">Координати</string>
@@ -205,10 +229,12 @@
   <string name="navigation_item_logout">Вийти</string>
   <string name="navigation_item_info">Посібник</string>
   <string name="navigation_item_notification">Сповіщення</string>
+  <string name="navigation_item_featured_images">Вибране</string>
   <string name="nearby_needs_permissions">Місця поблизу неможливо показати без дозволу на визначення місця розташування.</string>
   <string name="no_description_found">опис не знайдено</string>
   <string name="nearby_info_menu_commons_article">Сторінка файлу у Вікісховищі</string>
   <string name="nearby_info_menu_wikidata_article">Елемент Вікіданих</string>
+  <string name="nearby_info_menu_wikipedia_article">Стаття Вікіпедії</string>
   <string name="error_while_cache">Помилка кешування зображень</string>
   <string name="title_info">Унікальна описова назва файлу. Ви можете використовувати простий текст з пробілами. Не вказуйте розширення файлу</string>
   <string name="description_info">Будь ласка, докладно опишіть файл: де його було зроблено? що на ньому зображено? який контекст? Будь ласка, опишіть об\'єкти чи осіб. Додайте інформацію, яку не можна легко здогадатися, наприклад, пору доби для фотографії пейзажу. Якщо зображено щось незвичайне, постарайтеся пояснити, що робить його незвичайним.</string>
@@ -220,6 +246,12 @@
   <string name="login_to_your_account">Увійдіть у свій обліковий запис</string>
   <string name="send_log_file">Надіслати лог-файл</string>
   <string name="send_log_file_description">Надіслати лог-файл розробникам електронною поштою</string>
+  <string name="no_web_browser">Не знайдено браузера, щоб відкрити посилання</string>
+  <string name="null_url">Помилка! Посилання не знайдено</string>
+  <string name="nominate_deletion">Номінувати на вилучення</string>
+  <string name="nominated_for_deletion">Цей файл номіновано на вилучення.</string>
+  <string name="nominated_see_more"/>
+  <string name="view_browser">Переглянути в браузері</string>
   <string name="nearby_location_has_not_changed">Розташування не змінено</string>
   <string name="nearby_location_not_available">Місцезнаходження недоступне</string>
   <string name="location_permission_rationale_nearby">Потрібний дозвіл для показу списку місць поблизу</string>
@@ -230,4 +262,21 @@
   <string name="notifications_thank_you_edit">Дякуємо за правку</string>
   <string name="notifications_mention">%1$s згадав вас на %2$s.</string>
   <string name="toggle_view_button">Перемкнути режим перегляду</string>
+  <string name="nearby_directions">НАПРЯМКИ</string>
+  <string name="nearby_wikidata">ВІКІДАНІ</string>
+  <string name="nearby_wikipedia">ВІКІПЕДІЯ</string>
+  <string name="nearby_commons">ВІКІСХОВИЩЕ</string>
+  <string name="about_rate_us">&lt;u&gt;Оцініть нас&lt;/u&gt;</string>
+  <string name="about_faq">Часті запитання</string>
+  <string name="welcome_skip_button">Пропустити інструкцію</string>
+  <string name="no_internet">Інтернет недоступний</string>
+  <string name="internet_established">Інтернет доступний</string>
+  <string name="error_notifications">Помилка при отриманні сповіщення</string>
+  <string name="no_notifications">Сповіщень немає</string>
+  <string name="about_translate">&lt;u&gt;Перекласти&lt;/u&gt;</string>
+  <string name="about_translate_title">Мови</string>
+  <string name="about_translate_message">Виберіть мову, переклади якою ви хочете відправити</string>
+  <string name="about_translate_proceed">Виконується</string>
+  <string name="about_translate_cancel">Скасувати</string>
+  <string name="retry">Повторити</string>
 </resources>

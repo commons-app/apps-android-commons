@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- Authors:
+* Hello903hello
+-->
 <resources>
   <string name="crash_dialog_title">同享壞咗</string>
   <string name="crash_dialog_text">哎呀。出咗錯！</string>

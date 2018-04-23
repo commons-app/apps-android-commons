@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- Authors:
+* Paul Beppler
+-->
 <resources>
   <string name="crash_dialog_title">Commons (Allmend) ist abgestürzt</string>
   <string name="crash_dialog_text">Huch! Etwas ist schiefgeloof.</string>

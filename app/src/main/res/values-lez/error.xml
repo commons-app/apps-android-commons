@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- Authors:
+* Raa555
+-->
 <resources>
   <string name="crash_dialog_title">Чlурукl хьана</string>
   <string name="crash_dialog_text">Ёъ, вуч-ятlани масакl фена</string>

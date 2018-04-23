@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- Authors:
+* Chaduvari
+-->
 <resources>
   <string name="crash_dialog_title">కామన్స్ క్రాషయింది</string>
   <string name="crash_dialog_text">అడెడె.. ఎక్కడో తప్పు జరిగింది!</string>

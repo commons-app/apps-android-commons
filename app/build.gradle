@@ -11,17 +11,18 @@ dependencies {
     implementation 'fr.avianey.com.viewpagerindicator:library:2.4.1.1@aar'
     implementation 'in.yuvi:http.fluent:1.3'
     implementation 'com.android.volley:volley:1.0.0'
-    implementation 'ch.acra:acra:4.7.0'
+    implementation 'ch.acra:acra:4.9.2'
     implementation 'org.mediawiki:api:1.3'
     implementation 'commons-codec:commons-codec:1.10'
     implementation 'com.github.pedrovgs:renderers:3.3.3'
     implementation 'com.google.code.gson:gson:2.8.1'
     implementation 'com.jakewharton.timber:timber:4.5.1'
     implementation 'info.debatty:java-string-similarity:0.24'
+    implementation 'com.borjabravo:readmoretextview:2.1.0'
+    implementation 'com.android.support.constraint:constraint-layout:1.0.2'
     implementation ('com.mapbox.mapboxsdk:mapbox-android-sdk:5.4.1@aar'){
         transitive=true
     }
-
 
     implementation "com.android.support:support-v4:$SUPPORT_LIB_VERSION"
     implementation "com.android.support:appcompat-v7:$SUPPORT_LIB_VERSION"
@@ -41,8 +42,6 @@ dependencies {
     // explicitly depend on RxJava's latest version for bug fixes and new features.
     implementation 'com.android.support:multidex:1.0.3'
 
-    testImplementation "org.robolectric:multidex:3.4.2"
-
     implementation 'io.reactivex.rxjava2:rxjava:2.1.2'
     implementation 'com.jakewharton.rxbinding2:rxbinding:2.0.0'
     implementation 'com.jakewharton.rxbinding2:rxbinding-support-v4:2.0.0'
@@ -54,33 +53,25 @@ dependencies {
 
     implementation "com.google.dagger:dagger:$DAGGER_VERSION"
     implementation "com.google.dagger:dagger-android-support:$DAGGER_VERSION"
-
     kapt "com.google.dagger:dagger-android-processor:$DAGGER_VERSION"
     kapt "com.google.dagger:dagger-compiler:$DAGGER_VERSION"
 
+    testImplementation "org.robolectric:multidex:3.4.2"
     testImplementation "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
-    androidTestImplementation "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
-
+    testImplementation "org.jetbrains.kotlin:kotlin-reflect:$kotlin_version"
     testImplementation 'junit:junit:4.12'
     testImplementation 'org.robolectric:robolectric:3.7.1'
-    testImplementation 'org.mockito:mockito-all:1.10.19'
-
+    testImplementation 'com.nhaarman:mockito-kotlin:1.5.0'
     testImplementation 'com.squareup.okhttp3:mockwebserver:3.8.1'
+
+    androidTestImplementation "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
     androidTestImplementation 'com.squareup.okhttp3:mockwebserver:3.8.1'
     androidTestImplementation "com.android.support:support-annotations:$SUPPORT_LIB_VERSION"
-    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
+    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2-alpha1'
 
     debugImplementation "com.squareup.leakcanary:leakcanary-android:$LEAK_CANARY"
     releaseImplementation "com.squareup.leakcanary:leakcanary-android-no-op:$LEAK_CANARY"
     testImplementation "com.squareup.leakcanary:leakcanary-android-no-op:$LEAK_CANARY"
-
-    implementation "com.google.dagger:dagger:$DAGGER_VERSION"
-    implementation "com.google.dagger:dagger-android-support:$DAGGER_VERSION"
-    kapt "com.google.dagger:dagger-compiler:$DAGGER_VERSION"
-    kapt "com.google.dagger:dagger-android-processor:$DAGGER_VERSION"
-
-    implementation 'com.borjabravo:readmoretextview:2.1.0'
-    implementation 'com.android.support.constraint:constraint-layout:1.0.2'
 }
 
 android {
@@ -91,8 +82,8 @@ android {
 
     defaultConfig {
         applicationId 'fr.free.nrw.commons'
-        versionCode 82
-        versionName '2.6.7'
+        versionCode 83
+        versionName '2.7.0'
         setProperty("archivesBaseName", "app-commons-v$versionName-" + getBranchName())
 
         minSdkVersion project.minSdkVersion

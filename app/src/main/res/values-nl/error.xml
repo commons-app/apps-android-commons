@@ -1,4 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- Authors:
+* Ooswesthoesbes
+* Siebrand
+-->
 <resources>
   <string name="crash_dialog_title">Commons is gecrasht</string>
   <string name="crash_dialog_text">Oeps. Er is iets misgegaan.</string>

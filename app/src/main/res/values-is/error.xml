@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- Authors:
+* Sveinn í Felli
+-->
 <resources>
   <string name="crash_dialog_title">Commons-forritið hrundi</string>
   <string name="crash_dialog_text">Úbbs. Eitthvað fór úrskeiðis!</string>

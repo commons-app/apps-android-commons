@@ -1,4 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- Authors:
+* Aalam
+* Babanwalia
+* Jimidar
+* Sony dandiwal
+-->
 <resources>
   <string name="app_name" fuzzy="true">ਵਿਕੀਮੀਡੀਆ ਕਾਮਨਜ਼</string>
   <string name="menu_settings">ਸੈਟਿੰਗ</string>
@@ -131,7 +137,7 @@
   <string name="detail_description_empty">ਕੋਈ ਵੇਰਵਾ ਨਹੀਂ</string>
   <string name="detail_license_empty">ਅਣਜਾਣ ਲਸੰਸ</string>
   <string name="menu_refresh">ਤਾਜ਼ਾ ਕਰੋ</string>
-  <string name="read_storage_permission_rationale">ਆਗਿਆ ਚਾਹੀਦੀ ਹੈ: ਬਾਹਰੀ ਸਟੋਰੇਜ ਬਾਰੇ। ਇਸ ਤੋਂ ਬਿਨਾਂ ਐਪ ਕਾਰਜ ਨਹੀਂ ਕਰ ਸਕੇਗੀ।</string>
+  <string name="read_storage_permission_rationale" fuzzy="true">ਆਗਿਆ ਚਾਹੀਦੀ ਹੈ: ਬਾਹਰੀ ਸਟੋਰੇਜ ਬਾਰੇ। ਇਸ ਤੋਂ ਬਿਨਾਂ ਐਪ ਕਾਰਜ ਨਹੀਂ ਕਰ ਸਕੇਗੀ।</string>
   <string name="ok">ਠੀਕ ਹੈ</string>
   <string name="title_activity_nearby">ਨਜ਼ਦੀਕੀ ਥਾਵਾਂ</string>
   <string name="no_nearby">ਕੋਈ ਨਜ਼ਦੀਕੀ ਥਾਵਾਂ ਨਹੀਂ ਮਿਲੀਆਂ</string>
