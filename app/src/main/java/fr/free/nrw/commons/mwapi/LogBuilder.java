@@ -4,23 +4,30 @@ import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Build;
 
+import com.google.gson.Gson;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.HashMap;
+import java.util.Map;
 
 import fr.free.nrw.commons.BuildConfig;
 import fr.free.nrw.commons.Utils;
 import fr.free.nrw.commons.settings.Prefs;
+import okhttp3.HttpUrl;
 
 @SuppressWarnings("WeakerAccess")
 public class LogBuilder {
     private final MediaWikiApi mwApi;
+    private final Map<String, Object> data2;
     private final JSONObject data;
     private final long rev;
     private final String schema;
     private final SharedPreferences prefs;
+    private final Gson gsonParser;
 
     /**
      * Main constructor of LogBuilder
@@ -29,10 +36,13 @@ public class LogBuilder {
      * @param revision Log revision
      * @param mwApi    Wiki media API instance
      * @param prefs    Instance of SharedPreferences
+     * @param gsonParser Json parser
      */
-    LogBuilder(String schema, long revision, MediaWikiApi mwApi, SharedPreferences prefs) {
+    LogBuilder(String schema, long revision, MediaWikiApi mwApi, SharedPreferences prefs, Gson gsonParser) {
+        this.gsonParser = gsonParser;
         this.prefs = prefs;
         this.data = new JSONObject();
+        this.data2 = new HashMap<>();
         this.schema = schema;
         this.rev = revision;
         this.mwApi = mwApi;
@@ -51,6 +61,22 @@ public class LogBuilder {
             throw new RuntimeException(e);
         }
         return this;
+    }
+
+    HttpUrl toHttpUrl() {
+        return HttpUrl.parse(toUrlString());
+    }
+
+    String toUrlString() {
+        Map<String, Object> fullData = new HashMap<>();
+        fullData.put("schema", schema);
+        fullData.put("revision", rev);
+        fullData.put("wiki", BuildConfig.EVENTLOG_WIKI);
+        data2.put("device", EventLog.DEVICE);
+        data2.put("platform", "Android/" + Build.VERSION.RELEASE);
+        data2.put("appversion", "Android/" + BuildConfig.VERSION_NAME);
+        fullData.put("event", data2);
+        return BuildConfig.EVENTLOG_URL + "?" + Utils.urlEncode(gsonParser.toJson(fullData)) + ";";
     }
 
     /**

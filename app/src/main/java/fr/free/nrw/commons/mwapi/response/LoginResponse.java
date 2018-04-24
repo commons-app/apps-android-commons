@@ -13,6 +13,7 @@ public class LoginResponse {
     @SerializedName("username")
     public String username;
 
+    // TODO
     public String getStatusCodeToReturn() {
         if (status.equals("PASS")) {
             return status;

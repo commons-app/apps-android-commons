@@ -17,6 +17,9 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Locale;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -27,6 +30,14 @@ import timber.log.Timber;
 import static android.widget.Toast.LENGTH_SHORT;
 
 public class Utils {
+    public static Date parseMWDate(String mwDate) {
+        SimpleDateFormat isoFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'", Locale.ENGLISH); // Assuming MW always gives me UTC
+        try {
+            return isoFormat.parse(mwDate);
+        } catch (ParseException e) {
+            throw new RuntimeException(e);
+        }
+    }
 
     /**
      * Strips localization symbols from a string.

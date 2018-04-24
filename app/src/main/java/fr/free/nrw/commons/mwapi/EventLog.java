@@ -3,6 +3,8 @@ package fr.free.nrw.commons.mwapi;
 import android.content.SharedPreferences;
 import android.os.Build;
 
+import com.google.gson.Gson;
+
 import fr.free.nrw.commons.Utils;
 
 public class EventLog {
@@ -17,7 +19,7 @@ public class EventLog {
     }
 
     private static LogBuilder schema(String schema, long revision, MediaWikiApi mwApi, SharedPreferences prefs) {
-        return new LogBuilder(schema, revision, mwApi, prefs);
+        return new LogBuilder(schema, revision, mwApi, prefs, new Gson());
     }
 
     public static LogBuilder schema(Object[] scid, MediaWikiApi mwApi, SharedPreferences prefs) {
