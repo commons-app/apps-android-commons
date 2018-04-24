@@ -369,7 +369,7 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
             Gson gson = new GsonBuilder()
                     .registerTypeAdapter(Uri.class, new UriSerializer())
                     .create();
-            String gsonCurLatLng = gson.toJson(curLatLang);
+            String gsonCurLatLng = gson.toJson(curLatLng);
             bundle.clear();
             bundle.putString("CurLatLng", gsonCurLatLng);
 
