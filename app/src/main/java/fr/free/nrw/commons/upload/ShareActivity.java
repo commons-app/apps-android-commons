@@ -368,7 +368,7 @@ public class ShareActivity
         maps_fragment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if( imageObj != null || imageObj.imageCoordsExists == true) {
+                if( imageObj != null && imageObj.imageCoordsExists == true) {
                     Uri gmmIntentUri = Uri.parse("google.streetview:cbll=" + imageObj.getDecLatitude() + "," + imageObj.getDecLongitude());
                     Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
                     mapIntent.setPackage("com.google.android.apps.maps");
