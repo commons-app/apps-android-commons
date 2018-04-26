@@ -399,12 +399,13 @@ public class ShareActivity
     private void showFABMenu(){
         isFABOpen=true;
 
+        //if( imageObj != null && imageObj.imageCoordsExists == true)
         maps_fragment.setVisibility(View.VISIBLE);
         zoomInButton.setVisibility(View.VISIBLE);
 
         mainFab.animate().rotationBy(180);
-        maps_fragment.animate().translationY(-getResources().getDimension(R.dimen.first_fab));
-        zoomInButton.animate().translationY(-getResources().getDimension(R.dimen.second_fab));
+        maps_fragment.animate().translationY(-getResources().getDimension(R.dimen.second_fab));
+        zoomInButton.animate().translationY(-getResources().getDimension(R.dimen.first_fab));
     }
 
     private void closeFABMenu(){
@@ -816,6 +817,8 @@ public class ShareActivity
             CurrentAnimator.cancel();
         }
         ViewUtil.hideKeyboard(ShareActivity.this.findViewById(R.id.titleEdit | R.id.descEdit));
+        closeFABMenu();
+        mainFab.setVisibility(View.GONE);
         InputStream input = null;
         Bitmap scaled = null;
         try {
@@ -945,7 +948,7 @@ public class ShareActivity
                     CurrentAnimator.cancel();
                 }
                 zoomOutButton.setVisibility(View.GONE);
-                zoomInButton.setVisibility(View.VISIBLE);
+                mainFab.setVisibility(View.VISIBLE);
 
                 // Animate the four positioning/sizing properties in parallel,
                 // back to their original values.
