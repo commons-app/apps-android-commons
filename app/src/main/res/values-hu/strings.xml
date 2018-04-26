@@ -13,6 +13,7 @@
 * ViDam
 -->
 <resources>
+  <string name="preference_category_general">Általános</string>
   <string name="preference_category_feedback">Visszajelzés</string>
   <string name="preference_category_location">Helyszín</string>
   <string name="app_name">Commons</string>
@@ -54,6 +55,7 @@
   <string name="menu_share">Megosztás</string>
   <string name="menu_open_in_browser">Megtekintés böngészőben</string>
   <string name="share_title_hint">Cím</string>
+  <string name="add_title_toast">Kérlek, adj címet a fájlnak</string>
   <string name="share_description_hint">Leírás</string>
   <string name="login_failed_network">Nem lehet bejelentkezni - hálózati hiba</string>
   <string name="login_failed_username">Nem lehet bejelentkezni - ellenőrizd a felhasználóneved</string>
@@ -91,11 +93,12 @@
   <string name="categories_activity_title">Kategóriák</string>
   <string name="title_activity_settings">Beállítások</string>
   <string name="title_activity_signup">Regisztráció</string>
+  <string name="title_activity_featured_images">Kiemelt képek</string>
   <string name="menu_about">Névjegy</string>
   <string name="about_license">A Wikimedia Commons applikáció egy nyílt forráskódú szoftver, amit a Wikimedia-közösség önkéntesei készítettek és tartanak karban. A Wikimédia Alapítvány nem vesz részt az applikáció megalkotásában, fejlesztésében és üzemeltetésében.</string>
   <string name="about_improve">Nyiss egy új &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;GitHub-problémát&lt;/a&gt; hibabejelentéssel vagy fejlesztési javaslattal.</string>
-  <string name="about_privacy_policy" fuzzy="true">&lt;a href=\"https://github.com/commons-app/apps-android-commons/wiki/Privacy-policy\"&gt;Adatvédelmi irányelvek&lt;/a&gt;</string>
-  <string name="about_credits" fuzzy="true">&lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/CREDITS\"&gt;Köszönetnyilvánítás&lt;/a&gt;</string>
+  <string name="about_privacy_policy">&lt;u&gt;Adatvédelmi irányelvek&lt;/u&gt;</string>
+  <string name="about_credits">&lt;u&gt;Köszönetnyilvánítás&lt;/u&gt;</string>
   <string name="title_activity_about">Névjegy</string>
   <string name="menu_feedback">Visszajelzés küldése (e-mailben)</string>
   <string name="no_email_client">Nincs telepített levelezőprogram</string>
@@ -136,7 +139,10 @@
   <string name="tutorial_1_text">A Wikimédia Commons tárolja a Wikipédián használt képek többségét.</string>
   <string name="tutorial_1_subtext">A képeid segítik az ismeretterjesztést az egész világon!</string>
   <string name="tutorial_2_text">Kérjük, tölts fel képeket, amelyeket teljes mértékben te fotóztál vagy készítettél:</string>
-  <string name="tutorial_2_subtext" fuzzy="true">- Természeti tárgyak (virágok, állatok, hegyek)\n- Hasznos tárgyak (kerékpárok, vasútállomások)\n- Híres emberek (a polgármestered, olimpikonok, akikkel találkoztál)</string>
+  <string name="tutorial_2_subtext">Természeti tárgyak (virágok, állatok, hegyek)\n• Hasznos tárgyak (kerékpárok, vasútállomások)\n• Híres emberek (a polgármestered, olimpikonok, akikkel találkoztál)</string>
+  <string name="tutorial_2_subtext_1">Természeti tárgyak (virágok, állatok, hegyek)</string>
+  <string name="tutorial_2_subtext_2">Hasznos tárgyak (kerékpárok, vasútállomások)</string>
+  <string name="tutorial_2_subtext_3">Híres emberek (a polgármestered, olimpikonok, akikkel találkoztál)</string>
   <string name="tutorial_3_text">Kérjük, NE tölts fel:</string>
   <string name="tutorial_3_subtext">- Szelfiket vagy képeket a barátaidról\n- Internetröl letöltött képeket\n- Kereskedelmi alkalmazások képernyőképeit</string>
   <string name="tutorial_4_text">Példa feltöltés:</string>
@@ -168,6 +174,7 @@
   <string name="media_detail_media_title">Média címe</string>
   <string name="media_detail_description">Leírás</string>
   <string name="media_detail_description_explanation">A média leírása kerül ide. Ez akár egészen hosszú is lehet, és több sorba fog kerülni. Azért reméljük, jól néz majd ki.</string>
+  <string name="media_detail_author">Szerző</string>
   <string name="media_detail_uploaded_date">Feltöltési dátum</string>
   <string name="media_detail_license">Licenc</string>
   <string name="media_detail_coordinates">Koordináták</string>
@@ -207,6 +214,7 @@
   <string name="navigation_item_logout">Kijelentkezés</string>
   <string name="navigation_item_info">Bevezető</string>
   <string name="navigation_item_notification">Értesítések</string>
+  <string name="navigation_item_featured_images">Kiemelt</string>
   <string name="nearby_needs_permissions">Közeli helyek nem megjeleníthetőek a helyadatokhoz való hozzáférés engedélyezése nélkül</string>
   <string name="no_description_found">nincs leírás</string>
   <string name="nearby_info_menu_commons_article">Commons leírólap</string>
@@ -221,10 +229,26 @@
   <string name="login_to_your_account">Bejelentkezés a fiókodba</string>
   <string name="send_log_file">Naplófájlok küldése</string>
   <string name="send_log_file_description">Naplófájlok küldése e-mailben a fejlesztőknek</string>
+  <string name="no_web_browser">Nem található böngésző az URL megnyitásához</string>
   <string name="null_url">Hiba! URL nem található.</string>
   <string name="nominate_deletion">Törlésre jelölés</string>
+  <string name="nominated_for_deletion">Ezt a képet törlésre jelölték.</string>
+  <string name="view_browser">Megtekintés böngészőben</string>
   <string name="nearby_location_has_not_changed">A hely nem változott.</string>
   <string name="nearby_location_not_available">A hely nem érhető el.</string>
+  <string name="location_permission_rationale_nearby">Közeli helyek listájának megtekintéséhez engedély szükséges</string>
   <string name="notifications_welcome">Üdvözlünk a Wikimedia Commonson, %1$s! Örülünk, hogy itt vagy.</string>
   <string name="notifications_thank_you_edit">Köszönjük a szerkesztésedet!</string>
+  <string name="nearby_wikidata">WIKIDATA</string>
+  <string name="nearby_wikipedia">WIKIPÉDIA</string>
+  <string name="nearby_commons">COMMONS</string>
+  <string name="about_rate_us">&lt;u&gt;Értékelj minket&lt;/u&gt;</string>
+  <string name="about_faq">&lt;u&gt;GYIK&lt;/u&gt;</string>
+  <string name="welcome_skip_button">Útmutató átugrása</string>
+  <string name="no_internet">Internet nem elérhető</string>
+  <string name="internet_established">Internet elérhető</string>
+  <string name="no_notifications">Nincs értesítés</string>
+  <string name="about_translate_title">Nyelvek</string>
+  <string name="about_translate_cancel">Mégse</string>
+  <string name="retry">Újra</string>
 </resources>

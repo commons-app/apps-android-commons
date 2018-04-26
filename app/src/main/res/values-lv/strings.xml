@@ -79,6 +79,7 @@
   <string name="no">Nē</string>
   <string name="media_detail_title">Nosaukums</string>
   <string name="media_detail_description">Apraksts</string>
+  <string name="media_detail_author">Autors</string>
   <string name="media_detail_uploaded_date">Augšupielādēšanas datums</string>
   <string name="media_detail_license">Licence</string>
   <string name="media_detail_coordinates">Koordinātas</string>

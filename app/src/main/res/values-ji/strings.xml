@@ -3,6 +3,9 @@
 * פוילישער
 -->
 <resources>
+  <string name="preference_category_general">אַלגעמיין</string>
+  <string name="preference_category_feedback">פֿידבעק</string>
+  <string name="preference_category_location">לאקאציע</string>
   <string name="app_name">קאמאנס</string>
   <string name="menu_settings">איינשטעלונגען</string>
   <string name="username">באַניצער־נאָמען</string>
@@ -48,6 +51,7 @@
   <string name="categories_search_text_hint">זוכן קאטעגאריעס</string>
   <string name="menu_save_categories">אויפֿהיטן</string>
   <string name="refresh_button">דערפֿרישן</string>
+  <string name="display_list_button">ליסטע</string>
   <plurals name="contributions_subtitle">
     <item quantity="zero">\@string/contributions_subtitle_zero </item>
     <item quantity="one">איין ארויפֿלאד</item>
@@ -66,7 +70,7 @@
   <string name="provider_categories">לעצטיק־געניצטע קאטעגאריעס</string>
   <string name="menu_cancel_upload">אַנולירן</string>
   <string name="menu_download">אראָפלאָדן</string>
-  <string name="preference_license" fuzzy="true">ליצענץ</string>
+  <string name="preference_license">סטאנדארט־ליצענץ</string>
   <string name="license_name_cc_by_sa">Attribution-ShareAlike 3.0</string>
   <string name="license_name_cc_by">Attribution 3.0</string>
   <string name="license_name_cc0">CC0</string>
