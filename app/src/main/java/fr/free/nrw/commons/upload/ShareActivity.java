@@ -145,6 +145,8 @@ public class ShareActivity
     private long ShortAnimationDuration;
     private FloatingActionButton zoomInButton;
     private FloatingActionButton zoomOutButton;
+    private FloatingActionButton mainFab;
+    private boolean isFABOpen = false;
 
 
     /**
@@ -284,6 +286,22 @@ public class ShareActivity
         if (mediaUri != null) {
             backgroundImageView.setImageURI(mediaUri);
         }
+
+        mainFab = (FloatingActionButton) findViewById(R.id.main_fab);
+
+        mainFab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(!isFABOpen){
+                    showFABMenu();
+                }else{
+                    closeFABMenu();
+                }
+            }
+        });
+
+
+
         zoomInButton = (FloatingActionButton) findViewById(R.id.media_upload_zoom_in);
         try {
             zoomInButton.setOnClickListener(new View.OnClickListener() {
@@ -377,6 +395,49 @@ public class ShareActivity
             }
         });
     }
+
+    private void showFABMenu(){
+        isFABOpen=true;
+
+        maps_fragment.setVisibility(View.VISIBLE);
+        zoomInButton.setVisibility(View.VISIBLE);
+
+        mainFab.animate().rotationBy(180);
+        maps_fragment.animate().translationY(-getResources().getDimension(R.dimen.first_fab));
+        zoomInButton.animate().translationY(-getResources().getDimension(R.dimen.second_fab));
+    }
+
+    private void closeFABMenu(){
+        isFABOpen=false;
+        mainFab.animate().rotationBy(-180);
+        maps_fragment.animate().translationY(0);
+        zoomInButton.animate().translationY(0).setListener(new Animator.AnimatorListener() {
+            @Override
+            public void onAnimationStart(Animator animator) {
+
+            }
+
+            @Override
+            public void onAnimationEnd(Animator animator) {
+                if(!isFABOpen){
+                    maps_fragment.setVisibility(View.GONE);
+                    zoomInButton.setVisibility(View.GONE);
+                }
+
+            }
+
+            @Override
+            public void onAnimationCancel(Animator animator) {
+
+            }
+
+            @Override
+            public void onAnimationRepeat(Animator animator) {
+
+            }
+        });
+    }
+
 
     @Override
     public void onRequestPermissionsResult(int requestCode,

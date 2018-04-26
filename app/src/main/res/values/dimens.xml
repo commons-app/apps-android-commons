@@ -23,4 +23,6 @@
     <dimen name="subheading_text_size">20sp</dimen>
     <dimen name="normal_text">16sp</dimen>
     <dimen name="description_text_size">14sp</dimen>
+    <dimen name="first_fab">55dp</dimen>
+    <dimen name="second_fab">100dp</dimen>
 </resources>
