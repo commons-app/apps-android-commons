@@ -9,6 +9,10 @@ import android.widget.Toast;
 
 public class ViewUtil {
 
+    public static final String SHOWCASE_VIEW_ID_1 = "SHOWCASE_VIEW_ID_1";
+    public static final String SHOWCASE_VIEW_ID_2 = "SHOWCASE_VIEW_ID_2";
+    public static final String SHOWCASE_VIEW_ID_3 = "SHOWCASE_VIEW_ID_3";
+
     public static void showSnackbar(View view, int messageResourceId) {
         Snackbar.make(view, messageResourceId, Snackbar.LENGTH_SHORT).show();
     }
