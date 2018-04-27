@@ -14,6 +14,7 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.BottomSheetBehavior;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.FloatingActionButton;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -64,7 +65,7 @@ import static android.content.pm.PackageManager.PERMISSION_GRANTED;
 
 public class NearbyMapFragment extends DaggerFragment {
 
-    private MapView mapView;
+    public MapView mapView;
     private List<NearbyBaseMarker> baseMarkerOptions;
     private fr.free.nrw.commons.location.LatLng curLatLng;
     public fr.free.nrw.commons.location.LatLng[] boundaryCoordinates;
@@ -111,7 +112,12 @@ public class NearbyMapFragment extends DaggerFragment {
     private final double CAMERA_TARGET_SHIFT_FACTOR_PORTRAIT = 0.06;
     private final double CAMERA_TARGET_SHIFT_FACTOR_LANDSCAPE = 0.04;
 
+    private boolean isSecondMaterialShowcaseDismissed;
+    private boolean isMapReady;
+    private NearbyMaterialShowcaseSequence sequence;
+
     private Bundle bundleForUpdtes;// Carry information from activity about changed nearby places and current location
+    private float latestTouchedX, latestTouchedY;
 
     @Inject
     @Named("prefs")
@@ -160,6 +166,7 @@ public class NearbyMapFragment extends DaggerFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        sequence = new NearbyMaterialShowcaseSequence(getActivity(), ViewUtil.SHOWCASE_VIEW_ID_3);
 
         if (curLatLng != null) {
             setupMapView(savedInstanceState);
@@ -471,6 +478,7 @@ public class NearbyMapFragment extends DaggerFragment {
         mapView.getMapAsync(new OnMapReadyCallback() {
             @Override
             public void onMapReady(MapboxMap mapboxMap) {
+                ((NearbyActivity)getActivity()).setMapViewTutorialShowCase();
                 NearbyMapFragment.this.mapboxMap = mapboxMap;
                 updateMapSignificantly();
             }
@@ -514,6 +522,7 @@ public class NearbyMapFragment extends DaggerFragment {
     private void addNearbyMarkerstoMapBoxMap() {
 
         mapboxMap.addMarkers(baseMarkerOptions);
+
         mapboxMap.setOnInfoWindowCloseListener(marker -> {
             if (marker == selected) {
                 bottomSheetDetailsBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
@@ -528,7 +537,20 @@ public class NearbyMapFragment extends DaggerFragment {
                 }
             });
 
+            // Get latests touch coordinates in window here, they will be used on setOnMarkerClickListene
+
+                    /*.setOnTouchListener(new View.OnTouchListener() {
+                @Override
+                public boolean onTouch(View view, MotionEvent motionEvent) {
+                    latestTouchedX = view.getX();
+                    latestTouchedY = view.getY();
+                    return false;
+                }
+            });*/
+
+
             mapboxMap.setOnMarkerClickListener(marker -> {
+
                 if (marker instanceof NearbyMarker) {
                     this.selected = marker;
                     NearbyMarker nearbyMarker = (NearbyMarker) marker;
@@ -536,6 +558,28 @@ public class NearbyMapFragment extends DaggerFragment {
                     passInfoToSheet(place);
                     bottomSheetListBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
                     bottomSheetDetailsBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
+
+                    /*Shape mockView = new OvalShape();
+                    mockView. (32);
+                    mockView.setIntrinsicWidth (32);
+                    mockView.getPaint ().setColor (Color.BLUE);
+                    mockView.set*/
+
+                    /*View mockView = new View(this.getActivity());
+                    mockView.setX(latestTouchedX);
+                    mockView.setY(latestTouchedY);
+                    mockView.setFocusable(false);
+                    mockView.setBackgroundColor(Color.RED);*/
+                    /*mapboxMap.;
+
+                    sequence.addSequenceItem(mapboxMap.getMarkerViewManager().getMarkerViewContainer().getChildAt(0),"t","t");
+                    isMapReady = true;
+                    if (isSecondMaterialShowcaseDismissed) {
+                        sequence.start();
+                    }*/
+
+                    //sequence.addSequenceItem(mockView,"t","t");
+
                 }
                 return false;
             });
@@ -629,6 +673,12 @@ public class NearbyMapFragment extends DaggerFragment {
         addAnchorToSmallFABs(fabGallery, getActivity().findViewById(R.id.empty_view).getId());
 
         addAnchorToSmallFABs(fabCamera, getActivity().findViewById(R.id.empty_view1).getId());
+
+        sequence.addSequenceItem(fabPlus,"t","t");
+        isMapReady = true;
+        if (isSecondMaterialShowcaseDismissed) {
+            sequence.start();
+        }
 
     }
 
@@ -784,6 +834,14 @@ public class NearbyMapFragment extends DaggerFragment {
 
     public void setBundleForUpdtes(Bundle bundleForUpdtes) {
         this.bundleForUpdtes = bundleForUpdtes;
+    }
+
+    public void onNearbyMaterialShowcaseDismissed() {
+        Log.d("deneme","onNearbyMaterialShowcaseDismissed called");
+        isSecondMaterialShowcaseDismissed = true;
+        if (isMapReady) {
+            sequence.start();
+        }
     }
 
 
