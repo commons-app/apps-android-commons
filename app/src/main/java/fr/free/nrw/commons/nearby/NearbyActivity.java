@@ -437,7 +437,6 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
                 public void onDismiss(MaterialShowcaseView materialShowcaseView, int i) {
                     if (i == 1) {
                         nearbyMapFragment.onNearbyMaterialShowcaseDismissed();
-                        Log.d("deneme","deneme"+i);
                     }
                 }
             });

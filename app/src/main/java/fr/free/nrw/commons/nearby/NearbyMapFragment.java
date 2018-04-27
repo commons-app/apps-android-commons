@@ -14,7 +14,6 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.BottomSheetBehavior;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.FloatingActionButton;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -114,10 +113,9 @@ public class NearbyMapFragment extends DaggerFragment {
 
     private boolean isSecondMaterialShowcaseDismissed;
     private boolean isMapReady;
-    private NearbyMaterialShowcaseSequence sequence;
+    private NearbyMaterialShowcaseSequence nearbyMaterialShowcaseSequence;
 
     private Bundle bundleForUpdtes;// Carry information from activity about changed nearby places and current location
-    private float latestTouchedX, latestTouchedY;
 
     @Inject
     @Named("prefs")
@@ -166,7 +164,7 @@ public class NearbyMapFragment extends DaggerFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        sequence = new NearbyMaterialShowcaseSequence(getActivity(), ViewUtil.SHOWCASE_VIEW_ID_3);
+        nearbyMaterialShowcaseSequence = new NearbyMaterialShowcaseSequence(getActivity(), ViewUtil.SHOWCASE_VIEW_ID_3);
 
         if (curLatLng != null) {
             setupMapView(savedInstanceState);
@@ -559,27 +557,6 @@ public class NearbyMapFragment extends DaggerFragment {
                     bottomSheetListBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
                     bottomSheetDetailsBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
 
-                    /*Shape mockView = new OvalShape();
-                    mockView. (32);
-                    mockView.setIntrinsicWidth (32);
-                    mockView.getPaint ().setColor (Color.BLUE);
-                    mockView.set*/
-
-                    /*View mockView = new View(this.getActivity());
-                    mockView.setX(latestTouchedX);
-                    mockView.setY(latestTouchedY);
-                    mockView.setFocusable(false);
-                    mockView.setBackgroundColor(Color.RED);*/
-                    /*mapboxMap.;
-
-                    sequence.addSequenceItem(mapboxMap.getMarkerViewManager().getMarkerViewContainer().getChildAt(0),"t","t");
-                    isMapReady = true;
-                    if (isSecondMaterialShowcaseDismissed) {
-                        sequence.start();
-                    }*/
-
-                    //sequence.addSequenceItem(mockView,"t","t");
-
                 }
                 return false;
             });
@@ -674,10 +651,10 @@ public class NearbyMapFragment extends DaggerFragment {
 
         addAnchorToSmallFABs(fabCamera, getActivity().findViewById(R.id.empty_view1).getId());
 
-        sequence.addSequenceItem(fabPlus,"t","t");
+        nearbyMaterialShowcaseSequence.addSequenceItem(fabPlus,"t","t");
         isMapReady = true;
         if (isSecondMaterialShowcaseDismissed) {
-            sequence.start();
+            nearbyMaterialShowcaseSequence.start();
         }
 
     }
@@ -837,10 +814,9 @@ public class NearbyMapFragment extends DaggerFragment {
     }
 
     public void onNearbyMaterialShowcaseDismissed() {
-        Log.d("deneme","onNearbyMaterialShowcaseDismissed called");
         isSecondMaterialShowcaseDismissed = true;
         if (isMapReady) {
-            sequence.start();
+            nearbyMaterialShowcaseSequence.start();
         }
     }
 
