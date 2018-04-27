@@ -540,18 +540,6 @@ public class NearbyMapFragment extends DaggerFragment {
                 }
             });
 
-            // Get latests touch coordinates in window here, they will be used on setOnMarkerClickListene
-
-                    /*.setOnTouchListener(new View.OnTouchListener() {
-                @Override
-                public boolean onTouch(View view, MotionEvent motionEvent) {
-                    latestTouchedX = view.getX();
-                    latestTouchedY = view.getY();
-                    return false;
-                }
-            });*/
-
-
             mapboxMap.setOnMarkerClickListener(marker -> {
 
                 if (marker instanceof NearbyMarker) {
