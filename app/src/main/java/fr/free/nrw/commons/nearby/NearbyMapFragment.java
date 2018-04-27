@@ -111,6 +111,8 @@ public class NearbyMapFragment extends DaggerFragment {
     private final double CAMERA_TARGET_SHIFT_FACTOR_PORTRAIT = 0.06;
     private final double CAMERA_TARGET_SHIFT_FACTOR_LANDSCAPE = 0.04;
 
+    private Bundle bundleForUpdtes;// Carry information from activity about changed nearby places and current location
+
     @Inject
     @Named("prefs")
     SharedPreferences prefs;
@@ -124,6 +126,7 @@ public class NearbyMapFragment extends DaggerFragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Timber.d("Nearby map fragment created");
 
         controller = new ContributionController(this);
         directUpload = new DirectUpload(this, controller);
@@ -149,9 +152,11 @@ public class NearbyMapFragment extends DaggerFragment {
                             getActivity());
             boundaryCoordinates = gson.fromJson(gsonBoundaryCoordinates, gsonBoundaryCoordinatesType);
         }
-        Mapbox.getInstance(getActivity(),
-                getString(R.string.mapbox_commons_app_token));
-        MapboxTelemetry.getInstance().setTelemetryEnabled(false);
+        if (curLatLng != null) {
+            Mapbox.getInstance(getActivity(),
+                    getString(R.string.mapbox_commons_app_token));
+            MapboxTelemetry.getInstance().setTelemetryEnabled(false);
+        }
         setRetainInstance(true);
     }
 
@@ -159,7 +164,9 @@ public class NearbyMapFragment extends DaggerFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
+        Timber.d("onCreateView called");
         if (curLatLng != null) {
+            Timber.d("curLatLng found, setting up map view...");
             setupMapView(savedInstanceState);
         }
 
@@ -192,14 +199,12 @@ public class NearbyMapFragment extends DaggerFragment {
     }
 
     public void updateMapSlightly() {
-        // Get arguments from bundle for new location
-        Bundle bundle = this.getArguments();
         if (mapboxMap != null) {
             Gson gson = new GsonBuilder()
                     .registerTypeAdapter(Uri.class, new UriDeserializer())
                     .create();
-            if (bundle != null) {
-                String gsonLatLng = bundle.getString("CurLatLng");
+            if (bundleForUpdtes != null) {
+                String gsonLatLng = bundleForUpdtes.getString("CurLatLng");
                 Type curLatLngType = new TypeToken<fr.free.nrw.commons.location.LatLng>() {}.getType();
                 curLatLng = gson.fromJson(gsonLatLng, curLatLngType);
             }
@@ -209,17 +214,15 @@ public class NearbyMapFragment extends DaggerFragment {
     }
 
     public void updateMapSignificantly() {
-
-        Bundle bundle = this.getArguments();
         if (mapboxMap != null) {
-            if (bundle != null) {
+            if (bundleForUpdtes != null) {
                 Gson gson = new GsonBuilder()
                         .registerTypeAdapter(Uri.class, new UriDeserializer())
                         .create();
 
-                String gsonPlaceList = bundle.getString("PlaceList");
-                String gsonLatLng = bundle.getString("CurLatLng");
-                String gsonBoundaryCoordinates = bundle.getString("BoundaryCoord");
+                String gsonPlaceList = bundleForUpdtes.getString("PlaceList");
+                String gsonLatLng = bundleForUpdtes.getString("CurLatLng");
+                String gsonBoundaryCoordinates = bundleForUpdtes.getString("BoundaryCoord");
                 Type listType = new TypeToken<List<Place>>() {}.getType();
                 List<Place> placeList = gson.fromJson(gsonPlaceList, listType);
                 Type curLatLngType = new TypeToken<fr.free.nrw.commons.location.LatLng>() {}.getType();
@@ -457,6 +460,8 @@ public class NearbyMapFragment extends DaggerFragment {
 
     private void setupMapView(Bundle savedInstanceState) {
         MapboxMapOptions options = new MapboxMapOptions()
+                .compassGravity(Gravity.BOTTOM | Gravity.LEFT)
+                .compassMargins(new int[]{12, 0, 0, 24})
                 .styleUrl(Style.OUTDOORS)
                 .logoEnabled(false)
                 .attributionEnabled(false)
@@ -771,7 +776,7 @@ public class NearbyMapFragment extends DaggerFragment {
         }
     }
 
-        private void closeFabs ( boolean isFabOpen){
+    private void closeFabs ( boolean isFabOpen){
         if (isFabOpen) {
             fabPlus.startAnimation(rotate_backward);
             fabCamera.startAnimation(fab_close);
@@ -781,6 +786,11 @@ public class NearbyMapFragment extends DaggerFragment {
             this.isFabOpen = !isFabOpen;
         }
     }
+
+    public void setBundleForUpdtes(Bundle bundleForUpdtes) {
+        this.bundleForUpdtes = bundleForUpdtes;
+    }
+
 
     @Override
     public void onStart() {

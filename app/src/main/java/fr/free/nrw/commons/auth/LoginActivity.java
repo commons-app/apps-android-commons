@@ -19,7 +19,6 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatDelegate;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -28,7 +27,6 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.io.IOException;
 
@@ -160,7 +158,10 @@ public class LoginActivity extends AccountAuthenticatorActivity {
             WelcomeActivity.startYourself(this);
             prefs.edit().putBoolean("firstrun", false).apply();
         }
-        if (sessionManager.getCurrentAccount() != null) {
+
+        if (sessionManager.getCurrentAccount() != null
+                && sessionManager.isUserLoggedIn()
+                && sessionManager.getCachedAuthCookie() != null) {
             startMainActivity();
         }
     }

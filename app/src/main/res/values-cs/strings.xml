@@ -167,8 +167,8 @@
   <string name="detail_description_empty">Bez popisu</string>
   <string name="detail_license_empty">Neznámá licence</string>
   <string name="menu_refresh">Obnovit</string>
-  <string name="read_storage_permission_rationale">Požadované oprávnění: Čtení externího úložiště. Aplikace bez toho nemůže pracovat.</string>
-  <string name="write_storage_permission_rationale">Požadované oprávnění: Zapisování do externího úložiště. Aplikace bez toho nemůže pracovat.</string>
+  <string name="read_storage_permission_rationale">Požadované oprávnění: Čtení externího úložiště. Bez něj nemůže aplikace číst vaši galerii.</string>
+  <string name="write_storage_permission_rationale">Požadované oprávnění: Zapisování do externího úložiště. Bez něj nemůže aplikace používat vaši kameru.</string>
   <string name="location_permission_rationale">Volitelně: Umožněte aplikaci, aby získávala aktuální polohu a nabízela na jejím základě kategorie</string>
   <string name="ok">OK</string>
   <string name="title_activity_nearby">Místa v okolí</string>
@@ -243,7 +243,7 @@
   <string name="null_url">Chyba! URL nenalezeno</string>
   <string name="nominate_deletion">Navrhnout na smazání</string>
   <string name="nominated_for_deletion">Tento obrázek byl nominován na smazání.</string>
-  <string name="nominated_see_more">                              .</string>
+  <string name="nominated_see_more" fuzzy="true"/>
   <string name="view_browser">Zobrazit v prohlížeči</string>
   <string name="nearby_location_has_not_changed">Vaše umístění se nezměnilo.</string>
   <string name="nearby_location_not_available">Umístění není dostupné.</string>

@@ -11,10 +11,13 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.view.ViewCompat;
 import android.support.v7.app.AlertDialog;
 import android.text.Editable;
+import android.text.Html;
 import android.text.TextWatcher;
+import android.text.method.LinkMovementMethod;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -58,6 +61,7 @@ public class SingleUploadFragment extends CommonsDaggerSupportFragment {
     @BindView(R.id.titleDescButton) Button titleDescButton;
     @BindView(R.id.share_license_summary) TextView licenseSummaryView;
     @BindView(R.id.licenseSpinner) Spinner licenseSpinner;
+
 
     @Inject @Named("default_preferences") SharedPreferences prefs;
     @Inject @Named("direct_nearby_upload_prefs") SharedPreferences directPrefs;
@@ -225,18 +229,6 @@ public class SingleUploadFragment extends CommonsDaggerSupportFragment {
                 .commit();
     }
 
-    @OnTouch(R.id.share_license_summary)
-    boolean showLicence(View view, MotionEvent motionEvent) {
-        if (motionEvent.getActionMasked() == ACTION_DOWN) {
-            Intent intent = new Intent();
-            intent.setAction(Intent.ACTION_VIEW);
-            intent.setData(Uri.parse(licenseUrlFor(license)));
-            startActivity(intent);
-            return true;
-        } else {
-            return false;
-        }
-    }
 
     @OnClick(R.id.titleDescButton)
     void setTitleDescButton() {
@@ -294,8 +286,10 @@ public class SingleUploadFragment extends CommonsDaggerSupportFragment {
 
     @SuppressLint("StringFormatInvalid")
     private void setLicenseSummary(String license) {
-        licenseSummaryView.setText(getString(R.string.share_license_summary, getString(Utils.licenseNameFor(license))));
-    }
+        String licenseHyperLink = "<a href='" + licenseUrlFor(license)+"'>"+ getString(Utils.licenseNameFor(license)) + "</a><br>";
+        licenseSummaryView.setMovementMethod(LinkMovementMethod.getInstance());
+        licenseSummaryView.setText(Html.fromHtml(getString(R.string.share_license_summary, licenseHyperLink)));
+ }
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
@@ -353,6 +347,7 @@ public class SingleUploadFragment extends CommonsDaggerSupportFragment {
             }
         }
     }
+
 
     private void showInfoAlert (int titleStringID, int messageStringID){
         new AlertDialog.Builder(getContext())

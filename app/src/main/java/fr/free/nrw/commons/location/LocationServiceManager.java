@@ -79,6 +79,23 @@ public class LocationServiceManager implements LocationListener {
                         Manifest.permission.ACCESS_FINE_LOCATION);
     }
 
+    /**
+     * Gets the last known location in cases where there wasn't time to register a listener
+     * (e.g. when Location permission just granted)
+     * @return last known LatLng
+     */
+    public LatLng getLKL() {
+        if (ContextCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+            Location lastKL = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+            if (lastKL == null) {
+                lastKL = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
+            }
+            return LatLng.from(lastKL);
+        } else {
+            return null;
+        }
+    }
+
     public LatLng getLastLocation() {
         if (lastLocation == null) {
             return null;
@@ -249,6 +266,7 @@ public class LocationServiceManager implements LocationListener {
     public enum LocationChangeType{
         LOCATION_SIGNIFICANTLY_CHANGED, //Went out of borders of nearby markers
         LOCATION_SLIGHTLY_CHANGED,      //User might be walking or driving
-        LOCATION_NOT_CHANGED
+        LOCATION_NOT_CHANGED,
+        PERMISSION_JUST_GRANTED
     }
 }

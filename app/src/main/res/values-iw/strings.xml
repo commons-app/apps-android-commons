@@ -70,6 +70,7 @@
   <string name="categories_search_text_hint">חיפוש קטגוריות</string>
   <string name="menu_save_categories">שמירה</string>
   <string name="refresh_button">רענון</string>
+  <string name="display_list_button">רשימה</string>
   <string name="gps_disabled">ה־GPS במכשיר שלך אינו מופעל. האם להפעיל אותו?</string>
   <string name="enable_gps">הפעלת GPS</string>
   <string name="contributions_subtitle_zero">לא הועלה עדיין שום דבר</string>
@@ -91,6 +92,7 @@
   <string name="categories_activity_title">קטגוריות</string>
   <string name="title_activity_settings">הגדרות</string>
   <string name="title_activity_signup">רישום</string>
+  <string name="title_activity_featured_images">תמונות מומלצות</string>
   <string name="menu_about">אודות</string>
   <string name="about_license">יישום ויקישיתוף (Wikimedia Commons app) הוא יישום קוד פתוח שמפותח ומתוחזק על־ידי מקבלי מלגות ומתנדבים של קהילת ויקימדיה. קרן ויקימדיה אינה מעורבת ביצירה, פיתוח, או תחזוקה של היישום.</string>
   <string name="about_improve">נא ליצור &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;דיווח בגיטהאב&lt;/a&gt; בשביל באגים והצעות.</string>
@@ -176,6 +178,8 @@
   <string name="media_detail_media_title">כותרת המדיה</string>
   <string name="media_detail_description">תיאור</string>
   <string name="media_detail_description_explanation">תיאור המדיה יהיה כאן. זה יכול להיות ארוך למדי, ולהתפרס על מספר שורות. אנחנו מקווים שזה נראה טוב.</string>
+  <string name="media_detail_author">יוצר</string>
+  <string name="media_detail_author_explanation">שם המשתמש של יוצר התמונה המומלצת.</string>
   <string name="media_detail_uploaded_date">תאריך העלאה</string>
   <string name="media_detail_license">רישיון</string>
   <string name="media_detail_coordinates">נקודות ציון</string>
@@ -217,6 +221,7 @@
   <string name="navigation_item_logout">יציאה</string>
   <string name="navigation_item_info">מדריך</string>
   <string name="navigation_item_notification">הודעות</string>
+  <string name="navigation_item_featured_images">מומלץ</string>
   <string name="nearby_needs_permissions">אי־אפשר להציג מקומות בסביבה ללא הרשאות מיקום</string>
   <string name="no_description_found">לא נמצא תיאור</string>
   <string name="nearby_info_menu_commons_article">דף קובץ בוויקישיתוף</string>
@@ -233,6 +238,9 @@
   <string name="send_log_file">שליחת קובץ יומן</string>
   <string name="send_log_file_description">שליחת קובץ יומן למפתחים בדואר אלקטרוני</string>
   <string name="no_web_browser">לא נמצא דפדפן שיוכל לפתוח את הכתובת</string>
+  <string name="nominate_deletion">להציע מחיקה</string>
+  <string name="nominated_for_deletion">התמונה הזאת מועמדת למחיקה</string>
+  <string name="view_browser">הצגה בדפדפן</string>
   <string name="nearby_location_has_not_changed">המיקום לא השתנה.</string>
   <string name="nearby_location_not_available">המיקום אינו זמין.</string>
   <string name="location_permission_rationale_nearby">נדרשת הרשאה כדי להציג רשימה של מקומות בסביבה</string>
@@ -243,6 +251,21 @@
   <string name="notifications_thank_you_edit">תודה לך על העריכה</string>
   <string name="notifications_mention">אוזכרת על ידי %2$s ב{{GRAMMAR:תחילית|%1$s}}.</string>
   <string name="toggle_view_button">החלפת מצב תצוגה</string>
-  <string name="about_faq" fuzzy="true">שאלות נפוצות</string>
+  <string name="nearby_directions">כיוונים</string>
+  <string name="nearby_wikidata">ויקינתונים</string>
+  <string name="nearby_wikipedia">ויקיפדיה</string>
+  <string name="nearby_commons">ויקישיתוף</string>
+  <string name="about_rate_us">&lt;u&gt;תנו לנו ציון&lt;/u&gt;</string>
+  <string name="about_faq">&lt;u&gt;שאלות נפוצות&lt;/u&gt;</string>
   <string name="welcome_skip_button">לדלג על ההדרכה</string>
+  <string name="no_internet">האינטרנט אינו זמין</string>
+  <string name="internet_established">האינטרנט זמין</string>
+  <string name="error_notifications">שגיאה באחזור התראות</string>
+  <string name="no_notifications">לא נמצאו התראות</string>
+  <string name="about_translate">&lt;u&gt;תרגום&lt;/u&gt;</string>
+  <string name="about_translate_title">שפות</string>
+  <string name="about_translate_message">נא לבחור את השפה שבה תשלחו את התרגומים</string>
+  <string name="about_translate_proceed">המשך</string>
+  <string name="about_translate_cancel">ביטול</string>
+  <string name="retry">לנסות שוב</string>
 </resources>

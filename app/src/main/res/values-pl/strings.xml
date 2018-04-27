@@ -172,6 +172,7 @@
   <string name="media_detail_media_title">Tytuł pliku</string>
   <string name="media_detail_description">Opis</string>
   <string name="media_detail_description_explanation">Tu jest miejsce na opis pliku. Mogą być dość długie i wymagać przewijania podczas czytania. Chcemy, by wszystko wyglądało dobrze.</string>
+  <string name="media_detail_author">Autor</string>
   <string name="media_detail_uploaded_date">Data przesłania</string>
   <string name="media_detail_license">Licencja</string>
   <string name="media_detail_coordinates">Współrzędne</string>

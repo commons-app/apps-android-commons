@@ -50,14 +50,16 @@ import static android.widget.Toast.LENGTH_SHORT;
 public class MediaDetailFragment extends CommonsDaggerSupportFragment {
 
     private boolean editable;
+    private boolean isFeaturedMedia;
     private MediaDetailPagerFragment.MediaDetailProvider detailProvider;
     private int index;
 
-    public static MediaDetailFragment forMedia(int index, boolean editable) {
+    public static MediaDetailFragment forMedia(int index, boolean editable, boolean isFeaturedMedia) {
         MediaDetailFragment mf = new MediaDetailFragment();
 
         Bundle state = new Bundle();
         state.putBoolean("editable", editable);
+        state.putBoolean("isFeaturedMedia", isFeaturedMedia);
         state.putInt("index", index);
         state.putInt("listIndex", 0);
         state.putInt("listTop", 0);
@@ -79,12 +81,14 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
 
     private TextView title;
     private TextView desc;
+    private TextView author;
     private TextView license;
     private TextView coordinates;
     private TextView uploadedDate;
     private TextView seeMore;
     private LinearLayout nominatedforDeletion;
     private LinearLayout categoryContainer;
+    private LinearLayout authorLayout;
     private Button delete;
     private ScrollView scrollView;
     private ArrayList<String> categoryNames;
@@ -101,6 +105,7 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
         super.onSaveInstanceState(outState);
         outState.putInt("index", index);
         outState.putBoolean("editable", editable);
+        outState.putBoolean("isFeaturedMedia", isFeaturedMedia);
 
         getScrollPosition();
         outState.putInt("listTop", initialListTop);
@@ -116,13 +121,16 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
 
         if (savedInstanceState != null) {
             editable = savedInstanceState.getBoolean("editable");
+            isFeaturedMedia = savedInstanceState.getBoolean("isFeaturedMedia");
             index = savedInstanceState.getInt("index");
             initialListTop = savedInstanceState.getInt("listTop");
         } else {
             editable = getArguments().getBoolean("editable");
+            isFeaturedMedia = getArguments().getBoolean("isFeaturedMedia");
             index = getArguments().getInt("index");
             initialListTop = 0;
         }
+
         categoryNames = new ArrayList<>();
         categoryNames.add(getString(R.string.detail_panel_cats_loading));
 
@@ -135,6 +143,7 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
         spacer = (MediaDetailSpacer) view.findViewById(R.id.mediaDetailSpacer);
         title = (TextView) view.findViewById(R.id.mediaDetailTitle);
         desc = (TextView) view.findViewById(R.id.mediaDetailDesc);
+        author = (TextView) view.findViewById(R.id.mediaDetailAuthor);
         license = (TextView) view.findViewById(R.id.mediaDetailLicense);
         coordinates = (TextView) view.findViewById(R.id.mediaDetailCoordinates);
         uploadedDate = (TextView) view.findViewById(R.id.mediaDetailuploadeddate);
@@ -142,6 +151,13 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
         nominatedforDeletion = (LinearLayout) view.findViewById(R.id.nominatedDeletionBanner);
         delete = (Button) view.findViewById(R.id.nominateDeletion);
         categoryContainer = (LinearLayout) view.findViewById(R.id.mediaDetailCategoryContainer);
+        authorLayout = (LinearLayout) view.findViewById(R.id.authorLinearLayout);
+
+        if (isFeaturedMedia){
+            authorLayout.setVisibility(View.VISIBLE);
+        } else {
+            authorLayout.setVisibility(View.GONE);
+        }
 
         licenseList = new LicenseList(getActivity());
 
@@ -304,9 +320,10 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
             coordinates.setOnClickListener(v -> openMap(media.getCoordinates()));
         }
         if (delete.getVisibility() == View.VISIBLE) {
+            enableDeleteButton(true);
+
             delete.setOnClickListener(v -> {
-                delete.setEnabled(false);
-                delete.setTextColor(getResources().getColor(R.color.deleteButtonLight));
+
                 AlertDialog.Builder alert = new AlertDialog.Builder(getActivity());
                 alert.setMessage("Why should this file be deleted?");
                 final EditText input = new EditText(getActivity());
@@ -317,6 +334,7 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
                         String reason = input.getText().toString();
                         DeleteTask deleteTask = new DeleteTask(getActivity(), media, reason);
                         deleteTask.execute();
+                        enableDeleteButton(false);
                     }
                 });
                 alert.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
@@ -355,6 +373,15 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
             seeMore.setOnClickListener(v -> {
                 openWebBrowser(media.getFilePageTitle().getMobileUri().toString());
             });
+        }
+    }
+
+    private void enableDeleteButton(boolean visibility) {
+        delete.setEnabled(visibility);
+        if(visibility) {
+            delete.setTextColor(getResources().getColor(R.color.primaryTextColor));
+        } else {
+            delete.setTextColor(getResources().getColor(R.color.deleteButtonLight));
         }
     }
 
