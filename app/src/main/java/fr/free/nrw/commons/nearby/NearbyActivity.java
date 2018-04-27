@@ -457,7 +457,7 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
                 .setDismissText("GOT IT")
                 .setContentText("This is some amazing feature you should know about")
                 .setDelay(500) // optional but starting animations immediately in onCreate can make them choppy
-                .singleUse(ViewUtil.SHOWCASE_VIEW_ID_3) // provide a unique ID used to ensure it is only shown once
+                .singleUse(ViewUtil.SHOWCASE_VIEW_ID_2) // provide a unique ID used to ensure it is only shown once
                 .withoutShape() // no shape on map view since there are no view to focus on
                 .setListener(new IShowcaseListener() {
                     @Override
