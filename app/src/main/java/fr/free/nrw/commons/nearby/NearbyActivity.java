@@ -145,10 +145,12 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
         new Handler().post(() -> {
 
             listButton = findViewById(R.id.action_display_list);
-            nearbyMaterialShowcaseSequence.addSequenceItem(listButton,"test1","test2");
+            nearbyMaterialShowcaseSequence.addSequenceItem(listButton
+                    , getString(R.string.showcase_view_list_icon)
+                    , getString(R.string.showcase_view_got_it_button));
             isListShowcaseAdded = true;
 
-            if (isMapShowCaseAdded) { // If map showcase is also ready, start nearbyMaterialShowcaseSequence
+            if (isMapShowCaseAdded) { // If map showcase is also ready, start ShowcaseSequence
                 // Probably this case is not possible. Just added to be careful
                 setMapViewTutorialShowCase();
             }
@@ -449,7 +451,9 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
             updateListFragment();
         }
 
-        nearbyMaterialShowcaseSequence.addSequenceItem(fabRecenter, "testing1", "testing2");
+        nearbyMaterialShowcaseSequence.addSequenceItem(fabRecenter
+                , getString(R.string.showcase_view_recenter_icon)
+                , getString(R.string.showcase_view_got_it_button));
 
         isMapShowCaseAdded = true;
         if (isListShowcaseAdded) { // If list showcase is also ready
@@ -474,8 +478,8 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
             * */
         MaterialShowcaseView firstSingleShowCaseView = new MaterialShowcaseView.Builder(this)
                 .setTarget(nearbyMapFragment.mapView)
-                .setDismissText("GOT IT")
-                .setContentText("This is some amazing feature you should know about")
+                .setDismissText(getString(R.string.showcase_view_got_it_button))
+                .setContentText(getString(R.string.showcase_view_whole_nearby_activity))
                 .setDelay(500) // optional but starting animations immediately in onCreate can make them choppy
                 .singleUse(ViewUtil.SHOWCASE_VIEW_ID_2) // provide a unique ID used to ensure it is only shown once
                 .withoutShape() // no shape on map view since there are no view to focus on

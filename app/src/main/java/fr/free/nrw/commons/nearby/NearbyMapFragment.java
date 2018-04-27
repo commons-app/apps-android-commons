@@ -656,7 +656,9 @@ public class NearbyMapFragment extends DaggerFragment {
 
         addAnchorToSmallFABs(fabCamera, getActivity().findViewById(R.id.empty_view1).getId());
 
-        nearbyMaterialShowcaseSequence.addSequenceItem(fabPlus,"t","t");
+        nearbyMaterialShowcaseSequence.addSequenceItem(fabPlus
+                ,getString(R.string.showcase_view_plus_fab)
+                ,getString(R.string.showcase_view_got_it_button));
         isMapReady = true;
         if (isSecondMaterialShowcaseDismissed) {
             nearbyMaterialShowcaseSequence.start();

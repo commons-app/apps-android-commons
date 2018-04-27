@@ -269,4 +269,10 @@
   <string name="about_translate_proceed">Proceed</string>
   <string name="about_translate_cancel">Cancel</string>
   <string name="retry">Retry</string>
+
+  <string name="showcase_view_got_it_button">Got it!</string>
+  <string name="showcase_view_whole_nearby_activity">You can see wikidata items that need picture around you</string>
+  <string name="showcase_view_list_icon">You can see places as a list by clicking this button</string>
+  <string name="showcase_view_recenter_icon">Your location marker will be centered with this button</string>
+  <string name="showcase_view_plus_fab">You can upload pictures both via gallery and camera</string>
 </resources>
