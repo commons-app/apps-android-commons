@@ -15,5 +15,4 @@ public class NearbyMaterialShowcaseSequence extends MaterialShowcaseSequence {
         this.setConfig(config);
         this.singleUse(sequenceID); // Display tutorial only once
     }
-
 }
