@@ -8,10 +8,12 @@ import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomSheetBehavior;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AlertDialog;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -41,6 +43,9 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 import timber.log.Timber;
+import uk.co.deanwild.materialshowcaseview.IShowcaseListener;
+import uk.co.deanwild.materialshowcaseview.MaterialShowcaseSequence;
+import uk.co.deanwild.materialshowcaseview.MaterialShowcaseView;
 
 
 public class NearbyActivity extends NavigationBaseActivity implements LocationUpdateListener {
@@ -56,6 +61,8 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
     LinearLayout bottomSheetDetails;
     @BindView(R.id.transparentView)
     View transparentView;
+    @BindView(R.id.fab_recenter)
+    View fabRecenter;
 
     @Inject
     LocationServiceManager locationManager;
@@ -76,6 +83,10 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
 
     private final String NETWORK_INTENT_ACTION = "android.net.conn.CONNECTIVITY_CHANGE";
     private BroadcastReceiver broadcastReceiver;
+    private NearbyMaterialShowcaseSequence nearbyMaterialShowcaseSequence;
+
+    private boolean isListShowcaseAdded = false;
+    private boolean isMapShowCaseAdded = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -87,6 +98,7 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
 
         initBottomSheetBehaviour();
         initDrawer();
+        nearbyMaterialShowcaseSequence = new NearbyMaterialShowcaseSequence(this, ViewUtil.SHOWCASE_VIEW_ID_1);
     }
 
     private void resumeFragment() {
@@ -125,7 +137,18 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.menu_nearby, menu);
-        listButton = menu.findItem(R.id.action_display_list).getActionView();
+
+        new Handler().post(() -> {
+
+            listButton = findViewById(R.id.action_display_list);
+            nearbyMaterialShowcaseSequence.addSequenceItem(listButton,"test1","test2");
+            isListShowcaseAdded = true;
+
+            if (isMapShowCaseAdded) { // If map showcase is also ready, start nearbyMaterialShowcaseSequence
+                // Probably this case is not possible. Just added to be careful
+                setMapViewTutorialShowCase();
+            }
+        });
 
         return super.onCreateOptionsMenu(menu);
     }
@@ -405,9 +428,53 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
             updateListFragment();
         }
 
-        NearbyMaterialShowcaseSequence sequence = new NearbyMaterialShowcaseSequence(this, "SEQUENCE_ID");
-        sequence.addSequenceItem(listButton, "testing1", "testing2");
-        sequence.start();
+        nearbyMaterialShowcaseSequence.addSequenceItem(fabRecenter, "testing1", "testing2");
+
+        isMapShowCaseAdded = true;
+        if (isListShowcaseAdded) { // If list showcase is also ready
+            nearbyMaterialShowcaseSequence.setOnItemDismissedListener(new MaterialShowcaseSequence.OnSequenceItemDismissedListener() {
+                @Override
+                public void onDismiss(MaterialShowcaseView materialShowcaseView, int i) {
+                    if (i == 1) {
+                        nearbyMapFragment.onNearbyMaterialShowcaseDismissed();
+                        Log.d("deneme","deneme"+i);
+                    }
+                }
+            });
+        }
+
+    }
+
+    public void setMapViewTutorialShowCase() {
+           /*
+            *This showcase view will be the first step of our nearbyMaterialShowcaseSequence. The reason we use a
+            * single item instead of adding another step to nearbyMaterialShowcaseSequence is that we are not able to
+            * call withoutShape() method on steps. For mapView we need an showcase view without
+            * any circle on it, it should cover the whole page.
+            * */
+        MaterialShowcaseView firstSingleShowCaseView = new MaterialShowcaseView.Builder(this)
+                .setTarget(nearbyMapFragment.mapView)
+                .setDismissText("GOT IT")
+                .setContentText("This is some amazing feature you should know about")
+                .setDelay(500) // optional but starting animations immediately in onCreate can make them choppy
+                .singleUse(ViewUtil.SHOWCASE_VIEW_ID_3) // provide a unique ID used to ensure it is only shown once
+                .withoutShape() // no shape on map view since there are no view to focus on
+                .setListener(new IShowcaseListener() {
+                    @Override
+                    public void onShowcaseDisplayed(MaterialShowcaseView materialShowcaseView) {
+
+                    }
+
+                    @Override
+                    public void onShowcaseDismissed(MaterialShowcaseView materialShowcaseView) {
+                            /* Add other nearbyMaterialShowcaseSequence here, it will make the user feel as they are a
+                            * nearbyMaterialShowcaseSequence whole together.
+                            * */
+                        nearbyMaterialShowcaseSequence.start();
+                    }
+                })
+                .build();
+        firstSingleShowCaseView.show(this);
     }
 
     private void lockNearbyView(boolean lock) {
