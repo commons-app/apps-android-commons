@@ -90,6 +90,7 @@
   <string name="categories_activity_title">分类</string>
   <string name="title_activity_settings">设置</string>
   <string name="title_activity_signup">注册</string>
+  <string name="title_activity_featured_images">特色图片</string>
   <string name="menu_about">关于</string>
   <string name="about_license">维基共享资源应用程序是由维基媒体社区的受助者和志愿者创建和维护的开源应用程序。维基媒体基金会不参与该应用程序的创立，开发或维护。</string>
   <string name="about_improve">创建新的&lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;GitHub问题&lt;/a&gt;以发送错误报告和建议。</string>
@@ -175,6 +176,8 @@
   <string name="media_detail_media_title">媒体的标题</string>
   <string name="media_detail_description">说明</string>
   <string name="media_detail_description_explanation">在此填写媒体的说明。这可能会相当长，并将需要包裹在多行中。我们希望它看起来很好。</string>
+  <string name="media_detail_author">作者</string>
+  <string name="media_detail_author_explanation">这里有特色图片作者的用户名。</string>
   <string name="media_detail_uploaded_date">上传日期</string>
   <string name="media_detail_license">许可协议</string>
   <string name="media_detail_coordinates">坐标</string>
@@ -217,6 +220,7 @@
   <string name="navigation_item_logout">退出</string>
   <string name="navigation_item_info">教程</string>
   <string name="navigation_item_notification">通知</string>
+  <string name="navigation_item_featured_images">特色</string>
   <string name="nearby_needs_permissions">附近地点不能在没有位置权限的情况下显示</string>
   <string name="no_description_found">找不到描述</string>
   <string name="nearby_info_menu_commons_article">共享资源文件页面</string>

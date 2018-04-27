@@ -90,6 +90,7 @@
   <string name="categories_activity_title">Kategorier</string>
   <string name="title_activity_settings">Inställningar</string>
   <string name="title_activity_signup">Registrera</string>
+  <string name="title_activity_featured_images">Utvalda bild</string>
   <string name="menu_about">Om</string>
   <string name="about_license">Wikimedia Commons är en app med öppen källkod som skapas och underhålls av frivilliga från Wikimedias gemenskap. Wikimedia Foundation är inte involverad i skapandet, utvecklingen eller underhållet av appen.</string>
   <string name="about_improve">Skapa ett nytt &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;ärende på GitHub&lt;/a&gt; för att rapportera buggar och förslag.</string>
@@ -175,6 +176,8 @@
   <string name="media_detail_media_title">Mediatitel</string>
   <string name="media_detail_description">Beskrivning</string>
   <string name="media_detail_description_explanation">Beskrivningen för mediafilen ska vara här. Den kan vara riktig lång och kommer att behöva sträcka sig över flera rader. Vi hoppas i alla fall att det kommer se bra ut.</string>
+  <string name="media_detail_author">Skapare</string>
+  <string name="media_detail_author_explanation">Användarnamnet för den utvalda bildens skapare ska stå här.</string>
   <string name="media_detail_uploaded_date">Uppladdningsdatum</string>
   <string name="media_detail_license">Licens</string>
   <string name="media_detail_coordinates">Koordinater</string>
@@ -217,6 +220,7 @@
   <string name="navigation_item_logout">Logga ut</string>
   <string name="navigation_item_info">Guide</string>
   <string name="navigation_item_notification">Meddelanden</string>
+  <string name="navigation_item_featured_images">Utvald</string>
   <string name="nearby_needs_permissions">Platser i närheten kan inte visas utan platsbehörigheter</string>
   <string name="no_description_found">ingen beskrivning hittades</string>
   <string name="nearby_info_menu_commons_article">Commons-filsida</string>

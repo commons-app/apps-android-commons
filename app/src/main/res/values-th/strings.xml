@@ -164,6 +164,7 @@
   <string name="media_detail_media_title">ชื่อเรื่องสื่อ</string>
   <string name="media_detail_description">คำอธิบาย</string>
   <string name="media_detail_description_explanation">ป้อนคำอธิบายสื่อที่นี่ คำอธิบายที่มีความยาวมากอาจมีหลายบรรทัด เราหวังว่ามันจะดูดี</string>
+  <string name="media_detail_author">ผู้สร้างสรรค์</string>
   <string name="media_detail_uploaded_date">วันที่อัปโหลด</string>
   <string name="media_detail_license">สัญญาอนุญาต</string>
   <string name="media_detail_coordinates">พิกัด</string>

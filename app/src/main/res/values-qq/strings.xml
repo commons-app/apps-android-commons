@@ -110,6 +110,7 @@
   <string name="no">{{Identical|No}}</string>
   <string name="media_detail_title">{{Identical|Title}}</string>
   <string name="media_detail_description">{{Identical|Description}}</string>
+  <string name="media_detail_author">{{Identical|Author}}</string>
   <string name="media_detail_license">{{Identical|License}}</string>
   <string name="media_detail_coordinates">{{Identical|Coordinate}}</string>
   <string name="media_detail_coordinates_empty">Describes \"coordinates\".</string>

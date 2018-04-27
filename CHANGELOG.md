@@ -1,5 +1,11 @@
 # Wikimedia Commons for Android
 
+## v2.7.1
+- Fixed UI and permission issues with Nearby
+- Fixed issue with My Recent Uploads being empty
+- Fixed blank category issue when uploading directly from Nearby
+- Various crash fixes
+
 ## v2.7.0
 - New Nearby Places UI with direct uploads (and associated category suggestions)
 - Added two-factor authentication login

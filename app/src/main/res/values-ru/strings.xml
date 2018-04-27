@@ -104,6 +104,7 @@
   <string name="categories_activity_title">Категории</string>
   <string name="title_activity_settings">Настройки</string>
   <string name="title_activity_signup">Зарегистрироваться</string>
+  <string name="title_activity_featured_images">Избранные изображения</string>
   <string name="menu_about">О приложении</string>
   <string name="about_license">Приложение «Викисклад» - это программа с открытым кодом, которую создали волонтёры и участники грантов Викимедиа. Фонд Викимедиа не участвует в создании, разработке или обслуживании этого приложения.</string>
   <string name="about_improve">Вы можете создать &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;запрос на GitHub&lt;/a&gt;, чтобы сообщить об ошибке или внести предложение.</string>
@@ -146,7 +147,7 @@
   <string name="license_name_cc_by_sa_4_0">CC BY-SA 4.0</string>
   <string name="license_name_cc_by_4_0">CC BY 4.0</string>
   <string name="license_name_cc_zero">CC Zero</string>
-  <string name="tutorial_1_text">Викисклад содержит большую часть изображений, которые используются в Википедии.</string>
+  <string name="tutorial_1_text">Викисклад содержит бо́льшую часть изображений, которые используются в Википедии.</string>
   <string name="tutorial_1_subtext">Ваши изображения помогают образованию людей во всём мире!</string>
   <string name="tutorial_2_text">Пожалуйста, загрузите фотографии, которые были сняты или созданы исключительно вами:</string>
   <string name="tutorial_2_subtext">Природные объекты (например, цветы, животные, горы)\n• Полезные предметы (например, велосипеды, вокзалы)\n• Известные люди (например, ваш мэр, спортсмены-олимпийцы, которых вы встретили)</string>
@@ -186,9 +187,11 @@
   <string name="yes">Да</string>
   <string name="no">Нет</string>
   <string name="media_detail_title">Название</string>
-  <string name="media_detail_media_title">Заголовок носителя информации</string>
+  <string name="media_detail_media_title">Заголовок медиафайла</string>
   <string name="media_detail_description">Описание</string>
-  <string name="media_detail_description_explanation">Здесь располагается описание носителя информации. Оно потенциально может быть весьма длинным и даже располагаться в несколько строк. Однако мы надеемся, что это выглядит симпатично</string>
+  <string name="media_detail_description_explanation">Здесь располагается описание медиафайла. Оно может быть весьма длинным и даже располагаться в несколько строк. Однако, надеемся, будет выглядеть приемлемо.</string>
+  <string name="media_detail_author">Автор</string>
+  <string name="media_detail_author_explanation">Здесь указывается имя автора избранного изображения</string>
   <string name="media_detail_uploaded_date">Дата загрузки</string>
   <string name="media_detail_license">Лицензия</string>
   <string name="media_detail_coordinates">Координаты</string>
@@ -214,7 +217,7 @@
   <string name="welcome_image_llamas">Ламы</string>
   <string name="welcome_image_rainbow_bridge">Радужный мост</string>
   <string name="welcome_image_tulip">Тюльпан</string>
-  <string name="welcome_image_no_selfies">Нет сэлфи</string>
+  <string name="welcome_image_no_selfies">Без селфи</string>
   <string name="welcome_image_proprietary">Несвободное изображение</string>
   <string name="welcome_image_welcome_wikipedia">Добро пожаловать в Википедию</string>
   <string name="welcome_image_welcome_copyright">Добро пожаловать — авторские права</string>
@@ -231,6 +234,7 @@
   <string name="navigation_item_logout">Выйти</string>
   <string name="navigation_item_info">Руководство</string>
   <string name="navigation_item_notification">Уведомления</string>
+  <string name="navigation_item_featured_images">Избранное</string>
   <string name="nearby_needs_permissions">Места поблизости не могут быть отображены без разрешения на геолокацию</string>
   <string name="no_description_found">описание не найдено</string>
   <string name="nearby_info_menu_commons_article">Страница файла на Викискладе</string>
@@ -276,7 +280,7 @@
   <string name="no_notifications">Уведомлений нет</string>
   <string name="about_translate">&lt;u&gt;Перевести&lt;/u&gt;</string>
   <string name="about_translate_title">Языки</string>
-  <string name="about_translate_message">Выберите язык, переводы на который вы хотели бы видеть</string>
+  <string name="about_translate_message">Выберите язык локализации, на который сможете перевести элементы интерфейса приложения</string>
   <string name="about_translate_proceed">Выполняется</string>
   <string name="about_translate_cancel">Отмена</string>
   <string name="retry">Повторить</string>

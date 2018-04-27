@@ -157,6 +157,7 @@
   <string name="media_detail_media_title">メディアのタイトル</string>
   <string name="media_detail_description">記述</string>
   <string name="media_detail_description_explanation">ここにメディアの説明が入ります。かなり長文になる場合には数行にわたることがあります。それでも見栄えがよいと願っています。</string>
+  <string name="media_detail_author">作者</string>
   <string name="media_detail_uploaded_date">アップロード日時</string>
   <string name="media_detail_license">ライセンス</string>
   <string name="media_detail_coordinates">緯度経度</string>
