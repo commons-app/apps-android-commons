@@ -150,7 +150,10 @@ class JsonMediaWikiApi implements MediaWikiApi {
 
     @Override
     public boolean pageExists(String pageName) {
-        return false; // TODO
+        return !get().action("query")
+                .param("titles", pageName)
+                .execute()
+                .query.pages.containsKey("-1");
     }
 
     @Override
@@ -198,25 +201,29 @@ class JsonMediaWikiApi implements MediaWikiApi {
     @Nullable
     @Override
     public String edit(String editToken, String processedPageContent, String filename, String summary) {
-        return post().action("edit")
-                .param("title", filename)
-                .param("token", editToken)
-                .param("text", processedPageContent)
-                .param("summary", summary)
-                .execute()
-                .edit.result;
+        return editOperation("text", editToken, processedPageContent, filename, summary);
     }
 
     @Nullable
     @Override
     public String prependEdit(String editToken, String processedPageContent, String filename, String summary) {
-        return null; // TODO
+        return editOperation("prependtext", editToken, processedPageContent, filename, summary);
     }
 
     @Nullable
     @Override
     public String appendEdit(String editToken, String processedPageContent, String filename, String summary) {
-        return null; // TODO
+        return editOperation("appendtext", editToken, processedPageContent, filename, summary);
+    }
+
+    private String editOperation(String editType, String editToken, String processedPageContent, String filename, String summary) {
+        return post().action("edit")
+                .param("title", filename)
+                .param("token", editToken)
+                .param(editType, processedPageContent)
+                .param("summary", summary)
+                .execute()
+                .edit.result;
     }
 
     @NonNull
