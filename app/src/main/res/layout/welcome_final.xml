@@ -1,22 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#0c609c"
     >
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="top|end"
-        android:layout_marginTop="@dimen/standard_gap"
-        android:layout_marginRight="@dimen/standard_gap"
-        android:layout_marginEnd="@dimen/standard_gap"
-        android:id="@+id/welcomeInfo"
-        android:textSize="@dimen/normal_text"
-        android:textColor="@android:color/white"
-        android:text="@string/welcome_help_button_text"
-        />
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -76,4 +65,20 @@
         />
 
     </LinearLayout>
-</LinearLayout>
+    <TextView
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="top|end"
+        android:layout_marginTop="@dimen/standard_gap"
+        android:layout_marginRight="@dimen/standard_gap"
+        android:layout_marginEnd="@dimen/standard_gap"
+        android:id="@+id/welcomeInfo"
+        android:textSize="@dimen/normal_text"
+        android:textColor="@android:color/white"
+        android:text="@string/welcome_help_button_text"
+        android:padding="@dimen/standard_gap"
+        />
+</RelativeLayout>
