@@ -99,7 +99,7 @@ public class SettingsFragment extends PreferenceFragment {
 
         Preference betaTesterPreference = findPreference("becomeBetaTester");
         betaTesterPreference.setOnPreferenceClickListener(preference -> {
-                Utils.handleWebUrl(getContext(),Uri.parse(getResources().getString(R.string.beta_opt_in_link)));
+                Utils.handleWebUrl(getActivity(),Uri.parse(getResources().getString(R.string.beta_opt_in_link)));
                 return true;
         });
         Preference sendLogsPreference = findPreference("sendLogFile");
