@@ -27,7 +27,7 @@
   <string name="upload_failed_notification_title">උදුගතකරමින්  %1$s අසාර්ථකයි</string>
   <string name="upload_failed_notification_subtitle">පෙන්වන්න තට්ටු කරන්න.</string>
   <plurals name="uploads_pending_notification_indicator" fuzzy="true">
-    <item quantity="one">1 ගොනුවක් උඩුගත කෙරේ</item>
+    <item quantity="one">%d ගොනුවක් උඩුගත කෙරේ</item>
     <item quantity="other">ගොනු %d ක් උඩුගත කෙරේ</item>
   </plurals>
   <string name="title_activity_contributions">මගේ අලුත්ම උඩුගතකිරීම්</string>
