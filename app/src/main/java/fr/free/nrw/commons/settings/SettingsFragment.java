@@ -102,6 +102,11 @@ public class SettingsFragment extends PreferenceFragment {
             return true;
         });
 
+        Preference betaTesterPreference = findPreference("becomeBetaTester");
+        betaTesterPreference.setOnPreferenceClickListener(preference -> {
+                Utils.handleWebUrl(getActivity(),Uri.parse(getResources().getString(R.string.beta_opt_in_link)));
+                return true;
+        });
         Preference sendLogsPreference = findPreference("sendLogFile");
         sendLogsPreference.setOnPreferenceClickListener(preference -> {
             //first we need to check if we have the necessary permissions
