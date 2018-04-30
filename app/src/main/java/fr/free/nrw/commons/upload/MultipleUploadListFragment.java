@@ -11,7 +11,6 @@ import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.util.DisplayMetrics;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -89,9 +88,9 @@ public class MultipleUploadListFragment extends Fragment {
             if (view == null) {
                 view = LayoutInflater.from(getContext()).inflate(R.layout.layout_upload_item, viewGroup, false);
                 holder = new UploadHolderView();
-                holder.image = (SimpleDraweeView) view.findViewById(R.id.uploadImage);
-                holder.title = (TextView) view.findViewById(R.id.uploadTitle);
-                holder.overlay = (RelativeLayout) view.findViewById(R.id.uploadOverlay);
+                holder.image = view.findViewById(R.id.uploadImage);
+                holder.title = view.findViewById(R.id.uploadTitle);
+                holder.overlay = view.findViewById(R.id.uploadOverlay);
 
                 holder.image.setLayoutParams(new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, photoSize.y));
                 holder.image.setHierarchy(GenericDraweeHierarchyBuilder
@@ -129,11 +128,8 @@ public class MultipleUploadListFragment extends Fragment {
         super.onStop();
 
         // FIXME: Stops the keyboard from being shown 'stale' while moving out of this fragment into the next
-        View target = getView().findFocus();
-        if (target != null) {
-            InputMethodManager imm = (InputMethodManager) target.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
-            imm.hideSoftInputFromWindow(target.getWindowToken(), 0);
-        }
+        View target = getActivity().getCurrentFocus();
+        hideKeyboard(target);
     }
 
     // FIXME: Wrong result type
@@ -169,8 +165,8 @@ public class MultipleUploadListFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_multiple_uploads_list, container, false);
-        photosGrid = (GridView) view.findViewById(R.id.multipleShareBackground);
-        baseTitle = (EditText) view.findViewById(R.id.multipleBaseTitle);
+        photosGrid = view.findViewById(R.id.multipleShareBackground);
+        baseTitle = view.findViewById(R.id.multipleBaseTitle);
 
         photosAdapter = new PhotoDisplayAdapter();
         photosGrid.setAdapter(photosAdapter);
@@ -190,8 +186,12 @@ public class MultipleUploadListFragment extends Fragment {
     }
 
     public void hideKeyboard(View view) {
-        InputMethodManager inputMethodManager =(InputMethodManager)getActivity().getSystemService(Activity.INPUT_METHOD_SERVICE);
-        inputMethodManager.hideSoftInputFromWindow(view.getWindowToken(), 0);
+        if (view != null) {
+            InputMethodManager inputMethodManager = (InputMethodManager) getActivity().getSystemService(Activity.INPUT_METHOD_SERVICE);
+            if (inputMethodManager != null) {
+                inputMethodManager.hideSoftInputFromWindow(view.getWindowToken(), 0);
+            }
+        }
     }
 
     @Override

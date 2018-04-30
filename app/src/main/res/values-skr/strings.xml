@@ -89,6 +89,7 @@
   <string name="media_detail_title">عنوان</string>
   <string name="media_detail_media_title">میڈیا دا عنوان</string>
   <string name="media_detail_description">تفصیل</string>
+  <string name="media_detail_author">مصنف</string>
   <string name="media_detail_uploaded_date">اپ لوڈ تھیوݨ دی تاریخ</string>
   <string name="media_detail_license">لائیسنس</string>
   <string name="media_detail_coordinates">کوآرڈینیٹ</string>
@@ -113,6 +114,7 @@
   <string name="navigation_item_feedback">تہاڈی رائے</string>
   <string name="navigation_item_logout">لاگ آؤٹ</string>
   <string name="navigation_item_info">ٹیٹوریل</string>
+  <string name="navigation_item_featured_images">خاص</string>
   <string name="nearby_info_menu_wikidata_article">وکی ڈیٹا آئٹم</string>
   <string name="nearby_info_menu_wikipedia_article">وکی پیڈیا دا مضمون</string>
   <string name="give_permission">اجازت ݙیوو</string>

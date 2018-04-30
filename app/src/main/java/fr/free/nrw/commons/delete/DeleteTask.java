@@ -83,7 +83,7 @@ public class DeleteTask extends AsyncTask<Void, Integer, Boolean> {
 
         String logPageString = "\n{{Commons:Deletion requests/" + media.getFilename() +
                 "}}\n";
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd", Locale.getDefault());
         String date = sdf.format(calendar.getTime());
 
         String userPageString = "\n{{subst:idw|" + media.getFilename() +

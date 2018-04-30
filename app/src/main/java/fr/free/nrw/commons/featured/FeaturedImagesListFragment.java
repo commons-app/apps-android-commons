@@ -16,11 +16,6 @@ import dagger.android.support.DaggerFragment;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.R;
 
-
-/**
- * Created by root on 09.01.2018.
- */
-
 public class FeaturedImagesListFragment extends DaggerFragment {
     private GridView gridView;
     private MockGridViewAdapter gridAdapter;

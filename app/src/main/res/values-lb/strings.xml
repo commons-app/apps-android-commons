@@ -89,7 +89,7 @@
   <string name="about_license">D\'App Wikimedia Commons ass eng \'Open-Source-App\' déi vu Fräiwëllege vun der Wikimedia Foundation entwéckelt gouf an och vun hinnen ënnerhal gëtt. D\'Wikimedia Foundation ass net an d\'Entwécklung oder den Ënnerhalt vun der App implizéiert.</string>
   <string name="about_improve">Leet w.e.g. &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt; e GitHub Problem&lt;/a&gt; fir Problemer ze mellen a Proposen ze maachen.</string>
   <string name="about_privacy_policy">&lt;u&gt;Dateschutzrichtlinn&lt;/u&gt;</string>
-  <string name="about_credits" fuzzy="true">&lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/CREDITS\"&gt;Merci&lt;/a&gt;</string>
+  <string name="about_credits">&lt;u&gt;Merci&lt;/u&gt;</string>
   <string name="title_activity_about">Iwwer</string>
   <string name="menu_feedback">Feedback schécken (per E-Mail)</string>
   <string name="no_email_client">Keen E-Mail-Client installéiert</string>

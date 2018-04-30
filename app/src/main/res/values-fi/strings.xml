@@ -71,6 +71,7 @@
   <string name="categories_search_text_hint">Etsi luokkia</string>
   <string name="menu_save_categories">Tallenna</string>
   <string name="refresh_button">Päivitä</string>
+  <string name="display_list_button">Lista</string>
   <string name="gps_disabled">GPS ei ole käytössä. Haluatko ottaa sen käyttöön?</string>
   <string name="enable_gps">Ota GPS käyttöön</string>
   <string name="contributions_subtitle_zero">Ei tallennuksia vielä</string>
@@ -161,8 +162,8 @@
   <string name="detail_description_empty">Ei kuvausta</string>
   <string name="detail_license_empty">Tuntematon lisenssi</string>
   <string name="menu_refresh">Päivitä</string>
-  <string name="read_storage_permission_rationale" fuzzy="true">Vaadittu oikeus: Ulkoisen tallennustilan luku. Appi ei toimi ilman tätä oikeutta.</string>
-  <string name="write_storage_permission_rationale" fuzzy="true">Vaadittava lupa: Kirjoita ulkoiseen tallennustilaan. Sovellus ei voi toimia ilman tätä.</string>
+  <string name="read_storage_permission_rationale">Vaadittu oikeus: Ulkoisen tallennustilan luku. Appi ei voi päästä galleriaasi ilman tätä oikeutta.</string>
+  <string name="write_storage_permission_rationale">Vaadittava lupa: Kirjoita ulkoiseen tallennustilaan. Appi ei voi päästä kameraasi ilman tätä oikeutta.</string>
   <string name="location_permission_rationale">Valinnainen lupa: Saada tämänhetkinen sijainti loukkasuosituksia varten.</string>
   <string name="ok">OK</string>
   <string name="title_activity_nearby">Lähellä olevat paikat</string>
@@ -175,6 +176,7 @@
   <string name="media_detail_media_title">Median otsikko</string>
   <string name="media_detail_description">Kuvaus</string>
   <string name="media_detail_description_explanation">Median kuvaus menee tänne. Tämä voi mahdollisesti olla melko pitkä, ja sen täytyy kääriä poikittain useita rivejä. Toivomme, että se näyttää silti hyvältä.</string>
+  <string name="media_detail_author">Tekijä</string>
   <string name="media_detail_uploaded_date">Tallennuspäivämäärä</string>
   <string name="media_detail_license">Lisenssi</string>
   <string name="media_detail_coordinates">Koordinaatit</string>
@@ -221,6 +223,7 @@
   <string name="no_description_found">kuvausta ei löytynyt</string>
   <string name="nearby_info_menu_commons_article">Commons-tiedostosivu</string>
   <string name="nearby_info_menu_wikidata_article">Wikidata-kohde</string>
+  <string name="nearby_info_menu_wikipedia_article">Wikipedia-artikkeli</string>
   <string name="error_while_cache">Virhe varastoidessa kuvia</string>
   <string name="title_info">Tiedoston yksilöllinen ja kuvaava otsikko, jota käytetään tiedostonimenä. Voit käyttää tavallista kieltä välilyönnein. Älä sisällytä tiedoston päätettä.</string>
   <string name="description_info">Kuvaile mediaa niin paljon kuin mahdollista: Missä se otettiin? Mitä se esittää? Mikä on asiayhteys? Kuvaile esineitä tai henkilöitä. Tuo ilmi tietoja, joita ei ole helppo arvailla, esimerkiksi vuorokaudenaika, jos se on maisema. Jos media esittää jotain epätavallista, selitä, mikä tekee siitä epätavallisen.</string>
@@ -233,6 +236,9 @@
   <string name="send_log_file">Lähetä lokitiedosto</string>
   <string name="send_log_file_description">Lähetä lokitiedosto kehittäjille sähköpostin kautta</string>
   <string name="null_url">Virhe! URL-osoitetta ei löytynyt</string>
+  <string name="nominate_deletion">Ehdotettu poistettavaksi</string>
+  <string name="nominated_for_deletion">Tätä kuvaa on ehdotettu poistettavaksi.</string>
+  <string name="view_browser">Näytä selaimessa</string>
   <string name="nearby_location_has_not_changed">Sijainti ei ole muuttunut.</string>
   <string name="nearby_location_not_available">Sijainti ei käytettävissä.</string>
   <string name="location_permission_rationale_nearby">Lupa vaaditaan läheisten paikkojen luettelon näyttämiseen</string>
@@ -243,6 +249,17 @@
   <string name="notifications_thank_you_edit">Kiitos muokkaamisestasi</string>
   <string name="notifications_mention">%1$s mainitsi sinut %2$s.</string>
   <string name="toggle_view_button">Vaihda näkymä</string>
-  <string name="about_faq" fuzzy="true">Usein Kysytyt Kysymykset</string>
+  <string name="nearby_wikidata">WIKIDATA</string>
+  <string name="nearby_wikipedia">WIKIPEDIA</string>
+  <string name="nearby_commons">COMMONS</string>
+  <string name="about_rate_us">&lt;u&gt;Arvostele meidät&lt;/u&gt;</string>
+  <string name="about_faq">&lt;u&gt;UKK&lt;/u&gt;</string>
   <string name="welcome_skip_button">Ohita opetus</string>
+  <string name="no_internet">Internet ei saatavissa</string>
+  <string name="internet_established">Internet saatavana</string>
+  <string name="about_translate">&lt;u&gt;Käännä&lt;/u&gt;</string>
+  <string name="about_translate_title">Kielet</string>
+  <string name="about_translate_proceed">Jatka</string>
+  <string name="about_translate_cancel">Peruuta</string>
+  <string name="retry">Yritä uudelleen</string>
 </resources>

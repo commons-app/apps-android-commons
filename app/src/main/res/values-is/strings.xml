@@ -84,6 +84,7 @@
   <string name="categories_activity_title">Flokkar</string>
   <string name="title_activity_settings">Stillingar</string>
   <string name="title_activity_signup">Nýskrá</string>
+  <string name="title_activity_featured_images">Áberandi myndir</string>
   <string name="menu_about">Um</string>
   <string name="about_license">Wikimedia Commons forritið er opinn og frjáls hugbúnaður sem gerður er og viðhaldið af stuðningsaðilum og sjálfboðaliðum Wikimedia samfélagsins. Wikimedia Foundation sjálfseignarstofnunin kemur ekki að gerð, forritun eða viðhaldi forritsins. \</string>
   <string name="about_improve">Útbúðu nýjar &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;GitHub tilkynningar (issue)&lt;/a&gt; til að koma villum og uppástungum á framfæri.</string>
@@ -169,6 +170,8 @@
   <string name="media_detail_media_title">Titill þessa gagnamiðils</string>
   <string name="media_detail_description">Lýsing</string>
   <string name="media_detail_description_explanation">Lýsing á gagnamiðlinum kemur hér. Þetta má vera nokkuð langt og mun þurfa að skríða yfir nokkrar línur. Við vonum að þetta líti samt þokkalega út.</string>
+  <string name="media_detail_author">Höfundur</string>
+  <string name="media_detail_author_explanation">Nafn höfundar myndarinnar kemur hér.</string>
   <string name="media_detail_uploaded_date">Sent inn þann</string>
   <string name="media_detail_license">Notkunarleyfi</string>
   <string name="media_detail_coordinates">Hnit</string>
@@ -211,6 +214,7 @@
   <string name="navigation_item_logout">Útskráning</string>
   <string name="navigation_item_info">Kennsla</string>
   <string name="navigation_item_notification">Tilkynningar</string>
+  <string name="navigation_item_featured_images">Efst á baugi</string>
   <string name="nearby_needs_permissions">Ekki er hægt að birta nálæga staði an heimildar til að ná í hnattstaðsetningu</string>
   <string name="no_description_found">engin lýsing fannst</string>
   <string name="nearby_info_menu_commons_article">Síða Commons-skrár</string>

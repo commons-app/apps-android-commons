@@ -3,21 +3,20 @@ package fr.free.nrw.commons.upload;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
-import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.v4.view.ViewCompat;
 import android.support.v7.app.AlertDialog;
+
 import android.text.Editable;
 import android.text.Html;
 import android.text.TextWatcher;
 import android.text.method.LinkMovementMethod;
-import android.util.Log;
+
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -60,6 +59,7 @@ public class SingleUploadFragment extends CommonsDaggerSupportFragment {
     @BindView(R.id.titleDescButton) Button titleDescButton;
     @BindView(R.id.share_license_summary) TextView licenseSummaryView;
     @BindView(R.id.licenseSpinner) Spinner licenseSpinner;
+
 
     @Inject @Named("default_preferences") SharedPreferences prefs;
     @Inject @Named("direct_nearby_upload_prefs") SharedPreferences directPrefs;
@@ -184,9 +184,12 @@ public class SingleUploadFragment extends CommonsDaggerSupportFragment {
     }
 
     public void hideKeyboard(View view) {
-        Log.i("hide", "hideKeyboard: ");
-        InputMethodManager inputMethodManager =(InputMethodManager)getActivity().getSystemService(Activity.INPUT_METHOD_SERVICE);
-        inputMethodManager.hideSoftInputFromWindow(view.getWindowToken(), 0);
+        if (view != null) {
+            InputMethodManager inputMethodManager = (InputMethodManager) getActivity().getSystemService(Activity.INPUT_METHOD_SERVICE);
+            if (inputMethodManager != null) {
+                inputMethodManager.hideSoftInputFromWindow(view.getWindowToken(), 0);
+            }
+        }
     }
 
     @Override
@@ -224,7 +227,7 @@ public class SingleUploadFragment extends CommonsDaggerSupportFragment {
         setLicenseSummary(license);
         prefs.edit()
                 .putString(Prefs.DEFAULT_LICENSE, license)
-                .commit();
+                .apply();
     }
 
 
@@ -301,11 +304,8 @@ public class SingleUploadFragment extends CommonsDaggerSupportFragment {
         super.onStop();
 
         // FIXME: Stops the keyboard from being shown 'stale' while moving out of this fragment into the next
-        View target = getView().findFocus();
-        if (target != null) {
-            InputMethodManager imm = (InputMethodManager) target.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
-            imm.hideSoftInputFromWindow(target.getWindowToken(), 0);
-        }
+        View target = getActivity().getCurrentFocus();
+        hideKeyboard(target);
     }
 
     @NonNull
@@ -345,6 +345,7 @@ public class SingleUploadFragment extends CommonsDaggerSupportFragment {
             }
         }
     }
+
 
     private void showInfoAlert (int titleStringID, int messageStringID){
         new AlertDialog.Builder(getContext())
