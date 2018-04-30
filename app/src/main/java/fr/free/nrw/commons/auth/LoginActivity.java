@@ -84,6 +84,10 @@ public class LoginActivity extends AccountAuthenticatorActivity {
     private LoginTextWatcher textWatcher = new LoginTextWatcher();
 
     private Boolean loginCurrentlyInProgress = false;
+    private Boolean errorMessageShown = false;
+    private String  resultantError;
+    private static final String RESULTANT_ERROR = "resultantError";
+    private static final String ERROR_MESSAGE_SHOWN = "errorMessageShown";
     private static final String LOGING_IN = "logingIn";
 
     @Override
@@ -217,6 +221,8 @@ public class LoginActivity extends AccountAuthenticatorActivity {
             handlePassResult(username, password);
         } else {
             loginCurrentlyInProgress = false;
+            errorMessageShown = true;
+            resultantError = result;
             handleOtherResults(result);
         }
     }
@@ -343,14 +349,21 @@ public class LoginActivity extends AccountAuthenticatorActivity {
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         outState.putBoolean(LOGING_IN, loginCurrentlyInProgress);
+        outState.putBoolean(ERROR_MESSAGE_SHOWN, errorMessageShown);
+        outState.putString(RESULTANT_ERROR, resultantError);
     }
 
     @Override
     protected void onRestoreInstanceState(Bundle savedInstanceState) {
         super.onRestoreInstanceState(savedInstanceState);
         loginCurrentlyInProgress = savedInstanceState.getBoolean(LOGING_IN, false);
+        errorMessageShown = savedInstanceState.getBoolean(ERROR_MESSAGE_SHOWN, false);
         if(loginCurrentlyInProgress){
             performLogin();
+        }
+        if(errorMessageShown){
+            resultantError = savedInstanceState.getString(RESULTANT_ERROR);
+            handleOtherResults(resultantError);
         }
     }
 
@@ -363,7 +376,9 @@ public class LoginActivity extends AccountAuthenticatorActivity {
 
     public void showMessageAndCancelDialog(@StringRes int resId) {
         showMessage(resId, R.color.secondaryDarkColor);
-        progressDialog.cancel();
+        if(progressDialog != null){
+            progressDialog.cancel();
+        }
     }
 
     public void showSuccessAndDismissDialog() {
