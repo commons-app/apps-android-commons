@@ -17,6 +17,7 @@
   <string name="preference_category_feedback">משוב</string>
   <string name="preference_category_location">מיקום</string>
   <string name="app_name">ויקישיתוף</string>
+  <string name="bullet">•</string>
   <string name="menu_settings">הגדרות</string>
   <string name="username">שם משתמש</string>
   <string name="password">ססמה</string>
@@ -208,6 +209,7 @@
   <string name="welcome_image_no_selfies">בלי תמונות סלפי</string>
   <string name="welcome_image_proprietary">תמונה קניינית</string>
   <string name="welcome_image_welcome_wikipedia">ברוך בואך ויקיפדיה</string>
+  <string name="welcome_image_welcome_copyright">הודעה לגבי זכויות יוצרים</string>
   <string name="welcome_image_sydney_opera_house">בית האופרה של סידני</string>
   <string name="cancel">ביטול</string>
   <string name="navigation_drawer_open">פתיחה</string>
@@ -226,6 +228,7 @@
   <string name="no_description_found">לא נמצא תיאור</string>
   <string name="nearby_info_menu_commons_article">דף קובץ בוויקישיתוף</string>
   <string name="nearby_info_menu_wikidata_article">פריט ויקינתונים</string>
+  <string name="nearby_info_menu_wikipedia_article">ערך בוויקיפדיה</string>
   <string name="error_while_cache">שגיאה במשירת תמונות במטמון</string>
   <string name="title_info">כותרת מתארת ייחודית לקובץ, שתשמש שם קובץ. אפשר להשתמש בשפה פשוטה עם רווחים. אין לכלול סיומת קובץ</string>
   <string name="description_info">נא לתאר את המדיה כמה שיותר: איפה היא נוצרה? מה היא מראה? מה ההקשר? נא לתאר את העצמים או את האנשים. נא לחשוף מידע שאי־אפשר לנחש בקלות, למשל, הזמן ביום אם זאת תמונת נוף. אם המדיה מציגה משהו בלתי־רגיל, נא להסביר מה מיוחד בה.</string>
@@ -238,8 +241,10 @@
   <string name="send_log_file">שליחת קובץ יומן</string>
   <string name="send_log_file_description">שליחת קובץ יומן למפתחים בדואר אלקטרוני</string>
   <string name="no_web_browser">לא נמצא דפדפן שיוכל לפתוח את הכתובת</string>
+  <string name="null_url">שגיאה! כתובת ה־URL לא נמצאה</string>
   <string name="nominate_deletion">להציע מחיקה</string>
   <string name="nominated_for_deletion">התמונה הזאת מועמדת למחיקה</string>
+  <string name="nominated_see_more"/>
   <string name="view_browser">הצגה בדפדפן</string>
   <string name="nearby_location_has_not_changed">המיקום לא השתנה.</string>
   <string name="nearby_location_not_available">המיקום אינו זמין.</string>
