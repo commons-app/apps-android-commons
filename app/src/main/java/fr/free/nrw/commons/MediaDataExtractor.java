@@ -42,7 +42,7 @@ public class MediaDataExtractor {
     private @Nullable LatLng coordinates;
 
     @Inject
-    public MediaDataExtractor(MediaWikiApi mwApi) {
+    private MediaDataExtractor(MediaWikiApi mwApi) {
         this.categories = new ArrayList<>();
         this.descriptions = new HashMap<>();
         this.fetched = false;
@@ -61,8 +61,9 @@ public class MediaDataExtractor {
         }
 
         try{
-            Timber.d("Nominated for deletion: " + mediaWikiApi.pageExists("Commons:Deletion_requests/"+filename));
             deletionStatus = mediaWikiApi.pageExists("Commons:Deletion_requests/"+filename);
+            Timber.d("Nominated for deletion: " + deletionStatus);
+
         }
         catch (Exception e){
             Timber.d(e.getMessage());
@@ -199,14 +200,8 @@ public class MediaDataExtractor {
         return findTemplateParameter(templateNode, new TemplateChildNodeComparator() {
             @Override
             public boolean match(Node node) {
-                Element el = (Element)node;
-                if (el.getTextContent().trim().equals(theIndex)) {
-                    return true;
-                } else if (el.getAttribute("index") != null && el.getAttribute("index").trim().equals(theIndex)) {
-                    return true;
-                } else {
-                    return false;
-                }
+                Element el = (Element) node;
+                return el.getTextContent().trim().equals(theIndex) || el.getAttribute("index") != null && el.getAttribute("index").trim().equals(theIndex);
             }
         });
     }
@@ -271,10 +266,9 @@ public class MediaDataExtractor {
                 String title = getTemplateTitle(node);
                 if (title.length() < 3) {
                     // Hopefully a language code. Nasty hack!
-                    String lang = title;
                     Node valueNode = findTemplateParameter(node, 1);
                     String value = valueNode.getTextContent(); // hope there's no subtemplates or formatting for now
-                    texts.put(lang, value);
+                    texts.put(title, value);
                 }
             } else if (node.getNodeType() == Node.TEXT_NODE) {
                 localText.append(node.getTextContent());
