@@ -399,7 +399,7 @@ public class ShareActivity
     private void showFABMenu(){
         isFABOpen=true;
 
-        //if( imageObj != null && imageObj.imageCoordsExists == true)
+        if( imageObj != null && imageObj.imageCoordsExists == true)
         maps_fragment.setVisibility(View.VISIBLE);
         zoomInButton.setVisibility(View.VISIBLE);
 
