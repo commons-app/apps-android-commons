@@ -10,7 +10,6 @@ import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -43,7 +42,6 @@ import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
 import fr.free.nrw.commons.upload.MwVolleyApi;
-import fr.free.nrw.commons.upload.SingleUploadFragment;
 import fr.free.nrw.commons.utils.StringSortingUtils;
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -131,8 +129,13 @@ public class CategorizationFragment extends CommonsDaggerSupportFragment {
     }
 
     public void hideKeyboard(View view) {
-        InputMethodManager inputMethodManager = (InputMethodManager) getActivity().getSystemService(Activity.INPUT_METHOD_SERVICE);
-        inputMethodManager.hideSoftInputFromWindow(view.getWindowToken(), 0);
+
+        if (view != null) {
+            InputMethodManager inputMethodManager = (InputMethodManager) getActivity().getSystemService(Activity.INPUT_METHOD_SERVICE);
+            if (inputMethodManager != null) {
+                inputMethodManager.hideSoftInputFromWindow(view.getWindowToken(), 0);
+            }
+        }
     }
 
     @Override
