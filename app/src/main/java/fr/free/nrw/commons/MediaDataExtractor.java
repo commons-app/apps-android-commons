@@ -42,7 +42,7 @@ public class MediaDataExtractor {
     private @Nullable LatLng coordinates;
 
     @Inject
-    private MediaDataExtractor(MediaWikiApi mwApi) {
+    public MediaDataExtractor(MediaWikiApi mwApi) {
         this.categories = new ArrayList<>();
         this.descriptions = new HashMap<>();
         this.fetched = false;
