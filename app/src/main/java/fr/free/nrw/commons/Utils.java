@@ -178,6 +178,7 @@ public class Utils {
     }
 
     public static void handleWebUrl(Context context, Uri url) {
+        Timber.d("Launching web url %s", url.toString());
         Intent browserIntent = new Intent(Intent.ACTION_VIEW, url);
         if (browserIntent.resolveActivity(context.getPackageManager()) == null) {
             Toast toast = Toast.makeText(context, context.getString(R.string.no_web_browser), LENGTH_SHORT);

@@ -36,6 +36,10 @@ import fr.free.nrw.commons.contributions.ContributionsContentProvider;
 import fr.free.nrw.commons.modifications.ModificationsContentProvider;
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
 import fr.free.nrw.commons.mwapi.UploadResult;
+import fr.free.nrw.commons.utils.ViewUtil;
+import io.reactivex.Observable;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.schedulers.Schedulers;
 import timber.log.Timber;
 
 public class UploadService extends HandlerService<Contribution> {
@@ -137,6 +141,7 @@ public class UploadService extends HandlerService<Contribution> {
 
     @Override
     public void queue(int what, Contribution contribution) {
+        Timber.d("Upload service queue has contribution with wiki data entity id as %s", contribution.getWikiDataEntityId());
         switch (what) {
             case ACTION_UPLOAD_FILE:
 
@@ -253,6 +258,7 @@ public class UploadService extends HandlerService<Contribution> {
             if (!resultStatus.equals("Success")) {
                 showFailedNotification(contribution);
             } else {
+                editWikidataProperty(contribution);
                 contribution.setFilename(uploadResult.getCanonicalFilename());
                 contribution.setImageUrl(uploadResult.getImageUrl());
                 contribution.setState(Contribution.STATE_COMPLETED);
@@ -273,6 +279,27 @@ public class UploadService extends HandlerService<Contribution> {
                 stopForeground(true);
             }
         }
+    }
+
+    @SuppressLint("CheckResult")
+    private void editWikidataProperty(Contribution contribution) {
+        Timber.d("Upload successful with wiki data entity id as %s", contribution.getWikiDataEntityId());
+        Timber.d("Attempting to edit Wikidata property %s", contribution.getWikiDataEntityId());
+        Observable.fromCallable(() -> mwApi.wikidatCreateClaim("wbcreateclaim", contribution.getWikiDataEntityId(), "P18", "value", getFileName(contribution)))
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(result -> {
+                    if(result) {
+                        ViewUtil.showLongToast(getBaseContext(), "Image added corresponding to wiki data entity successfully!");
+                    } else {
+                        Timber.d("Unable to make wiki data edit for entity %s", contribution.getWikiDataEntityId());
+                    }
+                }, throwable -> Timber.e(throwable, "Error occurred while making claim"));
+    }
+
+    private String getFileName(Contribution contribution) {
+        String filename = String.format("\"%s\"", contribution.getFilename().replace("File:", ""));
+        return filename;
     }
 
     @SuppressLint("StringFormatInvalid")

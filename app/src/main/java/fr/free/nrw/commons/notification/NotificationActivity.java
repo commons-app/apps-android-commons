@@ -16,7 +16,6 @@ import android.widget.RelativeLayout;
 
 import com.pedrogomez.renderers.RVRendererAdapter;
 
-import java.lang.ref.WeakReference;
 import java.util.Collections;
 import java.util.List;
 
@@ -80,7 +79,6 @@ public class NotificationActivity extends NavigationBaseActivity {
             addNotifications();
         }
     }
-
 
     @SuppressLint("CheckResult")
     private void addNotifications() {

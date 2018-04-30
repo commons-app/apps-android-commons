@@ -123,7 +123,7 @@ public class CommonsApplicationModule {
                                             @Named("default_preferences") SharedPreferences defaultPreferences,
                                             @Named("category_prefs") SharedPreferences categoryPrefs,
                                             Gson gson) {
-        return new ApacheHttpClientMediaWikiApi(context, BuildConfig.WIKIMEDIA_API_HOST, defaultPreferences, categoryPrefs, gson);
+        return new ApacheHttpClientMediaWikiApi(context, BuildConfig.WIKIMEDIA_API_HOST, BuildConfig.WIKIDATA_API_HOST, defaultPreferences, categoryPrefs, gson);
     }
 
     @Provides

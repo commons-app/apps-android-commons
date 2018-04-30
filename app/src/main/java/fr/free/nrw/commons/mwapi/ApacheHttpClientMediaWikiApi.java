@@ -25,6 +25,8 @@ import org.apache.http.params.CoreProtocolPNames;
 import org.apache.http.util.EntityUtils;
 import org.mediawiki.api.ApiResult;
 import org.mediawiki.api.MWApi;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 import java.io.IOException;
@@ -62,6 +64,7 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
     private static final String THUMB_SIZE = "640";
     private AbstractHttpClient httpClient;
     private MWApi api;
+    private MWApi wikidataApi;
     private Context context;
     private SharedPreferences defaultPreferences;
     private SharedPreferences categoryPreferences;
@@ -69,6 +72,7 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
 
     public ApacheHttpClientMediaWikiApi(Context context,
                                         String apiURL,
+                                        String wikidatApiURL,
                                         SharedPreferences defaultPreferences,
                                         SharedPreferences categoryPreferences,
                                         Gson gson) {
@@ -82,6 +86,7 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
         params.setParameter(CoreProtocolPNames.USER_AGENT, getUserAgent());
         httpClient = new DefaultHttpClient(cm, params);
         api = new MWApi(apiURL, httpClient);
+        wikidataApi = new MWApi(wikidatApiURL, httpClient);
         this.defaultPreferences = defaultPreferences;
         this.categoryPreferences = categoryPreferences;
         this.gson = gson;
@@ -349,6 +354,34 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
 
             return categories;
         }).flatMapObservable(Observable::fromIterable);
+    }
+
+    public String getWikidataEditToken() throws IOException {
+        return wikidataApi.getEditToken();
+    }
+
+    @Nullable
+    @Override
+    public boolean wikidatCreateClaim(String action, String entityId, String property, String snaktype, String value) throws IOException {
+        ApiResult result = wikidataApi.action("wbcreateclaim")
+                .param("entity", entityId)
+                .param("token", getWikidataEditToken())
+                .param("snaktype", snaktype)
+                .param("property", property)
+                .param("value", value)
+                .post();
+
+        if (result == null || result.getNode("api") == null) {
+            return false;
+        }
+
+        Node node = result.getNode("api").getDocument();
+        Element element = (Element) node;
+
+        if (element != null && element.getAttribute("success").equals("1")) {
+            return true;
+        }
+        return false;
     }
 
     @Override

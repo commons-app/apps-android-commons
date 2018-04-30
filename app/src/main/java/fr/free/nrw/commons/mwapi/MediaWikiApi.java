@@ -49,6 +49,9 @@ public interface MediaWikiApi {
     @Nullable
     String appendEdit(String editToken, String processedPageContent, String filename, String summary) throws IOException;
 
+    @Nullable
+    boolean wikidatCreateClaim(String action, String entityId, String property, String snaktype, String value) throws IOException;
+
     @NonNull
     MediaResult fetchMediaByFilename(String filename) throws IOException;
 
