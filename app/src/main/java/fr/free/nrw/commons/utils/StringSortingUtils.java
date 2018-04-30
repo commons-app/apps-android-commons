@@ -1,6 +1,7 @@
 package fr.free.nrw.commons.utils;
 
 import java.util.Comparator;
+import java.util.Locale;
 
 import info.debatty.java.stringsimilarity.Levenshtein;
 
@@ -28,8 +29,8 @@ public class StringSortingUtils {
     }
 
     private static double calculateSimilarity(String firstString, String secondString) {
-        String longer = firstString.toLowerCase();
-        String shorter = secondString.toLowerCase();
+        String longer = firstString.toLowerCase(Locale.getDefault());
+        String shorter = secondString.toLowerCase(Locale.getDefault());
 
         if (firstString.length() < secondString.length()) {
             longer = secondString;

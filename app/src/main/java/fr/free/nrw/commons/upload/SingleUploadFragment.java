@@ -226,7 +226,7 @@ public class SingleUploadFragment extends CommonsDaggerSupportFragment {
         setLicenseSummary(license);
         prefs.edit()
                 .putString(Prefs.DEFAULT_LICENSE, license)
-                .commit();
+                .apply();
     }
 
 
