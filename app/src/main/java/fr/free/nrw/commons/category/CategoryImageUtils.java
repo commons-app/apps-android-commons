@@ -70,7 +70,6 @@ public class CategoryImageUtils {
 
     private static Date getDateCreated(Node document) {
         String dateTime = getMetaDataValue(document, "DateTime");
-        Timber.d("Date time is %s", dateTime);
         if (dateTime != null && !dateTime.equals("")) {
             SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
             try {

@@ -29,11 +29,6 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 import timber.log.Timber;
 
-
-/**
- * Created by root on 09.01.2018.
- */
-
 public class CategoryImagesListFragment extends DaggerFragment {
 
     private GridViewAdapter gridAdapter;
@@ -86,7 +81,6 @@ public class CategoryImagesListFragment extends DaggerFragment {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(featuredImageList -> {
                     isLoading = false;
-                    Timber.d("Number of featured images is %d", featuredImageList.size());
                     setAdapter(featuredImageList);
                     progressBar.setVisibility(View.GONE);
                 }, throwable -> {
@@ -130,7 +124,6 @@ public class CategoryImagesListFragment extends DaggerFragment {
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(collection -> {
-                            Timber.d("Adding to collection");
                             gridAdapter.addItems(collection);
                             isLoading = false;
                         },
