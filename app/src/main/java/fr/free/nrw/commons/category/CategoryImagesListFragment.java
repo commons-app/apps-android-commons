@@ -42,7 +42,6 @@ public class CategoryImagesListFragment extends DaggerFragment {
     @BindView(R.id.categoryImagesList) GridView gridView;
 
     private boolean isLoading;
-    private boolean hasMoreImages = true;
     private String categoryName = null;
 
     @Inject CategoryImageController controller;
