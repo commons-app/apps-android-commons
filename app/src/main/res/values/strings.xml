@@ -270,4 +270,5 @@
   <string name="about_translate_proceed">Proceed</string>
   <string name="about_translate_cancel">Cancel</string>
   <string name="retry">Retry</string>
+  <string name="skip_login">Skip </string>
 </resources>

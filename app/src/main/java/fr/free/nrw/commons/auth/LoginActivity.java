@@ -37,6 +37,7 @@ import javax.inject.Named;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import fr.free.nrw.commons.AboutActivity;
 import fr.free.nrw.commons.BuildConfig;
 import fr.free.nrw.commons.PageTitle;
 import fr.free.nrw.commons.R;
@@ -78,6 +79,7 @@ public class LoginActivity extends AccountAuthenticatorActivity {
     @BindView(R.id.login_credentials) TextView loginCredentials;
     @BindView(R.id.two_factor_container) TextInputLayout twoFactorContainer;
     @BindView(R.id.forgotPassword) HtmlTextView forgotPasswordText;
+    @BindView(R.id.skipLogin) HtmlTextView skipLoginText;
 
     ProgressDialog progressDialog;
     private AppCompatDelegate delegate;
@@ -127,12 +129,18 @@ public class LoginActivity extends AccountAuthenticatorActivity {
         signupButton.setOnClickListener(view -> signUp());
 
         forgotPasswordText.setOnClickListener(view -> forgotPassword());
+        skipLoginText.setOnClickListener(view -> skipLogin());
 
         if(BuildConfig.FLAVOR.equals("beta")){
             loginCredentials.setText(getString(R.string.login_credential));
         } else {
             loginCredentials.setVisibility(View.GONE);
         }
+    }
+
+    private void skipLogin() {
+        NavigationBaseActivity.startActivityWithFlags(this, AboutActivity.class, Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        finish();
     }
 
     private void forgotPassword() {
