@@ -38,6 +38,9 @@ public class CategoryImageUtils {
                 getDateCreated(node),
                 getCreator(node)
         );
+
+        media.setLicense(getLicense(node));
+
         return media;
     }
 
@@ -48,6 +51,10 @@ public class CategoryImageUtils {
 
     private static String getDescription(Node document) {
         return getMetaDataValue(document, "ImageDescription");
+    }
+
+    private static String getLicense(Node document) {
+        return getMetaDataValue(document, "License");
     }
 
     private static String getCreator(Node document) {
