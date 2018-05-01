@@ -201,7 +201,13 @@ public class MediaDataExtractor {
             @Override
             public boolean match(Node node) {
                 Element el = (Element) node;
-                return el.getTextContent().trim().equals(theIndex) || el.getAttribute("index") != null && el.getAttribute("index").trim().equals(theIndex);
+                if (el.getTextContent().trim().equals(theIndex)) {
+                    return true;
+                } else if (el.getAttribute("index") != null && el.getAttribute("index").trim().equals(theIndex)) {
+                    return true;
+                } else {
+                    return false;
+                }
             }
         });
     }
@@ -266,9 +272,10 @@ public class MediaDataExtractor {
                 String title = getTemplateTitle(node);
                 if (title.length() < 3) {
                     // Hopefully a language code. Nasty hack!
+                    String lang = title;
                     Node valueNode = findTemplateParameter(node, 1);
                     String value = valueNode.getTextContent(); // hope there's no subtemplates or formatting for now
-                    texts.put(title, value);
+                    texts.put(lang, value);
                 }
             } else if (node.getNodeType() == Node.TEXT_NODE) {
                 localText.append(node.getTextContent());
