@@ -6,6 +6,8 @@ import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import android.support.v4.util.LruCache;
 
+import com.google.gson.Gson;
+
 import javax.inject.Named;
 import javax.inject.Singleton;
 
@@ -86,6 +88,12 @@ public class CommonsApplicationModule {
     }
 
     @Provides
+    @Named("category_prefs")
+    public SharedPreferences providesCategorySharedPreferences(Context context) {
+        return context.getSharedPreferences("categoryPrefs", MODE_PRIVATE);
+    }
+
+    @Provides
     @Named("direct_nearby_upload_prefs")
     public SharedPreferences providesDirectNearbyUploadPreferences(Context context) {
         return context.getSharedPreferences("direct_nearby_upload_prefs", MODE_PRIVATE);
@@ -106,14 +114,23 @@ public class CommonsApplicationModule {
 
     @Provides
     @Singleton
-    public MediaWikiApi provideMediaWikiApi(Context context, @Named("default_preferences") SharedPreferences sharedPreferences) {
-        return new ApacheHttpClientMediaWikiApi(context, BuildConfig.WIKIMEDIA_API_HOST, sharedPreferences);
+    public MediaWikiApi provideMediaWikiApi(Context context,
+                                            @Named("default_preferences") SharedPreferences defaultPreferences,
+                                            @Named("category_prefs") SharedPreferences categoryPrefs,
+                                            Gson gson) {
+        return new ApacheHttpClientMediaWikiApi(context, BuildConfig.WIKIMEDIA_API_HOST, defaultPreferences, categoryPrefs, gson);
     }
 
     @Provides
     @Singleton
     public LocationServiceManager provideLocationServiceManager(Context context) {
         return new LocationServiceManager(context);
+    }
+
+    @Provides
+    @Singleton
+    public Gson provideGson() {
+        return new Gson();
     }
 
     @Provides

@@ -1,4 +1,4 @@
-package fr.free.nrw.commons.featured;
+package fr.free.nrw.commons.category;
 
 import android.app.Activity;
 import android.content.Context;
@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import java.util.List;
 
+import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.MediaWikiImageView;
 import fr.free.nrw.commons.R;
 
@@ -19,12 +20,17 @@ import fr.free.nrw.commons.R;
 
 public class GridViewAdapter extends ArrayAdapter {
     private Context context;
-    private List<FeaturedImage> data;
+    private List<Media> data;
 
-    public GridViewAdapter(Context context, int layoutResourceId, List<FeaturedImage> data) {
+    public GridViewAdapter(Context context, int layoutResourceId, List<Media> data) {
         super(context, layoutResourceId, data);
         this.context = context;
         this.data = data;
+    }
+
+    public void addItems(List<Media> images) {
+        data.addAll(images);
+        notifyDataSetChanged();
     }
 
     @Override
@@ -32,25 +38,24 @@ public class GridViewAdapter extends ArrayAdapter {
 
         if (convertView == null) {
             LayoutInflater inflater = ((Activity) context).getLayoutInflater();
-            convertView = inflater.inflate(R.layout.layout_featured_images, null);
+            convertView = inflater.inflate(R.layout.layout_category_images, null);
         }
 
-        FeaturedImage item = data.get(position);
-        MediaWikiImageView imageView = convertView.findViewById(R.id.featuredImageView);
-        TextView fileName = convertView.findViewById(R.id.featuredImageTitle);
-        TextView author = convertView.findViewById(R.id.featuredImageAuthor);
-        fileName.setText(item.getFileName());
+        Media item = data.get(position);
+        MediaWikiImageView imageView = convertView.findViewById(R.id.categoryImageView);
+        TextView fileName = convertView.findViewById(R.id.categoryImageTitle);
+        TextView author = convertView.findViewById(R.id.categoryImageAuthor);
+        fileName.setText(item.getFilename());
         setAuthorView(item, author);
-        imageView.setMedia(item.getImage());
+        imageView.setMedia(item);
         return convertView;
     }
 
-    private void setAuthorView(FeaturedImage item, TextView author) {
-        if (item.getAuthor() != null && !item.getAuthor().equals("")) {
-            author.setText(String.format("Uploaded by: %s", item.getAuthor()));
+    private void setAuthorView(Media item, TextView author) {
+        if (item.getCreator() != null && !item.getCreator().equals("")) {
+            author.setText(String.format("Uploaded by: %s", item.getCreator()));
         } else {
             author.setVisibility(View.GONE);
         }
     }
-
 }

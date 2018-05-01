@@ -9,6 +9,8 @@ import android.support.annotation.VisibleForTesting;
 import android.text.TextUtils;
 import android.util.Log;
 
+import com.google.gson.Gson;
+
 import org.apache.http.HttpResponse;
 import org.apache.http.conn.ClientConnectionManager;
 import org.apache.http.conn.scheme.PlainSocketFactory;
@@ -41,12 +43,15 @@ import fr.free.nrw.commons.BuildConfig;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.PageTitle;
 import fr.free.nrw.commons.category.CategoryImageUtils;
+import fr.free.nrw.commons.category.QueryContinue;
 import fr.free.nrw.commons.notification.Notification;
 import fr.free.nrw.commons.notification.NotificationUtils;
 import in.yuvi.http.fluent.Http;
 import io.reactivex.Observable;
 import io.reactivex.Single;
 import timber.log.Timber;
+
+import static fr.free.nrw.commons.utils.ContinueUtils.getQueryContinue;
 
 /**
  * @author Addshore
@@ -58,9 +63,15 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
     private AbstractHttpClient httpClient;
     private MWApi api;
     private Context context;
-    private SharedPreferences sharedPreferences;
+    private SharedPreferences defaultPreferences;
+    private SharedPreferences categoryPreferences;
+    private Gson gson;
 
-    public ApacheHttpClientMediaWikiApi(Context context, String apiURL, SharedPreferences sharedPreferences) {
+    public ApacheHttpClientMediaWikiApi(Context context,
+                                        String apiURL,
+                                        SharedPreferences defaultPreferences,
+                                        SharedPreferences categoryPreferences,
+                                        Gson gson) {
         this.context = context;
         BasicHttpParams params = new BasicHttpParams();
         SchemeRegistry schemeRegistry = new SchemeRegistry();
@@ -71,7 +82,9 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
         params.setParameter(CoreProtocolPNames.USER_AGENT, getUserAgent());
         httpClient = new DefaultHttpClient(cm, params);
         api = new MWApi(apiURL, httpClient);
-        this.sharedPreferences = sharedPreferences;
+        this.defaultPreferences = defaultPreferences;
+        this.categoryPreferences = categoryPreferences;
+        this.gson = gson;
     }
 
     @Override
@@ -162,7 +175,7 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
     }
 
     private void setAuthCookieOnLogin(boolean isLoggedIn) {
-        SharedPreferences.Editor editor = sharedPreferences.edit();
+        SharedPreferences.Editor editor = defaultPreferences.edit();
         if (isLoggedIn) {
             editor.putBoolean("isUserLoggedIn", true);
             editor.putString("getAuthCookie", api.getAuthCookie());
@@ -450,25 +463,43 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
         return NotificationUtils.getNotificationsFromList(context, childNodes);
     }
 
+    /**
+     * The method takes categoryName as input and returns a List of Media objects
+     * It uses the generator query API to get the images in a category, 10 at a time.
+     *
+     * @param categoryName
+     * @return
+     */
     @Override
     @NonNull
     public List<Media> getCategoryImages(String categoryName) {
-        ApiResult categoryImagesNode = null;
+        ApiResult apiResult = null;
         try {
-            categoryImagesNode = api.action("query")
+            MWApi.RequestBuilder requestBuilder = api.action("query")
                     .param("generator", "categorymembers")
                     .param("format", "xml")
                     .param("gcmtype", "file")
                     .param("gcmtitle", categoryName)
                     .param("prop", "imageinfo")
                     .param("gcmlimit", "10")
-                    .param("iiprop", "extmetadata")
-                    .get()
-                    .getNode("/api/query/pages");
+                    .param("iiprop", "extmetadata");
+
+            QueryContinue queryContinueValues = getQueryContinueValues(categoryName);
+            if (queryContinueValues != null) {
+                requestBuilder.param("continue", queryContinueValues.getContinueParam());
+                requestBuilder.param("gcmcontinue", queryContinueValues.getGcmContinueParam());
+            }
+
+            apiResult = requestBuilder.get();
         } catch (IOException e) {
             Timber.e("Failed to obtain searchCategories", e);
         }
 
+        if (apiResult == null) {
+            return new ArrayList<>();
+        }
+
+        ApiResult categoryImagesNode = apiResult.getNode("/api/query/pages");
         if (categoryImagesNode == null
                 || categoryImagesNode.getDocument() == null
                 || categoryImagesNode.getDocument().getChildNodes() == null
@@ -476,8 +507,23 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
             return new ArrayList<>();
         }
 
+        QueryContinue queryContinue = getQueryContinue(apiResult.getNode("/api/continue").getDocument());
+        setQueryContinueValues(categoryName, queryContinue);
+
         NodeList childNodes = categoryImagesNode.getDocument().getChildNodes();
         return CategoryImageUtils.getMediaList(context, childNodes);
+    }
+
+    private void setQueryContinueValues(String keyword, QueryContinue queryContinue) {
+        SharedPreferences.Editor editor = categoryPreferences.edit();
+        editor.putString(keyword, gson.toJson(queryContinue));
+        editor.apply();
+    }
+
+    @Nullable
+    private QueryContinue getQueryContinueValues(String keyword) {
+        String queryContinueString = categoryPreferences.getString(keyword, null);
+        return gson.fromJson(queryContinueString, QueryContinue.class);
     }
 
     @Override

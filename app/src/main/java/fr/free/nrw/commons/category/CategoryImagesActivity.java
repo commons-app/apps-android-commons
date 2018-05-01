@@ -1,8 +1,11 @@
-package fr.free.nrw.commons.featured;
+package fr.free.nrw.commons.category;
 
+import android.content.Context;
+import android.content.Intent;
 import android.database.DataSetObserver;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.view.View;
 import android.widget.AdapterView;
 
@@ -16,13 +19,15 @@ import fr.free.nrw.commons.media.MediaDetailPagerFragment;
  * This activity displays pic of the days of last xx days
  */
 
-public class FeaturedImagesActivity
+public class CategoryImagesActivity
         extends AuthenticatedActivity
         implements FragmentManager.OnBackStackChangedListener,
                     MediaDetailPagerFragment.MediaDetailProvider,
                     AdapterView.OnItemClickListener{
 
-    private FeaturedImagesListFragment featuredImagesListFragment;
+
+    private FragmentManager supportFragmentManager;
+    private CategoryImagesListFragment categoryImagesListFragment;
     private MediaDetailPagerFragment mediaDetails;
 
     @Override
@@ -38,24 +43,40 @@ public class FeaturedImagesActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_featured_images);
+        setContentView(R.layout.activity_category_images);
         ButterKnife.bind(this);
 
         // Activity can call methods in the fragment by acquiring a
         // reference to the Fragment from FragmentManager, using findFragmentById()
-        FragmentManager supportFragmentManager = getSupportFragmentManager();
-        featuredImagesListFragment = (FeaturedImagesListFragment)supportFragmentManager
-                .findFragmentById(R.id.featuedListFragment);
-
+        supportFragmentManager = getSupportFragmentManager();
+        setCategoryImagesFragment();
         supportFragmentManager.addOnBackStackChangedListener(this);
         if (savedInstanceState != null) {
-            mediaDetails = (MediaDetailPagerFragment)supportFragmentManager
-                    .findFragmentById(R.id.featuredFragmentContainer);
+            mediaDetails = (MediaDetailPagerFragment) supportFragmentManager
+                    .findFragmentById(R.id.fragmentContainer);
 
         }
         requestAuthToken();
         initDrawer();
-        setTitle(getString(R.string.title_activity_featured_images));
+        setPageTitle();
+    }
+
+    private void setCategoryImagesFragment() {
+        categoryImagesListFragment = new CategoryImagesListFragment();
+        String categoryName = getIntent().getStringExtra("categoryName");
+        if (getIntent() != null && categoryName != null) {
+            Bundle arguments = new Bundle();
+            arguments.putString("categoryName", categoryName);
+            categoryImagesListFragment.setArguments(arguments);
+            FragmentTransaction transaction = supportFragmentManager.beginTransaction();
+            transaction.replace(R.id.fragmentContainer, categoryImagesListFragment).commit();
+        }
+    }
+
+    private void setPageTitle() {
+        if (getIntent() != null && getIntent().getStringExtra("title") != null) {
+            setTitle(getIntent().getStringExtra("title"));
+        }
     }
 
     @Override
@@ -71,7 +92,7 @@ public class FeaturedImagesActivity
             FragmentManager supportFragmentManager = getSupportFragmentManager();
             supportFragmentManager
                     .beginTransaction()
-                    .replace(R.id.featuredFragmentContainer, mediaDetails)
+                    .replace(R.id.fragmentContainer, mediaDetails)
                     .addToBackStack(null)
                     .commit();
             supportFragmentManager.executePendingTransactions();
@@ -79,22 +100,30 @@ public class FeaturedImagesActivity
         mediaDetails.showImage(i);
     }
 
+    public static void startYourself(Context context, String title, String categoryName) {
+        Intent intent = new Intent(context, CategoryImagesActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+        intent.putExtra("title", title);
+        intent.putExtra("categoryName", categoryName);
+        context.startActivity(intent);
+    }
+
     @Override
     public Media getMediaAtPosition(int i) {
-        if (featuredImagesListFragment.getAdapter() == null) {
+        if (categoryImagesListFragment.getAdapter() == null) {
             // not yet ready to return data
             return null;
         } else {
-            return ((FeaturedImage)featuredImagesListFragment.getAdapter().getItem(i)).getImage();
+            return (Media) categoryImagesListFragment.getAdapter().getItem(i);
         }
     }
 
     @Override
     public int getTotalMediaCount() {
-        if (featuredImagesListFragment.getAdapter() == null) {
+        if (categoryImagesListFragment.getAdapter() == null) {
             return 0;
         }
-        return featuredImagesListFragment.getAdapter().getCount();
+        return categoryImagesListFragment.getAdapter().getCount();
     }
 
     @Override

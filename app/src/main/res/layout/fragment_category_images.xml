@@ -22,11 +22,11 @@
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         android:visibility="gone"
-        android:id="@+id/loadingFeaturedImagesProgressBar"
+        android:id="@+id/loadingImagesProgressBar"
         />
 
     <GridView
-        android:id="@+id/featuredImagesList"
+        android:id="@+id/categoryImagesList"
         android:layout_height="match_parent"
         android:layout_width="match_parent"
         android:stretchMode="columnWidth"
