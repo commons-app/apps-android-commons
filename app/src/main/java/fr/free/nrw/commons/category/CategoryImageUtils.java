@@ -7,6 +7,9 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -69,7 +72,13 @@ public class CategoryImageUtils {
         String dateTime = getMetaDataValue(document, "DateTime");
         Timber.d("Date time is %s", dateTime);
         if (dateTime != null && !dateTime.equals("")) {
-            return new Date(dateTime);
+            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            try {
+                return format.parse(dateTime);
+            } catch (ParseException e) {
+                Timber.d("Error occurred while parsing date %s", dateTime);
+                return new Date();
+            }
         }
         return new Date();
     }
@@ -124,7 +133,7 @@ public class CategoryImageUtils {
 
     @Nullable
     private static Node getImageInfo(Node document) {
-        Node imageInfo = getNode(document, "imageInfo");
+        Node imageInfo = getNode(document, "imageinfo");
         if (imageInfo != null) {
             return getNode(imageInfo, "ii");
         }
