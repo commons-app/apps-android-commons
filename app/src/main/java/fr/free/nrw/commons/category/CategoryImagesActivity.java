@@ -14,6 +14,7 @@ import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.auth.AuthenticatedActivity;
 import fr.free.nrw.commons.media.MediaDetailPagerFragment;
+import timber.log.Timber;
 
 /**
  * This activity displays pic of the days of last xx days
@@ -69,7 +70,9 @@ public class CategoryImagesActivity
             arguments.putString("categoryName", categoryName);
             categoryImagesListFragment.setArguments(arguments);
             FragmentTransaction transaction = supportFragmentManager.beginTransaction();
-            transaction.replace(R.id.fragmentContainer, categoryImagesListFragment).commit();
+            transaction
+                    .add(R.id.fragmentContainer, categoryImagesListFragment)
+                    .commit();
         }
     }
 
@@ -81,7 +84,7 @@ public class CategoryImagesActivity
 
     @Override
     public void onBackStackChanged() {
-
+        Timber.d("Do something");
     }
 
     @Override
