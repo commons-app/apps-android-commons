@@ -45,6 +45,7 @@ import fr.free.nrw.commons.mwapi.MediaWikiApi;
 import fr.free.nrw.commons.ui.widget.CompatTextView;
 import timber.log.Timber;
 
+import static android.view.View.*;
 import static android.widget.Toast.LENGTH_SHORT;
 
 public class MediaDetailFragment extends CommonsDaggerSupportFragment {
@@ -154,9 +155,9 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
         authorLayout = (LinearLayout) view.findViewById(R.id.authorLinearLayout);
 
         if (isFeaturedMedia){
-            authorLayout.setVisibility(View.VISIBLE);
+            authorLayout.setVisibility(VISIBLE);
         } else {
-            authorLayout.setVisibility(View.GONE);
+            authorLayout.setVisibility(GONE);
         }
 
         licenseList = new LicenseList(getActivity());
@@ -306,6 +307,12 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
         }
         rebuildCatList();
 
+        if(media.getCreator() == null || media.getCreator().equals("")) {
+            authorLayout.setVisibility(GONE);
+        } else {
+            author.setText(media.getCreator());
+        }
+
         checkDeletion(media);
     }
 
@@ -319,7 +326,7 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
         if (media.getCoordinates() != null) {
             coordinates.setOnClickListener(v -> openMap(media.getCoordinates()));
         }
-        if (delete.getVisibility() == View.VISIBLE) {
+        if (delete.getVisibility() == VISIBLE) {
             enableDeleteButton(true);
 
             delete.setOnClickListener(v -> {
@@ -369,7 +376,7 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
                 d.getButton(AlertDialog.BUTTON_POSITIVE).setEnabled(false);
             });
         }
-        if (nominatedforDeletion.getVisibility() == View.VISIBLE){
+        if (nominatedforDeletion.getVisibility() == VISIBLE){
             seeMore.setOnClickListener(v -> {
                 openWebBrowser(media.getFilePageTitle().getMobileUri().toString());
             });
@@ -476,12 +483,12 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
 
     private void checkDeletion(Media media){
         if (media.getRequestedDeletion()){
-            delete.setVisibility(View.GONE);
-            nominatedforDeletion.setVisibility(View.VISIBLE);
+            delete.setVisibility(GONE);
+            nominatedforDeletion.setVisibility(VISIBLE);
         }
         else{
-            delete.setVisibility(View.VISIBLE);
-            nominatedforDeletion.setVisibility(View.GONE);
+            delete.setVisibility(VISIBLE);
+            nominatedforDeletion.setVisibility(GONE);
         }
     }
 
