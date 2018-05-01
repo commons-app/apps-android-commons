@@ -43,7 +43,6 @@ SELECT
        OPTIONAL {
            ?wikipediaArticle   schema:about ?item ;
                                schema:isPartOf <https://${LANG}.wikipedia.org/> .
-           SERVICE wikibase:label { bd:serviceParam wikibase:language "${LANG}" }
          }
        OPTIONAL {
            ?wikipediaArticle   schema:about ?item ;
