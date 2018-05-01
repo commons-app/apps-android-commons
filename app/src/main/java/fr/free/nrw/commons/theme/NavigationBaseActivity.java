@@ -5,6 +5,7 @@ import android.accounts.AccountManager;
 import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
@@ -12,11 +13,15 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import javax.inject.Inject;
+import javax.inject.Named;
 
 import butterknife.BindView;
 import fr.free.nrw.commons.AboutActivity;
@@ -43,6 +48,7 @@ public abstract class NavigationBaseActivity extends BaseActivity
     NavigationView navigationView;
     @BindView(R.id.drawer_layout)
     DrawerLayout drawerLayout;
+    @Inject @Named("application_preferences") SharedPreferences prefs;
 
     private ActionBarDrawerToggle toggle;
 
@@ -95,6 +101,26 @@ public abstract class NavigationBaseActivity extends BaseActivity
 
         params.width = (getResources().getDisplayMetrics().widthPixels * percentageWidth) / 100;
         navigationView.setLayoutParams(params);
+    }
+
+    @Override
+    public boolean onPrepareOptionsMenu(Menu menu) {
+        super.onPrepareOptionsMenu(menu);
+        if (prefs.getBoolean("isloggedin", true)) {
+            menu.findItem(R.id.action_login).setVisible(false);
+            menu.findItem(R.id.action_home).setVisible(true);
+            menu.findItem(R.id.action_notifications).setVisible(true);
+            menu.findItem(R.id.action_settings).setVisible(true);
+            menu.findItem(R.id.action_logout).setVisible(true);
+
+        }else {
+            menu.findItem(R.id.action_login).setVisible(true);
+            menu.findItem(R.id.action_home).setVisible(false);
+            menu.findItem(R.id.action_notifications).setVisible(false);
+            menu.findItem(R.id.action_settings).setVisible(false);
+            menu.findItem(R.id.action_logout).setVisible(false);
+        }
+        return true;
     }
 
     @Override

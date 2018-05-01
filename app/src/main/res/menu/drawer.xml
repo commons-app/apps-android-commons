@@ -1,4 +1,11 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group android:id="@+id/drawer_login">
+        <item
+            android:id="@+id/action_login"
+            android:visible="false"
+            android:icon="@drawable/ic_home_black_24dp"
+            android:title="@string/navigation_item_login" />
+    </group>
     <group android:id="@+id/drawer_main">
         <item
             android:id="@+id/action_home"

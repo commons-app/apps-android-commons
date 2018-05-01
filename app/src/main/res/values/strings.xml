@@ -271,4 +271,5 @@
   <string name="about_translate_cancel">Cancel</string>
   <string name="retry">Retry</string>
   <string name="skip_login">Skip </string>
+  <string name="navigation_item_login">Login</string>
 </resources>

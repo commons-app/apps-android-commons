@@ -45,7 +45,9 @@ import fr.free.nrw.commons.Utils;
 import fr.free.nrw.commons.WelcomeActivity;
 import fr.free.nrw.commons.contributions.ContributionsActivity;
 import fr.free.nrw.commons.di.ApplicationlessInjection;
+import fr.free.nrw.commons.featured.FeaturedImagesActivity_MembersInjector;
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
+import fr.free.nrw.commons.nearby.NearbyActivity;
 import fr.free.nrw.commons.theme.NavigationBaseActivity;
 import fr.free.nrw.commons.ui.widget.HtmlTextView;
 import io.reactivex.Observable;
@@ -139,8 +141,10 @@ public class LoginActivity extends AccountAuthenticatorActivity {
     }
 
     private void skipLogin() {
-        NavigationBaseActivity.startActivityWithFlags(this, AboutActivity.class, Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        prefs.edit().putBoolean("isloggedin", false).apply();
+        NavigationBaseActivity.startActivityWithFlags(this, NearbyActivity.class, Intent.FLAG_ACTIVITY_CLEAR_TOP);
         finish();
+
     }
 
     private void forgotPassword() {
