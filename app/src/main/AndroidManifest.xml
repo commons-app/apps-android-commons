@@ -93,7 +93,8 @@
 
         <activity
             android:name=".category.CategoryImagesActivity"
-            android:label="@string/title_activity_featured_images" />
+            android:label="@string/title_activity_featured_images"
+            android:parentActivityName=".contributions.ContributionsActivity" />
 
         <service android:name=".upload.UploadService" />
 

@@ -79,15 +79,18 @@ public class CategoryImagesListFragment extends DaggerFragment {
 
     @SuppressLint("CheckResult")
     private void initList() {
+        isLoading = true;
         progressBar.setVisibility(View.VISIBLE);
         Observable.fromCallable(() -> controller.getCategoryImages(categoryName))
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(featuredImageList -> {
+                    isLoading = false;
                     Timber.d("Number of featured images is %d", featuredImageList.size());
                     setAdapter(featuredImageList);
                     progressBar.setVisibility(View.GONE);
                 }, throwable -> {
+                    isLoading = false;
                     Timber.e(throwable, "Error occurred while loading featured images");
                     ViewUtil.showSnackbar(gridView, R.string.error_featured_images);
                     progressBar.setVisibility(View.GONE);
