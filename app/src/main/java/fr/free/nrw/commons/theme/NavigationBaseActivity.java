@@ -28,7 +28,6 @@ import fr.free.nrw.commons.AboutActivity;
 import fr.free.nrw.commons.BuildConfig;
 import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.R;
-import fr.free.nrw.commons.Utils;
 import fr.free.nrw.commons.WelcomeActivity;
 import fr.free.nrw.commons.auth.AccountUtil;
 import fr.free.nrw.commons.auth.LoginActivity;
@@ -50,6 +49,7 @@ public abstract class NavigationBaseActivity extends BaseActivity
     DrawerLayout drawerLayout;
     @Inject @Named("application_preferences") SharedPreferences prefs;
 
+
     private ActionBarDrawerToggle toggle;
 
     public void initDrawer() {
@@ -64,6 +64,23 @@ public abstract class NavigationBaseActivity extends BaseActivity
         toggle.syncState();
         setDrawerPaneWidth();
         setUserName();
+        Menu nav_Menu = navigationView.getMenu();
+        if (prefs.getBoolean("isloggedin", true)) {
+            Toast.makeText(this,"LoggedIn",Toast.LENGTH_SHORT).show();
+            nav_Menu.findItem(R.id.action_login).setVisible(false);
+            nav_Menu.findItem(R.id.action_home).setVisible(true);
+            nav_Menu.findItem(R.id.action_notifications).setVisible(true);
+            nav_Menu.findItem(R.id.action_settings).setVisible(true);
+            nav_Menu.findItem(R.id.action_logout).setVisible(true);
+
+        }else {
+            Toast.makeText(this,"Skipped",Toast.LENGTH_SHORT).show();
+            nav_Menu.findItem(R.id.action_login).setVisible(true);
+            nav_Menu.findItem(R.id.action_home).setVisible(false);
+            nav_Menu.findItem(R.id.action_notifications).setVisible(false);
+            nav_Menu.findItem(R.id.action_settings).setVisible(false);
+            nav_Menu.findItem(R.id.action_logout).setVisible(false);
+        }
     }
 
     /**
@@ -104,29 +121,16 @@ public abstract class NavigationBaseActivity extends BaseActivity
     }
 
     @Override
-    public boolean onPrepareOptionsMenu(Menu menu) {
-        super.onPrepareOptionsMenu(menu);
-        if (prefs.getBoolean("isloggedin", true)) {
-            menu.findItem(R.id.action_login).setVisible(false);
-            menu.findItem(R.id.action_home).setVisible(true);
-            menu.findItem(R.id.action_notifications).setVisible(true);
-            menu.findItem(R.id.action_settings).setVisible(true);
-            menu.findItem(R.id.action_logout).setVisible(true);
-
-        }else {
-            menu.findItem(R.id.action_login).setVisible(true);
-            menu.findItem(R.id.action_home).setVisible(false);
-            menu.findItem(R.id.action_notifications).setVisible(false);
-            menu.findItem(R.id.action_settings).setVisible(false);
-            menu.findItem(R.id.action_logout).setVisible(false);
-        }
-        return true;
-    }
-
-    @Override
     public boolean onNavigationItemSelected(@NonNull final MenuItem item) {
         final int itemId = item.getItemId();
         switch (itemId) {
+            case R.id.action_login:
+                drawerLayout.closeDrawer(navigationView);
+                startActivityWithFlags(
+                        this, LoginActivity.class, Intent.FLAG_ACTIVITY_CLEAR_TOP,
+                        Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                finish();
+                return true;
             case R.id.action_home:
                 drawerLayout.closeDrawer(navigationView);
                 startActivityWithFlags(

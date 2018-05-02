@@ -7,7 +7,6 @@ public class Prefs {
     public static final String DEFAULT_LICENSE = "defaultLicense";
     public static final String UPLOADS_SHOWING = "uploadsshowing";
     public static final String IS_CONTRIBUTION_COUNT_CHANGED = "ccontributionCountChanged";
-    public static final String IS_LOGGED_IN = "isloggedin";
 
     public static class Licenses {
         public static final String CC_BY_SA_3 = "CC BY-SA 3.0";
