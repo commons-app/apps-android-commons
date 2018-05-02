@@ -451,10 +451,6 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
             updateListFragment();
         }
 
-        nearbyMaterialShowcaseSequence.addSequenceItem(fabRecenter
-                , getString(R.string.showcase_view_recenter_icon)
-                , getString(R.string.showcase_view_got_it_button));
-
         isMapShowCaseAdded = true;
         if (isListShowcaseAdded) { // If list showcase is also ready
             nearbyMaterialShowcaseSequence.setOnItemDismissedListener(new MaterialShowcaseSequence.OnSequenceItemDismissedListener() {
