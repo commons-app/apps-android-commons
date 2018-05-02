@@ -3,7 +3,7 @@
         <item
             android:id="@+id/action_login"
             android:visible="false"
-            android:icon="@drawable/ic_home_black_24dp"
+            android:icon="@drawable/ic_person_black_24dp"
             android:title="@string/navigation_item_login" />
     </group>
     <group android:id="@+id/drawer_main">

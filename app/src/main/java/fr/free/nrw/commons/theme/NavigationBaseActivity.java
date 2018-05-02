@@ -65,21 +65,18 @@ public abstract class NavigationBaseActivity extends BaseActivity
         setDrawerPaneWidth();
         setUserName();
         Menu nav_Menu = navigationView.getMenu();
-        if (prefs.getBoolean("isloggedin", true)) {
-            Toast.makeText(this,"LoggedIn",Toast.LENGTH_SHORT).show();
-            nav_Menu.findItem(R.id.action_login).setVisible(false);
-            nav_Menu.findItem(R.id.action_home).setVisible(true);
-            nav_Menu.findItem(R.id.action_notifications).setVisible(true);
-            nav_Menu.findItem(R.id.action_settings).setVisible(true);
-            nav_Menu.findItem(R.id.action_logout).setVisible(true);
-
-        }else {
-            Toast.makeText(this,"Skipped",Toast.LENGTH_SHORT).show();
+        if (prefs.getBoolean("login_skipped", true)) {
             nav_Menu.findItem(R.id.action_login).setVisible(true);
             nav_Menu.findItem(R.id.action_home).setVisible(false);
             nav_Menu.findItem(R.id.action_notifications).setVisible(false);
             nav_Menu.findItem(R.id.action_settings).setVisible(false);
             nav_Menu.findItem(R.id.action_logout).setVisible(false);
+        }else {
+            nav_Menu.findItem(R.id.action_login).setVisible(false);
+            nav_Menu.findItem(R.id.action_home).setVisible(true);
+            nav_Menu.findItem(R.id.action_notifications).setVisible(true);
+            nav_Menu.findItem(R.id.action_settings).setVisible(true);
+            nav_Menu.findItem(R.id.action_logout).setVisible(true);
         }
     }
 
@@ -129,6 +126,7 @@ public abstract class NavigationBaseActivity extends BaseActivity
                 startActivityWithFlags(
                         this, LoginActivity.class, Intent.FLAG_ACTIVITY_CLEAR_TOP,
                         Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                prefs.edit().putBoolean("login_skipped", false).apply();
                 finish();
                 return true;
             case R.id.action_home:

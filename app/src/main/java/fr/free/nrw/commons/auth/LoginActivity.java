@@ -6,6 +6,7 @@ import android.accounts.AccountAuthenticatorResponse;
 import android.accounts.AccountManager;
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
@@ -16,6 +17,7 @@ import android.support.annotation.StringRes;
 import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.NavUtils;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatDelegate;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -39,6 +41,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import fr.free.nrw.commons.AboutActivity;
 import fr.free.nrw.commons.BuildConfig;
+import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.PageTitle;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.Utils;
@@ -131,7 +134,15 @@ public class LoginActivity extends AccountAuthenticatorActivity {
         signupButton.setOnClickListener(view -> signUp());
 
         forgotPasswordText.setOnClickListener(view -> forgotPassword());
-        skipLoginText.setOnClickListener(view -> skipLogin());
+        skipLoginText.setOnClickListener(view -> new AlertDialog.Builder(this).setTitle(R.string.skip_login_title)
+                .setMessage(R.string.skip_login_message)
+                .setCancelable(false)
+                .setPositiveButton(R.string.yes, (dialog, which) -> {
+                    dialog.cancel();
+                    skipLogin();
+                })
+                .setNegativeButton(R.string.no, (dialog, which) -> dialog.cancel())
+                .show());
 
         if(BuildConfig.FLAVOR.equals("beta")){
             loginCredentials.setText(getString(R.string.login_credential));
@@ -141,7 +152,7 @@ public class LoginActivity extends AccountAuthenticatorActivity {
     }
 
     private void skipLogin() {
-        prefs.edit().putBoolean("isloggedin", false).apply();
+        prefs.edit().putBoolean("login_skipped", true).apply();
         NavigationBaseActivity.startActivityWithFlags(this, NearbyActivity.class, Intent.FLAG_ACTIVITY_CLEAR_TOP);
         finish();
 
@@ -165,7 +176,6 @@ public class LoginActivity extends AccountAuthenticatorActivity {
         }
     }
 
-
     @Override
     protected void onPostCreate(Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);
@@ -181,11 +191,16 @@ public class LoginActivity extends AccountAuthenticatorActivity {
         }
 
         if (sessionManager.getCurrentAccount() != null
-                && sessionManager.isUserLoggedIn()
-                && sessionManager.getCachedAuthCookie() != null) {
-            
+            && sessionManager.isUserLoggedIn()
+            && sessionManager.getCachedAuthCookie() != null) {
+            prefs.edit().putBoolean("login_skipped", false).apply();
             startMainActivity();
         }
+
+        if (prefs.getBoolean("login_skipped", false)){
+            skipLogin();
+        }
+
     }
 
     @Override
