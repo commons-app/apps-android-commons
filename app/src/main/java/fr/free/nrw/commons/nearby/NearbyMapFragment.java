@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -58,6 +59,7 @@ import fr.free.nrw.commons.contributions.ContributionController;
 import fr.free.nrw.commons.utils.UriDeserializer;
 import fr.free.nrw.commons.utils.ViewUtil;
 import timber.log.Timber;
+import uk.co.deanwild.materialshowcaseview.MaterialShowcaseView;
 
 import static android.app.Activity.RESULT_OK;
 import static android.content.pm.PackageManager.PERMISSION_GRANTED;
@@ -113,7 +115,7 @@ public class NearbyMapFragment extends DaggerFragment {
 
     private boolean isSecondMaterialShowcaseDismissed;
     private boolean isMapReady;
-    private NearbyMaterialShowcaseSequence nearbyMaterialShowcaseSequence;
+    private MaterialShowcaseView thirdSingleShowCaseView;
 
     private Bundle bundleForUpdtes;// Carry information from activity about changed nearby places and current location
 
@@ -167,8 +169,6 @@ public class NearbyMapFragment extends DaggerFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        nearbyMaterialShowcaseSequence = new NearbyMaterialShowcaseSequence(getActivity(), ViewUtil.SHOWCASE_VIEW_ID_3);
-
         Timber.d("onCreateView called");
         if (curLatLng != null) {
             Timber.d("curLatLng found, setting up map view...");
@@ -643,15 +643,19 @@ public class NearbyMapFragment extends DaggerFragment {
         addAnchorToSmallFABs(fabGallery, getActivity().findViewById(R.id.empty_view).getId());
 
         addAnchorToSmallFABs(fabCamera, getActivity().findViewById(R.id.empty_view1).getId());
+        thirdSingleShowCaseView = new MaterialShowcaseView.Builder(this.getActivity())
+                .setTarget(fabPlus)
+                .setDismissText(getString(R.string.showcase_view_got_it_button))
+                .setContentText(getString(R.string.showcase_view_plus_fab))
+                .setDelay(500) // optional but starting animations immediately in onCreate can make them choppy
+                .singleUse(ViewUtil.SHOWCASE_VIEW_ID_3) // provide a unique ID used to ensure it is only shown once
+                .setDismissStyle(Typeface.defaultFromStyle(Typeface.BOLD_ITALIC))
+                .build();
 
-        nearbyMaterialShowcaseSequence.addSequenceItem(fabPlus
-                ,getString(R.string.showcase_view_plus_fab)
-                ,getString(R.string.showcase_view_got_it_button));
         isMapReady = true;
         if (isSecondMaterialShowcaseDismissed) {
-            nearbyMaterialShowcaseSequence.start();
+            thirdSingleShowCaseView.show(getActivity());
         }
-
     }
 
 
@@ -811,7 +815,7 @@ public class NearbyMapFragment extends DaggerFragment {
     public void onNearbyMaterialShowcaseDismissed() {
         isSecondMaterialShowcaseDismissed = true;
         if (isMapReady) {
-            nearbyMaterialShowcaseSequence.start();
+            thirdSingleShowCaseView.show(getActivity());
         }
     }
 
