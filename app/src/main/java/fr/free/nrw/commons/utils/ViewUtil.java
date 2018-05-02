@@ -5,6 +5,7 @@ import android.content.Context;
 import android.support.design.widget.Snackbar;
 import android.view.Display;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Toast;
 
 public class ViewUtil {
@@ -24,6 +25,16 @@ public class ViewUtil {
             return true;
         } else {
             return false;
+        }
+    }
+
+    public static void hideKeyboard(View view){
+        if (view != null) {
+            InputMethodManager manager = (InputMethodManager) view.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
+            view.clearFocus();
+            if (manager != null) {
+                manager.hideSoftInputFromWindow(view.getWindowToken(), 0);
+            }
         }
     }
 
