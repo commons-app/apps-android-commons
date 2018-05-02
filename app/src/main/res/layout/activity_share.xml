@@ -49,7 +49,7 @@
             android:layout_marginRight="@dimen/standard_gap"
             android:layout_marginBottom="@dimen/standard_gap"
             app:backgroundTint="@color/button_blue"
-            app:srcCompat="@drawable/ic_add_white_24dp"
+            app:srcCompat="@drawable/ic_keyboard_arrow_up_black_24dp"
             android:id="@+id/main_fab"/>
 
 
