@@ -288,7 +288,9 @@ public class ShareActivity
         }
 
         mainFab = (FloatingActionButton) findViewById(R.id.main_fab);
-
+        /*
+         * called when upper arrow floating button
+         */
         mainFab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -395,7 +397,9 @@ public class ShareActivity
             }
         });
     }
-
+    /*
+     * Function to display the zoom and map FAB
+     */
     private void showFABMenu(){
         isFABOpen=true;
 
@@ -408,6 +412,9 @@ public class ShareActivity
         zoomInButton.animate().translationY(-getResources().getDimension(R.dimen.first_fab));
     }
 
+    /*
+     * function to close the zoom and map FAB
+     */
     private void closeFABMenu(){
         isFABOpen=false;
         mainFab.animate().rotationBy(-180);
@@ -541,6 +548,9 @@ public class ShareActivity
         detectUnwantedPicturesAsync.execute();
     }
 
+    /*
+     *  to display permission snackbar in share activity
+     */
     private Snackbar requestPermissionUsingSnackBar(String rationale,
                                                     final String[] perms,
                                                     final int code) {
@@ -773,7 +783,9 @@ public class ShareActivity
         return super.onOptionsItemSelected(item);
     }
 
-    // Get SHA1 of file from input stream
+    /*
+     * Get SHA1 of file from input stream
+     */
     private String getSHA1(InputStream is) {
 
         MessageDigest digest;
@@ -810,6 +822,9 @@ public class ShareActivity
         }
     }
 
+    /*
+     * function to provide pinch zoom
+     */
     private void zoomImageFromThumb(final View thumbView, Uri imageuri ) {
         // If there's an animation in progress, cancel it
         // immediately and proceed with this one.
