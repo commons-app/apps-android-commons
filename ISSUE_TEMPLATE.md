@@ -1,8 +1,8 @@
-_Before creating an issue, please search the existing issues to see if a similar one has already been created. You can search issues by specific labels (e.g. `label:nearby `) or just by typing keywords into the search filter._
-
 **Summary:** 
 
 Summarize your issue in one sentence (what goes wrong, what did you expect to happen)
+
+_Before creating an issue, please search the existing issues to see if a similar one has already been created. You can search issues by specific labels (e.g. `label:nearby `) or just by typing keywords into the search filter._
 
 **Steps to reproduce:** 
 
@@ -12,14 +12,6 @@ How can we reproduce the issue?
 
 Add logcat files here (if possible).
 
-**Expected behavior:** 
-
-What did you expect the App to do?
-
-**Observed behavior:** 
-
-What did you see instead?  Describe your issue in detail here.
-
 **Device and Android version:** 
 
 What make and model device (e.g., Samsung J7) did you encounter this on?  What Android
@@ -28,7 +20,7 @@ version (e.g., Android 4.0 Ice Cream Sandwich or Android 6.0 Marshmallow) are yo
  
  **Commons app version:** 
 
-You can find this information by going to the navigation drawer in the app and tapping 'About'
+You can find this information by going to the navigation drawer in the app and tapping 'About'. If you are building from our codebase instead of downloading the app, please also mention the branch and build variant (e.g. master and prodDebug).
 
 **Screen-shots:** 
 
