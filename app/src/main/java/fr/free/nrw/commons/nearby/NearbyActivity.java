@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.PackageManager;
+import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -84,13 +85,12 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
     private final String NETWORK_INTENT_ACTION = "android.net.conn.CONNECTIVITY_CHANGE";
     private BroadcastReceiver broadcastReceiver;
 
-    private NearbyMaterialShowcaseSequence nearbyMaterialShowcaseSequence;
-
     private boolean isListShowcaseAdded = false;
     private boolean isMapShowCaseAdded = false;
 
     private LatLng lastKnownLocation;
 
+    private MaterialShowcaseView secondSingleShowCaseView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -102,7 +102,6 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
 
         initBottomSheetBehaviour();
         initDrawer();
-        nearbyMaterialShowcaseSequence = new NearbyMaterialShowcaseSequence(this, ViewUtil.SHOWCASE_VIEW_ID_1);
     }
 
     private void resumeFragment() {
@@ -145,9 +144,28 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
         new Handler().post(() -> {
 
             listButton = findViewById(R.id.action_display_list);
-            nearbyMaterialShowcaseSequence.addSequenceItem(listButton
-                    , getString(R.string.showcase_view_list_icon)
-                    , getString(R.string.showcase_view_got_it_button));
+
+            secondSingleShowCaseView = new MaterialShowcaseView.Builder(this)
+                    .setTarget(listButton)
+                    .setDismissText(getString(R.string.showcase_view_got_it_button))
+                    .setContentText(getString(R.string.showcase_view_list_icon))
+                    .setDelay(500) // optional but starting animations immediately in onCreate can make them choppy
+                    .singleUse(ViewUtil.SHOWCASE_VIEW_ID_1) // provide a unique ID used to ensure it is only shown once
+                    .setDismissStyle(Typeface.defaultFromStyle(Typeface.BOLD_ITALIC))
+                    .setListener(new IShowcaseListener() {
+                        @Override
+                        public void onShowcaseDisplayed(MaterialShowcaseView materialShowcaseView) {
+
+                        }
+
+                        // If dismissed, we can inform fragment to start showcase sequence there
+                        @Override
+                        public void onShowcaseDismissed(MaterialShowcaseView materialShowcaseView) {
+                                nearbyMapFragment.onNearbyMaterialShowcaseDismissed();
+                        }
+                    })
+                    .build();
+
             isListShowcaseAdded = true;
 
             if (isMapShowCaseAdded) { // If map showcase is also ready, start ShowcaseSequence
@@ -452,17 +470,6 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
         }
 
         isMapShowCaseAdded = true;
-        if (isListShowcaseAdded) { // If list showcase is also ready
-            nearbyMaterialShowcaseSequence.setOnItemDismissedListener(new MaterialShowcaseSequence.OnSequenceItemDismissedListener() {
-                @Override
-                public void onDismiss(MaterialShowcaseView materialShowcaseView, int i) {
-                    if (i == 1) {
-                        nearbyMapFragment.onNearbyMaterialShowcaseDismissed();
-                    }
-                }
-            });
-        }
-
     }
 
     public void setMapViewTutorialShowCase() {
@@ -479,6 +486,7 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
                 .setDelay(500) // optional but starting animations immediately in onCreate can make them choppy
                 .singleUse(ViewUtil.SHOWCASE_VIEW_ID_2) // provide a unique ID used to ensure it is only shown once
                 .withoutShape() // no shape on map view since there are no view to focus on
+                .setDismissStyle(Typeface.defaultFromStyle(Typeface.BOLD_ITALIC))
                 .setListener(new IShowcaseListener() {
                     @Override
                     public void onShowcaseDisplayed(MaterialShowcaseView materialShowcaseView) {
@@ -490,7 +498,7 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
                             /* Add other nearbyMaterialShowcaseSequence here, it will make the user feel as they are a
                             * nearbyMaterialShowcaseSequence whole together.
                             * */
-                        nearbyMaterialShowcaseSequence.start();
+                        secondSingleShowCaseView.show(NearbyActivity.this);
                     }
                 })
                 .build();
