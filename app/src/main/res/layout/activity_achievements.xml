@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/drawer_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <include
+            android:id="@+id/toolbar"
+            layout="@layout/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1.5"
+            android:layout_below="@+id/toolbar"
+            android:background="#D6DCE0">
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:orientation="vertical"
+            android:layout_weight="1">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/statistics"
+                style="?android:textAppearanceLarge"
+                android:layout_marginLeft="@dimen/activity_margin_horizontal"
+                android:layout_marginTop="@dimen/activity_margin_vertical"/>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/activity_margin_horizontal"
+                android:layout_marginLeft="@dimen/activity_margin_horizontal"
+                android:layout_marginRight="@dimen/activity_margin_horizontal"
+                android:layout_marginStart="@dimen/activity_margin_horizontal"
+                android:layout_marginTop="@dimen/activity_margin_horizontal">
+                <ImageView
+                    android:layout_width="@dimen/overflow_icon_dimen"
+                    android:layout_height="@dimen/overflow_icon_dimen"
+                    android:id="@+id/featured_image_icon"
+                    app:srcCompat="@drawable/featured"
+                    />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    style="?android:textAppearanceMedium"
+                    android:layout_marginTop="@dimen/activity_margin_horizontal"
+                    android:layout_marginStart="@dimen/activity_margin_horizontal"
+                    android:layout_marginLeft="@dimen/activity_margin_horizontal"
+                    android:text="@string/statistics_featured"/>
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/activity_margin_horizontal"
+                android:layout_marginLeft="@dimen/activity_margin_horizontal"
+                android:layout_marginRight="@dimen/activity_margin_horizontal"
+                android:layout_marginStart="@dimen/activity_margin_horizontal"
+                android:layout_marginTop="@dimen/activity_margin_horizontal">
+                <ImageView
+                    android:layout_width="@dimen/overflow_icon_dimen"
+                    android:layout_height="@dimen/overflow_icon_dimen"
+                    app:srcCompat="@drawable/ic_thanks"
+                    android:scaleType="centerCrop"
+                    />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    style="?android:textAppearanceMedium"
+                    android:layout_marginTop="@dimen/activity_margin_horizontal"
+                    android:layout_marginStart="@dimen/activity_margin_horizontal"
+                    android:layout_marginLeft="@dimen/activity_margin_horizontal"
+                    android:text="@string/statistics_thanks"/>
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+    <android.support.design.widget.NavigationView
+        android:id="@+id/navigation_view"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        app:headerLayout="@layout/drawer_header"
+        app:menu="@menu/drawer" />
+</android.support.v4.widget.DrawerLayout>
