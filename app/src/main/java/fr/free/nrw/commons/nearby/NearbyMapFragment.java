@@ -649,7 +649,7 @@ public class NearbyMapFragment extends DaggerFragment {
                 .setContentText(getString(R.string.showcase_view_plus_fab))
                 .setDelay(500) // optional but starting animations immediately in onCreate can make them choppy
                 .singleUse(ViewUtil.SHOWCASE_VIEW_ID_3) // provide a unique ID used to ensure it is only shown once
-                .setDismissStyle(Typeface.defaultFromStyle(Typeface.BOLD_ITALIC))
+                .setDismissStyle(Typeface.defaultFromStyle(Typeface.BOLD))
                 .build();
 
         isMapReady = true;

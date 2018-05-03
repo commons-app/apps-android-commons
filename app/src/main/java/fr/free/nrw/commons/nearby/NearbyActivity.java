@@ -153,7 +153,7 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
                     .setContentText(getString(R.string.showcase_view_list_icon))
                     .setDelay(500) // optional but starting animations immediately in onCreate can make them choppy
                     .singleUse(ViewUtil.SHOWCASE_VIEW_ID_1) // provide a unique ID used to ensure it is only shown once
-                    .setDismissStyle(Typeface.defaultFromStyle(Typeface.BOLD_ITALIC))
+                    .setDismissStyle(Typeface.defaultFromStyle(Typeface.BOLD))
                     .setListener(new IShowcaseListener() {
                         @Override
                         public void onShowcaseDisplayed(MaterialShowcaseView materialShowcaseView) {
@@ -488,7 +488,7 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
                 .setDelay(500) // optional but starting animations immediately in onCreate can make them choppy
                 .singleUse(ViewUtil.SHOWCASE_VIEW_ID_2) // provide a unique ID used to ensure it is only shown once
                 .withoutShape() // no shape on map view since there are no view to focus on
-                .setDismissStyle(Typeface.defaultFromStyle(Typeface.BOLD_ITALIC))
+                .setDismissStyle(Typeface.defaultFromStyle(Typeface.BOLD))
                 .setListener(new IShowcaseListener() {
                     @Override
                     public void onShowcaseDisplayed(MaterialShowcaseView materialShowcaseView) {
