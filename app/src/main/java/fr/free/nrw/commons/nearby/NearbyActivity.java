@@ -4,6 +4,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Typeface;
 import android.net.Uri;
@@ -15,6 +16,7 @@ import android.support.design.widget.BottomSheetBehavior;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AlertDialog;
 
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -28,6 +30,7 @@ import com.google.gson.GsonBuilder;
 import java.util.List;
 
 import javax.inject.Inject;
+import javax.inject.Named;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -45,7 +48,6 @@ import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 import timber.log.Timber;
 import uk.co.deanwild.materialshowcaseview.IShowcaseListener;
-import uk.co.deanwild.materialshowcaseview.MaterialShowcaseSequence;
 import uk.co.deanwild.materialshowcaseview.MaterialShowcaseView;
 
 
@@ -69,7 +71,8 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
     LocationServiceManager locationManager;
     @Inject
     NearbyController nearbyController;
-
+    @Inject
+    @Named("application_preferences") SharedPreferences applicationPrefs;
     private LatLng curLatLng;
     private Bundle bundle;
     private Disposable placesDisposable;
@@ -502,7 +505,11 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
                     }
                 })
                 .build();
-        firstSingleShowCaseView.show(this);
+
+        if (applicationPrefs.getBoolean("firstRunNearby", true)) {
+            applicationPrefs.edit().putBoolean("firstRunNearby", false).apply();
+            firstSingleShowCaseView.show(this);
+        }
     }
 
     private void lockNearbyView(boolean lock) {
