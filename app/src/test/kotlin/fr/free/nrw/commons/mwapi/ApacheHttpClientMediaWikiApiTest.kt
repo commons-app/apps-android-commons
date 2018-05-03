@@ -33,6 +33,7 @@ class ApacheHttpClientMediaWikiApiTest {
     fun setUp() {
         server = MockWebServer()
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(RuntimeEnvironment.application)
+        categoryPreferences = PreferenceManager.getDefaultSharedPreferences(RuntimeEnvironment.application)
         testObject = ApacheHttpClientMediaWikiApi(RuntimeEnvironment.application, "http://" + server.hostName + ":" + server.port + "/", sharedPreferences, categoryPreferences, Gson())
         testObject.setWikiMediaToolforgeUrl("http://" + server.hostName + ":" + server.port + "/")
     }
