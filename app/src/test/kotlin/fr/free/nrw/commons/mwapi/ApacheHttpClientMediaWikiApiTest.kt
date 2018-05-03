@@ -3,6 +3,7 @@ package fr.free.nrw.commons.mwapi
 import android.content.SharedPreferences
 import android.os.Build
 import android.preference.PreferenceManager
+import com.google.gson.Gson
 import fr.free.nrw.commons.BuildConfig
 import fr.free.nrw.commons.TestCommonsApplication
 import okhttp3.mockwebserver.MockResponse
@@ -26,12 +27,13 @@ class ApacheHttpClientMediaWikiApiTest {
     private lateinit var testObject: ApacheHttpClientMediaWikiApi
     private lateinit var server: MockWebServer
     private lateinit var sharedPreferences: SharedPreferences
+    private lateinit var categoryPreferences: SharedPreferences
 
     @Before
     fun setUp() {
         server = MockWebServer()
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(RuntimeEnvironment.application)
-        testObject = ApacheHttpClientMediaWikiApi(RuntimeEnvironment.application, "http://" + server.hostName + ":" + server.port + "/", sharedPreferences)
+        testObject = ApacheHttpClientMediaWikiApi(RuntimeEnvironment.application, "http://" + server.hostName + ":" + server.port + "/", sharedPreferences, categoryPreferences, Gson())
         testObject.setWikiMediaToolforgeUrl("http://" + server.hostName + ":" + server.port + "/")
     }
 
