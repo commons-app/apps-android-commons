@@ -158,6 +158,7 @@
   <string name="welcome_copyright_subtext">Αποφύγετε προστατευμένο υλικό  που βρήκατε από το Internet, καθώς και εικόνες, αφίσες, εξώφυλλα βιβλίων, κλπ.</string>
   <string name="welcome_final_text">Τι λες, μπορείς;</string>
   <string name="welcome_final_button_text">Ναι!</string>
+  <string name="welcome_help_button_text"/>
   <string name="detail_panel_cats_label">Κατηγορίες</string>
   <string name="detail_panel_cats_loading">Φόρτωση…</string>
   <string name="detail_panel_cats_none">Καμία επιλεγμένη</string>
