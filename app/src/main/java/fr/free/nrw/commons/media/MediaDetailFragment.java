@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
@@ -59,13 +60,14 @@ public class MediaDetailFragment extends Fragment {
     private TextView uploadedDate;
     private LinearLayout categoryContainer;
     private ScrollView scrollView;
+    private ProgressBar progressBar;
     private ArrayList<String> categoryNames;
     private boolean categoriesLoaded = false;
     private boolean categoriesPresent = false;
     private ViewTreeObserver.OnGlobalLayoutListener layoutListener; // for layout stuff, only used once!
     private ViewTreeObserver.OnScrollChangedListener scrollListener;
     DataSetObserver dataObserver;
-    private AsyncTask<Void,Void,Boolean> detailFetchTask;
+    private AsyncTask<Void, Void, Boolean> detailFetchTask;
     private LicenseList licenseList;
 
     @Override
@@ -83,10 +85,11 @@ public class MediaDetailFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        detailProvider = (MediaDetailPagerFragment.MediaDetailProvider)getActivity();
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+            Bundle savedInstanceState) {
+        detailProvider = (MediaDetailPagerFragment.MediaDetailProvider) getActivity();
 
-        if(savedInstanceState != null) {
+        if (savedInstanceState != null) {
             editable = savedInstanceState.getBoolean("editable");
             index = savedInstanceState.getInt("index");
             initialListTop = savedInstanceState.getInt("listTop");
@@ -102,6 +105,7 @@ public class MediaDetailFragment extends Fragment {
 
         image = (MediaWikiImageView) view.findViewById(R.id.mediaDetailImage);
         scrollView = (ScrollView) view.findViewById(R.id.mediaDetailScrollView);
+        progressBar = (ProgressBar) view.findViewById(R.id.mediaDetailProgressBar);
 
         // Detail consists of a list view with main pane in header view, plus category list.
         spacer = (MediaDetailSpacer) view.findViewById(R.id.mediaDetailSpacer);
@@ -133,7 +137,8 @@ public class MediaDetailFragment extends Fragment {
                 int viewHeight = view.getHeight();
                 //int textHeight = title.getLineHeight();
                 int paddingDp = 112;
-                float paddingPx = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, paddingDp, getResources().getDisplayMetrics());
+                float paddingPx = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, paddingDp,
+                        getResources().getDisplayMetrics());
                 int newHeight = viewHeight - Math.round(paddingPx);
 
                 if (newHeight != currentHeight) {
@@ -150,7 +155,8 @@ public class MediaDetailFragment extends Fragment {
         return view;
     }
 
-    @Override public void onResume() {
+    @Override
+    public void onResume() {
         super.onResume();
         Media media = detailProvider.getMediaAtPosition(index);
         if (media == null) {
@@ -188,6 +194,7 @@ public class MediaDetailFragment extends Fragment {
 
             @Override
             protected void onPreExecute() {
+                showProgress(true);
                 extractor = new MediaDataExtractor(media.getFilename(), licenseList);
             }
 
@@ -231,13 +238,12 @@ public class MediaDetailFragment extends Fragment {
                 } else {
                     Timber.d("Failed to load photo details.");
                 }
+                showProgress(false);
             }
         };
         detailFetchTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 
         title.setText(media.getDisplayTitle());
-        desc.setText(""); // fill in from network...
-        license.setText(""); // fill in from network...
     }
 
     @Override
@@ -247,12 +253,13 @@ public class MediaDetailFragment extends Fragment {
             detailFetchTask = null;
         }
         if (layoutListener != null) {
-            getView().getViewTreeObserver().removeGlobalOnLayoutListener(layoutListener); // old Android was on crack. CRACK IS WHACK
+            getView().getViewTreeObserver().removeGlobalOnLayoutListener(
+                    layoutListener); // old Android was on crack. CRACK IS WHACK
             layoutListener = null;
         }
         if (scrollListener != null) {
             getView().getViewTreeObserver().removeOnScrollChangedListener(scrollListener);
-            scrollListener  = null;
+            scrollListener = null;
         }
         if (dataObserver != null) {
             detailProvider.unregisterDataSetObserver(dataObserver);
@@ -271,8 +278,9 @@ public class MediaDetailFragment extends Fragment {
 
     private View buildCatLabel(String cat) {
         final String catName = cat;
-        final View item = getLayoutInflater(null).inflate(R.layout.detail_category_item, null, false);
-        final TextView textView = (TextView)item.findViewById(R.id.mediaDetailCategoryItemText);
+        final View item = getLayoutInflater(null)
+                .inflate(R.layout.detail_category_item, null, false);
+        final TextView textView = (TextView) item.findViewById(R.id.mediaDetailCategoryItemText);
 
         textView.setText(cat);
         if (categoriesLoaded && categoriesPresent) {
@@ -294,7 +302,7 @@ public class MediaDetailFragment extends Fragment {
         // You must face the darkness alone
         int scrollY = scrollView.getScrollY();
         int scrollMax = getView().getHeight();
-        float scrollPercentage = (float)scrollY / (float)scrollMax;
+        float scrollPercentage = (float) scrollY / (float) scrollMax;
         final float transparencyMax = 0.75f;
         if (scrollPercentage > transparencyMax) {
             scrollPercentage = transparencyMax;
@@ -342,5 +350,17 @@ public class MediaDetailFragment extends Fragment {
      */
     private String prettyCoordinates(Media media) {
         return media.getCoordinates();
+    }
+
+    /**
+     * Show hide progress while making api calls
+     */
+
+    private void showProgress(boolean shouldShow) {
+        if (shouldShow) {
+            progressBar.setVisibility(View.VISIBLE);
+        } else {
+            progressBar.setVisibility(View.GONE);
+        }
     }
 }

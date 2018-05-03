@@ -1,252 +1,260 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:background="?attr/mainBackground"
+  android:orientation="vertical"
+  >
+
+  <ImageView
+    android:id="@+id/mediaDetailImageFailed"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:contentDescription="@string/mediaimage_failed"
+    android:src="@android:drawable/ic_menu_close_clear_cancel"
+    android:visibility="gone"
+    />
+
+  <fr.free.nrw.commons.MediaWikiImageView
+    android:id="@+id/mediaDetailImage"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="?attr/mainBackground"
+    app:actualImageScaleType="fitCenter"
+    />
+
+  <ScrollView
+    android:id="@+id/mediaDetailScrollView"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@android:color/transparent"
+    android:cacheColorHint="@android:color/transparent"
+    android:fillViewport="true"
     >
 
-    <ImageView
-        android:id="@+id/mediaDetailImageFailed"
-        android:layout_height="wrap_content"
-        android:layout_width="wrap_content"
-        android:layout_gravity="center"
-        android:src="@android:drawable/ic_menu_close_clear_cancel"
-        android:visibility="gone"
-        android:contentDescription="@string/mediaimage_failed"
+    <LinearLayout
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:orientation="vertical"
+      >
+
+      <!-- Placeholder. Height gets set at runtime based on container size; the initial value is a hack to keep
+           the detail info offscreen until it's placed properly. May be a better way to do this. -->
+      <fr.free.nrw.commons.media.MediaDetailSpacer
+        android:id="@+id/mediaDetailSpacer"
+        android:layout_width="match_parent"
+        android:layout_height="16dp"
         />
 
-    <fr.free.nrw.commons.MediaWikiImageView
-        android:id="@+id/mediaDetailImage"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:actualImageScaleType="fitCenter"
-        />
-
-    <ScrollView
+      <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/mediaDetailScrollView"
-        android:fillViewport="true"
-        android:background="@android:color/transparent"
-        android:cacheColorHint="@android:color/transparent"
+        android:padding="16dp"
+        android:background="?attr/fragmentCategorisationBackground"
+        android:orientation="vertical"
         >
 
         <LinearLayout
-            android:orientation="vertical"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:padding="16dp"
+          android:background="?attr/subBackground"
+          android:orientation="vertical"
+          >
+          <TextView
+            android:textStyle="bold"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            >
-
-            <!-- Placeholder. Height gets set at runtime based on container size; the initial value is a hack to keep
-                 the detail info offscreen until it's placed properly. May be a better way to do this. -->
-            <fr.free.nrw.commons.media.MediaDetailSpacer
-                android:layout_width="match_parent"
-                android:layout_height="16dp"
-                android:id="@+id/mediaDetailSpacer"
-                />
-
-            <LinearLayout
-                android:orientation="vertical"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="?attr/fragmentCategorisationBackground"
-                android:padding="16dp"
-                >
-
-                <LinearLayout
-                    android:orientation="vertical"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="?attr/subBackground"
-                    android:padding="16dp"
-                    >
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:textColor="@android:color/white"
-                        android:text="@string/media_detail_title"
-                        android:textSize="16sp"
-                        android:textStyle="bold"
-                        android:paddingBottom="6dp"
-                        />
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="@string/media_detail_media_title"
-                        android:id="@+id/mediaDetailTitle"
-                        android:layout_gravity="left|start"
-                        android:textColor="@android:color/white"
-                        android:background="?attr/subBackground"
-                        android:textSize="14sp"
-                        android:padding="12dp"
-                        />
-                </LinearLayout>
-
-                <fr.free.nrw.commons.media.MediaDetailSpacer
-                    android:layout_width="match_parent"
-                    android:layout_height="8dp"
-                    />
-
-                <LinearLayout
-                    android:orientation="vertical"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="?attr/subBackground"
-                    android:padding="16dp"
-                    >
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="@string/media_detail_description"
-                        android:textColor="@android:color/white"
-                        android:textSize="16sp"
-                        android:textStyle="bold"
-                        android:paddingBottom="6dp"
-                        />
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="@string/media_detail_description_explanation"
-                        android:background="?attr/subBackground"
-                        android:id="@+id/mediaDetailDesc"
-                        android:textColor="@android:color/white"
-                        android:layout_gravity="left|start"
-                        android:textSize="14sp"
-                        android:padding="12dp"
-                        />
-                </LinearLayout>
-
-                <fr.free.nrw.commons.media.MediaDetailSpacer
-                    android:layout_width="match_parent"
-                    android:layout_height="8dp"
-                    />
-
-                <LinearLayout
-                    android:orientation="vertical"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="?attr/subBackground"
-                    android:padding="16dp"
-                    >
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:textColor="@android:color/white"
-                        android:text="License"
-                        android:textSize="16sp"
-                        android:textStyle="bold"
-                        android:paddingBottom="6dp"
-                        />
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="License link"
-                        android:id="@+id/mediaDetailLicense"
-                        android:layout_gravity="left|start"
-                        android:background="?attr/subBackground"
-                        android:textColor="@android:color/white"
-                        android:textSize="14sp"
-                        android:padding="12dp"
-                        />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:orientation="vertical"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="?attr/subBackground"
-                    android:padding="16dp"
-                    >
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:textColor="@android:color/white"
-                        android:text="Coordinates"
-                        android:textSize="16sp"
-                        android:textStyle="bold"
-                        android:paddingBottom="6dp"
-                        />
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="License link"
-                        android:id="@+id/mediaDetailCoordinates"
-                        android:layout_gravity="left|start"
-                        android:background="?attr/subBackground"
-                        android:textColor="@android:color/white"
-                        android:textSize="14sp"
-                        android:padding="12dp"
-                        />
-                </LinearLayout>
-
-                <fr.free.nrw.commons.media.MediaDetailSpacer
-                    android:layout_width="match_parent"
-                    android:layout_height="8dp"
-                    />
-
-                <LinearLayout
-                    android:orientation="vertical"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="?attr/subBackground"
-                    android:padding="16dp"
-                    android:textStyle="bold"
-                    >
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="@string/detail_panel_cats_label"
-                        android:textSize="16sp"
-                        android:layout_gravity="left|start"
-                        android:textColor="@android:color/white"
-                        android:paddingBottom="6dp"
-                        />
-                    <LinearLayout
-                        android:orientation="vertical"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/mediaDetailCategoryContainer"
-                        />
-                </LinearLayout>
-
-                <fr.free.nrw.commons.media.MediaDetailSpacer
-                    android:layout_width="match_parent"
-                    android:layout_height="8dp"
-                    />
-
-                <LinearLayout
-                    android:orientation="vertical"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="?attr/subBackground"
-                    android:padding="16dp"
-                    >
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="@string/media_detail_uploaded_date"
-                        android:textColor="@android:color/white"
-                        android:textSize="16sp"
-                        android:textStyle="bold"
-                        android:paddingBottom="6dp"
-                        />
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="@string/media_detail_uploaded_date"
-                        android:background="?attr/subBackground"
-                        android:id="@+id/mediaDetailuploadeddate"
-                        android:textColor="@android:color/white"
-                        android:layout_gravity="left|start"
-                        android:textSize="14sp"
-                        android:padding="12dp"
-                        />
-                </LinearLayout>
-
-            </LinearLayout>
+            android:paddingBottom="6dp"
+            android:text="@string/media_detail_title"
+            android:textColor="@android:color/white"
+            android:textSize="16sp"
+            />
+          <TextView
+            android:id="@+id/mediaDetailTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left|start"
+            android:padding="12dp"
+            android:background="?attr/subBackground"
+            tools:text="@string/media_detail_media_title"
+            android:textColor="@android:color/white"
+            android:textSize="14sp"
+            />
         </LinearLayout>
-    </ScrollView>
+
+        <fr.free.nrw.commons.media.MediaDetailSpacer
+          android:layout_width="match_parent"
+          android:layout_height="8dp"
+          />
+
+        <LinearLayout
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:padding="16dp"
+          android:background="?attr/subBackground"
+          android:orientation="vertical"
+          >
+          <TextView
+            android:textStyle="bold"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="6dp"
+            android:text="@string/media_detail_description"
+            android:textColor="@android:color/white"
+            android:textSize="16sp"
+            />
+          <TextView
+            android:id="@+id/mediaDetailDesc"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left|start"
+            android:padding="12dp"
+            android:background="?attr/subBackground"
+            tools:text="@string/media_detail_description_explanation"
+            android:textColor="@android:color/white"
+            android:textSize="14sp"
+            />
+        </LinearLayout>
+
+        <fr.free.nrw.commons.media.MediaDetailSpacer
+          android:layout_width="match_parent"
+          android:layout_height="8dp"
+          />
+
+        <LinearLayout
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:padding="16dp"
+          android:background="?attr/subBackground"
+          android:orientation="vertical"
+          >
+          <TextView
+            android:textStyle="bold"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="6dp"
+            android:text="License"
+            android:textColor="@android:color/white"
+            android:textSize="16sp"
+            />
+          <TextView
+            android:id="@+id/mediaDetailLicense"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left|start"
+            android:padding="12dp"
+            android:background="?attr/subBackground"
+            tools:text="License link"
+            android:textColor="@android:color/white"
+            android:textSize="14sp"
+            />
+        </LinearLayout>
+
+        <LinearLayout
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:padding="16dp"
+          android:background="?attr/subBackground"
+          android:orientation="vertical"
+          >
+          <TextView
+            android:textStyle="bold"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="6dp"
+            android:text="Coordinates"
+            android:textColor="@android:color/white"
+            android:textSize="16sp"
+            />
+          <TextView
+            android:id="@+id/mediaDetailCoordinates"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left|start"
+            android:padding="12dp"
+            android:background="?attr/subBackground"
+            tools:text="Location Details"
+            android:textColor="@android:color/white"
+            android:textSize="14sp"
+            />
+        </LinearLayout>
+
+        <fr.free.nrw.commons.media.MediaDetailSpacer
+          android:layout_width="match_parent"
+          android:layout_height="8dp"
+          />
+
+        <LinearLayout
+          android:textStyle="bold"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:padding="16dp"
+          android:background="?attr/subBackground"
+          android:orientation="vertical"
+          >
+          <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left|start"
+            android:paddingBottom="6dp"
+            android:text="@string/detail_panel_cats_label"
+            android:textColor="@android:color/white"
+            android:textSize="16sp"
+            />
+          <LinearLayout
+            android:id="@+id/mediaDetailCategoryContainer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            />
+        </LinearLayout>
+
+        <fr.free.nrw.commons.media.MediaDetailSpacer
+          android:layout_width="match_parent"
+          android:layout_height="8dp"
+          />
+
+        <LinearLayout
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:padding="16dp"
+          android:background="?attr/subBackground"
+          android:orientation="vertical"
+          >
+          <TextView
+            android:textStyle="bold"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="6dp"
+            android:text="@string/media_detail_uploaded_date"
+            android:textColor="@android:color/white"
+            android:textSize="16sp"
+            />
+          <TextView
+            android:id="@+id/mediaDetailuploadeddate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left|start"
+            android:padding="12dp"
+            android:background="?attr/subBackground"
+            tools:text="@string/media_detail_uploaded_date"
+            android:textColor="@android:color/white"
+            android:textSize="14sp"
+            />
+        </LinearLayout>
+
+      </LinearLayout>
+    </LinearLayout>
+  </ScrollView>
+
+  <ProgressBar
+    android:id="@+id/mediaDetailProgressBar"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:visibility="gone"/>
 
 </FrameLayout>
