@@ -1,9 +1,6 @@
 package fr.free.nrw.commons.modifications;
 
 import android.accounts.Account;
-import android.accounts.AccountManager;
-import android.accounts.AuthenticatorException;
-import android.accounts.OperationCanceledException;
 import android.content.AbstractThreadedSyncAdapter;
 import android.content.ContentProviderClient;
 import android.content.Context;
@@ -12,18 +9,25 @@ import android.database.Cursor;
 import android.os.Bundle;
 import android.os.RemoteException;
 
-import fr.free.nrw.commons.MWApi;
-import org.mediawiki.api.ApiResult;
-
 import java.io.IOException;
 
-import fr.free.nrw.commons.CommonsApplication;
-import fr.free.nrw.commons.Utils;
+import javax.inject.Inject;
+
+import fr.free.nrw.commons.auth.SessionManager;
 import fr.free.nrw.commons.contributions.Contribution;
+import fr.free.nrw.commons.contributions.ContributionDao;
 import fr.free.nrw.commons.contributions.ContributionsContentProvider;
+import fr.free.nrw.commons.di.ApplicationlessInjection;
+import fr.free.nrw.commons.mwapi.MediaWikiApi;
 import timber.log.Timber;
 
 public class ModificationsSyncAdapter extends AbstractThreadedSyncAdapter {
+
+    @Inject MediaWikiApi mwApi;
+    @Inject ContributionDao contributionDao;
+    @Inject ModifierSequenceDao modifierSequenceDao;
+    @Inject
+    SessionManager sessionManager;
 
     public ModificationsSyncAdapter(Context context, boolean autoInitialize) {
         super(context, autoInitialize);
@@ -32,6 +36,11 @@ public class ModificationsSyncAdapter extends AbstractThreadedSyncAdapter {
     @Override
     public void onPerformSync(Account account, Bundle bundle, String s, ContentProviderClient contentProviderClient, SyncResult syncResult) {
         // This code is fraught with possibilities of race conditions, but lalalalala I can't hear you!
+        ApplicationlessInjection
+                .getInstance(getContext()
+                        .getApplicationContext())
+                .getCommonsApplicationComponent()
+                .inject(this);
 
         Cursor allModifications;
         try {
@@ -41,33 +50,22 @@ public class ModificationsSyncAdapter extends AbstractThreadedSyncAdapter {
         }
 
         // Exit early if nothing to do
-        if(allModifications == null || allModifications.getCount() == 0) {
+        if (allModifications == null || allModifications.getCount() == 0) {
             Timber.d("No modifications to perform");
             return;
         }
 
-        String authCookie;
-        try {
-             authCookie = AccountManager.get(getContext()).blockingGetAuthToken(account, "", false);
-        } catch (OperationCanceledException | AuthenticatorException e) {
-            throw new RuntimeException(e);
-        } catch (IOException e) {
+        String authCookie = sessionManager.getAuthCookie();
+        if (isNullOrWhiteSpace(authCookie)) {
             Timber.d("Could not authenticate :(");
             return;
         }
 
-        if(Utils.isNullOrWhiteSpace(authCookie)) {
-            Timber.d("Could not authenticate :(");
-            return;
-        }
-
-        MWApi api = CommonsApplication.getInstance().getMWApi();
-        api.setAuthCookie(authCookie);
+        mwApi.setAuthCookie(authCookie);
         String editToken;
 
-        ApiResult requestResult, responseResult;
         try {
-            editToken = api.getEditToken();
+            editToken = mwApi.getEditToken();
         } catch (IOException e) {
             Timber.d("Can not retreive edit token!");
             return;
@@ -79,67 +77,69 @@ public class ModificationsSyncAdapter extends AbstractThreadedSyncAdapter {
 
         ContentProviderClient contributionsClient = null;
         try {
-            contributionsClient = getContext().getContentResolver().acquireContentProviderClient(ContributionsContentProvider.AUTHORITY);
+            contributionsClient = getContext().getContentResolver().acquireContentProviderClient(ContributionsContentProvider.CONTRIBUTION_AUTHORITY);
 
-            while(!allModifications.isAfterLast()) {
-                ModifierSequence sequence = ModifierSequence.fromCursor(allModifications);
-                sequence.setContentProviderClient(contentProviderClient);
+            while (!allModifications.isAfterLast()) {
+                ModifierSequence sequence = modifierSequenceDao.fromCursor(allModifications);
                 Contribution contrib;
-
                 Cursor contributionCursor;
+
+                if (contributionsClient == null) {
+                    Timber.e("ContributionsClient is null. This should not happen!");
+                    return;
+                }
+
                 try {
                     contributionCursor = contributionsClient.query(sequence.getMediaUri(), null, null, null, null);
                 } catch (RemoteException e) {
                     throw new RuntimeException(e);
                 }
-                contributionCursor.moveToFirst();
-                contrib = Contribution.fromCursor(contributionCursor);
 
-                if(contrib.getState() == Contribution.STATE_COMPLETED) {
+                if (contributionCursor != null) {
+                    contributionCursor.moveToFirst();
+                }
 
+                contrib = contributionDao.fromCursor(contributionCursor);
+
+                if (contrib != null && contrib.getState() == Contribution.STATE_COMPLETED) {
+                    String pageContent;
                     try {
-                        requestResult = api.action("query")
-                                .param("prop", "revisions")
-                                .param("rvprop", "timestamp|content")
-                                .param("titles", contrib.getFilename())
-                                .get();
+                        pageContent = mwApi.revisionsByFilename(contrib.getFilename());
                     } catch (IOException e) {
-                        Timber.d("Network fuckup on modifications sync!");
+                        Timber.d("Network messed up on modifications sync!");
                         continue;
                     }
 
-                    Timber.d("Page content is %s", Utils.getStringFromDOM(requestResult.getDocument()));
-                    String pageContent = requestResult.getString("/api/query/pages/page/revisions/rev");
-                    String processedPageContent = sequence.executeModifications(contrib.getFilename(),  pageContent);
+                    Timber.d("Page content is %s", pageContent);
+                    String processedPageContent = sequence.executeModifications(contrib.getFilename(), pageContent);
 
+                    String editResult;
                     try {
-                        responseResult = api.action("edit")
-                                .param("title", contrib.getFilename())
-                                .param("token", editToken)
-                                .param("text", processedPageContent)
-                                .param("summary", sequence.getEditSummary())
-                                .post();
+                        editResult = mwApi.edit(editToken, processedPageContent, contrib.getFilename(), sequence.getEditSummary());
                     } catch (IOException e) {
-                        Timber.d("Network fuckup on modifications sync!");
+                        Timber.d("Network messed up on modifications sync!");
                         continue;
                     }
 
-                    Timber.d("Response is %s", Utils.getStringFromDOM(responseResult.getDocument()));
+                    Timber.d("Response is %s", editResult);
 
-                    String result = responseResult.getString("/api/edit/@result");
-                    if(!result.equals("Success")) {
+                    if (!"Success".equals(editResult)) {
                         // FIXME: Log this somewhere else
-                        Timber.d("Non success result! %s", result);
+                        Timber.d("Non success result! %s", editResult);
                     } else {
-                        sequence.delete();
+                        modifierSequenceDao.delete(sequence);
                     }
                 }
                 allModifications.moveToNext();
             }
         } finally {
-            if(contributionsClient != null) {
+            if (contributionsClient != null) {
                 contributionsClient.release();
             }
         }
+    }
+
+    private boolean isNullOrWhiteSpace(String value) {
+        return value == null || value.trim().isEmpty();
     }
 }

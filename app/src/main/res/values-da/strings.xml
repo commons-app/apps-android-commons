@@ -1,14 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- Authors:
+* Christian List
+* Envlh
+* Joedalton
+* Jsmakaayb
+* Luckas
+* Overlaet
+-->
 <resources>
-  <string name="app_name" fuzzy="true">Wikimedia Commons</string>
+  <string name="preference_category_appearance">Udseende</string>
+  <string name="preference_category_general">Generelt</string>
+  <string name="preference_category_feedback">Tilbagemelding</string>
+  <string name="preference_category_location">Sted</string>
+  <string name="app_name">Commons</string>
+  <string name="bullet">•</string>
   <string name="menu_settings">Indstillinger</string>
   <string name="username">Brugernavn</string>
   <string name="password">Adgangskode</string>
+  <string name="login_credential">Log ind på din Commons Beta-konto</string>
   <string name="login">Log på</string>
+  <string name="forgot_password">Glemt adgangskode?</string>
+  <string name="signup">Opret en konto</string>
   <string name="logging_in_title">Logger på</string>
   <string name="logging_in_message">Vent…</string>
   <string name="login_success">Du er nu logget på!</string>
   <string name="login_failed">Det mislykkedes at logge på!</string>
+  <string name="upload_failed">Filen blev ikke fundet. Forsøg med en anden fil.</string>
   <string name="authentication_failed">Godkendelse mislykkedes!</string>
   <string name="uploading_started">Overførsel begyndt!</string>
   <string name="upload_completed_notification_title">%1$s overført!</string>
@@ -18,23 +35,30 @@
   <string name="upload_progress_notification_title_finishing">Afslutter uploadning af %1$s</string>
   <string name="upload_failed_notification_title">Overførsel af %1$s mislykkedes</string>
   <string name="upload_failed_notification_subtitle">Klik for at se</string>
-  <string name="title_activity_contributions" fuzzy="true">Mine uploads</string>
+  <plurals name="uploads_pending_notification_indicator">
+    <item quantity="one">%1$d fil overføres</item>
+    <item quantity="other">%1$d filer overføres</item>
+  </plurals>
+  <string name="title_activity_contributions">Mine seneste overførsler</string>
   <string name="contribution_state_queued">I kø</string>
   <string name="contribution_state_failed">Mislykkedes</string>
   <string name="contribution_state_in_progress">%1$d%% færdig</string>
   <string name="contribution_state_starting">Overfører</string>
   <string name="menu_from_gallery">Fra galleriet</string>
   <string name="menu_from_camera">Tag billede</string>
+  <string name="menu_nearby">I nærhenden</string>
   <string name="provider_contributions">Mine uploads</string>
   <string name="menu_share">Del</string>
   <string name="menu_open_in_browser">Åbn i browser</string>
   <string name="share_title_hint">Titel</string>
+  <string name="add_title_toast">Angiv venligt en titel for denne fil</string>
   <string name="share_description_hint">Beskrivelse</string>
   <string name="login_failed_network">Kan ikke logge på - netværksfejl</string>
   <string name="login_failed_username">Ude af stand til at logge på - tjek venligst dit brugernavn</string>
   <string name="login_failed_password">Ude af stand til at logge på - tjek venligst din adgangskode</string>
-  <string name="login_failed_throttled" fuzzy="true">Alt for mange mislykkede forsøg. Prøv igen om et par minutter</string>
+  <string name="login_failed_throttled">Alt for mange mislykkede forsøg. Prøv igen om et par minutter.</string>
   <string name="login_failed_blocked">Beklager, denne bruger er blevet blokeret på Commons</string>
+  <string name="login_failed_2fa_needed">Du skal angive din tofaktorgodkendelseskode.</string>
   <string name="login_failed_generic">Det mislykkedes at logge på</string>
   <string name="share_upload_button">Upload</string>
   <string name="multiple_share_base_title">Navngiv dette sæt</string>
@@ -42,42 +66,87 @@
   <string name="menu_upload_single">Upload</string>
   <string name="categories_search_text_hint">Søgekategorier</string>
   <string name="menu_save_categories">Gem</string>
+  <string name="refresh_button">Opdater</string>
+  <string name="gps_disabled">GPS er deaktiveret i din enhed. Ønsker du at aktivere den?</string>
+  <string name="enable_gps">Aktiver GPS</string>
+  <string name="contributions_subtitle_zero">Ingen overførelser endnu</string>
+  <plurals name="contributions_subtitle">
+    <item quantity="zero">\@string/contributions_subtitle_zero</item>
+    <item quantity="one">%1$d overførsel</item>
+    <item quantity="other">%1$d overførsler</item>
+  </plurals>
+  <plurals name="starting_multiple_uploads">
+    <item quantity="one">Starter %1$d overførsel</item>
+    <item quantity="other">Starter %1$d overførsler</item>
+  </plurals>
+  <plurals name="multiple_uploads_title">
+    <item quantity="one">%1$d overførsel</item>
+    <item quantity="other">%1$d overførsler</item>
+  </plurals>
   <string name="categories_not_found">Ingen kategorier matchende %1$s er fundet</string>
-  <string name="categories_skip_explanation">Tilføj kategorier for at gøre billederne mere synlig på Wikimedia Commons.</string>
+  <string name="categories_skip_explanation">Tilføj kategorier for at gøre billederne mere synlig på Wikimedia Commons. Tast for at tilføje kategorier.</string>
   <string name="categories_activity_title">Kategorier</string>
-  <string name="preference_tracking">Brugsrapporter</string>
-  <string name="preference_tracking_summary">Send brugsrapporter til Wikimedia, så vi kan forbedre denne app</string>
   <string name="title_activity_settings">Indstillinger</string>
+  <string name="title_activity_signup">Opret konto</string>
   <string name="menu_about">Om</string>
-  <string name="about_license" fuzzy="true">Open Source-software frigivet under &lt;a href=\" https://github.com/commons-app/apps-android-commons/blob/master/COPYING\"&gt;Apache License v2&lt;/a&gt;</string>
-  <string name="about_improve" fuzzy="true">Kildekode på &lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;GitHub&lt;/a&gt;. Fejlmeldinger på &lt;a href=\" https://github.com/commons-app/apps-android-commons/issues\"&gt;Github&lt;/a&gt;.</string>
-  <string name="about_privacy_policy">&lt;a href=\"https://wikimediafoundation.org/wiki/Privacy_policy\"&gt;Privacy policy&lt;/a&gt;</string>
+  <string name="about_license">Wikimedia Commons-programmet oprettet og udviklet af frivillige i Wikimediafællesskabet. Wikimedia Foundation er ikke involveret i oprettelse, udvikling eller vedligeholdelse af programmet.</string>
+  <string name="about_improve">Opret en ny &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;GitHub-sag&lt;/a&gt; for fejlrapporter og forslag.</string>
+  <string name="about_privacy_policy">&lt;u&gt;Privatlivspolitik&lt;/u&gt;</string>
+  <string name="about_credits">&lt;u&gt;Bidragsydere&lt;/u&gt;</string>
   <string name="title_activity_about">Om</string>
   <string name="menu_feedback">Send tilbagemelding (med e-mail)</string>
+  <string name="no_email_client">Ingen e-postklient installeret</string>
   <string name="provider_categories">Nyligt anvendte kategorier</string>
   <string name="waiting_first_sync">Venter på den første synkronisering…</string>
   <string name="no_uploads_yet">Du har endnu ikke uploadet nogen billeder.</string>
   <string name="menu_retry_upload">Forsøg igen</string>
   <string name="menu_cancel_upload">Annullér</string>
   <string name="share_license_summary">Billedet vil blive licenseret under %1$s</string>
+  <string name="media_upload_policy">Ved at indsende dette billeder erklærer jeg at det er mit eget arbejde, som ikke indeholder materialer med ophavsret eller selvportrætter og generelt overholder &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines\"&gt;Wikimedia Commons-politikkerne&lt;/a&gt;.</string>
   <string name="menu_download">Hent</string>
-  <string name="preference_license">Licens</string>
-  <string name="license_name_cc_by_sa" fuzzy="true">CC Navngivelse-DelPåSammeVilkår 3.0</string>
-  <string name="license_name_cc_by" fuzzy="true">CC Navngivelse 3.0</string>
+  <string name="preference_license">Standardlicens</string>
+  <string name="use_previous">Brug forrige titel/beskrivelse</string>
+  <string name="allow_gps">Hent automatisk nuværende placering</string>
+  <string name="allow_gps_summary">Hent nuværende placering for at tilbyde kategoriforslag hvis billedet ikke er geografisk mærket</string>
+  <string name="preference_theme">Nat-tilstand</string>
+  <string name="preference_theme_summary">Brug mørkt tema</string>
+  <string name="license_name_cc_by_sa_four"> Attribution-ShareAlike 4.0</string>
+  <string name="license_name_cc_by_four"> Attribution 4.0</string>
+  <string name="license_name_cc_by_sa"> Attribution-ShareAlike 3.0</string>
+  <string name="license_name_cc_by"> Attribution 3.0</string>
   <string name="license_name_cc0">CC0</string>
   <string name="license_name_cc_by_sa_3_0">CC BY-SA 3.0</string>
   <string name="license_name_cc_by_sa_3_0_at">CC BY-SA 3.0 (Østrig)</string>
   <string name="license_name_cc_by_sa_3_0_de">CC BY-SA 3.0 (Tyskland)</string>
   <string name="license_name_cc_by_sa_3_0_ee">CC BY-SA 3.0 (Estland)</string>
-  <string name="license_name_cc_by_sa_3_0_es">CC-BY-SA 3.0 (Spanien)</string>
+  <string name="license_name_cc_by_sa_3_0_es">CC BY-SA 3.0 (Spanien)</string>
   <string name="license_name_cc_by_sa_3_0_hr">CC BY-SA 3.0 (Kroatien)</string>
-  <string name="license_name_cc_by_sa_3_0_lu">CC-BY-SA 3.0 (Luxemburg)</string>
+  <string name="license_name_cc_by_sa_3_0_lu">CC BY-SA 3.0 (Luxemburg)</string>
   <string name="license_name_cc_by_sa_3_0_nl">CC BY-SA 3.0 (Holland)</string>
   <string name="license_name_cc_by_sa_3_0_no">CC BY-SA 3.0 (Norge)</string>
   <string name="license_name_cc_by_sa_3_0_pl">CC BY-SA 3.0 (Polen)</string>
   <string name="license_name_cc_by_sa_3_0_ro">CC BY-SA 3.0 (Rumænien)</string>
   <string name="license_name_cc_by_3_0">CC BY 3.0</string>
+  <string name="license_name_cc_by_sa_4_0">CC BY-SA 4.0</string>
+  <string name="license_name_cc_by_4_0">CC BY 4.0</string>
   <string name="license_name_cc_zero">CC Zero</string>
+  <string name="tutorial_1_text">Wikimedia Commons lagrer de fleste billeder, som bruges på Wikipedia.</string>
+  <string name="tutorial_1_subtext">Dine billeder hjælper med til at uddanne folk rundt om i verden!</string>
+  <string name="tutorial_2_text">Læg venligst kun billeder op som er taget af dig selv:</string>
+  <string name="tutorial_2_subtext">Naturlige objekter (blomster, dyr, bjerge)\n• Nyttige objekter (cykler, togstationer)\n• Berømte personer (din borgmester, olympiske atleter)</string>
+  <string name="tutorial_2_subtext_1">Naturlige objekter (blomster, dyr, bjerge)</string>
+  <string name="tutorial_2_subtext_2">Nyttige objekter (cykler, togstationer)</string>
+  <string name="tutorial_2_subtext_3">Berømte personer (din borgmester, olympiske atleter)</string>
+  <string name="tutorial_3_text">Overfør venligst IKKE:</string>
+  <string name="tutorial_3_subtext">- Selvportrætter eller billeder af dine venner\n- Billeder du har hentet fra internettet\n- Skærmbilleder af dine proprietære programmer</string>
+  <string name="tutorial_3_subtext_1">Selvportrætter eller billeder af dine venner</string>
+  <string name="tutorial_3_subtext_2">Billeder du har hentet fra internettet</string>
+  <string name="tutorial_3_subtext_3">Skærmbilleder af proprietære programmer</string>
+  <string name="tutorial_4_text">Eksempel på overførsel:</string>
+  <string name="tutorial_4_subtext">- Titel: Sydneys Operahus\n- Beskrivelse: Operahuset i Sydney set fra den anden siden af\n  bugten\n- Kategorier: Operahuset i Sydney fra vest, Operahuset i Sydney\n  udefra</string>
+  <string name="tutorial_4_subtext_1">Titel: Sydneys operahus</string>
+  <string name="tutorial_4_subtext_2">Beskrivelse: Sydneys operahus set fra den anden side af bugten</string>
+  <string name="tutorial_4_subtext_3">Kategorier: Sydneys operahus fra vest, Sydneys operahus eksterne visninger</string>
   <string name="welcome_wikipedia_text">Bidrag med dine billeder. Hjælp Wikipedias artikler med at komme til live!</string>
   <string name="welcome_wikipedia_subtext">Billeder på Wikipedia kommer fra Wikimedia Commons.</string>
   <string name="welcome_copyright_text">Dine billeder hjælper med til at uddanne folk rundt om i verden.</string>
@@ -90,4 +159,91 @@
   <string name="detail_description_empty">Ingen beskrivelse</string>
   <string name="detail_license_empty">Ukendt licens</string>
   <string name="menu_refresh">Opdater</string>
+  <string name="read_storage_permission_rationale" fuzzy="true">Krævet tilladelse: Læs eksternt lager. Programmet kan ikke fungere uden denne tilladelse.</string>
+  <string name="write_storage_permission_rationale" fuzzy="true">Krævet tilladelse: Skriv til eksternt lager. Program kan ikke fungere uden denne funktion.</string>
+  <string name="location_permission_rationale">Valgfri tilladelse: Hent nuværende position for kategoriforslag</string>
+  <string name="ok">O.k.</string>
+  <string name="title_activity_nearby">Steder i nærheden</string>
+  <string name="no_nearby">Ingen steder i nærheden fundet</string>
+  <string name="warning">Advarsel</string>
+  <string name="file_exists">Denne fil findes allerede på Commons. Er du sikker på, at du ønsker at fortsætte?</string>
+  <string name="yes">Ja</string>
+  <string name="no">Nej</string>
+  <string name="media_detail_title">Titel</string>
+  <string name="media_detail_media_title">Medietitel</string>
+  <string name="media_detail_description">Beskrivelse</string>
+  <string name="media_detail_description_explanation">Beskrivelse af mediet skal være her. Denne kan potentielt være ganske lang, og vil behøve at strække sig over flere linjer. Vi håber dog, at det ser godt nok ud.</string>
+  <string name="media_detail_uploaded_date">Overførselsdato</string>
+  <string name="media_detail_license">Licens</string>
+  <string name="media_detail_coordinates">Koordinater</string>
+  <string name="media_detail_coordinates_empty">Ingen angivet</string>
+  <string name="become_a_tester_title">Bliv en betatester</string>
+  <string name="become_a_tester_description">Registrer dig på vores betakanal på Google Play og få tidlig tilgang til nye funktioner og feilrettelser</string>
+  <string name="_2fa_code">2FA-kode</string>
+  <string name="number_of_uploads">Grænse for mine seneste overførelser</string>
+  <string name="maximum_limit">Maksimumgrænse</string>
+  <string name="maximum_limit_alert">Kan ikke vise mere end 500</string>
+  <string name="set_limit">Angiv grænse for seneste overførelser</string>
+  <string name="login_failed_2fa_not_supported">Tofaktorgodkendelse er ikke understøttet i øjeblikket.</string>
+  <string name="logout_verification">Ønsker du at logge ud?</string>
+  <string name="commons_logo">Commons-logo</string>
+  <string name="commons_website">Commons-hjemmeside</string>
+  <string name="commons_facebook">Commons Facebook-side</string>
+  <string name="commons_github">Commons Github-kildekode</string>
+  <string name="background_image">Baggrundsbillede</string>
+  <string name="mediaimage_failed">Mediebillede mislykkedes</string>
+  <string name="no_image_found">Intet billede fundet</string>
+  <string name="upload_image">Overfør billede</string>
+  <string name="welcome_image_mount_zao">Monter Zao</string>
+  <string name="welcome_image_llamas">Lamaer</string>
+  <string name="welcome_image_rainbow_bridge">Regnbuebro</string>
+  <string name="welcome_image_tulip">Tulipan</string>
+  <string name="welcome_image_no_selfies">Ingen selvportrætter</string>
+  <string name="welcome_image_proprietary">Proprietært billede</string>
+  <string name="welcome_image_welcome_wikipedia">Velkommen til Wikipedia</string>
+  <string name="welcome_image_welcome_copyright">Velkommen til ophavsret</string>
+  <string name="welcome_image_sydney_opera_house">Operahuset i Sydney</string>
+  <string name="cancel">Afbryd</string>
+  <string name="navigation_drawer_open">Åbn</string>
+  <string name="navigation_drawer_close">Luk</string>
+  <string name="navigation_item_home">Hjem</string>
+  <string name="navigation_item_upload">Overfør</string>
+  <string name="navigation_item_nearby">I nærheden</string>
+  <string name="navigation_item_about">Om</string>
+  <string name="navigation_item_settings">Indstillinger</string>
+  <string name="navigation_item_feedback">Tilbagemelding</string>
+  <string name="navigation_item_logout">Log af</string>
+  <string name="navigation_item_info">Øvelse</string>
+  <string name="navigation_item_notification">Påmindelser</string>
+  <string name="nearby_needs_permissions">Steder i nærheden kan ikke vises uden placeringsrettigheder</string>
+  <string name="no_description_found">ingen beskrivelse fundet</string>
+  <string name="nearby_info_menu_commons_article">Commons-filside</string>
+  <string name="nearby_info_menu_wikidata_article">Wikibase-emne</string>
+  <string name="error_while_cache">Fejl under mellemlagring af billeder</string>
+  <string name="title_info">En unik beskrivelse for filen, som vil fungere som et filnavn. Du kan bruge normalt sprog med mellemrum. Udelad filendelsen.</string>
+  <string name="description_info">Beskriv mediet så godt som muligt: Hvor blev det taget? Hvad viser det? Hvad er konteksten? Beskriv objekterne eller personerne. Giv information som ikke nemt kan gættes, for eksempel hvornår på dagen billedet blev taget, om det er et landskabsbillede. Om billedet viser noget usædvanligt, forklar hvad som gør det usædvanlig.</string>
+  <string name="upload_image_too_dark">Billedet er for mørkt. Er du sikker på, at du ønsker at overføre det? Wikimedia Commons er kun for billeder encyklopædisk værdi.</string>
+  <string name="upload_image_blurry">Dette billede er sløret. Er du sikker på, at du ønsker at overføre det? Wikimedia Commons er kun for billeder med encyklopædisk værdi.</string>
+  <string name="give_permission">Giv tilladelse</string>
+  <string name="use_external_storage">Brug eksternt lager</string>
+  <string name="use_external_storage_summary">Gem billeder taget med din enheds program på kameraet</string>
+  <string name="login_to_your_account">Log ind på din konto</string>
+  <string name="send_log_file">Send logfil</string>
+  <string name="send_log_file_description">Send logfil til udviklerne via e-post</string>
+  <string name="no_web_browser">Ingen internetbrowser fundet til at åbne adresse</string>
+  <string name="null_url">Fejl! Adressen blev ikke fundet</string>
+  <string name="nominate_deletion">Nomineret til sletning</string>
+  <string name="view_browser">Se i browser</string>
+  <string name="nearby_location_has_not_changed">Sted er ikke ændret.</string>
+  <string name="nearby_location_not_available">Sted ikke tilgængeligt.</string>
+  <string name="location_permission_rationale_nearby">Tilladelse kræves for at vise en liste over steder i nærheden</string>
+  <string name="get_directions">FÅ RUTEHJÆLP</string>
+  <string name="read_article">LÆS ARTIKEL</string>
+  <string name="notifications_welcome">Velkommen til Wikimedia Commons, %1$s! Vi er glad for, at du er her.</string>
+  <string name="notifications_talk_page_message">%1$s efterlod en besked på din diskussionsside</string>
+  <string name="notifications_thank_you_edit">Tak fordi du lavede en redigering</string>
+  <string name="notifications_mention">%1$s nævnte dig på %2$s.</string>
+  <string name="toggle_view_button">Skift visning</string>
+  <string name="about_faq" fuzzy="true">Ofte stillede spørgsmål</string>
+  <string name="welcome_skip_button">Udelad øvelse</string>
 </resources>

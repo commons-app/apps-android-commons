@@ -1,20 +1,17 @@
 package fr.free.nrw.commons.upload;
 
+import android.app.Activity;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.v7.app.AlertDialog;
 
-import org.mediawiki.api.ApiResult;
-
 import java.io.IOException;
-import java.util.ArrayList;
+import java.lang.ref.WeakReference;
 
-import fr.free.nrw.commons.CommonsApplication;
-import fr.free.nrw.commons.MWApi;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.contributions.ContributionsActivity;
+import fr.free.nrw.commons.mwapi.MediaWikiApi;
 import timber.log.Timber;
 
 /**
@@ -22,6 +19,7 @@ import timber.log.Timber;
  * Displays a warning to the user if the file already exists on Commons
  */
 public class ExistingFileAsync extends AsyncTask<Void, Void, Boolean> {
+
     interface Callback {
         void onResult(Result result);
     }
@@ -32,14 +30,18 @@ public class ExistingFileAsync extends AsyncTask<Void, Void, Boolean> {
         DUPLICATE_CANCELLED
     }
 
+    private final WeakReference<Activity> activity;
+    private final MediaWikiApi api;
     private final String fileSha1;
-    private final Context context;
+    private final WeakReference<Context> context;
     private final Callback callback;
 
-    public ExistingFileAsync(String fileSha1, Context context, Callback callback) {
+    public ExistingFileAsync(WeakReference<Activity> activity, String fileSha1, WeakReference<Context> context, Callback callback, MediaWikiApi mwApi) {
+        this.activity = activity;
         this.fileSha1 = fileSha1;
         this.context = context;
         this.callback = callback;
+        this.api = mwApi;
     }
 
     @Override
@@ -49,26 +51,16 @@ public class ExistingFileAsync extends AsyncTask<Void, Void, Boolean> {
 
     @Override
     protected Boolean doInBackground(Void... voids) {
-        MWApi api = CommonsApplication.getInstance().getMWApi();
-        ApiResult result;
 
         // https://commons.wikimedia.org/w/api.php?action=query&list=allimages&format=xml&aisha1=801957214aba50cb63bb6eb1b0effa50188900ba
+        boolean fileExists;
         try {
-            result = api.action("query")
-                    .param("format", "xml")
-                    .param("list", "allimages")
-                    .param("aisha1", fileSha1)
-                    .get();
-            Timber.d("Searching Commons API for existing file: %s", result);
+            String fileSha1 = this.fileSha1;
+            fileExists = api.existingFile(fileSha1);
         } catch (IOException e) {
             Timber.e(e, "IO Exception: ");
             return false;
         }
-
-        ArrayList<ApiResult> resultNodes = result.getNodes("/api/query/allimages/img");
-        Timber.d("Result nodes: %s", resultNodes);
-
-        boolean fileExists = !resultNodes.isEmpty();
 
         Timber.d("File already exists in Commons: %s", fileExists);
         return fileExists;
@@ -81,27 +73,21 @@ public class ExistingFileAsync extends AsyncTask<Void, Void, Boolean> {
         // If file exists, display warning to user.
         // Use soft warning for now (user able to choose to proceed) until have determined that implementation works without bugs
         if (fileExists) {
-            AlertDialog.Builder builder = new AlertDialog.Builder(context);
+            AlertDialog.Builder builder = new AlertDialog.Builder(context.get());
             builder.setMessage(R.string.file_exists)
                     .setTitle(R.string.warning);
-            builder.setPositiveButton(R.string.no, new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int id) {
-                    //Go back to ContributionsActivity
-                    Intent intent = new Intent(context, ContributionsActivity.class);
-                    context.startActivity(intent);
-                    callback.onResult(Result.DUPLICATE_CANCELLED);
-                }
+            builder.setPositiveButton(R.string.no, (dialog, id) -> {
+                //Go back to ContributionsActivity
+                Intent intent = new Intent(context.get(), ContributionsActivity.class);
+                context.get().startActivity(intent);
+                callback.onResult(Result.DUPLICATE_CANCELLED);
             });
-            builder.setNegativeButton(R.string.yes, new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int id) {
-                    callback.onResult(Result.DUPLICATE_PROCEED);
-                }
-            });
+            builder.setNegativeButton(R.string.yes, (dialog, id) -> callback.onResult(Result.DUPLICATE_PROCEED));
 
             AlertDialog dialog = builder.create();
-            dialog.show();
+            if (!activity.get().isFinishing()) {
+                dialog.show();
+            }
         } else {
             callback.onResult(Result.NO_DUPLICATE);
         }

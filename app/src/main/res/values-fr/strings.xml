@@ -1,10 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- Authors:
+* Fitoschido
+* Gomoko
+* Happy13241
+* Jean-Frédéric
+* KATRINE1992
+* Metroitendo
+* Nicolas Raoul
+* Orikrin1998
+* Patrick Star
+* Sherbrooke
+* Thibaut120094
+* Tpt
+* Urhixidur
+* VIGNERON
+* Wladek92
+* Y-M D
+-->
 <resources>
+  <string name="preference_category_appearance">Apparence</string>
+  <string name="preference_category_general">Général</string>
+  <string name="preference_category_feedback">Donner son avis</string>
+  <string name="preference_category_location">Emplacement</string>
   <string name="app_name">Commons</string>
+  <string name="bullet">•</string>
   <string name="menu_settings">Paramètres</string>
   <string name="username">Nom d’utilisateur</string>
   <string name="password">Mot de passe</string>
+  <string name="login_credential">Connexion à votre compte Commons Beta</string>
   <string name="login">Se connecter</string>
+  <string name="forgot_password">Mot de passe oublié ?</string>
   <string name="signup">S’inscrire</string>
   <string name="logging_in_title">Connexion</string>
   <string name="logging_in_message">Veuillez patienter…</string>
@@ -21,13 +46,13 @@
   <string name="upload_failed_notification_title">Le téléversement de %1$s a échoué</string>
   <string name="upload_failed_notification_subtitle">Appuyer pour afficher</string>
   <plurals name="uploads_pending_notification_indicator">
-    <item quantity="one">%d fichier en cours de téléversement</item>
-    <item quantity="other">%d fichiers en cours de téléversement</item>
+    <item quantity="one">%1$d fichier en cours de téléversement</item>
+    <item quantity="other">%1$d fichiers en cours de téléversement</item>
   </plurals>
   <string name="title_activity_contributions">Mes téléversements récents</string>
   <string name="contribution_state_queued">Mis en file d\'attente</string>
   <string name="contribution_state_failed">Échoué</string>
-  <string name="contribution_state_in_progress">%1$d%% effectué</string>
+  <string name="contribution_state_in_progress">%1$d %% effectué</string>
   <string name="contribution_state_starting">Téléversement en cours</string>
   <string name="menu_from_gallery">Depuis la galerie</string>
   <string name="menu_from_camera">Prendre une photo</string>
@@ -36,6 +61,7 @@
   <string name="menu_share">Partager</string>
   <string name="menu_open_in_browser">Afficher dans le navigateur</string>
   <string name="share_title_hint">Titre</string>
+  <string name="add_title_toast">Veuillez donner un titre à ce fichier</string>
   <string name="share_description_hint">Description</string>
   <string name="login_failed_network">Impossible de se connecter — panne de réseau</string>
   <string name="login_failed_username">Impossible de se connecter — veuillez vérifier votre nom d’utilisateur</string>
@@ -51,34 +77,34 @@
   <string name="categories_search_text_hint">Rechercher des catégories</string>
   <string name="menu_save_categories">Enregistrer</string>
   <string name="refresh_button">Rafraîchir</string>
+  <string name="display_list_button">Liste</string>
   <string name="gps_disabled">Le GPS est désactivé sur votre appareil. Voulez-vous l’activer ?</string>
   <string name="enable_gps">Activer le GPS</string>
   <string name="contributions_subtitle_zero">Encore aucun téléversement</string>
   <plurals name="contributions_subtitle">
     <item quantity="zero">\@string/contributions_subtitle_zero</item>
-    <item quantity="one">%d téléversement</item>
-    <item quantity="other">%d téléversements</item>
+    <item quantity="one">%1$d téléversement</item>
+    <item quantity="other">%1$d téléversements</item>
   </plurals>
   <plurals name="starting_multiple_uploads">
-    <item quantity="one">%d téléversement démarré</item>
-    <item quantity="other">%d téléversements démarrés</item>
+    <item quantity="one">%1$d téléversement démarré</item>
+    <item quantity="other">%1$d téléversements démarrés</item>
   </plurals>
   <plurals name="multiple_uploads_title">
-    <item quantity="one">%d téléversement</item>
-    <item quantity="other">%d téléversements</item>
+    <item quantity="one">%1$d téléversement</item>
+    <item quantity="other">%1$d téléversements</item>
   </plurals>
   <string name="categories_not_found">Aucune catégorie correspondant à %1$s trouvée</string>
-  <string name="categories_skip_explanation">Ajoutez des catégories pour rendre vos images plus simple à trouver sur Wikimedia Commons. \n\nCommencer à ajouter des catégories. \nAppuyez sur ce message (ou retournez en arrière) pour sauter cette étape.</string>
+  <string name="categories_skip_explanation">Ajoutez des catégories pour rendre vos images plus simples à trouver sur Wikimedia Commons. \nCommencer à ajouter des catégories.</string>
   <string name="categories_activity_title">Catégories</string>
-  <string name="preference_tracking">Rapports d’utilisation</string>
-  <string name="preference_tracking_summary">Envoyer les rapports d’utilisation à Wikimedia pour nous aider à améliorer l’application</string>
   <string name="title_activity_settings">Paramètres</string>
   <string name="title_activity_signup">S’inscrire</string>
+  <string name="title_activity_featured_images">Images en vedette</string>
   <string name="menu_about">À propos</string>
-  <string name="about_license">Les logiciels Open Source sont publiés sous la &lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/COPYING\"&gt;licence Apache v2&lt;/a&gt;. Wikimédia Commons et son logo sont des marques déposées de la Fondation Wikimédia et sont utilisées avec l’autorisation de la Fondation Wikimédia. Nous ne sommes pas approuvés par ou affiliés à la Fondation Wikimédia.</string>
-  <string name="about_improve">&lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;Sources&lt;/a&gt; et &lt;a href=\"https://commons-app.github.io/\"&gt;site web&lt;/a&gt; sur GitHub. Créer un nouveau &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;signalement GitHub&lt;/a&gt; pour signales des bogues ou des suggestions.</string>
-  <string name="about_privacy_policy">&lt;a href=\"https://wikimediafoundation.org/wiki/Privacy_policy\"&gt;Politique de confidentialité&lt;/a&gt;</string>
-  <string name="about_credits">&lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/CREDITS\"&gt;Remerciements&lt;/a&gt;</string>
+  <string name="about_license">L’application Wikimedia Commons est une application open source créée et tenue à jour par les bénéficiaires et volontaires de la communauté Wikimedia. La fondation Wikimedia n’est pas associée à la création, le développement ou l’entretien de l’application.</string>
+  <string name="about_improve">Créer un nouveau &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;signalement GitHub&lt;/a&gt; pour signaler des bogues ou des suggestions.</string>
+  <string name="about_privacy_policy">&lt;u&gt;Règles de confidentialité&lt;/u&gt;</string>
+  <string name="about_credits">&lt;u&gt;Crédits&lt;/u&gt;</string>
   <string name="title_activity_about">À propos</string>
   <string name="menu_feedback">Envoyer vos commentaires (par courriel)</string>
   <string name="no_email_client">Aucun client de courriel installé</string>
@@ -88,8 +114,9 @@
   <string name="menu_retry_upload">Réessayer</string>
   <string name="menu_cancel_upload">Annuler</string>
   <string name="share_license_summary">Cette image sera sous licence %1$s</string>
+  <string name="media_upload_policy">En soumettant cette image, je déclare qu\'elle est l\'oeuvre de mon travail, qu\'elle ne contient pas d\'élément protégé par les droits d\'auteurs ni de portraits, et qu\'elle est par ailleur conforme à  &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines\"&gt;la politique de Wikimedia Commons&lt;/a&gt;.</string>
   <string name="menu_download">Télécharger</string>
-  <string name="preference_license">Licence</string>
+  <string name="preference_license">Licence par défaut</string>
   <string name="use_previous">Utiliser le titre ou la description précédent</string>
   <string name="allow_gps">Obtenir automatiquement l’emplacement actuel</string>
   <string name="allow_gps_summary">Récupérer l’emplacement actuel pour proposer des suggestions de catégorie si l’image n’est pas marquée géographiquement</string>
@@ -115,14 +142,23 @@
   <string name="license_name_cc_by_sa_4_0">CC BY-SA 4.0</string>
   <string name="license_name_cc_by_4_0">CC BY 4.0</string>
   <string name="license_name_cc_zero">CC Zéro</string>
-  <string name="tutorial_1_text">Wikimédia Communs héberge la plupart des images qui sont utilisées dans Wikipédia</string>
+  <string name="tutorial_1_text">Wikimedia Commons héberge la plupart des images qui sont utilisées dans Wikipédia.</string>
   <string name="tutorial_1_subtext">Vos images aident à éduquer les gens dans le monde entier !</string>
   <string name="tutorial_2_text">Veuillez téléverser des images qui sont prises ou créées entièrement par vous :</string>
-  <string name="tutorial_2_subtext">- Objets naturels (fleurs, animaux, montagnes) \n- Objets utiles (bicyclettes, gares ferroviaires) \n- Personnes célèbres (votre maire, les athlètes olympiques que vous avez rencontrés)</string>
+  <string name="tutorial_2_subtext">Objets naturels (fleurs, animaux, montagnes) \n• Objets utiles (bicyclettes, gares ferroviaires) \n• Personnes célèbres (votre maire, les athlètes olympiques que vous avez rencontrés)</string>
+  <string name="tutorial_2_subtext_1">Objets naturels (fleurs, animaux, montagnes)</string>
+  <string name="tutorial_2_subtext_2">Objets utiles (vélos, gares)</string>
+  <string name="tutorial_2_subtext_3">Personnes célèbres (votre maire, les athlètes olympiques que vous avez rencontrés)</string>
   <string name="tutorial_3_text">Veuillez ne PAS téléverser :</string>
   <string name="tutorial_3_subtext">- des selfies ou des images de vos amis \n- des images téléchargées sur Internet\n- des copies d’écran d’applications propriétaires</string>
+  <string name="tutorial_3_subtext_1">Auto-portraits ou photos de vos amis</string>
+  <string name="tutorial_3_subtext_2">Images que vous avez téléchargées d\'Internet</string>
+  <string name="tutorial_3_subtext_3">Captures d\'écran d\'applications propriétaires</string>
   <string name="tutorial_4_text">Exemple de téléversement :</string>
-  <string name="tutorial_4_subtext">- Titre : L’opéra de Sydney\n- Description : L’opéra de Sydney vu à travers la baie\n- Catégories : Opéra de Sydney, Opéra de Sydney depuis l’ouest, vues à distance de l’Opéra de Sydney</string>
+  <string name="tutorial_4_subtext">- Titre : Opéra de Sydney\n- Description : L’opéra de Sydney vu à travers la baie\n- Catégories : Opéra de Sydney depuis l’ouest, vues à distance de l’Opéra de Sydney</string>
+  <string name="tutorial_4_subtext_1">Titre : Opéra Sidney</string>
+  <string name="tutorial_4_subtext_2">Description: Opéra de Sydney tel que vu de l\'autre coté de la baie</string>
+  <string name="tutorial_4_subtext_3">Catégories: Opéra de Sydney de l\'ouest,  Opéra de Sydney vues éloignées</string>
   <string name="welcome_wikipedia_text">Contribuez avec vos images. Aidez les articles de Wikipédia à prendre vie !</string>
   <string name="welcome_wikipedia_subtext">Les images sur Wikipédia viennent de Wikimedia Commons.</string>
   <string name="welcome_copyright_text">Vos images aident à éduquer les gens dans le monde entier.</string>
@@ -135,24 +171,28 @@
   <string name="detail_description_empty">Aucune description</string>
   <string name="detail_license_empty">Licence inconnue</string>
   <string name="menu_refresh">Rafraîchir</string>
-  <string name="storage_permission_rationale">Autorisation nécessaire : Lire un stockage externe. L’application ne peut pas fonctionner sans cela.</string>
+  <string name="read_storage_permission_rationale">Autorisation nécessaire : Lire un stockage externe. L’application ne peut pas accéder à votre galerie sans cela.</string>
+  <string name="write_storage_permission_rationale">Permission obligatoire : Écriture sur stockage externe. L’application ne peut pas accéder à votre appareil photo sans cela.</string>
   <string name="location_permission_rationale">Autorisation facultative : Obtenir l’emplacement actuel pour des suggestions de catégorie</string>
   <string name="ok">OK</string>
   <string name="title_activity_nearby">Endroits à proximité</string>
   <string name="no_nearby">Rien trouvé dans le voisinage</string>
   <string name="warning">Avertissement</string>
-  <string name="file_exists">Ce fichier existe déjà sur Communs. Êtes-vous sûr de vouloir continuer ?</string>
+  <string name="file_exists">Ce fichier existe déjà sur Commons. Êtes-vous sûr de vouloir continuer ?</string>
   <string name="yes">Oui</string>
   <string name="no">Non</string>
   <string name="media_detail_title">Titre</string>
   <string name="media_detail_media_title">Titre du média</string>
   <string name="media_detail_description">Description</string>
   <string name="media_detail_description_explanation">La description du média vient ici. Cela peut être potentiellement assez long, et devra être réparti sur plusieurs lignes. Nous espérons que cela restera joli néanmoins.</string>
+  <string name="media_detail_author">Auteur</string>
+  <string name="media_detail_author_explanation">Le nom de l’utilisateur auteur d’une image en vedette va ici.</string>
   <string name="media_detail_uploaded_date">Date de téléversement</string>
+  <string name="media_detail_license">Licence</string>
+  <string name="media_detail_coordinates">Coordonnées</string>
+  <string name="media_detail_coordinates_empty">Non fourni</string>
   <string name="become_a_tester_title">Devenir un bêta-testeur</string>
   <string name="become_a_tester_description">S’inscrire à notre canal bêta sur Google Play et obtenir un accès anticipé aux nouvelles fonctionnalités et corrections de bogue</string>
-  <string name="use_wikidata">Utiliser Wikidata</string>
-  <string name="use_wikidata_summary">(Attention : désactiver cela pourrait provoquer une consommation importante de données par mobile)</string>
   <string name="_2fa_code">Code 2FA</string>
   <string name="number_of_uploads">Ma limite de téléversements récents</string>
   <string name="maximum_limit">Limite maximale</string>
@@ -160,7 +200,10 @@
   <string name="set_limit">Fixer la limite de téléversement récent</string>
   <string name="login_failed_2fa_not_supported">L’authentification à deux facteurs n’est pas prise en charge pour le moment.</string>
   <string name="logout_verification">Voulez-vous vraiment vous déconnecter ?</string>
-  <string name="commons_logo">Logo de Communs</string>
+  <string name="commons_logo">Logo de Commons</string>
+  <string name="commons_website">Site web de Communs</string>
+  <string name="commons_facebook">Page Facebook de Communs</string>
+  <string name="commons_github">Code source Github de Communs</string>
   <string name="background_image">Image de fond</string>
   <string name="mediaimage_failed">Échec sur l’image du média</string>
   <string name="no_image_found">Aucune image trouvée</string>
@@ -185,8 +228,55 @@
   <string name="navigation_item_feedback">Commentaire</string>
   <string name="navigation_item_logout">Déconnexion</string>
   <string name="navigation_item_info">Tutoriel</string>
+  <string name="navigation_item_notification">Notifications</string>
+  <string name="navigation_item_featured_images">Mis en vedette</string>
   <string name="nearby_needs_permissions">Les endroits proches ne peuvent pas être affichés si vous ne partagez pas votre position géographique.</string>
   <string name="no_description_found">aucune description trouvée</string>
-  <string name="nearby_info_menu_commons_article">Article de Communs</string>
+  <string name="nearby_info_menu_commons_article">Page des fichiers de Commons</string>
   <string name="nearby_info_menu_wikidata_article">Élément de Wikidata</string>
+  <string name="nearby_info_menu_wikipedia_article">Article Wikipédia</string>
+  <string name="error_while_cache">Erreur en mettant les images en cache</string>
+  <string name="title_info">Un titre descriptif unique pour le fichier, qui servira de nom de fichier. Vous pouvez utiliser un langage simple avec des espaces. N’incluez pas l’extension du fichier</string>
+  <string name="description_info">Veuillez décrire le média autant que possible : Où a-t-il été enregistré ? Que montre-t-il ? Quel est le contexte ? Veuillez décrire les objets ou les personnes. Révélez les informations qui ne peuvent pas être devinées facilement, par exemple l’heure de la journée si c’est un paysage. Si le média montre quelque chose d’inhabituel, veuillez expliquer ce qui le rend exceptionnel.</string>
+  <string name="upload_image_too_dark">Cette image est trop sombre, êtes-vous sûr de vouloir la télécharger ? Wikimédia Communs n’est que pour les images avec une valeur encyclopédique.</string>
+  <string name="upload_image_blurry">Cette image est floue, êtes-vous sûr de vouloir la télécharger ? Wikimédia Communs n’est que pour les images ayant une valeur encyclopédique.</string>
+  <string name="give_permission">Accorder le droit</string>
+  <string name="use_external_storage">Utiliser le stockage externe</string>
+  <string name="use_external_storage_summary">Enregistrer les images prises avec l’appareil photo de votre appareil</string>
+  <string name="login_to_your_account">Connectez-vous à votre compte</string>
+  <string name="send_log_file">Envoyer le journal</string>
+  <string name="send_log_file_description">Envoyer le journal aux développeurs par courriel</string>
+  <string name="no_web_browser">Pas d\'afficheur web trouvé pour ouvrir l\'URL</string>
+  <string name="null_url">Erreur! URL non trouvée</string>
+  <string name="nominate_deletion">Proposer pour suppression</string>
+  <string name="nominated_for_deletion">Cette image a été citée pour suppression.</string>
+  <string name="nominated_see_more"/>
+  <string name="view_browser">Afficher dans le navigateur</string>
+  <string name="nearby_location_has_not_changed">L\'emplacement n\'a pas changé.</string>
+  <string name="nearby_location_not_available">Emplacement non disponible.</string>
+  <string name="location_permission_rationale_nearby">Une permission est requise pour afficher une liste de lieux relatifs</string>
+  <string name="get_directions">OBTENIR DES DIRECTIVES</string>
+  <string name="read_article">LIRE L’ARTICLE</string>
+  <string name="notifications_welcome">Bienvenue sur Wikimedia Commons, %1$s! Nous sommes heureux que vous soyez venu.</string>
+  <string name="notifications_talk_page_message">%1$s a laissé un message sur votre page de discussion</string>
+  <string name="notifications_thank_you_edit">Merci de faire une modification</string>
+  <string name="notifications_mention">%1$s vous a mentionné sur %2$s .</string>
+  <string name="toggle_view_button">Basculer l’affichage</string>
+  <string name="nearby_directions">DIRECTIONS</string>
+  <string name="nearby_wikidata">WIKIDATA</string>
+  <string name="nearby_wikipedia">WIKIPÉDIA</string>
+  <string name="nearby_commons">COMMUNS</string>
+  <string name="about_rate_us">&lt;u&gt;Votre appréciation&lt;/u&gt;</string>
+  <string name="about_faq">&lt;u&gt;FAQ&lt;/u&gt;</string>
+  <string name="welcome_skip_button">Sauter le tutoriel</string>
+  <string name="no_internet">Internet indisponible</string>
+  <string name="internet_established">Internet disponible</string>
+  <string name="error_notifications">Erreur sur recherche des notifications</string>
+  <string name="no_notifications">Pas de notification trouvée</string>
+  <string name="about_translate">&lt;u&gt;Traduire&lt;/u&gt;</string>
+  <string name="about_translate_title">Langues</string>
+  <string name="about_translate_message">Sélectionner la langue pour laquelle vous voulez soumettre des traductions</string>
+  <string name="about_translate_proceed">Continuer</string>
+  <string name="about_translate_cancel">Annuler</string>
+  <string name="retry">Réessayer</string>
 </resources>

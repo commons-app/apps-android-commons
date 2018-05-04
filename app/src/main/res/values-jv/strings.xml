@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- Authors:
+* NoiX180
+-->
 <resources>
   <string name="app_name">Commons</string>
   <string name="menu_settings">Setèlan</string>
@@ -20,7 +23,7 @@
   <string name="upload_progress_notification_title_finishing">Rampung ngunggah %1$s</string>
   <string name="upload_failed_notification_title">Wurung ngunggah %1$s</string>
   <string name="upload_failed_notification_subtitle">Tunyuk saperlu ndeleng</string>
-  <plurals name="uploads_pending_notification_indicator">
+  <plurals name="uploads_pending_notification_indicator" fuzzy="true">
     <item quantity="one">%d barkas lagi diunggah</item>
   </plurals>
   <string name="title_activity_contributions">Unggahanku Sing Anyar</string>
@@ -53,29 +56,27 @@
   <string name="gps_disabled">GPS dipatèni ing pirantiné panjenengan. Panjenengan arep ngurubaké?</string>
   <string name="enable_gps">Urubaké GPS</string>
   <string name="contributions_subtitle_zero">Durung ana unggahan</string>
-  <plurals name="contributions_subtitle">
+  <plurals name="contributions_subtitle" fuzzy="true">
     <item quantity="zero">\@string/contributions_subtitle_zero</item>
-    <item quantity="one">%d unggahan</item>
-    <item quantity="other">%d unggahan</item>
+    <item quantity="one">%1$d unggahan</item>
+    <item quantity="other">%1$d unggahan</item>
   </plurals>
-  <plurals name="starting_multiple_uploads">
-    <item quantity="one">Miwiti %d unggahan</item>
-    <item quantity="other">Miwiti %d unggahan</item>
+  <plurals name="starting_multiple_uploads" fuzzy="true">
+    <item quantity="one">Miwiti %1$d unggahan</item>
+    <item quantity="other">Miwiti %1$d unggahan</item>
   </plurals>
-  <plurals name="multiple_uploads_title">
-    <item quantity="one">%d unggahan</item>
-    <item quantity="other">%d unggahan</item>
+  <plurals name="multiple_uploads_title" fuzzy="true">
+    <item quantity="one">%1$d unggahan</item>
+    <item quantity="other">%1$d unggahan</item>
   </plurals>
   <string name="categories_not_found">Ora ana kategori sing cocog karo %1$s</string>
   <string name="categories_activity_title">Kategori</string>
-  <string name="preference_tracking">Lapuran pangguna</string>
-  <string name="preference_tracking_summary">Kirim lapurané pangguna nyang Wikimedia supaya kita kabantu ngapikaké aplikasiné</string>
   <string name="title_activity_settings">Setèlan</string>
   <string name="title_activity_signup">Ndhaftar</string>
   <string name="menu_about">Ngenani</string>
-  <string name="about_improve">&lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;Sumber&lt;/a&gt; lan &lt;a href=\"https://commons-app.github.io/\"&gt;situs jaringan&lt;/a&gt; ing GitHub. Gawé anyar &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;bab GitHub&lt;/a&gt; ngenani lapuran ama lan saran.</string>
-  <string name="about_privacy_policy">&lt;a href=\"https://wikimediafoundation.org/wiki/Privacy_policy\"&gt;Pranatan priangga&lt;/a&gt;</string>
-  <string name="about_credits">&lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/CREDITS\"&gt;Krèdhit&lt;/a&gt;</string>
+  <string name="about_improve" fuzzy="true">&lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;Sumber&lt;/a&gt; lan &lt;a href=\"https://commons-app.github.io/\"&gt;situs jaringan&lt;/a&gt; ing GitHub. Gawé anyar &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;bab GitHub&lt;/a&gt; ngenani lapuran ama lan saran.</string>
+  <string name="about_privacy_policy" fuzzy="true">&lt;a href=\"https://wikimediafoundation.org/wiki/Privacy_policy\"&gt;Pranatan priangga&lt;/a&gt;</string>
+  <string name="about_credits" fuzzy="true">&lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/CREDITS\"&gt;Krèdhit&lt;/a&gt;</string>
   <string name="title_activity_about">Ngenani</string>
   <string name="menu_feedback">Kirim Pamrayoga (lumantar Layang-Èl)</string>
   <string name="no_email_client">Ora ana klièn layang-èl sing dipasang</string>
@@ -86,7 +87,7 @@
   <string name="menu_cancel_upload">Wurung</string>
   <string name="share_license_summary">Gambar iki bakal dilisènsèkaké nganggo %1$s</string>
   <string name="menu_download">Undhuh</string>
-  <string name="preference_license">Lisènsi</string>
+  <string name="preference_license" fuzzy="true">Lisènsi</string>
   <string name="use_previous">Anggo sesirah/wedharan sadurungé</string>
   <string name="allow_gps">Otomatis masang lokasi saiki</string>
   <string name="preference_theme">Modhe wengi</string>
@@ -121,7 +122,7 @@
   <string name="detail_description_empty">Tanpa katerangan</string>
   <string name="detail_license_empty">Lisènsi ora kaweruhan</string>
   <string name="menu_refresh">Anyarana</string>
-  <string name="storage_permission_rationale">Butuh palilah: Maca panyimpenan njaba. Aplikasi mokal mlaku yèn tanpa iki.</string>
+  <string name="read_storage_permission_rationale" fuzzy="true">Butuh palilah: Maca panyimpenan njaba. Aplikasi mokal mlaku yèn tanpa iki.</string>
   <string name="location_permission_rationale">Palilah manasuka: Njupuk pernah saiki kanggo saran ing kategori</string>
   <string name="ok">Oké</string>
   <string name="title_activity_nearby">Papan Cedhak Kéné</string>
@@ -135,7 +136,6 @@
   <string name="media_detail_description">Wedharan</string>
   <string name="media_detail_uploaded_date">Tanggal ngunggah</string>
   <string name="become_a_tester_title">Dadi Pangetès Béta</string>
-  <string name="use_wikidata">Anggo Wikidata</string>
   <string name="_2fa_code">Kodhe 2FA</string>
   <string name="number_of_uploads">Watesan Unggahan Anyarku</string>
   <string name="maximum_limit">Watesan Akèh Dhéwé</string>
@@ -165,6 +165,6 @@
   <string name="navigation_item_settings">Setèlan</string>
   <string name="navigation_item_feedback">Pamrayoga</string>
   <string name="navigation_item_logout">Metu log</string>
-  <string name="nearby_info_menu_commons_article">Artikel Commons</string>
+  <string name="nearby_info_menu_commons_article" fuzzy="true">Artikel Commons</string>
   <string name="nearby_info_menu_wikidata_article">Wiji Wikidata</string>
 </resources>

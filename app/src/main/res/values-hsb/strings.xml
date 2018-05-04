@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- Authors:
+* Michawiki
+-->
 <resources>
   <string name="app_name" fuzzy="true">Wikimedia Commons</string>
   <string name="menu_settings">Nastajenja</string>
@@ -44,13 +47,11 @@
   <string name="menu_save_categories">Składować</string>
   <string name="categories_not_found">Kategorija %1$s njeje so namakała</string>
   <string name="categories_activity_title">Kategorije</string>
-  <string name="preference_tracking">Wužiwanske rozprawy</string>
-  <string name="preference_tracking_summary">Pósćel nam wužiwanske rozprawy, zo by nam pomhał, nałoženje polěpšić</string>
   <string name="title_activity_settings">Nastajenja</string>
   <string name="menu_about">Wo</string>
   <string name="about_license" fuzzy="true">Software zjawneho žórła wozjewjena pod licencu &lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/COPYING\"&gt;Apache License v2&lt;/a&gt;</string>
   <string name="about_improve" fuzzy="true">Žórłowy kod na &lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;GitHub&lt;/a&gt;. Zdźělenja wo programowych zmylkach na &lt;a href=\"https://bugzilla.wikimedia.org/enter_bug.cgi?product=Commons%20App\"&gt;Bugzilla&lt;/a&gt;.</string>
-  <string name="about_privacy_policy">&lt;a href=\"//de.wikipedia.org/wiki/Wikipedia:Datenschutz\"&gt;Prawidła priwatnosće&lt;/a&gt;</string>
+  <string name="about_privacy_policy" fuzzy="true">&lt;a href=\"//de.wikipedia.org/wiki/Wikipedia:Datenschutz\"&gt;Prawidła priwatnosće&lt;/a&gt;</string>
   <string name="title_activity_about">Wo</string>
   <string name="menu_feedback">Komentar pósłać (přez e-mejl)</string>
   <string name="provider_categories">Njedawno wužite kategorije</string>
@@ -60,7 +61,7 @@
   <string name="menu_cancel_upload">Přetorhnyć</string>
   <string name="share_license_summary">Tutón wobraz so pod %1$s licencuje</string>
   <string name="menu_download">Sćahnyć</string>
-  <string name="preference_license">Licenca</string>
+  <string name="preference_license" fuzzy="true">Licenca</string>
   <string name="license_name_cc_by_sa" fuzzy="true">CC Attribution-ShareAlike 3.0</string>
   <string name="license_name_cc_by" fuzzy="true">CC Attribution 3.0</string>
   <string name="license_name_cc0">CC0</string>

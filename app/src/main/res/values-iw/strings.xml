@@ -1,10 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- Authors:
+* Ademo
+* Amire80
+* Barakolo
+* Deborahjay
+* ExampleTomer
+* Guycn2
+* Inkbug
+* Nurick
+* Uziel302
+* YaronSh
+-->
 <resources>
+  <string name="preference_category_appearance">מראה</string>
+  <string name="preference_category_general">כללי</string>
+  <string name="preference_category_feedback">משוב</string>
+  <string name="preference_category_location">מיקום</string>
   <string name="app_name">ויקישיתוף</string>
+  <string name="bullet">•</string>
   <string name="menu_settings">הגדרות</string>
   <string name="username">שם משתמש</string>
   <string name="password">ססמה</string>
+  <string name="login_credential">כניסה לחשבון Commons Beta שלך</string>
   <string name="login">כניסה</string>
+  <string name="forgot_password">שכחת את הסיסמה?</string>
   <string name="signup">רישום</string>
   <string name="logging_in_title">כניסה לחשבון</string>
   <string name="logging_in_message">נא להמתין…</string>
@@ -22,7 +41,7 @@
   <string name="upload_failed_notification_subtitle">נא ללחוץ כדי להציג</string>
   <plurals name="uploads_pending_notification_indicator">
     <item quantity="one">קובץ אחד מועלה</item>
-    <item quantity="other">%d קבצים מועלים</item>
+    <item quantity="other">%1$d קבצים מועלים</item>
   </plurals>
   <string name="title_activity_contributions">ההעלאות האחרונות שלי</string>
   <string name="contribution_state_queued">בתור</string>
@@ -36,6 +55,7 @@
   <string name="menu_share">שיתוף</string>
   <string name="menu_open_in_browser">הצגה בדפדפן</string>
   <string name="share_title_hint">כותרת</string>
+  <string name="add_title_toast">נא לתת כותרת לקובץ הזה</string>
   <string name="share_description_hint">תיאור</string>
   <string name="login_failed_network">לא ניתן להיכנס – כשל בתקשורת</string>
   <string name="login_failed_username">לא ניתן להיכנס – נא לבדוק את שם המשתמש שלך</string>
@@ -51,33 +71,34 @@
   <string name="categories_search_text_hint">חיפוש קטגוריות</string>
   <string name="menu_save_categories">שמירה</string>
   <string name="refresh_button">רענון</string>
+  <string name="display_list_button">רשימה</string>
   <string name="gps_disabled">ה־GPS במכשיר שלך אינו מופעל. האם להפעיל אותו?</string>
   <string name="enable_gps">הפעלת GPS</string>
   <string name="contributions_subtitle_zero">לא הועלה עדיין שום דבר</string>
   <plurals name="contributions_subtitle">
+    <item quantity="zero">\@string/contributions_subtitle_zero</item>
     <item quantity="one">העלאה אחת</item>
-    <item quantity="other">%d העלאות</item>
+    <item quantity="other">%1$d העלאות</item>
   </plurals>
   <plurals name="starting_multiple_uploads">
     <item quantity="one">התחלת העלאה</item>
-    <item quantity="other">התחלת %d העלאות</item>
+    <item quantity="other">התחלת 1$d% העלאות</item>
   </plurals>
   <plurals name="multiple_uploads_title">
     <item quantity="one">העלאה אחת</item>
-    <item quantity="other">%d העלאות</item>
+    <item quantity="other">%1$d העלאות</item>
   </plurals>
   <string name="categories_not_found">לא נמצאו קטגוריות בשם %1$s</string>
-  <string name="categories_skip_explanation">נא להוסיף קטגוריות כדי שיהיה קל יותר למצוא את התמונות שלך בוויקישיתוף.\n\nכדי להוסיף קטגוריה יש להתחיל לכתוב.\nיש ללחוץ על ההודעה הזאת או על כפתור \"חזרה\" כדי לדלג על הצעד הזה.</string>
+  <string name="categories_skip_explanation">יש להוסיף קטגוריות כדי שיהיה קל יותר למצוא את התמונות שלך בוויקישיתוף.\nכדי להוסיף קטגוריה יש להתחיל לכתוב.</string>
   <string name="categories_activity_title">קטגוריות</string>
-  <string name="preference_tracking">דוחות שימוש</string>
-  <string name="preference_tracking_summary">לשלוח דוחות שימוש לויקימדיה כדי לעזור לנו לשפר את היישום</string>
   <string name="title_activity_settings">הגדרות</string>
   <string name="title_activity_signup">רישום</string>
+  <string name="title_activity_featured_images">תמונות מומלצות</string>
   <string name="menu_about">אודות</string>
-  <string name="about_license">תכנת קוד פתוח המתפרסמת לפי תנאי &lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/COPYING\"&gt;Apache License v2&lt;/a&gt;. השם Wikimedia Commons והסמל שלו הם סימני מסחר של קרן ויקימדיה ומשמשים באישור קרן ויקימדיה. איננו נתמכים על־ידי קרן ויקימדיה או קשורים אליה בשותפות.</string>
-  <string name="about_improve">&lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;קוד מקור&lt;/a&gt; ו&lt;a href=\"https://commons-app.github.io/\"&gt;אתר&lt;/a&gt; בגיטהאב. נא ליצור &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;דיווח בגיטהאב&lt;/a&gt; בשביל באגים והצעות.</string>
-  <string name="about_privacy_policy"/>
-  <string name="about_credits">&lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/CREDITS\"&gt;יוצרים&lt;/a&gt;</string>
+  <string name="about_license">יישום ויקישיתוף (Wikimedia Commons app) הוא יישום קוד פתוח שמפותח ומתוחזק על־ידי מקבלי מלגות ומתנדבים של קהילת ויקימדיה. קרן ויקימדיה אינה מעורבת ביצירה, פיתוח, או תחזוקה של היישום.</string>
+  <string name="about_improve">נא ליצור &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;דיווח בגיטהאב&lt;/a&gt; בשביל באגים והצעות.</string>
+  <string name="about_privacy_policy">&lt;u&gt;מדיניות פרטיות&lt;/u&gt;</string>
+  <string name="about_credits">&lt;u&gt;יוצרים&lt;/u&gt;</string>
   <string name="title_activity_about">אודות</string>
   <string name="menu_feedback">שליחת משוב (בדוא\"ל)</string>
   <string name="no_email_client">לא מותקן לקוח דואר אלקטרוני</string>
@@ -87,8 +108,9 @@
   <string name="menu_retry_upload">לנסות שוב</string>
   <string name="menu_cancel_upload">ביטול</string>
   <string name="share_license_summary">התמונה הזאת היא תחת רשיון %1$s</string>
+  <string name="media_upload_policy">שליחת התמונה הזאת מהווה את הצהרתי על כך שזאת יצירה שלי, שהיא לא מכילה חומר מוגבל בזכויות יוצרים או תמונות עצמיות (סלפי) ומתאימה בכל אופן ל&lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines\"&gt;מדיניות של אתר ויקישיתוף של ויקימדיה&lt;/a&gt;.</string>
   <string name="menu_download">הורדה</string>
-  <string name="preference_license">רישיון</string>
+  <string name="preference_license">רישיון ברירת מחדל</string>
   <string name="use_previous">להשתמש בכותרת ובתיאור קודמים</string>
   <string name="allow_gps">לקבל אוטומטית את המיקום הנוכחי</string>
   <string name="allow_gps_summary">לאחזר את המיקום הנוכחי כדי להציע קטגוריות אם בתמונה אין תגי מיקום</string>
@@ -117,11 +139,20 @@
   <string name="tutorial_1_text">ויקישיתוף מארח את רוב התמונות שמשמשות בוויקיפדיה.</string>
   <string name="tutorial_1_subtext">התמונות שלכם עוזרות לתת השכלה לאנשים מסביב לעולם!</string>
   <string name="tutorial_2_text">נא להעלות תמונות שצולמו או נוצרו באופן מלא על־ידיכם:</string>
-  <string name="tutorial_2_subtext">- עצמים טבעיים (פרחים, חיות, הרים)\n- חפצים שימושיים (אופניים, תחנות רכבת)\n- אנשים מפורסמים (ראש העיר שלכם, ספורטאים אולימפיים שפגשתם)</string>
+  <string name="tutorial_2_subtext">עצמים טבעיים (פרחים, חיות, הרים)\n• חפצים שימושיים (אופניים, תחנות רכבת)\n• אנשים מפורסמים (ראש העיר שלכם, ספורטאים אולימפיים שפגשתם)</string>
+  <string name="tutorial_2_subtext_1">עצמים טבעיים (פרחים, חיות, הרים)</string>
+  <string name="tutorial_2_subtext_2">חפצים שימושיים (אופניים, תחנות רכבת)</string>
+  <string name="tutorial_2_subtext_3">אנשים מפורסמים (ראש העיר שלכם, ספורטאים אולימפיים שפגשתם)</string>
   <string name="tutorial_3_text">נא לא להעלות:</string>
   <string name="tutorial_3_subtext">- תמונות עצמיות (\"סלפי\") או תמונות של חברים שלכם\n- תמונות שהורדתם מהאינטרנט\n- צילומי מסך של יישומים קנייניים</string>
+  <string name="tutorial_3_subtext_1">תמונות עצמיות (\"סלפי\") או תמונות של חברים שלכם</string>
+  <string name="tutorial_3_subtext_2">תמונות שהורדתם מהאינטרנט</string>
+  <string name="tutorial_3_subtext_3">צילומי מסך של יישומים קנייניים</string>
   <string name="tutorial_4_text">העלאה לדוגמה:</string>
-  <string name="tutorial_4_subtext">- כותרת: בית האופרה של סידני\n- תיאור: בית האופרה של סידני מהצד השני של המפרץ\n- קטגוריות: Sydney Opera House (בית האופרה של סידני), Sydney Opera House from the west (בית האופרה של סידני מהמערב), Sydney Opera House remote views (מראה מרחוק על בית האופרה של סידני)</string>
+  <string name="tutorial_4_subtext">- כותרת: בית האופרה של סידני\n- תיאור: בית האופרה של סידני מהצד השני של המפרץ\n- קטגוריות: Sydney Opera House from the west (בית האופרה של סידני מהמערב), Sydney Opera House remote views (מראה מרחוק על בית האופרה של סידני)</string>
+  <string name="tutorial_4_subtext_1">כותרת: בית האופרה של סידני</string>
+  <string name="tutorial_4_subtext_2">תיאור: בית האופרה של סידני כפי שהוא נראה מעבר למפרץ</string>
+  <string name="tutorial_4_subtext_3">קטגוריות: בית האופרה של סידני מהמערב, מראות מרוחקים על בית האופרה של סידני</string>
   <string name="welcome_wikipedia_text">תרמו את התמונות שלכם. עזרו לערכים בוויקיפדיה להתעורר לחיים!</string>
   <string name="welcome_wikipedia_subtext">התמונות בוויקיפדיה מגיעות מ־Wikimedia Commons.</string>
   <string name="welcome_copyright_text">התמונות שלכם עוזרות להעניק חינוך לאנשים מסביב לעולם.</string>
@@ -134,7 +165,8 @@
   <string name="detail_description_empty">אין תיאור</string>
   <string name="detail_license_empty">רישיון לא ידוע</string>
   <string name="menu_refresh">רענון</string>
-  <string name="storage_permission_rationale">הרשאה מחייבת: אחסון. היישום לא יכול לעבוד בלי זה.</string>
+  <string name="read_storage_permission_rationale">נדרשת הרשאה: קריאת אחסון חיצוני. היישום לא יכול לגשת לגלריה שלך בלי זה.</string>
+  <string name="write_storage_permission_rationale">נדרשת הרשאה: כתיבה לאחסון חיצוני. היישום לא יכול לגשת למצלמה שלך בלי זה.</string>
   <string name="location_permission_rationale">הרשאה לא מחייבת: קבלת מיקום נוכחי בשביל הצעות קטגוריות</string>
   <string name="ok">אישור</string>
   <string name="title_activity_nearby">מקומות בסביבה</string>
@@ -147,11 +179,14 @@
   <string name="media_detail_media_title">כותרת המדיה</string>
   <string name="media_detail_description">תיאור</string>
   <string name="media_detail_description_explanation">תיאור המדיה יהיה כאן. זה יכול להיות ארוך למדי, ולהתפרס על מספר שורות. אנחנו מקווים שזה נראה טוב.</string>
+  <string name="media_detail_author">יוצר</string>
+  <string name="media_detail_author_explanation">שם המשתמש של יוצר התמונה המומלצת.</string>
   <string name="media_detail_uploaded_date">תאריך העלאה</string>
+  <string name="media_detail_license">רישיון</string>
+  <string name="media_detail_coordinates">נקודות ציון</string>
+  <string name="media_detail_coordinates_empty">לא סופקו</string>
   <string name="become_a_tester_title">להפוך לבודק בטא</string>
   <string name="become_a_tester_description">להירשם לערוץ הבטא שלנו בחנות גוגל Play ולקבל גישה מוקדמת לאפשרויות חדשות ותיקוני באגים</string>
-  <string name="use_wikidata">להשתמש בוויקינתונים</string>
-  <string name="use_wikidata_summary">(אזהרה: כיבוי של זה עלול לגרום לצריכת נתונים ניידים גבוהה)</string>
   <string name="_2fa_code">קוד אימות דו־שלבי</string>
   <string name="number_of_uploads">הגבלת ההעלאות האחרונה שלי</string>
   <string name="maximum_limit">מגבלה מרבית</string>
@@ -160,7 +195,11 @@
   <string name="login_failed_2fa_not_supported">אימות דו־שלבי אינו נתמך כעת.</string>
   <string name="logout_verification">האם באמת לצאת מהחשבון?</string>
   <string name="commons_logo">סמל ויקישיתוף</string>
+  <string name="commons_website">אתר ויקישיתוף</string>
+  <string name="commons_facebook">עמוד הפייסבוק של ויקישיתוף</string>
+  <string name="commons_github">קוד המקור של ויקישיתוף ב־GitHub</string>
   <string name="background_image">תמונת רקע</string>
+  <string name="mediaimage_failed">תמונת המדיה נכשלה</string>
   <string name="no_image_found">לא נמצאה תמונה</string>
   <string name="upload_image">העלאת תמונה</string>
   <string name="welcome_image_mount_zao">הר זאו</string>
@@ -169,6 +208,8 @@
   <string name="welcome_image_tulip">צבעוני</string>
   <string name="welcome_image_no_selfies">בלי תמונות סלפי</string>
   <string name="welcome_image_proprietary">תמונה קניינית</string>
+  <string name="welcome_image_welcome_wikipedia">ברוך בואך ויקיפדיה</string>
+  <string name="welcome_image_welcome_copyright">הודעה לגבי זכויות יוצרים</string>
   <string name="welcome_image_sydney_opera_house">בית האופרה של סידני</string>
   <string name="cancel">ביטול</string>
   <string name="navigation_drawer_open">פתיחה</string>
@@ -181,7 +222,55 @@
   <string name="navigation_item_feedback">משוב</string>
   <string name="navigation_item_logout">יציאה</string>
   <string name="navigation_item_info">מדריך</string>
+  <string name="navigation_item_notification">הודעות</string>
+  <string name="navigation_item_featured_images">מומלץ</string>
   <string name="nearby_needs_permissions">אי־אפשר להציג מקומות בסביבה ללא הרשאות מיקום</string>
   <string name="no_description_found">לא נמצא תיאור</string>
+  <string name="nearby_info_menu_commons_article">דף קובץ בוויקישיתוף</string>
   <string name="nearby_info_menu_wikidata_article">פריט ויקינתונים</string>
+  <string name="nearby_info_menu_wikipedia_article">ערך בוויקיפדיה</string>
+  <string name="error_while_cache">שגיאה במשירת תמונות במטמון</string>
+  <string name="title_info">כותרת מתארת ייחודית לקובץ, שתשמש שם קובץ. אפשר להשתמש בשפה פשוטה עם רווחים. אין לכלול סיומת קובץ</string>
+  <string name="description_info">נא לתאר את המדיה כמה שיותר: איפה היא נוצרה? מה היא מראה? מה ההקשר? נא לתאר את העצמים או את האנשים. נא לחשוף מידע שאי־אפשר לנחש בקלות, למשל, הזמן ביום אם זאת תמונת נוף. אם המדיה מציגה משהו בלתי־רגיל, נא להסביר מה מיוחד בה.</string>
+  <string name="upload_image_too_dark">התמונה הזאת חשוכה מדי, האם ברצונך באמת להעלות אותה? ויקישיתוף מיועד רק לתמונות בלות ערך אנציקלופדי.</string>
+  <string name="upload_image_blurry">התמונה הזאת מטושטשת, האם ברצונך באמת להעלות אותה? ויקישיתוף מיועד רק לתמונות בלות ערך אנציקלופדי.</string>
+  <string name="give_permission">לתת הרשאה</string>
+  <string name="use_external_storage">להשתמש באחסון חיצוני</string>
+  <string name="use_external_storage_summary">שמירת תמונות שצולמו באמצעות מצלמה בתוך היישום במכשיר שלך</string>
+  <string name="login_to_your_account">כניסה לחשבון שלך</string>
+  <string name="send_log_file">שליחת קובץ יומן</string>
+  <string name="send_log_file_description">שליחת קובץ יומן למפתחים בדואר אלקטרוני</string>
+  <string name="no_web_browser">לא נמצא דפדפן שיוכל לפתוח את הכתובת</string>
+  <string name="null_url">שגיאה! כתובת ה־URL לא נמצאה</string>
+  <string name="nominate_deletion">להציע מחיקה</string>
+  <string name="nominated_for_deletion">התמונה הזאת מועמדת למחיקה</string>
+  <string name="nominated_see_more"/>
+  <string name="view_browser">הצגה בדפדפן</string>
+  <string name="nearby_location_has_not_changed">המיקום לא השתנה.</string>
+  <string name="nearby_location_not_available">המיקום אינו זמין.</string>
+  <string name="location_permission_rationale_nearby">נדרשת הרשאה כדי להציג רשימה של מקומות בסביבה</string>
+  <string name="get_directions">קבלת כיוונים</string>
+  <string name="read_article">קריאה הערך</string>
+  <string name="notifications_welcome">ברוך בואך לוויקישיתוף של ויקימדיה, %1$s! שמחים לראות אותך כאן אצלנו.</string>
+  <string name="notifications_talk_page_message">קיבלת הודעה מאת %1$s בעמוד השיחה שלך</string>
+  <string name="notifications_thank_you_edit">תודה לך על העריכה</string>
+  <string name="notifications_mention">אוזכרת על ידי %2$s ב{{GRAMMAR:תחילית|%1$s}}.</string>
+  <string name="toggle_view_button">החלפת מצב תצוגה</string>
+  <string name="nearby_directions">כיוונים</string>
+  <string name="nearby_wikidata">ויקינתונים</string>
+  <string name="nearby_wikipedia">ויקיפדיה</string>
+  <string name="nearby_commons">ויקישיתוף</string>
+  <string name="about_rate_us">&lt;u&gt;תנו לנו ציון&lt;/u&gt;</string>
+  <string name="about_faq">&lt;u&gt;שאלות נפוצות&lt;/u&gt;</string>
+  <string name="welcome_skip_button">לדלג על ההדרכה</string>
+  <string name="no_internet">האינטרנט אינו זמין</string>
+  <string name="internet_established">האינטרנט זמין</string>
+  <string name="error_notifications">שגיאה באחזור התראות</string>
+  <string name="no_notifications">לא נמצאו התראות</string>
+  <string name="about_translate">&lt;u&gt;תרגום&lt;/u&gt;</string>
+  <string name="about_translate_title">שפות</string>
+  <string name="about_translate_message">נא לבחור את השפה שבה תשלחו את התרגומים</string>
+  <string name="about_translate_proceed">המשך</string>
+  <string name="about_translate_cancel">ביטול</string>
+  <string name="retry">לנסות שוב</string>
 </resources>

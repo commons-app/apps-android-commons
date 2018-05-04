@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- Authors:
+* Acamicamacaraca
+* Rancher
+-->
 <resources>
   <string name="crash_dialog_title">Остава се срушила</string>
   <string name="crash_dialog_text">Упс! Нешто је пошло наопако.</string>
   <string name="crash_dialog_comment_prompt">Реците нам шта сте радили па то сазнање поделите с нама, путем е-поште. Тиме ћете нам помоћи да решимо проблем!</string>
-  <string name="crash_dialog_ok_toast">Хвала вам!</string>
+  <string name="crash_dialog_ok_toast">Хвала Вам!</string>
 </resources>

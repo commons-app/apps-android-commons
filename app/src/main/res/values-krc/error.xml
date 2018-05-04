@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- Authors:
+* Ernác
+-->
 <resources>
   <string name="crash_dialog_title">Халат</string>
   <string name="crash_dialog_text">Не эсе да табсыз барды.</string>

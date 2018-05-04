@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- Authors:
+* Psubhashish
+-->
 <resources>
   <string name="crash_dialog_title">କମନ୍ସ ଅକାମୀ ହୋଇଗଲା</string>
   <string name="crash_dialog_text">କିଛି ଗୋଟେ ଅଘଟଣ ଘଟିଲା!</string>

@@ -32,7 +32,7 @@ public class CacheController {
     public void cacheCategory() {
         List<String> pointCatList = new ArrayList<>();
         if (MwVolleyApi.GpsCatExists.getGpsCatExists()) {
-             pointCatList.addAll(MwVolleyApi.getGpsCat());
+            pointCatList.addAll(MwVolleyApi.getGpsCat());
             Timber.d("Categories being cached: %s", pointCatList);
         } else {
             Timber.d("No categories found, so no categories cached");
@@ -74,14 +74,14 @@ public class CacheController {
         double offset = 100;
 
         //Coordinate offsets in radians
-        double dLat = offset/EARTH_RADIUS;
-        double dLon = offset/(EARTH_RADIUS*Math.cos(Math.PI*lat/180));
+        double dLat = offset / EARTH_RADIUS;
+        double dLon = offset / (EARTH_RADIUS * Math.cos(Math.PI * lat / 180));
 
         //OffsetPosition, decimal degrees
-        yPlus = lat + dLat * 180/Math.PI;
-        yMinus = lat - dLat * 180/Math.PI;
-        xPlus = lon + dLon * 180/Math.PI;
-        xMinus = lon - dLon * 180/Math.PI;
+        yPlus  = lat + dLat * 180 / Math.PI;
+        yMinus = lat - dLat * 180 / Math.PI;
+        xPlus  = lon + dLon * 180 / Math.PI;
+        xMinus = lon - dLon * 180 / Math.PI;
         Timber.d("Search within: xMinus=%s, yMinus=%s, xPlus=%s, yPlus=%s",
                 xMinus, yMinus, xPlus, yPlus);
     }

@@ -1,122 +1,167 @@
 package fr.free.nrw.commons.auth;
 
+import android.accounts.Account;
 import android.accounts.AccountAuthenticatorActivity;
+import android.accounts.AccountAuthenticatorResponse;
+import android.accounts.AccountManager;
+import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.ColorRes;
+import android.support.annotation.NonNull;
+import android.support.annotation.StringRes;
+import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.NavUtils;
+import android.support.v4.content.ContextCompat;
+import android.support.v7.app.AppCompatDelegate;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.view.KeyEvent;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.inputmethod.EditorInfo;
+import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import android.widget.Toast;
-import fr.free.nrw.commons.*;
+import java.io.IOException;
+import java.util.Locale;
+
+import javax.inject.Inject;
+import javax.inject.Named;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
+import fr.free.nrw.commons.BuildConfig;
+import fr.free.nrw.commons.PageTitle;
+import fr.free.nrw.commons.R;
+import fr.free.nrw.commons.Utils;
+import fr.free.nrw.commons.WelcomeActivity;
 import fr.free.nrw.commons.contributions.ContributionsActivity;
+import fr.free.nrw.commons.di.ApplicationlessInjection;
+import fr.free.nrw.commons.mwapi.MediaWikiApi;
+import fr.free.nrw.commons.theme.NavigationBaseActivity;
+import fr.free.nrw.commons.ui.widget.HtmlTextView;
+import fr.free.nrw.commons.utils.ViewUtil;
+import io.reactivex.Observable;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.schedulers.Schedulers;
 import timber.log.Timber;
 
+import static android.view.KeyEvent.KEYCODE_ENTER;
+import static android.view.View.VISIBLE;
+import static android.view.inputmethod.EditorInfo.IME_ACTION_DONE;
+import static fr.free.nrw.commons.auth.AccountUtil.ACCOUNT_TYPE;
+import static fr.free.nrw.commons.auth.AccountUtil.AUTH_TOKEN_TYPE;
 
 public class LoginActivity extends AccountAuthenticatorActivity {
 
     public static final String PARAM_USERNAME = "fr.free.nrw.commons.login.username";
 
-    private SharedPreferences prefs = null;
+    @Inject MediaWikiApi mwApi;
+    @Inject AccountUtil accountUtil;
+    @Inject SessionManager sessionManager;
+    @Inject @Named("application_preferences") SharedPreferences prefs;
+    @Inject @Named("default_preferences") SharedPreferences defaultPrefs;
 
-    private Button loginButton;
-    private EditText usernameEdit;
-    private EditText passwordEdit;
-    private EditText twoFactorEdit;
+    @BindView(R.id.loginButton) Button loginButton;
+    @BindView(R.id.signupButton) Button signupButton;
+    @BindView(R.id.loginUsername) EditText usernameEdit;
+    @BindView(R.id.loginPassword) EditText passwordEdit;
+    @BindView(R.id.loginTwoFactor) EditText twoFactorEdit;
+    @BindView(R.id.error_message_container) ViewGroup errorMessageContainer;
+    @BindView(R.id.error_message) TextView errorMessage;
+    @BindView(R.id.login_credentials) TextView loginCredentials;
+    @BindView(R.id.two_factor_container) TextInputLayout twoFactorContainer;
+    @BindView(R.id.forgotPassword) HtmlTextView forgotPasswordText;
+
     ProgressDialog progressDialog;
+    private AppCompatDelegate delegate;
     private LoginTextWatcher textWatcher = new LoginTextWatcher();
 
-    private CommonsApplication app;
+    private Boolean loginCurrentlyInProgress = false;
+    private Boolean errorMessageShown = false;
+    private String  resultantError;
+    private static final String RESULTANT_ERROR = "resultantError";
+    private static final String ERROR_MESSAGE_SHOWN = "errorMessageShown";
+    private static final String LOGING_IN = "logingIn";
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+        setTheme(Utils.isDarkTheme(this) ? R.style.DarkAppTheme : R.style.LightAppTheme);
+        getDelegate().installViewFactory();
+        getDelegate().onCreate(savedInstanceState);
 
-        app = CommonsApplication.getInstance();
+        super.onCreate(savedInstanceState);
+        ApplicationlessInjection
+                .getInstance(this.getApplicationContext())
+                .getCommonsApplicationComponent()
+                .inject(this);
 
         setContentView(R.layout.activity_login);
 
-        loginButton = (Button) findViewById(R.id.loginButton);
-        Button signupButton = (Button) findViewById(R.id.signupButton);
-        usernameEdit = (EditText) findViewById(R.id.loginUsername);
-        passwordEdit = (EditText) findViewById(R.id.loginPassword);
-        twoFactorEdit = (EditText) findViewById(R.id.loginTwoFactor);
-
-        prefs = getSharedPreferences("fr.free.nrw.commons", MODE_PRIVATE);
+        ButterKnife.bind(this);
 
         usernameEdit.addTextChangedListener(textWatcher);
+        usernameEdit.setOnFocusChangeListener((v, hasFocus) -> {
+            if (!hasFocus) {
+                ViewUtil.hideKeyboard(v);
+            }
+        });
+
         passwordEdit.addTextChangedListener(textWatcher);
+        passwordEdit.setOnFocusChangeListener((v, hasFocus) -> {
+            if (!hasFocus) {
+                ViewUtil.hideKeyboard(v);
+            }
+        });
+
         twoFactorEdit.addTextChangedListener(textWatcher);
-        passwordEdit.setOnEditorActionListener( newLoginInputActionListener() );
+        passwordEdit.setOnEditorActionListener(newLoginInputActionListener());
 
-        loginButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                performLogin();
-            }
-        });
-        signupButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                signUp(v);
-            }
-        });
-    }
+        loginButton.setOnClickListener(view -> performLogin());
+        signupButton.setOnClickListener(view -> signUp());
 
-    private class LoginTextWatcher implements TextWatcher {
-        @Override
-        public void beforeTextChanged(CharSequence charSequence, int start, int count, int after) {
-        }
+        forgotPasswordText.setOnClickListener(view -> forgotPassword());
 
-        @Override
-        public void onTextChanged(CharSequence charSequence, int start, int count, int after) {
-        }
-
-        @Override
-        public void afterTextChanged(Editable editable) {
-            if (usernameEdit.getText().length() != 0 && passwordEdit.getText().length() != 0 &&
-                    (BuildConfig.DEBUG || twoFactorEdit.getText().length() != 0 || twoFactorEdit.getVisibility() != View.VISIBLE)) {
-                loginButton.setEnabled(true);
-            } else {
-                loginButton.setEnabled(false);
-            }
+        if(BuildConfig.FLAVOR.equals("beta")){
+            loginCredentials.setText(getString(R.string.login_credential));
+        } else {
+            loginCredentials.setVisibility(View.GONE);
         }
     }
 
-    private TextView.OnEditorActionListener newLoginInputActionListener() {
-        return new TextView.OnEditorActionListener() {
-            @Override
-            public boolean onEditorAction(TextView textView, int actionId, KeyEvent keyEvent) {
-                if (loginButton.isEnabled()) {
-                    if (actionId == EditorInfo.IME_ACTION_DONE) {
-                        performLogin();
-                        return true;
-                    } else if ((keyEvent != null) && keyEvent.getKeyCode() == KeyEvent.KEYCODE_ENTER) {
-                        performLogin();
-                        return true;
-                    }
-                }
-                return false;
-            }
-        };
+    private void forgotPassword() {
+        Utils.handleWebUrl(this, Uri.parse(BuildConfig.FORGOT_PASSWORD_URL));
     }
 
+    @OnClick(R.id.about_privacy_policy)
+    void onPrivacyPolicyClicked() {
+        Utils.handleWebUrl(this,Uri.parse("https://github.com/commons-app/apps-android-commons/wiki/Privacy-policy\\"));
+    }
+
+    @Override
+    protected void onPostCreate(Bundle savedInstanceState) {
+        super.onPostCreate(savedInstanceState);
+        getDelegate().onPostCreate(savedInstanceState);
+    }
+
+    @Override
     protected void onResume() {
         super.onResume();
         if (prefs.getBoolean("firstrun", true)) {
             WelcomeActivity.startYourself(this);
             prefs.edit().putBoolean("firstrun", false).apply();
         }
-        if (app.getCurrentAccount() != null) {
+
+        if (sessionManager.getCurrentAccount() != null
+                && sessionManager.isUserLoggedIn()
+                && sessionManager.getCachedAuthCookie() != null) {
             startMainActivity();
         }
     }
@@ -134,22 +179,117 @@ public class LoginActivity extends AccountAuthenticatorActivity {
         usernameEdit.removeTextChangedListener(textWatcher);
         passwordEdit.removeTextChangedListener(textWatcher);
         twoFactorEdit.removeTextChangedListener(textWatcher);
+        delegate.onDestroy();
         super.onDestroy();
     }
 
     private void performLogin() {
+        loginCurrentlyInProgress = true;
         Timber.d("Login to start!");
-        LoginTask task = getLoginTask();
-        task.execute();
+        final String username = canonicializeUsername(usernameEdit.getText().toString());
+        final String password = passwordEdit.getText().toString();
+        String twoFactorCode = twoFactorEdit.getText().toString();
+
+        showLoggingProgressBar();
+        Observable.fromCallable(() -> login(username, password, twoFactorCode))
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(result -> handleLogin(username, password, result));
     }
 
-    private LoginTask getLoginTask() {
-        return new LoginTask(
-                this,
-                canonicializeUsername( usernameEdit.getText().toString() ),
-                passwordEdit.getText().toString(),
-                twoFactorEdit.getText().toString()
-        );
+    private String login(String username, String password, String twoFactorCode) {
+        try {
+            if (twoFactorCode.isEmpty()) {
+                return mwApi.login(username, password);
+            } else {
+                return mwApi.login(username, password, twoFactorCode);
+            }
+        } catch (IOException e) {
+            // Do something better!
+            return "NetworkFailure";
+        }
+    }
+
+    private void handleLogin(String username, String password, String result) {
+        Timber.d("Login done!");
+        if (result.equals("PASS")) {
+            handlePassResult(username, password);
+        } else {
+            loginCurrentlyInProgress = false;
+            errorMessageShown = true;
+            resultantError = result;
+            handleOtherResults(result);
+        }
+    }
+
+    private void showLoggingProgressBar() {
+        progressDialog = new ProgressDialog(this);
+        progressDialog.setIndeterminate(true);
+        progressDialog.setTitle(getString(R.string.logging_in_title));
+        progressDialog.setMessage(getString(R.string.logging_in_message));
+        progressDialog.setCanceledOnTouchOutside(false);
+        progressDialog.show();
+    }
+
+    private void handlePassResult(String username, String password) {
+        showSuccessAndDismissDialog();
+        requestAuthToken();
+        AccountAuthenticatorResponse response = null;
+
+        Bundle extras = getIntent().getExtras();
+        if (extras != null) {
+            Timber.d("Bundle of extras: %s", extras);
+            response = extras.getParcelable(AccountManager.KEY_ACCOUNT_AUTHENTICATOR_RESPONSE);
+            if (response != null) {
+                Bundle authResult = new Bundle();
+                authResult.putString(AccountManager.KEY_ACCOUNT_NAME, username);
+                authResult.putString(AccountManager.KEY_ACCOUNT_TYPE, ACCOUNT_TYPE);
+                response.onResult(authResult);
+            }
+        }
+
+        accountUtil.createAccount(response, username, password);
+        startMainActivity();
+    }
+
+    protected void requestAuthToken() {
+        AccountManager accountManager = AccountManager.get(this);
+        Account curAccount = sessionManager.getCurrentAccount();
+        if (curAccount != null) {
+            accountManager.setAuthToken(curAccount, AUTH_TOKEN_TYPE, mwApi.getAuthCookie());
+        }
+    }
+
+    /**
+     * Match known failure message codes and provide messages.
+     *
+     * @param result String
+     */
+    private void handleOtherResults(String result) {
+        if (result.equals("NetworkFailure")) {
+            // Matches NetworkFailure which is created by the doInBackground method
+            showMessageAndCancelDialog(R.string.login_failed_network);
+        } else if (result.toLowerCase(Locale.getDefault()).contains("nosuchuser".toLowerCase()) || result.toLowerCase().contains("noname".toLowerCase())) {
+            // Matches nosuchuser, nosuchusershort, noname
+            showMessageAndCancelDialog(R.string.login_failed_username);
+            emptySensitiveEditFields();
+        } else if (result.toLowerCase(Locale.getDefault()).contains("wrongpassword".toLowerCase())) {
+            // Matches wrongpassword, wrongpasswordempty
+            showMessageAndCancelDialog(R.string.login_failed_password);
+            emptySensitiveEditFields();
+        } else if (result.toLowerCase(Locale.getDefault()).contains("throttle".toLowerCase())) {
+            // Matches unknown throttle error codes
+            showMessageAndCancelDialog(R.string.login_failed_throttled);
+        } else if (result.toLowerCase(Locale.getDefault()).contains("userblocked".toLowerCase())) {
+            // Matches login-userblocked
+            showMessageAndCancelDialog(R.string.login_failed_blocked);
+        } else if (result.equals("2FA")) {
+            askUserForTwoFactorAuth();
+        } else {
+            // Occurs with unhandled login failure codes
+            Timber.d("Login failed with reason: %s", result);
+            showMessageAndCancelDialog(R.string.login_failed_generic);
+        }
     }
 
     /**
@@ -157,50 +297,87 @@ public class LoginActivity extends AccountAuthenticatorActivity {
      * @param username String
      * @return String canonicial username
      */
-    private String canonicializeUsername( String username ) {
-        return Utils.capitalize(username.substring(0,1)) + username.substring(1);
+    private String canonicializeUsername(String username) {
+        return new PageTitle(username).getText();
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        delegate.onStart();
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        delegate.onStop();
+    }
+
+    @Override
+    protected void onPostResume() {
+        super.onPostResume();
+        getDelegate().onPostResume();
+    }
+
+    @Override
+    public void setContentView(View view, ViewGroup.LayoutParams params) {
+        getDelegate().setContentView(view, params);
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-        case android.R.id.home:
-            NavUtils.navigateUpFromSameTask(this);
-            return true;
+            case android.R.id.home:
+                NavUtils.navigateUpFromSameTask(this);
+                return true;
         }
         return super.onOptionsItemSelected(item);
     }
 
-    /**
-     * Called when Sign Up button is clicked.
-     * @param view View
-     */
-    public void signUp(View view) {
-        Intent intent = new Intent(this, SignupActivity.class);
-        startActivity(intent);
+    @Override
+    @NonNull
+    public MenuInflater getMenuInflater() {
+        return getDelegate().getMenuInflater();
     }
 
-    public void askUserForTwoFactorAuth() {
-        if(BuildConfig.DEBUG) {
-            twoFactorEdit.setVisibility(View.VISIBLE);
-            showUserToastAndCancelDialog( R.string.login_failed_2fa_needed );
-        }else{
-            showUserToastAndCancelDialog( R.string.login_failed_2fa_not_supported );
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putBoolean(LOGING_IN, loginCurrentlyInProgress);
+        outState.putBoolean(ERROR_MESSAGE_SHOWN, errorMessageShown);
+        outState.putString(RESULTANT_ERROR, resultantError);
+    }
+
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+        loginCurrentlyInProgress = savedInstanceState.getBoolean(LOGING_IN, false);
+        errorMessageShown = savedInstanceState.getBoolean(ERROR_MESSAGE_SHOWN, false);
+        if(loginCurrentlyInProgress){
+            performLogin();
+        }
+        if(errorMessageShown){
+            resultantError = savedInstanceState.getString(RESULTANT_ERROR);
+            handleOtherResults(resultantError);
         }
     }
 
-    public void showUserToastAndCancelDialog( int resId ) {
-        showUserToast( resId );
-        progressDialog.cancel();
+    public void askUserForTwoFactorAuth() {
+        progressDialog.dismiss();
+        twoFactorContainer.setVisibility(VISIBLE);
+        twoFactorEdit.setVisibility(VISIBLE);
+        showMessageAndCancelDialog(R.string.login_failed_2fa_needed);
     }
 
-    private void showUserToast( int resId ) {
-        Toast.makeText(this, resId, Toast.LENGTH_LONG).show();
+    public void showMessageAndCancelDialog(@StringRes int resId) {
+        showMessage(resId, R.color.secondaryDarkColor);
+        if(progressDialog != null){
+            progressDialog.cancel();
+        }
     }
 
-    public void showSuccessToastAndDismissDialog() {
-        Toast successToast = Toast.makeText(this, R.string.login_success, Toast.LENGTH_SHORT);
-        successToast.show();
+    public void showSuccessAndDismissDialog() {
+        showMessage(R.string.login_success, R.color.primaryDarkColor);
         progressDialog.dismiss();
     }
 
@@ -210,8 +387,57 @@ public class LoginActivity extends AccountAuthenticatorActivity {
     }
 
     public void startMainActivity() {
-        ContributionsActivity.startYourself(this);
+        NavigationBaseActivity.startActivityWithFlags(this, ContributionsActivity.class, Intent.FLAG_ACTIVITY_CLEAR_TOP);
         finish();
     }
 
+    private void signUp() {
+        Intent intent = new Intent(this, SignupActivity.class);
+        startActivity(intent);
+    }
+
+    private TextView.OnEditorActionListener newLoginInputActionListener() {
+        return (textView, actionId, keyEvent) -> {
+            if (loginButton.isEnabled()) {
+                if (actionId == IME_ACTION_DONE) {
+                    performLogin();
+                    return true;
+                } else if ((keyEvent != null) && keyEvent.getKeyCode() == KEYCODE_ENTER) {
+                    performLogin();
+                    return true;
+                }
+            }
+            return false;
+        };
+    }
+
+    private void showMessage(@StringRes int resId, @ColorRes int colorResId) {
+        errorMessage.setText(getString(resId));
+        errorMessage.setTextColor(ContextCompat.getColor(this, colorResId));
+        errorMessageContainer.setVisibility(VISIBLE);
+    }
+
+    private AppCompatDelegate getDelegate() {
+        if (delegate == null) {
+            delegate = AppCompatDelegate.create(this, null);
+        }
+        return delegate;
+    }
+
+    private class LoginTextWatcher implements TextWatcher {
+        @Override
+        public void beforeTextChanged(CharSequence charSequence, int start, int count, int after) {
+        }
+
+        @Override
+        public void onTextChanged(CharSequence charSequence, int start, int count, int after) {
+        }
+
+        @Override
+        public void afterTextChanged(Editable editable) {
+            boolean enabled = usernameEdit.getText().length() != 0 && passwordEdit.getText().length() != 0
+                    && (BuildConfig.DEBUG || twoFactorEdit.getText().length() != 0 || twoFactorEdit.getVisibility() != VISIBLE);
+            loginButton.setEnabled(enabled);
+        }
+    }
 }

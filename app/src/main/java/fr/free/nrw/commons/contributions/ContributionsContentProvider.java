@@ -1,64 +1,67 @@
 package fr.free.nrw.commons.contributions;
 
-import android.content.ContentProvider;
 import android.content.ContentValues;
 import android.content.UriMatcher;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteQueryBuilder;
 import android.net.Uri;
+import android.support.annotation.NonNull;
 import android.text.TextUtils;
 
-import fr.free.nrw.commons.CommonsApplication;
+import javax.inject.Inject;
+
 import fr.free.nrw.commons.data.DBOpenHelper;
+import fr.free.nrw.commons.di.CommonsDaggerContentProvider;
 import timber.log.Timber;
 
-public class ContributionsContentProvider extends ContentProvider{
+import static android.content.UriMatcher.NO_MATCH;
+import static fr.free.nrw.commons.contributions.ContributionDao.Table.ALL_FIELDS;
+import static fr.free.nrw.commons.contributions.ContributionDao.Table.TABLE_NAME;
+
+public class ContributionsContentProvider extends CommonsDaggerContentProvider {
 
     private static final int CONTRIBUTIONS = 1;
     private static final int CONTRIBUTIONS_ID = 2;
-
-    public static final String AUTHORITY = "fr.free.nrw.commons.contributions.contentprovider";
     private static final String BASE_PATH = "contributions";
+    private static final UriMatcher uriMatcher = new UriMatcher(NO_MATCH);
+    public static final String CONTRIBUTION_AUTHORITY = "fr.free.nrw.commons.contributions.contentprovider";
 
-    public static final Uri BASE_URI = Uri.parse("content://" + AUTHORITY + "/" + BASE_PATH);
+    public static final Uri BASE_URI = Uri.parse("content://" + CONTRIBUTION_AUTHORITY + "/" + BASE_PATH);
 
-    private static final UriMatcher uriMatcher = new UriMatcher(UriMatcher.NO_MATCH);
     static {
-        uriMatcher.addURI(AUTHORITY, BASE_PATH, CONTRIBUTIONS);
-        uriMatcher.addURI(AUTHORITY, BASE_PATH + "/#", CONTRIBUTIONS_ID);
+        uriMatcher.addURI(CONTRIBUTION_AUTHORITY, BASE_PATH, CONTRIBUTIONS);
+        uriMatcher.addURI(CONTRIBUTION_AUTHORITY, BASE_PATH + "/#", CONTRIBUTIONS_ID);
     }
 
     public static Uri uriForId(int id) {
         return Uri.parse(BASE_URI.toString() + "/" + id);
     }
 
-    private DBOpenHelper dbOpenHelper;
-    @Override
-    public boolean onCreate() {
-        dbOpenHelper = CommonsApplication.getInstance().getDBOpenHelper();
-        return false;
-    }
+    @Inject DBOpenHelper dbOpenHelper;
 
+    @SuppressWarnings("ConstantConditions")
     @Override
-    public Cursor query(Uri uri, String[] projection, String selection, String[] selectionArgs, String sortOrder) {
+    public Cursor query(@NonNull Uri uri, String[] projection, String selection,
+                        String[] selectionArgs, String sortOrder) {
         SQLiteQueryBuilder queryBuilder = new SQLiteQueryBuilder();
-        queryBuilder.setTables(Contribution.Table.TABLE_NAME);
+        queryBuilder.setTables(TABLE_NAME);
 
         int uriType = uriMatcher.match(uri);
 
         SQLiteDatabase db = dbOpenHelper.getReadableDatabase();
         Cursor cursor;
 
-        switch(uriType) {
+        switch (uriType) {
             case CONTRIBUTIONS:
-                cursor = queryBuilder.query(db, projection, selection, selectionArgs, null, null, sortOrder);
+                cursor = queryBuilder.query(db, projection, selection, selectionArgs,
+                        null, null, sortOrder);
                 break;
             case CONTRIBUTIONS_ID:
                 cursor = queryBuilder.query(db,
-                        Contribution.Table.ALL_FIELDS,
+                        ALL_FIELDS,
                         "_id = ?",
-                        new String[] { uri.getLastPathSegment() },
+                        new String[]{uri.getLastPathSegment()},
                         null,
                         null,
                         sortOrder
@@ -74,18 +77,19 @@ public class ContributionsContentProvider extends ContentProvider{
     }
 
     @Override
-    public String getType(Uri uri) {
+    public String getType(@NonNull Uri uri) {
         return null;
     }
 
+    @SuppressWarnings("ConstantConditions")
     @Override
-    public Uri insert(Uri uri, ContentValues contentValues) {
+    public Uri insert(@NonNull Uri uri, ContentValues contentValues) {
         int uriType = uriMatcher.match(uri);
         SQLiteDatabase sqlDB = dbOpenHelper.getWritableDatabase();
-        long id = 0;
+        long id;
         switch (uriType) {
             case CONTRIBUTIONS:
-                id = sqlDB.insert(Contribution.Table.TABLE_NAME, null, contentValues);
+                id = sqlDB.insert(TABLE_NAME, null, contentValues);
                 break;
             default:
                 throw new IllegalArgumentException("Unknown URI: " + uri);
@@ -94,19 +98,20 @@ public class ContributionsContentProvider extends ContentProvider{
         return Uri.parse(BASE_URI + "/" + id);
     }
 
+    @SuppressWarnings("ConstantConditions")
     @Override
-    public int delete(Uri uri, String s, String[] strings) {
-        int rows = 0;
+    public int delete(@NonNull Uri uri, String s, String[] strings) {
+        int rows;
         int uriType = uriMatcher.match(uri);
 
         SQLiteDatabase db = dbOpenHelper.getReadableDatabase();
 
-        switch(uriType) {
+        switch (uriType) {
             case CONTRIBUTIONS_ID:
                 Timber.d("Deleting contribution id %s", uri.getLastPathSegment());
-                rows = db.delete(Contribution.Table.TABLE_NAME,
+                rows = db.delete(TABLE_NAME,
                         "_id = ?",
-                        new String[] { uri.getLastPathSegment() }
+                        new String[]{uri.getLastPathSegment()}
                 );
                 break;
             default:
@@ -116,17 +121,18 @@ public class ContributionsContentProvider extends ContentProvider{
         return rows;
     }
 
+    @SuppressWarnings("ConstantConditions")
     @Override
-    public int bulkInsert(Uri uri, ContentValues[] values) {
+    public int bulkInsert(@NonNull Uri uri, @NonNull ContentValues[] values) {
         Timber.d("Hello, bulk insert! (ContributionsContentProvider)");
         int uriType = uriMatcher.match(uri);
         SQLiteDatabase sqlDB = dbOpenHelper.getWritableDatabase();
         sqlDB.beginTransaction();
         switch (uriType) {
             case CONTRIBUTIONS:
-                for(ContentValues value: values) {
+                for (ContentValues value : values) {
                     Timber.d("Inserting! %s", value);
-                    sqlDB.insert(Contribution.Table.TABLE_NAME, null, value);
+                    sqlDB.insert(TABLE_NAME, null, value);
                 }
                 break;
             default:
@@ -138,35 +144,36 @@ public class ContributionsContentProvider extends ContentProvider{
         return values.length;
     }
 
+    @SuppressWarnings("ConstantConditions")
     @Override
-    public int update(Uri uri, ContentValues contentValues, String selection, String[] selectionArgs) {
+    public int update(@NonNull Uri uri, ContentValues contentValues, String selection, String[] selectionArgs) {
         /*
         SQL Injection warnings: First, note that we're not exposing this to the outside world (exported="false")
-        Even then, we should make sure to sanitize all user input appropriately. Input that passes through ContentValues
-        should be fine. So only issues are those that pass in via concating.
+        Even then, we should make sure to sanitize all user input appropriately.
+        Input that passes through ContentValuesshould be fine. So only issues are those that pass
+        in via concating.
 
-        In here, the only concat created argument is for id. It is cast to an int, and will error out otherwise.
+        In here, the only concat created argument is for id. It is cast to an int, and will
+        error out otherwise.
          */
         int uriType = uriMatcher.match(uri);
         SQLiteDatabase sqlDB = dbOpenHelper.getWritableDatabase();
-        int rowsUpdated = 0;
+        int rowsUpdated;
         switch (uriType) {
             case CONTRIBUTIONS:
-                rowsUpdated = sqlDB.update(Contribution.Table.TABLE_NAME,
-                        contentValues,
-                        selection,
-                        selectionArgs);
+                rowsUpdated = sqlDB.update(TABLE_NAME, contentValues, selection, selectionArgs);
                 break;
             case CONTRIBUTIONS_ID:
                 int id = Integer.valueOf(uri.getLastPathSegment());
 
                 if (TextUtils.isEmpty(selection)) {
-                    rowsUpdated = sqlDB.update(Contribution.Table.TABLE_NAME,
+                    rowsUpdated = sqlDB.update(TABLE_NAME,
                             contentValues,
-                            Contribution.Table.COLUMN_ID + " = ?",
-                            new String[] { String.valueOf(id) } );
+                            ContributionDao.Table.COLUMN_ID + " = ?",
+                            new String[]{String.valueOf(id)});
                 } else {
-                    throw new IllegalArgumentException("Parameter `selection` should be empty when updating an ID");
+                    throw new IllegalArgumentException(
+                            "Parameter `selection` should be empty when updating an ID");
                 }
                 break;
             default:

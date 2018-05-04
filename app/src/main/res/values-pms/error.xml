@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- Authors:
+* Borichèt
+-->
 <resources>
   <string name="crash_dialog_title">Commons a l\'é piantasse</string>
   <string name="crash_dialog_text">Contacc! Cheicòs a l\'é andàit mal!</string>

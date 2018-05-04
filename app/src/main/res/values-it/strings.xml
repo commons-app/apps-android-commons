@@ -1,10 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- Authors:
+* Ale.salmo
+* Beta16
+* Davio
+* Nemo bis
+* S4b1nuz E.656
+* Sarah Bernabei
+* Una giornata uggiosa '94
+* Wim b
+-->
 <resources>
+  <string name="preference_category_appearance">Aspetto</string>
+  <string name="preference_category_general">Generale</string>
+  <string name="preference_category_feedback">Commenti</string>
+  <string name="preference_category_location">Posizione</string>
   <string name="app_name">Commons</string>
   <string name="menu_settings">Impostazioni</string>
   <string name="username">Nome utente</string>
   <string name="password">Password</string>
   <string name="login">Entra</string>
+  <string name="forgot_password">Password dimenticata?</string>
   <string name="signup">Registrati</string>
   <string name="logging_in_title">Accesso in corso</string>
   <string name="logging_in_message">Attendi per favore…</string>
@@ -21,8 +36,8 @@
   <string name="upload_failed_notification_title">Caricamento di %1$s non riuscito</string>
   <string name="upload_failed_notification_subtitle">Premi per visualizzare</string>
   <plurals name="uploads_pending_notification_indicator">
-    <item quantity="one">%d file in caricamento</item>
-    <item quantity="other">%d file in caricamento</item>
+    <item quantity="one">%1$d file in caricamento</item>
+    <item quantity="other">%1$d file in caricamento</item>
   </plurals>
   <string name="title_activity_contributions">I miei ultimi caricamenti</string>
   <string name="contribution_state_queued">In coda</string>
@@ -51,34 +66,34 @@
   <string name="categories_search_text_hint">Cerca categorie</string>
   <string name="menu_save_categories">Salva</string>
   <string name="refresh_button">Aggiorna</string>
+  <string name="display_list_button">Elenco</string>
   <string name="gps_disabled">Il GPS è disabilitato nel dispositivo. Vuoi attivarlo?</string>
   <string name="enable_gps">Attiva GPS</string>
   <string name="contributions_subtitle_zero">Non è stato ancora caricato niente</string>
   <plurals name="contributions_subtitle">
     <item quantity="zero">\@string/contributions_subtitle_zero</item>
-    <item quantity="one">1 caricamento</item>
-    <item quantity="other">%d caricamenti</item>
+    <item quantity="one">%1$d caricamento</item>
+    <item quantity="other">%1$d caricamenti</item>
   </plurals>
   <plurals name="starting_multiple_uploads">
-    <item quantity="one">Iniziato %d caricamento</item>
-    <item quantity="other">Iniziati %d caricamenti</item>
+    <item quantity="one">Iniziato %1$d caricamento</item>
+    <item quantity="other">Iniziati %1$d caricamenti</item>
   </plurals>
   <plurals name="multiple_uploads_title">
-    <item quantity="one">%d caricamento</item>
-    <item quantity="other">%d caricamenti</item>
+    <item quantity="one">%1$d caricamento</item>
+    <item quantity="other">%1$d caricamenti</item>
   </plurals>
   <string name="categories_not_found">Non è stata trovata alcuna categoria che contiene %1$s</string>
-  <string name="categories_skip_explanation">Aggiungi categorie per rendere le tue immagini più facilmente individuabili su Wikimedia Commons.\n\nInizia a digitare per aggiungere categorie.\nTocca questo messaggio (o premi Indietro) per saltare l\'aggiunta di categorie.</string>
+  <string name="categories_skip_explanation">Aggiungi categorie per rendere le tue immagini più facilmente individuabili su Wikimedia Commons.\nInizia a digitare per aggiungere categorie.</string>
   <string name="categories_activity_title">Categorie</string>
-  <string name="preference_tracking">Report sull\'utilizzo</string>
-  <string name="preference_tracking_summary">Invia report sull\'utilizzo a Wikimedia per aiutarci a migliorare l\'app</string>
   <string name="title_activity_settings">Impostazioni</string>
   <string name="title_activity_signup">Registrati</string>
+  <string name="title_activity_featured_images">Immagini in evidenza</string>
   <string name="menu_about">Informazioni</string>
-  <string name="about_license">Software open source rilasciato con &lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/COPYING\"&gt;licenza Apache v2&lt;/a&gt;. Wikimedia Commons ed il suo logo sono marchi registrati della Wikimedia Foundation e sono utilizzati con il permesso della Wikimedia Foundation. Non siamo approvati o affiliati con la Wikimedia Foundation.</string>
-  <string name="about_improve">&lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;Codice sorgente&lt;/a&gt; e &lt;a href=\"https://commons-app.github.io/\"&gt;sito web&lt;/a&gt; su GitHub. Crea una nuova &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;segnalazione GitHub&lt;/a&gt; per riportare errori e suggerimenti.</string>
-  <string name="about_privacy_policy">&lt;a href=\"https://wikimediafoundation.org/wiki/Privacy_policy\"&gt;Politica sulla privacy&lt;/a&gt;</string>
-  <string name="about_credits">&lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/CREDITS\"&gt;Crediti&lt;/a&gt;</string>
+  <string name="about_license">L\'app di Wikimedia Commons è un\'applicazione open source creata e mantenuta da beneficiari e volontari della comunità Wikimedia. La Fondazione Wikimedia non è coinvolta nella creazione, sviluppo o manutenzione dell\'applicazione.</string>
+  <string name="about_improve">Crea una nuova &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;segnalazione GitHub&lt;/a&gt; per riportare errori e suggerimenti.</string>
+  <string name="about_privacy_policy">&lt;u&gt;Politica sulla privacy&lt;/u&gt;</string>
+  <string name="about_credits">&lt;u&gt;Crediti&lt;/u&gt;</string>
   <string name="title_activity_about">Informazioni</string>
   <string name="menu_feedback">Invia un commento (tramite email)</string>
   <string name="no_email_client">Nessun client di posta elettronica installato</string>
@@ -89,7 +104,7 @@
   <string name="menu_cancel_upload">Annulla</string>
   <string name="share_license_summary">Questa immagine sarà rilasciata in base alla licenza %1$s</string>
   <string name="menu_download">Scarica</string>
-  <string name="preference_license">Licenza</string>
+  <string name="preference_license">Licenza predefinita</string>
   <string name="use_previous">Utilizza titolo/descrizione precedente</string>
   <string name="allow_gps">Ottieni automaticamente l\'attuale posizione</string>
   <string name="preference_theme">Modalità notte</string>
@@ -116,7 +131,15 @@
   <string name="license_name_cc_zero">CC Zero</string>
   <string name="tutorial_1_text">Wikimedia Commons ospita la maggior parte delle immagini che vengono utilizzate in Wikipedia.</string>
   <string name="tutorial_1_subtext">Le tue immagini aiutano l\'istruzione di persone in tutto il mondo!</string>
+  <string name="tutorial_2_subtext">Oggetti naturali (fiori, animali, montagne)\n• Oggetti utili (biciclette, stazioni ferroviarie)\n• Personaggi famosi (il tuo sindaco, gli atleti olimpici che hai incontrato)</string>
+  <string name="tutorial_2_subtext_1">Oggetti naturali (fiori, animali, montagne)</string>
+  <string name="tutorial_2_subtext_2">Oggetti utili (biciclette, stazioni ferroviarie)</string>
+  <string name="tutorial_2_subtext_3">Personaggi famosi (il tuo sindaco, gli atleti olimpici che hai incontrato)</string>
+  <string name="tutorial_3_text">Per favore NON caricare:</string>
+  <string name="tutorial_3_subtext_2">Immagini scaricate da internet</string>
   <string name="tutorial_4_text">Esempi di caricamento:</string>
+  <string name="tutorial_4_subtext_1">Titolo: Sydney Opera House</string>
+  <string name="tutorial_4_subtext_2">Descrizione: Sydney Opera House vista dall\'altra parte della baia</string>
   <string name="welcome_wikipedia_text">Contribuisci con le tue immagini. Aiuta a rendere vive le voci di Wikipedia!</string>
   <string name="welcome_wikipedia_subtext">Le immagini su Wikipedia provengono da Wikimedia Commons.</string>
   <string name="welcome_copyright_text">Le tue immagini aiutano l\'istruzione di persone in tutto il mondo.</string>
@@ -139,18 +162,28 @@
   <string name="media_detail_title">Titolo</string>
   <string name="media_detail_media_title">Titolo del file multimediale</string>
   <string name="media_detail_description">Descrizione</string>
+  <string name="media_detail_author">Autore</string>
+  <string name="media_detail_author_explanation">Il nome dell\'autore dell\'immagine in evidenza va scritto qui.</string>
   <string name="media_detail_uploaded_date">Data di caricamento</string>
-  <string name="use_wikidata">Usa Wikidata</string>
+  <string name="media_detail_license">Licenza</string>
+  <string name="media_detail_coordinates">Coordinate</string>
   <string name="_2fa_code">Codice 2FA</string>
   <string name="maximum_limit">Limite massimo</string>
   <string name="maximum_limit_alert">Non è possibile mostrarne più di 500</string>
   <string name="login_failed_2fa_not_supported">L\'autenticazione a due fattori non è attualmente supportata.</string>
   <string name="logout_verification">Vuoi veramente uscire?</string>
+  <string name="commons_logo">Logo di Commons</string>
+  <string name="commons_website">Sito web di Commons</string>
+  <string name="commons_facebook">Pagina Facebook di Commons</string>
+  <string name="commons_github">Codice sorgente Github di Commons</string>
   <string name="no_image_found">Nessuna immagine trovata</string>
   <string name="upload_image">Carica immagine</string>
+  <string name="welcome_image_mount_zao">Monte Zao</string>
   <string name="welcome_image_rainbow_bridge">Arcobaleno</string>
   <string name="welcome_image_tulip">Tulipano</string>
   <string name="welcome_image_no_selfies">No autoscatti (selfie)</string>
+  <string name="welcome_image_welcome_wikipedia">Benvenuto Wikipedia</string>
+  <string name="welcome_image_welcome_copyright">Benvenuto Copyright</string>
   <string name="welcome_image_sydney_opera_house">Teatro dell\'opera di Sydney</string>
   <string name="cancel">Annulla</string>
   <string name="navigation_drawer_open">Apri</string>
@@ -163,6 +196,31 @@
   <string name="navigation_item_feedback">Commenti</string>
   <string name="navigation_item_logout">Esci</string>
   <string name="navigation_item_info">Tutorial</string>
+  <string name="navigation_item_notification">Notifiche</string>
+  <string name="navigation_item_featured_images">In evidenza</string>
   <string name="no_description_found">nessuna descrizione trovata</string>
+  <string name="nearby_info_menu_commons_article">Pagina di Commons del file</string>
   <string name="nearby_info_menu_wikidata_article">Elemento Wikidata</string>
+  <string name="nearby_info_menu_wikipedia_article">Voce Wikipedia</string>
+  <string name="give_permission">Dai autorizzazione</string>
+  <string name="login_to_your_account">Accedi alla tua utenza</string>
+  <string name="null_url">Errore! URL non trovato</string>
+  <string name="nominated_for_deletion">Questa immagine è stata proposta per la cancellazione.</string>
+  <string name="nearby_location_has_not_changed">La posizione non è cambiata.</string>
+  <string name="nearby_location_not_available">Posizione non disponibile.</string>
+  <string name="get_directions">OTTIENI DIREZIONI</string>
+  <string name="read_article">LEGGI VOCE</string>
+  <string name="notifications_welcome">Benvenuto in Wikimedia Commons, %1$s! Siamo contenti che tu sia qui.</string>
+  <string name="notifications_talk_page_message">%1$s ti ha lasciato un messaggio nella tua pagina di discussione</string>
+  <string name="notifications_thank_you_edit">Grazie per aver fatto una modifica</string>
+  <string name="notifications_mention">%1$s ti ha menzionato su %2$s.</string>
+  <string name="nearby_wikidata">WIKIDATA</string>
+  <string name="nearby_wikipedia">WIKIPEDIA</string>
+  <string name="nearby_commons">COMMONS</string>
+  <string name="about_faq">&lt;u&gt;Domande frequenti&lt;/u&gt;</string>
+  <string name="no_internet">Internet non disponibile</string>
+  <string name="internet_established">Internet disponibile</string>
+  <string name="about_translate_title">Lingue</string>
+  <string name="about_translate_cancel">Annulla</string>
+  <string name="retry">Riprova</string>
 </resources>

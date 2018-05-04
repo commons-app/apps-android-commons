@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Authors:
+* Zoranzoki21
+-->
+<resources>
+  <string name="crash_dialog_title">Ostava se srušila</string>
+  <string name="crash_dialog_text">Ups! Nešto je pošlo naopako.</string>
+  <string name="crash_dialog_comment_prompt">Recite nam šta ste radili pa to saznanje podelite s nama, putem e-pošte. Time ćete nam pomoći da rešimo problem!</string>
+  <string name="crash_dialog_ok_toast">Hvala vam!</string>
+</resources>

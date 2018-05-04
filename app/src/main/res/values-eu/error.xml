@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- Authors:
+* Theklan
+-->
 <resources>
   <string name="crash_dialog_title">Commons apurtu da</string>
   <string name="crash_dialog_text">Uiii. Zerbait gaizki dabil!</string>

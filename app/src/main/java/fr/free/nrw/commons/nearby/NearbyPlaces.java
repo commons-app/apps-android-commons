@@ -1,7 +1,6 @@
 package fr.free.nrw.commons.nearby;
 
 import android.net.Uri;
-import android.os.StrictMode;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -9,6 +8,7 @@ import java.io.InputStreamReader;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
@@ -30,12 +30,10 @@ public class NearbyPlaces {
     private static final Uri WIKIDATA_QUERY_UI_URL = Uri.parse("https://query.wikidata.org/");
     private final String wikidataQuery;
     private double radius = INITIAL_RADIUS;
-    private List<Place> places;
 
     public NearbyPlaces() {
         try {
-            String query = FileUtils.readFromResource("/assets/queries/nearby_query.rq");
-            wikidataQuery = query;
+            wikidataQuery = FileUtils.readFromResource("/queries/nearby_query.rq");
             Timber.v(wikidataQuery);
         } catch (IOException e) {
             throw new RuntimeException(e);
@@ -47,7 +45,7 @@ public class NearbyPlaces {
 
         try {
             // increase the radius gradually to find a satisfactory number of nearby places
-            while (radius < MAX_RADIUS) {
+            while (radius <= MAX_RADIUS) {
                 places = getFromWikidataQuery(curLatLng, lang, radius);
                 Timber.d("%d results at radius: %f", places.size(), radius);
                 if (places.size() >= MIN_RESULTS) {
@@ -63,6 +61,11 @@ public class NearbyPlaces {
             Timber.d("back to initial radius: %f", radius);
             radius = INITIAL_RADIUS;
         }
+        // make sure we will be able to send at least one request next time
+        if (radius > MAX_RADIUS) {
+            radius = MAX_RADIUS;
+        }
+
         return places;
     }
 
@@ -98,16 +101,20 @@ public class NearbyPlaces {
             }
 
             String[] fields = line.split("\t");
+            Timber.v("Fields: " + Arrays.toString(fields));
             String point = fields[0];
+            String wikiDataLink = Utils.stripLocalizedString(fields[1]);
             String name = Utils.stripLocalizedString(fields[2]);
             String type = Utils.stripLocalizedString(fields[4]);
+            String icon = fields[5];
             String wikipediaSitelink = Utils.stripLocalizedString(fields[7]);
             String commonsSitelink = Utils.stripLocalizedString(fields[8]);
-            String wikiDataLink = Utils.stripLocalizedString(fields[1]);
-            String icon = fields[5];
+            String category = Utils.stripLocalizedString(fields[9]);
 
-            double latitude = 0;
-            double longitude = 0;
+            Timber.v("Name: " + name + ", type: " + type + ", category: " + category + ", wikipediaSitelink: " + wikipediaSitelink + ", commonsSitelink: " + commonsSitelink);
+
+            double latitude;
+            double longitude;
             Matcher matcher =
                     Pattern.compile("Point\\(([^ ]+) ([^ ]+)\\)").matcher(point);
             if (!matcher.find()) {
@@ -122,10 +129,11 @@ public class NearbyPlaces {
 
             places.add(new Place(
                     name,
-                    type, // list
+                    Place.Label.fromText(type), // list
                     type, // details
                     Uri.parse(icon),
                     new LatLng(latitude, longitude, 0),
+                    category,
                     new Sitelinks.Builder()
                             .setWikipediaLink(wikipediaSitelink)
                             .setCommonsLink(commonsSitelink)
@@ -135,68 +143,6 @@ public class NearbyPlaces {
         }
         in.close();
 
-        return places;
-    }
-
-    List<Place> getFromWikiNeedsPictures() {
-        if (places != null) {
-            return places;
-        } else {
-            try {
-                places = new ArrayList<>();
-                StrictMode.ThreadPolicy policy
-                        = new StrictMode.ThreadPolicy.Builder().permitAll().build();
-                StrictMode.setThreadPolicy(policy);
-
-                URL file = new URL("https://tools.wmflabs.org/wiki-needs-pictures/data/data.csv");
-
-                BufferedReader in = new BufferedReader(new InputStreamReader(file.openStream()));
-
-                boolean firstLine = true;
-                String line;
-                Timber.d("Reading from CSV file...");
-
-                while ((line = in.readLine()) != null) {
-
-                    // Skip CSV header.
-                    if (firstLine) {
-                        firstLine = false;
-                        continue;
-                    }
-
-                    String[] fields = line.split(",");
-                    String name = Utils.stripLocalizedString(fields[0]);
-
-                    double latitude;
-                    double longitude;
-                    try {
-                        latitude = Double.parseDouble(fields[1]);
-                    } catch (NumberFormatException e) {
-                        latitude = 0;
-                    }
-                    try {
-                        longitude = Double.parseDouble(fields[2]);
-                    } catch (NumberFormatException e) {
-                        longitude = 0;
-                    }
-
-                    String type = fields[3];
-
-                    places.add(new Place(
-                            name,
-                            type, // list
-                            type, // details
-                            null,
-                            new LatLng(latitude, longitude, 0),
-                            new Sitelinks.Builder().build()
-                    ));
-                }
-                in.close();
-
-            } catch (IOException e) {
-                Timber.d(e.toString());
-            }
-        }
         return places;
     }
 }

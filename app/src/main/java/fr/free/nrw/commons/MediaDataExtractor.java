@@ -1,6 +1,7 @@
 package fr.free.nrw.commons;
 
-import org.mediawiki.api.ApiResult;
+import android.support.annotation.Nullable;
+
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -10,17 +11,19 @@ import org.xml.sax.SAXException;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import javax.inject.Inject;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
 import fr.free.nrw.commons.location.LatLng;
+import fr.free.nrw.commons.mwapi.MediaResult;
+import fr.free.nrw.commons.mwapi.MediaWikiApi;
 import timber.log.Timber;
 
 /**
@@ -30,61 +33,49 @@ import timber.log.Timber;
  * which are not intrinsic to the media and may change due to editing.
  */
 public class MediaDataExtractor {
+    private final MediaWikiApi mediaWikiApi;
     private boolean fetched;
-
-    private String filename;
+    private boolean deletionStatus;
     private ArrayList<String> categories;
     private Map<String, String> descriptions;
-    private Date date;
     private String license;
-    private String coordinates;
-    private LicenseList licenseList;
+    private @Nullable LatLng coordinates;
 
-    /**
-     * @param filename of the target media object, should include 'File:' prefix
-     */
-    public MediaDataExtractor(String filename, LicenseList licenseList) {
-        this.filename = filename;
-        categories = new ArrayList<>();
-        descriptions = new HashMap<>();
-        fetched = false;
-        this.licenseList = licenseList;
+    @Inject
+    public MediaDataExtractor(MediaWikiApi mwApi) {
+        this.categories = new ArrayList<>();
+        this.descriptions = new HashMap<>();
+        this.fetched = false;
+        this.mediaWikiApi = mwApi;
     }
 
-    /**
+    /*
      * Actually fetch the data over the network.
      * todo: use local caching?
      *
      * Warning: synchronous i/o, call on a background thread
      */
-    public void fetch() throws IOException {
+    public void fetch(String filename, LicenseList licenseList) throws IOException {
         if (fetched) {
             throw new IllegalStateException("Tried to call MediaDataExtractor.fetch() again.");
         }
 
-        MWApi api = CommonsApplication.getInstance().getMWApi();
-        ApiResult result = api.action("query")
-                .param("prop", "revisions")
-                .param("titles", filename)
-                .param("rvprop", "content")
-                .param("rvlimit", 1)
-                .param("rvgeneratexml", 1)
-                .get();
+        try{
+            Timber.d("Nominated for deletion: " + mediaWikiApi.pageExists("Commons:Deletion_requests/"+filename));
+            deletionStatus = mediaWikiApi.pageExists("Commons:Deletion_requests/"+filename);
+        }
+        catch (Exception e){
+            Timber.d(e.getMessage());
+        }
 
-        processResult(result);
-        fetched = true;
-    }
-
-    private void processResult(ApiResult result) throws IOException {
-
-        String wikiSource = result.getString("/api/query/pages/page/revisions/rev");
-        String parseTreeXmlSource = result.getString("/api/query/pages/page/revisions/rev/@parsetree");
+        MediaResult result = mediaWikiApi.fetchMediaByFilename(filename);
 
         // In-page category links are extracted from source, as XML doesn't cover [[links]]
-        extractCategories(wikiSource);
+        extractCategories(result.getWikiSource());
 
         // Description template info is extracted from preprocessor XML
-        processWikiParseTree(parseTreeXmlSource);
+        processWikiParseTree(result.getParseTreeXmlSource(), licenseList);
+        fetched = true;
     }
 
     /**
@@ -102,7 +93,7 @@ public class MediaDataExtractor {
         }
     }
 
-    private void processWikiParseTree(String source) throws IOException {
+    private void processWikiParseTree(String source, LicenseList licenseList) throws IOException {
         Document doc;
         try {
             DocumentBuilder docBuilder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
@@ -125,7 +116,7 @@ public class MediaDataExtractor {
         if (coordinateTemplateNode != null) {
             coordinates = getCoordinates(coordinateTemplateNode);
         } else {
-            coordinates = "No coordinates found";
+            coordinates = null;
         }
 
         /*
@@ -163,14 +154,14 @@ public class MediaDataExtractor {
         }
     }
 
-    private Node findTemplate(Element parentNode, String title) throws IOException {
-        String ucTitle= Utils.capitalize(title);
+    private Node findTemplate(Element parentNode, String title_) throws IOException {
+        String title = new PageTitle(title_).getDisplayText();
         NodeList nodes = parentNode.getChildNodes();
         for (int i = 0, length = nodes.getLength(); i < length; i++) {
             Node node = nodes.item(i);
             if (node.getNodeName().equals("template")) {
                 String foundTitle = getTemplateTitle(node);
-                if (Utils.capitalize(foundTitle).equals(ucTitle)) {
+                if (title.equals(new PageTitle(foundTitle).getDisplayText())) {
                     return node;
                 }
             }
@@ -190,7 +181,7 @@ public class MediaDataExtractor {
     }
 
     private static abstract class TemplateChildNodeComparator {
-        abstract public boolean match(Node node);
+        public abstract boolean match(Node node);
     }
 
     private Node findTemplateParameter(Node templateNode, String name) throws IOException {
@@ -249,22 +240,20 @@ public class MediaDataExtractor {
     }
 
     /**
-     * Extracts the coordinates from the template and returns them as pretty formatted string.
+     * Extracts the coordinates from the template.
      * Loops over the children of the coordinate template:
      *      {{Location|47.50111007666667|19.055700301944444}}
-     * and extracts the latitude and longitude as a pretty string.
+     * and extracts the latitude and longitude.
      *
      * @param parentNode The node of the coordinates template.
-     * @return Pretty formatted coordinates.
+     * @return Extracted coordinates.
      * @throws IOException Parsing failed.
      */
-    private String getCoordinates(Node parentNode) throws IOException {
+    private LatLng getCoordinates(Node parentNode) throws IOException {
         NodeList childNodes = parentNode.getChildNodes();
         double latitudeText = Double.parseDouble(childNodes.item(1).getTextContent());
         double longitudeText = Double.parseDouble(childNodes.item(2).getTextContent());
-        LatLng coordinates = new LatLng(latitudeText, longitudeText, 0);
-
-        return coordinates.getPrettyCoordinateString();
+        return new LatLng(latitudeText, longitudeText, 0);
     }
 
     // Extract a dictionary of multilingual texts from a subset of the parse tree.
@@ -303,7 +292,7 @@ public class MediaDataExtractor {
     /**
      * Take our metadata and inject it into a live Media object.
      * Media object might contain stale or cached data, or emptiness.
-     * @param media
+     * @param media Media object to inject into
      */
     public void fill(Media media) {
         if (!fetched) {
@@ -315,6 +304,9 @@ public class MediaDataExtractor {
         media.setCoordinates(coordinates);
         if (license != null) {
             media.setLicense(license);
+        }
+        if (deletionStatus){
+            media.setRequestedDeletion();
         }
 
         // add author, date, etc fields

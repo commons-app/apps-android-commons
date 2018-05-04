@@ -1,19 +1,33 @@
 package fr.free.nrw.commons.location;
 
+import android.location.Location;
+import android.net.Uri;
+import android.support.annotation.NonNull;
+
+/**
+ * a latitude and longitude point with accuracy information, often of a picture
+ */
 public class LatLng {
 
     private final double latitude;
     private final double longitude;
     private final float accuracy;
 
-    /** Accepts latitude and longitude.
+    /**
+     * Accepts latitude and longitude.
      * North and South values are cut off at 90°
      *
-     * @param latitude double value
-     * @param longitude double value
+     * @param latitude the latitude
+     * @param longitude the longitude
+     * @param accuracy the accuracy
+     *
+     * Examples:
+     * the Statue of Liberty is located at 40.69° N, 74.04° W
+     * The Statue of Liberty could be constructed as LatLng(40.69, -74.04, 1.0)
+     * where positive signifies north, east and negative signifies south, west.
      */
     public LatLng(double latitude, double longitude, float accuracy) {
-        if(-180.0D <= longitude && longitude < 180.0D) {
+        if (-180.0D <= longitude && longitude < 180.0D) {
             this.longitude = longitude;
         } else {
             this.longitude = ((longitude - 180.0D) % 360.0D + 360.0D) % 360.0D - 180.0D;
@@ -22,20 +36,35 @@ public class LatLng {
         this.accuracy = accuracy;
     }
 
-    public int hashCode() {
-        boolean var1 = true;
-        byte var2 = 1;
-        long var3 = Double.doubleToLongBits(this.latitude);
-        int var5 = 31 * var2 + (int)(var3 ^ var3 >>> 32);
-        var3 = Double.doubleToLongBits(this.longitude);
-        var5 = 31 * var5 + (int)(var3 ^ var3 >>> 32);
-        return var5;
+    /**
+     * gets the latitude and longitude of a given non-null location
+     * @param location the non-null location of the user
+     * @return LatLng the Latitude and Longitude of a given location
+     */
+    public static LatLng from(@NonNull Location location) {
+        return new LatLng(location.getLatitude(), location.getLongitude(), location.getAccuracy());
     }
 
+    /**
+     * creates a hash code for the longitude and longitude
+     */
+    public int hashCode() {
+        byte var1 = 1;
+        long var2 = Double.doubleToLongBits(this.latitude);
+        int var3 = 31 * var1 + (int)(var2 ^ var2 >>> 32);
+        var2 = Double.doubleToLongBits(this.longitude);
+        var3 = 31 * var3 + (int)(var2 ^ var2 >>> 32);
+        return var3;
+    }
+
+    /**
+     * checks for equality of two LatLng objects
+     * @param o the second LatLng object
+     */
     public boolean equals(Object o) {
-        if(this == o) {
+        if (this == o) {
             return true;
-        } else if(!(o instanceof LatLng)) {
+        } else if (!(o instanceof LatLng)) {
             return false;
         } else {
             LatLng var2 = (LatLng)o;
@@ -43,6 +72,9 @@ public class LatLng {
         }
     }
 
+    /**
+     * returns a string representation of the latitude and longitude
+     */
     public String toString() {
         return "lat/lng: (" + this.latitude + "," + this.longitude + ")";
     }
@@ -122,4 +154,9 @@ public class LatLng {
     public double getLatitude() {
         return latitude;
     }
+
+    public Uri getGmmIntentUri() {
+        return Uri.parse("geo:0,0?q=" + latitude + "," + longitude);
+    }
 }
+

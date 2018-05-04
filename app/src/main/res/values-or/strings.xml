@@ -1,4 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- Authors:
+* Ansumang
+* Psubhashish
+-->
 <resources>
   <string name="app_name" fuzzy="true">ଉଇକିମିଡ଼ିଆ କମନ୍ସ</string>
   <string name="menu_settings">ସଂରଚନା</string>
@@ -43,15 +47,13 @@
   <string name="categories_search_text_hint">ଶ୍ରେଣୀଗୁଡ଼ିକ ଖୋଜନ୍ତୁ</string>
   <string name="menu_save_categories">ସାଇତିବେ [Save]</string>
   <string name="categories_not_found">%1$s ସହ ମେଳ ହେଉଥିବା କୌଣସି ଶ୍ରେଣୀ ମିଳିଲା ନାହିଁ</string>
-  <string name="categories_skip_explanation">ଶ୍ରେଣୀମାନ ଯୋଡ଼ିବା ପାଇଁ ଟାଇପ କରନ୍ତୁ ।\nଏହି ସୋପାନଟି ବାଦ ଦେବା ପାଇଁ ମେସେଜଟି ଉପରେ ଟ୍ୟାପ କରନ୍ତୁ (କିମ୍ବା ପଛକୁ ଫେରନ୍ତୁ) ।</string>
+  <string name="categories_skip_explanation" fuzzy="true">ଶ୍ରେଣୀମାନ ଯୋଡ଼ିବା ପାଇଁ ଟାଇପ କରନ୍ତୁ ।\nଏହି ସୋପାନଟି ବାଦ ଦେବା ପାଇଁ ମେସେଜଟି ଉପରେ ଟ୍ୟାପ କରନ୍ତୁ (କିମ୍ବା ପଛକୁ ଫେରନ୍ତୁ) ।</string>
   <string name="categories_activity_title">ଶ୍ରେଣୀସମୂହ</string>
-  <string name="preference_tracking">ବ୍ୟବହାର ବିବରଣୀ</string>
-  <string name="preference_tracking_summary">ଉଇକିମିଡ଼ିଆକୁ ବ୍ୟବହାର ବିବରଣୀ ପଠାଇ ଆମକୁ ଏହି ଆପ୍ଲିକେସନଟିକୁ ଉନ୍ନତ କରିବାରେ ସାହାଯ୍ୟ କରନ୍ତୁ</string>
   <string name="title_activity_settings">ସଂରଚନା</string>
   <string name="menu_about">ବାବଦରେ</string>
   <string name="about_license" fuzzy="true">ଓପନ ସୋର୍ସ ସଫ୍ଟୱାର &lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/COPYING\"&gt;Apache License v2&lt;/a&gt;ରେ ବିତରିତ</string>
   <string name="about_improve" fuzzy="true">ମୂଳସବୁ &lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;GitHub&lt;/a&gt;ରେ ରହିଛି । ଅସୁବିଧାସବୁ &lt;a href=\" https://github.com/commons-app/apps-android-commons/issues\"&gt;Github&lt;/a&gt;ରେ ଜଣାଇବେ ।</string>
-  <string name="about_privacy_policy">&lt;a href=\"https://wikimediafoundation.org/wiki/Privacy_policy\"&gt;ଗୋପନୀୟତା ନୀତି&lt;/a&gt;</string>
+  <string name="about_privacy_policy" fuzzy="true">&lt;a href=\"https://wikimediafoundation.org/wiki/Privacy_policy\"&gt;ଗୋପନୀୟତା ନୀତି&lt;/a&gt;</string>
   <string name="title_activity_about">ବାବଦରେ</string>
   <string name="menu_feedback">ଇମେଲରେ ମତାମତ ପଠାଇବେ</string>
   <string name="provider_categories">ନିକଟରେ ବ୍ୟବହୃତ ଶ୍ରେଣୀମାନ</string>
@@ -61,7 +63,7 @@
   <string name="menu_cancel_upload">ବାତିଲ</string>
   <string name="share_license_summary">ଏହି ଛବିଟି %1$s ରେ ଲାଇସେନ୍ସକୃତ ହେବ</string>
   <string name="menu_download">ଡାଉନଲୋଡ଼</string>
-  <string name="preference_license">ଲାଇସେନ୍ସ</string>
+  <string name="preference_license" fuzzy="true">ଲାଇସେନ୍ସ</string>
   <string name="license_name_cc_by_sa" fuzzy="true">CC Attribution-ShareAlike 3.0</string>
   <string name="license_name_cc_by" fuzzy="true">CC Attribution 3.0</string>
   <string name="license_name_cc0">CC0</string>

@@ -2,21 +2,19 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="?attr/commonsAppBlue"
-    >
+    android:background="@color/primaryColor">
 
     <android.support.v4.view.ViewPager
         android:id="@+id/welcomePager"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:fadingEdge="none"
-        />
+        android:fadingEdge="none" />
 
     <com.viewpagerindicator.CirclePageIndicator
         android:id="@+id/welcomePagerIndicator"
-        android:layout_height="24dp"
+        android:layout_height="@dimen/half_standard_height"
         android:layout_width="match_parent"
         android:layout_gravity="bottom"
-        />
+        android:padding="5dp" />
 
 </FrameLayout>

@@ -1,36 +1,78 @@
+apply from: '../gitutils.gradle'
 apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
 apply plugin: 'jacoco-android'
 apply from: 'quality.gradle'
+apply plugin: 'com.getkeepsafe.dexcount'
 
 dependencies {
-    compile 'com.github.nicolas-raoul:Quadtree:ac16ea8035bf07'
-    compile 'fr.avianey.com.viewpagerindicator:library:2.4.1.1@aar'
-    compile 'in.yuvi:http.fluent:1.3'
-    compile 'com.android.volley:volley:1.0.0'
-    compile 'ch.acra:acra:4.7.0'
-    compile 'org.mediawiki:api:1.3'
-    compile 'commons-codec:commons-codec:1.10'
-    compile "com.android.support:support-v4:${project.supportLibVersion}"
-    compile "com.android.support:appcompat-v7:${project.supportLibVersion}"
-    compile "com.android.support:design:${project.supportLibVersion}"
-    compile 'com.google.code.gson:gson:2.7'
-    compile "com.jakewharton:butterknife:$BUTTERKNIFE_VERSION"
-    annotationProcessor "com.jakewharton:butterknife-compiler:$BUTTERKNIFE_VERSION"
-    compile 'com.jakewharton.timber:timber:4.5.1'
-    compile ('com.mapbox.mapboxsdk:mapbox-android-sdk:5.0.2@aar'){
+    implementation 'com.github.nicolas-raoul:Quadtree:ac16ea8035bf07'
+    implementation 'fr.avianey.com.viewpagerindicator:library:2.4.1.1@aar'
+    implementation 'in.yuvi:http.fluent:1.3'
+    implementation 'com.github.chrisbanes:PhotoView:2.0.0'
+    implementation 'com.android.volley:volley:1.0.0'
+    implementation 'ch.acra:acra:4.9.2'
+    implementation 'org.mediawiki:api:1.3'
+    implementation 'commons-codec:commons-codec:1.10'
+    implementation 'com.github.pedrovgs:renderers:3.3.3'
+    implementation 'com.google.code.gson:gson:2.8.1'
+    implementation 'com.jakewharton.timber:timber:4.5.1'
+    implementation 'info.debatty:java-string-similarity:0.24'
+    implementation 'com.borjabravo:readmoretextview:2.1.0'
+    implementation 'com.android.support.constraint:constraint-layout:1.0.2'
+    implementation ('com.mapbox.mapboxsdk:mapbox-android-sdk:5.4.1@aar'){
         transitive=true
     }
-    compile 'com.facebook.fresco:fresco:1.3.0'
-    compile 'com.facebook.stetho:stetho:1.5.0'
-    compile "com.google.guava:guava:${GUAVA_VERSION}"
 
-    testCompile 'junit:junit:4.12'
-    androidTestCompile "com.android.support:support-annotations:${project.supportLibVersion}"
-    androidTestCompile 'com.android.support.test.espresso:espresso-core:2.2.2'
+    implementation "com.android.support:support-v4:$SUPPORT_LIB_VERSION"
+    implementation "com.android.support:appcompat-v7:$SUPPORT_LIB_VERSION"
+    implementation "com.android.support:design:$SUPPORT_LIB_VERSION"
+    implementation "com.android.support:customtabs:$SUPPORT_LIB_VERSION"
 
-    debugCompile 'com.squareup.leakcanary:leakcanary-android:1.5.1'
-    releaseCompile 'com.squareup.leakcanary:leakcanary-android-no-op:1.5.1'
-    testCompile 'com.squareup.leakcanary:leakcanary-android-no-op:1.5.1'
+    implementation "com.android.support:cardview-v7:$SUPPORT_LIB_VERSION"
+
+    implementation "com.jakewharton:butterknife:$BUTTERKNIFE_VERSION"
+    kapt "com.jakewharton:butterknife-compiler:$BUTTERKNIFE_VERSION"
+
+    implementation 'com.squareup.okhttp3:okhttp:3.9.1'
+    implementation 'com.squareup.okio:okio:1.13.0'
+
+    implementation 'io.reactivex.rxjava2:rxandroid:2.0.1'
+    // Because RxAndroid releases are few and far between, it is recommended you also
+    // explicitly depend on RxJava's latest version for bug fixes and new features.
+    implementation 'com.android.support:multidex:1.0.3'
+
+    implementation 'io.reactivex.rxjava2:rxjava:2.1.2'
+    implementation 'com.jakewharton.rxbinding2:rxbinding:2.0.0'
+    implementation 'com.jakewharton.rxbinding2:rxbinding-support-v4:2.0.0'
+    implementation 'com.jakewharton.rxbinding2:rxbinding-appcompat-v7:2.0.0'
+    implementation 'com.jakewharton.rxbinding2:rxbinding-design:2.0.0'
+
+    implementation 'com.facebook.fresco:fresco:1.5.0'
+    implementation 'com.facebook.stetho:stetho:1.5.0'
+
+    implementation "com.google.dagger:dagger:$DAGGER_VERSION"
+    implementation "com.google.dagger:dagger-android-support:$DAGGER_VERSION"
+    kapt "com.google.dagger:dagger-android-processor:$DAGGER_VERSION"
+    kapt "com.google.dagger:dagger-compiler:$DAGGER_VERSION"
+
+    testImplementation "org.robolectric:multidex:3.4.2"
+    testImplementation "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
+    testImplementation "org.jetbrains.kotlin:kotlin-reflect:$kotlin_version"
+    testImplementation 'junit:junit:4.12'
+    testImplementation 'org.robolectric:robolectric:3.7.1'
+    testImplementation 'com.nhaarman:mockito-kotlin:1.5.0'
+    testImplementation 'com.squareup.okhttp3:mockwebserver:3.8.1'
+
+    androidTestImplementation "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
+    androidTestImplementation 'com.squareup.okhttp3:mockwebserver:3.8.1'
+    androidTestImplementation "com.android.support:support-annotations:$SUPPORT_LIB_VERSION"
+    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2-alpha1'
+
+    debugImplementation "com.squareup.leakcanary:leakcanary-android:$LEAK_CANARY"
+    releaseImplementation "com.squareup.leakcanary:leakcanary-android-no-op:$LEAK_CANARY"
+    testImplementation "com.squareup.leakcanary:leakcanary-android-no-op:$LEAK_CANARY"
 }
 
 android {
@@ -41,12 +83,31 @@ android {
 
     defaultConfig {
         applicationId 'fr.free.nrw.commons'
-        versionCode 73
-        versionName '2.4.2'
+        versionCode 84
+        versionName '2.7.1'
+        setProperty("archivesBaseName", "app-commons-v$versionName-" + getBranchName())
+
         minSdkVersion project.minSdkVersion
         targetSdkVersion project.targetSdkVersion
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary = true
+
+        multiDexEnabled true
+    }
+
+    testOptions {
+        unitTests.all {
+            jvmArgs '-noverify'
+        }
+    }
+
+    sourceSets {
+        // use kotlin only in tests (for now)
+        test.java.srcDirs += 'src/test/kotlin'
+
+        // use main assets and resources in test
+        test.assets.srcDirs += 'src/main/assets'
+        test.resources.srcDirs += 'src/main/resoures'
     }
 
     buildTypes {
@@ -55,7 +116,43 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
         }
         debug {
+            applicationIdSuffix ".debug"
             testCoverageEnabled true
+            versionNameSuffix "-debug-" + getBranchName() + "~" + getBuildVersion()
+        }
+    }
+
+    flavorDimensions 'tier'
+    productFlavors {
+        prod {
+            buildConfigField "String", "WIKIMEDIA_API_HOST", "\"https://commons.wikimedia.org/w/api.php\""
+            buildConfigField "String", "WIKIMEDIA_FORGE_API_HOST", "\"https://tools.wmflabs.org/\""
+            buildConfigField "String", "IMAGE_URL_BASE", "\"https://upload.wikimedia.org/wikipedia/commons\""
+            buildConfigField "String", "HOME_URL", "\"https://commons.wikimedia.org/wiki/\""
+            buildConfigField "String", "COMMONS_URL", "\"https://commons.wikimedia.org\""
+            buildConfigField "String", "MOBILE_HOME_URL", "\"https://commons.m.wikimedia.org/wiki/\""
+            buildConfigField "String", "EVENTLOG_URL", "\"https://www.wikimedia.org/beacon/event\""
+            buildConfigField "String", "EVENTLOG_WIKI", "\"commonswiki\""
+            buildConfigField "String", "SIGNUP_LANDING_URL", "\"https://commons.m.wikimedia.org/w/index.php?title=Special:CreateAccount&returnto=Main+Page&returntoquery=welcome%3Dyes\""
+            buildConfigField "String", "SIGNUP_SUCCESS_REDIRECTION_URL", "\"https://commons.m.wikimedia.org/w/index.php?title=Main_Page&welcome=yes\""
+            buildConfigField "String", "FORGOT_PASSWORD_URL", "\"https://commons.wikimedia.org/wiki/Special:PasswordReset\""
+            dimension 'tier'
+        }
+
+        beta {
+            // What values do we need to hit the BETA versions of the site / api ?
+            buildConfigField "String", "WIKIMEDIA_API_HOST", "\"https://commons.wikimedia.beta.wmflabs.org/w/api.php\""
+            buildConfigField "String", "WIKIMEDIA_FORGE_API_HOST", "\"https://tools.wmflabs.org/\""
+            buildConfigField "String", "IMAGE_URL_BASE", "\"https://upload.beta.wmflabs.org/wikipedia/commons\""
+            buildConfigField "String", "HOME_URL", "\"https://commons.wikimedia.beta.wmflabs.org/wiki/\""
+            buildConfigField "String", "COMMONS_URL", "\"https://commons.wikimedia.beta.wmflabs.org\""
+            buildConfigField "String", "MOBILE_HOME_URL", "\"https://commons.m.wikimedia.beta.wmflabs.org/wiki/\""
+            buildConfigField "String", "EVENTLOG_URL", "\"https://commons.wikimedia.beta.wmflabs.org/beacon/event\""
+            buildConfigField "String", "EVENTLOG_WIKI", "\"commonswiki\""
+            buildConfigField "String", "SIGNUP_LANDING_URL", "\"https://commons.m.wikimedia.beta.wmflabs.org/w/index.php?title=Special:CreateAccount&returnto=Main+Page&returntoquery=welcome%3Dyes\""
+            buildConfigField "String", "SIGNUP_SUCCESS_REDIRECTION_URL", "\"https://commons.m.wikimedia.beta.wmflabs.org/w/index.php?title=Main_Page&welcome=yes\""
+            buildConfigField "String", "FORGOT_PASSWORD_URL", "\"https://commons.wikimedia.beta.wmflabs.org/wiki/Special:PasswordReset\""
+            dimension 'tier'
         }
     }
 
@@ -65,8 +162,16 @@ android {
         abortOnError false
     }
 
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
     //FIXME: Temporary fix for https://github.com/commons-app/apps-android-commons/issues/709
     configurations.all {
         resolutionStrategy.force 'com.android.support:support-annotations:25.2.0'
+        exclude module: 'httpclient'
+        exclude module: 'commons-logging'
     }
+    buildToolsVersion buildToolsVersion
 }

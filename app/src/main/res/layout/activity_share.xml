@@ -9,18 +9,18 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-
         <include
             android:id="@+id/toolbar"
             layout="@layout/toolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
-        <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_below="@id/toolbar"
-            android:background="?attr/mainBackground">
+            android:background="?attr/mainBackground"
+            android:id="@+id/container">
 
             <com.facebook.drawee.view.SimpleDraweeView
                 android:id="@+id/backgroundImage"
@@ -33,20 +33,43 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" />
 
+            <com.github.chrisbanes.photoview.PhotoView
+                android:id="@+id/expanded_image"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:visibility="invisible" />
+
         </FrameLayout>
+
+
+
+        <android.support.design.widget.FloatingActionButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginRight="@dimen/standard_gap"
+            android:layout_marginBottom="@dimen/standard_gap"
+            android:src="@drawable/ic_zoom_in_white_24dp"
+            android:id="@+id/media_upload_zoom_in"/>
+        <android.support.design.widget.FloatingActionButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentBottom="true"
+            android:visibility="gone"
+            android:layout_marginRight="@dimen/standard_gap"
+            android:layout_marginBottom="@dimen/standard_gap"
+            android:src="@drawable/ic_zoom_out_white_24dp"
+            android:id="@+id/media_upload_zoom_out"/>
     </RelativeLayout>
 
-    <RelativeLayout
-        android:id="@+id/drawer_pane"
-        android:layout_width="320dp"
+    <android.support.design.widget.NavigationView
+        android:id="@+id/navigation_view"
+        android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_gravity="start"
-        android:background="@android:color/white">
-
-        <FrameLayout
-            android:id="@+id/drawer_fragment"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-    </RelativeLayout>
+        app:headerLayout="@layout/drawer_header"
+        app:menu="@menu/drawer" />
 
 </android.support.v4.widget.DrawerLayout>
