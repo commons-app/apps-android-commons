@@ -235,7 +235,6 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
             @Override
             protected void onPreExecute() {
                 showProgress(true);
-                extractor = new MediaDataExtractor(media.getFilename(), licenseList);
                 extractor = mediaDataExtractorProvider.get();
             }
 
