@@ -288,5 +288,6 @@
     <string name="statistics">STATISTICS</string>
     <string name="statistics_thanks">Thanks Received</string>
     <string name="statistics_featured">Featured Images</string>
-
+    <string name="level">LEVEL</string>
+    <string name="images_uploaded">Images Uploaded</string>
 </resources>
