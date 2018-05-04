@@ -14,6 +14,9 @@ import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -48,24 +51,35 @@ public class MediaDetailFragment extends Fragment {
         return mf;
     }
 
-    private MediaWikiImageView image;
-    private MediaDetailSpacer spacer;
     private int initialListTop = 0;
 
-    private TextView title;
-    private TextView desc;
-    private TextView license;
-    private TextView coordinates;
-    private TextView uploadedDate;
-    private LinearLayout categoryContainer;
-    private ScrollView scrollView;
+    //Changed the access specifiers of these view as well [ButterKnife wont let us bind private variables]
+    @BindView(R.id.mediaDetailImage)
+    MediaWikiImageView image;
+    @BindView(R.id.mediaDetailSpacer)
+    MediaDetailSpacer spacer;
+    @BindView(R.id.mediaDetailTitle)
+    TextView title;
+    @BindView(R.id.mediaDetailDesc)
+    TextView desc;
+    @BindView(R.id.mediaDetailLicense)
+    TextView license;
+    @BindView(R.id.mediaDetailCoordinates)
+    TextView coordinates;
+    @BindView(R.id.mediaDetailuploadeddate)
+    TextView uploadedDate;
+    @BindView(R.id.mediaDetailCategoryContainer)
+    LinearLayout categoryContainer;
+    @BindView(R.id.mediaDetailScrollView)
+    ScrollView scrollView;
+
     private ArrayList<String> categoryNames;
     private boolean categoriesLoaded = false;
     private boolean categoriesPresent = false;
     private ViewTreeObserver.OnGlobalLayoutListener layoutListener; // for layout stuff, only used once!
     private ViewTreeObserver.OnScrollChangedListener scrollListener;
     DataSetObserver dataObserver;
-    private AsyncTask<Void,Void,Boolean> detailFetchTask;
+    private AsyncTask<Void, Void, Boolean> detailFetchTask;
     private LicenseList licenseList;
 
     @Override
@@ -100,17 +114,7 @@ public class MediaDetailFragment extends Fragment {
 
         final View view = inflater.inflate(R.layout.fragment_media_detail, container, false);
 
-        image = (MediaWikiImageView) view.findViewById(R.id.mediaDetailImage);
-        scrollView = (ScrollView) view.findViewById(R.id.mediaDetailScrollView);
-
-        // Detail consists of a list view with main pane in header view, plus category list.
-        spacer = (MediaDetailSpacer) view.findViewById(R.id.mediaDetailSpacer);
-        title = (TextView) view.findViewById(R.id.mediaDetailTitle);
-        desc = (TextView) view.findViewById(R.id.mediaDetailDesc);
-        license = (TextView) view.findViewById(R.id.mediaDetailLicense);
-        coordinates = (TextView) view.findViewById(R.id.mediaDetailCoordinates);
-        uploadedDate = (TextView) view.findViewById(R.id.mediaDetailuploadeddate);
-        categoryContainer = (LinearLayout) view.findViewById(R.id.mediaDetailCategoryContainer);
+        ButterKnife.bind(this, view);
 
         licenseList = new LicenseList(getActivity());
 
@@ -271,22 +275,10 @@ public class MediaDetailFragment extends Fragment {
 
     private View buildCatLabel(String cat) {
         final String catName = cat;
-        final View item = getLayoutInflater(null).inflate(R.layout.detail_category_item, null, false);
-        final TextView textView = (TextView)item.findViewById(R.id.mediaDetailCategoryItemText);
-
-        textView.setText(cat);
-        if (categoriesLoaded && categoriesPresent) {
-            textView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    String selectedCategoryTitle = "Category:" + catName;
-                    Intent viewIntent = new Intent();
-                    viewIntent.setAction(Intent.ACTION_VIEW);
-                    viewIntent.setData(Utils.uriForWikiPage(selectedCategoryTitle));
-                    startActivity(viewIntent);
-                }
-            });
-        }
+        final View item = getLayoutInflater(null)
+                .inflate(R.layout.detail_category_item, null, false);
+        CategoryItemViewHolder categoryItemViewHolder = new CategoryItemViewHolder(item);
+        categoryItemViewHolder.init(catName);
         return item;
     }
 
@@ -342,5 +334,35 @@ public class MediaDetailFragment extends Fragment {
      */
     private String prettyCoordinates(Media media) {
         return media.getCoordinates();
+    }
+
+    /**
+     * Holds the individual category item views
+     */
+
+    public class CategoryItemViewHolder {
+
+        @BindView(R.id.mediaDetailCategoryItemText)
+        TextView mediaDetailCategoryItemText;
+
+        private String categoryTitle;
+
+        public CategoryItemViewHolder(View item) {
+            ButterKnife.bind(this, item);
+        }
+
+        public void init(String categoryName) {
+            this.categoryTitle = categoryName;
+            mediaDetailCategoryItemText.setText(categoryName);
+        }
+
+        @OnClick(R.id.mediaDetailCategoryItemText)
+        public void onCategoryItemClicked() {
+            String selectedCategoryTitle = "Category:" + categoryTitle;
+            Intent viewIntent = new Intent();
+            viewIntent.setAction(Intent.ACTION_VIEW);
+            viewIntent.setData(Utils.uriForWikiPage(selectedCategoryTitle));
+            startActivity(viewIntent);
+        }
     }
 }
