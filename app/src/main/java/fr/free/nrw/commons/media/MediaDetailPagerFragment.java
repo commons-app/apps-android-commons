@@ -27,6 +27,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.EventLog;
 import fr.free.nrw.commons.Media;
@@ -35,7 +37,8 @@ import fr.free.nrw.commons.contributions.Contribution;
 import fr.free.nrw.commons.contributions.ContributionsActivity;
 
 public class MediaDetailPagerFragment extends Fragment implements ViewPager.OnPageChangeListener {
-    private ViewPager pager;
+    @BindView(R.id.mediaDetailsPager)
+     ViewPager pager;
     private Boolean editable;
     private CommonsApplication app;
 
@@ -86,7 +89,7 @@ public class MediaDetailPagerFragment extends Fragment implements ViewPager.OnPa
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_media_detail_pager, container, false);
-        pager = (ViewPager) view.findViewById(R.id.mediaDetailsPager);
+        ButterKnife.bind(this,view);
         pager.addOnPageChangeListener(this);
 
         final MediaDetailAdapter adapter = new MediaDetailAdapter(getChildFragmentManager());
