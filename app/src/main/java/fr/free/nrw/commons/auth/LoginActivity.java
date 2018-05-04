@@ -53,6 +53,7 @@ import fr.free.nrw.commons.mwapi.MediaWikiApi;
 import fr.free.nrw.commons.nearby.NearbyActivity;
 import fr.free.nrw.commons.theme.NavigationBaseActivity;
 import fr.free.nrw.commons.ui.widget.HtmlTextView;
+import fr.free.nrw.commons.utils.ViewUtil;
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
@@ -116,14 +117,14 @@ public class LoginActivity extends AccountAuthenticatorActivity {
         usernameEdit.addTextChangedListener(textWatcher);
         usernameEdit.setOnFocusChangeListener((v, hasFocus) -> {
             if (!hasFocus) {
-                hideKeyboard(v);
+                ViewUtil.hideKeyboard(v);
             }
         });
 
         passwordEdit.addTextChangedListener(textWatcher);
         passwordEdit.setOnFocusChangeListener((v, hasFocus) -> {
             if (!hasFocus) {
-                hideKeyboard(v);
+                ViewUtil.hideKeyboard(v);
             }
         });
 
@@ -165,15 +166,6 @@ public class LoginActivity extends AccountAuthenticatorActivity {
     @OnClick(R.id.about_privacy_policy)
     void onPrivacyPolicyClicked() {
         Utils.handleWebUrl(this,Uri.parse("https://github.com/commons-app/apps-android-commons/wiki/Privacy-policy\\"));
-    }
-
-    public void hideKeyboard(View view) {
-        if (view != null) {
-            InputMethodManager inputMethodManager = (InputMethodManager) this.getSystemService(Activity.INPUT_METHOD_SERVICE);
-            if (inputMethodManager != null) {
-                inputMethodManager.hideSoftInputFromWindow(view.getWindowToken(), 0);
-            }
-        }
     }
 
     @Override

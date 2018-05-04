@@ -135,9 +135,10 @@ public class AboutActivity extends NavigationBaseActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.share_app_icon:
+                String shareText = "Upload photos to Wikimedia Commons on your phone\nDownload the Commons app: http://play.google.com/store/apps/details?id=fr.free.nrw.commons";
                 Intent sendIntent = new Intent();
                 sendIntent.setAction(Intent.ACTION_SEND);
-                sendIntent.putExtra(Intent.EXTRA_TEXT, "http://play.google.com/store/apps/details?id=fr.free.nrw.commons");
+                sendIntent.putExtra(Intent.EXTRA_TEXT, shareText);
                 sendIntent.setType("text/plain");
                 startActivity(Intent.createChooser(sendIntent, "Share app via..."));
                 return true;

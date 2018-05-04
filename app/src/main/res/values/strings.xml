@@ -272,6 +272,7 @@
   <string name="retry">Retry</string>
   <string name="skip_login">Skip </string>
   <string name="navigation_item_login">Login</string>
-    <string name="skip_login_title">Do you really want to skip login ?</string>
-  <string name="skip_login_message">You might not be able to access some features of the app.</string>
+  <string name="skip_login_title">Do you really want to skip login ?</string>
+  <string name="skip_login_message">You might not be able to access some features of the app.</string>=======
+  <string name="share_app_title">Share App</string>
 </resources>
