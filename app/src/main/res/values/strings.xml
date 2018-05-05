@@ -271,6 +271,7 @@
   <string name="about_translate_cancel">Cancel</string>
   <string name="retry">Retry</string>
 
-  <string name="no_featured_images">No featured images found</string>
-  <string name="error_featured_images">Error fetching featured images</string>
+  <string name="no_images_found">No images found!</string>
+  <string name="error_loading_images">Error occurred while loading images.</string>
+  <string name="image_uploaded_by">Uploaded by: %1$s</string>
 </resources>

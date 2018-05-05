@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import fr.free.nrw.commons.Media;
@@ -29,8 +30,16 @@ public class GridViewAdapter extends ArrayAdapter {
     }
 
     public void addItems(List<Media> images) {
+        if (data == null) {
+            data = new ArrayList<>();
+        }
         data.addAll(images);
         notifyDataSetChanged();
+    }
+
+    @Override
+    public boolean isEmpty() {
+        return data == null || data.isEmpty();
     }
 
     @Override
@@ -53,7 +62,8 @@ public class GridViewAdapter extends ArrayAdapter {
 
     private void setAuthorView(Media item, TextView author) {
         if (item.getCreator() != null && !item.getCreator().equals("")) {
-            author.setText(String.format("Uploaded by: %s", item.getCreator()));
+            String uploadedByTemplate = context.getString(R.string.image_uploaded_by);
+            author.setText(String.format(uploadedByTemplate, item.getCreator()));
         } else {
             author.setVisibility(View.GONE);
         }
