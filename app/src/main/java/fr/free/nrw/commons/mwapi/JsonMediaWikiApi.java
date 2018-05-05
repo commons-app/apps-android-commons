@@ -13,13 +13,14 @@ import java.net.CookieManager;
 import java.net.HttpCookie;
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.util.Collections;
 import java.util.List;
 
 import fr.free.nrw.commons.BuildConfig;
+import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.mwapi.request.HttpClientFactory;
 import fr.free.nrw.commons.mwapi.request.RequestBuilder;
 import fr.free.nrw.commons.mwapi.response.ApiResponse;
+import fr.free.nrw.commons.mwapi.response.QueryResponse.NotificationQueryResponse.NotificationResponse;
 import fr.free.nrw.commons.notification.Notification;
 import io.reactivex.Observable;
 import io.reactivex.Single;
@@ -34,7 +35,7 @@ import timber.log.Timber;
 import static fr.free.nrw.commons.mwapi.request.RequestBuilder.get;
 import static fr.free.nrw.commons.mwapi.request.RequestBuilder.post;
 
-class JsonMediaWikiApi implements MediaWikiApi {
+public class JsonMediaWikiApi implements MediaWikiApi {
     private static final String THUMB_SIZE = "640";
     private static final String CATEGORIES_NAMESPACE = "14";
 
@@ -192,6 +193,11 @@ class JsonMediaWikiApi implements MediaWikiApi {
         return allSuccess;
     }
 
+    @Override
+    public List<Media> getCategoryImages(String categoryName) { // TODO
+        return null;
+    }
+
     @NonNull
     @Override
     public UploadResult uploadFile(String filename, InputStream file, long dataLength, String pageContents, String editSummary, ProgressListener progressListener) {
@@ -276,7 +282,13 @@ class JsonMediaWikiApi implements MediaWikiApi {
     @NonNull
     @Override
     public List<Notification> getNotifications() {
-        return Collections.emptyList(); // TODO
+        return Observable.fromIterable(get().action("query")
+                .param("meta", "notifications")
+                .param("notprop", "list")
+                .param("notformat", "model")
+                .execute().query.getUsefulNotifications())
+                .map(NotificationResponse::toNotification)
+                .toList().blockingGet();
     }
 
     @NonNull

@@ -14,6 +14,7 @@ import dagger.Module;
 import dagger.Provides;
 import fr.free.nrw.commons.BuildConfig;
 import fr.free.nrw.commons.mwapi.ApacheHttpClientMediaWikiApi;
+import fr.free.nrw.commons.mwapi.JsonMediaWikiApi;
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
 import okhttp3.HttpUrl;
 import okhttp3.OkHttpClient;
@@ -35,7 +36,10 @@ public class NetworkingModule {
                                             @Named("default_preferences") SharedPreferences defaultPreferences,
                                             @Named("category_prefs") SharedPreferences categoryPrefs,
                                             Gson gson) {
-        return new ApacheHttpClientMediaWikiApi(context, BuildConfig.WIKIMEDIA_API_HOST, BuildConfig.WIKIDATA_API_HOST, defaultPreferences, categoryPrefs, gson);
+        return new JsonMediaWikiApi(
+                BuildConfig.WIKIMEDIA_API_HOST,
+                BuildConfig.WIKIMEDIA_FORGE_API_HOST);
+        // return new ApacheHttpClientMediaWikiApi(context, BuildConfig.WIKIMEDIA_API_HOST, defaultPreferences, categoryPrefs, gson);
     }
 
     @Provides

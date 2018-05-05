@@ -31,6 +31,7 @@ import fr.free.nrw.commons.utils.NetworkUtils;
 import fr.free.nrw.commons.utils.ViewUtil;
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 import timber.log.Timber;
 
@@ -91,8 +92,11 @@ public class NotificationActivity extends NavigationBaseActivity {
             Observable.fromCallable(() -> {
                 progressBar.setVisibility(View.VISIBLE);
                 return controller.getNotifications();
-            })
-                    .subscribeOn(Schedulers.io())
+            }).doOnEach(ln -> {
+                for (Notification n : ln.getValue()) {
+                    n.format(NotificationActivity.this);
+                }
+            }).subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe(notificationList -> {
                         Collections.reverse(notificationList);

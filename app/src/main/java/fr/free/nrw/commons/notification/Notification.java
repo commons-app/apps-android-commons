@@ -1,16 +1,16 @@
 package fr.free.nrw.commons.notification;
 
-/**
- * Created by root on 18.12.2017.
- */
+import android.content.Context;
 
 public class Notification {
-    public NotificationType notificationType;
+    public final NotificationType notificationType;
+    public final String date;
+    public final String description;
+    public final String link;
+    public final String iconUrl;
+    public final int notificationTextFormatId;
+    public final String[] notificationTextParameters;
     public String notificationText;
-    public String date;
-    public String description;
-    public String link;
-    public String iconUrl;
 
     public Notification(NotificationType notificationType, String notificationText, String date, String description, String link, String iconUrl) {
         this.notificationType = notificationType;
@@ -19,5 +19,24 @@ public class Notification {
         this.description = description;
         this.link = link;
         this.iconUrl = iconUrl;
+        this.notificationTextFormatId = 0;
+        this.notificationTextParameters = new String[0];
+    }
+
+    public Notification(NotificationType notificationType, String date, String description, String link, String icon, int notificationTextFormatId, String[] notificationTextParameters) {
+        this.notificationType = notificationType;
+        this.date = date;
+        this.description = description;
+        this.link = link;
+        this.iconUrl = icon;
+        this.notificationTextFormatId = notificationTextFormatId;
+        this.notificationTextParameters = notificationTextParameters;
+        this.notificationText = null;
+    }
+
+    @SuppressWarnings("ConfusingArgumentToVarargsMethod")
+    public Notification format(Context context) {
+        notificationText = context.getString(notificationTextFormatId, notificationTextParameters);
+        return this;
     }
 }

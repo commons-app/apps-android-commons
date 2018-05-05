@@ -9,6 +9,14 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
+import fr.free.nrw.commons.BuildConfig;
+import fr.free.nrw.commons.R;
+import fr.free.nrw.commons.notification.Notification;
+import fr.free.nrw.commons.notification.NotificationType;
+
+import static fr.free.nrw.commons.notification.NotificationType.THANK_YOU_EDIT;
+import static fr.free.nrw.commons.notification.NotificationType.UNKNOWN;
+
 @SuppressWarnings({"WeakerAccess", "unused"})
 public class QueryResponse {
     @SerializedName("tokens")
@@ -27,6 +35,8 @@ public class QueryResponse {
     public List<LogEventResponse> logEvents;
     @SerializedName("allimages")
     public List<ImageInfo> allImages;
+    @SerializedName("notifications")
+    public NotificationQueryResponse notifications;
 
     @Override
     public String toString() {
@@ -38,6 +48,11 @@ public class QueryResponse {
                 ", searchResults=" + searchResults +
                 ", allCategories=" + allCategories +
                 '}';
+    }
+
+    @NonNull
+    public List<NotificationQueryResponse.NotificationResponse> getUsefulNotifications() {
+        return notifications != null ? notifications.getUsefulNotifications() : Collections.emptyList();
     }
 
     @NonNull
@@ -87,6 +102,156 @@ public class QueryResponse {
                     "loginToken='" + loginToken + '\'' +
                     ", csrfToken='" + csrfToken + '\'' +
                     '}';
+        }
+    }
+
+    public class NotificationQueryResponse {
+        @SerializedName("list")
+        public List<NotificationResponse> list;
+        @SerializedName("continue")
+        public String continueIndicator;
+
+        public NotificationQueryResponse() {
+            list = Collections.emptyList();
+        }
+
+        @NonNull
+        public List<NotificationResponse> getUsefulNotifications() {
+            if (list == null) {
+                return Collections.emptyList();
+            }
+            List<NotificationResponse> nr = new ArrayList<>();
+            for (NotificationResponse response : list) {
+                if (response.isCommonsNotification()
+                        && !UNKNOWN.equals(response.getNotificationType())
+                        && !THANK_YOU_EDIT.equals(response.getNotificationType())) {
+                    nr.add(response);
+                }
+            }
+            return nr;
+        }
+
+        public class NotificationResponse {
+            private static final String COMMONS_WIKI = "commonswiki";
+
+            @SerializedName("wiki")
+            public String wiki;
+            @SerializedName("id")
+            public String id;
+            @SerializedName("type")
+            public String type;
+            @SerializedName("category")
+            public String category;
+            @SerializedName("timestamp")
+            public TimestampResponse timestamp;
+            @SerializedName("agent")
+            public AgentResponse agent;
+            @SerializedName("read")
+            public String read;
+            @SerializedName("title")
+            public TitleResponse title;
+            @SerializedName("*")
+            public ContentResponse content;
+
+            public boolean isCommonsNotification() {
+                return COMMONS_WIKI.equals(wiki);
+            }
+
+            public NotificationType getNotificationType() {
+                return NotificationType.handledValueOf(type);
+            }
+
+            @SuppressWarnings("unchecked")
+            public Notification toNotification() {
+                String link = content.getPrimaryLink();
+                String description = title != null && title.text != null ? title.text.trim() : "";
+                String icon = String.format("%s%s", BuildConfig.COMMONS_URL, content.iconUrl);
+                int notificationTextFormatId = 0;
+                String[] notificationTextParameters = new String[0];
+                NotificationType notificationType = NotificationType.handledValueOf(type);
+                switch (notificationType) {
+                    case THANK_YOU_EDIT:
+                        notificationTextFormatId = R.string.notifications_thank_you_edit;
+                        break;
+                    case EDIT_USER_TALK:
+                        notificationTextFormatId = R.string.notifications_talk_format;
+                        notificationTextParameters = new String[]{content.hasBody()
+                                ? content.body.trim()
+                                : content.header.trim()};
+                        break;
+                    case MENTION:
+                        notificationTextFormatId = R.string.notifications_mention;
+                        notificationTextParameters = new String[]{agent.name};
+                        description = content.hasBody() ? content.body.trim() : "";
+                        break;
+                    case WELCOME:
+                        notificationTextFormatId = R.string.notifications_welcome;
+                        notificationTextParameters = new String[]{agent.name};
+                        break;
+                }
+                return new Notification(notificationType, timestamp.date, description, link, icon, notificationTextFormatId, notificationTextParameters);
+            }
+
+            public class TitleResponse {
+                @SerializedName("full")
+                public String full;
+                @SerializedName("namespace")
+                public String namespace;
+                @SerializedName("namespace-key")
+                public String namespaceKey;
+                @SerializedName("text")
+                public String text;
+            }
+
+            public class TimestampResponse {
+                @SerializedName("utciso8601")
+                public String utciso8601;
+                @SerializedName("utcunix")
+                public String utcunix;
+                @SerializedName("unix")
+                public String unix;
+                @SerializedName("utcmw")
+                public String utcmw;
+                @SerializedName("mw")
+                public String mw;
+                @SerializedName("date")
+                public String date;
+            }
+
+            public class AgentResponse {
+                @SerializedName("id")
+                public long id;
+                @SerializedName("name")
+                public String name;
+            }
+
+            public class ContentResponse {
+                @SerializedName("header")
+                public String header;
+                @SerializedName("compactHeader")
+                public String compactHeader;
+                @SerializedName("body")
+                public String body;
+                @SerializedName("icon")
+                public String icon;
+                @SerializedName("iconUrl")
+                public String iconUrl;
+                @SerializedName("links")
+                public Map<String, Object> links;
+
+                public boolean hasBody() {
+                    return body != null && !body.trim().isEmpty();
+                }
+
+                public boolean hasPrimaryLink() {
+                    return links != null && links.get("primary") != null && links.get("primary") instanceof Map;
+                }
+
+                @SuppressWarnings("unchecked")
+                public String getPrimaryLink() {
+                    return hasPrimaryLink() ? (String) ((Map<String, Object>)links.get("primary")).get("url") : "";
+                }
+            }
         }
     }
 
