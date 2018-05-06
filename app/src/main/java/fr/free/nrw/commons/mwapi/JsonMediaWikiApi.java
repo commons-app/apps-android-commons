@@ -58,11 +58,6 @@ public class JsonMediaWikiApi implements MediaWikiApi {
     }
 
     @Override
-    public String getUserAgent() {
-        return "Commons/" + BuildConfig.VERSION_NAME + " (https://mediawiki.org/wiki/Apps/Commons) Android/" + Build.VERSION.RELEASE;
-    }
-
-    @Override
     public String getAuthCookie() {
         List<HttpCookie> cookies = cookieHandler.getCookieStore().getCookies();
         StringBuilder sb = new StringBuilder();

@@ -92,9 +92,8 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
         this.gson = gson;
     }
 
-    @Override
     @NonNull
-    public String getUserAgent() {
+    private String getUserAgent() {
         return "Commons/" + BuildConfig.VERSION_NAME + " (https://mediawiki.org/wiki/Apps/Commons) Android/" + Build.VERSION.RELEASE;
     }
 
