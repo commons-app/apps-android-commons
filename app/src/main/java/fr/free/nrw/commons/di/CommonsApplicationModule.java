@@ -87,6 +87,11 @@ public class CommonsApplicationModule {
         return context.getSharedPreferences("prefs", MODE_PRIVATE);
     }
 
+    /**
+     *
+     * @param context
+     * @return returns categoryPrefs
+     */
     @Provides
     @Named("category_prefs")
     public SharedPreferences providesCategorySharedPreferences(Context context) {
@@ -127,6 +132,10 @@ public class CommonsApplicationModule {
         return new LocationServiceManager(context);
     }
 
+    /**
+     * Gson objects are very heavy. The app should ideally be using just one instance of it instead of creating new instances everywhere.
+     * @return returns a singleton Gson instance
+     */
     @Provides
     @Singleton
     public Gson provideGson() {

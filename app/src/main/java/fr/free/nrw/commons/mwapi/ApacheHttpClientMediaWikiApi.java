@@ -466,8 +466,8 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
     /**
      * The method takes categoryName as input and returns a List of Media objects
      * It uses the generator query API to get the images in a category, 10 at a time.
-     *
-     * @param categoryName
+     * Uses the query continue values for fetching paginated responses
+     * @param categoryName Category name as defined on commons
      * @return
      */
     @Override
@@ -511,15 +511,27 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
         setQueryContinueValues(categoryName, queryContinue);
 
         NodeList childNodes = categoryImagesNode.getDocument().getChildNodes();
-        return CategoryImageUtils.getMediaList(context, childNodes);
+        return CategoryImageUtils.getMediaList(childNodes);
     }
 
+    /**
+     * For APIs that return paginated responses, MediaWiki APIs uses the QueryContinue to facilitate fetching of subsequent pages
+     * https://www.mediawiki.org/wiki/API:Raw_query_continue
+     * After fetching images a page of image for a particular category, shared prefs are updated with the latest QueryContinue Values
+     * @param keyword
+     * @param queryContinue
+     */
     private void setQueryContinueValues(String keyword, QueryContinue queryContinue) {
         SharedPreferences.Editor editor = categoryPreferences.edit();
         editor.putString(keyword, gson.toJson(queryContinue));
         editor.apply();
     }
 
+    /**
+     * Before making a paginated API call, this method is called to get the latest query continue values to be used
+     * @param keyword
+     * @return
+     */
     @Nullable
     private QueryContinue getQueryContinueValues(String keyword) {
         String queryContinueString = categoryPreferences.getString(keyword, null);

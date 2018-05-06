@@ -1,7 +1,5 @@
 package fr.free.nrw.commons.category;
 
-import android.content.Context;
-
 import org.jsoup.Jsoup;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -9,7 +7,6 @@ import org.w3c.dom.NodeList;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -21,17 +18,27 @@ import timber.log.Timber;
 
 public class CategoryImageUtils {
 
-    public static List<Media> getMediaList(Context context, NodeList childNodes) {
+    /**
+     * The method iterates over the child nodes to return a list of Media objects
+     * @param childNodes
+     * @return
+     */
+    public static List<Media> getMediaList(NodeList childNodes) {
         List<Media> categoryImages = new ArrayList<>();
         for (int i = 0; i < childNodes.getLength(); i++) {
             Node node = childNodes.item(i);
-            categoryImages.add(getMediaFromPage(context, node));
+            categoryImages.add(getMediaFromPage(node));
         }
 
         return categoryImages;
     }
 
-    private static Media getMediaFromPage(Context context, Node node) {
+    /**
+     * Creates a new Media object from the XML response as received by the API
+     * @param node
+     * @return
+     */
+    private static Media getMediaFromPage(Node node) {
         Media media = new Media(null,
                 getImageUrl(node),
                 getFileName(node),
@@ -47,19 +54,41 @@ public class CategoryImageUtils {
         return media;
     }
 
+    /**
+     * Extracts the filename of the uploaded image
+     * @param document
+     * @return
+     */
     private static String getFileName(Node document) {
         Element element = (Element) document;
         return element.getAttribute("title");
     }
 
+    /**
+     * Extracts the image description for that particular upload
+     * @param document
+     * @return
+     */
     private static String getDescription(Node document) {
         return getMetaDataValue(document, "ImageDescription");
     }
 
+    /**
+     * Extracts license information from the image meta data
+     * @param document
+     * @return
+     */
     private static String getLicense(Node document) {
         return getMetaDataValue(document, "License");
     }
 
+    /**
+     * Returns the parsed value of artist from the response
+     * The artist information is returned as a HTML string from the API. Jsoup library parses the HTML string
+     * to extract just the text value
+     * @param document
+     * @return
+     */
     private static String getCreator(Node document) {
         String artist = getMetaDataValue(document, "Artist");
         if (artist != null) {
@@ -68,6 +97,11 @@ public class CategoryImageUtils {
         return null;
     }
 
+    /**
+     * Returns the parsed date of creation of the image
+     * @param document
+     * @return
+     */
     private static Date getDateCreated(Node document) {
         String dateTime = getMetaDataValue(document, "DateTime");
         if (dateTime != null && !dateTime.equals("")) {
@@ -82,6 +116,10 @@ public class CategoryImageUtils {
         return new Date();
     }
 
+    /**
+     * @param document
+     * @return Returns the url attribute from the imageInfo node
+     */
     private static String getImageUrl(Node document) {
         Element element = (Element) getImageInfo(document);
         if (element != null) {
@@ -90,6 +128,11 @@ public class CategoryImageUtils {
         return null;
     }
 
+    /**
+     * Takes the node document and gives out the attribute length from the node document
+     * @param document
+     * @return
+     */
     private static long getDataLength(Node document) {
         Element element = (Element) document;
         if (element != null) {
@@ -101,6 +144,12 @@ public class CategoryImageUtils {
         return 0L;
     }
 
+    /**
+     * Generic method to get the value of any meta as returned by the getMetaData function
+     * @param document node document as returned by API
+     * @param metaName the name of meta node to be returned
+     * @return
+     */
     private static String getMetaDataValue(Node document, String metaName) {
         Element metaData = getMetaData(document, metaName);
         if (metaData != null) {
@@ -109,6 +158,12 @@ public class CategoryImageUtils {
         return null;
     }
 
+    /**
+     * Generic method to return an element taking the node document and metaName as input
+     * @param document node document as returned by API
+     * @param metaName the name of meta node to be returned
+     * @return
+     */
     @Nullable
     private static Element getMetaData(Node document, String metaName) {
         Node extraMetaData = getExtraMetaData(document);
@@ -121,6 +176,11 @@ public class CategoryImageUtils {
         return null;
     }
 
+    /**
+     * Extracts extmetadata from the response XML
+     * @param document
+     * @return
+     */
     @Nullable
     private static Node getExtraMetaData(Node document) {
         Node imageInfo = getImageInfo(document);
@@ -130,6 +190,11 @@ public class CategoryImageUtils {
         return null;
     }
 
+    /**
+     * Extracts the ii node from the imageinfo node
+     * @param document
+     * @return
+     */
     @Nullable
     private static Node getImageInfo(Node document) {
         Node imageInfo = getNode(document, "imageinfo");
@@ -139,6 +204,12 @@ public class CategoryImageUtils {
         return null;
     }
 
+    /**
+     * Takes a parent node as input and returns a child node if present
+     * @param node parent node
+     * @param nodeName child node name
+     * @return
+     */
     @Nullable
     public static Node getNode(Node node, String nodeName) {
         NodeList childNodes = node.getChildNodes();

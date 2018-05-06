@@ -35,6 +35,9 @@ import timber.log.Timber;
 import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
 
+/**
+ * Displays images for a particular category with load more on scrolling incorporated
+ */
 public class CategoryImagesListFragment extends DaggerFragment {
 
     private static int TIMEOUT_SECONDS = 15;
@@ -67,6 +70,10 @@ public class CategoryImagesListFragment extends DaggerFragment {
         initViews();
     }
 
+    /**
+     * Initializes the UI elements for the fragment
+     * Setup the grid view to and scroll listener for it
+     */
     private void initViews() {
         String categoryName = getArguments().getString("categoryName");
         if (getArguments() != null && categoryName != null) {
@@ -77,12 +84,20 @@ public class CategoryImagesListFragment extends DaggerFragment {
         }
     }
 
+    /**
+     * Query continue values determine the last page that was loaded for the particular keyword
+     * This method resets those values, so that the results can be queried from the first page itself
+     * @param keyword
+     */
     private void resetQueryContinueValues(String keyword) {
         SharedPreferences.Editor editor = categoryPreferences.edit();
         editor.remove(keyword);
         editor.apply();
     }
 
+    /**
+     * Checks for internet connection and then initializes the grid view with first 10 images of that category
+     */
     @SuppressLint("CheckResult")
     private void initList() {
         if(!NetworkUtils.isInternetConnectionEstablished(getContext())) {
@@ -99,6 +114,9 @@ public class CategoryImagesListFragment extends DaggerFragment {
                 .subscribe(this::handleSuccess, this::handleError);
     }
 
+    /**
+     * Handles the UI updates for no internet scenario
+     */
     private void handleNoInternet() {
         progressBar.setVisibility(GONE);
         if (gridAdapter == null || gridAdapter.isEmpty()) {
@@ -109,11 +127,18 @@ public class CategoryImagesListFragment extends DaggerFragment {
         }
     }
 
+    /**
+     * Logs and handles API error scenario
+     * @param throwable
+     */
     private void handleError(Throwable throwable) {
         Timber.e(throwable, "Error occurred while loading featured images");
         initErrorView();
     }
 
+    /**
+     * Handles the UI updates for a error scenario
+     */
     private void initErrorView() {
         ViewUtil.showSnackbar(gridView, R.string.error_loading_images);
         progressBar.setVisibility(GONE);
@@ -125,11 +150,20 @@ public class CategoryImagesListFragment extends DaggerFragment {
         }
     }
 
+    /**
+     * Initializes the adapter with a list of Media objects
+     * @param mediaList
+     */
     private void setAdapter(List<Media> mediaList) {
         gridAdapter = new GridViewAdapter(this.getContext(), R.layout.layout_category_images, mediaList);
         gridView.setAdapter(gridAdapter);
     }
 
+    /**
+     * Sets the scroll listener for the grid view so that more images are fetched when the user scrolls down
+     * Checks if the category has more images before loading
+     * Also checks whether images are currently being fetched before triggering another request
+     */
     private void setScrollListener() {
         gridView.setOnScrollListener(new AbsListView.OnScrollListener() {
             @Override
@@ -146,6 +180,9 @@ public class CategoryImagesListFragment extends DaggerFragment {
         });
     }
 
+    /**
+     * Fetches more images for the category and adds it to the grid view adapter
+     */
     @SuppressLint("CheckResult")
     private void fetchMoreImages() {
         if(!NetworkUtils.isInternetConnectionEstablished(getContext())) {
@@ -161,6 +198,11 @@ public class CategoryImagesListFragment extends DaggerFragment {
                 .subscribe(this::handleSuccess, this::handleError);
     }
 
+    /**
+     * Handles the success scenario
+     * On first load, it initializes the grid view. On subsequent loads, it adds items to the adapter
+     * @param collection
+     */
     private void handleSuccess(List<Media> collection) {
         if(collection == null || collection.isEmpty()) {
             initErrorView();

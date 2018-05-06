@@ -17,7 +17,10 @@ import fr.free.nrw.commons.media.MediaDetailPagerFragment;
 import timber.log.Timber;
 
 /**
- * This activity displays pic of the days of last xx days
+ * This activity displays pictures of a particular category
+ * Its generic and simply takes the name of category name in its start intent to load all images in
+ * a particular category. This activity is currently being used to display a list of featured images,
+ * which is nothing but another category on wikimedia commons.
  */
 
 public class CategoryImagesActivity
@@ -62,6 +65,9 @@ public class CategoryImagesActivity
         setPageTitle();
     }
 
+    /**
+     * Gets the categoryName from the intent and initializes the fragment for showing images of that category
+     */
     private void setCategoryImagesFragment() {
         categoryImagesListFragment = new CategoryImagesListFragment();
         String categoryName = getIntent().getStringExtra("categoryName");
@@ -76,6 +82,9 @@ public class CategoryImagesActivity
         }
     }
 
+    /**
+     * Gets the passed title from the intents and displays it as the page title
+     */
     private void setPageTitle() {
         if (getIntent() != null && getIntent().getStringExtra("title") != null) {
             setTitle(getIntent().getStringExtra("title"));
@@ -84,7 +93,6 @@ public class CategoryImagesActivity
 
     @Override
     public void onBackStackChanged() {
-        Timber.d("Do something");
     }
 
     @Override
@@ -103,6 +111,12 @@ public class CategoryImagesActivity
         mediaDetails.showImage(i);
     }
 
+    /**
+     * Consumers should be simply using this method to use this activity.
+     * @param context
+     * @param title Page title
+     * @param categoryName Name of the category for displaying its images
+     */
     public static void startYourself(Context context, String title, String categoryName) {
         Intent intent = new Intent(context, CategoryImagesActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);

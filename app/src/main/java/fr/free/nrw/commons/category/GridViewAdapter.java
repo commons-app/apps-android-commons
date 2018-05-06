@@ -29,6 +29,11 @@ public class GridViewAdapter extends ArrayAdapter {
         this.data = data;
     }
 
+    /**
+     * Adds more item to the list
+     * Its triggered on scrolling down in the list
+     * @param images
+     */
     public void addItems(List<Media> images) {
         if (data == null) {
             data = new ArrayList<>();
@@ -42,6 +47,13 @@ public class GridViewAdapter extends ArrayAdapter {
         return data == null || data.isEmpty();
     }
 
+    /**
+     * Sets up the UI for the category image item
+     * @param position
+     * @param convertView
+     * @param parent
+     * @return
+     */
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
 
@@ -60,6 +72,11 @@ public class GridViewAdapter extends ArrayAdapter {
         return convertView;
     }
 
+    /**
+     * Shows author information if its present
+     * @param item
+     * @param author
+     */
     private void setAuthorView(Media item, TextView author) {
         if (item.getCreator() != null && !item.getCreator().equals("")) {
             String uploadedByTemplate = context.getString(R.string.image_uploaded_by);

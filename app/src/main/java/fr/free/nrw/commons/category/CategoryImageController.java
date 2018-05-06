@@ -18,6 +18,11 @@ public class CategoryImageController {
         this.mediaWikiApi = mediaWikiApi;
     }
 
+    /**
+     * Takes a category name as input and calls the API to get a list of images for that category
+     * @param categoryName
+     * @return
+     */
     public List<Media> getCategoryImages(String categoryName) {
         return mediaWikiApi.getCategoryImages(categoryName);
     }

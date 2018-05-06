@@ -1,5 +1,9 @@
 package fr.free.nrw.commons.category;
 
+/**
+ * For APIs that return paginated responses, MediaWiki APIs uses the QueryContinue to facilitate fetching of subsequent pages
+ * https://www.mediawiki.org/wiki/API:Raw_query_continue
+ */
 public class QueryContinue {
     private String continueParam;
     private String gcmContinueParam;
