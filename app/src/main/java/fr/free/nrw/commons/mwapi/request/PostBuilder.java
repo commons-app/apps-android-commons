@@ -1,5 +1,7 @@
 package fr.free.nrw.commons.mwapi.request;
 
+import android.support.annotation.NonNull;
+
 import com.google.gson.Gson;
 
 import java.io.IOException;
@@ -26,6 +28,7 @@ class PostBuilder<T> extends AbstractBuilder<T> {
         super(okHttpClient, gsonParser, parsedApiEndpoint, returnClass);
     }
 
+    @NonNull
     @Override
     protected Response getResponse() throws IOException {
         return okHttpClient.newCall(

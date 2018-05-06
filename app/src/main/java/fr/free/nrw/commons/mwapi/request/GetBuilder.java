@@ -1,5 +1,7 @@
 package fr.free.nrw.commons.mwapi.request;
 
+import android.support.annotation.NonNull;
+
 import com.google.gson.Gson;
 
 import java.io.IOException;
@@ -15,6 +17,7 @@ class GetBuilder<T> extends AbstractBuilder<T> {
         super(okHttpClient, gsonParser, parsedApiEndpoint, returnClass);
     }
 
+    @NonNull
     @Override
     protected Response getResponse() throws IOException {
         return okHttpClient.newCall(
@@ -25,6 +28,7 @@ class GetBuilder<T> extends AbstractBuilder<T> {
         ).execute();
     }
 
+    @NonNull
     private HttpUrl buildGetRequest() {
         HttpUrl.Builder builder = parsedApiEndpoint.newBuilder();
         for (Map.Entry<String, Object> entry : params.entrySet()) {

@@ -1,5 +1,7 @@
 package fr.free.nrw.commons.mwapi.request;
 
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.util.Log;
 
 import com.google.gson.Gson;
@@ -30,6 +32,7 @@ abstract class AbstractBuilder<T> implements RequestBuilder.ActionBuilder<T>, Re
         this.returnClass = returnClass;
     }
 
+    @NonNull
     @Override
     public RequestBuilder.ParameterBuilder<T> action(String action) {
         params.put("format", "json");
@@ -37,30 +40,35 @@ abstract class AbstractBuilder<T> implements RequestBuilder.ActionBuilder<T>, Re
         return this;
     }
 
+    @NonNull
     @Override
     public RequestBuilder.ParameterBuilder<T> param(String name, String value) {
         params.put(name, value);
         return this;
     }
 
+    @NonNull
     @Override
     public RequestBuilder.ParameterBuilder<T> param(String name, int value) {
         params.put(name, "" + value);
         return this;
     }
 
+    @NonNull
     @Override
     public RequestBuilder.ParameterBuilder<T> param(String name, RequestBuilder.InputStreamDescriptor value) {
         params.put(name, value);
         return this;
     }
 
+    @NonNull
     @Override
     public RequestBuilder.ParameterBuilder<T> withListener(MediaWikiApi.ProgressListener listener) {
         this.listener = listener;
         return this;
     }
 
+    @Nullable
     @Override
     public T execute() {
         try {
@@ -82,5 +90,6 @@ abstract class AbstractBuilder<T> implements RequestBuilder.ActionBuilder<T>, Re
         return null;
     }
 
+    @NonNull
     protected abstract Response getResponse() throws IOException;
 }
