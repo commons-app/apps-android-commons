@@ -1,7 +1,6 @@
 package fr.free.nrw.commons.mwapi;
 
 import android.content.SharedPreferences;
-import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
@@ -16,7 +15,6 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
 
-import fr.free.nrw.commons.BuildConfig;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.mwapi.request.HttpClientFactory;
 import fr.free.nrw.commons.mwapi.request.RequestBuilder;
@@ -215,7 +213,7 @@ public class JsonMediaWikiApi implements MediaWikiApi {
     @NonNull
     @Override
     public UploadResult uploadFile(String filename, InputStream file, long dataLength, String pageContents, String editSummary, ProgressListener progressListener) {
-        return new UploadResult("",""); // TODO
+        return new UploadResult("",""); // TODO ... and this is the big one!  :-)
     }
 
     @Nullable
@@ -308,7 +306,7 @@ public class JsonMediaWikiApi implements MediaWikiApi {
     @NonNull
     @Override
     public Observable<String> searchTitles(String title, int searchCatsLimit) {
-        return Observable.empty(); // TODO
+        return searchCategories(title, searchCatsLimit); // TODO - check usages and have them call searchCategories() directly
     }
 
     @Nullable

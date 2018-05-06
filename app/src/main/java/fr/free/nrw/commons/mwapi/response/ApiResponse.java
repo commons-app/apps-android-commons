@@ -3,8 +3,6 @@ package fr.free.nrw.commons.mwapi.response;
 import com.google.gson.annotations.SerializedName;
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
 import java.util.Map;
 
 @SuppressWarnings({"WeakerAccess", "unused"})
