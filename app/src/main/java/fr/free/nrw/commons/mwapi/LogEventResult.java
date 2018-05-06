@@ -9,14 +9,13 @@ import java.util.Date;
 import java.util.List;
 
 import fr.free.nrw.commons.Utils;
-import fr.free.nrw.commons.mwapi.response.ApiResponse;
-import fr.free.nrw.commons.mwapi.response.QueryResponse;
+import fr.free.nrw.commons.mwapi.response.QueryApiResponse;
 
 public class LogEventResult {
     private final List<LogEvent> logEvents;
     private final String queryContinue;
 
-    LogEventResult(@NonNull ApiResponse apiResponse, String queryContinue) {
+    LogEventResult(@NonNull QueryApiResponse apiResponse, String queryContinue) {
         this.logEvents = getLogEventsFromResult(apiResponse);
         this.queryContinue = queryContinue;
     }
@@ -27,11 +26,11 @@ public class LogEventResult {
     }
 
     @NonNull
-    private ArrayList<LogEvent> getLogEventsFromResult(ApiResponse result) {
-        List<QueryResponse.LogEventResponse> uploads = result.query != null
+    private ArrayList<LogEvent> getLogEventsFromResult(QueryApiResponse result) {
+        List<QueryApiResponse.QueryResponse.LogEventResponse> uploads = result.query != null
                 ? result.query.logEvents : Collections.emptyList();
         ArrayList<LogEventResult.LogEvent> logEvents = new ArrayList<>();
-        for (QueryResponse.LogEventResponse image : uploads) {
+        for (QueryApiResponse.QueryResponse.LogEventResponse image : uploads) {
             logEvents.add(new LogEventResult.LogEvent(image.pageId, image.title,
                     Utils.parseMWDate(image.timestamp)));
         }

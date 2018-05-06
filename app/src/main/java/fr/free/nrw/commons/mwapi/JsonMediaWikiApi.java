@@ -18,8 +18,11 @@ import java.util.List;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.mwapi.request.HttpClientFactory;
 import fr.free.nrw.commons.mwapi.request.RequestBuilder;
-import fr.free.nrw.commons.mwapi.response.ApiResponse;
-import fr.free.nrw.commons.mwapi.response.QueryResponse.NotificationQueryResponse.NotificationResponse;
+import fr.free.nrw.commons.mwapi.response.EditApiResponse;
+import fr.free.nrw.commons.mwapi.response.LoginApiResponse;
+import fr.free.nrw.commons.mwapi.response.ParseApiResponse;
+import fr.free.nrw.commons.mwapi.response.QueryApiResponse;
+import fr.free.nrw.commons.mwapi.response.QueryApiResponse.QueryResponse.NotificationQueryResponse.NotificationResponse;
 import fr.free.nrw.commons.notification.Notification;
 import io.reactivex.Observable;
 import io.reactivex.Single;
@@ -84,7 +87,7 @@ public class JsonMediaWikiApi implements MediaWikiApi {
     @Override
     public String login(String username, String password) {
         String loginToken = getLoginToken();
-        String statusCodeToReturn = post().action("clientlogin")
+        String statusCodeToReturn = login()
                 .param("loginreturnurl", "https://commons.wikimedia.org")
                 .param("rememberMe", "1")
                 .param("logintoken", loginToken)
@@ -99,7 +102,7 @@ public class JsonMediaWikiApi implements MediaWikiApi {
     @Override
     public String login(String username, String password, String twoFactorCode) {
         String loginToken = getLoginToken();
-        String statusCodeToReturn = post().action("clientlogin")
+        String statusCodeToReturn = login()
                 .param("rememberMe", "1")
                 .param("username", username)
                 .param("password", password)
@@ -125,7 +128,7 @@ public class JsonMediaWikiApi implements MediaWikiApi {
     }
 
     private String getLoginToken() {
-        return post().action("query")
+        return query()
                 .param("type", "login")
                 .param("meta", "tokens")
                 .execute()
@@ -134,14 +137,14 @@ public class JsonMediaWikiApi implements MediaWikiApi {
 
     @Override
     public boolean validateLogin() {
-        return !get().action("query").param("meta", "userinfo")
+        return !query().param("meta", "userinfo")
                 .execute()
                 .query.userInfo.id.equals("0");
     }
 
     @Override
     public String getEditToken() {
-        return get().action("query")
+        return query()
                 .param("meta", "tokens")
                 .param("type", "csrf")
                 .execute()
@@ -150,7 +153,7 @@ public class JsonMediaWikiApi implements MediaWikiApi {
 
     @Override
     public boolean fileExistsWithName(String fileName) {
-        return get().action("query")
+        return query()
                 .param("prop", "imageinfo")
                 .param("titles", "File:" + fileName)
                 .execute()
@@ -160,7 +163,7 @@ public class JsonMediaWikiApi implements MediaWikiApi {
 
     @Override
     public boolean pageExists(String pageName) {
-        return !get().action("query")
+        return !query()
                 .param("titles", pageName)
                 .execute()
                 .query.pages.containsKey("-1");
@@ -168,7 +171,7 @@ public class JsonMediaWikiApi implements MediaWikiApi {
 
     @Override
     public String findThumbnailByFilename(String filename) {
-        return get().action("query")
+        return query()
                 .param("prop", "imageinfo")
                 .param("iiprop", "url")
                 .param("iiurlwidth", THUMB_SIZE)
@@ -232,7 +235,7 @@ public class JsonMediaWikiApi implements MediaWikiApi {
     }
 
     private String editOperation(String editType, String editToken, String processedPageContent, String filename, String summary) {
-        return post().action("edit")
+        return edit()
                 .param("title", filename)
                 .param("token", editToken)
                 .param(editType, processedPageContent)
@@ -244,7 +247,7 @@ public class JsonMediaWikiApi implements MediaWikiApi {
     @NonNull
     @Override
     public MediaResult fetchMediaByFilename(String filename) {
-        String wikiContent = get().action("query")
+        String wikiContent = query()
                 .param("prop", "revisions")
                 .param("titles", filename)
                 .param("rvprop", "content")
@@ -252,7 +255,7 @@ public class JsonMediaWikiApi implements MediaWikiApi {
                 .execute()
                 .query.firstPage().wikiContent();
 
-        String renderedXml = post().action("parse")
+        String renderedXml = parse()
                 .param("title", "File:" + filename)
                 .param("text", wikiContent)
                 .param("prop", "parsetree")
@@ -267,7 +270,7 @@ public class JsonMediaWikiApi implements MediaWikiApi {
     @NonNull
     @Override
     public Observable<String> searchCategories(String filterValue, int searchCatsLimit) {
-        return Observable.fromIterable(get().action("query")
+        return Observable.fromIterable(query()
                 .param("list", "search")
                 .param("srwhat", "text")
                 .param("srnamespace", CATEGORIES_NAMESPACE)
@@ -280,7 +283,7 @@ public class JsonMediaWikiApi implements MediaWikiApi {
     @NonNull
     @Override
     public Observable<String> allCategories(String filter, int searchCatsLimit) {
-        return Observable.fromIterable(get().action("query")
+        return Observable.fromIterable(query()
                 .param("list", "allcategories")
                 .param("acprefix", filter)
                 .param("aclimit", searchCatsLimit)
@@ -291,7 +294,7 @@ public class JsonMediaWikiApi implements MediaWikiApi {
     @NonNull
     @Override
     public List<Notification> getNotifications() {
-        return Observable.fromIterable(get().action("query")
+        return Observable.fromIterable(query()
                 .param("meta", "notifications")
                 .param("notprop", "list")
                 .param("notformat", "model")
@@ -309,7 +312,7 @@ public class JsonMediaWikiApi implements MediaWikiApi {
     @Nullable
     @Override
     public String revisionsByFilename(String filename) { // TODO
-        get().action("query")
+        query()
                 .param("prop", "revisions")
                 .param("rvprop", "timestamp|content")
                 .param("titles", filename)
@@ -326,7 +329,7 @@ public class JsonMediaWikiApi implements MediaWikiApi {
 
     @Override
     public boolean existingFile(String fileSha1) {
-        return get().action("query")
+        return query()
                 .param("list", "allimages")
                 .param("aisha1", fileSha1)
                 .execute()
@@ -336,7 +339,8 @@ public class JsonMediaWikiApi implements MediaWikiApi {
     @NonNull
     @Override
     public LogEventResult logEvents(String user, String lastModified, String queryContinue, int limit) {
-        RequestBuilder.ParameterBuilder<ApiResponse> builder = get().action("query")
+        RequestBuilder.ParameterBuilder<QueryApiResponse> builder =
+                query()
                 .param("list", "logevents")
                 .param("letype", "upload")
                 .param("leprop", "title|timestamp|ids")
@@ -349,7 +353,7 @@ public class JsonMediaWikiApi implements MediaWikiApi {
         if (!TextUtils.isEmpty(queryContinue)) {
             builder.param("lestart", queryContinue);
         }
-        ApiResponse result = builder.execute();
+        QueryApiResponse result = builder.execute();
 
         return new LogEventResult(result, "");
     }
@@ -372,11 +376,23 @@ public class JsonMediaWikiApi implements MediaWikiApi {
         });
     }
 
-    private RequestBuilder.ActionBuilder<ApiResponse> get() {
-        return RequestBuilder.get(ApiResponse.class);
+    @NonNull
+    private RequestBuilder.ParameterBuilder<EditApiResponse> edit() {
+        return RequestBuilder.post(EditApiResponse.class).action("edit");
     }
 
-    private RequestBuilder.ActionBuilder<ApiResponse> post() {
-        return RequestBuilder.post(ApiResponse.class);
+    @NonNull
+    private RequestBuilder.ParameterBuilder<ParseApiResponse> parse() {
+        return RequestBuilder.post(ParseApiResponse.class).action("parse");
+    }
+
+    @NonNull
+    private RequestBuilder.ParameterBuilder<LoginApiResponse> login() {
+        return RequestBuilder.post(LoginApiResponse.class).action("clientlogin");
+    }
+
+    @NonNull
+    private RequestBuilder.ParameterBuilder<QueryApiResponse> query() {
+        return RequestBuilder.post(QueryApiResponse.class).action("query");
     }
 }
