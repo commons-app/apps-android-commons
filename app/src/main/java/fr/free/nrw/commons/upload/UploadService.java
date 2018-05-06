@@ -281,11 +281,16 @@ public class UploadService extends HandlerService<Contribution> {
         }
     }
 
+    /**
+     * Edits the wikidata entity by adding the P18 property to it.
+     * Adding the P18 edit requires calling the wikidata API to create a claim against the entity
+     * @param contribution
+     */
     @SuppressLint("CheckResult")
     private void editWikidataProperty(Contribution contribution) {
         Timber.d("Upload successful with wiki data entity id as %s", contribution.getWikiDataEntityId());
         Timber.d("Attempting to edit Wikidata property %s", contribution.getWikiDataEntityId());
-        Observable.fromCallable(() -> mwApi.wikidatCreateClaim("wbcreateclaim", contribution.getWikiDataEntityId(), "P18", "value", getFileName(contribution)))
+        Observable.fromCallable(() -> mwApi.wikidatCreateClaim(contribution.getWikiDataEntityId(), "P18", "value", getFileName(contribution)))
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(result -> {
@@ -297,6 +302,12 @@ public class UploadService extends HandlerService<Contribution> {
                 }, throwable -> Timber.e(throwable, "Error occurred while making claim"));
     }
 
+    /**
+     * Formats and returns the filename as accepted by the wiki base API
+     * https://www.mediawiki.org/wiki/Wikibase/API#wbcreateclaim
+     * @param contribution
+     * @return
+     */
     private String getFileName(Contribution contribution) {
         String filename = String.format("\"%s\"", contribution.getFilename().replace("File:", ""));
         return filename;

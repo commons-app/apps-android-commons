@@ -356,13 +356,29 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
         }).flatMapObservable(Observable::fromIterable);
     }
 
-    public String getWikidataEditToken() throws IOException {
+    /**
+     * Get the edit token for making wiki data edits
+     * https://www.mediawiki.org/wiki/API:Tokens
+     * @return
+     * @throws IOException
+     */
+    private String getWikidataEditToken() throws IOException {
         return wikidataApi.getEditToken();
     }
 
+    /**
+     * Creates a new claim using the wikidata API
+     * https://www.mediawiki.org/wiki/Wikibase/API
+     * @param entityId the wikidata entity to be edited
+     * @param property the property to be edited, for eg P18 for images
+     * @param snaktype the type of value stored for that property
+     * @param value the actual value to be stored for the property, for eg filename in case of P18
+     * @return returns true if the claim is successfully created
+     * @throws IOException
+     */
     @Nullable
     @Override
-    public boolean wikidatCreateClaim(String action, String entityId, String property, String snaktype, String value) throws IOException {
+    public boolean wikidatCreateClaim(String entityId, String property, String snaktype, String value) throws IOException {
         ApiResult result = wikidataApi.action("wbcreateclaim")
                 .param("entity", entityId)
                 .param("token", getWikidataEditToken())

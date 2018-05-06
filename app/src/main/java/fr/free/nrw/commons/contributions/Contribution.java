@@ -228,6 +228,11 @@ public class Contribution extends Media {
         return wikiDataEntityId;
     }
 
+    /**
+     * When the corresponding wikidata entity is known as in case of nearby uploads, it can be set
+     * using the setter method
+     * @param wikiDataEntityId
+     */
     public void setWikiDataEntityId(String wikiDataEntityId) {
         this.wikiDataEntityId = wikiDataEntityId;
     }

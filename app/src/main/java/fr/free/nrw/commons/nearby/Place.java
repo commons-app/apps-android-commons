@@ -51,6 +51,10 @@ public class Place {
         this.distance = distance;
     }
 
+    /**
+     * Extracts the entity id from the wikidata link
+     * @return returns the entity id if wikidata link exists
+     */
     @Nullable
     public String getWikiDataEntityId() {
         if (!hasWikidataLink()) {
