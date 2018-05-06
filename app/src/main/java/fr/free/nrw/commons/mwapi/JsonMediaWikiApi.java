@@ -31,9 +31,6 @@ import okhttp3.Response;
 import okhttp3.ResponseBody;
 import timber.log.Timber;
 
-import static fr.free.nrw.commons.mwapi.request.RequestBuilder.get;
-import static fr.free.nrw.commons.mwapi.request.RequestBuilder.post;
-
 public class JsonMediaWikiApi implements MediaWikiApi {
     private static final String THUMB_SIZE = "640";
     private static final String CATEGORIES_NAMESPACE = "14";
@@ -373,5 +370,13 @@ public class JsonMediaWikiApi implements MediaWikiApi {
             }
             return count;
         });
+    }
+
+    private RequestBuilder.ActionBuilder<ApiResponse> get() {
+        return RequestBuilder.get(ApiResponse.class);
+    }
+
+    private RequestBuilder.ActionBuilder<ApiResponse> post() {
+        return RequestBuilder.post(ApiResponse.class);
     }
 }

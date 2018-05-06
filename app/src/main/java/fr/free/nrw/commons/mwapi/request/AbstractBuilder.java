@@ -80,7 +80,7 @@ abstract class AbstractBuilder<T> implements RequestBuilder.ActionBuilder<T>, Re
                 }
                 String stream = body.string();
                 if (BuildConfig.DEBUG) {
-                    Log.e("MW", "Response: " + stream);
+                    Log.d("MW", "Response: " + stream);
                 }
                 return gsonParser.fromJson(stream, returnClass);
             }

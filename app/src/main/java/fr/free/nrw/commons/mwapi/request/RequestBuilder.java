@@ -7,7 +7,6 @@ import com.google.gson.Gson;
 import java.io.InputStream;
 
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
-import fr.free.nrw.commons.mwapi.response.ApiResponse;
 import okhttp3.HttpUrl;
 import okhttp3.OkHttpClient;
 
@@ -33,18 +32,6 @@ public class RequestBuilder {
     @NonNull
     public static <T> ActionBuilder<T> get(Class<T> returnClass) {
         return new GetBuilder<T>(okHttpClient, gsonParser, parsedApiEndpoint, returnClass);
-    }
-
-    /** Convenience method - functionally equivalent to <code>post(..., ApiResponse.class)</code> */
-    @NonNull
-    public static ActionBuilder<ApiResponse> post() {
-        return new PostBuilder<>(okHttpClient, gsonParser, parsedApiEndpoint, ApiResponse.class);
-    }
-
-    /** Convenience method - functionally equivalent to <code>get(..., ApiResponse.class)</code> */
-    @NonNull
-    public static ActionBuilder<ApiResponse> get() {
-        return new GetBuilder<>(okHttpClient, gsonParser, parsedApiEndpoint, ApiResponse.class);
     }
 
     @SuppressWarnings("WeakerAccess")
