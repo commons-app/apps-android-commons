@@ -154,6 +154,7 @@
   <string name="welcome_copyright_subtext">Vermeide urheberrechtlich geschütztes Material, das du im Internet gefunden hast wie Bilder von Postern, Buchcovern etc.</string>
   <string name="welcome_final_text">Verstanden?</string>
   <string name="welcome_final_button_text">Ja!</string>
+  <string name="welcome_help_button_text"/>
   <string name="detail_panel_cats_label">Kategorien</string>
   <string name="detail_panel_cats_loading">Lade …</string>
   <string name="detail_panel_cats_none">Keine ausgewählt</string>

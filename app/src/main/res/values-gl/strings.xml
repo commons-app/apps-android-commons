@@ -90,6 +90,7 @@
   <string name="categories_activity_title">Categorías</string>
   <string name="title_activity_settings">Configuracións</string>
   <string name="title_activity_signup">Rexistrarse</string>
+  <string name="title_activity_featured_images">Imaxes destacadas</string>
   <string name="menu_about">Acerca de</string>
   <string name="about_license">A aplicación Wikimedia Commons é unha aplicación de código aberto creada e mantida polos cesionarios e voluntarios da comunidade de Wikimedia. A Fundación Wikimedia non está involucrada na creación, desenvolvemento ou mantemento da aplicación.</string>
   <string name="about_improve">Crear unha nova &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;incidencia&lt;/a&gt; para informar de problemas e suxestións.</string>
@@ -175,6 +176,8 @@
   <string name="media_detail_media_title">Título do ficheiro multimedia</string>
   <string name="media_detail_description">Descrición</string>
   <string name="media_detail_description_explanation">Aquí vai a descrición do ficheiro multimedia. Potencialmente, pode ser bastante longo, e necesitará agruparse en múltiples liñas. De tódolos xeitos esperamos que se vexa ben.</string>
+  <string name="media_detail_author">Autor</string>
+  <string name="media_detail_author_explanation">O nome de usuario do autor da imaxe destacada vai aquí.</string>
   <string name="media_detail_uploaded_date">Data de suba</string>
   <string name="media_detail_license">Licenza</string>
   <string name="media_detail_coordinates">Coordenadas</string>
@@ -217,6 +220,7 @@
   <string name="navigation_item_logout">Saír</string>
   <string name="navigation_item_info">Titorial</string>
   <string name="navigation_item_notification">Notificacións</string>
+  <string name="navigation_item_featured_images">Destacados</string>
   <string name="nearby_needs_permissions">Os sitios situados preto non poden visualizarse sen permisos de localización</string>
   <string name="no_description_found">non se atopou descrición</string>
   <string name="nearby_info_menu_commons_article">Páxina do ficheiro en Commons</string>

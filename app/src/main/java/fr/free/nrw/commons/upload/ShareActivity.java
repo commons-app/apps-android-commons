@@ -78,6 +78,7 @@ import fr.free.nrw.commons.modifications.TemplateRemoveModifier;
 
 import fr.free.nrw.commons.utils.ImageUtils;
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
+import fr.free.nrw.commons.utils.ViewUtil;
 import timber.log.Timber;
 
 
@@ -735,7 +736,7 @@ public class ShareActivity
         if (CurrentAnimator != null) {
             CurrentAnimator.cancel();
         }
-        hideKeyboard(ShareActivity.this);
+        ViewUtil.hideKeyboard(ShareActivity.this.findViewById(R.id.titleEdit | R.id.descEdit));
         InputStream input = null;
         Bitmap scaled = null;
         try {
@@ -904,13 +905,6 @@ public class ShareActivity
             }
 
         });
-    }
-    public static void hideKeyboard(Activity activity) {
-        View view = activity.findViewById(R.id.titleEdit | R.id.descEdit);
-        if (view != null) {
-            InputMethodManager imm = (InputMethodManager) activity.getSystemService(Context.INPUT_METHOD_SERVICE);
-            imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
-        }
     }
 
 }

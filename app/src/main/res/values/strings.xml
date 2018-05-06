@@ -274,4 +274,5 @@
   <string name="no_images_found">No images found!</string>
   <string name="error_loading_images">Error occurred while loading images.</string>
   <string name="image_uploaded_by">Uploaded by: %1$s</string>
+  <string name="share_app_title">Share App</string>
 </resources>
