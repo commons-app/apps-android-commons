@@ -346,7 +346,7 @@ public class JsonMediaWikiApi implements MediaWikiApi {
     @NonNull
     @Override
     public LogEventResult logEvents(String user, String lastModified, String queryContinue, int limit) {
-        RequestBuilder.ParameterBuilder builder = get().action("query")
+        RequestBuilder.ParameterBuilder<ApiResponse> builder = get().action("query")
                 .param("list", "logevents")
                 .param("letype", "upload")
                 .param("leprop", "title|timestamp|ids")

@@ -10,58 +10,59 @@ import java.util.Map;
 
 import fr.free.nrw.commons.BuildConfig;
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
-import fr.free.nrw.commons.mwapi.response.ApiResponse;
 import okhttp3.HttpUrl;
 import okhttp3.OkHttpClient;
 import okhttp3.Response;
 import okhttp3.ResponseBody;
 
-abstract class AbstractBuilder implements RequestBuilder.ActionBuilder, RequestBuilder.ParameterBuilder {
+abstract class AbstractBuilder<T> implements RequestBuilder.ActionBuilder<T>, RequestBuilder.ParameterBuilder<T> {
+    private final Gson gsonParser;
+    private final Class<T> returnClass;
     protected Map<String, Object> params = new HashMap<>();
     protected MediaWikiApi.ProgressListener listener;
-    private final Gson gsonParser;
     OkHttpClient okHttpClient;
     HttpUrl parsedApiEndpoint;
 
-    AbstractBuilder(OkHttpClient okHttpClient, Gson gsonParser, HttpUrl parsedApiEndpoint) {
+    AbstractBuilder(OkHttpClient okHttpClient, Gson gsonParser, HttpUrl parsedApiEndpoint, Class<T> returnClass) {
         this.okHttpClient = okHttpClient;
         this.gsonParser = gsonParser;
         this.parsedApiEndpoint = parsedApiEndpoint;
+        this.returnClass = returnClass;
     }
 
     @Override
-    public RequestBuilder.ParameterBuilder action(String action) {
+    public RequestBuilder.ParameterBuilder<T> action(String action) {
         params.put("format", "json");
         params.put("action", action);
         return this;
     }
 
     @Override
-    public RequestBuilder.ParameterBuilder param(String name, String value) {
+    public RequestBuilder.ParameterBuilder<T> param(String name, String value) {
         params.put(name, value);
         return this;
     }
 
     @Override
-    public RequestBuilder.ParameterBuilder param(String name, int value) {
+    public RequestBuilder.ParameterBuilder<T> param(String name, int value) {
         params.put(name, "" + value);
         return this;
     }
 
     @Override
-    public RequestBuilder.ParameterBuilder param(String name, RequestBuilder.InputStreamDescriptor value) {
+    public RequestBuilder.ParameterBuilder<T> param(String name, RequestBuilder.InputStreamDescriptor value) {
         params.put(name, value);
         return this;
     }
 
     @Override
-    public RequestBuilder.ParameterBuilder withListener(MediaWikiApi.ProgressListener listener) {
+    public RequestBuilder.ParameterBuilder<T> withListener(MediaWikiApi.ProgressListener listener) {
         this.listener = listener;
         return this;
     }
 
     @Override
-    public ApiResponse execute() {
+    public T execute() {
         try {
             Response response = getResponse();
             if (response.code() < 300) {
@@ -73,7 +74,7 @@ abstract class AbstractBuilder implements RequestBuilder.ActionBuilder, RequestB
                 if (BuildConfig.DEBUG) {
                     Log.e("MW", "Response: " + stream);
                 }
-                return gsonParser.fromJson(stream, ApiResponse.class);
+                return gsonParser.fromJson(stream, returnClass);
             }
         } catch (Exception e) {
             Log.e("MW", "Failed to execute request", e);

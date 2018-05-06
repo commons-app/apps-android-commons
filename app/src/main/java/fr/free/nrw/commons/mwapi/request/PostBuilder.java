@@ -21,9 +21,9 @@ import okio.BufferedSink;
 import okio.Okio;
 import okio.Source;
 
-class PostBuilder extends AbstractBuilder {
-    PostBuilder(OkHttpClient okHttpClient, Gson gsonParser, HttpUrl parsedApiEndpoint) {
-        super(okHttpClient, gsonParser, parsedApiEndpoint);
+class PostBuilder<T> extends AbstractBuilder<T> {
+    PostBuilder(OkHttpClient okHttpClient, Gson gsonParser, HttpUrl parsedApiEndpoint, Class<T> returnClass) {
+        super(okHttpClient, gsonParser, parsedApiEndpoint, returnClass);
     }
 
     @Override

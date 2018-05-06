@@ -23,30 +23,40 @@ public class RequestBuilder {
         parsedApiEndpoint = HttpUrl.parse(apiHost);
     }
 
-    public static ActionBuilder post() {
-        return new PostBuilder(okHttpClient, gsonParser, parsedApiEndpoint);
+    public static <T> ActionBuilder<T> post(Class<T> returnClass) {
+        return new PostBuilder<>(okHttpClient, gsonParser, parsedApiEndpoint, returnClass);
     }
 
-    public static ActionBuilder get() {
-        return new GetBuilder(okHttpClient, gsonParser, parsedApiEndpoint);
+    public static <T> ActionBuilder<T> get(Class<T> returnClass) {
+        return new GetBuilder<T>(okHttpClient, gsonParser, parsedApiEndpoint, returnClass);
+    }
+
+    /** Convenience method - functionally equivalent to <code>post(..., ApiResponse.class)</code> */
+    public static ActionBuilder<ApiResponse> post() {
+        return new PostBuilder<>(okHttpClient, gsonParser, parsedApiEndpoint, ApiResponse.class);
+    }
+
+    /** Convenience method - functionally equivalent to <code>get(..., ApiResponse.class)</code> */
+    public static ActionBuilder<ApiResponse> get() {
+        return new GetBuilder<>(okHttpClient, gsonParser, parsedApiEndpoint, ApiResponse.class);
     }
 
     @SuppressWarnings("WeakerAccess")
-    public interface ActionBuilder {
-        ParameterBuilder action(String action);
+    public interface ActionBuilder<T> {
+        ParameterBuilder<T> action(String action);
     }
 
     @SuppressWarnings("WeakerAccess")
-    public interface ParameterBuilder {
-        ParameterBuilder param(String name, String value);
+    public interface ParameterBuilder<T> {
+        ParameterBuilder<T> param(String name, String value);
 
-        ParameterBuilder param(String name, int value);
+        ParameterBuilder<T> param(String name, int value);
 
-        ParameterBuilder param(String name, InputStreamDescriptor value);
+        ParameterBuilder<T> param(String name, InputStreamDescriptor value);
 
-        ParameterBuilder withListener(MediaWikiApi.ProgressListener listener);
+        ParameterBuilder<T> withListener(MediaWikiApi.ProgressListener listener);
 
-        ApiResponse execute();
+        T execute();
     }
 
     public static class InputStreamDescriptor {

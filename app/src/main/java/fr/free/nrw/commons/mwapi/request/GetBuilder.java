@@ -10,9 +10,9 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 
-class GetBuilder extends AbstractBuilder {
-    GetBuilder(OkHttpClient okHttpClient, Gson gsonParser, HttpUrl parsedApiEndpoint) {
-        super(okHttpClient, gsonParser, parsedApiEndpoint);
+class GetBuilder<T> extends AbstractBuilder<T> {
+    GetBuilder(OkHttpClient okHttpClient, Gson gsonParser, HttpUrl parsedApiEndpoint, Class<T> returnClass) {
+        super(okHttpClient, gsonParser, parsedApiEndpoint, returnClass);
     }
 
     @Override
