@@ -75,6 +75,13 @@ public class LocationServiceManager implements LocationListener {
                 LOCATION_REQUEST);
     }
 
+    /**
+     * The permission explanation dialog box is now displayed just once for a particular activity. We are subscribing
+     * to updates from multiple providers so its important to show the dialog just once. Otherwise it will be displayed
+     * once for every provider, which in our case currently is 2.
+     * @param activity
+     * @return
+     */
     public boolean isPermissionExplanationRequired(Activity activity) {
         if (activity.isFinishing()) {
             return false;

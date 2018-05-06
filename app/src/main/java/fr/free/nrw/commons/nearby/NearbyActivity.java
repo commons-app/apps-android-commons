@@ -388,6 +388,9 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
         }
     }
 
+    /**
+     * This method first checks if the location permissions has been granted and then register the location manager for updates.
+     */
     private void registerLocationUpdates() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             if (locationManager.isLocationPermissionGranted()) {
