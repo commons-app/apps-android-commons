@@ -38,7 +38,7 @@ public class NetworkingModule {
                                             Gson gson) {
         return new JsonMediaWikiApi(
                 BuildConfig.WIKIMEDIA_API_HOST,
-                BuildConfig.WIKIMEDIA_FORGE_API_HOST);
+                BuildConfig.WIKIMEDIA_FORGE_API_HOST, defaultPreferences);
         // return new ApacheHttpClientMediaWikiApi(context, BuildConfig.WIKIMEDIA_API_HOST, defaultPreferences, categoryPrefs, gson);
     }
 

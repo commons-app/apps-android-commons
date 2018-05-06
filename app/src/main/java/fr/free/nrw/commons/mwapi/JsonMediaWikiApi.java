@@ -1,5 +1,6 @@
 package fr.free.nrw.commons.mwapi;
 
+import android.content.SharedPreferences;
 import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -42,10 +43,12 @@ public class JsonMediaWikiApi implements MediaWikiApi {
     private final CookieManager cookieHandler;
     private final OkHttpClient okHttpClient;
     private final String apiHost;
+    private final SharedPreferences sharedPreferences;
     private final HttpUrl uploadsPerUser;
 
-    public JsonMediaWikiApi(String apiHost, String wikimediaForge) {
+    public JsonMediaWikiApi(String apiHost, String wikimediaForge, SharedPreferences sharedPreferences) {
         this.apiHost = apiHost;
+        this.sharedPreferences = sharedPreferences;
         this.cookieHandler = new CookieManager();
         this.okHttpClient = HttpClientFactory.create(cookieHandler);
         this.uploadsPerUser = HttpUrl.parse(wikimediaForge +
@@ -91,7 +94,7 @@ public class JsonMediaWikiApi implements MediaWikiApi {
     @Override
     public String login(String username, String password) {
         String loginToken = getLoginToken();
-        return post().action("clientlogin")
+        String statusCodeToReturn = post().action("clientlogin")
                 .param("loginreturnurl", "https://commons.wikimedia.org")
                 .param("rememberMe", "1")
                 .param("logintoken", loginToken)
@@ -99,12 +102,14 @@ public class JsonMediaWikiApi implements MediaWikiApi {
                 .param("password", password)
                 .execute()
                 .clientlogin.getStatusCodeToReturn();
+        setAuthCookieOnLogin("PASS".equals(statusCodeToReturn));
+        return statusCodeToReturn; // TODO - process all the status values
     }
 
     @Override
     public String login(String username, String password, String twoFactorCode) {
         String loginToken = getLoginToken();
-        return post().action("clientlogin")
+        String statusCodeToReturn = post().action("clientlogin")
                 .param("rememberMe", "1")
                 .param("username", username)
                 .param("password", password)
@@ -112,7 +117,21 @@ public class JsonMediaWikiApi implements MediaWikiApi {
                 .param("logincontinue", "1")
                 .param("OATHToken", twoFactorCode)
                 .execute()
-                .clientlogin.getStatusCodeToReturn(); // TODO
+                .clientlogin.getStatusCodeToReturn();
+        setAuthCookieOnLogin("PASS".equals(statusCodeToReturn));
+        return statusCodeToReturn; // TODO - process all the status values
+    }
+
+    // This belongs elsewhere, probably the session manager?
+    private void setAuthCookieOnLogin(boolean isLoggedIn) {
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putBoolean("isUserLoggedIn", isLoggedIn);
+        if (isLoggedIn) {
+            editor.putString("getAuthCookie", getAuthCookie());
+        } else {
+            editor.remove("getAuthCookie");
+        }
+        editor.apply();
     }
 
     private String getLoginToken() {
