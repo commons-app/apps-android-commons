@@ -5,6 +5,7 @@
 * Davio
 * Nemo bis
 * S4b1nuz E.656
+* Sarah Bernabei
 * Una giornata uggiosa '94
 * Wim b
 -->
@@ -87,6 +88,7 @@
   <string name="categories_activity_title">Categorie</string>
   <string name="title_activity_settings">Impostazioni</string>
   <string name="title_activity_signup">Registrati</string>
+  <string name="title_activity_featured_images">Immagini in evidenza</string>
   <string name="menu_about">Informazioni</string>
   <string name="about_license">L\'app di Wikimedia Commons è un\'applicazione open source creata e mantenuta da beneficiari e volontari della comunità Wikimedia. La Fondazione Wikimedia non è coinvolta nella creazione, sviluppo o manutenzione dell\'applicazione.</string>
   <string name="about_improve">Crea una nuova &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;segnalazione GitHub&lt;/a&gt; per riportare errori e suggerimenti.</string>
@@ -161,6 +163,7 @@
   <string name="media_detail_media_title">Titolo del file multimediale</string>
   <string name="media_detail_description">Descrizione</string>
   <string name="media_detail_author">Autore</string>
+  <string name="media_detail_author_explanation">Il nome dell\'autore dell\'immagine in evidenza va scritto qui.</string>
   <string name="media_detail_uploaded_date">Data di caricamento</string>
   <string name="media_detail_license">Licenza</string>
   <string name="media_detail_coordinates">Coordinate</string>
@@ -194,6 +197,7 @@
   <string name="navigation_item_logout">Esci</string>
   <string name="navigation_item_info">Tutorial</string>
   <string name="navigation_item_notification">Notifiche</string>
+  <string name="navigation_item_featured_images">In evidenza</string>
   <string name="no_description_found">nessuna descrizione trovata</string>
   <string name="nearby_info_menu_commons_article">Pagina di Commons del file</string>
   <string name="nearby_info_menu_wikidata_article">Elemento Wikidata</string>

@@ -266,4 +266,5 @@
   <string name="about_translate_proceed">진행</string>
   <string name="about_translate_cancel">취소</string>
   <string name="retry">다시 시도</string>
+  <string name="share_app_title">앱 공유</string>
 </resources>
