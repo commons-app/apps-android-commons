@@ -26,8 +26,8 @@ The body should provide a meaningful commit message.
     - Please make sure that your Javadocs are reasonably descriptive, not just
       a copy of the method name
     - Please do not use `@author` tags - we aim for collective code ownership,
-      and if needed, GitHub allows us to see who wrote something without needing
-      to add these tags
+      and if needed, Git allows us to see who wrote something without needing
+      to add these tags (`git blame`)
 
 1. Write tests for your code (if possible)
 
