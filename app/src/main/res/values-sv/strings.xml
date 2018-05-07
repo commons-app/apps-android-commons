@@ -156,6 +156,7 @@
   <string name="welcome_copyright_subtext">Undvik upphovsrättsskyddat material som du hittar på Internet, samt bilder av affischer, bokomslag, etc.</string>
   <string name="welcome_final_text">Tror du att du förstår?</string>
   <string name="welcome_final_button_text">Ja!</string>
+  <string name="welcome_help_button_text"/>
   <string name="detail_panel_cats_label">Kategorier</string>
   <string name="detail_panel_cats_loading">Läser in…</string>
   <string name="detail_panel_cats_none">Ingen markerad</string>
@@ -270,4 +271,5 @@
   <string name="about_translate_proceed">Fortsätt</string>
   <string name="about_translate_cancel">Avbryt</string>
   <string name="retry">Försök igen</string>
+  <string name="share_app_title">Dela app</string>
 </resources>

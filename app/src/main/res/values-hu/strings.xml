@@ -13,6 +13,7 @@
 * ViDam
 -->
 <resources>
+  <string name="preference_category_appearance">Megjelenés</string>
   <string name="preference_category_general">Általános</string>
   <string name="preference_category_feedback">Visszajelzés</string>
   <string name="preference_category_location">Helyszín</string>
@@ -145,6 +146,7 @@
   <string name="tutorial_2_subtext_3">Híres emberek (a polgármestered, olimpikonok, akikkel találkoztál)</string>
   <string name="tutorial_3_text">Kérjük, NE tölts fel:</string>
   <string name="tutorial_3_subtext">- Szelfiket vagy képeket a barátaidról\n- Internetröl letöltött képeket\n- Kereskedelmi alkalmazások képernyőképeit</string>
+  <string name="tutorial_3_subtext_2">Az Internetről letöltött képek</string>
   <string name="tutorial_4_text">Példa feltöltés:</string>
   <string name="tutorial_4_subtext">- Cím: Sydney-i Operaház\n- Leírás: A Sydney-i Operaház az öböl túlpartjáról\n- Kategóriák: Sydney Opera House from the west, Sydney Opera House remote views</string>
   <string name="tutorial_4_subtext_1">Cím: Sydney-i Operaház</string>
@@ -191,6 +193,7 @@
   <string name="commons_logo">Commons Logo</string>
   <string name="commons_website">Commons weboldal</string>
   <string name="commons_facebook">Commons Facebook-oldal</string>
+  <string name="commons_github">Commons Github forráskód</string>
   <string name="background_image">Háttérkép</string>
   <string name="no_image_found">Nem található kép</string>
   <string name="upload_image">Kép feltöltése</string>
@@ -223,6 +226,8 @@
   <string name="error_while_cache">Hiba a képek gyorsítótárazásakor</string>
   <string name="title_info">Egy egyedi, leíró cím a fájlnak, ami fájlnévként fog szolgálni. Egyszerű nyelvezetet használhatsz szóközökkel. Ne tedd bele a kiterjesztést.</string>
   <string name="description_info">Kérlek a lehető legteljesebb módon írd le a fájlt: hol készült, mit ábrázol, mi a kontextus? Kérlek add meg az objektumokat vagy személyeket a képen, valamint a nehezen kitalálható információkat (például a kép készítésének dátumát, ha az egy tájkép). Amennyiben a média valami szokatlant ábrázol, kérlek fejtsd ki, hogy mi teszi szokatlanná.</string>
+  <string name="upload_image_too_dark">Ez a fénykép túl sötét, biztos fel akarod tölteni? A Wikimédia Commons csak enciklopédikus értékkel bíró képeket tart meg.</string>
+  <string name="upload_image_blurry">Ez a fénykép homályos, biztos fel akarod tölteni? A Wikimédia Commons csak enciklopédikus értékkel bíró képeket tart meg.</string>
   <string name="give_permission">Engedély adása</string>
   <string name="use_external_storage">Külső tárhely használata</string>
   <string name="use_external_storage_summary">Az alkalmazáson belüli kamerával készült képek mentése az eszközre</string>
@@ -238,6 +243,7 @@
   <string name="nearby_location_not_available">A hely nem érhető el.</string>
   <string name="location_permission_rationale_nearby">Közeli helyek listájának megtekintéséhez engedély szükséges</string>
   <string name="notifications_welcome">Üdvözlünk a Wikimedia Commonson, %1$s! Örülünk, hogy itt vagy.</string>
+  <string name="notifications_talk_page_message">%1$s üzenetet hagyott a vitalapodon</string>
   <string name="notifications_thank_you_edit">Köszönjük a szerkesztésedet!</string>
   <string name="nearby_wikidata">WIKIDATA</string>
   <string name="nearby_wikipedia">WIKIPÉDIA</string>
@@ -249,6 +255,8 @@
   <string name="internet_established">Internet elérhető</string>
   <string name="no_notifications">Nincs értesítés</string>
   <string name="about_translate_title">Nyelvek</string>
+  <string name="about_translate_proceed">Folytatás</string>
   <string name="about_translate_cancel">Mégse</string>
   <string name="retry">Újra</string>
+  <string name="share_app_title">Alkalmazás megosztása</string>
 </resources>
