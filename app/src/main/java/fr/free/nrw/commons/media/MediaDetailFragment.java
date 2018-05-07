@@ -49,6 +49,8 @@ import fr.free.nrw.commons.mwapi.MediaWikiApi;
 import fr.free.nrw.commons.ui.widget.CompatTextView;
 import timber.log.Timber;
 
+import static android.view.View.GONE;
+import static android.view.View.VISIBLE;
 import static android.widget.Toast.LENGTH_SHORT;
 
 public class MediaDetailFragment extends CommonsDaggerSupportFragment {
@@ -160,9 +162,9 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
         ButterKnife.bind(this,view);
 
         if (isFeaturedMedia){
-            authorLayout.setVisibility(View.VISIBLE);
+            authorLayout.setVisibility(VISIBLE);
         } else {
-            authorLayout.setVisibility(View.GONE);
+            authorLayout.setVisibility(GONE);
         }
 
         licenseList = new LicenseList(getActivity());
@@ -312,6 +314,12 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
         }
         rebuildCatList();
 
+        if(media.getCreator() == null || media.getCreator().equals("")) {
+            authorLayout.setVisibility(GONE);
+        } else {
+            author.setText(media.getCreator());
+        }
+
         checkDeletion(media);
     }
 
@@ -320,15 +328,19 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
         if (!TextUtils.isEmpty(licenseLink(media))) {
             openWebBrowser(licenseLink(media));
         } else {
-            Toast toast = Toast.makeText(getContext(), getString(R.string.null_url), Toast.LENGTH_SHORT);
-            toast.show();
+            if(isFeaturedMedia) {
+                Timber.d("Unable to fetch license URL for %s", media.getLicense());
+            } else {
+                Toast toast = Toast.makeText(getContext(), getString(R.string.null_url), Toast.LENGTH_SHORT);
+                toast.show();
+            }
         }
     }
 
     @OnClick(R.id.mediaDetailCoordinates)
     public void onMediaDetailCoordinatesClicked(){
         if (media.getCoordinates() != null) {
-           openMap(media.getCoordinates());
+            openMap(media.getCoordinates());
         }
     }
 
@@ -384,7 +396,7 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
 
     @OnClick(R.id.seeMore)
     public void onSeeMoreClicked(){
-        if(nominatedForDeletion.getVisibility()==View.VISIBLE) {
+        if(nominatedForDeletion.getVisibility()== VISIBLE) {
             openWebBrowser(media.getFilePageTitle().getMobileUri().toString());
         }
     }
@@ -489,13 +501,12 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
 
     private void checkDeletion(Media media){
         if (media.getRequestedDeletion()){
-            delete.setVisibility(View.GONE);
-            nominatedForDeletion.setVisibility(View.VISIBLE);
+            delete.setVisibility(GONE);
+            nominatedForDeletion.setVisibility(VISIBLE);
         }
         else{
-            delete.setVisibility(View.VISIBLE);
-            enableDeleteButton(true);//I believe this is to enable delete button and set its text color resemblance accordingly
-            nominatedForDeletion.setVisibility(View.GONE);
+            delete.setVisibility(VISIBLE);
+            nominatedForDeletion.setVisibility(GONE);
         }
     }
 

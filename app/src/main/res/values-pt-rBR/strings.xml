@@ -275,4 +275,5 @@
   <string name="about_translate_proceed">Avançar</string>
   <string name="about_translate_cancel">Cancelar</string>
   <string name="retry">Tentar novamente</string>
+  <string name="share_app_title">Compartilhar o aplicativo</string>
 </resources>
