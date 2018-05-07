@@ -92,8 +92,9 @@
             android:label="@string/navigation_item_notification" />
 
         <activity
-            android:name=".featured.FeaturedImagesActivity"
-            android:label="@string/title_activity_featured_images" />
+            android:name=".category.CategoryImagesActivity"
+            android:label="@string/title_activity_featured_images"
+            android:parentActivityName=".contributions.ContributionsActivity" />
 
         <service android:name=".upload.UploadService" />
 
