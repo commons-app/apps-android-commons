@@ -6,6 +6,8 @@ import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import android.support.v4.util.LruCache;
 
+import com.google.gson.Gson;
+
 import javax.inject.Named;
 import javax.inject.Singleton;
 
@@ -85,6 +87,17 @@ public class CommonsApplicationModule {
         return context.getSharedPreferences("prefs", MODE_PRIVATE);
     }
 
+    /**
+     *
+     * @param context
+     * @return returns categoryPrefs
+     */
+    @Provides
+    @Named("category_prefs")
+    public SharedPreferences providesCategorySharedPreferences(Context context) {
+        return context.getSharedPreferences("categoryPrefs", MODE_PRIVATE);
+    }
+
     @Provides
     @Named("direct_nearby_upload_prefs")
     public SharedPreferences providesDirectNearbyUploadPreferences(Context context) {
@@ -106,14 +119,27 @@ public class CommonsApplicationModule {
 
     @Provides
     @Singleton
-    public MediaWikiApi provideMediaWikiApi(Context context, @Named("default_preferences") SharedPreferences sharedPreferences) {
-        return new ApacheHttpClientMediaWikiApi(context, BuildConfig.WIKIMEDIA_API_HOST, sharedPreferences);
+    public MediaWikiApi provideMediaWikiApi(Context context,
+                                            @Named("default_preferences") SharedPreferences defaultPreferences,
+                                            @Named("category_prefs") SharedPreferences categoryPrefs,
+                                            Gson gson) {
+        return new ApacheHttpClientMediaWikiApi(context, BuildConfig.WIKIMEDIA_API_HOST, defaultPreferences, categoryPrefs, gson);
     }
 
     @Provides
     @Singleton
     public LocationServiceManager provideLocationServiceManager(Context context) {
         return new LocationServiceManager(context);
+    }
+
+    /**
+     * Gson objects are very heavy. The app should ideally be using just one instance of it instead of creating new instances everywhere.
+     * @return returns a singleton Gson instance
+     */
+    @Provides
+    @Singleton
+    public Gson provideGson() {
+        return new Gson();
     }
 
     @Provides

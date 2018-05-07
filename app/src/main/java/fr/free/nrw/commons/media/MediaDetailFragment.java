@@ -45,19 +45,22 @@ import fr.free.nrw.commons.mwapi.MediaWikiApi;
 import fr.free.nrw.commons.ui.widget.CompatTextView;
 import timber.log.Timber;
 
+import static android.view.View.*;
 import static android.widget.Toast.LENGTH_SHORT;
 
 public class MediaDetailFragment extends CommonsDaggerSupportFragment {
 
     private boolean editable;
+    private boolean isFeaturedMedia;
     private MediaDetailPagerFragment.MediaDetailProvider detailProvider;
     private int index;
 
-    public static MediaDetailFragment forMedia(int index, boolean editable) {
+    public static MediaDetailFragment forMedia(int index, boolean editable, boolean isFeaturedMedia) {
         MediaDetailFragment mf = new MediaDetailFragment();
 
         Bundle state = new Bundle();
         state.putBoolean("editable", editable);
+        state.putBoolean("isFeaturedMedia", isFeaturedMedia);
         state.putInt("index", index);
         state.putInt("listIndex", 0);
         state.putInt("listTop", 0);
@@ -79,12 +82,14 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
 
     private TextView title;
     private TextView desc;
+    private TextView author;
     private TextView license;
     private TextView coordinates;
     private TextView uploadedDate;
     private TextView seeMore;
     private LinearLayout nominatedforDeletion;
     private LinearLayout categoryContainer;
+    private LinearLayout authorLayout;
     private Button delete;
     private ScrollView scrollView;
     private ArrayList<String> categoryNames;
@@ -101,6 +106,7 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
         super.onSaveInstanceState(outState);
         outState.putInt("index", index);
         outState.putBoolean("editable", editable);
+        outState.putBoolean("isFeaturedMedia", isFeaturedMedia);
 
         getScrollPosition();
         outState.putInt("listTop", initialListTop);
@@ -116,13 +122,16 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
 
         if (savedInstanceState != null) {
             editable = savedInstanceState.getBoolean("editable");
+            isFeaturedMedia = savedInstanceState.getBoolean("isFeaturedMedia");
             index = savedInstanceState.getInt("index");
             initialListTop = savedInstanceState.getInt("listTop");
         } else {
             editable = getArguments().getBoolean("editable");
+            isFeaturedMedia = getArguments().getBoolean("isFeaturedMedia");
             index = getArguments().getInt("index");
             initialListTop = 0;
         }
+
         categoryNames = new ArrayList<>();
         categoryNames.add(getString(R.string.detail_panel_cats_loading));
 
@@ -135,6 +144,7 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
         spacer = (MediaDetailSpacer) view.findViewById(R.id.mediaDetailSpacer);
         title = (TextView) view.findViewById(R.id.mediaDetailTitle);
         desc = (TextView) view.findViewById(R.id.mediaDetailDesc);
+        author = (TextView) view.findViewById(R.id.mediaDetailAuthor);
         license = (TextView) view.findViewById(R.id.mediaDetailLicense);
         coordinates = (TextView) view.findViewById(R.id.mediaDetailCoordinates);
         uploadedDate = (TextView) view.findViewById(R.id.mediaDetailuploadeddate);
@@ -142,6 +152,13 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
         nominatedforDeletion = (LinearLayout) view.findViewById(R.id.nominatedDeletionBanner);
         delete = (Button) view.findViewById(R.id.nominateDeletion);
         categoryContainer = (LinearLayout) view.findViewById(R.id.mediaDetailCategoryContainer);
+        authorLayout = (LinearLayout) view.findViewById(R.id.authorLinearLayout);
+
+        if (isFeaturedMedia){
+            authorLayout.setVisibility(VISIBLE);
+        } else {
+            authorLayout.setVisibility(GONE);
+        }
 
         licenseList = new LicenseList(getActivity());
 
@@ -290,6 +307,12 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
         }
         rebuildCatList();
 
+        if(media.getCreator() == null || media.getCreator().equals("")) {
+            authorLayout.setVisibility(GONE);
+        } else {
+            author.setText(media.getCreator());
+        }
+
         checkDeletion(media);
     }
 
@@ -297,13 +320,17 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
         if (licenseLink(media) != null) {
             license.setOnClickListener(v -> openWebBrowser(licenseLink(media)));
         } else {
-            Toast toast = Toast.makeText(getContext(), getString(R.string.null_url), Toast.LENGTH_SHORT);
-            toast.show();
+            if(isFeaturedMedia) {
+               Timber.d("Unable to fetch license URL for %s", media.getLicense());
+            } else {
+                Toast toast = Toast.makeText(getContext(), getString(R.string.null_url), Toast.LENGTH_SHORT);
+                toast.show();
+            }
         }
         if (media.getCoordinates() != null) {
             coordinates.setOnClickListener(v -> openMap(media.getCoordinates()));
         }
-        if (delete.getVisibility() == View.VISIBLE) {
+        if (delete.getVisibility() == VISIBLE) {
             enableDeleteButton(true);
 
             delete.setOnClickListener(v -> {
@@ -353,7 +380,7 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
                 d.getButton(AlertDialog.BUTTON_POSITIVE).setEnabled(false);
             });
         }
-        if (nominatedforDeletion.getVisibility() == View.VISIBLE){
+        if (nominatedforDeletion.getVisibility() == VISIBLE){
             seeMore.setOnClickListener(v -> {
                 openWebBrowser(media.getFilePageTitle().getMobileUri().toString());
             });
@@ -442,7 +469,7 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
         if (date == null || date.toString() == null || date.toString().isEmpty()) {
             return "Uploaded date not available";
         }
-        SimpleDateFormat formatter = new SimpleDateFormat("dd MMM yyyy");
+        SimpleDateFormat formatter = new SimpleDateFormat("dd MMM yyyy", Locale.getDefault());
         return formatter.format(date);
     }
 
@@ -460,12 +487,12 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
 
     private void checkDeletion(Media media){
         if (media.getRequestedDeletion()){
-            delete.setVisibility(View.GONE);
-            nominatedforDeletion.setVisibility(View.VISIBLE);
+            delete.setVisibility(GONE);
+            nominatedforDeletion.setVisibility(VISIBLE);
         }
         else{
-            delete.setVisibility(View.VISIBLE);
-            nominatedforDeletion.setVisibility(View.GONE);
+            delete.setVisibility(VISIBLE);
+            nominatedforDeletion.setVisibility(GONE);
         }
     }
 

@@ -23,11 +23,11 @@ import fr.free.nrw.commons.AboutActivity;
 import fr.free.nrw.commons.BuildConfig;
 import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.R;
-import fr.free.nrw.commons.Utils;
 import fr.free.nrw.commons.WelcomeActivity;
 import fr.free.nrw.commons.auth.AccountUtil;
 import fr.free.nrw.commons.auth.LoginActivity;
 import fr.free.nrw.commons.contributions.ContributionsActivity;
+import fr.free.nrw.commons.category.CategoryImagesActivity;
 import fr.free.nrw.commons.nearby.NearbyActivity;
 import fr.free.nrw.commons.notification.NotificationActivity;
 import fr.free.nrw.commons.settings.SettingsActivity;
@@ -35,6 +35,8 @@ import timber.log.Timber;
 
 public abstract class NavigationBaseActivity extends BaseActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+
+    private static final String FEATURED_IMAGES_CATEGORY = "Category:Featured_pictures_on_Wikimedia_Commons";
 
     @BindView(R.id.toolbar)
     Toolbar toolbar;
@@ -153,6 +155,10 @@ public abstract class NavigationBaseActivity extends BaseActivity
             case R.id.action_notifications:
                 drawerLayout.closeDrawer(navigationView);
                 NotificationActivity.startYourself(this);
+                return true;
+            case R.id.action_featured_images:
+                drawerLayout.closeDrawer(navigationView);
+                CategoryImagesActivity.startYourself(this, getString(R.string.title_activity_featured_images), FEATURED_IMAGES_CATEGORY);
                 return true;
             default:
                 Timber.e("Unknown option [%s] selected from the navigation menu", itemId);

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Authors:
 * Acamicamacaraca
+* BadDog
 * Liuxinyu970226
 * Milicevic01
 * Obsuser
@@ -244,7 +245,7 @@
   <string name="notifications_thank_you_edit">Хвала Вам за прављење измене</string>
   <string name="notifications_mention">%1$s Вас је поменуо на страници %2$s.</string>
   <string name="toggle_view_button">Пребаци приказ</string>
-  <string name="about_rate_us" fuzzy="true"/>
+  <string name="about_rate_us">&lt;u&gt;Оцените нас&lt;/u&gt;</string>
   <string name="about_faq" fuzzy="true">Често постављана питања</string>
   <string name="welcome_skip_button">Прескочи туторијал</string>
 </resources>

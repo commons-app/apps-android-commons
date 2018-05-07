@@ -1,13 +1,9 @@
 package fr.free.nrw.commons.upload;
 
 import android.annotation.SuppressLint;
-import android.app.Activity;
-
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
-import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
@@ -17,7 +13,6 @@ import android.text.Editable;
 import android.text.Html;
 import android.text.TextWatcher;
 import android.text.method.LinkMovementMethod;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -25,7 +20,6 @@ import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -48,9 +42,9 @@ import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.Utils;
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
 import fr.free.nrw.commons.settings.Prefs;
+import fr.free.nrw.commons.utils.ViewUtil;
 import timber.log.Timber;
 
-import static android.view.MotionEvent.ACTION_DOWN;
 import static android.view.MotionEvent.ACTION_UP;
 
 public class SingleUploadFragment extends CommonsDaggerSupportFragment {
@@ -60,6 +54,7 @@ public class SingleUploadFragment extends CommonsDaggerSupportFragment {
     @BindView(R.id.titleDescButton) Button titleDescButton;
     @BindView(R.id.share_license_summary) TextView licenseSummaryView;
     @BindView(R.id.licenseSpinner) Spinner licenseSpinner;
+
 
     @Inject @Named("default_preferences") SharedPreferences prefs;
     @Inject @Named("direct_nearby_upload_prefs") SharedPreferences directPrefs;
@@ -168,25 +163,19 @@ public class SingleUploadFragment extends CommonsDaggerSupportFragment {
 
         titleEdit.setOnFocusChangeListener((v, hasFocus) -> {
             if (!hasFocus) {
-                hideKeyboard(v);
+                ViewUtil.hideKeyboard(v);
             }
         });
 
         descEdit.setOnFocusChangeListener((v, hasFocus) -> {
             if(!hasFocus){
-                hideKeyboard(v);
+                ViewUtil.hideKeyboard(v);
             }
         });
 
         setLicenseSummary(license);
 
         return rootView;
-    }
-
-    public void hideKeyboard(View view) {
-        Log.i("hide", "hideKeyboard: ");
-        InputMethodManager inputMethodManager =(InputMethodManager)getActivity().getSystemService(Activity.INPUT_METHOD_SERVICE);
-        inputMethodManager.hideSoftInputFromWindow(view.getWindowToken(), 0);
     }
 
     @Override
@@ -224,7 +213,7 @@ public class SingleUploadFragment extends CommonsDaggerSupportFragment {
         setLicenseSummary(license);
         prefs.edit()
                 .putString(Prefs.DEFAULT_LICENSE, license)
-                .commit();
+                .apply();
     }
 
 
@@ -301,11 +290,8 @@ public class SingleUploadFragment extends CommonsDaggerSupportFragment {
         super.onStop();
 
         // FIXME: Stops the keyboard from being shown 'stale' while moving out of this fragment into the next
-        View target = getView().findFocus();
-        if (target != null) {
-            InputMethodManager imm = (InputMethodManager) target.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
-            imm.hideSoftInputFromWindow(target.getWindowToken(), 0);
-        }
+        View target = getActivity().getCurrentFocus();
+        ViewUtil.hideKeyboard(target);
     }
 
     @NonNull
@@ -345,6 +331,7 @@ public class SingleUploadFragment extends CommonsDaggerSupportFragment {
             }
         }
     }
+
 
     private void showInfoAlert (int titleStringID, int messageStringID){
         new AlertDialog.Builder(getContext())

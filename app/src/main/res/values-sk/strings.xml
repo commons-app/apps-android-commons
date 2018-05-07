@@ -5,11 +5,18 @@
 * Sudo77(new)
 -->
 <resources>
+  <string name="preference_category_appearance">Vzhľad</string>
+  <string name="preference_category_general">Všeobecné</string>
+  <string name="preference_category_feedback">Spätná väzba</string>
+  <string name="preference_category_location">Poloha</string>
   <string name="app_name">Commons</string>
+  <string name="bullet">•</string>
   <string name="menu_settings">Nastavenia</string>
   <string name="username">Používateľské meno</string>
   <string name="password">Heslo</string>
+  <string name="login_credential">Prihláste sa do svojho účtu Commons Beta</string>
   <string name="login">Prihlásiť sa</string>
+  <string name="forgot_password">Zabudli ste heslo?</string>
   <string name="signup">Zaregistrovať sa</string>
   <string name="logging_in_title">Prihlasovanie</string>
   <string name="logging_in_message">Čakajte prosím…</string>
@@ -41,6 +48,7 @@
   <string name="menu_share">Zdieľať</string>
   <string name="menu_open_in_browser">Otvoriť v prehliadači</string>
   <string name="share_title_hint">Názov</string>
+  <string name="add_title_toast">Prosím, dajte tomuto súboru názov</string>
   <string name="share_description_hint">Opis</string>
   <string name="login_failed_network">prihlásenie zlyhalo - zlyhanie siete</string>
   <string name="login_failed_username">Prihlásenie zlyhalo - skontrolujte vaše používateľské meno</string>
@@ -64,7 +72,7 @@
   <string name="menu_about">O aplikácii</string>
   <string name="about_license" fuzzy="true">Open Source softvér dostupný za podmienok &lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/COPYING\"&gt;Apache License v2&lt;/a&gt;</string>
   <string name="about_improve" fuzzy="true">Zdroj na &lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;GitHub&lt;/a&gt;. Bugy na &lt;a href=\" https://github.com/commons-app/apps-android-commons/issues\"&gt;Github&lt;/a&gt;.</string>
-  <string name="about_privacy_policy" fuzzy="true">&lt;a href=\"https://github.com/commons-app/apps-android-commons/wiki/Privacy-policy\"&gt;Zásady ochrany súkromia&lt;/a&gt;</string>
+  <string name="about_privacy_policy">&lt;u&gt;Zásady ochrany súkromia&lt;/u&gt;</string>
   <string name="title_activity_about">O aplikácii</string>
   <string name="menu_feedback">Odoslať spätnú väzbu (emailom)</string>
   <string name="no_email_client">Nemáte nainštalovaného žiadneho e-mailového klienta</string>
@@ -75,7 +83,7 @@
   <string name="menu_cancel_upload">Zrušiť</string>
   <string name="share_license_summary">Tento obrázok bude licencovaný podľa %1$s</string>
   <string name="menu_download">Stiahnuť</string>
-  <string name="preference_license" fuzzy="true">Licencia</string>
+  <string name="preference_license">Predvolená licencia</string>
   <string name="use_previous">Použiť predchádzajúci názov/popis</string>
   <string name="allow_gps">Automaticky získať súčasnú polohu</string>
   <string name="preference_theme">Nočný režim</string>
@@ -103,11 +111,20 @@
   <string name="tutorial_1_text">Na Wikimedia Commons sa nachádza väčšina obrázkov, ktoré sa používajú na Wikipédii.</string>
   <string name="tutorial_1_subtext">Váš obrázok pomáha vzdelávať ľudí po celom svete!</string>
   <string name="tutorial_2_text">Prosím, nahrávajte obrázky, ktoré ste odfotili alebo vytvorili vy:</string>
-  <string name="tutorial_2_subtext" fuzzy="true">- Prírodu (kvety, zvieratá, hory)\n- Užitočné objekty (bicykle, železničné stanice)\n- Slávni ľudia (starosta, olympionici, s ktorými ste sa stretli)</string>
+  <string name="tutorial_2_subtext">Prírodu (kvety, zvieratá, hory)\n• Užitočné objekty (bicykle, železničné stanice)\n• Slávnych ľudí (starosta, olympionici, s ktorými ste sa stretli)</string>
+  <string name="tutorial_2_subtext_1">Prírodu (kvety, zvieratá, hory)</string>
+  <string name="tutorial_2_subtext_2">Užitočné objekty (bicykle, železničné stanice)</string>
+  <string name="tutorial_2_subtext_3">Slávnych ľudí (starosta, olympionici, s ktorými ste sa stretli)</string>
   <string name="tutorial_3_text">Prosím NENAHRÁVAJTE:</string>
   <string name="tutorial_3_subtext">- Selfies alebo fotky vašich priateľov\n- Obrázky prevzaté z internetu\n- Snímky obrazovky proprietárnych aplikácii</string>
+  <string name="tutorial_3_subtext_1">Selfies alebo fotky vašich priateľov</string>
+  <string name="tutorial_3_subtext_2">Obrázky prevzaté z internetu</string>
+  <string name="tutorial_3_subtext_3">Snímky obrazovky proprietárnych aplikácii</string>
   <string name="tutorial_4_text">Príklad nahratia:</string>
   <string name="tutorial_4_subtext">- Názov: Opera v Sydney\n- Opis: Opera v Sydney - pohľad spoza zátoky\n- Kategórie: Sydney Opera House from the west, Sydney Opera House remote views</string>
+  <string name="tutorial_4_subtext_1">Názov: Opera v Sydney</string>
+  <string name="tutorial_4_subtext_2">Popis: Opera v Sydney - pohľad spoza zátoky</string>
+  <string name="tutorial_4_subtext_3">Kategórie: Sydney Opera House from the west, Sydney Opera House remote views</string>
   <string name="welcome_wikipedia_text">Prispejte svojimi obrázkami. Pomôžte oživiť články na Wikipédií.</string>
   <string name="welcome_wikipedia_subtext">Obrázky na Wikipédií pochádzajú z Wikimedia Commons.</string>
   <string name="welcome_copyright_text">Vaše obrázky pomáhajú vzdelávať ľudí po celom svete.</string>
@@ -130,14 +147,20 @@
   <string name="media_detail_title">Názov</string>
   <string name="media_detail_media_title">Názov média</string>
   <string name="media_detail_description">Popis</string>
+  <string name="media_detail_author">Autor</string>
+  <string name="media_detail_uploaded_date">Dátum nahrania</string>
   <string name="media_detail_license">Licencia</string>
   <string name="media_detail_coordinates">Súradnice</string>
   <string name="media_detail_coordinates_empty">neposkytnuté</string>
   <string name="become_a_tester_title">Staňte sa beta testerom</string>
   <string name="logout_verification">Naozaj sa chcete odhlásiť?</string>
   <string name="commons_logo">Logo Commons</string>
+  <string name="commons_website">Webová stránka Commons</string>
+  <string name="commons_facebook">Facebooková stránka Commons</string>
+  <string name="commons_github">Zdrojový kód Commons na Githube</string>
   <string name="background_image">Obrázok pozadia</string>
   <string name="no_image_found">Nenašiel sa žiaden obrázok</string>
+  <string name="upload_image">Nahrať obrázok</string>
   <string name="welcome_image_mount_zao">Hora Zaó</string>
   <string name="welcome_image_llamas">Lamy</string>
   <string name="welcome_image_rainbow_bridge">Dúhový most</string>
@@ -157,4 +180,15 @@
   <string name="navigation_item_info">Návod</string>
   <string name="navigation_item_notification">Upozornenia</string>
   <string name="no_description_found">nenašiel sa žiaden popis</string>
+  <string name="view_browser">Otvoriť v prehliadači</string>
+  <string name="nearby_wikidata">WIKIÚDAJE</string>
+  <string name="nearby_wikipedia">WIKIPÉDIA</string>
+  <string name="nearby_commons">COMMONS</string>
+  <string name="about_rate_us">&lt;u&gt;Ohodnoťte nás&lt;/u&gt;</string>
+  <string name="about_faq">&lt;u&gt;FAQ&lt;/u&gt;</string>
+  <string name="about_translate">&lt;u&gt;Preložiť&lt;/u&gt;</string>
+  <string name="about_translate_title">Jazyky</string>
+  <string name="about_translate_proceed">Pokračovať</string>
+  <string name="about_translate_cancel">Zrušiť</string>
+  <string name="retry">Obnoviť</string>
 </resources>

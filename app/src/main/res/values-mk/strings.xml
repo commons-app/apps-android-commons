@@ -84,6 +84,7 @@
   <string name="categories_activity_title">Категории</string>
   <string name="title_activity_settings">Нагодувања</string>
   <string name="title_activity_signup">Регистрација</string>
+  <string name="title_activity_featured_images">Избрани слики</string>
   <string name="menu_about">За извршникот</string>
   <string name="about_license">Прилогот на Ризницата има отворен код. Негови творци и одржувачи се примателите на наменските средства од Викимедиината заедница како и членовите на заедницата. Фондацијата Викимедија нема учество во нејзиното создавање, разработка и одржување.</string>
   <string name="about_improve">Создајте нов &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;проблем на GitHub&lt;/a&gt; за пријавување на грешки и давање предлози.</string>
@@ -169,6 +170,8 @@
   <string name="media_detail_media_title">Наслов на податотеката</string>
   <string name="media_detail_description">Опис</string>
   <string name="media_detail_description_explanation">Тука оди описот на податотеката. Ова потенцијално може да биде прилично долго, и ќе треба да се преломи во неколку реда. Се надеваме дека ќе изгледа добро.</string>
+  <string name="media_detail_author">Автор</string>
+  <string name="media_detail_author_explanation">Тука оди корисничкото име на авторот на избраната слика.</string>
   <string name="media_detail_uploaded_date">Датум на подигање</string>
   <string name="media_detail_license">Лиценца</string>
   <string name="media_detail_coordinates">Координати</string>
@@ -211,6 +214,7 @@
   <string name="navigation_item_logout">Одјава</string>
   <string name="navigation_item_info">Упатства</string>
   <string name="navigation_item_notification">Известувања</string>
+  <string name="navigation_item_featured_images">Избрана</string>
   <string name="nearby_needs_permissions">Местата во близина не можат да се прикажат без дозволи за местоположба.</string>
   <string name="no_description_found">не најдов описи</string>
   <string name="nearby_info_menu_commons_article">Податотечна страница</string>
@@ -259,4 +263,5 @@
   <string name="about_translate_proceed">Продолжи</string>
   <string name="about_translate_cancel">Откажи</string>
   <string name="retry">Пробај пак</string>
+  <string name="share_app_title">Сподели прилог</string>
 </resources>

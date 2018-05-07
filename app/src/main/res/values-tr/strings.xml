@@ -16,6 +16,7 @@
   <string name="preference_category_feedback">Geri bildirim</string>
   <string name="preference_category_location">Konum</string>
   <string name="app_name">Commons</string>
+  <string name="bullet">•</string>
   <string name="menu_settings">Ayarlar</string>
   <string name="username">Kullanıcı adı</string>
   <string name="password">Parola</string>
@@ -91,6 +92,7 @@
   <string name="categories_activity_title">Kategoriler</string>
   <string name="title_activity_settings">Ayarlar</string>
   <string name="title_activity_signup">Kaydol</string>
+  <string name="title_activity_featured_images">Seçkin Resimler</string>
   <string name="menu_about">Hakkında</string>
   <string name="about_license">Wikimedia Commons uygulaması, Wikimedia topluluğunun imtiyaz sahibi ve gönüllüleri tarafından oluşturulmuş ve sürdürülmüş açık kaynak kodlu bir uygulamadır. Vikipedi Vakfı, uygulamanın oluşturulması, geliştirilmesi veya bakımına dahil değildir.</string>
   <string name="about_improve">GitHub üzerinde &lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;Kaynak&lt;/a&gt; ve &lt;a href=\"https://commons-app.github.io/\"&gt;website&lt;/a&gt;. Hata raporları ve önerileri için yeni bir &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;GitHub sorunu&lt;/a&gt; oluştur.</string>
@@ -149,6 +151,7 @@
   <string name="tutorial_4_subtext">- Başlık: Sydney Opera Binası\n- Tanım: Körfezin genelinden bakıldığında Sydney Opera Binası\n- Kategoriler: Sydney Opera Binası, batıdan Sydney Opera Binası</string>
   <string name="tutorial_4_subtext_1">Başlık: Sidney Opera Binası</string>
   <string name="tutorial_4_subtext_2">Açıklama: Sidney Opera Binası\'nın körfezin karşısından görünümü</string>
+  <string name="tutorial_4_subtext_3">Kategoriler: Batıdan Sidney Opera Binası, Sidney Opera Binası uzaktan manzaraları</string>
   <string name="welcome_wikipedia_text">Resimleriniz ile Vikipedi maddelerinin canlandırılmasına katkıda bulunabilirsiniz!</string>
   <string name="welcome_wikipedia_subtext">Vikipedi\'ye Wikimedia Commons\'tan gelen görüntüler.</string>
   <string name="welcome_copyright_text">Görüntüler dünya insanlarının eğitiminde yardımcı olur.</string>
@@ -161,8 +164,8 @@
   <string name="detail_description_empty">Açıklama yok</string>
   <string name="detail_license_empty">Bilinmeyen lisans</string>
   <string name="menu_refresh">Yenile</string>
-  <string name="read_storage_permission_rationale" fuzzy="true">Gerekli izinler: Harici depolama biriminin okunması. Uygulama buna izin verilmeden çalışmaz.</string>
-  <string name="write_storage_permission_rationale" fuzzy="true">Gerekli izin: Harici depolama birimi üzerine yazma. Uygulama buna izin verilmeden çalışmaz.</string>
+  <string name="read_storage_permission_rationale">Gerekli izin: Harici belleği oku. Uygulama, galerinize bu olmadan erişemez.</string>
+  <string name="write_storage_permission_rationale">Gerekli izin: Harici depolama yazın. Uygulama kameranıza bu olmadan erişemez.</string>
   <string name="location_permission_rationale">İsteğe bağlı izin: Kategori önerileri için geçerli konum alma</string>
   <string name="ok">Tamam</string>
   <string name="title_activity_nearby">Yakındaki yerler</string>
@@ -175,6 +178,8 @@
   <string name="media_detail_media_title">Medyanın başlığı</string>
   <string name="media_detail_description">Açıklama</string>
   <string name="media_detail_description_explanation">Medya için yapılan tanımı/açıklamayı buraya yazınız. Açıklamanız uzun olabilir ve birden fazla satıra sığabilir. Umuyoruz ki güzel ve bilgilendirici olacaktır.</string>
+  <string name="media_detail_author">Yazar</string>
+  <string name="media_detail_author_explanation">Seçkin resim yazarının kullanıcı adı buraya eklenir.</string>
   <string name="media_detail_uploaded_date">Yükleme tarihi</string>
   <string name="media_detail_license">Lisans</string>
   <string name="media_detail_coordinates">Koordinatlar</string>
@@ -217,6 +222,7 @@
   <string name="navigation_item_logout">Çıkış</string>
   <string name="navigation_item_info">Eğitim</string>
   <string name="navigation_item_notification">Bildirimler</string>
+  <string name="navigation_item_featured_images">Seçkin</string>
   <string name="nearby_needs_permissions">Yakındaki yerler, konum izinleri olmadan görüntülenemez</string>
   <string name="no_description_found">hiçbir açıklama bulunamadı</string>
   <string name="nearby_info_menu_commons_article">Commons dosya sayfası</string>
@@ -244,7 +250,25 @@
   <string name="get_directions">TALİMATLAR</string>
   <string name="read_article">MADDE OKU</string>
   <string name="notifications_welcome">Wikimedia Commons\'a hoşgedin %1$s! Burada olduğun için mutluyuz.</string>
+  <string name="notifications_talk_page_message">%1$s mesaj sayfasınıza bir mesaj bıraktı.</string>
   <string name="notifications_thank_you_edit">Düzenlemeniz için teşekkürler</string>
   <string name="notifications_mention">%1$s , %2$s \'de senden bahsetti</string>
+  <string name="toggle_view_button">Görünümü değiştir</string>
   <string name="nearby_directions">YOL TARİFİ</string>
+  <string name="nearby_wikidata">VİKİVERİ</string>
+  <string name="nearby_wikipedia">VİKİPEDİ</string>
+  <string name="nearby_commons">COMMONS</string>
+  <string name="about_rate_us">&lt;u&gt;Bizi oyla&lt;/u&gt;</string>
+  <string name="about_faq">&lt;u&gt;SSS&lt;/u&gt;</string>
+  <string name="welcome_skip_button">Eğiticiyi Atla</string>
+  <string name="no_internet">İnternet kullanılamıyor</string>
+  <string name="internet_established">İnternet kullanılabilir</string>
+  <string name="error_notifications">Bildirim alınırken hata oluştu</string>
+  <string name="no_notifications">Bildirim bulunamadı</string>
+  <string name="about_translate">&lt;u&gt;Çevir&lt;/u&gt;</string>
+  <string name="about_translate_title">Diller</string>
+  <string name="about_translate_message">Çevirileri göndermek istediğiniz dili seçin</string>
+  <string name="about_translate_proceed">İlerle</string>
+  <string name="about_translate_cancel">Vazgeç</string>
+  <string name="retry">Tekrar Deneyin</string>
 </resources>

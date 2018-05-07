@@ -19,7 +19,6 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatDelegate;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -28,9 +27,9 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.io.IOException;
+import java.util.Locale;
 
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -48,6 +47,7 @@ import fr.free.nrw.commons.di.ApplicationlessInjection;
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
 import fr.free.nrw.commons.theme.NavigationBaseActivity;
 import fr.free.nrw.commons.ui.widget.HtmlTextView;
+import fr.free.nrw.commons.utils.ViewUtil;
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
@@ -85,6 +85,10 @@ public class LoginActivity extends AccountAuthenticatorActivity {
     private LoginTextWatcher textWatcher = new LoginTextWatcher();
 
     private Boolean loginCurrentlyInProgress = false;
+    private Boolean errorMessageShown = false;
+    private String  resultantError;
+    private static final String RESULTANT_ERROR = "resultantError";
+    private static final String ERROR_MESSAGE_SHOWN = "errorMessageShown";
     private static final String LOGING_IN = "logingIn";
 
     @Override
@@ -106,14 +110,14 @@ public class LoginActivity extends AccountAuthenticatorActivity {
         usernameEdit.addTextChangedListener(textWatcher);
         usernameEdit.setOnFocusChangeListener((v, hasFocus) -> {
             if (!hasFocus) {
-                hideKeyboard(v);
+                ViewUtil.hideKeyboard(v);
             }
         });
 
         passwordEdit.addTextChangedListener(textWatcher);
         passwordEdit.setOnFocusChangeListener((v, hasFocus) -> {
             if (!hasFocus) {
-                hideKeyboard(v);
+                ViewUtil.hideKeyboard(v);
             }
         });
 
@@ -125,7 +129,7 @@ public class LoginActivity extends AccountAuthenticatorActivity {
 
         forgotPasswordText.setOnClickListener(view -> forgotPassword());
 
-        if(BuildConfig.FLAVOR == "beta"){
+        if(BuildConfig.FLAVOR.equals("beta")){
             loginCredentials.setText(getString(R.string.login_credential));
         } else {
             loginCredentials.setVisibility(View.GONE);
@@ -141,12 +145,6 @@ public class LoginActivity extends AccountAuthenticatorActivity {
         Utils.handleWebUrl(this,Uri.parse("https://github.com/commons-app/apps-android-commons/wiki/Privacy-policy\\"));
     }
 
-    public void hideKeyboard(View view) {
-        InputMethodManager inputMethodManager =(InputMethodManager)this.getSystemService(Activity.INPUT_METHOD_SERVICE);
-        inputMethodManager.hideSoftInputFromWindow(view.getWindowToken(), 0);
-    }
-
-
     @Override
     protected void onPostCreate(Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);
@@ -160,7 +158,10 @@ public class LoginActivity extends AccountAuthenticatorActivity {
             WelcomeActivity.startYourself(this);
             prefs.edit().putBoolean("firstrun", false).apply();
         }
-        if (sessionManager.getCurrentAccount() != null) {
+
+        if (sessionManager.getCurrentAccount() != null
+                && sessionManager.isUserLoggedIn()
+                && sessionManager.getCachedAuthCookie() != null) {
             startMainActivity();
         }
     }
@@ -215,6 +216,8 @@ public class LoginActivity extends AccountAuthenticatorActivity {
             handlePassResult(username, password);
         } else {
             loginCurrentlyInProgress = false;
+            errorMessageShown = true;
+            resultantError = result;
             handleOtherResults(result);
         }
     }
@@ -266,18 +269,18 @@ public class LoginActivity extends AccountAuthenticatorActivity {
         if (result.equals("NetworkFailure")) {
             // Matches NetworkFailure which is created by the doInBackground method
             showMessageAndCancelDialog(R.string.login_failed_network);
-        } else if (result.toLowerCase().contains("nosuchuser".toLowerCase()) || result.toLowerCase().contains("noname".toLowerCase())) {
+        } else if (result.toLowerCase(Locale.getDefault()).contains("nosuchuser".toLowerCase()) || result.toLowerCase().contains("noname".toLowerCase())) {
             // Matches nosuchuser, nosuchusershort, noname
             showMessageAndCancelDialog(R.string.login_failed_username);
             emptySensitiveEditFields();
-        } else if (result.toLowerCase().contains("wrongpassword".toLowerCase())) {
+        } else if (result.toLowerCase(Locale.getDefault()).contains("wrongpassword".toLowerCase())) {
             // Matches wrongpassword, wrongpasswordempty
             showMessageAndCancelDialog(R.string.login_failed_password);
             emptySensitiveEditFields();
-        } else if (result.toLowerCase().contains("throttle".toLowerCase())) {
+        } else if (result.toLowerCase(Locale.getDefault()).contains("throttle".toLowerCase())) {
             // Matches unknown throttle error codes
             showMessageAndCancelDialog(R.string.login_failed_throttled);
-        } else if (result.toLowerCase().contains("userblocked".toLowerCase())) {
+        } else if (result.toLowerCase(Locale.getDefault()).contains("userblocked".toLowerCase())) {
             // Matches login-userblocked
             showMessageAndCancelDialog(R.string.login_failed_blocked);
         } else if (result.equals("2FA")) {
@@ -341,14 +344,21 @@ public class LoginActivity extends AccountAuthenticatorActivity {
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         outState.putBoolean(LOGING_IN, loginCurrentlyInProgress);
+        outState.putBoolean(ERROR_MESSAGE_SHOWN, errorMessageShown);
+        outState.putString(RESULTANT_ERROR, resultantError);
     }
 
     @Override
     protected void onRestoreInstanceState(Bundle savedInstanceState) {
         super.onRestoreInstanceState(savedInstanceState);
         loginCurrentlyInProgress = savedInstanceState.getBoolean(LOGING_IN, false);
+        errorMessageShown = savedInstanceState.getBoolean(ERROR_MESSAGE_SHOWN, false);
         if(loginCurrentlyInProgress){
             performLogin();
+        }
+        if(errorMessageShown){
+            resultantError = savedInstanceState.getString(RESULTANT_ERROR);
+            handleOtherResults(resultantError);
         }
     }
 
@@ -361,7 +371,9 @@ public class LoginActivity extends AccountAuthenticatorActivity {
 
     public void showMessageAndCancelDialog(@StringRes int resId) {
         showMessage(resId, R.color.secondaryDarkColor);
-        progressDialog.cancel();
+        if(progressDialog != null){
+            progressDialog.cancel();
+        }
     }
 
     public void showSuccessAndDismissDialog() {

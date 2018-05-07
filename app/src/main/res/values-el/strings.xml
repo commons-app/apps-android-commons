@@ -92,6 +92,7 @@
   <string name="categories_activity_title">Κατηγορίες</string>
   <string name="title_activity_settings">Ρυθμίσεις</string>
   <string name="title_activity_signup">Εγγραφή</string>
+  <string name="title_activity_featured_images">Προβεβλημμένες εικόνες</string>
   <string name="menu_about">Σχετικά</string>
   <string name="about_license">Λογισμικό ανοικτού κωδικού που κυκλοφορεί υπό την &lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/COPYING\"&gt;Άδεια Apache v2&lt;/a&gt;. Το Wikimedia Commons και το λογότυπο είναι εμπορικά σήματα του Ιδρύματος Wikimedia και χρησιμοποιούνται με άδεια από το Ίδρυμα Wikimedia. Δεν συμμετέχουμε  στην δημιουργία, ανάπτυξη ή συντήρηση  του Ιδρύματος  Wikimedia.</string>
   <string name="about_improve">Δημιουργήστε ένα νέο &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;GitHub θέμα&lt;/a&gt; για αναφορές σφαλμάτων και προτάσεις.</string>
@@ -157,6 +158,7 @@
   <string name="welcome_copyright_subtext">Αποφύγετε προστατευμένο υλικό  που βρήκατε από το Internet, καθώς και εικόνες, αφίσες, εξώφυλλα βιβλίων, κλπ.</string>
   <string name="welcome_final_text">Τι λες, μπορείς;</string>
   <string name="welcome_final_button_text">Ναι!</string>
+  <string name="welcome_help_button_text"/>
   <string name="detail_panel_cats_label">Κατηγορίες</string>
   <string name="detail_panel_cats_loading">Φόρτωση…</string>
   <string name="detail_panel_cats_none">Καμία επιλεγμένη</string>
@@ -177,6 +179,8 @@
   <string name="media_detail_media_title">Τίτλος πολυμέσου</string>
   <string name="media_detail_description">Περιγραφή</string>
   <string name="media_detail_description_explanation">Η περιγραφή του πολυμέσου μπαίνει εδώ. Αυτή μπορεί να είναι σχετικά μεγάλη, και θα χρειαστεί να αναδιπλωθεί σε πολλές γραμμές. Ελπίζουμε ωστόσο ότι θα φαίνεται όμορφα.</string>
+  <string name="media_detail_author">Συγγραφέας</string>
+  <string name="media_detail_author_explanation">Το όνομα χρήστη του συγγραφέα της επιλεγμένης εικόνας πάει εδώ.</string>
   <string name="media_detail_uploaded_date">Ημερομηνία φόρτωσης</string>
   <string name="media_detail_license">Άδεια</string>
   <string name="media_detail_coordinates">Συντεταγμένες</string>
@@ -219,6 +223,7 @@
   <string name="navigation_item_logout">Αποσύνδεση</string>
   <string name="navigation_item_info">Σεμινάριο</string>
   <string name="navigation_item_notification">Ενημερώσεις</string>
+  <string name="navigation_item_featured_images">Επιλεγμένο</string>
   <string name="nearby_needs_permissions">Οι κοντινές τοποθεσίες δεν μπορούν να προβληθούν δίχως τις άδειες τοποθεσίας</string>
   <string name="no_description_found">δεν βρέθηκε περιγραφή</string>
   <string name="nearby_info_menu_commons_article">Σελίδα φακέλλου κοινής χρήσης</string>
@@ -268,4 +273,5 @@
   <string name="about_translate_proceed">Συνέχεια</string>
   <string name="about_translate_cancel">Ακύρωση</string>
   <string name="retry">Ξαναπροσπαθήστε</string>
+  <string name="share_app_title">Κοινοποίηση εφαρμογής</string>
 </resources>

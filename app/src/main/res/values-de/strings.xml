@@ -88,6 +88,7 @@
   <string name="categories_activity_title">Kategorien</string>
   <string name="title_activity_settings">Einstellungen</string>
   <string name="title_activity_signup">Registrieren</string>
+  <string name="title_activity_featured_images">Vorgestellte Bilder</string>
   <string name="menu_about">Über</string>
   <string name="about_license">Die Wikimedia-Commons-App ist eine Open-Source-App, entwickelt und gewartet von Freiwilligen der Wikimedia-Gemeinschaft. Die Wikimedia Foundation ist nicht bei der Erstellung, Entwicklung oder Wartung der App beteiligt.</string>
   <string name="about_improve">Einen neuen &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;GitHub-Eintrag&lt;/a&gt; für Fehlerberichte und Vorschläge erstellen.</string>
@@ -153,6 +154,7 @@
   <string name="welcome_copyright_subtext">Vermeide urheberrechtlich geschütztes Material, das du im Internet gefunden hast wie Bilder von Postern, Buchcovern etc.</string>
   <string name="welcome_final_text">Verstanden?</string>
   <string name="welcome_final_button_text">Ja!</string>
+  <string name="welcome_help_button_text"/>
   <string name="detail_panel_cats_label">Kategorien</string>
   <string name="detail_panel_cats_loading">Lade …</string>
   <string name="detail_panel_cats_none">Keine ausgewählt</string>
@@ -173,6 +175,8 @@
   <string name="media_detail_media_title">Titel des Mediums</string>
   <string name="media_detail_description">Beschreibung</string>
   <string name="media_detail_description_explanation">Hier folgt die Beschreibung des Mediums. Diese kann möglicherweise ziemlich lang sein und erfordert dann einen Umbruch auf mehreren Zeilen. Wir hoffen, dass sie dennoch gut aussieht.</string>
+  <string name="media_detail_author">Autor</string>
+  <string name="media_detail_author_explanation">Hier steht der Benutzername des Autors des vorgestellten Bildes.</string>
   <string name="media_detail_uploaded_date">Hochgeladen am</string>
   <string name="media_detail_license">Lizenz</string>
   <string name="media_detail_coordinates">Koordinaten</string>
@@ -215,6 +219,7 @@
   <string name="navigation_item_logout">Abmelden</string>
   <string name="navigation_item_info">Anleitung</string>
   <string name="navigation_item_notification">Benachrichtigungen</string>
+  <string name="navigation_item_featured_images">Vorgestellt</string>
   <string name="nearby_needs_permissions">Orte in der Nähe können ohne Berechtigung zur Standortbestimmung nicht ermittelt werden</string>
   <string name="no_description_found">Keine Beschreibung gefunden</string>
   <string name="nearby_info_menu_commons_article">Commons-Dateiseite</string>
@@ -264,4 +269,5 @@
   <string name="about_translate_proceed">Fortfahren</string>
   <string name="about_translate_cancel">Abbrechen</string>
   <string name="retry">Erneut versuchen</string>
+  <string name="share_app_title">App teilen</string>
 </resources>

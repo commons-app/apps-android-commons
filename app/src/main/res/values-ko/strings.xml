@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Authors:
 * CYAN
+* Doyoon1995
 * Garam
 * Jerrykim306
 * Kwj2772
@@ -90,6 +91,7 @@
   <string name="categories_activity_title">분류</string>
   <string name="title_activity_settings">설정</string>
   <string name="title_activity_signup">가입하기</string>
+  <string name="title_activity_featured_images">알찬 그림</string>
   <string name="menu_about">정보</string>
   <string name="about_license">위키미디어 공용 앱은 오픈 소스 애플리케이션이며 위키미디어 공동체 내의 자원봉사자에 의해 유지됩니다. 위키미디어 재단은 애플리케이션의 생성, 개발, 유지보수에 관여하지 않습니다.</string>
   <string name="about_improve">버그나 기타 제안은 &lt;a href=\" https://github.com/commons-app/apps-android-commons/issues\"&gt;GitHub&lt;/a&gt;에 보고해주세요.</string>
@@ -175,6 +177,8 @@
   <string name="media_detail_media_title">미디어 제목</string>
   <string name="media_detail_description">설명</string>
   <string name="media_detail_description_explanation">여기에 미디어의 설명이 들어갑니다. 상당히 길어질 경우, 여러 줄에 걸쳐야 할 수 있습니다. 그래도 보기 좋았으면 좋겠네요.</string>
+  <string name="media_detail_author">저자</string>
+  <string name="media_detail_author_explanation">알찬 그림 저자의 사용자 이름은 여기에.들어갑니다.</string>
   <string name="media_detail_uploaded_date">올린 날짜</string>
   <string name="media_detail_license">라이선스</string>
   <string name="media_detail_coordinates">좌표</string>
@@ -217,6 +221,7 @@
   <string name="navigation_item_logout">로그아웃</string>
   <string name="navigation_item_info">강좌</string>
   <string name="navigation_item_notification">알림</string>
+  <string name="navigation_item_featured_images">알참</string>
   <string name="nearby_needs_permissions">위치 권한이 없으면 주변 장소를 표시할 수 없습니다</string>
   <string name="no_description_found">설명이 없습니다</string>
   <string name="nearby_info_menu_commons_article">공용 파일 문서</string>
@@ -261,4 +266,5 @@
   <string name="about_translate_proceed">진행</string>
   <string name="about_translate_cancel">취소</string>
   <string name="retry">다시 시도</string>
+  <string name="share_app_title">앱 공유</string>
 </resources>
