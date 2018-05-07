@@ -273,4 +273,5 @@
   <string name="about_translate_proceed">Συνέχεια</string>
   <string name="about_translate_cancel">Ακύρωση</string>
   <string name="retry">Ξαναπροσπαθήστε</string>
+  <string name="share_app_title">Κοινοποίηση εφαρμογής</string>
 </resources>

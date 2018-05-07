@@ -263,4 +263,5 @@
   <string name="about_translate_proceed">Продолжи</string>
   <string name="about_translate_cancel">Откажи</string>
   <string name="retry">Пробај пак</string>
+  <string name="share_app_title">Сподели прилог</string>
 </resources>
