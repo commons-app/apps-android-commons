@@ -269,4 +269,5 @@
   <string name="about_translate_proceed">已处理</string>
   <string name="about_translate_cancel">取消</string>
   <string name="retry">重试</string>
+  <string name="share_app_title">分享应用</string>
 </resources>
