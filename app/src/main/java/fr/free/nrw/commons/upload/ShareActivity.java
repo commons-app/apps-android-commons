@@ -148,9 +148,9 @@ public class ShareActivity
     private FloatingActionButton mainFab;
     private boolean isFABOpen = false;
 
-
     /**
      * Called when user taps the submit button.
+     * Requests Storage permission, if needed.
      */
     @Override
     public void uploadActionInitiated(String title, String description) {
@@ -159,8 +159,6 @@ public class ShareActivity
         this.description = description;
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            // Check for Storage permission that is required for upload.
-            // Do not allow user to proceed without permission, otherwise will crash
             if (needsToRequestStoragePermission()) {
                 requestPermissions(new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},
                         REQUEST_PERM_ON_SUBMIT_STORAGE);
@@ -172,16 +170,22 @@ public class ShareActivity
         }
     }
 
+    /**
+     * Checks whether storage permissions need to be requested.
+     * Permissions are needed if the file is not owned by this application, (e.g. shared from the Gallery)
+     * @return true if file is not owned by this application and permission hasn't been granted beforehand
+     */
     @RequiresApi(16)
     private boolean needsToRequestStoragePermission() {
-        // We need to ask storage permission when
-        // the file is not owned by this application, (e.g. shared from the Gallery)
-        // and permission is not obtained.
         return !FileUtils.isSelfOwned(getApplicationContext(), mediaUri)
                 && (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE)
                 != PackageManager.PERMISSION_GRANTED);
     }
 
+    /**
+     * Called after permission checks are done.
+     * Gets file metadata for category suggestions, displays toast, caches categories found, calls uploadController
+     */
     private void uploadBegins() {
         getFileMetadata(locationPermitted);
 
