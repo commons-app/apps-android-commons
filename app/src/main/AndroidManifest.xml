@@ -52,6 +52,7 @@
             </intent-filter>
         </activity>
 
+        <!-- TODO: This should be REMOVED and SEND_MULTIPLE action should go to ShareActivity as well -->
         <activity
             android:name=".upload.MultipleShareActivity"
             android:icon="@drawable/ic_launcher"
