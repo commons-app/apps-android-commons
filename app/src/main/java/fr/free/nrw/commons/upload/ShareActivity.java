@@ -204,6 +204,9 @@ public class ShareActivity
         });
     }
 
+    /**
+     * Starts CategorizationFragment after uploadBegins.
+     */
     private void showPostUpload() {
         if (categorizationFragment == null) {
             categorizationFragment = new CategorizationFragment();
@@ -787,6 +790,7 @@ public class ShareActivity
         return super.onOptionsItemSelected(item);
     }
 
+    //TODO: Move this to a new class.
     /*
      * Get SHA1 of file from input stream
      */
@@ -826,6 +830,7 @@ public class ShareActivity
         }
     }
 
+    //TODO: Move this to a new class. Save references to the findViewByIds and pass them to the new method
     /*
      * function to provide pinch zoom
      */
@@ -874,7 +879,7 @@ public class ShareActivity
         expandedImageView.setImageBitmap(scaled);
 
 
-        
+
         // Calculate the starting and ending bounds for the zoomed-in image.
         // This step involves lots of math. Yay, math.
         final Rect startBounds = new Rect();
