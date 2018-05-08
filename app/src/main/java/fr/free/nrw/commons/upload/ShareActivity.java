@@ -216,6 +216,10 @@ public class ShareActivity
                 .commit();
     }
 
+    /**
+     * Send categories to modifications queue after they are selected
+     * @param categories categories selected
+     */
     @Override
     public void onCategoriesSave(List<String> categories) {
         if (categories.size() > 0) {
@@ -251,10 +255,6 @@ public class ShareActivity
         Toast failureToast = Toast.makeText(this, R.string.authentication_failed, Toast.LENGTH_LONG);
         failureToast.show();
         finish();
-    }
-
-    protected boolean isNearbyUpload() {
-        return isNearbyUpload;
     }
 
     @Override
@@ -309,8 +309,6 @@ public class ShareActivity
             }
         });
 
-
-
         zoomInButton = (FloatingActionButton) findViewById(R.id.media_upload_zoom_in);
         try {
             zoomInButton.setOnClickListener(new View.OnClickListener() {
@@ -345,6 +343,7 @@ public class ShareActivity
             }
         }
 
+        //TODO: We should only use snackbar for location permissions, since storage permissions are MANDATORY
         // Check storage permissions if marshmallow or newer
         if (useNewPermissions && (!storagePermitted || !locationPermitted)) {
             if (!storagePermitted && !locationPermitted) {
@@ -404,7 +403,8 @@ public class ShareActivity
             }
         });
     }
-    /*
+
+    /**
      * Function to display the zoom and map FAB
      */
     private void showFABMenu(){
@@ -419,8 +419,8 @@ public class ShareActivity
         zoomInButton.animate().translationY(-getResources().getDimension(R.dimen.first_fab));
     }
 
-    /*
-     * function to close the zoom and map FAB
+    /**
+     * Function to close the zoom and map FAB
      */
     private void closeFABMenu(){
         isFABOpen=false;
@@ -429,7 +429,6 @@ public class ShareActivity
         zoomInButton.animate().translationY(0).setListener(new Animator.AnimatorListener() {
             @Override
             public void onAnimationStart(Animator animator) {
-
             }
 
             @Override
@@ -438,21 +437,25 @@ public class ShareActivity
                     maps_fragment.setVisibility(View.GONE);
                     zoomInButton.setVisibility(View.GONE);
                 }
-
             }
 
             @Override
             public void onAnimationCancel(Animator animator) {
-
             }
 
             @Override
             public void onAnimationRepeat(Animator animator) {
-
             }
         });
     }
 
+    /**
+     * Checks if upload was initiated via Nearby
+     * @return true if upload was initiated via Nearby
+     */
+    protected boolean isNearbyUpload() {
+        return isNearbyUpload;
+    }
 
     @Override
     public void onRequestPermissionsResult(int requestCode,
