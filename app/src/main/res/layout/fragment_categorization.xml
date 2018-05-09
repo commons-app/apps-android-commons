@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
     android:background="?attr/fragmentCategorisationBackground"
     android:clickable="true"
     android:focusableInTouchMode="true"
@@ -38,9 +39,10 @@
             android:indeterminateOnly="true"
             android:layout_marginRight="@dimen/tiny_gap"
             android:layout_marginEnd="@dimen/tiny_gap"
-            android:layout_gravity="center_vertical|right"
+            android:layout_gravity="center_vertical|end"
             style="?android:progressBarStyleSmall"
             android:visibility="gone"
+            tools:visibility="visible"
             />
     </FrameLayout>
 

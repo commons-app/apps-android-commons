@@ -3,6 +3,7 @@
     <!-- Main application background color -->
     <color name="main_background_dark">#303030</color>
     <color name="main_background_light">#fafafa</color>
+    <color name="divider_grey">#eaeaea</color>
 
     <!-- Colors used by newer Android + Support library for material design theme -->
     <color name="primaryColor">#0c609c</color>

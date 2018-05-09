@@ -42,7 +42,7 @@
   <string name="provider_contributions">My uploads</string>
   <string name="menu_share">Share</string>
   <string name="menu_open_in_browser">View in Browser</string>
-  <string name="share_title_hint">Title</string>
+  <string name="share_title_hint">Title (Required)</string>
   <string name="add_title_toast">Please provide a title for this file</string>
   <string name="share_description_hint">Description</string>
   <string name="login_failed_network">Unable to login - network failure</string>
@@ -283,4 +283,13 @@
   <string name="share_app_title">Share App</string>
   <string name="share_coordinates_not_present">Coordinates were not specified during image selection</string>
 
+
+    <string name="step_count">Step %1$d of %2$d</string>
+  <string name="next">Next</string>
+  <string name="previous">Previous</string>
+  <string name="submit">Submit</string>
+  <plurals name="upload_count_title">
+        <item quantity="one">%1$d Upload</item>
+        <item quantity="other">%1$d Uploads</item>
+    </plurals>
 </resources>

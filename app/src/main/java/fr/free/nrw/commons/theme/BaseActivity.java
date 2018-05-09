@@ -8,7 +8,7 @@ import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.di.CommonsDaggerAppCompatActivity;
 
 public abstract class BaseActivity extends CommonsDaggerAppCompatActivity {
-    boolean currentTheme;
+    protected boolean currentTheme;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

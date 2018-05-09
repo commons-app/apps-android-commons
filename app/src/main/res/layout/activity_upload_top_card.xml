@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/top_card"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="@dimen/standard_gap"
+    android:layout_marginLeft="@dimen/standard_gap"
+    android:layout_marginTop="@dimen/standard_gap"
+    android:layout_marginEnd="@dimen/standard_gap"
+    android:layout_marginRight="@dimen/standard_gap"
+    android:layout_gravity="top"
+    android:elevation="@dimen/cardview_default_elevation"
+    tools:ignore="UnusedAttribute"
+    tools:showIn="@layout/activity_upload">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:animateLayoutChanges="true">
+
+        <TextView
+            android:id="@+id/top_card_title"
+            android:layout_width="wrap_content"
+            android:layout_height="24dp"
+            android:layout_marginStart="@dimen/small_gap"
+            android:layout_marginTop="@dimen/small_gap"
+            android:layout_marginEnd="@dimen/small_gap"
+            android:layout_marginBottom="@dimen/small_gap"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:gravity="center_vertical"
+            android:textSize="@dimen/normal_text"
+            android:textStyle="bold"
+            tools:text="4 Uploads" />
+
+        <ImageButton
+            android:id="@+id/top_card_expand_button"
+            style="@style/Widget.AppCompat.Button.Borderless"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginStart="@dimen/small_gap"
+            android:layout_marginTop="@dimen/small_gap"
+            android:layout_marginEnd="@dimen/small_gap"
+            android:layout_marginBottom="@dimen/small_gap"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:padding="0dp"
+            app:srcCompat="@drawable/ic_expand_less_black_24dp" />
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/top_card_thumbnails"
+            android:layout_width="match_parent"
+            android:layout_height="90dp"
+            android:layout_marginBottom="@dimen/small_gap"
+            android:layout_below="@id/top_card_title" />
+
+    </RelativeLayout>
+</android.support.v7.widget.CardView>
+
+            

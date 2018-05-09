@@ -3,7 +3,7 @@ package fr.free.nrw.commons.category;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-class CategoryItem implements Parcelable {
+public class CategoryItem implements Parcelable {
     private final String name;
     private boolean selected;
 
@@ -70,5 +70,10 @@ class CategoryItem implements Parcelable {
     @Override
     public int hashCode() {
         return name.hashCode();
+    }
+
+    @Override
+    public String toString() {
+        return "CategoryItem: '" + name + '\'';
     }
 }

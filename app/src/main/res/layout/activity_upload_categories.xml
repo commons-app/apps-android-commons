@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:showIn="@layout/activity_upload">
+
+    <TextView
+        android:id="@+id/categories_title"
+        android:layout_width="wrap_content"
+        android:layout_height="24dp"
+        android:layout_marginStart="@dimen/standard_gap"
+        android:layout_marginLeft="@dimen/standard_gap"
+        android:layout_marginTop="@dimen/standard_gap"
+        android:layout_marginEnd="@dimen/standard_gap"
+        android:layout_marginRight="@dimen/standard_gap"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:gravity="center_vertical"
+        android:textSize="@dimen/normal_text"
+        android:textStyle="bold"
+        tools:text="Step 1 of 15" />
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" android:id="@+id/category_search_layout"
+        android:layout_marginStart="@dimen/standard_gap"
+        android:layout_marginLeft="@dimen/standard_gap"
+        android:layout_marginEnd="@dimen/standard_gap"
+        android:layout_marginRight="@dimen/standard_gap"
+        android:layout_below="@id/categories_title">
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/category_search_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <android.support.design.widget.TextInputEditText
+                android:id="@+id/category_search"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/categories_search_text_hint"
+                android:imeOptions="actionSearch"
+                android:inputType="text"
+                android:maxLines="1" />
+        </android.support.design.widget.TextInputLayout>
+
+        <ProgressBar
+            android:id="@+id/categoriesSearchInProgress"
+            style="?android:progressBarStyleSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/tiny_gap"
+            android:layout_marginRight="@dimen/tiny_gap"
+            android:layout_gravity="center_vertical|end"
+            android:indeterminate="true"
+            android:indeterminateOnly="true"
+            android:visibility="gone"
+            tools:visibility="visible" />
+    </FrameLayout>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/categories"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginStart="@dimen/standard_gap"
+        android:layout_marginLeft="@dimen/standard_gap"
+        android:layout_marginEnd="@dimen/standard_gap"
+        android:layout_marginRight="@dimen/standard_gap"
+        android:layout_above="@+id/button_divider"
+        android:layout_below="@id/category_search_layout" />
+
+    <View
+        android:id="@+id/button_divider"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_above="@+id/category_next"
+        android:background="@color/divider_grey" />
+
+    <Button
+        android:id="@+id/category_next"
+        style="@style/Widget.AppCompat.Button.Borderless"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="24dp"
+        android:layout_marginRight="24dp"
+        android:layout_marginBottom="24dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:text="@string/next" />
+
+    <Button
+        android:id="@+id/category_previous"
+        style="@style/Widget.AppCompat.Button.Borderless"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/standard_gap"
+        android:layout_marginRight="@dimen/standard_gap"
+        android:layout_marginBottom="24dp"
+        android:layout_toStartOf="@id/category_next"
+        android:layout_toLeftOf="@id/category_next"
+        android:layout_alignParentBottom="true"
+        android:text="@string/previous" />
+
+</RelativeLayout>
+
+            
