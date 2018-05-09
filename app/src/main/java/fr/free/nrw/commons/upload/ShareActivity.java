@@ -81,8 +81,7 @@ import fr.free.nrw.commons.mwapi.MediaWikiApi;
 import fr.free.nrw.commons.utils.ViewUtil;
 import timber.log.Timber;
 
-
-
+import android.support.design.widget.FloatingActionButton;
 import static fr.free.nrw.commons.upload.ExistingFileAsync.Result.DUPLICATE_PROCEED;
 import static fr.free.nrw.commons.upload.ExistingFileAsync.Result.NO_DUPLICATE;
 import static java.lang.Long.min;
@@ -122,6 +121,7 @@ public class ShareActivity
     private Uri mediaUri;
     private Contribution contribution;
     private SimpleDraweeView backgroundImageView;
+    private FloatingActionButton maps_fragment;
 
     private boolean cacheFound;
 
@@ -145,6 +145,8 @@ public class ShareActivity
     private long ShortAnimationDuration;
     private FloatingActionButton zoomInButton;
     private FloatingActionButton zoomOutButton;
+    private FloatingActionButton mainFab;
+    private boolean isFABOpen = false;
 
 
     /**
@@ -284,6 +286,24 @@ public class ShareActivity
         if (mediaUri != null) {
             backgroundImageView.setImageURI(mediaUri);
         }
+
+        mainFab = (FloatingActionButton) findViewById(R.id.main_fab);
+        /*
+         * called when upper arrow floating button
+         */
+        mainFab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(!isFABOpen){
+                    showFABMenu();
+                }else{
+                    closeFABMenu();
+                }
+            }
+        });
+
+
+
         zoomInButton = (FloatingActionButton) findViewById(R.id.media_upload_zoom_in);
         try {
             zoomInButton.setOnClickListener(new View.OnClickListener() {
@@ -358,7 +378,74 @@ public class ShareActivity
                     .commitAllowingStateLoss();
         }
         uploadController.prepareService();
+        maps_fragment = (FloatingActionButton) findViewById(R.id.media_map);
+        maps_fragment.setVisibility(View.VISIBLE);
+        if( imageObj == null || imageObj.imageCoordsExists != true){
+            maps_fragment.setVisibility(View.INVISIBLE);
+        }
+
+
+        maps_fragment.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if( imageObj != null && imageObj.imageCoordsExists == true) {
+                    Uri gmmIntentUri = Uri.parse("google.streetview:cbll=" + imageObj.getDecLatitude() + "," + imageObj.getDecLongitude());
+                    Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
+                    mapIntent.setPackage("com.google.android.apps.maps");
+                    startActivity(mapIntent);
+                }
+            }
+        });
     }
+    /*
+     * Function to display the zoom and map FAB
+     */
+    private void showFABMenu(){
+        isFABOpen=true;
+
+        if( imageObj != null && imageObj.imageCoordsExists == true)
+        maps_fragment.setVisibility(View.VISIBLE);
+        zoomInButton.setVisibility(View.VISIBLE);
+
+        mainFab.animate().rotationBy(180);
+        maps_fragment.animate().translationY(-getResources().getDimension(R.dimen.second_fab));
+        zoomInButton.animate().translationY(-getResources().getDimension(R.dimen.first_fab));
+    }
+
+    /*
+     * function to close the zoom and map FAB
+     */
+    private void closeFABMenu(){
+        isFABOpen=false;
+        mainFab.animate().rotationBy(-180);
+        maps_fragment.animate().translationY(0);
+        zoomInButton.animate().translationY(0).setListener(new Animator.AnimatorListener() {
+            @Override
+            public void onAnimationStart(Animator animator) {
+
+            }
+
+            @Override
+            public void onAnimationEnd(Animator animator) {
+                if(!isFABOpen){
+                    maps_fragment.setVisibility(View.GONE);
+                    zoomInButton.setVisibility(View.GONE);
+                }
+
+            }
+
+            @Override
+            public void onAnimationCancel(Animator animator) {
+
+            }
+
+            @Override
+            public void onAnimationRepeat(Animator animator) {
+
+            }
+        });
+    }
+
 
     @Override
     public void onRequestPermissionsResult(int requestCode,
@@ -461,6 +548,9 @@ public class ShareActivity
         detectUnwantedPicturesAsync.execute();
     }
 
+    /*
+     *  to display permission snackbar in share activity
+     */
     private Snackbar requestPermissionUsingSnackBar(String rationale,
                                                     final String[] perms,
                                                     final int code) {
@@ -693,7 +783,9 @@ public class ShareActivity
         return super.onOptionsItemSelected(item);
     }
 
-    // Get SHA1 of file from input stream
+    /*
+     * Get SHA1 of file from input stream
+     */
     private String getSHA1(InputStream is) {
 
         MessageDigest digest;
@@ -730,6 +822,9 @@ public class ShareActivity
         }
     }
 
+    /*
+     * function to provide pinch zoom
+     */
     private void zoomImageFromThumb(final View thumbView, Uri imageuri ) {
         // If there's an animation in progress, cancel it
         // immediately and proceed with this one.
@@ -737,6 +832,8 @@ public class ShareActivity
             CurrentAnimator.cancel();
         }
         ViewUtil.hideKeyboard(ShareActivity.this.findViewById(R.id.titleEdit | R.id.descEdit));
+        closeFABMenu();
+        mainFab.setVisibility(View.GONE);
         InputStream input = null;
         Bitmap scaled = null;
         try {
@@ -866,7 +963,7 @@ public class ShareActivity
                     CurrentAnimator.cancel();
                 }
                 zoomOutButton.setVisibility(View.GONE);
-                zoomInButton.setVisibility(View.VISIBLE);
+                mainFab.setVisibility(View.VISIBLE);
 
                 // Animate the four positioning/sizing properties in parallel,
                 // back to their original values.
