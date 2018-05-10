@@ -30,6 +30,7 @@ import com.google.gson.GsonBuilder;
 
 import io.reactivex.functions.Consumer;
 import java.io.IOException;
+import java.net.ConnectException;
 import java.net.UnknownHostException;
 import java.util.List;
 
@@ -434,7 +435,7 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe(this::populatePlaces,
                             throwable -> {
-                                if (throwable instanceof UnknownHostException) {
+                                if (throwable instanceof UnknownHostException || throwable instanceof ConnectException) {
                                     showErrorMessage(getString(R.string.slow_internet));
                                 } else {
                                     showErrorMessage(throwable.getMessage());
@@ -596,7 +597,7 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
                         .observeOn(AndroidSchedulers.mainThread())
                         .subscribe(this::populatePlaces,
                                 throwable -> {
-                                    if (throwable instanceof UnknownHostException) {
+                                    if (throwable instanceof UnknownHostException || throwable instanceof ConnectException) {
                                         showErrorMessage(getString(R.string.slow_internet));
                                     } else {
                                         showErrorMessage(throwable.getMessage());
