@@ -12,13 +12,18 @@
 * Yusuke1109
 -->
 <resources>
+  <string name="preference_category_appearance">表示</string>
+  <string name="preference_category_general">全般</string>
   <string name="preference_category_feedback">フィードバック</string>
   <string name="preference_category_location">場所</string>
   <string name="app_name">コモンズ</string>
+  <string name="bullet">•</string>
   <string name="menu_settings">設定</string>
   <string name="username">利用者名</string>
   <string name="password">パスワード</string>
+  <string name="login_credential">コモンズのベータ版アカウントにログイン</string>
   <string name="login">ログイン</string>
+  <string name="forgot_password">パスワードを忘れた場合</string>
   <string name="signup">利用者登録</string>
   <string name="logging_in_title">ログイン中</string>
   <string name="logging_in_message">お待ちください…</string>
@@ -49,6 +54,7 @@
   <string name="menu_share">共有</string>
   <string name="menu_open_in_browser">ブラウザーで表示</string>
   <string name="share_title_hint">タイトル</string>
+  <string name="add_title_toast">ファイル名をつけてください</string>
   <string name="share_description_hint">説明</string>
   <string name="login_failed_network">ログインできません - ネットワークのエラーです</string>
   <string name="login_failed_username">ログインできません - 利用者名を確認してください</string>
@@ -64,6 +70,7 @@
   <string name="categories_search_text_hint">カテゴリを検索</string>
   <string name="menu_save_categories">保存</string>
   <string name="refresh_button">更新</string>
+  <string name="display_list_button">一覧</string>
   <string name="gps_disabled">お使いのデバイスではGPSが無効になっています。有効にしますか?</string>
   <string name="enable_gps">GPSを有効にする</string>
   <string name="contributions_subtitle_zero">まだ何もアップロードされていません。</string>
@@ -82,6 +89,7 @@
   <string name="categories_activity_title">カテゴリ</string>
   <string name="title_activity_settings">設定</string>
   <string name="title_activity_signup">利用者登録</string>
+  <string name="title_activity_featured_images">秀逸な画像</string>
   <string name="menu_about">このアプリについて</string>
   <string name="about_license">ウィキメディア・コモンズ・アプリはウィキメディア・コミュニティの助成金受給者とボランティアによって製作・メンテナンスされているオープンソースソフトウェアです。ウィキメディア財団はこのアプリの製作・開発・メンテナンスに関与していません。</string>
   <string name="about_improve">バグとアイディアは &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;Github&lt;/a&gt; へ。</string>
@@ -96,6 +104,7 @@
   <string name="menu_retry_upload">再試行</string>
   <string name="menu_cancel_upload">キャンセル</string>
   <string name="share_license_summary">この画像が %1$s ライセンスでアップロードされます。</string>
+  <string name="media_upload_policy">この画像の投稿に当たり、私はこれが自分自身の作品であり、著作権のあるコンテンツや自撮りは含まれていないと宣言します。</string>
   <string name="menu_download">ダウンロード</string>
   <string name="preference_license">既定のライセンス</string>
   <string name="use_previous">前回のタイトルと記述を使用</string>
@@ -126,11 +135,19 @@
   <string name="tutorial_1_text">ウィキメディア・コモンズにはウィキペディアで使用する画像のほぼすべてが保管されています。</string>
   <string name="tutorial_1_subtext">あなたの画像は世界中の人々が学習する助けになります!</string>
   <string name="tutorial_2_text">アップロードする画像はあなたご本人が撮影したものかあなたが単独で制作したものに限定します。</string>
-  <string name="tutorial_2_subtext" fuzzy="true">- 自然物 (動植物、山)\n- 道具 (自転車、駅)\n- 著名人 (市区村長・都道府県知事、自分が会ったオリンピック選手)</string>
+  <string name="tutorial_2_subtext">自然物 (動植物、山)\n• 道具 (自転車、駅)\n• 著名人 (市区村長・都道府県知事、自分が会ったオリンピック選手)</string>
+  <string name="tutorial_2_subtext_1">自然物 (動植物、山)</string>
+  <string name="tutorial_2_subtext_2">道具 (自転車、駅)</string>
+  <string name="tutorial_2_subtext_3">著名人 (市区村長・都道府県知事、自分が会ったオリンピック選手)</string>
   <string name="tutorial_3_text">アップロードが《禁止》のもの:</string>
   <string name="tutorial_3_subtext">- あなたの友人の自撮り写真や画像\n- インターネットからダウンロードした画像\n- 著作権のあるアプリのスクリーンショット</string>
+  <string name="tutorial_3_subtext_1">自撮りもしくは友達を撮影した写真</string>
+  <string name="tutorial_3_subtext_2">ウェブからダウンロードした画像</string>
+  <string name="tutorial_3_subtext_3">独自のアプリケーションのスクリーンショット</string>
   <string name="tutorial_4_text">アップロードの例:</string>
   <string name="tutorial_4_subtext">- 題名: シドニー・オペラハウス\n- 説明: 湾の向こうから見たシドニー・オペラハウス\n- カテゴリ: 西側から見たシドニー・オペラハウス、遠くから見たシドニー・オペラハウス</string>
+  <string name="tutorial_4_subtext_1">題名: シドニーのオペラハウス</string>
+  <string name="tutorial_4_subtext_2">説明: シドニーのオペラハウス。湾を挟んで撮影。</string>
   <string name="welcome_wikipedia_text">画像を投稿してください。ウィキペディアの記事に彩りを！</string>
   <string name="welcome_wikipedia_subtext">ウィキペディアの画像はウィキメディア・コモンズに保管されています。</string>
   <string name="welcome_copyright_text">あなたの画像は世界中の人々が学習する助けになります</string>
@@ -143,11 +160,11 @@
   <string name="detail_description_empty">説明はありません。</string>
   <string name="detail_license_empty">不明なライセンス</string>
   <string name="menu_refresh">更新</string>
-  <string name="read_storage_permission_rationale" fuzzy="true">必要な権限：外部ストレージを読み込みます。これがなければアプリは機能しません。</string>
-  <string name="write_storage_permission_rationale" fuzzy="true">必要な権限:外部ストレージを作成します。これがなければアプリは機能しません。</string>
-  <string name="location_permission_rationale">オプションの権限：カテゴリ候補の現在の位置を取得する</string>
+  <string name="read_storage_permission_rationale">必要な権限：外部ストレージを読み込みます。これがなければアプリはギャラリーを開けません。</string>
+  <string name="write_storage_permission_rationale">必要な権限:外部ストレージに入力します。これがないとアプリはカメラにアクセスできません。</string>
+  <string name="location_permission_rationale">オプションの権限：カテゴリ候補のため現在の位置を取得する</string>
   <string name="ok">承認</string>
-  <string name="title_activity_nearby">周りの場所</string>
+  <string name="title_activity_nearby">近くの場所</string>
   <string name="no_nearby">付近の場所が見つかりません</string>
   <string name="warning">警告</string>
   <string name="file_exists">このファイルが既にコモンズにあります。本当にアップロードしますか？</string>
@@ -158,6 +175,7 @@
   <string name="media_detail_description">記述</string>
   <string name="media_detail_description_explanation">ここにメディアの説明が入ります。かなり長文になる場合には数行にわたることがあります。それでも見栄えがよいと願っています。</string>
   <string name="media_detail_author">作者</string>
+  <string name="media_detail_author_explanation">秀逸な画像の作者名を記入します。</string>
   <string name="media_detail_uploaded_date">アップロード日時</string>
   <string name="media_detail_license">ライセンス</string>
   <string name="media_detail_coordinates">緯度経度</string>
@@ -174,14 +192,19 @@
   <string name="commons_logo">コモンズの商標</string>
   <string name="commons_website">コモンズのウェブサイト</string>
   <string name="commons_facebook">コモンズのフェイスブックページ</string>
+  <string name="commons_github">コモンズのGithubソースコード</string>
   <string name="background_image">背景画像</string>
+  <string name="mediaimage_failed">メディアイメージが失敗しました</string>
   <string name="no_image_found">画像がありません</string>
   <string name="upload_image">画像をアップロード</string>
   <string name="welcome_image_mount_zao">蔵王連峰</string>
   <string name="welcome_image_llamas">リャマ</string>
   <string name="welcome_image_rainbow_bridge">レインボーブリッジ</string>
   <string name="welcome_image_tulip">チューリップ</string>
+  <string name="welcome_image_no_selfies">自撮りはアップロードできません</string>
+  <string name="welcome_image_proprietary">独自の著作権がある画像</string>
   <string name="welcome_image_welcome_wikipedia">ウィキペディアへようこそ</string>
+  <string name="welcome_image_welcome_copyright">著作権について</string>
   <string name="welcome_image_sydney_opera_house">シドニーオペラハウス</string>
   <string name="cancel">キャンセル</string>
   <string name="navigation_drawer_open">開く</string>
@@ -195,28 +218,62 @@
   <string name="navigation_item_logout">ログアウト</string>
   <string name="navigation_item_info">チュートリアル</string>
   <string name="navigation_item_notification">通知</string>
-  <string name="nearby_needs_permissions">場所の権限がないと、近くの場所を表示できません</string>
+  <string name="navigation_item_featured_images">秀逸</string>
+  <string name="nearby_needs_permissions">場所の権限がないため、近くの場所を表示できません</string>
   <string name="no_description_found">説明がありません</string>
+  <string name="nearby_info_menu_commons_article">コモンズのファイルページ</string>
   <string name="nearby_info_menu_wikidata_article">ウィキデータ項目</string>
   <string name="nearby_info_menu_wikipedia_article">ウィキペディアの記事</string>
   <string name="error_while_cache">画像をキャッシュする際のエラー</string>
   <string name="title_info">ファイル固有の説明的な表題。ファイル名として使われます。平易な言葉を使い、空白を入れることができます。拡張子は含めないでください。</string>
   <string name="description_info">可能な限りメディアを説明してください:どこで撮られましたか?それは何を示していますか?文脈とは何ですか?物や人を説明してください。容易に推測できない情報、例えば風景の場合の時刻を明らかにする。メディアに珍しいことがある場合は、何が珍しいのかを説明してください。</string>
-  <string name="give_permission">権限を取得</string>
+  <string name="upload_image_too_dark">この画像は暗すぎますがアップロードしますか？ ウィキメディア・コモンズは百科事典に適した画像のみ受け付けます。</string>
+  <string name="upload_image_blurry">ピントが合っていませんが、アップロードしますか？ ウィキメディア・コモンズは百科事典に適した画像のみ受け付けます。</string>
+  <string name="give_permission">権限を付与</string>
   <string name="use_external_storage">外部ストレージを使用</string>
   <string name="use_external_storage_summary">アプリ内のカメラで撮影した写真を端末に保存する</string>
   <string name="login_to_your_account">自分のアカウントにログイン</string>
   <string name="send_log_file">ログファイルを送信する</string>
   <string name="send_log_file_description">メールで開発者にログファイルを送信する</string>
+  <string name="no_web_browser">URLを開くブラウザーが見つかりません</string>
+  <string name="null_url">エラーが発生しました。URL が見つかりません</string>
+  <string name="nominate_deletion">削除の提案</string>
+  <string name="nominated_for_deletion">この画像の削除が提案されています。</string>
   <string name="view_browser">ブラウザーで表示</string>
   <string name="nearby_location_has_not_changed">場所は変更されていません。</string>
   <string name="nearby_location_not_available">位置が無効です。</string>
+  <string name="location_permission_rationale_nearby">近くの場所を表示するには権限が必要です</string>
+  <string name="get_directions">道順を調べる</string>
   <string name="read_article">記事を読む</string>
+  <string name="notifications_welcome">ウィキメディアコモンズにようこそ、%1$さん！ このサイトへ来てくれてありがとうございます。</string>
+  <string name="notifications_talk_page_message">%1$さんからアナタのとーくぺ^字にメッセージが届いています</string>
+  <string name="notifications_thank_you_edit">編集をしてくれてありがとうございます</string>
+  <string name="notifications_mention">%1$さんが%2$であなたに言及しています。</string>
+  <string name="toggle_view_button">表示の切り替え</string>
+  <string name="nearby_directions">道順</string>
+  <string name="nearby_wikidata">ウィキデータ</string>
+  <string name="nearby_wikipedia">ウィキペディア</string>
+  <string name="nearby_commons">コモンズ</string>
   <string name="about_rate_us">&lt;u&gt;評価する&lt;/u&gt;</string>
   <string name="about_faq">&lt;u&gt;FAQ&lt;/u&gt;</string>
   <string name="welcome_skip_button">チュートリアルをスキップする</string>
+  <string name="no_internet">インターネットに接続していません</string>
+  <string name="internet_established">インターネットに接続しました</string>
+  <string name="error_notifications">通知の取得に失敗しました</string>
+  <string name="no_notifications">通知はありません</string>
   <string name="about_translate">&lt;u&gt;翻訳&lt;/u&gt;</string>
   <string name="about_translate_title">言語</string>
+  <string name="about_translate_message">どの言語に編集するか選択</string>
+  <string name="about_translate_proceed">次へ</string>
   <string name="about_translate_cancel">キャンセル</string>
-  <string name="retry">再試行</string>
+  <string name="retry">やり直す</string>
+  <string name="showcase_view_got_it_button">了解</string>
+  <string name="showcase_view_whole_nearby_activity">近くでウィキペディアの記事に使う写真がない場所はこちら</string>
+  <string name="showcase_view_list_icon">このボタンをタップするとリストを表示します</string>
+  <string name="showcase_view_plus_fab">場所の写真をアップロードするには、ギャラリーから選ぶことも撮影することもできます</string>
+  <string name="no_images_found">画像がありません</string>
+  <string name="error_loading_images">画像の読み込み中にエラーが発生しました</string>
+  <string name="image_uploaded_by">アップロードした人: %1$</string>
+  <string name="share_app_title">アプリをシェアする</string>
+  <string name="share_coordinates_not_present">画像の選択中に位置情報を特定できませんでした</string>
 </resources>

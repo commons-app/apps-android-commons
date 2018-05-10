@@ -145,4 +145,5 @@
   <string name="notifications_welcome">مرحبا بكم في ويكيمديا كومنز، %1$s! نحن سعداء لأنك هنا.</string>
   <string name="notifications_talk_page_message">%1$s رسالة على صفحة الحديث</string>
   <string name="notifications_mention">%1$s ذكر لك على %2$s.</string>
+  <string name="share_app_title">شارك التطبيق</string>
 </resources>

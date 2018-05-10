@@ -267,4 +267,12 @@
   <string name="about_translate_message">Selecciona el idioma en que quieres enviar traducciones</string>
   <string name="about_translate_cancel">Cancelar</string>
   <string name="retry">Reintentar</string>
+  <string name="showcase_view_got_it_button">Entendido</string>
+  <string name="showcase_view_whole_nearby_activity">Estos sitios cercanos a ti necesitan imágenes para ilustrar sus artículos de Wikipedia</string>
+  <string name="showcase_view_plus_fab">Puedes cargar una imagen para cualquier sitio desde la galería o la cámara</string>
+  <string name="no_images_found">No se encontró ninguna imagen.</string>
+  <string name="error_loading_images">Se produjo un error al cargar las imágenes.</string>
+  <string name="image_uploaded_by">Cargada por: %1$s</string>
+  <string name="share_app_title">Compartir aplicación</string>
+  <string name="share_coordinates_not_present">No se especificaron las coordenadas al seleccionar la imagen</string>
 </resources>
