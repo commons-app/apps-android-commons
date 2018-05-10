@@ -273,5 +273,13 @@
   <string name="about_translate_proceed">Συνέχεια</string>
   <string name="about_translate_cancel">Ακύρωση</string>
   <string name="retry">Ξαναπροσπαθήστε</string>
+  <string name="showcase_view_got_it_button">Κατάλαβα!</string>
+  <string name="showcase_view_whole_nearby_activity">Αυτά είναι τα μέρη κοντά σας που χρειάζονται φωτογραφίες για να εικονογραφηθούν τα λήμματά τους στη Βικιπαίδεια</string>
+  <string name="showcase_view_list_icon">Πατώντας αυτό το κουμπί φέρνει μια λίστα αυτών των μερών</string>
+  <string name="showcase_view_plus_fab">Μπορείτε να ανεβάσετε μια εικόνα για οποιοδήποτε μέρος από την γκαλερί ή την κάμερά σας</string>
+  <string name="no_images_found">Δεν βρέθηκαν εικόνες!</string>
+  <string name="error_loading_images">Συνέβη σφάλμα κατά το ανέβασμα των εικόνων.</string>
+  <string name="image_uploaded_by">Ανέβηκε από: %1$s</string>
   <string name="share_app_title">Κοινοποίηση εφαρμογής</string>
+  <string name="share_coordinates_not_present">Οι συντεταγμένες δεν ορίστηκαν κατά την διάρκεια της επιλογής εικόνας</string>
 </resources>

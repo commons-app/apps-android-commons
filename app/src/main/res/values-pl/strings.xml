@@ -227,4 +227,6 @@
   <string name="no_notifications">Nie znaleziono powiadomień</string>
   <string name="about_translate_title">Języki</string>
   <string name="about_translate_cancel">Anuluj</string>
+  <string name="no_images_found">Nie znaleziono grafik!</string>
+  <string name="error_loading_images">Wystąpił błąd podczas ładowania grafik.</string>
 </resources>
