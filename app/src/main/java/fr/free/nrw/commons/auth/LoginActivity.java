@@ -271,11 +271,11 @@ public class LoginActivity extends AccountAuthenticatorActivity {
             showMessageAndCancelDialog(R.string.login_failed_network);
         } else if (result.toLowerCase(Locale.getDefault()).contains("nosuchuser".toLowerCase()) || result.toLowerCase().contains("noname".toLowerCase())) {
             // Matches nosuchuser, nosuchusershort, noname
-            showMessageAndCancelDialog(R.string.login_failed_username);
+            showMessageAndCancelDialog(R.string.login_failed_wrong_credentials);
             emptySensitiveEditFields();
         } else if (result.toLowerCase(Locale.getDefault()).contains("wrongpassword".toLowerCase())) {
             // Matches wrongpassword, wrongpasswordempty
-            showMessageAndCancelDialog(R.string.login_failed_password);
+            showMessageAndCancelDialog(R.string.login_failed_wrong_credentials);
             emptySensitiveEditFields();
         } else if (result.toLowerCase(Locale.getDefault()).contains("throttle".toLowerCase())) {
             // Matches unknown throttle error codes
