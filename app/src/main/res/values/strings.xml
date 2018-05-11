@@ -282,7 +282,6 @@
 
   <string name="share_app_title">Share App</string>
   <string name="share_coordinates_not_present">Coordinates were not specified during image selection</string>
-  <string name="something_went_wrong">Something went wrong</string>
-  <string name="slow_internet">You seem to have slow internet connection</string>
+  <string name="error_fetching_nearby_places">Error fetching nearby places.</string>
 
 </resources>

@@ -435,11 +435,8 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe(this::populatePlaces,
                             throwable -> {
-                                if (throwable instanceof UnknownHostException || throwable instanceof ConnectException) {
-                                    showErrorMessage(getString(R.string.slow_internet));
-                                } else {
-                                    showErrorMessage(throwable.getMessage());
-                                }
+                                Timber.d(throwable);
+                                showErrorMessage(getString(R.string.error_fetching_nearby_places));
                                 progressBar.setVisibility(View.GONE);
                             });
         } else if (locationChangeType
@@ -597,11 +594,8 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
                         .observeOn(AndroidSchedulers.mainThread())
                         .subscribe(this::populatePlaces,
                                 throwable -> {
-                                    if (throwable instanceof UnknownHostException || throwable instanceof ConnectException) {
-                                        showErrorMessage(getString(R.string.slow_internet));
-                                    } else {
-                                        showErrorMessage(throwable.getMessage());
-                                    }
+                                    Timber.d(throwable);
+                                    showErrorMessage(getString(R.string.error_fetching_nearby_places));
                                     progressBar.setVisibility(View.GONE);
                                 });
                 nearbyMapFragment.setBundleForUpdtes(bundle);
@@ -671,9 +665,6 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
     }
 
     private void showErrorMessage(String message) {
-        if (TextUtils.isEmpty(message)) {
-            message = getString(R.string.something_went_wrong);
-        }
         ViewUtil.showLongToast(NearbyActivity.this, message);
     }
 }
