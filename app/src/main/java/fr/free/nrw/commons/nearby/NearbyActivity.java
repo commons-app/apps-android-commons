@@ -341,7 +341,7 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
     @Override
     protected void onResume() {
         super.onResume();
-        lockNearbyView = false;
+        lockNearbyView = true;
         checkGps();
         addNetworkBroadcastReceiver();
     }
