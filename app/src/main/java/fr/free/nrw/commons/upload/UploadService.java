@@ -37,6 +37,7 @@ import fr.free.nrw.commons.modifications.ModificationsContentProvider;
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
 import fr.free.nrw.commons.mwapi.UploadResult;
 import fr.free.nrw.commons.utils.ViewUtil;
+import fr.free.nrw.commons.wikidata.WikidataEditListener;
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
@@ -53,6 +54,7 @@ public class UploadService extends HandlerService<Contribution> {
     public static final String EXTRA_CAMPAIGN = EXTRA_PREFIX + ".campaign";
 
     @Inject MediaWikiApi mwApi;
+    @Inject WikidataEditListener wikidataEditListener;
     @Inject SessionManager sessionManager;
     @Inject @Named("default_preferences") SharedPreferences prefs;
     @Inject ContributionDao contributionDao;
@@ -295,6 +297,7 @@ public class UploadService extends HandlerService<Contribution> {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(result -> {
                     if(result) {
+                        wikidataEditListener.onSuccessfulWikidataEdit();
                         ViewUtil.showLongToast(getBaseContext(), "Image added corresponding to wiki data entity successfully!");
                     } else {
                         Timber.d("Unable to make wiki data edit for entity %s", contribution.getWikiDataEntityId());

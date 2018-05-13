@@ -635,6 +635,7 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
         String resultStatus = result.getString("/api/upload/@result");
         if (!resultStatus.equals("Success")) {
             String errorCode = result.getString("/api/error/@code");
+            Timber.e(errorCode);
             return new UploadResult(resultStatus, errorCode);
         } else {
             Date dateUploaded = parseMWDate(result.getString("/api/upload/imageinfo/@timestamp"));
