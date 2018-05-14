@@ -275,4 +275,5 @@
   <string name="image_uploaded_by">올린이: %1$s</string>
   <string name="share_app_title">앱 공유</string>
   <string name="share_coordinates_not_present">그림 선택 중에 좌표가 지정되지 않았습니다</string>
+  <string name="error_fetching_nearby_places">주변 장소를 가져오는데 오류가 있습니다.</string>
 </resources>

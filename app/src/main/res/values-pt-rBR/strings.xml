@@ -284,4 +284,5 @@
   <string name="image_uploaded_by">Carregada por: %1$s</string>
   <string name="share_app_title">Compartilhar o aplicativo</string>
   <string name="share_coordinates_not_present">Não foram especificadas coordenadas durante a seleção da imagem</string>
+  <string name="error_fetching_nearby_places">Erro ao buscar lugares próximos.</string>
 </resources>

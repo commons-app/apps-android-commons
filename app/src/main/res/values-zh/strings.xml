@@ -278,4 +278,5 @@
   <string name="image_uploaded_by">由%1$s上传</string>
   <string name="share_app_title">分享应用</string>
   <string name="share_coordinates_not_present">图片选择时，坐标并未指定</string>
+  <string name="error_fetching_nearby_places">检索附近地点时出错。</string>
 </resources>
