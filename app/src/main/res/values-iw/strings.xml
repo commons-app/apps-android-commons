@@ -273,4 +273,5 @@
   <string name="about_translate_proceed">המשך</string>
   <string name="about_translate_cancel">ביטול</string>
   <string name="retry">לנסות שוב</string>
+  <string name="share_app_title">שיתוף היישום</string>
 </resources>

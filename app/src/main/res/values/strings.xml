@@ -241,13 +241,11 @@
   <string name="nominated_for_deletion">This image has been nominated for deletion.</string>
   <string name="nominated_see_more"><u>See webpage for details</u></string>
   <string name="view_browser">View in Browser</string>
-
   <string name="nearby_location_has_not_changed">Location has not changed.</string>
   <string name="nearby_location_not_available">Location not available.</string>
   <string name="location_permission_rationale_nearby">Permission required to display a list of nearby places</string>
   <string name="get_directions">GET DIRECTIONS</string>
   <string name="read_article">READ ARTICLE</string>
-
   <string name="notifications_welcome" formatted="false">Welcome to Wikimedia Commons, %1$s! We\'re glad you\'re here.</string>
   <string name="notifications_talk_page_message">%1$s left a message on your talk page</string>
   <string name="notifications_thank_you_edit">Thank you for making an edit</string>
@@ -270,9 +268,19 @@
   <string name="about_translate_proceed">Proceed</string>
   <string name="about_translate_cancel">Cancel</string>
   <string name="retry">Retry</string>
-  <string name="skip_login">Skip </string>
+  <string name="skip_login">Skip</string>
   <string name="navigation_item_login">Login</string>
   <string name="skip_login_title">Do you really want to skip login ?</string>
-  <string name="skip_login_message">You might not be able to access some features of the app.</string>=======
+  <string name="skip_login_message">You might not be able to access some features of the app.</string>
+  <string name="showcase_view_got_it_button">Got it!</string>
+  <string name="showcase_view_whole_nearby_activity">These are the places near you that need pictures to illustrate their Wikipedia articles</string>
+  <string name="showcase_view_list_icon">Tapping this button brings up a list of these places</string>
+  <string name="showcase_view_plus_fab">You can upload a picture for any place from your gallery or camera</string>
+  <string name="no_images_found">No images found!</string>
+  <string name="error_loading_images">Error occurred while loading images.</string>
+  <string name="image_uploaded_by">Uploaded by: %1$s</string>
   <string name="share_app_title">Share App</string>
+  <string name="share_coordinates_not_present">Coordinates were not specified during image selection</string>
+  <string name="login_alert_message">This feature requires user to be logged in !!</string>
+
 </resources>

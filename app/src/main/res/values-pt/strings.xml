@@ -159,6 +159,7 @@
   <string name="welcome_copyright_subtext">Evite materiais protegidos por direitos de autor que tenham sido encontrados na Internet, bem como imagens de cartazes, capas de livros, etc.</string>
   <string name="welcome_final_text">Acha que conseguiu?</string>
   <string name="welcome_final_button_text">Sim!</string>
+  <string name="welcome_help_button_text"/>
   <string name="detail_panel_cats_label">Categorias</string>
   <string name="detail_panel_cats_loading">A carregar…</string>
   <string name="detail_panel_cats_none">Nenhuma selecionada</string>

@@ -136,19 +136,19 @@ public class CommonsApplication extends MultiDexApplication {
         }
 
         sessionManager.clearAllAccounts()
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(() -> {
-                    Timber.d("All accounts have been removed");
-                    //TODO: fix preference manager
-                    defaultPrefs.edit().clear().apply();
-                    applicationPrefs.edit().clear().apply();
-                    applicationPrefs.edit().putBoolean("firstrun", false).apply();
-                    otherPrefs.edit().clear().apply();
-                    updateAllDatabases();
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(() -> {
+                Timber.d("All accounts have been removed");
+                //TODO: fix preference manager
+                defaultPrefs.edit().clear().apply();
+                applicationPrefs.edit().clear().apply();
+                applicationPrefs.edit().putBoolean("firstrun", false).apply();
+                otherPrefs.edit().clear().apply();
+                updateAllDatabases();
 
-                    logoutListener.onLogoutComplete();
-                });
+                logoutListener.onLogoutComplete();
+            });
     }
 
     /**

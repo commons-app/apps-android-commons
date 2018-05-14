@@ -2,6 +2,7 @@ package fr.free.nrw.commons.nearby;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
@@ -21,6 +22,9 @@ import java.lang.reflect.Type;
 import java.util.Collections;
 import java.util.List;
 
+import javax.inject.Inject;
+import javax.inject.Named;
+
 import dagger.android.support.AndroidSupportInjection;
 import dagger.android.support.DaggerFragment;
 import fr.free.nrw.commons.R;
@@ -33,6 +37,7 @@ import static android.app.Activity.RESULT_OK;
 import static android.content.pm.PackageManager.PERMISSION_GRANTED;
 
 public class NearbyListFragment extends DaggerFragment {
+
     private Bundle bundleForUpdates; // Carry information from activity about changed nearby places and current location
 
     private static final Type LIST_TYPE = new TypeToken<List<Place>>() {
@@ -128,7 +133,6 @@ public class NearbyListFragment extends DaggerFragment {
             }
         }
     }
-
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {

@@ -6,6 +6,7 @@ import android.net.Uri;
 import android.content.SharedPreferences;
 import android.support.v4.app.Fragment;
 import android.support.transition.TransitionManager;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.PopupMenu;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -28,12 +29,17 @@ import butterknife.ButterKnife;
 import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.Utils;
+import fr.free.nrw.commons.auth.LoginActivity;
 import fr.free.nrw.commons.contributions.ContributionController;
 import fr.free.nrw.commons.di.ApplicationlessInjection;
 import timber.log.Timber;
 
+import static fr.free.nrw.commons.theme.NavigationBaseActivity.startActivityWithFlags;
+
 public class PlaceRenderer extends Renderer<Place> {
 
+    @Inject
+    @Named("application_preferences") SharedPreferences applicationPrefs;
     @BindView(R.id.tvName) TextView tvName;
     @BindView(R.id.tvDesc) TextView tvDesc;
     @BindView(R.id.distance) TextView distance;
@@ -89,9 +95,9 @@ public class PlaceRenderer extends Renderer<Place> {
             Log.d("Renderer", "clicked");
             TransitionManager.beginDelayedTransition(buttonLayout);
 
-            if(buttonLayout.isShown()){
+            if (buttonLayout.isShown()) {
                 closeLayout(buttonLayout);
-            }else {
+            } else {
                 openLayout(buttonLayout);
             }
 
@@ -107,18 +113,46 @@ public class PlaceRenderer extends Renderer<Place> {
         });
 
         cameraButton.setOnClickListener(view2 -> {
-            Timber.d("Camera button tapped. Image title: " + place.getName() + "Image desc: " + place.getLongDescription());
-            DirectUpload directUpload = new DirectUpload(fragment, controller);
-            storeSharedPrefs();
-            directUpload.initiateCameraUpload();
+            if (applicationPrefs.getBoolean("login_skipped", true)) {
+                // prompt the user to login
+                new AlertDialog.Builder(getContext())
+                        .setMessage(R.string.login_alert_message)
+                        .setPositiveButton(R.string.login, (dialog, which) -> {
+                            startActivityWithFlags( getContext(), LoginActivity.class, Intent.FLAG_ACTIVITY_CLEAR_TOP,
+                                    Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                            prefs.edit().putBoolean("login_skipped", false).apply();
+                            fragment.getActivity().finish();
+                        })
+                        .show();
+            } else {
+                Timber.d("Camera button tapped. Image title: " + place.getName() + "Image desc: " + place.getLongDescription());
+                DirectUpload directUpload = new DirectUpload(fragment, controller);
+                storeSharedPrefs();
+                directUpload.initiateCameraUpload();
+            }
         });
 
+
         galleryButton.setOnClickListener(view3 -> {
-            Timber.d("Gallery button tapped. Image title: " + place.getName() + "Image desc: " + place.getLongDescription());
-            DirectUpload directUpload = new DirectUpload(fragment, controller);
-            storeSharedPrefs();
-            directUpload.initiateGalleryUpload();
+            if (applicationPrefs.getBoolean("login_skipped", true)) {
+                // prompt the user to login
+                new AlertDialog.Builder(getContext())
+                        .setMessage(R.string.login_alert_message)
+                        .setPositiveButton(R.string.login, (dialog, which) -> {
+                            startActivityWithFlags( getContext(), LoginActivity.class, Intent.FLAG_ACTIVITY_CLEAR_TOP,
+                                    Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                            prefs.edit().putBoolean("login_skipped", false).apply();
+                            fragment.getActivity().finish();
+                        })
+                        .show();
+            }else {
+                Timber.d("Gallery button tapped. Image title: " + place.getName() + "Image desc: " + place.getLongDescription());
+                DirectUpload directUpload = new DirectUpload(fragment, controller);
+                storeSharedPrefs();
+                directUpload.initiateGalleryUpload();
+            }
         });
+
     }
 
     private void storeSharedPrefs() {
