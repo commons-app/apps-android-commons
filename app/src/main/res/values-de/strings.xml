@@ -278,4 +278,5 @@
   <string name="image_uploaded_by">Hochgeladen von: %1$s</string>
   <string name="share_app_title">App teilen</string>
   <string name="share_coordinates_not_present">Während der Bildauswahl wurden keine Koordinaten angegeben</string>
+  <string name="error_fetching_nearby_places">Fehler beim Abrufen der Orte in der Nähe.</string>
 </resources>

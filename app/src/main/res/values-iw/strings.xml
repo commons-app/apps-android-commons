@@ -282,4 +282,5 @@
   <string name="image_uploaded_by">הועלתה על־ידי: %1$s</string>
   <string name="share_app_title">שיתוף היישום</string>
   <string name="share_coordinates_not_present">לא צוינו קואורדינטות בעת בחירת התמונה</string>
+  <string name="error_fetching_nearby_places">שגיאה באחזור המקומות בסביבתך.</string>
 </resources>

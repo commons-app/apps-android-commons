@@ -282,4 +282,5 @@
   <string name="image_uploaded_by">Ανέβηκε από: %1$s</string>
   <string name="share_app_title">Κοινοποίηση εφαρμογής</string>
   <string name="share_coordinates_not_present">Οι συντεταγμένες δεν ορίστηκαν κατά την διάρκεια της επιλογής εικόνας</string>
+  <string name="error_fetching_nearby_places">Σφάλμα κατά την εύρεση κοντινών μερών.</string>
 </resources>
