@@ -387,11 +387,11 @@ public class ShareActivity
             }
         });
     }
-    
+
     /**
      * Function to display the zoom and map FAB
      */
-    private void showFABMenu(){
+    private void showFABMenu() {
         isFABOpen=true;
 
         if( imageObj != null && imageObj.imageCoordsExists == true)
@@ -445,42 +445,18 @@ public class ShareActivity
     public void onRequestPermissionsResult(int requestCode,
                                            @NonNull String[] permissions, @NonNull int[] grantResults) {
         switch (requestCode) {
-            case REQUEST_PERM_ON_CREATE_STORAGE: {
-                if (grantResults.length >= 1
-                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    backgroundImageView.setImageURI(mediaUri);
-                    storagePermitted = true;
-                    performPreUploadProcessingOfFile();
-                }
-                return;
-            }
             case REQUEST_PERM_ON_CREATE_LOCATION: {
-                if (grantResults.length >= 1
-                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                if (grantResults.length >= 1 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     locationPermitted = true;
                     performPreUploadProcessingOfFile();
                 }
                 return;
             }
-            case REQUEST_PERM_ON_CREATE_STORAGE_AND_LOCATION: {
-                if (grantResults.length >= 2
-                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    backgroundImageView.setImageURI(mediaUri);
-                    storagePermitted = true;
-                    performPreUploadProcessingOfFile();
-                }
-                if (grantResults.length >= 2
-                        && grantResults[1] == PackageManager.PERMISSION_GRANTED) {
-                    locationPermitted = true;
-                    performPreUploadProcessingOfFile();
-                }
-                return;
-            }
+
             // Storage (from submit button) - this needs to be separate from (1) because only the
             // submit button should bring user to next screen
             case REQUEST_PERM_ON_SUBMIT_STORAGE: {
-                if (grantResults.length >= 1
-                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                if (grantResults.length >= 1 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     //It is OK to call this at both (1) and (4) because if perm had been granted at
                     //snackbar, user should not be prompted at submit button
                     performPreUploadProcessingOfFile();
@@ -489,7 +465,6 @@ public class ShareActivity
                     uploadBegins();
                     snackbar.dismiss();
                 }
-                return;
             }
         }
     }
