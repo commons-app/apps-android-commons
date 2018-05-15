@@ -257,23 +257,10 @@ public class ShareActivity
         finish();
     }
 
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
-        setContentView(R.layout.activity_share);
-        ButterKnife.bind(this);
-        initBack();
-        backgroundImageView = (SimpleDraweeView) findViewById(R.id.backgroundImage);
-        backgroundImageView.setHierarchy(GenericDraweeHierarchyBuilder
-                .newInstance(getResources())
-                .setPlaceholderImage(VectorDrawableCompat.create(getResources(),
-                        R.drawable.ic_image_black_24dp, getTheme()))
-                .setFailureImage(VectorDrawableCompat.create(getResources(),
-                        R.drawable.ic_error_outline_black_24dp, getTheme()))
-                .build());
-
-        //Receive intent from ContributionController.java when user selects picture to upload
+    /**
+     * Receive intent from ContributionController.java when user selects picture to upload
+     */
+    private void receiveIntent() {
         Intent intent = getIntent();
 
         if (Intent.ACTION_SEND.equals(intent.getAction())) {
@@ -293,6 +280,25 @@ public class ShareActivity
         if (mediaUri != null) {
             backgroundImageView.setImageURI(mediaUri);
         }
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        setContentView(R.layout.activity_share);
+        ButterKnife.bind(this);
+        initBack();
+        backgroundImageView = (SimpleDraweeView) findViewById(R.id.backgroundImage);
+        backgroundImageView.setHierarchy(GenericDraweeHierarchyBuilder
+                .newInstance(getResources())
+                .setPlaceholderImage(VectorDrawableCompat.create(getResources(),
+                        R.drawable.ic_image_black_24dp, getTheme()))
+                .setFailureImage(VectorDrawableCompat.create(getResources(),
+                        R.drawable.ic_error_outline_black_24dp, getTheme()))
+                .build());
+
+        receiveIntent();
 
         mainFab = (FloatingActionButton) findViewById(R.id.main_fab);
         /*
@@ -339,8 +345,7 @@ public class ShareActivity
             }
         }
 
-        //TODO: We should only use snackbar for location permissions, since storage permissions are MANDATORY
-        // Check storage permissions if marshmallow or newer
+        // Check location permissions if M or newer for category suggestions, request via snackbar if not present
         if (!locationPermitted) {
             requestPermissionUsingSnackBar(
                     getString(R.string.location_permission_rationale),
