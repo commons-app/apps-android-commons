@@ -282,28 +282,12 @@ public class ShareActivity
         }
     }
 
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
-        setContentView(R.layout.activity_share);
-        ButterKnife.bind(this);
-        initBack();
-        backgroundImageView = (SimpleDraweeView) findViewById(R.id.backgroundImage);
-        backgroundImageView.setHierarchy(GenericDraweeHierarchyBuilder
-                .newInstance(getResources())
-                .setPlaceholderImage(VectorDrawableCompat.create(getResources(),
-                        R.drawable.ic_image_black_24dp, getTheme()))
-                .setFailureImage(VectorDrawableCompat.create(getResources(),
-                        R.drawable.ic_error_outline_black_24dp, getTheme()))
-                .build());
-
-        receiveIntent();
-
+    /**
+     * Initialize views and setup listeners here for FAB to prevent cluttering onCreate
+     */
+    private void initViewsAndListeners() {
         mainFab = (FloatingActionButton) findViewById(R.id.main_fab);
-        /*
-         * called when upper arrow floating button
-         */
+        //called when upper arrow floating button
         mainFab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -327,6 +311,26 @@ public class ShareActivity
             Log.i("exception", e.toString());
         }
         zoomOutButton = (FloatingActionButton) findViewById(R.id.media_upload_zoom_out);
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        setContentView(R.layout.activity_share);
+        ButterKnife.bind(this);
+        initBack();
+        backgroundImageView = (SimpleDraweeView) findViewById(R.id.backgroundImage);
+        backgroundImageView.setHierarchy(GenericDraweeHierarchyBuilder
+                .newInstance(getResources())
+                .setPlaceholderImage(VectorDrawableCompat.create(getResources(),
+                        R.drawable.ic_image_black_24dp, getTheme()))
+                .setFailureImage(VectorDrawableCompat.create(getResources(),
+                        R.drawable.ic_error_outline_black_24dp, getTheme()))
+                .build());
+
+        receiveIntent();
+        initViewsAndListeners();
 
         if (savedInstanceState != null) {
             contribution = savedInstanceState.getParcelable("contribution");
