@@ -16,12 +16,12 @@
   <string name="preference_category_general">Geral</string>
   <string name="preference_category_feedback">Comentários</string>
   <string name="preference_category_location">Localização</string>
-  <string name="app_name">Wikimedia Commons</string>
+  <string name="app_name">Commons</string>
   <string name="bullet">•</string>
   <string name="menu_settings">Configurações</string>
-  <string name="username">Nome de utilizador(a)</string>
+  <string name="username">Nome de utilizador</string>
   <string name="password">Palavra-passe</string>
-  <string name="login_credential">Entre com a sua conta do Commons Beta</string>
+  <string name="login_credential">Entre com a sua conta da wiki Commons Beta</string>
   <string name="login">Iniciar sessão</string>
   <string name="forgot_password">Esqueceu-se da palavra-passe?</string>
   <string name="signup">Registar-se</string>
@@ -118,7 +118,7 @@
   <string name="preference_theme_summary">Utilizar tema escuro</string>
   <string name="license_name_cc_by_sa_four">Atribuição-CompartilhaIgual 4.0</string>
   <string name="license_name_cc_by_four">Atribuição 4.0</string>
-  <string name="license_name_cc_by_sa"> Atribuição – Compartilhamento pela mesma Licença</string>
+  <string name="license_name_cc_by_sa"> Atribuição–CompartilhaIgual 3.0</string>
   <string name="license_name_cc_by">Atribuição 3.0</string>
   <string name="license_name_cc0">CC0</string>
   <string name="license_name_cc_by_sa_3_0">CC BY-SA 3.0</string>
@@ -136,7 +136,7 @@
   <string name="license_name_cc_by_sa_4_0">CC-BY-SA 4.0</string>
   <string name="license_name_cc_by_4_0">CC BY 4.0</string>
   <string name="license_name_cc_zero">CC Zero</string>
-  <string name="tutorial_1_text">Wikimedia Commons armazena a maioria das imagens que são usadas na Wikipédia.</string>
+  <string name="tutorial_1_text">A wiki Wikimedia Commons aloja a maioria das imagens que são usadas na Wikipédia.</string>
   <string name="tutorial_1_subtext">As suas imagens ajudam a educar pessoas em todo o mundo!</string>
   <string name="tutorial_2_text">Por favor, carregue apenas imagens tiradas ou criadas exclusivamente por si:</string>
   <string name="tutorial_2_subtext">Objetos naturais (flores, animais, montanhas)\n• Objetos úteis (bicicletas, estações de comboio)\n• Pessoas famosas (o seu presidente da câmara, atletas olímpicos que conheça)</string>
@@ -274,4 +274,14 @@
   <string name="about_translate_proceed">Avançar</string>
   <string name="about_translate_cancel">Cancelar</string>
   <string name="retry">Tentar novamente</string>
+  <string name="showcase_view_got_it_button">Entendido!</string>
+  <string name="showcase_view_whole_nearby_activity">Estes são os lugares perto de si que precisam de fotografias para ilustrar os respetivos artigos na Wikipédia</string>
+  <string name="showcase_view_list_icon">Tocar neste botão fará surgir uma lista destes lugares</string>
+  <string name="showcase_view_plus_fab">Pode carregar uma fotografia para qualquer dos lugares, da sua galeria ou câmara</string>
+  <string name="no_images_found">Não foi encontrada nenhuma imagem!</string>
+  <string name="error_loading_images">Ocorreu um erro durante o carregamento das imagens.</string>
+  <string name="image_uploaded_by">Carregada por: %1$s</string>
+  <string name="share_app_title">Partilhar aplicação</string>
+  <string name="share_coordinates_not_present">Não foram especificadas coordenadas durante a seleção da imagem</string>
+  <string name="error_fetching_nearby_places">Erro ao localizar locais próximos.</string>
 </resources>
