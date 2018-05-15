@@ -361,13 +361,13 @@ public class ShareActivity
         uploadController.prepareService();
         maps_fragment = (FloatingActionButton) findViewById(R.id.media_map);
         maps_fragment.setVisibility(View.VISIBLE);
-        if( imageObj == null || imageObj.imageCoordsExists != true){
+        if( imageObj == null || imageObj.imageCoordsExists){
             maps_fragment.setVisibility(View.INVISIBLE);
         }
         maps_fragment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if( imageObj != null && imageObj.imageCoordsExists == true) {
+                if( imageObj != null && imageObj.imageCoordsExists) {
                     Uri gmmIntentUri = Uri.parse("google.streetview:cbll=" + imageObj.getDecLatitude() + "," + imageObj.getDecLongitude());
                     Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
                     mapIntent.setPackage("com.google.android.apps.maps");
