@@ -394,7 +394,7 @@ public class ShareActivity
     private void showFABMenu() {
         isFABOpen=true;
 
-        if( imageObj != null && imageObj.imageCoordsExists == true)
+        if( imageObj != null && imageObj.imageCoordsExists)
         maps_fragment.setVisibility(View.VISIBLE);
         zoomInButton.setVisibility(View.VISIBLE);
 
@@ -482,12 +482,10 @@ public class ShareActivity
                     ExistingFileAsync fileAsyncTask =
                             new ExistingFileAsync(new WeakReference<Activity>(this), fileSHA1, new WeakReference<Context>(this), result -> {
                                 Timber.d("%s duplicate check: %s", mediaUri.toString(), result);
-                                duplicateCheckPassed = (result == DUPLICATE_PROCEED
-                                        || result == NO_DUPLICATE);
-                                /*
-                                 TODO: 16/9/17 should we run DetectUnwantedPicturesAsync if DUPLICATE_PROCEED is returned? Since that means
-                                 we are processing images that are already on server???...
-                                */
+                                duplicateCheckPassed = (result == DUPLICATE_PROCEED || result == NO_DUPLICATE);
+
+                                 //TODO: 16/9/17 should we run DetectUnwantedPicturesAsync if DUPLICATE_PROCEED is returned? Since that means
+                                 //we are processing images that are already on server???...
 
                                 if (duplicateCheckPassed) {
                                     //image can be uploaded, so now check if its a useless picture or not
@@ -500,7 +498,6 @@ public class ShareActivity
                     Timber.d(e, "IO Exception: ");
                 }
             }
-
             getFileMetadata(locationPermitted);
         } else {
             Timber.w("not ready for preprocessing: useNewPermissions=%s storage=%s location=%s",
