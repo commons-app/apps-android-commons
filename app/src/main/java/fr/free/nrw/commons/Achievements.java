@@ -26,8 +26,8 @@ import fr.free.nrw.commons.theme.NavigationBaseActivity;
 
 public class Achievements extends AppCompatActivity {
 
-    private static final double badge_image_ratio_width = 0.5;
-    private static final double badge_image_ratio_height = 0.5;
+    private static final double badge_image_ratio_width = 0.4;
+    private static final double badge_image_ratio_height = 0.36;
     private ImageView imageView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
