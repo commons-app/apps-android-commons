@@ -32,7 +32,7 @@
   <string name="authentication_failed">未能核對身分！</string>
   <string name="uploading_started">開始上傳！</string>
   <string name="upload_completed_notification_title">已上傳%1$s！</string>
-  <string name="upload_completed_notification_text">點選檢視您上傳的項目</string>
+  <string name="upload_completed_notification_text">輕觸來檢視您上傳的項目</string>
   <string name="upload_progress_notification_title_start">開始上傳%1$s</string>
   <string name="upload_progress_notification_title_in_progress">正在上傳%1$s</string>
   <string name="upload_progress_notification_title_finishing">即將完成上傳 %1$s</string>
@@ -271,5 +271,14 @@
   <string name="about_translate_proceed">已進行</string>
   <string name="about_translate_cancel">取消</string>
   <string name="retry">重試</string>
+  <string name="showcase_view_got_it_button">了解！</string>
+  <string name="showcase_view_whole_nearby_activity">這些是在您的附近，並且需要圖片來圖解有關它們的維基百科條目之地點</string>
+  <string name="showcase_view_list_icon">輕觸此按鈕來帶出這些地點的清單</string>
+  <string name="showcase_view_plus_fab">您可從您的圖庫或相機，來上傳任何地點的圖片</string>
+  <string name="no_images_found">找不到圖片！</string>
+  <string name="error_loading_images">當載入圖片時發生錯誤。</string>
+  <string name="image_uploaded_by">由：%1$s 上傳</string>
   <string name="share_app_title">分享應用程式</string>
+  <string name="share_coordinates_not_present">當選擇圖片時未指定座標</string>
+  <string name="error_fetching_nearby_places">索取附近地點時出錯。</string>
 </resources>

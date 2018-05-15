@@ -263,5 +263,14 @@
   <string name="about_translate_proceed">Andé anans</string>
   <string name="about_translate_cancel">Anulé</string>
   <string name="retry">Prové torna</string>
+  <string name="showcase_view_got_it_button">Fàit!</string>
+  <string name="showcase_view_whole_nearby_activity">A-i é dij pòst davzin a chiel ch\'a l\'han da manca ëd plance për ilustré ij sò artìcoj su Wikipedia</string>
+  <string name="showcase_view_list_icon">Sgnacand su \'s boton a comparirà na lista ëd si pòst</string>
+  <string name="showcase_view_plus_fab">A peul carié na fòto da \'n pòst qualsëssìa ëd soa galarìa o màchina fòto</string>
+  <string name="no_images_found">Gnun-e plance trovà!</string>
+  <string name="error_loading_images">A-i é staje n\'eror durant ël cariament ëd le plance.</string>
+  <string name="image_uploaded_by">Carià da: %1$s</string>
   <string name="share_app_title">Partagé j\'aplicassion</string>
+  <string name="share_coordinates_not_present">Le coordinà a son nen ëstàite spessificà durant la selession ëd la plancia</string>
+  <string name="error_fetching_nearby_places">Eror durant l\'esplorassion dj\'anviron.</string>
 </resources>

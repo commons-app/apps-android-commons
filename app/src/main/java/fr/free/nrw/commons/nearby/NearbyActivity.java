@@ -16,6 +16,7 @@ import android.support.design.widget.BottomSheetBehavior;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AlertDialog;
 
+import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -23,9 +24,14 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 
+import android.widget.Toast;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
+import io.reactivex.functions.Consumer;
+import java.io.IOException;
+import java.net.ConnectException;
+import java.net.UnknownHostException;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -316,7 +322,7 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
     protected void onStart() {
         super.onStart();
         locationManager.addLocationListener(this);
-        locationManager.registerLocationManager();
+        registerLocationUpdates();
     }
 
     @Override
@@ -394,7 +400,7 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
             return;
         }
 
-        locationManager.registerLocationManager();
+        registerLocationUpdates();
         LatLng lastLocation = locationManager.getLastLocation();
 
         if (curLatLng != null && curLatLng.equals(lastLocation)) { //refresh view only if location has changed
@@ -427,14 +433,53 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
                     .loadAttractionsFromLocation(curLatLng))
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe(this::populatePlaces);
-        } else if (locationChangeType.equals(LocationServiceManager.LocationChangeType.LOCATION_SLIGHTLY_CHANGED)) {
+                    .subscribe(this::populatePlaces,
+                            throwable -> {
+                                Timber.d(throwable);
+                                showErrorMessage(getString(R.string.error_fetching_nearby_places));
+                                progressBar.setVisibility(View.GONE);
+                            });
+        } else if (locationChangeType
+                .equals(LocationServiceManager.LocationChangeType.LOCATION_SLIGHTLY_CHANGED)) {
             Gson gson = new GsonBuilder()
                     .registerTypeAdapter(Uri.class, new UriSerializer())
                     .create();
             String gsonCurLatLng = gson.toJson(curLatLng);
             bundle.putString("CurLatLng", gsonCurLatLng);
             updateMapFragment(true);
+        }
+    }
+
+    /**
+     * This method first checks if the location permissions has been granted and then register the location manager for updates.
+     */
+    private void registerLocationUpdates() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            if (locationManager.isLocationPermissionGranted()) {
+                locationManager.registerLocationManager();
+            } else {
+                // Should we show an explanation?
+                if (locationManager.isPermissionExplanationRequired(this)) {
+                    new AlertDialog.Builder(this)
+                            .setMessage(getString(R.string.location_permission_rationale_nearby))
+                            .setPositiveButton("OK", (dialog, which) -> {
+                                requestLocationPermissions();
+                                dialog.dismiss();
+                            })
+                            .setNegativeButton("Cancel", (dialog, id) -> {
+                                showLocationPermissionDeniedErrorDialog();
+                                dialog.cancel();
+                            })
+                            .create()
+                            .show();
+
+                } else {
+                    // No explanation needed, we can request the permission.
+                    requestLocationPermissions();
+                }
+            }
+        } else {
+            locationManager.registerLocationManager();
         }
     }
 
@@ -451,7 +496,7 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
         if (placeList.size() == 0) {
             ViewUtil.showSnackbar(findViewById(R.id.container), R.string.no_nearby);
         }
-        
+
         bundle.putString("PlaceList", gsonPlaceList);
         //bundle.putString("CurLatLng", gsonCurLatLng);
         bundle.putString("BoundaryCoord", gsonBoundaryCoordinates);
@@ -518,7 +563,7 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
             locationManager.removeLocationListener(this);
         } else {
             lockNearbyView = false;
-            locationManager.registerLocationManager();
+            registerLocationUpdates();
             locationManager.addLocationListener(this);
         }
     }
@@ -580,7 +625,12 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
                         .loadAttractionsFromLocation(curLatLng))
                         .subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())
-                        .subscribe(this::populatePlaces);
+                        .subscribe(this::populatePlaces,
+                                throwable -> {
+                                    Timber.d(throwable);
+                                    showErrorMessage(getString(R.string.error_fetching_nearby_places));
+                                    progressBar.setVisibility(View.GONE);
+                                });
                 nearbyMapFragment.setBundleForUpdtes(bundle);
                 nearbyMapFragment.updateMapSignificantly();
                 updateListFragment();
@@ -645,5 +695,9 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
 
     public void prepareViewsForSheetPosition(int bottomSheetState) {
         // TODO
+    }
+
+    private void showErrorMessage(String message) {
+        ViewUtil.showLongToast(NearbyActivity.this, message);
     }
 }

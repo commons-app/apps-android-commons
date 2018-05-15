@@ -285,4 +285,13 @@
   <string name="about_translate_proceed">Выполняется</string>
   <string name="about_translate_cancel">Отмена</string>
   <string name="retry">Повторить</string>
+  <string name="showcase_view_got_it_button">Понятно!</string>
+  <string name="showcase_view_whole_nearby_activity">Это места поблизости, статьи о которых нуждаются в иллюстрациях</string>
+  <string name="showcase_view_list_icon">Нажатие этой кнопки сгенерирует список таких мест</string>
+  <string name="showcase_view_plus_fab">Вы можете загрузить изображение для любого из этих мест, сделав снимок камерой или выбрав уже существующее изображение из галереи</string>
+  <string name="no_images_found">Изображений не найдено!</string>
+  <string name="error_loading_images">Произошла ошибка при загрузке изображений.</string>
+  <string name="image_uploaded_by">Загружено участником %1$s</string>
+  <string name="share_app_title">Поделиться приложением</string>
+  <string name="share_coordinates_not_present">Во время выбора изображения не были указаны координаты</string>
 </resources>
