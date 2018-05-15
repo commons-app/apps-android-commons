@@ -1,6 +1,7 @@
 package fr.free.nrw.commons.location;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.pm.PackageManager;
@@ -10,9 +11,10 @@ import android.location.LocationManager;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
-import android.util.Log;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 import timber.log.Timber;
@@ -29,6 +31,7 @@ public class LocationServiceManager implements LocationListener {
     private Location lastLocation;
     private final List<LocationUpdateListener> locationListeners = new CopyOnWriteArrayList<>();
     private boolean isLocationManagerRegistered = false;
+    private Set<Activity> locationExplanationDisplayed = new HashSet<>();
 
     /**
      * Constructs a new instance of LocationServiceManager.
@@ -51,7 +54,6 @@ public class LocationServiceManager implements LocationListener {
 
     /**
      * Returns whether the location permission is granted.
-     *
      * @return true if the location permission is granted
      */
     public boolean isLocationPermissionGranted() {
@@ -73,10 +75,23 @@ public class LocationServiceManager implements LocationListener {
                 LOCATION_REQUEST);
     }
 
+    /**
+     * The permission explanation dialog box is now displayed just once for a particular activity. We are subscribing
+     * to updates from multiple providers so its important to show the dialog just once. Otherwise it will be displayed
+     * once for every provider, which in our case currently is 2.
+     * @param activity
+     * @return
+     */
     public boolean isPermissionExplanationRequired(Activity activity) {
-        return !activity.isFinishing() &&
-                ActivityCompat.shouldShowRequestPermissionRationale(activity,
-                        Manifest.permission.ACCESS_FINE_LOCATION);
+        if (activity.isFinishing()) {
+            return false;
+        }
+        boolean showRequestPermissionRationale = ActivityCompat.shouldShowRequestPermissionRationale(activity, Manifest.permission.ACCESS_FINE_LOCATION);
+        if (showRequestPermissionRationale && !locationExplanationDisplayed.contains(activity)) {
+            locationExplanationDisplayed.add(activity);
+            return true;
+        }
+        return false;
     }
 
     /**
@@ -84,8 +99,9 @@ public class LocationServiceManager implements LocationListener {
      * (e.g. when Location permission just granted)
      * @return last known LatLng
      */
+    @SuppressLint("MissingPermission")
     public LatLng getLKL() {
-        if (ContextCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+        if (isLocationPermissionGranted()) {
             Location lastKL = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
             if (lastKL == null) {
                 lastKL = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
@@ -107,9 +123,10 @@ public class LocationServiceManager implements LocationListener {
      * Registers a LocationManager to listen for current location.
      */
     public void registerLocationManager() {
-        if (!isLocationManagerRegistered)
+        if (!isLocationManagerRegistered) {
             isLocationManagerRegistered = requestLocationUpdatesFromProvider(LocationManager.NETWORK_PROVIDER)
                     && requestLocationUpdatesFromProvider(LocationManager.GPS_PROVIDER);
+        }
     }
 
     /**
@@ -142,7 +159,7 @@ public class LocationServiceManager implements LocationListener {
      * @return LOCATION_SIGNIFICANTLY_CHANGED if location changed significantly
      * LOCATION_SLIGHTLY_CHANGED if location changed slightly
      */
-    protected LocationChangeType isBetterLocation(Location location, Location currentBestLocation) {
+    private LocationChangeType isBetterLocation(Location location, Location currentBestLocation) {
 
         if (currentBestLocation == null) {
             // A new location is always better than no location
