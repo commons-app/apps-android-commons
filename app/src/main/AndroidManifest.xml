@@ -46,18 +46,6 @@
             android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.SEND" />
-                <category android:name="android.intent.category.DEFAULT" />
-                <data android:mimeType="image/*" />
-                <data android:mimeType="audio/ogg" />
-            </intent-filter>
-        </activity>
-
-        <!-- TODO: This should be REMOVED and SEND_MULTIPLE action should go to ShareActivity as well -->
-        <activity
-            android:name=".upload.MultipleShareActivity"
-            android:icon="@drawable/ic_launcher"
-            android:label="@string/app_name">
-            <intent-filter>
                 <action android:name="android.intent.action.SEND_MULTIPLE" />
                 <category android:name="android.intent.category.DEFAULT" />
                 <data android:mimeType="image/*" />
