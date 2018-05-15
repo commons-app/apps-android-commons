@@ -291,9 +291,9 @@ public class ShareActivity
         mainFab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(!isFABOpen){
+                if(!isFABOpen) {
                     showFABMenu();
-                }else{
+                } else {
                     closeFABMenu();
                 }
             }
@@ -307,10 +307,27 @@ public class ShareActivity
                     zoomImageFromThumb(backgroundImageView, mediaUri);
                 }
             });
-        } catch (Exception e){
+        } catch (Exception e) {
             Log.i("exception", e.toString());
         }
         zoomOutButton = (FloatingActionButton) findViewById(R.id.media_upload_zoom_out);
+
+        maps_fragment = (FloatingActionButton) findViewById(R.id.media_map);
+        maps_fragment.setVisibility(View.VISIBLE);
+        if( imageObj == null || imageObj.imageCoordsExists){
+            maps_fragment.setVisibility(View.INVISIBLE);
+        }
+        maps_fragment.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if( imageObj != null && imageObj.imageCoordsExists) {
+                    Uri gmmIntentUri = Uri.parse("google.streetview:cbll=" + imageObj.getDecLatitude() + "," + imageObj.getDecLongitude());
+                    Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
+                    mapIntent.setPackage("com.google.android.apps.maps");
+                    startActivity(mapIntent);
+                }
+            }
+        });
     }
 
     @Override
@@ -368,22 +385,6 @@ public class ShareActivity
                     .commitAllowingStateLoss();
         }
         uploadController.prepareService();
-        maps_fragment = (FloatingActionButton) findViewById(R.id.media_map);
-        maps_fragment.setVisibility(View.VISIBLE);
-        if( imageObj == null || imageObj.imageCoordsExists){
-            maps_fragment.setVisibility(View.INVISIBLE);
-        }
-        maps_fragment.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if( imageObj != null && imageObj.imageCoordsExists) {
-                    Uri gmmIntentUri = Uri.parse("google.streetview:cbll=" + imageObj.getDecLatitude() + "," + imageObj.getDecLongitude());
-                    Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
-                    mapIntent.setPackage("com.google.android.apps.maps");
-                    startActivity(mapIntent);
-                }
-            }
-        });
     }
 
     /**
