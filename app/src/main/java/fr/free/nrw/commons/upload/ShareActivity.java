@@ -441,9 +441,14 @@ public class ShareActivity
         return isNearbyUpload;
     }
 
+    /**
+     * Handles BOTH snackbar permission request (for location) and submit button permission request (for storage)
+     * @param requestCode type of request
+     * @param permissions permissions requested
+     * @param grantResults grant results
+     */
     @Override
-    public void onRequestPermissionsResult(int requestCode,
-                                           @NonNull String[] permissions, @NonNull int[] grantResults) {
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         switch (requestCode) {
             case REQUEST_PERM_ON_CREATE_LOCATION: {
                 if (grantResults.length >= 1 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
