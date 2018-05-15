@@ -334,10 +334,6 @@ public class ShareActivity
         useNewPermissions = false;
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             useNewPermissions = true;
-
-            if (!needsToRequestStoragePermission()) {
-                storagePermitted = true;
-            }
             if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
                 locationPermitted = true;
             }
@@ -345,34 +341,13 @@ public class ShareActivity
 
         //TODO: We should only use snackbar for location permissions, since storage permissions are MANDATORY
         // Check storage permissions if marshmallow or newer
-        if (useNewPermissions && (!storagePermitted || !locationPermitted)) {
-            if (!storagePermitted && !locationPermitted) {
-                String permissionRationales =
-                        getResources().getString(R.string.read_storage_permission_rationale) + "\n"
-                                + getResources().getString(R.string.location_permission_rationale);
-                snackbar = requestPermissionUsingSnackBar(
-                        permissionRationales,
-                        new String[]{
-                                Manifest.permission.READ_EXTERNAL_STORAGE,
-                                Manifest.permission.ACCESS_FINE_LOCATION},
-                        REQUEST_PERM_ON_CREATE_STORAGE_AND_LOCATION);
-                View snackbarView = snackbar.getView();
-                TextView textView = (TextView) snackbarView.findViewById(android.support.design.R.id.snackbar_text);
-                textView.setMaxLines(3);
-            } else if (!storagePermitted) {
-                requestPermissionUsingSnackBar(
-                        getString(R.string.read_storage_permission_rationale),
-                        new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},
-                        REQUEST_PERM_ON_CREATE_STORAGE);
-            } else if (!locationPermitted) {
-                requestPermissionUsingSnackBar(
-                        getString(R.string.location_permission_rationale),
-                        new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
-                        REQUEST_PERM_ON_CREATE_LOCATION);
-            }
+        if (!locationPermitted) {
+            requestPermissionUsingSnackBar(
+                    getString(R.string.location_permission_rationale),
+                    new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
+                    REQUEST_PERM_ON_CREATE_LOCATION);
         }
         performPreUploadProcessingOfFile();
-
 
         SingleUploadFragment shareView = (SingleUploadFragment) getSupportFragmentManager().findFragmentByTag("shareView");
         categorizationFragment = (CategorizationFragment) getSupportFragmentManager().findFragmentByTag("categorization");
@@ -389,8 +364,6 @@ public class ShareActivity
         if( imageObj == null || imageObj.imageCoordsExists != true){
             maps_fragment.setVisibility(View.INVISIBLE);
         }
-
-
         maps_fragment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
