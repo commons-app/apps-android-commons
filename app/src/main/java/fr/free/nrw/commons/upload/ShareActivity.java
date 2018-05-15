@@ -286,8 +286,12 @@ public class ShareActivity
      * Initialize views and setup listeners here for FAB to prevent cluttering onCreate
      */
     private void initViewsAndListeners() {
+        //Main FAB splits into Zoom and Map
         mainFab = (FloatingActionButton) findViewById(R.id.main_fab);
-        //called when upper arrow floating button
+        zoomInButton = (FloatingActionButton) findViewById(R.id.media_upload_zoom_in);
+        zoomOutButton = (FloatingActionButton) findViewById(R.id.media_upload_zoom_out);
+        maps_fragment = (FloatingActionButton) findViewById(R.id.media_map);
+
         mainFab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -299,7 +303,6 @@ public class ShareActivity
             }
         });
 
-        zoomInButton = (FloatingActionButton) findViewById(R.id.media_upload_zoom_in);
         try {
             zoomInButton.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -308,11 +311,9 @@ public class ShareActivity
                 }
             });
         } catch (Exception e) {
-            Log.i("exception", e.toString());
+            Timber.e(e);
         }
-        zoomOutButton = (FloatingActionButton) findViewById(R.id.media_upload_zoom_out);
 
-        maps_fragment = (FloatingActionButton) findViewById(R.id.media_map);
         maps_fragment.setVisibility(View.VISIBLE);
         if( imageObj == null || imageObj.imageCoordsExists){
             maps_fragment.setVisibility(View.INVISIBLE);
