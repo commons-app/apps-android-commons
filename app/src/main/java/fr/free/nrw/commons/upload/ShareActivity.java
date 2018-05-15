@@ -257,6 +257,63 @@ public class ShareActivity
         finish();
     }
 
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        setContentView(R.layout.activity_share);
+        ButterKnife.bind(this);
+        initBack();
+        backgroundImageView = (SimpleDraweeView) findViewById(R.id.backgroundImage);
+        backgroundImageView.setHierarchy(GenericDraweeHierarchyBuilder
+                .newInstance(getResources())
+                .setPlaceholderImage(VectorDrawableCompat.create(getResources(),
+                        R.drawable.ic_image_black_24dp, getTheme()))
+                .setFailureImage(VectorDrawableCompat.create(getResources(),
+                        R.drawable.ic_error_outline_black_24dp, getTheme()))
+                .build());
+
+        receiveIntent();
+        initViewsAndListeners();
+
+        if (savedInstanceState != null) {
+            contribution = savedInstanceState.getParcelable("contribution");
+        }
+
+        requestAuthToken();
+
+        Timber.d("Uri: %s", mediaUri.toString());
+        Timber.d("Ext storage dir: %s", Environment.getExternalStorageDirectory());
+
+        useNewPermissions = false;
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            useNewPermissions = true;
+            if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+                locationPermitted = true;
+            }
+        }
+
+        // Check location permissions if M or newer for category suggestions, request via snackbar if not present
+        if (!locationPermitted) {
+            requestPermissionUsingSnackBar(
+                    getString(R.string.location_permission_rationale),
+                    new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
+                    REQUEST_PERM_ON_CREATE_LOCATION);
+        }
+        performPreUploadProcessingOfFile();
+
+        SingleUploadFragment shareView = (SingleUploadFragment) getSupportFragmentManager().findFragmentByTag("shareView");
+        categorizationFragment = (CategorizationFragment) getSupportFragmentManager().findFragmentByTag("categorization");
+        if (shareView == null && categorizationFragment == null) {
+            shareView = new SingleUploadFragment();
+            getSupportFragmentManager()
+                    .beginTransaction()
+                    .add(R.id.single_upload_fragment_container, shareView, "shareView")
+                    .commitAllowingStateLoss();
+        }
+        uploadController.prepareService();
+    }
+
     /**
      * Receive intent from ContributionController.java when user selects picture to upload
      */
@@ -330,64 +387,7 @@ public class ShareActivity
             }
         });
     }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
-        setContentView(R.layout.activity_share);
-        ButterKnife.bind(this);
-        initBack();
-        backgroundImageView = (SimpleDraweeView) findViewById(R.id.backgroundImage);
-        backgroundImageView.setHierarchy(GenericDraweeHierarchyBuilder
-                .newInstance(getResources())
-                .setPlaceholderImage(VectorDrawableCompat.create(getResources(),
-                        R.drawable.ic_image_black_24dp, getTheme()))
-                .setFailureImage(VectorDrawableCompat.create(getResources(),
-                        R.drawable.ic_error_outline_black_24dp, getTheme()))
-                .build());
-
-        receiveIntent();
-        initViewsAndListeners();
-
-        if (savedInstanceState != null) {
-            contribution = savedInstanceState.getParcelable("contribution");
-        }
-
-        requestAuthToken();
-
-        Timber.d("Uri: %s", mediaUri.toString());
-        Timber.d("Ext storage dir: %s", Environment.getExternalStorageDirectory());
-
-        useNewPermissions = false;
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            useNewPermissions = true;
-            if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
-                locationPermitted = true;
-            }
-        }
-
-        // Check location permissions if M or newer for category suggestions, request via snackbar if not present
-        if (!locationPermitted) {
-            requestPermissionUsingSnackBar(
-                    getString(R.string.location_permission_rationale),
-                    new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
-                    REQUEST_PERM_ON_CREATE_LOCATION);
-        }
-        performPreUploadProcessingOfFile();
-
-        SingleUploadFragment shareView = (SingleUploadFragment) getSupportFragmentManager().findFragmentByTag("shareView");
-        categorizationFragment = (CategorizationFragment) getSupportFragmentManager().findFragmentByTag("categorization");
-        if (shareView == null && categorizationFragment == null) {
-            shareView = new SingleUploadFragment();
-            getSupportFragmentManager()
-                    .beginTransaction()
-                    .add(R.id.single_upload_fragment_container, shareView, "shareView")
-                    .commitAllowingStateLoss();
-        }
-        uploadController.prepareService();
-    }
-
+    
     /**
      * Function to display the zoom and map FAB
      */
