@@ -241,47 +241,49 @@
   <string name="nominated_see_more"><u>See webpage for details</u></string>
   <string name="view_browser">View in Browser</string>
 
-  <string name="nearby_location_has_not_changed">Location has not changed.</string>
-  <string name="nearby_location_not_available">Location not available.</string>
-  <string name="location_permission_rationale_nearby">Permission required to display a list of nearby places</string>
-  <string name="get_directions">GET DIRECTIONS</string>
-  <string name="read_article">READ ARTICLE</string>
+    <string name="nearby_location_has_not_changed">Location has not changed.</string>
+    <string name="nearby_location_not_available">Location not available.</string>
+    <string name="location_permission_rationale_nearby">Permission required to display a list of nearby places</string>
+    <string name="get_directions">GET DIRECTIONS</string>
+    <string name="read_article">READ ARTICLE</string>
 
-  <string name="notifications_welcome" formatted="false">Welcome to Wikimedia Commons, %1$s! We\'re glad you\'re here.</string>
-  <string name="notifications_talk_page_message">%1$s left a message on your talk page</string>
-  <string name="notifications_thank_you_edit">Thank you for making an edit</string>
-  <string name="notifications_mention">%1$s mentioned you on %2$s.</string>
-  <string name="toggle_view_button">Toggle view</string>
-  <string name="nearby_directions">DIRECTIONS</string>
-  <string name="nearby_wikidata">WIKIDATA</string>
-  <string name="nearby_wikipedia">WIKIPEDIA</string>
-  <string name="nearby_commons">COMMONS</string>
-  <string name="about_rate_us"><![CDATA[<u>Rate us</u>]]></string>
-  <string name="about_faq"><![CDATA[<u>FAQ</u>]]></string>
-  <string name="welcome_skip_button">Skip Tutorial</string>
-  <string name="no_internet">Internet unavailable</string>
-  <string name="internet_established">Internet available</string>
-  <string name="error_notifications">Error fetching notifications</string>
-  <string name="no_notifications">No notifications found</string>
-  <string name="about_translate"><![CDATA[<u>Translate</u>]]></string>
-  <string name="about_translate_title">Languages</string>
-  <string name="about_translate_message">Select the language that you would like to submit translations for</string>
-  <string name="about_translate_proceed">Proceed</string>
-  <string name="about_translate_cancel">Cancel</string>
-  <string name="retry">Retry</string>
+    <string name="notifications_welcome" formatted="false">Welcome to Wikimedia Commons, %1$s! We\'re glad you\'re here.</string>
+    <string name="notifications_talk_page_message">%1$s left a message on your talk page</string>
+    <string name="notifications_thank_you_edit">Thank you for making an edit</string>
+    <string name="notifications_mention">%1$s mentioned you on %2$s.</string>
+    <string name="toggle_view_button">Toggle view</string>
+    <string name="nearby_directions">DIRECTIONS</string>
+    <string name="nearby_wikidata">WIKIDATA</string>
+    <string name="nearby_wikipedia">WIKIPEDIA</string>
+    <string name="nearby_commons">COMMONS</string>
+    <string name="about_rate_us"><![CDATA[<u>Rate us</u>]]></string>
+    <string name="about_faq"><![CDATA[<u>FAQ</u>]]></string>
+    <string name="welcome_skip_button">Skip Tutorial</string>
+    <string name="no_internet">Internet unavailable</string>
+    <string name="internet_established">Internet available</string>
+    <string name="error_notifications">Error fetching notifications</string>
+    <string name="no_notifications">No notifications found</string>
+    <string name="about_translate"><![CDATA[<u>Translate</u>]]></string>
+    <string name="about_translate_title">Languages</string>
+    <string name="about_translate_message">Select the language that you would like to submit translations for</string>
+    <string name="about_translate_proceed">Proceed</string>
+    <string name="about_translate_cancel">Cancel</string>
+    <string name="retry">Retry</string>
 
-  <string name="showcase_view_got_it_button">Got it!</string>
-  <string name="showcase_view_whole_nearby_activity">These are the places near you that need pictures to illustrate their Wikipedia articles</string>
-  <string name="showcase_view_list_icon">Tapping this button brings up a list of these places</string>
-  <string name="showcase_view_plus_fab">You can upload a picture for any place from your gallery or camera</string>
+    <string name="showcase_view_got_it_button">Got it!</string>
+    <string name="showcase_view_whole_nearby_activity">These are the places near you that need pictures to illustrate their Wikipedia articles</string>
+    <string name="showcase_view_list_icon">Tapping this button brings up a list of these places</string>
+    <string name="showcase_view_plus_fab">You can upload a picture for any place from your gallery or camera</string>
 
-  <string name="no_images_found">No images found!</string>
-  <string name="error_loading_images">Error occurred while loading images.</string>
-  <string name="image_uploaded_by">Uploaded by: %1$s</string>
+    <string name="no_images_found">No images found!</string>
+    <string name="error_loading_images">Error occurred while loading images.</string>
+    <string name="image_uploaded_by">Uploaded by: %1$s</string>
 
-  <string name="share_app_title">Share App</string>
-  <string name="share_coordinates_not_present">Coordinates were not specified during image selection</string>
-  <string name="error_fetching_nearby_places">Error fetching nearby places.</string>
+    <string name="share_app_title">Share App</string>
+    <string name="share_coordinates_not_present">Coordinates were not specified during image selection</string>
+    <string name="error_fetching_nearby_places">Error fetching nearby places.</string>
+    <string name="appwidget_img">Pic of the Day</string>
+    <string name="app_widget_heading">Pic of the Day</string>
 
   <string name="menu_set_wallpaper">Set wallpaper</string>
   <string name="wallpaper_set_successfully">Wallpaper set successfully!</string>

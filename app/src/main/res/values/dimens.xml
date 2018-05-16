@@ -25,4 +25,10 @@
     <dimen name="description_text_size">14sp</dimen>
     <dimen name="first_fab">15dp</dimen>
     <dimen name="second_fab">25dp</dimen>
+
+    <!--
+Refer to App Widget Documentation for margin information
+http://developer.android.com/guide/topics/appwidgets/index.html#CreatingLayout
+    -->
+    <dimen name="widget_margin">8dp</dimen>
 </resources>
