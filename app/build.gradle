@@ -7,6 +7,8 @@ apply from: 'quality.gradle'
 apply plugin: 'com.getkeepsafe.dexcount'
 
 dependencies {
+    // https://mvnrepository.com/artifact/org.json/json
+    implementation group: 'org.json', name: 'json', version: '20180130'
     implementation 'com.squareup.picasso:picasso:2.71828'
     implementation 'com.prof.rssparser:rssparser:1.1'
     implementation 'com.github.nicolas-raoul:Quadtree:ac16ea8035bf07'
