@@ -33,6 +33,7 @@ import dagger.android.support.AndroidSupportInjection;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.contributions.Contribution;
 import fr.free.nrw.commons.media.MediaDetailPagerFragment;
+import fr.free.nrw.commons.utils.ViewUtil;
 
 public class MultipleUploadListFragment extends Fragment {
 
@@ -129,7 +130,7 @@ public class MultipleUploadListFragment extends Fragment {
 
         // FIXME: Stops the keyboard from being shown 'stale' while moving out of this fragment into the next
         View target = getActivity().getCurrentFocus();
-        hideKeyboard(target);
+        ViewUtil.hideKeyboard(target);
     }
 
     // FIXME: Wrong result type
@@ -178,20 +179,11 @@ public class MultipleUploadListFragment extends Fragment {
 
         baseTitle.setOnFocusChangeListener((v, hasFocus) -> {
             if (!hasFocus) {
-                hideKeyboard(v);
+                ViewUtil.hideKeyboard(v);
             }
         });
 
         return view;
-    }
-
-    public void hideKeyboard(View view) {
-        if (view != null) {
-            InputMethodManager inputMethodManager = (InputMethodManager) getActivity().getSystemService(Activity.INPUT_METHOD_SERVICE);
-            if (inputMethodManager != null) {
-                inputMethodManager.hideSoftInputFromWindow(view.getWindowToken(), 0);
-            }
-        }
     }
 
     @Override

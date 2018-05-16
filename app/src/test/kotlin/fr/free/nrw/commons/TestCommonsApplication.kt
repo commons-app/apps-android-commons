@@ -3,6 +3,7 @@ package fr.free.nrw.commons
 import android.content.Context
 import android.content.SharedPreferences
 import android.support.v4.util.LruCache
+import com.google.gson.Gson
 import com.nhaarman.mockito_kotlin.mock
 import com.squareup.leakcanary.RefWatcher
 import fr.free.nrw.commons.auth.AccountUtil
@@ -36,6 +37,7 @@ class MockCommonsApplicationModule(appContext: Context) : CommonsApplicationModu
     val accountUtil: AccountUtil = mock()
     val appSharedPreferences: SharedPreferences = mock()
     val defaultSharedPreferences: SharedPreferences = mock()
+    val categorySharedPreferences: SharedPreferences = mock()
     val otherSharedPreferences: SharedPreferences = mock()
     val uploadController: UploadController = mock()
     val mockSessionManager: SessionManager = mock()
@@ -45,6 +47,7 @@ class MockCommonsApplicationModule(appContext: Context) : CommonsApplicationModu
     val mockDbOpenHelper: DBOpenHelper = mock()
     val nearbyPlaces: NearbyPlaces = mock()
     val lruCache: LruCache<String, String> = mock()
+    val gson: Gson = Gson()
 
     override fun providesAccountUtil(context: Context): AccountUtil = accountUtil
 
@@ -58,7 +61,7 @@ class MockCommonsApplicationModule(appContext: Context) : CommonsApplicationModu
 
     override fun providesSessionManager(context: Context, mediaWikiApi: MediaWikiApi, sharedPreferences: SharedPreferences): SessionManager = mockSessionManager
 
-    override fun provideMediaWikiApi(context: Context, sharedPreferences: SharedPreferences): MediaWikiApi = mediaWikiApi
+    override fun provideMediaWikiApi(context: Context, sharedPreferences: SharedPreferences, categorySharedPreferences: SharedPreferences, gson: Gson): MediaWikiApi = mediaWikiApi
 
     override fun provideLocationServiceManager(context: Context): LocationServiceManager = locationServiceManager
 

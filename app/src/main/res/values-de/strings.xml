@@ -154,6 +154,7 @@
   <string name="welcome_copyright_subtext">Vermeide urheberrechtlich geschütztes Material, das du im Internet gefunden hast wie Bilder von Postern, Buchcovern etc.</string>
   <string name="welcome_final_text">Verstanden?</string>
   <string name="welcome_final_button_text">Ja!</string>
+  <string name="welcome_help_button_text"/>
   <string name="detail_panel_cats_label">Kategorien</string>
   <string name="detail_panel_cats_loading">Lade …</string>
   <string name="detail_panel_cats_none">Keine ausgewählt</string>
@@ -268,4 +269,14 @@
   <string name="about_translate_proceed">Fortfahren</string>
   <string name="about_translate_cancel">Abbrechen</string>
   <string name="retry">Erneut versuchen</string>
+  <string name="showcase_view_got_it_button">Verstanden!</string>
+  <string name="showcase_view_whole_nearby_activity">Dies sind die Orte in deiner Nähe, die Bilder zur Illustration ihrer Wikipedia-Artikel benötigen.</string>
+  <string name="showcase_view_list_icon">Das Antippen dieser Schaltfläche zeigt eine Liste mit diesen Orten</string>
+  <string name="showcase_view_plus_fab">Du kannst ein Bild für einen beliebigen Ort von deiner Galerie oder Kamera hochladen</string>
+  <string name="no_images_found">Keine Bilder gefunden!</string>
+  <string name="error_loading_images">Beim Laden der Bilder ist ein Fehler aufgetreten.</string>
+  <string name="image_uploaded_by">Hochgeladen von: %1$s</string>
+  <string name="share_app_title">App teilen</string>
+  <string name="share_coordinates_not_present">Während der Bildauswahl wurden keine Koordinaten angegeben</string>
+  <string name="error_fetching_nearby_places">Fehler beim Abrufen der Orte in der Nähe.</string>
 </resources>

@@ -9,11 +9,15 @@
 * Mirzali
 -->
 <resources>
+  <string name="preference_category_appearance">Asayış</string>
+  <string name="preference_category_general">Bıngeh</string>
+  <string name="preference_category_location">Lokasyon</string>
   <string name="app_name">Commons</string>
   <string name="menu_settings">Eyari</string>
   <string name="username">Namey karberi</string>
   <string name="password">Parola</string>
   <string name="login">Cı kewe</string>
+  <string name="forgot_password">Parola, xo vira kerde?</string>
   <string name="signup">Qeyd be</string>
   <string name="logging_in_title">Cıkewtış</string>
   <string name="logging_in_message">Kerem kerên, bıpawên...</string>
@@ -58,6 +62,8 @@
   <string name="menu_upload_single">Bar ke</string>
   <string name="categories_search_text_hint">Kategoriyan dı cı geyr</string>
   <string name="menu_save_categories">Star ke</string>
+  <string name="refresh_button">Newe ke</string>
+  <string name="display_list_button">Liste</string>
   <plurals name="contributions_subtitle">
     <item quantity="zero">\@string/contributions_subtitle_zero</item>
     <item quantity="one">Yew  barbiyayış</item>
@@ -83,7 +89,7 @@
   <string name="menu_feedback">Peyd rışten bırış (E-posta ra)</string>
   <string name="no_email_client">E-posta eyar nêbi</string>
   <string name="provider_categories">Karıyaye Kategoriyê peyêni</string>
-  <string name="menu_retry_upload">Fına</string>
+  <string name="menu_retry_upload">Anciya bıcerrebne</string>
   <string name="menu_cancel_upload">Bıtexelne</string>
   <string name="menu_download">Ron</string>
   <string name="preference_license" fuzzy="true">Lisans</string>
@@ -129,4 +135,7 @@
   <string name="navigation_item_home">Keye</string>
   <string name="navigation_item_upload">Bar ke</string>
   <string name="navigation_item_logout">Veciyayış</string>
+  <string name="about_translate_cancel">Bıtexelne</string>
+  <string name="retry">Anciya bıcerrebne</string>
+  <string name="showcase_view_got_it_button">Mı fehm kerd!</string>
 </resources>

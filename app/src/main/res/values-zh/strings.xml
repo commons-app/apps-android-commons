@@ -269,4 +269,14 @@
   <string name="about_translate_proceed">已处理</string>
   <string name="about_translate_cancel">取消</string>
   <string name="retry">重试</string>
+  <string name="showcase_view_got_it_button">明白了！</string>
+  <string name="showcase_view_whole_nearby_activity">这些是您附近需要图片以阐明维基百科条目的地方</string>
+  <string name="showcase_view_list_icon">点按此按钮会出现这些地点的列表</string>
+  <string name="showcase_view_plus_fab">您可以从您的图库或照相机中上传任意地点的图片</string>
+  <string name="no_images_found">找不到图片！</string>
+  <string name="error_loading_images">加载图片时出错。</string>
+  <string name="image_uploaded_by">由%1$s上传</string>
+  <string name="share_app_title">分享应用</string>
+  <string name="share_coordinates_not_present">图片选择时，坐标并未指定</string>
+  <string name="error_fetching_nearby_places">检索附近地点时出错。</string>
 </resources>

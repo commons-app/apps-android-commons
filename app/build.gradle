@@ -25,6 +25,8 @@ dependencies {
         transitive=true
     }
 
+    implementation "com.github.deano2390:MaterialShowcaseView:1.2.0"
+
     implementation "com.android.support:support-v4:$SUPPORT_LIB_VERSION"
     implementation "com.android.support:appcompat-v7:$SUPPORT_LIB_VERSION"
     implementation "com.android.support:design:$SUPPORT_LIB_VERSION"
@@ -48,6 +50,8 @@ dependencies {
     implementation 'com.jakewharton.rxbinding2:rxbinding-support-v4:2.0.0'
     implementation 'com.jakewharton.rxbinding2:rxbinding-appcompat-v7:2.0.0'
     implementation 'com.jakewharton.rxbinding2:rxbinding-design:2.0.0'
+
+    implementation 'org.jsoup:jsoup:1.11.3'
 
     implementation 'com.facebook.fresco:fresco:1.5.0'
     implementation 'com.facebook.stetho:stetho:1.5.0'

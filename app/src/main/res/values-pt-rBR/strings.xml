@@ -275,4 +275,14 @@
   <string name="about_translate_proceed">Avançar</string>
   <string name="about_translate_cancel">Cancelar</string>
   <string name="retry">Tentar novamente</string>
+  <string name="showcase_view_got_it_button">Entendido!</string>
+  <string name="showcase_view_whole_nearby_activity">Estes são os lugares perto de você que precisam de fotografias para ilustrar os respetivos artigos na Wikipédia</string>
+  <string name="showcase_view_list_icon">Tocar neste botão fará surgir uma lista destes lugares</string>
+  <string name="showcase_view_plus_fab">Pode carregar uma fotografia para qualquer dos lugares, da sua galeria ou câmara</string>
+  <string name="no_images_found">Não foi encontrada nenhuma imagem!</string>
+  <string name="error_loading_images">Ocorreu um erro durante o carregamento das imagens.</string>
+  <string name="image_uploaded_by">Carregada por: %1$s</string>
+  <string name="share_app_title">Compartilhar o aplicativo</string>
+  <string name="share_coordinates_not_present">Não foram especificadas coordenadas durante a seleção da imagem</string>
+  <string name="error_fetching_nearby_places">Erro ao buscar lugares próximos.</string>
 </resources>

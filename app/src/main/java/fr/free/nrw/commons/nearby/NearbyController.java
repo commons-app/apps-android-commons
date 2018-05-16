@@ -7,6 +7,7 @@ import android.support.graphics.drawable.VectorDrawableCompat;
 
 import com.mapbox.mapboxsdk.annotations.IconFactory;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -44,7 +45,7 @@ public class NearbyController {
      * @return NearbyPlacesInfo a variable holds Place list without distance information
      * and boundary coordinates of current Place List
      */
-    public NearbyPlacesInfo loadAttractionsFromLocation(LatLng curLatLng) {
+    public NearbyPlacesInfo loadAttractionsFromLocation(LatLng curLatLng) throws IOException {
 
         Timber.d("Loading attractions near %s", curLatLng);
         NearbyPlacesInfo nearbyPlacesInfo = new NearbyPlacesInfo();

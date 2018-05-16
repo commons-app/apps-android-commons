@@ -271,4 +271,13 @@
   <string name="about_translate_proceed">İlerle</string>
   <string name="about_translate_cancel">Vazgeç</string>
   <string name="retry">Tekrar Deneyin</string>
+  <string name="showcase_view_got_it_button">Anladım!</string>
+  <string name="showcase_view_whole_nearby_activity">Vikipedi maddelerine eklemek için fotoğrafa ihtiyaç duyan size yakın yerler</string>
+  <string name="showcase_view_list_icon">Bu tuşa dokunmak bu yerlerin bir listesini getirir</string>
+  <string name="showcase_view_plus_fab">Galerinizden veya kameranızla herhangi bir yer için resim yükleyebilirsiniz.</string>
+  <string name="no_images_found">Resim bulunamadı!</string>
+  <string name="error_loading_images">Resimler yüklenirken hata oluştu.</string>
+  <string name="image_uploaded_by">Yükleyen: %1$s</string>
+  <string name="share_app_title">Uygulamayı Paylaş</string>
+  <string name="share_coordinates_not_present">Koordinatlar görüntü seçimi sırasında belirlenmedi</string>
 </resources>

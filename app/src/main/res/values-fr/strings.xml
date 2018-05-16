@@ -5,6 +5,7 @@
 * Happy13241
 * Jean-Frédéric
 * KATRINE1992
+* Melissadeba95
 * Metroitendo
 * Nicolas Raoul
 * Orikrin1998
@@ -279,4 +280,14 @@
   <string name="about_translate_proceed">Continuer</string>
   <string name="about_translate_cancel">Annuler</string>
   <string name="retry">Réessayer</string>
+  <string name="showcase_view_got_it_button">C’est bon !</string>
+  <string name="showcase_view_whole_nearby_activity">Il y a des lieux autour de vous qui demandent des images pour illustrer leurs articles Wikipédia</string>
+  <string name="showcase_view_list_icon">En cliquant sur ce bouton vous afficherez une liste de ces endroits</string>
+  <string name="showcase_view_plus_fab">Vous pouvez téléverser une photo de n\'importe quel endroit de votre gallerie ou de votre appareil photo</string>
+  <string name="no_images_found">Aucune images trouvée.</string>
+  <string name="error_loading_images">Une erreur s\'est produite pendant le chargement des images.</string>
+  <string name="image_uploaded_by">Importé par:%1$s</string>
+  <string name="share_app_title">Partager les applications</string>
+  <string name="share_coordinates_not_present">Les coordonnées n\'ont pas été spécifiées pendant la sélection de l\'image</string>
+  <string name="error_fetching_nearby_places">Erreur durant l\'exploration du voisinage.</string>
 </resources>

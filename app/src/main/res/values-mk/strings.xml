@@ -263,4 +263,14 @@
   <string name="about_translate_proceed">Продолжи</string>
   <string name="about_translate_cancel">Откажи</string>
   <string name="retry">Пробај пак</string>
+  <string name="showcase_view_got_it_button">Јасно!</string>
+  <string name="showcase_view_whole_nearby_activity">Ова се места во ваша близинана кои им требаат слики за илустрирање на нивните статии на Википедија</string>
+  <string name="showcase_view_list_icon">Ако допрете на копчево ќе добиете список на тие места</string>
+  <string name="showcase_view_plus_fab">Можете да подигнете слика за било кое од местата од вашата галерија или камера</string>
+  <string name="no_images_found">Не пронајдов ниедна слика!</string>
+  <string name="error_loading_images">Се појави грешка при вчитувањето на сликите.</string>
+  <string name="image_uploaded_by">Подигач: %1$s</string>
+  <string name="share_app_title">Сподели прилог</string>
+  <string name="share_coordinates_not_present">Не беа укажани координати при изборот на сликата</string>
+  <string name="error_fetching_nearby_places">Грешка при добивањето на околните места.</string>
 </resources>

@@ -273,4 +273,14 @@
   <string name="about_translate_proceed">המשך</string>
   <string name="about_translate_cancel">ביטול</string>
   <string name="retry">לנסות שוב</string>
+  <string name="showcase_view_got_it_button">הבנתי!</string>
+  <string name="showcase_view_whole_nearby_activity">אלה המקומות בסביבתך שזקוקים לתמונות כדי להמחיש את הערכים שלהם בוויקיפדיה</string>
+  <string name="showcase_view_list_icon">ניתן ללחוץ על כפתור זה כדי להציג רשימה של המקומות האלה</string>
+  <string name="showcase_view_plus_fab">באפשרותך להעלות תמונה של כל מקום מהגלריה או מהמצלמה שלך</string>
+  <string name="no_images_found">לא נמצאו תמונות!</string>
+  <string name="error_loading_images">אירעה שגיאה בטעינת התמונות.</string>
+  <string name="image_uploaded_by">הועלתה על־ידי: %1$s</string>
+  <string name="share_app_title">שיתוף היישום</string>
+  <string name="share_coordinates_not_present">לא צוינו קואורדינטות בעת בחירת התמונה</string>
+  <string name="error_fetching_nearby_places">שגיאה באחזור המקומות בסביבתך.</string>
 </resources>
