@@ -279,4 +279,11 @@
   <string name="about_translate_proceed">Виконується</string>
   <string name="about_translate_cancel">Скасувати</string>
   <string name="retry">Повторити</string>
+  <string name="showcase_view_got_it_button">Зрозуміло</string>
+  <string name="showcase_view_list_icon">Натискання цієї кнопки згенерує список таких місць</string>
+  <string name="no_images_found">Зображень не знайдено!</string>
+  <string name="error_loading_images">Сталася помилка при завантаженні зображень.</string>
+  <string name="image_uploaded_by">Завантажено: %1$s</string>
+  <string name="share_app_title">Поділитися програмою</string>
+  <string name="error_fetching_nearby_places">Помилка отримання місць поблизу.</string>
 </resources>
