@@ -280,4 +280,5 @@
   <string name="image_uploaded_by">Uppladdad av: %1$s</string>
   <string name="share_app_title">Dela app</string>
   <string name="share_coordinates_not_present">Koordinater specificerades inte vid bildvalet</string>
+  <string name="error_fetching_nearby_places">Fel uppstod när platser i närheten hämtades.</string>
 </resources>

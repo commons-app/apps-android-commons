@@ -280,4 +280,5 @@
   <string name="image_uploaded_by">Yükleyen: %1$s</string>
   <string name="share_app_title">Uygulamayı Paylaş</string>
   <string name="share_coordinates_not_present">Koordinatlar görüntü seçimi sırasında belirlenmedi</string>
+  <string name="error_fetching_nearby_places">Yakındaki yerler alınırken hata oluştu.</string>
 </resources>
