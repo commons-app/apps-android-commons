@@ -27,6 +27,10 @@ public interface MediaWikiApi {
 
     String getEditToken() throws IOException;
 
+    String getWikidataCsrfToken() throws IOException;
+
+    String getCentralAuthToken() throws IOException;
+
     boolean fileExistsWithName(String fileName) throws IOException;
 
     boolean pageExists(String pageName) throws IOException;

@@ -298,11 +298,15 @@ public class UploadService extends HandlerService<Contribution> {
                 .subscribe(result -> {
                     if(result) {
                         wikidataEditListener.onSuccessfulWikidataEdit();
-                        ViewUtil.showLongToast(getBaseContext(), "Image added corresponding to wiki data entity successfully!");
+                        ViewUtil.showLongToast(getBaseContext(), getResources().getString(R.string.successful_wikidata_edit));
                     } else {
                         Timber.d("Unable to make wiki data edit for entity %s", contribution.getWikiDataEntityId());
+                        ViewUtil.showLongToast(getBaseContext(), getResources().getString(R.string.wikidata_edit_failure));
                     }
-                }, throwable -> Timber.e(throwable, "Error occurred while making claim"));
+                }, throwable -> {
+                    Timber.e(throwable, "Error occurred while making claim");
+                    ViewUtil.showLongToast(getBaseContext(), getResources().getString(R.string.wikidata_edit_failure));
+                });
     }
 
     /**

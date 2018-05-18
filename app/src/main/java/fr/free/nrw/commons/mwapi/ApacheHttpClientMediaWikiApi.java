@@ -212,6 +212,15 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
     }
 
     @Override
+    public String getCentralAuthToken() throws IOException {
+        String centralAuthToken = api.action("centralauthtoken")
+                .get()
+                .getString("/api/centralauthtoken/@centralauthtoken");
+        Timber.d("MediaWiki Central auth token is %s", centralAuthToken);
+        return centralAuthToken;
+    }
+
+    @Override
     public boolean fileExistsWithName(String fileName) throws IOException {
         return api.action("query")
                 .param("prop", "imageinfo")
@@ -366,6 +375,18 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
         return wikidataApi.getEditToken();
     }
 
+    @Override
+    public String getWikidataCsrfToken() throws IOException {
+        String wikidataCsrfToken = wikidataApi.action("query")
+                .param("action", "query")
+                .param("centralauthtoken", getCentralAuthToken())
+                .param("meta", "tokens")
+                .post()
+                .getString("/api/query/tokens/@csrftoken");
+        Timber.d("Wikidata csrf token is %s", wikidataCsrfToken);
+        return wikidataCsrfToken;
+    }
+
     /**
      * Creates a new claim using the wikidata API
      * https://www.mediawiki.org/wiki/Wikibase/API
@@ -381,7 +402,8 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
     public boolean wikidatCreateClaim(String entityId, String property, String snaktype, String value) throws IOException {
         ApiResult result = wikidataApi.action("wbcreateclaim")
                 .param("entity", entityId)
-                .param("token", getWikidataEditToken())
+                .param("centralauthtoken", getCentralAuthToken())
+                .param("token", getWikidataCsrfToken())
                 .param("snaktype", snaktype)
                 .param("property", property)
                 .param("value", value)
@@ -396,6 +418,8 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
 
         if (element != null && element.getAttribute("success").equals("1")) {
             return true;
+        } else {
+            Timber.e(result.getString("api/error/@code") + " " + result.getString("api/error/@info"));
         }
         return false;
     }
