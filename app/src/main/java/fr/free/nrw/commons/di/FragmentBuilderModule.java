@@ -17,9 +17,7 @@ import fr.free.nrw.commons.nearby.NearbyFragment;
 import fr.free.nrw.commons.nearby.NearbyListFragment;
 import fr.free.nrw.commons.nearby.NearbyMapFragment;
 import fr.free.nrw.commons.nearby.NoPermissionsFragment;
-import fr.free.nrw.commons.review.ReviewCategoryMissuseFragment;
-import fr.free.nrw.commons.review.ReviewLicenceViolationFragment;
-import fr.free.nrw.commons.review.ReviewOutOfContextFragment;
+import fr.free.nrw.commons.review.ReviewImageFragment;
 import fr.free.nrw.commons.settings.SettingsFragment;
 
 @Module
@@ -72,13 +70,6 @@ public abstract class FragmentBuilderModule {
     abstract BookmarkLocationsFragment bindBookmarkLocationListFragment();
 
     @ContributesAndroidInjector
-    abstract ReviewOutOfContextFragment bindReviewOutOfContextFragment();
-
-    @ContributesAndroidInjector
-    abstract ReviewLicenceViolationFragment bindReviewLicenceViolationFragment();
-
-
-    @ContributesAndroidInjector
-    abstract ReviewCategoryMissuseFragment bindReviewCategoryMissuseFragment();
+    abstract ReviewImageFragment bindReviewOutOfContextFragment();
 
 }

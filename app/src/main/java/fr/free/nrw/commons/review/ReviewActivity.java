@@ -15,6 +15,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
+import com.viewpagerindicator.CirclePageIndicator;
+
 import java.io.IOException;
 import java.util.List;
 
@@ -55,6 +57,9 @@ public class ReviewActivity extends AuthenticatedActivity {
     //private ReviewCallback reviewCallback;
     private ReviewController reviewController;
 
+    @BindView(R.id.reviewPagerIndicator)
+    public CirclePageIndicator pagerIndicator;
+
     @Override
     protected void onAuthCookieAcquired(String authCookie) {
 
@@ -78,6 +83,7 @@ public class ReviewActivity extends AuthenticatedActivity {
         reviewPagerAdapter = new ReviewPagerAdapter(getSupportFragmentManager());
         pager.setAdapter(reviewPagerAdapter);
         reviewPagerAdapter.getItem(0);
+        pagerIndicator.setViewPager(pager);
     }
 
     @Override
@@ -116,9 +122,9 @@ public class ReviewActivity extends AuthenticatedActivity {
     }
 
     private void updateImage(Media result) {
-
         reviewController.onImageRefreshed(result.getFilename()); //file name is updated
-        reviewPagerAdapter.getItem(0); //new fragment with this new filename created
+        reviewPagerAdapter.updateFilename();
+        pager.setCurrentItem(0);
     }
 
 
