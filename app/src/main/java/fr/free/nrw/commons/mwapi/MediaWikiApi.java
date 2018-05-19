@@ -75,6 +75,10 @@ public interface MediaWikiApi {
     @NonNull
     Single<Integer> getUploadCount(String userName);
 
+    boolean thank(String editToken, String revision) throws IOException;
+
+    String firstRevisionOfFile(String filename) throws IOException;
+
     interface ProgressListener {
         void onProgress(long transferred, long total);
     }

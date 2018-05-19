@@ -234,6 +234,19 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
     }
 
     @Override
+    public boolean thank(String editToken, String revision) throws IOException {
+        ApiResult res = api.action("thank")
+                .param("rev", revision)
+                .param("token", editToken)
+                .param("source", getUserAgent())
+                .post();
+        String r = res.getString("/api/result/@success");
+        // Does this correctly check the success/failure?
+        // The docs https://www.mediawiki.org/wiki/Extension:Thanks seems unclear about that.
+        return r.equals("success");
+    }
+
+    @Override
     @Nullable
     public String edit(String editToken, String processedPageContent, String filename, String summary) throws IOException {
         return api.action("edit")
@@ -443,6 +456,20 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
                 .param("titles", filename)
                 .get()
                 .getString("/api/query/pages/page/revisions/rev");
+    }
+
+    @Override
+    @Nullable
+    public String firstRevisionOfFile(String filename) throws IOException {
+        String res = api.action("query")
+                .param("prop", "revisions")
+                .param("rvprop", "timestamp|ids")
+                .param("titles", filename)
+                .param("rvdir", "newer")
+                .param("rvlimit", "1")
+                .get()
+                .getString("/api/query/pages/page/revisions/rev/@revid");
+        return res;
     }
 
     @Override
@@ -673,7 +700,6 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
                             // strip File: prefix
                             imageTitle = imageTitle.replace("File:", "");
                             media = new Media(imageTitle);
-                            //media = fetchMediaByFilename(fileName);
                         }
                     }
                 }
