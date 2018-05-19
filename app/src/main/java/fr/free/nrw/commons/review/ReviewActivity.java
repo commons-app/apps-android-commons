@@ -16,6 +16,7 @@ import android.view.MenuItem;
 import android.view.View;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.inject.Inject;
 
@@ -91,10 +92,9 @@ public class ReviewActivity extends AuthenticatedActivity {
 
         if (id == R.id.action_review_randomizer) {
             Observable.fromCallable(() -> {
+                Media result = null;
                 try {
-                    Media result = mwApi.getRecentRandomImage();
-                    reviewController.onImageRefreshed(result.getFilename()); //file name is updated
-                    reviewPagerAdapter.getItem(0); //new fragment with this new filename created
+                    result = mwApi.getRecentRandomImage();
 
                     //String thumBaseUrl = Utils.makeThumbBaseUrl(result.getFilename());
                     //reviewPagerAdapter.currentThumbBasedUrl = thumBaseUrl;
@@ -104,17 +104,22 @@ public class ReviewActivity extends AuthenticatedActivity {
                 } catch (IOException e) {
                     Log.d("review", e.toString());
                 }
-                return "Booga!";
+                return result;
             })
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe();
+                    .subscribe(this::updateImage);
             return true;
         }
 
         return super.onOptionsItemSelected(item);
     }
 
+    private void updateImage(Media result) {
+
+        reviewController.onImageRefreshed(result.getFilename()); //file name is updated
+        reviewPagerAdapter.getItem(0); //new fragment with this new filename created
+    }
 
 
     /**
@@ -130,9 +135,8 @@ public class ReviewActivity extends AuthenticatedActivity {
      * Consumers should be simply using this method to use this activity.
      * @param context
      * @param title Page title
-     * @param categoryName Name of the category for displaying its images
      */
-    public static void startYourself(Context context, String title, String categoryName) {
+    public static void startYourself(Context context, String title) {
         Intent reviewActivity = new Intent(context, ReviewActivity.class);
         context.startActivity(reviewActivity);
     }
@@ -143,7 +147,7 @@ public class ReviewActivity extends AuthenticatedActivity {
         void onSurveyFinished();
         void onImproperImageReported();
         void onLicenceViolationReported();
-        void oWrongCategoryReported();
+        void onWrongCategoryReported();
         void onThankSent();
     }
 }

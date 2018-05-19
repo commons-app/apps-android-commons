@@ -670,6 +670,8 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
                     if (imageTitle != null) {
                         boolean deletionStatus = pageExists("Commons:Deletion_requests/" + imageTitle);
                         if (!deletionStatus) {
+                            // strip File: prefix
+                            imageTitle = imageTitle.replace("File:", "");
                             media = new Media(imageTitle);
                             //media = fetchMediaByFilename(fileName);
                         }
