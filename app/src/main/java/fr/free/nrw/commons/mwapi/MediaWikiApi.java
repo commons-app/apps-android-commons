@@ -108,6 +108,10 @@ public interface MediaWikiApi {
 
     Single<CampaignResponseDTO> getCampaigns();
 
+    boolean thank(String editToken, String revision) throws IOException;
+
+    String firstRevisionOfFile(String filename) throws IOException;
+
     interface ProgressListener {
         void onProgress(long transferred, long total);
     }

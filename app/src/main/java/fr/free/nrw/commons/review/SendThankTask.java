@@ -19,26 +19,36 @@ import timber.log.Timber;
 import static android.support.v4.app.NotificationCompat.DEFAULT_ALL;
 import static android.support.v4.app.NotificationCompat.PRIORITY_HIGH;
 
-// Example code:
-// CheckCategoryTask deleteTask = new CheckCategoryTask(getActivity(), media);
+// example code:
+//
+//                media = new Media("File:Iru.png");
+//                        Observable.fromCallable(() -> mwApi.firstRevisionOfFile(media.getFilename()))
+//                        .subscribeOn(Schedulers.io())
+//                        .observeOn(AndroidSchedulers.mainThread())
+//                        .subscribe(revision -> {
+//                        SendThankTask task = new SendThankTask(getActivity(), media, revision);
+//                        task.execute();
+//                        });
 
-public class CheckCategoryTask extends AsyncTask<Void, Integer, Boolean> {
+public class SendThankTask extends AsyncTask<Void, Integer, Boolean> {
 
     @Inject
     MediaWikiApi mwApi;
     @Inject
     SessionManager sessionManager;
 
-    public static final int NOTIFICATION_CHECK_CATEGORY = 0x101;
+    public static final int NOTIFICATION_SEND_THANK = 0x102;
 
     private NotificationManager notificationManager;
     private NotificationCompat.Builder notificationBuilder;
     private Context context;
     private Media media;
+    private String revision;
 
-    public CheckCategoryTask(Context context, Media media){
+    public SendThankTask(Context context, Media media, String revision){
         this.context = context;
         this.media = media;
+        this.revision = revision;
     }
 
     @Override
@@ -52,7 +62,7 @@ public class CheckCategoryTask extends AsyncTask<Void, Integer, Boolean> {
         notificationBuilder = new NotificationCompat.Builder(context);
         Toast toast = new Toast(context);
         toast.setGravity(Gravity.CENTER,0,0);
-        toast = Toast.makeText(context, context.getString(R.string.check_category_toast, media.getDisplayTitle()), Toast.LENGTH_SHORT);
+        toast = Toast.makeText(context, context.getString(R.string.send_thank_toast, media.getDisplayTitle()), Toast.LENGTH_SHORT);
         toast.show();
     }
 
@@ -62,7 +72,6 @@ public class CheckCategoryTask extends AsyncTask<Void, Integer, Boolean> {
 
         String editToken;
         String authCookie;
-        String summary = context.getString(R.string.check_category_edit_summary);
 
         authCookie = sessionManager.getAuthCookie();
         mwApi.setAuthCookie(authCookie);
@@ -74,7 +83,8 @@ public class CheckCategoryTask extends AsyncTask<Void, Integer, Boolean> {
             }
             publishProgress(1);
 
-            mwApi.appendEdit(editToken, "\n{{subst:chc}}\n", media.getFilename(), summary);
+            mwApi.thank(editToken, revision);
+
             publishProgress(2);
         }
         catch (Exception e) {
@@ -88,19 +98,19 @@ public class CheckCategoryTask extends AsyncTask<Void, Integer, Boolean> {
     protected void onProgressUpdate (Integer... values){
         super.onProgressUpdate(values);
 
-        int[] messages = new int[]{R.string.getting_edit_token, R.string.check_category_adding_template};
+        int[] messages = new int[]{R.string.getting_edit_token, R.string.send_thank_send};
         String message = "";
         if (0 < values[0] && values[0] < messages.length) {
             message = context.getString(messages[values[0]]);
         }
 
-        notificationBuilder.setContentTitle(context.getString(R.string.check_category_notification_title, media.getDisplayTitle()))
+        notificationBuilder.setContentTitle(context.getString(R.string.send_thank_notification_title))
                 .setStyle(new NotificationCompat.BigTextStyle()
                         .bigText(message))
                 .setSmallIcon(R.drawable.ic_launcher)
                 .setProgress(messages.length, values[0], false)
                 .setOngoing(true);
-        notificationManager.notify(NOTIFICATION_CHECK_CATEGORY, notificationBuilder.build());
+        notificationManager.notify(NOTIFICATION_SEND_THANK, notificationBuilder.build());
     }
 
     @Override
@@ -109,12 +119,12 @@ public class CheckCategoryTask extends AsyncTask<Void, Integer, Boolean> {
         String title = "";
 
         if (result){
-            title = context.getString(R.string.check_category_success_title);
-            message = context.getString(R.string.check_category_success_message, media.getDisplayTitle());
+            title = context.getString(R.string.send_thank_success_title);
+            message = context.getString(R.string.send_thank_success_message, media.getDisplayTitle());
         }
         else {
-            title = context.getString(R.string.check_category_failure_title);
-            message = context.getString(R.string.check_category_failure_message, media.getDisplayTitle());
+            title = context.getString(R.string.send_thank_failure_title);
+            message = context.getString(R.string.send_thank_failure_message, media.getDisplayTitle());
         }
 
         notificationBuilder.setDefaults(DEFAULT_ALL)
@@ -125,6 +135,6 @@ public class CheckCategoryTask extends AsyncTask<Void, Integer, Boolean> {
                 .setProgress(0,0,false)
                 .setOngoing(false)
                 .setPriority(PRIORITY_HIGH);
-        notificationManager.notify(NOTIFICATION_CHECK_CATEGORY, notificationBuilder.build());
+        notificationManager.notify(NOTIFICATION_SEND_THANK, notificationBuilder.build());
     }
 }
