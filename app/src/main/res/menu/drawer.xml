@@ -15,11 +15,6 @@
             android:icon="@drawable/ic_star_black_24dp"
             android:title="@string/navigation_item_featured_images"/>
 
-        <item
-            android:id="@+id/action_review"
-            android:icon="@drawable/ic_check_black_24dp"
-            android:title="@string/navigation_item_review"/>
-
     </group>
     <group android:id="@+id/drawer_account">
         <item
