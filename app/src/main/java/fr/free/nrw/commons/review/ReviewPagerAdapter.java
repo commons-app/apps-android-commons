@@ -35,6 +35,11 @@ public class ReviewPagerAdapter extends FragmentStatePagerAdapter {
         }
     }
 
+    public void updateCategories() {
+        ReviewImageFragment categoryFragment = reviewImageFragments[ReviewImageFragment.CATEGORY];
+        categoryFragment.updateCategories(ReviewController.categories);
+    }
+
     @Override
     public Fragment getItem(int position) {
         Bundle bundle = new Bundle();
