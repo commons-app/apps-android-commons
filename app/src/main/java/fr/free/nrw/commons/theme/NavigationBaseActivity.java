@@ -164,7 +164,7 @@ public abstract class NavigationBaseActivity extends BaseActivity
 
             case R.id.action_review:
                 drawerLayout.closeDrawer(navigationView);
-                ReviewActivity.startYourself(this, getString(R.string.title_activity_featured_images), FEATURED_IMAGES_CATEGORY);
+                ReviewActivity.startYourself(this, getString(R.string.title_activity_review));
                 return true;
             default:
                 Timber.e("Unknown option [%s] selected from the navigation menu", itemId);

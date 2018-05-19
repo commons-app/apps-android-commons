@@ -130,9 +130,8 @@ public class ReviewActivity extends AuthenticatedActivity {
      * Consumers should be simply using this method to use this activity.
      * @param context
      * @param title Page title
-     * @param categoryName Name of the category for displaying its images
      */
-    public static void startYourself(Context context, String title, String categoryName) {
+    public static void startYourself(Context context, String title) {
         Intent reviewActivity = new Intent(context, ReviewActivity.class);
         context.startActivity(reviewActivity);
     }
@@ -143,7 +142,7 @@ public class ReviewActivity extends AuthenticatedActivity {
         void onSurveyFinished();
         void onImproperImageReported();
         void onLicenceViolationReported();
-        void oWrongCategoryReported();
+        void onWrongCategoryReported();
         void onThankSent();
     }
 }
