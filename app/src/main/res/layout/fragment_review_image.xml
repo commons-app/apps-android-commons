@@ -22,7 +22,7 @@
         android:layout_height="0dp"
         android:layout_weight="1.1"
         android:textAlignment="center"
-        android:textSize="32dp"
+        android:textSize="32sp"
         android:gravity="center_vertical"
         android:text="testing1"
         />
@@ -32,9 +32,20 @@
         android:layout_height="0dp"
         android:layout_weight="0.7"
         android:textAlignment="center"
-        android:textSize="24dp"
+        android:textSize="24sp"
         android:layout_marginBottom="15dp"
         android:gravity="center_vertical"
+        android:text="testing2"
+        />
+
+    <TextView
+        android:id="@+id/reviewCategories"
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.7"
+        android:textSize="24sp"
+        android:textAlignment="center"
         android:text="testing2"
         />
 
@@ -52,7 +63,7 @@
             android:layout_weight="1"
             android:background="@android:color/transparent"
             android:text="@string/yes"
-            android:textSize="20dp"
+            android:textSize="20sp"
             android:textColor="?attr/colorPrimaryDark"
             />
 
@@ -63,7 +74,7 @@
             android:background="@android:color/transparent"
             android:layout_weight="1"
             android:text="@string/no"
-            android:textSize="20dp"
+            android:textSize="20sp"
             android:textColor="?attr/colorPrimaryDark"
             />
 
