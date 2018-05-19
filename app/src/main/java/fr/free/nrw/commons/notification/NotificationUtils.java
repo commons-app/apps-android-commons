@@ -16,12 +16,13 @@ import javax.annotation.Nullable;
 import fr.free.nrw.commons.BuildConfig;
 import fr.free.nrw.commons.R;
 
-import static fr.free.nrw.commons.notification.NotificationType.THANK_YOU_EDIT;
 import static fr.free.nrw.commons.notification.NotificationType.UNKNOWN;
 
 public class NotificationUtils {
 
     private static final String COMMONS_WIKI = "commonswiki";
+    private static final String WIKIDATA_WIKI = "wikidatawiki";
+    private static final String WIKIPEDIA_WIKI = "enwiki";
 
     public static boolean isCommonsNotification(Node document) {
         if (document == null || !document.hasAttributes()) {
@@ -29,6 +30,22 @@ public class NotificationUtils {
         }
         Element element = (Element) document;
         return COMMONS_WIKI.equals(element.getAttribute("wiki"));
+    }
+
+    public static boolean isWikidataNotification(Node document) {
+        if (document == null || !document.hasAttributes()) {
+            return false;
+        }
+        Element element = (Element) document;
+        return WIKIDATA_WIKI.equals(element.getAttribute("wiki"));
+    }
+
+    public static boolean isWikipediaNotification(Node document) {
+        if (document == null || !document.hasAttributes()) {
+            return false;
+        }
+        Element element = (Element) document;
+        return WIKIPEDIA_WIKI.equals(element.getAttribute("wiki"));
     }
 
     public static NotificationType getNotificationType(Node document) {
@@ -69,9 +86,10 @@ public class NotificationUtils {
     }
 
     private static boolean isUsefulNotification(Node node) {
-        return isCommonsNotification(node)
-                && !getNotificationType(node).equals(UNKNOWN)
-                && !getNotificationType(node).equals(THANK_YOU_EDIT);
+        return (isCommonsNotification(node)
+                || isWikidataNotification(node)
+                || isWikipediaNotification(node))
+                && !getNotificationType(node).equals(UNKNOWN);
     }
 
     public static boolean isBundledNotification(Node document) {
@@ -97,7 +115,7 @@ public class NotificationUtils {
 
         switch (type) {
             case THANK_YOU_EDIT:
-                notificationText = context.getString(R.string.notifications_thank_you_edit);
+                notificationText = getThankYouEditDescription(document);
                 break;
             case EDIT_USER_TALK:
                 notificationText = getNotificationText(document);
@@ -143,6 +161,11 @@ public class NotificationUtils {
 
     private static String getMentionDescription(Node document) {
         Node body = getNode(getModel(document), "body");
+        return body != null ? body.getTextContent() : "";
+    }
+
+    private static String getThankYouEditDescription(Node document) {
+        Node body = getNode(getModel(document), "header");
         return body != null ? body.getTextContent() : "";
     }
 
