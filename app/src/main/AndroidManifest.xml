@@ -117,6 +117,10 @@
 
         <activity android:name="com.github.pedrovgs.lynx.LynxActivity"/>
 
+        <activity
+            android:name=".review.ReviewActivity"
+            android:label="@string/title_activity_review" />
+
         <service android:name=".upload.UploadService" />
         <service
             android:name=".auth.WikiAccountAuthenticatorService"
