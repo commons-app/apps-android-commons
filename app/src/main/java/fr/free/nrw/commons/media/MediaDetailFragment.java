@@ -349,6 +349,7 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
         }
     }
 
+    // TODO: refactor; see DeleteTask.askReasonAndExecute
     @OnClick(R.id.nominateDeletion)
     public void onDeleteButtonClicked(){
         //Reviewer correct me if i have misunderstood something over here
