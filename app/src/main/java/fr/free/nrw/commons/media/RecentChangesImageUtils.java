@@ -19,7 +19,7 @@ public class RecentChangesImageUtils {
                 // For log entries, we only want ones where old_revid is zero, indicating a new file
                 continue;
             }
-            imageTitle = ((Element)childNodes.item(i)).getAttribute("title");
+            imageTitle = e.getAttribute("title");
 
             for (String imageExtension : imageExtensions) {
                 if (imageTitle.toLowerCase().endsWith(imageExtension)) {

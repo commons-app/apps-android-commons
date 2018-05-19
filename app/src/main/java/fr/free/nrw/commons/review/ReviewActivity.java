@@ -78,26 +78,23 @@ public class ReviewActivity extends AuthenticatedActivity {
         return true;
     }
 
-    class rri implements Runnable {
-
-        @Override
-        public void run() {
-            android.os.Process.setThreadPriority(android.os.Process.THREAD_PRIORITY_BACKGROUND);
-            try {
-
-                Log.d("review", mwApi.getRecentRandomImage().getWikiSource());
-
-            } catch (IOException e) {
-                Log.d("review", e.toString());
-            }
-        }
-    }
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
 
         if (id == R.id.action_review_randomizer) {
-            new rri().run();
+            Observable.fromCallable(() -> {
+                try {
+
+                    Log.d("review", mwApi.getRecentRandomImage().getWikiSource());
+
+                } catch (IOException e) {
+                    Log.d("review", e.toString());
+                }
+                return "Booga!";
+            })
+                    .subscribeOn(Schedulers.io())
+                    .subscribe();
             return true;
         }
 
