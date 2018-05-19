@@ -259,6 +259,9 @@
   <string name="nominate_deletion">Nominate for Deletion</string>
   <string name="nominated_for_deletion">This image has been nominated for deletion.</string>
   <string name="nominated_see_more"><![CDATA[<u>See webpage for details</u>]]></string>
+  <string name="nominating_file_for_deletion">Nominating %1$s for deletion.</string>
+  <string name="nominating_for_deletion_status">Nominating file for deletion: %1$s</string>
+  <string name="nominated_see_more"><u>See webpage for details</u></string>
   <string name="view_browser">View in Browser</string>
   <string name="skip_login">Skip</string>
   <string name="navigation_item_login">Log in</string>
@@ -451,6 +454,20 @@ Upload your first media by touching the camera or gallery icon above.</string>
 
   <string name="this_function_needs_network_connection">This function requires network connection, please check your connection settings.</string>
   <string name="bad_token_error_proposed_solution">Upload failed due to issues with edit token. Please try logging out and in again. </string>
+  <string name="getting_edit_token">Getting token for editing</string>
+  <string name="check_category_adding_template">Adding template for category check</string>
+  <string name="check_category_notification_title">Requesting category check for %1$s</string>
+    <string name="check_category_edit_summary">Requesting category check</string>
+  <string name="check_category_success_title">Requesting category check: Success</string>
+  <string name="check_category_failure_title">Requesting category check: Failed</string>
+  <string name="check_category_success_message">Successfully requested category check for %1$s</string>
+  <string name="check_category_failure_message">Could not request category check for %1$s</string>
+  <string name="check_category_toast">Requesting category check for %1%s</string>
+  <string name="nominate_for_deletion_edit_file_page">Adding delete message to file</string>
+  <string name="nominate_for_deletion_done">Done</string>
+  <string name="nominate_for_deletion_notify_user">Notifying User on Talk page</string>
+  <string name="nominate_for_deletion_edit_deletion_request_log">Adding file to Delete requests log</string>
+  <string name="nominate_for_deletion_create_deletion_request">Creating Delete requests subpage</string>
 
   <string name="review_copyright">Is this a copyright violation?</string>
   <string name="review_category">Is this mis-categorized?</string>
