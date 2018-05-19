@@ -97,19 +97,19 @@ public class DeleteTask extends AsyncTask<Void, Integer, Boolean> {
             publishProgress(1);
 
             mwApi.prependEdit(editToken,fileDeleteString+"\n",
-                    media.getFilename(),summary);
+                    media.getFilename(), summary);
             publishProgress(2);
 
             mwApi.edit(editToken,subpageString+"\n",
-                    "Commons:Deletion_requests/"+media.getFilename(),summary);
+                    "Commons:Deletion_requests/"+media.getFilename(), summary);
             publishProgress(3);
 
             mwApi.appendEdit(editToken,logPageString+"\n",
-                    "Commons:Deletion_requests/"+date,summary);
+                    "Commons:Deletion_requests/"+date, summary);
             publishProgress(4);
 
             mwApi.appendEdit(editToken,userPageString+"\n",
-                    "User_Talk:"+sessionManager.getCurrentAccount().name,summary);
+                    "User_Talk:"+sessionManager.getCurrentAccount().name, summary);
             publishProgress(5);
         }
         catch (Exception e) {

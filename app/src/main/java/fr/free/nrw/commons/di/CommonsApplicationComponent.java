@@ -13,6 +13,7 @@ import fr.free.nrw.commons.contributions.ContributionsSyncAdapter;
 import fr.free.nrw.commons.delete.DeleteTask;
 import fr.free.nrw.commons.modifications.ModificationsSyncAdapter;
 import fr.free.nrw.commons.review.CheckCategoryTask;
+import fr.free.nrw.commons.review.SendThankTask;
 import fr.free.nrw.commons.settings.SettingsFragment;
 import fr.free.nrw.commons.nearby.PlaceRenderer;
 
@@ -40,6 +41,8 @@ public interface CommonsApplicationComponent extends AndroidInjector<Application
     void inject(DeleteTask deleteTask);
 
     void inject(CheckCategoryTask checkCategoryTask);
+
+    void inject(SendThankTask sendThankTask);
 
     void inject(SettingsFragment fragment);
 

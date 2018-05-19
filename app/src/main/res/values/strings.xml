@@ -302,6 +302,13 @@
   <string name="nominate_for_deletion_edit_deletion_request_log">Adding file to Delete requests log</string>
   <string name="nominate_for_deletion_create_deletion_request">Creating Delete requests subpage</string>
   <string name="notsure">Not sure</string>
+    <string name="send_thank_success_title">Sending Thanks: Success</string>
+  <string name="send_thank_success_message">Successfully sent thanks to %1$s</string>
+  <string name="send_thank_failure_message">Failed to send thanks %1$s</string>
+  <string name="send_thank_failure_title">Sending Thanks: Failure</string>
+  <string name="send_thank_send">Sending thanks</string>
+  <string name="send_thank_notification_title">Sending thanks</string>
+  <string name="send_thank_toast">Sending Thanks for %1$s</string>
 
   <string name="review_copyright">Is this a copyright violation?</string>
   <string name="review_category">Is this mis-categorized?</string>
