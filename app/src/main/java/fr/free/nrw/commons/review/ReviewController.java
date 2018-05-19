@@ -33,7 +33,7 @@ public class ReviewController implements ReviewActivity.ReviewCallback {
     }
 
     @Override
-    public void oWrongCategoryReported() {
+    public void onWrongCategoryReported() {
 
     }
 
