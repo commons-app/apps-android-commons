@@ -9,7 +9,7 @@ public class ReviewController implements ReviewActivity.ReviewCallback {
 
     @Override
     public void onImageRefreshed(String fileName) {
-        this.fileName = fileName;
+        ReviewController.fileName = fileName;
     }
 
     @Override

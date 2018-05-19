@@ -286,4 +286,8 @@
   <string name="share_coordinates_not_present">Coordinates were not specified during image selection</string>
   <string name="error_fetching_nearby_places">Error fetching nearby places.</string>
 
+  <string name="review_copyright">Is this a copyright violation?</string>
+  <string name="review_category">Is this mis-categorized?</string>
+  <string name="review_spam">Is this spam?</string>
+
 </resources>

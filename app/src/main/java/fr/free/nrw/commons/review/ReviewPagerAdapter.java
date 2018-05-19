@@ -11,16 +11,16 @@ import android.support.v4.app.FragmentStatePagerAdapter;
 
 public class ReviewPagerAdapter extends FragmentStatePagerAdapter {
     private int currentPosition;
-    ReviewOutOfContextFragment reviewOutOfContextFragment;
-    ReviewLicenceViolationFragment reviewLicenceViolationFragment;
-    ReviewCategoryMissuseFragment reviewCategoryMissuseFragment;
+    ReviewImageFragment[] reviewImageFragments;
 
 
     public ReviewPagerAdapter(FragmentManager fm) {
         super(fm);
-        reviewOutOfContextFragment = new ReviewOutOfContextFragment();
-        reviewLicenceViolationFragment = new ReviewLicenceViolationFragment();
-        reviewCategoryMissuseFragment = new ReviewCategoryMissuseFragment();
+        reviewImageFragments = new ReviewImageFragment[] {
+            new ReviewImageFragment(),
+            new ReviewImageFragment(),
+            new ReviewImageFragment()
+        };
     }
 
     @Override
@@ -28,22 +28,19 @@ public class ReviewPagerAdapter extends FragmentStatePagerAdapter {
         return 3;
     }
 
+    public void updateFilename() {
+        for (int i = 0; i < getCount(); i++) {
+            ReviewImageFragment fragment = reviewImageFragments[i];
+            fragment.update(i, ReviewController.fileName);
+        }
+    }
+
     @Override
     public Fragment getItem(int position) {
-        switch (position) {
-            case 0: // Fragment # 0 - This will show image
-                currentPosition = 0;
-                reviewOutOfContextFragment.update(currentPosition, ReviewController.fileName);
-                return reviewOutOfContextFragment;
-            case 1: // Fragment # 1 - This will show image
-                currentPosition = 1;
-                reviewLicenceViolationFragment.update(currentPosition, ReviewController.fileName);
-                return reviewLicenceViolationFragment;
-            default:// Fragment # 2-9 - Will show list
-                currentPosition = 2;
-                reviewCategoryMissuseFragment.update(currentPosition, ReviewController.fileName);
-                return reviewCategoryMissuseFragment;
-        }
+        Bundle bundle = new Bundle();
+        bundle.putInt("position", position);
+        reviewImageFragments[position].setArguments(bundle);
+        return reviewImageFragments[position];
     }
 
 }
