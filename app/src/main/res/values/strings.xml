@@ -241,6 +241,8 @@
   <string name="null_url">Error! URL not found</string>
   <string name="nominate_deletion">Nominate for Deletion</string>
   <string name="nominated_for_deletion">This image has been nominated for deletion.</string>
+  <string name="nominating_file_for_deletion">Nominating %1$s for deletion.</string>
+  <string name="nominating_for_deletion_status">Nominating file for deletion: %1$s</string>
   <string name="nominated_see_more"><u>See webpage for details</u></string>
   <string name="view_browser">View in Browser</string>
 
@@ -285,6 +287,20 @@
   <string name="share_app_title">Share App</string>
   <string name="share_coordinates_not_present">Coordinates were not specified during image selection</string>
   <string name="error_fetching_nearby_places">Error fetching nearby places.</string>
+  <string name="getting_edit_token">Getting token for editing</string>
+  <string name="check_category_adding_template">Adding template for category check</string>
+  <string name="check_category_notification_title">Requesting category check for %1$s</string>
+    <string name="check_category_edit_summary">Requesting category check</string>
+  <string name="check_category_success_title">Requesting category check: Success</string>
+  <string name="check_category_failure_title">Requesting category check: Failed</string>
+  <string name="check_category_success_message">Successfully requested category check for %1$s</string>
+  <string name="check_category_failure_message">Could not request category check for %1$s</string>
+  <string name="check_category_toast">Requesting category check for %1%s</string>
+  <string name="nominate_for_deletion_edit_file_page">Adding delete message to file</string>
+  <string name="nominate_for_deletion_done">Done</string>
+  <string name="nominate_for_deletion_notify_user">Notifying User on Talk page</string>
+  <string name="nominate_for_deletion_edit_deletion_request_log">Adding file to Delete requests log</string>
+  <string name="nominate_for_deletion_create_deletion_request">Creating Delete requests subpage</string>
 
   <string name="review_copyright">Is this a copyright violation?</string>
   <string name="review_category">Is this mis-categorized?</string>

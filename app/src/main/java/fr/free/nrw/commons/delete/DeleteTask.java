@@ -54,7 +54,7 @@ public class DeleteTask extends AsyncTask<Void, Integer, Boolean> {
         notificationBuilder = new NotificationCompat.Builder(context);
         Toast toast = new Toast(context);
         toast.setGravity(Gravity.CENTER,0,0);
-        toast = Toast.makeText(context,"Trying to nominate "+media.getDisplayTitle()+ " for deletion",Toast.LENGTH_SHORT);
+        toast = Toast.makeText(context,"Trying to nominate "+media.getDisplayTitle()+ " for deletion", Toast.LENGTH_SHORT);
         toast.show();
     }
 
@@ -64,7 +64,7 @@ public class DeleteTask extends AsyncTask<Void, Integer, Boolean> {
 
         String editToken;
         String authCookie;
-        String summary = "Nominating " + media.getFilename() +" for deletion.";
+        String summary = context.getString(R.string.nominating_file_for_deletion, media.getFilename());
 
         authCookie = sessionManager.getAuthCookie();
         mwApi.setAuthCookie(authCookie);
@@ -123,29 +123,21 @@ public class DeleteTask extends AsyncTask<Void, Integer, Boolean> {
     protected void onProgressUpdate (Integer... values){
         super.onProgressUpdate(values);
 
+        int[] messages = new int[]{
+                R.string.getting_edit_token,
+                R.string.nominate_for_deletion_edit_file_page,
+                R.string.nominate_for_deletion_create_deletion_request,
+                R.string.nominate_for_deletion_edit_deletion_request_log,
+                R.string.nominate_for_deletion_notify_user,
+                R.string.nominate_for_deletion_done
+        };
+
         String message = "";
-        switch (values[0]){
-            case 0:
-                message = "Getting token";
-                break;
-            case 1:
-                message = "Adding delete message to file";
-                break;
-            case 2:
-                message = "Creating Delete requests sub-page";
-                break;
-            case 3:
-                message = "Adding file to Delete requests log";
-                break;
-            case 4:
-                message = "Notifying User on Talk page";
-                break;
-            case 5:
-                message = "Done";
-                break;
+        if (0 < values[0] && values[0] < messages.length) {
+            message = context.getString(messages[values[0]]);
         }
 
-        notificationBuilder.setContentTitle("Nominating "+media.getDisplayTitle()+" for deletion")
+        notificationBuilder.setContentTitle(context.getString(R.string.nominating_file_for_deletion, media.getFilename()))
                 .setStyle(new NotificationCompat.BigTextStyle()
                         .bigText(message))
                 .setSmallIcon(R.drawable.ic_launcher)
