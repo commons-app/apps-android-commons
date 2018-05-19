@@ -4,18 +4,28 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 
+import android.os.Handler;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.widget.Toolbar;
 
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+
+import java.io.IOException;
+
+import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.auth.AuthenticatedActivity;
+import fr.free.nrw.commons.mwapi.MediaWikiApi;
+import io.reactivex.Observable;
+import io.reactivex.schedulers.Schedulers;
 
 /**
  * Created by root on 18.05.2018.
@@ -32,6 +42,9 @@ public class ReviewActivity extends AuthenticatedActivity {
 
     @BindView(R.id.reviewPager)
     ViewPager pager;
+
+    @Inject
+    MediaWikiApi mwApi;
 
     public static final int MAX_NUM = 4;
     private ReviewPagerAdapter reviewPagerAdapter;
@@ -69,7 +82,19 @@ public class ReviewActivity extends AuthenticatedActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
 
-        if (id == R.id.action_review) {
+        if (id == R.id.action_review_randomizer) {
+            Observable.fromCallable(() -> {
+                try {
+
+                    Log.d("review", mwApi.getRecentRandomImage().getWikiSource());
+
+                } catch (IOException e) {
+                    Log.d("review", e.toString());
+                }
+                return "Booga!";
+            })
+                    .subscribeOn(Schedulers.io())
+                    .subscribe();
             return true;
         }
 

@@ -38,12 +38,14 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 import java.util.concurrent.Callable;
+import java.util.Random;
 
 import fr.free.nrw.commons.BuildConfig;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.PageTitle;
 import fr.free.nrw.commons.category.CategoryImageUtils;
 import fr.free.nrw.commons.category.QueryContinue;
+import fr.free.nrw.commons.media.RecentChangesImageUtils;
 import fr.free.nrw.commons.notification.Notification;
 import fr.free.nrw.commons.notification.NotificationUtils;
 import in.yuvi.http.fluent.Http;
@@ -60,6 +62,14 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
     private String wikiMediaToolforgeUrl = "https://tools.wmflabs.org/";
 
     private static final String THUMB_SIZE = "640";
+    // Give up if no random recent image found after 5 tries
+    private static final int MAX_RANDOM_TRIES = 5;
+    // Random image request is for some time in the past 30 days
+    private static final int RANDOM_SECONDS = 60 * 60 * 24 * 30;
+    // Assuming MW always gives me UTC
+    private static final SimpleDateFormat isoFormat =
+            new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'", Locale.ENGLISH);
+    private static final String FILE_NAMESPACE = "6";
     private AbstractHttpClient httpClient;
     private MWApi api;
     private Context context;
@@ -616,11 +626,54 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
     }
 
     private Date parseMWDate(String mwDate) {
-        SimpleDateFormat isoFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'", Locale.ENGLISH); // Assuming MW always gives me UTC
         try {
             return isoFormat.parse(mwDate);
         } catch (ParseException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    private String formatMWDate(Date date) {
+        return isoFormat.format(date);
+    }
+
+    public MediaResult getRecentRandomImage() throws IOException {
+        MediaResult media = null;
+        int tries = 0;
+        Random r = new Random();
+
+        while (media == null && tries < MAX_RANDOM_TRIES) {
+            Date now = new Date();
+            Date startDate = new Date(now.getTime() - r.nextInt(RANDOM_SECONDS) * 1000L);
+            ApiResult apiResult = null;
+            try {
+                MWApi.RequestBuilder requestBuilder = api.action("query")
+                        .param("list", "recentchanges")
+                        .param("rcstart", formatMWDate(startDate))
+                        .param("rcnamespace", FILE_NAMESPACE)
+                        .param("rcprop", "title|ids")
+                        .param("rctype", "new|log")
+                        .param("rctoponly", "1");
+
+                apiResult = requestBuilder.get();
+            } catch (IOException e) {
+                Timber.e("Failed to obtain recent random", e);
+            }
+            if (apiResult != null) {
+                ApiResult recentChangesNode = apiResult.getNode("/api/query/recentchanges");
+                if (recentChangesNode != null
+                        && recentChangesNode.getDocument() != null
+                        && recentChangesNode.getDocument().getChildNodes() != null
+                        && recentChangesNode.getDocument().getChildNodes().getLength() > 0) {
+                    NodeList childNodes = recentChangesNode.getDocument().getChildNodes();
+                    String imageTitle = RecentChangesImageUtils.findImageInRecentChanges(childNodes);
+                    if (imageTitle != null) {
+                        media = fetchMediaByFilename(imageTitle);
+                    }
+                }
+            }
+            tries++;
+        }
+        return media;
     }
 }
