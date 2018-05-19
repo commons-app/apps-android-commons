@@ -6,6 +6,7 @@
     android:weightSum="5"
     android:orientation="vertical"
     android:background="@color/main_background_light"
+    android:gravity="center_horizontal"
     >
 
     <com.facebook.drawee.view.SimpleDraweeView
@@ -16,17 +17,20 @@
         android:src="@drawable/commons_logo_large"
         />
     <TextView
-        android:id="@+id/testingText"
+        android:id="@+id/reviewQuestion"
         android:layout_width="match_parent"
         android:textColor="@android:color/black"
         android:layout_height="0dp"
         android:layout_weight="0.7"
+        android:textAlignment="center"
         android:text="testing1"
         />
     <TextView
+        android:id="@+id/reviewQuestionContext"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="0.7"
+        android:textAlignment="center"
         android:text="testing2"
         />
 
@@ -34,26 +38,22 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="0.6"
-        android:weightSum="3"
+        android:weightSum="2"
         android:orientation="horizontal">
 
         <Button
             android:id="@+id/yesButton"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1"/>
+            android:layout_weight="1"
+            android:text="@string/yes"/>
 
         <Button
             android:id="@+id/noButton"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1"/>
-
-        <Button
-            android:id="@+id/notSureButton"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"/>
+            android:layout_weight="1"
+            android:text="@string/no"/>
 
     </LinearLayout>
 
