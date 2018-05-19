@@ -78,4 +78,7 @@ public interface MediaWikiApi {
     interface ProgressListener {
         void onProgress(long transferred, long total);
     }
+
+    @Nullable
+    MediaResult getRecentRandomImage() throws IOException;
 }
