@@ -3,10 +3,12 @@ package fr.free.nrw.commons.review;
 import android.app.AlertDialog;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.TableLayout;
 import android.widget.TextView;
 
 import com.facebook.drawee.view.SimpleDraweeView;
@@ -47,6 +49,7 @@ public class ReviewImageFragment extends CommonsDaggerSupportFragment {
             if (catsView != null) {
                 ((TextView) catsView).setText(catString);
             }
+
         }
 
         @Override
@@ -61,6 +64,8 @@ public class ReviewImageFragment extends CommonsDaggerSupportFragment {
             View layoutView = inflater.inflate(R.layout.fragment_review_image, container,
                     false);
             View textView = layoutView.findViewById(R.id.reviewQuestion);
+            View textViewQuestion = layoutView.findViewById(R.id.reviewQuestion);
+            View textViewQuestionContext = layoutView.findViewById(R.id.reviewQuestionContext);
             catsView = layoutView.findViewById(R.id.reviewCategories);
             String question;
             switch(position) {
@@ -68,6 +73,8 @@ public class ReviewImageFragment extends CommonsDaggerSupportFragment {
                     question = getString(R.string.review_copyright);
                     break;
                 case CATEGORY:
+                    textViewQuestion.setLayoutParams(new TableLayout.LayoutParams(TableLayout.LayoutParams.WRAP_CONTENT, TableLayout.LayoutParams.WRAP_CONTENT, 0.35f));
+                    textViewQuestionContext.setLayoutParams(new TableLayout.LayoutParams(TableLayout.LayoutParams.WRAP_CONTENT, TableLayout.LayoutParams.WRAP_CONTENT, 0.35f));
                     question = getString(R.string.review_category);
                     catsView.setVisibility(View.VISIBLE);
                     break;
@@ -88,5 +95,4 @@ public class ReviewImageFragment extends CommonsDaggerSupportFragment {
             }
             return layoutView;
         }
-
 }
