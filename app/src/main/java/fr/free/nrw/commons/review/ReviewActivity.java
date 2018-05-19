@@ -3,9 +3,12 @@ package fr.free.nrw.commons.review;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+
 import android.support.design.widget.NavigationView;
+import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.widget.Toolbar;
+
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -13,7 +16,6 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.auth.AuthenticatedActivity;
-import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
 
 /**
  * Created by root on 18.05.2018.
@@ -27,6 +29,12 @@ public class ReviewActivity extends AuthenticatedActivity {
     NavigationView navigationView;
     @BindView(R.id.drawer_layout)
     DrawerLayout drawerLayout;
+
+    @BindView(R.id.reviewPager)
+    ViewPager pager;
+
+    public static final int MAX_NUM = 4;
+    private ReviewPagerAdapter reviewPagerAdapter;
 
     @Override
     protected void onAuthCookieAcquired(String authCookie) {
@@ -43,8 +51,12 @@ public class ReviewActivity extends AuthenticatedActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_review);
         ButterKnife.bind(this);
-
         initDrawer();
+
+        reviewPagerAdapter = new ReviewPagerAdapter(getSupportFragmentManager());
+        pager.setAdapter(reviewPagerAdapter);
+        //pager.setAdapter(adapter);
+        reviewPagerAdapter.getItem(0);
     }
 
     @Override
@@ -65,6 +77,15 @@ public class ReviewActivity extends AuthenticatedActivity {
     }
 
     /**
+     * References ReviewPagerAdapter to null before the activity is destroyed
+     */
+    @Override
+    public void onDestroy() {
+        //adapter.setCallback(null);
+        super.onDestroy();
+    }
+
+    /**
      * Consumers should be simply using this method to use this activity.
      * @param context
      * @param title Page title
@@ -74,4 +95,21 @@ public class ReviewActivity extends AuthenticatedActivity {
         Intent reviewActivity = new Intent(context, ReviewActivity.class);
         context.startActivity(reviewActivity);
     }
+/*
+    @Override
+    public void onYesClicked() {
+        Log.d("deneme","onYesClicked");
+    }
+
+    @Override
+    public void onNoClicked() {
+        Log.d("deneme","onNoClicked");
+
+    }
+
+    @Override
+    public void onNotSureClicked() {
+        Log.d("deneme","onNotSureClicked");
+
+    }*/
 }
