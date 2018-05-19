@@ -10,6 +10,8 @@ import fr.free.nrw.commons.media.MediaDetailPagerFragment;
 import fr.free.nrw.commons.nearby.NearbyListFragment;
 import fr.free.nrw.commons.nearby.NearbyMapFragment;
 import fr.free.nrw.commons.nearby.NoPermissionsFragment;
+import fr.free.nrw.commons.review.ReviewCategoryMissuseFragment;
+import fr.free.nrw.commons.review.ReviewLicenceViolationFragment;
 import fr.free.nrw.commons.review.ReviewOutOfContextFragment;
 import fr.free.nrw.commons.settings.SettingsFragment;
 import fr.free.nrw.commons.upload.MultipleUploadListFragment;
@@ -54,5 +56,12 @@ public abstract class FragmentBuilderModule {
 
     @ContributesAndroidInjector
     abstract ReviewOutOfContextFragment bindReviewOutOfContextFragment();
+
+    @ContributesAndroidInjector
+    abstract ReviewLicenceViolationFragment bindReviewLicenceViolationFragment();
+
+
+    @ContributesAndroidInjector
+    abstract ReviewCategoryMissuseFragment bindReviewCategoryMissuseFragment();
 
 }

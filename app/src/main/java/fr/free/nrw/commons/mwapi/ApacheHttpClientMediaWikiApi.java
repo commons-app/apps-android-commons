@@ -637,8 +637,8 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
         return isoFormat.format(date);
     }
 
-    public MediaResult getRecentRandomImage() throws IOException {
-        MediaResult media = null;
+    public Media getRecentRandomImage() throws IOException {
+        Media media = null;
         int tries = 0;
         Random r = new Random();
 
@@ -668,7 +668,11 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
                     NodeList childNodes = recentChangesNode.getDocument().getChildNodes();
                     String imageTitle = RecentChangesImageUtils.findImageInRecentChanges(childNodes);
                     if (imageTitle != null) {
-                        media = fetchMediaByFilename(imageTitle);
+                        boolean deletionStatus = pageExists("Commons:Deletion_requests/" + imageTitle);
+                        if (!deletionStatus) {
+                            media = new Media(imageTitle);
+                            //media = fetchMediaByFilename(fileName);
+                        }
                     }
                 }
             }
