@@ -113,5 +113,5 @@ public interface MediaWikiApi {
     }
 
     @Nullable
-    MediaResult getRecentRandomImage() throws IOException;
+    Media getRecentRandomImage() throws IOException;
 }

@@ -7,7 +7,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.facebook.drawee.view.SimpleDraweeView;
+
 import fr.free.nrw.commons.R;
+import fr.free.nrw.commons.Utils;
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
 
 /**
@@ -17,30 +20,46 @@ import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
 public class ReviewOutOfContextFragment extends CommonsDaggerSupportFragment {
 
         int position;
+        String fileName;
 
-        static ReviewOutOfContextFragment init(int val) {
-            ReviewOutOfContextFragment truitonFrag = new ReviewOutOfContextFragment();
+        static ReviewOutOfContextFragment init(int val, String fileName) {
+            ReviewOutOfContextFragment fragment = new ReviewOutOfContextFragment();
             // Supply val input as an argument.
             Bundle args = new Bundle();
             args.putInt("val", val);
-            truitonFrag.setArguments(args);
-            return truitonFrag;
+            args.putString("fileName", fileName);
+            fragment.setArguments(args);
+            if (fileName != null) {
+                //updateFragment(val, file);
+            }
+            return fragment;
         }
+
+
 
         @Override
         public void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
             position = getArguments() != null ? getArguments().getInt("val") : 1;
+            fileName = getArguments() != null ? getArguments().getString("fileName") : "";
+
         }
 
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
-            View layoutView = inflater.inflate(R.layout.out_of_context_question_layout, container,
+            View layoutView = inflater.inflate(R.layout.review_out_of_context, container,
                     false);
             View textView = layoutView.findViewById(R.id.testingText);
+
+            if (fileName!= null) {
+                SimpleDraweeView simpleDraweeView = layoutView.findViewById(R.id.imageView);
+                simpleDraweeView.setImageURI(Utils.makeThumbBaseUrl(fileName));
+            }
+
             ((TextView) textView).setText("Fragment #" + position);
             Log.d("deneme","Fragment #" + position);
             return layoutView;
         }
+
 }

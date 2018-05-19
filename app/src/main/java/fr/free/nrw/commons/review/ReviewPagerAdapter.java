@@ -10,6 +10,9 @@ import android.support.v4.app.FragmentStatePagerAdapter;
  */
 
 public class ReviewPagerAdapter extends FragmentStatePagerAdapter {
+    private int currentPosition;
+    ReviewOutOfContextFragment reviewOutOfContextFragment;
+
 
     public ReviewPagerAdapter(FragmentManager fm) {
         super(fm);
@@ -24,11 +27,15 @@ public class ReviewPagerAdapter extends FragmentStatePagerAdapter {
     public Fragment getItem(int position) {
         switch (position) {
             case 0: // Fragment # 0 - This will show image
-                return ReviewOutOfContextFragment.init(position);
+                currentPosition = 0;
+                return ReviewOutOfContextFragment.init(position, ReviewController.fileName);
             case 1: // Fragment # 1 - This will show image
-                return ReviewOutOfContextFragment.init(position);
+                currentPosition = 1;
+                return ReviewLicenceViolationFragment.init(position, ReviewController.fileName);
             default:// Fragment # 2-9 - Will show list
-                return ReviewOutOfContextFragment.init(position);
+                currentPosition = 2;
+                return ReviewCategoryMissuseFragment.init(position, ReviewController.fileName);
         }
     }
+
 }

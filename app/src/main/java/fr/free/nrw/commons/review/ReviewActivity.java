@@ -21,8 +21,11 @@ import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.R;
+import fr.free.nrw.commons.Utils;
 import fr.free.nrw.commons.auth.AuthenticatedActivity;
+import fr.free.nrw.commons.mwapi.MediaResult;
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
 import io.reactivex.Observable;
 import io.reactivex.schedulers.Schedulers;
@@ -43,11 +46,12 @@ public class ReviewActivity extends AuthenticatedActivity {
     @BindView(R.id.reviewPager)
     ViewPager pager;
 
-    @Inject
-    MediaWikiApi mwApi;
+    @Inject MediaWikiApi mwApi;
 
-    public static final int MAX_NUM = 4;
     private ReviewPagerAdapter reviewPagerAdapter;
+
+    //private ReviewCallback reviewCallback;
+    private ReviewController reviewController;
 
     @Override
     protected void onAuthCookieAcquired(String authCookie) {
@@ -66,9 +70,11 @@ public class ReviewActivity extends AuthenticatedActivity {
         ButterKnife.bind(this);
         initDrawer();
 
+        reviewController = new ReviewController();
+
+
         reviewPagerAdapter = new ReviewPagerAdapter(getSupportFragmentManager());
         pager.setAdapter(reviewPagerAdapter);
-        //pager.setAdapter(adapter);
         reviewPagerAdapter.getItem(0);
     }
 
@@ -85,8 +91,14 @@ public class ReviewActivity extends AuthenticatedActivity {
         if (id == R.id.action_review_randomizer) {
             Observable.fromCallable(() -> {
                 try {
+                    Media result = mwApi.getRecentRandomImage();
+                    reviewController.onImageRefreshed(result.getFilename()); //file name is updated
+                    reviewPagerAdapter.getItem(0); //new fragment with this new filename created
 
-                    Log.d("review", mwApi.getRecentRandomImage().getWikiSource());
+                    //String thumBaseUrl = Utils.makeThumbBaseUrl(result.getFilename());
+                    //reviewPagerAdapter.currentThumbBasedUrl = thumBaseUrl;
+
+                    //Log.d("review", result.getWikiSource());
 
                 } catch (IOException e) {
                     Log.d("review", e.toString());
@@ -120,21 +132,14 @@ public class ReviewActivity extends AuthenticatedActivity {
         Intent reviewActivity = new Intent(context, ReviewActivity.class);
         context.startActivity(reviewActivity);
     }
-/*
-    @Override
-    public void onYesClicked() {
-        Log.d("deneme","onYesClicked");
+
+    interface ReviewCallback {
+        void onImageRefreshed(String itemTitle);
+        void onQuestionChanged();
+        void onSurveyFinished();
+        void onImproperImageReported();
+        void onLicenceViolationReported();
+        void oWrongCategoryReported();
+        void onThankSent();
     }
-
-    @Override
-    public void onNoClicked() {
-        Log.d("deneme","onNoClicked");
-
-    }
-
-    @Override
-    public void onNotSureClicked() {
-        Log.d("deneme","onNotSureClicked");
-
-    }*/
 }
