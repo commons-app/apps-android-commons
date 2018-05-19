@@ -46,12 +46,7 @@ import fr.free.nrw.commons.delete.DeleteTask;
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
 import fr.free.nrw.commons.location.LatLng;
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
-import fr.free.nrw.commons.review.CheckCategoryTask;
-import fr.free.nrw.commons.review.SendThankTask;
 import fr.free.nrw.commons.ui.widget.CompatTextView;
-import io.reactivex.Observable;
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.schedulers.Schedulers;
 import timber.log.Timber;
 
 import static android.view.View.GONE;
@@ -362,7 +357,6 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
         alert.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int whichButton) {
                 String reason = input.getText().toString();
-
                 DeleteTask deleteTask = new DeleteTask(getActivity(), media, reason);
                 deleteTask.execute();
                 enableDeleteButton(false);

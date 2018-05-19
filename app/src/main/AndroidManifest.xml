@@ -96,10 +96,6 @@
             android:label="@string/title_activity_featured_images"
             android:parentActivityName=".contributions.ContributionsActivity" />
 
-        <activity
-            android:name=".review.ReviewActivity"
-            android:label="@string/title_activity_review" />
-
         <service android:name=".upload.UploadService" />
 
         <service

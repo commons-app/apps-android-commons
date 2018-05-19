@@ -24,7 +24,6 @@ import javax.xml.parsers.ParserConfigurationException;
 import fr.free.nrw.commons.location.LatLng;
 import fr.free.nrw.commons.mwapi.MediaResult;
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
-import fr.free.nrw.commons.utils.MediaDataExtractorUtil;
 import timber.log.Timber;
 
 /**
@@ -72,11 +71,26 @@ public class MediaDataExtractor {
         MediaResult result = mediaWikiApi.fetchMediaByFilename(filename);
 
         // In-page category links are extracted from source, as XML doesn't cover [[links]]
-        categories = MediaDataExtractorUtil.extractCategories(result.getWikiSource());
+        extractCategories(result.getWikiSource());
 
         // Description template info is extracted from preprocessor XML
         processWikiParseTree(result.getParseTreeXmlSource(), licenseList);
         fetched = true;
+    }
+
+    /**
+     * We could fetch all category links from API, but we actually only want the ones
+     * directly in the page source so they're editable. In the future this may change.
+     *
+     * @param source wikitext source code
+     */
+    private void extractCategories(String source) {
+        Pattern regex = Pattern.compile("\\[\\[\\s*Category\\s*:([^]]*)\\s*\\]\\]", Pattern.CASE_INSENSITIVE);
+        Matcher matcher = regex.matcher(source);
+        while (matcher.find()) {
+            String cat = matcher.group(1).trim();
+            categories.add(cat);
+        }
     }
 
     private void processWikiParseTree(String source, LicenseList licenseList) throws IOException {
