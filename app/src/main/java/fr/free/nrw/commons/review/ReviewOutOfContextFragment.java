@@ -19,30 +19,25 @@ import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
 
 public class ReviewOutOfContextFragment extends CommonsDaggerSupportFragment {
 
-        int position;
-        String fileName;
+        private int position;
+        private String fileName;
+        private View textView;
+        private SimpleDraweeView simpleDraweeView;
 
-        static ReviewOutOfContextFragment init(int val, String fileName) {
-            ReviewOutOfContextFragment fragment = new ReviewOutOfContextFragment();
-            // Supply val input as an argument.
-            Bundle args = new Bundle();
-            args.putInt("val", val);
-            args.putString("fileName", fileName);
-            fragment.setArguments(args);
-            if (fileName != null) {
-                //updateFragment(val, file);
+        public void update(int position, String fileName) {
+            this.position = position;
+            this.fileName = fileName;
+
+            if (simpleDraweeView!=null) {
+                simpleDraweeView.setImageURI(Utils.makeThumbBaseUrl(fileName));
             }
-            return fragment;
         }
-
-
 
         @Override
         public void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
-            position = getArguments() != null ? getArguments().getInt("val") : 1;
-            fileName = getArguments() != null ? getArguments().getString("fileName") : "";
-
+            //position = getArguments() != null ? getArguments().getInt("val") : 1;
+            //fileName = getArguments() != null ? getArguments().getString("fileName") : " ";
         }
 
         @Override
@@ -50,10 +45,10 @@ public class ReviewOutOfContextFragment extends CommonsDaggerSupportFragment {
                                  Bundle savedInstanceState) {
             View layoutView = inflater.inflate(R.layout.review_out_of_context, container,
                     false);
-            View textView = layoutView.findViewById(R.id.testingText);
+            textView = layoutView.findViewById(R.id.testingText);
 
+            simpleDraweeView = layoutView.findViewById(R.id.imageView);
             if (fileName!= null) {
-                SimpleDraweeView simpleDraweeView = layoutView.findViewById(R.id.imageView);
                 simpleDraweeView.setImageURI(Utils.makeThumbBaseUrl(fileName));
             }
 

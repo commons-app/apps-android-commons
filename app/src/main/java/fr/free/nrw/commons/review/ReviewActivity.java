@@ -28,6 +28,7 @@ import fr.free.nrw.commons.auth.AuthenticatedActivity;
 import fr.free.nrw.commons.mwapi.MediaResult;
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
 import io.reactivex.Observable;
+import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 
 /**
@@ -106,12 +107,15 @@ public class ReviewActivity extends AuthenticatedActivity {
                 return "Booga!";
             })
                     .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
                     .subscribe();
             return true;
         }
 
         return super.onOptionsItemSelected(item);
     }
+
+
 
     /**
      * References ReviewPagerAdapter to null before the activity is destroyed
