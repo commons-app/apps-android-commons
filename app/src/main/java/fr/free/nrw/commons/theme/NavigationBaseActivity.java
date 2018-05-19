@@ -39,6 +39,7 @@ import fr.free.nrw.commons.contributions.MainActivity;
 import fr.free.nrw.commons.category.CategoryImagesActivity;
 import fr.free.nrw.commons.bookmarks.BookmarksActivity;
 import fr.free.nrw.commons.notification.NotificationActivity;
+import fr.free.nrw.commons.review.ReviewActivity;
 import fr.free.nrw.commons.settings.SettingsActivity;
 import timber.log.Timber;
 
@@ -226,6 +227,11 @@ public abstract class NavigationBaseActivity extends BaseActivity
             case R.id.action_bookmarks:
                 drawerLayout.closeDrawer(navigationView);
                 BookmarksActivity.startYourself(this);
+                return true;
+
+            case R.id.action_review:
+                drawerLayout.closeDrawer(navigationView);
+                ReviewActivity.startYourself(this, getString(R.string.title_activity_featured_images), FEATURED_IMAGES_CATEGORY);
                 return true;
             default:
                 Timber.e("Unknown option [%s] selected from the navigation menu", itemId);
