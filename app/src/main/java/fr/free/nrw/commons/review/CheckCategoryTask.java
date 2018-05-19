@@ -22,6 +22,7 @@ import static android.support.v4.app.NotificationCompat.PRIORITY_HIGH;
 // Example code:
 // CheckCategoryTask deleteTask = new CheckCategoryTask(getActivity(), media);
 
+// TODO: refactor; see DeleteTask and SendThankTask
 public class CheckCategoryTask extends AsyncTask<Void, Integer, Boolean> {
 
     @Inject
