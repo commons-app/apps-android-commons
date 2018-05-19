@@ -16,6 +16,8 @@ import fr.free.nrw.commons.media.MediaDetailPagerFragment;
 import fr.free.nrw.commons.nearby.NearbyFragment;
 import fr.free.nrw.commons.nearby.NearbyListFragment;
 import fr.free.nrw.commons.nearby.NearbyMapFragment;
+import fr.free.nrw.commons.nearby.NoPermissionsFragment;
+import fr.free.nrw.commons.review.ReviewOutOfContextFragment;
 import fr.free.nrw.commons.settings.SettingsFragment;
 
 @Module
@@ -66,5 +68,8 @@ public abstract class FragmentBuilderModule {
 
     @ContributesAndroidInjector
     abstract BookmarkLocationsFragment bindBookmarkLocationListFragment();
+
+    @ContributesAndroidInjector
+    abstract ReviewOutOfContextFragment bindReviewOutOfContextFragment();
 
 }
