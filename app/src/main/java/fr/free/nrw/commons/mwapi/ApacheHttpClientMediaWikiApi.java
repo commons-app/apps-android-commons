@@ -673,7 +673,6 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
                             // strip File: prefix
                             imageTitle = imageTitle.replace("File:", "");
                             media = new Media(imageTitle);
-                            //media = fetchMediaByFilename(fileName);
                         }
                     }
                 }
