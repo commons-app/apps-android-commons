@@ -14,6 +14,7 @@ import fr.free.nrw.commons.category.CategoryImagesActivity;
 import fr.free.nrw.commons.explore.SearchActivity;
 
 import fr.free.nrw.commons.notification.NotificationActivity;
+import fr.free.nrw.commons.review.ReviewActivity;
 import fr.free.nrw.commons.settings.SettingsActivity;
 import fr.free.nrw.commons.upload.UploadActivity;
 
@@ -60,4 +61,7 @@ public abstract class ActivityBuilderModule {
     @ContributesAndroidInjector
     abstract BookmarksActivity bindBookmarksActivity();
 
+
+    @ContributesAndroidInjector
+    abstract ReviewActivity bindReviewActivity();
 }
