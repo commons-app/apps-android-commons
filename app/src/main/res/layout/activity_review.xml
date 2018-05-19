@@ -23,17 +23,15 @@
 
             </include>
 
-            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_below="@id/toolbar"
-                android:background="@color/primaryColor"
-                android:orientation="vertical">
+                android:layout_below="@id/toolbar">
 
                 <android.support.v4.view.ViewPager
                     android:id="@+id/reviewPager"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:fadingEdge="none" />
 
 
@@ -41,11 +39,13 @@
                     android:id="@+id/reviewPagerIndicator"
                     android:layout_height="@dimen/half_standard_height"
                     android:layout_width="match_parent"
+                    android:layout_below="@id/reviewPager"
                     android:layout_gravity="bottom"
-                    android:padding="5dp"
+                    android:elevation="3dp"
+                    android:background="?attr/colorPrimaryDark"
                 />
 
-            </LinearLayout>
+            </FrameLayout>
 
 
 
