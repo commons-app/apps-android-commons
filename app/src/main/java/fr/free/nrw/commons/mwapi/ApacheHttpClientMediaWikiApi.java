@@ -64,8 +64,8 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
     private static final String THUMB_SIZE = "640";
     // Give up if no random recent image found after 5 tries
     private static final int MAX_RANDOM_TRIES = 5;
-    // First random image request is for some time in the past 30 days
-    private static final int INITIAL_RANDOM_SECONDS = 60 * 60 * 24 * 30;
+    // Random image request is for some time in the past 30 days
+    private static final int RANDOM_SECONDS = 60 * 60 * 24 * 30;
     // Assuming MW always gives me UTC
     private static final SimpleDateFormat isoFormat =
             new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'", Locale.ENGLISH);
@@ -641,19 +641,18 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
         MediaResult media = null;
         int tries = 0;
         Random r = new Random();
-        long timeRange = INITIAL_RANDOM_SECONDS * 1000L;
+
         while (media == null && tries < MAX_RANDOM_TRIES) {
             Date now = new Date();
-            Date startDate = new Date(now.getTime() - r.nextInt() * timeRange);
+            Date startDate = new Date(now.getTime() - r.nextInt(RANDOM_SECONDS) * 1000L);
             ApiResult apiResult = null;
             try {
                 MWApi.RequestBuilder requestBuilder = api.action("query")
                         .param("list", "recentchanges")
-                        .param("format", "xml")
                         .param("rcstart", formatMWDate(startDate))
                         .param("rcnamespace", FILE_NAMESPACE)
-                        .param("rcprop", "title")
-                        .param("rctype", "new")
+                        .param("rcprop", "title|ids")
+                        .param("rctype", "new|log")
                         .param("rctoponly", "1");
 
                 apiResult = requestBuilder.get();
@@ -674,7 +673,6 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
                 }
             }
             tries++;
-            timeRange = Math.round(timeRange * 1.25);
         }
         return media;
     }
