@@ -8,224 +8,235 @@
     <ScrollView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
-        <include
-            android:id="@+id/toolbar"
-            layout="@layout/toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/toolbar"
-            android:background="#D6DCE0"
-            android:orientation="vertical">
 
-            <TextView
-                style="?android:textAppearanceLarge"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/activity_margin_horizontal"
-                android:layout_marginStart="@dimen/activity_margin_horizontal"
-                android:layout_marginTop="@dimen/activity_margin_horizontal"
-                android:text="@string/level"
-                android:id="@+id/achievement_level"/>
-
-            <ImageView
-                android:id="@+id/achievement_badge"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/achievement_level"
-                android:layout_centerHorizontal="true"
-                android:layout_marginVertical="@dimen/activity_margin_vertical" />
-
-            <RelativeLayout
-                android:id="@+id/layout_image_uploaded"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/achievement_badge"
-                android:layout_marginEnd="@dimen/activity_margin_horizontal"
-                android:layout_marginLeft="@dimen/activity_margin_horizontal"
-                android:layout_marginRight="@dimen/activity_margin_horizontal"
-                android:layout_marginStart="@dimen/activity_margin_horizontal">
-
-                <TextView
-                    style="?android:textAppearanceMedium"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/activity_margin_horizontal"
-                    android:layout_marginStart="@dimen/activity_margin_horizontal"
-                    android:text="@string/images_uploaded" />
-
-                <com.dinuscxj.progressbar.CircleProgressBar
-                    android:layout_width="35dp"
-                    android:layout_height="35dp"
-                    android:layout_alignParentRight="true"
-                    android:layout_marginRight="32dp"
-                    android:progress="50"
-                    app:progress_end_color="#8C8B98"
-                    app:progress_start_color="#3A3381"
-                    app:progress_stroke_width="3dp"
-                    app:progress_text_format_pattern="12/24"
-                    app:style="solid_line" />
-
-
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:id="@+id/layout_image_reverts"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
-                android:layout_below="@+id/layout_image_uploaded"
-                android:layout_marginEnd="@dimen/activity_margin_horizontal"
-                android:layout_marginLeft="@dimen/activity_margin_horizontal"
-                android:layout_marginRight="@dimen/activity_margin_horizontal"
-                android:layout_marginStart="@dimen/activity_margin_horizontal">
-
-                <TextView
-                    style="?android:textAppearanceMedium"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/activity_margin_horizontal"
-                    android:layout_marginStart="@dimen/activity_margin_horizontal"
-                    android:text="@string/image_reverts" />
-
-                <com.dinuscxj.progressbar.CircleProgressBar
-                    android:layout_width="35dp"
-                    android:layout_height="35dp"
-                    android:layout_alignParentRight="true"
-                    android:layout_marginRight="32dp"
-                    android:progress="50"
-                    app:progress_end_color="#8C8B98"
-                    app:progress_start_color="#3A3381"
-                    app:progress_stroke_width="3dp"
-                    app:progress_text_format_pattern="12/24"
-                    app:style="solid_line" />
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:id="@+id/layout_image_used_by_wiki"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
-                android:layout_below="@+id/layout_image_reverts"
-                android:layout_marginBottom="@dimen/activity_margin_vertical"
-                android:layout_marginEnd="@dimen/activity_margin_horizontal"
-                android:layout_marginLeft="@dimen/activity_margin_horizontal"
-                android:layout_marginRight="@dimen/activity_margin_horizontal"
-                android:layout_marginStart="@dimen/activity_margin_horizontal">
-
-                <TextView
-                    style="?android:textAppearanceMedium"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/activity_margin_horizontal"
-                    android:layout_marginStart="@dimen/activity_margin_horizontal"
-                    android:text="@string/images_used_by_wiki" />
-
-                <com.dinuscxj.progressbar.CircleProgressBar
-                    android:layout_width="35dp"
-                    android:layout_height="35dp"
-                    android:layout_alignParentRight="true"
-                    android:layout_marginRight="32dp"                    android:progress="50"
-                    app:progress_end_color="#8C8B98"
-                    app:progress_start_color="#3A3381"
-                    app:progress_stroke_width="2.5dp"
-                    app:progress_text_format_pattern="12/24"
-                    app:style="solid_line" />
-            </RelativeLayout>
-
-        </RelativeLayout>
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:orientation="vertical">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/statistics"
-                style="?android:textAppearanceLarge"
-                android:layout_marginLeft="@dimen/activity_margin_horizontal"
-                android:layout_marginTop="@dimen/activity_margin_vertical"/>
+            <include
+                android:id="@+id/toolbar"
+                layout="@layout/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/activity_margin_horizontal"
-                android:layout_marginRight="@dimen/activity_margin_horizontal"
-                android:layout_marginEnd="@dimen/activity_margin_horizontal"
-                android:layout_marginStart="@dimen/activity_margin_horizontal"
-                android:layout_marginTop="@dimen/activity_margin_horizontal">
-                <ImageView
-                    android:layout_width="@dimen/overflow_icon_dimen"
-                    android:layout_height="@dimen/overflow_icon_dimen"
-                    android:id="@+id/featured_image_icon"
-                    app:srcCompat="@drawable/featured"
-                    />
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    style="?android:textAppearanceMedium"
-                    android:layout_toRightOf="@+id/featured_image_icon"
-                    android:layout_marginTop="@dimen/activity_margin_horizontal"
-                    android:layout_marginStart="@dimen/activity_margin_horizontal"
-                    android:layout_marginLeft="@dimen/activity_margin_horizontal"
-                    android:text="@string/statistics_featured"/>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    style="?android:textAppearanceMedium"
-                    android:layout_alignParentRight="true"
-                    android:layout_marginEnd="@dimen/activity_margin_horizontal"
-                    android:layout_marginTop="@dimen/activity_margin_horizontal"
-                    android:layout_marginStart="@dimen/activity_margin_horizontal"
-                    android:text="2"
-                    android:layout_marginLeft="@dimen/activity_margin_horizontal" />
+                android:layout_below="@+id/toolbar"
+                android:background="@color/layout_light_grey"
+                android:orientation="vertical">
 
+                <TextView
+                    style="?android:textAppearanceLarge"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/activity_margin_horizontal"
+                    android:layout_marginStart="@dimen/activity_margin_horizontal"
+                    android:layout_marginTop="@dimen/activity_margin_horizontal"
+                    android:text="@string/level"
+                    android:id="@+id/achievement_level" />
+
+                <ImageView
+                    android:id="@+id/achievement_badge"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/achievement_level"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginVertical="@dimen/activity_margin_vertical" />
+
+                <RelativeLayout
+                    android:id="@+id/layout_image_uploaded"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/achievement_badge"
+                    android:layout_marginEnd="@dimen/activity_margin_horizontal"
+                    android:layout_marginLeft="@dimen/activity_margin_horizontal"
+                    android:layout_marginRight="@dimen/activity_margin_horizontal"
+                    android:layout_marginStart="@dimen/activity_margin_horizontal">
+
+                    <TextView
+                        style="?android:textAppearanceMedium"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/activity_margin_horizontal"
+                        android:layout_marginStart="@dimen/activity_margin_horizontal"
+                        android:text="@string/images_uploaded" />
+
+                    <com.dinuscxj.progressbar.CircleProgressBar
+                        android:layout_width="35dp"
+                        android:layout_height="35dp"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginRight="32dp"
+                        android:progress="50"
+                        app:progress_end_color="#8C8B98"
+                        app:progress_start_color="#3A3381"
+                        app:progress_stroke_width="3dp"
+                        app:progress_text_format_pattern="12/24"
+                        app:style="solid_line" />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/layout_image_reverts"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:layout_below="@+id/layout_image_uploaded"
+                    android:layout_marginEnd="@dimen/activity_margin_horizontal"
+                    android:layout_marginLeft="@dimen/activity_margin_horizontal"
+                    android:layout_marginRight="@dimen/activity_margin_horizontal"
+                    android:layout_marginStart="@dimen/activity_margin_horizontal">
+
+                    <TextView
+                        style="?android:textAppearanceMedium"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/activity_margin_horizontal"
+                        android:layout_marginStart="@dimen/activity_margin_horizontal"
+                        android:text="@string/image_reverts" />
+
+                    <com.dinuscxj.progressbar.CircleProgressBar
+                        android:layout_width="35dp"
+                        android:layout_height="35dp"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginRight="32dp"
+                        android:progress="50"
+                        app:progress_end_color="#8C8B98"
+                        app:progress_start_color="#3A3381"
+                        app:progress_stroke_width="3dp"
+                        app:progress_text_format_pattern="12/24"
+                        app:style="solid_line" />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/layout_image_used_by_wiki"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:layout_below="@+id/layout_image_reverts"
+                    android:layout_marginBottom="@dimen/activity_margin_vertical"
+                    android:layout_marginEnd="@dimen/activity_margin_horizontal"
+                    android:layout_marginLeft="@dimen/activity_margin_horizontal"
+                    android:layout_marginRight="@dimen/activity_margin_horizontal"
+                    android:layout_marginStart="@dimen/activity_margin_horizontal">
+
+                    <TextView
+                        style="?android:textAppearanceMedium"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/activity_margin_horizontal"
+                        android:layout_marginStart="@dimen/activity_margin_horizontal"
+                        android:text="@string/images_used_by_wiki" />
+
+                    <com.dinuscxj.progressbar.CircleProgressBar
+                        android:layout_width="35dp"
+                        android:layout_height="35dp"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginRight="32dp"
+                        android:progress="50"
+                        app:progress_end_color="#8C8B98"
+                        app:progress_start_color="#3A3381"
+                        app:progress_stroke_width="2.5dp"
+                        app:progress_text_format_pattern="12/24"
+                        app:style="solid_line" />
+
+                </RelativeLayout>
             </RelativeLayout>
-            <RelativeLayout
+
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/activity_margin_horizontal"
-                android:layout_marginEnd="@dimen/activity_margin_horizontal"
-                android:layout_marginRight="@dimen/activity_margin_horizontal"
-                android:layout_marginStart="@dimen/activity_margin_horizontal">
-                <ImageView
-                    android:layout_width="@dimen/overflow_icon_dimen"
-                    android:layout_height="@dimen/overflow_icon_dimen"
-                    app:srcCompat="@drawable/ic_thanks"
-                    android:id="@+id/thanks_image_icon"
-                    android:scaleType="centerCrop"
-                    />
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    style="?android:textAppearanceMedium"
-                    android:layout_marginTop="@dimen/activity_margin_horizontal"
-                    android:layout_toRightOf="@+id/thanks_image_icon"
-                    android:layout_marginStart="@dimen/activity_margin_horizontal"
-                    android:layout_marginLeft="@dimen/activity_margin_horizontal"
-                    android:text="@string/statistics_thanks"/>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    style="?android:textAppearanceMedium"
-                    android:layout_alignParentRight="true"
-                    android:layout_marginEnd="@dimen/activity_margin_horizontal"
-                    android:layout_marginTop="@dimen/activity_margin_horizontal"
-                    android:layout_marginStart="@dimen/activity_margin_horizontal"
-                    android:layout_marginLeft="@dimen/activity_margin_horizontal"
-                    android:text="2"/>
-            </RelativeLayout>
+                android:orientation="vertical">
 
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/statistics"
+                    style="?android:textAppearanceLarge"
+                    android:layout_marginLeft="@dimen/activity_margin_horizontal"
+                    android:layout_marginTop="@dimen/activity_margin_vertical" />
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/activity_margin_horizontal"
+                    android:layout_marginRight="@dimen/activity_margin_horizontal"
+                    android:layout_marginEnd="@dimen/activity_margin_horizontal"
+                    android:layout_marginStart="@dimen/activity_margin_horizontal"
+                    android:layout_marginTop="@dimen/activity_margin_horizontal">
+
+                    <ImageView
+                        android:layout_width="@dimen/overflow_icon_dimen"
+                        android:layout_height="@dimen/overflow_icon_dimen"
+                        android:id="@+id/featured_image_icon"
+                        app:srcCompat="@drawable/featured" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        style="?android:textAppearanceMedium"
+                        android:layout_toRightOf="@+id/featured_image_icon"
+                        android:layout_marginTop="@dimen/activity_margin_horizontal"
+                        android:layout_marginStart="@dimen/activity_margin_horizontal"
+                        android:layout_marginLeft="@dimen/activity_margin_horizontal"
+                        android:text="@string/statistics_featured" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        style="?android:textAppearanceMedium"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginEnd="@dimen/activity_margin_horizontal"
+                        android:layout_marginTop="@dimen/activity_margin_horizontal"
+                        android:layout_marginStart="@dimen/activity_margin_horizontal"
+                        android:text="2"
+                        android:layout_marginLeft="@dimen/activity_margin_horizontal" />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/activity_margin_horizontal"
+                    android:layout_marginEnd="@dimen/activity_margin_horizontal"
+                    android:layout_marginRight="@dimen/activity_margin_horizontal"
+                    android:layout_marginStart="@dimen/activity_margin_horizontal">
+
+                    <ImageView
+                        android:layout_width="@dimen/overflow_icon_dimen"
+                        android:layout_height="@dimen/overflow_icon_dimen"
+                        app:srcCompat="@drawable/ic_thanks"
+                        android:id="@+id/thanks_image_icon"
+                        android:scaleType="centerCrop" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        style="?android:textAppearanceMedium"
+                        android:layout_marginTop="@dimen/activity_margin_horizontal"
+                        android:layout_toRightOf="@+id/thanks_image_icon"
+                        android:layout_marginStart="@dimen/activity_margin_horizontal"
+                        android:layout_marginLeft="@dimen/activity_margin_horizontal"
+                        android:text="@string/statistics_thanks" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        style="?android:textAppearanceMedium"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginEnd="@dimen/activity_margin_horizontal"
+                        android:layout_marginTop="@dimen/activity_margin_horizontal"
+                        android:layout_marginStart="@dimen/activity_margin_horizontal"
+                        android:layout_marginLeft="@dimen/activity_margin_horizontal"
+                        android:text="2" />
+
+                </RelativeLayout>
+            </LinearLayout>
         </LinearLayout>
-
-    </LinearLayout>
     </ScrollView>
+
     <android.support.design.widget.NavigationView
         android:id="@+id/navigation_view"
         android:layout_width="wrap_content"
@@ -233,4 +244,5 @@
         android:layout_gravity="start"
         app:headerLayout="@layout/drawer_header"
         app:menu="@menu/drawer" />
+
 </android.support.v4.widget.DrawerLayout>

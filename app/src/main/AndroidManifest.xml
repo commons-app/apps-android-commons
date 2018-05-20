@@ -89,7 +89,7 @@
             android:parentActivityName=".contributions.ContributionsActivity" />
 
         <activity
-            android:name=".Achievements"
+            android:name=".achievements.AchievementsActivity"
             android:label="@string/Achievements">
             <intent-filter>
                 <category android:name="android.intent.category.LAUNCHER" />
