@@ -3,18 +3,19 @@ package fr.free.nrw.commons.media;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 
+import java.util.ArrayList;
 import java.util.Random;
 
-import javax.annotation.Nullable;
+import android.support.annotation.NonNull;
 
 public class RecentChangesImageUtils {
 
     private static final String[] imageExtensions = new String[]
             {".jpg", ".jpeg", ".png"};
 
-    @Nullable
-    public static String findImageInRecentChanges(NodeList childNodes) {
-        String imageTitle;
+    @NonNull
+    public static ArrayList<String> findImagesInRecentChanges(NodeList childNodes) {
+        ArrayList<String> imageTitles = new ArrayList<>();
         Random r = new Random();
         int count = childNodes.getLength();
         // Build a range array
@@ -36,14 +37,14 @@ public class RecentChangesImageUtils {
                 // For log entries, we only want ones where old_revid is zero, indicating a new file
                 continue;
             }
-            imageTitle = e.getAttribute("title");
+            String imageTitle = e.getAttribute("title");
 
             for (String imageExtension : imageExtensions) {
                 if (imageTitle.toLowerCase().endsWith(imageExtension)) {
-                    return imageTitle;
+                    imageTitles.add(imageTitle);
                 }
             }
         }
-        return null;
+        return imageTitles;
     }
 }

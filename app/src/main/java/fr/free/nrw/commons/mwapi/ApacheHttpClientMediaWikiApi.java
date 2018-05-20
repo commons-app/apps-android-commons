@@ -667,6 +667,13 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
         return isoFormat.format(date);
     }
 
+    /**
+     * Retrieves a random recent image that has not yet been nominated for deletion.
+     *
+     * @return Media A media object with filename populated
+     * @throws IOException
+     */
+    @Nullable
     public Media getRecentRandomImage() throws IOException {
         Media media = null;
         int tries = 0;
@@ -696,13 +703,14 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
                         && recentChangesNode.getDocument().getChildNodes() != null
                         && recentChangesNode.getDocument().getChildNodes().getLength() > 0) {
                     NodeList childNodes = recentChangesNode.getDocument().getChildNodes();
-                    String imageTitle = RecentChangesImageUtils.findImageInRecentChanges(childNodes);
-                    if (imageTitle != null) {
+                    ArrayList<String> imageTitles = RecentChangesImageUtils.findImagesInRecentChanges(childNodes);
+                    for(String imageTitle: imageTitles) {
                         boolean deletionStatus = pageExists("Commons:Deletion_requests/" + imageTitle);
                         if (!deletionStatus) {
                             // strip File: prefix
                             imageTitle = imageTitle.replace("File:", "");
                             media = new Media(imageTitle);
+                            break;
                         }
                     }
                 }
