@@ -1,11 +1,17 @@
 package fr.free.nrw.commons.delete;
 
+import android.app.AlertDialog;
 import android.app.NotificationManager;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.os.AsyncTask;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.NotificationCompat.Builder;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.Gravity;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import java.text.SimpleDateFormat;
@@ -14,6 +20,7 @@ import java.util.Locale;
 
 import javax.inject.Inject;
 
+import butterknife.OnClick;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.auth.SessionManager;
@@ -169,5 +176,50 @@ public class DeleteTask extends AsyncTask<Void, Integer, Boolean> {
                 .setOngoing(false)
                 .setPriority(PRIORITY_HIGH);
         notificationManager.notify(NOTIFICATION_DELETE, notificationBuilder.build());
+    }
+
+    // TODO: refactor; see MediaDetailsFragment.onDeleteButtonClicked
+    // ReviewActivity will use this
+    public static void askReasonAndExecute(Media media, Context context, String question, String defaultValue) {
+        AlertDialog.Builder alert = new AlertDialog.Builder(context);
+        alert.setMessage(question);
+        final EditText input = new EditText(context);
+        input.setText(defaultValue);
+        alert.setView(input);
+        input.requestFocus();
+        alert.setPositiveButton(R.string.ok, (dialog, whichButton) -> {
+            String reason = input.getText().toString();
+
+            DeleteTask deleteTask = new DeleteTask(context, media, reason);
+            deleteTask.execute();
+        });
+        alert.setNegativeButton(R.string.cancel, (dialog, whichButton) -> {
+        });
+        AlertDialog d = alert.create();
+        input.addTextChangedListener(new TextWatcher() {
+            private void handleText() {
+                final Button okButton = d.getButton(AlertDialog.BUTTON_POSITIVE);
+                if (input.getText().length() == 0) {
+                    okButton.setEnabled(false);
+                } else {
+                    okButton.setEnabled(true);
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable arg0) {
+                handleText();
+            }
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+            }
+        });
+        d.show();
+        d.getButton(AlertDialog.BUTTON_POSITIVE).setEnabled(defaultValue.length() > 0);
     }
 }
