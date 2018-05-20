@@ -8,6 +8,9 @@ import java.util.ArrayList;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.delete.DeleteTask;
+import fr.free.nrw.commons.mwapi.Revision;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.schedulers.Schedulers;
 
 /**
  * Created by nes on 19.05.2018.
@@ -15,6 +18,7 @@ import fr.free.nrw.commons.delete.DeleteTask;
 
 public class ReviewController {
     public static String fileName;
+    public static Revision firstRevision; // TODO: maybe we can expand this class to include fileName
     protected static ArrayList<String> categories;
     ReviewPagerAdapter reviewPagerAdapter;
     ViewPager viewPager;
@@ -29,6 +33,12 @@ public class ReviewController {
     public void onImageRefreshed(String fileName) {
         ReviewController.fileName = fileName;
         ReviewController.categories = new ArrayList<>();
+
+        reviewActivity.mwApi.firstRevisionOfFile("File:" + fileName).subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(revision -> {
+                    ReviewController.firstRevision = revision;
+                });
     }
 
     public void onCategoriesRefreshed(ArrayList<String> categories) {
@@ -64,7 +74,7 @@ public class ReviewController {
     }
 
     public void sendThanks() {
-        new SendThankTask(reviewActivity, new Media("File:"+fileName)).execute();
+        new SendThankTask(reviewActivity, new Media("File:"+fileName), firstRevision).execute();
         swipeToNext();
     }
 }
