@@ -77,7 +77,7 @@ public interface MediaWikiApi {
 
     boolean thank(String editToken, String revision) throws IOException;
 
-    String firstRevisionOfFile(String filename) throws IOException;
+    Revision firstRevisionOfFile(String filename) throws IOException;
 
     interface ProgressListener {
         void onProgress(long transferred, long total);
