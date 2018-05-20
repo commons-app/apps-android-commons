@@ -3,26 +3,41 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:weightSum="5"
+    android:weightSum="6"
     android:orientation="vertical"
-    android:background="@color/main_background_light"
-    android:gravity="center_horizontal"
+    android:gravity="center_horizontal|bottom"
     >
 
-    <com.facebook.drawee.view.SimpleDraweeView
-        android:id="@+id/imageView"
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="3"
-        android:src="@drawable/commons_logo_large"
-        />
+        android:layout_weight="3">
+        <com.facebook.drawee.view.SimpleDraweeView
+            android:id="@+id/imageView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/commons_logo_large"
+            />
+
+        <ProgressBar
+            android:id="@+id/progressBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:visibility="visible"
+            />
+
+    </RelativeLayout>
+
     <TextView
         android:id="@+id/reviewQuestion"
         android:layout_width="match_parent"
         android:textColor="@android:color/black"
         android:layout_height="0dp"
-        android:layout_weight="0.7"
+        android:layout_weight="1.1"
         android:textAlignment="center"
+        android:textSize="32sp"
+        android:gravity="center_vertical"
         android:text="testing1"
         />
     <TextView
@@ -30,6 +45,21 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="0.7"
+        android:textAlignment="center"
+        android:textSize="24sp"
+        android:layout_marginBottom="15dp"
+        android:gravity="center_vertical"
+        android:text="testing2"
+        />
+
+    <TextView
+        android:id="@+id/reviewCategories"
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.7"
+        android:textSize="24sp"
+        android:textStyle="bold"
         android:textAlignment="center"
         android:text="testing2"
         />
@@ -46,15 +76,29 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="@string/yes"/>
+            android:background="@android:color/transparent"
+            android:text="@string/yes"
+            android:textSize="20sp"
+            android:textColor="?attr/colorPrimaryDark"
+            />
 
         <Button
             android:id="@+id/noButton"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
             android:layout_weight="1"
-            android:text="@string/no"/>
+            android:text="@string/no"
+            android:textSize="20sp"
+            android:textColor="?attr/colorPrimaryDark"
+            />
 
     </LinearLayout>
+    <View
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_weight="0.6"
+        android:background="?attr/colorPrimaryDark"
+        ></View>
 
 </LinearLayout>

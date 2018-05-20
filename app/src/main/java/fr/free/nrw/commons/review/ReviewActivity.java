@@ -16,10 +16,12 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 
 import com.viewpagerindicator.CirclePageIndicator;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -30,7 +32,9 @@ import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.Utils;
 import fr.free.nrw.commons.auth.AuthenticatedActivity;
+import fr.free.nrw.commons.mwapi.MediaResult;
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
+import fr.free.nrw.commons.utils.MediaDataExtractorUtil;
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
@@ -79,11 +83,12 @@ public class ReviewActivity extends AuthenticatedActivity {
 
         reviewController = new ReviewController();
 
-
         reviewPagerAdapter = new ReviewPagerAdapter(getSupportFragmentManager());
         pager.setAdapter(reviewPagerAdapter);
         reviewPagerAdapter.getItem(0);
         pagerIndicator.setViewPager(pager);
+
+        runRandomizer(); //Run randomizer whenever everything is ready so that a first random image will be added
     }
 
     @Override
@@ -97,36 +102,55 @@ public class ReviewActivity extends AuthenticatedActivity {
         int id = item.getItemId();
 
         if (id == R.id.action_review_randomizer) {
-            Observable.fromCallable(() -> {
-                Media result = null;
-                try {
-                    result = mwApi.getRecentRandomImage();
-
-                    //String thumBaseUrl = Utils.makeThumbBaseUrl(result.getFilename());
-                    //reviewPagerAdapter.currentThumbBasedUrl = thumBaseUrl;
-
-                    //Log.d("review", result.getWikiSource());
-
-                } catch (IOException e) {
-                    Log.d("review", e.toString());
-                }
-                return result;
-            })
-                    .subscribeOn(Schedulers.io())
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe(this::updateImage);
-            return true;
+            return runRandomizer();
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    private boolean runRandomizer() {
+        ProgressBar progressBar = reviewPagerAdapter.reviewImageFragments[pager.getCurrentItem()].progressBar;
+        if (progressBar != null) {
+            progressBar.setVisibility(View.VISIBLE);
+        }
+        Observable.fromCallable(() -> {
+            Media result = null;
+            try {
+                result = mwApi.getRecentRandomImage();
+
+                //String thumBaseUrl = Utils.makeThumbBaseUrl(result.getFilename());
+                //reviewPagerAdapter.currentThumbBasedUrl = thumBaseUrl;
+
+                //Log.d("review", result.getWikiSource());
+
+            } catch (IOException e) {
+                Log.d("review", e.toString());
+            }
+            return result;
+        })
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(this::updateImage);
+        return true;
     }
 
     private void updateImage(Media result) {
         reviewController.onImageRefreshed(result.getFilename()); //file name is updated
         reviewPagerAdapter.updateFilename();
         pager.setCurrentItem(0);
+        Observable.fromCallable(() -> {
+            MediaResult media = mwApi.fetchMediaByFilename("File:" + result.getFilename());
+            return MediaDataExtractorUtil.extractCategories(media.getWikiSource());
+        })
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(this::updateCategories);
     }
 
+    private void updateCategories(ArrayList<String> categories) {
+        reviewController.onCategoriesRefreshed(categories);
+        reviewPagerAdapter.updateCategories();
+    }
 
     /**
      * References ReviewPagerAdapter to null before the activity is destroyed
