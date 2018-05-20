@@ -87,6 +87,8 @@ public class ReviewActivity extends AuthenticatedActivity {
         pager.setAdapter(reviewPagerAdapter);
         reviewPagerAdapter.getItem(0);
         pagerIndicator.setViewPager(pager);
+
+        runRandomizer(); //Run randomizer whenever everything is ready so that a first random image will be added
     }
 
     @Override
@@ -100,28 +102,32 @@ public class ReviewActivity extends AuthenticatedActivity {
         int id = item.getItemId();
 
         if (id == R.id.action_review_randomizer) {
-            Observable.fromCallable(() -> {
-                Media result = null;
-                try {
-                    result = mwApi.getRecentRandomImage();
-
-                    //String thumBaseUrl = Utils.makeThumbBaseUrl(result.getFilename());
-                    //reviewPagerAdapter.currentThumbBasedUrl = thumBaseUrl;
-
-                    //Log.d("review", result.getWikiSource());
-
-                } catch (IOException e) {
-                    Log.d("review", e.toString());
-                }
-                return result;
-            })
-                    .subscribeOn(Schedulers.io())
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe(this::updateImage);
-            return true;
+            return runRandomizer();
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    private boolean runRandomizer() {
+        Observable.fromCallable(() -> {
+            Media result = null;
+            try {
+                result = mwApi.getRecentRandomImage();
+
+                //String thumBaseUrl = Utils.makeThumbBaseUrl(result.getFilename());
+                //reviewPagerAdapter.currentThumbBasedUrl = thumBaseUrl;
+
+                //Log.d("review", result.getWikiSource());
+
+            } catch (IOException e) {
+                Log.d("review", e.toString());
+            }
+            return result;
+        })
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(this::updateImage);
+        return true;
     }
 
     private void updateImage(Media result) {
