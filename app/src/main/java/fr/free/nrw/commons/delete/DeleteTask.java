@@ -186,7 +186,7 @@ public class DeleteTask extends AsyncTask<Void, Integer, Boolean> {
         alert.setMessage(question);
         final EditText input = new EditText(context);
         input.setText(defaultValue);
-        input.setSelection(0, defaultValue.length() - 1);
+        input.setSelection(0, defaultValue.length());
         alert.setView(input);
         input.requestFocus();
         alert.setPositiveButton(R.string.ok, (dialog, whichButton) -> {
