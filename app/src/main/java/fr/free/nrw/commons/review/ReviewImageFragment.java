@@ -87,16 +87,18 @@ public class ReviewImageFragment extends CommonsDaggerSupportFragment {
             textViewQuestionContext = layoutView.findViewById(R.id.reviewQuestionContext);
             yesButton = layoutView.findViewById(R.id.yesButton);
             noButton = layoutView.findViewById(R.id.noButton);
-            String question;
+            String question, explanation;
             switch(position) {
                 case COPYRIGHT:
                     question = getString(R.string.review_copyright);
+                    explanation = getString(R.string.review_copyright_explanation);
                     yesButton.setOnClickListener(view -> {
                         ((ReviewActivity)getActivity()).reviewController.reportPossibleCopyRightViolation();
                     });
                     break;
                 case CATEGORY:
                     question = getString(R.string.review_category);
+                    explanation = getString(R.string.review_no_category);
                     updateCategories(ReviewController.categories);
                     yesButton.setOnClickListener(view -> {
                         ((ReviewActivity)getActivity()).reviewController.reportWrongCategory();
@@ -104,18 +106,21 @@ public class ReviewImageFragment extends CommonsDaggerSupportFragment {
                     break;
                 case SPAM:
                     question = getString(R.string.review_spam);
+                    explanation = getString(R.string.review_spam_explanation);
                     yesButton.setOnClickListener(view -> {
                         ((ReviewActivity)getActivity()).reviewController.reportSpam();
                     });
                     break;
                 case THANKS:
                     question = getString(R.string.review_thanks);
+                    explanation = getString(R.string.review_thanks_explanation);
                     yesButton.setOnClickListener(view -> {
                         ((ReviewActivity)getActivity()).reviewController.sendThanks();
                     });
                     break;
                 default:
                     question = "How did we get here?";
+                    explanation = "No idea.";
             }
 
             noButton.setOnClickListener(view -> {
@@ -123,6 +128,8 @@ public class ReviewImageFragment extends CommonsDaggerSupportFragment {
             });
 
             ((TextView) textViewQuestion).setText(question);
+            ((TextView) textViewQuestionContext).setText(explanation);
+
             simpleDraweeView = layoutView.findViewById(R.id.imageView);
 
             if (fileName != null) {
