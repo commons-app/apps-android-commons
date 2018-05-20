@@ -196,6 +196,7 @@ public class DeleteTask extends AsyncTask<Void, Integer, Boolean> {
             String reason = input.getText().toString();
 
             ((ReviewActivity)context).reviewController.swipeToNext();
+            ((ReviewActivity)context).runRandomizer();
 
             DeleteTask deleteTask = new DeleteTask(context, media, reason);
             deleteTask.execute();

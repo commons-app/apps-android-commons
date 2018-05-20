@@ -1,11 +1,9 @@
 package fr.free.nrw.commons.review;
 
-import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 
-import android.os.Handler;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
@@ -15,14 +13,12 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.EditText;
 import android.widget.ProgressBar;
 
 import com.viewpagerindicator.CirclePageIndicator;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.List;
 
 import javax.inject.Inject;
 
@@ -30,7 +26,6 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.R;
-import fr.free.nrw.commons.Utils;
 import fr.free.nrw.commons.auth.AuthenticatedActivity;
 import fr.free.nrw.commons.mwapi.MediaResult;
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
@@ -53,7 +48,7 @@ public class ReviewActivity extends AuthenticatedActivity {
     DrawerLayout drawerLayout;
 
     @BindView(R.id.reviewPager)
-    ViewPager pager;
+    ViewPager reviewPager;
 
     @Inject MediaWikiApi mwApi;
 
@@ -84,9 +79,9 @@ public class ReviewActivity extends AuthenticatedActivity {
         reviewController = new ReviewController(this);
 
         reviewPagerAdapter = new ReviewPagerAdapter(getSupportFragmentManager());
-        pager.setAdapter(reviewPagerAdapter);
+        reviewPager.setAdapter(reviewPagerAdapter);
         reviewPagerAdapter.getItem(0);
-        pagerIndicator.setViewPager(pager);
+        pagerIndicator.setViewPager(reviewPager);
 
         runRandomizer(); //Run randomizer whenever everything is ready so that a first random image will be added
     }
@@ -109,10 +104,12 @@ public class ReviewActivity extends AuthenticatedActivity {
     }
 
     public boolean runRandomizer() {
-        ProgressBar progressBar = reviewPagerAdapter.reviewImageFragments[pager.getCurrentItem()].progressBar;
+        ProgressBar progressBar = reviewPagerAdapter.reviewImageFragments[reviewPager.getCurrentItem()].progressBar;
         if (progressBar != null) {
             progressBar.setVisibility(View.VISIBLE);
         }
+
+        reviewPager.setCurrentItem(0);
         Observable.fromCallable(() -> {
             Media result = null;
             try {
@@ -137,7 +134,7 @@ public class ReviewActivity extends AuthenticatedActivity {
     private void updateImage(Media result) {
         reviewController.onImageRefreshed(result.getFilename()); //file name is updated
         reviewPagerAdapter.updateFilename();
-        pager.setCurrentItem(0);
+        reviewPager.setCurrentItem(0);
         Observable.fromCallable(() -> {
             MediaResult media = mwApi.fetchMediaByFilename("File:" + result.getFilename());
             return MediaDataExtractorUtil.extractCategories(media.getWikiSource());

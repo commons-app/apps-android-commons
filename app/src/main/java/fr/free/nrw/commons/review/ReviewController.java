@@ -5,8 +5,6 @@ import android.support.v4.view.ViewPager;
 
 import java.util.ArrayList;
 
-import javax.inject.Inject;
-
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.delete.DeleteTask;
@@ -25,7 +23,7 @@ public class ReviewController {
     ReviewController(Context context) {
         reviewActivity =  (ReviewActivity)context;
         reviewPagerAdapter = reviewActivity.reviewPagerAdapter;
-        viewPager = ((ReviewActivity)context).pager;
+        viewPager = ((ReviewActivity)context).reviewPager;
     }
 
     public void onImageRefreshed(String fileName) {
@@ -43,7 +41,6 @@ public class ReviewController {
             viewPager.setCurrentItem(nextPos);
         } else {
             reviewActivity.runRandomizer();
-            viewPager.setCurrentItem(0);
         }
     }
 
