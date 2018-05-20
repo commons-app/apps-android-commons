@@ -57,7 +57,7 @@ public class ReviewActivity extends AuthenticatedActivity {
 
     @Inject MediaWikiApi mwApi;
 
-    private ReviewPagerAdapter reviewPagerAdapter;
+    public ReviewPagerAdapter reviewPagerAdapter;
 
     //private ReviewCallback reviewCallback;
     private ReviewController reviewController;
@@ -81,7 +81,7 @@ public class ReviewActivity extends AuthenticatedActivity {
         ButterKnife.bind(this);
         initDrawer();
 
-        reviewController = new ReviewController();
+        reviewController = new ReviewController(this);
 
         reviewPagerAdapter = new ReviewPagerAdapter(getSupportFragmentManager());
         pager.setAdapter(reviewPagerAdapter);
