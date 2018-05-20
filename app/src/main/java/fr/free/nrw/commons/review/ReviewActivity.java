@@ -60,7 +60,7 @@ public class ReviewActivity extends AuthenticatedActivity {
     public ReviewPagerAdapter reviewPagerAdapter;
 
     //private ReviewCallback reviewCallback;
-    private ReviewController reviewController;
+    public ReviewController reviewController;
 
     @BindView(R.id.reviewPagerIndicator)
     public CirclePageIndicator pagerIndicator;
@@ -108,7 +108,7 @@ public class ReviewActivity extends AuthenticatedActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    private boolean runRandomizer() {
+    public boolean runRandomizer() {
         ProgressBar progressBar = reviewPagerAdapter.reviewImageFragments[pager.getCurrentItem()].progressBar;
         if (progressBar != null) {
             progressBar.setVisibility(View.VISIBLE);
@@ -171,13 +171,14 @@ public class ReviewActivity extends AuthenticatedActivity {
         context.startActivity(reviewActivity);
     }
 
-    interface ReviewCallback {
+    /*interface ReviewCallback {
         void onImageRefreshed(String itemTitle);
+
         void onQuestionChanged();
         void onSurveyFinished();
         void onImproperImageReported();
         void onLicenceViolationReported();
         void onWrongCategoryReported();
         void onThankSent();
-    }
+    }*/
 }
