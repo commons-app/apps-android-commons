@@ -50,11 +50,7 @@ public class SendThankTask extends AsyncTask<Void, Integer, Boolean> {
     public SendThankTask(Context context, Media media){
         this.context = context;
         this.media = media;
-        try {
-            this.revision =  mwApi.firstRevisionOfFile(media.getFilename());
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+
     }
 
     @Override
@@ -83,6 +79,7 @@ public class SendThankTask extends AsyncTask<Void, Integer, Boolean> {
         mwApi.setAuthCookie(authCookie);
 
         try {
+            this.revision =  mwApi.firstRevisionOfFile(media.getFilename());
             editToken = mwApi.getEditToken();
             if (editToken.equals("+\\")) {
                 return false;
