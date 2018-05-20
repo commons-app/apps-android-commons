@@ -2,7 +2,7 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item android:id="@+id/action_review_randomizer"
-        android:title="@string/menu_from_gallery"
+        android:title="@string/refresh_button"
         app:showAsAction="ifRoom|withText"
         android:icon="@drawable/ic_refresh_white_24dp"
         />
