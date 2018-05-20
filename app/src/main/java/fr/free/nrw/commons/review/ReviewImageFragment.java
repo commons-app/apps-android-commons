@@ -34,7 +34,7 @@ public class ReviewImageFragment extends CommonsDaggerSupportFragment {
         private int position;
         private String fileName;
         private String catString;
-        //private View catsView;
+
         private View textViewQuestionContext;
         private SimpleDraweeView simpleDraweeView;
         public ProgressBar progressBar;
@@ -75,20 +75,15 @@ public class ReviewImageFragment extends CommonsDaggerSupportFragment {
                     false);
             progressBar = layoutView.findViewById(R.id.progressBar);
             View textView = layoutView.findViewById(R.id.reviewQuestion);
-            //View textViewQuestion = layoutView.findViewById(R.id.reviewQuestion);
             textViewQuestionContext = layoutView.findViewById(R.id.reviewQuestionContext);
-            //catsView = layoutView.findViewById(R.id.reviewCategories);
             String question;
             switch(position) {
                 case COPYRIGHT:
                     question = getString(R.string.review_copyright);
                     break;
                 case CATEGORY:
-                    //textViewQuestion.setLayoutParams(new TableLayout.LayoutParams(TableLayout.LayoutParams.WRAP_CONTENT, TableLayout.LayoutParams.WRAP_CONTENT, 0.35f));
-                    //textViewQuestionContext.setLayoutParams(new TableLayout.LayoutParams(TableLayout.LayoutParams.WRAP_CONTENT, TableLayout.LayoutParams.WRAP_CONTENT, 0.35f));
                     question = getString(R.string.review_category);
                     updateCategories(ReviewController.categories);
-                    //catsView.setVisibility(View.VISIBLE);
                     break;
                 case SPAM:
                     question = getString(R.string.review_spam);
@@ -103,10 +98,6 @@ public class ReviewImageFragment extends CommonsDaggerSupportFragment {
                 simpleDraweeView.setImageURI(Utils.makeThumbBaseUrl(fileName));
                 progressBar.setVisibility(View.GONE);
             }
-
-            /*if (catString != null) {
-                ((TextView) catsView).setText(catString);
-            }*/
             return layoutView;
         }
 }

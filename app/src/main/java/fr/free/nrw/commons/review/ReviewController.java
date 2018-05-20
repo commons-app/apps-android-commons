@@ -1,5 +1,8 @@
 package fr.free.nrw.commons.review;
 
+import android.content.Context;
+import android.support.v4.view.ViewPager;
+
 import java.util.ArrayList;
 
 /**
@@ -9,6 +12,13 @@ import java.util.ArrayList;
 public class ReviewController implements ReviewActivity.ReviewCallback {
     public static String fileName;
     protected static ArrayList<String> categories;
+    ReviewPagerAdapter reviewPagerAdapter;
+    ViewPager viewPager;
+
+    ReviewController(Context context) {
+        reviewPagerAdapter = ((ReviewActivity)context).reviewPagerAdapter;
+        viewPager = ((ReviewActivity)context).pager;
+    }
 
     @Override
     public void onImageRefreshed(String fileName) {
