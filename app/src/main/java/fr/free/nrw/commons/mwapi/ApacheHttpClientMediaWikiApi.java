@@ -460,16 +460,19 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
 
     @Override
     @Nullable
-    public Revision firstRevisionOfFile(String filename) throws IOException {
-        ApiResult res = api.action("query")
-                .param("prop", "revisions")
-                .param("rvprop", "timestamp|ids|user")
-                .param("titles", filename)
-                .param("rvdir", "newer")
-                .param("rvlimit", "1")
-                .get();
-        return new Revision(res.getString("/api/query/pages/page/revisions/rev/@revid"),
-                res.getString("/api/query/pages/page/revisions/rev/@user"));
+    public Single<Revision> firstRevisionOfFile(String filename) {
+        return Single.fromCallable(() -> {
+            ApiResult res = api.action("query")
+                    .param("prop", "revisions")
+                    .param("rvprop", "timestamp|ids|user")
+                    .param("titles", filename)
+                    .param("rvdir", "newer")
+                    .param("rvlimit", "1")
+                    .get();
+            return new Revision(
+                    res.getString("/api/query/pages/page/revisions/rev/@revid"),
+                    res.getString("/api/query/pages/page/revisions/rev/@user"));
+        });
     }
 
     @Override

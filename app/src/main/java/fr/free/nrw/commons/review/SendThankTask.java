@@ -7,8 +7,6 @@ import android.support.v4.app.NotificationCompat;
 import android.view.Gravity;
 import android.widget.Toast;
 
-import java.io.IOException;
-
 import javax.inject.Inject;
 
 import fr.free.nrw.commons.Media;
@@ -17,6 +15,8 @@ import fr.free.nrw.commons.auth.SessionManager;
 import fr.free.nrw.commons.di.ApplicationlessInjection;
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
 import fr.free.nrw.commons.mwapi.Revision;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.schedulers.Schedulers;
 import timber.log.Timber;
 
 import static android.support.v4.app.NotificationCompat.DEFAULT_ALL;
@@ -48,10 +48,10 @@ public class SendThankTask extends AsyncTask<Void, Integer, Boolean> {
     private Media media;
     private Revision revision;
 
-    public SendThankTask(Context context, Media media){
+    public SendThankTask(Context context, Media media, Revision revision){
         this.context = context;
         this.media = media;
-
+        this.revision = revision;
     }
 
     @Override
@@ -80,7 +80,6 @@ public class SendThankTask extends AsyncTask<Void, Integer, Boolean> {
         mwApi.setAuthCookie(authCookie);
 
         try {
-            revision = mwApi.firstRevisionOfFile(media.getFilename());
             editToken = mwApi.getEditToken();
             if (editToken.equals("+\\")) {
                 return false;
