@@ -19,13 +19,14 @@ public class ReviewPagerAdapter extends FragmentStatePagerAdapter {
         reviewImageFragments = new ReviewImageFragment[] {
             new ReviewImageFragment(),
             new ReviewImageFragment(),
+            new ReviewImageFragment(),
             new ReviewImageFragment()
         };
     }
 
     @Override
     public int getCount() {
-        return 3;
+        return 4;
     }
 
     public void updateFilename() {

@@ -26,6 +26,7 @@ import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.auth.SessionManager;
 import fr.free.nrw.commons.di.ApplicationlessInjection;
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
+import fr.free.nrw.commons.review.ReviewActivity;
 import timber.log.Timber;
 
 import static android.support.v4.app.NotificationCompat.DEFAULT_ALL;
@@ -189,6 +190,9 @@ public class DeleteTask extends AsyncTask<Void, Integer, Boolean> {
         input.requestFocus();
         alert.setPositiveButton(R.string.ok, (dialog, whichButton) -> {
             String reason = input.getText().toString();
+
+            ((ReviewActivity)context).reviewController.swipeToNext();
+            ((ReviewActivity)context).runRandomizer();
 
             DeleteTask deleteTask = new DeleteTask(context, media, reason);
             deleteTask.execute();
