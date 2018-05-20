@@ -30,9 +30,11 @@ import fr.free.nrw.commons.auth.AuthenticatedActivity;
 import fr.free.nrw.commons.mwapi.MediaResult;
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
 import fr.free.nrw.commons.utils.MediaDataExtractorUtil;
+import fr.free.nrw.commons.utils.ViewUtil;
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
+import timber.log.Timber;
 
 /**
  * Created by root on 18.05.2018.
@@ -111,17 +113,14 @@ public class ReviewActivity extends AuthenticatedActivity {
 
         reviewPager.setCurrentItem(0);
         Observable.fromCallable(() -> {
-            Media result = null;
+            String result = "";
             try {
-                result = mwApi.getRecentRandomImage();
-
-                //String thumBaseUrl = Utils.makeThumbBaseUrl(result.getFilename());
-                //reviewPagerAdapter.currentThumbBasedUrl = thumBaseUrl;
-
-                //Log.d("review", result.getWikiSource());
-
+                Media media = mwApi.getRecentRandomImage();
+                if (media != null) {
+                    result = media.getFilename();
+                }
             } catch (IOException e) {
-                Log.d("review", e.toString());
+                Timber.e("Error fetching recent random image: " + e.toString());
             }
             return result;
         })
@@ -131,17 +130,26 @@ public class ReviewActivity extends AuthenticatedActivity {
         return true;
     }
 
-    private void updateImage(Media result) {
-        reviewController.onImageRefreshed(result.getFilename()); //file name is updated
+    private void updateImage(String fileName) {
+        if (fileName.length() == 0) {
+            ViewUtil.showSnackbar(drawerLayout, R.string.error_review);
+            return;
+        }
+        reviewController.onImageRefreshed(fileName); //file name is updated
         reviewPagerAdapter.updateFilename();
         reviewPager.setCurrentItem(0);
         Observable.fromCallable(() -> {
-            MediaResult media = mwApi.fetchMediaByFilename("File:" + result.getFilename());
+            MediaResult media = mwApi.fetchMediaByFilename("File:" + fileName);
             return MediaDataExtractorUtil.extractCategories(media.getWikiSource());
         })
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(this::updateCategories);
+                .subscribe(this::updateCategories, this::categoryFetchError);
+    }
+
+    private void categoryFetchError(Throwable throwable) {
+        Timber.e(throwable, "Error fetching categories");
+        ViewUtil.showSnackbar(drawerLayout, R.string.error_review_categories);
     }
 
     private void updateCategories(ArrayList<String> categories) {
