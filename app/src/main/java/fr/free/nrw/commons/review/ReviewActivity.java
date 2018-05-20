@@ -19,6 +19,8 @@ import android.widget.ProgressBar;
 
 import com.viewpagerindicator.CirclePageIndicator;
 
+import org.mediawiki.api.MWApi;
+
 import java.io.IOException;
 import java.util.ArrayList;
 

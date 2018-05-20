@@ -19,6 +19,28 @@
             android:src="@drawable/commons_logo_large"
             />
 
+        <RelativeLayout
+            android:id="@+id/uploadOverlay"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center|bottom"
+            android:gravity="center"
+            android:layout_alignParentBottom="true"
+            android:background="#77000000"
+            android:padding="@dimen/tiny_gap"
+            >
+
+            <TextView
+                android:id="@+id/uploadTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Testingg"
+                android:textColor="#FFFFFFFF"
+                style="?android:textAppearanceMedium"
+                />
+
+        </RelativeLayout>
+
         <ProgressBar
             android:id="@+id/progressBar"
             android:layout_width="wrap_content"
