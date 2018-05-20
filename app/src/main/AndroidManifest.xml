@@ -33,7 +33,11 @@
             android:launchMode="singleInstance"
             android:theme="@android:style/Theme.Dialog" />
         <activity android:name=".auth.LoginActivity">
+            <intent-filter>
+                <category android:name="android.intent.category.LAUNCHER" />
 
+                <action android:name="android.intent.action.MAIN" />
+            </intent-filter>
         </activity>
         <activity android:name=".WelcomeActivity" />
         <activity
@@ -90,13 +94,8 @@
 
         <activity
             android:name=".achievements.AchievementsActivity"
-            android:label="@string/Achievements">
-            <intent-filter>
-                <category android:name="android.intent.category.LAUNCHER" />
+            android:label="@string/Achievements" />
 
-                <action android:name="android.intent.action.MAIN" />
-            </intent-filter>
-        </activity>
 
         <service android:name=".upload.UploadService" />
         <service

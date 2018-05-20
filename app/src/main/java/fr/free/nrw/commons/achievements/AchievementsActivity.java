@@ -1,5 +1,6 @@
 package fr.free.nrw.commons.achievements;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
@@ -29,7 +30,7 @@ import dagger.Binds;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.theme.NavigationBaseActivity;
 
-public class AchievementsActivity extends AppCompatActivity {
+public class AchievementsActivity extends NavigationBaseActivity {
 
     private static final double BADGE_IMAGE_WIDTH_RATIO = 0.4;
     private static final double BADGE_IMAGE_HEIGHT_RATIO = 0.36;
@@ -37,7 +38,14 @@ public class AchievementsActivity extends AppCompatActivity {
     @BindView(R.id.achievement_badge) ImageView imageView;
     @BindView(R.id.toolbar) android.support.v7.widget.Toolbar toolbar;
 
+
+    /**
+     * This method helps in the creation Achievement screen
+     *
+     * @param savedInstanceState Data bundle
+     */
     @Override
+    @SuppressLint("StringFormatInvalid")
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_achievements);
@@ -56,6 +64,7 @@ public class AchievementsActivity extends AppCompatActivity {
         imageView.requestLayout();
 
         setSupportActionBar(toolbar);
+        initDrawer();
     }
 
     @Override
