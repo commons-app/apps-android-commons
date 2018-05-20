@@ -161,7 +161,7 @@ public class DeleteTask extends AsyncTask<Void, Integer, Boolean> {
 
         if (result){
             title += ": Success";
-            message = "Successfully nominated " + media.getDisplayTitle() + " deletion.";
+            message = "Successfully nominated " + media.getDisplayTitle() + " for deletion.";
         }
         else {
             title += ": Failed";
