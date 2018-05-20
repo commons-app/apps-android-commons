@@ -42,32 +42,32 @@ public class ReviewController {
         if (nextPos <= 3) {
             viewPager.setCurrentItem(nextPos);
         } else {
-            reviewPagerAdapter.getItem(0);
             reviewActivity.runRandomizer();
+            viewPager.setCurrentItem(0);
         }
     }
 
     public void reportSpam() {
-        DeleteTask.askReasonAndExecute(new Media(fileName),
+        DeleteTask.askReasonAndExecute(new Media("File:"+fileName),
                 reviewActivity,
                 reviewActivity.getResources().getString(R.string.review_spam_report_question),
                 reviewActivity.getResources().getString(R.string.review_spam_report_default_answer));
     }
 
     public void reportPossibleCopyRightViolation() {
-        DeleteTask.askReasonAndExecute(new Media(fileName),
+        DeleteTask.askReasonAndExecute(new Media("File:"+fileName),
                 reviewActivity,
                 reviewActivity.getResources().getString(R.string.review_c_violation_report_question),
                 reviewActivity.getResources().getString(R.string.review_c_violation_report_default_answer));
     }
 
     public void reportWrongCategory() {
-        new CheckCategoryTask(reviewActivity, new Media(fileName)).execute();
+        new CheckCategoryTask(reviewActivity, new Media("File:"+fileName)).execute();
         swipeToNext();
     }
 
     public void sendThanks() {
-        new SendThankTask(reviewActivity, new Media(fileName));
+        new SendThankTask(reviewActivity, new Media("File:"+fileName)).execute();
         swipeToNext();
     }
 }
