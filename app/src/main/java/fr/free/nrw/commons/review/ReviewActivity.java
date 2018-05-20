@@ -9,9 +9,11 @@ import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.widget.Toolbar;
 
+import android.util.AttributeSet;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ProgressBar;
 
@@ -48,7 +50,7 @@ public class ReviewActivity extends AuthenticatedActivity {
     DrawerLayout drawerLayout;
 
     @BindView(R.id.reviewPager)
-    ViewPager reviewPager;
+    ReviewViewPager reviewPager;
 
     @Inject MediaWikiApi mwApi;
 
@@ -167,15 +169,4 @@ public class ReviewActivity extends AuthenticatedActivity {
         Intent reviewActivity = new Intent(context, ReviewActivity.class);
         context.startActivity(reviewActivity);
     }
-
-    /*interface ReviewCallback {
-        void onImageRefreshed(String itemTitle);
-
-        void onQuestionChanged();
-        void onSurveyFinished();
-        void onImproperImageReported();
-        void onLicenceViolationReported();
-        void onWrongCategoryReported();
-        void onThankSent();
-    }*/
 }

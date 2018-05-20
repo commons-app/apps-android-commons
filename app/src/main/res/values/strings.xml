@@ -312,9 +312,12 @@
 
   <string name="review_copyright">Is this a copyright violation?</string>
   <string name="review_category">Is this mis-categorized?</string>
-  <string name="review_spam">Is this spam?</string>
+  <string name="review_spam">Is this out of scope?</string>
   <string name="review_thanks">Would you like to thank to contributor?</string>
-  <string name="review_no_category">Oh, this is not evet categorized!</string>
+  <string name="review_spam_explanation">Please report if doesn\'t look useful.</string>
+  <string name="review_copyright_explanation">A random photo from internet, a famous brand logo etc.</string>
+  <string name="review_thanks_explanation">%1$s will be happy with your thanks</string>
+  <string name="review_no_category">Oh, this is not evet categorized! Do you want to set some?</string>
   <string name="review_category_explanation">This image is under %1$s categories.</string>
   <string name="review_spam_report_question">Why do you think this is out of scope?</string>
   <string name="review_spam_report_default_answer">Because it is a selfie, very blurry or has nonsense etc.</string>
