@@ -314,5 +314,6 @@
   <string name="review_category">Is this mis-categorized?</string>
   <string name="review_spam">Is this spam?</string>
   <string name="review_no_category">This image is uncategorized</string>
+  <string name="review_category_explanation">This image is under %1$s categories.</string>
 
 </resources>
