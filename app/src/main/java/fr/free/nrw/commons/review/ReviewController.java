@@ -5,22 +5,29 @@ import android.support.v4.view.ViewPager;
 
 import java.util.ArrayList;
 
+import javax.inject.Inject;
+
+import fr.free.nrw.commons.Media;
+import fr.free.nrw.commons.R;
+import fr.free.nrw.commons.delete.DeleteTask;
+
 /**
- * Created by root on 19.05.2018.
+ * Created by nes on 19.05.2018.
  */
 
-public class ReviewController implements ReviewActivity.ReviewCallback {
+public class ReviewController {
     public static String fileName;
     protected static ArrayList<String> categories;
     ReviewPagerAdapter reviewPagerAdapter;
     ViewPager viewPager;
+    ReviewActivity reviewActivity;
 
     ReviewController(Context context) {
-        reviewPagerAdapter = ((ReviewActivity)context).reviewPagerAdapter;
+        reviewActivity =  (ReviewActivity)context;
+        reviewPagerAdapter = reviewActivity.reviewPagerAdapter;
         viewPager = ((ReviewActivity)context).pager;
     }
 
-    @Override
     public void onImageRefreshed(String fileName) {
         ReviewController.fileName = fileName;
         ReviewController.categories = new ArrayList<>();
@@ -30,33 +37,37 @@ public class ReviewController implements ReviewActivity.ReviewCallback {
         ReviewController.categories = categories;
     }
 
-    @Override
-    public void onQuestionChanged() {
-
+    public void swipeToNext() {
+        int nextPos = viewPager.getCurrentItem()+1;
+        if (nextPos <= 3) {
+            viewPager.setCurrentItem(nextPos);
+        } else {
+            reviewPagerAdapter.getItem(0);
+            reviewActivity.runRandomizer();
+        }
     }
 
-    @Override
-    public void onSurveyFinished() {
-
+    public void reportSpam() {
+        DeleteTask.askReasonAndExecute(new Media(fileName),
+                reviewActivity,
+                reviewActivity.getResources().getString(R.string.review_spam_report_question),
+                reviewActivity.getResources().getString(R.string.review_spam_report_default_answer));
     }
 
-    @Override
-    public void onImproperImageReported() {
-
+    public void reportPossibleCopyRightViolation() {
+        DeleteTask.askReasonAndExecute(new Media(fileName),
+                reviewActivity,
+                reviewActivity.getResources().getString(R.string.review_c_violation_report_question),
+                reviewActivity.getResources().getString(R.string.review_c_violation_report_default_answer));
     }
 
-    @Override
-    public void onLicenceViolationReported() {
-
+    public void reportWrongCategory() {
+        new CheckCategoryTask(reviewActivity, new Media(fileName)).execute();
+        swipeToNext();
     }
 
-    @Override
-    public void onWrongCategoryReported() {
-
-    }
-
-    @Override
-    public void onThankSent() {
-
+    public void sendThanks() {
+        new SendThankTask(reviewActivity, new Media(fileName));
+        swipeToNext();
     }
 }
