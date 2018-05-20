@@ -16,6 +16,7 @@ import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.auth.SessionManager;
 import fr.free.nrw.commons.di.ApplicationlessInjection;
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
+import fr.free.nrw.commons.mwapi.Revision;
 import timber.log.Timber;
 
 import static android.support.v4.app.NotificationCompat.DEFAULT_ALL;
@@ -45,7 +46,7 @@ public class SendThankTask extends AsyncTask<Void, Integer, Boolean> {
     private NotificationCompat.Builder notificationBuilder;
     private Context context;
     private Media media;
-    private String revision;
+    private Revision revision;
 
     public SendThankTask(Context context, Media media){
         this.context = context;
@@ -79,14 +80,14 @@ public class SendThankTask extends AsyncTask<Void, Integer, Boolean> {
         mwApi.setAuthCookie(authCookie);
 
         try {
-            this.revision =  mwApi.firstRevisionOfFile(media.getFilename());
+            revision = mwApi.firstRevisionOfFile(media.getFilename());
             editToken = mwApi.getEditToken();
             if (editToken.equals("+\\")) {
                 return false;
             }
             publishProgress(1);
 
-            mwApi.thank(editToken, revision);
+            mwApi.thank(editToken, revision.revisionId);
 
             publishProgress(2);
         }
