@@ -33,12 +33,6 @@ public class ReviewController {
     public void onImageRefreshed(String fileName) {
         ReviewController.fileName = fileName;
         ReviewController.categories = new ArrayList<>();
-
-        reviewActivity.mwApi.firstRevisionOfFile("File:" + fileName).subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(revision -> {
-                    ReviewController.firstRevision = revision;
-                });
     }
 
     public void onCategoriesRefreshed(ArrayList<String> categories) {

@@ -1,27 +1,20 @@
 package fr.free.nrw.commons.review;
 
-import android.app.AlertDialog;
 import android.os.Bundle;
 import android.text.Html;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ProgressBar;
-import android.widget.TableLayout;
 import android.widget.TextView;
 
 import com.facebook.drawee.view.SimpleDraweeView;
 
-import java.util.ArrayList;
-
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.Utils;
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
-import fr.free.nrw.commons.utils.ViewUtil;
 
 /**
  * Created by root on 19.05.2018.
@@ -39,6 +32,7 @@ public class ReviewImageFragment extends CommonsDaggerSupportFragment {
         private String catString;
 
         private View textViewQuestionContext;
+        private View imageCaption;
         private View textViewQuestion;
         private SimpleDraweeView simpleDraweeView;
 
@@ -85,6 +79,7 @@ public class ReviewImageFragment extends CommonsDaggerSupportFragment {
             progressBar = layoutView.findViewById(R.id.progressBar);
             textViewQuestion = layoutView.findViewById(R.id.reviewQuestion);
             textViewQuestionContext = layoutView.findViewById(R.id.reviewQuestionContext);
+            imageCaption = layoutView.findViewById(R.id.imageCaption);
             yesButton = layoutView.findViewById(R.id.yesButton);
             noButton = layoutView.findViewById(R.id.noButton);
             String question, explanation;
@@ -137,5 +132,9 @@ public class ReviewImageFragment extends CommonsDaggerSupportFragment {
                 progressBar.setVisibility(View.GONE);
             }
             return layoutView;
+        }
+
+        public void updateImageCaption() {
+            ((TextView)imageCaption).setText(fileName+" is uploaded by: "+ReviewController.firstRevision.username);
         }
 }
