@@ -7,6 +7,8 @@ import android.support.v4.app.NotificationCompat;
 import android.view.Gravity;
 import android.widget.Toast;
 
+import java.io.IOException;
+
 import javax.inject.Inject;
 
 import fr.free.nrw.commons.Media;
@@ -45,10 +47,14 @@ public class SendThankTask extends AsyncTask<Void, Integer, Boolean> {
     private Media media;
     private String revision;
 
-    public SendThankTask(Context context, Media media, String revision){
+    public SendThankTask(Context context, Media media){
         this.context = context;
         this.media = media;
-        this.revision = revision;
+        try {
+            this.revision =  mwApi.firstRevisionOfFile(media.getFilename());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override

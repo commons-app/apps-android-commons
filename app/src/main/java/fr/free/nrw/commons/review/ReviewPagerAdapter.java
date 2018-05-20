@@ -25,7 +25,7 @@ public class ReviewPagerAdapter extends FragmentStatePagerAdapter {
 
     @Override
     public int getCount() {
-        return 3;
+        return 4;
     }
 
     public void updateFilename() {
