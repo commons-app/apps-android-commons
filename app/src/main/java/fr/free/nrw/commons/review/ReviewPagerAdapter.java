@@ -19,6 +19,7 @@ public class ReviewPagerAdapter extends FragmentStatePagerAdapter {
         reviewImageFragments = new ReviewImageFragment[] {
             new ReviewImageFragment(),
             new ReviewImageFragment(),
+            new ReviewImageFragment(),
             new ReviewImageFragment()
         };
     }
