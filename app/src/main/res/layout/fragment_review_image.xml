@@ -8,13 +8,27 @@
     android:gravity="center_horizontal|bottom"
     >
 
-    <com.facebook.drawee.view.SimpleDraweeView
-        android:id="@+id/imageView"
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="3"
-        android:src="@drawable/commons_logo_large"
-        />
+        android:layout_weight="3">
+        <com.facebook.drawee.view.SimpleDraweeView
+            android:id="@+id/imageView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/commons_logo_large"
+            />
+
+        <ProgressBar
+            android:id="@+id/progressBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:visibility="visible"
+            />
+
+    </RelativeLayout>
+
     <TextView
         android:id="@+id/reviewQuestion"
         android:layout_width="match_parent"
