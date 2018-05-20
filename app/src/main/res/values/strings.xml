@@ -267,6 +267,8 @@
   <string name="no_internet">Internet unavailable</string>
   <string name="internet_established">Internet available</string>
   <string name="error_notifications">Error fetching notifications</string>
+  <string name="error_review">Error fetching image for review. Press refresh to try again.</string>
+  <string name="error_review_categories">Error fetching image categories for review. Press refresh to try again.</string>
   <string name="no_notifications">No notifications found</string>
   <string name="about_translate"><![CDATA[<u>Translate</u>]]></string>
   <string name="about_translate_title">Languages</string>
