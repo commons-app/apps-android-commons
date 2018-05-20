@@ -149,6 +149,14 @@ public class ReviewActivity extends AuthenticatedActivity {
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(this::updateCategories, this::categoryFetchError);
+
+        mwApi.firstRevisionOfFile("File:" + fileName).subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(revision -> {
+                    ReviewController.firstRevision = revision;
+                    ((ReviewImageFragment)reviewPagerAdapter.getItem(reviewPager.getCurrentItem())).updateImageCaption();
+                });
+
     }
 
     private void categoryFetchError(Throwable throwable) {

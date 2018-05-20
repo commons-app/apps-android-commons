@@ -31,10 +31,9 @@
             >
 
             <TextView
-                android:id="@+id/uploadTitle"
+                android:id="@+id/imageCaption"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Testingg"
                 android:textColor="#FFFFFFFF"
                 style="?android:textAppearanceMedium"
                 />
