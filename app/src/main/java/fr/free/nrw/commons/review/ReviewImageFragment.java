@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.TableLayout;
 import android.widget.TextView;
 
@@ -34,6 +35,7 @@ public class ReviewImageFragment extends CommonsDaggerSupportFragment {
         private String catString;
         private View catsView;
         private SimpleDraweeView simpleDraweeView;
+        public ProgressBar progressBar;
 
         public void update(int position, String fileName) {
             this.position = position;
@@ -41,6 +43,7 @@ public class ReviewImageFragment extends CommonsDaggerSupportFragment {
 
             if (simpleDraweeView!=null) {
                 simpleDraweeView.setImageURI(Utils.makeThumbBaseUrl(fileName));
+                progressBar.setVisibility(View.GONE);
             }
         }
 
@@ -63,6 +66,7 @@ public class ReviewImageFragment extends CommonsDaggerSupportFragment {
             position = getArguments().getInt("position");
             View layoutView = inflater.inflate(R.layout.fragment_review_image, container,
                     false);
+            progressBar = layoutView.findViewById(R.id.progressBar);
             View textView = layoutView.findViewById(R.id.reviewQuestion);
             View textViewQuestion = layoutView.findViewById(R.id.reviewQuestion);
             View textViewQuestionContext = layoutView.findViewById(R.id.reviewQuestionContext);
@@ -89,6 +93,7 @@ public class ReviewImageFragment extends CommonsDaggerSupportFragment {
 
             if (fileName != null) {
                 simpleDraweeView.setImageURI(Utils.makeThumbBaseUrl(fileName));
+                progressBar.setVisibility(View.GONE);
             }
             if (catString != null) {
                 ((TextView) catsView).setText(catString);

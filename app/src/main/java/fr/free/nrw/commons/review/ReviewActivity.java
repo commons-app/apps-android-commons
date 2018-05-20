@@ -16,6 +16,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 
 import com.viewpagerindicator.CirclePageIndicator;
 
@@ -82,7 +83,6 @@ public class ReviewActivity extends AuthenticatedActivity {
 
         reviewController = new ReviewController();
 
-
         reviewPagerAdapter = new ReviewPagerAdapter(getSupportFragmentManager());
         pager.setAdapter(reviewPagerAdapter);
         reviewPagerAdapter.getItem(0);
@@ -109,6 +109,10 @@ public class ReviewActivity extends AuthenticatedActivity {
     }
 
     private boolean runRandomizer() {
+        ProgressBar progressBar = reviewPagerAdapter.reviewImageFragments[pager.getCurrentItem()].progressBar;
+        if (progressBar != null) {
+            progressBar.setVisibility(View.VISIBLE);
+        }
         Observable.fromCallable(() -> {
             Media result = null;
             try {
