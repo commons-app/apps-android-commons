@@ -33,7 +33,7 @@ import fr.free.nrw.commons.theme.NavigationBaseActivity;
 public class AchievementsActivity extends NavigationBaseActivity {
 
     private static final double BADGE_IMAGE_WIDTH_RATIO = 0.4;
-    private static final double BADGE_IMAGE_HEIGHT_RATIO = 0.36;
+    private static final double BADGE_IMAGE_HEIGHT_RATIO = 0.3;
 
     @BindView(R.id.achievement_badge) ImageView imageView;
     @BindView(R.id.toolbar) android.support.v7.widget.Toolbar toolbar;
@@ -60,7 +60,7 @@ public class AchievementsActivity extends NavigationBaseActivity {
                 imageView.getLayoutParams();
         params.height = (int) (height*BADGE_IMAGE_HEIGHT_RATIO);
         params.width = (int) (width*BADGE_IMAGE_WIDTH_RATIO);
-        imageView.setImageResource(R.drawable.sydney_opera_house);
+        imageView.setImageResource(R.drawable.featured);
         imageView.requestLayout();
 
         setSupportActionBar(toolbar);
