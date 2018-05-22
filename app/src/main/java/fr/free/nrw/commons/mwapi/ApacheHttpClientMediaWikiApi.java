@@ -43,7 +43,6 @@ import java.util.concurrent.Callable;
 import fr.free.nrw.commons.BuildConfig;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.PageTitle;
-import fr.free.nrw.commons.achievements.Achievements;
 import fr.free.nrw.commons.category.CategoryImageUtils;
 import fr.free.nrw.commons.category.QueryContinue;
 import fr.free.nrw.commons.notification.Notification;
@@ -223,7 +222,7 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
 
     @Override
     public boolean pageExists(String pageName) throws IOException {
-        return Double.parseDouble( api.action("query")
+        return Double.parseDouble(api.action("query")
                 .param("titles", pageName)
                 .get()
                 .getString("/api/query/pages/page/@_idx")) != -1;
@@ -473,6 +472,7 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
      * The method takes categoryName as input and returns a List of Media objects
      * It uses the generator query API to get the images in a category, 10 at a time.
      * Uses the query continue values for fetching paginated responses
+     *
      * @param categoryName Category name as defined on commons
      * @return
      */
@@ -524,6 +524,7 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
      * For APIs that return paginated responses, MediaWiki APIs uses the QueryContinue to facilitate fetching of subsequent pages
      * https://www.mediawiki.org/wiki/API:Raw_query_continue
      * After fetching images a page of image for a particular category, shared prefs are updated with the latest QueryContinue Values
+     *
      * @param keyword
      * @param queryContinue
      */
@@ -535,6 +536,7 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
 
     /**
      * Before making a paginated API call, this method is called to get the latest query continue values to be used
+     *
      * @param keyword
      * @return
      */
@@ -621,19 +623,25 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
         });
     }
 
+    /**
+     * This takes userName as input, which is then used to fetch the feedback/achievements
+     * statistics using OkHttp and JavaRx. This function return JSONObject
+     * @param userName
+     * @return
+     */
     @NonNull
     @Override
     public Single<JSONObject> getAchievements(String userName) {
         final String fetchAchievementUrlTemplate =
                 wikiMediaToolforgeUrl + "urbanecmbot/commonsmisc/feedback.py";
-        return Single.fromCallable(()->{
+        return Single.fromCallable(() -> {
             String url = String.format(
                     Locale.ENGLISH,
                     fetchAchievementUrlTemplate,
                     new PageTitle(userName).getText());
             HttpUrl.Builder urlBuilder = HttpUrl.parse(url).newBuilder();
-            urlBuilder.addQueryParameter("user",userName);
-            Log.i("url",urlBuilder.toString());
+            urlBuilder.addQueryParameter("user", userName);
+            Log.i("url", urlBuilder.toString());
             Request request = new Request.Builder()
                     .url(urlBuilder.toString())
                     .build();

@@ -10,7 +10,6 @@ import java.io.InputStream;
 import java.util.List;
 
 import fr.free.nrw.commons.Media;
-import fr.free.nrw.commons.achievements.Achievements;
 import fr.free.nrw.commons.notification.Notification;
 import io.reactivex.Observable;
 import io.reactivex.Single;
@@ -79,7 +78,7 @@ public interface MediaWikiApi {
     Single<Integer> getUploadCount(String userName);
 
     @NonNull
-    Single<JSONObject> getAchievements (String userName);
+    Single<JSONObject> getAchievements(String userName);
 
     interface ProgressListener {
         void onProgress(long transferred, long total);

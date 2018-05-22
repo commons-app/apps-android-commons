@@ -80,8 +80,7 @@ public abstract class NavigationBaseActivity extends BaseActivity
             @Override
             public void onClick(View v) {
                 drawerLayout.closeDrawer(navigationView);
-                startActivityWithFlags(NavigationBaseActivity.this, AchievementsActivity.class, Intent.FLAG_ACTIVITY_CLEAR_TOP,
-                        Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                AchievementsActivity.startYourself(NavigationBaseActivity.this);
             }
         });
     }
