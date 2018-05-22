@@ -80,7 +80,6 @@ public class AchievementsActivity extends NavigationBaseActivity {
         if (id == R.id.share_app_icon) {
             View rootView = getWindow().getDecorView().findViewById(android.R.id.content);
             Bitmap screenShot = getScreenShot(rootView);
-            imageView.setImageBitmap(screenShot);
             shareScreen(screenShot);
         }
 
