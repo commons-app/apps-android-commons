@@ -16,8 +16,11 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.Toolbar;
+
+import org.json.JSONObject;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -31,7 +34,12 @@ import butterknife.ButterKnife;
 import dagger.Binds;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.auth.SessionManager;
+import fr.free.nrw.commons.mwapi.MediaWikiApi;
 import fr.free.nrw.commons.theme.NavigationBaseActivity;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.CompositeDisposable;
+import io.reactivex.schedulers.Schedulers;
+import timber.log.Timber;
 
 /**
  *  activity for sharing feedback on uploaded activity
@@ -42,9 +50,13 @@ public class AchievementsActivity extends NavigationBaseActivity {
     private static final double BADGE_IMAGE_HEIGHT_RATIO = 0.3;
 
     @BindView(R.id.achievement_badge) ImageView imageView;
+    @BindView(R.id.achievement_level)
+    TextView textView;
     @BindView(R.id.toolbar) android.support.v7.widget.Toolbar toolbar;
     @Inject SessionManager sessionManager;
+    @Inject MediaWikiApi mediaWikiApi;
 
+    private CompositeDisposable compositeDisposable = new CompositeDisposable();
     /**
      * This method helps in the creation Achievement screen and
      * dynamically set the size of imageView
@@ -76,6 +88,7 @@ public class AchievementsActivity extends NavigationBaseActivity {
         imageView.requestLayout();
 
         setSupportActionBar(toolbar);
+        setUploadCount();
         initDrawer();
     }
 
@@ -131,6 +144,20 @@ public class AchievementsActivity extends NavigationBaseActivity {
         } catch (IOException e) {
             //Do Nothing
         }
+    }
+
+    private void setUploadCount() {
+        compositeDisposable.add(mediaWikiApi
+                .getAchievements(sessionManager.getCurrentAccount().name)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(
+                  jsonObject -> parseJson(jsonObject)
+                ));
+    }
+
+    private void parseJson(JSONObject object){
+        Log.i("json",object.toString());
     }
 
 }

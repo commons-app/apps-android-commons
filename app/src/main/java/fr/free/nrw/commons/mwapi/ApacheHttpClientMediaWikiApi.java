@@ -23,6 +23,7 @@ import org.apache.http.impl.conn.tsccm.ThreadSafeClientConnManager;
 import org.apache.http.params.BasicHttpParams;
 import org.apache.http.params.CoreProtocolPNames;
 import org.apache.http.util.EntityUtils;
+import org.json.JSONObject;
 import org.mediawiki.api.ApiResult;
 import org.mediawiki.api.MWApi;
 import org.w3c.dom.NodeList;
@@ -42,6 +43,7 @@ import java.util.concurrent.Callable;
 import fr.free.nrw.commons.BuildConfig;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.PageTitle;
+import fr.free.nrw.commons.achievements.Achievements;
 import fr.free.nrw.commons.category.CategoryImageUtils;
 import fr.free.nrw.commons.category.QueryContinue;
 import fr.free.nrw.commons.notification.Notification;
@@ -49,6 +51,10 @@ import fr.free.nrw.commons.notification.NotificationUtils;
 import in.yuvi.http.fluent.Http;
 import io.reactivex.Observable;
 import io.reactivex.Single;
+import okhttp3.HttpUrl;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
 import timber.log.Timber;
 
 import static fr.free.nrw.commons.utils.ContinueUtils.getQueryContinue;
@@ -613,6 +619,31 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
             String uploadCount = EntityUtils.toString(response.getEntity()).trim();
             return Integer.parseInt(uploadCount);
         });
+    }
+
+    @NonNull
+    @Override
+    public Single<JSONObject> getAchievements(String userName) {
+        final String fetchAchievementUrlTemplate =
+                wikiMediaToolforgeUrl + "urbanecmbot/commonsmisc/feedback.py";
+        return Single.fromCallable(()->{
+            String url = String.format(
+                    Locale.ENGLISH,
+                    fetchAchievementUrlTemplate,
+                    new PageTitle(userName).getText());
+            HttpUrl.Builder urlBuilder = HttpUrl.parse(url).newBuilder();
+            urlBuilder.addQueryParameter("user",userName);
+            Log.i("url",urlBuilder.toString());
+            Request request = new Request.Builder()
+                    .url(urlBuilder.toString())
+                    .build();
+            OkHttpClient client = new OkHttpClient();
+            Response response = client.newCall(request).execute();
+            String jsonData = response.body().string();
+            JSONObject jsonObject = new JSONObject(jsonData);
+            return jsonObject;
+        });
+
     }
 
     private Date parseMWDate(String mwDate) {
