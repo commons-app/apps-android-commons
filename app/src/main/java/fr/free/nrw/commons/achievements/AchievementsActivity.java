@@ -24,12 +24,18 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Random;
 
+import javax.inject.Inject;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import dagger.Binds;
 import fr.free.nrw.commons.R;
+import fr.free.nrw.commons.auth.SessionManager;
 import fr.free.nrw.commons.theme.NavigationBaseActivity;
 
+/**
+ *  activity for sharing feedback on uploaded activity
+ */
 public class AchievementsActivity extends NavigationBaseActivity {
 
     private static final double BADGE_IMAGE_WIDTH_RATIO = 0.4;
@@ -37,10 +43,11 @@ public class AchievementsActivity extends NavigationBaseActivity {
 
     @BindView(R.id.achievement_badge) ImageView imageView;
     @BindView(R.id.toolbar) android.support.v7.widget.Toolbar toolbar;
-
+    @Inject SessionManager sessionManager;
 
     /**
-     * This method helps in the creation Achievement screen
+     * This method helps in the creation Achievement screen and
+     * dynamically set the size of imageView
      *
      * @param savedInstanceState Data bundle
      */
@@ -50,12 +57,17 @@ public class AchievementsActivity extends NavigationBaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_achievements);
         ButterKnife.bind(this);
-
+        /**
+         * DisplayMetrics used to fetch the size of the screen
+         */
         DisplayMetrics displayMetrics = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
         int height = displayMetrics.heightPixels;
         int width = displayMetrics.widthPixels;
 
+        /**
+         * Used for the setting the size of imageView at runtime
+         */
         RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams)
                 imageView.getLayoutParams();
         params.height = (int) (height*BADGE_IMAGE_HEIGHT_RATIO);
