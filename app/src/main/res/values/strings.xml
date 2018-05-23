@@ -285,4 +285,5 @@
   <string name="error_fetching_nearby_places">Error fetching nearby places.</string>
 
   <string name="menu_set_wallpaper">Set wallpaper</string>
+  <string name="wallpaper_set_successfully">Wallpaper set successfully!</string>
 </resources>

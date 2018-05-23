@@ -24,6 +24,7 @@ import com.facebook.imagepipeline.request.ImageRequestBuilder;
 
 import java.io.IOException;
 
+import fr.free.nrw.commons.R;
 import timber.log.Timber;
 
 import static com.mapbox.mapboxsdk.Mapbox.getApplicationContext;
@@ -196,6 +197,7 @@ public class ImageUtils {
         WallpaperManager wallpaperManager = WallpaperManager.getInstance(context);
         try {
             wallpaperManager.setBitmap(bitmap);
+            ViewUtil.showLongToast(context, context.getString(R.string.wallpaper_set_successfully));
         } catch (IOException e) {
             Timber.e(e,"Error setting wallpaper");
         }
