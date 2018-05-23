@@ -64,6 +64,11 @@ public class NotificationRenderer extends Renderer<Notification> {
         requestBuilder.load(notification.iconUrl).into(icon);
     }
 
+    /**
+     * Cleans up the notification text and sets it as the title
+     * Clean up is required to fix escaped HTML string and extra white spaces at the beginning of the notification
+     * @param notificationText
+     */
     private void setTitle(String notificationText) {
         notificationText = notificationText.trim().replaceAll("(^\\h*)|(\\h*$)", "");
         notificationText = Html.fromHtml(notificationText).toString();

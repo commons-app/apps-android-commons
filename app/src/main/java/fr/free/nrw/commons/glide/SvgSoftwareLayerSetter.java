@@ -16,6 +16,14 @@ import com.bumptech.glide.request.target.Target;
  */
 public class SvgSoftwareLayerSetter implements RequestListener<PictureDrawable> {
 
+    /**
+     * Sets the layer type to none if the load fails
+     * @param e
+     * @param model
+     * @param target
+     * @param isFirstResource
+     * @return
+     */
     @Override
     public boolean onLoadFailed(GlideException e, Object model, Target<PictureDrawable> target,
                                 boolean isFirstResource) {
@@ -24,6 +32,15 @@ public class SvgSoftwareLayerSetter implements RequestListener<PictureDrawable> 
         return false;
     }
 
+    /**
+     * Sets the layer type to software when the resource is ready
+     * @param resource
+     * @param model
+     * @param target
+     * @param dataSource
+     * @param isFirstResource
+     * @return
+     */
     @Override
     public boolean onResourceReady(PictureDrawable resource, Object model,
                                    Target<PictureDrawable> target, DataSource dataSource, boolean isFirstResource) {

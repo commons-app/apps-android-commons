@@ -32,6 +32,11 @@ public class NotificationUtils {
         return COMMONS_WIKI.equals(element.getAttribute("wiki"));
     }
 
+    /**
+     * Returns true if the wiki attribute corresponds to wikidatawiki
+     * @param document
+     * @return
+     */
     public static boolean isWikidataNotification(Node document) {
         if (document == null || !document.hasAttributes()) {
             return false;
@@ -40,6 +45,11 @@ public class NotificationUtils {
         return WIKIDATA_WIKI.equals(element.getAttribute("wiki"));
     }
 
+    /**
+     * Returns true if the wiki attribute corresponds to enwiki
+     * @param document
+     * @return
+     */
     public static boolean isWikipediaNotification(Node document) {
         if (document == null || !document.hasAttributes()) {
             return false;
@@ -85,6 +95,12 @@ public class NotificationUtils {
         return notifications;
     }
 
+    /**
+     * Currently the app is interested in showing notifications just from the following three wikis: commons, wikidata, wikipedia
+     * This function returns true only if the notification belongs to any of the above wikis and is of a known notification type
+     * @param node
+     * @return
+     */
     private static boolean isUsefulNotification(Node node) {
         return (isCommonsNotification(node)
                 || isWikidataNotification(node)
@@ -164,6 +180,11 @@ public class NotificationUtils {
         return body != null ? body.getTextContent() : "";
     }
 
+    /**
+     * Gets the header node returned in the XML document to form the description for thank you edits
+     * @param document
+     * @return
+     */
     private static String getThankYouEditDescription(Node document) {
         Node body = getNode(getModel(document), "header");
         return body != null ? body.getTextContent() : "";
