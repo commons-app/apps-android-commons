@@ -166,6 +166,11 @@ public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment imple
         }
     }
 
+    /**
+     * Set the media as the device's wallpaper if the imageUrl is not null
+     * Fails silently if setting the wallpaper fails
+     * @param media
+     */
     private void setWallpaper(Media media) {
         if(media.getImageUrl() == null || media.getImageUrl().isEmpty()) {
             Timber.d("Media URL not present");

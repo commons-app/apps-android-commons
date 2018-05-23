@@ -154,6 +154,12 @@ public class ImageUtils {
         return isImageDark;
     }
 
+    /**
+     * Downloads the image from the URL and sets it as the phone's wallpaper
+     * Fails silently if download or setting wallpaper fails.
+     * @param context
+     * @param imageUrl
+     */
     public static void setWallpaperFromImageUrl(Context context, Uri imageUrl) {
         Timber.d("Trying to set wallpaper from url %s", imageUrl.toString());
         ImageRequest imageRequest = ImageRequestBuilder
