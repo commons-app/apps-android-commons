@@ -70,6 +70,7 @@ public abstract class NavigationBaseActivity extends BaseActivity
 
         View navHeaderView = navigationView.getHeaderView(0);
         TextView username = navHeaderView.findViewById(R.id.username);
+        
         AccountManager accountManager = AccountManager.get(this);
         Account[] allAccounts = accountManager.getAccountsByType(AccountUtil.ACCOUNT_TYPE);
         if (allAccounts.length != 0) {

@@ -39,7 +39,9 @@
                 <action android:name="android.intent.action.MAIN" />
             </intent-filter>
         </activity>
+
         <activity android:name=".WelcomeActivity" />
+
         <activity
             android:name=".upload.ShareActivity"
             android:icon="@drawable/ic_launcher"
@@ -53,6 +55,7 @@
                 <data android:mimeType="audio/ogg" />
             </intent-filter>
         </activity>
+
         <activity
             android:name=".upload.MultipleShareActivity"
             android:icon="@drawable/ic_launcher"
@@ -66,27 +69,34 @@
                 <data android:mimeType="audio/ogg" />
             </intent-filter>
         </activity>
+
         <activity
             android:name=".contributions.ContributionsActivity"
             android:icon="@drawable/ic_launcher"
             android:label="@string/app_name" />
+
         <activity
             android:name=".settings.SettingsActivity"
             android:label="@string/title_activity_settings" />
+
         <activity
             android:name=".AboutActivity"
             android:label="@string/title_activity_about"
             android:parentActivityName=".contributions.ContributionsActivity" />
+
         <activity
             android:name=".auth.SignupActivity"
             android:label="@string/title_activity_signup" />
+
         <activity
             android:name=".nearby.NearbyActivity"
             android:label="@string/title_activity_nearby"
             android:parentActivityName=".contributions.ContributionsActivity" />
+
         <activity
             android:name=".notification.NotificationActivity"
             android:label="@string/navigation_item_notification" />
+
         <activity
             android:name=".category.CategoryImagesActivity"
             android:label="@string/title_activity_featured_images"
@@ -110,6 +120,7 @@
                 android:name="android.accounts.AccountAuthenticator"
                 android:resource="@xml/authenticator" />
         </service>
+
         <service
             android:name=".contributions.ContributionsSyncService"
             android:exported="true">
@@ -121,6 +132,7 @@
                 android:name="android.content.SyncAdapter"
                 android:resource="@xml/contributions_sync_adapter" />
         </service>
+
         <service
             android:name=".modifications.ModificationsSyncService"
             android:exported="true">
@@ -142,18 +154,21 @@
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/provider_paths" />
         </provider>
+
         <provider
             android:name=".contributions.ContributionsContentProvider"
             android:authorities="fr.free.nrw.commons.contributions.contentprovider"
             android:exported="false"
             android:label="@string/provider_contributions"
             android:syncable="true" />
+
         <provider
             android:name=".modifications.ModificationsContentProvider"
             android:authorities="fr.free.nrw.commons.modifications.contentprovider"
             android:exported="false"
             android:label="@string/provider_modifications"
             android:syncable="true" />
+
         <provider
             android:name=".category.CategoryContentProvider"
             android:authorities="fr.free.nrw.commons.categories.contentprovider"

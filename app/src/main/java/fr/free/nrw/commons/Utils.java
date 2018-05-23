@@ -60,7 +60,6 @@ public class Utils {
 
     /**
      * URL Encode an URL in UTF-8 format
-     *
      * @param url Unformatted URL
      * @return Encoded URL
      */
@@ -84,7 +83,6 @@ public class Utils {
 
     /**
      * Generates licence name with given ID
-     *
      * @param license License ID
      * @return Name of license
      */
@@ -110,7 +108,6 @@ public class Utils {
 
     /**
      * Fixing incorrect extension
-     *
      * @param title     File name
      * @param extension Correct extension
      * @return File with correct extension
@@ -132,7 +129,6 @@ public class Utils {
 
     /**
      * Tells whether dark theme is active or not
-     *
      * @param context Activity context
      * @return The state of dark theme
      */
