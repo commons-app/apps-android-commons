@@ -50,6 +50,7 @@
 
     <color name="bottom_bar_light">#E0E0E0</color>
     <color name="bottom_bar_dark">#424242</color>
+    <color name="layout_light_grey">#D6DCE0</color>
 
     <color name="opak_middle_grey">#757575</color>
 </resources>

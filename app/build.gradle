@@ -21,8 +21,8 @@ dependencies {
     implementation 'info.debatty:java-string-similarity:0.24'
     implementation 'com.borjabravo:readmoretextview:2.1.0'
     implementation 'com.android.support.constraint:constraint-layout:1.0.2'
-    implementation ('com.mapbox.mapboxsdk:mapbox-android-sdk:5.4.1@aar'){
-        transitive=true
+    implementation('com.mapbox.mapboxsdk:mapbox-android-sdk:5.4.1@aar') {
+        transitive = true
     }
 
     implementation "com.github.deano2390:MaterialShowcaseView:1.2.0"
@@ -68,6 +68,7 @@ dependencies {
     testImplementation 'org.robolectric:robolectric:3.7.1'
     testImplementation 'com.nhaarman:mockito-kotlin:1.5.0'
     testImplementation 'com.squareup.okhttp3:mockwebserver:3.8.1'
+    compile 'com.dinuscxj:circleprogressbar:1.1.1'
 
     androidTestImplementation "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
     androidTestImplementation 'com.squareup.okhttp3:mockwebserver:3.8.1'
@@ -116,7 +117,8 @@ android {
 
     buildTypes {
         release {
-            minifyEnabled false // See https://stackoverflow.com/questions/40232404/google-play-apk-and-android-studio-apk-usb-debug-behaving-differently - proguard.cfg modification alone insufficient.
+            minifyEnabled false
+            // See https://stackoverflow.com/questions/40232404/google-play-apk-and-android-studio-apk-usb-debug-behaving-differently - proguard.cfg modification alone insufficient.
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
         }
         debug {

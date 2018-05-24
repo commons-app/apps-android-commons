@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_height="match_parent"
     android:layout_width="match_parent"
@@ -25,6 +26,18 @@
         android:textSize="@dimen/subheading_text_size"
         android:layout_below="@+id/pictureOfTheDay"
         android:layout_centerHorizontal="true"
+        android:paddingBottom="@dimen/small_gap"/>
+
+    <ImageView
+        android:id="@+id/user_icon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/ic_person_black_24dp"
+        android:textColor="@color/item_white_background"
+        android:textSize="@dimen/subheading_text_size"
+        android:layout_below="@+id/pictureOfTheDay"
+        android:layout_marginHorizontal="@dimen/activity_margin_horizontal"
+        android:layout_toRightOf="@+id/username"
         android:paddingBottom="@dimen/small_gap"/>
 
 </RelativeLayout>

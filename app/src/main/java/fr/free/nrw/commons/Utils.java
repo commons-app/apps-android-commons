@@ -2,11 +2,13 @@ package fr.free.nrw.commons;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.customtabs.CustomTabsIntent;
 import android.support.v4.content.ContextCompat;
+import android.view.View;
 import android.widget.Toast;
 
 import org.apache.commons.codec.binary.Hex;
@@ -106,7 +108,7 @@ public class Utils {
 
     /**
      * Fixing incorrect extension
-     * @param title File name
+     * @param title     File name
      * @param extension Correct extension
      * @return File with correct extension
      */
@@ -146,7 +148,7 @@ public class Utils {
         StringBuilder stringBuilder = new StringBuilder();
 
         try {
-            String[] command = new String[] {"logcat","-d","-v","threadtime"};
+            String[] command = new String[]{"logcat", "-d", "-v", "threadtime"};
 
             Process process = Runtime.getRuntime().exec(command);
 
@@ -171,8 +173,7 @@ public class Utils {
         final String appPackageName = BuildConfig.class.getPackage().getName();
         try {
             context.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=" + appPackageName)));
-        }
-        catch (android.content.ActivityNotFoundException anfe) {
+        } catch (android.content.ActivityNotFoundException anfe) {
             context.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=" + appPackageName)));
         }
     }
@@ -192,6 +193,20 @@ public class Utils {
         CustomTabsIntent customTabsIntent = builder.build();
         customTabsIntent.intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         customTabsIntent.launchUrl(context, url);
+    }
+
+    /**
+     * To take screenshot of the screen and return it in Bitmap format
+     *
+     * @param view
+     * @return
+     */
+    public static Bitmap getScreenShot(View view) {
+        View screenView = view.getRootView();
+        screenView.setDrawingCacheEnabled(true);
+        Bitmap bitmap = Bitmap.createBitmap(screenView.getDrawingCache());
+        screenView.setDrawingCacheEnabled(false);
+        return bitmap;
     }
 
 }
