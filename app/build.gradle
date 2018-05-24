@@ -69,6 +69,10 @@ dependencies {
     testImplementation 'com.nhaarman:mockito-kotlin:1.5.0'
     testImplementation 'com.squareup.okhttp3:mockwebserver:3.8.1'
 
+    implementation 'com.caverock:androidsvg:1.2.1'
+    implementation 'com.github.bumptech.glide:glide:4.7.1'
+    kapt 'com.github.bumptech.glide:compiler:4.7.1'
+
     androidTestImplementation "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
     androidTestImplementation 'com.squareup.okhttp3:mockwebserver:3.8.1'
     androidTestImplementation "com.android.support:support-annotations:$SUPPORT_LIB_VERSION"
@@ -117,7 +121,7 @@ android {
     buildTypes {
         release {
             minifyEnabled false // See https://stackoverflow.com/questions/40232404/google-play-apk-and-android-studio-apk-usb-debug-behaving-differently - proguard.cfg modification alone insufficient.
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt', 'proguard-glide.txt'
         }
         debug {
             applicationIdSuffix ".debug"
