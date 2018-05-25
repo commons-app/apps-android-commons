@@ -22,7 +22,7 @@ import timber.log.Timber;
  * is uploaded, extract latitude and longitude from EXIF data of image. If a picture without
  * geolocation is uploaded, retrieve user's location (if enabled in Settings).
  */
-public class GPSExtractor {
+public class GPSExtractor extends FileProcessor {
 
     private final Context context;
     private SharedPreferences prefs;

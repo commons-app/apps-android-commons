@@ -79,6 +79,7 @@ import timber.log.Timber;
 
 import static fr.free.nrw.commons.upload.ExistingFileAsync.Result.DUPLICATE_PROCEED;
 import static fr.free.nrw.commons.upload.ExistingFileAsync.Result.NO_DUPLICATE;
+import static fr.free.nrw.commons.upload.FileUtils.getSHA1;
 
 /**
  * Activity for the title/desc screen after image is selected. Also starts processing image
@@ -307,8 +308,9 @@ public class ShareActivity
                     new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
                     REQUEST_PERM_ON_CREATE_LOCATION);
         }
+        FileProcessor fileObj = new FileProcessor(mediaUri);
         checkIfFileExists();
-        getFileCoordinates(locationPermitted);
+        fileObj.getFileCoordinates(locationPermitted);
 
         SingleUploadFragment shareView = (SingleUploadFragment) getSupportFragmentManager().findFragmentByTag("shareView");
         categorizationFragment = (CategorizationFragment) getSupportFragmentManager().findFragmentByTag("categorization");
@@ -436,14 +438,48 @@ public class ShareActivity
     /**
      *  Displays Snackbar to ask for location permissions
      */
-    private Snackbar requestPermissionUsingSnackBar(String rationale,
-                                                    final String[] perms,
-                                                    final int code) {
+    private Snackbar requestPermissionUsingSnackBar(String rationale, final String[] perms, final int code) {
         Snackbar snackbar = Snackbar.make(findViewById(android.R.id.content), rationale,
                 Snackbar.LENGTH_INDEFINITE).setAction(R.string.ok,
                 view -> ActivityCompat.requestPermissions(ShareActivity.this, perms, code));
         snackbar.show();
         return snackbar;
+    }
+
+    /**
+     * Check if file user wants to upload already exists on Commons
+     */
+    private void checkIfFileExists() {
+        if (!useNewPermissions || storagePermitted) {
+            if (!duplicateCheckPassed) {
+                //Test SHA1 of image to see if it matches SHA1 of a file on Commons
+                try {
+                    InputStream inputStream = getContentResolver().openInputStream(mediaUri);
+                    Timber.d("Input stream created from %s", mediaUri.toString());
+                    String fileSHA1 = getSHA1(inputStream);
+                    Timber.d("File SHA1 is: %s", fileSHA1);
+
+                    ExistingFileAsync fileAsyncTask =
+                            new ExistingFileAsync(new WeakReference<Activity>(this), fileSHA1, new WeakReference<Context>(this), result -> {
+                                Timber.d("%s duplicate check: %s", mediaUri.toString(), result);
+                                duplicateCheckPassed = (result == DUPLICATE_PROCEED || result == NO_DUPLICATE);
+
+                                //TODO: 16/9/17 should we run DetectUnwantedPicturesAsync if DUPLICATE_PROCEED is returned? Since that means
+                                //we are processing images that are already on server???...
+                                if (duplicateCheckPassed) {
+                                    //image can be uploaded, so now check if its a useless picture or not
+                                    detectUnwantedPictures();
+                                }
+                            },mwApi);
+                    fileAsyncTask.execute();
+                } catch (IOException e) {
+                    Timber.e(e, "IO Exception: ");
+                }
+            }
+        } else {
+            Timber.w("not ready for preprocessing: useNewPermissions=%s storage=%s location=%s",
+                    useNewPermissions, storagePermitted, locationPermitted);
+        }
     }
 
     //I might not be supposed to change it, but still, I saw it

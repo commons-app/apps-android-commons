@@ -19,48 +19,20 @@ import java.util.List;
 
 import timber.log.Timber;
 
+import static com.mapbox.mapboxsdk.Mapbox.getApplicationContext;
 import static fr.free.nrw.commons.upload.ExistingFileAsync.Result.DUPLICATE_PROCEED;
 import static fr.free.nrw.commons.upload.ExistingFileAsync.Result.NO_DUPLICATE;
+import static fr.free.nrw.commons.upload.FileUtils.getSHA1;
 
 public class FileProcessor {
 
+    private Uri mediaUri;
 
-    /**
-     * Check if file user wants to upload already exists on Commons
-     */
-    private void checkIfFileExists() {
-        if (!useNewPermissions || storagePermitted) {
-            if (!duplicateCheckPassed) {
-                //Test SHA1 of image to see if it matches SHA1 of a file on Commons
-                try {
-                    InputStream inputStream = getContentResolver().openInputStream(mediaUri);
-                    Timber.d("Input stream created from %s", mediaUri.toString());
-                    String fileSHA1 = getSHA1(inputStream);
-                    Timber.d("File SHA1 is: %s", fileSHA1);
+    public FileProcessor(Uri mediaUri) {
+        this.mediaUri = mediaUri;
 
-                    ExistingFileAsync fileAsyncTask =
-                            new ExistingFileAsync(new WeakReference<Activity>(this), fileSHA1, new WeakReference<Context>(this), result -> {
-                                Timber.d("%s duplicate check: %s", mediaUri.toString(), result);
-                                duplicateCheckPassed = (result == DUPLICATE_PROCEED || result == NO_DUPLICATE);
-
-                                //TODO: 16/9/17 should we run DetectUnwantedPicturesAsync if DUPLICATE_PROCEED is returned? Since that means
-                                //we are processing images that are already on server???...
-                                if (duplicateCheckPassed) {
-                                    //image can be uploaded, so now check if its a useless picture or not
-                                    detectUnwantedPictures();
-                                }
-                            },mwApi);
-                    fileAsyncTask.execute();
-                } catch (IOException e) {
-                    Timber.e(e, "IO Exception: ");
-                }
-            }
-        } else {
-            Timber.w("not ready for preprocessing: useNewPermissions=%s storage=%s location=%s",
-                    useNewPermissions, storagePermitted, locationPermitted);
-        }
     }
-
+    
     /**
      * Calls the async task that detects if image is fuzzy, too dark, etc
      */
@@ -108,7 +80,7 @@ public class FileProcessor {
      * Gets coordinates for category suggestions, either from EXIF data or user location
      * @param gpsEnabled if true use GPS
      */
-    private void getFileCoordinates(boolean gpsEnabled) {
+    void getFileCoordinates(boolean gpsEnabled) {
         Timber.d("Calling GPSExtractor");
         try {
             if (imageObj == null) {
