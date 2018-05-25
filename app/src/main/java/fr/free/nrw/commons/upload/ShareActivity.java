@@ -80,6 +80,14 @@ public class ShareActivity
         implements SingleUploadFragment.OnUploadActionInitiated,
         OnCategoriesSaveHandler,SimilarImageDialogFragment.onResponse {
 
+    private static final int REQUEST_PERM_ON_CREATE_STORAGE = 1;
+    private static final int REQUEST_PERM_ON_CREATE_LOCATION = 2;
+    private static final int REQUEST_PERM_ON_CREATE_STORAGE_AND_LOCATION = 3;
+    private static final int REQUEST_PERM_ON_SUBMIT_STORAGE = 4;
+    //Had to make them class variables, to extract out the click listeners, also I see no harm in this
+    final Rect startBounds = new Rect();
+    final Rect finalBounds = new Rect();
+    final Point globalOffset = new Point();
     @Inject
     MediaWikiApi mwApi;
     @Inject
@@ -93,7 +101,6 @@ public class ShareActivity
     @Inject
     @Named("default_preferences")
     SharedPreferences prefs;
-
     @BindView(R.id.container)
     FrameLayout flContainer;
     @BindView(R.id.backgroundImage)
@@ -108,45 +115,27 @@ public class ShareActivity
     FloatingActionButton mainFab;
     @BindView(R.id.expanded_image)
     PhotoView expandedImageView;
-
-    private static final int REQUEST_PERM_ON_CREATE_STORAGE = 1;
-    private static final int REQUEST_PERM_ON_CREATE_LOCATION = 2;
-    private static final int REQUEST_PERM_ON_CREATE_STORAGE_AND_LOCATION = 3;
-    private static final int REQUEST_PERM_ON_SUBMIT_STORAGE = 4;
-
     private String source;
     private String mimeType;
-
     private CategorizationFragment categorizationFragment;
     private Uri mediaUri;
     private Contribution contribution;
     private boolean cacheFound;
-
     private GPSExtractor imageObj;
     private GPSExtractor tempImageObj;
     private String decimalCoords;
     private FileProcessor fileObj;
-
     private boolean useNewPermissions = false;
     private boolean storagePermitted = false;
     private boolean locationPermitted = false;
-
     private String title;
     private String description;
     private Snackbar snackbar;
     private boolean duplicateCheckPassed = false;
-
-
     private boolean isNearbyUpload = false;
-
     private Animator CurrentAnimator;
     private long ShortAnimationDuration;
     private boolean isFABOpen = false;
-
-    //Had to make them class variables, to extract out the click listeners, also I see no harm in this
-    final Rect startBounds = new Rect();
-    final Rect finalBounds = new Rect();
-    final Point globalOffset = new Point();
     private float startScaleFinal;
 
     /**
@@ -274,14 +263,13 @@ public class ShareActivity
                         R.drawable.ic_error_outline_black_24dp, getTheme()))
                 .build());
 
-        receiveIntent();
+        receiveImageIntent();
 
         if (savedInstanceState != null) {
             contribution = savedInstanceState.getParcelable("contribution");
         }
 
         requestAuthToken();
-
         Timber.d("Uri: %s", mediaUri.toString());
         Timber.d("Ext storage dir: %s", Environment.getExternalStorageDirectory());
 
@@ -301,8 +289,6 @@ public class ShareActivity
                     REQUEST_PERM_ON_CREATE_LOCATION);
         }
 
-        ContentResolver contentResolver = this.getContentResolver();
-
         SingleUploadFragment shareView = (SingleUploadFragment) getSupportFragmentManager().findFragmentByTag("shareView");
         categorizationFragment = (CategorizationFragment) getSupportFragmentManager().findFragmentByTag("categorization");
         if (shareView == null && categorizationFragment == null) {
@@ -314,6 +300,7 @@ public class ShareActivity
         }
         uploadController.prepareService();
 
+        ContentResolver contentResolver = this.getContentResolver();
         fileObj = new FileProcessor(mediaUri, contentResolver, prefs, this);
         checkIfFileExists();
         fileObj.getFileCoordinates(locationPermitted);
@@ -322,7 +309,7 @@ public class ShareActivity
     /**
      * Receive intent from ContributionController.java when user selects picture to upload
      */
-    private void receiveIntent() {
+    private void receiveImageIntent() {
         Intent intent = getIntent();
 
         if (Intent.ACTION_SEND.equals(intent.getAction())) {
@@ -450,19 +437,16 @@ public class ShareActivity
                 //Test SHA1 of image to see if it matches SHA1 of a file on Commons
                 try {
                     InputStream inputStream = getContentResolver().openInputStream(mediaUri);
-                    Timber.d("Input stream created from %s", mediaUri.toString());
                     String fileSHA1 = getSHA1(inputStream);
+                    Timber.d("Input stream created from %s", mediaUri.toString());
                     Timber.d("File SHA1 is: %s", fileSHA1);
 
                     ExistingFileAsync fileAsyncTask =
                             new ExistingFileAsync(new WeakReference<Activity>(this), fileSHA1, new WeakReference<Context>(this), result -> {
                                 Timber.d("%s duplicate check: %s", mediaUri.toString(), result);
                                 duplicateCheckPassed = (result == DUPLICATE_PROCEED || result == NO_DUPLICATE);
-
-                                //TODO: 16/9/17 should we run DetectUnwantedPicturesAsync if DUPLICATE_PROCEED is returned? Since that means
-                                //we are processing images that are already on server???...
                                 if (duplicateCheckPassed) {
-                                    //image can be uploaded, so now check if its a useless picture or not
+                                    //image is not a duplicate, so now check if its a unwanted picture or not
                                     detectUnwantedPictures();
                                 }
                             },mwApi);
@@ -476,6 +460,7 @@ public class ShareActivity
                     useNewPermissions, storagePermitted, locationPermitted);
         }
     }
+
 
     //I might not be supposed to change it, but still, I saw it
     @Override
@@ -502,7 +487,6 @@ public class ShareActivity
                 = new DetectUnwantedPicturesAsync(new WeakReference<Activity>(this), imageMediaFilePath);
         detectUnwantedPicturesAsync.execute();
     }
-
 
     @Override
     public void onPause() {
