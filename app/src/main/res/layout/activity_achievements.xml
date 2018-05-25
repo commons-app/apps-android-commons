@@ -205,6 +205,7 @@
                         android:layout_marginTop="@dimen/activity_margin_horizontal"
                         android:layout_marginStart="@dimen/activity_margin_horizontal"
                         android:text="2"
+                        android:id="@+id/image_featured"
                         android:layout_marginLeft="@dimen/activity_margin_horizontal"
                         android:layout_marginRight="44dp" />
 

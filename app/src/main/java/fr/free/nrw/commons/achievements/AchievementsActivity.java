@@ -15,8 +15,8 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import com.dinuscxj.progressbar.CircleProgressBar;
 
+import com.dinuscxj.progressbar.CircleProgressBar;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -59,6 +59,8 @@ public class AchievementsActivity extends NavigationBaseActivity {
     CircleProgressBar imagesUploadedProgressbar;
     @BindView(R.id.images_used_by_wiki_progressbar)
     CircleProgressBar imagesUsedByWikiProgessbar;
+    @BindView(R.id.image_featured)
+    TextView imagesFeatured;
     @Inject
     SessionManager sessionManager;
     @Inject
@@ -158,6 +160,9 @@ public class AchievementsActivity extends NavigationBaseActivity {
                 ));
     }
 
+    /**
+     * used to the count of images uploaded by user
+     */
     private void setUploadCount() {
         compositeDisposable.add(mediaWikiApi
                 .getUploadCount(sessionManager.getCurrentAccount().name)
@@ -169,7 +174,12 @@ public class AchievementsActivity extends NavigationBaseActivity {
                 ));
     }
 
+    /**
+     * used to the uploaded images progressbar
+     * @param uploadCount
+     */
     private void setUploadProgress( int uploadCount){
+        Log.i("uploadCount",Integer.toString(uploadCount));
         imagesUploadedProgressbar.setProgress(100*uploadCount/25);
         imagesUploadedProgressbar.setProgressTextFormatPattern(uploadCount +"/25" );
     }
@@ -186,6 +196,10 @@ public class AchievementsActivity extends NavigationBaseActivity {
             achievements.setArticlesUsingImages(object.getInt("articlesUsingImages"));
             achievements.setThanksReceived(object.getInt("thanksReceived"));
             achievements.setImagesEditedBySomeoneElse(object.getInt("imagesEditedBySomeoneElse"));
+            JSONObject featuredImages = object.getJSONObject("featuredImages");
+            achievements.setFeaturedImages
+                    (featuredImages.getInt("Quality_images") +
+                            featuredImages.getInt("Featured_pictures_on_Wikimedia_Commons"));
 
         } catch (JSONException e) {
             e.printStackTrace();
@@ -193,10 +207,15 @@ public class AchievementsActivity extends NavigationBaseActivity {
         inflateAchievements(achievements);
     }
 
+    /**
+     * Used the inflate the fetched statistics of the images uploaded by user
+     * @param achievements
+     */
     private void inflateAchievements( Achievements achievements){
         thanksReceived.setText(Integer.toString(achievements.getThanksReceived()));
         imagesUsedByWikiProgessbar.setProgress(100*achievements.getUniqueUsedImages()/25);
         imagesUsedByWikiProgessbar.setProgressTextFormatPattern(achievements.getUniqueUsedImages() + "/25");
+        imagesFeatured.setText(Integer.toString(achievements.getFeaturedImages()));
     }
 
     /**

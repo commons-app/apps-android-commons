@@ -8,6 +8,7 @@ public class Achievements {
     private int articlesUsingImages;
     private int thanksReceived;
     private int imagesEditedBySomeoneElse;
+    private int featuredImages;
 
     /**
      * Sets the unique images used
@@ -79,5 +80,21 @@ public class Achievements {
      */
     public int getImagesEditedBySomeoneElse() {
         return imagesEditedBySomeoneElse;
+    }
+
+    /**
+     *  sets the total of images featured
+     * @param featuredImages
+     */
+    public void setFeaturedImages(int featuredImages) {
+        this.featuredImages = featuredImages;
+    }
+
+    /**
+     * returns the total count of images featured
+     * @return
+     */
+    public int getFeaturedImages() {
+        return featuredImages;
     }
 }
