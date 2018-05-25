@@ -10,6 +10,7 @@ import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.v4.view.ViewCompat;
 import android.support.v7.app.AlertDialog;
+import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.Html;
 import android.text.TextWatcher;
@@ -53,7 +54,7 @@ import static android.view.MotionEvent.ACTION_UP;
 public class SingleUploadFragment extends CommonsDaggerSupportFragment {
 
     @BindView(R.id.titleEdit) EditText titleEdit;
-    @BindView(R.id.descEdit) EditText descEdit;
+    @BindView(R.id.rv_descriptions) RecyclerView rvDescriptions;
     @BindView(R.id.titleDescButton) Button titleDescButton;
     @BindView(R.id.share_license_summary) TextView licenseSummaryView;
     @BindView(R.id.licenseSpinner) Spinner licenseSpinner;
@@ -65,6 +66,7 @@ public class SingleUploadFragment extends CommonsDaggerSupportFragment {
     private String license;
     private OnUploadActionInitiated uploadActionInitiatedHandler;
     private TitleTextWatcher textWatcher = new TitleTextWatcher();
+    private DescriptionsAdapter adapter;
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
@@ -102,6 +104,8 @@ public class SingleUploadFragment extends CommonsDaggerSupportFragment {
            Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_single_upload, container, false);
         ButterKnife.bind(this, rootView);
+
+        initRecyclerView();
 
         Intent activityIntent = getActivity().getIntent();
         if (activityIntent.hasExtra("title")) {
@@ -179,6 +183,10 @@ public class SingleUploadFragment extends CommonsDaggerSupportFragment {
         setLicenseSummary(license);
 
         return rootView;
+    }
+
+    private void initRecyclerView() {
+        adapter=new DescriptionsAdapter();
     }
 
     @Override
