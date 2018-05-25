@@ -1,5 +1,6 @@
 package fr.free.nrw.commons.upload;
 
+import android.app.Activity;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -13,6 +14,7 @@ import android.support.v7.app.AppCompatActivity;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.lang.ref.WeakReference;
 import java.util.Date;
 import java.util.List;
 
@@ -196,13 +198,23 @@ public class FileProcessor {
                 Timber.d("Cache found, setting categoryList in MwVolleyApi to %s", displayCatList);
                 MwVolleyApi.setGpsCat(displayCatList);
             }
-        }else{
+        } else {
             Timber.d("EXIF: no coords");
         }
     }
 
     boolean isCacheFound() {
         return cacheFound;
+    }
+
+    /**
+     * Calls the async task that detects if image is fuzzy, too dark, etc
+     */
+    void detectUnwantedPictures() {
+        String imageMediaFilePath = FileUtils.getPath(context, mediaUri);
+        DetectUnwantedPicturesAsync detectUnwantedPicturesAsync
+                = new DetectUnwantedPicturesAsync(new WeakReference<Activity>((Activity) context), imageMediaFilePath);
+        detectUnwantedPicturesAsync.execute();
     }
 
 }

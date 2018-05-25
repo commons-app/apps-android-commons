@@ -447,7 +447,7 @@ public class ShareActivity
                                 duplicateCheckPassed = (result == DUPLICATE_PROCEED || result == NO_DUPLICATE);
                                 if (duplicateCheckPassed) {
                                     //image is not a duplicate, so now check if its a unwanted picture or not
-                                    detectUnwantedPictures();
+                                    fileObj.detectUnwantedPictures();
                                 }
                             },mwApi);
                     fileAsyncTask.execute();
@@ -475,17 +475,6 @@ public class ShareActivity
     public void onNegativeResponse() {
         Timber.d("EXIF from imageObj");
         fileObj.useImageCoords();
-
-    }
-
-    /**
-     * Calls the async task that detects if image is fuzzy, too dark, etc
-     */
-    private void detectUnwantedPictures() {
-        String imageMediaFilePath = FileUtils.getPath(this, mediaUri);
-        DetectUnwantedPicturesAsync detectUnwantedPicturesAsync
-                = new DetectUnwantedPicturesAsync(new WeakReference<Activity>(this), imageMediaFilePath);
-        detectUnwantedPicturesAsync.execute();
     }
 
     @Override
