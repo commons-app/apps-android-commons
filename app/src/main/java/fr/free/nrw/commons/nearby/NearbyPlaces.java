@@ -17,7 +17,6 @@ import java.util.regex.Pattern;
 
 import fr.free.nrw.commons.Utils;
 import fr.free.nrw.commons.location.LatLng;
-import fr.free.nrw.commons.utils.FileUtils;
 import timber.log.Timber;
 
 public class NearbyPlaces {

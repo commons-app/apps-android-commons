@@ -15,11 +15,16 @@ import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileDescriptor;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
 import java.nio.channels.FileChannel;
 import java.util.Date;
 
@@ -251,6 +256,82 @@ public class FileUtils {
     public static void copy(@NonNull FileDescriptor source, @NonNull String destination)
             throws IOException {
         copy(new FileInputStream(source), new FileOutputStream(destination));
+    }
+
+
+    /**
+     * Read and return the content of a resource file as string.
+     * @param fileName asset file's path (e.g. "/queries/nearby_query.rq")
+     * @return the content of the file
+     */
+    public static String readFromResource(String fileName) throws IOException {
+        StringBuilder buffer = new StringBuilder();
+        BufferedReader reader = null;
+        try {
+            InputStream inputStream = FileUtils.class.getResourceAsStream(fileName);
+            if (inputStream == null) {
+                throw new FileNotFoundException(fileName);
+            }
+            reader = new BufferedReader(new InputStreamReader(inputStream, "UTF-8"));
+            String line;
+            while ((line = reader.readLine()) != null) {
+                buffer.append(line).append("\n");
+            }
+        } finally {
+            if (reader != null) {
+                reader.close();
+            }
+        }
+        return buffer.toString();
+    }
+
+    /**
+     * Deletes files.
+     * @param file context
+     */
+    public static boolean deleteFile(File file) {
+        boolean deletedAll = true;
+        if (file != null) {
+            if (file.isDirectory()) {
+                String[] children = file.list();
+                for (String child : children) {
+                    deletedAll = deleteFile(new File(file, child)) && deletedAll;
+                }
+            } else {
+                deletedAll = file.delete();
+            }
+        }
+
+        return deletedAll;
+    }
+
+    public static File createAndGetAppLogsFile(String logs) {
+        try {
+            File commonsAppDirectory = new File(Environment.getExternalStorageDirectory().toString() + "/CommonsApp");
+            if (!commonsAppDirectory.exists()) {
+                commonsAppDirectory.mkdir();
+            }
+
+            File logsFile = new File(commonsAppDirectory,"logs.txt");
+            if (logsFile.exists()) {
+                //old logs file is useless
+                logsFile.delete();
+            }
+
+            logsFile.createNewFile();
+
+            FileOutputStream outputStream = new FileOutputStream(logsFile);
+            OutputStreamWriter outputStreamWriter = new OutputStreamWriter(outputStream);
+            outputStreamWriter.append(logs);
+            outputStreamWriter.close();
+            outputStream.flush();
+            outputStream.close();
+
+            return logsFile;
+        } catch (IOException ioe) {
+            Timber.e(ioe);
+            return null;
+        }
     }
 
 }
