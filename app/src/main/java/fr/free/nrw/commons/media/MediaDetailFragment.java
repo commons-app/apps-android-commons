@@ -19,6 +19,7 @@ import android.view.ViewTreeObserver;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -110,6 +111,8 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
     Button delete;
     @BindView(R.id.mediaDetailScrollView)
     ScrollView scrollView;
+    @BindView(R.id.mediaDetailProgressBar)
+    ProgressBar progressBar;
 
     private ArrayList<String> categoryNames;
     private boolean categoriesLoaded = false;
@@ -235,6 +238,7 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
         // FIXME: keep the spinner going while we load data
         // FIXME: cache this data
         // Load image metadata: desc, license, categories
+        showProgress(true);
         detailFetchTask = new AsyncTask<Void, Void, Boolean>() {
             private MediaDataExtractor extractor;
 
@@ -267,13 +271,12 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
                 } else {
                     Timber.d("Failed to load photo details.");
                 }
+                showProgress(false);
             }
         };
         detailFetchTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 
         title.setText(media.getDisplayTitle());
-        desc.setText(""); // fill in from network...
-        license.setText(""); // fill in from network...
     }
 
     @Override
@@ -543,6 +546,18 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
 
         if (mapIntent.resolveActivity(getActivity().getPackageManager()) != null) {
             startActivity(mapIntent);
+        }
+    }
+
+    /**
+     * Show hide progress while making api calls
+     */
+
+    private void showProgress(boolean shouldShow) {
+        if (shouldShow) {
+            progressBar.setVisibility(View.VISIBLE);
+        } else {
+            progressBar.setVisibility(View.GONE);
         }
     }
 }
