@@ -460,7 +460,7 @@ public class ShareActivity
                             },mwApi);
                     fileAsyncTask.execute();
                 } catch (IOException e) {
-                    Timber.d(e, "IO Exception: ");
+                    Timber.e(e, "IO Exception: ");
                 }
             }
         } else {
@@ -479,8 +479,8 @@ public class ShareActivity
         detectUnwantedPicturesAsync.execute();
     }
 
-    /*
-     *  to display permission snackbar in share activity
+    /**
+     *  Displays Snackbar to ask for location permissions
      */
     private Snackbar requestPermissionUsingSnackBar(String rationale,
                                                     final String[] perms,
@@ -502,23 +502,18 @@ public class ShareActivity
             // TODO: there might be a more proper solution than this
             String copyPath = null;
             try {
-                ParcelFileDescriptor descriptor
-                        = getContentResolver().openFileDescriptor(mediaUri, "r");
+                ParcelFileDescriptor descriptor = getContentResolver().openFileDescriptor(mediaUri, "r");
                 if (descriptor != null) {
                     boolean useExtStorage = prefs.getBoolean("useExternalStorage", true);
                     if (useExtStorage) {
-                        copyPath = Environment.getExternalStorageDirectory().toString()
-                                + "/CommonsApp/" + new Date().getTime() + ".jpg";
+                        copyPath = Environment.getExternalStorageDirectory().toString() + "/CommonsApp/" + new Date().getTime() + ".jpg";
                         File newFile = new File(Environment.getExternalStorageDirectory().toString() + "/CommonsApp");
                         newFile.mkdir();
-                        FileUtils.copy(
-                                descriptor.getFileDescriptor(),
-                                copyPath);
+                        FileUtils.copy(descriptor.getFileDescriptor(), copyPath);
                         Timber.d("Filepath (copied): %s", copyPath);
                         return copyPath;
                     }
-                    copyPath = getApplicationContext().getCacheDir().getAbsolutePath()
-                            + "/" + new Date().getTime() + ".jpg";
+                    copyPath = getApplicationContext().getCacheDir().getAbsolutePath() + "/" + new Date().getTime() + ".jpg";
                     FileUtils.copy(
                             descriptor.getFileDescriptor(),
                             copyPath);
@@ -622,9 +617,7 @@ public class ShareActivity
                         newFragment.show(fragmentManager, "dialog");
                         break;
                     }
-
                 }
-
             }
         }
         haveCheckedForOtherImages = true; //Finished checking for other images
