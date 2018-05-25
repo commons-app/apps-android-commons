@@ -37,6 +37,7 @@ import fr.free.nrw.commons.theme.NavigationBaseActivity;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.schedulers.Schedulers;
+import timber.log.Timber;
 
 /**
  * activity for sharing feedback on uploaded activity
@@ -97,6 +98,7 @@ public class AchievementsActivity extends NavigationBaseActivity {
 
         setSupportActionBar(toolbar);
         setAchievements();
+        setUploadCount();
         initDrawer();
     }
 
@@ -154,6 +156,22 @@ public class AchievementsActivity extends NavigationBaseActivity {
                 .subscribe(
                         jsonObject -> parseJson(jsonObject)
                 ));
+    }
+
+    private void setUploadCount() {
+        compositeDisposable.add(mediaWikiApi
+                .getUploadCount(sessionManager.getCurrentAccount().name)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(
+                        uploadCount -> setUploadProgress(uploadCount),
+                        t -> Timber.e(t, "Fetching upload count failed")
+                ));
+    }
+
+    private void setUploadProgress( int uploadCount){
+        imagesUploadedProgressbar.setProgress(100*uploadCount/25);
+        imagesUploadedProgressbar.setProgressTextFormatPattern(uploadCount +"/25" );
     }
 
     /**
