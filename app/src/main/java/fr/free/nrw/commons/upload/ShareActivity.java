@@ -268,6 +268,7 @@ public class ShareActivity
         finish();
     }
 
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -312,13 +313,6 @@ public class ShareActivity
 
         ContentResolver contentResolver = this.getContentResolver();
 
-        fileObj = new FileProcessor(mediaUri, contentResolver, prefs, this);
-        String filePath = fileObj.getPathOfMediaOrCopy();
-
-
-        checkIfFileExists();
-        fileObj.getFileCoordinates(locationPermitted);
-
         SingleUploadFragment shareView = (SingleUploadFragment) getSupportFragmentManager().findFragmentByTag("shareView");
         categorizationFragment = (CategorizationFragment) getSupportFragmentManager().findFragmentByTag("categorization");
         if (shareView == null && categorizationFragment == null) {
@@ -329,6 +323,10 @@ public class ShareActivity
                     .commitAllowingStateLoss();
         }
         uploadController.prepareService();
+
+        fileObj = new FileProcessor(mediaUri, contentResolver, prefs, this);
+        checkIfFileExists();
+        fileObj.getFileCoordinates(locationPermitted);
     }
 
     /**

@@ -65,7 +65,7 @@ public class FileProcessor {
      */
     @Nullable
     String getPathOfMediaOrCopy() {
-        filePath = FileUtils.getPath(getApplicationContext(), mediaUri);
+        filePath = FileUtils.getPath(context, mediaUri);
         Timber.d("Filepath: " + filePath);
         if (filePath == null) {
             String copyPath = null;
