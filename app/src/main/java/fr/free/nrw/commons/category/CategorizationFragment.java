@@ -296,7 +296,7 @@ public class CategorizationFragment extends CommonsDaggerSupportFragment {
         String title = prefs.getString("Title", "");
 
         return mwApi
-                .searchTitles(title, SEARCH_CATS_LIMIT)
+                .searchCategories(title, SEARCH_CATS_LIMIT)
                 .map(name -> new CategoryItem(name, false));
     }
 

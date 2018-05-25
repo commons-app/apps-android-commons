@@ -153,6 +153,16 @@ public class JsonMediaWikiApi implements MediaWikiApi {
     }
 
     @Override
+    public String getWikidataCsrfToken() throws IOException {
+        return null;  // TODO
+    }
+
+    @Override
+    public String getCentralAuthToken() throws IOException {
+        return null;  // TODO
+    }
+
+    @Override
     public boolean fileExistsWithName(String fileName) {
         return query()
                 .param("prop", "imageinfo")
@@ -235,6 +245,18 @@ public class JsonMediaWikiApi implements MediaWikiApi {
         return editOperation("appendtext", editToken, processedPageContent, filename, summary);
     }
 
+    @Nullable
+    @Override
+    public String wikidatCreateClaim(String entityId, String property, String snaktype, String value) throws IOException {
+        return null;  // TODO
+    }
+
+    @Nullable
+    @Override
+    public boolean addWikidataEditTag(String revisionId) throws IOException {
+        return false;  // TODO
+    }
+
     private String editOperation(String editType, String editToken, String processedPageContent, String filename, String summary) {
         return edit()
                 .param("title", filename)
@@ -302,12 +324,6 @@ public class JsonMediaWikiApi implements MediaWikiApi {
                 .execute().query.getUsefulNotifications())
                 .map(NotificationResponse::toNotification)
                 .toList().blockingGet();
-    }
-
-    @NonNull
-    @Override
-    public Observable<String> searchTitles(String title, int searchCatsLimit) {
-        return searchCategories(title, searchCatsLimit); // TODO - check usages and have them call searchCategories() directly
     }
 
     @Nullable

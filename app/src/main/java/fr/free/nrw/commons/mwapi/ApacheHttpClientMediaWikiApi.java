@@ -458,42 +458,6 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
 
     @Override
     @NonNull
-    public Observable<String> searchTitles(String title, int searchCatsLimit) {
-        return Single.fromCallable((Callable<List<String>>) () -> {
-            ArrayList<ApiResult> categoryNodes;
-
-            try {
-                categoryNodes = api.action("query")
-                        .param("format", "xml")
-                        .param("list", "search")
-                        .param("srwhat", "text")
-                        .param("srnamespace", "14")
-                        .param("srlimit", searchCatsLimit)
-                        .param("srsearch", title)
-                        .get()
-                        .getNodes("/api/query/search/p/@title");
-            } catch (IOException e) {
-                Timber.e("Failed to obtain searchTitles", e);
-                return Collections.emptyList();
-            }
-
-            if (categoryNodes == null) {
-                return Collections.emptyList();
-            }
-
-            List<String> titleCategories = new ArrayList<>();
-            for (ApiResult categoryNode : categoryNodes) {
-                String cat = categoryNode.getDocument().getTextContent();
-                String catString = cat.replace("Category:", "");
-                titleCategories.add(catString);
-            }
-
-            return titleCategories;
-        }).flatMapObservable(Observable::fromIterable);
-    }
-
-    @Override
-    @NonNull
     public LogEventResult logEvents(String user, String lastModified, String queryContinue, int limit) throws IOException {
         org.mediawiki.api.MWApi.RequestBuilder builder = api.action("query")
                 .param("list", "logevents")
