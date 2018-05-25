@@ -347,19 +347,12 @@ public class ShareActivity
         if (mediaUri != null) {
             backgroundImageView.setImageURI(mediaUri);
         }
-<<<<<<< HEAD
     }
 
     /**
      * Initialize views and setup listeners here for FAB to prevent cluttering onCreate
      */
     private void initViewsAndListeners() {
-        //Main FAB splits into Zoom and Map
-        mainFab = (FloatingActionButton) findViewById(R.id.main_fab);
-        zoomInButton = (FloatingActionButton) findViewById(R.id.media_upload_zoom_in);
-        zoomOutButton = (FloatingActionButton) findViewById(R.id.media_upload_zoom_out);
-        maps_fragment = (FloatingActionButton) findViewById(R.id.media_map);
-
         mainFab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -382,11 +375,11 @@ public class ShareActivity
             Timber.e(e);
         }
 
-        maps_fragment.setVisibility(View.VISIBLE);
+        mapsFragment.setVisibility(View.VISIBLE);
         if( imageObj == null || imageObj.imageCoordsExists){
-            maps_fragment.setVisibility(View.INVISIBLE);
+            mapsFragment.setVisibility(View.INVISIBLE);
         }
-        maps_fragment.setOnClickListener(new View.OnClickListener() {
+        mapsFragment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if( imageObj != null && imageObj.imageCoordsExists) {
@@ -399,90 +392,14 @@ public class ShareActivity
         });
     }
 
-    
-=======
-        if (savedInstanceState != null) {
-            contribution = savedInstanceState.getParcelable("contribution");
-        }
-
-        requestAuthToken();
-
-        Timber.d("Uri: %s", mediaUri.toString());
-        Timber.d("Ext storage dir: %s", Environment.getExternalStorageDirectory());
-
-        useNewPermissions = false;
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            useNewPermissions = true;
-
-            if (!needsToRequestStoragePermission()) {
-                storagePermitted = true;
-            }
-            if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
-                locationPermitted = true;
-            }
-        }
-
-        // Check storage permissions if marshmallow or newer
-        if (useNewPermissions && (!storagePermitted || !locationPermitted)) {
-            if (!storagePermitted && !locationPermitted) {
-                String permissionRationales =
-                        getResources().getString(R.string.read_storage_permission_rationale) + "\n"
-                                + getResources().getString(R.string.location_permission_rationale);
-                snackbar = requestPermissionUsingSnackBar(
-                        permissionRationales,
-                        new String[]{
-                                Manifest.permission.READ_EXTERNAL_STORAGE,
-                                Manifest.permission.ACCESS_FINE_LOCATION},
-                        REQUEST_PERM_ON_CREATE_STORAGE_AND_LOCATION);
-                View snackbarView = snackbar.getView();
-                TextView textView = (TextView) snackbarView.findViewById(android.support.design.R.id.snackbar_text);
-                textView.setMaxLines(3);
-            } else if (!storagePermitted) {
-                requestPermissionUsingSnackBar(
-                        getString(R.string.read_storage_permission_rationale),
-                        new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},
-                        REQUEST_PERM_ON_CREATE_STORAGE);
-            } else if (!locationPermitted) {
-                requestPermissionUsingSnackBar(
-                        getString(R.string.location_permission_rationale),
-                        new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
-                        REQUEST_PERM_ON_CREATE_LOCATION);
-            }
-        }
-        performPreUploadProcessingOfFile();
-
-
-        SingleUploadFragment shareView = (SingleUploadFragment) getSupportFragmentManager().findFragmentByTag("shareView");
-        categorizationFragment = (CategorizationFragment) getSupportFragmentManager().findFragmentByTag("categorization");
-        if (shareView == null && categorizationFragment == null) {
-            shareView = new SingleUploadFragment();
-            getSupportFragmentManager()
-                    .beginTransaction()
-                    .add(R.id.single_upload_fragment_container, shareView, "shareView")
-                    .commitAllowingStateLoss();
-        }
-        uploadController.prepareService();
-        mapsFragment.setVisibility(View.VISIBLE);
-        if( imageObj == null || imageObj.imageCoordsExists != true){
-            mapsFragment.setVisibility(View.INVISIBLE);
-        }
-
-    }
-
-    /*
->>>>>>> refs/remotes/commons-app/master
+    /**
      * Function to display the zoom and map FAB
      */
     private void showFABMenu() {
         isFABOpen=true;
 
-<<<<<<< HEAD
         if( imageObj != null && imageObj.imageCoordsExists)
-        maps_fragment.setVisibility(View.VISIBLE);
-=======
-        if( imageObj != null && imageObj.imageCoordsExists == true)
         mapsFragment.setVisibility(View.VISIBLE);
->>>>>>> refs/remotes/commons-app/master
         zoomInButton.setVisibility(View.VISIBLE);
 
         mainFab.animate().rotationBy(180);
