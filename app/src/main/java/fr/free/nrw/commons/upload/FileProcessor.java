@@ -12,6 +12,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
+import android.support.v7.app.AppCompatActivity;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -21,6 +22,9 @@ import java.lang.ref.WeakReference;
 import java.util.Date;
 import java.util.List;
 
+import javax.inject.Inject;
+
+import fr.free.nrw.commons.caching.CacheController;
 import timber.log.Timber;
 
 import static com.mapbox.mapboxsdk.Mapbox.getApplicationContext;
@@ -39,6 +43,10 @@ public class FileProcessor {
     private boolean haveCheckedForOtherImages = false;
     private String filePath;
     private boolean useExtStorage;
+    private boolean cacheFound;
+
+    @Inject
+    CacheController cacheController;
 
     FileProcessor(Uri mediaUri, ContentResolver contentResolver, SharedPreferences prefs, Context context) {
         this.mediaUri = mediaUri;
@@ -86,7 +94,6 @@ public class FileProcessor {
     void getFileCoordinates(boolean gpsEnabled) {
         Timber.d("Calling GPSExtractor");
         try {
-
                 ParcelFileDescriptor descriptor = contentResolver.openFileDescriptor(mediaUri, "r");
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
                     if (descriptor != null) {
@@ -128,8 +135,7 @@ public class FileProcessor {
                 //Make sure the photos were taken within 20seconds
                 Timber.d("fild date:"+file.lastModified()+ " time of creation"+timeOfCreation);
                 tempImageObj = null;//Temporary GPSExtractor to extract coords from these photos
-                ParcelFileDescriptor descriptor
-                        = null;
+                ParcelFileDescriptor descriptor = null;
                 try {
                     descriptor = contentResolver.openFileDescriptor(Uri.parse(file.getAbsolutePath()), "r");
                 } catch (FileNotFoundException e) {
@@ -149,15 +155,14 @@ public class FileProcessor {
                     Timber.d("not null fild EXIF"+tempImageObj.imageCoordsExists +" coords"+tempImageObj.getCoords(gpsEnabled));
                     if(tempImageObj.getCoords(gpsEnabled)!=null && tempImageObj.imageCoordsExists){
 //                       Current image has gps coordinates and it's not current gps locaiton
-                        Timber.d("This fild has image coords:"+ file.getAbsolutePath());
+                        Timber.d("This file has image coords:"+ file.getAbsolutePath());
 //                       Create a dialog fragment for the suggestion
-                        FragmentManager fragmentManager = (Fragment) context.getSupportFragmentManager();
                         SimilarImageDialogFragment newFragment = new SimilarImageDialogFragment();
                         Bundle args = new Bundle();
                         args.putString("originalImagePath",filePath);
                         args.putString("possibleImagePath",file.getAbsolutePath());
                         newFragment.setArguments(args);
-                        newFragment.show(fragmentManager, "dialog");
+                        newFragment.show(((AppCompatActivity)context).getSupportFragmentManager(), "dialog");
                         break;
                     }
                 }
@@ -175,7 +180,7 @@ public class FileProcessor {
     public void useImageCoords() {
         if (decimalCoords != null) {
             Timber.d("Decimal coords of image: %s", decimalCoords);
-            Timber.d("is EXIF data present:"+imageObj.imageCoordsExists+" from findOther image:"+(imageObj==tempImageObj));
+            Timber.d("is EXIF data present:"+imageObj.imageCoordsExists+" from findOther image");
 
             // Only set cache for this point if image has coords
             if (imageObj.imageCoordsExists) {
@@ -184,10 +189,11 @@ public class FileProcessor {
                 cacheController.setQtPoint(decLongitude, decLatitude);
             }
 
-            MwVolleyApi apiCall = new MwVolleyApi(this);
+            MwVolleyApi apiCall = new MwVolleyApi(context);
 
             List<String> displayCatList = cacheController.findCategory();
             boolean catListEmpty = displayCatList.isEmpty();
+
 
             // If no categories found in cache, call MediaWiki API to match image coords with nearby Commons categories
             if (catListEmpty) {
@@ -202,7 +208,10 @@ public class FileProcessor {
         }else{
             Timber.d("EXIF: no coords");
         }
+    }
 
+    boolean isCacheFound() {
+        return cacheFound;
     }
 
 }
