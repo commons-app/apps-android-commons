@@ -8,7 +8,6 @@ import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.content.ContentResolver;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
@@ -32,16 +31,16 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.graphics.BitmapCompat;
-import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.WindowManager;
 import android.view.animation.DecelerateInterpolator;
-import android.view.inputmethod.InputMethodManager;
+import android.widget.FrameLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import butterknife.BindView;
+import butterknife.OnClick;
 import com.facebook.drawee.generic.GenericDraweeHierarchyBuilder;
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.github.chrisbanes.photoview.PhotoView;
@@ -69,22 +68,18 @@ import fr.free.nrw.commons.caching.CacheController;
 import fr.free.nrw.commons.category.CategorizationFragment;
 import fr.free.nrw.commons.category.OnCategoriesSaveHandler;
 import fr.free.nrw.commons.contributions.Contribution;
-import fr.free.nrw.commons.contributions.ContributionsActivity;
 import fr.free.nrw.commons.modifications.CategoryModifier;
 import fr.free.nrw.commons.modifications.ModificationsContentProvider;
 import fr.free.nrw.commons.modifications.ModifierSequence;
 import fr.free.nrw.commons.modifications.ModifierSequenceDao;
 import fr.free.nrw.commons.modifications.TemplateRemoveModifier;
 
-import fr.free.nrw.commons.utils.ImageUtils;
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
 import fr.free.nrw.commons.utils.ViewUtil;
 import timber.log.Timber;
 
-import android.support.design.widget.FloatingActionButton;
 import static fr.free.nrw.commons.upload.ExistingFileAsync.Result.DUPLICATE_PROCEED;
 import static fr.free.nrw.commons.upload.ExistingFileAsync.Result.NO_DUPLICATE;
-import static java.lang.Long.min;
 
 /**
  * Activity for the title/desc screen after image is selected. Also starts processing image
@@ -94,6 +89,22 @@ public class ShareActivity
         extends AuthenticatedActivity
         implements SingleUploadFragment.OnUploadActionInitiated,
         OnCategoriesSaveHandler,SimilarImageDialogFragment.onResponse {
+
+    @BindView(R.id.container)
+    FrameLayout flContainer;
+    @BindView(R.id.backgroundImage)
+    SimpleDraweeView backgroundImageView;
+    @BindView(R.id.media_map)
+    FloatingActionButton mapsFragment; //Lets stick to camelCase
+    @BindView(R.id.media_upload_zoom_in)
+    FloatingActionButton zoomInButton;
+    @BindView(R.id.media_upload_zoom_out)
+    FloatingActionButton zoomOutButton;
+    @BindView(R.id.main_fab)
+    FloatingActionButton mainFab;
+    @BindView(R.id.expanded_image)
+    PhotoView expandedImageView;
+
 
     private static final int REQUEST_PERM_ON_CREATE_STORAGE = 1;
     private static final int REQUEST_PERM_ON_CREATE_LOCATION = 2;
@@ -120,9 +131,6 @@ public class ShareActivity
 
     private Uri mediaUri;
     private Contribution contribution;
-    private SimpleDraweeView backgroundImageView;
-    private FloatingActionButton maps_fragment;
-
     private boolean cacheFound;
 
     private GPSExtractor imageObj;
@@ -143,10 +151,13 @@ public class ShareActivity
 
     private Animator CurrentAnimator;
     private long ShortAnimationDuration;
-    private FloatingActionButton zoomInButton;
-    private FloatingActionButton zoomOutButton;
-    private FloatingActionButton mainFab;
     private boolean isFABOpen = false;
+
+    //Had to make them class variables, to extract out the click listeners, also I see no harm in this
+    final Rect startBounds = new Rect();
+    final Rect finalBounds = new Rect();
+    final Point globalOffset = new Point();
+    private float startScaleFinal;
 
     /**
      * Called when user taps the submit button.
@@ -264,7 +275,6 @@ public class ShareActivity
         setContentView(R.layout.activity_share);
         ButterKnife.bind(this);
         initBack();
-        backgroundImageView = (SimpleDraweeView) findViewById(R.id.backgroundImage);
         backgroundImageView.setHierarchy(GenericDraweeHierarchyBuilder
                 .newInstance(getResources())
                 .setPlaceholderImage(VectorDrawableCompat.create(getResources(),
@@ -337,6 +347,7 @@ public class ShareActivity
         if (mediaUri != null) {
             backgroundImageView.setImageURI(mediaUri);
         }
+<<<<<<< HEAD
     }
 
     /**
@@ -388,18 +399,94 @@ public class ShareActivity
         });
     }
 
-    /**
+    
+=======
+        if (savedInstanceState != null) {
+            contribution = savedInstanceState.getParcelable("contribution");
+        }
+
+        requestAuthToken();
+
+        Timber.d("Uri: %s", mediaUri.toString());
+        Timber.d("Ext storage dir: %s", Environment.getExternalStorageDirectory());
+
+        useNewPermissions = false;
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            useNewPermissions = true;
+
+            if (!needsToRequestStoragePermission()) {
+                storagePermitted = true;
+            }
+            if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+                locationPermitted = true;
+            }
+        }
+
+        // Check storage permissions if marshmallow or newer
+        if (useNewPermissions && (!storagePermitted || !locationPermitted)) {
+            if (!storagePermitted && !locationPermitted) {
+                String permissionRationales =
+                        getResources().getString(R.string.read_storage_permission_rationale) + "\n"
+                                + getResources().getString(R.string.location_permission_rationale);
+                snackbar = requestPermissionUsingSnackBar(
+                        permissionRationales,
+                        new String[]{
+                                Manifest.permission.READ_EXTERNAL_STORAGE,
+                                Manifest.permission.ACCESS_FINE_LOCATION},
+                        REQUEST_PERM_ON_CREATE_STORAGE_AND_LOCATION);
+                View snackbarView = snackbar.getView();
+                TextView textView = (TextView) snackbarView.findViewById(android.support.design.R.id.snackbar_text);
+                textView.setMaxLines(3);
+            } else if (!storagePermitted) {
+                requestPermissionUsingSnackBar(
+                        getString(R.string.read_storage_permission_rationale),
+                        new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},
+                        REQUEST_PERM_ON_CREATE_STORAGE);
+            } else if (!locationPermitted) {
+                requestPermissionUsingSnackBar(
+                        getString(R.string.location_permission_rationale),
+                        new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
+                        REQUEST_PERM_ON_CREATE_LOCATION);
+            }
+        }
+        performPreUploadProcessingOfFile();
+
+
+        SingleUploadFragment shareView = (SingleUploadFragment) getSupportFragmentManager().findFragmentByTag("shareView");
+        categorizationFragment = (CategorizationFragment) getSupportFragmentManager().findFragmentByTag("categorization");
+        if (shareView == null && categorizationFragment == null) {
+            shareView = new SingleUploadFragment();
+            getSupportFragmentManager()
+                    .beginTransaction()
+                    .add(R.id.single_upload_fragment_container, shareView, "shareView")
+                    .commitAllowingStateLoss();
+        }
+        uploadController.prepareService();
+        mapsFragment.setVisibility(View.VISIBLE);
+        if( imageObj == null || imageObj.imageCoordsExists != true){
+            mapsFragment.setVisibility(View.INVISIBLE);
+        }
+
+    }
+
+    /*
+>>>>>>> refs/remotes/commons-app/master
      * Function to display the zoom and map FAB
      */
     private void showFABMenu() {
         isFABOpen=true;
 
+<<<<<<< HEAD
         if( imageObj != null && imageObj.imageCoordsExists)
         maps_fragment.setVisibility(View.VISIBLE);
+=======
+        if( imageObj != null && imageObj.imageCoordsExists == true)
+        mapsFragment.setVisibility(View.VISIBLE);
+>>>>>>> refs/remotes/commons-app/master
         zoomInButton.setVisibility(View.VISIBLE);
 
         mainFab.animate().rotationBy(180);
-        maps_fragment.animate().translationY(-getResources().getDimension(R.dimen.second_fab));
+        mapsFragment.animate().translationY(-getResources().getDimension(R.dimen.second_fab));
         zoomInButton.animate().translationY(-getResources().getDimension(R.dimen.first_fab));
     }
 
@@ -409,7 +496,7 @@ public class ShareActivity
     private void closeFABMenu(){
         isFABOpen=false;
         mainFab.animate().rotationBy(-180);
-        maps_fragment.animate().translationY(0);
+        mapsFragment.animate().translationY(0);
         zoomInButton.animate().translationY(0).setListener(new Animator.AnimatorListener() {
             @Override
             public void onAnimationStart(Animator animator) {
@@ -418,7 +505,7 @@ public class ShareActivity
             @Override
             public void onAnimationEnd(Animator animator) {
                 if(!isFABOpen){
-                    maps_fragment.setVisibility(View.GONE);
+                    mapsFragment.setVisibility(View.GONE);
                     zoomInButton.setVisibility(View.GONE);
                 }
             }
@@ -671,8 +758,9 @@ public class ShareActivity
         return;
     }
 
+    //I might not be supposed to change it, but still, I saw it
     @Override
-    public void onPostiveResponse() {
+    public void onPositiveResponse() {
         imageObj = tempImageObj;
         decimalCoords = imageObj.getCoords(false);// Not necessary to use gps as image already ha EXIF data
         Timber.d("EXIF from tempImageObj");
@@ -838,26 +926,19 @@ public class ShareActivity
             scaled = bitmap;
         }
         // Load the high-resolution "zoomed-in" image.
-        PhotoView expandedImageView = (PhotoView) findViewById(
-                R.id.expanded_image);
         expandedImageView.setImageBitmap(scaled);
 
 
 
         // Calculate the starting and ending bounds for the zoomed-in image.
         // This step involves lots of math. Yay, math.
-        final Rect startBounds = new Rect();
-        final Rect finalBounds = new Rect();
-        final Point globalOffset = new Point();
-
         // The start bounds are the global visible rectangle of the thumbnail,
         // and the final bounds are the global visible rectangle of the container
         // view. Also set the container view's offset as the origin for the
         // bounds, since that's the origin for the positioning animation
         // properties (X, Y).
         thumbView.getGlobalVisibleRect(startBounds);
-        findViewById(R.id.container)
-                .getGlobalVisibleRect(finalBounds, globalOffset);
+        flContainer.getGlobalVisibleRect(finalBounds, globalOffset);
         startBounds.offset(-globalOffset.x, -globalOffset.y);
         finalBounds.offset(-globalOffset.x, -globalOffset.y);
 
@@ -928,53 +1009,86 @@ public class ShareActivity
         // Upon clicking the zoomed-in image, it should zoom back down
         // to the original bounds and show the thumbnail instead of
         // the expanded image.
-        final float startScaleFinal = startScale;
-        zoomOutButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (CurrentAnimator != null) {
-                    CurrentAnimator.cancel();
-                }
-                zoomOutButton.setVisibility(View.GONE);
-                mainFab.setVisibility(View.VISIBLE);
+        startScaleFinal = startScale;
 
-                // Animate the four positioning/sizing properties in parallel,
-                // back to their original values.
-                AnimatorSet set = new AnimatorSet();
-                set.play(ObjectAnimator
-                        .ofFloat(expandedImageView, View.X, startBounds.left))
-                        .with(ObjectAnimator
-                                .ofFloat(expandedImageView,
-                                        View.Y,startBounds.top))
-                        .with(ObjectAnimator
-                                .ofFloat(expandedImageView,
-                                        View.SCALE_X, startScaleFinal))
-                        .with(ObjectAnimator
-                                .ofFloat(expandedImageView,
-                                        View.SCALE_Y, startScaleFinal));
-                set.setDuration(ShortAnimationDuration);
-                set.setInterpolator(new DecelerateInterpolator());
-                set.addListener(new AnimatorListenerAdapter() {
-                    @Override
-                    public void onAnimationEnd(Animator animation) {
-                        thumbView.setAlpha(1f);
-                        expandedImageView.setVisibility(View.GONE);
-                        CurrentAnimator = null;
-                    }
-
-                   @Override
-                    public void onAnimationCancel(Animator animation) {
-                       thumbView.setAlpha(1f);
-                       expandedImageView.setVisibility(View.GONE);
-                        CurrentAnimator = null;
-                    }
-                });
-                set.start();
-                CurrentAnimator = set;
-
-            }
-
-        });
     }
 
+    /*
+     * called when upper arrow floating button
+     */
+    @OnClick(R.id.main_fab)
+    public void onMainFabClicked() {
+        if (!isFABOpen) {
+            showFABMenu();
+        } else {
+            closeFABMenu();
+        }
+    }
+
+    @OnClick(R.id.media_upload_zoom_in)
+    public void onZoomInFabClicked() {
+        //This try catch block was originally holding the entire click listener on the fab button, I did not wanted to risk exceptions
+        try {
+            zoomImageFromThumb(backgroundImageView, mediaUri);
+        } catch (Exception e) {
+            Log.i("exception", e.toString());
+        }
+    }
+
+    @OnClick(R.id.media_upload_zoom_out)
+    public void onZoomOutFabClicked() {
+        if (CurrentAnimator != null) {
+            CurrentAnimator.cancel();
+        }
+        zoomOutButton.setVisibility(View.GONE);
+        mainFab.setVisibility(View.VISIBLE);
+
+        // Animate the four positioning/sizing properties in parallel,
+        // back to their original values.
+        AnimatorSet set = new AnimatorSet();
+        set.play(ObjectAnimator
+                .ofFloat(expandedImageView, View.X, startBounds.left))
+                .with(ObjectAnimator
+                        .ofFloat(expandedImageView,
+                                View.Y, startBounds.top))
+                .with(ObjectAnimator
+                        .ofFloat(expandedImageView,
+                                View.SCALE_X, startScaleFinal))
+                .with(ObjectAnimator
+                        .ofFloat(expandedImageView,
+                                View.SCALE_Y, startScaleFinal));
+        set.setDuration(ShortAnimationDuration);
+        set.setInterpolator(new DecelerateInterpolator());
+        set.addListener(new AnimatorListenerAdapter() {
+            @Override
+            public void onAnimationEnd(Animator animation) {
+                //background image view is thumbView
+                backgroundImageView.setAlpha(1f);
+                expandedImageView.setVisibility(View.GONE);
+                CurrentAnimator = null;
+            }
+
+            @Override
+            public void onAnimationCancel(Animator animation) {
+                //background image view is thumbView
+                backgroundImageView.setAlpha(1f);
+                expandedImageView.setVisibility(View.GONE);
+                CurrentAnimator = null;
+            }
+        });
+        set.start();
+        CurrentAnimator = set;
+    }
+
+    @OnClick(R.id.media_map)
+    public void onFabShowMapsClicked() {
+        if (imageObj != null && imageObj.imageCoordsExists == true) {
+            Uri gmmIntentUri = Uri
+                    .parse("google.streetview:cbll=" + imageObj.getDecLatitude() + "," + imageObj
+                            .getDecLongitude());
+            Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
+            mapIntent.setPackage("com.google.android.apps.maps");
+            startActivity(mapIntent);
+        }
+    }
 }

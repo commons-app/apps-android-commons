@@ -162,8 +162,8 @@
   <string name="detail_description_empty">Nincs leírás</string>
   <string name="detail_license_empty">Ismeretlen licenc</string>
   <string name="menu_refresh">Frissítés</string>
-  <string name="read_storage_permission_rationale" fuzzy="true">Szükséges engedély: Külső tárhely olvasása. Az alkalmazás nem működik enélkül.</string>
-  <string name="write_storage_permission_rationale" fuzzy="true">Szükséges engedély: Külső tárhely írása. Az alkalmazás nem működik enélkül.</string>
+  <string name="read_storage_permission_rationale">Szükséges engedély: Külső tárhely olvasása. Az alkalmazás nem működik enélkül.</string>
+  <string name="write_storage_permission_rationale">Szükséges engedély: Külső tárhely írása. Az alkalmazás nem tudja használni a kamerát enélkül.</string>
   <string name="location_permission_rationale">Lehetséges engedély: Jelenlegi hely megszerzése, a kategóriajavaslatok lehetőségéért.</string>
   <string name="ok">OK</string>
   <string name="title_activity_nearby">Közeli helyek</string>
@@ -242,6 +242,7 @@
   <string name="nearby_location_has_not_changed">A hely nem változott.</string>
   <string name="nearby_location_not_available">A hely nem érhető el.</string>
   <string name="location_permission_rationale_nearby">Közeli helyek listájának megtekintéséhez engedély szükséges</string>
+  <string name="read_article">SZÓCIKK OLVASÁSA</string>
   <string name="notifications_welcome">Üdvözlünk a Wikimedia Commonson, %1$s! Örülünk, hogy itt vagy.</string>
   <string name="notifications_talk_page_message">%1$s üzenetet hagyott a vitalapodon</string>
   <string name="notifications_thank_you_edit">Köszönjük a szerkesztésedet!</string>
@@ -258,5 +259,12 @@
   <string name="about_translate_proceed">Folytatás</string>
   <string name="about_translate_cancel">Mégse</string>
   <string name="retry">Újra</string>
+  <string name="showcase_view_whole_nearby_activity">Ezek a helyek vannak a közeledben, amikről van Wikipédia szócikk és nincs bennük kép.</string>
+  <string name="showcase_view_list_icon">A gombra koppintva bejön egy lista, ami ezeket a helyeket mutatja.</string>
+  <string name="showcase_view_plus_fab">Bármelyik helyhez feltölthetsz képet a galériádból vagy készíthetsz újat a kamerával.</string>
+  <string name="no_images_found">Nem található kép!</string>
+  <string name="error_loading_images">Képbetöltés közben hiba történt</string>
   <string name="share_app_title">Alkalmazás megosztása</string>
+  <string name="share_coordinates_not_present">A koordináták nem lettek megadva a kép kiválasztásakor.</string>
+  <string name="error_fetching_nearby_places">Hiba a közeli helyek elérésekor.</string>
 </resources>
