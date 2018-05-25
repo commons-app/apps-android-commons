@@ -128,7 +128,7 @@ public class JsonMediaWikiApi implements MediaWikiApi {
     }
 
     private String getLoginToken() {
-        return query()
+        return nonCachedQuery()
                 .param("type", "login")
                 .param("meta", "tokens")
                 .execute()
@@ -137,7 +137,8 @@ public class JsonMediaWikiApi implements MediaWikiApi {
 
     @Override
     public boolean validateLogin() {
-        return !query().param("meta", "userinfo")
+        return !query()
+                .param("meta", "userinfo")  // get
                 .execute()
                 .query.userInfo.id.equals("0");
     }
@@ -339,8 +340,7 @@ public class JsonMediaWikiApi implements MediaWikiApi {
     @NonNull
     @Override
     public LogEventResult logEvents(String user, String lastModified, String queryContinue, int limit) {
-        RequestBuilder.ParameterBuilder<QueryApiResponse> builder =
-                query()
+        RequestBuilder.ParameterBuilder<QueryApiResponse> builder = query()
                 .param("list", "logevents")
                 .param("letype", "upload")
                 .param("leprop", "title|timestamp|ids")
@@ -377,6 +377,22 @@ public class JsonMediaWikiApi implements MediaWikiApi {
     }
 
     @NonNull
+    private RequestBuilder.ParameterBuilder<QueryApiResponse> query() {
+        // See: https://www.mediawiki.org/wiki/API:Main_page
+        //
+        //   "Per the HTTP specification, POST requests cannot be cached.
+        //   Therefore, whenever you're reading data from the web service
+        //   API, you should use GET requests, not POST."
+        return RequestBuilder.get(QueryApiResponse.class).action("query");
+    }
+
+    @NonNull
+    private RequestBuilder.ParameterBuilder<QueryApiResponse> nonCachedQuery() {
+        // In some cases, cache avoidance is the desired behaviour though.
+        return RequestBuilder.post(QueryApiResponse.class).action("query");
+    }
+
+    @NonNull
     private RequestBuilder.ParameterBuilder<EditApiResponse> edit() {
         return RequestBuilder.post(EditApiResponse.class).action("edit");
     }
@@ -389,10 +405,5 @@ public class JsonMediaWikiApi implements MediaWikiApi {
     @NonNull
     private RequestBuilder.ParameterBuilder<LoginApiResponse> login() {
         return RequestBuilder.post(LoginApiResponse.class).action("clientlogin");
-    }
-
-    @NonNull
-    private RequestBuilder.ParameterBuilder<QueryApiResponse> query() {
-        return RequestBuilder.post(QueryApiResponse.class).action("query");
     }
 }

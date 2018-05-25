@@ -31,7 +31,7 @@ public class RequestBuilder {
 
     @NonNull
     public static <T> ActionBuilder<T> get(Class<T> returnClass) {
-        return new GetBuilder<T>(okHttpClient, gsonParser, parsedApiEndpoint, returnClass);
+        return new GetBuilder<>(okHttpClient, gsonParser, parsedApiEndpoint, returnClass);
     }
 
     @SuppressWarnings("WeakerAccess")
