@@ -283,7 +283,6 @@ public class ShareActivity
                 .build());
 
         receiveIntent();
-        initViewsAndListeners();
 
         if (savedInstanceState != null) {
             contribution = savedInstanceState.getParcelable("contribution");
@@ -346,49 +345,6 @@ public class ShareActivity
         if (mediaUri != null) {
             backgroundImageView.setImageURI(mediaUri);
         }
-    }
-
-    /**
-     * Initialize views and setup listeners here for FAB to prevent cluttering onCreate
-     */
-    private void initViewsAndListeners() {
-        mainFab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(!isFABOpen) {
-                    showFABMenu();
-                } else {
-                    closeFABMenu();
-                }
-            }
-        });
-
-        try {
-            zoomInButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    zoomImageFromThumb(backgroundImageView, mediaUri);
-                }
-            });
-        } catch (Exception e) {
-            Timber.e(e);
-        }
-
-        mapsFragment.setVisibility(View.VISIBLE);
-        if( imageObj == null || imageObj.imageCoordsExists){
-            mapsFragment.setVisibility(View.INVISIBLE);
-        }
-        mapsFragment.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if( imageObj != null && imageObj.imageCoordsExists) {
-                    Uri gmmIntentUri = Uri.parse("google.streetview:cbll=" + imageObj.getDecLatitude() + "," + imageObj.getDecLongitude());
-                    Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
-                    mapIntent.setPackage("com.google.android.apps.maps");
-                    startActivity(mapIntent);
-                }
-            }
-        });
     }
 
     /**
