@@ -26,6 +26,24 @@ import java.util.Date;
 import timber.log.Timber;
 
 public class FileUtils {
+    /**
+     * In older devices getPath() may fail depending on the source URI. Creating and using a copy of the file seems to work instead.
+     * @return path of copy
+     */
+    @Nullable
+    static String createCopyPath(ParcelFileDescriptor descriptor) {
+        try {
+            String copyPath = Environment.getExternalStorageDirectory().toString() + "/CommonsApp/" + new Date().getTime() + ".jpg";
+            File newFile = new File(Environment.getExternalStorageDirectory().toString() + "/CommonsApp");
+            newFile.mkdir();
+            FileUtils.copy(descriptor.getFileDescriptor(), copyPath);
+            Timber.d("Filepath (copied): %s", copyPath);
+            return copyPath;
+        } catch (IOException e) {
+            Timber.e(e);
+            return null;
+        }
+    }
 
     /**
      * Get a file path from a Uri. This will get the the path for Storage Access

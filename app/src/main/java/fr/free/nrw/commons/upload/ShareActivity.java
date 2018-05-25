@@ -492,31 +492,27 @@ public class ShareActivity
         return snackbar;
     }
 
+    /**
+     * Gets file path from media URI.
+     * In older devices getPath() may fail depending on the source URI, creating and using a copy of the file seems to work instead.
+     * @return file path of media
+     */
     @Nullable
     private String getPathOfMediaOrCopy() {
         String filePath = FileUtils.getPath(getApplicationContext(), mediaUri);
         Timber.d("Filepath: " + filePath);
         if (filePath == null) {
-            // in older devices getPath() may fail depending on the source URI
-            // creating and using a copy of the file seems to work instead.
-            // TODO: there might be a more proper solution than this
             String copyPath = null;
             try {
                 ParcelFileDescriptor descriptor = getContentResolver().openFileDescriptor(mediaUri, "r");
                 if (descriptor != null) {
                     boolean useExtStorage = prefs.getBoolean("useExternalStorage", true);
                     if (useExtStorage) {
-                        copyPath = Environment.getExternalStorageDirectory().toString() + "/CommonsApp/" + new Date().getTime() + ".jpg";
-                        File newFile = new File(Environment.getExternalStorageDirectory().toString() + "/CommonsApp");
-                        newFile.mkdir();
-                        FileUtils.copy(descriptor.getFileDescriptor(), copyPath);
-                        Timber.d("Filepath (copied): %s", copyPath);
+                        copyPath = FileUtils.createCopyPath(descriptor);
                         return copyPath;
                     }
                     copyPath = getApplicationContext().getCacheDir().getAbsolutePath() + "/" + new Date().getTime() + ".jpg";
-                    FileUtils.copy(
-                            descriptor.getFileDescriptor(),
-                            copyPath);
+                    FileUtils.copy(descriptor.getFileDescriptor(), copyPath);
                     Timber.d("Filepath (copied): %s", copyPath);
                     return copyPath;
                 }
