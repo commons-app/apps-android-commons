@@ -312,20 +312,12 @@ public class JsonMediaWikiApi implements MediaWikiApi {
 
     @Nullable
     @Override
-    public String revisionsByFilename(String filename) { // TODO
-        query()
+    public String revisionsByFilename(String filename) {
+        return query()
                 .param("prop", "revisions")
                 .param("rvprop", "timestamp|content")
                 .param("titles", filename)
-                .execute();
-
-        return ""
-                /*api.action("query")
-                .param("prop", "revisions")
-                .param("rvprop", "timestamp|content")
-                .param("titles", filename)
-                .get()
-                .getString("/api/query/pages/page/revisions/rev")*/;
+                .execute().query.firstPage().wikiContent();
     }
 
     @Override
