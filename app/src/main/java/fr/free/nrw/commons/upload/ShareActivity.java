@@ -455,7 +455,7 @@ public class ShareActivity
                                  //we are processing images that are already on server???...
                                 if (duplicateCheckPassed) {
                                     //image can be uploaded, so now check if its a useless picture or not
-                                    performUnwantedPictureDetectionProcess();
+                                    detectUnwantedPictures();
                                 }
                             },mwApi);
                     fileAsyncTask.execute();
@@ -469,12 +469,13 @@ public class ShareActivity
         }
     }
 
-    private void performUnwantedPictureDetectionProcess() {
+    /**
+     * Calls the async task that detects if image is fuzzy, too dark, etc
+     */
+    private void detectUnwantedPictures() {
         String imageMediaFilePath = FileUtils.getPath(this,mediaUri);
         DetectUnwantedPicturesAsync detectUnwantedPicturesAsync
-                = new DetectUnwantedPicturesAsync(new WeakReference<Activity>(this)
-                                                                , imageMediaFilePath);
-
+                = new DetectUnwantedPicturesAsync(new WeakReference<Activity>(this), imageMediaFilePath);
         detectUnwantedPicturesAsync.execute();
     }
 
