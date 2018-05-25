@@ -26,7 +26,7 @@ import timber.log.Timber;
 
 import static com.mapbox.mapboxsdk.Mapbox.getApplicationContext;
 
-public class FileProcessor {
+public class FileProcessor implements SimilarImageDialogFragment.onResponse{
 
     private Uri mediaUri;
     private ContentResolver contentResolver;
@@ -38,6 +38,7 @@ public class FileProcessor {
     private String filePath;
     private boolean useExtStorage;
     private boolean cacheFound;
+    private GPSExtractor tempImageObj;
 
     @Inject
     CacheController cacheController;
@@ -123,7 +124,7 @@ public class FileProcessor {
         File folder = new File(filePath.substring(0,filePath.lastIndexOf('/')));
         File[] files = folder.listFiles();
         Timber.d("folderTime Number:"+files.length);
-        GPSExtractor tempImageObj;
+
 
         for(File file : files){
             if(file.lastModified()-timeOfCreation<=(120*1000) && file.lastModified()-timeOfCreation>=-(120*1000)){
@@ -217,4 +218,17 @@ public class FileProcessor {
         detectUnwantedPicturesAsync.execute();
     }
 
+    @Override
+    public void onPositiveResponse() {
+        imageObj = tempImageObj;
+        decimalCoords = imageObj.getCoords(false);// Not necessary to use gps as image already ha EXIF data
+        Timber.d("EXIF from tempImageObj");
+        useImageCoords();
+    }
+
+    @Override
+    public void onNegativeResponse() {
+        Timber.d("EXIF from imageObj");
+        useImageCoords();
+    }
 }

@@ -78,7 +78,7 @@ import static fr.free.nrw.commons.upload.FileUtils.getSHA1;
 public class ShareActivity
         extends AuthenticatedActivity
         implements SingleUploadFragment.OnUploadActionInitiated,
-        OnCategoriesSaveHandler,SimilarImageDialogFragment.onResponse {
+        OnCategoriesSaveHandler {
 
     private static final int REQUEST_PERM_ON_CREATE_STORAGE = 1;
     private static final int REQUEST_PERM_ON_CREATE_LOCATION = 2;
@@ -462,20 +462,6 @@ public class ShareActivity
     }
 
 
-    //I might not be supposed to change it, but still, I saw it
-    @Override
-    public void onPositiveResponse() {
-        imageObj = tempImageObj;
-        decimalCoords = imageObj.getCoords(false);// Not necessary to use gps as image already ha EXIF data
-        Timber.d("EXIF from tempImageObj");
-        fileObj.useImageCoords();
-    }
-
-    @Override
-    public void onNegativeResponse() {
-        Timber.d("EXIF from imageObj");
-        fileObj.useImageCoords();
-    }
 
     @Override
     public void onPause() {
