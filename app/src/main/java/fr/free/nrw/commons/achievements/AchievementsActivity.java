@@ -15,7 +15,10 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import com.dinuscxj.progressbar.CircleProgressBar;
 
+
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.File;
@@ -49,6 +52,12 @@ public class AchievementsActivity extends NavigationBaseActivity {
     TextView textView;
     @BindView(R.id.toolbar)
     Toolbar toolbar;
+    @BindView(R.id.thanks_received)
+    TextView thanksReceived;
+    @BindView(R.id.images_uploaded_progressbar)
+    CircleProgressBar imagesUploadedProgressbar;
+    @BindView(R.id.images_used_by_wiki_progressbar)
+    CircleProgressBar imagesUsedByWikiProgessbar;
     @Inject
     SessionManager sessionManager;
     @Inject
@@ -153,7 +162,23 @@ public class AchievementsActivity extends NavigationBaseActivity {
      * @param object
      */
     private void parseJson(JSONObject object) {
-        Log.i("json", object.toString());
+        Achievements achievements = new Achievements();
+        try {
+            achievements.setUniqueUsedImages(object.getInt("uniqueUsedImages"));
+            achievements.setArticlesUsingImages(object.getInt("articlesUsingImages"));
+            achievements.setThanksReceived(object.getInt("thanksReceived"));
+            achievements.setImagesEditedBySomeoneElse(object.getInt("imagesEditedBySomeoneElse"));
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        inflateAchievements(achievements);
+    }
+
+    private void inflateAchievements( Achievements achievements){
+        thanksReceived.setText(Integer.toString(achievements.getThanksReceived()));
+        imagesUsedByWikiProgessbar.setProgress(100*achievements.getUniqueUsedImages()/25);
+        imagesUsedByWikiProgessbar.setProgressTextFormatPattern(achievements.getUniqueUsedImages() + "/25");
     }
 
     /**

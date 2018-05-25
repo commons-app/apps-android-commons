@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-  <string name="preference_category_appearance">Appearance</string
+  <string name="preference_category_appearance">Appearance</string>
   <string name="preference_category_general">General</string>
   <string name="preference_category_feedback">Feedback</string>
   <string name="preference_category_location">Location</string>

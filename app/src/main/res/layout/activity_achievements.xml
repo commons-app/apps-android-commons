@@ -78,6 +78,7 @@
                         android:layout_height="35dp"
                         android:layout_alignParentRight="true"
                         android:layout_marginRight="32dp"
+                        android:id="@+id/images_uploaded_progressbar"
                         android:progress="50"
                         app:progress_end_color="#8C8B98"
                         app:progress_start_color="#3A3381"
@@ -112,6 +113,7 @@
                         android:layout_alignParentRight="true"
                         android:layout_marginRight="32dp"
                         android:progress="50"
+                        android:id="@+id/image_reverts_progressbar"
                         app:progress_end_color="#8C8B98"
                         app:progress_start_color="#3A3381"
                         app:progress_stroke_width="3dp"
@@ -146,6 +148,7 @@
                         android:layout_alignParentRight="true"
                         android:layout_marginRight="32dp"
                         android:progress="50"
+                        android:id="@+id/images_used_by_wiki_progressbar"
                         app:progress_end_color="#8C8B98"
                         app:progress_start_color="#3A3381"
                         app:progress_stroke_width="2.5dp"
@@ -242,6 +245,7 @@
                         android:layout_marginStart="@dimen/activity_margin_horizontal"
                         android:layout_marginLeft="@dimen/activity_margin_horizontal"
                         android:text="2"
+                        android:id="@+id/thanks_received"
                         android:layout_marginRight="44dp" />
 
                 </RelativeLayout>
