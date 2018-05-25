@@ -196,7 +196,7 @@ public class ShareActivity
      * Gets file metadata for category suggestions, displays toast, caches categories found, calls uploadController
      */
     private void uploadBegins() {
-        getFileMetadata(locationPermitted);
+        getFileCoordinates(locationPermitted);
 
         Toast startingToast = Toast.makeText(this, R.string.uploading_started, Toast.LENGTH_LONG);
         startingToast.show();
@@ -308,7 +308,7 @@ public class ShareActivity
                     REQUEST_PERM_ON_CREATE_LOCATION);
         }
         checkIfFileExists();
-        getFileMetadata(locationPermitted);
+        getFileCoordinates(locationPermitted);
 
         SingleUploadFragment shareView = (SingleUploadFragment) getSupportFragmentManager().findFragmentByTag("shareView");
         categorizationFragment = (CategorizationFragment) getSupportFragmentManager().findFragmentByTag("categorization");
@@ -526,15 +526,13 @@ public class ShareActivity
 
     /**
      * Gets coordinates for category suggestions, either from EXIF data or user location
-     *
      * @param gpsEnabled if true use GPS
      */
-    private void getFileMetadata(boolean gpsEnabled) {
+    private void getFileCoordinates(boolean gpsEnabled) {
         Timber.d("Calling GPSExtractor");
         try {
             if (imageObj == null) {
-                ParcelFileDescriptor descriptor
-                        = getContentResolver().openFileDescriptor(mediaUri, "r");
+                ParcelFileDescriptor descriptor = getContentResolver().openFileDescriptor(mediaUri, "r");
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
                     if (descriptor != null) {
                         imageObj = new GPSExtractor(descriptor.getFileDescriptor(), this, prefs);
@@ -548,18 +546,13 @@ public class ShareActivity
             }
 
             if (imageObj != null) {
-                // Gets image coords from exif data or user location
                 decimalCoords = imageObj.getCoords(gpsEnabled);
-                if(decimalCoords==null || !imageObj.imageCoordsExists){
-//                  Check if the location is from GPS or EXIF
-//                  Find other photos taken around the same time which has gps coordinates
-                    Timber.d("EXIF:false");
-                    Timber.d("EXIF call"+(imageObj==tempImageObj));
+                if (decimalCoords == null || !imageObj.imageCoordsExists){
+                    //Find other photos taken around the same time which has gps coordinates
                     if(!haveCheckedForOtherImages)
                         findOtherImages(gpsEnabled);// Do not do repeat the process
                 }
                 else {
-//                  As the selected image has GPS data in EXIF go ahead with the same.
                     useImageCoords();
                 }
             }
