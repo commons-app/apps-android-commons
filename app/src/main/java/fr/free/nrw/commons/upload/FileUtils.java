@@ -25,12 +25,55 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
+import java.math.BigInteger;
 import java.nio.channels.FileChannel;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.Date;
 
 import timber.log.Timber;
 
 public class FileUtils {
+
+    /**
+     * Get SHA1 of file from input stream
+     */
+    static String getSHA1(InputStream is) {
+
+        MessageDigest digest;
+        try {
+            digest = MessageDigest.getInstance("SHA1");
+        } catch (NoSuchAlgorithmException e) {
+            Timber.e(e, "Exception while getting Digest");
+            return "";
+        }
+
+        byte[] buffer = new byte[8192];
+        int read;
+        try {
+            while ((read = is.read(buffer)) > 0) {
+                digest.update(buffer, 0, read);
+            }
+            byte[] md5sum = digest.digest();
+            BigInteger bigInt = new BigInteger(1, md5sum);
+            String output = bigInt.toString(16);
+            // Fill to 40 chars
+            output = String.format("%40s", output).replace(' ', '0');
+            Timber.i("File SHA1: %s", output);
+
+            return output;
+        } catch (IOException e) {
+            Timber.e(e, "IO Exception");
+            return "";
+        } finally {
+            try {
+                is.close();
+            } catch (IOException e) {
+                Timber.e(e, "Exception on closing MD5 input stream");
+            }
+        }
+    }
+
     /**
      * In older devices getPath() may fail depending on the source URI. Creating and using a copy of the file seems to work instead.
      * @return path of copy
