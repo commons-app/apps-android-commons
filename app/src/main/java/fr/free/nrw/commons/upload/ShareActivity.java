@@ -433,7 +433,6 @@ public class ShareActivity
         }
     }
 
-
     /**
      *  Displays Snackbar to ask for location permissions
      */
@@ -446,7 +445,6 @@ public class ShareActivity
         snackbar.show();
         return snackbar;
     }
-
 
     //I might not be supposed to change it, but still, I saw it
     @Override
@@ -494,9 +492,6 @@ public class ShareActivity
         }
         return super.onOptionsItemSelected(item);
     }
-
-    //TODO: Move this to a new class.
-
 
     //TODO: Move this to a new class. Save references to the findViewByIds and pass them to the new method
     /*
@@ -597,15 +592,10 @@ public class ShareActivity
         // Construct and run the parallel animation of the four translation and
         // scale properties (X, Y, SCALE_X, and SCALE_Y).
         AnimatorSet set = new AnimatorSet();
-        set
-                .play(ObjectAnimator.ofFloat(expandedImageView, View.X,
-                        startBounds.left, finalBounds.left))
-                .with(ObjectAnimator.ofFloat(expandedImageView, View.Y,
-                        startBounds.top, finalBounds.top))
-                .with(ObjectAnimator.ofFloat(expandedImageView, View.SCALE_X,
-                        startScale, 1f))
-                .with(ObjectAnimator.ofFloat(expandedImageView,
-                        View.SCALE_Y, startScale, 1f));
+        set.play(ObjectAnimator.ofFloat(expandedImageView, View.X, startBounds.left, finalBounds.left))
+                .with(ObjectAnimator.ofFloat(expandedImageView, View.Y, startBounds.top, finalBounds.top))
+                .with(ObjectAnimator.ofFloat(expandedImageView, View.SCALE_X, startScale, 1f))
+                .with(ObjectAnimator.ofFloat(expandedImageView, View.SCALE_Y, startScale, 1f));
         set.setDuration(ShortAnimationDuration);
         set.setInterpolator(new DecelerateInterpolator());
         set.addListener(new AnimatorListenerAdapter() {
@@ -626,7 +616,6 @@ public class ShareActivity
         // to the original bounds and show the thumbnail instead of
         // the expanded image.
         startScaleFinal = startScale;
-
     }
 
     /*
@@ -662,17 +651,10 @@ public class ShareActivity
         // Animate the four positioning/sizing properties in parallel,
         // back to their original values.
         AnimatorSet set = new AnimatorSet();
-        set.play(ObjectAnimator
-                .ofFloat(expandedImageView, View.X, startBounds.left))
-                .with(ObjectAnimator
-                        .ofFloat(expandedImageView,
-                                View.Y, startBounds.top))
-                .with(ObjectAnimator
-                        .ofFloat(expandedImageView,
-                                View.SCALE_X, startScaleFinal))
-                .with(ObjectAnimator
-                        .ofFloat(expandedImageView,
-                                View.SCALE_Y, startScaleFinal));
+        set.play(ObjectAnimator.ofFloat(expandedImageView, View.X, startBounds.left))
+                .with(ObjectAnimator.ofFloat(expandedImageView, View.Y, startBounds.top))
+                .with(ObjectAnimator.ofFloat(expandedImageView, View.SCALE_X, startScaleFinal))
+                .with(ObjectAnimator.ofFloat(expandedImageView, View.SCALE_Y, startScaleFinal));
         set.setDuration(ShortAnimationDuration);
         set.setInterpolator(new DecelerateInterpolator());
         set.addListener(new AnimatorListenerAdapter() {
@@ -699,9 +681,7 @@ public class ShareActivity
     @OnClick(R.id.media_map)
     public void onFabShowMapsClicked() {
         if (imageObj != null && imageObj.imageCoordsExists == true) {
-            Uri gmmIntentUri = Uri
-                    .parse("google.streetview:cbll=" + imageObj.getDecLatitude() + "," + imageObj
-                            .getDecLongitude());
+            Uri gmmIntentUri = Uri.parse("google.streetview:cbll=" + imageObj.getDecLatitude() + "," + imageObj.getDecLongitude());
             Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
             mapIntent.setPackage("com.google.android.apps.maps");
             startActivity(mapIntent);
