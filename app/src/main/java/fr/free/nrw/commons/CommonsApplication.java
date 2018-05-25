@@ -26,6 +26,7 @@ import fr.free.nrw.commons.contributions.ContributionDao;
 import fr.free.nrw.commons.data.DBOpenHelper;
 import fr.free.nrw.commons.di.ApplicationlessInjection;
 import fr.free.nrw.commons.modifications.ModifierSequenceDao;
+import fr.free.nrw.commons.upload.FileUtils;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 import timber.log.Timber;

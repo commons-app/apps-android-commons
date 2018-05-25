@@ -30,6 +30,7 @@ import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.Utils;
 import fr.free.nrw.commons.di.ApplicationlessInjection;
+import fr.free.nrw.commons.upload.FileUtils;
 
 public class SettingsFragment extends PreferenceFragment {
 
