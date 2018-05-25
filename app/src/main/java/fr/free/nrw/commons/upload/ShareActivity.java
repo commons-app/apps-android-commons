@@ -135,6 +135,7 @@ public class ShareActivity
     private GPSExtractor imageObj;
     private GPSExtractor tempImageObj;
     private String decimalCoords;
+    private FileProcessor fileObj;
 
     private boolean useNewPermissions = false;
     private boolean storagePermitted = false;
@@ -145,7 +146,7 @@ public class ShareActivity
     private Snackbar snackbar;
     private boolean duplicateCheckPassed = false;
 
-    private boolean haveCheckedForOtherImages = false;
+
     private boolean isNearbyUpload = false;
 
     private Animator CurrentAnimator;
@@ -197,7 +198,7 @@ public class ShareActivity
      * Gets file metadata for category suggestions, displays toast, caches categories found, calls uploadController
      */
     private void uploadBegins() {
-        getFileCoordinates(locationPermitted);
+        fileObj.getFileCoordinates(locationPermitted);
 
         Toast startingToast = Toast.makeText(this, R.string.uploading_started, Toast.LENGTH_LONG);
         startingToast.show();
@@ -308,7 +309,13 @@ public class ShareActivity
                     new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
                     REQUEST_PERM_ON_CREATE_LOCATION);
         }
-        FileProcessor fileObj = new FileProcessor(mediaUri);
+
+        ContentResolver contentResolver = this.getContentResolver();
+
+        fileObj = new FileProcessor(mediaUri, contentResolver, prefs, this);
+        String filePath = fileObj.getPathOfMediaOrCopy();
+
+
         checkIfFileExists();
         fileObj.getFileCoordinates(locationPermitted);
 
@@ -488,15 +495,26 @@ public class ShareActivity
         imageObj = tempImageObj;
         decimalCoords = imageObj.getCoords(false);// Not necessary to use gps as image already ha EXIF data
         Timber.d("EXIF from tempImageObj");
-        useImageCoords();
+        fileObj.useImageCoords();
     }
 
     @Override
     public void onNegativeResponse() {
         Timber.d("EXIF from imageObj");
-        useImageCoords();
+        fileObj.useImageCoords();
 
     }
+
+    /**
+     * Calls the async task that detects if image is fuzzy, too dark, etc
+     */
+    private void detectUnwantedPictures() {
+        String imageMediaFilePath = FileUtils.getPath(this, mediaUri);
+        DetectUnwantedPicturesAsync detectUnwantedPicturesAsync
+                = new DetectUnwantedPicturesAsync(new WeakReference<Activity>(this), imageMediaFilePath);
+        detectUnwantedPicturesAsync.execute();
+    }
+
 
     @Override
     public void onPause() {

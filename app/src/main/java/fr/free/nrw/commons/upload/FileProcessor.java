@@ -1,12 +1,16 @@
 package fr.free.nrw.commons.upload;
 
 import android.app.Activity;
+import android.content.ContentResolver;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.ParcelFileDescriptor;
 import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 
 import java.io.File;
@@ -27,22 +31,22 @@ import static fr.free.nrw.commons.upload.FileUtils.getSHA1;
 public class FileProcessor {
 
     private Uri mediaUri;
+    private ContentResolver contentResolver;
+    private GPSExtractor imageObj;
+    private SharedPreferences prefs;
+    private Context context;
+    private String decimalCoords;
+    private boolean haveCheckedForOtherImages = false;
+    private String filePath;
+    private boolean useExtStorage;
 
-    public FileProcessor(Uri mediaUri) {
+    FileProcessor(Uri mediaUri, ContentResolver contentResolver, SharedPreferences prefs, Context context) {
         this.mediaUri = mediaUri;
-
+        this.contentResolver = contentResolver;
+        this.prefs = prefs;
+        this.context = context;
+        useExtStorage = prefs.getBoolean("useExternalStorage", true);
     }
-    
-    /**
-     * Calls the async task that detects if image is fuzzy, too dark, etc
-     */
-    private void detectUnwantedPictures() {
-        String imageMediaFilePath = FileUtils.getPath(this,mediaUri);
-        DetectUnwantedPicturesAsync detectUnwantedPicturesAsync
-                = new DetectUnwantedPicturesAsync(new WeakReference<Activity>(this), imageMediaFilePath);
-        detectUnwantedPicturesAsync.execute();
-    }
-
 
     /**
      * Gets file path from media URI.
@@ -50,15 +54,14 @@ public class FileProcessor {
      * @return file path of media
      */
     @Nullable
-    private String getPathOfMediaOrCopy() {
-        String filePath = FileUtils.getPath(getApplicationContext(), mediaUri);
+    String getPathOfMediaOrCopy() {
+        filePath = FileUtils.getPath(getApplicationContext(), mediaUri);
         Timber.d("Filepath: " + filePath);
         if (filePath == null) {
             String copyPath = null;
             try {
-                ParcelFileDescriptor descriptor = getContentResolver().openFileDescriptor(mediaUri, "r");
+                ParcelFileDescriptor descriptor = contentResolver.openFileDescriptor(mediaUri, "r");
                 if (descriptor != null) {
-                    boolean useExtStorage = prefs.getBoolean("useExternalStorage", true);
                     if (useExtStorage) {
                         copyPath = FileUtils.createCopyPath(descriptor);
                         return copyPath;
@@ -83,21 +86,19 @@ public class FileProcessor {
     void getFileCoordinates(boolean gpsEnabled) {
         Timber.d("Calling GPSExtractor");
         try {
-            if (imageObj == null) {
-                ParcelFileDescriptor descriptor = getContentResolver().openFileDescriptor(mediaUri, "r");
+
+                ParcelFileDescriptor descriptor = contentResolver.openFileDescriptor(mediaUri, "r");
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
                     if (descriptor != null) {
-                        imageObj = new GPSExtractor(descriptor.getFileDescriptor(), this, prefs);
+                        imageObj = new GPSExtractor(descriptor.getFileDescriptor(), context, prefs);
                     }
                 } else {
                     String filePath = getPathOfMediaOrCopy();
                     if (filePath != null) {
-                        imageObj = new GPSExtractor(filePath, this, prefs);
+                        imageObj = new GPSExtractor(filePath, context, prefs);
                     }
-                }
             }
 
-            if (imageObj != null) {
                 decimalCoords = imageObj.getCoords(gpsEnabled);
                 if (decimalCoords == null || !imageObj.imageCoordsExists){
                     //Find other photos taken around the same time which has gps coordinates
@@ -107,19 +108,20 @@ public class FileProcessor {
                 else {
                     useImageCoords();
                 }
-            }
+
         } catch (FileNotFoundException e) {
             Timber.w("File not found: " + mediaUri, e);
         }
     }
 
-    private void findOtherImages(boolean gpsEnabled) {
+    void findOtherImages(boolean gpsEnabled) {
         Timber.d("filePath"+getPathOfMediaOrCopy());
-        String filePath = getPathOfMediaOrCopy();
+
         long timeOfCreation = new File(filePath).lastModified();//Time when the original image was created
         File folder = new File(filePath.substring(0,filePath.lastIndexOf('/')));
         File[] files = folder.listFiles();
         Timber.d("folderTime Number:"+files.length);
+        GPSExtractor tempImageObj;
 
         for(File file : files){
             if(file.lastModified()-timeOfCreation<=(120*1000) && file.lastModified()-timeOfCreation>=-(120*1000)){
@@ -129,17 +131,17 @@ public class FileProcessor {
                 ParcelFileDescriptor descriptor
                         = null;
                 try {
-                    descriptor = getContentResolver().openFileDescriptor(Uri.parse(file.getAbsolutePath()), "r");
+                    descriptor = contentResolver.openFileDescriptor(Uri.parse(file.getAbsolutePath()), "r");
                 } catch (FileNotFoundException e) {
                     e.printStackTrace();
                 }
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
                     if (descriptor != null) {
-                        tempImageObj = new GPSExtractor(descriptor.getFileDescriptor(),this, prefs);
+                        tempImageObj = new GPSExtractor(descriptor.getFileDescriptor(), context, prefs);
                     }
                 } else {
                     if (filePath != null) {
-                        tempImageObj = new GPSExtractor(file.getAbsolutePath(), this, prefs);
+                        tempImageObj = new GPSExtractor(file.getAbsolutePath(), context, prefs);
                     }
                 }
 
@@ -149,7 +151,7 @@ public class FileProcessor {
 //                       Current image has gps coordinates and it's not current gps locaiton
                         Timber.d("This fild has image coords:"+ file.getAbsolutePath());
 //                       Create a dialog fragment for the suggestion
-                        FragmentManager fragmentManager = getSupportFragmentManager();
+                        FragmentManager fragmentManager = (Fragment) context.getSupportFragmentManager();
                         SimilarImageDialogFragment newFragment = new SimilarImageDialogFragment();
                         Bundle args = new Bundle();
                         args.putString("originalImagePath",filePath);
