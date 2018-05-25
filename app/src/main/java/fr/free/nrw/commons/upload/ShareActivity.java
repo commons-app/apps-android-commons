@@ -90,6 +90,20 @@ public class ShareActivity
         implements SingleUploadFragment.OnUploadActionInitiated,
         OnCategoriesSaveHandler,SimilarImageDialogFragment.onResponse {
 
+    @Inject
+    MediaWikiApi mwApi;
+    @Inject
+    CacheController cacheController;
+    @Inject
+    SessionManager sessionManager;
+    @Inject
+    UploadController uploadController;
+    @Inject
+    ModifierSequenceDao modifierSequenceDao;
+    @Inject
+    @Named("default_preferences")
+    SharedPreferences prefs;
+
     @BindView(R.id.container)
     FrameLayout flContainer;
     @BindView(R.id.backgroundImage)
@@ -105,30 +119,15 @@ public class ShareActivity
     @BindView(R.id.expanded_image)
     PhotoView expandedImageView;
 
-
     private static final int REQUEST_PERM_ON_CREATE_STORAGE = 1;
     private static final int REQUEST_PERM_ON_CREATE_LOCATION = 2;
     private static final int REQUEST_PERM_ON_CREATE_STORAGE_AND_LOCATION = 3;
     private static final int REQUEST_PERM_ON_SUBMIT_STORAGE = 4;
-    private CategorizationFragment categorizationFragment;
-
-    @Inject
-    MediaWikiApi mwApi;
-    @Inject
-    CacheController cacheController;
-    @Inject
-    SessionManager sessionManager;
-    @Inject
-    UploadController uploadController;
-    @Inject
-    ModifierSequenceDao modifierSequenceDao;
-    @Inject
-    @Named("default_preferences")
-    SharedPreferences prefs;
-
+    
     private String source;
     private String mimeType;
 
+    private CategorizationFragment categorizationFragment;
     private Uri mediaUri;
     private Contribution contribution;
     private boolean cacheFound;
