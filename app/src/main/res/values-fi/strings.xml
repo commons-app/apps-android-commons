@@ -58,8 +58,6 @@
   <string name="add_title_toast">Anna tälle tiedostolle otsikko</string>
   <string name="share_description_hint">Kuvaus</string>
   <string name="login_failed_network">Kirjautuminen epäonnistui - verkkovirhe</string>
-  <string name="login_failed_username">Kirjautuminen epäonnistui - tarkista käyttäjätunnus</string>
-  <string name="login_failed_password">Kirjautuminen epäonnistui - tarkista salasanasi</string>
   <string name="login_failed_throttled">Liikaa epäonnistuneita yrityksiä. Yritä uudelleen parin minuutin kuluttua.</string>
   <string name="login_failed_blocked">Pahoittelut, tämä käyttäjä on estetty Commonsissa</string>
   <string name="login_failed_2fa_needed">Anna kaksivaiheisen tunnistuksen koodi.</string>
@@ -162,8 +160,8 @@
   <string name="detail_description_empty">Ei kuvausta</string>
   <string name="detail_license_empty">Tuntematon lisenssi</string>
   <string name="menu_refresh">Päivitä</string>
-  <string name="read_storage_permission_rationale">Vaadittu oikeus: Ulkoisen tallennustilan luku. Appi ei voi päästä galleriaasi ilman tätä oikeutta.</string>
-  <string name="write_storage_permission_rationale">Vaadittava lupa: Kirjoita ulkoiseen tallennustilaan. Appi ei voi päästä kameraasi ilman tätä oikeutta.</string>
+  <string name="read_storage_permission_rationale">Vaadittu oikeus: Ulkoisen tallennustilan luku. Sovellus ei voi päästä galleriaasi ilman tätä oikeutta.</string>
+  <string name="write_storage_permission_rationale">Vaadittu oikeus: Kirjoita ulkoiseen tallennustilaan. Sovellus ei voi päästä kameraasi ilman tätä oikeutta.</string>
   <string name="location_permission_rationale">Valinnainen lupa: Saada tämänhetkinen sijainti loukkasuosituksia varten.</string>
   <string name="ok">OK</string>
   <string name="title_activity_nearby">Lähellä olevat paikat</string>
@@ -262,4 +260,8 @@
   <string name="about_translate_proceed">Jatka</string>
   <string name="about_translate_cancel">Peruuta</string>
   <string name="retry">Yritä uudelleen</string>
+  <string name="showcase_view_got_it_button">Selvä!</string>
+  <string name="no_images_found">Kuvia ei löytynyt!</string>
+  <string name="image_uploaded_by">Tallentanut: %1$s</string>
+  <string name="share_app_title">Jaa sovellus</string>
 </resources>

@@ -58,8 +58,6 @@
   <string name="add_title_toast">Forneça um título para este ficheiro, por favor</string>
   <string name="share_description_hint">Descrição</string>
   <string name="login_failed_network">Não foi possível iniciar sessão - falha de rede</string>
-  <string name="login_failed_username">Não foi possível iniciar sessão - verifique o seu nome de utilizador(a)</string>
-  <string name="login_failed_password">Não foi possível iniciar sessão - verifique a sua palavra-passe</string>
   <string name="login_failed_throttled">Demasiadas tentativas malsucedidas. Por favor, tente de novo dentro de alguns minutos.</string>
   <string name="login_failed_blocked">Desculpe, este utilizador foi bloqueado no Commons</string>
   <string name="login_failed_2fa_needed">Precisa fornecer o seu código de ativação de dois fatores.</string>

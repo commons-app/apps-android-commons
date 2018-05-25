@@ -52,8 +52,6 @@
   <string name="share_title_hint">Sername</string>
   <string name="share_description_hint">Şınasnayış</string>
   <string name="login_failed_network">Xırabiya kewten-network xeta</string>
-  <string name="login_failed_username">Ronıştışo abeno - Namey karberi ye xo kontrol kerë</string>
-  <string name="login_failed_password">Ronıştışo nêabeno - Parolay xo kontrol kerë</string>
   <string name="login_failed_throttled">Şıma xeylê rayi kerd ke cı kewê, a ser nêvıst. Şıma rê zehmet 2-3 deqey ra tepeya reyna bıcerrebnên.</string>
   <string name="login_failed_blocked">Qısur mewni rê, Karber commons dı bloqe biyo.</string>
   <string name="login_failed_generic">Nidekeweya de</string>

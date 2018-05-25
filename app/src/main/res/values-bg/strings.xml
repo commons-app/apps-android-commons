@@ -32,8 +32,6 @@
   <string name="share_title_hint">Заглавие</string>
   <string name="share_description_hint">Описание</string>
   <string name="login_failed_network">Неуспешно влизане – проблем в мрежата</string>
-  <string name="login_failed_username">Неуспешно влизане – моля проверете потребителското си име</string>
-  <string name="login_failed_password">Неуспешно влизане – моля проверете паролата си</string>
   <string name="share_upload_button">Качване</string>
   <string name="provider_modifications">Изменения</string>
   <string name="menu_upload_single">Качване</string>

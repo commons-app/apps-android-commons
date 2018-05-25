@@ -48,8 +48,6 @@
   <string name="add_title_toast">กรุณาระบุชืิ่อเรื่องของไฟล์นี้</string>
   <string name="share_description_hint">คำอธิบาย</string>
   <string name="login_failed_network">ไม่สามารถเข้าสู่ระบบได้ - ความล้มเหลวของเครือข่าย</string>
-  <string name="login_failed_username">ไม่สามารถเข้าสู่ระบบได้ - กรุณาตรวจสอบชื่อผู้ใช้ของคุณ</string>
-  <string name="login_failed_password">ไม่สามารถเข้าสู่ระบบได้ - กรุณาตรวจสอบรหัสผ่านของคุณ</string>
   <string name="login_failed_throttled">จำนวนครั้งที่พยายามไม่สำเร็จมากเกินไป กรุณาลองอีกครั้งในอีกสักครู่</string>
   <string name="login_failed_blocked">ขออภัย ผู้ใช้นี้ถูกบล็อกบนคอมมอนส์อยู่</string>
   <string name="login_failed_2fa_needed">คุณต้องระบุโค้ดการตรวจสอบความถูกต้องสองปัจจัยของคุณ</string>

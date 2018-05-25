@@ -57,8 +57,6 @@
   <string name="add_title_toast">Παρακαλώ παρέχετε ένα τίτλο για αυτό το αρχείο</string>
   <string name="share_description_hint">Περιγραφή</string>
   <string name="login_failed_network">Δεν είναι δυνατή η σύνδεση - αποτυχία του δικτύου</string>
-  <string name="login_failed_username">Δεν είναι δυνατή η σύνδεση - ελέγξτε το όνομα χρήστη σας</string>
-  <string name="login_failed_password">Δεν είναι δυνατή η σύνδεση - παρακαλούμε ελέγξτε τον κωδικό σας</string>
   <string name="login_failed_throttled">Πάρα πολλές ανεπιτυχείς προσπάθειες. Παρακαλώ δοκιμάστε ξανά σε λίγα λεπτά.</string>
   <string name="login_failed_blocked">Συγνώμη, αυτός ο χρήστης έχει αποκλειστεί από τα Commons</string>
   <string name="login_failed_2fa_needed">Πρέπει να δώσετε τον κωδικό πιστοποίησης με δύο παράγοντες</string>

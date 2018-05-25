@@ -45,8 +45,6 @@
   <string name="share_title_hint">عنوان</string>
   <string name="share_description_hint">وضاحت</string>
   <string name="login_failed_network">لاگ ان ہونے میں ناکام - نیٹ ورک ناکامی</string>
-  <string name="login_failed_username">لاگ ان ہونے میں ناکام - براہ مہربانی اپنا صارف نام کی جانچ کریں</string>
-  <string name="login_failed_password">لاگ ان ہونے میں ناکام - براہ مہربانی - اپنے پاس ورڈ کی جانچ کریں</string>
   <string name="login_failed_throttled">بے شمار ناکام کوششیں کچھ منٹوں میں دوبارہ کوشش کریں۔</string>
   <string name="login_failed_blocked">معذرت، یہ صارف کومنز پر بلاک کردیا گیا ہے</string>
   <string name="login_failed_2fa_needed">آپ کو اپنے دو عامل کے تصدیق کوڈ فراہم کرنا چاہیے۔</string>

@@ -37,8 +37,6 @@
   <string name="share_title_hint">Tajuk</string>
   <string name="share_description_hint">Keterangan</string>
   <string name="login_failed_network">Tidak boleh log masuk - kegagalan rangkaian</string>
-  <string name="login_failed_username">Tidak dapat log masuk - Sila semak nama pengguna anda</string>
-  <string name="login_failed_password">Tidak dapat log masuk - Sila semak kata laluan anda</string>
   <string name="login_failed_throttled" fuzzy="true">Terlalu banyak cubaan yang tidak berjaya. Sila cuba lagi dalam beberapa minit</string>
   <string name="login_failed_blocked">Maaf, pengguna ini telah disekat di Commons</string>
   <string name="login_failed_generic">Log masuk gagal</string>

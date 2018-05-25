@@ -43,8 +43,6 @@
   <string name="share_title_hint">Judul</string>
   <string name="share_description_hint">Pedaran</string>
   <string name="login_failed_network">Teu bisa login - gangguan jaringan</string>
-  <string name="login_failed_username">Teu bisa login - pariksa sandiasma</string>
-  <string name="login_failed_password">Teu bisa login - pariksa kecap sandi</string>
   <string name="login_failed_throttled">Loba teuing nu gagalna. Mangga cobian sababaraha menit deui mah</string>
   <string name="login_failed_blocked">Punten, ieu kontributor geus diblokir di Commons</string>
   <string name="login_failed_2fa_needed">Anjeun kudu nyayagakeun kodeu oténtikasi dua faktor.</string>

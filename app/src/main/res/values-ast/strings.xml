@@ -49,8 +49,6 @@
   <string name="add_title_toast">Apurre un títulu pa esti ficheru</string>
   <string name="share_description_hint">Descripción</string>
   <string name="login_failed_network">Nun se pudo aniciar sesión – error de rede</string>
-  <string name="login_failed_username">Nun se pudo aniciar sesión – por favor compruebe\'l so nome d\'usuariu</string>
-  <string name="login_failed_password">Nun se pudo aniciar sesión – por favor compruebe la so contraseña</string>
   <string name="login_failed_throttled">Demasiaos intentos incorreutos. Téntalo otra vuelta n\'unos minutos.</string>
   <string name="login_failed_blocked">Sentímoslo, esti usuariu ta bloquiáu en Commons</string>
   <string name="login_failed_2fa_needed">Tienes de dar el códigu d\'identificación de dos factores.</string>
