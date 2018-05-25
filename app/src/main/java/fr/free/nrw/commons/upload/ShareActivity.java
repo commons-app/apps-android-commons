@@ -36,7 +36,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.DecelerateInterpolator;
 import android.widget.FrameLayout;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import butterknife.BindView;
@@ -308,7 +307,8 @@ public class ShareActivity
                     new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
                     REQUEST_PERM_ON_CREATE_LOCATION);
         }
-        performPreUploadProcessingOfFile();
+        checkIfFileExists();
+        getFileMetadata(locationPermitted);
 
         SingleUploadFragment shareView = (SingleUploadFragment) getSupportFragmentManager().findFragmentByTag("shareView");
         categorizationFragment = (CategorizationFragment) getSupportFragmentManager().findFragmentByTag("categorization");
@@ -412,7 +412,7 @@ public class ShareActivity
             case REQUEST_PERM_ON_CREATE_LOCATION: {
                 if (grantResults.length >= 1 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     locationPermitted = true;
-                    performPreUploadProcessingOfFile();
+                    checkIfFileExists();
                 }
                 return;
             }
@@ -423,7 +423,7 @@ public class ShareActivity
                 if (grantResults.length >= 1 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     //It is OK to call this at both (1) and (4) because if perm had been granted at
                     //snackbar, user should not be prompted at submit button
-                    performPreUploadProcessingOfFile();
+                    checkIfFileExists();
 
                     //Uploading only begins if storage permission granted from arrow icon
                     uploadBegins();
@@ -433,7 +433,10 @@ public class ShareActivity
         }
     }
 
-    private void performPreUploadProcessingOfFile() {
+    /**
+     * Check if file user wants to upload already exists on Commons
+     */
+    private void checkIfFileExists() {
         if (!useNewPermissions || storagePermitted) {
             if (!duplicateCheckPassed) {
                 //Test SHA1 of image to see if it matches SHA1 of a file on Commons
@@ -450,19 +453,16 @@ public class ShareActivity
 
                                  //TODO: 16/9/17 should we run DetectUnwantedPicturesAsync if DUPLICATE_PROCEED is returned? Since that means
                                  //we are processing images that are already on server???...
-
                                 if (duplicateCheckPassed) {
                                     //image can be uploaded, so now check if its a useless picture or not
                                     performUnwantedPictureDetectionProcess();
                                 }
-
                             },mwApi);
                     fileAsyncTask.execute();
                 } catch (IOException e) {
                     Timber.d(e, "IO Exception: ");
                 }
             }
-            getFileMetadata(locationPermitted);
         } else {
             Timber.w("not ready for preprocessing: useNewPermissions=%s storage=%s location=%s",
                     useNewPermissions, storagePermitted, locationPermitted);
