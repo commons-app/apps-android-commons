@@ -1,6 +1,5 @@
 package fr.free.nrw.commons.upload;
 
-import android.app.Activity;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -9,16 +8,11 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.ParcelFileDescriptor;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
-import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.InputStream;
-import java.lang.ref.WeakReference;
 import java.util.Date;
 import java.util.List;
 
@@ -29,9 +23,6 @@ import fr.free.nrw.commons.di.ApplicationlessInjection;
 import timber.log.Timber;
 
 import static com.mapbox.mapboxsdk.Mapbox.getApplicationContext;
-import static fr.free.nrw.commons.upload.ExistingFileAsync.Result.DUPLICATE_PROCEED;
-import static fr.free.nrw.commons.upload.ExistingFileAsync.Result.NO_DUPLICATE;
-import static fr.free.nrw.commons.upload.FileUtils.getSHA1;
 
 public class FileProcessor {
 
@@ -64,7 +55,7 @@ public class FileProcessor {
      * @return file path of media
      */
     @Nullable
-    String getPathOfMediaOrCopy() {
+    private String getPathOfMediaOrCopy() {
         filePath = FileUtils.getPath(context, mediaUri);
         Timber.d("Filepath: " + filePath);
         if (filePath == null) {
@@ -123,7 +114,7 @@ public class FileProcessor {
         }
     }
 
-    void findOtherImages(boolean gpsEnabled) {
+    private void findOtherImages(boolean gpsEnabled) {
         Timber.d("filePath"+getPathOfMediaOrCopy());
 
         long timeOfCreation = new File(filePath).lastModified();//Time when the original image was created
@@ -156,9 +147,8 @@ public class FileProcessor {
                 if(tempImageObj!=null){
                     Timber.d("not null fild EXIF"+tempImageObj.imageCoordsExists +" coords"+tempImageObj.getCoords(gpsEnabled));
                     if(tempImageObj.getCoords(gpsEnabled)!=null && tempImageObj.imageCoordsExists){
-//                       Current image has gps coordinates and it's not current gps locaiton
+                        // Current image has gps coordinates and it's not current gps locaiton
                         Timber.d("This file has image coords:"+ file.getAbsolutePath());
-//                       Create a dialog fragment for the suggestion
                         SimilarImageDialogFragment newFragment = new SimilarImageDialogFragment();
                         Bundle args = new Bundle();
                         args.putString("originalImagePath",filePath);
@@ -171,7 +161,6 @@ public class FileProcessor {
             }
         }
         haveCheckedForOtherImages = true; //Finished checking for other images
-        return;
     }
 
 
