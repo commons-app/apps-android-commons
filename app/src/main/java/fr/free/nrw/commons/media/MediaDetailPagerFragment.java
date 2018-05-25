@@ -26,6 +26,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -53,7 +55,8 @@ public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment imple
     @Named("default_preferences")
     SharedPreferences prefs;
 
-    private ViewPager pager;
+    @BindView(R.id.mediaDetailsPager)
+    ViewPager pager;
     private Boolean editable;
     private boolean isFeaturedImage;
 
@@ -72,7 +75,7 @@ public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment imple
                              ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_media_detail_pager, container, false);
-        pager = (ViewPager) view.findViewById(R.id.mediaDetailsPager);
+        ButterKnife.bind(this,view);
         pager.addOnPageChangeListener(this);
 
         final MediaDetailAdapter adapter = new MediaDetailAdapter(getChildFragmentManager());

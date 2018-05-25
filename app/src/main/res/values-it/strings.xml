@@ -223,4 +223,11 @@
   <string name="about_translate_title">Lingue</string>
   <string name="about_translate_cancel">Annulla</string>
   <string name="retry">Riprova</string>
+  <string name="showcase_view_got_it_button">Capito!</string>
+  <string name="showcase_view_whole_nearby_activity">Questi sono i luoghi vicino a te che necessitano di immagini per illustrare le loro voci di Wikipedia</string>
+  <string name="showcase_view_plus_fab">Puoi caricare un\'immagine per ogni luogo dalla tua galleria o fotocamera</string>
+  <string name="no_images_found">Nessuna immagine trovata!</string>
+  <string name="error_loading_images">Si è verificato un errore durante il caricamento delle immagini.</string>
+  <string name="image_uploaded_by">Caricato da: %1$s</string>
+  <string name="share_app_title">Condividi applicazione</string>
 </resources>

@@ -259,4 +259,7 @@
   <string name="internet_established">ইন্টারনেট উপলব্ধ</string>
   <string name="no_notifications">কোন বিজ্ঞপ্তি পাওয়া যায়নি</string>
   <string name="retry">পুনঃচেষ্টা করুন</string>
+  <string name="showcase_view_got_it_button">বুঝেছি!</string>
+  <string name="no_images_found">কোন চিত্র পাওয়া যায়নি!</string>
+  <string name="image_uploaded_by">আপলোড করেছেন: %1$s</string>
 </resources>

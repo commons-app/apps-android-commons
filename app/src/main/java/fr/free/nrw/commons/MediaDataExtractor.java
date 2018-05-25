@@ -61,8 +61,8 @@ public class MediaDataExtractor {
         }
 
         try{
-            Timber.d("Nominated for deletion: " + mediaWikiApi.pageExists("Commons:Deletion_requests/"+filename));
-            deletionStatus = mediaWikiApi.pageExists("Commons:Deletion_requests/"+filename);
+            deletionStatus = mediaWikiApi.pageExists("Commons:Deletion_requests/" + filename);
+            Timber.d("Nominated for deletion: " + deletionStatus);
         }
         catch (Exception e){
             Timber.d(e.getMessage());

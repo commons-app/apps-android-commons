@@ -90,9 +90,9 @@
   <string name="categories_activity_title">Kategorier</string>
   <string name="title_activity_settings">Inställningar</string>
   <string name="title_activity_signup">Registrera</string>
-  <string name="title_activity_featured_images">Utvalda bild</string>
+  <string name="title_activity_featured_images">Utvalda bilder</string>
   <string name="menu_about">Om</string>
-  <string name="about_license">Wikimedia Commons är en app med öppen källkod som skapas och underhålls av frivilliga från Wikimedias gemenskap. Wikimedia Foundation är inte involverad i skapandet, utvecklingen eller underhållet av appen.</string>
+  <string name="about_license">Wikimedia Commons-appen är en app med öppen källkod som skapas och underhålls av frivilliga från Wikimedias gemenskap. Wikimedia Foundation är inte involverad i skapandet, utvecklingen eller underhållet av appen.</string>
   <string name="about_improve">Skapa ett nytt &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;ärende på GitHub&lt;/a&gt; för att rapportera buggar och förslag.</string>
   <string name="about_privacy_policy">&lt;u&gt;Integritetspolicy&lt;/u&gt;</string>
   <string name="about_credits">&lt;u&gt;Erkännande&lt;/u&gt;</string>
@@ -105,7 +105,7 @@
   <string name="menu_retry_upload">Försök igen</string>
   <string name="menu_cancel_upload">Avbryt</string>
   <string name="share_license_summary">Denna bild kommer att licensieras under %1$s</string>
-  <string name="media_upload_policy">Genom att skicka in denna bild intygar jag att detta är mitt eget verk, som inte innehåller upphovsrättsskyddat material eller selfies samt annars följer &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines\"&gt;Wikimedia Commons-policys&lt;/a&gt;.</string>
+  <string name="media_upload_policy">Genom att skicka in denna bild intygar jag att detta är mitt eget verk, som inte innehåller upphovsrättsskyddat material eller selfies samt följer &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines\"&gt;Wikimedia Commons-policys&lt;/a&gt;.</string>
   <string name="menu_download">Ladda ned</string>
   <string name="preference_license">Standardlicens</string>
   <string name="use_previous">Använd föregående titel/beskrivning</string>
@@ -135,7 +135,7 @@
   <string name="license_name_cc_zero">CC Zero</string>
   <string name="tutorial_1_text">Wikimedia Commons lagrar de flesta bilderna som används på Wikipedia.</string>
   <string name="tutorial_1_subtext">Dina bilder hjälper till att utbilda\nmänniskor runt hela världen!</string>
-  <string name="tutorial_2_text">Ladda upp bilder som endast du har tagit eller skapat:</string>
+  <string name="tutorial_2_text">Ladda endast upp bilder som du har tagit eller skapat själv:</string>
   <string name="tutorial_2_subtext">Naturliga föremål (blommor, djur, berg)\n• Användbara föremål (cyklar, tågstationer)\n• Berömda personer (din borgmästare, olympiska atleter du har träffat)</string>
   <string name="tutorial_2_subtext_1">Naturliga föremål (blommor, djur, berg)</string>
   <string name="tutorial_2_subtext_2">Användbar föremål (cyklar, tågstationer)</string>
@@ -163,8 +163,8 @@
   <string name="detail_description_empty">Ingen beskrivning</string>
   <string name="detail_license_empty">Okänd licens</string>
   <string name="menu_refresh">Uppdatera</string>
-  <string name="read_storage_permission_rationale">Nödvändig behörighet: Läsa extern lagring. Appen kan inte komma åt ditt galleri utan detta.</string>
-  <string name="write_storage_permission_rationale">Nödvändig behörighet: Skriva till extern lagring. Appen kan inte komma åt din kamera utan detta.</string>
+  <string name="read_storage_permission_rationale">Nödvändig behörighet: Läs extern lagring. Appen kan inte komma åt ditt galleri utan detta.</string>
+  <string name="write_storage_permission_rationale">Nödvändig behörighet: Skriv till extern lagring. Appen kan inte komma åt din kamera utan detta.</string>
   <string name="location_permission_rationale">Valfri behörighet: Hämta aktuell plats för kategoriförslag</string>
   <string name="ok">OK</string>
   <string name="title_activity_nearby">Platser i närheten</string>
@@ -271,5 +271,13 @@
   <string name="about_translate_proceed">Fortsätt</string>
   <string name="about_translate_cancel">Avbryt</string>
   <string name="retry">Försök igen</string>
+  <string name="showcase_view_got_it_button">Uppfattat!</string>
+  <string name="showcase_view_whole_nearby_activity">Detta är platserna nära dig som behöver bilder för att illustrera deras Wikipedia-artiklar</string>
+  <string name="showcase_view_list_icon">Klicka på den här knappen för att få upp en lista med dessa platser</string>
+  <string name="showcase_view_plus_fab">Du kan ladda upp en bild från vilken plats som helst från ditt galleri eller kamera</string>
+  <string name="no_images_found">Inga bilder hittades!</string>
+  <string name="error_loading_images">Ett fel uppstod vid inläsning av bilder.</string>
+  <string name="image_uploaded_by">Uppladdad av: %1$s</string>
   <string name="share_app_title">Dela app</string>
+  <string name="share_coordinates_not_present">Koordinater specificerades inte vid bildvalet</string>
 </resources>

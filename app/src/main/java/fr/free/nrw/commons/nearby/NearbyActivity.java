@@ -4,14 +4,18 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomSheetBehavior;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AlertDialog;
+
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -25,6 +29,7 @@ import com.google.gson.GsonBuilder;
 import java.util.List;
 
 import javax.inject.Inject;
+import javax.inject.Named;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -41,6 +46,8 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 import timber.log.Timber;
+import uk.co.deanwild.materialshowcaseview.IShowcaseListener;
+import uk.co.deanwild.materialshowcaseview.MaterialShowcaseView;
 
 
 public class NearbyActivity extends NavigationBaseActivity implements LocationUpdateListener {
@@ -56,12 +63,15 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
     LinearLayout bottomSheetDetails;
     @BindView(R.id.transparentView)
     View transparentView;
+    @BindView(R.id.fab_recenter)
+    View fabRecenter;
 
     @Inject
     LocationServiceManager locationManager;
     @Inject
     NearbyController nearbyController;
-
+    @Inject
+    @Named("application_preferences") SharedPreferences applicationPrefs;
     private LatLng curLatLng;
     private Bundle bundle;
     private Disposable placesDisposable;
@@ -72,10 +82,17 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
     private NearbyListFragment nearbyListFragment;
     private static final String TAG_RETAINED_MAP_FRAGMENT = NearbyMapFragment.class.getSimpleName();
     private static final String TAG_RETAINED_LIST_FRAGMENT = NearbyListFragment.class.getSimpleName();
+    private View listButton; // Reference to list button to use in tutorial
 
     private final String NETWORK_INTENT_ACTION = "android.net.conn.CONNECTIVITY_CHANGE";
     private BroadcastReceiver broadcastReceiver;
+
+    private boolean isListShowcaseAdded = false;
+    private boolean isMapShowCaseAdded = false;
+
     private LatLng lastKnownLocation;
+
+    private MaterialShowcaseView secondSingleShowCaseView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -125,6 +142,39 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.menu_nearby, menu);
+
+        new Handler().post(() -> {
+
+            listButton = findViewById(R.id.action_display_list);
+
+            secondSingleShowCaseView = new MaterialShowcaseView.Builder(this)
+                    .setTarget(listButton)
+                    .setDismissText(getString(R.string.showcase_view_got_it_button))
+                    .setContentText(getString(R.string.showcase_view_list_icon))
+                    .setDelay(500) // optional but starting animations immediately in onCreate can make them choppy
+                    .singleUse(ViewUtil.SHOWCASE_VIEW_ID_1) // provide a unique ID used to ensure it is only shown once
+                    .setDismissStyle(Typeface.defaultFromStyle(Typeface.BOLD))
+                    .setListener(new IShowcaseListener() {
+                        @Override
+                        public void onShowcaseDisplayed(MaterialShowcaseView materialShowcaseView) {
+
+                        }
+
+                        // If dismissed, we can inform fragment to start showcase sequence there
+                        @Override
+                        public void onShowcaseDismissed(MaterialShowcaseView materialShowcaseView) {
+                                nearbyMapFragment.onNearbyMaterialShowcaseDismissed();
+                        }
+                    })
+                    .build();
+
+            isListShowcaseAdded = true;
+
+            if (isMapShowCaseAdded) { // If map showcase is also ready, start ShowcaseSequence
+                // Probably this case is not possible. Just added to be careful
+                setMapViewTutorialShowCase();
+            }
+        });
 
         return super.onCreateOptionsMenu(menu);
     }
@@ -419,6 +469,45 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
             Timber.d("Map fragment already exists, just update the map and list");
             updateMapFragment(false);
             updateListFragment();
+        }
+
+        isMapShowCaseAdded = true;
+    }
+
+    public void setMapViewTutorialShowCase() {
+           /*
+            *This showcase view will be the first step of our nearbyMaterialShowcaseSequence. The reason we use a
+            * single item instead of adding another step to nearbyMaterialShowcaseSequence is that we are not able to
+            * call withoutShape() method on steps. For mapView we need an showcase view without
+            * any circle on it, it should cover the whole page.
+            * */
+        MaterialShowcaseView firstSingleShowCaseView = new MaterialShowcaseView.Builder(this)
+                .setTarget(nearbyMapFragment.mapView)
+                .setDismissText(getString(R.string.showcase_view_got_it_button))
+                .setContentText(getString(R.string.showcase_view_whole_nearby_activity))
+                .setDelay(500) // optional but starting animations immediately in onCreate can make them choppy
+                .singleUse(ViewUtil.SHOWCASE_VIEW_ID_2) // provide a unique ID used to ensure it is only shown once
+                .withoutShape() // no shape on map view since there are no view to focus on
+                .setDismissStyle(Typeface.defaultFromStyle(Typeface.BOLD))
+                .setListener(new IShowcaseListener() {
+                    @Override
+                    public void onShowcaseDisplayed(MaterialShowcaseView materialShowcaseView) {
+
+                    }
+
+                    @Override
+                    public void onShowcaseDismissed(MaterialShowcaseView materialShowcaseView) {
+                            /* Add other nearbyMaterialShowcaseSequence here, it will make the user feel as they are a
+                            * nearbyMaterialShowcaseSequence whole together.
+                            * */
+                        secondSingleShowCaseView.show(NearbyActivity.this);
+                    }
+                })
+                .build();
+
+        if (applicationPrefs.getBoolean("firstRunNearby", true)) {
+            applicationPrefs.edit().putBoolean("firstRunNearby", false).apply();
+            firstSingleShowCaseView.show(this);
         }
     }
 
