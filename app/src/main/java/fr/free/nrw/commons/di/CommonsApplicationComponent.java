@@ -16,6 +16,7 @@ import fr.free.nrw.commons.delete.DeleteTask;
 import fr.free.nrw.commons.modifications.ModificationsSyncAdapter;
 import fr.free.nrw.commons.settings.SettingsFragment;
 import fr.free.nrw.commons.nearby.PlaceRenderer;
+import fr.free.nrw.commons.upload.FileProcessor;
 
 @Singleton
 @Component(modules = {
@@ -46,6 +47,8 @@ public interface CommonsApplicationComponent extends AndroidInjector<Application
     void inject(ApplicationlessInjection instance);
 
     void inject(PlaceRenderer placeRenderer);
+
+    void inject(FileProcessor fileProcessor);
 
     @Component.Builder
     @SuppressWarnings({"WeakerAccess", "unused"})

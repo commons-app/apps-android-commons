@@ -25,6 +25,7 @@ import java.util.List;
 import javax.inject.Inject;
 
 import fr.free.nrw.commons.caching.CacheController;
+import fr.free.nrw.commons.di.ApplicationlessInjection;
 import timber.log.Timber;
 
 import static com.mapbox.mapboxsdk.Mapbox.getApplicationContext;
@@ -54,6 +55,7 @@ public class FileProcessor {
         this.prefs = prefs;
         this.context = context;
         useExtStorage = prefs.getBoolean("useExternalStorage", true);
+        ApplicationlessInjection.getInstance(context.getApplicationContext()).getCommonsApplicationComponent().inject(this);
     }
 
     /**
