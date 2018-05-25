@@ -109,7 +109,7 @@ public class ShareActivity
     @BindView(R.id.backgroundImage)
     SimpleDraweeView backgroundImageView;
     @BindView(R.id.media_map)
-    FloatingActionButton mapsFragment; //Lets stick to camelCase
+    FloatingActionButton mapsFragment;
     @BindView(R.id.media_upload_zoom_in)
     FloatingActionButton zoomInButton;
     @BindView(R.id.media_upload_zoom_out)
@@ -123,7 +123,7 @@ public class ShareActivity
     private static final int REQUEST_PERM_ON_CREATE_LOCATION = 2;
     private static final int REQUEST_PERM_ON_CREATE_STORAGE_AND_LOCATION = 3;
     private static final int REQUEST_PERM_ON_SUBMIT_STORAGE = 4;
-    
+
     private String source;
     private String mimeType;
 
