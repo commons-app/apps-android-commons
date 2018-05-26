@@ -28,6 +28,7 @@ import fr.free.nrw.commons.auth.AccountUtil;
 import fr.free.nrw.commons.auth.LoginActivity;
 import fr.free.nrw.commons.contributions.ContributionsActivity;
 import fr.free.nrw.commons.category.CategoryImagesActivity;
+import fr.free.nrw.commons.explore.ExploreActivity;
 import fr.free.nrw.commons.nearby.NearbyActivity;
 import fr.free.nrw.commons.notification.NotificationActivity;
 import fr.free.nrw.commons.settings.SettingsActivity;
@@ -156,9 +157,9 @@ public abstract class NavigationBaseActivity extends BaseActivity
                 drawerLayout.closeDrawer(navigationView);
                 NotificationActivity.startYourself(this);
                 return true;
-            case R.id.action_featured_images:
+            case R.id.action_explore:
                 drawerLayout.closeDrawer(navigationView);
-                CategoryImagesActivity.startYourself(this, getString(R.string.title_activity_featured_images), FEATURED_IMAGES_CATEGORY);
+                startActivityWithFlags(this, ExploreActivity.class, Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
                 return true;
             default:
                 Timber.e("Unknown option [%s] selected from the navigation menu", itemId);
