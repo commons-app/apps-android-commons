@@ -26,6 +26,8 @@ import android.widget.GridView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import com.facebook.drawee.generic.GenericDraweeHierarchyBuilder;
 import com.facebook.drawee.view.SimpleDraweeView;
 
@@ -41,9 +43,13 @@ public class MultipleUploadListFragment extends Fragment {
         void OnMultipleUploadInitiated();
     }
 
-    private GridView photosGrid;
+    @BindView(R.id.multipleShareBackground)
+    GridView photosGrid;
+
+    @BindView(R.id.multipleBaseTitle)
+    EditText baseTitle;
+
     private PhotoDisplayAdapter photosAdapter;
-    private EditText baseTitle;
     private TitleTextWatcher textWatcher = new TitleTextWatcher();
 
     private Point photoSize;
@@ -166,9 +172,7 @@ public class MultipleUploadListFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_multiple_uploads_list, container, false);
-        photosGrid = view.findViewById(R.id.multipleShareBackground);
-        baseTitle = view.findViewById(R.id.multipleBaseTitle);
-
+        ButterKnife.bind(this,view);
         photosAdapter = new PhotoDisplayAdapter();
         photosGrid.setAdapter(photosAdapter);
         photosGrid.setOnItemClickListener((AdapterView.OnItemClickListener) getActivity());

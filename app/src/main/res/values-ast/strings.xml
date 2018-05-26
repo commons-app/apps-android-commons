@@ -49,8 +49,6 @@
   <string name="add_title_toast">Apurre un títulu pa esti ficheru</string>
   <string name="share_description_hint">Descripción</string>
   <string name="login_failed_network">Nun se pudo aniciar sesión – error de rede</string>
-  <string name="login_failed_username">Nun se pudo aniciar sesión – por favor compruebe\'l so nome d\'usuariu</string>
-  <string name="login_failed_password">Nun se pudo aniciar sesión – por favor compruebe la so contraseña</string>
   <string name="login_failed_throttled">Demasiaos intentos incorreutos. Téntalo otra vuelta n\'unos minutos.</string>
   <string name="login_failed_blocked">Sentímoslo, esti usuariu ta bloquiáu en Commons</string>
   <string name="login_failed_2fa_needed">Tienes de dar el códigu d\'identificación de dos factores.</string>
@@ -84,6 +82,7 @@
   <string name="categories_activity_title">Categoríes</string>
   <string name="title_activity_settings">Configuración</string>
   <string name="title_activity_signup">Date d\'alta</string>
+  <string name="title_activity_featured_images">Imáxenes destacaes</string>
   <string name="menu_about">Tocante a</string>
   <string name="about_license">La app de Wikimedia Commons ye software de códigu abiertu, creáu y calteníu por becaos y voluntarios de la comunidá de Wikimedia. La Fundación Wikimedia nun participa na creación, desendolcu nin caltenimientu de la app.</string>
   <string name="about_improve">Crea una nueva &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;incidencia en GitHub&lt;/a&gt; pa informar de problemes y suxerencies.</string>
@@ -169,6 +168,8 @@
   <string name="media_detail_media_title">Títulu del mediu</string>
   <string name="media_detail_description">Descripción</string>
   <string name="media_detail_description_explanation">Equí va la descripción del mediu. Esto pué ser llargo enforma, y necesitará espardese per delles llinies. Sicasí, esperamos que se vea bien.</string>
+  <string name="media_detail_author">Autor</string>
+  <string name="media_detail_author_explanation">El nome d\'usuariu del autor de la imaxe destacada va equí.</string>
   <string name="media_detail_uploaded_date">Data d\'unviu</string>
   <string name="media_detail_license">Llicencia</string>
   <string name="media_detail_coordinates">Coordenaes</string>
@@ -211,6 +212,7 @@
   <string name="navigation_item_logout">Salir</string>
   <string name="navigation_item_info">Tutorial</string>
   <string name="navigation_item_notification">Avisos</string>
+  <string name="navigation_item_featured_images">Destacada</string>
   <string name="nearby_needs_permissions">Los sitios cercanos nun pueden amosase ensin los permisos d\'allugamientu</string>
   <string name="no_description_found">nun s\'atoparon descripciones</string>
   <string name="nearby_info_menu_commons_article">Páxina del ficheru en Commons</string>
@@ -259,4 +261,14 @@
   <string name="about_translate_proceed">Siguir</string>
   <string name="about_translate_cancel">Encaboxar</string>
   <string name="retry">Retentar</string>
+  <string name="showcase_view_got_it_button">Entendílo</string>
+  <string name="showcase_view_whole_nearby_activity">Estos son sitios cercanos a ti que precisen imaxes para ilustrar los sos artículos de Wikipedia</string>
+  <string name="showcase_view_list_icon">Tocando esti botón amuésase la llista d\'esos llugares</string>
+  <string name="showcase_view_plus_fab">Puedes xubir una imaxe pa cualquier sitiu dende la galería o la cámara</string>
+  <string name="no_images_found">Nun s\'alcontró nenguna imaxe</string>
+  <string name="error_loading_images">Asocedió un error al cargar les imáxenes.</string>
+  <string name="image_uploaded_by">Xubida por: %1$s</string>
+  <string name="share_app_title">Compartir app</string>
+  <string name="share_coordinates_not_present">Nun s\'especificaron les coordenaes al escoyer la imaxe</string>
+  <string name="error_fetching_nearby_places">Error al llograr los llugares cercanos.</string>
 </resources>

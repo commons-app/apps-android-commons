@@ -48,8 +48,6 @@
   <string name="share_title_hint">Izenburua</string>
   <string name="share_description_hint">Deskribapena</string>
   <string name="login_failed_network">Ezin izan da sartu - sarean akatsa</string>
-  <string name="login_failed_username">Ezin izan da sartu - ziurtatu ezazu zure erabiltzaile izena</string>
-  <string name="login_failed_password">Ezin izan da sartu - ziurta ezazu zure pasahitza</string>
   <string name="login_failed_throttled">Sartzeko saiakera txar gehiegi. Mesedez saiatu zaitez minutu batzuk barru.</string>
   <string name="login_failed_blocked">Barka, baina erabiltzaile hau blokeatuta dago Commonsen</string>
   <string name="login_failed_generic">Saio hasieran akatsa</string>

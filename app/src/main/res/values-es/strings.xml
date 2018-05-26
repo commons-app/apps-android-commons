@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Authors:
 * 2axterix2
+* Adjen
 * Benfutbol10
 * Fitoschido
 * Jduranboger
@@ -57,8 +58,7 @@
   <string name="add_title_toast">Proporciona un título para este archivo</string>
   <string name="share_description_hint">Descripción</string>
   <string name="login_failed_network">No se pudo iniciar sesión: falla de red</string>
-  <string name="login_failed_username">No se pudo iniciar sesión: revisa tu nombre de usuario</string>
-  <string name="login_failed_password">No se pudo iniciar sesión: revisa tu contraseña</string>
+  <string name="login_failed_wrong_credentials">Incapaz de ingresar - por favor cheque su nombre de usario y contraseña</string>
   <string name="login_failed_throttled">Demasiados intentos fallidos. Inténtalo de nuevo en unos minutos.</string>
   <string name="login_failed_blocked">Lo sentimos, este usuario ha sido bloqueado en Commons</string>
   <string name="login_failed_2fa_needed">Debes proporcionar tu código de auntenticación de dos factores.</string>
@@ -275,4 +275,5 @@
   <string name="image_uploaded_by">Cargada por: %1$s</string>
   <string name="share_app_title">Compartir aplicación</string>
   <string name="share_coordinates_not_present">No se especificaron las coordenadas al seleccionar la imagen</string>
+  <string name="error_fetching_nearby_places">Error al recuperar los lugares cercanos.</string>
 </resources>

@@ -49,8 +49,6 @@
   <string name="add_title_toast">Gefðu þessari skrá einhvern titil</string>
   <string name="share_description_hint">Lýsing</string>
   <string name="login_failed_network">Innskráning mistókst - bilun í neti</string>
-  <string name="login_failed_username">Innskráning mistókst. Athugaðu notandanafnið þitt</string>
-  <string name="login_failed_password">Innskráning mistókst. Athugaðu lykilorðið þitt</string>
   <string name="login_failed_throttled">Of margar misteknar tilraunir. Reyndu aftur eftir nokkrar mínútur.</string>
   <string name="login_failed_blocked">Því miður, þessi notandi hefur verið bannaður á Commons</string>
   <string name="login_failed_2fa_needed">Þú verður að setja inn tveggja-þrepa auðkenningarkóðann þinn.</string>
@@ -263,4 +261,14 @@
   <string name="about_translate_proceed">Halda áfram</string>
   <string name="about_translate_cancel">Hætta við</string>
   <string name="retry">Reyna aftur</string>
+  <string name="showcase_view_got_it_button">Náði því!</string>
+  <string name="showcase_view_whole_nearby_activity">Þetta eru þeir staðir í næsta nágrenni við þig sem vantar myndir til að skýra með Wikipedia-greinar</string>
+  <string name="showcase_view_list_icon">Ef ýtt er á þennan hnapp birtist listi yfir þessa staði</string>
+  <string name="showcase_view_plus_fab">Þú getur sent inn mynd úr myndasafninu þínu eða myndavélinni</string>
+  <string name="no_images_found">Engir myndir fundust!</string>
+  <string name="error_loading_images">Villa kom upp við að hlaða inn myndum.</string>
+  <string name="image_uploaded_by">Sent inn af: %1$s</string>
+  <string name="share_app_title">Deila forriti</string>
+  <string name="share_coordinates_not_present">Hnit voru ekki tilgreind við val myndar</string>
+  <string name="error_fetching_nearby_places">Villa við að sækja nálæga staði.</string>
 </resources>

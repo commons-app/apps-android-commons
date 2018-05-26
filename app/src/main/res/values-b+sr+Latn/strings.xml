@@ -43,8 +43,6 @@
   <string name="share_title_hint">Naslov</string>
   <string name="share_description_hint">Opis</string>
   <string name="login_failed_network">Ne mogu da vas prijavim – mreža ne radi</string>
-  <string name="login_failed_username">Ne mogu da vas prijavim – proverite svoje korisničko ime</string>
-  <string name="login_failed_password">Ne mogu da vas prijavim – proverite svoju lozinku</string>
   <string name="login_failed_throttled">Previše neuspešnih pokušaja. Probajte ponovo za nekoliko minuta.</string>
   <string name="login_failed_blocked">Nažalost, korisnik je blokiran na Ostavi</string>
   <string name="login_failed_2fa_needed">Morate uneti svoj dvofaktorski kod za autentifikaciju.</string>

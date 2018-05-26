@@ -42,8 +42,6 @@
   <string name="share_title_hint">عنوان</string>
   <string name="share_description_hint">تشريح</string>
   <string name="login_failed_network">ناقابلِ داخل ٿيڻ - باھمڄار ناڪامي</string>
-  <string name="login_failed_username">ناقابلِ داخل ٿيڻ - براءِ مھرباني پنھنجو واپرائيندڙ-نانءُ چڪاسيو</string>
-  <string name="login_failed_password">ناقابل داخل ٿيڻ - براءِ مھرباني پنھنجو ڳجھولفظ چڪاسيو</string>
   <string name="login_failed_throttled">ھيڪانديون ناڪام ڪوششون. براءِ مھرباني ڪجھ منٽن کانپوءِ ٻيھر ڪوشش ڪريو.</string>
   <string name="login_failed_blocked">افسوس، ھي واپرائيندڙ العام تي بندشيل آھي</string>
   <string name="login_failed_generic">داخل ٿيڻ ناڪام</string>

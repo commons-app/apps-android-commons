@@ -61,8 +61,7 @@
   <string name="add_title_toast">Forneça um título para este arquivo</string>
   <string name="share_description_hint">Descrição</string>
   <string name="login_failed_network">Erro ao efetuar o login - falha na rede</string>
-  <string name="login_failed_username">Erro ao efetuar o login - confira seu nome de usuário</string>
-  <string name="login_failed_password">Erro ao efetuar o login - confira sua senha</string>
+  <string name="login_failed_wrong_credentials">Não é possível fazer o login - verifique seu nome de usuário e senha</string>
   <string name="login_failed_throttled">Muitas tentativas malsucedidas. Tente de novo daqui alguns minutos.</string>
   <string name="login_failed_blocked">Desculpe, esse usuário foi banido do Commons</string>
   <string name="login_failed_2fa_needed">Você precisa fornecer o seu código de ativação de dois fatores.</string>
@@ -284,4 +283,5 @@
   <string name="image_uploaded_by">Carregada por: %1$s</string>
   <string name="share_app_title">Compartilhar o aplicativo</string>
   <string name="share_coordinates_not_present">Não foram especificadas coordenadas durante a seleção da imagem</string>
+  <string name="error_fetching_nearby_places">Erro ao buscar lugares próximos.</string>
 </resources>

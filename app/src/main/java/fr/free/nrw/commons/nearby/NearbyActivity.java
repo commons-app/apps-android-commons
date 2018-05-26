@@ -322,7 +322,7 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
     protected void onStart() {
         super.onStart();
         locationManager.addLocationListener(this);
-        locationManager.registerLocationManager();
+        registerLocationUpdates();
     }
 
     @Override
@@ -400,7 +400,7 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
             return;
         }
 
-        locationManager.registerLocationManager();
+        registerLocationUpdates();
         LatLng lastLocation = locationManager.getLastLocation();
 
         if (curLatLng != null && curLatLng.equals(lastLocation)) { //refresh view only if location has changed
@@ -447,6 +447,39 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
             String gsonCurLatLng = gson.toJson(curLatLng);
             bundle.putString("CurLatLng", gsonCurLatLng);
             updateMapFragment(true);
+        }
+    }
+
+    /**
+     * This method first checks if the location permissions has been granted and then register the location manager for updates.
+     */
+    private void registerLocationUpdates() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            if (locationManager.isLocationPermissionGranted()) {
+                locationManager.registerLocationManager();
+            } else {
+                // Should we show an explanation?
+                if (locationManager.isPermissionExplanationRequired(this)) {
+                    new AlertDialog.Builder(this)
+                            .setMessage(getString(R.string.location_permission_rationale_nearby))
+                            .setPositiveButton("OK", (dialog, which) -> {
+                                requestLocationPermissions();
+                                dialog.dismiss();
+                            })
+                            .setNegativeButton("Cancel", (dialog, id) -> {
+                                showLocationPermissionDeniedErrorDialog();
+                                dialog.cancel();
+                            })
+                            .create()
+                            .show();
+
+                } else {
+                    // No explanation needed, we can request the permission.
+                    requestLocationPermissions();
+                }
+            }
+        } else {
+            locationManager.registerLocationManager();
         }
     }
 
@@ -530,7 +563,7 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
             locationManager.removeLocationListener(this);
         } else {
             lockNearbyView = false;
-            locationManager.registerLocationManager();
+            registerLocationUpdates();
             locationManager.addLocationListener(this);
         }
     }

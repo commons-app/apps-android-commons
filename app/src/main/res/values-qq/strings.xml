@@ -50,8 +50,6 @@
   <string name="share_title_hint">{{Identical|Title}}</string>
   <string name="share_description_hint">{{Identical|Description}}</string>
   <string name="login_failed_network">Error message shown to user when login can not be completed due to network issues.</string>
-  <string name="login_failed_username">Error message shown to user when login can not be completed because the user name is wrong.</string>
-  <string name="login_failed_password">Error message shown to user when login can not be completed beause the password is wrong</string>
   <string name="login_failed_throttled">Error message shown to user when login can not be completed because the user has attempted to login too many times in a short period of time, and hence been throttled.</string>
   <string name="login_failed_blocked">Error message shown to user when login can not be completed because the user is blocked on Wikimedia Commons</string>
   <string name="login_failed_generic">{{Identical|Login failed}}</string>
@@ -99,6 +97,7 @@
   <string name="welcome_copyright_subtext">Message explaining what kind of images not to submit.</string>
   <string name="welcome_final_text">Message asking user if they understand what kinds of images to upload.</string>
   <string name="welcome_final_button_text">Button text for confirming the user understands what kinds of images to upload.\n{{Identical|Yes}}</string>
+  <string name="welcome_help_button_text">\'\'This message is empty, and it\'s probably invalid. See bug report: https://github.com/commons-app/apps-android-commons/issues/1333 .\'\'</string>
   <string name="detail_panel_cats_label">Label for categories list in media detail panel.\n{{Identical|Category}}</string>
   <string name="detail_panel_cats_loading">Placeholder for categories list in media detail panel, while loading from network.\n{{Identical|Loading}}</string>
   <string name="detail_panel_cats_none">Placeholder for categories list in media detail panel, if no categories found.\n{{Identical|None selected}}</string>

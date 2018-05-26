@@ -40,7 +40,8 @@
   <string name="upload_failed_notification_title">%1$s のアップロードに失敗しました</string>
   <string name="upload_failed_notification_subtitle">閲覧するにはタップしてください</string>
   <plurals name="uploads_pending_notification_indicator">
-    <item quantity="other">%1$d 件のファイルをアップロード中</item>
+    <item quantity="one">%1$d file uploading</item>
+    <item quantity="other">%1$d件のファイルをアップロード中</item>
   </plurals>
   <string name="title_activity_contributions">自分の最近のアップロードファイル</string>
   <string name="contribution_state_queued">順番待ち中</string>
@@ -57,11 +58,9 @@
   <string name="add_title_toast">ファイル名をつけてください</string>
   <string name="share_description_hint">説明</string>
   <string name="login_failed_network">ログインできません - ネットワークのエラーです</string>
-  <string name="login_failed_username">ログインできません - 利用者名を確認してください</string>
-  <string name="login_failed_password">ログインできません - パスワードを確認してください</string>
-  <string name="login_failed_throttled">失敗した回数が多すぎます。数分でもう一度お試しください。</string>
+  <string name="login_failed_throttled">失敗した回数が多すぎます。数分待ってからもう一度お試しください。</string>
   <string name="login_failed_blocked">申し訳ありませんが、この利用者はコモンズでブロックされています。</string>
-  <string name="login_failed_2fa_needed">2 要素認証コードを提供する必要があります。</string>
+  <string name="login_failed_2fa_needed">2要素認証コードを提供する必要があります。</string>
   <string name="login_failed_generic">ログイン失敗</string>
   <string name="share_upload_button">アップロード</string>
   <string name="multiple_share_base_title">このセットに名前をつけてください</string>
@@ -76,22 +75,24 @@
   <string name="contributions_subtitle_zero">まだ何もアップロードされていません。</string>
   <plurals name="contributions_subtitle">
     <item quantity="zero">\@string/contributions_subtitle_zero</item>
-    <item quantity="other">%1$d 件のアップロード</item>
+    <item quantity="other">pne=%1$d upload</item>
   </plurals>
   <plurals name="starting_multiple_uploads">
-    <item quantity="other">%1$d 件のアップロードを開始中</item>
+    <item quantity="one">Starting %1$d upload</item>
+    <item quantity="other">%1$d件のアップロードを開始中</item>
   </plurals>
   <plurals name="multiple_uploads_title">
+    <item quantity="one">%1$d upload</item>
     <item quantity="other">%1$d 件のアップロード</item>
   </plurals>
   <string name="categories_not_found">%1$s に一致するカテゴリが見つかりません</string>
-  <string name="categories_skip_explanation">あなたの画像をウィキメディア・コモンズで見つけやすくするためにカテゴリを追加してください。\n\nカテゴリ名の入力を開始してください。\nこの手順をスキップするにはこのメッセージをタップしてください(または戻るボタン)。</string>
+  <string name="categories_skip_explanation">あなたの画像をウィキメディア・コモンズで見つけやすくするためにカテゴリを追加してください。\nカテゴリ名の入力を開始してください。</string>
   <string name="categories_activity_title">カテゴリ</string>
   <string name="title_activity_settings">設定</string>
   <string name="title_activity_signup">利用者登録</string>
   <string name="title_activity_featured_images">秀逸な画像</string>
   <string name="menu_about">このアプリについて</string>
-  <string name="about_license">ウィキメディア・コモンズ・アプリはウィキメディア・コミュニティの助成金受給者とボランティアによって製作・メンテナンスされているオープンソースソフトウェアです。ウィキメディア財団はこのアプリの製作・開発・メンテナンスに関与していません。</string>
+  <string name="about_license">ウィキメディア・コモンズ・アプリはウィキメディア・コミュニティの助成金受給者とボランティアが製作・管理しているオープンソースソフトウェアです。ウィキメディア財団はこのアプリの製作・開発・メンテナンスに関与していません。</string>
   <string name="about_improve">バグとアイディアは &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;Github&lt;/a&gt; へ。</string>
   <string name="about_privacy_policy">&lt;u&gt;プライバシー・ポリシー&lt;/u&gt;</string>
   <string name="about_credits">&lt;u&gt;クレジット&lt;/u&gt;</string>
@@ -103,7 +104,7 @@
   <string name="no_uploads_yet">まだ写真をアップロードしていません。</string>
   <string name="menu_retry_upload">再試行</string>
   <string name="menu_cancel_upload">キャンセル</string>
-  <string name="share_license_summary">この画像が %1$s ライセンスでアップロードされます。</string>
+  <string name="share_license_summary">この画像は%1$sライセンスのもとにアップロードされます。</string>
   <string name="media_upload_policy">この画像の投稿に当たり、私はこれが自分自身の作品であり、著作権のあるコンテンツや自撮りは含まれていないと宣言します。</string>
   <string name="menu_download">ダウンロード</string>
   <string name="preference_license">既定のライセンス</string>
@@ -148,6 +149,7 @@
   <string name="tutorial_4_subtext">- 題名: シドニー・オペラハウス\n- 説明: 湾の向こうから見たシドニー・オペラハウス\n- カテゴリ: 西側から見たシドニー・オペラハウス、遠くから見たシドニー・オペラハウス</string>
   <string name="tutorial_4_subtext_1">題名: シドニーのオペラハウス</string>
   <string name="tutorial_4_subtext_2">説明: シドニーのオペラハウス。湾を挟んで撮影。</string>
+  <string name="tutorial_4_subtext_3">カテゴリ: シドニーオペラハウスの西面、シドニーオペラ遠景</string>
   <string name="welcome_wikipedia_text">画像を投稿してください。ウィキペディアの記事に彩りを！</string>
   <string name="welcome_wikipedia_subtext">ウィキペディアの画像はウィキメディア・コモンズに保管されています。</string>
   <string name="welcome_copyright_text">あなたの画像は世界中の人々が学習する助けになります</string>
@@ -167,7 +169,7 @@
   <string name="title_activity_nearby">近くの場所</string>
   <string name="no_nearby">付近の場所が見つかりません</string>
   <string name="warning">警告</string>
-  <string name="file_exists">このファイルが既にコモンズにあります。本当にアップロードしますか？</string>
+  <string name="file_exists">このファイルは既にコモンズにあります。本当にアップロードしますか？</string>
   <string name="yes">はい</string>
   <string name="no">いいえ</string>
   <string name="media_detail_title">タイトル</string>
@@ -185,7 +187,7 @@
   <string name="_2fa_code">2FA コード</string>
   <string name="number_of_uploads">最近のアップロードファイルに表示する最大件数</string>
   <string name="maximum_limit">最大限</string>
-  <string name="maximum_limit_alert">500 以上の項目を表示できません</string>
+  <string name="maximum_limit_alert">表示できるのは500件以下です</string>
   <string name="set_limit">最近のアップロードファイルに表示する最大件数</string>
   <string name="login_failed_2fa_not_supported">2段階認証は現在サポートされていません。</string>
   <string name="logout_verification">ログアウトしてもよろしいですか？</string>
@@ -226,7 +228,7 @@
   <string name="nearby_info_menu_wikipedia_article">ウィキペディアの記事</string>
   <string name="error_while_cache">画像をキャッシュする際のエラー</string>
   <string name="title_info">ファイル固有の説明的な表題。ファイル名として使われます。平易な言葉を使い、空白を入れることができます。拡張子は含めないでください。</string>
-  <string name="description_info">可能な限りメディアを説明してください:どこで撮られましたか?それは何を示していますか?文脈とは何ですか?物や人を説明してください。容易に推測できない情報、例えば風景の場合の時刻を明らかにする。メディアに珍しいことがある場合は、何が珍しいのかを説明してください。</string>
+  <string name="description_info">可能な限りメディアを説明してください: 撮影地はどこですか? それは何を示していますか? どんな文脈がありますか? 被写体の物や人を説明してください。容易に推測できない情報、例えば風景であれば時刻を明示します。特筆すべき物事が映っている場合は、何が珍しいのかを説明してください。</string>
   <string name="upload_image_too_dark">この画像は暗すぎますがアップロードしますか？ ウィキメディア・コモンズは百科事典に適した画像のみ受け付けます。</string>
   <string name="upload_image_blurry">ピントが合っていませんが、アップロードしますか？ ウィキメディア・コモンズは百科事典に適した画像のみ受け付けます。</string>
   <string name="give_permission">権限を付与</string>
@@ -255,7 +257,7 @@
   <string name="nearby_wikipedia">ウィキペディア</string>
   <string name="nearby_commons">コモンズ</string>
   <string name="about_rate_us">&lt;u&gt;評価する&lt;/u&gt;</string>
-  <string name="about_faq">&lt;u&gt;FAQ&lt;/u&gt;</string>
+  <string name="about_faq">&lt;u&gt;よくある質問&lt;/u&gt;</string>
   <string name="welcome_skip_button">チュートリアルをスキップする</string>
   <string name="no_internet">インターネットに接続していません</string>
   <string name="internet_established">インターネットに接続しました</string>
@@ -276,4 +278,5 @@
   <string name="image_uploaded_by">アップロードした人: %1$</string>
   <string name="share_app_title">アプリをシェアする</string>
   <string name="share_coordinates_not_present">画像の選択中に位置情報を特定できませんでした</string>
+  <string name="error_fetching_nearby_places">付近の場所を取得しようとしてエラーが発生しました。</string>
 </resources>
