@@ -92,8 +92,16 @@ public class ExploreActivity extends NavigationBaseActivity implements MediaDeta
     }
 
     @Override
+    public void onBackPressed() {
+        tabLayout.setVisibility(View.VISIBLE);
+        viewPager.setVisibility(View.VISIBLE);
+        fragmentContainer.setVisibility(View.GONE);
+        super.onBackPressed();
+    }
+
+    @Override
     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-        Toast.makeText(this,view+"",Toast.LENGTH_SHORT).show();
+//        Toast.makeText(this,adapterView+"",Toast.LENGTH_SHORT).show();
         tabLayout.setVisibility(View.GONE);
         viewPager.setVisibility(View.GONE);
         fragmentContainer.setVisibility(View.VISIBLE);
@@ -113,20 +121,36 @@ public class ExploreActivity extends NavigationBaseActivity implements MediaDeta
 
     @Override
     public Media getMediaAtPosition(int i) {
-        if (featuredImagesFragment.getAdapter() == null) {
-            // not yet ready to return data
-            return null;
-        } else {
-            return (Media) featuredImagesFragment.getAdapter().getItem(i);
+        if (tabLayout.getSelectedTabPosition()==0){
+            if (featuredImagesFragment.getAdapter() == null) {
+                // not yet ready to return data
+                return null;
+            } else {
+                return (Media) featuredImagesFragment.getAdapter().getItem(i);
+            }
+        }else {
+            if (pictureOfTheDayFragment.getAdapter() == null) {
+                // not yet ready to return data
+                return null;
+            } else {
+                return (Media) pictureOfTheDayFragment.getAdapter().getItem(i);
+            }
         }
     }
 
     @Override
     public int getTotalMediaCount() {
-        if (featuredImagesFragment.getAdapter() == null) {
-            return 0;
+        if (tabLayout.getSelectedTabPosition()==0) {
+            if (featuredImagesFragment.getAdapter() == null) {
+                return 0;
+            }
+            return featuredImagesFragment.getAdapter().getCount();
+        }else {
+            if (pictureOfTheDayFragment.getAdapter() == null) {
+                return 0;
+            }
+            return pictureOfTheDayFragment.getAdapter().getCount();
         }
-        return featuredImagesFragment.getAdapter().getCount();
     }
 
     @Override
