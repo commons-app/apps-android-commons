@@ -12,6 +12,7 @@
         android:textColor="@color/white"
         android:textSize="20sp"
         android:gravity="center"
+        android:layout_marginTop="10dp"
         android:text="@string/app_widget_heading"/>
 
     <ImageView

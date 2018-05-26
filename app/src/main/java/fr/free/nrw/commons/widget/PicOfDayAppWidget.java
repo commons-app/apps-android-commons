@@ -12,7 +12,10 @@ import com.squareup.picasso.Picasso;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.json.XML;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
 
 import java.util.ArrayList;
 
@@ -37,20 +40,15 @@ public class PicOfDayAppWidget extends AppWidgetProvider {
             @Override
             public void onTaskCompleted(ArrayList<Article> list) {
                 String desc = list.get(list.size() - 1).getDescription();
-                try {
-                    if (desc != null) {
-                        JSONObject data = XML.toJSONObject(desc);
-                        JSONArray tr = data.optJSONObject("div").optJSONObject("div").optJSONObject("table").optJSONArray("tr");
-                        JSONObject jsonObject = new JSONObject(String.valueOf(tr.opt(1)));
-                        String imageUrl = jsonObject.optJSONObject("td").optJSONObject("a").optJSONObject("img").optString("src");
-                        if (imageUrl != null && imageUrl.length() > 0) {
-                            Picasso.get().load(imageUrl).into(views, R.id.appwidget_image, new int[]{appWidgetId});
-                        }
+                if (desc != null) {
+                    Document document = Jsoup.parse(desc);
+                    Elements elements = document.select("img");
+                    String imageUrl = elements.get(0).attr("src");
+                    if (imageUrl != null && imageUrl.length() > 0) {
+                        Picasso.get().load(imageUrl).into(views, R.id.appwidget_image, new int[]{appWidgetId});
                     }
-
-                } catch (JSONException e) {
-                    e.printStackTrace();
                 }
+
             }
 
             @Override
