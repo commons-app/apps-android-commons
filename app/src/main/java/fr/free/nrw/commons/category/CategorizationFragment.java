@@ -28,6 +28,7 @@ import java.util.Calendar;
 import java.util.Comparator;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -194,6 +195,20 @@ public class CategorizationFragment extends CommonsDaggerSupportFragment {
         onCategoriesSaveHandler = (OnCategoriesSaveHandler) getActivity();
         getActivity().setTitle(R.string.categories_activity_title);
     }
+    void removeduplicates(RVRendererAdapter<CategoryItem> categoriesAdapter){
+        List<CategoryItem> al = new ArrayList<>();
+        // add elements to al, including duplicates
+        for (int i = 0; i<categoriesAdapter.getItemCount();i++){
+            al.add(categoriesAdapter.getItem(i));
+        }
+        //Linked Hash Set contains only single valued items and the order is maintained
+        LinkedHashSet<CategoryItem> hs = new LinkedHashSet<>();
+        hs.addAll(al);
+        al.clear();
+        al.addAll(hs);
+        categoriesAdapter.clear();
+        categoriesAdapter.addAll(al);
+    }
 
     private void updateCategoryList(String filter) {
         Observable.fromIterable(selectedCategories)
@@ -220,6 +235,7 @@ public class CategorizationFragment extends CommonsDaggerSupportFragment {
                         s -> categoriesAdapter.add(s),
                         Timber::e,
                         () -> {
+                            removeduplicates(categoriesAdapter);
                             categoriesAdapter.notifyDataSetChanged();
                             categoriesSearchInProgress.setVisibility(View.GONE);
 
