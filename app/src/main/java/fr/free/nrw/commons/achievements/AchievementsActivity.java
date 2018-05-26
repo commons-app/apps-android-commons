@@ -13,6 +13,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -46,6 +48,8 @@ public class AchievementsActivity extends NavigationBaseActivity {
 
     private static final double BADGE_IMAGE_WIDTH_RATIO = 0.4;
     private static final double BADGE_IMAGE_HEIGHT_RATIO = 0.3;
+    private Boolean isUploadFetched = false;
+    private Boolean isStatisticsFetched = false;
 
     @BindView(R.id.achievement_badge)
     ImageView imageView;
@@ -61,6 +65,16 @@ public class AchievementsActivity extends NavigationBaseActivity {
     CircleProgressBar imagesUsedByWikiProgessbar;
     @BindView(R.id.image_featured)
     TextView imagesFeatured;
+    @BindView(R.id.progressBar)
+    ProgressBar progressBar;
+    @BindView(R.id.layout_image_uploaded)
+    RelativeLayout layoutImageUploaded;
+    @BindView(R.id.layout_image_reverts)
+    RelativeLayout layoutImageReverts;
+    @BindView(R.id.layout_image_used_by_wiki)
+    RelativeLayout layoutImageUsedByWiki;
+    @BindView(R.id.layout_statistics)
+    LinearLayout layoutStatistics;
     @Inject
     SessionManager sessionManager;
     @Inject
@@ -99,6 +113,8 @@ public class AchievementsActivity extends NavigationBaseActivity {
         imageView.requestLayout();
 
         setSupportActionBar(toolbar);
+        progressBar.setVisibility(View.VISIBLE);
+        hideLayouts();
         setAchievements();
         setUploadCount();
         initDrawer();
@@ -182,6 +198,8 @@ public class AchievementsActivity extends NavigationBaseActivity {
         Log.i("uploadCount",Integer.toString(uploadCount));
         imagesUploadedProgressbar.setProgress(100*uploadCount/25);
         imagesUploadedProgressbar.setProgressTextFormatPattern(uploadCount +"/25" );
+        isUploadFetched = true;
+        hideProgressBar();
     }
 
     /**
@@ -216,6 +234,8 @@ public class AchievementsActivity extends NavigationBaseActivity {
         imagesUsedByWikiProgessbar.setProgress(100*achievements.getUniqueUsedImages()/25);
         imagesUsedByWikiProgessbar.setProgressTextFormatPattern(achievements.getUniqueUsedImages() + "/25");
         imagesFeatured.setText(Integer.toString(achievements.getFeaturedImages()));
+        isStatisticsFetched = true;
+        hideProgressBar();
     }
 
     /**
@@ -228,6 +248,31 @@ public class AchievementsActivity extends NavigationBaseActivity {
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
         context.startActivity(intent);
+    }
+
+    /**
+     * to hide progressbar
+     */
+    private void hideProgressBar() {
+        if (progressBar != null && isUploadFetched && isStatisticsFetched) {
+            progressBar.setVisibility(View.GONE);
+            layoutImageReverts.setVisibility(View.VISIBLE);
+            layoutImageUploaded.setVisibility(View.VISIBLE);
+            layoutImageUsedByWiki.setVisibility(View.VISIBLE);
+            layoutStatistics.setVisibility(View.VISIBLE);
+            imageView.setVisibility(View.VISIBLE);
+        }
+    }
+
+    /**
+     * used to hide the layouts while fetching results from api
+     */
+    private void hideLayouts(){
+        layoutImageUsedByWiki.setVisibility(View.INVISIBLE);
+        layoutImageUploaded.setVisibility(View.INVISIBLE);
+        layoutImageReverts.setVisibility(View.INVISIBLE);
+        layoutStatistics.setVisibility(View.INVISIBLE);
+        imageView.setVisibility(View.INVISIBLE);
     }
 
 }
