@@ -1,6 +1,7 @@
 package fr.free.nrw.commons.review;
 
 import android.content.Context;
+import android.support.annotation.Nullable;
 import android.support.v4.view.ViewPager;
 
 import java.util.ArrayList;
@@ -17,12 +18,14 @@ import io.reactivex.schedulers.Schedulers;
  */
 
 public class ReviewController {
-    public static String fileName;
-    public static Revision firstRevision; // TODO: maybe we can expand this class to include fileName
+    private String fileName;
+    @Nullable
+    public Revision firstRevision; // TODO: maybe we can expand this class to include fileName
     protected static ArrayList<String> categories;
-    ReviewPagerAdapter reviewPagerAdapter;
-    ViewPager viewPager;
-    ReviewActivity reviewActivity;
+
+    private ReviewPagerAdapter reviewPagerAdapter;
+    private ViewPager viewPager;
+    private ReviewActivity reviewActivity;
 
     ReviewController(Context context) {
         reviewActivity =  (ReviewActivity)context;
@@ -31,7 +34,7 @@ public class ReviewController {
     }
 
     public void onImageRefreshed(String fileName) {
-        ReviewController.fileName = fileName;
+        this.fileName = fileName;
         ReviewController.categories = new ArrayList<>();
     }
 

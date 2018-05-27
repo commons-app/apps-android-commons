@@ -1,11 +1,15 @@
 package fr.free.nrw.commons.mwapi;
 
-public class Revision {
-    public String revisionId;
-    public String username;
+import fr.free.nrw.commons.PageTitle;
 
-    public Revision(String revisionId, String username) {
+public class Revision {
+    public final String revisionId;
+    public final String username;
+    public final PageTitle pageTitle;
+
+    public Revision(String revisionId, String username, String pageTitle) {
         this.revisionId = revisionId;
         this.username = username;
+        this.pageTitle = new PageTitle(pageTitle);
     }
 }
