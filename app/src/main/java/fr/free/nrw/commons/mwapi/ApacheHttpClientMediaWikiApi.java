@@ -471,7 +471,8 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
                     .get();
             return new Revision(
                     res.getString("/api/query/pages/page/revisions/rev/@revid"),
-                    res.getString("/api/query/pages/page/revisions/rev/@user"));
+                    res.getString("/api/query/pages/page/revisions/rev/@user"),
+                    filename);
         });
     }
 

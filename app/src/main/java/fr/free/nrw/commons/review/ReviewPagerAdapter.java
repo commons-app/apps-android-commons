@@ -5,12 +5,13 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 
+import fr.free.nrw.commons.mwapi.Revision;
+
 /**
  * Created by nes on 19.05.2018.
  */
 
 public class ReviewPagerAdapter extends FragmentStatePagerAdapter {
-    private int currentPosition;
     ReviewImageFragment[] reviewImageFragments;
 
 
@@ -26,13 +27,13 @@ public class ReviewPagerAdapter extends FragmentStatePagerAdapter {
 
     @Override
     public int getCount() {
-        return 4;
+        return reviewImageFragments.length;
     }
 
-    public void updateFilename() {
+    public void updateFileInformation(String fileName, Revision revision) {
         for (int i = 0; i < getCount(); i++) {
             ReviewImageFragment fragment = reviewImageFragments[i];
-            fragment.update(i, ReviewController.fileName);
+            fragment.update(i, fileName, revision);
         }
     }
 
