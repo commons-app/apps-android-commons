@@ -1,6 +1,7 @@
 package fr.free.nrw.commons.upload;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
@@ -73,8 +74,10 @@ import fr.free.nrw.commons.modifications.ModificationsContentProvider;
 import fr.free.nrw.commons.modifications.ModifierSequence;
 import fr.free.nrw.commons.modifications.ModifierSequenceDao;
 import fr.free.nrw.commons.modifications.TemplateRemoveModifier;
+import fr.free.nrw.commons.mwapi.CategoryApi;
 
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
+import io.reactivex.schedulers.Schedulers;
 import fr.free.nrw.commons.utils.ViewUtil;
 import timber.log.Timber;
 
@@ -123,8 +126,12 @@ public class ShareActivity
     @Inject
     ModifierSequenceDao modifierSequenceDao;
     @Inject
+    CategoryApi apiCall;
+    @Inject
     @Named("default_preferences")
     SharedPreferences prefs;
+    @Inject
+    GpsCategoryModel gpsCategoryModel;
 
     private String source;
     private String mimeType;
@@ -685,8 +692,9 @@ public class ShareActivity
 
     /**
      * Initiates retrieval of image coordinates or user coordinates, and caching of coordinates.
-     * Then initiates the calls to MediaWiki API through an instance of MwVolleyApi.
+     * Then initiates the calls to MediaWiki API through an instance of CategpryApi.
      */
+    @SuppressLint("CheckResult")
     public void useImageCoords() {
         if (decimalCoords != null) {
             Timber.d("Decimal coords of image: %s", decimalCoords);
@@ -699,20 +707,27 @@ public class ShareActivity
                 cacheController.setQtPoint(decLongitude, decLatitude);
             }
 
-            MwVolleyApi apiCall = new MwVolleyApi(this);
-
             List<String> displayCatList = cacheController.findCategory();
             boolean catListEmpty = displayCatList.isEmpty();
 
             // If no categories found in cache, call MediaWiki API to match image coords with nearby Commons categories
             if (catListEmpty) {
                 cacheFound = false;
-                apiCall.request(decimalCoords);
+                apiCall.request(decimalCoords)
+                        .subscribeOn(Schedulers.io())
+                        .observeOn(Schedulers.io())
+                        .subscribe(
+                                gpsCategoryModel::setCategoryList,
+                                throwable -> {
+                                    Timber.e(throwable);
+                                    gpsCategoryModel.clear();
+                                }
+                        );
                 Timber.d("displayCatList size 0, calling MWAPI %s", displayCatList);
             } else {
                 cacheFound = true;
-                Timber.d("Cache found, setting categoryList in MwVolleyApi to %s", displayCatList);
-                MwVolleyApi.setGpsCat(displayCatList);
+                Timber.d("Cache found, setting categoryList in model to %s", displayCatList);
+                gpsCategoryModel.setCategoryList(displayCatList);
             }
         }else{
             Timber.d("EXIF: no coords");
