@@ -225,6 +225,10 @@ public class CategoryImagesListFragment extends DaggerFragment {
         return gridView.getAdapter();
     }
 
+    /**
+     * This method will be called on back pressed of CategoryImagesActivity.
+     * It initializes the grid view by setting adapter.
+\     */
     @Override
     public void onResume() {
         gridView.setAdapter(gridAdapter);
