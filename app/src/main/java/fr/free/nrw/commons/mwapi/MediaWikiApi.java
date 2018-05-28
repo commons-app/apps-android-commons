@@ -38,7 +38,7 @@ public interface MediaWikiApi {
     List<Media> getCategoryImages(String categoryName);
 
     @NonNull
-    Observable<String> searchImages(String title, int searchImagesLimit);
+    List<Media> searchImages(String title);
 
     @NonNull
     UploadResult uploadFile(String filename, InputStream file, long dataLength, String pageContents, String editSummary, ProgressListener progressListener) throws IOException;

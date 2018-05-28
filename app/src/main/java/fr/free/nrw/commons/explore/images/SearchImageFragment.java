@@ -5,21 +5,17 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-
 import com.pedrogomez.renderers.RVRendererAdapter;
-
 import java.util.ArrayList;
 import java.util.List;
-
+import java.util.concurrent.TimeUnit;
 import javax.inject.Inject;
 import javax.inject.Named;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import fr.free.nrw.commons.Media;
@@ -27,10 +23,15 @@ import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
 import fr.free.nrw.commons.explore.SearchActivity;
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
+import fr.free.nrw.commons.utils.NetworkUtils;
+import fr.free.nrw.commons.utils.ViewUtil;
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 import timber.log.Timber;
+
+import static android.view.View.GONE;
+import static android.view.View.VISIBLE;
 
 /**
  * Displays the image search screen. It has a recyclerview
@@ -38,22 +39,22 @@ import timber.log.Timber;
 
 public class SearchImageFragment extends CommonsDaggerSupportFragment {
 
-    public static final int SEARCH_IMAGES_LIMIT = 25;
+    private static int TIMEOUT_SECONDS = 15;
 
     @BindView(R.id.imagesListBox)
-    RecyclerView imagesList;
+    RecyclerView imagesRecyclerView;
     @BindView(R.id.imageSearchInProgress)
-    ProgressBar imageSearchInProgress;
+    ProgressBar progressBar;
     @BindView(R.id.imagesNotFound)
     TextView imagesNotFoundView;
+    String query;
 
     @Inject
     MediaWikiApi mwApi;
     @Inject @Named("default_preferences") SharedPreferences prefs;
 
-    private RVRendererAdapter<SearchImageItem> imagesAdapter;
-    private List<SearchImageItem> images=new ArrayList<>();
-    private List<SearchImageItem> queryList = new ArrayList<>();
+    private RVRendererAdapter<Media> imagesAdapter;
+    private List<Media> queryList = new ArrayList<>();
 
     private final SearchImagesAdapterFactory adapterFactory = new SearchImagesAdapterFactory(item -> {
         int index = queryList.indexOf(item);
@@ -65,60 +66,76 @@ public class SearchImageFragment extends CommonsDaggerSupportFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_browse_image, container, false);
         ButterKnife.bind(this, rootView);
-
-        imagesList.setLayoutManager(new LinearLayoutManager(getContext()));
-
-        ArrayList<SearchImageItem> items = new ArrayList<>();
-
+        imagesRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        ArrayList<Media> items = new ArrayList<>();
         imagesAdapter = adapterFactory.create(items);
-        imagesList.setAdapter(imagesAdapter);
-
+        imagesRecyclerView.setAdapter(imagesAdapter);
         return rootView;
     }
 
+
     public void updateImageList(String query) {
+        if(!NetworkUtils.isInternetConnectionEstablished(getContext())) {
+            handleNoInternet();
+            return;
+        }
+        progressBar.setVisibility(View.VISIBLE);
         queryList.clear();
-        Observable.fromIterable(images)
+        imagesAdapter.clear();
+        Observable.fromCallable(() -> mwApi.searchImages(query))
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .doOnSubscribe(disposable -> {
-                    imageSearchInProgress.setVisibility(View.VISIBLE);
-                    imagesNotFoundView.setVisibility(View.GONE);
-                    imagesAdapter.clear();
-                })
-                .observeOn(Schedulers.io())
-                .concatWith(
-                        searchImages(query)
-                )
-                .distinct()
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(
-                        s ->{
-                            imagesAdapter.add(s);
-                            queryList.add(s);
-                        },
-                        Timber::e,
-                        () -> {
-                            imagesAdapter.notifyDataSetChanged();
-                            imageSearchInProgress.setVisibility(View.GONE);
-
-                            if (imagesAdapter.getItemCount() == images.size()) {
-                                if (TextUtils.isEmpty(query)) {
-                                    imagesAdapter.clear();
-
-                                } else {
-                                    imagesNotFoundView.setText(getString(R.string.images_not_found, query));
-                                    imagesNotFoundView.setVisibility(View.VISIBLE);
-                                }
-                            }
-                        }
-                );
+                .timeout(TIMEOUT_SECONDS, TimeUnit.SECONDS)
+                .subscribe(this::handleSuccess, this::handleError);
     }
 
-    private Observable<SearchImageItem> searchImages(String query) {
-        return mwApi.searchImages(query, SEARCH_IMAGES_LIMIT).map(s -> new SearchImageItem(s));
+    /**
+     * Handles the success scenario
+     * it initializes the recycler view by adding items to the adapter
+     * @param mediaList
+     */
+    private void handleSuccess(List<Media> mediaList) {
+        queryList = mediaList;
+        if(mediaList == null || mediaList.isEmpty()) {
+            initErrorView();
+        }else {
+
+            progressBar.setVisibility(View.GONE);
+            imagesAdapter.addAll(mediaList);
+            imagesAdapter.notifyDataSetChanged();
+        }
     }
 
+    /**
+     * Logs and handles API error scenario
+     * @param throwable
+     */
+    private void handleError(Throwable throwable) {
+        Timber.e(throwable, "Error occurred while loading queried images");
+        initErrorView();
+    }
+
+    /**
+     * Handles the UI updates for a error scenario
+     */
+    private void initErrorView() {
+        ViewUtil.showSnackbar(imagesRecyclerView, R.string.error_loading_images);
+        progressBar.setVisibility(GONE);
+        imagesNotFoundView.setVisibility(VISIBLE);
+        imagesNotFoundView.setText(getString(R.string.images_not_found, query));
+    }
+
+    /**
+     * Handles the UI updates for no internet scenario
+     */
+    private void handleNoInternet() {
+        progressBar.setVisibility(GONE);
+        ViewUtil.showSnackbar(imagesRecyclerView, R.string.no_internet);
+    }
+
+    /**
+    * returns total number of images present in the recyclerview adapter.
+    */
     public int getTotalImagesCount(){
         if (imagesAdapter == null) {
             return 0;
@@ -127,12 +144,16 @@ public class SearchImageFragment extends CommonsDaggerSupportFragment {
         }
     }
 
+    /**
+     * returns Media Object at position
+     * @param i position of Media in the recyclerview adapter.
+     */
     public Media getImageAtPosition(int i) {
-        if (imagesAdapter.getItem(i).getName() == null) {
+        if (imagesAdapter.getItem(i).getFilename() == null) {
             // not yet ready to return data
             return null;
         } else {
-            return new Media(imagesAdapter.getItem(i).getName());
+            return new Media(imagesAdapter.getItem(i).getFilename());
         }
     }
 }

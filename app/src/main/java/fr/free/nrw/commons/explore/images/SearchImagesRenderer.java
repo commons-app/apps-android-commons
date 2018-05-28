@@ -17,7 +17,7 @@ import fr.free.nrw.commons.R;
  * presentation logic of individual image in search is handled here
  */
 
-class SearchImagesRenderer extends Renderer<SearchImageItem> {
+class SearchImagesRenderer extends Renderer<Media> {
     @BindView(R.id.categoryImageTitle) TextView tvImageName;
     @BindView(R.id.categoryImageAuthor) TextView categoryImageAuthor;
     @BindView(R.id.categoryImageView)
@@ -42,7 +42,7 @@ class SearchImagesRenderer extends Renderer<SearchImageItem> {
     @Override
     protected void hookListeners(View view) {
         view.setOnClickListener(v -> {
-            SearchImageItem item = getContent();
+            Media item = getContent();
             if (listener != null) {
                 listener.imageClicked(item);
             }
@@ -51,19 +51,22 @@ class SearchImagesRenderer extends Renderer<SearchImageItem> {
 
     @Override
     public void render() {
-        SearchImageItem item = getContent();
-        Media media = new Media(item.getName());
-        tvImageName.setText(item.getName());
-        browseImage.setMedia(media);
-        setAuthorView(media, categoryImageAuthor);
+        Media item = getContent();
+        tvImageName.setText(item.getFilename());
+        browseImage.setMedia(item);
+        setAuthorView(item, categoryImageAuthor);
     }
 
     interface ImageClickedListener {
-        void imageClicked(SearchImageItem item);
+        void imageClicked(Media item);
     }
 
+    /**
+     * formats author name as "Uploaded by: authorName" and sets it in textview
+     */
     private void setAuthorView(Media item, TextView author) {
         if (item.getCreator() != null && !item.getCreator().equals("")) {
+            author.setVisibility(View.GONE);
             String uploadedByTemplate = getContext().getString(R.string.image_uploaded_by);
             author.setText(String.format(uploadedByTemplate, item.getCreator()));
         } else {
