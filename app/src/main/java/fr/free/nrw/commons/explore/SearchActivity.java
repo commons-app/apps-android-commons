@@ -120,7 +120,7 @@ public class SearchActivity extends NavigationBaseActivity implements MediaDetai
 
     @Override
     public void onBackPressed() {
-        if (getSupportFragmentManager().getBackStackEntryCount()==1){
+        if (getSupportFragmentManager().getBackStackEntryCount() == 1){
             // back to search so show search toolbar and hide navigation toolbar
             toolbar.setVisibility(View.VISIBLE);
             setNavigationBaseToolbarVisibility(false);

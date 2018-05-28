@@ -19,7 +19,6 @@ import fr.free.nrw.commons.auth.AuthenticatedActivity;
 import fr.free.nrw.commons.explore.SearchActivity;
 import fr.free.nrw.commons.media.MediaDetailPagerFragment;
 import fr.free.nrw.commons.theme.NavigationBaseActivity;
-import timber.log.Timber;
 
 /**
  * This activity displays pictures of a particular category

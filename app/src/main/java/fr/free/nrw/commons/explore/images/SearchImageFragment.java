@@ -33,7 +33,7 @@ import io.reactivex.schedulers.Schedulers;
 import timber.log.Timber;
 
 /**
- * Displays the image search screen.
+ * Displays the image search screen. It has a recyclerview
  */
 
 public class SearchImageFragment extends CommonsDaggerSupportFragment {
