@@ -9,6 +9,7 @@ public class Achievements {
     private int thanksReceived;
     private int imagesEditedBySomeoneElse;
     private int featuredImages;
+    private int imagesUploaded;
 
     /**
      * Sets the unique images used
@@ -96,5 +97,21 @@ public class Achievements {
      */
     public int getFeaturedImages() {
         return featuredImages;
+    }
+
+    /**
+     * to set the total number of images uploaded
+     * @param imagesUploaded
+     */
+    public void setImagesUploaded(int imagesUploaded) {
+        this.imagesUploaded = imagesUploaded;
+    }
+
+    /**
+     * to get the total number of uploads
+     * @return
+     */
+    public int getImagesUploaded() {
+        return imagesUploaded;
     }
 }

@@ -50,6 +50,8 @@ public class AchievementsActivity extends NavigationBaseActivity {
     private static final double BADGE_IMAGE_HEIGHT_RATIO = 0.3;
     private Boolean isUploadFetched = false;
     private Boolean isStatisticsFetched = false;
+    private Achievements achievements = new Achievements();
+    private LevelController level = new LevelController();
 
     @BindView(R.id.achievement_badge)
     ImageView imageView;
@@ -168,7 +170,7 @@ public class AchievementsActivity extends NavigationBaseActivity {
      */
     private void setAchievements() {
         compositeDisposable.add(mediaWikiApi
-                .getAchievements(sessionManager.getCurrentAccount().name)
+                .getAchievements("Martin_Urbanec")
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
@@ -181,7 +183,7 @@ public class AchievementsActivity extends NavigationBaseActivity {
      */
     private void setUploadCount() {
         compositeDisposable.add(mediaWikiApi
-                .getUploadCount(sessionManager.getCurrentAccount().name)
+                .getUploadCount("Martin_Urbanec")
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
@@ -195,6 +197,7 @@ public class AchievementsActivity extends NavigationBaseActivity {
      * @param uploadCount
      */
     private void setUploadProgress( int uploadCount){
+        achievements.setImagesUploaded(uploadCount);
         Log.i("uploadCount",Integer.toString(uploadCount));
         imagesUploadedProgressbar.setProgress(100*uploadCount/25);
         imagesUploadedProgressbar.setProgressTextFormatPattern(uploadCount +"/25" );
@@ -208,7 +211,6 @@ public class AchievementsActivity extends NavigationBaseActivity {
      * @param object
      */
     private void parseJson(JSONObject object) {
-        Achievements achievements = new Achievements();
         try {
             achievements.setUniqueUsedImages(object.getInt("uniqueUsedImages"));
             achievements.setArticlesUsingImages(object.getInt("articlesUsingImages"));
@@ -255,6 +257,7 @@ public class AchievementsActivity extends NavigationBaseActivity {
      */
     private void hideProgressBar() {
         if (progressBar != null && isUploadFetched && isStatisticsFetched) {
+            Log.i("level", Integer.toString(level.calculateLevelUp(achievements)));
             progressBar.setVisibility(View.GONE);
             layoutImageReverts.setVisibility(View.VISIBLE);
             layoutImageUploaded.setVisibility(View.VISIBLE);
