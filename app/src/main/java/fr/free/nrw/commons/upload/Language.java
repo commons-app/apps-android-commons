@@ -1,23 +1,29 @@
 package fr.free.nrw.commons.upload;
 
+import java.util.Locale;
+
 class Language {
 
-    private String id;
-    private String displayText;
+    private Locale locale;
+    private boolean isSet = false;
 
-    public String getId() {
-        return id;
+    public Language(Locale locale) {
+        this.locale = locale;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public Locale getLocale() {
+        return locale;
     }
 
-    public String getDisplayText() {
-        return displayText;
+    public void setLocale(Locale locale) {
+        this.locale = locale;
     }
 
-    public void setDisplayText(String displayText) {
-        this.displayText = displayText;
+    public boolean isSet() {
+        return isSet;
+    }
+
+    public void setSet(boolean set) {
+        isSet = set;
     }
 }

@@ -3,12 +3,25 @@
   xmlns:android="http://schemas.android.com/apk/res/android"
   xmlns:tools="http://schemas.android.com/tools"
   android:layout_width="match_parent"
-  android:layout_height="match_parent">
+  android:layout_height="wrap_content"
+  android:padding="10dp"
+  android:id="@+id/ll_container_description_language"
+  android:orientation="vertical">
   <TextView
-    android:id="@+id/et_language"
+    android:id="@+id/tv_language"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:padding="4dp"
     android:imeOptions="flagNoExtractUi"
+    android:maxLines="1"
+    style="@style/Base.TextAppearance.AppCompat.Widget.TextView.SpinnerItem"
+    android:singleLine="true"
     tools:text="en"
     />
+
+  <View
+    android:id="@+id/view"
+    android:layout_width="match_parent"
+    android:layout_height="1dp"
+    android:background="@color/item_white_background"></View>
 </LinearLayout>

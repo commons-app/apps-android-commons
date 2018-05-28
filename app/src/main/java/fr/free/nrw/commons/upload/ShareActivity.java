@@ -481,7 +481,7 @@ public class ShareActivity
             CurrentAnimator.cancel();
         }
         isZoom = true;
-        ViewUtil.hideKeyboard(ShareActivity.this.findViewById(R.id.titleEdit | R.id.descEdit));
+        ViewUtil.hideKeyboard(ShareActivity.this.findViewById(R.id.titleEdit));
         closeFABMenu();
         mainFab.setVisibility(View.GONE);
 

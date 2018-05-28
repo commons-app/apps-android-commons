@@ -38,10 +38,31 @@
                 android:scrollHorizontally="false" />
         </android.support.design.widget.TextInputLayout>
 
+        <LinearLayout
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:orientation="vertical">
         <android.support.v7.widget.RecyclerView
           android:id="@+id/rv_descriptions"
           android:layout_width="match_parent"
-          android:layout_height="wrap_content"></android.support.v7.widget.RecyclerView>
+          android:layout_height="wrap_content"/>
+          <LinearLayout
+            android:layout_marginTop="4dp"
+            android:orientation="horizontal"
+            android:id="@+id/ll_add_description"
+            android:layout_width="wrap_content"
+            android:layout_gravity="right"
+            android:gravity="right"
+            android:padding="10dp"
+            android:layout_height="wrap_content"
+            >
+            <TextView
+              style="@style/TextAppearance.AppCompat.Body1"
+              android:text="@string/add_description"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"/>
+          </LinearLayout>
+        </LinearLayout>
         <Spinner
             android:id="@+id/licenseSpinner"
             android:layout_width="match_parent"

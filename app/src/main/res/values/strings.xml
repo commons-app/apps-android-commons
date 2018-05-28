@@ -325,6 +325,10 @@
   <string name="correct">Correct Answer</string>
   <string name="wrong">Wrong Answer</string>
   <string name="quiz_screenshot_question">Is this screenshot OK to upload?</string>
+  <string name="share_app_title">Share App</string>
+  <string name="share_coordinates_not_present">Coordinates were not specified during image selection</string>
+  <string name="error_fetching_nearby_places">Error fetching nearby places.</string>
+  <string name="add_description">+ Add description</string>
 
   <string name="delete_recent_searches_dialog">Are you sure you want to clear your search history?</string>
   <string name="search_history_deleted">Search history deleted</string>

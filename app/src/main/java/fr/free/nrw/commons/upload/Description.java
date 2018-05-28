@@ -9,7 +9,7 @@ class Description {
     private String languageDisplayText;
     private String descriptionText;
     private boolean set;
-    private int selectedLanguageIndex=0;
+    private int selectedLanguageIndex = -1;
 
     public String getLanguageId() {
         return languageId;
