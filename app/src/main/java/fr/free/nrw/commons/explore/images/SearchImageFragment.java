@@ -34,7 +34,7 @@ import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
 
 /**
- * Displays the image search screen. It has a recyclerview
+ * Displays the image search screen.
  */
 
 public class SearchImageFragment extends CommonsDaggerSupportFragment {
@@ -73,7 +73,10 @@ public class SearchImageFragment extends CommonsDaggerSupportFragment {
         return rootView;
     }
 
-
+    /**
+     * Checks for internet connection and then initializes the recycler view with 25 images of the searched query
+     * Clearing imageAdapter every time new keyword is searched so that user can see only new results
+     */
     public void updateImageList(String query) {
         if(!NetworkUtils.isInternetConnectionEstablished(getContext())) {
             handleNoInternet();
