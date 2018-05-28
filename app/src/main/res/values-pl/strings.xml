@@ -60,6 +60,7 @@
   <string name="share_title_hint">Tytuł</string>
   <string name="share_description_hint">Opis</string>
   <string name="login_failed_network">Nie można zalogować - błąd sieci</string>
+  <string name="login_failed_wrong_credentials">Nie można się zalogować - sprawdź swoją nazwę użytkownika i hasło</string>
   <string name="login_failed_throttled">Zbyt wiele nieudanych prób zalogowania. Spróbuj ponownie za kilka minut.</string>
   <string name="login_failed_blocked">Przepraszamy, ten użytkownik został zablokowany na Commons</string>
   <string name="login_failed_2fa_needed">Wprowadź swój kod dla  dwuetapowej autoryzacji.</string>
