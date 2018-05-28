@@ -257,7 +257,7 @@ public class AchievementsActivity extends NavigationBaseActivity {
      */
     private void hideProgressBar() {
         if (progressBar != null && isUploadFetched && isStatisticsFetched) {
-            Log.i("level", Integer.toString(level.calculateLevelUp(achievements)));
+            Log.i("level", Integer.toString(level.calculateLevelUp(achievements).getMaximumUniqueImagesUsed()));
             progressBar.setVisibility(View.GONE);
             layoutImageReverts.setVisibility(View.VISIBLE);
             layoutImageUploaded.setVisibility(View.VISIBLE);
