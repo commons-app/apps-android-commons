@@ -282,6 +282,7 @@
   <string name="share_app_title">Share App</string>
   <string name="share_coordinates_not_present">Coordinates were not specified during image selection</string>
   <string name="error_fetching_nearby_places">Error fetching nearby places.</string>
+  <string name="block_notification">You are blocked from editing commons</string>
 
   <string name="menu_set_wallpaper">Set wallpaper</string>
   <string name="wallpaper_set_successfully">Wallpaper set successfully!</string>

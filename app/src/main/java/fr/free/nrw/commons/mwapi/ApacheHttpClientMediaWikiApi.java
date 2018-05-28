@@ -615,6 +615,26 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
         });
     }
 
+    @Override
+    public boolean isUserBlocked() {
+        boolean userBlocked = false;
+        try {
+            ApiResult result = api.action("query")
+                    .param("action", "query")
+                    .param("format", "xml")
+                    .param("meta", "userinfo")
+                    .param("uiprop", "blockinfo")
+                    .get();
+            if(result != null) {
+                userBlocked = !result.getString("/api/query/userinfo/@blockexpiry").isEmpty();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return userBlocked;
+    }
+
     private Date parseMWDate(String mwDate) {
         SimpleDateFormat isoFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'", Locale.ENGLISH); // Assuming MW always gives me UTC
         try {

@@ -162,6 +162,7 @@ public class LoginActivity extends AccountAuthenticatorActivity {
         if (sessionManager.getCurrentAccount() != null
                 && sessionManager.isUserLoggedIn()
                 && sessionManager.getCachedAuthCookie() != null) {
+            sessionManager.revalidateAuthToken();
             startMainActivity();
         }
     }
