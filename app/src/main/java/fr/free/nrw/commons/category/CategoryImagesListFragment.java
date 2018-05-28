@@ -224,4 +224,10 @@ public class CategoryImagesListFragment extends DaggerFragment {
     public ListAdapter getAdapter() {
         return gridView.getAdapter();
     }
+
+    @Override
+    public void onResume() {
+        gridView.setAdapter(gridAdapter);
+        super.onResume();
+    }
 }
