@@ -514,6 +514,40 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
         return CategoryImageUtils.getMediaList(childNodes);
     }
 
+    @Override
+    @NonNull
+    public Observable<String> searchImages(String filterValue, int searchImagesLimit) {
+        return Single.fromCallable(() -> {
+            List<ApiResult> imageNodes = null;
+            try {
+                imageNodes = api.action("query")
+                        .param("format", "xml")
+                        .param("list", "search")
+                        .param("srwhat", "text")
+                        .param("srnamespace", "6")
+                        .param("srlimit", searchImagesLimit)
+                        .param("srsearch", filterValue)
+                        .get()
+                        .getNodes("/api/query/search/p/@title");
+            } catch (IOException e) {
+                Timber.e("Failed to obtain searchImages", e);
+            }
+
+            if (imageNodes == null) {
+                return new ArrayList<String>();
+            }
+
+            List<String> categories = new ArrayList<>();
+            for (ApiResult imageNode : imageNodes) {
+                String imgName = imageNode.getDocument().getTextContent();
+                categories.add(imgName);
+            }
+
+            return categories;
+        }).flatMapObservable(Observable::fromIterable);
+    }
+
+
     /**
      * For APIs that return paginated responses, MediaWiki APIs uses the QueryContinue to facilitate fetching of subsequent pages
      * https://www.mediawiki.org/wiki/API:Raw_query_continue
