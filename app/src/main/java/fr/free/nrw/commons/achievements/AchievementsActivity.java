@@ -57,7 +57,7 @@ public class AchievementsActivity extends NavigationBaseActivity {
     @BindView(R.id.achievement_badge)
     ImageView imageView;
     @BindView(R.id.achievement_level)
-    TextView textView;
+    TextView levelNumber;
     @BindView(R.id.toolbar)
     Toolbar toolbar;
     @BindView(R.id.thanks_received)
@@ -241,6 +241,8 @@ public class AchievementsActivity extends NavigationBaseActivity {
         imagesUsedByWikiProgessbar.setProgressTextFormatPattern
                 (achievements.getUniqueUsedImages() + "/" + levelInfo.getMaximumUniqueImagesUsed());
         imagesFeatured.setText(Integer.toString(achievements.getFeaturedImages()));
+        levelNumber.setText(R.string.level);
+        levelNumber.append( "  " + Integer.toString(levelInfo.getLevel()));
     }
 
     /**
@@ -269,6 +271,7 @@ public class AchievementsActivity extends NavigationBaseActivity {
             layoutImageUsedByWiki.setVisibility(View.VISIBLE);
             layoutStatistics.setVisibility(View.VISIBLE);
             imageView.setVisibility(View.VISIBLE);
+            levelNumber.setVisibility(View.VISIBLE);
         }
     }
 
@@ -281,6 +284,7 @@ public class AchievementsActivity extends NavigationBaseActivity {
         layoutImageReverts.setVisibility(View.INVISIBLE);
         layoutStatistics.setVisibility(View.INVISIBLE);
         imageView.setVisibility(View.INVISIBLE);
+        levelNumber.setVisibility(View.INVISIBLE);
     }
 
 }
