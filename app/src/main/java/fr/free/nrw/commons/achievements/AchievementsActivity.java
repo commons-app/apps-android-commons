@@ -52,6 +52,7 @@ public class AchievementsActivity extends NavigationBaseActivity {
     private Boolean isStatisticsFetched = false;
     private Achievements achievements = new Achievements();
     private LevelController level = new LevelController();
+    private Level levelInfo;
 
     @BindView(R.id.achievement_badge)
     ImageView imageView;
@@ -170,7 +171,7 @@ public class AchievementsActivity extends NavigationBaseActivity {
      */
     private void setAchievements() {
         compositeDisposable.add(mediaWikiApi
-                .getAchievements("Martin_Urbanec")
+                .getAchievements(sessionManager.getCurrentAccount().name)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
@@ -183,13 +184,15 @@ public class AchievementsActivity extends NavigationBaseActivity {
      */
     private void setUploadCount() {
         compositeDisposable.add(mediaWikiApi
-                .getUploadCount("Martin_Urbanec")
+                .getUploadCount(sessionManager.getCurrentAccount().name)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
-                        uploadCount -> setUploadProgress(uploadCount),
+                        uploadCount -> achievements.setImagesUploaded(uploadCount),
                         t -> Timber.e(t, "Fetching upload count failed")
                 ));
+        isUploadFetched = true;
+        hideProgressBar();
     }
 
     /**
@@ -197,12 +200,11 @@ public class AchievementsActivity extends NavigationBaseActivity {
      * @param uploadCount
      */
     private void setUploadProgress( int uploadCount){
-        achievements.setImagesUploaded(uploadCount);
-        Log.i("uploadCount",Integer.toString(uploadCount));
-        imagesUploadedProgressbar.setProgress(100*uploadCount/25);
-        imagesUploadedProgressbar.setProgressTextFormatPattern(uploadCount +"/25" );
-        isUploadFetched = true;
-        hideProgressBar();
+
+        imagesUploadedProgressbar.setProgress
+                (100*uploadCount/levelInfo.getMaximumUploadCount());
+        imagesUploadedProgressbar.setProgressTextFormatPattern
+                (uploadCount +"/" + levelInfo.getMaximumUploadCount() );
     }
 
     /**
@@ -224,20 +226,21 @@ public class AchievementsActivity extends NavigationBaseActivity {
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        inflateAchievements(achievements);
+        isStatisticsFetched = true;
+        hideProgressBar();
     }
 
     /**
      * Used the inflate the fetched statistics of the images uploaded by user
      * @param achievements
      */
-    private void inflateAchievements( Achievements achievements){
+    private void inflateAchievements( Achievements achievements ){
         thanksReceived.setText(Integer.toString(achievements.getThanksReceived()));
-        imagesUsedByWikiProgessbar.setProgress(100*achievements.getUniqueUsedImages()/25);
-        imagesUsedByWikiProgessbar.setProgressTextFormatPattern(achievements.getUniqueUsedImages() + "/25");
+        imagesUsedByWikiProgessbar.setProgress
+                (100*achievements.getUniqueUsedImages()/levelInfo.getMaximumUniqueImagesUsed());
+        imagesUsedByWikiProgessbar.setProgressTextFormatPattern
+                (achievements.getUniqueUsedImages() + "/" + levelInfo.getMaximumUniqueImagesUsed());
         imagesFeatured.setText(Integer.toString(achievements.getFeaturedImages()));
-        isStatisticsFetched = true;
-        hideProgressBar();
     }
 
     /**
@@ -257,7 +260,9 @@ public class AchievementsActivity extends NavigationBaseActivity {
      */
     private void hideProgressBar() {
         if (progressBar != null && isUploadFetched && isStatisticsFetched) {
-            Log.i("level", Integer.toString(level.calculateLevelUp(achievements).getMaximumUniqueImagesUsed()));
+            levelInfo = level.calculateLevelUp(achievements);
+            inflateAchievements(achievements);
+            setUploadProgress(achievements.getImagesUploaded());
             progressBar.setVisibility(View.GONE);
             layoutImageReverts.setVisibility(View.VISIBLE);
             layoutImageUploaded.setVisibility(View.VISIBLE);

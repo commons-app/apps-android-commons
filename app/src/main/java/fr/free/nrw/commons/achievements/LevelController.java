@@ -5,6 +5,11 @@ package fr.free.nrw.commons.achievements;
  */
 public class LevelController {
 
+    /**
+     * calculated the level of user and return the level information
+     * @param achievements
+     * @return
+     */
     Level calculateLevelUp( Achievements achievements){
         Level level  = new Level ();
         level.setLevel(1);
