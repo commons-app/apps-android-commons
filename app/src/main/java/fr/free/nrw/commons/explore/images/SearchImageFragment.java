@@ -116,8 +116,7 @@ public class SearchImageFragment extends CommonsDaggerSupportFragment {
     }
 
     private Observable<SearchImageItem> searchImages(String query) {
-        return mwApi.searchImages(query, SEARCH_IMAGES_LIMIT)
-            .map(s -> new SearchImageItem(s));
+        return mwApi.searchImages(query, SEARCH_IMAGES_LIMIT).map(s -> new SearchImageItem(s));
     }
 
     public int getTotalImagesCount(){
