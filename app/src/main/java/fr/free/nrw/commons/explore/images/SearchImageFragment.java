@@ -57,13 +57,12 @@ public class SearchImageFragment extends CommonsDaggerSupportFragment {
 
     private final SearchImagesAdapterFactory adapterFactory = new SearchImagesAdapterFactory(item -> {
         int index = queryList.indexOf(item);
-        ((SearchActivity)getContext()).onSearchImageClicked(item,index);
-//      Add images to recently searched images db table and open to Media Details Fragment
+        ((SearchActivity)getContext()).onSearchImageClicked(index);
+        //TODO : Add images to recently searched images db table
     });
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_browse_image, container, false);
         ButterKnife.bind(this, rootView);
 
@@ -118,7 +117,7 @@ public class SearchImageFragment extends CommonsDaggerSupportFragment {
 
     private Observable<SearchImageItem> searchImages(String query) {
         return mwApi.searchImages(query, SEARCH_IMAGES_LIMIT)
-            .map(s -> new SearchImageItem(s,false));
+            .map(s -> new SearchImageItem(s));
     }
 
     public int getTotalImagesCount(){

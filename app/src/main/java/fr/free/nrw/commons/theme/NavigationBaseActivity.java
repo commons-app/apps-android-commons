@@ -187,7 +187,11 @@ public abstract class NavigationBaseActivity extends BaseActivity
         context.startActivity(intent);
     }
 
-    public void setToolbarVisibility(boolean show){
+    /**
+     * Handles visibility of navigation base toolbar
+     * @param show : Used to handle visibility of toolbar
+     */
+    public void setNavigationBaseToolbarVisibility(boolean show){
         if (show){
             toolbar.setVisibility(View.VISIBLE);
         }else {

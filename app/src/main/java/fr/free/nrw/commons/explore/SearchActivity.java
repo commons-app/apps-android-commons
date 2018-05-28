@@ -19,7 +19,6 @@ import butterknife.ButterKnife;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.explore.images.SearchImageFragment;
-import fr.free.nrw.commons.explore.images.SearchImageItem;
 import fr.free.nrw.commons.media.MediaDetailPagerFragment;
 import fr.free.nrw.commons.theme.NavigationBaseActivity;
 import fr.free.nrw.commons.utils.ViewUtil;
@@ -37,7 +36,6 @@ public class SearchActivity extends NavigationBaseActivity implements MediaDetai
     private SearchImageFragment searchImageFragment;
     private FragmentManager supportFragmentManager;
     private MediaDetailPagerFragment mediaDetails;
-    SearchImageItem searchImageItem;
     private String query;
 
     @Override
@@ -98,11 +96,14 @@ public class SearchActivity extends NavigationBaseActivity implements MediaDetai
 
     }
 
-    public void onSearchImageClicked(SearchImageItem searchImageItem, int index) {
-        this.searchImageItem = searchImageItem;
+    /**
+     * Open media detail pager fragment on click of image in search results
+     * @param index item index that should be opened
+     */
+    public void onSearchImageClicked(int index) {
         ViewUtil.hideKeyboard(this.findViewById(R.id.searchBox));
         toolbar.setVisibility(View.GONE);
-        setToolbarVisibility(true);
+        setNavigationBaseToolbarVisibility(true);
         if (mediaDetails == null || !mediaDetails.isVisible()) {
             // set isFeaturedImage true for featured images, to include author field on media detail
             mediaDetails = new MediaDetailPagerFragment(false, true);
@@ -120,14 +121,15 @@ public class SearchActivity extends NavigationBaseActivity implements MediaDetai
     @Override
     public void onBackPressed() {
         if (getSupportFragmentManager().getBackStackEntryCount()==1){
+            // back to search so show search toolbar and hide navigation toolbar
+            toolbar.setVisibility(View.VISIBLE);
+            setNavigationBaseToolbarVisibility(false);
             if (!TextUtils.isEmpty(query)) {
                 searchImageFragment.updateImageList(query);
             }
-            toolbar.setVisibility(View.VISIBLE);
-            setToolbarVisibility(false);
         }else {
             toolbar.setVisibility(View.GONE);
-            setToolbarVisibility(true);
+            setNavigationBaseToolbarVisibility(true);
         }
         super.onBackPressed();
     }

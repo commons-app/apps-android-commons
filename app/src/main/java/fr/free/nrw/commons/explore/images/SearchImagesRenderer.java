@@ -13,6 +13,10 @@ import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.MediaWikiImageView;
 import fr.free.nrw.commons.R;
 
+/**
+ * presentation logic of individual image in search is handled here
+ */
+
 class SearchImagesRenderer extends Renderer<SearchImageItem> {
     @BindView(R.id.categoryImageTitle) TextView tvImageName;
     @BindView(R.id.categoryImageAuthor) TextView categoryImageAuthor;
