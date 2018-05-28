@@ -58,6 +58,7 @@
   <string name="add_title_toast">Будь ласка, вкажіть назву цього файлу</string>
   <string name="share_description_hint">Опис</string>
   <string name="login_failed_network">Неможливо увійти — збій у мережі</string>
+  <string name="login_failed_wrong_credentials">Неможливо увійти — будь ласка перевірте ім\'я користувача та пароль</string>
   <string name="login_failed_throttled">Надто багато невдалих спроб. Будь ласка, спробуйте знову через кілька хвилин.</string>
   <string name="login_failed_blocked">Вибачте, цього користувача було заблоковано на Вікісховищі</string>
   <string name="login_failed_2fa_needed">Ви повинні надати код двофакторної автентифікації.</string>
