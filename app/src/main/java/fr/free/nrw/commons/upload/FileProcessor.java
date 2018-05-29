@@ -99,7 +99,7 @@ public class FileProcessor implements SimilarImageDialogFragment.onResponse{
      * Gets coordinates for category suggestions, either from EXIF data or user location
      * @param gpsEnabled if true use GPS
      */
-    void getFileCoordinates(boolean gpsEnabled) {
+    GPSExtractor getFileCoordinates(boolean gpsEnabled) {
         Timber.d("Calling GPSExtractor");
         try {
                 ParcelFileDescriptor descriptor = contentResolver.openFileDescriptor(mediaUri, "r");
@@ -127,6 +127,7 @@ public class FileProcessor implements SimilarImageDialogFragment.onResponse{
         } catch (FileNotFoundException e) {
             Timber.w("File not found: " + mediaUri, e);
         }
+        return imageObj;
     }
 
     /**

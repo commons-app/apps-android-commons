@@ -306,7 +306,7 @@ public class ShareActivity
         ContentResolver contentResolver = this.getContentResolver();
         fileObj = new FileProcessor(mediaUri, contentResolver, this);
         checkIfFileExists();
-        fileObj.getFileCoordinates(locationPermitted);
+        imageObj = fileObj.getFileCoordinates(locationPermitted);
     }
 
     /**
