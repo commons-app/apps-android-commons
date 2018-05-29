@@ -15,6 +15,8 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 
+import timber.log.Timber;
+
 public class Zoom {
 
     private View thumbView;
@@ -22,7 +24,6 @@ public class Zoom {
     private Uri imageUri;
     private ContentResolver contentResolver;
     private FrameLayout flContainer;
-
 
     Zoom(View thumbView, FrameLayout flContainer, InputStream input, Uri imageUri, ContentResolver contentResolver) {
         this.thumbView = thumbView;
@@ -36,12 +37,16 @@ public class Zoom {
 
         Bitmap scaled = null;
         BitmapRegionDecoder decoder = null;
+        Bitmap bitmap = null;
+
         try {
             decoder = BitmapRegionDecoder.newInstance(input, false);
+            bitmap = decoder.decodeRegion(new Rect(10, 10, 50, 50), null);
         } catch (IOException e) {
-            e.printStackTrace();
+            Timber.e(e);
+        } catch (NullPointerException e) {
+            Timber.e(e);
         }
-        Bitmap bitmap = decoder.decodeRegion(new Rect(10, 10, 50, 50), null);
         try {
             //Compress the Image
             System.gc();
@@ -55,7 +60,9 @@ public class Zoom {
             long calWidth = (long) ((width * maxMemory) / (bitmapByteCount * 1.1));
             scaled = Bitmap.createScaledBitmap(bitmap, (int) Math.min(width, calWidth), (int) Math.min(height, calHeight), true);
         } catch (IOException e) {
+            Timber.e(e);
         } catch (NullPointerException e) {
+            Timber.e(e);
             scaled = bitmap;
         }
         return scaled;
