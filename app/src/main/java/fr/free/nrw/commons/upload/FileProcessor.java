@@ -95,6 +95,8 @@ public class FileProcessor implements SimilarImageDialogFragment.onResponse{
         return filePath;
     }
 
+    //TODO: Figure out why coords are not sent to location template, use LocationServiceManager
+
     /**
      * Gets coordinates for category suggestions, either from EXIF data or user location
      * @param gpsEnabled if true use GPS
