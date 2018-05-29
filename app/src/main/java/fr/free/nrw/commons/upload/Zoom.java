@@ -18,18 +18,18 @@ import java.io.InputStream;
 public class Zoom {
 
     private View thumbView;
-    private Rect startBounds;
     private InputStream input;
     private Uri imageUri;
     private ContentResolver contentResolver;
     private FrameLayout flContainer;
 
-    public Zoom(View thumbView, Rect startBounds, InputStream input, Uri imageUri, ContentResolver contentResolver) {
+
+    Zoom(View thumbView, FrameLayout flContainer, InputStream input, Uri imageUri, ContentResolver contentResolver) {
         this.thumbView = thumbView;
-        this.startBounds = startBounds;
         this.input = input;
         this.imageUri = imageUri;
         this.contentResolver = contentResolver;
+        this.flContainer = flContainer;
     }
 
     Bitmap createScaledImage() {
@@ -61,8 +61,7 @@ public class Zoom {
         return scaled;
     }
 
-
-    float adjustStartEndBounds(Rect finalBounds, Point globalOffset) {
+    float adjustStartEndBounds(Rect startBounds, Rect finalBounds, Point globalOffset) {
         // Calculate the starting and ending bounds for the zoomed-in image.
         // The start bounds are the global visible rectangle of the thumbnail,
         // and the final bounds are the global visible rectangle of the container

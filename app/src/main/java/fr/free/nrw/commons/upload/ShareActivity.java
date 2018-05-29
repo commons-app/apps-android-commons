@@ -501,7 +501,7 @@ public class ShareActivity
     /*
      * function to provide pinch zoom
      */
-    private void zoomImageFromThumb(final View thumbView, Uri imageuri ) {
+    private void zoomImageFromThumb(final View thumbView, Uri imageuri) {
         // If there's an animation in progress, cancel it immediately and proceed with this one.
         if (CurrentAnimator != null) {
             CurrentAnimator.cancel();
@@ -518,13 +518,13 @@ public class ShareActivity
             e.printStackTrace();
         }
 
-        Zoom zoomObj = new Zoom(thumbView, startBounds, input, imageuri, this.getContentResolver());
+        Zoom zoomObj = new Zoom(thumbView, flContainer, input, imageuri, this.getContentResolver());
         Bitmap scaledImage = zoomObj.createScaledImage();
 
         // Load the high-resolution "zoomed-in" image.
         expandedImageView.setImageBitmap(scaledImage);
 
-        float startScale = zoomObj.adjustStartEndBounds(finalBounds, globalOffset);
+        float startScale = zoomObj.adjustStartEndBounds(startBounds, finalBounds, globalOffset);
 
         // Hide the thumbnail and show the zoomed-in view. When the animation
         // begins, it will position the zoomed-in view in the place of the
