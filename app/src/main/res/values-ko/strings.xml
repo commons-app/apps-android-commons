@@ -58,8 +58,7 @@
   <string name="add_title_toast">이 파일의 제목을 지정해 주십시오</string>
   <string name="share_description_hint">설명</string>
   <string name="login_failed_network">로그인할 수 없습니다 - 네트워크 오류입니다</string>
-  <string name="login_failed_username">로그인할 수 없습니다 - 사용자 이름을 확인하세요</string>
-  <string name="login_failed_password">로그인할 수 없습니다 - 비밀번호를 확인하세요</string>
+  <string name="login_failed_wrong_credentials">로그인할 수 없습니다 - 사용자 이름과 비밀번호를 확인해 주십시오</string>
   <string name="login_failed_throttled">실패한 시도가 너무 많습니다. 몇 분 후에 다시 시도하세요.</string>
   <string name="login_failed_blocked">죄송합니다, 이 사용자는 공용에서 차단되었습니다</string>
   <string name="login_failed_2fa_needed">2요소 인증 코드를 제공해야 합니다.</string>

@@ -61,8 +61,6 @@
   <string name="add_title_toast">Vložte prosím název tohoto souboru</string>
   <string name="share_description_hint">Popis</string>
   <string name="login_failed_network">Nelze se přihlásit - selhání sítě</string>
-  <string name="login_failed_username">Nelze se přihlásit - prosím zkontrolujte své uživatelské jméno</string>
-  <string name="login_failed_password">Nelze se přihlásit - zkontrolujte prosím své heslo</string>
   <string name="login_failed_throttled">Příliš mnoho neúspěšných pokusů. Zkuste to prosím znovu za několik minut.</string>
   <string name="login_failed_blocked">Omlouváme se, tento uživatel byl na Commons zablokován</string>
   <string name="login_failed_2fa_needed">Prosím vložte kód pro své dvoufázové ověření.</string>

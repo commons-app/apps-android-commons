@@ -42,8 +42,6 @@
   <string name="share_title_hint">Azwel</string>
   <string name="share_description_hint">Aglam</string>
   <string name="login_failed_network">Ur izmir ara ad yeqqen - tuccḍa n uẓeṭṭa</string>
-  <string name="login_failed_username">Ur izmir ara ad yeqqen - wali isem-ik n useqdac</string>
-  <string name="login_failed_password">Ur izmir ara ad yeqqen - wali awal-ik uffir</string>
   <string name="login_failed_throttled">Ddeq n uɛraḍ ur yeddin ara. Ɛreḍ akka di kra n tisdatin</string>
   <string name="login_failed_blocked">Suref-aɣ, aseqdac-agi yewḥel di Commons</string>
   <string name="login_failed_2fa_needed">Yessefk ad d-muddeḍ tangalt n n usesbteb s snat n tarrayin.</string>

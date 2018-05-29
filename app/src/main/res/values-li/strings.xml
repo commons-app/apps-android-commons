@@ -50,8 +50,6 @@
   <string name="add_title_toast">Gaef estebleef \'ne naam veur dit bestandj</string>
   <string name="share_description_hint">Besjrieving</string>
   <string name="login_failed_network">Kan zich neet aanmelde - netwirkfout</string>
-  <string name="login_failed_username">Kan zich neet aanmelde - controleer de gebroekersnaam</string>
-  <string name="login_failed_password">Kan zich neet aanmelde - controleer die wachwaord</string>
   <string name="login_failed_throttled">Te väöl mislökde kieëre geperbeerd. Perbeer estebleef oppernuuj euver e paar menuut.</string>
   <string name="login_failed_blocked">Deze gebroeker is geblokkeerd op Commons</string>
   <string name="login_failed_2fa_needed">Doe mós diene twieëfaktorische bevestigingscode opgaeve.</string>

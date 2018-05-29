@@ -54,8 +54,6 @@
   <string name="add_title_toast">Angiv venligt en titel for denne fil</string>
   <string name="share_description_hint">Beskrivelse</string>
   <string name="login_failed_network">Kan ikke logge på - netværksfejl</string>
-  <string name="login_failed_username">Ude af stand til at logge på - tjek venligst dit brugernavn</string>
-  <string name="login_failed_password">Ude af stand til at logge på - tjek venligst din adgangskode</string>
   <string name="login_failed_throttled">Alt for mange mislykkede forsøg. Prøv igen om et par minutter.</string>
   <string name="login_failed_blocked">Beklager, denne bruger er blevet blokeret på Commons</string>
   <string name="login_failed_2fa_needed">Du skal angive din tofaktorgodkendelseskode.</string>

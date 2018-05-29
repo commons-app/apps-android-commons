@@ -9,18 +9,18 @@ import dagger.android.support.AndroidSupportInjectionModule;
 import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.MediaWikiImageView;
 import fr.free.nrw.commons.auth.LoginActivity;
-import fr.free.nrw.commons.contributions.Contribution;
-import fr.free.nrw.commons.contributions.ContributionsActivity;
 import fr.free.nrw.commons.contributions.ContributionsSyncAdapter;
 import fr.free.nrw.commons.delete.DeleteTask;
 import fr.free.nrw.commons.modifications.ModificationsSyncAdapter;
-import fr.free.nrw.commons.settings.SettingsFragment;
 import fr.free.nrw.commons.nearby.PlaceRenderer;
 import fr.free.nrw.commons.upload.FileProcessor;
+import fr.free.nrw.commons.settings.SettingsFragment;
+
 
 @Singleton
 @Component(modules = {
         CommonsApplicationModule.class,
+        NetworkingModule.class,
         AndroidInjectionModule.class,
         AndroidSupportInjectionModule.class,
         ActivityBuilderModule.class,

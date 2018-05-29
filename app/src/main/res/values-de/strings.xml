@@ -53,8 +53,7 @@
   <string name="add_title_toast">Bitte gib einen Titel für diese Datei an</string>
   <string name="share_description_hint">Beschreibung</string>
   <string name="login_failed_network">Anmeldung fehlgeschlagen – Netzwerkfehler</string>
-  <string name="login_failed_username">Anmeldung fehlgeschlagen – Bitte Benutzernamen überprüfen</string>
-  <string name="login_failed_password">Anmeldung fehlgeschlagen – Bitte Passwort überprüfen</string>
+  <string name="login_failed_wrong_credentials">Anmeldung fehlgeschlagen. Bitte Benutzernamen und Passwort überprüfen.</string>
   <string name="login_failed_throttled">Zu viele erfolglose Versuche. Bitte in einigen Minuten erneut versuchen.</string>
   <string name="login_failed_blocked">Dieser Benutzer wurde leider auf Commons gesperrt</string>
   <string name="login_failed_2fa_needed">Du musst deinen Code zur Zwei-Faktor-Authentifizierung angeben.</string>

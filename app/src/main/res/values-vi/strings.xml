@@ -1,16 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Authors:
 * Harriettruong3
+* Leducthn
 * Minh Nguyen
 * Thanhtai2009
 * Tuankiet65
 -->
 <resources>
+  <string name="preference_category_feedback">Phản hồi</string>
+  <string name="preference_category_location">Vị trí</string>
   <string name="app_name">Commons</string>
+  <string name="bullet">•</string>
   <string name="menu_settings">Thiết lập</string>
   <string name="username">Tên người dùng</string>
   <string name="password">Mật khẩu</string>
+  <string name="login_credential">Đăng nhập vào tài khoản Commons Beta của bạn</string>
   <string name="login">Đăng nhập</string>
+  <string name="forgot_password">Quên mật khẩu?</string>
   <string name="signup">Mở tài khoản</string>
   <string name="logging_in_title">Đang đăng nhập</string>
   <string name="logging_in_message">Vui lòng chờ…</string>
@@ -26,7 +32,10 @@
   <string name="upload_progress_notification_title_finishing">Đang hoàn thành việc tải lên tập tin %1$s</string>
   <string name="upload_failed_notification_title">Tải lên tập tin %1$s thất bại</string>
   <string name="upload_failed_notification_subtitle">Chạm để xem</string>
-  <string name="uploads_pending_notification_indicator" fuzzy="true">%d tập tin đang được tải lên</string>
+  <plurals name="uploads_pending_notification_indicator">
+    <item quantity="one">%1$d tập tin đang được tải lên</item>
+    <item quantity="other">%1$d tập tin đang được tải lên</item>
+  </plurals>
   <string name="title_activity_contributions">Tập tin Tôi đã Tải lên Gần đây</string>
   <string name="contribution_state_queued">Đang chờ</string>
   <string name="contribution_state_failed">Thất bại</string>
@@ -39,10 +48,9 @@
   <string name="menu_share">Chia sẻ</string>
   <string name="menu_open_in_browser">Mở trong Trình duyệt</string>
   <string name="share_title_hint">Tên</string>
+  <string name="add_title_toast">Xin hãy đặt tiêu đề cho tập tin này</string>
   <string name="share_description_hint">Miêu tả</string>
   <string name="login_failed_network">Không thể đăng nhập – có lỗi mạng</string>
-  <string name="login_failed_username">Không thể đăng nhập – xin vui lòng kiểm tra tên người dùng</string>
-  <string name="login_failed_password">Không thể đăng nhập – xin vui lòng kiểm tra mật khẩu</string>
   <string name="login_failed_throttled">Đã đăng nhập thất bại quá nhiều lần. Xin vui lòng thử lại trong vòng vài phút.</string>
   <string name="login_failed_blocked">Rất tiếc, người dùng này đã bị cấm tại Commons</string>
   <string name="login_failed_2fa_needed">Bạn phải cung cấp mã xác thực dùng hai nhân tố.</string>
@@ -54,25 +62,31 @@
   <string name="categories_search_text_hint">Tìm thể loại</string>
   <string name="menu_save_categories">Lưu</string>
   <string name="refresh_button">Làm mới</string>
+  <string name="display_list_button">Danh sách</string>
   <string name="gps_disabled">Chức năng GPS đang tắt trên thiết bị của bạn. Bạn có muốn bật nó lên?</string>
   <string name="enable_gps">Bật GPS</string>
   <string name="contributions_subtitle_zero">Chưa có tập tin tải lên</string>
-  <plurals name="contributions_subtitle" fuzzy="true">
+  <plurals name="contributions_subtitle">
     <item quantity="zero">\@string/contributions_subtitle_zero</item>
-    <item quantity="other">%1$d tập tin tải lên</item>
+    <item quantity="one">%1$d tập tin đã tải lên</item>
+    <item quantity="other">%1$d tập tin đã tải lên</item>
   </plurals>
   <string name="starting_multiple_uploads">Đang bắt đầu tải lên %1$d tập tin</string>
-  <string name="multiple_uploads_title" fuzzy="true">%1$d tập tin tải lên</string>
+  <plurals name="multiple_uploads_title">
+    <item quantity="one">%1$d tập tin đã tải lên</item>
+    <item quantity="other">%1$d tập tin đã tải lên</item>
+  </plurals>
   <string name="categories_not_found">Không tìm thấy thể loại khớp với %1$s</string>
-  <string name="categories_skip_explanation" fuzzy="true">Xếp các hình ảnh vào thể loại để cho chúng dễ tìm kiếm hơn trên Wikimedia Commons.\n\nHãy bắt đầu nhập tên thể loại để tìm kiếm.\nChạm vào thông điệp này (hoặc bấm Quay lại) để bỏ qua bước này.</string>
+  <string name="categories_skip_explanation">Xếp các hình ảnh vào thể loại để giúp chúng dễ tìm kiếm hơn trên Wikimedia Commons.\nHãy bắt đầu nhập để thêm thể loại.</string>
   <string name="categories_activity_title">Thể loại</string>
   <string name="title_activity_settings">Cài đặt</string>
   <string name="title_activity_signup">Mở tài khoản</string>
+  <string name="title_activity_featured_images">Hình ảnh chọn lọc</string>
   <string name="menu_about">Giới thiệu</string>
-  <string name="about_license" fuzzy="true">Phần mềm mã nguồn mở được phát hành theo &lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/COPYING\"&gt;Giấy phép Apache v2&lt;/a&gt;. %1$s và biểu trưng của nó là nhãn hiệu của Quỹ Wikimedia và được sử dụng do Quỹ Wikimedia cho phép. Chúng tôi không được Quỹ Wikimedia ủng hộ hoặc nhận làm chi nhánh.</string>
-  <string name="about_improve" fuzzy="true">&lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;Mã nguồn&lt;/a&gt; và &lt;a href=\"https://commons-app.github.io/\"&gt;trang chủ&lt;/a&gt; tại GitHub. &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;Tạo vấn đề GitHub mới&lt;/a&gt; để báo cáo lỗi hoặc gợi ý thay đổi.</string>
-  <string name="about_privacy_policy" fuzzy="true"/>
-  <string name="about_credits" fuzzy="true">&lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/CREDITS\"&gt;Công trạng&lt;/a&gt;</string>
+  <string name="about_license">Ứng dụng Wikimedia Commons là ứng dụng mã nguồn mở được sáng tạo và quản lý bởi các tình nguyện viên và những người được tin tưởng của cộng đồng Wikipedia. Wikimedia Foundation không tham gia vào sự tạo lập, phát triển cũng như quản lý của ứng dụng.</string>
+  <string name="about_improve">Tạo một &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;thảo luận (issue) mới trên GitHub&lt;/a&gt;  để báo cáo lỗi cũng như đưa ra các ý tưởng.</string>
+  <string name="about_privacy_policy">&lt;u&gt;Chính sách riêng tư&lt;/u&gt;</string>
+  <string name="about_credits">&lt;u&gt;Công trạng&lt;/u&gt;</string>
   <string name="title_activity_about">Giới thiệu</string>
   <string name="menu_feedback">Gửi Phản hồi (qua Thư điện tử)</string>
   <string name="no_email_client">Không có chương trình thư điện tử nào được cài đặt</string>
@@ -84,7 +98,7 @@
   <string name="share_license_summary">Hình này sẽ được phát hành theo giấy phép %1$s</string>
   <string name="media_upload_policy">Với việc đăng hình này, tôi tuyên bố rằng nó là tác phẩm của chính mình, rằng nó không chứa nội dung có bản quyền hoặc ảnh tự chụp, và về mặt khác thì hoàn toàn tuân theo &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines?uselang=vi\"&gt;các quy định Wikimedia Commons&lt;/a&gt;.</string>
   <string name="menu_download">Tải về</string>
-  <string name="preference_license" fuzzy="true">Giấy phép</string>
+  <string name="preference_license">Giấy phép mặc định</string>
   <string name="use_previous">Sử dụng tiêu đề/miêu tả trước</string>
   <string name="allow_gps">Lấy vị trí hiện tại tự động</string>
   <string name="allow_gps_summary">Định vị hiện tại để nhận gợi ý thể loại trong trường hợp hình ảnh chưa được gắn thẻ địa lý</string>

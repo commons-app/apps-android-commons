@@ -43,8 +43,6 @@
   <string name="share_title_hint">Teitl</string>
   <string name="share_description_hint">Disgrifiad</string>
   <string name="login_failed_network">Yn methu mewngofnodi - methodd y rhwydwaith</string>
-  <string name="login_failed_username">Yn methu mewngofnodi - gwirwch eich enw defnyddiwr</string>
-  <string name="login_failed_password">Yn methu mewngofnodi - gwirwch eich cyfrinair</string>
   <string name="login_failed_throttled">Cafwyd gormod o ymgeision aflwyddiannus. Oedwch ennyd cyn ceisio eto.</string>
   <string name="login_failed_blocked">Ymddiheurwn. Mae\'r defnyddiwr hwn wedi ei flocio ar Gomin Wikimedia</string>
   <string name="login_failed_2fa_needed">Mae\'n rhaid i chi roi eich cod adnabod 2 ffactor.</string>

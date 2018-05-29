@@ -58,8 +58,7 @@
   <string name="add_title_toast">Forneça um título para este ficheiro, por favor</string>
   <string name="share_description_hint">Descrição</string>
   <string name="login_failed_network">Não foi possível iniciar sessão - falha de rede</string>
-  <string name="login_failed_username">Não foi possível iniciar sessão - verifique o seu nome de utilizador(a)</string>
-  <string name="login_failed_password">Não foi possível iniciar sessão - verifique a sua palavra-passe</string>
+  <string name="login_failed_wrong_credentials">Não foi possível iniciar sessão - verifique o seu nome de utilizador e a palavra-passe</string>
   <string name="login_failed_throttled">Demasiadas tentativas malsucedidas. Por favor, tente de novo dentro de alguns minutos.</string>
   <string name="login_failed_blocked">Desculpe, este utilizador foi bloqueado no Commons</string>
   <string name="login_failed_2fa_needed">Precisa fornecer o seu código de ativação de dois fatores.</string>
@@ -222,7 +221,7 @@
   <string name="navigation_item_settings">Configurações</string>
   <string name="navigation_item_feedback">Comentários</string>
   <string name="navigation_item_logout">Sair</string>
-  <string name="navigation_item_info">Tutorial</string>
+  <string name="navigation_item_info">Explicação</string>
   <string name="navigation_item_notification">Notificações</string>
   <string name="navigation_item_featured_images">Destacadas</string>
   <string name="nearby_needs_permissions">Os sítios aqui perto não podem ser apresentados sem permissões de localização</string>

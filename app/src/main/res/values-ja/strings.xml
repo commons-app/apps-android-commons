@@ -58,8 +58,6 @@
   <string name="add_title_toast">ファイル名をつけてください</string>
   <string name="share_description_hint">説明</string>
   <string name="login_failed_network">ログインできません - ネットワークのエラーです</string>
-  <string name="login_failed_username">ログインできません - 利用者名を確認してください</string>
-  <string name="login_failed_password">ログインできません - パスワードを確認してください</string>
   <string name="login_failed_throttled">失敗した回数が多すぎます。数分待ってからもう一度お試しください。</string>
   <string name="login_failed_blocked">申し訳ありませんが、この利用者はコモンズでブロックされています。</string>
   <string name="login_failed_2fa_needed">2要素認証コードを提供する必要があります。</string>

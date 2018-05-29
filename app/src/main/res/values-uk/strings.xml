@@ -58,8 +58,7 @@
   <string name="add_title_toast">Будь ласка, вкажіть назву цього файлу</string>
   <string name="share_description_hint">Опис</string>
   <string name="login_failed_network">Неможливо увійти — збій у мережі</string>
-  <string name="login_failed_username">Неможливо увійти — будь ласка, перевірте своє ім\'я користувача</string>
-  <string name="login_failed_password">Неможливо увійти — будь ласка, перевірте свій пароль</string>
+  <string name="login_failed_wrong_credentials">Неможливо увійти — будь ласка перевірте ім\'я користувача та пароль</string>
   <string name="login_failed_throttled">Надто багато невдалих спроб. Будь ласка, спробуйте знову через кілька хвилин.</string>
   <string name="login_failed_blocked">Вибачте, цього користувача було заблоковано на Вікісховищі</string>
   <string name="login_failed_2fa_needed">Ви повинні надати код двофакторної автентифікації.</string>
@@ -150,7 +149,7 @@
   <string name="tutorial_2_subtext_2">Корисні об\'єкти (велосипеди, залізничні станції)</string>
   <string name="tutorial_2_subtext_3">Відомі люди (ваш мер, спортсмен-олімпієць, якого ви зустріли)</string>
   <string name="tutorial_3_text">Будь ласка, НЕ завантажуйте:</string>
-  <string name="tutorial_3_subtext">- Селфі або фото своїх друзів \n- Зображення, які Ви завантажили з інтернету \n- Скріншоти патентованих програм</string>
+  <string name="tutorial_3_subtext">- Селфі або фото своїх друзів \n- Зображення, які Ви завантажили з інтернету \n- Знімки екрану пропрієтарних програм</string>
   <string name="tutorial_3_subtext_1">Селфі чи фото ваших друзів</string>
   <string name="tutorial_3_subtext_2">Зображення, які ви завантажили з інтернету</string>
   <string name="tutorial_3_subtext_3">Знімки екрану пропрієтарних програм</string>
@@ -162,7 +161,7 @@
   <string name="welcome_wikipedia_text">Надсилайте Ваші зображення. Допоможіть оживити статті Вікіпедії!</string>
   <string name="welcome_wikipedia_subtext">Зображення у Вікіпедії надходять з Вікісховища.</string>
   <string name="welcome_copyright_text">Ваші зображення допомагають освіті людей у всьому світі.</string>
-  <string name="welcome_copyright_subtext">Уникайте захищених авторським правом матеріалів, знайдених в Інтернеті, а також зображень плакатів, обкладинок книг і т. п.</string>
+  <string name="welcome_copyright_subtext">Уникайте захищених авторським правом матеріалів, знайдених в Інтернеті, а також зображень плакатів, обкладинок книг, тощо.</string>
   <string name="welcome_final_text">Ви це зрозуміли?</string>
   <string name="welcome_final_button_text">Так!</string>
   <string name="welcome_help_button_text"/>

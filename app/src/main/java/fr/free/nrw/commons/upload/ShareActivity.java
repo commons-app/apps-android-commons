@@ -1,6 +1,9 @@
 package fr.free.nrw.commons.upload;
 
 import android.Manifest;
+
+import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.animation.AnimatorSet;
@@ -63,7 +66,9 @@ import fr.free.nrw.commons.modifications.ModificationsContentProvider;
 import fr.free.nrw.commons.modifications.ModifierSequence;
 import fr.free.nrw.commons.modifications.ModifierSequenceDao;
 import fr.free.nrw.commons.modifications.TemplateRemoveModifier;
+import fr.free.nrw.commons.mwapi.CategoryApi;
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
+import io.reactivex.schedulers.Schedulers;
 import fr.free.nrw.commons.utils.ViewUtil;
 import timber.log.Timber;
 
@@ -99,8 +104,13 @@ public class ShareActivity
     @Inject
     ModifierSequenceDao modifierSequenceDao;
     @Inject
+    CategoryApi apiCall;
+    @Inject
     @Named("default_preferences")
     SharedPreferences prefs;
+    @Inject
+    GpsCategoryModel gpsCategoryModel;
+
     @BindView(R.id.container)
     FrameLayout flContainer;
     @BindView(R.id.backgroundImage)
@@ -115,6 +125,7 @@ public class ShareActivity
     FloatingActionButton mainFab;
     @BindView(R.id.expanded_image)
     PhotoView expandedImageView;
+
     private String source;
     private String mimeType;
     private CategorizationFragment categorizationFragment;
@@ -460,8 +471,6 @@ public class ShareActivity
                     useNewPermissions, storagePermitted, locationPermitted);
         }
     }
-
-
 
     @Override
     public void onPause() {

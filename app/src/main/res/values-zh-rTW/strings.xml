@@ -4,6 +4,7 @@
 * Kly
 * LNDDYL
 * Liuxinyu970226
+* S099001
 * Simon Shek
 * StephDC
 * Wwycheuk
@@ -28,7 +29,7 @@
   <string name="logging_in_message">請稍候…</string>
   <string name="login_success">登入成功！</string>
   <string name="login_failed">登入失敗！</string>
-  <string name="upload_failed">找不到檔案。請嘗試其它檔案看看。</string>
+  <string name="upload_failed">找不到檔案。請試試看其它檔案。</string>
   <string name="authentication_failed">未能核對身分！</string>
   <string name="uploading_started">開始上傳！</string>
   <string name="upload_completed_notification_title">已上傳%1$s！</string>
@@ -42,7 +43,7 @@
     <item quantity="one">正在上載 %1$d 個檔案</item>
     <item quantity="other">正在上載 %1$d 個檔案</item>
   </plurals>
-  <string name="title_activity_contributions">我的最近上傳</string>
+  <string name="title_activity_contributions">我最近的上傳</string>
   <string name="contribution_state_queued">已佇列</string>
   <string name="contribution_state_failed">失敗</string>
   <string name="contribution_state_in_progress">%1$d%%完成</string>
@@ -57,8 +58,7 @@
   <string name="add_title_toast">請提供此檔案的標題</string>
   <string name="share_description_hint">說明</string>
   <string name="login_failed_network">無法登入－網路故障</string>
-  <string name="login_failed_username">無法登入－請檢查您的使用者名稱</string>
-  <string name="login_failed_password">無法登入－請檢查您的密碼</string>
+  <string name="login_failed_wrong_credentials">無法登入 - 請檢查您的使用者名稱與密碼</string>
   <string name="login_failed_throttled">失敗次數過多。請於幾分鐘後重試。</string>
   <string name="login_failed_blocked">很抱歉，該使用者已被維基共享資源封禁</string>
   <string name="login_failed_2fa_needed">必須提供您的雙重因素身分核對代碼。</string>
@@ -110,7 +110,7 @@
   <string name="media_upload_policy">透過提交此圖片，我宣佈這是我個人創作的成品，且不包含受版權保護或自拍內容，並除此之外遵守&lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines\"&gt;維基媒體共享資源方針&lt;/a&gt;。</string>
   <string name="menu_download">下載</string>
   <string name="preference_license">預設授權條款</string>
-  <string name="use_previous">使用先前標題/說明</string>
+  <string name="use_previous">使用先前標題、說明</string>
   <string name="allow_gps">自動獲取目前位置</string>
   <string name="allow_gps_summary">若圖片未有地理標記，就以目前位置來作為分類建議。</string>
   <string name="preference_theme">夜間模式</string>
@@ -155,9 +155,10 @@
   <string name="welcome_wikipedia_text">貢獻您的圖片，使維基百科的文章更加生動！</string>
   <string name="welcome_wikipedia_subtext">維基百科的圖片，來自維基共享資源。</string>
   <string name="welcome_copyright_text">您的圖片可以幫助教育世界各地的人。</string>
-  <string name="welcome_copyright_subtext">避免使用受版權保護的材料，例如從互聯網找來的圖片、海報、書籍封面等</string>
+  <string name="welcome_copyright_subtext">避免使用受版權保護的材料，例如從網際網路找來的圖片、海報、書籍封面等</string>
   <string name="welcome_final_text">明白了嗎？</string>
   <string name="welcome_final_button_text">是！</string>
+  <string name="welcome_help_button_text">此提示為空，可能無效。請見錯誤報告： https://github.com/commons-app/apps-android-commons/issues/1333 。</string>
   <string name="detail_panel_cats_label">分類</string>
   <string name="detail_panel_cats_loading">載入中…</string>
   <string name="detail_panel_cats_none">未選擇</string>
@@ -243,6 +244,7 @@
   <string name="null_url">錯誤！查無 URL</string>
   <string name="nominate_deletion">提名刪除</string>
   <string name="nominated_for_deletion">此圖片已被提名刪除。</string>
+  <string name="nominated_see_more">此提示為空，可能無效。請見錯誤報告： https://github.com/commons-app/apps-android-commons/issues/1333 。</string>
   <string name="view_browser">於瀏覽器檢視</string>
   <string name="nearby_location_has_not_changed">位置無法更改。</string>
   <string name="nearby_location_not_available">位置無效。</string>

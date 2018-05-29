@@ -35,8 +35,6 @@
   <string name="share_title_hint">ចំណងជើង</string>
   <string name="share_description_hint">បរិយាយ</string>
   <string name="login_failed_network">មិនអាចកត់ឈ្មោះចូល - បណ្តាញ network បរាជ័យ</string>
-  <string name="login_failed_username">មិនអាចកត់ឈ្មោះចូល - សូមពិនិត្យឈ្មោះអ្នកប្រើប្រាស់របស់អ្នក</string>
-  <string name="login_failed_password">មិនអាចកត់ឈ្មោះចូល - សូមពិនិត្យលេខសម្ងាត់របស់អ្នក</string>
   <string name="login_failed_throttled" fuzzy="true">ការព្យាយាមមិនបានសម្រេចមានចំនួនច្រើនដងពេក។ សូមព្យាយាមម្តងទៀតនៅប៉ុន្មាននាទីក្រោយ។</string>
   <string name="login_failed_blocked">សូមអភ័យទោស អ្នកប្រើប្រាស់រូបនេះត្រូវបានហាមឃាត់នៅ Commons</string>
   <string name="login_failed_generic">កត់ឈ្មោះចូលបរាជ័យ</string>

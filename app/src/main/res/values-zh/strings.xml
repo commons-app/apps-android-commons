@@ -55,8 +55,6 @@
   <string name="add_title_toast">请提供此文件的标题</string>
   <string name="share_description_hint">说明</string>
   <string name="login_failed_network">无法登录 - 网络故障</string>
-  <string name="login_failed_username">无法登录 - 请检查您的用户名</string>
-  <string name="login_failed_password">无法登录 - 请检查您的密码</string>
   <string name="login_failed_throttled">失败次数过多。请在几分钟后重试。</string>
   <string name="login_failed_blocked">对不起，该用户已经被共享资源封禁</string>
   <string name="login_failed_2fa_needed">您必须提供您的双因素验证代码。</string>

@@ -1,5 +1,6 @@
 package fr.free.nrw.commons.upload;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.ContentResolver;
 import android.content.Context;
@@ -22,6 +23,8 @@ import javax.inject.Inject;
 
 import fr.free.nrw.commons.caching.CacheController;
 import fr.free.nrw.commons.di.ApplicationlessInjection;
+import fr.free.nrw.commons.mwapi.CategoryApi;
+import io.reactivex.schedulers.Schedulers;
 import timber.log.Timber;
 
 import static com.mapbox.mapboxsdk.Mapbox.getApplicationContext;
@@ -42,6 +45,10 @@ public class FileProcessor implements SimilarImageDialogFragment.onResponse{
 
     @Inject
     CacheController cacheController;
+    @Inject
+    GpsCategoryModel gpsCategoryModel;
+    @Inject
+    CategoryApi apiCall;
 
     FileProcessor(Uri mediaUri, ContentResolver contentResolver, SharedPreferences prefs, Context context) {
         this.mediaUri = mediaUri;
@@ -169,8 +176,9 @@ public class FileProcessor implements SimilarImageDialogFragment.onResponse{
 
     /**
      * Initiates retrieval of image coordinates or user coordinates, and caching of coordinates.
-     * Then initiates the calls to MediaWiki API through an instance of MwVolleyApi.
+     * Then initiates the calls to MediaWiki API through an instance of CategoryApi.
      */
+    @SuppressLint("CheckResult")
     public void useImageCoords() {
         if (decimalCoords != null) {
             Timber.d("Decimal coords of image: %s", decimalCoords);
@@ -183,8 +191,6 @@ public class FileProcessor implements SimilarImageDialogFragment.onResponse{
                 cacheController.setQtPoint(decLongitude, decLatitude);
             }
 
-            MwVolleyApi apiCall = new MwVolleyApi(context);
-
             List<String> displayCatList = cacheController.findCategory();
             boolean catListEmpty = displayCatList.isEmpty();
 
@@ -192,12 +198,21 @@ public class FileProcessor implements SimilarImageDialogFragment.onResponse{
             // If no categories found in cache, call MediaWiki API to match image coords with nearby Commons categories
             if (catListEmpty) {
                 cacheFound = false;
-                apiCall.request(decimalCoords);
+                apiCall.request(decimalCoords)
+                        .subscribeOn(Schedulers.io())
+                        .observeOn(Schedulers.io())
+                        .subscribe(
+                                gpsCategoryModel::setCategoryList,
+                                throwable -> {
+                                    Timber.e(throwable);
+                                    gpsCategoryModel.clear();
+                                }
+                        );
                 Timber.d("displayCatList size 0, calling MWAPI %s", displayCatList);
             } else {
                 cacheFound = true;
-                Timber.d("Cache found, setting categoryList in MwVolleyApi to %s", displayCatList);
-                MwVolleyApi.setGpsCat(displayCatList);
+                Timber.d("Cache found, setting categoryList in model to %s", displayCatList);
+                gpsCategoryModel.setCategoryList(displayCatList);
             }
         } else {
             Timber.d("EXIF: no coords");

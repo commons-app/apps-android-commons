@@ -39,8 +39,6 @@
   <string name="share_title_hint">Аталышы</string>
   <string name="share_description_hint">Баяндамасы</string>
   <string name="login_failed_network">Кирүүгө болбой жатат - тармакта үзгүлтүк бар</string>
-  <string name="login_failed_username">Кирүүгө мүмкүн эмес - сураныч, колдонуучу ысымыңызды текшериңиз</string>
-  <string name="login_failed_password">Кирүүгө мүмкүн эмес - сураныч, сыр сөзүңүздү текшериңиз</string>
   <string name="login_failed_throttled" fuzzy="true">Өтө көп натыйжасыз иш аракет. Суранабыз, бир нече мүнөттөн кийин кайталаңыз</string>
   <string name="login_failed_blocked">Кечириңиз, бул кодонуучу Уикиказынада блокко алынган.</string>
   <string name="login_failed_generic">Системага кирүүдө катачылык бар!</string>
