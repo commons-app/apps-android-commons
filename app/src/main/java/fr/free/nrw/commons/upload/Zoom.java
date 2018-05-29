@@ -1,19 +1,38 @@
 package fr.free.nrw.commons.upload;
 
+import android.content.ContentResolver;
 import android.graphics.Bitmap;
 import android.graphics.BitmapRegionDecoder;
+import android.graphics.Point;
 import android.graphics.Rect;
+import android.net.Uri;
 import android.provider.MediaStore;
 import android.support.v4.graphics.BitmapCompat;
 import android.view.View;
+import android.widget.FrameLayout;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 
-public class ZoomUtils {
+public class Zoom {
 
-    static void zoomImageUtil(View thumbView, Rect startBounds, InputStream input) {
+    private View thumbView;
+    private Rect startBounds;
+    private InputStream input;
+    private Uri imageUri;
+    private ContentResolver contentResolver;
+    private FrameLayout flContainer;
+
+    public Zoom(View thumbView, Rect startBounds, InputStream input, Uri imageUri, ContentResolver contentResolver) {
+        this.thumbView = thumbView;
+        this.startBounds = startBounds;
+        this.input = input;
+        this.imageUri = imageUri;
+        this.contentResolver = contentResolver;
+    }
+
+    Bitmap createScaledImage() {
 
         Bitmap scaled = null;
         BitmapRegionDecoder decoder = null;
@@ -28,24 +47,23 @@ public class ZoomUtils {
             System.gc();
             Runtime rt = Runtime.getRuntime();
             long maxMemory = rt.freeMemory();
-            bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), imageuri);
-            int bitmapByteCount= BitmapCompat.getAllocationByteCount(bitmap);
+            bitmap = MediaStore.Images.Media.getBitmap(contentResolver, imageUri);
+            int bitmapByteCount = BitmapCompat.getAllocationByteCount(bitmap);
             long height = bitmap.getHeight();
             long width = bitmap.getWidth();
-            long calHeight = (long) ((height * maxMemory)/(bitmapByteCount * 1.1));
-            long calWidth = (long) ((width * maxMemory)/(bitmapByteCount * 1.1));
-            scaled = Bitmap.createScaledBitmap(bitmap,(int) Math.min(width,calWidth), (int) Math.min(height,calHeight), true);
+            long calHeight = (long) ((height * maxMemory) / (bitmapByteCount * 1.1));
+            long calWidth = (long) ((width * maxMemory) / (bitmapByteCount * 1.1));
+            scaled = Bitmap.createScaledBitmap(bitmap, (int) Math.min(width, calWidth), (int) Math.min(height, calHeight), true);
         } catch (IOException e) {
-        } catch (NullPointerException e){
+        } catch (NullPointerException e) {
             scaled = bitmap;
         }
-        // Load the high-resolution "zoomed-in" image.
-        expandedImageView.setImageBitmap(scaled);
+        return scaled;
+    }
 
 
-
+    float adjustStartEndBounds(Rect finalBounds, Point globalOffset) {
         // Calculate the starting and ending bounds for the zoomed-in image.
-        // This step involves lots of math. Yay, math.
         // The start bounds are the global visible rectangle of the thumbnail,
         // and the final bounds are the global visible rectangle of the container
         // view. Also set the container view's offset as the origin for the
@@ -77,20 +95,6 @@ public class ZoomUtils {
             startBounds.top -= deltaHeight;
             startBounds.bottom += deltaHeight;
         }
-
-        // Hide the thumbnail and show the zoomed-in view. When the animation
-        // begins, it will position the zoomed-in view in the place of the
-        // thumbnail.
-        thumbView.setAlpha(0f);
-        expandedImageView.setVisibility(View.VISIBLE);
-        zoomOutButton.setVisibility(View.VISIBLE);
-        zoomInButton.setVisibility(View.GONE);
-
-        // Set the pivot point for SCALE_X and SCALE_Y transformations
-        // to the top-left corner of the zoomed-in view (the default
-        // is the center of the view).
-        expandedImageView.setPivotX(0f);
-        expandedImageView.setPivotY(0f);
-
+        return startScale;
     }
 }

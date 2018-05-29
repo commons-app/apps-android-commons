@@ -2,27 +2,23 @@ package fr.free.nrw.commons.upload;
 
 import android.Manifest;
 
-import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
-import android.app.Activity;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
-import android.graphics.BitmapRegionDecoder;
 import android.graphics.Point;
 import android.graphics.Rect;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
-import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.annotation.RequiresApi;
 import android.support.design.widget.FloatingActionButton;
@@ -30,7 +26,6 @@ import android.support.design.widget.Snackbar;
 import android.support.graphics.drawable.VectorDrawableCompat;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
-import android.support.v4.graphics.BitmapCompat;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
@@ -68,7 +63,6 @@ import fr.free.nrw.commons.modifications.ModifierSequenceDao;
 import fr.free.nrw.commons.modifications.TemplateRemoveModifier;
 import fr.free.nrw.commons.mwapi.CategoryApi;
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
-import io.reactivex.schedulers.Schedulers;
 import fr.free.nrw.commons.utils.ViewUtil;
 import timber.log.Timber;
 
@@ -524,7 +518,27 @@ public class ShareActivity
             e.printStackTrace();
         }
 
-        ZoomUtils.zoomImageUtil(thumbView, startBounds, input);
+        Zoom zoomObj = new Zoom(thumbView, startBounds, input, imageuri, this.getContentResolver());
+        Bitmap scaledImage = zoomObj.createScaledImage();
+
+        // Load the high-resolution "zoomed-in" image.
+        expandedImageView.setImageBitmap(scaledImage);
+
+        float startScale = zoomObj.adjustStartEndBounds(finalBounds, globalOffset);
+
+        // Hide the thumbnail and show the zoomed-in view. When the animation
+        // begins, it will position the zoomed-in view in the place of the
+        // thumbnail.
+        thumbView.setAlpha(0f);
+        expandedImageView.setVisibility(View.VISIBLE);
+        zoomOutButton.setVisibility(View.VISIBLE);
+        zoomInButton.setVisibility(View.GONE);
+
+        // Set the pivot point for SCALE_X and SCALE_Y transformations
+        // to the top-left corner of the zoomed-in view (the default
+        // is the center of the view).
+        expandedImageView.setPivotX(0f);
+        expandedImageView.setPivotY(0f);
 
         // Construct and run the parallel animation of the four translation and
         // scale properties (X, Y, SCALE_X, and SCALE_Y).
