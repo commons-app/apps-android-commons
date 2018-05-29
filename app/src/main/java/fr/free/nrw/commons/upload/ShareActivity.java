@@ -26,7 +26,6 @@ import android.support.design.widget.Snackbar;
 import android.support.graphics.drawable.VectorDrawableCompat;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.DecelerateInterpolator;
@@ -110,7 +109,7 @@ public class ShareActivity
     @BindView(R.id.backgroundImage)
     SimpleDraweeView backgroundImageView;
     @BindView(R.id.media_map)
-    FloatingActionButton mapsFragment;
+    FloatingActionButton mapButton;
     @BindView(R.id.media_upload_zoom_in)
     FloatingActionButton zoomInButton;
     @BindView(R.id.media_upload_zoom_out)
@@ -343,11 +342,11 @@ public class ShareActivity
         isFABOpen=true;
 
         if( imageObj != null && imageObj.imageCoordsExists)
-        mapsFragment.setVisibility(View.VISIBLE);
+        mapButton.setVisibility(View.VISIBLE);
         zoomInButton.setVisibility(View.VISIBLE);
 
         mainFab.animate().rotationBy(180);
-        mapsFragment.animate().translationY(-getResources().getDimension(R.dimen.second_fab));
+        mapButton.animate().translationY(-getResources().getDimension(R.dimen.second_fab));
         zoomInButton.animate().translationY(-getResources().getDimension(R.dimen.first_fab));
     }
 
@@ -357,7 +356,7 @@ public class ShareActivity
     private void closeFABMenu(){
         isFABOpen=false;
         mainFab.animate().rotationBy(-180);
-        mapsFragment.animate().translationY(0);
+        mapButton.animate().translationY(0);
         zoomInButton.animate().translationY(0).setListener(new Animator.AnimatorListener() {
             @Override
             public void onAnimationStart(Animator animator) {
@@ -366,7 +365,7 @@ public class ShareActivity
             @Override
             public void onAnimationEnd(Animator animator) {
                 if(!isFABOpen){
-                    mapsFragment.setVisibility(View.GONE);
+                    mapButton.setVisibility(View.GONE);
                     zoomInButton.setVisibility(View.GONE);
                 }
             }
@@ -498,7 +497,7 @@ public class ShareActivity
     }
 
     /**
-     * Allows zooming in to the uploaded image. Called when zoom FAB is tapped
+     * Allows zooming in to the image about to be uploaded. Called when zoom FAB is tapped
      */
     private void zoomImageFromThumb(final View thumbView, Uri imageuri) {
         // If there's an animation in progress, cancel it immediately and proceed with this one.
