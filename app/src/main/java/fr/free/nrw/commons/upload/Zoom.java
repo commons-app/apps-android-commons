@@ -20,20 +20,16 @@ import timber.log.Timber;
 public class Zoom {
 
     private View thumbView;
-    private InputStream input;
-    private Uri imageUri;
     private ContentResolver contentResolver;
     private FrameLayout flContainer;
 
-    Zoom(View thumbView, FrameLayout flContainer, InputStream input, Uri imageUri, ContentResolver contentResolver) {
+    Zoom(View thumbView, FrameLayout flContainer, ContentResolver contentResolver) {
         this.thumbView = thumbView;
-        this.input = input;
-        this.imageUri = imageUri;
         this.contentResolver = contentResolver;
         this.flContainer = flContainer;
     }
 
-    Bitmap createScaledImage() {
+    Bitmap createScaledImage(InputStream input, Uri imageUri) {
 
         Bitmap scaled = null;
         BitmapRegionDecoder decoder = null;

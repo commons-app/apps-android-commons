@@ -497,9 +497,8 @@ public class ShareActivity
         return super.onOptionsItemSelected(item);
     }
 
-    //TODO: Move this to a new class. Save references to the findViewByIds and pass them to the new method
-    /*
-     * function to provide pinch zoom
+    /**
+     * Allows zooming in to the uploaded image. Called when zoom FAB is tapped
      */
     private void zoomImageFromThumb(final View thumbView, Uri imageuri) {
         // If there's an animation in progress, cancel it immediately and proceed with this one.
@@ -511,15 +510,14 @@ public class ShareActivity
         mainFab.setVisibility(View.GONE);
 
         InputStream input = null;
-
         try {
             input = this.getContentResolver().openInputStream(imageuri);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
 
-        Zoom zoomObj = new Zoom(thumbView, flContainer, input, imageuri, this.getContentResolver());
-        Bitmap scaledImage = zoomObj.createScaledImage();
+        Zoom zoomObj = new Zoom(thumbView, flContainer, this.getContentResolver());
+        Bitmap scaledImage = zoomObj.createScaledImage(input, imageuri);
 
         // Load the high-resolution "zoomed-in" image.
         expandedImageView.setImageBitmap(scaledImage);
@@ -569,8 +567,8 @@ public class ShareActivity
         startScaleFinal = startScale;
     }
 
-    /*
-     * called when upper arrow floating button
+    /**
+     * Called when user taps the ^ FAB button, expands to show Zoom and Map
      */
     @OnClick(R.id.main_fab)
     public void onMainFabClicked() {
@@ -583,11 +581,10 @@ public class ShareActivity
 
     @OnClick(R.id.media_upload_zoom_in)
     public void onZoomInFabClicked() {
-        //This try catch block was originally holding the entire click listener on the fab button, I did not wanted to risk exceptions
         try {
             zoomImageFromThumb(backgroundImageView, mediaUri);
         } catch (Exception e) {
-            Log.i("exception", e.toString());
+            Timber.e(e);
         }
     }
 
