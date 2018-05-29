@@ -17,6 +17,9 @@ import java.io.InputStream;
 
 import timber.log.Timber;
 
+/**
+ * Contains utility methods for the Zoom function in ShareActivity.
+ */
 public class Zoom {
 
     private View thumbView;
@@ -29,6 +32,12 @@ public class Zoom {
         this.flContainer = flContainer;
     }
 
+    /**
+     * Create a scaled bitmap to display the zoomed-in image
+     * @param input the input stream corresponding to the uploaded image
+     * @param imageUri the uploaded image's URI
+     * @return a zoomable bitmap
+     */
     Bitmap createScaledImage(InputStream input, Uri imageUri) {
 
         Bitmap scaled = null;
@@ -64,13 +73,18 @@ public class Zoom {
         return scaled;
     }
 
+    /**
+     *  Calculate the starting and ending bounds for the zoomed-in image.
+     *  Also set the container view's offset as the origin for the
+     * bounds, since that's the origin for the positioning animation
+     * properties (X, Y).
+     * @param startBounds the global visible rectangle of the thumbnail
+     * @param finalBounds the global visible rectangle of the container view
+     * @param globalOffset the container view's offset
+     * @return scaled start bounds
+     */
     float adjustStartEndBounds(Rect startBounds, Rect finalBounds, Point globalOffset) {
-        // Calculate the starting and ending bounds for the zoomed-in image.
-        // The start bounds are the global visible rectangle of the thumbnail,
-        // and the final bounds are the global visible rectangle of the container
-        // view. Also set the container view's offset as the origin for the
-        // bounds, since that's the origin for the positioning animation
-        // properties (X, Y).
+
         thumbView.getGlobalVisibleRect(startBounds);
         flContainer.getGlobalVisibleRect(finalBounds, globalOffset);
         startBounds.offset(-globalOffset.x, -globalOffset.y);
