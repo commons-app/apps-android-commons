@@ -6,6 +6,9 @@ import android.database.DataSetObserver;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 
@@ -13,8 +16,9 @@ import butterknife.ButterKnife;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.auth.AuthenticatedActivity;
+import fr.free.nrw.commons.explore.SearchActivity;
 import fr.free.nrw.commons.media.MediaDetailPagerFragment;
-import timber.log.Timber;
+import fr.free.nrw.commons.theme.NavigationBaseActivity;
 
 /**
  * This activity displays pictures of a particular category
@@ -156,5 +160,25 @@ public class CategoryImagesActivity
     @Override
     public void unregisterDataSetObserver(DataSetObserver observer) {
 
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_search, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        // Handle item selection
+        switch (item.getItemId()) {
+            case R.id.action_search:
+                NavigationBaseActivity.startActivityWithFlags(this, SearchActivity.class);
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 }

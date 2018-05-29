@@ -96,6 +96,12 @@
             android:label="@string/title_activity_featured_images"
             android:parentActivityName=".contributions.ContributionsActivity" />
 
+        <activity
+            android:name=".explore.SearchActivity"
+            android:label="@string/title_activity_search"
+            android:parentActivityName=".contributions.ContributionsActivity"
+            />
+
         <service android:name=".upload.UploadService" />
 
         <service
