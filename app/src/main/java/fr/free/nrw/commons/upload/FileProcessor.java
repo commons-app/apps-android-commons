@@ -60,8 +60,8 @@ public class FileProcessor implements SimilarImageDialogFragment.onResponse{
         this.mediaUri = mediaUri;
         this.contentResolver = contentResolver;
         this.context = context;
-        useExtStorage = prefs.getBoolean("useExternalStorage", true);
         ApplicationlessInjection.getInstance(context.getApplicationContext()).getCommonsApplicationComponent().inject(this);
+        useExtStorage = prefs.getBoolean("useExternalStorage", true);
     }
 
     /**
