@@ -30,6 +30,9 @@ import timber.log.Timber;
 
 import static com.mapbox.mapboxsdk.Mapbox.getApplicationContext;
 
+/**
+ * Processing of the image file that is about to be uploaded via ShareActivity is done here
+ */
 public class FileProcessor implements SimilarImageDialogFragment.onResponse{
 
     private Uri mediaUri;
@@ -126,6 +129,10 @@ public class FileProcessor implements SimilarImageDialogFragment.onResponse{
         }
     }
 
+    /**
+     * Find other images around the same location that were taken within the last 20 sec
+     * @param gpsEnabled True if GPS is enabled
+     */
     private void findOtherImages(boolean gpsEnabled) {
         Timber.d("filePath"+getPathOfMediaOrCopy());
 
@@ -174,7 +181,6 @@ public class FileProcessor implements SimilarImageDialogFragment.onResponse{
         }
         haveCheckedForOtherImages = true; //Finished checking for other images
     }
-
 
     /**
      * Initiates retrieval of image coordinates or user coordinates, and caching of coordinates.
