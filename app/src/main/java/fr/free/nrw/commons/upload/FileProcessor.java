@@ -20,6 +20,7 @@ import java.util.Date;
 import java.util.List;
 
 import javax.inject.Inject;
+import javax.inject.Named;
 
 import fr.free.nrw.commons.caching.CacheController;
 import fr.free.nrw.commons.di.ApplicationlessInjection;
@@ -34,7 +35,6 @@ public class FileProcessor implements SimilarImageDialogFragment.onResponse{
     private Uri mediaUri;
     private ContentResolver contentResolver;
     private GPSExtractor imageObj;
-    private SharedPreferences prefs;
     private Context context;
     private String decimalCoords;
     private boolean haveCheckedForOtherImages = false;
@@ -49,11 +49,13 @@ public class FileProcessor implements SimilarImageDialogFragment.onResponse{
     GpsCategoryModel gpsCategoryModel;
     @Inject
     CategoryApi apiCall;
+    @Inject
+    @Named("default_preferences")
+    SharedPreferences prefs;
 
-    FileProcessor(Uri mediaUri, ContentResolver contentResolver, SharedPreferences prefs, Context context) {
+    FileProcessor(Uri mediaUri, ContentResolver contentResolver, Context context) {
         this.mediaUri = mediaUri;
         this.contentResolver = contentResolver;
-        this.prefs = prefs;
         this.context = context;
         useExtStorage = prefs.getBoolean("useExternalStorage", true);
         ApplicationlessInjection.getInstance(context.getApplicationContext()).getCommonsApplicationComponent().inject(this);

@@ -11,7 +11,6 @@ import android.support.v4.graphics.BitmapCompat;
 import android.view.View;
 import android.widget.FrameLayout;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 

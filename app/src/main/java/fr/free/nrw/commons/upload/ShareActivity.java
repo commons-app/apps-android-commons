@@ -1,12 +1,11 @@
 package fr.free.nrw.commons.upload;
 
 import android.Manifest;
-
-import android.app.Activity;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
+import android.app.Activity;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
@@ -305,7 +304,7 @@ public class ShareActivity
         uploadController.prepareService();
 
         ContentResolver contentResolver = this.getContentResolver();
-        fileObj = new FileProcessor(mediaUri, contentResolver, prefs, this);
+        fileObj = new FileProcessor(mediaUri, contentResolver, this);
         checkIfFileExists();
         fileObj.getFileCoordinates(locationPermitted);
     }
@@ -342,7 +341,7 @@ public class ShareActivity
         isFABOpen=true;
 
         if( imageObj != null && imageObj.imageCoordsExists)
-        mapButton.setVisibility(View.VISIBLE);
+            mapButton.setVisibility(View.VISIBLE);
         zoomInButton.setVisibility(View.VISIBLE);
 
         mainFab.animate().rotationBy(180);
