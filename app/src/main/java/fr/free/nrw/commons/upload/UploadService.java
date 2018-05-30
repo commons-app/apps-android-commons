@@ -18,6 +18,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.HashSet;
+import java.util.Locale;
 import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -58,6 +59,7 @@ public class UploadService extends HandlerService<Contribution> {
     @Inject SessionManager sessionManager;
     @Inject @Named("default_preferences") SharedPreferences prefs;
     @Inject ContributionDao contributionDao;
+    @Inject @Named("direct_nearby_upload_prefs") SharedPreferences directPrefs;
 
     private NotificationManager notificationManager;
     private NotificationCompat.Builder curProgressNotification;
@@ -295,18 +297,23 @@ public class UploadService extends HandlerService<Contribution> {
         Observable.fromCallable(() -> mwApi.wikidatCreateClaim(contribution.getWikiDataEntityId(), "P18", "value", getFileName(contribution)))
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(result -> {
-                    if(result) {
-                        wikidataEditListener.onSuccessfulWikidataEdit();
-                        ViewUtil.showLongToast(getBaseContext(), getResources().getString(R.string.successful_wikidata_edit));
-                    } else {
-                        Timber.d("Unable to make wiki data edit for entity %s", contribution.getWikiDataEntityId());
-                        ViewUtil.showLongToast(getBaseContext(), getResources().getString(R.string.wikidata_edit_failure));
-                    }
-                }, throwable -> {
+                .subscribe(result -> handleClaimResult(contribution, result), throwable -> {
                     Timber.e(throwable, "Error occurred while making claim");
                     ViewUtil.showLongToast(getBaseContext(), getResources().getString(R.string.wikidata_edit_failure));
                 });
+    }
+
+    private void handleClaimResult(Contribution contribution, Boolean result) {
+        if(result) {
+            wikidataEditListener.onSuccessfulWikidataEdit();
+            String title = directPrefs.getString("Title", "");
+            String successStringTemplate = getResources().getString(R.string.successful_wikidata_edit);
+            String successMessage = String.format(Locale.getDefault(), successStringTemplate, title);
+            ViewUtil.showLongToast(getBaseContext(), successMessage);
+        } else {
+            Timber.d("Unable to make wiki data edit for entity %s", contribution.getWikiDataEntityId());
+            ViewUtil.showLongToast(getBaseContext(), getResources().getString(R.string.wikidata_edit_failure));
+        }
     }
 
     /**
