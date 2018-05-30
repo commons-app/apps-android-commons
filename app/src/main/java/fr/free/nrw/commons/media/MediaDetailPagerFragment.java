@@ -2,9 +2,11 @@ package fr.free.nrw.commons.media;
 
 import android.annotation.SuppressLint;
 import android.app.DownloadManager;
+import android.app.WallpaperManager;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.DataSetObserver;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -26,6 +28,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import java.io.IOException;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import javax.inject.Inject;
@@ -38,12 +42,15 @@ import fr.free.nrw.commons.contributions.Contribution;
 import fr.free.nrw.commons.contributions.ContributionsActivity;
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
+import fr.free.nrw.commons.utils.ImageUtils;
+import timber.log.Timber;
 
 import static android.Manifest.permission.READ_EXTERNAL_STORAGE;
 import static android.content.Context.DOWNLOAD_SERVICE;
 import static android.content.Intent.ACTION_VIEW;
 import static android.content.pm.PackageManager.PERMISSION_GRANTED;
 import static android.widget.Toast.LENGTH_SHORT;
+import static com.mapbox.mapboxsdk.Mapbox.getApplicationContext;
 
 public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment implements ViewPager.OnPageChangeListener {
 
@@ -140,6 +147,10 @@ public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment imple
                 // Download
                 downloadMedia(m);
                 return true;
+            case R.id.menu_set_as_wallpaper:
+                // Set wallpaper
+                setWallpaper(m);
+                return true;
             case R.id.menu_retry_current_image:
                 // Retry
                 ((ContributionsActivity) getActivity()).retryUpload(pager.getCurrentItem());
@@ -153,6 +164,19 @@ public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment imple
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    /**
+     * Set the media as the device's wallpaper if the imageUrl is not null
+     * Fails silently if setting the wallpaper fails
+     * @param media
+     */
+    private void setWallpaper(Media media) {
+        if(media.getImageUrl() == null || media.getImageUrl().isEmpty()) {
+            Timber.d("Media URL not present");
+            return;
+        }
+        ImageUtils.setWallpaperFromImageUrl(getActivity(), Uri.parse(media.getImageUrl()));
     }
 
     /**
