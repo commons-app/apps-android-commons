@@ -7,6 +7,8 @@
 * Tuankiet65
 -->
 <resources>
+  <string name="preference_category_appearance">Giao diện</string>
+  <string name="preference_category_general">Tổng quát</string>
   <string name="preference_category_feedback">Phản hồi</string>
   <string name="preference_category_location">Vị trí</string>
   <string name="app_name">Commons</string>
@@ -51,6 +53,7 @@
   <string name="add_title_toast">Xin hãy đặt tiêu đề cho tập tin này</string>
   <string name="share_description_hint">Miêu tả</string>
   <string name="login_failed_network">Không thể đăng nhập – có lỗi mạng</string>
+  <string name="login_failed_wrong_credentials">Không thể đăng nhập – vui lòng kiểm tra tên người dùng và mật khẩu của bạn</string>
   <string name="login_failed_throttled">Đã đăng nhập thất bại quá nhiều lần. Xin vui lòng thử lại trong vòng vài phút.</string>
   <string name="login_failed_blocked">Rất tiếc, người dùng này đã bị cấm tại Commons</string>
   <string name="login_failed_2fa_needed">Bạn phải cung cấp mã xác thực dùng hai nhân tố.</string>
@@ -127,11 +130,20 @@
   <string name="tutorial_1_text">Wikimedia Commons là nơi lưu giữ phần nhiều hình ảnh xuất hiện trong Wikipedia.</string>
   <string name="tutorial_1_subtext">Các hình ảnh của bạn giúp giáo dục người dân trên khắp thế giới!</string>
   <string name="tutorial_2_text">Xin hãy tải lên các hình ảnh do chính bạn chụp hoặc vẽ:</string>
-  <string name="tutorial_2_subtext" fuzzy="true">- Thiên nhiên (bông hoa, thú vật, cảnh núi)\n- Vật nhân tạo (xe đạp, nhà ga, món ăn)\n- Nhân vật nổi tiếng (thị trưởng của bạn, cầu thủ đội tuyển mà bạn gặp)</string>
+  <string name="tutorial_2_subtext">Thiên nhiên (bông hoa, thú vật, cảnh núi)\n* Vật nhân tạo (xe đạp, nhà ga, món ăn)\n* Nhân vật nổi tiếng (thị trưởng của bạn, cầu thủ đội tuyển mà bạn gặp)</string>
+  <string name="tutorial_2_subtext_1">Thiên nhiên (bông hoa, thú vật, cảnh núi)</string>
+  <string name="tutorial_2_subtext_2">Vật nhân tạo (xe đạp, nhà ga, món ăn)</string>
+  <string name="tutorial_2_subtext_3">Nhân vật nổi tiếng (thị trưởng của bạn, cầu thủ đội tuyển mà bạn gặp)</string>
   <string name="tutorial_3_text">Xin DỪNG tải lên:</string>
   <string name="tutorial_3_subtext">- Hình tự sướng hoặc hình bạn bè\n- Hình ảnh tải về từ Internet\n- Ảnh chụp màn hình của ứng dụng thương mại</string>
+  <string name="tutorial_3_subtext_1">Ảnh tự chụp hoặc hình bạn bè</string>
+  <string name="tutorial_3_subtext_2">Hình ảnh trên Internet tải về</string>
+  <string name="tutorial_3_subtext_3">Ảnh chụp màn hình của ứng dụng có bản quyền</string>
   <string name="tutorial_4_text">Tập tin tải lên ví dụ:</string>
-  <string name="tutorial_4_subtext" fuzzy="true">- Tiêu đề: Nhà hát Opera Sydney\n- Miêu tả: Nhà hát Opera Sydney nhìn qua cảng\n- Thể loại: Sydney Opera House, Sydney Opera House from the west, Sydney Opera House remote views</string>
+  <string name="tutorial_4_subtext">- Tiêu đề: Nhà hát Opera Sydney\n- Miêu tả: Nhà hát Opera Sydney nhìn qua cảng\n- Thể loại: Nhà hát Opera Sydney nhìn từ phía tây, Nhà hát Opera Sydney nhìn từ xa</string>
+  <string name="tutorial_4_subtext_1">Tiêu đề: Nhà hát Opera Sydney</string>
+  <string name="tutorial_4_subtext_2">Miêu tả: Nhà hát Opera Sydney nhìn qua cảng</string>
+  <string name="tutorial_4_subtext_3">Thể loại: Nhà hát Opera Sydney nhìn từ phía tây, Nhà hát Opera Sydney nhìn từ xa</string>
   <string name="welcome_wikipedia_text">Đóng góp hình ảnh của bạn. Làm sinh động các bài viết Wikipedia!</string>
   <string name="welcome_wikipedia_subtext">Các hình ảnh trên Wikipedia được cung cấp bởi Wikimedia Commons.</string>
   <string name="welcome_copyright_text">Các hình ảnh của bạn giúp giáo dục người dân trên khắp thế giới.</string>
@@ -144,8 +156,8 @@
   <string name="detail_description_empty">Không miêu tả</string>
   <string name="detail_license_empty">Giấy phép không rõ</string>
   <string name="menu_refresh">Làm tươi</string>
-  <string name="read_storage_permission_rationale" fuzzy="true">Yêu cầu cấp phép: Đọc thiết bị lưu trữ bên ngoài. Ứng dụng cần được phép đọc thiết bị lưu trữ bên ngoài để hoạt động.</string>
-  <string name="write_storage_permission_rationale" fuzzy="true">Yêu cầu cấp phép: Ghi vào thiết bị lưu trữ bên ngoài. Ứng dụng cần được phép ghi vào thiết bị lưu trữ bên ngoài để hoạt động.</string>
+  <string name="read_storage_permission_rationale">Yêu cầu cấp phép: Đọc thiết bị lưu trữ bên ngoài. Ứng dụng cần được phép đọc thiết bị lưu trữ bên ngoài để truy cập kho ảnh của bạn.</string>
+  <string name="write_storage_permission_rationale">Yêu cầu cấp phép: Ghi vào thiết bị lưu trữ bên ngoài. Ứng dụng cần được phép ghi vào thiết bị lưu trữ bên ngoài để truy cập máy chụp hình của bạn.</string>
   <string name="location_permission_rationale">Tùy chọn cấp phép: Định vị hiện tại để nhận gợi ý thể loại</string>
   <string name="ok">OK</string>
   <string name="title_activity_nearby">Nơi Lân cận</string>
@@ -158,6 +170,7 @@
   <string name="media_detail_media_title">Tiêu đề phương tiện</string>
   <string name="media_detail_description">Mô tả</string>
   <string name="media_detail_description_explanation">Mô tả phương tiện xuất hiện tại đây. Nó có thể khá dài và sẽ cần phải ngắt thành nhiều dòng. Nhưng chúng tôi hy vọng sẽ trông ưa nhìn.</string>
+  <string name="media_detail_author">Tác giả</string>
   <string name="media_detail_uploaded_date">Ngày tải lên</string>
   <string name="media_detail_license">Giấy phép</string>
   <string name="media_detail_coordinates">Tọa độ</string>
@@ -172,6 +185,9 @@
   <string name="login_failed_2fa_not_supported">Hiện chưa hỗ trợ xác thực dùng hai nhân tố.</string>
   <string name="logout_verification">Bạn có chắc chắn muốn đăng xuất?</string>
   <string name="commons_logo">Biểu trưng Commons</string>
+  <string name="commons_website">Trang Web Commons</string>
+  <string name="commons_facebook">Trang Commons tại Facebook</string>
+  <string name="commons_github">Mã nguồn Commons tại GitHub</string>
   <string name="background_image">Hình nền</string>
   <string name="mediaimage_failed">Hình ảnh bị Thất bại</string>
   <string name="no_image_found">Không tìm thấy Hình ảnh</string>
@@ -196,15 +212,58 @@
   <string name="navigation_item_feedback">Phản hồi</string>
   <string name="navigation_item_logout">Đăng xuất</string>
   <string name="navigation_item_info">Hướng dẫn</string>
+  <string name="navigation_item_notification">Thông báo</string>
+  <string name="navigation_item_featured_images">Chọn lọc</string>
   <string name="nearby_needs_permissions">Cần có quyền truy cập vị trí của bạn để hiển thị các địa điểm lân cận</string>
   <string name="no_description_found">không tìm thấy miêu tả</string>
   <string name="nearby_info_menu_commons_article">Trang tập tin Commons</string>
   <string name="nearby_info_menu_wikidata_article">Khoản mục Wikidata</string>
+  <string name="nearby_info_menu_wikipedia_article">Bài Wikipedia</string>
   <string name="error_while_cache">Xuất hiện lỗi khi đưa hình ảnh vào vùng nhớ đệm</string>
   <string name="title_info">Tên ngắn và duy nhất cho tập tin sẽ được dùng làm tên tập tin. Có thể dùng thuật ngữ bình thường với khoảng cách. Đừng bao gồm phần mở rộng tập tin.</string>
   <string name="description_info">Xin vui lòng miêu tả phương tiện càng đầy đủ càng tốt: Chụp ở đâu? Trong hình có gì? Bối cảnh làm sao? Xin vui lòng miêu tả các đối tượng và người trong hình. Cho biết những thông tin khó đoán ra, chẳng hạn giờ trong ngày nếu là phong cảnh. Nếu phương tiện có gì kỳ lạ, xin vui lòng giải thích tại sao nó kỳ lạ.</string>
+  <string name="give_permission">Cho phép</string>
   <string name="use_external_storage">Sử dụng thiết bị lưu trữ bên ngoài</string>
   <string name="use_external_storage_summary">Lưu các hình ảnh được chụp bằng máy chụp hình trong ứng dụng vào thiết bị của bạn</string>
+  <string name="login_to_your_account">Đăng nhập vào tài khoản của bạn</string>
+  <string name="send_log_file">Gửi tập tin nhật trình</string>
+  <string name="send_log_file_description">Gửi tập tin nhật trình cho nhà phát triển qua thư điện tử</string>
+  <string name="no_web_browser">Không tìm thấy trình duyệt để mở URL</string>
+  <string name="null_url">Lỗi! Không tìm thấy URL</string>
   <string name="nominate_deletion">Bầu chọn để xóa</string>
+  <string name="nominated_for_deletion">Có đề nghị xóa hình này.</string>
   <string name="view_browser">Hiện lên ở trang xem browse</string>
+  <string name="nearby_location_has_not_changed">Vị trí không thay đổi.</string>
+  <string name="nearby_location_not_available">Vị trí không có sẵn.</string>
+  <string name="location_permission_rationale_nearby">Bạn cần cho phép để hiển thị danh sách nơi lân cận</string>
+  <string name="get_directions">HƯỚNG DẪN</string>
+  <string name="read_article">ĐỌC BÀI</string>
+  <string name="notifications_welcome">Hoan nghênh %1$s đã đến Wikimedia Commons! Chúng tôi rất mừng bạn đến đây.</string>
+  <string name="notifications_talk_page_message">%1$s đã nhắn tin tại trang thảo luận của bạn</string>
+  <string name="notifications_thank_you_edit">Cảm ơn vì bạn đã thực hiện sửa đổi</string>
+  <string name="notifications_mention">%1$s đã nhắc đến bạn tại %2$s.</string>
+  <string name="nearby_directions">HƯỚNG DẪN</string>
+  <string name="nearby_wikidata">WIKIDATA</string>
+  <string name="nearby_wikipedia">WIKIPEDIA</string>
+  <string name="nearby_commons">COMMONS</string>
+  <string name="about_rate_us">&lt;u&gt;Đánh giá chúng tôi&lt;/u&gt;</string>
+  <string name="about_faq">&lt;u&gt;Câu thường hỏi&lt;/u&gt;</string>
+  <string name="welcome_skip_button">Bỏ qua Hướng dẫn</string>
+  <string name="no_internet">Internet không có sẵn</string>
+  <string name="internet_established">Internet có sẵn</string>
+  <string name="error_notifications">Lỗi khi lấy thông báo</string>
+  <string name="no_notifications">Không tìm thấy thông báo</string>
+  <string name="about_translate">&lt;u&gt;Biên dịch&lt;/u&gt;</string>
+  <string name="about_translate_title">Ngôn ngữ</string>
+  <string name="about_translate_message">Chọn ngôn ngữ để gửi bản dịch</string>
+  <string name="about_translate_proceed">Tiến hành</string>
+  <string name="about_translate_cancel">Hủy bỏ</string>
+  <string name="retry">Thử lại</string>
+  <string name="showcase_view_got_it_button">Được rồi!</string>
+  <string name="no_images_found">Không tìm thấy hình ảnh!</string>
+  <string name="error_loading_images">Đã xuất hiện lỗi khi tải hình ảnh.</string>
+  <string name="image_uploaded_by">Tải lên bởi: %1$s</string>
+  <string name="share_app_title">Chia sẻ Ứng dụng</string>
+  <string name="share_coordinates_not_present">Tọa độ không được chỉ định khi chọn hình ảnh</string>
+  <string name="error_fetching_nearby_places">Lỗi khi lấy các nơi lân cận.</string>
 </resources>

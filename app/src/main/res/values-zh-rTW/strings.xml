@@ -283,4 +283,6 @@
   <string name="share_app_title">分享應用程式</string>
   <string name="share_coordinates_not_present">當選擇圖片時未指定座標</string>
   <string name="error_fetching_nearby_places">索取附近地點時出錯。</string>
+  <string name="menu_set_wallpaper">設定桌布</string>
+  <string name="wallpaper_set_successfully">桌布設定成功！</string>
 </resources>
