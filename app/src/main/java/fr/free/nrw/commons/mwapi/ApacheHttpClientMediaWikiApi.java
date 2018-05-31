@@ -615,6 +615,10 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
         });
     }
 
+    /**
+     * Checks to see if a user is currently blocked
+     * @return whether or not the user is blocked
+     */
     @Override
     public boolean isUserBlocked() {
         boolean userBlocked = false;
@@ -626,6 +630,7 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
                     .param("uiprop", "blockinfo")
                     .get();
             if(result != null) {
+                // the blockexpiry field will only be present if the user is currently blocked
                 userBlocked = !result.getString("/api/query/userinfo/@blockexpiry").isEmpty();
             }
         } catch (Exception e) {
