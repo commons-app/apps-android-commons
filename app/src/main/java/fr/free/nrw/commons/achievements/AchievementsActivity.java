@@ -254,7 +254,7 @@ public class AchievementsActivity extends NavigationBaseActivity {
         String levelUpInfoString = getString(R.string.level);
         levelUpInfoString += " " + Integer.toString(levelInfo.getLevel());
         levelNumber.setText(levelUpInfoString);
-        final ContextThemeWrapper wrapper = new ContextThemeWrapper(this, R.style.LevelOne);
+        final ContextThemeWrapper wrapper = new ContextThemeWrapper(this, levelInfo.getLevelStyle());
         Drawable drawable = ResourcesCompat.getDrawable(getResources(), R.drawable.badge, wrapper.getTheme());
         Bitmap bitmap = drawableToBitmap(drawable);
         BitmapDrawable bitmapImage = writeOnDrawable(bitmap, Integer.toString(levelInfo.getLevel()));

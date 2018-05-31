@@ -63,4 +63,28 @@
         <item name="centerRegion">#bc6853</item>
     </style>
 
+    <style name="LevelTwo">
+        <item name="boundary">#a8a8c0</item>
+        <item name="camera">#604890</item>
+        <item name="centerRegion">#6060a8</item>
+    </style>
+
+    <style name="LevelThree">
+        <item name="boundary">#90c0a8</item>
+        <item name="camera">#487878</item>
+        <item name="centerRegion">#48a8a8</item>
+    </style>
+
+    <style name="LevelFour">
+        <item name="boundary">#ffc078</item>
+        <item name="camera">#d87818</item>
+        <item name="centerRegion">#f09018</item>
+    </style>
+
+    <style name="LevelFive">
+        <item name="boundary">#c0a8c0</item>
+        <item name="camera">#784878</item>
+        <item name="centerRegion">#906078</item>
+    </style>
+
 </resources>

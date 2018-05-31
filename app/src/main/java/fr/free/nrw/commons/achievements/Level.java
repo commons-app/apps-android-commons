@@ -8,6 +8,7 @@ public class Level {
     private int maximumUniqueImagesUsed;
     private int revertRate;
     private int level;
+    private int levelStyle;
 
     public int getMaximumUniqueImagesUsed() {
         return maximumUniqueImagesUsed;
@@ -32,4 +33,13 @@ public class Level {
     public void setLevel(int level) {
         this.level = level;
     }
+
+    public void setLevelStyle(int levelStyle) {
+        this.levelStyle = levelStyle;
+    }
+
+    public int getLevelStyle() {
+        return levelStyle;
+    }
+
 }
