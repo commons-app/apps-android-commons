@@ -4,8 +4,16 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Paint;
+import android.graphics.Rect;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.v4.content.res.ResourcesCompat;
 import android.support.v7.widget.Toolbar;
 import android.util.DisplayMetrics;
 import android.util.Log;
@@ -112,7 +120,10 @@ public class AchievementsActivity extends NavigationBaseActivity {
                 imageView.getLayoutParams();
         params.height = (int) (height * BADGE_IMAGE_HEIGHT_RATIO);
         params.width = (int) (width * BADGE_IMAGE_WIDTH_RATIO);
-        imageView.setImageResource(R.drawable.badge);
+        Drawable drawable = getResources().getDrawable(R.drawable.badge);
+        Bitmap bitmap = drawableToBitmap(drawable);
+        BitmapDrawable bitmapImage = writeOnDrawable(bitmap, "LEVEL 1");
+        imageView.setImageDrawable(bitmapImage);
         imageView.requestLayout();
 
         setSupportActionBar(toolbar);
@@ -285,6 +296,36 @@ public class AchievementsActivity extends NavigationBaseActivity {
         layoutStatistics.setVisibility(View.INVISIBLE);
         imageView.setVisibility(View.INVISIBLE);
         levelNumber.setVisibility(View.INVISIBLE);
+    }
+
+    public BitmapDrawable writeOnDrawable(Bitmap bm, String text){
+        Bitmap.Config config = bm.getConfig();
+        if(config == null){
+            config = Bitmap.Config.ARGB_8888;
+        }
+        Bitmap bitmap = Bitmap.createBitmap(bm.getWidth(),bm.getHeight(),config);
+        Canvas canvas = new Canvas(bitmap);
+        canvas.drawBitmap(bm, 0, 0, null);
+        Paint paint = new Paint(Paint.ANTI_ALIAS_FLAG);
+        paint.setStyle(Paint.Style.FILL);
+        paint.setColor(Color.BLUE);
+        paint.setTextSize(100);
+        Rect rectText = new Rect();
+        paint.getTextBounds(text,0, text.length(),rectText);
+        canvas.drawText(text, 0, rectText.height(), paint);
+        return new BitmapDrawable(getResources(), bitmap);
+    }
+
+    public static Bitmap drawableToBitmap (Drawable drawable) {
+        if (drawable instanceof BitmapDrawable) {
+            return ((BitmapDrawable)drawable).getBitmap();
+        }
+        Bitmap bitmap = Bitmap.createBitmap(drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight(), Bitmap.Config.ARGB_8888);
+        Canvas canvas = new Canvas(bitmap);
+        drawable.setBounds(0, 0, canvas.getWidth(), canvas.getHeight());
+        drawable.draw(canvas);
+
+        return bitmap;
     }
 
 }
