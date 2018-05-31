@@ -255,7 +255,7 @@ public class AchievementsActivity extends NavigationBaseActivity {
         levelNumber.setText(levelUpInfoString);
         Drawable drawable = getResources().getDrawable(R.drawable.badge);
         Bitmap bitmap = drawableToBitmap(drawable);
-        BitmapDrawable bitmapImage = writeOnDrawable(bitmap, levelUpInfoString);
+        BitmapDrawable bitmapImage = writeOnDrawable(bitmap, Integer.toString(levelInfo.getLevel()));
         imageView.setImageDrawable(bitmapImage);
     }
 
@@ -318,11 +318,11 @@ public class AchievementsActivity extends NavigationBaseActivity {
         Paint paint = new Paint(Paint.ANTI_ALIAS_FLAG);
         paint.setStyle(Paint.Style.FILL);
         paint.setColor(Color.WHITE);
-        paint.setTextSize(300);
+        paint.setTextSize(Math.round(canvas.getHeight()/2));
         paint.setTextAlign(Paint.Align.CENTER);
         Rect rectText = new Rect();
         paint.getTextBounds(text,0, text.length(),rectText);
-        canvas.drawText(text, Math.round(canvas.getWidth()/2),Math.round(canvas.getHeight()/1.75), paint);
+        canvas.drawText(text, Math.round(canvas.getWidth()/2),Math.round(canvas.getHeight()/1.35), paint);
         return new BitmapDrawable(getResources(), bitmap);
     }
 
