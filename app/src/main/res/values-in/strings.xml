@@ -46,8 +46,6 @@
   <string name="share_title_hint">Judul</string>
   <string name="share_description_hint">Deskripsi</string>
   <string name="login_failed_network">Tidak dapat login - kesalahan pada jaringan</string>
-  <string name="login_failed_username">Tidak dapat masuk log - harap periksa nama pengguna Anda</string>
-  <string name="login_failed_password">Tidak dapat masuk log - harap periksa kata sandi Anda</string>
   <string name="login_failed_throttled" fuzzy="true">Terlalu banyak usaha yang gagal. Harap coba lagi dalam beberapa menit</string>
   <string name="login_failed_blocked">Maaf, pengguna ini telah diblokir di Commons</string>
   <string name="login_failed_generic">Gagal masuk log</string>

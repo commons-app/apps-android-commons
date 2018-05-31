@@ -13,14 +13,10 @@ import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;
-import fr.free.nrw.commons.BuildConfig;
-import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.auth.AccountUtil;
 import fr.free.nrw.commons.auth.SessionManager;
-import fr.free.nrw.commons.caching.CacheController;
 import fr.free.nrw.commons.data.DBOpenHelper;
 import fr.free.nrw.commons.location.LocationServiceManager;
-import fr.free.nrw.commons.mwapi.ApacheHttpClientMediaWikiApi;
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
 import fr.free.nrw.commons.nearby.NearbyPlaces;
 import fr.free.nrw.commons.upload.UploadController;
@@ -35,7 +31,6 @@ import static fr.free.nrw.commons.modifications.ModificationsContentProvider.MOD
 @SuppressWarnings({"WeakerAccess", "unused"})
 public class CommonsApplicationModule {
     public static final String CATEGORY_AUTHORITY = "fr.free.nrw.commons.categories.contentprovider";
-    public static final long OK_HTTP_CACHE_SIZE = 10 * 1024 * 1024;
 
     private Context applicationContext;
 
@@ -142,12 +137,6 @@ public class CommonsApplicationModule {
     @Singleton
     public Gson provideGson() {
         return new Gson();
-    }
-
-    @Provides
-    @Singleton
-    public CacheController provideCacheController() {
-        return new CacheController();
     }
 
     @Provides

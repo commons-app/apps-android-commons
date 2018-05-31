@@ -58,8 +58,7 @@
   <string name="add_title_toast">נא לתת כותרת לקובץ הזה</string>
   <string name="share_description_hint">תיאור</string>
   <string name="login_failed_network">לא ניתן להיכנס – כשל בתקשורת</string>
-  <string name="login_failed_username">לא ניתן להיכנס – נא לבדוק את שם המשתמש שלך</string>
-  <string name="login_failed_password">לא ניתן להיכנס – נא לבדוק את הססמה שלך</string>
+  <string name="login_failed_wrong_credentials">לא ניתן להיכנס לחשבון – נא לבדוק את שם המשתמש ואת הסיסמה</string>
   <string name="login_failed_throttled">יותר מדי ניסיונות כושלים להיכנס. נא לנסות שוב בעוד מספר דקות.</string>
   <string name="login_failed_blocked">סליחה, החשבון הזה חסום בוויקישיתוף</string>
   <string name="login_failed_2fa_needed">יש לספק את קוד האימות הדו־שלבי שלך.</string>

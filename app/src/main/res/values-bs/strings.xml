@@ -43,8 +43,6 @@
   <string name="share_title_hint">Naslov</string>
   <string name="share_description_hint">Opis</string>
   <string name="login_failed_network">Ne mogu Vas prijaviti – mreža ne radi</string>
-  <string name="login_failed_username">Ne mogu Vas prijaviti – provjerite svoje korisničko ime</string>
-  <string name="login_failed_password">Ne mogu Vas prijaviti – provjerite svoje lozinku</string>
   <string name="login_failed_throttled">Napravili ste previše grešaka u prijavi. Pokušajte ponovo za nekoliko minuta.</string>
   <string name="login_failed_blocked">Žao nam je, korisnik je blokiran na Commonsu</string>
   <string name="login_failed_2fa_needed">Morate upisati kôd za potvrdu u 2 koraka.</string>

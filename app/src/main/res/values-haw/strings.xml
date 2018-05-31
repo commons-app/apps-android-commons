@@ -34,8 +34,6 @@
   <string name="share_title_hint">Poʻo Inoa</string>
   <string name="share_description_hint">Hōʻike ʻAno</string>
   <string name="login_failed_network">Hiki ʻole ke ʻeʻe - hāʻule pūnaewele</string>
-  <string name="login_failed_username">Hiki ʻole ke ʻeʻe - hōʻoiaʻiʻo i kāu inoa mea hoʻohana ke ʻoluʻolu</string>
-  <string name="login_failed_password">Hiki ʻole ke ʻeʻe - hōʻoiaʻiʻo i kāu ʻōlelo hūnā ke ʻoluʻolu</string>
   <string name="login_failed_throttled" fuzzy="true">Hoʻāʻo ʻeʻe ʻole he nui kā. E ʻoluʻolu, e hana hou i ka wā hou aku</string>
   <string name="login_failed_blocked">E kala mai, ua pale ʻia kēia mea hoʻohana ma ke Kahilehulehu</string>
   <string name="login_failed_generic">Hāʻule ka ʻeʻena</string>

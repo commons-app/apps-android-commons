@@ -51,8 +51,6 @@
   <string name="add_title_toast">Prosím, dajte tomuto súboru názov</string>
   <string name="share_description_hint">Opis</string>
   <string name="login_failed_network">prihlásenie zlyhalo - zlyhanie siete</string>
-  <string name="login_failed_username">Prihlásenie zlyhalo - skontrolujte vaše používateľské meno</string>
-  <string name="login_failed_password">Prihlásenie zlyhalo - skontrolujte vaše heslo</string>
   <string name="login_failed_throttled">Príliš veľa neúspešných pokusov. Skúste to znova o niekoľko minút.</string>
   <string name="login_failed_blocked">Ospravedlňujeme sa, tento užívateľ bol na Commons zablokovaný</string>
   <string name="login_failed_generic">Prihlásenie zlyhalo</string>

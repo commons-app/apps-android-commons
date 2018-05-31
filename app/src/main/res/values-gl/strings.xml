@@ -55,8 +55,6 @@
   <string name="add_title_toast">Por favor, proporcione un título para este ficheiro</string>
   <string name="share_description_hint">Descrición</string>
   <string name="login_failed_network">Erro ao acceder ao sistema: Fallou a rede</string>
-  <string name="login_failed_username">Erro ao acceder ao sistema: Comprobe o seu nome de usuario</string>
-  <string name="login_failed_password">Erro ao acceder ao sistema: Comprobe o seu contrasinal</string>
   <string name="login_failed_throttled">Demasiados intentos incorrectos. Inténteo de novo nuns minutos.</string>
   <string name="login_failed_blocked">Sentímolo, este usuario está bloqueado en Commons</string>
   <string name="login_failed_2fa_needed">Debe proporcionar o seu código de autenticación de dous factores.</string>

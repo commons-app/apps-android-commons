@@ -1,5 +1,4 @@
 -dontobfuscate
 -keep class org.apache.http.** { *; }
 -dontwarn org.apache.http.**
--keep class fr.free.nrw.commons.upload.MwVolleyApi$Page {*;}
 -keep class android.support.v7.widget.ShareActionProvider { *; }

@@ -65,8 +65,7 @@
   <string name="add_title_toast">Veuillez donner un titre à ce fichier</string>
   <string name="share_description_hint">Description</string>
   <string name="login_failed_network">Impossible de se connecter — panne de réseau</string>
-  <string name="login_failed_username">Impossible de se connecter — veuillez vérifier votre nom d’utilisateur</string>
-  <string name="login_failed_password">Impossible de se connecter — veuillez vérifier votre mot de passe</string>
+  <string name="login_failed_wrong_credentials">Impossible de se connecter — veuillez vérifier votre nom d’utilisateur et votre mot de passe</string>
   <string name="login_failed_throttled">Trop de tentatives infructueuses. Veuillez réessayer dans quelques minutes.</string>
   <string name="login_failed_blocked">Désolé, cet utilisateur a été bloqué dans Commons</string>
   <string name="login_failed_2fa_needed">Vous devez fournir votre code d’authentification à deux facteurs.</string>

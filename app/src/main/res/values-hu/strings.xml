@@ -59,8 +59,6 @@
   <string name="add_title_toast">Kérlek, adj címet a fájlnak</string>
   <string name="share_description_hint">Leírás</string>
   <string name="login_failed_network">Nem lehet bejelentkezni - hálózati hiba</string>
-  <string name="login_failed_username">Nem lehet bejelentkezni - ellenőrizd a felhasználóneved</string>
-  <string name="login_failed_password">Nem lehet bejelentkezni - ellenőrizd a jelszavad</string>
   <string name="login_failed_throttled">Túl sok sikertelen próbálkozás. Próbálkozz újra pár perc múlva.</string>
   <string name="login_failed_blocked">Sajnáljuk, ezt a felhasználót blokkolták a Commonson</string>
   <string name="login_failed_2fa_needed">Meg kell adnia a kétlépcsős hitelesítő kódját.</string>

@@ -35,8 +35,6 @@
   <string name="share_title_hint">Titel</string>
   <string name="share_description_hint">Beschreibung</string>
   <string name="login_failed_network">Oonmeldung fehlgeschlooht – Netzwerrekfehler</string>
-  <string name="login_failed_username">Oonmeldung fehlgeschlooht – Bittschön Benutzernoome üwerprüfe</string>
-  <string name="login_failed_password">Oonmeldung fehlgeschlooht – Bittschön Passwort üwerprüfe</string>
   <string name="login_failed_throttled" fuzzy="true">Zu viele erfollichlose Versuche. Bittschön in en poor Minute wieder erneit versuche.</string>
   <string name="login_failed_blocked">Der Benutzer woard leider uff Commons gesperrt</string>
   <string name="login_failed_generic">Oonmeldung fehlgeschlooht</string>

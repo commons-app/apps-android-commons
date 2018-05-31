@@ -44,8 +44,6 @@
   <string name="share_title_hint">Titlu</string>
   <string name="share_description_hint">Descriere</string>
   <string name="login_failed_network">Autentificare nereușită – defecțiune de rețea</string>
-  <string name="login_failed_username">Autentificare nereușită – verificați-vă numele de utilizator</string>
-  <string name="login_failed_password">Autentificare nereușită – verificați-vă parola</string>
   <string name="login_failed_throttled">Prea multe încercări nereușite. Încercați din nou peste câteva minute.</string>
   <string name="login_failed_blocked">Ne pare rău, acest utilizator a fost blocat la Commons</string>
   <string name="login_failed_2fa_needed">Trebuie să introduceți tokenul de autentificare.</string>
