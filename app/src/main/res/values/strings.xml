@@ -284,4 +284,6 @@
   <string name="share_coordinates_not_present">Coordinates were not specified during image selection</string>
   <string name="error_fetching_nearby_places">Error fetching nearby places.</string>
 
+  <string name="successful_wikidata_edit">Image successfully added to %1$s on Wikidata!</string>
+  <string name="wikidata_edit_failure">Failed to update corresponding wiki data entity!</string>
 </resources>

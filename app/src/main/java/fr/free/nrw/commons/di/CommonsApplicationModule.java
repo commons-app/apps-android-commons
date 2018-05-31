@@ -24,6 +24,8 @@ import fr.free.nrw.commons.mwapi.ApacheHttpClientMediaWikiApi;
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
 import fr.free.nrw.commons.nearby.NearbyPlaces;
 import fr.free.nrw.commons.upload.UploadController;
+import fr.free.nrw.commons.wikidata.WikidataEditListener;
+import fr.free.nrw.commons.wikidata.WikidataEditListenerImpl;
 
 import static android.content.Context.MODE_PRIVATE;
 import static fr.free.nrw.commons.contributions.ContributionsContentProvider.CONTRIBUTION_AUTHORITY;
@@ -123,7 +125,7 @@ public class CommonsApplicationModule {
                                             @Named("default_preferences") SharedPreferences defaultPreferences,
                                             @Named("category_prefs") SharedPreferences categoryPrefs,
                                             Gson gson) {
-        return new ApacheHttpClientMediaWikiApi(context, BuildConfig.WIKIMEDIA_API_HOST, defaultPreferences, categoryPrefs, gson);
+        return new ApacheHttpClientMediaWikiApi(context, BuildConfig.WIKIMEDIA_API_HOST, BuildConfig.WIKIDATA_API_HOST, defaultPreferences, categoryPrefs, gson);
     }
 
     @Provides
@@ -164,5 +166,11 @@ public class CommonsApplicationModule {
     @Singleton
     public LruCache<String, String> provideLruCache() {
         return new LruCache<>(1024);
+    }
+
+    @Provides
+    @Singleton
+    public WikidataEditListener provideWikidataEditListener() {
+        return new WikidataEditListenerImpl();
     }
 }
