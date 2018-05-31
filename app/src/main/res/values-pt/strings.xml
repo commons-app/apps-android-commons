@@ -283,4 +283,6 @@
   <string name="share_app_title">Partilhar aplicação</string>
   <string name="share_coordinates_not_present">Não foram especificadas coordenadas durante a seleção da imagem</string>
   <string name="error_fetching_nearby_places">Erro ao localizar locais próximos.</string>
+  <string name="menu_set_wallpaper">Definir imagem de fundo</string>
+  <string name="wallpaper_set_successfully">Imagem de fundo definida!</string>
 </resources>

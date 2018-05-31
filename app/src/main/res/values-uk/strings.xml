@@ -289,4 +289,6 @@
   <string name="share_app_title">Поділитися програмою</string>
   <string name="share_coordinates_not_present">Під час вибору зображення не були вказані координати</string>
   <string name="error_fetching_nearby_places">Помилка отримання місць поблизу.</string>
+  <string name="menu_set_wallpaper">Поставити шпалерами екрану</string>
+  <string name="wallpaper_set_successfully">Шпалери екрану виставлено успішно!</string>
 </resources>
