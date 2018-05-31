@@ -139,7 +139,6 @@ public class ShareActivity
 
     private Uri mediaUri;
     private Contribution contribution;
-    private SimpleDraweeView backgroundImageView;
     private FloatingActionButton maps_fragment;
 
     private boolean cacheFound;
@@ -163,9 +162,6 @@ public class ShareActivity
 
     private Animator CurrentAnimator;
     private long ShortAnimationDuration;
-    private FloatingActionButton zoomInButton;
-    private FloatingActionButton zoomOutButton;
-    private FloatingActionButton mainFab;
     private boolean isFABOpen = false;
 
           //Had to make them class variables, to extract out the click listeners, also I see no harm in this
