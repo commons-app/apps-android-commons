@@ -53,6 +53,10 @@ public abstract class AuthenticatedActivity extends NavigationBaseActivity {
 
     protected abstract void onAuthFailure();
 
+    /**
+     * Makes API call to check if user is blocked. If the user is blocked, a snackbar
+     * is created to notify the user
+     */
     protected void showBlockStatus()
     {
         Observable.fromCallable(() -> mediaWikiApi.isUserBlocked())
