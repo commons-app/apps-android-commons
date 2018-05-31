@@ -23,4 +23,10 @@
         <attr name="drawableEnd" format="reference"/>
         <attr name="drawableBottom" format="reference"/>
     </declare-styleable>
+
+    <declare-styleable name="Badge">
+        <attr name="boundary" format="color"/>
+        <attr name="camera" format="color"/>
+        <attr name="centerRegion" format="color"/>
+    </declare-styleable>
 </resources>

@@ -17,6 +17,7 @@ import android.support.v4.content.res.ResourcesCompat;
 import android.support.v7.widget.Toolbar;
 import android.util.DisplayMetrics;
 import android.util.Log;
+import android.view.ContextThemeWrapper;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -253,7 +254,8 @@ public class AchievementsActivity extends NavigationBaseActivity {
         String levelUpInfoString = getString(R.string.level);
         levelUpInfoString += " " + Integer.toString(levelInfo.getLevel());
         levelNumber.setText(levelUpInfoString);
-        Drawable drawable = getResources().getDrawable(R.drawable.badge);
+        final ContextThemeWrapper wrapper = new ContextThemeWrapper(this, R.style.LevelOne);
+        Drawable drawable = ResourcesCompat.getDrawable(getResources(), R.drawable.badge, wrapper.getTheme());
         Bitmap bitmap = drawableToBitmap(drawable);
         BitmapDrawable bitmapImage = writeOnDrawable(bitmap, Integer.toString(levelInfo.getLevel()));
         imageView.setImageDrawable(bitmapImage);

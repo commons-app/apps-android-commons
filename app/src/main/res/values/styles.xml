@@ -57,4 +57,10 @@
         <item name="android:background">@android:color/transparent</item>
     </style>
 
+    <style name="LevelOne">
+        <item name="boundary">#ddb4aa</item>
+        <item name="camera">#ae403a</item>
+        <item name="centerRegion">#bc6853</item>
+    </style>
+
 </resources>
