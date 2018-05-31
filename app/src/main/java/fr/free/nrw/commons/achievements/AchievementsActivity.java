@@ -112,7 +112,7 @@ public class AchievementsActivity extends NavigationBaseActivity {
                 imageView.getLayoutParams();
         params.height = (int) (height * BADGE_IMAGE_HEIGHT_RATIO);
         params.width = (int) (width * BADGE_IMAGE_WIDTH_RATIO);
-        imageView.setImageResource(R.drawable.featured);
+        imageView.setImageResource(R.drawable.badge);
         imageView.requestLayout();
 
         setSupportActionBar(toolbar);
