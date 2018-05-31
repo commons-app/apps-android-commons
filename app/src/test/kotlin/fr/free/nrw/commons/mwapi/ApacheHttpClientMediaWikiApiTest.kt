@@ -223,6 +223,60 @@ class ApacheHttpClientMediaWikiApiTest {
         assertEquals(23, testObserver.values()[0])
     }
 
+    @Test
+    fun isUserBlockedForInfinitelyBlockedUser() {
+        server.enqueue(MockResponse().setBody("<?xml version=\"1.0\"?><api><query><userinfo id=\"1000\" name=\"testusername\" blockid=\"3000\" blockedby=\"blockerusername\" blockedbyid=\"1001\" blockreason=\"testing\" blockedtimestamp=\"2018-05-24T15:32:09Z\" blockexpiry=\"infinite\"></userinfo></query></api>"))
+
+        val result = testObject.isUserBlocked();
+
+        assertBasicRequestParameters(server, "GET").let { userBlockedRequest ->
+            parseQueryParams(userBlockedRequest).let { body ->
+                assertEquals("xml", body["format"])
+                assertEquals("query", body["action"])
+                assertEquals("userinfo", body["meta"])
+                assertEquals("blockinfo", body["uiprop"])
+            }
+        }
+
+        assertTrue(result)
+    }
+
+    @Test
+    fun isUserBlockedForTimeBlockedUser() {
+        server.enqueue(MockResponse().setBody("<?xml version=\"1.0\"?><api><query><userinfo id=\"1000\" name=\"testusername\" blockid=\"3000\" blockedby=\"blockerusername\" blockedbyid=\"1001\" blockreason=\"testing\" blockedtimestamp=\"2018-05-24T15:32:09Z\" blockexpiry=\"2014-09-18T12:34:56Z\"></userinfo></query></api>"))
+
+        val result = testObject.isUserBlocked();
+
+        assertBasicRequestParameters(server, "GET").let { userBlockedRequest ->
+            parseQueryParams(userBlockedRequest).let { body ->
+                assertEquals("xml", body["format"])
+                assertEquals("query", body["action"])
+                assertEquals("userinfo", body["meta"])
+                assertEquals("blockinfo", body["uiprop"])
+            }
+        }
+
+        assertTrue(result)
+    }
+
+    @Test
+    fun isUserBlockedForNotBlockedUser() {
+        server.enqueue(MockResponse().setBody("<?xml version=\"1.0\"?><api><query><userinfo id=\"1000\" name=\"testusername\"></userinfo></query></api>"))
+
+        val result = testObject.isUserBlocked();
+
+        assertBasicRequestParameters(server, "GET").let { userBlockedRequest ->
+            parseQueryParams(userBlockedRequest).let { body ->
+                assertEquals("xml", body["format"])
+                assertEquals("query", body["action"])
+                assertEquals("userinfo", body["meta"])
+                assertEquals("blockinfo", body["uiprop"])
+            }
+        }
+
+        assertFalse(result)
+    }
+
     private fun assertBasicRequestParameters(server: MockWebServer, method: String): RecordedRequest = server.takeRequest().let {
         assertEquals("/", it.requestUrl.encodedPath())
         assertEquals(method, it.method)
