@@ -120,10 +120,7 @@ public class AchievementsActivity extends NavigationBaseActivity {
                 imageView.getLayoutParams();
         params.height = (int) (height * BADGE_IMAGE_HEIGHT_RATIO);
         params.width = (int) (width * BADGE_IMAGE_WIDTH_RATIO);
-        Drawable drawable = getResources().getDrawable(R.drawable.badge);
-        Bitmap bitmap = drawableToBitmap(drawable);
-        BitmapDrawable bitmapImage = writeOnDrawable(bitmap, "LEVEL 1");
-        imageView.setImageDrawable(bitmapImage);
+        imageView.setImageResource(R.drawable.badge);
         imageView.requestLayout();
 
         setSupportActionBar(toolbar);
@@ -243,6 +240,7 @@ public class AchievementsActivity extends NavigationBaseActivity {
 
     /**
      * Used the inflate the fetched statistics of the images uploaded by user
+     * and assign badge and level
      * @param achievements
      */
     private void inflateAchievements( Achievements achievements ){
@@ -252,8 +250,13 @@ public class AchievementsActivity extends NavigationBaseActivity {
         imagesUsedByWikiProgessbar.setProgressTextFormatPattern
                 (achievements.getUniqueUsedImages() + "/" + levelInfo.getMaximumUniqueImagesUsed());
         imagesFeatured.setText(Integer.toString(achievements.getFeaturedImages()));
-        levelNumber.setText(R.string.level);
-        levelNumber.append( "  " + Integer.toString(levelInfo.getLevel()));
+        String levelUpInfoString = getString(R.string.level);
+        levelUpInfoString += " " + Integer.toString(levelInfo.getLevel());
+        levelNumber.setText(levelUpInfoString);
+        Drawable drawable = getResources().getDrawable(R.drawable.badge);
+        Bitmap bitmap = drawableToBitmap(drawable);
+        BitmapDrawable bitmapImage = writeOnDrawable(bitmap, levelUpInfoString);
+        imageView.setImageDrawable(bitmapImage);
     }
 
     /**
@@ -298,6 +301,12 @@ public class AchievementsActivity extends NavigationBaseActivity {
         levelNumber.setVisibility(View.INVISIBLE);
     }
 
+    /**
+     *  write level Number on the badge
+     * @param bm
+     * @param text
+     * @return
+     */
     public BitmapDrawable writeOnDrawable(Bitmap bm, String text){
         Bitmap.Config config = bm.getConfig();
         if(config == null){
@@ -308,14 +317,20 @@ public class AchievementsActivity extends NavigationBaseActivity {
         canvas.drawBitmap(bm, 0, 0, null);
         Paint paint = new Paint(Paint.ANTI_ALIAS_FLAG);
         paint.setStyle(Paint.Style.FILL);
-        paint.setColor(Color.BLUE);
-        paint.setTextSize(100);
+        paint.setColor(Color.WHITE);
+        paint.setTextSize(300);
+        paint.setTextAlign(Paint.Align.CENTER);
         Rect rectText = new Rect();
         paint.getTextBounds(text,0, text.length(),rectText);
-        canvas.drawText(text, 0, rectText.height(), paint);
+        canvas.drawText(text, Math.round(canvas.getWidth()/2),Math.round(canvas.getHeight()/1.75), paint);
         return new BitmapDrawable(getResources(), bitmap);
     }
 
+    /**
+     * Convert Drawable to bitmap
+     * @param drawable
+     * @return
+     */
     public static Bitmap drawableToBitmap (Drawable drawable) {
         if (drawable instanceof BitmapDrawable) {
             return ((BitmapDrawable)drawable).getBitmap();
