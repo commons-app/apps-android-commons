@@ -156,9 +156,9 @@ public abstract class NavigationBaseActivity extends BaseActivity
                 drawerLayout.closeDrawer(navigationView);
                 NotificationActivity.startYourself(this);
                 return true;
-            case R.id.action_featured_images:
+            case R.id.action_explore:
                 drawerLayout.closeDrawer(navigationView);
-                CategoryImagesActivity.startYourself(this, getString(R.string.title_activity_featured_images), FEATURED_IMAGES_CATEGORY);
+                CategoryImagesActivity.startYourself(this, getString(R.string.title_activity_explore), FEATURED_IMAGES_CATEGORY);
                 return true;
             default:
                 Timber.e("Unknown option [%s] selected from the navigation menu", itemId);
