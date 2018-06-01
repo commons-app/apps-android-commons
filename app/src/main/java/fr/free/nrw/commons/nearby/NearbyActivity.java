@@ -5,6 +5,10 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.PackageManager;
+import android.hardware.Sensor;
+import android.hardware.SensorEvent;
+import android.hardware.SensorEventListener;
+import android.hardware.SensorManager;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -12,6 +16,7 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.BottomSheetBehavior;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AlertDialog;
+import android.view.Display;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -33,6 +38,7 @@ import fr.free.nrw.commons.location.LatLng;
 import fr.free.nrw.commons.location.LocationServiceManager;
 import fr.free.nrw.commons.location.LocationUpdateListener;
 import fr.free.nrw.commons.theme.NavigationBaseActivity;
+import fr.free.nrw.commons.utils.CompassUtils;
 import fr.free.nrw.commons.utils.NetworkUtils;
 import fr.free.nrw.commons.utils.UriSerializer;
 import fr.free.nrw.commons.utils.ViewUtil;
@@ -43,7 +49,7 @@ import io.reactivex.schedulers.Schedulers;
 import timber.log.Timber;
 
 
-public class NearbyActivity extends NavigationBaseActivity implements LocationUpdateListener {
+public class NearbyActivity extends NavigationBaseActivity implements LocationUpdateListener, SensorEventListener {
 
     private static final int LOCATION_REQUEST = 1;
 
@@ -77,6 +83,13 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
     private BroadcastReceiver broadcastReceiver;
     private LatLng lastKnownLocation;
 
+    private int magneticAccuracy;
+    private int accelerometerAccuracy;
+    private Sensor magneticSensor;
+    private Sensor accelerometerSensor;
+    private float magneticValues[];
+    private float accelerometerValues[];
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -84,6 +97,10 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
         ButterKnife.bind(this);
         resumeFragment();
         bundle = new Bundle();
+
+        SensorManager sensorManager = (SensorManager) this.getSystemService(SENSOR_SERVICE);
+        magneticSensor = sensorManager.getDefaultSensor(Sensor.TYPE_MAGNETIC_FIELD);
+        accelerometerSensor = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
 
         initBottomSheetBehaviour();
         initDrawer();
@@ -267,6 +284,10 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
         super.onStart();
         locationManager.addLocationListener(this);
         locationManager.registerLocationManager();
+
+        SensorManager sensorManager = (SensorManager) this.getSystemService(SENSOR_SERVICE);
+        sensorManager.registerListener(this, accelerometerSensor, SensorManager.SENSOR_DELAY_UI);
+        sensorManager.registerListener(this, magneticSensor, SensorManager.SENSOR_DELAY_UI);
     }
 
     @Override
@@ -556,5 +577,41 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
 
     public void prepareViewsForSheetPosition(int bottomSheetState) {
         // TODO
+    }
+
+
+    @Override
+    public void onSensorChanged(SensorEvent sensorEvent) {
+
+        // while accuracy should indicate reliability of data from sensor
+        // i found that my device never sends accuracy for accelerometer sensor
+        // therefore i disabled accuracy check for now
+        if (sensorEvent.sensor.getType() == Sensor.TYPE_MAGNETIC_FIELD) {
+                //&& (magneticAccuracy == SensorManager.SENSOR_STATUS_ACCURACY_HIGH
+                //|| magneticAccuracy == SensorManager.SENSOR_STATUS_ACCURACY_MEDIUM)) {
+                magneticValues = sensorEvent.values;
+        }
+
+        if (sensorEvent.sensor.getType() == Sensor.TYPE_ACCELEROMETER) {
+                //&& (accelerometerAccuracy == SensorManager.SENSOR_STATUS_ACCURACY_HIGH
+                //|| accelerometerAccuracy == SensorManager.SENSOR_STATUS_ACCURACY_MEDIUM)) {
+                accelerometerValues = sensorEvent.values;
+        }
+
+        if (magneticValues != null && accelerometerValues != null) {
+            Display display = this.getWindowManager().getDefaultDisplay();
+            Float azimuth = CompassUtils.getDeviceOrientation(display.getRotation(), accelerometerValues, magneticValues);
+        }
+    }
+
+    @Override
+    public void onAccuracyChanged(Sensor sensor, int accuracy) {
+        if (sensor.getType() == Sensor.TYPE_ACCELEROMETER) {
+            accelerometerAccuracy = accuracy;
+        }
+
+        if (sensor.getType() == Sensor.TYPE_MAGNETIC_FIELD) {
+            magneticAccuracy = accuracy;
+        }
     }
 }
