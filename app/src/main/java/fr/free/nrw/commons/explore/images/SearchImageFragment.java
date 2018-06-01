@@ -78,6 +78,7 @@ public class SearchImageFragment extends CommonsDaggerSupportFragment {
      * Clearing imageAdapter every time new keyword is searched so that user can see only new results
      */
     public void updateImageList(String query) {
+        this.query = query;
         if(!NetworkUtils.isInternetConnectionEstablished(getContext())) {
             handleNoInternet();
             return;
