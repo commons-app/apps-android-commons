@@ -280,4 +280,6 @@
   <string name="share_app_title">Dela app</string>
   <string name="share_coordinates_not_present">Koordinater specificerades inte vid bildvalet</string>
   <string name="error_fetching_nearby_places">Fel uppstod när platser i närheten hämtades.</string>
+  <string name="menu_set_wallpaper">Ange som bakgrundsbild</string>
+  <string name="wallpaper_set_successfully">Bakgrundsbilden ändrades!</string>
 </resources>
