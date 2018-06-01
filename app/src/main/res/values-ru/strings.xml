@@ -290,4 +290,6 @@
   <string name="share_app_title">Поделиться приложением</string>
   <string name="share_coordinates_not_present">Во время выбора изображения не были указаны координаты</string>
   <string name="error_fetching_nearby_places">Ошибка получения мест поблизости</string>
+  <string name="menu_set_wallpaper">Сделать фоновой заставкой</string>
+  <string name="wallpaper_set_successfully">Фоновая заставка успешно установлена!</string>
 </resources>

@@ -16,6 +16,10 @@
         android:title="@string/menu_download"
         app:showAsAction="never" />
     <item
+        android:id="@+id/menu_set_as_wallpaper"
+        android:title="@string/menu_set_wallpaper"
+        app:showAsAction="never" />
+    <item
         android:id="@+id/menu_retry_current_image"
         android:enabled="false"
         android:icon="@drawable/ic_undo_white_24dp"

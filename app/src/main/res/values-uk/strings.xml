@@ -58,6 +58,7 @@
   <string name="add_title_toast">Будь ласка, вкажіть назву цього файлу</string>
   <string name="share_description_hint">Опис</string>
   <string name="login_failed_network">Неможливо увійти — збій у мережі</string>
+  <string name="login_failed_wrong_credentials">Неможливо увійти — будь ласка перевірте ім\'я користувача та пароль</string>
   <string name="login_failed_throttled">Надто багато невдалих спроб. Будь ласка, спробуйте знову через кілька хвилин.</string>
   <string name="login_failed_blocked">Вибачте, цього користувача було заблоковано на Вікісховищі</string>
   <string name="login_failed_2fa_needed">Ви повинні надати код двофакторної автентифікації.</string>
@@ -288,4 +289,6 @@
   <string name="share_app_title">Поділитися програмою</string>
   <string name="share_coordinates_not_present">Під час вибору зображення не були вказані координати</string>
   <string name="error_fetching_nearby_places">Помилка отримання місць поблизу.</string>
+  <string name="menu_set_wallpaper">Поставити шпалерами екрану</string>
+  <string name="wallpaper_set_successfully">Шпалери екрану виставлено успішно!</string>
 </resources>
