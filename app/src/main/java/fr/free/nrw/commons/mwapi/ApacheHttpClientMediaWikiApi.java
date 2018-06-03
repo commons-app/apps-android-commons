@@ -425,6 +425,12 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
         return null;
     }
 
+    /**
+     * Adds the wikimedia-commons-app tag to the edits made on wikidata
+     * @param revisionId
+     * @return
+     * @throws IOException
+     */
     @Nullable
     @Override
     public boolean addWikidataEditTag(String revisionId) throws IOException {

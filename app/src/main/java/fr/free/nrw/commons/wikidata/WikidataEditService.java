@@ -18,6 +18,11 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 import timber.log.Timber;
 
+/**
+ * This class is meant to handle the Wikidata edits made through the app
+ * It will talk with MediaWikiApi to make necessary API calls, log the edits and fire listeners
+ * on successful edits
+ */
 @Singleton
 public class WikidataEditService {
 
@@ -37,6 +42,11 @@ public class WikidataEditService {
         this.directPrefs = directPrefs;
     }
 
+    /**
+     * Create a P18 claim and log the edit with custom tag
+     * @param wikidataEntityId
+     * @param fileName
+     */
     public void createClaimWithLogging(String wikidataEntityId, String fileName) {
         editWikidataProperty(wikidataEntityId, fileName);
     }
@@ -75,6 +85,10 @@ public class WikidataEditService {
         }
     }
 
+    /**
+     * Log the Wikidata edit by adding Wikimedia Commons App tag to the edit
+     * @param revisionId
+     */
     @SuppressLint("CheckResult")
     private void logEdit(String revisionId) {
         Observable.fromCallable(() -> mediaWikiApi.addWikidataEditTag(revisionId))
@@ -91,6 +105,9 @@ public class WikidataEditService {
                 });
     }
 
+    /**
+     * Show a success toast when the edit is made successfully
+     */
     private void showSuccessToast() {
         String title = directPrefs.getString("Title", "");
         String successStringTemplate = context.getString(R.string.successful_wikidata_edit);
