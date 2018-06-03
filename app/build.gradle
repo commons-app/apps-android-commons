@@ -21,9 +21,9 @@ dependencies {
     implementation 'com.jakewharton.timber:timber:4.5.1'
     implementation 'info.debatty:java-string-similarity:0.24'
     implementation 'com.borjabravo:readmoretextview:2.1.0'
-    implementation 'com.android.support.constraint:constraint-layout:1.1.0'
-    implementation ('com.mapbox.mapboxsdk:mapbox-android-sdk:5.4.1@aar'){
-        transitive=true
+    implementation 'com.android.support.constraint:constraint-layout:1.0.2'
+    implementation('com.mapbox.mapboxsdk:mapbox-android-sdk:5.4.1@aar') {
+        transitive = true
     }
     implementation 'com.github.deano2390:MaterialShowcaseView:1.2.0'
     implementation "com.android.support:support-v4:$SUPPORT_LIB_VERSION"
