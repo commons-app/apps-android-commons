@@ -75,6 +75,8 @@ dependencies {
     androidTestImplementation "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
     androidTestImplementation 'com.squareup.okhttp3:mockwebserver:3.8.1'
     androidTestImplementation "com.android.support:support-annotations:$SUPPORT_LIB_VERSION"
+    androidTestImplementation 'com.android.support.test:rules:1.0.2'
+    androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
 
     debugImplementation "com.squareup.leakcanary:leakcanary-android:$LEAK_CANARY"

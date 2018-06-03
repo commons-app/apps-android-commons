@@ -95,4 +95,6 @@
   <string name="detail_license_empty">अज्ञान अनुमतिपत्र</string>
   <string name="menu_refresh">ताजागर्ने</string>
   <string name="toggle_view_button">टगल दृश्य</string>
+  <string name="menu_set_wallpaper">भित्तेपत्र चयन गर्नुहोस्</string>
+  <string name="wallpaper_set_successfully">भित्तेपत्र सफलतापूर्वक चयन भयो!</string>
 </resources>
