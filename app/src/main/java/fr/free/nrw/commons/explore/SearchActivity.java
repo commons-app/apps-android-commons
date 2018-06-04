@@ -19,7 +19,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.R;
-import fr.free.nrw.commons.explore.history.SearchHistoryFragment;
+import fr.free.nrw.commons.explore.recent_searches.RecentSearchesFragment;
 import fr.free.nrw.commons.explore.images.SearchImageFragment;
 import fr.free.nrw.commons.media.MediaDetailPagerFragment;
 import fr.free.nrw.commons.theme.NavigationBaseActivity;
@@ -37,7 +37,7 @@ public class SearchActivity extends NavigationBaseActivity implements MediaDetai
     @BindView(R.id.resultsContainer) FrameLayout resultsContainer;
     @BindView(R.id.searchHistoryContainer) FrameLayout searchHistoryContainer;
     private SearchImageFragment searchImageFragment;
-    private SearchHistoryFragment searchHistoryFragment;
+    private RecentSearchesFragment recentSearchesFragment;
     private FragmentManager supportFragmentManager;
     private MediaDetailPagerFragment mediaDetails;
     private String query;
@@ -74,9 +74,9 @@ public class SearchActivity extends NavigationBaseActivity implements MediaDetai
     }
 
     private void setSearchHistoryFragment() {
-        searchHistoryFragment = new SearchHistoryFragment();
+        recentSearchesFragment = new RecentSearchesFragment();
         FragmentTransaction transaction = supportFragmentManager.beginTransaction();
-        transaction.add(R.id.searchHistoryContainer, searchHistoryFragment).commit();
+        transaction.add(R.id.searchHistoryContainer, recentSearchesFragment).commit();
     }
 
 

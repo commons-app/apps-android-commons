@@ -2,12 +2,54 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="fr.free.nrw.commons.explore.history.SearchHistoryFragment">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context="fr.free.nrw.commons.explore.recent_searches.RecentSearchesFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:background="?android:windowBackground"
+        android:orientation="vertical"
+        android:id="@+id/recent_searches">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="48dp"
+                android:layout_gravity="start"
+                android:gravity="center_vertical"
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp"
+                android:text="@string/search_recent_header"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textStyle="bold" />
+
+            <ImageView
+                android:id="@+id/recent_searches_delete_button"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_gravity="end"
+                android:background="?attr/actionBarItemBackground"
+                android:clickable="true"
+                android:longClickable="true"
+                android:scaleType="centerInside"
+                app:srcCompat="@drawable/ic_delete_grey_700_24dp" />
+
+        </FrameLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="@color/opak_middle_grey" />
+
+        <ListView
+            android:id="@+id/recent_searches_list"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+    </LinearLayout>
 
 </FrameLayout>

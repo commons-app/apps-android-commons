@@ -289,7 +289,5 @@
 
     <string name="menu_set_wallpaper">Set wallpaper</string>
     <string name="wallpaper_set_successfully">Wallpaper set successfully!</string>
-
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="search_recent_header">Recent searches:</string>
 </resources>
