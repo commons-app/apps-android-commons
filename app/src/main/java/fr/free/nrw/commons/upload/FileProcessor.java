@@ -95,13 +95,11 @@ public class FileProcessor implements SimilarImageDialogFragment.onResponse{
         return filePath;
     }
 
-    //TODO: Figure out why coords are not sent to location template, use LocationServiceManager
-
     /**
      * Gets coordinates for category suggestions, either from EXIF data or user location
      * @param gpsEnabled if true use GPS
      */
-    GPSExtractor getFileCoordinates(boolean gpsEnabled) {
+    GPSExtractor processFileCoordinates(boolean gpsEnabled) {
         Timber.d("Calling GPSExtractor");
         try {
                 ParcelFileDescriptor descriptor = contentResolver.openFileDescriptor(mediaUri, "r");
@@ -130,6 +128,10 @@ public class FileProcessor implements SimilarImageDialogFragment.onResponse{
             Timber.w("File not found: " + mediaUri, e);
         }
         return imageObj;
+    }
+
+    String getDecimalCoords() {
+        return decimalCoords;
     }
 
     /**

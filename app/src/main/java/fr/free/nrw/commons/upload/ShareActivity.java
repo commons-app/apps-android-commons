@@ -124,7 +124,7 @@ public class ShareActivity
     private Uri mediaUri;
     private Contribution contribution;
     private boolean cacheFound;
-    private GPSExtractor imageObj;
+    private GPSExtractor gpsObj;
     private GPSExtractor tempImageObj;
     private String decimalCoords;
     private FileProcessor fileObj;
@@ -180,7 +180,7 @@ public class ShareActivity
      * Gets file metadata for category suggestions, displays toast, caches categories found, calls uploadController
      */
     private void uploadBegins() {
-        fileObj.getFileCoordinates(locationPermitted);
+        fileObj.processFileCoordinates(locationPermitted);
 
         Toast startingToast = Toast.makeText(this, R.string.uploading_started, Toast.LENGTH_LONG);
         startingToast.show();
@@ -190,6 +190,9 @@ public class ShareActivity
             cacheController.cacheCategory();
             Timber.d("Cache the categories found");
         }
+
+
+        //TODO: Figure out why coords are not sent to location template, use LocationServiceManager
 
         uploadController.startUpload(title, mediaUri, description, mimeType, source, decimalCoords, c -> {
             ShareActivity.this.contribution = c;
@@ -306,7 +309,8 @@ public class ShareActivity
         ContentResolver contentResolver = this.getContentResolver();
         fileObj = new FileProcessor(mediaUri, contentResolver, this);
         checkIfFileExists();
-        imageObj = fileObj.getFileCoordinates(locationPermitted);
+        gpsObj = fileObj.processFileCoordinates(locationPermitted);
+        decimalCoords = fileObj.getDecimalCoords();
     }
 
     /**
@@ -340,7 +344,7 @@ public class ShareActivity
     private void showFABMenu() {
         isFABOpen=true;
 
-        if( imageObj != null && imageObj.imageCoordsExists)
+        if( gpsObj != null && gpsObj.imageCoordsExists)
             mapButton.setVisibility(View.VISIBLE);
         zoomInButton.setVisibility(View.VISIBLE);
 
@@ -468,7 +472,7 @@ public class ShareActivity
     public void onPause() {
         super.onPause();
         try {
-            imageObj.unregisterLocationManager();
+            gpsObj.unregisterLocationManager();
             Timber.d("Unregistered locationManager");
         } catch (NullPointerException e) {
             Timber.d("locationManager does not exist, not unregistered");
@@ -626,8 +630,8 @@ public class ShareActivity
 
     @OnClick(R.id.media_map)
     public void onFabShowMapsClicked() {
-        if (imageObj != null && imageObj.imageCoordsExists) {
-            Uri gmmIntentUri = Uri.parse("google.streetview:cbll=" + imageObj.getDecLatitude() + "," + imageObj.getDecLongitude());
+        if (gpsObj != null && gpsObj.imageCoordsExists) {
+            Uri gmmIntentUri = Uri.parse("google.streetview:cbll=" + gpsObj.getDecLatitude() + "," + gpsObj.getDecLongitude());
             Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
             mapIntent.setPackage("com.google.android.apps.maps");
             startActivity(mapIntent);
