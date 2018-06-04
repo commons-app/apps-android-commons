@@ -72,8 +72,6 @@ class MockCommonsApplicationModule(appContext: Context) : CommonsApplicationModu
 
     override fun providesSessionManager(context: Context, mediaWikiApi: MediaWikiApi, sharedPreferences: SharedPreferences): SessionManager = mockSessionManager
 
-    override fun provideMediaWikiApi(context: Context, sharedPreferences: SharedPreferences, categorySharedPreferences: SharedPreferences, gson: Gson): MediaWikiApi = mediaWikiApi
-
     override fun provideLocationServiceManager(context: Context): LocationServiceManager = locationServiceManager
 
     override fun provideDBOpenHelper(context: Context): DBOpenHelper = mockDbOpenHelper
