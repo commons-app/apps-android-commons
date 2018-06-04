@@ -76,10 +76,7 @@ public class ShareActivity
         extends AuthenticatedActivity
         implements SingleUploadFragment.OnUploadActionInitiated,
         OnCategoriesSaveHandler {
-
-    private static final int REQUEST_PERM_ON_CREATE_STORAGE = 1;
     private static final int REQUEST_PERM_ON_CREATE_LOCATION = 2;
-    private static final int REQUEST_PERM_ON_CREATE_STORAGE_AND_LOCATION = 3;
     private static final int REQUEST_PERM_ON_SUBMIT_STORAGE = 4;
     //Had to make them class variables, to extract out the click listeners, also I see no harm in this
     final Rect startBounds = new Rect();
@@ -123,9 +120,7 @@ public class ShareActivity
     private CategorizationFragment categorizationFragment;
     private Uri mediaUri;
     private Contribution contribution;
-    private boolean cacheFound;
     private GPSExtractor gpsObj;
-    private GPSExtractor tempImageObj;
     private String decimalCoords;
     private FileProcessor fileObj;
     private boolean useNewPermissions = false;
