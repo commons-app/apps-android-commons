@@ -48,6 +48,10 @@ public class WikidataEditService {
      * @param fileName
      */
     public void createClaimWithLogging(String wikidataEntityId, String fileName) {
+        if(wikidataEntityId == null
+                || fileName == null) {
+            return;
+        }
         editWikidataProperty(wikidataEntityId, fileName);
     }
 
