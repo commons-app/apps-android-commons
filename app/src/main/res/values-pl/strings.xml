@@ -228,4 +228,6 @@
   <string name="about_translate_cancel">Anuluj</string>
   <string name="no_images_found">Nie znaleziono grafik!</string>
   <string name="error_loading_images">Wystąpił błąd podczas ładowania grafik.</string>
+  <string name="menu_set_wallpaper">Ustaw tapetę</string>
+  <string name="wallpaper_set_successfully">Tapeta ustawiona pomyślnie!</string>
 </resources>
