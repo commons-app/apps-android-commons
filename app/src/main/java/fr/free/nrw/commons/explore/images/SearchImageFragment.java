@@ -12,6 +12,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import com.pedrogomez.renderers.RVRendererAdapter;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 import javax.inject.Inject;
@@ -20,8 +21,10 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.R;
+import fr.free.nrw.commons.category.Category;
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
 import fr.free.nrw.commons.explore.SearchActivity;
+import fr.free.nrw.commons.explore.recent_searches.RecentSearchesDao;
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
 import fr.free.nrw.commons.utils.NetworkUtils;
 import fr.free.nrw.commons.utils.ViewUtil;
@@ -49,8 +52,8 @@ public class SearchImageFragment extends CommonsDaggerSupportFragment {
     TextView imagesNotFoundView;
     String query;
 
-    @Inject
-    MediaWikiApi mwApi;
+    @Inject RecentSearchesDao recentSearchesDao;
+    @Inject MediaWikiApi mwApi;
     @Inject @Named("default_preferences") SharedPreferences prefs;
 
     private RVRendererAdapter<Media> imagesAdapter;
@@ -60,7 +63,21 @@ public class SearchImageFragment extends CommonsDaggerSupportFragment {
         int index = queryList.indexOf(item);
         ((SearchActivity)getContext()).onSearchImageClicked(index);
         //TODO : Add images to recently searched images db table
+        saveQuery(query);
     });
+
+    private void saveQuery(String query) {
+        Category category = recentSearchesDao.find(query);
+
+        // Newly used category...
+        if (category == null) {
+            category = new Category(null, query, new Date(), 0);
+        }
+
+        category.incTimesUsed();
+        recentSearchesDao.save(category);
+    }
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {

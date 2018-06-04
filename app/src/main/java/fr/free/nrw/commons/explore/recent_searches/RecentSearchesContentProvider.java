@@ -16,25 +16,23 @@ import fr.free.nrw.commons.di.CommonsDaggerContentProvider;
 import timber.log.Timber;
 
 import static android.content.UriMatcher.NO_MATCH;
-import static fr.free.nrw.commons.category.CategoryDao.Table.ALL_FIELDS;
-import static fr.free.nrw.commons.category.CategoryDao.Table.COLUMN_ID;
-import static fr.free.nrw.commons.category.CategoryDao.Table.TABLE_NAME;
+import static fr.free.nrw.commons.explore.recent_searches.RecentSearchesDao.Table.ALL_FIELDS;
+import static fr.free.nrw.commons.explore.recent_searches.RecentSearchesDao.Table.COLUMN_ID;
+import static fr.free.nrw.commons.explore.recent_searches.RecentSearchesDao.Table.TABLE_NAME;
 
 public class RecentSearchesContentProvider extends CommonsDaggerContentProvider {
 
-    public static final String AUTHORITY = "fr.free.nrw.commons.categories.contentprovider";
+    public static final String AUTHORITY = "fr.free.nrw.commons.explore.recent_searches.contentprovider";
     // For URI matcher
-    private static final int CATEGORIES = 1;
-    private static final int CATEGORIES_ID = 2;
-    private static final String BASE_PATH = "categories";
-
+    private static final int RECENT_SEARCHES = 1;
+    private static final int RECENT_SEARCHES_ID = 2;
+    private static final String BASE_PATH = "recent_searches";
     public static final Uri BASE_URI = Uri.parse("content://" + AUTHORITY + "/" + BASE_PATH);
-
     private static final UriMatcher uriMatcher = new UriMatcher(NO_MATCH);
 
     static {
-        uriMatcher.addURI(AUTHORITY, BASE_PATH, CATEGORIES);
-        uriMatcher.addURI(AUTHORITY, BASE_PATH + "/#", CATEGORIES_ID);
+        uriMatcher.addURI(AUTHORITY, BASE_PATH, RECENT_SEARCHES);
+        uriMatcher.addURI(AUTHORITY, BASE_PATH + "/#", RECENT_SEARCHES_ID);
     }
 
     public static Uri uriForId(int id) {
@@ -56,11 +54,11 @@ public class RecentSearchesContentProvider extends CommonsDaggerContentProvider 
         Cursor cursor;
 
         switch (uriType) {
-            case CATEGORIES:
+            case RECENT_SEARCHES:
                 cursor = queryBuilder.query(db, projection, selection, selectionArgs,
                         null, null, sortOrder);
                 break;
-            case CATEGORIES_ID:
+            case RECENT_SEARCHES_ID:
                 cursor = queryBuilder.query(db,
                         ALL_FIELDS,
                         "_id = ?",
@@ -91,7 +89,7 @@ public class RecentSearchesContentProvider extends CommonsDaggerContentProvider 
         SQLiteDatabase sqlDB = dbOpenHelper.getWritableDatabase();
         long id;
         switch (uriType) {
-            case CATEGORIES:
+            case RECENT_SEARCHES:
                 id = sqlDB.insert(TABLE_NAME, null, contentValues);
                 break;
             default:
@@ -109,12 +107,12 @@ public class RecentSearchesContentProvider extends CommonsDaggerContentProvider 
     @SuppressWarnings("ConstantConditions")
     @Override
     public int bulkInsert(@NonNull Uri uri, @NonNull ContentValues[] values) {
-        Timber.d("Hello, bulk insert! (CategoryContentProvider)");
+        Timber.d("Hello, bulk insert! (RecentSearchesContentProvider)");
         int uriType = uriMatcher.match(uri);
         SQLiteDatabase sqlDB = dbOpenHelper.getWritableDatabase();
         sqlDB.beginTransaction();
         switch (uriType) {
-            case CATEGORIES:
+            case RECENT_SEARCHES:
                 for (ContentValues value : values) {
                     Timber.d("Inserting! %s", value);
                     sqlDB.insert(TABLE_NAME, null, value);
@@ -146,7 +144,7 @@ public class RecentSearchesContentProvider extends CommonsDaggerContentProvider 
         SQLiteDatabase sqlDB = dbOpenHelper.getWritableDatabase();
         int rowsUpdated;
         switch (uriType) {
-            case CATEGORIES_ID:
+            case RECENT_SEARCHES_ID:
                 if (TextUtils.isEmpty(selection)) {
                     int id = Integer.valueOf(uri.getLastPathSegment());
                     rowsUpdated = sqlDB.update(TABLE_NAME,

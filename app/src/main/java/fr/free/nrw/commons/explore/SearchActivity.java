@@ -13,12 +13,14 @@ import android.widget.FrameLayout;
 import com.jakewharton.rxbinding2.view.RxView;
 import com.jakewharton.rxbinding2.widget.RxTextView;
 
+import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.R;
+import fr.free.nrw.commons.category.Category;
 import fr.free.nrw.commons.explore.recent_searches.RecentSearchesFragment;
 import fr.free.nrw.commons.explore.images.SearchImageFragment;
 import fr.free.nrw.commons.media.MediaDetailPagerFragment;
@@ -117,6 +119,7 @@ public class SearchActivity extends NavigationBaseActivity implements MediaDetai
      * @param index item index that should be opened
      */
     public void onSearchImageClicked(int index) {
+        // search query
         ViewUtil.hideKeyboard(this.findViewById(R.id.searchBox));
         toolbar.setVisibility(View.GONE);
         setNavigationBaseToolbarVisibility(true);
@@ -134,6 +137,7 @@ public class SearchActivity extends NavigationBaseActivity implements MediaDetai
         mediaDetails.showImage(index);
     }
 
+
     @Override
     public void onBackPressed() {
         if (getSupportFragmentManager().getBackStackEntryCount() == 1){
@@ -150,4 +154,7 @@ public class SearchActivity extends NavigationBaseActivity implements MediaDetai
         super.onBackPressed();
     }
 
+    public void updateText(String query) {
+        etSearchKeyword.setText(query);
+    }
 }

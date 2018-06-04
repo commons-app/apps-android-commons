@@ -290,4 +290,5 @@
     <string name="menu_set_wallpaper">Set wallpaper</string>
     <string name="wallpaper_set_successfully">Wallpaper set successfully!</string>
     <string name="search_recent_header">Recent searches:</string>
+    <string name="provider_searches">Recently searched queries</string>
 </resources>

@@ -16,8 +16,6 @@ import javax.inject.Inject;
 import javax.inject.Named;
 import javax.inject.Provider;
 
-import fr.free.nrw.commons.category.Category;
-import fr.free.nrw.commons.category.CategoryContentProvider;
 
 public class RecentSearchesDao {
 
@@ -28,13 +26,13 @@ public class RecentSearchesDao {
         this.clientProvider = clientProvider;
     }
 
-    public void save(Category category) {
+    public void save(RecentSearch recentSearch) {
         ContentProviderClient db = clientProvider.get();
         try {
-            if (category.getContentUri() == null) {
-                category.setContentUri(db.insert(CategoryContentProvider.BASE_URI, toContentValues(category)));
+            if (recentSearch.getContentUri() == null) {
+                recentSearch.setContentUri(db.insert(RecentSearchesContentProvider.BASE_URI, toContentValues(recentSearch)));
             } else {
-                db.update(category.getContentUri(), toContentValues(category), null, null);
+                db.update(recentSearch.getContentUri(), toContentValues(recentSearch), null, null);
             }
         } catch (RemoteException e) {
             throw new RuntimeException(e);
@@ -44,25 +42,52 @@ public class RecentSearchesDao {
     }
 
     /**
-     * Retrieve recently-used categories, ordered by descending date.
+     * Find persisted search query in database, based on its name.
      *
-     * @return a list containing recent categories
+     * @param name Search query name
+     * @return recently searched query from database, or null if not found
      */
-    @NonNull
-    List<String> recentCategories(int limit) {
-        List<String> items = new ArrayList<>();
+    @Nullable
+    public RecentSearch find(String name) {
         Cursor cursor = null;
         ContentProviderClient db = clientProvider.get();
         try {
             cursor = db.query(
-                    CategoryContentProvider.BASE_URI,
+                    RecentSearchesContentProvider.BASE_URI,
                     Table.ALL_FIELDS,
-                    null,
-                    new String[]{},
-                    Table.COLUMN_LAST_USED + " DESC");
+                    Table.COLUMN_NAME + "=?",
+                    new String[]{name},
+                    null);
+            if (cursor != null && cursor.moveToFirst()) {
+                return fromCursor(cursor);
+            }
+        } catch (RemoteException e) {
+            // This feels lazy, but to hell with checked exceptions. :)
+            throw new RuntimeException(e);
+        } finally {
+            if (cursor != null) {
+                cursor.close();
+            }
+            db.release();
+        }
+        return null;
+    }
+
+    /**
+     * Retrieve recently-searched queries, ordered by descending date.
+     *
+     * @return a list containing recent searches
+     */
+    @NonNull
+    public List<String> recentSearches(int limit) {
+        List<String> items = new ArrayList<>();
+        Cursor cursor = null;
+        ContentProviderClient db = clientProvider.get();
+        try {
+            cursor = db.query( RecentSearchesContentProvider.BASE_URI, Table.ALL_FIELDS,
+                    null, new String[]{}, Table.COLUMN_LAST_USED + " DESC");
             // fixme add a limit on the original query instead of falling out of the loop?
-            while (cursor != null && cursor.moveToNext()
-                    && cursor.getPosition() < limit) {
+            while (cursor != null && cursor.moveToNext() && cursor.getPosition() < limit) {
                 items.add(fromCursor(cursor).getName());
             }
         } catch (RemoteException e) {
@@ -77,38 +102,34 @@ public class RecentSearchesDao {
     }
 
     @NonNull
-    Category fromCursor(Cursor cursor) {
+    RecentSearch fromCursor(Cursor cursor) {
         // Hardcoding column positions!
-        return new Category(
-                CategoryContentProvider.uriForId(cursor.getInt(cursor.getColumnIndex(Table.COLUMN_ID))),
+        return new RecentSearch(
+                RecentSearchesContentProvider.uriForId(cursor.getInt(cursor.getColumnIndex(Table.COLUMN_ID))),
                 cursor.getString(cursor.getColumnIndex(Table.COLUMN_NAME)),
-                new Date(cursor.getLong(cursor.getColumnIndex(Table.COLUMN_LAST_USED))),
-                cursor.getInt(cursor.getColumnIndex(Table.COLUMN_TIMES_USED))
+                new Date(cursor.getLong(cursor.getColumnIndex(Table.COLUMN_LAST_USED)))
         );
     }
 
-    private ContentValues toContentValues(Category category) {
+    private ContentValues toContentValues(RecentSearch recentSearch) {
         ContentValues cv = new ContentValues();
-        cv.put(RecentSearchesDao.Table.COLUMN_NAME, category.getName());
-        cv.put(RecentSearchesDao.Table.COLUMN_LAST_USED, category.getLastUsed().getTime());
-        cv.put(RecentSearchesDao.Table.COLUMN_TIMES_USED, category.getTimesUsed());
+        cv.put(RecentSearchesDao.Table.COLUMN_NAME, recentSearch.getName());
+        cv.put(RecentSearchesDao.Table.COLUMN_LAST_USED, recentSearch.getLastUsed().getTime());
         return cv;
     }
 
     public static class Table {
-        public static final String TABLE_NAME = "categories";
+        public static final String TABLE_NAME = "recent_searches";
 
         public static final String COLUMN_ID = "_id";
         static final String COLUMN_NAME = "name";
         static final String COLUMN_LAST_USED = "last_used";
-        static final String COLUMN_TIMES_USED = "times_used";
 
         // NOTE! KEEP IN SAME ORDER AS THEY ARE DEFINED UP THERE. HELPS HARD CODE COLUMN INDICES.
         public static final String[] ALL_FIELDS = {
                 COLUMN_ID,
                 COLUMN_NAME,
                 COLUMN_LAST_USED,
-                COLUMN_TIMES_USED
         };
 
         static final String DROP_TABLE_STATEMENT = "DROP TABLE IF EXISTS " + TABLE_NAME;
@@ -117,7 +138,6 @@ public class RecentSearchesDao {
                 + COLUMN_ID + " INTEGER PRIMARY KEY,"
                 + COLUMN_NAME + " STRING,"
                 + COLUMN_LAST_USED + " INTEGER,"
-                + COLUMN_TIMES_USED + " INTEGER"
                 + ");";
 
         public static void onCreate(SQLiteDatabase db) {
