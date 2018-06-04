@@ -26,18 +26,19 @@
             app:navigationIcon="@drawable/ic_arrow_back_primary_24dp"
             android:background="@color/item_white_background"
             android:layout_height="wrap_content">
-        <EditText
-            android:id="@+id/searchBox"
-            android:background="@null"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textColorHint="@color/disabled_button_text_color_dark"
-            android:textColor="@color/primaryDarkColor"
-            android:imeOptions="actionDone"
-            android:singleLine="true"
-            android:hint="@string/search_commons"
-            android:textSize="@dimen/normal_text"
-            />
+            <android.support.v7.widget.SearchView
+                android:id="@+id/searchBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:focusable="true"
+                app:queryBackground="@android:color/transparent"
+                app:searchIcon="@null"
+                android:imeOptions="actionDone"
+                android:singleLine="true"
+                android:iconifiedByDefault="false"
+                android:textSize="@dimen/normal_text"
+                />
+
         </android.support.v7.widget.Toolbar>
         </android.support.design.widget.AppBarLayout>
         <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
