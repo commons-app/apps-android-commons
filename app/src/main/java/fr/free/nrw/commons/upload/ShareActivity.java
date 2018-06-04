@@ -191,9 +191,6 @@ public class ShareActivity
             Timber.d("Cache the categories found");
         }
 
-
-        //TODO: Figure out why coords are not sent to location template, use LocationServiceManager
-
         uploadController.startUpload(title, mediaUri, description, mimeType, source, decimalCoords, c -> {
             ShareActivity.this.contribution = c;
             showPostUpload();

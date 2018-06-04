@@ -96,7 +96,7 @@ public class FileProcessor implements SimilarImageDialogFragment.onResponse{
     }
 
     /**
-     * Gets coordinates for category suggestions, either from EXIF data or user location
+     * Processes file coordinates, either from EXIF data or user location
      * @param gpsEnabled if true use GPS
      */
     GPSExtractor processFileCoordinates(boolean gpsEnabled) {
