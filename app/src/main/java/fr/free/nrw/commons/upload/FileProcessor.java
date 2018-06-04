@@ -33,18 +33,7 @@ import static com.mapbox.mapboxsdk.Mapbox.getApplicationContext;
 /**
  * Processing of the image file that is about to be uploaded via ShareActivity is done here
  */
-public class FileProcessor implements SimilarImageDialogFragment.onResponse{
-
-    private Uri mediaUri;
-    private ContentResolver contentResolver;
-    private GPSExtractor imageObj;
-    private Context context;
-    private String decimalCoords;
-    private boolean haveCheckedForOtherImages = false;
-    private String filePath;
-    private boolean useExtStorage;
-    private boolean cacheFound;
-    private GPSExtractor tempImageObj;
+public class FileProcessor implements SimilarImageDialogFragment.onResponse {
 
     @Inject
     CacheController cacheController;
@@ -55,6 +44,16 @@ public class FileProcessor implements SimilarImageDialogFragment.onResponse{
     @Inject
     @Named("default_preferences")
     SharedPreferences prefs;
+    private Uri mediaUri;
+    private ContentResolver contentResolver;
+    private GPSExtractor imageObj;
+    private Context context;
+    private String decimalCoords;
+    private boolean haveCheckedForOtherImages = false;
+    private String filePath;
+    private boolean useExtStorage;
+    private boolean cacheFound;
+    private GPSExtractor tempImageObj;
 
     FileProcessor(Uri mediaUri, ContentResolver contentResolver, Context context) {
         this.mediaUri = mediaUri;
@@ -67,6 +66,7 @@ public class FileProcessor implements SimilarImageDialogFragment.onResponse{
     /**
      * Gets file path from media URI.
      * In older devices getPath() may fail depending on the source URI, creating and using a copy of the file seems to work instead.
+     *
      * @return file path of media
      */
     @Nullable
@@ -97,32 +97,32 @@ public class FileProcessor implements SimilarImageDialogFragment.onResponse{
 
     /**
      * Processes file coordinates, either from EXIF data or user location
+     *
      * @param gpsEnabled if true use GPS
      */
     GPSExtractor processFileCoordinates(boolean gpsEnabled) {
         Timber.d("Calling GPSExtractor");
         try {
-                ParcelFileDescriptor descriptor = contentResolver.openFileDescriptor(mediaUri, "r");
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-                    if (descriptor != null) {
-                        imageObj = new GPSExtractor(descriptor.getFileDescriptor(), context, prefs);
-                    }
-                } else {
-                    String filePath = getPathOfMediaOrCopy();
-                    if (filePath != null) {
-                        imageObj = new GPSExtractor(filePath, context, prefs);
-                    }
+            ParcelFileDescriptor descriptor = contentResolver.openFileDescriptor(mediaUri, "r");
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                if (descriptor != null) {
+                    imageObj = new GPSExtractor(descriptor.getFileDescriptor(), context, prefs);
+                }
+            } else {
+                String filePath = getPathOfMediaOrCopy();
+                if (filePath != null) {
+                    imageObj = new GPSExtractor(filePath, context, prefs);
+                }
             }
 
-                decimalCoords = imageObj.getCoords(gpsEnabled);
-                if (decimalCoords == null || !imageObj.imageCoordsExists){
-                    //Find other photos taken around the same time which has gps coordinates
-                    if(!haveCheckedForOtherImages)
-                        findOtherImages(gpsEnabled);// Do not do repeat the process
-                }
-                else {
-                    useImageCoords();
-                }
+            decimalCoords = imageObj.getCoords(gpsEnabled);
+            if (decimalCoords == null || !imageObj.imageCoordsExists) {
+                //Find other photos taken around the same time which has gps coordinates
+                if (!haveCheckedForOtherImages)
+                    findOtherImages(gpsEnabled);// Do not do repeat the process
+            } else {
+                useImageCoords();
+            }
 
         } catch (FileNotFoundException e) {
             Timber.w("File not found: " + mediaUri, e);
@@ -136,21 +136,22 @@ public class FileProcessor implements SimilarImageDialogFragment.onResponse{
 
     /**
      * Find other images around the same location that were taken within the last 20 sec
+     *
      * @param gpsEnabled True if GPS is enabled
      */
     private void findOtherImages(boolean gpsEnabled) {
-        Timber.d("filePath"+getPathOfMediaOrCopy());
+        Timber.d("filePath" + getPathOfMediaOrCopy());
 
         long timeOfCreation = new File(filePath).lastModified();//Time when the original image was created
-        File folder = new File(filePath.substring(0,filePath.lastIndexOf('/')));
+        File folder = new File(filePath.substring(0, filePath.lastIndexOf('/')));
         File[] files = folder.listFiles();
-        Timber.d("folderTime Number:"+files.length);
+        Timber.d("folderTime Number:" + files.length);
 
 
-        for(File file : files){
-            if(file.lastModified()-timeOfCreation<=(120*1000) && file.lastModified()-timeOfCreation>=-(120*1000)){
+        for (File file : files) {
+            if (file.lastModified() - timeOfCreation <= (120 * 1000) && file.lastModified() - timeOfCreation >= -(120 * 1000)) {
                 //Make sure the photos were taken within 20seconds
-                Timber.d("fild date:"+file.lastModified()+ " time of creation"+timeOfCreation);
+                Timber.d("fild date:" + file.lastModified() + " time of creation" + timeOfCreation);
                 tempImageObj = null;//Temporary GPSExtractor to extract coords from these photos
                 ParcelFileDescriptor descriptor = null;
                 try {
@@ -168,17 +169,17 @@ public class FileProcessor implements SimilarImageDialogFragment.onResponse{
                     }
                 }
 
-                if(tempImageObj!=null){
-                    Timber.d("not null fild EXIF"+tempImageObj.imageCoordsExists +" coords"+tempImageObj.getCoords(gpsEnabled));
-                    if(tempImageObj.getCoords(gpsEnabled)!=null && tempImageObj.imageCoordsExists){
+                if (tempImageObj != null) {
+                    Timber.d("not null fild EXIF" + tempImageObj.imageCoordsExists + " coords" + tempImageObj.getCoords(gpsEnabled));
+                    if (tempImageObj.getCoords(gpsEnabled) != null && tempImageObj.imageCoordsExists) {
                         // Current image has gps coordinates and it's not current gps locaiton
-                        Timber.d("This file has image coords:"+ file.getAbsolutePath());
+                        Timber.d("This file has image coords:" + file.getAbsolutePath());
                         SimilarImageDialogFragment newFragment = new SimilarImageDialogFragment();
                         Bundle args = new Bundle();
-                        args.putString("originalImagePath",filePath);
-                        args.putString("possibleImagePath",file.getAbsolutePath());
+                        args.putString("originalImagePath", filePath);
+                        args.putString("possibleImagePath", file.getAbsolutePath());
                         newFragment.setArguments(args);
-                        newFragment.show(((AppCompatActivity)context).getSupportFragmentManager(), "dialog");
+                        newFragment.show(((AppCompatActivity) context).getSupportFragmentManager(), "dialog");
                         break;
                     }
                 }
@@ -195,7 +196,7 @@ public class FileProcessor implements SimilarImageDialogFragment.onResponse{
     public void useImageCoords() {
         if (decimalCoords != null) {
             Timber.d("Decimal coords of image: %s", decimalCoords);
-            Timber.d("is EXIF data present:"+imageObj.imageCoordsExists+" from findOther image");
+            Timber.d("is EXIF data present:" + imageObj.imageCoordsExists + " from findOther image");
 
             // Only set cache for this point if image has coords
             if (imageObj.imageCoordsExists) {

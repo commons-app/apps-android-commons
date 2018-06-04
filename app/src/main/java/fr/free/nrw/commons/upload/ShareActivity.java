@@ -166,6 +166,7 @@ public class ShareActivity
     /**
      * Checks whether storage permissions need to be requested.
      * Permissions are needed if the file is not owned by this application, (e.g. shared from the Gallery)
+     *
      * @return true if file is not owned by this application and permission hasn't been granted beforehand
      */
     @RequiresApi(16)
@@ -211,6 +212,7 @@ public class ShareActivity
 
     /**
      * Send categories to modifications queue after they are selected
+     *
      * @param categories categories selected
      */
     @Override
@@ -339,9 +341,9 @@ public class ShareActivity
      * Function to display the zoom and map FAB
      */
     private void showFABMenu() {
-        isFABOpen=true;
+        isFABOpen = true;
 
-        if( gpsObj != null && gpsObj.imageCoordsExists)
+        if (gpsObj != null && gpsObj.imageCoordsExists)
             mapButton.setVisibility(View.VISIBLE);
         zoomInButton.setVisibility(View.VISIBLE);
 
@@ -353,8 +355,8 @@ public class ShareActivity
     /**
      * Function to close the zoom and map FAB
      */
-    private void closeFABMenu(){
-        isFABOpen=false;
+    private void closeFABMenu() {
+        isFABOpen = false;
         mainFab.animate().rotationBy(-180);
         mapButton.animate().translationY(0);
         zoomInButton.animate().translationY(0).setListener(new Animator.AnimatorListener() {
@@ -364,7 +366,7 @@ public class ShareActivity
 
             @Override
             public void onAnimationEnd(Animator animator) {
-                if(!isFABOpen){
+                if (!isFABOpen) {
                     mapButton.setVisibility(View.GONE);
                     zoomInButton.setVisibility(View.GONE);
                 }
@@ -382,6 +384,7 @@ public class ShareActivity
 
     /**
      * Checks if upload was initiated via Nearby
+     *
      * @return true if upload was initiated via Nearby
      */
     protected boolean isNearbyUpload() {
@@ -390,8 +393,9 @@ public class ShareActivity
 
     /**
      * Handles BOTH snackbar permission request (for location) and submit button permission request (for storage)
-     * @param requestCode type of request
-     * @param permissions permissions requested
+     *
+     * @param requestCode  type of request
+     * @param permissions  permissions requested
      * @param grantResults grant results
      */
     @Override
@@ -422,7 +426,7 @@ public class ShareActivity
     }
 
     /**
-     *  Displays Snackbar to ask for location permissions
+     * Displays Snackbar to ask for location permissions
      */
     private Snackbar requestPermissionUsingSnackBar(String rationale, final String[] perms, final int code) {
         Snackbar snackbar = Snackbar.make(findViewById(android.R.id.content), rationale,
@@ -453,7 +457,7 @@ public class ShareActivity
                                     //image is not a duplicate, so now check if its a unwanted picture or not
                                     fileObj.detectUnwantedPictures();
                                 }
-                            },mwApi);
+                            }, mwApi);
                     fileAsyncTask.execute();
                 } catch (IOException e) {
                     Timber.e(e, "IO Exception: ");
