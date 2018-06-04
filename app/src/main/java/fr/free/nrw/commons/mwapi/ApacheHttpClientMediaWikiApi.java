@@ -394,12 +394,13 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
      * @param property the property to be edited, for eg P18 for images
      * @param snaktype the type of value stored for that property
      * @param value the actual value to be stored for the property, for eg filename in case of P18
-     * @return returns true if the claim is successfully created
+     * @return returns revisionId if the claim is successfully created else returns null
      * @throws IOException
      */
     @Nullable
     @Override
-    public boolean wikidatCreateClaim(String entityId, String property, String snaktype, String value) throws IOException {
+    public String wikidatCreateClaim(String entityId, String property, String snaktype, String value) throws IOException {
+        Timber.d("Filename is %s", value);
         ApiResult result = wikidataApi.action("wbcreateclaim")
                 .param("entity", entityId)
                 .param("centralauthtoken", getCentralAuthToken())
@@ -410,13 +411,45 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
                 .post();
 
         if (result == null || result.getNode("api") == null) {
-            return false;
+            return null;
         }
 
         Node node = result.getNode("api").getDocument();
         Element element = (Element) node;
 
         if (element != null && element.getAttribute("success").equals("1")) {
+            return result.getString("api/pageinfo/@lastrevid");
+        } else {
+            Timber.e(result.getString("api/error/@code") + " " + result.getString("api/error/@info"));
+        }
+        return null;
+    }
+
+    /**
+     * Adds the wikimedia-commons-app tag to the edits made on wikidata
+     * @param revisionId
+     * @return
+     * @throws IOException
+     */
+    @Nullable
+    @Override
+    public boolean addWikidataEditTag(String revisionId) throws IOException {
+        ApiResult result = wikidataApi.action("tag")
+                .param("revid", revisionId)
+                .param("centralauthtoken", getCentralAuthToken())
+                .param("token", getWikidataCsrfToken())
+                .param("add", "wikimedia-commons-app")
+                .param("reason", "Add tag for edits made using Android Commons app")
+                .post();
+
+        if (result == null || result.getNode("api") == null) {
+            return false;
+        }
+
+        Node node = result.getNode("api").getDocument();
+        Element element = (Element) node;
+
+        if (element != null && element.getAttribute("status").equals("success")) {
             return true;
         } else {
             Timber.e(result.getString("api/error/@code") + " " + result.getString("api/error/@info"));

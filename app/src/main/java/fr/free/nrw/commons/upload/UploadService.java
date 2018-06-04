@@ -39,6 +39,7 @@ import fr.free.nrw.commons.mwapi.MediaWikiApi;
 import fr.free.nrw.commons.mwapi.UploadResult;
 import fr.free.nrw.commons.utils.ViewUtil;
 import fr.free.nrw.commons.wikidata.WikidataEditListener;
+import fr.free.nrw.commons.wikidata.WikidataEditService;
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
@@ -55,11 +56,9 @@ public class UploadService extends HandlerService<Contribution> {
     public static final String EXTRA_CAMPAIGN = EXTRA_PREFIX + ".campaign";
 
     @Inject MediaWikiApi mwApi;
-    @Inject WikidataEditListener wikidataEditListener;
+    @Inject WikidataEditService wikidataEditService;
     @Inject SessionManager sessionManager;
-    @Inject @Named("default_preferences") SharedPreferences prefs;
     @Inject ContributionDao contributionDao;
-    @Inject @Named("direct_nearby_upload_prefs") SharedPreferences directPrefs;
 
     private NotificationManager notificationManager;
     private NotificationCompat.Builder curProgressNotification;
@@ -262,7 +261,7 @@ public class UploadService extends HandlerService<Contribution> {
             if (!resultStatus.equals("Success")) {
                 showFailedNotification(contribution);
             } else {
-                editWikidataProperty(contribution);
+                wikidataEditService.createClaimWithLogging(contribution.getWikiDataEntityId(), filename);
                 contribution.setFilename(uploadResult.getCanonicalFilename());
                 contribution.setImageUrl(uploadResult.getImageUrl());
                 contribution.setState(Contribution.STATE_COMPLETED);
@@ -283,48 +282,6 @@ public class UploadService extends HandlerService<Contribution> {
                 stopForeground(true);
             }
         }
-    }
-
-    /**
-     * Edits the wikidata entity by adding the P18 property to it.
-     * Adding the P18 edit requires calling the wikidata API to create a claim against the entity
-     * @param contribution
-     */
-    @SuppressLint("CheckResult")
-    private void editWikidataProperty(Contribution contribution) {
-        Timber.d("Upload successful with wiki data entity id as %s", contribution.getWikiDataEntityId());
-        Timber.d("Attempting to edit Wikidata property %s", contribution.getWikiDataEntityId());
-        Observable.fromCallable(() -> mwApi.wikidatCreateClaim(contribution.getWikiDataEntityId(), "P18", "value", getFileName(contribution)))
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(result -> handleClaimResult(contribution, result), throwable -> {
-                    Timber.e(throwable, "Error occurred while making claim");
-                    ViewUtil.showLongToast(getBaseContext(), getResources().getString(R.string.wikidata_edit_failure));
-                });
-    }
-
-    private void handleClaimResult(Contribution contribution, Boolean result) {
-        if(result) {
-            wikidataEditListener.onSuccessfulWikidataEdit();
-            String title = directPrefs.getString("Title", "");
-            String successStringTemplate = getResources().getString(R.string.successful_wikidata_edit);
-            String successMessage = String.format(Locale.getDefault(), successStringTemplate, title);
-            ViewUtil.showLongToast(getBaseContext(), successMessage);
-        } else {
-            Timber.d("Unable to make wiki data edit for entity %s", contribution.getWikiDataEntityId());
-            ViewUtil.showLongToast(getBaseContext(), getResources().getString(R.string.wikidata_edit_failure));
-        }
-    }
-
-    /**
-     * Formats and returns the filename as accepted by the wiki base API
-     * https://www.mediawiki.org/wiki/Wikibase/API#wbcreateclaim
-     * @param contribution
-     * @return
-     */
-    private String getFileName(Contribution contribution) {
-        String filename = String.format("\"%s\"", contribution.getFilename().replace("File:", ""));
-        return filename;
     }
 
     @SuppressLint("StringFormatInvalid")
