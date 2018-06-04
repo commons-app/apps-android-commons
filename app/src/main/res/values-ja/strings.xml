@@ -136,7 +136,7 @@
   <string name="tutorial_1_text">ウィキメディア・コモンズにはウィキペディアで使用する画像のほぼすべてが保管されています。</string>
   <string name="tutorial_1_subtext">あなたの画像は世界中の人々が学習する助けになります!</string>
   <string name="tutorial_2_text">アップロードする画像はあなたご本人が撮影したものかあなたが単独で制作したものに限定します。</string>
-  <string name="tutorial_2_subtext">自然物 (動植物、山)\n• 道具 (自転車、駅)\n• 著名人 (市区村長・都道府県知事、自分が会ったオリンピック選手)</string>
+  <string name="tutorial_2_subtext">自然 (動植物、山)\n• 道具 (自転車、駅)\n• 著名人 (市区村長・都道府県知事、自分が会ったオリンピック選手)</string>
   <string name="tutorial_2_subtext_1">自然物 (動植物、山)</string>
   <string name="tutorial_2_subtext_2">道具 (自転車、駅)</string>
   <string name="tutorial_2_subtext_3">著名人 (市区村長・都道府県知事、自分が会ったオリンピック選手)</string>
