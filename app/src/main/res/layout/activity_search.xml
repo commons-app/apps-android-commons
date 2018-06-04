@@ -40,15 +40,24 @@
             />
         </android.support.v7.widget.Toolbar>
         </android.support.design.widget.AppBarLayout>
-        <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        <FrameLayout
+            android:visibility="gone"
+            xmlns:android="http://schemas.android.com/apk/res/android"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:id="@+id/fragmentContainer"
+            android:id="@+id/resultsContainer"
             android:orientation="horizontal"
             android:layout_below="@id/toolbar_layout"
-            >
-        </FrameLayout>
-
+            />
+        <FrameLayout
+            android:visibility="visible"
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/searchHistoryContainer"
+            android:orientation="horizontal"
+            android:layout_below="@id/toolbar_layout"
+            />
     </RelativeLayout>
 
     <android.support.design.widget.NavigationView

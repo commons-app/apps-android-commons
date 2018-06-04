@@ -8,6 +8,7 @@ import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.FrameLayout;
 
 import com.jakewharton.rxbinding2.view.RxView;
 import com.jakewharton.rxbinding2.widget.RxTextView;
@@ -18,6 +19,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.R;
+import fr.free.nrw.commons.explore.history.SearchHistoryFragment;
 import fr.free.nrw.commons.explore.images.SearchImageFragment;
 import fr.free.nrw.commons.media.MediaDetailPagerFragment;
 import fr.free.nrw.commons.theme.NavigationBaseActivity;
@@ -32,8 +34,10 @@ public class SearchActivity extends NavigationBaseActivity implements MediaDetai
 
     @BindView(R.id.toolbar_search) Toolbar toolbar;
     @BindView(R.id.searchBox) EditText etSearchKeyword;
-
+    @BindView(R.id.resultsContainer) FrameLayout resultsContainer;
+    @BindView(R.id.searchHistoryContainer) FrameLayout searchHistoryContainer;
     private SearchImageFragment searchImageFragment;
+    private SearchHistoryFragment searchHistoryFragment;
     private FragmentManager supportFragmentManager;
     private MediaDetailPagerFragment mediaDetails;
     private String query;
@@ -48,27 +52,39 @@ public class SearchActivity extends NavigationBaseActivity implements MediaDetai
         toolbar.setNavigationOnClickListener(v->onBackPressed());
         supportFragmentManager = getSupportFragmentManager();
         setBrowseImagesFragment();
+        setSearchHistoryFragment();
         RxTextView.textChanges(etSearchKeyword)
-                .takeUntil(RxView.detaches(etSearchKeyword))
-                .debounce(500, TimeUnit.MILLISECONDS)
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe( query -> {
-                        //update image list
-                            if (!TextUtils.isEmpty(query)) {
-                                this.query = query.toString();
-                                searchImageFragment.updateImageList(query.toString());
-                            }else {
-                                // open search history fragment
-                            }
-                        }
-                );
+            .takeUntil(RxView.detaches(etSearchKeyword))
+            .debounce(500, TimeUnit.MILLISECONDS)
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe( query -> {
+                //update image list
+                    if (!TextUtils.isEmpty(query)) {
+                        resultsContainer.setVisibility(View.VISIBLE);
+                        searchHistoryContainer.setVisibility(View.GONE);
+                        this.query = query.toString();
+                        searchImageFragment.updateImageList(query.toString());
+                    }else {
+                        resultsContainer.setVisibility(View.GONE);
+                        searchHistoryContainer.setVisibility(View.VISIBLE);
+                        // open search history fragment
+                    }
+                }
+            );
+    }
+
+    private void setSearchHistoryFragment() {
+        searchHistoryFragment = new SearchHistoryFragment();
+        FragmentTransaction transaction = supportFragmentManager.beginTransaction();
+        transaction.add(R.id.searchHistoryContainer, searchHistoryFragment).commit();
     }
 
 
     private void setBrowseImagesFragment() {
         searchImageFragment = new SearchImageFragment();
         FragmentTransaction transaction = supportFragmentManager.beginTransaction();
-        transaction.add(R.id.fragmentContainer, searchImageFragment).commit();
+        transaction.add(R.id.resultsContainer, searchImageFragment).commit();
+
     }
 
     @Override
@@ -110,7 +126,7 @@ public class SearchActivity extends NavigationBaseActivity implements MediaDetai
             FragmentManager supportFragmentManager = getSupportFragmentManager();
             supportFragmentManager
                     .beginTransaction()
-                    .replace(R.id.fragmentContainer, mediaDetails)
+                    .replace(R.id.resultsContainer, mediaDetails)
                     .addToBackStack(null)
                     .commit();
             supportFragmentManager.executePendingTransactions();

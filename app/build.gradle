@@ -20,8 +20,8 @@ dependencies {
     implementation 'info.debatty:java-string-similarity:0.24'
     implementation 'com.borjabravo:readmoretextview:2.1.0'
     implementation 'com.android.support.constraint:constraint-layout:1.1.0'
-    implementation ('com.mapbox.mapboxsdk:mapbox-android-sdk:5.4.1@aar'){
-        transitive=true
+    implementation('com.mapbox.mapboxsdk:mapbox-android-sdk:5.4.1@aar') {
+        transitive = true
     }
 
     implementation "com.github.deano2390:MaterialShowcaseView:1.2.0"
@@ -80,6 +80,7 @@ dependencies {
     debugImplementation "com.squareup.leakcanary:leakcanary-android:$LEAK_CANARY"
     releaseImplementation "com.squareup.leakcanary:leakcanary-android-no-op:$LEAK_CANARY"
     testImplementation "com.squareup.leakcanary:leakcanary-android-no-op:$LEAK_CANARY"
+    implementation 'com.android.support:support-v4:27.1.1'
 }
 
 android {
@@ -119,7 +120,8 @@ android {
 
     buildTypes {
         release {
-            minifyEnabled false // See https://stackoverflow.com/questions/40232404/google-play-apk-and-android-studio-apk-usb-debug-behaving-differently - proguard.cfg modification alone insufficient.
+            minifyEnabled false
+            // See https://stackoverflow.com/questions/40232404/google-play-apk-and-android-studio-apk-usb-debug-behaving-differently - proguard.cfg modification alone insufficient.
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt', 'proguard-glide.txt'
         }
         debug {
