@@ -4,15 +4,10 @@ import android.database.DataSetObserver;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.view.View;
-import android.widget.EditText;
-
-import com.jakewharton.rxbinding2.view.RxView;
-import com.jakewharton.rxbinding2.widget.RxTextView;
-
-import java.util.concurrent.TimeUnit;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -22,7 +17,6 @@ import fr.free.nrw.commons.explore.images.SearchImageFragment;
 import fr.free.nrw.commons.media.MediaDetailPagerFragment;
 import fr.free.nrw.commons.theme.NavigationBaseActivity;
 import fr.free.nrw.commons.utils.ViewUtil;
-import io.reactivex.android.schedulers.AndroidSchedulers;
 
 /**
  * Represents search screen of this app
@@ -31,12 +25,13 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 public class SearchActivity extends NavigationBaseActivity implements MediaDetailPagerFragment.MediaDetailProvider{
 
     @BindView(R.id.toolbar_search) Toolbar toolbar;
-    @BindView(R.id.searchBox) EditText etSearchKeyword;
+    @BindView(R.id.searchBox)
+    SearchView searchView;
 
     private SearchImageFragment searchImageFragment;
     private FragmentManager supportFragmentManager;
     private MediaDetailPagerFragment mediaDetails;
-    private String query;
+    private String str_query;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,20 +43,35 @@ public class SearchActivity extends NavigationBaseActivity implements MediaDetai
         toolbar.setNavigationOnClickListener(v->onBackPressed());
         supportFragmentManager = getSupportFragmentManager();
         setBrowseImagesFragment();
-        RxTextView.textChanges(etSearchKeyword)
-                .takeUntil(RxView.detaches(etSearchKeyword))
-                .debounce(500, TimeUnit.MILLISECONDS)
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe( query -> {
-                        //update image list
-                            if (!TextUtils.isEmpty(query)) {
-                                this.query = query.toString();
-                                searchImageFragment.updateImageList(query.toString());
-                            }else {
-                                // open search history fragment
-                            }
-                        }
-                );
+        searchView.setQueryHint(getString(R.string.search_commons));
+        searchView.onActionViewExpanded();
+        searchView.clearFocus();
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                //update image list
+                if (!TextUtils.isEmpty(query)) {
+                    str_query = query;
+                    searchImageFragment.updateImageList(query);
+                }else {
+
+                    // open search history fragment
+                }
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                //update image list
+                if (!TextUtils.isEmpty(newText)) {
+                    str_query = newText;
+                    searchImageFragment.updateImageList(newText);
+                }else {
+                    // open search history fragment
+                }
+                return false;
+            }
+        });
     }
 
 
@@ -124,8 +134,8 @@ public class SearchActivity extends NavigationBaseActivity implements MediaDetai
             // back to search so show search toolbar and hide navigation toolbar
             toolbar.setVisibility(View.VISIBLE);
             setNavigationBaseToolbarVisibility(false);
-            if (!TextUtils.isEmpty(query)) {
-                searchImageFragment.updateImageList(query);
+            if (!TextUtils.isEmpty(str_query)) {
+                searchImageFragment.updateImageList(str_query);
             }
         }else {
             toolbar.setVisibility(View.GONE);
