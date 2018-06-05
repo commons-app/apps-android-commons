@@ -347,7 +347,7 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
     @OnClick(R.id.nominateDeletion)
     public void onDeleteButtonClicked(){
         //Reviewer correct me if i have misunderstood something over here
-        //But how does this  if (deleteAll.getVisibility() == View.VISIBLE) {
+        //But how does this  if (delete.getVisibility() == View.VISIBLE) {
         //            enableDeleteButton(true);   makes sense ?
         AlertDialog.Builder alert = new AlertDialog.Builder(getActivity());
         alert.setMessage("Why should this file be deleted?");

@@ -61,7 +61,7 @@ public class CategoryImagesActivity
         supportFragmentManager.addOnBackStackChangedListener(this);
         if (savedInstanceState != null) {
             mediaDetails = (MediaDetailPagerFragment) supportFragmentManager
-                    .findFragmentById(R.id.resultsContainer);
+                    .findFragmentById(R.id.fragmentContainer);
 
         }
         requestAuthToken();
@@ -81,7 +81,7 @@ public class CategoryImagesActivity
             categoryImagesListFragment.setArguments(arguments);
             FragmentTransaction transaction = supportFragmentManager.beginTransaction();
             transaction
-                    .add(R.id.resultsContainer, categoryImagesListFragment)
+                    .add(R.id.fragmentContainer, categoryImagesListFragment)
                     .commit();
         }
     }
@@ -107,7 +107,7 @@ public class CategoryImagesActivity
             FragmentManager supportFragmentManager = getSupportFragmentManager();
             supportFragmentManager
                     .beginTransaction()
-                    .replace(R.id.resultsContainer, mediaDetails)
+                    .replace(R.id.fragmentContainer, mediaDetails)
                     .addToBackStack(null)
                     .commit();
             supportFragmentManager.executePendingTransactions();

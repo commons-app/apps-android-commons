@@ -34,7 +34,7 @@ public class SearchActivity extends NavigationBaseActivity implements MediaDetai
 
     @BindView(R.id.toolbar_search) Toolbar toolbar;
     @BindView(R.id.searchBox) EditText etSearchKeyword;
-    @BindView(R.id.resultsContainer) FrameLayout resultsContainer;
+    @BindView(R.id.fragmentContainer) FrameLayout resultsContainer;
     @BindView(R.id.searchHistoryContainer) FrameLayout searchHistoryContainer;
     private SearchImageFragment searchImageFragment;
     private RecentSearchesFragment recentSearchesFragment;
@@ -83,7 +83,7 @@ public class SearchActivity extends NavigationBaseActivity implements MediaDetai
     private void setBrowseImagesFragment() {
         searchImageFragment = new SearchImageFragment();
         FragmentTransaction transaction = supportFragmentManager.beginTransaction();
-        transaction.add(R.id.resultsContainer, searchImageFragment).commit();
+        transaction.add(R.id.fragmentContainer, searchImageFragment).commit();
 
     }
 
@@ -117,7 +117,6 @@ public class SearchActivity extends NavigationBaseActivity implements MediaDetai
      * @param index item index that should be opened
      */
     public void onSearchImageClicked(int index) {
-        // search query
         ViewUtil.hideKeyboard(this.findViewById(R.id.searchBox));
         toolbar.setVisibility(View.GONE);
         setNavigationBaseToolbarVisibility(true);
@@ -127,7 +126,7 @@ public class SearchActivity extends NavigationBaseActivity implements MediaDetai
             FragmentManager supportFragmentManager = getSupportFragmentManager();
             supportFragmentManager
                     .beginTransaction()
-                    .replace(R.id.resultsContainer, mediaDetails)
+                    .replace(R.id.fragmentContainer, mediaDetails)
                     .addToBackStack(null)
                     .commit();
             supportFragmentManager.executePendingTransactions();
