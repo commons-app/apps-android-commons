@@ -20,7 +20,7 @@ dependencies {
     implementation 'info.debatty:java-string-similarity:0.24'
     implementation 'com.borjabravo:readmoretextview:2.1.0'
     implementation 'com.android.support.constraint:constraint-layout:1.1.0'
-    implementation ('com.mapbox.mapboxsdk:mapbox-android-sdk:5.4.1@aar') {
+    implementation ('com.mapbox.mapboxsdk:mapbox-android-sdk:5.4.1@aar'){
         transitive=true
     }
 
