@@ -64,6 +64,7 @@ import fr.free.nrw.commons.mwapi.MediaWikiApi;
 import fr.free.nrw.commons.utils.ViewUtil;
 import timber.log.Timber;
 
+import android.support.design.widget.FloatingActionButton;
 import static fr.free.nrw.commons.upload.ExistingFileAsync.Result.DUPLICATE_PROCEED;
 import static fr.free.nrw.commons.upload.ExistingFileAsync.Result.NO_DUPLICATE;
 import static fr.free.nrw.commons.upload.FileUtils.getSHA1;
@@ -128,6 +129,7 @@ public class ShareActivity
     private boolean locationPermitted = false;
     private String title;
     private String description;
+    private String wikiDataEntityId;
     private Snackbar snackbar;
     private boolean duplicateCheckPassed = false;
     private boolean isNearbyUpload = false;
@@ -187,7 +189,7 @@ public class ShareActivity
             Timber.d("Cache the categories found");
         }
 
-        uploadController.startUpload(title, mediaUri, description, mimeType, source, decimalCoords, c -> {
+        uploadController.startUpload(title, mediaUri, description, mimeType, source, decimalCoords, wikiDataEntityId, c -> {
             ShareActivity.this.contribution = c;
             showPostUpload();
         });
