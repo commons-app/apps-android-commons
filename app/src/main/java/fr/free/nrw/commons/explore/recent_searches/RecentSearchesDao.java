@@ -42,27 +42,6 @@ public class RecentSearchesDao {
         }
     }
 
-    public void deleteAll(List<String> recentSearchesStringList) {
-        ContentProviderClient db = clientProvider.get();
-        Log.d("qwertyui",recentSearchesStringList.size()+"Size");
-        for (String recentSearchName : recentSearchesStringList) {
-            Log.d("qweName",recentSearchName+"Name");
-            try {
-                RecentSearch recentSearch = find(recentSearchName);
-                if (recentSearch.getContentUri() == null) {
-                    throw new RuntimeException("tried to delete item with no content URI");
-                } else {
-                    db.delete(recentSearch.getContentUri(), null, null);
-                }
-            } catch (RemoteException e) {
-                throw new RuntimeException(e);
-            } finally {
-                db.release();
-            }
-        }
-    }
-
-
     /**
      * Find persisted search query in database, based on its name.
      *
