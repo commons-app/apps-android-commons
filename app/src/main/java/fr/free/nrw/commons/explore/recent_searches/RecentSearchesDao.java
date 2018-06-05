@@ -7,6 +7,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.os.RemoteException;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -22,7 +23,7 @@ public class RecentSearchesDao {
     private final Provider<ContentProviderClient> clientProvider;
 
     @Inject
-    public RecentSearchesDao(@Named("category") Provider<ContentProviderClient> clientProvider) {
+    public RecentSearchesDao(@Named("recent_search") Provider<ContentProviderClient> clientProvider) {
         this.clientProvider = clientProvider;
     }
 
@@ -40,6 +41,27 @@ public class RecentSearchesDao {
             db.release();
         }
     }
+
+    public void deleteAll(List<String> recentSearchesStringList) {
+        ContentProviderClient db = clientProvider.get();
+        Log.d("qwertyui",recentSearchesStringList.size()+"Size");
+        for (String recentSearchName : recentSearchesStringList) {
+            Log.d("qweName",recentSearchName+"Name");
+            try {
+                RecentSearch recentSearch = find(recentSearchName);
+                if (recentSearch.getContentUri() == null) {
+                    throw new RuntimeException("tried to delete item with no content URI");
+                } else {
+                    db.delete(recentSearch.getContentUri(), null, null);
+                }
+            } catch (RemoteException e) {
+                throw new RuntimeException(e);
+            } finally {
+                db.release();
+            }
+        }
+    }
+
 
     /**
      * Find persisted search query in database, based on its name.
@@ -120,7 +142,6 @@ public class RecentSearchesDao {
 
     public static class Table {
         public static final String TABLE_NAME = "recent_searches";
-
         public static final String COLUMN_ID = "_id";
         static final String COLUMN_NAME = "name";
         static final String COLUMN_LAST_USED = "last_used";
@@ -137,7 +158,7 @@ public class RecentSearchesDao {
         static final String CREATE_TABLE_STATEMENT = "CREATE TABLE " + TABLE_NAME + " ("
                 + COLUMN_ID + " INTEGER PRIMARY KEY,"
                 + COLUMN_NAME + " STRING,"
-                + COLUMN_LAST_USED + " INTEGER,"
+                + COLUMN_LAST_USED + " INTEGER"
                 + ");";
 
         public static void onCreate(SQLiteDatabase db) {
@@ -153,20 +174,20 @@ public class RecentSearchesDao {
             if (from == to) {
                 return;
             }
-            if (from < 4) {
+            if (from < 6) {
                 // doesn't exist yet
                 from++;
                 onUpdate(db, from, to);
                 return;
             }
-            if (from == 4) {
-                // table added in version 5
+            if (from == 6) {
+                // table added in version 7
                 onCreate(db);
                 from++;
                 onUpdate(db, from, to);
                 return;
             }
-            if (from == 5) {
+            if (from == 7) {
                 from++;
                 onUpdate(db, from, to);
                 return;

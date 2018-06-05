@@ -1,19 +1,15 @@
 package fr.free.nrw.commons.explore.recent_searches;
 
 import android.net.Uri;
-
 import java.util.Date;
 
 /**
- * Represents a category
+ * Represents a recently searched query
  */
 public class RecentSearch {
     private Uri contentUri;
     private String name;
     private Date lastUsed;
-
-    public RecentSearch() {
-    }
 
     public RecentSearch(Uri contentUri, String name, Date lastUsed) {
         this.contentUri = contentUri;
@@ -31,15 +27,6 @@ public class RecentSearch {
     }
 
     /**
-     * Modifies name
-     *
-     * @param name Category name
-     */
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    /**
      * Gets last used date
      *
      * @return Last used date
@@ -50,14 +37,7 @@ public class RecentSearch {
     }
 
     /**
-     * Generates new last used date
-     */
-    private void touch() {
-        lastUsed = new Date();
-    }
-
-    /**
-     * Gets the content URI for this category
+     * Gets the content URI for this query
      *
      * @return content URI
      */
@@ -66,7 +46,7 @@ public class RecentSearch {
     }
 
     /**
-     * Modifies the content URI - marking this category as already saved in the database
+     * Modifies the content URI - marking this query as already saved in the database
      *
      * @param contentUri the content URI
      */

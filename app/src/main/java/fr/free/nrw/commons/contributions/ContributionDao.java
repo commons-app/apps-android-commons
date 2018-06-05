@@ -75,7 +75,7 @@ public class ContributionDao {
         try {
             if (contribution.getContentUri() == null) {
                 // noooo
-                throw new RuntimeException("tried to delete item with no content URI");
+                throw new RuntimeException("tried to deleteAll item with no content URI");
             } else {
                 db.delete(contribution.getContentUri(), null, null);
             }

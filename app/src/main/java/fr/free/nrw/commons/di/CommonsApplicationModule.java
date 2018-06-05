@@ -21,6 +21,7 @@ import fr.free.nrw.commons.upload.UploadController;
 
 import static android.content.Context.MODE_PRIVATE;
 import static fr.free.nrw.commons.contributions.ContributionsContentProvider.CONTRIBUTION_AUTHORITY;
+import static fr.free.nrw.commons.explore.recent_searches.RecentSearchesContentProvider.RECENT_SEARCH_AUTHORITY;
 import static fr.free.nrw.commons.modifications.ModificationsContentProvider.MODIFICATIONS_AUTHORITY;
 
 @Module
@@ -49,6 +50,13 @@ public class CommonsApplicationModule {
     public ContentProviderClient provideCategoryContentProviderClient(Context context) {
         return context.getContentResolver().acquireContentProviderClient(CATEGORY_AUTHORITY);
     }
+
+    @Provides
+    @Named("recent_search")
+    public ContentProviderClient provideRecentSearchContentProviderClient(Context context) {
+        return context.getContentResolver().acquireContentProviderClient(RECENT_SEARCH_AUTHORITY);
+    }
+
 
     @Provides
     @Named("contribution")

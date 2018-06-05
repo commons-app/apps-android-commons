@@ -21,9 +21,9 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.R;
-import fr.free.nrw.commons.category.Category;
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
 import fr.free.nrw.commons.explore.SearchActivity;
+import fr.free.nrw.commons.explore.recent_searches.RecentSearch;
 import fr.free.nrw.commons.explore.recent_searches.RecentSearchesDao;
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
 import fr.free.nrw.commons.utils.NetworkUtils;
@@ -67,15 +67,14 @@ public class SearchImageFragment extends CommonsDaggerSupportFragment {
     });
 
     private void saveQuery(String query) {
-        Category category = recentSearchesDao.find(query);
+        RecentSearch recentSearch = recentSearchesDao.find(query);
 
-        // Newly used category...
-        if (category == null) {
-            category = new Category(null, query, new Date(), 0);
+        // Newly searched query...
+        if (recentSearch == null) {
+            recentSearch = new RecentSearch(null, query, new Date());
         }
+        recentSearchesDao.save(recentSearch);
 
-        category.incTimesUsed();
-        recentSearchesDao.save(category);
     }
 
 

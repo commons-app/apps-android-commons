@@ -6,12 +6,13 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 import fr.free.nrw.commons.category.CategoryDao;
 import fr.free.nrw.commons.contributions.ContributionDao;
+import fr.free.nrw.commons.explore.recent_searches.RecentSearchesDao;
 import fr.free.nrw.commons.modifications.ModifierSequenceDao;
 
 public class DBOpenHelper  extends SQLiteOpenHelper {
 
     private static final String DATABASE_NAME = "commons.db";
-    private static final int DATABASE_VERSION = 6;
+    private static final int DATABASE_VERSION = 7;
 
     /**
      * Do not use directly - @Inject an instance where it's needed and let
@@ -26,6 +27,7 @@ public class DBOpenHelper  extends SQLiteOpenHelper {
         ContributionDao.Table.onCreate(sqLiteDatabase);
         ModifierSequenceDao.Table.onCreate(sqLiteDatabase);
         CategoryDao.Table.onCreate(sqLiteDatabase);
+        RecentSearchesDao.Table.onCreate(sqLiteDatabase);
     }
 
     @Override
@@ -33,5 +35,6 @@ public class DBOpenHelper  extends SQLiteOpenHelper {
         ContributionDao.Table.onUpdate(sqLiteDatabase, from, to);
         ModifierSequenceDao.Table.onUpdate(sqLiteDatabase, from, to);
         CategoryDao.Table.onUpdate(sqLiteDatabase, from, to);
+        RecentSearchesDao.Table.onUpdate(sqLiteDatabase, from, to);
     }
 }

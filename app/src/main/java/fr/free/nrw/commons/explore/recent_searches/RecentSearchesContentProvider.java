@@ -22,17 +22,17 @@ import static fr.free.nrw.commons.explore.recent_searches.RecentSearchesDao.Tabl
 
 public class RecentSearchesContentProvider extends CommonsDaggerContentProvider {
 
-    public static final String AUTHORITY = "fr.free.nrw.commons.explore.recent_searches.contentprovider";
+    public static final String RECENT_SEARCH_AUTHORITY = "fr.free.nrw.commons.explore.recent_searches.contentprovider";
     // For URI matcher
     private static final int RECENT_SEARCHES = 1;
     private static final int RECENT_SEARCHES_ID = 2;
     private static final String BASE_PATH = "recent_searches";
-    public static final Uri BASE_URI = Uri.parse("content://" + AUTHORITY + "/" + BASE_PATH);
+    public static final Uri BASE_URI = Uri.parse("content://" + RECENT_SEARCH_AUTHORITY + "/" + BASE_PATH);
     private static final UriMatcher uriMatcher = new UriMatcher(NO_MATCH);
 
     static {
-        uriMatcher.addURI(AUTHORITY, BASE_PATH, RECENT_SEARCHES);
-        uriMatcher.addURI(AUTHORITY, BASE_PATH + "/#", RECENT_SEARCHES_ID);
+        uriMatcher.addURI(RECENT_SEARCH_AUTHORITY, BASE_PATH, RECENT_SEARCHES);
+        uriMatcher.addURI(RECENT_SEARCH_AUTHORITY, BASE_PATH + "/#", RECENT_SEARCHES_ID);
     }
 
     public static Uri uriForId(int id) {
