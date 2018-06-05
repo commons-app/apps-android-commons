@@ -70,7 +70,7 @@ public class DeleteTask extends AsyncTask<Void, Integer, Boolean> {
         mwApi.setAuthCookie(authCookie);
 
         Calendar calendar = Calendar.getInstance();
-        String fileDeleteString = "{{deleteAll|reason=" + reason +
+        String fileDeleteString = "{{delete|reason=" + reason +
                 "|subpage=" +media.getFilename() +
                 "|day=" + calendar.get(Calendar.DAY_OF_MONTH) +
                 "|month=" + calendar.getDisplayName(Calendar.MONTH,Calendar.LONG, Locale.getDefault()) +
@@ -129,7 +129,7 @@ public class DeleteTask extends AsyncTask<Void, Integer, Boolean> {
                 message = "Getting token";
                 break;
             case 1:
-                message = "Adding deleteAll message to file";
+                message = "Adding delete message to file";
                 break;
             case 2:
                 message = "Creating Delete requests sub-page";
