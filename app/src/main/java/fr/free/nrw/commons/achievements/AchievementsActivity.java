@@ -2,6 +2,7 @@ package fr.free.nrw.commons.achievements;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -14,10 +15,12 @@ import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.content.res.ResourcesCompat;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.Toolbar;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.ContextThemeWrapper;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -145,7 +148,7 @@ public class AchievementsActivity extends NavigationBaseActivity {
         if (id == R.id.share_app_icon) {
             View rootView = getWindow().getDecorView().findViewById(android.R.id.content);
             Bitmap screenShot = Utils.getScreenShot(rootView);
-            shareScreen(screenShot);
+            showAlert(screenShot);
         }
 
         return super.onOptionsItemSelected(item);
@@ -343,6 +346,33 @@ public class AchievementsActivity extends NavigationBaseActivity {
         drawable.draw(canvas);
 
         return bitmap;
+    }
+
+    /**
+     * It display the alertDialog with Image of screenshot
+     * @param screenshot
+     */
+    public void showAlert(Bitmap screenshot){
+        AlertDialog.Builder alertadd = new AlertDialog.Builder(AchievementsActivity.this);
+        LayoutInflater factory = LayoutInflater.from(AchievementsActivity.this);
+        final View view = factory.inflate(R.layout.image_alert_layout, null);
+        ImageView screenShotImage = (ImageView) view.findViewById(R.id.alert_image);
+        screenShotImage.setImageBitmap(screenshot);
+        TextView shareMessage = (TextView) view.findViewById(R.id.alert_text);
+        shareMessage.setText(R.string.achievements_share_message);
+        alertadd.setView(view);
+        alertadd.setPositiveButton("Proceed", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+                shareScreen(screenshot);
+            }
+        });
+        alertadd.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
+        alertadd.show();
     }
 
 }

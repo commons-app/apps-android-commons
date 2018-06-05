@@ -292,4 +292,5 @@
   <string name="images_uploaded">Images Uploaded</string>
   <string name="image_reverts">Images Not Reverted</string>
   <string name="images_used_by_wiki">Images Used By Wiki</string>
+  <string name="achievements_share_message">Proceed to Share the Screenshot of Achievements</string>
 </resources>
