@@ -13,16 +13,14 @@ import android.widget.FrameLayout;
 import com.jakewharton.rxbinding2.view.RxView;
 import com.jakewharton.rxbinding2.widget.RxTextView;
 
-import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.R;
-import fr.free.nrw.commons.category.Category;
-import fr.free.nrw.commons.explore.recent_searches.RecentSearchesFragment;
 import fr.free.nrw.commons.explore.images.SearchImageFragment;
+import fr.free.nrw.commons.explore.recent_searches.RecentSearchesFragment;
 import fr.free.nrw.commons.media.MediaDetailPagerFragment;
 import fr.free.nrw.commons.theme.NavigationBaseActivity;
 import fr.free.nrw.commons.utils.ViewUtil;
