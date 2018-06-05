@@ -44,6 +44,7 @@ class MockCommonsApplicationModule(appContext: Context) : CommonsApplicationModu
     val mockDbOpenHelper: DBOpenHelper = mock()
     val nearbyPlaces: NearbyPlaces = mock()
     val lruCache: LruCache<String, String> = mock()
+    val gson: Gson = Gson()
     val categoryClient: ContentProviderClient = mock()
     val contributionClient: ContentProviderClient = mock()
     val modificationClient: ContentProviderClient = mock()

@@ -731,6 +731,7 @@ public class NearbyMapFragment extends DaggerFragment {
         editor.putString("Title", place.getName());
         editor.putString("Desc", place.getLongDescription());
         editor.putString("Category", place.getCategory());
+        editor.putString("WikiDataEntityId", place.getWikiDataEntityId());
         editor.apply();
     }
 
@@ -766,7 +767,7 @@ public class NearbyMapFragment extends DaggerFragment {
         if (resultCode == RESULT_OK) {
             Timber.d("OnActivityResult() parameters: Req code: %d Result code: %d Data: %s",
                     requestCode, resultCode, data);
-            controller.handleImagePicked(requestCode, data, true);
+            controller.handleImagePicked(requestCode, data, true, directPrefs.getString("WikiDataEntityId", null));
         } else {
             Timber.e("OnActivityResult() parameters: Req code: %d Result code: %d Data: %s",
                     requestCode, resultCode, data);

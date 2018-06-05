@@ -81,6 +81,7 @@ import io.reactivex.schedulers.Schedulers;
 import fr.free.nrw.commons.utils.ViewUtil;
 import timber.log.Timber;
 
+import android.support.design.widget.FloatingActionButton;
 import static fr.free.nrw.commons.upload.ExistingFileAsync.Result.DUPLICATE_PROCEED;
 import static fr.free.nrw.commons.upload.ExistingFileAsync.Result.NO_DUPLICATE;
 
@@ -138,6 +139,8 @@ public class ShareActivity
 
     private Uri mediaUri;
     private Contribution contribution;
+    private FloatingActionButton maps_fragment;
+
     private boolean cacheFound;
 
     private GPSExtractor imageObj;
@@ -150,6 +153,7 @@ public class ShareActivity
 
     private String title;
     private String description;
+    private String wikiDataEntityId;
     private Snackbar snackbar;
     private boolean duplicateCheckPassed = false;
 
@@ -160,7 +164,7 @@ public class ShareActivity
     private long ShortAnimationDuration;
     private boolean isFABOpen = false;
 
-    //Had to make them class variables, to extract out the click listeners, also I see no harm in this
+          //Had to make them class variables, to extract out the click listeners, also I see no harm in this
     final Rect startBounds = new Rect();
     final Rect finalBounds = new Rect();
     final Point globalOffset = new Point();
@@ -212,7 +216,7 @@ public class ShareActivity
             Timber.d("Cache the categories found");
         }
 
-        uploadController.startUpload(title, mediaUri, description, mimeType, source, decimalCoords, c -> {
+        uploadController.startUpload(title, mediaUri, description, mimeType, source, decimalCoords, wikiDataEntityId, c -> {
             ShareActivity.this.contribution = c;
             showPostUpload();
         });
@@ -295,7 +299,10 @@ public class ShareActivity
             }
             if (intent.hasExtra("isDirectUpload")) {
                 Timber.d("This was initiated by a direct upload from Nearby");
-                isNearbyUpload = true;
+                isNearbyUpload = intent.getBooleanExtra("isDirectUpload", false);
+            }
+            if (intent.hasExtra("wikiDataEntityId")) {
+                wikiDataEntityId = intent.getStringExtra("wikiDataEntityId");
             }
             mimeType = intent.getType();
         }
