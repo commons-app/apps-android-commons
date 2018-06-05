@@ -43,6 +43,7 @@ import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.Utils;
 import fr.free.nrw.commons.auth.SessionManager;
@@ -133,6 +134,21 @@ public class AchievementsActivity extends NavigationBaseActivity {
         setAchievements();
         setUploadCount();
         initDrawer();
+    }
+
+    /**
+     * to invoke the AlertDialog on clicking info button
+     */
+    @OnClick(R.id.achievement_info)
+    public void showInfoDialog(){
+        new AlertDialog.Builder(AchievementsActivity.this)
+                .setTitle(R.string.Achievements)
+                .setMessage(R.string.achievements_info_message)
+                .setCancelable(true)
+                .setNeutralButton(android.R.string.ok, (dialog, id) -> dialog.cancel())
+                .create()
+                .show();
+
     }
 
     @Override
