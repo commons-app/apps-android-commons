@@ -42,8 +42,6 @@
   <string name="share_title_hint">სათაური</string>
   <string name="share_description_hint">აღწერა</string>
   <string name="login_failed_network">შესვლა ვერ ხერხდება - ქსელის შეცდომა</string>
-  <string name="login_failed_username">შესვლა ვერ ხერხდება - გთხოვთ შეამოწმოთ სახელი</string>
-  <string name="login_failed_password">შესვლა ვერ ხერხდება - გთხოვთ შეამოწმოთ პაროლი</string>
   <string name="login_failed_throttled">ძალიან ბევრი წარუმატებელი მცდელობა. გთხოვთ, რამდენიმე წუთში სცადეთ კვლავ.</string>
   <string name="login_failed_blocked">უკაცრავად, ეს მომხმარებელი დაბლოკილია ვიკისაწყობში</string>
   <string name="login_failed_2fa_needed">თქვენ უნდა შეიყვანოთ ორფაქტორიანი ავტორიზაციის კოდი.</string>

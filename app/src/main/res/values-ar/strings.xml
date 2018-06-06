@@ -54,8 +54,6 @@
   <string name="share_title_hint">العنوان</string>
   <string name="share_description_hint">الوصف</string>
   <string name="login_failed_network">لا يمكن تسجيل الدخول - فشل في شبكة الاتصال</string>
-  <string name="login_failed_username">لا يمكن تسجيل الدخول - فضلا تحقق من اسم المستخدم</string>
-  <string name="login_failed_password">لا يمكن تسجيل الدخول - فضلا تحقق من كلمة السر</string>
   <string name="login_failed_throttled">الكثير من المحاولات غير الناجحة. الرجاء المحاولة مرة أخرى في بضع دقائق.</string>
   <string name="login_failed_blocked">عذراً، لقد تم منع هذا المستخدم على كومنز</string>
   <string name="login_failed_2fa_needed">يجب توفير رمز التحقق المزدوج.</string>

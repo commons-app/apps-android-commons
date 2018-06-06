@@ -1,5 +1,6 @@
 package fr.free.nrw.commons
 
+import android.content.ContentProviderClient
 import android.content.Context
 import android.content.SharedPreferences
 import android.support.v4.util.LruCache
@@ -8,7 +9,6 @@ import com.nhaarman.mockito_kotlin.mock
 import com.squareup.leakcanary.RefWatcher
 import fr.free.nrw.commons.auth.AccountUtil
 import fr.free.nrw.commons.auth.SessionManager
-import fr.free.nrw.commons.caching.CacheController
 import fr.free.nrw.commons.data.DBOpenHelper
 import fr.free.nrw.commons.di.CommonsApplicationComponent
 import fr.free.nrw.commons.di.CommonsApplicationModule
@@ -33,6 +33,7 @@ class TestCommonsApplication : CommonsApplication() {
     override fun setupLeakCanary(): RefWatcher = RefWatcher.DISABLED
 }
 
+@Suppress("MemberVisibilityCanBePrivate")
 class MockCommonsApplicationModule(appContext: Context) : CommonsApplicationModule(appContext) {
     val accountUtil: AccountUtil = mock()
     val appSharedPreferences: SharedPreferences = mock()
@@ -41,13 +42,23 @@ class MockCommonsApplicationModule(appContext: Context) : CommonsApplicationModu
     val otherSharedPreferences: SharedPreferences = mock()
     val uploadController: UploadController = mock()
     val mockSessionManager: SessionManager = mock()
-    val mediaWikiApi: MediaWikiApi = mock()
     val locationServiceManager: LocationServiceManager = mock()
-    val cacheController: CacheController = mock()
     val mockDbOpenHelper: DBOpenHelper = mock()
     val nearbyPlaces: NearbyPlaces = mock()
     val lruCache: LruCache<String, String> = mock()
     val gson: Gson = Gson()
+    val categoryClient: ContentProviderClient = mock()
+    val contributionClient: ContentProviderClient = mock()
+    val modificationClient: ContentProviderClient = mock()
+    val uploadPrefs: SharedPreferences = mock()
+
+    override fun provideCategoryContentProviderClient(context: Context?): ContentProviderClient = categoryClient
+
+    override fun provideContributionContentProviderClient(context: Context?): ContentProviderClient = contributionClient
+
+    override fun provideModificationContentProviderClient(context: Context?): ContentProviderClient = modificationClient
+
+    override fun providesDirectNearbyUploadPreferences(context: Context?): SharedPreferences = uploadPrefs
 
     override fun providesAccountUtil(context: Context): AccountUtil = accountUtil
 
@@ -61,11 +72,7 @@ class MockCommonsApplicationModule(appContext: Context) : CommonsApplicationModu
 
     override fun providesSessionManager(context: Context, mediaWikiApi: MediaWikiApi, sharedPreferences: SharedPreferences): SessionManager = mockSessionManager
 
-    override fun provideMediaWikiApi(context: Context, sharedPreferences: SharedPreferences, categorySharedPreferences: SharedPreferences, gson: Gson): MediaWikiApi = mediaWikiApi
-
     override fun provideLocationServiceManager(context: Context): LocationServiceManager = locationServiceManager
-
-    override fun provideCacheController(): CacheController = cacheController
 
     override fun provideDBOpenHelper(context: Context): DBOpenHelper = mockDbOpenHelper
 

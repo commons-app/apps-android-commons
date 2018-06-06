@@ -53,8 +53,6 @@
   <string name="share_title_hint">शीर्षक</string>
   <string name="share_description_hint">विवरण</string>
   <string name="login_failed_network">प्रवेश नहीं हो रहा - नेटवर्क विफल</string>
-  <string name="login_failed_username">प्रवेश नहीं हो रहा - कृपया अपना सदस्य नाम जाँचें</string>
-  <string name="login_failed_password">प्रवेश नहीं हो रहा - कृपया अपना पासवर्ड जाँचें</string>
   <string name="login_failed_throttled">ढेर सारे असफल प्रयास होने के कारण कुछ मिनटों के बाद प्रयास करें।</string>
   <string name="login_failed_blocked">क्षमा करें, यह सदस्य कॉमन्स में अवरोधित है</string>
   <string name="login_failed_2fa_needed">आपको अपना दो कारक प्रमाणन कोड प्रदान करना होगा।</string>

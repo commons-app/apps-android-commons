@@ -39,8 +39,6 @@
   <string name="share_title_hint">शीर्षक</string>
   <string name="share_description_hint">वर्णन</string>
   <string name="login_failed_network">प्रवेश गर्न असमर्थ - जडान खराबी</string>
-  <string name="login_failed_username">प्रवेश गर्न असमर्थ - कृपया तपाईंको प्रयोगकर्ता नाम जाँच गर्नुहोस्</string>
-  <string name="login_failed_password">प्रवेश गर्न असमर्थ - कृपया आफ्नो पासवर्ड जाँच गर्नुहोस</string>
   <string name="login_failed_throttled" fuzzy="true">धेरै असफल प्रयासहरू भए । कृपया केही मिनेट पछि पुन: प्रयास गर्नुहोस</string>
   <string name="login_failed_blocked">माफ गर्नुहोस, यो प्रयोगकर्तालाई कमोन्समा ब्लक गरिएको छ</string>
   <string name="login_failed_generic">प्रवेश सफल हुन सकेन</string>
@@ -97,4 +95,6 @@
   <string name="detail_license_empty">अज्ञान अनुमतिपत्र</string>
   <string name="menu_refresh">ताजागर्ने</string>
   <string name="toggle_view_button">टगल दृश्य</string>
+  <string name="menu_set_wallpaper">भित्तेपत्र चयन गर्नुहोस्</string>
+  <string name="wallpaper_set_successfully">भित्तेपत्र सफलतापूर्वक चयन भयो!</string>
 </resources>

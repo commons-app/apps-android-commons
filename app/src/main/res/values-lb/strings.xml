@@ -50,8 +50,6 @@
   <string name="share_title_hint">Titel</string>
   <string name="share_description_hint">Beschreiwung</string>
   <string name="login_failed_network">Aloggen huet net funktionéiert - Feeler mam Reseau</string>
-  <string name="login_failed_username">Login net méiglech - kuckt w.e.g. Äre Benotzernumm no</string>
-  <string name="login_failed_password">Login net méiglech - kuckt w.e.g. Äert Passwuert no</string>
   <string name="login_failed_throttled">Ze dacks ouni Succès probéiert. Probéiert w.e.g. an e puer Minutten nach eng Kéier.</string>
   <string name="login_failed_blocked">Pardon, dëse Benotzer ass op Commons gespaart</string>
   <string name="login_failed_generic">Aloggen huet net funktionéiert</string>
@@ -244,4 +242,6 @@
   <string name="no_images_found">Keng Biller fonnt!</string>
   <string name="error_loading_images">Feeler beim Eropluede vu Biller.</string>
   <string name="image_uploaded_by">Eropgeluede vum: %1$s</string>
+  <string name="menu_set_wallpaper">Hannergrondbild festleeën</string>
+  <string name="wallpaper_set_successfully">Hannergrondbild festgeluecht</string>
 </resources>

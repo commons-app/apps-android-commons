@@ -53,8 +53,6 @@
   <string name="share_title_hint">Titolo</string>
   <string name="share_description_hint">Descrizione</string>
   <string name="login_failed_network">Impossibile effettuare l\'accesso - errore di rete</string>
-  <string name="login_failed_username">Impossibile effettuare l\'accesso - controlla il nome utente</string>
-  <string name="login_failed_password">Impossibile effettuare l\'accesso - controlla la password</string>
   <string name="login_failed_throttled">Troppi tentativi falliti. Riprova tra alcuni minuti.</string>
   <string name="login_failed_blocked">Spiacente, questo utente è stato bloccato su Commons</string>
   <string name="login_failed_2fa_needed">Devi fornire il tuo codice di autenticazione a due fattori.</string>

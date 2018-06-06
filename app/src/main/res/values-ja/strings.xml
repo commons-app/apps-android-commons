@@ -58,8 +58,6 @@
   <string name="add_title_toast">ファイル名をつけてください</string>
   <string name="share_description_hint">説明</string>
   <string name="login_failed_network">ログインできません - ネットワークのエラーです</string>
-  <string name="login_failed_username">ログインできません - 利用者名を確認してください</string>
-  <string name="login_failed_password">ログインできません - パスワードを確認してください</string>
   <string name="login_failed_throttled">失敗した回数が多すぎます。数分待ってからもう一度お試しください。</string>
   <string name="login_failed_blocked">申し訳ありませんが、この利用者はコモンズでブロックされています。</string>
   <string name="login_failed_2fa_needed">2要素認証コードを提供する必要があります。</string>
@@ -138,7 +136,7 @@
   <string name="tutorial_1_text">ウィキメディア・コモンズにはウィキペディアで使用する画像のほぼすべてが保管されています。</string>
   <string name="tutorial_1_subtext">あなたの画像は世界中の人々が学習する助けになります!</string>
   <string name="tutorial_2_text">アップロードする画像はあなたご本人が撮影したものかあなたが単独で制作したものに限定します。</string>
-  <string name="tutorial_2_subtext">自然物 (動植物、山)\n• 道具 (自転車、駅)\n• 著名人 (市区村長・都道府県知事、自分が会ったオリンピック選手)</string>
+  <string name="tutorial_2_subtext">自然 (動植物、山)\n• 道具 (自転車、駅)\n• 著名人 (市区村長・都道府県知事、自分が会ったオリンピック選手)</string>
   <string name="tutorial_2_subtext_1">自然物 (動植物、山)</string>
   <string name="tutorial_2_subtext_2">道具 (自転車、駅)</string>
   <string name="tutorial_2_subtext_3">著名人 (市区村長・都道府県知事、自分が会ったオリンピック選手)</string>

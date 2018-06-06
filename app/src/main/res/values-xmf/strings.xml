@@ -41,8 +41,6 @@
   <string name="share_title_hint">დუდჯოხო</string>
   <string name="share_description_hint">ეჭარუა</string>
   <string name="login_failed_network">მიშულაქ ვემიხუჯინუ - რშვილიშ ჩილათა</string>
-  <string name="login_failed_username">მიშულაქ ვემიხუჯინუ - ქორთხინთ გეგნაჯინით ჯოხოს</string>
-  <string name="login_failed_password">მიშულაქ ვემიხუჯინუ - ქორთხინთ გეგნაჯინით პაროლს</string>
   <string name="login_failed_throttled">ძალამ მიარე უმწუძინუ ცადება. ქორთხინ, მუხირენ წუთშა ხოლო ქოცადით.</string>
   <string name="login_failed_blocked">მორდება, თე მახვარებუ ბლოკირი რე ვიკიოწკარუეს</string>
   <string name="login_failed_2fa_needed">თქვა გემშიონათ ოკო ჟირფაქტორიანი ავტორიზაციაშ კოდი.</string>

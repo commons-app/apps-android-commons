@@ -41,8 +41,6 @@
   <string name="share_title_hint">Titel</string>
   <string name="share_description_hint">Òpisënk</string>
   <string name="login_failed_network">Ni mòże sã wlogòwac - fela sécë</string>
-  <string name="login_failed_username">Ni mòże sã wlogòwac - sprôwdzë miono brëkòwnika</string>
-  <string name="login_failed_password">Ni mòże sã wlogòwac - sprôwdzë parolã</string>
   <string name="login_failed_throttled">Za wiele nieùdałich prób wlogòwaniô. Spróbùjë znowa za czile minut.</string>
   <string name="login_failed_blocked">Nen brëkòwnik òstôł zablokòwóny na Commons</string>
   <string name="login_failed_2fa_needed">Mùszisz wpisac swój kòd dlô dwafaktorowi aùtorizacëji.</string>

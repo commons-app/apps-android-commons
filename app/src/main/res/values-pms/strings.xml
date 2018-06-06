@@ -49,8 +49,7 @@
   <string name="add_title_toast">Për piasì, ch\'a-j buta \'n tìtol a s\'archivi</string>
   <string name="share_description_hint">Descrission</string>
   <string name="login_failed_network">Impossìbil rintré ant ël sistema - la rej a marcia nen</string>
-  <string name="login_failed_username">Impossìbil rintré ant ël sistema - për piasì, ch\'a verìfica sò stranòm</string>
-  <string name="login_failed_password">Impossìbil rintré ant ël sistema - për piasì, ch\'a contròla soa ciav</string>
+  <string name="login_failed_wrong_credentials">Impossìbil rintré ant ël sistema - për piasì ch\'a contròla sò stranòm e soa ciav</string>
   <string name="login_failed_throttled">Tròpi tentativ falì. Për piasì, ch\'a preuva torna da-sì chèiche minute.</string>
   <string name="login_failed_blocked">An dëspias, s\'utent-sì a l\'é stàit blocà ansima a Commons</string>
   <string name="login_failed_2fa_needed">A dev fornì sò còdes d\'autentificassion a doi fator.</string>
@@ -273,4 +272,6 @@
   <string name="share_app_title">Partagé j\'aplicassion</string>
   <string name="share_coordinates_not_present">Le coordinà a son nen ëstàite spessificà durant la selession ëd la plancia</string>
   <string name="error_fetching_nearby_places">Eror durant l\'esplorassion dj\'anviron.</string>
+  <string name="menu_set_wallpaper">Definì la tapissarìa</string>
+  <string name="wallpaper_set_successfully">La tapissarìa a l\'é stàita definìa për da bin!</string>
 </resources>

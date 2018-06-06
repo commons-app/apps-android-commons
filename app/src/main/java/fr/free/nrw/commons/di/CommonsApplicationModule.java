@@ -13,17 +13,18 @@ import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;
+
 import fr.free.nrw.commons.BuildConfig;
-import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.auth.AccountUtil;
 import fr.free.nrw.commons.auth.SessionManager;
-import fr.free.nrw.commons.caching.CacheController;
 import fr.free.nrw.commons.data.DBOpenHelper;
 import fr.free.nrw.commons.location.LocationServiceManager;
 import fr.free.nrw.commons.mwapi.ApacheHttpClientMediaWikiApi;
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
 import fr.free.nrw.commons.nearby.NearbyPlaces;
 import fr.free.nrw.commons.upload.UploadController;
+import fr.free.nrw.commons.wikidata.WikidataEditListener;
+import fr.free.nrw.commons.wikidata.WikidataEditListenerImpl;
 
 import static android.content.Context.MODE_PRIVATE;
 import static fr.free.nrw.commons.contributions.ContributionsContentProvider.CONTRIBUTION_AUTHORITY;
@@ -33,7 +34,6 @@ import static fr.free.nrw.commons.modifications.ModificationsContentProvider.MOD
 @SuppressWarnings({"WeakerAccess", "unused"})
 public class CommonsApplicationModule {
     public static final String CATEGORY_AUTHORITY = "fr.free.nrw.commons.categories.contentprovider";
-    public static final long OK_HTTP_CACHE_SIZE = 10 * 1024 * 1024;
 
     private Context applicationContext;
 
@@ -119,33 +119,8 @@ public class CommonsApplicationModule {
 
     @Provides
     @Singleton
-    public MediaWikiApi provideMediaWikiApi(Context context,
-                                            @Named("default_preferences") SharedPreferences defaultPreferences,
-                                            @Named("category_prefs") SharedPreferences categoryPrefs,
-                                            Gson gson) {
-        return new ApacheHttpClientMediaWikiApi(context, BuildConfig.WIKIMEDIA_API_HOST, defaultPreferences, categoryPrefs, gson);
-    }
-
-    @Provides
-    @Singleton
     public LocationServiceManager provideLocationServiceManager(Context context) {
         return new LocationServiceManager(context);
-    }
-
-    /**
-     * Gson objects are very heavy. The app should ideally be using just one instance of it instead of creating new instances everywhere.
-     * @return returns a singleton Gson instance
-     */
-    @Provides
-    @Singleton
-    public Gson provideGson() {
-        return new Gson();
-    }
-
-    @Provides
-    @Singleton
-    public CacheController provideCacheController() {
-        return new CacheController();
     }
 
     @Provides
@@ -164,5 +139,11 @@ public class CommonsApplicationModule {
     @Singleton
     public LruCache<String, String> provideLruCache() {
         return new LruCache<>(1024);
+    }
+
+    @Provides
+    @Singleton
+    public WikidataEditListener provideWikidataEditListener() {
+        return new WikidataEditListenerImpl();
     }
 }

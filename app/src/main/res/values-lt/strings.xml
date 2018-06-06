@@ -45,8 +45,6 @@
   <string name="share_title_hint">Pavadinimas</string>
   <string name="share_description_hint">Aprašymas</string>
   <string name="login_failed_network">Negalima prisijungti - tinklo klaida</string>
-  <string name="login_failed_username">Negalima prisijungti - prašome patikrinti savo vartotojo vardą</string>
-  <string name="login_failed_password">Negalima prisijungti - prašome patikrinti savo slaptažodį</string>
   <string name="login_failed_throttled">Per daug nesėkmingų bandymų. Pabandykite dar kartą po keleto minučių.</string>
   <string name="login_failed_blocked">Atsiprašome, šis vartotojas buvo užblokuotas Commons</string>
   <string name="login_failed_generic">Prisijungti nepavyko</string>

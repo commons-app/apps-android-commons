@@ -7,18 +7,25 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import fr.free.nrw.commons.upload.MwVolleyApi;
+import javax.inject.Inject;
+import javax.inject.Singleton;
+
+import fr.free.nrw.commons.upload.GpsCategoryModel;
 import timber.log.Timber;
 
+@Singleton
 public class CacheController {
 
+    private final GpsCategoryModel gpsCategoryModel;
+    private final QuadTree<List<String>> quadTree;
     private double x, y;
-    private QuadTree<List<String>> quadTree;
     private double xMinus, xPlus, yMinus, yPlus;
 
     private static final int EARTH_RADIUS = 6378137;
 
-    public CacheController() {
+    @Inject
+    CacheController(GpsCategoryModel gpsCategoryModel) {
+        this.gpsCategoryModel = gpsCategoryModel;
         quadTree = new QuadTree<>(-180, -90, +180, +90);
     }
 
@@ -31,8 +38,8 @@ public class CacheController {
 
     public void cacheCategory() {
         List<String> pointCatList = new ArrayList<>();
-        if (MwVolleyApi.GpsCatExists.getGpsCatExists()) {
-            pointCatList.addAll(MwVolleyApi.getGpsCat());
+        if (gpsCategoryModel.getGpsCatExists()) {
+            pointCatList.addAll(gpsCategoryModel.getCategoryList());
             Timber.d("Categories being cached: %s", pointCatList);
         } else {
             Timber.d("No categories found, so no categories cached");
@@ -65,7 +72,7 @@ public class CacheController {
     }
 
     //Based on algorithm at http://gis.stackexchange.com/questions/2951/algorithm-for-offsetting-a-latitude-longitude-by-some-amount-of-meters
-    public void convertCoordRange() {
+    private void convertCoordRange() {
         //Position, decimal degrees
         double lat = y;
         double lon = x;

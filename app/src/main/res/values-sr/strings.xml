@@ -57,8 +57,6 @@
   <string name="add_title_toast">Унесите наслов за ову датотеку</string>
   <string name="share_description_hint">Опис</string>
   <string name="login_failed_network">Неуспешно пријављивање – грешка на мрежи</string>
-  <string name="login_failed_username">Неуспешно пријављивање – проверите Ваше корисничко име</string>
-  <string name="login_failed_password">Неуспешно пријављивање – проверите Вашу лозинку</string>
   <string name="login_failed_throttled">Превише неуспешних покушаја. Пробајте поново за неколико минута.</string>
   <string name="login_failed_blocked">Нажалост, овај корисник је блокиран на Остави</string>
   <string name="login_failed_2fa_needed">Морате унети Ваш двофакторски код за аутентификацију.</string>

@@ -34,8 +34,6 @@
   <string name="share_title_hint">Titul</string>
   <string name="share_description_hint">Wopisanje</string>
   <string name="login_failed_network">Přizjewjenje je so njeporadźiło - syćowy zmylk</string>
-  <string name="login_failed_username">Přizjewjenje je njemóžno - prošu přepruwuj swoje wužiwarske mjeno</string>
-  <string name="login_failed_password">Přizjewjenje njeje móžno - prošu přepruwuj swoje hesło</string>
   <string name="login_failed_throttled" fuzzy="true">Přewjele njewuspěšnych pospytow. Prošu spytaj za něšto mjeńšin hišće raz.</string>
   <string name="login_failed_blocked">Tutoho wužiwarja su bohužel na Commons zablokowali</string>
   <string name="login_failed_generic">Přizjewjenje je so njeporadźiło</string>
