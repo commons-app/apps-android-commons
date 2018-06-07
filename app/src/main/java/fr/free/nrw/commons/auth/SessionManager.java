@@ -81,6 +81,12 @@ public class SessionManager {
         return sharedPreferences.getBoolean("isUserLoggedIn", false);
     }
 
+    public void forceLogin(Context context) {
+        if (context != null) {
+            LoginActivity.startYourself(context);
+        }
+    }
+
     public Completable clearAllAccounts() {
         AccountManager accountManager = AccountManager.get(context);
         Account[] allAccounts = accountManager.getAccountsByType(ACCOUNT_TYPE);
