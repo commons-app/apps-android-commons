@@ -278,6 +278,8 @@
   <string name="share_app_title">App teilen</string>
   <string name="share_coordinates_not_present">Während der Bildauswahl wurden keine Koordinaten angegeben</string>
   <string name="error_fetching_nearby_places">Fehler beim Abrufen der Orte in der Nähe.</string>
+  <string name="successful_wikidata_edit">Bild erfolgreich nach %1$s auf Wikidata hinzugefügt!</string>
+  <string name="wikidata_edit_failure">Fehler bei der Aktualisierung des dazugehörigen Wikidata-Objekts!</string>
   <string name="menu_set_wallpaper">Hintergrundbild festlegen</string>
   <string name="wallpaper_set_successfully">Hintergrundbild erfolgreich festgelegt!</string>
 </resources>
