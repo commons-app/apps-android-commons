@@ -31,6 +31,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:focusable="true"
+                android:queryBackground="@android:color/transparent"
+                android:searchIcon="@null"
                 app:queryBackground="@android:color/transparent"
                 app:searchIcon="@null"
                 android:imeOptions="actionDone"
