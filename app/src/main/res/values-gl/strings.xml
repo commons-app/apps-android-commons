@@ -55,6 +55,7 @@
   <string name="add_title_toast">Por favor, proporcione un título para este ficheiro</string>
   <string name="share_description_hint">Descrición</string>
   <string name="login_failed_network">Erro ao acceder ao sistema: Fallou a rede</string>
+  <string name="login_failed_wrong_credentials">Non se pode acceder. Revise o nome de usuario e o contrasinal</string>
   <string name="login_failed_throttled">Demasiados intentos incorrectos. Inténteo de novo nuns minutos.</string>
   <string name="login_failed_blocked">Sentímolo, este usuario está bloqueado en Commons</string>
   <string name="login_failed_2fa_needed">Debe proporcionar o seu código de autenticación de dous factores.</string>
@@ -267,4 +268,16 @@
   <string name="about_translate_proceed">Proceder</string>
   <string name="about_translate_cancel">Cancelar</string>
   <string name="retry">Reintentar</string>
+  <string name="showcase_view_got_it_button">Entendido!</string>
+  <string name="showcase_view_whole_nearby_activity">Hai sitios preto de vostede que precisan fotos para ilustrar os seus artigos de Wikipedia</string>
+  <string name="showcase_view_list_icon">Premendo neste botón aparecerá unha lista destes lugares</string>
+  <string name="showcase_view_plus_fab">Pode cargar unha imaxe de calquera lugar dende a galería ou a cámara</string>
+  <string name="no_images_found">Non se atopou ningunha imaxeǃ</string>
+  <string name="error_loading_images">Houbo un erro ó subir as imaxes.</string>
+  <string name="image_uploaded_by">Subida porː %1$s</string>
+  <string name="share_app_title">Compartir a aplicación</string>
+  <string name="share_coordinates_not_present">Non se indicaron as coordenadas ó seleccionar a imaxe</string>
+  <string name="error_fetching_nearby_places">Erro ó procurar os lugares próximos.</string>
+  <string name="menu_set_wallpaper">Definir imaxe de fondo</string>
+  <string name="wallpaper_set_successfully">A imaxe de fondo configurouse correctamenteǃ</string>
 </resources>

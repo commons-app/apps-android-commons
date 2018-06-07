@@ -272,6 +272,8 @@
   <string name="share_app_title">Сподели прилог</string>
   <string name="share_coordinates_not_present">Не беа укажани координати при изборот на сликата</string>
   <string name="error_fetching_nearby_places">Грешка при добивањето на околните места.</string>
+  <string name="successful_wikidata_edit">Сликата е успешно додадена кон %1$s на Википодатоците!</string>
+  <string name="wikidata_edit_failure">Не успеав да ја изменам соодветната единица на Википодатоците!</string>
   <string name="menu_set_wallpaper">Задај позадина</string>
   <string name="wallpaper_set_successfully">Позадината е успешно зададена!</string>
 </resources>

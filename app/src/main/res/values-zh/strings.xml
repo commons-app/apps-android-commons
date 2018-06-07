@@ -278,6 +278,8 @@
   <string name="share_app_title">分享应用</string>
   <string name="share_coordinates_not_present">图片选择时，坐标并未指定</string>
   <string name="error_fetching_nearby_places">检索附近地点时出错。</string>
+  <string name="successful_wikidata_edit">图片已成功添加到维基数据上的%1$s！</string>
+  <string name="wikidata_edit_failure">更新对应wiki的数据实体失败！</string>
   <string name="menu_set_wallpaper">设置墙纸</string>
   <string name="wallpaper_set_successfully">墙纸已成功设置！</string>
 </resources>
