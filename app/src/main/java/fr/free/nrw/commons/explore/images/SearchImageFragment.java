@@ -101,7 +101,10 @@ public class SearchImageFragment extends CommonsDaggerSupportFragment {
     private void handleSuccess(List<Media> mediaList) {
         imagesNotFoundView.setVisibility(GONE);
         queryList = mediaList;
-        if (mediaList != null && !mediaList.isEmpty()) {
+        if(mediaList == null || mediaList.isEmpty()) {
+            initErrorView();
+        }else {
+
             progressBar.setVisibility(View.GONE);
             imagesAdapter.addAll(mediaList);
             imagesAdapter.notifyDataSetChanged();
@@ -115,13 +118,13 @@ public class SearchImageFragment extends CommonsDaggerSupportFragment {
     private void handleError(Throwable throwable) {
         Timber.e(throwable, "Error occurred while loading queried images");
         initErrorView();
+        ViewUtil.showSnackbar(imagesRecyclerView, R.string.error_loading_images);
     }
 
     /**
      * Handles the UI updates for a error scenario
      */
     private void initErrorView() {
-        ViewUtil.showSnackbar(imagesRecyclerView, R.string.error_loading_images);
         progressBar.setVisibility(GONE);
         imagesNotFoundView.setVisibility(VISIBLE);
         imagesNotFoundView.setText(getString(R.string.images_not_found, query));
