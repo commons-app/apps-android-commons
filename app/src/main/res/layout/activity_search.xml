@@ -26,7 +26,7 @@
             app:navigationIcon="@drawable/ic_arrow_back_primary_24dp"
             android:background="@color/item_white_background"
             android:layout_height="wrap_content">
-            <android.support.v7.widget.SearchView
+            <SearchView
                 android:id="@+id/searchBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
