@@ -239,10 +239,10 @@ public class UploadService extends HandlerService<Contribution> {
                     Timber.d("Successfully revalidated token!");
                 } else {
                     Timber.d("Unable to revalidate :(");
-                    // TODO: Put up a new notification, ask them to re-login
                     stopForeground(true);
                     Toast failureToast = Toast.makeText(this, R.string.authentication_failed, Toast.LENGTH_LONG);
                     failureToast.show();
+                    sessionManager.forceLogin(this);
                     return;
                 }
             }
