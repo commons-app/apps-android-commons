@@ -4,10 +4,15 @@ import android.database.DataSetObserver;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.view.View;
+import android.widget.SearchView;
+
+import com.jakewharton.rxbinding2.view.RxView;
+import com.jakewharton.rxbinding2.widget.RxSearchView;
+
+import java.util.concurrent.TimeUnit;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -17,6 +22,7 @@ import fr.free.nrw.commons.explore.images.SearchImageFragment;
 import fr.free.nrw.commons.media.MediaDetailPagerFragment;
 import fr.free.nrw.commons.theme.NavigationBaseActivity;
 import fr.free.nrw.commons.utils.ViewUtil;
+import io.reactivex.android.schedulers.AndroidSchedulers;
 
 /**
  * Represents search screen of this app
@@ -46,32 +52,21 @@ public class SearchActivity extends NavigationBaseActivity implements MediaDetai
         searchView.setQueryHint(getString(R.string.search_commons));
         searchView.onActionViewExpanded();
         searchView.clearFocus();
-        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-            @Override
-            public boolean onQueryTextSubmit(String query) {
-                //update image list
-                if (!TextUtils.isEmpty(query)) {
-                    str_query = query;
-                    searchImageFragment.updateImageList(query);
-                }else {
+        RxSearchView.queryTextChanges(searchView)
+                .takeUntil(RxView.detaches(searchView))
+                .debounce(500, TimeUnit.MILLISECONDS)
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe( query -> {
+                            //update image list
+                        if (!TextUtils.isEmpty(query)) {
+                            str_query = query.toString();
+                            searchImageFragment.updateImageList(query.toString());
+                        }else {
 
-                    // open search history fragment
-                }
-                return false;
-            }
-
-            @Override
-            public boolean onQueryTextChange(String newText) {
-                //update image list
-                if (!TextUtils.isEmpty(newText)) {
-                    str_query = newText;
-                    searchImageFragment.updateImageList(newText);
-                }else {
-                    // open search history fragment
-                }
-                return false;
-            }
-        });
+                            // open search history fragment
+                        }
+                        }
+                );
     }
 
 
