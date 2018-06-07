@@ -70,6 +70,17 @@ public class SearchImageFragment extends CommonsDaggerSupportFragment {
         ArrayList<Media> items = new ArrayList<>();
         imagesAdapter = adapterFactory.create(items);
         imagesRecyclerView.setAdapter(imagesAdapter);
+        imagesRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
+
+                if (!recyclerView.canScrollVertically(1)) {
+//                    Toast.makeText(ChatDetailsActivity.this,"LAst",Toast.LENGTH_LONG).show();
+                    addImagesToList(query);
+                }
+            }
+        });
         return rootView;
     }
 
@@ -86,12 +97,36 @@ public class SearchImageFragment extends CommonsDaggerSupportFragment {
         progressBar.setVisibility(View.VISIBLE);
         queryList.clear();
         imagesAdapter.clear();
-        Observable.fromCallable(() -> mwApi.searchImages(query))
+        Observable.fromCallable(() -> mwApi.searchImages(query,queryList.size()))
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .timeout(TIMEOUT_SECONDS, TimeUnit.SECONDS)
                 .subscribe(this::handleSuccess, this::handleError);
     }
+
+    public void addImagesToList(String query) {
+        this.query = query;
+        progressBar.setVisibility(View.VISIBLE);
+        Observable.fromCallable(() -> mwApi.searchImages(query,queryList.size()))
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .timeout(TIMEOUT_SECONDS, TimeUnit.SECONDS)
+                .subscribe(this::handlePaginationSuccess, this::handleError);
+    }
+
+    /**
+     * Handles the success scenario
+     * it initializes the recycler view by adding items to the adapter
+     * @param mediaList
+     */
+    private void handlePaginationSuccess(List<Media> mediaList) {
+        queryList.addAll(mediaList);
+        progressBar.setVisibility(View.GONE);
+        imagesAdapter.addAll(mediaList);
+        imagesAdapter.notifyDataSetChanged();
+    }
+
+
 
     /**
      * Handles the success scenario

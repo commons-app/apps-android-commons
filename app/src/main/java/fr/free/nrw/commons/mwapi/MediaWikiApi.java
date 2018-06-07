@@ -42,7 +42,7 @@ public interface MediaWikiApi {
     List<Media> getCategoryImages(String categoryName);
 
     @NonNull
-    List<Media> searchImages(String title);
+    List<Media> searchImages(String title, int offset);
 
     @NonNull
     UploadResult uploadFile(String filename, InputStream file, long dataLength, String pageContents, String editSummary, ProgressListener progressListener) throws IOException;
