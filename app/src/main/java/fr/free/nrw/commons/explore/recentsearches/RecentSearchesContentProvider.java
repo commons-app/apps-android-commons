@@ -22,7 +22,7 @@ import static fr.free.nrw.commons.explore.recentsearches.RecentSearchesDao.Table
 
 public class RecentSearchesContentProvider extends CommonsDaggerContentProvider {
 
-    public static final String RECENT_SEARCH_AUTHORITY = "fr.free.nrw.commons.explore.recent_searches.contentprovider";
+    public static final String RECENT_SEARCH_AUTHORITY = "fr.free.nrw.commons.explore.recentsearches.contentprovider";
     // For URI matcher
     private static final int RECENT_SEARCHES = 1;
     private static final int RECENT_SEARCHES_ID = 2;

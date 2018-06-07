@@ -5,41 +5,40 @@ import java.util.Date;
 
 /**
  * Represents a recently searched query
- * query - butterfly
+ * Example - query = "butterfly"
  */
 public class RecentSearch {
     private Uri contentUri;
     private String query;
-    private Date lastUsed;
+    private Date lastSearched;
 
-    public RecentSearch(Uri contentUri, String query, Date lastUsed) {
+    public RecentSearch(Uri contentUri, String query, Date lastSearched) {
         this.contentUri = contentUri;
         this.query = query;
-        this.lastUsed = lastUsed;
+        this.lastSearched = lastSearched;
     }
 
     /**
-     * Gets name
+     * Gets query name
      *
-     * @return name
+     * @return query name
      */
     public String getQuery() {
         return query;
     }
 
     /**
-     * Gets last used date
+     * Gets last searched date
      *
-     * @return Last used date
+     * @return Last searched date
      */
-    public Date getLastUsed() {
+    public Date getLastSearched() {
         // warning: Date objects are mutable.
-        return (Date)lastUsed.clone();
+        return (Date)lastSearched.clone();
     }
 
     /**
      * Gets the content URI for this query
-     *
      * @return content URI
      */
     public Uri getContentUri() {

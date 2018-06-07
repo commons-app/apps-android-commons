@@ -62,7 +62,6 @@ public class SearchImageFragment extends CommonsDaggerSupportFragment {
     private final SearchImagesAdapterFactory adapterFactory = new SearchImagesAdapterFactory(item -> {
         int index = queryList.indexOf(item);
         ((SearchActivity)getContext()).onSearchImageClicked(index);
-        //TODO : Add images to recently searched images db table
         saveQuery(query);
     });
 

@@ -52,7 +52,7 @@ public class CommonsApplicationModule {
     }
 
     @Provides
-    @Named("recent_search")
+    @Named("recentsearch")
     public ContentProviderClient provideRecentSearchContentProviderClient(Context context) {
         return context.getContentResolver().acquireContentProviderClient(RECENT_SEARCH_AUTHORITY);
     }

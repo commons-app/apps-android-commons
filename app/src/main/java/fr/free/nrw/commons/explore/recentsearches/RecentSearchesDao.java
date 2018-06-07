@@ -22,7 +22,7 @@ public class RecentSearchesDao {
     private final Provider<ContentProviderClient> clientProvider;
 
     @Inject
-    public RecentSearchesDao(@Named("recent_search") Provider<ContentProviderClient> clientProvider) {
+    public RecentSearchesDao(@Named("recentsearch") Provider<ContentProviderClient> clientProvider) {
         this.clientProvider = clientProvider;
     }
 
@@ -44,7 +44,7 @@ public class RecentSearchesDao {
     /**
      * Find persisted search query in database, based on its name.
      *
-     * @param name Search query name
+     * @param name Search query  Ex- "butterfly"
      * @return recently searched query from database, or null if not found
      */
     @Nullable
@@ -114,7 +114,7 @@ public class RecentSearchesDao {
     private ContentValues toContentValues(RecentSearch recentSearch) {
         ContentValues cv = new ContentValues();
         cv.put(RecentSearchesDao.Table.COLUMN_NAME, recentSearch.getQuery());
-        cv.put(RecentSearchesDao.Table.COLUMN_LAST_USED, recentSearch.getLastUsed().getTime());
+        cv.put(RecentSearchesDao.Table.COLUMN_LAST_USED, recentSearch.getLastSearched().getTime());
         return cv;
     }
 
