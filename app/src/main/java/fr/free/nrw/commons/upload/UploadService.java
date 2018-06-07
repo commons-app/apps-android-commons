@@ -18,6 +18,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.HashSet;
+import java.util.Locale;
 import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -36,6 +37,12 @@ import fr.free.nrw.commons.contributions.ContributionsContentProvider;
 import fr.free.nrw.commons.modifications.ModificationsContentProvider;
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
 import fr.free.nrw.commons.mwapi.UploadResult;
+import fr.free.nrw.commons.utils.ViewUtil;
+import fr.free.nrw.commons.wikidata.WikidataEditListener;
+import fr.free.nrw.commons.wikidata.WikidataEditService;
+import io.reactivex.Observable;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.schedulers.Schedulers;
 import timber.log.Timber;
 
 public class UploadService extends HandlerService<Contribution> {
@@ -49,8 +56,8 @@ public class UploadService extends HandlerService<Contribution> {
     public static final String EXTRA_CAMPAIGN = EXTRA_PREFIX + ".campaign";
 
     @Inject MediaWikiApi mwApi;
+    @Inject WikidataEditService wikidataEditService;
     @Inject SessionManager sessionManager;
-    @Inject @Named("default_preferences") SharedPreferences prefs;
     @Inject ContributionDao contributionDao;
 
     private NotificationManager notificationManager;
@@ -137,6 +144,7 @@ public class UploadService extends HandlerService<Contribution> {
 
     @Override
     public void queue(int what, Contribution contribution) {
+        Timber.d("Upload service queue has contribution with wiki data entity id as %s", contribution.getWikiDataEntityId());
         switch (what) {
             case ACTION_UPLOAD_FILE:
 
@@ -253,6 +261,7 @@ public class UploadService extends HandlerService<Contribution> {
             if (!resultStatus.equals("Success")) {
                 showFailedNotification(contribution);
             } else {
+                wikidataEditService.createClaimWithLogging(contribution.getWikiDataEntityId(), filename);
                 contribution.setFilename(uploadResult.getCanonicalFilename());
                 contribution.setImageUrl(uploadResult.getImageUrl());
                 contribution.setState(Contribution.STATE_COMPLETED);

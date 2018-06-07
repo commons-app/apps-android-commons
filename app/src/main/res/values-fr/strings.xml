@@ -289,4 +289,6 @@
   <string name="share_app_title">Partager les applications</string>
   <string name="share_coordinates_not_present">Les coordonnées n\'ont pas été spécifiées pendant la sélection de l\'image</string>
   <string name="error_fetching_nearby_places">Erreur durant l\'exploration du voisinage.</string>
+  <string name="menu_set_wallpaper">Définir le papier-peint</string>
+  <string name="wallpaper_set_successfully">Papier-peint configuré avec succès!</string>
 </resources>

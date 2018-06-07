@@ -27,6 +27,10 @@ public interface MediaWikiApi {
 
     String getEditToken() throws IOException;
 
+    String getWikidataCsrfToken() throws IOException;
+
+    String getCentralAuthToken() throws IOException;
+
     boolean fileExistsWithName(String fileName) throws IOException;
 
     boolean pageExists(String pageName) throws IOException;
@@ -51,6 +55,12 @@ public interface MediaWikiApi {
 
     @Nullable
     String appendEdit(String editToken, String processedPageContent, String filename, String summary) throws IOException;
+
+    @Nullable
+    String wikidatCreateClaim(String entityId, String property, String snaktype, String value) throws IOException;
+
+    @Nullable
+    boolean addWikidataEditTag(String revisionId) throws IOException;
 
     @NonNull
     MediaResult fetchMediaByFilename(String filename) throws IOException;

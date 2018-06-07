@@ -4,6 +4,7 @@ import android.content.ContentProviderClient
 import android.content.Context
 import android.content.SharedPreferences
 import android.support.v4.util.LruCache
+import com.google.gson.Gson
 import com.nhaarman.mockito_kotlin.mock
 import com.squareup.leakcanary.RefWatcher
 import fr.free.nrw.commons.auth.AccountUtil
@@ -44,6 +45,7 @@ class MockCommonsApplicationModule(appContext: Context) : CommonsApplicationModu
     val mockDbOpenHelper: DBOpenHelper = mock()
     val nearbyPlaces: NearbyPlaces = mock()
     val lruCache: LruCache<String, String> = mock()
+    val gson: Gson = Gson()
     val categoryClient: ContentProviderClient = mock()
     val contributionClient: ContentProviderClient = mock()
     val modificationClient: ContentProviderClient = mock()

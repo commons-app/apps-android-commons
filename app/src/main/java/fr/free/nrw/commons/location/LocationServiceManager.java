@@ -284,6 +284,7 @@ public class LocationServiceManager implements LocationListener {
         LOCATION_SIGNIFICANTLY_CHANGED, //Went out of borders of nearby markers
         LOCATION_SLIGHTLY_CHANGED,      //User might be walking or driving
         LOCATION_NOT_CHANGED,
-        PERMISSION_JUST_GRANTED
+        PERMISSION_JUST_GRANTED,
+        MAP_UPDATED
     }
 }

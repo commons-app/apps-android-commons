@@ -25,6 +25,8 @@ import org.apache.http.params.CoreProtocolPNames;
 import org.apache.http.util.EntityUtils;
 import org.mediawiki.api.ApiResult;
 import org.mediawiki.api.MWApi;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 import java.io.IOException;
@@ -62,6 +64,7 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
     private static final String THUMB_SIZE = "640";
     private AbstractHttpClient httpClient;
     private MWApi api;
+    private MWApi wikidataApi;
     private Context context;
     private SharedPreferences defaultPreferences;
     private SharedPreferences categoryPreferences;
@@ -69,6 +72,7 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
 
     public ApacheHttpClientMediaWikiApi(Context context,
                                         String apiURL,
+                                        String wikidatApiURL,
                                         SharedPreferences defaultPreferences,
                                         SharedPreferences categoryPreferences,
                                         Gson gson) {
@@ -82,6 +86,7 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
         params.setParameter(CoreProtocolPNames.USER_AGENT, getUserAgent());
         httpClient = new DefaultHttpClient(cm, params);
         api = new MWApi(apiURL, httpClient);
+        wikidataApi = new MWApi(wikidatApiURL, httpClient);
         this.defaultPreferences = defaultPreferences;
         this.categoryPreferences = categoryPreferences;
         this.gson = gson;
@@ -204,6 +209,15 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
     @Override
     public String getEditToken() throws IOException {
         return api.getEditToken();
+    }
+
+    @Override
+    public String getCentralAuthToken() throws IOException {
+        String centralAuthToken = api.action("centralauthtoken")
+                .get()
+                .getString("/api/centralauthtoken/@centralauthtoken");
+        Timber.d("MediaWiki Central auth token is %s", centralAuthToken);
+        return centralAuthToken;
     }
 
     @Override
@@ -349,6 +363,98 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
 
             return categories;
         }).flatMapObservable(Observable::fromIterable);
+    }
+
+    /**
+     * Get the edit token for making wiki data edits
+     * https://www.mediawiki.org/wiki/API:Tokens
+     * @return
+     * @throws IOException
+     */
+    private String getWikidataEditToken() throws IOException {
+        return wikidataApi.getEditToken();
+    }
+
+    @Override
+    public String getWikidataCsrfToken() throws IOException {
+        String wikidataCsrfToken = wikidataApi.action("query")
+                .param("action", "query")
+                .param("centralauthtoken", getCentralAuthToken())
+                .param("meta", "tokens")
+                .post()
+                .getString("/api/query/tokens/@csrftoken");
+        Timber.d("Wikidata csrf token is %s", wikidataCsrfToken);
+        return wikidataCsrfToken;
+    }
+
+    /**
+     * Creates a new claim using the wikidata API
+     * https://www.mediawiki.org/wiki/Wikibase/API
+     * @param entityId the wikidata entity to be edited
+     * @param property the property to be edited, for eg P18 for images
+     * @param snaktype the type of value stored for that property
+     * @param value the actual value to be stored for the property, for eg filename in case of P18
+     * @return returns revisionId if the claim is successfully created else returns null
+     * @throws IOException
+     */
+    @Nullable
+    @Override
+    public String wikidatCreateClaim(String entityId, String property, String snaktype, String value) throws IOException {
+        Timber.d("Filename is %s", value);
+        ApiResult result = wikidataApi.action("wbcreateclaim")
+                .param("entity", entityId)
+                .param("centralauthtoken", getCentralAuthToken())
+                .param("token", getWikidataCsrfToken())
+                .param("snaktype", snaktype)
+                .param("property", property)
+                .param("value", value)
+                .post();
+
+        if (result == null || result.getNode("api") == null) {
+            return null;
+        }
+
+        Node node = result.getNode("api").getDocument();
+        Element element = (Element) node;
+
+        if (element != null && element.getAttribute("success").equals("1")) {
+            return result.getString("api/pageinfo/@lastrevid");
+        } else {
+            Timber.e(result.getString("api/error/@code") + " " + result.getString("api/error/@info"));
+        }
+        return null;
+    }
+
+    /**
+     * Adds the wikimedia-commons-app tag to the edits made on wikidata
+     * @param revisionId
+     * @return
+     * @throws IOException
+     */
+    @Nullable
+    @Override
+    public boolean addWikidataEditTag(String revisionId) throws IOException {
+        ApiResult result = wikidataApi.action("tag")
+                .param("revid", revisionId)
+                .param("centralauthtoken", getCentralAuthToken())
+                .param("token", getWikidataCsrfToken())
+                .param("add", "wikimedia-commons-app")
+                .param("reason", "Add tag for edits made using Android Commons app")
+                .post();
+
+        if (result == null || result.getNode("api") == null) {
+            return false;
+        }
+
+        Node node = result.getNode("api").getDocument();
+        Element element = (Element) node;
+
+        if (element != null && element.getAttribute("status").equals("success")) {
+            return true;
+        } else {
+            Timber.e(result.getString("api/error/@code") + " " + result.getString("api/error/@info"));
+        }
+        return false;
     }
 
     @Override
@@ -624,6 +730,7 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
         String resultStatus = result.getString("/api/upload/@result");
         if (!resultStatus.equals("Success")) {
             String errorCode = result.getString("/api/error/@code");
+            Timber.e(errorCode);
             return new UploadResult(resultStatus, errorCode);
         } else {
             Date dateUploaded = parseMWDate(result.getString("/api/upload/imageinfo/@timestamp"));

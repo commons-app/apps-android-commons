@@ -23,6 +23,9 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;

@@ -7,11 +7,11 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.view.View;
-import android.widget.EditText;
 import android.widget.FrameLayout;
+import android.widget.SearchView;
 
 import com.jakewharton.rxbinding2.view.RxView;
-import com.jakewharton.rxbinding2.widget.RxTextView;
+import com.jakewharton.rxbinding2.widget.RxSearchView;
 
 import java.util.concurrent.TimeUnit;
 
@@ -33,9 +33,9 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 public class SearchActivity extends NavigationBaseActivity implements MediaDetailPagerFragment.MediaDetailProvider{
 
     @BindView(R.id.toolbar_search) Toolbar toolbar;
-    @BindView(R.id.searchBox) EditText etSearchKeyword;
     @BindView(R.id.fragmentContainer) FrameLayout resultsContainer;
     @BindView(R.id.searchHistoryContainer) FrameLayout searchHistoryContainer;
+    @BindView(R.id.searchBox) SearchView searchView;
     private SearchImageFragment searchImageFragment;
     private RecentSearchesFragment recentSearchesFragment;
     private FragmentManager supportFragmentManager;
@@ -53,24 +53,27 @@ public class SearchActivity extends NavigationBaseActivity implements MediaDetai
         supportFragmentManager = getSupportFragmentManager();
         setBrowseImagesFragment();
         setSearchHistoryFragment();
-        RxTextView.textChanges(etSearchKeyword)
-            .takeUntil(RxView.detaches(etSearchKeyword))
-            .debounce(500, TimeUnit.MILLISECONDS)
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe( query -> {
-                //update image list
-                    if (!TextUtils.isEmpty(query)) {
-                        resultsContainer.setVisibility(View.VISIBLE);
-                        searchHistoryContainer.setVisibility(View.GONE);
-                        this.query = query.toString();
-                        searchImageFragment.updateImageList(query.toString());
-                    }else {
-                        resultsContainer.setVisibility(View.GONE);
-                        searchHistoryContainer.setVisibility(View.VISIBLE);
-                        // open search history fragment
-                    }
-                }
-            );
+        searchView.setQueryHint(getString(R.string.search_commons));
+        searchView.onActionViewExpanded();
+        searchView.clearFocus();
+        RxSearchView.queryTextChanges(searchView)
+                .takeUntil(RxView.detaches(searchView))
+                .debounce(500, TimeUnit.MILLISECONDS)
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe( query -> {
+                            //update image list
+                            if (!TextUtils.isEmpty(query)) {
+                                resultsContainer.setVisibility(View.VISIBLE);
+                                searchHistoryContainer.setVisibility(View.GONE);
+                                this.query = query.toString();
+                                searchImageFragment.updateImageList(query.toString());
+                            }else {
+                                resultsContainer.setVisibility(View.GONE);
+                                searchHistoryContainer.setVisibility(View.VISIBLE);
+                                // open search history fragment
+                            }
+                        }
+                );
     }
 
     private void setSearchHistoryFragment() {
@@ -152,6 +155,6 @@ public class SearchActivity extends NavigationBaseActivity implements MediaDetai
     }
 
     public void updateText(String query) {
-        etSearchKeyword.setText(query);
+        searchView.setQuery(query, true);;
     }
 }

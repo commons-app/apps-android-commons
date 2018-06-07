@@ -75,6 +75,8 @@ dependencies {
     androidTestImplementation "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
     androidTestImplementation 'com.squareup.okhttp3:mockwebserver:3.8.1'
     androidTestImplementation "com.android.support:support-annotations:$SUPPORT_LIB_VERSION"
+    androidTestImplementation 'com.android.support.test:rules:1.0.2'
+    androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
 
     debugImplementation "com.squareup.leakcanary:leakcanary-android:$LEAK_CANARY"
@@ -133,6 +135,7 @@ android {
     productFlavors {
         prod {
             buildConfigField "String", "WIKIMEDIA_API_HOST", "\"https://commons.wikimedia.org/w/api.php\""
+            buildConfigField "String", "WIKIDATA_API_HOST", "\"https://www.wikidata.org/w/api.php\""
             buildConfigField "String", "WIKIMEDIA_FORGE_API_HOST", "\"https://tools.wmflabs.org/\""
             buildConfigField "String", "IMAGE_URL_BASE", "\"https://upload.wikimedia.org/wikipedia/commons\""
             buildConfigField "String", "HOME_URL", "\"https://commons.wikimedia.org/wiki/\""
@@ -149,6 +152,7 @@ android {
         beta {
             // What values do we need to hit the BETA versions of the site / api ?
             buildConfigField "String", "WIKIMEDIA_API_HOST", "\"https://commons.wikimedia.beta.wmflabs.org/w/api.php\""
+            buildConfigField "String", "WIKIDATA_API_HOST", "\"https://www.wikidata.org/w/api.php\""
             buildConfigField "String", "WIKIMEDIA_FORGE_API_HOST", "\"https://tools.wmflabs.org/\""
             buildConfigField "String", "IMAGE_URL_BASE", "\"https://upload.beta.wmflabs.org/wikipedia/commons\""
             buildConfigField "String", "HOME_URL", "\"https://commons.wikimedia.beta.wmflabs.org/wiki/\""

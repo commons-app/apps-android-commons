@@ -49,6 +49,7 @@
   <string name="add_title_toast">Apurre un títulu pa esti ficheru</string>
   <string name="share_description_hint">Descripción</string>
   <string name="login_failed_network">Nun se pudo aniciar sesión – error de rede</string>
+  <string name="login_failed_wrong_credentials">Nun pudo aniciase sesión. Revisa\'l nome d\'usuariu y la contraseña</string>
   <string name="login_failed_throttled">Demasiaos intentos incorreutos. Téntalo otra vuelta n\'unos minutos.</string>
   <string name="login_failed_blocked">Sentímoslo, esti usuariu ta bloquiáu en Commons</string>
   <string name="login_failed_2fa_needed">Tienes de dar el códigu d\'identificación de dos factores.</string>
@@ -271,4 +272,6 @@
   <string name="share_app_title">Compartir app</string>
   <string name="share_coordinates_not_present">Nun s\'especificaron les coordenaes al escoyer la imaxe</string>
   <string name="error_fetching_nearby_places">Error al llograr los llugares cercanos.</string>
+  <string name="menu_set_wallpaper">Definir fondu</string>
+  <string name="wallpaper_set_successfully">Fondu definíu correutamente</string>
 </resources>

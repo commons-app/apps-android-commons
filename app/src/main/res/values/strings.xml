@@ -291,4 +291,6 @@
     <string name="wallpaper_set_successfully">Wallpaper set successfully!</string>
     <string name="search_recent_header">Recent searches:</string>
     <string name="provider_searches">Recently searched queries</string>
+    <string name="successful_wikidata_edit">Image successfully added to %1$s on Wikidata!</string>
+    <string name="wikidata_edit_failure">Failed to update corresponding wiki data entity!</string>
 </resources>
