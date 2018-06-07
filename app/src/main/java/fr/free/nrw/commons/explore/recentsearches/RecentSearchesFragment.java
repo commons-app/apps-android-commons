@@ -18,11 +18,15 @@ import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
 import fr.free.nrw.commons.explore.SearchActivity;
 
 
+/**
+ * Displays the recent searches screen.
+ */
 public class RecentSearchesFragment extends CommonsDaggerSupportFragment {
     @Inject RecentSearchesDao recentSearchesDao;
     @BindView(R.id.recent_searches_list) ListView recentSearchesList;
     List<String> recentSearches;
     ArrayAdapter adapter;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -37,6 +41,10 @@ public class RecentSearchesFragment extends CommonsDaggerSupportFragment {
         return rootView;
     }
 
+    /**
+     * This method is called on back press of activity
+     * so we are updating the list from database to refresh the recent searches list.
+     */
     @Override
     public void onResume() {
         recentSearches = recentSearchesDao.recentSearches(10);

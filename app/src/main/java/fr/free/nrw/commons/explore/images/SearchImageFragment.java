@@ -123,6 +123,7 @@ public class SearchImageFragment extends CommonsDaggerSupportFragment {
             progressBar.setVisibility(View.GONE);
             imagesAdapter.addAll(mediaList);
             imagesAdapter.notifyDataSetChanged();
+            saveQuery(query);
         }
     }
 

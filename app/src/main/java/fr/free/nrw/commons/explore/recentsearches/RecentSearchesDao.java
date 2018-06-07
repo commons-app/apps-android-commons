@@ -43,7 +43,6 @@ public class RecentSearchesDao {
 
     /**
      * Find persisted search query in database, based on its name.
-     *
      * @param name Search query  Ex- "butterfly"
      * @return recently searched query from database, or null if not found
      */
@@ -75,7 +74,6 @@ public class RecentSearchesDao {
 
     /**
      * Retrieve recently-searched queries, ordered by descending date.
-     *
      * @return a list containing recent searches
      */
     @NonNull
@@ -118,6 +116,10 @@ public class RecentSearchesDao {
         return cv;
     }
 
+    /**
+     * This class contains the database table architechture for recent searches,
+     * It also contains queries and logic necessary to the create, update, delete this table.
+     */
     public static class Table {
         public static final String TABLE_NAME = "recent_searches";
         public static final String COLUMN_ID = "_id";
