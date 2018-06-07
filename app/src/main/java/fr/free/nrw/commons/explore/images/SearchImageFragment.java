@@ -101,10 +101,7 @@ public class SearchImageFragment extends CommonsDaggerSupportFragment {
     private void handleSuccess(List<Media> mediaList) {
         imagesNotFoundView.setVisibility(GONE);
         queryList = mediaList;
-        if(mediaList == null || mediaList.isEmpty()) {
-            initErrorView();
-        }else {
-
+        if (mediaList != null && !mediaList.isEmpty()) {
             progressBar.setVisibility(View.GONE);
             imagesAdapter.addAll(mediaList);
             imagesAdapter.notifyDataSetChanged();
