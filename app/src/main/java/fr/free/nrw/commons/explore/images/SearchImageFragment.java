@@ -3,6 +3,7 @@ package fr.free.nrw.commons.explore.images;
 
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -71,7 +72,10 @@ public class SearchImageFragment extends CommonsDaggerSupportFragment {
         // Newly searched query...
         if (recentSearch == null) {
             recentSearch = new RecentSearch(null, query, new Date());
+        }else {
+            recentSearch.setLastSearched(new Date());
         }
+
         recentSearchesDao.save(recentSearch);
 
     }
@@ -123,7 +127,10 @@ public class SearchImageFragment extends CommonsDaggerSupportFragment {
             progressBar.setVisibility(View.GONE);
             imagesAdapter.addAll(mediaList);
             imagesAdapter.notifyDataSetChanged();
-            saveQuery(query);
+
+            // check if user is waiting for 5 seconds if yes then save search query to history.
+            Handler handler = new Handler();
+            handler.postDelayed(() -> saveQuery(query), 5000);
         }
     }
 

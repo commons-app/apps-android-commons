@@ -20,7 +20,6 @@ public class RecentSearch {
 
     /**
      * Gets query name
-     *
      * @return query name
      */
     public String getQuery() {
@@ -29,12 +28,20 @@ public class RecentSearch {
 
     /**
      * Gets last searched date
-     *
      * @return Last searched date
      */
     public Date getLastSearched() {
         // warning: Date objects are mutable.
         return (Date)lastSearched.clone();
+    }
+
+
+    /**
+     * Updates the last searched date
+     * @param  lastSearched Last searched date
+     */
+    public void setLastSearched(Date lastSearched) {
+        this.lastSearched = lastSearched;
     }
 
     /**
