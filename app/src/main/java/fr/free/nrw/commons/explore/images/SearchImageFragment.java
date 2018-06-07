@@ -72,7 +72,8 @@ public class SearchImageFragment extends CommonsDaggerSupportFragment {
         // Newly searched query...
         if (recentSearch == null) {
             recentSearch = new RecentSearch(null, query, new Date());
-        }else {
+        }
+        else {
             recentSearch.setLastSearched(new Date());
         }
 
@@ -122,7 +123,8 @@ public class SearchImageFragment extends CommonsDaggerSupportFragment {
         queryList = mediaList;
         if(mediaList == null || mediaList.isEmpty()) {
             initErrorView();
-        }else {
+        }
+        else {
 
             progressBar.setVisibility(View.GONE);
             imagesAdapter.addAll(mediaList);
@@ -167,7 +169,8 @@ public class SearchImageFragment extends CommonsDaggerSupportFragment {
     public int getTotalImagesCount(){
         if (imagesAdapter == null) {
             return 0;
-        }else {
+        }
+        else {
             return imagesAdapter.getItemCount();
         }
     }
@@ -180,7 +183,8 @@ public class SearchImageFragment extends CommonsDaggerSupportFragment {
         if (imagesAdapter.getItem(i).getFilename() == null) {
             // not yet ready to return data
             return null;
-        } else {
+        }
+        else {
             return new Media(imagesAdapter.getItem(i).getFilename());
         }
     }
