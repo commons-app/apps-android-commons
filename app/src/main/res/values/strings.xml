@@ -18,7 +18,7 @@
   <string name="login_success">Login success!</string>
   <string name="login_failed">Login failed!</string>
   <string name="upload_failed">File not found. Please try another file.</string>
-  <string name="authentication_failed">Authentication failed!</string>
+  <string name="authentication_failed">Authentication failed, please login again</string>
   <string name="uploading_started">Upload started!</string>
   <string name="upload_completed_notification_title">%1$s uploaded!</string>
   <string name="upload_completed_notification_text">Tap to view your upload</string>
