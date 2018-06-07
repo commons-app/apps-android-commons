@@ -4,6 +4,7 @@ import android.content.ContentProviderClient
 import android.content.Context
 import android.content.SharedPreferences
 import android.support.v4.util.LruCache
+import com.google.gson.Gson
 import com.nhaarman.mockito_kotlin.mock
 import com.squareup.leakcanary.RefWatcher
 import fr.free.nrw.commons.auth.AccountUtil
