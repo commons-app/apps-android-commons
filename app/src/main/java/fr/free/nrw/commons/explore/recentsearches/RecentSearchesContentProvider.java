@@ -1,4 +1,4 @@
-package fr.free.nrw.commons.explore.recent_searches;
+package fr.free.nrw.commons.explore.recentsearches;
 
 import android.content.ContentValues;
 import android.content.UriMatcher;
@@ -16,9 +16,9 @@ import fr.free.nrw.commons.di.CommonsDaggerContentProvider;
 import timber.log.Timber;
 
 import static android.content.UriMatcher.NO_MATCH;
-import static fr.free.nrw.commons.explore.recent_searches.RecentSearchesDao.Table.ALL_FIELDS;
-import static fr.free.nrw.commons.explore.recent_searches.RecentSearchesDao.Table.COLUMN_ID;
-import static fr.free.nrw.commons.explore.recent_searches.RecentSearchesDao.Table.TABLE_NAME;
+import static fr.free.nrw.commons.explore.recentsearches.RecentSearchesDao.Table.ALL_FIELDS;
+import static fr.free.nrw.commons.explore.recentsearches.RecentSearchesDao.Table.COLUMN_ID;
+import static fr.free.nrw.commons.explore.recentsearches.RecentSearchesDao.Table.TABLE_NAME;
 
 public class RecentSearchesContentProvider extends CommonsDaggerContentProvider {
 

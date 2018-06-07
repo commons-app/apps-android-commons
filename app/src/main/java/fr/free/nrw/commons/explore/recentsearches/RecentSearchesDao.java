@@ -1,4 +1,4 @@
-package fr.free.nrw.commons.explore.recent_searches;
+package fr.free.nrw.commons.explore.recentsearches;
 
 import android.content.ContentProviderClient;
 import android.content.ContentValues;
@@ -88,7 +88,7 @@ public class RecentSearchesDao {
                     null, new String[]{}, Table.COLUMN_LAST_USED + " DESC");
             // fixme add a limit on the original query instead of falling out of the loop?
             while (cursor != null && cursor.moveToNext() && cursor.getPosition() < limit) {
-                items.add(fromCursor(cursor).getName());
+                items.add(fromCursor(cursor).getQuery());
             }
         } catch (RemoteException e) {
             throw new RuntimeException(e);
@@ -113,7 +113,7 @@ public class RecentSearchesDao {
 
     private ContentValues toContentValues(RecentSearch recentSearch) {
         ContentValues cv = new ContentValues();
-        cv.put(RecentSearchesDao.Table.COLUMN_NAME, recentSearch.getName());
+        cv.put(RecentSearchesDao.Table.COLUMN_NAME, recentSearch.getQuery());
         cv.put(RecentSearchesDao.Table.COLUMN_LAST_USED, recentSearch.getLastUsed().getTime());
         return cv;
     }

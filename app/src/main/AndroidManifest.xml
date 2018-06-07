@@ -172,8 +172,8 @@
             android:syncable="false" />
 
         <provider
-            android:name=".explore.recent_searches.RecentSearchesContentProvider"
-            android:authorities="fr.free.nrw.commons.explore.recent_searches.contentprovider"
+            android:name=".explore.recentsearches.RecentSearchesContentProvider"
+            android:authorities="fr.free.nrw.commons.explore.recentsearches.contentprovider"
             android:exported="false"
             android:label="@string/provider_searches"
             android:syncable="false" />

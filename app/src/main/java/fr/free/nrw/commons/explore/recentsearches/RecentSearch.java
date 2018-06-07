@@ -1,19 +1,20 @@
-package fr.free.nrw.commons.explore.recent_searches;
+package fr.free.nrw.commons.explore.recentsearches;
 
 import android.net.Uri;
 import java.util.Date;
 
 /**
  * Represents a recently searched query
+ * query - butterfly
  */
 public class RecentSearch {
     private Uri contentUri;
-    private String name;
+    private String query;
     private Date lastUsed;
 
-    public RecentSearch(Uri contentUri, String name, Date lastUsed) {
+    public RecentSearch(Uri contentUri, String query, Date lastUsed) {
         this.contentUri = contentUri;
-        this.name = name;
+        this.query = query;
         this.lastUsed = lastUsed;
     }
 
@@ -22,8 +23,8 @@ public class RecentSearch {
      *
      * @return name
      */
-    public String getName() {
-        return name;
+    public String getQuery() {
+        return query;
     }
 
     /**

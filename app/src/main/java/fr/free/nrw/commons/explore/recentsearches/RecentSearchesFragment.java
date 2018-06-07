@@ -1,4 +1,4 @@
-package fr.free.nrw.commons.explore.recent_searches;
+package fr.free.nrw.commons.explore.recentsearches;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
