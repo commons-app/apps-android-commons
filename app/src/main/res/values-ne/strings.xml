@@ -39,8 +39,6 @@
   <string name="share_title_hint">शीर्षक</string>
   <string name="share_description_hint">वर्णन</string>
   <string name="login_failed_network">प्रवेश गर्न असमर्थ - जडान खराबी</string>
-  <string name="login_failed_username">प्रवेश गर्न असमर्थ - कृपया तपाईंको प्रयोगकर्ता नाम जाँच गर्नुहोस्</string>
-  <string name="login_failed_password">प्रवेश गर्न असमर्थ - कृपया आफ्नो पासवर्ड जाँच गर्नुहोस</string>
   <string name="login_failed_throttled" fuzzy="true">धेरै असफल प्रयासहरू भए । कृपया केही मिनेट पछि पुन: प्रयास गर्नुहोस</string>
   <string name="login_failed_blocked">माफ गर्नुहोस, यो प्रयोगकर्तालाई कमोन्समा ब्लक गरिएको छ</string>
   <string name="login_failed_generic">प्रवेश सफल हुन सकेन</string>
@@ -55,7 +53,7 @@
   <string name="categories_activity_title">श्रेणीहरू</string>
   <string name="title_activity_settings">सेटिङ्गहरू</string>
   <string name="menu_about">बारेमा</string>
-  <string name="about_license" fuzzy="true">&lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/COPYING\"&gt;अपाचे लाइसेन्स संस्करण२&lt;/a&gt; को अाधारमा खुला स्रोत सफ्टवेयर जारी</string>
+  <string name="about_license">विकिमिडिया कमन्स याप एक स्वतन्त्र स्रोत याप हो। यो याप विकिमिडिया समुदायका अनुदानप्राप्तकर्ताहरू र स्वयंसेवकहरू द्वारा निर्मित एवं प्रबन्धित छ। विकिमीडिया फाउण्डेसन यस यापको निर्माण, विकास र प्रबन्धनमा कुनै पनि प्रकारले संलग्न छैन।</string>
   <string name="about_improve" fuzzy="true">&lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;गिटहब&lt;/a&gt; मा स्रोत। &lt;a href=\" https://github.com/commons-app/apps-android-commons/issues\"&gt;बगजिल्ला&lt;/a&gt; मा बग छ।</string>
   <string name="about_privacy_policy" fuzzy="true">&lt;a href=\"https://wikimediafoundation.org/wiki/Privacy_policy\"&gt;गोपनीयता नीति&lt;/a&gt;</string>
   <string name="title_activity_about">बारेमा</string>
@@ -97,4 +95,6 @@
   <string name="detail_license_empty">अज्ञान अनुमतिपत्र</string>
   <string name="menu_refresh">ताजागर्ने</string>
   <string name="toggle_view_button">टगल दृश्य</string>
+  <string name="menu_set_wallpaper">भित्तेपत्र चयन गर्नुहोस्</string>
+  <string name="wallpaper_set_successfully">भित्तेपत्र सफलतापूर्वक चयन भयो!</string>
 </resources>

@@ -43,8 +43,6 @@
   <string name="share_title_hint">ਸਿਰਲੇਖ</string>
   <string name="share_description_hint">ਵੇਰਵਾ</string>
   <string name="login_failed_network">ਦਾਖ਼ਲਾ ਨਹੀਂ ਹੋ ਰਿਹਾ - ਨੈੱਟਵਰਕ ਫੇਲ੍ਹ ਹੋਇਆ ਹੈ</string>
-  <string name="login_failed_username">ਦਾਖ਼ਲਾ ਨਹੀਂ ਹੋ ਰਿਹਾ - ਆਪਣਾ ਵਰਤੋਂਕਾਰ ਨਾਂ ਚੈੱਕ ਕਰੋ</string>
-  <string name="login_failed_password">ਦਾਖ਼ਲਾ ਨਹੀਂ ਹੋ ਰਿਹਾ - ਆਪਣਾ ਪਾਸਵਰਡ ਚੈੱਕ ਕਰੋ ਜੀ</string>
   <string name="login_failed_throttled">ਬਹੁਤ ਸਾਰੀਆਂ ਅਸਫ਼ਲ ਕੋਸ਼ਿਸ਼ਾਂ। ਥੋੜ੍ਹੀ ਦੇਰ ਬਾਅਦ ਕੋਸ਼ਿਸ਼ ਕਰੋ ਜੀ।</string>
   <string name="login_failed_blocked">ਅਫ਼ਸੋਸ, ਇਹ ਵਰਤੋਂਕਾਰ ਕਾਮਨਜ਼ ਉੱਤੇ ਬਲਾਕ ਕਰ ਦਿੱਤਾ ਗਿਆ ਹੈ</string>
   <string name="login_failed_generic">ਦਾਖ਼ਲਾ ਫੇਲ੍ਹ ਹੋਇਆ</string>

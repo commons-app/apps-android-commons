@@ -40,8 +40,6 @@
   <string name="share_title_hint">Sesirah</string>
   <string name="share_description_hint">Wedharan</string>
   <string name="login_failed_network">Ora bisa mlebu log - jaringané gagal</string>
-  <string name="login_failed_username">Ora bisa mlebu log - tiliki jeneng panganggoné panjenengan</string>
-  <string name="login_failed_password">Ora bisa mlebu log - tiliki tembung wadiné panjenengan</string>
   <string name="login_failed_throttled">Kakèhan upaya sing gagal. Jajalana manèh mengko.</string>
   <string name="login_failed_blocked">Ngapunten, panganggo iki wis diblokir ing Commons</string>
   <string name="login_failed_2fa_needed">Panjenengan kudu ngisi kodhe otèntifikasi rong faktoré panjenengan</string>

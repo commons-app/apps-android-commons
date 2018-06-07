@@ -42,8 +42,6 @@
   <string name="share_title_hint">Tiitel</string>
   <string name="share_description_hint">Beskriiwang</string>
   <string name="login_failed_network">Bi\'t uunmeldin as wat skiaf gingen - näätwerk-feeler</string>
-  <string name="login_failed_username">Bi\'t uunmeldin as wat skiaf gingen - luke ans efter di brükernööm</string>
-  <string name="login_failed_password">Bi\'t uunmeldin as wat skiaf gingen - luke ans efter det paaswurd</string>
   <string name="login_failed_throttled">Tu fölsis fersoocht saner lok. Ferschük det uun hög minüüten noch ans nei.</string>
   <string name="login_failed_blocked">Didiar brüker as üüb Commons speret wurden.</string>
   <string name="login_failed_2fa_needed">Dü skel dan code för\'t tau-straal-gudkäänen (2FA) uundu.</string>

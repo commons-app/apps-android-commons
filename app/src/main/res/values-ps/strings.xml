@@ -37,8 +37,6 @@
   <string name="add_title_toast">مهرباني وکړئ د دې دوتنې لپاره سرلیک چمتو کړئ</string>
   <string name="share_description_hint">څرگندونه</string>
   <string name="login_failed_network">د ننوتلو توان نلري - د شبکې ناکامي</string>
-  <string name="login_failed_username">د ننوتلو توان نلري - لطفاً خپل کارن نوم وګورئ</string>
-  <string name="login_failed_password">د ننوتلو توان نلري - لطفاً خپل پټنوم وګورئ</string>
   <string name="login_failed_throttled">ډیری ناکامه هڅې. لطفا څو دقیقې وروسته بیا هڅه وکړئ.</string>
   <string name="login_failed_blocked">بخښنه غواړو، په دي کارن د کامنز لخوا بنديز ولګول شو</string>
   <string name="login_failed_generic">غونډال کې ننوتنه نابريالې شوه</string>

@@ -35,8 +35,6 @@
   <string name="share_title_hint">ଶିରୋନାମ</string>
   <string name="share_description_hint">ବିବରଣୀ</string>
   <string name="login_failed_network">ଲଗ ଇନ କରିବାରେ ବିଫଳ - ନେଟୱାର୍କରେ ଅସୁବିଧା</string>
-  <string name="login_failed_username">ଲଗ ଇନ କରିବାରେ ବିଫଳ - ଦୟାକରି ନିଜର ସଭ୍ୟ ନାମ ପରଖିନିଅନ୍ତୁ</string>
-  <string name="login_failed_password">ଲଗ ଇନ କରିବାରେ ବିଫଳ - ଦୟାକରି ନିଜର ପାସୱାର୍ଡ଼ ପରଖିନିଅନ୍ତୁ</string>
   <string name="login_failed_throttled" fuzzy="true">ଖୁବ ଅଧିକ ଅସଫଳ ଚେଷ୍ଟା । ଦୟାକରି କେଇ ମିନିଟ ଛାଡ଼ି ଚେଷ୍ଟା କରନ୍ତୁ</string>
   <string name="login_failed_blocked">କ୍ଷମା ଘେନିବେ, ଏହି ସଭ୍ୟଙ୍କୁ କମନ୍ସରେ ଅଟକାଯାଇଛି</string>
   <string name="login_failed_generic">ଲଗଇନ ହେଲାନାହିଁ</string>

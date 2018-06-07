@@ -9,11 +9,16 @@
 * Mirzali
 -->
 <resources>
+  <string name="preference_category_appearance">Asayış</string>
+  <string name="preference_category_general">Bıngeh</string>
+  <string name="preference_category_location">Lokasyon</string>
   <string name="app_name">Commons</string>
+  <string name="bullet">•</string>
   <string name="menu_settings">Eyari</string>
   <string name="username">Namey karberi</string>
   <string name="password">Parola</string>
   <string name="login">Cı kewe</string>
+  <string name="forgot_password">Parola, xo vira kerde?</string>
   <string name="signup">Qeyd be</string>
   <string name="logging_in_title">Cıkewtış</string>
   <string name="logging_in_message">Kerem kerên, bıpawên...</string>
@@ -47,8 +52,6 @@
   <string name="share_title_hint">Sername</string>
   <string name="share_description_hint">Şınasnayış</string>
   <string name="login_failed_network">Xırabiya kewten-network xeta</string>
-  <string name="login_failed_username">Ronıştışo abeno - Namey karberi ye xo kontrol kerë</string>
-  <string name="login_failed_password">Ronıştışo nêabeno - Parolay xo kontrol kerë</string>
   <string name="login_failed_throttled">Şıma xeylê rayi kerd ke cı kewê, a ser nêvıst. Şıma rê zehmet 2-3 deqey ra tepeya reyna bıcerrebnên.</string>
   <string name="login_failed_blocked">Qısur mewni rê, Karber commons dı bloqe biyo.</string>
   <string name="login_failed_generic">Nidekeweya de</string>
@@ -58,6 +61,8 @@
   <string name="menu_upload_single">Bar ke</string>
   <string name="categories_search_text_hint">Kategoriyan dı cı geyr</string>
   <string name="menu_save_categories">Star ke</string>
+  <string name="refresh_button">Newe ke</string>
+  <string name="display_list_button">Liste</string>
   <plurals name="contributions_subtitle">
     <item quantity="zero">\@string/contributions_subtitle_zero</item>
     <item quantity="one">Yew  barbiyayış</item>
@@ -78,7 +83,8 @@
   <string name="title_activity_signup">Qeyd be</string>
   <string name="menu_about">Heq te cı</string>
   <string name="about_improve">Qandê yew &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;GitHub-cıkewtış&lt;/a&gt;ê neweyi rê rapor û teklifan bıaferne.</string>
-  <string name="about_privacy_policy" fuzzy="true">&lt;a href=\"https://github.com/commons-app/apps-android-commons/wiki/Privacy-policy\"&gt;Politikay nımıtışi&lt;/a&gt;</string>
+  <string name="about_privacy_policy">&lt;u&gt;Politikaya nımıtışi&lt;/u&gt;</string>
+  <string name="about_credits">&lt;u&gt;İştırakkerdoği&lt;/u&gt;</string>
   <string name="title_activity_about">Heq te cı</string>
   <string name="menu_feedback">Peyd rışten bırış (E-posta ra)</string>
   <string name="no_email_client">E-posta eyar nêbi</string>
@@ -86,7 +92,7 @@
   <string name="menu_retry_upload">Anciya bıcerrebne</string>
   <string name="menu_cancel_upload">Bıtexelne</string>
   <string name="menu_download">Ron</string>
-  <string name="preference_license" fuzzy="true">Lisans</string>
+  <string name="preference_license">Lisanso hesebiyaye</string>
   <string name="license_name_cc_by_sa"> Attribution-ShareAlike 3.0</string>
   <string name="license_name_cc_by">Attribution 3.0</string>
   <string name="license_name_cc0">CC0</string>
@@ -121,6 +127,8 @@
   <string name="yes">E</string>
   <string name="no">Nê</string>
   <string name="media_detail_title">Sername</string>
+  <string name="media_detail_description">Şınasnayış</string>
+  <string name="media_detail_author">Nuştekar</string>
   <string name="media_detail_license">Lisans</string>
   <string name="media_detail_coordinates">Koordinati</string>
   <string name="welcome_image_tulip">Korbıze</string>
@@ -129,5 +137,7 @@
   <string name="navigation_item_home">Keye</string>
   <string name="navigation_item_upload">Bar ke</string>
   <string name="navigation_item_logout">Veciyayış</string>
+  <string name="about_translate_cancel">Bıtexelne</string>
   <string name="retry">Anciya bıcerrebne</string>
+  <string name="showcase_view_got_it_button">Mı fehm kerd!</string>
 </resources>

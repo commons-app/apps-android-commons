@@ -54,8 +54,6 @@
   <string name="share_title_hint">العنوان</string>
   <string name="share_description_hint">الوصف</string>
   <string name="login_failed_network">لا يمكن تسجيل الدخول - فشل في شبكة الاتصال</string>
-  <string name="login_failed_username">لا يمكن تسجيل الدخول - فضلا تحقق من اسم المستخدم</string>
-  <string name="login_failed_password">لا يمكن تسجيل الدخول - فضلا تحقق من كلمة السر</string>
   <string name="login_failed_throttled">الكثير من المحاولات غير الناجحة. الرجاء المحاولة مرة أخرى في بضع دقائق.</string>
   <string name="login_failed_blocked">عذراً، لقد تم منع هذا المستخدم على كومنز</string>
   <string name="login_failed_2fa_needed">يجب توفير رمز التحقق المزدوج.</string>
@@ -145,4 +143,5 @@
   <string name="notifications_welcome">مرحبا بكم في ويكيمديا كومنز، %1$s! نحن سعداء لأنك هنا.</string>
   <string name="notifications_talk_page_message">%1$s رسالة على صفحة الحديث</string>
   <string name="notifications_mention">%1$s ذكر لك على %2$s.</string>
+  <string name="share_app_title">شارك التطبيق</string>
 </resources>

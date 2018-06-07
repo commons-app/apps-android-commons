@@ -43,8 +43,6 @@
   <string name="share_title_hint">Títol</string>
   <string name="share_description_hint">Descripcion</string>
   <string name="login_failed_network">Impossible de se connectar — pana de ret</string>
-  <string name="login_failed_username">Impossible de se connectar — verificatz vòstre nom d’utilizaire</string>
-  <string name="login_failed_password">Impossible de se connectar — verificatz vòstre senhal</string>
   <string name="login_failed_throttled">Tròp de temptativas infructuosas. Ensajatz tornarmai dins qualques minutas.</string>
   <string name="login_failed_blocked">O planhèm, aqueste utilizaire es estat blocat dins Commons</string>
   <string name="login_failed_generic">Error de connexion</string>

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Authors:
 * 2axterix2
+* Adjen
 * Benfutbol10
 * Fitoschido
 * Jduranboger
@@ -57,8 +58,7 @@
   <string name="add_title_toast">Proporciona un título para este archivo</string>
   <string name="share_description_hint">Descripción</string>
   <string name="login_failed_network">No se pudo iniciar sesión: falla de red</string>
-  <string name="login_failed_username">No se pudo iniciar sesión: revisa tu nombre de usuario</string>
-  <string name="login_failed_password">No se pudo iniciar sesión: revisa tu contraseña</string>
+  <string name="login_failed_wrong_credentials">No se puede acceder. Revisa el nombre de usuario y la contraseña</string>
   <string name="login_failed_throttled">Demasiados intentos fallidos. Inténtalo de nuevo en unos minutos.</string>
   <string name="login_failed_blocked">Lo sentimos, este usuario ha sido bloqueado en Commons</string>
   <string name="login_failed_2fa_needed">Debes proporcionar tu código de auntenticación de dos factores.</string>
@@ -267,4 +267,13 @@
   <string name="about_translate_message">Selecciona el idioma en que quieres enviar traducciones</string>
   <string name="about_translate_cancel">Cancelar</string>
   <string name="retry">Reintentar</string>
+  <string name="showcase_view_got_it_button">Entendido</string>
+  <string name="showcase_view_whole_nearby_activity">Estos sitios cercanos a ti necesitan imágenes para ilustrar sus artículos de Wikipedia</string>
+  <string name="showcase_view_plus_fab">Puedes cargar una imagen para cualquier sitio desde la galería o la cámara</string>
+  <string name="no_images_found">No se encontró ninguna imagen.</string>
+  <string name="error_loading_images">Se produjo un error al cargar las imágenes.</string>
+  <string name="image_uploaded_by">Cargada por: %1$s</string>
+  <string name="share_app_title">Compartir aplicación</string>
+  <string name="share_coordinates_not_present">No se especificaron las coordenadas al seleccionar la imagen</string>
+  <string name="error_fetching_nearby_places">Error al recuperar los lugares cercanos.</string>
 </resources>

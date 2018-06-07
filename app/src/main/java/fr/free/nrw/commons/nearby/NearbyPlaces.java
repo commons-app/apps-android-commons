@@ -17,7 +17,7 @@ import java.util.regex.Pattern;
 
 import fr.free.nrw.commons.Utils;
 import fr.free.nrw.commons.location.LatLng;
-import fr.free.nrw.commons.utils.FileUtils;
+import fr.free.nrw.commons.upload.FileUtils;
 import timber.log.Timber;
 
 public class NearbyPlaces {
@@ -40,10 +40,9 @@ public class NearbyPlaces {
         }
     }
 
-    List<Place> getFromWikidataQuery(LatLng curLatLng, String lang) {
+    List<Place> getFromWikidataQuery(LatLng curLatLng, String lang) throws IOException {
         List<Place> places = Collections.emptyList();
 
-        try {
             // increase the radius gradually to find a satisfactory number of nearby places
             while (radius <= MAX_RADIUS) {
                 places = getFromWikidataQuery(curLatLng, lang, radius);
@@ -54,13 +53,6 @@ public class NearbyPlaces {
                     radius *= RADIUS_MULTIPLIER;
                 }
             }
-        } catch (IOException e) {
-            Timber.d(e.toString());
-            // errors tend to be caused by too many results (and time out)
-            // try a small radius next time
-            Timber.d("back to initial radius: %f", radius);
-            radius = INITIAL_RADIUS;
-        }
         // make sure we will be able to send at least one request next time
         if (radius > MAX_RADIUS) {
             radius = MAX_RADIUS;

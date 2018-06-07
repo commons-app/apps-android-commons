@@ -58,8 +58,7 @@
   <string name="add_title_toast">Будь ласка, вкажіть назву цього файлу</string>
   <string name="share_description_hint">Опис</string>
   <string name="login_failed_network">Неможливо увійти — збій у мережі</string>
-  <string name="login_failed_username">Неможливо увійти — будь ласка, перевірте своє ім\'я користувача</string>
-  <string name="login_failed_password">Неможливо увійти — будь ласка, перевірте свій пароль</string>
+  <string name="login_failed_wrong_credentials">Неможливо увійти — будь ласка перевірте ім\'я користувача та пароль</string>
   <string name="login_failed_throttled">Надто багато невдалих спроб. Будь ласка, спробуйте знову через кілька хвилин.</string>
   <string name="login_failed_blocked">Вибачте, цього користувача було заблоковано на Вікісховищі</string>
   <string name="login_failed_2fa_needed">Ви повинні надати код двофакторної автентифікації.</string>
@@ -150,7 +149,7 @@
   <string name="tutorial_2_subtext_2">Корисні об\'єкти (велосипеди, залізничні станції)</string>
   <string name="tutorial_2_subtext_3">Відомі люди (ваш мер, спортсмен-олімпієць, якого ви зустріли)</string>
   <string name="tutorial_3_text">Будь ласка, НЕ завантажуйте:</string>
-  <string name="tutorial_3_subtext">u2022 Селфі або фото своїх друзів \nu2022 Зображення, які Ви завантажили з інтернету \nu2022 Скріншоти патентованих програм</string>
+  <string name="tutorial_3_subtext">- Селфі або фото своїх друзів \n- Зображення, які Ви завантажили з інтернету \n- Знімки екрану пропрієтарних програм</string>
   <string name="tutorial_3_subtext_1">Селфі чи фото ваших друзів</string>
   <string name="tutorial_3_subtext_2">Зображення, які ви завантажили з інтернету</string>
   <string name="tutorial_3_subtext_3">Знімки екрану пропрієтарних програм</string>
@@ -162,9 +161,10 @@
   <string name="welcome_wikipedia_text">Надсилайте Ваші зображення. Допоможіть оживити статті Вікіпедії!</string>
   <string name="welcome_wikipedia_subtext">Зображення у Вікіпедії надходять з Вікісховища.</string>
   <string name="welcome_copyright_text">Ваші зображення допомагають освіті людей у всьому світі.</string>
-  <string name="welcome_copyright_subtext">Уникайте захищених авторським правом матеріалів, знайдених в Інтернеті, а також зображень плакатів, обкладинок книг і т. п.</string>
+  <string name="welcome_copyright_subtext">Уникайте захищених авторським правом матеріалів, знайдених в Інтернеті, а також зображень плакатів, обкладинок книг, тощо.</string>
   <string name="welcome_final_text">Ви це зрозуміли?</string>
   <string name="welcome_final_button_text">Так!</string>
+  <string name="welcome_help_button_text"/>
   <string name="detail_panel_cats_label">Категорії</string>
   <string name="detail_panel_cats_loading">Завантаження…</string>
   <string name="detail_panel_cats_none">Нічого не обрано</string>
@@ -186,7 +186,7 @@
   <string name="media_detail_description">Опис</string>
   <string name="media_detail_description_explanation">Сюди потрапляє опис медіафайлу. Він потенційно може бути досить довгим і розтягнутися на декілька рядків. Однак ми сподіваємось, що він виглядатиме гарно.</string>
   <string name="media_detail_author">Автор</string>
-  <string name="media_detail_author_explanation">Тут вказується ім\'я автора вибраного зображеня</string>
+  <string name="media_detail_author_explanation">Тут вказується ім\'я автора вибраного зображення</string>
   <string name="media_detail_uploaded_date">Дата завантаження</string>
   <string name="media_detail_license">Ліцензія</string>
   <string name="media_detail_coordinates">Координати</string>
@@ -202,7 +202,7 @@
   <string name="logout_verification">Ви справді хочете вийти із системи?</string>
   <string name="commons_logo">Логотип Вікісховища</string>
   <string name="commons_website">Веб-сайт Commons</string>
-  <string name="commons_facebook">Фейсбук сторінка Commons</string>
+  <string name="commons_facebook">Facebook-сторінка Commons</string>
   <string name="commons_github">Програмний код Commons на GitHub</string>
   <string name="background_image">Фонове зображення</string>
   <string name="mediaimage_failed">Помилка медіазображення</string>
@@ -237,15 +237,15 @@
   <string name="nearby_info_menu_wikipedia_article">Стаття Вікіпедії</string>
   <string name="error_while_cache">Помилка кешування зображень</string>
   <string name="title_info">Унікальна описова назва файлу. Ви можете використовувати простий текст з пробілами. Не вказуйте розширення файлу</string>
-  <string name="description_info">Будь ласка, докладно опишіть файл: де його було зроблено? що на ньому зображено? який контекст? Будь ласка, опишіть об\'єкти чи осіб. Додайте інформацію, яку не можна легко здогадатися, наприклад, пору доби для фотографії пейзажу. Якщо зображено щось незвичайне, постарайтеся пояснити, що робить його незвичайним.</string>
+  <string name="description_info">Будь ласка, докладно опишіть файл: де його було зроблено? що на ньому зображено? який контекст? Будь ласка, опишіть об\'єкти чи осіб. Додайте інформацію, яку не можна легко здогадатися, наприклад, пору доби для фотографії пейзажу. Якщо зображено щось незвичайне, спробуйте пояснити, що робить його незвичайним.</string>
   <string name="upload_image_too_dark">Це зображення надто темне. Ви упевнені, що хочете його завантажити? Вікісховище призначене лише для зображень, що мають енциклопедичну цінність.</string>
   <string name="upload_image_blurry">Це зображення розмите. Ви упевнені, що хочете його завантажити? Вікісховище призначене лише для зображень, що мають енциклопедичну цінність.</string>
   <string name="give_permission">Надати дозвіл</string>
   <string name="use_external_storage">Використовувати зовнішнє сховище</string>
   <string name="use_external_storage_summary">Зберігати зображення, виконані вбудованою камерою Вашого пристрою</string>
   <string name="login_to_your_account">Увійдіть у свій обліковий запис</string>
-  <string name="send_log_file">Надіслати лог-файл</string>
-  <string name="send_log_file_description">Надіслати лог-файл розробникам електронною поштою</string>
+  <string name="send_log_file">Надіслати файл журналу</string>
+  <string name="send_log_file_description">Надіслати файл журналу розробникам електронною поштою</string>
   <string name="no_web_browser">Не знайдено браузера, щоб відкрити посилання</string>
   <string name="null_url">Помилка! Посилання не знайдено</string>
   <string name="nominate_deletion">Номінувати на вилучення</string>
@@ -257,9 +257,9 @@
   <string name="location_permission_rationale_nearby">Потрібний дозвіл для показу списку місць поблизу</string>
   <string name="get_directions">Показати на мапі у зовнішній програмі</string>
   <string name="read_article">ЧИТАТИ СТАТТЮ</string>
-  <string name="notifications_welcome">Вітаємо у Wikimedia Commons, %1$s! Раді вас бачити.</string>
+  <string name="notifications_welcome">Вітаємо у Вікісховищі, %1$s! Раді вас бачити.</string>
   <string name="notifications_talk_page_message">%1$s залишив повідомлення на вашій сторінці обговорення</string>
-  <string name="notifications_thank_you_edit">Дякуємо за правку</string>
+  <string name="notifications_thank_you_edit">Дякуємо за редагування</string>
   <string name="notifications_mention">%1$s згадав вас на %2$s.</string>
   <string name="toggle_view_button">Перемкнути режим перегляду</string>
   <string name="nearby_directions">НАПРЯМКИ</string>
@@ -279,4 +279,16 @@
   <string name="about_translate_proceed">Виконується</string>
   <string name="about_translate_cancel">Скасувати</string>
   <string name="retry">Повторити</string>
+  <string name="showcase_view_got_it_button">Зрозуміло</string>
+  <string name="showcase_view_whole_nearby_activity">Це місця поблизу, про які є статті Вікіпедії, але які потребують ілюстрацій</string>
+  <string name="showcase_view_list_icon">Натискання цієї кнопки згенерує список таких місць</string>
+  <string name="showcase_view_plus_fab">Ви можете завантажити зображення для любого з цих місць, зробивши знімок камерою або вибравши зображення з галереї</string>
+  <string name="no_images_found">Зображень не знайдено!</string>
+  <string name="error_loading_images">Сталася помилка при завантаженні зображень.</string>
+  <string name="image_uploaded_by">Завантажено: %1$s</string>
+  <string name="share_app_title">Поділитися програмою</string>
+  <string name="share_coordinates_not_present">Під час вибору зображення не були вказані координати</string>
+  <string name="error_fetching_nearby_places">Помилка отримання місць поблизу.</string>
+  <string name="menu_set_wallpaper">Поставити шпалерами екрану</string>
+  <string name="wallpaper_set_successfully">Шпалери екрану виставлено успішно!</string>
 </resources>

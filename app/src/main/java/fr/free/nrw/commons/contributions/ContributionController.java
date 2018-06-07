@@ -90,7 +90,7 @@ public class ContributionController {
         fragment.startActivityForResult(pickImageIntent, SELECT_FROM_GALLERY);
     }
 
-    public void handleImagePicked(int requestCode, Intent data, boolean isDirectUpload) {
+    public void handleImagePicked(int requestCode, Intent data, boolean isDirectUpload, String wikiDataEntityId) {
         FragmentActivity activity = fragment.getActivity();
         Timber.d("handleImagePicked() called with onActivityResult()");
         Intent shareIntent = new Intent(activity, ShareActivity.class);
@@ -102,9 +102,6 @@ public class ContributionController {
                 shareIntent.setType(activity.getContentResolver().getType(imageData));
                 shareIntent.putExtra(EXTRA_STREAM, imageData);
                 shareIntent.putExtra(EXTRA_SOURCE, SOURCE_GALLERY);
-                if (isDirectUpload) {
-                    shareIntent.putExtra("isDirectUpload", true);
-                }
                 break;
             case SELECT_FROM_CAMERA:
                 //FIXME: Find out appropriate mime type
@@ -113,9 +110,6 @@ public class ContributionController {
                 shareIntent.setType("image/jpeg");
                 shareIntent.putExtra(EXTRA_STREAM, lastGeneratedCaptureUri);
                 shareIntent.putExtra(EXTRA_SOURCE, SOURCE_CAMERA);
-                if (isDirectUpload) {
-                    shareIntent.putExtra("isDirectUpload", true);
-                }
 
                 break;
             default:
@@ -123,6 +117,10 @@ public class ContributionController {
         }
         Timber.i("Image selected");
         try {
+            shareIntent.putExtra("isDirectUpload", isDirectUpload);
+            if (wikiDataEntityId != null && !wikiDataEntityId.equals("")) {
+                shareIntent.putExtra("wikiDataEntityId", wikiDataEntityId);
+            }
             activity.startActivity(shareIntent);
         } catch (SecurityException e) {
             Timber.e(e, "Security Exception");

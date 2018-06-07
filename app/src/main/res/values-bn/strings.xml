@@ -57,8 +57,6 @@
   <string name="add_title_toast">এই ফাইলটির জন্য একটি শিরোনাম প্রদান করুন</string>
   <string name="share_description_hint">বিবরণ</string>
   <string name="login_failed_network">প্রবেশ করা যাচ্ছে না - নেটওয়ার্ক ব্যর্থতা</string>
-  <string name="login_failed_username">প্রবেশ করা যাচ্ছে না - অনুগ্রহ করে আপনার ব্যবহারকারী নাম পরীক্ষা করুন।</string>
-  <string name="login_failed_password">প্রবেশ করা যাচ্ছে না - অনুগ্রহ করে আপনার পাসওয়ার্ড পরীক্ষা করুন</string>
   <string name="login_failed_throttled">খুব বেশি অসফল প্রচেষ্টা। অনুগ্রহ করে কয়েক মিনিট পরে আবারও চেষ্টা করুন।</string>
   <string name="login_failed_blocked">দুঃখিত, এই ব্যবহারকারীকে কমন্সে বাধা দেয়া হয়েছে</string>
   <string name="login_failed_2fa_needed">অাপনাকে অবশ্যই অাপনার দু\'স্তরের সত্যায়নকরণ কোড দিতে হবে।</string>
@@ -259,4 +257,8 @@
   <string name="internet_established">ইন্টারনেট উপলব্ধ</string>
   <string name="no_notifications">কোন বিজ্ঞপ্তি পাওয়া যায়নি</string>
   <string name="retry">পুনঃচেষ্টা করুন</string>
+  <string name="showcase_view_got_it_button">বুঝেছি!</string>
+  <string name="no_images_found">কোন চিত্র পাওয়া যায়নি!</string>
+  <string name="image_uploaded_by">আপলোড করেছেন: %1$s</string>
+  <string name="error_fetching_nearby_places">কাছাকাছি স্থানগুলি আনতে ত্রুটি।</string>
 </resources>

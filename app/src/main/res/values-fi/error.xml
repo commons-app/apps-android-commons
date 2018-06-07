@@ -2,10 +2,11 @@
 <!-- Authors:
 * Nike
 * Olli
+* Pyscowicz
 * Silvonen
 -->
 <resources>
-  <string name="crash_dialog_title">Commons app on kaatunut</string>
+  <string name="crash_dialog_title">Commons on kaatunut</string>
   <string name="crash_dialog_text">Pahoittelemme, virhe tapahtui.</string>
   <string name="crash_dialog_comment_prompt">Kerro meille mitä teit äsken, sähköpostitse. Se auttaa meitä korjaamaan ongelman!</string>
   <string name="crash_dialog_ok_toast">Kiitos!</string>

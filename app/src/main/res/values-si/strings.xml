@@ -44,8 +44,6 @@
   <string name="share_title_hint">මාතෘකාව</string>
   <string name="share_description_hint">විස්තරය</string>
   <string name="login_failed_network">පිවිසීමට නොහැකිය-ජාලය ඇනහිටීමක්</string>
-  <string name="login_failed_username">පිවිසීමට නොහැකිය-කරුණාකර ඔබගේ පිවිසුම්-නාමය පරික්ෂා කරන්න</string>
-  <string name="login_failed_password">පිවිසීමට නොහැකිය-කරුණාකර ඔබගේ මුරපදය පරික්ෂා කරන්න.</string>
   <string name="login_failed_throttled">බොහෝ අසාර්ථක උත්සාහයන් කර ඇත. කරුණාකර මිනිත්තු කිහිපයකට පසුව උත්සාහ කරන්න</string>
   <string name="login_failed_blocked">කණගාටුයි,මෙම පරිශීලක වාරණයට ලක්කර ඇත.</string>
   <string name="login_failed_2fa_needed">ඔබ ඔබගේ ද්විත්ව සහතික කිරීමේ කේතය ඇතුලත් කළ යුතුය.</string>

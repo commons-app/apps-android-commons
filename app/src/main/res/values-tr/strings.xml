@@ -57,8 +57,7 @@
   <string name="add_title_toast">Lütfen bu dosya için bir başlık ekleyin</string>
   <string name="share_description_hint">Açıklama</string>
   <string name="login_failed_network">Oturum açılamıyor - ağ hatası</string>
-  <string name="login_failed_username">Oturum açılamıyor - lütfen kullanıcı adınızı kontrol edin</string>
-  <string name="login_failed_password">Oturum açılamıyor - lütfen parolanızı kontrol edin</string>
+  <string name="login_failed_wrong_credentials">Giriş yapılamıyor - lütfen kullanıcı adınızı ve şifrenizi kontrol edin</string>
   <string name="login_failed_throttled">Çok sayıda başarısız girişimde bulundunuz. Birkaç dakika sonra tekrar deneyin.</string>
   <string name="login_failed_blocked">Üzgünüz, bu kullanıcı Commons\'ta engellendi</string>
   <string name="login_failed_2fa_needed">İki faktörlü kimlik doğrulama kodunu sağlamalısınız.</string>
@@ -158,6 +157,7 @@
   <string name="welcome_copyright_subtext">Telif hakkı olan ve internette bulunan film afişi, kitap kapağı gibi malzemelerin kullanımından kaçının.</string>
   <string name="welcome_final_text">Bunu anladınız mı?</string>
   <string name="welcome_final_button_text">Evet!</string>
+  <string name="welcome_help_button_text">*</string>
   <string name="detail_panel_cats_label">Kategoriler</string>
   <string name="detail_panel_cats_loading">Yükleniyor...</string>
   <string name="detail_panel_cats_none">Hiçbir şey seçilmedi</string>
@@ -271,4 +271,16 @@
   <string name="about_translate_proceed">İlerle</string>
   <string name="about_translate_cancel">Vazgeç</string>
   <string name="retry">Tekrar Deneyin</string>
+  <string name="showcase_view_got_it_button">Anladım!</string>
+  <string name="showcase_view_whole_nearby_activity">Vikipedi maddelerine eklemek için fotoğrafa ihtiyaç duyan size yakın yerler</string>
+  <string name="showcase_view_list_icon">Bu tuşa dokunmak bu yerlerin bir listesini getirir</string>
+  <string name="showcase_view_plus_fab">Galerinizden veya kameranızla herhangi bir yer için resim yükleyebilirsiniz.</string>
+  <string name="no_images_found">Resim bulunamadı!</string>
+  <string name="error_loading_images">Resimler yüklenirken hata oluştu.</string>
+  <string name="image_uploaded_by">Yükleyen: %1$s</string>
+  <string name="share_app_title">Uygulamayı Paylaş</string>
+  <string name="share_coordinates_not_present">Koordinatlar görüntü seçimi sırasında belirlenmedi</string>
+  <string name="error_fetching_nearby_places">Yakındaki yerler alınırken hata oluştu.</string>
+  <string name="menu_set_wallpaper">Duvar kağıdı ayarla</string>
+  <string name="wallpaper_set_successfully">Duvar kağıdı başarıyla ayarlandı!</string>
 </resources>

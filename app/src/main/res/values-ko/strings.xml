@@ -58,8 +58,7 @@
   <string name="add_title_toast">이 파일의 제목을 지정해 주십시오</string>
   <string name="share_description_hint">설명</string>
   <string name="login_failed_network">로그인할 수 없습니다 - 네트워크 오류입니다</string>
-  <string name="login_failed_username">로그인할 수 없습니다 - 사용자 이름을 확인하세요</string>
-  <string name="login_failed_password">로그인할 수 없습니다 - 비밀번호를 확인하세요</string>
+  <string name="login_failed_wrong_credentials">로그인할 수 없습니다 - 사용자 이름과 비밀번호를 확인해 주십시오</string>
   <string name="login_failed_throttled">실패한 시도가 너무 많습니다. 몇 분 후에 다시 시도하세요.</string>
   <string name="login_failed_blocked">죄송합니다, 이 사용자는 공용에서 차단되었습니다</string>
   <string name="login_failed_2fa_needed">2요소 인증 코드를 제공해야 합니다.</string>
@@ -266,5 +265,16 @@
   <string name="about_translate_proceed">진행</string>
   <string name="about_translate_cancel">취소</string>
   <string name="retry">다시 시도</string>
+  <string name="showcase_view_got_it_button">알겠습니다!</string>
+  <string name="showcase_view_whole_nearby_activity">이들은 위키백과 글에 사진을 넣을 필요가 있는 당신 주위의 장소들입니다</string>
+  <string name="showcase_view_list_icon">이 버튼을 탭하면 이 장소들의 목록을 가져옵니다</string>
+  <string name="showcase_view_plus_fab">갤러리나 카메라 어느 곳이든 사진을 올릴 수 있습니다</string>
+  <string name="no_images_found">그림이 없습니다!</string>
+  <string name="error_loading_images">그림을 불러오는 동안 오류가 발생했습니다.</string>
+  <string name="image_uploaded_by">올린이: %1$s</string>
   <string name="share_app_title">앱 공유</string>
+  <string name="share_coordinates_not_present">그림 선택 중에 좌표가 지정되지 않았습니다</string>
+  <string name="error_fetching_nearby_places">주변 장소를 가져오는데 오류가 있습니다.</string>
+  <string name="menu_set_wallpaper">배경화면 설정</string>
+  <string name="wallpaper_set_successfully">배경화면을 성공적으로 설정했습니다!</string>
 </resources>

@@ -1,6 +1,5 @@
 package fr.free.nrw.commons;
 
-import android.app.Application;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.database.sqlite.SQLiteDatabase;
@@ -21,13 +20,14 @@ import java.io.File;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import fr.free.nrw.commons.BuildConfig;
 import fr.free.nrw.commons.auth.SessionManager;
 import fr.free.nrw.commons.category.CategoryDao;
 import fr.free.nrw.commons.contributions.ContributionDao;
 import fr.free.nrw.commons.data.DBOpenHelper;
 import fr.free.nrw.commons.di.ApplicationlessInjection;
 import fr.free.nrw.commons.modifications.ModifierSequenceDao;
-import fr.free.nrw.commons.utils.FileUtils;
+import fr.free.nrw.commons.upload.FileUtils;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 import timber.log.Timber;

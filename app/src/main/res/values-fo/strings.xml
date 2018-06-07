@@ -34,8 +34,6 @@
   <string name="share_title_hint">Heiti</string>
   <string name="share_description_hint">Frágreiðing</string>
   <string name="login_failed_network">Ómøguligt at rita inn - feilur í netsambandinum</string>
-  <string name="login_failed_username">Ómøguligt at rita inn - vinarliga eftirkanna títt brúkaranavn</string>
-  <string name="login_failed_password">Ómøguligt at rita inn - vinarliga kanna eftir, um títt loyniorð er rætt</string>
   <string name="login_failed_throttled" fuzzy="true">Ov nógv miseydnaðar royndir. Vinarliga royn aftur um fáir minuttir</string>
   <string name="login_failed_blocked">Haldið okkum tilgóðar, hesin brúkari er blivin sperraður á Commons</string>
   <string name="login_failed_generic">Login miseydnaðist</string>
