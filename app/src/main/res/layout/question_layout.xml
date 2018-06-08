@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center_horizontal">
+
+    <ImageView
+        android:layout_width="300dp"
+        android:layout_height="236dp"
+        android:scaleType="fitXY"
+        android:layout_marginHorizontal="@dimen/activity_margin_horizontal"
+        android:layout_marginVertical="@dimen/activity_margin_vertical"
+        android:src="@drawable/sydney_opera_house" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="?android:textAppearanceMedium"
+        android:textColor="@color/secondaryTextColor"
+        android:text="Is Photograph of an Artwork allowed ?" />
+
+</LinearLayout>
+
