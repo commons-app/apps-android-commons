@@ -3,6 +3,7 @@ package fr.free.nrw.commons.explore.images;
 
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -12,6 +13,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import com.pedrogomez.renderers.RVRendererAdapter;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 import javax.inject.Inject;
@@ -22,6 +24,8 @@ import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
 import fr.free.nrw.commons.explore.SearchActivity;
+import fr.free.nrw.commons.explore.recentsearches.RecentSearch;
+import fr.free.nrw.commons.explore.recentsearches.RecentSearchesDao;
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
 import fr.free.nrw.commons.utils.NetworkUtils;
 import fr.free.nrw.commons.utils.ViewUtil;
@@ -49,8 +53,8 @@ public class SearchImageFragment extends CommonsDaggerSupportFragment {
     TextView imagesNotFoundView;
     String query;
 
-    @Inject
-    MediaWikiApi mwApi;
+    @Inject RecentSearchesDao recentSearchesDao;
+    @Inject MediaWikiApi mwApi;
     @Inject @Named("default_preferences") SharedPreferences prefs;
 
     private RVRendererAdapter<Media> imagesAdapter;
@@ -59,8 +63,24 @@ public class SearchImageFragment extends CommonsDaggerSupportFragment {
     private final SearchImagesAdapterFactory adapterFactory = new SearchImagesAdapterFactory(item -> {
         int index = queryList.indexOf(item);
         ((SearchActivity)getContext()).onSearchImageClicked(index);
-        //TODO : Add images to recently searched images db table
+        saveQuery(query);
     });
+
+    private void saveQuery(String query) {
+        RecentSearch recentSearch = recentSearchesDao.find(query);
+
+        // Newly searched query...
+        if (recentSearch == null) {
+            recentSearch = new RecentSearch(null, query, new Date());
+        }
+        else {
+            recentSearch.setLastSearched(new Date());
+        }
+
+        recentSearchesDao.save(recentSearch);
+
+    }
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
@@ -103,11 +123,16 @@ public class SearchImageFragment extends CommonsDaggerSupportFragment {
         queryList = mediaList;
         if(mediaList == null || mediaList.isEmpty()) {
             initErrorView();
-        }else {
+        }
+        else {
 
             progressBar.setVisibility(View.GONE);
             imagesAdapter.addAll(mediaList);
             imagesAdapter.notifyDataSetChanged();
+
+            // check if user is waiting for 5 seconds if yes then save search query to history.
+            Handler handler = new Handler();
+            handler.postDelayed(() -> saveQuery(query), 5000);
         }
     }
 
@@ -144,7 +169,8 @@ public class SearchImageFragment extends CommonsDaggerSupportFragment {
     public int getTotalImagesCount(){
         if (imagesAdapter == null) {
             return 0;
-        }else {
+        }
+        else {
             return imagesAdapter.getItemCount();
         }
     }
@@ -157,7 +183,8 @@ public class SearchImageFragment extends CommonsDaggerSupportFragment {
         if (imagesAdapter.getItem(i).getFilename() == null) {
             // not yet ready to return data
             return null;
-        } else {
+        }
+        else {
             return new Media(imagesAdapter.getItem(i).getFilename());
         }
     }
