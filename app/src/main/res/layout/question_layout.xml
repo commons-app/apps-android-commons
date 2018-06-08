@@ -9,6 +9,7 @@
         android:layout_width="300dp"
         android:layout_height="236dp"
         android:scaleType="fitXY"
+        android:id="@+id/question_image"
         android:layout_marginHorizontal="@dimen/activity_margin_horizontal"
         android:layout_marginVertical="@dimen/activity_margin_vertical"
         android:src="@drawable/sydney_opera_house" />
@@ -17,6 +18,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         style="?android:textAppearanceMedium"
+        android:id="@+id/question_text"
+        android:layout_marginLeft="@dimen/activity_margin_horizontal"
+        android:layout_marginRight="@dimen/activity_margin_horizontal"
         android:textColor="@color/secondaryTextColor"
         android:text="Is Photograph of an Artwork allowed ?" />
 
