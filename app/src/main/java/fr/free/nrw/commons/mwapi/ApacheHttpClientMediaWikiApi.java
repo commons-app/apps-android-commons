@@ -628,7 +628,7 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
      */
     @Override
     @NonNull
-    public List<Media> searchImages(String query) {
+    public List<Media> searchImages(String query, int offset) {
         List<ApiResult> imageNodes = null;
         try {
             imageNodes = api.action("query")
@@ -637,6 +637,7 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
                     .param("srwhat", "text")
                     .param("srnamespace", "6")
                     .param("srlimit", "25")
+                    .param("sroffset",offset)
                     .param("srsearch", query)
                     .get()
                     .getNodes("/api/query/search/p/@title");
