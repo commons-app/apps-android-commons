@@ -7,6 +7,7 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.view.View;
+import android.widget.FrameLayout;
 import android.widget.SearchView;
 
 import com.jakewharton.rxbinding2.view.RxView;
@@ -19,6 +20,7 @@ import butterknife.ButterKnife;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.explore.images.SearchImageFragment;
+import fr.free.nrw.commons.explore.recentsearches.RecentSearchesFragment;
 import fr.free.nrw.commons.media.MediaDetailPagerFragment;
 import fr.free.nrw.commons.theme.NavigationBaseActivity;
 import fr.free.nrw.commons.utils.ViewUtil;
@@ -31,13 +33,14 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 public class SearchActivity extends NavigationBaseActivity implements MediaDetailPagerFragment.MediaDetailProvider{
 
     @BindView(R.id.toolbar_search) Toolbar toolbar;
-    @BindView(R.id.searchBox)
-    SearchView searchView;
-
+    @BindView(R.id.fragmentContainer) FrameLayout resultsContainer;
+    @BindView(R.id.searchHistoryContainer) FrameLayout searchHistoryContainer;
+    @BindView(R.id.searchBox) SearchView searchView;
     private SearchImageFragment searchImageFragment;
+    private RecentSearchesFragment recentSearchesFragment;
     private FragmentManager supportFragmentManager;
     private MediaDetailPagerFragment mediaDetails;
-    private String str_query;
+    private String query;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +52,7 @@ public class SearchActivity extends NavigationBaseActivity implements MediaDetai
         toolbar.setNavigationOnClickListener(v->onBackPressed());
         supportFragmentManager = getSupportFragmentManager();
         setBrowseImagesFragment();
+        setSearchHistoryFragment();
         searchView.setQueryHint(getString(R.string.search_commons));
         searchView.onActionViewExpanded();
         searchView.clearFocus();
@@ -58,15 +62,24 @@ public class SearchActivity extends NavigationBaseActivity implements MediaDetai
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe( query -> {
                             //update image list
-                        if (!TextUtils.isEmpty(query)) {
-                            str_query = query.toString();
-                            searchImageFragment.updateImageList(query.toString());
-                        }else {
-
-                            // open search history fragment
+                            if (!TextUtils.isEmpty(query)) {
+                                resultsContainer.setVisibility(View.VISIBLE);
+                                searchHistoryContainer.setVisibility(View.GONE);
+                                this.query = query.toString();
+                                searchImageFragment.updateImageList(query.toString());
+                            }else {
+                                resultsContainer.setVisibility(View.GONE);
+                                searchHistoryContainer.setVisibility(View.VISIBLE);
+                                // open search history fragment
+                            }
                         }
-                    }
                 );
+    }
+
+    private void setSearchHistoryFragment() {
+        recentSearchesFragment = new RecentSearchesFragment();
+        FragmentTransaction transaction = supportFragmentManager.beginTransaction();
+        transaction.add(R.id.searchHistoryContainer, recentSearchesFragment).commit();
     }
 
 
@@ -74,6 +87,7 @@ public class SearchActivity extends NavigationBaseActivity implements MediaDetai
         searchImageFragment = new SearchImageFragment();
         FragmentTransaction transaction = supportFragmentManager.beginTransaction();
         transaction.add(R.id.fragmentContainer, searchImageFragment).commit();
+
     }
 
     @Override
@@ -123,14 +137,15 @@ public class SearchActivity extends NavigationBaseActivity implements MediaDetai
         mediaDetails.showImage(index);
     }
 
+
     @Override
     public void onBackPressed() {
         if (getSupportFragmentManager().getBackStackEntryCount() == 1){
             // back to search so show search toolbar and hide navigation toolbar
             toolbar.setVisibility(View.VISIBLE);
             setNavigationBaseToolbarVisibility(false);
-            if (!TextUtils.isEmpty(str_query)) {
-                searchImageFragment.updateImageList(str_query);
+            if (!TextUtils.isEmpty(query)) {
+                searchImageFragment.updateImageList(query);
             }
         }else {
             toolbar.setVisibility(View.GONE);
@@ -139,4 +154,7 @@ public class SearchActivity extends NavigationBaseActivity implements MediaDetai
         super.onBackPressed();
     }
 
+    public void updateText(String query) {
+        searchView.setQuery(query, true);;
+    }
 }
