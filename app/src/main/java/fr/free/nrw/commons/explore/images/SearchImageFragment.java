@@ -76,7 +76,6 @@ public class SearchImageFragment extends CommonsDaggerSupportFragment {
                 super.onScrollStateChanged(recyclerView, newState);
 
                 if (!recyclerView.canScrollVertically(1)) {
-//                    Toast.makeText(ChatDetailsActivity.this,"LAst",Toast.LENGTH_LONG).show();
                     addImagesToList(query);
                 }
             }

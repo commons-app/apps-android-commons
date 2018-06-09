@@ -65,7 +65,7 @@ public class SearchActivity extends NavigationBaseActivity implements MediaDetai
 
                             // open search history fragment
                         }
-                        }
+                    }
                 );
     }
 
