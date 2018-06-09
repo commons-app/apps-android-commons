@@ -94,7 +94,7 @@ public class SearchImageFragment extends CommonsDaggerSupportFragment {
             @Override
             public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
                 super.onScrollStateChanged(recyclerView, newState);
-
+                // check if end of recycler view is reached, if yes then add more results to existing results
                 if (!recyclerView.canScrollVertically(1)) {
                     addImagesToList(query);
                 }
@@ -123,6 +123,10 @@ public class SearchImageFragment extends CommonsDaggerSupportFragment {
                 .subscribe(this::handleSuccess, this::handleError);
     }
 
+
+    /**
+     * Adds more results to existing search results
+     */
     public void addImagesToList(String query) {
         this.query = query;
         progressBar.setVisibility(View.VISIBLE);
