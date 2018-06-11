@@ -144,6 +144,7 @@ public  class       ContributionsActivity
         if(!BuildConfig.FLAVOR.equalsIgnoreCase("beta")){
             setUploadCount();
         }
+
     }
 
     @Override
