@@ -75,7 +75,7 @@ public interface MediaWikiApi {
     @NonNull
     Single<Integer> getUploadCount(String userName);
 
-    boolean isUserBlocked();
+    boolean isUserBlockedFromCommons();
 
     interface ProgressListener {
         void onProgress(long transferred, long total);

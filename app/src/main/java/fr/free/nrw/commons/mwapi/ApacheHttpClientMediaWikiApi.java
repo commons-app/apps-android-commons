@@ -617,11 +617,11 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
     }
 
     /**
-     * Checks to see if a user is currently blocked
-     * @return whether or not the user is blocked
+     * Checks to see if a user is currently blocked from Commons
+     * @return whether or not the user is blocked from Commons
      */
     @Override
-    public boolean isUserBlocked() {
+    public boolean isUserBlockedFromCommons() {
         boolean userBlocked = false;
         try {
             ApiResult result = api.action("query")
