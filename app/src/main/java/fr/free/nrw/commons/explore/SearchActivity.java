@@ -135,6 +135,7 @@ public class SearchActivity extends NavigationBaseActivity implements MediaDetai
             supportFragmentManager.executePendingTransactions();
         }
         mediaDetails.showImage(index);
+        initBackButton();
     }
 
 

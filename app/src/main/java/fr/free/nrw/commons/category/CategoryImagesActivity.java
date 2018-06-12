@@ -113,6 +113,7 @@ public class CategoryImagesActivity
             supportFragmentManager.executePendingTransactions();
         }
         mediaDetails.showImage(i);
+        initBackButton();
     }
 
     /**
