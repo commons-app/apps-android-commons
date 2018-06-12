@@ -39,7 +39,8 @@
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="QUESTION 1"
+                            android:id="@+id/question_title"
+                            android:text="@string/question"
                             style="?android:textAppearanceLarge"
                             android:gravity="center_horizontal"
                             android:layout_marginTop="@dimen/activity_margin_vertical"

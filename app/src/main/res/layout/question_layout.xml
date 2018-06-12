@@ -5,14 +5,13 @@
     android:layout_height="wrap_content"
     android:gravity="center_horizontal">
 
-    <ImageView
+    <com.facebook.drawee.view.SimpleDraweeView
         android:layout_width="320dp"
         android:layout_height="252dp"
         android:scaleType="fitXY"
         android:id="@+id/question_image"
         android:layout_marginHorizontal="@dimen/activity_margin_horizontal"
-        android:layout_marginVertical="@dimen/activity_margin_vertical"
-        android:src="@drawable/sydney_opera_house" />
+        android:layout_marginVertical="@dimen/activity_margin_vertical" />
 
     <TextView
         android:layout_width="wrap_content"

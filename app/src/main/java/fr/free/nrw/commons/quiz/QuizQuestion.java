@@ -1,5 +1,7 @@
 package fr.free.nrw.commons.quiz;
 
+import android.net.Uri;
+
 /**
  * class contains information about all the quiz questions
  */
@@ -7,11 +9,21 @@ public class QuizQuestion {
     private int questionNumber;
     private String question;
     private boolean answer;
+    private String url;
 
-    QuizQuestion( int questionNumber, String question, boolean answer){
+    QuizQuestion( int questionNumber, String question, String url, boolean answer){
         this.questionNumber = questionNumber;
         this.question = question;
+        this.url = url;
         this.answer = answer;
+    }
+
+    public Uri getUrl() {
+        return Uri.parse(url);
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
     }
 
     public boolean isAnswer() {
