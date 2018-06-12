@@ -156,5 +156,8 @@ public class SearchActivity extends NavigationBaseActivity implements MediaDetai
 
     public void updateText(String query) {
         searchView.setQuery(query, true);;
+        // Clear focus of searchView now. searchView.clearFocus(); does not seem to work Check the below link for more details.
+        // https://stackoverflow.com/questions/6117967/how-to-remove-focus-without-setting-focus-to-another-control/15481511
+        resultsContainer.requestFocus();
     }
 }
