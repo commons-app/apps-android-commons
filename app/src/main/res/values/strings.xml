@@ -293,4 +293,7 @@
     <string name="provider_searches">Recently searched queries</string>
     <string name="successful_wikidata_edit">Image successfully added to %1$s on Wikidata!</string>
     <string name="wikidata_edit_failure">Failed to update corresponding wiki data entity!</string>
+    <string name="delete_recent_searches_dialog">Are you sure you want to clear your search history?</string>
+    <string name="search_history_deleted">Search history deleted</string>
+
 </resources>
