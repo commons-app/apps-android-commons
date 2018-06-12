@@ -2,8 +2,10 @@ package fr.free.nrw.commons.explore.images;
 
 
 import android.content.SharedPreferences;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -86,7 +88,12 @@ public class SearchImageFragment extends CommonsDaggerSupportFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_browse_image, container, false);
         ButterKnife.bind(this, rootView);
-        imagesRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        if(getActivity().getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT){
+            imagesRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        }
+        else{
+            imagesRecyclerView.setLayoutManager(new GridLayoutManager(getContext(), 2));
+        }
         ArrayList<Media> items = new ArrayList<>();
         imagesAdapter = adapterFactory.create(items);
         imagesRecyclerView.setAdapter(imagesAdapter);
