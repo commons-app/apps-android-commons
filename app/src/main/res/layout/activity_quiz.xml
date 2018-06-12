@@ -55,12 +55,11 @@
 
                         <include
                             android:id="@+id/answer"
-                            layout="@layout/mcq_answer_layout"
+                            layout="@layout/answer_layout"
                             android:layout_marginTop="@dimen/activity_margin_vertical"
                             android:layout_marginBottom="@dimen/activity_margin_vertical"
                             android:layout_height="wrap_content"
                             android:layout_width="wrap_content" />
-
 
 
                     <Button

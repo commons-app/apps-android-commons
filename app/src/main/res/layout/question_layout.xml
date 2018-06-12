@@ -6,8 +6,8 @@
     android:gravity="center_horizontal">
 
     <ImageView
-        android:layout_width="300dp"
-        android:layout_height="236dp"
+        android:layout_width="320dp"
+        android:layout_height="252dp"
         android:scaleType="fitXY"
         android:id="@+id/question_image"
         android:layout_marginHorizontal="@dimen/activity_margin_horizontal"
