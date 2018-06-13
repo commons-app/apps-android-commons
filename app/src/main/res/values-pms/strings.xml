@@ -272,6 +272,8 @@
   <string name="share_app_title">Partagé j\'aplicassion</string>
   <string name="share_coordinates_not_present">Le coordinà a son nen ëstàite spessificà durant la selession ëd la plancia</string>
   <string name="error_fetching_nearby_places">Eror durant l\'esplorassion dj\'anviron.</string>
+  <string name="successful_wikidata_edit">Plancia giontà për da bin a %1$s su Wikidata!</string>
+  <string name="wikidata_edit_failure">Falì a agiorné l\'entità ëd dàit wiki corëspondent!</string>
   <string name="menu_set_wallpaper">Definì la tapissarìa</string>
   <string name="wallpaper_set_successfully">La tapissarìa a l\'é stàita definìa për da bin!</string>
 </resources>

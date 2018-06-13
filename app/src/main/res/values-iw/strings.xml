@@ -282,6 +282,8 @@
   <string name="share_app_title">שיתוף היישום</string>
   <string name="share_coordinates_not_present">לא צוינו קואורדינטות בעת בחירת התמונה</string>
   <string name="error_fetching_nearby_places">שגיאה באחזור המקומות בסביבתך.</string>
+  <string name="successful_wikidata_edit">התמונה נוספה בהצלחה ל־%1$s בוויקינתונים!</string>
+  <string name="wikidata_edit_failure">לא ניתן היה לעדכן הישות המתאימה בוויקינתונים!</string>
   <string name="menu_set_wallpaper">הגדרת רקע</string>
   <string name="wallpaper_set_successfully">הרקע הוגדר בהצלחה!</string>
 </resources>

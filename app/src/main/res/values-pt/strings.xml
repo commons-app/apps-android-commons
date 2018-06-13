@@ -283,6 +283,8 @@
   <string name="share_app_title">Partilhar aplicação</string>
   <string name="share_coordinates_not_present">Não foram especificadas coordenadas durante a seleção da imagem</string>
   <string name="error_fetching_nearby_places">Erro ao localizar locais próximos.</string>
+  <string name="successful_wikidata_edit">Imagem adicionada a %1$s na wiki Wikidata!</string>
+  <string name="wikidata_edit_failure">Falha ao atualizar a entidade Wikidata correspondente!</string>
   <string name="menu_set_wallpaper">Definir imagem de fundo</string>
   <string name="wallpaper_set_successfully">Imagem de fundo definida!</string>
 </resources>
