@@ -242,19 +242,6 @@ public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment imple
                     menu.findItem(R.id.menu_browser_current_image).setEnabled(true).setVisible(true);
                     menu.findItem(R.id.menu_share_current_image).setEnabled(true).setVisible(true);
                     menu.findItem(R.id.menu_download_current_image).setEnabled(true).setVisible(true);
-                    menu.findItem(R.id.menu_download_current_image).setEnabled(true).setVisible(true);
-
-                    // Set ShareActionProvider Intent
-//                    ShareActionProvider mShareActionProvider = (ShareActionProvider) MenuItemCompat.getActionProvider(menu.findItem(R.id.menu_share_current_image));
-//                    // On some phones null is returned for some reason:
-//                    // https://github.com/commons-app/apps-android-commons/issues/413
-//                    if (mShareActionProvider != null) {
-//                        Intent shareIntent = new Intent(Intent.ACTION_SEND);
-//                        shareIntent.setType("text/plain");
-//                        shareIntent.putExtra(Intent.EXTRA_TEXT,
-//                                m.getDisplayTitle() + " \n" + m.getFilePageTitle().getCanonicalUri());
-//                        mShareActionProvider.setShareIntent(shareIntent);
-//                    }
 
                     if (m instanceof Contribution ) {
                         Contribution c = (Contribution) m;
