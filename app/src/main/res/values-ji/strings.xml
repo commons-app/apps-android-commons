@@ -17,7 +17,7 @@
   <string name="login_success">אריינלאגירט מיט הצלחה!</string>
   <string name="login_failed">ארײַנלאגירן אדורכגעפאלן!</string>
   <string name="upload_failed">טעקע נישט געראפן.  פרובירט אפשר אן אנדער טעקע.</string>
-  <string name="authentication_failed">אויטענטיפֿיצירן דורכגעפֿאלן!</string>
+  <string name="authentication_failed" fuzzy="true">אויטענטיפֿיצירן דורכגעפֿאלן!</string>
   <string name="uploading_started">ארויפלאדן אנגעהויבן!</string>
   <string name="upload_completed_notification_title">%1$s ארויפגעלאדן!!</string>
   <string name="upload_completed_notification_text">דרוקט צו זען אײַער ארויפֿלאד</string>

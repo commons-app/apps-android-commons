@@ -29,7 +29,7 @@
   <string name="login_success">প্রবেশ সফল!</string>
   <string name="login_failed">প্রবেশ ব্যর্থ :(</string>
   <string name="upload_failed">ফাইল পাওয়া যায়নি। আরেকটি ফাইল চেষ্টা করুন।</string>
-  <string name="authentication_failed">প্রমাণীকরণ ব্যর্থ হয়েছে!</string>
+  <string name="authentication_failed">প্রমাণীকরণ ব্যর্থ হয়েছে, আবার প্রবেশ করুন</string>
   <string name="uploading_started"> আপলোড আরম্ভ হয়েছে!</string>
   <string name="upload_completed_notification_title">%1$s আপলোড হয়েছে!</string>
   <string name="upload_completed_notification_text">আপনার আপলোড দেখতে টোকা দিন</string>
@@ -110,7 +110,7 @@
   <string name="preference_license">পূর্বনির্ধারিত লাইসেন্স</string>
   <string name="use_previous">পূর্ববর্তী শিরোনাম/বিবরণ ব্যবহার করুন</string>
   <string name="allow_gps">স্বয়ংক্রিয়ভাবে বর্তমান অবস্থান পান</string>
-  <string name="allow_gps_summary">বিষয়শ্রেণীর পরামর্শ দিতে বর্তমান অবস্থান পান যদি ছবিতে ভূ-ট্যাগ না থেকে থাকে</string>
+  <string name="allow_gps_summary" fuzzy="true">বিষয়শ্রেণীর পরামর্শ দিতে বর্তমান অবস্থান পান যদি ছবিতে ভূ-ট্যাগ না থেকে থাকে</string>
   <string name="preference_theme">রাত্রি মোড</string>
   <string name="preference_theme_summary">কালো থিম ব্যবহার করুন</string>
   <string name="license_name_cc_by_sa_four">অ্যাট্রিবিউশন-শেয়ারঅ্যালাইক ৪.০</string>

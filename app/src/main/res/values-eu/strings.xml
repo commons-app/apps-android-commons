@@ -25,7 +25,7 @@
   <string name="login_success">Saio hasiera egina</string>
   <string name="login_failed">Saio hasieran akatsa!</string>
   <string name="upload_failed">Fitxategia ez da aurkitu. Mesedez saiatu beste batekin.</string>
-  <string name="authentication_failed">Autentifikazioan akatsa!</string>
+  <string name="authentication_failed" fuzzy="true">Autentifikazioan akatsa!</string>
   <string name="uploading_started">Igoera hasi da!</string>
   <string name="upload_completed_notification_title">%1$s igotzen!</string>
   <string name="upload_completed_notification_text">Ukitu igotakoa ikusteko</string>

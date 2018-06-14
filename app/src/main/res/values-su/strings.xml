@@ -16,7 +16,7 @@
   <string name="login_success">Laksana login!</string>
   <string name="login_failed">Gagal login!</string>
   <string name="upload_failed">Berkas teu kapanggih. Coba berkas séjén.</string>
-  <string name="authentication_failed">Oténtikasi gagal!</string>
+  <string name="authentication_failed" fuzzy="true">Oténtikasi gagal!</string>
   <string name="uploading_started">Mitembeyan ngunjal!</string>
   <string name="upload_completed_notification_title">%1$s diunjal!</string>
   <string name="upload_completed_notification_text">Toél pikeun némpo unjalan anjeun</string>
@@ -94,7 +94,7 @@
   <string name="preference_license" fuzzy="true">Lisénsi</string>
   <string name="use_previous">Paké baé judul/pedaran saméméhna</string>
   <string name="allow_gps">Comot lokasi sacara otomatis</string>
-  <string name="allow_gps_summary">Catet lokasi ayeuna pikeun nawarkeun usulan kategori lamun gambar tanpa géotag</string>
+  <string name="allow_gps_summary" fuzzy="true">Catet lokasi ayeuna pikeun nawarkeun usulan kategori lamun gambar tanpa géotag</string>
   <string name="preference_theme">Modus peuting</string>
   <string name="preference_theme_summary">Gunakeun téma cakueum</string>
   <string name="license_name_cc_by_sa_four">Atribusi-BabagiSarupa 4.0</string>

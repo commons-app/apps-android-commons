@@ -33,7 +33,7 @@
   <string name="login_success">Login bem sucedido</string>
   <string name="login_failed">Falha na identificação</string>
   <string name="upload_failed">Arquivo não encontrado. Tente outro arquivo.</string>
-  <string name="authentication_failed">Falha de autenticação!</string>
+  <string name="authentication_failed" fuzzy="true">Falha de autenticação!</string>
   <string name="uploading_started">Upload iniciado!</string>
   <string name="upload_completed_notification_title">%1$s enviado!</string>
   <string name="upload_completed_notification_text">Toque para ver os seu upload</string>
@@ -115,7 +115,7 @@
   <string name="preference_license">Licença padrão</string>
   <string name="use_previous">Usar o título/descrição anterior</string>
   <string name="allow_gps">Obter automaticamente a localização atual</string>
-  <string name="allow_gps_summary">Recuperar o local atual para oferecer sugestões de categoria se a imagem não tiver geo-tagged</string>
+  <string name="allow_gps_summary" fuzzy="true">Recuperar o local atual para oferecer sugestões de categoria se a imagem não tiver geo-tagged</string>
   <string name="preference_theme">Modo noturno</string>
   <string name="preference_theme_summary">Usar tema escuro</string>
   <string name="license_name_cc_by_sa_four">Atribuição-CompartilhaIgual 4.0</string>

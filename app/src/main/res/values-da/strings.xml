@@ -26,7 +26,7 @@
   <string name="login_success">Du er nu logget på!</string>
   <string name="login_failed">Det mislykkedes at logge på!</string>
   <string name="upload_failed">Filen blev ikke fundet. Forsøg med en anden fil.</string>
-  <string name="authentication_failed">Godkendelse mislykkedes!</string>
+  <string name="authentication_failed" fuzzy="true">Godkendelse mislykkedes!</string>
   <string name="uploading_started">Overførsel begyndt!</string>
   <string name="upload_completed_notification_title">%1$s overført!</string>
   <string name="upload_completed_notification_text">Tryk for at få vist din upload</string>
@@ -105,7 +105,7 @@
   <string name="preference_license">Standardlicens</string>
   <string name="use_previous">Brug forrige titel/beskrivelse</string>
   <string name="allow_gps">Hent automatisk nuværende placering</string>
-  <string name="allow_gps_summary">Hent nuværende placering for at tilbyde kategoriforslag hvis billedet ikke er geografisk mærket</string>
+  <string name="allow_gps_summary" fuzzy="true">Hent nuværende placering for at tilbyde kategoriforslag hvis billedet ikke er geografisk mærket</string>
   <string name="preference_theme">Nat-tilstand</string>
   <string name="preference_theme_summary">Brug mørkt tema</string>
   <string name="license_name_cc_by_sa_four"> Attribution-ShareAlike 4.0</string>

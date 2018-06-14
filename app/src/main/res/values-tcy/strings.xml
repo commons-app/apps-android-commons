@@ -15,7 +15,7 @@
   <string name="login_success">ಲಾಗಿನ್ ಅಂಡ್!</string>
   <string name="login_failed">ಲಾಗಿನ್ ಅಯಿಜಾತ್ತ!</string>
   <string name="upload_failed">ಈ ಕಡತ ತಿಕ್ಕಿಜಿ. ದಯಮಲ್ತ್ ಕುಡೊಂಜಿ ಕಡತೊನು ಪ್ರಯತ್ನ ಮಲ್ಪುಲೆ.</string>
-  <string name="authentication_failed">ದೃಢೀಕರಣ ಸರಿ ಆಯಿಜಿ!</string>
+  <string name="authentication_failed" fuzzy="true">ದೃಢೀಕರಣ ಸರಿ ಆಯಿಜಿ!</string>
   <string name="uploading_started">ದಿಂಜಪುನಾ ಸುರು ಅಂಡ್!</string>
   <string name="upload_completed_notification_title">%1$s ಅಪ್ಲೋಡ್ ಆಂಡ್!</string>
   <string name="upload_completed_notification_text">ಇರೆನ ಅಪ್ಲೋಡ್ ತೂಯೆರೆ ಒತ್ತುಲೆ</string>

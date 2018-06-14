@@ -21,7 +21,7 @@
   <string name="login_success">Innskráning tókst!</string>
   <string name="login_failed">Innskráning mistókst!</string>
   <string name="upload_failed">Skráin fannst ekki. Prófaðu aðra skrá.</string>
-  <string name="authentication_failed">Auðkenning tókst ekki!</string>
+  <string name="authentication_failed" fuzzy="true">Auðkenning tókst ekki!</string>
   <string name="uploading_started">Innsending í gangi!</string>
   <string name="upload_completed_notification_title">%1$s var sent inn!</string>
   <string name="upload_completed_notification_text">Bankaðu til að skoða sem þú ert að senda inn</string>
@@ -102,7 +102,7 @@
   <string name="preference_license">Sjálfgefið notkunarleyfi</string>
   <string name="use_previous">Nota fyrri titil/lýsingu</string>
   <string name="allow_gps">Ná sjálfvirkt í núverandi staðsetningu</string>
-  <string name="allow_gps_summary">Lesa núverandi staðsetningu til að geta stungið upp á flokkum ef myndin er ekki með hnattstaðsetningarhnitum</string>
+  <string name="allow_gps_summary" fuzzy="true">Lesa núverandi staðsetningu til að geta stungið upp á flokkum ef myndin er ekki með hnattstaðsetningarhnitum</string>
   <string name="preference_theme">Næturhamur</string>
   <string name="preference_theme_summary">Nota dökkt þema</string>
   <string name="license_name_cc_by_sa_four"> Attribution-ShareAlike 4.0</string>

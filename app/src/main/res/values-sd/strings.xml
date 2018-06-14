@@ -15,7 +15,7 @@
   <string name="login_success">داخل ٿيڻ ڪامياب!</string>
   <string name="login_failed">داخل ٿيڻ ناڪام!</string>
   <string name="upload_failed">فائيل نہ لڌو. براءِ مھرباني ٻيو ڪو فائيل آزمايو.</string>
-  <string name="authentication_failed">اٿينٽيڪيشن ناڪام!</string>
+  <string name="authentication_failed" fuzzy="true">اٿينٽيڪيشن ناڪام!</string>
   <string name="uploading_started">چاڙھ شروع!</string>
   <string name="upload_completed_notification_title">%1$s چڙھي چڪا!</string>
   <string name="upload_completed_notification_text">پنھنجو چاڙھ ڏسڻ لاءِ ٺونگو ھڻو</string>
@@ -87,7 +87,7 @@
   <string name="preference_license" fuzzy="true">لائسنس</string>
   <string name="use_previous">گذريل عنوان/تشريح استعمال ڪريو</string>
   <string name="allow_gps">خوبخود ھاڻوڪي مڪانيت وٺو</string>
-  <string name="allow_gps_summary">ھاڻوڪي مڪانيت لھو زمرن جون تجويزون پيش ڪرڻ لاءِ جيڪڏھن عڪس تي جيوٽيگ ناھي لڳل</string>
+  <string name="allow_gps_summary" fuzzy="true">ھاڻوڪي مڪانيت لھو زمرن جون تجويزون پيش ڪرڻ لاءِ جيڪڏھن عڪس تي جيوٽيگ ناھي لڳل</string>
   <string name="preference_theme">رات جو ڏيک</string>
   <string name="preference_theme_summary">گھرو نظارو استعمال ڪريو</string>
   <string name="license_name_cc_by_sa_four">انتساب-ھجھڙي ڀاڱيداري 4.0</string>

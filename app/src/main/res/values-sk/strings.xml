@@ -23,7 +23,7 @@
   <string name="login_success">Prihlásenie úspešné</string>
   <string name="login_failed">Prihlásenie zlyhalo!</string>
   <string name="upload_failed">Súbor nebol nájdený. Skúste, prosím, iný súbor.</string>
-  <string name="authentication_failed">Overenie zlyhalo!</string>
+  <string name="authentication_failed" fuzzy="true">Overenie zlyhalo!</string>
   <string name="uploading_started">Nahrávanie začalo!</string>
   <string name="upload_completed_notification_title">%1$s je nahraný!</string>
   <string name="upload_completed_notification_text">Kliknutím zobrazíte váš upload</string>

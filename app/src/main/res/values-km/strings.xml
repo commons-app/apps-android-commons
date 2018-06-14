@@ -13,7 +13,7 @@
   <string name="logging_in_message">សូមរង់ចាំ…</string>
   <string name="login_success">កត់ឈ្មោះចូលបានសំរេច</string>
   <string name="login_failed">កត់ឈ្មោះចូលបរាជ័យ</string>
-  <string name="authentication_failed">Authentication បានបរាជ័យ!</string>
+  <string name="authentication_failed" fuzzy="true">Authentication បានបរាជ័យ!</string>
   <string name="uploading_started">បានចាប់ផ្តើមការផ្ទុកឡើង!</string>
   <string name="upload_completed_notification_title">%1$s បានផ្ទូកឡើងហើយ!</string>
   <string name="upload_completed_notification_text">Tap ដើម្បីមើលការផ្ទុកឡើងរបស់អ្នក</string>

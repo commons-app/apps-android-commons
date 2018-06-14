@@ -12,7 +12,7 @@
   <string name="logging_in_message" fuzzy="true">Vinarliga bíða…</string>
   <string name="login_success">Innritan væleydnað!</string>
   <string name="login_failed">Innritan miseydnaðist</string>
-  <string name="authentication_failed">Góðkenning miseydnaðist!</string>
+  <string name="authentication_failed" fuzzy="true">Góðkenning miseydnaðist!</string>
   <string name="uploading_started">Upplóting er byrjað!</string>
   <string name="upload_completed_notification_title">%1$s er lagt út!</string>
   <string name="upload_completed_notification_text">Trýst fyri at síggja tað sum tú legði út</string>

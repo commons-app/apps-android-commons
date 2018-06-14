@@ -28,7 +28,7 @@
   <string name="login_success">Ви успішно увійшли!</string>
   <string name="login_failed">Не вдалося увійти</string>
   <string name="upload_failed">Файл не знайдено. Будь ласка, спробуйте інший файл.</string>
-  <string name="authentication_failed">Помилка автентифікації</string>
+  <string name="authentication_failed" fuzzy="true">Помилка автентифікації</string>
   <string name="uploading_started">Завантаження розпочато!</string>
   <string name="upload_completed_notification_title">Завантажено %1$s!</string>
   <string name="upload_completed_notification_text">Торкніться, щоб переглянути Ваше завантаження</string>
@@ -118,7 +118,7 @@
   <string name="preference_license">Стандартна ліцензія</string>
   <string name="use_previous">Використати попередню назву/опис</string>
   <string name="allow_gps">Автоматично отримати поточне розташування</string>
-  <string name="allow_gps_summary">Отримати поточне розташування, щоб з\'явилися підказки категорій, якщо зображення не має геотегів</string>
+  <string name="allow_gps_summary" fuzzy="true">Отримати поточне розташування, щоб з\'явилися підказки категорій, якщо зображення не має геотегів</string>
   <string name="preference_theme">Нічний режим</string>
   <string name="preference_theme_summary">Використати темну тему</string>
   <string name="license_name_cc_by_sa_four"> Attribution-ShareAlike 4.0</string>
@@ -290,7 +290,7 @@
   <string name="share_coordinates_not_present">Під час вибору зображення не були вказані координати</string>
   <string name="error_fetching_nearby_places">Помилка отримання місць поблизу.</string>
   <string name="successful_wikidata_edit">Зображення успішно додано до сторінки %1$s у Вікіданих!</string>
-  <string name="wikidata_edit_failure">Не вдалось оновити відповідну сторінку Вікіданих!</string>
+  <string name="wikidata_edit_failure" fuzzy="true">Не вдалось оновити відповідну сторінку Вікіданих!</string>
   <string name="menu_set_wallpaper">Поставити шпалерами екрану</string>
   <string name="wallpaper_set_successfully">Шпалери екрану виставлено успішно!</string>
 </resources>
