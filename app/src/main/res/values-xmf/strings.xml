@@ -14,7 +14,7 @@
   <string name="login_success">სისტემაშა მიშულაქ წჷმოძინელო გეთუ!</string>
   <string name="login_failed">სისტემაშა მიშულაქ ვემიხუჯინუ!</string>
   <string name="upload_failed">ფაილქ ვეგორუ. ქორთხინთ, ქოცადით შხვა ფაილი.</string>
-  <string name="authentication_failed">აუთენტიფიკაციაქ ვემიხუჯინუ!</string>
+  <string name="authentication_failed" fuzzy="true">აუთენტიფიკაციაქ ვემიხუჯინუ!</string>
   <string name="uploading_started">ეხარგუაქ ქჷდიჭყუ!</string>
   <string name="upload_completed_notification_title">%1$ ეხარგილი რე!</string>
   <string name="upload_completed_notification_text">ქეგუწკანტეთ თქვანი ეხარგუაშ ოძირაფალო</string>

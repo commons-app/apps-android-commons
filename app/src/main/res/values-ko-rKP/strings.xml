@@ -15,7 +15,7 @@
   <string name="login_success">가입 성공!</string>
   <string name="login_failed">가입 실패!</string>
   <string name="upload_failed">서류를 찾을수 없습니다. 다른 서류를 사용해주십시오.</string>
-  <string name="authentication_failed">인증 실패!</string>
+  <string name="authentication_failed" fuzzy="true">인증 실패!</string>
   <string name="uploading_started">올리적재를 시작했습니다!</string>
   <string name="upload_completed_notification_title">%1$s 서류를 올리적재하였습니다!</string>
   <string name="upload_completed_notification_text">당신의 올리적재를 보려면 두드리세요</string>
@@ -89,7 +89,7 @@
   <string name="preference_license" fuzzy="true">허가권</string>
   <string name="use_previous">이전의 제목/설명을 사용하기</string>
   <string name="allow_gps">자동으로 현재 위치 얻기</string>
-  <string name="allow_gps_summary">화상에 지리정보꼬리표가 달려 있지 않다면, 현재 위치를 검색하여 분류를 제안해주십시오</string>
+  <string name="allow_gps_summary" fuzzy="true">화상에 지리정보꼬리표가 달려 있지 않다면, 현재 위치를 검색하여 분류를 제안해주십시오</string>
   <string name="preference_theme">야간방식</string>
   <string name="preference_theme_summary">어두운 주제 쓰기</string>
   <string name="license_name_cc_by_sa_four">저작자표시-동일조건변경허락 4.0</string>

@@ -19,7 +19,7 @@
   <string name="login_success">Berhasil masuk log!</string>
   <string name="login_failed">Masuk log gagal!</string>
   <string name="upload_failed" fuzzy="true">Berkas tidak ditemukan, silakan coba berkas lain</string>
-  <string name="authentication_failed">Autentikasi gagal!</string>
+  <string name="authentication_failed" fuzzy="true">Autentikasi gagal!</string>
   <string name="uploading_started">Mulai unggah!</string>
   <string name="upload_completed_notification_title">%1$s terunggah!</string>
   <string name="upload_completed_notification_text">Tekan untuk melihat unggahan Anda</string>

@@ -30,7 +30,7 @@
   <string name="login_success">הכניסה הצליחה</string>
   <string name="login_failed">הכניסה נכשלה!</string>
   <string name="upload_failed">הקובץ לא נמצא. נא לנסות קובץ אחר.</string>
-  <string name="authentication_failed">אימות הפרטים נכשל</string>
+  <string name="authentication_failed">אימות הפרטים נכשל, נא להיכנס מחדש</string>
   <string name="uploading_started">ההעלאה התחילה!</string>
   <string name="upload_completed_notification_title">הקובץ %1$s הועלה!</string>
   <string name="upload_completed_notification_text">ללחוץ כאן כדי לצפות בהעלאה שלך</string>
@@ -112,7 +112,7 @@
   <string name="preference_license">רישיון ברירת מחדל</string>
   <string name="use_previous">להשתמש בכותרת ובתיאור קודמים</string>
   <string name="allow_gps">לקבל אוטומטית את המיקום הנוכחי</string>
-  <string name="allow_gps_summary">לאחזר את המיקום הנוכחי כדי להציע קטגוריות אם בתמונה אין תגי מיקום</string>
+  <string name="allow_gps_summary">אחזור המיקום הנוכחי אם אין בתמונה תגי מיקום, וכן הוספת תגי מיקום לתמונה. אזהרה: פעולה זו תחשוף את המיקום הנוכחי שלך.</string>
   <string name="preference_theme">מצב לילה</string>
   <string name="preference_theme_summary">שימוש במצב לילה</string>
   <string name="license_name_cc_by_sa_four">ייחוס–שיתוף זהה 4.0</string>

@@ -21,7 +21,7 @@
   <string name="login_success">A l\'é intrà ant ël sistema!</string>
   <string name="login_failed">Falì a rintré ant ël sistema!</string>
   <string name="upload_failed">Archivi nen trovà. Për piasì, ch\'a preuva con n\'àutr.</string>
-  <string name="authentication_failed">Autentificassion falìa!</string>
+  <string name="authentication_failed">Autentificassion falìa, për piasì ch\'as colega torna</string>
   <string name="uploading_started">Cariament ancaminà!</string>
   <string name="upload_completed_notification_title">%1$s carià!</string>
   <string name="upload_completed_notification_text">Sgnaché për vëdde sò cariament</string>
@@ -103,7 +103,7 @@
   <string name="preference_license">Licensa dë stàndard</string>
   <string name="use_previous">Dovré ël tìtol o la descrission precedent</string>
   <string name="allow_gps">Oten-e an automàtich la posission atual</string>
-  <string name="allow_gps_summary">Arcuperé la posission atual për propon-e dij sugeriment ëd categorìa si la plancia a l\'é nen marcà da na mira geogràfica</string>
+  <string name="allow_gps_summary">A arcupera la posission atual si la plancia a l\'é nen marcà da na mira geogràfica, e a marca da na mira geogràfica la plancia. Atension: Sòn a dësveilërà soa posission atual.</string>
   <string name="preference_theme">Meud nuité</string>
   <string name="preference_theme_summary">Dovré un tema sombr</string>
   <string name="license_name_cc_by_sa_four">Atribussion-Partagi ugual 4.0</string>
@@ -273,7 +273,7 @@
   <string name="share_coordinates_not_present">Le coordinà a son nen ëstàite spessificà durant la selession ëd la plancia</string>
   <string name="error_fetching_nearby_places">Eror durant l\'esplorassion dj\'anviron.</string>
   <string name="successful_wikidata_edit">Plancia giontà për da bin a %1$s su Wikidata!</string>
-  <string name="wikidata_edit_failure">Falì a agiorné l\'entità ëd dàit wiki corëspondent!</string>
+  <string name="wikidata_edit_failure">Falì a agiorné l\'entità ëd Wikidata corëspondenta!</string>
   <string name="menu_set_wallpaper">Definì la tapissarìa</string>
   <string name="wallpaper_set_successfully">La tapissarìa a l\'é stàita definìa për da bin!</string>
 </resources>
