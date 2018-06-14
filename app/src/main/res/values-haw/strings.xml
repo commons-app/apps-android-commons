@@ -12,7 +12,7 @@
   <string name="logging_in_message">E kali ke ʻoluʻolu…</string>
   <string name="login_success">ʻEʻe kūleʻa</string>
   <string name="login_failed">Hāʻule ka ʻeʻena</string>
-  <string name="authentication_failed">Hāʻule ka hōʻoiaʻiʻo ʻike</string>
+  <string name="authentication_failed" fuzzy="true">Hāʻule ka hōʻoiaʻiʻo ʻike</string>
   <string name="uploading_started">Ua hoʻomaka ka hoʻouka!</string>
   <string name="upload_completed_notification_title">Ua hoʻouka ʻia ʻo %1$s</string>
   <string name="upload_completed_notification_text">Kīkē no ka ʻike ʻana o kāu hoʻouka</string>

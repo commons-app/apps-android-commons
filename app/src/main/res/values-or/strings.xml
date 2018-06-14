@@ -13,7 +13,7 @@
   <string name="logging_in_message">ଟିକେ ଅପେକ୍ଷା କରନ୍ତୁ…</string>
   <string name="login_success">ଠିକଭାବେ ଲଗଇନ ହେଲା!</string>
   <string name="login_failed">ଲଗଇନ ହେଲାନାହିଁ!</string>
-  <string name="authentication_failed">ନିଶ୍ଚିତ କରିବାରେ ବିଫଳ!</string>
+  <string name="authentication_failed" fuzzy="true">ନିଶ୍ଚିତ କରିବାରେ ବିଫଳ!</string>
   <string name="uploading_started">ଅପଲୋଡ଼ ଆରମ୍ଭ ହେଲା!</string>
   <string name="upload_completed_notification_title">%1$s ଅପଲୋଡ଼ ହୋଇଗଲା!</string>
   <string name="upload_completed_notification_text">ନିଜର ଅପଲୋଡ଼ ଦେଖିବା ନିମନ୍ତେ ଟ୍ୟାପ କରନ୍ତୁ</string>

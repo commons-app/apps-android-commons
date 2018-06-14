@@ -17,7 +17,7 @@
   <string name="login_success">පිවිසුම සාර්ථකයි!</string>
   <string name="login_failed">පිවිසීම අසාර්ථකයි!</string>
   <string name="upload_failed">ගොනුව හමු නොවිණි. තවත් ගොනුවක් උත්සාහ කරන්න.</string>
-  <string name="authentication_failed">සහතික කිරීම අසාර්ථකයි</string>
+  <string name="authentication_failed" fuzzy="true">සහතික කිරීම අසාර්ථකයි</string>
   <string name="uploading_started">උඩුගතකිරීම ආරම්හවූවා!</string>
   <string name="upload_completed_notification_title">%1$s උඩුගතකලා!</string>
   <string name="upload_completed_notification_text">ඔබගේ උඩුගතකිරීම පෙන්වන්න තට්ටු කරන්න</string>

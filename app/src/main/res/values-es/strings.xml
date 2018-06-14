@@ -30,7 +30,7 @@
   <string name="login_success">Acceso correcto.</string>
   <string name="login_failed">Acceso fallido.</string>
   <string name="upload_failed">No se encontró el archivo. Prueba con otro.</string>
-  <string name="authentication_failed">Falló la autenticación.</string>
+  <string name="authentication_failed" fuzzy="true">Falló la autenticación.</string>
   <string name="uploading_started">Ha comenzado la carga.</string>
   <string name="upload_completed_notification_title">Se ha cargado %1$s.</string>
   <string name="upload_completed_notification_text">Pulsa para ver tu subida</string>
@@ -112,7 +112,7 @@
   <string name="preference_license">Licencia predeterminada</string>
   <string name="use_previous">Usar título/descripción anteriores</string>
   <string name="allow_gps">Obtener ubicación actual automáticamente</string>
-  <string name="allow_gps_summary">Recuperar ubicación actual para ofrecer sugerencias de categorías si la imagen no tiene etiquetas geográficas</string>
+  <string name="allow_gps_summary" fuzzy="true">Recuperar ubicación actual para ofrecer sugerencias de categorías si la imagen no tiene etiquetas geográficas</string>
   <string name="preference_theme">Modo nocturno</string>
   <string name="preference_theme_summary">Usar tema oscuro</string>
   <string name="license_name_cc_by_sa_four"> Atribución-CompartirIgual 4.0</string>

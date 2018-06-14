@@ -30,7 +30,7 @@
   <string name="login_success">Inicio de sessão bem sucedido</string>
   <string name="login_failed">O início de sessão falhou!</string>
   <string name="upload_failed">Ficheiro não encontrado. Por favor, tente outro ficheiro.</string>
-  <string name="authentication_failed">Falha de autenticação!</string>
+  <string name="authentication_failed" fuzzy="true">Falha de autenticação!</string>
   <string name="uploading_started">Iniciado o carregamento!</string>
   <string name="upload_completed_notification_title">%1$s enviado!</string>
   <string name="upload_completed_notification_text">Toque para ver seu carregamento</string>
@@ -112,7 +112,7 @@
   <string name="preference_license">Licença padrão</string>
   <string name="use_previous">Usar título/descrição anteriores</string>
   <string name="allow_gps">Obter automaticamente a localização atual</string>
-  <string name="allow_gps_summary">Recuperar localização atual para oferecer sugestões da categoria se a imagem não é georreferenciada</string>
+  <string name="allow_gps_summary" fuzzy="true">Recuperar localização atual para oferecer sugestões da categoria se a imagem não é georreferenciada</string>
   <string name="preference_theme">Modo noturno</string>
   <string name="preference_theme_summary">Utilizar tema escuro</string>
   <string name="license_name_cc_by_sa_four">Atribuição-CompartilhaIgual 4.0</string>
@@ -283,6 +283,8 @@
   <string name="share_app_title">Partilhar aplicação</string>
   <string name="share_coordinates_not_present">Não foram especificadas coordenadas durante a seleção da imagem</string>
   <string name="error_fetching_nearby_places">Erro ao localizar locais próximos.</string>
+  <string name="successful_wikidata_edit">Imagem adicionada a %1$s na wiki Wikidata!</string>
+  <string name="wikidata_edit_failure" fuzzy="true">Falha ao atualizar a entidade Wikidata correspondente!</string>
   <string name="menu_set_wallpaper">Definir imagem de fundo</string>
   <string name="wallpaper_set_successfully">Imagem de fundo definida!</string>
 </resources>

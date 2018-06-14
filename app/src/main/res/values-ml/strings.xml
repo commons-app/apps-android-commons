@@ -22,7 +22,7 @@
   <string name="login_success">പ്രവേശനം വിജയകരം!</string>
   <string name="login_failed">പ്രവേശനം പരാജയപ്പെട്ടു!</string>
   <string name="upload_failed">പ്രമാണം കണ്ടെത്താനായില്ല. ദയവായി മറ്റൊരു പ്രമാണം നോക്കുക.</string>
-  <string name="authentication_failed">സാധുതാനിർണ്ണയം പരാജയപ്പെട്ടു!</string>
+  <string name="authentication_failed" fuzzy="true">സാധുതാനിർണ്ണയം പരാജയപ്പെട്ടു!</string>
   <string name="uploading_started">അപ്‌ലോഡ് തുടങ്ങി!</string>
   <string name="upload_completed_notification_title">%1$s  അപ്‌ലോഡ് ചെയ്തിരിക്കുന്നു!</string>
   <string name="upload_completed_notification_text">താങ്കളുടെ അപ്‌ലോഡ് കാണാനായി ടാപ് ചെയ്യുക</string>

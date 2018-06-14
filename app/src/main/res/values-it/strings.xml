@@ -26,7 +26,7 @@
   <string name="login_success">Accesso effettuato!</string>
   <string name="login_failed">Accesso non riuscito!</string>
   <string name="upload_failed">File non trovato. Prova con un altro file.</string>
-  <string name="authentication_failed">Autenticazione non riuscita!</string>
+  <string name="authentication_failed">Autenticazione non riuscita, si prega di riprovare</string>
   <string name="uploading_started">Caricamento iniziato!</string>
   <string name="upload_completed_notification_title">%1$s caricato!</string>
   <string name="upload_completed_notification_text">Premi per vedere i tuoi caricamenti</string>

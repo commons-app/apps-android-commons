@@ -23,7 +23,7 @@
   <string name="login_success">การเข้าสู่ระบบสำเร็จแล้ว!</string>
   <string name="login_failed">การเข้าสู่ระบบล้มเหลว!</string>
   <string name="upload_failed">ไม่พบไฟล์ กรุณาลองใช้ไฟล์อื่น</string>
-  <string name="authentication_failed">การตรวจสอบความถูกต้องล้มเหลว!</string>
+  <string name="authentication_failed" fuzzy="true">การตรวจสอบความถูกต้องล้มเหลว!</string>
   <string name="uploading_started">เริ่มการอัปโหลดแล้ว!</string>
   <string name="upload_completed_notification_title">อัปโหลด %1$s แล้ว!</string>
   <string name="upload_completed_notification_text">แตะเพื่อดูการอัปโหลดของคุณ</string>
@@ -96,7 +96,7 @@
   <string name="preference_license">สัญญาอนุญาตปริยาย</string>
   <string name="use_previous">ใช้ชื่อเรื่อง/คำอธิบายก่อนหน้านี้</string>
   <string name="allow_gps">รับข้อมูลตำแหน่งที่ตั้งปัจจุบันโดยอัตโนมัติ</string>
-  <string name="allow_gps_summary">ดึงข้อมูลตำแหน่งที่ตั้งปัจจุบันเพื่อรับข้อเสนอแนะเกี่ยวกับหมวดหมู่ถ้ารูปภาพไม่ได้ติดแท็กตำแหน่งที่ตั้งเอาไว้</string>
+  <string name="allow_gps_summary" fuzzy="true">ดึงข้อมูลตำแหน่งที่ตั้งปัจจุบันเพื่อรับข้อเสนอแนะเกี่ยวกับหมวดหมู่ถ้ารูปภาพไม่ได้ติดแท็กตำแหน่งที่ตั้งเอาไว้</string>
   <string name="preference_theme">โหมดกลางคืน</string>
   <string name="preference_theme_summary">ใช้ธีมสีเข้ม</string>
   <string name="license_name_cc_by_sa_four"> Attribution-ShareAlike 4.0</string>

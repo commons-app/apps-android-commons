@@ -33,7 +33,7 @@
   <string name="login_success">Zalogowano pomyślnie!</string>
   <string name="login_failed">Logowanie nie powiodło się!</string>
   <string name="upload_failed">Nie znaleziono pliku. Spróbuj znaleźć inny.</string>
-  <string name="authentication_failed">Błąd uwierzytelniania!</string>
+  <string name="authentication_failed" fuzzy="true">Błąd uwierzytelniania!</string>
   <string name="uploading_started">Wysyłanie rozpoczęte!</string>
   <string name="upload_completed_notification_title">Przesłano %1$s!</string>
   <string name="upload_completed_notification_text">Dotknij, aby zobaczyć przesłany plik</string>
@@ -112,7 +112,7 @@
   <string name="preference_license">Domyślna licencja</string>
   <string name="use_previous">Użyj poprzedniego tytułu/opisu</string>
   <string name="allow_gps">Automatycznie uzyskaj bieżącą lokalizację</string>
-  <string name="allow_gps_summary">Pobierz aktualną lokalizację, aby uzyskać propozycje kategorii, jeśli obraz nie zawiera znaczników geograficznych</string>
+  <string name="allow_gps_summary" fuzzy="true">Pobierz aktualną lokalizację, aby uzyskać propozycje kategorii, jeśli obraz nie zawiera znaczników geograficznych</string>
   <string name="preference_theme">Tryb nocny</string>
   <string name="preference_theme_summary">Użyj ciemnej skórki</string>
   <string name="license_name_cc_by_sa_four">Uznanie autorstwa-Na tych samych warunkach 4.0</string>

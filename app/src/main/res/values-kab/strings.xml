@@ -15,7 +15,7 @@
   <string name="login_success">Tuqqna tedda!</string>
   <string name="login_failed">Tqqna ur teddi ara!</string>
   <string name="upload_failed">Ulac afaylu. Ɛreḍ wayeḍ ma ulac aɣilif.</string>
-  <string name="authentication_failed">Asesteb yecceḍ!</string>
+  <string name="authentication_failed" fuzzy="true">Asesteb yecceḍ!</string>
   <string name="uploading_started">Asali yebda!</string>
   <string name="upload_completed_notification_title">%1$s yuli!</string>
   <string name="upload_completed_notification_text">Senned akken ad twaliḍ asali-ik</string>
@@ -93,7 +93,7 @@
   <string name="preference_license" fuzzy="true">Turagt</string>
   <string name="use_previous">Seqdec azwel neɣ aglam yezrin</string>
   <string name="allow_gps">Awi s wudem awurman adig amiran</string>
-  <string name="allow_gps_summary">Awi adig amiran akken ad tsumreḍ taggayt ma yella tugna ur tettwacreḍ ara di tirakalt</string>
+  <string name="allow_gps_summary" fuzzy="true">Awi adig amiran akken ad tsumreḍ taggayt ma yella tugna ur tettwacreḍ ara di tirakalt</string>
   <string name="preference_theme">Askar  n yiḍ</string>
   <string name="preference_theme_summary">Seqdec asentel aberkan</string>
   <string name="license_name_cc_by_sa_four"> Attribution-ShareAlike 4.0</string>
