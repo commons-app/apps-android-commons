@@ -107,9 +107,18 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="@dimen/activity_margin_horizontal"
-                        android:layout_marginTop="@dimen/achievements_activity_margin_vertical"
+                        android:id="@+id/images_reverted_text"
                         android:layout_marginStart="@dimen/activity_margin_horizontal"
                         android:text="@string/image_reverts" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="(minimum required: 90%)"
+                        android:textSize="10dp"
+                        android:layout_marginLeft="@dimen/activity_margin_horizontal"
+                        android:layout_marginStart="@dimen/activity_margin_horizontal"
+                        android:layout_below="@+id/images_reverted_text"/>
 
                     <com.dinuscxj.progressbar.CircleProgressBar
                         android:layout_width="40dp"
@@ -122,7 +131,7 @@
                         app:progress_start_color="#3A3381"
                         app:progress_text_size="9dp"
                         app:progress_stroke_width="3dp"
-                        app:progress_text_format_pattern="12/24"
+                        app:progress_text_format_pattern="92%%"
                         app:progress_text_color="@color/secondaryColor"
                         app:style="solid_line" />
 
