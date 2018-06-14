@@ -7,6 +7,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.os.RemoteException;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -38,6 +39,27 @@ public class RecentSearchesDao {
             throw new RuntimeException(e);
         } finally {
             db.release();
+        }
+    }
+
+    public void deleteAll(List<String> recentSearchesStringList) {
+        ContentProviderClient db = clientProvider.get();
+        for (String recentSearchName : recentSearchesStringList) {
+            try {
+                RecentSearch recentSearch = find(recentSearchName);
+                if (recentSearch.getContentUri() == null) {
+                    throw new RuntimeException("tried to delete item with no content URI");
+                } else {
+                    Log.d("QUERY_NAME",recentSearch.getContentUri()+"- delete tried");
+                    db.delete(recentSearch.getContentUri(), null, null);
+                    Log.d("QUERY_NAME",recentSearch.getQuery()+"- query deleted");
+                }
+            } catch (RemoteException e) {
+                Log.d("Exception",e+"- query deleted");
+                throw new RuntimeException(e);
+            } finally {
+                db.release();
+            }
         }
     }
 

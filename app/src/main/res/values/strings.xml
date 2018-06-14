@@ -291,4 +291,6 @@
   <string name="wikidata_edit_failure">Failed to update corresponding Wikidata entity!</string>
   <string name="menu_set_wallpaper">Set wallpaper</string>
   <string name="wallpaper_set_successfully">Wallpaper set successfully!</string>
+  <string name="delete_recent_searches_dialog">Are you sure you want to clear your search history?</string>
+  <string name="search_history_deleted">Search history deleted</string>
 </resources>

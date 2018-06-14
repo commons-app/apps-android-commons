@@ -59,11 +59,6 @@ public class CategoryImagesActivity
         supportFragmentManager = getSupportFragmentManager();
         setCategoryImagesFragment();
         supportFragmentManager.addOnBackStackChangedListener(this);
-        if (savedInstanceState != null) {
-            mediaDetails = (MediaDetailPagerFragment) supportFragmentManager
-                    .findFragmentById(R.id.fragmentContainer);
-
-        }
         requestAuthToken();
         initDrawer();
         setPageTitle();
@@ -113,6 +108,17 @@ public class CategoryImagesActivity
             supportFragmentManager.executePendingTransactions();
         }
         mediaDetails.showImage(i);
+        initBackButton();
+    }
+
+    @Override
+    protected void onResume() {
+        if (supportFragmentManager.getBackStackEntryCount()==1){
+            //FIXME: Temporary fix for screen rotation inside media details. If we don't call onBackPressed then fragment stack is increasing every time.
+            //FIXME: Similar issue like this https://github.com/commons-app/apps-android-commons/issues/894
+            onBackPressed();
+        }
+        super.onResume();
     }
 
     /**

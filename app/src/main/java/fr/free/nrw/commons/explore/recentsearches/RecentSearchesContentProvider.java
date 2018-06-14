@@ -11,6 +11,7 @@ import android.text.TextUtils;
 
 import javax.inject.Inject;
 
+import fr.free.nrw.commons.contributions.ContributionDao;
 import fr.free.nrw.commons.data.DBOpenHelper;
 import fr.free.nrw.commons.di.CommonsDaggerContentProvider;
 import timber.log.Timber;
@@ -101,7 +102,22 @@ public class RecentSearchesContentProvider extends CommonsDaggerContentProvider 
 
     @Override
     public int delete(@NonNull Uri uri, String s, String[] strings) {
-        return 0;
+        int rows;
+        int uriType = uriMatcher.match(uri);
+        SQLiteDatabase db = dbOpenHelper.getReadableDatabase();
+        switch (uriType) {
+            case RECENT_SEARCHES_ID:
+                Timber.d("Deleting recent searches id %s", uri.getLastPathSegment());
+                rows = db.delete(RecentSearchesDao.Table.TABLE_NAME,
+                        "_id = ?",
+                        new String[]{uri.getLastPathSegment()}
+                );
+                break;
+            default:
+                throw new IllegalArgumentException("Unknown URI" + uri);
+        }
+        getContext().getContentResolver().notifyChange(uri, null);
+        return rows;
     }
 
     @SuppressWarnings("ConstantConditions")
