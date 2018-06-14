@@ -20,6 +20,8 @@ public class LevelController {
         level.setMaximumUniqueImagesUsed(5);
         if(achievements.getImagesUploaded() >= 100 && achievements.getUniqueUsedImages() >= 45){
             level.setLevel(10);
+            level.setMaximumUniqueImagesUsed(50);
+            level.setMaximumUploadCount(110);
             level.setLevelStyle(R.style.LevelFive);
         } else if (achievements.getImagesUploaded() >= 90 && achievements.getUniqueUsedImages() >= 40){
             level.setLevel(9);

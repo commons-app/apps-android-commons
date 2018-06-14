@@ -250,7 +250,6 @@ public class AchievementsActivity extends NavigationBaseActivity {
             achievements.setFeaturedImages
                     (featuredImages.getInt("Quality_images") +
                             featuredImages.getInt("Featured_pictures_on_Wikimedia_Commons"));
-
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -275,8 +274,8 @@ public class AchievementsActivity extends NavigationBaseActivity {
         levelNumber.setText(levelUpInfoString);
         final ContextThemeWrapper wrapper = new ContextThemeWrapper(this, levelInfo.getLevelStyle());
         Drawable drawable = ResourcesCompat.getDrawable(getResources(), R.drawable.badge, wrapper.getTheme());
-        Bitmap bitmap = drawableToBitmap(drawable);
-        BitmapDrawable bitmapImage = writeOnDrawable(bitmap, Integer.toString(levelInfo.getLevel()));
+        Bitmap bitmap = BitmapUtils.drawableToBitmap(drawable);
+        BitmapDrawable bitmapImage = BitmapUtils.writeOnDrawable(bitmap, Integer.toString(levelInfo.getLevel()),this);
         imageView.setImageDrawable(bitmapImage);
     }
 
@@ -320,48 +319,6 @@ public class AchievementsActivity extends NavigationBaseActivity {
         layoutStatistics.setVisibility(View.INVISIBLE);
         imageView.setVisibility(View.INVISIBLE);
         levelNumber.setVisibility(View.INVISIBLE);
-    }
-
-    /**
-     *  write level Number on the badge
-     * @param bm
-     * @param text
-     * @return
-     */
-    public BitmapDrawable writeOnDrawable(Bitmap bm, String text){
-        Bitmap.Config config = bm.getConfig();
-        if(config == null){
-            config = Bitmap.Config.ARGB_8888;
-        }
-        Bitmap bitmap = Bitmap.createBitmap(bm.getWidth(),bm.getHeight(),config);
-        Canvas canvas = new Canvas(bitmap);
-        canvas.drawBitmap(bm, 0, 0, null);
-        Paint paint = new Paint(Paint.ANTI_ALIAS_FLAG);
-        paint.setStyle(Paint.Style.FILL);
-        paint.setColor(Color.WHITE);
-        paint.setTextSize(Math.round(canvas.getHeight()/2));
-        paint.setTextAlign(Paint.Align.CENTER);
-        Rect rectText = new Rect();
-        paint.getTextBounds(text,0, text.length(),rectText);
-        canvas.drawText(text, Math.round(canvas.getWidth()/2),Math.round(canvas.getHeight()/1.35), paint);
-        return new BitmapDrawable(getResources(), bitmap);
-    }
-
-    /**
-     * Convert Drawable to bitmap
-     * @param drawable
-     * @return
-     */
-    public static Bitmap drawableToBitmap (Drawable drawable) {
-        if (drawable instanceof BitmapDrawable) {
-            return ((BitmapDrawable)drawable).getBitmap();
-        }
-        Bitmap bitmap = Bitmap.createBitmap(drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight(), Bitmap.Config.ARGB_8888);
-        Canvas canvas = new Canvas(bitmap);
-        drawable.setBounds(0, 0, canvas.getWidth(), canvas.getHeight());
-        drawable.draw(canvas);
-
-        return bitmap;
     }
 
     /**

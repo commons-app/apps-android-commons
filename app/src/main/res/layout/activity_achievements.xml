@@ -81,10 +81,11 @@
                         android:layout_marginRight="32dp"
                         android:id="@+id/images_uploaded_progressbar"
                         android:progress="50"
+                        app:progress_text_size="9dp"
                         app:progress_end_color="#8C8B98"
                         app:progress_start_color="#3A3381"
                         app:progress_stroke_width="3dp"
-                        app:progress_text_format_pattern="12/24"
+                        app:progress_text_format_pattern="573/110"
                         app:progress_text_color="@color/secondaryColor"
                         app:style="solid_line" />
 
@@ -119,6 +120,7 @@
                         android:id="@+id/image_reverts_progressbar"
                         app:progress_end_color="#8C8B98"
                         app:progress_start_color="#3A3381"
+                        app:progress_text_size="9dp"
                         app:progress_stroke_width="3dp"
                         app:progress_text_format_pattern="12/24"
                         app:progress_text_color="@color/secondaryColor"
@@ -153,6 +155,7 @@
                         android:layout_alignParentRight="true"
                         android:layout_marginRight="32dp"
                         android:progress="50"
+                        app:progress_text_size="9dp"
                         android:id="@+id/images_used_by_wiki_progressbar"
                         app:progress_end_color="#8C8B98"
                         app:progress_start_color="#3A3381"
