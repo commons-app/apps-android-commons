@@ -64,8 +64,8 @@ public class AchievementsActivity extends NavigationBaseActivity {
     private Boolean isUploadFetched = false;
     private Boolean isStatisticsFetched = false;
     private Achievements achievements = new Achievements();
-    private LevelController level = new LevelController();
-    private Level levelInfo;
+    private LevelController level;
+    private LevelController.LevelInfo levelInfo;
 
     @BindView(R.id.achievement_badge)
     ImageView imageView;
@@ -230,9 +230,9 @@ public class AchievementsActivity extends NavigationBaseActivity {
     private void setUploadProgress( int uploadCount){
 
         imagesUploadedProgressbar.setProgress
-                (100*uploadCount/levelInfo.getMaximumUploadCount());
+                (100*uploadCount/levelInfo.getMaxUploadCount());
         imagesUploadedProgressbar.setProgressTextFormatPattern
-                (uploadCount +"/" + levelInfo.getMaximumUploadCount() );
+                (uploadCount +"/" + levelInfo.getMaxUploadCount() );
     }
 
     /**
@@ -265,17 +265,17 @@ public class AchievementsActivity extends NavigationBaseActivity {
     private void inflateAchievements( Achievements achievements ){
         thanksReceived.setText(Integer.toString(achievements.getThanksReceived()));
         imagesUsedByWikiProgessbar.setProgress
-                (100*achievements.getUniqueUsedImages()/levelInfo.getMaximumUniqueImagesUsed());
+                (100*achievements.getUniqueUsedImages()/levelInfo.getMaxUniqueImages() );
         imagesUsedByWikiProgessbar.setProgressTextFormatPattern
-                (achievements.getUniqueUsedImages() + "/" + levelInfo.getMaximumUniqueImagesUsed());
+                (achievements.getUniqueUsedImages() + "/" + levelInfo.getMaxUniqueImages());
         imagesFeatured.setText(Integer.toString(achievements.getFeaturedImages()));
         String levelUpInfoString = getString(R.string.level);
-        levelUpInfoString += " " + Integer.toString(levelInfo.getLevel());
+        levelUpInfoString += " " + Integer.toString(levelInfo.getLevelNumber());
         levelNumber.setText(levelUpInfoString);
         final ContextThemeWrapper wrapper = new ContextThemeWrapper(this, levelInfo.getLevelStyle());
         Drawable drawable = ResourcesCompat.getDrawable(getResources(), R.drawable.badge, wrapper.getTheme());
         Bitmap bitmap = BitmapUtils.drawableToBitmap(drawable);
-        BitmapDrawable bitmapImage = BitmapUtils.writeOnDrawable(bitmap, Integer.toString(levelInfo.getLevel()),this);
+        BitmapDrawable bitmapImage = BitmapUtils.writeOnDrawable(bitmap, Integer.toString(levelInfo.getLevelNumber()),this);
         imageView.setImageDrawable(bitmapImage);
     }
 
@@ -296,7 +296,7 @@ public class AchievementsActivity extends NavigationBaseActivity {
      */
     private void hideProgressBar() {
         if (progressBar != null && isUploadFetched && isStatisticsFetched) {
-            levelInfo = level.calculateLevelUp(achievements);
+            levelInfo = LevelController.LevelInfo.from(achievements.getImagesUploaded(),achievements.getUniqueUsedImages());
             inflateAchievements(achievements);
             setUploadProgress(achievements.getImagesUploaded());
             progressBar.setVisibility(View.GONE);
