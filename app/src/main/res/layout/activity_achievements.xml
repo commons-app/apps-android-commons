@@ -71,18 +71,22 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="@dimen/activity_margin_horizontal"
                         android:layout_marginStart="@dimen/activity_margin_horizontal"
+                        android:layout_marginTop="@dimen/achievements_activity_margin_vertical"
                         android:text="@string/images_uploaded" />
 
                     <com.dinuscxj.progressbar.CircleProgressBar
-                        android:layout_width="35dp"
-                        android:layout_height="35dp"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
                         android:layout_alignParentRight="true"
                         android:layout_marginRight="32dp"
+                        android:id="@+id/images_uploaded_progressbar"
                         android:progress="50"
+                        app:progress_text_size="9dp"
                         app:progress_end_color="#8C8B98"
                         app:progress_start_color="#3A3381"
                         app:progress_stroke_width="3dp"
-                        app:progress_text_format_pattern="12/24"
+                        app:progress_text_format_pattern="573/110"
+                        app:progress_text_color="@color/secondaryColor"
                         app:style="solid_line" />
 
                 </RelativeLayout>
@@ -103,19 +107,32 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="@dimen/activity_margin_horizontal"
+                        android:id="@+id/images_reverted_text"
                         android:layout_marginStart="@dimen/activity_margin_horizontal"
                         android:text="@string/image_reverts" />
 
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="(minimum required: 90%)"
+                        android:textSize="10dp"
+                        android:layout_marginLeft="@dimen/activity_margin_horizontal"
+                        android:layout_marginStart="@dimen/activity_margin_horizontal"
+                        android:layout_below="@+id/images_reverted_text"/>
+
                     <com.dinuscxj.progressbar.CircleProgressBar
-                        android:layout_width="35dp"
-                        android:layout_height="35dp"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
                         android:layout_alignParentRight="true"
                         android:layout_marginRight="32dp"
                         android:progress="50"
+                        android:id="@+id/image_reverts_progressbar"
                         app:progress_end_color="#8C8B98"
                         app:progress_start_color="#3A3381"
+                        app:progress_text_size="9dp"
                         app:progress_stroke_width="3dp"
-                        app:progress_text_format_pattern="12/24"
+                        app:progress_text_format_pattern="92%%"
+                        app:progress_text_color="@color/secondaryColor"
                         app:style="solid_line" />
 
                 </RelativeLayout>
@@ -138,26 +155,38 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="@dimen/activity_margin_horizontal"
                         android:layout_marginStart="@dimen/activity_margin_horizontal"
+                        android:layout_marginTop="@dimen/achievements_activity_margin_vertical"
                         android:text="@string/images_used_by_wiki" />
 
                     <com.dinuscxj.progressbar.CircleProgressBar
-                        android:layout_width="35dp"
-                        android:layout_height="35dp"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
                         android:layout_alignParentRight="true"
                         android:layout_marginRight="32dp"
                         android:progress="50"
+                        app:progress_text_size="9dp"
+                        android:id="@+id/images_used_by_wiki_progressbar"
                         app:progress_end_color="#8C8B98"
                         app:progress_start_color="#3A3381"
                         app:progress_stroke_width="2.5dp"
+                        app:progress_text_color="@color/secondaryColor"
                         app:progress_text_format_pattern="12/24"
                         app:style="solid_line" />
 
                 </RelativeLayout>
+
+                <ProgressBar
+                    android:id="@+id/progressBar"
+                    android:layout_centerVertical="true"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
             </RelativeLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:id="@+id/layout_statistics"
                 android:orientation="vertical">
 
                 <TextView
@@ -202,6 +231,7 @@
                         android:layout_marginTop="@dimen/activity_margin_horizontal"
                         android:layout_marginStart="@dimen/activity_margin_horizontal"
                         android:text="2"
+                        android:id="@+id/image_featured"
                         android:layout_marginLeft="@dimen/activity_margin_horizontal"
                         android:layout_marginRight="44dp" />
 
@@ -242,6 +272,7 @@
                         android:layout_marginStart="@dimen/activity_margin_horizontal"
                         android:layout_marginLeft="@dimen/activity_margin_horizontal"
                         android:text="2"
+                        android:id="@+id/thanks_received"
                         android:layout_marginRight="44dp" />
 
                 </RelativeLayout>
