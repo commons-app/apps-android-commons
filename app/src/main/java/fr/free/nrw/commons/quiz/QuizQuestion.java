@@ -10,12 +10,14 @@ public class QuizQuestion {
     private String question;
     private boolean answer;
     private String url;
+    private String answerMessage;
 
-    QuizQuestion( int questionNumber, String question, String url, boolean answer){
+    QuizQuestion( int questionNumber, String question, String url, boolean answer, String answerMessage){
         this.questionNumber = questionNumber;
         this.question = question;
         this.url = url;
         this.answer = answer;
+        this.answerMessage = answerMessage;
     }
 
     public Uri getUrl() {
@@ -50,4 +52,11 @@ public class QuizQuestion {
         this.questionNumber = questionNumber;
     }
 
+    public String getAnswerMessage() {
+        return answerMessage;
+    }
+
+    public void setAnswerMessage(String answerMessage) {
+        this.answerMessage = answerMessage;
+    }
 }

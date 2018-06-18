@@ -1,6 +1,8 @@
 package fr.free.nrw.commons.quiz;
 
+import android.content.DialogInterface;
 import android.net.Uri;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -51,8 +53,6 @@ public class QuizActivity extends AppCompatActivity {
     public void setNextQuestion(){
        if( questionIndex < 5 && (positiveAnswer.isChecked() || negativeAnswer.isChecked())) {
            evaluateScore();
-           displayQuestion();
-           questionIndex++;
        } else if ( !positiveAnswer.isChecked() && !negativeAnswer.isChecked()){
            Log.i("Nothing", "Nothing Selected");
        }
@@ -70,10 +70,26 @@ public class QuizActivity extends AppCompatActivity {
     public void evaluateScore(){
         if((quiz.get(questionIndex).isAnswer() && positiveAnswer.isChecked()) ||
                 (!quiz.get(questionIndex).isAnswer() && negativeAnswer.isChecked()) ){
+            customAlert("Correct",quiz.get(questionIndex).getAnswerMessage() );
             score++;
         } else{
-            Log.i("Wrong Ans", "evaluateScore: ");
+            customAlert("Wrong", "Selfies are not allowed to uploaded");
         }
-        Log.i("Wrong ", "evaluateScore: " + score);
+    }
+
+    public void customAlert( String title, String Message){
+        AlertDialog.Builder alert = new AlertDialog.Builder(this);
+        alert.setTitle(title);
+        alert.setMessage(Message);
+        alert.setPositiveButton("Continue", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                Log.i("Answer", "Answer");
+                displayQuestion();
+                questionIndex++;
+            }
+        });
+        AlertDialog dialog = alert.create();
+        dialog.show();
     }
 }
