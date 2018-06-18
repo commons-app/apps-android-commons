@@ -3,6 +3,7 @@ package fr.free.nrw.commons.upload;
 import static android.view.MotionEvent.ACTION_UP;
 
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.support.v4.view.ViewCompat;
 import android.support.v7.widget.AppCompatSpinner;
 import android.support.v7.widget.RecyclerView;
@@ -36,6 +37,10 @@ class DescriptionsAdapter extends RecyclerView.Adapter<DescriptionsAdapter.ViewH
         descriptions = new ArrayList<>();
         descriptions.add(new Description());
         languages = new ArrayList<>();
+    }
+
+    public void setCallback(Callback callback) {
+        this.callback = callback;
     }
 
     public void setDescriptions(List<Description> descriptions) {
@@ -97,6 +102,12 @@ class DescriptionsAdapter extends RecyclerView.Adapter<DescriptionsAdapter.ViewH
                 etDescriptionText.setText(description.getDescriptionText());
             } else {
                 etDescriptionText.setText("");
+            }
+            Drawable drawableRight=context.getResources().getDrawable(R.drawable.mapbox_info_icon_default);
+            if(position==0){
+                etDescriptionText.setCompoundDrawables(null,null,drawableRight,null);
+            }else{
+                etDescriptionText.setCompoundDrawables(null,null,null,null);
             }
 
             etDescriptionText.addTextChangedListener(new TextWatcher() {

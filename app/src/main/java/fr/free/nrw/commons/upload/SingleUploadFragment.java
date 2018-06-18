@@ -34,6 +34,7 @@ import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import fr.free.nrw.commons.upload.DescriptionsAdapter.Callback;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Locale;
@@ -216,6 +217,7 @@ public class SingleUploadFragment extends CommonsDaggerSupportFragment {
 
     private void initRecyclerView() {
         descriptionsAdapter = new DescriptionsAdapter();
+        descriptionsAdapter.setCallback((mediaDetailDescription, descriptionInfo) -> showInfoAlert(mediaDetailDescription,descriptionInfo));
         descriptionsAdapter.setLanguages(getLocaleSupportedByDevice());
         rvDescriptions.setLayoutManager(new LinearLayoutManager(getContext()));
         rvDescriptions.setAdapter(descriptionsAdapter);
