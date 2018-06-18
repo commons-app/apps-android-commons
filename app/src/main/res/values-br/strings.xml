@@ -3,6 +3,7 @@
 * Dishual
 * Fohanno
 * Fulup
+* Gwendal
 * Gwenn-Ael
 * Y-M D
 -->
@@ -217,4 +218,5 @@
   <string name="nearby_location_has_not_changed">N\'eo ket cheñchet al lec\'hiadur.</string>
   <string name="get_directions">Kaout urzhioù</string>
   <string name="read_article">Lenn ar pennad</string>
+  <string name="appwidget_img">Skeudenn an deiz</string>
 </resources>

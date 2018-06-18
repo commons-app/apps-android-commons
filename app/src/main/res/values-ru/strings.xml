@@ -37,7 +37,7 @@
   <string name="login_success">Вход выполнен успешно!</string>
   <string name="login_failed">Ошибка входа в систему!</string>
   <string name="upload_failed">Файл не найден. Попробуйте другой файл.</string>
-  <string name="authentication_failed" fuzzy="true">Ошибка аутентификации!</string>
+  <string name="authentication_failed">Ошибка аутентификации. Пожалуйста, авторизуйтесь ещё раз.</string>
   <string name="uploading_started">Загрузка началась!</string>
   <string name="upload_completed_notification_title">%1$s загружен!</string>
   <string name="upload_completed_notification_text">Нажмите для просмотра загруженного файла</string>
@@ -119,7 +119,7 @@
   <string name="preference_license">Лицензия по умолчанию</string>
   <string name="use_previous">Использовать предыдущие название/описание</string>
   <string name="allow_gps">Анализ местоположения</string>
-  <string name="allow_gps_summary" fuzzy="true">Получить текущее местоположение, чтобы были предложены категории, если изображение не содержит геотегов</string>
+  <string name="allow_gps_summary">Если изображение не содержит геотега, то будет получено и проставлено текущее местоположение. Будьте внимательны, если вы не хотите раскрывать ваше месторасположение.</string>
   <string name="preference_theme">Ночной режим</string>
   <string name="preference_theme_summary">Использовать тёмную тему</string>
   <string name="license_name_cc_by_sa_four"> Attribution-ShareAlike 4.0</string>
@@ -290,8 +290,10 @@
   <string name="share_app_title">Поделиться приложением</string>
   <string name="share_coordinates_not_present">Во время выбора изображения не были указаны координаты</string>
   <string name="error_fetching_nearby_places">Ошибка получения мест поблизости</string>
+  <string name="appwidget_img">Изображение дня</string>
+  <string name="app_widget_heading">Изображение дня</string>
   <string name="successful_wikidata_edit">Изображение успешно добавлено на страницу викиданных!</string>
-  <string name="wikidata_edit_failure" fuzzy="true">Не удалось обновить соответствующую страницу викиданных!</string>
+  <string name="wikidata_edit_failure">Не удалось обновить соответствующую страницу викиданных!</string>
   <string name="menu_set_wallpaper">Сделать фоновой заставкой</string>
   <string name="wallpaper_set_successfully">Фоновая заставка успешно установлена!</string>
 </resources>

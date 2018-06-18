@@ -33,7 +33,7 @@
   <string name="login_success">Přihlášení uspělo!</string>
   <string name="login_failed">Přihlášení se nezdařilo!</string>
   <string name="upload_failed">Soubor nebyl nalezen. Prosím, zkuste jiný soubor.</string>
-  <string name="authentication_failed" fuzzy="true">Ověření se nezdařilo!</string>
+  <string name="authentication_failed">Ověření se nezdařilo, prosím přihlaste se znovu</string>
   <string name="uploading_started">Nahrávání začalo!</string>
   <string name="upload_completed_notification_title">%1$s nahráno!</string>
   <string name="upload_completed_notification_text">Klepnutím zobrazíte upload</string>

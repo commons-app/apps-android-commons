@@ -23,7 +23,7 @@
   <string name="login_success">S\'ha iniciat sessió correctament!</string>
   <string name="login_failed">Error en iniciar la sessió!</string>
   <string name="upload_failed">No s\'ha trobat el fitxer. Proveu-ho amb un altre fitxer.</string>
-  <string name="authentication_failed" fuzzy="true">L\'autenticació ha fallat!</string>
+  <string name="authentication_failed">L’autenticació ha fallat. Torneu a provar d’iniciar una sessió.</string>
   <string name="uploading_started">Ha començat la càrrega!</string>
   <string name="upload_completed_notification_title">S’ha pujat %1$s.</string>
   <string name="upload_completed_notification_text">Prem per veure la teva càrrega</string>

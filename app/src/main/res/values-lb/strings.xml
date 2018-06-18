@@ -242,6 +242,9 @@
   <string name="no_images_found">Keng Biller fonnt!</string>
   <string name="error_loading_images">Feeler beim Eropluede vu Biller.</string>
   <string name="image_uploaded_by">Eropgeluede vum: %1$s</string>
+  <string name="appwidget_img">Bild vum Dag</string>
+  <string name="app_widget_heading">Bild vum Dag</string>
+  <string name="wikidata_edit_failure">Déi entspriechend Wikidata-Entitéit konnt net aktualiséiert ginn!</string>
   <string name="menu_set_wallpaper">Hannergrondbild festleeën</string>
   <string name="wallpaper_set_successfully">Hannergrondbild festgeluecht</string>
 </resources>

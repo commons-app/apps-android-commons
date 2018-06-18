@@ -33,7 +33,7 @@
   <string name="login_success">Zalogowano pomyślnie!</string>
   <string name="login_failed">Logowanie nie powiodło się!</string>
   <string name="upload_failed">Nie znaleziono pliku. Spróbuj znaleźć inny.</string>
-  <string name="authentication_failed" fuzzy="true">Błąd uwierzytelniania!</string>
+  <string name="authentication_failed">Uwierzytelnianie nie powiodło się, zaloguj się ponownie</string>
   <string name="uploading_started">Wysyłanie rozpoczęte!</string>
   <string name="upload_completed_notification_title">Przesłano %1$s!</string>
   <string name="upload_completed_notification_text">Dotknij, aby zobaczyć przesłany plik</string>
