@@ -280,7 +280,7 @@
   <string name="share_app_title">アプリをシェアする</string>
   <string name="share_coordinates_not_present">画像の選択中に位置情報を特定できませんでした</string>
   <string name="error_fetching_nearby_places">付近の場所を取得しようとしてエラーが発生しました。</string>
-  <string name="successful_wikidata_edit">画像はウィキデータの%1$sに追加を完了しました !</string>
+  <string name="successful_wikidata_edit">ウィキデータの%1$sに画像を追加しました !</string>
   <string name="wikidata_edit_failure" fuzzy="true">対応するウィキデータの引数の更新に失敗しました。</string>
   <string name="menu_set_wallpaper">壁紙の設定</string>
   <string name="wallpaper_set_successfully">壁紙の設定ができました!</string>

@@ -272,6 +272,8 @@
   <string name="share_app_title">Compartir app</string>
   <string name="share_coordinates_not_present">Nun s\'especificaron les coordenaes al escoyer la imaxe</string>
   <string name="error_fetching_nearby_places">Error al llograr los llugares cercanos.</string>
+  <string name="appwidget_img">Semeya del día</string>
+  <string name="app_widget_heading">Semeya del día</string>
   <string name="successful_wikidata_edit">Añadióse correutamente la imaxe a %1$s en Wikidata.</string>
   <string name="wikidata_edit_failure">Nun pudo anovase la entidá de Wikidata correspondiente.</string>
   <string name="menu_set_wallpaper">Definir fondu</string>

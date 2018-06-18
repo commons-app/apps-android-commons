@@ -4,56 +4,75 @@
 * វ័ណថារិទ្ធ
 -->
 <resources>
-  <string name="app_name" fuzzy="true">Wikimedia Commons</string>
-  <string name="menu_settings">ការកំណត់​នានា</string>
-  <string name="username">ឈ្មោះអ្នកប្រើប្រាស់</string>
-  <string name="password">លេខ​សម្ងាត់​</string>
-  <string name="login">ឡុកអ៊ីន​</string>
-  <string name="logging_in_title">កំពុងឡុកអ៊ីន​</string>
-  <string name="logging_in_message">សូមរង់ចាំ…</string>
-  <string name="login_success">កត់ឈ្មោះចូលបានសំរេច</string>
-  <string name="login_failed">កត់ឈ្មោះចូលបរាជ័យ</string>
-  <string name="authentication_failed" fuzzy="true">Authentication បានបរាជ័យ!</string>
-  <string name="uploading_started">បានចាប់ផ្តើមការផ្ទុកឡើង!</string>
-  <string name="upload_completed_notification_title">%1$s បានផ្ទូកឡើងហើយ!</string>
-  <string name="upload_completed_notification_text">Tap ដើម្បីមើលការផ្ទុកឡើងរបស់អ្នក</string>
-  <string name="upload_progress_notification_title_start">កំពុងចាប់ផ្តើម ផ្ទុកឡើង %1$s</string>
-  <string name="upload_progress_notification_title_in_progress">%1$s កំពុងផ្ទូកឡើង</string>
+  <string name="preference_category_appearance">ការ​រចនា</string>
+  <string name="preference_category_general">ទូទៅ​</string>
+  <string name="preference_category_feedback">មតិយោបល់</string>
+  <string name="preference_category_location">ទីកន្លែង</string>
+  <string name="app_name">វិគីមេឌារួម</string>
+  <string name="menu_settings">ការកំណត់​</string>
+  <string name="username">អត្តនាម</string>
+  <string name="password">ពាក្យ​សម្ងាត់</string>
+  <string name="login_credential">កត់ឈ្មោះចូលទៅក្នុងគណនីវិគីមេឌារួមបេតា</string>
+  <string name="login">កត់ឈ្មោះចូល</string>
+  <string name="forgot_password">ពេលភ្លេច​ពាក្យ​សម្ងាត់</string>
+  <string name="signup">ចុះ​ឈ្មោះ</string>
+  <string name="logging_in_title">កំពុងកត់ឈ្មោះចូល</string>
+  <string name="logging_in_message">សូមរង់ចាំបន្តិច…</string>
+  <string name="login_success">កត់ឈ្មោះចូលបានសម្រេច!</string>
+  <string name="login_failed">កត់ឈ្មោះចូលមិនបានសម្រេច!</string>
+  <string name="upload_failed">រកមិនឃើញឯកសារទេ។ សូមសាកល្បងជាមួយឯកសារផ្សេងមួយទៀត។</string>
+  <string name="authentication_failed">ការបញ្ជាក់ទទួលស្គាល់មិនបានសម្រេច។ សូមកត់ឈ្មោះចូលម្ដងទៀត។</string>
+  <string name="uploading_started">ការផ្ទុកឡើងបានចាប់ផ្តើមហើយ!</string>
+  <string name="upload_completed_notification_title">បានផ្ទុកឡើង %1$s ហើយ!</string>
+  <string name="upload_completed_notification_text">ចុចដើម្បីមើលអ្វីដែលអ្នកផ្ទុកឡើង</string>
+  <string name="upload_progress_notification_title_start">កំពុងចាប់ផ្តើមផ្ទុកឡើង %1$s</string>
+  <string name="upload_progress_notification_title_in_progress">កំពុងផ្ទុកឡើង %1$s</string>
   <string name="upload_progress_notification_title_finishing">កំពុងបញ្ចប់ការផ្ទុកឡើង  %1$s</string>
-  <string name="upload_failed_notification_title">ការផ្ទុកឡើង %1$s បានបរាជ័យ</string>
-  <string name="upload_failed_notification_subtitle">Tap ដើម្បីមើល</string>
-  <string name="title_activity_contributions" fuzzy="true">ការផ្ទុកឡើងរបស់ខ្ញុំ</string>
-  <string name="contribution_state_queued">បានដាក់ក្នុងជួររង់ចាំ</string>
-  <string name="contribution_state_failed">បានបរាជ័យ</string>
-  <string name="contribution_state_in_progress">%1$d%% រួចរាល់</string>
+  <string name="upload_failed_notification_title">ការផ្ទុកឡើង %1$s មិនបានសម្រេច</string>
+  <string name="upload_failed_notification_subtitle">ចុចដើម្បីមើល</string>
+  <string name="title_activity_contributions">អ្វីដែលខ្ញុំផ្ទុកឡើងថ្មីៗ</string>
+  <string name="contribution_state_queued">ក្នុងជួររង់ចាំ</string>
+  <string name="contribution_state_failed">មិនបានសម្រេច</string>
+  <string name="contribution_state_in_progress">រួចរាល់​បាន %1$d%%</string>
   <string name="contribution_state_starting">កំពុង​ផ្ទុកឡើង​</string>
   <string name="menu_from_gallery">ពីវិចិត្រសាល</string>
   <string name="menu_from_camera">ថតរូប</string>
-  <string name="provider_contributions">ការផ្ទុកឡើងរបស់ខ្ញុំ</string>
-  <string name="menu_share">ចែករំលែក</string>
-  <string name="menu_open_in_browser">មើលក្នុង browser</string>
+  <string name="menu_nearby">ជិតខាង</string>
+  <string name="provider_contributions">អ្វីដែលខ្ញុំផ្ទុកឡើង</string>
+  <string name="menu_share">ចែកចាយ</string>
+  <string name="menu_open_in_browser">មើលក្នុងឧបករណ៍រាយរក</string>
   <string name="share_title_hint">ចំណងជើង</string>
-  <string name="share_description_hint">បរិយាយ</string>
-  <string name="login_failed_network">មិនអាចកត់ឈ្មោះចូល - បណ្តាញ network បរាជ័យ</string>
-  <string name="login_failed_throttled" fuzzy="true">ការព្យាយាមមិនបានសម្រេចមានចំនួនច្រើនដងពេក។ សូមព្យាយាមម្តងទៀតនៅប៉ុន្មាននាទីក្រោយ។</string>
-  <string name="login_failed_blocked">សូមអភ័យទោស អ្នកប្រើប្រាស់រូបនេះត្រូវបានហាមឃាត់នៅ Commons</string>
-  <string name="login_failed_generic">កត់ឈ្មោះចូលបរាជ័យ</string>
+  <string name="add_title_toast">សូមដាក់ចំណងជើងអោយឯកសារនេះ</string>
+  <string name="share_description_hint">ការពិពណ៌នា</string>
+  <string name="login_failed_network">មិនអាចកត់ឈ្មោះចូលបានទេ ព្រោះបណ្ដាញកំពុងមានបញ្ហា។</string>
+  <string name="login_failed_wrong_credentials">មិនអាចកត់ឈ្មោះចូលបានទេ។ សូមពិនិត្យអត្តនាមនិងពាក្យសម្ងាត់របស់អ្នកឡើងវិញ។</string>
+  <string name="login_failed_throttled">ការព្យាយាមមិនបានសម្រេចច្រើនដងពេក។ សូមព្យាយាមម្តងទៀតនៅប៉ុន្មាននាទីក្រោយ។</string>
+  <string name="login_failed_blocked">សូមអភ័យទោស អ្នកប្រើប្រាស់រូបនេះត្រូវបានហាមឃាត់នៅវិគីមេឌារួម</string>
+  <string name="login_failed_2fa_needed">អ្នកចាំបាច់ត្រូវតែផ្ដល់លេខកូដសម្រាប់បញ្ជាក់ទទួលស្គាល់ពីរតង់។</string>
+  <string name="login_failed_generic">កត់ឈ្មោះចូលមិនបានសម្រេច</string>
   <string name="share_upload_button">ផ្ទុកឡើង</string>
   <string name="multiple_share_base_title">ដាក់ឈ្មោះឲ្យសំនុំនេះ</string>
   <string name="provider_modifications">បម្រែបម្រួល</string>
   <string name="menu_upload_single">ផ្ទុកឡើង</string>
   <string name="categories_search_text_hint">ស្វែងរកចំណាត់ថ្នាក់ក្រុម</string>
   <string name="menu_save_categories">រក្សាទុក</string>
+  <string name="refresh_button">ផ្ទុកឡើងវិញ</string>
+  <string name="display_list_button">បញ្ជី</string>
+  <string name="gps_disabled">ឧបករណ៍របស់អ្នកកំពុងបិទមិនប្រើGPS។ តើអ្នកចង់បើកវាប្រើទេ?</string>
+  <string name="enable_gps">បើកប្រើGPS</string>
+  <string name="contributions_subtitle_zero">គ្មានអ្វីដែលបានផ្ទុកឡើងទេ</string>
   <string name="categories_not_found">រកមិនឃើញចំណាត់ថ្នាក់ក្រុមដែលត្រូវនឹង %1$s ទេ</string>
-  <string name="categories_skip_explanation" fuzzy="true">បន្ថែមចំណាត់ថ្នាក់ក្រុមអោយរូបភាពរបស់អ្នកដើម្បីអោយងាយស្រួលស្វែងរក្នុង Wikimedia Commons។\nចាប់ផ្ដើមវាយបញ្ចូលឈ្មោះចំណាត់ថ្នាក់ក្រុម។\nចុចលើសារនេះ (ឬចុចប៊ូតុងត្រលប់ក្រោយ)ដើម្បីរំលងជំហ៊ាននេះ។</string>
+  <string name="categories_skip_explanation">បន្ថែមចំណាត់ថ្នាក់ក្រុមអោយរូបភាពរបស់អ្នកដើម្បីអោយងាយស្រួលស្វែងរកក្នុងវិគីមេឌារួម។ ចាប់ផ្ដើមវាយបញ្ចូលឈ្មោះចំណាត់ថ្នាក់ក្រុម។</string>
   <string name="categories_activity_title">ចំណាត់ថ្នាក់ក្រុម</string>
   <string name="title_activity_settings">ការកំណត់</string>
+  <string name="title_activity_signup">ចុះឈ្មោះ​</string>
+  <string name="title_activity_featured_images">រូបភាពឆ្នើម</string>
   <string name="menu_about">អំពី</string>
   <string name="about_license" fuzzy="true">សូហ្វវែរប្រភពបើកទូលាយត្រូវបានចេញផ្សាយក្រោមអាជ្ញាបណ្ណ &lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/COPYING\"&gt;Apache License v2&lt;/a&gt;</string>
   <string name="about_improve" fuzzy="true">ប្រភពកូដមាននៅ &lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;GitHub&lt;/a&gt;. Bugs មាននៅ &lt;a href=\" https://github.com/commons-app/apps-android-commons/issues\"&gt;Github&lt;/a&gt;.</string>
-  <string name="about_privacy_policy" fuzzy="true">&lt;a href=\"https://wikimediafoundation.org/wiki/Privacy_policy\"&gt;គោលការភាពជាឯកជន&lt;/a&gt;</string>
+  <string name="about_privacy_policy">&lt;a href=\"https://wikimediafoundation.org/wiki/Privacy_policy\"&gt;គោលការភាពឯកជន&lt;/a&gt;</string>
   <string name="title_activity_about">អំពី</string>
-  <string name="menu_feedback">ផ្ញើមតិកែលម្អ (តាមអ៊ីមែល)</string>
+  <string name="menu_feedback">ផ្ញើមតិយោបល់ (តាមអ៊ីមែល)</string>
   <string name="provider_categories">ចំណាត់ថ្នាក់ក្រុមដែលត្រូវបានប្រើថ្មីៗ</string>
   <string name="waiting_first_sync">កំពុងរង់ចាំ ធ្វើការ sync ជាលើកដំបូង…</string>
   <string name="no_uploads_yet">អ្នកមិនទាន់បានផ្ទុករូបថតណាមួយឡើងនៅឡើយទេ។</string>
@@ -90,4 +109,25 @@
   <string name="detail_description_empty">គ្មាន​ការ​ពណ៌នា</string>
   <string name="detail_license_empty">Unknown license</string>
   <string name="menu_refresh">ធ្វើឱ្យស្រស់</string>
+  <string name="background_image">រូបភាពផ្ទៃខាងក្រោយ</string>
+  <string name="no_image_found">គ្មានរូបភាព</string>
+  <string name="upload_image">ផ្ទុករូបភាពឡើង</string>
+  <string name="welcome_image_mount_zao">ភ្នំហ្សាអូ</string>
+  <string name="welcome_image_rainbow_bridge">ស្ពានឥន្ទធនូ</string>
+  <string name="cancel">បោះបង់</string>
+  <string name="navigation_drawer_open">បើក</string>
+  <string name="navigation_drawer_close">បិទ</string>
+  <string name="navigation_item_home">ទំព័រដើម</string>
+  <string name="navigation_item_upload">ផ្ទុកឡើង​</string>
+  <string name="navigation_item_nearby">ជិតខាង</string>
+  <string name="navigation_item_about">អំពី</string>
+  <string name="navigation_item_settings">ការកំណត់​</string>
+  <string name="navigation_item_feedback">មតិយោបល់</string>
+  <string name="navigation_item_logout">កត់ឈ្មោះចេញ</string>
+  <string name="navigation_item_info">រៀនប្រើ</string>
+  <string name="navigation_item_notification">សារជូនដំណឹង</string>
+  <string name="navigation_item_featured_images">ឆ្នើម</string>
+  <string name="no_description_found">គ្មានការពិពណ៌នា</string>
+  <string name="nearby_info_menu_wikidata_article">វត្ថុក្នុងវិគីទិន្នន័យ</string>
+  <string name="nearby_info_menu_wikipedia_article">អត្ថបទវិគីភីឌា</string>
 </resources>
