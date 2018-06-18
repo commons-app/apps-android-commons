@@ -23,6 +23,8 @@ import butterknife.OnTouch;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.utils.ViewUtil;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Locale;
 
@@ -135,6 +137,8 @@ class DescriptionsAdapter extends RecyclerView.Adapter<DescriptionsAdapter.ViewH
 
             SpinnerLanguagesAdapter languagesAdapter = new SpinnerLanguagesAdapter(context,
                     R.layout.row_item_languages_spinner);
+            Collections.sort(languages, (language, t1) -> language.getLocale().getDisplayLanguage()
+                    .compareTo(t1.getLocale().getDisplayLanguage().toString()));
             languagesAdapter.setLanguages(languages);
             languagesAdapter.notifyDataSetChanged();
             spinnerDescriptionLanguages.setAdapter(languagesAdapter);

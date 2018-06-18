@@ -75,13 +75,15 @@ public class SpinnerLanguagesAdapter extends ArrayAdapter {
 
         public void init(int position, boolean isDropDownView) {
             Language language = languages.get(position);
-            tvLanguage.setText(
-                    String.format("%s [%s]", language.getLocale().getDisplayName(),
-                            language.getLocale().getLanguage()));
             if (!isDropDownView) {
                 view.setVisibility(View.GONE);
+                tvLanguage.setText(
+                        language.getLocale().getLanguage());
             } else {
                 view.setVisibility(View.VISIBLE);
+                tvLanguage.setText(
+                        String.format("%s [%s]", language.getLocale().getDisplayName(),
+                                language.getLocale().getLanguage()));
             }
 
         }
