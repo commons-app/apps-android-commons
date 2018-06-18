@@ -35,7 +35,7 @@ public class QuizActivity extends AppCompatActivity {
 
     private QuizController quizController = new QuizController();
     private ArrayList<QuizQuestion> quiz = new ArrayList<QuizQuestion>();
-    private int questionIndex = 0;
+    private int questionIndex = 4;
     private int score;
 
     @Override
@@ -91,6 +91,7 @@ public class QuizActivity extends AppCompatActivity {
                 if(questionIndex == quiz.size()){
                     Intent i = new Intent(QuizActivity.this, QuizResultActivity.class);
                     dialog.dismiss();
+                    i.putExtra("QuizResult",score);
                     startActivity(i);
                 }else {
                     displayQuestion();
