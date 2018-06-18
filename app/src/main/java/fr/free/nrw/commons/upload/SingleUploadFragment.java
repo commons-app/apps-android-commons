@@ -138,14 +138,13 @@ public class SingleUploadFragment extends CommonsDaggerSupportFragment {
         if (activityIntent.hasExtra("title")) {
             titleEdit.setText(activityIntent.getStringExtra("title"));
         }
-        if (activityIntent.hasExtra("description")) {
-            if (descriptionsAdapter.getDescriptions() != null
-                    && descriptionsAdapter.getDescriptions().size() > 0) {
-                descriptionsAdapter.getDescriptions().get(0)
-                        .setDescriptionText(activityIntent.getStringExtra("description"));
-                descriptionsAdapter.notifyItemChanged(0);
-            }
+        if (activityIntent.hasExtra("description") && descriptionsAdapter.getDescriptions() != null
+                && descriptionsAdapter.getDescriptions().size() > 0) {
+            descriptionsAdapter.getDescriptions().get(0)
+                    .setDescriptionText(activityIntent.getStringExtra("description"));
+            descriptionsAdapter.notifyItemChanged(0);
         }
+
 
         ArrayList<String> licenseItems = new ArrayList<>();
         licenseItems.add(getString(R.string.license_name_cc0));

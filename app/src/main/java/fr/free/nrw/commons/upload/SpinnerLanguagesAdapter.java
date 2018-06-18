@@ -18,7 +18,6 @@ import java.util.Locale;
 
 public class SpinnerLanguagesAdapter extends ArrayAdapter {
 
-    private final Context context;
     private final int resource;
     private final LayoutInflater layoutInflater;
     List<Language> languages;
@@ -26,7 +25,6 @@ public class SpinnerLanguagesAdapter extends ArrayAdapter {
     public SpinnerLanguagesAdapter(@NonNull Context context,
             int resource) {
         super(context, resource);
-        this.context = context;
         this.resource = resource;
         this.layoutInflater = LayoutInflater.from(context);
         languages = new ArrayList<>();
