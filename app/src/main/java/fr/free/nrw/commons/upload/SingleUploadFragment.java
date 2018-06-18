@@ -387,6 +387,7 @@ public class SingleUploadFragment extends CommonsDaggerSupportFragment {
     @OnClick(R.id.ll_add_description)
     public void onLLAddDescriptionClicked() {
         descriptionsAdapter.addDescription(new Description());
+        rvDescriptions.scrollToPosition(descriptionsAdapter.getItemCount() - 1);
     }
 
     /**

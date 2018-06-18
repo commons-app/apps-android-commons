@@ -12,6 +12,7 @@
     android:paddingRight="@dimen/standard_gap"
     android:paddingStart="@dimen/standard_gap"
     android:paddingTop="@dimen/small_gap"
+    android:nestedScrollingEnabled="false"
     android:theme="@style/DarkAppTheme">
 
     <LinearLayout
