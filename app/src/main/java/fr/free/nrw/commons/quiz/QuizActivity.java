@@ -1,6 +1,7 @@
 package fr.free.nrw.commons.quiz;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.net.Uri;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -21,6 +22,7 @@ import java.util.ArrayList;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import fr.free.nrw.commons.AboutActivity;
 import fr.free.nrw.commons.R;
 
 public class QuizActivity extends AppCompatActivity {
@@ -42,16 +44,16 @@ public class QuizActivity extends AppCompatActivity {
         setContentView(R.layout.activity_quiz);
         Fresco.initialize(this);
 
+        setTitle(getResources().getString(R.string.quiz));
+
         quizController.initialize(this);
         ButterKnife.bind(this);
         displayQuestion();
-        questionIndex++;
-
     }
 
     @OnClick(R.id.next_button)
     public void setNextQuestion(){
-       if( questionIndex < 5 && (positiveAnswer.isChecked() || negativeAnswer.isChecked())) {
+       if( questionIndex <= quiz.size() && (positiveAnswer.isChecked() || negativeAnswer.isChecked())) {
            evaluateScore();
        } else if ( !positiveAnswer.isChecked() && !negativeAnswer.isChecked()){
            Log.i("Nothing", "Nothing Selected");
@@ -85,8 +87,14 @@ public class QuizActivity extends AppCompatActivity {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 Log.i("Answer", "Answer");
-                displayQuestion();
                 questionIndex++;
+                if(questionIndex == quiz.size()){
+                    Intent i = new Intent(QuizActivity.this, QuizResultActivity.class);
+                    dialog.dismiss();
+                    startActivity(i);
+                }else {
+                    displayQuestion();
+                }
             }
         });
         AlertDialog dialog = alert.create();

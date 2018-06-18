@@ -292,4 +292,5 @@
   <string name="quiz">QUIZ</string>
   <string name="quiz_question_string">Is it Ok to Upload ? </string>
   <string name="question">Question</string>
+  <string name="result">Result</string>
 </resources>
