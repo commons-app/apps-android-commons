@@ -23,6 +23,7 @@ import android.support.annotation.RequiresApi;
 import android.support.design.widget.FloatingActionButton;
 import android.support.graphics.drawable.VectorDrawableCompat;
 import android.support.v4.content.ContextCompat;
+import android.view.KeyEvent;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.DecelerateInterpolator;
@@ -133,6 +134,8 @@ public class ShareActivity
     private long ShortAnimationDuration;
     private boolean isFABOpen = false;
     private float startScaleFinal;
+    private boolean isZoom = false;
+
 
     /**
      * Called when user taps the submit button.
@@ -459,6 +462,7 @@ public class ShareActivity
         if (CurrentAnimator != null) {
             CurrentAnimator.cancel();
         }
+        isZoom = true;
         ViewUtil.hideKeyboard(ShareActivity.this.findViewById(R.id.titleEdit | R.id.descEdit));
         closeFABMenu();
         mainFab.setVisibility(View.GONE);
@@ -475,7 +479,6 @@ public class ShareActivity
 
         // Load the high-resolution "zoomed-in" image.
         expandedImageView.setImageBitmap(scaledImage);
-
         float startScale = zoomObj.adjustStartEndBounds(startBounds, finalBounds, globalOffset);
 
         // Hide the thumbnail and show the zoomed-in view. When the animation
@@ -547,6 +550,7 @@ public class ShareActivity
         if (CurrentAnimator != null) {
             CurrentAnimator.cancel();
         }
+        isZoom = false;
         zoomOutButton.setVisibility(View.GONE);
         mainFab.setVisibility(View.VISIBLE);
 
@@ -557,6 +561,7 @@ public class ShareActivity
                 .with(ObjectAnimator.ofFloat(expandedImageView, View.Y, startBounds.top))
                 .with(ObjectAnimator.ofFloat(expandedImageView, View.SCALE_X, startScaleFinal))
                 .with(ObjectAnimator.ofFloat(expandedImageView, View.SCALE_Y, startScaleFinal));
+
         set.setDuration(ShortAnimationDuration);
         set.setInterpolator(new DecelerateInterpolator());
         set.addListener(new AnimatorListenerAdapter() {
@@ -588,5 +593,18 @@ public class ShareActivity
             mapIntent.setPackage("com.google.android.apps.maps");
             startActivity(mapIntent);
         }
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        switch (keyCode) {
+            case KeyEvent.KEYCODE_BACK:
+                if(isZoom) {
+                    onZoomOutFabClicked();
+                    return true;
+                }
+        }
+        return super.onKeyDown(keyCode,event);
+
     }
 }
