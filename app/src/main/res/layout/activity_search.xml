@@ -41,33 +41,23 @@
                 android:textSize="@dimen/normal_text"
                 />
         </android.support.v7.widget.Toolbar>
-        </android.support.design.widget.AppBarLayout>
         <android.support.design.widget.TabLayout
             android:id="@+id/tabLayout"
             android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
+            android:layout_height="wrap_content"
             app:tabTextAppearance="@android:style/TextAppearance.Widget.TabWidget"
             android:background="@color/item_white_background"
             app:tabMode="scrollable"
-            app:tabSelectedTextColor="@color/button_background_dark"
-            android:layout_below="@id/toolbar_layout"
+            app:tabSelectedTextColor="@color/primaryColor"
+            app:tabTextColor="@color/button_background_dark"
+            android:layout_below="@id/toolbar_search"
             />
-        <!--<FrameLayout-->
-            <!--android:visibility="gone"-->
-            <!--xmlns:android="http://schemas.android.com/apk/res/android"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="match_parent"-->
-            <!--android:id="@+id/fragmentContainer"-->
-            <!--android:orientation="horizontal"-->
-            <!--android:layout_below="@id/toolbar_layout"-->
-            <!--android:focusable="true"-->
-            <!--android:focusableInTouchMode="true"-->
-            <!--/>-->
+        </android.support.design.widget.AppBarLayout>
         <android.support.v4.view.ViewPager
             android:id="@+id/viewPager"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_below="@id/tabLayout"
+            android:layout_below="@id/toolbar_layout"
             />
         <FrameLayout
             android:visibility="visible"

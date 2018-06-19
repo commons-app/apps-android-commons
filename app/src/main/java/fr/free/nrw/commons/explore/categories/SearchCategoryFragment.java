@@ -28,7 +28,6 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
-import fr.free.nrw.commons.explore.SearchActivity;
 import fr.free.nrw.commons.explore.recentsearches.RecentSearch;
 import fr.free.nrw.commons.explore.recentsearches.RecentSearchesDao;
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
@@ -51,7 +50,7 @@ public class SearchCategoryFragment extends CommonsDaggerSupportFragment {
     private static int TIMEOUT_SECONDS = 15;
 
     @BindView(R.id.imagesListBox)
-    RecyclerView imagesRecyclerView;
+    RecyclerView categoriesRecyclerView;
     @BindView(R.id.imageSearchInProgress)
     ProgressBar progressBar;
     @BindView(R.id.imagesNotFound)
@@ -62,12 +61,11 @@ public class SearchCategoryFragment extends CommonsDaggerSupportFragment {
     @Inject MediaWikiApi mwApi;
     @Inject @Named("default_preferences") SharedPreferences prefs;
 
-    private RVRendererAdapter<String> imagesAdapter;
+    private RVRendererAdapter<String> categoriesAdapter;
     private List<String> queryList = new ArrayList<>();
 
     private final SearchCategoriesAdapterFactory adapterFactory = new SearchCategoriesAdapterFactory(item -> {
-        int index = queryList.indexOf(item);
-        ((SearchActivity)getContext()).onSearchImageClicked(index);
+        // Open Category Details activity
         saveQuery(query);
     });
 
@@ -81,7 +79,6 @@ public class SearchCategoryFragment extends CommonsDaggerSupportFragment {
         else {
             recentSearch.setLastSearched(new Date());
         }
-
         recentSearchesDao.save(recentSearch);
 
     }
@@ -92,15 +89,15 @@ public class SearchCategoryFragment extends CommonsDaggerSupportFragment {
         View rootView = inflater.inflate(R.layout.fragment_browse_image, container, false);
         ButterKnife.bind(this, rootView);
         if(getActivity().getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT){
-            imagesRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+            categoriesRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         }
         else{
-            imagesRecyclerView.setLayoutManager(new GridLayoutManager(getContext(), 2));
+            categoriesRecyclerView.setLayoutManager(new GridLayoutManager(getContext(), 2));
         }
         ArrayList<String> items = new ArrayList<>();
-        imagesAdapter = adapterFactory.create(items);
-        imagesRecyclerView.setAdapter(imagesAdapter);
-        imagesRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+        categoriesAdapter = adapterFactory.create(items);
+        categoriesRecyclerView.setAdapter(categoriesAdapter);
+        categoriesRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
                 super.onScrollStateChanged(recyclerView, newState);
@@ -125,7 +122,7 @@ public class SearchCategoryFragment extends CommonsDaggerSupportFragment {
         }
         progressBar.setVisibility(View.VISIBLE);
         queryList.clear();
-        imagesAdapter.clear();
+        categoriesAdapter.clear();
         Observable.fromCallable(() -> mwApi.searchCategory(query,queryList.size()))
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -155,8 +152,8 @@ public class SearchCategoryFragment extends CommonsDaggerSupportFragment {
     private void handlePaginationSuccess(List<String> mediaList) {
         queryList.addAll(mediaList);
         progressBar.setVisibility(View.GONE);
-        imagesAdapter.addAll(mediaList);
-        imagesAdapter.notifyDataSetChanged();
+        categoriesAdapter.addAll(mediaList);
+        categoriesAdapter.notifyDataSetChanged();
     }
 
 
@@ -175,8 +172,8 @@ public class SearchCategoryFragment extends CommonsDaggerSupportFragment {
         else {
 
             progressBar.setVisibility(View.GONE);
-            imagesAdapter.addAll(mediaList);
-            imagesAdapter.notifyDataSetChanged();
+            categoriesAdapter.addAll(mediaList);
+            categoriesAdapter.notifyDataSetChanged();
 
             // check if user is waiting for 5 seconds if yes then save search query to history.
             Handler handler = new Handler();
@@ -191,7 +188,7 @@ public class SearchCategoryFragment extends CommonsDaggerSupportFragment {
     private void handleError(Throwable throwable) {
         Timber.e(throwable, "Error occurred while loading queried images");
         initErrorView();
-        ViewUtil.showSnackbar(imagesRecyclerView, R.string.error_loading_images);
+        ViewUtil.showSnackbar(categoriesRecyclerView, R.string.error_loading_images);
     }
 
     /**
@@ -208,6 +205,6 @@ public class SearchCategoryFragment extends CommonsDaggerSupportFragment {
      */
     private void handleNoInternet() {
         progressBar.setVisibility(GONE);
-        ViewUtil.showSnackbar(imagesRecyclerView, R.string.no_internet);
+        ViewUtil.showSnackbar(categoriesRecyclerView, R.string.no_internet);
     }
 }
