@@ -10,7 +10,6 @@ import com.pedrogomez.renderers.Renderer;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import fr.free.nrw.commons.Media;
-import fr.free.nrw.commons.MediaWikiImageView;
 import fr.free.nrw.commons.R;
 
 /**
@@ -19,9 +18,6 @@ import fr.free.nrw.commons.R;
 
 class SearchCategoriesRenderer extends Renderer<Media> {
     @BindView(R.id.categoryImageTitle) TextView tvImageName;
-    @BindView(R.id.categoryImageAuthor) TextView categoryImageAuthor;
-    @BindView(R.id.categoryImageView)
-    MediaWikiImageView browseImage;
 
     private final ImageClickedListener listener;
 
@@ -53,24 +49,10 @@ class SearchCategoriesRenderer extends Renderer<Media> {
     public void render() {
         Media item = getContent();
         tvImageName.setText(item.getFilename());
-        browseImage.setMedia(item);
-        setAuthorView(item, categoryImageAuthor);
     }
 
     interface ImageClickedListener {
         void imageClicked(Media item);
     }
 
-    /**
-     * formats author name as "Uploaded by: authorName" and sets it in textview
-     */
-    private void setAuthorView(Media item, TextView author) {
-        if (item.getCreator() != null && !item.getCreator().equals("")) {
-            author.setVisibility(View.GONE);
-            String uploadedByTemplate = getContext().getString(R.string.image_uploaded_by);
-            author.setText(String.format(uploadedByTemplate, item.getCreator()));
-        } else {
-            author.setVisibility(View.VISIBLE);
-        }
-    }
 }

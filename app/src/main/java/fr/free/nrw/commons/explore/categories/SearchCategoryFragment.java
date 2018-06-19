@@ -30,7 +30,6 @@ import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
 import fr.free.nrw.commons.explore.SearchActivity;
-import fr.free.nrw.commons.explore.images.SearchImagesAdapterFactory;
 import fr.free.nrw.commons.explore.recentsearches.RecentSearch;
 import fr.free.nrw.commons.explore.recentsearches.RecentSearchesDao;
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
@@ -67,7 +66,7 @@ public class SearchCategoryFragment extends CommonsDaggerSupportFragment {
     private RVRendererAdapter<Media> imagesAdapter;
     private List<Media> queryList = new ArrayList<>();
 
-    private final SearchImagesAdapterFactory adapterFactory = new SearchImagesAdapterFactory(item -> {
+    private final SearchCategoriesAdapterFactory adapterFactory = new SearchCategoriesAdapterFactory(item -> {
         int index = queryList.indexOf(item);
         ((SearchActivity)getContext()).onSearchImageClicked(index);
         saveQuery(query);
