@@ -84,7 +84,7 @@ public class SearchActivity extends NavigationBaseActivity implements MediaDetai
         searchImageFragment = new SearchImageFragment();
         searchCategoryFragment= new SearchCategoryFragment();
         fragmentList.add(searchImageFragment);
-        titleList.add("IMAGES");
+        titleList.add("MEDIA");
         fragmentList.add(searchCategoryFragment);
         titleList.add("CATEGORIES");
 
