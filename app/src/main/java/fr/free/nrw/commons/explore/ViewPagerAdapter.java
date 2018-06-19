@@ -7,7 +7,9 @@ import android.support.v4.app.FragmentPagerAdapter;
 import java.util.ArrayList;
 import java.util.List;
 
-
+/**
+ * This adapter will be used to display fragments in a ViewPager
+ */
 class ViewPagerAdapter extends FragmentPagerAdapter {
     private List<Fragment> fragmentList = new ArrayList<>();
     private List<String> fragmentTitleList = new ArrayList<>();
