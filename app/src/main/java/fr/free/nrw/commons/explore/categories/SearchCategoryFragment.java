@@ -118,7 +118,7 @@ public class SearchCategoryFragment extends CommonsDaggerSupportFragment {
      * Checks for internet connection and then initializes the recycler view with 25 images of the searched query
      * Clearing imageAdapter every time new keyword is searched so that user can see only new results
      */
-    public void updateImageList(String query) {
+    public void updateCategoryList(String query) {
         this.query = query;
         if(!NetworkUtils.isInternetConnectionEstablished(getContext())) {
             handleNoInternet();
