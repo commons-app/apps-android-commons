@@ -275,22 +275,6 @@ public class ShareActivity
         Timber.d("Uri: %s", mediaUri.toString());
         Timber.d("Ext storage dir: %s", Environment.getExternalStorageDirectory());
 
-        useNewPermissions = false;
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            useNewPermissions = true;
-            if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
-                locationPermitted = true;
-            }
-        }
-
-        // Check location permissions if M or newer for category suggestions, request via snackbar if not present
-        if (!locationPermitted) {
-            requestPermissionUsingSnackBar(
-                    getString(R.string.location_permission_rationale),
-                    new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
-                    REQUEST_PERM_ON_CREATE_LOCATION);
-        }
-
         SingleUploadFragment shareView = (SingleUploadFragment) getSupportFragmentManager().findFragmentByTag("shareView");
         categorizationFragment = (CategorizationFragment) getSupportFragmentManager().findFragmentByTag("categorization");
         if (shareView == null && categorizationFragment == null) {
