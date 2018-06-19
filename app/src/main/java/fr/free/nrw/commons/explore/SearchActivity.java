@@ -39,7 +39,6 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 public class SearchActivity extends NavigationBaseActivity implements MediaDetailPagerFragment.MediaDetailProvider{
 
     @BindView(R.id.toolbar_search) Toolbar toolbar;
-//    @BindView(R.id.fragmentContainer) FrameLayout resultsContainer;
     @BindView(R.id.searchHistoryContainer) FrameLayout searchHistoryContainer;
     @BindView(R.id.searchBox) SearchView searchView;
     @BindView(R.id.tabLayout) TabLayout tabLayout;
@@ -62,7 +61,6 @@ public class SearchActivity extends NavigationBaseActivity implements MediaDetai
         setTitle(getString(R.string.title_activity_search));
         toolbar.setNavigationOnClickListener(v->onBackPressed());
         supportFragmentManager = getSupportFragmentManager();
-//        setBrowseImagesFragment();
         setSearchHistoryFragment();
         viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager());
         viewPager.setAdapter(viewPagerAdapter);
@@ -87,8 +85,8 @@ public class SearchActivity extends NavigationBaseActivity implements MediaDetai
         searchCategoryFragment= new SearchCategoryFragment();
         fragmentList.add(searchImageFragment);
         titleList.add("IMAGES");
-//        fragmentList.add(searchCategoryFragment);
-//        titleList.add("CATEGORIES");
+        fragmentList.add(searchCategoryFragment);
+        titleList.add("CATEGORIES");
 
         viewPagerAdapter.setTabData(fragmentList, titleList);
         viewPagerAdapter.notifyDataSetChanged();
@@ -111,13 +109,6 @@ public class SearchActivity extends NavigationBaseActivity implements MediaDetai
                             }
                         }
                 );
-    }
-
-    private void setBrowseImagesFragment() {
-        searchImageFragment = new SearchImageFragment();
-        FragmentTransaction transaction = supportFragmentManager.beginTransaction();
-        transaction.add(R.id.fragmentContainer, searchImageFragment).commit();
-
     }
 
     @Override

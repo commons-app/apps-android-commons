@@ -660,6 +660,43 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
         return images;
     }
 
+    /**
+     * This method takes search keyword as input and returns a list of categories objects filtered using search query
+     * It uses the generator query API to get the images searched using a query, 25 at a time.
+     * @param query keyword to search images on commons
+     * @return
+     */
+    @Override
+    @NonNull
+    public List<String> searchCategory(String query, int offset) {
+        List<ApiResult> imageNodes = null;
+        try {
+            imageNodes = api.action("query")
+                    .param("format", "xml")
+                    .param("list", "search")
+                    .param("srwhat", "text")
+                    .param("srnamespace", "14")
+                    .param("srlimit", "25")
+                    .param("sroffset",offset)
+                    .param("srsearch", query)
+                    .get()
+                    .getNodes("/api/query/search/p/@title");
+        } catch (IOException e) {
+            Timber.e("Failed to obtain searchImages", e);
+        }
+
+        if (imageNodes == null) {
+            return new ArrayList<String>();
+        }
+
+        List<String> categories = new ArrayList<>();
+        for (ApiResult imageNode : imageNodes) {
+            String catName = imageNode.getDocument().getTextContent();
+            categories.add(catName);
+        }
+        return categories;
+    }
+
 
     /**
      * For APIs that return paginated responses, MediaWiki APIs uses the QueryContinue to facilitate fetching of subsequent pages

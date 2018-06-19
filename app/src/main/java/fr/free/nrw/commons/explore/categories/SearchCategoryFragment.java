@@ -26,7 +26,6 @@ import javax.inject.Named;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
 import fr.free.nrw.commons.explore.SearchActivity;
@@ -63,8 +62,8 @@ public class SearchCategoryFragment extends CommonsDaggerSupportFragment {
     @Inject MediaWikiApi mwApi;
     @Inject @Named("default_preferences") SharedPreferences prefs;
 
-    private RVRendererAdapter<Media> imagesAdapter;
-    private List<Media> queryList = new ArrayList<>();
+    private RVRendererAdapter<String> imagesAdapter;
+    private List<String> queryList = new ArrayList<>();
 
     private final SearchCategoriesAdapterFactory adapterFactory = new SearchCategoriesAdapterFactory(item -> {
         int index = queryList.indexOf(item);
@@ -98,7 +97,7 @@ public class SearchCategoryFragment extends CommonsDaggerSupportFragment {
         else{
             imagesRecyclerView.setLayoutManager(new GridLayoutManager(getContext(), 2));
         }
-        ArrayList<Media> items = new ArrayList<>();
+        ArrayList<String> items = new ArrayList<>();
         imagesAdapter = adapterFactory.create(items);
         imagesRecyclerView.setAdapter(imagesAdapter);
         imagesRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
@@ -127,7 +126,7 @@ public class SearchCategoryFragment extends CommonsDaggerSupportFragment {
         progressBar.setVisibility(View.VISIBLE);
         queryList.clear();
         imagesAdapter.clear();
-        Observable.fromCallable(() -> mwApi.searchImages(query,queryList.size()))
+        Observable.fromCallable(() -> mwApi.searchCategory(query,queryList.size()))
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .timeout(TIMEOUT_SECONDS, TimeUnit.SECONDS)
@@ -141,7 +140,7 @@ public class SearchCategoryFragment extends CommonsDaggerSupportFragment {
     public void addImagesToList(String query) {
         this.query = query;
         progressBar.setVisibility(View.VISIBLE);
-        Observable.fromCallable(() -> mwApi.searchImages(query,queryList.size()))
+        Observable.fromCallable(() -> mwApi.searchCategory(query,queryList.size()))
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .timeout(TIMEOUT_SECONDS, TimeUnit.SECONDS)
@@ -153,7 +152,7 @@ public class SearchCategoryFragment extends CommonsDaggerSupportFragment {
      * it initializes the recycler view by adding items to the adapter
      * @param mediaList
      */
-    private void handlePaginationSuccess(List<Media> mediaList) {
+    private void handlePaginationSuccess(List<String> mediaList) {
         queryList.addAll(mediaList);
         progressBar.setVisibility(View.GONE);
         imagesAdapter.addAll(mediaList);
@@ -167,7 +166,7 @@ public class SearchCategoryFragment extends CommonsDaggerSupportFragment {
      * it initializes the recycler view by adding items to the adapter
      * @param mediaList
      */
-    private void handleSuccess(List<Media> mediaList) {
+    private void handleSuccess(List<String> mediaList) {
         imagesNotFoundView.setVisibility(GONE);
         queryList = mediaList;
         if(mediaList == null || mediaList.isEmpty()) {
@@ -210,31 +209,5 @@ public class SearchCategoryFragment extends CommonsDaggerSupportFragment {
     private void handleNoInternet() {
         progressBar.setVisibility(GONE);
         ViewUtil.showSnackbar(imagesRecyclerView, R.string.no_internet);
-    }
-
-    /**
-    * returns total number of images present in the recyclerview adapter.
-    */
-    public int getTotalImagesCount(){
-        if (imagesAdapter == null) {
-            return 0;
-        }
-        else {
-            return imagesAdapter.getItemCount();
-        }
-    }
-
-    /**
-     * returns Media Object at position
-     * @param i position of Media in the recyclerview adapter.
-     */
-    public Media getImageAtPosition(int i) {
-        if (imagesAdapter.getItem(i).getFilename() == null) {
-            // not yet ready to return data
-            return null;
-        }
-        else {
-            return new Media(imagesAdapter.getItem(i).getFilename());
-        }
     }
 }

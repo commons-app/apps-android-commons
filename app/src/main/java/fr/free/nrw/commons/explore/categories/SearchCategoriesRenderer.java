@@ -9,15 +9,14 @@ import com.pedrogomez.renderers.Renderer;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.R;
 
 /**
- * presentation logic of individual image in search is handled here
+ * presentation logic of individual category in search is handled here
  */
 
-class SearchCategoriesRenderer extends Renderer<Media> {
-    @BindView(R.id.categoryImageTitle) TextView tvImageName;
+class SearchCategoriesRenderer extends Renderer<String> {
+    @BindView(R.id.textView1) TextView tvCategoryName;
 
     private final ImageClickedListener listener;
 
@@ -27,7 +26,7 @@ class SearchCategoriesRenderer extends Renderer<Media> {
 
     @Override
     protected View inflate(LayoutInflater layoutInflater, ViewGroup viewGroup) {
-        return layoutInflater.inflate(R.layout.layout_category_images, viewGroup, false);
+        return layoutInflater.inflate(R.layout.item_recent_searches, viewGroup, false);
     }
 
     @Override
@@ -38,7 +37,7 @@ class SearchCategoriesRenderer extends Renderer<Media> {
     @Override
     protected void hookListeners(View view) {
         view.setOnClickListener(v -> {
-            Media item = getContent();
+            String item = getContent();
             if (listener != null) {
                 listener.imageClicked(item);
             }
@@ -47,12 +46,12 @@ class SearchCategoriesRenderer extends Renderer<Media> {
 
     @Override
     public void render() {
-        Media item = getContent();
-        tvImageName.setText(item.getFilename());
+        String item = getContent();
+        tvCategoryName.setText(item);
     }
 
     interface ImageClickedListener {
-        void imageClicked(Media item);
+        void imageClicked(String item);
     }
 
 }

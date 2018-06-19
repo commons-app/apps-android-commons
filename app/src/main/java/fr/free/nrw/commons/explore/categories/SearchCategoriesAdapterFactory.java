@@ -7,9 +7,6 @@ import com.pedrogomez.renderers.RendererBuilder;
 import java.util.Collections;
 import java.util.List;
 
-import fr.free.nrw.commons.Media;
-
-
 class SearchCategoriesAdapterFactory {
     private final SearchCategoriesRenderer.ImageClickedListener listener;
 
@@ -17,11 +14,10 @@ class SearchCategoriesAdapterFactory {
         this.listener = listener;
     }
 
-    public RVRendererAdapter<Media> create(List<Media> searchImageItemList) {
-        RendererBuilder<Media> builder = new RendererBuilder<Media>()
-                .bind(Media.class, new SearchCategoriesRenderer(listener));
-        ListAdapteeCollection<Media> collection = new ListAdapteeCollection<>(
-                searchImageItemList != null ? searchImageItemList : Collections.<Media>emptyList());
+    public RVRendererAdapter<String> create(List<String> searchImageItemList) {
+        RendererBuilder<String> builder = new RendererBuilder<String>().bind(String.class, new SearchCategoriesRenderer(listener));
+        ListAdapteeCollection<String> collection = new ListAdapteeCollection<>(
+                searchImageItemList != null ? searchImageItemList : Collections.<String>emptyList());
         return new RVRendererAdapter<>(builder, collection);
     }
 }
