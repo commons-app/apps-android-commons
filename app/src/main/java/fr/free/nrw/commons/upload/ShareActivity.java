@@ -453,12 +453,6 @@ public class ShareActivity
     @Override
     public void onPause() {
         super.onPause();
-        try {
-            gpsObj.unregisterLocationManager();
-            Timber.d("Unregistered locationManager");
-        } catch (NullPointerException e) {
-            Timber.d("locationManager does not exist, not unregistered");
-        }
     }
 
     @Override
