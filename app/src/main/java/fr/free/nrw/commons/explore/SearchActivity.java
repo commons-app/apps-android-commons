@@ -78,6 +78,9 @@ public class SearchActivity extends NavigationBaseActivity implements MediaDetai
         transaction.add(R.id.searchHistoryContainer, recentSearchesFragment).commit();
     }
 
+    /**
+     * Sets the titles in the tabLayout and fragments in the viewPager
+     */
     public void setTabs() {
         List<Fragment> fragmentList = new ArrayList<>();
         List<String> titleList = new ArrayList<>();
