@@ -98,12 +98,12 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
         resumeFragment();
         bundle = new Bundle();
 
+        initBottomSheetBehaviour();
+        initDrawer();
+
         SensorManager sensorManager = (SensorManager) this.getSystemService(SENSOR_SERVICE);
         magneticSensor = sensorManager.getDefaultSensor(Sensor.TYPE_MAGNETIC_FIELD);
         accelerometerSensor = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
-
-        initBottomSheetBehaviour();
-        initDrawer();
     }
 
     private void resumeFragment() {
@@ -285,9 +285,11 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
         locationManager.addLocationListener(this);
         locationManager.registerLocationManager();
 
-        SensorManager sensorManager = (SensorManager) this.getSystemService(SENSOR_SERVICE);
-        sensorManager.registerListener(this, accelerometerSensor, SensorManager.SENSOR_DELAY_UI);
-        sensorManager.registerListener(this, magneticSensor, SensorManager.SENSOR_DELAY_UI);
+        if (magneticSensor != null && accelerometerSensor != null) {
+            SensorManager sensorManager = (SensorManager) this.getSystemService(SENSOR_SERVICE);
+            sensorManager.registerListener(this, accelerometerSensor, SensorManager.SENSOR_DELAY_UI);
+            sensorManager.registerListener(this, magneticSensor, SensorManager.SENSOR_DELAY_UI);
+        }
     }
 
     @Override
@@ -328,6 +330,10 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
         locationManager.removeLocationListener(this);
         locationManager.unregisterLocationManager();
 
+        if (magneticSensor != null && accelerometerSensor != null) {
+            SensorManager sensorManager = (SensorManager) this.getSystemService(SENSOR_SERVICE);
+            sensorManager.unregisterListener(this);
+        }
     }
 
     private void addNetworkBroadcastReceiver() {
@@ -545,6 +551,10 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
      * Calls fragment for map view.
      */
     private void setMapFragment() {
+        if (magneticSensor != null && accelerometerSensor != null) {
+            bundle.putBoolean("useArrowMarker", true);
+        }
+
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
         nearbyMapFragment = new NearbyMapFragment();
         nearbyMapFragment.setArguments(bundle);
@@ -598,9 +608,10 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
                 accelerometerValues = sensorEvent.values;
         }
 
-        if (magneticValues != null && accelerometerValues != null) {
+        if (magneticValues != null && accelerometerValues != null && nearbyMapFragment != null) {
             Display display = this.getWindowManager().getDefaultDisplay();
-            Float azimuth = CompassUtils.getDeviceOrientation(display.getRotation(), accelerometerValues, magneticValues);
+            Double azimuth = (Math.toDegrees(CompassUtils.getDeviceOrientation(display.getRotation(), accelerometerValues, magneticValues)) + 360) % 360;
+            nearbyMapFragment.updateMarkerBearing(azimuth.floatValue());
         }
     }
 
