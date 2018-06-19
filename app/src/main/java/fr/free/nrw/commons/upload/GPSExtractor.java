@@ -121,28 +121,7 @@ public class GPSExtractor {
 
         //If image has no EXIF data and user has enabled GPS setting, get user's location
         if (exif == null || exif.getAttribute(ExifInterface.TAG_GPS_LATITUDE) == null) {
-            if (useGPS) {
-                registerLocationManager();
-
-                imageCoordsExists = false;
-                Timber.d("EXIF data has no location info");
-
-                //Check what user's preference is for automatic location detection
-                boolean gpsPrefEnabled = gpsPreferenceEnabled();
-
-                //Check that currentLatitude and currentLongitude have been
-                // explicitly set by MyLocationListener
-                // and do not default to (0.0,0.0)
-                if (gpsPrefEnabled && currentLatitude != null && currentLongitude != null) {
-                    Timber.d("Current location values: Lat = %f Long = %f", currentLatitude, currentLongitude);
-                    return String.valueOf(currentLatitude) + "|" + String.valueOf(currentLongitude);
-                } else {
-                    // No coords found
-                    return null;
-                }
-            } else {
-                return null;
-            }
+            return null;
         } else {
             //If image has EXIF data, extract image coords
             imageCoordsExists = true;
