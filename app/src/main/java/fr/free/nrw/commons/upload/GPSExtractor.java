@@ -71,9 +71,9 @@ public class GPSExtractor {
      * @return true if enabled, false if disabled
      */
     private boolean gpsPreferenceEnabled() {
-        boolean gpsPref = prefs.getBoolean("allowGps", false);
-        Timber.d("Gps pref set to: %b", gpsPref);
-        return gpsPref;
+        //TODO: Hotfix for #1599
+        //Stopgap measure prior to implementing category suggestions without adding location template
+        return false;
     }
 
     /**
@@ -134,8 +134,7 @@ public class GPSExtractor {
                 // explicitly set by MyLocationListener
                 // and do not default to (0.0,0.0)
                 if (gpsPrefEnabled && currentLatitude != null && currentLongitude != null) {
-                    Timber.d("Current location values: Lat = %f Long = %f",
-                            currentLatitude, currentLongitude);
+                    Timber.d("Current location values: Lat = %f Long = %f", currentLatitude, currentLongitude);
                     return String.valueOf(currentLatitude) + "|" + String.valueOf(currentLongitude);
                 } else {
                     // No coords found
