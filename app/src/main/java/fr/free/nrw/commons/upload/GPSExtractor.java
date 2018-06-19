@@ -120,6 +120,7 @@ public class GPSExtractor {
         String decimalCoords;
 
         //If image has no EXIF data and user has enabled GPS setting, get user's location
+        //TODO: Always return null as a temporary fix for #1599
         if (exif == null || exif.getAttribute(ExifInterface.TAG_GPS_LATITUDE) == null) {
             return null;
         } else {
