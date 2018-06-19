@@ -662,16 +662,16 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
 
     /**
      * This method takes search keyword as input and returns a list of categories objects filtered using search query
-     * It uses the generator query API to get the images searched using a query, 25 at a time.
-     * @param query keyword to search images on commons
+     * It uses the generator query API to get the categories searched using a query, 25 at a time.
+     * @param query keyword to search categories on commons
      * @return
      */
     @Override
     @NonNull
     public List<String> searchCategory(String query, int offset) {
-        List<ApiResult> imageNodes = null;
+        List<ApiResult> categoryNodes = null;
         try {
-            imageNodes = api.action("query")
+            categoryNodes = api.action("query")
                     .param("format", "xml")
                     .param("list", "search")
                     .param("srwhat", "text")
@@ -682,16 +682,16 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
                     .get()
                     .getNodes("/api/query/search/p/@title");
         } catch (IOException e) {
-            Timber.e("Failed to obtain searchImages", e);
+            Timber.e("Failed to obtain searchCategories", e);
         }
 
-        if (imageNodes == null) {
+        if (categoryNodes == null) {
             return new ArrayList<String>();
         }
 
         List<String> categories = new ArrayList<>();
-        for (ApiResult imageNode : imageNodes) {
-            String catName = imageNode.getDocument().getTextContent();
+        for (ApiResult categoryNode : categoryNodes) {
+            String catName = categoryNode.getDocument().getTextContent();
             categories.add(catName);
         }
         return categories;

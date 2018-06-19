@@ -42,7 +42,7 @@ import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
 
 /**
- * Displays the image search screen.
+ * Displays the category search screen.
  */
 
 public class SearchCategoryFragment extends CommonsDaggerSupportFragment {
@@ -54,7 +54,7 @@ public class SearchCategoryFragment extends CommonsDaggerSupportFragment {
     @BindView(R.id.imageSearchInProgress)
     ProgressBar progressBar;
     @BindView(R.id.imagesNotFound)
-    TextView imagesNotFoundView;
+    TextView categoriesNotFoundView;
     String query;
 
     @Inject RecentSearchesDao recentSearchesDao;
@@ -103,7 +103,7 @@ public class SearchCategoryFragment extends CommonsDaggerSupportFragment {
                 super.onScrollStateChanged(recyclerView, newState);
                 // check if end of recycler view is reached, if yes then add more results to existing results
                 if (!recyclerView.canScrollVertically(1)) {
-                    addImagesToList(query);
+                    addCategoriesToList(query);
                 }
             }
         });
@@ -111,8 +111,8 @@ public class SearchCategoryFragment extends CommonsDaggerSupportFragment {
     }
 
     /**
-     * Checks for internet connection and then initializes the recycler view with 25 images of the searched query
-     * Clearing imageAdapter every time new keyword is searched so that user can see only new results
+     * Checks for internet connection and then initializes the recycler view with 25 categories of the searched query
+     * Clearing categoryAdapter every time new keyword is searched so that user can see only new results
      */
     public void updateCategoryList(String query) {
         this.query = query;
@@ -134,7 +134,7 @@ public class SearchCategoryFragment extends CommonsDaggerSupportFragment {
     /**
      * Adds more results to existing search results
      */
-    public void addImagesToList(String query) {
+    public void addCategoriesToList(String query) {
         this.query = query;
         progressBar.setVisibility(View.VISIBLE);
         Observable.fromCallable(() -> mwApi.searchCategory(query,queryList.size()))
@@ -164,7 +164,7 @@ public class SearchCategoryFragment extends CommonsDaggerSupportFragment {
      * @param mediaList
      */
     private void handleSuccess(List<String> mediaList) {
-        imagesNotFoundView.setVisibility(GONE);
+        categoriesNotFoundView.setVisibility(GONE);
         queryList = mediaList;
         if(mediaList == null || mediaList.isEmpty()) {
             initErrorView();
@@ -186,9 +186,9 @@ public class SearchCategoryFragment extends CommonsDaggerSupportFragment {
      * @param throwable
      */
     private void handleError(Throwable throwable) {
-        Timber.e(throwable, "Error occurred while loading queried images");
+        Timber.e(throwable, "Error occurred while loading queried categories");
         initErrorView();
-        ViewUtil.showSnackbar(categoriesRecyclerView, R.string.error_loading_images);
+        ViewUtil.showSnackbar(categoriesRecyclerView, R.string.error_loading_categories);
     }
 
     /**
@@ -196,8 +196,8 @@ public class SearchCategoryFragment extends CommonsDaggerSupportFragment {
      */
     private void initErrorView() {
         progressBar.setVisibility(GONE);
-        imagesNotFoundView.setVisibility(VISIBLE);
-        imagesNotFoundView.setText(getString(R.string.images_not_found, query));
+        categoriesNotFoundView.setVisibility(VISIBLE);
+        categoriesNotFoundView.setText(getString(R.string.categories_not_found, query));
     }
 
     /**

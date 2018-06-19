@@ -8,9 +8,9 @@ import java.util.Collections;
 import java.util.List;
 
 class SearchCategoriesAdapterFactory {
-    private final SearchCategoriesRenderer.ImageClickedListener listener;
+    private final SearchCategoriesRenderer.CategoryClickedListener listener;
 
-    SearchCategoriesAdapterFactory(SearchCategoriesRenderer.ImageClickedListener listener) {
+    SearchCategoriesAdapterFactory(SearchCategoriesRenderer.CategoryClickedListener listener) {
         this.listener = listener;
     }
 

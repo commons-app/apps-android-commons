@@ -18,9 +18,9 @@ import fr.free.nrw.commons.R;
 class SearchCategoriesRenderer extends Renderer<String> {
     @BindView(R.id.textView1) TextView tvCategoryName;
 
-    private final ImageClickedListener listener;
+    private final CategoryClickedListener listener;
 
-    SearchCategoriesRenderer(ImageClickedListener listener) {
+    SearchCategoriesRenderer(CategoryClickedListener listener) {
         this.listener = listener;
     }
 
@@ -39,7 +39,7 @@ class SearchCategoriesRenderer extends Renderer<String> {
         view.setOnClickListener(v -> {
             String item = getContent();
             if (listener != null) {
-                listener.imageClicked(item);
+                listener.categoryClicked(item);
             }
         });
     }
@@ -50,8 +50,8 @@ class SearchCategoriesRenderer extends Renderer<String> {
         tvCategoryName.setText(item);
     }
 
-    interface ImageClickedListener {
-        void imageClicked(String item);
+    interface CategoryClickedListener {
+        void categoryClicked(String item);
     }
 
 }
