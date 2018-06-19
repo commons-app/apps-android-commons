@@ -2,6 +2,7 @@ package fr.free.nrw.commons.explore;
 
 import android.database.DataSetObserver;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.Toolbar;
@@ -13,12 +14,15 @@ import android.widget.SearchView;
 import com.jakewharton.rxbinding2.view.RxView;
 import com.jakewharton.rxbinding2.widget.RxSearchView;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.R;
+import fr.free.nrw.commons.explore.categories.SearchCategoryFragment;
 import fr.free.nrw.commons.explore.images.SearchImageFragment;
 import fr.free.nrw.commons.explore.recentsearches.RecentSearchesFragment;
 import fr.free.nrw.commons.media.MediaDetailPagerFragment;
@@ -41,6 +45,7 @@ public class SearchActivity extends NavigationBaseActivity implements MediaDetai
     private FragmentManager supportFragmentManager;
     private MediaDetailPagerFragment mediaDetails;
     private String query;
+    ViewPagerAdapter viewPagerAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,6 +61,27 @@ public class SearchActivity extends NavigationBaseActivity implements MediaDetai
         searchView.setQueryHint(getString(R.string.search_commons));
         searchView.onActionViewExpanded();
         searchView.clearFocus();
+
+    }
+
+    private void setSearchHistoryFragment() {
+        recentSearchesFragment = new RecentSearchesFragment();
+        FragmentTransaction transaction = supportFragmentManager.beginTransaction();
+        transaction.add(R.id.searchHistoryContainer, recentSearchesFragment).commit();
+    }
+
+    public void setTabs() {
+        List<Fragment> fragmentList = new ArrayList<>();
+        List<String> titleList = new ArrayList<>();
+        SearchImageFragment browseImageFragment = new SearchImageFragment();
+        SearchCategoryFragment browseCategoryFragment = new SearchCategoryFragment();
+        fragmentList.add(browseImageFragment);
+        titleList.add("IMAGES");
+        fragmentList.add(browseCategoryFragment);
+        titleList.add("CATEGORIES");
+
+        viewPagerAdapter.setTabData(fragmentList, titleList);
+        viewPagerAdapter.notifyDataSetChanged();
         RxSearchView.queryTextChanges(searchView)
                 .takeUntil(RxView.detaches(searchView))
                 .debounce(500, TimeUnit.MILLISECONDS)
@@ -67,6 +93,7 @@ public class SearchActivity extends NavigationBaseActivity implements MediaDetai
                                 searchHistoryContainer.setVisibility(View.GONE);
                                 this.query = query.toString();
                                 searchImageFragment.updateImageList(query.toString());
+                                browseCategoryFragment.updateCategoryList(filter.toString());
                             }else {
                                 resultsContainer.setVisibility(View.GONE);
                                 searchHistoryContainer.setVisibility(View.VISIBLE);
@@ -75,13 +102,6 @@ public class SearchActivity extends NavigationBaseActivity implements MediaDetai
                         }
                 );
     }
-
-    private void setSearchHistoryFragment() {
-        recentSearchesFragment = new RecentSearchesFragment();
-        FragmentTransaction transaction = supportFragmentManager.beginTransaction();
-        transaction.add(R.id.searchHistoryContainer, recentSearchesFragment).commit();
-    }
-
 
     private void setBrowseImagesFragment() {
         searchImageFragment = new SearchImageFragment();
