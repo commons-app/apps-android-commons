@@ -14,7 +14,6 @@ import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.auth.AuthenticatedActivity;
 import fr.free.nrw.commons.media.MediaDetailPagerFragment;
-import timber.log.Timber;
 
 /**
  * This activity displays pictures of a particular category
