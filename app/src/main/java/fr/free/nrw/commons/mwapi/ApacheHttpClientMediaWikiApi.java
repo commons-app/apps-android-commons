@@ -678,7 +678,6 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
             Response response = client.newCall(request).execute();
             String jsonData = response.body().string();
             JSONObject jsonRevertObject = new JSONObject(jsonData);
-            Log.i("Result", jsonData);
             return jsonRevertObject;
         });
     }

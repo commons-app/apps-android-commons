@@ -1,5 +1,7 @@
 package fr.free.nrw.commons.achievements;
 
+import android.util.Log;
+
 /**
  * represnts Achievements
  */
@@ -10,6 +12,7 @@ public class Achievements {
     private int imagesEditedBySomeoneElse;
     private int featuredImages;
     private int imagesUploaded;
+    private int revertCount;
 
     public Achievements(){
 
@@ -20,13 +23,15 @@ public class Achievements {
                         int thanksReceived,
                         int imagesEditedBySomeoneElse,
                         int featuredImages,
-                        int imagesUploaded) {
+                        int imagesUploaded,
+                        int revertCount) {
         this.uniqueUsedImages = uniqueUsedImages;
         this.articlesUsingImages = articlesUsingImages;
         this.thanksReceived = thanksReceived;
         this.imagesEditedBySomeoneElse = imagesEditedBySomeoneElse;
         this.featuredImages = featuredImages;
         this.imagesUploaded = imagesUploaded;
+        this.revertCount = revertCount;
     }
     public class AchievementsBuilder {
         private int nestedUniqueUsedImages;
@@ -35,6 +40,7 @@ public class Achievements {
         private int nestedImagesEditedBySomeoneElse;
         private int nestedFeaturedImages;
         private int nestedImagesUploaded;
+        private int nestedRevertCount;
 
         public AchievementsBuilder setUniqueUsedImages(int uniqueUsedImages) {
             this.nestedUniqueUsedImages = uniqueUsedImages;
@@ -66,13 +72,19 @@ public class Achievements {
             return this;
         }
 
+        public AchievementsBuilder setRevertCount( int revertCount){
+            this.nestedRevertCount = revertCount;
+            return this;
+        }
+
         public Achievements createAchievements(){
             return new Achievements(nestedUniqueUsedImages,
                     nestedArticlesUsingImages,
                     nestedThanksReceived,
                     nestedImagesEditedBySomeoneElse,
                     nestedFeaturedImages,
-                    nestedImagesUploaded);
+                    nestedImagesUploaded,
+                    nestedRevertCount);
         }
 
     }
@@ -124,4 +136,21 @@ public class Achievements {
     public void setUniqueUsedImages(int uniqueUsedImages) {
         this.uniqueUsedImages = uniqueUsedImages;
     }
+
+    public int getRevertCount() {
+        return revertCount;
+    }
+
+    public void setRevertCount(int revertCount) {
+        this.revertCount = revertCount;
+    }
+
+    public int getNotRevertPercentage(){
+        try {
+            return ((imagesUploaded - revertCount) * 100)/imagesUploaded;
+        } catch (ArithmeticException divideByZero ){
+           return 100;
+        }
+    }
+
 }

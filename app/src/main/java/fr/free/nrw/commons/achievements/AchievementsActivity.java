@@ -63,6 +63,7 @@ public class AchievementsActivity extends NavigationBaseActivity {
     private static final double BADGE_IMAGE_HEIGHT_RATIO = 0.3;
     private Boolean isUploadFetched = false;
     private Boolean isStatisticsFetched = false;
+    private Boolean isRevertFetched = false;
     private Achievements achievements = new Achievements();
     private LevelController level;
     private LevelController.LevelInfo levelInfo;
@@ -79,6 +80,8 @@ public class AchievementsActivity extends NavigationBaseActivity {
     CircleProgressBar imagesUploadedProgressbar;
     @BindView(R.id.images_used_by_wiki_progressbar)
     CircleProgressBar imagesUsedByWikiProgessbar;
+    @BindView(R.id.image_reverts_progressbar)
+    CircleProgressBar imageRevertsProgressbar;
     @BindView(R.id.image_featured)
     TextView imagesFeatured;
     @BindView(R.id.progressBar)
@@ -208,14 +211,20 @@ public class AchievementsActivity extends NavigationBaseActivity {
                 ));
     }
 
+    /**
+     * To call the API to get reverts count in form of JSONObject
+     *
+     */
     private void setRevertCount(){
         compositeDisposable.add(mediaWikiApi
                 .getRevertCount(sessionManager.getCurrentAccount().name)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
-                   object -> Log.i("Success",object.toString())
+                   object -> achievements.setRevertCount(object.getInt("deletedUploads"))
                 ));
+        isRevertFetched = true;
+        hideProgressBar();
     }
 
     /**
@@ -244,6 +253,16 @@ public class AchievementsActivity extends NavigationBaseActivity {
                 (100*uploadCount/levelInfo.getMaxUploadCount());
         imagesUploadedProgressbar.setProgressTextFormatPattern
                 (uploadCount +"/" + levelInfo.getMaxUploadCount() );
+    }
+
+    /**
+     * used to set the non revert image percentage
+     * @param notRevertPercentage
+     */
+    private void setImageRevertPercentage( int notRevertPercentage){
+        imageRevertsProgressbar.setProgress(notRevertPercentage);
+        String revertPercentage = Integer.toString(notRevertPercentage);
+        imageRevertsProgressbar.setProgressTextFormatPattern(revertPercentage + "%%");
     }
 
     /**
@@ -306,10 +325,11 @@ public class AchievementsActivity extends NavigationBaseActivity {
      * to hide progressbar
      */
     private void hideProgressBar() {
-        if (progressBar != null && isUploadFetched && isStatisticsFetched) {
+        if (progressBar != null && isUploadFetched && isStatisticsFetched && isRevertFetched) {
             levelInfo = LevelController.LevelInfo.from(achievements.getImagesUploaded(),achievements.getUniqueUsedImages());
             inflateAchievements(achievements);
             setUploadProgress(achievements.getImagesUploaded());
+            setImageRevertPercentage(achievements.getNotRevertPercentage());
             progressBar.setVisibility(View.GONE);
             layoutImageReverts.setVisibility(View.VISIBLE);
             layoutImageUploaded.setVisibility(View.VISIBLE);
