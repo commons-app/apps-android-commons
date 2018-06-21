@@ -294,4 +294,5 @@
   <string name="images_used_by_wiki">Images Used By Wiki</string>
   <string name="achievements_share_message">Share your achievements with your friends!</string>
   <string name="achievements_info_message">Your level increases as you meet these requirements. Items in the "statistics" section do not count towards your level.</string>
+  <string name="achievements_revert_limit_message">minimum required: </string>
 </resources>

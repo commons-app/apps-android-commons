@@ -65,7 +65,6 @@ public class AchievementsActivity extends NavigationBaseActivity {
     private Boolean isStatisticsFetched = false;
     private Boolean isRevertFetched = false;
     private Achievements achievements = new Achievements();
-    private LevelController level;
     private LevelController.LevelInfo levelInfo;
 
     @BindView(R.id.achievement_badge)
@@ -84,6 +83,8 @@ public class AchievementsActivity extends NavigationBaseActivity {
     CircleProgressBar imageRevertsProgressbar;
     @BindView(R.id.image_featured)
     TextView imagesFeatured;
+    @BindView(R.id.images_revert_limit_text)
+    TextView imagesRevertLimitText;
     @BindView(R.id.progressBar)
     ProgressBar progressBar;
     @BindView(R.id.layout_image_uploaded)
@@ -263,6 +264,10 @@ public class AchievementsActivity extends NavigationBaseActivity {
         imageRevertsProgressbar.setProgress(notRevertPercentage);
         String revertPercentage = Integer.toString(notRevertPercentage);
         imageRevertsProgressbar.setProgressTextFormatPattern(revertPercentage + "%%");
+        imagesRevertLimitText.setText(
+                getResources().getString(R.string.achievements_revert_limit_message)
+                        + levelInfo.getMinNonRevertPercentage() + "%"
+        );
     }
 
     /**
@@ -326,7 +331,9 @@ public class AchievementsActivity extends NavigationBaseActivity {
      */
     private void hideProgressBar() {
         if (progressBar != null && isUploadFetched && isStatisticsFetched && isRevertFetched) {
-            levelInfo = LevelController.LevelInfo.from(achievements.getImagesUploaded(),achievements.getUniqueUsedImages());
+            levelInfo = LevelController.LevelInfo.from(achievements.getImagesUploaded(),
+                    achievements.getUniqueUsedImages(),
+                    achievements.getNotRevertPercentage());
             inflateAchievements(achievements);
             setUploadProgress(achievements.getImagesUploaded());
             setImageRevertPercentage(achievements.getNotRevertPercentage());
