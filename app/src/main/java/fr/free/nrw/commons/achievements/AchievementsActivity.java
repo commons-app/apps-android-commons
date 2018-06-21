@@ -133,6 +133,7 @@ public class AchievementsActivity extends NavigationBaseActivity {
         hideLayouts();
         setAchievements();
         setUploadCount();
+        setRevertCount();
         initDrawer();
     }
 
@@ -204,6 +205,16 @@ public class AchievementsActivity extends NavigationBaseActivity {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
                         jsonObject -> parseJson(jsonObject)
+                ));
+    }
+
+    private void setRevertCount(){
+        compositeDisposable.add(mediaWikiApi
+                .getRevertCount(sessionManager.getCurrentAccount().name)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(
+                   object -> Log.i("Success",object.toString())
                 ));
     }
 

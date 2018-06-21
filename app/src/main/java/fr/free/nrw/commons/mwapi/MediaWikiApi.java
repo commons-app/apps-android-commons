@@ -80,6 +80,9 @@ public interface MediaWikiApi {
     @NonNull
     Single<JSONObject> getAchievements(String userName);
 
+    @NonNull
+    Single<JSONObject> getRevertCount(String userName);
+
     interface ProgressListener {
         void onProgress(long transferred, long total);
     }
