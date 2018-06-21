@@ -38,6 +38,9 @@
 
     </PreferenceCategory>
 
+    <!-- The key 'allowGps' was used before and has since been removed based on the discussion at #1599.
+          Do not reuse this key unless you revive the same feature with the changes mentioned at #1599.-->
+
     <PreferenceCategory
         android:title="@string/preference_category_feedback">
 
