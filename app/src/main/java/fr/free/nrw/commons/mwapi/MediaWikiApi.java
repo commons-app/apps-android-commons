@@ -45,6 +45,9 @@ public interface MediaWikiApi {
     List<Media> searchImages(String title, int offset);
 
     @NonNull
+    List<String> searchCategory(String title, int offset);
+
+    @NonNull
     UploadResult uploadFile(String filename, InputStream file, long dataLength, String pageContents, String editSummary, ProgressListener progressListener) throws IOException;
 
     @Nullable

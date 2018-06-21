@@ -2,8 +2,11 @@ package fr.free.nrw.commons.explore;
 
 import android.database.DataSetObserver;
 import android.os.Bundle;
+import android.support.design.widget.TabLayout;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.view.ViewPager;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.view.View;
@@ -13,12 +16,15 @@ import android.widget.SearchView;
 import com.jakewharton.rxbinding2.view.RxView;
 import com.jakewharton.rxbinding2.widget.RxSearchView;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.R;
+import fr.free.nrw.commons.explore.categories.SearchCategoryFragment;
 import fr.free.nrw.commons.explore.images.SearchImageFragment;
 import fr.free.nrw.commons.explore.recentsearches.RecentSearchesFragment;
 import fr.free.nrw.commons.media.MediaDetailPagerFragment;
@@ -33,14 +39,18 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 public class SearchActivity extends NavigationBaseActivity implements MediaDetailPagerFragment.MediaDetailProvider{
 
     @BindView(R.id.toolbar_search) Toolbar toolbar;
-    @BindView(R.id.fragmentContainer) FrameLayout resultsContainer;
     @BindView(R.id.searchHistoryContainer) FrameLayout searchHistoryContainer;
     @BindView(R.id.searchBox) SearchView searchView;
+    @BindView(R.id.tabLayout) TabLayout tabLayout;
+    @BindView(R.id.viewPager) ViewPager viewPager;
+
     private SearchImageFragment searchImageFragment;
+    private SearchCategoryFragment searchCategoryFragment;
     private RecentSearchesFragment recentSearchesFragment;
     private FragmentManager supportFragmentManager;
     private MediaDetailPagerFragment mediaDetails;
     private String query;
+    ViewPagerAdapter viewPagerAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,29 +61,15 @@ public class SearchActivity extends NavigationBaseActivity implements MediaDetai
         setTitle(getString(R.string.title_activity_search));
         toolbar.setNavigationOnClickListener(v->onBackPressed());
         supportFragmentManager = getSupportFragmentManager();
-        setBrowseImagesFragment();
         setSearchHistoryFragment();
+        viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager());
+        viewPager.setAdapter(viewPagerAdapter);
+        tabLayout.setupWithViewPager(viewPager);
+        setTabs();
         searchView.setQueryHint(getString(R.string.search_commons));
         searchView.onActionViewExpanded();
         searchView.clearFocus();
-        RxSearchView.queryTextChanges(searchView)
-                .takeUntil(RxView.detaches(searchView))
-                .debounce(500, TimeUnit.MILLISECONDS)
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe( query -> {
-                            //update image list
-                            if (!TextUtils.isEmpty(query)) {
-                                resultsContainer.setVisibility(View.VISIBLE);
-                                searchHistoryContainer.setVisibility(View.GONE);
-                                this.query = query.toString();
-                                searchImageFragment.updateImageList(query.toString());
-                            }else {
-                                resultsContainer.setVisibility(View.GONE);
-                                searchHistoryContainer.setVisibility(View.VISIBLE);
-                                // open search history fragment
-                            }
-                        }
-                );
+
     }
 
     private void setSearchHistoryFragment() {
@@ -82,12 +78,40 @@ public class SearchActivity extends NavigationBaseActivity implements MediaDetai
         transaction.add(R.id.searchHistoryContainer, recentSearchesFragment).commit();
     }
 
-
-    private void setBrowseImagesFragment() {
+    /**
+     * Sets the titles in the tabLayout and fragments in the viewPager
+     */
+    public void setTabs() {
+        List<Fragment> fragmentList = new ArrayList<>();
+        List<String> titleList = new ArrayList<>();
         searchImageFragment = new SearchImageFragment();
-        FragmentTransaction transaction = supportFragmentManager.beginTransaction();
-        transaction.add(R.id.fragmentContainer, searchImageFragment).commit();
+        searchCategoryFragment= new SearchCategoryFragment();
+        fragmentList.add(searchImageFragment);
+        titleList.add("MEDIA");
+        fragmentList.add(searchCategoryFragment);
+        titleList.add("CATEGORIES");
 
+        viewPagerAdapter.setTabData(fragmentList, titleList);
+        viewPagerAdapter.notifyDataSetChanged();
+        RxSearchView.queryTextChanges(searchView)
+                .takeUntil(RxView.detaches(searchView))
+                .debounce(500, TimeUnit.MILLISECONDS)
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe( query -> {
+                            //update image list
+                            if (!TextUtils.isEmpty(query)) {
+                                viewPager.setVisibility(View.VISIBLE);
+                                searchHistoryContainer.setVisibility(View.GONE);
+                                this.query = query.toString();
+                                searchImageFragment.updateImageList(query.toString());
+                                searchCategoryFragment.updateCategoryList(query.toString());
+                            }else {
+                                viewPager.setVisibility(View.GONE);
+                                searchHistoryContainer.setVisibility(View.VISIBLE);
+                                // open search history fragment
+                            }
+                        }
+                );
     }
 
     @Override
@@ -170,6 +194,6 @@ public class SearchActivity extends NavigationBaseActivity implements MediaDetai
         searchView.setQuery(query, true);;
         // Clear focus of searchView now. searchView.clearFocus(); does not seem to work Check the below link for more details.
         // https://stackoverflow.com/questions/6117967/how-to-remove-focus-without-setting-focus-to-another-control/15481511
-        resultsContainer.requestFocus();
+        viewPager.requestFocus();
     }
 }
