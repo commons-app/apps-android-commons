@@ -54,6 +54,16 @@
             android:layout_below="@id/toolbar_search"
             />
         </android.support.design.widget.AppBarLayout>
+        <FrameLayout
+            android:visibility="gone"
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/mediaContainer"
+            android:orientation="horizontal"
+            android:layout_below="@id/toolbar_layout"
+            />
+
         <android.support.v4.view.ViewPager
             android:id="@+id/viewPager"
             android:layout_width="match_parent"
@@ -61,7 +71,7 @@
             android:layout_below="@id/toolbar_layout"
             />
         <FrameLayout
-            android:visibility="visible"
+            android:visibility="gone"
             xmlns:android="http://schemas.android.com/apk/res/android"
             android:layout_width="match_parent"
             android:layout_height="match_parent"

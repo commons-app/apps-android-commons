@@ -12,6 +12,7 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.SearchView;
+import android.widget.Toast;
 
 import com.jakewharton.rxbinding2.view.RxView;
 import com.jakewharton.rxbinding2.widget.RxSearchView;
@@ -40,6 +41,7 @@ public class SearchActivity extends NavigationBaseActivity implements MediaDetai
 
     @BindView(R.id.toolbar_search) Toolbar toolbar;
     @BindView(R.id.searchHistoryContainer) FrameLayout searchHistoryContainer;
+    @BindView(R.id.mediaContainer) FrameLayout mediaContainer;
     @BindView(R.id.searchBox) SearchView searchView;
     @BindView(R.id.tabLayout) TabLayout tabLayout;
     @BindView(R.id.viewPager) ViewPager viewPager;
@@ -146,6 +148,9 @@ public class SearchActivity extends NavigationBaseActivity implements MediaDetai
     public void onSearchImageClicked(int index) {
         ViewUtil.hideKeyboard(this.findViewById(R.id.searchBox));
         toolbar.setVisibility(View.GONE);
+        tabLayout.setVisibility(View.GONE);
+        viewPager.setVisibility(View.GONE);
+        mediaContainer.setVisibility(View.VISIBLE);
         setNavigationBaseToolbarVisibility(true);
         if (mediaDetails == null || !mediaDetails.isVisible()) {
             // set isFeaturedImage true for featured images, to include author field on media detail
@@ -153,7 +158,7 @@ public class SearchActivity extends NavigationBaseActivity implements MediaDetai
             FragmentManager supportFragmentManager = getSupportFragmentManager();
             supportFragmentManager
                     .beginTransaction()
-                    .replace(R.id.fragmentContainer, mediaDetails)
+                    .replace(R.id.mediaContainer, mediaDetails)
                     .addToBackStack(null)
                     .commit();
             supportFragmentManager.executePendingTransactions();
@@ -179,6 +184,9 @@ public class SearchActivity extends NavigationBaseActivity implements MediaDetai
         if (getSupportFragmentManager().getBackStackEntryCount() == 1){
             // back to search so show search toolbar and hide navigation toolbar
             toolbar.setVisibility(View.VISIBLE);
+            tabLayout.setVisibility(View.VISIBLE);
+            viewPager.setVisibility(View.VISIBLE);
+            mediaContainer.setVisibility(View.GONE);
             setNavigationBaseToolbarVisibility(false);
             if (!TextUtils.isEmpty(query)) {
                 searchImageFragment.updateImageList(query);
@@ -191,7 +199,7 @@ public class SearchActivity extends NavigationBaseActivity implements MediaDetai
     }
 
     public void updateText(String query) {
-        searchView.setQuery(query, true);;
+        searchView.setQuery(query, true);
         // Clear focus of searchView now. searchView.clearFocus(); does not seem to work Check the below link for more details.
         // https://stackoverflow.com/questions/6117967/how-to-remove-focus-without-setting-focus-to-another-control/15481511
         viewPager.requestFocus();
