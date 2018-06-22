@@ -116,6 +116,7 @@ public class SearchCategoryFragment extends CommonsDaggerSupportFragment {
      */
     public void updateCategoryList(String query) {
         this.query = query;
+        categoriesNotFoundView.setVisibility(GONE);
         if(!NetworkUtils.isInternetConnectionEstablished(getContext())) {
             handleNoInternet();
             return;
