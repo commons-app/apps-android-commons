@@ -5,6 +5,7 @@ import dagger.android.ContributesAndroidInjector;
 import fr.free.nrw.commons.category.CategorizationFragment;
 import fr.free.nrw.commons.contributions.ContributionsListFragment;
 import fr.free.nrw.commons.category.CategoryImagesListFragment;
+import fr.free.nrw.commons.explore.categories.SearchCategoryFragment;
 import fr.free.nrw.commons.explore.images.SearchImageFragment;
 import fr.free.nrw.commons.explore.recentsearches.RecentSearchesFragment;
 import fr.free.nrw.commons.media.MediaDetailFragment;
@@ -55,6 +56,9 @@ public abstract class FragmentBuilderModule {
 
     @ContributesAndroidInjector
     abstract SearchImageFragment bindBrowseImagesListFragment();
+
+    @ContributesAndroidInjector
+    abstract SearchCategoryFragment bindSearchCategoryListFragment();
 
     @ContributesAndroidInjector
     abstract RecentSearchesFragment bindRecentSearchesFragment();

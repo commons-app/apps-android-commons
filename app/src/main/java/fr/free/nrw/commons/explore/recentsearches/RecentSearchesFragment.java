@@ -44,6 +44,10 @@ public class RecentSearchesFragment extends CommonsDaggerSupportFragment {
                 .setPositiveButton("YES", (dialog, which) -> {
                     recentSearchesDao.deleteAll(recentSearches);
                     Toast.makeText(getContext(),getString(R.string.search_history_deleted),Toast.LENGTH_SHORT).show();
+                    recentSearches = recentSearchesDao.recentSearches(10);
+                    adapter = new ArrayAdapter<String>(getContext(),R.layout.item_recent_searches, recentSearches);
+                    recentSearchesList.setAdapter(adapter);
+                    adapter.notifyDataSetChanged();
                     dialog.dismiss();
                 })
                 .setNegativeButton("NO", null)
