@@ -164,7 +164,6 @@ public class SearchCategoryFragment extends CommonsDaggerSupportFragment {
      * @param mediaList
      */
     private void handleSuccess(List<String> mediaList) {
-        categoriesNotFoundView.setVisibility(GONE);
         queryList = mediaList;
         if(mediaList == null || mediaList.isEmpty()) {
             initErrorView();
