@@ -351,6 +351,11 @@ public class NearbyMapFragment extends DaggerFragment {
         }
     }
 
+    /**
+     * set rotation of position marker icon on current position SymbolLayer to azimuth
+     * note: this sets rotation to all icons on said SymbolLayer, if you add more icons all will be rotated
+     * @param azimuth in degrees
+     */
     public void updateMarkerBearing(Float azimuth) {
         if (azimuth == null || mapboxMap == null) {
             return;
