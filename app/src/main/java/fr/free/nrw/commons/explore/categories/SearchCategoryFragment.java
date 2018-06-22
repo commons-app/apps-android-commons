@@ -1,4 +1,4 @@
-package fr.free.nrw.commons.explore.images;
+package fr.free.nrw.commons.explore.categories;
 
 
 import android.content.SharedPreferences;
@@ -13,19 +13,21 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+
 import com.pedrogomez.renderers.RVRendererAdapter;
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
+
 import javax.inject.Inject;
 import javax.inject.Named;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
-import fr.free.nrw.commons.explore.SearchActivity;
 import fr.free.nrw.commons.explore.recentsearches.RecentSearch;
 import fr.free.nrw.commons.explore.recentsearches.RecentSearchesDao;
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
@@ -40,31 +42,30 @@ import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
 
 /**
- * Displays the image search screen.
+ * Displays the category search screen.
  */
 
-public class SearchImageFragment extends CommonsDaggerSupportFragment {
+public class SearchCategoryFragment extends CommonsDaggerSupportFragment {
 
     private static int TIMEOUT_SECONDS = 15;
 
     @BindView(R.id.imagesListBox)
-    RecyclerView imagesRecyclerView;
+    RecyclerView categoriesRecyclerView;
     @BindView(R.id.imageSearchInProgress)
     ProgressBar progressBar;
     @BindView(R.id.imagesNotFound)
-    TextView imagesNotFoundView;
+    TextView categoriesNotFoundView;
     String query;
 
     @Inject RecentSearchesDao recentSearchesDao;
     @Inject MediaWikiApi mwApi;
     @Inject @Named("default_preferences") SharedPreferences prefs;
 
-    private RVRendererAdapter<Media> imagesAdapter;
-    private List<Media> queryList = new ArrayList<>();
+    private RVRendererAdapter<String> categoriesAdapter;
+    private List<String> queryList = new ArrayList<>();
 
-    private final SearchImagesAdapterFactory adapterFactory = new SearchImagesAdapterFactory(item -> {
-        int index = queryList.indexOf(item);
-        ((SearchActivity)getContext()).onSearchImageClicked(index);
+    private final SearchCategoriesAdapterFactory adapterFactory = new SearchCategoriesAdapterFactory(item -> {
+        // Open Category Details activity
         saveQuery(query);
     });
 
@@ -78,7 +79,6 @@ public class SearchImageFragment extends CommonsDaggerSupportFragment {
         else {
             recentSearch.setLastSearched(new Date());
         }
-
         recentSearchesDao.save(recentSearch);
 
     }
@@ -89,21 +89,21 @@ public class SearchImageFragment extends CommonsDaggerSupportFragment {
         View rootView = inflater.inflate(R.layout.fragment_browse_image, container, false);
         ButterKnife.bind(this, rootView);
         if(getActivity().getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT){
-            imagesRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+            categoriesRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         }
         else{
-            imagesRecyclerView.setLayoutManager(new GridLayoutManager(getContext(), 2));
+            categoriesRecyclerView.setLayoutManager(new GridLayoutManager(getContext(), 2));
         }
-        ArrayList<Media> items = new ArrayList<>();
-        imagesAdapter = adapterFactory.create(items);
-        imagesRecyclerView.setAdapter(imagesAdapter);
-        imagesRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+        ArrayList<String> items = new ArrayList<>();
+        categoriesAdapter = adapterFactory.create(items);
+        categoriesRecyclerView.setAdapter(categoriesAdapter);
+        categoriesRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
                 super.onScrollStateChanged(recyclerView, newState);
                 // check if end of recycler view is reached, if yes then add more results to existing results
                 if (!recyclerView.canScrollVertically(1)) {
-                    addImagesToList(query);
+                    addCategoriesToList(query);
                 }
             }
         });
@@ -111,20 +111,20 @@ public class SearchImageFragment extends CommonsDaggerSupportFragment {
     }
 
     /**
-     * Checks for internet connection and then initializes the recycler view with 25 images of the searched query
-     * Clearing imageAdapter every time new keyword is searched so that user can see only new results
+     * Checks for internet connection and then initializes the recycler view with 25 categories of the searched query
+     * Clearing categoryAdapter every time new keyword is searched so that user can see only new results
      */
-    public void updateImageList(String query) {
+    public void updateCategoryList(String query) {
         this.query = query;
-        imagesNotFoundView.setVisibility(GONE);
+        categoriesNotFoundView.setVisibility(GONE);
         if(!NetworkUtils.isInternetConnectionEstablished(getContext())) {
             handleNoInternet();
             return;
         }
         progressBar.setVisibility(View.VISIBLE);
         queryList.clear();
-        imagesAdapter.clear();
-        Observable.fromCallable(() -> mwApi.searchImages(query,queryList.size()))
+        categoriesAdapter.clear();
+        Observable.fromCallable(() -> mwApi.searchCategory(query,queryList.size()))
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .timeout(TIMEOUT_SECONDS, TimeUnit.SECONDS)
@@ -135,10 +135,10 @@ public class SearchImageFragment extends CommonsDaggerSupportFragment {
     /**
      * Adds more results to existing search results
      */
-    public void addImagesToList(String query) {
+    public void addCategoriesToList(String query) {
         this.query = query;
         progressBar.setVisibility(View.VISIBLE);
-        Observable.fromCallable(() -> mwApi.searchImages(query,queryList.size()))
+        Observable.fromCallable(() -> mwApi.searchCategory(query,queryList.size()))
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .timeout(TIMEOUT_SECONDS, TimeUnit.SECONDS)
@@ -150,11 +150,11 @@ public class SearchImageFragment extends CommonsDaggerSupportFragment {
      * it initializes the recycler view by adding items to the adapter
      * @param mediaList
      */
-    private void handlePaginationSuccess(List<Media> mediaList) {
+    private void handlePaginationSuccess(List<String> mediaList) {
         queryList.addAll(mediaList);
         progressBar.setVisibility(View.GONE);
-        imagesAdapter.addAll(mediaList);
-        imagesAdapter.notifyDataSetChanged();
+        categoriesAdapter.addAll(mediaList);
+        categoriesAdapter.notifyDataSetChanged();
     }
 
 
@@ -164,7 +164,7 @@ public class SearchImageFragment extends CommonsDaggerSupportFragment {
      * it initializes the recycler view by adding items to the adapter
      * @param mediaList
      */
-    private void handleSuccess(List<Media> mediaList) {
+    private void handleSuccess(List<String> mediaList) {
         queryList = mediaList;
         if(mediaList == null || mediaList.isEmpty()) {
             initErrorView();
@@ -172,8 +172,8 @@ public class SearchImageFragment extends CommonsDaggerSupportFragment {
         else {
 
             progressBar.setVisibility(View.GONE);
-            imagesAdapter.addAll(mediaList);
-            imagesAdapter.notifyDataSetChanged();
+            categoriesAdapter.addAll(mediaList);
+            categoriesAdapter.notifyDataSetChanged();
 
             // check if user is waiting for 5 seconds if yes then save search query to history.
             Handler handler = new Handler();
@@ -186,9 +186,9 @@ public class SearchImageFragment extends CommonsDaggerSupportFragment {
      * @param throwable
      */
     private void handleError(Throwable throwable) {
-        Timber.e(throwable, "Error occurred while loading queried images");
+        Timber.e(throwable, "Error occurred while loading queried categories");
         initErrorView();
-        ViewUtil.showSnackbar(imagesRecyclerView, R.string.error_loading_images);
+        ViewUtil.showSnackbar(categoriesRecyclerView, R.string.error_loading_categories);
     }
 
     /**
@@ -196,8 +196,8 @@ public class SearchImageFragment extends CommonsDaggerSupportFragment {
      */
     private void initErrorView() {
         progressBar.setVisibility(GONE);
-        imagesNotFoundView.setVisibility(VISIBLE);
-        imagesNotFoundView.setText(getString(R.string.images_not_found, query));
+        categoriesNotFoundView.setVisibility(VISIBLE);
+        categoriesNotFoundView.setText(getString(R.string.categories_not_found, query));
     }
 
     /**
@@ -205,32 +205,6 @@ public class SearchImageFragment extends CommonsDaggerSupportFragment {
      */
     private void handleNoInternet() {
         progressBar.setVisibility(GONE);
-        ViewUtil.showSnackbar(imagesRecyclerView, R.string.no_internet);
-    }
-
-    /**
-    * returns total number of images present in the recyclerview adapter.
-    */
-    public int getTotalImagesCount(){
-        if (imagesAdapter == null) {
-            return 0;
-        }
-        else {
-            return imagesAdapter.getItemCount();
-        }
-    }
-
-    /**
-     * returns Media Object at position
-     * @param i position of Media in the recyclerview adapter.
-     */
-    public Media getImageAtPosition(int i) {
-        if (imagesAdapter.getItem(i).getFilename() == null) {
-            // not yet ready to return data
-            return null;
-        }
-        else {
-            return new Media(imagesAdapter.getItem(i).getFilename());
-        }
+        ViewUtil.showSnackbar(categoriesRecyclerView, R.string.no_internet);
     }
 }

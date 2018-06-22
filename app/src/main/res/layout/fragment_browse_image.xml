@@ -5,7 +5,7 @@
     android:focusableInTouchMode="true"
     android:id="@+id/image_search_results_display"
     android:orientation="vertical"
-    android:paddingTop="@dimen/small_gap"
+    android:paddingTop="@dimen/tiny_gap"
     >
 
     <TextView
