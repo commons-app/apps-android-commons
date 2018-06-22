@@ -352,11 +352,14 @@ public class NearbyMapFragment extends DaggerFragment {
     }
 
     public void updateMarkerBearing(Float azimuth) {
-        if (azimuth == null || mapboxMap == null) return;
+        if (azimuth == null || mapboxMap == null) {
+            return;
+        }
 
         SymbolLayer layer = (SymbolLayer) mapboxMap.getLayer(CURRENT_LOCATION_LAYER_ID);
-        if (layer != null)
+        if (layer != null) {
             layer.setProperties(PropertyFactory.iconRotate(azimuth));
+        }
     }
 
     private void initViews() {
