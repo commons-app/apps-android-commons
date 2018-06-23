@@ -29,8 +29,8 @@ import static fr.free.nrw.commons.wikidata.WikidataConstants.WIKIDATA_ENTITY_ID_
 
 public class ContributionController {
 
-    private static final int SELECT_FROM_GALLERY = 1;
-    private static final int SELECT_FROM_CAMERA = 2;
+    public static final int SELECT_FROM_GALLERY = 1;
+    public static final int SELECT_FROM_CAMERA = 2;
 
     private Fragment fragment;
 
