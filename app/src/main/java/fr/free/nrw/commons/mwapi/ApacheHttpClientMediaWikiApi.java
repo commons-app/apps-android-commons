@@ -685,7 +685,6 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
                                    String pageContents,
                                    String editSummary,
                                    final ProgressListener progressListener) throws IOException {
-        Log.d("deneme", "uploadFile "+ file.toString());
 
         ApiResult result = api.upload(filename, file, dataLength, pageContents, editSummary, progressListener::onProgress);
 

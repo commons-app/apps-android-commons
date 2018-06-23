@@ -197,10 +197,7 @@ public class UploadService extends HandlerService<Contribution> {
 
         try {
             //FIXME: Google Photos bug
-            Log.d("deneme","uploadContribution "+contribution.getLocalUri());
             File file1 = new File(contribution.getLocalUri().getPath());
-            Log.d("deneme", file1.exists()+"");
-
             fileInputStream = new FileInputStream(file1);
             //fileInputStream = this.getContentResolver().openInputStream(contribution.getLocalUri());
         } catch (FileNotFoundException e) {
