@@ -27,7 +27,7 @@
   <string name="login_success">Accedeu correctamente!</string>
   <string name="login_failed">Erro durante o inición de sesión!</string>
   <string name="upload_failed">Ficheiro non atopado. Por favor, probe con outro.</string>
-  <string name="authentication_failed">Erro durante a autenticación!</string>
+  <string name="authentication_failed" fuzzy="true">Erro durante a autenticación!</string>
   <string name="uploading_started">A carga comezou!</string>
   <string name="upload_completed_notification_title">Cargouse \"%1$s\"!</string>
   <string name="upload_completed_notification_text">Prema para ollar a súa carga</string>
@@ -109,7 +109,7 @@
   <string name="preference_license">Licenza por defecto</string>
   <string name="use_previous">Usar o título ou a descrición anterior</string>
   <string name="allow_gps">Obter automaticamente a localización actual</string>
-  <string name="allow_gps_summary">Obter a localización actual para ofrecer suxestións de categoría se a imaxe non está xeolocalizada</string>
+  <string name="allow_gps_summary" fuzzy="true">Obter a localización actual para ofrecer suxestións de categoría se a imaxe non está xeolocalizada</string>
   <string name="preference_theme">Modo nocturno</string>
   <string name="preference_theme_summary">Usar tema escuro</string>
   <string name="license_name_cc_by_sa_four"> Recoñecemento-CompartirIgual 4.0</string>

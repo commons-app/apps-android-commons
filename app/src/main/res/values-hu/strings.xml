@@ -31,7 +31,7 @@
   <string name="login_success">Sikeres bejelentkezés</string>
   <string name="login_failed">A bejelentkezés nem sikerült.</string>
   <string name="upload_failed">A fájl nem található. Próbálkozz másik fájllal.</string>
-  <string name="authentication_failed">Sikertelen hitelesítés.</string>
+  <string name="authentication_failed" fuzzy="true">Sikertelen hitelesítés.</string>
   <string name="uploading_started">Feltöltés elindult.</string>
   <string name="upload_completed_notification_title">%1$s feltöltve.</string>
   <string name="upload_completed_notification_text">Feltöltés megtekintése</string>
@@ -113,7 +113,7 @@
   <string name="preference_license">Alapértelmezett licenc</string>
   <string name="use_previous">Előző cím/leírás használata</string>
   <string name="allow_gps">Automatikusan megkapja a jelenlegi helyet</string>
-  <string name="allow_gps_summary">Lekéri a jelenlegi helyet, hogy lehetőség legyen kategóriajavaslatokra a nem földrajzi címkézett képeknél.</string>
+  <string name="allow_gps_summary" fuzzy="true">Lekéri a jelenlegi helyet, hogy lehetőség legyen kategóriajavaslatokra a nem földrajzi címkézett képeknél.</string>
   <string name="preference_theme">Éjszakai mód</string>
   <string name="preference_theme_summary">Sötét téma használata</string>
   <string name="license_name_cc_by_sa_four">Nevezd meg! – Így add tovább! 4.0</string>

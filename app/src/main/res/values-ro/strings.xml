@@ -16,7 +16,7 @@
   <string name="login_success">Autentificare reușită!</string>
   <string name="login_failed">Autentificare nereușită!</string>
   <string name="upload_failed">Fișierul nu a fost găsit. Încercați cu un alt fișier.</string>
-  <string name="authentication_failed">Certificare nereușită!</string>
+  <string name="authentication_failed" fuzzy="true">Certificare nereușită!</string>
   <string name="uploading_started">Încărcarea a început!</string>
   <string name="upload_completed_notification_title">%1$s s-a încărcat!</string>
   <string name="upload_completed_notification_text">Atingeți pentru a vizualiza elementul încărcat</string>

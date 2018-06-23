@@ -21,7 +21,7 @@
   <string name="login_success">Најавата е успешна!</string>
   <string name="login_failed">Најавата не успеа!</string>
   <string name="upload_failed">Не ја пронајдов податотеката. Пробајте со друга.</string>
-  <string name="authentication_failed">Заверката не успеа!</string>
+  <string name="authentication_failed">Заверката не успеа. Најавете се повторно.</string>
   <string name="uploading_started">Подигањето започна</string>
   <string name="upload_completed_notification_title">Податотеката „%1$s“ е подигната!</string>
   <string name="upload_completed_notification_text">Допрете за да го погледате подигањето</string>
@@ -103,7 +103,7 @@
   <string name="preference_license">Стандардна лиценца</string>
   <string name="use_previous">Користи претходен наслов/опис</string>
   <string name="allow_gps">Автоматски давај тековна местоположба</string>
-  <string name="allow_gps_summary">Добивање на тековната местоположба за да се дадат предлози за категории, доколку сликата нема геоознаки</string>
+  <string name="allow_gps_summary">Става геоознака од тековната местоположба во слика (ако ја нема). Предупредување: ова ви го разоткрива наоѓалиштето.</string>
   <string name="preference_theme">Ноќен режим</string>
   <string name="preference_theme_summary">Користи темен изглед</string>
   <string name="license_name_cc_by_sa_four"> Наведи извор-Сподели под исти услови 4.0</string>
@@ -272,6 +272,8 @@
   <string name="share_app_title">Сподели прилог</string>
   <string name="share_coordinates_not_present">Не беа укажани координати при изборот на сликата</string>
   <string name="error_fetching_nearby_places">Грешка при добивањето на околните места.</string>
+  <string name="appwidget_img">Слика на денот</string>
+  <string name="app_widget_heading">Слика на денот</string>
   <string name="successful_wikidata_edit">Сликата е успешно додадена кон %1$s на Википодатоците!</string>
   <string name="wikidata_edit_failure">Не успеав да ја изменам соодветната единица на Википодатоците!</string>
   <string name="menu_set_wallpaper">Задај позадина</string>

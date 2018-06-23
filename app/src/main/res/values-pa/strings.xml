@@ -16,7 +16,7 @@
   <string name="login_success">ਦਾਖ਼ਲਾ ਸਫ਼ਲ ਹੋਇਆ!</string>
   <string name="login_failed">ਦਾਖ਼ਲਾ ਫੇਲ੍ਹ ਹੋਇਆ!</string>
   <string name="upload_failed">ਫ਼ਾਇਲ ਦੀ ਖੋਜ ਨਹੀਂ ਹੋ ਸਕੀ। ਕਿਰਪਾ ਕਰਕੇ ਹੋਰ ਫ਼ਾਇਲ ਖੋਜੋ।</string>
-  <string name="authentication_failed">ਪ੍ਰਮਾਣਤਾ ਫੇਲ੍ਹ ਹੋਈ!</string>
+  <string name="authentication_failed" fuzzy="true">ਪ੍ਰਮਾਣਤਾ ਫੇਲ੍ਹ ਹੋਈ!</string>
   <string name="uploading_started">ਅੱਪਲੋਡ ਸ਼ੁਰੂ ਹੋਇਆ!</string>
   <string name="upload_completed_notification_title">%1$s ਅੱਪਲੋਡ ਹੋ ਗਏ!</string>
   <string name="upload_completed_notification_text">ਆਪਣਾ ਅੱਪਲੋਡ ਵੇਖਣ ਲਈ ਥਪੇੜੋ</string>

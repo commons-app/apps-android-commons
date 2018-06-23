@@ -21,7 +21,7 @@
   <string name="login_success">¡Identificación correuta!</string>
   <string name="login_failed">¡Falló l\'aniciu de sesión!</string>
   <string name="upload_failed">Nun s\'alcontró\'l ficheru. Tenta con otru.</string>
-  <string name="authentication_failed">¡Falló la identificación!</string>
+  <string name="authentication_failed">Falló la identificación, anicia sesión nuevamente</string>
   <string name="uploading_started">Principió la xuba</string>
   <string name="upload_completed_notification_title">¡%1$s xubíu!</string>
   <string name="upload_completed_notification_text">Toque pa ver la xuba</string>
@@ -103,7 +103,7 @@
   <string name="preference_license">Llicencia predeterminada</string>
   <string name="use_previous">Usar un títulu/descripción anterior</string>
   <string name="allow_gps">Llograr automáticamente l\'allugamientu actual</string>
-  <string name="allow_gps_summary">Recuperar l\'allugamientu actual pa ufiertar suxerencies de categoríes si la imaxe nun tien etiquetes xeográfiques</string>
+  <string name="allow_gps_summary">Recupera la posición actual si la imaxe nun tien etiquetes xeográfiques, y marca la imaxe con ella. Atención: Esto revelará\'l to allugamientu actual.</string>
   <string name="preference_theme">Mou nocherniegu</string>
   <string name="preference_theme_summary">Usar tema escuru</string>
   <string name="license_name_cc_by_sa_four"> Reconocimientu-CompartirIgual 4.0</string>
@@ -272,6 +272,10 @@
   <string name="share_app_title">Compartir app</string>
   <string name="share_coordinates_not_present">Nun s\'especificaron les coordenaes al escoyer la imaxe</string>
   <string name="error_fetching_nearby_places">Error al llograr los llugares cercanos.</string>
+  <string name="appwidget_img">Semeya del día</string>
+  <string name="app_widget_heading">Semeya del día</string>
+  <string name="successful_wikidata_edit">Añadióse correutamente la imaxe a %1$s en Wikidata.</string>
+  <string name="wikidata_edit_failure">Nun pudo anovase la entidá de Wikidata correspondiente.</string>
   <string name="menu_set_wallpaper">Definir fondu</string>
   <string name="wallpaper_set_successfully">Fondu definíu correutamente</string>
 </resources>
