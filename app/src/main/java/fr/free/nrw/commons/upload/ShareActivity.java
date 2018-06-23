@@ -34,6 +34,8 @@ import com.facebook.drawee.generic.GenericDraweeHierarchyBuilder;
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.github.chrisbanes.photoview.PhotoView;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
@@ -405,8 +407,9 @@ public class ShareActivity
             if (!duplicateCheckPassed) {
                 //Test SHA1 of image to see if it matches SHA1 of a file on Commons
                 try {
-                    InputStream inputStream = getContentResolver().openInputStream(mediaUri);
-                    String fileSHA1 = getSHA1(inputStream);
+                    //InputStream inputStream = getContentResolver().openInputStream(mediaUri);
+                    FileInputStream fileInputStream = new FileInputStream(new File(mediaUri.toString()));
+                    String fileSHA1 = getSHA1(fileInputStream);
                     Timber.d("Input stream created from %s", mediaUri.toString());
                     Timber.d("File SHA1 is: %s", fileSHA1);
 
