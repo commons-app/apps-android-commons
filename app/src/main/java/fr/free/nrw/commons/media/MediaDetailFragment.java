@@ -9,6 +9,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.text.Editable;
+import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
@@ -22,6 +23,9 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -45,19 +49,23 @@ import fr.free.nrw.commons.mwapi.MediaWikiApi;
 import fr.free.nrw.commons.ui.widget.CompatTextView;
 import timber.log.Timber;
 
+import static android.view.View.GONE;
+import static android.view.View.VISIBLE;
 import static android.widget.Toast.LENGTH_SHORT;
 
 public class MediaDetailFragment extends CommonsDaggerSupportFragment {
 
     private boolean editable;
+    private boolean isCategoryImage;
     private MediaDetailPagerFragment.MediaDetailProvider detailProvider;
     private int index;
 
-    public static MediaDetailFragment forMedia(int index, boolean editable) {
+    public static MediaDetailFragment forMedia(int index, boolean editable, boolean isCategoryImage) {
         MediaDetailFragment mf = new MediaDetailFragment();
 
         Bundle state = new Bundle();
         state.putBoolean("editable", editable);
+        state.putBoolean("isCategoryImage", isCategoryImage);
         state.putInt("index", index);
         state.putInt("listIndex", 0);
         state.putInt("listTop", 0);
@@ -72,21 +80,37 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
     @Inject
     MediaWikiApi mwApi;
 
-
-    private MediaWikiImageView image;
-    private MediaDetailSpacer spacer;
     private int initialListTop = 0;
 
-    private TextView title;
-    private TextView desc;
-    private TextView license;
-    private TextView coordinates;
-    private TextView uploadedDate;
-    private TextView seeMore;
-    private LinearLayout nominatedforDeletion;
-    private LinearLayout categoryContainer;
-    private Button delete;
-    private ScrollView scrollView;
+    @BindView(R.id.mediaDetailImage)
+    MediaWikiImageView image;
+    @BindView(R.id.mediaDetailSpacer)
+    MediaDetailSpacer spacer;
+    @BindView(R.id.mediaDetailTitle)
+    TextView title;
+    @BindView(R.id.mediaDetailDesc)
+    TextView desc;
+    @BindView(R.id.mediaDetailAuthor)
+    TextView author;
+    @BindView(R.id.mediaDetailLicense)
+    TextView license;
+    @BindView(R.id.mediaDetailCoordinates)
+    TextView coordinates;
+    @BindView(R.id.mediaDetailuploadeddate)
+    TextView uploadedDate;
+    @BindView(R.id.seeMore)
+    TextView seeMore;
+    @BindView(R.id.nominatedDeletionBanner)
+    LinearLayout nominatedForDeletion;
+    @BindView(R.id.mediaDetailCategoryContainer)
+    LinearLayout categoryContainer;
+    @BindView(R.id.authorLinearLayout)
+    LinearLayout authorLayout;
+    @BindView(R.id.nominateDeletion)
+    Button delete;
+    @BindView(R.id.mediaDetailScrollView)
+    ScrollView scrollView;
+
     private ArrayList<String> categoryNames;
     private boolean categoriesLoaded = false;
     private boolean categoriesPresent = false;
@@ -96,11 +120,15 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
     private AsyncTask<Void, Void, Boolean> detailFetchTask;
     private LicenseList licenseList;
 
+    //Had to make this class variable, to implement various onClicks, which access the media, also I fell why make separate variables when one can serve the purpose
+    private Media media;
+
     @Override
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         outState.putInt("index", index);
         outState.putBoolean("editable", editable);
+        outState.putBoolean("isCategoryImage", isCategoryImage);
 
         getScrollPosition();
         outState.putInt("listTop", initialListTop);
@@ -116,32 +144,28 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
 
         if (savedInstanceState != null) {
             editable = savedInstanceState.getBoolean("editable");
+            isCategoryImage = savedInstanceState.getBoolean("isCategoryImage");
             index = savedInstanceState.getInt("index");
             initialListTop = savedInstanceState.getInt("listTop");
         } else {
             editable = getArguments().getBoolean("editable");
+            isCategoryImage = getArguments().getBoolean("isCategoryImage");
             index = getArguments().getInt("index");
             initialListTop = 0;
         }
+
         categoryNames = new ArrayList<>();
         categoryNames.add(getString(R.string.detail_panel_cats_loading));
 
         final View view = inflater.inflate(R.layout.fragment_media_detail, container, false);
 
-        image = (MediaWikiImageView) view.findViewById(R.id.mediaDetailImage);
-        scrollView = (ScrollView) view.findViewById(R.id.mediaDetailScrollView);
+        ButterKnife.bind(this,view);
 
-        // Detail consists of a list view with main pane in header view, plus category list.
-        spacer = (MediaDetailSpacer) view.findViewById(R.id.mediaDetailSpacer);
-        title = (TextView) view.findViewById(R.id.mediaDetailTitle);
-        desc = (TextView) view.findViewById(R.id.mediaDetailDesc);
-        license = (TextView) view.findViewById(R.id.mediaDetailLicense);
-        coordinates = (TextView) view.findViewById(R.id.mediaDetailCoordinates);
-        uploadedDate = (TextView) view.findViewById(R.id.mediaDetailuploadeddate);
-        seeMore = (TextView) view.findViewById(R.id.seeMore);
-        nominatedforDeletion = (LinearLayout) view.findViewById(R.id.nominatedDeletionBanner);
-        delete = (Button) view.findViewById(R.id.nominateDeletion);
-        categoryContainer = (LinearLayout) view.findViewById(R.id.mediaDetailCategoryContainer);
+        if (isCategoryImage){
+            authorLayout.setVisibility(VISIBLE);
+        } else {
+            authorLayout.setVisibility(GONE);
+        }
 
         licenseList = new LicenseList(getActivity());
 
@@ -179,7 +203,7 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
     @Override
     public void onResume() {
         super.onResume();
-        Media media = detailProvider.getMediaAtPosition(index);
+        media = detailProvider.getMediaAtPosition(index);
         if (media == null) {
             // Ask the detail provider to ping us when we're ready
             Timber.d("MediaDetailFragment not yet ready to display details; registering observer");
@@ -192,17 +216,18 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
                     Timber.d("MediaDetailFragment ready to display delayed details!");
                     detailProvider.unregisterDataSetObserver(dataObserver);
                     dataObserver = null;
-                    displayMediaDetails(detailProvider.getMediaAtPosition(index));
+                    media=detailProvider.getMediaAtPosition(index);
+                    displayMediaDetails();
                 }
             };
             detailProvider.registerDataSetObserver(dataObserver);
         } else {
             Timber.d("MediaDetailFragment ready to display details");
-            displayMediaDetails(media);
+            displayMediaDetails();
         }
     }
 
-    private void displayMediaDetails(final Media media) {
+    private void displayMediaDetails() {
         //Always load image from Internet to allow viewing the desc, license, and cats
         image.setMedia(media);
 
@@ -239,7 +264,6 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
                 if (success) {
                     extractor.fill(media);
                     setTextFields(media);
-                    setOnClickListeners(media);
                 } else {
                     Timber.d("Failed to load photo details.");
                 }
@@ -290,71 +314,99 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
         }
         rebuildCatList();
 
+        if(media.getCreator() == null || media.getCreator().equals("")) {
+            authorLayout.setVisibility(GONE);
+        } else {
+            author.setText(media.getCreator());
+        }
+
         checkDeletion(media);
     }
 
-    private void setOnClickListeners(final Media media) {
-        if (licenseLink(media) != null) {
-            license.setOnClickListener(v -> openWebBrowser(licenseLink(media)));
+    @OnClick(R.id.mediaDetailLicense)
+    public void onMediaDetailLicenceClicked(){
+        if (!TextUtils.isEmpty(licenseLink(media))) {
+            openWebBrowser(licenseLink(media));
         } else {
-            Toast toast = Toast.makeText(getContext(), getString(R.string.null_url), Toast.LENGTH_SHORT);
-            toast.show();
+            if(isCategoryImage) {
+                Timber.d("Unable to fetch license URL for %s", media.getLicense());
+            } else {
+                Toast toast = Toast.makeText(getContext(), getString(R.string.null_url), Toast.LENGTH_SHORT);
+                toast.show();
+            }
         }
+    }
+
+    @OnClick(R.id.mediaDetailCoordinates)
+    public void onMediaDetailCoordinatesClicked(){
         if (media.getCoordinates() != null) {
-            coordinates.setOnClickListener(v -> openMap(media.getCoordinates()));
+            openMap(media.getCoordinates());
         }
-        if (delete.getVisibility() == View.VISIBLE) {
-            delete.setOnClickListener(v -> {
-                delete.setEnabled(false);
-                delete.setTextColor(getResources().getColor(R.color.deleteButtonLight));
-                AlertDialog.Builder alert = new AlertDialog.Builder(getActivity());
-                alert.setMessage("Why should this file be deleted?");
-                final EditText input = new EditText(getActivity());
-                alert.setView(input);
-                input.requestFocus();
-                alert.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int whichButton) {
-                        String reason = input.getText().toString();
-                        DeleteTask deleteTask = new DeleteTask(getActivity(), media, reason);
-                        deleteTask.execute();
-                    }
-                });
-                alert.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int whichButton) {
-                    }
-                });
-                AlertDialog d = alert.create();
-                input.addTextChangedListener(new TextWatcher() {
-                    private void handleText() {
-                        final Button okButton = d.getButton(AlertDialog.BUTTON_POSITIVE);
-                        if (input.getText().length() == 0) {
-                            okButton.setEnabled(false);
-                        } else {
-                            okButton.setEnabled(true);
-                        }
-                    }
+    }
 
-                    @Override
-                    public void afterTextChanged(Editable arg0) {
-                        handleText();
-                    }
+    @OnClick(R.id.nominateDeletion)
+    public void onDeleteButtonClicked(){
+        //Reviewer correct me if i have misunderstood something over here
+        //But how does this  if (delete.getVisibility() == View.VISIBLE) {
+        //            enableDeleteButton(true);   makes sense ?
+        AlertDialog.Builder alert = new AlertDialog.Builder(getActivity());
+        alert.setMessage("Why should this file be deleted?");
+        final EditText input = new EditText(getActivity());
+        alert.setView(input);
+        input.requestFocus();
+        alert.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int whichButton) {
+                String reason = input.getText().toString();
+                DeleteTask deleteTask = new DeleteTask(getActivity(), media, reason);
+                deleteTask.execute();
+                enableDeleteButton(false);
+            }
+        });
+        alert.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int whichButton) {
+            }
+        });
+        AlertDialog d = alert.create();
+        input.addTextChangedListener(new TextWatcher() {
+            private void handleText() {
+                final Button okButton = d.getButton(AlertDialog.BUTTON_POSITIVE);
+                if (input.getText().length() == 0) {
+                    okButton.setEnabled(false);
+                } else {
+                    okButton.setEnabled(true);
+                }
+            }
 
-                    @Override
-                    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-                    }
+            @Override
+            public void afterTextChanged(Editable arg0) {
+                handleText();
+            }
 
-                    @Override
-                    public void onTextChanged(CharSequence s, int start, int before, int count) {
-                    }
-                });
-                d.show();
-                d.getButton(AlertDialog.BUTTON_POSITIVE).setEnabled(false);
-            });
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+            }
+        });
+        d.show();
+        d.getButton(AlertDialog.BUTTON_POSITIVE).setEnabled(false);
+    }
+
+    @OnClick(R.id.seeMore)
+    public void onSeeMoreClicked(){
+        if(nominatedForDeletion.getVisibility()== VISIBLE) {
+            openWebBrowser(media.getFilePageTitle().getMobileUri().toString());
         }
-        if (nominatedforDeletion.getVisibility() == View.VISIBLE){
-            seeMore.setOnClickListener(v -> {
-                openWebBrowser(media.getFilePageTitle().getMobileUri().toString());
-            });
+    }
+
+    private void enableDeleteButton(boolean visibility) {
+        delete.setEnabled(visibility);
+        if(visibility) {
+            delete.setTextColor(getResources().getColor(R.color.primaryTextColor));
+        } else {
+            delete.setTextColor(getResources().getColor(R.color.deleteButtonLight));
         }
     }
 
@@ -431,7 +483,7 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
         if (date == null || date.toString() == null || date.toString().isEmpty()) {
             return "Uploaded date not available";
         }
-        SimpleDateFormat formatter = new SimpleDateFormat("dd MMM yyyy");
+        SimpleDateFormat formatter = new SimpleDateFormat("dd MMM yyyy", Locale.getDefault());
         return formatter.format(date);
     }
 
@@ -449,12 +501,11 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
 
     private void checkDeletion(Media media){
         if (media.getRequestedDeletion()){
-            delete.setVisibility(View.GONE);
-            nominatedforDeletion.setVisibility(View.VISIBLE);
-        }
-        else{
-            delete.setVisibility(View.VISIBLE);
-            nominatedforDeletion.setVisibility(View.GONE);
+            delete.setVisibility(GONE);
+            nominatedForDeletion.setVisibility(VISIBLE);
+        } else if (!isCategoryImage) {
+            delete.setVisibility(VISIBLE);
+            nominatedForDeletion.setVisibility(GONE);
         }
     }
 

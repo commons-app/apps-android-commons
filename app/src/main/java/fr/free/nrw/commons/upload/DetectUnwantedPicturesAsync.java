@@ -1,10 +1,8 @@
 package fr.free.nrw.commons.upload;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.BitmapRegionDecoder;
-import android.net.Uri;
 import android.os.AsyncTask;
 import android.support.v7.app.AlertDialog;
 

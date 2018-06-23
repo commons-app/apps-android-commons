@@ -3,10 +3,11 @@
 * 1917 Ekim Devrimi
 * Gorizon
 * Marmase
+* Mirzali
 -->
 <resources>
   <string name="crash_dialog_title">Commons lığiya</string>
   <string name="crash_dialog_text">Oops. Thebayo nigurweyino!</string>
   <string name="crash_dialog_comment_prompt">Şıma se kerd bı, marê vacê. Dıma e-posta ra bırışê marê.  Ney timar kerdışi de marê beno desteg!</string>
-  <string name="crash_dialog_ok_toast">Teşekur kena</string>
+  <string name="crash_dialog_ok_toast">Teşekur kenan!</string>
 </resources>

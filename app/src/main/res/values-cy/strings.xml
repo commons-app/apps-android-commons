@@ -16,7 +16,7 @@
   <string name="login_success">Llwyddodd y mewngofnodi!</string>
   <string name="login_failed">Methodd y mewngofnodi!</string>
   <string name="upload_failed">Ni chafwyd hyd i\'r ffeil. Ceisiwch un arall.</string>
-  <string name="authentication_failed">Methodd y dilysu!</string>
+  <string name="authentication_failed" fuzzy="true">Methodd y dilysu!</string>
   <string name="uploading_started">Dechreuodd yr uwchlwytho!</string>
   <string name="upload_completed_notification_title">Uwchlwythwyd %1$s!</string>
   <string name="upload_completed_notification_text">Tapiwch i weld eich uwchlwythiad</string>
@@ -43,8 +43,6 @@
   <string name="share_title_hint">Teitl</string>
   <string name="share_description_hint">Disgrifiad</string>
   <string name="login_failed_network">Yn methu mewngofnodi - methodd y rhwydwaith</string>
-  <string name="login_failed_username">Yn methu mewngofnodi - gwirwch eich enw defnyddiwr</string>
-  <string name="login_failed_password">Yn methu mewngofnodi - gwirwch eich cyfrinair</string>
   <string name="login_failed_throttled">Cafwyd gormod o ymgeision aflwyddiannus. Oedwch ennyd cyn ceisio eto.</string>
   <string name="login_failed_blocked">Ymddiheurwn. Mae\'r defnyddiwr hwn wedi ei flocio ar Gomin Wikimedia</string>
   <string name="login_failed_2fa_needed">Mae\'n rhaid i chi roi eich cod adnabod 2 ffactor.</string>
@@ -96,7 +94,7 @@
   <string name="preference_license" fuzzy="true">Trwydded</string>
   <string name="use_previous">Defnydiwch y teitl/disgrifiad blaenorol</string>
   <string name="allow_gps">Defnyddiwch y lleoliad cyfredol</string>
-  <string name="allow_gps_summary">Canfyddwch eich lleoliad, er mwyn i ni gynnig categori (os nad ydych wedi nodi\'r cyfesurynnau).</string>
+  <string name="allow_gps_summary" fuzzy="true">Canfyddwch eich lleoliad, er mwyn i ni gynnig categori (os nad ydych wedi nodi\'r cyfesurynnau).</string>
   <string name="preference_theme">Modd fin nos</string>
   <string name="preference_theme_summary">Defnyddiwch thema tywyll</string>
   <string name="license_name_cc_by_sa_four"> Attribution-ShareAlike 4.0</string>

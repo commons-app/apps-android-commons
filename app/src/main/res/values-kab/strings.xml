@@ -15,7 +15,7 @@
   <string name="login_success">Tuqqna tedda!</string>
   <string name="login_failed">Tqqna ur teddi ara!</string>
   <string name="upload_failed">Ulac afaylu. Ɛreḍ wayeḍ ma ulac aɣilif.</string>
-  <string name="authentication_failed">Asesteb yecceḍ!</string>
+  <string name="authentication_failed" fuzzy="true">Asesteb yecceḍ!</string>
   <string name="uploading_started">Asali yebda!</string>
   <string name="upload_completed_notification_title">%1$s yuli!</string>
   <string name="upload_completed_notification_text">Senned akken ad twaliḍ asali-ik</string>
@@ -42,8 +42,6 @@
   <string name="share_title_hint">Azwel</string>
   <string name="share_description_hint">Aglam</string>
   <string name="login_failed_network">Ur izmir ara ad yeqqen - tuccḍa n uẓeṭṭa</string>
-  <string name="login_failed_username">Ur izmir ara ad yeqqen - wali isem-ik n useqdac</string>
-  <string name="login_failed_password">Ur izmir ara ad yeqqen - wali awal-ik uffir</string>
   <string name="login_failed_throttled">Ddeq n uɛraḍ ur yeddin ara. Ɛreḍ akka di kra n tisdatin</string>
   <string name="login_failed_blocked">Suref-aɣ, aseqdac-agi yewḥel di Commons</string>
   <string name="login_failed_2fa_needed">Yessefk ad d-muddeḍ tangalt n n usesbteb s snat n tarrayin.</string>
@@ -95,7 +93,7 @@
   <string name="preference_license" fuzzy="true">Turagt</string>
   <string name="use_previous">Seqdec azwel neɣ aglam yezrin</string>
   <string name="allow_gps">Awi s wudem awurman adig amiran</string>
-  <string name="allow_gps_summary">Awi adig amiran akken ad tsumreḍ taggayt ma yella tugna ur tettwacreḍ ara di tirakalt</string>
+  <string name="allow_gps_summary" fuzzy="true">Awi adig amiran akken ad tsumreḍ taggayt ma yella tugna ur tettwacreḍ ara di tirakalt</string>
   <string name="preference_theme">Askar  n yiḍ</string>
   <string name="preference_theme_summary">Seqdec asentel aberkan</string>
   <string name="license_name_cc_by_sa_four"> Attribution-ShareAlike 4.0</string>
@@ -138,8 +136,8 @@
   <string name="detail_description_empty">Ulac aglam</string>
   <string name="detail_license_empty">Turagt tarussint</string>
   <string name="menu_refresh">Smiren</string>
-  <string name="read_storage_permission_rationale">Yesra tasiregt: Ɣeṛ asekles azɣaray. Asnas ur yezmir ara ad yeddu s war aya.</string>
-  <string name="write_storage_permission_rationale">Ysera tasiregt: Aru deg usekles azɣaray. Asnas ur yezmir ara ad yeddu s war aya.</string>
+  <string name="read_storage_permission_rationale" fuzzy="true">Yesra tasiregt: Ɣeṛ asekles azɣaray. Asnas ur yezmir ara ad yeddu s war aya.</string>
+  <string name="write_storage_permission_rationale" fuzzy="true">Ysera tasiregt: Aru deg usekles azɣaray. Asnas ur yezmir ara ad yeddu s war aya.</string>
   <string name="location_permission_rationale">Tasiregt tafrayant: Awi adig amiran i yisumar n taggayt</string>
   <string name="ok">IH</string>
   <string name="title_activity_nearby">Idigen iqeṛben</string>

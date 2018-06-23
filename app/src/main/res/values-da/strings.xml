@@ -26,7 +26,7 @@
   <string name="login_success">Du er nu logget på!</string>
   <string name="login_failed">Det mislykkedes at logge på!</string>
   <string name="upload_failed">Filen blev ikke fundet. Forsøg med en anden fil.</string>
-  <string name="authentication_failed">Godkendelse mislykkedes!</string>
+  <string name="authentication_failed" fuzzy="true">Godkendelse mislykkedes!</string>
   <string name="uploading_started">Overførsel begyndt!</string>
   <string name="upload_completed_notification_title">%1$s overført!</string>
   <string name="upload_completed_notification_text">Tryk for at få vist din upload</string>
@@ -54,8 +54,6 @@
   <string name="add_title_toast">Angiv venligt en titel for denne fil</string>
   <string name="share_description_hint">Beskrivelse</string>
   <string name="login_failed_network">Kan ikke logge på - netværksfejl</string>
-  <string name="login_failed_username">Ude af stand til at logge på - tjek venligst dit brugernavn</string>
-  <string name="login_failed_password">Ude af stand til at logge på - tjek venligst din adgangskode</string>
   <string name="login_failed_throttled">Alt for mange mislykkede forsøg. Prøv igen om et par minutter.</string>
   <string name="login_failed_blocked">Beklager, denne bruger er blevet blokeret på Commons</string>
   <string name="login_failed_2fa_needed">Du skal angive din tofaktorgodkendelseskode.</string>
@@ -107,7 +105,7 @@
   <string name="preference_license">Standardlicens</string>
   <string name="use_previous">Brug forrige titel/beskrivelse</string>
   <string name="allow_gps">Hent automatisk nuværende placering</string>
-  <string name="allow_gps_summary">Hent nuværende placering for at tilbyde kategoriforslag hvis billedet ikke er geografisk mærket</string>
+  <string name="allow_gps_summary" fuzzy="true">Hent nuværende placering for at tilbyde kategoriforslag hvis billedet ikke er geografisk mærket</string>
   <string name="preference_theme">Nat-tilstand</string>
   <string name="preference_theme_summary">Brug mørkt tema</string>
   <string name="license_name_cc_by_sa_four"> Attribution-ShareAlike 4.0</string>
@@ -159,8 +157,8 @@
   <string name="detail_description_empty">Ingen beskrivelse</string>
   <string name="detail_license_empty">Ukendt licens</string>
   <string name="menu_refresh">Opdater</string>
-  <string name="read_storage_permission_rationale">Krævet tilladelse: Læs eksternt lager. Programmet kan ikke fungere uden denne tilladelse.</string>
-  <string name="write_storage_permission_rationale">Krævet tilladelse: Skriv til eksternt lager. Program kan ikke fungere uden denne funktion.</string>
+  <string name="read_storage_permission_rationale" fuzzy="true">Krævet tilladelse: Læs eksternt lager. Programmet kan ikke fungere uden denne tilladelse.</string>
+  <string name="write_storage_permission_rationale" fuzzy="true">Krævet tilladelse: Skriv til eksternt lager. Program kan ikke fungere uden denne funktion.</string>
   <string name="location_permission_rationale">Valgfri tilladelse: Hent nuværende position for kategoriforslag</string>
   <string name="ok">O.k.</string>
   <string name="title_activity_nearby">Steder i nærheden</string>

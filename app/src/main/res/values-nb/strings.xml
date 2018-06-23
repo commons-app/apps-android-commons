@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Authors:
+* Citadell
 * Danmichaelo
+* Imre Eilertsen
 * JohSan65
 * Jon Harald Søby
 * Laaknor
@@ -21,7 +23,7 @@
   <string name="login_success">Innloggingen var vellykket!</string>
   <string name="login_failed">Innloggingen feilet!</string>
   <string name="upload_failed">Filen ble ikke funnet. Forsøk med en annen fil.</string>
-  <string name="authentication_failed">Autentiseringen feilet!</string>
+  <string name="authentication_failed">Autentiseringen feilet, vennligst logg inn igjen</string>
   <string name="uploading_started">Opplastingen startet</string>
   <string name="upload_completed_notification_title">%1$s lastet opp!</string>
   <string name="upload_completed_notification_text">Trykk for å vise din opplasting</string>
@@ -48,8 +50,6 @@
   <string name="share_title_hint">Tittel</string>
   <string name="share_description_hint">Beskrivelse</string>
   <string name="login_failed_network">Innlogging feilet - nettverksproblem</string>
-  <string name="login_failed_username">Innlogging feilet - sjekk brukernavnet ditt</string>
-  <string name="login_failed_password">Innlogging feilet - sjekk passordet ditt</string>
   <string name="login_failed_throttled">For mange misslykkede forsøk. Vennligst prøv igjen om noen få minutter.</string>
   <string name="login_failed_blocked">Beklager, denne brukeren har blitt blokkert på Commons</string>
   <string name="login_failed_2fa_needed">Du må oppgi tofaktorautentiseringskoden din.</string>
@@ -101,7 +101,7 @@
   <string name="preference_license">Standardlisens</string>
   <string name="use_previous">Bruk forrige tittel/beskrivelse</string>
   <string name="allow_gps">Hent automatisk nåværende plassering</string>
-  <string name="allow_gps_summary">Hent nåværende plassering for å tilby kategoriforslag om bildet ikke er geotagget</string>
+  <string name="allow_gps_summary" fuzzy="true">Hent nåværende plassering for å tilby kategoriforslag om bildet ikke er geotagget</string>
   <string name="preference_theme">Nattmodus</string>
   <string name="preference_theme_summary">Bruk mørk drakt</string>
   <string name="license_name_cc_by_sa_four">Navngivelse-Del på samme vilkår 4.0</string>
@@ -150,8 +150,8 @@
   <string name="detail_description_empty">Ingen beskrivelse</string>
   <string name="detail_license_empty">Ukjent lisens</string>
   <string name="menu_refresh">Gjenoppfrisk</string>
-  <string name="read_storage_permission_rationale">Nødvendig tillatelse: Lese ekstern lagring. Appen virker ikke uten dette.</string>
-  <string name="write_storage_permission_rationale">Påkrevd tillatelse: Skriv til ekstern lagring. Appen fungerer ikke uten dette.</string>
+  <string name="read_storage_permission_rationale" fuzzy="true">Nødvendig tillatelse: Lese ekstern lagring. Appen virker ikke uten dette.</string>
+  <string name="write_storage_permission_rationale" fuzzy="true">Påkrevd tillatelse: Skriv til ekstern lagring. Appen fungerer ikke uten dette.</string>
   <string name="location_permission_rationale">Valgfri tillatelse: Hent nåværende posisjon for kategoriforslag</string>
   <string name="ok">OK</string>
   <string name="title_activity_nearby">Plasser i nærheten</string>
@@ -233,4 +233,7 @@
   <string name="notifications_mention">%1$s nevnte deg på %2$s.</string>
   <string name="toggle_view_button">Skift visning</string>
   <string name="about_faq" fuzzy="true">Ofte stilte spørsmål</string>
+  <string name="no_internet">Internett er utilgjengelig</string>
+  <string name="about_translate">&lt;u&gt;Oversett&lt;/u&gt;</string>
+  <string name="retry">Prøv igjen</string>
 </resources>

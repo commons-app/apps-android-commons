@@ -7,7 +7,6 @@ import android.app.PendingIntent;
 import android.content.ContentResolver;
 import android.content.ContentValues;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.v4.app.NotificationCompat;
@@ -23,7 +22,6 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import javax.inject.Inject;
-import javax.inject.Named;
 
 import fr.free.nrw.commons.HandlerService;
 import fr.free.nrw.commons.R;
@@ -36,6 +34,7 @@ import fr.free.nrw.commons.contributions.ContributionsContentProvider;
 import fr.free.nrw.commons.modifications.ModificationsContentProvider;
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
 import fr.free.nrw.commons.mwapi.UploadResult;
+import fr.free.nrw.commons.wikidata.WikidataEditService;
 import timber.log.Timber;
 
 public class UploadService extends HandlerService<Contribution> {
@@ -49,8 +48,8 @@ public class UploadService extends HandlerService<Contribution> {
     public static final String EXTRA_CAMPAIGN = EXTRA_PREFIX + ".campaign";
 
     @Inject MediaWikiApi mwApi;
+    @Inject WikidataEditService wikidataEditService;
     @Inject SessionManager sessionManager;
-    @Inject @Named("default_preferences") SharedPreferences prefs;
     @Inject ContributionDao contributionDao;
 
     private NotificationManager notificationManager;
@@ -137,6 +136,7 @@ public class UploadService extends HandlerService<Contribution> {
 
     @Override
     public void queue(int what, Contribution contribution) {
+        Timber.d("Upload service queue has contribution with wiki data entity id as %s", contribution.getWikiDataEntityId());
         switch (what) {
             case ACTION_UPLOAD_FILE:
 
@@ -231,10 +231,10 @@ public class UploadService extends HandlerService<Contribution> {
                     Timber.d("Successfully revalidated token!");
                 } else {
                     Timber.d("Unable to revalidate :(");
-                    // TODO: Put up a new notification, ask them to re-login
                     stopForeground(true);
                     Toast failureToast = Toast.makeText(this, R.string.authentication_failed, Toast.LENGTH_LONG);
                     failureToast.show();
+                    sessionManager.forceLogin(this);
                     return;
                 }
             }
@@ -253,6 +253,7 @@ public class UploadService extends HandlerService<Contribution> {
             if (!resultStatus.equals("Success")) {
                 showFailedNotification(contribution);
             } else {
+                wikidataEditService.createClaimWithLogging(contribution.getWikiDataEntityId(), filename);
                 contribution.setFilename(uploadResult.getCanonicalFilename());
                 contribution.setImageUrl(uploadResult.getImageUrl());
                 contribution.setState(Contribution.STATE_COMPLETED);

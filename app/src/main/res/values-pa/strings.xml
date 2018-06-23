@@ -16,7 +16,7 @@
   <string name="login_success">ਦਾਖ਼ਲਾ ਸਫ਼ਲ ਹੋਇਆ!</string>
   <string name="login_failed">ਦਾਖ਼ਲਾ ਫੇਲ੍ਹ ਹੋਇਆ!</string>
   <string name="upload_failed">ਫ਼ਾਇਲ ਦੀ ਖੋਜ ਨਹੀਂ ਹੋ ਸਕੀ। ਕਿਰਪਾ ਕਰਕੇ ਹੋਰ ਫ਼ਾਇਲ ਖੋਜੋ।</string>
-  <string name="authentication_failed">ਪ੍ਰਮਾਣਤਾ ਫੇਲ੍ਹ ਹੋਈ!</string>
+  <string name="authentication_failed" fuzzy="true">ਪ੍ਰਮਾਣਤਾ ਫੇਲ੍ਹ ਹੋਈ!</string>
   <string name="uploading_started">ਅੱਪਲੋਡ ਸ਼ੁਰੂ ਹੋਇਆ!</string>
   <string name="upload_completed_notification_title">%1$s ਅੱਪਲੋਡ ਹੋ ਗਏ!</string>
   <string name="upload_completed_notification_text">ਆਪਣਾ ਅੱਪਲੋਡ ਵੇਖਣ ਲਈ ਥਪੇੜੋ</string>
@@ -43,8 +43,6 @@
   <string name="share_title_hint">ਸਿਰਲੇਖ</string>
   <string name="share_description_hint">ਵੇਰਵਾ</string>
   <string name="login_failed_network">ਦਾਖ਼ਲਾ ਨਹੀਂ ਹੋ ਰਿਹਾ - ਨੈੱਟਵਰਕ ਫੇਲ੍ਹ ਹੋਇਆ ਹੈ</string>
-  <string name="login_failed_username">ਦਾਖ਼ਲਾ ਨਹੀਂ ਹੋ ਰਿਹਾ - ਆਪਣਾ ਵਰਤੋਂਕਾਰ ਨਾਂ ਚੈੱਕ ਕਰੋ</string>
-  <string name="login_failed_password">ਦਾਖ਼ਲਾ ਨਹੀਂ ਹੋ ਰਿਹਾ - ਆਪਣਾ ਪਾਸਵਰਡ ਚੈੱਕ ਕਰੋ ਜੀ</string>
   <string name="login_failed_throttled">ਬਹੁਤ ਸਾਰੀਆਂ ਅਸਫ਼ਲ ਕੋਸ਼ਿਸ਼ਾਂ। ਥੋੜ੍ਹੀ ਦੇਰ ਬਾਅਦ ਕੋਸ਼ਿਸ਼ ਕਰੋ ਜੀ।</string>
   <string name="login_failed_blocked">ਅਫ਼ਸੋਸ, ਇਹ ਵਰਤੋਂਕਾਰ ਕਾਮਨਜ਼ ਉੱਤੇ ਬਲਾਕ ਕਰ ਦਿੱਤਾ ਗਿਆ ਹੈ</string>
   <string name="login_failed_generic">ਦਾਖ਼ਲਾ ਫੇਲ੍ਹ ਹੋਇਆ</string>
@@ -137,7 +135,7 @@
   <string name="detail_description_empty">ਕੋਈ ਵੇਰਵਾ ਨਹੀਂ</string>
   <string name="detail_license_empty">ਅਣਜਾਣ ਲਸੰਸ</string>
   <string name="menu_refresh">ਤਾਜ਼ਾ ਕਰੋ</string>
-  <string name="read_storage_permission_rationale">ਆਗਿਆ ਚਾਹੀਦੀ ਹੈ: ਬਾਹਰੀ ਸਟੋਰੇਜ ਬਾਰੇ। ਇਸ ਤੋਂ ਬਿਨਾਂ ਐਪ ਕਾਰਜ ਨਹੀਂ ਕਰ ਸਕੇਗੀ।</string>
+  <string name="read_storage_permission_rationale" fuzzy="true">ਆਗਿਆ ਚਾਹੀਦੀ ਹੈ: ਬਾਹਰੀ ਸਟੋਰੇਜ ਬਾਰੇ। ਇਸ ਤੋਂ ਬਿਨਾਂ ਐਪ ਕਾਰਜ ਨਹੀਂ ਕਰ ਸਕੇਗੀ।</string>
   <string name="ok">ਠੀਕ ਹੈ</string>
   <string name="title_activity_nearby">ਨਜ਼ਦੀਕੀ ਥਾਵਾਂ</string>
   <string name="no_nearby">ਕੋਈ ਨਜ਼ਦੀਕੀ ਥਾਵਾਂ ਨਹੀਂ ਮਿਲੀਆਂ</string>

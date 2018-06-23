@@ -29,7 +29,7 @@
   <string name="login_success">Επιτυχής σύνδεση!</string>
   <string name="login_failed">Η είσοδος απέτυχε!</string>
   <string name="upload_failed">Το αρχείο δεν βρέθηκε. Παρακαλώ δοκιμάστε ένα άλλο αρχείο.</string>
-  <string name="authentication_failed">Απέτυχε ο έλεγχος ταυτότητας!</string>
+  <string name="authentication_failed">Απέτυχε ο έλεγχος ταυτότητας, παρακαλώ συνδεθείτε ξανά</string>
   <string name="uploading_started">Η αποστολή ξεκίνησε!</string>
   <string name="upload_completed_notification_title">%1$s επιφορτώθηκε!</string>
   <string name="upload_completed_notification_text">Πατήστε για να προβάλλετε την αποστολή</string>
@@ -57,8 +57,7 @@
   <string name="add_title_toast">Παρακαλώ παρέχετε ένα τίτλο για αυτό το αρχείο</string>
   <string name="share_description_hint">Περιγραφή</string>
   <string name="login_failed_network">Δεν είναι δυνατή η σύνδεση - αποτυχία του δικτύου</string>
-  <string name="login_failed_username">Δεν είναι δυνατή η σύνδεση - ελέγξτε το όνομα χρήστη σας</string>
-  <string name="login_failed_password">Δεν είναι δυνατή η σύνδεση - παρακαλούμε ελέγξτε τον κωδικό σας</string>
+  <string name="login_failed_wrong_credentials">Αποτυχία σύνδεσης - παρακαλώ ελέγξτε το όνομα χρήστη και τον κωδικό σας</string>
   <string name="login_failed_throttled">Πάρα πολλές ανεπιτυχείς προσπάθειες. Παρακαλώ δοκιμάστε ξανά σε λίγα λεπτά.</string>
   <string name="login_failed_blocked">Συγνώμη, αυτός ο χρήστης έχει αποκλειστεί από τα Commons</string>
   <string name="login_failed_2fa_needed">Πρέπει να δώσετε τον κωδικό πιστοποίησης με δύο παράγοντες</string>
@@ -92,6 +91,7 @@
   <string name="categories_activity_title">Κατηγορίες</string>
   <string name="title_activity_settings">Ρυθμίσεις</string>
   <string name="title_activity_signup">Εγγραφή</string>
+  <string name="title_activity_featured_images">Προβεβλημμένες εικόνες</string>
   <string name="menu_about">Σχετικά</string>
   <string name="about_license">Λογισμικό ανοικτού κωδικού που κυκλοφορεί υπό την &lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/COPYING\"&gt;Άδεια Apache v2&lt;/a&gt;. Το Wikimedia Commons και το λογότυπο είναι εμπορικά σήματα του Ιδρύματος Wikimedia και χρησιμοποιούνται με άδεια από το Ίδρυμα Wikimedia. Δεν συμμετέχουμε  στην δημιουργία, ανάπτυξη ή συντήρηση  του Ιδρύματος  Wikimedia.</string>
   <string name="about_improve">Δημιουργήστε ένα νέο &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;GitHub θέμα&lt;/a&gt; για αναφορές σφαλμάτων και προτάσεις.</string>
@@ -111,7 +111,7 @@
   <string name="preference_license">Προεπιλεγμένη άδεια</string>
   <string name="use_previous">Χρήση προηγούμενου τίτλου/περιγραφής</string>
   <string name="allow_gps">Αυτόματη ανάκτηση τρέχουσας θέσης</string>
-  <string name="allow_gps_summary">Ανάκτηση τρέχουσας τοποθεσία για να σας προσφέρουμε προτάσεις κατηγοριών αν η εικόνα δεν είναι γεωσεσημασμένη.</string>
+  <string name="allow_gps_summary">Ανακτά την τρέχουσα τοποθεσία εάν η εικόνα δεν είναι γεωσεσημασμένη, και τις γεωσημάνσεις με αυτή. Προειδοποίηση: Αυτό θα αποκαλύψει την τρέχουσα τοποθεσία σας.</string>
   <string name="preference_theme">Νυχτερινή λειτουργία</string>
   <string name="preference_theme_summary">Χρήση σκοτεινού θέματος</string>
   <string name="license_name_cc_by_sa_four"> Attribution-ShareAlike 4.0</string>
@@ -157,14 +157,15 @@
   <string name="welcome_copyright_subtext">Αποφύγετε προστατευμένο υλικό  που βρήκατε από το Internet, καθώς και εικόνες, αφίσες, εξώφυλλα βιβλίων, κλπ.</string>
   <string name="welcome_final_text">Τι λες, μπορείς;</string>
   <string name="welcome_final_button_text">Ναι!</string>
+  <string name="welcome_help_button_text"/>
   <string name="detail_panel_cats_label">Κατηγορίες</string>
   <string name="detail_panel_cats_loading">Φόρτωση…</string>
   <string name="detail_panel_cats_none">Καμία επιλεγμένη</string>
   <string name="detail_description_empty">Καμία περιγραφή</string>
   <string name="detail_license_empty">Άγνωστη άδεια</string>
   <string name="menu_refresh">Ανανέωση</string>
-  <string name="read_storage_permission_rationale">Απαιτούμενη άδεια: Ανάγνωση εξωτερικής αποθήκευσης. Η εφαρμογή δεν μπορεί να λειτουργήσει χωρίς αυτή.</string>
-  <string name="write_storage_permission_rationale">Απαιτούμενη άδεια: Με εξωτερική αποθήκευση.Το πρόγραμμα δεν μπορεί να λειτουργήσει με αυτήν.</string>
+  <string name="read_storage_permission_rationale">Απαιτούμενη άδεια: Ανάγνωση εξωτερικής αποθήκευσης. Η εφαρμογή δεν μπορεί να έχει πρόσβαση στην συλλογή σας χωρίς αυτή.</string>
+  <string name="write_storage_permission_rationale">Απαιτούμενη άδεια: Με εξωτερική αποθήκευση. Το πρόγραμμα δεν μπορεί να έχει πρόσβαση στην κάμερα σας χωρίς αυτήν.</string>
   <string name="location_permission_rationale">Προαιρετική άδεια: Ανάκτηση τρέχουσας θέσης σας για προτάσεις κατηγοριών</string>
   <string name="ok">Εντάξει</string>
   <string name="title_activity_nearby">Κοντινοί Τόποι</string>
@@ -177,6 +178,8 @@
   <string name="media_detail_media_title">Τίτλος πολυμέσου</string>
   <string name="media_detail_description">Περιγραφή</string>
   <string name="media_detail_description_explanation">Η περιγραφή του πολυμέσου μπαίνει εδώ. Αυτή μπορεί να είναι σχετικά μεγάλη, και θα χρειαστεί να αναδιπλωθεί σε πολλές γραμμές. Ελπίζουμε ωστόσο ότι θα φαίνεται όμορφα.</string>
+  <string name="media_detail_author">Συγγραφέας</string>
+  <string name="media_detail_author_explanation">Το όνομα χρήστη του συγγραφέα της επιλεγμένης εικόνας πάει εδώ.</string>
   <string name="media_detail_uploaded_date">Ημερομηνία φόρτωσης</string>
   <string name="media_detail_license">Άδεια</string>
   <string name="media_detail_coordinates">Συντεταγμένες</string>
@@ -219,6 +222,7 @@
   <string name="navigation_item_logout">Αποσύνδεση</string>
   <string name="navigation_item_info">Σεμινάριο</string>
   <string name="navigation_item_notification">Ενημερώσεις</string>
+  <string name="navigation_item_featured_images">Επιλεγμένο</string>
   <string name="nearby_needs_permissions">Οι κοντινές τοποθεσίες δεν μπορούν να προβληθούν δίχως τις άδειες τοποθεσίας</string>
   <string name="no_description_found">δεν βρέθηκε περιγραφή</string>
   <string name="nearby_info_menu_commons_article">Σελίδα φακέλλου κοινής χρήσης</string>
@@ -255,17 +259,33 @@
   <string name="nearby_wikidata">Βικιδεδομένα</string>
   <string name="nearby_wikipedia">Βικιπαίδεια</string>
   <string name="nearby_commons">Κοινά</string>
-  <string name="about_rate_us"/>
+  <string name="about_rate_us">&lt;u&gt;Βαθμολογήστε μας&lt;/u&gt;</string>
   <string name="about_faq">&lt;u&gt;Συχνές ερωτήσεις&lt;/u&gt;</string>
   <string name="welcome_skip_button">Παράβλεψη εισαγωγής</string>
   <string name="no_internet">Το διαδίκτυο δεν είναι διαθέσιμο</string>
   <string name="internet_established">Το διαδίκτυο είναι διαθέσιμο</string>
   <string name="error_notifications">Σφάλμα κατά την συγκέντρωση ειδοποιήσεων</string>
   <string name="no_notifications">Δεν βρέθηκαν ειδοποιήσεις</string>
-  <string name="about_translate"/>
+  <string name="about_translate">&lt;u&gt;Μεταφράστε&lt;/u&gt;</string>
   <string name="about_translate_title">Γλώσσες</string>
   <string name="about_translate_message">Επιλέξτε την γλώσσα που θα θέλατε να υποβάλετε μεταφράσεις για αυτή</string>
   <string name="about_translate_proceed">Συνέχεια</string>
   <string name="about_translate_cancel">Ακύρωση</string>
   <string name="retry">Ξαναπροσπαθήστε</string>
+  <string name="showcase_view_got_it_button">Κατάλαβα!</string>
+  <string name="showcase_view_whole_nearby_activity">Αυτά είναι τα μέρη κοντά σας που χρειάζονται φωτογραφίες για να εικονογραφηθούν τα λήμματά τους στη Βικιπαίδεια</string>
+  <string name="showcase_view_list_icon">Πατώντας αυτό το κουμπί φέρνει μια λίστα αυτών των μερών</string>
+  <string name="showcase_view_plus_fab">Μπορείτε να ανεβάσετε μια εικόνα για οποιοδήποτε μέρος από την γκαλερί ή την κάμερά σας</string>
+  <string name="no_images_found">Δεν βρέθηκαν εικόνες!</string>
+  <string name="error_loading_images">Συνέβη σφάλμα κατά το ανέβασμα των εικόνων.</string>
+  <string name="image_uploaded_by">Ανέβηκε από: %1$s</string>
+  <string name="share_app_title">Κοινοποίηση εφαρμογής</string>
+  <string name="share_coordinates_not_present">Οι συντεταγμένες δεν ορίστηκαν κατά την διάρκεια της επιλογής εικόνας</string>
+  <string name="error_fetching_nearby_places">Σφάλμα κατά την εύρεση κοντινών μερών.</string>
+  <string name="appwidget_img">Φωτογραφία της Ημέρας</string>
+  <string name="app_widget_heading">Φωτογραφία της Ημέρας</string>
+  <string name="successful_wikidata_edit">Η εικόνα προστέθηκε επιτυχώς στο %1$s στο Wikidata!</string>
+  <string name="wikidata_edit_failure">Αποτυχία ενημέρωσης της αντιστοιχούσας οντότητας του Wikidata!</string>
+  <string name="menu_set_wallpaper">Ρύθμιση ταπετσαρίας</string>
+  <string name="wallpaper_set_successfully">Η ταπετσαρία ρυθμίστηκε επιτυχώς!</string>
 </resources>

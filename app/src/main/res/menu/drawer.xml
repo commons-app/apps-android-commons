@@ -9,6 +9,12 @@
             android:id="@+id/action_nearby"
             android:icon="@drawable/ic_location_black_24dp"
             android:title="@string/navigation_item_nearby" />
+      
+        <item
+            android:id="@+id/action_featured_images"
+            android:icon="@drawable/ic_star_black_24dp"
+            android:title="@string/navigation_item_featured_images"/>
+
     </group>
     <group android:id="@+id/drawer_account">
         <item

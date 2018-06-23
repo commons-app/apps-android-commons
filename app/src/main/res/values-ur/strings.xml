@@ -18,7 +18,7 @@
   <string name="login_success">لاگ ان کامیاب۔</string>
   <string name="login_failed">داخل ہونے میں ناکامی ہوئی!</string>
   <string name="upload_failed">فائل نہیں ملی، براہ کرم دوسری فائل آزمائیں۔</string>
-  <string name="authentication_failed">تصدیق ناکام!</string>
+  <string name="authentication_failed" fuzzy="true">تصدیق ناکام!</string>
   <string name="uploading_started">اپلوڈ شروع!</string>
   <string name="upload_completed_notification_title">%1$s اپلوڈ شد!</string>
   <string name="upload_completed_notification_text">اپنی اپلوڈ دیکھنے کے لیے ٹیپ کریں۔</string>
@@ -45,8 +45,6 @@
   <string name="share_title_hint">عنوان</string>
   <string name="share_description_hint">وضاحت</string>
   <string name="login_failed_network">لاگ ان ہونے میں ناکام - نیٹ ورک ناکامی</string>
-  <string name="login_failed_username">لاگ ان ہونے میں ناکام - براہ مہربانی اپنا صارف نام کی جانچ کریں</string>
-  <string name="login_failed_password">لاگ ان ہونے میں ناکام - براہ مہربانی - اپنے پاس ورڈ کی جانچ کریں</string>
   <string name="login_failed_throttled">بے شمار ناکام کوششیں کچھ منٹوں میں دوبارہ کوشش کریں۔</string>
   <string name="login_failed_blocked">معذرت، یہ صارف کومنز پر بلاک کردیا گیا ہے</string>
   <string name="login_failed_2fa_needed">آپ کو اپنے دو عامل کے تصدیق کوڈ فراہم کرنا چاہیے۔</string>
@@ -99,7 +97,7 @@
   <string name="preference_license" fuzzy="true">اجازت نامہ</string>
   <string name="use_previous">گزشتہ عنوان/وضاحت استعمال کریں</string>
   <string name="allow_gps">خودکارانہ طریقے سے حالیہ جگہ حاصل کریں</string>
-  <string name="allow_gps_summary">اگر تصویر جغرافیائی نہیں ہے تو قسم کے تجاویز پیش کرنے کیلئے موجودہ مقام کو دوبارہ حاصل کریں</string>
+  <string name="allow_gps_summary" fuzzy="true">اگر تصویر جغرافیائی نہیں ہے تو قسم کے تجاویز پیش کرنے کیلئے موجودہ مقام کو دوبارہ حاصل کریں</string>
   <string name="preference_theme">نائٹ موڈ</string>
   <string name="preference_theme_summary">کالا تھیم استعمال کریں</string>
   <string name="license_name_cc_by_sa_four">انتباہ-شراکت 4.0</string>

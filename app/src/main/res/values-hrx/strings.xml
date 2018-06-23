@@ -13,7 +13,7 @@
   <string name="logging_in_message" fuzzy="true">Bittschön woorte …</string>
   <string name="login_success">Oonmeldung erfollichreich!</string>
   <string name="login_failed">Oonmeldung fehlgeschlooht!</string>
-  <string name="authentication_failed">Authentifizierung fehlgeschlooht!</string>
+  <string name="authentication_failed" fuzzy="true">Authentifizierung fehlgeschlooht!</string>
   <string name="uploading_started">Hochloode oongefang!</string>
   <string name="upload_completed_notification_title">„%1$s“ hochgelood!</string>
   <string name="upload_completed_notification_text">Tippe mit dein Fingerspitze, um dein Upload (Ufflloodung) oonzusiehn</string>
@@ -35,8 +35,6 @@
   <string name="share_title_hint">Titel</string>
   <string name="share_description_hint">Beschreibung</string>
   <string name="login_failed_network">Oonmeldung fehlgeschlooht – Netzwerrekfehler</string>
-  <string name="login_failed_username">Oonmeldung fehlgeschlooht – Bittschön Benutzernoome üwerprüfe</string>
-  <string name="login_failed_password">Oonmeldung fehlgeschlooht – Bittschön Passwort üwerprüfe</string>
   <string name="login_failed_throttled" fuzzy="true">Zu viele erfollichlose Versuche. Bittschön in en poor Minute wieder erneit versuche.</string>
   <string name="login_failed_blocked">Der Benutzer woard leider uff Commons gesperrt</string>
   <string name="login_failed_generic">Oonmeldung fehlgeschlooht</string>

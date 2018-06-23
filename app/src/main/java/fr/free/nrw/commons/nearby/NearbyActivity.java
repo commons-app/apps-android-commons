@@ -4,23 +4,24 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomSheetBehavior;
-
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AlertDialog;
-import android.util.Log;
+
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
-import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -28,28 +29,34 @@ import com.google.gson.GsonBuilder;
 import java.util.List;
 
 import javax.inject.Inject;
+import javax.inject.Named;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.location.LatLng;
 import fr.free.nrw.commons.location.LocationServiceManager;
+import fr.free.nrw.commons.location.LocationServiceManager.LocationChangeType;
 import fr.free.nrw.commons.location.LocationUpdateListener;
 import fr.free.nrw.commons.theme.NavigationBaseActivity;
 import fr.free.nrw.commons.utils.NetworkUtils;
 import fr.free.nrw.commons.utils.UriSerializer;
-
 import fr.free.nrw.commons.utils.ViewUtil;
+import fr.free.nrw.commons.wikidata.WikidataEditListener;
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
-
 import timber.log.Timber;
+import uk.co.deanwild.materialshowcaseview.IShowcaseListener;
+import uk.co.deanwild.materialshowcaseview.MaterialShowcaseView;
+
+import static fr.free.nrw.commons.location.LocationServiceManager.LocationChangeType.*;
+import static fr.free.nrw.commons.location.LocationServiceManager.LocationChangeType.MAP_UPDATED;
 
 
-public class NearbyActivity extends NavigationBaseActivity implements LocationUpdateListener {
+public class NearbyActivity extends NavigationBaseActivity implements LocationUpdateListener,
+        WikidataEditListener.WikidataP18EditListener {
 
     private static final int LOCATION_REQUEST = 1;
 
@@ -62,13 +69,18 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
     LinearLayout bottomSheetDetails;
     @BindView(R.id.transparentView)
     View transparentView;
+    @BindView(R.id.fab_recenter)
+    View fabRecenter;
 
     @Inject
     LocationServiceManager locationManager;
     @Inject
     NearbyController nearbyController;
+    @Inject WikidataEditListener wikidataEditListener;
 
-    private LatLng curLatLang;
+    @Inject
+    @Named("application_preferences") SharedPreferences applicationPrefs;
+    private LatLng curLatLng;
     private Bundle bundle;
     private Disposable placesDisposable;
     private boolean lockNearbyView; //Determines if the nearby places needs to be refreshed
@@ -78,9 +90,17 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
     private NearbyListFragment nearbyListFragment;
     private static final String TAG_RETAINED_MAP_FRAGMENT = NearbyMapFragment.class.getSimpleName();
     private static final String TAG_RETAINED_LIST_FRAGMENT = NearbyListFragment.class.getSimpleName();
+    private View listButton; // Reference to list button to use in tutorial
 
     private final String NETWORK_INTENT_ACTION = "android.net.conn.CONNECTIVITY_CHANGE";
     private BroadcastReceiver broadcastReceiver;
+
+    private boolean isListShowcaseAdded = false;
+    private boolean isMapShowCaseAdded = false;
+
+    private LatLng lastKnownLocation;
+
+    private MaterialShowcaseView secondSingleShowCaseView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -92,6 +112,7 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
 
         initBottomSheetBehaviour();
         initDrawer();
+        wikidataEditListener.setAuthenticationStateListener(this);
     }
 
     private void resumeFragment() {
@@ -131,16 +152,55 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.menu_nearby, menu);
 
+        new Handler().post(() -> {
+
+            listButton = findViewById(R.id.action_display_list);
+
+            secondSingleShowCaseView = new MaterialShowcaseView.Builder(this)
+                    .setTarget(listButton)
+                    .setDismissText(getString(R.string.showcase_view_got_it_button))
+                    .setContentText(getString(R.string.showcase_view_list_icon))
+                    .setDelay(500) // optional but starting animations immediately in onCreate can make them choppy
+                    .singleUse(ViewUtil.SHOWCASE_VIEW_ID_1) // provide a unique ID used to ensure it is only shown once
+                    .setDismissStyle(Typeface.defaultFromStyle(Typeface.BOLD))
+                    .setListener(new IShowcaseListener() {
+                        @Override
+                        public void onShowcaseDisplayed(MaterialShowcaseView materialShowcaseView) {
+
+                        }
+
+                        // If dismissed, we can inform fragment to start showcase sequence there
+                        @Override
+                        public void onShowcaseDismissed(MaterialShowcaseView materialShowcaseView) {
+                                nearbyMapFragment.onNearbyMaterialShowcaseDismissed();
+                        }
+                    })
+                    .build();
+
+            isListShowcaseAdded = true;
+
+            if (isMapShowCaseAdded) { // If map showcase is also ready, start ShowcaseSequence
+                // Probably this case is not possible. Just added to be careful
+                setMapViewTutorialShowCase();
+            }
+        });
+
         return super.onCreateOptionsMenu(menu);
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+
         // Handle item selection
         switch (item.getItemId()) {
             case R.id.action_display_list:
-                bottomSheetBehaviorForDetails.setState(BottomSheetBehavior.STATE_HIDDEN);
-                bottomSheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
+                if(bottomSheetBehavior.getState()==BottomSheetBehavior.STATE_COLLAPSED || bottomSheetBehavior.getState()==BottomSheetBehavior.STATE_HIDDEN){
+                    bottomSheetBehaviorForDetails.setState(BottomSheetBehavior.STATE_HIDDEN);
+                    bottomSheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
+                }else if(bottomSheetBehavior.getState()==BottomSheetBehavior.STATE_EXPANDED){
+                    bottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
+                }
+
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -158,7 +218,11 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
         switch (requestCode) {
             case LOCATION_REQUEST: {
                 if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    refreshView(LocationServiceManager.LocationChangeType.LOCATION_SIGNIFICANTLY_CHANGED);
+                    Timber.d("Location permission granted, refreshing view");
+                    //Still need to check if GPS is enabled
+                    checkGps();
+                    lastKnownLocation = locationManager.getLKL();
+                    refreshView(PERMISSION_JUST_GRANTED);
                 } else {
                     //If permission not granted, go to page that says Nearby Places cannot be displayed
                     hideProgressBar();
@@ -218,7 +282,7 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
     private void checkLocationPermission() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             if (locationManager.isLocationPermissionGranted()) {
-                refreshView(LocationServiceManager.LocationChangeType.LOCATION_SIGNIFICANTLY_CHANGED);
+                refreshView(LOCATION_SIGNIFICANTLY_CHANGED);
             } else {
                 // Should we show an explanation?
                 if (locationManager.isPermissionExplanationRequired(this)) {
@@ -244,7 +308,7 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
                 }
             }
         } else {
-            refreshView(LocationServiceManager.LocationChangeType.LOCATION_SIGNIFICANTLY_CHANGED);
+            refreshView(LOCATION_SIGNIFICANTLY_CHANGED);
         }
     }
 
@@ -253,7 +317,7 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == 1) {
             Timber.d("User is back from Settings page");
-            refreshView(LocationServiceManager.LocationChangeType.LOCATION_SIGNIFICANTLY_CHANGED);
+            refreshView(LOCATION_SIGNIFICANTLY_CHANGED);
         }
     }
 
@@ -261,7 +325,7 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
     protected void onStart() {
         super.onStart();
         locationManager.addLocationListener(this);
-        locationManager.registerLocationManager();
+        registerLocationUpdates();
     }
 
     @Override
@@ -312,8 +376,7 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
             @Override
             public void onReceive(Context context, Intent intent) {
                 if (NetworkUtils.isInternetConnectionEstablished(NearbyActivity.this)) {
-                    refreshView(LocationServiceManager
-                            .LocationChangeType.LOCATION_SIGNIFICANTLY_CHANGED);
+                    refreshView(LOCATION_SIGNIFICANTLY_CHANGED);
                 } else {
                     ViewUtil.showLongToast(NearbyActivity.this, getString(R.string.no_internet));
                 }
@@ -329,7 +392,7 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
      *
      * @param locationChangeType defines if location shanged significantly or slightly
      */
-    private void refreshView(LocationServiceManager.LocationChangeType locationChangeType) {
+    private void refreshView(LocationChangeType locationChangeType) {
         if (lockNearbyView) {
             return;
         }
@@ -339,35 +402,88 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
             return;
         }
 
-        locationManager.registerLocationManager();
+        registerLocationUpdates();
         LatLng lastLocation = locationManager.getLastLocation();
 
-        if (curLatLang != null && curLatLang.equals(lastLocation)) { //refresh view only if location has changed
+        if (curLatLng != null && curLatLng.equals(lastLocation)
+                && !locationChangeType.equals(MAP_UPDATED)) { //refresh view only if location has changed
             return;
         }
-        curLatLang = lastLocation;
+        curLatLng = lastLocation;
 
-        if (curLatLang == null) {
+        if (locationChangeType.equals(PERMISSION_JUST_GRANTED)) {
+            curLatLng = lastKnownLocation;
+        }
+
+        if (curLatLng == null) {
             Timber.d("Skipping update of nearby places as location is unavailable");
             return;
         }
 
-        if (locationChangeType
-                .equals(LocationServiceManager.LocationChangeType.LOCATION_SIGNIFICANTLY_CHANGED)) {
+        if (locationChangeType.equals(LOCATION_SIGNIFICANTLY_CHANGED)
+                || locationChangeType.equals(PERMISSION_JUST_GRANTED)
+                || locationChangeType.equals(MAP_UPDATED)) {
             progressBar.setVisibility(View.VISIBLE);
-            placesDisposable = Observable.fromCallable(() -> nearbyController
-                    .loadAttractionsFromLocation(curLatLang))
-                    .subscribeOn(Schedulers.io())
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe(this::populatePlaces);
-        } else if (locationChangeType
-                .equals(LocationServiceManager.LocationChangeType.LOCATION_SLIGHTLY_CHANGED)) {
+
+            //TODO: This hack inserts curLatLng before populatePlaces is called (see #1440). Ideally a proper fix should be found
             Gson gson = new GsonBuilder()
                     .registerTypeAdapter(Uri.class, new UriSerializer())
                     .create();
-            String gsonCurLatLng = gson.toJson(curLatLang);
+            String gsonCurLatLng = gson.toJson(curLatLng);
+            bundle.clear();
+            bundle.putString("CurLatLng", gsonCurLatLng);
+
+            placesDisposable = Observable.fromCallable(() -> nearbyController
+                    .loadAttractionsFromLocation(curLatLng))
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe(this::populatePlaces,
+                            throwable -> {
+                                Timber.d(throwable);
+                                showErrorMessage(getString(R.string.error_fetching_nearby_places));
+                                progressBar.setVisibility(View.GONE);
+                            });
+        } else if (locationChangeType
+                .equals(LOCATION_SLIGHTLY_CHANGED)) {
+            Gson gson = new GsonBuilder()
+                    .registerTypeAdapter(Uri.class, new UriSerializer())
+                    .create();
+            String gsonCurLatLng = gson.toJson(curLatLng);
             bundle.putString("CurLatLng", gsonCurLatLng);
             updateMapFragment(true);
+        }
+    }
+
+    /**
+     * This method first checks if the location permissions has been granted and then register the location manager for updates.
+     */
+    private void registerLocationUpdates() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            if (locationManager.isLocationPermissionGranted()) {
+                locationManager.registerLocationManager();
+            } else {
+                // Should we show an explanation?
+                if (locationManager.isPermissionExplanationRequired(this)) {
+                    new AlertDialog.Builder(this)
+                            .setMessage(getString(R.string.location_permission_rationale_nearby))
+                            .setPositiveButton("OK", (dialog, which) -> {
+                                requestLocationPermissions();
+                                dialog.dismiss();
+                            })
+                            .setNegativeButton("Cancel", (dialog, id) -> {
+                                showLocationPermissionDeniedErrorDialog();
+                                dialog.cancel();
+                            })
+                            .create()
+                            .show();
+
+                } else {
+                    // No explanation needed, we can request the permission.
+                    requestLocationPermissions();
+                }
+            }
+        } else {
+            locationManager.registerLocationManager();
         }
     }
 
@@ -378,20 +494,20 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
                 .registerTypeAdapter(Uri.class, new UriSerializer())
                 .create();
         String gsonPlaceList = gson.toJson(placeList);
-        String gsonCurLatLng = gson.toJson(curLatLang);
+        String gsonCurLatLng = gson.toJson(curLatLng);
         String gsonBoundaryCoordinates = gson.toJson(boundaryCoordinates);
 
         if (placeList.size() == 0) {
             ViewUtil.showSnackbar(findViewById(R.id.container), R.string.no_nearby);
         }
 
-        bundle.clear();
         bundle.putString("PlaceList", gsonPlaceList);
-        bundle.putString("CurLatLng", gsonCurLatLng);
+        //bundle.putString("CurLatLng", gsonCurLatLng);
         bundle.putString("BoundaryCoord", gsonBoundaryCoordinates);
 
         // First time to init fragments
         if (nearbyMapFragment == null) {
+            Timber.d("Init map fragment for the first time");
             lockNearbyView(true);
             setMapFragment();
             setListFragment();
@@ -399,8 +515,48 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
             lockNearbyView(false);
         } else {
             // There are fragments, just update the map and list
+            Timber.d("Map fragment already exists, just update the map and list");
             updateMapFragment(false);
             updateListFragment();
+        }
+
+        isMapShowCaseAdded = true;
+    }
+
+    public void setMapViewTutorialShowCase() {
+           /*
+            *This showcase view will be the first step of our nearbyMaterialShowcaseSequence. The reason we use a
+            * single item instead of adding another step to nearbyMaterialShowcaseSequence is that we are not able to
+            * call withoutShape() method on steps. For mapView we need an showcase view without
+            * any circle on it, it should cover the whole page.
+            * */
+        MaterialShowcaseView firstSingleShowCaseView = new MaterialShowcaseView.Builder(this)
+                .setTarget(nearbyMapFragment.mapView)
+                .setDismissText(getString(R.string.showcase_view_got_it_button))
+                .setContentText(getString(R.string.showcase_view_whole_nearby_activity))
+                .setDelay(500) // optional but starting animations immediately in onCreate can make them choppy
+                .singleUse(ViewUtil.SHOWCASE_VIEW_ID_2) // provide a unique ID used to ensure it is only shown once
+                .withoutShape() // no shape on map view since there are no view to focus on
+                .setDismissStyle(Typeface.defaultFromStyle(Typeface.BOLD))
+                .setListener(new IShowcaseListener() {
+                    @Override
+                    public void onShowcaseDisplayed(MaterialShowcaseView materialShowcaseView) {
+
+                    }
+
+                    @Override
+                    public void onShowcaseDismissed(MaterialShowcaseView materialShowcaseView) {
+                            /* Add other nearbyMaterialShowcaseSequence here, it will make the user feel as they are a
+                            * nearbyMaterialShowcaseSequence whole together.
+                            * */
+                        secondSingleShowCaseView.show(NearbyActivity.this);
+                    }
+                })
+                .build();
+
+        if (applicationPrefs.getBoolean("firstRunNearby", true)) {
+            applicationPrefs.edit().putBoolean("firstRunNearby", false).apply();
+            firstSingleShowCaseView.show(this);
         }
     }
 
@@ -411,7 +567,7 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
             locationManager.removeLocationListener(this);
         } else {
             lockNearbyView = false;
-            locationManager.registerLocationManager();
+            registerLocationUpdates();
             locationManager.addLocationListener(this);
         }
     }
@@ -457,34 +613,39 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
 
         NearbyMapFragment nearbyMapFragment = getMapFragment();
 
-        if (nearbyMapFragment != null && curLatLang != null) {
+        if (nearbyMapFragment != null && curLatLng != null) {
             hideProgressBar(); // In case it is visible (this happens, not an impossible case)
             /*
             * If we are close to nearby places boundaries, we need a significant update to
             * get new nearby places. Check order is south, north, west, east
             * */
             if (nearbyMapFragment.boundaryCoordinates != null
-                    && (curLatLang.getLatitude() <= nearbyMapFragment.boundaryCoordinates[0].getLatitude()
-                    || curLatLang.getLatitude() >= nearbyMapFragment.boundaryCoordinates[1].getLatitude()
-                    || curLatLang.getLongitude() <= nearbyMapFragment.boundaryCoordinates[2].getLongitude()
-                    || curLatLang.getLongitude() >= nearbyMapFragment.boundaryCoordinates[3].getLongitude())) {
+                    && (curLatLng.getLatitude() <= nearbyMapFragment.boundaryCoordinates[0].getLatitude()
+                    || curLatLng.getLatitude() >= nearbyMapFragment.boundaryCoordinates[1].getLatitude()
+                    || curLatLng.getLongitude() <= nearbyMapFragment.boundaryCoordinates[2].getLongitude()
+                    || curLatLng.getLongitude() >= nearbyMapFragment.boundaryCoordinates[3].getLongitude())) {
                 // populate places
                 placesDisposable = Observable.fromCallable(() -> nearbyController
-                        .loadAttractionsFromLocation(curLatLang))
+                        .loadAttractionsFromLocation(curLatLng))
                         .subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())
-                        .subscribe(this::populatePlaces);
-                nearbyMapFragment.setArguments(bundle);
+                        .subscribe(this::populatePlaces,
+                                throwable -> {
+                                    Timber.d(throwable);
+                                    showErrorMessage(getString(R.string.error_fetching_nearby_places));
+                                    progressBar.setVisibility(View.GONE);
+                                });
+                nearbyMapFragment.setBundleForUpdtes(bundle);
                 nearbyMapFragment.updateMapSignificantly();
                 updateListFragment();
                 return;
             }
 
             if (isSlightUpdate) {
-                nearbyMapFragment.setArguments(bundle);
+                nearbyMapFragment.setBundleForUpdtes(bundle);
                 nearbyMapFragment.updateMapSlightly();
             } else {
-                nearbyMapFragment.setArguments(bundle);
+                nearbyMapFragment.setBundleForUpdtes(bundle);
                 nearbyMapFragment.updateMapSignificantly();
                 updateListFragment();
             }
@@ -498,7 +659,7 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
     }
 
     private void updateListFragment() {
-        nearbyListFragment.setArguments(bundle);
+        nearbyListFragment.setBundleForUpdates(bundle);
         nearbyListFragment.updateNearbyListSignificantly();
     }
 
@@ -528,15 +689,24 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
 
     @Override
     public void onLocationChangedSignificantly(LatLng latLng) {
-        refreshView(LocationServiceManager.LocationChangeType.LOCATION_SIGNIFICANTLY_CHANGED);
+        refreshView(LOCATION_SIGNIFICANTLY_CHANGED);
     }
 
     @Override
     public void onLocationChangedSlightly(LatLng latLng) {
-        refreshView(LocationServiceManager.LocationChangeType.LOCATION_SLIGHTLY_CHANGED);
+        refreshView(LOCATION_SLIGHTLY_CHANGED);
     }
 
     public void prepareViewsForSheetPosition(int bottomSheetState) {
         // TODO
+    }
+
+    private void showErrorMessage(String message) {
+        ViewUtil.showLongToast(NearbyActivity.this, message);
+    }
+
+    @Override
+    public void onWikidataEditSuccessful() {
+        refreshView(MAP_UPDATED);
     }
 }

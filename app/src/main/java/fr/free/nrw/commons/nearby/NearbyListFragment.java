@@ -2,6 +2,7 @@ package fr.free.nrw.commons.nearby;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
@@ -21,6 +22,9 @@ import java.lang.reflect.Type;
 import java.util.Collections;
 import java.util.List;
 
+import javax.inject.Inject;
+import javax.inject.Named;
+
 import dagger.android.support.AndroidSupportInjection;
 import dagger.android.support.DaggerFragment;
 import fr.free.nrw.commons.R;
@@ -33,6 +37,8 @@ import static android.app.Activity.RESULT_OK;
 import static android.content.pm.PackageManager.PERMISSION_GRANTED;
 
 public class NearbyListFragment extends DaggerFragment {
+    private Bundle bundleForUpdates; // Carry information from activity about changed nearby places and current location
+
     private static final Type LIST_TYPE = new TypeToken<List<Place>>() {
     }.getType();
     private static final Type CUR_LAT_LNG_TYPE = new TypeToken<LatLng>() {
@@ -44,6 +50,11 @@ public class NearbyListFragment extends DaggerFragment {
     private NearbyAdapterFactory adapterFactory;
     private RecyclerView recyclerView;
     private ContributionController controller;
+
+
+    @Inject
+    @Named("direct_nearby_upload_prefs")
+    SharedPreferences directPrefs;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -80,9 +91,11 @@ public class NearbyListFragment extends DaggerFragment {
     }
 
     public void updateNearbyListSignificantly() {
-        Bundle bundle = this.getArguments();
-        adapterFactory.updateAdapterData(getPlaceListFromBundle(bundle),
-                (RVRendererAdapter<Place>) recyclerView.getAdapter());
+        try {
+            adapterFactory.updateAdapterData(getPlaceListFromBundle(bundleForUpdates), (RVRendererAdapter<Place>) recyclerView.getAdapter());
+        } catch (NullPointerException e) {
+            Timber.e("Null pointer exception from calling recyclerView.getAdapter()");
+        }
     }
 
     private List<Place> getPlaceListFromBundle(Bundle bundle) {
@@ -133,11 +146,15 @@ public class NearbyListFragment extends DaggerFragment {
         if (resultCode == RESULT_OK) {
             Timber.d("OnActivityResult() parameters: Req code: %d Result code: %d Data: %s",
                     requestCode, resultCode, data);
-            controller.handleImagePicked(requestCode, data, true);
+            controller.handleImagePicked(requestCode, data, true, directPrefs.getString("WikiDataEntityId", null));
         } else {
             Timber.e("OnActivityResult() parameters: Req code: %d Result code: %d Data: %s",
                     requestCode, resultCode, data);
         }
+    }
+
+    public void setBundleForUpdates(Bundle bundleForUpdates) {
+        this.bundleForUpdates = bundleForUpdates;
     }
 
 }

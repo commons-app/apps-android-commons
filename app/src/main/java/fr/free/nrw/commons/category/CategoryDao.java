@@ -105,6 +105,7 @@ public class CategoryDao {
         return items;
     }
 
+    @NonNull
     Category fromCursor(Cursor cursor) {
         // Hardcoding column positions!
         return new Category(

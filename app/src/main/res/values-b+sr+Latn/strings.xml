@@ -16,7 +16,7 @@
   <string name="login_success">Uspešno ste prijavljeni.</string>
   <string name="login_failed">Prijavljivanje nije uspelo.</string>
   <string name="upload_failed">Datoteka nije pronađena. Pokušajte sa drugom datotekom.</string>
-  <string name="authentication_failed">Provera identiteta nije uspela.</string>
+  <string name="authentication_failed" fuzzy="true">Provera identiteta nije uspela.</string>
   <string name="uploading_started">Otpremanje je započeto.</string>
   <string name="upload_completed_notification_title">Datoteka „%1$s“ je otpremljena.</string>
   <string name="upload_completed_notification_text">Tapnite da biste videli otpremanje</string>
@@ -43,8 +43,6 @@
   <string name="share_title_hint">Naslov</string>
   <string name="share_description_hint">Opis</string>
   <string name="login_failed_network">Ne mogu da vas prijavim – mreža ne radi</string>
-  <string name="login_failed_username">Ne mogu da vas prijavim – proverite svoje korisničko ime</string>
-  <string name="login_failed_password">Ne mogu da vas prijavim – proverite svoju lozinku</string>
   <string name="login_failed_throttled">Previše neuspešnih pokušaja. Probajte ponovo za nekoliko minuta.</string>
   <string name="login_failed_blocked">Nažalost, korisnik je blokiran na Ostavi</string>
   <string name="login_failed_2fa_needed">Morate uneti svoj dvofaktorski kod za autentifikaciju.</string>
@@ -96,7 +94,7 @@
   <string name="preference_license" fuzzy="true">Licenca</string>
   <string name="use_previous">Koristi prethodan naslov/opis</string>
   <string name="allow_gps">Automatski detektuj trenutnu lokaciju</string>
-  <string name="allow_gps_summary">Primi trenutnu lokaciju da bi predložili kategoriju ako slika nije geografski označena</string>
+  <string name="allow_gps_summary" fuzzy="true">Primi trenutnu lokaciju da bi predložili kategoriju ako slika nije geografski označena</string>
   <string name="preference_theme">Noćni režim</string>
   <string name="preference_theme_summary">Koristiti tamnu temu</string>
   <string name="license_name_cc_by_sa_four">Autorstvo-Deliti pod istim uslovima 4.0</string>
@@ -139,8 +137,8 @@
   <string name="detail_description_empty">Nema opisa</string>
   <string name="detail_license_empty">Nepoznata licenca</string>
   <string name="menu_refresh">Osveži</string>
-  <string name="read_storage_permission_rationale">Potrebna dozvola: Provera spoljašnje memorije. Aplikacija bez ovoga ne može da funkcioniše.</string>
-  <string name="write_storage_permission_rationale">Neophodna dozvola: Pisanje spoljašnjeg skladišta. Aplikacija ne može da funkcioniše bez ovoga.</string>
+  <string name="read_storage_permission_rationale" fuzzy="true">Potrebna dozvola: Provera spoljašnje memorije. Aplikacija bez ovoga ne može da funkcioniše.</string>
+  <string name="write_storage_permission_rationale" fuzzy="true">Neophodna dozvola: Pisanje spoljašnjeg skladišta. Aplikacija ne može da funkcioniše bez ovoga.</string>
   <string name="location_permission_rationale">Opciona dozvola: Preuzmi trenutnu lokaciju za predloge kategorija</string>
   <string name="ok">U redu</string>
   <string name="title_activity_nearby">Mesta u blizini</string>

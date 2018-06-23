@@ -14,6 +14,7 @@
         android:id="@+id/welcomePagerIndicator"
         android:layout_height="@dimen/half_standard_height"
         android:layout_width="match_parent"
-        android:layout_gravity="bottom" />
+        android:layout_gravity="bottom"
+        android:padding="5dp" />
 
 </FrameLayout>
