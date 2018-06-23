@@ -50,4 +50,16 @@ public class ContributionUtils {
         Log.d("deneme","result Uri is:"+result);
         return result;
     }
+
+    public static void emptyTemporaryDirectory(Context context) {
+        File dir = new File(context.getFilesDir()+TEMP_UPLOADING_DIRECTORY_BODY);
+        if (dir.isDirectory())
+        {
+            String[] children = dir.list();
+            for (int i = 0; i < children.length; i++)
+            {
+                new File(dir, children[i]).delete();
+            }
+        }
+    }
 }
