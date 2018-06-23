@@ -3,7 +3,6 @@ package fr.free.nrw.commons.upload;
 import android.content.SharedPreferences;
 import android.location.Location;
 import android.location.LocationListener;
-import android.location.LocationManager;
 import android.media.ExifInterface;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -17,8 +16,7 @@ import timber.log.Timber;
 
 /**
  * Extracts geolocation to be passed to API for category suggestions. If a picture with geolocation
- * is uploaded, extract latitude and longitude from EXIF data of image. If a picture without
- * geolocation is uploaded, retrieve user's location (if enabled in Settings).
+ * is uploaded, extract latitude and longitude from EXIF data of image.
  */
 public class GPSExtractor {
 
@@ -29,8 +27,6 @@ public class GPSExtractor {
     private Double currentLatitude = null;
     private Double currentLongitude = null;
     public boolean imageCoordsExists;
-    private MyLocationListener myLocationListener;
-    private LocationManager locationManager;
 
     /**
      * Construct from the file descriptor of the image (only for API 24 or newer).
