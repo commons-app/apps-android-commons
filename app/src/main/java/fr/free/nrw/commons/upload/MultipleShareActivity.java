@@ -340,7 +340,7 @@ public class MultipleShareActivity extends AuthenticatedActivity
 
             if (gpsExtractor != null) {
                 //get image coordinates from exif data or user location
-                return gpsExtractor.getCoords(locationPermitted);
+                return gpsExtractor.getCoords();
             }
 
         } catch (FileNotFoundException fnfe) {

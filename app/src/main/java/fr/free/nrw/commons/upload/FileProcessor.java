@@ -115,7 +115,7 @@ public class FileProcessor implements SimilarImageDialogFragment.onResponse {
                 }
             }
 
-            decimalCoords = imageObj.getCoords(gpsEnabled);
+            decimalCoords = imageObj.getCoords();
             if (decimalCoords == null || !imageObj.imageCoordsExists) {
                 //Find other photos taken around the same time which has gps coordinates
                 if (!haveCheckedForOtherImages)
@@ -170,8 +170,8 @@ public class FileProcessor implements SimilarImageDialogFragment.onResponse {
                 }
 
                 if (tempImageObj != null) {
-                    Timber.d("not null fild EXIF" + tempImageObj.imageCoordsExists + " coords" + tempImageObj.getCoords(gpsEnabled));
-                    if (tempImageObj.getCoords(gpsEnabled) != null && tempImageObj.imageCoordsExists) {
+                    Timber.d("not null fild EXIF" + tempImageObj.imageCoordsExists + " coords" + tempImageObj.getCoords());
+                    if (tempImageObj.getCoords() != null && tempImageObj.imageCoordsExists) {
                         // Current image has gps coordinates and it's not current gps locaiton
                         Timber.d("This file has image coords:" + file.getAbsolutePath());
                         SimilarImageDialogFragment newFragment = new SimilarImageDialogFragment();
@@ -250,7 +250,7 @@ public class FileProcessor implements SimilarImageDialogFragment.onResponse {
     @Override
     public void onPositiveResponse() {
         imageObj = tempImageObj;
-        decimalCoords = imageObj.getCoords(false);// Not necessary to use gps as image already ha EXIF data
+        decimalCoords = imageObj.getCoords();// Not necessary to use gps as image already ha EXIF data
         Timber.d("EXIF from tempImageObj");
         useImageCoords();
     }

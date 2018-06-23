@@ -1,10 +1,7 @@
 package fr.free.nrw.commons.upload;
 
 import android.content.SharedPreferences;
-import android.location.Location;
-import android.location.LocationListener;
 import android.media.ExifInterface;
-import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
@@ -24,8 +21,6 @@ public class GPSExtractor {
     private ExifInterface exif;
     private double decLatitude;
     private double decLongitude;
-    private Double currentLatitude = null;
-    private Double currentLongitude = null;
     public boolean imageCoordsExists;
 
     /**
@@ -58,11 +53,10 @@ public class GPSExtractor {
 
     /**
      * Extracts geolocation (either of image from EXIF data, or of user)
-     * @param useGPS set to true if location permissions allowed (by API 23), false if disallowed
      * @return coordinates as string (needs to be passed as a String in API query)
      */
     @Nullable
-    public String getCoords(boolean useGPS) {
+    public String getCoords() {
         String latitude;
         String longitude;
         String latitudeRef;
