@@ -16,8 +16,7 @@ import timber.log.Timber;
  * is uploaded, extract latitude and longitude from EXIF data of image.
  */
 public class GPSExtractor {
-
-    private SharedPreferences prefs;
+    
     private ExifInterface exif;
     private double decLatitude;
     private double decLongitude;
@@ -28,8 +27,7 @@ public class GPSExtractor {
      * @param fileDescriptor the file descriptor of the image
      */
     @RequiresApi(24)
-    public GPSExtractor(@NonNull FileDescriptor fileDescriptor, SharedPreferences prefs) {
-        this.prefs = prefs;
+    public GPSExtractor(@NonNull FileDescriptor fileDescriptor) {
         try {
             exif = new ExifInterface(fileDescriptor);
         } catch (IOException | IllegalArgumentException e) {
@@ -42,8 +40,7 @@ public class GPSExtractor {
      * @param path file path of the image
      *
      */
-    public GPSExtractor(@NonNull String path, SharedPreferences prefs) {
-        this.prefs = prefs;
+    public GPSExtractor(@NonNull String path) {
         try {
             exif = new ExifInterface(path);
         } catch (IOException | IllegalArgumentException e) {

@@ -329,12 +329,12 @@ public class MultipleShareActivity extends AuthenticatedActivity
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
                 ParcelFileDescriptor fd = getContentResolver().openFileDescriptor(imageUri,"r");
                 if (fd != null) {
-                    gpsExtractor = new GPSExtractor(fd.getFileDescriptor(), prefs);
+                    gpsExtractor = new GPSExtractor(fd.getFileDescriptor());
                 }
             } else {
                 String filePath = FileUtils.getPath(this,imageUri);
                 if (filePath != null) {
-                    gpsExtractor = new GPSExtractor(filePath, prefs);
+                    gpsExtractor = new GPSExtractor(filePath);
                 }
             }
 
