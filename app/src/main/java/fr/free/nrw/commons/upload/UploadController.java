@@ -15,9 +15,10 @@ import android.os.AsyncTask;
 import android.os.IBinder;
 import android.provider.MediaStore;
 import android.text.TextUtils;
-import android.widget.Toast;
+import android.util.Log;
 
 import java.io.BufferedInputStream;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Date;
@@ -152,8 +153,9 @@ public class UploadController {
                 ContentResolver contentResolver = context.getContentResolver();
                 try {
                     if (contribution.getDataLength() <= 0) {
+                        Log.d("deneme","Contribution doInBackground"+contribution.getLocalUri());
                         AssetFileDescriptor assetFileDescriptor = contentResolver
-                                .openAssetFileDescriptor(contribution.getLocalUri(), "r");
+                                .openAssetFileDescriptor(Uri.fromFile(new File(contribution.getLocalUri().toString())), "r");
                         if (assetFileDescriptor != null) {
                             length = assetFileDescriptor.getLength();
                             if (length == -1) {
