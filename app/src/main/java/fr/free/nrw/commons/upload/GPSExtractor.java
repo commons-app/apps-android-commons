@@ -67,46 +67,6 @@ public class GPSExtractor {
     }
 
     /**
-     * Check if user enabled retrieval of their current location in Settings
-     * @return true if enabled, false if disabled
-     */
-    private boolean gpsPreferenceEnabled() {
-        //TODO: Hotfix for #1599
-        //Stopgap measure prior to implementing category suggestions without adding location template
-        return false;
-    }
-
-    /**
-     * Registers a LocationManager to listen for current location
-     */
-    protected void registerLocationManager() {
-        locationManager = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
-        Criteria criteria = new Criteria();
-        String provider = locationManager.getBestProvider(criteria, true);
-        myLocationListener = new MyLocationListener();
-
-        try {
-            locationManager.requestLocationUpdates(provider, 400, 1, myLocationListener);
-            Location location = locationManager.getLastKnownLocation(provider);
-            if (location != null) {
-                myLocationListener.onLocationChanged(location);
-            }
-        } catch (IllegalArgumentException e) {
-            Timber.e(e, "Illegal argument exception");
-        } catch (SecurityException e) {
-            Timber.e(e, "Security exception");
-        }
-    }
-
-    protected void unregisterLocationManager() {
-        try {
-            locationManager.removeUpdates(myLocationListener);
-        } catch (SecurityException e) {
-            Timber.e(e, "Security exception");
-        }
-    }
-
-    /**
      * Extracts geolocation (either of image from EXIF data, or of user)
      * @param useGPS set to true if location permissions allowed (by API 23), false if disallowed
      * @return coordinates as string (needs to be passed as a String in API query)
