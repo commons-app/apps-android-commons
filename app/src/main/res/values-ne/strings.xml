@@ -16,7 +16,7 @@
   <string name="login_success">प्रवेश सफल!</string>
   <string name="login_failed">प्रवेश सफल हुन सकेन!</string>
   <string name="upload_failed">फाइल भेटिएन। कृपया अर्को फाइल प्रयास गर्नुहोस्।</string>
-  <string name="authentication_failed">प्रमाणिकरण असफल भयो!</string>
+  <string name="authentication_failed" fuzzy="true">प्रमाणिकरण असफल भयो!</string>
   <string name="uploading_started">अपलोड शुरू भयो!</string>
   <string name="upload_completed_notification_title">%1$s अपलोड गरियो !</string>
   <string name="upload_completed_notification_text">तपाईंको अपलोड हेर्नको लागि ट्याप गर्नुहोस्</string>

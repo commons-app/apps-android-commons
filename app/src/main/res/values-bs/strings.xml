@@ -16,7 +16,7 @@
   <string name="login_success">Prijavljivanje uspješno!</string>
   <string name="login_failed">Prijavljivanje nije uspjelo!</string>
   <string name="upload_failed">Datoteka nije pronađena. Pokušajte drugu.</string>
-  <string name="authentication_failed">Provjera identiteta nije uspjela!</string>
+  <string name="authentication_failed" fuzzy="true">Provjera identiteta nije uspjela!</string>
   <string name="uploading_started">Postavljanje je započelo!</string>
   <string name="upload_completed_notification_title">Datoteka %1$s je postavljena!</string>
   <string name="upload_completed_notification_text">Dodirnite da biste vidjeli datoteku</string>
@@ -93,7 +93,7 @@
   <string name="preference_license" fuzzy="true">Licenca</string>
   <string name="use_previous">Koristi prethodni naziv/opis</string>
   <string name="allow_gps">Automatski dobavi trenutnu lokaciju</string>
-  <string name="allow_gps_summary">Dobavi trenutnu lokaciju za davanje prijedloga o kategorijama ako nema geooznaku</string>
+  <string name="allow_gps_summary" fuzzy="true">Dobavi trenutnu lokaciju za davanje prijedloga o kategorijama ako nema geooznaku</string>
   <string name="preference_theme">Noćni režim</string>
   <string name="preference_theme_summary">Koristi tamnu temu</string>
   <string name="license_name_cc_by_sa_four">Autorstvo-Dijeliti pod istim uslovima 4.0</string>

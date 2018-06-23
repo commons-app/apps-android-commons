@@ -27,7 +27,7 @@
   <string name="login_success">登录成功！</string>
   <string name="login_failed">登录失败！</string>
   <string name="upload_failed">找不到文件。请尝试其他文件。</string>
-  <string name="authentication_failed">身份验证失败！</string>
+  <string name="authentication_failed">身份验证失败，请重新登录</string>
   <string name="uploading_started">上传开始！</string>
   <string name="upload_completed_notification_title">%1$s已上传！</string>
   <string name="upload_completed_notification_text">点击查看您的上传</string>
@@ -109,7 +109,7 @@
   <string name="preference_license">默认许可协议</string>
   <string name="use_previous">使用之前的标题/描述</string>
   <string name="allow_gps">自动获取当前位置</string>
-  <string name="allow_gps_summary">如果图片没有地理标记的话，就取得当前位置以提供分类建议</string>
+  <string name="allow_gps_summary">如果图片没有地理标记，以及地理标签图片的话，就取得当前位置。警告：这将暴露您的当前位置。</string>
   <string name="preference_theme">夜间模式</string>
   <string name="preference_theme_summary">使用黑暗主题</string>
   <string name="license_name_cc_by_sa_four">署名-相同方式共享4.0</string>
@@ -278,8 +278,10 @@
   <string name="share_app_title">分享应用</string>
   <string name="share_coordinates_not_present">图片选择时，坐标并未指定</string>
   <string name="error_fetching_nearby_places">检索附近地点时出错。</string>
+  <string name="appwidget_img">每日图片</string>
+  <string name="app_widget_heading">每日图片</string>
   <string name="successful_wikidata_edit">图片已成功添加到维基数据上的%1$s！</string>
-  <string name="wikidata_edit_failure">更新对应wiki的数据实体失败！</string>
+  <string name="wikidata_edit_failure">更新对应维基数据实体失败！</string>
   <string name="menu_set_wallpaper">设置墙纸</string>
   <string name="wallpaper_set_successfully">墙纸已成功设置！</string>
 </resources>

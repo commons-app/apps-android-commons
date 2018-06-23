@@ -15,7 +15,7 @@
   <string name="logging_in_message">వేచివుండండి…</string>
   <string name="login_success">లాగిన్ విజయవంతమైంది!</string>
   <string name="login_failed">లాగిన్ విఫలమైంది!</string>
-  <string name="authentication_failed">ఆథెంటికేషను విఫలమైంది!</string>
+  <string name="authentication_failed" fuzzy="true">ఆథెంటికేషను విఫలమైంది!</string>
   <string name="uploading_started">ఎక్కింపు మొదలైంది!</string>
   <string name="upload_completed_notification_title">%1$s ను ఎక్కించాం!</string>
   <string name="upload_completed_notification_text">మీ ఎక్కింపును చూసేందుకు నొక్కండి</string>

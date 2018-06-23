@@ -30,7 +30,7 @@
   <string name="login_success">Inicio de sessão bem sucedido</string>
   <string name="login_failed">O início de sessão falhou!</string>
   <string name="upload_failed">Ficheiro não encontrado. Por favor, tente outro ficheiro.</string>
-  <string name="authentication_failed">Falha de autenticação!</string>
+  <string name="authentication_failed">A autenticação falhou, inicie uma nova sessão, por favor</string>
   <string name="uploading_started">Iniciado o carregamento!</string>
   <string name="upload_completed_notification_title">%1$s enviado!</string>
   <string name="upload_completed_notification_text">Toque para ver seu carregamento</string>
@@ -88,13 +88,13 @@
     <item quantity="other">%1$d carregamentos</item>
   </plurals>
   <string name="categories_not_found">Nenhuma categoria correspondente %1$s encontrada</string>
-  <string name="categories_skip_explanation">Adicione categorias para tornar as suas imagens mais fáceis de encontrar no Wikimedia Commons.\nComece a digitar para adicionar categorias.</string>
+  <string name="categories_skip_explanation">Adicione categorias para tornar as suas imagens mais fáceis de encontrar na wiki Wikimedia Commons.\nComece a escrever para adicionar categorias.</string>
   <string name="categories_activity_title">Categorias</string>
   <string name="title_activity_settings">Configurações</string>
   <string name="title_activity_signup">Registar-se</string>
   <string name="title_activity_featured_images">Imagens destacadas</string>
   <string name="menu_about">Sobre</string>
-  <string name="about_license">A aplicação do Wikimedia Commons é uma aplicação de código aberto criada e mantida por bolseiros e voluntários da comunidade Wikimedia. A Wikimedia Foundation não está envolvida na criação, desenvolvimento ou manutenção da aplicação.</string>
+  <string name="about_license">A aplicação da wiki Wikimedia Commons é uma aplicação de código aberto criada e mantida por bolseiros e voluntários da comunidade Wikimedia. A Wikimedia Foundation não está envolvida na criação, desenvolvimento ou manutenção da aplicação.</string>
   <string name="about_improve">Criar uma nova &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;incidência no GitHub&lt;/a&gt; para reportar erros e sugestões.</string>
   <string name="about_privacy_policy">&lt;u&gt;Política de privacidade&lt;/u&gt;</string>
   <string name="about_credits">&lt;u&gt;Créditos&lt;/u&gt;</string>
@@ -107,12 +107,12 @@
   <string name="menu_retry_upload">Tente novamente</string>
   <string name="menu_cancel_upload">Cancelar</string>
   <string name="share_license_summary">Essa imagem será licenciada sob %1$s</string>
-  <string name="media_upload_policy">Ao carregar esta imagem, declaro que esta é a minha própria obra, que não contém material protegido ou selfies, e que adere às &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines/pt\"&gt;políticas do Wikimedia Commons&lt;/a&gt;.</string>
+  <string name="media_upload_policy">Ao carregar esta imagem, declaro que esta é uma obra própria, que não contém material protegido nem selfies, e que adere às &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines/pt\"&gt;normas da wiki Wikimedia Commons&lt;/a&gt;.</string>
   <string name="menu_download">Descarregar</string>
   <string name="preference_license">Licença padrão</string>
   <string name="use_previous">Usar título/descrição anteriores</string>
   <string name="allow_gps">Obter automaticamente a localização atual</string>
-  <string name="allow_gps_summary">Recuperar localização atual para oferecer sugestões da categoria se a imagem não é georreferenciada</string>
+  <string name="allow_gps_summary">Se a imagem não estiver georreferenciada, obtém a localização atual e georreferencia a imagem com ela. Aviso: isto revela a sua localização corrente.</string>
   <string name="preference_theme">Modo noturno</string>
   <string name="preference_theme_summary">Utilizar tema escuro</string>
   <string name="license_name_cc_by_sa_four">Atribuição-CompartilhaIgual 4.0</string>
@@ -172,7 +172,7 @@
   <string name="title_activity_nearby">Locais Próximos</string>
   <string name="no_nearby">Não foram encontrados locais próximos.</string>
   <string name="warning">Aviso</string>
-  <string name="file_exists">Este ficheiro já existe no Commons. Tem a certeza de que deseja continuar?</string>
+  <string name="file_exists">Este ficheiro já existe na wiki Commons. Tem a certeza de que deseja continuar?</string>
   <string name="yes">Sim</string>
   <string name="no">Não</string>
   <string name="media_detail_title">Título</string>
@@ -194,10 +194,10 @@
   <string name="set_limit">Definir o limite de carregamentos recentes</string>
   <string name="login_failed_2fa_not_supported">Atualmente, a autenticação de dois fatores não é suportada.</string>
   <string name="logout_verification">Deseja realmente sair?</string>
-  <string name="commons_logo">Logótipo do Commons</string>
-  <string name="commons_website">Sítio do Commons</string>
-  <string name="commons_facebook">Página do Commons no Facebook</string>
-  <string name="commons_github">Código-fonte do Commons no Github</string>
+  <string name="commons_logo">Logótipo da wiki Commons</string>
+  <string name="commons_website">Sítio da wiki Commons</string>
+  <string name="commons_facebook">Página da wiki Commons no Facebook</string>
+  <string name="commons_github">Código-fonte da wiki Commons no Github</string>
   <string name="background_image">Imagem de fundo</string>
   <string name="mediaimage_failed">Falha na imagem de média</string>
   <string name="no_image_found">Nenhuma imagem encontrada</string>
@@ -226,7 +226,7 @@
   <string name="navigation_item_featured_images">Destacadas</string>
   <string name="nearby_needs_permissions">Os sítios aqui perto não podem ser apresentados sem permissões de localização</string>
   <string name="no_description_found">não foi encontrada nenhuma descrição</string>
-  <string name="nearby_info_menu_commons_article">Página do ficheiro no Commons</string>
+  <string name="nearby_info_menu_commons_article">Página do ficheiro na wiki Commons</string>
   <string name="nearby_info_menu_wikidata_article">Item do Wikidata</string>
   <string name="nearby_info_menu_wikipedia_article">Artigo na Wikipédia</string>
   <string name="error_while_cache">Erro ao colocar imagens na cache</string>
@@ -283,6 +283,8 @@
   <string name="share_app_title">Partilhar aplicação</string>
   <string name="share_coordinates_not_present">Não foram especificadas coordenadas durante a seleção da imagem</string>
   <string name="error_fetching_nearby_places">Erro ao localizar locais próximos.</string>
+  <string name="appwidget_img">Imagem do Dia</string>
+  <string name="app_widget_heading">Imagem do Dia</string>
   <string name="successful_wikidata_edit">Imagem adicionada a %1$s na wiki Wikidata!</string>
   <string name="wikidata_edit_failure">Falha ao atualizar a entidade Wikidata correspondente!</string>
   <string name="menu_set_wallpaper">Definir imagem de fundo</string>
