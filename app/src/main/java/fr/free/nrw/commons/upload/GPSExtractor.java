@@ -95,33 +95,6 @@ public class GPSExtractor {
         }
     }
 
-    /**
-     * Listen for user's location when it changes
-     */
-    private class MyLocationListener implements LocationListener {
-
-        @Override
-        public void onLocationChanged(Location location) {
-            currentLatitude = location.getLatitude();
-            currentLongitude = location.getLongitude();
-        }
-
-        @Override
-        public void onStatusChanged(String provider, int status, Bundle extras) {
-            Timber.d("%s's status changed to %d", provider, status);
-        }
-
-        @Override
-        public void onProviderEnabled(String provider) {
-            Timber.d("Provider %s enabled", provider);
-        }
-
-        @Override
-        public void onProviderDisabled(String provider) {
-            Timber.d("Provider %s disabled", provider);
-        }
-    }
-
     public double getDecLatitude() {
         return decLatitude;
     }
