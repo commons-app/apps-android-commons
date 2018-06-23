@@ -1,8 +1,6 @@
 package fr.free.nrw.commons.upload;
 
-import android.content.Context;
 import android.content.SharedPreferences;
-import android.location.Criteria;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
@@ -51,9 +49,9 @@ public class GPSExtractor {
     /**
      * Construct from the file path of the image.
      * @param path file path of the image
-     * @param context the context
+     *
      */
-    public GPSExtractor(@NonNull String path, Context context, SharedPreferences prefs) {
+    public GPSExtractor(@NonNull String path, SharedPreferences prefs) {
         this.prefs = prefs;
         try {
             exif = new ExifInterface(path);

@@ -111,7 +111,7 @@ public class FileProcessor implements SimilarImageDialogFragment.onResponse {
             } else {
                 String filePath = getPathOfMediaOrCopy();
                 if (filePath != null) {
-                    imageObj = new GPSExtractor(filePath, context, prefs);
+                    imageObj = new GPSExtractor(filePath, prefs);
                 }
             }
 
@@ -165,7 +165,7 @@ public class FileProcessor implements SimilarImageDialogFragment.onResponse {
                     }
                 } else {
                     if (filePath != null) {
-                        tempImageObj = new GPSExtractor(file.getAbsolutePath(), context, prefs);
+                        tempImageObj = new GPSExtractor(file.getAbsolutePath(), prefs);
                     }
                 }
 
