@@ -11,9 +11,12 @@ import android.content.SharedPreferences;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.v4.app.NotificationCompat;
+import android.util.Log;
 import android.webkit.MimeTypeMap;
 import android.widget.Toast;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
@@ -188,13 +191,18 @@ public class UploadService extends HandlerService<Contribution> {
 
     @SuppressLint("StringFormatInvalid")
     private void uploadContribution(Contribution contribution) {
-        InputStream file;
+        InputStream fileInputStream;
 
         String notificationTag = contribution.getLocalUri().toString();
 
         try {
             //FIXME: Google Photos bug
-            file = this.getContentResolver().openInputStream(contribution.getLocalUri());
+            Log.d("deneme","uploadContribution "+contribution.getLocalUri());
+            File file1 = new File(contribution.getLocalUri().getPath());
+            Log.d("deneme", file1.exists()+"");
+
+            fileInputStream = new FileInputStream(file1);
+            //fileInputStream = this.getContentResolver().openInputStream(contribution.getLocalUri());
         } catch (FileNotFoundException e) {
             Timber.d("File not found");
             Toast fileNotFound = Toast.makeText(this, R.string.upload_failed, Toast.LENGTH_LONG);
@@ -202,9 +210,9 @@ public class UploadService extends HandlerService<Contribution> {
             return;
         }
 
-        //As the file is null there's no point in continuing the upload process
+        //As the fileInputStream is null there's no point in continuing the upload process
         //mwapi.upload accepts a NonNull input stream
-        if(file == null) {
+        if(fileInputStream == null) {
             Timber.d("File not found");
             return;
         }
@@ -252,7 +260,7 @@ public class UploadService extends HandlerService<Contribution> {
                     getString(R.string.upload_progress_notification_title_finishing, contribution.getDisplayTitle()),
                     contribution
             );
-            UploadResult uploadResult = mwApi.uploadFile(filename, file, contribution.getDataLength(), contribution.getPageContents(), contribution.getEditSummary(), notificationUpdater);
+            UploadResult uploadResult = mwApi.uploadFile(filename, fileInputStream, contribution.getDataLength(), contribution.getPageContents(), contribution.getEditSummary(), notificationUpdater);
 
             Timber.d("Response is %s", uploadResult.toString());
 
