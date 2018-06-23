@@ -1,6 +1,5 @@
 package fr.free.nrw.commons.upload;
 
-import android.content.SharedPreferences;
 import android.media.ExifInterface;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -16,7 +15,7 @@ import timber.log.Timber;
  * is uploaded, extract latitude and longitude from EXIF data of image.
  */
 public class GPSExtractor {
-    
+
     private ExifInterface exif;
     private double decLatitude;
     private double decLongitude;

@@ -119,7 +119,7 @@ public class FileProcessor implements SimilarImageDialogFragment.onResponse {
             if (decimalCoords == null || !imageObj.imageCoordsExists) {
                 //Find other photos taken around the same time which has gps coordinates
                 if (!haveCheckedForOtherImages)
-                    findOtherImages(gpsEnabled);// Do not do repeat the process
+                    findOtherImages();// Do not do repeat the process
             } else {
                 useImageCoords();
             }
@@ -137,9 +137,8 @@ public class FileProcessor implements SimilarImageDialogFragment.onResponse {
     /**
      * Find other images around the same location that were taken within the last 20 sec
      *
-     * @param gpsEnabled True if GPS is enabled
      */
-    private void findOtherImages(boolean gpsEnabled) {
+    private void findOtherImages() {
         Timber.d("filePath" + getPathOfMediaOrCopy());
 
         long timeOfCreation = new File(filePath).lastModified();//Time when the original image was created
