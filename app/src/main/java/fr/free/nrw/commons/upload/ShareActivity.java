@@ -130,7 +130,6 @@ public class ShareActivity
     private String title;
     private String description;
     private String wikiDataEntityId;
-    private Snackbar snackbar;
     private boolean duplicateCheckPassed = false;
     private boolean isNearbyUpload = false;
     private Animator CurrentAnimator;
@@ -373,7 +372,7 @@ public class ShareActivity
     }
 
     /**
-     * Handles BOTH snackbar permission request (for location) and submit button permission request (for storage)
+     * Handles submit button permission request (for storage)
      *
      * @param requestCode  type of request
      * @param permissions  permissions requested
@@ -394,27 +393,13 @@ public class ShareActivity
             // submit button should bring user to next screen
             case REQUEST_PERM_ON_SUBMIT_STORAGE: {
                 if (grantResults.length >= 1 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    //It is OK to call this at both (1) and (4) because if perm had been granted at
-                    //snackbar, user should not be prompted at submit button
                     checkIfFileExists();
 
                     //Uploading only begins if storage permission granted from arrow icon
                     uploadBegins();
-                    snackbar.dismiss();
                 }
             }
         }
-    }
-
-    /**
-     * Displays Snackbar to ask for location permissions
-     */
-    private Snackbar requestPermissionUsingSnackBar(String rationale, final String[] perms, final int code) {
-        Snackbar snackbar = Snackbar.make(findViewById(android.R.id.content), rationale,
-                Snackbar.LENGTH_INDEFINITE).setAction(R.string.ok,
-                view -> ActivityCompat.requestPermissions(ShareActivity.this, perms, code));
-        snackbar.show();
-        return snackbar;
     }
 
     /**
