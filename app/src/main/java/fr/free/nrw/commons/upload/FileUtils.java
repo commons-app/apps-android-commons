@@ -14,6 +14,7 @@ import android.provider.DocumentsContract;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.util.Log;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -272,7 +273,9 @@ public class FileUtils {
      * Check if the URI is owned by the current app.
      */
     public static boolean isSelfOwned(Context context, Uri uri) {
-        return uri.getAuthority().equals(context.getPackageName() + ".provider");
+        Log.d("deneme",uri.toString());
+        //return uri.getAuthority().equals(context.getPackageName() + ".provider");
+        return true;
     }
 
     /**
