@@ -10,6 +10,7 @@ import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.content.FileProvider;
+import android.util.Log;
 
 import java.io.File;
 import java.util.Date;
@@ -91,7 +92,7 @@ public class ContributionController {
         fragment.startActivityForResult(pickImageIntent, SELECT_FROM_GALLERY);
     }
 
-    public void handleImagePicked(int requestCode, Intent data, boolean isDirectUpload, String wikiDataEntityId) {
+    public void handleImagePicked(int requestCode, Uri uri, boolean isDirectUpload, String wikiDataEntityId) {
         Timber.d("Is direct upload %s and the Wikidata entity ID is %s", isDirectUpload, wikiDataEntityId);
         FragmentActivity activity = fragment.getActivity();
         Timber.d("handleImagePicked() called with onActivityResult()");
@@ -100,7 +101,7 @@ public class ContributionController {
         switch (requestCode) {
             case SELECT_FROM_GALLERY:
                 //Handles image picked from gallery
-                Uri imageData = data.getData();
+                Uri imageData = uri;
                 shareIntent.setType(activity.getContentResolver().getType(imageData));
                 shareIntent.putExtra(EXTRA_STREAM, imageData);
                 shareIntent.putExtra(EXTRA_SOURCE, SOURCE_GALLERY);
