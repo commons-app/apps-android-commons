@@ -4,16 +4,8 @@ import android.content.Context;
 import android.net.Uri;
 import android.util.Log;
 
-import java.io.BufferedInputStream;
-import java.io.BufferedOutputStream;
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.URI;
-import java.net.URISyntaxException;
+import java.io.FileWriter;
 
 import timber.log.Timber;
 
@@ -23,9 +15,11 @@ import timber.log.Timber;
 
 public class ContributionUtils {
 
-    private static final String TEMP_UPLOADING_DIRECTORY =
+    /*private static String TEMP_UPLOADING_DIRECTORY_BODY =
             android.os.Environment.getExternalStorageDirectory().getPath()+
-                    File.separatorChar+"UploadingByCommonsApp";
+                    File.separatorChar+"UploadingByCommonsApp";*/
+    // This file will be folder of files which are uploading now will be stored in
+    private static final String TEMP_UPLOADING_DIRECTORY_BODY = "/Uploading_Now";
 
     /**
      * Saves images temporarily to a fixed folder and use URI of that file during upload process.
@@ -34,24 +28,29 @@ public class ContributionUtils {
      * Not: Saved image will be deleted, our directory will be empty after upload process.
      * @return URI of saved image
      */
-    public static Uri saveFileBeingUploadedTemporarily(Uri URIfromContentProvider) {
+    public static Uri saveFileBeingUploadedTemporarily(Context context, Uri URIfromContentProvider) {
         // TODO add exceptions for Google Drive URİ is needed
         Uri result = null;
-        if (FileUtils.checkIfDirectoryExists(TEMP_UPLOADING_DIRECTORY)) {
-            Log.d("deneme","saveFileBeingUploadedTemporarily checkIfDirectoryExists");
 
-            String destinationFilename = TEMP_UPLOADING_DIRECTORY +File.separatorChar+"1_tmp";
+        if (FileUtils.checkIfDirectoryExists(context.getFilesDir()+TEMP_UPLOADING_DIRECTORY_BODY)) {
+            Log.d("deneme","saveFileBeingUploadedTemporarily checkIfDirectoryExists uri: "+URIfromContentProvider.toString()+" - directory = "+context.getFilesDir()+ TEMP_UPLOADING_DIRECTORY_BODY);
+
+            String destinationFilename = context.getFilesDir()+ TEMP_UPLOADING_DIRECTORY_BODY +File.separatorChar+"1_tmp";
             String sourceFileName = URIfromContentProvider.getPath();
-            result = FileUtils.saveFileFromURI(sourceFileName, destinationFilename);
+            Log.d("deneme","saveFileBeingUploadedTemporarily sourceFileName"+sourceFileName);
+
+            result = FileUtils.saveFileFromURI(context, URIfromContentProvider, destinationFilename);
         } else { // If directory doesn't exist, create it and recursive call current method to check again
-           if (FileUtils.createDirectory(TEMP_UPLOADING_DIRECTORY)) {
+
+            File file = new File(context.getFilesDir(),TEMP_UPLOADING_DIRECTORY_BODY);
+            if (file.mkdirs()) {
                Log.d("deneme","saveFileBeingUploadedTemporarily directoryCreated");
 
                Timber.d("saveFileBeingUploadedTemporarily() parameters: URI from Content Provider %s", URIfromContentProvider);
-               saveFileBeingUploadedTemporarily(URIfromContentProvider); // If directory is created
-           } else { //An error occurred to create directory
+               result = saveFileBeingUploadedTemporarily(context, URIfromContentProvider); // If directory is created
+            } else { //An error occurred to create directory
                Timber.e("saveFileBeingUploadedTemporarily() parameters: URI from Content Provider %s", URIfromContentProvider);
-           }
+            }
         }
         return result;
     }
