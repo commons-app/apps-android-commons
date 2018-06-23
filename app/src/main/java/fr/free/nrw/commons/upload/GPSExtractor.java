@@ -24,7 +24,6 @@ import timber.log.Timber;
  */
 public class GPSExtractor {
 
-    private final Context context;
     private SharedPreferences prefs;
     private ExifInterface exif;
     private double decLatitude;
@@ -38,11 +37,9 @@ public class GPSExtractor {
     /**
      * Construct from the file descriptor of the image (only for API 24 or newer).
      * @param fileDescriptor the file descriptor of the image
-     * @param context the context
      */
     @RequiresApi(24)
-    public GPSExtractor(@NonNull FileDescriptor fileDescriptor, Context context, SharedPreferences prefs) {
-        this.context = context;
+    public GPSExtractor(@NonNull FileDescriptor fileDescriptor, SharedPreferences prefs) {
         this.prefs = prefs;
         try {
             exif = new ExifInterface(fileDescriptor);
@@ -63,7 +60,6 @@ public class GPSExtractor {
         } catch (IOException | IllegalArgumentException e) {
             Timber.w(e);
         }
-        this.context = context;
     }
 
     /**

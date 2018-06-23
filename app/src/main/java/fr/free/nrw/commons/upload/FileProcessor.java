@@ -106,7 +106,7 @@ public class FileProcessor implements SimilarImageDialogFragment.onResponse {
             ParcelFileDescriptor descriptor = contentResolver.openFileDescriptor(mediaUri, "r");
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
                 if (descriptor != null) {
-                    imageObj = new GPSExtractor(descriptor.getFileDescriptor(), context, prefs);
+                    imageObj = new GPSExtractor(descriptor.getFileDescriptor(), prefs);
                 }
             } else {
                 String filePath = getPathOfMediaOrCopy();
@@ -161,7 +161,7 @@ public class FileProcessor implements SimilarImageDialogFragment.onResponse {
                 }
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
                     if (descriptor != null) {
-                        tempImageObj = new GPSExtractor(descriptor.getFileDescriptor(), context, prefs);
+                        tempImageObj = new GPSExtractor(descriptor.getFileDescriptor(), prefs);
                     }
                 } else {
                     if (filePath != null) {
