@@ -46,8 +46,10 @@ import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.PageTitle;
 import fr.free.nrw.commons.category.CategoryImageUtils;
 import fr.free.nrw.commons.category.QueryContinue;
+import fr.free.nrw.commons.contributions.Contribution;
 import fr.free.nrw.commons.notification.Notification;
 import fr.free.nrw.commons.notification.NotificationUtils;
+import fr.free.nrw.commons.utils.ContributionUtils;
 import in.yuvi.http.fluent.Http;
 import io.reactivex.Observable;
 import io.reactivex.Single;
@@ -693,6 +695,9 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
         Log.e("WTF", "Result: " + result.toString());
 
         String resultStatus = result.getString("/api/upload/@result");
+
+        // In either case, filure or success we have to clean directory
+        ContributionUtils.emptyTemporaryDirectory(context);
         if (!resultStatus.equals("Success")) {
             String errorCode = result.getString("/api/error/@code");
             Timber.e(errorCode);
