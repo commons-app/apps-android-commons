@@ -273,7 +273,6 @@ public class FileUtils {
      * Check if the URI is owned by the current app.
      */
     public static boolean isSelfOwned(Context context, Uri uri) {
-        Log.d("deneme",uri.toString());
         //return uri.getAuthority().equals(context.getPackageName() + ".provider");
         return true;
     }
