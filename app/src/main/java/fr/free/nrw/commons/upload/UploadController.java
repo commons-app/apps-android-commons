@@ -140,7 +140,6 @@ public class UploadController {
                 ContentResolver contentResolver = context.getContentResolver();
                 try {
                     if (contribution.getDataLength() <= 0) {
-                        Log.d("deneme","Contribution doInBackground"+contribution.getLocalUri());
                         AssetFileDescriptor assetFileDescriptor = contentResolver
                                 .openAssetFileDescriptor(Uri.fromFile(new File(contribution.getLocalUri().toString())), "r");
                         if (assetFileDescriptor != null) {

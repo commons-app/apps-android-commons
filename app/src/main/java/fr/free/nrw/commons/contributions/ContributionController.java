@@ -92,7 +92,6 @@ public class ContributionController {
     }
 
     public void handleImagePicked(int requestCode, Uri uri, boolean isDirectUpload, String wikiDataEntityId) {
-        //Log.d("deneme","handleImagePicked"+uri.toString());
         FragmentActivity activity = fragment.getActivity();
         Timber.d("handleImagePicked() called with onActivityResult()");
         Intent shareIntent = new Intent(activity, ShareActivity.class);
