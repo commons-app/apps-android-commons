@@ -77,7 +77,8 @@ public class FileUtils {
                 e.printStackTrace();
             }
         }*/
-        return Uri.parse(destinationFilename);
+        //return Uri.parse(destinationFilename);
+        return Uri.parse("file://" + destinationFilename);
     }
 
     /**
