@@ -14,6 +14,8 @@ changed. It is also good to prefix the first line with "area: " where the "area"
 is a filename or identifier for the general area of the code being modified.
 The body should provide a meaningful commit message.
 
+    Read the importance of good commit messages in the [linked blog post](https://blog.oozou.com/commit-messages-matter-60309983c227?gi=c550a10d0f67).
+
 1. Write Javadocs
 
     We require contributors to include Javadocs for all new methods and classes
