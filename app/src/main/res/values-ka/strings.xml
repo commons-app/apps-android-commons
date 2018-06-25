@@ -15,7 +15,7 @@
   <string name="login_success">სისტემაში შესვლა წარმატებით განხორციელდა!</string>
   <string name="login_failed">სისტემაში შესვლა ვერ განხორციელდა!</string>
   <string name="upload_failed">ფაილი არ მოიძებნა. გთხოვთ, სცადოთ სხვა ფაილი.</string>
-  <string name="authentication_failed">ავთენტიფიკაცია ვერ მოხერხდა!</string>
+  <string name="authentication_failed" fuzzy="true">ავთენტიფიკაცია ვერ მოხერხდა!</string>
   <string name="uploading_started">ატვირთვა დაიწყო!</string>
   <string name="upload_completed_notification_title">%1$ ატვირთულია!</string>
   <string name="upload_completed_notification_text">დააჭირეთ თქვენი ატვირთვის სანახავად</string>
@@ -42,8 +42,6 @@
   <string name="share_title_hint">სათაური</string>
   <string name="share_description_hint">აღწერა</string>
   <string name="login_failed_network">შესვლა ვერ ხერხდება - ქსელის შეცდომა</string>
-  <string name="login_failed_username">შესვლა ვერ ხერხდება - გთხოვთ შეამოწმოთ სახელი</string>
-  <string name="login_failed_password">შესვლა ვერ ხერხდება - გთხოვთ შეამოწმოთ პაროლი</string>
   <string name="login_failed_throttled">ძალიან ბევრი წარუმატებელი მცდელობა. გთხოვთ, რამდენიმე წუთში სცადეთ კვლავ.</string>
   <string name="login_failed_blocked">უკაცრავად, ეს მომხმარებელი დაბლოკილია ვიკისაწყობში</string>
   <string name="login_failed_2fa_needed">თქვენ უნდა შეიყვანოთ ორფაქტორიანი ავტორიზაციის კოდი.</string>

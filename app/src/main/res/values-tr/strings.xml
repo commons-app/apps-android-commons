@@ -6,6 +6,7 @@
 * Incelemeelemani
 * McAang
 * Neslihan Turan
+* Rapsar
 * Sayginer
 * Trockya
 * VikipediBilgini
@@ -29,7 +30,7 @@
   <string name="login_success">Oturum açma başarılı!</string>
   <string name="login_failed">Oturum açma başarısız oldu!</string>
   <string name="upload_failed">Dosya bulunamadı. Lütfen başka bir dosya deneyin.</string>
-  <string name="authentication_failed">Kimlik doğrulama başarısız oldu!</string>
+  <string name="authentication_failed">Kimlik doğrulama başarısız oldu, lütfen tekrar giriş yapın</string>
   <string name="uploading_started">Yükleme başladı!</string>
   <string name="upload_completed_notification_title">%1$s yüklendi!</string>
   <string name="upload_completed_notification_text">Yüklemelerinizi görüntülemek için dokunun</string>
@@ -57,8 +58,7 @@
   <string name="add_title_toast">Lütfen bu dosya için bir başlık ekleyin</string>
   <string name="share_description_hint">Açıklama</string>
   <string name="login_failed_network">Oturum açılamıyor - ağ hatası</string>
-  <string name="login_failed_username">Oturum açılamıyor - lütfen kullanıcı adınızı kontrol edin</string>
-  <string name="login_failed_password">Oturum açılamıyor - lütfen parolanızı kontrol edin</string>
+  <string name="login_failed_wrong_credentials">Giriş yapılamıyor - lütfen kullanıcı adınızı ve şifrenizi kontrol edin</string>
   <string name="login_failed_throttled">Çok sayıda başarısız girişimde bulundunuz. Birkaç dakika sonra tekrar deneyin.</string>
   <string name="login_failed_blocked">Üzgünüz, bu kullanıcı Commons\'ta engellendi</string>
   <string name="login_failed_2fa_needed">İki faktörlü kimlik doğrulama kodunu sağlamalısınız.</string>
@@ -112,7 +112,7 @@
   <string name="preference_license">Varsayılan lisans</string>
   <string name="use_previous">Önceki başlığı/açıklamayı kullan</string>
   <string name="allow_gps">Otomatik olarak mevcut konumu al</string>
-  <string name="allow_gps_summary">Resim koordinat olarak etiketlendirilmemişse kategori önerileri için mevcut konum bulun</string>
+  <string name="allow_gps_summary">Resim coğrafi etiketli değilse ve coğrafi etiketler resimle görüntüleniyorsa geçerli konumu alır. Uyarı: Mevcut konumunuzu gösterir.</string>
   <string name="preference_theme">Gece modu</string>
   <string name="preference_theme_summary">Koyu temayı kullanın</string>
   <string name="license_name_cc_by_sa_four"> Attribution-ShareAlike 4.0</string>
@@ -158,6 +158,7 @@
   <string name="welcome_copyright_subtext">Telif hakkı olan ve internette bulunan film afişi, kitap kapağı gibi malzemelerin kullanımından kaçının.</string>
   <string name="welcome_final_text">Bunu anladınız mı?</string>
   <string name="welcome_final_button_text">Evet!</string>
+  <string name="welcome_help_button_text">*</string>
   <string name="detail_panel_cats_label">Kategoriler</string>
   <string name="detail_panel_cats_loading">Yükleniyor...</string>
   <string name="detail_panel_cats_none">Hiçbir şey seçilmedi</string>
@@ -241,7 +242,7 @@
   <string name="send_log_file_description">Kayıt dosyasını, e-posta aracılığıyla geliştiricilere gönderin</string>
   <string name="no_web_browser">URL\'yi açabilecek bir tarayıcı bulunamadı</string>
   <string name="null_url">Hata! URL bulunamadı</string>
-  <string name="nominate_deletion">Silinmesi için aday göster</string>
+  <string name="nominate_deletion">Silinmeye aday göster</string>
   <string name="nominated_for_deletion">Bu görsel silinmesi için aday gösterildi.</string>
   <string name="view_browser">Tarayıcıda görüntüle</string>
   <string name="nearby_location_has_not_changed">Konum değiştirilmedi</string>
@@ -271,4 +272,20 @@
   <string name="about_translate_proceed">İlerle</string>
   <string name="about_translate_cancel">Vazgeç</string>
   <string name="retry">Tekrar Deneyin</string>
+  <string name="showcase_view_got_it_button">Anladım!</string>
+  <string name="showcase_view_whole_nearby_activity">Vikipedi maddelerine eklemek için fotoğrafa ihtiyaç duyan size yakın yerler</string>
+  <string name="showcase_view_list_icon">Bu tuşa dokunmak bu yerlerin bir listesini getirir</string>
+  <string name="showcase_view_plus_fab">Galerinizden veya kameranızla herhangi bir yer için resim yükleyebilirsiniz.</string>
+  <string name="no_images_found">Resim bulunamadı!</string>
+  <string name="error_loading_images">Resimler yüklenirken hata oluştu.</string>
+  <string name="image_uploaded_by">Yükleyen: %1$s</string>
+  <string name="share_app_title">Uygulamayı Paylaş</string>
+  <string name="share_coordinates_not_present">Koordinatlar görüntü seçimi sırasında belirlenmedi</string>
+  <string name="error_fetching_nearby_places">Yakındaki yerler alınırken hata oluştu.</string>
+  <string name="appwidget_img">Günün Resmi</string>
+  <string name="app_widget_heading">Günün Resmi</string>
+  <string name="successful_wikidata_edit">Resim, Vikiveri\'de %1$s içine başarıyla eklendi.</string>
+  <string name="wikidata_edit_failure">Karşılık gelen Vikiveri varlığı güncellenemedi!</string>
+  <string name="menu_set_wallpaper">Duvar kağıdı ayarla</string>
+  <string name="wallpaper_set_successfully">Duvar kağıdı başarıyla ayarlandı!</string>
 </resources>

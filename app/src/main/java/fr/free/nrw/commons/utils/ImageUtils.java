@@ -1,10 +1,27 @@
 package fr.free.nrw.commons.utils;
 
+import android.app.WallpaperManager;
+import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapRegionDecoder;
 import android.graphics.Color;
 import android.graphics.Rect;
+import android.net.Uri;
+import android.support.annotation.Nullable;
 
+import com.facebook.common.executors.CallerThreadExecutor;
+import com.facebook.common.references.CloseableReference;
+import com.facebook.datasource.DataSource;
+import com.facebook.drawee.backends.pipeline.Fresco;
+import com.facebook.imagepipeline.core.ImagePipeline;
+import com.facebook.imagepipeline.datasource.BaseBitmapDataSubscriber;
+import com.facebook.imagepipeline.image.CloseableImage;
+import com.facebook.imagepipeline.request.ImageRequest;
+import com.facebook.imagepipeline.request.ImageRequestBuilder;
+
+import java.io.IOException;
+
+import fr.free.nrw.commons.R;
 import timber.log.Timber;
 
 /**
@@ -131,5 +148,53 @@ public class ImageUtils {
         }
 
         return isImageDark;
+    }
+
+    /**
+     * Downloads the image from the URL and sets it as the phone's wallpaper
+     * Fails silently if download or setting wallpaper fails.
+     * @param context
+     * @param imageUrl
+     */
+    public static void setWallpaperFromImageUrl(Context context, Uri imageUrl) {
+        Timber.d("Trying to set wallpaper from url %s", imageUrl.toString());
+        ImageRequest imageRequest = ImageRequestBuilder
+                .newBuilderWithSource(imageUrl)
+                .setAutoRotateEnabled(true)
+                .build();
+
+        ImagePipeline imagePipeline = Fresco.getImagePipeline();
+        final DataSource<CloseableReference<CloseableImage>>
+                dataSource = imagePipeline.fetchDecodedImage(imageRequest, context);
+
+        dataSource.subscribe(new BaseBitmapDataSubscriber() {
+
+            @Override
+            public void onNewResultImpl(@Nullable Bitmap bitmap) {
+                if (dataSource.isFinished() && bitmap != null){
+                    Timber.d("Bitmap loaded from url %s", imageUrl.toString());
+                    setWallpaper(context, Bitmap.createBitmap(bitmap));
+                    dataSource.close();
+                }
+            }
+
+            @Override
+            public void onFailureImpl(DataSource dataSource) {
+                Timber.d("Error getting bitmap from image url %s", imageUrl.toString());
+                if (dataSource != null) {
+                    dataSource.close();
+                }
+            }
+        }, CallerThreadExecutor.getInstance());
+    }
+
+    private static void setWallpaper(Context context, Bitmap bitmap) {
+        WallpaperManager wallpaperManager = WallpaperManager.getInstance(context);
+        try {
+            wallpaperManager.setBitmap(bitmap);
+            ViewUtil.showLongToast(context, context.getString(R.string.wallpaper_set_successfully));
+        } catch (IOException e) {
+            Timber.e(e,"Error setting wallpaper");
+        }
     }
 }

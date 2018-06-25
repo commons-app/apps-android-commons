@@ -39,7 +39,7 @@ import butterknife.ButterKnife;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
-import fr.free.nrw.commons.upload.MwVolleyApi;
+import fr.free.nrw.commons.upload.GpsCategoryModel;
 import fr.free.nrw.commons.utils.StringSortingUtils;
 import fr.free.nrw.commons.utils.ViewUtil;
 import io.reactivex.Observable;
@@ -73,6 +73,7 @@ public class CategorizationFragment extends CommonsDaggerSupportFragment {
     @Inject @Named("prefs") SharedPreferences prefsPrefs;
     @Inject @Named("direct_nearby_upload_prefs") SharedPreferences directPrefs;
     @Inject CategoryDao categoryDao;
+    @Inject GpsCategoryModel gpsCategoryModel;
 
     private RVRendererAdapter<CategoryItem> categoriesAdapter;
     private OnCategoriesSaveHandler onCategoriesSaveHandler;
@@ -253,7 +254,6 @@ public class CategorizationFragment extends CommonsDaggerSupportFragment {
     }
 
     private Observable<CategoryItem> defaultCategories() {
-
         Observable<CategoryItem> directCat = directCategories();
         if (hasDirectCategories) {
             Timber.d("Image has direct Cat");
@@ -287,9 +287,7 @@ public class CategorizationFragment extends CommonsDaggerSupportFragment {
     }
 
     private Observable<CategoryItem> gpsCategories() {
-        return Observable.fromIterable(
-                MwVolleyApi.GpsCatExists.getGpsCatExists()
-                        ? MwVolleyApi.getGpsCat() : new ArrayList<>())
+        return Observable.fromIterable(gpsCategoryModel.getCategoryList())
                 .map(name -> new CategoryItem(name, false));
     }
 

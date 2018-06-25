@@ -16,7 +16,7 @@
   <string name="logging_in_message">Lūdzu, uzgaidiet…</string>
   <string name="login_success">Ieiešana veiksmīga</string>
   <string name="login_failed">Pieteikšanās neizdevās.</string>
-  <string name="authentication_failed">Autentifikācija neizdevās!</string>
+  <string name="authentication_failed" fuzzy="true">Autentifikācija neizdevās!</string>
   <string name="uploading_started">Augšupielāde sākās!</string>
   <string name="upload_completed_notification_title">%1$s augšupielādēti!</string>
   <string name="upload_progress_notification_title_start">Uzsāk %1$s augšupielādi</string>
@@ -109,4 +109,5 @@
   <string name="about_translate_title">Valodas</string>
   <string name="about_translate_proceed">Turpināt</string>
   <string name="about_translate_cancel">Atcelt</string>
+  <string name="showcase_view_got_it_button">Sapratu!</string>
 </resources>

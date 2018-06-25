@@ -52,4 +52,6 @@
     <color name="bottom_bar_dark">#424242</color>
 
     <color name="opak_middle_grey">#757575</color>
+    <color name="white">#FFFFFF</color>
+    <color name="black">#000000</color>
 </resources>

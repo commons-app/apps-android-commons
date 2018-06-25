@@ -47,6 +47,8 @@ import fr.free.nrw.commons.modifications.TemplateRemoveModifier;
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
 import timber.log.Timber;
 
+//TODO: We should use this class to see how multiple uploads are handled, and then REMOVE it.
+
 public class MultipleShareActivity extends AuthenticatedActivity
         implements MediaDetailPagerFragment.MediaDetailProvider,
         AdapterView.OnItemClickListener,
