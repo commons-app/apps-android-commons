@@ -29,6 +29,9 @@ import android.widget.TextView;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
+import com.mapbox.geojson.Feature;
+import com.mapbox.geojson.FeatureCollection;
+import com.mapbox.geojson.Point;
 import com.mapbox.mapboxsdk.Mapbox;
 import com.mapbox.mapboxsdk.annotations.Icon;
 import com.mapbox.mapboxsdk.annotations.IconFactory;
@@ -42,15 +45,11 @@ import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.MapboxMapOptions;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
+import com.mapbox.mapboxsdk.maps.Telemetry;
 import com.mapbox.mapboxsdk.style.layers.Layer;
 import com.mapbox.mapboxsdk.style.layers.PropertyFactory;
 import com.mapbox.mapboxsdk.style.layers.SymbolLayer;
 import com.mapbox.mapboxsdk.style.sources.GeoJsonSource;
-import com.mapbox.services.android.telemetry.MapboxTelemetry;
-import com.mapbox.services.commons.geojson.Feature;
-import com.mapbox.services.commons.geojson.FeatureCollection;
-import com.mapbox.services.commons.geojson.Point;
-import com.mapbox.services.commons.models.Position;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
@@ -120,12 +119,15 @@ public class NearbyMapFragment extends DaggerFragment {
     private final double CAMERA_TARGET_SHIFT_FACTOR_PORTRAIT = 0.06;
     private final double CAMERA_TARGET_SHIFT_FACTOR_LANDSCAPE = 0.04;
 
-    private final String CURRENT_LOCATION_LAYER_ID = "current_location_layer";
-    private boolean useArrowMarker;
 
     private boolean isSecondMaterialShowcaseDismissed;
     private boolean isMapReady;
     private MaterialShowcaseView thirdSingleShowCaseView;
+
+    private final String CURRENT_LOCATION_LAYER_ID = "current_location_layer";
+    private final String CURRENT_LOCATION_MARKER_SOURCE_ID = "current_location_marker";
+    private boolean useArrowMarker;
+
 
     private Bundle bundleForUpdtes;// Carry information from activity about changed nearby places and current location
 
@@ -172,7 +174,7 @@ public class NearbyMapFragment extends DaggerFragment {
         if (curLatLng != null) {
             Mapbox.getInstance(getActivity(),
                     getString(R.string.mapbox_commons_app_token));
-            MapboxTelemetry.getInstance().setTelemetryEnabled(false);
+            Telemetry.disableOnUserRequest();
         }
         setRetainInstance(true);
     }
@@ -261,19 +263,20 @@ public class NearbyMapFragment extends DaggerFragment {
     private void updateMapToTrackPosition() {
 
         if (currentLocationMarker != null) {
-            Position curMapBoxPosition = Position.fromCoordinates(curLatLng.getLongitude(), curLatLng.getLatitude());
+            Point curMapBoxPosition = Point.fromLngLat(curLatLng.getLongitude(), curLatLng.getLatitude());
             LatLng curMapBoxLatLng = new LatLng(curLatLng.getLatitude(),curLatLng.getLongitude());
-            ValueAnimator markerAnimator = ObjectAnimator.ofObject(currentLocationMarker.getGeometry(), "coordinates",
-                    new PositionEvaluator(), currentLocationMarker.getGeometry().getCoordinates(),
+            ValueAnimator markerAnimator = ObjectAnimator.ofObject(currentLocationMarker, "geometry",
+                    new PointEvaluator(), ((Point)currentLocationMarker.geometry()),
                     curMapBoxPosition);
 
 
             markerAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
                 @Override
                 public void onAnimationUpdate(ValueAnimator valueAnimator) {
-                    GeoJsonSource source = mapboxMap.getSourceAs("current_location_marker");
+                    GeoJsonSource source = mapboxMap.getSourceAs(CURRENT_LOCATION_MARKER_SOURCE_ID);
                     if (source != null) {
-                        source.setGeoJson(Feature.fromGeometry(Point.fromCoordinates((Position) valueAnimator.getAnimatedValue())));
+                        Point point = (Point) valueAnimator.getAnimatedValue();
+                        source.setGeoJson(point);
                     }
                 }
             });
@@ -291,32 +294,32 @@ public class NearbyMapFragment extends DaggerFragment {
                 mapboxMap.addPolygon(currentLocationPolygonOptions);
             }
 
-                // Make camera to follow user on location change
-                CameraPosition position ;
-                if(ViewUtil.isPortrait(getActivity())){
-                    position = new CameraPosition.Builder()
-                            .target(isBottomListSheetExpanded ?
-                                    new LatLng(curMapBoxLatLng.getLatitude()- CAMERA_TARGET_SHIFT_FACTOR_PORTRAIT,
-                                            curMapBoxLatLng.getLongitude())
-                                    : curMapBoxLatLng ) // Sets the new camera position
-                            .zoom(isBottomListSheetExpanded ?
-                                    11 // zoom level is fixed to 11 when bottom sheet is expanded
-                                    :mapboxMap.getCameraPosition().zoom) // Same zoom level
-                            .build();
-                }else {
-                    position = new CameraPosition.Builder()
-                            .target(isBottomListSheetExpanded ?
-                                    new LatLng(curMapBoxLatLng.getLatitude()- CAMERA_TARGET_SHIFT_FACTOR_LANDSCAPE,
-                                            curMapBoxLatLng.getLongitude())
-                                    : curMapBoxLatLng ) // Sets the new camera position
-                            .zoom(isBottomListSheetExpanded ?
-                                    11 // zoom level is fixed to 11 when bottom sheet is expanded
-                                    :mapboxMap.getCameraPosition().zoom) // Same zoom level
-                            .build();
-                }
+            // Make camera to follow user on location change
+            CameraPosition position ;
+            if(ViewUtil.isPortrait(getActivity())){
+                position = new CameraPosition.Builder()
+                        .target(isBottomListSheetExpanded ?
+                                new LatLng(curMapBoxLatLng.getLatitude()- CAMERA_TARGET_SHIFT_FACTOR_PORTRAIT,
+                                        curMapBoxLatLng.getLongitude())
+                                : curMapBoxLatLng ) // Sets the new camera position
+                        .zoom(isBottomListSheetExpanded ?
+                                11 // zoom level is fixed to 11 when bottom sheet is expanded
+                                :mapboxMap.getCameraPosition().zoom) // Same zoom level
+                        .build();
+            }else {
+                position = new CameraPosition.Builder()
+                        .target(isBottomListSheetExpanded ?
+                                new LatLng(curMapBoxLatLng.getLatitude()- CAMERA_TARGET_SHIFT_FACTOR_LANDSCAPE,
+                                        curMapBoxLatLng.getLongitude())
+                                : curMapBoxLatLng ) // Sets the new camera position
+                        .zoom(isBottomListSheetExpanded ?
+                                11 // zoom level is fixed to 11 when bottom sheet is expanded
+                                :mapboxMap.getCameraPosition().zoom) // Same zoom level
+                        .build();
+            }
 
-                mapboxMap.animateCamera(CameraUpdateFactory
-                        .newCameraPosition(position), 1000);
+            mapboxMap.animateCamera(CameraUpdateFactory
+                    .newCameraPosition(position), 1000);
 
         }
     }
@@ -355,7 +358,6 @@ public class NearbyMapFragment extends DaggerFragment {
                     .newCameraPosition(position), 1000);
         }
     }
-
     /**
      * set rotation of position marker icon on current position SymbolLayer to azimuth
      * note: this sets rotation to all icons on said SymbolLayer, if you add more icons all will be rotated
@@ -536,7 +538,7 @@ public class NearbyMapFragment extends DaggerFragment {
                 mapboxMap.addImage("current_location_icon", icon.getBitmap());
 
                 FeatureCollection emptySource = FeatureCollection.fromFeatures(new Feature[]{});
-                GeoJsonSource source = new GeoJsonSource("current_location_marker", emptySource);
+                GeoJsonSource source = new GeoJsonSource(CURRENT_LOCATION_MARKER_SOURCE_ID, emptySource);
 
                 if (currentLocationMarker != null) {
                     source.setGeoJson(currentLocationMarker);
@@ -544,17 +546,15 @@ public class NearbyMapFragment extends DaggerFragment {
 
                 mapboxMap.addSource(source);
 
-                // add current marker layer bellow other markers
+                // add current marker layer below other markers
                 List<Layer> layers = mapboxMap.getLayers();
-                String markerLayer = null;
+                String markerLayerId = null;
                 for (Layer layer : layers) {
                     if (layer instanceof SymbolLayer)
-                        markerLayer = layer.getId();
+                        markerLayerId = layer.getId();
                 }
-                currentLocationLayer = new SymbolLayer(CURRENT_LOCATION_LAYER_ID, "current_location_marker").withProperties(PropertyFactory.iconImage("current_location_icon"));
-                mapboxMap.addLayerBelow(currentLocationLayer, markerLayer);
-
-
+                currentLocationLayer = new SymbolLayer(CURRENT_LOCATION_LAYER_ID, CURRENT_LOCATION_MARKER_SOURCE_ID).withProperties(PropertyFactory.iconImage("current_location_icon"));
+                mapboxMap.addLayerBelow(currentLocationLayer, markerLayerId);
             }
         });
         mapView.setStyleUrl("asset://mapstyle.json");
@@ -572,8 +572,8 @@ public class NearbyMapFragment extends DaggerFragment {
      */
     private void addCurrentLocationMarker(MapboxMap mapboxMap) {
 
-        GeoJsonSource source = mapboxMap.getSourceAs("current_location_marker");
-        currentLocationMarker = Feature.fromGeometry(Point.fromCoordinates(Position.fromLngLat(curLatLng.getLongitude(), curLatLng.getLatitude())));
+        GeoJsonSource source = mapboxMap.getSourceAs(CURRENT_LOCATION_MARKER_SOURCE_ID);
+        currentLocationMarker = Feature.fromGeometry(Point.fromLngLat(curLatLng.getLongitude(), curLatLng.getLatitude()));
         if (source != null) {
             source.setGeoJson(currentLocationMarker);
         }
@@ -845,7 +845,7 @@ public class NearbyMapFragment extends DaggerFragment {
     }
 
     private void animateFAB(boolean isFabOpen) {
-            this.isFabOpen = !isFabOpen;
+        this.isFabOpen = !isFabOpen;
         if (fabPlus.isShown()){
             if (isFabOpen) {
                 fabPlus.startAnimation(rotate_backward);
@@ -934,17 +934,16 @@ public class NearbyMapFragment extends DaggerFragment {
         super.onDestroyView();
     }
 
-    private static class PositionEvaluator implements TypeEvaluator<Position> {
+    private static class PointEvaluator implements TypeEvaluator<Point> {
         // Method is used to interpolate the marker animation.
 
         @Override
-        public Position evaluate(float fraction, Position startValue, Position endValue) {
-            double newLatitude = (startValue.getLatitude()
-                    + ((endValue.getLatitude() - startValue.getLatitude()) * fraction));
-            double newLongitude = (startValue.getLongitude()
-                    + ((endValue.getLongitude() - startValue.getLongitude()) * fraction));
-            return Position.fromCoordinates(newLongitude, newLatitude);
+        public Point evaluate(float fraction, Point startValue, Point endValue) {
+            double newLatitude = (startValue.latitude()
+                    + ((endValue.latitude() - startValue.latitude()) * fraction));
+            double newLongitude = (startValue.longitude()
+                    + ((endValue.longitude() - startValue.longitude()) * fraction));
+            return Point.fromLngLat(newLongitude, newLatitude);
         }
     }
 }
-

@@ -22,7 +22,7 @@ dependencies {
     implementation 'info.debatty:java-string-similarity:0.24'
     implementation 'com.borjabravo:readmoretextview:2.1.0'
     implementation 'com.android.support.constraint:constraint-layout:1.0.2'
-    implementation('com.mapbox.mapboxsdk:mapbox-android-sdk:5.4.1@aar') {
+    implementation('com.mapbox.mapboxsdk:mapbox-android-sdk:6.2.0@aar') {
         transitive = true
     }
     implementation 'com.github.deano2390:MaterialShowcaseView:1.2.0'
