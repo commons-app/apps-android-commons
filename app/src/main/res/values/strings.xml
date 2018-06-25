@@ -300,4 +300,5 @@
   <string name="Hmong_wedding_answer">Pictures showing technology or culture are very welcome on Commons</string>
   <string name="warning_for_image_reverts">WARNING : If percentage of images reverted continues to be more than 50%, user is likely to be banned.</string>
   <string name="congratulatory_message_quiz">Congratualtions! You got %1$s of the answers correct</string>
+  <string name="warning_for_no_answer">Select one of the two options to answer the question</string>
 </resources>

@@ -35,7 +35,7 @@ public class QuizActivity extends AppCompatActivity {
 
     private QuizController quizController = new QuizController();
     private ArrayList<QuizQuestion> quiz = new ArrayList<QuizQuestion>();
-    private int questionIndex = 4;
+    private int questionIndex = 3;
     private int score;
 
     @Override
@@ -56,7 +56,7 @@ public class QuizActivity extends AppCompatActivity {
        if( questionIndex <= quiz.size() && (positiveAnswer.isChecked() || negativeAnswer.isChecked())) {
            evaluateScore();
        } else if ( !positiveAnswer.isChecked() && !negativeAnswer.isChecked()){
-           Log.i("Nothing", "Nothing Selected");
+           customAlert(getResources().getString(R.string.warning), getResources().getString(R.string.warning_for_no_answer));
        }
 
     }
@@ -67,6 +67,8 @@ public class QuizActivity extends AppCompatActivity {
         questionTitle.setText(getResources().getString(R.string.question)+quiz.get(questionIndex).getQuestionNumber());
         imageView.setImageURI(quiz.get(questionIndex).getUrl());
         RadioGroupHelper group = new RadioGroupHelper(this,R.id.quiz_positive_answer,R.id.quiz_negative_answer);
+        positiveAnswer.setChecked(false);
+        negativeAnswer.setChecked(false);
     }
 
     public void evaluateScore(){
@@ -75,7 +77,7 @@ public class QuizActivity extends AppCompatActivity {
             customAlert("Correct",quiz.get(questionIndex).getAnswerMessage() );
             score++;
         } else{
-            customAlert("Wrong", "Selfies are not allowed to uploaded");
+            customAlert("Wrong", quiz.get(questionIndex).getAnswerMessage());
         }
     }
 
@@ -86,7 +88,6 @@ public class QuizActivity extends AppCompatActivity {
         alert.setPositiveButton("Continue", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                Log.i("Answer", "Answer");
                 questionIndex++;
                 if(questionIndex == quiz.size()){
                     Intent i = new Intent(QuizActivity.this, QuizResultActivity.class);
