@@ -293,4 +293,9 @@
   <string name="quiz_question_string">Is it Ok to Upload ? </string>
   <string name="question">Question</string>
   <string name="result">Result</string>
+  <string name="selfie_answer">Selfies do not have much encyclopedic value. Please do not upload a picture of your self unless you are famous enough and already have a Wikipedia article about you.</string>
+  <string name="taj_mahal_answer">Pictures of monuments and outside scenery is OK to upload in most countries. Please note that temporary art installations outside are often copyrighted and not OK to upload.</string>
+  <string name="screenshot_answer">Screenshots of websites are considered derivatives works and subject to any copyright on the website itself. These can be used after permission from the author. Without such permission, any art you create based on their work is legally considered an unlicensed copy owned by the original author.</string>
+  <string name="blurry_image_answer">One of the goals of Commons is to gather quality images. Therefore, blurry images shouldn\'t be uploaded. Always try to take nice pictures with good lighting.</string>
+  <string name="Hmong_wedding_answer">Pictures showing technology or culture are very welcome on Commons</string>
 </resources>
