@@ -35,7 +35,7 @@ public class QuizActivity extends AppCompatActivity {
 
     private QuizController quizController = new QuizController();
     private ArrayList<QuizQuestion> quiz = new ArrayList<QuizQuestion>();
-    private int questionIndex = 0;
+    private int questionIndex = 4;
     private int score;
 
     @Override

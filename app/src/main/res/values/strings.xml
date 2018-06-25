@@ -298,4 +298,6 @@
   <string name="screenshot_answer">Screenshots of websites are considered derivatives works and subject to any copyright on the website itself. These can be used after permission from the author. Without such permission, any art you create based on their work is legally considered an unlicensed copy owned by the original author.</string>
   <string name="blurry_image_answer">One of the goals of Commons is to gather quality images. Therefore, blurry images shouldn\'t be uploaded. Always try to take nice pictures with good lighting.</string>
   <string name="Hmong_wedding_answer">Pictures showing technology or culture are very welcome on Commons</string>
+  <string name="warning_for_image_reverts">WARNING : If percentage of images reverted continues to be more than 50%, user is likely to be banned.</string>
+  <string name="congratulatory_message_quiz">Congratualtions! You got %1$s of the answers correct</string>
 </resources>
