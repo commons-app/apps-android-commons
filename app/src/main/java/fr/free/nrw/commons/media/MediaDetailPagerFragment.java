@@ -26,6 +26,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -36,6 +38,8 @@ import fr.free.nrw.commons.contributions.Contribution;
 import fr.free.nrw.commons.contributions.ContributionsActivity;
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
+import fr.free.nrw.commons.utils.ImageUtils;
+import timber.log.Timber;
 
 import static android.Manifest.permission.READ_EXTERNAL_STORAGE;
 import static android.content.Context.DOWNLOAD_SERVICE;
@@ -53,7 +57,8 @@ public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment imple
     @Named("default_preferences")
     SharedPreferences prefs;
 
-    private ViewPager pager;
+    @BindView(R.id.mediaDetailsPager)
+    ViewPager pager;
     private Boolean editable;
     private boolean isFeaturedImage;
 
@@ -72,7 +77,7 @@ public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment imple
                              ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_media_detail_pager, container, false);
-        pager = (ViewPager) view.findViewById(R.id.mediaDetailsPager);
+        ButterKnife.bind(this,view);
         pager.addOnPageChangeListener(this);
 
         final MediaDetailAdapter adapter = new MediaDetailAdapter(getChildFragmentManager());
@@ -137,6 +142,10 @@ public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment imple
                 // Download
                 downloadMedia(m);
                 return true;
+            case R.id.menu_set_as_wallpaper:
+                // Set wallpaper
+                setWallpaper(m);
+                return true;
             case R.id.menu_retry_current_image:
                 // Retry
                 ((ContributionsActivity) getActivity()).retryUpload(pager.getCurrentItem());
@@ -150,6 +159,19 @@ public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment imple
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    /**
+     * Set the media as the device's wallpaper if the imageUrl is not null
+     * Fails silently if setting the wallpaper fails
+     * @param media
+     */
+    private void setWallpaper(Media media) {
+        if(media.getImageUrl() == null || media.getImageUrl().isEmpty()) {
+            Timber.d("Media URL not present");
+            return;
+        }
+        ImageUtils.setWallpaperFromImageUrl(getActivity(), Uri.parse(media.getImageUrl()));
     }
 
     /**

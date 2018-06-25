@@ -7,6 +7,8 @@
     Modified from https://github.com/checkstyle/checkstyle/blob/master/src/main/resources/google_checks.xml.
     Modifications are:
     - doubled each value in Indentation
+    - exceptions for Butter Knife and Espresso
+    - larger (max)LineLength
 
     Checkstyle configuration that checks the Google coding conventions from Google Java Style
     that can be found at https://google.github.io/styleguide/javaguide.html.
@@ -44,7 +46,7 @@
             <property name="allowNonPrintableEscapes" value="true"/>
         </module>
         <module name="LineLength">
-            <property name="max" value="100"/>
+            <property name="max" value="140"/>
             <property name="ignorePattern" value="^package.*|^import.*|a href|href|http://|https://|ftp://"/>
         </module>
         <module name="AvoidStarImport"/>
@@ -56,7 +58,7 @@
         </module>
         <module name="NeedBraces"/>
         <module name="LeftCurly">
-            <property name="maxLineLength" value="100"/>
+            <property name="maxLineLength" value="140"/>
         </module>
         <module name="RightCurly">
             <property name="id" value="RightCurlySame"/>

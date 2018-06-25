@@ -9,7 +9,7 @@
     >
 
     <TextView
-        android:id="@+id/featuredImagesSequenceNumber"
+        android:id="@+id/categoryImagesSequenceNumber"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="98sp"
@@ -19,7 +19,7 @@
         />
 
     <fr.free.nrw.commons.MediaWikiImageView
-        android:id="@+id/featuredImageView"
+        android:id="@+id/categoryImageView"
         android:layout_width="match_parent"
         android:layout_height="240dp"
         />
@@ -33,7 +33,7 @@
         android:padding="@dimen/small_gap"
         >
         <ProgressBar
-            android:id="@+id/featuredProgress"
+            android:id="@+id/categoryProgress"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             style="@style/ProgressBar"
@@ -43,7 +43,7 @@
             />
 
         <TextView
-            android:id="@+id/featuredImageTitle"
+            android:id="@+id/categoryImageTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="#FFFFFFFF"
@@ -53,7 +53,7 @@
             />
 
         <TextView
-            android:id="@+id/featuredImageAuthor"
+            android:id="@+id/categoryImageAuthor"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="#FFFFFFFF"
