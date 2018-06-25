@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Authors:
 * Aefgh39622
+* Deathkon
 * Hydra
 * Kuailong
 * Liuxinyu970226
@@ -10,7 +11,7 @@
 -->
 <resources>
   <string name="preference_category_appearance">外观</string>
-  <string name="preference_category_general">一般</string>
+  <string name="preference_category_general">常规</string>
   <string name="preference_category_feedback">反馈</string>
   <string name="preference_category_location">位置</string>
   <string name="app_name">共享资源</string>
