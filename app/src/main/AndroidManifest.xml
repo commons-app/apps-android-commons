@@ -27,10 +27,10 @@
         android:theme="@style/LightAppTheme"
         android:supportsRtl="true" >
         <activity android:name="org.acra.CrashReportDialog"
-                  android:theme="@android:style/Theme.Dialog"
-                  android:launchMode="singleInstance"
-                  android:excludeFromRecents="true"
-                  android:finishOnTaskLaunch="true" />
+            android:theme="@android:style/Theme.Dialog"
+            android:launchMode="singleInstance"
+            android:excludeFromRecents="true"
+            android:finishOnTaskLaunch="true" />
 
         <activity android:name=".auth.LoginActivity">
             <intent-filter>
@@ -164,6 +164,16 @@
             android:exported="false"
             android:label="@string/provider_categories"
             android:syncable="false" />
+
+        <receiver android:name=".widget.PicOfDayAppWidget">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/pic_of_day_app_widget_info" />
+        </receiver>
 
     </application>
 

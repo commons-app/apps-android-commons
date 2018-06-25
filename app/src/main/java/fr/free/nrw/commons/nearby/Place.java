@@ -3,6 +3,7 @@ package fr.free.nrw.commons.nearby;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.support.annotation.DrawableRes;
+import android.support.annotation.Nullable;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -48,6 +49,20 @@ public class Place {
 
     public void setDistance(String distance) {
         this.distance = distance;
+    }
+
+    /**
+     * Extracts the entity id from the wikidata link
+     * @return returns the entity id if wikidata link exists
+     */
+    @Nullable
+    public String getWikiDataEntityId() {
+        if (!hasWikidataLink()) {
+            return null;
+        }
+
+        String wikiDataLink = siteLinks.getWikidataLink().toString();
+        return wikiDataLink.replace("http://www.wikidata.org/entity/", "");
     }
 
     public boolean hasWikipediaLink() {

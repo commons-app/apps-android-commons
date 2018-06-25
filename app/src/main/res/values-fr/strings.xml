@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Authors:
 * Fitoschido
+* Friday83260
 * Gomoko
 * Happy13241
 * Jean-Frédéric
@@ -37,7 +38,7 @@
   <string name="login_success">Connexion réussie !</string>
   <string name="login_failed">Échec de la connexion !</string>
   <string name="upload_failed">Fichier non trouvé. Veuillez en essayer un autre.</string>
-  <string name="authentication_failed">Échec de l’authentification !</string>
+  <string name="authentication_failed">Échec de l\'authentification, veuillez vous reconnecter s\'il vous plait</string>
   <string name="uploading_started">Téléversement démarré !</string>
   <string name="upload_completed_notification_title">%1$s téléversés !</string>
   <string name="upload_completed_notification_text">Appuyer pour voir votre téléversement</string>
@@ -119,7 +120,7 @@
   <string name="preference_license">Licence par défaut</string>
   <string name="use_previous">Utiliser le titre ou la description précédent</string>
   <string name="allow_gps">Obtenir automatiquement l’emplacement actuel</string>
-  <string name="allow_gps_summary">Récupérer l’emplacement actuel pour proposer des suggestions de catégorie si l’image n’est pas marquée géographiquement</string>
+  <string name="allow_gps_summary">Récupère l’emplacement actuel si l’image n’est pas marquée géographiquement, et marque géographiquement l’image avec. Avertissement : Cela dévoilera votre emplacement actuel.</string>
   <string name="preference_theme">Mode de nuit</string>
   <string name="preference_theme_summary">Utiliser un thème sombre</string>
   <string name="license_name_cc_by_sa_four"> Attribution-ShareAlike 4.0</string>
@@ -289,6 +290,10 @@
   <string name="share_app_title">Partager les applications</string>
   <string name="share_coordinates_not_present">Les coordonnées n\'ont pas été spécifiées pendant la sélection de l\'image</string>
   <string name="error_fetching_nearby_places">Erreur durant l\'exploration du voisinage.</string>
+  <string name="appwidget_img">Image du jour</string>
+  <string name="app_widget_heading">Image du jour</string>
+  <string name="successful_wikidata_edit">Image bien ajoutée à %1$s sur Wikidata !</string>
+  <string name="wikidata_edit_failure">Échec de la mise à jour de l\'entité Wikidata correspondante !</string>
   <string name="menu_set_wallpaper">Définir le papier-peint</string>
   <string name="wallpaper_set_successfully">Papier-peint configuré avec succès!</string>
 </resources>

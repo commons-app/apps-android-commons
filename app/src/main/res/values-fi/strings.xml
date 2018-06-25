@@ -30,7 +30,7 @@
   <string name="login_success">Kirjautuminen onnistui!</string>
   <string name="login_failed">Kirjautuminen epäonnistui!</string>
   <string name="upload_failed">Tiedostoa ei löytynyt. Yritä toista tiedostoa.</string>
-  <string name="authentication_failed">Tunnistautuminen epäonnistui!</string>
+  <string name="authentication_failed" fuzzy="true">Tunnistautuminen epäonnistui!</string>
   <string name="uploading_started">Tallentaminen aloitettiin!</string>
   <string name="upload_completed_notification_title">%1$s tallennettiin!</string>
   <string name="upload_completed_notification_text">Napauta katsoaksesi tallennusta</string>
@@ -110,7 +110,7 @@
   <string name="preference_license">Oletuslisenssi</string>
   <string name="use_previous">Käytä edellistä otsikkoa/kuvausta</string>
   <string name="allow_gps">Hae tämänhetkinen sijainti automaattisesti</string>
-  <string name="allow_gps_summary">Nouda nykyinen sijainti asettaaksesi käyttöön luokkaehdotuksia jos kuva ei ole paikkamerkitty</string>
+  <string name="allow_gps_summary" fuzzy="true">Nouda nykyinen sijainti asettaaksesi käyttöön luokkaehdotuksia jos kuva ei ole paikkamerkitty</string>
   <string name="preference_theme">Yötila</string>
   <string name="preference_theme_summary">Käytä tummaa teemaa</string>
   <string name="license_name_cc_by_sa_four">Nimeä-JaaSamoin 4.0</string>
