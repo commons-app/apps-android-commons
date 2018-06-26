@@ -1,5 +1,7 @@
 package fr.free.nrw.commons.category;
 
+import android.util.Log;
+
 import org.jsoup.Jsoup;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -27,7 +29,9 @@ public class CategoryImageUtils {
         List<Media> categoryImages = new ArrayList<>();
         for (int i = 0; i < childNodes.getLength(); i++) {
             Node node = childNodes.item(i);
-            categoryImages.add(getMediaFromPage(node));
+            if (getMediaFromPage(node).getFilename().substring(0,5).equals("File:")){
+                categoryImages.add(getMediaFromPage(node));
+            }
         }
 
         return categoryImages;
