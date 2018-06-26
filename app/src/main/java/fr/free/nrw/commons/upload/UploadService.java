@@ -257,7 +257,7 @@ public class UploadService extends HandlerService<Contribution> {
                     getString(R.string.upload_progress_notification_title_finishing, contribution.getDisplayTitle()),
                     contribution
             );
-            UploadResult uploadResult = mwApi.uploadFile(filename, fileInputStream, contribution.getDataLength(), contribution.getPageContents(), contribution.getEditSummary(), notificationUpdater);
+            UploadResult uploadResult = mwApi.uploadFile(filename, fileInputStream, contribution.getDataLength(), contribution.getPageContents(), contribution.getEditSummary(), notificationUpdater, contribution.getLocalUri());
 
             Timber.d("Response is %s", uploadResult.toString());
 
