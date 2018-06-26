@@ -45,6 +45,7 @@ import fr.free.nrw.commons.MediaDataExtractor;
 import fr.free.nrw.commons.MediaWikiImageView;
 import fr.free.nrw.commons.PageTitle;
 import fr.free.nrw.commons.R;
+import fr.free.nrw.commons.category.CategoryDetailsActivity;
 import fr.free.nrw.commons.delete.DeleteTask;
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
 import fr.free.nrw.commons.location.LatLng;
@@ -430,16 +431,7 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
         if (categoriesLoaded && categoriesPresent) {
             textView.setOnClickListener(view -> {
                 String selectedCategoryTitle = "Category:" + catName;
-                Intent viewIntent = new Intent();
-                viewIntent.setAction(Intent.ACTION_VIEW);
-                viewIntent.setData(new PageTitle(selectedCategoryTitle).getCanonicalUri());
-                //check if web browser available
-                if (viewIntent.resolveActivity(getActivity().getPackageManager()) != null) {
-                    startActivity(viewIntent);
-                } else {
-                    Toast toast = Toast.makeText(getContext(), getString(R.string.no_web_browser), LENGTH_SHORT);
-                    toast.show();
-                }
+                CategoryDetailsActivity.startYourself(getContext(), selectedCategoryTitle, selectedCategoryTitle);
             });
         }
         return item;

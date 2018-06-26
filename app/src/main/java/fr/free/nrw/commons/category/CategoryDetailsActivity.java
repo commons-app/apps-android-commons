@@ -6,14 +6,22 @@ import android.database.DataSetObserver;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Toast;
 
 import butterknife.ButterKnife;
 import fr.free.nrw.commons.Media;
+import fr.free.nrw.commons.PageTitle;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.auth.AuthenticatedActivity;
 import fr.free.nrw.commons.media.MediaDetailPagerFragment;
+import fr.free.nrw.commons.theme.NavigationBaseActivity;
+
+import static android.widget.Toast.LENGTH_SHORT;
 
 /**
  * This activity displays pictures of a particular category
@@ -32,6 +40,7 @@ public class CategoryDetailsActivity
     private FragmentManager supportFragmentManager;
     private CategoryImagesListFragment categoryImagesListFragment;
     private MediaDetailPagerFragment mediaDetails;
+    private String categoryName;
 
     @Override
     protected void onAuthCookieAcquired(String authCookie) {
@@ -51,12 +60,12 @@ public class CategoryDetailsActivity
 
         // Activity can call methods in the fragment by acquiring a
         // reference to the Fragment from FragmentManager, using findFragmentById()
-        initDrawer();
         supportFragmentManager = getSupportFragmentManager();
         setCategoryImagesFragment();
         supportFragmentManager.addOnBackStackChangedListener(this);
         requestAuthToken();
         setPageTitle();
+        initDrawer();
     }
 
     /**
@@ -64,7 +73,7 @@ public class CategoryDetailsActivity
      */
     private void setCategoryImagesFragment() {
         categoryImagesListFragment = new CategoryImagesListFragment();
-        String categoryName = getIntent().getStringExtra("categoryName");
+        categoryName = getIntent().getStringExtra("categoryName");
         if (getIntent() != null && categoryName != null) {
             Bundle arguments = new Bundle();
             arguments.putString("categoryName", categoryName);
@@ -108,6 +117,7 @@ public class CategoryDetailsActivity
 
     @Override
     protected void onResume() {
+        initBackButton();
         if (supportFragmentManager.getBackStackEntryCount()==1){
             //FIXME: Temporary fix for screen rotation inside media details. If we don't call onBackPressed then fragment stack is increasing every time.
             //FIXME: Similar issue like this https://github.com/commons-app/apps-android-commons/issues/894
@@ -155,11 +165,39 @@ public class CategoryDetailsActivity
 
     @Override
     public void registerDataSetObserver(DataSetObserver observer) {
-
     }
 
     @Override
     public void unregisterDataSetObserver(DataSetObserver observer) {
 
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.fragment_category_detail, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        // Handle item selection
+        switch (item.getItemId()) {
+            case R.id.menu_browser_current_category:
+                Intent viewIntent = new Intent();
+                viewIntent.setAction(Intent.ACTION_VIEW);
+                viewIntent.setData(new PageTitle(categoryName).getCanonicalUri());
+                //check if web browser available
+                if (viewIntent.resolveActivity(this.getPackageManager()) != null) {
+                    startActivity(viewIntent);
+                } else {
+                    Toast toast = Toast.makeText(this, getString(R.string.no_web_browser), LENGTH_SHORT);
+                    toast.show();
+                }
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 }

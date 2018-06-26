@@ -1,7 +1,5 @@
 package fr.free.nrw.commons.category;
 
-import android.util.Log;
-
 import org.jsoup.Jsoup;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
