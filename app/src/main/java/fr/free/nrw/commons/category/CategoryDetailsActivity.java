@@ -19,7 +19,6 @@ import fr.free.nrw.commons.PageTitle;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.auth.AuthenticatedActivity;
 import fr.free.nrw.commons.media.MediaDetailPagerFragment;
-import fr.free.nrw.commons.theme.NavigationBaseActivity;
 
 import static android.widget.Toast.LENGTH_SHORT;
 
@@ -66,6 +65,7 @@ public class CategoryDetailsActivity
         requestAuthToken();
         setPageTitle();
         initDrawer();
+        initBackButton();
     }
 
     /**
