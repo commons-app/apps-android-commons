@@ -2,6 +2,7 @@ package fr.free.nrw.commons.mwapi;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -688,7 +689,8 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
                                    long dataLength,
                                    String pageContents,
                                    String editSummary,
-                                   final ProgressListener progressListener) throws IOException {
+                                   final ProgressListener progressListener,
+                                   Uri fileUri) throws IOException {
 
         ApiResult result = api.upload(filename, file, dataLength, pageContents, editSummary, progressListener::onProgress);
 
@@ -697,7 +699,7 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
         String resultStatus = result.getString("/api/upload/@result");
 
         // In either case, filure or success we have to clean directory
-        ContributionUtils.emptyTemporaryDirectory(context);
+        ContributionUtils.removeTemporaryFile(context, fileUri);
         if (!resultStatus.equals("Success")) {
             String errorCode = result.getString("/api/error/@code");
             Timber.e(errorCode);

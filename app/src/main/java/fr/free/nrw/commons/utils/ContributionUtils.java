@@ -51,6 +51,13 @@ public class ContributionUtils {
         return result;
     }
 
+    public static void removeTemporaryFile(Context context, Uri tempFileUri) {
+        File tempFile = new File(tempFileUri.getPath());
+        if (tempFile.exists()) {
+            tempFile.delete();
+        }
+    }
+
     public static void emptyTemporaryDirectory(Context context) {
         File dir = new File(context.getFilesDir()+TEMP_UPLOADING_DIRECTORY_BODY);
         if (dir.isDirectory())
