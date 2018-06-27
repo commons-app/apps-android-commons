@@ -263,7 +263,6 @@ public class MultipleShareActivity extends AuthenticatedActivity
     protected void onAuthCookieAcquired(String authCookie) {
         mwApi.setAuthCookie(authCookie);
         Intent intent = getIntent();
-        Log.d("deneme","MultipleShareActivity onAuthCookieAcquired1");
 
         if (Intent.ACTION_SEND_MULTIPLE.equals(intent.getAction())) {
             if (photosList == null) {
@@ -272,8 +271,8 @@ public class MultipleShareActivity extends AuthenticatedActivity
                 for (int i = 0; i < urisList.size(); i++) {
                     Contribution up = new Contribution();
                     Uri uri = urisList.get(i);
+                    // Use temporarily saved file Uri instead
                     uri = ContributionUtils.saveFileBeingUploadedTemporarily(this, uri);
-                    Log.d("deneme","MultipleShareActivity onAuthCookieAcquired:"+uri.toString());
                     up.setLocalUri(uri);
                     up.setTag("mimeType", intent.getType());
                     up.setTag("sequence", i);

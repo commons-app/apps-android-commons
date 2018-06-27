@@ -100,7 +100,6 @@ public class ContributionController {
             case SELECT_FROM_GALLERY:
                 //Handles image picked from gallery
                 Uri imageData = uri;
-                Log.d("deneme","ContributionController handleImagePicked:"+uri.toString());
                 shareIntent.setType(activity.getContentResolver().getType(imageData));
                 shareIntent.putExtra(EXTRA_STREAM, imageData);
                 shareIntent.putExtra(EXTRA_SOURCE, SOURCE_GALLERY);
