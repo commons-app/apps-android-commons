@@ -121,6 +121,7 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment {
             Timber.d("OnActivityResult() parameters: Req code: %d Result code: %d Data: %s",
                     requestCode, resultCode, data);
             Uri uri = ContributionUtils.saveFileBeingUploadedTemporarily(getActivity(), data.getData());
+            Log.d("deneme","ContributionListFragment onActivityResult:"+uri.toString());
             controller.handleImagePicked(requestCode, uri, false, null);
         } else {
             Timber.e("OnActivityResult() parameters: Req code: %d Result code: %d Data: %s",
