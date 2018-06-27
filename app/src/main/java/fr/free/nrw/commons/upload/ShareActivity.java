@@ -23,6 +23,7 @@ import android.support.annotation.RequiresApi;
 import android.support.design.widget.FloatingActionButton;
 import android.support.graphics.drawable.VectorDrawableCompat;
 import android.support.v4.content.ContextCompat;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.MenuItem;
 import android.view.View;
@@ -62,6 +63,7 @@ import fr.free.nrw.commons.modifications.ModifierSequenceDao;
 import fr.free.nrw.commons.modifications.TemplateRemoveModifier;
 import fr.free.nrw.commons.mwapi.CategoryApi;
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
+import fr.free.nrw.commons.utils.ContributionUtils;
 import fr.free.nrw.commons.utils.ViewUtil;
 import timber.log.Timber;
 
@@ -137,6 +139,7 @@ public class ShareActivity
     private boolean isFABOpen = false;
     private float startScaleFinal;
     private boolean isZoom = false;
+    private Uri tempUri;
 
 
     /**
@@ -190,6 +193,7 @@ public class ShareActivity
             cacheController.cacheCategory();
             Timber.d("Cache the categories found");
         }
+
 
         uploadController.startUpload(title, mediaUri, description, mimeType, source, decimalCoords, wikiDataEntityId, c -> {
             ShareActivity.this.contribution = c;
@@ -303,6 +307,10 @@ public class ShareActivity
 
         if (Intent.ACTION_SEND.equals(intent.getAction())) {
             mediaUri = intent.getParcelableExtra(Intent.EXTRA_STREAM);
+
+            mediaUri = ContributionUtils.saveFileBeingUploadedTemporarily(this, mediaUri);
+            Log.d("deneme","ContributionListFragment onActivityResult:"+mediaUri.toString());
+
             if (intent.hasExtra(UploadService.EXTRA_SOURCE)) {
                 source = intent.getStringExtra(UploadService.EXTRA_SOURCE);
             } else {
