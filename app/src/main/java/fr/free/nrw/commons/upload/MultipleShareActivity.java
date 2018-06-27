@@ -263,6 +263,7 @@ public class MultipleShareActivity extends AuthenticatedActivity
     protected void onAuthCookieAcquired(String authCookie) {
         mwApi.setAuthCookie(authCookie);
         Intent intent = getIntent();
+        Log.d("deneme","MultipleShareActivity onAuthCookieAcquired1");
 
         if (Intent.ACTION_SEND_MULTIPLE.equals(intent.getAction())) {
             if (photosList == null) {
