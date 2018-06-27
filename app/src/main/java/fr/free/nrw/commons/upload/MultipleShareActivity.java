@@ -17,6 +17,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.content.ContextCompat;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
@@ -269,6 +270,7 @@ public class MultipleShareActivity extends AuthenticatedActivity
                 for (int i = 0; i < urisList.size(); i++) {
                     Contribution up = new Contribution();
                     Uri uri = urisList.get(i);
+                    Log.d("deneme","MultipleShareActivity onAuthCookieAcquired:"+uri.toString());
                     up.setLocalUri(uri);
                     up.setTag("mimeType", intent.getType());
                     up.setTag("sequence", i);
