@@ -5,7 +5,6 @@ import android.net.Uri;
 import android.util.Log;
 
 import java.io.File;
-import java.io.FileWriter;
 
 import timber.log.Timber;
 
@@ -15,11 +14,11 @@ import timber.log.Timber;
 
 public class ContributionUtils {
 
-    /*private static String TEMP_UPLOADING_DIRECTORY_BODY =
+    private static String TEMP_EXTERNAL_DIRECTORY =
             android.os.Environment.getExternalStorageDirectory().getPath()+
-                    File.separatorChar+"UploadingByCommonsApp";*/
+                    File.separatorChar+"UploadingByCommonsApp";
     // This file will be folder of files which are uploading now will be stored in
-    private static final String TEMP_UPLOADING_DIRECTORY_BODY = "/Uploading_Now";
+    //private static final String TEMP_EXTERNAL_DIRECTORY = "/Uploading_Now";
 
     /**
      * Saves images temporarily to a fixed folder and use Uri of that file during upload process.
@@ -32,14 +31,14 @@ public class ContributionUtils {
         // TODO add exceptions for Google Drive URİ is needed
         Uri result = null;
 
-        if (FileUtils.checkIfDirectoryExists(context.getFilesDir()+TEMP_UPLOADING_DIRECTORY_BODY)) {
-            String destinationFilename = context.getFilesDir()+ TEMP_UPLOADING_DIRECTORY_BODY +File.separatorChar+"1_tmp";
+        if (FileUtils.checkIfDirectoryExists(TEMP_EXTERNAL_DIRECTORY)) {
+            String destinationFilename = TEMP_EXTERNAL_DIRECTORY +File.separatorChar+"1_tmp";
             String sourceFileName = URIfromContentProvider.getPath();
 
             result = FileUtils.saveFileFromURI(context, URIfromContentProvider, destinationFilename);
         } else { // If directory doesn't exist, create it and recursive call current method to check again
 
-            File file = new File(context.getFilesDir(),TEMP_UPLOADING_DIRECTORY_BODY);
+            File file = new File(TEMP_EXTERNAL_DIRECTORY);
             if (file.mkdirs()) {
                Timber.d("saveFileBeingUploadedTemporarily() parameters: URI from Content Provider %s", URIfromContentProvider);
                result = saveFileBeingUploadedTemporarily(context, URIfromContentProvider); // If directory is created
@@ -54,12 +53,13 @@ public class ContributionUtils {
     public static void removeTemporaryFile(Context context, Uri tempFileUri) {
         File tempFile = new File(tempFileUri.getPath());
         if (tempFile.exists()) {
+            Log.d("deneme","ContributionUtils removeTemporaryFile:"+tempFileUri);
             tempFile.delete();
         }
     }
 
     public static void emptyTemporaryDirectory(Context context) {
-        File dir = new File(context.getFilesDir()+TEMP_UPLOADING_DIRECTORY_BODY);
+        File dir = new File(TEMP_EXTERNAL_DIRECTORY);
         if (dir.isDirectory())
         {
             String[] children = dir.list();
