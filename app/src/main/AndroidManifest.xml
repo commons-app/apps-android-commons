@@ -35,6 +35,11 @@
             android:finishOnTaskLaunch="true" />
 
         <activity android:name=".auth.LoginActivity">
+            <intent-filter>
+                <category android:name="android.intent.category.LAUNCHER" />
+
+                <action android:name="android.intent.action.MAIN" />
+            </intent-filter>
         </activity>
         <activity android:name=".WelcomeActivity" />
         <activity
@@ -86,11 +91,6 @@
             android:label="@string/navigation_item_notification" />
         <activity
             android:name=".quiz.QuizActivity">
-            <intent-filter>
-                <category android:name="android.intent.category.LAUNCHER" />
-
-                <action android:name="android.intent.action.MAIN" />
-            </intent-filter>
         </activity>
         <activity android:name=".quiz.QuizResultActivity"
             android:label="@string/result"/>

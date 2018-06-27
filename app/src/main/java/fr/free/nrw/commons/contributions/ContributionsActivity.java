@@ -1,7 +1,9 @@
 package fr.free.nrw.commons.contributions;
 
+import android.app.AlertDialog;
 import android.content.ComponentName;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.ServiceConnection;
 import android.content.SharedPreferences;
@@ -14,6 +16,7 @@ import android.support.v4.app.LoaderManager;
 import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
 import android.support.v4.widget.CursorAdapter;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -34,6 +37,8 @@ import fr.free.nrw.commons.auth.AuthenticatedActivity;
 import fr.free.nrw.commons.auth.SessionManager;
 import fr.free.nrw.commons.media.MediaDetailPagerFragment;
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
+import fr.free.nrw.commons.quiz.QuizActivity;
+import fr.free.nrw.commons.quiz.QuizResultActivity;
 import fr.free.nrw.commons.settings.Prefs;
 import fr.free.nrw.commons.upload.UploadService;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -58,6 +63,7 @@ public  class       ContributionsActivity
     @Inject MediaWikiApi mediaWikiApi;
     @Inject SessionManager sessionManager;
     @Inject @Named("default_preferences") SharedPreferences prefs;
+    @Inject @Named("revertCount") SharedPreferences revertPrefs;
     @Inject ContributionDao contributionDao;
 
     private Cursor allContributions;
@@ -66,6 +72,10 @@ public  class       ContributionsActivity
     private UploadService uploadService;
     private boolean isUploadServiceConnected;
     private ArrayList<DataSetObserver> observersWaitingForLoad = new ArrayList<>();
+    private int revertCount;
+    private int totalUploadCount;
+    private boolean isRevertCountFetched;
+    private boolean isUploadCountFetched;
 
     private CompositeDisposable compositeDisposable = new CompositeDisposable();
 
@@ -137,10 +147,12 @@ public  class       ContributionsActivity
 
             getSupportLoaderManager().initLoader(0, null, this);
         }
+
         requestAuthToken();
         initDrawer();
         setTitle(getString(R.string.title_activity_contributions));
 
+        setRevertCount();
         if(!BuildConfig.FLAVOR.equalsIgnoreCase("beta")){
             setUploadCount();
         }
@@ -277,11 +289,51 @@ public  class       ContributionsActivity
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
-                        uploadCount -> getSupportActionBar().setSubtitle(getResources()
-                                .getQuantityString(R.plurals.contributions_subtitle,
-                                        uploadCount, uploadCount)),
+                        uploadCount -> setContributionSubTitle(uploadCount),
                         t -> Timber.e(t, "Fetching upload count failed")
                 ));
+    }
+
+    /**
+     * set the sub Title of Contibutions Activity and
+     * call function to check for quiz
+     * @param uploadCount
+     */
+    private void setContributionSubTitle( int uploadCount){
+        getSupportActionBar().setSubtitle(getResources()
+                .getQuantityString(R.plurals.contributions_subtitle,
+                        uploadCount, uploadCount));
+        totalUploadCount = uploadCount;
+        isUploadCountFetched = true;
+        calculateRevertParamater();
+    }
+
+    /**
+     * To call the API to get reverts count in form of JSONObject
+     *
+     */
+    private void setRevertCount(){
+        compositeDisposable.add(mediaWikiApi
+                .getRevertCount(sessionManager.getCurrentAccount().name)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(
+                        object -> setRevertParamter(object.getInt("deletedUploads"))
+                ));
+    }
+
+    private void setRevertParamter( int revertCountFetched){
+        revertCount = revertCountFetched - revertPrefs.getInt("revertCount",0);
+        isRevertCountFetched = true;
+        calculateRevertParamater();
+    }
+
+    private void calculateRevertParamater(){
+        if(isRevertCountFetched && isUploadCountFetched && totalUploadCount != 0){
+            if( (revertCount * 100)/totalUploadCount >= 50){
+                callQuiz();
+            }
+        }
     }
 
     public void betaSetUploadCount(int betaUploadCount){
@@ -318,6 +370,30 @@ public  class       ContributionsActivity
         } else {
             adapter.registerDataSetObserver(observer);
         }
+    }
+
+    /**
+     * to implement alert to call Quiz Activity
+     */
+    public void callQuiz(){
+        android.support.v7.app.AlertDialog.Builder alert = new android.support.v7.app.AlertDialog.Builder(this);
+        alert.setTitle(getResources().getString(R.string.quiz));
+        alert.setMessage(getResources().getString(R.string.warning_for_image_reverts));
+        alert.setPositiveButton("Proceed", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                int newRevetSharedPrefs = revertCount+ revertPrefs.getInt("revertCount",0);
+                revertPrefs.edit().putInt("revertCount", newRevetSharedPrefs).apply();
+            }
+        });
+        alert.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+               dialogInterface.cancel();
+            }
+        });
+        android.support.v7.app.AlertDialog dialog = alert.create();
+        dialog.show();
     }
 
     @Override
