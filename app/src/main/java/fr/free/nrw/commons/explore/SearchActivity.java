@@ -158,7 +158,8 @@ public class SearchActivity extends NavigationBaseActivity implements MediaDetai
             FragmentManager supportFragmentManager = getSupportFragmentManager();
             supportFragmentManager
                     .beginTransaction()
-                    .replace(R.id.mediaContainer, mediaDetails)
+                    .hide(supportFragmentManager.getFragments().get(supportFragmentManager.getBackStackEntryCount()))
+                    .add(R.id.mediaContainer, mediaDetails)
                     .addToBackStack(null)
                     .commit();
             supportFragmentManager.executePendingTransactions();
@@ -188,9 +189,6 @@ public class SearchActivity extends NavigationBaseActivity implements MediaDetai
             viewPager.setVisibility(View.VISIBLE);
             mediaContainer.setVisibility(View.GONE);
             setNavigationBaseToolbarVisibility(false);
-            if (!TextUtils.isEmpty(query)) {
-                searchImageFragment.updateImageList(query);
-            }
         }else {
             toolbar.setVisibility(View.GONE);
             setNavigationBaseToolbarVisibility(true);
