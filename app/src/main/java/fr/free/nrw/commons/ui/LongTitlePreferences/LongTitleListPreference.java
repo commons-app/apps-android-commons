@@ -25,6 +25,8 @@ public class LongTitleListPreference extends ListPreference {
         super.onBindView(view);
 
         TextView title= view.findViewById(android.R.id.title);
-        title.setSingleLine(false);
+        if (title != null) {
+            title.setSingleLine(false);
+        }
     }
 }
