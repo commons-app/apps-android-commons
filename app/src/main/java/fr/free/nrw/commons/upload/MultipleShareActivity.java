@@ -46,6 +46,7 @@ import fr.free.nrw.commons.modifications.ModifierSequence;
 import fr.free.nrw.commons.modifications.ModifierSequenceDao;
 import fr.free.nrw.commons.modifications.TemplateRemoveModifier;
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
+import fr.free.nrw.commons.utils.ContributionUtils;
 import timber.log.Timber;
 
 //TODO: We should use this class to see how multiple uploads are handled, and then REMOVE it.
@@ -271,6 +272,7 @@ public class MultipleShareActivity extends AuthenticatedActivity
                 for (int i = 0; i < urisList.size(); i++) {
                     Contribution up = new Contribution();
                     Uri uri = urisList.get(i);
+                    uri = ContributionUtils.saveFileBeingUploadedTemporarily(this, uri);
                     Log.d("deneme","MultipleShareActivity onAuthCookieAcquired:"+uri.toString());
                     up.setLocalUri(uri);
                     up.setTag("mimeType", intent.getType());
