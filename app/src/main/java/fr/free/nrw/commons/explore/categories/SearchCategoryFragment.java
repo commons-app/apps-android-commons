@@ -27,6 +27,7 @@ import javax.inject.Named;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import fr.free.nrw.commons.R;
+import fr.free.nrw.commons.category.CategoryDetailsActivity;
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
 import fr.free.nrw.commons.explore.recentsearches.RecentSearch;
 import fr.free.nrw.commons.explore.recentsearches.RecentSearchesDao;
@@ -66,6 +67,7 @@ public class SearchCategoryFragment extends CommonsDaggerSupportFragment {
 
     private final SearchCategoriesAdapterFactory adapterFactory = new SearchCategoriesAdapterFactory(item -> {
         // Open Category Details activity
+        CategoryDetailsActivity.startYourself(getContext(), item, item);
         saveQuery(query);
     });
 

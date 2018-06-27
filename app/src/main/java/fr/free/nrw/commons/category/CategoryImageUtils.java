@@ -27,7 +27,9 @@ public class CategoryImageUtils {
         List<Media> categoryImages = new ArrayList<>();
         for (int i = 0; i < childNodes.getLength(); i++) {
             Node node = childNodes.item(i);
-            categoryImages.add(getMediaFromPage(node));
+            if (getMediaFromPage(node).getFilename().substring(0,5).equals("File:")){
+                categoryImages.add(getMediaFromPage(node));
+            }
         }
 
         return categoryImages;
