@@ -44,14 +44,12 @@ public class ContributionUtils {
                Timber.e("saveFileBeingUploadedTemporarily() parameters: URI from Content Provider %s", URIfromContentProvider);
             }
         }
-        Log.d("deneme","result Uri is:"+result);
         return result;
     }
 
     public static void removeTemporaryFile(Context context, Uri tempFileUri) {
         File tempFile = new File(tempFileUri.getPath());
         if (tempFile.exists()) {
-            Log.d("deneme","ContributionUtils removeTemporaryFile:"+tempFileUri);
             tempFile.delete();
         }
     }
@@ -63,7 +61,6 @@ public class ContributionUtils {
                 // This file is in use, try enother file
                 i++;
             } else {
-                Log.d("deneme","ContributionUtils decideTempDestinationFileName:"+TEMP_EXTERNAL_DIRECTORY +File.separatorChar+i+"_tmp");
                 return TEMP_EXTERNAL_DIRECTORY +File.separatorChar+i+"_tmp";
             }
         }

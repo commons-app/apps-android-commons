@@ -56,28 +56,6 @@ public class FileUtils {
             }
         }
 
-        /*BufferedInputStream bufferedInputStream = null;
-        BufferedOutputStream bufferedOutputStream = null;
-
-        try {
-            bufferedInputStream = new BufferedInputStream(new FileInputStream(sourceFileName));
-            bufferedOutputStream = new BufferedOutputStream(new FileOutputStream(destinationFilename, false));
-            byte[] buffer = new byte[1024];
-            bufferedInputStream.read(buffer);
-            do {
-                bufferedOutputStream.write(buffer);
-            } while(bufferedInputStream.read(buffer) != -1);
-        } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
-            try {
-                if (bufferedInputStream != null) bufferedInputStream.close();
-                if (bufferedOutputStream != null) bufferedOutputStream.close();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }*/
-        //return Uri.parse(destinationFilename);
         return Uri.parse("file://" + destinationFilename);
     }
 
