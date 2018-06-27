@@ -309,7 +309,6 @@ public class ShareActivity
             mediaUri = intent.getParcelableExtra(Intent.EXTRA_STREAM);
 
             mediaUri = ContributionUtils.saveFileBeingUploadedTemporarily(this, mediaUri);
-            Log.d("deneme","ContributionListFragment onActivityResult:"+mediaUri.toString());
 
             if (intent.hasExtra(UploadService.EXTRA_SOURCE)) {
                 source = intent.getStringExtra(UploadService.EXTRA_SOURCE);
