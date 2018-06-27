@@ -17,8 +17,6 @@ public class ContributionUtils {
     private static String TEMP_EXTERNAL_DIRECTORY =
             android.os.Environment.getExternalStorageDirectory().getPath()+
                     File.separatorChar+"UploadingByCommonsApp";
-    // This file will be folder of files which are uploading now will be stored in
-    //private static final String TEMP_EXTERNAL_DIRECTORY = "/Uploading_Now";
 
     /**
      * Saves images temporarily to a fixed folder and use Uri of that file during upload process.
@@ -32,7 +30,7 @@ public class ContributionUtils {
         Uri result = null;
 
         if (FileUtils.checkIfDirectoryExists(TEMP_EXTERNAL_DIRECTORY)) {
-            String destinationFilename = TEMP_EXTERNAL_DIRECTORY +File.separatorChar+"1_tmp";
+            String destinationFilename = decideTempDestinationFileName();
             String sourceFileName = URIfromContentProvider.getPath();
 
             result = FileUtils.saveFileFromURI(context, URIfromContentProvider, destinationFilename);
@@ -55,6 +53,19 @@ public class ContributionUtils {
         if (tempFile.exists()) {
             Log.d("deneme","ContributionUtils removeTemporaryFile:"+tempFileUri);
             tempFile.delete();
+        }
+    }
+
+    private static String decideTempDestinationFileName() {
+        int i = 0;
+        while (true) {
+            if (new File(TEMP_EXTERNAL_DIRECTORY +File.separatorChar+i+"_tmp").exists()) {
+                // This file is in use, try enother file
+                i++;
+            } else {
+                Log.d("deneme","ContributionUtils decideTempDestinationFileName:"+TEMP_EXTERNAL_DIRECTORY +File.separatorChar+i+"_tmp");
+                return TEMP_EXTERNAL_DIRECTORY +File.separatorChar+i+"_tmp";
+            }
         }
     }
 
