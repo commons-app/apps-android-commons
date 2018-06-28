@@ -22,6 +22,7 @@ import java.util.concurrent.Executors;
 
 import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.HandlerService;
+import fr.free.nrw.commons.auth.LoginActivity;
 import fr.free.nrw.commons.auth.SessionManager;
 import fr.free.nrw.commons.contributions.Contribution;
 import fr.free.nrw.commons.settings.Prefs;
@@ -94,16 +95,17 @@ public class UploadController {
     public void startUpload(String title, Uri mediaUri, String description, String mimeType, String source, String decimalCoords, ContributionUploadProgress onComplete) {
         Contribution contribution;
 
-        //TODO: Modify this to include coords
-        contribution = new Contribution(mediaUri, null, title, description, -1,
-                null, null, sessionManager.getCurrentAccount().name,
-                CommonsApplication.DEFAULT_EDIT_SUMMARY, decimalCoords);
+            //TODO: Modify this to include coords
+            contribution = new Contribution(mediaUri, null, title, description, -1,
+                    null, null, sessionManager.getCurrentAccount().name,
+                    CommonsApplication.DEFAULT_EDIT_SUMMARY, decimalCoords);
 
-        contribution.setTag("mimeType", mimeType);
-        contribution.setSource(source);
+            contribution.setTag("mimeType", mimeType);
+            contribution.setSource(source);
 
-        //Calls the next overloaded method
-        startUpload(contribution, onComplete);
+            //Calls the next overloaded method
+            startUpload(contribution, onComplete);
+
     }
 
     /**
