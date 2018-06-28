@@ -83,13 +83,13 @@ public class UploadController {
 
     /**
      * Starts a new upload task.
-     *
      * @param title         the title of the contribution
      * @param mediaUri      the media URI of the contribution
      * @param description   the description of the contribution
      * @param mimeType      the MIME type of the contribution
      * @param source        the source of the contribution
      * @param decimalCoords the coordinates in decimal. (e.g. "37.51136|-77.602615")
+     * @param wikiDataEntityId
      * @param onComplete    the progress tracker
      */
     public void startUpload(String title, Uri mediaUri, String description, String mimeType, String source, String decimalCoords, String wikiDataEntityId, ContributionUploadProgress onComplete) {

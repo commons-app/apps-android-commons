@@ -152,8 +152,8 @@ public class ShareActivity
         this.title = title;
         this.description = description;
 
- 
-        if(sessionManager.getCurrentAccount()!=null) {
+
+        if (sessionManager.getCurrentAccount() != null) {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                 // Check for Storage permission that is required for upload.
                 // Do not allow user to proceed without permission, otherwise will crash
@@ -167,11 +167,10 @@ public class ShareActivity
                 uploadBegins();
             }
         }
-
         else  //Send user to login activity
         {
             Toast.makeText(this, "You need to login first!", Toast.LENGTH_SHORT).show();
-            Intent loginIntent=new Intent(ShareActivity.this, LoginActivity.class);
+            Intent loginIntent = new Intent(ShareActivity.this, LoginActivity.class);
             startActivity(loginIntent);
         }
     }
@@ -207,20 +206,13 @@ public class ShareActivity
             Timber.d("Cache the categories found");
         }
 
-            uploadController.startUpload(title, mediaUri, description, mimeType, source, decimalCoords, c -> {
-                ShareActivity.this.contribution = c;
-                showPostUpload();
-            });
+        uploadController.startUpload(title,mediaUri,description,mimeType,source,decimalCoords,wikiDataEntityId,c ->
 
-    }
-
-
-
-        uploadController.startUpload(title, mediaUri, description, mimeType, source, decimalCoords, wikiDataEntityId, c -> {
-            ShareActivity.this.contribution = c;
-            showPostUpload();
-        });
-    }
+    {
+        ShareActivity.this.contribution = c;
+        showPostUpload();
+    });
+}
 
     /**
      * Starts CategorizationFragment after uploadBegins.
@@ -679,3 +671,4 @@ public class ShareActivity
 
     }
 }
+
