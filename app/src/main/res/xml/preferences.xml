@@ -11,6 +11,13 @@
             android:summary="@string/preference_theme_summary"
             android:key="theme" />
 
+        <EditTextPreference
+            android:key="uploads"
+            android:defaultValue="100"
+            android:title= "@string/set_limit"
+            android:inputType="numberDecimal"
+            android:maxLength="3" />
+
     </PreferenceCategory>
 
     <PreferenceCategory
@@ -28,13 +35,6 @@
             android:title="@string/use_external_storage"
             android:defaultValue="true"
             android:summary="@string/use_external_storage_summary" />
-
-        <EditTextPreference
-            android:key="uploads"
-            android:defaultValue="100"
-            android:title= "@string/set_limit"
-            android:inputType="numberDecimal"
-            android:maxLength="3" />
 
     </PreferenceCategory>
 
