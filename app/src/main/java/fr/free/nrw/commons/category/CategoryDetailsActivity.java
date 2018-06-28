@@ -24,14 +24,12 @@ import fr.free.nrw.commons.theme.NavigationBaseActivity;
 import static android.widget.Toast.LENGTH_SHORT;
 
 /**
- * This activity displays pictures of a particular category
- * Its generic and simply takes the name of category name in its start intent to load all images in
- * a particular category. This activity is currently being used to display a list of featured images,
- * which is nothing but another category on wikimedia commons.
+ * This activity displays details of a particular category
+ * Its generic and simply takes the name of category name in its start intent to load all images, subcategories in
+ * a particular category on wikimedia commons.
  */
 
-public class CategoryDetailsActivity
-        extends NavigationBaseActivity
+public class CategoryDetailsActivity extends NavigationBaseActivity
         implements MediaDetailPagerFragment.MediaDetailProvider,
                     AdapterView.OnItemClickListener{
 
@@ -46,11 +44,7 @@ public class CategoryDetailsActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_category_images);
         ButterKnife.bind(this);
-
-        // Activity can call methods in the fragment by acquiring a
-        // reference to the Fragment from FragmentManager, using findFragmentById()
         supportFragmentManager = getSupportFragmentManager();
-//        supportFragmentManager.addOnBackStackChangedListener(this);
         setCategoryImagesFragment();
         setPageTitle();
         initDrawer();
@@ -85,7 +79,6 @@ public class CategoryDetailsActivity
     @Override
     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
         if (mediaDetails == null || !mediaDetails.isVisible()) {
-            // set isFeaturedImage true for featured images, to include author field on media detail
             mediaDetails = new MediaDetailPagerFragment(false, true);
             FragmentManager supportFragmentManager = getSupportFragmentManager();
             supportFragmentManager
@@ -104,7 +97,7 @@ public class CategoryDetailsActivity
     /**
      * Consumers should be simply using this method to use this activity.
      * @param context
-     * @param categoryName Name of the category for displaying its images
+     * @param categoryName Name of the category for displaying its details
      */
     public static void startYourself(Context context, String categoryName) {
         Intent intent = new Intent(context, CategoryDetailsActivity.class);
