@@ -172,7 +172,7 @@ public class CategoryImagesListFragment extends DaggerFragment {
 
             @Override
             public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
-                if (hasMoreImages && !isLoading && (firstVisibleItem + visibleItemCount + 1 >= totalItemCount)) {
+                if (hasMoreImages && !isLoading && (firstVisibleItem + visibleItemCount >= totalItemCount)) {
                     isLoading = true;
                     fetchMoreImages();
                 }
