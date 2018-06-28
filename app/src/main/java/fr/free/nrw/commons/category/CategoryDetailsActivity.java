@@ -19,6 +19,7 @@ import fr.free.nrw.commons.PageTitle;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.auth.AuthenticatedActivity;
 import fr.free.nrw.commons.media.MediaDetailPagerFragment;
+import fr.free.nrw.commons.theme.NavigationBaseActivity;
 
 import static android.widget.Toast.LENGTH_SHORT;
 
@@ -30,9 +31,8 @@ import static android.widget.Toast.LENGTH_SHORT;
  */
 
 public class CategoryDetailsActivity
-        extends AuthenticatedActivity
-        implements FragmentManager.OnBackStackChangedListener,
-                    MediaDetailPagerFragment.MediaDetailProvider,
+        extends NavigationBaseActivity
+        implements MediaDetailPagerFragment.MediaDetailProvider,
                     AdapterView.OnItemClickListener{
 
 
@@ -40,16 +40,6 @@ public class CategoryDetailsActivity
     private CategoryImagesListFragment categoryImagesListFragment;
     private MediaDetailPagerFragment mediaDetails;
     private String categoryName;
-
-    @Override
-    protected void onAuthCookieAcquired(String authCookie) {
-
-    }
-
-    @Override
-    protected void onAuthFailure() {
-
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,9 +50,8 @@ public class CategoryDetailsActivity
         // Activity can call methods in the fragment by acquiring a
         // reference to the Fragment from FragmentManager, using findFragmentById()
         supportFragmentManager = getSupportFragmentManager();
+//        supportFragmentManager.addOnBackStackChangedListener(this);
         setCategoryImagesFragment();
-        supportFragmentManager.addOnBackStackChangedListener(this);
-        requestAuthToken();
         setPageTitle();
         initDrawer();
         initBackButton();
@@ -79,23 +68,18 @@ public class CategoryDetailsActivity
             arguments.putString("categoryName", categoryName);
             categoryImagesListFragment.setArguments(arguments);
             FragmentTransaction transaction = supportFragmentManager.beginTransaction();
-            transaction
-                    .add(R.id.fragmentContainer, categoryImagesListFragment)
-                    .commit();
+            transaction.replace(R.id.fragmentContainer, categoryImagesListFragment)
+            .commit();
         }
     }
 
     /**
-     * Gets the passed title from the intents and displays it as the page title
+     * Gets the passed categoryName from the intents and displays it as the page title
      */
     private void setPageTitle() {
-        if (getIntent() != null && getIntent().getStringExtra("title") != null) {
-            setTitle(getIntent().getStringExtra("title"));
+        if (getIntent() != null && getIntent().getStringExtra("categoryName") != null) {
+            setTitle(getIntent().getStringExtra("categoryName"));
         }
-    }
-
-    @Override
-    public void onBackStackChanged() {
     }
 
     @Override
@@ -106,7 +90,8 @@ public class CategoryDetailsActivity
             FragmentManager supportFragmentManager = getSupportFragmentManager();
             supportFragmentManager
                     .beginTransaction()
-                    .replace(R.id.fragmentContainer, mediaDetails)
+                    .hide(supportFragmentManager.getFragments().get(supportFragmentManager.getBackStackEntryCount()))
+                    .add(R.id.fragmentContainer, mediaDetails)
                     .addToBackStack(null)
                     .commit();
             supportFragmentManager.executePendingTransactions();
@@ -115,27 +100,15 @@ public class CategoryDetailsActivity
         initBackButton();
     }
 
-    @Override
-    protected void onResume() {
-        initBackButton();
-        if (supportFragmentManager.getBackStackEntryCount()==1){
-            //FIXME: Temporary fix for screen rotation inside media details. If we don't call onBackPressed then fragment stack is increasing every time.
-            //FIXME: Similar issue like this https://github.com/commons-app/apps-android-commons/issues/894
-            onBackPressed();
-        }
-        super.onResume();
-    }
 
     /**
      * Consumers should be simply using this method to use this activity.
      * @param context
-     * @param title Page title
      * @param categoryName Name of the category for displaying its images
      */
-    public static void startYourself(Context context, String title, String categoryName) {
+    public static void startYourself(Context context, String categoryName) {
         Intent intent = new Intent(context, CategoryDetailsActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-        intent.putExtra("title", title);
         intent.putExtra("categoryName", categoryName);
         context.startActivity(intent);
     }

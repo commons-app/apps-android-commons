@@ -67,7 +67,7 @@ public class SearchCategoryFragment extends CommonsDaggerSupportFragment {
 
     private final SearchCategoriesAdapterFactory adapterFactory = new SearchCategoriesAdapterFactory(item -> {
         // Open Category Details activity
-        CategoryDetailsActivity.startYourself(getContext(), item, item);
+        CategoryDetailsActivity.startYourself(getContext(), item);
         saveQuery(query);
     });
 

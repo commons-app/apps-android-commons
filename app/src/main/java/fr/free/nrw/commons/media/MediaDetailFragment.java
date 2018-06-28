@@ -431,7 +431,11 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
         if (categoriesLoaded && categoriesPresent) {
             textView.setOnClickListener(view -> {
                 String selectedCategoryTitle = "Category:" + catName;
-                CategoryDetailsActivity.startYourself(getContext(), selectedCategoryTitle, selectedCategoryTitle);
+                Intent intent = new Intent(getContext(), CategoryDetailsActivity.class);
+                intent.putExtra("categoryName", selectedCategoryTitle);
+                getContext().startActivity(intent);
+
+//                CategoryDetailsActivity.startYourself(getContext(),  selectedCategoryTitle);
             });
         }
         return item;

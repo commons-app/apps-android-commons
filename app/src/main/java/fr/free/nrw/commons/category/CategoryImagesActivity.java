@@ -49,6 +49,12 @@ public class CategoryImagesActivity
     }
 
     @Override
+    public void onBackPressed() {
+        initDrawer();
+        super.onBackPressed();
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_category_images);
@@ -102,7 +108,8 @@ public class CategoryImagesActivity
             FragmentManager supportFragmentManager = getSupportFragmentManager();
             supportFragmentManager
                     .beginTransaction()
-                    .replace(R.id.fragmentContainer, mediaDetails)
+                    .hide(supportFragmentManager.getFragments().get(supportFragmentManager.getBackStackEntryCount()))
+                    .add(R.id.fragmentContainer, mediaDetails)
                     .addToBackStack(null)
                     .commit();
             supportFragmentManager.executePendingTransactions();
