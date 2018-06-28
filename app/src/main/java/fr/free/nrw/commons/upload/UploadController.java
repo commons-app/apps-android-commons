@@ -92,7 +92,7 @@ public class UploadController {
      * @param decimalCoords the coordinates in decimal. (e.g. "37.51136|-77.602615")
      * @param onComplete    the progress tracker
      */
-    public void startUpload(String title, Uri mediaUri, String description, String mimeType, String source, String decimalCoords, ContributionUploadProgress onComplete) {
+    public void startUpload(String title, Uri mediaUri, String description, String mimeType, String source, String decimalCoords, String wikiDataEntityId, ContributionUploadProgress onComplete) {
         Contribution contribution;
 
             //TODO: Modify this to include coords
@@ -100,11 +100,17 @@ public class UploadController {
                     null, null, sessionManager.getCurrentAccount().name,
                     CommonsApplication.DEFAULT_EDIT_SUMMARY, decimalCoords);
 
+
             contribution.setTag("mimeType", mimeType);
             contribution.setSource(source);
 
             //Calls the next overloaded method
             startUpload(contribution, onComplete);
+
+        contribution.setTag("mimeType", mimeType);
+        contribution.setSource(source);
+        contribution.setWikiDataEntityId(wikiDataEntityId);
+
 
     }
 

@@ -276,17 +276,25 @@ public  class       ContributionsActivity
                 .getUploadCount(sessionManager.getCurrentAccount().name)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(
-                        uploadCount -> getSupportActionBar().setSubtitle(getResources()
-                                .getQuantityString(R.plurals.contributions_subtitle,
-                                        uploadCount, uploadCount)),
+                .subscribe(this::displayUploadCount,
                         t -> Timber.e(t, "Fetching upload count failed")
                 ));
     }
 
-    public void betaSetUploadCount(int betaUploadCount){
+    private void displayUploadCount(Integer uploadCount) {
+        if (isFinishing()
+                || getSupportActionBar() == null
+                || getResources() == null) {
+            return;
+        }
+        
         getSupportActionBar().setSubtitle(getResources()
-                .getQuantityString(R.plurals.contributions_subtitle, betaUploadCount, betaUploadCount));
+                .getQuantityString(R.plurals.contributions_subtitle,
+                        uploadCount, uploadCount));
+    }
+
+    public void betaSetUploadCount(int betaUploadCount) {
+        displayUploadCount(betaUploadCount);
     }
 
 

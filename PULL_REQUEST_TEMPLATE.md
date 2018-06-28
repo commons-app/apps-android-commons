@@ -1,3 +1,7 @@
+## Title (required)
+
+Fixes #{GitHub issue number and title (Please do not forget adding title) } 
+
 ## Description (required)
 
 Fixes #{GitHub issue number and title}

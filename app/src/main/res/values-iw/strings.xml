@@ -30,7 +30,7 @@
   <string name="login_success">הכניסה הצליחה</string>
   <string name="login_failed">הכניסה נכשלה!</string>
   <string name="upload_failed">הקובץ לא נמצא. נא לנסות קובץ אחר.</string>
-  <string name="authentication_failed">אימות הפרטים נכשל</string>
+  <string name="authentication_failed">אימות הפרטים נכשל, נא להיכנס מחדש</string>
   <string name="uploading_started">ההעלאה התחילה!</string>
   <string name="upload_completed_notification_title">הקובץ %1$s הועלה!</string>
   <string name="upload_completed_notification_text">ללחוץ כאן כדי לצפות בהעלאה שלך</string>
@@ -58,8 +58,7 @@
   <string name="add_title_toast">נא לתת כותרת לקובץ הזה</string>
   <string name="share_description_hint">תיאור</string>
   <string name="login_failed_network">לא ניתן להיכנס – כשל בתקשורת</string>
-  <string name="login_failed_username">לא ניתן להיכנס – נא לבדוק את שם המשתמש שלך</string>
-  <string name="login_failed_password">לא ניתן להיכנס – נא לבדוק את הססמה שלך</string>
+  <string name="login_failed_wrong_credentials">לא ניתן להיכנס לחשבון – נא לבדוק את שם המשתמש ואת הסיסמה</string>
   <string name="login_failed_throttled">יותר מדי ניסיונות כושלים להיכנס. נא לנסות שוב בעוד מספר דקות.</string>
   <string name="login_failed_blocked">סליחה, החשבון הזה חסום בוויקישיתוף</string>
   <string name="login_failed_2fa_needed">יש לספק את קוד האימות הדו־שלבי שלך.</string>
@@ -113,7 +112,7 @@
   <string name="preference_license">רישיון ברירת מחדל</string>
   <string name="use_previous">להשתמש בכותרת ובתיאור קודמים</string>
   <string name="allow_gps">לקבל אוטומטית את המיקום הנוכחי</string>
-  <string name="allow_gps_summary">לאחזר את המיקום הנוכחי כדי להציע קטגוריות אם בתמונה אין תגי מיקום</string>
+  <string name="allow_gps_summary">אחזור המיקום הנוכחי אם אין בתמונה תגי מיקום, וכן הוספת תגי מיקום לתמונה. אזהרה: פעולה זו תחשוף את המיקום הנוכחי שלך.</string>
   <string name="preference_theme">מצב לילה</string>
   <string name="preference_theme_summary">שימוש במצב לילה</string>
   <string name="license_name_cc_by_sa_four">ייחוס–שיתוף זהה 4.0</string>
@@ -282,4 +281,11 @@
   <string name="image_uploaded_by">הועלתה על־ידי: %1$s</string>
   <string name="share_app_title">שיתוף היישום</string>
   <string name="share_coordinates_not_present">לא צוינו קואורדינטות בעת בחירת התמונה</string>
+  <string name="error_fetching_nearby_places">שגיאה באחזור המקומות בסביבתך.</string>
+  <string name="appwidget_img">תמונת היום</string>
+  <string name="app_widget_heading">תמונת היום</string>
+  <string name="successful_wikidata_edit">התמונה נוספה בהצלחה ל־%1$s בוויקינתונים!</string>
+  <string name="wikidata_edit_failure">לא ניתן היה לעדכן הישות המתאימה בוויקינתונים!</string>
+  <string name="menu_set_wallpaper">הגדרת רקע</string>
+  <string name="wallpaper_set_successfully">הרקע הוגדר בהצלחה!</string>
 </resources>

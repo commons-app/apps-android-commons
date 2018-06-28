@@ -23,7 +23,7 @@
   <string name="login_success">Umeldung huet geklappt!</string>
   <string name="login_failed">D\'Aloggen huet net funktionéiert</string>
   <string name="upload_failed">Fichier net fonnt. probéiert w.e.g. en anere Fichier.</string>
-  <string name="authentication_failed">Authentifizéierung huet net funktionéiert!</string>
+  <string name="authentication_failed">Authentifizéierung huet net funktionéiert, loggt Iech w.e.g. nach eng Kéier an.</string>
   <string name="uploading_started">D\'Eroplueden huet ugefaang!</string>
   <string name="upload_completed_notification_title">%1$s eropgelueden!</string>
   <string name="upload_completed_notification_text">Dréckt fir de Fichier ze gesinn deen Dir eropgelueden hutt</string>
@@ -50,8 +50,6 @@
   <string name="share_title_hint">Titel</string>
   <string name="share_description_hint">Beschreiwung</string>
   <string name="login_failed_network">Aloggen huet net funktionéiert - Feeler mam Reseau</string>
-  <string name="login_failed_username">Login net méiglech - kuckt w.e.g. Äre Benotzernumm no</string>
-  <string name="login_failed_password">Login net méiglech - kuckt w.e.g. Äert Passwuert no</string>
   <string name="login_failed_throttled">Ze dacks ouni Succès probéiert. Probéiert w.e.g. an e puer Minutten nach eng Kéier.</string>
   <string name="login_failed_blocked">Pardon, dëse Benotzer ass op Commons gespaart</string>
   <string name="login_failed_generic">Aloggen huet net funktionéiert</string>
@@ -103,7 +101,7 @@
   <string name="preference_license">Standardlizenz</string>
   <string name="use_previous">Viregen Titel/Beschreiwung benotzen</string>
   <string name="allow_gps">Automatesch déi aktuell Plaz kréien</string>
-  <string name="allow_gps_summary">Aktuell Plaz ofruffe fir Propose fir Kategorien ze erméigleche wann d\'Bild keng Geotaggen huet</string>
+  <string name="allow_gps_summary" fuzzy="true">Aktuell Plaz ofruffe fir Propose fir Kategorien ze erméigleche wann d\'Bild keng Geotaggen huet</string>
   <string name="preference_theme">Nuetsmodus</string>
   <string name="preference_theme_summary">Donkele Layout benotzen</string>
   <string name="license_name_cc_by_sa_four">Attribution-ShareAlike 4.0</string>
@@ -244,4 +242,9 @@
   <string name="no_images_found">Keng Biller fonnt!</string>
   <string name="error_loading_images">Feeler beim Eropluede vu Biller.</string>
   <string name="image_uploaded_by">Eropgeluede vum: %1$s</string>
+  <string name="appwidget_img">Bild vum Dag</string>
+  <string name="app_widget_heading">Bild vum Dag</string>
+  <string name="wikidata_edit_failure">Déi entspriechend Wikidata-Entitéit konnt net aktualiséiert ginn!</string>
+  <string name="menu_set_wallpaper">Hannergrondbild festleeën</string>
+  <string name="wallpaper_set_successfully">Hannergrondbild festgeluecht</string>
 </resources>

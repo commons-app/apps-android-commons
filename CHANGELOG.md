@@ -1,5 +1,8 @@
 # Wikimedia Commons for Android
 
+## v2.7.2
+- Modified subtext for "automatically get current location" setting to emphasize that it will reveal user's location
+
 ## v2.7.1
 - Fixed UI and permission issues with Nearby
 - Fixed issue with My Recent Uploads being empty

@@ -3,6 +3,7 @@
 * Dishual
 * Fohanno
 * Fulup
+* Gwendal
 * Gwenn-Ael
 * Y-M D
 -->
@@ -24,7 +25,7 @@
   <string name="login_success">Kevreet oc\'h !</string>
   <string name="login_failed">Kudenn gevreañ !</string>
   <string name="upload_failed">N\'eo ket bet kavet ar restr. Klask gant unan all.</string>
-  <string name="authentication_failed">Dilesadur c\'hwitet!</string>
+  <string name="authentication_failed" fuzzy="true">Dilesadur c\'hwitet!</string>
   <string name="uploading_started">Kroget da enporzhiañ!</string>
   <string name="upload_completed_notification_title">%1$s bet enporzhiet !</string>
   <string name="upload_completed_notification_text">Pouezit evit gwelet hoc\'h enporzhiadenn</string>
@@ -52,8 +53,6 @@
   <string name="add_title_toast">Roit un titl d\'ar restr-mañ, mar plij</string>
   <string name="share_description_hint">Deskrivadur</string>
   <string name="login_failed_network">Ne c\'haller ket kevreañ - rouedad sac\'het</string>
-  <string name="login_failed_username">Ne c\'haller ket kevreañ - Gwiriit hoc\'h anv implijer, mar plij</string>
-  <string name="login_failed_password">Ne c\'haller ket kevreañ - Gwiriit ho ker tremen, mar plij</string>
   <string name="login_failed_throttled">Re a daolioù-esae. Klaskit en-dro a-benn ur pennadig amzer.</string>
   <string name="login_failed_blocked">Hon digarezit, prennet eo bet an implijer-mañ e Commons</string>
   <string name="login_failed_2fa_needed">Rankout a rit reiñ ho kod dilesa gant daou faktor.</string>
@@ -104,7 +103,7 @@
   <string name="preference_license">Aotre-implijout dre ziouer</string>
   <string name="use_previous">Ober gant an titl/deskrivadur kent</string>
   <string name="allow_gps">Tapout al lec\'hiadur red ent emgefre</string>
-  <string name="allow_gps_summary">Kavout al lec\'hiadur red evit pourchas kinnigoù rummadoù ma n\'eo ket douarlec\'hiet ar skeudenn.</string>
+  <string name="allow_gps_summary" fuzzy="true">Kavout al lec\'hiadur red evit pourchas kinnigoù rummadoù ma n\'eo ket douarlec\'hiet ar skeudenn.</string>
   <string name="preference_theme">Mod noz</string>
   <string name="preference_theme_summary">Ober gant an tem teñval</string>
   <string name="license_name_cc_by_sa_four">Deroadur-RannañHeñvel 4.0</string>
@@ -219,4 +218,5 @@
   <string name="nearby_location_has_not_changed">N\'eo ket cheñchet al lec\'hiadur.</string>
   <string name="get_directions">Kaout urzhioù</string>
   <string name="read_article">Lenn ar pennad</string>
+  <string name="appwidget_img">Skeudenn an deiz</string>
 </resources>

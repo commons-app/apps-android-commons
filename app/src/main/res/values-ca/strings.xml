@@ -23,7 +23,7 @@
   <string name="login_success">S\'ha iniciat sessió correctament!</string>
   <string name="login_failed">Error en iniciar la sessió!</string>
   <string name="upload_failed">No s\'ha trobat el fitxer. Proveu-ho amb un altre fitxer.</string>
-  <string name="authentication_failed">L\'autenticació ha fallat!</string>
+  <string name="authentication_failed">L’autenticació ha fallat. Torneu a provar d’iniciar una sessió.</string>
   <string name="uploading_started">Ha començat la càrrega!</string>
   <string name="upload_completed_notification_title">S’ha pujat %1$s.</string>
   <string name="upload_completed_notification_text">Prem per veure la teva càrrega</string>
@@ -50,8 +50,6 @@
   <string name="share_title_hint">Títol</string>
   <string name="share_description_hint">Descripció</string>
   <string name="login_failed_network">No s\'ha pogut iniciar la sessió – error de xarxa</string>
-  <string name="login_failed_username">No s\'ha pogut iniciar la sessió – si et plau comprova el teu nom d\'usuari</string>
-  <string name="login_failed_password">No s’ha pogut iniciar la sessió. Comproveu la vostra contrasenya</string>
   <string name="login_failed_throttled">Massa intents erronis – Proveu-ho de nou d\'aquí uns minuts.</string>
   <string name="login_failed_blocked">Ho sentim, aquest usuari ha estat blocat a Commons</string>
   <string name="login_failed_2fa_needed">Heu de proporcionar el vostre codi d\'autenticació de dos factors.</string>
@@ -192,4 +190,5 @@
   <string name="notifications_thank_you_edit">Gràcies per fer una modificació</string>
   <string name="notifications_mention" fuzzy="true">%1$s us ha mencionat a %2$s.</string>
   <string name="about_faq" fuzzy="true">Preguntes freqüents</string>
+  <string name="no_images_found">No s’ha trobat cap imatge.</string>
 </resources>
