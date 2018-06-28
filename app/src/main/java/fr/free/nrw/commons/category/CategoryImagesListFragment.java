@@ -140,12 +140,12 @@ public class CategoryImagesListFragment extends DaggerFragment {
      * Handles the UI updates for a error scenario
      */
     private void initErrorView() {
-        ViewUtil.showSnackbar(gridView, R.string.error_loading_images);
         progressBar.setVisibility(GONE);
         if (gridAdapter == null || gridAdapter.isEmpty()) {
             statusTextView.setVisibility(VISIBLE);
             statusTextView.setText(getString(R.string.no_images_found));
         } else {
+            ViewUtil.showSnackbar(gridView, R.string.error_loading_images);
             statusTextView.setVisibility(GONE);
         }
     }
@@ -172,7 +172,7 @@ public class CategoryImagesListFragment extends DaggerFragment {
 
             @Override
             public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
-                if (hasMoreImages && !isLoading && (firstVisibleItem + visibleItemCount + 1 >= totalItemCount)) {
+                if (hasMoreImages && !isLoading && (firstVisibleItem + visibleItemCount >= totalItemCount)) {
                     isLoading = true;
                     fetchMoreImages();
                 }
@@ -225,13 +225,4 @@ public class CategoryImagesListFragment extends DaggerFragment {
         return gridView.getAdapter();
     }
 
-    /**
-     * This method will be called on back pressed of CategoryImagesActivity.
-     * It initializes the grid view by setting adapter.
-     */
-    @Override
-    public void onResume() {
-        gridView.setAdapter(gridAdapter);
-        super.onResume();
-    }
 }

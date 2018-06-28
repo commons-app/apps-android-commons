@@ -77,8 +77,7 @@ public abstract class NavigationBaseActivity extends BaseActivity
     }
 
     public void initBackButton() {
-        int backStackEntryCount = getSupportFragmentManager().getBackStackEntryCount();
-        toggle.setDrawerIndicatorEnabled(backStackEntryCount == 0);
+        toggle.setDrawerIndicatorEnabled(false);
         toggle.setToolbarNavigationClickListener(v -> onBackPressed());
     }
 
