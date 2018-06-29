@@ -72,4 +72,11 @@ public class RecentSearchesFragment extends CommonsDaggerSupportFragment {
         adapter.notifyDataSetChanged();
         super.onResume();
     }
+
+    public void updateRecentSearches() {
+        recentSearches = recentSearchesDao.recentSearches(10);
+        adapter = new ArrayAdapter<String>(getContext(),R.layout.item_recent_searches, recentSearches);
+        recentSearchesList.setAdapter(adapter);
+        adapter.notifyDataSetChanged();
+    }
 }

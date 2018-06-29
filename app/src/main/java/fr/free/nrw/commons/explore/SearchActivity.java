@@ -103,13 +103,16 @@ public class SearchActivity extends NavigationBaseActivity implements MediaDetai
                             //update image list
                             if (!TextUtils.isEmpty(query)) {
                                 viewPager.setVisibility(View.VISIBLE);
+                                tabLayout.setVisibility(View.VISIBLE);
                                 searchHistoryContainer.setVisibility(View.GONE);
                                 this.query = query.toString();
                                 searchImageFragment.updateImageList(query.toString());
                                 searchCategoryFragment.updateCategoryList(query.toString());
                             }else {
                                 viewPager.setVisibility(View.GONE);
+                                tabLayout.setVisibility(View.GONE);
                                 searchHistoryContainer.setVisibility(View.VISIBLE);
+                                recentSearchesFragment.updateRecentSearches();
                                 // open search history fragment
                             }
                         }
@@ -164,7 +167,7 @@ public class SearchActivity extends NavigationBaseActivity implements MediaDetai
             supportFragmentManager.executePendingTransactions();
         }
         mediaDetails.showImage(index);
-        initBackButton();
+        forceInitBackButton();
     }
 
     @Override

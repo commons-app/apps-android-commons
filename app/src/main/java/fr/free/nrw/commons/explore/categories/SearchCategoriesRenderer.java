@@ -47,7 +47,7 @@ class SearchCategoriesRenderer extends Renderer<String> {
     @Override
     public void render() {
         String item = getContent();
-        tvCategoryName.setText(item);
+        tvCategoryName.setText(item.replaceFirst("^Category:", ""));
     }
 
     interface CategoryClickedListener {
