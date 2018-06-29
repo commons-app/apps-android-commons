@@ -32,7 +32,7 @@ public class QuizController {
         quiz.add(q3);
         QuizQuestion q4 = new QuizQuestion(4,
                 context.getResources().getString(R.string.quiz_question_string),
-                "https://upload.wikimedia.org/wikipedia/commons/8/8b/Social_media_app_mockup_screenshot.svg",
+                "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8b/Social_media_app_mockup_screenshot.svg/500px-Social_media_app_mockup_screenshot.svg.png",
                 false, context.getResources().getString(R.string.screenshot_answer));
         quiz.add(q4);
 
