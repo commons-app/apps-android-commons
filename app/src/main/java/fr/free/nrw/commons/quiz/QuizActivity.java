@@ -6,6 +6,7 @@ import android.net.Uri;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -32,6 +33,7 @@ public class QuizActivity extends AppCompatActivity {
     @BindView(R.id.question_title) TextView questionTitle;
     @BindView(R.id.quiz_positive_answer) RadioButton positiveAnswer;
     @BindView(R.id.quiz_negative_answer) RadioButton negativeAnswer;
+    @BindView(R.id.toolbar) Toolbar toolbar;
 
     private QuizController quizController = new QuizController();
     private ArrayList<QuizQuestion> quiz = new ArrayList<QuizQuestion>();
@@ -44,11 +46,11 @@ public class QuizActivity extends AppCompatActivity {
         setContentView(R.layout.activity_quiz);
         Fresco.initialize(this);
 
-        setTitle(getResources().getString(R.string.quiz));
-
         quizController.initialize(this);
         ButterKnife.bind(this);
+        setSupportActionBar(toolbar);
         displayQuestion();
+
     }
 
     @OnClick(R.id.next_button)

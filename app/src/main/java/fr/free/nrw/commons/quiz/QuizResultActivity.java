@@ -24,8 +24,10 @@ public class QuizResultActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_quiz_result);
-        setSupportActionBar(toolbar);
+
         ButterKnife.bind(this);
+        setSupportActionBar(toolbar);
+
         Bundle extras = getIntent().getExtras();
         int score = extras.getInt("QuizResult");
         setScore(score);

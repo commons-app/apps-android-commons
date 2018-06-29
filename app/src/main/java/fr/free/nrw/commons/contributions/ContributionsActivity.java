@@ -330,9 +330,10 @@ public  class       ContributionsActivity
     }
 
     private void calculateRevertParamater(){
+        callQuiz();
         if(isRevertCountFetched && isUploadCountFetched && totalUploadCount != 0){
             if( (revertCount * 100)/totalUploadCount >= 50){
-                callQuiz();
+
             }
         }
     }
