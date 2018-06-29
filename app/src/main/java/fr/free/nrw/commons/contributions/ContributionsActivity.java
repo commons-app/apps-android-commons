@@ -33,6 +33,7 @@ import fr.free.nrw.commons.BuildConfig;
 import fr.free.nrw.commons.HandlerService;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.R;
+import fr.free.nrw.commons.WelcomeActivity;
 import fr.free.nrw.commons.auth.AuthenticatedActivity;
 import fr.free.nrw.commons.auth.SessionManager;
 import fr.free.nrw.commons.media.MediaDetailPagerFragment;
@@ -384,6 +385,9 @@ public  class       ContributionsActivity
             public void onClick(DialogInterface dialog, int which) {
                 int newRevetSharedPrefs = revertCount+ revertPrefs.getInt("revertCount",0);
                 revertPrefs.edit().putInt("revertCount", newRevetSharedPrefs).apply();
+                Intent i = new Intent(ContributionsActivity.this, WelcomeActivity.class);
+                i.putExtra("isQuiz",true);
+                startActivity(i);
             }
         });
         alert.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
