@@ -92,7 +92,7 @@ public class ContributionController {
     }
 
     public void handleImagePicked(int requestCode, Intent data, boolean isDirectUpload, String wikiDataEntityId) {
-        Timber.d("Is direct upload %s and the Wikidata entity ID is $s", isDirectUpload, wikiDataEntityId);
+        Timber.d("Is direct upload %s and the Wikidata entity ID is %s", isDirectUpload, wikiDataEntityId);
         FragmentActivity activity = fragment.getActivity();
         Timber.d("handleImagePicked() called with onActivityResult()");
         Intent shareIntent = new Intent(activity, ShareActivity.class);
