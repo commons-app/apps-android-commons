@@ -222,8 +222,21 @@ public class AchievementsActivity extends NavigationBaseActivity {
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
-                   object -> achievements.setRevertCount(object.getInt("deletedUploads"))
+                   object -> parseJsonRevertCount(object)
                 ));
+
+    }
+
+    /**
+     * used to set number of deleted images
+     * @param object
+     */
+    private void parseJsonRevertCount( JSONObject object){
+        try {
+            achievements.setRevertCount(object.getInt("deletedUploads"));
+        } catch (JSONException e) {
+
+        }
         isRevertFetched = true;
         hideProgressBar();
     }
@@ -237,9 +250,18 @@ public class AchievementsActivity extends NavigationBaseActivity {
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
-                        uploadCount -> achievements.setImagesUploaded(uploadCount),
+                        uploadCount -> setAchievementsUploadCount(uploadCount),
                         t -> Timber.e(t, "Fetching upload count failed")
                 ));
+
+    }
+
+    /**
+     * used to set achievements upload count and call hideProgressbar
+     * @param uploadCount
+     */
+    private void setAchievementsUploadCount(int uploadCount){
+        achievements.setImagesUploaded(uploadCount);
         isUploadFetched = true;
         hideProgressBar();
     }

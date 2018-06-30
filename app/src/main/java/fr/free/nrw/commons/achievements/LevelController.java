@@ -1,5 +1,7 @@
 package fr.free.nrw.commons.achievements;
 
+import android.util.Log;
+
 import fr.free.nrw.commons.R;
 
 /**
@@ -51,10 +53,11 @@ public class LevelController {
             for (LevelInfo levelInfo : LevelInfo.values()) {
                 if (imagesUploaded > levelInfo.maxUploadCount
                         && uniqueImagesUsed > levelInfo.maxUniqueImages
-                        && nonRevertRate > levelInfo.minNonRevertPercentage ) {
+                        && nonRevertRate >= levelInfo.minNonRevertPercentage-1 ) {
                     level = levelInfo;
                     return level;
                 }
+                Log.i("url",levelInfo.levelNumber+" ");
             }
             return level;
         }
