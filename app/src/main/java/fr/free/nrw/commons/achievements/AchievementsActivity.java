@@ -146,14 +146,8 @@ public class AchievementsActivity extends NavigationBaseActivity {
      */
     @OnClick(R.id.achievement_info)
     public void showInfoDialog(){
-        new AlertDialog.Builder(AchievementsActivity.this)
-                .setTitle(R.string.Achievements)
-                .setMessage(R.string.achievements_info_message)
-                .setCancelable(true)
-                .setNeutralButton(android.R.string.ok, (dialog, id) -> dialog.cancel())
-                .create()
-                .show();
-
+        launchAlert(getResources().getString(R.string.Achievements)
+                ,getResources().getString(R.string.achievements_info_message));
     }
 
     @Override
@@ -208,7 +202,8 @@ public class AchievementsActivity extends NavigationBaseActivity {
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
-                        jsonObject -> parseJson(jsonObject)
+                        jsonObject -> parseJson(jsonObject),
+                        t -> Timber.e(t, "Fetching achievements statisticss failed")
                 ));
     }
 
@@ -222,7 +217,8 @@ public class AchievementsActivity extends NavigationBaseActivity {
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
-                   object -> parseJsonRevertCount(object)
+                   object -> parseJsonRevertCount(object),
+                   t -> Timber.e(t, "Fetching revert count failed")
                 ));
 
     }
@@ -235,7 +231,7 @@ public class AchievementsActivity extends NavigationBaseActivity {
         try {
             achievements.setRevertCount(object.getInt("deletedUploads"));
         } catch (JSONException e) {
-
+            Timber.d( e, e.getMessage());
         }
         isRevertFetched = true;
         hideProgressBar();
@@ -253,7 +249,6 @@ public class AchievementsActivity extends NavigationBaseActivity {
                         uploadCount -> setAchievementsUploadCount(uploadCount),
                         t -> Timber.e(t, "Fetching upload count failed")
                 ));
-
     }
 
     /**
@@ -271,7 +266,6 @@ public class AchievementsActivity extends NavigationBaseActivity {
      * @param uploadCount
      */
     private void setUploadProgress( int uploadCount){
-
         imagesUploadedProgressbar.setProgress
                 (100*uploadCount/levelInfo.getMaxUploadCount());
         imagesUploadedProgressbar.setProgressTextFormatPattern
@@ -286,10 +280,7 @@ public class AchievementsActivity extends NavigationBaseActivity {
         imageRevertsProgressbar.setProgress(notRevertPercentage);
         String revertPercentage = Integer.toString(notRevertPercentage);
         imageRevertsProgressbar.setProgressTextFormatPattern(revertPercentage + "%%");
-        imagesRevertLimitText.setText(
-                getResources().getString(R.string.achievements_revert_limit_message)
-                        + levelInfo.getMinNonRevertPercentage() + "%"
-        );
+        imagesRevertLimitText.setText(getResources().getString(R.string.achievements_revert_limit_message)+ levelInfo.getMinNonRevertPercentage() + "%");
     }
 
     /**
@@ -406,6 +397,34 @@ public class AchievementsActivity extends NavigationBaseActivity {
             }
         });
         alertadd.show();
+    }
+
+    @OnClick(R.id.images_upload_info)
+    public void showUploadInfo(){
+        launchAlert(getResources().getString(R.string.images_uploaded)
+                ,getResources().getString(R.string.images_uploaded_explanation));
+    }
+
+    @OnClick(R.id.images_reverted_info)
+    public void showRevertedInfo(){
+        launchAlert(getResources().getString(R.string.image_reverts)
+                ,getResources().getString(R.string.images_reverted_explanation));
+    }
+
+    @OnClick(R.id.images_used_by_wiki_info)
+    public void showUsedByWikiInfo(){
+        launchAlert(getResources().getString(R.string.images_used_by_wiki)
+                ,getResources().getString(R.string.images_used_explanation));
+    }
+
+    private void launchAlert( String title, String message){
+        new AlertDialog.Builder(AchievementsActivity.this)
+                .setTitle(title)
+                .setMessage(message)
+                .setCancelable(true)
+                .setNeutralButton(android.R.string.ok, (dialog, id) -> dialog.cancel())
+                .create()
+                .show();
     }
 
 }

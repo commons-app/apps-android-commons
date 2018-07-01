@@ -667,9 +667,8 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
                     Locale.ENGLISH,
                     fetchRevertCountUrlTemplate,
                     new PageTitle(userName).getText());
-            String userNameCaps = Character.toString(userName.charAt(0)).toUpperCase()+userName.substring(1);
             HttpUrl.Builder urlBuilder = HttpUrl.parse(url).newBuilder();
-            urlBuilder.addQueryParameter("user", userNameCaps);
+            urlBuilder.addQueryParameter("user", userName);
             urlBuilder.addQueryParameter("fetch","deletedUploads");
             Log.i("url", urlBuilder.toString());
             Request request = new Request.Builder()
