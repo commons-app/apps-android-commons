@@ -103,6 +103,8 @@
   <string name="use_previous">Use previous title/description</string>
   <string name="allow_gps">Automatically get current location</string>
   <string name="allow_gps_summary">Retrieves current location if image is not geotagged, and geotags image with it. Warning: This will reveal your current location.</string>
+  <string name="redact_from_exif">Redact from EXIF data</string>
+  <string name="redact_from_exif_summary">Some cameras add your real name to EXIF data. The following string will be redacted from all fields.</string>
   <string name="preference_theme">Night mode</string>
   <string name="preference_theme_summary">Use dark theme</string>
   <string name="license_name_cc_by_sa_four"> Attribution-ShareAlike 4.0</string>

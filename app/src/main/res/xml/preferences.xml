@@ -47,6 +47,10 @@
             android:defaultValue="false"
             android:summary="@string/allow_gps_summary" />
 
+        <EditTextPreference
+            android:key="redactFromExif"
+            android:title="@string/redact_from_exif"
+            android:summary="@string/redact_from_exif_summary" />
     </PreferenceCategory>
 
     <PreferenceCategory
