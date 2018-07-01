@@ -130,8 +130,12 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment {
         if (resultCode == RESULT_OK) {
             Timber.d("OnActivityResult() parameters: Req code: %d Result code: %d Data: %s",
                     requestCode, resultCode, data);
-            Uri uri = ContributionUtils.saveFileBeingUploadedTemporarily(getActivity(), data.getData());
-            controller.handleImagePicked(requestCode, uri, false, null);
+            if (requestCode == ContributionController.SELECT_FROM_CAMERA) {
+                controller.handleImagePicked(requestCode, null, false, null);
+            } else {
+                Uri uri = ContributionUtils.saveFileBeingUploadedTemporarily(getActivity(), data.getData());
+                controller.handleImagePicked(requestCode, uri, false, null);
+            }
         } else {
             Timber.e("OnActivityResult() parameters: Req code: %d Result code: %d Data: %s",
                     requestCode, resultCode, data);
