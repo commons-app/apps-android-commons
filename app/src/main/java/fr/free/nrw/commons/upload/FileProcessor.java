@@ -245,6 +245,11 @@ public class FileProcessor implements SimilarImageDialogFragment.onResponse {
         return cacheFound;
     }
 
+    /**
+    *Redacts EXIF data from the file.
+    *
+     * @return Uri of the new file.
+    **/
     public Uri redactEXIFData() {
         try {
             Timber.d("String to be redacted:"+redactEXIFString);
