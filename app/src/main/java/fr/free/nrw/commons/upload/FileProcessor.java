@@ -5,6 +5,7 @@ import android.app.Activity;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.support.media.ExifInterface;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -51,9 +52,12 @@ public class FileProcessor implements SimilarImageDialogFragment.onResponse {
     private String decimalCoords;
     private boolean haveCheckedForOtherImages = false;
     private String filePath;
+    private String fileOrCopyPath=null;
     private boolean useExtStorage;
+    private String redactEXIFString;
     private boolean cacheFound;
     private GPSExtractor tempImageObj;
+
 
     FileProcessor(Uri mediaUri, ContentResolver contentResolver, Context context) {
         this.mediaUri = mediaUri;
@@ -61,37 +65,41 @@ public class FileProcessor implements SimilarImageDialogFragment.onResponse {
         this.context = context;
         ApplicationlessInjection.getInstance(context.getApplicationContext()).getCommonsApplicationComponent().inject(this);
         useExtStorage = prefs.getBoolean("useExternalStorage", true);
+        redactEXIFString = prefs.getString("redactFromExif", "");
     }
 
     /**
      * Gets file path from media URI.
      * In older devices getPath() may fail depending on the source URI, creating and using a copy of the file seems to work instead.
+     * If cleansing EXIF tags is enabled, it always copies the file.
      *
      * @return file path of media
      */
     @Nullable
     private String getPathOfMediaOrCopy() {
+        if (fileOrCopyPath!=null)
+            return fileOrCopyPath;
         filePath = FileUtils.getPath(context, mediaUri);
         Timber.d("Filepath: " + filePath);
-        if (filePath == null) {
-            String copyPath = null;
+        if (filePath == null || !redactEXIFString.isEmpty()) {
             try {
                 ParcelFileDescriptor descriptor = contentResolver.openFileDescriptor(mediaUri, "r");
                 if (descriptor != null) {
                     if (useExtStorage) {
-                        copyPath = FileUtils.createCopyPath(descriptor);
-                        return copyPath;
+                        fileOrCopyPath = FileUtils.createCopyPath(descriptor);
+                        return fileOrCopyPath;
                     }
-                    copyPath = getApplicationContext().getCacheDir().getAbsolutePath() + "/" + new Date().getTime() + ".jpg";
-                    FileUtils.copy(descriptor.getFileDescriptor(), copyPath);
-                    Timber.d("Filepath (copied): %s", copyPath);
-                    return copyPath;
+                    fileOrCopyPath = getApplicationContext().getCacheDir().getAbsolutePath() + "/" + new Date().getTime() + ".jpg";
+                    FileUtils.copy(descriptor.getFileDescriptor(), fileOrCopyPath);
+                    Timber.d("Filepath (copied): %s", fileOrCopyPath);
+                    return fileOrCopyPath;
                 }
             } catch (IOException e) {
-                Timber.w(e, "Error in file " + copyPath);
+                Timber.w(e, "Error in file " + fileOrCopyPath);
                 return null;
             }
         }
+        fileOrCopyPath=filePath;
         return filePath;
     }
 
@@ -236,7 +244,7 @@ public class FileProcessor implements SimilarImageDialogFragment.onResponse {
     boolean isCacheFound() {
         return cacheFound;
     }
-
+    
     /**
      * Calls the async task that detects if image is fuzzy, too dark, etc
      */
