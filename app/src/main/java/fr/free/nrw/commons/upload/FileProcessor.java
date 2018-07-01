@@ -244,14 +244,37 @@ public class FileProcessor implements SimilarImageDialogFragment.onResponse {
     boolean isCacheFound() {
         return cacheFound;
     }
-    
+
+    public Uri redactEXIFData() {
+        try {
+            Timber.d("String to be redacted:"+redactEXIFString);
+            Timber.v("File path:"+fileOrCopyPath);
+            if (!redactEXIFString.isEmpty() && fileOrCopyPath != null) {
+                ExifInterface exif = new ExifInterface(fileOrCopyPath);//Temporary EXIF interface to redact data.
+                String[] exifTags = {"Artist", "Copyright"};
+                for (String tag : exifTags) {
+                    String oldValue = exif.getAttribute(tag);
+                    if (oldValue != null && !oldValue.isEmpty()) {
+                        Timber.v("Exif tag "+tag+":"+oldValue+"->"+oldValue.replaceAll(redactEXIFString, ""));
+                        exif.setAttribute(tag, oldValue.replaceAll(redactEXIFString, ""));
+                    }
+                }
+                exif.saveAttributes();
+            }
+        } catch (IOException e) {
+            Timber.w(e);
+			throw new RuntimeException("EXIF redaction failed.");
+        }
+        return Uri.parse("file://" + fileOrCopyPath);
+    }
+
     /**
      * Calls the async task that detects if image is fuzzy, too dark, etc
      */
     void detectUnwantedPictures() {
         String imageMediaFilePath = FileUtils.getPath(context, mediaUri);
         DetectUnwantedPicturesAsync detectUnwantedPicturesAsync
-                = new DetectUnwantedPicturesAsync(new WeakReference<Activity>((Activity) context), imageMediaFilePath);
+                = new DetectUnwantedPicturesAsync(new WeakReference<>((Activity) context), imageMediaFilePath);
         detectUnwantedPicturesAsync.execute();
     }
 
