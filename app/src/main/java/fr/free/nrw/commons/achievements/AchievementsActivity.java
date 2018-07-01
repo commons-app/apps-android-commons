@@ -417,6 +417,11 @@ public class AchievementsActivity extends NavigationBaseActivity {
                 ,getResources().getString(R.string.images_used_explanation));
     }
 
+    /**
+     * takes title and message as input to display alerts
+     * @param title
+     * @param message
+     */
     private void launchAlert( String title, String message){
         new AlertDialog.Builder(AchievementsActivity.this)
                 .setTitle(title)
