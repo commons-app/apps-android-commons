@@ -29,7 +29,7 @@ import static fr.free.nrw.commons.upload.UploadService.EXTRA_SOURCE;
 public class ContributionController {
 
     private static final int SELECT_FROM_GALLERY = 1;
-    private static final int SELECT_FROM_CAMERA = 2;
+    public static final int SELECT_FROM_CAMERA = 2;
 
     private Fragment fragment;
 
