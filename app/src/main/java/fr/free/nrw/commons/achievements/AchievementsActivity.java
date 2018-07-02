@@ -1,6 +1,8 @@
 package fr.free.nrw.commons.achievements;
 
+import android.accounts.Account;
 import android.annotation.SuppressLint;
+import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -38,6 +40,7 @@ import org.json.JSONObject;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.Optional;
 
 import javax.inject.Inject;
 
@@ -49,6 +52,7 @@ import fr.free.nrw.commons.Utils;
 import fr.free.nrw.commons.auth.SessionManager;
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
 import fr.free.nrw.commons.theme.NavigationBaseActivity;
+import fr.free.nrw.commons.utils.ViewUtil;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.schedulers.Schedulers;
@@ -197,37 +201,41 @@ public class AchievementsActivity extends NavigationBaseActivity {
      * which then calls parseJson when results are fetched
      */
     private void setAchievements() {
-        compositeDisposable.add(mediaWikiApi
-                .getAchievements(sessionManager.getCurrentAccount().name)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(
-                        jsonObject -> parseJson(jsonObject),
-                        t -> Timber.e(t, "Fetching achievements statisticss failed")
-                ));
+        if(checkAccount()) {
+            compositeDisposable.add(mediaWikiApi
+                    .getAchievements(sessionManager.getCurrentAccount().name)
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe(
+                            jsonObject -> parseJson(jsonObject),
+                            t -> Timber.e(t, "Fetching achievements statisticss failed")
+                    ));
+        }
     }
 
     /**
      * To call the API to get reverts count in form of JSONObject
      *
      */
-    private void setRevertCount(){
-        compositeDisposable.add(mediaWikiApi
-                .getRevertCount(sessionManager.getCurrentAccount().name)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(
-                   object -> parseJsonRevertCount(object),
-                   t -> Timber.e(t, "Fetching revert count failed")
-                ));
 
+    private void setRevertCount(){
+        if(checkAccount()) {
+            compositeDisposable.add(mediaWikiApi
+                    .getRevertCount(sessionManager.getCurrentAccount().name)
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe(
+                            object -> parseJsonRevertCount(object),
+                            t -> Timber.e(t, "Fetching revert count failed")
+                    ));
+        }
     }
 
     /**
      * used to set number of deleted images
      * @param object
      */
-    private void parseJsonRevertCount( JSONObject object){
+    private void parseJsonRevertCount(JSONObject object){
         try {
             achievements.setRevertCount(object.getInt("deletedUploads"));
         } catch (JSONException e) {
@@ -241,14 +249,16 @@ public class AchievementsActivity extends NavigationBaseActivity {
      * used to the count of images uploaded by user
      */
     private void setUploadCount() {
-        compositeDisposable.add(mediaWikiApi
-                .getUploadCount(sessionManager.getCurrentAccount().name)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(
-                        uploadCount -> setAchievementsUploadCount(uploadCount),
-                        t -> Timber.e(t, "Fetching upload count failed")
-                ));
+        if(checkAccount()) {
+            compositeDisposable.add(mediaWikiApi
+                    .getUploadCount(sessionManager.getCurrentAccount().name)
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe(
+                            uploadCount -> setAchievementsUploadCount(uploadCount),
+                            t -> Timber.e(t, "Fetching upload count failed")
+                    ));
+        }
     }
 
     /**
@@ -265,7 +275,7 @@ public class AchievementsActivity extends NavigationBaseActivity {
      * used to the uploaded images progressbar
      * @param uploadCount
      */
-    private void setUploadProgress( int uploadCount){
+    private void setUploadProgress(int uploadCount){
         imagesUploadedProgressbar.setProgress
                 (100*uploadCount/levelInfo.getMaxUploadCount());
         imagesUploadedProgressbar.setProgressTextFormatPattern
@@ -276,7 +286,7 @@ public class AchievementsActivity extends NavigationBaseActivity {
      * used to set the non revert image percentage
      * @param notRevertPercentage
      */
-    private void setImageRevertPercentage( int notRevertPercentage){
+    private void setImageRevertPercentage(int notRevertPercentage){
         imageRevertsProgressbar.setProgress(notRevertPercentage);
         String revertPercentage = Integer.toString(notRevertPercentage);
         imageRevertsProgressbar.setProgressTextFormatPattern(revertPercentage + "%%");
@@ -285,7 +295,6 @@ public class AchievementsActivity extends NavigationBaseActivity {
 
     /**
      * used to parse the JSONObject containing results
-     *
      * @param object
      */
     private void parseJson(JSONObject object) {
@@ -310,7 +319,7 @@ public class AchievementsActivity extends NavigationBaseActivity {
      * and assign badge and level
      * @param achievements
      */
-    private void inflateAchievements( Achievements achievements ){
+    private void inflateAchievements(Achievements achievements ){
         thanksReceived.setText(Integer.toString(achievements.getThanksReceived()));
         imagesUsedByWikiProgessbar.setProgress
                 (100*achievements.getUniqueUsedImages()/levelInfo.getMaxUniqueImages() );
@@ -329,7 +338,6 @@ public class AchievementsActivity extends NavigationBaseActivity {
 
     /**
      * Creates a way to change current activity to AchievementActivity
-     *
      * @param context
      */
     public static void startYourself(Context context) {
@@ -422,7 +430,7 @@ public class AchievementsActivity extends NavigationBaseActivity {
      * @param title
      * @param message
      */
-    private void launchAlert( String title, String message){
+    private void launchAlert(String title, String message){
         new AlertDialog.Builder(AchievementsActivity.this)
                 .setTitle(title)
                 .setMessage(message)
@@ -430,6 +438,21 @@ public class AchievementsActivity extends NavigationBaseActivity {
                 .setNeutralButton(android.R.string.ok, (dialog, id) -> dialog.cancel())
                 .create()
                 .show();
+    }
+
+    /**
+     * check to ensure that user is logged in
+     * @return
+     */
+    private boolean checkAccount(){
+        Account currentAccount = sessionManager.getCurrentAccount();
+        if(currentAccount == null) {
+        Timber.d("Current account is null");
+        ViewUtil.showLongToast(this, getResources().getString(R.string.user_not_logged_in));
+        sessionManager.forceLogin(this);
+        return false;
+        }
+        return true;
     }
 
 }
