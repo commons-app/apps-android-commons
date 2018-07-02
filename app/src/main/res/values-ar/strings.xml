@@ -144,4 +144,6 @@
   <string name="notifications_talk_page_message">%1$s رسالة على صفحة الحديث</string>
   <string name="notifications_mention">%1$s ذكر لك على %2$s.</string>
   <string name="share_app_title">شارك التطبيق</string>
+  <string name="appwidget_img">صورة اليوم</string>
+  <string name="app_widget_heading">صورة اليوم</string>
 </resources>
