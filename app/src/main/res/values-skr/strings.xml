@@ -20,7 +20,7 @@
   <string name="login_success">لاگ ان کامیاب!</string>
   <string name="login_failed">لاگ ان ناکام!</string>
   <string name="upload_failed">فائل کائنی لبھی،ٻئی فائل کیتے کوشش کرو۔</string>
-  <string name="authentication_failed" fuzzy="true">تصدیق ناکام!</string>
+  <string name="authentication_failed">تصدیق ناکام، ولدا لاڳ ان تھیوو</string>
   <string name="uploading_started">اپ لوڈ شروع!</string>
   <string name="upload_completed_notification_title">%1$s اپ لوڈ تھی ڳیا!</string>
   <string name="upload_completed_notification_text">آپݨی اپلوڈ ݙیکھݨ کیتے ٹیپ کرو</string>
