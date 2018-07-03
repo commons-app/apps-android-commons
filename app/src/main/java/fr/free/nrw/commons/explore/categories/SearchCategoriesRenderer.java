@@ -50,7 +50,7 @@ class SearchCategoriesRenderer extends Renderer<String> {
         tvCategoryName.setText(item.replaceFirst("^Category:", ""));
     }
 
-    interface CategoryClickedListener {
+    public interface CategoryClickedListener {
         void categoryClicked(String item);
     }
 

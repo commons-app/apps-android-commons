@@ -4,20 +4,27 @@ import android.content.Context;
 import android.content.Intent;
 import android.database.DataSetObserver;
 import android.os.Bundle;
+import android.support.design.widget.TabLayout;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
+import android.support.v4.view.ViewPager;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.FrameLayout;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.PageTitle;
 import fr.free.nrw.commons.R;
-import fr.free.nrw.commons.auth.AuthenticatedActivity;
+import fr.free.nrw.commons.explore.ViewPagerAdapter;
 import fr.free.nrw.commons.media.MediaDetailPagerFragment;
 import fr.free.nrw.commons.theme.NavigationBaseActivity;
 
@@ -36,35 +43,49 @@ public class CategoryDetailsActivity extends NavigationBaseActivity
 
     private FragmentManager supportFragmentManager;
     private CategoryImagesListFragment categoryImagesListFragment;
+    private SubCategoryListFragment subCategoryListFragment;
     private MediaDetailPagerFragment mediaDetails;
     private String categoryName;
+    @BindView(R.id.mediaContainer) FrameLayout mediaContainer;
+    @BindView(R.id.tabLayout) TabLayout tabLayout;
+    @BindView(R.id.viewPager) ViewPager viewPager;
+
+    ViewPagerAdapter viewPagerAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_category_images);
+        setContentView(R.layout.activity_category_details);
         ButterKnife.bind(this);
         supportFragmentManager = getSupportFragmentManager();
-        setCategoryImagesFragment();
+        viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager());
+        viewPager.setAdapter(viewPagerAdapter);
+        tabLayout.setupWithViewPager(viewPager);
+        setTabs();
         setPageTitle();
         initDrawer();
         forceInitBackButton();
     }
 
-    /**
-     * Gets the categoryName from the intent and initializes the fragment for showing images of that category
-     */
-    private void setCategoryImagesFragment() {
+    private void setTabs() {
+        List<Fragment> fragmentList = new ArrayList<>();
+        List<String> titleList = new ArrayList<>();
         categoryImagesListFragment = new CategoryImagesListFragment();
+        subCategoryListFragment = new SubCategoryListFragment();
         categoryName = getIntent().getStringExtra("categoryName");
         if (getIntent() != null && categoryName != null) {
             Bundle arguments = new Bundle();
             arguments.putString("categoryName", categoryName);
             categoryImagesListFragment.setArguments(arguments);
-            FragmentTransaction transaction = supportFragmentManager.beginTransaction();
-            transaction.replace(R.id.fragmentContainer, categoryImagesListFragment)
-            .commit();
+            subCategoryListFragment.setArguments(arguments);
         }
+        fragmentList.add(categoryImagesListFragment);
+        titleList.add("MEDIA");
+        fragmentList.add(subCategoryListFragment);
+        titleList.add("CATEGORIES");
+        viewPagerAdapter.setTabData(fragmentList, titleList);
+        viewPagerAdapter.notifyDataSetChanged();
+
     }
 
     /**
@@ -78,13 +99,16 @@ public class CategoryDetailsActivity extends NavigationBaseActivity
 
     @Override
     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+        tabLayout.setVisibility(View.GONE);
+        viewPager.setVisibility(View.GONE);
+        mediaContainer.setVisibility(View.VISIBLE);
         if (mediaDetails == null || !mediaDetails.isVisible()) {
+            // set isFeaturedImage true for featured images, to include author field on media detail
             mediaDetails = new MediaDetailPagerFragment(false, true);
             FragmentManager supportFragmentManager = getSupportFragmentManager();
             supportFragmentManager
                     .beginTransaction()
-                    .hide(supportFragmentManager.getFragments().get(supportFragmentManager.getBackStackEntryCount()))
-                    .add(R.id.fragmentContainer, mediaDetails)
+                    .replace(R.id.mediaContainer, mediaDetails)
                     .addToBackStack(null)
                     .commit();
             supportFragmentManager.executePendingTransactions();
@@ -165,5 +189,16 @@ public class CategoryDetailsActivity extends NavigationBaseActivity
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (getSupportFragmentManager().getBackStackEntryCount() == 1){
+            // back to search so show search toolbar and hide navigation toolbar
+            tabLayout.setVisibility(View.VISIBLE);
+            viewPager.setVisibility(View.VISIBLE);
+            mediaContainer.setVisibility(View.GONE);
+        }
+        super.onBackPressed();
     }
 }

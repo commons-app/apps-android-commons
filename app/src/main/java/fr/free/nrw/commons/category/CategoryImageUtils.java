@@ -35,6 +35,18 @@ public class CategoryImageUtils {
         return categoryImages;
     }
 
+    public static List<String> getSubCategoryList(NodeList childNodes) {
+        List<String> subCategories = new ArrayList<>();
+        for (int i = 0; i < childNodes.getLength(); i++) {
+            Node node = childNodes.item(i);
+            if (getMediaFromPage(node).getFilename().substring(0,9).equals("Category:")){
+                subCategories.add(getMediaFromPage(node).getFilename());
+            }
+        }
+
+        return subCategories;
+    }
+
     /**
      * Creates a new Media object from the XML response as received by the API
      * @param node

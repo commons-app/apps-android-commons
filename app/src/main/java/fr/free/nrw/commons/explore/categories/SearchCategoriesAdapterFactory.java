@@ -7,10 +7,10 @@ import com.pedrogomez.renderers.RendererBuilder;
 import java.util.Collections;
 import java.util.List;
 
-class SearchCategoriesAdapterFactory {
+public class SearchCategoriesAdapterFactory {
     private final SearchCategoriesRenderer.CategoryClickedListener listener;
 
-    SearchCategoriesAdapterFactory(SearchCategoriesRenderer.CategoryClickedListener listener) {
+    public SearchCategoriesAdapterFactory(SearchCategoriesRenderer.CategoryClickedListener listener) {
         this.listener = listener;
     }
 
