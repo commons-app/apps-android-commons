@@ -571,7 +571,7 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
 
     /**
      * The method takes categoryName as input and returns a List of Subcategories
-     * It uses the generator query API to get the subcategories in a category, 10 at a time.
+     * It uses the generator query API to get the subcategories in a category, 20 at a time.
      * Uses the query continue values for fetching paginated responses
      * @param categoryName Category name as defined on commons
      * @return
@@ -584,11 +584,9 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
             MWApi.RequestBuilder requestBuilder = api.action("query")
                     .param("generator", "categorymembers")
                     .param("format", "xml")
-                    .param("gcmtype", "file")
+                    .param("gcmtype","subcat")
                     .param("gcmtitle", categoryName)
-                    .param("gcmsort", "timestamp")//property to sort by;timestamp
-                    .param("gcmdir", "desc")//in which direction to sort;descending
-                    .param("prop", "imageinfo")
+                    .param("prop", "info")
                     .param("gcmlimit", "10")
                     .param("iiprop", "url|extmetadata");
 

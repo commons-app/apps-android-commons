@@ -12,7 +12,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.pedrogomez.renderers.RVRendererAdapter;
 
@@ -151,7 +150,7 @@ public class SubCategoryListFragment extends CommonsDaggerSupportFragment {
     private void handleSuccess(List<String> subCategoryList) {
         this.subCategoryList = subCategoryList;
         if(subCategoryList == null || subCategoryList.isEmpty()) {
-            initErrorView();
+            initEmptyView();
         }
         else {
             progressBar.setVisibility(View.GONE);
@@ -165,14 +164,13 @@ public class SubCategoryListFragment extends CommonsDaggerSupportFragment {
      * @param throwable
      */
     private void handleError(Throwable throwable) {
-        Timber.e(throwable, "Error occurred while loading queried categories");
-        initErrorView();
+        Timber.e(throwable, "Error occurred while loading queried subcategories");
     }
 
     /**
-     * Handles the UI updates for a error scenario
+     * Handles the UI updates for a empty results scenario
      */
-    private void initErrorView() {
+    private void initEmptyView() {
         progressBar.setVisibility(GONE);
         categoriesNotFoundView.setVisibility(VISIBLE);
         categoriesNotFoundView.setText(getString(R.string.no_subcategory_found));
