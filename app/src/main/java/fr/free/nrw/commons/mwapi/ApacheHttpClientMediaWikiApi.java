@@ -587,7 +587,7 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
                     .param("gcmtype","subcat")
                     .param("gcmtitle", categoryName)
                     .param("prop", "info")
-                    .param("gcmlimit", "10")
+                    .param("gcmlimit", "20")
                     .param("iiprop", "url|extmetadata");
 
             QueryContinue queryContinueValues = getQueryContinueValues(categoryName);
