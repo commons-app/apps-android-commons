@@ -74,13 +74,13 @@ public class SingleUploadFragment extends CommonsDaggerSupportFragment {
             //What happens when the 'submit' icon is tapped
             case R.id.menu_upload_single:
 
-                if (titleEdit.getText().toString().isEmpty()) {
+                if (titleEdit.getText().toString().trim().isEmpty()) {
                     Toast.makeText(getContext(), R.string.add_title_toast, Toast.LENGTH_LONG).show();
                     return false;
                 }
 
-                String title = titleEdit.getText().toString();
-                String desc = descEdit.getText().toString();
+                String title = titleEdit.getText().toString().trim();
+                String desc = descEdit.getText().toString().trim();
 
                 //Save the title/desc in short-lived cache so next time this fragment is loaded, we can access these
                 prefs.edit()
