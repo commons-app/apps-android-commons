@@ -651,6 +651,37 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
 
     }
 
+    /**
+     * This takes userName as input, which is then used to fetch the no of images deleted
+     * using OkHttp and JavaRx. This function return JSONObject
+     * @param userName
+     * @return
+     */
+    @NonNull
+    @Override
+    public Single<JSONObject> getRevertCount(String userName){
+        final String fetchRevertCountUrlTemplate =
+                wikiMediaToolforgeUrl + "urbanecmbot/commonsmisc/feedback.py";
+        return Single.fromCallable(() -> {
+            String url = String.format(
+                    Locale.ENGLISH,
+                    fetchRevertCountUrlTemplate,
+                    new PageTitle(userName).getText());
+            HttpUrl.Builder urlBuilder = HttpUrl.parse(url).newBuilder();
+            urlBuilder.addQueryParameter("user", userName);
+            urlBuilder.addQueryParameter("fetch","deletedUploads");
+            Log.i("url", urlBuilder.toString());
+            Request request = new Request.Builder()
+                    .url(urlBuilder.toString())
+                    .build();
+            OkHttpClient client = new OkHttpClient();
+            Response response = client.newCall(request).execute();
+            String jsonData = response.body().string();
+            JSONObject jsonRevertObject = new JSONObject(jsonData);
+            return jsonRevertObject;
+        });
+    }
+
     private Date parseMWDate(String mwDate) {
         SimpleDateFormat isoFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'", Locale.ENGLISH); // Assuming MW always gives me UTC
         try {

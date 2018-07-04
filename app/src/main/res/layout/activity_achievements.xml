@@ -71,8 +71,19 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="@dimen/activity_margin_horizontal"
                         android:layout_marginStart="@dimen/activity_margin_horizontal"
+                        android:id="@+id/images_upload_text_param"
                         android:layout_marginTop="@dimen/achievements_activity_margin_vertical"
                         android:text="@string/images_uploaded" />
+
+                    <ImageView
+                        android:layout_width="12dp"
+                        android:layout_height="12dp"
+                        android:id="@+id/images_upload_info"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginRight="@dimen/activity_margin_horizontal"
+                        android:layout_toRightOf="@+id/images_upload_text_param"
+                        app:srcCompat="@drawable/ic_info_outline_blue_24dp"
+                        android:layout_marginLeft="8dp" />
 
                     <com.dinuscxj.progressbar.CircleProgressBar
                         android:layout_width="40dp"
@@ -111,11 +122,22 @@
                         android:layout_marginStart="@dimen/activity_margin_horizontal"
                         android:text="@string/image_reverts" />
 
+                    <ImageView
+                        android:layout_width="12dp"
+                        android:layout_height="12dp"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginRight="@dimen/activity_margin_horizontal"
+                        android:id="@+id/images_reverted_info"
+                        android:layout_toRightOf="@+id/images_reverted_text"
+                        app:srcCompat="@drawable/ic_info_outline_blue_24dp"
+                        android:layout_marginLeft="8dp" />
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="(minimum required: 90%)"
+                        android:text="@string/achievements_revert_limit_message"
                         android:textSize="10dp"
+                        android:id="@+id/images_revert_limit_text"
                         android:layout_marginLeft="@dimen/activity_margin_horizontal"
                         android:layout_marginStart="@dimen/activity_margin_horizontal"
                         android:layout_below="@+id/images_reverted_text"/>
@@ -153,10 +175,21 @@
                         style="?android:textAppearanceMedium"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:id="@+id/images_used_by_wiki_text"
                         android:layout_marginLeft="@dimen/activity_margin_horizontal"
                         android:layout_marginStart="@dimen/activity_margin_horizontal"
                         android:layout_marginTop="@dimen/achievements_activity_margin_vertical"
                         android:text="@string/images_used_by_wiki" />
+
+                    <ImageView
+                        android:layout_width="12dp"
+                        android:layout_height="12dp"
+                        android:id="@+id/images_used_by_wiki_info"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginRight="@dimen/activity_margin_horizontal"
+                        android:layout_toRightOf="@+id/images_used_by_wiki_text"
+                        app:srcCompat="@drawable/ic_info_outline_blue_24dp"
+                        android:layout_marginLeft="8dp" />
 
                     <com.dinuscxj.progressbar.CircleProgressBar
                         android:layout_width="40dp"

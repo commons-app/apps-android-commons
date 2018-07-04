@@ -291,7 +291,12 @@
   <string name="level">LEVEL</string>
   <string name="images_uploaded">Images Uploaded</string>
   <string name="image_reverts">Images Not Reverted</string>
-  <string name="images_used_by_wiki">Images Used By Wiki</string>
+  <string name="images_used_by_wiki">Images Used</string>
   <string name="achievements_share_message">Share your achievements with your friends!</string>
   <string name="achievements_info_message">Your level increases as you meet these requirements. Items in the "statistics" section do not count towards your level.</string>
+  <string name="achievements_revert_limit_message">minimum required: </string>
+  <string name="images_uploaded_explanation">The number of images you have uploaded to Commons, via any upload software</string>
+  <string name="images_reverted_explanation">The percentage of images you have uploaded to Commons that were not deleted</string>
+  <string name="images_used_explanation">The number of images you have uploaded to Commons that were used in Wikimedia articles</string>
+  <string name="user_not_logged_in">Login session expired, please log in again.</string>
 </resources>
