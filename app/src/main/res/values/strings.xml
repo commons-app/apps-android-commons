@@ -291,4 +291,6 @@
   <string name="wikidata_edit_failure">Failed to update corresponding Wikidata entity!</string>
   <string name="menu_set_wallpaper">Set wallpaper</string>
   <string name="wallpaper_set_successfully">Wallpaper set successfully!</string>
+
+  <string name="user_not_logged_in">Login session expired, please log in again.</string>
 </resources>
