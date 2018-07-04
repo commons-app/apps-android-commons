@@ -66,7 +66,7 @@ public class GridViewAdapter extends ArrayAdapter {
         MediaWikiImageView imageView = convertView.findViewById(R.id.categoryImageView);
         TextView fileName = convertView.findViewById(R.id.categoryImageTitle);
         TextView author = convertView.findViewById(R.id.categoryImageAuthor);
-        fileName.setText(item.getFilename());
+        fileName.setText(item.getDisplayTitle());
         setAuthorView(item, author);
         imageView.setMedia(item);
         return convertView;

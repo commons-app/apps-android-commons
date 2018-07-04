@@ -143,7 +143,7 @@ public class CategoryImagesListFragment extends DaggerFragment {
         progressBar.setVisibility(GONE);
         if (gridAdapter == null || gridAdapter.isEmpty()) {
             statusTextView.setVisibility(VISIBLE);
-            statusTextView.setText(getString(R.string.no_images_found));
+            statusTextView.setText(getContext().getString(R.string.no_images_found));
         } else {
             ViewUtil.showSnackbar(gridView, R.string.error_loading_images);
             statusTextView.setVisibility(GONE);

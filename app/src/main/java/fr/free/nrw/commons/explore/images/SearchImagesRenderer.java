@@ -52,7 +52,7 @@ class SearchImagesRenderer extends Renderer<Media> {
     @Override
     public void render() {
         Media item = getContent();
-        tvImageName.setText(item.getFilename());
+        tvImageName.setText(item.getDisplayTitle());
         browseImage.setMedia(item);
         setAuthorView(item, categoryImageAuthor);
     }

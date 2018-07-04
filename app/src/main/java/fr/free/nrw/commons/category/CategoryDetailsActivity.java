@@ -48,7 +48,7 @@ public class CategoryDetailsActivity extends NavigationBaseActivity
         setCategoryImagesFragment();
         setPageTitle();
         initDrawer();
-        initBackButton();
+        forceInitBackButton();
     }
 
     /**
@@ -90,7 +90,7 @@ public class CategoryDetailsActivity extends NavigationBaseActivity
             supportFragmentManager.executePendingTransactions();
         }
         mediaDetails.showImage(i);
-        initBackButton();
+        forceInitBackButton();
     }
 
 

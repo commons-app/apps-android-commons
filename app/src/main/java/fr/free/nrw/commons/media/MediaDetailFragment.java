@@ -434,8 +434,6 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
                 Intent intent = new Intent(getContext(), CategoryDetailsActivity.class);
                 intent.putExtra("categoryName", selectedCategoryTitle);
                 getContext().startActivity(intent);
-
-//                CategoryDetailsActivity.startYourself(getContext(),  selectedCategoryTitle);
             });
         }
         return item;
