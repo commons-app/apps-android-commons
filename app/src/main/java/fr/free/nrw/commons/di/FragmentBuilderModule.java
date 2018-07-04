@@ -3,6 +3,7 @@ package fr.free.nrw.commons.di;
 import dagger.Module;
 import dagger.android.ContributesAndroidInjector;
 import fr.free.nrw.commons.category.CategorizationFragment;
+import fr.free.nrw.commons.category.SubCategoryListFragment;
 import fr.free.nrw.commons.contributions.ContributionsListFragment;
 import fr.free.nrw.commons.category.CategoryImagesListFragment;
 import fr.free.nrw.commons.explore.categories.SearchCategoryFragment;
@@ -53,6 +54,9 @@ public abstract class FragmentBuilderModule {
 
     @ContributesAndroidInjector
     abstract CategoryImagesListFragment bindFeaturedImagesListFragment();
+
+    @ContributesAndroidInjector
+    abstract SubCategoryListFragment bindSubCategoryListFragment();
 
     @ContributesAndroidInjector
     abstract SearchImageFragment bindBrowseImagesListFragment();

@@ -10,7 +10,7 @@ import java.util.List;
 /**
  * This adapter will be used to display fragments in a ViewPager
  */
-class ViewPagerAdapter extends FragmentPagerAdapter {
+public class ViewPagerAdapter extends FragmentPagerAdapter {
     private List<Fragment> fragmentList = new ArrayList<>();
     private List<String> fragmentTitleList = new ArrayList<>();
 

@@ -570,6 +570,58 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
     }
 
     /**
+     * The method takes categoryName as input and returns a List of Subcategories
+     * It uses the generator query API to get the subcategories in a category, 20 at a time.
+     * Uses the query continue values for fetching paginated responses
+     * @param categoryName Category name as defined on commons
+     * @return
+     */
+    @Override
+    @NonNull
+    public List<String> getSubCategoryList(String categoryName) {
+        ApiResult apiResult = null;
+        try {
+            MWApi.RequestBuilder requestBuilder = api.action("query")
+                    .param("generator", "categorymembers")
+                    .param("format", "xml")
+                    .param("gcmtype","subcat")
+                    .param("gcmtitle", categoryName)
+                    .param("prop", "info")
+                    .param("gcmlimit", "20")
+                    .param("iiprop", "url|extmetadata");
+
+            QueryContinue queryContinueValues = getQueryContinueValues(categoryName);
+            if (queryContinueValues != null) {
+                requestBuilder.param("continue", queryContinueValues.getContinueParam());
+                requestBuilder.param("gcmcontinue", queryContinueValues.getGcmContinueParam());
+            }
+
+            apiResult = requestBuilder.get();
+        } catch (IOException e) {
+            Timber.e("Failed to obtain searchCategories", e);
+        }
+
+        if (apiResult == null) {
+            return new ArrayList<>();
+        }
+
+        ApiResult categoryImagesNode = apiResult.getNode("/api/query/pages");
+        if (categoryImagesNode == null
+                || categoryImagesNode.getDocument() == null
+                || categoryImagesNode.getDocument().getChildNodes() == null
+                || categoryImagesNode.getDocument().getChildNodes().getLength() == 0) {
+            return new ArrayList<>();
+        }
+
+        QueryContinue queryContinue = getQueryContinue(apiResult.getNode("/api/continue").getDocument());
+        setQueryContinueValues(categoryName, queryContinue);
+
+        NodeList childNodes = categoryImagesNode.getDocument().getChildNodes();
+        return CategoryImageUtils.getSubCategoryList(childNodes);
+    }
+
+
+    /**
      * The method takes categoryName as input and returns a List of Media objects
      * It uses the generator query API to get the images in a category, 10 at a time.
      * Uses the query continue values for fetching paginated responses
