@@ -8,6 +8,7 @@ import org.w3c.dom.NodeList;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
@@ -41,7 +42,7 @@ public class CategoryImageUtils {
             Node node = childNodes.item(i);
             subCategories.add(getMediaFromPage(node).getFilename());
         }
-
+        Collections.sort(subCategories);
         return subCategories;
     }
 

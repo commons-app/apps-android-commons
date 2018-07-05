@@ -82,7 +82,7 @@ public class CategoryDetailsActivity extends NavigationBaseActivity
         fragmentList.add(categoryImagesListFragment);
         titleList.add("MEDIA");
         fragmentList.add(subCategoryListFragment);
-        titleList.add("SUB-CATEGORIES");
+        titleList.add("SUBCATEGORIES");
         viewPagerAdapter.setTabData(fragmentList, titleList);
         viewPagerAdapter.notifyDataSetChanged();
 

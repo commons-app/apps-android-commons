@@ -35,6 +35,7 @@ import java.net.URL;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
@@ -587,14 +588,8 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
                     .param("gcmtype","subcat")
                     .param("gcmtitle", categoryName)
                     .param("prop", "info")
-                    .param("gcmlimit", "20")
+                    .param("gcmlimit", "500")
                     .param("iiprop", "url|extmetadata");
-
-            QueryContinue queryContinueValues = getQueryContinueValues(categoryName);
-            if (queryContinueValues != null) {
-                requestBuilder.param("continue", queryContinueValues.getContinueParam());
-                requestBuilder.param("gcmcontinue", queryContinueValues.getGcmContinueParam());
-            }
 
             apiResult = requestBuilder.get();
         } catch (IOException e) {
@@ -612,9 +607,6 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
                 || categoryImagesNode.getDocument().getChildNodes().getLength() == 0) {
             return new ArrayList<>();
         }
-
-        QueryContinue queryContinue = getQueryContinue(apiResult.getNode("/api/continue").getDocument());
-        setQueryContinueValues(categoryName, queryContinue);
 
         NodeList childNodes = categoryImagesNode.getDocument().getChildNodes();
         return CategoryImageUtils.getSubCategoryList(childNodes);

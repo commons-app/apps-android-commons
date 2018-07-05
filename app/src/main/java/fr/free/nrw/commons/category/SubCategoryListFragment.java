@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.pedrogomez.renderers.RVRendererAdapter;
 
@@ -56,7 +57,6 @@ public class SubCategoryListFragment extends CommonsDaggerSupportFragment {
     @Inject MediaWikiApi mwApi;
 
     private RVRendererAdapter<String> categoriesAdapter;
-    private List<String> subCategoryList = new ArrayList<>();
 
     private final SearchCategoriesAdapterFactory adapterFactory = new SearchCategoriesAdapterFactory(item -> {
         // Open SubCategory Details page
@@ -81,16 +81,6 @@ public class SubCategoryListFragment extends CommonsDaggerSupportFragment {
         ArrayList<String> items = new ArrayList<>();
         categoriesAdapter = adapterFactory.create(items);
         categoriesRecyclerView.setAdapter(categoriesAdapter);
-        categoriesRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
-            @Override
-            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
-                super.onScrollStateChanged(recyclerView, newState);
-                // check if end of recycler view is reached, if yes then add more results to existing results
-                if (!recyclerView.canScrollVertically(1)) {
-                    addCategoriesToList();
-                }
-            }
-        });
         return rootView;
     }
 
@@ -105,8 +95,6 @@ public class SubCategoryListFragment extends CommonsDaggerSupportFragment {
             return;
         }
         progressBar.setVisibility(View.VISIBLE);
-//        subCategoryList.clear();
-//        categoriesAdapter.clear();
 
         Observable.fromCallable(() -> mwApi.getSubCategoryList(categoryName))
                 .subscribeOn(Schedulers.io())
@@ -117,38 +105,11 @@ public class SubCategoryListFragment extends CommonsDaggerSupportFragment {
 
 
     /**
-     * Adds more results to existing search results
-     */
-    public void addCategoriesToList() {
-        progressBar.setVisibility(View.VISIBLE);
-        Observable.fromCallable(() -> mwApi.getSubCategoryList(categoryName))
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .timeout(TIMEOUT_SECONDS, TimeUnit.SECONDS)
-                .subscribe(this::handlePaginationSuccess, this::handleError);
-    }
-
-    /**
-     * Handles the success scenario
-     * it initializes the recycler view by adding items to the adapter
-     * @param subCategoryList
-     */
-    private void handlePaginationSuccess(List<String> subCategoryList) {
-        this.subCategoryList.addAll(subCategoryList);
-        progressBar.setVisibility(View.GONE);
-        categoriesAdapter.addAll(subCategoryList);
-        categoriesAdapter.notifyDataSetChanged();
-    }
-
-
-
-    /**
      * Handles the success scenario
      * it initializes the recycler view by adding items to the adapter
      * @param subCategoryList
      */
     private void handleSuccess(List<String> subCategoryList) {
-        this.subCategoryList = subCategoryList;
         if(subCategoryList == null || subCategoryList.isEmpty()) {
             initEmptyView();
         }
@@ -165,6 +126,7 @@ public class SubCategoryListFragment extends CommonsDaggerSupportFragment {
      */
     private void handleError(Throwable throwable) {
         Timber.e(throwable, "Error occurred while loading queried subcategories");
+        ViewUtil.showSnackbar(categoriesRecyclerView,R.string.error_loading_categories);
     }
 
     /**
