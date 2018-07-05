@@ -284,4 +284,5 @@
   <string name="wikidata_edit_failure">Fehler bei der Aktualisierung des dazugehörigen Wikidata-Objekts!</string>
   <string name="menu_set_wallpaper">Hintergrundbild festlegen</string>
   <string name="wallpaper_set_successfully">Hintergrundbild erfolgreich festgelegt!</string>
+  <string name="user_not_logged_in">Sitzung abgelaufen. Bitte erneut anmelden.</string>
 </resources>

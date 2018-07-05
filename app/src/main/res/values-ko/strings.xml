@@ -286,4 +286,5 @@
   <string name="wikidata_edit_failure">일치하는 위키데이터 엔티티의 업데이트를 실패했습니다!</string>
   <string name="menu_set_wallpaper">배경화면 설정</string>
   <string name="wallpaper_set_successfully">배경화면을 성공적으로 설정했습니다!</string>
+  <string name="user_not_logged_in">로그인 세션이 만료되었으므로 다시 로그인해 주십시오.</string>
 </resources>
