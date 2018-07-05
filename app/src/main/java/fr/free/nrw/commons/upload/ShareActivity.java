@@ -68,6 +68,7 @@ import android.support.design.widget.FloatingActionButton;
 import static fr.free.nrw.commons.upload.ExistingFileAsync.Result.DUPLICATE_PROCEED;
 import static fr.free.nrw.commons.upload.ExistingFileAsync.Result.NO_DUPLICATE;
 import static fr.free.nrw.commons.upload.FileUtils.getSHA1;
+import static fr.free.nrw.commons.wikidata.WikidataConstants.WIKIDATA_ENTITY_ID_PREF;
 
 /**
  * Activity for the title/desc screen after image is selected. Also starts processing image
@@ -325,6 +326,8 @@ public class ShareActivity
             if (intent.hasExtra("isDirectUpload")) {
                 Timber.d("This was initiated by a direct upload from Nearby");
                 isNearbyUpload = true;
+                wikiDataEntityId = intent.getStringExtra(WIKIDATA_ENTITY_ID_PREF);
+                Timber.d("Received wikiDataEntityId from contribution controller %s", wikiDataEntityId);
             }
             mimeType = intent.getType();
         }
