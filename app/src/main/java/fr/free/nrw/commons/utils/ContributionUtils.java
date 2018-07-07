@@ -75,7 +75,7 @@ public class ContributionUtils {
         }
     }
 
-    public static void emptyTemporaryDirectory(Context context) {
+    public static void emptyTemporaryDirectory() {
         File dir = new File(TEMP_EXTERNAL_DIRECTORY);
         if (dir.isDirectory())
         {
