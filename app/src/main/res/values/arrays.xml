@@ -14,4 +14,34 @@
         <item>@string/license_pref_cc_by_sa_3_0</item>
         <item>@string/license_pref_cc_by_sa_4_0</item>
     </array>
+    <array name="pref_exifTag_entries">
+        <item>Author</item>
+        <item>Copyright</item>
+        <item>Camera Model</item>
+        <item>Software</item>
+    </array>
+    <array name="pref_exifTag_values">
+        <item>Author</item>
+        <item>Copyright</item>
+        <item>Model</item>
+        <item>Software</item>
+    </array>
+    <array name="pref_locationAccuracy_entries">
+        <item>Remove all location data.</item>
+        <item>Reduce accuracy to 20km</item>
+        <item>Reduce accuracy to 10km</item>
+        <item>Reduce accuracy to 5km</item>
+        <item>Reduce accuracy to 1km</item>
+        <item>Reduce accuracy to 100m</item>
+        <item>Do nothing</item>
+    </array>
+    <array name="pref_locationAccuracy_values">
+        <item>-1</item>
+        <item>20000</item>
+        <item>10000</item>
+        <item>5000</item>
+        <item>1000</item>
+        <item>100</item>
+        <item>0</item>
+    </array>
 </resources>
