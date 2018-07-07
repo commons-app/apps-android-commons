@@ -97,7 +97,7 @@ public class UploadController {
      * @param decimalCoords the coordinates in decimal. (e.g. "37.51136|-77.602615")
      * @param onComplete    the progress tracker
      */
-    public void startUpload(String title, Uri mediaUri, String description, String mimeType, String source, String decimalCoords, String wikiDataEntityId, ContributionUploadProgress onComplete) {
+    public void startUpload(String title, Uri contentProviderUri, Uri mediaUri, String description, String mimeType, String source, String decimalCoords, String wikiDataEntityId, ContributionUploadProgress onComplete) {
         Contribution contribution;
 
         Timber.d("Wikidata entity ID received from Share activity is %s", wikiDataEntityId);
@@ -116,6 +116,7 @@ public class UploadController {
         contribution.setTag("mimeType", mimeType);
         contribution.setSource(source);
         contribution.setWikiDataEntityId(wikiDataEntityId);
+        contribution.setContentProviderUri(contentProviderUri);
 
         //Calls the next overloaded method
         startUpload(contribution, onComplete);
@@ -151,7 +152,9 @@ public class UploadController {
             protected Contribution doInBackground(Void... voids /* stare into you */) {
                 long length;
                 ContentResolver contentResolver = context.getContentResolver();
-                try {
+                /*try {
+
+                    //TODO: understand do we really need this code
                     if (contribution.getDataLength() <= 0) {
                         AssetFileDescriptor assetFileDescriptor = contentResolver
                                 .openAssetFileDescriptor(Uri.fromFile(new File(contribution.getLocalUri().toString())), "r");
@@ -171,7 +174,7 @@ public class UploadController {
                     Timber.e(e, "Null Pointer Exception: ");
                 } catch (SecurityException e) {
                     Timber.e(e, "Security Exception: ");
-                }
+                }*/
 
                 String mimeType = (String) contribution.getTag("mimeType");
                 Boolean imagePrefix = false;

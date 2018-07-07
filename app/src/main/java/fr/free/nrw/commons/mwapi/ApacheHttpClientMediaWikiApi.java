@@ -690,7 +690,8 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
                                    String pageContents,
                                    String editSummary,
                                    final ProgressListener progressListener,
-                                   Uri fileUri) throws IOException {
+                                   Uri fileUri,
+                                   Uri contentProviderUri) throws IOException {
 
         ApiResult result = api.upload(filename, file, dataLength, pageContents, editSummary, progressListener::onProgress);
 
@@ -699,7 +700,7 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
         String resultStatus = result.getString("/api/upload/@result");
 
         // In either case, filure or success we have to clean directory
-        ContributionUtils.removeTemporaryFile(context, fileUri);
+        ContributionUtils.removeTemporaryFile(context, fileUri, contentProviderUri);
         if (!resultStatus.equals("Success")) {
             String errorCode = result.getString("/api/error/@code");
             Timber.e(errorCode);
