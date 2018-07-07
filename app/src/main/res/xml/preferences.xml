@@ -41,7 +41,7 @@
             android:entries="@array/pref_locationAccuracy_entries"
             android:entryValues="@array/pref_locationAccuracy_values"
             android:key="locationAccuracy"
-            android:title="Set Location Accuracy" />
+            android:title="@string/location_accuracy"/>
 
         <SwitchPreference
             android:defaultValue="false"
@@ -53,8 +53,8 @@
             android:entries="@array/pref_exifTag_entries"
             android:entryValues="@array/pref_exifTag_values"
             android:key="redactExifTags"
-            android:title="Remove EXIF Tags"
-            android:summary="Select which EXIF tags to remove from uploads."/>
+            android:title="@string/redact_exif_tags"
+            android:summary="@string/redact_exif_tags_summary"/>
 
     </PreferenceCategory>
 
