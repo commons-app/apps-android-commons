@@ -296,4 +296,5 @@
   <string name="wikidata_edit_failure">Échec de la mise à jour de l\'entité Wikidata correspondante !</string>
   <string name="menu_set_wallpaper">Définir le papier-peint</string>
   <string name="wallpaper_set_successfully">Papier-peint configuré avec succès!</string>
+  <string name="user_not_logged_in">Session expirée, veuillez vous reconnecter.</string>
 </resources>
