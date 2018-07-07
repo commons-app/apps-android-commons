@@ -1,67 +1,74 @@
 <?xml version="1.0" encoding="utf-8"?>
-<PreferenceScreen
-    xmlns:android="http://schemas.android.com/apk/res/android">
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <PreferenceCategory
-        android:title="@string/preference_category_appearance">
+    <PreferenceCategory android:title="@string/preference_category_appearance">
 
         <SwitchPreference
-            android:title="@string/preference_theme"
             android:defaultValue="false"
+            android:key="theme"
             android:summary="@string/preference_theme_summary"
-            android:key="theme" />
+            android:title="@string/preference_theme" />
 
     </PreferenceCategory>
 
-    <PreferenceCategory
-        android:title="@string/preference_category_general">
+    <PreferenceCategory android:title="@string/preference_category_general">
 
         <ListPreference
-            android:key="defaultLicense"
-            android:title="@string/preference_license"
+            android:defaultValue="@string/license_pref_cc_by_sa_4_0"
             android:entries="@array/pref_defaultLicense_entries"
             android:entryValues="@array/pref_defaultLicense_values"
-            android:defaultValue="@string/license_pref_cc_by_sa_4_0" />
+            android:key="defaultLicense"
+            android:title="@string/preference_license" />
 
         <SwitchPreference
-            android:key="useExternalStorage"
-            android:title="@string/use_external_storage"
             android:defaultValue="true"
-            android:summary="@string/use_external_storage_summary" />
+            android:key="useExternalStorage"
+            android:summary="@string/use_external_storage_summary"
+            android:title="@string/use_external_storage" />
 
         <EditTextPreference
-            android:key="uploads"
             android:defaultValue="100"
-            android:title= "@string/set_limit"
             android:inputType="numberDecimal"
-            android:maxLength="3" />
+            android:key="uploads"
+            android:maxLength="3"
+            android:title="@string/set_limit" />
 
     </PreferenceCategory>
 
-    <PreferenceCategory
-        android:title="@string/preference_category_location">
+    <PreferenceCategory android:title="Privacy">
+
+        <ListPreference
+            android:entries="@array/pref_locationAccuracy_entries"
+            android:entryValues="@array/pref_locationAccuracy_values"
+            android:key="locationAccuracy"
+            android:title="@string/location_accuracy"/>
 
         <SwitchPreference
-            android:key="allowGps"
-            android:title="@string/allow_gps"
             android:defaultValue="false"
-            android:summary="@string/allow_gps_summary" />
+            android:key="allowGps"
+            android:summary="@string/allow_gps_summary"
+            android:title="@string/allow_gps" />
+
+        <MultiSelectListPreference
+            android:entries="@array/pref_exifTag_entries"
+            android:entryValues="@array/pref_exifTag_values"
+            android:key="redactExifTags"
+            android:title="@string/redact_exif_tags"
+            android:summary="@string/redact_exif_tags_summary"/>
 
     </PreferenceCategory>
 
-    <PreferenceCategory
-        android:title="@string/preference_category_feedback">
+    <PreferenceCategory android:title="@string/preference_category_feedback">
 
         <Preference
             android:key="becomeBetaTester"
-            android:title="@string/become_a_tester_title"
-            android:summary="@string/become_a_tester_description">
-        </Preference>
+            android:summary="@string/become_a_tester_description"
+            android:title="@string/become_a_tester_title" />
 
         <Preference
             android:key="sendLogFile"
-            android:title="@string/send_log_file"
-            android:summary="@string/send_log_file_description"/>
+            android:summary="@string/send_log_file_description"
+            android:title="@string/send_log_file" />
 
     </PreferenceCategory>
 </PreferenceScreen>

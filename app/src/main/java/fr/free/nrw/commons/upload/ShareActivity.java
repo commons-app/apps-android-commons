@@ -120,6 +120,7 @@ public class ShareActivity
     private String mimeType;
     private CategorizationFragment categorizationFragment;
     private Uri mediaUri;
+    private Uri redactedMediaUri;
     private Contribution contribution;
     private GPSExtractor gpsObj;
     private String decimalCoords;
@@ -191,7 +192,9 @@ public class ShareActivity
             Timber.d("Cache the categories found");
         }
 
-        uploadController.startUpload(title, mediaUri, description, mimeType, source, decimalCoords, wikiDataEntityId, c -> {
+        redactedMediaUri=fileObj.redactEXIFData();
+
+        uploadController.startUpload(title, redactedMediaUri, description, mimeType, source, fileObj.getAnonymizedDecimalCoords(), wikiDataEntityId, c -> {
             ShareActivity.this.contribution = c;
             showPostUpload();
         });
@@ -308,7 +311,6 @@ public class ShareActivity
         fileObj = new FileProcessor(mediaUri, contentResolver, this);
         checkIfFileExists();
         gpsObj = fileObj.processFileCoordinates(locationPermitted);
-        decimalCoords = fileObj.getDecimalCoords();
     }
 
     /**
@@ -449,7 +451,7 @@ public class ShareActivity
                     Timber.d("File SHA1 is: %s", fileSHA1);
 
                     ExistingFileAsync fileAsyncTask =
-                            new ExistingFileAsync(new WeakReference<Activity>(this), fileSHA1, new WeakReference<Context>(this), result -> {
+                            new ExistingFileAsync(new WeakReference<>(this), fileSHA1, new WeakReference<>(this), result -> {
                                 Timber.d("%s duplicate check: %s", mediaUri.toString(), result);
                                 duplicateCheckPassed = (result == DUPLICATE_PROCEED || result == NO_DUPLICATE);
                                 if (duplicateCheckPassed) {
