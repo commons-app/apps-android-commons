@@ -26,6 +26,7 @@ import android.support.graphics.drawable.VectorDrawableCompat;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.MenuItem;
 import android.view.View;
@@ -124,6 +125,7 @@ public class ShareActivity
     private String mimeType;
     private CategorizationFragment categorizationFragment;
     private Uri mediaUri;
+    private Uri contentProviderUri;
     private Contribution contribution;
     private GPSExtractor gpsObj;
     private String decimalCoords;
@@ -196,8 +198,7 @@ public class ShareActivity
             Timber.d("Cache the categories found");
         }
 
-
-        uploadController.startUpload(title, mediaUri, description, mimeType, source, decimalCoords, wikiDataEntityId, c -> {
+        uploadController.startUpload(title, contentProviderUri, mediaUri, description, mimeType, source, decimalCoords, wikiDataEntityId, c -> {
             ShareActivity.this.contribution = c;
             showPostUpload();
         });
@@ -279,6 +280,9 @@ public class ShareActivity
             contribution = savedInstanceState.getParcelable("contribution");
         }
 
+        //receiveImageIntent();
+
+
         requestAuthToken();
         Timber.d("Uri: %s", mediaUri.toString());
         Timber.d("Ext storage dir: %s", Environment.getExternalStorageDirectory());
@@ -325,6 +329,8 @@ public class ShareActivity
 
         if (Intent.ACTION_SEND.equals(intent.getAction())) {
             mediaUri = intent.getParcelableExtra(Intent.EXTRA_STREAM);
+
+            contentProviderUri = mediaUri;
 
             mediaUri = ContributionUtils.saveFileBeingUploadedTemporarily(this, mediaUri);
 

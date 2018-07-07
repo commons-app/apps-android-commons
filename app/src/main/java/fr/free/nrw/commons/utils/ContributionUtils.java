@@ -1,7 +1,10 @@
 package fr.free.nrw.commons.utils;
 
+import android.content.ContentUris;
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
+import android.provider.MediaStore;
 import android.util.Log;
 
 import java.io.File;
@@ -31,8 +34,6 @@ public class ContributionUtils {
 
         if (FileUtils.checkIfDirectoryExists(TEMP_EXTERNAL_DIRECTORY)) {
             String destinationFilename = decideTempDestinationFileName();
-            String sourceFileName = URIfromContentProvider.getPath();
-
             result = FileUtils.saveFileFromURI(context, URIfromContentProvider, destinationFilename);
         } else { // If directory doesn't exist, create it and recursive call current method to check again
 
@@ -47,10 +48,18 @@ public class ContributionUtils {
         return result;
     }
 
-    public static void removeTemporaryFile(Context context, Uri tempFileUri) {
+    /**
+     * Removes temp file created during upload
+     * @param context
+     * @param tempFileUri
+     * @param contentProviderUri
+     */
+    public static void removeTemporaryFile(Context context, Uri tempFileUri, Uri contentProviderUri) {
+        //TODO: do I have to notify file system about deletion?
         File tempFile = new File(tempFileUri.getPath());
         if (tempFile.exists()) {
-            tempFile.delete();
+            boolean isDeleted= tempFile.delete();
+            Timber.e("removeTemporaryFile() parameters: URI tempFileUri %s, deleted status %b", tempFileUri, isDeleted);
         }
     }
 
