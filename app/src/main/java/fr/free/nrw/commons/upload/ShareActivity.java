@@ -192,7 +192,9 @@ public class ShareActivity
             Timber.d("Cache the categories found");
         }
 
-        uploadController.startUpload(title, redactedMediaUri, description, mimeType, source, decimalCoords, wikiDataEntityId, c -> {
+        redactedMediaUri=fileObj.redactEXIFData();
+
+        uploadController.startUpload(title, redactedMediaUri, description, mimeType, source, fileObj.getAnonymizedDecimalCoords(), wikiDataEntityId, c -> {
             ShareActivity.this.contribution = c;
             showPostUpload();
         });
@@ -309,8 +311,6 @@ public class ShareActivity
         fileObj = new FileProcessor(mediaUri, contentResolver, this);
         checkIfFileExists();
         gpsObj = fileObj.processFileCoordinates(locationPermitted);
-        redactedMediaUri=fileObj.redactEXIFData();
-        decimalCoords = fileObj.getDecimalCoords();
     }
 
     /**
