@@ -1,5 +1,6 @@
 package fr.free.nrw.commons.upload;
 
+import android.accounts.Account;
 import android.content.ComponentName;
 import android.content.ContentResolver;
 import android.content.Context;
@@ -13,6 +14,7 @@ import android.os.AsyncTask;
 import android.os.IBinder;
 import android.provider.MediaStore;
 import android.text.TextUtils;
+import android.widget.Toast;
 
 import java.io.BufferedInputStream;
 import java.io.IOException;
@@ -22,9 +24,11 @@ import java.util.concurrent.Executors;
 
 import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.HandlerService;
+import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.auth.SessionManager;
 import fr.free.nrw.commons.contributions.Contribution;
 import fr.free.nrw.commons.settings.Prefs;
+import fr.free.nrw.commons.utils.ViewUtil;
 import timber.log.Timber;
 
 public class UploadController {
@@ -95,8 +99,15 @@ public class UploadController {
         Contribution contribution;
 
         //TODO: Modify this to include coords
+        Account currentAccount = sessionManager.getCurrentAccount();
+        if(currentAccount == null) {
+            Timber.d("Current account is null");
+            ViewUtil.showLongToast(context, context.getString(R.string.user_not_logged_in));
+            sessionManager.forceLogin(context);
+            return;
+        }
         contribution = new Contribution(mediaUri, null, title, description, -1,
-                null, null, sessionManager.getCurrentAccount().name,
+                null, null, currentAccount.name,
                 CommonsApplication.DEFAULT_EDIT_SUMMARY, decimalCoords);
 
         contribution.setTag("mimeType", mimeType);
