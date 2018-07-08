@@ -41,16 +41,27 @@ public class QuizChecker {
     private MediaWikiApi mediaWikiApi;
     private int revertCounter;
     private SharedPreferences revertPref;
+    private SharedPreferences countPref;
 
+    /**
+     * constructor to set the parameters for quiz
+     * @param context
+     * @param userName
+     * @param mediaWikiApi
+     */
     public QuizChecker( Context context, String userName, MediaWikiApi mediaWikiApi){
         this.context = context;
         this.userName = userName;
         this.mediaWikiApi = mediaWikiApi;
         revertPref = context.getSharedPreferences("revertCount", Context.MODE_PRIVATE);
+        countPref = context.getSharedPreferences("uploadCount",Context.MODE_PRIVATE);
         setUploadCount();
         setRevertCount();
     }
 
+    /**
+     * to fet the total number of images uploaded
+     */
     private void setUploadCount() {
             compositeDisposable.add(mediaWikiApi
                     .getUploadCount(userName)
@@ -68,7 +79,7 @@ public class QuizChecker {
      * @param uploadCount
      */
     private void setTotalUploadCount( int uploadCount){
-        totalUploadCount = uploadCount;
+        totalUploadCount = uploadCount - countPref.getInt("uploadCount",0);
         isUploadCountFetched = true;
         calculateRevertParamater();
     }
@@ -95,8 +106,8 @@ public class QuizChecker {
     }
 
     private void calculateRevertParamater(){
-        callQuiz();
-        if(isRevertCountFetched && isUploadCountFetched && totalUploadCount != 0){
+        //callQuiz();
+        if(isRevertCountFetched && isUploadCountFetched && totalUploadCount >= 5){
             if( (revertCount * 100)/totalUploadCount >= 50){
                 callQuiz();
             }
@@ -105,12 +116,14 @@ public class QuizChecker {
     public void callQuiz(){
         Builder alert = new Builder(context);
         alert.setTitle(context.getResources().getString(R.string.quiz));
-        alert.setMessage(context.getResources().getString(R.string.warning_for_image_reverts));
+        alert.setMessage(context.getResources().getString(R.string.quiz_alert_message));
         alert.setPositiveButton("Proceed", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                int newRevetSharedPrefs = revertCount+ revertPref.getInt("revertCount",0);
                 revertPref.edit().putInt("revertCount", newRevetSharedPrefs).apply();
+                int newUploadCount = totalUploadCount + countPref.getInt("uploadCount",0);
+                countPref.edit().putInt("uploadCount",newUploadCount).apply();
                 Intent i = new Intent(context, WelcomeActivity.class);
                 i.putExtra("isQuiz", true);
                 context.startActivity(i);
