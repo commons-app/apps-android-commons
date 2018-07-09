@@ -302,22 +302,13 @@ public class ShareActivity
                     .add(R.id.single_upload_fragment_container, shareView, "shareView")
                     .commitAllowingStateLoss();
         }
+        uploadController.prepareService();
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            if (needsToRequestStoragePermission()) {
-                requestPermissions(new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},
-                        REQUEST_PERM_ON_SUBMIT_STORAGE);
-                finish();
-            }
-        } else {
-            uploadController.prepareService();
-
-            ContentResolver contentResolver = this.getContentResolver();
-            fileObj = new FileProcessor(mediaUri, contentResolver, this);
-            checkIfFileExists();
-            gpsObj = fileObj.processFileCoordinates(locationPermitted);
-            decimalCoords = fileObj.getDecimalCoords();
-        }
+        ContentResolver contentResolver = this.getContentResolver();
+        fileObj = new FileProcessor(mediaUri, contentResolver, this);
+        checkIfFileExists();
+        gpsObj = fileObj.processFileCoordinates(locationPermitted);
+        decimalCoords = fileObj.getDecimalCoords();
     }
 
     /**
