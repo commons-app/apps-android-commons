@@ -293,6 +293,7 @@
   <string name="quiz_question_string">Is it Ok to Upload ? </string>
   <string name="question">Question</string>
   <string name="result">Result</string>
+  <string name="quiz_back_button">Do you want to end Quiz ? </string>
   <string name="quiz_alert_message">Percentage of images reverted is more than 50%.Take Quiz to get familiar with the topicness and copyrights assosciated with creative commoms</string>
   <string name="selfie_answer">Selfies do not have much encyclopedic value. Please do not upload a picture of your self unless you are famous enough and already have a Wikipedia article about you.</string>
   <string name="taj_mahal_answer">Pictures of monuments and outside scenery is OK to upload in most countries. Please note that temporary art installations outside are often copyrighted and not OK to upload.</string>

@@ -39,7 +39,6 @@ public class QuizChecker {
     public Context context;
     private String userName;
     private MediaWikiApi mediaWikiApi;
-    private int revertCounter;
     private SharedPreferences revertPref;
     private SharedPreferences countPref;
 
@@ -99,12 +98,19 @@ public class QuizChecker {
 
     }
 
+    /**
+     * to calculate the number of images reverted after previous quiz
+     * @param revertCountFetched
+     */
     private void setRevertParamter( int revertCountFetched){
         revertCount = revertCountFetched - revertPref.getInt("revertCount",0);
         isRevertCountFetched = true;
         calculateRevertParamater();
     }
 
+    /**
+     * to check whether the criterion to call quiz is satisfied
+     */
     private void calculateRevertParamater(){
         callQuiz();
         if(isRevertCountFetched && isUploadCountFetched && totalUploadCount >= 5){
@@ -113,6 +119,10 @@ public class QuizChecker {
             }
         }
     }
+
+    /**
+     * Alert which prompts to quiz
+     */
     public void callQuiz(){
         Builder alert = new Builder(context);
         alert.setTitle(context.getResources().getString(R.string.quiz));
