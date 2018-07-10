@@ -7,6 +7,8 @@ import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.View;
+import android.widget.ProgressBar;
 import android.widget.RadioButton;
 import android.widget.TextView;
 
@@ -29,6 +31,7 @@ public class QuizActivity extends AppCompatActivity {
     @BindView(R.id.quiz_positive_answer) RadioButton positiveAnswer;
     @BindView(R.id.quiz_negative_answer) RadioButton negativeAnswer;
     @BindView(R.id.toolbar) Toolbar toolbar;
+    @BindView(R.id.progressBar) ProgressBar progressBar;
 
     private QuizController quizController = new QuizController();
     private ArrayList<QuizQuestion> quiz = new ArrayList<QuizQuestion>();
@@ -103,6 +106,7 @@ public class QuizActivity extends AppCompatActivity {
      * to display the question
      */
     public void displayQuestion(){
+        progressBar.setVisibility(View.VISIBLE);
         quiz = quizController.getQuiz();
         questionText.setText(quiz.get(questionIndex).getQuestion());
         questionTitle.setText(getResources().getString(R.string.question)+quiz.get(questionIndex).getQuestionNumber());
@@ -110,6 +114,7 @@ public class QuizActivity extends AppCompatActivity {
         new RadioGroupHelper(this, R.id.quiz_positive_answer, R.id.quiz_negative_answer);
         positiveAnswer.setChecked(false);
         negativeAnswer.setChecked(false);
+        progressBar.setVisibility(View.INVISIBLE);
     }
 
     /**
