@@ -67,6 +67,7 @@
             android:layout_width="150dp"
             android:layout_gravity="right"
             android:layout_marginRight="@dimen/activity_margin_horizontal"
+            android:id="@+id/quiz_result_next"
             android:paddingHorizontal="@dimen/activity_margin_horizontal"
             android:layout_height="wrap_content"
             android:backgroundTint="#D6DCE0"

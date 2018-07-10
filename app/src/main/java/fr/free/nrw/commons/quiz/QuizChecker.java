@@ -106,7 +106,7 @@ public class QuizChecker {
     }
 
     private void calculateRevertParamater(){
-        //callQuiz();
+        callQuiz();
         if(isRevertCountFetched && isUploadCountFetched && totalUploadCount >= 5){
             if( (revertCount * 100)/totalUploadCount >= 50){
                 callQuiz();
