@@ -572,7 +572,7 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
 
     /**
      * The method takes categoryName as input and returns a List of Subcategories
-     * It uses the generator query API to get the subcategories in a category, 20 at a time.
+     * It uses the generator query API to get the subcategories in a category, 500 at a time.
      * Uses the query continue values for fetching paginated responses
      * @param categoryName Category name as defined on commons
      * @return
@@ -594,6 +594,46 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
             apiResult = requestBuilder.get();
         } catch (IOException e) {
             Timber.e("Failed to obtain searchCategories", e);
+        }
+
+        if (apiResult == null) {
+            return new ArrayList<>();
+        }
+
+        ApiResult categoryImagesNode = apiResult.getNode("/api/query/pages");
+        if (categoryImagesNode == null
+                || categoryImagesNode.getDocument() == null
+                || categoryImagesNode.getDocument().getChildNodes() == null
+                || categoryImagesNode.getDocument().getChildNodes().getLength() == 0) {
+            return new ArrayList<>();
+        }
+
+        NodeList childNodes = categoryImagesNode.getDocument().getChildNodes();
+        return CategoryImageUtils.getSubCategoryList(childNodes);
+    }
+
+    /**
+     * The method takes categoryName as input and returns a List of parent categories
+     * It uses the generator query API to get the parent categories of a category, 500 at a time.
+     * @param categoryName Category name as defined on commons
+     * @return
+     */
+    @Override
+    @NonNull
+    public List<String> getParentCategoryList(String categoryName) {
+        ApiResult apiResult = null;
+        try {
+            MWApi.RequestBuilder requestBuilder = api.action("query")
+                    .param("generator", "categories")
+                    .param("format", "xml")
+                    .param("titles", categoryName)
+                    .param("prop", "info")
+                    .param("cllimit", "500")
+                    .param("iiprop", "url|extmetadata");
+
+            apiResult = requestBuilder.get();
+        } catch (IOException e) {
+            Timber.e("Failed to obtain parent Categories", e);
         }
 
         if (apiResult == null) {
@@ -641,7 +681,6 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
                 requestBuilder.param("continue", queryContinueValues.getContinueParam());
                 requestBuilder.param("gcmcontinue", queryContinueValues.getGcmContinueParam());
             }
-
             apiResult = requestBuilder.get();
         } catch (IOException e) {
             Timber.e("Failed to obtain searchCategories", e);
@@ -659,9 +698,12 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
             return new ArrayList<>();
         }
 
-        QueryContinue queryContinue = getQueryContinue(apiResult.getNode("/api/continue").getDocument());
-        setQueryContinueValues(categoryName, queryContinue);
-
+        if (apiResult.getNode("/api/continue").getDocument()==null){
+            setQueryContinueValues(categoryName, null);
+        }else {
+            QueryContinue queryContinue = getQueryContinue(apiResult.getNode("/api/continue").getDocument());
+            setQueryContinueValues(categoryName, queryContinue);
+        }
         NodeList childNodes = categoryImagesNode.getDocument().getChildNodes();
         return CategoryImageUtils.getMediaList(childNodes);
     }

@@ -44,6 +44,7 @@ public class CategoryDetailsActivity extends NavigationBaseActivity
     private FragmentManager supportFragmentManager;
     private CategoryImagesListFragment categoryImagesListFragment;
     private SubCategoryListFragment subCategoryListFragment;
+    private SubCategoryListFragment parentCategoryListFragment;
     private MediaDetailPagerFragment mediaDetails;
     private String categoryName;
     @BindView(R.id.mediaContainer) FrameLayout mediaContainer;
@@ -60,6 +61,7 @@ public class CategoryDetailsActivity extends NavigationBaseActivity
         supportFragmentManager = getSupportFragmentManager();
         viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager());
         viewPager.setAdapter(viewPagerAdapter);
+        viewPager.setOffscreenPageLimit(2);
         tabLayout.setupWithViewPager(viewPager);
         setTabs();
         setPageTitle();
@@ -72,17 +74,25 @@ public class CategoryDetailsActivity extends NavigationBaseActivity
         List<String> titleList = new ArrayList<>();
         categoryImagesListFragment = new CategoryImagesListFragment();
         subCategoryListFragment = new SubCategoryListFragment();
+        parentCategoryListFragment = new SubCategoryListFragment();
         categoryName = getIntent().getStringExtra("categoryName");
         if (getIntent() != null && categoryName != null) {
             Bundle arguments = new Bundle();
             arguments.putString("categoryName", categoryName);
+            arguments.putBoolean("isParentCategory", false);
             categoryImagesListFragment.setArguments(arguments);
             subCategoryListFragment.setArguments(arguments);
+            Bundle parentCategoryArguments = new Bundle();
+            parentCategoryArguments.putString("categoryName", categoryName);
+            parentCategoryArguments.putBoolean("isParentCategory", true);
+            parentCategoryListFragment.setArguments(parentCategoryArguments);
         }
         fragmentList.add(categoryImagesListFragment);
         titleList.add("MEDIA");
         fragmentList.add(subCategoryListFragment);
         titleList.add("SUBCATEGORIES");
+        fragmentList.add(parentCategoryListFragment);
+        titleList.add("PARENT CATEGORIES");
         viewPagerAdapter.setTabData(fragmentList, titleList);
         viewPagerAdapter.notifyDataSetChanged();
 

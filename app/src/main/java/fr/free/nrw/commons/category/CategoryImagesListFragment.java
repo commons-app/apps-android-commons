@@ -12,7 +12,9 @@ import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.ListAdapter;
 import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -48,7 +50,7 @@ public class CategoryImagesListFragment extends DaggerFragment {
     TextView statusTextView;
     @BindView(R.id.loadingImagesProgressBar) ProgressBar progressBar;
     @BindView(R.id.categoryImagesList) GridView gridView;
-
+    @BindView(R.id.parentLayout) RelativeLayout parentLayout;
     private boolean hasMoreImages = true;
     private boolean isLoading;
     private String categoryName = null;
@@ -123,7 +125,7 @@ public class CategoryImagesListFragment extends DaggerFragment {
             statusTextView.setVisibility(VISIBLE);
             statusTextView.setText(getString(R.string.no_internet));
         } else {
-            ViewUtil.showSnackbar(gridView, R.string.no_internet);
+            ViewUtil.showSnackbar(parentLayout, R.string.no_internet);
         }
     }
 
@@ -132,7 +134,8 @@ public class CategoryImagesListFragment extends DaggerFragment {
      * @param throwable
      */
     private void handleError(Throwable throwable) {
-        Timber.e(throwable, "Error occurred while loading featured images");
+        Timber.e(throwable, "Error occurred while loading images inside a category");
+        ViewUtil.showSnackbar(parentLayout, R.string.error_loading_images);
         initErrorView();
     }
 
@@ -145,7 +148,6 @@ public class CategoryImagesListFragment extends DaggerFragment {
             statusTextView.setVisibility(VISIBLE);
             statusTextView.setText(getContext().getString(R.string.no_images_found));
         } else {
-            ViewUtil.showSnackbar(gridView, R.string.error_loading_images);
             statusTextView.setVisibility(GONE);
         }
     }
@@ -175,6 +177,9 @@ public class CategoryImagesListFragment extends DaggerFragment {
                 if (hasMoreImages && !isLoading && (firstVisibleItem + visibleItemCount >= totalItemCount)) {
                     isLoading = true;
                     fetchMoreImages();
+                }else {
+                    isLoading = false;
+                    progressBar.setVisibility(GONE);
                 }
             }
         });
@@ -213,6 +218,10 @@ public class CategoryImagesListFragment extends DaggerFragment {
         if(gridAdapter == null) {
             setAdapter(collection);
         } else {
+            if (gridAdapter.containsAll(collection)){
+                hasMoreImages = false;
+                return;
+            }
             gridAdapter.addItems(collection);
         }
 
