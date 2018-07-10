@@ -297,4 +297,5 @@
   <string name="wallpaper_set_successfully">Wallpaper set successfully!</string>
   <string name="delete_recent_searches_dialog">Are you sure you want to clear your search history?</string>
   <string name="search_history_deleted">Search history deleted</string>
+  <string name="user_not_logged_in">Login session expired, please log in again.</string>
 </resources>

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Authors:
+* Har-wradim
 * פוילישער
 -->
 <resources>
@@ -115,4 +116,7 @@
   <string name="navigation_item_feedback">פֿידבעק</string>
   <string name="navigation_item_logout">אַרויסלאָגירן</string>
   <string name="navigation_item_featured_images">רעקאמנדירט</string>
+  <string name="appwidget_img">בילד פונעם טאָג</string>
+  <string name="app_widget_heading">בילד פונעם טאָג</string>
+  <string name="wikidata_edit_failure">ס׳איז ניט געלונגען צו דערהיינטיקן דעם אַנטשפּרעכנדיקן בלאַט אין וויקידאַטן.</string>
 </resources>

@@ -120,7 +120,7 @@
   <string name="preference_license">Licence par défaut</string>
   <string name="use_previous">Utiliser le titre ou la description précédent</string>
   <string name="allow_gps">Obtenir automatiquement l’emplacement actuel</string>
-  <string name="allow_gps_summary">Récupère l’emplacement actuel si l’image n’est pas marquée géographiquement, et marque géographiquement l’image avec. Avertissement : Cela dévoilera votre emplacement actuel.</string>
+  <string name="allow_gps_summary">Récupère l’emplacement actuel si l’image n’est pas marquée géographiquement, et marque géographiquement l’image avec. Avertissement : ceci dévoilera votre emplacement actuel.</string>
   <string name="preference_theme">Mode de nuit</string>
   <string name="preference_theme_summary">Utiliser un thème sombre</string>
   <string name="license_name_cc_by_sa_four"> Attribution-ShareAlike 4.0</string>
@@ -290,8 +290,11 @@
   <string name="share_app_title">Partager les applications</string>
   <string name="share_coordinates_not_present">Les coordonnées n\'ont pas été spécifiées pendant la sélection de l\'image</string>
   <string name="error_fetching_nearby_places">Erreur durant l\'exploration du voisinage.</string>
+  <string name="appwidget_img">Image du jour</string>
+  <string name="app_widget_heading">Image du jour</string>
   <string name="successful_wikidata_edit">Image bien ajoutée à %1$s sur Wikidata !</string>
   <string name="wikidata_edit_failure">Échec de la mise à jour de l\'entité Wikidata correspondante !</string>
   <string name="menu_set_wallpaper">Définir le papier-peint</string>
   <string name="wallpaper_set_successfully">Papier-peint configuré avec succès!</string>
+  <string name="user_not_logged_in">Session expirée, veuillez vous reconnecter.</string>
 </resources>

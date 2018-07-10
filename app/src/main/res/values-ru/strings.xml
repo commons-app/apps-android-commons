@@ -31,13 +31,13 @@
   <string name="login_credential">Войдите в свою учётную запись Commons Beta</string>
   <string name="login">Войти</string>
   <string name="forgot_password">Забыли пароль?</string>
-  <string name="signup">Зарегистрироваться</string>
+  <string name="signup">Регистрация</string>
   <string name="logging_in_title">Вход в систему</string>
   <string name="logging_in_message">Пожалуйста, подождите…</string>
   <string name="login_success">Вход выполнен успешно!</string>
   <string name="login_failed">Ошибка входа в систему!</string>
   <string name="upload_failed">Файл не найден. Попробуйте другой файл.</string>
-  <string name="authentication_failed" fuzzy="true">Ошибка аутентификации!</string>
+  <string name="authentication_failed">Ошибка аутентификации. Пожалуйста, авторизуйтесь ещё раз.</string>
   <string name="uploading_started">Загрузка началась!</string>
   <string name="upload_completed_notification_title">%1$s загружен!</string>
   <string name="upload_completed_notification_text">Нажмите для просмотра загруженного файла</string>
@@ -98,7 +98,7 @@
   <string name="categories_skip_explanation">Добавьте категории, чтобы ваши изображения можно было легко найти на Викискладе.\nНачните вводить название для добавления категорий.</string>
   <string name="categories_activity_title">Категории</string>
   <string name="title_activity_settings">Настройки</string>
-  <string name="title_activity_signup">Зарегистрироваться</string>
+  <string name="title_activity_signup">Регистрация</string>
   <string name="title_activity_featured_images">Избранные изображения</string>
   <string name="menu_about">О приложении</string>
   <string name="about_license">Приложение «Викисклад» - это программа с открытым кодом, которую создали волонтёры и участники грантов Викимедиа. Фонд Викимедиа не участвует в создании, разработке или обслуживании этого приложения.</string>
@@ -119,7 +119,7 @@
   <string name="preference_license">Лицензия по умолчанию</string>
   <string name="use_previous">Использовать предыдущие название/описание</string>
   <string name="allow_gps">Анализ местоположения</string>
-  <string name="allow_gps_summary" fuzzy="true">Получить текущее местоположение, чтобы были предложены категории, если изображение не содержит геотегов</string>
+  <string name="allow_gps_summary">Если изображение не содержит геотега, то будет получено и проставлено текущее местоположение. Будьте внимательны, если вы не хотите раскрывать ваше месторасположение.</string>
   <string name="preference_theme">Ночной режим</string>
   <string name="preference_theme_summary">Использовать тёмную тему</string>
   <string name="license_name_cc_by_sa_four"> Attribution-ShareAlike 4.0</string>
@@ -277,7 +277,7 @@
   <string name="about_translate">&lt;u&gt;Перевести&lt;/u&gt;</string>
   <string name="about_translate_title">Языки</string>
   <string name="about_translate_message">Выберите язык локализации, на который сможете перевести элементы интерфейса приложения</string>
-  <string name="about_translate_proceed">Выполняется</string>
+  <string name="about_translate_proceed">Перейти к переводу</string>
   <string name="about_translate_cancel">Отмена</string>
   <string name="retry">Повторить</string>
   <string name="showcase_view_got_it_button">Понятно!</string>
@@ -290,8 +290,11 @@
   <string name="share_app_title">Поделиться приложением</string>
   <string name="share_coordinates_not_present">Во время выбора изображения не были указаны координаты</string>
   <string name="error_fetching_nearby_places">Ошибка получения мест поблизости</string>
+  <string name="appwidget_img">Изображение дня</string>
+  <string name="app_widget_heading">Изображение дня</string>
   <string name="successful_wikidata_edit">Изображение успешно добавлено на страницу викиданных!</string>
-  <string name="wikidata_edit_failure" fuzzy="true">Не удалось обновить соответствующую страницу викиданных!</string>
+  <string name="wikidata_edit_failure">Не удалось обновить соответствующую страницу викиданных!</string>
   <string name="menu_set_wallpaper">Сделать фоновой заставкой</string>
   <string name="wallpaper_set_successfully">Фоновая заставка успешно установлена!</string>
+  <string name="user_not_logged_in">Сессия авторизации истекла, пожалуйста авторизуйтесь заново.</string>
 </resources>

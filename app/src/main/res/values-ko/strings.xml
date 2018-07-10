@@ -280,8 +280,11 @@
   <string name="share_app_title">앱 공유</string>
   <string name="share_coordinates_not_present">그림 선택 중에 좌표가 지정되지 않았습니다</string>
   <string name="error_fetching_nearby_places">주변 장소를 가져오는데 오류가 있습니다.</string>
+  <string name="appwidget_img">오늘의 사진</string>
+  <string name="app_widget_heading">오늘의 사진</string>
   <string name="successful_wikidata_edit">위키데이터의 %1$s에 그림을 성공적으로 추가했습니다!</string>
   <string name="wikidata_edit_failure">일치하는 위키데이터 엔티티의 업데이트를 실패했습니다!</string>
   <string name="menu_set_wallpaper">배경화면 설정</string>
   <string name="wallpaper_set_successfully">배경화면을 성공적으로 설정했습니다!</string>
+  <string name="user_not_logged_in">로그인 세션이 만료되었으므로 다시 로그인해 주십시오.</string>
 </resources>

@@ -289,4 +289,5 @@
   <string name="wikidata_edit_failure">更新所對應的維基數據項目失敗！</string>
   <string name="menu_set_wallpaper">設定桌布</string>
   <string name="wallpaper_set_successfully">桌布設定成功！</string>
+  <string name="user_not_logged_in">登入用 session 逾期，請重新登入。</string>
 </resources>

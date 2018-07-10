@@ -3,14 +3,11 @@ package fr.free.nrw.commons.utils;
 import android.app.WallpaperManager;
 import android.content.Context;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.BitmapRegionDecoder;
 import android.graphics.Color;
 import android.graphics.Rect;
 import android.net.Uri;
-import android.os.Build;
 import android.support.annotation.Nullable;
-import android.support.annotation.RequiresApi;
 
 import com.facebook.common.executors.CallerThreadExecutor;
 import com.facebook.common.references.CloseableReference;
@@ -26,8 +23,6 @@ import java.io.IOException;
 
 import fr.free.nrw.commons.R;
 import timber.log.Timber;
-
-import static com.mapbox.mapboxsdk.Mapbox.getApplicationContext;
 
 /**
  * Created by bluesir9 on 3/10/17.
