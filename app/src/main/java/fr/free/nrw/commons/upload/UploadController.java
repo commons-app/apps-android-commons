@@ -1,5 +1,6 @@
 package fr.free.nrw.commons.upload;
 
+import android.annotation.SuppressLint;
 import android.accounts.Account;
 import android.content.ComponentName;
 import android.content.ContentResolver;
@@ -98,6 +99,7 @@ public class UploadController {
     public void startUpload(String title, Uri mediaUri, String description, String mimeType, String source, String decimalCoords, String wikiDataEntityId, ContributionUploadProgress onComplete) {
         Contribution contribution;
 
+        Timber.d("Wikidata entity ID received from Share activity is %s", wikiDataEntityId);
         //TODO: Modify this to include coords
         Account currentAccount = sessionManager.getCurrentAccount();
         if(currentAccount == null) {
@@ -124,6 +126,7 @@ public class UploadController {
      * @param contribution the contribution object
      * @param onComplete   the progress tracker
      */
+    @SuppressLint("StaticFieldLeak")
     public void startUpload(final Contribution contribution, final ContributionUploadProgress onComplete) {
         //Set creator, desc, and license
         if (TextUtils.isEmpty(contribution.getCreator())) {

@@ -58,6 +58,15 @@ public class Sitelinks implements Parcelable {
         return Uri.parse(sanitisedStringUrl);
     }
 
+    @Override
+    public String toString() {
+        return "Sitelinks{" +
+                "wikipediaLink='" + wikipediaLink + '\'' +
+                ", commonsLink='" + commonsLink + '\'' +
+                ", wikidataLink='" + wikidataLink + '\'' +
+                '}';
+    }
+
     private Sitelinks(Sitelinks.Builder builder) {
         this.wikidataLink = builder.wikidataLink;
         this.wikipediaLink = builder.wikipediaLink;
