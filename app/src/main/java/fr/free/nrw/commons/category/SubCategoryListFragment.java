@@ -57,6 +57,7 @@ public class SubCategoryListFragment extends CommonsDaggerSupportFragment {
     @Inject MediaWikiApi mwApi;
 
     private RVRendererAdapter<String> categoriesAdapter;
+    private boolean isParentCategory = true;
 
     private final SearchCategoriesAdapterFactory adapterFactory = new SearchCategoriesAdapterFactory(item -> {
         // Open SubCategory Details page
@@ -71,6 +72,7 @@ public class SubCategoryListFragment extends CommonsDaggerSupportFragment {
         View rootView = inflater.inflate(R.layout.fragment_browse_image, container, false);
         ButterKnife.bind(this, rootView);
         categoryName = getArguments().getString("categoryName");
+        isParentCategory = getArguments().getBoolean("isParentCategory");
         initSubCategoryList();
         if(getActivity().getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT){
             categoriesRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
@@ -95,12 +97,19 @@ public class SubCategoryListFragment extends CommonsDaggerSupportFragment {
             return;
         }
         progressBar.setVisibility(View.VISIBLE);
-
-        Observable.fromCallable(() -> mwApi.getSubCategoryList(categoryName))
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .timeout(TIMEOUT_SECONDS, TimeUnit.SECONDS)
-                .subscribe(this::handleSuccess, this::handleError);
+        if (!isParentCategory){
+            Observable.fromCallable(() -> mwApi.getSubCategoryList(categoryName))
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .timeout(TIMEOUT_SECONDS, TimeUnit.SECONDS)
+                    .subscribe(this::handleSuccess, this::handleError);
+        }else {
+            Observable.fromCallable(() -> mwApi.getParentCategoryList(categoryName))
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .timeout(TIMEOUT_SECONDS, TimeUnit.SECONDS)
+                    .subscribe(this::handleSuccess, this::handleError);
+        }
     }
 
 
@@ -125,8 +134,13 @@ public class SubCategoryListFragment extends CommonsDaggerSupportFragment {
      * @param throwable
      */
     private void handleError(Throwable throwable) {
-        Timber.e(throwable, "Error occurred while loading queried subcategories");
-        ViewUtil.showSnackbar(categoriesRecyclerView,R.string.error_loading_categories);
+        if (!isParentCategory){
+            Timber.e(throwable, "Error occurred while loading queried subcategories");
+            ViewUtil.showSnackbar(categoriesRecyclerView,R.string.error_loading_categories);
+        }else {
+            Timber.e(throwable, "Error occurred while loading queried subcategories");
+            ViewUtil.showSnackbar(categoriesRecyclerView,R.string.error_loading_categories);
+        }
     }
 
     /**

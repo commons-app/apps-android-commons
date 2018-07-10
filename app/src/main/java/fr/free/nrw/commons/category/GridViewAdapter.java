@@ -2,6 +2,7 @@ package fr.free.nrw.commons.category;
 
 import android.app.Activity;
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -40,6 +41,18 @@ public class GridViewAdapter extends ArrayAdapter {
         }
         data.addAll(images);
         notifyDataSetChanged();
+    }
+
+    /**
+     * Check the last item in the new list with old list and returns true if they are same
+     * Its triggered on successful response of the fetch images API.
+     * @param images
+     */
+    public boolean containsAll(List<Media> images){
+        if (data == null) {
+            data = new ArrayList<>();
+        }
+        return images.get(images.size()-1).getFilename().equals(data.get(data.size()-1).getFilename());
     }
 
     @Override
