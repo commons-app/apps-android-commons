@@ -704,6 +704,7 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
             QueryContinue queryContinue = getQueryContinue(apiResult.getNode("/api/continue").getDocument());
             setQueryContinueValues(categoryName, queryContinue);
         }
+
         NodeList childNodes = categoryImagesNode.getDocument().getChildNodes();
         return CategoryImageUtils.getMediaList(childNodes);
     }
