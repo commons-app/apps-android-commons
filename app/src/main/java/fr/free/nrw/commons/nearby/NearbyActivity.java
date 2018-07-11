@@ -22,6 +22,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
+import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -227,6 +228,9 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
                     //If permission not granted, go to page that says Nearby Places cannot be displayed
                     hideProgressBar();
                     showLocationPermissionDeniedErrorDialog();
+                    Toast contriAct = Toast.makeText(this, "Location permission needed to search for nearby places", Toast.LENGTH_LONG);
+                    contriAct.show();
+                    finish();
                 }
             }
             break;
