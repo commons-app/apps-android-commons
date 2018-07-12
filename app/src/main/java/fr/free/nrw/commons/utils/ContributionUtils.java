@@ -1,17 +1,9 @@
 package fr.free.nrw.commons.utils;
 
-import android.content.ContentUris;
 import android.content.Context;
-import android.content.Intent;
 import android.net.Uri;
-import android.provider.MediaStore;
-import android.util.Log;
 
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.PrintWriter;
-import java.util.Random;
-
 
 import timber.log.Timber;
 
