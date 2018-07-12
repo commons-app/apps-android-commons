@@ -15,6 +15,7 @@ import android.os.AsyncTask;
 import android.os.IBinder;
 import android.provider.MediaStore;
 import android.text.TextUtils;
+import android.util.Log;
 
 import java.io.BufferedInputStream;
 import java.io.File;
@@ -155,8 +156,9 @@ public class UploadController {
 
                     //TODO: understand do we really need this code
                     if (contribution.getDataLength() <= 0) {
+                        Log.d("deneme","UploadController/doInBackground, contribution.getLocalUri():"+contribution.getLocalUri());
                         AssetFileDescriptor assetFileDescriptor = contentResolver
-                                .openAssetFileDescriptor(Uri.fromFile(new File(contribution.getLocalUri().toString())), "r");
+                                .openAssetFileDescriptor(Uri.fromFile(new File(contribution.getLocalUri().getPath())), "r");
                         if (assetFileDescriptor != null) {
                             length = assetFileDescriptor.getLength();
                             if (length == -1) {
