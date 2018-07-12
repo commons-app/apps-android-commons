@@ -203,7 +203,7 @@ public class UploadController {
                         contribution.setDateCreated(new Date());
                     }
                 }
-                return contribution;
+            return contribution;
             }
 
             @Override
