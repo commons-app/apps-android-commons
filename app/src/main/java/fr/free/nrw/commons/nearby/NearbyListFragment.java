@@ -149,10 +149,11 @@ public class NearbyListFragment extends DaggerFragment {
             Timber.d("OnActivityResult() parameters: Req code: %d Result code: %d Data: %s",
                     requestCode, resultCode, data);
             if (requestCode == ContributionController.SELECT_FROM_CAMERA) {
+                // If coming from camera, pass null as uri. Because camera photos get saved to a
+                // fixed directory
                 controller.handleImagePicked(requestCode, null, true, null);
             } else {
-                Uri uri = ContributionUtils.saveFileBeingUploadedTemporarily(getActivity(), data.getData());
-                controller.handleImagePicked(requestCode, uri, true, null);
+                controller.handleImagePicked(requestCode, data.getData(), true, null);
             }
         } else {
             Timber.e("OnActivityResult() parameters: Req code: %d Result code: %d Data: %s",
