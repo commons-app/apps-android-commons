@@ -36,6 +36,7 @@ import timber.log.Timber;
 
 import static android.app.Activity.RESULT_OK;
 import static android.content.pm.PackageManager.PERMISSION_GRANTED;
+import static fr.free.nrw.commons.wikidata.WikidataConstants.WIKIDATA_ENTITY_ID_PREF;
 
 public class NearbyListFragment extends DaggerFragment {
     private Bundle bundleForUpdates; // Carry information from activity about changed nearby places and current location
