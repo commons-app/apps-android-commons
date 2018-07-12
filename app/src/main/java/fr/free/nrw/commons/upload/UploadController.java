@@ -14,6 +14,7 @@ import android.os.AsyncTask;
 import android.os.IBinder;
 import android.provider.MediaStore;
 import android.text.TextUtils;
+import android.util.Log;
 
 import java.io.BufferedInputStream;
 import java.io.File;
@@ -148,7 +149,7 @@ public class UploadController {
             protected Contribution doInBackground(Void... voids /* stare into you */) {
                 long length;
                 ContentResolver contentResolver = context.getContentResolver();
-                /*try {
+                try {
 
                     //TODO: understand do we really need this code
                     if (contribution.getDataLength() <= 0) {
@@ -170,7 +171,7 @@ public class UploadController {
                     Timber.e(e, "Null Pointer Exception: ");
                 } catch (SecurityException e) {
                     Timber.e(e, "Security Exception: ");
-                }*/
+                }
 
                 String mimeType = (String) contribution.getTag("mimeType");
                 Boolean imagePrefix = false;
@@ -187,6 +188,7 @@ public class UploadController {
 
                 if (imagePrefix && contribution.getDateCreated() == null) {
                     Timber.d("local uri   " + contribution.getLocalUri());
+                    Log.d("deneme","Upload Controller/startUpload contribution.getLocalUri(): "+contribution.getLocalUri());
                     Cursor cursor = contentResolver.query(contribution.getLocalUri(),
                             new String[]{MediaStore.Images.ImageColumns.DATE_TAKEN}, null, null, null);
                     if (cursor != null && cursor.getCount() != 0 && cursor.getColumnCount() != 0) {
