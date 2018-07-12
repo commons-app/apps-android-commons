@@ -416,9 +416,8 @@ public class ShareActivity
             if (!duplicateCheckPassed) {
                 //Test SHA1 of image to see if it matches SHA1 of a file on Commons
                 try {
-                    //InputStream inputStream = getContentResolver().openInputStream(mediaUri);
-                    FileInputStream fileInputStream = new FileInputStream(new File(mediaUri.toString()));
-                    String fileSHA1 = getSHA1(fileInputStream);
+                    InputStream inputStream = getContentResolver().openInputStream(mediaUri);
+                    String fileSHA1 = getSHA1(inputStream);
                     Timber.d("Input stream created from %s", mediaUri.toString());
                     Timber.d("File SHA1 is: %s", fileSHA1);
 
