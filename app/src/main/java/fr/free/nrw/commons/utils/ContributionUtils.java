@@ -8,6 +8,10 @@ import android.provider.MediaStore;
 import android.util.Log;
 
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
+import java.util.Random;
+
 
 import timber.log.Timber;
 
@@ -70,7 +74,11 @@ public class ContributionUtils {
                 // This file is in use, try enother file
                 i++;
             } else {
-                return TEMP_EXTERNAL_DIRECTORY +File.separatorChar+i+"_tmp";
+                // Use time stamp for file name, so that two temporary file never has same file name
+                // to prevent previous file reference bug
+                Long tsLong = System.currentTimeMillis()/1000;
+                String ts = tsLong.toString();
+                return TEMP_EXTERNAL_DIRECTORY +File.separatorChar+ts+"_tmp";
             }
         }
     }
