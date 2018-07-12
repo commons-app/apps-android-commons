@@ -277,9 +277,6 @@ public class ShareActivity
             contribution = savedInstanceState.getParcelable("contribution");
         }
 
-        //receiveImageIntent();
-
-
         requestAuthToken();
         Timber.d("Uri: %s", mediaUri.toString());
         Timber.d("Ext storage dir: %s", Environment.getExternalStorageDirectory());
