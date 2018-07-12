@@ -131,9 +131,10 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment {
             Timber.d("OnActivityResult() parameters: Req code: %d Result code: %d Data: %s",
                     requestCode, resultCode, data);
             if (requestCode == ContributionController.SELECT_FROM_CAMERA) {
+                // If coming from camera, pass null as uri. Because camera photos get saved to a
+                // fixed directory
                 controller.handleImagePicked(requestCode, null, false, null);
             } else {
-                //Uri uri = ContributionUtils.saveFileBeingUploadedTemporarily(getActivity(), data.getData());
                 controller.handleImagePicked(requestCode, data.getData(), false, null);
             }
         } else {
