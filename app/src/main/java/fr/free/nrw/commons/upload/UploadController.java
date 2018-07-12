@@ -15,7 +15,6 @@ import android.os.AsyncTask;
 import android.os.IBinder;
 import android.provider.MediaStore;
 import android.text.TextUtils;
-import android.util.Log;
 
 import java.io.BufferedInputStream;
 import java.io.File;
@@ -191,7 +190,6 @@ public class UploadController {
 
                 if (imagePrefix && contribution.getDateCreated() == null) {
                     Timber.d("local uri   " + contribution.getLocalUri());
-                    Log.d("deneme","Upload Controller/startUpload contribution.getLocalUri(): "+contribution.getLocalUri());
                     Cursor cursor = contentResolver.query(contribution.getLocalUri(),
                             new String[]{MediaStore.Images.ImageColumns.DATE_TAKEN}, null, null, null);
                     if (cursor != null && cursor.getCount() != 0 && cursor.getColumnCount() != 0) {
