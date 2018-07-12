@@ -7,6 +7,7 @@ import android.content.pm.ResolveInfo;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.content.FileProvider;
@@ -92,9 +93,7 @@ public class ContributionController {
         fragment.startActivityForResult(pickImageIntent, SELECT_FROM_GALLERY);
     }
 
-    public void handleImagePicked(int requestCode, Uri uri, boolean isDirectUpload, String wikiDataEntityId) {
-        Timber.d("Is direct upload %s and the Wikidata entity ID is %s", isDirectUpload, wikiDataEntityId);
-
+    public void handleImagePicked(int requestCode, @Nullable Uri uri, boolean isDirectUpload, String wikiDataEntityId) {
         FragmentActivity activity = fragment.getActivity();
         Timber.d("handleImagePicked() called with onActivityResult()");
         Intent shareIntent = new Intent(activity, ShareActivity.class);
