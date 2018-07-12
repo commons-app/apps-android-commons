@@ -2,6 +2,7 @@ package fr.free.nrw.commons.utils;
 
 import android.content.Context;
 import android.net.Uri;
+import android.util.Log;
 
 import java.io.File;
 
@@ -30,6 +31,7 @@ public class ContributionUtils {
 
         if (FileUtils.checkIfDirectoryExists(TEMP_EXTERNAL_DIRECTORY)) {
             String destinationFilename = decideTempDestinationFileName();
+            Log.d("deneme","URIfromContentProvider is:"+URIfromContentProvider+" destinationFilename:"+destinationFilename);
             result = FileUtils.saveFileFromURI(context, URIfromContentProvider, destinationFilename);
         } else { // If directory doesn't exist, create it and recursive call current method to check again
 
