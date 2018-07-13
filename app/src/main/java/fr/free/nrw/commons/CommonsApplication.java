@@ -82,6 +82,8 @@ public class CommonsApplication extends MultiDexApplication {
         if (setupLeakCanary() == RefWatcher.DISABLED) {
             return;
         }
+        // Empty temp directory in case some temp files are created and never removed.
+        ContributionUtils.emptyTemporaryDirectory();
 
         Timber.plant(new Timber.DebugTree());
 
