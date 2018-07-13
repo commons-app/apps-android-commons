@@ -269,14 +269,18 @@ public class MultipleShareActivity extends AuthenticatedActivity
                 for (int i = 0; i < urisList.size(); i++) {
                     Contribution up = new Contribution();
                     Uri uri = urisList.get(i);
-                    up.setLocalUri(uri);
+                    if(uri==null)
+                        Timber.w("Uri is null.");
+                    FileProcessor fileObj= new FileProcessor(uri, this.getContentResolver(), this);
+                    fileObj.processFileCoordinates(false);
+                    up.setLocalUri(fileObj.redactEXIFData());
                     up.setTag("mimeType", intent.getType());
                     up.setTag("sequence", i);
                     up.setSource(Contribution.SOURCE_EXTERNAL);
                     up.setMultiple(true);
-                    String imageGpsCoordinates = extractImageGpsData(uri);
+                    String imageGpsCoordinates=fileObj.getAnonymizedDecimalCoords();
                     if (imageGpsCoordinates != null) {
-                        Timber.d("GPS data for image found!");
+                        Timber.d("GPS data will be used for image!");
                         up.setDecimalCoords(imageGpsCoordinates);
                     }
                     photosList.add(up);
