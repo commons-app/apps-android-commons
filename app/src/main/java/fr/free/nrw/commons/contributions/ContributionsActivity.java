@@ -192,7 +192,7 @@ public  class       ContributionsActivity
             Timber.d("Deleting failed contrib %s", c.toString());
             // If upload fails and then user decides to cancel upload at all, which means contribution
             // object will be deleted. So we have to delete temp file for that contribution.
-            ContributionUtils.removeTemporaryFile(null, c.getLocalUri() , null);
+            ContributionUtils.removeTemporaryFile(c.getLocalUri());
             contributionDao.delete(c);
         } else {
             Timber.d("Skipping deletion for non-failed contrib %s", c.toString());

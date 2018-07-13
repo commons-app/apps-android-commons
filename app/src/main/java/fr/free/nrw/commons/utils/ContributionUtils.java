@@ -48,11 +48,9 @@ public class ContributionUtils {
 
     /**
      * Removes temp file created during upload
-     * @param context
      * @param tempFileUri
-     * @param contentProviderUri
      */
-    public static void removeTemporaryFile(Context context, Uri tempFileUri, Uri contentProviderUri) {
+    public static void removeTemporaryFile(Uri tempFileUri) {
         //TODO: do I have to notify file system about deletion?
         File tempFile = new File(tempFileUri.getPath());
         if (tempFile.exists()) {
