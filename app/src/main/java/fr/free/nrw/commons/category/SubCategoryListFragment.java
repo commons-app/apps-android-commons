@@ -138,7 +138,7 @@ public class SubCategoryListFragment extends CommonsDaggerSupportFragment {
             Timber.e(throwable, "Error occurred while loading queried subcategories");
             ViewUtil.showSnackbar(categoriesRecyclerView,R.string.error_loading_categories);
         }else {
-            Timber.e(throwable, "Error occurred while loading queried subcategories");
+            Timber.e(throwable, "Error occurred while loading queried parentcategories");
             ViewUtil.showSnackbar(categoriesRecyclerView,R.string.error_loading_categories);
         }
     }
@@ -149,7 +149,12 @@ public class SubCategoryListFragment extends CommonsDaggerSupportFragment {
     private void initEmptyView() {
         progressBar.setVisibility(GONE);
         categoriesNotFoundView.setVisibility(VISIBLE);
-        categoriesNotFoundView.setText(getString(R.string.no_subcategory_found));
+        if (!isParentCategory){
+            categoriesNotFoundView.setText(getString(R.string.no_subcategory_found));
+        }else {
+            categoriesNotFoundView.setText(getString(R.string.no_parentcategory_found));
+        }
+
     }
 
     /**
