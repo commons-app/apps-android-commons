@@ -23,6 +23,8 @@ import android.support.annotation.RequiresApi;
 import android.support.design.widget.FloatingActionButton;
 import android.support.graphics.drawable.VectorDrawableCompat;
 import android.support.v4.content.ContextCompat;
+
+import android.view.KeyEvent;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.DecelerateInterpolator;
@@ -33,6 +35,8 @@ import com.facebook.drawee.generic.GenericDraweeHierarchyBuilder;
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.github.chrisbanes.photoview.PhotoView;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
@@ -59,6 +63,7 @@ import fr.free.nrw.commons.modifications.ModifierSequenceDao;
 import fr.free.nrw.commons.modifications.TemplateRemoveModifier;
 import fr.free.nrw.commons.mwapi.CategoryApi;
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
+import fr.free.nrw.commons.utils.ContributionUtils;
 import fr.free.nrw.commons.utils.ViewUtil;
 import timber.log.Timber;
 
@@ -117,6 +122,7 @@ public class ShareActivity
     private String mimeType;
     private CategorizationFragment categorizationFragment;
     private Uri mediaUri;
+    private Uri contentProviderUri;
     private Contribution contribution;
     private GPSExtractor gpsObj;
     private String decimalCoords;
@@ -133,6 +139,8 @@ public class ShareActivity
     private long ShortAnimationDuration;
     private boolean isFABOpen = false;
     private float startScaleFinal;
+    private boolean isZoom = false;
+
 
     /**
      * Called when user taps the submit button.
@@ -167,6 +175,7 @@ public class ShareActivity
         return !FileUtils.isSelfOwned(getApplicationContext(), mediaUri)
                 && (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE)
                 != PackageManager.PERMISSION_GRANTED);
+        //return false;
     }
 
     /**
@@ -185,7 +194,7 @@ public class ShareActivity
             Timber.d("Cache the categories found");
         }
 
-        uploadController.startUpload(title, mediaUri, description, mimeType, source, decimalCoords, wikiDataEntityId, c -> {
+        uploadController.startUpload(title, contentProviderUri, mediaUri, description, mimeType, source, decimalCoords, wikiDataEntityId, c -> {
             ShareActivity.this.contribution = c;
             showPostUpload();
         });
@@ -297,6 +306,11 @@ public class ShareActivity
 
         if (Intent.ACTION_SEND.equals(intent.getAction())) {
             mediaUri = intent.getParcelableExtra(Intent.EXTRA_STREAM);
+
+            contentProviderUri = mediaUri;
+
+            mediaUri = ContributionUtils.saveFileBeingUploadedTemporarily(this, mediaUri);
+
             if (intent.hasExtra(UploadService.EXTRA_SOURCE)) {
                 source = intent.getStringExtra(UploadService.EXTRA_SOURCE);
             } else {
@@ -459,6 +473,7 @@ public class ShareActivity
         if (CurrentAnimator != null) {
             CurrentAnimator.cancel();
         }
+        isZoom = true;
         ViewUtil.hideKeyboard(ShareActivity.this.findViewById(R.id.titleEdit | R.id.descEdit));
         closeFABMenu();
         mainFab.setVisibility(View.GONE);
@@ -475,7 +490,6 @@ public class ShareActivity
 
         // Load the high-resolution "zoomed-in" image.
         expandedImageView.setImageBitmap(scaledImage);
-
         float startScale = zoomObj.adjustStartEndBounds(startBounds, finalBounds, globalOffset);
 
         // Hide the thumbnail and show the zoomed-in view. When the animation
@@ -547,6 +561,7 @@ public class ShareActivity
         if (CurrentAnimator != null) {
             CurrentAnimator.cancel();
         }
+        isZoom = false;
         zoomOutButton.setVisibility(View.GONE);
         mainFab.setVisibility(View.VISIBLE);
 
@@ -557,6 +572,7 @@ public class ShareActivity
                 .with(ObjectAnimator.ofFloat(expandedImageView, View.Y, startBounds.top))
                 .with(ObjectAnimator.ofFloat(expandedImageView, View.SCALE_X, startScaleFinal))
                 .with(ObjectAnimator.ofFloat(expandedImageView, View.SCALE_Y, startScaleFinal));
+
         set.setDuration(ShortAnimationDuration);
         set.setInterpolator(new DecelerateInterpolator());
         set.addListener(new AnimatorListenerAdapter() {
@@ -588,5 +604,18 @@ public class ShareActivity
             mapIntent.setPackage("com.google.android.apps.maps");
             startActivity(mapIntent);
         }
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        switch (keyCode) {
+            case KeyEvent.KEYCODE_BACK:
+                if(isZoom) {
+                    onZoomOutFabClicked();
+                    return true;
+                }
+        }
+        return super.onKeyDown(keyCode,event);
+
     }
 }

@@ -16,7 +16,7 @@
   <string name="login_success">Identificacion capitada !</string>
   <string name="login_failed">Error de connexion !</string>
   <string name="upload_failed">Fichièr pas trobat. Ensajatz-ne un autre.</string>
-  <string name="authentication_failed">Fracàs de l’autentificacion !</string>
+  <string name="authentication_failed" fuzzy="true">Fracàs de l’autentificacion !</string>
   <string name="uploading_started">Telecargament aviat !</string>
   <string name="upload_completed_notification_title">%1$s telecargats !</string>
   <string name="upload_completed_notification_text">Quichar per veire vòstre telecargament</string>

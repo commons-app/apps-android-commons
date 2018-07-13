@@ -25,7 +25,7 @@
   <string name="login_success">Đã đăng nhập thành công!</string>
   <string name="login_failed">Đăng nhập thất bại!</string>
   <string name="upload_failed">Không tìm thấy tập tin. Xin vui lòng thử tập tin khác.</string>
-  <string name="authentication_failed">Xác thực thất bại!</string>
+  <string name="authentication_failed" fuzzy="true">Xác thực thất bại!</string>
   <string name="uploading_started">Đã bắt đầu tải lên!</string>
   <string name="upload_completed_notification_title">Đã tải lên %1$s!</string>
   <string name="upload_completed_notification_text">Chạm để xem những tập tin tải lên của bạn</string>
@@ -104,7 +104,7 @@
   <string name="preference_license">Giấy phép mặc định</string>
   <string name="use_previous">Sử dụng tiêu đề/miêu tả trước</string>
   <string name="allow_gps">Lấy vị trí hiện tại tự động</string>
-  <string name="allow_gps_summary">Định vị hiện tại để nhận gợi ý thể loại trong trường hợp hình ảnh chưa được gắn thẻ địa lý</string>
+  <string name="allow_gps_summary" fuzzy="true">Định vị hiện tại để nhận gợi ý thể loại trong trường hợp hình ảnh chưa được gắn thẻ địa lý</string>
   <string name="preference_theme">Chế độ ban đêm</string>
   <string name="preference_theme_summary">Dùng chủ đề tối</string>
   <string name="license_name_cc_by_sa_four">Ghi công–Chia sẻ tương tự 4.0</string>

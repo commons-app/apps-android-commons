@@ -28,7 +28,7 @@
   <string name="login_success">ورود موفق!</string>
   <string name="login_failed">ورود ناموفق!</string>
   <string name="upload_failed">پرونده یافت نشد لطفاً پرونده دیگری را امتحان کنید.</string>
-  <string name="authentication_failed">تأیید اعتبار انجام نشد!</string>
+  <string name="authentication_failed" fuzzy="true">تأیید اعتبار انجام نشد!</string>
   <string name="uploading_started">بارگذاری آغاز شد!</string>
   <string name="upload_completed_notification_title">%1$s بارگذاری شد!</string>
   <string name="upload_completed_notification_text">برای دیدن بارگذاریتان بر روی صفحه انگشت بزنید</string>
@@ -104,7 +104,7 @@
   <string name="preference_license">مجوز پیش‌فرض</string>
   <string name="use_previous">از عنوان/توضیحات پیشین استفاده کنید</string>
   <string name="allow_gps">دریافت خودکار موقعیت کنونی</string>
-  <string name="allow_gps_summary">درحال دریافت موقعیت برای پیشنهاد رده در صورتی که برچسب جغرافیایی وجود نداشته باشد.</string>
+  <string name="allow_gps_summary" fuzzy="true">درحال دریافت موقعیت برای پیشنهاد رده در صورتی که برچسب جغرافیایی وجود نداشته باشد.</string>
   <string name="preference_theme">حالت شبانه</string>
   <string name="preference_theme_summary">استفاده از حالت تیره</string>
   <string name="license_name_cc_by_sa_four">CC Attribution-ShareAlike 4.0</string>

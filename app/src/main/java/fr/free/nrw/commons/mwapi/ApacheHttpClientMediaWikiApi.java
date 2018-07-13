@@ -2,6 +2,7 @@ package fr.free.nrw.commons.mwapi;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -48,6 +49,7 @@ import fr.free.nrw.commons.category.CategoryImageUtils;
 import fr.free.nrw.commons.category.QueryContinue;
 import fr.free.nrw.commons.notification.Notification;
 import fr.free.nrw.commons.notification.NotificationUtils;
+import fr.free.nrw.commons.utils.ContributionUtils;
 import in.yuvi.http.fluent.Http;
 import io.reactivex.Observable;
 import io.reactivex.Single;
@@ -586,6 +588,8 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
                     .param("format", "xml")
                     .param("gcmtype", "file")
                     .param("gcmtitle", categoryName)
+                    .param("gcmsort", "timestamp")//property to sort by;timestamp
+                    .param("gcmdir", "desc")//in which direction to sort;descending
                     .param("prop", "imageinfo")
                     .param("gcmlimit", "10")
                     .param("iiprop", "url|extmetadata");
@@ -684,12 +688,18 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
                                    long dataLength,
                                    String pageContents,
                                    String editSummary,
-                                   final ProgressListener progressListener) throws IOException {
+                                   final ProgressListener progressListener,
+                                   Uri fileUri,
+                                   Uri contentProviderUri) throws IOException {
+
         ApiResult result = api.upload(filename, file, dataLength, pageContents, editSummary, progressListener::onProgress);
 
         Log.e("WTF", "Result: " + result.toString());
 
         String resultStatus = result.getString("/api/upload/@result");
+
+        // In either case, filure or success we have to clean directory
+        ContributionUtils.removeTemporaryFile(fileUri);
         if (!resultStatus.equals("Success")) {
             String errorCode = result.getString("/api/error/@code");
             Timber.e(errorCode);
@@ -701,7 +711,6 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
             return new UploadResult(resultStatus, dateUploaded, canonicalFilename, imageUrl);
         }
     }
-
 
     @Override
     @NonNull

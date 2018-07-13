@@ -17,6 +17,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.content.ContextCompat;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
@@ -45,6 +46,7 @@ import fr.free.nrw.commons.modifications.ModifierSequence;
 import fr.free.nrw.commons.modifications.ModifierSequenceDao;
 import fr.free.nrw.commons.modifications.TemplateRemoveModifier;
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
+import fr.free.nrw.commons.utils.ContributionUtils;
 import timber.log.Timber;
 
 //TODO: We should use this class to see how multiple uploads are handled, and then REMOVE it.
@@ -269,6 +271,8 @@ public class MultipleShareActivity extends AuthenticatedActivity
                 for (int i = 0; i < urisList.size(); i++) {
                     Contribution up = new Contribution();
                     Uri uri = urisList.get(i);
+                    // Use temporarily saved file Uri instead
+                    uri = ContributionUtils.saveFileBeingUploadedTemporarily(this, uri);
                     up.setLocalUri(uri);
                     up.setTag("mimeType", intent.getType());
                     up.setTag("sequence", i);

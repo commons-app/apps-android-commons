@@ -6,20 +6,16 @@ import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import android.support.v4.util.LruCache;
 
-import com.google.gson.Gson;
-
 import javax.inject.Named;
 import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;
 
-import fr.free.nrw.commons.BuildConfig;
 import fr.free.nrw.commons.auth.AccountUtil;
 import fr.free.nrw.commons.auth.SessionManager;
 import fr.free.nrw.commons.data.DBOpenHelper;
 import fr.free.nrw.commons.location.LocationServiceManager;
-import fr.free.nrw.commons.mwapi.ApacheHttpClientMediaWikiApi;
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
 import fr.free.nrw.commons.nearby.NearbyPlaces;
 import fr.free.nrw.commons.upload.UploadController;

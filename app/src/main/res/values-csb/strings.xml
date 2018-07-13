@@ -14,7 +14,7 @@
   <string name="login_success">Ùdałi logòwanié!</string>
   <string name="login_failed">Logòwanié nie darzëło sã!</string>
   <string name="upload_failed">Felënk lopka. Proszã spróbòwac znowa.</string>
-  <string name="authentication_failed">Fela ùdowierzaniô!</string>
+  <string name="authentication_failed" fuzzy="true">Fela ùdowierzaniô!</string>
   <string name="uploading_started">Wladënk zrëszony!</string>
   <string name="upload_completed_notification_title">%1$s wladowóné!</string>
   <string name="upload_completed_notification_text">Tkni, abë òbôczëc ladowóny lopk</string>

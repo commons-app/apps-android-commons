@@ -30,6 +30,7 @@ import dagger.android.support.DaggerFragment;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.contributions.ContributionController;
 import fr.free.nrw.commons.location.LatLng;
+import fr.free.nrw.commons.utils.ContributionUtils;
 import fr.free.nrw.commons.utils.UriDeserializer;
 import timber.log.Timber;
 
@@ -147,7 +148,13 @@ public class NearbyListFragment extends DaggerFragment {
         if (resultCode == RESULT_OK) {
             Timber.d("OnActivityResult() parameters: Req code: %d Result code: %d Data: %s",
                     requestCode, resultCode, data);
-            controller.handleImagePicked(requestCode, data, true, directPrefs.getString(WIKIDATA_ENTITY_ID_PREF, null));
+            if (requestCode == ContributionController.SELECT_FROM_CAMERA) {
+                // If coming from camera, pass null as uri. Because camera photos get saved to a
+                // fixed directory
+                controller.handleImagePicked(requestCode, null, true, null);
+            } else {
+                controller.handleImagePicked(requestCode, data.getData(), true, null);
+            }
         } else {
             Timber.e("OnActivityResult() parameters: Req code: %d Result code: %d Data: %s",
                     requestCode, resultCode, data);
