@@ -36,6 +36,7 @@ import fr.free.nrw.commons.media.MediaDetailPagerFragment;
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
 import fr.free.nrw.commons.settings.Prefs;
 import fr.free.nrw.commons.upload.UploadService;
+import fr.free.nrw.commons.utils.ContributionUtils;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.schedulers.Schedulers;
@@ -188,6 +189,9 @@ public  class       ContributionsActivity
         Contribution c = contributionDao.fromCursor(allContributions);
         if (c.getState() == STATE_FAILED) {
             Timber.d("Deleting failed contrib %s", c.toString());
+            // If upload fails and then user decides to cancel upload at all, which means contribution
+            // object will be deleted. So we have to delete temp file for that contribution.
+            ContributionUtils.removeTemporaryFile(null, c.getLocalUri() , null);
             contributionDao.delete(c);
         } else {
             Timber.d("Skipping deletion for non-failed contrib %s", c.toString());
