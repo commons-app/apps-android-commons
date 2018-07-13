@@ -47,11 +47,11 @@ public class WelcomeActivity extends BaseActivity {
      */
     @Override
     public void onDestroy() {
-        adapter.setCallback(null);
         if(isQuiz){
             Intent i = new Intent(WelcomeActivity.this, QuizActivity.class);
             startActivity(i);
         }
+        adapter.setCallback(null);
         super.onDestroy();
     }
 

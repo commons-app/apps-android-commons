@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.graphics.drawable.VectorDrawableCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -13,6 +14,9 @@ import android.widget.RadioButton;
 import android.widget.TextView;
 
 import com.facebook.drawee.backends.pipeline.Fresco;
+import com.facebook.drawee.drawable.ProgressBarDrawable;
+import com.facebook.drawee.generic.GenericDraweeHierarchy;
+import com.facebook.drawee.generic.GenericDraweeHierarchyBuilder;
 import com.facebook.drawee.view.SimpleDraweeView;
 
 import java.util.ArrayList;
@@ -31,7 +35,6 @@ public class QuizActivity extends AppCompatActivity {
     @BindView(R.id.quiz_positive_answer) RadioButton positiveAnswer;
     @BindView(R.id.quiz_negative_answer) RadioButton negativeAnswer;
     @BindView(R.id.toolbar) Toolbar toolbar;
-    @BindView(R.id.progressBar) ProgressBar progressBar;
 
     private QuizController quizController = new QuizController();
     private ArrayList<QuizQuestion> quiz = new ArrayList<QuizQuestion>();
@@ -106,15 +109,20 @@ public class QuizActivity extends AppCompatActivity {
      * to display the question
      */
     public void displayQuestion(){
-        progressBar.setVisibility(View.VISIBLE);
         quiz = quizController.getQuiz();
         questionText.setText(quiz.get(questionIndex).getQuestion());
         questionTitle.setText(getResources().getString(R.string.question)+quiz.get(questionIndex).getQuestionNumber());
+        imageView.setHierarchy(GenericDraweeHierarchyBuilder
+                .newInstance(getResources())
+                .setFailureImage(VectorDrawableCompat.create(getResources(),
+                        R.drawable.ic_error_outline_black_24dp, getTheme()))
+                .setProgressBarImage(new ProgressBarDrawable())
+                .build());
+
         imageView.setImageURI(quiz.get(questionIndex).getUrl());
         new RadioGroupHelper(this, R.id.quiz_positive_answer, R.id.quiz_negative_answer);
         positiveAnswer.setChecked(false);
         negativeAnswer.setChecked(false);
-        progressBar.setVisibility(View.INVISIBLE);
     }
 
     /**

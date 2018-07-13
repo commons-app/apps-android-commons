@@ -27,7 +27,7 @@ public class QuizController {
         quiz.add(q2);
         QuizQuestion q3 = new QuizQuestion(3,
                 context.getResources().getString(R.string.quiz_question_string),
-                "https://upload.wikimedia.org/wikipedia/commons/5/51/HouseBuildingInNorthernVietnam.jpg",
+                "https://i.imgur.com/Kepb5jR.jpg",
                 false,context.getResources().getString(R.string.blurry_image_answer));
         quiz.add(q3);
         QuizQuestion q4 = new QuizQuestion(4,
