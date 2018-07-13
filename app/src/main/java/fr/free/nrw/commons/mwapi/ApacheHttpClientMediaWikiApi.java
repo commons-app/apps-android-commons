@@ -47,7 +47,6 @@ import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.PageTitle;
 import fr.free.nrw.commons.category.CategoryImageUtils;
 import fr.free.nrw.commons.category.QueryContinue;
-import fr.free.nrw.commons.contributions.Contribution;
 import fr.free.nrw.commons.notification.Notification;
 import fr.free.nrw.commons.notification.NotificationUtils;
 import fr.free.nrw.commons.utils.ContributionUtils;
@@ -712,7 +711,6 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
             return new UploadResult(resultStatus, dateUploaded, canonicalFilename, imageUrl);
         }
     }
-
 
     @Override
     @NonNull
