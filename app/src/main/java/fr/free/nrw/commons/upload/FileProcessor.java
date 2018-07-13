@@ -5,6 +5,8 @@ import android.app.Activity;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.location.Location;
+import android.support.media.ExifInterface;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -16,8 +18,11 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.lang.ref.WeakReference;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -51,47 +56,58 @@ public class FileProcessor implements SimilarImageDialogFragment.onResponse {
     private String decimalCoords;
     private boolean haveCheckedForOtherImages = false;
     private String filePath;
-    private boolean useExtStorage;
+    private String fileOrCopyPath=null;
+    private boolean prefUseExtStorage;
     private boolean cacheFound;
     private GPSExtractor tempImageObj;
+    private Set<String> prefRedactEXIFTags;
+    private double prefLocationAccuracy;
+
 
     FileProcessor(Uri mediaUri, ContentResolver contentResolver, Context context) {
         this.mediaUri = mediaUri;
+        Timber.d("mediaUri:"+ (this.mediaUri != null ? this.mediaUri.getPath() : "null"));
         this.contentResolver = contentResolver;
         this.context = context;
         ApplicationlessInjection.getInstance(context.getApplicationContext()).getCommonsApplicationComponent().inject(this);
-        useExtStorage = prefs.getBoolean("useExternalStorage", true);
+        prefUseExtStorage = prefs.getBoolean("useExternalStorage", true);
+        prefRedactEXIFTags = prefs.getStringSet("redactExifTags", Collections.emptySet() );
+        prefLocationAccuracy = Double.valueOf(prefs.getString("locationAccuracy", "0"))/111300; //about 111300 meters in one degree
+        Timber.d("prefLocationAccuracy:"+prefLocationAccuracy);
     }
 
     /**
      * Gets file path from media URI.
      * In older devices getPath() may fail depending on the source URI, creating and using a copy of the file seems to work instead.
+     * If cleansing EXIF tags is enabled, it always copies the file.
      *
      * @return file path of media
      */
     @Nullable
     private String getPathOfMediaOrCopy() {
+        if (fileOrCopyPath!=null)
+            return fileOrCopyPath;
         filePath = FileUtils.getPath(context, mediaUri);
         Timber.d("Filepath: " + filePath);
-        if (filePath == null) {
-            String copyPath = null;
+        if (filePath == null || !prefRedactEXIFTags.isEmpty()) {
             try {
                 ParcelFileDescriptor descriptor = contentResolver.openFileDescriptor(mediaUri, "r");
                 if (descriptor != null) {
-                    if (useExtStorage) {
-                        copyPath = FileUtils.createCopyPath(descriptor);
-                        return copyPath;
+                    if (prefUseExtStorage) {
+                        fileOrCopyPath = FileUtils.createCopyPath(descriptor);
+                        return fileOrCopyPath;
                     }
-                    copyPath = getApplicationContext().getCacheDir().getAbsolutePath() + "/" + new Date().getTime() + ".jpg";
-                    FileUtils.copy(descriptor.getFileDescriptor(), copyPath);
-                    Timber.d("Filepath (copied): %s", copyPath);
-                    return copyPath;
+                    fileOrCopyPath = getApplicationContext().getCacheDir().getAbsolutePath() + "/" + new Date().getTime() + ".jpg";
+                    FileUtils.copy(descriptor.getFileDescriptor(), fileOrCopyPath);
+                    Timber.d("Filepath (copied): %s", fileOrCopyPath);
+                    return fileOrCopyPath;
                 }
             } catch (IOException e) {
-                Timber.w(e, "Error in file " + copyPath);
+                Timber.w(e, "Error in file " + fileOrCopyPath);
                 return null;
             }
         }
+        fileOrCopyPath=filePath;
         return filePath;
     }
 
@@ -130,8 +146,39 @@ public class FileProcessor implements SimilarImageDialogFragment.onResponse {
         return imageObj;
     }
 
+    /**
+     * @return The coordinates with reduced accuracy in "lat|long" format
+     */
     String getDecimalCoords() {
         return decimalCoords;
+    }
+
+    /**
+     * Reduces the accuracy of the coordinate according to location accuracy preference.
+     *
+     * @param input
+     * @return The coordinate with reduced accuracy.
+     */
+    double anonymizeCoord(double input){
+        double intermediate=Math.round(input/prefLocationAccuracy)*prefLocationAccuracy;
+        return Math.round(intermediate*100000.0)/100000.0; //Round to 5th decimal place.
+    }
+
+    /**
+     * Reduces the accuracy of file coordinates according to location accuracy preference.
+     *
+     * @return The coordinates with reduced accuracy in "lat|long" format
+     */
+    String getAnonymizedDecimalCoords(){
+        Timber.d("Anonymizing coords with setting:"+prefLocationAccuracy);
+        if(prefLocationAccuracy<0)
+            return null;
+        else if (prefLocationAccuracy==0)
+            return decimalCoords;
+        else{
+            return  String.valueOf(anonymizeCoord(imageObj.getDecLatitude())) + "|"
+                    + String.valueOf(anonymizeCoord(imageObj.getDecLongitude()));
+        }
     }
 
     /**
@@ -237,13 +284,47 @@ public class FileProcessor implements SimilarImageDialogFragment.onResponse {
         return cacheFound;
     }
 
+
+    /**
+    *Redacts EXIF data from the file.
+    *
+     * @return Uri of the new file.
+    **/
+    public Uri redactEXIFData() {
+        try {
+            Timber.d("Tags to be redacted:"+ Arrays.toString(prefRedactEXIFTags.toArray()));
+            Timber.v("File path:"+getPathOfMediaOrCopy());
+            if (!prefRedactEXIFTags.isEmpty() && getPathOfMediaOrCopy() != null) {
+                ExifInterface exif = new ExifInterface(getPathOfMediaOrCopy());//Temporary EXIF interface to redact data.
+                for (String tag : prefRedactEXIFTags) {
+                    String oldValue = exif.getAttribute(tag);
+                    if (oldValue != null && !oldValue.isEmpty()) {
+                        Timber.d("Exif tag " + tag + " with value " + oldValue + " redacted.");
+                        exif.setAttribute(tag, null);
+                    }
+                }
+                if (prefLocationAccuracy<0) {
+                    Timber.d("Setting EXIF coordinates to 0");
+                    exif.setLatLong(0d, 0d);
+                }else if (prefLocationAccuracy!=0){
+                    exif.setLatLong(anonymizeCoord(imageObj.getDecLatitude()), anonymizeCoord(imageObj.getDecLongitude()));
+                }
+                exif.saveAttributes();
+            }
+        } catch (IOException e) {
+            Timber.w(e);
+			throw new RuntimeException("EXIF redaction failed.");
+        }
+        return Uri.parse("file://" + getPathOfMediaOrCopy());
+    }
+
     /**
      * Calls the async task that detects if image is fuzzy, too dark, etc
      */
     void detectUnwantedPictures() {
         String imageMediaFilePath = FileUtils.getPath(context, mediaUri);
         DetectUnwantedPicturesAsync detectUnwantedPicturesAsync
-                = new DetectUnwantedPicturesAsync(new WeakReference<Activity>((Activity) context), imageMediaFilePath);
+                = new DetectUnwantedPicturesAsync(new WeakReference<>((Activity) context), imageMediaFilePath);
         detectUnwantedPicturesAsync.execute();
     }
 
