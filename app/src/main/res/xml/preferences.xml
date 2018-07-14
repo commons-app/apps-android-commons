@@ -35,6 +35,11 @@
             android:title= "@string/set_limit"
             android:inputType="numberDecimal"
             android:maxLength="3" />
+        <EditTextPreference
+            android:key="authorName"
+            android:title="@string/author_name"
+            android:summary="@string/author_name_summary"
+            />
 
     </PreferenceCategory>
 
