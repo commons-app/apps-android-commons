@@ -189,8 +189,13 @@ public class SearchCategoryFragment extends CommonsDaggerSupportFragment {
      */
     private void handleError(Throwable throwable) {
         Timber.e(throwable, "Error occurred while loading queried categories");
-        initErrorView();
-        ViewUtil.showSnackbar(categoriesRecyclerView, R.string.error_loading_categories);
+        try {
+            initErrorView();
+            ViewUtil.showSnackbar(categoriesRecyclerView, R.string.error_loading_categories);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
     }
 
     /**

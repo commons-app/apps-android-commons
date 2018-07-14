@@ -14,7 +14,6 @@ import android.widget.ListAdapter;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -135,8 +134,13 @@ public class CategoryImagesListFragment extends DaggerFragment {
      */
     private void handleError(Throwable throwable) {
         Timber.e(throwable, "Error occurred while loading images inside a category");
-        ViewUtil.showSnackbar(parentLayout, R.string.error_loading_images);
-        initErrorView();
+        try{
+            ViewUtil.showSnackbar(parentLayout, R.string.error_loading_images);
+            initErrorView();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
     }
 
     /**
@@ -219,7 +223,6 @@ public class CategoryImagesListFragment extends DaggerFragment {
             setAdapter(collection);
         } else {
             if (gridAdapter.containsAll(collection)){
-                hasMoreImages = false;
                 return;
             }
             gridAdapter.addItems(collection);

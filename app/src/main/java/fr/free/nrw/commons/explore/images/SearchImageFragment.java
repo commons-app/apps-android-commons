@@ -187,8 +187,12 @@ public class SearchImageFragment extends CommonsDaggerSupportFragment {
      */
     private void handleError(Throwable throwable) {
         Timber.e(throwable, "Error occurred while loading queried images");
-        initErrorView();
-        ViewUtil.showSnackbar(imagesRecyclerView, R.string.error_loading_images);
+        try {
+            initErrorView();
+            ViewUtil.showSnackbar(imagesRecyclerView, R.string.error_loading_images);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
     /**
