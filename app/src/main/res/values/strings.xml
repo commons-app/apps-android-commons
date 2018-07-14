@@ -291,6 +291,7 @@
     <string name="wikidata_edit_failure">Failed to update corresponding Wikidata entity!</string>
     <string name="menu_set_wallpaper">Set wallpaper</string>
     <string name="wallpaper_set_successfully">Wallpaper set successfully!</string>
+
     <string name="user_not_logged_in">Login session expired, please log in again.</string>
     <string name="redact_exif_tags">Remove EXIF Tags</string>
     <string name="redact_exif_tags_summary">Select which EXIF tags to remove from uploads.</string>

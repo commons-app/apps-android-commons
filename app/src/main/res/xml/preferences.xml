@@ -43,11 +43,8 @@
             android:key="locationAccuracy"
             android:title="@string/location_accuracy"/>
 
-        <SwitchPreference
-            android:defaultValue="false"
-            android:key="allowGps"
-            android:summary="@string/allow_gps_summary"
-            android:title="@string/allow_gps" />
+        <!-- The key 'allowGps' was used before and has since been removed based on the discussion at #1599.
+          Do not reuse this key unless you revive the same feature with the changes mentioned at #1599.-->
 
         <MultiSelectListPreference
             android:entries="@array/pref_exifTag_entries"
