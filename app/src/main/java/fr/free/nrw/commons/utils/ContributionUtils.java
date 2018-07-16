@@ -5,6 +5,7 @@ import android.net.Uri;
 import android.util.Log;
 
 import java.io.File;
+import java.util.Random;
 
 import timber.log.Timber;
 
@@ -70,7 +71,11 @@ public class ContributionUtils {
                 // to prevent previous file reference bug
                 Long tsLong = System.currentTimeMillis()/1000;
                 String ts = tsLong.toString();
-                return TEMP_EXTERNAL_DIRECTORY +File.separatorChar+ts+"_tmp";
+
+                // For multiple uploads, time randomisation should be combined with another random
+                // parameter, since they created at same time
+                int multipleUploadRandomParameter = new Random().nextInt(100);
+                return TEMP_EXTERNAL_DIRECTORY +File.separatorChar+ts+multipleUploadRandomParameter+"_tmp";
             }
         }
     }
