@@ -1,5 +1,6 @@
 package fr.free.nrw.commons.contributions;
 
+import android.accounts.Account;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
@@ -14,7 +15,6 @@ import android.support.v4.app.LoaderManager;
 import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
 import android.support.v4.widget.CursorAdapter;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -38,6 +38,7 @@ import fr.free.nrw.commons.mwapi.MediaWikiApi;
 import fr.free.nrw.commons.quiz.QuizChecker;
 import fr.free.nrw.commons.settings.Prefs;
 import fr.free.nrw.commons.upload.UploadService;
+import fr.free.nrw.commons.utils.ViewUtil;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.schedulers.Schedulers;
@@ -68,10 +69,6 @@ public  class       ContributionsActivity
     private UploadService uploadService;
     private boolean isUploadServiceConnected;
     private ArrayList<DataSetObserver> observersWaitingForLoad = new ArrayList<>();
-    private int revertCount;
-    private int totalUploadCount;
-    private boolean isRevertCountFetched;
-    private boolean isUploadCountFetched;
 
     private CompositeDisposable compositeDisposable = new CompositeDisposable();
 
@@ -148,9 +145,12 @@ public  class       ContributionsActivity
         initDrawer();
         setTitle(getString(R.string.title_activity_contributions));
 
-        QuizChecker quizChecker = new QuizChecker(this,
-                sessionManager.getCurrentAccount().name,
-                mediaWikiApi);
+
+        if(checkAccount()) {
+            new QuizChecker(this,
+                    sessionManager.getCurrentAccount().name,
+                    mediaWikiApi);
+        }
         if(!BuildConfig.FLAVOR.equalsIgnoreCase("beta")){
             setUploadCount();
         }
@@ -338,6 +338,21 @@ public  class       ContributionsActivity
         } else {
             adapter.unregisterDataSetObserver(observer);
         }
+    }
+
+    /**
+     * to ensure user is logged in
+     * @return
+     */
+    private boolean checkAccount() {
+        Account currentAccount = sessionManager.getCurrentAccount();
+        if (currentAccount == null) {
+            Timber.d("Current account is null");
+            ViewUtil.showLongToast(this, getResources().getString(R.string.user_not_logged_in));
+            sessionManager.forceLogin(this);
+            return false;
+        }
+        return true;
     }
 
     @Override

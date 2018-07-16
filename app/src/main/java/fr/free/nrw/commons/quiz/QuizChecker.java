@@ -136,6 +136,7 @@ public class QuizChecker {
                 Intent i = new Intent(context, WelcomeActivity.class);
                 i.putExtra("isQuiz", true);
                 context.startActivity(i);
+                dialog.dismiss();
             }
         });
         alert.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {

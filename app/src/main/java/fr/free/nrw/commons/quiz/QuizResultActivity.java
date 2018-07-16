@@ -25,6 +25,9 @@ public class QuizResultActivity extends AppCompatActivity {
     @BindView(R.id.congratulatory_message)
     TextView congratulatoryMessageText;
 
+    private final int NUMBER_OF_QUESTIONS = 5;
+    private final int MULTIPLIER_TO_GET_PERCENTAGE = 20;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,17 +36,27 @@ public class QuizResultActivity extends AppCompatActivity {
         ButterKnife.bind(this);
         setSupportActionBar(toolbar);
 
-        Bundle extras = getIntent().getExtras();
-        int score = extras.getInt("QuizResult");
-        setScore(score);
+        if( getIntent() != null) {
+            Bundle extras = getIntent().getExtras();
+            int score = extras.getInt("QuizResult");
+            setScore(score);
+        }else{
+            startActivityWithFlags(
+                    this, ContributionsActivity.class, Intent.FLAG_ACTIVITY_CLEAR_TOP,
+                    Intent.FLAG_ACTIVITY_SINGLE_TOP);
+            super.onBackPressed();
+        }
 
     }
 
+    /**
+     * to calculate and display percentage and score
+     * @param score
+     */
     public void setScore( int score){
-        int per = score * 20;
-        Log.i("percentage", "setScore: " + per);
+        int per = score * MULTIPLIER_TO_GET_PERCENTAGE;
         resultProgressBar.setProgress(per);
-        resultProgressBar.setProgressTextFormatPattern(score +" / " + 5);
+        resultProgressBar.setProgressTextFormatPattern(score +" / " + NUMBER_OF_QUESTIONS);
         String message = getResources().getString(R.string.congratulatory_message_quiz,per + "%");
         congratulatoryMessageText.setText(message);
     }

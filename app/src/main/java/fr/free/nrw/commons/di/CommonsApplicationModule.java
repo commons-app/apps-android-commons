@@ -64,12 +64,6 @@ public class CommonsApplicationModule {
     }
 
     @Provides
-    @Named("revertCount")
-    public SharedPreferences provideRevertCountSharedPreferences( Context context) {
-        return context.getSharedPreferences("revertCount", MODE_PRIVATE);
-    }
-
-    @Provides
     @Named("modification")
     public ContentProviderClient provideModificationContentProviderClient(Context context) {
         return context.getContentResolver().acquireContentProviderClient(MODIFICATIONS_AUTHORITY);

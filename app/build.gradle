@@ -74,8 +74,8 @@ dependencies {
     releaseImplementation "com.squareup.leakcanary:leakcanary-android-no-op:$LEAK_CANARY"
     testImplementation "com.squareup.leakcanary:leakcanary-android-no-op:$LEAK_CANARY"
 
-    compile 'com.borjabravo:readmoretextview:2.1.0'
-    compile 'com.dinuscxj:circleprogressbar:1.1.1'
+    implementation 'com.borjabravo:readmoretextview:2.1.0'
+    implementation 'com.dinuscxj:circleprogressbar:1.1.1'
 }
 
 android {
