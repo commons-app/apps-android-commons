@@ -696,13 +696,13 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
 
         String resultStatus = result.getString("/api/upload/@result");
 
-        // In either case, filure or success we have to clean directory
-        ContributionUtils.removeTemporaryFile(fileUri);
         if (!resultStatus.equals("Success")) {
             String errorCode = result.getString("/api/error/@code");
             Timber.e(errorCode);
             return new UploadResult(resultStatus, errorCode);
         } else {
+            // If success we have to remove file from temp directory
+            ContributionUtils.removeTemporaryFile(fileUri);
             Date dateUploaded = parseMWDate(result.getString("/api/upload/imageinfo/@timestamp"));
             String canonicalFilename = "File:" + result.getString("/api/upload/@filename").replace("_", " "); // Title vs Filename
             String imageUrl = result.getString("/api/upload/imageinfo/@url");
