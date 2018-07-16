@@ -80,9 +80,11 @@ public class ContributionUtils {
         if (dir.isDirectory())
         {
             String[] children = dir.list();
-            for (int i = 0; i < children.length; i++)
-            {
-                new File(dir, children[i]).delete();
+            if (children != null && children.length >0) {
+                for (int i = 0; i < children.length; i++)
+                {
+                    new File(dir, children[i]).delete();
+                }
             }
         }
     }
