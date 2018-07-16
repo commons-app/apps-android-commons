@@ -29,12 +29,16 @@ public class WelcomeActivity extends BaseActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_welcome);
-
-
-        Bundle bundle = getIntent().getExtras();
-        if(bundle != null) {
-            isQuiz = bundle.getBoolean("isQuiz");
+        
+        if(getIntent() != null) {
+            Bundle bundle = getIntent().getExtras();
+            if (bundle != null) {
+                isQuiz = bundle.getBoolean("isQuiz");
+            }
+        } else{
+            isQuiz = false;
         }
+
         ButterKnife.bind(this);
 
         pager.setAdapter(adapter);

@@ -42,6 +42,8 @@ public class QuizChecker {
     private SharedPreferences revertPref;
     private SharedPreferences countPref;
 
+    private final int UPLOAD_COUNT_THRESHOLD = 5;
+
     /**
      * constructor to set the parameters for quiz
      * @param context
@@ -112,7 +114,7 @@ public class QuizChecker {
      * to check whether the criterion to call quiz is satisfied
      */
     private void calculateRevertParamater(){
-        if(isRevertCountFetched && isUploadCountFetched && totalUploadCount >= 5){
+        if(isRevertCountFetched && isUploadCountFetched && totalUploadCount >= UPLOAD_COUNT_THRESHOLD ){
             if( (revertCount * 100)/totalUploadCount >= 50){
                 callQuiz();
             }
