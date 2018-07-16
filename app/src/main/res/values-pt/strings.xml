@@ -31,7 +31,7 @@
   <string name="login_success">Inicio de sessão bem sucedido</string>
   <string name="login_failed">O início de sessão falhou!</string>
   <string name="upload_failed">Ficheiro não encontrado. Por favor, tente outro ficheiro.</string>
-  <string name="authentication_failed">A autenticação falhou, inicie uma nova sessão</string>
+  <string name="authentication_failed">A autenticação falhou, inicie uma nova sessão, por favor</string>
   <string name="uploading_started">Iniciado o carregamento!</string>
   <string name="upload_completed_notification_title">%1$s enviado!</string>
   <string name="upload_completed_notification_text">Toque para ver seu carregamento</string>
@@ -269,7 +269,7 @@
   <string name="error_notifications">Erro ao tentar obter as notificações</string>
   <string name="no_notifications">Não foram encontradas notificações</string>
   <string name="about_translate">&lt;u&gt;Traduzir&lt;/u&gt;</string>
-  <string name="about_translate_title">Idiomas</string>
+  <string name="about_translate_title">Línguas</string>
   <string name="about_translate_message">Selecione a língua para a qual quer enviar as traduções</string>
   <string name="about_translate_proceed">Avançar</string>
   <string name="about_translate_cancel">Cancelar</string>

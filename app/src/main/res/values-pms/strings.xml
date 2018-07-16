@@ -278,4 +278,5 @@
   <string name="wikidata_edit_failure">Falì a agiorné l\'entità ëd Wikidata corëspondenta!</string>
   <string name="menu_set_wallpaper">Definì la tapissarìa</string>
   <string name="wallpaper_set_successfully">La tapissarìa a l\'é stàita definìa për da bin!</string>
+  <string name="user_not_logged_in">Session ëscadùa, për piasì ch\'a rintra torna ant ël sistema.</string>
 </resources>
