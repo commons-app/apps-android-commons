@@ -8,6 +8,7 @@ import android.net.Uri;
 import android.os.RemoteException;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
+import android.util.Log;
 
 import java.util.Date;
 

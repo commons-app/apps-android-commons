@@ -35,6 +35,9 @@ import java.util.Locale;
 import javax.inject.Inject;
 import javax.inject.Provider;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
 import fr.free.nrw.commons.License;
 import fr.free.nrw.commons.LicenseList;
 import fr.free.nrw.commons.Media;

@@ -1,5 +1,6 @@
 package fr.free.nrw.commons.upload;
 
+import android.app.Activity;
 import android.content.Context;
 import android.graphics.Point;
 import android.net.Uri;
@@ -16,6 +17,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.EditText;
