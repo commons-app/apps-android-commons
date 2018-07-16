@@ -588,8 +588,8 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
                     .param("format", "xml")
                     .param("gcmtype", "file")
                     .param("gcmtitle", categoryName)
-                    .param("gcmsort", "timestamp")//property to sort by;timestamp
-                    .param("gcmdir", "desc")//in which direction to sort;descending
+                    .param("gcmsort", "timestamp")
+                    .param("gcmdir", "desc")
                     .param("prop", "imageinfo")
                     .param("gcmlimit", "10")
                     .param("iiprop", "url|extmetadata");
