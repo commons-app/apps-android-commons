@@ -29,7 +29,7 @@ public class WelcomeActivity extends BaseActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_welcome);
-        
+
         if(getIntent() != null) {
             Bundle bundle = getIntent().getExtras();
             if (bundle != null) {

@@ -61,6 +61,7 @@
             android:layout_marginBottom="@dimen/activity_margin_vertical"
             style="?android:textAppearanceMedium"
             android:gravity="center_horizontal"
+            android:id="@+id/quiz_result_warning_text"
             android:text="@string/warning_for_image_reverts" />
 
         <Button

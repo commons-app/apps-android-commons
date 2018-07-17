@@ -24,9 +24,12 @@ public class QuizResultActivity extends AppCompatActivity {
     Toolbar toolbar;
     @BindView(R.id.congratulatory_message)
     TextView congratulatoryMessageText;
+    @BindView(R.id.quiz_result_warning_text)
+    TextView warningTextView;
 
     private final int NUMBER_OF_QUESTIONS = 5;
     private final int MULTIPLIER_TO_GET_PERCENTAGE = 20;
+    private final String REVERT_PERCENTAGE_FOR_WARNING = "50%";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +50,8 @@ public class QuizResultActivity extends AppCompatActivity {
             super.onBackPressed();
         }
 
+        warningTextView.setText(getResources().getString(R.string.warning_for_image_reverts,
+                REVERT_PERCENTAGE_FOR_WARNING));
     }
 
     /**

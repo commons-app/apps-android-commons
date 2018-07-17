@@ -53,7 +53,7 @@ public class QuizController {
                 context.getResources().getString(R.string.quiz_question_string),
                 URL_FOR_EVENT,
                 true,
-                context.getResources().getString(R.string.Hmong_wedding_answer));
+                context.getResources().getString(R.string.construction_event_answer));
         quiz.add(q5);
 
     }

@@ -1,26 +1,14 @@
 package fr.free.nrw.commons.quiz;
 
-import android.accounts.Account;
-import android.content.ContentProviderClient;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.v7.app.AlertDialog.Builder;
-import android.util.Log;
 
-import javax.inject.Inject;
-import javax.inject.Named;
-import javax.inject.Provider;
-
-import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.WelcomeActivity;
-import fr.free.nrw.commons.auth.SessionManager;
-import fr.free.nrw.commons.contributions.ContributionsActivity;
-import fr.free.nrw.commons.di.CommonsDaggerContentProvider;
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
-import fr.free.nrw.commons.utils.ViewUtil;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.schedulers.Schedulers;
@@ -43,6 +31,7 @@ public class QuizChecker {
     private SharedPreferences countPref;
 
     private final int UPLOAD_COUNT_THRESHOLD = 5;
+    private final String REVERT_PERCENTAGE_FOR_MESSAGE = "50%";
 
     /**
      * constructor to set the parameters for quiz
@@ -82,7 +71,7 @@ public class QuizChecker {
     private void setTotalUploadCount( int uploadCount){
         totalUploadCount = uploadCount - countPref.getInt("uploadCount",0);
         isUploadCountFetched = true;
-        calculateRevertParamater();
+        calculateRevertParameter();
     }
 
     /**
@@ -107,17 +96,17 @@ public class QuizChecker {
     private void setRevertParamter( int revertCountFetched){
         revertCount = revertCountFetched - revertPref.getInt("revertCount",0);
         isRevertCountFetched = true;
-        calculateRevertParamater();
+        calculateRevertParameter();
     }
 
     /**
      * to check whether the criterion to call quiz is satisfied
      */
-    private void calculateRevertParamater(){
-        if(isRevertCountFetched && isUploadCountFetched && totalUploadCount >= UPLOAD_COUNT_THRESHOLD ){
-            if( (revertCount * 100)/totalUploadCount >= 50){
-                callQuiz();
-            }
+    private void calculateRevertParameter() {
+        if (isRevertCountFetched && isUploadCountFetched &&
+                totalUploadCount >= UPLOAD_COUNT_THRESHOLD &&
+                (revertCount * 100) / totalUploadCount >= 50) {
+            callQuiz();
         }
     }
 
@@ -127,7 +116,8 @@ public class QuizChecker {
     public void callQuiz(){
         Builder alert = new Builder(context);
         alert.setTitle(context.getResources().getString(R.string.quiz));
-        alert.setMessage(context.getResources().getString(R.string.quiz_alert_message));
+        alert.setMessage(context.getResources().getString(R.string.quiz_alert_message,
+                REVERT_PERCENTAGE_FOR_MESSAGE));
         alert.setPositiveButton("Proceed", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
@@ -137,8 +127,8 @@ public class QuizChecker {
                 countPref.edit().putInt("uploadCount",newUploadCount).apply();
                 Intent i = new Intent(context, WelcomeActivity.class);
                 i.putExtra("isQuiz", true);
-                context.startActivity(i);
                 dialog.dismiss();
+                context.startActivity(i);
             }
         });
         alert.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
