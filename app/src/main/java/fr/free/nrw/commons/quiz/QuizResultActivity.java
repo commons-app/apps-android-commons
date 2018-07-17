@@ -1,7 +1,11 @@
 package fr.free.nrw.commons.quiz;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.net.Uri;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -15,7 +19,15 @@ import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.contributions.ContributionsActivity;
 
 import android.support.v7.widget.Toolbar;
+import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
+
+import java.io.File;
+import java.io.FileOutputStream;
 
 public class QuizResultActivity extends AppCompatActivity {
     @BindView(R.id.result_progress_bar)
@@ -98,4 +110,96 @@ public class QuizResultActivity extends AppCompatActivity {
         }
         context.startActivity(intent);
     }
+
+    /**
+     * to inflate menu
+     * @param menu
+     * @return
+     */
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_about, menu);
+        return true;
+    }
+
+    /**
+     * if share option selected then take screenshot and launch alert
+     * @param item
+     * @return
+     */
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        if (id == R.id.share_app_icon) {
+            View rootView = getWindow().getDecorView().findViewById(android.R.id.content);
+            Bitmap screenShot = getScreenShot(rootView);
+            showAlert(screenShot);
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
+    /**
+     * to store the screenshot of image in bitmap variable temporarily
+     * @param view
+     * @return
+     */
+    public static Bitmap getScreenShot(View view) {
+        View screenView = view.getRootView();
+        screenView.setDrawingCacheEnabled(true);
+        Bitmap bitmap = Bitmap.createBitmap(screenView.getDrawingCache());
+        screenView.setDrawingCacheEnabled(false);
+        return bitmap;
+    }
+
+    /**
+     * share the screenshot through social media
+     * @param bitmap
+     */
+    void shareScreen ( Bitmap bitmap){
+        try {
+            File file = new File(this.getExternalCacheDir(),"screen.png");
+            FileOutputStream fOut = new FileOutputStream(file);
+            bitmap.compress(Bitmap.CompressFormat.PNG, 100, fOut);
+            fOut.flush();
+            fOut.close();
+            file.setReadable(true, false);
+            final Intent intent = new Intent(android.content.Intent.ACTION_SEND);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            intent.putExtra(Intent.EXTRA_STREAM, Uri.fromFile(file));
+            intent.setType("image/png");
+            startActivity(Intent.createChooser(intent, "Share image via"));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * It display the alertDialog with Image of screenshot
+     * @param screenshot
+     */
+    public void showAlert(Bitmap screenshot){
+        AlertDialog.Builder alertadd = new AlertDialog.Builder(QuizResultActivity.this);
+        LayoutInflater factory = LayoutInflater.from(QuizResultActivity.this);
+        final View view = factory.inflate(R.layout.image_alert_layout, null);
+        ImageView screenShotImage = (ImageView) view.findViewById(R.id.alert_image);
+        screenShotImage.setImageBitmap(screenshot);
+        TextView shareMessage = (TextView) view.findViewById(R.id.alert_text);
+        shareMessage.setText(R.string.quiz_result_share_message);
+        alertadd.setView(view);
+        alertadd.setPositiveButton("Proceed", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+                shareScreen(screenshot);
+            }
+        });
+        alertadd.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
+        alertadd.show();
+    }
+
 }

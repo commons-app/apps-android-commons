@@ -304,4 +304,5 @@
   <string name="congratulatory_message_quiz">You got %1$s of the answers correct. Congratulations!</string>
   <string name="warning_for_no_answer">Select one of the two options to answer the question</string>
   <string name="user_not_logged_in">Login session expired, please log in again.</string>
+  <string name="quiz_result_share_message">Share your quiz result with your friends!</string>
 </resources>
