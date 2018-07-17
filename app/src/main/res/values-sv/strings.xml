@@ -286,4 +286,5 @@
   <string name="wikidata_edit_failure">Misslyckades att uppdatera motsvarande Wikidataentitet!</string>
   <string name="menu_set_wallpaper">Ange som bakgrundsbild</string>
   <string name="wallpaper_set_successfully">Bakgrundsbilden ändrades!</string>
+  <string name="user_not_logged_in">Inloggningssessionen löptes ut, var god logga in igen.</string>
 </resources>
