@@ -21,9 +21,7 @@ import android.os.Environment;
 import android.support.annotation.NonNull;
 import android.support.annotation.RequiresApi;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.graphics.drawable.VectorDrawableCompat;
-import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.view.MenuItem;
 import android.view.View;
@@ -64,10 +62,10 @@ import fr.free.nrw.commons.mwapi.MediaWikiApi;
 import fr.free.nrw.commons.utils.ViewUtil;
 import timber.log.Timber;
 
-import android.support.design.widget.FloatingActionButton;
 import static fr.free.nrw.commons.upload.ExistingFileAsync.Result.DUPLICATE_PROCEED;
 import static fr.free.nrw.commons.upload.ExistingFileAsync.Result.NO_DUPLICATE;
 import static fr.free.nrw.commons.upload.FileUtils.getSHA1;
+import static fr.free.nrw.commons.wikidata.WikidataConstants.WIKIDATA_ENTITY_ID_PREF;
 
 /**
  * Activity for the title/desc screen after image is selected. Also starts processing image
@@ -77,7 +75,6 @@ public class ShareActivity
         extends AuthenticatedActivity
         implements SingleUploadFragment.OnUploadActionInitiated,
         OnCategoriesSaveHandler {
-    private static final int REQUEST_PERM_ON_CREATE_LOCATION = 2;
     private static final int REQUEST_PERM_ON_SUBMIT_STORAGE = 4;
     //Had to make them class variables, to extract out the click listeners, also I see no harm in this
     final Rect startBounds = new Rect();
@@ -130,7 +127,6 @@ public class ShareActivity
     private String title;
     private String description;
     private String wikiDataEntityId;
-    private Snackbar snackbar;
     private boolean duplicateCheckPassed = false;
     private boolean isNearbyUpload = false;
     private Animator CurrentAnimator;
@@ -275,22 +271,6 @@ public class ShareActivity
         Timber.d("Uri: %s", mediaUri.toString());
         Timber.d("Ext storage dir: %s", Environment.getExternalStorageDirectory());
 
-        useNewPermissions = false;
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            useNewPermissions = true;
-            if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
-                locationPermitted = true;
-            }
-        }
-
-        // Check location permissions if M or newer for category suggestions, request via snackbar if not present
-        if (!locationPermitted) {
-            requestPermissionUsingSnackBar(
-                    getString(R.string.location_permission_rationale),
-                    new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
-                    REQUEST_PERM_ON_CREATE_LOCATION);
-        }
-
         SingleUploadFragment shareView = (SingleUploadFragment) getSupportFragmentManager().findFragmentByTag("shareView");
         categorizationFragment = (CategorizationFragment) getSupportFragmentManager().findFragmentByTag("categorization");
         if (shareView == null && categorizationFragment == null) {
@@ -325,6 +305,8 @@ public class ShareActivity
             if (intent.hasExtra("isDirectUpload")) {
                 Timber.d("This was initiated by a direct upload from Nearby");
                 isNearbyUpload = true;
+                wikiDataEntityId = intent.getStringExtra(WIKIDATA_ENTITY_ID_PREF);
+                Timber.d("Received wikiDataEntityId from contribution controller %s", wikiDataEntityId);
             }
             mimeType = intent.getType();
         }
@@ -389,7 +371,7 @@ public class ShareActivity
     }
 
     /**
-     * Handles BOTH snackbar permission request (for location) and submit button permission request (for storage)
+     * Handles submit button permission request (for storage)
      *
      * @param requestCode  type of request
      * @param permissions  permissions requested
@@ -398,39 +380,17 @@ public class ShareActivity
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         switch (requestCode) {
-            case REQUEST_PERM_ON_CREATE_LOCATION: {
-                if (grantResults.length >= 1 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    locationPermitted = true;
-                    checkIfFileExists();
-                }
-                return;
-            }
-
             // Storage (from submit button) - this needs to be separate from (1) because only the
             // submit button should bring user to next screen
             case REQUEST_PERM_ON_SUBMIT_STORAGE: {
                 if (grantResults.length >= 1 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    //It is OK to call this at both (1) and (4) because if perm had been granted at
-                    //snackbar, user should not be prompted at submit button
                     checkIfFileExists();
 
                     //Uploading only begins if storage permission granted from arrow icon
                     uploadBegins();
-                    snackbar.dismiss();
                 }
             }
         }
-    }
-
-    /**
-     * Displays Snackbar to ask for location permissions
-     */
-    private Snackbar requestPermissionUsingSnackBar(String rationale, final String[] perms, final int code) {
-        Snackbar snackbar = Snackbar.make(findViewById(android.R.id.content), rationale,
-                Snackbar.LENGTH_INDEFINITE).setAction(R.string.ok,
-                view -> ActivityCompat.requestPermissions(ShareActivity.this, perms, code));
-        snackbar.show();
-        return snackbar;
     }
 
     /**
@@ -469,12 +429,6 @@ public class ShareActivity
     @Override
     public void onPause() {
         super.onPause();
-        try {
-            gpsObj.unregisterLocationManager();
-            Timber.d("Unregistered locationManager");
-        } catch (NullPointerException e) {
-            Timber.d("locationManager does not exist, not unregistered");
-        }
     }
 
     @Override
