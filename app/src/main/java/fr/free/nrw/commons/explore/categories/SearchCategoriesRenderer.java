@@ -13,8 +13,7 @@ import fr.free.nrw.commons.R;
 
 /**
  * presentation logic of individual category in search is handled here
- */
-
+ **/
 class SearchCategoriesRenderer extends Renderer<String> {
     @BindView(R.id.textView1) TextView tvCategoryName;
 

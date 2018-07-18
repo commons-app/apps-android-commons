@@ -63,11 +63,16 @@ public class SearchImageFragment extends CommonsDaggerSupportFragment {
     private List<Media> queryList = new ArrayList<>();
 
     private final SearchImagesAdapterFactory adapterFactory = new SearchImagesAdapterFactory(item -> {
+        // Called on Click of a individual media Item
         int index = queryList.indexOf(item);
         ((SearchActivity)getContext()).onSearchImageClicked(index);
         saveQuery(query);
     });
 
+    /**
+     * This method saves Search Query in the Recent Searches Database.
+     * @param query
+     */
     private void saveQuery(String query) {
         RecentSearch recentSearch = recentSearchesDao.find(query);
 
@@ -148,7 +153,7 @@ public class SearchImageFragment extends CommonsDaggerSupportFragment {
     /**
      * Handles the success scenario
      * it initializes the recycler view by adding items to the adapter
-     * @param mediaList
+     * @param mediaList List of media to be added
      */
     private void handlePaginationSuccess(List<Media> mediaList) {
         queryList.addAll(mediaList);
@@ -162,7 +167,7 @@ public class SearchImageFragment extends CommonsDaggerSupportFragment {
     /**
      * Handles the success scenario
      * it initializes the recycler view by adding items to the adapter
-     * @param mediaList
+     * @param mediaList List of media to be shown
      */
     private void handleSuccess(List<Media> mediaList) {
         queryList = mediaList;

@@ -30,6 +30,10 @@ public class RecentSearchesDao {
         this.clientProvider = clientProvider;
     }
 
+    /**
+     * This method is called on click of media/ categories for storing them in recent searches
+     * @param recentSearch a recent searches object that is to be added in SqLite DB
+     */
     public void save(RecentSearch recentSearch) {
         ContentProviderClient db = clientProvider.get();
         try {
@@ -45,6 +49,11 @@ public class RecentSearchesDao {
         }
     }
 
+    /**
+     * This method is called on confirmation of delete recent searches.
+     * It deletes latest 10 recent searches from the database
+     * @param recentSearchesStringList list of recent searches to be deleted
+     */
     public void deleteAll(List<String> recentSearchesStringList) {
         ContentProviderClient db = clientProvider.get();
         for (String recentSearchName : recentSearchesStringList) {
@@ -176,15 +185,29 @@ public class RecentSearchesDao {
                 + COLUMN_LAST_USED + " INTEGER"
                 + ");";
 
+        /**
+         * This method creates a RecentSearchesTable in SQLiteDatabase
+         * @param db SQLiteDatabase
+         */
         public static void onCreate(SQLiteDatabase db) {
             db.execSQL(CREATE_TABLE_STATEMENT);
         }
 
+        /**
+         * This method deletes RecentSearchesTable from SQLiteDatabase
+         * @param db SQLiteDatabase
+         */
         public static void onDelete(SQLiteDatabase db) {
             db.execSQL(DROP_TABLE_STATEMENT);
             onCreate(db);
         }
 
+        /**
+         * This method is called on migrating from a older version to a newer version
+         * @param db SQLiteDatabase
+         * @param from Version from which we are migrating
+         * @param to Version to which we are migrating
+         */
         public static void onUpdate(SQLiteDatabase db, int from, int to) {
             if (from == to) {
                 return;

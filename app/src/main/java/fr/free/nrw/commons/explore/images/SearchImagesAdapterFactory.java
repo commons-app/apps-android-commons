@@ -20,6 +20,11 @@ class SearchImagesAdapterFactory {
         this.listener = listener;
     }
 
+    /**
+     * This method creates a recyclerViewAdapter for Media.
+     * @param searchImageItemList List of Media objects to be displayed
+     * @return imagesAdapter
+     **/
     public RVRendererAdapter<Media> create(List<Media> searchImageItemList) {
         RendererBuilder<Media> builder = new RendererBuilder<Media>()
                 .bind(Media.class, new SearchImagesRenderer(listener));

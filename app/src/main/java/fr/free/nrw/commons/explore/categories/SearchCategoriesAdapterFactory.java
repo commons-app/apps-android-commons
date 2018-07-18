@@ -18,6 +18,11 @@ public class SearchCategoriesAdapterFactory {
         this.listener = listener;
     }
 
+    /**
+     * This method creates a recyclerViewAdapter for Categories.
+     * @param searchImageItemList List of category name to be displayed
+     * @return categoriesAdapter
+     **/
     public RVRendererAdapter<String> create(List<String> searchImageItemList) {
         RendererBuilder<String> builder = new RendererBuilder<String>().bind(String.class, new SearchCategoriesRenderer(listener));
         ListAdapteeCollection<String> collection = new ListAdapteeCollection<>(

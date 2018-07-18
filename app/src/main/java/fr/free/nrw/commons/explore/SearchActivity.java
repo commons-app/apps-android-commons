@@ -119,26 +119,45 @@ public class SearchActivity extends NavigationBaseActivity implements MediaDetai
                 );
     }
 
+    /**
+     * returns Media Object at position
+     * @param i position of Media in the imagesRecyclerView adapter.
+     */
     @Override
     public Media getMediaAtPosition(int i) {
         return searchImageFragment.getImageAtPosition(i);
     }
 
+    /**
+     * returns total number of images present in the imagesRecyclerView adapter.
+     */
     @Override
     public int getTotalMediaCount() {
        return searchImageFragment.getTotalImagesCount();
     }
 
+    /**
+     * This method is never called but it was in MediaDetailProvider Interface
+     * so it needs to be overrided.
+     */
     @Override
     public void notifyDatasetChanged() {
 
     }
 
+    /**
+     * This method is never called but it was in MediaDetailProvider Interface
+     * so it needs to be overrided.
+     */
     @Override
     public void registerDataSetObserver(DataSetObserver observer) {
 
     }
 
+    /**
+     * This method is never called but it was in MediaDetailProvider Interface
+     * so it needs to be overrided.
+     */
     @Override
     public void unregisterDataSetObserver(DataSetObserver observer) {
 
@@ -171,6 +190,9 @@ public class SearchActivity extends NavigationBaseActivity implements MediaDetai
         forceInitBackButton();
     }
 
+    /**
+     * This method is called on Screen Rotation
+     */
     @Override
     protected void onResume() {
         if (supportFragmentManager.getBackStackEntryCount()==1){
@@ -183,6 +205,10 @@ public class SearchActivity extends NavigationBaseActivity implements MediaDetai
         super.onResume();
     }
 
+    /**
+     * This method is called on backPressed of anyFragment in the activity.
+     * If condition is called when mediaDetailFragment is opened.
+     */
     @Override
     public void onBackPressed() {
         if (getSupportFragmentManager().getBackStackEntryCount() == 1){
@@ -199,6 +225,10 @@ public class SearchActivity extends NavigationBaseActivity implements MediaDetai
         super.onBackPressed();
     }
 
+    /**
+     * This method is called on click of a recent search to update query in SearchView.
+     * @param query Recent Search Query
+     */
     public void updateText(String query) {
         searchView.setQuery(query, true);
         // Clear focus of searchView now. searchView.clearFocus(); does not seem to work Check the below link for more details.

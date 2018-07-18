@@ -12,6 +12,12 @@ public class RecentSearch {
     private String query;
     private Date lastSearched;
 
+    /**
+     * Constructor
+     * @param contentUri the content URI for this query
+     * @param query query name
+     * @param lastSearched last searched date
+     */
     public RecentSearch(Uri contentUri, String query, Date lastSearched) {
         this.contentUri = contentUri;
         this.query = query;
