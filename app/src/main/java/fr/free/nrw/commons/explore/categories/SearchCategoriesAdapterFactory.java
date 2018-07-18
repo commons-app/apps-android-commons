@@ -7,6 +7,10 @@ import com.pedrogomez.renderers.RendererBuilder;
 import java.util.Collections;
 import java.util.List;
 
+/**
+ * This class helps in creating adapter for categoriesRecyclerView in SearchCategoryFragment,
+ * implementing onClicks on categoriesRecyclerView Items
+ **/
 public class SearchCategoriesAdapterFactory {
     private final SearchCategoriesRenderer.CategoryClickedListener listener;
 

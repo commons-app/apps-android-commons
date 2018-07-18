@@ -21,6 +21,11 @@ import static fr.free.nrw.commons.explore.recentsearches.RecentSearchesDao.Table
 import static fr.free.nrw.commons.explore.recentsearches.RecentSearchesDao.Table.COLUMN_ID;
 import static fr.free.nrw.commons.explore.recentsearches.RecentSearchesDao.Table.TABLE_NAME;
 
+
+/**
+ * This class contains functions for executing queries for
+ * inserting, searching, deleting, editing recent searches in SqLite DB
+ **/
 public class RecentSearchesContentProvider extends CommonsDaggerContentProvider {
 
     public static final String RECENT_SEARCH_AUTHORITY = "fr.free.nrw.commons.explore.recentsearches.contentprovider";

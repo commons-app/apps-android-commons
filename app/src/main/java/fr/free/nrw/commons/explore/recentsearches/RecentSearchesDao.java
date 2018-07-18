@@ -17,7 +17,10 @@ import javax.inject.Inject;
 import javax.inject.Named;
 import javax.inject.Provider;
 
-
+/**
+ * This class doesn't execute queries in database directly instead it contains the logic behind
+ * inserting, deleting, searching data from recent searches database.
+ **/
 public class RecentSearchesDao {
 
     private final Provider<ContentProviderClient> clientProvider;
@@ -121,6 +124,12 @@ public class RecentSearchesDao {
         return items;
     }
 
+
+    /**
+     * It creates an Recent Searches object from data stored in the SQLite DB by using cursor
+     * @param cursor
+     * @returns RecentSearch object
+     */
     @NonNull
     RecentSearch fromCursor(Cursor cursor) {
         // Hardcoding column positions!
@@ -131,6 +140,10 @@ public class RecentSearchesDao {
         );
     }
 
+    /**
+     * This class contains the database table architechture for recent searches,
+     * It also contains queries and logic necessary to the create, update, delete this table.
+     */
     private ContentValues toContentValues(RecentSearch recentSearch) {
         ContentValues cv = new ContentValues();
         cv.put(RecentSearchesDao.Table.COLUMN_NAME, recentSearch.getQuery());

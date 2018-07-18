@@ -69,6 +69,10 @@ public class CategoryDetailsActivity extends NavigationBaseActivity
         forceInitBackButton();
     }
 
+    /**
+     * This activity contains 3 tabs and a viewpager. This method is used to set the titles of tab,
+     * Set the fragments according to the tab selected in the viewPager.
+     */
     private void setTabs() {
         List<Fragment> fragmentList = new ArrayList<>();
         List<String> titleList = new ArrayList<>();
@@ -107,6 +111,9 @@ public class CategoryDetailsActivity extends NavigationBaseActivity
         }
     }
 
+    /**
+     * This method is called onClick of media inside category details (CategoryImageListFragment).
+     */
     @Override
     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
         tabLayout.setVisibility(View.GONE);

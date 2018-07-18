@@ -82,6 +82,10 @@ public abstract class NavigationBaseActivity extends BaseActivity
         toggle.setToolbarNavigationClickListener(v -> onBackPressed());
     }
 
+    /**
+     * This method changes the toolbar icon to back regardless of any conditions that
+     * there is any fragment in the backStack or not
+     */
     public void forceInitBackButton() {
         toggle.setDrawerIndicatorEnabled(false);
         toggle.setToolbarNavigationClickListener(v -> onBackPressed());

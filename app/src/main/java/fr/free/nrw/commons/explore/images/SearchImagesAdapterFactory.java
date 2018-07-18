@@ -9,7 +9,10 @@ import java.util.List;
 
 import fr.free.nrw.commons.Media;
 
-
+/**
+ * This class helps in creating adapter for imagesRecyclerView in SearchImagesFragment,
+ * implementing onClicks on imagesRecyclerView Items
+ **/
 class SearchImagesAdapterFactory {
     private final SearchImagesRenderer.ImageClickedListener listener;
 
