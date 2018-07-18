@@ -128,7 +128,7 @@ public class RecentSearchesDao {
     /**
      * It creates an Recent Searches object from data stored in the SQLite DB by using cursor
      * @param cursor
-     * @returns RecentSearch object
+     * @return RecentSearch object
      */
     @NonNull
     RecentSearch fromCursor(Cursor cursor) {
