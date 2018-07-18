@@ -36,6 +36,12 @@ public class CategoryImageUtils {
         return categoryImages;
     }
 
+    /**
+     * The method iterates over the child nodes to return a list of Subcategory name
+     * sorted alphabetically
+     * @param childNodes
+     * @return
+     */
     public static List<String> getSubCategoryList(NodeList childNodes) {
         List<String> subCategories = new ArrayList<>();
         for (int i = 0; i < childNodes.getLength(); i++) {

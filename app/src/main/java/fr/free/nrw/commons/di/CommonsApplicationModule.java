@@ -54,12 +54,17 @@ public class CommonsApplicationModule {
         return context.getContentResolver().acquireContentProviderClient(CATEGORY_AUTHORITY);
     }
 
+    /**
+     * This method is used to provide instance of RecentSearchContentProviderClient
+     * which provides content of Recent Searches from database
+     * @param context
+     * @return returns RecentSearchContentProviderClient
+     */
     @Provides
     @Named("recentsearch")
     public ContentProviderClient provideRecentSearchContentProviderClient(Context context) {
         return context.getContentResolver().acquireContentProviderClient(RECENT_SEARCH_AUTHORITY);
     }
-
 
     @Provides
     @Named("contribution")
