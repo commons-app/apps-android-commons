@@ -47,6 +47,9 @@ public class RecentSearchesContentProvider extends CommonsDaggerContentProvider 
 
     @Inject DBOpenHelper dbOpenHelper;
 
+    /**
+     * This functions executes query for searching recent searches in SqLite DB
+     **/
     @SuppressWarnings("ConstantConditions")
     @Override
     public Cursor query(@NonNull Uri uri, String[] projection, String selection,
@@ -88,6 +91,9 @@ public class RecentSearchesContentProvider extends CommonsDaggerContentProvider 
         return null;
     }
 
+    /**
+     * This functions executes query for inserting a recentSearch object in SqLite DB
+     **/
     @SuppressWarnings("ConstantConditions")
     @Override
     public Uri insert(@NonNull Uri uri, ContentValues contentValues) {
@@ -105,6 +111,9 @@ public class RecentSearchesContentProvider extends CommonsDaggerContentProvider 
         return Uri.parse(BASE_URI + "/" + id);
     }
 
+    /**
+     * This functions executes query for deleting a recentSearch object in SqLite DB
+     **/
     @Override
     public int delete(@NonNull Uri uri, String s, String[] strings) {
         int rows;
@@ -125,6 +134,9 @@ public class RecentSearchesContentProvider extends CommonsDaggerContentProvider 
         return rows;
     }
 
+    /**
+     * This functions executes query for inserting multiple recentSearch objects in SqLite DB
+     **/
     @SuppressWarnings("ConstantConditions")
     @Override
     public int bulkInsert(@NonNull Uri uri, @NonNull ContentValues[] values) {
@@ -148,6 +160,9 @@ public class RecentSearchesContentProvider extends CommonsDaggerContentProvider 
         return values.length;
     }
 
+    /**
+     * This functions executes query for updating a particular recentSearch object in SqLite DB
+     **/
     @SuppressWarnings("ConstantConditions")
     @Override
     public int update(@NonNull Uri uri, ContentValues contentValues, String selection,

@@ -15,8 +15,7 @@ import fr.free.nrw.commons.R;
 
 /**
  * presentation logic of individual image in search is handled here
- */
-
+ **/
 class SearchImagesRenderer extends Renderer<Media> {
     @BindView(R.id.categoryImageTitle) TextView tvImageName;
     @BindView(R.id.categoryImageAuthor) TextView categoryImageAuthor;

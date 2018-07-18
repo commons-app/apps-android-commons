@@ -66,11 +66,16 @@ public class SearchCategoryFragment extends CommonsDaggerSupportFragment {
     private List<String> queryList = new ArrayList<>();
 
     private final SearchCategoriesAdapterFactory adapterFactory = new SearchCategoriesAdapterFactory(item -> {
+        // Called on Click of a individual category Item
         // Open Category Details activity
         CategoryDetailsActivity.startYourself(getContext(), item);
         saveQuery(query);
     });
 
+    /**
+     * This method saves Search Query in the Recent Searches Database.
+     * @param query
+     */
     private void saveQuery(String query) {
         RecentSearch recentSearch = recentSearchesDao.find(query);
 

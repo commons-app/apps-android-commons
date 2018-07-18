@@ -147,6 +147,12 @@ public class CategoryDetailsActivity extends NavigationBaseActivity
         context.startActivity(intent);
     }
 
+    /**
+     * This method is called mediaDetailPagerFragment. It returns the Media Object at that Index
+     * @param i It is the index of which media object is to be returned which is same as
+     *          current index of viewPager.
+     * @return Media Object
+     */
     @Override
     public Media getMediaAtPosition(int i) {
         if (categoryImagesListFragment.getAdapter() == null) {
@@ -157,6 +163,11 @@ public class CategoryDetailsActivity extends NavigationBaseActivity
         }
     }
 
+    /**
+     * This method is called on from getCount of MediaDetailPagerFragment
+     * The viewpager will contain same number of media items as that of media elements in adapter.
+     * @return Total Media count in the adapter
+     */
     @Override
     public int getTotalMediaCount() {
         if (categoryImagesListFragment.getAdapter() == null) {
@@ -165,20 +176,35 @@ public class CategoryDetailsActivity extends NavigationBaseActivity
         return categoryImagesListFragment.getAdapter().getCount();
     }
 
+    /**
+     * This method is never called but it was in MediaDetailProvider Interface
+     * so it needs to be overrided.
+     */
     @Override
     public void notifyDatasetChanged() {
 
     }
 
+    /**
+     * This method is never called but it was in MediaDetailProvider Interface
+     * so it needs to be overrided.
+     */
     @Override
     public void registerDataSetObserver(DataSetObserver observer) {
     }
 
+    /**
+     * This method is never called but it was in MediaDetailProvider Interface
+     * so it needs to be overrided.
+     */
     @Override
     public void unregisterDataSetObserver(DataSetObserver observer) {
 
     }
 
+    /**
+     * This method inflates the menu in the toolbar
+     */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
@@ -186,6 +212,10 @@ public class CategoryDetailsActivity extends NavigationBaseActivity
         return super.onCreateOptionsMenu(menu);
     }
 
+    /**
+     * This method handles the logic on ItemSelect in toolbar menu
+     * Currently only 1 choice is available to open category details page in browser
+     */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
 
@@ -208,6 +238,10 @@ public class CategoryDetailsActivity extends NavigationBaseActivity
         }
     }
 
+    /**
+     * This method is called on backPressed of anyFragment in the activity.
+     * If condition is called when mediaDetailFragment is opened.
+     */
     @Override
     public void onBackPressed() {
         if (getSupportFragmentManager().getBackStackEntryCount() == 1){

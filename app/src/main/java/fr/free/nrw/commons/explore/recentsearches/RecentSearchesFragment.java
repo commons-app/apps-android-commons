@@ -73,6 +73,9 @@ public class RecentSearchesFragment extends CommonsDaggerSupportFragment {
         super.onResume();
     }
 
+    /**
+     * This method is called when search query is null to update Recent Searches
+     */
     public void updateRecentSearches() {
         recentSearches = recentSearchesDao.recentSearches(10);
         adapter = new ArrayAdapter<String>(getContext(),R.layout.item_recent_searches, recentSearches);
