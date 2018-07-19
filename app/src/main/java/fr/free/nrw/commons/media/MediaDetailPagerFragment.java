@@ -94,6 +94,11 @@ public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment imple
             view.postDelayed(() -> {
                 pager.setAdapter(adapter);
                 pager.setCurrentItem(pageNumber, false);
+
+                if(getActivity() == null) {
+                    return;
+                }
+
                 getActivity().supportInvalidateOptionsMenu();
                 adapter.notifyDataSetChanged();
             }, 100);
@@ -123,6 +128,9 @@ public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment imple
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+        if(getActivity() == null) {
+            return true;
+        }
         MediaDetailProvider provider = (MediaDetailProvider) getActivity();
         Media m = provider.getMediaAtPosition(pager.getCurrentItem());
         switch (item.getItemId()) {
@@ -186,10 +194,12 @@ public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment imple
      * @param m Media file to download
      */
     private void downloadMedia(Media m) {
-        String imageUrl = m.getImageUrl(),
-                fileName = m.getFilename();
+        String imageUrl = m.getImageUrl(), fileName = m.getFilename();
 
-        if (imageUrl == null || fileName == null) {
+        if (imageUrl == null
+                || fileName == null
+                || getContext() ==  null
+                || getActivity() == null) {
             return;
         }
 
@@ -231,6 +241,10 @@ public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment imple
             inflater.inflate(R.menu.fragment_image_detail, menu);
             if (pager != null) {
                 MediaDetailProvider provider = (MediaDetailProvider) getActivity();
+                if(provider == null) {
+                    return;
+                }
+
                 Media m = provider.getMediaAtPosition(pager.getCurrentItem());
                 if (m != null) {
                     // Enable default set of actions, then re-enable different set of actions only if it is a failed contrib
@@ -286,6 +300,9 @@ public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment imple
 
     @Override
     public void onPageScrolled(int i, float v, int i2) {
+        if(getActivity() == null) {
+            return;
+        }
         getActivity().supportInvalidateOptionsMenu();
     }
 
@@ -320,6 +337,9 @@ public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment imple
         public Fragment getItem(int i) {
             if (i == 0) {
                 // See bug https://code.google.com/p/android/issues/detail?id=27526
+                if(getActivity() == null) {
+                    return null;
+                }
                 pager.postDelayed(() -> getActivity().supportInvalidateOptionsMenu(), 5);
             }
             return MediaDetailFragment.forMedia(i, editable, isFeaturedImage);
@@ -327,6 +347,9 @@ public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment imple
 
         @Override
         public int getCount() {
+            if(getActivity() == null) {
+                return 0;
+            }
             return ((MediaDetailProvider) getActivity()).getTotalMediaCount();
         }
     }
