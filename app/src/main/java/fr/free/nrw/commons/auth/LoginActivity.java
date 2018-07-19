@@ -4,7 +4,6 @@ import android.accounts.Account;
 import android.accounts.AccountAuthenticatorActivity;
 import android.accounts.AccountAuthenticatorResponse;
 import android.accounts.AccountManager;
-import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -24,7 +23,6 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -65,7 +63,6 @@ public class LoginActivity extends AccountAuthenticatorActivity {
     public static final String PARAM_USERNAME = "fr.free.nrw.commons.login.username";
 
     @Inject MediaWikiApi mwApi;
-    @Inject AccountUtil accountUtil;
     @Inject SessionManager sessionManager;
     @Inject @Named("application_preferences") SharedPreferences prefs;
     @Inject @Named("default_preferences") SharedPreferences defaultPrefs;
@@ -254,7 +251,7 @@ public class LoginActivity extends AccountAuthenticatorActivity {
             }
         }
 
-        accountUtil.createAccount(response, username, password);
+        sessionManager.createAccount(response, username, password);
         startMainActivity();
     }
 

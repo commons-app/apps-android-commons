@@ -11,6 +11,7 @@ import android.text.TextUtils;
 
 import javax.inject.Inject;
 
+import fr.free.nrw.commons.BuildConfig;
 import fr.free.nrw.commons.data.DBOpenHelper;
 import fr.free.nrw.commons.di.CommonsDaggerContentProvider;
 import timber.log.Timber;
@@ -22,15 +23,14 @@ public class ModificationsContentProvider extends CommonsDaggerContentProvider {
     private static final int MODIFICATIONS = 1;
     private static final int MODIFICATIONS_ID = 2;
 
-    public static final String MODIFICATIONS_AUTHORITY = "fr.free.nrw.commons.modifications.contentprovider";
     public static final String BASE_PATH = "modifications";
 
-    public static final Uri BASE_URI = Uri.parse("content://" + MODIFICATIONS_AUTHORITY + "/" + BASE_PATH);
+    public static final Uri BASE_URI = Uri.parse("content://" + BuildConfig.MODIFICATION_AUTHORITY + "/" + BASE_PATH);
 
     private static final UriMatcher uriMatcher = new UriMatcher(UriMatcher.NO_MATCH);
     static {
-        uriMatcher.addURI(MODIFICATIONS_AUTHORITY, BASE_PATH, MODIFICATIONS);
-        uriMatcher.addURI(MODIFICATIONS_AUTHORITY, BASE_PATH + "/#", MODIFICATIONS_ID);
+        uriMatcher.addURI(BuildConfig.MODIFICATION_AUTHORITY, BASE_PATH, MODIFICATIONS);
+        uriMatcher.addURI(BuildConfig.MODIFICATION_AUTHORITY, BASE_PATH + "/#", MODIFICATIONS_ID);
     }
 
     public static Uri uriForId(int id) {
