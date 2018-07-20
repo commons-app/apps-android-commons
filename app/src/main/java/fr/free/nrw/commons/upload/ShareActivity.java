@@ -48,6 +48,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.auth.AuthenticatedActivity;
+import fr.free.nrw.commons.auth.LoginActivity;
 import fr.free.nrw.commons.auth.SessionManager;
 import fr.free.nrw.commons.caching.CacheController;
 import fr.free.nrw.commons.category.CategorizationFragment;
@@ -141,21 +142,33 @@ public class ShareActivity
      * Called when user taps the submit button.
      * Requests Storage permission, if needed.
      */
+
     @Override
     public void uploadActionInitiated(String title, String description) {
 
         this.title = title;
         this.description = description;
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            if (needsToRequestStoragePermission()) {
-                requestPermissions(new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},
-                        REQUEST_PERM_ON_SUBMIT_STORAGE);
+
+        if (sessionManager.getCurrentAccount() != null) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                // Check for Storage permission that is required for upload.
+                // Do not allow user to proceed without permission, otherwise will crash
+                if (needsToRequestStoragePermission()) {
+                    requestPermissions(new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},
+                            REQUEST_PERM_ON_SUBMIT_STORAGE);
+                } else {
+                    uploadBegins();
+                }
             } else {
                 uploadBegins();
             }
-        } else {
-            uploadBegins();
+        }
+        else  //Send user to login activity
+        {
+            Toast.makeText(this, "You need to login first!", Toast.LENGTH_SHORT).show();
+            Intent loginIntent = new Intent(ShareActivity.this, LoginActivity.class);
+            startActivity(loginIntent);
         }
     }
 
@@ -172,10 +185,12 @@ public class ShareActivity
                 != PackageManager.PERMISSION_GRANTED);
     }
 
+
     /**
      * Called after permission checks are done.
      * Gets file metadata for category suggestions, displays toast, caches categories found, calls uploadController
      */
+
     private void uploadBegins() {
         fileObj.processFileCoordinates(locationPermitted);
 
@@ -188,15 +203,18 @@ public class ShareActivity
             Timber.d("Cache the categories found");
         }
 
-        uploadController.startUpload(title, mediaUri, description, mimeType, source, decimalCoords, wikiDataEntityId, c -> {
-            ShareActivity.this.contribution = c;
-            showPostUpload();
-        });
-    }
+        uploadController.startUpload(title,mediaUri,description,mimeType,source,decimalCoords,wikiDataEntityId,c ->
+
+    {
+        ShareActivity.this.contribution = c;
+        showPostUpload();
+    });
+}
 
     /**
      * Starts CategorizationFragment after uploadBegins.
      */
+
     private void showPostUpload() {
         if (categorizationFragment == null) {
             categorizationFragment = new CategorizationFragment();
@@ -617,3 +635,4 @@ public class ShareActivity
 
     }
 }
+

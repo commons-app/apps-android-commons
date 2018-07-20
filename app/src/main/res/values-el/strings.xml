@@ -288,4 +288,5 @@
   <string name="wikidata_edit_failure">Αποτυχία ενημέρωσης της αντιστοιχούσας οντότητας του Wikidata!</string>
   <string name="menu_set_wallpaper">Ρύθμιση ταπετσαρίας</string>
   <string name="wallpaper_set_successfully">Η ταπετσαρία ρυθμίστηκε επιτυχώς!</string>
+  <string name="user_not_logged_in">Η συνεδρία σύνδεσης έληξε, παρακαλώ συνδεθείτε ξανά.</string>
 </resources>
