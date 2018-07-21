@@ -12,7 +12,7 @@ public class QuizQuestion {
     private String url;
     private String answerMessage;
 
-    QuizQuestion( int questionNumber, String question, String url, boolean answer, String answerMessage){
+    QuizQuestion(int questionNumber, String question, String url, boolean answer, String answerMessage){
         this.questionNumber = questionNumber;
         this.question = question;
         this.url = url;

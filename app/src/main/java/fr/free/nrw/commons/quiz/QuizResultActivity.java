@@ -29,15 +29,14 @@ import android.widget.TextView;
 import java.io.File;
 import java.io.FileOutputStream;
 
+/**
+ *  Displays the final score of quiz and congratulates the user
+ */
 public class QuizResultActivity extends AppCompatActivity {
-    @BindView(R.id.result_progress_bar)
-    CircleProgressBar resultProgressBar;
-    @BindView(R.id.toolbar)
-    Toolbar toolbar;
-    @BindView(R.id.congratulatory_message)
-    TextView congratulatoryMessageText;
-    @BindView(R.id.quiz_result_warning_text)
-    TextView warningTextView;
+
+    @BindView(R.id.result_progress_bar) CircleProgressBar resultProgressBar;
+    @BindView(R.id.toolbar) Toolbar toolbar;
+    @BindView(R.id.congratulatory_message) TextView congratulatoryMessageText;
 
     private final int NUMBER_OF_QUESTIONS = 5;
     private final int MULTIPLIER_TO_GET_PERCENTAGE = 20;
@@ -61,16 +60,13 @@ public class QuizResultActivity extends AppCompatActivity {
                     Intent.FLAG_ACTIVITY_SINGLE_TOP);
             super.onBackPressed();
         }
-
-        warningTextView.setText(getResources().getString(R.string.warning_for_image_reverts,
-                REVERT_PERCENTAGE_FOR_WARNING));
     }
 
     /**
      * to calculate and display percentage and score
      * @param score
      */
-    public void setScore( int score){
+    public void setScore(int score) {
         int per = score * MULTIPLIER_TO_GET_PERCENTAGE;
         resultProgressBar.setProgress(per);
         resultProgressBar.setProgressTextFormatPattern(score +" / " + NUMBER_OF_QUESTIONS);
@@ -157,7 +153,7 @@ public class QuizResultActivity extends AppCompatActivity {
      * share the screenshot through social media
      * @param bitmap
      */
-    void shareScreen ( Bitmap bitmap){
+    void shareScreen(Bitmap bitmap) {
         try {
             File file = new File(this.getExternalCacheDir(),"screen.png");
             FileOutputStream fOut = new FileOutputStream(file);
@@ -179,7 +175,7 @@ public class QuizResultActivity extends AppCompatActivity {
      * It display the alertDialog with Image of screenshot
      * @param screenshot
      */
-    public void showAlert(Bitmap screenshot){
+    public void showAlert(Bitmap screenshot) {
         AlertDialog.Builder alertadd = new AlertDialog.Builder(QuizResultActivity.this);
         LayoutInflater factory = LayoutInflater.from(QuizResultActivity.this);
         final View view = factory.inflate(R.layout.image_alert_layout, null);
@@ -201,5 +197,4 @@ public class QuizResultActivity extends AppCompatActivity {
         });
         alertadd.show();
     }
-
 }

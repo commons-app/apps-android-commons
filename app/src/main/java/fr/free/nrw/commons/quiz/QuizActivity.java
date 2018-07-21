@@ -51,7 +51,6 @@ public class QuizActivity extends AppCompatActivity {
         ButterKnife.bind(this);
         setSupportActionBar(toolbar);
         displayQuestion();
-
     }
 
     /**
@@ -102,13 +101,12 @@ public class QuizActivity extends AppCompatActivity {
         });
         AlertDialog dialog = alert.create();
         dialog.show();
-        //super.onBackPressed();
     }
 
     /**
      * to display the question
      */
-    public void displayQuestion(){
+    public void displayQuestion() {
         quiz = quizController.getQuiz();
         questionText.setText(quiz.get(questionIndex).getQuestion());
         questionTitle.setText(getResources().getString(R.string.question)+quiz.get(questionIndex).getQuestionNumber());
@@ -128,7 +126,7 @@ public class QuizActivity extends AppCompatActivity {
     /**
      * to evaluate score and check whether answer is correct or wrong
      */
-    public void evaluateScore(){
+    public void evaluateScore() {
         if((quiz.get(questionIndex).isAnswer() && positiveAnswer.isChecked()) ||
                 (!quiz.get(questionIndex).isAnswer() && negativeAnswer.isChecked()) ){
             customAlert("Correct",quiz.get(questionIndex).getAnswerMessage() );
@@ -143,7 +141,7 @@ public class QuizActivity extends AppCompatActivity {
      * @param title
      * @param Message
      */
-    public void customAlert(String title, String Message){
+    public void customAlert(String title, String Message) {
         AlertDialog.Builder alert = new AlertDialog.Builder(this);
         alert.setTitle(title);
         alert.setMessage(Message);
@@ -164,5 +162,4 @@ public class QuizActivity extends AppCompatActivity {
         AlertDialog dialog = alert.create();
         dialog.show();
     }
-
 }

@@ -5,6 +5,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.v7.app.AlertDialog.Builder;
+import android.util.Log;
 
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.WelcomeActivity;
@@ -15,12 +16,15 @@ import io.reactivex.schedulers.Schedulers;
 import timber.log.Timber;
 
 /**
- * to check whether to pop quiz or not
+ * fetches the number of images uploaded and number of images reverted.
+ * Then it calculates the percentage of the images reverted
+ * if the percentage of images reverted after last quiz exceeds 50% and number of images uploaded is
+ * greater than 50, then quiz is popped up
  */
 public class QuizChecker {
 
-    private int revertCount;
-    private int totalUploadCount;
+    private int revertCount ;
+    private int totalUploadCount ;
     private boolean isRevertCountFetched;
     private boolean isUploadCountFetched;
     private CompositeDisposable compositeDisposable = new CompositeDisposable();
@@ -39,7 +43,7 @@ public class QuizChecker {
      * @param userName
      * @param mediaWikiApi
      */
-    public QuizChecker( Context context, String userName, MediaWikiApi mediaWikiApi){
+    public QuizChecker(Context context, String userName, MediaWikiApi mediaWikiApi) {
         this.context = context;
         this.userName = userName;
         this.mediaWikiApi = mediaWikiApi;
@@ -68,7 +72,7 @@ public class QuizChecker {
      * call function to check for quiz
      * @param uploadCount
      */
-    private void setTotalUploadCount( int uploadCount){
+    private void setTotalUploadCount(int uploadCount) {
         totalUploadCount = uploadCount - countPref.getInt("uploadCount",0);
         isUploadCountFetched = true;
         calculateRevertParameter();
@@ -76,24 +80,22 @@ public class QuizChecker {
 
     /**
      * To call the API to get reverts count in form of JSONObject
-     *
      */
-    private void setRevertCount(){
+    private void setRevertCount() {
             compositeDisposable.add(mediaWikiApi
                     .getRevertCount(userName)
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe(
-                            object -> setRevertParamter(object.getInt("deletedUploads"))
+                            object -> setRevertParameter(object.getInt("deletedUploads"))
                     ));
-
     }
 
     /**
      * to calculate the number of images reverted after previous quiz
      * @param revertCountFetched
      */
-    private void setRevertParamter( int revertCountFetched){
+    private void setRevertParameter(int revertCountFetched) {
         revertCount = revertCountFetched - revertPref.getInt("revertCount",0);
         isRevertCountFetched = true;
         calculateRevertParameter();
@@ -103,6 +105,12 @@ public class QuizChecker {
      * to check whether the criterion to call quiz is satisfied
      */
     private void calculateRevertParameter() {
+        Log.i("Count", " "+revertCount + "    " + totalUploadCount);
+        if( revertCount < 0 || totalUploadCount < 0){
+            revertPref.edit().putInt("revertCount", 0).apply();
+            countPref.edit().putInt("uploadCount",0).apply();
+            return;
+        }
         if (isRevertCountFetched && isUploadCountFetched &&
                 totalUploadCount >= UPLOAD_COUNT_THRESHOLD &&
                 (revertCount * 100) / totalUploadCount >= 50) {
@@ -113,7 +121,7 @@ public class QuizChecker {
     /**
      * Alert which prompts to quiz
      */
-    public void callQuiz(){
+    public void callQuiz() {
         Builder alert = new Builder(context);
         alert.setTitle(context.getResources().getString(R.string.quiz));
         alert.setMessage(context.getResources().getString(R.string.quiz_alert_message,
@@ -140,5 +148,4 @@ public class QuizChecker {
         android.support.v7.app.AlertDialog dialog = alert.create();
         dialog.show();
     }
-
 }
