@@ -40,7 +40,6 @@ public class QuizResultActivity extends AppCompatActivity {
 
     private final int NUMBER_OF_QUESTIONS = 5;
     private final int MULTIPLIER_TO_GET_PERCENTAGE = 20;
-    private final String REVERT_PERCENTAGE_FOR_WARNING = "50%";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
