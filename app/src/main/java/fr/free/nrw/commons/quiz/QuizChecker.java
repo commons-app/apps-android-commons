@@ -105,7 +105,6 @@ public class QuizChecker {
      * to check whether the criterion to call quiz is satisfied
      */
     private void calculateRevertParameter() {
-        Log.i("Count", " "+revertCount + "    " + totalUploadCount);
         if( revertCount < 0 || totalUploadCount < 0){
             revertPref.edit().putInt("revertCount", 0).apply();
             countPref.edit().putInt("uploadCount",0).apply();
