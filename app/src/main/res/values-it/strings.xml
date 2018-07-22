@@ -230,4 +230,5 @@
   <string name="share_app_title">Condividi applicazione</string>
   <string name="appwidget_img">Foto del giorno</string>
   <string name="app_widget_heading">Foto del giorno</string>
+  <string name="user_not_logged_in">Sessione di login scaduta, accedi nuovamente.</string>
 </resources>

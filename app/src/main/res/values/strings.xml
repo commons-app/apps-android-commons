@@ -7,6 +7,7 @@
   <string name="app_name">Commons</string>
   <string name="bullet">&#8226;  </string>
   <string name="menu_settings">Settings</string>
+  <string name="intent_share_upload_label">Upload to Commons</string>
   <string name="username">Username</string>
   <string name="password">Password</string>
   <string name="login_credential">Log in to your Commons Beta account</string>
@@ -279,6 +280,7 @@
     <string name="error_loading_images">Error occurred while loading images.</string>
     <string name="image_uploaded_by">Uploaded by: %1$s</string>
 
+    <string name="block_notification">You are blocked from editing Commons</string>
     <string name="share_app_title">Share App</string>
     <string name="share_coordinates_not_present">Coordinates were not specified during image selection</string>
     <string name="error_fetching_nearby_places">Error fetching nearby places.</string>
@@ -289,4 +291,6 @@
   <string name="wikidata_edit_failure">Failed to update corresponding Wikidata entity!</string>
   <string name="menu_set_wallpaper">Set wallpaper</string>
   <string name="wallpaper_set_successfully">Wallpaper set successfully!</string>
+
+  <string name="user_not_logged_in">Login session expired, please log in again.</string>
 </resources>

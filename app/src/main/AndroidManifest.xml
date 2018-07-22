@@ -45,7 +45,7 @@
             android:name=".upload.ShareActivity"
             android:icon="@drawable/ic_launcher"
             android:label="@string/app_name">
-            <intent-filter>
+            <intent-filter android:label="@string/intent_share_upload_label">
                 <action android:name="android.intent.action.SEND" />
                 <category android:name="android.intent.category.DEFAULT" />
                 <data android:mimeType="image/*" />
@@ -57,7 +57,7 @@
             android:name=".upload.MultipleShareActivity"
             android:icon="@drawable/ic_launcher"
             android:label="@string/app_name">
-            <intent-filter>
+            <intent-filter android:label="@string/intent_share_upload_label">
                 <action android:name="android.intent.action.SEND_MULTIPLE" />
                 <category android:name="android.intent.category.DEFAULT" />
                 <data android:mimeType="image/*" />

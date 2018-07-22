@@ -288,4 +288,5 @@
   <string name="wikidata_edit_failure">לא ניתן היה לעדכן הישות המתאימה בוויקינתונים!</string>
   <string name="menu_set_wallpaper">הגדרת רקע</string>
   <string name="wallpaper_set_successfully">הרקע הוגדר בהצלחה!</string>
+  <string name="user_not_logged_in">זמן הכניסה לחשבון פקע, נא להיכנס שוב.</string>
 </resources>

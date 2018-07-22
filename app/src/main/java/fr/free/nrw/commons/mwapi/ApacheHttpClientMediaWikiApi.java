@@ -39,6 +39,7 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
+import java.util.TimeZone;
 import java.util.concurrent.Callable;
 
 import fr.free.nrw.commons.BuildConfig;
@@ -724,12 +725,48 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
         });
     }
 
+    /**
+     * Checks to see if a user is currently blocked from Commons
+     * @return whether or not the user is blocked from Commons
+     */
+    @Override
+    public boolean isUserBlockedFromCommons() {
+        boolean userBlocked = false;
+        try {
+            ApiResult result = api.action("query")
+                    .param("action", "query")
+                    .param("format", "xml")
+                    .param("meta", "userinfo")
+                    .param("uiprop", "blockinfo")
+                    .get();
+            if(result != null) {
+                String blockEnd = result.getString("/api/query/userinfo/@blockexpiry");
+                if(blockEnd.equals("infinite"))
+                {
+                    userBlocked = true;
+                }
+                else if (!blockEnd.isEmpty()) {
+                    Date endDate = parseMWDate(blockEnd);
+                    Date current = new Date();
+                    userBlocked = endDate.after(current);
+                }
+
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return userBlocked;
+    }
+
     private Date parseMWDate(String mwDate) {
         SimpleDateFormat isoFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'", Locale.ENGLISH); // Assuming MW always gives me UTC
+        isoFormat.setTimeZone(TimeZone.getTimeZone("UTC"));
         try {
             return isoFormat.parse(mwDate);
         } catch (ParseException e) {
             throw new RuntimeException(e);
         }
     }
+
 }

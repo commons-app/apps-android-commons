@@ -28,4 +28,8 @@ class UtilsTest {
     @Test fun `capitalize - pass Japanase characters`() {
         Assert.assertThat(Utils.capitalize("こんにちは"), _is("こんにちは"))
     }
+
+    @Test fun `capitalize does not fail on empty string`() {
+        Assert.assertThat(Utils.capitalize(""), _is(""))
+    }
 }
