@@ -43,7 +43,7 @@ public class GridViewAdapter extends ArrayAdapter {
     }
 
     /**
-     * Check the last item in the new list with old list and returns true if they are same
+     * Check the first item in the new list with old list and returns true if they are same
      * Its triggered on successful response of the fetch images API.
      * @param images
      */
@@ -51,7 +51,7 @@ public class GridViewAdapter extends ArrayAdapter {
         if (data == null) {
             data = new ArrayList<>();
         }
-        return images.get(images.size()-1).getFilename().equals(data.get(data.size()-1).getFilename());
+        return images.get(0).getFilename().equals(data.get(0).getFilename());
     }
 
     @Override

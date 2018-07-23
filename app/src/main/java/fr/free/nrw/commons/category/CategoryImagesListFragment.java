@@ -14,6 +14,7 @@ import android.widget.ListAdapter;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -51,7 +52,7 @@ public class CategoryImagesListFragment extends DaggerFragment {
     @BindView(R.id.categoryImagesList) GridView gridView;
     @BindView(R.id.parentLayout) RelativeLayout parentLayout;
     private boolean hasMoreImages = true;
-    private boolean isLoading;
+    private boolean isLoading=true;
     private String categoryName = null;
 
     @Inject CategoryImageController controller;
@@ -150,7 +151,7 @@ public class CategoryImagesListFragment extends DaggerFragment {
         progressBar.setVisibility(GONE);
         if (gridAdapter == null || gridAdapter.isEmpty()) {
             statusTextView.setVisibility(VISIBLE);
-            statusTextView.setText(getContext().getString(R.string.no_images_found));
+            statusTextView.setText(getString(R.string.no_images_found));
         } else {
             statusTextView.setVisibility(GONE);
         }
@@ -158,7 +159,7 @@ public class CategoryImagesListFragment extends DaggerFragment {
 
     /**
      * Initializes the adapter with a list of Media objects
-     * @param mediaList
+     * @param mediaList List of new Media to be displayed
      */
     private void setAdapter(List<Media> mediaList) {
         gridAdapter = new GridViewAdapter(this.getContext(), R.layout.layout_category_images, mediaList);
@@ -178,11 +179,11 @@ public class CategoryImagesListFragment extends DaggerFragment {
 
             @Override
             public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
-                if (hasMoreImages && !isLoading && (firstVisibleItem + visibleItemCount >= totalItemCount)) {
+                if (hasMoreImages && !isLoading && (firstVisibleItem + visibleItemCount + 1 >= totalItemCount)) {
                     isLoading = true;
                     fetchMoreImages();
-                }else {
-                    isLoading = false;
+                }
+                if (!hasMoreImages){
                     progressBar.setVisibility(GONE);
                 }
             }
@@ -210,7 +211,7 @@ public class CategoryImagesListFragment extends DaggerFragment {
     /**
      * Handles the success scenario
      * On first load, it initializes the grid view. On subsequent loads, it adds items to the adapter
-     * @param collection
+     * @param collection List of new Media to be displayed
      */
     private void handleSuccess(List<Media> collection) {
         if(collection == null || collection.isEmpty()) {
@@ -223,6 +224,7 @@ public class CategoryImagesListFragment extends DaggerFragment {
             setAdapter(collection);
         } else {
             if (gridAdapter.containsAll(collection)){
+                hasMoreImages = false;
                 return;
             }
             gridAdapter.addItems(collection);
@@ -233,6 +235,11 @@ public class CategoryImagesListFragment extends DaggerFragment {
         statusTextView.setVisibility(GONE);
     }
 
+    /**
+     * It return an instance of gridView adapter which helps in extracting media details
+     * used by the gridView
+     * @return  GridView Adapter
+     */
     public ListAdapter getAdapter() {
         return gridView.getAdapter();
     }

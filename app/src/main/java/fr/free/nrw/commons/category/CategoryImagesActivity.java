@@ -48,6 +48,10 @@ public class CategoryImagesActivity
 
     }
 
+    /**
+     * This method is called on backPressed of anyFragment in the activity.
+     * We are changing the icon here from back to hamburger icon.
+     */
     @Override
     public void onBackPressed() {
         initDrawer();
@@ -100,6 +104,9 @@ public class CategoryImagesActivity
     public void onBackStackChanged() {
     }
 
+    /**
+     * This method is called onClick of media inside category details (CategoryImageListFragment).
+     */
     @Override
     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
         if (mediaDetails == null || !mediaDetails.isVisible()) {
@@ -118,6 +125,9 @@ public class CategoryImagesActivity
         forceInitBackButton();
     }
 
+    /**
+     * This method is called on backPressed when mediaDetailFragment is opened in the activity.
+     */
     @Override
     protected void onResume() {
         if (supportFragmentManager.getBackStackEntryCount()==1){
@@ -130,7 +140,7 @@ public class CategoryImagesActivity
 
     /**
      * Consumers should be simply using this method to use this activity.
-     * @param context
+     * @param context A Context of the application package implementing this class.
      * @param title Page title
      * @param categoryName Name of the category for displaying its images
      */
@@ -142,6 +152,12 @@ public class CategoryImagesActivity
         context.startActivity(intent);
     }
 
+    /**
+     * This method is called mediaDetailPagerFragment. It returns the Media Object at that Index
+     * @param i It is the index of which media object is to be returned which is same as
+     *          current index of viewPager.
+     * @return Media Object
+     */
     @Override
     public Media getMediaAtPosition(int i) {
         if (categoryImagesListFragment.getAdapter() == null) {
@@ -152,6 +168,11 @@ public class CategoryImagesActivity
         }
     }
 
+    /**
+     * This method is called on from getCount of MediaDetailPagerFragment
+     * The viewpager will contain same number of media items as that of media elements in adapter.
+     * @return Total Media count in the adapter
+     */
     @Override
     public int getTotalMediaCount() {
         if (categoryImagesListFragment.getAdapter() == null) {
@@ -160,21 +181,36 @@ public class CategoryImagesActivity
         return categoryImagesListFragment.getAdapter().getCount();
     }
 
+    /**
+     * This method is never called but it was in MediaDetailProvider Interface
+     * so it needs to be overrided.
+     */
     @Override
     public void notifyDatasetChanged() {
 
     }
 
+    /**
+     * This method is never called but it was in MediaDetailProvider Interface
+     * so it needs to be overrided.
+     */
     @Override
     public void registerDataSetObserver(DataSetObserver observer) {
 
     }
 
+    /**
+     * This method is never called but it was in MediaDetailProvider Interface
+     * so it needs to be overrided.
+     */
     @Override
     public void unregisterDataSetObserver(DataSetObserver observer) {
 
     }
 
+    /**
+     * This method inflates the menu in the toolbar
+     */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
@@ -182,6 +218,10 @@ public class CategoryImagesActivity
         return super.onCreateOptionsMenu(menu);
     }
 
+    /**
+     * This method handles the logic on ItemSelect in toolbar menu
+     * Currently only 1 choice is available to open search page of the app
+     */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
 

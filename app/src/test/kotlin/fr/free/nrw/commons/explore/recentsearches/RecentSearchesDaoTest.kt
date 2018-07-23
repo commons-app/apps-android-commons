@@ -37,12 +37,18 @@ class RecentSearchesDaoTest {
         testObject = RecentSearchesDao { client }
     }
 
+    /**
+     * Unit Test for creating a table for recent Searches
+     */
     @Test
     fun createTable() {
         onCreate(database)
         verify(database).execSQL(CREATE_TABLE_STATEMENT)
     }
 
+    /**
+     * Unit Test for deleting table for recent Searches
+     */
     @Test
     fun deleteTable() {
         onDelete(database)
@@ -52,6 +58,9 @@ class RecentSearchesDaoTest {
         }
     }
 
+    /**
+     * Unit Test for migrating from database version 1 to 2 for recent Searches Table
+     */
     @Test
     fun migrateTableVersionFrom_v1_to_v2() {
         onUpdate(database, 1, 2)
@@ -59,6 +68,9 @@ class RecentSearchesDaoTest {
         verifyZeroInteractions(database)
     }
 
+    /**
+     * Unit Test for migrating from database version 2 to 3 for recent Searches Table
+     */
     @Test
     fun migrateTableVersionFrom_v2_to_v3() {
         onUpdate(database, 2, 3)
@@ -66,6 +78,9 @@ class RecentSearchesDaoTest {
         verifyZeroInteractions(database)
     }
 
+    /**
+     * Unit Test for migrating from database version 3 to 4 for recent Searches Table
+     */
     @Test
     fun migrateTableVersionFrom_v3_to_v4() {
         onUpdate(database, 3, 4)
@@ -73,6 +88,9 @@ class RecentSearchesDaoTest {
         verifyZeroInteractions(database)
     }
 
+    /**
+     * Unit Test for migrating from database version 4 to 5 for recent Searches Table
+     */
     @Test
     fun migrateTableVersionFrom_v4_to_v5() {
         onUpdate(database, 4, 5)
@@ -80,6 +98,9 @@ class RecentSearchesDaoTest {
         verifyZeroInteractions(database)
     }
 
+    /**
+     * Unit Test for migrating from database version 5 to 6 for recent Searches Table
+     */
     @Test
     fun migrateTableVersionFrom_v5_to_v6() {
         onUpdate(database, 5, 6)
@@ -87,12 +108,18 @@ class RecentSearchesDaoTest {
         verifyZeroInteractions(database)
     }
 
+    /**
+     * Unit Test for migrating from database version 6 to 7 for recent Searches Table
+     */
     @Test
     fun migrateTableVersionFrom_v6_to_v7() {
         onUpdate(database, 6, 7)
         verify(database).execSQL(CREATE_TABLE_STATEMENT)
     }
 
+    /**
+     * Unit Test for migrating from database version 7 to 8 for recent Searches Table
+     */
     @Test
     fun migrateTableVersionFrom_v7_to_v8() {
         onUpdate(database, 7, 8)
@@ -100,6 +127,9 @@ class RecentSearchesDaoTest {
         verifyZeroInteractions(database)
     }
 
+    /**
+     * Unit Test for migrating from creating a row without using ID in recent Searches Table
+     */
     @Test
     fun createFromCursor() {
         createCursor(1).let { cursor ->
@@ -112,6 +142,9 @@ class RecentSearchesDaoTest {
         }
     }
 
+    /**
+     * Unit Test for migrating from updating a row using contentUri in recent Searches Table
+     */
     @Test
     fun saveExistingQuery() {
         createCursor(1).let {
@@ -128,6 +161,9 @@ class RecentSearchesDaoTest {
         }
     }
 
+    /**
+     * Unit Test for migrating from creating a row using ID in recent Searches Table
+     */
     @Test
     fun saveNewQuery() {
         val contentUri = RecentSearchesContentProvider.uriForId(111)
@@ -145,24 +181,36 @@ class RecentSearchesDaoTest {
         }
     }
 
+    /**
+     * Unit Test for checking translation exceptions in searching a row from DB using recent search query
+     */
     @Test(expected = RuntimeException::class)
     fun findRecentSearchTranslatesExceptions() {
         whenever(client.query(any(), any(), any(), any(), anyOrNull())).thenThrow(RemoteException(""))
         testObject.find("butterfly")
     }
 
+    /**
+     * Unit Test for checking data if it's not present in searching a row from DB using recent search query
+     */
     @Test
     fun whenTheresNoDataFindReturnsNull_nullCursor() {
         whenever(client.query(any(), any(), any(), any(), any())).thenReturn(null)
         assertNull(testObject.find("butterfly"))
     }
 
+    /**
+     * Unit Test for checking data if it's not present in searching a row from DB using recent search query
+     */
     @Test
     fun whenTheresNoDataFindReturnsNull_emptyCursor() {
         whenever(client.query(any(), any(), any(), any(), any())).thenReturn(createCursor(0))
         assertNull(testObject.find("butterfly"))
     }
 
+    /**
+     * Unit Test for checking if cursor's are closed after use or not
+     */
     @Test
     fun cursorsAreClosedAfterUse() {
         val mockCursor: Cursor = mock()
@@ -174,7 +222,9 @@ class RecentSearchesDaoTest {
         verify(mockCursor).close()
     }
 
-
+    /**
+     * Unit Test for checking search results after searching a row from DB using recent search query
+     */
     @Test
     fun findRecentSearchQuery() {
         whenever(client.query(any(), any(), any(), any(), anyOrNull())).thenReturn(createCursor(1))
@@ -196,6 +246,9 @@ class RecentSearchesDaoTest {
         assertEquals("butterfly", queryCaptor.firstValue[0])
     }
 
+    /**
+     * Unit Test for checking if cursor's are closed after recent search query or not
+     */
     @Test
     fun cursorsAreClosedAfterRecentSearchQuery() {
         val mockCursor: Cursor = mock()
@@ -207,6 +260,9 @@ class RecentSearchesDaoTest {
         verify(mockCursor).close()
     }
 
+    /**
+     * Unit Test for checking when recent searches returns less than the limit
+     */
     @Test
     fun recentSearchesReturnsLessThanLimit() {
         whenever(client.query(any(), any(), anyOrNull(), any(), any())).thenReturn(createCursor(1))
@@ -226,6 +282,9 @@ class RecentSearchesDaoTest {
         assertEquals(0, queryCaptor.firstValue.size)
     }
 
+    /**
+     * Unit Test for checking size or list recieved from recent searches
+     */
     @Test
     fun recentSearchesHonorsLimit() {
         whenever(client.query(any(), any(), anyOrNull(), any(), any())).thenReturn(createCursor(10))
@@ -235,6 +294,10 @@ class RecentSearchesDaoTest {
         assertEquals(5, result.size)
     }
 
+    /**
+     * Unit Test for creating entries in recent searches database.
+     * @param rowCount No of rows
+     */
     private fun createCursor(rowCount: Int) = MatrixCursor(columns, rowCount).apply {
         for (i in 0 until rowCount) {
             addRow(listOf("1", "butterfly", "123"))
