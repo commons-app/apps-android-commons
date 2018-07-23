@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Authors:
 * Envlh
+* FF11
 * Inkowik
 * Kghbln
 * Metalhead64
@@ -14,6 +15,7 @@
   <string name="app_name">Commons</string>
   <string name="bullet">•</string>
   <string name="menu_settings">Einstellungen</string>
+  <string name="intent_share_upload_label">Zu Commons hochladen</string>
   <string name="username">Benutzername</string>
   <string name="password">Passwort</string>
   <string name="login_credential">Bei deinem Commons-Beta-Benutzerkonto anmelden</string>
@@ -24,13 +26,13 @@
   <string name="logging_in_message">Bitte warten …</string>
   <string name="login_success">Anmeldung erfolgreich!</string>
   <string name="login_failed">Anmeldung fehlgeschlagen!</string>
-  <string name="upload_failed">Datei nicht gefunden. Bitte versuche es mit einer anderen.</string>
+  <string name="upload_failed">Datei nicht gefunden. Bitte versuche es mit einer anderen Datei.</string>
   <string name="authentication_failed">Authentifizierung fehlgeschlagen. Bitte erneut anmelden.</string>
   <string name="uploading_started">Hochladen gestartet!</string>
   <string name="upload_completed_notification_title">„%1$s“ hochgeladen!</string>
   <string name="upload_completed_notification_text">Tippe, um deinen Upload anzusehen</string>
   <string name="upload_progress_notification_title_start">Hochladen von „%1$s“ starten</string>
-  <string name="upload_progress_notification_title_in_progress">„%1$s“ hochladen</string>
+  <string name="upload_progress_notification_title_in_progress">„%1$s“ wird hochgeladen</string>
   <string name="upload_progress_notification_title_finishing">Hochladen von „%1$s“ abschließen</string>
   <string name="upload_failed_notification_title">Hochladen von „%1$s“ fehlgeschlagen</string>
   <string name="upload_failed_notification_subtitle">Tippen zum Betrachten</string>
@@ -101,7 +103,7 @@
   <string name="no_uploads_yet">Du hast noch keine Fotos hochgeladen.</string>
   <string name="menu_retry_upload">Erneut versuchen</string>
   <string name="menu_cancel_upload">Abbrechen</string>
-  <string name="share_license_summary">Dieses Bild wird lizenziert unter %1$s</string>
+  <string name="share_license_summary">Dieses Bild wird unter %1$s lizenziert</string>
   <string name="media_upload_policy">Durch das Hochladen dieses Bildes erkläre ich, dass dies mein eigenes Werk ist, das kein urheberrechtlich geschütztes Material oder Selfies enthält und das auch sonst die &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines/de\"&gt;Wikimedia-Commons-Richtlinien&lt;/a&gt; einhält.</string>
   <string name="menu_download">Herunterladen</string>
   <string name="preference_license">Standardlizenz</string>
@@ -275,6 +277,7 @@
   <string name="no_images_found">Keine Bilder gefunden!</string>
   <string name="error_loading_images">Beim Laden der Bilder ist ein Fehler aufgetreten.</string>
   <string name="image_uploaded_by">Hochgeladen von: %1$s</string>
+  <string name="block_notification">Du bist für das Bearbeiten auf Commons gesperrt</string>
   <string name="share_app_title">App teilen</string>
   <string name="share_coordinates_not_present">Während der Bildauswahl wurden keine Koordinaten angegeben</string>
   <string name="error_fetching_nearby_places">Fehler beim Abrufen der Orte in der Nähe.</string>

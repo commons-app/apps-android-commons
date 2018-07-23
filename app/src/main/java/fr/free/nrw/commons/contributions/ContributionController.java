@@ -24,6 +24,7 @@ import static android.content.Intent.EXTRA_STREAM;
 import static fr.free.nrw.commons.contributions.Contribution.SOURCE_CAMERA;
 import static fr.free.nrw.commons.contributions.Contribution.SOURCE_GALLERY;
 import static fr.free.nrw.commons.upload.UploadService.EXTRA_SOURCE;
+import static fr.free.nrw.commons.wikidata.WikidataConstants.WIKIDATA_ENTITY_ID_PREF;
 
 public class ContributionController {
 
@@ -91,6 +92,7 @@ public class ContributionController {
     }
 
     public void handleImagePicked(int requestCode, Intent data, boolean isDirectUpload, String wikiDataEntityId) {
+        Timber.d("Is direct upload %s and the Wikidata entity ID is %s", isDirectUpload, wikiDataEntityId);
         FragmentActivity activity = fragment.getActivity();
         Timber.d("handleImagePicked() called with onActivityResult()");
         Intent shareIntent = new Intent(activity, ShareActivity.class);
@@ -119,7 +121,7 @@ public class ContributionController {
         try {
             shareIntent.putExtra("isDirectUpload", isDirectUpload);
             if (wikiDataEntityId != null && !wikiDataEntityId.equals("")) {
-                shareIntent.putExtra("wikiDataEntityId", wikiDataEntityId);
+                shareIntent.putExtra(WIKIDATA_ENTITY_ID_PREF, wikiDataEntityId);
             }
             activity.startActivity(shareIntent);
         } catch (SecurityException e) {

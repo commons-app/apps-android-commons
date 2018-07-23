@@ -4,6 +4,7 @@
 * Emperyan
 * Hedda
 * Incelemeelemani
+* Joseph
 * McAang
 * Neslihan Turan
 * Rapsar
@@ -288,4 +289,5 @@
   <string name="wikidata_edit_failure">Karşılık gelen Vikiveri varlığı güncellenemedi!</string>
   <string name="menu_set_wallpaper">Duvar kağıdı ayarla</string>
   <string name="wallpaper_set_successfully">Duvar kağıdı başarıyla ayarlandı!</string>
+  <string name="user_not_logged_in">Oturumun süresi doldu, lütfen tekrar giriş yapın.</string>
 </resources>

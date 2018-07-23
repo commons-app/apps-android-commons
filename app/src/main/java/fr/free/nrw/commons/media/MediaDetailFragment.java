@@ -246,6 +246,10 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
 
             @Override
             protected Boolean doInBackground(Void... voids) {
+                // Local files have no filename yet
+                if(media.getFilename() == null) {
+                    return Boolean.FALSE;
+                }
                 try {
                     extractor.fetch(media.getFilename(), licenseList);
                     return Boolean.TRUE;

@@ -1,5 +1,6 @@
 package fr.free.nrw.commons.upload;
 
+import android.annotation.SuppressLint;
 import android.accounts.Account;
 import android.content.ComponentName;
 import android.content.ContentResolver;
@@ -24,7 +25,11 @@ import java.util.concurrent.Executors;
 
 import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.HandlerService;
+
+import fr.free.nrw.commons.auth.LoginActivity;
+
 import fr.free.nrw.commons.R;
+
 import fr.free.nrw.commons.auth.SessionManager;
 import fr.free.nrw.commons.contributions.Contribution;
 import fr.free.nrw.commons.settings.Prefs;
@@ -86,18 +91,32 @@ public class UploadController {
 
     /**
      * Starts a new upload task.
-     *
      * @param title         the title of the contribution
      * @param mediaUri      the media URI of the contribution
      * @param description   the description of the contribution
      * @param mimeType      the MIME type of the contribution
      * @param source        the source of the contribution
      * @param decimalCoords the coordinates in decimal. (e.g. "37.51136|-77.602615")
+     * @param wikiDataEntityId
      * @param onComplete    the progress tracker
      */
     public void startUpload(String title, Uri mediaUri, String description, String mimeType, String source, String decimalCoords, String wikiDataEntityId, ContributionUploadProgress onComplete) {
         Contribution contribution;
 
+
+            //TODO: Modify this to include coords
+            contribution = new Contribution(mediaUri, null, title, description, -1,
+                    null, null, sessionManager.getCurrentAccount().name,
+                    CommonsApplication.DEFAULT_EDIT_SUMMARY, decimalCoords);
+
+
+            contribution.setTag("mimeType", mimeType);
+            contribution.setSource(source);
+
+            //Calls the next overloaded method
+            startUpload(contribution, onComplete);
+
+        Timber.d("Wikidata entity ID received from Share activity is %s", wikiDataEntityId);
         //TODO: Modify this to include coords
         Account currentAccount = sessionManager.getCurrentAccount();
         if(currentAccount == null) {
@@ -110,12 +129,12 @@ public class UploadController {
                 null, null, currentAccount.name,
                 CommonsApplication.DEFAULT_EDIT_SUMMARY, decimalCoords);
 
+
         contribution.setTag("mimeType", mimeType);
         contribution.setSource(source);
         contribution.setWikiDataEntityId(wikiDataEntityId);
 
-        //Calls the next overloaded method
-        startUpload(contribution, onComplete);
+
     }
 
     /**
@@ -124,6 +143,7 @@ public class UploadController {
      * @param contribution the contribution object
      * @param onComplete   the progress tracker
      */
+    @SuppressLint("StaticFieldLeak")
     public void startUpload(final Contribution contribution, final ContributionUploadProgress onComplete) {
         //Set creator, desc, and license
         if (TextUtils.isEmpty(contribution.getCreator())) {
