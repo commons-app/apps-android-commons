@@ -16,6 +16,7 @@
   <string name="app_name">Commons</string>
   <string name="bullet">•</string>
   <string name="menu_settings">Configuracións</string>
+  <string name="intent_share_upload_label">Cargar en Commons</string>
   <string name="username">Nome de usuario</string>
   <string name="password">Contrasinal</string>
   <string name="login_credential">Acceda á súa conta de Commons Beta</string>
@@ -275,6 +276,7 @@
   <string name="no_images_found">Non se atopou ningunha imaxeǃ</string>
   <string name="error_loading_images">Houbo un erro ó subir as imaxes.</string>
   <string name="image_uploaded_by">Subida porː %1$s</string>
+  <string name="block_notification">Está bloqueado e non pode editar en Commons</string>
   <string name="share_app_title">Compartir a aplicación</string>
   <string name="share_coordinates_not_present">Non se indicaron as coordenadas ó seleccionar a imaxe</string>
   <string name="error_fetching_nearby_places">Erro ó procurar os lugares próximos.</string>
