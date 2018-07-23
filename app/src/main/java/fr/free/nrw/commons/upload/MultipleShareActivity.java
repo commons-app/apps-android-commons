@@ -48,6 +48,7 @@ import fr.free.nrw.commons.modifications.ModifierSequenceDao;
 import fr.free.nrw.commons.modifications.TemplateRemoveModifier;
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
 import fr.free.nrw.commons.utils.ContributionUtils;
+import fr.free.nrw.commons.utils.ExternalStorageUtils;
 import timber.log.Timber;
 
 //TODO: We should use this class to see how multiple uploads are handled, and then REMOVE it.
@@ -57,7 +58,8 @@ public class MultipleShareActivity extends AuthenticatedActivity
         AdapterView.OnItemClickListener,
         FragmentManager.OnBackStackChangedListener,
         MultipleUploadListFragment.OnMultipleUploadInitiatedHandler,
-        OnCategoriesSaveHandler {
+        OnCategoriesSaveHandler,
+        ActivityCompat.OnRequestPermissionsResultCallback{
 
     @Inject
     MediaWikiApi mwApi;
@@ -78,6 +80,7 @@ public class MultipleShareActivity extends AuthenticatedActivity
     private CategorizationFragment categorizationFragment;
 
     private boolean locationPermitted = false;
+    private boolean multipleUploadsPrepared = false;
 
     @Override
     public Media getMediaAtPosition(int i) {
@@ -116,30 +119,22 @@ public class MultipleShareActivity extends AuthenticatedActivity
 
     @Override
     public void OnMultipleUploadInitiated() {
-
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            //Check for Storage permission that is required for upload. Do not allow user to proceed without permission, otherwise will crash
-            if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
-                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, 1);
-            } else {
-                multipleUploadBegins();
-            }
-        } else {
-            multipleUploadBegins();
-        }
+        // No need to request external permission here, because if user can reach this point, then she permission granted
+        Timber.d("OnMultipleUploadInitiated");
+        multipleUploadBegins();
     }
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         if (requestCode == 1 && grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-            multipleUploadBegins();
+            Timber.d("onRequestPermissionsResult external storage permission granted");
+            prepareMultipleUpoadList();
         }
     }
 
     private void multipleUploadBegins() {
 
         Timber.d("Multiple upload begins");
-
         final ProgressDialog dialog = new ProgressDialog(this);
         dialog.setIndeterminate(false);
         dialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
@@ -256,13 +251,39 @@ public class MultipleShareActivity extends AuthenticatedActivity
 
     @Override
     protected void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
-        outState.putParcelableArrayList("uploadsList", photosList);
+        /* This will be true if permission request is granted before we request. Otherwise we will
+         * explicitly call operations under this method again.
+        */
+        if (multipleUploadsPrepared) {
+            super.onSaveInstanceState(outState);
+            Timber.d("onSaveInstanceState multiple uploads is prepared, permission granted");
+            outState.putParcelableArrayList("uploadsList", photosList);
+        } else {
+            Timber.d("onSaveInstanceState multiple uploads is not prepared, permission not granted");
+            return;
+        }
     }
 
     @Override
     protected void onAuthCookieAcquired(String authCookie) {
+        // Multiple uploads prepared boolean is used to decide when to call multipleUploadsBegin()
+        multipleUploadsPrepared = false;
         mwApi.setAuthCookie(authCookie);
+        if (!ExternalStorageUtils.isStoragePermissionGranted(this)) {
+            ExternalStorageUtils.requestExternalStoragePermission(this);
+            multipleUploadsPrepared = false;
+            return; // Postpone operation to do after gettion permission
+        } else {
+            multipleUploadsPrepared = true;
+            prepareMultipleUpoadList();
+        }
+    }
+
+    /**
+     * Prepares a list from files will be uploaded. Saves these files temporarily to external
+     * storage. Adds them to uploads list
+     */
+    private void prepareMultipleUpoadList() {
         Intent intent = getIntent();
 
         if (Intent.ACTION_SEND_MULTIPLE.equals(intent.getAction())) {
@@ -355,4 +376,5 @@ public class MultipleShareActivity extends AuthenticatedActivity
 
         return null;
     }
+
 }
