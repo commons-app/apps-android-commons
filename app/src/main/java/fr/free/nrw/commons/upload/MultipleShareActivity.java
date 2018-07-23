@@ -80,6 +80,7 @@ public class MultipleShareActivity extends AuthenticatedActivity
 
     private boolean locationPermitted = false;
     private boolean multipleUploadsPrepared = false;
+    private boolean multipleUploadsFinalised = false; // Checks is user clicked to upload button or regret before this phase
 
     @Override
     public Media getMediaAtPosition(int i) {
@@ -174,6 +175,7 @@ public class MultipleShareActivity extends AuthenticatedActivity
         getSupportFragmentManager().beginTransaction()
                 .add(R.id.uploadsFragmentContainer, categorizationFragment, "categorization")
                 .commitAllowingStateLoss();
+        multipleUploadsFinalised = true;
         //See http://stackoverflow.com/questions/7469082/getting-exception-illegalstateexception-can-not-perform-this-action-after-onsa
     }
 
@@ -269,6 +271,7 @@ public class MultipleShareActivity extends AuthenticatedActivity
     @Override
     protected void onAuthCookieAcquired(String authCookie) {
         // Multiple uploads prepared boolean is used to decide when to call multipleUploadsBegin()
+        multipleUploadsFinalised = false;
         multipleUploadsPrepared = false;
         mwApi.setAuthCookie(authCookie);
         if (!ExternalStorageUtils.isStoragePermissionGranted(this)) {
@@ -379,4 +382,20 @@ public class MultipleShareActivity extends AuthenticatedActivity
         return null;
     }
 
+    // If on back pressed before sharing
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+    }
+
+    @Override
+    protected void onStop() {
+        // Remove saved files if activity is stopped before upload operation, ie user changed mind
+        if (!multipleUploadsFinalised) {
+            for (Contribution contribution : photosList) {
+                ContributionUtils.removeTemporaryFile(contribution.getLocalUri());
+            }
+        }
+        super.onStop();
+    }
 }
