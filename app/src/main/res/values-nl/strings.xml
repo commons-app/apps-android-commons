@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Authors:
 * Festina90
+* KlaasZ4usV
 * Mainframe98
 * Mar(c)
 * Patio
@@ -20,7 +21,7 @@
   <string name="login_success">Aanmelden geslaagd</string>
   <string name="login_failed">Aanmelden mislukt</string>
   <string name="upload_failed">Bestand niet gevonden. Probeer een ander bestand.</string>
-  <string name="authentication_failed">Verificatie is mislukt</string>
+  <string name="authentication_failed" fuzzy="true">Verificatie is mislukt</string>
   <string name="uploading_started">Uploaden is begonnen</string>
   <string name="upload_completed_notification_title">%1$s geüpload</string>
   <string name="upload_completed_notification_text">Wijs aan om uw upload te bekijken</string>
@@ -94,7 +95,7 @@
   <string name="preference_license" fuzzy="true">Licentie</string>
   <string name="use_previous">Vorige naam/beschrijving gebruiken</string>
   <string name="allow_gps">Automatisch huidige locatie ophalen</string>
-  <string name="allow_gps_summary">Huidige locatie ophalen om categoriesuggesties te maken als het beeld geen geotags heeft</string>
+  <string name="allow_gps_summary" fuzzy="true">Huidige locatie ophalen om categoriesuggesties te maken als het beeld geen geotags heeft</string>
   <string name="preference_theme">Nachtmodus</string>
   <string name="preference_theme_summary">Gebruik donker thema</string>
   <string name="license_name_cc_by_sa_four"> Naamsvermelding-GelijkDelen 4.0</string>

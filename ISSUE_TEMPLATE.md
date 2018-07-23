@@ -6,7 +6,8 @@ Summarize your issue in one sentence (what goes wrong, what did you expect to ha
 
 **Steps to reproduce:** 
 
-How can we reproduce the issue?
+How can we reproduce the issue? 
+What did you expect the app to do, and what did you see instead?
 
 **Add System logs:**
 

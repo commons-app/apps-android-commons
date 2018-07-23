@@ -15,9 +15,10 @@ import android.os.AsyncTask;
 import android.os.IBinder;
 import android.provider.MediaStore;
 import android.text.TextUtils;
-import android.widget.Toast;
+import android.util.Log;
 
 import java.io.BufferedInputStream;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Date;
@@ -96,7 +97,7 @@ public class UploadController {
      * @param decimalCoords the coordinates in decimal. (e.g. "37.51136|-77.602615")
      * @param onComplete    the progress tracker
      */
-    public void startUpload(String title, Uri mediaUri, String description, String mimeType, String source, String decimalCoords, String wikiDataEntityId, ContributionUploadProgress onComplete) {
+    public void startUpload(String title, Uri contentProviderUri, Uri mediaUri, String description, String mimeType, String source, String decimalCoords, String wikiDataEntityId, ContributionUploadProgress onComplete) {
         Contribution contribution;
 
         Timber.d("Wikidata entity ID received from Share activity is %s", wikiDataEntityId);
@@ -115,6 +116,7 @@ public class UploadController {
         contribution.setTag("mimeType", mimeType);
         contribution.setSource(source);
         contribution.setWikiDataEntityId(wikiDataEntityId);
+        contribution.setContentProviderUri(contentProviderUri);
 
         //Calls the next overloaded method
         startUpload(contribution, onComplete);
@@ -151,9 +153,12 @@ public class UploadController {
                 long length;
                 ContentResolver contentResolver = context.getContentResolver();
                 try {
+
+                    //TODO: understand do we really need this code
                     if (contribution.getDataLength() <= 0) {
+                        Log.d("deneme","UploadController/doInBackground, contribution.getLocalUri():"+contribution.getLocalUri());
                         AssetFileDescriptor assetFileDescriptor = contentResolver
-                                .openAssetFileDescriptor(contribution.getLocalUri(), "r");
+                                .openAssetFileDescriptor(Uri.fromFile(new File(contribution.getLocalUri().getPath())), "r");
                         if (assetFileDescriptor != null) {
                             length = assetFileDescriptor.getLength();
                             if (length == -1) {
@@ -203,7 +208,7 @@ public class UploadController {
                         contribution.setDateCreated(new Date());
                     }
                 }
-                return contribution;
+            return contribution;
             }
 
             @Override
