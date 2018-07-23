@@ -186,6 +186,9 @@ public class SearchActivity extends NavigationBaseActivity implements MediaDetai
                     .add(R.id.mediaContainer, mediaDetails)
                     .addToBackStack(null)
                     .commit();
+            // Reason for using hide, add instead of replace is to maintain scroll position after
+            // coming back to the search activity. See https://github.com/commons-app/apps-android-commons/issues/1631
+            // https://stackoverflow.com/questions/11353075/how-can-i-maintain-fragment-state-when-added-to-the-back-stack/19022550#19022550
             supportFragmentManager.executePendingTransactions();
         }
         mediaDetails.showImage(index);

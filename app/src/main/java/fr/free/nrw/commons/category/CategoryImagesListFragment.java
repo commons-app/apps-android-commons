@@ -52,7 +52,7 @@ public class CategoryImagesListFragment extends DaggerFragment {
     @BindView(R.id.categoryImagesList) GridView gridView;
     @BindView(R.id.parentLayout) RelativeLayout parentLayout;
     private boolean hasMoreImages = true;
-    private boolean isLoading=true;
+    private boolean isLoading = true;
     private String categoryName = null;
 
     @Inject CategoryImageController controller;
@@ -223,7 +223,7 @@ public class CategoryImagesListFragment extends DaggerFragment {
         if(gridAdapter == null) {
             setAdapter(collection);
         } else {
-            if (gridAdapter.containsAll(collection)){
+            if (gridAdapter.containsAll(collection)) {
                 hasMoreImages = false;
                 return;
             }
