@@ -17,7 +17,6 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.content.ContextCompat;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
@@ -128,6 +127,9 @@ public class MultipleShareActivity extends AuthenticatedActivity
         if (requestCode == 1 && grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
             Timber.d("onRequestPermissionsResult external storage permission granted");
             prepareMultipleUpoadList();
+        } else {
+            // Permission is not granted, close activity
+            finish();
         }
     }
 
