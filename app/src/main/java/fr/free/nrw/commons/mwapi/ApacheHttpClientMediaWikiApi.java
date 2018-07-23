@@ -710,7 +710,7 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
     @NonNull
     public Single<Integer> getUploadCount(String userName) {
         final String uploadCountUrlTemplate =
-                wikiMediaToolforgeUrl + "urbanecmbot/uploadsbyuser/uploadsbyuser.py";
+                wikiMediaToolforgeUrl + "urbanecmbot/commonsmisc/uploadsbyuser.py";
 
         return Single.fromCallable(() -> {
             String url = String.format(
