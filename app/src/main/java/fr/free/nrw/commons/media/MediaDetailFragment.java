@@ -427,6 +427,7 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
         textView.setText(catName);
         if (categoriesLoaded && categoriesPresent) {
             textView.setOnClickListener(view -> {
+                // Open Category Details page
                 String selectedCategoryTitle = "Category:" + catName;
                 Intent intent = new Intent(getContext(), CategoryDetailsActivity.class);
                 intent.putExtra("categoryName", selectedCategoryTitle);

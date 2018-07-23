@@ -43,8 +43,6 @@ public class CategoryDetailsActivity extends NavigationBaseActivity
 
     private FragmentManager supportFragmentManager;
     private CategoryImagesListFragment categoryImagesListFragment;
-    private SubCategoryListFragment subCategoryListFragment;
-    private SubCategoryListFragment parentCategoryListFragment;
     private MediaDetailPagerFragment mediaDetails;
     private String categoryName;
     @BindView(R.id.mediaContainer) FrameLayout mediaContainer;
@@ -77,8 +75,8 @@ public class CategoryDetailsActivity extends NavigationBaseActivity
         List<Fragment> fragmentList = new ArrayList<>();
         List<String> titleList = new ArrayList<>();
         categoryImagesListFragment = new CategoryImagesListFragment();
-        subCategoryListFragment = new SubCategoryListFragment();
-        parentCategoryListFragment = new SubCategoryListFragment();
+        SubCategoryListFragment subCategoryListFragment = new SubCategoryListFragment();
+        SubCategoryListFragment parentCategoryListFragment = new SubCategoryListFragment();
         categoryName = getIntent().getStringExtra("categoryName");
         if (getIntent() != null && categoryName != null) {
             Bundle arguments = new Bundle();
@@ -137,7 +135,7 @@ public class CategoryDetailsActivity extends NavigationBaseActivity
 
     /**
      * Consumers should be simply using this method to use this activity.
-     * @param context
+     * @param context  A Context of the application package implementing this class.
      * @param categoryName Name of the category for displaying its details
      */
     public static void startYourself(Context context, String categoryName) {
@@ -244,7 +242,7 @@ public class CategoryDetailsActivity extends NavigationBaseActivity
      */
     @Override
     public void onBackPressed() {
-        if (getSupportFragmentManager().getBackStackEntryCount() == 1){
+        if (supportFragmentManager.getBackStackEntryCount() == 1){
             // back to search so show search toolbar and hide navigation toolbar
             tabLayout.setVisibility(View.VISIBLE);
             viewPager.setVisibility(View.VISIBLE);

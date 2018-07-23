@@ -51,7 +51,6 @@ public class SearchActivity extends NavigationBaseActivity implements MediaDetai
     private RecentSearchesFragment recentSearchesFragment;
     private FragmentManager supportFragmentManager;
     private MediaDetailPagerFragment mediaDetails;
-    private String query;
     ViewPagerAdapter viewPagerAdapter;
 
     @Override
@@ -74,6 +73,10 @@ public class SearchActivity extends NavigationBaseActivity implements MediaDetai
 
     }
 
+    /**
+     * This method sets the search history fragment.
+     * Search history fragment is displayed when query is empty.
+     */
     private void setSearchHistoryFragment() {
         recentSearchesFragment = new RecentSearchesFragment();
         FragmentTransaction transaction = supportFragmentManager.beginTransaction();
@@ -105,7 +108,6 @@ public class SearchActivity extends NavigationBaseActivity implements MediaDetai
                                 viewPager.setVisibility(View.VISIBLE);
                                 tabLayout.setVisibility(View.VISIBLE);
                                 searchHistoryContainer.setVisibility(View.GONE);
-                                this.query = query.toString();
                                 searchImageFragment.updateImageList(query.toString());
                                 searchCategoryFragment.updateCategoryList(query.toString());
                             }else {
