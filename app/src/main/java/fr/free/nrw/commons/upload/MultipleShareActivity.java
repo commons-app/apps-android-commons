@@ -392,8 +392,11 @@ public class MultipleShareActivity extends AuthenticatedActivity
     protected void onStop() {
         // Remove saved files if activity is stopped before upload operation, ie user changed mind
         if (!multipleUploadsFinalised) {
-            for (Contribution contribution : photosList) {
-                ContributionUtils.removeTemporaryFile(contribution.getLocalUri());
+            if (photosList != null) {
+                for (Contribution contribution : photosList) {
+                    Timber.d("User changed mind, didn't click to upload button, deleted file: "+contribution.getLocalUri());
+                    ContributionUtils.removeTemporaryFile(contribution.getLocalUri());
+                }
             }
         }
         super.onStop();
