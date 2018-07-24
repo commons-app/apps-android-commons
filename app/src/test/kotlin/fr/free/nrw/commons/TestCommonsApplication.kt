@@ -38,7 +38,6 @@ class MockCommonsApplicationModule(appContext: Context) : CommonsApplicationModu
     val accountUtil: AccountUtil = mock()
     val appSharedPreferences: SharedPreferences = mock()
     val defaultSharedPreferences: SharedPreferences = mock()
-    val categorySharedPreferences: SharedPreferences = mock()
     val otherSharedPreferences: SharedPreferences = mock()
     val uploadController: UploadController = mock()
     val mockSessionManager: SessionManager = mock()
