@@ -36,6 +36,8 @@ public class QuizChecker {
 
     private final int UPLOAD_COUNT_THRESHOLD = 5;
     private final String REVERT_PERCENTAGE_FOR_MESSAGE = "50%";
+    private final String REVERT_SHARED_PREFERENCE = "revertCount";
+    private final String UPLOAD_SHARED_PREFERENCE = "uploadCount";
 
     /**
      * constructor to set the parameters for quiz
@@ -47,8 +49,8 @@ public class QuizChecker {
         this.context = context;
         this.userName = userName;
         this.mediaWikiApi = mediaWikiApi;
-        revertPref = context.getSharedPreferences("revertCount", Context.MODE_PRIVATE);
-        countPref = context.getSharedPreferences("uploadCount",Context.MODE_PRIVATE);
+        revertPref = context.getSharedPreferences(REVERT_SHARED_PREFERENCE, Context.MODE_PRIVATE);
+        countPref = context.getSharedPreferences(UPLOAD_SHARED_PREFERENCE,Context.MODE_PRIVATE);
         setUploadCount();
         setRevertCount();
     }
@@ -73,7 +75,11 @@ public class QuizChecker {
      * @param uploadCount
      */
     private void setTotalUploadCount(int uploadCount) {
-        totalUploadCount = uploadCount - countPref.getInt("uploadCount",0);
+        totalUploadCount = uploadCount - countPref.getInt(UPLOAD_SHARED_PREFERENCE,0);
+        if( totalUploadCount < 0){
+            totalUploadCount = 0;
+            countPref.edit().putInt(UPLOAD_SHARED_PREFERENCE,0).apply();
+        }
         isUploadCountFetched = true;
         calculateRevertParameter();
     }
@@ -96,7 +102,11 @@ public class QuizChecker {
      * @param revertCountFetched
      */
     private void setRevertParameter(int revertCountFetched) {
-        revertCount = revertCountFetched - revertPref.getInt("revertCount",0);
+        revertCount = revertCountFetched - revertPref.getInt(REVERT_SHARED_PREFERENCE,0);
+        if(revertCount < 0){
+            revertCount = 0;
+            revertPref.edit().putInt(REVERT_SHARED_PREFERENCE, 0).apply();
+        }
         isRevertCountFetched = true;
         calculateRevertParameter();
     }
@@ -106,8 +116,8 @@ public class QuizChecker {
      */
     private void calculateRevertParameter() {
         if( revertCount < 0 || totalUploadCount < 0){
-            revertPref.edit().putInt("revertCount", 0).apply();
-            countPref.edit().putInt("uploadCount",0).apply();
+            revertPref.edit().putInt(REVERT_SHARED_PREFERENCE, 0).apply();
+            countPref.edit().putInt(UPLOAD_SHARED_PREFERENCE,0).apply();
             return;
         }
         if (isRevertCountFetched && isUploadCountFetched &&
@@ -128,10 +138,10 @@ public class QuizChecker {
         alert.setPositiveButton("Proceed", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-               int newRevetSharedPrefs = revertCount+ revertPref.getInt("revertCount",0);
-                revertPref.edit().putInt("revertCount", newRevetSharedPrefs).apply();
-                int newUploadCount = totalUploadCount + countPref.getInt("uploadCount",0);
-                countPref.edit().putInt("uploadCount",newUploadCount).apply();
+               int newRevetSharedPrefs = revertCount+ revertPref.getInt(REVERT_SHARED_PREFERENCE,0);
+                revertPref.edit().putInt(REVERT_SHARED_PREFERENCE, newRevetSharedPrefs).apply();
+                int newUploadCount = totalUploadCount + countPref.getInt(UPLOAD_SHARED_PREFERENCE,0);
+                countPref.edit().putInt(UPLOAD_SHARED_PREFERENCE,newUploadCount).apply();
                 Intent i = new Intent(context, WelcomeActivity.class);
                 i.putExtra("isQuiz", true);
                 dialog.dismiss();
