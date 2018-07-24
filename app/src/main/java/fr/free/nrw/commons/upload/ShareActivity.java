@@ -22,6 +22,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.RequiresApi;
 import android.support.design.widget.FloatingActionButton;
 import android.support.graphics.drawable.VectorDrawableCompat;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 
 import android.view.MenuItem;
@@ -63,6 +64,7 @@ import fr.free.nrw.commons.modifications.TemplateRemoveModifier;
 import fr.free.nrw.commons.mwapi.CategoryApi;
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
 import fr.free.nrw.commons.utils.ContributionUtils;
+import fr.free.nrw.commons.utils.ExternalStorageUtils;
 import fr.free.nrw.commons.utils.ViewUtil;
 import timber.log.Timber;
 
@@ -78,7 +80,9 @@ import static fr.free.nrw.commons.wikidata.WikidataConstants.WIKIDATA_ENTITY_ID_
 public class ShareActivity
         extends AuthenticatedActivity
         implements SingleUploadFragment.OnUploadActionInitiated,
-        OnCategoriesSaveHandler {
+        OnCategoriesSaveHandler,
+        ActivityCompat.OnRequestPermissionsResultCallback {
+
     private static final int REQUEST_PERM_ON_SUBMIT_STORAGE = 4;
     //Had to make them class variables, to extract out the click listeners, also I see no harm in this
     final Rect startBounds = new Rect();
@@ -138,6 +142,7 @@ public class ShareActivity
     private long ShortAnimationDuration;
     private boolean isFABOpen = false;
     private float startScaleFinal;
+    private Bundle savedInstanceState;
 
 
     /**
@@ -267,9 +272,24 @@ public class ShareActivity
                 .setFailureImage(VectorDrawableCompat.create(getResources(),
                         R.drawable.ic_error_outline_black_24dp, getTheme()))
                 .build());
+        if (!ExternalStorageUtils.isStoragePermissionGranted(this)) {
+            savedInstanceState = this.savedInstanceState;
+            ExternalStorageUtils.requestExternalStoragePermission(this);
+            return; // Postpone operation to do after getting permission
+        } else {
+            receiveImageIntent();
+            createContributionWithReceivedIntent(savedInstanceState);
+        }
 
-        receiveImageIntent();
+        /*receiveImageIntent();
 
+        createContributionWithReceivedIntent(savedInstanceState);*/
+
+    }
+
+
+
+    private void createContributionWithReceivedIntent(Bundle savedInstanceState) {
         if (savedInstanceState != null) {
             contribution = savedInstanceState.getParcelable("contribution");
         }
@@ -391,13 +411,19 @@ public class ShareActivity
      */
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        if (requestCode == 1 && grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+            Timber.d("onRequestPermissionsResult external storage permission granted");
+            // You can receive image intent and save image to a temp file only if ext storage permission is granted
+            receiveImageIntent();
+            createContributionWithReceivedIntent(savedInstanceState);
+        }
+
         switch (requestCode) {
             // Storage (from submit button) - this needs to be separate from (1) because only the
             // submit button should bring user to next screen
             case REQUEST_PERM_ON_SUBMIT_STORAGE: {
                 if (grantResults.length >= 1 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     checkIfFileExists();
-
                     //Uploading only begins if storage permission granted from arrow icon
                     uploadBegins();
                 }
@@ -601,4 +627,5 @@ public class ShareActivity
             startActivity(mapIntent);
         }
     }
+
 }
