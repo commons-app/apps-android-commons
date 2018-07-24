@@ -416,21 +416,15 @@ public class ShareActivity
             // You can receive image intent and save image to a temp file only if ext storage permission is granted
             receiveImageIntent();
             createContributionWithReceivedIntent(savedInstanceState);
-            
+
+            if (requestCode == REQUEST_PERM_ON_SUBMIT_STORAGE) {
+                checkIfFileExists();
+                //Uploading only begins if storage permission granted from arrow icon
+                uploadBegins();
+            }
+
         } else {
             finish();
-        }
-
-        switch (requestCode) {
-            // Storage (from submit button) - this needs to be separate from (1) because only the
-            // submit button should bring user to next screen
-            case REQUEST_PERM_ON_SUBMIT_STORAGE: {
-                if (grantResults.length >= 1 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    checkIfFileExists();
-                    //Uploading only begins if storage permission granted from arrow icon
-                    uploadBegins();
-                }
-            }
         }
     }
 
