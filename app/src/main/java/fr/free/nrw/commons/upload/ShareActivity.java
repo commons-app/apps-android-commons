@@ -417,6 +417,9 @@ public class ShareActivity
             // You can receive image intent and save image to a temp file only if ext storage permission is granted
             receiveImageIntent();
             createContributionWithReceivedIntent(savedInstanceState);
+            
+        } else {
+            finish();
         }
 
         switch (requestCode) {
