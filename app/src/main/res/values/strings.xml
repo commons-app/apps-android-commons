@@ -293,7 +293,7 @@
   <string name="quiz_question_string">Is this picture OK to upload?</string>
   <string name="question">Question</string>
   <string name="result">Result</string>
-  <string name="quiz_back_button">End quiz ? </string>
+  <string name="quiz_back_button">If you carry on uploading images that require deletion, your account will likely be banned. Are you sure you want to end the quiz?</string>
   <string name="quiz_alert_message">More than %1$s of the images you uploaded have been deleted. If you carry on uploading images that require deletion, your account will likely be banned.\n\nWould you like to view the tutorial again and then take a quiz to help you learn what type of images you should or shouldn\'t upload?</string>
   <string name="selfie_answer">Selfies do not have much encyclopedic value. Please do not upload a picture of yourself unless you already have a Wikipedia article about you.</string>
   <string name="taj_mahal_answer">Pictures of monuments and outside scenery is OK to upload in most countries. Please note that temporary art installations outside are often copyrighted and not OK to upload.</string>
