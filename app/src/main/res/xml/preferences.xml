@@ -1,39 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <PreferenceCategory android:title="@string/preference_category_appearance">
+    <fr.free.nrw.commons.ui.LongTitlePreferences.LongTitlePreferenceCategory
+        android:title="@string/preference_category_appearance">
 
-        <SwitchPreference
+        <fr.free.nrw.commons.ui.LongTitlePreferences.LongTitleSwitchPreference
+            android:title="@string/preference_theme"
             android:defaultValue="false"
             android:key="theme"
             android:summary="@string/preference_theme_summary"
             android:title="@string/preference_theme" />
 
-    </PreferenceCategory>
+    </fr.free.nrw.commons.ui.LongTitlePreferences.LongTitlePreferenceCategory>
 
-    <PreferenceCategory android:title="@string/preference_category_general">
+    <fr.free.nrw.commons.ui.LongTitlePreferences.LongTitlePreferenceCategory
+        android:title="@string/preference_category_general">
 
-        <ListPreference
-            android:defaultValue="@string/license_pref_cc_by_sa_4_0"
+        <fr.free.nrw.commons.ui.LongTitlePreferences.LongTitleListPreference
+            android:key="defaultLicense"
+            android:title="@string/preference_license"
             android:entries="@array/pref_defaultLicense_entries"
             android:entryValues="@array/pref_defaultLicense_values"
-            android:key="defaultLicense"
-            android:title="@string/preference_license" />
-
-        <SwitchPreference
+            android:key="defaultLicense" />
+      
+        <fr.free.nrw.commons.ui.LongTitlePreferences.LongTitleSwitchPreference
+            android:key="useExternalStorage"
+            android:title="@string/use_external_storage"
             android:defaultValue="true"
             android:key="useExternalStorage"
             android:summary="@string/use_external_storage_summary"
-            android:title="@string/use_external_storage" />
 
-        <EditTextPreference
+        <fr.free.nrw.commons.ui.LongTitlePreferences.LongTitleEditTextPreference
+            android:key="uploads"
             android:defaultValue="100"
             android:inputType="numberDecimal"
             android:key="uploads"
             android:maxLength="3"
             android:title="@string/set_limit" />
 
-    </PreferenceCategory>
+    </fr.free.nrw.commons.ui.LongTitlePreferences.LongTitlePreferenceCategory>
 
     <PreferenceCategory android:title="Privacy">
 
@@ -55,17 +60,19 @@
 
     </PreferenceCategory>
 
-    <PreferenceCategory android:title="@string/preference_category_feedback">
+    <fr.free.nrw.commons.ui.LongTitlePreferences.LongTitlePreferenceCategory
+        android:title="@string/preference_category_feedback">
 
-        <Preference
+        <fr.free.nrw.commons.ui.LongTitlePreferences.LongTitlePreference
             android:key="becomeBetaTester"
-            android:summary="@string/become_a_tester_description"
-            android:title="@string/become_a_tester_title" />
+            android:title="@string/become_a_tester_title"
+            android:summary="@string/become_a_tester_description">
+        </fr.free.nrw.commons.ui.LongTitlePreferences.LongTitlePreference>
 
-        <Preference
+        <fr.free.nrw.commons.ui.LongTitlePreferences.LongTitlePreference
             android:key="sendLogFile"
             android:summary="@string/send_log_file_description"
             android:title="@string/send_log_file" />
 
-    </PreferenceCategory>
+    </fr.free.nrw.commons.ui.LongTitlePreferences.LongTitlePreferenceCategory>
 </PreferenceScreen>

@@ -296,4 +296,5 @@
   <string name="wikidata_edit_failure">Не удалось обновить соответствующую страницу викиданных!</string>
   <string name="menu_set_wallpaper">Сделать фоновой заставкой</string>
   <string name="wallpaper_set_successfully">Фоновая заставка успешно установлена!</string>
+  <string name="user_not_logged_in">Сессия авторизации истекла, пожалуйста авторизуйтесь заново.</string>
 </resources>

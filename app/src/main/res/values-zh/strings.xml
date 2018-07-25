@@ -11,7 +11,7 @@
 -->
 <resources>
   <string name="preference_category_appearance">外观</string>
-  <string name="preference_category_general">常规</string>
+  <string name="preference_category_general">一般</string>
   <string name="preference_category_feedback">反馈</string>
   <string name="preference_category_location">位置</string>
   <string name="app_name">共享资源</string>
@@ -285,4 +285,5 @@
   <string name="wikidata_edit_failure">更新对应维基数据实体失败！</string>
   <string name="menu_set_wallpaper">设置墙纸</string>
   <string name="wallpaper_set_successfully">墙纸已成功设置！</string>
+  <string name="user_not_logged_in">登录会话已过期，请重新登录。</string>
 </resources>

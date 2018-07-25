@@ -24,6 +24,7 @@ import fr.free.nrw.commons.wikidata.WikidataEditListenerImpl;
 
 import static android.content.Context.MODE_PRIVATE;
 import static fr.free.nrw.commons.contributions.ContributionsContentProvider.CONTRIBUTION_AUTHORITY;
+import static fr.free.nrw.commons.explore.recentsearches.RecentSearchesContentProvider.RECENT_SEARCH_AUTHORITY;
 import static fr.free.nrw.commons.modifications.ModificationsContentProvider.MODIFICATIONS_AUTHORITY;
 
 @Module
@@ -51,6 +52,18 @@ public class CommonsApplicationModule {
     @Named("category")
     public ContentProviderClient provideCategoryContentProviderClient(Context context) {
         return context.getContentResolver().acquireContentProviderClient(CATEGORY_AUTHORITY);
+    }
+
+    /**
+     * This method is used to provide instance of RecentSearchContentProviderClient
+     * which provides content of Recent Searches from database
+     * @param context
+     * @return returns RecentSearchContentProviderClient
+     */
+    @Provides
+    @Named("recentsearch")
+    public ContentProviderClient provideRecentSearchContentProviderClient(Context context) {
+        return context.getContentResolver().acquireContentProviderClient(RECENT_SEARCH_AUTHORITY);
     }
 
     @Provides

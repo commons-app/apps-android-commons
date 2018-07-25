@@ -10,6 +10,7 @@
   <string name="app_name">Comun</string>
   <string name="bullet">•</string>
   <string name="menu_settings">Paràmeter</string>
+  <string name="intent_share_upload_label">Carié su Commons</string>
   <string name="username">Stranòm</string>
   <string name="password">Ciav</string>
   <string name="login_credential">Ch\'a intra an sò cont Comun beta</string>
@@ -269,6 +270,7 @@
   <string name="no_images_found">Gnun-e plance trovà!</string>
   <string name="error_loading_images">A-i é staje n\'eror durant ël cariament ëd le plance.</string>
   <string name="image_uploaded_by">Carià da: %1$s</string>
+  <string name="block_notification">Chiel a l\'é stàit blocà e a peul pa modifiché su Commons</string>
   <string name="share_app_title">Partagé j\'aplicassion</string>
   <string name="share_coordinates_not_present">Le coordinà a son nen ëstàite spessificà durant la selession ëd la plancia</string>
   <string name="error_fetching_nearby_places">Eror durant l\'esplorassion dj\'anviron.</string>
@@ -278,4 +280,5 @@
   <string name="wikidata_edit_failure">Falì a agiorné l\'entità ëd Wikidata corëspondenta!</string>
   <string name="menu_set_wallpaper">Definì la tapissarìa</string>
   <string name="wallpaper_set_successfully">La tapissarìa a l\'é stàita definìa për da bin!</string>
+  <string name="user_not_logged_in">Session ëscadùa, për piasì ch\'a rintra torna ant ël sistema.</string>
 </resources>

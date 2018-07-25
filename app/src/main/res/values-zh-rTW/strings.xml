@@ -19,6 +19,7 @@
   <string name="app_name">共享資源</string>
   <string name="bullet">•</string>
   <string name="menu_settings">設定</string>
+  <string name="intent_share_upload_label">上傳至共享資源</string>
   <string name="username">使用者名稱</string>
   <string name="password">密碼</string>
   <string name="login_credential">登入您的維基共享資源測試版帳號</string>
@@ -280,6 +281,7 @@
   <string name="no_images_found">找不到圖片！</string>
   <string name="error_loading_images">當載入圖片時發生錯誤。</string>
   <string name="image_uploaded_by">由：%1$s 上傳</string>
+  <string name="block_notification">您被禁止編輯共享資源</string>
   <string name="share_app_title">分享應用程式</string>
   <string name="share_coordinates_not_present">當選擇圖片時未指定座標</string>
   <string name="error_fetching_nearby_places">索取附近地點時出錯。</string>
@@ -289,4 +291,5 @@
   <string name="wikidata_edit_failure">更新所對應的維基數據項目失敗！</string>
   <string name="menu_set_wallpaper">設定桌布</string>
   <string name="wallpaper_set_successfully">桌布設定成功！</string>
+  <string name="user_not_logged_in">登入用 session 逾期，請重新登入。</string>
 </resources>

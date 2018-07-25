@@ -39,7 +39,7 @@
   <string name="menu_from_gallery">از نگار خانہ</string>
   <string name="menu_from_camera">تصویر لیں</string>
   <string name="menu_nearby">قریبی</string>
-  <string name="provider_contributions">میری اپلوڈ</string>
+  <string name="provider_contributions">میرے اپلوڈ کردہ</string>
   <string name="menu_share">شیئر</string>
   <string name="menu_open_in_browser">براؤزر میں کھولیں</string>
   <string name="share_title_hint">عنوان</string>
@@ -69,9 +69,9 @@
     <item quantity="one">شروع %1$d اپلوڈ</item>
     <item quantity="other">شروع %d$1 اپلوڈ</item>
   </plurals>
-  <plurals name="multiple_uploads_title" fuzzy="true">
+  <plurals name="multiple_uploads_title">
     <item quantity="one">%1$d اپلوڈ</item>
-    <item quantity="other">%1$d اپلوڈ</item>
+    <item quantity="other">%1$d اپلوڈز</item>
   </plurals>
   <string name="categories_not_found">%1$s سے کوئی زمرہ جات میل نہیں کھاتے</string>
   <string name="categories_skip_explanation">ویکیمیڈیا کامنز پر اپنی تصاویر کو قابل دریافت بنانے کے لیے زمرے شامل کریں۔\n\nزمرے شامل کرنے کے لیے لکھنا شروع کریں۔\n\nاس مرحلے کو نظر انداز کرنے کے لیے اس پیغام یا (یا پیچھے) پر ٹیپ کریں۔</string>
@@ -130,6 +130,7 @@
   <string name="navigation_item_feedback">آپ کی رائے</string>
   <string name="navigation_item_logout">لاگ آوٹ</string>
   <string name="navigation_item_info">معلمی</string>
+  <string name="notifications_welcome">%1$s، ویکیمیڈیا کامنز میں خوش آمدید! آپ کو یہاں پا کر ہمیں خوشی ہوئی۔</string>
   <string name="nearby_directions">ہدایات</string>
   <string name="nearby_commons">عام</string>
   <string name="no_internet">انٹرنیٹ دستیاب نہیں</string>
