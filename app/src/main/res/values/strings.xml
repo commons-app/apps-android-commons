@@ -289,4 +289,22 @@
   <string name="wikidata_edit_failure">Failed to update corresponding Wikidata entity!</string>
   <string name="menu_set_wallpaper">Set wallpaper</string>
   <string name="wallpaper_set_successfully">Wallpaper set successfully!</string>
+
+    <string name="user_not_logged_in">Login session expired, please log in again.</string>
+    <string name="redact_exif_tags">Remove EXIF Tags</string>
+    <string name="redact_exif_tags_summary">Select which EXIF tags to remove from uploads.</string>
+    <string name="location_accuracy">Set Location Accuracy</string>
+    <string name="location_accuracy_pref_remove">Remove all location data.</string>
+    <string name="location_accuracy_pref_20km">Reduce accuracy to 20km</string>
+    <string name="location_accuracy_pref_10km">Reduce accuracy to 10km</string>
+    <string name="location_accuracy_pref_5km">Reduce accuracy to 5km</string>
+    <string name="location_accuracy_pref_1km">Reduce accuracy to 1km</string>
+    <string name="location_accuracy_pref_100m">Reduce accuracy to 100m</string>
+    <string name="location_accuracy_pref_do_nothing">Do nothing</string>
+
+    <string name="exif_tag_name_author">Author</string>
+    <string name="exif_tag_name_copyright">Copyright</string>
+    <string name="exif_tag_name_model">Camera Model</string>
+    <string name="exif_tag_name_software">Software</string>
+
 </resources>
