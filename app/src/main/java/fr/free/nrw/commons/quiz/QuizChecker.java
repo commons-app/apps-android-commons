@@ -89,7 +89,7 @@ public class QuizChecker {
      */
     private void setRevertCount() {
             compositeDisposable.add(mediaWikiApi
-                    .getRevertCount(userName)
+                    .getRevertRespObjectSingle(userName)
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe(

@@ -305,4 +305,7 @@
   <string name="warning_for_no_answer">Select one of the two options to answer the question</string>
   <string name="user_not_logged_in">Login session expired, please log in again.</string>
   <string name="quiz_result_share_message">Share your quiz with your friends!</string>
+  <string name="continue_message">Continue</string>
+  <string name="correct">Correct Answer</string>
+  <string name="wrong">Wrong Answer</string>
 </resources>

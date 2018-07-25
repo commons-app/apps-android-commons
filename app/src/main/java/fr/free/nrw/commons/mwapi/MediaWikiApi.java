@@ -88,7 +88,7 @@ public interface MediaWikiApi {
     Single<Integer> getUploadCount(String userName);
 
     @NonNull
-    Single<JSONObject> getRevertCount(String userName);
+    Single<JSONObject> getRevertRespObjectSingle(String userName);
 
     interface ProgressListener {
         void onProgress(long transferred, long total);
