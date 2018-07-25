@@ -23,6 +23,7 @@ import org.apache.http.impl.conn.tsccm.ThreadSafeClientConnManager;
 import org.apache.http.params.BasicHttpParams;
 import org.apache.http.params.CoreProtocolPNames;
 import org.apache.http.util.EntityUtils;
+import org.json.JSONObject;
 import org.mediawiki.api.ApiResult;
 import org.mediawiki.api.MWApi;
 import org.w3c.dom.Element;
@@ -53,6 +54,10 @@ import fr.free.nrw.commons.notification.NotificationUtils;
 import in.yuvi.http.fluent.Http;
 import io.reactivex.Observable;
 import io.reactivex.Single;
+import okhttp3.HttpUrl;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
 import timber.log.Timber;
 
 import static fr.free.nrw.commons.utils.ContinueUtils.getQueryContinue;
@@ -233,7 +238,7 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
 
     @Override
     public boolean pageExists(String pageName) throws IOException {
-        return Double.parseDouble( api.action("query")
+        return Double.parseDouble(api.action("query")
                 .param("titles", pageName)
                 .get()
                 .getString("/api/query/pages/page/@_idx")) != -1;
@@ -902,13 +907,11 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
                     .param("meta", "userinfo")
                     .param("uiprop", "blockinfo")
                     .get();
-            if(result != null) {
+            if (result != null) {
                 String blockEnd = result.getString("/api/query/userinfo/@blockexpiry");
-                if(blockEnd.equals("infinite"))
-                {
+                if (blockEnd.equals("infinite")) {
                     userBlocked = true;
-                }
-                else if (!blockEnd.isEmpty()) {
+                } else if (!blockEnd.isEmpty()) {
                     Date endDate = parseMWDate(blockEnd);
                     Date current = new Date();
                     userBlocked = endDate.after(current);
@@ -920,6 +923,68 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
         }
 
         return userBlocked;
+    }
+
+    /**
+     * This takes userName as input, which is then used to fetch the feedback/achievements
+     * statistics using OkHttp and JavaRx. This function return JSONObject
+     * @param userName
+     * @return
+     */
+    @NonNull
+    @Override
+    public Single<JSONObject> getAchievements(String userName) {
+        final String fetchAchievementUrlTemplate =
+                wikiMediaToolforgeUrl + "urbanecmbot/commonsmisc/feedback.py";
+        return Single.fromCallable(() -> {
+            String url = String.format(
+                    Locale.ENGLISH,
+                    fetchAchievementUrlTemplate,
+                    new PageTitle(userName).getText());
+            HttpUrl.Builder urlBuilder = HttpUrl.parse(url).newBuilder();
+            urlBuilder.addQueryParameter("user", userName);
+            Log.i("url", urlBuilder.toString());
+            Request request = new Request.Builder()
+                    .url(urlBuilder.toString())
+                    .build();
+            OkHttpClient client = new OkHttpClient();
+            Response response = client.newCall(request).execute();
+            String jsonData = response.body().string();
+            JSONObject jsonObject = new JSONObject(jsonData);
+            return jsonObject;
+        });
+
+    }
+
+    /**
+     * This takes userName as input, which is then used to fetch the no of images deleted
+     * using OkHttp and JavaRx. This function return JSONObject
+     * @param userName
+     * @return
+     */
+    @NonNull
+    @Override
+    public Single<JSONObject> getRevertCount(String userName){
+        final String fetchRevertCountUrlTemplate =
+                wikiMediaToolforgeUrl + "urbanecmbot/commonsmisc/feedback.py";
+        return Single.fromCallable(() -> {
+            String url = String.format(
+                    Locale.ENGLISH,
+                    fetchRevertCountUrlTemplate,
+                    new PageTitle(userName).getText());
+            HttpUrl.Builder urlBuilder = HttpUrl.parse(url).newBuilder();
+            urlBuilder.addQueryParameter("user", userName);
+            urlBuilder.addQueryParameter("fetch","deletedUploads");
+            Log.i("url", urlBuilder.toString());
+            Request request = new Request.Builder()
+                    .url(urlBuilder.toString())
+                    .build();
+            OkHttpClient client = new OkHttpClient();
+            Response response = client.newCall(request).execute();
+            String jsonData = response.body().string();
+            JSONObject jsonRevertObject = new JSONObject(jsonData);
+            return jsonRevertObject;
+        });
     }
 
     private Date parseMWDate(String mwDate) {

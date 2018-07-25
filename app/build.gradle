@@ -21,6 +21,7 @@ dependencies {
     implementation 'com.jakewharton.timber:timber:4.5.1'
     implementation 'info.debatty:java-string-similarity:0.24'
     implementation 'com.borjabravo:readmoretextview:2.1.0'
+
     implementation 'com.android.support.constraint:constraint-layout:1.1.0'
     implementation('com.mapbox.mapboxsdk:mapbox-android-sdk:5.5.0@aar') {
         transitive = true
@@ -59,6 +60,7 @@ dependencies {
     testImplementation 'org.robolectric:robolectric:3.7.1'
     testImplementation 'com.nhaarman:mockito-kotlin:1.5.0'
     testImplementation 'com.squareup.okhttp3:mockwebserver:3.8.1'
+    implementation 'com.dinuscxj:circleprogressbar:1.1.1'
 
     implementation 'com.caverock:androidsvg:1.2.1'
     implementation 'com.github.bumptech.glide:glide:4.7.1'
