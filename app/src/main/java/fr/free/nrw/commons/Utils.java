@@ -112,7 +112,7 @@ public class Utils {
 
     /**
      * Fixing incorrect extension
-     * @param title     File name
+     * @param title File name
      * @param extension Correct extension
      * @return File with correct extension
      */
@@ -152,7 +152,7 @@ public class Utils {
         StringBuilder stringBuilder = new StringBuilder();
 
         try {
-            String[] command = new String[]{"logcat", "-d", "-v", "threadtime"};
+            String[] command = new String[]{"logcat","-d","-v","threadtime"};
 
             Process process = Runtime.getRuntime().exec(command);
 
@@ -177,7 +177,8 @@ public class Utils {
         final String appPackageName = BuildConfig.class.getPackage().getName();
         try {
             context.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=" + appPackageName)));
-        } catch (android.content.ActivityNotFoundException anfe) {
+        }
+        catch (android.content.ActivityNotFoundException anfe) {
             context.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=" + appPackageName)));
         }
     }

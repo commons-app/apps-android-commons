@@ -70,7 +70,6 @@ public abstract class NavigationBaseActivity extends BaseActivity
 
         View navHeaderView = navigationView.getHeaderView(0);
         TextView username = navHeaderView.findViewById(R.id.username);
-        
         AccountManager accountManager = AccountManager.get(this);
         Account[] allAccounts = accountManager.getAccountsByType(AccountUtil.ACCOUNT_TYPE);
         if (allAccounts.length != 0) {
@@ -200,7 +199,7 @@ public abstract class NavigationBaseActivity extends BaseActivity
 
     public static <T> void startActivityWithFlags(Context context, Class<T> cls, int... flags) {
         Intent intent = new Intent(context, cls);
-        for (int flag : flags) {
+        for (int flag: flags) {
             intent.addFlags(flag);
         }
         context.startActivity(intent);

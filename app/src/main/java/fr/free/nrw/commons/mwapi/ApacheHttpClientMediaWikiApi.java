@@ -238,7 +238,7 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
 
     @Override
     public boolean pageExists(String pageName) throws IOException {
-        return Double.parseDouble(api.action("query")
+        return Double.parseDouble( api.action("query")
                 .param("titles", pageName)
                 .get()
                 .getString("/api/query/pages/page/@_idx")) != -1;
