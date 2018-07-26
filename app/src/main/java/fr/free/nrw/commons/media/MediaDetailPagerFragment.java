@@ -270,7 +270,6 @@ public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment imple
     public void showImage(int i) {
         Handler handler =  new Handler();
         handler.postDelayed(() -> pager.setCurrentItem(i), 10);
-
     }
 
     @Override
