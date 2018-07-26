@@ -5,6 +5,8 @@
 * Tweety
 -->
 <resources>
+  <string name="title_activity_explore">تلاش ڪريو</string>
+  <string name="navigation_item_explore">تلاش ڪريو</string>
   <string name="preference_category_appearance">حليو</string>
   <string name="preference_category_general">عام</string>
   <string name="preference_category_feedback">پذيرائي</string>
@@ -12,6 +14,7 @@
   <string name="app_name">العام</string>
   <string name="bullet">•</string>
   <string name="menu_settings">ترتيبون</string>
+  <string name="intent_share_upload_label">ڪامنز ۾ چاڙهيو</string>
   <string name="username">واپرائيندڙ-نانءُ</string>
   <string name="password">ڳجھولفظ</string>
   <string name="login_credential">وڪي ڪامنز جي آزمائشي کاتي ۾ داخل ٿيو</string>
@@ -86,6 +89,7 @@
   <string name="title_activity_settings">ترتيبون</string>
   <string name="title_activity_signup">کاتو کوليو</string>
   <string name="title_activity_featured_images">چونڊ تصويرون</string>
+  <string name="title_activity_category_details">زمرو</string>
   <string name="menu_about">بابت</string>
   <string name="about_privacy_policy">&lt;u&gt;ذاتيات پاليسي&lt;/u&gt;</string>
   <string name="title_activity_about">بابت</string>
@@ -154,6 +158,7 @@
   <string name="location_permission_rationale">چونڊ اجازت: زمرن جي تجويزن لاءِ ھاڻوڪي مڪانيت وٺو</string>
   <string name="ok">ٺيڪ</string>
   <string name="title_activity_nearby">ويجھڙائيءَ ۾ جڳھون</string>
+  <string name="no_nearby">آپاس وارو جڳهه نه لڌو</string>
   <string name="warning">چتاءُ</string>
   <string name="file_exists">فائل اڳ ئي العام ۾ موجود آھي. ڇا توھان کي پڪ آھي تہ توھان اڳتي وڌڻ ٿا چاھيو؟</string>
   <string name="yes">ها</string>
@@ -164,6 +169,7 @@
   <string name="media_detail_author">ليکڪ</string>
   <string name="media_detail_uploaded_date">چاڙھيل تاريخ</string>
   <string name="media_detail_license">لائسنس (اجازت نامو)</string>
+  <string name="media_detail_coordinates">مڪانيت</string>
   <string name="become_a_tester_title">آزمائشي آزمائيندڙ ٿيو</string>
   <string name="number_of_uploads">منهنجي تازي چاڙهڻ (اَپلوڊ) جي حد (لِمٽ)</string>
   <string name="maximum_limit">وڌ ۾ وڌ حد (ميگزيمم لِمٽ)</string>
@@ -204,6 +210,7 @@
   <string name="login_to_your_account">پنھنجي کاتي ۾ داخل ٿيو</string>
   <string name="send_log_file">لاگ فائيل موڪليو</string>
   <string name="send_log_file_description">لاگ فائيل سرجڻھارن کي برقٽپال ذريعي موڪليو</string>
+  <string name="null_url">خلل: يو آر ايل نه لڌو</string>
   <string name="nominated_for_deletion">هن تصوير کي ڊاهڻ لاءِ مقرر ڪيو ويو آهي.</string>
   <string name="view_browser">برائوزر ۾ ڏسو</string>
   <string name="nearby_location_has_not_changed">مڪانيت تبديلي ناھي ٿي.</string>
@@ -235,7 +242,13 @@
   <string name="share_app_title">ايپ ونڊيو</string>
   <string name="appwidget_img">اڄ جي تصوير</string>
   <string name="app_widget_heading">اڄ جي تصوير</string>
+  <string name="menu_search_button">ڳوليو</string>
+  <string name="search_commons">ڪامنز ۾ ڳولا</string>
+  <string name="title_activity_search">ڳوليو</string>
+  <string name="search_recent_header">تازيون ڳولائون:</string>
+  <string name="provider_searches">تازه ڳوليل مسودا</string>
   <string name="menu_set_wallpaper">وال پيپر لڳايو</string>
   <string name="wallpaper_set_successfully">وال پيپر ڪاميابيءَ سان لڳي ويو!</string>
+  <string name="search_history_deleted">ڳولا سوانح ڊاٿي وئي</string>
   <string name="user_not_logged_in">لاگ اِن سيشن ايڪسپائير ٿي ويو آهي، مهرباني ڪري وري لاڳ اِن ٿيو.</string>
 </resources>
