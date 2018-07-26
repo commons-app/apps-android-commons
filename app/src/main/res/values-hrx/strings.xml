@@ -13,7 +13,7 @@
   <string name="logging_in_message" fuzzy="true">Bittschön woorte …</string>
   <string name="login_success">Oonmeldung erfollichreich!</string>
   <string name="login_failed">Oonmeldung fehlgeschlooht!</string>
-  <string name="authentication_failed">Authentifizierung fehlgeschlooht!</string>
+  <string name="authentication_failed" fuzzy="true">Authentifizierung fehlgeschlooht!</string>
   <string name="uploading_started">Hochloode oongefang!</string>
   <string name="upload_completed_notification_title">„%1$s“ hochgelood!</string>
   <string name="upload_completed_notification_text">Tippe mit dein Fingerspitze, um dein Upload (Ufflloodung) oonzusiehn</string>

@@ -28,6 +28,7 @@ import fr.free.nrw.commons.data.DBOpenHelper;
 import fr.free.nrw.commons.di.ApplicationlessInjection;
 import fr.free.nrw.commons.modifications.ModifierSequenceDao;
 import fr.free.nrw.commons.upload.FileUtils;
+import fr.free.nrw.commons.utils.ContributionUtils;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 import timber.log.Timber;
@@ -69,7 +70,6 @@ public class CommonsApplication extends MultiDexApplication {
     @Override
     public void onCreate() {
         super.onCreate();
-
         ApplicationlessInjection
                 .getInstance(this)
                 .getCommonsApplicationComponent()
@@ -82,6 +82,8 @@ public class CommonsApplication extends MultiDexApplication {
         if (setupLeakCanary() == RefWatcher.DISABLED) {
             return;
         }
+        // Empty temp directory in case some temp files are created and never removed.
+        ContributionUtils.emptyTemporaryDirectory();
 
         Timber.plant(new Timber.DebugTree());
 

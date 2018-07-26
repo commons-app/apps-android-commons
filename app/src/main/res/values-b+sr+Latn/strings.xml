@@ -16,7 +16,7 @@
   <string name="login_success">Uspešno ste prijavljeni.</string>
   <string name="login_failed">Prijavljivanje nije uspelo.</string>
   <string name="upload_failed">Datoteka nije pronađena. Pokušajte sa drugom datotekom.</string>
-  <string name="authentication_failed">Provera identiteta nije uspela.</string>
+  <string name="authentication_failed" fuzzy="true">Provera identiteta nije uspela.</string>
   <string name="uploading_started">Otpremanje je započeto.</string>
   <string name="upload_completed_notification_title">Datoteka „%1$s“ je otpremljena.</string>
   <string name="upload_completed_notification_text">Tapnite da biste videli otpremanje</string>
@@ -94,7 +94,7 @@
   <string name="preference_license" fuzzy="true">Licenca</string>
   <string name="use_previous">Koristi prethodan naslov/opis</string>
   <string name="allow_gps">Automatski detektuj trenutnu lokaciju</string>
-  <string name="allow_gps_summary">Primi trenutnu lokaciju da bi predložili kategoriju ako slika nije geografski označena</string>
+  <string name="allow_gps_summary" fuzzy="true">Primi trenutnu lokaciju da bi predložili kategoriju ako slika nije geografski označena</string>
   <string name="preference_theme">Noćni režim</string>
   <string name="preference_theme_summary">Koristiti tamnu temu</string>
   <string name="license_name_cc_by_sa_four">Autorstvo-Deliti pod istim uslovima 4.0</string>
