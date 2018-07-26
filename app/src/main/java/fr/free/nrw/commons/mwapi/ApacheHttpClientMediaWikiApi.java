@@ -9,8 +9,13 @@ import android.support.annotation.VisibleForTesting;
 import android.text.TextUtils;
 import android.util.Log;
 
+import com.facebook.stetho.okhttp3.StethoInterceptor;
+import com.facebook.stetho.urlconnection.StethoURLConnectionManager;
 import com.google.gson.Gson;
 
+import org.apache.http.HttpException;
+import org.apache.http.HttpRequest;
+import org.apache.http.HttpRequestInterceptor;
 import org.apache.http.HttpResponse;
 import org.apache.http.conn.ClientConnectionManager;
 import org.apache.http.conn.scheme.PlainSocketFactory;
@@ -22,6 +27,7 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.impl.conn.tsccm.ThreadSafeClientConnManager;
 import org.apache.http.params.BasicHttpParams;
 import org.apache.http.params.CoreProtocolPNames;
+import org.apache.http.protocol.HttpContext;
 import org.apache.http.util.EntityUtils;
 import org.mediawiki.api.ApiResult;
 import org.mediawiki.api.MWApi;
@@ -35,6 +41,7 @@ import java.net.URL;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
@@ -85,6 +92,7 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
         ClientConnectionManager cm = new ThreadSafeClientConnManager(params, schemeRegistry);
         params.setParameter(CoreProtocolPNames.USER_AGENT, getUserAgent());
         httpClient = new DefaultHttpClient(cm, params);
+        httpClient.addRequestInterceptor(NetworkInterceptors.getHttpRequestInterceptor());
         api = new MWApi(apiURL, httpClient);
         wikidataApi = new MWApi(wikidatApiURL, httpClient);
         this.defaultPreferences = defaultPreferences;
