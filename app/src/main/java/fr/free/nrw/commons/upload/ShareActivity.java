@@ -290,8 +290,8 @@ public class ShareActivity
         // If upload is not finalised with failure or success, but contribution is created,
         // we have to remove temp file, to prevent using unnecessary memory
         if (!isUploadFinalised) {
-            if (contribution != null) {
-                ContributionUtils.removeTemporaryFile(contribution.getLocalUri());
+            if (mediaUri != null) {
+                ContributionUtils.removeTemporaryFile(mediaUri);
             }
         }
         super.onStop();
