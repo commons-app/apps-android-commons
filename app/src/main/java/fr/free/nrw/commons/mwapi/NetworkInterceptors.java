@@ -16,6 +16,9 @@ import timber.log.Timber;
 
 public class NetworkInterceptors {
 
+    /**
+     * Interceptor to log the HTTP request
+     */
     @NonNull
     public static HttpRequestInterceptor getHttpRequestInterceptor() {
         return (HttpRequest request, HttpContext httpContext) -> {
@@ -30,6 +33,10 @@ public class NetworkInterceptors {
         };
     }
 
+    /**
+     * Log all request params from a HTTPRequest
+     * @param request
+     */
     private static void logRequestParams(HttpRequest request) {
         Set<String> names = new HashSet<>();
         if (request.getParams() instanceof ClientParamsStack) {
@@ -62,6 +69,10 @@ public class NetworkInterceptors {
         Timber.v("<<<<<<<<<<<<<< REQUEST PARAMS >>>>>>>>>>>>");
     }
 
+    /**
+     * Log all headers from a HTTPRequest
+     * @param request
+     */
     private static void logRequestHeaders(HttpRequest request) {
         Header[] headerFields = request.getAllHeaders();
 
