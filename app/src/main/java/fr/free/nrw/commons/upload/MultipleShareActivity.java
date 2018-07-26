@@ -78,8 +78,8 @@ public class MultipleShareActivity extends AuthenticatedActivity
     private CategorizationFragment categorizationFragment;
 
     private boolean locationPermitted = false;
-    private boolean multipleUploadsPrepared = false;
-    private boolean multipleUploadsFinalised = false; // Checks is user clicked to upload button or regret before this phase
+    private boolean isMultipleUploadsPrepared = false;
+    private boolean isMultipleUploadsFinalised = false; // Checks is user clicked to upload button or regret before this phase
 
     @Override
     public Media getMediaAtPosition(int i) {
@@ -174,7 +174,7 @@ public class MultipleShareActivity extends AuthenticatedActivity
         getSupportFragmentManager().beginTransaction()
                 .add(R.id.uploadsFragmentContainer, categorizationFragment, "categorization")
                 .commitAllowingStateLoss();
-        multipleUploadsFinalised = true;
+        isMultipleUploadsFinalised = true;
         //See http://stackoverflow.com/questions/7469082/getting-exception-illegalstateexception-can-not-perform-this-action-after-onsa
     }
 
@@ -257,7 +257,7 @@ public class MultipleShareActivity extends AuthenticatedActivity
         /* This will be true if permission request is granted before we request. Otherwise we will
          * explicitly call operations under this method again.
         */
-        if (multipleUploadsPrepared) {
+        if (isMultipleUploadsPrepared) {
             super.onSaveInstanceState(outState);
             Timber.d("onSaveInstanceState multiple uploads is prepared, permission granted");
             outState.putParcelableArrayList("uploadsList", photosList);
@@ -270,15 +270,15 @@ public class MultipleShareActivity extends AuthenticatedActivity
     @Override
     protected void onAuthCookieAcquired(String authCookie) {
         // Multiple uploads prepared boolean is used to decide when to call multipleUploadsBegin()
-        multipleUploadsFinalised = false;
-        multipleUploadsPrepared = false;
+        isMultipleUploadsFinalised = false;
+        isMultipleUploadsPrepared = false;
         mwApi.setAuthCookie(authCookie);
         if (!ExternalStorageUtils.isStoragePermissionGranted(this)) {
             ExternalStorageUtils.requestExternalStoragePermission(this);
-            multipleUploadsPrepared = false;
+            isMultipleUploadsPrepared = false;
             return; // Postpone operation to do after gettion permission
         } else {
-            multipleUploadsPrepared = true;
+            isMultipleUploadsPrepared = true;
             prepareMultipleUpoadList();
         }
     }
@@ -390,7 +390,7 @@ public class MultipleShareActivity extends AuthenticatedActivity
     @Override
     protected void onStop() {
         // Remove saved files if activity is stopped before upload operation, ie user changed mind
-        if (!multipleUploadsFinalised) {
+        if (!isMultipleUploadsFinalised) {
             if (photosList != null) {
                 for (Contribution contribution : photosList) {
                     Timber.d("User changed mind, didn't click to upload button, deleted file: "+contribution.getLocalUri());
