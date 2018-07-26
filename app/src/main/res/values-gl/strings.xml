@@ -110,11 +110,7 @@
   <string name="preference_license">Licenza por defecto</string>
   <string name="use_previous">Usar o título ou a descrición anterior</string>
   <string name="allow_gps">Obter automaticamente a localización actual</string>
-<<<<<<< HEAD
-  <string name="allow_gps_summary" fuzzy="true">Obter a localización actual para ofrecer suxestións de categoría se a imaxe non está xeolocalizada</string>
-=======
   <string name="allow_gps_summary">Obter a localización actual se a imaxe non está xeolocalizada, e xeolocaliza a imaxe con ela. Atención: Isto revelará a súa localización actual.</string>
->>>>>>> upstream/master
   <string name="preference_theme">Modo nocturno</string>
   <string name="preference_theme_summary">Usar tema escuro</string>
   <string name="license_name_cc_by_sa_four"> Recoñecemento-CompartirIgual 4.0</string>
@@ -280,13 +276,6 @@
   <string name="no_images_found">Non se atopou ningunha imaxeǃ</string>
   <string name="error_loading_images">Houbo un erro ó subir as imaxes.</string>
   <string name="image_uploaded_by">Subida porː %1$s</string>
-<<<<<<< HEAD
-  <string name="share_app_title">Compartir a aplicación</string>
-  <string name="share_coordinates_not_present">Non se indicaron as coordenadas ó seleccionar a imaxe</string>
-  <string name="error_fetching_nearby_places">Erro ó procurar os lugares próximos.</string>
-  <string name="menu_set_wallpaper">Definir imaxe de fondo</string>
-  <string name="wallpaper_set_successfully">A imaxe de fondo configurouse correctamenteǃ</string>
-=======
   <string name="block_notification">Está bloqueado e non pode editar en Commons</string>
   <string name="share_app_title">Compartir a aplicación</string>
   <string name="share_coordinates_not_present">Non se indicaron as coordenadas ó seleccionar a imaxe</string>
@@ -298,5 +287,4 @@
   <string name="menu_set_wallpaper">Definir imaxe de fondo</string>
   <string name="wallpaper_set_successfully">A imaxe de fondo configurouse correctamenteǃ</string>
   <string name="user_not_logged_in">A sesión caducou, por favor inicia unha nova sesión.</string>
->>>>>>> upstream/master
 </resources>

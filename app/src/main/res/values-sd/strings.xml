@@ -20,11 +20,7 @@
   <string name="password">ڳجھولفظ</string>
   <string name="login_credential">وڪي ڪامنز جي آزمائشي کاتي ۾ داخل ٿيو</string>
   <string name="login">داخل ٿيو</string>
-<<<<<<< HEAD
-  <string name="forgot_password">ڳجھو لفظ وساري ويٺا آهيو؟</string>
-=======
   <string name="forgot_password">پاسورڊ وساري ويٺا آهيو؟</string>
->>>>>>> upstream/master
   <string name="signup">کاتو کوليو</string>
   <string name="logging_in_title">داخل ٿيندي</string>
   <string name="logging_in_message">براءِ مھرباني انتظار ڪريو…</string>
@@ -59,17 +55,10 @@
   <string name="add_title_toast">هن فائيل لاءِ ڪا سُرخي ڏيو</string>
   <string name="share_description_hint">تشريح</string>
   <string name="login_failed_network">ناقابلِ داخل ٿيڻ - باھمڄار ناڪامي</string>
-<<<<<<< HEAD
-  <string name="login_failed_wrong_credentials">داخل نه ٿيا آهيو - مهرباني ڪري ڳجهو لفظ ۽ کاتي جو نالو چيڪ ڪيو</string>
-  <string name="login_failed_throttled">ھيڪانديون ناڪام ڪوششون. براءِ مھرباني ڪجھ منٽن کانپوءِ ٻيھر ڪوشش ڪريو.</string>
-  <string name="login_failed_blocked">افسوس، ھي واپرائيندڙ العام تي بندشيل آھي</string>
-  <string name="login_failed_2fa_needed">اوهان هر صورت ۾ ٻن عنصرن واري تصديق جو ڪوڊ ڏيو.</string>
-=======
   <string name="login_failed_wrong_credentials">داخل نه ٿيا آهيو - مهرباني ڪري پاسورڊ ۽ کاتي جو نالو چيڪ ڪيو</string>
   <string name="login_failed_throttled">ھيڪانديون ناڪام ڪوششون. براءِ مھرباني ڪجھ منٽن کانپوءِ ٻيھر ڪوشش ڪريو.</string>
   <string name="login_failed_blocked">افسوس، ھي واپرائيندڙ العام تي بندشيل آھي</string>
   <string name="login_failed_2fa_needed">اوهان هر صورت ۾ پنهنجو ٻن عنصرن وارو تصديقي ڪوڊ ڏيو.</string>
->>>>>>> upstream/master
   <string name="login_failed_generic">داخل ٿيڻ ناڪام</string>
   <string name="share_upload_button">چاڙھيو</string>
   <string name="multiple_share_base_title">ھن سيٽ کي نالو ڏيو</string>
@@ -79,11 +68,7 @@
   <string name="menu_save_categories">سانڍيو</string>
   <string name="refresh_button">تازو ڪيو</string>
   <string name="display_list_button">فهرست</string>
-<<<<<<< HEAD
-  <string name="gps_disabled">اوهان جي ڊوائيس ۾ جي پي ايس بند آهي. اوهان کولڻ چاهيو ٿا؟</string>
-=======
   <string name="gps_disabled">اوهان جي ڊوائيس ۾ جي پي ايس بند آهي. ڇا اوهان ان کي کولڻ چاهيو ٿا؟</string>
->>>>>>> upstream/master
   <string name="enable_gps">جي پي ايس چالو ڪيو (اين ايبل جي پي ايس)</string>
   <string name="contributions_subtitle_zero">اڃان تائين ڪو به ڄاڙهه (اَپلوڊ) نه ٿيو آهي</string>
   <plurals name="contributions_subtitle">
@@ -105,10 +90,7 @@
   <string name="title_activity_settings">ترتيبون</string>
   <string name="title_activity_signup">کاتو کوليو</string>
   <string name="title_activity_featured_images">چونڊ تصويرون</string>
-<<<<<<< HEAD
-=======
   <string name="title_activity_category_details">زمرو</string>
->>>>>>> upstream/master
   <string name="menu_about">بابت</string>
   <string name="about_privacy_policy">&lt;u&gt;ذاتيات پاليسي&lt;/u&gt;</string>
   <string name="title_activity_about">بابت</string>
@@ -156,11 +138,7 @@
   <string name="tutorial_2_subtext_3">مشھور شخصيتون (توھان جو ناظم، اولمپڪ رانديگر جنھن سان توھان مليو)</string>
   <string name="tutorial_3_text">براءِ مھرباني نہ چاڙھيو:</string>
   <string name="tutorial_3_subtext">u2022 سيلفيون يا پنھنجي دوستن جو تصويرون \nu2022 اھي تصويرون جيڪي توھان انٽرنيٽ تان ڊائونلوڊ ڪيون \nu2022 پروپرائيٽري ايپس جا اسڪرين شاٽ</string>
-<<<<<<< HEAD
-  <string name="tutorial_3_subtext_1">سيلفي يا اوهان جي دوست جي تصوير</string>
-=======
   <string name="tutorial_3_subtext_1">پاڻفي يا اوهان جي دوستن جون تصويرون</string>
->>>>>>> upstream/master
   <string name="tutorial_3_subtext_2">انٽرنيٽ تان کنيل تصويرون</string>
   <string name="tutorial_4_text">مثال چاڙھ:</string>
   <string name="tutorial_4_subtext">- عنوان: سڊني اوپيرا گھر \n- تشريح: سڊني اوپيرا گھر نھر جي پاسي کان ڏيک \n- زمرا: سڊني اوپيرا گھر، سڊني اوپيرا گھر اولھ کان، سڊني اوپيرا گھر ڏورانھان ڏيک</string>
@@ -233,12 +211,8 @@
   <string name="login_to_your_account">پنھنجي کاتي ۾ داخل ٿيو</string>
   <string name="send_log_file">لاگ فائيل موڪليو</string>
   <string name="send_log_file_description">لاگ فائيل سرجڻھارن کي برقٽپال ذريعي موڪليو</string>
-<<<<<<< HEAD
-  <string name="nominated_for_deletion">تصوير مٽائڻ لاءِ نامزد ڪئي وئي آهي.</string>
-=======
   <string name="null_url">خلل: يو آر ايل نه لڌو</string>
   <string name="nominated_for_deletion">هن تصوير کي ڊاهڻ لاءِ مقرر ڪيو ويو آهي.</string>
->>>>>>> upstream/master
   <string name="view_browser">برائوزر ۾ ڏسو</string>
   <string name="nearby_location_has_not_changed">مڪانيت تبديلي ناھي ٿي.</string>
   <string name="nearby_location_not_available">مڪانيت موجود ناھي.</string>
@@ -246,13 +220,6 @@
   <string name="get_directions">ھدايتون وٺو</string>
   <string name="read_article">مضمون پڙھو</string>
   <string name="notifications_welcome">وڪيپيڊيا ڪامنز ۾ ڀليڪار، %1$s! اسان کي خوشي آهي ته اوهان هتي آهيو</string>
-<<<<<<< HEAD
-  <string name="notifications_talk_page_message">%1$s اوهان جي بحث صفحي تي پيغام ڇڏيو آهي.</string>
-  <string name="notifications_thank_you_edit">سنوارڻ لاءِ مهرباني</string>
-  <string name="notifications_mention">%1$s اوهان جو %2$s تي ذڪر ڪيو آهي.</string>
-  <string name="nearby_directions">طرف</string>
-  <string name="nearby_wikipedia">وڪيپيڊيا</string>
-=======
   <string name="notifications_talk_page_message">%1$s اوهان جي بحث واري صفحي تي پيغام ڇڏيو آهي.</string>
   <string name="notifications_thank_you_edit">سنوارڻ لاءِ مهرباني</string>
   <string name="notifications_mention">%1$s اوهان جو %2$s تي ذڪر ڪيو آهي.</string>
@@ -260,7 +227,6 @@
   <string name="nearby_wikidata">وڪيڊيٽا</string>
   <string name="nearby_wikipedia">وڪيپيڊيا</string>
   <string name="nearby_commons">ڪامنز</string>
->>>>>>> upstream/master
   <string name="about_rate_us">&lt;u&gt;پذيرائي ڏيو&lt;/u&gt;</string>
   <string name="about_faq">&lt;u&gt;عام سوال&lt;/u&gt;</string>
   <string name="welcome_skip_button">سبق کي ڇڏيو</string>
@@ -269,13 +235,6 @@
   <string name="about_translate">&lt;u&gt;ترجمو&lt;/u&gt;</string>
   <string name="about_translate_title">ٻوليون</string>
   <string name="about_translate_cancel">رد</string>
-<<<<<<< HEAD
-  <string name="showcase_view_got_it_button">سمجھي ويس!</string>
-  <string name="no_images_found">ڪوبہ عڪس نہ لڌو!</string>
-  <string name="share_app_title">ايپ ونڊيو</string>
-  <string name="appwidget_img">اڄ جي تصوير</string>
-  <string name="app_widget_heading">اڄ جي تصوير</string>
-=======
   <string name="retry">ٻيهر ڪوشش ڪريو</string>
   <string name="showcase_view_got_it_button">سمجھي ويس!</string>
   <string name="no_images_found">ڪوبہ عڪس نہ لڌو!</string>
@@ -293,5 +252,4 @@
   <string name="wallpaper_set_successfully">وال پيپر ڪاميابيءَ سان لڳي ويو!</string>
   <string name="search_history_deleted">ڳولا سوانح ڊاٿي وئي</string>
   <string name="user_not_logged_in">لاگ اِن سيشن ايڪسپائير ٿي ويو آهي، مهرباني ڪري وري لاڳ اِن ٿيو.</string>
->>>>>>> upstream/master
 </resources>

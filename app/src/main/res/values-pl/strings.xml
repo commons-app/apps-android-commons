@@ -241,14 +241,11 @@
   <string name="no_images_found">Nie znaleziono grafik!</string>
   <string name="error_loading_images">Wystąpił błąd podczas ładowania grafik.</string>
   <string name="image_uploaded_by">Przesłano przez $1</string>
-<<<<<<< HEAD
-=======
   <string name="menu_search_button">Szukaj</string>
   <string name="search_recent_header">Ostatnie wyszukiwania:</string>
   <string name="provider_searches">Ostatnio wyszukiwane zapytania</string>
   <string name="error_loading_categories">Wystąpił błąd podczas ładowania kategorii.</string>
   <string name="error_loading_subcategories">Wystąpił błąd podczas ładowania podkategorii.</string>
->>>>>>> upstream/master
   <string name="menu_set_wallpaper">Ustaw tapetę</string>
   <string name="wallpaper_set_successfully">Tapeta ustawiona pomyślnie!</string>
   <string name="delete_recent_searches_dialog">Czy na pewno chcesz usunąć swoją historię wyszukiwania?</string>
