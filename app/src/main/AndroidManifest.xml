@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="fr.free.nrw.commons">
 
@@ -108,8 +109,11 @@
             android:parentActivityName=".contributions.ContributionsActivity"
             />
 
-        <service android:name=".upload.UploadService" />
+        <activity
+            android:name=".achievements.AchievementsActivity"
+            android:label="@string/Achievements" />
 
+        <service android:name=".upload.UploadService" />
         <service
             android:name=".auth.WikiAccountAuthenticatorService"
             android:exported="true"
