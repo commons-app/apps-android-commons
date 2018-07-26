@@ -145,6 +145,8 @@ public class ShareActivity
     private boolean isFABOpen = false;
     private float startScaleFinal;
     private Bundle savedInstanceState;
+    private boolean isUploadFinalised = false; // Checks is user clicked to upload button or regret before this phase
+
 
     /**
      * Called when user taps the submit button.
@@ -202,6 +204,7 @@ public class ShareActivity
             ShareActivity.this.contribution = c;
             showPostUpload();
         });
+        isUploadFinalised = true;
     }
 
     /**
@@ -262,7 +265,7 @@ public class ShareActivity
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        isUploadFinalised = false;
         setContentView(R.layout.activity_share);
         ButterKnife.bind(this);
         initBack();
@@ -274,21 +277,26 @@ public class ShareActivity
                         R.drawable.ic_error_outline_black_24dp, getTheme()))
                 .build());
         if (!ExternalStorageUtils.isStoragePermissionGranted(this)) {
-            savedInstanceState = this.savedInstanceState;
+            this.savedInstanceState = savedInstanceState;
             ExternalStorageUtils.requestExternalStoragePermission(this);
             return; // Postpone operation to do after getting permission
         } else {
             receiveImageIntent();
             createContributionWithReceivedIntent(savedInstanceState);
         }
-
-        /*receiveImageIntent();
-
-        createContributionWithReceivedIntent(savedInstanceState);*/
-
     }
 
-
+    @Override
+    protected void onStop() {
+        // If upload is not finalised with failure or success, but contribution is created,
+        // we have to remove temp file, to prevent using unnecessary memory
+        if (!isUploadFinalised) {
+            if (contribution != null) {
+                ContributionUtils.removeTemporaryFile(contribution.getLocalUri());
+            }
+        }
+        super.onStop();
+    }
 
     private void createContributionWithReceivedIntent(Bundle savedInstanceState) {
         if (savedInstanceState != null) {
