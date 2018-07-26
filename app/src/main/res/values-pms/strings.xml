@@ -3,6 +3,8 @@
 * Borichèt
 -->
 <resources>
+  <string name="title_activity_explore">Esploré</string>
+  <string name="navigation_item_explore">Esploré</string>
   <string name="preference_category_appearance">Aparensa</string>
   <string name="preference_category_general">General</string>
   <string name="preference_category_feedback">Sugeriment</string>
@@ -10,6 +12,7 @@
   <string name="app_name">Comun</string>
   <string name="bullet">•</string>
   <string name="menu_settings">Paràmeter</string>
+  <string name="intent_share_upload_label">Carié su Commons</string>
   <string name="username">Stranòm</string>
   <string name="password">Ciav</string>
   <string name="login_credential">Ch\'a intra an sò cont Comun beta</string>
@@ -84,6 +87,7 @@
   <string name="title_activity_settings">Paràmeter</string>
   <string name="title_activity_signup">Marchesse</string>
   <string name="title_activity_featured_images">Plance an evidensa</string>
+  <string name="title_activity_category_details">Categorìa</string>
   <string name="menu_about">A propòsit</string>
   <string name="about_license">L\'aplicassion Wikimedia Commons a l\'é n\'aplicassion a sorgiss duverta creà e mantnùa da \'d përson-e pagà e da \'d volontari ëd la comunità Wikimedia. La Fondassion Wikimedia a l\'é nen amplicà ant la creassion, ël dësvlup, o la manutension dl\'aplicassion.</string>
   <string name="about_improve">Creé na neuva &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;signalassion GitHub&lt;/a&gt; për signalé dij givo e dij sugeriment.</string>
@@ -191,6 +195,8 @@
   <string name="background_image">Plancia dë sfond</string>
   <string name="mediaimage_failed">Faliment ëd la plancia dël mojen</string>
   <string name="no_image_found">Gnun-a plancia trovà</string>
+  <string name="no_subcategory_found">Gnun-e sot-categorìe trovà</string>
+  <string name="no_parentcategory_found">Gnun-é categorìe ce trovà</string>
   <string name="upload_image">Carié na plancia</string>
   <string name="welcome_image_mount_zao">Mont Zao</string>
   <string name="welcome_image_llamas">Lama</string>
@@ -269,13 +275,25 @@
   <string name="no_images_found">Gnun-e plance trovà!</string>
   <string name="error_loading_images">A-i é staje n\'eror durant ël cariament ëd le plance.</string>
   <string name="image_uploaded_by">Carià da: %1$s</string>
+  <string name="block_notification">Chiel a l\'é stàit blocà e a peul pa modifiché su Commons</string>
   <string name="share_app_title">Partagé j\'aplicassion</string>
   <string name="share_coordinates_not_present">Le coordinà a son nen ëstàite spessificà durant la selession ëd la plancia</string>
   <string name="error_fetching_nearby_places">Eror durant l\'esplorassion dj\'anviron.</string>
   <string name="appwidget_img">Plancia dël di</string>
   <string name="app_widget_heading">Plancia dël di</string>
+  <string name="menu_search_button">Arserché</string>
+  <string name="search_commons">Arserché su Commons</string>
+  <string name="images_not_found">Gnun-e plance rëspondente a %1$s trovà</string>
+  <string name="title_activity_search">Arserché</string>
+  <string name="search_recent_header">Arserche recente:</string>
+  <string name="provider_searches">Domande arsercà ëd recent</string>
+  <string name="error_loading_categories">A l\'é ancapitaje n\'eror antramentre ch\'as cariavo le categorìe.</string>
+  <string name="error_loading_subcategories">A l\'é ancapitaje n\'eror antrametre ch\'as cariavo le sot-categorìe.</string>
   <string name="successful_wikidata_edit">Plancia giontà për da bin a %1$s su Wikidata!</string>
   <string name="wikidata_edit_failure">Falì a agiorné l\'entità ëd Wikidata corëspondenta!</string>
   <string name="menu_set_wallpaper">Definì la tapissarìa</string>
   <string name="wallpaper_set_successfully">La tapissarìa a l\'é stàita definìa për da bin!</string>
+  <string name="delete_recent_searches_dialog">É-lo sigur ëd vorèj dëscancelé lë stòrich ëd soe arserche?</string>
+  <string name="search_history_deleted">Lë stòrich ëd j\'arserche a l\'é stàit dëscancelà</string>
+  <string name="user_not_logged_in">Session ëscadùa, për piasì ch\'a rintra torna ant ël sistema.</string>
 </resources>

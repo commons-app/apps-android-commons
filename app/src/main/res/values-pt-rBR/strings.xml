@@ -15,6 +15,8 @@
 * Tuliouel
 -->
 <resources>
+  <string name="title_activity_explore">Explorar</string>
+  <string name="navigation_item_explore">Explorar</string>
   <string name="preference_category_appearance">Aparência</string>
   <string name="preference_category_general">Geral</string>
   <string name="preference_category_feedback">Comentário</string>
@@ -22,6 +24,7 @@
   <string name="app_name">Commons</string>
   <string name="bullet">•</string>
   <string name="menu_settings">Configurações</string>
+  <string name="intent_share_upload_label">Carregar no Commons</string>
   <string name="username">Nome de usuário</string>
   <string name="password">Senha</string>
   <string name="login_credential">Entre com a sua conta do Commons Beta</string>
@@ -96,6 +99,7 @@
   <string name="title_activity_settings">Configurações</string>
   <string name="title_activity_signup">Criar conta</string>
   <string name="title_activity_featured_images">Imagens destacadas</string>
+  <string name="title_activity_category_details">Categoria</string>
   <string name="menu_about">Sobre</string>
   <string name="about_license">O Wikimedia Commons é um aplicativo de código aberto criado e mantido por beneficiários e voluntários da comunidade Wikimedia. A Wikimedia Foundation não está envolvida na criação, desenvolvimento ou manutenção do aplicativo.</string>
   <string name="about_improve">Criar uma nova &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;publicação no GitHub&lt;/a&gt; para informar erros e sugestões.</string>
@@ -203,6 +207,8 @@
   <string name="background_image">Imagem de fundo</string>
   <string name="mediaimage_failed">Falha na imagem de mídia</string>
   <string name="no_image_found">Nenhuma imagem encontrada</string>
+  <string name="no_subcategory_found">Nenhuma subcategoria encontrada</string>
+  <string name="no_parentcategory_found">Nenhuma categoria pai encontrada</string>
   <string name="upload_image">Enviar Imagem</string>
   <string name="welcome_image_mount_zao">Mount Zao</string>
   <string name="welcome_image_llamas">Llamas</string>
@@ -281,13 +287,25 @@
   <string name="no_images_found">Não foi encontrada nenhuma imagem!</string>
   <string name="error_loading_images">Ocorreu um erro durante o carregamento das imagens.</string>
   <string name="image_uploaded_by">Carregada por: %1$s</string>
+  <string name="block_notification">Está impedido de editar no Commons</string>
   <string name="share_app_title">Compartilhar o aplicativo</string>
   <string name="share_coordinates_not_present">Não foram especificadas coordenadas durante a seleção da imagem</string>
   <string name="error_fetching_nearby_places">Erro ao buscar lugares próximos.</string>
   <string name="appwidget_img">Imagem do Dia</string>
   <string name="app_widget_heading">Imagem do Dia</string>
+  <string name="menu_search_button">Pesquisar</string>
+  <string name="search_commons">Pesquisar Commons</string>
+  <string name="images_not_found">Nenhuma imagem correspondente %1$s encontrada</string>
+  <string name="title_activity_search">Pesquisar</string>
+  <string name="search_recent_header">Pesquisas recentes:</string>
+  <string name="provider_searches">Consultas recentemente pesquisadas</string>
+  <string name="error_loading_categories">Ocorreu um erro ao carregar categorias.</string>
+  <string name="error_loading_subcategories">Ocorreu um erro ao carregar subcategorias.</string>
   <string name="successful_wikidata_edit">Imagem adicionada a %1$s na wiki Wikidata!</string>
   <string name="wikidata_edit_failure">Falha ao atualizar a entidade Wikidata correspondente!</string>
   <string name="menu_set_wallpaper">Definir imagem de fundo</string>
   <string name="wallpaper_set_successfully">Imagem de fundo definida!</string>
+  <string name="delete_recent_searches_dialog">Tem certeza de que deseja apagar o histórico de pesquisa?</string>
+  <string name="search_history_deleted">Histórico de pesquisa excluído</string>
+  <string name="user_not_logged_in">A sessão expirou. Inicie uma nova sessão, por favor.</string>
 </resources>

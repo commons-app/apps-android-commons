@@ -3,6 +3,8 @@
 * Bjankuloski06
 -->
 <resources>
+  <string name="title_activity_explore">Истражи</string>
+  <string name="navigation_item_explore">Истражи</string>
   <string name="preference_category_appearance">Изглед</string>
   <string name="preference_category_general">Општи</string>
   <string name="preference_category_feedback">Мислења</string>
@@ -10,6 +12,7 @@
   <string name="app_name">Ризница</string>
   <string name="bullet">•</string>
   <string name="menu_settings">Поставки</string>
+  <string name="intent_share_upload_label">Подигни на Ризницата</string>
   <string name="username">Корисничко име</string>
   <string name="password">Лозинка</string>
   <string name="login_credential">Најавете се на бета-сметката</string>
@@ -84,6 +87,7 @@
   <string name="title_activity_settings">Нагодувања</string>
   <string name="title_activity_signup">Регистрација</string>
   <string name="title_activity_featured_images">Избрани слики</string>
+  <string name="title_activity_category_details">Категорија</string>
   <string name="menu_about">За извршникот</string>
   <string name="about_license">Прилогот на Ризницата има отворен код. Негови творци и одржувачи се примателите на наменските средства од Викимедиината заедница како и членовите на заедницата. Фондацијата Викимедија нема учество во нејзиното создавање, разработка и одржување.</string>
   <string name="about_improve">Создајте нов &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;проблем на GitHub&lt;/a&gt; за пријавување на грешки и давање предлози.</string>
@@ -191,6 +195,8 @@
   <string name="background_image">Заднинска слика</string>
   <string name="mediaimage_failed">Сликата не успеа</string>
   <string name="no_image_found">Не најдов слики</string>
+  <string name="no_subcategory_found">Не пронајдов поткатегории</string>
+  <string name="no_parentcategory_found">Не пронајдов матични категории</string>
   <string name="upload_image">Подигни слика</string>
   <string name="welcome_image_mount_zao">Зао</string>
   <string name="welcome_image_llamas">Лами</string>
@@ -269,14 +275,25 @@
   <string name="no_images_found">Не пронајдов ниедна слика!</string>
   <string name="error_loading_images">Се појави грешка при вчитувањето на сликите.</string>
   <string name="image_uploaded_by">Подигач: %1$s</string>
+  <string name="block_notification">Спречени сте да ја уредувате Ризницата</string>
   <string name="share_app_title">Сподели прилог</string>
   <string name="share_coordinates_not_present">Не беа укажани координати при изборот на сликата</string>
   <string name="error_fetching_nearby_places">Грешка при добивањето на околните места.</string>
   <string name="appwidget_img">Слика на денот</string>
   <string name="app_widget_heading">Слика на денот</string>
+  <string name="menu_search_button">Пребарај</string>
+  <string name="search_commons">Пребарај по Ризницата</string>
+  <string name="images_not_found">Нема слики што одговараат на %1$s</string>
+  <string name="title_activity_search">Пребарај</string>
+  <string name="search_recent_header">Скорешни пребарувања:</string>
+  <string name="provider_searches">Скорешни пребарувања</string>
+  <string name="error_loading_categories">Се јави грешка при вчитувањето на категориите.</string>
+  <string name="error_loading_subcategories">Се јави грешка при вчитувањето на поткатегориите.</string>
   <string name="successful_wikidata_edit">Сликата е успешно додадена кон %1$s на Википодатоците!</string>
   <string name="wikidata_edit_failure">Не успеав да ја изменам соодветната единица на Википодатоците!</string>
   <string name="menu_set_wallpaper">Задај позадина</string>
   <string name="wallpaper_set_successfully">Позадината е успешно зададена!</string>
+  <string name="delete_recent_searches_dialog">Дали сте сигурни дека сакате да ја избришете историјата на пребарувања?</string>
+  <string name="search_history_deleted">Историјата на пребарување е избришана</string>
   <string name="user_not_logged_in">Најавната седница истече. Најавете се повторно.</string>
 </resources>

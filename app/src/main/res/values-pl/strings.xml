@@ -95,6 +95,7 @@
   <string name="title_activity_settings">Ustawienia</string>
   <string name="title_activity_signup">Zarejestruj się</string>
   <string name="title_activity_featured_images">Wyróżniony obrazek</string>
+  <string name="title_activity_category_details">Kategoria</string>
   <string name="menu_about">O aplikacji</string>
   <string name="about_license">Aplikacja Wikimedia Commons jest oprogramowaniem typu open-source tworzonym i rozwijanym przez stypendystów i wolontariuszy ze społeczności Wikimedii. Fundacja Wikimedia nie bierze udziału w tworzeniu, rozwijaniu ani utrzymywaniu aplikacji.</string>
   <string name="about_improve" fuzzy="true">&lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;Kod źródłowy&lt;/a&gt; oraz &lt;a href=\"https://commons-app.github.io/\"&gt;strona internetowa&lt;/a&gt; na GitHub. Aby zgłosić błąd lub sugestię, utwórz nowe &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;zgłoszenie na GitHub&lt;/a&gt;.</string>
@@ -187,6 +188,8 @@
   <string name="logout_verification">Czy na pewno wylogować?</string>
   <string name="commons_logo">Logo Commons</string>
   <string name="background_image">Obraz w tle</string>
+  <string name="no_subcategory_found">Nie znaleziono podkategorii</string>
+  <string name="no_parentcategory_found">Nie znaleziono kategorii nadrzędnych</string>
   <string name="upload_image">Załaduj zdjęcie</string>
   <string name="welcome_image_mount_zao">Zaō</string>
   <string name="welcome_image_llamas">Lamy</string>
@@ -238,6 +241,16 @@
   <string name="no_images_found">Nie znaleziono grafik!</string>
   <string name="error_loading_images">Wystąpił błąd podczas ładowania grafik.</string>
   <string name="image_uploaded_by">Przesłano przez $1</string>
+<<<<<<< HEAD
+=======
+  <string name="menu_search_button">Szukaj</string>
+  <string name="search_recent_header">Ostatnie wyszukiwania:</string>
+  <string name="provider_searches">Ostatnio wyszukiwane zapytania</string>
+  <string name="error_loading_categories">Wystąpił błąd podczas ładowania kategorii.</string>
+  <string name="error_loading_subcategories">Wystąpił błąd podczas ładowania podkategorii.</string>
+>>>>>>> upstream/master
   <string name="menu_set_wallpaper">Ustaw tapetę</string>
   <string name="wallpaper_set_successfully">Tapeta ustawiona pomyślnie!</string>
+  <string name="delete_recent_searches_dialog">Czy na pewno chcesz usunąć swoją historię wyszukiwania?</string>
+  <string name="search_history_deleted">Historia wyszukiwania została usunięta</string>
 </resources>

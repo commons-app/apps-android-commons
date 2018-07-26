@@ -42,6 +42,18 @@ public class GridViewAdapter extends ArrayAdapter {
         notifyDataSetChanged();
     }
 
+    /**
+     * Check the first item in the new list with old list and returns true if they are same
+     * Its triggered on successful response of the fetch images API.
+     * @param images
+     */
+    public boolean containsAll(List<Media> images){
+        if (data == null) {
+            data = new ArrayList<>();
+        }
+        return images.get(0).getFilename().equals(data.get(0).getFilename());
+    }
+
     @Override
     public boolean isEmpty() {
         return data == null || data.isEmpty();
@@ -66,7 +78,7 @@ public class GridViewAdapter extends ArrayAdapter {
         MediaWikiImageView imageView = convertView.findViewById(R.id.categoryImageView);
         TextView fileName = convertView.findViewById(R.id.categoryImageTitle);
         TextView author = convertView.findViewById(R.id.categoryImageAuthor);
-        fileName.setText(item.getFilename());
+        fileName.setText(item.getDisplayTitle());
         setAuthorView(item, author);
         imageView.setMedia(item);
         return convertView;

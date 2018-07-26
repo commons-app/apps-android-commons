@@ -7,9 +7,12 @@
 * Liuxinyu970226
 * Qiyue2001
 * Shizhao
+* Wxyveronica
 * Yfdyh000
 -->
 <resources>
+  <string name="title_activity_explore">探索</string>
+  <string name="navigation_item_explore">探索</string>
   <string name="preference_category_appearance">外观</string>
   <string name="preference_category_general">常规</string>
   <string name="preference_category_feedback">反馈</string>
@@ -91,6 +94,7 @@
   <string name="title_activity_settings">设置</string>
   <string name="title_activity_signup">注册</string>
   <string name="title_activity_featured_images">特色图片</string>
+  <string name="title_activity_category_details">类别</string>
   <string name="menu_about">关于</string>
   <string name="about_license">维基共享资源应用程序是由维基媒体社区的受助者和志愿者创建和维护的开源应用程序。维基媒体基金会不参与该应用程序的创立，开发或维护。</string>
   <string name="about_improve">创建新的&lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;GitHub问题&lt;/a&gt;以发送错误报告和建议。</string>
@@ -198,6 +202,8 @@
   <string name="background_image">背景图片</string>
   <string name="mediaimage_failed">媒体图片失败</string>
   <string name="no_image_found">找不到图片</string>
+  <string name="no_subcategory_found">找不到子类别</string>
+  <string name="no_parentcategory_found">找不到父分类</string>
   <string name="upload_image">上传图片</string>
   <string name="welcome_image_mount_zao">藏王连峰</string>
   <string name="welcome_image_llamas">大羊驼</string>
@@ -281,8 +287,14 @@
   <string name="error_fetching_nearby_places">检索附近地点时出错。</string>
   <string name="appwidget_img">每日图片</string>
   <string name="app_widget_heading">每日图片</string>
+  <string name="menu_search_button">搜索</string>
+  <string name="images_not_found">找不到匹配%1$s的图片</string>
+  <string name="title_activity_search">搜索</string>
+  <string name="error_loading_subcategories">加载子类别时发生错误。</string>
   <string name="successful_wikidata_edit">图片已成功添加到维基数据上的%1$s！</string>
   <string name="wikidata_edit_failure">更新对应维基数据实体失败！</string>
   <string name="menu_set_wallpaper">设置墙纸</string>
   <string name="wallpaper_set_successfully">墙纸已成功设置！</string>
+  <string name="delete_recent_searches_dialog">您确认要清除您的搜索历史？</string>
+  <string name="user_not_logged_in">登录会话已过期，请重新登录。</string>
 </resources>

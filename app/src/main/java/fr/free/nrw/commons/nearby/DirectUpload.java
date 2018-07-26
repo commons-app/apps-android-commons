@@ -1,6 +1,5 @@
 package fr.free.nrw.commons.nearby;
 
-import android.content.SharedPreferences;
 import android.os.Build;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;

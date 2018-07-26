@@ -12,6 +12,8 @@
 * 烈羽
 -->
 <resources>
+  <string name="title_activity_explore">探索</string>
+  <string name="navigation_item_explore">探索</string>
   <string name="preference_category_appearance">外觀</string>
   <string name="preference_category_general">一般</string>
   <string name="preference_category_feedback">意見回饋</string>
@@ -19,6 +21,7 @@
   <string name="app_name">共享資源</string>
   <string name="bullet">•</string>
   <string name="menu_settings">設定</string>
+  <string name="intent_share_upload_label">上傳至共享資源</string>
   <string name="username">使用者名稱</string>
   <string name="password">密碼</string>
   <string name="login_credential">登入您的維基共享資源測試版帳號</string>
@@ -93,6 +96,7 @@
   <string name="title_activity_settings">設定</string>
   <string name="title_activity_signup">註冊</string>
   <string name="title_activity_featured_images">特色圖片</string>
+  <string name="title_activity_category_details">分類</string>
   <string name="menu_about">關於</string>
   <string name="about_license">維基共享資源應用程式是透過維基媒體社群上的受讓人，與志願者們所建立及維護的開放原始碼應用程式。維基媒體基金會並不涉及此應用程式的建立、開發，與維護方面。</string>
   <string name="about_improve">建立新的&lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt; GitHub 問題&lt;/a&gt;來回報程式錯誤和提出建議。</string>
@@ -201,6 +205,8 @@
   <string name="background_image">背景圖片</string>
   <string name="mediaimage_failed">媒體圖片失敗</string>
   <string name="no_image_found">找不到圖片</string>
+  <string name="no_subcategory_found">找不到子分類</string>
+  <string name="no_parentcategory_found">找不到父分類</string>
   <string name="upload_image">上傳圖片</string>
   <string name="welcome_image_mount_zao">藏王連峰</string>
   <string name="welcome_image_llamas">大羊駝</string>
@@ -280,14 +286,25 @@
   <string name="no_images_found">找不到圖片！</string>
   <string name="error_loading_images">當載入圖片時發生錯誤。</string>
   <string name="image_uploaded_by">由：%1$s 上傳</string>
+  <string name="block_notification">您被禁止編輯共享資源</string>
   <string name="share_app_title">分享應用程式</string>
   <string name="share_coordinates_not_present">當選擇圖片時未指定座標</string>
   <string name="error_fetching_nearby_places">索取附近地點時出錯。</string>
   <string name="appwidget_img">每日圖片</string>
   <string name="app_widget_heading">每日圖片</string>
+  <string name="menu_search_button">搜尋</string>
+  <string name="search_commons">搜尋共享資源</string>
+  <string name="images_not_found">找不到符合%1$s的圖片</string>
+  <string name="title_activity_search">搜尋</string>
+  <string name="search_recent_header">近期搜尋：</string>
+  <string name="provider_searches">近期搜尋查詢</string>
+  <string name="error_loading_categories">當載入分類時發生錯誤。</string>
+  <string name="error_loading_subcategories">當載入子分類時發生錯誤。</string>
   <string name="successful_wikidata_edit">圖片已成功添加到維基數據上的 %1$s！</string>
   <string name="wikidata_edit_failure">更新所對應的維基數據項目失敗！</string>
   <string name="menu_set_wallpaper">設定桌布</string>
   <string name="wallpaper_set_successfully">桌布設定成功！</string>
+  <string name="delete_recent_searches_dialog">確定要清除搜尋歷史嗎？</string>
+  <string name="search_history_deleted">搜尋歷史已刪除</string>
   <string name="user_not_logged_in">登入用 session 逾期，請重新登入。</string>
 </resources>

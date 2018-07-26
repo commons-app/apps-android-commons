@@ -24,6 +24,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.graphics.drawable.VectorDrawableCompat;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
+import android.view.KeyEvent;
 
 import android.view.MenuItem;
 import android.view.View;
@@ -35,8 +36,6 @@ import com.facebook.drawee.generic.GenericDraweeHierarchyBuilder;
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.github.chrisbanes.photoview.PhotoView;
 
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
@@ -51,6 +50,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.auth.AuthenticatedActivity;
+import fr.free.nrw.commons.auth.LoginActivity;
 import fr.free.nrw.commons.auth.SessionManager;
 import fr.free.nrw.commons.caching.CacheController;
 import fr.free.nrw.commons.category.CategorizationFragment;
@@ -144,28 +144,40 @@ public class ShareActivity
     private float startScaleFinal;
     private Bundle savedInstanceState;
     private boolean isUploadFinalised = false; // Checks is user clicked to upload button or regret before this phase
-
+    private boolean isZoom = false;
 
 
     /**
      * Called when user taps the submit button.
      * Requests Storage permission, if needed.
      */
+
     @Override
     public void uploadActionInitiated(String title, String description) {
 
         this.title = title;
         this.description = description;
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            if (needsToRequestStoragePermission()) {
-                requestPermissions(new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},
-                        REQUEST_PERM_ON_SUBMIT_STORAGE);
+
+        if (sessionManager.getCurrentAccount() != null) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                // Check for Storage permission that is required for upload.
+                // Do not allow user to proceed without permission, otherwise will crash
+                if (needsToRequestStoragePermission()) {
+                    requestPermissions(new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},
+                            REQUEST_PERM_ON_SUBMIT_STORAGE);
+                } else {
+                    uploadBegins();
+                }
             } else {
                 uploadBegins();
             }
-        } else {
-            uploadBegins();
+        }
+        else  //Send user to login activity
+        {
+            Toast.makeText(this, "You need to login first!", Toast.LENGTH_SHORT).show();
+            Intent loginIntent = new Intent(ShareActivity.this, LoginActivity.class);
+            startActivity(loginIntent);
         }
     }
 
@@ -183,10 +195,12 @@ public class ShareActivity
         //return false;
     }
 
+
     /**
      * Called after permission checks are done.
      * Gets file metadata for category suggestions, displays toast, caches categories found, calls uploadController
      */
+
     private void uploadBegins() {
         fileObj.processFileCoordinates(locationPermitted);
 
@@ -209,6 +223,7 @@ public class ShareActivity
     /**
      * Starts CategorizationFragment after uploadBegins.
      */
+
     private void showPostUpload() {
         if (categorizationFragment == null) {
             categorizationFragment = new CategorizationFragment();
@@ -502,6 +517,7 @@ public class ShareActivity
         if (CurrentAnimator != null) {
             CurrentAnimator.cancel();
         }
+        isZoom = true;
         ViewUtil.hideKeyboard(ShareActivity.this.findViewById(R.id.titleEdit | R.id.descEdit));
         closeFABMenu();
         mainFab.setVisibility(View.GONE);
@@ -518,7 +534,6 @@ public class ShareActivity
 
         // Load the high-resolution "zoomed-in" image.
         expandedImageView.setImageBitmap(scaledImage);
-
         float startScale = zoomObj.adjustStartEndBounds(startBounds, finalBounds, globalOffset);
 
         // Hide the thumbnail and show the zoomed-in view. When the animation
@@ -590,6 +605,7 @@ public class ShareActivity
         if (CurrentAnimator != null) {
             CurrentAnimator.cancel();
         }
+        isZoom = false;
         zoomOutButton.setVisibility(View.GONE);
         mainFab.setVisibility(View.VISIBLE);
 
@@ -600,6 +616,7 @@ public class ShareActivity
                 .with(ObjectAnimator.ofFloat(expandedImageView, View.Y, startBounds.top))
                 .with(ObjectAnimator.ofFloat(expandedImageView, View.SCALE_X, startScaleFinal))
                 .with(ObjectAnimator.ofFloat(expandedImageView, View.SCALE_Y, startScaleFinal));
+
         set.setDuration(ShortAnimationDuration);
         set.setInterpolator(new DecelerateInterpolator());
         set.addListener(new AnimatorListenerAdapter() {
@@ -633,4 +650,18 @@ public class ShareActivity
         }
     }
 
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        switch (keyCode) {
+            case KeyEvent.KEYCODE_BACK:
+                if(isZoom) {
+                    onZoomOutFabClicked();
+                    return true;
+                }
+        }
+        return super.onKeyDown(keyCode,event);
+
+    }
+
 }
+
