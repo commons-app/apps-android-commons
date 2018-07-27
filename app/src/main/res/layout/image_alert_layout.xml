@@ -16,6 +16,6 @@
         android:layout_height="wrap_content"
         android:id="@+id/alert_text"
         android:layout_marginRight="@dimen/activity_margin_horizontal"
-        android:layout_marginLeft="@dimen/activity_margin_horizontal"/>
+        android:layout_marginLeft="@dimen/activity_margin_horizontal" />
 
 </LinearLayout>

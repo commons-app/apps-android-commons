@@ -97,13 +97,13 @@ public interface MediaWikiApi {
     @NonNull
     Single<Integer> getUploadCount(String userName);
 
+    @NonNull
+    Single<JSONObject> getRevertRespObjectSingle(String userName);
+
     boolean isUserBlockedFromCommons();
 
     @NonNull
     Single<JSONObject> getAchievements(String userName);
-
-    @NonNull
-    Single<JSONObject> getRevertCount(String userName);
 
     interface ProgressListener {
         void onProgress(long transferred, long total);

@@ -894,6 +894,7 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
     }
 
     /**
+
      * Checks to see if a user is currently blocked from Commons
      * @return whether or not the user is blocked from Commons
      */
@@ -964,7 +965,7 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
      */
     @NonNull
     @Override
-    public Single<JSONObject> getRevertCount(String userName){
+    public Single<JSONObject> getRevertRespObjectSingle(String userName){
         final String fetchRevertCountUrlTemplate =
                 wikiMediaToolforgeUrl + "urbanecmbot/commonsmisc/feedback.py";
         return Single.fromCallable(() -> {

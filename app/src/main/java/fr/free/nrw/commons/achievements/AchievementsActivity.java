@@ -221,7 +221,7 @@ public class AchievementsActivity extends NavigationBaseActivity {
     private void setRevertCount(){
         if(checkAccount()) {
             compositeDisposable.add(mediaWikiApi
-                    .getRevertCount(sessionManager.getCurrentAccount().name)
+                    .getRevertRespObjectSingle(sessionManager.getCurrentAccount().name)
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe(
