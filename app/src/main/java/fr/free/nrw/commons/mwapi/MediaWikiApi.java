@@ -43,6 +43,16 @@ public interface MediaWikiApi {
 
     List<Media> getCategoryImages(String categoryName);
 
+    List<String> getSubCategoryList(String categoryName);
+
+    List<String> getParentCategoryList(String categoryName);
+
+    @NonNull
+    List<Media> searchImages(String title, int offset);
+
+    @NonNull
+    List<String> searchCategory(String title, int offset);
+
     @NonNull
     UploadResult uploadFile(String filename, InputStream file, long dataLength, String pageContents, String editSummary, ProgressListener progressListener) throws IOException;
 
@@ -89,6 +99,14 @@ public interface MediaWikiApi {
 
     @NonNull
     Single<JSONObject> getRevertRespObjectSingle(String userName);
+
+    boolean isUserBlockedFromCommons();
+
+    @NonNull
+    Single<JSONObject> getAchievements(String userName);
+
+    @NonNull
+    Single<JSONObject> getRevertCount(String userName);
 
     interface ProgressListener {
         void onProgress(long transferred, long total);

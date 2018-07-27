@@ -36,10 +36,12 @@ import java.net.URL;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
+import java.util.TimeZone;
 import java.util.concurrent.Callable;
 
 import fr.free.nrw.commons.BuildConfig;
@@ -575,6 +577,89 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
     }
 
     /**
+     * The method takes categoryName as input and returns a List of Subcategories
+     * It uses the generator query API to get the subcategories in a category, 500 at a time.
+     * Uses the query continue values for fetching paginated responses
+     * @param categoryName Category name as defined on commons
+     * @return
+     */
+    @Override
+    @NonNull
+    public List<String> getSubCategoryList(String categoryName) {
+        ApiResult apiResult = null;
+        try {
+            MWApi.RequestBuilder requestBuilder = api.action("query")
+                    .param("generator", "categorymembers")
+                    .param("format", "xml")
+                    .param("gcmtype","subcat")
+                    .param("gcmtitle", categoryName)
+                    .param("prop", "info")
+                    .param("gcmlimit", "500")
+                    .param("iiprop", "url|extmetadata");
+
+            apiResult = requestBuilder.get();
+        } catch (IOException e) {
+            Timber.e("Failed to obtain searchCategories", e);
+        }
+
+        if (apiResult == null) {
+            return new ArrayList<>();
+        }
+
+        ApiResult categoryImagesNode = apiResult.getNode("/api/query/pages");
+        if (categoryImagesNode == null
+                || categoryImagesNode.getDocument() == null
+                || categoryImagesNode.getDocument().getChildNodes() == null
+                || categoryImagesNode.getDocument().getChildNodes().getLength() == 0) {
+            return new ArrayList<>();
+        }
+
+        NodeList childNodes = categoryImagesNode.getDocument().getChildNodes();
+        return CategoryImageUtils.getSubCategoryList(childNodes);
+    }
+
+    /**
+     * The method takes categoryName as input and returns a List of parent categories
+     * It uses the generator query API to get the parent categories of a category, 500 at a time.
+     * @param categoryName Category name as defined on commons
+     * @return
+     */
+    @Override
+    @NonNull
+    public List<String> getParentCategoryList(String categoryName) {
+        ApiResult apiResult = null;
+        try {
+            MWApi.RequestBuilder requestBuilder = api.action("query")
+                    .param("generator", "categories")
+                    .param("format", "xml")
+                    .param("titles", categoryName)
+                    .param("prop", "info")
+                    .param("cllimit", "500")
+                    .param("iiprop", "url|extmetadata");
+
+            apiResult = requestBuilder.get();
+        } catch (IOException e) {
+            Timber.e("Failed to obtain parent Categories", e);
+        }
+
+        if (apiResult == null) {
+            return new ArrayList<>();
+        }
+
+        ApiResult categoryImagesNode = apiResult.getNode("/api/query/pages");
+        if (categoryImagesNode == null
+                || categoryImagesNode.getDocument() == null
+                || categoryImagesNode.getDocument().getChildNodes() == null
+                || categoryImagesNode.getDocument().getChildNodes().getLength() == 0) {
+            return new ArrayList<>();
+        }
+
+        NodeList childNodes = categoryImagesNode.getDocument().getChildNodes();
+        return CategoryImageUtils.getSubCategoryList(childNodes);
+    }
+
+
+    /**
      * The method takes categoryName as input and returns a List of Media objects
      * It uses the generator query API to get the images in a category, 10 at a time.
      * Uses the query continue values for fetching paginated responses
@@ -602,7 +687,6 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
                 requestBuilder.param("continue", queryContinueValues.getContinueParam());
                 requestBuilder.param("gcmcontinue", queryContinueValues.getGcmContinueParam());
             }
-
             apiResult = requestBuilder.get();
         } catch (IOException e) {
             Timber.e("Failed to obtain searchCategories", e);
@@ -620,12 +704,92 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
             return new ArrayList<>();
         }
 
-        QueryContinue queryContinue = getQueryContinue(apiResult.getNode("/api/continue").getDocument());
-        setQueryContinueValues(categoryName, queryContinue);
+        if (apiResult.getNode("/api/continue").getDocument()==null){
+            setQueryContinueValues(categoryName, null);
+        }else {
+            QueryContinue queryContinue = getQueryContinue(apiResult.getNode("/api/continue").getDocument());
+            setQueryContinueValues(categoryName, queryContinue);
+        }
 
         NodeList childNodes = categoryImagesNode.getDocument().getChildNodes();
         return CategoryImageUtils.getMediaList(childNodes);
     }
+
+    /**
+     * This method takes search keyword as input and returns a list of  Media objects filtered using search query
+     * It uses the generator query API to get the images searched using a query, 25 at a time.
+     * @param query keyword to search images on commons
+     * @return
+     */
+    @Override
+    @NonNull
+    public List<Media> searchImages(String query, int offset) {
+        List<ApiResult> imageNodes = null;
+        try {
+            imageNodes = api.action("query")
+                    .param("format", "xml")
+                    .param("list", "search")
+                    .param("srwhat", "text")
+                    .param("srnamespace", "6")
+                    .param("srlimit", "25")
+                    .param("sroffset",offset)
+                    .param("srsearch", query)
+                    .get()
+                    .getNodes("/api/query/search/p/@title");
+        } catch (IOException e) {
+            Timber.e("Failed to obtain searchImages", e);
+        }
+
+        if (imageNodes == null) {
+            return new ArrayList<Media>();
+        }
+
+        List<Media> images = new ArrayList<>();
+        for (ApiResult imageNode : imageNodes) {
+            String imgName = imageNode.getDocument().getTextContent();
+            images.add(new Media(imgName));
+        }
+
+        return images;
+    }
+
+    /**
+     * This method takes search keyword as input and returns a list of categories objects filtered using search query
+     * It uses the generator query API to get the categories searched using a query, 25 at a time.
+     * @param query keyword to search categories on commons
+     * @return
+     */
+    @Override
+    @NonNull
+    public List<String> searchCategory(String query, int offset) {
+        List<ApiResult> categoryNodes = null;
+        try {
+            categoryNodes = api.action("query")
+                    .param("format", "xml")
+                    .param("list", "search")
+                    .param("srwhat", "text")
+                    .param("srnamespace", "14")
+                    .param("srlimit", "25")
+                    .param("sroffset",offset)
+                    .param("srsearch", query)
+                    .get()
+                    .getNodes("/api/query/search/p/@title");
+        } catch (IOException e) {
+            Timber.e("Failed to obtain searchCategories", e);
+        }
+
+        if (categoryNodes == null) {
+            return new ArrayList<String>();
+        }
+
+        List<String> categories = new ArrayList<>();
+        for (ApiResult categoryNode : categoryNodes) {
+            String catName = categoryNode.getDocument().getTextContent();
+            categories.add(catName);
+        }
+        return categories;
+    }
+
 
     /**
      * For APIs that return paginated responses, MediaWiki APIs uses the QueryContinue to facilitate fetching of subsequent pages
@@ -714,7 +878,7 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
     @NonNull
     public Single<Integer> getUploadCount(String userName) {
         final String uploadCountUrlTemplate =
-                wikiMediaToolforgeUrl + "urbanecmbot/uploadsbyuser/uploadsbyuser.py";
+                wikiMediaToolforgeUrl + "urbanecmbot/commonsmisc/uploadsbyuser.py";
 
         return Single.fromCallable(() -> {
             String url = String.format(
@@ -727,6 +891,70 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
             String uploadCount = EntityUtils.toString(response.getEntity()).trim();
             return Integer.parseInt(uploadCount);
         });
+    }
+
+    /**
+
+     * Checks to see if a user is currently blocked from Commons
+     * @return whether or not the user is blocked from Commons
+     */
+    @Override
+    public boolean isUserBlockedFromCommons() {
+        boolean userBlocked = false;
+        try {
+            ApiResult result = api.action("query")
+                    .param("action", "query")
+                    .param("format", "xml")
+                    .param("meta", "userinfo")
+                    .param("uiprop", "blockinfo")
+                    .get();
+            if (result != null) {
+                String blockEnd = result.getString("/api/query/userinfo/@blockexpiry");
+                if (blockEnd.equals("infinite")) {
+                    userBlocked = true;
+                } else if (!blockEnd.isEmpty()) {
+                    Date endDate = parseMWDate(blockEnd);
+                    Date current = new Date();
+                    userBlocked = endDate.after(current);
+                }
+
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return userBlocked;
+    }
+
+    /**
+     * This takes userName as input, which is then used to fetch the feedback/achievements
+     * statistics using OkHttp and JavaRx. This function return JSONObject
+     * @param userName
+     * @return
+     */
+    @NonNull
+    @Override
+    public Single<JSONObject> getAchievements(String userName) {
+        final String fetchAchievementUrlTemplate =
+                wikiMediaToolforgeUrl + "urbanecmbot/commonsmisc/feedback.py";
+        return Single.fromCallable(() -> {
+            String url = String.format(
+                    Locale.ENGLISH,
+                    fetchAchievementUrlTemplate,
+                    new PageTitle(userName).getText());
+            HttpUrl.Builder urlBuilder = HttpUrl.parse(url).newBuilder();
+            urlBuilder.addQueryParameter("user", userName);
+            Log.i("url", urlBuilder.toString());
+            Request request = new Request.Builder()
+                    .url(urlBuilder.toString())
+                    .build();
+            OkHttpClient client = new OkHttpClient();
+            Response response = client.newCall(request).execute();
+            String jsonData = response.body().string();
+            JSONObject jsonObject = new JSONObject(jsonData);
+            return jsonObject;
+        });
+
     }
 
     /**
@@ -762,10 +990,12 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
 
     private Date parseMWDate(String mwDate) {
         SimpleDateFormat isoFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'", Locale.ENGLISH); // Assuming MW always gives me UTC
+        isoFormat.setTimeZone(TimeZone.getTimeZone("UTC"));
         try {
             return isoFormat.parse(mwDate);
         } catch (ParseException e) {
             throw new RuntimeException(e);
         }
     }
+
 }

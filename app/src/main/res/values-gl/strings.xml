@@ -16,6 +16,7 @@
   <string name="app_name">Commons</string>
   <string name="bullet">•</string>
   <string name="menu_settings">Configuracións</string>
+  <string name="intent_share_upload_label">Cargar en Commons</string>
   <string name="username">Nome de usuario</string>
   <string name="password">Contrasinal</string>
   <string name="login_credential">Acceda á súa conta de Commons Beta</string>
@@ -27,7 +28,7 @@
   <string name="login_success">Accedeu correctamente!</string>
   <string name="login_failed">Erro durante o inición de sesión!</string>
   <string name="upload_failed">Ficheiro non atopado. Por favor, probe con outro.</string>
-  <string name="authentication_failed" fuzzy="true">Erro durante a autenticación!</string>
+  <string name="authentication_failed">Erro de autenticación, por favor inicia unha nova sesión</string>
   <string name="uploading_started">A carga comezou!</string>
   <string name="upload_completed_notification_title">Cargouse \"%1$s\"!</string>
   <string name="upload_completed_notification_text">Prema para ollar a súa carga</string>
@@ -109,7 +110,7 @@
   <string name="preference_license">Licenza por defecto</string>
   <string name="use_previous">Usar o título ou a descrición anterior</string>
   <string name="allow_gps">Obter automaticamente a localización actual</string>
-  <string name="allow_gps_summary" fuzzy="true">Obter a localización actual para ofrecer suxestións de categoría se a imaxe non está xeolocalizada</string>
+  <string name="allow_gps_summary">Obter a localización actual se a imaxe non está xeolocalizada, e xeolocaliza a imaxe con ela. Atención: Isto revelará a súa localización actual.</string>
   <string name="preference_theme">Modo nocturno</string>
   <string name="preference_theme_summary">Usar tema escuro</string>
   <string name="license_name_cc_by_sa_four"> Recoñecemento-CompartirIgual 4.0</string>
@@ -275,9 +276,15 @@
   <string name="no_images_found">Non se atopou ningunha imaxeǃ</string>
   <string name="error_loading_images">Houbo un erro ó subir as imaxes.</string>
   <string name="image_uploaded_by">Subida porː %1$s</string>
+  <string name="block_notification">Está bloqueado e non pode editar en Commons</string>
   <string name="share_app_title">Compartir a aplicación</string>
   <string name="share_coordinates_not_present">Non se indicaron as coordenadas ó seleccionar a imaxe</string>
   <string name="error_fetching_nearby_places">Erro ó procurar os lugares próximos.</string>
+  <string name="appwidget_img">Imaxe do día</string>
+  <string name="app_widget_heading">Imaxe do día</string>
+  <string name="successful_wikidata_edit">A imaxe engadiuse con éxito a %1$s en Wikidata!</string>
+  <string name="wikidata_edit_failure">Fallou a actualización da entidade do Wikidata correspondente!</string>
   <string name="menu_set_wallpaper">Definir imaxe de fondo</string>
   <string name="wallpaper_set_successfully">A imaxe de fondo configurouse correctamenteǃ</string>
+  <string name="user_not_logged_in">A sesión caducou, por favor inicia unha nova sesión.</string>
 </resources>

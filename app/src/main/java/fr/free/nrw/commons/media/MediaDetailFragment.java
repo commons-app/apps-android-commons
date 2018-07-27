@@ -35,9 +35,6 @@ import java.util.Locale;
 import javax.inject.Inject;
 import javax.inject.Provider;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
 import fr.free.nrw.commons.License;
 import fr.free.nrw.commons.LicenseList;
 import fr.free.nrw.commons.Media;
@@ -45,6 +42,7 @@ import fr.free.nrw.commons.MediaDataExtractor;
 import fr.free.nrw.commons.MediaWikiImageView;
 import fr.free.nrw.commons.PageTitle;
 import fr.free.nrw.commons.R;
+import fr.free.nrw.commons.category.CategoryDetailsActivity;
 import fr.free.nrw.commons.delete.DeleteTask;
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
 import fr.free.nrw.commons.location.LatLng;
@@ -248,6 +246,10 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
 
             @Override
             protected Boolean doInBackground(Void... voids) {
+                // Local files have no filename yet
+                if(media.getFilename() == null) {
+                    return Boolean.FALSE;
+                }
                 try {
                     extractor.fetch(media.getFilename(), licenseList);
                     return Boolean.TRUE;
@@ -429,17 +431,11 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
         textView.setText(catName);
         if (categoriesLoaded && categoriesPresent) {
             textView.setOnClickListener(view -> {
+                // Open Category Details page
                 String selectedCategoryTitle = "Category:" + catName;
-                Intent viewIntent = new Intent();
-                viewIntent.setAction(Intent.ACTION_VIEW);
-                viewIntent.setData(new PageTitle(selectedCategoryTitle).getCanonicalUri());
-                //check if web browser available
-                if (viewIntent.resolveActivity(getActivity().getPackageManager()) != null) {
-                    startActivity(viewIntent);
-                } else {
-                    Toast toast = Toast.makeText(getContext(), getString(R.string.no_web_browser), LENGTH_SHORT);
-                    toast.show();
-                }
+                Intent intent = new Intent(getContext(), CategoryDetailsActivity.class);
+                intent.putExtra("categoryName", selectedCategoryTitle);
+                getContext().startActivity(intent);
             });
         }
         return item;

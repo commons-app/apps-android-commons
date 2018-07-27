@@ -2,15 +2,14 @@ package fr.free.nrw.commons.media;
 
 import android.annotation.SuppressLint;
 import android.app.DownloadManager;
-import android.app.WallpaperManager;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.DataSetObserver;
-import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.Handler;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
@@ -27,8 +26,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
-
-import java.io.IOException;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -50,7 +47,6 @@ import static android.content.Context.DOWNLOAD_SERVICE;
 import static android.content.Intent.ACTION_VIEW;
 import static android.content.pm.PackageManager.PERMISSION_GRANTED;
 import static android.widget.Toast.LENGTH_SHORT;
-import static com.mapbox.mapboxsdk.Mapbox.getApplicationContext;
 
 public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment implements ViewPager.OnPageChangeListener {
 
@@ -127,7 +123,10 @@ public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment imple
         Media m = provider.getMediaAtPosition(pager.getCurrentItem());
         switch (item.getItemId()) {
             case R.id.menu_share_current_image:
-                // Share - intent set in onCreateOptionsMenu, around line 252
+                Intent shareIntent = new Intent(Intent.ACTION_SEND);
+                shareIntent.setType("text/plain");
+                shareIntent.putExtra(Intent.EXTRA_TEXT, m.getDisplayTitle() + " \n" + m.getFilePageTitle().getCanonicalUri());
+                startActivity(Intent.createChooser(shareIntent, "Share image via..."));
                 return true;
             case R.id.menu_browser_current_image:
                 // View in browser
@@ -240,19 +239,7 @@ public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment imple
                     menu.findItem(R.id.menu_share_current_image).setEnabled(true).setVisible(true);
                     menu.findItem(R.id.menu_download_current_image).setEnabled(true).setVisible(true);
 
-                    // Set ShareActionProvider Intent
-                    ShareActionProvider mShareActionProvider = (ShareActionProvider) MenuItemCompat.getActionProvider(menu.findItem(R.id.menu_share_current_image));
-                    // On some phones null is returned for some reason:
-                    // https://github.com/commons-app/apps-android-commons/issues/413
-                    if (mShareActionProvider != null) {
-                        Intent shareIntent = new Intent(Intent.ACTION_SEND);
-                        shareIntent.setType("text/plain");
-                        shareIntent.putExtra(Intent.EXTRA_TEXT,
-                                m.getDisplayTitle() + " \n" + m.getFilePageTitle().getCanonicalUri());
-                        mShareActionProvider.setShareIntent(shareIntent);
-                    }
-
-                    if (m instanceof Contribution) {
+                    if (m instanceof Contribution ) {
                         Contribution c = (Contribution) m;
                         switch (c.getState()) {
                             case Contribution.STATE_FAILED:
@@ -281,7 +268,8 @@ public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment imple
     }
 
     public void showImage(int i) {
-        pager.setCurrentItem(i);
+        Handler handler =  new Handler();
+        handler.postDelayed(() -> pager.setCurrentItem(i), 10);
     }
 
     @Override

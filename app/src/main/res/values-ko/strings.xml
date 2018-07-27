@@ -20,6 +20,7 @@
   <string name="app_name">공용</string>
   <string name="bullet">•</string>
   <string name="menu_settings">설정</string>
+  <string name="intent_share_upload_label">공용에 업로드</string>
   <string name="username">사용자 이름</string>
   <string name="password">비밀번호</string>
   <string name="login_credential">공용 베타 계정으로 로그인합니다</string>
@@ -92,6 +93,7 @@
   <string name="title_activity_settings">설정</string>
   <string name="title_activity_signup">가입하기</string>
   <string name="title_activity_featured_images">알찬 그림</string>
+  <string name="title_activity_category_details">분류</string>
   <string name="menu_about">정보</string>
   <string name="about_license">위키미디어 공용 앱은 오픈 소스 애플리케이션이며 위키미디어 공동체 내의 자원봉사자에 의해 유지됩니다. 위키미디어 재단은 애플리케이션의 생성, 개발, 유지보수에 관여하지 않습니다.</string>
   <string name="about_improve">버그나 기타 제안은 &lt;a href=\" https://github.com/commons-app/apps-android-commons/issues\"&gt;GitHub&lt;/a&gt;에 보고해주세요.</string>
@@ -199,6 +201,8 @@
   <string name="background_image">배경 그림</string>
   <string name="mediaimage_failed">미디어 그림 실패</string>
   <string name="no_image_found">그림이 없습니다</string>
+  <string name="no_subcategory_found">하위 분류가 없습니다</string>
+  <string name="no_parentcategory_found">부모 분류가 없습니다</string>
   <string name="upload_image">그림 올리기</string>
   <string name="welcome_image_mount_zao">자오 연봉</string>
   <string name="welcome_image_llamas">라마</string>
@@ -277,13 +281,24 @@
   <string name="no_images_found">그림이 없습니다!</string>
   <string name="error_loading_images">그림을 불러오는 동안 오류가 발생했습니다.</string>
   <string name="image_uploaded_by">올린이: %1$s</string>
+  <string name="block_notification">공용 편집이 차단되어 있습니다</string>
   <string name="share_app_title">앱 공유</string>
   <string name="share_coordinates_not_present">그림 선택 중에 좌표가 지정되지 않았습니다</string>
   <string name="error_fetching_nearby_places">주변 장소를 가져오는데 오류가 있습니다.</string>
   <string name="appwidget_img">오늘의 사진</string>
   <string name="app_widget_heading">오늘의 사진</string>
+  <string name="menu_search_button">검색</string>
+  <string name="images_not_found">%1$s와(과) 일치하는 그림이 없습니다</string>
+  <string name="title_activity_search">검색</string>
+  <string name="search_recent_header">최근 검색:</string>
+  <string name="provider_searches">최근 검색된 쿼리</string>
+  <string name="error_loading_categories">분류를 불러오는 동안 오류가 발생했습니다.</string>
+  <string name="error_loading_subcategories">하위 분류를 불러오는 동안 오류가 발생했습니다.</string>
   <string name="successful_wikidata_edit">위키데이터의 %1$s에 그림을 성공적으로 추가했습니다!</string>
   <string name="wikidata_edit_failure">일치하는 위키데이터 엔티티의 업데이트를 실패했습니다!</string>
   <string name="menu_set_wallpaper">배경화면 설정</string>
   <string name="wallpaper_set_successfully">배경화면을 성공적으로 설정했습니다!</string>
+  <string name="delete_recent_searches_dialog">검색 기록을 지우겠습니까?</string>
+  <string name="search_history_deleted">검색 기록 삭제됨</string>
+  <string name="user_not_logged_in">로그인 세션이 만료되었으므로 다시 로그인해 주십시오.</string>
 </resources>

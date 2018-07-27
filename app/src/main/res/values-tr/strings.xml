@@ -4,6 +4,7 @@
 * Emperyan
 * Hedda
 * Incelemeelemani
+* Joseph
 * McAang
 * Neslihan Turan
 * Rapsar
@@ -30,7 +31,7 @@
   <string name="login_success">Oturum açma başarılı!</string>
   <string name="login_failed">Oturum açma başarısız oldu!</string>
   <string name="upload_failed">Dosya bulunamadı. Lütfen başka bir dosya deneyin.</string>
-  <string name="authentication_failed" fuzzy="true">Kimlik doğrulama başarısız oldu!</string>
+  <string name="authentication_failed">Kimlik doğrulama başarısız oldu, lütfen tekrar giriş yapın</string>
   <string name="uploading_started">Yükleme başladı!</string>
   <string name="upload_completed_notification_title">%1$s yüklendi!</string>
   <string name="upload_completed_notification_text">Yüklemelerinizi görüntülemek için dokunun</string>
@@ -112,7 +113,7 @@
   <string name="preference_license">Varsayılan lisans</string>
   <string name="use_previous">Önceki başlığı/açıklamayı kullan</string>
   <string name="allow_gps">Otomatik olarak mevcut konumu al</string>
-  <string name="allow_gps_summary" fuzzy="true">Resim koordinat olarak etiketlendirilmemişse kategori önerileri için mevcut konum bulun</string>
+  <string name="allow_gps_summary">Resim coğrafi etiketli değilse ve coğrafi etiketler resimle görüntüleniyorsa geçerli konumu alır. Uyarı: Mevcut konumunuzu gösterir.</string>
   <string name="preference_theme">Gece modu</string>
   <string name="preference_theme_summary">Koyu temayı kullanın</string>
   <string name="license_name_cc_by_sa_four"> Attribution-ShareAlike 4.0</string>
@@ -282,8 +283,11 @@
   <string name="share_app_title">Uygulamayı Paylaş</string>
   <string name="share_coordinates_not_present">Koordinatlar görüntü seçimi sırasında belirlenmedi</string>
   <string name="error_fetching_nearby_places">Yakındaki yerler alınırken hata oluştu.</string>
+  <string name="appwidget_img">Günün Resmi</string>
+  <string name="app_widget_heading">Günün Resmi</string>
   <string name="successful_wikidata_edit">Resim, Vikiveri\'de %1$s içine başarıyla eklendi.</string>
-  <string name="wikidata_edit_failure" fuzzy="true">Karşılık gelen viki veri varlığı güncellenemedi!</string>
+  <string name="wikidata_edit_failure">Karşılık gelen Vikiveri varlığı güncellenemedi!</string>
   <string name="menu_set_wallpaper">Duvar kağıdı ayarla</string>
   <string name="wallpaper_set_successfully">Duvar kağıdı başarıyla ayarlandı!</string>
+  <string name="user_not_logged_in">Oturumun süresi doldu, lütfen tekrar giriş yapın.</string>
 </resources>
