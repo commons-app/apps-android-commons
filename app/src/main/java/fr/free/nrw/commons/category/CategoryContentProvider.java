@@ -11,6 +11,7 @@ import android.text.TextUtils;
 
 import javax.inject.Inject;
 
+import fr.free.nrw.commons.BuildConfig;
 import fr.free.nrw.commons.data.DBOpenHelper;
 import fr.free.nrw.commons.di.CommonsDaggerContentProvider;
 import timber.log.Timber;
@@ -22,19 +23,18 @@ import static fr.free.nrw.commons.category.CategoryDao.Table.TABLE_NAME;
 
 public class CategoryContentProvider extends CommonsDaggerContentProvider {
 
-    public static final String AUTHORITY = "fr.free.nrw.commons.categories.contentprovider";
     // For URI matcher
     private static final int CATEGORIES = 1;
     private static final int CATEGORIES_ID = 2;
     private static final String BASE_PATH = "categories";
 
-    public static final Uri BASE_URI = Uri.parse("content://" + AUTHORITY + "/" + BASE_PATH);
+    public static final Uri BASE_URI = Uri.parse("content://" + BuildConfig.CATEGORY_AUTHORITY + "/" + BASE_PATH);
 
     private static final UriMatcher uriMatcher = new UriMatcher(NO_MATCH);
 
     static {
-        uriMatcher.addURI(AUTHORITY, BASE_PATH, CATEGORIES);
-        uriMatcher.addURI(AUTHORITY, BASE_PATH + "/#", CATEGORIES_ID);
+        uriMatcher.addURI(BuildConfig.CATEGORY_AUTHORITY, BASE_PATH, CATEGORIES);
+        uriMatcher.addURI(BuildConfig.CATEGORY_AUTHORITY, BASE_PATH + "/#", CATEGORIES_ID);
     }
 
     public static Uri uriForId(int id) {

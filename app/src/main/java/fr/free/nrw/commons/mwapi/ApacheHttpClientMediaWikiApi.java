@@ -92,6 +92,7 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
         ClientConnectionManager cm = new ThreadSafeClientConnManager(params, schemeRegistry);
         params.setParameter(CoreProtocolPNames.USER_AGENT, getUserAgent());
         httpClient = new DefaultHttpClient(cm, params);
+        httpClient.addRequestInterceptor(NetworkInterceptors.getHttpRequestInterceptor());
         api = new MWApi(apiURL, httpClient);
         wikidataApi = new MWApi(wikidatApiURL, httpClient);
         this.defaultPreferences = defaultPreferences;

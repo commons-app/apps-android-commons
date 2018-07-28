@@ -13,6 +13,7 @@ import java.io.IOException;
 
 import javax.inject.Inject;
 
+import fr.free.nrw.commons.BuildConfig;
 import fr.free.nrw.commons.auth.SessionManager;
 import fr.free.nrw.commons.contributions.Contribution;
 import fr.free.nrw.commons.contributions.ContributionDao;
@@ -77,7 +78,7 @@ public class ModificationsSyncAdapter extends AbstractThreadedSyncAdapter {
 
         ContentProviderClient contributionsClient = null;
         try {
-            contributionsClient = getContext().getContentResolver().acquireContentProviderClient(ContributionsContentProvider.CONTRIBUTION_AUTHORITY);
+            contributionsClient = getContext().getContentResolver().acquireContentProviderClient(BuildConfig.CONTRIBUTION_AUTHORITY);
 
             while (!allModifications.isAfterLast()) {
                 ModifierSequence sequence = modifierSequenceDao.fromCursor(allModifications);

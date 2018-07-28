@@ -110,7 +110,7 @@ public  class       ContributionsActivity
     @Override
     protected void onAuthCookieAcquired(String authCookie) {
         // Do a sync everytime we get here!
-        requestSync(sessionManager.getCurrentAccount(), ContributionsContentProvider.CONTRIBUTION_AUTHORITY, new Bundle());
+        requestSync(sessionManager.getCurrentAccount(), BuildConfig.CONTRIBUTION_AUTHORITY, new Bundle());
         Intent uploadServiceIntent = new Intent(this, UploadService.class);
         uploadServiceIntent.setAction(UploadService.ACTION_START_SERVICE);
         startService(uploadServiceIntent);

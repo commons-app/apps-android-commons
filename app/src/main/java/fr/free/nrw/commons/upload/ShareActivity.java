@@ -46,6 +46,7 @@ import javax.inject.Named;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import fr.free.nrw.commons.BuildConfig;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.auth.AuthenticatedActivity;
 import fr.free.nrw.commons.auth.LoginActivity;
@@ -241,7 +242,7 @@ public class ShareActivity
 
         // FIXME: Make sure that the content provider is up
         // This is the wrong place for it, but bleh - better than not having it turned on by default for people who don't go throughl ogin
-        ContentResolver.setSyncAutomatically(sessionManager.getCurrentAccount(), ModificationsContentProvider.MODIFICATIONS_AUTHORITY, true); // Enable sync by default!
+        ContentResolver.setSyncAutomatically(sessionManager.getCurrentAccount(), BuildConfig.MODIFICATION_AUTHORITY, true); // Enable sync by default!
 
         finish();
     }

@@ -23,6 +23,7 @@ import java.util.regex.Pattern;
 
 import javax.inject.Inject;
 
+import fr.free.nrw.commons.BuildConfig;
 import fr.free.nrw.commons.HandlerService;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.Utils;
@@ -272,7 +273,7 @@ public class UploadService extends HandlerService<Contribution> {
             toUpload--;
             if (toUpload == 0) {
                 // Sync modifications right after all uplaods are processed
-                ContentResolver.requestSync(sessionManager.getCurrentAccount(), ModificationsContentProvider.MODIFICATIONS_AUTHORITY, new Bundle());
+                ContentResolver.requestSync(sessionManager.getCurrentAccount(), BuildConfig.MODIFICATION_AUTHORITY, new Bundle());
                 stopForeground(true);
             }
         }
