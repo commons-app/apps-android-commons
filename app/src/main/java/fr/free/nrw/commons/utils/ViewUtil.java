@@ -15,12 +15,19 @@ public class ViewUtil {
     public static final String SHOWCASE_VIEW_ID_3 = "SHOWCASE_VIEW_ID_3";
 
     public static void showSnackbar(View view, int messageResourceId) {
-        Snackbar.make(view, messageResourceId, Snackbar.LENGTH_SHORT).show();
+        if(view.getContext() == null) {
+            return;
+        }
+
+        ExecutorUtils.uiExecutor().execute(() -> Snackbar.make(view, messageResourceId, Snackbar.LENGTH_SHORT).show());
     }
 
     public static void showLongToast(Context context, String text) {
-        Toast.makeText(context, text,
-                Toast.LENGTH_LONG).show();
+        if (context == null) {
+            return;
+        }
+
+        ExecutorUtils.uiExecutor().execute(() -> Toast.makeText(context, text, Toast.LENGTH_LONG).show());
     }
 
     public static boolean isPortrait(Context context) {

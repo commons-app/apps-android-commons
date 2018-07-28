@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent">
+
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <android.support.v7.widget.CardView
+        android:layout_height="match_parent"
+        android:layout_width="match_parent"
+        app:cardCornerRadius="8dp"
+        android:layout_marginBottom="@dimen/activity_margin_vertical"
+        android:layout_marginLeft="@dimen/activity_margin_horizontal"
+        android:layout_marginRight="@dimen/activity_margin_horizontal"
+        android:layout_marginTop="@dimen/activity_margin_vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:tools="http://schemas.android.com/tools"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:orientation="vertical"
+                tools:context="fr.free.nrw.commons.quiz.QuizResultActivity">
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:text="@string/result"
+                    style="?android:textAppearanceLarge"
+                    android:textSize="32dp"
+                    android:layout_marginTop="@dimen/activity_margin_vertical" />
+
+                <com.dinuscxj.progressbar.CircleProgressBar
+                    android:layout_width="match_parent"
+                    android:layout_height="250dp"
+                    android:layout_marginRight="@dimen/activity_margin_horizontal"
+                    android:layout_marginLeft="@dimen/activity_margin_horizontal"
+                    android:layout_marginTop="@dimen/activity_margin_vertical"
+                    android:progress="50"
+                    app:progress_end_color="#8C8B98"
+                    app:progress_start_color="#3A3381"
+                    app:progress_stroke_width="15dp"
+                    app:progress_text_size="32dp"
+                    app:progress_text_format_pattern="4/5"
+                    app:style="solid_line"
+                    android:id="@+id/result_progress_bar"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="@dimen/activity_margin_horizontal"
+                    android:layout_marginLeft="@dimen/activity_margin_horizontal"
+                    android:layout_marginTop="@dimen/activity_margin_vertical"
+                    android:layout_marginBottom="@dimen/activity_margin_vertical"
+                    style="?android:textAppearanceMedium"
+                    android:gravity="center_horizontal"
+                    android:id="@+id/congratulatory_message"
+                    android:text="@string/congratulatory_message_quiz" />
+
+            </LinearLayout>
+
+            <Button
+                android:layout_width="150dp"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="@dimen/activity_margin_horizontal"
+                android:id="@+id/quiz_result_next"
+                android:layout_marginBottom="@dimen/activity_margin_vertical"
+                android:paddingHorizontal="@dimen/activity_margin_horizontal"
+                android:layout_height="wrap_content"
+                android:backgroundTint="#D6DCE0"
+                android:text="Continue" />
+
+        </RelativeLayout>
+    </android.support.v7.widget.CardView>
+</LinearLayout>

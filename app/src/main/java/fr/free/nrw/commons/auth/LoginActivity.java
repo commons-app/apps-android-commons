@@ -134,11 +134,6 @@ public class LoginActivity extends AccountAuthenticatorActivity {
         }
     }
 
-    public static void startYourself(Context context) {
-        Intent intent = new Intent(context, LoginActivity.class);
-        context.startActivity(intent);
-    }
-
     private void forgotPassword() {
         Utils.handleWebUrl(this, Uri.parse(BuildConfig.FORGOT_PASSWORD_URL));
     }
@@ -165,6 +160,7 @@ public class LoginActivity extends AccountAuthenticatorActivity {
         if (sessionManager.getCurrentAccount() != null
                 && sessionManager.isUserLoggedIn()
                 && sessionManager.getCachedAuthCookie() != null) {
+            sessionManager.revalidateAuthToken();
             startMainActivity();
         }
     }
@@ -442,5 +438,10 @@ public class LoginActivity extends AccountAuthenticatorActivity {
                     && (BuildConfig.DEBUG || twoFactorEdit.getText().length() != 0 || twoFactorEdit.getVisibility() != VISIBLE);
             loginButton.setEnabled(enabled);
         }
+    }
+
+    public static void startYourself(Context context) {
+        Intent intent = new Intent(context, LoginActivity.class);
+        context.startActivity(intent);
     }
 }

@@ -8,7 +8,6 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.content.ContextCompat;
-import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -51,8 +50,6 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment {
     TextView waitingMessage;
     @BindView(R.id.loadingContributionsProgressBar)
     ProgressBar progressBar;
-    @BindView(R.id.swipeRefreshLayout)
-    SwipeRefreshLayout swipeRefreshLayout;
 
     @Inject
     @Named("prefs")
@@ -70,13 +67,6 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment {
         ButterKnife.bind(this, v);
 
         contributionsList.setOnItemClickListener((AdapterView.OnItemClickListener) getActivity());
-        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                ((ContributionsListAdapter)contributionsList.getAdapter()).notifyDataSetChanged();
-                swipeRefreshLayout.setRefreshing(false);
-            }
-        });
         if (savedInstanceState != null) {
             Timber.d("Scrolling to %d", savedInstanceState.getInt("grid-position"));
             contributionsList.setSelection(savedInstanceState.getInt("grid-position"));

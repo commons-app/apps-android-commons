@@ -1,5 +1,6 @@
 package fr.free.nrw.commons.contributions;
 
+import android.accounts.Account;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
@@ -34,9 +35,11 @@ import fr.free.nrw.commons.auth.AuthenticatedActivity;
 import fr.free.nrw.commons.auth.SessionManager;
 import fr.free.nrw.commons.media.MediaDetailPagerFragment;
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
+import fr.free.nrw.commons.quiz.QuizChecker;
 import fr.free.nrw.commons.settings.Prefs;
 import fr.free.nrw.commons.upload.UploadService;
 import fr.free.nrw.commons.utils.ContributionUtils;
+import fr.free.nrw.commons.utils.ViewUtil;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.schedulers.Schedulers;
@@ -138,13 +141,21 @@ public  class       ContributionsActivity
 
             getSupportLoaderManager().initLoader(0, null, this);
         }
+
         requestAuthToken();
         initDrawer();
         setTitle(getString(R.string.title_activity_contributions));
 
+
+        if(checkAccount()) {
+            new QuizChecker(this,
+                    sessionManager.getCurrentAccount().name,
+                    mediaWikiApi);
+        }
         if(!BuildConfig.FLAVOR.equalsIgnoreCase("beta")){
             setUploadCount();
         }
+
     }
 
     @Override
@@ -339,6 +350,21 @@ public  class       ContributionsActivity
         } else {
             adapter.unregisterDataSetObserver(observer);
         }
+    }
+
+    /**
+     * to ensure user is logged in
+     * @return
+     */
+    private boolean checkAccount() {
+        Account currentAccount = sessionManager.getCurrentAccount();
+        if (currentAccount == null) {
+            Timber.d("Current account is null");
+            ViewUtil.showLongToast(this, getResources().getString(R.string.user_not_logged_in));
+            sessionManager.forceLogin(this);
+            return false;
+        }
+        return true;
     }
 
     @Override

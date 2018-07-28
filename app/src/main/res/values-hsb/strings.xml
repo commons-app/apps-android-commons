@@ -12,7 +12,7 @@
   <string name="logging_in_message">Prošu čakaj…</string>
   <string name="login_success">Přizjewjenje wuspěšne!</string>
   <string name="login_failed">Přizjewjenje je so njeporadźiło!</string>
-  <string name="authentication_failed">Awtentifikacija je so njeporadźiła!</string>
+  <string name="authentication_failed" fuzzy="true">Awtentifikacija je so njeporadźiła!</string>
   <string name="uploading_started">Nahraće je so započało!</string>
   <string name="upload_completed_notification_title">%1$s nahraty!</string>
   <string name="upload_completed_notification_text">Dótkń so, zo by swoje nahraće widźał</string>

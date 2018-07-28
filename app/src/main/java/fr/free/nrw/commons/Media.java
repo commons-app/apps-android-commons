@@ -3,13 +3,17 @@ package fr.free.nrw.commons;
 import android.net.Uri;
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -356,12 +360,8 @@ public class Media implements Parcelable {
      * @param descriptions Media descriptions
      */
     void setDescriptions(Map<String, String> descriptions) {
-        for (String key : this.descriptions.keySet()) {
-            this.descriptions.remove(key);
-        }
-        for (String key : descriptions.keySet()) {
-            this.descriptions.put(key, descriptions.get(key));
-        }
+        this.descriptions.clear();
+        this.descriptions.putAll(descriptions);
     }
 
     /**

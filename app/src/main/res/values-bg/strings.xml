@@ -18,7 +18,7 @@
   <string name="login_success">Успешно влизане.</string>
   <string name="login_failed">Неуспешно влизане!</string>
   <string name="upload_failed">Файлът не е намерен. Моля, опитайте с друг файл.</string>
-  <string name="authentication_failed">Неуспешен опит за удостоверяване!</string>
+  <string name="authentication_failed" fuzzy="true">Неуспешен опит за удостоверяване!</string>
   <string name="uploading_started">Качването започна!</string>
   <string name="upload_completed_notification_title">Файл %1$s е качен!</string>
   <string name="upload_completed_notification_text">Докоснете, за да видите качения файл</string>
