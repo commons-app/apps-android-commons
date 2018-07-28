@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
@@ -13,6 +14,7 @@ import android.text.Editable;
 import android.text.Html;
 import android.text.TextWatcher;
 import android.text.method.LinkMovementMethod;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -29,6 +31,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.Locale;
 
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -74,13 +77,13 @@ public class SingleUploadFragment extends CommonsDaggerSupportFragment {
             //What happens when the 'submit' icon is tapped
             case R.id.menu_upload_single:
 
-                if (titleEdit.getText().toString().isEmpty()) {
+                if (titleEdit.getText().toString().trim().isEmpty()) {
                     Toast.makeText(getContext(), R.string.add_title_toast, Toast.LENGTH_LONG).show();
                     return false;
                 }
 
-                String title = titleEdit.getText().toString();
-                String desc = descEdit.getText().toString();
+                String title = titleEdit.getText().toString().trim();
+                String desc = descEdit.getText().toString().trim();
 
                 //Save the title/desc in short-lived cache so next time this fragment is loaded, we can access these
                 prefs.edit()
@@ -341,5 +344,18 @@ public class SingleUploadFragment extends CommonsDaggerSupportFragment {
                 .setNeutralButton(android.R.string.ok, (dialog, id) -> dialog.cancel())
                 .create()
                 .show();
+    }
+
+    /**
+     * To launch the Commons:Licensing
+     * @param view
+     */
+    @OnClick(R.id.licenseInfo)
+    public void launchLicenseInfo(View view){
+        Log.i("Language", Locale.getDefault().getLanguage());
+        UrlLicense urlLicense = new UrlLicense();
+        urlLicense.initialize();
+        String url = urlLicense.getLicenseUrl(Locale.getDefault().getLanguage());
+        Utils.handleWebUrl(getActivity() , Uri.parse(url));
     }
 }

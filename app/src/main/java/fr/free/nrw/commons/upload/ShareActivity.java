@@ -21,10 +21,9 @@ import android.os.Environment;
 import android.support.annotation.NonNull;
 import android.support.annotation.RequiresApi;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.graphics.drawable.VectorDrawableCompat;
-import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
+import android.view.KeyEvent;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.DecelerateInterpolator;
@@ -49,6 +48,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.auth.AuthenticatedActivity;
+import fr.free.nrw.commons.auth.LoginActivity;
 import fr.free.nrw.commons.auth.SessionManager;
 import fr.free.nrw.commons.caching.CacheController;
 import fr.free.nrw.commons.category.CategorizationFragment;
@@ -64,10 +64,10 @@ import fr.free.nrw.commons.mwapi.MediaWikiApi;
 import fr.free.nrw.commons.utils.ViewUtil;
 import timber.log.Timber;
 
-import android.support.design.widget.FloatingActionButton;
 import static fr.free.nrw.commons.upload.ExistingFileAsync.Result.DUPLICATE_PROCEED;
 import static fr.free.nrw.commons.upload.ExistingFileAsync.Result.NO_DUPLICATE;
 import static fr.free.nrw.commons.upload.FileUtils.getSHA1;
+import static fr.free.nrw.commons.wikidata.WikidataConstants.WIKIDATA_ENTITY_ID_PREF;
 
 /**
  * Activity for the title/desc screen after image is selected. Also starts processing image
@@ -77,7 +77,6 @@ public class ShareActivity
         extends AuthenticatedActivity
         implements SingleUploadFragment.OnUploadActionInitiated,
         OnCategoriesSaveHandler {
-    private static final int REQUEST_PERM_ON_CREATE_LOCATION = 2;
     private static final int REQUEST_PERM_ON_SUBMIT_STORAGE = 4;
     //Had to make them class variables, to extract out the click listeners, also I see no harm in this
     final Rect startBounds = new Rect();
@@ -130,33 +129,46 @@ public class ShareActivity
     private String title;
     private String description;
     private String wikiDataEntityId;
-    private Snackbar snackbar;
     private boolean duplicateCheckPassed = false;
     private boolean isNearbyUpload = false;
     private Animator CurrentAnimator;
     private long ShortAnimationDuration;
     private boolean isFABOpen = false;
     private float startScaleFinal;
+    private boolean isZoom = false;
+
 
     /**
      * Called when user taps the submit button.
      * Requests Storage permission, if needed.
      */
+
     @Override
     public void uploadActionInitiated(String title, String description) {
 
         this.title = title;
         this.description = description;
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            if (needsToRequestStoragePermission()) {
-                requestPermissions(new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},
-                        REQUEST_PERM_ON_SUBMIT_STORAGE);
+
+        if (sessionManager.getCurrentAccount() != null) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                // Check for Storage permission that is required for upload.
+                // Do not allow user to proceed without permission, otherwise will crash
+                if (needsToRequestStoragePermission()) {
+                    requestPermissions(new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},
+                            REQUEST_PERM_ON_SUBMIT_STORAGE);
+                } else {
+                    uploadBegins();
+                }
             } else {
                 uploadBegins();
             }
-        } else {
-            uploadBegins();
+        }
+        else  //Send user to login activity
+        {
+            Toast.makeText(this, "You need to login first!", Toast.LENGTH_SHORT).show();
+            Intent loginIntent = new Intent(ShareActivity.this, LoginActivity.class);
+            startActivity(loginIntent);
         }
     }
 
@@ -173,10 +185,12 @@ public class ShareActivity
                 != PackageManager.PERMISSION_GRANTED);
     }
 
+
     /**
      * Called after permission checks are done.
      * Gets file metadata for category suggestions, displays toast, caches categories found, calls uploadController
      */
+
     private void uploadBegins() {
         fileObj.processFileCoordinates(locationPermitted);
 
@@ -189,15 +203,18 @@ public class ShareActivity
             Timber.d("Cache the categories found");
         }
 
-        uploadController.startUpload(title, mediaUri, description, mimeType, source, decimalCoords, wikiDataEntityId, c -> {
-            ShareActivity.this.contribution = c;
-            showPostUpload();
-        });
-    }
+        uploadController.startUpload(title,mediaUri,description,mimeType,source,decimalCoords,wikiDataEntityId,c ->
+
+    {
+        ShareActivity.this.contribution = c;
+        showPostUpload();
+    });
+}
 
     /**
      * Starts CategorizationFragment after uploadBegins.
      */
+
     private void showPostUpload() {
         if (categorizationFragment == null) {
             categorizationFragment = new CategorizationFragment();
@@ -275,22 +292,6 @@ public class ShareActivity
         Timber.d("Uri: %s", mediaUri.toString());
         Timber.d("Ext storage dir: %s", Environment.getExternalStorageDirectory());
 
-        useNewPermissions = false;
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            useNewPermissions = true;
-            if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
-                locationPermitted = true;
-            }
-        }
-
-        // Check location permissions if M or newer for category suggestions, request via snackbar if not present
-        if (!locationPermitted) {
-            requestPermissionUsingSnackBar(
-                    getString(R.string.location_permission_rationale),
-                    new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
-                    REQUEST_PERM_ON_CREATE_LOCATION);
-        }
-
         SingleUploadFragment shareView = (SingleUploadFragment) getSupportFragmentManager().findFragmentByTag("shareView");
         categorizationFragment = (CategorizationFragment) getSupportFragmentManager().findFragmentByTag("categorization");
         if (shareView == null && categorizationFragment == null) {
@@ -325,6 +326,8 @@ public class ShareActivity
             if (intent.hasExtra("isDirectUpload")) {
                 Timber.d("This was initiated by a direct upload from Nearby");
                 isNearbyUpload = true;
+                wikiDataEntityId = intent.getStringExtra(WIKIDATA_ENTITY_ID_PREF);
+                Timber.d("Received wikiDataEntityId from contribution controller %s", wikiDataEntityId);
             }
             mimeType = intent.getType();
         }
@@ -389,7 +392,7 @@ public class ShareActivity
     }
 
     /**
-     * Handles BOTH snackbar permission request (for location) and submit button permission request (for storage)
+     * Handles submit button permission request (for storage)
      *
      * @param requestCode  type of request
      * @param permissions  permissions requested
@@ -398,39 +401,17 @@ public class ShareActivity
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         switch (requestCode) {
-            case REQUEST_PERM_ON_CREATE_LOCATION: {
-                if (grantResults.length >= 1 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    locationPermitted = true;
-                    checkIfFileExists();
-                }
-                return;
-            }
-
             // Storage (from submit button) - this needs to be separate from (1) because only the
             // submit button should bring user to next screen
             case REQUEST_PERM_ON_SUBMIT_STORAGE: {
                 if (grantResults.length >= 1 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    //It is OK to call this at both (1) and (4) because if perm had been granted at
-                    //snackbar, user should not be prompted at submit button
                     checkIfFileExists();
 
                     //Uploading only begins if storage permission granted from arrow icon
                     uploadBegins();
-                    snackbar.dismiss();
                 }
             }
         }
-    }
-
-    /**
-     * Displays Snackbar to ask for location permissions
-     */
-    private Snackbar requestPermissionUsingSnackBar(String rationale, final String[] perms, final int code) {
-        Snackbar snackbar = Snackbar.make(findViewById(android.R.id.content), rationale,
-                Snackbar.LENGTH_INDEFINITE).setAction(R.string.ok,
-                view -> ActivityCompat.requestPermissions(ShareActivity.this, perms, code));
-        snackbar.show();
-        return snackbar;
     }
 
     /**
@@ -469,12 +450,6 @@ public class ShareActivity
     @Override
     public void onPause() {
         super.onPause();
-        try {
-            gpsObj.unregisterLocationManager();
-            Timber.d("Unregistered locationManager");
-        } catch (NullPointerException e) {
-            Timber.d("locationManager does not exist, not unregistered");
-        }
     }
 
     @Override
@@ -505,6 +480,7 @@ public class ShareActivity
         if (CurrentAnimator != null) {
             CurrentAnimator.cancel();
         }
+        isZoom = true;
         ViewUtil.hideKeyboard(ShareActivity.this.findViewById(R.id.titleEdit | R.id.descEdit));
         closeFABMenu();
         mainFab.setVisibility(View.GONE);
@@ -521,7 +497,6 @@ public class ShareActivity
 
         // Load the high-resolution "zoomed-in" image.
         expandedImageView.setImageBitmap(scaledImage);
-
         float startScale = zoomObj.adjustStartEndBounds(startBounds, finalBounds, globalOffset);
 
         // Hide the thumbnail and show the zoomed-in view. When the animation
@@ -593,6 +568,7 @@ public class ShareActivity
         if (CurrentAnimator != null) {
             CurrentAnimator.cancel();
         }
+        isZoom = false;
         zoomOutButton.setVisibility(View.GONE);
         mainFab.setVisibility(View.VISIBLE);
 
@@ -603,6 +579,7 @@ public class ShareActivity
                 .with(ObjectAnimator.ofFloat(expandedImageView, View.Y, startBounds.top))
                 .with(ObjectAnimator.ofFloat(expandedImageView, View.SCALE_X, startScaleFinal))
                 .with(ObjectAnimator.ofFloat(expandedImageView, View.SCALE_Y, startScaleFinal));
+
         set.setDuration(ShortAnimationDuration);
         set.setInterpolator(new DecelerateInterpolator());
         set.addListener(new AnimatorListenerAdapter() {
@@ -635,4 +612,18 @@ public class ShareActivity
             startActivity(mapIntent);
         }
     }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        switch (keyCode) {
+            case KeyEvent.KEYCODE_BACK:
+                if(isZoom) {
+                    onZoomOutFabClicked();
+                    return true;
+                }
+        }
+        return super.onKeyDown(keyCode,event);
+
+    }
 }
+

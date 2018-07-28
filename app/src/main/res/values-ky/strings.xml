@@ -13,7 +13,7 @@
   <string name="logging_in_message">Сураныч, күтө туруңуз…</string>
   <string name="login_success">Сиз ийгиликтүү кирдиңиз</string>
   <string name="login_failed">Системага кирүүдө катачылык бар!</string>
-  <string name="authentication_failed">Таану катачылыгы!</string>
+  <string name="authentication_failed" fuzzy="true">Таану катачылыгы!</string>
   <string name="uploading_started">Жүктөө башталды!</string>
   <string name="upload_completed_notification_title">%1$s жүктөлүүдө</string>
   <string name="upload_completed_notification_text">Жүктөлгөн файлды көрүү үчүн басыңыз</string>

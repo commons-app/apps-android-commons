@@ -16,7 +16,7 @@
   <string name="login_success">تىزىمغا كىرىش مۇۋەپپەقىيەتلىك!</string>
   <string name="login_failed">تىزىمغا كىرەلمىدى!</string>
   <string name="upload_failed">ھۆججەت تېپىلمىدى . سىناپ بېقىڭ ، باشقا ھۆججەتلەر .</string>
-  <string name="authentication_failed">سالاھىيەتنى ئىسپاتىنى تەكشۈرۈش مەغلۇپ بولدى !</string>
+  <string name="authentication_failed" fuzzy="true">سالاھىيەتنى ئىسپاتىنى تەكشۈرۈش مەغلۇپ بولدى !</string>
   <string name="uploading_started">يۈكلەش باشلاندى!</string>
   <string name="upload_completed_notification_title">%1$s يۈكلەندى!</string>
   <string name="upload_completed_notification_text">چېكىپ كۆرۈپ بېقىڭ ، سىزنىڭ يۇقىرىغا يوللاش</string>

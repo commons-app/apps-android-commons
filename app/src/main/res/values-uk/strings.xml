@@ -17,6 +17,7 @@
   <string name="app_name">Вікісховище</string>
   <string name="bullet">•</string>
   <string name="menu_settings">Налаштування</string>
+  <string name="intent_share_upload_label">Завантажити до Вікісховища</string>
   <string name="username">Ім\'я користувача</string>
   <string name="password">Пароль</string>
   <string name="login_credential">Увійдіть до вашого облікового запису Commons Beta</string>
@@ -28,7 +29,7 @@
   <string name="login_success">Ви успішно увійшли!</string>
   <string name="login_failed">Не вдалося увійти</string>
   <string name="upload_failed">Файл не знайдено. Будь ласка, спробуйте інший файл.</string>
-  <string name="authentication_failed">Помилка автентифікації</string>
+  <string name="authentication_failed">Помилка автентифікації. Будь ласка, увійдіть у свій обліковий запис знову</string>
   <string name="uploading_started">Завантаження розпочато!</string>
   <string name="upload_completed_notification_title">Завантажено %1$s!</string>
   <string name="upload_completed_notification_text">Торкніться, щоб переглянути Ваше завантаження</string>
@@ -99,6 +100,7 @@
   <string name="title_activity_settings">Налаштування</string>
   <string name="title_activity_signup">Зареєструватися</string>
   <string name="title_activity_featured_images">Вибрані зображення</string>
+  <string name="title_activity_category_details">Категорія</string>
   <string name="menu_about">Про програму</string>
   <string name="about_license">Додаток «Вікісховище» — це програма з відкритим кодом, яку створили отримувачі грантів та волонтери спільноти Вікімедіа. Фонд Вікімедіа не брав участі у створенні, розробці чи обслуговуванні цього додатка.</string>
   <string name="about_improve">Ви можете створити новий &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;запит на GitHub&lt;/a&gt;, щоб повідомити про помилки, або висловити пропозиції.</string>
@@ -118,7 +120,7 @@
   <string name="preference_license">Стандартна ліцензія</string>
   <string name="use_previous">Використати попередню назву/опис</string>
   <string name="allow_gps">Автоматично отримати поточне розташування</string>
-  <string name="allow_gps_summary">Отримати поточне розташування, щоб з\'явилися підказки категорій, якщо зображення не має геотегів</string>
+  <string name="allow_gps_summary">Якщо зображення не містить координат, то буде отримано і поставлено ваше поточне розташування. Будьте уважні, якщо ви не хочете розкривати ваше розташування.</string>
   <string name="preference_theme">Нічний режим</string>
   <string name="preference_theme_summary">Використати темну тему</string>
   <string name="license_name_cc_by_sa_four"> Attribution-ShareAlike 4.0</string>
@@ -207,6 +209,7 @@
   <string name="background_image">Фонове зображення</string>
   <string name="mediaimage_failed">Помилка медіазображення</string>
   <string name="no_image_found">Не знайдено зображення</string>
+  <string name="no_subcategory_found">Підкатегорій не знайдено</string>
   <string name="upload_image">Завантажити зображення</string>
   <string name="welcome_image_mount_zao">Гора Зао</string>
   <string name="welcome_image_llamas">Лами</string>
@@ -286,9 +289,16 @@
   <string name="no_images_found">Зображень не знайдено!</string>
   <string name="error_loading_images">Сталася помилка при завантаженні зображень.</string>
   <string name="image_uploaded_by">Завантажено: %1$s</string>
+  <string name="block_notification">Редагування у до Вікісховищі вам було заблоковано</string>
   <string name="share_app_title">Поділитися програмою</string>
   <string name="share_coordinates_not_present">Під час вибору зображення не були вказані координати</string>
   <string name="error_fetching_nearby_places">Помилка отримання місць поблизу.</string>
+  <string name="appwidget_img">Зображення дня</string>
+  <string name="app_widget_heading">Зображення дня</string>
+  <string name="search_recent_header">Недавні пошуки:</string>
+  <string name="successful_wikidata_edit">Зображення успішно додано до сторінки %1$s у Вікіданих!</string>
+  <string name="wikidata_edit_failure">Не вдалось оновити відповідну сторінку Вікіданих!</string>
   <string name="menu_set_wallpaper">Поставити шпалерами екрану</string>
   <string name="wallpaper_set_successfully">Шпалери екрану виставлено успішно!</string>
+  <string name="user_not_logged_in">Сесія авторизації спливла. Будь ласка, авторизуйтесь знову.</string>
 </resources>
