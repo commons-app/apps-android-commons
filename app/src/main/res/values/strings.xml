@@ -321,11 +321,6 @@
     <string name="exif_tag_name_model">Camera Model</string>
     <string name="exif_tag_name_software">Software</string>
 
-
-  <string name="delete_recent_searches_dialog">Are you sure you want to clear your search history?</string>
-  <string name="search_history_deleted">Search history deleted</string>
-  <string name="user_not_logged_in">Login session expired, please log in again.</string>
-
 <string name="quiz">Quiz</string>
   <string name="quiz_question_string">Is this picture OK to upload?</string>
   <string name="question">Question</string>
