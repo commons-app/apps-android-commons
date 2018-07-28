@@ -27,7 +27,7 @@
   <string name="login_success">Inloggningen lyckades!</string>
   <string name="login_failed">Det gick inte att logga in!</string>
   <string name="upload_failed">Filen hittades inte. Försök med en annan fil.</string>
-  <string name="authentication_failed">Autentisering misslyckades!</string>
+  <string name="authentication_failed">Autentisering misslyckades, var god logga in igen!</string>
   <string name="uploading_started">Överföring påbörjad!</string>
   <string name="upload_completed_notification_title">%1$s överförd!</string>
   <string name="upload_completed_notification_text">Tryck för att visa din uppladdning</string>
@@ -109,7 +109,7 @@
   <string name="preference_license">Standardlicens</string>
   <string name="use_previous">Använd föregående titel/beskrivning</string>
   <string name="allow_gps">Hämta aktuell plats automatiskt</string>
-  <string name="allow_gps_summary">Hämta aktuell plats för att erbjuda kategoriförslag om bilden inte är geotaggad</string>
+  <string name="allow_gps_summary">Hämtar aktuell plats om bilden inte är geotaggad och geotaggar bilden med den. Varning: Detta kommer att avslöja din nuvarande position.</string>
   <string name="preference_theme">Nattläge</string>
   <string name="preference_theme_summary">Använd mörkt tema</string>
   <string name="license_name_cc_by_sa_four">Erkännande-DelaLika 4.0</string>
@@ -280,6 +280,11 @@
   <string name="share_app_title">Dela app</string>
   <string name="share_coordinates_not_present">Koordinater specificerades inte vid bildvalet</string>
   <string name="error_fetching_nearby_places">Fel uppstod när platser i närheten hämtades.</string>
+  <string name="appwidget_img">Dagens bild</string>
+  <string name="app_widget_heading">Dagens bild</string>
+  <string name="successful_wikidata_edit">Bilden lades till i %1$s på Wikidata!</string>
+  <string name="wikidata_edit_failure">Misslyckades att uppdatera motsvarande Wikidataentitet!</string>
   <string name="menu_set_wallpaper">Ange som bakgrundsbild</string>
   <string name="wallpaper_set_successfully">Bakgrundsbilden ändrades!</string>
+  <string name="user_not_logged_in">Inloggningssessionen löptes ut, var god logga in igen.</string>
 </resources>

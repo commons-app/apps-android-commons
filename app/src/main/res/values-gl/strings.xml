@@ -16,6 +16,7 @@
   <string name="app_name">Commons</string>
   <string name="bullet">•</string>
   <string name="menu_settings">Configuracións</string>
+  <string name="intent_share_upload_label">Cargar en Commons</string>
   <string name="username">Nome de usuario</string>
   <string name="password">Contrasinal</string>
   <string name="login_credential">Acceda á súa conta de Commons Beta</string>
@@ -27,7 +28,7 @@
   <string name="login_success">Accedeu correctamente!</string>
   <string name="login_failed">Erro durante o inición de sesión!</string>
   <string name="upload_failed">Ficheiro non atopado. Por favor, probe con outro.</string>
-  <string name="authentication_failed">Erro durante a autenticación!</string>
+  <string name="authentication_failed">Erro de autenticación, por favor inicia unha nova sesión</string>
   <string name="uploading_started">A carga comezou!</string>
   <string name="upload_completed_notification_title">Cargouse \"%1$s\"!</string>
   <string name="upload_completed_notification_text">Prema para ollar a súa carga</string>
@@ -55,6 +56,7 @@
   <string name="add_title_toast">Por favor, proporcione un título para este ficheiro</string>
   <string name="share_description_hint">Descrición</string>
   <string name="login_failed_network">Erro ao acceder ao sistema: Fallou a rede</string>
+  <string name="login_failed_wrong_credentials">Non se pode acceder. Revise o nome de usuario e o contrasinal</string>
   <string name="login_failed_throttled">Demasiados intentos incorrectos. Inténteo de novo nuns minutos.</string>
   <string name="login_failed_blocked">Sentímolo, este usuario está bloqueado en Commons</string>
   <string name="login_failed_2fa_needed">Debe proporcionar o seu código de autenticación de dous factores.</string>
@@ -108,7 +110,7 @@
   <string name="preference_license">Licenza por defecto</string>
   <string name="use_previous">Usar o título ou a descrición anterior</string>
   <string name="allow_gps">Obter automaticamente a localización actual</string>
-  <string name="allow_gps_summary">Obter a localización actual para ofrecer suxestións de categoría se a imaxe non está xeolocalizada</string>
+  <string name="allow_gps_summary">Obter a localización actual se a imaxe non está xeolocalizada, e xeolocaliza a imaxe con ela. Atención: Isto revelará a súa localización actual.</string>
   <string name="preference_theme">Modo nocturno</string>
   <string name="preference_theme_summary">Usar tema escuro</string>
   <string name="license_name_cc_by_sa_four"> Recoñecemento-CompartirIgual 4.0</string>
@@ -267,4 +269,22 @@
   <string name="about_translate_proceed">Proceder</string>
   <string name="about_translate_cancel">Cancelar</string>
   <string name="retry">Reintentar</string>
+  <string name="showcase_view_got_it_button">Entendido!</string>
+  <string name="showcase_view_whole_nearby_activity">Hai sitios preto de vostede que precisan fotos para ilustrar os seus artigos de Wikipedia</string>
+  <string name="showcase_view_list_icon">Premendo neste botón aparecerá unha lista destes lugares</string>
+  <string name="showcase_view_plus_fab">Pode cargar unha imaxe de calquera lugar dende a galería ou a cámara</string>
+  <string name="no_images_found">Non se atopou ningunha imaxeǃ</string>
+  <string name="error_loading_images">Houbo un erro ó subir as imaxes.</string>
+  <string name="image_uploaded_by">Subida porː %1$s</string>
+  <string name="block_notification">Está bloqueado e non pode editar en Commons</string>
+  <string name="share_app_title">Compartir a aplicación</string>
+  <string name="share_coordinates_not_present">Non se indicaron as coordenadas ó seleccionar a imaxe</string>
+  <string name="error_fetching_nearby_places">Erro ó procurar os lugares próximos.</string>
+  <string name="appwidget_img">Imaxe do día</string>
+  <string name="app_widget_heading">Imaxe do día</string>
+  <string name="successful_wikidata_edit">A imaxe engadiuse con éxito a %1$s en Wikidata!</string>
+  <string name="wikidata_edit_failure">Fallou a actualización da entidade do Wikidata correspondente!</string>
+  <string name="menu_set_wallpaper">Definir imaxe de fondo</string>
+  <string name="wallpaper_set_successfully">A imaxe de fondo configurouse correctamenteǃ</string>
+  <string name="user_not_logged_in">A sesión caducou, por favor inicia unha nova sesión.</string>
 </resources>

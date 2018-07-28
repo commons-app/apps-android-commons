@@ -14,7 +14,7 @@
   <string name="login_success">Kasil mlebu log!</string>
   <string name="login_failed">Wurung mlebu log!</string>
   <string name="upload_failed">Barkas ora katemu. Jajalana barkas liyané.</string>
-  <string name="authentication_failed">Wurung otèntifikasi!</string>
+  <string name="authentication_failed" fuzzy="true">Wurung otèntifikasi!</string>
   <string name="uploading_started">Wiwit ngunggah!</string>
   <string name="upload_completed_notification_title">%1$s kaunggah!</string>
   <string name="upload_completed_notification_text">Dudul saperlu ndeleng unggahané panjenengan</string>
