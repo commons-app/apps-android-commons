@@ -5,11 +5,17 @@
 * Veeven
 -->
 <resources>
+  <string name="preference_category_appearance">రూపురేఖలు</string>
+  <string name="preference_category_general">సాధారణం</string>
+  <string name="preference_category_feedback">ప్రతిస్పందన</string>
+  <string name="preference_category_location">ప్రాంతం</string>
   <string name="app_name">కామన్స్</string>
+  <string name="bullet">•</string>
   <string name="menu_settings">అమరికలు</string>
   <string name="username">వాడుకరిపేరు</string>
   <string name="password">సంకేతపదం</string>
   <string name="login">లాగినవండి</string>
+  <string name="forgot_password">సంకేతపదం మర్చిపోయారా?</string>
   <string name="signup">నమోదవ్వండి</string>
   <string name="logging_in_title">లాగినవుతున్నారు</string>
   <string name="logging_in_message">వేచివుండండి…</string>
@@ -24,7 +30,7 @@
   <string name="upload_progress_notification_title_finishing">%1$s ఎక్కింపు పూర్తికావస్తోంది</string>
   <string name="upload_failed_notification_title">%1$s ఎక్కింపు విఫలమైంది</string>
   <string name="upload_failed_notification_subtitle">చూసేందుకు నొక్కండి</string>
-  <string name="title_activity_contributions" fuzzy="true">నా ఎక్కింపులు</string>
+  <string name="title_activity_contributions">ఇటీవలి నా ఎక్కింపులు</string>
   <string name="contribution_state_queued">క్యూలో ఉంది</string>
   <string name="contribution_state_failed">విఫలమైంది</string>
   <string name="contribution_state_in_progress">%1$d%% పూర్తయింది</string>
@@ -47,6 +53,7 @@
   <string name="menu_upload_single">ఎక్కించు</string>
   <string name="categories_search_text_hint">వర్గాల్లో వెతకండి</string>
   <string name="menu_save_categories">భద్రపరచు</string>
+  <string name="display_list_button">జాబితా</string>
   <string name="categories_not_found">%1$s తో సరిపోలే వర్గాలేమీ లేవు</string>
   <string name="categories_skip_explanation" fuzzy="true">వికీమీడియా కామన్స్ లో వెతికేటపుడు మీ బొమ్మలు మరింత సులువుగా కనబడేందుకు వాటికి వర్గాలను చేర్చండి.\n\nవర్గాలను చేర్చేందుకు టైపండి.\nఈ అంగను దాటేసి ముందుకు పోయేందుకు, ఈ సందేశాన్ని నొక్కండి (లేదా ’బ్యాక్’ నొక్కండి)</string>
   <string name="categories_activity_title">వర్గాలు</string>

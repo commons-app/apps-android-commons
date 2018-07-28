@@ -11,6 +11,8 @@
 * Tgkarounos
 -->
 <resources>
+  <string name="title_activity_explore">Εξερεύνηση</string>
+  <string name="navigation_item_explore">Εξερεύνηση</string>
   <string name="preference_category_appearance">Εμφάνιση</string>
   <string name="preference_category_general">Γενικά</string>
   <string name="preference_category_feedback">Ανατροφοδότηση</string>
@@ -18,6 +20,7 @@
   <string name="app_name">Commons</string>
   <string name="bullet">•</string>
   <string name="menu_settings">Ρυθμίσεις</string>
+  <string name="intent_share_upload_label">Ανέβασμα στα Κοινά</string>
   <string name="username">Όνομα χρήστη</string>
   <string name="password">Κωδικός πρόσβασης</string>
   <string name="login_credential">Συνδεθείτε στο λογαριασμό σας στο Commons Beta</string>
@@ -92,6 +95,7 @@
   <string name="title_activity_settings">Ρυθμίσεις</string>
   <string name="title_activity_signup">Εγγραφή</string>
   <string name="title_activity_featured_images">Προβεβλημμένες εικόνες</string>
+  <string name="title_activity_category_details">Κατηγορία</string>
   <string name="menu_about">Σχετικά</string>
   <string name="about_license">Λογισμικό ανοικτού κωδικού που κυκλοφορεί υπό την &lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/COPYING\"&gt;Άδεια Apache v2&lt;/a&gt;. Το Wikimedia Commons και το λογότυπο είναι εμπορικά σήματα του Ιδρύματος Wikimedia και χρησιμοποιούνται με άδεια από το Ίδρυμα Wikimedia. Δεν συμμετέχουμε  στην δημιουργία, ανάπτυξη ή συντήρηση  του Ιδρύματος  Wikimedia.</string>
   <string name="about_improve">Δημιουργήστε ένα νέο &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;GitHub θέμα&lt;/a&gt; για αναφορές σφαλμάτων και προτάσεις.</string>
@@ -200,6 +204,8 @@
   <string name="background_image">Εικόνα Υποβάθρου</string>
   <string name="mediaimage_failed">Η Εικόνα των Μέσων Απέτυχε (δεν μπορεί να φορτωθεί)</string>
   <string name="no_image_found">Δεν Βρέθηκε καμία Εικόνα</string>
+  <string name="no_subcategory_found">Δεν βρέθηκαν υποκατηγορίες</string>
+  <string name="no_parentcategory_found">Δεν βρέθηκαν γονικές κατηγορίες</string>
   <string name="upload_image">Φορτώστε την Εικόνα</string>
   <string name="welcome_image_mount_zao">Mount Zao</string>
   <string name="welcome_image_llamas">Llamas</string>
@@ -285,9 +291,19 @@
   <string name="error_fetching_nearby_places">Σφάλμα κατά την εύρεση κοντινών μερών.</string>
   <string name="appwidget_img">Φωτογραφία της Ημέρας</string>
   <string name="app_widget_heading">Φωτογραφία της Ημέρας</string>
+  <string name="menu_search_button">Αναζήτηση</string>
+  <string name="search_commons">Αναζήτηση στα κοινά</string>
+  <string name="images_not_found">Δεν βρέθηκαν εικόνες που αντιστοιχούν στο %1$s</string>
+  <string name="title_activity_search">Αναζήτηση</string>
+  <string name="search_recent_header">Πρόσφατες αναζητήσεις:</string>
+  <string name="provider_searches">Πρόσφατα αναζητημένα ερωτήματα</string>
+  <string name="error_loading_categories">Συνέβη σφάλμα κατά τη φόρτωση κατηγοριών.</string>
+  <string name="error_loading_subcategories">Συνέβη σφάλμα κατά τη φόρτωση υποκατηγοριών.</string>
   <string name="successful_wikidata_edit">Η εικόνα προστέθηκε επιτυχώς στο %1$s στο Wikidata!</string>
   <string name="wikidata_edit_failure">Αποτυχία ενημέρωσης της αντιστοιχούσας οντότητας του Wikidata!</string>
   <string name="menu_set_wallpaper">Ρύθμιση ταπετσαρίας</string>
   <string name="wallpaper_set_successfully">Η ταπετσαρία ρυθμίστηκε επιτυχώς!</string>
+  <string name="delete_recent_searches_dialog">Είστε σίγουρος ότι θέλετε να καθαρίσετε το ιστορικό αναζήτησης;</string>
+  <string name="search_history_deleted">Το ιστορικό αναζήτησης διεγράφη</string>
   <string name="user_not_logged_in">Η συνεδρία σύνδεσης έληξε, παρακαλώ συνδεθείτε ξανά.</string>
 </resources>

@@ -3,6 +3,8 @@ package fr.free.nrw.commons.mwapi;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
+import org.json.JSONObject;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
@@ -95,7 +97,13 @@ public interface MediaWikiApi {
     @NonNull
     Single<Integer> getUploadCount(String userName);
 
+    @NonNull
+    Single<JSONObject> getRevertRespObjectSingle(String userName);
+
     boolean isUserBlockedFromCommons();
+
+    @NonNull
+    Single<JSONObject> getAchievements(String userName);
 
     interface ProgressListener {
         void onProgress(long transferred, long total);

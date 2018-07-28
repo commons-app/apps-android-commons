@@ -12,6 +12,7 @@
   <string name="app_name">Commons</string>
   <string name="bullet">•</string>
   <string name="menu_settings">Astellungen</string>
+  <string name="intent_share_upload_label">Op Commons eroplueden</string>
   <string name="username">Benotzernumm</string>
   <string name="password">Passwuert</string>
   <string name="login_credential">Loggt Iech an Äre Commons-Beta-Benotzerkont an</string>
@@ -176,6 +177,8 @@
   <string name="maximum_limit_alert">Et kënnen der net méi wéi 500 gewise ginn</string>
   <string name="logout_verification">Wëllt dir Iech wierklech ausloggen?</string>
   <string name="commons_logo">Commons-Logo</string>
+  <string name="commons_website">Internetsite vu Commons</string>
+  <string name="commons_facebook">Commons-Facebook-Säit</string>
   <string name="background_image">Hannergrondbild</string>
   <string name="no_image_found">Kee Bild fonnt</string>
   <string name="upload_image">Bild eroplueden</string>
@@ -242,6 +245,7 @@
   <string name="no_images_found">Keng Biller fonnt!</string>
   <string name="error_loading_images">Feeler beim Eropluede vu Biller.</string>
   <string name="image_uploaded_by">Eropgeluede vum: %1$s</string>
+  <string name="block_notification">Dir sidd gespaart a kënnt keng Ännerungen op Commons maachen</string>
   <string name="appwidget_img">Bild vum Dag</string>
   <string name="app_widget_heading">Bild vum Dag</string>
   <string name="wikidata_edit_failure">Déi entspriechend Wikidata-Entitéit konnt net aktualiséiert ginn!</string>

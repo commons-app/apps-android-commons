@@ -127,6 +127,7 @@
   <string name="tutorial_2_subtext_2">Objektu erabilgarriak (bizikletak, tren geltokiak)</string>
   <string name="tutorial_2_subtext_3">Pertsona famatuak (zure alkatea, zuk ezagututako atleta olinpikoren bat...)</string>
   <string name="tutorial_3_text">Mesedez EZ igo:</string>
+  <string name="tutorial_3_subtext_1">Autorretratuak edo zure lagunen argazkiak</string>
   <string name="tutorial_3_subtext_2">Internetetik jaitsitako irudiak</string>
   <string name="tutorial_4_text">Igoera adibidea:</string>
   <string name="tutorial_4_subtext">- Izenburua: Sydney Opera House\n- Deskribapena: Sydney Opera House badiaren beste aldetik ikusita\n- Kategoriak: Sydney Opera House mendebaldetik, Sydney Opera House urrunetik ikusita</string>
@@ -247,5 +248,8 @@
   <string name="share_coordinates_not_present">Ez da koordenaturik zehaztu irudia aukeratzean</string>
   <string name="appwidget_img">Eguneko argazkia</string>
   <string name="app_widget_heading">Eguneko argazkia</string>
+  <string name="wikidata_edit_failure">Ezin izan da dagokion Wikidata entitatea eguneratu!</string>
+  <string name="menu_set_wallpaper">Horma papera ezarri</string>
+  <string name="wallpaper_set_successfully">Horma papera ezarri da!</string>
   <string name="user_not_logged_in">Saioa hasteko denbora amaituta, mesedez, hasi saioa berriro.</string>
 </resources>
