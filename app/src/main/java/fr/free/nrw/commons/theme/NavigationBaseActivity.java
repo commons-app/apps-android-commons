@@ -15,6 +15,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -24,6 +25,7 @@ import fr.free.nrw.commons.BuildConfig;
 import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.WelcomeActivity;
+import fr.free.nrw.commons.achievements.AchievementsActivity;
 import fr.free.nrw.commons.auth.AccountUtil;
 import fr.free.nrw.commons.auth.LoginActivity;
 import fr.free.nrw.commons.contributions.ContributionsActivity;
@@ -68,17 +70,33 @@ public abstract class NavigationBaseActivity extends BaseActivity
 
         View navHeaderView = navigationView.getHeaderView(0);
         TextView username = navHeaderView.findViewById(R.id.username);
-
         AccountManager accountManager = AccountManager.get(this);
         Account[] allAccounts = accountManager.getAccountsByType(AccountUtil.ACCOUNT_TYPE);
         if (allAccounts.length != 0) {
             username.setText(allAccounts[0].name);
         }
+        ImageView userIcon = navHeaderView.findViewById(R.id.user_icon);
+        userIcon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                drawerLayout.closeDrawer(navigationView);
+                AchievementsActivity.startYourself(NavigationBaseActivity.this);
+            }
+        });
     }
 
     public void initBackButton() {
         int backStackEntryCount = getSupportFragmentManager().getBackStackEntryCount();
         toggle.setDrawerIndicatorEnabled(backStackEntryCount == 0);
+        toggle.setToolbarNavigationClickListener(v -> onBackPressed());
+    }
+
+    /**
+     * This method changes the toolbar icon to back regardless of any conditions that
+     * there is any fragment in the backStack or not
+     */
+    public void forceInitBackButton() {
+        toggle.setDrawerIndicatorEnabled(false);
         toggle.setToolbarNavigationClickListener(v -> onBackPressed());
     }
 
@@ -156,9 +174,9 @@ public abstract class NavigationBaseActivity extends BaseActivity
                 drawerLayout.closeDrawer(navigationView);
                 NotificationActivity.startYourself(this);
                 return true;
-            case R.id.action_featured_images:
+            case R.id.action_explore:
                 drawerLayout.closeDrawer(navigationView);
-                CategoryImagesActivity.startYourself(this, getString(R.string.title_activity_featured_images), FEATURED_IMAGES_CATEGORY);
+                CategoryImagesActivity.startYourself(this, getString(R.string.title_activity_explore), FEATURED_IMAGES_CATEGORY);
                 return true;
             default:
                 Timber.e("Unknown option [%s] selected from the navigation menu", itemId);
@@ -185,5 +203,17 @@ public abstract class NavigationBaseActivity extends BaseActivity
             intent.addFlags(flag);
         }
         context.startActivity(intent);
+    }
+
+    /**
+     * Handles visibility of navigation base toolbar
+     * @param show : Used to handle visibility of toolbar
+     */
+    public void setNavigationBaseToolbarVisibility(boolean show){
+        if (show){
+            toolbar.setVisibility(View.VISIBLE);
+        }else {
+            toolbar.setVisibility(View.GONE);
+        }
     }
 }

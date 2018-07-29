@@ -3,6 +3,7 @@
 * Amire80
 * Liuxinyu970226
 * Minh Nguyen
+* Nemo bis
 * Robby
 * Shirayuki
 * Siebrand
@@ -136,4 +137,5 @@
   <string name="about_translate_title">{{Identical|Language}}</string>
   <string name="about_translate_cancel">{{Identical|Cancel}}</string>
   <string name="retry">{{Identical|Retry}}</string>
+  <string name="successful_wikidata_edit">Message shown in a dialog (\"success toast\") after a contribution by the user.\n\nParameter:\n* %1$s - title of the target page on Wikidata</string>
 </resources>

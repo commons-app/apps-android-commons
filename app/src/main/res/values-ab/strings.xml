@@ -14,7 +14,7 @@
   <string name="login_success">Аҭалара қәҿиарала имҩаҧысит!</string>
   <string name="login_failed">Асистемахь аҭалараан агха!</string>
   <string name="upload_failed">Афаил ҧшаам. Даҽа фаилк шәахәаҧш.</string>
-  <string name="authentication_failed">Аутентификациа агха!</string>
+  <string name="authentication_failed" fuzzy="true">Аутентификациа агха!</string>
   <string name="uploading_started">Аҭагалара иалагоуп!</string>
   <string name="upload_completed_notification_title">%1$s иҭагалоуп!</string>
   <string name="upload_completed_notification_text">Шәақәыӷәӷәа иҭагалоу афаил ахәаҧшраз</string>

@@ -6,8 +6,6 @@ import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import android.support.v4.util.LruCache;
 
-import com.google.gson.Gson;
-
 import javax.inject.Named;
 import javax.inject.Singleton;
 
@@ -19,7 +17,6 @@ import fr.free.nrw.commons.auth.AccountUtil;
 import fr.free.nrw.commons.auth.SessionManager;
 import fr.free.nrw.commons.data.DBOpenHelper;
 import fr.free.nrw.commons.location.LocationServiceManager;
-import fr.free.nrw.commons.mwapi.ApacheHttpClientMediaWikiApi;
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
 import fr.free.nrw.commons.nearby.NearbyPlaces;
 import fr.free.nrw.commons.upload.UploadController;
@@ -28,13 +25,12 @@ import fr.free.nrw.commons.wikidata.WikidataEditListenerImpl;
 
 import static android.content.Context.MODE_PRIVATE;
 import static fr.free.nrw.commons.contributions.ContributionsContentProvider.CONTRIBUTION_AUTHORITY;
+import static fr.free.nrw.commons.explore.recentsearches.RecentSearchesContentProvider.RECENT_SEARCH_AUTHORITY;
 import static fr.free.nrw.commons.modifications.ModificationsContentProvider.MODIFICATIONS_AUTHORITY;
 
 @Module
 @SuppressWarnings({"WeakerAccess", "unused"})
 public class CommonsApplicationModule {
-    public static final String CATEGORY_AUTHORITY = "fr.free.nrw.commons.categories.contentprovider";
-
     private Context applicationContext;
 
     public CommonsApplicationModule(Context applicationContext) {
@@ -54,19 +50,31 @@ public class CommonsApplicationModule {
     @Provides
     @Named("category")
     public ContentProviderClient provideCategoryContentProviderClient(Context context) {
-        return context.getContentResolver().acquireContentProviderClient(CATEGORY_AUTHORITY);
+        return context.getContentResolver().acquireContentProviderClient(BuildConfig.CATEGORY_AUTHORITY);
+    }
+
+    /**
+     * This method is used to provide instance of RecentSearchContentProviderClient
+     * which provides content of Recent Searches from database
+     * @param context
+     * @return returns RecentSearchContentProviderClient
+     */
+    @Provides
+    @Named("recentsearch")
+    public ContentProviderClient provideRecentSearchContentProviderClient(Context context) {
+        return context.getContentResolver().acquireContentProviderClient(RECENT_SEARCH_AUTHORITY);
     }
 
     @Provides
     @Named("contribution")
     public ContentProviderClient provideContributionContentProviderClient(Context context) {
-        return context.getContentResolver().acquireContentProviderClient(CONTRIBUTION_AUTHORITY);
+        return context.getContentResolver().acquireContentProviderClient(BuildConfig.CONTRIBUTION_AUTHORITY);
     }
 
     @Provides
     @Named("modification")
     public ContentProviderClient provideModificationContentProviderClient(Context context) {
-        return context.getContentResolver().acquireContentProviderClient(MODIFICATIONS_AUTHORITY);
+        return context.getContentResolver().acquireContentProviderClient(BuildConfig.MODIFICATION_AUTHORITY);
     }
 
     @Provides
