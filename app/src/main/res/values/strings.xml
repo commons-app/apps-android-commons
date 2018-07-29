@@ -323,6 +323,7 @@
   <string name="continue_message">Continue</string>
   <string name="correct">Correct Answer</string>
   <string name="wrong">Wrong Answer</string>
+  <string name="quiz_screenshot_question">Is this screenshot OK to upload?</string>
 
   <string name="delete_recent_searches_dialog">Are you sure you want to clear your search history?</string>
   <string name="search_history_deleted">Search history deleted</string>
