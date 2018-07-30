@@ -9,6 +9,8 @@
 * Theklan
 -->
 <resources>
+  <string name="title_activity_explore">Esploratu</string>
+  <string name="navigation_item_explore">Esploratu</string>
   <string name="preference_category_appearance">Itxura</string>
   <string name="preference_category_general">Orokorra</string>
   <string name="preference_category_feedback">Feedback</string>
@@ -16,6 +18,7 @@
   <string name="app_name">Commons</string>
   <string name="bullet">•</string>
   <string name="menu_settings">Hobespenak</string>
+  <string name="intent_share_upload_label">Commons-en kargatu</string>
   <string name="username">Erabiltzaile izena</string>
   <string name="password">Pasahitza</string>
   <string name="login_credential">Sartu zure Commons Beta kontura</string>
@@ -36,6 +39,10 @@
   <string name="upload_progress_notification_title_finishing">%1$s igotzen bukatzen</string>
   <string name="upload_failed_notification_title">%1$s igotzean akatsa</string>
   <string name="upload_failed_notification_subtitle">Ukitu ikusteko</string>
+  <plurals name="uploads_pending_notification_indicator">
+    <item quantity="one">Fitxategi %1$d kargatzen</item>
+    <item quantity="other">%1$d fitxategi kargatzen</item>
+  </plurals>
   <string name="title_activity_contributions">Nire azken igoerak</string>
   <string name="contribution_state_queued">Itxoite-zerrendan</string>
   <string name="contribution_state_failed">Hutsegitea</string>
@@ -72,12 +79,21 @@
     <item quantity="one">igoera 1</item>
     <item quantity="other">%1$d igoera</item>
   </plurals>
+  <plurals name="starting_multiple_uploads">
+    <item quantity="one">Karga %1$d hasten</item>
+    <item quantity="other">%1$d karga hasten</item>
+  </plurals>
+  <plurals name="multiple_uploads_title">
+    <item quantity="one">karga %1$d</item>
+    <item quantity="other">%1$d karga</item>
+  </plurals>
   <string name="categories_not_found">Ez da kategoriak aukritu %1$s izenarekin</string>
   <string name="categories_skip_explanation">Gehitu kategoriak zure argazkiak Wikimedia Commonsen aurkitzen errazagoak izan daitezen.\nHasi idazten kategoriak gehitzeko.</string>
   <string name="categories_activity_title">Kategoriak</string>
   <string name="title_activity_settings">Hobespenak</string>
   <string name="title_activity_signup">Eman izena</string>
   <string name="title_activity_featured_images">Nabarmendutako irudiak</string>
+  <string name="title_activity_category_details">Kategoria</string>
   <string name="menu_about">Honi buruz</string>
   <string name="about_license" fuzzy="true">Open Source softwarea &lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/COPYING\"&gt;Apache v2 Lizentziaren&lt;/a&gt; pean egina. Wikimedia Commons eta bere logoa Wikimedia Fundazioaren marka erregistratuak dira eta Wikimedia Fundazioaren baimenarekin erabiltzen dira. Ez gaude Wikimedia Fundaziora afiliatuta.</string>
   <string name="about_improve" fuzzy="true">GitHub-eko &lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;Iturria&lt;/a&gt; eta &lt;a href=\"https://commons-app.github.io/\"&gt;webgunea&lt;/a&gt;. &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;GitHub-eko gai&lt;/a&gt; berria sortu erroreen berri emateko.</string>
@@ -177,6 +193,7 @@
   <string name="background_image">Atzealdeko irudia</string>
   <string name="mediaimage_failed">Media irudiak kale egin du</string>
   <string name="no_image_found">Ez da irudirik aurkitu</string>
+  <string name="no_subcategory_found">Ez da azpikategoriarik aurkitu</string>
   <string name="upload_image">Igo irudia</string>
   <string name="welcome_image_mount_zao">Zao Mendia</string>
   <string name="welcome_image_llamas">Llamak</string>
@@ -226,13 +243,16 @@
   <string name="get_directions">NORABIDEAK JASO</string>
   <string name="read_article">IRAKURRI ARTIKULUA</string>
   <string name="notifications_welcome">Ongi etorria Wikimedia Commons-era! Pozten gara zu hemen egoteaz.</string>
+  <string name="notifications_talk_page_message">%1$s-(e)k mezu bat utzi du zure eztabaida orrian</string>
   <string name="notifications_thank_you_edit">Eskerrik asko aldaketa bat egiteagatik</string>
   <string name="nearby_directions">NOLA HELDU</string>
   <string name="nearby_wikidata">WIKIDATA</string>
   <string name="nearby_wikipedia">WIKIPEDIA</string>
   <string name="nearby_commons">COMMONS</string>
+  <string name="about_rate_us">&lt;u&gt;Baloratu gaitzazu&lt;/u&gt;</string>
   <string name="no_internet">Interneta ez dago erabilgarri</string>
   <string name="internet_established">Interneta erabilgarri</string>
+  <string name="error_notifications">Errorea jakinarazpenak ekartzean</string>
   <string name="no_notifications">Ez da jakinarazpenik aurkitu</string>
   <string name="about_translate">&lt;u&gt;Itzuli&lt;/u&gt;</string>
   <string name="about_translate_title">Hizkuntzak</string>
@@ -242,14 +262,50 @@
   <string name="retry">Saiatu berriro</string>
   <string name="showcase_view_got_it_button">Ulertu dut!</string>
   <string name="showcase_view_whole_nearby_activity">Zugandik hurbil dauden leku hauek irudiak behar dituzte beren Wikipedia artikuluak hornitzeko</string>
+  <string name="showcase_view_plus_fab">Edozein lekutako irudi bat igo dezakezu zure kamera edo galeriatik</string>
   <string name="no_images_found">Ez da irudirik aurkitu!</string>
   <string name="error_loading_images">Arazo bat egon da irudiak kargatzerakoan.</string>
+  <string name="block_notification">Commons aldatzeko blokeatuta zaude</string>
   <string name="share_app_title">Aplikazioa partekatu</string>
   <string name="share_coordinates_not_present">Ez da koordenaturik zehaztu irudia aukeratzean</string>
+  <string name="error_fetching_nearby_places">Ezin izan dira hurbileko lekuak ekarri.</string>
   <string name="appwidget_img">Eguneko argazkia</string>
   <string name="app_widget_heading">Eguneko argazkia</string>
+  <string name="menu_search_button">Bilatu</string>
+  <string name="search_commons">Commons-en bilatu</string>
+  <string name="images_not_found">Ez da %1$s-(r)ekin bat datorren irudirik aurkitu</string>
+  <string name="title_activity_search">Bilatu</string>
+  <string name="search_recent_header">Azken bilaketak:</string>
+  <string name="provider_searches">Bilatutako azken galderak</string>
+  <string name="error_loading_categories">Arazo bat egon da kategoriak kargatzerakoan.</string>
+  <string name="error_loading_subcategories">Arazo bat egon da azpikategoriak kargatzerakoan.</string>
+  <string name="successful_wikidata_edit">Irudia arazorik gabe gehitu da %1$s-(e)ra Wikidatan!</string>
   <string name="wikidata_edit_failure">Ezin izan da dagokion Wikidata entitatea eguneratu!</string>
   <string name="menu_set_wallpaper">Horma papera ezarri</string>
   <string name="wallpaper_set_successfully">Horma papera ezarri da!</string>
+  <string name="question">Galdera</string>
+  <string name="result">Emaitza</string>
+  <string name="selfie_answer">Norberaren argazkiek ez daukate balio entziklopediko handirik. Mesedez, ez igo zure buruaren argazkirik, lehendik zuri buruzko Wikipedia artikulu bat ez badaukazu.</string>
+  <string name="taj_mahal_answer">Monumentuen eta paisaien argazkiak herrialde gehienetan igo daitezke. Mesedez, kontuan hartu askotan kanpoan instalatutako epe laburreko arte erakusketek copyright-a daukatela eta ezin direla igo.</string>
+  <string name="construction_event_answer">Teknologia edo kultura erakusten duten irudiak ongi etorriak dira Commons-en.</string>
+  <string name="congratulatory_message_quiz">Erantzunetako %1$s zuzen erantzun dituzu. Zorionak!</string>
+  <string name="warning_for_no_answer">Hautatu bi aukeretako bat galderari erantzuteko</string>
   <string name="user_not_logged_in">Saioa hasteko denbora amaituta, mesedez, hasi saioa berriro.</string>
+  <string name="continue_message">Jarraitu</string>
+  <string name="correct">Erantzun zuzena</string>
+  <string name="wrong">Erantzun okerra</string>
+  <string name="delete_recent_searches_dialog">Ziur zaude zure bilaketen historia garbitu nahi duzula?</string>
+  <string name="search_history_deleted">Bilaketa historia ezabatuta</string>
+  <string name="Achievements">Lorpenak</string>
+  <string name="statistics">ESTATISTIKAK</string>
+  <string name="statistics_thanks">Jasotako eskerrak</string>
+  <string name="statistics_featured">Nabarmendutako irudiak</string>
+  <string name="level">MAILA</string>
+  <string name="images_uploaded">Irudiak igo dira</string>
+  <string name="images_used_by_wiki">Erabilitako irudiak</string>
+  <string name="achievements_share_message">Partekatu zure lorpenak lagunekin!</string>
+  <string name="achievements_info_message">Zure maila baldintza hauek bete ahala igotzen da. \"Estatistikak\" ataleko elementuak ez dira zure mailarako kontuan hartzen.</string>
+  <string name="images_uploaded_explanation">Commons-era edozein karga software erabilita igo dituzun irudien kopurua</string>
+  <string name="images_reverted_explanation">Commons-era igo dituzun eta Wikimedia artikuluetan erabili diren irudien ehunekoa</string>
+  <string name="images_used_explanation">Commons-era igo dituzun eta Wikimedia artikuluetan erabili diren irudien kopurua</string>
 </resources>
