@@ -4,6 +4,7 @@
     <!-- Standard margin / padding for the containing activity -->
     <dimen name="activity_margin_horizontal">16dp</dimen>
     <dimen name="activity_margin_vertical">16dp</dimen>
+    <dimen name="achievements_activity_margin_vertical">8dp</dimen>
 
     <!-- Standard margins / padding -->
     <dimen name="huge_gap">48dp</dimen>

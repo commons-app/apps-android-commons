@@ -10,8 +10,11 @@
 * Samoasambia
 * Silvonen
 * Stryn
+* Surjection
 -->
 <resources>
+  <string name="title_activity_explore">Tutki</string>
+  <string name="navigation_item_explore">Tutki</string>
   <string name="preference_category_appearance">Ulkoasu</string>
   <string name="preference_category_general">Yleinen</string>
   <string name="preference_category_feedback">Palaute</string>
@@ -30,7 +33,7 @@
   <string name="login_success">Kirjautuminen onnistui!</string>
   <string name="login_failed">Kirjautuminen epäonnistui!</string>
   <string name="upload_failed">Tiedostoa ei löytynyt. Yritä toista tiedostoa.</string>
-  <string name="authentication_failed" fuzzy="true">Tunnistautuminen epäonnistui!</string>
+  <string name="authentication_failed">Tunnistautuminen epäonnistui, kirjaudu uudelleen sisään</string>
   <string name="uploading_started">Tallentaminen aloitettiin!</string>
   <string name="upload_completed_notification_title">%1$s tallennettiin!</string>
   <string name="upload_completed_notification_text">Napauta katsoaksesi tallennusta</string>
@@ -58,6 +61,7 @@
   <string name="add_title_toast">Anna tälle tiedostolle otsikko</string>
   <string name="share_description_hint">Kuvaus</string>
   <string name="login_failed_network">Kirjautuminen epäonnistui - verkkovirhe</string>
+  <string name="login_failed_wrong_credentials">Kirjautuminen epäonnistui - tarkista käyttäjänimesi ja salasanasi</string>
   <string name="login_failed_throttled">Liikaa epäonnistuneita yrityksiä. Yritä uudelleen parin minuutin kuluttua.</string>
   <string name="login_failed_blocked">Pahoittelut, tämä käyttäjä on estetty Commonsissa</string>
   <string name="login_failed_2fa_needed">Anna kaksivaiheisen tunnistuksen koodi.</string>
@@ -91,6 +95,8 @@
   <string name="categories_activity_title">Luokat</string>
   <string name="title_activity_settings">Asetukset</string>
   <string name="title_activity_signup">Rekisteröidy</string>
+  <string name="title_activity_featured_images">Suositellut kuvat</string>
+  <string name="title_activity_category_details">Luokka</string>
   <string name="menu_about">Tietoja</string>
   <string name="about_license">Wikimedia Commons -sovellus on vapaan lähdekoodin ohjelmisto, joka on luotu ja ylläpidetty Wikimedia-yhteisön apurahoilla ja vapaaehtoisilla. Wikimedia Foundation ei ole sitoutunut sovelluksen luomiseen, kehittämiseen tai ylläpitoon.</string>
   <string name="about_improve">Luo uusi &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;GitHub-issue&lt;/a&gt; bugiraporteille ja ehdotuksille.</string>
@@ -110,7 +116,7 @@
   <string name="preference_license">Oletuslisenssi</string>
   <string name="use_previous">Käytä edellistä otsikkoa/kuvausta</string>
   <string name="allow_gps">Hae tämänhetkinen sijainti automaattisesti</string>
-  <string name="allow_gps_summary" fuzzy="true">Nouda nykyinen sijainti asettaaksesi käyttöön luokkaehdotuksia jos kuva ei ole paikkamerkitty</string>
+  <string name="allow_gps_summary">Noutaa nykyisen sijainnin jos kuva ei ole paikkamerkitty, ja paikkamerkitsee kuvan. Varoitus: tämä paljastaa nykyisen sijaintisi.</string>
   <string name="preference_theme">Yötila</string>
   <string name="preference_theme_summary">Käytä tummaa teemaa</string>
   <string name="license_name_cc_by_sa_four">Nimeä-JaaSamoin 4.0</string>
@@ -148,6 +154,8 @@
   <string name="tutorial_4_text">Tallennusesimerkki:</string>
   <string name="tutorial_4_subtext">- Otsikko: Sydneyn oopperatalo\n- Kuvaus: Sydneyn oopperatalo katsottuna lahden toiselta puolelta\n- Luokat: Sydneyn oopperatalo, Sydneyn oopperatalo lännestä, Sydneyn oopperatalon etänäkymät</string>
   <string name="tutorial_4_subtext_1">Otsikko: Sydneyn oopperatalo</string>
+  <string name="tutorial_4_subtext_2">Kuvaus: Sydneyn oopperatalo lahden toiselta puolelta katsottuna</string>
+  <string name="tutorial_4_subtext_3">Luokat: Sydneyn oopperatalo lännestä katsottuna, Sydneyn oopperatalo kaukaa katsottuna</string>
   <string name="welcome_wikipedia_text">Herätä Wikipedia-artikkelit eloon kuvillasi! Tuo kuvasi Wikipediaan.</string>
   <string name="welcome_wikipedia_subtext">Wikipedian kuvat tulevat Wikimedia Commonsista.</string>
   <string name="welcome_copyright_text">Kuvasi auttavat useita ihmisiä ympäri maailmaa artikkeleiden ymmärtämisessä.</string>
@@ -175,6 +183,7 @@
   <string name="media_detail_description">Kuvaus</string>
   <string name="media_detail_description_explanation">Median kuvaus menee tänne. Tämä voi mahdollisesti olla melko pitkä, ja sen täytyy kääriä poikittain useita rivejä. Toivomme, että se näyttää silti hyvältä.</string>
   <string name="media_detail_author">Tekijä</string>
+  <string name="media_detail_author_explanation">Suositellun kuvan tekijän käyttäjänimi tähän.</string>
   <string name="media_detail_uploaded_date">Tallennuspäivämäärä</string>
   <string name="media_detail_license">Lisenssi</string>
   <string name="media_detail_coordinates">Koordinaatit</string>
@@ -217,6 +226,7 @@
   <string name="navigation_item_logout">Kirjaudu ulos</string>
   <string name="navigation_item_info">Opas</string>
   <string name="navigation_item_notification">Ilmoitukset</string>
+  <string name="navigation_item_featured_images">Suositeltu</string>
   <string name="nearby_needs_permissions">Lähellä olevia paikkoja ei voida näyttää ilman sijaintilupaa</string>
   <string name="no_description_found">kuvausta ei löytynyt</string>
   <string name="nearby_info_menu_commons_article">Commons-tiedostosivu</string>
@@ -233,6 +243,7 @@
   <string name="login_to_your_account">Kirjaudu tilillesi</string>
   <string name="send_log_file">Lähetä lokitiedosto</string>
   <string name="send_log_file_description">Lähetä lokitiedosto kehittäjille sähköpostin kautta</string>
+  <string name="no_web_browser">Ei verkkoselainta jolla avata URL-osoite</string>
   <string name="null_url">Virhe! URL-osoitetta ei löytynyt</string>
   <string name="nominate_deletion">Ehdotettu poistettavaksi</string>
   <string name="nominated_for_deletion">Tätä kuvaa on ehdotettu poistettavaksi.</string>
@@ -247,6 +258,7 @@
   <string name="notifications_thank_you_edit">Kiitos muokkaamisestasi</string>
   <string name="notifications_mention">%1$s mainitsi sinut %2$s.</string>
   <string name="toggle_view_button">Vaihda näkymä</string>
+  <string name="nearby_directions">REITTI</string>
   <string name="nearby_wikidata">WIKIDATA</string>
   <string name="nearby_wikipedia">WIKIPEDIA</string>
   <string name="nearby_commons">COMMONS</string>
@@ -255,13 +267,32 @@
   <string name="welcome_skip_button">Ohita opetus</string>
   <string name="no_internet">Internet ei saatavissa</string>
   <string name="internet_established">Internet saatavana</string>
+  <string name="error_notifications">Virhe ilmoitusten haussa</string>
+  <string name="no_notifications">Ilmoituksia ei löytynyt</string>
   <string name="about_translate">&lt;u&gt;Käännä&lt;/u&gt;</string>
   <string name="about_translate_title">Kielet</string>
+  <string name="about_translate_message">Valitse kieli, joksi haluaisit kääntää</string>
   <string name="about_translate_proceed">Jatka</string>
   <string name="about_translate_cancel">Peruuta</string>
   <string name="retry">Yritä uudelleen</string>
   <string name="showcase_view_got_it_button">Selvä!</string>
+  <string name="showcase_view_whole_nearby_activity">Tässä lähellä olevia paikkoja, jotka tarvitsevat kuvitusta Wikipedia-artikkeleihinsa</string>
+  <string name="showcase_view_list_icon">Tämä nappi näyttää listan kyseisistä paikoista</string>
+  <string name="showcase_view_plus_fab">Voit lähettää kuvan mistä tahansa paikasta galleriastasi tai kamerasta</string>
   <string name="no_images_found">Kuvia ei löytynyt!</string>
+  <string name="error_loading_images">Virhe ladattaessa kuvia.</string>
   <string name="image_uploaded_by">Tallentanut: %1$s</string>
   <string name="share_app_title">Jaa sovellus</string>
+  <string name="share_coordinates_not_present">Koordinaatteja ei annettu kuvaa valittaessa</string>
+  <string name="error_fetching_nearby_places">Virhe paikkoja haettaessa.</string>
+  <string name="appwidget_img">Päivän kuva</string>
+  <string name="app_widget_heading">Päivän kuva</string>
+  <string name="menu_search_button">Hae</string>
+  <string name="search_commons">Hae Commonsista</string>
+  <string name="title_activity_search">Haku</string>
+  <string name="successful_wikidata_edit">Kuva onnistuneesti lisätty Wikidata-kohteeseen %1$s!</string>
+  <string name="wikidata_edit_failure">Vastaavaa Wikidata-kohdetta ei voitu päivittää!</string>
+  <string name="menu_set_wallpaper">Aseta taustakuvaksi</string>
+  <string name="wallpaper_set_successfully">Taustakuva asetettu!</string>
+  <string name="user_not_logged_in">Istuntosi on vanhentunut. Kirjaudu sisään uudelleen.</string>
 </resources>

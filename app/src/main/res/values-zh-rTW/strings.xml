@@ -4,6 +4,7 @@
 * Kly
 * LNDDYL
 * Liuxinyu970226
+* Reke
 * S099001
 * Simon Shek
 * StephDC
@@ -12,6 +13,8 @@
 * 烈羽
 -->
 <resources>
+  <string name="title_activity_explore">探索</string>
+  <string name="navigation_item_explore">探索</string>
   <string name="preference_category_appearance">外觀</string>
   <string name="preference_category_general">一般</string>
   <string name="preference_category_feedback">意見回饋</string>
@@ -19,6 +22,7 @@
   <string name="app_name">共享資源</string>
   <string name="bullet">•</string>
   <string name="menu_settings">設定</string>
+  <string name="intent_share_upload_label">上傳至共享資源</string>
   <string name="username">使用者名稱</string>
   <string name="password">密碼</string>
   <string name="login_credential">登入您的維基共享資源測試版帳號</string>
@@ -93,6 +97,7 @@
   <string name="title_activity_settings">設定</string>
   <string name="title_activity_signup">註冊</string>
   <string name="title_activity_featured_images">特色圖片</string>
+  <string name="title_activity_category_details">分類</string>
   <string name="menu_about">關於</string>
   <string name="about_license">維基共享資源應用程式是透過維基媒體社群上的受讓人，與志願者們所建立及維護的開放原始碼應用程式。維基媒體基金會並不涉及此應用程式的建立、開發，與維護方面。</string>
   <string name="about_improve">建立新的&lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt; GitHub 問題&lt;/a&gt;來回報程式錯誤和提出建議。</string>
@@ -201,6 +206,8 @@
   <string name="background_image">背景圖片</string>
   <string name="mediaimage_failed">媒體圖片失敗</string>
   <string name="no_image_found">找不到圖片</string>
+  <string name="no_subcategory_found">找不到子分類</string>
+  <string name="no_parentcategory_found">找不到父分類</string>
   <string name="upload_image">上傳圖片</string>
   <string name="welcome_image_mount_zao">藏王連峰</string>
   <string name="welcome_image_llamas">大羊駝</string>
@@ -280,13 +287,57 @@
   <string name="no_images_found">找不到圖片！</string>
   <string name="error_loading_images">當載入圖片時發生錯誤。</string>
   <string name="image_uploaded_by">由：%1$s 上傳</string>
+  <string name="block_notification">您被禁止編輯共享資源</string>
   <string name="share_app_title">分享應用程式</string>
   <string name="share_coordinates_not_present">當選擇圖片時未指定座標</string>
   <string name="error_fetching_nearby_places">索取附近地點時出錯。</string>
   <string name="appwidget_img">每日圖片</string>
   <string name="app_widget_heading">每日圖片</string>
+  <string name="menu_search_button">搜尋</string>
+  <string name="search_commons">搜尋共享資源</string>
+  <string name="images_not_found">找不到符合%1$s的圖片</string>
+  <string name="title_activity_search">搜尋</string>
+  <string name="search_recent_header">近期搜尋：</string>
+  <string name="provider_searches">近期搜尋查詢</string>
+  <string name="error_loading_categories">當載入分類時發生錯誤。</string>
+  <string name="error_loading_subcategories">當載入子分類時發生錯誤。</string>
   <string name="successful_wikidata_edit">圖片已成功添加到維基數據上的 %1$s！</string>
   <string name="wikidata_edit_failure">更新所對應的維基數據項目失敗！</string>
   <string name="menu_set_wallpaper">設定桌布</string>
   <string name="wallpaper_set_successfully">桌布設定成功！</string>
+  <string name="quiz">測驗</string>
+  <string name="quiz_question_string">這張圖片可以上傳嗎？</string>
+  <string name="question">問題</string>
+  <string name="result">結果</string>
+  <string name="quiz_back_button">如果您持續上傳需要刪除的圖片，您的帳號可能會被封禁。你確定要結束測驗嗎？</string>
+  <string name="quiz_alert_message">超過 %1$s 由您上傳的圖片都遭到刪除了。如果你持續上傳需要刪除的圖片，您的帳號可能會遭到封禁。\n\n您要不要重新閱覽教程，然後再做一次測驗，好讓您學習分辨哪些類型的圖片你可以上傳、哪些不可以？</string>
+  <string name="selfie_answer">自拍照沒有什麼百科價值。除非已經有維基百科的條目介紹您，否則請不要上傳拍攝您自己的照片。</string>
+  <string name="taj_mahal_answer">在大多數的國家，上傳古蹟或室外景的照片是沒有問題的。請留意，臨時性的戶外藝術裝置常常是有著作權保護的，不可上傳。</string>
+  <string name="screenshot_answer">網站的螢幕截圖被視為衍生作品，受到該網站本身所有著作權保護。這些截圖可以在獲得原作者許可之後使用。若未經許可，您根據他們的作品而創作的任何藝術品，在法律上均會被視為未經原作者許可的複製品。</string>
+  <string name="blurry_image_answer">收錄高畫質圖像是維基共享資源的目標之一，所以不應該上傳模糊的圖片。儘量試著只上傳光線良好的優良圖片。</string>
+  <string name="construction_event_answer">在維基共享資源上，展現科技或文化的圖片很受到歡迎。</string>
+  <string name="warning_for_image_reverts">警告：您所上傳的圖片中，超過 %1$s 張已經被刪除。如果您持續上傳那些需要被刪除的圖片，您的帳號可能會被封禁。</string>
+  <string name="congratulatory_message_quiz">您答對了 %1$s 題，恭喜！</string>
+  <string name="warning_for_no_answer">請在兩個選項中擇一，來回答這個問題。</string>
+  <string name="user_not_logged_in">登入用 session 逾期，請重新登入。</string>
+  <string name="quiz_result_share_message">向朋友分享您的測驗結果！</string>
+  <string name="continue_message">繼續</string>
+  <string name="correct">正確答案</string>
+  <string name="wrong">錯誤答案</string>
+  <string name="delete_recent_searches_dialog">確定要清除搜尋歷史嗎？</string>
+  <string name="search_history_deleted">搜尋歷史已刪除</string>
+  <string name="Achievements">成果</string>
+  <string name="statistics">統計內容</string>
+  <string name="statistics_thanks">感謝接收</string>
+  <string name="statistics_featured">特色圖片</string>
+  <string name="level">級別</string>
+  <string name="images_uploaded">圖片已上傳</string>
+  <string name="image_reverts">圖片未回復</string>
+  <string name="images_used_by_wiki">圖片已使用</string>
+  <string name="achievements_share_message">與您的朋友分享您的成果！</string>
+  <string name="achievements_info_message">在您符合這些需求時，您的級別會增加。在「統計內容」裡的項目，不會計算到您的級別。</string>
+  <string name="achievements_revert_limit_message">最低需求：</string>
+  <string name="images_uploaded_explanation">您透過任一上傳軟體將圖片上傳至共享資源的數目</string>
+  <string name="images_reverted_explanation">您所上傳至共享資源且尚未被刪除掉的圖片數目</string>
+  <string name="images_used_explanation">您所上傳至共享資源且被使用在維基百科條目中的圖片數目</string>
 </resources>

@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+  <string name="title_activity_explore">Explore</string>
+  <string name="navigation_item_explore">Explore</string>
   <string name="preference_category_appearance">Appearance</string>
   <string name="preference_category_general">General</string>
   <string name="preference_category_feedback">Feedback</string>
@@ -7,6 +9,7 @@
   <string name="app_name">Commons</string>
   <string name="bullet">&#8226;  </string>
   <string name="menu_settings">Settings</string>
+  <string name="intent_share_upload_label">Upload to Commons</string>
   <string name="username">Username</string>
   <string name="password">Password</string>
   <string name="login_credential">Log in to your Commons Beta account</string>
@@ -73,8 +76,8 @@
     <item quantity="other">Starting %1$d uploads</item>
   </plurals>
   <plurals name="multiple_uploads_title">
-    <item quantity="one">%1$d upload</item>
-    <item quantity="other">%1$d uploads</item>
+     <item quantity="one">%1$d upload</item>
+     <item quantity="other">%1$d uploads</item>
   </plurals>
   <string name="categories_not_found">No categories matching %1$s found</string>
   <string name="categories_skip_explanation">Add categories to make your images more discoverable on Wikimedia Commons.\nStart typing to add categories.</string>
@@ -82,6 +85,7 @@
   <string name="title_activity_settings">Settings</string>
   <string name="title_activity_signup">Sign Up</string>
   <string name="title_activity_featured_images">Featured Images</string>
+  <string name="title_activity_category_details">Category</string>
   <string name="menu_about">About</string>
   <string name="about_license">The Wikimedia Commons app is an open-source app created and maintained by grantees and volunteers of the Wikimedia community. The Wikimedia Foundation is not involved in the creation, development, or maintenance of the app. </string>
   <string name="trademarked_name" translatable="false">Wikimedia Commons</string>
@@ -187,7 +191,7 @@
   <string name="maximum_limit_alert">Unable to display more than 500</string>
   <string name="set_limit">Set Recent Upload Limit</string>
   <string name="login_failed_2fa_not_supported">Two factor authentication is currently not supported.</string>
-  <string name="logout_verification">Do you really want to logout?</string>
+    <string name="logout_verification">Do you really want to logout?</string>
   <string name="commons_logo">Commons Logo</string>
   <string name="commons_website">Commons Website</string>
   <string name="commons_facebook">Commons Facebook Page</string>
@@ -195,6 +199,8 @@
   <string name="background_image">Background Image</string>
   <string name="mediaimage_failed">Media Image Failed</string>
   <string name="no_image_found">No Image Found</string>
+  <string name="no_subcategory_found">No subcategories found</string>
+  <string name="no_parentcategory_found">No parent categories found</string>
   <string name="upload_image">Upload Image</string>
   <string name="welcome_image_mount_zao">Mount Zao</string>
   <string name="welcome_image_llamas">Llamas</string>
@@ -279,14 +285,61 @@
     <string name="error_loading_images">Error occurred while loading images.</string>
     <string name="image_uploaded_by">Uploaded by: %1$s</string>
 
+    <string name="block_notification">You are blocked from editing Commons</string>
     <string name="share_app_title">Share App</string>
     <string name="share_coordinates_not_present">Coordinates were not specified during image selection</string>
     <string name="error_fetching_nearby_places">Error fetching nearby places.</string>
     <string name="appwidget_img">Pic of the Day</string>
     <string name="app_widget_heading">Pic of the Day</string>
+  <string name="menu_search_button">Search</string>
+  <string name="search_commons">Search Commons</string>
+  <string name="images_not_found">No Images matching %1$s found</string>
+  <string name="title_activity_search">Search</string>
+  <string name="search_recent_header">Recent searches:</string>
+  <string name="provider_searches">Recently searched queries</string>
+  <string name="error_loading_categories">Error occurred while loading categories.</string>
+  <string name="error_loading_subcategories">Error occurred while loading subcategories.</string>
 
   <string name="successful_wikidata_edit">Image successfully added to %1$s on Wikidata!</string>
   <string name="wikidata_edit_failure">Failed to update corresponding Wikidata entity!</string>
   <string name="menu_set_wallpaper">Set wallpaper</string>
   <string name="wallpaper_set_successfully">Wallpaper set successfully!</string>
+  <string name="quiz">Quiz</string>
+  <string name="quiz_question_string">Is this picture OK to upload?</string>
+  <string name="question">Question </string>
+  <string name="result">Result</string>
+  <string name="quiz_back_button">If you carry on uploading images that require deletion, your account will likely be banned. Are you sure you want to end the quiz?</string>
+  <string name="quiz_alert_message">More than %1$s of the images you uploaded have been deleted. If you carry on uploading images that require deletion, your account will likely be banned.\n\nWould you like to view the tutorial again and then take a quiz to help you learn what type of images you should or shouldn\'t upload?</string>
+  <string name="selfie_answer">Selfies do not have much encyclopedic value. Please do not upload a picture of yourself unless you already have a Wikipedia article about you.</string>
+  <string name="taj_mahal_answer">Pictures of monuments and outside scenery is OK to upload in most countries. Please note that temporary art installations outside are often copyrighted and not OK to upload.</string>
+  <string name="screenshot_answer">Screenshots of websites are considered derivatives works and subject to any copyright on the website itself. These can be used after permission from the author. Without such permission, any art you create based on their work is legally considered an unlicensed copy owned by the original author.</string>
+  <string name="blurry_image_answer">One of the goals of Commons is to gather quality images. Therefore, blurry images shouldn\'t be uploaded. Always try to take nice pictures with good lighting.</string>
+  <string name="construction_event_answer">Pictures showing technology or culture are very welcome on Commons.</string>
+  <string name="warning_for_image_reverts">WARNING : More than %1$s of the images you uploaded have been deleted. If you carry on uploading images that require deletion, your account will likely be banned.</string>
+  <string name="congratulatory_message_quiz">You got %1$s of the answers correct. Congratulations!</string>
+  <string name="warning_for_no_answer">Select one of the two options to answer the question</string>
+  <string name="user_not_logged_in">Login session expired, please log in again.</string>
+  <string name="quiz_result_share_message">Share your quiz with your friends!</string>
+  <string name="continue_message">Continue</string>
+  <string name="correct">Correct Answer</string>
+  <string name="wrong">Wrong Answer</string>
+  <string name="quiz_screenshot_question">Is this screenshot OK to upload?</string>
+
+  <string name="delete_recent_searches_dialog">Are you sure you want to clear your search history?</string>
+  <string name="search_history_deleted">Search history deleted</string>
+
+  <string name="Achievements">Achievements</string>
+  <string name="statistics">STATISTICS</string>
+  <string name="statistics_thanks">Thanks Received</string>
+  <string name="statistics_featured">Featured Images</string>
+  <string name="level">LEVEL</string>
+  <string name="images_uploaded">Images Uploaded</string>
+  <string name="image_reverts">Images Not Reverted</string>
+  <string name="images_used_by_wiki">Images Used</string>
+  <string name="achievements_share_message">Share your achievements with your friends!</string>
+  <string name="achievements_info_message">Your level increases as you meet these requirements. Items in the "statistics" section do not count towards your level.</string>
+  <string name="achievements_revert_limit_message">minimum required: </string>
+  <string name="images_uploaded_explanation">The number of images you have uploaded to Commons, via any upload software</string>
+  <string name="images_reverted_explanation">The percentage of images you have uploaded to Commons that were not deleted</string>
+  <string name="images_used_explanation">The number of images you have uploaded to Commons that were used in Wikimedia articles</string>
 </resources>
