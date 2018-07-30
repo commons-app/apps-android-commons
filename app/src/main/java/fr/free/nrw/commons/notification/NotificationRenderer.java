@@ -1,7 +1,6 @@
 package fr.free.nrw.commons.notification;
 
 import android.graphics.drawable.PictureDrawable;
-import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -59,21 +58,9 @@ public class NotificationRenderer extends Renderer<Notification> {
     @Override
     public void render() {
         Notification notification = getContent();
-        setTitle(notification.notificationText);
+        title.setText(notification.notificationText);
         time.setText(notification.date);
         requestBuilder.load(notification.iconUrl).into(icon);
-    }
-
-    /**
-     * Cleans up the notification text and sets it as the title
-     * Clean up is required to fix escaped HTML string and extra white spaces at the beginning of the notification
-     * @param notificationText
-     */
-    private void setTitle(String notificationText) {
-        notificationText = notificationText.trim().replaceAll("(^\\h*)|(\\h*$)", "");
-        notificationText = Html.fromHtml(notificationText).toString();
-        notificationText = notificationText.concat(" ");
-        title.setText(notificationText);
     }
 
     public interface NotificationClicked{

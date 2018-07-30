@@ -3,6 +3,7 @@ package fr.free.nrw.commons.notification;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.support.annotation.NonNull;
+import android.text.Html;
 
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -10,11 +11,13 @@ import org.w3c.dom.NodeList;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.PatternSyntaxException;
 
 import javax.annotation.Nullable;
 
 import fr.free.nrw.commons.BuildConfig;
 import fr.free.nrw.commons.R;
+import timber.log.Timber;
 
 import static fr.free.nrw.commons.notification.NotificationType.UNKNOWN;
 
@@ -23,60 +26,6 @@ public class NotificationUtils {
     private static final String COMMONS_WIKI = "commonswiki";
     private static final String WIKIDATA_WIKI = "wikidatawiki";
     private static final String WIKIPEDIA_WIKI = "enwiki";
-
-    public static boolean isCommonsNotification(Node document) {
-        if (document == null || !document.hasAttributes()) {
-            return false;
-        }
-        Element element = (Element) document;
-        return COMMONS_WIKI.equals(element.getAttribute("wiki"));
-    }
-
-    /**
-     * Returns true if the wiki attribute corresponds to wikidatawiki
-     * @param document
-     * @return
-     */
-    public static boolean isWikidataNotification(Node document) {
-        if (document == null || !document.hasAttributes()) {
-            return false;
-        }
-        Element element = (Element) document;
-        return WIKIDATA_WIKI.equals(element.getAttribute("wiki"));
-    }
-
-    /**
-     * Returns true if the wiki attribute corresponds to enwiki
-     * @param document
-     * @return
-     */
-    public static boolean isWikipediaNotification(Node document) {
-        if (document == null || !document.hasAttributes()) {
-            return false;
-        }
-        Element element = (Element) document;
-        return WIKIPEDIA_WIKI.equals(element.getAttribute("wiki"));
-    }
-
-    public static NotificationType getNotificationType(Node document) {
-        Element element = (Element) document;
-        String type = element.getAttribute("type");
-        return NotificationType.handledValueOf(type);
-    }
-
-    public static List<Notification> getNotificationsFromBundle(Context context, Node document) {
-        Element bundledNotifications = getBundledNotifications(document);
-        NodeList childNodes = bundledNotifications.getChildNodes();
-
-        List<Notification> notifications = new ArrayList<>();
-        for (int i = 0; i < childNodes.getLength(); i++) {
-            Node node = childNodes.item(i);
-            if (isUsefulNotification(node)) {
-                notifications.add(getNotificationFromApiResult(context, node));
-            }
-        }
-        return notifications;
-    }
 
     @NonNull
     public static List<Notification> getNotificationsFromList(Context context, NodeList childNodes) {
@@ -95,6 +44,60 @@ public class NotificationUtils {
         return notifications;
     }
 
+    private static boolean isCommonsNotification(Node document) {
+        if (document == null || !document.hasAttributes()) {
+            return false;
+        }
+        Element element = (Element) document;
+        return COMMONS_WIKI.equals(element.getAttribute("wiki"));
+    }
+
+    /**
+     * Returns true if the wiki attribute corresponds to wikidatawiki
+     * @param document
+     * @return
+     */
+    private static boolean isWikidataNotification(Node document) {
+        if (document == null || !document.hasAttributes()) {
+            return false;
+        }
+        Element element = (Element) document;
+        return WIKIDATA_WIKI.equals(element.getAttribute("wiki"));
+    }
+
+    /**
+     * Returns true if the wiki attribute corresponds to enwiki
+     * @param document
+     * @return
+     */
+    private static boolean isWikipediaNotification(Node document) {
+        if (document == null || !document.hasAttributes()) {
+            return false;
+        }
+        Element element = (Element) document;
+        return WIKIPEDIA_WIKI.equals(element.getAttribute("wiki"));
+    }
+
+    private static NotificationType getNotificationType(Node document) {
+        Element element = (Element) document;
+        String type = element.getAttribute("type");
+        return NotificationType.handledValueOf(type);
+    }
+
+    private static List<Notification> getNotificationsFromBundle(Context context, Node document) {
+        Element bundledNotifications = getBundledNotifications(document);
+        NodeList childNodes = bundledNotifications.getChildNodes();
+
+        List<Notification> notifications = new ArrayList<>();
+        for (int i = 0; i < childNodes.getLength(); i++) {
+            Node node = childNodes.item(i);
+            if (isUsefulNotification(node)) {
+                notifications.add(getNotificationFromApiResult(context, node));
+            }
+        }
+        return notifications;
+    }
+
     /**
      * Currently the app is interested in showing notifications just from the following three wikis: commons, wikidata, wikipedia
      * This function returns true only if the notification belongs to any of the above wikis and is of a known notification type
@@ -108,43 +111,56 @@ public class NotificationUtils {
                 && !getNotificationType(node).equals(UNKNOWN);
     }
 
-    public static boolean isBundledNotification(Node document) {
+    private static boolean isBundledNotification(Node document) {
         Element bundleElement = getBundledNotifications(document);
-        if (bundleElement == null) {
-            return false;
-        }
-
-        return bundleElement.getChildNodes().getLength() > 0;
+        return bundleElement != null && bundleElement.getChildNodes().getLength() > 0;
     }
 
     private static Element getBundledNotifications(Node document) {
         return (Element) getNode(document, "bundledNotifications");
     }
 
-    public static Notification getNotificationFromApiResult(Context context, Node document) {
+    private static Notification getNotificationFromApiResult(Context context, Node document) {
         NotificationType type = getNotificationType(document);
 
-        String notificationText = "";
+        String rawNotificationText = "";
         String link = getPrimaryLink(document);
         String description = getNotificationDescription(document);
         String iconUrl = getNotificationIconUrl(document);
 
         switch (type) {
             case THANK_YOU_EDIT:
-                notificationText = getThankYouEditDescription(document);
+                rawNotificationText = getThankYouEditDescription(document);
                 break;
             case EDIT_USER_TALK:
-                notificationText = getNotificationText(document);
+                rawNotificationText = getNotificationText(document);
                 break;
             case MENTION:
-                notificationText = getMentionMessage(context, document);
+                rawNotificationText = getMentionMessage(context, document);
                 description = getMentionDescription(document);
                 break;
             case WELCOME:
-                notificationText = getWelcomeMessage(context, document);
+                rawNotificationText = getWelcomeMessage(context, document);
                 break;
         }
-        return new Notification(type, notificationText, getTimestamp(document), description, link, iconUrl);
+
+        String sanitisedNotificationText = sanitiseNotificationText(rawNotificationText);
+
+        return new Notification(type, sanitisedNotificationText, getTimestamp(document), description, link, iconUrl);
+    }
+
+    private static String sanitiseNotificationText(String notificationText) {
+        notificationText = notificationText.trim();
+
+        try {
+            notificationText = notificationText.replaceAll("(^\\h*)|(\\h*$)", "");
+        } catch (PatternSyntaxException exception) {
+            Timber.d("Error occurred while removing whitespaces");
+        }
+
+        notificationText = Html.fromHtml(notificationText).toString();
+        notificationText = notificationText.concat(" ");
+        return notificationText;
     }
 
     private static String getNotificationText(Node document) {
@@ -201,19 +217,14 @@ public class NotificationUtils {
         }
     }
 
-    public static String getMentionMessage(Context context, Node document) {
+    @SuppressLint("StringFormatInvalid")
+    private static String getMentionMessage(Context context, Node document) {
         String format = context.getString(R.string.notifications_mention);
         return String.format(format, getAgent(document), getNotificationDescription(document));
     }
 
-    @SuppressLint("StringFormatMatches")
-    public static String getUserTalkMessage(Context context, Node document) {
-        String format = context.getString(R.string.notifications_talk_page_message);
-        return String.format(format, getAgent(document));
-    }
-
     @SuppressLint("StringFormatInvalid")
-    public static String getWelcomeMessage(Context context, Node document) {
+    private static String getWelcomeMessage(Context context, Node document) {
         String welcomeMessageFormat = context.getString(R.string.notifications_welcome);
         return String.format(welcomeMessageFormat, getAgent(document));
     }
@@ -256,7 +267,7 @@ public class NotificationUtils {
     }
 
     @Nullable
-    public static Node getNode(Node node, String nodeName) {
+    private static Node getNode(Node node, String nodeName) {
         NodeList childNodes = node.getChildNodes();
         for (int i = 0; i < childNodes.getLength(); i++) {
             Node nodeItem = childNodes.item(i);
