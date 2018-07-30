@@ -9,6 +9,7 @@
 * Shizhao
 * Wxyveronica
 * Yfdyh000
+* 阿pp
 -->
 <resources>
   <string name="title_activity_explore">探索</string>
@@ -295,6 +296,20 @@
   <string name="wikidata_edit_failure">更新对应维基数据实体失败！</string>
   <string name="menu_set_wallpaper">设置墙纸</string>
   <string name="wallpaper_set_successfully">墙纸已成功设置！</string>
-  <string name="delete_recent_searches_dialog">您确认要清除您的搜索历史？</string>
   <string name="user_not_logged_in">登录会话已过期，请重新登录。</string>
+  <string name="delete_recent_searches_dialog">您确认要清除您的搜索历史？</string>
+  <string name="Achievements">成就</string>
+  <string name="statistics">数据</string>
+  <string name="statistics_thanks">不客气</string>
+  <string name="statistics_featured">特色图片</string>
+  <string name="level">等级</string>
+  <string name="images_uploaded">已上传图片</string>
+  <string name="image_reverts">未还原图片</string>
+  <string name="images_used_by_wiki">使用过的图片</string>
+  <string name="achievements_share_message">与朋友分享您的所得！</string>
+  <string name="achievements_info_message">当您满足这些要求时，您的等级会增加。“统计”部分的项目不计入等级计算范围。</string>
+  <string name="achievements_revert_limit_message">最低要求：</string>
+  <string name="images_uploaded_explanation">您通过任一上传软件上传至Commons的图片总数量</string>
+  <string name="images_reverted_explanation">您上传至Commons的图片中未经删除的数量占上传总数量的百分比</string>
+  <string name="images_used_explanation">您上传至Commons的图片中被Wikimedia条目使用过的数量</string>
 </resources>

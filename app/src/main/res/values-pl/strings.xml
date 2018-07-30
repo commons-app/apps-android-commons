@@ -248,6 +248,23 @@
   <string name="error_loading_subcategories">Wystąpił błąd podczas ładowania podkategorii.</string>
   <string name="menu_set_wallpaper">Ustaw tapetę</string>
   <string name="wallpaper_set_successfully">Tapeta ustawiona pomyślnie!</string>
+  <string name="quiz">Quiz</string>
+  <string name="quiz_question_string">Czy to zdjęcie nadaje się do przesłania?</string>
+  <string name="question">Pytanie</string>
+  <string name="result">Wynik</string>
+  <string name="blurry_image_answer">Jednym z celów Commons jest gromadzenie zdjęć wysokiej jakości, dlatego powinny być zamazane. Zawsze staraj się robić ładne zdjęcia z dobrym oświetleniem.</string>
+  <string name="warning_for_no_answer">Wybierz jedną z dwóch opcji, aby odpowiedzieć na pytanie</string>
+  <string name="quiz_result_share_message">Podziel się quizem ze swoimi znajomymi!</string>
+  <string name="continue_message">Kontynuuj</string>
+  <string name="correct">Poprawna odpowiedź</string>
+  <string name="wrong">Zła odpowiedź</string>
   <string name="delete_recent_searches_dialog">Czy na pewno chcesz usunąć swoją historię wyszukiwania?</string>
   <string name="search_history_deleted">Historia wyszukiwania została usunięta</string>
+  <string name="Achievements">Osiągnięcia</string>
+  <string name="statistics">STATYSTYKA</string>
+  <string name="statistics_featured">Wyróżnione ilustracje</string>
+  <string name="level">POZIOM</string>
+  <string name="images_uploaded_explanation">Liczba zdjęć przesłanych do Commons za pomocą dowolnego oprogramowania</string>
+  <string name="images_reverted_explanation">Procent zdjęć przesłanych do Commons, które nie zostały usunięte</string>
+  <string name="images_used_explanation">Liczba zdjęć przesłanych do Commons, które zostały wykorzystane w artykułach Wikimedia</string>
 </resources>
