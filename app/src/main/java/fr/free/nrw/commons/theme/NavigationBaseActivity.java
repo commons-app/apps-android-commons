@@ -71,7 +71,7 @@ public abstract class NavigationBaseActivity extends BaseActivity
         Menu nav_Menu = navigationView.getMenu();
         View headerLayout = navigationView.getHeaderView(0);
         ImageView userIcon = headerLayout.findViewById(R.id.user_icon);
-        if (prefs.getBoolean("login_skipped", true)) {
+        if (prefs.getBoolean("login_skipped", false)) {
             userIcon.setVisibility(View.GONE);
             nav_Menu.findItem(R.id.action_login).setVisible(true);
             nav_Menu.findItem(R.id.action_home).setVisible(false);
