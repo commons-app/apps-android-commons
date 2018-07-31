@@ -26,7 +26,7 @@
   <string name="login_success">प्रवेश में सफल हुआ!</string>
   <string name="login_failed">प्रवेश विफल हुआ!</string>
   <string name="upload_failed">फ़ाइल नहीं मिली, कृपया अन्य फ़ाइल से प्रयास करें।</string>
-  <string name="authentication_failed">प्रमाणीकरण विफल!</string>
+  <string name="authentication_failed" fuzzy="true">प्रमाणीकरण विफल!</string>
   <string name="uploading_started">अपलोड आरंभ!</string>
   <string name="upload_completed_notification_title">%1$s अपलोड हुआ!</string>
   <string name="upload_completed_notification_text">अपना अपलोड देखने के लिए टैप करें</string>
@@ -53,8 +53,6 @@
   <string name="share_title_hint">शीर्षक</string>
   <string name="share_description_hint">विवरण</string>
   <string name="login_failed_network">प्रवेश नहीं हो रहा - नेटवर्क विफल</string>
-  <string name="login_failed_username">प्रवेश नहीं हो रहा - कृपया अपना सदस्य नाम जाँचें</string>
-  <string name="login_failed_password">प्रवेश नहीं हो रहा - कृपया अपना पासवर्ड जाँचें</string>
   <string name="login_failed_throttled">ढेर सारे असफल प्रयास होने के कारण कुछ मिनटों के बाद प्रयास करें।</string>
   <string name="login_failed_blocked">क्षमा करें, यह सदस्य कॉमन्स में अवरोधित है</string>
   <string name="login_failed_2fa_needed">आपको अपना दो कारक प्रमाणन कोड प्रदान करना होगा।</string>
@@ -106,7 +104,7 @@
   <string name="preference_license" fuzzy="true">लाइसेन्स</string>
   <string name="use_previous">पिछले शीर्षक/विवरण का उपयोग करें</string>
   <string name="allow_gps">वर्तमान स्थान स्वतः ज्ञात करें</string>
-  <string name="allow_gps_summary">यदि छवि पर जियोटैग नहीं है तो श्रेणियों के सुझाव हेतु वर्तमान स्थान ज्ञात करें।</string>
+  <string name="allow_gps_summary" fuzzy="true">यदि छवि पर जियोटैग नहीं है तो श्रेणियों के सुझाव हेतु वर्तमान स्थान ज्ञात करें।</string>
   <string name="preference_theme">रात्रि मोड</string>
   <string name="preference_theme_summary">डार्क थीम का प्रयोग करें</string>
   <string name="license_name_cc_by_sa_four">एट्रीब्यूशन-शेयरअलाइक 4.0</string>

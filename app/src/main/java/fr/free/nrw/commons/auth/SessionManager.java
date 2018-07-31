@@ -5,6 +5,8 @@ import android.accounts.AccountManager;
 import android.content.Context;
 import android.content.SharedPreferences;
 
+import javax.annotation.Nullable;
+
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
 import io.reactivex.Completable;
 import io.reactivex.Observable;
@@ -31,6 +33,7 @@ public class SessionManager {
     /**
      * @return Account|null
      */
+    @Nullable
     public Account getCurrentAccount() {
         if (currentAccount == null) {
             AccountManager accountManager = AccountManager.get(context);
@@ -79,6 +82,12 @@ public class SessionManager {
 
     public boolean isUserLoggedIn() {
         return sharedPreferences.getBoolean("isUserLoggedIn", false);
+    }
+
+    public void forceLogin(Context context) {
+        if (context != null) {
+            LoginActivity.startYourself(context);
+        }
     }
 
     public Completable clearAllAccounts() {

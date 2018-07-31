@@ -58,9 +58,7 @@ import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.Utils;
 import fr.free.nrw.commons.auth.LoginActivity;
-import fr.free.nrw.commons.category.CategoryImagesActivity;
 import fr.free.nrw.commons.contributions.ContributionController;
-import fr.free.nrw.commons.theme.NavigationBaseActivity;
 import fr.free.nrw.commons.utils.UriDeserializer;
 import fr.free.nrw.commons.utils.ViewUtil;
 import timber.log.Timber;
@@ -68,7 +66,7 @@ import uk.co.deanwild.materialshowcaseview.MaterialShowcaseView;
 
 import static android.app.Activity.RESULT_OK;
 import static android.content.pm.PackageManager.PERMISSION_GRANTED;
-import static fr.free.nrw.commons.theme.NavigationBaseActivity.startActivityWithFlags;
+import static fr.free.nrw.commons.wikidata.WikidataConstants.WIKIDATA_ENTITY_ID_PREF;
 
 public class NearbyMapFragment extends DaggerFragment {
 
@@ -750,7 +748,7 @@ public class NearbyMapFragment extends DaggerFragment {
 
         fabCamera.setOnClickListener(view -> {
             if (fabCamera.isShown()) {
-                Timber.d("Camera button tapped. Image title: " + place.getName() + "Image desc: " + place.getLongDescription());
+                Timber.d("Camera button tapped. Place: %s", place.toString());
                 storeSharedPrefs();
                 directUpload.initiateCameraUpload();
             }
@@ -758,7 +756,7 @@ public class NearbyMapFragment extends DaggerFragment {
 
         fabGallery.setOnClickListener(view -> {
             if (fabGallery.isShown()) {
-                Timber.d("Gallery button tapped. Image title: " + place.getName() + "Image desc: " + place.getLongDescription());
+                Timber.d("Gallery button tapped. Place: %s", place.toString());
                 storeSharedPrefs();
                 directUpload.initiateGalleryUpload();
             }
@@ -770,6 +768,7 @@ public class NearbyMapFragment extends DaggerFragment {
         editor.putString("Title", place.getName());
         editor.putString("Desc", place.getLongDescription());
         editor.putString("Category", place.getCategory());
+        editor.putString(WIKIDATA_ENTITY_ID_PREF, place.getWikiDataEntityId());
         editor.apply();
     }
 
@@ -805,7 +804,7 @@ public class NearbyMapFragment extends DaggerFragment {
         if (resultCode == RESULT_OK) {
             Timber.d("OnActivityResult() parameters: Req code: %d Result code: %d Data: %s",
                     requestCode, resultCode, data);
-            controller.handleImagePicked(requestCode, data, true);
+            controller.handleImagePicked(requestCode, data, true, directPrefs.getString(WIKIDATA_ENTITY_ID_PREF, null));
         } else {
             Timber.e("OnActivityResult() parameters: Req code: %d Result code: %d Data: %s",
                     requestCode, resultCode, data);

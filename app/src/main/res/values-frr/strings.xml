@@ -15,7 +15,7 @@
   <string name="login_success">Uunmeldin hää loket!</string>
   <string name="login_failed">Bi\'t uunmeldin as wat skiaf gingen.</string>
   <string name="upload_failed">Datei ei fünjen. Ferschük det mä en ööder datei.</string>
-  <string name="authentication_failed">Dü küdst ei gudkäänd wurd!</string>
+  <string name="authentication_failed" fuzzy="true">Dü küdst ei gudkäänd wurd!</string>
   <string name="uploading_started">Huuchschüüren hää begand!</string>
   <string name="upload_completed_notification_title">%1$s huuchschüürd!</string>
   <string name="upload_completed_notification_text">Tipe, am din huuchschüürd bil uuntulukin</string>
@@ -42,8 +42,6 @@
   <string name="share_title_hint">Tiitel</string>
   <string name="share_description_hint">Beskriiwang</string>
   <string name="login_failed_network">Bi\'t uunmeldin as wat skiaf gingen - näätwerk-feeler</string>
-  <string name="login_failed_username">Bi\'t uunmeldin as wat skiaf gingen - luke ans efter di brükernööm</string>
-  <string name="login_failed_password">Bi\'t uunmeldin as wat skiaf gingen - luke ans efter det paaswurd</string>
   <string name="login_failed_throttled">Tu fölsis fersoocht saner lok. Ferschük det uun hög minüüten noch ans nei.</string>
   <string name="login_failed_blocked">Didiar brüker as üüb Commons speret wurden.</string>
   <string name="login_failed_2fa_needed">Dü skel dan code för\'t tau-straal-gudkäänen (2FA) uundu.</string>
@@ -94,7 +92,7 @@
   <string name="preference_license" fuzzy="true">Lisens</string>
   <string name="use_previous">Ual tiitel/beskriiwang brük</string>
   <string name="allow_gps">Aktuel plak automaatisk ufrep</string>
-  <string name="allow_gps_summary">Rept di aktuel plak uf, am kategoriin föörtuslauen, wan det bil nian geotags hää.</string>
+  <string name="allow_gps_summary" fuzzy="true">Rept di aktuel plak uf, am kategoriin föörtuslauen, wan det bil nian geotags hää.</string>
   <string name="preference_theme">Naacht muude</string>
   <string name="preference_theme_summary">Jonk skak brük</string>
   <string name="license_name_cc_by_sa_four">Attribution-ShareAlike 4.0</string>

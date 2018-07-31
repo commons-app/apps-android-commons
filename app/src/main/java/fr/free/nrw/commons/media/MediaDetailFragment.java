@@ -42,6 +42,7 @@ import fr.free.nrw.commons.MediaDataExtractor;
 import fr.free.nrw.commons.MediaWikiImageView;
 import fr.free.nrw.commons.PageTitle;
 import fr.free.nrw.commons.R;
+import fr.free.nrw.commons.category.CategoryDetailsActivity;
 import fr.free.nrw.commons.delete.DeleteTask;
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
 import fr.free.nrw.commons.location.LatLng;
@@ -56,16 +57,16 @@ import static android.widget.Toast.LENGTH_SHORT;
 public class MediaDetailFragment extends CommonsDaggerSupportFragment {
 
     private boolean editable;
-    private boolean isFeaturedMedia;
+    private boolean isCategoryImage;
     private MediaDetailPagerFragment.MediaDetailProvider detailProvider;
     private int index;
 
-    public static MediaDetailFragment forMedia(int index, boolean editable, boolean isFeaturedMedia) {
+    public static MediaDetailFragment forMedia(int index, boolean editable, boolean isCategoryImage) {
         MediaDetailFragment mf = new MediaDetailFragment();
 
         Bundle state = new Bundle();
         state.putBoolean("editable", editable);
-        state.putBoolean("isFeaturedMedia", isFeaturedMedia);
+        state.putBoolean("isCategoryImage", isCategoryImage);
         state.putInt("index", index);
         state.putInt("listIndex", 0);
         state.putInt("listTop", 0);
@@ -128,7 +129,7 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
         super.onSaveInstanceState(outState);
         outState.putInt("index", index);
         outState.putBoolean("editable", editable);
-        outState.putBoolean("isFeaturedMedia", isFeaturedMedia);
+        outState.putBoolean("isCategoryImage", isCategoryImage);
 
         getScrollPosition();
         outState.putInt("listTop", initialListTop);
@@ -144,12 +145,12 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
 
         if (savedInstanceState != null) {
             editable = savedInstanceState.getBoolean("editable");
-            isFeaturedMedia = savedInstanceState.getBoolean("isFeaturedMedia");
+            isCategoryImage = savedInstanceState.getBoolean("isCategoryImage");
             index = savedInstanceState.getInt("index");
             initialListTop = savedInstanceState.getInt("listTop");
         } else {
             editable = getArguments().getBoolean("editable");
-            isFeaturedMedia = getArguments().getBoolean("isFeaturedMedia");
+            isCategoryImage = getArguments().getBoolean("isCategoryImage");
             index = getArguments().getInt("index");
             initialListTop = 0;
         }
@@ -161,7 +162,7 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
 
         ButterKnife.bind(this,view);
 
-        if (isFeaturedMedia){
+        if (isCategoryImage){
             authorLayout.setVisibility(VISIBLE);
         } else {
             authorLayout.setVisibility(GONE);
@@ -245,6 +246,10 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
 
             @Override
             protected Boolean doInBackground(Void... voids) {
+                // Local files have no filename yet
+                if(media.getFilename() == null) {
+                    return Boolean.FALSE;
+                }
                 try {
                     extractor.fetch(media.getFilename(), licenseList);
                     return Boolean.TRUE;
@@ -328,7 +333,7 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
         if (!TextUtils.isEmpty(licenseLink(media))) {
             openWebBrowser(licenseLink(media));
         } else {
-            if(isFeaturedMedia) {
+            if(isCategoryImage) {
                 Timber.d("Unable to fetch license URL for %s", media.getLicense());
             } else {
                 Toast toast = Toast.makeText(getContext(), getString(R.string.null_url), Toast.LENGTH_SHORT);
@@ -426,17 +431,11 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
         textView.setText(catName);
         if (categoriesLoaded && categoriesPresent) {
             textView.setOnClickListener(view -> {
+                // Open Category Details page
                 String selectedCategoryTitle = "Category:" + catName;
-                Intent viewIntent = new Intent();
-                viewIntent.setAction(Intent.ACTION_VIEW);
-                viewIntent.setData(new PageTitle(selectedCategoryTitle).getCanonicalUri());
-                //check if web browser available
-                if (viewIntent.resolveActivity(getActivity().getPackageManager()) != null) {
-                    startActivity(viewIntent);
-                } else {
-                    Toast toast = Toast.makeText(getContext(), getString(R.string.no_web_browser), LENGTH_SHORT);
-                    toast.show();
-                }
+                Intent intent = new Intent(getContext(), CategoryDetailsActivity.class);
+                intent.putExtra("categoryName", selectedCategoryTitle);
+                getContext().startActivity(intent);
             });
         }
         return item;
@@ -503,8 +502,7 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
         if (media.getRequestedDeletion()){
             delete.setVisibility(GONE);
             nominatedForDeletion.setVisibility(VISIBLE);
-        }
-        else{
+        } else if (!isCategoryImage) {
             delete.setVisibility(VISIBLE);
             nominatedForDeletion.setVisibility(GONE);
         }

@@ -26,7 +26,7 @@
   <string name="login_success">सनोंद प्रवेश यशस्वी!</string>
   <string name="login_failed">सनोंद प्रवेश अयशस्वी!</string>
   <string name="upload_failed">संचिका सापडली नाही. कृपया दुसऱ्या संचिकेसाठी प्रयत्न करा.</string>
-  <string name="authentication_failed">अधिप्रमाणन अयशस्वी!</string>
+  <string name="authentication_failed" fuzzy="true">अधिप्रमाणन अयशस्वी!</string>
   <string name="uploading_started">अपभारण सुरू झाले!</string>
   <string name="upload_completed_notification_title">%1$s अपभारीत!</string>
   <string name="upload_completed_notification_text">आपले अपभारण बघण्यास अलगद टपली मारा</string>
@@ -54,8 +54,6 @@
   <string name="add_title_toast">कृपया या फाईलसाठी शीर्षक प्रदान करा</string>
   <string name="share_description_hint">वर्णन</string>
   <string name="login_failed_network">सनोंद प्रवेश अशक्य - नेटवर्क नाही</string>
-  <string name="login_failed_username">सनोंद प्रवेश अशक्य - कृपया आपले सदस्यनाव तपासा</string>
-  <string name="login_failed_password">सनोंद प्रवेश अशक्य - कृपया आपला परवलीचा शब्द तपासा</string>
   <string name="login_failed_throttled">अनेक अयशस्वी प्रयत्न.काही मिनीटांनंतर पुन्हा प्रयत्न करा.</string>
   <string name="login_failed_blocked">माफ करा, कॉमन्सवर हा सदस्य प्रतिबंधित आहे</string>
   <string name="login_failed_2fa_needed">आपण आपल्या दोन कारक प्रमाणिकरण कोड प्रदान करणे आवश्यक आहे.</string>
@@ -107,7 +105,7 @@
   <string name="preference_license">डिफॉल्ट परवाना</string>
   <string name="use_previous">मागील शीर्षक/वर्णन वापरा</string>
   <string name="allow_gps">आपोआप सध्याचे स्थान मिळवा</string>
-  <string name="allow_gps_summary">जर छायाचित्राला जिओटॅग नसल्यास तुम्ही तुमच्या स्थानाची निश्चिती करा जेणे करुन संबंधीत वर्ग सुचवले जातील</string>
+  <string name="allow_gps_summary" fuzzy="true">जर छायाचित्राला जिओटॅग नसल्यास तुम्ही तुमच्या स्थानाची निश्चिती करा जेणे करुन संबंधीत वर्ग सुचवले जातील</string>
   <string name="preference_theme">रात्रीच्या वेळेच्या व्यवस्था</string>
   <string name="preference_theme_summary">गडद त्वचा वापरा</string>
   <string name="license_name_cc_by_sa_four"> Attribution-ShareAlike 3.0</string>

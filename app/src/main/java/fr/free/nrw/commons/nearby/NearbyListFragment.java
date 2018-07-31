@@ -35,6 +35,7 @@ import timber.log.Timber;
 
 import static android.app.Activity.RESULT_OK;
 import static android.content.pm.PackageManager.PERMISSION_GRANTED;
+import static fr.free.nrw.commons.wikidata.WikidataConstants.WIKIDATA_ENTITY_ID_PREF;
 
 public class NearbyListFragment extends DaggerFragment {
 
@@ -51,6 +52,11 @@ public class NearbyListFragment extends DaggerFragment {
     private NearbyAdapterFactory adapterFactory;
     private RecyclerView recyclerView;
     private ContributionController controller;
+
+
+    @Inject
+    @Named("direct_nearby_upload_prefs")
+    SharedPreferences directPrefs;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -141,7 +147,7 @@ public class NearbyListFragment extends DaggerFragment {
         if (resultCode == RESULT_OK) {
             Timber.d("OnActivityResult() parameters: Req code: %d Result code: %d Data: %s",
                     requestCode, resultCode, data);
-            controller.handleImagePicked(requestCode, data, true);
+            controller.handleImagePicked(requestCode, data, true, directPrefs.getString(WIKIDATA_ENTITY_ID_PREF, null));
         } else {
             Timber.e("OnActivityResult() parameters: Req code: %d Result code: %d Data: %s",
                     requestCode, resultCode, data);

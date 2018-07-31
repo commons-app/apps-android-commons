@@ -12,7 +12,7 @@
   <string name="logging_in_message" fuzzy="true">Vinarliga bíða…</string>
   <string name="login_success">Innritan væleydnað!</string>
   <string name="login_failed">Innritan miseydnaðist</string>
-  <string name="authentication_failed">Góðkenning miseydnaðist!</string>
+  <string name="authentication_failed" fuzzy="true">Góðkenning miseydnaðist!</string>
   <string name="uploading_started">Upplóting er byrjað!</string>
   <string name="upload_completed_notification_title">%1$s er lagt út!</string>
   <string name="upload_completed_notification_text">Trýst fyri at síggja tað sum tú legði út</string>
@@ -34,8 +34,6 @@
   <string name="share_title_hint">Heiti</string>
   <string name="share_description_hint">Frágreiðing</string>
   <string name="login_failed_network">Ómøguligt at rita inn - feilur í netsambandinum</string>
-  <string name="login_failed_username">Ómøguligt at rita inn - vinarliga eftirkanna títt brúkaranavn</string>
-  <string name="login_failed_password">Ómøguligt at rita inn - vinarliga kanna eftir, um títt loyniorð er rætt</string>
   <string name="login_failed_throttled" fuzzy="true">Ov nógv miseydnaðar royndir. Vinarliga royn aftur um fáir minuttir</string>
   <string name="login_failed_blocked">Haldið okkum tilgóðar, hesin brúkari er blivin sperraður á Commons</string>
   <string name="login_failed_generic">Login miseydnaðist</string>

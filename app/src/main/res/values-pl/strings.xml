@@ -33,7 +33,7 @@
   <string name="login_success">Zalogowano pomyślnie!</string>
   <string name="login_failed">Logowanie nie powiodło się!</string>
   <string name="upload_failed">Nie znaleziono pliku. Spróbuj znaleźć inny.</string>
-  <string name="authentication_failed">Błąd uwierzytelniania!</string>
+  <string name="authentication_failed">Uwierzytelnianie nie powiodło się, zaloguj się ponownie</string>
   <string name="uploading_started">Wysyłanie rozpoczęte!</string>
   <string name="upload_completed_notification_title">Przesłano %1$s!</string>
   <string name="upload_completed_notification_text">Dotknij, aby zobaczyć przesłany plik</string>
@@ -60,8 +60,7 @@
   <string name="share_title_hint">Tytuł</string>
   <string name="share_description_hint">Opis</string>
   <string name="login_failed_network">Nie można zalogować - błąd sieci</string>
-  <string name="login_failed_username">Nie można zalogować - sprawdź nazwę użytkownika</string>
-  <string name="login_failed_password">Nie można zalogować - sprawdź hasło</string>
+  <string name="login_failed_wrong_credentials">Nie można się zalogować - sprawdź swoją nazwę użytkownika i hasło</string>
   <string name="login_failed_throttled">Zbyt wiele nieudanych prób zalogowania. Spróbuj ponownie za kilka minut.</string>
   <string name="login_failed_blocked">Przepraszamy, ten użytkownik został zablokowany na Commons</string>
   <string name="login_failed_2fa_needed">Wprowadź swój kod dla  dwuetapowej autoryzacji.</string>
@@ -95,6 +94,8 @@
   <string name="categories_activity_title">Kategorie</string>
   <string name="title_activity_settings">Ustawienia</string>
   <string name="title_activity_signup">Zarejestruj się</string>
+  <string name="title_activity_featured_images">Wyróżniony obrazek</string>
+  <string name="title_activity_category_details">Kategoria</string>
   <string name="menu_about">O aplikacji</string>
   <string name="about_license">Aplikacja Wikimedia Commons jest oprogramowaniem typu open-source tworzonym i rozwijanym przez stypendystów i wolontariuszy ze społeczności Wikimedii. Fundacja Wikimedia nie bierze udziału w tworzeniu, rozwijaniu ani utrzymywaniu aplikacji.</string>
   <string name="about_improve" fuzzy="true">&lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;Kod źródłowy&lt;/a&gt; oraz &lt;a href=\"https://commons-app.github.io/\"&gt;strona internetowa&lt;/a&gt; na GitHub. Aby zgłosić błąd lub sugestię, utwórz nowe &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;zgłoszenie na GitHub&lt;/a&gt;.</string>
@@ -113,7 +114,7 @@
   <string name="preference_license">Domyślna licencja</string>
   <string name="use_previous">Użyj poprzedniego tytułu/opisu</string>
   <string name="allow_gps">Automatycznie uzyskaj bieżącą lokalizację</string>
-  <string name="allow_gps_summary">Pobierz aktualną lokalizację, aby uzyskać propozycje kategorii, jeśli obraz nie zawiera znaczników geograficznych</string>
+  <string name="allow_gps_summary" fuzzy="true">Pobierz aktualną lokalizację, aby uzyskać propozycje kategorii, jeśli obraz nie zawiera znaczników geograficznych</string>
   <string name="preference_theme">Tryb nocny</string>
   <string name="preference_theme_summary">Użyj ciemnej skórki</string>
   <string name="license_name_cc_by_sa_four">Uznanie autorstwa-Na tych samych warunkach 4.0</string>
@@ -160,6 +161,7 @@
   <string name="detail_license_empty">Nieznana licencja</string>
   <string name="menu_refresh">Odśwież</string>
   <string name="read_storage_permission_rationale" fuzzy="true">Wymagane uprawnienia: odczyt z dysku zewnętrznego. Aplikacja nie będzie w stanie funkcjonować bez tego.</string>
+  <string name="write_storage_permission_rationale">Wymagane uprawnienia: odczyt z dysku zewnętrznego. Aplikacja nie będzie w stanie funkcjonować bez tego.</string>
   <string name="location_permission_rationale">Opcjonalne zezwolenie: uzyskiwanie bieżącej lokalizacji dla wygenerowania propozycji kategorii</string>
   <string name="ok">OK</string>
   <string name="title_activity_nearby">Pobliskie miejsca</string>
@@ -176,6 +178,7 @@
   <string name="media_detail_uploaded_date">Data przesłania</string>
   <string name="media_detail_license">Licencja</string>
   <string name="media_detail_coordinates">Współrzędne</string>
+  <string name="media_detail_coordinates_empty">Nie dostarczone</string>
   <string name="become_a_tester_title">Zostań beta-testerem</string>
   <string name="become_a_tester_description">Dołącz do kanału bety w Google Play i dostań wczesny dostęp do nowych funkcji i łatek</string>
   <string name="_2fa_code">Kod 2FA</string>
@@ -185,6 +188,8 @@
   <string name="logout_verification">Czy na pewno wylogować?</string>
   <string name="commons_logo">Logo Commons</string>
   <string name="background_image">Obraz w tle</string>
+  <string name="no_subcategory_found">Nie znaleziono podkategorii</string>
+  <string name="no_parentcategory_found">Nie znaleziono kategorii nadrzędnych</string>
   <string name="upload_image">Załaduj zdjęcie</string>
   <string name="welcome_image_mount_zao">Zaō</string>
   <string name="welcome_image_llamas">Lamy</string>
@@ -206,12 +211,15 @@
   <string name="navigation_item_logout">Wyloguj</string>
   <string name="navigation_item_info">Samouczek</string>
   <string name="navigation_item_notification">Powiadomienia</string>
+  <string name="navigation_item_featured_images">Wyróżnione</string>
   <string name="no_description_found">nie znaleziono opisu</string>
   <string name="nearby_info_menu_wikidata_article">Element Wikidanych</string>
   <string name="nearby_info_menu_wikipedia_article">Artykuł na Wikipedii</string>
   <string name="title_info">Podaj krótką, opisową i unikalną nazwę, która będzie służyła jako nazwa pliku. Możesz używać prostego języka i spacji. Nie dodawaj rozszerzenia pliku.</string>
+  <string name="give_permission">Uzyskaj uprawnienie</string>
   <string name="login_to_your_account">Zaloguj się na swoje konto</string>
   <string name="null_url">Błąd! Nie znaleziono adresu URL</string>
+  <string name="nominate_deletion">Zgłoszone do usunięcia</string>
   <string name="nominated_for_deletion">Ta grafika została zgłoszona do usunięcia.</string>
   <string name="view_browser">Otwórz w przeglądarce</string>
   <string name="notifications_welcome">Witamy w Wikimedia Commons, %1$s! Cieszymy się, że tu jesteś.</string>
@@ -226,5 +234,20 @@
   <string name="welcome_skip_button">Pomiń samouczek</string>
   <string name="no_notifications">Nie znaleziono powiadomień</string>
   <string name="about_translate_title">Języki</string>
+  <string name="about_translate_proceed">Dalej</string>
   <string name="about_translate_cancel">Anuluj</string>
+  <string name="retry">Ponów próbę</string>
+  <string name="showcase_view_got_it_button">Wszystko jasne!</string>
+  <string name="no_images_found">Nie znaleziono grafik!</string>
+  <string name="error_loading_images">Wystąpił błąd podczas ładowania grafik.</string>
+  <string name="image_uploaded_by">Przesłano przez $1</string>
+  <string name="menu_search_button">Szukaj</string>
+  <string name="search_recent_header">Ostatnie wyszukiwania:</string>
+  <string name="provider_searches">Ostatnio wyszukiwane zapytania</string>
+  <string name="error_loading_categories">Wystąpił błąd podczas ładowania kategorii.</string>
+  <string name="error_loading_subcategories">Wystąpił błąd podczas ładowania podkategorii.</string>
+  <string name="menu_set_wallpaper">Ustaw tapetę</string>
+  <string name="wallpaper_set_successfully">Tapeta ustawiona pomyślnie!</string>
+  <string name="delete_recent_searches_dialog">Czy na pewno chcesz usunąć swoją historię wyszukiwania?</string>
+  <string name="search_history_deleted">Historia wyszukiwania została usunięta</string>
 </resources>

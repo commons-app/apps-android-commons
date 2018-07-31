@@ -12,7 +12,9 @@ import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.ListAdapter;
 import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -48,9 +50,9 @@ public class CategoryImagesListFragment extends DaggerFragment {
     TextView statusTextView;
     @BindView(R.id.loadingImagesProgressBar) ProgressBar progressBar;
     @BindView(R.id.categoryImagesList) GridView gridView;
-
+    @BindView(R.id.parentLayout) RelativeLayout parentLayout;
     private boolean hasMoreImages = true;
-    private boolean isLoading;
+    private boolean isLoading = true;
     private String categoryName = null;
 
     @Inject CategoryImageController controller;
@@ -123,7 +125,7 @@ public class CategoryImagesListFragment extends DaggerFragment {
             statusTextView.setVisibility(VISIBLE);
             statusTextView.setText(getString(R.string.no_internet));
         } else {
-            ViewUtil.showSnackbar(gridView, R.string.no_internet);
+            ViewUtil.showSnackbar(parentLayout, R.string.no_internet);
         }
     }
 
@@ -132,15 +134,20 @@ public class CategoryImagesListFragment extends DaggerFragment {
      * @param throwable
      */
     private void handleError(Throwable throwable) {
-        Timber.e(throwable, "Error occurred while loading featured images");
-        initErrorView();
+        Timber.e(throwable, "Error occurred while loading images inside a category");
+        try{
+            ViewUtil.showSnackbar(parentLayout, R.string.error_loading_images);
+            initErrorView();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
     }
 
     /**
      * Handles the UI updates for a error scenario
      */
     private void initErrorView() {
-        ViewUtil.showSnackbar(gridView, R.string.error_loading_images);
         progressBar.setVisibility(GONE);
         if (gridAdapter == null || gridAdapter.isEmpty()) {
             statusTextView.setVisibility(VISIBLE);
@@ -152,7 +159,7 @@ public class CategoryImagesListFragment extends DaggerFragment {
 
     /**
      * Initializes the adapter with a list of Media objects
-     * @param mediaList
+     * @param mediaList List of new Media to be displayed
      */
     private void setAdapter(List<Media> mediaList) {
         gridAdapter = new GridViewAdapter(this.getContext(), R.layout.layout_category_images, mediaList);
@@ -175,6 +182,9 @@ public class CategoryImagesListFragment extends DaggerFragment {
                 if (hasMoreImages && !isLoading && (firstVisibleItem + visibleItemCount + 1 >= totalItemCount)) {
                     isLoading = true;
                     fetchMoreImages();
+                }
+                if (!hasMoreImages){
+                    progressBar.setVisibility(GONE);
                 }
             }
         });
@@ -201,7 +211,7 @@ public class CategoryImagesListFragment extends DaggerFragment {
     /**
      * Handles the success scenario
      * On first load, it initializes the grid view. On subsequent loads, it adds items to the adapter
-     * @param collection
+     * @param collection List of new Media to be displayed
      */
     private void handleSuccess(List<Media> collection) {
         if(collection == null || collection.isEmpty()) {
@@ -213,6 +223,10 @@ public class CategoryImagesListFragment extends DaggerFragment {
         if(gridAdapter == null) {
             setAdapter(collection);
         } else {
+            if (gridAdapter.containsAll(collection)) {
+                hasMoreImages = false;
+                return;
+            }
             gridAdapter.addItems(collection);
         }
 
@@ -221,7 +235,13 @@ public class CategoryImagesListFragment extends DaggerFragment {
         statusTextView.setVisibility(GONE);
     }
 
+    /**
+     * It return an instance of gridView adapter which helps in extracting media details
+     * used by the gridView
+     * @return  GridView Adapter
+     */
     public ListAdapter getAdapter() {
         return gridView.getAdapter();
     }
+
 }

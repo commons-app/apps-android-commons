@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="fr.free.nrw.commons">
 
@@ -15,6 +16,7 @@
     <uses-permission android:name="android.permission.MANAGE_DOCUMENTS" />
     <uses-permission android:name="com.google.android.apps.photos.permission.GOOGLE_PHOTOS" />
     <uses-permission android:name="android.permission.READ_LOGS"/>
+    <uses-permission android:name="android.permission.SET_WALLPAPER"/>
 
     <!-- Needed only if your app targets Android 5.0 (API level 21) or higher. -->
     <uses-feature android:name="android.hardware.location.gps" />
@@ -26,10 +28,10 @@
         android:theme="@style/LightAppTheme"
         android:supportsRtl="true" >
         <activity android:name="org.acra.CrashReportDialog"
-                  android:theme="@android:style/Theme.Dialog"
-                  android:launchMode="singleInstance"
-                  android:excludeFromRecents="true"
-                  android:finishOnTaskLaunch="true" />
+            android:theme="@android:style/Theme.Dialog"
+            android:launchMode="singleInstance"
+            android:excludeFromRecents="true"
+            android:finishOnTaskLaunch="true" />
 
         <activity android:name=".auth.LoginActivity">
             <intent-filter>
@@ -44,7 +46,7 @@
             android:name=".upload.ShareActivity"
             android:icon="@drawable/ic_launcher"
             android:label="@string/app_name">
-            <intent-filter>
+            <intent-filter android:label="@string/intent_share_upload_label">
                 <action android:name="android.intent.action.SEND" />
                 <category android:name="android.intent.category.DEFAULT" />
                 <data android:mimeType="image/*" />
@@ -56,7 +58,7 @@
             android:name=".upload.MultipleShareActivity"
             android:icon="@drawable/ic_launcher"
             android:label="@string/app_name">
-            <intent-filter>
+            <intent-filter android:label="@string/intent_share_upload_label">
                 <action android:name="android.intent.action.SEND_MULTIPLE" />
                 <category android:name="android.intent.category.DEFAULT" />
                 <data android:mimeType="image/*" />
@@ -96,8 +98,22 @@
             android:label="@string/title_activity_featured_images"
             android:parentActivityName=".contributions.ContributionsActivity" />
 
-        <service android:name=".upload.UploadService" />
+        <activity
+            android:name=".category.CategoryDetailsActivity"
+            android:label="@string/title_activity_featured_images"
+            android:parentActivityName=".contributions.ContributionsActivity" />
 
+        <activity
+            android:name=".explore.SearchActivity"
+            android:label="@string/title_activity_search"
+            android:parentActivityName=".contributions.ContributionsActivity"
+            />
+
+        <activity
+            android:name=".achievements.AchievementsActivity"
+            android:label="@string/Achievements" />
+
+        <service android:name=".upload.UploadService" />
         <service
             android:name=".auth.WikiAccountAuthenticatorService"
             android:exported="true"
@@ -163,6 +179,23 @@
             android:exported="false"
             android:label="@string/provider_categories"
             android:syncable="false" />
+
+        <provider
+            android:name=".explore.recentsearches.RecentSearchesContentProvider"
+            android:authorities="fr.free.nrw.commons.explore.recentsearches.contentprovider"
+            android:exported="false"
+            android:label="@string/provider_searches"
+            android:syncable="false" />
+
+        <receiver android:name=".widget.PicOfDayAppWidget">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/pic_of_day_app_widget_info" />
+        </receiver>
 
     </application>
 

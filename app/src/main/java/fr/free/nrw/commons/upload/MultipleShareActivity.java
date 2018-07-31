@@ -47,6 +47,8 @@ import fr.free.nrw.commons.modifications.TemplateRemoveModifier;
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
 import timber.log.Timber;
 
+//TODO: We should use this class to see how multiple uploads are handled, and then REMOVE it.
+
 public class MultipleShareActivity extends AuthenticatedActivity
         implements MediaDetailPagerFragment.MediaDetailProvider,
         AdapterView.OnItemClickListener,
@@ -327,18 +329,18 @@ public class MultipleShareActivity extends AuthenticatedActivity
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
                 ParcelFileDescriptor fd = getContentResolver().openFileDescriptor(imageUri,"r");
                 if (fd != null) {
-                    gpsExtractor = new GPSExtractor(fd.getFileDescriptor(),this,prefs);
+                    gpsExtractor = new GPSExtractor(fd.getFileDescriptor());
                 }
             } else {
                 String filePath = FileUtils.getPath(this,imageUri);
                 if (filePath != null) {
-                    gpsExtractor = new GPSExtractor(filePath,this,prefs);
+                    gpsExtractor = new GPSExtractor(filePath);
                 }
             }
 
             if (gpsExtractor != null) {
                 //get image coordinates from exif data or user location
-                return gpsExtractor.getCoords(locationPermitted);
+                return gpsExtractor.getCoords();
             }
 
         } catch (FileNotFoundException fnfe) {

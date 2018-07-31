@@ -2,11 +2,13 @@ package fr.free.nrw.commons;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.customtabs.CustomTabsIntent;
 import android.support.v4.content.ContextCompat;
+import android.view.View;
 import android.widget.Toast;
 
 import org.apache.commons.codec.binary.Hex;
@@ -76,7 +78,11 @@ public class Utils {
      * @return string with capitalized first character
      */
     public static String capitalize(String string) {
-        return string.substring(0, 1).toUpperCase(Locale.getDefault()) + string.substring(1);
+        if(string.length() > 0) {
+            return string.substring(0, 1).toUpperCase(Locale.getDefault()) + string.substring(1);
+        } else {
+            return string;
+        }
     }
 
     /**
@@ -146,7 +152,7 @@ public class Utils {
         StringBuilder stringBuilder = new StringBuilder();
 
         try {
-            String[] command = new String[] {"logcat","-d","-v","threadtime"};
+            String[] command = new String[]{"logcat","-d","-v","threadtime"};
 
             Process process = Runtime.getRuntime().exec(command);
 
@@ -178,6 +184,7 @@ public class Utils {
     }
 
     public static void handleWebUrl(Context context, Uri url) {
+        Timber.d("Launching web url %s", url.toString());
         Intent browserIntent = new Intent(Intent.ACTION_VIEW, url);
         if (browserIntent.resolveActivity(context.getPackageManager()) == null) {
             Toast toast = Toast.makeText(context, context.getString(R.string.no_web_browser), LENGTH_SHORT);
@@ -192,6 +199,20 @@ public class Utils {
         CustomTabsIntent customTabsIntent = builder.build();
         customTabsIntent.intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         customTabsIntent.launchUrl(context, url);
+    }
+
+    /**
+     * To take screenshot of the screen and return it in Bitmap format
+     *
+     * @param view
+     * @return
+     */
+    public static Bitmap getScreenShot(View view) {
+        View screenView = view.getRootView();
+        screenView.setDrawingCacheEnabled(true);
+        Bitmap bitmap = Bitmap.createBitmap(screenView.getDrawingCache());
+        screenView.setDrawingCacheEnabled(false);
+        return bitmap;
     }
 
 }

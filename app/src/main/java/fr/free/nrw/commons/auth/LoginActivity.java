@@ -5,6 +5,7 @@ import android.accounts.AccountAuthenticatorActivity;
 import android.accounts.AccountAuthenticatorResponse;
 import android.accounts.AccountManager;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
@@ -41,10 +42,10 @@ import fr.free.nrw.commons.PageTitle;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.Utils;
 import fr.free.nrw.commons.WelcomeActivity;
+import fr.free.nrw.commons.category.CategoryImagesActivity;
 import fr.free.nrw.commons.contributions.ContributionsActivity;
 import fr.free.nrw.commons.di.ApplicationlessInjection;
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
-import fr.free.nrw.commons.nearby.NearbyActivity;
 import fr.free.nrw.commons.theme.NavigationBaseActivity;
 import fr.free.nrw.commons.ui.widget.HtmlTextView;
 import fr.free.nrw.commons.utils.ViewUtil;
@@ -62,6 +63,7 @@ import static fr.free.nrw.commons.auth.AccountUtil.AUTH_TOKEN_TYPE;
 public class LoginActivity extends AccountAuthenticatorActivity {
 
     public static final String PARAM_USERNAME = "fr.free.nrw.commons.login.username";
+    private static final String FEATURED_IMAGES_CATEGORY = "Category:Featured_pictures_on_Wikimedia_Commons";
 
     @Inject MediaWikiApi mwApi;
     @Inject AccountUtil accountUtil;
@@ -146,9 +148,13 @@ public class LoginActivity extends AccountAuthenticatorActivity {
         }
     }
 
+    /**
+     * This function is called when user skips the login.
+     * It redirects the user to Explore Activity.
+     */
     private void skipLogin() {
         prefs.edit().putBoolean("login_skipped", true).apply();
-        NavigationBaseActivity.startActivityWithFlags(this, NearbyActivity.class, Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        CategoryImagesActivity.startYourself(this, getString(R.string.title_activity_explore), FEATURED_IMAGES_CATEGORY);
         finish();
 
     }
@@ -180,6 +186,7 @@ public class LoginActivity extends AccountAuthenticatorActivity {
             && sessionManager.isUserLoggedIn()
             && sessionManager.getCachedAuthCookie() != null) {
             prefs.edit().putBoolean("login_skipped", false).apply();
+            sessionManager.revalidateAuthToken();
             startMainActivity();
         }
 
@@ -294,11 +301,11 @@ public class LoginActivity extends AccountAuthenticatorActivity {
             showMessageAndCancelDialog(R.string.login_failed_network);
         } else if (result.toLowerCase(Locale.getDefault()).contains("nosuchuser".toLowerCase()) || result.toLowerCase().contains("noname".toLowerCase())) {
             // Matches nosuchuser, nosuchusershort, noname
-            showMessageAndCancelDialog(R.string.login_failed_username);
+            showMessageAndCancelDialog(R.string.login_failed_wrong_credentials);
             emptySensitiveEditFields();
         } else if (result.toLowerCase(Locale.getDefault()).contains("wrongpassword".toLowerCase())) {
             // Matches wrongpassword, wrongpasswordempty
-            showMessageAndCancelDialog(R.string.login_failed_password);
+            showMessageAndCancelDialog(R.string.login_failed_wrong_credentials);
             emptySensitiveEditFields();
         } else if (result.toLowerCase(Locale.getDefault()).contains("throttle".toLowerCase())) {
             // Matches unknown throttle error codes
@@ -462,5 +469,10 @@ public class LoginActivity extends AccountAuthenticatorActivity {
                     && (BuildConfig.DEBUG || twoFactorEdit.getText().length() != 0 || twoFactorEdit.getVisibility() != VISIBLE);
             loginButton.setEnabled(enabled);
         }
+    }
+
+    public static void startYourself(Context context) {
+        Intent intent = new Intent(context, LoginActivity.class);
+        context.startActivity(intent);
     }
 }

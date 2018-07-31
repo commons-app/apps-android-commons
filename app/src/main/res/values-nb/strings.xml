@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Authors:
+* Citadell
 * Danmichaelo
 * Imre Eilertsen
 * JohSan65
@@ -9,20 +10,24 @@
 -->
 <resources>
   <string name="preference_category_appearance">Utseende</string>
+  <string name="preference_category_general">Generelt</string>
   <string name="preference_category_feedback">Tilbakemelding</string>
+  <string name="preference_category_location">Beliggenhet</string>
   <string name="app_name">Commons</string>
   <string name="bullet">•</string>
   <string name="menu_settings">Innstillinger</string>
   <string name="username">Brukernavn</string>
   <string name="password">Passord</string>
+  <string name="login_credential">Logg inn på Commons Beta-kontoen din</string>
   <string name="login">Logg inn</string>
+  <string name="forgot_password">Glemt passordet?</string>
   <string name="signup">Registrer deg</string>
   <string name="logging_in_title">Logger inn</string>
   <string name="logging_in_message">Vennligst vent …</string>
   <string name="login_success">Innloggingen var vellykket!</string>
   <string name="login_failed">Innloggingen feilet!</string>
   <string name="upload_failed">Filen ble ikke funnet. Forsøk med en annen fil.</string>
-  <string name="authentication_failed">Autentiseringen feilet!</string>
+  <string name="authentication_failed">Autentiseringen feilet, vennligst logg inn igjen</string>
   <string name="uploading_started">Opplastingen startet</string>
   <string name="upload_completed_notification_title">%1$s lastet opp!</string>
   <string name="upload_completed_notification_text">Trykk for å vise din opplasting</string>
@@ -47,10 +52,10 @@
   <string name="menu_share">Del</string>
   <string name="menu_open_in_browser">Vis i nettleser</string>
   <string name="share_title_hint">Tittel</string>
+  <string name="add_title_toast">Angi en tittel for denne fila</string>
   <string name="share_description_hint">Beskrivelse</string>
   <string name="login_failed_network">Innlogging feilet - nettverksproblem</string>
-  <string name="login_failed_username">Innlogging feilet - sjekk brukernavnet ditt</string>
-  <string name="login_failed_password">Innlogging feilet - sjekk passordet ditt</string>
+  <string name="login_failed_wrong_credentials">Kunne ikke logge inn – sjekk brukernavnet og passordet ditt</string>
   <string name="login_failed_throttled">For mange misslykkede forsøk. Vennligst prøv igjen om noen få minutter.</string>
   <string name="login_failed_blocked">Beklager, denne brukeren har blitt blokkert på Commons</string>
   <string name="login_failed_2fa_needed">Du må oppgi tofaktorautentiseringskoden din.</string>
@@ -62,6 +67,7 @@
   <string name="categories_search_text_hint">Søk kategorier</string>
   <string name="menu_save_categories">Lagre</string>
   <string name="refresh_button">Oppdater</string>
+  <string name="display_list_button">Liste</string>
   <string name="gps_disabled">GPS er slått av på denne enheten. Ønsker du å slå den på?</string>
   <string name="enable_gps">Slå på GPS</string>
   <string name="contributions_subtitle_zero">Ingen opplastinger ennå</string>
@@ -83,11 +89,12 @@
   <string name="categories_activity_title">Kategorier</string>
   <string name="title_activity_settings">Innstillinger</string>
   <string name="title_activity_signup">Registrer deg</string>
+  <string name="title_activity_featured_images">Utvalgte bilder</string>
   <string name="menu_about">Om</string>
   <string name="about_license">Wikimedia Commons-appen er åpen kildekode og er skapt og vedlikeholdt av stipendiater og frivillige fra Wikimedia-fellesskapet. Wikimedia Foundation er ikke involvert i utviklingen eller vedlikeholdet av appen.</string>
   <string name="about_improve">Opprett en ny &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;GitHub-sak&lt;/a&gt; for feilrapporter og forslag.</string>
-  <string name="about_privacy_policy" fuzzy="true">&lt;a href=\"https://github.com/commons-app/apps-android-commons/wiki/Privacy-policy\"&gt;Personvernpolicy&lt;/a&gt;</string>
-  <string name="about_credits" fuzzy="true">&lt;a href=\"https://github.com/commons-app/apps-android-comons/blob/master/CREDITS\"&gt;Bidragsytere&lt;/a&gt;</string>
+  <string name="about_privacy_policy">&lt;u&gt;Personvernpolicy&lt;/u&gt;</string>
+  <string name="about_credits">&lt;u&gt;Bidragsytere&lt;/u&gt;</string>
   <string name="title_activity_about">Om</string>
   <string name="menu_feedback">Send tilbakemelding (via Epost)</string>
   <string name="no_email_client">Ingen epostklient installert</string>
@@ -102,7 +109,7 @@
   <string name="preference_license">Standardlisens</string>
   <string name="use_previous">Bruk forrige tittel/beskrivelse</string>
   <string name="allow_gps">Hent automatisk nåværende plassering</string>
-  <string name="allow_gps_summary">Hent nåværende plassering for å tilby kategoriforslag om bildet ikke er geotagget</string>
+  <string name="allow_gps_summary">Hent nåværende plassering om bildet ikke er geotagget, og tagger bildet med plasseringen. Advarsel: Dette vil avsløre hvor du befinner deg for øyeblikket.</string>
   <string name="preference_theme">Nattmodus</string>
   <string name="preference_theme_summary">Bruk mørk drakt</string>
   <string name="license_name_cc_by_sa_four">Navngivelse-Del på samme vilkår 4.0</string>
@@ -130,15 +137,18 @@
   <string name="tutorial_2_text">Last opp bilder som er tatt eller skapt av deg:</string>
   <string name="tutorial_2_subtext">– Naturlige objekter (blomster, dyr, fjell)\n– Nyttige objekter (sykler, jernbanestasjoner)\n– Berømte personer (ordføreren din, OL-deltakere du har møtt)</string>
   <string name="tutorial_2_subtext_1">Naturlige objekter (blomster, dyr, fjell)</string>
+  <string name="tutorial_2_subtext_2">Nyttige objekter (sykler, togstasjoner)</string>
   <string name="tutorial_2_subtext_3">Berømte personer (din ordfører, OL-deltakere du møtte)</string>
   <string name="tutorial_3_text">Vennligst IKKE last opp:</string>
   <string name="tutorial_3_subtext">- Selfies eller bilder av vennene dine\n- Bilder som du har lastet ned fra internet\n- Skjermbilder tatt fra proprietære apper</string>
   <string name="tutorial_3_subtext_1">Selvportrett eller bilder av dine venner</string>
   <string name="tutorial_3_subtext_2">Bilder du lastet ned fra Internett</string>
+  <string name="tutorial_3_subtext_3">Skjermbilder av proprietære programmer</string>
   <string name="tutorial_4_text">Opplastingseksempel:</string>
   <string name="tutorial_4_subtext">- Tittel: Sydneys operahus\n- Beskrivelse: Operahuset i Sydney sett fra andre siden av bukten\n- Kategorier: Operahuset i Sydney ifra vest, Operahuset i Sydney utenfra</string>
   <string name="tutorial_4_subtext_1">Tittel: Operahuset i Sydney</string>
   <string name="tutorial_4_subtext_2">Beskrivelse: Operahuset i Sydney som det sees fra motsatt side av bukten</string>
+  <string name="tutorial_4_subtext_3">Kategorier: Sydneys operahus fra vest, Sydneys operahus fra utsiden</string>
   <string name="welcome_wikipedia_text">Bidra med dine bilder. Hjelp til med å blåse liv i Wikipedias artikler!</string>
   <string name="welcome_wikipedia_subtext">Bilder på Wikipedia kommer fra Wikimedia Commons.</string>
   <string name="welcome_copyright_text">Bildene dine kan være til hjelp for mennesker over hele verden som søker kunnskap og dannelse.</string>
@@ -151,8 +161,8 @@
   <string name="detail_description_empty">Ingen beskrivelse</string>
   <string name="detail_license_empty">Ukjent lisens</string>
   <string name="menu_refresh">Gjenoppfrisk</string>
-  <string name="read_storage_permission_rationale" fuzzy="true">Nødvendig tillatelse: Lese ekstern lagring. Appen virker ikke uten dette.</string>
-  <string name="write_storage_permission_rationale" fuzzy="true">Påkrevd tillatelse: Skriv til ekstern lagring. Appen fungerer ikke uten dette.</string>
+  <string name="read_storage_permission_rationale">Nødvendig tillatelse: Lese ekstern lagring. Appen kan ikke få tilgang til galleriet ditt uten dette.</string>
+  <string name="write_storage_permission_rationale">Nødvendig tillatelse: Skriv til ekstern lagring. Appen får ikke tilgang til kameraet ditt uten dette.</string>
   <string name="location_permission_rationale">Valgfri tillatelse: Hent nåværende posisjon for kategoriforslag</string>
   <string name="ok">OK</string>
   <string name="title_activity_nearby">Plasser i nærheten</string>
@@ -165,6 +175,8 @@
   <string name="media_detail_media_title">Medietittel</string>
   <string name="media_detail_description">Beskrivelse</string>
   <string name="media_detail_description_explanation">Beskrivelse av mediet skal være her. Denne kan potensielt være ganske lang, og vil trenge å strekke seg over flere linjer. Vi håper det ser bra nok ut.</string>
+  <string name="media_detail_author">Opphavsperson</string>
+  <string name="media_detail_author_explanation">Brukernavnet til opphavspersonen til utvalgte bilder kommer her.</string>
   <string name="media_detail_uploaded_date">Opplastingsdato</string>
   <string name="media_detail_license">Lisens</string>
   <string name="media_detail_coordinates">Koordinater</string>
@@ -207,10 +219,12 @@
   <string name="navigation_item_logout">Logg ut</string>
   <string name="navigation_item_info">Veiviser</string>
   <string name="navigation_item_notification">Varsler</string>
+  <string name="navigation_item_featured_images">Utvalgt</string>
   <string name="nearby_needs_permissions">Steder i nærheten kan ikke vises uten tillatelse for stedsbestemmelse</string>
   <string name="no_description_found">ingen beskrivelse funnet</string>
   <string name="nearby_info_menu_commons_article">Commons-filside</string>
   <string name="nearby_info_menu_wikidata_article">Wikidata-element</string>
+  <string name="nearby_info_menu_wikipedia_article">Wikipedia-artikkel</string>
   <string name="error_while_cache">Feil under mellomlagring av bilder</string>
   <string name="title_info">En unik beskrivende tittel for fila, som vil fungere som filnavn. Du kan bruke vanlig språk med mellomrom. Ikke ta med filendelsen</string>
   <string name="description_info">Beskriv bidraget så mye som mulig: Hvor ble det tatt? Hva viser det? Hva er konteksten? Beskriv objektene eller personene. Gi informasjon som ikke kan gjettes lett, for eksempel når på dagen bildet ble tatt om det er et landskapsbilde. Om bildet viser noe uvanlig, forklar hva som gjør det uvanlig.</string>
@@ -223,6 +237,10 @@
   <string name="send_log_file">Send loggfil</string>
   <string name="send_log_file_description">Send loggfil til utviklerne via epost</string>
   <string name="no_web_browser">Ingen internettleser funnet som kan åpne lenken</string>
+  <string name="null_url">Feil! URL ikke funnet</string>
+  <string name="nominate_deletion">Nominer for sletting</string>
+  <string name="nominated_for_deletion">Dette bildet har blitt nominert for sletting.</string>
+  <string name="view_browser">Vis i nettleseren</string>
   <string name="nearby_location_has_not_changed">Stedet har ikke blitt endret.</string>
   <string name="nearby_location_not_available">Sted ikke tilgjengelig.</string>
   <string name="location_permission_rationale_nearby">Tillatelse kreves for å vise listen over steder i nærheten</string>
@@ -233,8 +251,38 @@
   <string name="notifications_thank_you_edit">Takk for at du har gjort en redigering</string>
   <string name="notifications_mention">%1$s nevnte deg på %2$s.</string>
   <string name="toggle_view_button">Skift visning</string>
-  <string name="about_faq" fuzzy="true">Ofte stilte spørsmål</string>
+  <string name="nearby_directions">VEIBESKRIVELSE</string>
+  <string name="nearby_wikidata">WIKIDATA</string>
+  <string name="nearby_wikipedia">WIKIPEDIA</string>
+  <string name="nearby_commons">COMMONS</string>
+  <string name="about_rate_us">&lt;u&gt;Vurder oss&lt;/u&gt;</string>
+  <string name="about_faq">&lt;u&gt;Ofte stilte spørsmål&lt;/u&gt;</string>
+  <string name="welcome_skip_button">Hopp over innledning</string>
   <string name="no_internet">Internett er utilgjengelig</string>
+  <string name="internet_established">Internett tilgjengelig</string>
+  <string name="error_notifications">Feil under henting av varsler</string>
+  <string name="no_notifications">Ingen varsler funnet</string>
   <string name="about_translate">&lt;u&gt;Oversett&lt;/u&gt;</string>
+  <string name="about_translate_title">Språk</string>
+  <string name="about_translate_message">Velg språket du ønsker å sende inn oversettelser for</string>
+  <string name="about_translate_proceed">Fortsett</string>
+  <string name="about_translate_cancel">Avbryt</string>
   <string name="retry">Prøv igjen</string>
+  <string name="showcase_view_got_it_button">Skjønner!</string>
+  <string name="showcase_view_whole_nearby_activity">Det er steder i nærheten av deg som trenger bilder for å illustrere Wikipedia-artiklene sine</string>
+  <string name="showcase_view_list_icon">Trykk på denne knappen for å få en liste over disse stedene</string>
+  <string name="showcase_view_plus_fab">Du kan laste opp et bilde for alle steder fra galleriet eller kameraet ditt</string>
+  <string name="no_images_found">Ingen bilder funnet!</string>
+  <string name="error_loading_images">Feil oppsto under lasting av bilder.</string>
+  <string name="image_uploaded_by">Lastet opp av: %1$s</string>
+  <string name="share_app_title">Del appen</string>
+  <string name="share_coordinates_not_present">Koordinater ble ikke spesifisert under bildevalget</string>
+  <string name="error_fetching_nearby_places">Feil under henting av steder i nærheten.</string>
+  <string name="appwidget_img">Dagens bilde</string>
+  <string name="app_widget_heading">Dagens bilde</string>
+  <string name="successful_wikidata_edit">Bildet ble lagt til på %1$s på Wikidata!</string>
+  <string name="wikidata_edit_failure">Kunne ikke oppdatere tilsvarende Wikidata-element!</string>
+  <string name="menu_set_wallpaper">Angi som bakgrunnsbilde</string>
+  <string name="wallpaper_set_successfully">Bakgrunnsbildet ble endret!</string>
+  <string name="user_not_logged_in">Innloggingsøkten har utløpt, logg inn på nytt.</string>
 </resources>

@@ -38,11 +38,13 @@ import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.auth.LoginActivity;
 import fr.free.nrw.commons.location.LatLng;
 import fr.free.nrw.commons.location.LocationServiceManager;
+import fr.free.nrw.commons.location.LocationServiceManager.LocationChangeType;
 import fr.free.nrw.commons.location.LocationUpdateListener;
 import fr.free.nrw.commons.theme.NavigationBaseActivity;
 import fr.free.nrw.commons.utils.NetworkUtils;
 import fr.free.nrw.commons.utils.UriSerializer;
 import fr.free.nrw.commons.utils.ViewUtil;
+import fr.free.nrw.commons.wikidata.WikidataEditListener;
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
@@ -51,8 +53,12 @@ import timber.log.Timber;
 import uk.co.deanwild.materialshowcaseview.IShowcaseListener;
 import uk.co.deanwild.materialshowcaseview.MaterialShowcaseView;
 
+import static fr.free.nrw.commons.location.LocationServiceManager.LocationChangeType.*;
+import static fr.free.nrw.commons.location.LocationServiceManager.LocationChangeType.MAP_UPDATED;
 
-public class NearbyActivity extends NavigationBaseActivity implements LocationUpdateListener {
+
+public class NearbyActivity extends NavigationBaseActivity implements LocationUpdateListener,
+        WikidataEditListener.WikidataP18EditListener {
 
     private static final int LOCATION_REQUEST = 1;
 
@@ -72,6 +78,8 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
     LocationServiceManager locationManager;
     @Inject
     NearbyController nearbyController;
+    @Inject WikidataEditListener wikidataEditListener;
+
     @Inject
     @Named("application_preferences") SharedPreferences applicationPrefs;
     private LatLng curLatLng;
@@ -106,6 +114,7 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
 
         initBottomSheetBehaviour();
         initDrawer();
+        wikidataEditListener.setAuthenticationStateListener(this);
     }
 
     private void resumeFragment() {
@@ -215,7 +224,7 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
                     //Still need to check if GPS is enabled
                     checkGps();
                     lastKnownLocation = locationManager.getLKL();
-                    refreshView(LocationServiceManager.LocationChangeType.PERMISSION_JUST_GRANTED);
+                    refreshView(PERMISSION_JUST_GRANTED);
                 } else {
                     //If permission not granted, go to page that says Nearby Places cannot be displayed
                     hideProgressBar();
@@ -275,7 +284,7 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
     private void checkLocationPermission() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             if (locationManager.isLocationPermissionGranted()) {
-                refreshView(LocationServiceManager.LocationChangeType.LOCATION_SIGNIFICANTLY_CHANGED);
+                refreshView(LOCATION_SIGNIFICANTLY_CHANGED);
             } else {
                 // Should we show an explanation?
                 if (locationManager.isPermissionExplanationRequired(this)) {
@@ -301,7 +310,7 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
                 }
             }
         } else {
-            refreshView(LocationServiceManager.LocationChangeType.LOCATION_SIGNIFICANTLY_CHANGED);
+            refreshView(LOCATION_SIGNIFICANTLY_CHANGED);
         }
     }
 
@@ -310,7 +319,7 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == 1) {
             Timber.d("User is back from Settings page");
-            refreshView(LocationServiceManager.LocationChangeType.LOCATION_SIGNIFICANTLY_CHANGED);
+            refreshView(LOCATION_SIGNIFICANTLY_CHANGED);
         }
     }
 
@@ -318,7 +327,7 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
     protected void onStart() {
         super.onStart();
         locationManager.addLocationListener(this);
-        locationManager.registerLocationManager();
+        registerLocationUpdates();
     }
 
     @Override
@@ -369,8 +378,7 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
             @Override
             public void onReceive(Context context, Intent intent) {
                 if (NetworkUtils.isInternetConnectionEstablished(NearbyActivity.this)) {
-                    refreshView(LocationServiceManager
-                            .LocationChangeType.LOCATION_SIGNIFICANTLY_CHANGED);
+                    refreshView(LOCATION_SIGNIFICANTLY_CHANGED);
                 } else {
                     ViewUtil.showLongToast(NearbyActivity.this, getString(R.string.no_internet));
                 }
@@ -386,7 +394,7 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
      *
      * @param locationChangeType defines if location shanged significantly or slightly
      */
-    private void refreshView(LocationServiceManager.LocationChangeType locationChangeType) {
+    private void refreshView(LocationChangeType locationChangeType) {
         if (lockNearbyView) {
             return;
         }
@@ -396,15 +404,16 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
             return;
         }
 
-        locationManager.registerLocationManager();
+        registerLocationUpdates();
         LatLng lastLocation = locationManager.getLastLocation();
 
-        if (curLatLng != null && curLatLng.equals(lastLocation)) { //refresh view only if location has changed
+        if (curLatLng != null && curLatLng.equals(lastLocation)
+                && !locationChangeType.equals(MAP_UPDATED)) { //refresh view only if location has changed
             return;
         }
         curLatLng = lastLocation;
 
-        if (locationChangeType.equals(LocationServiceManager.LocationChangeType.PERMISSION_JUST_GRANTED)) {
+        if (locationChangeType.equals(PERMISSION_JUST_GRANTED)) {
             curLatLng = lastKnownLocation;
         }
 
@@ -413,8 +422,9 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
             return;
         }
 
-        if (locationChangeType.equals(LocationServiceManager.LocationChangeType.LOCATION_SIGNIFICANTLY_CHANGED)
-                || locationChangeType.equals(LocationServiceManager.LocationChangeType.PERMISSION_JUST_GRANTED)) {
+        if (locationChangeType.equals(LOCATION_SIGNIFICANTLY_CHANGED)
+                || locationChangeType.equals(PERMISSION_JUST_GRANTED)
+                || locationChangeType.equals(MAP_UPDATED)) {
             progressBar.setVisibility(View.VISIBLE);
 
             //TODO: This hack inserts curLatLng before populatePlaces is called (see #1440). Ideally a proper fix should be found
@@ -429,14 +439,53 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
                     .loadAttractionsFromLocation(curLatLng))
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe(this::populatePlaces);
-        } else if (locationChangeType.equals(LocationServiceManager.LocationChangeType.LOCATION_SLIGHTLY_CHANGED)) {
+                    .subscribe(this::populatePlaces,
+                            throwable -> {
+                                Timber.d(throwable);
+                                showErrorMessage(getString(R.string.error_fetching_nearby_places));
+                                progressBar.setVisibility(View.GONE);
+                            });
+        } else if (locationChangeType
+                .equals(LOCATION_SLIGHTLY_CHANGED)) {
             Gson gson = new GsonBuilder()
                     .registerTypeAdapter(Uri.class, new UriSerializer())
                     .create();
             String gsonCurLatLng = gson.toJson(curLatLng);
             bundle.putString("CurLatLng", gsonCurLatLng);
             updateMapFragment(true);
+        }
+    }
+
+    /**
+     * This method first checks if the location permissions has been granted and then register the location manager for updates.
+     */
+    private void registerLocationUpdates() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            if (locationManager.isLocationPermissionGranted()) {
+                locationManager.registerLocationManager();
+            } else {
+                // Should we show an explanation?
+                if (locationManager.isPermissionExplanationRequired(this)) {
+                    new AlertDialog.Builder(this)
+                            .setMessage(getString(R.string.location_permission_rationale_nearby))
+                            .setPositiveButton("OK", (dialog, which) -> {
+                                requestLocationPermissions();
+                                dialog.dismiss();
+                            })
+                            .setNegativeButton("Cancel", (dialog, id) -> {
+                                showLocationPermissionDeniedErrorDialog();
+                                dialog.cancel();
+                            })
+                            .create()
+                            .show();
+
+                } else {
+                    // No explanation needed, we can request the permission.
+                    requestLocationPermissions();
+                }
+            }
+        } else {
+            locationManager.registerLocationManager();
         }
     }
 
@@ -453,7 +502,7 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
         if (placeList.size() == 0) {
             ViewUtil.showSnackbar(findViewById(R.id.container), R.string.no_nearby);
         }
-        
+
         bundle.putString("PlaceList", gsonPlaceList);
         //bundle.putString("CurLatLng", gsonCurLatLng);
         bundle.putString("BoundaryCoord", gsonBoundaryCoordinates);
@@ -520,7 +569,7 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
             locationManager.removeLocationListener(this);
         } else {
             lockNearbyView = false;
-            locationManager.registerLocationManager();
+            registerLocationUpdates();
             locationManager.addLocationListener(this);
         }
     }
@@ -582,7 +631,12 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
                         .loadAttractionsFromLocation(curLatLng))
                         .subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())
-                        .subscribe(this::populatePlaces);
+                        .subscribe(this::populatePlaces,
+                                throwable -> {
+                                    Timber.d(throwable);
+                                    showErrorMessage(getString(R.string.error_fetching_nearby_places));
+                                    progressBar.setVisibility(View.GONE);
+                                });
                 nearbyMapFragment.setBundleForUpdtes(bundle);
                 nearbyMapFragment.updateMapSignificantly();
                 updateListFragment();
@@ -637,16 +691,24 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
 
     @Override
     public void onLocationChangedSignificantly(LatLng latLng) {
-        refreshView(LocationServiceManager.LocationChangeType.LOCATION_SIGNIFICANTLY_CHANGED);
+        refreshView(LOCATION_SIGNIFICANTLY_CHANGED);
     }
 
     @Override
     public void onLocationChangedSlightly(LatLng latLng) {
-        refreshView(LocationServiceManager.LocationChangeType.LOCATION_SLIGHTLY_CHANGED);
+        refreshView(LOCATION_SLIGHTLY_CHANGED);
     }
 
     public void prepareViewsForSheetPosition(int bottomSheetState) {
         // TODO
     }
 
+    private void showErrorMessage(String message) {
+        ViewUtil.showLongToast(NearbyActivity.this, message);
+    }
+
+    @Override
+    public void onWikidataEditSuccessful() {
+        refreshView(MAP_UPDATED);
+    }
 }
