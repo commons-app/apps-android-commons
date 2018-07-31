@@ -56,6 +56,7 @@
   <string name="login_failed_generic">Login failed</string>
   <string name="share_upload_button">Upload</string>
   <string name="multiple_share_base_title">Name this set</string>
+  <string name="add_set_name_toast">Please provide a name for this set</string>
   <string name="provider_modifications">Modifications</string>
   <string name="menu_upload_single">Upload</string>
   <string name="categories_search_text_hint">Search categories</string>
