@@ -384,9 +384,6 @@ public class NearbyMapFragment extends DaggerFragment {
                         .setMessage(R.string.login_alert_message)
                         .setPositiveButton(R.string.login, (dialog, which) -> {
                             // logout of the app
-//                            startActivityWithFlags( getContext(), CategoryImagesActivity.class, Intent.FLAG_ACTIVITY_CLEAR_TOP,
-//                                    Intent.FLAG_ACTIVITY_SINGLE_TOP);
-//                            getActivity().finish();
                             BaseLogoutListener logoutListener = new BaseLogoutListener();
                             CommonsApplication app = (CommonsApplication) getActivity().getApplication();
                             app.clearApplicationData(getContext(), logoutListener);
@@ -514,6 +511,9 @@ public class NearbyMapFragment extends DaggerFragment {
         mapView.setStyleUrl("asset://mapstyle.json");
     }
 
+    /**
+     * onLogoutComplete is called after shared preferences and data stored in local database are cleared.
+     */
     private class BaseLogoutListener implements CommonsApplication.LogoutListener {
         @Override
         public void onLogoutComplete() {
@@ -816,7 +816,7 @@ public class NearbyMapFragment extends DaggerFragment {
     }
 
     private void animateFAB(boolean isFabOpen) {
-        this.isFabOpen = !isFabOpen;
+            this.isFabOpen = !isFabOpen;
         if (fabPlus.isShown()){
             if (isFabOpen) {
                 fabPlus.startAnimation(rotate_backward);

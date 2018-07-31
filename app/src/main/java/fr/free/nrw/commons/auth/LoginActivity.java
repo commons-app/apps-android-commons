@@ -183,8 +183,8 @@ public class LoginActivity extends AccountAuthenticatorActivity {
         }
 
         if (sessionManager.getCurrentAccount() != null
-            && sessionManager.isUserLoggedIn()
-            && sessionManager.getCachedAuthCookie() != null) {
+                && sessionManager.isUserLoggedIn()
+                && sessionManager.getCachedAuthCookie() != null) {
             prefs.edit().putBoolean("login_skipped", false).apply();
             sessionManager.revalidateAuthToken();
             startMainActivity();

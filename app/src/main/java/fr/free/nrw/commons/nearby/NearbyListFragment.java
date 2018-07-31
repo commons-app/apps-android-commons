@@ -38,7 +38,6 @@ import static android.content.pm.PackageManager.PERMISSION_GRANTED;
 import static fr.free.nrw.commons.wikidata.WikidataConstants.WIKIDATA_ENTITY_ID_PREF;
 
 public class NearbyListFragment extends DaggerFragment {
-
     private Bundle bundleForUpdates; // Carry information from activity about changed nearby places and current location
 
     private static final Type LIST_TYPE = new TypeToken<List<Place>>() {
@@ -139,6 +138,7 @@ public class NearbyListFragment extends DaggerFragment {
             }
         }
     }
+
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
