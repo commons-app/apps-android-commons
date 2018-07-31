@@ -5,6 +5,8 @@
 * Soued031
 -->
 <resources>
+  <string name="title_activity_explore">Entdecken</string>
+  <string name="navigation_item_explore">Entdecken</string>
   <string name="preference_category_appearance">Ausgesinn</string>
   <string name="preference_category_general">Allgemeng</string>
   <string name="preference_category_feedback">Feedback</string>
@@ -84,6 +86,7 @@
   <string name="title_activity_settings">Astellungen</string>
   <string name="title_activity_signup">Mellt Iech un</string>
   <string name="title_activity_featured_images">Bemierkenswäert Biller</string>
+  <string name="title_activity_category_details">Kategorie</string>
   <string name="menu_about">Iwwer</string>
   <string name="about_license">D\'App Wikimedia Commons ass eng \'Open-Source-App\' déi vu Fräiwëllege vun der Wikimedia Foundation entwéckelt gouf an och vun hinnen ënnerhal gëtt. D\'Wikimedia Foundation ass net an d\'Entwécklung oder den Ënnerhalt vun der App implizéiert.</string>
   <string name="about_improve">Leet w.e.g. &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt; e GitHub Problem&lt;/a&gt; fir Problemer ze mellen a Proposen ze maachen.</string>
@@ -181,6 +184,7 @@
   <string name="commons_facebook">Commons-Facebook-Säit</string>
   <string name="background_image">Hannergrondbild</string>
   <string name="no_image_found">Kee Bild fonnt</string>
+  <string name="no_subcategory_found">Keng Ënnerkategorie fonnt</string>
   <string name="upload_image">Bild eroplueden</string>
   <string name="welcome_image_mount_zao">Bierg Zao</string>
   <string name="welcome_image_llamas">Lamaen</string>
@@ -248,7 +252,22 @@
   <string name="block_notification">Dir sidd gespaart a kënnt keng Ännerungen op Commons maachen</string>
   <string name="appwidget_img">Bild vum Dag</string>
   <string name="app_widget_heading">Bild vum Dag</string>
+  <string name="menu_search_button">Sichen</string>
+  <string name="search_commons">Op Commons sichen</string>
+  <string name="title_activity_search">Sichen</string>
   <string name="wikidata_edit_failure">Déi entspriechend Wikidata-Entitéit konnt net aktualiséiert ginn!</string>
   <string name="menu_set_wallpaper">Hannergrondbild festleeën</string>
   <string name="wallpaper_set_successfully">Hannergrondbild festgeluecht</string>
+  <string name="quiz">Quiz</string>
+  <string name="question">Fro</string>
+  <string name="result">Resultat</string>
+  <string name="continue_message">Virufueren</string>
+  <string name="correct">Richteg Äntwert</string>
+  <string name="wrong">Falsch Äntwert</string>
+  <string name="Achievements">Realisatiounen</string>
+  <string name="statistics">STATISTIKEN</string>
+  <string name="statistics_thanks">Merci\'e kritt</string>
+  <string name="statistics_featured">Bemierkenswäert Biller</string>
+  <string name="level">NIVEAU</string>
+  <string name="images_uploaded">Eropgeluede Biller</string>
 </resources>

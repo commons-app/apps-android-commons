@@ -23,6 +23,7 @@ import android.widget.FrameLayout;
 import android.widget.GridView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -205,6 +206,10 @@ public class MultipleUploadListFragment extends Fragment {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.menu_upload_multiple:
+                if (baseTitle.getText().toString().trim().isEmpty()) {
+                    Toast.makeText(getContext(), R.string.add_title_toast, Toast.LENGTH_LONG).show();
+                    return false;
+                }
                 multipleUploadInitiatedHandler.OnMultipleUploadInitiated();
                 return true;
         }
