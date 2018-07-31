@@ -207,7 +207,7 @@ public class MultipleUploadListFragment extends Fragment {
         switch (item.getItemId()) {
             case R.id.menu_upload_multiple:
                 if (baseTitle.getText().toString().trim().isEmpty()) {
-                    Toast.makeText(getContext(), R.string.add_title_toast, Toast.LENGTH_LONG).show();
+                    Toast.makeText(getContext(), R.string.add_set_name_toast, Toast.LENGTH_LONG).show();
                     return false;
                 }
                 multipleUploadInitiatedHandler.OnMultipleUploadInitiated();
