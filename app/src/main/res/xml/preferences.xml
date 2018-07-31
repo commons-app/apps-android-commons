@@ -37,9 +37,9 @@
 
     </fr.free.nrw.commons.ui.LongTitlePreferences.LongTitlePreferenceCategory>
 
-    <PreferenceCategory android:title="Privacy">
+    <fr.free.nrw.commons.ui.LongTitlePreferences.LongTitlePreferenceCategory android:title="Privacy">
 
-        <ListPreference
+        <fr.free.nrw.commons.ui.LongTitlePreferences.LongTitleListPreference
             android:entries="@array/pref_locationAccuracy_entries"
             android:entryValues="@array/pref_locationAccuracy_values"
             android:key="locationAccuracy"
@@ -48,14 +48,14 @@
         <!-- The key 'allowGps' was used before and has since been removed based on the discussion at #1599.
           Do not reuse this key unless you revive the same feature with the changes mentioned at #1599.-->
 
-        <MultiSelectListPreference
+        <fr.free.nrw.commons.ui.LongTitlePreferences.LongTitleMultiSelectListPreference
             android:entries="@array/pref_exifTag_entries"
             android:entryValues="@array/pref_exifTag_values"
             android:key="redactExifTags"
             android:title="@string/redact_exif_tags"
             android:summary="@string/redact_exif_tags_summary"/>
 
-    </PreferenceCategory>
+    </fr.free.nrw.commons.ui.LongTitlePreferences.LongTitlePreferenceCategory>
 
     <fr.free.nrw.commons.ui.LongTitlePreferences.LongTitlePreferenceCategory
         android:title="@string/preference_category_feedback">
