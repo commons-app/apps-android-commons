@@ -2,6 +2,7 @@
 <!-- Authors:
 * 2axterix2
 * Adjen
+* Astroemi
 * Benfutbol10
 * Fitoschido
 * Jduranboger
@@ -12,6 +13,8 @@
 * Vivaelcelta
 -->
 <resources>
+  <string name="title_activity_explore">Explorar</string>
+  <string name="navigation_item_explore">Explorar</string>
   <string name="preference_category_appearance">Apariencia</string>
   <string name="preference_category_general">Generales</string>
   <string name="preference_category_feedback">Sugerencias</string>
@@ -19,6 +22,7 @@
   <string name="app_name">Commons</string>
   <string name="bullet">•</string>
   <string name="menu_settings">Configuración</string>
+  <string name="intent_share_upload_label">Cargar en Commons</string>
   <string name="username">Nombre de usuario</string>
   <string name="password">Contraseña</string>
   <string name="login_credential">Accede a tu cuenta de Commons Beta</string>
@@ -93,6 +97,7 @@
   <string name="title_activity_settings">Ajustes</string>
   <string name="title_activity_signup">Regístrate</string>
   <string name="title_activity_featured_images">Imágenes en destaque</string>
+  <string name="title_activity_category_details">Categoría</string>
   <string name="menu_about">Acerca de</string>
   <string name="about_license">La aplicación de código abierto Wikimedia Commons fue creada por, y recibe mantenimiento de, cesionarios y voluntarios de la comunidad de Wikimedia. La Fundación Wikimedia no está involucrada en la creación, el desarrollo ni el mantenimiento de la aplicación.</string>
   <string name="about_improve">Notifica de problemas y sugerencias en &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;GitHub&lt;/a&gt;.</string>
@@ -199,6 +204,7 @@
   <string name="background_image">Imagen de fondo</string>
   <string name="mediaimage_failed">Falló la imagen de multimedia</string>
   <string name="no_image_found">No se encontró ninguna imagen</string>
+  <string name="no_subcategory_found">No se encontró ninguna subcategoría</string>
   <string name="upload_image">Subir imagen</string>
   <string name="welcome_image_mount_zao">Monte Zao</string>
   <string name="welcome_image_llamas">Llamas</string>
@@ -278,4 +284,26 @@
   <string name="error_fetching_nearby_places">Error al recuperar los lugares cercanos.</string>
   <string name="appwidget_img">Foto del día</string>
   <string name="app_widget_heading">Foto del día</string>
+  <string name="menu_search_button">Buscar</string>
+  <string name="search_commons">Buscar en Commons</string>
+  <string name="title_activity_search">Buscar</string>
+  <string name="search_recent_header">Búsquedas recientes:</string>
+  <string name="error_loading_categories">Se produjo un error al cargar las categorías.</string>
+  <string name="error_loading_subcategories">Se produjo un error al cargar las subcategorías.</string>
+  <string name="delete_recent_searches_dialog">¿Confirmas que quieres vaciar el historial de búsquedas?</string>
+  <string name="search_history_deleted">Historial de búsqueda eliminado</string>
+  <string name="Achievements">Logros</string>
+  <string name="statistics">ESTADÍSTICAS</string>
+  <string name="statistics_thanks">Gracias recibidas</string>
+  <string name="statistics_featured">Imágenes destacadas</string>
+  <string name="level">NIVEL</string>
+  <string name="images_uploaded">Las imágenes han sido cargadas</string>
+  <string name="image_reverts">Imágenes no revertidas</string>
+  <string name="images_used_by_wiki">Imágenes utilizadas</string>
+  <string name="achievements_share_message">¡Comparte tus logros con tus amigos!</string>
+  <string name="achievements_info_message">Tu nivel aumenta conforme cumples con estos requisitos. Elementos en la sección \"estadísticas\" no se cuentan para tu nivel.</string>
+  <string name="achievements_revert_limit_message">mínimo requerido:</string>
+  <string name="images_uploaded_explanation">El número de imágenes que has subido a Commons, por medio de cualquier software de carga</string>
+  <string name="images_reverted_explanation">El porcentaje de imágenes que haz subido a Commons que no fueron eliminadas</string>
+  <string name="images_used_explanation">El número de imágenes que haz subido a Commons que fueron utilizadas en artículos de Wikimedia</string>
 </resources>
