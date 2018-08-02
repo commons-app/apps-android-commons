@@ -1,12 +1,55 @@
 <?xml version="1.0" encoding="utf-8"?>
-<CheckedTextView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/tvName"
+<RelativeLayout
+    android:id="@+id/parentLayout"
+    android:background="@color/white"
     android:layout_width="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_height="wrap_content"
-    android:checkMark="?android:attr/textCheckMark"
-    android:checked="false"
-    android:gravity="center_vertical"
-    android:padding="@dimen/tiny_gap"
-    android:theme="@style/DarkAppTheme">
+    >
 
-</CheckedTextView>
+    <CheckBox
+        android:id="@+id/categoryCheckbox"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:paddingTop="@dimen/standard_gap"
+        android:paddingBottom="@dimen/standard_gap"
+        android:layout_marginRight="@dimen/small_gap"
+        android:layout_marginTop="@dimen/small_gap"
+        android:layout_marginLeft="@dimen/small_gap"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        />
+    <TextView android:id="@+id/tvName"
+        android:layout_width="match_parent"
+        android:layout_toRightOf="@+id/categoryCheckbox"
+        android:layout_toLeftOf="@+id/viewMoreIcon"
+        android:background="@color/item_white_background"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:paddingTop="@dimen/standard_gap"
+        android:paddingBottom="@dimen/standard_gap"
+        android:text="Category Name"
+        android:textColor="@color/opak_middle_grey"
+        xmlns:android="http://schemas.android.com/apk/res/android" />
+
+    <ImageView
+        android:id="@+id/viewMoreIcon"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_keyboard_arrow_right_primary_dark_24dp"
+        android:paddingTop="@dimen/standard_gap"
+        android:paddingBottom="@dimen/standard_gap"
+        android:paddingLeft="@dimen/standard_gap"
+        android:paddingRight="@dimen/standard_gap"
+        />
+    <View
+        android:layout_toRightOf="@+id/categoryCheckbox"
+        android:layout_toLeftOf="@+id/viewMoreIcon"
+        android:layout_below="@+id/tvName"
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="#DDDDDD"
+        />
+</RelativeLayout>

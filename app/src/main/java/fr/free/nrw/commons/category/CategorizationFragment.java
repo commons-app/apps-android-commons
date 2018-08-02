@@ -18,6 +18,7 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.jakewharton.rxbinding2.view.RxView;
 import com.jakewharton.rxbinding2.widget.RxTextView;
@@ -82,12 +83,28 @@ public class CategorizationFragment extends CommonsDaggerSupportFragment {
     private TitleTextWatcher textWatcher = new TitleTextWatcher();
     private boolean hasDirectCategories = false;
 
-    private final CategoriesAdapterFactory adapterFactory = new CategoriesAdapterFactory(item -> {
-        if (item.isSelected()) {
-            selectedCategories.add(item);
-            updateCategoryCount(item);
-        } else {
-            selectedCategories.remove(item);
+    private final CategoriesAdapterFactory adapterFactory = new CategoriesAdapterFactory(new CategoriesRenderer.CategoryClickedListener() {
+        /**
+         * Adds/Removes the item from selectedCategory List
+         * @param item
+         */
+        @Override
+        public void categoryClicked(CategoryItem item) {
+            if (item.isSelected()) {
+                selectedCategories.add(item);
+                updateCategoryCount(item);
+            } else {
+                selectedCategories.remove(item);
+            }
+        }
+
+        /**
+         * Opens category Details page on click of name, viewMore icon of categorization item.
+         * @param item
+         */
+        @Override
+        public void categoryViewMoreClicked(CategoryItem item) {
+            CategoryDetailsActivity.startYourself(getContext(), "Category:"+item.getName());
         }
     });
 

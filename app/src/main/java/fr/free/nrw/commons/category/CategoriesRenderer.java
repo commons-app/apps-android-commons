@@ -3,7 +3,11 @@ package fr.free.nrw.commons.category;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
 import android.widget.CheckedTextView;
+import android.widget.CompoundButton;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.pedrogomez.renderers.Renderer;
 
@@ -12,7 +16,12 @@ import butterknife.ButterKnife;
 import fr.free.nrw.commons.R;
 
 class CategoriesRenderer extends Renderer<CategoryItem> {
-    @BindView(R.id.tvName) CheckedTextView checkedView;
+    @BindView(R.id.tvName)
+    TextView tvName;
+    @BindView(R.id.categoryCheckbox)
+    CheckBox categoryCheckbox;
+    @BindView(R.id.viewMoreIcon)
+    ImageView viewMoreIcon;
     private final CategoryClickedListener listener;
 
     CategoriesRenderer(CategoryClickedListener listener) {
@@ -31,10 +40,21 @@ class CategoriesRenderer extends Renderer<CategoryItem> {
 
     @Override
     protected void hookListeners(View view) {
-        view.setOnClickListener(v -> {
+        tvName.setOnClickListener(v -> {
+            CategoryItem item = getContent();
+            if (listener != null) {
+                listener.categoryViewMoreClicked(item);
+            }
+        });
+        viewMoreIcon.setOnClickListener(v -> {
+            CategoryItem item = getContent();
+            if (listener != null) {
+                listener.categoryViewMoreClicked(item);
+            }
+        });
+        categoryCheckbox.setOnCheckedChangeListener((buttonView, isChecked) -> {
             CategoryItem item = getContent();
             item.setSelected(!item.isSelected());
-            checkedView.setChecked(item.isSelected());
             if (listener != null) {
                 listener.categoryClicked(item);
             }
@@ -44,11 +64,12 @@ class CategoriesRenderer extends Renderer<CategoryItem> {
     @Override
     public void render() {
         CategoryItem item = getContent();
-        checkedView.setChecked(item.isSelected());
-        checkedView.setText(item.getName());
+        categoryCheckbox.setChecked(item.isSelected());
+        tvName.setText(item.getName());
     }
 
     interface CategoryClickedListener {
         void categoryClicked(CategoryItem item);
+        void categoryViewMoreClicked(CategoryItem item);
     }
 }
