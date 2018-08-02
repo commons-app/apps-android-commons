@@ -2,17 +2,11 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="?attr/fragmentCategorisationBackground"
+    android:background="@color/white"
     android:clickable="true"
     android:focusableInTouchMode="true"
     android:orientation="vertical"
-    android:paddingBottom="@dimen/small_gap"
-    android:paddingEnd="@dimen/standard_gap"
-    android:paddingLeft="@dimen/standard_gap"
-    android:paddingRight="@dimen/standard_gap"
-    android:paddingStart="@dimen/standard_gap"
-    android:paddingTop="@dimen/small_gap"
-    android:theme="@style/DarkAppTheme">
+    >
 
     <FrameLayout
         android:layout_width="match_parent"
