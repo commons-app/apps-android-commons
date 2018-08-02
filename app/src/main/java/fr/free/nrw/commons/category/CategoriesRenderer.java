@@ -54,7 +54,7 @@ class CategoriesRenderer extends Renderer<CategoryItem> {
         });
         categoryCheckbox.setOnCheckedChangeListener((buttonView, isChecked) -> {
             CategoryItem item = getContent();
-            item.setSelected(!item.isSelected());
+            item.setSelected(isChecked);
             if (listener != null) {
                 listener.categoryClicked(item);
             }
