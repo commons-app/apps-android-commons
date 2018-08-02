@@ -1,5 +1,6 @@
 package fr.free.nrw.commons.explore;
 
+import android.content.res.Configuration;
 import android.database.DataSetObserver;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
@@ -193,6 +194,10 @@ public class SearchActivity extends NavigationBaseActivity implements MediaDetai
         }
         mediaDetails.showImage(index);
         forceInitBackButton();
+    }
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
     }
 
     /**
