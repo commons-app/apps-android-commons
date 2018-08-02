@@ -3,12 +3,14 @@ package fr.free.nrw.commons.nearby;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.support.annotation.DrawableRes;
+import android.support.annotation.Nullable;
 
 import java.util.HashMap;
 import java.util.Map;
 
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.location.LatLng;
+import timber.log.Timber;
 
 public class Place {
 
@@ -50,6 +52,22 @@ public class Place {
         this.distance = distance;
     }
 
+    /**
+     * Extracts the entity id from the wikidata link
+     * @return returns the entity id if wikidata link exists
+     */
+    @Nullable
+    public String getWikiDataEntityId() {
+        if (!hasWikidataLink()) {
+            Timber.d("Wikidata entity ID is null for place with sitelink %s", siteLinks.toString());
+            return null;
+        }
+
+        String wikiDataLink = siteLinks.getWikidataLink().toString();
+        Timber.d("Wikidata entity is %s", wikiDataLink);
+        return wikiDataLink.replace("http://www.wikidata.org/entity/", "");
+    }
+
     public boolean hasWikipediaLink() {
         return !(siteLinks == null || Uri.EMPTY.equals(siteLinks.getWikipediaLink()));
     }
@@ -79,7 +97,18 @@ public class Place {
 
     @Override
     public String toString() {
-        return String.format("Place(%s@%s)", name, location);
+        return "Place{" +
+                "name='" + name + '\'' +
+                ", label='" + label + '\'' +
+                ", longDescription='" + longDescription + '\'' +
+                ", secondaryImageUrl='" + secondaryImageUrl + '\'' +
+                ", location='" + location + '\'' +
+                ", category='" + category + '\'' +
+                ", image='" + image + '\'' +
+                ", secondaryImage=" + secondaryImage +
+                ", distance='" + distance + '\'' +
+                ", siteLinks='" + siteLinks.toString() + '\'' +
+                '}';
     }
 
     /**

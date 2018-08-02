@@ -1,9 +1,6 @@
 package fr.free.nrw.commons.upload;
 
 import android.annotation.SuppressLint;
-import android.app.Activity;
-
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
@@ -11,7 +8,6 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v4.view.ViewCompat;
 import android.support.v7.app.AlertDialog;
 import android.text.Editable;
@@ -26,7 +22,6 @@ import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -36,6 +31,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.Locale;
 
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -49,9 +45,9 @@ import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.Utils;
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
 import fr.free.nrw.commons.settings.Prefs;
+import fr.free.nrw.commons.utils.ViewUtil;
 import timber.log.Timber;
 
-import static android.view.MotionEvent.ACTION_DOWN;
 import static android.view.MotionEvent.ACTION_UP;
 
 public class SingleUploadFragment extends CommonsDaggerSupportFragment {
@@ -81,13 +77,13 @@ public class SingleUploadFragment extends CommonsDaggerSupportFragment {
             //What happens when the 'submit' icon is tapped
             case R.id.menu_upload_single:
 
-                if (titleEdit.getText().toString().isEmpty()) {
+                if (titleEdit.getText().toString().trim().isEmpty()) {
                     Toast.makeText(getContext(), R.string.add_title_toast, Toast.LENGTH_LONG).show();
                     return false;
                 }
 
-                String title = titleEdit.getText().toString();
-                String desc = descEdit.getText().toString();
+                String title = titleEdit.getText().toString().trim();
+                String desc = descEdit.getText().toString().trim();
 
                 //Save the title/desc in short-lived cache so next time this fragment is loaded, we can access these
                 prefs.edit()
@@ -170,25 +166,19 @@ public class SingleUploadFragment extends CommonsDaggerSupportFragment {
 
         titleEdit.setOnFocusChangeListener((v, hasFocus) -> {
             if (!hasFocus) {
-                hideKeyboard(v);
+                ViewUtil.hideKeyboard(v);
             }
         });
 
         descEdit.setOnFocusChangeListener((v, hasFocus) -> {
             if(!hasFocus){
-                hideKeyboard(v);
+                ViewUtil.hideKeyboard(v);
             }
         });
 
         setLicenseSummary(license);
 
         return rootView;
-    }
-
-    public void hideKeyboard(View view) {
-        Log.i("hide", "hideKeyboard: ");
-        InputMethodManager inputMethodManager =(InputMethodManager)getActivity().getSystemService(Activity.INPUT_METHOD_SERVICE);
-        inputMethodManager.hideSoftInputFromWindow(view.getWindowToken(), 0);
     }
 
     @Override
@@ -226,7 +216,7 @@ public class SingleUploadFragment extends CommonsDaggerSupportFragment {
         setLicenseSummary(license);
         prefs.edit()
                 .putString(Prefs.DEFAULT_LICENSE, license)
-                .commit();
+                .apply();
     }
 
 
@@ -303,11 +293,8 @@ public class SingleUploadFragment extends CommonsDaggerSupportFragment {
         super.onStop();
 
         // FIXME: Stops the keyboard from being shown 'stale' while moving out of this fragment into the next
-        View target = getView().findFocus();
-        if (target != null) {
-            InputMethodManager imm = (InputMethodManager) target.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
-            imm.hideSoftInputFromWindow(target.getWindowToken(), 0);
-        }
+        View target = getActivity().getCurrentFocus();
+        ViewUtil.hideKeyboard(target);
     }
 
     @NonNull
@@ -357,5 +344,18 @@ public class SingleUploadFragment extends CommonsDaggerSupportFragment {
                 .setNeutralButton(android.R.string.ok, (dialog, id) -> dialog.cancel())
                 .create()
                 .show();
+    }
+
+    /**
+     * To launch the Commons:Licensing
+     * @param view
+     */
+    @OnClick(R.id.licenseInfo)
+    public void launchLicenseInfo(View view){
+        Log.i("Language", Locale.getDefault().getLanguage());
+        UrlLicense urlLicense = new UrlLicense();
+        urlLicense.initialize();
+        String url = urlLicense.getLicenseUrl(Locale.getDefault().getLanguage());
+        Utils.handleWebUrl(getActivity() , Uri.parse(url));
     }
 }

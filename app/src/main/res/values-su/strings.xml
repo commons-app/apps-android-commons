@@ -5,27 +5,34 @@
 * Uchup19
 -->
 <resources>
+  <string name="preference_category_appearance">Pidangan</string>
+  <string name="preference_category_general">Umum</string>
+  <string name="preference_category_feedback">Eupan balik</string>
+  <string name="preference_category_location">Lokasi</string>
   <string name="app_name">Commons</string>
+  <string name="bullet">•</string>
   <string name="menu_settings">Séting</string>
   <string name="username">Sandiasma</string>
   <string name="password">Kecap sandi</string>
+  <string name="login_credential">Asup log kana akun Commons Beta anjeun</string>
   <string name="login">Asup log</string>
+  <string name="forgot_password">Poho Kecap Sandi?</string>
   <string name="signup">Daptar</string>
   <string name="logging_in_title">Asup log</string>
-  <string name="logging_in_message">Tungguan heula…</string>
-  <string name="login_success">Asup log suksés!</string>
-  <string name="login_failed">Asup log Gagal!</string>
+  <string name="logging_in_message">Tungguan…</string>
+  <string name="login_success">Laksana login!</string>
+  <string name="login_failed">Gagal login!</string>
   <string name="upload_failed">Berkas teu kapanggih. Coba berkas séjén.</string>
-  <string name="authentication_failed">Oténtikasi gagal!</string>
-  <string name="uploading_started">Ngamimitian ngunjal!</string>
+  <string name="authentication_failed">Oténtikasi gagal! mangga asup log deui</string>
+  <string name="uploading_started">Mitembeyan ngunjal!</string>
   <string name="upload_completed_notification_title">%1$s diunjal!</string>
   <string name="upload_completed_notification_text">Toél pikeun némpo unjalan anjeun</string>
-  <string name="upload_progress_notification_title_start">Ngamimitian ngunjal %1$s</string>
+  <string name="upload_progress_notification_title_start">Ngamimitian %1$s ngunjal</string>
   <string name="upload_progress_notification_title_in_progress">Ngunjal %1$s</string>
   <string name="upload_progress_notification_title_finishing">Méréskeun unjalan %1$s</string>
   <string name="upload_failed_notification_title">Ngunjal %1$s gagal</string>
   <string name="upload_failed_notification_subtitle">Toél pikeun nempo</string>
-  <plurals name="uploads_pending_notification_indicator" fuzzy="true">
+  <plurals name="uploads_pending_notification_indicator">
     <item quantity="one">ngunjal %1$d berkas</item>
     <item quantity="other">ngunjal %1$d berkas</item>
   </plurals>
@@ -43,8 +50,6 @@
   <string name="share_title_hint">Judul</string>
   <string name="share_description_hint">Pedaran</string>
   <string name="login_failed_network">Teu bisa login - gangguan jaringan</string>
-  <string name="login_failed_username">Teu bisa login - pariksa sandiasma</string>
-  <string name="login_failed_password">Teu bisa login - pariksa kecap sandi</string>
   <string name="login_failed_throttled">Loba teuing nu gagalna. Mangga cobian sababaraha menit deui mah</string>
   <string name="login_failed_blocked">Punten, ieu kontributor geus diblokir di Commons</string>
   <string name="login_failed_2fa_needed">Anjeun kudu nyayagakeun kodeu oténtikasi dua faktor.</string>
@@ -77,6 +82,7 @@
   <string name="categories_activity_title">Kategori</string>
   <string name="title_activity_settings">Séting</string>
   <string name="title_activity_signup">Daptar</string>
+  <string name="title_activity_featured_images">Gambar petingan</string>
   <string name="menu_about">Ngeunaan</string>
   <string name="about_license">Aplikasi Wikimédia Commons mangrupa aplikasi sumber nembrak nu dijieun jeung dikokolakeun ku panampa hibah sarta rélawan komunitas Wikimédia. Wikimedia Foundation teu pépérodeun dina nyieun, ngamekarkeun, atawa mulasara ieu aplikasi.</string>
   <string name="about_improve" fuzzy="true">&lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;Sumber&lt;/a&gt; sarta &lt;a href=\"https://commons-app.github.io/\"&gt;situ wéb&lt;/a&gt; dina GitHub. Jieun anyar &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;perkara GitHub&lt;/a&gt; pikeun saran jeung laporan kutu.</string>
@@ -93,10 +99,10 @@
   <string name="share_license_summary">Ieu gambar bakal ditangtayungan ku lisénsi %1$s</string>
   <string name="media_upload_policy">Ku ngirimkeun ieu gambar, kuring ngedalkeun yén ieu mangrupa karya kuring sorangan, yén ieu karya teu ngandung matéri atawa hak pribadi nu ditangtayungan ku hak cipta, sarta mun teu nurut kana &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines\"&gt;Kawijakan Wikimedia Commons&lt;/a&gt;.</string>
   <string name="menu_download">Undeur</string>
-  <string name="preference_license" fuzzy="true">Lisénsi</string>
+  <string name="preference_license">Lisénsi buhun</string>
   <string name="use_previous">Paké baé judul/pedaran saméméhna</string>
   <string name="allow_gps">Comot lokasi sacara otomatis</string>
-  <string name="allow_gps_summary">Catet lokasi ayeuna pikeun nawarkeun usulan kategori lamun gambar tanpa géotag</string>
+  <string name="allow_gps_summary" fuzzy="true">Catet lokasi ayeuna pikeun nawarkeun usulan kategori lamun gambar tanpa géotag</string>
   <string name="preference_theme">Modus peuting</string>
   <string name="preference_theme_summary">Gunakeun téma cakueum</string>
   <string name="license_name_cc_by_sa_four">Atribusi-BabagiSarupa 4.0</string>
@@ -127,6 +133,7 @@
   <string name="tutorial_3_subtext">- Sélpi atawa poto sobat anjeun\n- Poto anu diundeur ti Internét\n- Poto layar aplikasi</string>
   <string name="tutorial_4_text">Conto unjalan:</string>
   <string name="tutorial_4_subtext" fuzzy="true">- Judul: Gedung Opera Sydney\n- Pedaran: Gedung Opera Sydney (Sydney Opera House) ditempo ti basisir peuntas\n- Kategori: Sydney Opera House, Sydney Opera House from the west, Sydney Opera House remote views</string>
+  <string name="tutorial_4_subtext_1">Judul: Rumah Opera Sydney</string>
   <string name="welcome_wikipedia_text">Sumbangkeun gambar Anjeun. Bantuan ngahirupkeun artikel Wikipédia!</string>
   <string name="welcome_wikipedia_subtext">Gambar di Wikipédia asalna ti Wikimedia Commons.</string>
   <string name="welcome_copyright_text">Gambar-gambar anjeun ngabantu ngatik jalma di sakuliah dunya.</string>
@@ -153,6 +160,7 @@
   <string name="media_detail_media_title">Judul berkas</string>
   <string name="media_detail_description">Déskripsi</string>
   <string name="media_detail_description_explanation">Pedaran berkas nyangkaruk didieu. Bisa jadi matak ngalikakeun, sarta ngempladkeun kana sawatara baris. Sanajan kitu, muga bisa katémbong écés.</string>
+  <string name="media_detail_author">Pangarang</string>
   <string name="media_detail_uploaded_date">Tanggal ngunjal</string>
   <string name="media_detail_license">Lisénsi</string>
   <string name="media_detail_coordinates">Koordinat</string>
@@ -167,6 +175,9 @@
   <string name="login_failed_2fa_not_supported">Oténtikasi dua faktor kiwari teu dirojong.</string>
   <string name="logout_verification">Yakin anjeun rék kaluar?</string>
   <string name="commons_logo">Logo Commons</string>
+  <string name="commons_website">Situs wéb Commons</string>
+  <string name="commons_facebook">Kaca Facebook Commons</string>
+  <string name="commons_github">Kode Sumber Github Commons</string>
   <string name="background_image">Gambar Kasang Tukang</string>
   <string name="mediaimage_failed">Gambar Média Gagal</string>
   <string name="no_image_found">Gambar Teu Kapanggih</string>
@@ -191,10 +202,13 @@
   <string name="navigation_item_feedback">Eupan balik</string>
   <string name="navigation_item_logout">Kaluar</string>
   <string name="navigation_item_info">Pituduh</string>
+  <string name="navigation_item_notification">Iber</string>
+  <string name="navigation_item_featured_images">Petingan</string>
   <string name="nearby_needs_permissions">Tempat sabudeureun teu bisa ditémbongkeun tanpa idin lokasi</string>
   <string name="no_description_found">teu manggihan pedaran</string>
   <string name="nearby_info_menu_commons_article">Kaca berkas commons</string>
   <string name="nearby_info_menu_wikidata_article">item Wikidata</string>
+  <string name="nearby_info_menu_wikipedia_article">Artikel Wikipédia</string>
   <string name="error_while_cache">Kasalahan nalika muat gambar</string>
   <string name="title_info">Judul déskriptif anu unik pikeun berkas, anu bakal miboga fungsi minangka ngaran berkas. Anjeun bisa maké basa basajan kalawan spasi. Ulah ngawuwuhkeun éksténsi berkas</string>
   <string name="description_info">Pék émbarkeun wincikan média saloba-lobabana: Dimana éta dicokot? Naon nu titojokeunna? Naon kontéksna? Pék jéntrékeun obyék atawa jalmana. Ébré informasi anu teu gampang kajudi, kawas wayah mun éta mangrupa pamandangan. Ari média nu némbongkeun perkara nu teu guyub, pék jéntrékeun naon nu ngabalukarkeun éta téh teu guyub.</string>

@@ -3,6 +3,8 @@
 * Bjankuloski06
 -->
 <resources>
+  <string name="title_activity_explore">Истражи</string>
+  <string name="navigation_item_explore">Истражи</string>
   <string name="preference_category_appearance">Изглед</string>
   <string name="preference_category_general">Општи</string>
   <string name="preference_category_feedback">Мислења</string>
@@ -10,6 +12,7 @@
   <string name="app_name">Ризница</string>
   <string name="bullet">•</string>
   <string name="menu_settings">Поставки</string>
+  <string name="intent_share_upload_label">Подигни на Ризницата</string>
   <string name="username">Корисничко име</string>
   <string name="password">Лозинка</string>
   <string name="login_credential">Најавете се на бета-сметката</string>
@@ -21,7 +24,7 @@
   <string name="login_success">Најавата е успешна!</string>
   <string name="login_failed">Најавата не успеа!</string>
   <string name="upload_failed">Не ја пронајдов податотеката. Пробајте со друга.</string>
-  <string name="authentication_failed">Заверката не успеа!</string>
+  <string name="authentication_failed">Заверката не успеа. Најавете се повторно.</string>
   <string name="uploading_started">Подигањето започна</string>
   <string name="upload_completed_notification_title">Податотеката „%1$s“ е подигната!</string>
   <string name="upload_completed_notification_text">Допрете за да го погледате подигањето</string>
@@ -49,8 +52,7 @@
   <string name="add_title_toast">Ставете ѝ наслов на податотеката</string>
   <string name="share_description_hint">Опис</string>
   <string name="login_failed_network">Не можам да Ве најавам — мрежата не работи</string>
-  <string name="login_failed_username">Не можам да Ве најавам — проверете си го корисничкото име</string>
-  <string name="login_failed_password">Не можам да Ве најавам — проверете си ја лозинката</string>
+  <string name="login_failed_wrong_credentials">Не можев да ве најавам. Проверете ги корисничкото име и лозинката.</string>
   <string name="login_failed_throttled">Направени се премногу неуспешни обиди. Обидете се пак за некоја минута.</string>
   <string name="login_failed_blocked">Нажалост, корисникот е блокиран на Ризницата</string>
   <string name="login_failed_2fa_needed">Мора да го укажете вашиот код за двочинителска заверка.</string>
@@ -85,6 +87,7 @@
   <string name="title_activity_settings">Нагодувања</string>
   <string name="title_activity_signup">Регистрација</string>
   <string name="title_activity_featured_images">Избрани слики</string>
+  <string name="title_activity_category_details">Категорија</string>
   <string name="menu_about">За извршникот</string>
   <string name="about_license">Прилогот на Ризницата има отворен код. Негови творци и одржувачи се примателите на наменските средства од Викимедиината заедница како и членовите на заедницата. Фондацијата Викимедија нема учество во нејзиното создавање, разработка и одржување.</string>
   <string name="about_improve">Создајте нов &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;проблем на GitHub&lt;/a&gt; за пријавување на грешки и давање предлози.</string>
@@ -104,7 +107,7 @@
   <string name="preference_license">Стандардна лиценца</string>
   <string name="use_previous">Користи претходен наслов/опис</string>
   <string name="allow_gps">Автоматски давај тековна местоположба</string>
-  <string name="allow_gps_summary">Добивање на тековната местоположба за да се дадат предлози за категории, доколку сликата нема геоознаки</string>
+  <string name="allow_gps_summary">Става геоознака од тековната местоположба во слика (ако ја нема). Предупредување: ова ви го разоткрива наоѓалиштето.</string>
   <string name="preference_theme">Ноќен режим</string>
   <string name="preference_theme_summary">Користи темен изглед</string>
   <string name="license_name_cc_by_sa_four"> Наведи извор-Сподели под исти услови 4.0</string>
@@ -192,6 +195,8 @@
   <string name="background_image">Заднинска слика</string>
   <string name="mediaimage_failed">Сликата не успеа</string>
   <string name="no_image_found">Не најдов слики</string>
+  <string name="no_subcategory_found">Не пронајдов поткатегории</string>
+  <string name="no_parentcategory_found">Не пронајдов матични категории</string>
   <string name="upload_image">Подигни слика</string>
   <string name="welcome_image_mount_zao">Зао</string>
   <string name="welcome_image_llamas">Лами</string>
@@ -263,4 +268,64 @@
   <string name="about_translate_proceed">Продолжи</string>
   <string name="about_translate_cancel">Откажи</string>
   <string name="retry">Пробај пак</string>
+  <string name="showcase_view_got_it_button">Јасно!</string>
+  <string name="showcase_view_whole_nearby_activity">Ова се места во ваша близинана кои им требаат слики за илустрирање на нивните статии на Википедија</string>
+  <string name="showcase_view_list_icon">Ако допрете на копчево ќе добиете список на тие места</string>
+  <string name="showcase_view_plus_fab">Можете да подигнете слика за било кое од местата од вашата галерија или камера</string>
+  <string name="no_images_found">Не пронајдов ниедна слика!</string>
+  <string name="error_loading_images">Се појави грешка при вчитувањето на сликите.</string>
+  <string name="image_uploaded_by">Подигач: %1$s</string>
+  <string name="block_notification">Спречени сте да ја уредувате Ризницата</string>
+  <string name="share_app_title">Сподели прилог</string>
+  <string name="share_coordinates_not_present">Не беа укажани координати при изборот на сликата</string>
+  <string name="error_fetching_nearby_places">Грешка при добивањето на околните места.</string>
+  <string name="appwidget_img">Слика на денот</string>
+  <string name="app_widget_heading">Слика на денот</string>
+  <string name="menu_search_button">Пребарај</string>
+  <string name="search_commons">Пребарај по Ризницата</string>
+  <string name="images_not_found">Нема слики што одговараат на %1$s</string>
+  <string name="title_activity_search">Пребарај</string>
+  <string name="search_recent_header">Скорешни пребарувања:</string>
+  <string name="provider_searches">Скорешни пребарувања</string>
+  <string name="error_loading_categories">Се јави грешка при вчитувањето на категориите.</string>
+  <string name="error_loading_subcategories">Се јави грешка при вчитувањето на поткатегориите.</string>
+  <string name="successful_wikidata_edit">Сликата е успешно додадена кон %1$s на Википодатоците!</string>
+  <string name="wikidata_edit_failure">Не успеав да ја изменам соодветната единица на Википодатоците!</string>
+  <string name="menu_set_wallpaper">Задај позадина</string>
+  <string name="wallpaper_set_successfully">Позадината е успешно зададена!</string>
+  <string name="quiz">Квиз</string>
+  <string name="quiz_question_string">Дали е во ред да се подигне сликава?</string>
+  <string name="question">Прашање</string>
+  <string name="result">Исход</string>
+  <string name="quiz_back_button">Ако продолжите со подигање на слики што треба да се бришат, веројатно е дека ќе добиете забрана на сметката. Сигурно сакате да го завршите квизот?</string>
+  <string name="quiz_alert_message">Преку %1$s од сликите што ги подигнавте беа избришани. Ако продолжите со подигање на слики што треба да се бришат, веројатно е дека ќе добиете забрана на сметката.\n\nДали би сакале повторно да го погледате упатството, па да си го проверите знаењето во квиз за тоа какви слики се дозволени за подигање?</string>
+  <string name="selfie_answer">Самосликот нема енциклопедиска вредност. Не подигајте слики од вас доколку веќе не постои статија за вас на Википедија.</string>
+  <string name="taj_mahal_answer">Сликите од споменици и глетки од околината се дозволени за подигање во највеќето земји. Имајте на ум дека привремените уметнички инсталации на отворено честопати се заштитени со авторски права и затоа не треба да се подигаат.</string>
+  <string name="screenshot_answer">Екранските снимки од мрежни места се сметаат за изведени дела и затоа подлежат на авторските права кои ги налага мрежното место. Ваквите снимки можат да се користат откако ќе добиете дозвола од авторот. Доколку немате дозвола, секое изведено дело од тие страници ќе се смета за бесправно направен примерок во сопственост на авторот.</string>
+  <string name="blurry_image_answer">Една од целите на Ризницата е да биде собиралиште за квалитетни слики. Затоа, не треба да се подигаат матни фотографии. Секогаш настојувајте да правите уредни слики со добро осветлување.</string>
+  <string name="construction_event_answer">На Ризницата се добредојдени слики на кои се прикажува технологија или култура.</string>
+  <string name="warning_for_image_reverts">ПРЕДУПРЕДУВАЊЕ : Избришани се преку %1$s од сликите што ги подигнавте. Ако продолжите со подигање на слики што треба да се бришат, веројатно е дека ќе добиете забрана на сметката.</string>
+  <string name="congratulatory_message_quiz">Дадовте %1$s точни одговори. Честитаме!</string>
+  <string name="warning_for_no_answer">Изберете еден одговор</string>
+  <string name="user_not_logged_in">Најавната седница истече. Најавете се повторно.</string>
+  <string name="quiz_result_share_message">Споделете го квизов со пријателите!</string>
+  <string name="continue_message">Продолжи</string>
+  <string name="correct">Точен одговор</string>
+  <string name="wrong">Погрешен одговор</string>
+  <string name="delete_recent_searches_dialog">Дали сте сигурни дека сакате да ја избришете историјата на пребарувања?</string>
+  <string name="search_history_deleted">Историјата на пребарување е избришана</string>
+  <string name="Achievements">Достигнувања</string>
+  <string name="statistics">СТАТИСТИКА</string>
+  <string name="statistics_thanks">Примени благодарници</string>
+  <string name="statistics_featured">Избрани слики</string>
+  <string name="level">СТЕПЕН</string>
+  <string name="images_uploaded">Подигнати слики</string>
+  <string name="image_reverts">Неоткажани слики</string>
+  <string name="images_used_by_wiki">Употребени слики</string>
+  <string name="achievements_share_message">Споделете ги вашите достигнувања со пријателите!</string>
+  <string name="achievements_info_message">Степенот се накачува како што ги задоволувате овие услови. Предметите во одделот „статистика“ не се бројат.</string>
+  <string name="achievements_revert_limit_message">потребно барем:</string>
+  <string name="images_uploaded_explanation">Бројот на слики што сте ги подигнале на Ризницата преку секоја алатка за подигање</string>
+  <string name="images_reverted_explanation">Постоток од подигнатите слики на Ризницата кои не се избришани</string>
+  <string name="images_used_explanation">Бројот на слики што сте ги подигнале на Ризницата кои се користат во статии</string>
 </resources>

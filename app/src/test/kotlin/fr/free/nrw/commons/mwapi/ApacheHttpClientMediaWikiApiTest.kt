@@ -3,6 +3,7 @@ package fr.free.nrw.commons.mwapi
 import android.content.SharedPreferences
 import android.os.Build
 import android.preference.PreferenceManager
+import com.google.gson.Gson
 import fr.free.nrw.commons.BuildConfig
 import fr.free.nrw.commons.TestCommonsApplication
 import okhttp3.mockwebserver.MockResponse
@@ -17,6 +18,7 @@ import org.robolectric.RobolectricTestRunner
 import org.robolectric.RuntimeEnvironment
 import org.robolectric.annotation.Config
 import java.net.URLDecoder
+import java.text.SimpleDateFormat
 import java.util.*
 
 @RunWith(RobolectricTestRunner::class)
@@ -25,13 +27,17 @@ class ApacheHttpClientMediaWikiApiTest {
 
     private lateinit var testObject: ApacheHttpClientMediaWikiApi
     private lateinit var server: MockWebServer
+    private lateinit var wikidataServer: MockWebServer
     private lateinit var sharedPreferences: SharedPreferences
+    private lateinit var categoryPreferences: SharedPreferences
 
     @Before
     fun setUp() {
         server = MockWebServer()
+        wikidataServer = MockWebServer()
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(RuntimeEnvironment.application)
-        testObject = ApacheHttpClientMediaWikiApi(RuntimeEnvironment.application, "http://" + server.hostName + ":" + server.port + "/", sharedPreferences)
+        categoryPreferences = PreferenceManager.getDefaultSharedPreferences(RuntimeEnvironment.application)
+        testObject = ApacheHttpClientMediaWikiApi(RuntimeEnvironment.application, "http://" + server.hostName + ":" + server.port + "/", "http://" + wikidataServer.hostName + ":" + wikidataServer.port + "/", sharedPreferences, categoryPreferences, Gson())
         testObject.setWikiMediaToolforgeUrl("http://" + server.hostName + ":" + server.port + "/")
     }
 
@@ -218,6 +224,86 @@ class ApacheHttpClientMediaWikiApiTest {
         assertEquals("testUsername", parseQueryParams(server.takeRequest())["user"])
         assertEquals(1, testObserver.valueCount())
         assertEquals(23, testObserver.values()[0])
+    }
+
+    @Test
+    fun isUserBlockedFromCommonsForInfinitelyBlockedUser() {
+        server.enqueue(MockResponse().setBody("<?xml version=\"1.0\"?><api><query><userinfo id=\"1000\" name=\"testusername\" blockid=\"3000\" blockedby=\"blockerusername\" blockedbyid=\"1001\" blockreason=\"testing\" blockedtimestamp=\"2018-05-24T15:32:09Z\" blockexpiry=\"infinite\"></userinfo></query></api>"))
+
+        val result = testObject.isUserBlockedFromCommons();
+
+        assertBasicRequestParameters(server, "GET").let { userBlockedRequest ->
+            parseQueryParams(userBlockedRequest).let { body ->
+                assertEquals("xml", body["format"])
+                assertEquals("query", body["action"])
+                assertEquals("userinfo", body["meta"])
+                assertEquals("blockinfo", body["uiprop"])
+            }
+        }
+
+        assertTrue(result)
+    }
+
+    @Test
+    fun isUserBlockedFromCommonsForTimeBlockedUser() {
+        val currentDate = Date()
+        val expiredDate = Date(currentDate.time + 10000)
+        val dateFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'")
+        dateFormat.setTimeZone(TimeZone.getTimeZone("UTC"))
+        server.enqueue(MockResponse().setBody("<?xml version=\"1.0\"?><api><query><userinfo id=\"1000\" name=\"testusername\" blockid=\"3000\" blockedby=\"blockerusername\" blockedbyid=\"1001\" blockreason=\"testing\" blockedtimestamp=\"2018-05-24T15:32:09Z\" blockexpiry=\"" + dateFormat.format(expiredDate) + "\"></userinfo></query></api>"))
+
+        val result = testObject.isUserBlockedFromCommons();
+
+        assertBasicRequestParameters(server, "GET").let { userBlockedRequest ->
+            parseQueryParams(userBlockedRequest).let { body ->
+                assertEquals("xml", body["format"])
+                assertEquals("query", body["action"])
+                assertEquals("userinfo", body["meta"])
+                assertEquals("blockinfo", body["uiprop"])
+            }
+        }
+
+        assertTrue(result)
+    }
+
+    @Test
+    fun isUserBlockedFromCommonsForExpiredBlockedUser() {
+        val currentDate = Date()
+        val expiredDate = Date(currentDate.time - 10000)
+        val dateFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'")
+        dateFormat.setTimeZone(TimeZone.getTimeZone("UTC"))
+        server.enqueue(MockResponse().setBody("<?xml version=\"1.0\"?><api><query><userinfo id=\"1000\" name=\"testusername\" blockid=\"3000\" blockedby=\"blockerusername\" blockedbyid=\"1001\" blockreason=\"testing\" blockedtimestamp=\"2018-05-24T15:32:09Z\" blockexpiry=\"" + dateFormat.format(expiredDate) + "\"></userinfo></query></api>"))
+
+        val result = testObject.isUserBlockedFromCommons();
+
+        assertBasicRequestParameters(server, "GET").let { userBlockedRequest ->
+            parseQueryParams(userBlockedRequest).let { body ->
+                assertEquals("xml", body["format"])
+                assertEquals("query", body["action"])
+                assertEquals("userinfo", body["meta"])
+                assertEquals("blockinfo", body["uiprop"])
+            }
+        }
+
+        assertFalse(result)
+    }
+
+    @Test
+    fun isUserBlockedFromCommonsForNotBlockedUser() {
+        server.enqueue(MockResponse().setBody("<?xml version=\"1.0\"?><api><query><userinfo id=\"1000\" name=\"testusername\"></userinfo></query></api>"))
+
+        val result = testObject.isUserBlockedFromCommons();
+
+        assertBasicRequestParameters(server, "GET").let { userBlockedRequest ->
+            parseQueryParams(userBlockedRequest).let { body ->
+                assertEquals("xml", body["format"])
+                assertEquals("query", body["action"])
+                assertEquals("userinfo", body["meta"])
+                assertEquals("blockinfo", body["uiprop"])
+            }
+        }
+
+        assertFalse(result)
     }
 
     private fun assertBasicRequestParameters(server: MockWebServer, method: String): RecordedRequest = server.takeRequest().let {

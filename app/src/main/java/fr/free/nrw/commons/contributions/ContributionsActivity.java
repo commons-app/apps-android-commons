@@ -1,5 +1,6 @@
 package fr.free.nrw.commons.contributions;
 
+import android.accounts.Account;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
@@ -34,8 +35,10 @@ import fr.free.nrw.commons.auth.AuthenticatedActivity;
 import fr.free.nrw.commons.auth.SessionManager;
 import fr.free.nrw.commons.media.MediaDetailPagerFragment;
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
+import fr.free.nrw.commons.quiz.QuizChecker;
 import fr.free.nrw.commons.settings.Prefs;
 import fr.free.nrw.commons.upload.UploadService;
+import fr.free.nrw.commons.utils.ViewUtil;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.schedulers.Schedulers;
@@ -137,10 +140,17 @@ public  class       ContributionsActivity
 
             getSupportLoaderManager().initLoader(0, null, this);
         }
+
         requestAuthToken();
         initDrawer();
         setTitle(getString(R.string.title_activity_contributions));
 
+
+        if(checkAccount()) {
+            new QuizChecker(this,
+                    sessionManager.getCurrentAccount().name,
+                    mediaWikiApi);
+        }
         if(!BuildConfig.FLAVOR.equalsIgnoreCase("beta")){
             setUploadCount();
         }
@@ -276,17 +286,25 @@ public  class       ContributionsActivity
                 .getUploadCount(sessionManager.getCurrentAccount().name)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(
-                        uploadCount -> getSupportActionBar().setSubtitle(getResources()
-                                .getQuantityString(R.plurals.contributions_subtitle,
-                                        uploadCount, uploadCount)),
+                .subscribe(this::displayUploadCount,
                         t -> Timber.e(t, "Fetching upload count failed")
                 ));
     }
 
-    public void betaSetUploadCount(int betaUploadCount){
+    private void displayUploadCount(Integer uploadCount) {
+        if (isFinishing()
+                || getSupportActionBar() == null
+                || getResources() == null) {
+            return;
+        }
+        
         getSupportActionBar().setSubtitle(getResources()
-                .getQuantityString(R.plurals.contributions_subtitle, betaUploadCount, betaUploadCount));
+                .getQuantityString(R.plurals.contributions_subtitle,
+                        uploadCount, uploadCount));
+    }
+
+    public void betaSetUploadCount(int betaUploadCount) {
+        displayUploadCount(betaUploadCount);
     }
 
 
@@ -328,6 +346,21 @@ public  class       ContributionsActivity
         } else {
             adapter.unregisterDataSetObserver(observer);
         }
+    }
+
+    /**
+     * to ensure user is logged in
+     * @return
+     */
+    private boolean checkAccount() {
+        Account currentAccount = sessionManager.getCurrentAccount();
+        if (currentAccount == null) {
+            Timber.d("Current account is null");
+            ViewUtil.showLongToast(this, getResources().getString(R.string.user_not_logged_in));
+            sessionManager.forceLogin(this);
+            return false;
+        }
+        return true;
     }
 
     @Override

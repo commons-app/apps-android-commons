@@ -47,6 +47,8 @@ import fr.free.nrw.commons.modifications.TemplateRemoveModifier;
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
 import timber.log.Timber;
 
+//TODO: We should use this class to see how multiple uploads are handled, and then REMOVE it.
+
 public class MultipleShareActivity extends AuthenticatedActivity
         implements MediaDetailPagerFragment.MediaDetailProvider,
         AdapterView.OnItemClickListener,
@@ -166,7 +168,8 @@ public class MultipleShareActivity extends AuthenticatedActivity
         View target = getCurrentFocus();
         if (target != null) {
             InputMethodManager imm = (InputMethodManager) target.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
-            imm.hideSoftInputFromWindow(target.getWindowToken(), 0);
+            if (imm != null)
+                imm.hideSoftInputFromWindow(target.getWindowToken(), 0);
         }
         getSupportFragmentManager().beginTransaction()
                 .add(R.id.uploadsFragmentContainer, categorizationFragment, "categorization")
@@ -221,8 +224,8 @@ public class MultipleShareActivity extends AuthenticatedActivity
 
         //TODO: 15/10/17 should location permission be explicitly requested if not provided?
         //check if location permission is enabled
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            if (ContextCompat.checkSelfPermission(this,Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && ContextCompat.checkSelfPermission(this,Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+             {
                 locationPermitted = true;
             }
         }
@@ -326,18 +329,18 @@ public class MultipleShareActivity extends AuthenticatedActivity
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
                 ParcelFileDescriptor fd = getContentResolver().openFileDescriptor(imageUri,"r");
                 if (fd != null) {
-                    gpsExtractor = new GPSExtractor(fd.getFileDescriptor(),this,prefs);
+                    gpsExtractor = new GPSExtractor(fd.getFileDescriptor());
                 }
             } else {
                 String filePath = FileUtils.getPath(this,imageUri);
                 if (filePath != null) {
-                    gpsExtractor = new GPSExtractor(filePath,this,prefs);
+                    gpsExtractor = new GPSExtractor(filePath);
                 }
             }
 
             if (gpsExtractor != null) {
                 //get image coordinates from exif data or user location
-                return gpsExtractor.getCoords(locationPermitted);
+                return gpsExtractor.getCoords();
             }
 
         } catch (FileNotFoundException fnfe) {

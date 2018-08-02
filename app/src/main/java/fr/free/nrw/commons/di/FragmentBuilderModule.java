@@ -3,8 +3,12 @@ package fr.free.nrw.commons.di;
 import dagger.Module;
 import dagger.android.ContributesAndroidInjector;
 import fr.free.nrw.commons.category.CategorizationFragment;
+import fr.free.nrw.commons.category.SubCategoryListFragment;
 import fr.free.nrw.commons.contributions.ContributionsListFragment;
-import fr.free.nrw.commons.featured.FeaturedImagesListFragment;
+import fr.free.nrw.commons.category.CategoryImagesListFragment;
+import fr.free.nrw.commons.explore.categories.SearchCategoryFragment;
+import fr.free.nrw.commons.explore.images.SearchImageFragment;
+import fr.free.nrw.commons.explore.recentsearches.RecentSearchesFragment;
 import fr.free.nrw.commons.media.MediaDetailFragment;
 import fr.free.nrw.commons.media.MediaDetailPagerFragment;
 import fr.free.nrw.commons.nearby.NearbyListFragment;
@@ -49,6 +53,18 @@ public abstract class FragmentBuilderModule {
     abstract SingleUploadFragment bindSingleUploadFragment();
 
     @ContributesAndroidInjector
-    abstract FeaturedImagesListFragment bindFeaturedImagesListFragment();
+    abstract CategoryImagesListFragment bindFeaturedImagesListFragment();
+
+    @ContributesAndroidInjector
+    abstract SubCategoryListFragment bindSubCategoryListFragment();
+
+    @ContributesAndroidInjector
+    abstract SearchImageFragment bindBrowseImagesListFragment();
+
+    @ContributesAndroidInjector
+    abstract SearchCategoryFragment bindSearchCategoryListFragment();
+
+    @ContributesAndroidInjector
+    abstract RecentSearchesFragment bindRecentSearchesFragment();
 
 }

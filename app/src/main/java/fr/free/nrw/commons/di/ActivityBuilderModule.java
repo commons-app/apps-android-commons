@@ -4,10 +4,14 @@ import dagger.Module;
 import dagger.android.ContributesAndroidInjector;
 import fr.free.nrw.commons.AboutActivity;
 import fr.free.nrw.commons.WelcomeActivity;
+import fr.free.nrw.commons.achievements.AchievementsActivity;
 import fr.free.nrw.commons.auth.LoginActivity;
 import fr.free.nrw.commons.auth.SignupActivity;
+import fr.free.nrw.commons.category.CategoryDetailsActivity;
 import fr.free.nrw.commons.contributions.ContributionsActivity;
-import fr.free.nrw.commons.featured.FeaturedImagesActivity;
+import fr.free.nrw.commons.category.CategoryImagesActivity;
+import fr.free.nrw.commons.explore.SearchActivity;
+
 import fr.free.nrw.commons.nearby.NearbyActivity;
 import fr.free.nrw.commons.notification.NotificationActivity;
 import fr.free.nrw.commons.settings.SettingsActivity;
@@ -49,5 +53,15 @@ public abstract class ActivityBuilderModule {
     abstract NotificationActivity bindNotificationActivity();
 
     @ContributesAndroidInjector
-    abstract FeaturedImagesActivity bindFeaturedImagesActivity();
+    abstract CategoryImagesActivity bindFeaturedImagesActivity();
+
+    @ContributesAndroidInjector
+    abstract SearchActivity bindSearchActivity();
+
+    @ContributesAndroidInjector
+    abstract CategoryDetailsActivity bindCategoryDetailsActivity();
+
+    @ContributesAndroidInjector
+    abstract AchievementsActivity bindAchievementsActivity();
+
 }

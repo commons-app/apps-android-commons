@@ -13,6 +13,9 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.Button;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
 import com.facebook.drawee.generic.GenericDraweeHierarchyBuilder;
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.facebook.imagepipeline.listener.RequestListener;
@@ -29,28 +32,32 @@ import fr.free.nrw.commons.R;
  */
 
 public class SimilarImageDialogFragment extends DialogFragment {
+
+    @BindView(R.id.orginalImage)
     SimpleDraweeView originalImage;
+    @BindView(R.id.possibleImage)
     SimpleDraweeView possibleImage;
+    @BindView(R.id.postive_button)
     Button positiveButton;
+    @BindView(R.id.negative_button)
     Button negativeButton;
     onResponse mOnResponse;//Implemented interface from shareActivity
     Boolean gotResponse = false;
+
     public SimilarImageDialogFragment() {
     }
     public interface onResponse{
-        public void onPostiveResponse();
+        public void onPositiveResponse();
+
         public void onNegativeResponse();
     }
+
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view =  inflater.inflate(R.layout.fragment_similar_image_dialog, container, false);
+        ButterKnife.bind(this,view);
         Set<RequestListener> requestListeners = new HashSet<>();
         requestListeners.add(new RequestLoggingListener());
-
-        originalImage =(SimpleDraweeView) view.findViewById(R.id.orginalImage);
-        possibleImage =(SimpleDraweeView) view.findViewById(R.id.possibleImage);
-        positiveButton = (Button) view.findViewById(R.id.postive_button);
-        negativeButton = (Button) view.findViewById(R.id.negative_button);
 
         originalImage.setHierarchy(GenericDraweeHierarchyBuilder
                 .newInstance(getResources())
@@ -70,22 +77,6 @@ public class SimilarImageDialogFragment extends DialogFragment {
         originalImage.setImageURI(Uri.fromFile(new File(getArguments().getString("originalImagePath"))));
         possibleImage.setImageURI(Uri.fromFile(new File(getArguments().getString("possibleImagePath"))));
 
-        negativeButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                mOnResponse.onNegativeResponse();
-                gotResponse = true;
-                dismiss();
-            }
-        });
-        positiveButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                mOnResponse.onPostiveResponse();
-                gotResponse = true;
-                dismiss();
-            }
-        });
         return view;
     }
 
@@ -105,8 +96,23 @@ public class SimilarImageDialogFragment extends DialogFragment {
     @Override
     public void onDismiss(DialogInterface dialog) {
 //        I user dismisses dialog by pressing outside the dialog.
-        if(!gotResponse)
+        if (!gotResponse) {
             mOnResponse.onNegativeResponse();
+        }
         super.onDismiss(dialog);
+    }
+
+    @OnClick(R.id.negative_button)
+    public void onNegativeButtonClicked() {
+        mOnResponse.onNegativeResponse();
+        gotResponse = true;
+        dismiss();
+    }
+
+    @OnClick(R.id.postive_button)
+    public void onPositiveButtonClicked() {
+        mOnResponse.onPositiveResponse();
+        gotResponse = true;
+        dismiss();
     }
 }

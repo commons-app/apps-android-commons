@@ -3,13 +3,10 @@ package fr.free.nrw.commons.settings;
 import android.Manifest;
 import android.app.AlertDialog;
 import android.content.ActivityNotFoundException;
-import android.content.ComponentName;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
-import android.content.pm.ResolveInfo;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -24,8 +21,6 @@ import android.support.v4.content.FileProvider;
 import android.widget.Toast;
 
 import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -35,7 +30,7 @@ import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.Utils;
 import fr.free.nrw.commons.di.ApplicationlessInjection;
-import fr.free.nrw.commons.utils.FileUtils;
+import fr.free.nrw.commons.upload.FileUtils;
 
 public class SettingsFragment extends PreferenceFragment {
 
@@ -102,6 +97,11 @@ public class SettingsFragment extends PreferenceFragment {
             return true;
         });
 
+        Preference betaTesterPreference = findPreference("becomeBetaTester");
+        betaTesterPreference.setOnPreferenceClickListener(preference -> {
+                Utils.handleWebUrl(getActivity(),Uri.parse(getResources().getString(R.string.beta_opt_in_link)));
+                return true;
+        });
         Preference sendLogsPreference = findPreference("sendLogFile");
         sendLogsPreference.setOnPreferenceClickListener(preference -> {
             //first we need to check if we have the necessary permissions
@@ -128,8 +128,8 @@ public class SettingsFragment extends PreferenceFragment {
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        if (requestCode == REQUEST_CODE_WRITE_EXTERNAL_STORAGE) {
-            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+        if (requestCode == REQUEST_CODE_WRITE_EXTERNAL_STORAGE && grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+             {
                 sendAppLogsViaEmail();
             }
         }
