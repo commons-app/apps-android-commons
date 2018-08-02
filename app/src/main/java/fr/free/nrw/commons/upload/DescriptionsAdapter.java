@@ -105,11 +105,12 @@ class DescriptionsAdapter extends RecyclerView.Adapter<DescriptionsAdapter.ViewH
             } else {
                 etDescriptionText.setText("");
             }
-            Drawable drawableRight=context.getResources().getDrawable(R.drawable.mapbox_info_icon_default);
-            if(position==0){
-                etDescriptionText.setCompoundDrawables(null,null,drawableRight,null);
-            }else{
-                etDescriptionText.setCompoundDrawables(null,null,null,null);
+            Drawable drawableRight = context.getResources()
+                    .getDrawable(R.drawable.mapbox_info_icon_default);
+            if (position != 0) {
+                etDescriptionText.setCompoundDrawablesWithIntrinsicBounds(null, null, null, null);
+            } else {
+                etDescriptionText.setCompoundDrawablesRelativeWithIntrinsicBounds(null, null, drawableRight, null);
             }
 
             etDescriptionText.addTextChangedListener(new TextWatcher() {
