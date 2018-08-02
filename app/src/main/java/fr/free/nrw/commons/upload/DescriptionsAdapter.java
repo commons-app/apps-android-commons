@@ -176,22 +176,28 @@ class DescriptionsAdapter extends RecyclerView.Adapter<DescriptionsAdapter.ViewH
 
         @OnTouch(R.id.et_description_text)
         boolean descriptionInfo(View view, MotionEvent motionEvent) {
-            final int value;
-            if (ViewCompat.getLayoutDirection(view) == ViewCompat.LAYOUT_DIRECTION_LTR) {
-                value = etDescriptionText.getRight() - etDescriptionText.getCompoundDrawables()[2]
-                        .getBounds().width();
-                if (motionEvent.getAction() == ACTION_UP && motionEvent.getRawX() >= value) {
-                    callback.showAlert(R.string.media_detail_description,
-                            R.string.description_info);
-                    return true;
-                }
-            } else {
-                value = etDescriptionText.getLeft() + etDescriptionText.getCompoundDrawables()[0]
-                        .getBounds().width();
-                if (motionEvent.getAction() == ACTION_UP && motionEvent.getRawX() <= value) {
-                    callback.showAlert(R.string.media_detail_description,
-                            R.string.description_info);
-                    return true;
+
+            if (getAdapterPosition() == 0) {
+                //Description info is visible only for the first item
+                final int value;
+                if (ViewCompat.getLayoutDirection(view) == ViewCompat.LAYOUT_DIRECTION_LTR) {
+                    value = etDescriptionText.getRight() - etDescriptionText
+                            .getCompoundDrawables()[2]
+                            .getBounds().width();
+                    if (motionEvent.getAction() == ACTION_UP && motionEvent.getRawX() >= value) {
+                        callback.showAlert(R.string.media_detail_description,
+                                R.string.description_info);
+                        return true;
+                    }
+                } else {
+                    value = etDescriptionText.getLeft() + etDescriptionText
+                            .getCompoundDrawables()[0]
+                            .getBounds().width();
+                    if (motionEvent.getAction() == ACTION_UP && motionEvent.getRawX() <= value) {
+                        callback.showAlert(R.string.media_detail_description,
+                                R.string.description_info);
+                        return true;
+                    }
                 }
             }
             return false;

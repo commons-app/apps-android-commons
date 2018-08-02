@@ -389,17 +389,4 @@ public class SingleUploadFragment extends CommonsDaggerSupportFragment {
         descriptionsAdapter.addDescription(new Description());
         rvDescriptions.scrollToPosition(descriptionsAdapter.getItemCount() - 1);
     }
-
-    /**
-     * To launch the Commons:Licensing
-     * @param view
-     */
-    @OnClick(R.id.licenseInfo)
-    public void launchLicenseInfo(View view){
-        Log.i("Language", Locale.getDefault().getLanguage());
-        UrlLicense urlLicense = new UrlLicense();
-        urlLicense.initialize();
-        String url = urlLicense.getLicenseUrl(Locale.getDefault().getLanguage());
-        Utils.handleWebUrl(getActivity() , Uri.parse(url));
-    }
 }
