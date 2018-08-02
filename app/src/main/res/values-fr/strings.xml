@@ -76,6 +76,7 @@
   <string name="login_failed_generic">Échec de connexion</string>
   <string name="share_upload_button">Téléverser</string>
   <string name="multiple_share_base_title">Nommer ce jeu</string>
+  <string name="add_set_name_toast">Veuillez fournir un nom pour cet ensemble</string>
   <string name="provider_modifications">Modifications</string>
   <string name="menu_upload_single">Téléverser</string>
   <string name="categories_search_text_hint">Rechercher des catégories</string>
@@ -330,6 +331,7 @@
   <string name="continue_message">Continuer</string>
   <string name="correct">Réponse correcte</string>
   <string name="wrong">Mauvaise réponse</string>
+  <string name="quiz_screenshot_question">Cette copie d’écran est-elle correcte pour être téléversée ?</string>
   <string name="delete_recent_searches_dialog">Êtes-vous sûr de vouloir effacer votre historique de recherche ?</string>
   <string name="search_history_deleted">Historique de recherche effacée</string>
   <string name="Achievements">Réalisations</string>

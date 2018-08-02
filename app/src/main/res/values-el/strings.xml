@@ -67,6 +67,7 @@
   <string name="login_failed_generic">Η είσοδος απέτυχε</string>
   <string name="share_upload_button">Ανέβασμα</string>
   <string name="multiple_share_base_title">Ονομάστε το σύνολο</string>
+  <string name="add_set_name_toast">Παρακαλώ παρέχετε ένα όνομα για αυτό το σύνολο</string>
   <string name="provider_modifications">Τροποποιήσεις</string>
   <string name="menu_upload_single">Ανέβασμα</string>
   <string name="categories_search_text_hint">Αναζήτηση κατηγοριών</string>
@@ -322,6 +323,7 @@
   <string name="continue_message">Συνέχεια</string>
   <string name="correct">Σωστή απάντηση</string>
   <string name="wrong">Λάθος απάντηση</string>
+  <string name="quiz_screenshot_question">Αυτό το στιγμιότυπο είναι εντάξει για ανέβασμα;</string>
   <string name="delete_recent_searches_dialog">Είστε σίγουρος ότι θέλετε να καθαρίσετε το ιστορικό αναζήτησης;</string>
   <string name="search_history_deleted">Το ιστορικό αναζήτησης διεγράφη</string>
   <string name="Achievements">Κατορθώματα</string>

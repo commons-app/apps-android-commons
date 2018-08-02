@@ -65,6 +65,7 @@
   <string name="login_failed_generic">Inloggningen misslyckades</string>
   <string name="share_upload_button">Ladda upp</string>
   <string name="multiple_share_base_title">Namnge denna uppsättning</string>
+  <string name="add_set_name_toast">Ange ett namn för denna uppsättning</string>
   <string name="provider_modifications">Ändringar</string>
   <string name="menu_upload_single">Ladda upp</string>
   <string name="categories_search_text_hint">Sök kategorier</string>
@@ -320,6 +321,7 @@
   <string name="continue_message">Fortsätt</string>
   <string name="correct">Korrekt svar</string>
   <string name="wrong">Fel svar</string>
+  <string name="quiz_screenshot_question">Är det okej att ladda upp denna skärmdump?</string>
   <string name="delete_recent_searches_dialog">Är du säker på att du vill rensa din sökhistorik?</string>
   <string name="search_history_deleted">Sökhistoriken raderades</string>
   <string name="Achievements">Prestationer</string>

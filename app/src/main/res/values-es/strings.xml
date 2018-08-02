@@ -10,6 +10,7 @@
 * Macofe
 * MarionaDSR
 * Miguel2706
+* Tiberius1701
 * Vivaelcelta
 -->
 <resources>
@@ -22,7 +23,7 @@
   <string name="app_name">Commons</string>
   <string name="bullet">•</string>
   <string name="menu_settings">Configuración</string>
-  <string name="intent_share_upload_label">Cargar en Commons</string>
+  <string name="intent_share_upload_label">Subir a Commons</string>
   <string name="username">Nombre de usuario</string>
   <string name="password">Contraseña</string>
   <string name="login_credential">Accede a tu cuenta de Commons Beta</string>
@@ -297,13 +298,13 @@
   <string name="statistics_thanks">Gracias recibidas</string>
   <string name="statistics_featured">Imágenes destacadas</string>
   <string name="level">NIVEL</string>
-  <string name="images_uploaded">Las imágenes han sido cargadas</string>
+  <string name="images_uploaded">Las imágenes han sido subidas</string>
   <string name="image_reverts">Imágenes no revertidas</string>
   <string name="images_used_by_wiki">Imágenes utilizadas</string>
   <string name="achievements_share_message">¡Comparte tus logros con tus amigos!</string>
   <string name="achievements_info_message">Tu nivel aumenta conforme cumples con estos requisitos. Elementos en la sección \"estadísticas\" no se cuentan para tu nivel.</string>
   <string name="achievements_revert_limit_message">mínimo requerido:</string>
   <string name="images_uploaded_explanation">El número de imágenes que has subido a Commons, por medio de cualquier software de carga</string>
-  <string name="images_reverted_explanation">El porcentaje de imágenes que haz subido a Commons que no fueron eliminadas</string>
-  <string name="images_used_explanation">El número de imágenes que haz subido a Commons que fueron utilizadas en artículos de Wikimedia</string>
+  <string name="images_reverted_explanation">El porcentaje de imágenes que has subido a Commons que no fueron eliminadas</string>
+  <string name="images_used_explanation">El número de imágenes que has subido a Commons que fueron utilizadas en artículos de Wikimedia</string>
 </resources>
