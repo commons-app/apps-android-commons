@@ -110,7 +110,7 @@ class DescriptionsAdapter extends RecyclerView.Adapter<DescriptionsAdapter.ViewH
             if (position != 0) {
                 etDescriptionText.setCompoundDrawablesWithIntrinsicBounds(null, null, null, null);
             } else {
-                etDescriptionText.setCompoundDrawablesRelativeWithIntrinsicBounds(null, null, drawableRight, null);
+                etDescriptionText.setCompoundDrawablesWithIntrinsicBounds(null, null, drawableRight, null);
             }
 
             etDescriptionText.addTextChangedListener(new TextWatcher() {
