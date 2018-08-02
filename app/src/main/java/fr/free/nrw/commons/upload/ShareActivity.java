@@ -169,7 +169,6 @@ public class ShareActivity
         else  //Send user to login activity
         {
             Toast.makeText(this, "You need to login first!", Toast.LENGTH_SHORT).show();
-            applicationPrefs.edit().putBoolean("login_skipped", false).apply();
             Intent loginIntent = new Intent(ShareActivity.this, LoginActivity.class);
             startActivity(loginIntent);
         }
@@ -311,6 +310,12 @@ public class ShareActivity
         checkIfFileExists();
         gpsObj = fileObj.processFileCoordinates(locationPermitted);
         decimalCoords = fileObj.getDecimalCoords();
+        if (sessionManager.getCurrentAccount() == null) {
+            Toast.makeText(this, getString(R.string.login_alert_message), Toast.LENGTH_SHORT).show();
+            applicationPrefs.edit().putBoolean("login_skipped", false).apply();
+            Intent loginIntent = new Intent(ShareActivity.this, LoginActivity.class);
+            startActivity(loginIntent);
+        }
     }
 
     /**
