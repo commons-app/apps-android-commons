@@ -67,6 +67,7 @@
   <string name="login_failed_generic">로그인 실패</string>
   <string name="share_upload_button">올리기</string>
   <string name="multiple_share_base_title">이 집합의 이름 짓기</string>
+  <string name="add_set_name_toast">이 집합의 이름을 지정해 주십시오</string>
   <string name="provider_modifications">바뀜</string>
   <string name="menu_upload_single">올리기</string>
   <string name="categories_search_text_hint">분류 검색</string>
@@ -317,6 +318,7 @@
   <string name="continue_message">계속</string>
   <string name="correct">정답</string>
   <string name="wrong">오답</string>
+  <string name="quiz_screenshot_question">이 스크린샷을 올리시겠습니까?</string>
   <string name="delete_recent_searches_dialog">검색 기록을 지우겠습니까?</string>
   <string name="search_history_deleted">검색 기록 삭제됨</string>
   <string name="Achievements">성과</string>

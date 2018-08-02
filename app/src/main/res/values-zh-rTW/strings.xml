@@ -69,6 +69,7 @@
   <string name="login_failed_generic">登入失敗</string>
   <string name="share_upload_button">上傳</string>
   <string name="multiple_share_base_title">命名此組</string>
+  <string name="add_set_name_toast">請提供此設定的名稱</string>
   <string name="provider_modifications">修改</string>
   <string name="menu_upload_single">上傳</string>
   <string name="categories_search_text_hint">搜尋分類</string>
@@ -324,6 +325,7 @@
   <string name="continue_message">繼續</string>
   <string name="correct">正確答案</string>
   <string name="wrong">錯誤答案</string>
+  <string name="quiz_screenshot_question">這張截圖可以上傳嗎？</string>
   <string name="delete_recent_searches_dialog">確定要清除搜尋歷史嗎？</string>
   <string name="search_history_deleted">搜尋歷史已刪除</string>
   <string name="Achievements">成果</string>

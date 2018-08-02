@@ -68,7 +68,8 @@
   <string name="login_failed_2fa_needed">Precisa fornecer o seu código de ativação de dois fatores.</string>
   <string name="login_failed_generic">Falha ao iniciar sessão</string>
   <string name="share_upload_button">Carregar</string>
-  <string name="multiple_share_base_title">Nomeie este conjunto</string>
+  <string name="multiple_share_base_title">Dê um nome a este conjunto</string>
+  <string name="add_set_name_toast">Forneça um nome para este conjunto, por favor</string>
   <string name="provider_modifications">Modificações</string>
   <string name="menu_upload_single">Enviar</string>
   <string name="categories_search_text_hint">Pesquisar categorias</string>
@@ -91,7 +92,7 @@
     <item quantity="one">%1$d carregamento</item>
     <item quantity="other">%1$d carregamentos</item>
   </plurals>
-  <string name="categories_not_found">Nenhuma categoria correspondente %1$s encontrada</string>
+  <string name="categories_not_found">Não foi encontrada nenhuma categoria que corresponda a %1$s</string>
   <string name="categories_skip_explanation">Adicione categorias para tornar as suas imagens mais fáceis de encontrar na wiki Wikimedia Commons.\nComece a escrever para adicionar categorias.</string>
   <string name="categories_activity_title">Categorias</string>
   <string name="title_activity_settings">Configurações</string>
@@ -204,8 +205,8 @@
   <string name="commons_facebook">Página da wiki Commons no Facebook</string>
   <string name="commons_github">Código-fonte da wiki Commons no Github</string>
   <string name="background_image">Imagem de fundo</string>
-  <string name="mediaimage_failed">Falha na imagem de média</string>
-  <string name="no_image_found">Nenhuma imagem encontrada</string>
+  <string name="mediaimage_failed">Falha na imagem multimédia</string>
+  <string name="no_image_found">Não foi encontrada nenhuma imagem</string>
   <string name="no_subcategory_found">Não foi encontrada nenhuma subcategoria.</string>
   <string name="no_parentcategory_found">Não foi encontrada nenhuma categoria mãe</string>
   <string name="upload_image">Carregar imagem</string>
@@ -324,6 +325,7 @@
   <string name="continue_message">Continuar</string>
   <string name="correct">Resposta correta</string>
   <string name="wrong">Resposta incorreta</string>
+  <string name="quiz_screenshot_question">Esta captura de ecrã pode ser carregada?</string>
   <string name="delete_recent_searches_dialog">Tem a certeza de que deseja limpar o historial de pesquisas?</string>
   <string name="search_history_deleted">O historial de pesquisas foi eliminado</string>
   <string name="Achievements">Realizações</string>

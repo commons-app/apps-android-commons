@@ -59,6 +59,7 @@
   <string name="login_failed_generic">Falì a rintré ant ël sistema</string>
   <string name="share_upload_button">Carié</string>
   <string name="multiple_share_base_title">Deje un nòm a s\'ansem</string>
+  <string name="add_set_name_toast">Për piasì, ch\'a-j buta \'n tìtol a st\'ansem</string>
   <string name="provider_modifications">Modìfiche</string>
   <string name="menu_upload_single">Carié</string>
   <string name="categories_search_text_hint">Sërché dle categorìe</string>
@@ -304,7 +305,15 @@
   <string name="screenshot_answer">Schermà ëd sit an sl\'aragnà a con considerà dij travaj derivà e a son sogete a tuti ij drit d\'autor dël sit midem. A peulo esse dovrà con ël përmess ëd l\'autor. Sensa \'s përmess, tute euvra che chiel a crea basà su col travaj a l\'é considerà da na mira legal tanme na còpia sensa licensa possedùa da l\'autor original.</string>
   <string name="blurry_image_answer">Un dij but ëd Commons a l\'é ëd raduné dle plance ëd qualità. Donca le plance tërbole a peulo nen esse carià. Ch\'a sërca ëd pijé sempe dle bele fòto con na bon-a iluminassion.</string>
   <string name="construction_event_answer">Fòto ch\'a mostro la tecnologìa o la coltura a son particolarman bin ëvnùe su Commons.</string>
+  <string name="warning_for_image_reverts">\'TENSION: pi che %1$s dle plance che chiel a l\'ha carià a son ëstàite dëscancelà. S\'a va anans a carié cle plance che a devo esse gavà, sò cont a sarà probabilman blocà.</string>
+  <string name="congratulatory_message_quiz">A l\'ha avù %1$s ëd rispòste giuste. Congratulassion!</string>
+  <string name="warning_for_no_answer">Ch\'a serna un-a dle doe opsion për rësponde a la chestion</string>
   <string name="user_not_logged_in">Session ëscadùa, për piasì ch\'a rintra torna ant ël sistema.</string>
+  <string name="quiz_result_share_message">Ch\'a partagia soa preuva con ij sò amis!</string>
+  <string name="continue_message">Continué</string>
+  <string name="correct">Rispòsta giusta</string>
+  <string name="wrong">Rispòsta sbalià</string>
+  <string name="quiz_screenshot_question">Costa schermà a va bin da carié?</string>
   <string name="delete_recent_searches_dialog">É-lo sigur ëd vorèj dëscancelé lë stòrich ëd soe arserche?</string>
   <string name="search_history_deleted">Lë stòrich ëd j\'arserche a l\'é stàit dëscancelà</string>
   <string name="Achievements">Realisassion</string>
@@ -315,4 +324,10 @@
   <string name="images_uploaded">Plance carià</string>
   <string name="image_reverts">Plance nen anulà</string>
   <string name="images_used_by_wiki">Plance dovrà</string>
+  <string name="achievements_share_message">Ch\'a partagia ij sò arzultà con ij sò amis!</string>
+  <string name="achievements_info_message">Sò livel a aumenta viaman che chiel a argionz costi sucess. J\'element ant la session «statìstiche» a conto nen për sò livel.</string>
+  <string name="achievements_revert_limit_message">mìnim necessari:</string>
+  <string name="images_uploaded_explanation">Ël nùmer ëd plance che chiel a l\'ha carià su Comun, a travers un programa qualsëssìa</string>
+  <string name="images_reverted_explanation">La përsentual ëd plance che chiel a l\'ha carià su Comun e ch\'a son nen ëstàite dëscancelà</string>
+  <string name="images_used_explanation">Ël nùmer ëd plance che chiel a l\'ha carià su Comun e che a son ëstàite dovrà an dj\'artìcoj ëd Wikimedia</string>
 </resources>

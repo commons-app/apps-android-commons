@@ -187,6 +187,7 @@
   <string name="share_app_title">شارك التطبيق</string>
   <string name="appwidget_img">صورة اليوم</string>
   <string name="app_widget_heading">صورة اليوم</string>
+  <string name="Achievements">الإنجازات</string>
   <string name="statistics_featured">الصور المختارة</string>
   <string name="images_used_by_wiki">الصور المستخدمة</string>
 </resources>

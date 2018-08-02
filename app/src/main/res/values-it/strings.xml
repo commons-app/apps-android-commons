@@ -241,7 +241,12 @@
   <string name="search_recent_header">Ricerche recenti:</string>
   <string name="error_loading_categories">Si è verificato un errore durante il caricamento delle categorie.</string>
   <string name="error_loading_subcategories">Si è verificato un errore durante il caricamento delle sottocategorie.</string>
+  <string name="question">Domanda</string>
+  <string name="result">Risultato</string>
   <string name="user_not_logged_in">Sessione di login scaduta, accedi nuovamente.</string>
+  <string name="continue_message">Continua</string>
+  <string name="correct">Risposta corretta</string>
+  <string name="wrong">Risposta sbagliata</string>
   <string name="delete_recent_searches_dialog">Sei sicuro di voler cancellare la tua cronologia di ricerca?</string>
   <string name="search_history_deleted">Cronologia di ricerca cancellata</string>
   <string name="Achievements">Risultati</string>

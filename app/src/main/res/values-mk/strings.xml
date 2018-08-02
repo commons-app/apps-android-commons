@@ -59,6 +59,7 @@
   <string name="login_failed_generic">Најавата не успеа</string>
   <string name="share_upload_button">Подигни</string>
   <string name="multiple_share_base_title">Дајте му име на овој комплет</string>
+  <string name="add_set_name_toast">Дајте му име на збирот</string>
   <string name="provider_modifications">Преиначувања</string>
   <string name="menu_upload_single">Подигни</string>
   <string name="categories_search_text_hint">Пребарај категории</string>
@@ -312,6 +313,7 @@
   <string name="continue_message">Продолжи</string>
   <string name="correct">Точен одговор</string>
   <string name="wrong">Погрешен одговор</string>
+  <string name="quiz_screenshot_question">Дали оваа екранска снимка е во ред за подигање?</string>
   <string name="delete_recent_searches_dialog">Дали сте сигурни дека сакате да ја избришете историјата на пребарувања?</string>
   <string name="search_history_deleted">Историјата на пребарување е избришана</string>
   <string name="Achievements">Достигнувања</string>

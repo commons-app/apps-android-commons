@@ -134,4 +134,6 @@
   <string name="showcase_view_got_it_button">گھن گھندا</string>
   <string name="menu_search_button">ڳولو</string>
   <string name="question">سوال</string>
+  <string name="result">نتیجہ</string>
+  <string name="statistics">شماریات</string>
 </resources>
