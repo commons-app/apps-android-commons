@@ -10,12 +10,15 @@
 * Wim b
 -->
 <resources>
+  <string name="title_activity_explore">Esplora</string>
+  <string name="navigation_item_explore">Esplora</string>
   <string name="preference_category_appearance">Aspetto</string>
   <string name="preference_category_general">Generale</string>
   <string name="preference_category_feedback">Commenti</string>
   <string name="preference_category_location">Posizione</string>
   <string name="app_name">Commons</string>
   <string name="menu_settings">Impostazioni</string>
+  <string name="intent_share_upload_label">Carica su Commons</string>
   <string name="username">Nome utente</string>
   <string name="password">Password</string>
   <string name="login">Entra</string>
@@ -26,7 +29,7 @@
   <string name="login_success">Accesso effettuato!</string>
   <string name="login_failed">Accesso non riuscito!</string>
   <string name="upload_failed">File non trovato. Prova con un altro file.</string>
-  <string name="authentication_failed">Autenticazione non riuscita!</string>
+  <string name="authentication_failed">Autenticazione non riuscita, si prega di riprovare</string>
   <string name="uploading_started">Caricamento iniziato!</string>
   <string name="upload_completed_notification_title">%1$s caricato!</string>
   <string name="upload_completed_notification_text">Premi per vedere i tuoi caricamenti</string>
@@ -53,8 +56,6 @@
   <string name="share_title_hint">Titolo</string>
   <string name="share_description_hint">Descrizione</string>
   <string name="login_failed_network">Impossibile effettuare l\'accesso - errore di rete</string>
-  <string name="login_failed_username">Impossibile effettuare l\'accesso - controlla il nome utente</string>
-  <string name="login_failed_password">Impossibile effettuare l\'accesso - controlla la password</string>
   <string name="login_failed_throttled">Troppi tentativi falliti. Riprova tra alcuni minuti.</string>
   <string name="login_failed_blocked">Spiacente, questo utente è stato bloccato su Commons</string>
   <string name="login_failed_2fa_needed">Devi fornire il tuo codice di autenticazione a due fattori.</string>
@@ -89,6 +90,7 @@
   <string name="title_activity_settings">Impostazioni</string>
   <string name="title_activity_signup">Registrati</string>
   <string name="title_activity_featured_images">Immagini in evidenza</string>
+  <string name="title_activity_category_details">Categoria</string>
   <string name="menu_about">Informazioni</string>
   <string name="about_license">L\'app di Wikimedia Commons è un\'applicazione open source creata e mantenuta da beneficiari e volontari della comunità Wikimedia. La Fondazione Wikimedia non è coinvolta nella creazione, sviluppo o manutenzione dell\'applicazione.</string>
   <string name="about_improve">Crea una nuova &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;segnalazione GitHub&lt;/a&gt; per riportare errori e suggerimenti.</string>
@@ -177,6 +179,7 @@
   <string name="commons_facebook">Pagina Facebook di Commons</string>
   <string name="commons_github">Codice sorgente Github di Commons</string>
   <string name="no_image_found">Nessuna immagine trovata</string>
+  <string name="no_subcategory_found">Nessuna sottocategoria trovata</string>
   <string name="upload_image">Carica immagine</string>
   <string name="welcome_image_mount_zao">Monte Zao</string>
   <string name="welcome_image_rainbow_bridge">Arcobaleno</string>
@@ -223,4 +226,35 @@
   <string name="about_translate_title">Lingue</string>
   <string name="about_translate_cancel">Annulla</string>
   <string name="retry">Riprova</string>
+  <string name="showcase_view_got_it_button">Capito!</string>
+  <string name="showcase_view_whole_nearby_activity">Questi sono i luoghi vicino a te che necessitano di immagini per illustrare le loro voci di Wikipedia</string>
+  <string name="showcase_view_plus_fab">Puoi caricare un\'immagine per ogni luogo dalla tua galleria o fotocamera</string>
+  <string name="no_images_found">Nessuna immagine trovata!</string>
+  <string name="error_loading_images">Si è verificato un errore durante il caricamento delle immagini.</string>
+  <string name="image_uploaded_by">Caricato da: %1$s</string>
+  <string name="share_app_title">Condividi applicazione</string>
+  <string name="appwidget_img">Foto del giorno</string>
+  <string name="app_widget_heading">Foto del giorno</string>
+  <string name="menu_search_button">Cerca</string>
+  <string name="search_commons">Cerca in Commons</string>
+  <string name="title_activity_search">Ricerca</string>
+  <string name="search_recent_header">Ricerche recenti:</string>
+  <string name="error_loading_categories">Si è verificato un errore durante il caricamento delle categorie.</string>
+  <string name="error_loading_subcategories">Si è verificato un errore durante il caricamento delle sottocategorie.</string>
+  <string name="question">Domanda</string>
+  <string name="result">Risultato</string>
+  <string name="user_not_logged_in">Sessione di login scaduta, accedi nuovamente.</string>
+  <string name="continue_message">Continua</string>
+  <string name="correct">Risposta corretta</string>
+  <string name="wrong">Risposta sbagliata</string>
+  <string name="delete_recent_searches_dialog">Sei sicuro di voler cancellare la tua cronologia di ricerca?</string>
+  <string name="search_history_deleted">Cronologia di ricerca cancellata</string>
+  <string name="Achievements">Risultati</string>
+  <string name="statistics_featured">Immagini in evidenza</string>
+  <string name="images_uploaded">Immagini caricate</string>
+  <string name="images_used_by_wiki">Immagini utilizzate</string>
+  <string name="achievements_share_message">Condividi i tuoi risultati con i tuoi amici!</string>
+  <string name="images_uploaded_explanation">Il numero di immagini che hai caricato su Commons, tramite qualsiasi software di caricamento</string>
+  <string name="images_reverted_explanation">La percentuale di immagini che hai caricato su Commons che non sono state cancellate</string>
+  <string name="images_used_explanation">Il numero di immagini che hai caricato su Commons che sono state usate nelle voci di Wikimedia</string>
 </resources>

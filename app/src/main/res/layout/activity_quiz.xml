@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context="fr.free.nrw.commons.quiz.QuizActivity">
+
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <include
+                android:id="@+id/toolbar"
+                layout="@layout/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:cardCornerRadius="8dp"
+                android:layout_marginBottom="8dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_marginTop="8dp"
+                app:cardUseCompatPadding="true">
+
+                <ScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:isScrollContainer="true">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/question_title"
+                            android:text="@string/question"
+                            style="?android:textAppearanceLarge"
+                            android:gravity="center_horizontal"
+                            android:layout_marginTop="@dimen/activity_margin_vertical"
+                            android:layout_marginBottom="@dimen/activity_margin_vertical" />
+
+                        <include
+                            android:id="@+id/question"
+                            layout="@layout/question_layout"
+                            android:layout_height="wrap_content"
+                            android:layout_width="match_parent"
+                            android:layout_marginTop="@dimen/activity_margin_vertical"
+                            android:layout_marginBottom="@dimen/activity_margin_vertical" />
+
+                        <include
+                            android:id="@+id/answer"
+                            layout="@layout/answer_layout"
+                            android:layout_marginTop="@dimen/activity_margin_vertical"
+                            android:layout_marginBottom="@dimen/activity_margin_vertical"
+                            android:layout_height="wrap_content"
+                            android:layout_width="wrap_content" />
+
+
+                    <Button
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/next_button"
+                        android:layout_gravity="right"
+                        style="?android:textAppearanceMedium"
+                        android:layout_alignParentBottom="true"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginLeft="@dimen/activity_margin_horizontal"
+                        android:layout_marginRight="@dimen/activity_margin_horizontal"
+                        android:text="NEXT"
+                        android:backgroundTint="#D6DCE0"
+                        android:layout_marginBottom="@dimen/activity_margin_vertical" />
+
+                    </LinearLayout>
+                </ScrollView>
+            </android.support.v7.widget.CardView>
+        </LinearLayout>
+</RelativeLayout>

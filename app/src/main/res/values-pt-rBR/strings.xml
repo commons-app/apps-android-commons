@@ -15,6 +15,8 @@
 * Tuliouel
 -->
 <resources>
+  <string name="title_activity_explore">Explorar</string>
+  <string name="navigation_item_explore">Explorar</string>
   <string name="preference_category_appearance">Aparência</string>
   <string name="preference_category_general">Geral</string>
   <string name="preference_category_feedback">Comentário</string>
@@ -22,6 +24,7 @@
   <string name="app_name">Commons</string>
   <string name="bullet">•</string>
   <string name="menu_settings">Configurações</string>
+  <string name="intent_share_upload_label">Carregar no Commons</string>
   <string name="username">Nome de usuário</string>
   <string name="password">Senha</string>
   <string name="login_credential">Entre com a sua conta do Commons Beta</string>
@@ -33,7 +36,7 @@
   <string name="login_success">Login bem sucedido</string>
   <string name="login_failed">Falha na identificação</string>
   <string name="upload_failed">Arquivo não encontrado. Tente outro arquivo.</string>
-  <string name="authentication_failed">Falha de autenticação!</string>
+  <string name="authentication_failed">A autenticação falhou, inicie uma nova sessão, por favor</string>
   <string name="uploading_started">Upload iniciado!</string>
   <string name="upload_completed_notification_title">%1$s enviado!</string>
   <string name="upload_completed_notification_text">Toque para ver os seu upload</string>
@@ -61,14 +64,14 @@
   <string name="add_title_toast">Forneça um título para este arquivo</string>
   <string name="share_description_hint">Descrição</string>
   <string name="login_failed_network">Erro ao efetuar o login - falha na rede</string>
-  <string name="login_failed_username">Erro ao efetuar o login - confira seu nome de usuário</string>
-  <string name="login_failed_password">Erro ao efetuar o login - confira sua senha</string>
+  <string name="login_failed_wrong_credentials">Não é possível fazer o login - verifique seu nome de usuário e senha</string>
   <string name="login_failed_throttled">Muitas tentativas malsucedidas. Tente de novo daqui alguns minutos.</string>
   <string name="login_failed_blocked">Desculpe, esse usuário foi banido do Commons</string>
   <string name="login_failed_2fa_needed">Você precisa fornecer o seu código de ativação de dois fatores.</string>
   <string name="login_failed_generic">Erro ao efetuar o login</string>
   <string name="share_upload_button">Enviar</string>
   <string name="multiple_share_base_title">Nomeie esse conjunto</string>
+  <string name="add_set_name_toast">Forneça um nome para este conjunto, por favor</string>
   <string name="provider_modifications">Modificações</string>
   <string name="menu_upload_single">Enviar</string>
   <string name="categories_search_text_hint">Procurar categorias</string>
@@ -97,6 +100,7 @@
   <string name="title_activity_settings">Configurações</string>
   <string name="title_activity_signup">Criar conta</string>
   <string name="title_activity_featured_images">Imagens destacadas</string>
+  <string name="title_activity_category_details">Categoria</string>
   <string name="menu_about">Sobre</string>
   <string name="about_license">O Wikimedia Commons é um aplicativo de código aberto criado e mantido por beneficiários e voluntários da comunidade Wikimedia. A Wikimedia Foundation não está envolvida na criação, desenvolvimento ou manutenção do aplicativo.</string>
   <string name="about_improve">Criar uma nova &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;publicação no GitHub&lt;/a&gt; para informar erros e sugestões.</string>
@@ -116,7 +120,7 @@
   <string name="preference_license">Licença padrão</string>
   <string name="use_previous">Usar o título/descrição anterior</string>
   <string name="allow_gps">Obter automaticamente a localização atual</string>
-  <string name="allow_gps_summary">Recuperar o local atual para oferecer sugestões de categoria se a imagem não tiver geo-tagged</string>
+  <string name="allow_gps_summary">Se a imagem não estiver georreferenciada, obtém a localização atual e georreferencia a imagem com ela. Aviso: isto revela a sua localização corrente.</string>
   <string name="preference_theme">Modo noturno</string>
   <string name="preference_theme_summary">Usar tema escuro</string>
   <string name="license_name_cc_by_sa_four">Atribuição-CompartilhaIgual 4.0</string>
@@ -204,6 +208,8 @@
   <string name="background_image">Imagem de fundo</string>
   <string name="mediaimage_failed">Falha na imagem de mídia</string>
   <string name="no_image_found">Nenhuma imagem encontrada</string>
+  <string name="no_subcategory_found">Nenhuma subcategoria encontrada</string>
+  <string name="no_parentcategory_found">Nenhuma categoria pai encontrada</string>
   <string name="upload_image">Enviar Imagem</string>
   <string name="welcome_image_mount_zao">Mount Zao</string>
   <string name="welcome_image_llamas">Llamas</string>
@@ -275,5 +281,65 @@
   <string name="about_translate_proceed">Avançar</string>
   <string name="about_translate_cancel">Cancelar</string>
   <string name="retry">Tentar novamente</string>
+  <string name="showcase_view_got_it_button">Entendido!</string>
+  <string name="showcase_view_whole_nearby_activity">Estes são os lugares perto de você que precisam de fotografias para ilustrar os respetivos artigos na Wikipédia</string>
+  <string name="showcase_view_list_icon">Tocar neste botão fará surgir uma lista destes lugares</string>
+  <string name="showcase_view_plus_fab">Pode carregar uma fotografia para qualquer dos lugares, da sua galeria ou câmara</string>
+  <string name="no_images_found">Não foi encontrada nenhuma imagem!</string>
+  <string name="error_loading_images">Ocorreu um erro durante o carregamento das imagens.</string>
+  <string name="image_uploaded_by">Carregada por: %1$s</string>
+  <string name="block_notification">Está impedido de editar no Commons</string>
   <string name="share_app_title">Compartilhar o aplicativo</string>
+  <string name="share_coordinates_not_present">Não foram especificadas coordenadas durante a seleção da imagem</string>
+  <string name="error_fetching_nearby_places">Erro ao buscar lugares próximos.</string>
+  <string name="appwidget_img">Imagem do Dia</string>
+  <string name="app_widget_heading">Imagem do Dia</string>
+  <string name="menu_search_button">Pesquisar</string>
+  <string name="search_commons">Pesquisar Commons</string>
+  <string name="images_not_found">Nenhuma imagem correspondente %1$s encontrada</string>
+  <string name="title_activity_search">Pesquisar</string>
+  <string name="search_recent_header">Pesquisas recentes:</string>
+  <string name="provider_searches">Consultas recentemente pesquisadas</string>
+  <string name="error_loading_categories">Ocorreu um erro ao carregar categorias.</string>
+  <string name="error_loading_subcategories">Ocorreu um erro ao carregar subcategorias.</string>
+  <string name="successful_wikidata_edit">Imagem adicionada a %1$s na wiki Wikidata!</string>
+  <string name="wikidata_edit_failure">Falha ao atualizar a entidade Wikidata correspondente!</string>
+  <string name="menu_set_wallpaper">Definir imagem de fundo</string>
+  <string name="wallpaper_set_successfully">Imagem de fundo definida!</string>
+  <string name="quiz">Questionário</string>
+  <string name="quiz_question_string">Esta fotografia pode ser carregada?</string>
+  <string name="question">Pergunta</string>
+  <string name="result">Resultado</string>
+  <string name="quiz_back_button">Se continuar carregadas imagens que precisam de ser eliminadas a sua conta será provavelmente banida. Tem a certeza de que pretende terminar o questionário?</string>
+  <string name="quiz_alert_message">Mais de %1$s das imagens que carregou foram eliminadas. Se continuar a carregar imagens que precisam de ser eliminadas a sua conta será provavelmente banida.\n\nQuer ver o guia prático outra vez e depois preencher um questionário que ajuda a aprender que tipos de imagens deve ou não deve carregar?</string>
+  <string name="selfie_answer">As autofotografias \'\'(selfies)\'\' não têm grande valor enciclopédico. Não carregue fotografias de si próprio, por favor, a menos que já exista um artigo na Wikipédia sobre você.</string>
+  <string name="taj_mahal_answer">As fotografias de monumentos e cenários de exterior podem ser carregadas na maioria dos países. Note, por favor, que as instalações de arte temporárias em exteriores normalmente têm o respetivo direito de autor protegido e não podem ser carregadas.</string>
+  <string name="screenshot_answer">As capturas de tela de \'\'sites\'\' da Internet são consideradas obras derivadas e estão sujeitas aos direitos de autor definidos para o respetivo \'\'site.\'\' Estas imagens podem ser usadas depois de obter autorização do autor. Sem esta autorização, todas as obras que criar baseadas na obra são consideradas cópias não licenciadas, cuja propriedade é detida pelo autor original.</string>
+  <string name="blurry_image_answer">Um dos objetivos da wiki Commons é recolher imagens de qualidade. Assim, não devem ser carregadas imagens desfocadas. Tente sempre tirar boas fotografias com iluminação adequada.</string>
+  <string name="construction_event_answer">As imagens que mostram tecnologia ou cultura são muito bem-vindas na wiki Commons.</string>
+  <string name="warning_for_image_reverts">AVISO: Mais de %1$s das imagens que carregou foram eliminadas. Se continuar a carregar imagens que precisam de ser eliminadas a sua conta será provavelmente banida.</string>
+  <string name="congratulatory_message_quiz">Obteve %1$s de respostas corretas. Parabéns!</string>
+  <string name="warning_for_no_answer">Selecione uma das duas opções para responder à pergunta</string>
+  <string name="user_not_logged_in">A sessão expirou. Inicie uma nova sessão, por favor.</string>
+  <string name="quiz_result_share_message">Compartilhe o seu questionário com os amigos!</string>
+  <string name="continue_message">Continuar</string>
+  <string name="correct">Resposta correta</string>
+  <string name="wrong">Resposta incorreta</string>
+  <string name="quiz_screenshot_question">Esta captura de tela pode ser carregada?</string>
+  <string name="delete_recent_searches_dialog">Tem certeza de que deseja apagar o histórico de pesquisa?</string>
+  <string name="search_history_deleted">Histórico de pesquisa excluído</string>
+  <string name="Achievements">Conquistas</string>
+  <string name="statistics">ESTATÍSTICAS</string>
+  <string name="statistics_thanks">Agradecimentos recebidos</string>
+  <string name="statistics_featured">Imagens destacadas</string>
+  <string name="level">NÍVEL</string>
+  <string name="images_uploaded">Imagens carregadas</string>
+  <string name="image_reverts">Imagens não revertidas</string>
+  <string name="images_used_by_wiki">Imagens usadas</string>
+  <string name="achievements_share_message">Compartilhe as suas conquistas com os amigos!</string>
+  <string name="achievements_info_message">O seu nível aumenta à medida que satisfaz estes requisitos. Os elementos da secção «estatísticas» não contam para o seu nível.</string>
+  <string name="achievements_revert_limit_message">mínimo exigido:</string>
+  <string name="images_uploaded_explanation">O número de imagens que carregou na wiki Commons, através de qualquer programa de carregamento</string>
+  <string name="images_reverted_explanation">A percentagem das imagens que carregou na wiki Commons que não foram eliminadas</string>
+  <string name="images_used_explanation">O número de imagens que carregou na wiki Commons que foram usadas em artigos na Wikimedia</string>
 </resources>

@@ -9,9 +9,6 @@ import android.os.Bundle;
 import android.text.Html;
 import android.text.SpannableString;
 import android.text.style.UnderlineSpan;
-import android.util.Log;
-import android.support.customtabs.CustomTabsIntent;
-import android.support.v4.content.ContextCompat;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -20,15 +17,12 @@ import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import fr.free.nrw.commons.theme.NavigationBaseActivity;
 import fr.free.nrw.commons.ui.widget.HtmlTextView;
-
-import static android.widget.Toast.LENGTH_SHORT;
 
 /**
  * Represents about screen of this app
@@ -150,11 +144,12 @@ public class AboutActivity extends NavigationBaseActivity {
     @OnClick(R.id.about_translate)
     public void launchTranslate(View view) {
         final ArrayAdapter<String> languageAdapter = new ArrayAdapter<String>(AboutActivity.this,
-                android.R.layout.simple_spinner_item, language);
+                android.R.layout.simple_spinner_dropdown_item, language);
         final Spinner spinner = new Spinner(AboutActivity.this);
         spinner.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT));
         spinner.setAdapter(languageAdapter);
         spinner.setGravity(17);
+        spinner.setPadding(50,0,0,0);
 
         AlertDialog.Builder builder = new AlertDialog.Builder(AboutActivity.this);
         builder.setView(spinner);

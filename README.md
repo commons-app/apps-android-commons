@@ -18,6 +18,33 @@ We try to have an extensive documentation at [our wiki here at Github][5]:
   * [Volunteers Welcome!][9]
 * [Developer Documentation][8]
 
+## Libraries Used ##
+
+* [Picasso][11]
+* [RSS-Parser][12]
+* [ViewPagerIndicator][13]
+* [PhotoView][14]
+* [Acra][15]
+* [Renderers][16]
+* [Gson][17]
+* [Timber][18]
+* [Java-String-Similarity][19]
+* [ReadMoreTextView][20]
+* [MaterialShowcaseView][21]
+* [Butterknife][22]
+* [OKHttp][23]
+* [Okio][24]
+* [RxJava][25]
+* [JSoup][26]
+* [Fresco][27]
+* [Stetho][28]
+* [Dagger][29]
+* [AndroidSVG][30]
+* [Java-HTTP-Fluent][31]
+* [CircleProgressBar][32]
+* [Glide][33]
+* [Leak Canary][34]
+
 ## License ##
 
 This software is open source, licensed under the [Apache License 2.0][4].
@@ -34,3 +61,27 @@ This software is open source, licensed under the [Apache License 2.0][4].
 [8]: https://github.com/commons-app/apps-android-commons/wiki#developer-documentation
 [9]: https://github.com/commons-app/apps-android-commons/wiki/Volunteers-welcome%21
 [10]: https://meta.wikimedia.org/wiki/Grants:Project/Improve_%27Upload_to_Commons%27_Android_App/Renewal
+[11]: https://github.com/square/picasso
+[12]: https://github.com/prof18/RSS-Parser
+[13]: https://github.com/avianey/Android-ViewPagerIndicator
+[14]: https://github.com/chrisbanes/PhotoView
+[15]: https://github.com/ACRA/acra
+[16]: https://github.com/pedrovgs/Renderers
+[17]: https://github.com/google/gson
+[18]: https://github.com/JakeWharton/timber
+[19]: https://github.com/tdebatty/java-string-similarity
+[20]: https://github.com/bravoborja/ReadMoreTextView
+[21]: https://github.com/deano2390/MaterialShowcaseView
+[22]: https://github.com/JakeWharton/butterknife
+[23]: https://github.com/square/okhttp
+[24]: https://github.com/square/okio
+[25]: https://github.com/ReactiveX/RxJava
+[26]: https://github.com/jhy/jsoup
+[27]: https://github.com/facebook/fresco
+[28]: https://github.com/facebook/stetho
+[29]: https://github.com/google/dagger
+[30]: https://github.com/BigBadaboom/androidsvg
+[31]: https://github.com/yuvipanda/java-http-fluent/blob/master/src/main/java/in/yuvi/http/fluent/Http.java
+[32]: https://github.com/dinuscxj/CircleProgressBar
+[33]: https://github.com/bumptech/glide
+[34]: https://github.com/square/leakcanary

@@ -29,13 +29,14 @@ import java.util.HashMap;
 import java.util.concurrent.TimeUnit;
 
 import javax.inject.Inject;
+import javax.inject.Named;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
-import fr.free.nrw.commons.upload.MwVolleyApi;
+import fr.free.nrw.commons.upload.GpsCategoryModel;
 import fr.free.nrw.commons.utils.StringSortingUtils;
 import fr.free.nrw.commons.utils.ViewUtil;
 import io.reactivex.Observable;
@@ -62,13 +63,20 @@ public class CategorizationFragment extends CommonsDaggerSupportFragment {
     @BindView(R.id.categoriesExplanation)
     TextView categoriesSkip;
 
+    @Inject MediaWikiApi mwApi;
+    @Inject @Named("default_preferences") SharedPreferences prefs;
+    @Inject @Named("prefs") SharedPreferences prefsPrefs;
+    @Inject @Named("direct_nearby_upload_prefs") SharedPreferences directPrefs;
+    @Inject CategoryDao categoryDao;
+    @Inject GpsCategoryModel gpsCategoryModel;
     @Inject CategoriesModel categoriesModel;
 
     private CategoryRendererAdapter categoriesAdapter;
     private OnCategoriesSaveHandler onCategoriesSaveHandler;
+    private HashMap<String, ArrayList<String>> categoriesCache;
     private TitleTextWatcher textWatcher = new TitleTextWatcher();
+    private boolean hasDirectCategories = false;
 
-    @SuppressLint("CheckResult")
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -217,6 +225,136 @@ public class CategorizationFragment extends CommonsDaggerSupportFragment {
                             }
                         }
                 );
+    }
+
+    private Comparator<CategoryItem> sortBySimilarity(final String filter) {
+        Comparator<String> stringSimilarityComparator = StringSortingUtils.sortBySimilarity(filter);
+        return (firstItem, secondItem) -> stringSimilarityComparator
+                .compare(firstItem.getName(), secondItem.getName());
+    }
+
+    private List<String> getStringList(List<CategoryItem> input) {
+        List<String> output = new ArrayList<>();
+        for (CategoryItem item : input) {
+            output.add(item.getName());
+        }
+        return output;
+    }
+
+    private Observable<CategoryItem> defaultCategories() {
+        Observable<CategoryItem> directCat = directCategories();
+        if (hasDirectCategories) {
+            Timber.d("Image has direct Cat");
+            return directCat
+                    .concatWith(gpsCategories())
+                    .concatWith(titleCategories())
+                    .concatWith(recentCategories());
+        }
+        else {
+            Timber.d("Image has no direct Cat");
+            return gpsCategories()
+                    .concatWith(titleCategories())
+                    .concatWith(recentCategories());
+        }
+    }
+
+    private Observable<CategoryItem> directCategories() {
+        String directCategory = directPrefs.getString("Category", "");
+        // Strip newlines to prevent blank categories, and to tidy existing categories
+        directCategory = directCategory.replace("\n", "");
+
+        List<String> categoryList = new ArrayList<>();
+        Timber.d("Direct category found: " + "'" + directCategory + "'");
+
+        if (!directCategory.equals("")) {
+            hasDirectCategories = true;
+            categoryList.add(directCategory);
+            Timber.d("DirectCat does not equal emptyString. Direct Cat list has " + categoryList);
+        }
+        return Observable.fromIterable(categoryList).map(name -> new CategoryItem(name, false));
+    }
+
+    private Observable<CategoryItem> gpsCategories() {
+        return Observable.fromIterable(gpsCategoryModel.getCategoryList())
+                .map(name -> new CategoryItem(name, false));
+    }
+
+    private Observable<CategoryItem> titleCategories() {
+        //Retrieve the title that was saved when user tapped submit icon
+        String title = prefs.getString("Title", "");
+
+        return mwApi
+                .searchTitles(title, SEARCH_CATS_LIMIT)
+                .map(name -> new CategoryItem(name, false));
+    }
+
+    private Observable<CategoryItem> recentCategories() {
+        return Observable.fromIterable(categoryDao.recentCategories(SEARCH_CATS_LIMIT))
+                .map(s -> new CategoryItem(s, false));
+    }
+
+    private Observable<CategoryItem> searchAll(String term) {
+        //If user hasn't typed anything in yet, get GPS and recent items
+        if (TextUtils.isEmpty(term)) {
+            return Observable.empty();
+        }
+
+        //if user types in something that is in cache, return cached category
+        if (categoriesCache.containsKey(term)) {
+            return Observable.fromIterable(categoriesCache.get(term))
+                    .map(name -> new CategoryItem(name, false));
+        }
+
+        //otherwise, search API for matching categories
+        return mwApi
+                .allCategories(term, SEARCH_CATS_LIMIT)
+                .map(name -> new CategoryItem(name, false));
+    }
+
+    private Observable<CategoryItem> searchCategories(String term) {
+        //If user hasn't typed anything in yet, get GPS and recent items
+        if (TextUtils.isEmpty(term)) {
+            return Observable.empty();
+        }
+
+        return mwApi
+                .searchCategories(term, SEARCH_CATS_LIMIT)
+                .map(s -> new CategoryItem(s, false));
+    }
+
+    private boolean containsYear(String item) {
+        //Check for current and previous year to exclude these categories from removal
+        Calendar now = Calendar.getInstance();
+        int year = now.get(Calendar.YEAR);
+        String yearInString = String.valueOf(year);
+
+        int prevYear = year - 1;
+        String prevYearInString = String.valueOf(prevYear);
+        Timber.d("Previous year: %s", prevYearInString);
+
+        //Check if item contains a 4-digit word anywhere within the string (.* is wildcard)
+        //And that item does not equal the current year or previous year
+        //And if it is an irrelevant category such as Media_needing_categories_as_of_16_June_2017(Issue #750)
+        //Check if the year in the form of XX(X)0s is relevant, i.e. in the 2000s or 2010s as stated in Issue #1029
+        return ((item.matches(".*(19|20)\\d{2}.*") && !item.contains(yearInString) && !item.contains(prevYearInString))
+                || item.matches("(.*)needing(.*)") || item.matches("(.*)taken on(.*)")
+                || (item.matches(".*0s.*") && !item.matches(".*(200|201)0s.*")));
+    }
+
+    private void updateCategoryCount(CategoryItem item) {
+        Category category = categoryDao.find(item.getName());
+
+        // Newly used category...
+        if (category == null) {
+            category = new Category(null, item.getName(), new Date(), 0);
+        }
+
+        category.incTimesUsed();
+        categoryDao.save(category);
+    }
+
+    public int getCurrentSelectedCount() {
+        return selectedCategories.size();
     }
 
     /**

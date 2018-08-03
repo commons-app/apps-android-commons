@@ -32,16 +32,18 @@ import fr.free.nrw.commons.mwapi.MediaWikiApi;
 import fr.free.nrw.commons.nearby.NearbyPlaces;
 import fr.free.nrw.commons.settings.Prefs;
 import fr.free.nrw.commons.upload.UploadController;
+import fr.free.nrw.commons.wikidata.WikidataEditListener;
+import fr.free.nrw.commons.wikidata.WikidataEditListenerImpl;
 
 import static android.content.Context.MODE_PRIVATE;
 import static fr.free.nrw.commons.contributions.ContributionsContentProvider.CONTRIBUTION_AUTHORITY;
+import static fr.free.nrw.commons.explore.recentsearches.RecentSearchesContentProvider.RECENT_SEARCH_AUTHORITY;
 import static fr.free.nrw.commons.modifications.ModificationsContentProvider.MODIFICATIONS_AUTHORITY;
 
 @Module
 @SuppressWarnings({"WeakerAccess", "unused"})
 public class CommonsApplicationModule {
     public static final String CATEGORY_AUTHORITY = "fr.free.nrw.commons.categories.contentprovider";
-    public static final long OK_HTTP_CACHE_SIZE = 10 * 1024 * 1024;
 
     private Context applicationContext;
 
@@ -92,6 +94,18 @@ public class CommonsApplicationModule {
     @Named("category")
     public ContentProviderClient provideCategoryContentProviderClient(Context context) {
         return context.getContentResolver().acquireContentProviderClient(CATEGORY_AUTHORITY);
+    }
+
+    /**
+     * This method is used to provide instance of RecentSearchContentProviderClient
+     * which provides content of Recent Searches from database
+     * @param context
+     * @return returns RecentSearchContentProviderClient
+     */
+    @Provides
+    @Named("recentsearch")
+    public ContentProviderClient provideRecentSearchContentProviderClient(Context context) {
+        return context.getContentResolver().acquireContentProviderClient(RECENT_SEARCH_AUTHORITY);
     }
 
     @Provides
@@ -201,5 +215,11 @@ public class CommonsApplicationModule {
     @Singleton
     public LruCache<String, String> provideLruCache() {
         return new LruCache<>(1024);
+    }
+
+    @Provides
+    @Singleton
+    public WikidataEditListener provideWikidataEditListener() {
+        return new WikidataEditListenerImpl();
     }
 }

@@ -4,7 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
         android:id="@+id/menu_share_current_image"
-        app:actionProviderClass="android.support.v7.widget.ShareActionProvider"
+        android:icon="@drawable/ic_share_black_24dp"
         android:title="@string/menu_share"
         app:showAsAction="ifRoom" />
     <item
@@ -14,6 +14,10 @@
     <item
         android:id="@+id/menu_download_current_image"
         android:title="@string/menu_download"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/menu_set_as_wallpaper"
+        android:title="@string/menu_set_wallpaper"
         app:showAsAction="never" />
     <item
         android:id="@+id/menu_retry_current_image"

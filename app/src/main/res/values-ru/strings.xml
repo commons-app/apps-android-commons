@@ -15,10 +15,13 @@
 * Okras
 * Redredsonia
 * Rubin16
+* Vlad5250
 * Wirbel78
 * ОйЛ
 -->
 <resources>
+  <string name="title_activity_explore">Обзор</string>
+  <string name="navigation_item_explore">Обзор</string>
   <string name="preference_category_appearance">Внешний вид</string>
   <string name="preference_category_general">Общие</string>
   <string name="preference_category_feedback">Обратная связь</string>
@@ -26,18 +29,19 @@
   <string name="app_name">Викисклад</string>
   <string name="bullet">•</string>
   <string name="menu_settings">Настройки</string>
+  <string name="intent_share_upload_label">Загрузить на Викисклад</string>
   <string name="username">Имя пользователя</string>
   <string name="password">Пароль</string>
   <string name="login_credential">Войдите в свою учётную запись Commons Beta</string>
   <string name="login">Войти</string>
   <string name="forgot_password">Забыли пароль?</string>
-  <string name="signup">Зарегистрироваться</string>
+  <string name="signup">Регистрация</string>
   <string name="logging_in_title">Вход в систему</string>
   <string name="logging_in_message">Пожалуйста, подождите…</string>
   <string name="login_success">Вход выполнен успешно!</string>
   <string name="login_failed">Ошибка входа в систему!</string>
   <string name="upload_failed">Файл не найден. Попробуйте другой файл.</string>
-  <string name="authentication_failed">Ошибка аутентификации!</string>
+  <string name="authentication_failed">Ошибка аутентификации. Пожалуйста, авторизуйтесь ещё раз.</string>
   <string name="uploading_started">Загрузка началась!</string>
   <string name="upload_completed_notification_title">%1$s загружен!</string>
   <string name="upload_completed_notification_text">Нажмите для просмотра загруженного файла</string>
@@ -46,11 +50,7 @@
   <string name="upload_progress_notification_title_finishing">Завершение загрузки %1$s</string>
   <string name="upload_failed_notification_title">Загрузка %1$s не удалась</string>
   <string name="upload_failed_notification_subtitle">Нажмите для просмотра</string>
-  <plurals name="uploads_pending_notification_indicator">
-    <item quantity="one">%1$d файл загружается</item>
-    <item quantity="few">%1$d файла загружается</item>
-    <item quantity="other">%1$d файлов загружается</item>
-  </plurals>
+  <string name="uploads_pending_notification_indicator">%1$d {{PLURAL:%1$d|one=файл загружается|few=файла загружается|файлов загружается}}</string>
   <string name="title_activity_contributions">Мои недавние загрузки</string>
   <string name="contribution_state_queued">В очереди</string>
   <string name="contribution_state_failed">Ошибка загрузки.</string>
@@ -66,14 +66,14 @@
   <string name="add_title_toast">Пожалуйста, укажите название этого файла</string>
   <string name="share_description_hint">Описание</string>
   <string name="login_failed_network">Не удаётся войти — сбой сети</string>
-  <string name="login_failed_username">Не удалось войти — пожалуйста, проверьте своё имя пользователя</string>
-  <string name="login_failed_password">Не удалось войти — пожалуйста, проверьте свой пароль</string>
+  <string name="login_failed_wrong_credentials">Не удаётся войти — проверьте ваше имя пользователя и пароль</string>
   <string name="login_failed_throttled">Слишком много неудачных попыток. Пожалуйста, попробуйте ещё раз через несколько минут.</string>
   <string name="login_failed_blocked">Извините, но участник с таким именем был заблокирован на Викискладе</string>
   <string name="login_failed_2fa_needed">Вы должны ввести код двухфакторной аутентификации.</string>
   <string name="login_failed_generic">Ошибка входа в систему!</string>
   <string name="share_upload_button">Загрузка</string>
   <string name="multiple_share_base_title">Введите название для этой группы файлов</string>
+  <string name="add_set_name_toast">Пожалуйста, укажите название этой группы файлов</string>
   <string name="provider_modifications">Изменения</string>
   <string name="menu_upload_single">Загрузка</string>
   <string name="categories_search_text_hint">Выбор категорий</string>
@@ -99,12 +99,13 @@
     <item quantity="few">%1$d загрузки</item>
     <item quantity="other">%1$d загрузок</item>
   </plurals>
-  <string name="categories_not_found">Категории, соответствующие %1$s, не найдены</string>
+  <string name="categories_not_found">Не найдено категорий, соответствующих %1$s</string>
   <string name="categories_skip_explanation">Добавьте категории, чтобы ваши изображения можно было легко найти на Викискладе.\nНачните вводить название для добавления категорий.</string>
   <string name="categories_activity_title">Категории</string>
   <string name="title_activity_settings">Настройки</string>
-  <string name="title_activity_signup">Зарегистрироваться</string>
+  <string name="title_activity_signup">Регистрация</string>
   <string name="title_activity_featured_images">Избранные изображения</string>
+  <string name="title_activity_category_details">Категория</string>
   <string name="menu_about">О приложении</string>
   <string name="about_license">Приложение «Викисклад» - это программа с открытым кодом, которую создали волонтёры и участники грантов Викимедиа. Фонд Викимедиа не участвует в создании, разработке или обслуживании этого приложения.</string>
   <string name="about_improve">Вы можете создать &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;запрос на GitHub&lt;/a&gt;, чтобы сообщить об ошибке или внести предложение.</string>
@@ -115,7 +116,7 @@
   <string name="no_email_client">Почтовый клиент не установлен</string>
   <string name="provider_categories">Недавно использованные категории</string>
   <string name="waiting_first_sync">Ожидание первой синхронизации…</string>
-  <string name="no_uploads_yet">Вы ещё не загрузили ни одной фотографии.</string>
+  <string name="no_uploads_yet">Вы ещё не загрузили ни одного изображения.</string>
   <string name="menu_retry_upload">Повторить</string>
   <string name="menu_cancel_upload">Отмена</string>
   <string name="share_license_summary">Это изображение будет лицензировано под %1$s</string>
@@ -123,8 +124,8 @@
   <string name="menu_download">Скачать</string>
   <string name="preference_license">Лицензия по умолчанию</string>
   <string name="use_previous">Использовать предыдущие название/описание</string>
-  <string name="allow_gps">Автоматически получить текущее местоположение</string>
-  <string name="allow_gps_summary">Получить текущее местоположение, чтобы были предложены категории, если изображение не содержит геотегов</string>
+  <string name="allow_gps">Анализ местоположения</string>
+  <string name="allow_gps_summary">Если изображение не содержит геотега, то будет получено и проставлено текущее местоположение. Будьте внимательны, если вы не хотите раскрывать ваше месторасположение.</string>
   <string name="preference_theme">Ночной режим</string>
   <string name="preference_theme_summary">Использовать тёмную тему</string>
   <string name="license_name_cc_by_sa_four"> Attribution-ShareAlike 4.0</string>
@@ -148,7 +149,7 @@
   <string name="license_name_cc_by_4_0">CC BY 4.0</string>
   <string name="license_name_cc_zero">CC Zero</string>
   <string name="tutorial_1_text">Викисклад содержит бо́льшую часть изображений, которые используются в Википедии.</string>
-  <string name="tutorial_1_subtext">Ваши изображения помогают образованию людей во всём мире!</string>
+  <string name="tutorial_1_subtext">Ваши изображения могут помочь образованию людей во всём мире!</string>
   <string name="tutorial_2_text">Пожалуйста, загрузите фотографии, которые были сняты или созданы исключительно вами:</string>
   <string name="tutorial_2_subtext">Природные объекты (например, цветы, животные, горы)\n• Полезные предметы (например, велосипеды, вокзалы)\n• Известные люди (например, ваш мэр, спортсмены-олимпийцы, которых вы встретили)</string>
   <string name="tutorial_2_subtext_1">Природные объекты (например, цветы, животные, горы)</string>
@@ -166,7 +167,7 @@
   <string name="tutorial_4_subtext_3">Категории: Sydney Opera House from the west, Sydney Opera House remote views</string>
   <string name="welcome_wikipedia_text">Загрузите свои изображения. Помогите Википедии оживить статьи!</string>
   <string name="welcome_wikipedia_subtext">Изображения в Википедии хранятся на Викискладе.</string>
-  <string name="welcome_copyright_text">Ваши изображения помогают образованию людей во всём мире.</string>
+  <string name="welcome_copyright_text">Ваши изображения могут помочь образованию людей во всём мире.</string>
   <string name="welcome_copyright_subtext">Избегайте материалов, защищённых авторским правом, например, найденных в Интернете, изображений плакатов, книжных обложек и т.п.</string>
   <string name="welcome_final_text">Вам это понятно?</string>
   <string name="welcome_final_button_text">Да!</string>
@@ -207,12 +208,14 @@
   <string name="login_failed_2fa_not_supported">Двухфакторная аутентификация в настоящее время не поддерживается.</string>
   <string name="logout_verification">Вы действительно хотите выйти?</string>
   <string name="commons_logo">Логотип Викисклада</string>
-  <string name="commons_website">Веб-сайт Commons</string>
-  <string name="commons_facebook">Facebook-страница Commons</string>
-  <string name="commons_github">Исходные коды Commons на гитхабе</string>
+  <string name="commons_website">Веб-сайт Викисклада</string>
+  <string name="commons_facebook">Facebook-страница Викисклада</string>
+  <string name="commons_github">Исходные коды Викисклада на гитхабе</string>
   <string name="background_image">Фоновое изображение</string>
-  <string name="mediaimage_failed">Ошибка медиаизображения</string>
+  <string name="mediaimage_failed">Ошибка медиафайла</string>
   <string name="no_image_found">Изображение не найдено</string>
+  <string name="no_subcategory_found">Подкатегории не найдены.</string>
+  <string name="no_parentcategory_found">Не найдено родительских категорий</string>
   <string name="upload_image">Загрузить изображение</string>
   <string name="welcome_image_mount_zao">Гора Зао</string>
   <string name="welcome_image_llamas">Ламы</string>
@@ -246,7 +249,7 @@
   <string name="description_info">Пожалуйста, подробно опишите загружаемый файл: где он был снят? что на нём изображено? каков его контекст? Пожалуйста опишите изображённых персон или объекты. Добавьте информацию, о которой нельзя легко догадаться, например, время суток, когда снимался файл. Если снято что-то необычное, постарайтесь пояснить, что именно в этом необычного.</string>
   <string name="upload_image_too_dark">Это изображение слишком тёмное. Вы уверены, что хотите его загрузить? Викисклад подходит только для фотографий, имеющих энциклопедическую ценность.</string>
   <string name="upload_image_blurry">Это изображение размыто. Вы уверены, что хотите его загрузить? Викисклад подходит только для фотографий, имеющих энциклопедическую ценность.</string>
-  <string name="give_permission">Дать разрешение</string>
+  <string name="give_permission">Разрешить</string>
   <string name="use_external_storage">Использовать внешнее хранилище</string>
   <string name="use_external_storage_summary">Сохранять изображения, сделанные с помощью встроенной камеры на устройстве</string>
   <string name="login_to_your_account">Войдите в свою учётную запись</string>
@@ -282,7 +285,67 @@
   <string name="about_translate">&lt;u&gt;Перевести&lt;/u&gt;</string>
   <string name="about_translate_title">Языки</string>
   <string name="about_translate_message">Выберите язык локализации, на который сможете перевести элементы интерфейса приложения</string>
-  <string name="about_translate_proceed">Выполняется</string>
+  <string name="about_translate_proceed">Перейти к переводу</string>
   <string name="about_translate_cancel">Отмена</string>
   <string name="retry">Повторить</string>
+  <string name="showcase_view_got_it_button">Понятно!</string>
+  <string name="showcase_view_whole_nearby_activity">Это места поблизости, статьи о которых нуждаются в иллюстрациях</string>
+  <string name="showcase_view_list_icon">Нажатие этой кнопки сгенерирует список таких мест</string>
+  <string name="showcase_view_plus_fab">Вы можете загрузить изображение для любого из этих мест, сделав снимок камерой или выбрав уже существующее изображение из галереи</string>
+  <string name="no_images_found">Изображений не найдено!</string>
+  <string name="error_loading_images">Произошла ошибка при загрузке изображений.</string>
+  <string name="image_uploaded_by">Загружено участником %1$s</string>
+  <string name="block_notification">Редактирование на Викискладе вам было заблокировано</string>
+  <string name="share_app_title">Поделиться приложением</string>
+  <string name="share_coordinates_not_present">Во время выбора изображения не были указаны координаты</string>
+  <string name="error_fetching_nearby_places">Ошибка получения мест поблизости</string>
+  <string name="appwidget_img">Изображение дня</string>
+  <string name="app_widget_heading">Изображение дня</string>
+  <string name="menu_search_button">Поиск</string>
+  <string name="search_commons">Найти на Викискладе</string>
+  <string name="images_not_found">Не найдено изображений, соответствующих %1$s</string>
+  <string name="title_activity_search">Найти</string>
+  <string name="search_recent_header">Последние поиски:</string>
+  <string name="provider_searches">Последние запросы</string>
+  <string name="error_loading_categories">При загрузке категорий произошла ошибка.</string>
+  <string name="error_loading_subcategories">При загрузке подкатегорий произошла ошибка.</string>
+  <string name="successful_wikidata_edit">Изображение успешно добавлено на страницу викиданных!</string>
+  <string name="wikidata_edit_failure">Не удалось обновить соответствующую страницу викиданных!</string>
+  <string name="menu_set_wallpaper">Сделать фоновой заставкой</string>
+  <string name="wallpaper_set_successfully">Фоновая заставка успешно установлена!</string>
+  <string name="quiz">Опрос</string>
+  <string name="quiz_question_string">Это изображение корректно для загрузки на сервер?</string>
+  <string name="question">Вопрос</string>
+  <string name="result">Результат</string>
+  <string name="quiz_back_button">Если вы продолжите заливать изображения, которые будут удаляться, ваша учётная запись скорее всего будет заблокирована. Вы уверены, что хотите завершить опрос ?</string>
+  <string name="quiz_alert_message">Внимание: были удалены более %1$s {{PLURAL:%1$s|zero=изображений|one= изображения|few=изображений|изображений}}, загруженных вами. Если вы продолжите заливать изображения, которые будут удаляться, ваша учётная запись скорее всего будет заблокирована.\n\nЖелаете пересмотреть руководство снова и поучаствовать в опросе, для прояснения, какие из типов изображений могут быть загруженными, а какие запрещены ?</string>
+  <string name="selfie_answer">Обычно селфи не имеют энциклопедической значимости. Пожалуйста, не загружайте фото себя до тех пор, пока о вас не будет создана статья википедии.</string>
+  <string name="taj_mahal_answer">Изображения памятников и объектов снаружи в большинстве стран мира обычно подходят для загрузки. При этом временные инсталляции снаружи часто являются объектом копирайта и не подходят для загрузки.</string>
+  <string name="blurry_image_answer">Одной из целей Викисклада является собирание качественных изображений. Поэтому не следует туда загружать нечто размытое. Старайтесь делать изображения с хорошим освещением</string>
+  <string name="construction_event_answer">Изображения в области техники или культуры весьма желательны на Викискладе.</string>
+  <string name="warning_for_image_reverts">Внимание: были удалены более %1$s {{PLURAL:%1$s|zero=изображений|one= изображения|few=изображений|изображений}}, загруженных вами. Если вы продолжите заливать изображения, которые будут удаляться, ваша учётная запись скорее всего будет заблокирована.</string>
+  <string name="congratulatory_message_quiz">Вы дали %1$s {{PLURAL:%1$s|zero=правильных ответов|one= правильный ответ|few=правильного ответа|правильных ответов}}. Так держать!</string>
+  <string name="warning_for_no_answer">Выберите один из двух вариантов ответа на вопрос</string>
+  <string name="user_not_logged_in">Сессия авторизации истекла, пожалуйста авторизуйтесь заново.</string>
+  <string name="quiz_result_share_message">Поделитесь результатами опроса со своими друзьями!</string>
+  <string name="continue_message">Продолжить</string>
+  <string name="correct">Правильный ответ</string>
+  <string name="wrong">Неверный ответ</string>
+  <string name="quiz_screenshot_question">Этот скриншот подходит для загрузки на Викисклад?</string>
+  <string name="delete_recent_searches_dialog">Вы уверены, что хотите очистить историю поисковых запросов?</string>
+  <string name="search_history_deleted">История поиска очищена</string>
+  <string name="Achievements">Достижения</string>
+  <string name="statistics">СТАТИСТИКА</string>
+  <string name="statistics_thanks">Получены благодарности</string>
+  <string name="statistics_featured">Избранные изображения</string>
+  <string name="level">УРОВЕНЬ</string>
+  <string name="images_uploaded">Загружено изображений</string>
+  <string name="image_reverts">Изображения, которые не откатывались</string>
+  <string name="images_used_by_wiki">Использовано изображений</string>
+  <string name="achievements_share_message">Поделитесь своими достижениями с друзьями!</string>
+  <string name="achievements_info_message">Ваш уровень будет увеличиваться, если вы будете придерживаться этих требований. Числа в разделе \"Статистика\" не влияют на ваш уровень.</string>
+  <string name="achievements_revert_limit_message">требуется минимум:</string>
+  <string name="images_uploaded_explanation">Число изображений, загруженных на Викисклад любыми приложениями</string>
+  <string name="images_reverted_explanation">Число изображений, загруженных на Викисклад и не удалённых</string>
+  <string name="images_used_explanation">Число изображений, загруженных на Викисклад, которые используются в статьях Викимедиа</string>
 </resources>

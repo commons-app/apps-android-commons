@@ -23,7 +23,7 @@
   <string name="login_success">Танышыу уңышлы үтте</string>
   <string name="login_failed">Танылыу хатаһы</string>
   <string name="upload_failed">Файл табылманы. Башҡа файлды эҙлә.</string>
-  <string name="authentication_failed">Кем икәнегеҙ танылманы!</string>
+  <string name="authentication_failed" fuzzy="true">Кем икәнегеҙ танылманы!</string>
   <string name="uploading_started">Тейәү башланды!</string>
   <string name="upload_completed_notification_title">%1$s тейәлде!</string>
   <string name="upload_completed_notification_text">Ошонда баҫып тейәлгән файлды ҡара</string>
@@ -50,8 +50,6 @@
   <string name="add_title_toast">Был файлдың атамаһын күрһәт</string>
   <string name="share_description_hint">Тасуирлама</string>
   <string name="login_failed_network">Инеп булмай - интернет хатаһы</string>
-  <string name="login_failed_username">Инмәнең - ҡулланыусы исемеңде тикшер</string>
-  <string name="login_failed_password">Инмәнең - серһуҙеңде тикшер</string>
   <string name="login_failed_throttled">Күп тапҡыр яңылыштың. Зинһар, бер-нисә минуттан тағы ла инеп ҡара</string>
   <string name="login_failed_blocked">Ғәфү итегеҙ, әммә был исемдәге ҡатнашыусыға Викискладҡа инеү тыйылған</string>
   <string name="login_failed_2fa_needed">Ике тапҡыр раҫлай торған шәхси кодты яҙырға кәрәк</string>
@@ -102,7 +100,7 @@
   <string name="preference_license">Нығытылған рөхсәтнамә</string>
   <string name="use_previous">Алдағы атама/һәрәтләмәне ҡулланыу</string>
   <string name="allow_gps">Автомат рәүешендә сираттағы урынды алыу</string>
-  <string name="allow_gps_summary">Әгәр рәсемдең геотегтары булмаһа, категориялар үҙенән-үҙе тәҡдим ителһен өсөн сираттағы урынды алырға</string>
+  <string name="allow_gps_summary" fuzzy="true">Әгәр рәсемдең геотегтары булмаһа, категориялар үҙенән-үҙе тәҡдим ителһен өсөн сираттағы урынды алырға</string>
   <string name="preference_theme">Төнгө режим</string>
   <string name="preference_theme_summary">Ҡараңғы теманы ҡулланыу</string>
   <string name="license_name_cc_by_sa_four"> Attribution-ShareAlike 4.0</string>
