@@ -32,13 +32,27 @@ public class ImageUtils {
 
     public enum Result {
         IMAGE_DARK,
-        IMAGE_OK
+        IMAGE_OK,
+        IMAGE_KEEP,
+        IMAGE_WAIT
+    }
+
+    /**
+     * Creates a BitmapRegionDecoder from the Uri and then calls checkIfImageIsTooDark(BitmapRegionDecoder)
+     *
+     * @param uri Uri of the file being checked
+     * @return Result.IMAGE_OK if image is neither dark nor blurry
+     * @throws IOException
+     */
+    public static Result checkIfImageIsTooDark(Uri uri) throws IOException {
+        BitmapRegionDecoder decoder = BitmapRegionDecoder.newInstance(uri.getPath(), false);
+        return checkIfImageIsTooDark(decoder);
     }
 
     /**
      * @param bitmapRegionDecoder BitmapRegionDecoder for the image we wish to process
      * @return Result.IMAGE_OK if image is neither dark nor blurry or if the input bitmapRegionDecoder provided is null
-     *         Result.IMAGE_DARK if image is too dark
+     * Result.IMAGE_DARK if image is too dark
      */
     public static Result checkIfImageIsTooDark(BitmapRegionDecoder bitmapRegionDecoder) {
         if (bitmapRegionDecoder == null) {
@@ -132,6 +146,7 @@ public class ImageUtils {
     /**
      * Downloads the image from the URL and sets it as the phone's wallpaper
      * Fails silently if download or setting wallpaper fails.
+     *
      * @param context
      * @param imageUrl
      */
@@ -150,7 +165,7 @@ public class ImageUtils {
 
             @Override
             public void onNewResultImpl(@Nullable Bitmap bitmap) {
-                if (dataSource.isFinished() && bitmap != null){
+                if (dataSource.isFinished() && bitmap != null) {
                     Timber.d("Bitmap loaded from url %s", imageUrl.toString());
                     setWallpaper(context, Bitmap.createBitmap(bitmap));
                     dataSource.close();
@@ -173,7 +188,7 @@ public class ImageUtils {
             wallpaperManager.setBitmap(bitmap);
             ViewUtil.showLongToast(context, context.getString(R.string.wallpaper_set_successfully));
         } catch (IOException e) {
-            Timber.e(e,"Error setting wallpaper");
+            Timber.e(e, "Error setting wallpaper");
         }
     }
 }

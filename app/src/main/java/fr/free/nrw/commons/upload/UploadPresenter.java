@@ -16,6 +16,7 @@ import fr.free.nrw.commons.contributions.Contribution;
 import fr.free.nrw.commons.modifications.CategoryModifier;
 import fr.free.nrw.commons.modifications.ModifierSequence;
 import fr.free.nrw.commons.modifications.TemplateRemoveModifier;
+import io.reactivex.Completable;
 import io.reactivex.Single;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
@@ -29,6 +30,7 @@ public class UploadPresenter {
     private final UploadController uploadController;
     private UploadView view;// = UploadView.DUMMY;
 
+
     @Inject
     public UploadPresenter(UploadModel uploadModel, UploadController uploadController) {
         this.uploadModel = uploadModel;
@@ -41,21 +43,18 @@ public class UploadPresenter {
 
     @SuppressLint("CheckResult")
     public void receive(List<Uri> media, String mimeType, String source) {
-//        uploadModel.receive(media, mimeType, source);
-        cacheFileUploads(media).doOnSuccess(
-                uris ->uploadModel.receive(media, mimeType, source)
-        ).flatMap(
-                uris -> Single.fromCallable(() -> performQualityCheck(uris))
+        Completable.fromRunnable(() -> uploadModel.receive(media, mimeType, source)
         ).subscribeOn(
                 Schedulers.io()
         ).observeOn(
                 AndroidSchedulers.mainThread()
         ).subscribe(
-                uploadItems -> {
+                () -> {
                     updateCards(view);
                     updateLicenses(view);
                     updateContent();
                 });
+
     }
 
     public void imageTitleChanged(String text) {
@@ -93,11 +92,12 @@ public class UploadPresenter {
 
     @SuppressLint("CheckResult")
     public void handleSubmit(CategoriesModel categoriesModel) {
-        uploadModel.toContributions().forEach(contribution -> {
+        uploadModel.toContributions().subscribe(contribution -> {
             contribution.setCategories(categoriesModel.getCategoryStringList());
             uploadController.startUpload(contribution);
         });
     }
+
     //endregion
 
     //region Top and Bottom card state management
@@ -183,19 +183,6 @@ public class UploadPresenter {
             page = UploadView.LICENSE;
         }
         view.setBottomCardVisibility(page);
-    }
-    //endregion
-
-    //todo move to model?
-    //region Quality checking for shared items
-    private Single<List<Uri>> cacheFileUploads(List<Uri> media) {
-        //Copy files into local storage and return URIs
-        return Single.fromCallable(() -> media);
-    }
-
-    private List<Uri> performQualityCheck(List<Uri> uris) {
-        // Perform quality check on the files
-        return uris;
     }
     //endregion
 }

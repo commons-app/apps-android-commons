@@ -79,7 +79,7 @@ public class FileProcessor implements SimilarImageDialogFragment.onResponse {
                 ParcelFileDescriptor descriptor = contentResolver.openFileDescriptor(mediaUri, "r");
                 if (descriptor != null) {
                     if (useExtStorage) {
-                        copyPath = FileUtils.createCopyPath(descriptor);
+                        copyPath = FileUtils.createCopyPathAndCopy(descriptor);
                         return copyPath;
                     }
                     copyPath = getApplicationContext().getCacheDir().getAbsolutePath() + "/" + new Date().getTime() + ".jpg";

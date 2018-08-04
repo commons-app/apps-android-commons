@@ -1,12 +1,17 @@
 package fr.free.nrw.commons.upload;
 
 import android.annotation.SuppressLint;
+import android.content.ContentResolver;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.net.Uri;
+import android.os.ParcelFileDescriptor;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -17,7 +22,15 @@ import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.auth.SessionManager;
 import fr.free.nrw.commons.contributions.Contribution;
 import fr.free.nrw.commons.settings.Prefs;
+import fr.free.nrw.commons.utils.ImageUtils;
 import io.reactivex.Observable;
+import io.reactivex.Scheduler;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.schedulers.Schedulers;
+import io.reactivex.subjects.BehaviorSubject;
+import timber.log.Timber;
+
+import static com.mapbox.mapboxsdk.Mapbox.getApplicationContext;
 
 public class UploadModel {
     private static UploadItem DUMMY = new UploadItem(Uri.EMPTY, "", "", GPSExtractor.DUMMY);
@@ -30,6 +43,10 @@ public class UploadModel {
     private boolean bottomCardState = true;
     private int currentStepIndex = 0;
     private Context context;
+    private ContentResolver contentResolver;
+    private boolean useExtStorage;
+
+
     @Inject
     SessionManager sessionManager;
 
@@ -43,19 +60,26 @@ public class UploadModel {
         this.license = Prefs.Licenses.CC_BY_SA_3;
         this.licensesByName = licensesByName;
         this.context = context;
+        this.contentResolver = context.getContentResolver();
+        useExtStorage = prefs.getBoolean("useExternalStorage", true);
     }
 
+    @SuppressLint("CheckResult")
     public void receive(List<Uri> mediaUri, String mimeType, String source) {
-        items = new ArrayList<>();
         currentStepIndex = 0;
-        for (int i = 0; i < mediaUri.size(); i++) {
-            Uri uri = mediaUri.get(i);
-            FileProcessor fp = new FileProcessor(uri, context.getContentResolver(), context);
-            UploadItem e = new UploadItem(uri, mimeType, source, fp.processFileCoordinates(false));
-            e.selected = (i == 0);
-            e.first = (i == 0);
-            items.add(e);
-        }
+        Observable<UploadItem> itemObservable = Observable.fromIterable(mediaUri)
+                .map(this::cacheFileUpload)
+                .map(uri->{
+                    FileProcessor fp = new FileProcessor(uri, context.getContentResolver(), context);
+                    return new UploadItem(uri, mimeType, source, fp.processFileCoordinates(false));
+                });
+        items=itemObservable.toList().blockingGet();
+        items.get(0).selected = true;
+        items.get(0).first = true;
+
+//        Observable.fromIterable(items
+//        ).observeOn(Schedulers.io()
+//        ).subscribe(item -> item.imageQuality.onNext(ImageUtils.checkIfImageIsTooDark(item.mediaUri)));
     }
 
     public boolean isPreviousAvailable() {
@@ -166,12 +190,30 @@ public class UploadModel {
     }
 
     //When the EXIF modification UI is added, the modifications will be done here
-    @SuppressLint("CheckResult")
     public Observable<Contribution> toContributions() {
         return Observable.fromIterable(items).map(item ->
                 new Contribution(item.mediaUri, null, item.title, item.description, -1,
                         null, null, sessionManager.getCurrentAccount().name,
                         CommonsApplication.DEFAULT_EDIT_SUMMARY, item.gpsCoords.getCoords()));
+    }
+
+    private Uri cacheFileUpload(Uri media) {
+        //Copy files into local storage and return URI
+        try {
+            String copyPath;
+            ParcelFileDescriptor descriptor = contentResolver.openFileDescriptor(media, "r");
+            if (descriptor != null) {
+                if (useExtStorage)
+                    copyPath=FileUtils.createExternalCopyPathAndCopy(descriptor);
+                else
+                    copyPath=FileUtils.createCopyPathAndCopy(descriptor);
+                Timber.i("Parsed Uri is "+Uri.parse(copyPath).toString());
+                return Uri.fromFile(new File(copyPath));
+            }
+        } catch (IOException e) {
+        Timber.w(e, "Error in copying URI " + media.getPath());
+        }
+        return null;
     }
 
     @SuppressWarnings("WeakerAccess")
@@ -183,16 +225,20 @@ public class UploadModel {
 
         public boolean selected = false;
         public boolean first = false;
+//        public BehaviorSubject<ImageUtils.Result> imageQuality;
         public String title;
         public String description;
         public boolean visited;
         public boolean error;
 
+        @SuppressLint("CheckResult")
         UploadItem(Uri mediaUri, String mimeType, String source, GPSExtractor gpsCoords) {
             this.mediaUri = mediaUri;
             this.mimeType = mimeType;
             this.source = source;
             this.gpsCoords = gpsCoords;
+//            imageQuality=BehaviorSubject.createDefault(ImageUtils.Result.IMAGE_WAIT);
+//            imageQuality.subscribe(iq->Timber.i("New value of imageQuality:"+ImageUtils.Result.IMAGE_OK));
         }
     }
 }
