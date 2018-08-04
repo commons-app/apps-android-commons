@@ -63,7 +63,6 @@ public class LoginActivity extends AccountAuthenticatorActivity {
     public static final String PARAM_USERNAME = "fr.free.nrw.commons.login.username";
 
     @Inject MediaWikiApi mwApi;
-    @Inject AccountUtil accountUtil;
     @Inject SessionManager sessionManager;
     @Inject @Named("application_preferences") SharedPreferences prefs;
     @Inject @Named("default_preferences") SharedPreferences defaultPrefs;
@@ -248,7 +247,7 @@ public class LoginActivity extends AccountAuthenticatorActivity {
             }
         }
 
-        accountUtil.createAccount(response, username, password);
+        sessionManager.createAccount(response, username, password);
         startMainActivity();
     }
 

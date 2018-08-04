@@ -36,15 +36,11 @@ import fr.free.nrw.commons.wikidata.WikidataEditListener;
 import fr.free.nrw.commons.wikidata.WikidataEditListenerImpl;
 
 import static android.content.Context.MODE_PRIVATE;
-import static fr.free.nrw.commons.contributions.ContributionsContentProvider.CONTRIBUTION_AUTHORITY;
 import static fr.free.nrw.commons.explore.recentsearches.RecentSearchesContentProvider.RECENT_SEARCH_AUTHORITY;
-import static fr.free.nrw.commons.modifications.ModificationsContentProvider.MODIFICATIONS_AUTHORITY;
 
 @Module
 @SuppressWarnings({"WeakerAccess", "unused"})
 public class CommonsApplicationModule {
-    public static final String CATEGORY_AUTHORITY = "fr.free.nrw.commons.categories.contentprovider";
-
     private Context applicationContext;
 
     public CommonsApplicationModule(Context applicationContext) {
@@ -93,7 +89,7 @@ public class CommonsApplicationModule {
     @Provides
     @Named("category")
     public ContentProviderClient provideCategoryContentProviderClient(Context context) {
-        return context.getContentResolver().acquireContentProviderClient(CATEGORY_AUTHORITY);
+        return context.getContentResolver().acquireContentProviderClient(BuildConfig.CATEGORY_AUTHORITY);
     }
 
     /**
@@ -111,13 +107,13 @@ public class CommonsApplicationModule {
     @Provides
     @Named("contribution")
     public ContentProviderClient provideContributionContentProviderClient(Context context) {
-        return context.getContentResolver().acquireContentProviderClient(CONTRIBUTION_AUTHORITY);
+        return context.getContentResolver().acquireContentProviderClient(BuildConfig.CONTRIBUTION_AUTHORITY);
     }
 
     @Provides
     @Named("modification")
     public ContentProviderClient provideModificationContentProviderClient(Context context) {
-        return context.getContentResolver().acquireContentProviderClient(MODIFICATIONS_AUTHORITY);
+        return context.getContentResolver().acquireContentProviderClient(BuildConfig.MODIFICATION_AUTHORITY);
     }
 
     @Provides
