@@ -46,6 +46,7 @@ public class  Contribution extends Media {
     private String decimalCoords;
     private boolean isMultiple;
     private String wikiDataEntityId;
+    private Uri contentProviderUri;
 
     public Contribution(Uri contentUri, String filename, Uri localUri, String imageUrl, Date timestamp,
                         int state, long dataLength, Date dateUploaded, long transferred,
@@ -238,5 +239,13 @@ public class  Contribution extends Media {
      */
     public void setWikiDataEntityId(String wikiDataEntityId) {
         this.wikiDataEntityId = wikiDataEntityId;
+    }
+
+    public void setContentProviderUri(Uri contentProviderUri) {
+        this.contentProviderUri = contentProviderUri;
+    }
+
+    public Uri getContentProviderUri() {
+        return contentProviderUri;
     }
 }

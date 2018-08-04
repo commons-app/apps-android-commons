@@ -136,7 +136,6 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt', 'proguard-glide.txt'
         }
         debug {
-            applicationIdSuffix ".debug"
             testCoverageEnabled true
             versionNameSuffix "-debug-" + getBranchName() + "~" + getBuildVersion()
         }
@@ -145,6 +144,9 @@ android {
     flavorDimensions 'tier'
     productFlavors {
         prod {
+		
+			applicationId 'fr.free.nrw.commons'
+
             buildConfigField "String", "WIKIMEDIA_API_POTD", "\"https://commons.wikimedia.org/w/api.php?action=featuredfeed&feed=potd&feedformat=rss&language=en\""
             buildConfigField "String", "WIKIMEDIA_API_HOST", "\"https://commons.wikimedia.org/w/api.php\""
             buildConfigField "String", "WIKIDATA_API_HOST", "\"https://www.wikidata.org/w/api.php\""
@@ -158,10 +160,18 @@ android {
             buildConfigField "String", "SIGNUP_LANDING_URL", "\"https://commons.m.wikimedia.org/w/index.php?title=Special:CreateAccount&returnto=Main+Page&returntoquery=welcome%3Dyes\""
             buildConfigField "String", "SIGNUP_SUCCESS_REDIRECTION_URL", "\"https://commons.m.wikimedia.org/w/index.php?title=Main_Page&welcome=yes\""
             buildConfigField "String", "FORGOT_PASSWORD_URL", "\"https://commons.wikimedia.org/wiki/Special:PasswordReset\""
+
+            buildConfigField "String", "ACCOUNT_TYPE", "\"fr.free.nrw.commons\""
+            buildConfigField "String", "CONTRIBUTION_AUTHORITY", "\"fr.free.nrw.commons.contributions.contentprovider\""
+            buildConfigField "String", "MODIFICATION_AUTHORITY", "\"fr.free.nrw.commons.modifications.contentprovider\""
+            buildConfigField "String", "CATEGORY_AUTHORITY", "\"fr.free.nrw.commons.categories.contentprovider\""
+
             dimension 'tier'
         }
 
         beta {
+            applicationId 'fr.free.nrw.commons.beta'
+
             // What values do we need to hit the BETA versions of the site / api ?
             buildConfigField "String", "WIKIMEDIA_API_POTD", "\"https://commons.wikimedia.org/w/api.php?action=featuredfeed&feed=potd&feedformat=rss&language=en\""
             buildConfigField "String", "WIKIMEDIA_API_HOST", "\"https://commons.wikimedia.beta.wmflabs.org/w/api.php\""
@@ -176,6 +186,12 @@ android {
             buildConfigField "String", "SIGNUP_LANDING_URL", "\"https://commons.m.wikimedia.beta.wmflabs.org/w/index.php?title=Special:CreateAccount&returnto=Main+Page&returntoquery=welcome%3Dyes\""
             buildConfigField "String", "SIGNUP_SUCCESS_REDIRECTION_URL", "\"https://commons.m.wikimedia.beta.wmflabs.org/w/index.php?title=Main_Page&welcome=yes\""
             buildConfigField "String", "FORGOT_PASSWORD_URL", "\"https://commons.wikimedia.beta.wmflabs.org/wiki/Special:PasswordReset\""
+
+            buildConfigField "String", "ACCOUNT_TYPE", "\"fr.free.nrw.commons.beta\""
+            buildConfigField "String", "CONTRIBUTION_AUTHORITY", "\"fr.free.nrw.commons.beta.contributions.contentprovider\""
+            buildConfigField "String", "MODIFICATION_AUTHORITY", "\"fr.free.nrw.commons.beta.modifications.contentprovider\""
+            buildConfigField "String", "CATEGORY_AUTHORITY", "\"fr.free.nrw.commons.beta.categories.contentprovider\""
+
             dimension 'tier'
         }
     }
