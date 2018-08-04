@@ -165,7 +165,7 @@ public class UploadModel {
         this.license = licensesByName.get(licenseName);
     }
 
-    //When the EXIF modification UI is added, the selections will be realised here
+    //When the EXIF modification UI is added, the modifications will be done here
     @SuppressLint("CheckResult")
     public Observable<Contribution> toContributions() {
         return Observable.fromIterable(items).map(item ->

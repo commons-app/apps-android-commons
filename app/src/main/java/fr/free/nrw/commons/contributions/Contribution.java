@@ -141,10 +141,6 @@ public class  Contribution extends Media {
         this.dateUploaded = date;
     }
 
-    public String getTrackingTemplates() {
-        return "{{subst:unc}}";  // Remove when we have categorization
-    }
-
     public String getPageContents() {
         StringBuilder buffer = new StringBuilder();
         SimpleDateFormat isoFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
@@ -169,8 +165,15 @@ public class  Contribution extends Media {
 
         buffer.append("== {{int:license-header}} ==\n")
                 .append(licenseTemplateFor(getLicense())).append("\n\n")
-                .append("{{Uploaded from Mobile|platform=Android|version=").append(BuildConfig.VERSION_NAME).append("}}\n")
-                .append(getTrackingTemplates());
+                .append("{{Uploaded from Mobile|platform=Android|version=").append(BuildConfig.VERSION_NAME).append("}}\n");
+        if(categories!=null&&categories.size()!=0) {
+            for (int i = 0; i < categories.size(); i++) {
+                String category = categories.get(i);
+                buffer.append("\n[[Category:").append(category).append("]]");
+            }
+        }
+        else
+            buffer.append("{{subst:unc}}");
         return buffer.toString();
     }
 
