@@ -2,6 +2,7 @@ package fr.free.nrw.commons.mwapi;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -51,6 +52,7 @@ import fr.free.nrw.commons.category.CategoryImageUtils;
 import fr.free.nrw.commons.category.QueryContinue;
 import fr.free.nrw.commons.notification.Notification;
 import fr.free.nrw.commons.notification.NotificationUtils;
+import fr.free.nrw.commons.utils.ContributionUtils;
 import in.yuvi.http.fluent.Http;
 import io.reactivex.Observable;
 import io.reactivex.Single;
@@ -92,6 +94,7 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
         ClientConnectionManager cm = new ThreadSafeClientConnManager(params, schemeRegistry);
         params.setParameter(CoreProtocolPNames.USER_AGENT, getUserAgent());
         httpClient = new DefaultHttpClient(cm, params);
+        httpClient.addRequestInterceptor(NetworkInterceptors.getHttpRequestInterceptor());
         api = new MWApi(apiURL, httpClient);
         wikidataApi = new MWApi(wikidatApiURL, httpClient);
         this.defaultPreferences = defaultPreferences;
@@ -855,24 +858,29 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
                                    long dataLength,
                                    String pageContents,
                                    String editSummary,
-                                   final ProgressListener progressListener) throws IOException {
+                                   final ProgressListener progressListener,
+                                   Uri fileUri,
+                                   Uri contentProviderUri) throws IOException {
+
         ApiResult result = api.upload(filename, file, dataLength, pageContents, editSummary, progressListener::onProgress);
 
         Log.e("WTF", "Result: " + result.toString());
 
         String resultStatus = result.getString("/api/upload/@result");
+
         if (!resultStatus.equals("Success")) {
             String errorCode = result.getString("/api/error/@code");
             Timber.e(errorCode);
             return new UploadResult(resultStatus, errorCode);
         } else {
+            // If success we have to remove file from temp directory
+            ContributionUtils.removeTemporaryFile(fileUri);
             Date dateUploaded = parseMWDate(result.getString("/api/upload/imageinfo/@timestamp"));
             String canonicalFilename = "File:" + result.getString("/api/upload/@filename").replace("_", " "); // Title vs Filename
             String imageUrl = result.getString("/api/upload/imageinfo/@url");
             return new UploadResult(resultStatus, dateUploaded, canonicalFilename, imageUrl);
         }
     }
-
 
     @Override
     @NonNull
