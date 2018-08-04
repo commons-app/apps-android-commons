@@ -3,11 +3,13 @@ package fr.free.nrw.commons.contributions;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -31,6 +33,7 @@ import fr.free.nrw.commons.BuildConfig;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
 import fr.free.nrw.commons.nearby.NearbyActivity;
+import fr.free.nrw.commons.utils.ContributionUtils;
 import timber.log.Timber;
 
 import static android.Manifest.permission.READ_EXTERNAL_STORAGE;
@@ -117,7 +120,13 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment {
         if (resultCode == RESULT_OK) {
             Timber.d("OnActivityResult() parameters: Req code: %d Result code: %d Data: %s",
                     requestCode, resultCode, data);
-            controller.handleImagePicked(requestCode, data, false, null);
+            if (requestCode == ContributionController.SELECT_FROM_CAMERA) {
+                // If coming from camera, pass null as uri. Because camera photos get saved to a
+                // fixed directory
+                controller.handleImagePicked(requestCode, null, false, null);
+            } else {
+                controller.handleImagePicked(requestCode, data.getData(), false, null);
+            }
         } else {
             Timber.e("OnActivityResult() parameters: Req code: %d Result code: %d Data: %s",
                     requestCode, resultCode, data);
