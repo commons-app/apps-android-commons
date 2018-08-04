@@ -11,7 +11,11 @@ import java.util.concurrent.Callable;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
+import fr.free.nrw.commons.category.CategoriesModel;
 import fr.free.nrw.commons.contributions.Contribution;
+import fr.free.nrw.commons.modifications.CategoryModifier;
+import fr.free.nrw.commons.modifications.ModifierSequence;
+import fr.free.nrw.commons.modifications.TemplateRemoveModifier;
 import io.reactivex.Single;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
@@ -88,9 +92,11 @@ public class UploadPresenter {
     }
 
     @SuppressLint("CheckResult")
-    public void handleSubmit() {
-        uploadModel.toContributions().forEach(uploadController::startUpload);
-
+    public void handleSubmit(CategoriesModel categoriesModel) {
+        uploadModel.toContributions().forEach(contribution -> {
+            contribution.setCategories(categoriesModel.getCategoryStringList());
+            uploadController.startUpload(contribution);
+        });
     }
     //endregion
 

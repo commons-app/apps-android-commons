@@ -53,4 +53,6 @@ public interface UploadView {
     void updateTopCardContent();
 
     void dismissKeyboard();
+
+
 }

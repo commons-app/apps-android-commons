@@ -100,7 +100,9 @@ public class CategoriesModel implements CategoryClickedListener {
     public Observable<CategoryItem> searchAll(String term) {
         //If user hasn't typed anything in yet, get GPS and recent items
         if (TextUtils.isEmpty(term)) {
-            return Observable.empty();
+            return gpsCategories()
+                    .concatWith(titleCategories())
+                    .concatWith(recentCategories());
         }
 
         //if user types in something that is in cache, return cached category
@@ -118,7 +120,9 @@ public class CategoriesModel implements CategoryClickedListener {
     public Observable<CategoryItem> searchCategories(String term) {
         //If user hasn't typed anything in yet, get GPS and recent items
         if (TextUtils.isEmpty(term)) {
-            return Observable.empty();
+            return gpsCategories()
+                    .concatWith(titleCategories())
+                    .concatWith(recentCategories());
         }
 
         return mwApi

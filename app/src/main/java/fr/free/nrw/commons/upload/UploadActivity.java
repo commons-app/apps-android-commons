@@ -330,7 +330,7 @@ public class UploadActivity extends AuthenticatedActivity implements UploadView 
         // Finally, the previous / submit buttons on the final page of the wizard
         licensePrevious.setOnClickListener(v -> presenter.handlePrevious());
         submit.setOnClickListener(v -> {
-            presenter.handleSubmit();
+            presenter.handleSubmit(categoriesModel);
             finish();
         });
     }
