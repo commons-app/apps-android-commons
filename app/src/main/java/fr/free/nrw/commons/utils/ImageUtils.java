@@ -37,7 +37,21 @@ public class ImageUtils {
 
     public enum Result {
         IMAGE_DARK,
-        IMAGE_OK
+        IMAGE_OK,
+        IMAGE_KEEP,
+        IMAGE_WAIT
+    }
+
+    /**
+     * Creates a BitmapRegionDecoder from the Uri and then calls checkIfImageIsTooDark(BitmapRegionDecoder)
+     *
+     * @param uri Uri of the file being checked
+     * @return Result.IMAGE_OK if image is neither dark nor blurry
+     * @throws IOException
+     */
+    public static Result checkIfImageIsTooDark(Uri uri) throws IOException {
+        BitmapRegionDecoder decoder = BitmapRegionDecoder.newInstance(uri.getPath(), false);
+        return checkIfImageIsTooDark(decoder);
     }
 
     /**
@@ -50,7 +64,7 @@ public class ImageUtils {
      *
      * @param bitmapRegionDecoder BitmapRegionDecoder for the image we wish to process
      * @return Result.IMAGE_OK if image is neither dark nor blurry or if the input bitmapRegionDecoder provided is null
-     *         Result.IMAGE_DARK if image is too dark
+     * Result.IMAGE_DARK if image is too dark
      */
     public static Result checkIfImageIsTooDark(BitmapRegionDecoder bitmapRegionDecoder) {
         if (bitmapRegionDecoder == null) {
@@ -73,10 +87,10 @@ public class ImageUtils {
             while ((checkImageBottomPosition <= loadImageHeight) && (checkImageTopPosition < checkImageBottomPosition)) {
                 Timber.v("left: " + checkImageLeftPosition + " right: " + checkImageRightPosition + " top: " + checkImageTopPosition + " bottom: " + checkImageBottomPosition);
 
-                Rect rect = new Rect(checkImageLeftPosition,checkImageTopPosition,checkImageRightPosition,checkImageBottomPosition);
+                Rect rect = new Rect(checkImageLeftPosition, checkImageTopPosition, checkImageRightPosition, checkImageBottomPosition);
                 totalDividedRectangles++;
 
-                Bitmap processBitmap = bitmapRegionDecoder.decodeRegion(rect,null);
+                Bitmap processBitmap = bitmapRegionDecoder.decodeRegion(rect, null);
 
                 if (checkIfImageIsDark(processBitmap)) {
                     numberOfDarkRectangles++;
@@ -107,7 +121,7 @@ public class ImageUtils {
      * and then applying the formula to calculate its "Luminance". If this brightness value is less than
      * 50 then the pixel is considered to be dark. Based on the MINIMUM_DARKNESS_FACTOR if enough pixels
      * are dark then the entire bitmap is considered to be dark.
-     *
+     * <p>
      * <p>For more information on this brightness/darkness calculation technique refer the accepted answer
      * on this -> https://stackoverflow.com/questions/35914461/how-to-detect-dark-photos-in-android/35914745
      * SO question and follow the trail.
@@ -127,7 +141,7 @@ public class ImageUtils {
         int allPixelsCount = bitmapWidth * bitmapHeight;
         int[] bitmapPixels = new int[allPixelsCount];
 
-        bitmap.getPixels(bitmapPixels,0,bitmapWidth,0,0,bitmapWidth,bitmapHeight);
+        bitmap.getPixels(bitmapPixels, 0, bitmapWidth, 0, 0, bitmapWidth, bitmapHeight);
         boolean isImageDark = false;
         int darkPixelsCount = 0;
 
@@ -153,6 +167,7 @@ public class ImageUtils {
     /**
      * Downloads the image from the URL and sets it as the phone's wallpaper
      * Fails silently if download or setting wallpaper fails.
+     *
      * @param context
      * @param imageUrl
      */
@@ -171,7 +186,7 @@ public class ImageUtils {
 
             @Override
             public void onNewResultImpl(@Nullable Bitmap bitmap) {
-                if (dataSource.isFinished() && bitmap != null){
+                if (dataSource.isFinished() && bitmap != null) {
                     Timber.d("Bitmap loaded from url %s", imageUrl.toString());
                     setWallpaper(context, Bitmap.createBitmap(bitmap));
                     dataSource.close();
@@ -194,7 +209,7 @@ public class ImageUtils {
             wallpaperManager.setBitmap(bitmap);
             ViewUtil.showLongToast(context, context.getString(R.string.wallpaper_set_successfully));
         } catch (IOException e) {
-            Timber.e(e,"Error setting wallpaper");
+            Timber.e(e, "Error setting wallpaper");
         }
     }
 }

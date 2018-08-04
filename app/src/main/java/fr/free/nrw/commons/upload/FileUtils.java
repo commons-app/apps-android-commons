@@ -33,6 +33,8 @@ import java.util.Date;
 
 import timber.log.Timber;
 
+import static com.mapbox.mapboxsdk.Mapbox.getApplicationContext;
+
 public class FileUtils {
 
     /**
@@ -76,21 +78,30 @@ public class FileUtils {
 
     /**
      * In older devices getPath() may fail depending on the source URI. Creating and using a copy of the file seems to work instead.
+     *
      * @return path of copy
      */
-    @Nullable
-    static String createCopyPath(ParcelFileDescriptor descriptor) {
-        try {
-            String copyPath = Environment.getExternalStorageDirectory().toString() + "/CommonsApp/" + new Date().getTime() + ".jpg";
-            File newFile = new File(Environment.getExternalStorageDirectory().toString() + "/CommonsApp");
-            newFile.mkdir();
-            FileUtils.copy(descriptor.getFileDescriptor(), copyPath);
-            Timber.d("Filepath (copied): %s", copyPath);
-            return copyPath;
-        } catch (IOException e) {
-            Timber.e(e);
-            return null;
-        }
+    @NonNull
+    static String createExternalCopyPathAndCopy(ParcelFileDescriptor descriptor) throws IOException {
+        String copyPath = Environment.getExternalStorageDirectory().toString() + "/CommonsApp/" + new Date().getTime() + ".jpg";
+        File newFile = new File(Environment.getExternalStorageDirectory().toString() + "/CommonsApp");
+        newFile.mkdir();
+        FileUtils.copy(descriptor.getFileDescriptor(), copyPath);
+        Timber.d("Filepath (copied): %s", copyPath);
+        return copyPath;
+    }
+
+    /**
+     * In older devices getPath() may fail depending on the source URI. Creating and using a copy of the file seems to work instead.
+     *
+     * @return path of copy
+     */
+    @NonNull
+    static String createCopyPathAndCopy(ParcelFileDescriptor descriptor) throws IOException {
+        String copyPath = getApplicationContext().getCacheDir().getAbsolutePath() + "/" + new Date().getTime() + ".jpg";
+        FileUtils.copy(descriptor.getFileDescriptor(), copyPath);
+        Timber.d("Filepath (copied): %s", copyPath);
+        return copyPath;
     }
 
     /**
@@ -121,13 +132,13 @@ public class FileUtils {
                 if ("primary".equalsIgnoreCase(type)) {
                     returnPath = Environment.getExternalStorageDirectory() + "/" + split[1];
                 }
-            } else if (isDownloadsDocument(uri))  { // DownloadsProvider
+            } else if (isDownloadsDocument(uri)) { // DownloadsProvider
 
                 final String id = DocumentsContract.getDocumentId(uri);
                 final Uri contentUri = ContentUris.withAppendedId(
                         Uri.parse("content://downloads/document"), Long.valueOf(id));
 
-                returnPath =  getDataColumn(context, contentUri, null, null);
+                returnPath = getDataColumn(context, contentUri, null, null);
             } else if (isMediaDocument(uri)) { // MediaProvider
 
                 final String docId = DocumentsContract.getDocumentId(uri);
@@ -166,7 +177,7 @@ public class FileUtils {
             returnPath = uri.getPath();
         }
 
-        if(returnPath == null) {
+        if (returnPath == null) {
             //fetching path may fail depending on the source URI and all hope is lost
             //so we will create and use a copy of the file, which seems to work
             String copyPath = null;
@@ -304,6 +315,7 @@ public class FileUtils {
 
     /**
      * Read and return the content of a resource file as string.
+     *
      * @param fileName asset file's path (e.g. "/queries/nearby_query.rq")
      * @return the content of the file
      */
@@ -330,6 +342,7 @@ public class FileUtils {
 
     /**
      * Deletes files.
+     *
      * @param file context
      */
     public static boolean deleteFile(File file) {
@@ -355,7 +368,7 @@ public class FileUtils {
                 commonsAppDirectory.mkdir();
             }
 
-            File logsFile = new File(commonsAppDirectory,"logs.txt");
+            File logsFile = new File(commonsAppDirectory, "logs.txt");
             if (logsFile.exists()) {
                 //old logs file is useless
                 logsFile.delete();
