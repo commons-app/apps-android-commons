@@ -8,6 +8,7 @@ import android.graphics.Color;
 import android.graphics.Rect;
 import android.net.Uri;
 import android.support.annotation.Nullable;
+import android.util.Log;
 
 import com.facebook.common.executors.CallerThreadExecutor;
 import com.facebook.common.references.CloseableReference;
@@ -29,8 +30,7 @@ import timber.log.Timber;
  */
 
 public class ImageUtils {
-    //atleast 50% of the image in question should be considered dark for the entire image to be dark
-    private static final double MINIMUM_DARKNESS_FACTOR = 0.50;
+
     //atleast 50% of the image in question should be considered blurry for the entire image to be blurry
     private static final double MINIMUM_BLURRYNESS_FACTOR = 0.50;
     private static final int LAPLACIAN_VARIANCE_THRESHOLD = 70;
@@ -41,13 +41,6 @@ public class ImageUtils {
     }
 
     /**
-     * BitmapRegionDecoder allows us to process a large bitmap by breaking it down into smaller rectangles. The rectangles
-     * are obtained by setting an initial width, height and start position of the rectangle as a factor of the width and
-     * height of the original bitmap and then manipulating the width, height and position to loop over the entire original
-     * bitmap. Each individual rectangle is independently processed to check if its too dark. Based on
-     * the factor of "bright enough" individual rectangles amongst the total rectangles into which the image
-     * was divided, we will declare the image as wanted/unwanted
-     *
      * @param bitmapRegionDecoder BitmapRegionDecoder for the image we wish to process
      * @return Result.IMAGE_OK if image is neither dark nor blurry or if the input bitmapRegionDecoder provided is null
      *         Result.IMAGE_DARK if image is too dark
@@ -62,39 +55,17 @@ public class ImageUtils {
         int loadImageWidth = bitmapRegionDecoder.getWidth();
 
         int checkImageTopPosition = 0;
-        int checkImageBottomPosition = loadImageHeight / 10;
+        int checkImageBottomPosition = loadImageHeight;
         int checkImageLeftPosition = 0;
-        int checkImageRightPosition = loadImageWidth / 10;
+        int checkImageRightPosition = loadImageWidth;
 
-        int totalDividedRectangles = 0;
-        int numberOfDarkRectangles = 0;
+        Timber.v("left: " + checkImageLeftPosition + " right: " + checkImageRightPosition + " top: " + checkImageTopPosition + " bottom: " + checkImageBottomPosition);
 
-        while ((checkImageRightPosition <= loadImageWidth) && (checkImageLeftPosition < checkImageRightPosition)) {
-            while ((checkImageBottomPosition <= loadImageHeight) && (checkImageTopPosition < checkImageBottomPosition)) {
-                Timber.v("left: " + checkImageLeftPosition + " right: " + checkImageRightPosition + " top: " + checkImageTopPosition + " bottom: " + checkImageBottomPosition);
+        Rect rect = new Rect(checkImageLeftPosition,checkImageTopPosition,checkImageRightPosition,checkImageBottomPosition);
 
-                Rect rect = new Rect(checkImageLeftPosition,checkImageTopPosition,checkImageRightPosition,checkImageBottomPosition);
-                totalDividedRectangles++;
+        Bitmap processBitmap = bitmapRegionDecoder.decodeRegion(rect,null);
 
-                Bitmap processBitmap = bitmapRegionDecoder.decodeRegion(rect,null);
-
-                if (checkIfImageIsDark(processBitmap)) {
-                    numberOfDarkRectangles++;
-                }
-
-                checkImageTopPosition = checkImageBottomPosition;
-                checkImageBottomPosition += (checkImageBottomPosition < (loadImageHeight - checkImageBottomPosition)) ? checkImageBottomPosition : (loadImageHeight - checkImageBottomPosition);
-            }
-
-            checkImageTopPosition = 0; //reset to start
-            checkImageBottomPosition = loadImageHeight / 10; //reset to start
-            checkImageLeftPosition = checkImageRightPosition;
-            checkImageRightPosition += (checkImageRightPosition < (loadImageWidth - checkImageRightPosition)) ? checkImageRightPosition : (loadImageWidth - checkImageRightPosition);
-        }
-
-        Timber.d("dark rectangles count = " + numberOfDarkRectangles + ", total rectangles count = " + totalDividedRectangles);
-
-        if (numberOfDarkRectangles > totalDividedRectangles * MINIMUM_DARKNESS_FACTOR) {
+        if (checkIfImageIsDark(processBitmap)) {
             return Result.IMAGE_DARK;
         }
 
@@ -104,14 +75,12 @@ public class ImageUtils {
     /**
      * Pulls the pixels into an array and then runs through it while checking the brightness of each pixel.
      * The calculation of brightness of each pixel is done by extracting the RGB constituents of the pixel
-     * and then applying the formula to calculate its "Luminance". If this brightness value is less than
-     * 50 then the pixel is considered to be dark. Based on the MINIMUM_DARKNESS_FACTOR if enough pixels
-     * are dark then the entire bitmap is considered to be dark.
-     *
-     * <p>For more information on this brightness/darkness calculation technique refer the accepted answer
-     * on this -> https://stackoverflow.com/questions/35914461/how-to-detect-dark-photos-in-android/35914745
-     * SO question and follow the trail.
-     *
+     * and then applying the formula to calculate its "Luminance".
+     * Pixels with luminance greater than 40% are considered to be bright pixels while the ones with luminance
+     * greater than 26% but less than 40% are considered to be pixels with medium brightness. The rest are
+     * dark pixels.
+     * If the number of bright pixels is more than 2.5% or the number of pixels with medium brightness is
+     * more than 30% of the total number of pixels then the image is considered to be OK else dark.
      * @param bitmap The bitmap that needs to be checked.
      * @return true if bitmap is dark or null, false if bitmap is bright
      */
@@ -126,28 +95,45 @@ public class ImageUtils {
 
         int allPixelsCount = bitmapWidth * bitmapHeight;
         int[] bitmapPixels = new int[allPixelsCount];
+        Log.e("total", Integer.toString(allPixelsCount));
 
         bitmap.getPixels(bitmapPixels,0,bitmapWidth,0,0,bitmapWidth,bitmapHeight);
-        boolean isImageDark = false;
-        int darkPixelsCount = 0;
+        int numberOfBrightPixels = 0;
+        int numberOfMediumBrightnessPixels = 0;
+        double brightPixelThreshold = 0.025*allPixelsCount;
+        double mediumBrightPixelThreshold = 0.3*allPixelsCount;
 
         for (int pixel : bitmapPixels) {
             int r = Color.red(pixel);
             int g = Color.green(pixel);
             int b = Color.blue(pixel);
 
-            int brightness = (int) (0.2126 * r + 0.7152 * g + 0.0722 * b);
-            if (brightness < 50) {
-                //pixel is dark
-                darkPixelsCount++;
-                if (darkPixelsCount > allPixelsCount * MINIMUM_DARKNESS_FACTOR) {
-                    isImageDark = true;
-                    break;
+            int secondMax = r>g ? r:g;
+            double max = (secondMax>b ? secondMax:b)/255.0;
+
+            int secondMin = r<g ? r:g;
+            double min = (secondMin<b ? secondMin:b)/255.0;
+
+            double luminance = ((max+min)/2.0)*100;
+
+            int highBrightnessLuminance = 40;
+            int mediumBrightnessLuminance = 26;
+
+            if (luminance<highBrightnessLuminance){
+                if (luminance>mediumBrightnessLuminance){
+                    numberOfMediumBrightnessPixels++;
                 }
             }
-        }
+            else {
+                numberOfBrightPixels++;
+            }
 
-        return isImageDark;
+            if (numberOfBrightPixels>=brightPixelThreshold || numberOfMediumBrightnessPixels>=mediumBrightPixelThreshold){
+                return false;
+            }
+
+        }
+        return true;
     }
 
     /**
