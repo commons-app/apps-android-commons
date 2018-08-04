@@ -360,8 +360,7 @@ public class ShareActivity
                 source = Contribution.SOURCE_EXTERNAL;
             }
 
-            Bundle extras = intent.getExtras();
-            boolean isDirectUpload = extras.getBoolean("isDirectUpload");
+            boolean isDirectUpload = intent.getBooleanExtra("isDirectUpload", false);
 
             if (isDirectUpload) {
                 Timber.d("This was initiated by a direct upload from Nearby");
