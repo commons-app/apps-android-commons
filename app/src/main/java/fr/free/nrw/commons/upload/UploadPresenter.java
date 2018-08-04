@@ -1,6 +1,8 @@
 package fr.free.nrw.commons.upload;
 
 import android.annotation.SuppressLint;
+import android.app.Dialog;
+import android.content.DialogInterface;
 import android.net.Uri;
 import android.os.Bundle;
 
@@ -11,15 +13,18 @@ import java.util.concurrent.Callable;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
+import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.category.CategoriesModel;
 import fr.free.nrw.commons.contributions.Contribution;
 import fr.free.nrw.commons.modifications.CategoryModifier;
 import fr.free.nrw.commons.modifications.ModifierSequence;
 import fr.free.nrw.commons.modifications.TemplateRemoveModifier;
+import fr.free.nrw.commons.utils.ImageUtils;
 import io.reactivex.Completable;
 import io.reactivex.Single;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
+import timber.log.Timber;
 
 @Singleton
 public class UploadPresenter {
@@ -29,6 +34,7 @@ public class UploadPresenter {
     private final UploadModel uploadModel;
     private final UploadController uploadController;
     private UploadView view;// = UploadView.DUMMY;
+
 
 
     @Inject
@@ -53,6 +59,7 @@ public class UploadPresenter {
                     updateCards(view);
                     updateLicenses(view);
                     updateContent();
+                    if(uploadModel.isShowingItem()) uploadModel.subscribeBadPicture(this::handleBadPicture);
                 });
 
     }
@@ -76,12 +83,14 @@ public class UploadPresenter {
     public void handleNext() {
         uploadModel.next();
         updateContent();
+        if(uploadModel.isShowingItem()) uploadModel.subscribeBadPicture(this::handleBadPicture);
         view.dismissKeyboard();
     }
 
     public void handlePrevious() {
         uploadModel.previous();
         updateContent();
+        if(uploadModel.isShowingItem()) uploadModel.subscribeBadPicture(this::handleBadPicture);
         view.dismissKeyboard();
     }
 
@@ -98,6 +107,26 @@ public class UploadPresenter {
         });
     }
 
+    public void handleBadPicture(ImageUtils.Result result){
+        view.showBadPicturePopup(result);
+    }
+
+    public void keepPicture(){
+        uploadModel.keepPicture();
+    }
+
+    public void deletePicture(){
+        if(uploadModel.getCount()==1)
+            view.finish();
+        else {
+            uploadModel.deletePicture();
+            updateCards(view);
+            updateContent();
+            if (uploadModel.isShowingItem())
+                uploadModel.subscribeBadPicture(this::handleBadPicture);
+            view.dismissKeyboard();
+        }
+    }
     //endregion
 
     //region Top and Bottom card state management
@@ -159,6 +188,7 @@ public class UploadPresenter {
     }
 
     void updateContent() {
+        Timber.i("Updating content for page"+uploadModel.getCurrentStep());
         view.setNextEnabled(uploadModel.isNextAvailable());
         view.setPreviousEnabled(uploadModel.isPreviousAvailable());
         view.setSubmitEnabled(uploadModel.isSubmitAvailable());

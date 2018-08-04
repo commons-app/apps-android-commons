@@ -6,9 +6,13 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.ParcelFileDescriptor;
+import android.text.TextUtils;
+
+import org.reactivestreams.Subscription;
 
 import java.io.File;
 import java.io.IOException;
+import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
@@ -24,8 +28,11 @@ import fr.free.nrw.commons.contributions.Contribution;
 import fr.free.nrw.commons.settings.Prefs;
 import fr.free.nrw.commons.utils.ImageUtils;
 import io.reactivex.Observable;
+import io.reactivex.Observer;
 import io.reactivex.Scheduler;
 import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 import io.reactivex.subjects.BehaviorSubject;
 import timber.log.Timber;
@@ -45,6 +52,7 @@ public class UploadModel {
     private Context context;
     private ContentResolver contentResolver;
     private boolean useExtStorage;
+    private Disposable badImageSubscription;
 
 
     @Inject
@@ -77,10 +85,7 @@ public class UploadModel {
         items.get(0).selected = true;
         items.get(0).first = true;
 
-//        Observable.fromIterable(items
-//        ).observeOn(Schedulers.io()
-//        ).subscribe(item -> item.imageQuality.onNext(ImageUtils.checkIfImageIsTooDark(item.mediaUri)));
-    }
+            }
 
     public boolean isPreviousAvailable() {
         return currentStepIndex > 0;
@@ -133,6 +138,8 @@ public class UploadModel {
     }
 
     public void next() {
+        if(badImageSubscription!=null)
+            badImageSubscription.dispose();
         markCurrentUploadVisited();
         if (currentStepIndex < items.size() + 1) {
             currentStepIndex++;
@@ -141,6 +148,8 @@ public class UploadModel {
     }
 
     public void previous() {
+        if(badImageSubscription!=null)
+            badImageSubscription.dispose();
         markCurrentUploadVisited();
         if (currentStepIndex > 0) {
             currentStepIndex--;
@@ -216,6 +225,21 @@ public class UploadModel {
         return null;
     }
 
+    public void keepPicture(){
+        items.get(currentStepIndex).imageQuality.onNext(ImageUtils.Result.IMAGE_KEEP);
+    }
+
+    public void deletePicture(){
+        badImageSubscription.dispose();
+        items.remove(currentStepIndex).imageQuality.onComplete();
+        updateItemState();
+    }
+
+    public void subscribeBadPicture(Consumer<ImageUtils.Result> consumer) {
+        badImageSubscription=getCurrentItem().imageQuality.subscribe(consumer);
+    }
+
+
     @SuppressWarnings("WeakerAccess")
     static class UploadItem {
         public final Uri mediaUri;
@@ -225,7 +249,7 @@ public class UploadModel {
 
         public boolean selected = false;
         public boolean first = false;
-//        public BehaviorSubject<ImageUtils.Result> imageQuality;
+        public BehaviorSubject<ImageUtils.Result> imageQuality;
         public String title;
         public String description;
         public boolean visited;
@@ -237,8 +261,11 @@ public class UploadModel {
             this.mimeType = mimeType;
             this.source = source;
             this.gpsCoords = gpsCoords;
-//            imageQuality=BehaviorSubject.createDefault(ImageUtils.Result.IMAGE_WAIT);
-//            imageQuality.subscribe(iq->Timber.i("New value of imageQuality:"+ImageUtils.Result.IMAGE_OK));
+            if(mediaUri!=null && !mediaUri.equals(Uri.EMPTY)) {
+                imageQuality = BehaviorSubject.createDefault(ImageUtils.Result.IMAGE_WAIT);
+//                imageQuality.subscribe(iq->Timber.i("New value of imageQuality:"+ImageUtils.Result.IMAGE_OK));
+                new DetectBadPicturesAsync(new WeakReference<>(imageQuality), mediaUri.getPath()).execute();
+            }
         }
     }
 }
