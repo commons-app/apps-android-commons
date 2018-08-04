@@ -221,7 +221,6 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
     @Override
     public String getEditToken() throws IOException {
         String editToken = api.action("query")
-                .param("action", "query")
                 .param("centralauthtoken", getCentralAuthToken())
                 .param("meta", "tokens")
                 .post()
