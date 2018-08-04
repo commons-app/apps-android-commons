@@ -9,6 +9,8 @@
 * SuperPotato
 -->
 <resources>
+  <string name="title_activity_explore">Utforsk</string>
+  <string name="navigation_item_explore">Utforsk</string>
   <string name="preference_category_appearance">Utseende</string>
   <string name="preference_category_general">Generelt</string>
   <string name="preference_category_feedback">Tilbakemelding</string>
@@ -16,6 +18,7 @@
   <string name="app_name">Commons</string>
   <string name="bullet">•</string>
   <string name="menu_settings">Innstillinger</string>
+  <string name="intent_share_upload_label">Last opp til Commons</string>
   <string name="username">Brukernavn</string>
   <string name="password">Passord</string>
   <string name="login_credential">Logg inn på Commons Beta-kontoen din</string>
@@ -90,6 +93,7 @@
   <string name="title_activity_settings">Innstillinger</string>
   <string name="title_activity_signup">Registrer deg</string>
   <string name="title_activity_featured_images">Utvalgte bilder</string>
+  <string name="title_activity_category_details">Kategori</string>
   <string name="menu_about">Om</string>
   <string name="about_license">Wikimedia Commons-appen er åpen kildekode og er skapt og vedlikeholdt av stipendiater og frivillige fra Wikimedia-fellesskapet. Wikimedia Foundation er ikke involvert i utviklingen eller vedlikeholdet av appen.</string>
   <string name="about_improve">Opprett en ny &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;GitHub-sak&lt;/a&gt; for feilrapporter og forslag.</string>
@@ -197,6 +201,8 @@
   <string name="background_image">Bakgrunnsbilde</string>
   <string name="mediaimage_failed">Mediebilde feilet</string>
   <string name="no_image_found">Intet bilde funnet</string>
+  <string name="no_subcategory_found">Ingen underkategorier funnet</string>
+  <string name="no_parentcategory_found">Ingen overordnede kategorier funnet</string>
   <string name="upload_image">Last opp bilde</string>
   <string name="welcome_image_mount_zao">Zao</string>
   <string name="welcome_image_llamas">Lamaer</string>
@@ -275,14 +281,39 @@
   <string name="no_images_found">Ingen bilder funnet!</string>
   <string name="error_loading_images">Feil oppsto under lasting av bilder.</string>
   <string name="image_uploaded_by">Lastet opp av: %1$s</string>
+  <string name="block_notification">Du er blokkert fra å redigere Commons</string>
   <string name="share_app_title">Del appen</string>
   <string name="share_coordinates_not_present">Koordinater ble ikke spesifisert under bildevalget</string>
   <string name="error_fetching_nearby_places">Feil under henting av steder i nærheten.</string>
   <string name="appwidget_img">Dagens bilde</string>
   <string name="app_widget_heading">Dagens bilde</string>
+  <string name="menu_search_button">Søk</string>
+  <string name="search_commons">Søk på Commons</string>
+  <string name="images_not_found">Ingen bilder som matcher %1$s funnet</string>
+  <string name="title_activity_search">Søk</string>
+  <string name="search_recent_header">Nylige søk:</string>
+  <string name="provider_searches">Nylige søkeord</string>
+  <string name="error_loading_categories">Feil oppsto under lasting av kategorier.</string>
+  <string name="error_loading_subcategories">Feil oppsto under lasting av underkategorier.</string>
   <string name="successful_wikidata_edit">Bildet ble lagt til på %1$s på Wikidata!</string>
   <string name="wikidata_edit_failure">Kunne ikke oppdatere tilsvarende Wikidata-element!</string>
   <string name="menu_set_wallpaper">Angi som bakgrunnsbilde</string>
   <string name="wallpaper_set_successfully">Bakgrunnsbildet ble endret!</string>
   <string name="user_not_logged_in">Innloggingsøkten har utløpt, logg inn på nytt.</string>
+  <string name="delete_recent_searches_dialog">Er du sikker på at du vil tømme søkehistorikken din?</string>
+  <string name="search_history_deleted">Søkehistorikk slettet</string>
+  <string name="Achievements">Prestasjoner</string>
+  <string name="statistics">STATISTIKK</string>
+  <string name="statistics_thanks">Takk mottatt</string>
+  <string name="statistics_featured">Utvalgte bilder</string>
+  <string name="level">NIVÅ</string>
+  <string name="images_uploaded">Opplastede bilder</string>
+  <string name="image_reverts">Bilder som ikke har blitt tilbakestilt</string>
+  <string name="images_used_by_wiki">Bilder brukt</string>
+  <string name="achievements_share_message">Del prestasjonene dine med vennene dine!</string>
+  <string name="achievements_info_message">Nivået ditt øker når du møter disse kravene. Elementene i «statistikk»-seksjonen teller ikke mot nivået ditt.</string>
+  <string name="achievements_revert_limit_message">minimumskrav:</string>
+  <string name="images_uploaded_explanation">Antallet bilder du har lastet opp på Commons via enhver opplastingsmåte</string>
+  <string name="images_reverted_explanation">Prosentandelen av bildene du har lastet opp til Commons som ikke har blitt slettet</string>
+  <string name="images_used_explanation">Antall bilder du har lastet opp på Commons som er brukt i Wikimedia-artikler</string>
 </resources>

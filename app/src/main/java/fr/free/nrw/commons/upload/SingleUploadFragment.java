@@ -10,6 +10,8 @@ import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.v4.view.ViewCompat;
 import android.support.v7.app.AlertDialog;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.Html;
 import android.text.TextWatcher;
@@ -30,9 +32,16 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+import fr.free.nrw.commons.upload.DescriptionsAdapter.Callback;
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Locale;
 
+import java.util.Arrays;
+import java.util.List;
+import java.util.Locale;
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -53,7 +62,7 @@ import static android.view.MotionEvent.ACTION_UP;
 public class SingleUploadFragment extends CommonsDaggerSupportFragment {
 
     @BindView(R.id.titleEdit) EditText titleEdit;
-    @BindView(R.id.descEdit) EditText descEdit;
+    @BindView(R.id.rv_descriptions) RecyclerView rvDescriptions;
     @BindView(R.id.titleDescButton) Button titleDescButton;
     @BindView(R.id.share_license_summary) TextView licenseSummaryView;
     @BindView(R.id.licenseSpinner) Spinner licenseSpinner;
@@ -65,6 +74,7 @@ public class SingleUploadFragment extends CommonsDaggerSupportFragment {
     private String license;
     private OnUploadActionInitiated uploadActionInitiatedHandler;
     private TitleTextWatcher textWatcher = new TitleTextWatcher();
+    private DescriptionsAdapter descriptionsAdapter;
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
@@ -82,19 +92,38 @@ public class SingleUploadFragment extends CommonsDaggerSupportFragment {
                     return false;
                 }
 
-                String title = titleEdit.getText().toString().trim();
-                String desc = descEdit.getText().toString().trim();
+                String title = titleEdit.getText().toString();
+                String descriptionsInVariousLanguages = getDescriptionsInAppropriateFormat();
 
                 //Save the title/desc in short-lived cache so next time this fragment is loaded, we can access these
                 prefs.edit()
                         .putString("Title", title)
-                        .putString("Desc", desc)
+                        .putString("Desc", new Gson().toJson(descriptionsAdapter
+                                .getDescriptions()))//Description, now is not just a string, its a list of description objects
                         .apply();
 
-                uploadActionInitiatedHandler.uploadActionInitiated(title, desc);
+                uploadActionInitiatedHandler
+                        .uploadActionInitiated(title, descriptionsInVariousLanguages);
                 return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    private String getDescriptionsInAppropriateFormat() {
+        List<Description> descriptions = descriptionsAdapter.getDescriptions();
+        StringBuilder descriptionsInAppropriateFormat = new StringBuilder();
+        for (Description description : descriptions) {
+            String individualDescription = String.format("{{%s|1=%s}}", description.getLanguageId(),
+                    description.getDescriptionText());
+            descriptionsInAppropriateFormat.append(individualDescription);
+        }
+        return descriptionsInAppropriateFormat.toString();
+
+    }
+
+    private List<Description> getDescriptions() {
+        List<Description> descriptions = descriptionsAdapter.getDescriptions();
+        return descriptions;
     }
 
     @Override
@@ -103,13 +132,19 @@ public class SingleUploadFragment extends CommonsDaggerSupportFragment {
         View rootView = inflater.inflate(R.layout.fragment_single_upload, container, false);
         ButterKnife.bind(this, rootView);
 
+        initRecyclerView();
+
         Intent activityIntent = getActivity().getIntent();
         if (activityIntent.hasExtra("title")) {
             titleEdit.setText(activityIntent.getStringExtra("title"));
         }
-        if (activityIntent.hasExtra("description")) {
-            descEdit.setText(activityIntent.getStringExtra("description"));
+        if (activityIntent.hasExtra("description") && descriptionsAdapter.getDescriptions() != null
+                && descriptionsAdapter.getDescriptions().size() > 0) {
+            descriptionsAdapter.getDescriptions().get(0)
+                    .setDescriptionText(activityIntent.getStringExtra("description"));
+            descriptionsAdapter.notifyItemChanged(0);
         }
+
 
         ArrayList<String> licenseItems = new ArrayList<>();
         licenseItems.add(getString(R.string.license_name_cc0));
@@ -129,7 +164,11 @@ public class SingleUploadFragment extends CommonsDaggerSupportFragment {
             String imageCats = directPrefs.getString("Category", "");
             Timber.d("Image title: " + imageTitle + ", image desc: " + imageDesc + ", image categories: " + imageCats);
             titleEdit.setText(imageTitle);
-            descEdit.setText(imageDesc);
+            if (descriptionsAdapter.getDescriptions() != null
+                    && descriptionsAdapter.getDescriptions().size() > 0) {
+                descriptionsAdapter.getDescriptions().get(0).setDescriptionText(imageDesc);
+                descriptionsAdapter.notifyItemChanged(0);
+            }
         }
 
         // check if this is the first time we have uploaded
@@ -170,15 +209,27 @@ public class SingleUploadFragment extends CommonsDaggerSupportFragment {
             }
         });
 
-        descEdit.setOnFocusChangeListener((v, hasFocus) -> {
-            if(!hasFocus){
-                ViewUtil.hideKeyboard(v);
-            }
-        });
-
         setLicenseSummary(license);
 
         return rootView;
+    }
+
+    private void initRecyclerView() {
+        descriptionsAdapter = new DescriptionsAdapter();
+        descriptionsAdapter.setCallback((mediaDetailDescription, descriptionInfo) -> showInfoAlert(mediaDetailDescription,descriptionInfo));
+        descriptionsAdapter.setLanguages(getLocaleSupportedByDevice());
+        rvDescriptions.setLayoutManager(new LinearLayoutManager(getContext()));
+        rvDescriptions.setAdapter(descriptionsAdapter);
+    }
+
+    private List<Language> getLocaleSupportedByDevice() {
+        List<Language> languages = new ArrayList<>();
+        Locale[] localesArray = Locale.getAvailableLocales();
+        List<Locale> locales = Arrays.asList(localesArray);
+        for (Locale locale : locales) {
+            languages.add(new Language(locale));
+        }
+        return languages;
     }
 
     @Override
@@ -224,11 +275,16 @@ public class SingleUploadFragment extends CommonsDaggerSupportFragment {
     void setTitleDescButton() {
         //Retrieve last title and desc entered
         String title = prefs.getString("Title", "");
-        String desc = prefs.getString("Desc", "");
-        Timber.d("Title: %s, Desc: %s", title, desc);
+        String descriptionJson = prefs.getString("Desc", "");
+        Timber.d("Title: %s, Desc: %s", title, descriptionJson);
 
         titleEdit.setText(title);
-        descEdit.setText(desc);
+        Type typeOfDest = new TypeToken<List<Description>>() {
+        }.getType();
+
+        List<Description> descriptions = new Gson().fromJson(descriptionJson, typeOfDest);
+        descriptionsAdapter.setDescriptions(descriptions);
+
     }
 
     /**
@@ -248,26 +304,6 @@ public class SingleUploadFragment extends CommonsDaggerSupportFragment {
             value = titleEdit.getLeft() + titleEdit.getCompoundDrawables()[0].getBounds().width();
             if (motionEvent.getAction() == ACTION_UP && motionEvent.getRawX() <= value) {
                 showInfoAlert(R.string.media_detail_title, R.string.title_info);
-                return true;
-            }
-        }
-        return false;
-    }
-
-    @OnTouch(R.id.descEdit)
-    boolean descriptionInfo(View view, MotionEvent motionEvent) {
-        final int value;
-        if (ViewCompat.getLayoutDirection(getView()) == ViewCompat.LAYOUT_DIRECTION_LTR) {
-            value = descEdit.getRight() - descEdit.getCompoundDrawables()[2].getBounds().width();
-            if (motionEvent.getAction() == ACTION_UP && motionEvent.getRawX() >= value) {
-                showInfoAlert(R.string.media_detail_description,R.string.description_info);
-                return true;
-            }
-        }
-        else{
-            value = descEdit.getLeft() + descEdit.getCompoundDrawables()[0].getBounds().width();
-            if (motionEvent.getAction() == ACTION_UP && motionEvent.getRawX() <= value) {
-                showInfoAlert(R.string.media_detail_description,R.string.description_info);
                 return true;
             }
         }
@@ -315,10 +351,12 @@ public class SingleUploadFragment extends CommonsDaggerSupportFragment {
     }
 
     public interface OnUploadActionInitiated {
+
         void uploadActionInitiated(String title, String description);
     }
 
     private class TitleTextWatcher implements TextWatcher {
+
         @Override
         public void beforeTextChanged(CharSequence charSequence, int i, int i2, int i3) {
         }
@@ -346,16 +384,9 @@ public class SingleUploadFragment extends CommonsDaggerSupportFragment {
                 .show();
     }
 
-    /**
-     * To launch the Commons:Licensing
-     * @param view
-     */
-    @OnClick(R.id.licenseInfo)
-    public void launchLicenseInfo(View view){
-        Log.i("Language", Locale.getDefault().getLanguage());
-        UrlLicense urlLicense = new UrlLicense();
-        urlLicense.initialize();
-        String url = urlLicense.getLicenseUrl(Locale.getDefault().getLanguage());
-        Utils.handleWebUrl(getActivity() , Uri.parse(url));
+    @OnClick(R.id.ll_add_description)
+    public void onLLAddDescriptionClicked() {
+        descriptionsAdapter.addDescription(new Description());
+        rvDescriptions.scrollToPosition(descriptionsAdapter.getItemCount() - 1);
     }
 }

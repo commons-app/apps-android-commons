@@ -9,6 +9,8 @@
 * WikiPhoenix
 -->
 <resources>
+  <string name="title_activity_explore">Utforska</string>
+  <string name="navigation_item_explore">Utforska</string>
   <string name="preference_category_appearance">Utseende</string>
   <string name="preference_category_general">Allmänt</string>
   <string name="preference_category_feedback">Återkoppling</string>
@@ -16,6 +18,7 @@
   <string name="app_name">Commons</string>
   <string name="bullet">•</string>
   <string name="menu_settings">Inställningar</string>
+  <string name="intent_share_upload_label">Ladda upp till Commons</string>
   <string name="username">Användarnamn</string>
   <string name="password">Lösenord</string>
   <string name="login_credential">Logga in på ditt betakonto för Commons</string>
@@ -62,6 +65,7 @@
   <string name="login_failed_generic">Inloggningen misslyckades</string>
   <string name="share_upload_button">Ladda upp</string>
   <string name="multiple_share_base_title">Namnge denna uppsättning</string>
+  <string name="add_set_name_toast">Ange ett namn för denna uppsättning</string>
   <string name="provider_modifications">Ändringar</string>
   <string name="menu_upload_single">Ladda upp</string>
   <string name="categories_search_text_hint">Sök kategorier</string>
@@ -90,6 +94,7 @@
   <string name="title_activity_settings">Inställningar</string>
   <string name="title_activity_signup">Registrera</string>
   <string name="title_activity_featured_images">Utvalda bilder</string>
+  <string name="title_activity_category_details">Kategori</string>
   <string name="menu_about">Om</string>
   <string name="about_license">Wikimedia Commons-appen är en app med öppen källkod som skapas och underhålls av frivilliga från Wikimedias gemenskap. Wikimedia Foundation är inte involverad i skapandet, utvecklingen eller underhållet av appen.</string>
   <string name="about_improve">Skapa ett nytt &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;ärende på GitHub&lt;/a&gt; för att rapportera buggar och förslag.</string>
@@ -198,6 +203,8 @@
   <string name="background_image">Bakgrundsbild</string>
   <string name="mediaimage_failed">Mediabild misslyckades</string>
   <string name="no_image_found">Ingen bild hittades</string>
+  <string name="no_subcategory_found">Inga underkategorier hittades</string>
+  <string name="no_parentcategory_found">Inga överordnade kategorier hittades</string>
   <string name="upload_image">Ladda upp bild</string>
   <string name="welcome_image_mount_zao">Zao</string>
   <string name="welcome_image_llamas">Lamor</string>
@@ -277,14 +284,58 @@
   <string name="no_images_found">Inga bilder hittades!</string>
   <string name="error_loading_images">Ett fel uppstod vid inläsning av bilder.</string>
   <string name="image_uploaded_by">Uppladdad av: %1$s</string>
+  <string name="block_notification">Du har blockerats från att redigera på Commons</string>
   <string name="share_app_title">Dela app</string>
   <string name="share_coordinates_not_present">Koordinater specificerades inte vid bildvalet</string>
   <string name="error_fetching_nearby_places">Fel uppstod när platser i närheten hämtades.</string>
   <string name="appwidget_img">Dagens bild</string>
   <string name="app_widget_heading">Dagens bild</string>
+  <string name="menu_search_button">Sök</string>
+  <string name="search_commons">Sök på Commons</string>
+  <string name="images_not_found">Inga bilder som matchar %1$s hittades</string>
+  <string name="title_activity_search">Sök</string>
+  <string name="search_recent_header">Senaste sökningar:</string>
+  <string name="provider_searches">Senaste sökfrågor</string>
+  <string name="error_loading_categories">Fel uppstod när kategorier lästes in.</string>
+  <string name="error_loading_subcategories">Fel uppstod när underkategorier lästes in.</string>
   <string name="successful_wikidata_edit">Bilden lades till i %1$s på Wikidata!</string>
   <string name="wikidata_edit_failure">Misslyckades att uppdatera motsvarande Wikidataentitet!</string>
   <string name="menu_set_wallpaper">Ange som bakgrundsbild</string>
   <string name="wallpaper_set_successfully">Bakgrundsbilden ändrades!</string>
+  <string name="quiz">Frågesport</string>
+  <string name="quiz_question_string">Är det okej att ladda upp denna bild?</string>
+  <string name="question">Fråga</string>
+  <string name="result">Resultat</string>
+  <string name="quiz_back_button">Om du fortsätter ladda upp bilder som kommer att raderas kommer ditt konto förmodligen bannlysas. Är du säker på att du vill avsluta frågesporten?</string>
+  <string name="quiz_alert_message">Fler än %1$s av bilderna du har laddat upp har raderats. Om du fortsätter ladda upp bilder som kommer att raderas kommer ditt konto förmodligen bannlysas.\n\nVill du se guiden igen och sedan göra frågesporten för att hjälpa dig förstå vilka bildtyper du bör och inte bör ladda upp?</string>
+  <string name="selfie_answer">Bilder på dig själv (selfies) har inte mycket encyklopediskt värde. Ladda inte upp en bild på dig själv såvida du inte har en Wikipedia-artikel om dig.</string>
+  <string name="taj_mahal_answer">Bilder på monument och utomhuslandskap är okej att ladda upp i de flesta länder. Observera att tillfälliga konstinstallationer är oftast upphovsrättsskyddade och inte okej att ladda upp.</string>
+  <string name="screenshot_answer">Skärmdumpar på webbplatser anses vara deriverade verk och föremål för all upphovsrätt på själva webbplatsen. Dessa kan användas efter tillstånd från författaren. Utan sådant tillstånd anses all konst du skapar baserat på deras verk juridiskt sett vara en olicensierad kopia som ägs av den ursprungliga författaren.</string>
+  <string name="blurry_image_answer">Ett av Commons mål är att samla ihop kvalitetsbilder. Därför bör inte suddiga bilder laddas upp. Försök alltid att ta fina bilder med bra ljus.</string>
+  <string name="construction_event_answer">Bilder som skildrar teknologi eller kultur är mycket välkomna på Commons.</string>
+  <string name="warning_for_image_reverts">VARNING: Fler än %1$s av bilderna du har laddat upp har raderats. Om du fortsätter ladda upp bilder som kommer att raderas kommer ditt konto förmodligen bannlysas.</string>
+  <string name="congratulatory_message_quiz">Du svarade rätt på %1$s av svaren. Gratulerar!</string>
+  <string name="warning_for_no_answer">Välj ett av de två alternativet för att svara på frågan</string>
   <string name="user_not_logged_in">Inloggningssessionen löptes ut, var god logga in igen.</string>
+  <string name="quiz_result_share_message">Dela din frågesport med dina vänner!</string>
+  <string name="continue_message">Fortsätt</string>
+  <string name="correct">Korrekt svar</string>
+  <string name="wrong">Fel svar</string>
+  <string name="quiz_screenshot_question">Är det okej att ladda upp denna skärmdump?</string>
+  <string name="delete_recent_searches_dialog">Är du säker på att du vill rensa din sökhistorik?</string>
+  <string name="search_history_deleted">Sökhistoriken raderades</string>
+  <string name="Achievements">Prestationer</string>
+  <string name="statistics">STATISTIK</string>
+  <string name="statistics_thanks">Mottagna tack</string>
+  <string name="statistics_featured">Utvalda bilder</string>
+  <string name="level">NIVÅ</string>
+  <string name="images_uploaded">Uppladdade bilder</string>
+  <string name="image_reverts">Bilder som inte har återställts</string>
+  <string name="images_used_by_wiki">Bilder som används</string>
+  <string name="achievements_share_message">Dela dina prestationer med dina vänner!</string>
+  <string name="achievements_info_message">Din nivå går upp när du möter dessa krav. Saker i statistikavsnittet räknas inte för din nivå.</string>
+  <string name="achievements_revert_limit_message">minimumkrav:</string>
+  <string name="images_uploaded_explanation">Antalet bilder du har laddat upp till Commons med något uppladdningsprogram</string>
+  <string name="images_reverted_explanation">Procentandelen av bilder du har laddat upp till Commons som inte har raderats</string>
+  <string name="images_used_explanation">Antalet bilder du har laddat upp till Commons som användes i Wikimedia-artiklar</string>
 </resources>

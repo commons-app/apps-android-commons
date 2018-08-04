@@ -73,6 +73,7 @@
   <string name="login_failed_generic">Ошибка входа в систему!</string>
   <string name="share_upload_button">Загрузка</string>
   <string name="multiple_share_base_title">Введите название для этой группы файлов</string>
+  <string name="add_set_name_toast">Пожалуйста, укажите название этой группы файлов</string>
   <string name="provider_modifications">Изменения</string>
   <string name="menu_upload_single">Загрузка</string>
   <string name="categories_search_text_hint">Выбор категорий</string>
@@ -312,7 +313,39 @@
   <string name="wikidata_edit_failure">Не удалось обновить соответствующую страницу викиданных!</string>
   <string name="menu_set_wallpaper">Сделать фоновой заставкой</string>
   <string name="wallpaper_set_successfully">Фоновая заставка успешно установлена!</string>
+  <string name="quiz">Опрос</string>
+  <string name="quiz_question_string">Это изображение корректно для загрузки на сервер?</string>
+  <string name="question">Вопрос</string>
+  <string name="result">Результат</string>
+  <string name="quiz_back_button">Если вы продолжите заливать изображения, которые будут удаляться, ваша учётная запись скорее всего будет заблокирована. Вы уверены, что хотите завершить опрос ?</string>
+  <string name="quiz_alert_message">Внимание: были удалены более %1$s {{PLURAL:%1$s|zero=изображений|one= изображения|few=изображений|изображений}}, загруженных вами. Если вы продолжите заливать изображения, которые будут удаляться, ваша учётная запись скорее всего будет заблокирована.\n\nЖелаете пересмотреть руководство снова и поучаствовать в опросе, для прояснения, какие из типов изображений могут быть загруженными, а какие запрещены ?</string>
+  <string name="selfie_answer">Обычно селфи не имеют энциклопедической значимости. Пожалуйста, не загружайте фото себя до тех пор, пока о вас не будет создана статья википедии.</string>
+  <string name="taj_mahal_answer">Изображения памятников и объектов снаружи в большинстве стран мира обычно подходят для загрузки. При этом временные инсталляции снаружи часто являются объектом копирайта и не подходят для загрузки.</string>
+  <string name="blurry_image_answer">Одной из целей Викисклада является собирание качественных изображений. Поэтому не следует туда загружать нечто размытое. Старайтесь делать изображения с хорошим освещением</string>
+  <string name="construction_event_answer">Изображения в области техники или культуры весьма желательны на Викискладе.</string>
+  <string name="warning_for_image_reverts">Внимание: были удалены более %1$s {{PLURAL:%1$s|zero=изображений|one= изображения|few=изображений|изображений}}, загруженных вами. Если вы продолжите заливать изображения, которые будут удаляться, ваша учётная запись скорее всего будет заблокирована.</string>
+  <string name="congratulatory_message_quiz">Вы дали %1$s {{PLURAL:%1$s|zero=правильных ответов|one= правильный ответ|few=правильного ответа|правильных ответов}}. Так держать!</string>
+  <string name="warning_for_no_answer">Выберите один из двух вариантов ответа на вопрос</string>
+  <string name="user_not_logged_in">Сессия авторизации истекла, пожалуйста авторизуйтесь заново.</string>
+  <string name="quiz_result_share_message">Поделитесь результатами опроса со своими друзьями!</string>
+  <string name="continue_message">Продолжить</string>
+  <string name="correct">Правильный ответ</string>
+  <string name="wrong">Неверный ответ</string>
+  <string name="quiz_screenshot_question">Этот скриншот подходит для загрузки на Викисклад?</string>
   <string name="delete_recent_searches_dialog">Вы уверены, что хотите очистить историю поисковых запросов?</string>
   <string name="search_history_deleted">История поиска очищена</string>
-  <string name="user_not_logged_in">Сессия авторизации истекла, пожалуйста авторизуйтесь заново.</string>
+  <string name="Achievements">Достижения</string>
+  <string name="statistics">СТАТИСТИКА</string>
+  <string name="statistics_thanks">Получены благодарности</string>
+  <string name="statistics_featured">Избранные изображения</string>
+  <string name="level">УРОВЕНЬ</string>
+  <string name="images_uploaded">Загружено изображений</string>
+  <string name="image_reverts">Изображения, которые не откатывались</string>
+  <string name="images_used_by_wiki">Использовано изображений</string>
+  <string name="achievements_share_message">Поделитесь своими достижениями с друзьями!</string>
+  <string name="achievements_info_message">Ваш уровень будет увеличиваться, если вы будете придерживаться этих требований. Числа в разделе \"Статистика\" не влияют на ваш уровень.</string>
+  <string name="achievements_revert_limit_message">требуется минимум:</string>
+  <string name="images_uploaded_explanation">Число изображений, загруженных на Викисклад любыми приложениями</string>
+  <string name="images_reverted_explanation">Число изображений, загруженных на Викисклад и не удалённых</string>
+  <string name="images_used_explanation">Число изображений, загруженных на Викисклад, которые используются в статьях Викимедиа</string>
 </resources>

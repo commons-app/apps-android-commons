@@ -56,6 +56,7 @@
   <string name="login_failed_generic">Login failed</string>
   <string name="share_upload_button">Upload</string>
   <string name="multiple_share_base_title">Name this set</string>
+  <string name="add_set_name_toast">Please provide a name for this set</string>
   <string name="provider_modifications">Modifications</string>
   <string name="menu_upload_single">Upload</string>
   <string name="categories_search_text_hint">Search categories</string>
@@ -237,7 +238,7 @@
   <string name="give_permission">Give permission</string>
   <string name="use_external_storage">Use external storage</string>
   <string name="use_external_storage_summary">Save pictures taken with the in-app camera on your device</string>
-  <string name="login_to_your_account">Login to your account</string>
+  <string name="login_to_your_account">Log in to your account</string>
   <string name="send_log_file">Send log file</string>
   <string name="send_log_file_description">Send log file to developers via email</string>
   <string name="no_web_browser">No web browser found to open URL</string>
@@ -247,50 +248,47 @@
   <string name="nominated_see_more"><u>See webpage for details</u></string>
   <string name="view_browser">View in Browser</string>
 
-    <string name="nearby_location_has_not_changed">Location has not changed.</string>
-    <string name="nearby_location_not_available">Location not available.</string>
-    <string name="location_permission_rationale_nearby">Permission required to display a list of nearby places</string>
-    <string name="get_directions">GET DIRECTIONS</string>
-    <string name="read_article">READ ARTICLE</string>
+  <string name="nearby_location_has_not_changed">Location has not changed.</string>
+  <string name="nearby_location_not_available">Location not available.</string>
+  <string name="location_permission_rationale_nearby">Permission required to display a list of nearby places</string>
+  <string name="get_directions">GET DIRECTIONS</string>
+  <string name="read_article">READ ARTICLE</string>
 
-    <string name="notifications_welcome" formatted="false">Welcome to Wikimedia Commons, %1$s! We\'re glad you\'re here.</string>
-    <string name="notifications_talk_page_message">%1$s left a message on your talk page</string>
-    <string name="notifications_thank_you_edit">Thank you for making an edit</string>
-    <string name="notifications_mention">%1$s mentioned you on %2$s.</string>
-    <string name="toggle_view_button">Toggle view</string>
-    <string name="nearby_directions">DIRECTIONS</string>
-    <string name="nearby_wikidata">WIKIDATA</string>
-    <string name="nearby_wikipedia">WIKIPEDIA</string>
-    <string name="nearby_commons">COMMONS</string>
-    <string name="about_rate_us"><![CDATA[<u>Rate us</u>]]></string>
-    <string name="about_faq"><![CDATA[<u>FAQ</u>]]></string>
-    <string name="welcome_skip_button">Skip Tutorial</string>
-    <string name="no_internet">Internet unavailable</string>
-    <string name="internet_established">Internet available</string>
-    <string name="error_notifications">Error fetching notifications</string>
-    <string name="no_notifications">No notifications found</string>
-    <string name="about_translate"><![CDATA[<u>Translate</u>]]></string>
-    <string name="about_translate_title">Languages</string>
-    <string name="about_translate_message">Select the language that you would like to submit translations for</string>
-    <string name="about_translate_proceed">Proceed</string>
-    <string name="about_translate_cancel">Cancel</string>
-    <string name="retry">Retry</string>
+  <string formatted="false" name="notifications_welcome">Welcome to Wikimedia Commons, %1$s! We\'re glad you\'re here.</string>
+  <string name="notifications_talk_page_message">%1$s left a message on your talk page</string>
+  <string name="notifications_thank_you_edit">Thank you for making an edit</string>
+  <string name="notifications_mention">%1$s mentioned you on %2$s.</string>
+  <string name="toggle_view_button">Toggle view</string>
+  <string name="nearby_directions">DIRECTIONS</string>
+  <string name="nearby_wikidata">WIKIDATA</string>
+  <string name="nearby_wikipedia">WIKIPEDIA</string>
+  <string name="nearby_commons">COMMONS</string>
+  <string name="about_rate_us"><![CDATA[<u>Rate us</u>]]></string>
+  <string name="about_faq"><![CDATA[<u>FAQ</u>]]></string>
+  <string name="welcome_skip_button">Skip Tutorial</string>
+  <string name="no_internet">Internet unavailable</string>
+  <string name="internet_established">Internet available</string>
+  <string name="error_notifications">Error fetching notifications</string>
+  <string name="no_notifications">No notifications found</string>
+  <string name="about_translate"><![CDATA[<u>Translate</u>]]></string>
+  <string name="about_translate_title">Languages</string>
+  <string name="about_translate_message">Select the language that you would like to submit translations for</string>
+  <string name="about_translate_proceed">Proceed</string>
+  <string name="about_translate_cancel">Cancel</string>
+  <string name="retry">Retry</string>
 
-    <string name="showcase_view_got_it_button">Got it!</string>
-    <string name="showcase_view_whole_nearby_activity">These are the places near you that need pictures to illustrate their Wikipedia articles</string>
-    <string name="showcase_view_list_icon">Tapping this button brings up a list of these places</string>
-    <string name="showcase_view_plus_fab">You can upload a picture for any place from your gallery or camera</string>
+  <string name="showcase_view_got_it_button">Got it!</string>
+  <string name="showcase_view_whole_nearby_activity">These are the places near you that need pictures to illustrate their Wikipedia articles</string>
+  <string name="showcase_view_list_icon">Tapping this button brings up a list of these places</string>
+  <string name="showcase_view_plus_fab">You can upload a picture for any place from your gallery or camera</string>
 
-    <string name="no_images_found">No images found!</string>
-    <string name="error_loading_images">Error occurred while loading images.</string>
-    <string name="image_uploaded_by">Uploaded by: %1$s</string>
+  <string name="no_images_found">No images found!</string>
+  <string name="error_loading_images">Error occurred while loading images.</string>
+  <string name="image_uploaded_by">Uploaded by: %1$s</string>
 
-    <string name="block_notification">You are blocked from editing Commons</string>
-    <string name="share_app_title">Share App</string>
-    <string name="share_coordinates_not_present">Coordinates were not specified during image selection</string>
-    <string name="error_fetching_nearby_places">Error fetching nearby places.</string>
-    <string name="appwidget_img">Pic of the Day</string>
-    <string name="app_widget_heading">Pic of the Day</string>
+  <string name="block_notification">You are blocked from editing Commons</string>
+  <string name="appwidget_img">Pic of the Day</string>
+  <string name="app_widget_heading">Pic of the Day</string>
   <string name="menu_search_button">Search</string>
   <string name="search_commons">Search Commons</string>
   <string name="images_not_found">No Images matching %1$s found</string>
@@ -306,7 +304,7 @@
   <string name="wallpaper_set_successfully">Wallpaper set successfully!</string>
   <string name="quiz">Quiz</string>
   <string name="quiz_question_string">Is this picture OK to upload?</string>
-  <string name="question">Question</string>
+  <string name="question">Question </string>
   <string name="result">Result</string>
   <string name="quiz_back_button">If you carry on uploading images that require deletion, your account will likely be banned. Are you sure you want to end the quiz?</string>
   <string name="quiz_alert_message">More than %1$s of the images you uploaded have been deleted. If you carry on uploading images that require deletion, your account will likely be banned.\n\nWould you like to view the tutorial again and then take a quiz to help you learn what type of images you should or shouldn\'t upload?</string>
@@ -323,6 +321,11 @@
   <string name="continue_message">Continue</string>
   <string name="correct">Correct Answer</string>
   <string name="wrong">Wrong Answer</string>
+  <string name="quiz_screenshot_question">Is this screenshot OK to upload?</string>
+  <string name="share_app_title">Share App</string>
+  <string name="share_coordinates_not_present">Coordinates were not specified during image selection</string>
+  <string name="error_fetching_nearby_places">Error fetching nearby places.</string>
+  <string name="add_description">+ Add description</string>
 
   <string name="delete_recent_searches_dialog">Are you sure you want to clear your search history?</string>
   <string name="search_history_deleted">Search history deleted</string>
