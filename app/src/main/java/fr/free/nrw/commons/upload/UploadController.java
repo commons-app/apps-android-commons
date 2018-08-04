@@ -103,19 +103,15 @@ public class UploadController {
      */
     public void startUpload(String title, Uri contentProviderUri, Uri mediaUri, String description, String mimeType, String source, String decimalCoords, String wikiDataEntityId, ContributionUploadProgress onComplete) {
         Contribution contribution;
+        
+        //TODO: Modify this to include coords
+        contribution = new Contribution(mediaUri, null, title, description, -1,
+                null, null, sessionManager.getCurrentAccount().name,
+                CommonsApplication.DEFAULT_EDIT_SUMMARY, decimalCoords);
 
 
-            //TODO: Modify this to include coords
-            contribution = new Contribution(mediaUri, null, title, description, -1,
-                    null, null, sessionManager.getCurrentAccount().name,
-                    CommonsApplication.DEFAULT_EDIT_SUMMARY, decimalCoords);
-
-
-            contribution.setTag("mimeType", mimeType);
-            contribution.setSource(source);
-
-            //Calls the next overloaded method
-            startUpload(contribution, onComplete);
+        contribution.setTag("mimeType", mimeType);
+        contribution.setSource(source);
 
         Timber.d("Wikidata entity ID received from Share activity is %s", wikiDataEntityId);
         //TODO: Modify this to include coords
@@ -136,6 +132,8 @@ public class UploadController {
         contribution.setWikiDataEntityId(wikiDataEntityId);
         contribution.setContentProviderUri(contentProviderUri);
 
+        //Calls the next overloaded method
+        startUpload(contribution, onComplete);
 
     }
 
