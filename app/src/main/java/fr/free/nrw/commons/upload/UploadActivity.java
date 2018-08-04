@@ -1,10 +1,12 @@
 package fr.free.nrw.commons.upload;
 
 import android.annotation.SuppressLint;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.TextInputLayout;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -42,8 +44,10 @@ import fr.free.nrw.commons.auth.AuthenticatedActivity;
 import fr.free.nrw.commons.category.CategoriesModel;
 import fr.free.nrw.commons.category.CategoryItem;
 import fr.free.nrw.commons.contributions.Contribution;
+import fr.free.nrw.commons.contributions.ContributionsActivity;
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
 import fr.free.nrw.commons.utils.AbstractTextWatcher;
+import fr.free.nrw.commons.utils.ImageUtils;
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
@@ -261,6 +265,36 @@ public class UploadActivity extends AuthenticatedActivity implements UploadView 
     }
 
     @Override
+    public void showBadPicturePopup(ImageUtils.Result result) {
+        Timber.i(result.name());
+        String errorMessage=null;
+        if(result == ImageUtils.Result.IMAGE_DARK)
+            errorMessage=getString(R.string.upload_image_too_dark);
+        else if (result == ImageUtils.Result.IMAGE_BLURRY)
+            errorMessage=getString(R.string.upload_image_blurry);
+        else
+            return;
+        AlertDialog.Builder errorDialogBuilder = new AlertDialog.Builder(this);
+        errorDialogBuilder.setMessage(errorMessage);
+        errorDialogBuilder.setTitle(getString(R.string.warning));
+        //user does not wish to upload the picture, delete it
+        errorDialogBuilder.setPositiveButton(getString(R.string.no), (dialogInterface, i) -> {
+            presenter.deletePicture();
+            dialogInterface.dismiss();
+        });
+        //user wishes to go ahead with the upload of this picture, just dismiss this dialog
+        errorDialogBuilder.setNegativeButton(getString(R.string.yes), (DialogInterface dialogInterface, int i) -> {
+            presenter.keepPicture();
+            dialogInterface.dismiss();
+        });
+
+        AlertDialog errorDialog = errorDialogBuilder.create();
+        if (!isFinishing()) {
+            errorDialog.show();
+        }
+    }
+
+    @Override
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         Bundle state = presenter.getSavedState();
@@ -412,4 +446,5 @@ public class UploadActivity extends AuthenticatedActivity implements UploadView 
             }
         }
     }
+
 }

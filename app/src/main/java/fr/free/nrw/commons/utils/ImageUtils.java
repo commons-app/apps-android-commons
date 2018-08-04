@@ -32,22 +32,12 @@ public class ImageUtils {
 
     public enum Result {
         IMAGE_DARK,
+        IMAGE_BLURRY,
         IMAGE_OK,
         IMAGE_KEEP,
         IMAGE_WAIT
     }
 
-    /**
-     * Creates a BitmapRegionDecoder from the Uri and then calls checkIfImageIsTooDark(BitmapRegionDecoder)
-     *
-     * @param uri Uri of the file being checked
-     * @return Result.IMAGE_OK if image is neither dark nor blurry
-     * @throws IOException
-     */
-    public static Result checkIfImageIsTooDark(Uri uri) throws IOException {
-        BitmapRegionDecoder decoder = BitmapRegionDecoder.newInstance(uri.getPath(), false);
-        return checkIfImageIsTooDark(decoder);
-    }
 
     /**
      * @param bitmapRegionDecoder BitmapRegionDecoder for the image we wish to process

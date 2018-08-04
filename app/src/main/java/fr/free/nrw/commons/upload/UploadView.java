@@ -4,8 +4,9 @@ import android.net.Uri;
 import android.support.annotation.IntDef;
 
 import java.lang.annotation.Retention;
-import java.lang.reflect.Proxy;
 import java.util.List;
+
+import fr.free.nrw.commons.utils.ImageUtils;
 
 import static java.lang.annotation.RetentionPolicy.SOURCE;
 
@@ -54,5 +55,7 @@ public interface UploadView {
 
     void dismissKeyboard();
 
+    void showBadPicturePopup(ImageUtils.Result errorMessage);
 
+    void finish();
 }
