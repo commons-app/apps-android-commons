@@ -23,9 +23,14 @@ import android.widget.TextView;
 
 import com.jakewharton.rxbinding2.view.RxView;
 import com.jakewharton.rxbinding2.widget.RxTextView;
+import com.pedrogomez.renderers.RVRendererAdapter;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Comparator;
+import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import javax.inject.Inject;
@@ -49,6 +54,8 @@ import static android.view.KeyEvent.KEYCODE_BACK;
  * Displays the category suggestion and selection screen. Category search is initiated here.
  */
 public class CategorizationFragment extends CommonsDaggerSupportFragment {
+
+    public static final int SEARCH_CATS_LIMIT = 25;
 
     @BindView(R.id.categoriesListBox)
     RecyclerView categoriesList;

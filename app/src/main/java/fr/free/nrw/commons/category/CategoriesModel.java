@@ -14,7 +14,7 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
-import fr.free.nrw.commons.upload.MwVolleyApi;
+import fr.free.nrw.commons.upload.GpsCategoryModel;
 import fr.free.nrw.commons.utils.StringSortingUtils;
 import io.reactivex.Observable;
 import timber.log.Timber;
@@ -30,6 +30,7 @@ public class CategoriesModel implements CategoryClickedListener {
     private HashMap<String, ArrayList<String>> categoriesCache;
     private List<CategoryItem> selectedCategories;
 
+    @Inject GpsCategoryModel gpsCategoryModel;
     @Inject
     public CategoriesModel(MediaWikiApi mwApi, CategoryDao categoryDao,
                            @Named("default_preferences") SharedPreferences prefs,
@@ -90,7 +91,7 @@ public class CategoriesModel implements CategoryClickedListener {
         return categoriesCache;
     }
 
-    private boolean cacheContainsKey(String term) {
+    boolean cacheContainsKey(String term) {
         return categoriesCache.containsKey(term);
     }
     //endregion
@@ -161,10 +162,8 @@ public class CategoriesModel implements CategoryClickedListener {
         return Observable.fromIterable(categoryList).map(name -> new CategoryItem(name, false));
     }
 
-    private Observable<CategoryItem> gpsCategories() {
-        return Observable.fromIterable(
-                MwVolleyApi.GpsCatExists.getGpsCatExists()
-                        ? MwVolleyApi.getGpsCat() : new ArrayList<>())
+    Observable<CategoryItem> gpsCategories() {
+        return Observable.fromIterable(gpsCategoryModel.getCategoryList())
                 .map(name -> new CategoryItem(name, false));
     }
 

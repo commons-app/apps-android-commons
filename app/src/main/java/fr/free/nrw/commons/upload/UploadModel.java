@@ -1,5 +1,7 @@
 package fr.free.nrw.commons.upload;
 
+import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.net.Uri;
 
@@ -11,11 +13,14 @@ import java.util.Map;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import fr.free.nrw.commons.CommonsApplication;
+import fr.free.nrw.commons.auth.SessionManager;
 import fr.free.nrw.commons.contributions.Contribution;
 import fr.free.nrw.commons.settings.Prefs;
+import io.reactivex.Observable;
 
 public class UploadModel {
-    private static UploadItem DUMMY = new UploadItem(Uri.EMPTY, "", "");
+    private static UploadItem DUMMY = new UploadItem(Uri.EMPTY, "", "", GPSExtractor.DUMMY);
     private final SharedPreferences prefs;
     private final List<String> licenses;
     private String license;
@@ -24,15 +29,20 @@ public class UploadModel {
     private boolean topCardState = true;
     private boolean bottomCardState = true;
     private int currentStepIndex = 0;
+    private Context context;
+    @Inject
+    SessionManager sessionManager;
 
     @Inject
     UploadModel(@Named("licenses") List<String> licenses,
                 @Named("default_preferences") SharedPreferences prefs,
-                @Named("licenses_by_name") Map<String, String> licensesByName) {
+                @Named("licenses_by_name") Map<String, String> licensesByName,
+                Context context) {
         this.licenses = licenses;
         this.prefs = prefs;
         this.license = Prefs.Licenses.CC_BY_SA_3;
         this.licensesByName = licensesByName;
+        this.context = context;
     }
 
     public void receive(List<Uri> mediaUri, String mimeType, String source) {
@@ -40,7 +50,8 @@ public class UploadModel {
         currentStepIndex = 0;
         for (int i = 0; i < mediaUri.size(); i++) {
             Uri uri = mediaUri.get(i);
-            UploadItem e = new UploadItem(uri, mimeType, source);
+            FileProcessor fp = new FileProcessor(uri, context.getContentResolver(), context);
+            UploadItem e = new UploadItem(uri, mimeType, source, fp.processFileCoordinates(false));
             e.selected = (i == 0);
             e.first = (i == 0);
             items.add(e);
@@ -154,26 +165,34 @@ public class UploadModel {
         this.license = licensesByName.get(licenseName);
     }
 
-    public List<Contribution> toContributions() {
-        return null;
+    //When the EXIF modification UI is added, the selections will be realised here
+    @SuppressLint("CheckResult")
+    public Observable<Contribution> toContributions() {
+        return Observable.fromIterable(items).map(item ->
+                new Contribution(item.mediaUri, null, item.title, item.description, -1,
+                        null, null, sessionManager.getCurrentAccount().name,
+                        CommonsApplication.DEFAULT_EDIT_SUMMARY, item.gpsCoords.getCoords()));
     }
 
     @SuppressWarnings("WeakerAccess")
     static class UploadItem {
-        public boolean selected = false;
-        public boolean first = false;
         public final Uri mediaUri;
         public final String mimeType;
         public final String source;
+        public final GPSExtractor gpsCoords;
+
+        public boolean selected = false;
+        public boolean first = false;
         public String title;
         public String description;
         public boolean visited;
         public boolean error;
 
-        UploadItem(Uri mediaUri, String mimeType, String source) {
+        UploadItem(Uri mediaUri, String mimeType, String source, GPSExtractor gpsCoords) {
             this.mediaUri = mediaUri;
             this.mimeType = mimeType;
             this.source = source;
+            this.gpsCoords = gpsCoords;
         }
     }
 }
