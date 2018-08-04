@@ -113,15 +113,14 @@ public class ContributionController {
                 shareIntent.setType("image/jpeg");
                 shareIntent.putExtra(EXTRA_STREAM, lastGeneratedCaptureUri);
                 shareIntent.putExtra(EXTRA_SOURCE, SOURCE_CAMERA);
-
                 break;
             default:
                 break;
         }
-        Timber.i("Image selected");
 
+        Timber.i("Image selected");
         shareIntent.putExtra("isDirectUpload", isDirectUpload);
-        Timber.d("Successfully put extra into intent, isDirectUpload is " + isDirectUpload);
+        Timber.d("Put extras into image intent, isDirectUpload is " + isDirectUpload);
 
         try {
             if (wikiDataEntityId != null && !wikiDataEntityId.equals("")) {
@@ -130,10 +129,9 @@ public class ContributionController {
         } catch (SecurityException e) {
             Timber.e(e, "Security Exception");
         }
-        try {
+
+        if (activity != null) {
             activity.startActivity(shareIntent);
-        } catch (NullPointerException e) {
-            Timber.e(e, "Null Pointer Exception");
         }
     }
 
