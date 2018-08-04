@@ -76,10 +76,6 @@ public class SessionManager {
         ContentResolver.setSyncAutomatically(account, BuildConfig.MODIFICATION_AUTHORITY, true); // Enable sync by default!
     }
 
-    private AccountManager accountManager() {
-        return AccountManager.get(context);
-    }
-
     /**
      * @return Account|null
      */
@@ -95,6 +91,22 @@ public class SessionManager {
         return currentAccount;
     }
 
+    @Nullable
+    public String getUserName() {
+        Account account = getCurrentAccount();
+        return account == null ? null : account.name;
+    }
+
+    @Nullable
+    public String getPassword() {
+        Account account = getCurrentAccount();
+        return account == null ? null : accountManager().getPassword(account);
+    }
+
+    private AccountManager accountManager() {
+        return AccountManager.get(context);
+    }
+
     public Boolean revalidateAuthToken() {
         AccountManager accountManager = AccountManager.get(context);
         Account curAccount = getCurrentAccount();
@@ -103,12 +115,13 @@ public class SessionManager {
             return false; // This should never happen
         }
 
-        accountManager.invalidateAuthToken(BuildConfig.ACCOUNT_TYPE, mediaWikiApi.getAuthCookie());
+        accountManager.invalidateAuthToken(BuildConfig.ACCOUNT_TYPE, null);
         String authCookie = getAuthCookie();
 
         if (authCookie == null) {
             return false;
         }
+
         mediaWikiApi.setAuthCookie(authCookie);
         return true;
     }

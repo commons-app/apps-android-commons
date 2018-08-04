@@ -25,8 +25,6 @@ import org.apache.http.params.BasicHttpParams;
 import org.apache.http.params.CoreProtocolPNames;
 import org.apache.http.util.EntityUtils;
 import org.json.JSONObject;
-import org.mediawiki.api.ApiResult;
-import org.mediawiki.api.MWApi;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
@@ -37,7 +35,6 @@ import java.net.URL;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
@@ -48,6 +45,7 @@ import java.util.concurrent.Callable;
 import fr.free.nrw.commons.BuildConfig;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.PageTitle;
+import fr.free.nrw.commons.auth.AccountUtil;
 import fr.free.nrw.commons.category.CategoryImageUtils;
 import fr.free.nrw.commons.category.QueryContinue;
 import fr.free.nrw.commons.notification.Notification;
@@ -72,8 +70,8 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
 
     private static final String THUMB_SIZE = "640";
     private AbstractHttpClient httpClient;
-    private MWApi api;
-    private MWApi wikidataApi;
+    private CustomMwApi api;
+    private CustomMwApi wikidataApi;
     private Context context;
     private SharedPreferences defaultPreferences;
     private SharedPreferences categoryPreferences;
@@ -97,8 +95,8 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
         if (BuildConfig.DEBUG) {
             httpClient.addRequestInterceptor(NetworkInterceptors.getHttpRequestInterceptor());
         }
-        api = new MWApi(apiURL, httpClient);
-        wikidataApi = new MWApi(wikidatApiURL, httpClient);
+        api = new CustomMwApi(apiURL, httpClient);
+        wikidataApi = new CustomMwApi(wikidatApiURL, httpClient);
         this.defaultPreferences = defaultPreferences;
         this.categoryPreferences = categoryPreferences;
         this.gson = gson;
@@ -163,25 +161,25 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
     }
 
     /**
-     * @param loginApiResult ApiResult Any clientlogin api result
+     * @param loginCustomApiResult CustomApiResult Any clientlogin api result
      * @return String On success: "PASS"
      * continue: "2FA" (More information required for 2FA)
      * failure: A failure message code (defined by mediawiki)
      * misc:    genericerror-UI, genericerror-REDIRECT, genericerror-RESTART
      */
-    private String getErrorCodeToReturn(ApiResult loginApiResult) {
-        String status = loginApiResult.getString("/api/clientlogin/@status");
+    private String getErrorCodeToReturn(CustomApiResult loginCustomApiResult) {
+        String status = loginCustomApiResult.getString("/api/clientlogin/@status");
         if (status.equals("PASS")) {
             api.isLoggedIn = true;
             setAuthCookieOnLogin(true);
             return status;
         } else if (status.equals("FAIL")) {
             setAuthCookieOnLogin(false);
-            return loginApiResult.getString("/api/clientlogin/@messagecode");
+            return loginCustomApiResult.getString("/api/clientlogin/@messagecode");
         } else if (
                 status.equals("UI")
-                        && loginApiResult.getString("/api/clientlogin/requests/_v/@id").equals("TOTPAuthenticationRequest")
-                        && loginApiResult.getString("/api/clientlogin/requests/_v/@provider").equals("Two-factor authentication (OATH).")
+                        && loginCustomApiResult.getString("/api/clientlogin/requests/_v/@id").equals("TOTPAuthenticationRequest")
+                        && loginCustomApiResult.getString("/api/clientlogin/requests/_v/@provider").equals("Two-factor authentication (OATH).")
                 ) {
             setAuthCookieOnLogin(false);
             return "2FA";
@@ -211,16 +209,26 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
     @Override
     public void setAuthCookie(String authCookie) {
         api.setAuthCookie(authCookie);
+
+        Timber.d("Mediawiki auth cookie is %s", api.getAuthCookie());
     }
 
     @Override
     public boolean validateLogin() throws IOException {
-        return api.validateLogin();
+        boolean validateLoginResp = api.validateLogin();
+        Timber.d("Validate login response is %s", validateLoginResp);
+        return validateLoginResp;
     }
 
     @Override
     public String getEditToken() throws IOException {
-        return api.getEditToken();
+        String editToken = api.action("query")
+                .param("centralauthtoken", getCentralAuthToken())
+                .param("meta", "tokens")
+                .post()
+                .getString("/api/query/tokens/@csrftoken");
+        Timber.d("MediaWiki edit token is %s", editToken);
+        return editToken;
     }
 
     @Override
@@ -229,6 +237,14 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
                 .get()
                 .getString("/api/centralauthtoken/@centralauthtoken");
         Timber.d("MediaWiki Central auth token is %s", centralAuthToken);
+
+        if(centralAuthToken == null || centralAuthToken.isEmpty()) {
+            api.removeAllCookies();
+            String login = login(AccountUtil.getUserName(context), AccountUtil.getPassword(context));
+            if(login.equals("PASS")) {
+                return getCentralAuthToken();
+            }
+        }
         return centralAuthToken;
     }
 
@@ -301,7 +317,7 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
     @Override
     @NonNull
     public MediaResult fetchMediaByFilename(String filename) throws IOException {
-        ApiResult apiResult = api.action("query")
+        CustomApiResult apiResult = api.action("query")
                 .param("prop", "revisions")
                 .param("titles", filename)
                 .param("rvprop", "content")
@@ -318,7 +334,7 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
     @NonNull
     public Observable<String> searchCategories(String filterValue, int searchCatsLimit) {
         return Single.fromCallable(() -> {
-            List<ApiResult> categoryNodes = null;
+            List<CustomApiResult> categoryNodes = null;
             try {
                 categoryNodes = api.action("query")
                         .param("format", "xml")
@@ -338,7 +354,7 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
             }
 
             List<String> categories = new ArrayList<>();
-            for (ApiResult categoryNode : categoryNodes) {
+            for (CustomApiResult categoryNode : categoryNodes) {
                 String cat = categoryNode.getDocument().getTextContent();
                 String catString = cat.replace("Category:", "");
                 categories.add(catString);
@@ -352,7 +368,7 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
     @NonNull
     public Observable<String> allCategories(String filterValue, int searchCatsLimit) {
         return Single.fromCallable(() -> {
-            ArrayList<ApiResult> categoryNodes = null;
+            ArrayList<CustomApiResult> categoryNodes = null;
             try {
                 categoryNodes = api.action("query")
                         .param("list", "allcategories")
@@ -369,22 +385,12 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
             }
 
             List<String> categories = new ArrayList<>();
-            for (ApiResult categoryNode : categoryNodes) {
+            for (CustomApiResult categoryNode : categoryNodes) {
                 categories.add(categoryNode.getDocument().getTextContent());
             }
 
             return categories;
         }).flatMapObservable(Observable::fromIterable);
-    }
-
-    /**
-     * Get the edit token for making wiki data edits
-     * https://www.mediawiki.org/wiki/API:Tokens
-     * @return
-     * @throws IOException
-     */
-    private String getWikidataEditToken() throws IOException {
-        return wikidataApi.getEditToken();
     }
 
     @Override
@@ -413,7 +419,7 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
     @Override
     public String wikidatCreateClaim(String entityId, String property, String snaktype, String value) throws IOException {
         Timber.d("Filename is %s", value);
-        ApiResult result = wikidataApi.action("wbcreateclaim")
+        CustomApiResult result = wikidataApi.action("wbcreateclaim")
                 .param("entity", entityId)
                 .param("centralauthtoken", getCentralAuthToken())
                 .param("token", getWikidataCsrfToken())
@@ -446,7 +452,7 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
     @Nullable
     @Override
     public boolean addWikidataEditTag(String revisionId) throws IOException {
-        ApiResult result = wikidataApi.action("tag")
+        CustomApiResult result = wikidataApi.action("tag")
                 .param("revid", revisionId)
                 .param("centralauthtoken", getCentralAuthToken())
                 .param("token", getWikidataCsrfToken())
@@ -473,7 +479,7 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
     @NonNull
     public Observable<String> searchTitles(String title, int searchCatsLimit) {
         return Single.fromCallable((Callable<List<String>>) () -> {
-            ArrayList<ApiResult> categoryNodes;
+            ArrayList<CustomApiResult> categoryNodes;
 
             try {
                 categoryNodes = api.action("query")
@@ -495,7 +501,7 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
             }
 
             List<String> titleCategories = new ArrayList<>();
-            for (ApiResult categoryNode : categoryNodes) {
+            for (CustomApiResult categoryNode : categoryNodes) {
                 String cat = categoryNode.getDocument().getTextContent();
                 String catString = cat.replace("Category:", "");
                 titleCategories.add(catString);
@@ -508,7 +514,7 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
     @Override
     @NonNull
     public LogEventResult logEvents(String user, String lastModified, String queryContinue, int limit) throws IOException {
-        org.mediawiki.api.MWApi.RequestBuilder builder = api.action("query")
+        CustomMwApi.RequestBuilder builder = api.action("query")
                 .param("list", "logevents")
                 .param("letype", "upload")
                 .param("leprop", "title|timestamp|ids")
@@ -520,7 +526,7 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
         if (!TextUtils.isEmpty(queryContinue)) {
             builder.param("lestart", queryContinue);
         }
-        ApiResult result = builder.get();
+        CustomApiResult result = builder.get();
 
         return new LogEventResult(
                 getLogEventsFromResult(result),
@@ -528,11 +534,11 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
     }
 
     @NonNull
-    private ArrayList<LogEventResult.LogEvent> getLogEventsFromResult(ApiResult result) {
-        ArrayList<ApiResult> uploads = result.getNodes("/api/query/logevents/item");
+    private ArrayList<LogEventResult.LogEvent> getLogEventsFromResult(CustomApiResult result) {
+        ArrayList<CustomApiResult> uploads = result.getNodes("/api/query/logevents/item");
         Timber.d("%d results!", uploads.size());
         ArrayList<LogEventResult.LogEvent> logEvents = new ArrayList<>();
-        for (ApiResult image : uploads) {
+        for (CustomApiResult image : uploads) {
             logEvents.add(new LogEventResult.LogEvent(
                     image.getString("@pageid"),
                     image.getString("@title"),
@@ -556,7 +562,7 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
     @Override
     @NonNull
     public List<Notification> getNotifications() {
-        ApiResult notificationNode = null;
+        CustomApiResult notificationNode = null;
         try {
             notificationNode = api.action("query")
                     .param("notprop", "list")
@@ -591,9 +597,9 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
     @Override
     @NonNull
     public List<String> getSubCategoryList(String categoryName) {
-        ApiResult apiResult = null;
+        CustomApiResult apiResult = null;
         try {
-            MWApi.RequestBuilder requestBuilder = api.action("query")
+            CustomMwApi.RequestBuilder requestBuilder = api.action("query")
                     .param("generator", "categorymembers")
                     .param("format", "xml")
                     .param("gcmtype","subcat")
@@ -611,7 +617,7 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
             return new ArrayList<>();
         }
 
-        ApiResult categoryImagesNode = apiResult.getNode("/api/query/pages");
+        CustomApiResult categoryImagesNode = apiResult.getNode("/api/query/pages");
         if (categoryImagesNode == null
                 || categoryImagesNode.getDocument() == null
                 || categoryImagesNode.getDocument().getChildNodes() == null
@@ -632,9 +638,9 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
     @Override
     @NonNull
     public List<String> getParentCategoryList(String categoryName) {
-        ApiResult apiResult = null;
+        CustomApiResult apiResult = null;
         try {
-            MWApi.RequestBuilder requestBuilder = api.action("query")
+            CustomMwApi.RequestBuilder requestBuilder = api.action("query")
                     .param("generator", "categories")
                     .param("format", "xml")
                     .param("titles", categoryName)
@@ -651,7 +657,7 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
             return new ArrayList<>();
         }
 
-        ApiResult categoryImagesNode = apiResult.getNode("/api/query/pages");
+        CustomApiResult categoryImagesNode = apiResult.getNode("/api/query/pages");
         if (categoryImagesNode == null
                 || categoryImagesNode.getDocument() == null
                 || categoryImagesNode.getDocument().getChildNodes() == null
@@ -674,9 +680,9 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
     @Override
     @NonNull
     public List<Media> getCategoryImages(String categoryName) {
-        ApiResult apiResult = null;
+        CustomApiResult apiResult = null;
         try {
-            MWApi.RequestBuilder requestBuilder = api.action("query")
+            CustomMwApi.RequestBuilder requestBuilder = api.action("query")
                     .param("generator", "categorymembers")
                     .param("format", "xml")
                     .param("gcmtype", "file")
@@ -701,7 +707,7 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
             return new ArrayList<>();
         }
 
-        ApiResult categoryImagesNode = apiResult.getNode("/api/query/pages");
+        CustomApiResult categoryImagesNode = apiResult.getNode("/api/query/pages");
         if (categoryImagesNode == null
                 || categoryImagesNode.getDocument() == null
                 || categoryImagesNode.getDocument().getChildNodes() == null
@@ -729,7 +735,7 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
     @Override
     @NonNull
     public List<Media> searchImages(String query, int offset) {
-        List<ApiResult> imageNodes = null;
+        List<CustomApiResult> imageNodes = null;
         try {
             imageNodes = api.action("query")
                     .param("format", "xml")
@@ -750,7 +756,7 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
         }
 
         List<Media> images = new ArrayList<>();
-        for (ApiResult imageNode : imageNodes) {
+        for (CustomApiResult imageNode : imageNodes) {
             String imgName = imageNode.getDocument().getTextContent();
             images.add(new Media(imgName));
         }
@@ -767,7 +773,7 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
     @Override
     @NonNull
     public List<String> searchCategory(String query, int offset) {
-        List<ApiResult> categoryNodes = null;
+        List<CustomApiResult> categoryNodes = null;
         try {
             categoryNodes = api.action("query")
                     .param("format", "xml")
@@ -788,7 +794,7 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
         }
 
         List<String> categories = new ArrayList<>();
-        for (ApiResult categoryNode : categoryNodes) {
+        for (CustomApiResult categoryNode : categoryNodes) {
             String catName = categoryNode.getDocument().getTextContent();
             categories.add(catName);
         }
@@ -860,11 +866,11 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
                                    long dataLength,
                                    String pageContents,
                                    String editSummary,
-                                   final ProgressListener progressListener,
                                    Uri fileUri,
-                                   Uri contentProviderUri) throws IOException {
+                                   Uri contentProviderUri,
+                                   final ProgressListener progressListener) throws IOException {
 
-        ApiResult result = api.upload(filename, file, dataLength, pageContents, editSummary, progressListener::onProgress);
+        CustomApiResult result = api.upload(filename, file, dataLength, pageContents, editSummary, getCentralAuthToken(), getEditToken(), progressListener::onProgress);
 
         Log.e("WTF", "Result: " + result.toString());
 
@@ -912,7 +918,7 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
     public boolean isUserBlockedFromCommons() {
         boolean userBlocked = false;
         try {
-            ApiResult result = api.action("query")
+            CustomApiResult result = api.action("query")
                     .param("action", "query")
                     .param("format", "xml")
                     .param("meta", "userinfo")
