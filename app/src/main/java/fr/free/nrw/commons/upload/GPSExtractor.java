@@ -16,6 +16,7 @@ import timber.log.Timber;
  */
 public class GPSExtractor {
 
+    public static final GPSExtractor DUMMY= new GPSExtractor();
     private double decLatitude;
     private double decLongitude;
     public boolean imageCoordsExists;
@@ -25,7 +26,12 @@ public class GPSExtractor {
     private String longitudeRef;
     private String decimalCoords;
 
+    /**
+     * Dummy constructor.
+     */
+    private GPSExtractor(){
 
+    }
     /**
      * Construct from the file descriptor of the image (only for API 24 or newer).
      * @param fileDescriptor the file descriptor of the image

@@ -240,7 +240,7 @@ public class ShareActivity
         }
 
         // FIXME: Make sure that the content provider is up
-        // This is the wrong place for it, but bleh - better than not having it turned on by default for people who don't go throughl ogin
+        // This is the wrong place for it, but bleh - better than not having it turned on by default for people who don't go through login
         ContentResolver.setSyncAutomatically(sessionManager.getCurrentAccount(), ModificationsContentProvider.MODIFICATIONS_AUTHORITY, true); // Enable sync by default!
 
         finish();

@@ -23,9 +23,14 @@ import android.widget.TextView;
 
 import com.jakewharton.rxbinding2.view.RxView;
 import com.jakewharton.rxbinding2.widget.RxTextView;
+import com.pedrogomez.renderers.RVRendererAdapter;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Comparator;
+import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import javax.inject.Inject;
@@ -52,6 +57,8 @@ import static android.view.KeyEvent.KEYCODE_BACK;
  */
 public class CategorizationFragment extends CommonsDaggerSupportFragment {
 
+    public static final int SEARCH_CATS_LIMIT = 25;
+
     @BindView(R.id.categoriesListBox)
     RecyclerView categoriesList;
     @BindView(R.id.categoriesSearchBox)
@@ -68,12 +75,10 @@ public class CategorizationFragment extends CommonsDaggerSupportFragment {
     @Inject @Named("prefs") SharedPreferences prefsPrefs;
     @Inject @Named("direct_nearby_upload_prefs") SharedPreferences directPrefs;
     @Inject CategoryDao categoryDao;
-    @Inject GpsCategoryModel gpsCategoryModel;
     @Inject CategoriesModel categoriesModel;
 
     private CategoryRendererAdapter categoriesAdapter;
     private OnCategoriesSaveHandler onCategoriesSaveHandler;
-    private HashMap<String, ArrayList<String>> categoriesCache;
     private TitleTextWatcher textWatcher = new TitleTextWatcher();
     private boolean hasDirectCategories = false;
 
@@ -246,13 +251,13 @@ public class CategorizationFragment extends CommonsDaggerSupportFragment {
         if (hasDirectCategories) {
             Timber.d("Image has direct Cat");
             return directCat
-                    .concatWith(gpsCategories())
+                    .concatWith(categoriesModel.gpsCategories())
                     .concatWith(titleCategories())
                     .concatWith(recentCategories());
         }
         else {
             Timber.d("Image has no direct Cat");
-            return gpsCategories()
+            return categoriesModel.gpsCategories()
                     .concatWith(titleCategories())
                     .concatWith(recentCategories());
         }
@@ -274,11 +279,6 @@ public class CategorizationFragment extends CommonsDaggerSupportFragment {
         return Observable.fromIterable(categoryList).map(name -> new CategoryItem(name, false));
     }
 
-    private Observable<CategoryItem> gpsCategories() {
-        return Observable.fromIterable(gpsCategoryModel.getCategoryList())
-                .map(name -> new CategoryItem(name, false));
-    }
-
     private Observable<CategoryItem> titleCategories() {
         //Retrieve the title that was saved when user tapped submit icon
         String title = prefs.getString("Title", "");
@@ -291,70 +291,6 @@ public class CategorizationFragment extends CommonsDaggerSupportFragment {
     private Observable<CategoryItem> recentCategories() {
         return Observable.fromIterable(categoryDao.recentCategories(SEARCH_CATS_LIMIT))
                 .map(s -> new CategoryItem(s, false));
-    }
-
-    private Observable<CategoryItem> searchAll(String term) {
-        //If user hasn't typed anything in yet, get GPS and recent items
-        if (TextUtils.isEmpty(term)) {
-            return Observable.empty();
-        }
-
-        //if user types in something that is in cache, return cached category
-        if (categoriesCache.containsKey(term)) {
-            return Observable.fromIterable(categoriesCache.get(term))
-                    .map(name -> new CategoryItem(name, false));
-        }
-
-        //otherwise, search API for matching categories
-        return mwApi
-                .allCategories(term, SEARCH_CATS_LIMIT)
-                .map(name -> new CategoryItem(name, false));
-    }
-
-    private Observable<CategoryItem> searchCategories(String term) {
-        //If user hasn't typed anything in yet, get GPS and recent items
-        if (TextUtils.isEmpty(term)) {
-            return Observable.empty();
-        }
-
-        return mwApi
-                .searchCategories(term, SEARCH_CATS_LIMIT)
-                .map(s -> new CategoryItem(s, false));
-    }
-
-    private boolean containsYear(String item) {
-        //Check for current and previous year to exclude these categories from removal
-        Calendar now = Calendar.getInstance();
-        int year = now.get(Calendar.YEAR);
-        String yearInString = String.valueOf(year);
-
-        int prevYear = year - 1;
-        String prevYearInString = String.valueOf(prevYear);
-        Timber.d("Previous year: %s", prevYearInString);
-
-        //Check if item contains a 4-digit word anywhere within the string (.* is wildcard)
-        //And that item does not equal the current year or previous year
-        //And if it is an irrelevant category such as Media_needing_categories_as_of_16_June_2017(Issue #750)
-        //Check if the year in the form of XX(X)0s is relevant, i.e. in the 2000s or 2010s as stated in Issue #1029
-        return ((item.matches(".*(19|20)\\d{2}.*") && !item.contains(yearInString) && !item.contains(prevYearInString))
-                || item.matches("(.*)needing(.*)") || item.matches("(.*)taken on(.*)")
-                || (item.matches(".*0s.*") && !item.matches(".*(200|201)0s.*")));
-    }
-
-    private void updateCategoryCount(CategoryItem item) {
-        Category category = categoryDao.find(item.getName());
-
-        // Newly used category...
-        if (category == null) {
-            category = new Category(null, item.getName(), new Date(), 0);
-        }
-
-        category.incTimesUsed();
-        categoryDao.save(category);
-    }
-
-    public int getCurrentSelectedCount() {
-        return selectedCategories.size();
     }
 
     /**

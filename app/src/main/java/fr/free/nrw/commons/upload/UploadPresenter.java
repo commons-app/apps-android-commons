@@ -23,7 +23,7 @@ public class UploadPresenter {
 
     private final UploadModel uploadModel;
     private final UploadController uploadController;
-    private UploadView view = UploadView.DUMMY;
+    private UploadView view;// = UploadView.DUMMY;
 
     @Inject
     public UploadPresenter(UploadModel uploadModel, UploadController uploadController) {
@@ -37,8 +37,9 @@ public class UploadPresenter {
 
     @SuppressLint("CheckResult")
     public void receive(List<Uri> media, String mimeType, String source) {
+//        uploadModel.receive(media, mimeType, source);
         cacheFileUploads(media).doOnSuccess(
-                uris -> uploadModel.receive(uris, mimeType, source)
+                uris ->uploadModel.receive(media, mimeType, source)
         ).flatMap(
                 uris -> Single.fromCallable(() -> performQualityCheck(uris))
         ).subscribeOn(
@@ -86,11 +87,10 @@ public class UploadPresenter {
         updateContent();
     }
 
+    @SuppressLint("CheckResult")
     public void handleSubmit() {
-        List<Contribution> contributions = uploadModel.toContributions();
-        for (Contribution contribution : contributions) {
-            uploadController.startUpload(contribution);
-        }
+        uploadModel.toContributions().forEach(uploadController::startUpload);
+
     }
     //endregion
 
@@ -127,7 +127,7 @@ public class UploadPresenter {
     }
 
     public void removeView() {
-        this.view = UploadView.DUMMY;
+        this.view = null;//UploadView.DUMMY;
     }
 
     public void addView(UploadView view) {
@@ -180,15 +180,11 @@ public class UploadPresenter {
     }
     //endregion
 
+    //todo move to model?
     //region Quality checking for shared items
     private Single<List<Uri>> cacheFileUploads(List<Uri> media) {
         //Copy files into local storage and return URIs
-        return Single.fromCallable(new Callable<List<Uri>>() {
-            @Override
-            public List<Uri> call() throws Exception {
-                return media;
-            }
-        });
+        return Single.fromCallable(() -> media);
     }
 
     private List<Uri> performQualityCheck(List<Uri> uris) {

@@ -168,14 +168,14 @@ public class CommonsApplicationModule {
         return new SessionManager(context, mediaWikiApi, sharedPreferences);
     }
 
-    @Provides
-    @Singleton
-    public MediaWikiApi provideMediaWikiApi(Context context,
-                                            @Named("default_preferences") SharedPreferences defaultPreferences,
-                                            @Named("category_prefs") SharedPreferences categoryPrefs,
-                                            Gson gson) {
-        return new ApacheHttpClientMediaWikiApi(context, BuildConfig.WIKIMEDIA_API_HOST, defaultPreferences, categoryPrefs, gson);
-    }
+//    @Provides
+//    @Singleton
+//    public MediaWikiApi provideMediaWikiApi(Context context,
+//                                            @Named("default_preferences") SharedPreferences defaultPreferences,
+//                                            @Named("category_prefs") SharedPreferences categoryPrefs,
+//                                            Gson gson) {
+//        return new ApacheHttpClientMediaWikiApi(context, BuildConfig.WIKIMEDIA_API_HOST, defaultPreferences, categoryPrefs, gson);
+//    }
 
     @Provides
     @Singleton
@@ -183,21 +183,21 @@ public class CommonsApplicationModule {
         return new LocationServiceManager(context);
     }
 
-    /**
+    /*
      * Gson objects are very heavy. The app should ideally be using just one instance of it instead of creating new instances everywhere.
      * @return returns a singleton Gson instance
      */
-    @Provides
-    @Singleton
-    public Gson provideGson() {
-        return new Gson();
-    }
-
-    @Provides
-    @Singleton
-    public CacheController provideCacheController() {
-        return new CacheController();
-    }
+//    @Provides
+//    @Singleton
+//    public Gson provideGson() {
+//        return new Gson();
+//    }
+//
+//    @Provides
+//    @Singleton
+//    public CacheController provideCacheController() {
+//        return new CacheController();
+//    }
 
     @Provides
     @Singleton
