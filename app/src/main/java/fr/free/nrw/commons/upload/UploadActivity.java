@@ -3,6 +3,7 @@ package fr.free.nrw.commons.upload;
 import android.annotation.SuppressLint;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.TextInputLayout;
@@ -11,7 +12,9 @@ import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
+import android.util.TypedValue;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -80,6 +83,11 @@ public class UploadActivity extends AuthenticatedActivity implements UploadView 
     @BindView(R.id.image_title) EditText imageTitle;
     @BindView(R.id.image_description) EditText imageDescription;
 
+    //Right Card
+    @BindView(R.id.right_card) CardView rightCard;
+    @BindView(R.id.right_card_expand_button) ImageView rightCardExpandButton;
+    @BindView(R.id.right_card_map_button) View rightCardMapButton;
+
     // Category Search
     @BindView(R.id.categories_title) TextView categoryTitle;
     @BindView(R.id.category_next) Button categoryNext;
@@ -105,9 +113,18 @@ public class UploadActivity extends AuthenticatedActivity implements UploadView 
     private AbstractTextWatcher descriptionWatcher;
     private CompositeDisposable compositeDisposable;
 
+    private int dp8; //8 dp in px
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        dp8 = (int) TypedValue.applyDimension(
+                TypedValue.COMPLEX_UNIT_DIP,
+                8,
+                getResources().getDisplayMetrics()
+        );
+
         configureTheme();
         setContentView(R.layout.activity_upload);
         ButterKnife.bind(this);
@@ -116,6 +133,7 @@ public class UploadActivity extends AuthenticatedActivity implements UploadView 
         configureLicenses();
         configureTopCard();
         configureBottomCard();
+        configureRightCard();
         configureNavigationButtons();
 
         presenter.initFromSavedState(savedInstanceState);
@@ -236,14 +254,24 @@ public class UploadActivity extends AuthenticatedActivity implements UploadView 
         bottomCard.setVisibility(visible ? View.VISIBLE : View.GONE);
     }
 
+    public void setRightCardVisibility(boolean visible){
+        rightCard.setVisibility(visible ? View.VISIBLE : View.GONE);
+    }
+
     @Override
     public void setBottomCardVisibility(@UploadPage int page) {
         if (page == TITLE_CARD) {
             viewFlipper.setDisplayedChild(0);
+            setTopCardVisibility(true);
+            setRightCardVisibility(true);
         } else if (page == CATEGORIES) {
             viewFlipper.setDisplayedChild(1);
+            setTopCardVisibility(false);
+            setRightCardVisibility(false);
         } else if (page == LICENSE) {
             viewFlipper.setDisplayedChild(2);
+            setTopCardVisibility(false);
+            setRightCardVisibility(false);
         } else if (page == PLEASE_WAIT) {
             viewFlipper.setDisplayedChild(3);
         }
@@ -252,6 +280,21 @@ public class UploadActivity extends AuthenticatedActivity implements UploadView 
     @Override
     public void setBottomCardState(boolean state) {
         updateCardState(state, bottomCardExpandButton, bottomCardContent);
+    }
+
+    @Override
+    public void setRightCardState(boolean state) {
+        rightCardExpandButton.animate().rotation(rightCardExpandButton.getRotation()+(state?-180:180)).start();
+        rightCardMapButton.setVisibility(state ? View.VISIBLE : View.GONE);
+//        if (rightCardExpandButton.getLayoutParams() instanceof ViewGroup.MarginLayoutParams) {
+//            ViewGroup.MarginLayoutParams p = (ViewGroup.MarginLayoutParams) rightCardExpandButton.getLayoutParams();
+//            if (state) {
+//                p.setMargins(dp8, dp8, dp8, dp8);
+//            } else {
+//                p.setMargins( 0, 0, 0, 0);
+//            }
+//            rightCardExpandButton.requestLayout();
+//        }
     }
 
     @Override
@@ -352,6 +395,10 @@ public class UploadActivity extends AuthenticatedActivity implements UploadView 
         descriptionWatcher = new AbstractTextWatcher(presenter::descriptionChanged);
     }
 
+    private void configureRightCard() {
+        rightCardExpandButton.setOnClickListener(v -> presenter.toggleRightCardState());
+    }
+
     private void configureNavigationButtons() {
         // Navigation next / previous for each image as we're collecting title + description
         next.setOnClickListener(v -> presenter.handleNext());
@@ -439,11 +486,20 @@ public class UploadActivity extends AuthenticatedActivity implements UploadView 
     }
 
     private void updateCardState(boolean state, ImageView button, View... content) {
-        button.setImageResource(state ? expandLessIcon : expandMoreIcons);
+        button.animate().rotation(button.getRotation()+(state?180:-180)).start();
+//        button.setImageResource(state ? expandLessIcon : expandMoreIcons);
         if (content != null) {
             for (View view : content) {
                 view.setVisibility(state ? View.VISIBLE : View.GONE);
             }
+        }
+    }
+
+    public static void setMargins (View v, int l, int t, int r, int b) {
+        if (v.getLayoutParams() instanceof ViewGroup.MarginLayoutParams) {
+            ViewGroup.MarginLayoutParams p = (ViewGroup.MarginLayoutParams) v.getLayoutParams();
+            p.setMargins(l, t, r, b);
+            v.requestLayout();
         }
     }
 

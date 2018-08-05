@@ -48,6 +48,7 @@ public class UploadModel {
     private List<UploadItem> items = Collections.emptyList();
     private boolean topCardState = true;
     private boolean bottomCardState = true;
+    private boolean rightCardState = true;
     private int currentStepIndex = 0;
     private Context context;
     private ContentResolver contentResolver;
@@ -131,6 +132,14 @@ public class UploadModel {
 
     public boolean isBottomCardState() {
         return bottomCardState;
+    }
+
+    public void setRightCardState(boolean rightCardState) {
+        this.rightCardState = rightCardState;
+    }
+
+    public boolean isRightCardState() {
+        return rightCardState;
     }
 
     public void setBottomCardState(boolean bottomCardState) {

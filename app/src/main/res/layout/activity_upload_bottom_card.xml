@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:layout_marginTop="@dimen/standard_gap"
     android:orientation="vertical"
     tools:showIn="@layout/activity_upload">
@@ -18,12 +18,8 @@
         android:id="@+id/bottom_card"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/standard_gap"
-        android:layout_marginLeft="@dimen/standard_gap"
-        android:layout_marginEnd="@dimen/standard_gap"
-        android:layout_marginRight="@dimen/standard_gap"
-        android:layout_marginBottom="@dimen/standard_gap"
         android:layout_gravity="bottom"
+        android:layout_margin="8dp"
         android:elevation="@dimen/cardview_default_elevation"
         tools:ignore="UnusedAttribute"
         tools:showIn="@layout/activity_upload">
@@ -38,8 +34,8 @@
                 android:id="@+id/bottom_card_title"
                 android:layout_width="wrap_content"
                 android:layout_height="24dp"
-                android:layout_alignParentStart="true"
                 android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
                 android:layout_alignParentTop="true"
                 android:gravity="center_vertical"
                 android:textSize="@dimen/normal_text"
@@ -51,10 +47,11 @@
                 style="@style/Widget.AppCompat.Button.Borderless"
                 android:layout_width="24dp"
                 android:layout_height="24dp"
-                android:layout_alignParentTop="true"
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentRight="true"
+                android:layout_alignParentTop="true"
                 android:padding="0dp"
+                android:rotation="180"
                 app:srcCompat="@drawable/ic_expand_less_black_24dp" />
 
             <RelativeLayout
@@ -99,9 +96,9 @@
                     style="@style/Widget.AppCompat.Button.Borderless"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@id/image_description_container"
                     android:layout_alignParentEnd="true"
                     android:layout_alignParentRight="true"
+                    android:layout_below="@id/image_description_container"
                     android:text="@string/next" />
 
                 <Button
@@ -109,11 +106,11 @@
                     style="@style/Widget.AppCompat.Button.Borderless"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_below="@id/image_description_container"
                     android:layout_marginEnd="@dimen/standard_gap"
                     android:layout_marginRight="@dimen/standard_gap"
-                    android:layout_toStartOf="@id/bottom_card_next"
                     android:layout_toLeftOf="@id/bottom_card_next"
-                    android:layout_below="@id/image_description_container"
+                    android:layout_toStartOf="@id/bottom_card_next"
                     android:text="@string/previous" />
 
             </RelativeLayout>
