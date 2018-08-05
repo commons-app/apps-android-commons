@@ -129,7 +129,7 @@ public class UploadPresenter {
     }
     //endregion
 
-    //region Top and Bottom card state management
+    //region Top Bottom and Right card state management
     public void toggleTopCardState() {
         uploadModel.setTopCardState(!uploadModel.isTopCardState());
         view.setTopCardState(uploadModel.isTopCardState());
@@ -139,7 +139,11 @@ public class UploadPresenter {
         uploadModel.setBottomCardState(!uploadModel.isBottomCardState());
         view.setBottomCardState(uploadModel.isBottomCardState());
     }
-    //endregion
+
+    public void toggleRightCardState() {
+        uploadModel.setRightCardState(!uploadModel.isRightCardState());
+        view.setRightCardState(uploadModel.isRightCardState());
+    }    //endregion
 
     //region View / Lifecycle management
     public void initFromSavedState(Bundle state) {

@@ -25,19 +25,27 @@
             android:background="@color/commons_app_blue_dark"
             app:actualImageScaleType="centerCrop" />
 
-        <LinearLayout
+        <android.support.constraint.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_below="@id/toolbar"
-            android:orientation="vertical">
+            android:gravity="bottom"
+            android:animateLayoutChanges="true">
 
-            <include layout="@layout/activity_upload_top_card" />
+        <include layout="@layout/activity_upload_top_card"/>
+
+            <include layout="@layout/activity_upload_right_card" />
 
             <ViewFlipper
                 android:id="@+id/view_flipper"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1">
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:clipChildren="false"
+                android:measureAllChildren="false"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent">
 
                 <include layout="@layout/activity_upload_bottom_card" />
 
@@ -48,7 +56,7 @@
                 <include layout="@layout/activity_upload_please_wait" />
 
             </ViewFlipper>
-        </LinearLayout>
+        </android.support.constraint.ConstraintLayout>
 
     </RelativeLayout>
 
