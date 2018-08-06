@@ -174,7 +174,7 @@
   <string name="title_activity_nearby">Platser i närheten</string>
   <string name="no_nearby">Inga platser i närheten hittades</string>
   <string name="warning">Varning</string>
-  <string name="file_exists">Denna fil finns redan på Commons. Är du säker på att du vill fortsätta?</string>
+  <string name="upload_image_duplicate">Denna fil finns redan på Commons. Är du säker på att du vill fortsätta?</string>
   <string name="yes">Ja</string>
   <string name="no">Nej</string>
   <string name="media_detail_title">Titel</string>

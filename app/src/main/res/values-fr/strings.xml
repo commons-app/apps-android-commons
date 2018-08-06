@@ -185,7 +185,7 @@
   <string name="title_activity_nearby">Endroits à proximité</string>
   <string name="no_nearby">Rien trouvé dans le voisinage</string>
   <string name="warning">Avertissement</string>
-  <string name="file_exists">Ce fichier existe déjà sur Commons. Êtes-vous sûr de vouloir continuer ?</string>
+  <string name="upload_image_duplicate">Ce fichier existe déjà sur Commons. Êtes-vous sûr de vouloir continuer ?</string>
   <string name="yes">Oui</string>
   <string name="no">Non</string>
   <string name="media_detail_title">Titre</string>

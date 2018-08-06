@@ -186,7 +186,7 @@
   <string name="title_activity_nearby">Места поблизости</string>
   <string name="no_nearby">Места поблизости не найдены</string>
   <string name="warning">Внимание</string>
-  <string name="file_exists">Этот файл уже существует на Викискладе. Вы уверены, что хотите продолжить?</string>
+  <string name="upload_image_duplicate">Этот файл уже существует на Викискладе. Вы уверены, что хотите продолжить?</string>
   <string name="yes">Да</string>
   <string name="no">Нет</string>
   <string name="media_detail_title">Название</string>

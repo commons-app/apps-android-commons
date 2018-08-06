@@ -178,7 +178,7 @@
   <string name="title_activity_nearby">কাছাকাছি স্থান</string>
   <string name="no_nearby">কাছাকাছি কোন স্থান পাওয়া যায়নি</string>
   <string name="warning">সতর্কীকরণ</string>
-  <string name="file_exists">এই ফাইলটি ইতিমধ্যে কমন্সে বিদ্যমান। আপনি কি নিশ্চিত আপনি সামনে এগুতে চান?</string>
+  <string name="upload_image_duplicate">এই ফাইলটি ইতিমধ্যে কমন্সে বিদ্যমান। আপনি কি নিশ্চিত আপনি সামনে এগুতে চান?</string>
   <string name="yes">হ্যাঁ</string>
   <string name="no">না</string>
   <string name="media_detail_title">শিরোনাম</string>

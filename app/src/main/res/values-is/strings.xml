@@ -161,7 +161,7 @@
   <string name="title_activity_nearby">Staðir í nágrenninu</string>
   <string name="no_nearby">Engir staðir fundust í nágrenninu</string>
   <string name="warning">Aðvörun</string>
-  <string name="file_exists">Þessi skrá er þegar fyrirliggjandi á Commons. Ertu viss um að þú viljir halda áfram?</string>
+  <string name="upload_image_duplicate">Þessi skrá er þegar fyrirliggjandi á Commons. Ertu viss um að þú viljir halda áfram?</string>
   <string name="yes">Já</string>
   <string name="no">Nei</string>
   <string name="media_detail_title">Titill</string>

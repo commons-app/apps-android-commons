@@ -176,7 +176,7 @@
   <string name="title_activity_nearby">Κοντινοί Τόποι</string>
   <string name="no_nearby">Δεν βρέθηκαν τόποι εδώ κοντά</string>
   <string name="warning">Προειδοποίηση</string>
-  <string name="file_exists">Αυτό το αρχείο υπάρχει ήδη στα Commons. Είστε σίγουρος ότι θέλετε να συνεχίσετε;</string>
+  <string name="upload_image_duplicate">Αυτό το αρχείο υπάρχει ήδη στα Commons. Είστε σίγουρος ότι θέλετε να συνεχίσετε;</string>
   <string name="yes">Ναι</string>
   <string name="no">Όχι</string>
   <string name="media_detail_title">Τίτλος</string>

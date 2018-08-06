@@ -139,7 +139,7 @@
   <string name="title_activity_nearby">Llocs propers</string>
   <string name="no_nearby">No s\'han trobat llocs propers</string>
   <string name="warning">Avís</string>
-  <string name="file_exists">El fitxer ja existeix a Commons. Segur que voleu procedir?</string>
+  <string name="upload_image_duplicate">El fitxer ja existeix a Commons. Segur que voleu procedir?</string>
   <string name="yes">Sí</string>
   <string name="no">No</string>
   <string name="media_detail_title">Títol</string>

@@ -157,7 +157,7 @@
   <string name="location_permission_rationale">Мотлаҡ булмаған рөхсәт: категория тәҡдиме өсөн ошо урынды алыу</string>
   <string name="title_activity_nearby">Яҡындағы урындар</string>
   <string name="no_nearby">Яҡындағы урындар табылманы</string>
-  <string name="file_exists">Был файл Викискладта бар. Дауам итергә ризаһыңмы?</string>
+  <string name="upload_image_duplicate">Был файл Викискладта бар. Дауам итергә ризаһыңмы?</string>
   <string name="media_detail_title">Атама</string>
   <string name="media_detail_media_title">Мәғлүмәт йөрөтөүсенең атамаһы</string>
   <string name="media_detail_description_explanation">Мәғлүмәт йөрөтөүсене һүрәтләү ошонда яҙыла.Уның ярайһы уҡ оҙон, хатта бер-нисә юлға һуҙылып китеүе лә бар. Шулай булһа ла ул бик матур күренер тип уйлайбыҙ.</string>

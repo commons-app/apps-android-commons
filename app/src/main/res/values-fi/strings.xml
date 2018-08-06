@@ -176,7 +176,7 @@
   <string name="title_activity_nearby">Lähellä olevat paikat</string>
   <string name="no_nearby">Lähistöltä ei löytynyt paikkoja</string>
   <string name="warning">Varoitus</string>
-  <string name="file_exists">Tämä tiedosto on jo Wikimedia Commonsissa. Haluatko varmasti jatkaa?</string>
+  <string name="upload_image_duplicate">Tämä tiedosto on jo Wikimedia Commonsissa. Haluatko varmasti jatkaa?</string>
   <string name="yes">Kyllä</string>
   <string name="no">Ei</string>
   <string name="media_detail_title">Otsikko</string>

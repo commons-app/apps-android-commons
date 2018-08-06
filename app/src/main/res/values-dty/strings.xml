@@ -46,7 +46,7 @@
   <string name="ok">हुन्छ</string>
   <string name="title_activity_nearby">नज्यूकाऽ ठउरअन</string>
   <string name="warning">चेतावनी</string>
-  <string name="file_exists">यो फाइल कमन्स मी पैली बठेइ छ। तम पक्का छऽ कि तम ऐतिर जान चाहन्छऽ?</string>
+  <string name="upload_image_duplicate">यो फाइल कमन्स मी पैली बठेइ छ। तम पक्का छऽ कि तम ऐतिर जान चाहन्छऽ?</string>
   <string name="yes">हो</string>
   <string name="no">नाइँ</string>
   <string name="media_detail_title">शीर्षक</string>

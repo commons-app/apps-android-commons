@@ -159,7 +159,7 @@
   <string name="title_activity_nearby">Plaatse in de buurt</string>
   <string name="no_nearby">Gein plaatse in de buurt gevónje</string>
   <string name="warning">Waorsjoewing</string>
-  <string name="file_exists">Dit bestandj besteit al op Commons. Wèts se zeker det se door wils gaon?</string>
+  <string name="upload_image_duplicate">Dit bestandj besteit al op Commons. Wèts se zeker det se door wils gaon?</string>
   <string name="yes">Jao</string>
   <string name="no">Nae</string>
   <string name="media_detail_title">Titel</string>

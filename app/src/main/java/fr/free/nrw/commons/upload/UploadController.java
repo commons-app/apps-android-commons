@@ -167,8 +167,6 @@ public class UploadController {
                 long length;
                 ContentResolver contentResolver = context.getContentResolver();
                 try {
-
-                    //TODO: understand do we really need this code
                     if (contribution.getDataLength() <= 0) {
                         Timber.d("UploadController/doInBackground, contribution.getLocalUri():" + contribution.getLocalUri());
                         AssetFileDescriptor assetFileDescriptor = contentResolver

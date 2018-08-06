@@ -6,16 +6,11 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.ParcelFileDescriptor;
-import android.text.TextUtils;
-
-import org.reactivestreams.Subscription;
 
 import java.io.File;
 import java.io.IOException;
 import java.lang.ref.WeakReference;
-import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -25,22 +20,19 @@ import javax.inject.Named;
 import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.auth.SessionManager;
 import fr.free.nrw.commons.contributions.Contribution;
+import fr.free.nrw.commons.mwapi.MediaWikiApi;
 import fr.free.nrw.commons.settings.Prefs;
 import fr.free.nrw.commons.utils.ImageUtils;
 import io.reactivex.Observable;
-import io.reactivex.Observer;
-import io.reactivex.Scheduler;
-import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Consumer;
-import io.reactivex.schedulers.Schedulers;
 import io.reactivex.subjects.BehaviorSubject;
 import timber.log.Timber;
 
-import static com.mapbox.mapboxsdk.Mapbox.getApplicationContext;
-
 public class UploadModel {
-    private static UploadItem DUMMY = new UploadItem(Uri.EMPTY, "", "", GPSExtractor.DUMMY);
+
+    MediaWikiApi mwApi;
+    private static UploadItem DUMMY = new UploadItem(Uri.EMPTY, "", "", GPSExtractor.DUMMY, "");
     private final SharedPreferences prefs;
     private final List<String> licenses;
     private String license;
@@ -55,7 +47,6 @@ public class UploadModel {
     private boolean useExtStorage;
     private Disposable badImageSubscription;
 
-
     @Inject
     SessionManager sessionManager;
 
@@ -63,30 +54,35 @@ public class UploadModel {
     UploadModel(@Named("licenses") List<String> licenses,
                 @Named("default_preferences") SharedPreferences prefs,
                 @Named("licenses_by_name") Map<String, String> licensesByName,
-                Context context) {
+                Context context,
+                MediaWikiApi mwApi) {
         this.licenses = licenses;
         this.prefs = prefs;
         this.license = Prefs.Licenses.CC_BY_SA_3;
         this.licensesByName = licensesByName;
         this.context = context;
+        this.mwApi=mwApi;
         this.contentResolver = context.getContentResolver();
         useExtStorage = prefs.getBoolean("useExternalStorage", true);
     }
 
     @SuppressLint("CheckResult")
     public void receive(List<Uri> mediaUri, String mimeType, String source) {
-        currentStepIndex = 0;
         Observable<UploadItem> itemObservable = Observable.fromIterable(mediaUri)
                 .map(this::cacheFileUpload)
-                .map(uri->{
+                .map(filePath -> {
+                    Uri uri=Uri.fromFile(new File(filePath));
                     FileProcessor fp = new FileProcessor(uri, context.getContentResolver(), context);
-                    return new UploadItem(uri, mimeType, source, fp.processFileCoordinates(false));
+                    UploadItem item= new UploadItem(uri, mimeType, source, fp.processFileCoordinates(false),
+                            FileUtils.getFileExt(filePath));
+                    new DetectBadPicturesAsync(new WeakReference<>(item.imageQuality), new WeakReference<>(context),
+                            new WeakReference<>(mwApi), uri).execute();
+                    return item;
                 });
-        items=itemObservable.toList().blockingGet();
+        items = itemObservable.toList().blockingGet();
         items.get(0).selected = true;
         items.get(0).first = true;
-
-            }
+    }
 
     public boolean isPreviousAvailable() {
         return currentStepIndex > 0;
@@ -147,7 +143,7 @@ public class UploadModel {
     }
 
     public void next() {
-        if(badImageSubscription!=null)
+        if (badImageSubscription != null)
             badImageSubscription.dispose();
         markCurrentUploadVisited();
         if (currentStepIndex < items.size() + 1) {
@@ -157,7 +153,7 @@ public class UploadModel {
     }
 
     public void previous() {
-        if(badImageSubscription!=null)
+        if (badImageSubscription != null)
             badImageSubscription.dispose();
         markCurrentUploadVisited();
         if (currentStepIndex > 0) {
@@ -207,45 +203,52 @@ public class UploadModel {
         this.license = licensesByName.get(licenseName);
     }
 
-    //When the EXIF modification UI is added, the modifications will be done here
-    public Observable<Contribution> toContributions() {
+    public Observable<Contribution> buildContributions(List<String> categoryStringList) {
         return Observable.fromIterable(items).map(item ->
-                new Contribution(item.mediaUri, null, item.title, item.description, -1,
-                        null, null, sessionManager.getCurrentAccount().name,
-                        CommonsApplication.DEFAULT_EDIT_SUMMARY, item.gpsCoords.getCoords()));
+        {
+            Contribution contribution= new Contribution(item.mediaUri, null, item.title+"."+item.fileExt, item.description, -1,
+                    null, null, sessionManager.getCurrentAccount().name,
+                    CommonsApplication.DEFAULT_EDIT_SUMMARY, item.gpsCoords.getCoords());
+            contribution.setCategories(categoryStringList);
+            contribution.setTag("mimeType", item.mimeType);
+            contribution.setSource(item.source);
+            contribution.setContentProviderUri(item.mediaUri);
+            return contribution;
+        });
     }
 
-    private Uri cacheFileUpload(Uri media) {
-        //Copy files into local storage and return URI
+    /**
+     *Copy files into local storage and return file path
+     * @param media Uri of the file
+     * @return
+     */
+    private String cacheFileUpload(Uri media) {
         try {
             String copyPath;
-            ParcelFileDescriptor descriptor = contentResolver.openFileDescriptor(media, "r");
-            if (descriptor != null) {
                 if (useExtStorage)
-                    copyPath=FileUtils.createExternalCopyPathAndCopy(descriptor);
+                    copyPath = FileUtils.createExternalCopyPathAndCopy(media, contentResolver);
                 else
-                    copyPath=FileUtils.createCopyPathAndCopy(descriptor);
-                Timber.i("Parsed Uri is "+Uri.parse(copyPath).toString());
-                return Uri.fromFile(new File(copyPath));
-            }
+                    copyPath = FileUtils.createCopyPathAndCopy(media, contentResolver);
+                Timber.i("File path is " + copyPath);
+                return copyPath;
         } catch (IOException e) {
-        Timber.w(e, "Error in copying URI " + media.getPath());
+            Timber.w(e, "Error in copying URI " + media.getPath());
         }
         return null;
     }
 
-    public void keepPicture(){
+    public void keepPicture() {
         items.get(currentStepIndex).imageQuality.onNext(ImageUtils.Result.IMAGE_KEEP);
     }
 
-    public void deletePicture(){
+    public void deletePicture() {
         badImageSubscription.dispose();
         items.remove(currentStepIndex).imageQuality.onComplete();
         updateItemState();
     }
 
     public void subscribeBadPicture(Consumer<ImageUtils.Result> consumer) {
-        badImageSubscription=getCurrentItem().imageQuality.subscribe(consumer);
+        badImageSubscription = getCurrentItem().imageQuality.subscribe(consumer);
     }
 
 
@@ -258,6 +261,7 @@ public class UploadModel {
 
         public boolean selected = false;
         public boolean first = false;
+        public String fileExt;
         public BehaviorSubject<ImageUtils.Result> imageQuality;
         public String title;
         public String description;
@@ -265,16 +269,14 @@ public class UploadModel {
         public boolean error;
 
         @SuppressLint("CheckResult")
-        UploadItem(Uri mediaUri, String mimeType, String source, GPSExtractor gpsCoords) {
+        UploadItem(Uri mediaUri, String mimeType, String source, GPSExtractor gpsCoords, String fileExt) {
             this.mediaUri = mediaUri;
             this.mimeType = mimeType;
             this.source = source;
             this.gpsCoords = gpsCoords;
-            if(mediaUri!=null && !mediaUri.equals(Uri.EMPTY)) {
-                imageQuality = BehaviorSubject.createDefault(ImageUtils.Result.IMAGE_WAIT);
+            this.fileExt = fileExt;
+            imageQuality = BehaviorSubject.createDefault(ImageUtils.Result.IMAGE_WAIT);
 //                imageQuality.subscribe(iq->Timber.i("New value of imageQuality:"+ImageUtils.Result.IMAGE_OK));
-                new DetectBadPicturesAsync(new WeakReference<>(imageQuality), mediaUri.getPath()).execute();
-            }
         }
     }
 }

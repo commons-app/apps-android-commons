@@ -168,7 +168,7 @@
   <string name="title_activity_nearby">Околни места</string>
   <string name="no_nearby">Не најдов околни места</string>
   <string name="warning">Предупредување</string>
-  <string name="file_exists">Податотекава веќе постои на Ризницата. Дали сигурно сакате да продолжите?</string>
+  <string name="upload_image_duplicate">Податотекава веќе постои на Ризницата. Дали сигурно сакате да продолжите?</string>
   <string name="yes">Да</string>
   <string name="no">Не</string>
   <string name="media_detail_title">Наслов</string>

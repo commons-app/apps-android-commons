@@ -179,7 +179,7 @@
   <string name="title_activity_nearby">附近地点</string>
   <string name="no_nearby">找不到附近地点</string>
   <string name="warning">警告</string>
-  <string name="file_exists">此文件在共享资源已存在。您确定要继续么？</string>
+  <string name="upload_image_duplicate">此文件在共享资源已存在。您确定要继续么？</string>
   <string name="yes">是</string>
   <string name="no">否</string>
   <string name="media_detail_title">标题</string>

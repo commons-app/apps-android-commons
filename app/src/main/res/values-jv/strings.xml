@@ -145,7 +145,7 @@
   <string name="title_activity_nearby">Papan Cedhak Kéné</string>
   <string name="no_nearby">Ora ana papan cedhak kéné</string>
   <string name="warning">Pélik</string>
-  <string name="file_exists">Barkasé wis ana ing Commons. Panjenengan yakin arep mbacutaké?</string>
+  <string name="upload_image_duplicate">Barkasé wis ana ing Commons. Panjenengan yakin arep mbacutaké?</string>
   <string name="yes">Iya</string>
   <string name="no">Ora</string>
   <string name="media_detail_title">Sesirah</string>

@@ -172,7 +172,7 @@
   <string name="title_activity_nearby">近くの場所</string>
   <string name="no_nearby">付近の場所が見つかりません</string>
   <string name="warning">警告</string>
-  <string name="file_exists">このファイルは既にコモンズにあります。本当にアップロードしますか？</string>
+  <string name="upload_image_duplicate">このファイルは既にコモンズにあります。本当にアップロードしますか？</string>
   <string name="yes">はい</string>
   <string name="no">いいえ</string>
   <string name="media_detail_title">タイトル</string>

@@ -154,7 +154,7 @@
   <string name="title_activity_nearby">आसपास के स्थान</string>
   <string name="no_nearby">पास के कोई भी स्थान नहीं मिले</string>
   <string name="warning">चेतावनी</string>
-  <string name="file_exists">यह फ़ाइल कॉमन्स पर पहले से है। क्या आप फिर भी आगे बढ़ना चाहते हैं?</string>
+  <string name="upload_image_duplicate">यह फ़ाइल कॉमन्स पर पहले से है। क्या आप फिर भी आगे बढ़ना चाहते हैं?</string>
   <string name="yes">हाँ</string>
   <string name="no">नहीं</string>
   <string name="media_detail_title">शीर्षक</string>

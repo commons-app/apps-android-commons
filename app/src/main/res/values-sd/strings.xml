@@ -161,7 +161,7 @@
   <string name="title_activity_nearby">ويجھڙائيءَ ۾ جڳھون</string>
   <string name="no_nearby">آپاس وارو جڳهه نه لڌو</string>
   <string name="warning">چتاءُ</string>
-  <string name="file_exists">فائل اڳ ئي العام ۾ موجود آھي. ڇا توھان کي پڪ آھي تہ توھان اڳتي وڌڻ ٿا چاھيو؟</string>
+  <string name="upload_image_duplicate">فائل اڳ ئي العام ۾ موجود آھي. ڇا توھان کي پڪ آھي تہ توھان اڳتي وڌڻ ٿا چاھيو؟</string>
   <string name="yes">ها</string>
   <string name="no">نہ</string>
   <string name="media_detail_title">عنوان</string>

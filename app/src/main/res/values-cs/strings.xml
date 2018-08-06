@@ -181,7 +181,7 @@
   <string name="title_activity_nearby">Místa v okolí</string>
   <string name="no_nearby">Poblíž nebylo nic nalezeno</string>
   <string name="warning">Upozornění</string>
-  <string name="file_exists">Tento soubor již na Commons existuje. Jste si jist, že chcete pokračovat?</string>
+  <string name="upload_image_duplicate">Tento soubor již na Commons existuje. Jste si jist, že chcete pokračovat?</string>
   <string name="yes">Ano</string>
   <string name="no">Ne</string>
   <string name="media_detail_title">Název</string>
