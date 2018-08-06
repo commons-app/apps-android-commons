@@ -94,8 +94,8 @@ public class UploadPresenter {
                 .subscribe(uploadController::startUpload);
     }
 
-    public void openCoordinateMap(){
-        GPSExtractor gpsObj=uploadModel.getCurrentItem().gpsCoords;
+    public void openCoordinateMap() {
+        GPSExtractor gpsObj = uploadModel.getCurrentItem().gpsCoords;
         if (gpsObj != null && gpsObj.imageCoordsExists) {
             view.launchMapActivity(gpsObj.getDecLatitude() + "," + gpsObj.getDecLongitude());
         }
@@ -137,7 +137,23 @@ public class UploadPresenter {
     public void toggleRightCardState() {
         uploadModel.setRightCardState(!uploadModel.isRightCardState());
         view.setRightCardState(uploadModel.isRightCardState());
-    }    //endregion
+    }
+
+    public void closeAllCards() {
+        if (uploadModel.isTopCardState()) {
+            uploadModel.setTopCardState(false);
+            view.setTopCardState(false);
+        }
+        if (uploadModel.isRightCardState()) {
+            uploadModel.setRightCardState(false);
+            view.setRightCardState(false);
+        }
+        if (uploadModel.isBottomCardState()) {
+            uploadModel.setBottomCardState(false);
+            view.setBottomCardState(false);
+        }
+    }
+    //endregion
 
     //region View / Lifecycle management
     public void initFromSavedState(Bundle state) {
@@ -173,7 +189,7 @@ public class UploadPresenter {
     }
 
     void updateCards(UploadView view) {
-        Timber.i("uploadModel.getCount():"+uploadModel.getCount());
+        Timber.i("uploadModel.getCount():" + uploadModel.getCount());
         view.updateThumbnails(uploadModel.getUploads());
         view.setTopCardVisibility(uploadModel.getCount() > 1);
         view.setBottomCardVisibility(uploadModel.getCount() > 0);

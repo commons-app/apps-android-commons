@@ -17,7 +17,7 @@
             android:layout_height="wrap_content"
             android:visibility="gone" />
 
-        <com.facebook.drawee.view.SimpleDraweeView
+        <com.github.chrisbanes.photoview.PhotoView
             android:id="@+id/backgroundImage"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -41,7 +41,6 @@
                 android:id="@+id/view_flipper"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp"
                 android:clipChildren="false"
                 android:measureAllChildren="false"
                 app:layout_constraintBottom_toBottomOf="parent"

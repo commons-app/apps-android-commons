@@ -15,9 +15,7 @@ import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
-import android.util.TypedValue;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -30,7 +28,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ViewFlipper;
 
-import com.facebook.drawee.view.SimpleDraweeView;
+import com.github.chrisbanes.photoview.PhotoView;
 import com.jakewharton.rxbinding2.view.RxView;
 import com.jakewharton.rxbinding2.widget.RxTextView;
 import com.pedrogomez.renderers.RVRendererAdapter;
@@ -44,7 +42,6 @@ import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import dagger.android.AndroidInjection;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.Utils;
 import fr.free.nrw.commons.auth.AuthenticatedActivity;
@@ -72,7 +69,7 @@ public class UploadActivity extends AuthenticatedActivity implements UploadView 
 
     // Main GUI
     @BindView(R.id.backgroundImage)
-    SimpleDraweeView background;
+    PhotoView background;
     @BindView(R.id.activity_upload_cards)
     ConstraintLayout cardLayout;
     @BindView(R.id.view_flipper)
@@ -158,7 +155,7 @@ public class UploadActivity extends AuthenticatedActivity implements UploadView 
 
         configureCategories(savedInstanceState);
         configureLicenses();
-        configureCardLayout();
+        configureLayout();
         configureTopCard();
         configureBottomCard();
         configureRightCard();
@@ -327,6 +324,7 @@ public class UploadActivity extends AuthenticatedActivity implements UploadView 
         background.setImageURI(mediaUri);
     }
 
+
     @Override
     public void dismissKeyboard() {
         inputMethodManager.hideSoftInputFromWindow(imageTitle.getWindowToken(), 0);
@@ -419,10 +417,14 @@ public class UploadActivity extends AuthenticatedActivity implements UploadView 
         });
     }
 
-    private void configureCardLayout(){
+    private void configureLayout(){
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
             cardLayout.getLayoutTransition().enableTransitionType(LayoutTransition.CHANGING);
         }
+        background.setScaleType(ImageView.ScaleType.CENTER_CROP);
+        background.setOnScaleChangeListener((scaleFactor, x, y)->{
+            presenter.closeAllCards();
+        });
     }
 
     private void configureTopCard() {
