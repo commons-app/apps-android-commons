@@ -27,7 +27,6 @@ public class UploadPresenter {
     private UploadView view;// = UploadView.DUMMY;
 
 
-
     @Inject
     public UploadPresenter(UploadModel uploadModel, UploadController uploadController) {
         this.uploadModel = uploadModel;
@@ -40,17 +39,15 @@ public class UploadPresenter {
 
     @SuppressLint("CheckResult")
     public void receive(List<Uri> media, String mimeType, String source) {
-        Completable.fromRunnable(() -> uploadModel.receive(media, mimeType, source)
-        ).subscribeOn(
-                Schedulers.io()
-        ).observeOn(
-                AndroidSchedulers.mainThread()
-        ).subscribe(
-                () -> {
+        Completable.fromRunnable(() -> uploadModel.receive(media, mimeType, source))
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(() -> {
                     updateCards(view);
                     updateLicenses(view);
                     updateContent();
-                    if(uploadModel.isShowingItem()) uploadModel.subscribeBadPicture(this::handleBadPicture);
+                    if (uploadModel.isShowingItem())
+                        uploadModel.subscribeBadPicture(this::handleBadPicture);
                 });
 
     }
@@ -74,14 +71,14 @@ public class UploadPresenter {
     public void handleNext() {
         uploadModel.next();
         updateContent();
-        if(uploadModel.isShowingItem()) uploadModel.subscribeBadPicture(this::handleBadPicture);
+        if (uploadModel.isShowingItem()) uploadModel.subscribeBadPicture(this::handleBadPicture);
         view.dismissKeyboard();
     }
 
     public void handlePrevious() {
         uploadModel.previous();
         updateContent();
-        if(uploadModel.isShowingItem()) uploadModel.subscribeBadPicture(this::handleBadPicture);
+        if (uploadModel.isShowingItem()) uploadModel.subscribeBadPicture(this::handleBadPicture);
         view.dismissKeyboard();
     }
 
@@ -92,20 +89,28 @@ public class UploadPresenter {
 
     @SuppressLint("CheckResult")
     public void handleSubmit(CategoriesModel categoriesModel) {
-        uploadModel.buildContributions(categoriesModel.getCategoryStringList()
-        ).observeOn(Schedulers.io()).subscribe(uploadController::startUpload);
+        uploadModel.buildContributions(categoriesModel.getCategoryStringList())
+                .observeOn(Schedulers.io())
+                .subscribe(uploadController::startUpload);
     }
 
-    public void handleBadPicture(ImageUtils.Result result){
+    public void openCoordinateMap(){
+        GPSExtractor gpsObj=uploadModel.getCurrentItem().gpsCoords;
+        if (gpsObj != null && gpsObj.imageCoordsExists) {
+            view.launchMapActivity(gpsObj.getDecLatitude() + "," + gpsObj.getDecLongitude());
+        }
+    }
+
+    public void handleBadPicture(ImageUtils.Result result) {
         view.showBadPicturePopup(result);
     }
 
-    public void keepPicture(){
+    public void keepPicture() {
         uploadModel.keepPicture();
     }
 
-    public void deletePicture(){
-        if(uploadModel.getCount()==1)
+    public void deletePicture() {
+        if (uploadModel.getCount() == 1)
             view.finish();
         else {
             uploadModel.deletePicture();
@@ -167,6 +172,7 @@ public class UploadPresenter {
     }
 
     void updateCards(UploadView view) {
+        Timber.i("uploadModel.getCount():"+uploadModel.getCount());
         view.updateThumbnails(uploadModel.getUploads());
         view.setTopCardVisibility(uploadModel.getCount() > 1);
         view.setBottomCardVisibility(uploadModel.getCount() > 0);
@@ -181,7 +187,7 @@ public class UploadPresenter {
     }
 
     void updateContent() {
-        Timber.i("Updating content for page"+uploadModel.getCurrentStep());
+        Timber.i("Updating content for page" + uploadModel.getCurrentStep());
         view.setNextEnabled(uploadModel.isNextAvailable());
         view.setPreviousEnabled(uploadModel.isPreviousAvailable());
         view.setSubmitEnabled(uploadModel.isSubmitAvailable());
@@ -191,21 +197,31 @@ public class UploadPresenter {
         view.updateBottomCardContent(uploadModel.getCurrentStep(), uploadModel.getStepCount(), uploadModel.getCurrentItem());
         view.updateTopCardContent();
 
-        showCorrectBottomCard(uploadModel.getCurrentStep(), uploadModel.getCount());
+        showCorrectCards(uploadModel.getCurrentStep(), uploadModel.getCount());
     }
 
-    void showCorrectBottomCard(int currentStep, int uploadCount) {
+    void showCorrectCards(int currentStep, int uploadCount) {
         @UploadView.UploadPage int page;
         if (uploadCount == 0) {
             page = UploadView.PLEASE_WAIT;
         } else if (currentStep <= uploadCount) {
             page = UploadView.TITLE_CARD;
+            view.setTopCardVisibility(uploadModel.getCount() > 1);
+            view.setRightCardVisibility(true);
         } else if (currentStep == uploadCount + 1) {
             page = UploadView.CATEGORIES;
+            view.setTopCardVisibility(false);
+            view.setRightCardVisibility(false);
         } else {
             page = UploadView.LICENSE;
+            view.setTopCardVisibility(false);
+            view.setRightCardVisibility(false);
         }
         view.setBottomCardVisibility(page);
     }
+
     //endregion
+    public UploadModel.UploadItem getCurrentItem() {
+        return uploadModel.getCurrentItem();
+    }
 }

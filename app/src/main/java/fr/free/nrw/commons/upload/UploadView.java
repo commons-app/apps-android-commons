@@ -36,6 +36,8 @@ public interface UploadView {
 
     void setTopCardState(boolean state);
 
+    void setRightCardVisibility(boolean visible);
+
     void setBottomCardState(boolean state);
 
     void setRightCardState(boolean bottomCardState);
@@ -61,4 +63,6 @@ public interface UploadView {
     void showBadPicturePopup(ImageUtils.Result errorMessage);
 
     void finish();
+
+    void launchMapActivity(String decCoords);
 }
