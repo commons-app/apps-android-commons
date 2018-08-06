@@ -1,11 +1,14 @@
 package fr.free.nrw.commons.upload;
 
+import android.animation.LayoutTransition;
 import android.annotation.SuppressLint;
 import android.content.ActivityNotFoundException;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.constraint.ConstraintLayout;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.CardView;
@@ -41,6 +44,7 @@ import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import dagger.android.AndroidInjection;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.Utils;
 import fr.free.nrw.commons.auth.AuthenticatedActivity;
@@ -69,6 +73,8 @@ public class UploadActivity extends AuthenticatedActivity implements UploadView 
     // Main GUI
     @BindView(R.id.backgroundImage)
     SimpleDraweeView background;
+    @BindView(R.id.activity_upload_cards)
+    ConstraintLayout cardLayout;
     @BindView(R.id.view_flipper)
     ViewFlipper viewFlipper;
 
@@ -152,6 +158,7 @@ public class UploadActivity extends AuthenticatedActivity implements UploadView 
 
         configureCategories(savedInstanceState);
         configureLicenses();
+        configureCardLayout();
         configureTopCard();
         configureBottomCard();
         configureRightCard();
@@ -412,6 +419,12 @@ public class UploadActivity extends AuthenticatedActivity implements UploadView 
         });
     }
 
+    private void configureCardLayout(){
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+            cardLayout.getLayoutTransition().enableTransitionType(LayoutTransition.CHANGING);
+        }
+    }
+
     private void configureTopCard() {
         topCardExpandButton.setOnClickListener(v -> presenter.toggleTopCardState());
         topCardThumbnails.setLayoutManager(new LinearLayoutManager(this,
@@ -544,11 +557,5 @@ public class UploadActivity extends AuthenticatedActivity implements UploadView 
                 errorDialog.show();
             }
         }
-    }
-
-    @Override
-    protected void finalize() throws Throwable {
-        presenter = null;
-        super.finalize();
     }
 }

@@ -27,7 +27,6 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:animateLayoutChanges="true"
             android:padding="@dimen/small_gap">
 
             <TextView

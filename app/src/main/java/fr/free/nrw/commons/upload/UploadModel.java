@@ -68,6 +68,7 @@ public class UploadModel {
 
     @SuppressLint("CheckResult")
     public void receive(List<Uri> mediaUri, String mimeType, String source) {
+        currentStepIndex=0;
         Observable<UploadItem> itemObservable = Observable.fromIterable(mediaUri)
                 .map(this::cacheFileUpload)
                 .map(filePath -> {
