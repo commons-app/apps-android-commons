@@ -142,6 +142,7 @@ public class UploadPresenter {
     //region View / Lifecycle management
     public void initFromSavedState(Bundle state) {
         if (state != null) {
+            Timber.i("Saved state is not null.");
             uploadModel.setTopCardState(state.getBoolean(TOP_CARD_STATE, true));
             uploadModel.setBottomCardState(state.getBoolean(BOTTOM_CARD_STATE, true));
         }
