@@ -131,7 +131,7 @@
   <string name="title_activity_nearby">අවට ස්ථාන</string>
   <string name="no_nearby">ළඟපාත තැන් කිසිවක් සොයා ගැනීමට නොහැකි විය</string>
   <string name="warning">අනතුරු හැඟවීමයි</string>
-  <string name="file_exists">මෙම ගොනුව දැනටමත් කොමන්ස් හි ඇත. ඔබට ඉදිරියට ‍යෑම ගැන විශ්වාසද?</string>
+  <string name="upload_image_duplicate">මෙම ගොනුව දැනටමත් කොමන්ස් හි ඇත. ඔබට ඉදිරියට ‍යෑම ගැන විශ්වාසද?</string>
   <string name="yes">ඔව්</string>
   <string name="no">නැත</string>
   <string name="media_detail_title">මාතෘකාව</string>

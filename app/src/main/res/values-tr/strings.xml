@@ -173,7 +173,7 @@
   <string name="title_activity_nearby">Yakındaki yerler</string>
   <string name="no_nearby">Yakınlardaki yer bulunamadı</string>
   <string name="warning">Uyarı</string>
-  <string name="file_exists">Bu dosya zaten Commons\'da var. Devam etmek istediğinizden emin misiniz?</string>
+  <string name="upload_image_duplicate">Bu dosya zaten Commons\'da var. Devam etmek istediğinizden emin misiniz?</string>
   <string name="yes">Evet</string>
   <string name="no">Hayır</string>
   <string name="media_detail_title">Başlık</string>

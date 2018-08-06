@@ -217,6 +217,7 @@ public class ShareActivity
             Timber.d("Cache the categories found");
         }
 
+        Timber.i("Title is "+title);
         uploadController.startUpload(title, contentProviderUri, mediaUri, description, mimeType, source, decimalCoords, wikiDataEntityId, c -> {
             ShareActivity.this.contribution = c;
             showPostUpload();

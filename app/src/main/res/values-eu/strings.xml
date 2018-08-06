@@ -169,7 +169,7 @@
   <string name="title_activity_nearby">Gertuko lekuak</string>
   <string name="no_nearby">Ez da hurbileko lekurik aurkitu</string>
   <string name="warning">Oharra</string>
-  <string name="file_exists">Fifxategia dagoeneko Commonsen existitzen da. Ziur zaude jarraitu nahi duzula?</string>
+  <string name="upload_image_duplicate">Fifxategia dagoeneko Commonsen existitzen da. Ziur zaude jarraitu nahi duzula?</string>
   <string name="yes">Bai</string>
   <string name="no">Ez</string>
   <string name="media_detail_title">Izenburua</string>

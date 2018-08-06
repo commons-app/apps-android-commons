@@ -171,7 +171,7 @@
   <string name="title_activity_nearby">Места у близини</string>
   <string name="no_nearby">Нису пронађена оближња места</string>
   <string name="warning">Упозорење</string>
-  <string name="file_exists">Ова датотека је већ доступна на Остави. Да ли сте сигурни да желите да наставите?</string>
+  <string name="upload_image_duplicate">Ова датотека је већ доступна на Остави. Да ли сте сигурни да желите да наставите?</string>
   <string name="yes">Да</string>
   <string name="no">Не</string>
   <string name="media_detail_title">Наслов</string>

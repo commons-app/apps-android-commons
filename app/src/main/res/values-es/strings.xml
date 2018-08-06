@@ -177,7 +177,7 @@
   <string name="title_activity_nearby">Lugares cercanos</string>
   <string name="no_nearby">No se encontraron lugares cercanos</string>
   <string name="warning">Atención</string>
-  <string name="file_exists">Este archivo ya existe en Commons. ¿Confirmas que quieres continuar?</string>
+  <string name="upload_image_duplicate">Este archivo ya existe en Commons. ¿Confirmas que quieres continuar?</string>
   <string name="yes">Sí</string>
   <string name="no">No</string>
   <string name="media_detail_title">Título</string>

@@ -1,6 +1,7 @@
 package fr.free.nrw.commons.upload;
 
 import android.annotation.SuppressLint;
+import android.content.ContentResolver;
 import android.content.ContentUris;
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -12,6 +13,7 @@ import android.os.ParcelFileDescriptor;
 import android.preference.PreferenceManager;
 import android.provider.DocumentsContract;
 import android.provider.MediaStore;
+import android.provider.OpenableColumns;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.util.Log;
@@ -83,11 +85,12 @@ public class FileUtils {
      * @return path of copy
      */
     @NonNull
-    static String createExternalCopyPathAndCopy(ParcelFileDescriptor descriptor) throws IOException {
-        String copyPath = Environment.getExternalStorageDirectory().toString() + "/CommonsApp/" + new Date().getTime() + ".jpg";
+    static String createExternalCopyPathAndCopy(Uri uri, ContentResolver contentResolver) throws IOException {
+        FileDescriptor fileDescriptor = contentResolver.openFileDescriptor(uri, "r").getFileDescriptor();
+        String copyPath = Environment.getExternalStorageDirectory().toString() + "/CommonsApp/" + new Date().getTime() + "." + getFileExt(uri, contentResolver);
         File newFile = new File(Environment.getExternalStorageDirectory().toString() + "/CommonsApp");
         newFile.mkdir();
-        FileUtils.copy(descriptor.getFileDescriptor(), copyPath);
+        FileUtils.copy(fileDescriptor, copyPath);
         Timber.d("Filepath (copied): %s", copyPath);
         return copyPath;
     }
@@ -98,9 +101,10 @@ public class FileUtils {
      * @return path of copy
      */
     @NonNull
-    static String createCopyPathAndCopy(ParcelFileDescriptor descriptor) throws IOException {
-        String copyPath = getApplicationContext().getCacheDir().getAbsolutePath() + "/" + new Date().getTime() + ".jpg";
-        FileUtils.copy(descriptor.getFileDescriptor(), copyPath);
+    static String createCopyPathAndCopy(Uri uri, ContentResolver contentResolver) throws IOException {
+        FileDescriptor fileDescriptor = contentResolver.openFileDescriptor(uri, "r").getFileDescriptor();
+        String copyPath = getApplicationContext().getCacheDir().getAbsolutePath() + "/" + new Date().getTime() + "." + getFileExt(uri, contentResolver);
+        FileUtils.copy(fileDescriptor, copyPath);
         Timber.d("Filepath (copied): %s", copyPath);
         return copyPath;
     }
@@ -391,4 +395,39 @@ public class FileUtils {
         }
     }
 
+    public static String getFilename(Uri uri, ContentResolver contentResolver) {
+        if (android.os.Build.VERSION.SDK_INT < android.os.Build.VERSION_CODES.JELLY_BEAN)
+            return "";
+        String result = null;
+        if (uri.getScheme().equals("content")) {
+            try (Cursor cursor = contentResolver.query(uri, null, null, null, null)) {
+                if (cursor != null && cursor.moveToFirst()) {
+                    result = cursor.getString(cursor.getColumnIndex(OpenableColumns.DISPLAY_NAME));
+                }
+            }
+        }
+        if (result == null) {
+            result = uri.getPath();
+            int cut = result.lastIndexOf('/');
+            if (cut != -1) {
+                result = result.substring(cut + 1);
+            }
+        }
+        return result;
+    }
+
+    public static String getFileExt(String fileName){
+        //Default file extension
+        String extension=".jpg";
+
+        int i = fileName.lastIndexOf('.');
+        if (i > 0) {
+            extension = fileName.substring(i+1);
+        }
+        return extension;
+    }
+
+    public static String getFileExt(Uri uri, ContentResolver contentResolver) {
+        return getFileExt(getFilename(uri, contentResolver));
+    }
 }

@@ -153,7 +153,7 @@
   <string name="title_activity_nearby">Tempat Sabudeureun</string>
   <string name="no_nearby">Teu kapanggih tempat sabudeureun</string>
   <string name="warning">Mangkahadé</string>
-  <string name="file_exists">Ieu berkas geus aya di Commons. Rék diteruskeun baé ieu téh?</string>
+  <string name="upload_image_duplicate">Ieu berkas geus aya di Commons. Rék diteruskeun baé ieu téh?</string>
   <string name="yes">Nya</string>
   <string name="no">Henteu</string>
   <string name="media_detail_title">Judul</string>

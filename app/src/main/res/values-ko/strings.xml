@@ -173,7 +173,7 @@
   <string name="title_activity_nearby">근처의 장소</string>
   <string name="no_nearby">근처에 장소가 없습니다</string>
   <string name="warning">경고</string>
-  <string name="file_exists">이 파일은 이미 공용에 존재합니다. 계속하시겠습니까?</string>
+  <string name="upload_image_duplicate">이 파일은 이미 공용에 존재합니다. 계속하시겠습니까?</string>
   <string name="yes">예</string>
   <string name="no">아니오</string>
   <string name="media_detail_title">제목</string>

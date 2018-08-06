@@ -79,7 +79,7 @@ public class FileProcessor implements SimilarImageDialogFragment.onResponse {
                 ParcelFileDescriptor descriptor = contentResolver.openFileDescriptor(mediaUri, "r");
                 if (descriptor != null) {
                     if (useExtStorage) {
-                        copyPath = FileUtils.createCopyPathAndCopy(descriptor);
+                        copyPath = FileUtils.createExternalCopyPathAndCopy(mediaUri, contentResolver);
                         return copyPath;
                     }
                     copyPath = getApplicationContext().getCacheDir().getAbsolutePath() + "/" + new Date().getTime() + ".jpg";
@@ -118,8 +118,8 @@ public class FileProcessor implements SimilarImageDialogFragment.onResponse {
             decimalCoords = imageObj.getCoords();
             if (decimalCoords == null || !imageObj.imageCoordsExists) {
                 //Find other photos taken around the same time which has gps coordinates
-                if (!haveCheckedForOtherImages)
-                    findOtherImages();// Do not do repeat the process
+//                if (!haveCheckedForOtherImages)
+//                    findOtherImages();// Do not do repeat the process
             } else {
                 useImageCoords();
             }
@@ -154,7 +154,7 @@ public class FileProcessor implements SimilarImageDialogFragment.onResponse {
                 tempImageObj = null;//Temporary GPSExtractor to extract coords from these photos
                 ParcelFileDescriptor descriptor = null;
                 try {
-                    descriptor = contentResolver.openFileDescriptor(Uri.parse(file.getAbsolutePath()), "r");
+                    descriptor = contentResolver.openFileDescriptor(Uri.fromFile(file), "r");
                 } catch (FileNotFoundException e) {
                     e.printStackTrace();
                 }

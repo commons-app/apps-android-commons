@@ -41,7 +41,7 @@
   <string name="ok">باشە</string>
   <string name="title_activity_nearby">شوێنە نزیکەکان</string>
   <string name="warning">ئاگاداری</string>
-  <string name="file_exists">ئەم پەڕگەیە لەسەر کۆمنز ھەیە. دڵنیایت کە دەتەوێت بەردەوام بیت؟</string>
+  <string name="upload_image_duplicate">ئەم پەڕگەیە لەسەر کۆمنز ھەیە. دڵنیایت کە دەتەوێت بەردەوام بیت؟</string>
   <string name="yes">بەڵێ</string>
   <string name="no">نەخێر</string>
   <string name="media_detail_title">ناونیشان</string>

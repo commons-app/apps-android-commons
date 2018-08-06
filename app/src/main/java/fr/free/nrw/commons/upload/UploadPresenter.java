@@ -1,27 +1,18 @@
 package fr.free.nrw.commons.upload;
 
 import android.annotation.SuppressLint;
-import android.app.Dialog;
-import android.content.DialogInterface;
 import android.net.Uri;
 import android.os.Bundle;
 
 import java.util.Collections;
 import java.util.List;
-import java.util.concurrent.Callable;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
-import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.category.CategoriesModel;
-import fr.free.nrw.commons.contributions.Contribution;
-import fr.free.nrw.commons.modifications.CategoryModifier;
-import fr.free.nrw.commons.modifications.ModifierSequence;
-import fr.free.nrw.commons.modifications.TemplateRemoveModifier;
 import fr.free.nrw.commons.utils.ImageUtils;
 import io.reactivex.Completable;
-import io.reactivex.Single;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 import timber.log.Timber;
@@ -101,10 +92,8 @@ public class UploadPresenter {
 
     @SuppressLint("CheckResult")
     public void handleSubmit(CategoriesModel categoriesModel) {
-        uploadModel.toContributions().subscribe(contribution -> {
-            contribution.setCategories(categoriesModel.getCategoryStringList());
-            uploadController.startUpload(contribution);
-        });
+        uploadModel.buildContributions(categoriesModel.getCategoryStringList()
+        ).observeOn(Schedulers.io()).subscribe(uploadController::startUpload);
     }
 
     public void handleBadPicture(ImageUtils.Result result){

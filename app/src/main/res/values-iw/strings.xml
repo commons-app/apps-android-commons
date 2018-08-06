@@ -176,7 +176,7 @@
   <string name="title_activity_nearby">מקומות בסביבה</string>
   <string name="no_nearby">לא נמצאו מקומות בסביבה</string>
   <string name="warning">אזהרה</string>
-  <string name="file_exists">הקובץ הזה כבר קיים בוויקישיתוף. האם להמשיך?</string>
+  <string name="upload_image_duplicate">הקובץ הזה כבר קיים בוויקישיתוף. האם להמשיך?</string>
   <string name="yes">כן</string>
   <string name="no">לא</string>
   <string name="media_detail_title">כותרת</string>

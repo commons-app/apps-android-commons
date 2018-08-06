@@ -167,7 +167,7 @@
   <string name="title_activity_nearby">Pòst davzin</string>
   <string name="no_nearby">Trovà gnente ant ij parage</string>
   <string name="warning">Avertensa</string>
-  <string name="file_exists">S\'archivi a esist già su Comun. É-lo sigur ëd vorèj andé anans?</string>
+  <string name="upload_image_duplicate">S\'archivi a esist già su Comun. É-lo sigur ëd vorèj andé anans?</string>
   <string name="yes">Bò</string>
   <string name="no">Nò</string>
   <string name="media_detail_title">Tìtol</string>

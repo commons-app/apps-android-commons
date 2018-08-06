@@ -140,7 +140,7 @@
   <string name="title_activity_nearby">ਨਜ਼ਦੀਕੀ ਥਾਵਾਂ</string>
   <string name="no_nearby">ਕੋਈ ਨਜ਼ਦੀਕੀ ਥਾਵਾਂ ਨਹੀਂ ਮਿਲੀਆਂ</string>
   <string name="warning">ਖ਼ਬਰਦਾਰ</string>
-  <string name="file_exists">ਇਹ ਤਸਵੀਰ ਕਾਮਨਜ਼ \'ਤੇ ਪਹਿਲਾਂ ਹੀ ਮੌਜੂਦ ਹੈ। ਕੀ ਤੁਸੀਂ ਫਿਰ ਵੀ ਚਾਹੋਂਗੇ?</string>
+  <string name="upload_image_duplicate">ਇਹ ਤਸਵੀਰ ਕਾਮਨਜ਼ \'ਤੇ ਪਹਿਲਾਂ ਹੀ ਮੌਜੂਦ ਹੈ। ਕੀ ਤੁਸੀਂ ਫਿਰ ਵੀ ਚਾਹੋਂਗੇ?</string>
   <string name="yes">ਹਾਂ</string>
   <string name="no">ਨਹੀਂ</string>
   <string name="media_detail_title">ਸਿਰਲੇਖ</string>

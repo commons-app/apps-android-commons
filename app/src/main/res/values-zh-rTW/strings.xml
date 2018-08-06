@@ -178,7 +178,7 @@
   <string name="title_activity_nearby">附近地點</string>
   <string name="no_nearby">找不到附近地點</string>
   <string name="warning">警告</string>
-  <string name="file_exists">共享資源已有此檔案。確定要繼續嗎？</string>
+  <string name="upload_image_duplicate">共享資源已有此檔案。確定要繼續嗎？</string>
   <string name="yes">是</string>
   <string name="no">否</string>
   <string name="media_detail_title">標題</string>

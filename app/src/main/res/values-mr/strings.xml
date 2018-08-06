@@ -164,7 +164,7 @@
   <string name="title_activity_nearby">जवळपासची स्थाने</string>
   <string name="no_nearby">आसपास काहीही सापडले नाही</string>
   <string name="warning">इशारा</string>
-  <string name="file_exists">ही संचिका पूर्वीच कॉमन्सवर उपलब्ध आहे. आपणास पुढे जायचे याची निश्चिती करता काय?</string>
+  <string name="upload_image_duplicate">ही संचिका पूर्वीच कॉमन्सवर उपलब्ध आहे. आपणास पुढे जायचे याची निश्चिती करता काय?</string>
   <string name="yes">होय</string>
   <string name="no">नाही</string>
   <string name="media_detail_title">शीर्षक</string>

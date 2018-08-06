@@ -142,7 +142,7 @@
   <string name="title_activity_nearby">Mjesta u blizini</string>
   <string name="no_nearby">Nema okolnih mjesta</string>
   <string name="warning">Upozorenje</string>
-  <string name="file_exists">Ova datoteka već postoji na Commonsu. Jeste li sigurni da želite nastaviti?</string>
+  <string name="upload_image_duplicate">Ova datoteka već postoji na Commonsu. Jeste li sigurni da želite nastaviti?</string>
   <string name="yes">Da</string>
   <string name="no">Ne</string>
   <string name="media_detail_title">Naslov</string>

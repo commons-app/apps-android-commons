@@ -38,6 +38,7 @@ public class ImageUtils {
     public enum Result {
         IMAGE_DARK,
         IMAGE_BLURRY,
+        IMAGE_DUPLICATE,
         IMAGE_OK,
         IMAGE_KEEP,
         IMAGE_WAIT

@@ -3,7 +3,6 @@ package fr.free.nrw.commons.upload;
 import android.annotation.SuppressLint;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.res.Resources;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.TextInputLayout;
@@ -47,7 +46,6 @@ import fr.free.nrw.commons.auth.AuthenticatedActivity;
 import fr.free.nrw.commons.category.CategoriesModel;
 import fr.free.nrw.commons.category.CategoryItem;
 import fr.free.nrw.commons.contributions.Contribution;
-import fr.free.nrw.commons.contributions.ContributionsActivity;
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
 import fr.free.nrw.commons.utils.AbstractTextWatcher;
 import fr.free.nrw.commons.utils.ImageUtils;
@@ -311,10 +309,12 @@ public class UploadActivity extends AuthenticatedActivity implements UploadView 
     public void showBadPicturePopup(ImageUtils.Result result) {
         Timber.i(result.name());
         String errorMessage=null;
-        if(result == ImageUtils.Result.IMAGE_DARK)
+        if (result == ImageUtils.Result.IMAGE_DARK)
             errorMessage=getString(R.string.upload_image_too_dark);
         else if (result == ImageUtils.Result.IMAGE_BLURRY)
             errorMessage=getString(R.string.upload_image_blurry);
+        else if(result == ImageUtils.Result.IMAGE_DUPLICATE)
+            errorMessage=getString(R.string.upload_image_duplicate);
         else
             return;
         AlertDialog.Builder errorDialogBuilder = new AlertDialog.Builder(this);
@@ -503,4 +503,9 @@ public class UploadActivity extends AuthenticatedActivity implements UploadView 
         }
     }
 
+    @Override
+    protected void finalize() throws Throwable {
+        presenter = null;
+        super.finalize();
+    }
 }

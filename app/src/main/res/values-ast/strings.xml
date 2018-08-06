@@ -162,7 +162,7 @@
   <string name="title_activity_nearby">Llugares cercanos</string>
   <string name="no_nearby">Nun s\'alcontraron llugares cercanos</string>
   <string name="warning">Avisu</string>
-  <string name="file_exists">Esti ficheru yá esiste\'n Commons. ¿Confirmes que quies siguir?</string>
+  <string name="upload_image_duplicate">Esti ficheru yá esiste\'n Commons. ¿Confirmes que quies siguir?</string>
   <string name="yes">Sí</string>
   <string name="no">Non</string>
   <string name="media_detail_title">Títulu</string>

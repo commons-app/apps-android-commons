@@ -159,7 +159,7 @@
   <string name="title_activity_nearby">مکان‌‌های اطراف</string>
   <string name="no_nearby">مکانی در نزدیکی یافت نشد</string>
   <string name="warning">هشدار</string>
-  <string name="file_exists">پرونده در ویکی‌انبار موجود است. آیا مطمئنید که می‌خواهید ادامه دهید؟</string>
+  <string name="upload_image_duplicate">پرونده در ویکی‌انبار موجود است. آیا مطمئنید که می‌خواهید ادامه دهید؟</string>
   <string name="yes">بله</string>
   <string name="no">خیر</string>
   <string name="media_detail_title">عنوان</string>

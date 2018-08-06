@@ -168,7 +168,7 @@
   <string name="title_activity_nearby">Közeli helyek</string>
   <string name="no_nearby">Nem találhatók közeli helyek</string>
   <string name="warning">Figyelmeztetés</string>
-  <string name="file_exists">Ez a fájl már létezik a Commons-on. Biztos, hogy folytatni akarod?</string>
+  <string name="upload_image_duplicate">Ez a fájl már létezik a Commons-on. Biztos, hogy folytatni akarod?</string>
   <string name="yes">Igen</string>
   <string name="no">Nem</string>
   <string name="media_detail_title">Cím</string>
