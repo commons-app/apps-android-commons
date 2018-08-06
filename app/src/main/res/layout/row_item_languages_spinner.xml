@@ -8,6 +8,7 @@
   android:id="@+id/ll_container_description_language"
   android:orientation="vertical">
   <TextView
+    android:textAlignment="center"
     android:id="@+id/tv_language"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
