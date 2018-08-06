@@ -264,10 +264,12 @@
   <string name="continue_message">Virufueren</string>
   <string name="correct">Richteg Äntwert</string>
   <string name="wrong">Falsch Äntwert</string>
+  <string name="add_description">+ Beschreiwung derbäisetzen</string>
   <string name="Achievements">Realisatiounen</string>
   <string name="statistics">STATISTIKEN</string>
   <string name="statistics_thanks">Merci\'e kritt</string>
   <string name="statistics_featured">Bemierkenswäert Biller</string>
   <string name="level">NIVEAU</string>
   <string name="images_uploaded">Eropgeluede Biller</string>
+  <string name="image_reverts">Biller net zréckgesat</string>
 </resources>

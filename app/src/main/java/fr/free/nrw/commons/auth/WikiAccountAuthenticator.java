@@ -12,14 +12,12 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
-import fr.free.nrw.commons.contributions.ContributionsContentProvider;
-import fr.free.nrw.commons.modifications.ModificationsContentProvider;
+import fr.free.nrw.commons.BuildConfig;
 
-import static fr.free.nrw.commons.auth.AccountUtil.ACCOUNT_TYPE;
 import static fr.free.nrw.commons.auth.AccountUtil.AUTH_TOKEN_TYPE;
 
 public class WikiAccountAuthenticator extends AbstractAccountAuthenticator {
-    private static final String[] SYNC_AUTHORITIES = {ContributionsContentProvider.CONTRIBUTION_AUTHORITY, ModificationsContentProvider.MODIFICATIONS_AUTHORITY};
+    private static final String[] SYNC_AUTHORITIES = {BuildConfig.CONTRIBUTION_AUTHORITY, BuildConfig.MODIFICATION_AUTHORITY};
 
     @NonNull
     private final Context context;
@@ -98,7 +96,7 @@ public class WikiAccountAuthenticator extends AbstractAccountAuthenticator {
     }
 
     private boolean supportedAccountType(@Nullable String type) {
-        return ACCOUNT_TYPE.equals(type);
+        return BuildConfig.ACCOUNT_TYPE.equals(type);
     }
 
     private Bundle addAccount(AccountAuthenticatorResponse response) {

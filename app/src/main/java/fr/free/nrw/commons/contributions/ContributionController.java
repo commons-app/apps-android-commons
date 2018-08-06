@@ -7,9 +7,11 @@ import android.content.pm.ResolveInfo;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.content.FileProvider;
+import android.util.Log;
 
 import java.io.File;
 import java.util.Date;
@@ -28,8 +30,8 @@ import static fr.free.nrw.commons.wikidata.WikidataConstants.WIKIDATA_ENTITY_ID_
 
 public class ContributionController {
 
-    private static final int SELECT_FROM_GALLERY = 1;
-    private static final int SELECT_FROM_CAMERA = 2;
+    public static final int SELECT_FROM_GALLERY = 1;
+    public static final int SELECT_FROM_CAMERA = 2;
 
     private Fragment fragment;
 
@@ -91,16 +93,15 @@ public class ContributionController {
         fragment.startActivityForResult(pickImageIntent, SELECT_FROM_GALLERY);
     }
 
-    public void handleImagePicked(int requestCode, Intent data, boolean isDirectUpload, String wikiDataEntityId) {
-        Timber.d("Is direct upload %s and the Wikidata entity ID is %s", isDirectUpload, wikiDataEntityId);
+    public void handleImagePicked(int requestCode, @Nullable Uri uri, boolean isDirectUpload, String wikiDataEntityId) {
         FragmentActivity activity = fragment.getActivity();
-        Timber.d("handleImagePicked() called with onActivityResult()");
+        Timber.d("handleImagePicked() called with onActivityResult(). Boolean isDirectUpload: " + isDirectUpload + "String wikiDataEntityId: " + wikiDataEntityId);
         Intent shareIntent = new Intent(activity, ShareActivity.class);
         shareIntent.setAction(ACTION_SEND);
         switch (requestCode) {
             case SELECT_FROM_GALLERY:
                 //Handles image picked from gallery
-                Uri imageData = data.getData();
+                Uri imageData = uri;
                 shareIntent.setType(activity.getContentResolver().getType(imageData));
                 shareIntent.putExtra(EXTRA_STREAM, imageData);
                 shareIntent.putExtra(EXTRA_SOURCE, SOURCE_GALLERY);
@@ -112,20 +113,25 @@ public class ContributionController {
                 shareIntent.setType("image/jpeg");
                 shareIntent.putExtra(EXTRA_STREAM, lastGeneratedCaptureUri);
                 shareIntent.putExtra(EXTRA_SOURCE, SOURCE_CAMERA);
-
                 break;
             default:
                 break;
         }
+
         Timber.i("Image selected");
+        shareIntent.putExtra("isDirectUpload", isDirectUpload);
+        Timber.d("Put extras into image intent, isDirectUpload is " + isDirectUpload);
+
         try {
-            shareIntent.putExtra("isDirectUpload", isDirectUpload);
             if (wikiDataEntityId != null && !wikiDataEntityId.equals("")) {
                 shareIntent.putExtra(WIKIDATA_ENTITY_ID_PREF, wikiDataEntityId);
             }
-            activity.startActivity(shareIntent);
         } catch (SecurityException e) {
             Timber.e(e, "Security Exception");
+        }
+
+        if (activity != null) {
+            activity.startActivity(shareIntent);
         }
     }
 

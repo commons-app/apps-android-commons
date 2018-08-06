@@ -287,9 +287,6 @@
   <string name="error_loading_images">אירעה שגיאה בטעינת התמונות.</string>
   <string name="image_uploaded_by">הועלתה על־ידי: %1$s</string>
   <string name="block_notification">נחסמת מעריכת ויקישיתוף</string>
-  <string name="share_app_title">שיתוף היישום</string>
-  <string name="share_coordinates_not_present">לא צוינו קואורדינטות בעת בחירת התמונה</string>
-  <string name="error_fetching_nearby_places">שגיאה באחזור המקומות בסביבתך.</string>
   <string name="appwidget_img">תמונת היום</string>
   <string name="app_widget_heading">תמונת היום</string>
   <string name="menu_search_button">חיפוש</string>
@@ -308,4 +305,7 @@
   <string name="question">שאלה</string>
   <string name="result">תוצאה</string>
   <string name="user_not_logged_in">זמן הכניסה לחשבון פקע, נא להיכנס שוב.</string>
+  <string name="share_app_title">שיתוף היישום</string>
+  <string name="share_coordinates_not_present">לא צוינו קואורדינטות בעת בחירת התמונה</string>
+  <string name="error_fetching_nearby_places">שגיאה באחזור המקומות בסביבתך.</string>
 </resources>

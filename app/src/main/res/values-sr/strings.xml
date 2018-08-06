@@ -279,11 +279,12 @@
   <string name="no_images_found">Нису пронађене слике!</string>
   <string name="error_loading_images">Десила се грешка при учитавању слика.</string>
   <string name="image_uploaded_by">Отпремио/ла: %1$s</string>
-  <string name="share_app_title">Подели апликацију</string>
-  <string name="share_coordinates_not_present">Координате нису биле одређене током селекције слике</string>
-  <string name="error_fetching_nearby_places">Грешка при фечовању оближњих места.</string>
   <string name="successful_wikidata_edit">Слика успешно додата у %1$s на Википодацима!</string>
   <string name="wikidata_edit_failure">Неуспешно ажурирање одговарајућег ентитета на Википодацима!</string>
   <string name="menu_set_wallpaper">Постави позадину</string>
   <string name="wallpaper_set_successfully">Позадина успешно постављена!</string>
+  <string name="share_app_title">Подели апликацију</string>
+  <string name="share_coordinates_not_present">Координате нису биле одређене током селекције слике</string>
+  <string name="error_fetching_nearby_places">Грешка при фечовању оближњих места.</string>
+  <string name="add_description">+ Додај опис</string>
 </resources>

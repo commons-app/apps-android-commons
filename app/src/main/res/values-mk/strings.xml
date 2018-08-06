@@ -277,9 +277,6 @@
   <string name="error_loading_images">Се појави грешка при вчитувањето на сликите.</string>
   <string name="image_uploaded_by">Подигач: %1$s</string>
   <string name="block_notification">Спречени сте да ја уредувате Ризницата</string>
-  <string name="share_app_title">Сподели прилог</string>
-  <string name="share_coordinates_not_present">Не беа укажани координати при изборот на сликата</string>
-  <string name="error_fetching_nearby_places">Грешка при добивањето на околните места.</string>
   <string name="appwidget_img">Слика на денот</string>
   <string name="app_widget_heading">Слика на денот</string>
   <string name="menu_search_button">Пребарај</string>
@@ -314,6 +311,10 @@
   <string name="correct">Точен одговор</string>
   <string name="wrong">Погрешен одговор</string>
   <string name="quiz_screenshot_question">Дали оваа екранска снимка е во ред за подигање?</string>
+  <string name="share_app_title">Сподели прилог</string>
+  <string name="share_coordinates_not_present">Не беа укажани координати при изборот на сликата</string>
+  <string name="error_fetching_nearby_places">Грешка при добивањето на околните места.</string>
+  <string name="add_description">+ Додај опис</string>
   <string name="delete_recent_searches_dialog">Дали сте сигурни дека сакате да ја избришете историјата на пребарувања?</string>
   <string name="search_history_deleted">Историјата на пребарување е избришана</string>
   <string name="Achievements">Достигнувања</string>

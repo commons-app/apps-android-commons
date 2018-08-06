@@ -283,9 +283,6 @@
   <string name="error_loading_images">그림을 불러오는 동안 오류가 발생했습니다.</string>
   <string name="image_uploaded_by">올린이: %1$s</string>
   <string name="block_notification">공용 편집이 차단되어 있습니다</string>
-  <string name="share_app_title">앱 공유</string>
-  <string name="share_coordinates_not_present">그림 선택 중에 좌표가 지정되지 않았습니다</string>
-  <string name="error_fetching_nearby_places">주변 장소를 가져오는데 오류가 있습니다.</string>
   <string name="appwidget_img">오늘의 사진</string>
   <string name="app_widget_heading">오늘의 사진</string>
   <string name="menu_search_button">검색</string>
@@ -319,6 +316,10 @@
   <string name="correct">정답</string>
   <string name="wrong">오답</string>
   <string name="quiz_screenshot_question">이 스크린샷을 올리시겠습니까?</string>
+  <string name="share_app_title">앱 공유</string>
+  <string name="share_coordinates_not_present">그림 선택 중에 좌표가 지정되지 않았습니다</string>
+  <string name="error_fetching_nearby_places">주변 장소를 가져오는데 오류가 있습니다.</string>
+  <string name="add_description">+ 설명 추가</string>
   <string name="delete_recent_searches_dialog">검색 기록을 지우겠습니까?</string>
   <string name="search_history_deleted">검색 기록 삭제됨</string>
   <string name="Achievements">성과</string>

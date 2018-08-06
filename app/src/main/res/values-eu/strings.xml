@@ -266,9 +266,6 @@
   <string name="no_images_found">Ez da irudirik aurkitu!</string>
   <string name="error_loading_images">Arazo bat egon da irudiak kargatzerakoan.</string>
   <string name="block_notification">Commons aldatzeko blokeatuta zaude</string>
-  <string name="share_app_title">Aplikazioa partekatu</string>
-  <string name="share_coordinates_not_present">Ez da koordenaturik zehaztu irudia aukeratzean</string>
-  <string name="error_fetching_nearby_places">Ezin izan dira hurbileko lekuak ekarri.</string>
   <string name="appwidget_img">Eguneko argazkia</string>
   <string name="app_widget_heading">Eguneko argazkia</string>
   <string name="menu_search_button">Bilatu</string>
@@ -294,6 +291,9 @@
   <string name="continue_message">Jarraitu</string>
   <string name="correct">Erantzun zuzena</string>
   <string name="wrong">Erantzun okerra</string>
+  <string name="share_app_title">Aplikazioa partekatu</string>
+  <string name="share_coordinates_not_present">Ez da koordenaturik zehaztu irudia aukeratzean</string>
+  <string name="error_fetching_nearby_places">Ezin izan dira hurbileko lekuak ekarri.</string>
   <string name="delete_recent_searches_dialog">Ziur zaude zure bilaketen historia garbitu nahi duzula?</string>
   <string name="search_history_deleted">Bilaketa historia ezabatuta</string>
   <string name="Achievements">Lorpenak</string>

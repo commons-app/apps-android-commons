@@ -55,7 +55,6 @@ import timber.log.Timber;
 import static android.view.KeyEvent.KEYCODE_ENTER;
 import static android.view.View.VISIBLE;
 import static android.view.inputmethod.EditorInfo.IME_ACTION_DONE;
-import static fr.free.nrw.commons.auth.AccountUtil.ACCOUNT_TYPE;
 import static fr.free.nrw.commons.auth.AccountUtil.AUTH_TOKEN_TYPE;
 
 public class LoginActivity extends AccountAuthenticatorActivity {
@@ -63,7 +62,6 @@ public class LoginActivity extends AccountAuthenticatorActivity {
     public static final String PARAM_USERNAME = "fr.free.nrw.commons.login.username";
 
     @Inject MediaWikiApi mwApi;
-    @Inject AccountUtil accountUtil;
     @Inject SessionManager sessionManager;
     @Inject @Named("application_preferences") SharedPreferences prefs;
     @Inject @Named("default_preferences") SharedPreferences defaultPrefs;
@@ -243,12 +241,12 @@ public class LoginActivity extends AccountAuthenticatorActivity {
             if (response != null) {
                 Bundle authResult = new Bundle();
                 authResult.putString(AccountManager.KEY_ACCOUNT_NAME, username);
-                authResult.putString(AccountManager.KEY_ACCOUNT_TYPE, ACCOUNT_TYPE);
+                authResult.putString(AccountManager.KEY_ACCOUNT_TYPE, BuildConfig.ACCOUNT_TYPE);
                 response.onResult(authResult);
             }
         }
 
-        accountUtil.createAccount(response, username, password);
+        sessionManager.createAccount(response, username, password);
         startMainActivity();
     }
 

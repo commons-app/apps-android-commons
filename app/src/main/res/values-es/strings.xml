@@ -6,6 +6,7 @@
 * Benfutbol10
 * Fitoschido
 * Jduranboger
+* Jelou
 * Luisangelrg
 * Macofe
 * MarionaDSR
@@ -23,7 +24,7 @@
   <string name="app_name">Commons</string>
   <string name="bullet">•</string>
   <string name="menu_settings">Configuración</string>
-  <string name="intent_share_upload_label">Subir a Commons</string>
+  <string name="intent_share_upload_label">Cargar en Commons</string>
   <string name="username">Nombre de usuario</string>
   <string name="password">Contraseña</string>
   <string name="login_credential">Accede a tu cuenta de Commons Beta</string>
@@ -70,6 +71,7 @@
   <string name="login_failed_generic">Falló el inicio de sesión</string>
   <string name="share_upload_button">Subir</string>
   <string name="multiple_share_base_title">Nombrar este conjunto</string>
+  <string name="add_set_name_toast">Proporciona un nombre para este conjunto</string>
   <string name="provider_modifications">Modificaciones</string>
   <string name="menu_upload_single">Subir</string>
   <string name="categories_search_text_hint">Buscar categorías</string>
@@ -206,6 +208,7 @@
   <string name="mediaimage_failed">Falló la imagen de multimedia</string>
   <string name="no_image_found">No se encontró ninguna imagen</string>
   <string name="no_subcategory_found">No se encontró ninguna subcategoría</string>
+  <string name="no_parentcategory_found">No se encontró ninguna categoría contenedora</string>
   <string name="upload_image">Subir imagen</string>
   <string name="welcome_image_mount_zao">Monte Zao</string>
   <string name="welcome_image_llamas">Llamas</string>
@@ -280,29 +283,36 @@
   <string name="no_images_found">No se encontró ninguna imagen.</string>
   <string name="error_loading_images">Se produjo un error al cargar las imágenes.</string>
   <string name="image_uploaded_by">Cargada por: %1$s</string>
-  <string name="share_app_title">Compartir aplicación</string>
-  <string name="share_coordinates_not_present">No se especificaron las coordenadas al seleccionar la imagen</string>
-  <string name="error_fetching_nearby_places">Error al recuperar los lugares cercanos.</string>
   <string name="appwidget_img">Foto del día</string>
   <string name="app_widget_heading">Foto del día</string>
   <string name="menu_search_button">Buscar</string>
   <string name="search_commons">Buscar en Commons</string>
+  <string name="images_not_found">No se encontró ninguna imagen que coincidiera con $1$s</string>
   <string name="title_activity_search">Buscar</string>
   <string name="search_recent_header">Búsquedas recientes:</string>
   <string name="error_loading_categories">Se produjo un error al cargar las categorías.</string>
   <string name="error_loading_subcategories">Se produjo un error al cargar las subcategorías.</string>
+  <string name="question">Pregunta</string>
+  <string name="result">Resultado</string>
+  <string name="continue_message">Continuar</string>
+  <string name="correct">Respuesta correcta</string>
+  <string name="wrong">Respuesta incorrecta</string>
+  <string name="share_app_title">Compartir aplicación</string>
+  <string name="share_coordinates_not_present">No se especificaron las coordenadas al seleccionar la imagen</string>
+  <string name="error_fetching_nearby_places">Error al recuperar los lugares cercanos.</string>
+  <string name="add_description">+ Añadir descripción</string>
   <string name="delete_recent_searches_dialog">¿Confirmas que quieres vaciar el historial de búsquedas?</string>
   <string name="search_history_deleted">Historial de búsqueda eliminado</string>
   <string name="Achievements">Logros</string>
   <string name="statistics">ESTADÍSTICAS</string>
-  <string name="statistics_thanks">Gracias recibidas</string>
+  <string name="statistics_thanks">Agradecimientos recibidos</string>
   <string name="statistics_featured">Imágenes destacadas</string>
   <string name="level">NIVEL</string>
   <string name="images_uploaded">Las imágenes han sido subidas</string>
   <string name="image_reverts">Imágenes no revertidas</string>
   <string name="images_used_by_wiki">Imágenes utilizadas</string>
   <string name="achievements_share_message">¡Comparte tus logros con tus amigos!</string>
-  <string name="achievements_info_message">Tu nivel aumenta conforme cumples con estos requisitos. Elementos en la sección \"estadísticas\" no se cuentan para tu nivel.</string>
+  <string name="achievements_info_message">Tu nivel aumenta conforme cumples con estos requisitos. Los elementos de la sección «estadísticas» no se cuentan para tu nivel.</string>
   <string name="achievements_revert_limit_message">mínimo requerido:</string>
   <string name="images_uploaded_explanation">El número de imágenes que has subido a Commons, por medio de cualquier software de carga</string>
   <string name="images_reverted_explanation">El porcentaje de imágenes que has subido a Commons que no fueron eliminadas</string>
