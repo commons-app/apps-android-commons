@@ -232,7 +232,6 @@
   <string name="no_images_found">Nessuna immagine trovata!</string>
   <string name="error_loading_images">Si è verificato un errore durante il caricamento delle immagini.</string>
   <string name="image_uploaded_by">Caricato da: %1$s</string>
-  <string name="share_app_title">Condividi applicazione</string>
   <string name="appwidget_img">Foto del giorno</string>
   <string name="app_widget_heading">Foto del giorno</string>
   <string name="menu_search_button">Cerca</string>
@@ -247,6 +246,7 @@
   <string name="continue_message">Continua</string>
   <string name="correct">Risposta corretta</string>
   <string name="wrong">Risposta sbagliata</string>
+  <string name="share_app_title">Condividi applicazione</string>
   <string name="delete_recent_searches_dialog">Sei sicuro di voler cancellare la tua cronologia di ricerca?</string>
   <string name="search_history_deleted">Cronologia di ricerca cancellata</string>
   <string name="Achievements">Risultati</string>

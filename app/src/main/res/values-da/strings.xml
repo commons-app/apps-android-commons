@@ -6,8 +6,11 @@
 * Jsmakaayb
 * Luckas
 * Overlaet
+* Saederup92
 -->
 <resources>
+  <string name="title_activity_explore">Udforsk</string>
+  <string name="navigation_item_explore">Udforsk</string>
   <string name="preference_category_appearance">Udseende</string>
   <string name="preference_category_general">Generelt</string>
   <string name="preference_category_feedback">Tilbagemelding</string>
@@ -86,6 +89,7 @@
   <string name="categories_activity_title">Kategorier</string>
   <string name="title_activity_settings">Indstillinger</string>
   <string name="title_activity_signup">Opret konto</string>
+  <string name="title_activity_category_details">Kategori</string>
   <string name="menu_about">Om</string>
   <string name="about_license">Wikimedia Commons-programmet oprettet og udviklet af frivillige i Wikimediafællesskabet. Wikimedia Foundation er ikke involveret i oprettelse, udvikling eller vedligeholdelse af programmet.</string>
   <string name="about_improve">Opret en ny &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;GitHub-sag&lt;/a&gt; for fejlrapporter og forslag.</string>
@@ -244,4 +248,9 @@
   <string name="toggle_view_button">Skift visning</string>
   <string name="about_faq" fuzzy="true">Ofte stillede spørgsmål</string>
   <string name="welcome_skip_button">Udelad øvelse</string>
+  <string name="menu_search_button">Søg</string>
+  <string name="title_activity_search">Søg</string>
+  <string name="question">Spørgsmål</string>
+  <string name="correct">Rigtigt svar</string>
+  <string name="add_description">+ Tilføj en beskrivelse</string>
 </resources>

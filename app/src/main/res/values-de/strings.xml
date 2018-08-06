@@ -284,9 +284,6 @@
   <string name="error_loading_images">Beim Laden der Bilder ist ein Fehler aufgetreten.</string>
   <string name="image_uploaded_by">Hochgeladen von: %1$s</string>
   <string name="block_notification">Du bist für das Bearbeiten auf Commons gesperrt</string>
-  <string name="share_app_title">App teilen</string>
-  <string name="share_coordinates_not_present">Während der Bildauswahl wurden keine Koordinaten angegeben</string>
-  <string name="error_fetching_nearby_places">Fehler beim Abrufen der Orte in der Nähe.</string>
   <string name="appwidget_img">Bild des Tages</string>
   <string name="app_widget_heading">Bild des Tages</string>
   <string name="menu_search_button">Suchen</string>
@@ -321,6 +318,10 @@
   <string name="correct">Richtige Antwort</string>
   <string name="wrong">Falsche Antwort</string>
   <string name="quiz_screenshot_question">Darf dieses Bildschirmfoto hochgeladen werden?</string>
+  <string name="share_app_title">App teilen</string>
+  <string name="share_coordinates_not_present">Während der Bildauswahl wurden keine Koordinaten angegeben</string>
+  <string name="error_fetching_nearby_places">Fehler beim Abrufen der Orte in der Nähe.</string>
+  <string name="add_description">+ Beschreibung hinzufügen</string>
   <string name="delete_recent_searches_dialog">Bist du sicher, dass du deinen Suchverlauf löschen möchtest?</string>
   <string name="search_history_deleted">Suchverlauf gelöscht</string>
   <string name="Achievements">Errungenschaften</string>

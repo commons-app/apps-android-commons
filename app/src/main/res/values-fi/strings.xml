@@ -282,9 +282,6 @@
   <string name="no_images_found">Kuvia ei löytynyt!</string>
   <string name="error_loading_images">Virhe ladattaessa kuvia.</string>
   <string name="image_uploaded_by">Tallentanut: %1$s</string>
-  <string name="share_app_title">Jaa sovellus</string>
-  <string name="share_coordinates_not_present">Koordinaatteja ei annettu kuvaa valittaessa</string>
-  <string name="error_fetching_nearby_places">Virhe paikkoja haettaessa.</string>
   <string name="appwidget_img">Päivän kuva</string>
   <string name="app_widget_heading">Päivän kuva</string>
   <string name="menu_search_button">Hae</string>
@@ -295,4 +292,7 @@
   <string name="menu_set_wallpaper">Aseta taustakuvaksi</string>
   <string name="wallpaper_set_successfully">Taustakuva asetettu!</string>
   <string name="user_not_logged_in">Istuntosi on vanhentunut. Kirjaudu sisään uudelleen.</string>
+  <string name="share_app_title">Jaa sovellus</string>
+  <string name="share_coordinates_not_present">Koordinaatteja ei annettu kuvaa valittaessa</string>
+  <string name="error_fetching_nearby_places">Virhe paikkoja haettaessa.</string>
 </resources>

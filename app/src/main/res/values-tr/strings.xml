@@ -280,9 +280,6 @@
   <string name="no_images_found">Resim bulunamadı!</string>
   <string name="error_loading_images">Resimler yüklenirken hata oluştu.</string>
   <string name="image_uploaded_by">Yükleyen: %1$s</string>
-  <string name="share_app_title">Uygulamayı Paylaş</string>
-  <string name="share_coordinates_not_present">Koordinatlar görüntü seçimi sırasında belirlenmedi</string>
-  <string name="error_fetching_nearby_places">Yakındaki yerler alınırken hata oluştu.</string>
   <string name="appwidget_img">Günün Resmi</string>
   <string name="app_widget_heading">Günün Resmi</string>
   <string name="successful_wikidata_edit">Resim, Vikiveri\'de %1$s içine başarıyla eklendi.</string>
@@ -290,4 +287,7 @@
   <string name="menu_set_wallpaper">Duvar kağıdı ayarla</string>
   <string name="wallpaper_set_successfully">Duvar kağıdı başarıyla ayarlandı!</string>
   <string name="user_not_logged_in">Oturumun süresi doldu, lütfen tekrar giriş yapın.</string>
+  <string name="share_app_title">Uygulamayı Paylaş</string>
+  <string name="share_coordinates_not_present">Koordinatlar görüntü seçimi sırasında belirlenmedi</string>
+  <string name="error_fetching_nearby_places">Yakındaki yerler alınırken hata oluştu.</string>
 </resources>

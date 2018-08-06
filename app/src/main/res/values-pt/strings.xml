@@ -289,9 +289,6 @@
   <string name="error_loading_images">Ocorreu um erro durante o carregamento das imagens.</string>
   <string name="image_uploaded_by">Carregada por: %1$s</string>
   <string name="block_notification">Está impedido de editar a wiki Commons</string>
-  <string name="share_app_title">Partilhar aplicação</string>
-  <string name="share_coordinates_not_present">Não foram especificadas coordenadas durante a seleção da imagem</string>
-  <string name="error_fetching_nearby_places">Erro ao localizar locais próximos.</string>
   <string name="appwidget_img">Imagem do Dia</string>
   <string name="app_widget_heading">Imagem do Dia</string>
   <string name="menu_search_button">Pesquisar</string>
@@ -326,6 +323,10 @@
   <string name="correct">Resposta correta</string>
   <string name="wrong">Resposta incorreta</string>
   <string name="quiz_screenshot_question">Esta captura de ecrã pode ser carregada?</string>
+  <string name="share_app_title">Partilhar aplicação</string>
+  <string name="share_coordinates_not_present">Não foram especificadas coordenadas durante a seleção da imagem</string>
+  <string name="error_fetching_nearby_places">Erro ao localizar locais próximos.</string>
+  <string name="add_description">+ Adicionar descrição</string>
   <string name="delete_recent_searches_dialog">Tem a certeza de que deseja limpar o historial de pesquisas?</string>
   <string name="search_history_deleted">O historial de pesquisas foi eliminado</string>
   <string name="Achievements">Realizações</string>

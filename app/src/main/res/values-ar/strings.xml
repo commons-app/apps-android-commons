@@ -184,9 +184,10 @@
   <string name="notifications_talk_page_message">%1$s رسالة على صفحة الحديث</string>
   <string name="notifications_thank_you_edit">شكرا لك لعمل تعديل</string>
   <string name="notifications_mention">%1$s ذكر لك على %2$s.</string>
-  <string name="share_app_title">شارك التطبيق</string>
   <string name="appwidget_img">صورة اليوم</string>
   <string name="app_widget_heading">صورة اليوم</string>
+  <string name="search_recent_header">أحدث عمليات البحث:</string>
+  <string name="share_app_title">شارك التطبيق</string>
   <string name="Achievements">الإنجازات</string>
   <string name="statistics_featured">الصور المختارة</string>
   <string name="images_used_by_wiki">الصور المستخدمة</string>

@@ -285,9 +285,6 @@
   <string name="error_loading_images">Ett fel uppstod vid inläsning av bilder.</string>
   <string name="image_uploaded_by">Uppladdad av: %1$s</string>
   <string name="block_notification">Du har blockerats från att redigera på Commons</string>
-  <string name="share_app_title">Dela app</string>
-  <string name="share_coordinates_not_present">Koordinater specificerades inte vid bildvalet</string>
-  <string name="error_fetching_nearby_places">Fel uppstod när platser i närheten hämtades.</string>
   <string name="appwidget_img">Dagens bild</string>
   <string name="app_widget_heading">Dagens bild</string>
   <string name="menu_search_button">Sök</string>
@@ -322,6 +319,10 @@
   <string name="correct">Korrekt svar</string>
   <string name="wrong">Fel svar</string>
   <string name="quiz_screenshot_question">Är det okej att ladda upp denna skärmdump?</string>
+  <string name="share_app_title">Dela app</string>
+  <string name="share_coordinates_not_present">Koordinater specificerades inte vid bildvalet</string>
+  <string name="error_fetching_nearby_places">Fel uppstod när platser i närheten hämtades.</string>
+  <string name="add_description">+ Lägg till beskrivning</string>
   <string name="delete_recent_searches_dialog">Är du säker på att du vill rensa din sökhistorik?</string>
   <string name="search_history_deleted">Sökhistoriken raderades</string>
   <string name="Achievements">Prestationer</string>

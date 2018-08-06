@@ -289,9 +289,6 @@
   <string name="error_loading_images">當載入圖片時發生錯誤。</string>
   <string name="image_uploaded_by">由：%1$s 上傳</string>
   <string name="block_notification">您被禁止編輯共享資源</string>
-  <string name="share_app_title">分享應用程式</string>
-  <string name="share_coordinates_not_present">當選擇圖片時未指定座標</string>
-  <string name="error_fetching_nearby_places">索取附近地點時出錯。</string>
   <string name="appwidget_img">每日圖片</string>
   <string name="app_widget_heading">每日圖片</string>
   <string name="menu_search_button">搜尋</string>
@@ -326,6 +323,10 @@
   <string name="correct">正確答案</string>
   <string name="wrong">錯誤答案</string>
   <string name="quiz_screenshot_question">這張截圖可以上傳嗎？</string>
+  <string name="share_app_title">分享應用程式</string>
+  <string name="share_coordinates_not_present">當選擇圖片時未指定座標</string>
+  <string name="error_fetching_nearby_places">索取附近地點時出錯。</string>
+  <string name="add_description">+ 添加描述</string>
   <string name="delete_recent_searches_dialog">確定要清除搜尋歷史嗎？</string>
   <string name="search_history_deleted">搜尋歷史已刪除</string>
   <string name="Achievements">成果</string>
