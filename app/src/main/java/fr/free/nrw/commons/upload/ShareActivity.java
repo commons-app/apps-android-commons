@@ -351,9 +351,7 @@ public class ShareActivity
 
         if (Intent.ACTION_SEND.equals(intent.getAction())) {
             mediaUri = intent.getParcelableExtra(Intent.EXTRA_STREAM);
-
             contentProviderUri = mediaUri;
-
             mediaUri = ContributionUtils.saveFileBeingUploadedTemporarily(this, mediaUri);
 
             if (intent.hasExtra(UploadService.EXTRA_SOURCE)) {
@@ -361,7 +359,10 @@ public class ShareActivity
             } else {
                 source = Contribution.SOURCE_EXTERNAL;
             }
-            if (intent.hasExtra("isDirectUpload")) {
+
+            boolean isDirectUpload = intent.getBooleanExtra("isDirectUpload", false);
+
+            if (isDirectUpload) {
                 Timber.d("This was initiated by a direct upload from Nearby");
                 isNearbyUpload = true;
                 wikiDataEntityId = intent.getStringExtra(WIKIDATA_ENTITY_ID_PREF);
