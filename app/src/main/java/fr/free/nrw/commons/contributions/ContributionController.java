@@ -18,6 +18,7 @@ import java.util.Date;
 import java.util.List;
 
 import fr.free.nrw.commons.upload.ShareActivity;
+import fr.free.nrw.commons.upload.UploadActivity;
 import timber.log.Timber;
 
 import static android.content.Intent.ACTION_GET_CONTENT;
@@ -96,7 +97,7 @@ public class ContributionController {
     public void handleImagePicked(int requestCode, @Nullable Uri uri, boolean isDirectUpload, String wikiDataEntityId) {
         FragmentActivity activity = fragment.getActivity();
         Timber.d("handleImagePicked() called with onActivityResult()");
-        Intent shareIntent = new Intent(activity, ShareActivity.class);
+        Intent shareIntent = new Intent(activity, UploadActivity.class);
         shareIntent.setAction(ACTION_SEND);
         switch (requestCode) {
             case SELECT_FROM_GALLERY:

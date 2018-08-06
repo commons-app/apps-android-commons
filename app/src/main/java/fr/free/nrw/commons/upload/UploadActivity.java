@@ -1,6 +1,7 @@
 package fr.free.nrw.commons.upload;
 
 import android.annotation.SuppressLint;
+import android.content.ActivityNotFoundException;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
@@ -56,74 +57,96 @@ import io.reactivex.schedulers.Schedulers;
 import timber.log.Timber;
 
 public class UploadActivity extends AuthenticatedActivity implements UploadView {
-    @Inject InputMethodManager inputMethodManager;
-    @Inject MediaWikiApi mwApi;
-    @Inject UploadPresenter presenter;
-    @Inject CategoriesModel categoriesModel;
+    @Inject
+    InputMethodManager inputMethodManager;
+    @Inject
+    MediaWikiApi mwApi;
+    @Inject
+    UploadPresenter presenter;
+    @Inject
+    CategoriesModel categoriesModel;
 
     // Main GUI
-    @BindView(R.id.backgroundImage) SimpleDraweeView background;
-    @BindView(R.id.view_flipper) ViewFlipper viewFlipper;
+    @BindView(R.id.backgroundImage)
+    SimpleDraweeView background;
+    @BindView(R.id.view_flipper)
+    ViewFlipper viewFlipper;
 
     // Top Card
-    @BindView(R.id.top_card) CardView topCard;
-    @BindView(R.id.top_card_expand_button) ImageView topCardExpandButton;
-    @BindView(R.id.top_card_title) TextView topCardTitle;
-    @BindView(R.id.top_card_thumbnails) RecyclerView topCardThumbnails;
+    @BindView(R.id.top_card)
+    CardView topCard;
+    @BindView(R.id.top_card_expand_button)
+    ImageView topCardExpandButton;
+    @BindView(R.id.top_card_title)
+    TextView topCardTitle;
+    @BindView(R.id.top_card_thumbnails)
+    RecyclerView topCardThumbnails;
 
     // Bottom Card
-    @BindView(R.id.bottom_card) CardView bottomCard;
-    @BindView(R.id.bottom_card_expand_button) ImageView bottomCardExpandButton;
-    @BindView(R.id.bottom_card_title) TextView bottomCardTitle;
-    @BindView(R.id.bottom_card_content) View bottomCardContent;
-    @BindView(R.id.bottom_card_next) Button next;
-    @BindView(R.id.bottom_card_previous) Button previous;
-    @BindView(R.id.image_title) EditText imageTitle;
-    @BindView(R.id.image_description) EditText imageDescription;
+    @BindView(R.id.bottom_card)
+    CardView bottomCard;
+    @BindView(R.id.bottom_card_expand_button)
+    ImageView bottomCardExpandButton;
+    @BindView(R.id.bottom_card_title)
+    TextView bottomCardTitle;
+    @BindView(R.id.bottom_card_content)
+    View bottomCardContent;
+    @BindView(R.id.bottom_card_next)
+    Button next;
+    @BindView(R.id.bottom_card_previous)
+    Button previous;
+    @BindView(R.id.image_title)
+    EditText imageTitle;
+    @BindView(R.id.image_description)
+    EditText imageDescription;
 
     //Right Card
-    @BindView(R.id.right_card) CardView rightCard;
-    @BindView(R.id.right_card_expand_button) ImageView rightCardExpandButton;
-    @BindView(R.id.right_card_map_button) View rightCardMapButton;
+    @BindView(R.id.right_card)
+    CardView rightCard;
+    @BindView(R.id.right_card_expand_button)
+    ImageView rightCardExpandButton;
+    @BindView(R.id.right_card_map_button)
+    View rightCardMapButton;
 
     // Category Search
-    @BindView(R.id.categories_title) TextView categoryTitle;
-    @BindView(R.id.category_next) Button categoryNext;
-    @BindView(R.id.category_previous) Button categoryPrevious;
-    @BindView(R.id.categoriesSearchInProgress) ProgressBar categoriesSearchInProgress;
-    @BindView(R.id.category_search) EditText categoriesSearch;
-    @BindView(R.id.category_search_container) TextInputLayout categoriesSearchContainer;
-    @BindView(R.id.categories) RecyclerView categoriesList;
+    @BindView(R.id.categories_title)
+    TextView categoryTitle;
+    @BindView(R.id.category_next)
+    Button categoryNext;
+    @BindView(R.id.category_previous)
+    Button categoryPrevious;
+    @BindView(R.id.categoriesSearchInProgress)
+    ProgressBar categoriesSearchInProgress;
+    @BindView(R.id.category_search)
+    EditText categoriesSearch;
+    @BindView(R.id.category_search_container)
+    TextInputLayout categoriesSearchContainer;
+    @BindView(R.id.categories)
+    RecyclerView categoriesList;
 
     // Final Submission
-    @BindView(R.id.license_title) TextView licenseTitle;
-    @BindView(R.id.share_license_summary) TextView licenseSummary;
-    @BindView(R.id.media_upload_policy) TextView licensePolicy;
-    @BindView(R.id.license_list) Spinner licenseSpinner;
-    @BindView(R.id.submit) Button submit;
-    @BindView(R.id.license_previous) Button licensePrevious;
-
-    private int expandLessIcon;
-    private int expandMoreIcons;
+    @BindView(R.id.license_title)
+    TextView licenseTitle;
+    @BindView(R.id.share_license_summary)
+    TextView licenseSummary;
+    @BindView(R.id.media_upload_policy)
+    TextView licensePolicy;
+    @BindView(R.id.license_list)
+    Spinner licenseSpinner;
+    @BindView(R.id.submit)
+    Button submit;
+    @BindView(R.id.license_previous)
+    Button licensePrevious;
 
     private RVRendererAdapter<CategoryItem> categoriesAdapter;
     private AbstractTextWatcher titleWatcher;
     private AbstractTextWatcher descriptionWatcher;
     private CompositeDisposable compositeDisposable;
 
-    private int dp8; //8 dp in px
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        dp8 = (int) TypedValue.applyDimension(
-                TypedValue.COMPLEX_UNIT_DIP,
-                8,
-                getResources().getDisplayMetrics()
-        );
-
-        configureTheme();
         setContentView(R.layout.activity_upload);
         ButterKnife.bind(this);
 
@@ -159,6 +182,16 @@ public class UploadActivity extends AuthenticatedActivity implements UploadView 
                         .debounce(500, TimeUnit.MILLISECONDS)
                         .observeOn(AndroidSchedulers.mainThread())
                         .subscribe(filter -> updateCategoryList(filter.toString()))
+        );
+
+        compositeDisposable.add(
+                RxTextView.textChanges(imageTitle)
+                        .takeUntil(RxView.detaches(categoriesSearch))
+                        .debounce(500, TimeUnit.MILLISECONDS)
+                        .observeOn(Schedulers.io())
+                        .filter(title -> mwApi.fileExistsWithName(title.toString() + "." + presenter.getCurrentItem().fileExt))
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribe(title -> showDuplicateTitlePopup(title.toString() + "." + presenter.getCurrentItem().fileExt))
         );
     }
 
@@ -252,7 +285,8 @@ public class UploadActivity extends AuthenticatedActivity implements UploadView 
         bottomCard.setVisibility(visible ? View.VISIBLE : View.GONE);
     }
 
-    public void setRightCardVisibility(boolean visible){
+    @Override
+    public void setRightCardVisibility(boolean visible) {
         rightCard.setVisibility(visible ? View.VISIBLE : View.GONE);
     }
 
@@ -260,16 +294,10 @@ public class UploadActivity extends AuthenticatedActivity implements UploadView 
     public void setBottomCardVisibility(@UploadPage int page) {
         if (page == TITLE_CARD) {
             viewFlipper.setDisplayedChild(0);
-            setTopCardVisibility(true);
-            setRightCardVisibility(true);
         } else if (page == CATEGORIES) {
             viewFlipper.setDisplayedChild(1);
-            setTopCardVisibility(false);
-            setRightCardVisibility(false);
         } else if (page == LICENSE) {
             viewFlipper.setDisplayedChild(2);
-            setTopCardVisibility(false);
-            setRightCardVisibility(false);
         } else if (page == PLEASE_WAIT) {
             viewFlipper.setDisplayedChild(3);
         }
@@ -282,17 +310,9 @@ public class UploadActivity extends AuthenticatedActivity implements UploadView 
 
     @Override
     public void setRightCardState(boolean state) {
-        rightCardExpandButton.animate().rotation(rightCardExpandButton.getRotation()+(state?-180:180)).start();
+        rightCardExpandButton.animate().rotation(rightCardExpandButton.getRotation() + (state ? -180 : 180)).start();
+        //Add all items in rightCard here
         rightCardMapButton.setVisibility(state ? View.VISIBLE : View.GONE);
-//        if (rightCardExpandButton.getLayoutParams() instanceof ViewGroup.MarginLayoutParams) {
-//            ViewGroup.MarginLayoutParams p = (ViewGroup.MarginLayoutParams) rightCardExpandButton.getLayoutParams();
-//            if (state) {
-//                p.setMargins(dp8, dp8, dp8, dp8);
-//            } else {
-//                p.setMargins( 0, 0, 0, 0);
-//            }
-//            rightCardExpandButton.requestLayout();
-//        }
     }
 
     @Override
@@ -308,27 +328,41 @@ public class UploadActivity extends AuthenticatedActivity implements UploadView 
     @Override
     public void showBadPicturePopup(ImageUtils.Result result) {
         Timber.i(result.name());
-        String errorMessage=null;
+        int errorMessage;
         if (result == ImageUtils.Result.IMAGE_DARK)
-            errorMessage=getString(R.string.upload_image_too_dark);
+            errorMessage = R.string.upload_image_too_dark;
         else if (result == ImageUtils.Result.IMAGE_BLURRY)
-            errorMessage=getString(R.string.upload_image_blurry);
-        else if(result == ImageUtils.Result.IMAGE_DUPLICATE)
-            errorMessage=getString(R.string.upload_image_duplicate);
+            errorMessage = R.string.upload_image_blurry;
+        else if (result == ImageUtils.Result.IMAGE_DUPLICATE)
+            errorMessage = R.string.upload_image_duplicate;
         else
             return;
         AlertDialog.Builder errorDialogBuilder = new AlertDialog.Builder(this);
         errorDialogBuilder.setMessage(errorMessage);
-        errorDialogBuilder.setTitle(getString(R.string.warning));
+        errorDialogBuilder.setTitle(R.string.warning);
         //user does not wish to upload the picture, delete it
-        errorDialogBuilder.setPositiveButton(getString(R.string.no), (dialogInterface, i) -> {
+        errorDialogBuilder.setPositiveButton(R.string.no, (dialogInterface, i) -> {
             presenter.deletePicture();
             dialogInterface.dismiss();
         });
         //user wishes to go ahead with the upload of this picture, just dismiss this dialog
-        errorDialogBuilder.setNegativeButton(getString(R.string.yes), (DialogInterface dialogInterface, int i) -> {
+        errorDialogBuilder.setNegativeButton(R.string.yes, (DialogInterface dialogInterface, int i) -> {
             presenter.keepPicture();
             dialogInterface.dismiss();
+        });
+
+        AlertDialog errorDialog = errorDialogBuilder.create();
+        if (!isFinishing()) {
+            errorDialog.show();
+        }
+    }
+
+    public void showDuplicateTitlePopup(String title) {
+        AlertDialog.Builder errorDialogBuilder = new AlertDialog.Builder(this);
+        errorDialogBuilder.setMessage(getString(R.string.upload_title_duplicate, title));
+        errorDialogBuilder.setTitle(R.string.warning);
+        //just dismiss the dialog
+        errorDialogBuilder.setPositiveButton(R.string.ok, (dialogInterface, i) -> {
         });
 
         AlertDialog errorDialog = errorDialogBuilder.create();
@@ -363,11 +397,6 @@ public class UploadActivity extends AuthenticatedActivity implements UploadView 
         finish();
     }
 
-    private void configureTheme() {
-        expandLessIcon = currentTheme ? R.drawable.ic_expand_less_white_24dp : R.drawable.ic_expand_less_black_24dp;
-        expandMoreIcons = currentTheme ? R.drawable.ic_expand_more_white_24dp : R.drawable.ic_expand_more_black_24dp;
-    }
-
     private void configureLicenses() {
         licenseSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -397,6 +426,7 @@ public class UploadActivity extends AuthenticatedActivity implements UploadView 
 
     private void configureRightCard() {
         rightCardExpandButton.setOnClickListener(v -> presenter.toggleRightCardState());
+        rightCardMapButton.setOnClickListener(v -> presenter.openCoordinateMap());
     }
 
     private void configureNavigationButtons() {
@@ -414,6 +444,7 @@ public class UploadActivity extends AuthenticatedActivity implements UploadView 
             presenter.handleSubmit(categoriesModel);
             finish();
         });
+
     }
 
     private void configureCategories(Bundle savedInstanceState) {
@@ -486,8 +517,7 @@ public class UploadActivity extends AuthenticatedActivity implements UploadView 
     }
 
     private void updateCardState(boolean state, ImageView button, View... content) {
-        button.animate().rotation(button.getRotation()+(state?180:-180)).start();
-//        button.setImageResource(state ? expandLessIcon : expandMoreIcons);
+        button.animate().rotation(button.getRotation() + (state ? 180 : -180)).start();
         if (content != null) {
             for (View view : content) {
                 view.setVisibility(state ? View.VISIBLE : View.GONE);
@@ -495,11 +525,24 @@ public class UploadActivity extends AuthenticatedActivity implements UploadView 
         }
     }
 
-    public static void setMargins (View v, int l, int t, int r, int b) {
-        if (v.getLayoutParams() instanceof ViewGroup.MarginLayoutParams) {
-            ViewGroup.MarginLayoutParams p = (ViewGroup.MarginLayoutParams) v.getLayoutParams();
-            p.setMargins(l, t, r, b);
-            v.requestLayout();
+    public void launchMapActivity(String decCoords) {
+        try {
+            Uri gmmIntentUri = Uri.parse("google.streetview:cbll=" + decCoords);
+            Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
+            mapIntent.setPackage("com.google.android.apps.maps");
+            startActivity(mapIntent);
+        } catch (ActivityNotFoundException ex) {
+            AlertDialog.Builder errorDialogBuilder = new AlertDialog.Builder(this);
+            errorDialogBuilder.setMessage(R.string.map_application_missing);
+            errorDialogBuilder.setTitle(R.string.warning);
+            //just dismiss the dialog
+            errorDialogBuilder.setPositiveButton(R.string.ok, (dialogInterface, i) -> {
+            });
+
+            AlertDialog errorDialog = errorDialogBuilder.create();
+            if (!isFinishing()) {
+                errorDialog.show();
+            }
         }
     }
 

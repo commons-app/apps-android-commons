@@ -349,8 +349,11 @@
   <string name="next">Next</string>
   <string name="previous">Previous</string>
   <string name="submit">Submit</string>
+  <string name="upload_title_duplicate">A file with the file name %1$s exists. Please consider changing it.</string>
+  <string name="map_application_missing">No compatible map application could be found on your device. Please install a map application to use this feature.</string>
   <plurals name="upload_count_title">
         <item quantity="one">%1$d Upload</item>
         <item quantity="other">%1$d Uploads</item>
     </plurals>
+
 </resources>

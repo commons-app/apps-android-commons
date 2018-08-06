@@ -136,7 +136,6 @@ public class UploadController {
         contribution.setWikiDataEntityId(wikiDataEntityId);
         contribution.setContentProviderUri(contentProviderUri);
 
-
     }
 
     public void startUpload(Contribution contribution) {
