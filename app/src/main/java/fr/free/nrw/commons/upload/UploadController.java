@@ -114,9 +114,6 @@ public class UploadController {
             contribution.setTag("mimeType", mimeType);
             contribution.setSource(source);
 
-            //Calls the next overloaded method
-            startUpload(contribution, onComplete);
-
         Timber.d("Wikidata entity ID received from Share activity is %s", wikiDataEntityId);
         //TODO: Modify this to include coords
         Account currentAccount = sessionManager.getCurrentAccount();
@@ -136,7 +133,8 @@ public class UploadController {
         contribution.setWikiDataEntityId(wikiDataEntityId);
         contribution.setContentProviderUri(contentProviderUri);
 
-
+        //Calls the next overloaded method
+        startUpload(contribution, onComplete);
     }
 
     /**
