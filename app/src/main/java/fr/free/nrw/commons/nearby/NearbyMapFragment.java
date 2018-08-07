@@ -770,12 +770,13 @@ public class NearbyMapFragment extends DaggerFragment {
         if (resultCode == RESULT_OK) {
             Timber.d("OnActivityResult() parameters: Req code: %d Result code: %d Data: %s",
                     requestCode, resultCode, data);
+            String wikidataEntityId = directPrefs.getString("WikiDataEntityId", null);
             if (requestCode == ContributionController.SELECT_FROM_CAMERA) {
                 // If coming from camera, pass null as uri. Because camera photos get saved to a
                 // fixed directory
-                controller.handleImagePicked(requestCode, null, true, null);
+                controller.handleImagePicked(requestCode, null, true, wikidataEntityId);
             } else {
-                controller.handleImagePicked(requestCode, data.getData(), true, null);
+                controller.handleImagePicked(requestCode, data.getData(), true, wikidataEntityId);
             }
         } else {
             Timber.e("OnActivityResult() parameters: Req code: %d Result code: %d Data: %s",
