@@ -158,11 +158,15 @@ public class SearchImageFragment extends CommonsDaggerSupportFragment {
      * @param mediaList List of media to be added
      */
     private void handlePaginationSuccess(List<Media> mediaList) {
-        queryList.addAll(mediaList);
         progressBar.setVisibility(View.GONE);
-        imagesAdapter.addAll(mediaList);
-        imagesAdapter.notifyDataSetChanged();
-        ((SearchActivity)getContext()).viewPagerNotifyDataSetChanged();
+        if (mediaList.size()!=0){
+            if (!queryList.get(queryList.size()-1).getFilename().equals(mediaList.get(mediaList.size()-1).getFilename())) {
+                queryList.addAll(mediaList);
+                imagesAdapter.addAll(mediaList);
+                imagesAdapter.notifyDataSetChanged();
+                ((SearchActivity)getContext()).viewPagerNotifyDataSetChanged();
+            }
+        }
     }
 
 
@@ -197,7 +201,6 @@ public class SearchImageFragment extends CommonsDaggerSupportFragment {
     private void handleError(Throwable throwable) {
         Timber.e(throwable, "Error occurred while loading queried images");
         try {
-            initErrorView();
             ViewUtil.showSnackbar(imagesRecyclerView, R.string.error_loading_images);
         }catch (Exception e){
             e.printStackTrace();
