@@ -247,6 +247,11 @@
   <string name="nominated_for_deletion">This image has been nominated for deletion.</string>
   <string name="nominated_see_more"><u>See webpage for details</u></string>
   <string name="view_browser">View in Browser</string>
+  <string name="skip_login">Skip</string>
+  <string name="navigation_item_login">Log in</string>
+  <string name="skip_login_title">Do you really want to skip login?</string>
+  <string name="skip_login_message">You will not be able to upload pictures.</string>
+  <string name="login_alert_message">Please log in to use this feature</string>
 
   <string name="nearby_location_has_not_changed">Location has not changed.</string>
   <string name="nearby_location_not_available">Location not available.</string>
