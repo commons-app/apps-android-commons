@@ -13,6 +13,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import com.pedrogomez.renderers.RVRendererAdapter;
 import java.util.ArrayList;
 import java.util.Date;
@@ -160,6 +162,7 @@ public class SearchImageFragment extends CommonsDaggerSupportFragment {
         progressBar.setVisibility(View.GONE);
         imagesAdapter.addAll(mediaList);
         imagesAdapter.notifyDataSetChanged();
+        ((SearchActivity)getContext()).viewPagerNotifyDataSetChanged();
     }
 
 
@@ -179,6 +182,7 @@ public class SearchImageFragment extends CommonsDaggerSupportFragment {
             progressBar.setVisibility(View.GONE);
             imagesAdapter.addAll(mediaList);
             imagesAdapter.notifyDataSetChanged();
+            ((SearchActivity)getContext()).viewPagerNotifyDataSetChanged();
 
             // check if user is waiting for 5 seconds if yes then save search query to history.
             Handler handler = new Handler();
@@ -239,7 +243,7 @@ public class SearchImageFragment extends CommonsDaggerSupportFragment {
             return null;
         }
         else {
-            return new Media(imagesAdapter.getItem(i).getFilename());
+            return imagesAdapter.getItem(i);
         }
     }
 }

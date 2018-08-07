@@ -35,9 +35,12 @@ import javax.inject.Named;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.auth.SessionManager;
+import fr.free.nrw.commons.category.CategoryDetailsActivity;
+import fr.free.nrw.commons.category.CategoryImagesActivity;
 import fr.free.nrw.commons.contributions.Contribution;
 import fr.free.nrw.commons.contributions.ContributionsActivity;
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
+import fr.free.nrw.commons.explore.SearchActivity;
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
 import fr.free.nrw.commons.utils.ImageUtils;
 import timber.log.Timber;
@@ -62,6 +65,7 @@ public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment imple
     ViewPager pager;
     private Boolean editable;
     private boolean isFeaturedImage;
+    MediaDetailAdapter adapter;
 
     public MediaDetailPagerFragment() {
         this(false, false);
@@ -81,7 +85,7 @@ public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment imple
         ButterKnife.bind(this,view);
         pager.addOnPageChangeListener(this);
 
-        final MediaDetailAdapter adapter = new MediaDetailAdapter(getChildFragmentManager());
+        adapter = new MediaDetailAdapter(getChildFragmentManager());
 
         if (savedInstanceState != null) {
             final int pageNumber = savedInstanceState.getInt("current-page");
@@ -269,11 +273,35 @@ public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment imple
 
     public void showImage(int i) {
         Handler handler =  new Handler();
-        handler.postDelayed(() -> pager.setCurrentItem(i), 10);
+        handler.postDelayed(() -> pager.setCurrentItem(i), 5);
+    }
+
+    /**
+     * The method notify the viewpager that number of items have changed.
+     */
+    public void notifyDataSetChanged(){
+        adapter.notifyDataSetChanged();
     }
 
     @Override
     public void onPageScrolled(int i, float v, int i2) {
+        if (i+1 >= adapter.getCount()){
+            try{
+                ((CategoryImagesActivity) getContext()).requestMoreImages();
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+            try{
+                ((CategoryDetailsActivity) getContext()).requestMoreImages();
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+            try{
+                ((SearchActivity) getContext()).requestMoreImages();
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+        }
         getActivity().supportInvalidateOptionsMenu();
     }
 
