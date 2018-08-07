@@ -65,11 +65,11 @@ class SearchImagesRenderer extends Renderer<Media> {
      */
     private void setAuthorView(Media item, TextView author) {
         if (item.getCreator() != null && !item.getCreator().equals("")) {
-            author.setVisibility(View.GONE);
+            author.setVisibility(View.VISIBLE);
             String uploadedByTemplate = getContext().getString(R.string.image_uploaded_by);
             author.setText(String.format(uploadedByTemplate, item.getCreator()));
         } else {
-            author.setVisibility(View.VISIBLE);
+            author.setVisibility(View.GONE);
         }
     }
 }
