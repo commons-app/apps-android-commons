@@ -191,6 +191,20 @@ public class CategoryImagesListFragment extends DaggerFragment {
     }
 
     /**
+     * This method is called when viewPager has reached its end.
+     * Fetches more images for the category and adds it to the grid view and viewpager adapter
+     */
+    public void fetchMoreImagesViewPager(){
+        if (hasMoreImages && !isLoading) {
+            isLoading = true;
+            fetchMoreImages();
+        }
+        if (!hasMoreImages){
+            progressBar.setVisibility(GONE);
+        }
+    }
+
+    /**
      * Fetches more images for the category and adds it to the grid view adapter
      */
     @SuppressLint("CheckResult")
@@ -228,8 +242,17 @@ public class CategoryImagesListFragment extends DaggerFragment {
                 return;
             }
             gridAdapter.addItems(collection);
+            try {
+                ((CategoryImagesActivity) getContext()).viewPagerNotifyDataSetChanged();
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+            try {
+                ((CategoryDetailsActivity) getContext()).viewPagerNotifyDataSetChanged();
+            }catch (Exception e){
+                e.printStackTrace();
+            }
         }
-
         progressBar.setVisibility(GONE);
         isLoading = false;
         statusTextView.setVisibility(GONE);
