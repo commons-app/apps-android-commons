@@ -336,6 +336,7 @@
 
   <string name="delete_recent_searches_dialog">Are you sure you want to clear your search history?</string>
   <string name="search_history_deleted">Search history deleted</string>
+  <string name="nominate_delete">Nominate For Deletion</string>
 
   <string name="Achievements">Achievements</string>
   <string name="statistics">STATISTICS</string>
