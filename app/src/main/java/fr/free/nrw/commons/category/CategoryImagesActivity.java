@@ -171,6 +171,16 @@ public class CategoryImagesActivity
     }
 
     /**
+     * This method is called on success of API call for featured Images.
+     * The viewpager will notified that number of items have changed.
+     */
+    public void viewPagerNotifyDataSetChanged() {
+        if (mediaDetails!=null){
+            mediaDetails.notifyDataSetChanged();
+        }
+    }
+
+    /**
      * This method is called on from getCount of MediaDetailPagerFragment
      * The viewpager will contain same number of media items as that of media elements in adapter.
      * @return Total Media count in the adapter
@@ -234,6 +244,16 @@ public class CategoryImagesActivity
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
+        }
+    }
+
+    /**
+     * This method is called when viewPager has reached its end.
+     * Fetches more images using search query and adds it to the gridView and viewpager adapter
+     */
+    public void requestMoreImages() {
+        if (categoryImagesListFragment!=null){
+            categoryImagesListFragment.fetchMoreImagesViewPager();
         }
     }
 }
