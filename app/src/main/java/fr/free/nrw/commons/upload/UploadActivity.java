@@ -154,6 +154,7 @@ public class UploadActivity extends AuthenticatedActivity implements UploadView 
 
         setContentView(R.layout.activity_upload);
         ButterKnife.bind(this);
+        compositeDisposable = new CompositeDisposable();
 
         configureCategories(savedInstanceState);
         configureLicenses();
@@ -178,7 +179,6 @@ public class UploadActivity extends AuthenticatedActivity implements UploadView 
     @Override
     protected void onResume() {
         super.onResume();
-        compositeDisposable = new CompositeDisposable();
         presenter.addView(this);
         compositeDisposable.add(
                 RxTextView.textChanges(categoriesSearch)
@@ -188,16 +188,6 @@ public class UploadActivity extends AuthenticatedActivity implements UploadView 
                         .observeOn(AndroidSchedulers.mainThread())
                         .subscribe(filter -> updateCategoryList(filter.toString()))
         );
-
-//        compositeDisposable.add(
-//                RxTextView.textChanges(imageTitle)
-//                        .takeUntil(RxView.detaches(categoriesSearch))
-//                        .debounce(500, TimeUnit.MILLISECONDS)
-//                        .observeOn(Schedulers.io())
-//                        .filter(title -> mwApi.fileExistsWithName(title.toString() + "." + presenter.getCurrentItem().fileExt))
-//                        .observeOn(AndroidSchedulers.mainThread())
-//                        .subscribe(title -> showDuplicateTitlePopup(title.toString() + "." + presenter.getCurrentItem().fileExt))
-//        );
     }
 
     @Override
@@ -206,6 +196,7 @@ public class UploadActivity extends AuthenticatedActivity implements UploadView 
 //        imageTitle.removeTextChangedListener(titleWatcher);
 //        imageDescription.removeTextChangedListener(descriptionWatcher);
         compositeDisposable.dispose();
+        compositeDisposable = new CompositeDisposable();
         super.onPause();
     }
 
@@ -218,10 +209,10 @@ public class UploadActivity extends AuthenticatedActivity implements UploadView 
 
     @Override
     public void updateBottomCardContent(int currentStep, int stepCount, UploadModel.UploadItem uploadItem) {
-        String title = getResources().getString(R.string.step_count, currentStep, stepCount);
-        bottomCardTitle.setText(title);
-        categoryTitle.setText(title);
-        licenseTitle.setText(title);
+        String cardTitle = getResources().getString(R.string.step_count, currentStep, stepCount);
+        bottomCardTitle.setText(cardTitle);
+        categoryTitle.setText(cardTitle);
+        licenseTitle.setText(cardTitle);
         if (!uploadItem.isDummy()) {
             descriptionsAdapter.setItems(uploadItem.title, uploadItem.descriptions);
             rvDescriptions.setAdapter(descriptionsAdapter);
@@ -366,7 +357,7 @@ public class UploadActivity extends AuthenticatedActivity implements UploadView 
     }
 
     public void showDuplicateTitlePopup(String title) {
-        showInfoAlert(R.string.warning, getString(R.string.upload_title_duplicate, title));
+        showInfoAlert(R.string.warning, R.string.upload_title_duplicate, title);
     }
 
     @Override
@@ -563,10 +554,18 @@ public class UploadActivity extends AuthenticatedActivity implements UploadView 
 
     private void initRecyclerView() {
         descriptionsAdapter = new DescriptionsAdapter();
-        descriptionsAdapter.setCallback((mediaDetailDescription, descriptionInfo) ->
-                showInfoAlert(mediaDetailDescription, getString(descriptionInfo)));
+        descriptionsAdapter.setCallback(this::showInfoAlert);
         rvDescriptions.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
         rvDescriptions.setAdapter(descriptionsAdapter);
+        compositeDisposable.add(
+                descriptionsAdapter.getTitleChangeObserver()
+                        .takeUntil(RxView.detaches(categoriesSearch))
+                        .debounce(1000, TimeUnit.MILLISECONDS)
+                        .observeOn(Schedulers.io())
+                        .filter(title -> mwApi.fileExistsWithName(title + "." + presenter.getCurrentItem().fileExt))
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribe(title -> showDuplicateTitlePopup(title + "." + presenter.getCurrentItem().fileExt))
+        );
     }
 
 //    private List<Language> getDescriptionLanguages() {
@@ -577,10 +576,10 @@ public class UploadActivity extends AuthenticatedActivity implements UploadView 
 //                .blockingGet();
 //    }
 
-    private void showInfoAlert(int titleStringID, String message) {
+    private void showInfoAlert(int titleStringID, int messageStringId, String... formatArgs) {
         new AlertDialog.Builder(this)
                 .setTitle(titleStringID)
-                .setMessage(message)
+                .setMessage(getString(messageStringId, (Object[]) formatArgs))
                 .setCancelable(true)
                 .setNeutralButton(android.R.string.ok, (dialog, id) -> dialog.cancel())
                 .create()
