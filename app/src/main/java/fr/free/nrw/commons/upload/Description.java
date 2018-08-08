@@ -2,28 +2,21 @@ package fr.free.nrw.commons.upload;
 
 import android.text.TextUtils;
 
+import java.util.List;
+
 class Description {
 
-    private String languageId;
-    private String languageDisplayText;
+    private String languageCode;
     private String descriptionText;
     private boolean set;
     private int selectedLanguageIndex = -1;
 
-    public String getLanguageId() {
-        return languageId;
+    public String getLanguageCode() {
+        return languageCode;
     }
 
-    public void setLanguageId(String languageId) {
-        this.languageId = languageId;
-    }
-
-    public String getLanguageDisplayText() {
-        return languageDisplayText;
-    }
-
-    public void setLanguageDisplayText(String languageDisplayText) {
-        this.languageDisplayText = languageDisplayText;
+    public void setLanguageCode(String languageCode) {
+        this.languageCode = languageCode;
     }
 
     public String getDescriptionText() {
@@ -52,5 +45,22 @@ class Description {
 
     public void setSelectedLanguageIndex(int selectedLanguageIndex) {
         this.selectedLanguageIndex = selectedLanguageIndex;
+    }
+
+
+    public static String formatList(List<Description> descriptions) {
+        StringBuilder descListString = new StringBuilder();
+        for (Description description : descriptions) {
+            if (!description.isEmpty()) {
+                String individualDescription = String.format("{{%s|1=%s}}", description.getLanguageCode(),
+                        description.getDescriptionText());
+                descListString.append(individualDescription);
+            }
+        }
+        return descListString.toString();
+    }
+
+    public boolean isEmpty() {
+        return descriptionText == null || descriptionText.isEmpty();
     }
 }

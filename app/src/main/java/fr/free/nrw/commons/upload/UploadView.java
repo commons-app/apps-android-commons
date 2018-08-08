@@ -14,8 +14,9 @@ public interface UploadView {
     // Dummy implementation of the view interface to allow us to have a 'null object pattern'
     // in the presenter and avoid constant NULL checking.
     UploadView DUMMY = null; //(UploadView) Proxy.newProxyInstance(UploadView.class.getClassLoader(),
-
     //new Class[]{UploadView.class}, (proxy, method, methodArgs) -> null);
+
+    List<Description> getDescriptions();
 
     @Retention(SOURCE)
     @IntDef({PLEASE_WAIT, TITLE_CARD, CATEGORIES, LICENSE})

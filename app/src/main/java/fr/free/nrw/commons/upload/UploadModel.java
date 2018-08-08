@@ -5,11 +5,11 @@ import android.content.ContentResolver;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.net.Uri;
-import android.os.ParcelFileDescriptor;
 
 import java.io.File;
 import java.io.IOException;
 import java.lang.ref.WeakReference;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
@@ -32,7 +32,12 @@ import timber.log.Timber;
 public class UploadModel {
 
     MediaWikiApi mwApi;
-    private static UploadItem DUMMY = new UploadItem(Uri.EMPTY, "", "", GPSExtractor.DUMMY, "");
+    private static UploadItem DUMMY = new UploadItem(Uri.EMPTY, "", "", GPSExtractor.DUMMY, ""){
+        @Override
+        public boolean isDummy(){
+            return true;
+        }
+    };
     private final SharedPreferences prefs;
     private final List<String> licenses;
     private String license;
@@ -182,7 +187,7 @@ public class UploadModel {
         for (int i = 0; i < count; i++) {
             UploadItem item = items.get(i);
             item.selected = (currentStepIndex >= count || i == currentStepIndex);
-            item.error = item.title == null || item.title.trim().isEmpty();
+            item.error = item.title == null || item.title.isEmpty();
         }
     }
 
@@ -207,7 +212,8 @@ public class UploadModel {
     public Observable<Contribution> buildContributions(List<String> categoryStringList) {
         return Observable.fromIterable(items).map(item ->
         {
-            Contribution contribution= new Contribution(item.mediaUri, null, item.title+"."+item.fileExt, item.description, -1,
+            Contribution contribution= new Contribution(item.mediaUri, null, item.title+"."+item.fileExt,
+                    Description.formatList(item.descriptions), -1,
                     null, null, sessionManager.getCurrentAccount().name,
                     CommonsApplication.DEFAULT_EDIT_SUMMARY, item.gpsCoords.getCoords());
             contribution.setCategories(categoryStringList);
@@ -264,13 +270,17 @@ public class UploadModel {
         public boolean first = false;
         public String fileExt;
         public BehaviorSubject<ImageUtils.Result> imageQuality;
-        public String title;
-        public String description;
+        Title title;
+        List<Description> descriptions;
         public boolean visited;
         public boolean error;
 
         @SuppressLint("CheckResult")
         UploadItem(Uri mediaUri, String mimeType, String source, GPSExtractor gpsCoords, String fileExt) {
+            title=new Title();
+            descriptions=new ArrayList<>();
+            descriptions.add(new Description());
+
             this.mediaUri = mediaUri;
             this.mimeType = mimeType;
             this.source = source;
@@ -279,5 +289,9 @@ public class UploadModel {
             imageQuality = BehaviorSubject.createDefault(ImageUtils.Result.IMAGE_WAIT);
 //                imageQuality.subscribe(iq->Timber.i("New value of imageQuality:"+ImageUtils.Result.IMAGE_OK));
         }
+        public boolean isDummy(){
+            return false;
+        }
     }
+
 }
