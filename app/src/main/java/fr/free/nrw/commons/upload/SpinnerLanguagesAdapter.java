@@ -1,6 +1,9 @@
 package fr.free.nrw.commons.upload;
 
 import android.content.Context;
+import android.content.res.Resources;
+import android.graphics.Color;
+import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
@@ -9,39 +12,60 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import fr.free.nrw.commons.R;
+import fr.free.nrw.commons.Utils;
+
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Locale;
 
 public class SpinnerLanguagesAdapter extends ArrayAdapter {
 
     private final int resource;
     private final LayoutInflater layoutInflater;
-    List<Language> languages;
+    private List<String> languageNamesList;
+    private List<String> languageCodesList;
+
 
     public SpinnerLanguagesAdapter(@NonNull Context context,
-            int resource) {
+                                   int resource) {
         super(context, resource);
         this.resource = resource;
         this.layoutInflater = LayoutInflater.from(context);
-        languages = new ArrayList<>();
+        languageNamesList = new ArrayList<>();
+        languageCodesList = new ArrayList<>();
+        prepareLanguages(context);
     }
 
-    public void setLanguages(List<Language> languages) {
-        this.languages = languages;
+    private void prepareLanguages(Context context) {
+        Resources resources = context.getResources();
+        for (int i = 0; i < Language.languageNames.length; i++) {
+            languageNamesList.add(resources.getString(Language.languageGroups[i]));
+            languageCodesList.add("");
+
+            languageNamesList.addAll(Arrays.asList(resources.getStringArray(Language.languageNames[i])));
+            languageCodesList.addAll(Arrays.asList(resources.getStringArray(Language.languageCodes[i])));
+        }
+    }
+
+    @Override
+    public boolean isEnabled(int position) {
+        return !languageCodesList.get(position).isEmpty();
     }
 
     @Override
     public int getCount() {
-        return languages.size();
+        return languageNamesList.size();
     }
 
     @Override
     public View getDropDownView(int position, @Nullable View convertView,
-            @NonNull ViewGroup parent) {
+                                @NonNull ViewGroup parent) {
         View view = layoutInflater.inflate(resource, parent, false);
         ViewHolder holder = new ViewHolder(view);
         holder.init(position, true);
@@ -74,19 +98,31 @@ public class SpinnerLanguagesAdapter extends ArrayAdapter {
         }
 
         public void init(int position, boolean isDropDownView) {
-            Language language = languages.get(position);
             if (!isDropDownView) {
                 view.setVisibility(View.GONE);
-                tvLanguage.setText(
-                        language.getLocale().getLanguage());
+                tvLanguage.setText(languageCodesList.get(position));
             } else {
                 view.setVisibility(View.VISIBLE);
-                tvLanguage.setText(
-                        String.format("%s [%s]", language.getLocale().getDisplayName(),
-                                language.getLocale().getLanguage()));
+                if (languageCodesList.get(position).isEmpty()) {
+                    tvLanguage.setText(languageNamesList.get(position));
+                    tvLanguage.setTextColor(Color.GRAY);
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
+                        tvLanguage.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+                    }
+                } else {
+                    tvLanguage.setText(
+                            String.format("%s [%s]", languageNamesList.get(position), languageCodesList.get(position)));
+                    tvLanguage.setTextColor(Color.BLACK);
+                }
             }
-
         }
     }
+    public String getLanguageCode(int position){
+        return languageCodesList.get(position);
+    }
+    public int getIndexOfUserDefaultLocale(Context context) {
+        return languageCodesList.indexOf(context.getResources().getConfiguration().locale.getLanguage());
+    }
+
 
 }

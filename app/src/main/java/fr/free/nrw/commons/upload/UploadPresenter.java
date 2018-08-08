@@ -52,19 +52,9 @@ public class UploadPresenter {
 
     }
 
-    public void imageTitleChanged(String text) {
-        uploadModel.getCurrentItem().title = text;
-        uploadModel.getCurrentItem().error = text.trim().isEmpty();
-        view.updateTopCardContent();
-    }
-
     public void selectLicense(String licenseName) {
         uploadModel.setSelectedLicense(licenseName);
         view.updateLicenseSummary(uploadModel.getSelectedLicense());
-    }
-
-    public void descriptionChanged(String text) {
-        uploadModel.getCurrentItem().description = text;
     }
 
     //region Wizard step management
@@ -89,6 +79,7 @@ public class UploadPresenter {
 
     @SuppressLint("CheckResult")
     public void handleSubmit(CategoriesModel categoriesModel) {
+
         uploadModel.buildContributions(categoriesModel.getCategoryStringList())
                 .observeOn(Schedulers.io())
                 .subscribe(uploadController::startUpload);

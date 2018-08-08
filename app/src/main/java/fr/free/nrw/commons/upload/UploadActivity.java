@@ -36,6 +36,7 @@ import com.pedrogomez.renderers.RVRendererAdapter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.concurrent.TimeUnit;
 
 import javax.inject.Inject;
@@ -49,7 +50,6 @@ import fr.free.nrw.commons.category.CategoriesModel;
 import fr.free.nrw.commons.category.CategoryItem;
 import fr.free.nrw.commons.contributions.Contribution;
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
-import fr.free.nrw.commons.utils.AbstractTextWatcher;
 import fr.free.nrw.commons.utils.ImageUtils;
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -62,6 +62,7 @@ public class UploadActivity extends AuthenticatedActivity implements UploadView 
     InputMethodManager inputMethodManager;
     @Inject
     MediaWikiApi mwApi;
+
     @Inject
     UploadPresenter presenter;
     @Inject
@@ -92,16 +93,16 @@ public class UploadActivity extends AuthenticatedActivity implements UploadView 
     ImageView bottomCardExpandButton;
     @BindView(R.id.bottom_card_title)
     TextView bottomCardTitle;
-    @BindView(R.id.bottom_card_content)
-    View bottomCardContent;
     @BindView(R.id.bottom_card_next)
     Button next;
     @BindView(R.id.bottom_card_previous)
     Button previous;
-    @BindView(R.id.image_title)
-    EditText imageTitle;
-    @BindView(R.id.image_description)
-    EditText imageDescription;
+    @BindView(R.id.bottom_card_add_desc)
+    Button bottomCardAddDescription;
+//    @BindView(R.id.image_title)
+//    EditText imageTitle;
+//    @BindView(R.id.image_description)
+//    EditText imageDescription;
 
     //Right Card
     @BindView(R.id.right_card)
@@ -140,10 +141,11 @@ public class UploadActivity extends AuthenticatedActivity implements UploadView 
     Button submit;
     @BindView(R.id.license_previous)
     Button licensePrevious;
+    @BindView(R.id.rv_descriptions)
+    RecyclerView rvDescriptions;
 
+    private DescriptionsAdapter descriptionsAdapter;
     private RVRendererAdapter<CategoryItem> categoriesAdapter;
-    private AbstractTextWatcher titleWatcher;
-    private AbstractTextWatcher descriptionWatcher;
     private CompositeDisposable compositeDisposable;
 
     @Override
@@ -158,6 +160,7 @@ public class UploadActivity extends AuthenticatedActivity implements UploadView 
         configureLayout();
         configureTopCard();
         configureBottomCard();
+        initRecyclerView();
         configureRightCard();
         configureNavigationButtons();
 
@@ -177,8 +180,6 @@ public class UploadActivity extends AuthenticatedActivity implements UploadView 
         super.onResume();
         compositeDisposable = new CompositeDisposable();
         presenter.addView(this);
-        imageTitle.addTextChangedListener(titleWatcher);
-        imageDescription.addTextChangedListener(descriptionWatcher);
         compositeDisposable.add(
                 RxTextView.textChanges(categoriesSearch)
                         .doOnEach(v -> categoriesSearchContainer.setError(null))
@@ -188,22 +189,22 @@ public class UploadActivity extends AuthenticatedActivity implements UploadView 
                         .subscribe(filter -> updateCategoryList(filter.toString()))
         );
 
-        compositeDisposable.add(
-                RxTextView.textChanges(imageTitle)
-                        .takeUntil(RxView.detaches(categoriesSearch))
-                        .debounce(500, TimeUnit.MILLISECONDS)
-                        .observeOn(Schedulers.io())
-                        .filter(title -> mwApi.fileExistsWithName(title.toString() + "." + presenter.getCurrentItem().fileExt))
-                        .observeOn(AndroidSchedulers.mainThread())
-                        .subscribe(title -> showDuplicateTitlePopup(title.toString() + "." + presenter.getCurrentItem().fileExt))
-        );
+//        compositeDisposable.add(
+//                RxTextView.textChanges(imageTitle)
+//                        .takeUntil(RxView.detaches(categoriesSearch))
+//                        .debounce(500, TimeUnit.MILLISECONDS)
+//                        .observeOn(Schedulers.io())
+//                        .filter(title -> mwApi.fileExistsWithName(title.toString() + "." + presenter.getCurrentItem().fileExt))
+//                        .observeOn(AndroidSchedulers.mainThread())
+//                        .subscribe(title -> showDuplicateTitlePopup(title.toString() + "." + presenter.getCurrentItem().fileExt))
+//        );
     }
 
     @Override
     protected void onPause() {
         presenter.removeView();
-        imageTitle.removeTextChangedListener(titleWatcher);
-        imageDescription.removeTextChangedListener(descriptionWatcher);
+//        imageTitle.removeTextChangedListener(titleWatcher);
+//        imageDescription.removeTextChangedListener(descriptionWatcher);
         compositeDisposable.dispose();
         super.onPause();
     }
@@ -221,8 +222,10 @@ public class UploadActivity extends AuthenticatedActivity implements UploadView 
         bottomCardTitle.setText(title);
         categoryTitle.setText(title);
         licenseTitle.setText(title);
-        imageTitle.setText(uploadItem.title);
-        imageDescription.setText(uploadItem.description);
+        if (!uploadItem.isDummy()) {
+            descriptionsAdapter.setItems(uploadItem.title, uploadItem.descriptions);
+            rvDescriptions.setAdapter(descriptionsAdapter);
+        }
     }
 
     @Override
@@ -309,7 +312,7 @@ public class UploadActivity extends AuthenticatedActivity implements UploadView 
 
     @Override
     public void setBottomCardState(boolean state) {
-        updateCardState(state, bottomCardExpandButton, bottomCardContent);
+        updateCardState(state, bottomCardExpandButton, rvDescriptions, previous, next);
     }
 
     @Override
@@ -327,7 +330,7 @@ public class UploadActivity extends AuthenticatedActivity implements UploadView 
 
     @Override
     public void dismissKeyboard() {
-        inputMethodManager.hideSoftInputFromWindow(imageTitle.getWindowToken(), 0);
+//        inputMethodManager.hideSoftInputFromWindow(imageTitle.getWindowToken(), 0);
     }
 
     @Override
@@ -363,17 +366,7 @@ public class UploadActivity extends AuthenticatedActivity implements UploadView 
     }
 
     public void showDuplicateTitlePopup(String title) {
-        AlertDialog.Builder errorDialogBuilder = new AlertDialog.Builder(this);
-        errorDialogBuilder.setMessage(getString(R.string.upload_title_duplicate, title));
-        errorDialogBuilder.setTitle(R.string.warning);
-        //just dismiss the dialog
-        errorDialogBuilder.setPositiveButton(R.string.ok, (dialogInterface, i) -> {
-        });
-
-        AlertDialog errorDialog = errorDialogBuilder.create();
-        if (!isFinishing()) {
-            errorDialog.show();
-        }
+        showInfoAlert(R.string.warning, getString(R.string.upload_title_duplicate, title));
     }
 
     @Override
@@ -417,12 +410,12 @@ public class UploadActivity extends AuthenticatedActivity implements UploadView 
         });
     }
 
-    private void configureLayout(){
+    private void configureLayout() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
             cardLayout.getLayoutTransition().enableTransitionType(LayoutTransition.CHANGING);
         }
         background.setScaleType(ImageView.ScaleType.CENTER_CROP);
-        background.setOnScaleChangeListener((scaleFactor, x, y)->{
+        background.setOnScaleChangeListener((scaleFactor, x, y) -> {
             presenter.closeAllCards();
         });
     }
@@ -435,8 +428,10 @@ public class UploadActivity extends AuthenticatedActivity implements UploadView 
 
     private void configureBottomCard() {
         bottomCardExpandButton.setOnClickListener(v -> presenter.toggleBottomCardState());
-        titleWatcher = new AbstractTextWatcher(presenter::imageTitleChanged);
-        descriptionWatcher = new AbstractTextWatcher(presenter::descriptionChanged);
+        bottomCardAddDescription.setOnClickListener(v -> {
+            descriptionsAdapter.addDescription(new Description());
+            rvDescriptions.scrollToPosition(descriptionsAdapter.getItemCount() - 1);
+        });
     }
 
     private void configureRightCard() {
@@ -560,4 +555,36 @@ public class UploadActivity extends AuthenticatedActivity implements UploadView 
             }
         }
     }
+
+    @Override
+    public List<Description> getDescriptions() {
+        return descriptionsAdapter.getDescriptions();
+    }
+
+    private void initRecyclerView() {
+        descriptionsAdapter = new DescriptionsAdapter();
+        descriptionsAdapter.setCallback((mediaDetailDescription, descriptionInfo) ->
+                showInfoAlert(mediaDetailDescription, getString(descriptionInfo)));
+        rvDescriptions.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+        rvDescriptions.setAdapter(descriptionsAdapter);
+    }
+
+//    private List<Language> getDescriptionLanguages() {
+//        return Observable.fromArray(getResources().getStringArray(R.array.desc_language_codes))
+//                .map(Locale::new)
+//                .map(Language::new)
+//                .toList()
+//                .blockingGet();
+//    }
+
+    private void showInfoAlert(int titleStringID, String message) {
+        new AlertDialog.Builder(this)
+                .setTitle(titleStringID)
+                .setMessage(message)
+                .setCancelable(true)
+                .setNeutralButton(android.R.string.ok, (dialog, id) -> dialog.cancel())
+                .create()
+                .show();
+    }
+
 }

@@ -35,7 +35,8 @@
 
             <include layout="@layout/activity_upload_top_card"/>
 
-            <include layout="@layout/activity_upload_right_card" />
+            <include
+                layout="@layout/activity_upload_right_card" />
 
             <ViewFlipper
                 android:id="@+id/view_flipper"
@@ -47,7 +48,9 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent">
 
-                <include layout="@layout/activity_upload_bottom_card" />
+                <include
+                    layout="@layout/activity_upload_bottom_card"
+                    android:visibility="visible" />
 
                 <include layout="@layout/activity_upload_categories" />
 

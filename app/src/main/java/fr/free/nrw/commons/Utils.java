@@ -19,7 +19,9 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
+import java.util.LinkedHashMap;
 import java.util.Locale;
+import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -213,6 +215,16 @@ public class Utils {
         Bitmap bitmap = Bitmap.createBitmap(screenView.getDrawingCache());
         screenView.setDrawingCacheEnabled(false);
         return bitmap;
+    }
+
+    public static <K,V> Map<K,V>  arraysToMap(K[] kArray, V[] vArray){
+        if(kArray.length!=vArray.length)
+            throw new RuntimeException("arraysToMap array sizes don't match");
+        Map<K,V> map=new LinkedHashMap<>();
+        for (int i=0;i<vArray.length;i++){
+            map.put(kArray[i], vArray[i]);
+        }
+        return map;
     }
 
 }
