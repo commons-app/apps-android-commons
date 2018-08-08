@@ -113,7 +113,7 @@ public class PlaceRenderer extends Renderer<Place> {
         });
 
         cameraButton.setOnClickListener(view2 -> {
-            if (applicationPrefs.getBoolean("login_skipped", true)) {
+            if (applicationPrefs.getBoolean("login_skipped", false)) {
                 // prompt the user to login
                 new AlertDialog.Builder(getContext())
                         .setMessage(R.string.login_alert_message)
@@ -134,7 +134,7 @@ public class PlaceRenderer extends Renderer<Place> {
 
 
         galleryButton.setOnClickListener(view3 -> {
-            if (applicationPrefs.getBoolean("login_skipped", true)) {
+            if (applicationPrefs.getBoolean("login_skipped", false)) {
                 // prompt the user to login
                 new AlertDialog.Builder(getContext())
                         .setMessage(R.string.login_alert_message)

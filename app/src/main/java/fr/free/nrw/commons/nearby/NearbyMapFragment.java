@@ -379,7 +379,7 @@ public class NearbyMapFragment extends DaggerFragment {
 
     private void setListeners() {
         fabPlus.setOnClickListener(view -> {
-            if (applicationPrefs.getBoolean("login_skipped", true)) {
+            if (applicationPrefs.getBoolean("login_skipped", false)) {
                 // prompt the user to login
                 new AlertDialog.Builder(getContext())
                         .setMessage(R.string.login_alert_message)
