@@ -17,6 +17,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -24,12 +25,15 @@ import butterknife.OnTouch;
 import butterknife.Optional;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.utils.AbstractTextWatcher;
+import fr.free.nrw.commons.utils.BiMap;
 import fr.free.nrw.commons.utils.ViewUtil;
+import io.reactivex.Observable;
+import io.reactivex.subjects.BehaviorSubject;
+import io.reactivex.subjects.Subject;
 import timber.log.Timber;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 
 class DescriptionsAdapter extends RecyclerView.Adapter<DescriptionsAdapter.ViewHolder> {
 
@@ -37,20 +41,30 @@ class DescriptionsAdapter extends RecyclerView.Adapter<DescriptionsAdapter.ViewH
     List<Description> descriptions;
     private Context context;
     private Callback callback;
+    private Subject<String> titleChangedSubject;
+
+    private BiMap<AdapterView, String> selectedLanguages;
 
     public DescriptionsAdapter() {
         title = new Title();
         descriptions = new ArrayList<>();
         descriptions.add(new Description());
+        titleChangedSubject=BehaviorSubject.create();
+        selectedLanguages=new BiMap<>();
     }
 
     public void setCallback(Callback callback) {
         this.callback = callback;
     }
 
+    public Observable<String> getTitleChangeObserver(){
+        return titleChangedSubject;
+    }
+
     public void setItems(Title title, List<Description> descriptions) {
         this.descriptions = descriptions;
         this.title = title;
+        selectedLanguages=new BiMap<>();
         notifyDataSetChanged();
     }
 
@@ -129,7 +143,10 @@ class DescriptionsAdapter extends RecyclerView.Adapter<DescriptionsAdapter.ViewH
                 } else {
                     descItemEditText.setText("");
                 }
-                descItemEditText.addTextChangedListener(new AbstractTextWatcher(title::setTitleText));
+                descItemEditText.addTextChangedListener(new AbstractTextWatcher(titleText ->{
+                    title.setTitleText(titleText);
+                    titleChangedSubject.onNext(titleText);
+                }));
 
                 descItemEditText.setOnFocusChangeListener((v, hasFocus) -> {
                     if (!hasFocus) {
@@ -154,7 +171,6 @@ class DescriptionsAdapter extends RecyclerView.Adapter<DescriptionsAdapter.ViewH
                 }
 
                 descItemEditText.addTextChangedListener(new AbstractTextWatcher(description::setDescriptionText));
-
                 descItemEditText.setOnFocusChangeListener((v, hasFocus) -> {
                     if (!hasFocus) {
                         ViewUtil.hideKeyboard(v);
@@ -162,7 +178,7 @@ class DescriptionsAdapter extends RecyclerView.Adapter<DescriptionsAdapter.ViewH
                 });
 
                 SpinnerLanguagesAdapter languagesAdapter = new SpinnerLanguagesAdapter(context,
-                        R.layout.row_item_languages_spinner);
+                        R.layout.row_item_languages_spinner, selectedLanguages);
                 languagesAdapter.notifyDataSetChanged();
                 spinnerDescriptionLanguages.setAdapter(languagesAdapter);
 
@@ -175,6 +191,7 @@ class DescriptionsAdapter extends RecyclerView.Adapter<DescriptionsAdapter.ViewH
                     }
                 } else {
                     spinnerDescriptionLanguages.setSelection(description.getSelectedLanguageIndex());
+                    selectedLanguages.put(spinnerDescriptionLanguages, description.getLanguageCode());
                 }
 
                 //TODO do it the butterknife way
@@ -182,10 +199,16 @@ class DescriptionsAdapter extends RecyclerView.Adapter<DescriptionsAdapter.ViewH
                     @Override
                     public void onItemSelected(AdapterView<?> adapterView, View view, int position,
                                                long l) {
-                        //TODO handle case when user tries to select an already selected language
                         description.setSelectedLanguageIndex(position);
                         String languageCode=((SpinnerLanguagesAdapter)adapterView.getAdapter()).getLanguageCode(position);
                         description.setLanguageCode(languageCode);
+                        selectedLanguages.remove(adapterView);
+                        selectedLanguages.put(adapterView, languageCode);
+                        ((SpinnerLanguagesAdapter)adapterView.getAdapter()).selectedLangCode=languageCode;
+//                        if(prevSpinnerItem!=null)
+//                            prevSpinnerItem.setText(prevSpinnerItem.getText().subSequence(0,2));
+//                        prevSpinnerItem=(TextView)adapterView.getItemAtPosition(position);
+//                        prevSpinnerItem.setText(languageCode);
                     }
 
                     @Override
