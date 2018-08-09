@@ -2,8 +2,11 @@ package fr.free.nrw.commons.contributions;
 
 import android.net.Uri;
 import android.os.Parcel;
+import android.support.annotation.IntDef;
 import android.support.annotation.NonNull;
+import android.support.annotation.StringDef;
 
+import java.lang.annotation.Retention;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
@@ -12,6 +15,8 @@ import fr.free.nrw.commons.BuildConfig;
 import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.settings.Prefs;
+
+import static java.lang.annotation.RetentionPolicy.SOURCE;
 
 public class  Contribution extends Media {
 
@@ -32,6 +37,10 @@ public class  Contribution extends Media {
     public static final int STATE_FAILED = 1;
     public static final int STATE_QUEUED = 2;
     public static final int STATE_IN_PROGRESS = 3;
+
+    @Retention(SOURCE)
+    @StringDef({SOURCE_CAMERA, SOURCE_GALLERY, SOURCE_EXTERNAL})
+    public @interface FileSource {}
 
     public static final String SOURCE_CAMERA = "camera";
     public static final String SOURCE_GALLERY = "gallery";
@@ -235,7 +244,7 @@ public class  Contribution extends Media {
     /**
      * When the corresponding wikidata entity is known as in case of nearby uploads, it can be set
      * using the setter method
-     * @param wikiDataEntityId
+     * @param wikiDataEntityId wikiDataEntityId
      */
     public void setWikiDataEntityId(String wikiDataEntityId) {
         this.wikiDataEntityId = wikiDataEntityId;

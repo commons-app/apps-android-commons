@@ -60,7 +60,9 @@ public class UploadService extends HandlerService<Contribution> {
     private NotificationCompat.Builder curProgressNotification;
     private int toUpload;
 
-    // The file names of unfinished uploads, used to prevent overwriting
+    /**
+     * The file names of unfinished uploads, used to prevent overwriting
+     */
     private Set<String> unfinishedUploads = new HashSet<>();
 
     // DO NOT HAVE NOTIFICATION ID OF 0 FOR ANYTHING
@@ -199,14 +201,8 @@ public class UploadService extends HandlerService<Contribution> {
             return;
         }
 
-        //As the fileInputStream is null there's no point in continuing the upload process
-        //mwapi.upload accepts a NonNull input stream
-        if(fileInputStream == null) {
-            Timber.d("File not found");
-            return;
-        }
-
         Timber.d("Before execution!");
+        //noinspection deprecation
         curProgressNotification = new NotificationCompat.Builder(this).setAutoCancel(true)
                 .setSmallIcon(R.drawable.ic_launcher)
                 .setLargeIcon(BitmapFactory.decodeResource(getResources(), R.drawable.ic_launcher))
@@ -285,6 +281,7 @@ public class UploadService extends HandlerService<Contribution> {
     }
 
     @SuppressLint("StringFormatInvalid")
+    @SuppressWarnings("deprecation")
     private void showFailedNotification(Contribution contribution) {
         Notification failureNotification = new NotificationCompat.Builder(this).setAutoCancel(true)
                 .setSmallIcon(R.drawable.ic_launcher)
