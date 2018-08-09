@@ -559,7 +559,6 @@ public class UploadActivity extends AuthenticatedActivity implements UploadView 
         rvDescriptions.setAdapter(descriptionsAdapter);
         compositeDisposable.add(
                 descriptionsAdapter.getTitleChangeObserver()
-                        .takeUntil(RxView.detaches(categoriesSearch))
                         .debounce(1000, TimeUnit.MILLISECONDS)
                         .observeOn(Schedulers.io())
                         .filter(title -> mwApi.fileExistsWithName(title + "." + presenter.getCurrentItem().fileExt))
@@ -567,14 +566,6 @@ public class UploadActivity extends AuthenticatedActivity implements UploadView 
                         .subscribe(title -> showDuplicateTitlePopup(title + "." + presenter.getCurrentItem().fileExt))
         );
     }
-
-//    private List<Language> getDescriptionLanguages() {
-//        return Observable.fromArray(getResources().getStringArray(R.array.desc_language_codes))
-//                .map(Locale::new)
-//                .map(Language::new)
-//                .toList()
-//                .blockingGet();
-//    }
 
     private void showInfoAlert(int titleStringID, int messageStringId, String... formatArgs) {
         new AlertDialog.Builder(this)

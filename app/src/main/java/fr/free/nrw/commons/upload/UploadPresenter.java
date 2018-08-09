@@ -11,12 +11,16 @@ import javax.inject.Inject;
 import javax.inject.Singleton;
 
 import fr.free.nrw.commons.category.CategoriesModel;
+import fr.free.nrw.commons.contributions.Contribution;
 import fr.free.nrw.commons.utils.ImageUtils;
 import io.reactivex.Completable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 import timber.log.Timber;
 
+/**
+ * The MVP pattern presenter of Upload GUI
+ */
 @Singleton
 public class UploadPresenter {
     private static final String TOP_CARD_STATE = "fr.free.nrw.commons.upload.top_card_state";
@@ -37,14 +41,21 @@ public class UploadPresenter {
         receive(Collections.singletonList(mediaUri), mimeType, source);
     }
 
+    /**
+     * Passes the items received to {@link #uploadModel} and displays the items.
+     *
+     * @param media The Uri's of the media being uploaded.
+     * @param mimeType the mimeType of the files.
+     * @param source File source from {@link Contribution.FileSource}
+     */
     @SuppressLint("CheckResult")
-    public void receive(List<Uri> media, String mimeType, String source) {
+    public void receive(List<Uri> media, String mimeType, @Contribution.FileSource String source) {
         Completable.fromRunnable(() -> uploadModel.receive(media, mimeType, source))
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(() -> {
-                    updateCards(view);
-                    updateLicenses(view);
+                    updateCards();
+                    updateLicenses();
                     updateContent();
                     if (uploadModel.isShowingItem())
                         uploadModel.subscribeBadPicture(this::handleBadPicture);
@@ -52,12 +63,21 @@ public class UploadPresenter {
 
     }
 
+    /**
+     * Sets the license to parameter and updates {@link UploadActivity}
+     *
+     * @param licenseName license name
+     */
     public void selectLicense(String licenseName) {
         uploadModel.setSelectedLicense(licenseName);
         view.updateLicenseSummary(uploadModel.getSelectedLicense());
     }
 
     //region Wizard step management
+
+    /**
+     * Called by the next button in {@link UploadActivity}
+     */
     public void handleNext() {
         uploadModel.next();
         updateContent();
@@ -65,6 +85,9 @@ public class UploadPresenter {
         view.dismissKeyboard();
     }
 
+    /**
+     * Called by the previous button in {@link UploadActivity}
+     */
     public void handlePrevious() {
         uploadModel.previous();
         updateContent();
@@ -72,11 +95,17 @@ public class UploadPresenter {
         view.dismissKeyboard();
     }
 
+    /**
+     * Called when one of the pictures on the top card is clicked on in {@link UploadActivity}
+     */
     public void thumbnailClicked(UploadModel.UploadItem item) {
         uploadModel.jumpTo(item);
         updateContent();
     }
 
+    /**
+     * Called by the submit button in {@link UploadActivity}
+     */
     @SuppressLint("CheckResult")
     public void handleSubmit(CategoriesModel categoriesModel) {
 
@@ -85,6 +114,9 @@ public class UploadPresenter {
                 .subscribe(uploadController::startUpload);
     }
 
+    /**
+     * Called by the map button on the right card in {@link UploadActivity}
+     */
     public void openCoordinateMap() {
         GPSExtractor gpsObj = uploadModel.getCurrentItem().gpsCoords;
         if (gpsObj != null && gpsObj.imageCoordsExists) {
@@ -92,7 +124,13 @@ public class UploadPresenter {
         }
     }
 
-    public void handleBadPicture(ImageUtils.Result result) {
+
+    /**
+     * Called by {@link DetectBadPicturesAsync} when a result is obtained.
+     *
+     * @param result the result returned by DetectBadPicturesAsync.
+     */
+    private void handleBadPicture(ImageUtils.Result result) {
         view.showBadPicturePopup(result);
     }
 
@@ -105,7 +143,7 @@ public class UploadPresenter {
             view.finish();
         else {
             uploadModel.deletePicture();
-            updateCards(view);
+            updateCards();
             updateContent();
             if (uploadModel.isShowingItem())
                 uploadModel.subscribeBadPicture(this::handleBadPicture);
@@ -115,21 +153,35 @@ public class UploadPresenter {
     //endregion
 
     //region Top Bottom and Right card state management
+
+
+    /**
+     * Toggles the top card's state between open and closed.
+     */
     public void toggleTopCardState() {
         uploadModel.setTopCardState(!uploadModel.isTopCardState());
         view.setTopCardState(uploadModel.isTopCardState());
     }
 
+    /**
+     * Toggles the bottom card's state between open and closed.
+     */
     public void toggleBottomCardState() {
         uploadModel.setBottomCardState(!uploadModel.isBottomCardState());
         view.setBottomCardState(uploadModel.isBottomCardState());
     }
 
+    /**
+     * Toggles the right card's state between open and closed.
+     */
     public void toggleRightCardState() {
         uploadModel.setRightCardState(!uploadModel.isRightCardState());
         view.setRightCardState(uploadModel.isRightCardState());
     }
 
+    /**
+     * Sets all the cards' states to closed.
+     */
     public void closeAllCards() {
         if (uploadModel.isTopCardState()) {
             uploadModel.setTopCardState(false);
@@ -174,12 +226,16 @@ public class UploadPresenter {
     public void addView(UploadView view) {
         this.view = view;
 
-        updateCards(view);
-        updateLicenses(view);
+        updateCards();
+        updateLicenses();
         updateContent();
     }
 
-    void updateCards(UploadView view) {
+
+    /**
+     * Updates the cards for when there is a change to the amount of items being uploaded.
+     */
+    private void updateCards() {
         Timber.i("uploadModel.getCount():" + uploadModel.getCount());
         view.updateThumbnails(uploadModel.getUploads());
         view.setTopCardVisibility(uploadModel.getCount() > 1);
@@ -188,13 +244,19 @@ public class UploadPresenter {
         view.setBottomCardState(uploadModel.isBottomCardState());
     }
 
-    void updateLicenses(UploadView view) {
+    /**
+     * Sets the list of licences and the default license.
+     */
+    private void updateLicenses() {
         String selectedLicense = uploadModel.getSelectedLicense();
         view.updateLicenses(uploadModel.getLicenses(), selectedLicense);
         view.updateLicenseSummary(selectedLicense);
     }
 
-    void updateContent() {
+    /**
+     * Updates the cards and the background when a new page is selected.
+     */
+    private void updateContent() {
         Timber.i("Updating content for page" + uploadModel.getCurrentStep());
         view.setNextEnabled(uploadModel.isNextAvailable());
         view.setPreviousEnabled(uploadModel.isPreviousAvailable());
@@ -208,7 +270,13 @@ public class UploadPresenter {
         showCorrectCards(uploadModel.getCurrentStep(), uploadModel.getCount());
     }
 
-    void showCorrectCards(int currentStep, int uploadCount) {
+    /**
+     * Updates the layout to show the correct bottom card.
+     *
+     * @param currentStep the current step
+     * @param uploadCount how many items are being uploaded
+     */
+    private void showCorrectCards(int currentStep, int uploadCount) {
         @UploadView.UploadPage int page;
         if (uploadCount == 0) {
             page = UploadView.PLEASE_WAIT;
@@ -229,6 +297,10 @@ public class UploadPresenter {
     }
 
     //endregion
+
+    /**
+     * @return the item currently being displayed
+     */
     public UploadModel.UploadItem getCurrentItem() {
         return uploadModel.getCurrentItem();
     }
