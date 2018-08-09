@@ -250,6 +250,11 @@
   <string name="nominated_for_deletion">Denna bild har nominerats för radering.</string>
   <string name="nominated_see_more"/>
   <string name="view_browser">Visa i webbläsare</string>
+  <string name="skip_login">Hoppa över</string>
+  <string name="navigation_item_login">Logga in</string>
+  <string name="skip_login_title">Vill du verkligen hoppa över inloggningen?</string>
+  <string name="skip_login_message">Du kommer inte kunna ladda upp bilder.</string>
+  <string name="login_alert_message">Logga in för att använda denna funktion</string>
   <string name="nearby_location_has_not_changed">Platsen har inte ändrats.</string>
   <string name="nearby_location_not_available">Platsen är inte tillgänglig.</string>
   <string name="location_permission_rationale_nearby">Behörighet krävs för att visa en lista över platser i närheten</string>

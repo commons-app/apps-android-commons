@@ -242,6 +242,11 @@
   <string name="nominate_deletion">Предложи за бришење</string>
   <string name="nominated_for_deletion">Сликава е предложена за бришење.</string>
   <string name="view_browser">Погледај во прелистувач</string>
+  <string name="skip_login">Прескокни</string>
+  <string name="navigation_item_login">Најава</string>
+  <string name="skip_login_title">Дали навистина сакате да ја прескокнете најавата?</string>
+  <string name="skip_login_message">Нема да можете да подигате слики.</string>
+  <string name="login_alert_message">Најавете се за да ја користите оваа можност.</string>
   <string name="nearby_location_has_not_changed">Местоположбата не е сменета.</string>
   <string name="nearby_location_not_available">Местоположбата е недостапна.</string>
   <string name="location_permission_rationale_nearby">Се бара дозвола за приказ на список на околни места</string>
