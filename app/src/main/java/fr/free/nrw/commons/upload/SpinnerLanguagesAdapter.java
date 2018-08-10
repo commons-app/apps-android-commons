@@ -6,8 +6,6 @@ import android.graphics.Color;
 import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.annotation.RequiresApi;
-import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,13 +17,10 @@ import android.widget.TextView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import fr.free.nrw.commons.R;
-import fr.free.nrw.commons.Utils;
 import fr.free.nrw.commons.utils.BiMap;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
-import java.util.LinkedHashMap;
 import java.util.List;
 
 public class SpinnerLanguagesAdapter extends ArrayAdapter {
@@ -63,7 +58,7 @@ public class SpinnerLanguagesAdapter extends ArrayAdapter {
     @Override
     public boolean isEnabled(int position) {
         return !languageCodesList.get(position).isEmpty()&&
-                (!selectedLanguages.hasKey(languageCodesList.get(position)) ||
+                (!selectedLanguages.containsKey(languageCodesList.get(position)) ||
                         languageCodesList.get(position).equals(selectedLangCode));
     }
 
@@ -125,7 +120,7 @@ public class SpinnerLanguagesAdapter extends ArrayAdapter {
                 } else {
                     tvLanguage.setText(
                             String.format("%s [%s]", languageNamesList.get(position), languageCodesList.get(position)));
-                    if(selectedLanguages.hasKey(languageCodesList.get(position))&&
+                    if(selectedLanguages.containsKey(languageCodesList.get(position))&&
                             !languageCodesList.get(position).equals(selectedLangCode))
                         tvLanguage.setTextColor(Color.GRAY);
                     else
