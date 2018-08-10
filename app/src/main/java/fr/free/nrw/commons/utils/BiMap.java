@@ -1,17 +1,15 @@
 package fr.free.nrw.commons.utils;
 
-import java.util.AbstractMap;
 import java.util.HashMap;
 import java.util.Set;
-import java.util.function.Function;
 
 /**
- * Created by Ilgaz Er on 8/8/2018.
+ * HashMap that can be searched in both the forward and reverse directions.
  */
 public class BiMap<K, V> {
 
-    HashMap<K, V> map = new HashMap<K, V>();
-    HashMap<V, K> inversedMap = new HashMap<V, K>();
+    private HashMap<K, V> map = new HashMap<K, V>();
+    private HashMap<V, K> inversedMap = new HashMap<V, K>();
 
     public void put(K k, V v) {
         map.put(k, v);
@@ -34,7 +32,8 @@ public class BiMap<K, V> {
         inversedMap.remove(map.remove(k));
     }
 
-    public boolean hasKey(V v){
+
+    public boolean containsKey(V v){
         return inversedMap.containsKey(v);
     }
 
