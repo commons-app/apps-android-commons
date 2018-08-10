@@ -46,11 +46,13 @@ import butterknife.ButterKnife;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.Utils;
 import fr.free.nrw.commons.auth.AuthenticatedActivity;
+import fr.free.nrw.commons.auth.LoginActivity;
 import fr.free.nrw.commons.category.CategoriesModel;
 import fr.free.nrw.commons.category.CategoryItem;
 import fr.free.nrw.commons.contributions.Contribution;
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
 import fr.free.nrw.commons.utils.ImageUtils;
+import fr.free.nrw.commons.utils.ViewUtil;
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
@@ -171,6 +173,18 @@ public class UploadActivity extends AuthenticatedActivity implements UploadView 
     }
 
     @Override
+    public boolean checkIfLoggedIn() {
+        if (!sessionManager.isUserLoggedIn()) {
+            Timber.d("Current account is null");
+            ViewUtil.showLongToast(this, getString(R.string.user_not_logged_in));
+            Intent loginIntent = new Intent(UploadActivity.this, LoginActivity.class);
+            startActivity(loginIntent);
+            return false;
+        }
+        return true;
+    }
+
+    @Override
     protected void onDestroy() {
         presenter.cleanup();
         super.onDestroy();
@@ -179,6 +193,7 @@ public class UploadActivity extends AuthenticatedActivity implements UploadView 
     @Override
     protected void onResume() {
         super.onResume();
+        checkIfLoggedIn();
         presenter.addView(this);
         compositeDisposable.add(
                 RxTextView.textChanges(categoriesSearch)
@@ -567,6 +582,7 @@ public class UploadActivity extends AuthenticatedActivity implements UploadView 
         );
     }
 
+
     private void showInfoAlert(int titleStringID, int messageStringId, String... formatArgs) {
         new AlertDialog.Builder(this)
                 .setTitle(titleStringID)
@@ -576,5 +592,6 @@ public class UploadActivity extends AuthenticatedActivity implements UploadView 
                 .create()
                 .show();
     }
+
 
 }

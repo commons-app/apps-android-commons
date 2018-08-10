@@ -1,5 +1,6 @@
 package fr.free.nrw.commons.upload;
 
+import android.accounts.Account;
 import android.annotation.SuppressLint;
 import android.content.ContentResolver;
 import android.content.Context;
@@ -18,11 +19,13 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 import fr.free.nrw.commons.CommonsApplication;
+import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.auth.SessionManager;
 import fr.free.nrw.commons.contributions.Contribution;
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
 import fr.free.nrw.commons.settings.Prefs;
 import fr.free.nrw.commons.utils.ImageUtils;
+import fr.free.nrw.commons.utils.ViewUtil;
 import io.reactivex.Observable;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Consumer;
@@ -256,6 +259,11 @@ public class UploadModel {
 
     public void subscribeBadPicture(Consumer<ImageUtils.Result> consumer) {
         badImageSubscription = getCurrentItem().imageQuality.subscribe(consumer);
+    }
+
+    public boolean isLoggedIn() {
+        Account currentAccount = sessionManager.getCurrentAccount();
+        return currentAccount != null;
     }
 
 

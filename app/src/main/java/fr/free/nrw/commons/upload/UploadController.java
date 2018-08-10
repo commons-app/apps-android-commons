@@ -92,32 +92,23 @@ public class UploadController {
 
     /**
      * Starts a new upload task.
-     * @param title         the title of the contribution
-     * @param mediaUri      the media URI of the contribution
-     * @param description   the description of the contribution
-     * @param mimeType      the MIME type of the contribution
-     * @param source        the source of the contribution
-     * @param decimalCoords the coordinates in decimal. (e.g. "37.51136|-77.602615")
+     *
+     * @param title            the title of the contribution
+     * @param mediaUri         the media URI of the contribution
+     * @param description      the description of the contribution
+     * @param mimeType         the MIME type of the contribution
+     * @param source           the source of the contribution
+     * @param decimalCoords    the coordinates in decimal. (e.g. "37.51136|-77.602615")
      * @param wikiDataEntityId
-     * @param onComplete    the progress tracker
+     * @param onComplete       the progress tracker
      */
     public void startUpload(String title, Uri contentProviderUri, Uri mediaUri, String description, String mimeType, String source, String decimalCoords, String wikiDataEntityId, ContributionUploadProgress onComplete) {
         Contribution contribution;
 
-
-            //TODO: Modify this to include coords
-            contribution = new Contribution(mediaUri, null, title, description, -1,
-                    null, null, sessionManager.getCurrentAccount().name,
-                    CommonsApplication.DEFAULT_EDIT_SUMMARY, decimalCoords);
-
-
-            contribution.setTag("mimeType", mimeType);
-            contribution.setSource(source);
-
         Timber.d("Wikidata entity ID received from Share activity is %s", wikiDataEntityId);
         //TODO: Modify this to include coords
         Account currentAccount = sessionManager.getCurrentAccount();
-        if(currentAccount == null) {
+        if (currentAccount == null) {
             Timber.d("Current account is null");
             ViewUtil.showLongToast(context, context.getString(R.string.user_not_logged_in));
             sessionManager.forceLogin(context);
@@ -141,13 +132,29 @@ public class UploadController {
      * Starts a new upload task.
      *
      * @param contribution the contribution object
+     */
+    public void startUpload(Contribution contribution) {
+        startUpload(contribution, c -> {});
+    }
+
+    /**
+     * Starts a new upload task.
+     *
+     * @param contribution the contribution object
      * @param onComplete   the progress tracker
      */
     @SuppressLint("StaticFieldLeak")
     public void startUpload(final Contribution contribution, final ContributionUploadProgress onComplete) {
         //Set creator, desc, and license
         if (TextUtils.isEmpty(contribution.getCreator())) {
-            contribution.setCreator(sessionManager.getCurrentAccount().name);
+            Account currentAccount = sessionManager.getCurrentAccount();
+            if (currentAccount == null) {
+                Timber.d("Current account is null");
+                ViewUtil.showLongToast(context, context.getString(R.string.user_not_logged_in));
+                sessionManager.forceLogin(context);
+                return;
+            }
+            contribution.setCreator(currentAccount.name);
         }
 
         if (contribution.getDescription() == null) {
@@ -169,7 +176,7 @@ public class UploadController {
                 ContentResolver contentResolver = context.getContentResolver();
                 try {
                     if (contribution.getDataLength() <= 0) {
-                        Log.d("deneme","UploadController/doInBackground, contribution.getLocalUri():"+contribution.getLocalUri());
+                        Log.d("deneme", "UploadController/doInBackground, contribution.getLocalUri():" + contribution.getLocalUri());
                         AssetFileDescriptor assetFileDescriptor = contentResolver
                                 .openAssetFileDescriptor(Uri.fromFile(new File(contribution.getLocalUri().getPath())), "r");
                         if (assetFileDescriptor != null) {
@@ -221,7 +228,7 @@ public class UploadController {
                         contribution.setDateCreated(new Date());
                     }
                 }
-            return contribution;
+                return contribution;
             }
 
             @Override
