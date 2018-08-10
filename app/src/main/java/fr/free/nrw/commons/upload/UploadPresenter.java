@@ -4,15 +4,18 @@ import android.annotation.SuppressLint;
 import android.net.Uri;
 import android.os.Bundle;
 
+import java.lang.reflect.Proxy;
 import java.util.Collections;
 import java.util.List;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
+import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.category.CategoriesModel;
 import fr.free.nrw.commons.contributions.Contribution;
 import fr.free.nrw.commons.utils.ImageUtils;
+import fr.free.nrw.commons.utils.ViewUtil;
 import io.reactivex.Completable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
@@ -28,7 +31,9 @@ public class UploadPresenter {
 
     private final UploadModel uploadModel;
     private final UploadController uploadController;
-    private UploadView view;// = UploadView.DUMMY;
+    private static final UploadView DUMMY = (UploadView) Proxy.newProxyInstance(UploadView.class.getClassLoader(),
+            new Class[]{UploadView.class}, (proxy, method, methodArgs) -> null);
+    private UploadView view = DUMMY;
 
 
     @Inject
@@ -44,9 +49,9 @@ public class UploadPresenter {
     /**
      * Passes the items received to {@link #uploadModel} and displays the items.
      *
-     * @param media The Uri's of the media being uploaded.
+     * @param media    The Uri's of the media being uploaded.
      * @param mimeType the mimeType of the files.
-     * @param source File source from {@link Contribution.FileSource}
+     * @param source   File source from {@link Contribution.FileSource}
      */
     @SuppressLint("CheckResult")
     public void receive(List<Uri> media, String mimeType, @Contribution.FileSource String source) {
@@ -60,7 +65,6 @@ public class UploadPresenter {
                     if (uploadModel.isShowingItem())
                         uploadModel.subscribeBadPicture(this::handleBadPicture);
                 });
-
     }
 
     /**
@@ -108,10 +112,10 @@ public class UploadPresenter {
      */
     @SuppressLint("CheckResult")
     public void handleSubmit(CategoriesModel categoriesModel) {
-
-        uploadModel.buildContributions(categoriesModel.getCategoryStringList())
-                .observeOn(Schedulers.io())
-                .subscribe(uploadController::startUpload);
+        if (view.checkIfLoggedIn())
+            uploadModel.buildContributions(categoriesModel.getCategoryStringList())
+                    .observeOn(Schedulers.io())
+                    .subscribe(uploadController::startUpload);
     }
 
     /**
@@ -220,7 +224,7 @@ public class UploadPresenter {
     }
 
     public void removeView() {
-        this.view = null;//UploadView.DUMMY;
+        this.view = DUMMY;
     }
 
     public void addView(UploadView view) {

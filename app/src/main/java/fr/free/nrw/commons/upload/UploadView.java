@@ -4,6 +4,7 @@ import android.net.Uri;
 import android.support.annotation.IntDef;
 
 import java.lang.annotation.Retention;
+import java.lang.reflect.Proxy;
 import java.util.List;
 
 import fr.free.nrw.commons.utils.ImageUtils;
@@ -13,8 +14,8 @@ import static java.lang.annotation.RetentionPolicy.SOURCE;
 public interface UploadView {
     // Dummy implementation of the view interface to allow us to have a 'null object pattern'
     // in the presenter and avoid constant NULL checking.
-    UploadView DUMMY = null; //(UploadView) Proxy.newProxyInstance(UploadView.class.getClassLoader(),
-    //new Class[]{UploadView.class}, (proxy, method, methodArgs) -> null);
+//    UploadView DUMMY = (UploadView) Proxy.newProxyInstance(UploadView.class.getClassLoader(),
+//    new Class[]{UploadView.class}, (proxy, method, methodArgs) -> null);
 
     List<Description> getDescriptions();
 
@@ -23,9 +24,12 @@ public interface UploadView {
     @interface UploadPage {}
 
     int PLEASE_WAIT = 0;
+
     int TITLE_CARD = 1;
     int CATEGORIES = 2;
     int LICENSE = 3;
+
+    boolean checkIfLoggedIn();
 
     void updateThumbnails(List<UploadModel.UploadItem> uploads);
 
