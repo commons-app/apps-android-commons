@@ -242,6 +242,11 @@
   <string name="nominate_deletion">Propon-e për la scancelassion</string>
   <string name="nominated_for_deletion">Sa plancia a l\'é stàita nominà për ël dëscancelament.</string>
   <string name="view_browser">Smon-e ant ël navigador</string>
+  <string name="skip_login">Sauté</string>
+  <string name="navigation_item_login">Intré ant ël sistema</string>
+  <string name="skip_login_title">Veul-lo për da bon sauté la procedura d\'intrada ant ël sistema?</string>
+  <string name="skip_login_message">A podrà nen carié \'d fòto.</string>
+  <string name="login_alert_message">Për piasì, ch\'a rintra ant ël sistema për podèj dovré costa fonsionalità</string>
   <string name="nearby_location_has_not_changed">Ël leu a l\'é nen cangià.</string>
   <string name="nearby_location_not_available">Leu nen disponìbil.</string>
   <string name="location_permission_rationale_nearby">A-i é da manca dël përmess pr\'ësmon-e na lista dij pòst davzin</string>
@@ -277,9 +282,6 @@
   <string name="error_loading_images">A-i é staje n\'eror durant ël cariament ëd le plance.</string>
   <string name="image_uploaded_by">Carià da: %1$s</string>
   <string name="block_notification">Chiel a l\'é stàit blocà e a peul pa modifiché su Commons</string>
-  <string name="share_app_title">Partagé j\'aplicassion</string>
-  <string name="share_coordinates_not_present">Le coordinà a son nen ëstàite spessificà durant la selession ëd la plancia</string>
-  <string name="error_fetching_nearby_places">Eror durant l\'esplorassion dj\'anviron.</string>
   <string name="appwidget_img">Plancia dël di</string>
   <string name="app_widget_heading">Plancia dël di</string>
   <string name="menu_search_button">Arserché</string>
@@ -314,6 +316,10 @@
   <string name="correct">Rispòsta giusta</string>
   <string name="wrong">Rispòsta sbalià</string>
   <string name="quiz_screenshot_question">Costa schermà a va bin da carié?</string>
+  <string name="share_app_title">Partagé j\'aplicassion</string>
+  <string name="share_coordinates_not_present">Le coordinà a son nen ëstàite spessificà durant la selession ëd la plancia</string>
+  <string name="error_fetching_nearby_places">Eror durant l\'esplorassion dj\'anviron.</string>
+  <string name="add_description">Gionté na descrission</string>
   <string name="delete_recent_searches_dialog">É-lo sigur ëd vorèj dëscancelé lë stòrich ëd soe arserche?</string>
   <string name="search_history_deleted">Lë stòrich ëd j\'arserche a l\'é stàit dëscancelà</string>
   <string name="Achievements">Realisassion</string>

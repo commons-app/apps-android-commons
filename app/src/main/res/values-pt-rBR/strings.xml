@@ -254,6 +254,11 @@
   <string name="nominate_deletion">Nomear para a exclusão</string>
   <string name="nominated_for_deletion">Esta imagem foi nomeada para eliminação.</string>
   <string name="view_browser">Exibir no navegador</string>
+  <string name="skip_login">Pular</string>
+  <string name="navigation_item_login">Entrar</string>
+  <string name="skip_login_title">Você realmente quer pular a entrada?</string>
+  <string name="skip_login_message">Você não poderá enviar fotos.</string>
+  <string name="login_alert_message">Entre para usar esta funcionalidade</string>
   <string name="nearby_location_has_not_changed">O local não mudou.</string>
   <string name="nearby_location_not_available">Localização não disponível.</string>
   <string name="location_permission_rationale_nearby">Permissão necessária para exibir uma lista de locais próximos</string>
@@ -289,9 +294,6 @@
   <string name="error_loading_images">Ocorreu um erro durante o carregamento das imagens.</string>
   <string name="image_uploaded_by">Carregada por: %1$s</string>
   <string name="block_notification">Está impedido de editar no Commons</string>
-  <string name="share_app_title">Compartilhar o aplicativo</string>
-  <string name="share_coordinates_not_present">Não foram especificadas coordenadas durante a seleção da imagem</string>
-  <string name="error_fetching_nearby_places">Erro ao buscar lugares próximos.</string>
   <string name="appwidget_img">Imagem do Dia</string>
   <string name="app_widget_heading">Imagem do Dia</string>
   <string name="menu_search_button">Pesquisar</string>
@@ -326,6 +328,10 @@
   <string name="correct">Resposta correta</string>
   <string name="wrong">Resposta incorreta</string>
   <string name="quiz_screenshot_question">Esta captura de tela pode ser carregada?</string>
+  <string name="share_app_title">Compartilhar o aplicativo</string>
+  <string name="share_coordinates_not_present">Não foram especificadas coordenadas durante a seleção da imagem</string>
+  <string name="error_fetching_nearby_places">Erro ao buscar lugares próximos.</string>
+  <string name="add_description">+ Adicionar descrição</string>
   <string name="delete_recent_searches_dialog">Tem certeza de que deseja apagar o histórico de pesquisa?</string>
   <string name="search_history_deleted">Histórico de pesquisa excluído</string>
   <string name="Achievements">Conquistas</string>

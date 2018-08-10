@@ -18,6 +18,7 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.annotation.RequiresApi;
 import android.support.design.widget.FloatingActionButton;
@@ -103,6 +104,7 @@ public class ShareActivity
     ModifierSequenceDao modifierSequenceDao;
     @Inject
     CategoryApi apiCall;
+    @Inject @Named("application_preferences") SharedPreferences applicationPrefs;
     @Inject
     @Named("default_preferences")
     SharedPreferences prefs;
@@ -343,6 +345,12 @@ public class ShareActivity
         checkIfFileExists();
         gpsObj = fileObj.processFileCoordinates(locationPermitted);
         decimalCoords = fileObj.getDecimalCoords();
+        if (sessionManager.getCurrentAccount() == null) {
+            Toast.makeText(this, getString(R.string.login_alert_message), Toast.LENGTH_SHORT).show();
+            applicationPrefs.edit().putBoolean("login_skipped", false).apply();
+            Intent loginIntent = new Intent(ShareActivity.this, LoginActivity.class);
+            startActivity(loginIntent);
+        }
     }
 
     /**
@@ -353,9 +361,7 @@ public class ShareActivity
 
         if (Intent.ACTION_SEND.equals(intent.getAction())) {
             mediaUri = intent.getParcelableExtra(Intent.EXTRA_STREAM);
-
             contentProviderUri = mediaUri;
-
             mediaUri = ContributionUtils.saveFileBeingUploadedTemporarily(this, mediaUri);
 
             if (intent.hasExtra(UploadService.EXTRA_SOURCE)) {
@@ -363,7 +369,10 @@ public class ShareActivity
             } else {
                 source = Contribution.SOURCE_EXTERNAL;
             }
-            if (intent.hasExtra("isDirectUpload")) {
+
+            boolean isDirectUpload = intent.getBooleanExtra("isDirectUpload", false);
+
+            if (isDirectUpload) {
                 Timber.d("This was initiated by a direct upload from Nearby");
                 isNearbyUpload = true;
                 wikiDataEntityId = intent.getStringExtra(WIKIDATA_ENTITY_ID_PREF);

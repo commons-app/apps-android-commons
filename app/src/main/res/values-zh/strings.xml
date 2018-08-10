@@ -283,9 +283,6 @@
   <string name="no_images_found">找不到图片！</string>
   <string name="error_loading_images">加载图片时出错。</string>
   <string name="image_uploaded_by">由%1$s上传</string>
-  <string name="share_app_title">分享应用</string>
-  <string name="share_coordinates_not_present">图片选择时，坐标并未指定</string>
-  <string name="error_fetching_nearby_places">检索附近地点时出错。</string>
   <string name="appwidget_img">每日图片</string>
   <string name="app_widget_heading">每日图片</string>
   <string name="menu_search_button">搜索</string>
@@ -297,6 +294,9 @@
   <string name="menu_set_wallpaper">设置墙纸</string>
   <string name="wallpaper_set_successfully">墙纸已成功设置！</string>
   <string name="user_not_logged_in">登录会话已过期，请重新登录。</string>
+  <string name="share_app_title">分享应用</string>
+  <string name="share_coordinates_not_present">图片选择时，坐标并未指定</string>
+  <string name="error_fetching_nearby_places">检索附近地点时出错。</string>
   <string name="delete_recent_searches_dialog">您确认要清除您的搜索历史？</string>
   <string name="Achievements">成就</string>
   <string name="statistics">统计</string>

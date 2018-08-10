@@ -6,6 +6,7 @@
 * JohSan65
 * Jon Harald Søby
 * Laaknor
+* Orf3us
 * SuperPotato
 -->
 <resources>
@@ -247,6 +248,11 @@
   <string name="nominate_deletion">Nominer for sletting</string>
   <string name="nominated_for_deletion">Dette bildet har blitt nominert for sletting.</string>
   <string name="view_browser">Vis i nettleseren</string>
+  <string name="skip_login">Hopp over</string>
+  <string name="navigation_item_login">Logg inn</string>
+  <string name="skip_login_title">Vil du hoppe over logg inn?</string>
+  <string name="skip_login_message">Du kan ikke laste opp bilder.</string>
+  <string name="login_alert_message">Logg vennligst inn for å bruke denne funksjonen</string>
   <string name="nearby_location_has_not_changed">Stedet har ikke blitt endret.</string>
   <string name="nearby_location_not_available">Sted ikke tilgjengelig.</string>
   <string name="location_permission_rationale_nearby">Tillatelse kreves for å vise listen over steder i nærheten</string>
@@ -282,9 +288,6 @@
   <string name="error_loading_images">Feil oppsto under lasting av bilder.</string>
   <string name="image_uploaded_by">Lastet opp av: %1$s</string>
   <string name="block_notification">Du er blokkert fra å redigere Commons</string>
-  <string name="share_app_title">Del appen</string>
-  <string name="share_coordinates_not_present">Koordinater ble ikke spesifisert under bildevalget</string>
-  <string name="error_fetching_nearby_places">Feil under henting av steder i nærheten.</string>
   <string name="appwidget_img">Dagens bilde</string>
   <string name="app_widget_heading">Dagens bilde</string>
   <string name="menu_search_button">Søk</string>
@@ -300,6 +303,10 @@
   <string name="menu_set_wallpaper">Angi som bakgrunnsbilde</string>
   <string name="wallpaper_set_successfully">Bakgrunnsbildet ble endret!</string>
   <string name="user_not_logged_in">Innloggingsøkten har utløpt, logg inn på nytt.</string>
+  <string name="share_app_title">Del appen</string>
+  <string name="share_coordinates_not_present">Koordinater ble ikke spesifisert under bildevalget</string>
+  <string name="error_fetching_nearby_places">Feil under henting av steder i nærheten.</string>
+  <string name="add_description">+ Legg til beskrivelse</string>
   <string name="delete_recent_searches_dialog">Er du sikker på at du vil tømme søkehistorikken din?</string>
   <string name="search_history_deleted">Søkehistorikk slettet</string>
   <string name="Achievements">Prestasjoner</string>

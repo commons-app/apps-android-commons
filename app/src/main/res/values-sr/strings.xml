@@ -11,6 +11,8 @@
 * Милан Јелисавчић
 -->
 <resources>
+  <string name="title_activity_explore">Истрага</string>
+  <string name="navigation_item_explore">Истрага</string>
   <string name="preference_category_appearance">Изглед</string>
   <string name="preference_category_general">Опште</string>
   <string name="preference_category_feedback">Повратне информације</string>
@@ -92,6 +94,7 @@
   <string name="title_activity_settings">Подешавања</string>
   <string name="title_activity_signup">Отвори налог</string>
   <string name="title_activity_featured_images">Изабране слике</string>
+  <string name="title_activity_category_details">Категорија</string>
   <string name="menu_about">О апликацији</string>
   <string name="about_license">Софтвер отвореног кода доступан под лиценцом &lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/COPYING\"&gt;Apache вер. 2&lt;/a&gt; Викимедијина Остава и њен лого су заштитни знаци Викимедијине Фондације и користе се са дозволом Викимедијине Фондацине. Ми не одобравамо или подржавмо Викимедијину Фондацију.\n\nАпликација за Викимедијину оставу је апликација отвореног кода која је направљена и која се одржава помоћу грантова и волонтера Викимедијине заједнице. Задужбина Викимедија није укључена у стварање, развој или одржавање апликације.</string>
   <string name="about_improve">Направите нови &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;захтев на GitHub-у&lt;/a&gt; да бисте пријавили грешке или дали предлоге.</string>
@@ -279,11 +282,19 @@
   <string name="no_images_found">Нису пронађене слике!</string>
   <string name="error_loading_images">Десила се грешка при учитавању слика.</string>
   <string name="image_uploaded_by">Отпремио/ла: %1$s</string>
-  <string name="share_app_title">Подели апликацију</string>
-  <string name="share_coordinates_not_present">Координате нису биле одређене током селекције слике</string>
-  <string name="error_fetching_nearby_places">Грешка при фечовању оближњих места.</string>
+  <string name="menu_search_button">Претражи</string>
+  <string name="search_commons">Претрага Оставе</string>
+  <string name="title_activity_search">Претрага</string>
   <string name="successful_wikidata_edit">Слика успешно додата у %1$s на Википодацима!</string>
   <string name="wikidata_edit_failure">Неуспешно ажурирање одговарајућег ентитета на Википодацима!</string>
   <string name="menu_set_wallpaper">Постави позадину</string>
   <string name="wallpaper_set_successfully">Позадина успешно постављена!</string>
+  <string name="share_app_title">Подели апликацију</string>
+  <string name="share_coordinates_not_present">Координате нису биле одређене током селекције слике</string>
+  <string name="error_fetching_nearby_places">Грешка при фечовању оближњих места.</string>
+  <string name="add_description">+ Додај опис</string>
+  <string name="delete_recent_searches_dialog">Да ли сте сигурни да желите да очистите своју историју претраге?</string>
+  <string name="statistics">СТАТИСТИКЕ</string>
+  <string name="statistics_featured">Изабране слике</string>
+  <string name="level">НИВО</string>
 </resources>

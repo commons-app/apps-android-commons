@@ -96,7 +96,7 @@ public class ContributionController {
 
     public void handleImagePicked(int requestCode, @Nullable Uri uri, boolean isDirectUpload, String wikiDataEntityId) {
         FragmentActivity activity = fragment.getActivity();
-        Timber.d("handleImagePicked() called with onActivityResult()");
+        Timber.d("handleImagePicked() called with onActivityResult(). Boolean isDirectUpload: " + isDirectUpload + "String wikiDataEntityId: " + wikiDataEntityId);
         Intent shareIntent = new Intent(activity, UploadActivity.class);
         shareIntent.setAction(ACTION_SEND);
         switch (requestCode) {
@@ -114,20 +114,25 @@ public class ContributionController {
                 shareIntent.setType("image/jpeg");
                 shareIntent.putExtra(EXTRA_STREAM, lastGeneratedCaptureUri);
                 shareIntent.putExtra(EXTRA_SOURCE, SOURCE_CAMERA);
-
                 break;
             default:
                 break;
         }
+
         Timber.i("Image selected");
+        shareIntent.putExtra("isDirectUpload", isDirectUpload);
+        Timber.d("Put extras into image intent, isDirectUpload is " + isDirectUpload);
+
         try {
-            shareIntent.putExtra("isDirectUpload", isDirectUpload);
             if (wikiDataEntityId != null && !wikiDataEntityId.equals("")) {
                 shareIntent.putExtra(WIKIDATA_ENTITY_ID_PREF, wikiDataEntityId);
             }
-            activity.startActivity(shareIntent);
         } catch (SecurityException e) {
             Timber.e(e, "Security Exception");
+        }
+
+        if (activity != null) {
+            activity.startActivity(shareIntent);
         }
     }
 

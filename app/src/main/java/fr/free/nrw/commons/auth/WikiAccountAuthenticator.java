@@ -13,10 +13,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
 import fr.free.nrw.commons.BuildConfig;
-import fr.free.nrw.commons.contributions.ContributionsContentProvider;
-import fr.free.nrw.commons.modifications.ModificationsContentProvider;
 
-import static fr.free.nrw.commons.auth.AccountUtil.ACCOUNT_TYPE;
 import static fr.free.nrw.commons.auth.AccountUtil.AUTH_TOKEN_TYPE;
 
 public class WikiAccountAuthenticator extends AbstractAccountAuthenticator {
@@ -99,7 +96,7 @@ public class WikiAccountAuthenticator extends AbstractAccountAuthenticator {
     }
 
     private boolean supportedAccountType(@Nullable String type) {
-        return ACCOUNT_TYPE.equals(type);
+        return BuildConfig.ACCOUNT_TYPE.equals(type);
     }
 
     private Bundle addAccount(AccountAuthenticatorResponse response) {

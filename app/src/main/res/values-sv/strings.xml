@@ -250,6 +250,11 @@
   <string name="nominated_for_deletion">Denna bild har nominerats för radering.</string>
   <string name="nominated_see_more"/>
   <string name="view_browser">Visa i webbläsare</string>
+  <string name="skip_login">Hoppa över</string>
+  <string name="navigation_item_login">Logga in</string>
+  <string name="skip_login_title">Vill du verkligen hoppa över inloggningen?</string>
+  <string name="skip_login_message">Du kommer inte kunna ladda upp bilder.</string>
+  <string name="login_alert_message">Logga in för att använda denna funktion</string>
   <string name="nearby_location_has_not_changed">Platsen har inte ändrats.</string>
   <string name="nearby_location_not_available">Platsen är inte tillgänglig.</string>
   <string name="location_permission_rationale_nearby">Behörighet krävs för att visa en lista över platser i närheten</string>
@@ -285,9 +290,6 @@
   <string name="error_loading_images">Ett fel uppstod vid inläsning av bilder.</string>
   <string name="image_uploaded_by">Uppladdad av: %1$s</string>
   <string name="block_notification">Du har blockerats från att redigera på Commons</string>
-  <string name="share_app_title">Dela app</string>
-  <string name="share_coordinates_not_present">Koordinater specificerades inte vid bildvalet</string>
-  <string name="error_fetching_nearby_places">Fel uppstod när platser i närheten hämtades.</string>
   <string name="appwidget_img">Dagens bild</string>
   <string name="app_widget_heading">Dagens bild</string>
   <string name="menu_search_button">Sök</string>
@@ -322,6 +324,10 @@
   <string name="correct">Korrekt svar</string>
   <string name="wrong">Fel svar</string>
   <string name="quiz_screenshot_question">Är det okej att ladda upp denna skärmdump?</string>
+  <string name="share_app_title">Dela app</string>
+  <string name="share_coordinates_not_present">Koordinater specificerades inte vid bildvalet</string>
+  <string name="error_fetching_nearby_places">Fel uppstod när platser i närheten hämtades.</string>
+  <string name="add_description">+ Lägg till beskrivning</string>
   <string name="delete_recent_searches_dialog">Är du säker på att du vill rensa din sökhistorik?</string>
   <string name="search_history_deleted">Sökhistoriken raderades</string>
   <string name="Achievements">Prestationer</string>

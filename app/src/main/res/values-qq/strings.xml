@@ -132,6 +132,8 @@
   <string name="navigation_item_info">{{Identical|Tutorial}}</string>
   <string name="navigation_item_notification">{{Identical|Notification}}</string>
   <string name="nominated_see_more">\'\'This message is empty, and it\'s probably invalid. See bug report: https://github.com/commons-app/apps-android-commons/issues/1333 .\'\'</string>
+  <string name="skip_login">{{Identical|Skip}}</string>
+  <string name="navigation_item_login">{{Identical|Log in}}</string>
   <string name="nearby_wikidata">{{Identical|Wikidata}}</string>
   <string name="nearby_wikipedia">{{Identical|Wikipedia}}</string>
   <string name="about_rate_us">Link text with underline.</string>

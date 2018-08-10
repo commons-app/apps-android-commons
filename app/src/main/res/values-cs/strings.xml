@@ -2,6 +2,7 @@
 <!-- Authors:
 * Aktron
 * Chmee2
+* Clon
 * Dvorapa
 * Frettie
 * Ilimanaq29
@@ -243,6 +244,8 @@
   <string name="nominated_for_deletion">Tento obrázek byl nominován na smazání.</string>
   <string name="nominated_see_more" fuzzy="true"/>
   <string name="view_browser">Zobrazit v prohlížeči</string>
+  <string name="skip_login">Přeskočit</string>
+  <string name="navigation_item_login">Přihlásit se</string>
   <string name="nearby_location_has_not_changed">Vaše umístění se nezměnilo.</string>
   <string name="nearby_location_not_available">Umístění není dostupné.</string>
   <string name="location_permission_rationale_nearby">Vyžadováno povolení k zobrazení seznamu blízkých míst</string>

@@ -239,7 +239,6 @@
   <string name="no_images_found">ڪوبہ عڪس نہ لڌو!</string>
   <string name="error_loading_images">تصويرون لوڊ ڪرڻ دوران چُڪ ٿي آهي.</string>
   <string name="image_uploaded_by">پاران چاڙهيل: %1$s</string>
-  <string name="share_app_title">ايپ ونڊيو</string>
   <string name="appwidget_img">اڄ جي تصوير</string>
   <string name="app_widget_heading">اڄ جي تصوير</string>
   <string name="menu_search_button">ڳوليو</string>
@@ -250,5 +249,6 @@
   <string name="menu_set_wallpaper">وال پيپر لڳايو</string>
   <string name="wallpaper_set_successfully">وال پيپر ڪاميابيءَ سان لڳي ويو!</string>
   <string name="user_not_logged_in">لاگ اِن سيشن ايڪسپائير ٿي ويو آهي، مهرباني ڪري وري لاڳ اِن ٿيو.</string>
+  <string name="share_app_title">ايپ ونڊيو</string>
   <string name="search_history_deleted">ڳولا سوانح ڊاٿي وئي</string>
 </resources>

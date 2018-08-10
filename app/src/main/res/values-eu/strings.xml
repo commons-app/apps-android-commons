@@ -2,6 +2,7 @@
 <!-- Authors:
 * Amaia
 * An13sa
+* EukeneFL
 * Fitoschido
 * Mikel Ibaiba
 * Sator
@@ -65,6 +66,7 @@
   <string name="login_failed_generic">Saio hasieran akatsa</string>
   <string name="share_upload_button">Igo</string>
   <string name="multiple_share_base_title">Izena eman bilduma honi</string>
+  <string name="add_set_name_toast">Mesedez, eman izenburu bat multzo honetarako</string>
   <string name="provider_modifications">Aldaketak</string>
   <string name="menu_upload_single">Igo</string>
   <string name="categories_search_text_hint">Kategoriak bilatu</string>
@@ -194,6 +196,7 @@
   <string name="mediaimage_failed">Media irudiak kale egin du</string>
   <string name="no_image_found">Ez da irudirik aurkitu</string>
   <string name="no_subcategory_found">Ez da azpikategoriarik aurkitu</string>
+  <string name="no_parentcategory_found">Ez da guraso kategoriarik aurkitu</string>
   <string name="upload_image">Igo irudia</string>
   <string name="welcome_image_mount_zao">Zao Mendia</string>
   <string name="welcome_image_llamas">Llamak</string>
@@ -232,11 +235,17 @@
   <string name="use_external_storage_summary">Aplikazioaren kamerarekin ateratako argazkiak zure gailuan gorde</string>
   <string name="login_to_your_account">Zure kontuan saioa hasi</string>
   <string name="send_log_file">Erregistro fitxategia bidali</string>
+  <string name="send_log_file_description">Bidali erregistro fitxategia garatzaileei emailaren bitartez</string>
   <string name="no_web_browser">Ez da URLa irekitzeko nabigatzailerik aurkitu</string>
   <string name="null_url">Errorea! Ez da URLa aurkitu</string>
   <string name="nominate_deletion">Ezabaketarako izendatu</string>
   <string name="nominated_for_deletion">Irudi hau ezabaketarako izendatua izan da.</string>
   <string name="view_browser">Nabigatzailean ikusi</string>
+  <string name="skip_login">Jauzi</string>
+  <string name="navigation_item_login">Hasi saioa</string>
+  <string name="skip_login_title">Benetan saioa hastea jauzi nahi duzula?</string>
+  <string name="skip_login_message">Ezin izango duzu argazkirik igo.</string>
+  <string name="login_alert_message">Mesedez, hasi saioa funtzio hau erabili ahal izateko</string>
   <string name="nearby_location_has_not_changed">Kokapena ez da aldatu.</string>
   <string name="nearby_location_not_available">Kokapena ez dago erabilgarri.</string>
   <string name="location_permission_rationale_nearby">Baimena beharrezkoa da hurbil dauden lekuen zerrende ikusteko</string>
@@ -245,11 +254,14 @@
   <string name="notifications_welcome">Ongi etorria Wikimedia Commons-era! Pozten gara zu hemen egoteaz.</string>
   <string name="notifications_talk_page_message">%1$s-(e)k mezu bat utzi du zure eztabaida orrian</string>
   <string name="notifications_thank_you_edit">Eskerrik asko aldaketa bat egiteagatik</string>
+  <string name="notifications_mention">%1$s(e)k %2$s(e)an aipatu zaitu.</string>
+  <string name="toggle_view_button">Toggle ikuspegia</string>
   <string name="nearby_directions">NOLA HELDU</string>
   <string name="nearby_wikidata">WIKIDATA</string>
   <string name="nearby_wikipedia">WIKIPEDIA</string>
   <string name="nearby_commons">COMMONS</string>
   <string name="about_rate_us">&lt;u&gt;Baloratu gaitzazu&lt;/u&gt;</string>
+  <string name="welcome_skip_button">Tutoriala jauzi</string>
   <string name="no_internet">Interneta ez dago erabilgarri</string>
   <string name="internet_established">Interneta erabilgarri</string>
   <string name="error_notifications">Errorea jakinarazpenak ekartzean</string>
@@ -262,13 +274,12 @@
   <string name="retry">Saiatu berriro</string>
   <string name="showcase_view_got_it_button">Ulertu dut!</string>
   <string name="showcase_view_whole_nearby_activity">Zugandik hurbil dauden leku hauek irudiak behar dituzte beren Wikipedia artikuluak hornitzeko</string>
+  <string name="showcase_view_list_icon">Botoi hau sakatzeak leku hauetako zerrenda eskeiniko dizu</string>
   <string name="showcase_view_plus_fab">Edozein lekutako irudi bat igo dezakezu zure kamera edo galeriatik</string>
   <string name="no_images_found">Ez da irudirik aurkitu!</string>
   <string name="error_loading_images">Arazo bat egon da irudiak kargatzerakoan.</string>
+  <string name="image_uploaded_by">Nork igota: %1$s</string>
   <string name="block_notification">Commons aldatzeko blokeatuta zaude</string>
-  <string name="share_app_title">Aplikazioa partekatu</string>
-  <string name="share_coordinates_not_present">Ez da koordenaturik zehaztu irudia aukeratzean</string>
-  <string name="error_fetching_nearby_places">Ezin izan dira hurbileko lekuak ekarri.</string>
   <string name="appwidget_img">Eguneko argazkia</string>
   <string name="app_widget_heading">Eguneko argazkia</string>
   <string name="menu_search_button">Bilatu</string>
@@ -283,17 +294,28 @@
   <string name="wikidata_edit_failure">Ezin izan da dagokion Wikidata entitatea eguneratu!</string>
   <string name="menu_set_wallpaper">Horma papera ezarri</string>
   <string name="wallpaper_set_successfully">Horma papera ezarri da!</string>
+  <string name="quiz">Galdetegia</string>
+  <string name="quiz_question_string">Ondo dago argazki hau igotzeko?</string>
   <string name="question">Galdera</string>
   <string name="result">Emaitza</string>
+  <string name="quiz_back_button">Kendu behar diren irudiak kargatzen jarraitzen baduzu, zure kontua debekatuta izan liteke. Ziur zaude galdetegia amaitu nahi duzula?</string>
+  <string name="quiz_alert_message">Zuk igotako argazkien %1$s baino gehiago ezabatuak izan dira. Kendu behar diren irudiak kargatzen jarraitzen baduzu, zure kontua debekatuta izan liteke. \n\nGustatuko litzaizuke tutoriala berriz ikustea eta gero galdetegia egitea lagun diezazun ikasten zein motatako argazkiak igo ditzakezun eta zeintzuk ez?</string>
   <string name="selfie_answer">Norberaren argazkiek ez daukate balio entziklopediko handirik. Mesedez, ez igo zure buruaren argazkirik, lehendik zuri buruzko Wikipedia artikulu bat ez badaukazu.</string>
   <string name="taj_mahal_answer">Monumentuen eta paisaien argazkiak herrialde gehienetan igo daitezke. Mesedez, kontuan hartu askotan kanpoan instalatutako epe laburreko arte erakusketek copyright-a daukatela eta ezin direla igo.</string>
   <string name="construction_event_answer">Teknologia edo kultura erakusten duten irudiak ongi etorriak dira Commons-en.</string>
+  <string name="warning_for_image_reverts">ABISUA: Igo dituzun argazkien %1$sa baino gehiago ezabatu da. Ezabatu beharreko argazkiak igotzen jarraitzekotan, zure kontua ezabatua izan liteke.</string>
   <string name="congratulatory_message_quiz">Erantzunetako %1$s zuzen erantzun dituzu. Zorionak!</string>
   <string name="warning_for_no_answer">Hautatu bi aukeretako bat galderari erantzuteko</string>
   <string name="user_not_logged_in">Saioa hasteko denbora amaituta, mesedez, hasi saioa berriro.</string>
+  <string name="quiz_result_share_message">Partekatu galdetegia zure lagunekin!</string>
   <string name="continue_message">Jarraitu</string>
   <string name="correct">Erantzun zuzena</string>
   <string name="wrong">Erantzun okerra</string>
+  <string name="quiz_screenshot_question">Pantaila-kaptura hau ondo al dago igotzeko?</string>
+  <string name="share_app_title">Aplikazioa partekatu</string>
+  <string name="share_coordinates_not_present">Ez da koordenaturik zehaztu irudia aukeratzean</string>
+  <string name="error_fetching_nearby_places">Ezin izan dira hurbileko lekuak ekarri.</string>
+  <string name="add_description">+ Deskribapena gehitu</string>
   <string name="delete_recent_searches_dialog">Ziur zaude zure bilaketen historia garbitu nahi duzula?</string>
   <string name="search_history_deleted">Bilaketa historia ezabatuta</string>
   <string name="Achievements">Lorpenak</string>
@@ -305,6 +327,7 @@
   <string name="images_used_by_wiki">Erabilitako irudiak</string>
   <string name="achievements_share_message">Partekatu zure lorpenak lagunekin!</string>
   <string name="achievements_info_message">Zure maila baldintza hauek bete ahala igotzen da. \"Estatistikak\" ataleko elementuak ez dira zure mailarako kontuan hartzen.</string>
+  <string name="achievements_revert_limit_message">gutxienezko derrigorrezkoa:</string>
   <string name="images_uploaded_explanation">Commons-era edozein karga software erabilita igo dituzun irudien kopurua</string>
   <string name="images_reverted_explanation">Commons-era igo dituzun eta Wikimedia artikuluetan erabili diren irudien ehunekoa</string>
   <string name="images_used_explanation">Commons-era igo dituzun eta Wikimedia artikuluetan erabili diren irudien kopurua</string>
