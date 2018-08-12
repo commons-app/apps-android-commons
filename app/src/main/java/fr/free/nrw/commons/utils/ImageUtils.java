@@ -31,10 +31,6 @@ import timber.log.Timber;
 
 public class ImageUtils {
 
-    //atleast 50% of the image in question should be considered blurry for the entire image to be blurry
-    private static final double MINIMUM_BLURRYNESS_FACTOR = 0.50;
-    private static final int LAPLACIAN_VARIANCE_THRESHOLD = 70;
-
     public enum Result {
         IMAGE_DARK,
         IMAGE_OK
@@ -55,13 +51,11 @@ public class ImageUtils {
         int loadImageWidth = bitmapRegionDecoder.getWidth();
 
         int checkImageTopPosition = 0;
-        int checkImageBottomPosition = loadImageHeight;
         int checkImageLeftPosition = 0;
-        int checkImageRightPosition = loadImageWidth;
 
-        Timber.v("left: " + checkImageLeftPosition + " right: " + checkImageRightPosition + " top: " + checkImageTopPosition + " bottom: " + checkImageBottomPosition);
+        Timber.v("left: " + checkImageLeftPosition + " right: " + loadImageWidth + " top: " + checkImageTopPosition + " bottom: " + loadImageHeight);
 
-        Rect rect = new Rect(checkImageLeftPosition,checkImageTopPosition,checkImageRightPosition,checkImageBottomPosition);
+        Rect rect = new Rect(checkImageLeftPosition,checkImageTopPosition, loadImageWidth, loadImageHeight);
 
         Bitmap processBitmap = bitmapRegionDecoder.decodeRegion(rect,null);
 
