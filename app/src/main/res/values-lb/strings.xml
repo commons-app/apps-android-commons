@@ -5,6 +5,8 @@
 * Soued031
 -->
 <resources>
+  <string name="title_activity_explore">Entdecken</string>
+  <string name="navigation_item_explore">Entdecken</string>
   <string name="preference_category_appearance">Ausgesinn</string>
   <string name="preference_category_general">Allgemeng</string>
   <string name="preference_category_feedback">Feedback</string>
@@ -12,6 +14,7 @@
   <string name="app_name">Commons</string>
   <string name="bullet">•</string>
   <string name="menu_settings">Astellungen</string>
+  <string name="intent_share_upload_label">Op Commons eroplueden</string>
   <string name="username">Benotzernumm</string>
   <string name="password">Passwuert</string>
   <string name="login_credential">Loggt Iech an Äre Commons-Beta-Benotzerkont an</string>
@@ -23,7 +26,7 @@
   <string name="login_success">Umeldung huet geklappt!</string>
   <string name="login_failed">D\'Aloggen huet net funktionéiert</string>
   <string name="upload_failed">Fichier net fonnt. probéiert w.e.g. en anere Fichier.</string>
-  <string name="authentication_failed">Authentifizéierung huet net funktionéiert!</string>
+  <string name="authentication_failed">Authentifizéierung huet net funktionéiert, loggt Iech w.e.g. nach eng Kéier an.</string>
   <string name="uploading_started">D\'Eroplueden huet ugefaang!</string>
   <string name="upload_completed_notification_title">%1$s eropgelueden!</string>
   <string name="upload_completed_notification_text">Dréckt fir de Fichier ze gesinn deen Dir eropgelueden hutt</string>
@@ -83,6 +86,7 @@
   <string name="title_activity_settings">Astellungen</string>
   <string name="title_activity_signup">Mellt Iech un</string>
   <string name="title_activity_featured_images">Bemierkenswäert Biller</string>
+  <string name="title_activity_category_details">Kategorie</string>
   <string name="menu_about">Iwwer</string>
   <string name="about_license">D\'App Wikimedia Commons ass eng \'Open-Source-App\' déi vu Fräiwëllege vun der Wikimedia Foundation entwéckelt gouf an och vun hinnen ënnerhal gëtt. D\'Wikimedia Foundation ass net an d\'Entwécklung oder den Ënnerhalt vun der App implizéiert.</string>
   <string name="about_improve">Leet w.e.g. &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt; e GitHub Problem&lt;/a&gt; fir Problemer ze mellen a Proposen ze maachen.</string>
@@ -101,7 +105,7 @@
   <string name="preference_license">Standardlizenz</string>
   <string name="use_previous">Viregen Titel/Beschreiwung benotzen</string>
   <string name="allow_gps">Automatesch déi aktuell Plaz kréien</string>
-  <string name="allow_gps_summary">Aktuell Plaz ofruffe fir Propose fir Kategorien ze erméigleche wann d\'Bild keng Geotaggen huet</string>
+  <string name="allow_gps_summary" fuzzy="true">Aktuell Plaz ofruffe fir Propose fir Kategorien ze erméigleche wann d\'Bild keng Geotaggen huet</string>
   <string name="preference_theme">Nuetsmodus</string>
   <string name="preference_theme_summary">Donkele Layout benotzen</string>
   <string name="license_name_cc_by_sa_four">Attribution-ShareAlike 4.0</string>
@@ -176,8 +180,11 @@
   <string name="maximum_limit_alert">Et kënnen der net méi wéi 500 gewise ginn</string>
   <string name="logout_verification">Wëllt dir Iech wierklech ausloggen?</string>
   <string name="commons_logo">Commons-Logo</string>
+  <string name="commons_website">Internetsite vu Commons</string>
+  <string name="commons_facebook">Commons-Facebook-Säit</string>
   <string name="background_image">Hannergrondbild</string>
   <string name="no_image_found">Kee Bild fonnt</string>
+  <string name="no_subcategory_found">Keng Ënnerkategorie fonnt</string>
   <string name="upload_image">Bild eroplueden</string>
   <string name="welcome_image_mount_zao">Bierg Zao</string>
   <string name="welcome_image_llamas">Lamaen</string>
@@ -216,6 +223,8 @@
   <string name="nominate_deletion">Nominéiere fir ze Läschen</string>
   <string name="nominated_for_deletion">Dëst Bild gouf virgeschloe fir geläscht ze ginn.</string>
   <string name="view_browser">Am Browser weisen</string>
+  <string name="skip_login">Iwwersprangen</string>
+  <string name="navigation_item_login">Aloggen</string>
   <string name="nearby_location_has_not_changed">De Plaz huet net geännert.</string>
   <string name="nearby_location_not_available">Plaz ass net disponibel.</string>
   <string name="read_article">ARTIKEL LIESEN</string>
@@ -242,6 +251,27 @@
   <string name="no_images_found">Keng Biller fonnt!</string>
   <string name="error_loading_images">Feeler beim Eropluede vu Biller.</string>
   <string name="image_uploaded_by">Eropgeluede vum: %1$s</string>
+  <string name="block_notification">Dir sidd gespaart a kënnt keng Ännerungen op Commons maachen</string>
+  <string name="appwidget_img">Bild vum Dag</string>
+  <string name="app_widget_heading">Bild vum Dag</string>
+  <string name="menu_search_button">Sichen</string>
+  <string name="search_commons">Op Commons sichen</string>
+  <string name="title_activity_search">Sichen</string>
+  <string name="wikidata_edit_failure">Déi entspriechend Wikidata-Entitéit konnt net aktualiséiert ginn!</string>
   <string name="menu_set_wallpaper">Hannergrondbild festleeën</string>
   <string name="wallpaper_set_successfully">Hannergrondbild festgeluecht</string>
+  <string name="quiz">Quiz</string>
+  <string name="question">Fro</string>
+  <string name="result">Resultat</string>
+  <string name="continue_message">Virufueren</string>
+  <string name="correct">Richteg Äntwert</string>
+  <string name="wrong">Falsch Äntwert</string>
+  <string name="add_description">+ Beschreiwung derbäisetzen</string>
+  <string name="Achievements">Realisatiounen</string>
+  <string name="statistics">STATISTIKEN</string>
+  <string name="statistics_thanks">Merci\'e kritt</string>
+  <string name="statistics_featured">Bemierkenswäert Biller</string>
+  <string name="level">NIVEAU</string>
+  <string name="images_uploaded">Eropgeluede Biller</string>
+  <string name="image_reverts">Biller net zréckgesat</string>
 </resources>

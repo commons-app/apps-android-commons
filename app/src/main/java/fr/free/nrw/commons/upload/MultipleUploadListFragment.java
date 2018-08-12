@@ -1,6 +1,5 @@
 package fr.free.nrw.commons.upload;
 
-import android.app.Activity;
 import android.content.Context;
 import android.graphics.Point;
 import android.net.Uri;
@@ -17,7 +16,6 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.EditText;
@@ -25,6 +23,7 @@ import android.widget.FrameLayout;
 import android.widget.GridView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -207,6 +206,10 @@ public class MultipleUploadListFragment extends Fragment {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.menu_upload_multiple:
+                if (baseTitle.getText().toString().trim().isEmpty()) {
+                    Toast.makeText(getContext(), R.string.add_set_name_toast, Toast.LENGTH_LONG).show();
+                    return false;
+                }
                 multipleUploadInitiatedHandler.OnMultipleUploadInitiated();
                 return true;
         }

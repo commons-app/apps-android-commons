@@ -51,7 +51,7 @@ public class MediaWikiImageView extends SimpleDraweeView {
             return;
         }
 
-        if (thumbnailUrlCache.get(media.getFilename()) != null) {
+        if (media.getFilename() != null && thumbnailUrlCache.get(media.getFilename()) != null) {
             setImageUrl(thumbnailUrlCache.get(media.getFilename()));
         } else {
             setImageUrl(null);

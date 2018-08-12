@@ -18,11 +18,15 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.annotation.RequiresApi;
 import android.support.design.widget.FloatingActionButton;
 import android.support.graphics.drawable.VectorDrawableCompat;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
+
+import android.view.KeyEvent;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.DecelerateInterpolator;
@@ -33,6 +37,8 @@ import com.facebook.drawee.generic.GenericDraweeHierarchyBuilder;
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.github.chrisbanes.photoview.PhotoView;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
@@ -45,8 +51,10 @@ import javax.inject.Named;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import fr.free.nrw.commons.BuildConfig;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.auth.AuthenticatedActivity;
+import fr.free.nrw.commons.auth.LoginActivity;
 import fr.free.nrw.commons.auth.SessionManager;
 import fr.free.nrw.commons.caching.CacheController;
 import fr.free.nrw.commons.category.CategorizationFragment;
@@ -59,6 +67,8 @@ import fr.free.nrw.commons.modifications.ModifierSequenceDao;
 import fr.free.nrw.commons.modifications.TemplateRemoveModifier;
 import fr.free.nrw.commons.mwapi.CategoryApi;
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
+import fr.free.nrw.commons.utils.ContributionUtils;
+import fr.free.nrw.commons.utils.ExternalStorageUtils;
 import fr.free.nrw.commons.utils.ViewUtil;
 import timber.log.Timber;
 
@@ -74,7 +84,9 @@ import static fr.free.nrw.commons.wikidata.WikidataConstants.WIKIDATA_ENTITY_ID_
 public class ShareActivity
         extends AuthenticatedActivity
         implements SingleUploadFragment.OnUploadActionInitiated,
-        OnCategoriesSaveHandler {
+        OnCategoriesSaveHandler,
+        ActivityCompat.OnRequestPermissionsResultCallback {
+
     private static final int REQUEST_PERM_ON_SUBMIT_STORAGE = 4;
     //Had to make them class variables, to extract out the click listeners, also I see no harm in this
     final Rect startBounds = new Rect();
@@ -92,6 +104,7 @@ public class ShareActivity
     ModifierSequenceDao modifierSequenceDao;
     @Inject
     CategoryApi apiCall;
+    @Inject @Named("application_preferences") SharedPreferences applicationPrefs;
     @Inject
     @Named("default_preferences")
     SharedPreferences prefs;
@@ -117,6 +130,7 @@ public class ShareActivity
     private String mimeType;
     private CategorizationFragment categorizationFragment;
     private Uri mediaUri;
+    private Uri contentProviderUri;
     private Contribution contribution;
     private GPSExtractor gpsObj;
     private String decimalCoords;
@@ -133,26 +147,43 @@ public class ShareActivity
     private long ShortAnimationDuration;
     private boolean isFABOpen = false;
     private float startScaleFinal;
+    private Bundle savedInstanceState;
+    private boolean isUploadFinalised = false; // Checks is user clicked to upload button or regret before this phase
+    private boolean isZoom = false;
+
+
 
     /**
      * Called when user taps the submit button.
      * Requests Storage permission, if needed.
      */
+
     @Override
     public void uploadActionInitiated(String title, String description) {
 
         this.title = title;
         this.description = description;
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            if (needsToRequestStoragePermission()) {
-                requestPermissions(new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},
-                        REQUEST_PERM_ON_SUBMIT_STORAGE);
+
+        if (sessionManager.getCurrentAccount() != null) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                // Check for Storage permission that is required for upload.
+                // Do not allow user to proceed without permission, otherwise will crash
+                if (needsToRequestStoragePermission()) {
+                    requestPermissions(new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},
+                            REQUEST_PERM_ON_SUBMIT_STORAGE);
+                } else {
+                    uploadBegins();
+                }
             } else {
                 uploadBegins();
             }
-        } else {
-            uploadBegins();
+        }
+        else  //Send user to login activity
+        {
+            Toast.makeText(this, "You need to login first!", Toast.LENGTH_SHORT).show();
+            Intent loginIntent = new Intent(ShareActivity.this, LoginActivity.class);
+            startActivity(loginIntent);
         }
     }
 
@@ -167,12 +198,15 @@ public class ShareActivity
         return !FileUtils.isSelfOwned(getApplicationContext(), mediaUri)
                 && (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE)
                 != PackageManager.PERMISSION_GRANTED);
+        //return false;
     }
+
 
     /**
      * Called after permission checks are done.
      * Gets file metadata for category suggestions, displays toast, caches categories found, calls uploadController
      */
+
     private void uploadBegins() {
         fileObj.processFileCoordinates(locationPermitted);
 
@@ -185,15 +219,17 @@ public class ShareActivity
             Timber.d("Cache the categories found");
         }
 
-        uploadController.startUpload(title, mediaUri, description, mimeType, source, decimalCoords, wikiDataEntityId, c -> {
+        uploadController.startUpload(title, contentProviderUri, mediaUri, description, mimeType, source, decimalCoords, wikiDataEntityId, c -> {
             ShareActivity.this.contribution = c;
             showPostUpload();
         });
+        isUploadFinalised = true;
     }
 
     /**
      * Starts CategorizationFragment after uploadBegins.
      */
+
     private void showPostUpload() {
         if (categorizationFragment == null) {
             categorizationFragment = new CategorizationFragment();
@@ -220,7 +256,7 @@ public class ShareActivity
 
         // FIXME: Make sure that the content provider is up
         // This is the wrong place for it, but bleh - better than not having it turned on by default for people who don't go throughl ogin
-        ContentResolver.setSyncAutomatically(sessionManager.getCurrentAccount(), ModificationsContentProvider.MODIFICATIONS_AUTHORITY, true); // Enable sync by default!
+        ContentResolver.setSyncAutomatically(sessionManager.getCurrentAccount(), BuildConfig.MODIFICATION_AUTHORITY, true); // Enable sync by default!
 
         finish();
     }
@@ -249,7 +285,7 @@ public class ShareActivity
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        isUploadFinalised = false;
         setContentView(R.layout.activity_share);
         ButterKnife.bind(this);
         initBack();
@@ -260,9 +296,29 @@ public class ShareActivity
                 .setFailureImage(VectorDrawableCompat.create(getResources(),
                         R.drawable.ic_error_outline_black_24dp, getTheme()))
                 .build());
+        if (!ExternalStorageUtils.isStoragePermissionGranted(this)) {
+            this.savedInstanceState = savedInstanceState;
+            ExternalStorageUtils.requestExternalStoragePermission(this);
+            return; // Postpone operation to do after getting permission
+        } else {
+            receiveImageIntent();
+            createContributionWithReceivedIntent(savedInstanceState);
+        }
+    }
 
-        receiveImageIntent();
+    @Override
+    protected void onStop() {
+        // If upload is not finalised with failure or success, but contribution is created,
+        // we have to remove temp file, to prevent using unnecessary memory
+        if (!isUploadFinalised) {
+            if (mediaUri != null) {
+                ContributionUtils.removeTemporaryFile(mediaUri);
+            }
+        }
+        super.onStop();
+    }
 
+    private void createContributionWithReceivedIntent(Bundle savedInstanceState) {
         if (savedInstanceState != null) {
             contribution = savedInstanceState.getParcelable("contribution");
         }
@@ -287,6 +343,12 @@ public class ShareActivity
         checkIfFileExists();
         gpsObj = fileObj.processFileCoordinates(locationPermitted);
         decimalCoords = fileObj.getDecimalCoords();
+        if (sessionManager.getCurrentAccount() == null) {
+            Toast.makeText(this, getString(R.string.login_alert_message), Toast.LENGTH_SHORT).show();
+            applicationPrefs.edit().putBoolean("login_skipped", false).apply();
+            Intent loginIntent = new Intent(ShareActivity.this, LoginActivity.class);
+            startActivity(loginIntent);
+        }
     }
 
     /**
@@ -297,12 +359,18 @@ public class ShareActivity
 
         if (Intent.ACTION_SEND.equals(intent.getAction())) {
             mediaUri = intent.getParcelableExtra(Intent.EXTRA_STREAM);
+            contentProviderUri = mediaUri;
+            mediaUri = ContributionUtils.saveFileBeingUploadedTemporarily(this, mediaUri);
+
             if (intent.hasExtra(UploadService.EXTRA_SOURCE)) {
                 source = intent.getStringExtra(UploadService.EXTRA_SOURCE);
             } else {
                 source = Contribution.SOURCE_EXTERNAL;
             }
-            if (intent.hasExtra("isDirectUpload")) {
+
+            boolean isDirectUpload = intent.getBooleanExtra("isDirectUpload", false);
+
+            if (isDirectUpload) {
                 Timber.d("This was initiated by a direct upload from Nearby");
                 isNearbyUpload = true;
                 wikiDataEntityId = intent.getStringExtra(WIKIDATA_ENTITY_ID_PREF);
@@ -379,17 +447,20 @@ public class ShareActivity
      */
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        switch (requestCode) {
-            // Storage (from submit button) - this needs to be separate from (1) because only the
-            // submit button should bring user to next screen
-            case REQUEST_PERM_ON_SUBMIT_STORAGE: {
-                if (grantResults.length >= 1 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    checkIfFileExists();
+        if (requestCode == 1 && grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+            Timber.d("onRequestPermissionsResult external storage permission granted");
+            // You can receive image intent and save image to a temp file only if ext storage permission is granted
+            receiveImageIntent();
+            createContributionWithReceivedIntent(savedInstanceState);
 
-                    //Uploading only begins if storage permission granted from arrow icon
-                    uploadBegins();
-                }
+            if (requestCode == REQUEST_PERM_ON_SUBMIT_STORAGE) {
+                checkIfFileExists();
+                //Uploading only begins if storage permission granted from arrow icon
+                uploadBegins();
             }
+
+        } else {
+            finish();
         }
     }
 
@@ -459,7 +530,8 @@ public class ShareActivity
         if (CurrentAnimator != null) {
             CurrentAnimator.cancel();
         }
-        ViewUtil.hideKeyboard(ShareActivity.this.findViewById(R.id.titleEdit | R.id.descEdit));
+        isZoom = true;
+        ViewUtil.hideKeyboard(ShareActivity.this.findViewById(R.id.titleEdit));
         closeFABMenu();
         mainFab.setVisibility(View.GONE);
 
@@ -475,7 +547,6 @@ public class ShareActivity
 
         // Load the high-resolution "zoomed-in" image.
         expandedImageView.setImageBitmap(scaledImage);
-
         float startScale = zoomObj.adjustStartEndBounds(startBounds, finalBounds, globalOffset);
 
         // Hide the thumbnail and show the zoomed-in view. When the animation
@@ -547,6 +618,7 @@ public class ShareActivity
         if (CurrentAnimator != null) {
             CurrentAnimator.cancel();
         }
+        isZoom = false;
         zoomOutButton.setVisibility(View.GONE);
         mainFab.setVisibility(View.VISIBLE);
 
@@ -557,6 +629,7 @@ public class ShareActivity
                 .with(ObjectAnimator.ofFloat(expandedImageView, View.Y, startBounds.top))
                 .with(ObjectAnimator.ofFloat(expandedImageView, View.SCALE_X, startScaleFinal))
                 .with(ObjectAnimator.ofFloat(expandedImageView, View.SCALE_Y, startScaleFinal));
+
         set.setDuration(ShortAnimationDuration);
         set.setInterpolator(new DecelerateInterpolator());
         set.addListener(new AnimatorListenerAdapter() {
@@ -589,4 +662,18 @@ public class ShareActivity
             startActivity(mapIntent);
         }
     }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        switch (keyCode) {
+            case KeyEvent.KEYCODE_BACK:
+                if(isZoom) {
+                    onZoomOutFabClicked();
+                    return true;
+                }
+        }
+        return super.onKeyDown(keyCode,event);
+
+    }
 }
+

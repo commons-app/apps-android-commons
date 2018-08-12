@@ -2,58 +2,58 @@
 <PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <PreferenceCategory
+    <fr.free.nrw.commons.ui.LongTitlePreferences.LongTitlePreferenceCategory
         android:title="@string/preference_category_appearance">
 
-        <SwitchPreference
+        <fr.free.nrw.commons.ui.LongTitlePreferences.LongTitleSwitchPreference
             android:title="@string/preference_theme"
             android:defaultValue="false"
             android:summary="@string/preference_theme_summary"
             android:key="theme" />
 
-    </PreferenceCategory>
+    </fr.free.nrw.commons.ui.LongTitlePreferences.LongTitlePreferenceCategory>
 
-    <PreferenceCategory
+    <fr.free.nrw.commons.ui.LongTitlePreferences.LongTitlePreferenceCategory
         android:title="@string/preference_category_general">
 
-        <ListPreference
+        <fr.free.nrw.commons.ui.LongTitlePreferences.LongTitleListPreference
             android:key="defaultLicense"
             android:title="@string/preference_license"
             android:entries="@array/pref_defaultLicense_entries"
             android:entryValues="@array/pref_defaultLicense_values"
             android:defaultValue="@string/license_pref_cc_by_sa_4_0" />
 
-        <SwitchPreference
+        <fr.free.nrw.commons.ui.LongTitlePreferences.LongTitleSwitchPreference
             android:key="useExternalStorage"
             android:title="@string/use_external_storage"
             android:defaultValue="true"
             android:summary="@string/use_external_storage_summary" />
 
-        <EditTextPreference
+        <fr.free.nrw.commons.ui.LongTitlePreferences.LongTitleEditTextPreference
             android:key="uploads"
             android:defaultValue="100"
             android:title= "@string/set_limit"
             android:inputType="numberDecimal"
             android:maxLength="3" />
 
-    </PreferenceCategory>
+    </fr.free.nrw.commons.ui.LongTitlePreferences.LongTitlePreferenceCategory>
 
     <!-- The key 'allowGps' was used before and has since been removed based on the discussion at #1599.
           Do not reuse this key unless you revive the same feature with the changes mentioned at #1599.-->
 
-    <PreferenceCategory
+    <fr.free.nrw.commons.ui.LongTitlePreferences.LongTitlePreferenceCategory
         android:title="@string/preference_category_feedback">
 
-        <Preference
+        <fr.free.nrw.commons.ui.LongTitlePreferences.LongTitlePreference
             android:key="becomeBetaTester"
             android:title="@string/become_a_tester_title"
             android:summary="@string/become_a_tester_description">
-        </Preference>
+        </fr.free.nrw.commons.ui.LongTitlePreferences.LongTitlePreference>
 
-        <Preference
+        <fr.free.nrw.commons.ui.LongTitlePreferences.LongTitlePreference
             android:key="sendLogFile"
             android:title="@string/send_log_file"
             android:summary="@string/send_log_file_description"/>
 
-    </PreferenceCategory>
+    </fr.free.nrw.commons.ui.LongTitlePreferences.LongTitlePreferenceCategory>
 </PreferenceScreen>

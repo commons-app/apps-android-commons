@@ -1,7 +1,10 @@
 package fr.free.nrw.commons.mwapi;
 
+import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+
+import org.json.JSONObject;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -41,8 +44,18 @@ public interface MediaWikiApi {
 
     List<Media> getCategoryImages(String categoryName);
 
+    List<String> getSubCategoryList(String categoryName);
+
+    List<String> getParentCategoryList(String categoryName);
+
     @NonNull
-    UploadResult uploadFile(String filename, InputStream file, long dataLength, String pageContents, String editSummary, ProgressListener progressListener) throws IOException;
+    List<Media> searchImages(String title, int offset);
+
+    @NonNull
+    List<String> searchCategory(String title, int offset);
+
+    @NonNull
+    UploadResult uploadFile(String filename, InputStream file, long dataLength, String pageContents, String editSummary, Uri fileUri, Uri contentProviderUri, ProgressListener progressListener) throws IOException;
 
     @Nullable
     String edit(String editToken, String processedPageContent, String filename, String summary) throws IOException;
@@ -84,6 +97,14 @@ public interface MediaWikiApi {
 
     @NonNull
     Single<Integer> getUploadCount(String userName);
+
+    @NonNull
+    Single<JSONObject> getRevertRespObjectSingle(String userName);
+
+    boolean isUserBlockedFromCommons();
+
+    @NonNull
+    Single<JSONObject> getAchievements(String userName);
 
     interface ProgressListener {
         void onProgress(long transferred, long total);

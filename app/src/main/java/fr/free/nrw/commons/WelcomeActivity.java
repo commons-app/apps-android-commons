@@ -9,6 +9,7 @@ import com.viewpagerindicator.CirclePageIndicator;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import fr.free.nrw.commons.quiz.QuizActivity;
 import fr.free.nrw.commons.theme.BaseActivity;
 
 public class WelcomeActivity extends BaseActivity {
@@ -17,6 +18,7 @@ public class WelcomeActivity extends BaseActivity {
     @BindView(R.id.welcomePagerIndicator) CirclePageIndicator indicator;
 
     private WelcomePagerAdapter adapter = new WelcomePagerAdapter();
+    private boolean isQuiz;
 
     /**
      * Initialises exiting fields and dependencies
@@ -27,6 +29,15 @@ public class WelcomeActivity extends BaseActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_welcome);
+
+        if(getIntent() != null) {
+            Bundle bundle = getIntent().getExtras();
+            if (bundle != null) {
+                isQuiz = bundle.getBoolean("isQuiz");
+            }
+        } else{
+            isQuiz = false;
+        }
 
         ButterKnife.bind(this);
 
@@ -40,6 +51,10 @@ public class WelcomeActivity extends BaseActivity {
      */
     @Override
     public void onDestroy() {
+        if(isQuiz){
+            Intent i = new Intent(WelcomeActivity.this, QuizActivity.class);
+            startActivity(i);
+        }
         adapter.setCallback(null);
         super.onDestroy();
     }

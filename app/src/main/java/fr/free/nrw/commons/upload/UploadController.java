@@ -15,9 +15,10 @@ import android.os.AsyncTask;
 import android.os.IBinder;
 import android.provider.MediaStore;
 import android.text.TextUtils;
-import android.widget.Toast;
+import android.util.Log;
 
 import java.io.BufferedInputStream;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Date;
@@ -25,7 +26,11 @@ import java.util.concurrent.Executors;
 
 import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.HandlerService;
+
+import fr.free.nrw.commons.auth.LoginActivity;
+
 import fr.free.nrw.commons.R;
+
 import fr.free.nrw.commons.auth.SessionManager;
 import fr.free.nrw.commons.contributions.Contribution;
 import fr.free.nrw.commons.settings.Prefs;
@@ -87,17 +92,27 @@ public class UploadController {
 
     /**
      * Starts a new upload task.
-     *
      * @param title         the title of the contribution
      * @param mediaUri      the media URI of the contribution
      * @param description   the description of the contribution
      * @param mimeType      the MIME type of the contribution
      * @param source        the source of the contribution
      * @param decimalCoords the coordinates in decimal. (e.g. "37.51136|-77.602615")
+     * @param wikiDataEntityId
      * @param onComplete    the progress tracker
      */
-    public void startUpload(String title, Uri mediaUri, String description, String mimeType, String source, String decimalCoords, String wikiDataEntityId, ContributionUploadProgress onComplete) {
+    public void startUpload(String title, Uri contentProviderUri, Uri mediaUri, String description, String mimeType, String source, String decimalCoords, String wikiDataEntityId, ContributionUploadProgress onComplete) {
         Contribution contribution;
+
+
+            //TODO: Modify this to include coords
+            contribution = new Contribution(mediaUri, null, title, description, -1,
+                    null, null, sessionManager.getCurrentAccount().name,
+                    CommonsApplication.DEFAULT_EDIT_SUMMARY, decimalCoords);
+
+
+            contribution.setTag("mimeType", mimeType);
+            contribution.setSource(source);
 
         Timber.d("Wikidata entity ID received from Share activity is %s", wikiDataEntityId);
         //TODO: Modify this to include coords
@@ -112,9 +127,11 @@ public class UploadController {
                 null, null, currentAccount.name,
                 CommonsApplication.DEFAULT_EDIT_SUMMARY, decimalCoords);
 
+
         contribution.setTag("mimeType", mimeType);
         contribution.setSource(source);
         contribution.setWikiDataEntityId(wikiDataEntityId);
+        contribution.setContentProviderUri(contentProviderUri);
 
         //Calls the next overloaded method
         startUpload(contribution, onComplete);
@@ -151,9 +168,12 @@ public class UploadController {
                 long length;
                 ContentResolver contentResolver = context.getContentResolver();
                 try {
+
+                    //TODO: understand do we really need this code
                     if (contribution.getDataLength() <= 0) {
+                        Log.d("deneme","UploadController/doInBackground, contribution.getLocalUri():"+contribution.getLocalUri());
                         AssetFileDescriptor assetFileDescriptor = contentResolver
-                                .openAssetFileDescriptor(contribution.getLocalUri(), "r");
+                                .openAssetFileDescriptor(Uri.fromFile(new File(contribution.getLocalUri().getPath())), "r");
                         if (assetFileDescriptor != null) {
                             length = assetFileDescriptor.getLength();
                             if (length == -1) {
@@ -203,7 +223,7 @@ public class UploadController {
                         contribution.setDateCreated(new Date());
                     }
                 }
-                return contribution;
+            return contribution;
             }
 
             @Override

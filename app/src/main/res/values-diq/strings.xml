@@ -25,7 +25,7 @@
   <string name="login_success">Cıkewtış hewl bi.</string>
   <string name="login_failed">Nidekeweya de</string>
   <string name="upload_failed">Dosya nêvineya. Dosyê da bine bıcerebnê.</string>
-  <string name="authentication_failed">Tesdiq kerdış nebı</string>
+  <string name="authentication_failed" fuzzy="true">Tesdiq kerdış nebı</string>
   <string name="uploading_started">Barkerdış sertera!</string>
   <string name="upload_completed_notification_title">%1$s bıbar!</string>
   <string name="upload_completed_notification_text">Barkerdışê xo pıro bıde.</string>

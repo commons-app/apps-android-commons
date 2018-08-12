@@ -30,7 +30,7 @@
   <string name="login_success">ログインしました!</string>
   <string name="login_failed">ログインに失敗しました!</string>
   <string name="upload_failed">ファイルが見つかりません。別のファイルでお試しください。</string>
-  <string name="authentication_failed">認証に失敗しました!</string>
+  <string name="authentication_failed">認証に失敗しました!　もう一度ログインしてください</string>
   <string name="uploading_started">アップロードを開始しました!</string>
   <string name="upload_completed_notification_title">%1$s をアップロードしました!</string>
   <string name="upload_completed_notification_text">アップロードしたものを表示するにはタップしてください</string>
@@ -58,9 +58,10 @@
   <string name="add_title_toast">ファイル名をつけてください</string>
   <string name="share_description_hint">説明</string>
   <string name="login_failed_network">ログインできません - ネットワークのエラーです</string>
+  <string name="login_failed_wrong_credentials">ログインできません - 利用者名とパスワードを確認してください</string>
   <string name="login_failed_throttled">失敗した回数が多すぎます。数分待ってからもう一度お試しください。</string>
   <string name="login_failed_blocked">申し訳ありませんが、この利用者はコモンズでブロックされています。</string>
-  <string name="login_failed_2fa_needed">2要素認証コードを提供する必要があります。</string>
+  <string name="login_failed_2fa_needed">2段階認証コードを入力する必要があります。</string>
   <string name="login_failed_generic">ログイン失敗</string>
   <string name="share_upload_button">アップロード</string>
   <string name="multiple_share_base_title">このセットに名前をつけてください</string>
@@ -110,7 +111,7 @@
   <string name="preference_license">既定のライセンス</string>
   <string name="use_previous">前回のタイトルと記述を使用</string>
   <string name="allow_gps">現在の位置を自動的に取得</string>
-  <string name="allow_gps_summary">画像にジオタグが付いていない場合、現在の位置を取得してカテゴリを提案</string>
+  <string name="allow_gps_summary">Retrieves current location if image is not geotagged, \n画像にジオタグが付いていない場合、現在の位置を取得して画像に添付。ご注意: 自分の現在地が明示されます。</string>
   <string name="preference_theme">夜モード</string>
   <string name="preference_theme_summary">暗いテーマを使う</string>
   <string name="license_name_cc_by_sa_four">表示-継承 4.0</string>
@@ -184,7 +185,7 @@
   <string name="media_detail_coordinates_empty">情報なし</string>
   <string name="become_a_tester_title">ベータ版を使ってみましょう！</string>
   <string name="become_a_tester_description">Google Playのベータ版チャンネルにオプトインして、新機能やバグ修正プログラムに早期にアクセス</string>
-  <string name="_2fa_code">2FA コード</string>
+  <string name="_2fa_code">2段階認証コード</string>
   <string name="number_of_uploads">最近のアップロードファイルに表示する最大件数</string>
   <string name="maximum_limit">最大限</string>
   <string name="maximum_limit_alert">表示できるのは500件以下です</string>
@@ -276,6 +277,12 @@
   <string name="no_images_found">画像がありません</string>
   <string name="error_loading_images">画像の読み込み中にエラーが発生しました</string>
   <string name="image_uploaded_by">アップロードした人: %1$</string>
+  <string name="appwidget_img">今日の一枚</string>
+  <string name="app_widget_heading">今日の一枚</string>
+  <string name="successful_wikidata_edit">ウィキデータの%1$sに画像を追加しました !</string>
+  <string name="wikidata_edit_failure">対応するウィキデータの更新に失敗しました！</string>
+  <string name="menu_set_wallpaper">壁紙の設定</string>
+  <string name="wallpaper_set_successfully">壁紙の設定ができました!</string>
   <string name="share_app_title">アプリをシェアする</string>
   <string name="share_coordinates_not_present">画像の選択中に位置情報を特定できませんでした</string>
   <string name="error_fetching_nearby_places">付近の場所を取得しようとしてエラーが発生しました。</string>

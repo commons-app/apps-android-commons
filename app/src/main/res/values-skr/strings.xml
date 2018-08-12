@@ -3,6 +3,7 @@
 * Saraiki
 -->
 <resources>
+  <string name="title_activity_explore">پھرولو</string>
   <string name="preference_category_appearance">شکل و صورت</string>
   <string name="preference_category_general">عمومی</string>
   <string name="preference_category_feedback">تہاڈی رائے</string>
@@ -20,7 +21,7 @@
   <string name="login_success">لاگ ان کامیاب!</string>
   <string name="login_failed">لاگ ان ناکام!</string>
   <string name="upload_failed">فائل کائنی لبھی،ٻئی فائل کیتے کوشش کرو۔</string>
-  <string name="authentication_failed">تصدیق ناکام!</string>
+  <string name="authentication_failed">تصدیق ناکام، ولدا لاڳ ان تھیوو</string>
   <string name="uploading_started">اپ لوڈ شروع!</string>
   <string name="upload_completed_notification_title">%1$s اپ لوڈ تھی ڳیا!</string>
   <string name="upload_completed_notification_text">آپݨی اپلوڈ ݙیکھݨ کیتے ٹیپ کرو</string>
@@ -46,18 +47,19 @@
   <string name="multiple_share_base_title">ایں سیٹ دا ناں ݙسو</string>
   <string name="provider_modifications">تبدیلیاں</string>
   <string name="menu_upload_single">اپلوڈ</string>
-  <string name="categories_search_text_hint">قسماں دی ڳول</string>
+  <string name="categories_search_text_hint">ونکیاں دی ڳول</string>
   <string name="menu_save_categories">بچاؤ</string>
   <string name="refresh_button">سجرا، تازہ کرو</string>
   <string name="display_list_button">فہرست</string>
   <string name="enable_gps">جی پی ایس چلاؤ</string>
   <string name="contributions_subtitle_zero">اڄݨ ککھ وی اپ لوڈ نی تھیا</string>
-  <string name="categories_activity_title">قسماں، زمرے</string>
+  <string name="categories_activity_title">ونکیاں</string>
   <string name="title_activity_settings">ترتیباں</string>
   <string name="title_activity_signup">سائن اپ</string>
+  <string name="title_activity_category_details">ون٘کی</string>
   <string name="menu_about">تعارف</string>
   <string name="title_activity_about">تعارف</string>
-  <string name="provider_categories">حالیہ ورتیاں ڳیاں قسماں</string>
+  <string name="provider_categories">حالیہ ورتیاں ڳیاں ونکیاں</string>
   <string name="menu_retry_upload">ولدا کوشش کرو</string>
   <string name="menu_cancel_upload">منسوخ</string>
   <string name="menu_download">ڈاؤن لوڈ ، لہاوݨ</string>
@@ -74,7 +76,7 @@
   <string name="welcome_wikipedia_subtext">وکی پیڈیا تے فوٹو وکی میڈیا کامنز کنوں امدن۔</string>
   <string name="welcome_copyright_text">تہاݙے فوٹو پوری دنیا دے لوکاں کوں تعلیم ݙیوݨ کیتے مدد ݙیندن</string>
   <string name="welcome_final_button_text">جیا!</string>
-  <string name="detail_panel_cats_label">قسماں، زمرے</string>
+  <string name="detail_panel_cats_label">ونکیاں</string>
   <string name="detail_panel_cats_loading">لوڈ تھیدا پئے۔۔۔</string>
   <string name="detail_panel_cats_none">کجھ نی چݨیا</string>
   <string name="detail_description_empty">کوئی تفصیل کائنی</string>
@@ -130,4 +132,8 @@
   <string name="about_translate_cancel">منسوخ</string>
   <string name="retry">ولدا کوشش کرو</string>
   <string name="showcase_view_got_it_button">گھن گھندا</string>
+  <string name="menu_search_button">ڳولو</string>
+  <string name="question">سوال</string>
+  <string name="result">نتیجہ</string>
+  <string name="statistics">شماریات</string>
 </resources>

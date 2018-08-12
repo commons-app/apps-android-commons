@@ -5,6 +5,7 @@ import android.accounts.AccountManager;
 import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
@@ -12,11 +13,16 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import javax.inject.Inject;
+import javax.inject.Named;
 
 import butterknife.BindView;
 import fr.free.nrw.commons.AboutActivity;
@@ -24,6 +30,7 @@ import fr.free.nrw.commons.BuildConfig;
 import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.WelcomeActivity;
+import fr.free.nrw.commons.achievements.AchievementsActivity;
 import fr.free.nrw.commons.auth.AccountUtil;
 import fr.free.nrw.commons.auth.LoginActivity;
 import fr.free.nrw.commons.contributions.ContributionsActivity;
@@ -44,6 +51,8 @@ public abstract class NavigationBaseActivity extends BaseActivity
     NavigationView navigationView;
     @BindView(R.id.drawer_layout)
     DrawerLayout drawerLayout;
+    @Inject @Named("application_preferences") SharedPreferences prefs;
+
 
     private ActionBarDrawerToggle toggle;
 
@@ -59,6 +68,24 @@ public abstract class NavigationBaseActivity extends BaseActivity
         toggle.syncState();
         setDrawerPaneWidth();
         setUserName();
+        Menu nav_Menu = navigationView.getMenu();
+        View headerLayout = navigationView.getHeaderView(0);
+        ImageView userIcon = headerLayout.findViewById(R.id.user_icon);
+        if (prefs.getBoolean("login_skipped", false)) {
+            userIcon.setVisibility(View.GONE);
+            nav_Menu.findItem(R.id.action_login).setVisible(true);
+            nav_Menu.findItem(R.id.action_home).setVisible(false);
+            nav_Menu.findItem(R.id.action_notifications).setVisible(false);
+            nav_Menu.findItem(R.id.action_settings).setVisible(false);
+            nav_Menu.findItem(R.id.action_logout).setVisible(false);
+        }else {
+            userIcon.setVisibility(View.VISIBLE);
+            nav_Menu.findItem(R.id.action_login).setVisible(false);
+            nav_Menu.findItem(R.id.action_home).setVisible(true);
+            nav_Menu.findItem(R.id.action_notifications).setVisible(true);
+            nav_Menu.findItem(R.id.action_settings).setVisible(true);
+            nav_Menu.findItem(R.id.action_logout).setVisible(true);
+        }
     }
 
     /**
@@ -68,17 +95,33 @@ public abstract class NavigationBaseActivity extends BaseActivity
 
         View navHeaderView = navigationView.getHeaderView(0);
         TextView username = navHeaderView.findViewById(R.id.username);
-
         AccountManager accountManager = AccountManager.get(this);
-        Account[] allAccounts = accountManager.getAccountsByType(AccountUtil.ACCOUNT_TYPE);
+        Account[] allAccounts = accountManager.getAccountsByType(BuildConfig.ACCOUNT_TYPE);
         if (allAccounts.length != 0) {
             username.setText(allAccounts[0].name);
         }
+        ImageView userIcon = navHeaderView.findViewById(R.id.user_icon);
+        userIcon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                drawerLayout.closeDrawer(navigationView);
+                AchievementsActivity.startYourself(NavigationBaseActivity.this);
+            }
+        });
     }
 
     public void initBackButton() {
         int backStackEntryCount = getSupportFragmentManager().getBackStackEntryCount();
         toggle.setDrawerIndicatorEnabled(backStackEntryCount == 0);
+        toggle.setToolbarNavigationClickListener(v -> onBackPressed());
+    }
+
+    /**
+     * This method changes the toolbar icon to back regardless of any conditions that
+     * there is any fragment in the backStack or not
+     */
+    public void forceInitBackButton() {
+        toggle.setDrawerIndicatorEnabled(false);
         toggle.setToolbarNavigationClickListener(v -> onBackPressed());
     }
 
@@ -102,6 +145,14 @@ public abstract class NavigationBaseActivity extends BaseActivity
     public boolean onNavigationItemSelected(@NonNull final MenuItem item) {
         final int itemId = item.getItemId();
         switch (itemId) {
+            case R.id.action_login:
+                drawerLayout.closeDrawer(navigationView);
+                startActivityWithFlags(
+                        this, LoginActivity.class, Intent.FLAG_ACTIVITY_CLEAR_TOP,
+                        Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                prefs.edit().putBoolean("login_skipped", false).apply();
+                finish();
+                return true;
             case R.id.action_home:
                 drawerLayout.closeDrawer(navigationView);
                 startActivityWithFlags(
@@ -156,9 +207,9 @@ public abstract class NavigationBaseActivity extends BaseActivity
                 drawerLayout.closeDrawer(navigationView);
                 NotificationActivity.startYourself(this);
                 return true;
-            case R.id.action_featured_images:
+            case R.id.action_explore:
                 drawerLayout.closeDrawer(navigationView);
-                CategoryImagesActivity.startYourself(this, getString(R.string.title_activity_featured_images), FEATURED_IMAGES_CATEGORY);
+                CategoryImagesActivity.startYourself(this, getString(R.string.title_activity_explore), FEATURED_IMAGES_CATEGORY);
                 return true;
             default:
                 Timber.e("Unknown option [%s] selected from the navigation menu", itemId);
@@ -185,5 +236,17 @@ public abstract class NavigationBaseActivity extends BaseActivity
             intent.addFlags(flag);
         }
         context.startActivity(intent);
+    }
+
+    /**
+     * Handles visibility of navigation base toolbar
+     * @param show : Used to handle visibility of toolbar
+     */
+    public void setNavigationBaseToolbarVisibility(boolean show){
+        if (show){
+            toolbar.setVisibility(View.VISIBLE);
+        }else {
+            toolbar.setVisibility(View.GONE);
+        }
     }
 }
