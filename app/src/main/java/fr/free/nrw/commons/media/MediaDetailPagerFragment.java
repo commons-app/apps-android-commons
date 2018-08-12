@@ -96,6 +96,7 @@ public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment imple
                 pager.setCurrentItem(pageNumber, false);
 
                 if(getActivity() == null) {
+                    Timber.d("Returning as activity is destroyed!");
                     return;
                 }
 
@@ -129,6 +130,7 @@ public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment imple
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if(getActivity() == null) {
+            Timber.d("Returning as activity is destroyed!");
             return true;
         }
         MediaDetailProvider provider = (MediaDetailProvider) getActivity();
@@ -203,6 +205,7 @@ public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment imple
                 || fileName == null
                 || getContext() ==  null
                 || getActivity() == null) {
+            Timber.d("Skipping download media as either imageUrl %s or filename %s activity is null", imageUrl, fileName);
             return;
         }
 
@@ -300,6 +303,7 @@ public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment imple
     @Override
     public void onPageScrolled(int i, float v, int i2) {
         if(getActivity() == null) {
+            Timber.d("Returning as activity is destroyed!");
             return;
         }
         if (i+1 >= adapter.getCount()){
@@ -354,6 +358,7 @@ public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment imple
             if (i == 0) {
                 // See bug https://code.google.com/p/android/issues/detail?id=27526
                 if(getActivity() == null) {
+                    Timber.d("Skipping getItem. Returning as activity is destroyed!");
                     return null;
                 }
                 pager.postDelayed(() -> getActivity().supportInvalidateOptionsMenu(), 5);
@@ -364,6 +369,7 @@ public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment imple
         @Override
         public int getCount() {
             if(getActivity() == null) {
+                Timber.d("Skipping getCount. Returning as activity is destroyed!");
                 return 0;
             }
             return ((MediaDetailProvider) getActivity()).getTotalMediaCount();
