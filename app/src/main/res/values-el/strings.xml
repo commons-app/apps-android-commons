@@ -304,7 +304,7 @@
   <string name="error_loading_subcategories">Συνέβη σφάλμα κατά τη φόρτωση υποκατηγοριών.</string>
   <string name="successful_wikidata_edit">Η εικόνα προστέθηκε επιτυχώς στο %1$s στο Wikidata!</string>
   <string name="wikidata_edit_failure">Αποτυχία ενημέρωσης της αντιστοιχούσας οντότητας του Wikidata!</string>
-  <string name="menu_set_wallpaper">Ρύθμιση ταπετσαρίας</string>
+  <string name="menu_set_wallpaper">Ρύθμιση ως ταπετσαρία</string>
   <string name="wallpaper_set_successfully">Η ταπετσαρία ρυθμίστηκε επιτυχώς!</string>
   <string name="quiz">Κουίζ</string>
   <string name="quiz_question_string">Αυτή η φωτογραφία είναι εντάξει για ανέβασμα;</string>

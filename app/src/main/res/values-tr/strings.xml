@@ -284,7 +284,7 @@
   <string name="app_widget_heading">Günün Resmi</string>
   <string name="successful_wikidata_edit">Resim, Vikiveri\'de %1$s içine başarıyla eklendi.</string>
   <string name="wikidata_edit_failure">Karşılık gelen Vikiveri varlığı güncellenemedi!</string>
-  <string name="menu_set_wallpaper">Duvar kağıdı ayarla</string>
+  <string name="menu_set_wallpaper" fuzzy="true">Duvar kağıdı ayarla</string>
   <string name="wallpaper_set_successfully">Duvar kağıdı başarıyla ayarlandı!</string>
   <string name="user_not_logged_in">Oturumun süresi doldu, lütfen tekrar giriş yapın.</string>
   <string name="share_app_title">Uygulamayı Paylaş</string>

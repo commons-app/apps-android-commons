@@ -281,7 +281,7 @@
   <string name="app_widget_heading">今日の一枚</string>
   <string name="successful_wikidata_edit">ウィキデータの%1$sに画像を追加しました !</string>
   <string name="wikidata_edit_failure">対応するウィキデータの更新に失敗しました！</string>
-  <string name="menu_set_wallpaper">壁紙の設定</string>
+  <string name="menu_set_wallpaper" fuzzy="true">壁紙の設定</string>
   <string name="wallpaper_set_successfully">壁紙の設定ができました!</string>
   <string name="share_app_title">アプリをシェアする</string>
   <string name="share_coordinates_not_present">画像の選択中に位置情報を特定できませんでした</string>

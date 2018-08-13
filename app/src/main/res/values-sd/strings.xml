@@ -213,6 +213,8 @@
   <string name="null_url">خلل: يو آر ايل نه لڌو</string>
   <string name="nominated_for_deletion">هن تصوير کي ڊاهڻ لاءِ مقرر ڪيو ويو آهي.</string>
   <string name="view_browser">برائوزر ۾ ڏسو</string>
+  <string name="skip_login">ڇڏيو</string>
+  <string name="login_alert_message">هن خصوصيت جي استعمال لاءِ داخل ٿيو</string>
   <string name="nearby_location_has_not_changed">مڪانيت تبديلي ناھي ٿي.</string>
   <string name="nearby_location_not_available">مڪانيت موجود ناھي.</string>
   <string name="location_permission_rationale_nearby">ويجھين جڳھن جي فھرست ڏيکارڻ لاءِ اجازت گھربل آھي</string>
@@ -246,7 +248,7 @@
   <string name="title_activity_search">ڳوليو</string>
   <string name="search_recent_header">تازيون ڳولائون:</string>
   <string name="provider_searches">تازه ڳوليل مسودا</string>
-  <string name="menu_set_wallpaper">وال پيپر لڳايو</string>
+  <string name="menu_set_wallpaper" fuzzy="true">وال پيپر لڳايو</string>
   <string name="wallpaper_set_successfully">وال پيپر ڪاميابيءَ سان لڳي ويو!</string>
   <string name="user_not_logged_in">لاگ اِن سيشن ايڪسپائير ٿي ويو آهي، مهرباني ڪري وري لاڳ اِن ٿيو.</string>
   <string name="share_app_title">ايپ ونڊيو</string>

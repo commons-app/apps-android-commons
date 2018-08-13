@@ -287,7 +287,7 @@
   <string name="app_widget_heading">Foto del día</string>
   <string name="menu_search_button">Buscar</string>
   <string name="search_commons">Buscar en Commons</string>
-  <string name="images_not_found">No se encontró ninguna imagen que coincidiera con $1$s</string>
+  <string name="images_not_found">No se encontró ninguna imagen que coincida con %1$s</string>
   <string name="title_activity_search">Buscar</string>
   <string name="search_recent_header">Búsquedas recientes:</string>
   <string name="error_loading_categories">Se produjo un error al cargar las categorías.</string>

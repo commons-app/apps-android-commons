@@ -249,7 +249,7 @@
   <string name="provider_searches">Ostatnio wyszukiwane zapytania</string>
   <string name="error_loading_categories">Wystąpił błąd podczas ładowania kategorii.</string>
   <string name="error_loading_subcategories">Wystąpił błąd podczas ładowania podkategorii.</string>
-  <string name="menu_set_wallpaper">Ustaw tapetę</string>
+  <string name="menu_set_wallpaper">Ustaw jako tapetę</string>
   <string name="wallpaper_set_successfully">Tapeta ustawiona pomyślnie!</string>
   <string name="quiz">Quiz</string>
   <string name="quiz_question_string">Czy to zdjęcie nadaje się do przesłania?</string>

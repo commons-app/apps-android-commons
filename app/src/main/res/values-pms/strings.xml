@@ -294,7 +294,7 @@
   <string name="error_loading_subcategories">A l\'é ancapitaje n\'eror antrametre ch\'as cariavo le sot-categorìe.</string>
   <string name="successful_wikidata_edit">Plancia giontà për da bin a %1$s su Wikidata!</string>
   <string name="wikidata_edit_failure">Falì a agiorné l\'entità ëd Wikidata corëspondenta!</string>
-  <string name="menu_set_wallpaper">Definì la tapissarìa</string>
+  <string name="menu_set_wallpaper">Definì \'me tapissarìa</string>
   <string name="wallpaper_set_successfully">La tapissarìa a l\'é stàita definìa për da bin!</string>
   <string name="quiz">Domande</string>
   <string name="quiz_question_string">Sa fòto a va bin da carié?</string>

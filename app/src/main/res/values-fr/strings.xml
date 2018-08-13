@@ -312,7 +312,7 @@
   <string name="error_loading_subcategories">Erreur durant le chargement des sous-catégories.</string>
   <string name="successful_wikidata_edit">Image bien ajoutée à %1$s sur Wikidata !</string>
   <string name="wikidata_edit_failure">Échec de la mise à jour de l\'entité Wikidata correspondante !</string>
-  <string name="menu_set_wallpaper">Définir le fond d\'écran</string>
+  <string name="menu_set_wallpaper" fuzzy="true">Définir le fond d\'écran</string>
   <string name="wallpaper_set_successfully">Papier-peint configuré avec succès!</string>
   <string name="quiz">Quiz</string>
   <string name="quiz_question_string">Est-ce que cette photo est prête pour être téléversée ?</string>

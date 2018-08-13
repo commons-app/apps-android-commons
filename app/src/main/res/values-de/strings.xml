@@ -301,7 +301,7 @@
   <string name="error_loading_subcategories">Beim Laden der Unterkategorien ist ein Fehler aufgetreten.</string>
   <string name="successful_wikidata_edit">Bild erfolgreich nach %1$s auf Wikidata hinzugefügt!</string>
   <string name="wikidata_edit_failure">Fehler bei der Aktualisierung des dazugehörigen Wikidata-Objekts!</string>
-  <string name="menu_set_wallpaper">Hintergrundbild festlegen</string>
+  <string name="menu_set_wallpaper">Als Hintergrundbild festlegen</string>
   <string name="wallpaper_set_successfully">Hintergrundbild erfolgreich festgelegt!</string>
   <string name="quiz">Quiz</string>
   <string name="quiz_question_string">Ist dieses Bild in Ordnung zum Hochladen?</string>
