@@ -306,7 +306,7 @@
   <string name="error_loading_subcategories">當載入子分類時發生錯誤。</string>
   <string name="successful_wikidata_edit">圖片已成功添加到維基數據上的 %1$s！</string>
   <string name="wikidata_edit_failure">更新所對應的維基數據項目失敗！</string>
-  <string name="menu_set_wallpaper">設定桌布</string>
+  <string name="menu_set_wallpaper" fuzzy="true">設定桌布</string>
   <string name="wallpaper_set_successfully">桌布設定成功！</string>
   <string name="quiz">測驗</string>
   <string name="quiz_question_string">這張圖片可以上傳嗎？</string>

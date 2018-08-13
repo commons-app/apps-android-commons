@@ -18,6 +18,7 @@
   <string name="app_name">Commons</string>
   <string name="bullet">•</string>
   <string name="menu_settings">Indstillinger</string>
+  <string name="intent_share_upload_label">Upload til Commons</string>
   <string name="username">Brugernavn</string>
   <string name="password">Adgangskode</string>
   <string name="login_credential">Log ind på din Commons Beta-konto</string>
@@ -29,7 +30,7 @@
   <string name="login_success">Du er nu logget på!</string>
   <string name="login_failed">Det mislykkedes at logge på!</string>
   <string name="upload_failed">Filen blev ikke fundet. Forsøg med en anden fil.</string>
-  <string name="authentication_failed" fuzzy="true">Godkendelse mislykkedes!</string>
+  <string name="authentication_failed">Godkendelse mislykkedes, log venligst på igen</string>
   <string name="uploading_started">Overførsel begyndt!</string>
   <string name="upload_completed_notification_title">%1$s overført!</string>
   <string name="upload_completed_notification_text">Tryk for at få vist din upload</string>
@@ -90,6 +91,7 @@
   <string name="categories_activity_title">Kategorier</string>
   <string name="title_activity_settings">Indstillinger</string>
   <string name="title_activity_signup">Opret konto</string>
+  <string name="title_activity_featured_images">Udvalgte billeder</string>
   <string name="title_activity_category_details">Kategori</string>
   <string name="menu_about">Om</string>
   <string name="about_license">Wikimedia Commons-programmet oprettet og udviklet af frivillige i Wikimediafællesskabet. Wikimedia Foundation er ikke involveret i oprettelse, udvikling eller vedligeholdelse af programmet.</string>
@@ -240,6 +242,8 @@
   <string name="null_url">Fejl! Adressen blev ikke fundet</string>
   <string name="nominate_deletion">Nomineret til sletning</string>
   <string name="view_browser">Se i browser</string>
+  <string name="skip_login">Spring over</string>
+  <string name="navigation_item_login">Log på</string>
   <string name="nearby_location_has_not_changed">Sted er ikke ændret.</string>
   <string name="nearby_location_not_available">Sted ikke tilgængeligt.</string>
   <string name="location_permission_rationale_nearby">Tilladelse kræves for at vise en liste over steder i nærheden</string>
@@ -250,15 +254,21 @@
   <string name="notifications_thank_you_edit">Tak fordi du lavede en redigering</string>
   <string name="notifications_mention">%1$s nævnte dig på %2$s.</string>
   <string name="toggle_view_button">Skift visning</string>
+  <string name="nearby_directions">RUTEBESKRIVELSE</string>
   <string name="nearby_wikidata">WIKIDATA</string>
   <string name="nearby_wikipedia">WIKIPEDIA</string>
   <string name="nearby_commons">COMMONS</string>
   <string name="about_rate_us">&lt;u&gt;Vurder os&lt;/u&gt;</string>
-  <string name="about_faq" fuzzy="true">Ofte stillede spørgsmål</string>
+  <string name="about_faq">&lt;u&gt;OSS&lt;/u&gt;</string>
   <string name="welcome_skip_button">Udelad øvelse</string>
+  <string name="no_internet">Internet er utilgængeligt</string>
+  <string name="internet_established">Internet tilgængeligt</string>
   <string name="about_translate">&lt;u&gt;Oversæt&lt;/u&gt;</string>
   <string name="about_translate_title">Sprog</string>
+  <string name="about_translate_cancel">Annullér</string>
   <string name="retry">Prøv igen</string>
+  <string name="showcase_view_got_it_button">Forstået!</string>
+  <string name="no_images_found">Ingen billeder fundet!</string>
   <string name="image_uploaded_by">Lagt op af: %1$s</string>
   <string name="appwidget_img">Dagens billede</string>
   <string name="app_widget_heading">Dagens billede</string>
@@ -266,8 +276,10 @@
   <string name="title_activity_search">Søg</string>
   <string name="question">Spørgsmål</string>
   <string name="result">Resultat</string>
+  <string name="continue_message">Fortsæt</string>
   <string name="correct">Rigtigt svar</string>
   <string name="wrong">Forkert svar</string>
+  <string name="share_app_title">Del appen</string>
   <string name="add_description">+ Tilføj en beskrivelse</string>
   <string name="Achievements">Præstationer</string>
   <string name="statistics_thanks">Tak modtaget</string>

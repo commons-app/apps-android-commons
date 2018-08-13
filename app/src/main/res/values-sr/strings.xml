@@ -287,7 +287,7 @@
   <string name="title_activity_search">Претрага</string>
   <string name="successful_wikidata_edit">Слика успешно додата у %1$s на Википодацима!</string>
   <string name="wikidata_edit_failure">Неуспешно ажурирање одговарајућег ентитета на Википодацима!</string>
-  <string name="menu_set_wallpaper">Постави позадину</string>
+  <string name="menu_set_wallpaper">Постави као позадину</string>
   <string name="wallpaper_set_successfully">Позадина успешно постављена!</string>
   <string name="share_app_title">Подели апликацију</string>
   <string name="share_coordinates_not_present">Координате нису биле одређене током селекције слике</string>

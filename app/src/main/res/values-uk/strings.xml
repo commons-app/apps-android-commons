@@ -296,7 +296,7 @@
   <string name="search_recent_header">Недавні пошуки:</string>
   <string name="successful_wikidata_edit">Зображення успішно додано до сторінки %1$s у Вікіданих!</string>
   <string name="wikidata_edit_failure">Не вдалось оновити відповідну сторінку Вікіданих!</string>
-  <string name="menu_set_wallpaper">Поставити шпалерами екрану</string>
+  <string name="menu_set_wallpaper" fuzzy="true">Поставити шпалерами екрану</string>
   <string name="wallpaper_set_successfully">Шпалери екрану виставлено успішно!</string>
   <string name="user_not_logged_in">Сесія авторизації спливла. Будь ласка, авторизуйтесь знову.</string>
   <string name="share_app_title">Поділитися програмою</string>

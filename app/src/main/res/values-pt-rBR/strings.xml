@@ -306,7 +306,7 @@
   <string name="error_loading_subcategories">Ocorreu um erro ao carregar subcategorias.</string>
   <string name="successful_wikidata_edit">Imagem adicionada a %1$s na wiki Wikidata!</string>
   <string name="wikidata_edit_failure">Falha ao atualizar a entidade Wikidata correspondente!</string>
-  <string name="menu_set_wallpaper">Definir imagem de fundo</string>
+  <string name="menu_set_wallpaper">Definir como imagem de fundo</string>
   <string name="wallpaper_set_successfully">Imagem de fundo definida!</string>
   <string name="quiz">Questionário</string>
   <string name="quiz_question_string">Esta fotografia pode ser carregada?</string>

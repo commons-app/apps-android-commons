@@ -292,7 +292,7 @@
   <string name="error_loading_subcategories">Arazo bat egon da azpikategoriak kargatzerakoan.</string>
   <string name="successful_wikidata_edit">Irudia arazorik gabe gehitu da %1$s-(e)ra Wikidatan!</string>
   <string name="wikidata_edit_failure">Ezin izan da dagokion Wikidata entitatea eguneratu!</string>
-  <string name="menu_set_wallpaper">Horma papera ezarri</string>
+  <string name="menu_set_wallpaper" fuzzy="true">Horma papera ezarri</string>
   <string name="wallpaper_set_successfully">Horma papera ezarri da!</string>
   <string name="quiz">Galdetegia</string>
   <string name="quiz_question_string">Ondo dago argazki hau igotzeko?</string>

@@ -296,13 +296,13 @@
   <string name="error_loading_subcategories">Houbo un erro ó cargar subcategorías.</string>
   <string name="successful_wikidata_edit">A imaxe engadiuse con éxito a %1$s en Wikidata!</string>
   <string name="wikidata_edit_failure">Fallou a actualización da entidade do Wikidata correspondente!</string>
-  <string name="menu_set_wallpaper">Definir imaxe de fondo</string>
+  <string name="menu_set_wallpaper" fuzzy="true">Definir imaxe de fondo</string>
   <string name="wallpaper_set_successfully">A imaxe de fondo configurouse correctamenteǃ</string>
   <string name="quiz">Cuestionario</string>
   <string name="question">Pregunta</string>
   <string name="result">Resultado</string>
-  <string name="warning_for_image_reverts">Aviso: das imaxes que subiches,máis do 1% foron borradas. Se segues a subir imaxes que precisan borrado, o máis probable é que se che anule a conta.</string>
-  <string name="congratulatory_message_quiz">Acadaches un %1$s de respostas correctas. Parabéns!</string>
+  <string name="warning_for_image_reverts">Aviso: Máis do 1%  das imaxes cargadas por vostede foron borradas. Se segue a cargar imaxes que precisan borrado o máis probable é que a súa conta sexa anulada.</string>
+  <string name="congratulatory_message_quiz">Acadou un %1$s de respostas correctas. Parabéns!</string>
   <string name="warning_for_no_answer">Escolla unha das dúas opcións para contestar a pregunta</string>
   <string name="user_not_logged_in">A sesión caducou, por favor inicia unha nova sesión.</string>
   <string name="continue_message">Continuar</string>

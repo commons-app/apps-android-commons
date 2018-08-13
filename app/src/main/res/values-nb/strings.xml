@@ -300,7 +300,7 @@
   <string name="error_loading_subcategories">Feil oppsto under lasting av underkategorier.</string>
   <string name="successful_wikidata_edit">Bildet ble lagt til på %1$s på Wikidata!</string>
   <string name="wikidata_edit_failure">Kunne ikke oppdatere tilsvarende Wikidata-element!</string>
-  <string name="menu_set_wallpaper">Angi som bakgrunnsbilde</string>
+  <string name="menu_set_wallpaper" fuzzy="true">Angi som bakgrunnsbilde</string>
   <string name="wallpaper_set_successfully">Bakgrunnsbildet ble endret!</string>
   <string name="user_not_logged_in">Innloggingsøkten har utløpt, logg inn på nytt.</string>
   <string name="share_app_title">Del appen</string>

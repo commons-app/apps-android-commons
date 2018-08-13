@@ -263,6 +263,9 @@
   <string name="no_images_found">Không tìm thấy hình ảnh!</string>
   <string name="error_loading_images">Đã xuất hiện lỗi khi tải hình ảnh.</string>
   <string name="image_uploaded_by">Tải lên bởi: %1$s</string>
+  <string name="menu_set_wallpaper">Đặt làm hình nền</string>
+  <string name="taj_mahal_answer">Hình chứa di tích và cảnh vật thiên nhiên thường được chấp nhận tải lên ở hầu hết các quốc gia. Xin lưu ý rằng các công trình nghệ thuật được trưng bày tạm thời thường có bản quyền và không được chấp nhận tải lên.</string>
+  <string name="warning_for_image_reverts">CẢNH BÁO: Hơn %1$s hình mà bạn tải lên đã bị xoá. Nếu tiếp tục tải lên hình ảnh bị yêu cầu xoá, tài khoản của bạn có thể bị chặn.</string>
   <string name="share_app_title">Chia sẻ Ứng dụng</string>
   <string name="share_coordinates_not_present">Tọa độ không được chỉ định khi chọn hình ảnh</string>
   <string name="error_fetching_nearby_places">Lỗi khi lấy các nơi lân cận.</string>
