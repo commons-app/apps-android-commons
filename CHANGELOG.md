@@ -1,5 +1,8 @@
 # Wikimedia Commons for Android
 
+## v2.8.1
+- Fixed bug with category edits not being sent to server
+
 ## v2.8.0
 - Fixed failed uploads by modifying auth token
 - Fixed crashes during upload by storing file temporarily
