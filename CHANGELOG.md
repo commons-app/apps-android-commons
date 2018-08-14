@@ -1,6 +1,6 @@
 # Wikimedia Commons for Android
 
-@@ v2.8.1
+## v2.8.1
 - Fixed bug with category edits not being sent to server
 
 ## v2.8.0
