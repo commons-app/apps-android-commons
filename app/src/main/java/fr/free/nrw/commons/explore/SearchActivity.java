@@ -53,6 +53,7 @@ public class SearchActivity extends NavigationBaseActivity implements MediaDetai
     private FragmentManager supportFragmentManager;
     private MediaDetailPagerFragment mediaDetails;
     ViewPagerAdapter viewPagerAdapter;
+    private String query;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -104,6 +105,7 @@ public class SearchActivity extends NavigationBaseActivity implements MediaDetai
                 .debounce(500, TimeUnit.MILLISECONDS)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe( query -> {
+                    this.query = query.toString();
                             //update image list
                             if (!TextUtils.isEmpty(query)) {
                                 viewPager.setVisibility(View.VISIBLE);
@@ -145,7 +147,16 @@ public class SearchActivity extends NavigationBaseActivity implements MediaDetai
      */
     @Override
     public void notifyDatasetChanged() {
+    }
 
+    /**
+     * This method is called on success of API call for image Search.
+     * The viewpager will notified that number of items have changed.
+     */
+    public void viewPagerNotifyDataSetChanged() {
+        if (mediaDetails!=null){
+            mediaDetails.notifyDataSetChanged();
+        }
     }
 
     /**
@@ -244,5 +255,15 @@ public class SearchActivity extends NavigationBaseActivity implements MediaDetai
         // Clear focus of searchView now. searchView.clearFocus(); does not seem to work Check the below link for more details.
         // https://stackoverflow.com/questions/6117967/how-to-remove-focus-without-setting-focus-to-another-control/15481511
         viewPager.requestFocus();
+    }
+
+    /**
+     * This method is called when viewPager has reached its end.
+     * Fetches more images using search query and adds it to the recycler view and viewpager adapter
+     */
+    public void requestMoreImages() {
+        if (searchImageFragment!=null){
+            searchImageFragment.addImagesToList(query);
+        }
     }
 }

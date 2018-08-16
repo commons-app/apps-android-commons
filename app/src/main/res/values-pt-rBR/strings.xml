@@ -254,6 +254,11 @@
   <string name="nominate_deletion">Nomear para a exclusão</string>
   <string name="nominated_for_deletion">Esta imagem foi nomeada para eliminação.</string>
   <string name="view_browser">Exibir no navegador</string>
+  <string name="skip_login">Pular</string>
+  <string name="navigation_item_login">Entrar</string>
+  <string name="skip_login_title">Você realmente quer pular a entrada?</string>
+  <string name="skip_login_message">Você não poderá enviar fotos.</string>
+  <string name="login_alert_message">Entre para usar esta funcionalidade</string>
   <string name="nearby_location_has_not_changed">O local não mudou.</string>
   <string name="nearby_location_not_available">Localização não disponível.</string>
   <string name="location_permission_rationale_nearby">Permissão necessária para exibir uma lista de locais próximos</string>
@@ -301,7 +306,7 @@
   <string name="error_loading_subcategories">Ocorreu um erro ao carregar subcategorias.</string>
   <string name="successful_wikidata_edit">Imagem adicionada a %1$s na wiki Wikidata!</string>
   <string name="wikidata_edit_failure">Falha ao atualizar a entidade Wikidata correspondente!</string>
-  <string name="menu_set_wallpaper">Definir imagem de fundo</string>
+  <string name="menu_set_wallpaper">Definir como imagem de fundo</string>
   <string name="wallpaper_set_successfully">Imagem de fundo definida!</string>
   <string name="quiz">Questionário</string>
   <string name="quiz_question_string">Esta fotografia pode ser carregada?</string>

@@ -270,7 +270,8 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
     public String edit(String editToken, String processedPageContent, String filename, String summary) throws IOException {
         return api.action("edit")
                 .param("title", filename)
-                .param("token", editToken)
+                .param("token", getEditToken())
+                .param("centralauthtoken", getCentralAuthToken())
                 .param("text", processedPageContent)
                 .param("summary", summary)
                 .post()
@@ -283,7 +284,8 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
     public String appendEdit(String editToken, String processedPageContent, String filename, String summary) throws IOException {
         return api.action("edit")
                 .param("title", filename)
-                .param("token", editToken)
+                .param("token", getEditToken())
+                .param("centralauthtoken", getCentralAuthToken())
                 .param("appendtext", processedPageContent)
                 .param("summary", summary)
                 .post()
@@ -295,7 +297,8 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
     public String prependEdit(String editToken, String processedPageContent, String filename, String summary) throws IOException {
         return api.action("edit")
                 .param("title", filename)
-                .param("token", editToken)
+                .param("token", getEditToken())
+                .param("centralauthtoken", getCentralAuthToken())
                 .param("prependtext", processedPageContent)
                 .param("summary", summary)
                 .post()
@@ -736,17 +739,21 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
     @NonNull
     public List<Media> searchImages(String query, int offset) {
         List<CustomApiResult> imageNodes = null;
+        List<CustomApiResult> authorNodes = null;
+        CustomApiResult customApiResult;
         try {
-            imageNodes = api.action("query")
+            customApiResult= api.action("query")
                     .param("format", "xml")
-                    .param("list", "search")
-                    .param("srwhat", "text")
-                    .param("srnamespace", "6")
-                    .param("srlimit", "25")
-                    .param("sroffset",offset)
-                    .param("srsearch", query)
-                    .get()
-                    .getNodes("/api/query/search/p/@title");
+                    .param("generator", "search")
+                    .param("gsrwhat", "text")
+                    .param("gsrnamespace", "6")
+                    .param("gsrlimit", "25")
+                    .param("gsroffset",offset)
+                    .param("gsrsearch", query)
+                    .param("prop", "imageinfo")
+                    .get();
+            imageNodes= customApiResult.getNodes("/api/query/pages/page/@title");
+            authorNodes= customApiResult.getNodes("/api/query/pages/page/imageinfo/ii/@user");
         } catch (IOException e) {
             Timber.e("Failed to obtain searchImages", e);
         }
@@ -756,11 +763,13 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
         }
 
         List<Media> images = new ArrayList<>();
-        for (CustomApiResult imageNode : imageNodes) {
-            String imgName = imageNode.getDocument().getTextContent();
-            images.add(new Media(imgName));
-        }
 
+        for (int i=0; i< imageNodes.size();i++){
+            String imgName = imageNodes.get(i).getDocument().getTextContent();
+            Media media = new Media(imgName);
+            media.setCreator(authorNodes.get(i).getDocument().getTextContent());
+            images.add(media);
+        }
         return images;
     }
 

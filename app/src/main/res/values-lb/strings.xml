@@ -223,6 +223,8 @@
   <string name="nominate_deletion">Nominéiere fir ze Läschen</string>
   <string name="nominated_for_deletion">Dëst Bild gouf virgeschloe fir geläscht ze ginn.</string>
   <string name="view_browser">Am Browser weisen</string>
+  <string name="skip_login">Iwwersprangen</string>
+  <string name="navigation_item_login">Aloggen</string>
   <string name="nearby_location_has_not_changed">De Plaz huet net geännert.</string>
   <string name="nearby_location_not_available">Plaz ass net disponibel.</string>
   <string name="read_article">ARTIKEL LIESEN</string>
@@ -256,7 +258,7 @@
   <string name="search_commons">Op Commons sichen</string>
   <string name="title_activity_search">Sichen</string>
   <string name="wikidata_edit_failure">Déi entspriechend Wikidata-Entitéit konnt net aktualiséiert ginn!</string>
-  <string name="menu_set_wallpaper">Hannergrondbild festleeën</string>
+  <string name="menu_set_wallpaper">Als Hannergrondbild festleeën</string>
   <string name="wallpaper_set_successfully">Hannergrondbild festgeluecht</string>
   <string name="quiz">Quiz</string>
   <string name="question">Fro</string>

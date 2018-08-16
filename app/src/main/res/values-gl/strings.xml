@@ -4,6 +4,7 @@
 * Banjo
 * Chairego apc
 * Elisardojm
+* Maria zaos
 * Navhy
 * Toliño
 * Vivaelcelta
@@ -295,15 +296,19 @@
   <string name="error_loading_subcategories">Houbo un erro ó cargar subcategorías.</string>
   <string name="successful_wikidata_edit">A imaxe engadiuse con éxito a %1$s en Wikidata!</string>
   <string name="wikidata_edit_failure">Fallou a actualización da entidade do Wikidata correspondente!</string>
-  <string name="menu_set_wallpaper">Definir imaxe de fondo</string>
+  <string name="menu_set_wallpaper" fuzzy="true">Definir imaxe de fondo</string>
   <string name="wallpaper_set_successfully">A imaxe de fondo configurouse correctamenteǃ</string>
   <string name="quiz">Cuestionario</string>
   <string name="question">Pregunta</string>
   <string name="result">Resultado</string>
+  <string name="warning_for_image_reverts">Aviso: Máis do 1%  das imaxes cargadas por vostede foron borradas. Se segue a cargar imaxes que precisan borrado o máis probable é que a súa conta sexa anulada.</string>
+  <string name="congratulatory_message_quiz">Acadou un %1$s de respostas correctas. Parabéns!</string>
+  <string name="warning_for_no_answer">Escolla unha das dúas opcións para contestar a pregunta</string>
   <string name="user_not_logged_in">A sesión caducou, por favor inicia unha nova sesión.</string>
   <string name="continue_message">Continuar</string>
   <string name="correct">Resposta correcta</string>
   <string name="wrong">Resposta incorrecta</string>
+  <string name="quiz_screenshot_question">Pódese subir esta captura de pantalla?</string>
   <string name="share_app_title">Compartir a aplicación</string>
   <string name="share_coordinates_not_present">Non se indicaron as coordenadas ó seleccionar a imaxe</string>
   <string name="error_fetching_nearby_places">Erro ó procurar os lugares próximos.</string>

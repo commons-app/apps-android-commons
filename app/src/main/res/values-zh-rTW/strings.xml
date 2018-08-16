@@ -254,6 +254,11 @@
   <string name="nominated_for_deletion">此圖片已被提名刪除。</string>
   <string name="nominated_see_more">此提示為空，可能無效。請見錯誤報告： https://github.com/commons-app/apps-android-commons/issues/1333 。</string>
   <string name="view_browser">於瀏覽器檢視</string>
+  <string name="skip_login">略過</string>
+  <string name="navigation_item_login">登入</string>
+  <string name="skip_login_title">您確定要略過登入嗎？</string>
+  <string name="skip_login_message">您將無法上傳圖片。</string>
+  <string name="login_alert_message">請登入來使用此功能</string>
   <string name="nearby_location_has_not_changed">位置無法更改。</string>
   <string name="nearby_location_not_available">位置無效。</string>
   <string name="location_permission_rationale_nearby">需權限來顯示附近地點清單</string>
@@ -301,7 +306,7 @@
   <string name="error_loading_subcategories">當載入子分類時發生錯誤。</string>
   <string name="successful_wikidata_edit">圖片已成功添加到維基數據上的 %1$s！</string>
   <string name="wikidata_edit_failure">更新所對應的維基數據項目失敗！</string>
-  <string name="menu_set_wallpaper">設定桌布</string>
+  <string name="menu_set_wallpaper" fuzzy="true">設定桌布</string>
   <string name="wallpaper_set_successfully">桌布設定成功！</string>
   <string name="quiz">測驗</string>
   <string name="quiz_question_string">這張圖片可以上傳嗎？</string>

@@ -250,4 +250,24 @@ public class CategoryDetailsActivity extends NavigationBaseActivity
         }
         super.onBackPressed();
     }
+
+    /**
+     * This method is called on success of API call for Images inside a category.
+     * The viewpager will notified that number of items have changed.
+     */
+    public void viewPagerNotifyDataSetChanged() {
+        if (mediaDetails!=null){
+            mediaDetails.notifyDataSetChanged();
+        }
+    }
+
+    /**
+     * This method is called when viewPager has reached its end.
+     * Fetches more images using search query and adds it to the grid view and viewpager adapter
+     */
+    public void requestMoreImages() {
+        if (categoryImagesListFragment!=null){
+            categoryImagesListFragment.fetchMoreImagesViewPager();
+        }
+    }
 }

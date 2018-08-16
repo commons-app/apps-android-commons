@@ -9,6 +9,7 @@
 * Lijealso
 * Luckas
 * Malafaya
+* Mansil alfalb
 * Sarilho1
 * Vitorvicentevalente
 -->
@@ -254,6 +255,11 @@
   <string name="nominated_for_deletion">Esta imagem foi nomeada para eliminação.</string>
   <string name="nominated_see_more"/>
   <string name="view_browser">Ver no navegador</string>
+  <string name="skip_login">Saltar</string>
+  <string name="navigation_item_login">Entrar</string>
+  <string name="skip_login_title">Pretende realmente saltar o início de sessão?</string>
+  <string name="skip_login_message">Não poderá carregar fotografias.</string>
+  <string name="login_alert_message">Inicie uma sessão para usar esta funcionalidade</string>
   <string name="nearby_location_has_not_changed">A localização não foi alterada.</string>
   <string name="nearby_location_not_available">A localização não está disponível.</string>
   <string name="location_permission_rationale_nearby">É necessária a permissão para mostrar uma lista dos sítios aqui perto</string>
@@ -301,7 +307,7 @@
   <string name="error_loading_subcategories">Ocorreu um erro ao carregar subcategorias.</string>
   <string name="successful_wikidata_edit">Imagem adicionada a %1$s na wiki Wikidata!</string>
   <string name="wikidata_edit_failure">Falha ao atualizar a entidade Wikidata correspondente!</string>
-  <string name="menu_set_wallpaper">Definir imagem de fundo</string>
+  <string name="menu_set_wallpaper">Definir como imagem de fundo</string>
   <string name="wallpaper_set_successfully">Imagem de fundo definida!</string>
   <string name="quiz">Questionário</string>
   <string name="quiz_question_string">Esta fotografia pode ser carregada?</string>
