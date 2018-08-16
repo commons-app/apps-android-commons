@@ -2,20 +2,23 @@
 <LinearLayout
   xmlns:android="http://schemas.android.com/apk/res/android"
   xmlns:tools="http://schemas.android.com/tools"
+  android:id="@+id/ll_container_description_language"
   android:layout_width="match_parent"
   android:layout_height="wrap_content"
-  android:padding="10dp"
-  android:id="@+id/ll_container_description_language"
   android:orientation="vertical">
   <TextView
     android:id="@+id/tv_language"
+    style="@style/Base.TextAppearance.AppCompat.Widget.TextView.SpinnerItem"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="4dp"
+    android:paddingTop="10dp"
+    android:paddingBottom="10dp"
+    android:paddingLeft="4dp"
+    android:paddingRight="4dp"
     android:imeOptions="flagNoExtractUi"
     android:maxLines="1"
-    style="@style/Base.TextAppearance.AppCompat.Widget.TextView.SpinnerItem"
     android:singleLine="true"
+    android:textAlignment="center"
     tools:text="en"
     />
 
