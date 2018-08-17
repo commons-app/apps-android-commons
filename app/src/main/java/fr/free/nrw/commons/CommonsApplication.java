@@ -1,8 +1,12 @@
 package fr.free.nrw.commons;
 
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.database.sqlite.SQLiteDatabase;
+import android.os.Build;
+import android.support.annotation.RequiresApi;
 import android.support.multidex.MultiDexApplication;
 
 import com.facebook.drawee.backends.pipeline.Fresco;
@@ -60,6 +64,8 @@ public class CommonsApplication extends MultiDexApplication {
 
     public static final String LOGS_PRIVATE_EMAIL_SUBJECT = "Commons Android App (%s) Logs";
 
+    public static final String NOTIFICATION_CHANNEL_ID_ALL = "CommonsNotificationAll";
+
     private RefWatcher refWatcher;
 
 
@@ -92,10 +98,23 @@ public class CommonsApplication extends MultiDexApplication {
             Stetho.initializeWithDefaults(this);
         }
 
+
+        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.O) {
+            createNotificationChannel();
+        }
+
         // Fire progress callbacks for every 3% of uploaded content
         System.setProperty("in.yuvi.http.fluent.PROGRESS_TRIGGER_THRESHOLD", "3.0");
     }
 
+    @RequiresApi(26)
+    private void createNotificationChannel() {
+        NotificationChannel channel = new NotificationChannel(
+                NOTIFICATION_CHANNEL_ID_ALL,
+                getString(R.string.notifications_channel_name_all), NotificationManager.IMPORTANCE_NONE);
+        NotificationManager manager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+        manager.createNotificationChannel(channel);
+    }
 
     /**
      * Helps in setting up LeakCanary library
