@@ -10,6 +10,8 @@ import com.facebook.imagepipeline.core.ImagePipelineConfig;
 import com.facebook.stetho.Stetho;
 import com.squareup.leakcanary.LeakCanary;
 import com.squareup.leakcanary.RefWatcher;
+import com.tspoon.traceur.Traceur;
+import com.tspoon.traceur.TraceurConfig;
 
 import org.acra.ACRA;
 import org.acra.ReportingInteractionMode;
@@ -69,6 +71,8 @@ public class CommonsApplication extends MultiDexApplication {
     @Override
     public void onCreate() {
         super.onCreate();
+        Traceur.enableLogging();
+
         ApplicationlessInjection
                 .getInstance(this)
                 .getCommonsApplicationComponent()
