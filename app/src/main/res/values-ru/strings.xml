@@ -313,7 +313,7 @@
   <string name="error_loading_subcategories">При загрузке подкатегорий произошла ошибка.</string>
   <string name="successful_wikidata_edit">Изображение успешно добавлено на страницу викиданных!</string>
   <string name="wikidata_edit_failure">Не удалось обновить соответствующую страницу викиданных!</string>
-  <string name="menu_set_wallpaper" fuzzy="true">Сделать фоновой заставкой</string>
+  <string name="menu_set_wallpaper">Сделать фоновой заставкой</string>
   <string name="wallpaper_set_successfully">Фоновая заставка успешно установлена!</string>
   <string name="quiz">Опрос</string>
   <string name="quiz_question_string">Это изображение корректно для загрузки на сервер?</string>

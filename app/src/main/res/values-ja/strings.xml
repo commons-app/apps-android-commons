@@ -7,6 +7,7 @@
 * Omotecho
 * Otokoume
 * Shirayuki
+* Suyama
 * Takot
 * Whym
 * Yusuke1109
@@ -243,6 +244,8 @@
   <string name="nominate_deletion">削除の提案</string>
   <string name="nominated_for_deletion">この画像の削除が提案されています。</string>
   <string name="view_browser">ブラウザーで表示</string>
+  <string name="navigation_item_login">ログイン</string>
+  <string name="login_alert_message">この機能を使うにはログインしてください</string>
   <string name="nearby_location_has_not_changed">場所は変更されていません。</string>
   <string name="nearby_location_not_available">位置が無効です。</string>
   <string name="location_permission_rationale_nearby">近くの場所を表示するには権限が必要です</string>
@@ -281,7 +284,7 @@
   <string name="app_widget_heading">今日の一枚</string>
   <string name="successful_wikidata_edit">ウィキデータの%1$sに画像を追加しました !</string>
   <string name="wikidata_edit_failure">対応するウィキデータの更新に失敗しました！</string>
-  <string name="menu_set_wallpaper" fuzzy="true">壁紙の設定</string>
+  <string name="menu_set_wallpaper">壁紙として設定</string>
   <string name="wallpaper_set_successfully">壁紙の設定ができました!</string>
   <string name="share_app_title">アプリをシェアする</string>
   <string name="share_coordinates_not_present">画像の選択中に位置情報を特定できませんでした</string>
