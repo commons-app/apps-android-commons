@@ -58,12 +58,14 @@
   <string name="add_title_toast">Angiv venligt en titel for denne fil</string>
   <string name="share_description_hint">Beskrivelse</string>
   <string name="login_failed_network">Kan ikke logge på - netværksfejl</string>
+  <string name="login_failed_wrong_credentials">Kunne ikke logge ind – check brugernavnet og adgangskoden</string>
   <string name="login_failed_throttled">Alt for mange mislykkede forsøg. Prøv igen om et par minutter.</string>
   <string name="login_failed_blocked">Beklager, denne bruger er blevet blokeret på Commons</string>
   <string name="login_failed_2fa_needed">Du skal angive din tofaktorgodkendelseskode.</string>
   <string name="login_failed_generic">Det mislykkedes at logge på</string>
   <string name="share_upload_button">Upload</string>
   <string name="multiple_share_base_title">Navngiv dette sæt</string>
+  <string name="add_set_name_toast">Angiv venligt et navn for dette sæt</string>
   <string name="provider_modifications">Ændringer</string>
   <string name="menu_upload_single">Upload</string>
   <string name="categories_search_text_hint">Søgekategorier</string>
@@ -199,6 +201,8 @@
   <string name="background_image">Baggrundsbillede</string>
   <string name="mediaimage_failed">Mediebillede mislykkedes</string>
   <string name="no_image_found">Intet billede fundet</string>
+  <string name="no_subcategory_found">Ingen underkategorier fundet</string>
+  <string name="no_parentcategory_found">Ingen overordnede kategorier fundet</string>
   <string name="upload_image">Overfør billede</string>
   <string name="welcome_image_mount_zao">Monter Zao</string>
   <string name="welcome_image_llamas">Lamaer</string>
@@ -273,7 +277,9 @@
   <string name="appwidget_img">Dagens billede</string>
   <string name="app_widget_heading">Dagens billede</string>
   <string name="menu_search_button">Søg</string>
+  <string name="search_commons">Søgning på Commons</string>
   <string name="title_activity_search">Søg</string>
+  <string name="search_recent_header">Seneste søgninger:</string>
   <string name="question">Spørgsmål</string>
   <string name="result">Resultat</string>
   <string name="continue_message">Fortsæt</string>
@@ -281,6 +287,7 @@
   <string name="wrong">Forkert svar</string>
   <string name="share_app_title">Del appen</string>
   <string name="add_description">+ Tilføj en beskrivelse</string>
+  <string name="search_history_deleted">Søgehistorik slettet</string>
   <string name="Achievements">Præstationer</string>
   <string name="statistics_thanks">Tak modtaget</string>
   <string name="statistics_featured">Udvalgte billeder</string>

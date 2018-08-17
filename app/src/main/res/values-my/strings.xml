@@ -28,9 +28,17 @@
   <string name="authentication_failed">စစ်ဆေးခြင်း မအောင်မြင်ပါ၊ ထပ်မံ၍ လော့အင်ဝင်ပါ။</string>
   <string name="uploading_started">Upload စတင်ပါပြီ</string>
   <string name="upload_completed_notification_title">%1$s တင်ပြီးပြီ</string>
+  <string name="upload_progress_notification_title_start">ဖိုင်တင်မှု %1$s စတင်နေသည်</string>
   <string name="upload_progress_notification_title_in_progress">%1$s ဖိုင်တင်နေသည်</string>
+  <string name="upload_progress_notification_title_finishing">ဖိုင်တင်ခြင်း ပြီးဆုံးမှု %1$s</string>
+  <string name="upload_failed_notification_title">ဖိုင်တင်ခြင်း %1$s မအောင်မြင်ပါ</string>
+  <plurals name="uploads_pending_notification_indicator">
+    <item quantity="one">ဖိုင် %1$d ခု တင်နေသည်</item>
+    <item quantity="other">ဖိုင် %1$d ခု တင်နေသည်</item>
+  </plurals>
   <string name="title_activity_contributions">မကြာသေးခင်က မိမိတင်ထားသည်များ</string>
   <string name="contribution_state_failed">မအောင်မြင်ပါ</string>
+  <string name="contribution_state_in_progress">%1$d%% ပြီးဆုံး</string>
   <string name="contribution_state_starting">ဖိုင်တင်နေသည်</string>
   <string name="menu_from_gallery">ပြခန်းမှ</string>
   <string name="menu_from_camera">ဓာတ်ပုံ ရိုက်ရန်</string>
@@ -44,6 +52,7 @@
   <string name="login_failed_network">လော့အင် မဝင်နိုင်ပါ - ကွန်ရက် အမှား</string>
   <string name="login_failed_wrong_credentials">လော့အင် မဝင်နိုင်ပါ - အသုံးပြုသူအမည်နှင့် စကားဝှက်ကို စစ်ဆေးပါ</string>
   <string name="login_failed_throttled">မအောင်မြင်သော ကြိုးပမ်းများစွာ ရှိပါပြီ။ နောက်မိနစ်အနည်းငယ်ကြာလျင် ထပ်မံစမ်းကြည့်ပါ။</string>
+  <string name="login_failed_blocked">စိတ်မကောင်းပါ၊ ဤအသုံးပြုသူအား ကွန်မွန်းစ်မှ ပိတ်ပင်ထားသည်</string>
   <string name="login_failed_generic">လော့ဂ်အင် မအောင်မြင်ပါ</string>
   <string name="share_upload_button">တင်ရန်</string>
   <string name="provider_modifications">ပြုပြင်မှုများ</string>
@@ -53,6 +62,10 @@
   <string name="display_list_button">စာရင်း</string>
   <string name="enable_gps">ဂျီပီအက်စ် ဖွင့်ရန်</string>
   <string name="contributions_subtitle_zero">ဖိုင်မတင်ရသေးပါ</string>
+  <plurals name="multiple_uploads_title">
+    <item quantity="one">%1$d ခု တင်ထားသည်</item>
+    <item quantity="other">%1$d ခု တင်ထားသည်</item>
+  </plurals>
   <string name="categories_activity_title">ကဏ္ဍများ</string>
   <string name="title_activity_settings">အပြင်အဆင်များ</string>
   <string name="title_activity_signup">မှတ်ပုံတင်ရန်</string>
@@ -94,12 +107,18 @@
   <string name="license_name_cc_by_4_0">CC BY 4.0</string>
   <string name="license_name_cc_zero">CC Zero</string>
   <string name="tutorial_1_subtext">သင်၏ ရုပ်ပုံများသည် တစ်ကမ္ဘာလုံးရှိ လူပုဂ္ဂိုလ်များကို ပညာတတ်စေရန် ကူညီပါသည်</string>
+  <string name="tutorial_2_subtext">သဘာဝ အရာဝတ္ထုများ (ပန်းများ၊ တိရိစ္ဆာန်များ၊ တောင်များ) \n• အသုံးဝင်သော အရာဝတ္ထုများ (စက်ဘီးများ၊ ရထားဘူတာများ)\n• နာမည်ကြီးပုဂ္ဂိုလ် (သင်၏မြို့တော်ဝန်၊ သင်ဆုံတွေ့ခဲ့သော အိုလံပစ်အားကစားသမား)</string>
+  <string name="tutorial_2_subtext_1">သဘာဝ အရာဝတ္ထုများ (ပန်းများ၊ တိရိစ္ဆာန်များ၊ တောင်များ)</string>
+  <string name="tutorial_2_subtext_2">အသုံးဝင်သော အရာဝတ္ထုများ (စက်ဘီးများ၊ ရထားဘူတာများ)</string>
+  <string name="tutorial_2_subtext_3">နာမည်ကြီးပုဂ္ဂိုလ် (သင်၏မြို့တော်ဝန်၊ သင်ဆုံတွေ့ခဲ့သော အိုလံပစ်အားကစားသမား)</string>
   <string name="tutorial_3_text">ကျေးဇူးပြု၍ မတင်ပါနှင့် :</string>
   <string name="tutorial_3_subtext">- Selfies ပုံများ သို့မဟုတ် မိတ်ဆွေ၏ ပုံများ\n- အင်တာနက်မှ ဒေါင်းလုဒ်ဆွဲထားသော ပုံများ\n- ပိုင်ရှင်ရှိ app များ၏ Screenshot များ</string>
   <string name="tutorial_3_subtext_1">Selfies ပုံများ သို့မဟုတ် မိတ်ဆွေ၏ ပုံများ</string>
   <string name="tutorial_3_subtext_2">အင်တာနက်မှ ဒေါင်းလုဒ်ဆွဲထားသော ပုံများ</string>
   <string name="tutorial_3_subtext_3">ပိုင်ရှင်ရှိ app များ၏ Screenshot များ</string>
   <string name="tutorial_4_text">တင်ရန် နမူနာ:</string>
+  <string name="welcome_wikipedia_subtext">ဝီကီပီးဒီးယားပေါ်ရှိ ရုပ်ပုံများသည် ဝီကီမီဒီယာ ကွန်မွန်းစ်မှဖြစ်သည်။</string>
+  <string name="welcome_copyright_subtext">ပိုစတာရုပ်ပုံ၊ စာအုပ်မျက်နှာဖုံးကဲ့သို့သော အင်တာနက်ပေါ်ရှိ သင်တွေ့ရှိမိသမျှ မူပိုင်ပစ္စည်းများကို ရှောင်ကြဉ်ပါ။</string>
   <string name="welcome_final_text">သင် သဘောပေါက်သည်ဟု ထင်ပါသလား</string>
   <string name="welcome_final_button_text">ဟုတ်ကဲ့</string>
   <string name="detail_panel_cats_label">ကဏ္ဍများ</string>
@@ -121,12 +140,14 @@
   <string name="media_detail_license">လိုင်စင်</string>
   <string name="media_detail_coordinates">ကိုဩဒိနိတ်</string>
   <string name="maximum_limit">အများဆုံး ကန့်သတ်ချက်</string>
+  <string name="maximum_limit_alert">၅၀၀ ထက်ပို၍ မပြသနိုင်ပါ</string>
   <string name="logout_verification">အမှန်တကယ် ထွက်သွားလိုပါသလား</string>
   <string name="commons_logo">ကွန်မွန်းစ် လိုဂို</string>
   <string name="commons_website">ကွန်မွန်းစ် ဝဘ်ဆိုဒ်</string>
   <string name="commons_facebook">ကွန်မွန်းစ် ဖေ့ဘုတ်စာမျက်နှာ</string>
   <string name="background_image">နောက်ခံ ဓါတ်ပုံ</string>
   <string name="no_image_found">ပုံ မတွေ့ပါ</string>
+  <string name="no_subcategory_found">ကဏ္ဍခွဲများ မတွေ့ရှိပါ</string>
   <string name="welcome_image_welcome_wikipedia">ဝီကီပီးဒီးယားမှ ကြိုဆိုပါသည်။</string>
   <string name="welcome_image_welcome_copyright">မူပိုင်ခွင့်မှ ကြိုဆိုပါသည်</string>
   <string name="cancel">ပယ်ဖျက်ရန်</string>
@@ -152,9 +173,15 @@
   <string name="nominate_deletion">ဖျက်ပစ်ရန် အဆိုပြုပါ</string>
   <string name="nominated_for_deletion">ဤရုပ်ပုံအား ဖျက်ပစ်ရန် အဆိုပြုခံထားရသည်။</string>
   <string name="view_browser">ဘရောက်ဆာတွင် ကြည့်ရန်</string>
+  <string name="skip_login">ကျော်ရန်</string>
+  <string name="navigation_item_login">အကောင့်ဝင်ရန်</string>
+  <string name="skip_login_title">အကောင့်ထဲဝင်ခြင်းကို အမှန်တကယ် ကျော်သွားလိုပါသလား</string>
+  <string name="skip_login_message">သင် ရုပ်ပုံများ တင်နိုင်လိမ့်မည်မဟုတ်ပါ။</string>
   <string name="nearby_location_has_not_changed">တည်နေရာ မပြောင်းလဲပါ</string>
   <string name="nearby_location_not_available">တည်နေရာ မရရှိနိုင်ပါ</string>
   <string name="location_permission_rationale_nearby">အနီးအနားနေရာများစာရင်းကို ပြသပေးရန် ခွင့်ပြုချက် လိုအပ်ပါသည်</string>
+  <string name="read_article">ဆောင်းပါး ဖတ်ရန်</string>
+  <string name="notifications_talk_page_message">%1$sက သင်၏ဆွေးနွေးချက် စာမျက်နှာတွင် မက်ဆေ့တစ်ခု ချန်ခဲ့သည်။</string>
   <string name="notifications_thank_you_edit">တည်းဖြတ်မှုတစ်ခု လုပ်ဆောင်သည့်အတွက် ကျေးဇူးတင်ပါသည်</string>
   <string name="nearby_wikidata">ဝီကီးဒေတာ</string>
   <string name="nearby_wikipedia">ဝီကီပီးဒီးယား</string>
@@ -166,7 +193,11 @@
   <string name="about_translate_title">ဘာသာစကားများ</string>
   <string name="about_translate_cancel">မလုပ်တော့ပါ</string>
   <string name="retry">ပြန်လုပ်</string>
+  <string name="showcase_view_got_it_button">သဘောပေါက်ပြီ</string>
   <string name="no_images_found">ရုပ်ပုံများ မတွေ့ပါ</string>
+  <string name="block_notification">သင့်အား ကွန်မွန်းစ်တွင် တည်းဖြတ်ခြင်းကို ပိတ်ပင်လိုက်သည်</string>
+  <string name="appwidget_img">ယနေ့အတွက် အထူးဓာတ်ပုံ</string>
+  <string name="app_widget_heading">ယနေ့အတွက် အထူးဓာတ်ပုံ</string>
   <string name="menu_search_button">ရှာဖွေရန်</string>
   <string name="search_commons">ကွန်မွန်းစ်တွင် ရှာဖွေရန်</string>
   <string name="title_activity_search">ရှာဖွေရန်</string>
@@ -176,13 +207,17 @@
   <string name="quiz">ထွက်</string>
   <string name="question">မေးခွန်း</string>
   <string name="result">ရလဒ်</string>
+  <string name="warning_for_image_reverts">သတိပေးချက်: သင် တင်လိုက်သော %1$s ထက်ပိုသည့်ရုပ်ပုံများသည် အဖျက်ခံလိုက်ရပါသည်။ ဖျက်ပစ်ရန် လိုအပ်သော ရုပ်ပုံများကို ဆက်လက်တင်ပါက သင်၏အကောင့်သည် ပိတ်ပင်တားဆီးခြင်း ခံရကိန်းရှိပါသည်။</string>
   <string name="continue_message">ဆက်လက်</string>
   <string name="correct">အဖြေမှန်</string>
   <string name="wrong">အဖြေမှား</string>
+  <string name="add_description">+ ဖော်ပြချက် ထည့်ရန်</string>
   <string name="delete_recent_searches_dialog">သင့်ရှာဖွေမှု ရာဇဝင်ကို ရှင်းလင်းမည်မှာ သေချာပါသလား?</string>
   <string name="search_history_deleted">ရှာဖွေမှု ရာဇဝင်အား ဖျက်လိုက်ပါပြီ</string>
   <string name="Achievements">အောင်မြင်မှုပန်းတိုင်များ</string>
   <string name="statistics">စာရင်းအင်း</string>
   <string name="statistics_thanks">ကျေးဇူးစကား လက်ခံရရှိ</string>
+  <string name="statistics_featured">အထူးဓာတ်ပုံများ</string>
   <string name="level">အဆင့်</string>
+  <string name="achievements_revert_limit_message">အနည်းဆုံး လိုအပ်ချက်:</string>
 </resources>

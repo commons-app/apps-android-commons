@@ -225,6 +225,7 @@
   <string name="skip_login">Pomiń</string>
   <string name="navigation_item_login">Zaloguj się</string>
   <string name="skip_login_title">Czy na pewno chcesz pominąć logowanie?</string>
+  <string name="login_alert_message">Zaloguj się, aby skorzystać z tej funkcji</string>
   <string name="notifications_welcome">Witamy w Wikimedia Commons, %1$s! Cieszymy się, że tu jesteś.</string>
   <string name="notifications_thank_you_edit">Dziękujemy za dokonanie edycji</string>
   <string name="notifications_mention">%1$s wspomniał o Tobie w %2$s.</string>
