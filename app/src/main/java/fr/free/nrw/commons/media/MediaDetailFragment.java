@@ -9,6 +9,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.text.Editable;
+import android.text.Html;
 import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.util.TypedValue;
@@ -162,6 +163,7 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
         final View view = inflater.inflate(R.layout.fragment_media_detail, container, false);
 
         ButterKnife.bind(this,view);
+        seeMore.setText(Html.fromHtml(getString(R.string.nominated_see_more)));
 
         if (isCategoryImage){
             authorLayout.setVisibility(VISIBLE);

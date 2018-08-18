@@ -305,7 +305,6 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="center"
-                        android:text="@string/nominated_see_more"
                         android:paddingTop="@dimen/standard_gap"
                         android:textColor="@color/primaryTextColor"
                         android:textSize="@dimen/normal_text"
