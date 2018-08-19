@@ -128,6 +128,13 @@ public class Utils {
                 .endsWith("." + extension.toLowerCase(Locale.ENGLISH))) {
             title += "." + extension;
         }
+
+        // If extension is still null, make it jpg. But be careful this if is not tested well
+        if (extension == null) {
+           extension = "jpg";
+           title += "." + extension;
+        }
+
         return title;
     }
 
