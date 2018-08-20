@@ -1,5 +1,8 @@
 # Wikimedia Commons for Android
 
+## v2.8.2
+- Fixed bug with uploads sent via Share being given .jpeg extensions and overwriting files of the same name
+
 ## v2.8.1
 - Fixed bug with category edits not being sent to server
 
