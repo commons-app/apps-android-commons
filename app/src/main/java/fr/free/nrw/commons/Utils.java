@@ -130,8 +130,8 @@ public class Utils {
         }
 
         // If extension is still null, make it jpg. But be careful this if is not tested well
-        // Check if title has an extension to cover Sample.jpg case too.
-        if (extension == null && title.lastIndexOf(".")>0) {
+        // If title has an extension in it, if won't be true
+        if (extension == null && title.lastIndexOf(".")<=0) {
            extension = "jpg";
            title += "." + extension;
         }
