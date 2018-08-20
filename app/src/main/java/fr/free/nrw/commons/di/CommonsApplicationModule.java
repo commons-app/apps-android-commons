@@ -11,7 +11,6 @@ import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;
-
 import fr.free.nrw.commons.BuildConfig;
 import fr.free.nrw.commons.auth.AccountUtil;
 import fr.free.nrw.commons.auth.SessionManager;
@@ -24,7 +23,6 @@ import fr.free.nrw.commons.wikidata.WikidataEditListener;
 import fr.free.nrw.commons.wikidata.WikidataEditListenerImpl;
 
 import static android.content.Context.MODE_PRIVATE;
-import static fr.free.nrw.commons.explore.recentsearches.RecentSearchesContentProvider.RECENT_SEARCH_AUTHORITY;
 
 @Module
 @SuppressWarnings({"WeakerAccess", "unused"})
@@ -60,7 +58,7 @@ public class CommonsApplicationModule {
     @Provides
     @Named("recentsearch")
     public ContentProviderClient provideRecentSearchContentProviderClient(Context context) {
-        return context.getContentResolver().acquireContentProviderClient(RECENT_SEARCH_AUTHORITY);
+        return context.getContentResolver().acquireContentProviderClient(BuildConfig.RECENT_SEARCH_AUTHORITY);
     }
 
     @Provides
