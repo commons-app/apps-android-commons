@@ -354,4 +354,5 @@
   <string name="images_uploaded_explanation">Le nombre d’images que vous avez téléchargé de Communs, via un logiciel de téléchargement quelconque</string>
   <string name="images_reverted_explanation">Le pourcentage d’images que vous avez téléchargé sur Communs et qui n’ont pas été supprimées</string>
   <string name="images_used_explanation">Le nombre d’images que vous avez téléchargé sur Communs qui sont utilisées dans des articles de Wikimédia</string>
+  <string name="notifications_channel_name_all">Notification de Commons</string>
 </resources>

@@ -336,4 +336,5 @@
   <string name="images_uploaded_explanation">업로드 소프트웨어를 통해 공용에 업로드한 그림 수</string>
   <string name="images_reverted_explanation">삭제되지 않은, 공용에 업로드한 그림의 백분율</string>
   <string name="images_used_explanation">위키미디어 문서에 사용된, 공용에 업로드한 그림 수</string>
+  <string name="notifications_channel_name_all">공용 알림</string>
 </resources>
