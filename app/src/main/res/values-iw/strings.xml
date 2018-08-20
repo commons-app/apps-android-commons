@@ -23,7 +23,7 @@
   <string name="menu_settings">הגדרות</string>
   <string name="intent_share_upload_label">להעלות לוויקישיתוף</string>
   <string name="username">שם משתמש</string>
-  <string name="password">ססמה</string>
+  <string name="password">סיסמה</string>
   <string name="login_credential">כניסה לחשבון Commons Beta שלך</string>
   <string name="login">כניסה</string>
   <string name="forgot_password">שכחת את הסיסמה?</string>
@@ -311,6 +311,9 @@
   <string name="question">שאלה</string>
   <string name="result">תוצאה</string>
   <string name="quiz_back_button">העלאה של תמונות שדורשות מחיקה תגרום להחרמתך. האם באמת לסיים את הבוחן?</string>
+  <string name="quiz_alert_message">יותר מ־%1$s מהתמונות שהעלית נמחקו. אם תמשיך להעלות תמונות שצריך למחוק, חשבונך כנראה ייחסם.\n\nאולי תרצה לראות שוב את המדריך ואז לעשות בוחן כדי לעזור לך ללמוד אילו סוגים של תמונות צריך או לא צריך להעלות?</string>
+  <string name="selfie_answer">בתמנות עצמיות (סלפי) אין ערך אנציקלופדי. נא לא להעלות תמונות של עצמך אלא אם כן יש עליך ערך בוויקיפדיה.</string>
+  <string name="taj_mahal_answer">מותר להעלות תמונות של אנדרטאות ונופים ברוב המדינות. נא לשים לב לכך שיצירות אומנות שמוצבות באופן זמני בחוץ מוגבלות לעיתים קרובות בזכויות יוצרים, ואסור להעלות אותן.</string>
   <string name="user_not_logged_in">זמן הכניסה לחשבון פקע, נא להיכנס שוב.</string>
   <string name="share_app_title">שיתוף היישום</string>
   <string name="share_coordinates_not_present">לא צוינו קואורדינטות בעת בחירת התמונה</string>

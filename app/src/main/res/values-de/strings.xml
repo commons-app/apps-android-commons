@@ -343,4 +343,5 @@
   <string name="images_uploaded_explanation">Die Anzahl der Bilder, die du über eine Hochladesoftware auf Commons hochgeladen hast.</string>
   <string name="images_reverted_explanation">Der Prozentsatz an Bildern, die du auf Commons hochgeladen hast und die nicht gelöscht wurden.</string>
   <string name="images_used_explanation">Die Anzahl der Bilder, die du auf Commons hochgeladen hast und in Wikimedia-Artikeln verwendet werden.</string>
+  <string name="notifications_channel_name_all">Commons-Benachrichtigung</string>
 </resources>

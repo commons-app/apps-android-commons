@@ -336,4 +336,5 @@
   <string name="images_uploaded_explanation">Бројот на слики што сте ги подигнале на Ризницата преку секоја алатка за подигање</string>
   <string name="images_reverted_explanation">Постоток од подигнатите слики на Ризницата кои не се избришани</string>
   <string name="images_used_explanation">Бројот на слики што сте ги подигнале на Ризницата кои се користат во статии</string>
+  <string name="notifications_channel_name_all">Известување од Ризницата</string>
 </resources>

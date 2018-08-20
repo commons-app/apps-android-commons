@@ -130,6 +130,7 @@
   <string name="title_activity_nearby">အနီးအနား နေရာများ</string>
   <string name="no_nearby">အနီးအနား နေရာများ မတွေ့ပါ</string>
   <string name="warning">သတိပေးချက်</string>
+  <string name="file_exists">ဤဖိုင်သည် ကွန်မွန်းစ်ပေါ်တွင် ရှိနှင့်ပြီးဖြစ်သည်။ ဆက်လုပ်ရန် သေချာပါသလား။</string>
   <string name="yes">မှန်</string>
   <string name="no">မလုပ်ပါ</string>
   <string name="media_detail_title">ခေါင်းစဉ်</string>
@@ -181,8 +182,10 @@
   <string name="nearby_location_not_available">တည်နေရာ မရရှိနိုင်ပါ</string>
   <string name="location_permission_rationale_nearby">အနီးအနားနေရာများစာရင်းကို ပြသပေးရန် ခွင့်ပြုချက် လိုအပ်ပါသည်</string>
   <string name="read_article">ဆောင်းပါး ဖတ်ရန်</string>
+  <string name="notifications_welcome">ဝီကီမီဒီယာ ကွန်မွန်းစ်မှ ကြိုဆိုပါသည်၊ %1$s သင် ဤနေရာသို့ရောက်လာသည်ကို ကျွန်ုပ်တို့ ဝမ်းသာပါသည်။</string>
   <string name="notifications_talk_page_message">%1$sက သင်၏ဆွေးနွေးချက် စာမျက်နှာတွင် မက်ဆေ့တစ်ခု ချန်ခဲ့သည်။</string>
   <string name="notifications_thank_you_edit">တည်းဖြတ်မှုတစ်ခု လုပ်ဆောင်သည့်အတွက် ကျေးဇူးတင်ပါသည်</string>
+  <string name="notifications_mention">%1$s က %2$s ပေါ်တွင် သင့်ကို ရည်ညွှန်းပြောဆိုခဲ့သည်။</string>
   <string name="nearby_wikidata">ဝီကီးဒေတာ</string>
   <string name="nearby_wikipedia">ဝီကီပီးဒီးယား</string>
   <string name="nearby_commons">ကွန်မွန်းစ်</string>
@@ -205,9 +208,13 @@
   <string name="error_loading_categories">ကဏ္ဍများကို ဝန်ဆွဲတင်နေစဉ် အမှားဖြစ်ပွားခဲ့ပါသည်။</string>
   <string name="error_loading_subcategories">ကဏ္ဍခွဲများကို ဝန်ဆွဲတင်နေစဉ် အမှားဖြစ်ပွားခဲ့ပါသည်။</string>
   <string name="quiz">ထွက်</string>
+  <string name="quiz_question_string">ဤရုပ်ပုံကို တင်ရန် အဆင်ပြေပါ့မလား?</string>
   <string name="question">မေးခွန်း</string>
   <string name="result">ရလဒ်</string>
+  <string name="construction_event_answer">နည်းပညာ သို့မဟုတ် ယဉ်ကျေးမှုကိုပြသသော ရုပ်ပုံများသည် ကွန်မွန်းစ်ပေါ်တွင် အလွန်ကြိုဆိုပါသည်။</string>
   <string name="warning_for_image_reverts">သတိပေးချက်: သင် တင်လိုက်သော %1$s ထက်ပိုသည့်ရုပ်ပုံများသည် အဖျက်ခံလိုက်ရပါသည်။ ဖျက်ပစ်ရန် လိုအပ်သော ရုပ်ပုံများကို ဆက်လက်တင်ပါက သင်၏အကောင့်သည် ပိတ်ပင်တားဆီးခြင်း ခံရကိန်းရှိပါသည်။</string>
+  <string name="congratulatory_message_quiz">အဖြေများ၏ %$s ကို မှန်ကန်စွာဖြေခဲ့သည်။ ဂုဏ်ယူပါ၏။</string>
+  <string name="warning_for_no_answer">မေးခွန်းကိုဖြေဆိုရန် ရွေးစရာနှစ်ခုထဲမှ တစ်ခုကို ရွေးချယ်ပါ</string>
   <string name="continue_message">ဆက်လက်</string>
   <string name="correct">အဖြေမှန်</string>
   <string name="wrong">အဖြေမှား</string>
@@ -219,5 +226,7 @@
   <string name="statistics_thanks">ကျေးဇူးစကား လက်ခံရရှိ</string>
   <string name="statistics_featured">အထူးဓာတ်ပုံများ</string>
   <string name="level">အဆင့်</string>
+  <string name="achievements_share_message">သင်၏အောင်မြင်မှုများကို မိတ်ဆွေများနှင့် မျှဝေလိုက်ပါ</string>
   <string name="achievements_revert_limit_message">အနည်းဆုံး လိုအပ်ချက်:</string>
+  <string name="notifications_channel_name_all">ကွန်မွန်းစ် အသိပေးချက်</string>
 </resources>

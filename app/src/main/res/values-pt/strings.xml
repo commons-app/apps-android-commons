@@ -349,4 +349,5 @@
   <string name="images_uploaded_explanation">O número de imagens que carregou na wiki Commons, através de qualquer programa de carregamento</string>
   <string name="images_reverted_explanation">A percentagem das imagens que carregou na wiki Commons que não foram eliminadas</string>
   <string name="images_used_explanation">O número de imagens que carregou na wiki Commons que foram usadas em artigos na Wikimedia</string>
+  <string name="notifications_channel_name_all">Notificação da wiki Commons</string>
 </resources>
