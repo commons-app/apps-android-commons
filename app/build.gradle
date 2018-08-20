@@ -165,6 +165,7 @@ android {
             buildConfigField "String", "CONTRIBUTION_AUTHORITY", "\"fr.free.nrw.commons.contributions.contentprovider\""
             buildConfigField "String", "MODIFICATION_AUTHORITY", "\"fr.free.nrw.commons.modifications.contentprovider\""
             buildConfigField "String", "CATEGORY_AUTHORITY", "\"fr.free.nrw.commons.categories.contentprovider\""
+            buildConfigField "String", "RECENT_SEARCH_AUTHORITY", "\"fr.free.nrw.commons.explore.recentsearches.contentprovider\""
 
             dimension 'tier'
         }
@@ -191,6 +192,7 @@ android {
             buildConfigField "String", "CONTRIBUTION_AUTHORITY", "\"fr.free.nrw.commons.beta.contributions.contentprovider\""
             buildConfigField "String", "MODIFICATION_AUTHORITY", "\"fr.free.nrw.commons.beta.modifications.contentprovider\""
             buildConfigField "String", "CATEGORY_AUTHORITY", "\"fr.free.nrw.commons.beta.categories.contentprovider\""
+            buildConfigField "String", "RECENT_SEARCH_AUTHORITY", "\"fr.free.nrw.commons.beta.explore.recentsearches.contentprovider\""
 
             dimension 'tier'
         }
