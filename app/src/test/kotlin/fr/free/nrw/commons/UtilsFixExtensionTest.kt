@@ -66,12 +66,10 @@ class UtilsFixExtensionTest {
         assertEquals("X.jpeg.SAMPLE.jpg", fixExtension("X.jpeg.SAMPLE", "jpg"))
     }
 
-
     @Test
     fun noExtensionShouldResultInJpg() {
         assertEquals("Sample.jpg", fixExtension("Sample", null))
     }
-
 
     @Test
     fun extensionAlreadyInTitleShouldRemain() {
