@@ -45,7 +45,12 @@ public class NearbyPlaces {
 
             // increase the radius gradually to find a satisfactory number of nearby places
             while (radius <= MAX_RADIUS) {
-                places = getFromWikidataQuery(curLatLng, lang, radius);
+                try {
+                    places = getFromWikidataQuery(curLatLng, lang, radius);
+                }catch (Exception e){
+                    Timber.d("exception in fetching nearby places", e.getLocalizedMessage());
+                    return null;
+                }
                 Timber.d("%d results at radius: %f", places.size(), radius);
                 if (places.size() >= MIN_RESULTS) {
                     break;
