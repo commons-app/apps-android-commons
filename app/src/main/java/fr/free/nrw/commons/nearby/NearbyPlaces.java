@@ -47,7 +47,7 @@ public class NearbyPlaces {
             while (radius <= MAX_RADIUS) {
                 try {
                     places = getFromWikidataQuery(curLatLng, lang, radius);
-                }catch (Exception e){
+                } catch (Exception e) {
                     Timber.d("exception in fetching nearby places", e.getLocalizedMessage());
                     return null;
                 }
