@@ -344,4 +344,5 @@
   <string name="images_uploaded_explanation">Antalet bilder du har laddat upp till Commons med något uppladdningsprogram</string>
   <string name="images_reverted_explanation">Procentandelen av bilder du har laddat upp till Commons som inte har raderats</string>
   <string name="images_used_explanation">Antalet bilder du har laddat upp till Commons som användes i Wikimedia-artiklar</string>
+  <string name="notifications_channel_name_all">Commons-aviseringar</string>
 </resources>
