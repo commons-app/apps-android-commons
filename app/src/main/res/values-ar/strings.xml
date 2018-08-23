@@ -346,4 +346,5 @@
   <string name="images_uploaded_explanation">عدد الصور التي قمت برفعها إلى كومنز، عبر أي برنامج رفع</string>
   <string name="images_reverted_explanation">النسبة المئوية للصور التي قمت برفعها إلى كومنز لم يتم حذفها</string>
   <string name="images_used_explanation">عدد الصور التي قمت برفعها إلى كومنز والتي تم استخدامها في مقالات ويكيميديا</string>
+  <string name="notifications_channel_name_all">إشعار كومنز</string>
 </resources>

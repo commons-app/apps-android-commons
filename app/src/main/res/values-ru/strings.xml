@@ -355,4 +355,5 @@
   <string name="images_uploaded_explanation">Число изображений, загруженных на Викисклад любыми приложениями</string>
   <string name="images_reverted_explanation">Число изображений, загруженных на Викисклад и не удалённых</string>
   <string name="images_used_explanation">Число изображений, загруженных на Викисклад, которые используются в статьях Викимедиа</string>
+  <string name="notifications_channel_name_all">Уведомления Викисклада</string>
 </resources>
