@@ -10,6 +10,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.FragmentActivity;
 
+import fr.free.nrw.commons.R;
 import timber.log.Timber;
 
 public class DialogUtil {
@@ -102,11 +103,11 @@ public class DialogUtil {
         AlertDialog alertDialog = new Builder(context)
                 .setTitle(title)
                 .setMessage(message)
-                .setPositiveButton("Okay", (dialog, which) -> {
+                .setPositiveButton(context.getString(R.string.ok), (dialog, which) -> {
                     dialog.dismiss();
                     callback.onPositiveButtonClicked();
                 })
-                .setNegativeButton("Cancel", (dialog, which) -> {
+                .setNegativeButton(context.getString(R.string.cancel), (dialog, which) -> {
                     dialog.dismiss();
                     callback.onNegativeButtonClicked();
                 })
