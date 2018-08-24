@@ -55,7 +55,7 @@ public class NearbyController {
         }
         List<Place> places = nearbyPlaces.getFromWikidataQuery(curLatLng, Locale.getDefault().getLanguage());
 
-        if (places.size() > 0) {
+        if (null != places && places.size() > 0) {
             LatLng[] boundaryCoordinates = {places.get(0).location,   // south
                     places.get(0).location, // north
                     places.get(0).location, // west
