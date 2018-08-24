@@ -14,7 +14,6 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.ParcelFileDescriptor;
-import android.provider.Settings;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentManager;
@@ -27,13 +26,9 @@ import android.widget.Toast;
 
 import com.karumi.dexter.Dexter;
 import com.karumi.dexter.DexterBuilder;
-import com.karumi.dexter.PermissionToken;
 import com.karumi.dexter.listener.PermissionDeniedResponse;
 import com.karumi.dexter.listener.PermissionGrantedResponse;
-import com.karumi.dexter.listener.PermissionRequest;
 import com.karumi.dexter.listener.single.BasePermissionListener;
-import com.karumi.dexter.listener.single.PermissionListener;
-import fr.free.nrw.commons.utils.Constants;
 import fr.free.nrw.commons.utils.Constants.REQUEST_CODES;
 import fr.free.nrw.commons.utils.DialogUtil;
 import fr.free.nrw.commons.utils.DialogUtil.Callback;
@@ -98,6 +93,8 @@ public class MultipleShareActivity extends AuthenticatedActivity
     private final String TAG="#MultipleShareActivity#";
     private AlertDialog storagePermissionInfoDialog;
     private DexterBuilder dexterStoragePermissionBuilder;
+
+    PermissionDeniedResponse permissionDeniedResponse;
 
     @Override
     public Media getMediaAtPosition(int i) {
@@ -222,6 +219,7 @@ public class MultipleShareActivity extends AuthenticatedActivity
         setContentView(R.layout.activity_multiple_uploads);
         ButterKnife.bind(this);
         initDrawer();
+        initPermissionsRationaleDialog();
 
         if (savedInstanceState != null) {
             photosList = savedInstanceState.getParcelableArrayList("uploadsList");
@@ -236,6 +234,43 @@ public class MultipleShareActivity extends AuthenticatedActivity
              {
                 locationPermitted = true;
             }
+        }
+    }
+
+    private void initPermissionsRationaleDialog() {
+        if (storagePermissionInfoDialog == null) {
+            storagePermissionInfoDialog = DialogUtil
+                    .getAlertDialogWithPositiveAndNegativeCallbacks(
+                            MultipleShareActivity.this,
+                            getString(R.string.storage_permission), getString(
+                                    R.string.write_storage_permission_rationale_for_image_share),
+                            R.drawable.ic_launcher, new Callback() {
+                                @Override
+                                public void onPositiveButtonClicked() {
+                                    //If the user is willing to give us the permission
+                                    //But had somehow previously choose never ask again, we take him to app settings to manually enable permission
+                                    if(null== permissionDeniedResponse){
+                                        //Dexter returned null, lets see if this ever happens
+                                        return;
+                                    }
+                                    else if (permissionDeniedResponse.isPermanentlyDenied()) {
+                                        PermissionUtils
+                                                .askUserToManuallyEnablePermissionFromSettings(
+                                                        MultipleShareActivity.this);
+                                    } else {
+                                        //or if we still have chance to show runtime permission dialog, we show him that.
+                                        askDexterToHandleExternalStoragePermission();
+                                    }
+                                }
+
+                                @Override
+                                public void onNegativeButtonClicked() {
+                                    //This was the behaviour as of now, I was planning to maybe snack him with some message
+                                    //and then call finish after some time, or may be it could be associated with some action on the snack
+                                    //If the user does not want us to give the permission, even after showing rationale dialog, lets not trouble him anymore
+                                    finish();
+                                }
+                            });
         }
     }
 
@@ -310,37 +345,7 @@ public class MultipleShareActivity extends AuthenticatedActivity
                             Timber.d(TAG,
                                     "User has granted us the permission for writing the external storage");
                             //If permission is not granted in whatsoever scenario, we show him a dialog stating why we need the permission
-                            if (storagePermissionInfoDialog == null) {
-                                storagePermissionInfoDialog = DialogUtil
-                                        .getAlertDialogWithPositiveAndNegativeCallbacks(
-                                                MultipleShareActivity.this,
-                                                getString(R.string.storage_permission), getString(
-                                                        R.string.write_storage_permission_rationale_for_image_share),
-                                                R.drawable.ic_launcher, new Callback() {
-                                                    @Override
-                                                    public void onPositiveButtonClicked() {
-                                                        //If the user is willing to give us the permission
-                                                        //But had somehow previously choose never ask again, we take him to app settings to manually enable permission
-                                                        if (response.isPermanentlyDenied()) {
-                                                            PermissionUtils
-                                                                    .askUserToManuallyEnablePermissionFromSettings(
-                                                                            MultipleShareActivity.this);
-                                                        } else {
-                                                            //or if we still have chance to show runtime permission dialog, we show him that.
-                                                            askDexterToHandleExternalStoragePermission();
-                                                        }
-                                                    }
-
-                                                    @Override
-                                                    public void onNegativeButtonClicked() {
-                                                        //This was the behaviour as of now, I was planning to maybe snack him with some message
-                                                        //and then call finish after some time, or may be it could be associated with some action on the snack
-                                                        //If the user does not want us to give the permission, even after showing rationale dialog, lets not trouble him anymore
-                                                        finish();
-                                                    }
-                                                });
-                            }
-
+                            permissionDeniedResponse=response;
                             if (null != storagePermissionInfoDialog && !storagePermissionInfoDialog
                                     .isShowing()) {
                                 storagePermissionInfoDialog.show();

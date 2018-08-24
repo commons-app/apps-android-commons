@@ -104,12 +104,12 @@ public class DialogUtil {
                 .setTitle(title)
                 .setMessage(message)
                 .setPositiveButton(context.getString(R.string.ok), (dialog, which) -> {
-                    dialog.dismiss();
                     callback.onPositiveButtonClicked();
+                    dialog.dismiss();
                 })
                 .setNegativeButton(context.getString(R.string.cancel), (dialog, which) -> {
-                    dialog.dismiss();
                     callback.onNegativeButtonClicked();
+                    dialog.dismiss();
                 })
                 .setIcon(iconResourceId).create();
 
@@ -117,7 +117,7 @@ public class DialogUtil {
 
     }
 
-    public static interface Callback {
+    public  interface Callback {
 
         void onPositiveButtonClicked();
 
