@@ -65,6 +65,15 @@ public class SettingsFragment extends PreferenceFragment {
             return true;
         });
 
+        //Check if the Author Name switch is enabled and appropriately handle the author name usage
+        SwitchPreference useAuthorName = (SwitchPreference) findPreference("useAuthorName");
+        EditTextPreference authorName = (EditTextPreference) findPreference("authorName");
+        authorName.setEnabled(prefs.getBoolean("useAuthorName", false));
+        useAuthorName.setOnPreferenceChangeListener((preference, newValue) -> {
+            authorName.setEnabled((Boolean)newValue);
+            return true;
+        });
+
         final EditTextPreference uploadLimit = (EditTextPreference) findPreference("uploads");
         int uploads = prefs.getInt(Prefs.UPLOADS_SHOWING, 100);
         uploadLimit.setText(uploads + "");

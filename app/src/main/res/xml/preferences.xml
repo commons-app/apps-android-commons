@@ -36,6 +36,18 @@
             android:inputType="numberDecimal"
             android:maxLength="3" />
 
+        <fr.free.nrw.commons.ui.LongTitlePreferences.LongTitleSwitchPreference
+            android:key="useAuthorName"
+            android:title="@string/use_author_name"
+            android:summary="@string/author_name_chk_summary"/>
+
+        <fr.free.nrw.commons.ui.LongTitlePreferences.LongTitleEditTextPreference
+            android:key="authorName"
+            android:title="@string/author_name"
+            android:summary="@string/author_name_summary"
+            />
+
+
     </fr.free.nrw.commons.ui.LongTitlePreferences.LongTitlePreferenceCategory>
 
     <!-- The key 'allowGps' was used before and has since been removed based on the discussion at #1599.

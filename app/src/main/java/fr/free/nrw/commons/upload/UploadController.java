@@ -13,6 +13,7 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.IBinder;
+import android.preference.PreferenceManager;
 import android.provider.MediaStore;
 import android.text.TextUtils;
 import android.util.Log;
@@ -42,6 +43,7 @@ public class UploadController {
     private SessionManager sessionManager;
     private Context context;
     private SharedPreferences prefs;
+
 
     public interface ContributionUploadProgress {
         void onUploadStarted(Contribution contribution);
@@ -146,8 +148,19 @@ public class UploadController {
     @SuppressLint("StaticFieldLeak")
     public void startUpload(final Contribution contribution, final ContributionUploadProgress onComplete) {
         //Set creator, desc, and license
-        if (TextUtils.isEmpty(contribution.getCreator())) {
-            contribution.setCreator(sessionManager.getCurrentAccount().name);
+
+        //If author name is enabled and set, use it
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
+
+        if(preferences.getBoolean("useAuthorName", false)) {
+            String authorName = preferences.getString("authorName", "");
+            if (!TextUtils.isEmpty(authorName)) {
+                contribution.setCreator(authorName);
+            }
+        }
+
+        else if(TextUtils.isEmpty(contribution.getCreator())){
+                contribution.setCreator(sessionManager.getCurrentAccount().name);
         }
 
         if (contribution.getDescription() == null) {
