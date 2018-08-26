@@ -2,9 +2,7 @@ apply from: '../gitutils.gradle'
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
-apply plugin: 'jacoco-android'
 apply from: 'quality.gradle'
-apply plugin: 'com.getkeepsafe.dexcount'
 
 dependencies {
     implementation 'com.squareup.picasso:picasso:2.71828'
@@ -54,7 +52,7 @@ dependencies {
     kapt "com.google.dagger:dagger-android-processor:$DAGGER_VERSION"
     kapt "com.google.dagger:dagger-compiler:$DAGGER_VERSION"
     testImplementation 'org.robolectric:multidex:3.4.2'
-    testImplementation "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
+    testImplementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     testImplementation "org.jetbrains.kotlin:kotlin-reflect:$kotlin_version"
     testImplementation 'junit:junit:4.12'
     testImplementation 'org.robolectric:robolectric:3.7.1'
@@ -66,7 +64,7 @@ dependencies {
     implementation 'com.github.bumptech.glide:glide:4.7.1'
     kapt 'com.github.bumptech.glide:compiler:4.7.1'
 
-    androidTestImplementation "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
+    androidTestImplementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     androidTestImplementation 'com.squareup.okhttp3:mockwebserver:3.10.0'
     androidTestImplementation "com.android.support:support-annotations:$SUPPORT_LIB_VERSION"
     androidTestImplementation 'com.android.support.test:rules:1.0.2'
@@ -91,8 +89,8 @@ android {
         versionName '2.8.1'
         setProperty("archivesBaseName", "app-commons-v$versionName-" + getBranchName())
 
-        minSdkVersion project.minSdkVersion
-        targetSdkVersion project.targetSdkVersion
+        minSdkVersion 15
+        targetSdkVersion 27
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary = true
 
