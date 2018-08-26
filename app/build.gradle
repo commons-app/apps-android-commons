@@ -110,7 +110,7 @@ android {
     buildTypes {
         release {
             minifyEnabled false // See https://stackoverflow.com/questions/40232404/google-play-apk-and-android-studio-apk-usb-debug-behaving-differently - proguard.cfg modification alone insufficient.
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt', 'proguard-glide.txt'
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
         }
         debug {
             testCoverageEnabled true
