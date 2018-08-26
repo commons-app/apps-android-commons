@@ -135,7 +135,7 @@ public class QuizChecker {
         alert.setTitle(context.getResources().getString(R.string.quiz));
         alert.setMessage(context.getResources().getString(R.string.quiz_alert_message,
                 REVERT_PERCENTAGE_FOR_MESSAGE));
-        alert.setPositiveButton("Proceed", new DialogInterface.OnClickListener() {
+        alert.setPositiveButton(R.string.about_translate_proceed, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                int newRevetSharedPrefs = revertCount+ revertPref.getInt(REVERT_SHARED_PREFERENCE,0);
