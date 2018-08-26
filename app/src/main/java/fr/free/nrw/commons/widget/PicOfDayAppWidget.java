@@ -4,11 +4,21 @@ import android.appwidget.AppWidgetManager;
 import android.appwidget.AppWidgetProvider;
 import android.content.Context;
 import android.graphics.Bitmap;
-import android.support.annotation.NonNull;
+import android.graphics.Canvas;
+import android.graphics.Paint;
+import android.net.Uri;
+import android.support.annotation.Nullable;
 import android.widget.RemoteViews;
 
-import com.bumptech.glide.request.target.AppWidgetTarget;
-import com.bumptech.glide.request.transition.Transition;
+import com.facebook.common.executors.CallerThreadExecutor;
+import com.facebook.common.references.CloseableReference;
+import com.facebook.datasource.DataSource;
+import com.facebook.drawee.backends.pipeline.Fresco;
+import com.facebook.imagepipeline.core.ImagePipeline;
+import com.facebook.imagepipeline.datasource.BaseBitmapDataSubscriber;
+import com.facebook.imagepipeline.image.CloseableImage;
+import com.facebook.imagepipeline.request.ImageRequest;
+import com.facebook.imagepipeline.request.ImageRequestBuilder;
 import com.prof.rssparser.Article;
 import com.prof.rssparser.Parser;
 
@@ -20,17 +30,13 @@ import java.util.ArrayList;
 
 import fr.free.nrw.commons.BuildConfig;
 import fr.free.nrw.commons.R;
-import fr.free.nrw.commons.notification.GlideApp;
 
 /**
  * Implementation of App Widget functionality.
  */
 public class PicOfDayAppWidget extends AppWidgetProvider {
 
-    static void updateAppWidget(Context context, AppWidgetManager appWidgetManager,
-                                int appWidgetId) {
-
-        // Construct the RemoteViews object
+    static void updateAppWidget(Context context, AppWidgetManager appWidgetManager, int appWidgetId) {
         RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.pic_of_day_app_widget);
 
         String urlString = BuildConfig.WIKIMEDIA_API_POTD;
@@ -45,25 +51,37 @@ public class PicOfDayAppWidget extends AppWidgetProvider {
                     Elements elements = document.select("img");
                     String imageUrl = elements.get(0).attr("src");
                     if (imageUrl != null && imageUrl.length() > 0) {
-                        AppWidgetTarget appWidgetTarget = new AppWidgetTarget(context, R.id.appwidget_image, views, appWidgetId) {
+
+                        ImageRequest request = ImageRequestBuilder.newBuilderWithSource(Uri.parse(imageUrl)).build();
+                        ImagePipeline imagePipeline = Fresco.getImagePipeline();
+                        DataSource<CloseableReference<CloseableImage>> dataSource
+                                = imagePipeline.fetchDecodedImage(request, context);
+                        dataSource.subscribe(new BaseBitmapDataSubscriber() {
                             @Override
-                            public void onResourceReady(@NonNull Bitmap resource, Transition<? super Bitmap> transition) {
-                                super.onResourceReady(resource, transition);
+                            protected void onNewResultImpl(@Nullable Bitmap tempBitmap) {
+                                Bitmap bitmap = null;
+                                if (tempBitmap != null) {
+                                    bitmap = Bitmap.createBitmap(tempBitmap.getWidth(), tempBitmap.getHeight(), Bitmap.Config.ARGB_8888);
+                                    Canvas canvas = new Canvas(bitmap);
+                                    canvas.drawBitmap(tempBitmap, 0f, 0f, new Paint());
+                                }
+                                views.setImageViewBitmap(R.id.appwidget_image, bitmap);
+                                appWidgetManager.updateAppWidget(appWidgetId, views);
                             }
-                        };
-                        GlideApp.with(context).asBitmap().load(imageUrl).into(appWidgetTarget);
+
+                            @Override
+                            protected void onFailureImpl(DataSource<CloseableReference<CloseableImage>> dataSource) {
+                                // Ignore failure for now.
+                            }
+                        }, CallerThreadExecutor.getInstance());
                     }
                 }
-
             }
 
             @Override
             public void onError() {
             }
         });
-
-        // Instruct the widget manager to update the widget
-        appWidgetManager.updateAppWidget(appWidgetId, views);
     }
 
     @Override
