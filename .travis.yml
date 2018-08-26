@@ -19,7 +19,7 @@ android:
   components:
     - tools
     - platform-tools
-    - build-tools-27.0.0
+    - build-tools-27.0.3
     - extra-google-m2repository
     - extra-android-m2repository
     - ${ANDROID_TARGET}
