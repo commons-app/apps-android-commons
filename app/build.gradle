@@ -7,7 +7,6 @@ apply from: 'quality.gradle'
 apply plugin: 'com.getkeepsafe.dexcount'
 
 dependencies {
-    implementation 'com.squareup.picasso:picasso:2.71828'
     implementation 'com.prof.rssparser:rssparser:1.1'
     implementation 'com.github.nicolas-raoul:Quadtree:ac16ea8035bf07'
     implementation 'fr.avianey.com.viewpagerindicator:library:2.4.1.1@aar'

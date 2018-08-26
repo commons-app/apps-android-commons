@@ -3,24 +3,24 @@ package fr.free.nrw.commons.widget;
 import android.appwidget.AppWidgetManager;
 import android.appwidget.AppWidgetProvider;
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.support.annotation.NonNull;
 import android.widget.RemoteViews;
 
+import com.bumptech.glide.request.target.AppWidgetTarget;
+import com.bumptech.glide.request.transition.Transition;
 import com.prof.rssparser.Article;
 import com.prof.rssparser.Parser;
-import com.squareup.picasso.Picasso;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 import java.util.ArrayList;
 
 import fr.free.nrw.commons.BuildConfig;
 import fr.free.nrw.commons.R;
+import fr.free.nrw.commons.notification.GlideApp;
 
 /**
  * Implementation of App Widget functionality.
@@ -45,7 +45,13 @@ public class PicOfDayAppWidget extends AppWidgetProvider {
                     Elements elements = document.select("img");
                     String imageUrl = elements.get(0).attr("src");
                     if (imageUrl != null && imageUrl.length() > 0) {
-                        Picasso.get().load(imageUrl).into(views, R.id.appwidget_image, new int[]{appWidgetId});
+                        AppWidgetTarget appWidgetTarget = new AppWidgetTarget(context, R.id.appwidget_image, views, appWidgetId) {
+                            @Override
+                            public void onResourceReady(@NonNull Bitmap resource, Transition<? super Bitmap> transition) {
+                                super.onResourceReady(resource, transition);
+                            }
+                        };
+                        GlideApp.with(context).asBitmap().load(imageUrl).into(appWidgetTarget);
                     }
                 }
 
