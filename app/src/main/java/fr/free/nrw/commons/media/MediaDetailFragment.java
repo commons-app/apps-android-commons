@@ -1,6 +1,8 @@
 package fr.free.nrw.commons.media;
 
 import android.app.AlertDialog;
+import android.content.ClipData;
+import android.content.ClipboardManager;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.DataSetObserver;
@@ -50,6 +52,7 @@ import fr.free.nrw.commons.mwapi.MediaWikiApi;
 import fr.free.nrw.commons.ui.widget.CompatTextView;
 import timber.log.Timber;
 
+import static android.content.Context.CLIPBOARD_SERVICE;
 import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
 import static android.widget.Toast.LENGTH_SHORT;
@@ -349,6 +352,17 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
         if (media.getCoordinates() != null) {
             openMap(media.getCoordinates());
         }
+    }
+
+    @OnClick(R.id.copyWikicode)
+    public void onCopyWikicodeClicked(){
+        String data = "[[" + media.getFilename() + "|thumb|" + media.getDescription() + "]]";
+        ClipboardManager clipboard = (ClipboardManager) getContext().getApplicationContext().getSystemService(CLIPBOARD_SERVICE);
+        clipboard.setPrimaryClip(ClipData.newPlainText("wikiCode", data));
+
+        Timber.d("Generated wikidata copy code: %s", data);
+
+        Toast.makeText(getContext(), getString(R.string.wikicode_copied), Toast.LENGTH_SHORT).show();
     }
 
     @OnClick(R.id.nominateDeletion)

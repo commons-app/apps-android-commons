@@ -313,14 +313,22 @@
                 </LinearLayout>
 
                 <Button
+                    android:id="@+id/copyWikicode"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/standard_gap"
+                    android:background="@color/button_blue"
+                    android:text="@string/copy_wikicode"
+                    android:textColor="@color/primaryTextColor" />
+
+                <Button
                     android:id="@+id/nominateDeletion"
                     android:background="@drawable/bg_delete_button"
                     android:textColor="@color/primaryTextColor"
                     android:layout_margin="@dimen/standard_gap"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/nominate_deletion"
-                    android:visibility="gone"/>
+                    android:text="@string/nominate_deletion"/>
             </LinearLayout>
         </LinearLayout>
     </ScrollView>
