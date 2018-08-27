@@ -4,6 +4,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <LinearLayout
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:orientation="vertical">
+
     <FrameLayout
         android:layout_width="400sp"
         android:layout_height="wrap_content"
@@ -198,16 +203,15 @@
                     android:text="@string/forgot_password"
                     android:textColor="@color/status_bar_blue" />
 
-                <fr.free.nrw.commons.ui.widget.HtmlTextView
-                    android:id="@+id/about_privacy_policy"
-                    style="?android:textAppearanceSmall"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/forgotPassword"
-                    android:layout_centerHorizontal="true"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_marginBottom="@dimen/standard_gap"
-                    android:text="@string/about_privacy_policy" />
+              <fr.free.nrw.commons.ui.widget.HtmlTextView
+                android:id="@+id/skipLogin"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/standard_gap"
+                android:layout_below="@id/forgotPassword"
+                android:gravity="center_horizontal"
+                android:text="@string/skip_login"
+                android:visibility="visible"/>
 
             </RelativeLayout>
         </android.support.v7.widget.CardView>
@@ -230,5 +234,16 @@
             tools:ignore="UnusedAttribute" />
 
     </FrameLayout>
+      <fr.free.nrw.commons.ui.widget.HtmlTextView
+        android:id="@+id/about_privacy_policy"
+        style="?android:textAppearanceSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/standard_gap"
+        android:layout_below="@id/forgotPassword"
+        android:layout_centerHorizontal="true"
+        android:layout_gravity="center_horizontal"
+        android:text="@string/about_privacy_policy"/>
+    </LinearLayout>
 
 </ScrollView>
