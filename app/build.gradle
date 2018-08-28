@@ -81,8 +81,6 @@ android {
     compileSdkVersion project.compileSdkVersion
     buildToolsVersion project.buildToolsVersion
 
-    useLibrary 'org.apache.http.legacy'
-
     defaultConfig {
         applicationId 'fr.free.nrw.commons'
         versionCode 88
@@ -191,11 +189,5 @@ android {
         targetCompatibility JavaVersion.VERSION_1_8
     }
 
-    //FIXME: Temporary fix for https://github.com/commons-app/apps-android-commons/issues/709
-    configurations.all {
-        resolutionStrategy.force 'com.android.support:support-annotations:25.2.0'
-        exclude module: 'httpclient'
-        exclude module: 'commons-logging'
-    }
     buildToolsVersion buildToolsVersion
 }
