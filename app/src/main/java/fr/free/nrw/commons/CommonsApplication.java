@@ -8,8 +8,9 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Build;
+import android.os.Process;
 import android.support.annotation.NonNull;
-import android.support.annotation.RequiresApi;
+import android.util.Log;
 
 import com.facebook.drawee.backends.pipeline.Fresco;
 import com.facebook.imagepipeline.core.ImagePipelineConfig;
@@ -17,22 +18,28 @@ import com.facebook.stetho.Stetho;
 import com.squareup.leakcanary.LeakCanary;
 import com.squareup.leakcanary.RefWatcher;
 import com.tspoon.traceur.Traceur;
-import com.tspoon.traceur.TraceurConfig;
 
 import org.acra.ACRA;
-import org.acra.ReportingInteractionMode;
-import org.acra.annotation.ReportsCrashes;
+import org.acra.annotation.AcraCore;
+import org.acra.annotation.AcraToast;
+import org.acra.data.StringFormat;
 
 import java.io.File;
 
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.auth.SessionManager;
 import fr.free.nrw.commons.category.CategoryDao;
+import fr.free.nrw.commons.concurrency.BackgroundPoolExceptionHandler;
+import fr.free.nrw.commons.concurrency.ThreadPoolService;
 import fr.free.nrw.commons.contributions.ContributionDao;
 import fr.free.nrw.commons.data.DBOpenHelper;
 import fr.free.nrw.commons.di.ApplicationlessInjection;
+import fr.free.nrw.commons.logging.CommonsLogSenderFactory;
+import fr.free.nrw.commons.logging.FileLoggingTree;
+import fr.free.nrw.commons.logging.LogUtils;
 import fr.free.nrw.commons.modifications.ModifierSequenceDao;
 import fr.free.nrw.commons.upload.FileUtils;
 import fr.free.nrw.commons.utils.ContributionUtils;
@@ -40,17 +47,17 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 import timber.log.Timber;
 
-// TODO: Use ProGuard to rip out reporting when publishing
-@ReportsCrashes(
-        mailTo = "commons-app-android-private@googlegroups.com",
-        mode = ReportingInteractionMode.DIALOG,
-        resDialogText = R.string.crash_dialog_text,
-        resDialogTitle = R.string.crash_dialog_title,
-        resDialogCommentPrompt = R.string.crash_dialog_comment_prompt,
-        resDialogOkToast = R.string.crash_dialog_ok_toast
-)
-public class CommonsApplication extends Application {
+import static org.acra.ReportField.ANDROID_VERSION;
+import static org.acra.ReportField.APP_VERSION_CODE;
+import static org.acra.ReportField.CUSTOM_DATA;
+import static org.acra.ReportField.LOGCAT;
+import static org.acra.ReportField.PHONE_MODEL;
+import static org.acra.ReportField.STACK_TRACE;
 
+@AcraCore(reportContent = {APP_VERSION_CODE, ANDROID_VERSION, PHONE_MODEL, CUSTOM_DATA, STACK_TRACE, LOGCAT},
+        buildConfigClass = BuildConfig.class,
+        reportSenderFactoryClasses = CommonsLogSenderFactory.class)
+public class CommonsApplication extends Application {
     @Inject SessionManager sessionManager;
     @Inject DBOpenHelper dbOpenHelper;
 
@@ -99,8 +106,6 @@ public class CommonsApplication extends Application {
                 .getCommonsApplicationComponent()
                 .inject(this);
 
-        Timber.plant(new Timber.DebugTree());
-
 //        Set DownsampleEnabled to True to downsample the image in case it's heavy
         ImagePipelineConfig config = ImagePipelineConfig.newBuilder(this)
                 .setDownsampleEnabled(true)
@@ -117,9 +122,9 @@ public class CommonsApplication extends Application {
         // Empty temp directory in case some temp files are created and never removed.
         ContributionUtils.emptyTemporaryDirectory();
 
-        if (!BuildConfig.DEBUG) {
-            ACRA.init(this);
-        } else {
+        initTimber();
+
+        if (BuildConfig.DEBUG) {
             Stetho.initializeWithDefaults(this);
         }
 
@@ -127,6 +132,35 @@ public class CommonsApplication extends Application {
 
         // Fire progress callbacks for every 3% of uploaded content
         System.setProperty("in.yuvi.http.fluent.PROGRESS_TRIGGER_THRESHOLD", "3.0");
+    }
+
+    private void initTimber() {
+        FileLoggingTree tree = new FileLoggingTree(
+                Log.DEBUG,
+                LogUtils.getLogDirectory(this),
+                1000,
+                getFileLoggingThreadPool());
+
+        Timber.plant(tree);
+        Timber.plant(new Timber.DebugTree());
+    }
+
+    @Override
+    protected void attachBaseContext(Context base) {
+        super.attachBaseContext(base);
+        initAcra();
+    }
+
+    private void initAcra() {
+        ACRA.init(this);
+    }
+
+    private ThreadPoolService getFileLoggingThreadPool() {
+        return new ThreadPoolService.Builder("file-logging-thread")
+                .setPriority(Process.THREAD_PRIORITY_LOWEST)
+                .setPoolSize(1)
+                .setExceptionHandler(new BackgroundPoolExceptionHandler())
+                .build();
     }
 
     public static void createNotificationChannel(@NonNull Context context) {

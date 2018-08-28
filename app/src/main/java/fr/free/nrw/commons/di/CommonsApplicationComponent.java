@@ -11,6 +11,7 @@ import fr.free.nrw.commons.MediaWikiImageView;
 import fr.free.nrw.commons.auth.LoginActivity;
 import fr.free.nrw.commons.contributions.ContributionsSyncAdapter;
 import fr.free.nrw.commons.delete.DeleteTask;
+import fr.free.nrw.commons.logging.CommonsLogSenderFactory;
 import fr.free.nrw.commons.modifications.ModificationsSyncAdapter;
 import fr.free.nrw.commons.nearby.PlaceRenderer;
 import fr.free.nrw.commons.upload.FileProcessor;
@@ -52,6 +53,8 @@ public interface CommonsApplicationComponent extends AndroidInjector<Application
     void inject(FileProcessor fileProcessor);
 
     void inject(PicOfDayAppWidget picOfDayAppWidget);
+
+    void inject(CommonsLogSenderFactory factory);
 
     @Component.Builder
     @SuppressWarnings({"WeakerAccess", "unused"})

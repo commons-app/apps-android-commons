@@ -214,8 +214,6 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
     @Override
     public void setAuthCookie(String authCookie) {
         api.setAuthCookie(authCookie);
-
-        Timber.d("Mediawiki auth cookie is %s", api.getAuthCookie());
     }
 
     @Override
