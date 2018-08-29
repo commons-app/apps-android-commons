@@ -88,8 +88,6 @@ android {
         targetSdkVersion project.targetSdkVersion
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary = true
-
-        multiDexEnabled true
     }
 
     testOptions {
