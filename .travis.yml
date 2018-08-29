@@ -7,7 +7,7 @@ addons:
 
 env:
   global:
-    - ANDROID_TARGET=android-27
+    - ANDROID_TARGET=android-22
     - ANDROID_ABI=armeabi-v7a
     - ADB_INSTALL_TIMEOUT=12 # in minutes
 
@@ -21,7 +21,8 @@ android:
     - build-tools-27.0.3
     - extra-google-m2repository
     - extra-android-m2repository
-    - ${ANDROID_TARGET}
+    - android-22
+    - android-27
     - sys-img-${ANDROID_ABI}-${ANDROID_TARGET}
   licenses:
     - 'android-sdk-license-.+'
