@@ -5,6 +5,12 @@ addons:
     packages:
       - w3m
 
+env:
+  global:
+    - ANDROID_TARGET=android-27
+    - ANDROID_ABI=armeabi-v7a
+    - ADB_INSTALL_TIMEOUT=12 # in minutes
+
 jdk:
   - oraclejdk8
 
@@ -15,12 +21,18 @@ android:
     - build-tools-27.0.3
     - extra-google-m2repository
     - extra-android-m2repository
-    - android-27
+    - ${ANDROID_TARGET}
+    - sys-img-${ANDROID_ABI}-${ANDROID_TARGET}
   licenses:
     - 'android-sdk-license-.+'
 
+before_script:
+  - echo no | android create avd --force -n test -t $ANDROID_TARGET --abi $ANDROID_ABI
+  - emulator -avd test -no-audio -no-window -no-boot-anim &
+  - android-wait-for-emulator
+
 script:
-  - ./gradlew clean check
+  - ./gradlew clean check connectedCheck jacocoTestReport
 
 after_success:
   - bash <(curl -s https://codecov.io/bash)
