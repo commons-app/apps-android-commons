@@ -10,9 +10,12 @@ import android.content.Intent;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.v4.app.NotificationCompat;
+import android.util.Log;
 import android.webkit.MimeTypeMap;
 import android.widget.Toast;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
@@ -23,6 +26,7 @@ import java.util.regex.Pattern;
 
 import javax.inject.Inject;
 
+import fr.free.nrw.commons.BuildConfig;
 import fr.free.nrw.commons.HandlerService;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.Utils;
@@ -179,13 +183,15 @@ public class UploadService extends HandlerService<Contribution> {
 
     @SuppressLint("StringFormatInvalid")
     private void uploadContribution(Contribution contribution) {
-        InputStream file;
+        InputStream fileInputStream;
 
         String notificationTag = contribution.getLocalUri().toString();
 
         try {
             //FIXME: Google Photos bug
-            file = this.getContentResolver().openInputStream(contribution.getLocalUri());
+            File file1 = new File(contribution.getLocalUri().getPath());
+            fileInputStream = new FileInputStream(file1);
+            //fileInputStream = this.getContentResolver().openInputStream(contribution.getLocalUri());
         } catch (FileNotFoundException e) {
             Timber.d("File not found");
             Toast fileNotFound = Toast.makeText(this, R.string.upload_failed, Toast.LENGTH_LONG);
@@ -193,9 +199,9 @@ public class UploadService extends HandlerService<Contribution> {
             return;
         }
 
-        //As the file is null there's no point in continuing the upload process
+        //As the fileInputStream is null there's no point in continuing the upload process
         //mwapi.upload accepts a NonNull input stream
-        if(file == null) {
+        if(fileInputStream == null) {
             Timber.d("File not found");
             return;
         }
@@ -243,7 +249,7 @@ public class UploadService extends HandlerService<Contribution> {
                     getString(R.string.upload_progress_notification_title_finishing, contribution.getDisplayTitle()),
                     contribution
             );
-            UploadResult uploadResult = mwApi.uploadFile(filename, file, contribution.getDataLength(), contribution.getPageContents(), contribution.getEditSummary(), notificationUpdater);
+            UploadResult uploadResult = mwApi.uploadFile(filename, fileInputStream, contribution.getDataLength(), contribution.getPageContents(), contribution.getEditSummary(), contribution.getLocalUri(), contribution.getContentProviderUri(), notificationUpdater);
 
             Timber.d("Response is %s", uploadResult.toString());
 
@@ -272,7 +278,7 @@ public class UploadService extends HandlerService<Contribution> {
             toUpload--;
             if (toUpload == 0) {
                 // Sync modifications right after all uplaods are processed
-                ContentResolver.requestSync(sessionManager.getCurrentAccount(), ModificationsContentProvider.MODIFICATIONS_AUTHORITY, new Bundle());
+                ContentResolver.requestSync(sessionManager.getCurrentAccount(), BuildConfig.MODIFICATION_AUTHORITY, new Bundle());
                 stopForeground(true);
             }
         }

@@ -1,5 +1,6 @@
 package fr.free.nrw.commons.mwapi;
 
+import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
@@ -54,7 +55,7 @@ public interface MediaWikiApi {
     List<String> searchCategory(String title, int offset);
 
     @NonNull
-    UploadResult uploadFile(String filename, InputStream file, long dataLength, String pageContents, String editSummary, ProgressListener progressListener) throws IOException;
+    UploadResult uploadFile(String filename, InputStream file, long dataLength, String pageContents, String editSummary, Uri fileUri, Uri contentProviderUri, ProgressListener progressListener) throws IOException;
 
     @Nullable
     String edit(String editToken, String processedPageContent, String filename, String summary) throws IOException;

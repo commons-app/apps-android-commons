@@ -31,6 +31,8 @@ import fr.free.nrw.commons.contributions.ContributionController;
 import fr.free.nrw.commons.di.ApplicationlessInjection;
 import timber.log.Timber;
 
+import static fr.free.nrw.commons.wikidata.WikidataConstants.WIKIDATA_ENTITY_ID_PREF;
+
 public class PlaceRenderer extends Renderer<Place> {
 
     @BindView(R.id.tvName) TextView tvName;
@@ -126,6 +128,7 @@ public class PlaceRenderer extends Renderer<Place> {
         editor.putString("Title", place.getName());
         editor.putString("Desc", place.getLongDescription());
         editor.putString("Category", place.getCategory());
+        editor.putString(WIKIDATA_ENTITY_ID_PREF, place.getWikiDataEntityId());
         editor.apply();
     }
 
