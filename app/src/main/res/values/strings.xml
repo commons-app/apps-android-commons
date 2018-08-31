@@ -153,7 +153,7 @@
     <string name="welcome_copyright_subtext">Avoid copyrighted materials you found from the Internet as well as images of posters, book covers, etc.</string>
     <string name="welcome_final_text">You think you got it?</string>
     <string name="welcome_final_button_text">Yes!</string>
-    <string name="welcome_help_button_text"><u>More Information</u></string>
+    <string name="welcome_help_button_text"><![CDATA[<u>More Information</u>]]></string>
     <string name="detail_panel_cats_label">Categories</string>
     <string name="detail_panel_cats_loading">Loading…</string>
     <string name="detail_panel_cats_none">None selected</string>
@@ -245,7 +245,7 @@
     <string name="null_url">Error! URL not found</string>
     <string name="nominate_deletion">Nominate for Deletion</string>
     <string name="nominated_for_deletion">This image has been nominated for deletion.</string>
-    <string name="nominated_see_more"><u>See webpage for details</u></string>
+    <string name="nominated_see_more"><![CDATA[<u>See webpage for details</u>]]</string>
     <string name="view_browser">View in Browser</string>
   <string name="skip_login">Skip</string>
   <string name="navigation_item_login">Log in</string>
