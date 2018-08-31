@@ -240,7 +240,6 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/standard_gap"
         android:layout_below="@id/forgotPassword"
-        android:layout_centerHorizontal="true"
         android:layout_gravity="center_horizontal"
         android:text="@string/about_privacy_policy"/>
     </LinearLayout>
