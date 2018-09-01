@@ -1,7 +1,6 @@
 package fr.free.nrw.commons.notification;
 
 import android.graphics.Color;
-import android.graphics.drawable.PictureDrawable;
 import android.text.Html;
 import android.text.SpannableString;
 import android.text.Spanned;
@@ -82,9 +81,9 @@ public class NotificationRenderer extends Renderer<Notification> {
             }
         };
 
+        // Attach a ClickableSpan to the range (start:0, end:notificationText.length()) of the String
         ss.setSpan(clickableSpan, 0, notificationText.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
         title.setText(ss, TextView.BufferType.SPANNABLE);
-
     }
 
     public interface NotificationClicked{
