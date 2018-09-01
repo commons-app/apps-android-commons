@@ -19,6 +19,7 @@ public class WelcomeActivity extends BaseActivity {
 
     private WelcomePagerAdapter adapter = new WelcomePagerAdapter();
     private boolean isQuiz;
+    static String moreInformation;
 
     /**
      * Initialises exiting fields and dependencies
@@ -29,6 +30,8 @@ public class WelcomeActivity extends BaseActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_welcome);
+
+        moreInformation = this.getString(R.string.welcome_help_button_text);
 
         if(getIntent() != null) {
             Bundle bundle = getIntent().getExtras();
