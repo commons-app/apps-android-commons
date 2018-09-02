@@ -94,7 +94,7 @@ public class MultipleShareActivity extends AuthenticatedActivity
     private AlertDialog storagePermissionInfoDialog;
     private DexterBuilder dexterStoragePermissionBuilder;
 
-    PermissionDeniedResponse permissionDeniedResponse;
+    private PermissionDeniedResponse permissionDeniedResponse;
 
     @Override
     public Media getMediaAtPosition(int i) {
@@ -237,6 +237,12 @@ public class MultipleShareActivity extends AuthenticatedActivity
         }
     }
 
+
+    /**
+     * We have agreed to show a dialog showing why we need a particular permission.
+     * This method is used to initialise the dialog which is going to show the permission's rationale.
+     * The dialog is initialised along with a callback for positive and negative user actions.
+     */
     private void initPermissionsRationaleDialog() {
         if (storagePermissionInfoDialog == null) {
             storagePermissionInfoDialog = DialogUtil
@@ -254,9 +260,7 @@ public class MultipleShareActivity extends AuthenticatedActivity
                                         return;
                                     }
                                     else if (permissionDeniedResponse.isPermanentlyDenied()) {
-                                        PermissionUtils
-                                                .askUserToManuallyEnablePermissionFromSettings(
-                                                        MultipleShareActivity.this);
+                                        PermissionUtils.askUserToManuallyEnablePermissionFromSettings(MultipleShareActivity.this);
                                     } else {
                                         //or if we still have chance to show runtime permission dialog, we show him that.
                                         askDexterToHandleExternalStoragePermission();
@@ -326,6 +330,11 @@ public class MultipleShareActivity extends AuthenticatedActivity
         }
     }
 
+    /**
+     * This method initialised the Dexter's permission builder (if not already initialised). Also makes sure that the builder is initialised
+     * only once, otherwise we would'nt know on which instance of it, the user is working on. And after the builder is initialised, it checks for the required
+     * permission and then handles the permission status, thanks to Dexter's appropriate callbacks.
+     */
     private void askDexterToHandleExternalStoragePermission() {
         Timber.d(TAG, "External storage permission is being requested");
         if (null == dexterStoragePermissionBuilder) {
@@ -334,16 +343,14 @@ public class MultipleShareActivity extends AuthenticatedActivity
                     .withListener(new BasePermissionListener() {
                         @Override
                         public void onPermissionGranted(PermissionGrantedResponse response) {
-                            Timber.d(TAG,
-                                    "User has granted us the permission for writing the external storage");
+                            Timber.d(TAG,"User has granted us the permission for writing the external storage");
                             //If permission is granted, well and good
                             prepareMultipleUploadList();
                         }
 
                         @Override
                         public void onPermissionDenied(PermissionDeniedResponse response) {
-                            Timber.d(TAG,
-                                    "User has granted us the permission for writing the external storage");
+                            Timber.d(TAG,"User has granted us the permission for writing the external storage");
                             //If permission is not granted in whatsoever scenario, we show him a dialog stating why we need the permission
                             permissionDeniedResponse=response;
                             if (null != storagePermissionInfoDialog && !storagePermissionInfoDialog
