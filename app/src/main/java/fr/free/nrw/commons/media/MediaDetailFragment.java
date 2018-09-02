@@ -436,8 +436,18 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
     private void rebuildCatList() {
         categoryContainer.removeAllViews();
         // @fixme add the category items
-        for (String cat : categoryNames) {
-            View catLabel = buildCatLabel(cat, categoryContainer);
+
+        //As per issue #1826, some categories come suffixed with strings prefixed with |. As per the discussion
+        //that was meant for alphabetical sorting of the categories and can be safely removed.
+        for(int i=0;i<categoryNames.size();i++){
+            String categoryName = categoryNames.get(i);
+            //Removed everything after '|'
+            if (categoryName.indexOf('|') != -1) {
+                categoryName = categoryName.substring(0, categoryName.indexOf('|'));
+                //Set the updated category to the list as well
+                categoryNames.set(i, categoryName);
+            }
+            View catLabel = buildCatLabel(categoryName, categoryContainer);
             categoryContainer.addView(catLabel);
         }
     }
