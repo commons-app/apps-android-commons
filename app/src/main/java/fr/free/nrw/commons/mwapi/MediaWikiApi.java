@@ -106,6 +106,8 @@ public interface MediaWikiApi {
     @NonNull
     Single<JSONObject> getAchievements(String userName);
 
+    void logout();
+
     interface ProgressListener {
         void onProgress(long transferred, long total);
     }

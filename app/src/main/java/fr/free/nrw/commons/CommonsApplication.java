@@ -1,5 +1,6 @@
 package fr.free.nrw.commons;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.database.sqlite.SQLiteDatabase;
@@ -128,6 +129,7 @@ public class CommonsApplication extends MultiDexApplication {
      * @param context Application context
      * @param logoutListener Implementation of interface LogoutListener
      */
+    @SuppressLint("CheckResult")
     public void clearApplicationData(Context context, LogoutListener logoutListener) {
         File cacheDirectory = context.getCacheDir();
         File applicationDirectory = new File(cacheDirectory.getParent());
@@ -140,7 +142,7 @@ public class CommonsApplication extends MultiDexApplication {
             }
         }
 
-        sessionManager.clearAllAccounts()
+        sessionManager.logout()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(() -> {
@@ -151,7 +153,6 @@ public class CommonsApplication extends MultiDexApplication {
                     applicationPrefs.edit().putBoolean("firstrun", false).apply();
                     otherPrefs.edit().clear().apply();
                     updateAllDatabases();
-
                     logoutListener.onLogoutComplete();
                 });
     }
