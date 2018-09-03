@@ -17,7 +17,6 @@ import java.io.File;
 import java.util.Date;
 import java.util.List;
 
-import fr.free.nrw.commons.upload.ShareActivity;
 import fr.free.nrw.commons.upload.UploadActivity;
 import timber.log.Timber;
 
