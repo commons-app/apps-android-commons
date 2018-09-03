@@ -6,12 +6,12 @@ import android.content.ContentResolver;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.net.Uri;
+import android.support.annotation.Nullable;
 
 import java.io.File;
 import java.io.IOException;
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
@@ -35,9 +35,9 @@ import timber.log.Timber;
 public class UploadModel {
 
     MediaWikiApi mwApi;
-    private static UploadItem DUMMY = new UploadItem(Uri.EMPTY, "", "", GPSExtractor.DUMMY, ""){
+    private static UploadItem DUMMY = new UploadItem(Uri.EMPTY, "", "", GPSExtractor.DUMMY, "", null) {
         @Override
-        public boolean isDummy(){
+        public boolean isDummy() {
             return true;
         }
     };
@@ -45,7 +45,7 @@ public class UploadModel {
     private final List<String> licenses;
     private String license;
     private final Map<String, String> licensesByName;
-    private List<UploadItem> items = Collections.emptyList();
+    private List<UploadItem> items = new ArrayList<>();
     private boolean topCardState = true;
     private boolean bottomCardState = true;
     private boolean rightCardState = true;
@@ -69,21 +69,21 @@ public class UploadModel {
         this.license = Prefs.Licenses.CC_BY_SA_3;
         this.licensesByName = licensesByName;
         this.context = context;
-        this.mwApi=mwApi;
+        this.mwApi = mwApi;
         this.contentResolver = context.getContentResolver();
         useExtStorage = prefs.getBoolean("useExternalStorage", true);
     }
 
     @SuppressLint("CheckResult")
     public void receive(List<Uri> mediaUri, String mimeType, String source) {
-        currentStepIndex=0;
+        currentStepIndex = 0;
         Observable<UploadItem> itemObservable = Observable.fromIterable(mediaUri)
                 .map(this::cacheFileUpload)
                 .map(filePath -> {
-                    Uri uri=Uri.fromFile(new File(filePath));
+                    Uri uri = Uri.fromFile(new File(filePath));
                     FileProcessor fp = new FileProcessor(uri, context.getContentResolver(), context);
-                    UploadItem item= new UploadItem(uri, mimeType, source, fp.processFileCoordinates(false),
-                            FileUtils.getFileExt(filePath));
+                    UploadItem item = new UploadItem(uri, mimeType, source, fp.processFileCoordinates(false),
+                            FileUtils.getFileExt(filePath), null);
                     new DetectBadPicturesAsync(new WeakReference<>(item.imageQuality), new WeakReference<>(context),
                             new WeakReference<>(mwApi), uri).execute();
                     return item;
@@ -215,10 +215,11 @@ public class UploadModel {
     public Observable<Contribution> buildContributions(List<String> categoryStringList) {
         return Observable.fromIterable(items).map(item ->
         {
-            Contribution contribution= new Contribution(item.mediaUri, null, item.title+"."+item.fileExt,
+            Contribution contribution = new Contribution(item.mediaUri, null, item.title + "." + item.fileExt,
                     Description.formatList(item.descriptions), -1,
                     null, null, sessionManager.getCurrentAccount().name,
                     CommonsApplication.DEFAULT_EDIT_SUMMARY, item.gpsCoords.getCoords());
+            contribution.setWikiDataEntityId(item.wikidataEntityId);
             contribution.setCategories(categoryStringList);
             contribution.setTag("mimeType", item.mimeType);
             contribution.setSource(item.source);
@@ -228,19 +229,20 @@ public class UploadModel {
     }
 
     /**
-     *Copy files into local storage and return file path
+     * Copy files into local storage and return file path
+     *
      * @param media Uri of the file
      * @return
      */
     private String cacheFileUpload(Uri media) {
         try {
             String copyPath;
-                if (useExtStorage)
-                    copyPath = FileUtils.createExternalCopyPathAndCopy(media, contentResolver);
-                else
-                    copyPath = FileUtils.createCopyPathAndCopy(media, contentResolver);
-                Timber.i("File path is " + copyPath);
-                return copyPath;
+            if (useExtStorage)
+                copyPath = FileUtils.createExternalCopyPathAndCopy(media, contentResolver);
+            else
+                copyPath = FileUtils.createCopyPathAndCopy(media, contentResolver);
+            Timber.i("File path is " + copyPath);
+            return copyPath;
         } catch (IOException e) {
             Timber.w(e, "Error in copying URI " + media.getPath());
         }
@@ -258,7 +260,25 @@ public class UploadModel {
     }
 
     public void subscribeBadPicture(Consumer<ImageUtils.Result> consumer) {
-        badImageSubscription = getCurrentItem().imageQuality.subscribe(consumer);
+        badImageSubscription = getCurrentItem().imageQuality.subscribe(consumer, Timber::e);
+    }
+
+    public void receiveDirect(Uri media, String mimeType, String source, String wikidataEntityIdPref, String title, String desc) {
+        currentStepIndex = 0;
+        String filePath = this.cacheFileUpload(media);
+        Uri uri = Uri.fromFile(new File(filePath));
+        FileProcessor fp = new FileProcessor(uri, context.getContentResolver(), context);
+        UploadItem item = new UploadItem(uri, mimeType, source, fp.processFileCoordinates(false),
+                FileUtils.getFileExt(filePath), wikidataEntityIdPref);
+        item.title.setTitleText(title);
+        item.descriptions.get(0).setDescriptionText(desc);
+        //TODO figure out if default descriptions in other languages exist
+        item.descriptions.get(0).setLanguageCode("en");
+        new DetectBadPicturesAsync(new WeakReference<>(item.imageQuality), new WeakReference<>(context),
+                new WeakReference<>(mwApi), uri).execute();
+        items.add(item);
+        items.get(0).selected = true;
+        items.get(0).first = true;
     }
 
     public boolean isLoggedIn() {
@@ -280,14 +300,16 @@ public class UploadModel {
         public BehaviorSubject<ImageUtils.Result> imageQuality;
         Title title;
         List<Description> descriptions;
+        public String wikidataEntityId;
         public boolean visited;
         public boolean error;
 
         @SuppressLint("CheckResult")
-        UploadItem(Uri mediaUri, String mimeType, String source, GPSExtractor gpsCoords, String fileExt) {
-            title=new Title();
-            descriptions=new ArrayList<>();
+        UploadItem(Uri mediaUri, String mimeType, String source, GPSExtractor gpsCoords, String fileExt, @Nullable String wikidataEntityId) {
+            title = new Title();
+            descriptions = new ArrayList<>();
             descriptions.add(new Description());
+            this.wikidataEntityId = wikidataEntityId;
 
             this.mediaUri = mediaUri;
             this.mimeType = mimeType;
@@ -297,7 +319,8 @@ public class UploadModel {
             imageQuality = BehaviorSubject.createDefault(ImageUtils.Result.IMAGE_WAIT);
 //                imageQuality.subscribe(iq->Timber.i("New value of imageQuality:"+ImageUtils.Result.IMAGE_OK));
         }
-        public boolean isDummy(){
+
+        public boolean isDummy() {
             return false;
         }
     }

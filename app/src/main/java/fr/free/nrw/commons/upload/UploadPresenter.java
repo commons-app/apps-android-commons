@@ -64,9 +64,29 @@ public class UploadPresenter {
                     updateContent();
                     if (uploadModel.isShowingItem())
                         uploadModel.subscribeBadPicture(this::handleBadPicture);
-                });
+                }, Timber::e);
     }
 
+    /**
+     * Passes the direct upload item received to {@link #uploadModel} and displays the items.
+     *
+     * @param media The Uri's of the media being uploaded.
+     * @param mimeType the mimeType of the files.
+     * @param source File source from {@link Contribution.FileSource}
+     */
+    @SuppressLint("CheckResult")
+    public void receiveDirect(Uri media, String mimeType, @Contribution.FileSource String source, String wikidataEntityIdPref, String title, String desc) {
+        Completable.fromRunnable(() -> uploadModel.receiveDirect(media, mimeType, source, wikidataEntityIdPref, title, desc))
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(() -> {
+                    updateCards();
+                    updateLicenses();
+                    updateContent();
+                    if (uploadModel.isShowingItem())
+                        uploadModel.subscribeBadPicture(this::handleBadPicture);
+                }, Timber::e);
+    }
     /**
      * Sets the license to parameter and updates {@link UploadActivity}
      *
@@ -308,4 +328,5 @@ public class UploadPresenter {
     public UploadModel.UploadItem getCurrentItem() {
         return uploadModel.getCurrentItem();
     }
+
 }

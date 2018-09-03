@@ -5,6 +5,7 @@ import android.annotation.SuppressLint;
 import android.content.ActivityNotFoundException;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -40,6 +41,7 @@ import java.util.Locale;
 import java.util.concurrent.TimeUnit;
 
 import javax.inject.Inject;
+import javax.inject.Named;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -59,11 +61,17 @@ import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.schedulers.Schedulers;
 import timber.log.Timber;
 
+import static fr.free.nrw.commons.wikidata.WikidataConstants.WIKIDATA_ENTITY_ID_PREF;
+
 public class UploadActivity extends AuthenticatedActivity implements UploadView {
     @Inject
     InputMethodManager inputMethodManager;
     @Inject
     MediaWikiApi mwApi;
+
+
+    @Inject @Named("direct_nearby_upload_prefs")
+    SharedPreferences directPrefs;
 
     @Inject
     UploadPresenter presenter;
@@ -201,7 +209,7 @@ public class UploadActivity extends AuthenticatedActivity implements UploadView 
                         .takeUntil(RxView.detaches(categoriesSearch))
                         .debounce(500, TimeUnit.MILLISECONDS)
                         .observeOn(AndroidSchedulers.mainThread())
-                        .subscribe(filter -> updateCategoryList(filter.toString()))
+                        .subscribe(filter -> updateCategoryList(filter.toString()), Timber::e)
         );
     }
 
@@ -525,7 +533,14 @@ public class UploadActivity extends AuthenticatedActivity implements UploadView 
 
         if (Intent.ACTION_SEND.equals(intent.getAction())) {
             Uri mediaUri = intent.getParcelableExtra(Intent.EXTRA_STREAM);
-            presenter.receive(mediaUri, mimeType, source);
+            if (intent.hasExtra("isDirectUpload")) {
+                String imageTitle = directPrefs.getString("Title", "");
+                String imageDesc = directPrefs.getString("Desc", "");
+                String wikidataEntityIdPref = intent.getStringExtra(WIKIDATA_ENTITY_ID_PREF);
+                presenter.receiveDirect(mediaUri, mimeType, source, wikidataEntityIdPref, imageTitle, imageDesc);
+            } else {
+                presenter.receive(mediaUri, mimeType, source);
+            }
         } else if (Intent.ACTION_SEND_MULTIPLE.equals(intent.getAction())) {
             ArrayList<Uri> urisList = intent.getParcelableArrayListExtra(Intent.EXTRA_STREAM);
             presenter.receive(urisList, mimeType, source);
@@ -578,7 +593,7 @@ public class UploadActivity extends AuthenticatedActivity implements UploadView 
                         .observeOn(Schedulers.io())
                         .filter(title -> mwApi.fileExistsWithName(title + "." + presenter.getCurrentItem().fileExt))
                         .observeOn(AndroidSchedulers.mainThread())
-                        .subscribe(title -> showDuplicateTitlePopup(title + "." + presenter.getCurrentItem().fileExt))
+                        .subscribe(title -> showDuplicateTitlePopup(title + "." + presenter.getCurrentItem().fileExt), Timber::e)
         );
     }
 
