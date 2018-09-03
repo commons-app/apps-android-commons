@@ -57,10 +57,7 @@ public class CommonsApplication extends Application {
     /**
      * Constants begin
      */
-    public class REQUEST_CODES {
-
-        public static final int OPEN_APPLICATION_DETAIL_SETTINGS = 1001;
-    }
+    public static final int OPEN_APPLICATION_DETAIL_SETTINGS = 1001;
 
     public static final String DEFAULT_EDIT_SUMMARY = "Uploaded using [[COM:MOA|Commons Mobile App]]";
 

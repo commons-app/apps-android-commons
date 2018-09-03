@@ -366,7 +366,7 @@ public class MultipleShareActivity extends AuthenticatedActivity
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == CommonsApplication.REQUEST_CODES.OPEN_APPLICATION_DETAIL_SETTINGS) {
+        if (requestCode == CommonsApplication.OPEN_APPLICATION_DETAIL_SETTINGS) {
             //OnActivity result, no matter what the result is, our function can handle that.
             askDexterToHandleExternalStoragePermission();
         }
