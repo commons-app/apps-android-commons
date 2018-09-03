@@ -161,6 +161,7 @@
   <string name="welcome_copyright_subtext">请避免上传您在互联网找到的有版权的素材以及海报的图像、图书封面等。</string>
   <string name="welcome_final_text">您明白了吗？</string>
   <string name="welcome_final_button_text">是！</string>
+  <string name="welcome_help_button_text">&lt;u&gt;更多信息&lt;/u&gt;</string>
   <string name="detail_panel_cats_label">分类</string>
   <string name="detail_panel_cats_loading">正在载入…</string>
   <string name="detail_panel_cats_none">未选择</string>
@@ -248,6 +249,7 @@
   <string name="null_url">错误！找不到URL</string>
   <string name="nominate_deletion">提交删除</string>
   <string name="nominated_for_deletion">此图片已被提交删除。</string>
+  <string name="nominated_see_more">&lt;u&gt;查看网页获取详情&lt;/u&gt;</string>
   <string name="view_browser">在浏览器中预览</string>
   <string name="nearby_location_has_not_changed">位置没有更新。</string>
   <string name="nearby_location_not_available">位置不可用。</string>
