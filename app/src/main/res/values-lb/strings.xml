@@ -274,4 +274,5 @@
   <string name="level">NIVEAU</string>
   <string name="images_uploaded">Eropgeluede Biller</string>
   <string name="image_reverts">Biller net zréckgesat</string>
+  <string name="notifications_channel_name_all">Notifikatioun vu Commons</string>
 </resources>

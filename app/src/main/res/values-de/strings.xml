@@ -159,7 +159,7 @@
   <string name="welcome_copyright_subtext">Vermeide urheberrechtlich geschütztes Material, das du im Internet gefunden hast wie Bilder von Postern, Buchcovern etc.</string>
   <string name="welcome_final_text">Verstanden?</string>
   <string name="welcome_final_button_text">Ja!</string>
-  <string name="welcome_help_button_text"/>
+  <string name="welcome_help_button_text">&lt;u&gt;Weitere Informationen&lt;/u&gt;</string>
   <string name="detail_panel_cats_label">Kategorien</string>
   <string name="detail_panel_cats_loading">Lade …</string>
   <string name="detail_panel_cats_none">Keine ausgewählt</string>
@@ -247,13 +247,15 @@
   <string name="null_url">Fehler! URL nicht gefunden</string>
   <string name="nominate_deletion">Zur Löschung vorschlagen</string>
   <string name="nominated_for_deletion">Dieses Bild wurde zur Löschung vorgeschlagen.</string>
-  <string name="nominated_see_more"/>
+  <string name="nominated_see_more">&lt;u&gt;Siehe die Webseite für Einzelheiten&lt;/u&gt;</string>
   <string name="view_browser">Im Browser ansehen</string>
   <string name="skip_login">Überspringen</string>
   <string name="navigation_item_login">Anmelden</string>
   <string name="skip_login_title">Möchtest du wirklich die Anmeldung überspringen?</string>
   <string name="skip_login_message">Du wirst keine Bilder hochladen können.</string>
   <string name="login_alert_message">Bitte melde dich an, um diese Funktion zu nutzen.</string>
+  <string name="copy_wikicode">Wikicode in die Zwischenablage kopieren</string>
+  <string name="wikicode_copied">Wikicode in die Zwischenablage kopiert</string>
   <string name="nearby_location_has_not_changed">Der Standort hat sich nicht geändert.</string>
   <string name="nearby_location_not_available">Der Standort ist nicht verfügbar.</string>
   <string name="location_permission_rationale_nearby">Berechtigung zur Anzeige einer Liste mit Orten in der Nähe erforderlich</string>
