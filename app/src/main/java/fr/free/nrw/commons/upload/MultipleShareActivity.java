@@ -29,7 +29,7 @@ import com.karumi.dexter.DexterBuilder;
 import com.karumi.dexter.listener.PermissionDeniedResponse;
 import com.karumi.dexter.listener.PermissionGrantedResponse;
 import com.karumi.dexter.listener.single.BasePermissionListener;
-import fr.free.nrw.commons.utils.Constants.REQUEST_CODES;
+import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.utils.DialogUtil;
 import fr.free.nrw.commons.utils.DialogUtil.Callback;
 import fr.free.nrw.commons.utils.PermissionUtils;
@@ -366,7 +366,7 @@ public class MultipleShareActivity extends AuthenticatedActivity
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == REQUEST_CODES.OPEN_APPLICATION_DETAIL_SETTINGS) {
+        if (requestCode == CommonsApplication.REQUEST_CODES.OPEN_APPLICATION_DETAIL_SETTINGS) {
             //OnActivity result, no matter what the result is, our function can handle that.
             askDexterToHandleExternalStoragePermission();
         }
