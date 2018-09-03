@@ -233,17 +233,27 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
 
     @Override
     public String getCentralAuthToken() throws IOException {
-        String centralAuthToken = api.action("centralauthtoken")
-                .get()
-                .getString("/api/centralauthtoken/@centralauthtoken");
+        CustomApiResult result = api.action("centralauthtoken").get();
+        String centralAuthToken = result.getString("/api/centralauthtoken/@centralauthtoken");
+
         Timber.d("MediaWiki Central auth token is %s", centralAuthToken);
 
-        if(centralAuthToken == null || centralAuthToken.isEmpty()) {
+        if ((centralAuthToken == null || centralAuthToken.isEmpty())
+                && "notLoggedIn".equals(result.getString("api/error/@code"))) {
+            Timber.d("Central auth token isn't valid. Trying to fetch a fresh token");
             api.removeAllCookies();
-            String login = login(AccountUtil.getUserName(context), AccountUtil.getPassword(context));
-            if(login.equals("PASS")) {
+            String loginResultCode = login(AccountUtil.getUserName(context), AccountUtil.getPassword(context));
+            if(loginResultCode.equals("PASS")) {
                 return getCentralAuthToken();
+            } else if(loginResultCode.equals("2FA")) {
+                Timber.e("Cannot refresh session for 2FA enabled user. Login required");
+            } else {
+                Timber.e("Error occurred in refreshing session. Error code is %s", loginResultCode);
             }
+        } else {
+            Timber.e("Error occurred while fetching auth token. Error code is %s and message is %s",
+                    result.getString("api/error/@code"),
+                    result.getString("api/error/@info"));
         }
         return centralAuthToken;
     }
@@ -467,13 +477,12 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
             return false;
         }
 
-        Node node = result.getNode("api").getDocument();
-        Element element = (Element) node;
-
-        if (element != null && element.getAttribute("status").equals("success")) {
+        if ("success".equals(result.getString("api/tag/result/@status"))) {
             return true;
         } else {
-            Timber.e(result.getString("api/error/@code") + " " + result.getString("api/error/@info"));
+            Timber.e("Error occurred in creating claim. Error code is: %s and message is %s",
+                    result.getString("api/error/@code"),
+                    result.getString("api/error/@info"));
         }
         return false;
     }
