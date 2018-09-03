@@ -3,6 +3,8 @@
 * Xuacu
 -->
 <resources>
+  <string name="title_activity_explore">Esplorar</string>
+  <string name="navigation_item_explore">Esplorar</string>
   <string name="preference_category_appearance">Aspeutu</string>
   <string name="preference_category_general">Xeneral</string>
   <string name="preference_category_feedback">La to opinión</string>
@@ -10,6 +12,7 @@
   <string name="app_name">Commons</string>
   <string name="bullet">•</string>
   <string name="menu_settings">Configuración</string>
+  <string name="intent_share_upload_label">Xubir a Commons</string>
   <string name="username">Nome d\'usuariu</string>
   <string name="password">Contraseña</string>
   <string name="login_credential">Anicia sesión na to cuenta de Commons Beta</string>
@@ -56,6 +59,7 @@
   <string name="login_failed_generic">Falló l\'aniciu de sesión</string>
   <string name="share_upload_button">Xubir</string>
   <string name="multiple_share_base_title">Da-y un nome al conxuntu</string>
+  <string name="add_set_name_toast">Apurre un nome para esti conxuntu</string>
   <string name="provider_modifications">Cambeos</string>
   <string name="menu_upload_single">Xubir</string>
   <string name="categories_search_text_hint">Guetar categoríes</string>
@@ -84,6 +88,7 @@
   <string name="title_activity_settings">Configuración</string>
   <string name="title_activity_signup">Date d\'alta</string>
   <string name="title_activity_featured_images">Imáxenes destacaes</string>
+  <string name="title_activity_category_details">Categoría</string>
   <string name="menu_about">Tocante a</string>
   <string name="about_license">La app de Wikimedia Commons ye software de códigu abiertu, creáu y calteníu por becaos y voluntarios de la comunidá de Wikimedia. La Fundación Wikimedia nun participa na creación, desendolcu nin caltenimientu de la app.</string>
   <string name="about_improve">Crea una nueva &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;incidencia en GitHub&lt;/a&gt; pa informar de problemes y suxerencies.</string>
@@ -191,6 +196,8 @@
   <string name="background_image">Imaxe de fondu</string>
   <string name="mediaimage_failed">Falló la imaxe multimedia</string>
   <string name="no_image_found">Nun s\'atopó nenguna imaxe</string>
+  <string name="no_subcategory_found">Nun s\'alcontraron categoríes</string>
+  <string name="no_parentcategory_found">Nun s\'atopó nenguna categoría padre</string>
   <string name="upload_image">Xubir imaxe</string>
   <string name="welcome_image_mount_zao">Monte Zao</string>
   <string name="welcome_image_llamas">Llames</string>
@@ -235,6 +242,13 @@
   <string name="nominate_deletion">Marcada pa desaniciar</string>
   <string name="nominated_for_deletion">Esta imaxe marcóse pa desaniciar.</string>
   <string name="view_browser">Ver nel restolador</string>
+  <string name="skip_login">Saltar</string>
+  <string name="navigation_item_login">Aniciar sesión</string>
+  <string name="skip_login_title">¿Realmente quiés saltar l\'aniciu de sesión?</string>
+  <string name="skip_login_message">Nun vas poder xubir imaxes.</string>
+  <string name="login_alert_message">Anicia sesión pa usar esta función</string>
+  <string name="copy_wikicode">Copiar el códigu wiki al cartafueyu</string>
+  <string name="wikicode_copied">Copióse\'l códigu wiki al cartafueyu</string>
   <string name="nearby_location_has_not_changed">L\'allugamientu nun camudó.</string>
   <string name="nearby_location_not_available">L\'allugamientu nun ta disponible.</string>
   <string name="location_permission_rationale_nearby">Ríquese permisu p\'amosar una llista de llugares cercanos</string>
@@ -269,13 +283,60 @@
   <string name="no_images_found">Nun s\'alcontró nenguna imaxe</string>
   <string name="error_loading_images">Asocedió un error al cargar les imáxenes.</string>
   <string name="image_uploaded_by">Xubida por: %1$s</string>
+  <string name="block_notification">Tas bloquiáu pa editar en Commons</string>
   <string name="appwidget_img">Semeya del día</string>
   <string name="app_widget_heading">Semeya del día</string>
+  <string name="menu_search_button">Buscar</string>
+  <string name="search_commons">Buscar en Commons</string>
+  <string name="images_not_found">Nun s\'atopó nenguna imaxe que case con %1$s</string>
+  <string name="title_activity_search">Buscar</string>
+  <string name="search_recent_header">Guetao de recién:</string>
+  <string name="provider_searches">Consultes buscaes apocayá</string>
+  <string name="error_loading_categories">Asocedió un error al cargar les categoríes.</string>
+  <string name="error_loading_subcategories">Asocedió un error al cargar les subcategoríes.</string>
   <string name="successful_wikidata_edit">Añadióse correutamente la imaxe a %1$s en Wikidata.</string>
   <string name="wikidata_edit_failure">Nun pudo anovase la entidá de Wikidata correspondiente.</string>
-  <string name="menu_set_wallpaper" fuzzy="true">Definir fondu</string>
+  <string name="menu_set_wallpaper">Poner como fondu</string>
   <string name="wallpaper_set_successfully">Fondu definíu correutamente</string>
+  <string name="quiz">Cuestionariu</string>
+  <string name="quiz_question_string">¿Puede xubise esta imaxe?</string>
+  <string name="question">Entruga</string>
+  <string name="result">Resultáu</string>
+  <string name="quiz_back_button">Si sigues xubiendo imáxenes que riquen desaniciase, la to cuenta probablemente va bloquiase. ¿Seguro que desees acabar el cuestionariu?</string>
+  <string name="quiz_alert_message">Más d\'un %1$s de les imáxenes que xubisti desaniciáronse. Si sigues xubiendo imáxenes que riquen desaniciase, la to cuenta probablemente va bloquiase.\n\n¿Desees volver a ver el tutorial y llueu contestar un cuestionariu p\'ayudate a saber qué triba d\'imáxenes puedes o nun puedes xubir?</string>
+  <string name="selfie_answer">Los selfies nun tienen munchu valor enciclopédicu. Por favor, nun xubas una semeya de ti mesmu sacante que yá esista un artículu de Wikipedia que trate de ti.</string>
+  <string name="taj_mahal_answer">Les semeyes de monumentos y escenes en esteriores pueden xubise pa la mayor parte de paises. Ten presente que les instalaciones artístiques temporales en esteriores de vezu tienen derechos d\'autor y nun pueden xubise.</string>
+  <string name="screenshot_answer">Los pantallazos de sitios web considérense obres derivaes, y tán suxetes a los derechos d\'autor del propiu sitiu web. Los mesmos pueden usase en teniendo permisu del autor. Ensin esi permisu, cualquier obra artística que crees basada nel so trabayu tien la consideración llegal de copia ensin llicencia que pertenez al autor orixinal.</string>
+  <string name="blurry_image_answer">Unu de los oxetivos de Commons ye collechar imáxenes de calidá. Por eso, les imáxenes borroses nun tendríen de xubise. Tenta siempre sacar semeyes guapes con bona lluz.</string>
+  <string name="construction_event_answer">Les semeyes qu\'amuesen la teunoloxía o la cultura son enforma bienveníes en Commons.</string>
+  <string name="warning_for_image_reverts">ATENCIÓN: Más del 1%  de les imáxenes que xubisti desaniciáronse. Si sigues xubiendo imáxenes que riquen desaniciase, la to cuenta probablemente va bloquiase.</string>
+  <string name="congratulatory_message_quiz">Algamasti un %1$s de respuestes correutes. ¡Norabona!</string>
+  <string name="warning_for_no_answer">Seleiciona una de les dos opciones pa contestar la entruga</string>
+  <string name="user_not_logged_in">La sesión caducó, anicia sesión nuevamente.</string>
+  <string name="quiz_result_share_message">¡Comparte\'l cuestionariu colos collacios</string>
+  <string name="continue_message">Siguir</string>
+  <string name="correct">Respuesta correuta</string>
+  <string name="wrong">Respuesta incorreuta</string>
+  <string name="quiz_screenshot_question">¿Puede xubise esta imaxe de pantalla?</string>
   <string name="share_app_title">Compartir app</string>
   <string name="share_coordinates_not_present">Nun s\'especificaron les coordenaes al escoyer la imaxe</string>
   <string name="error_fetching_nearby_places">Error al llograr los llugares cercanos.</string>
+  <string name="add_description">+ Añadir descripción</string>
+  <string name="delete_recent_searches_dialog">¿Tas seguru de que quies llimpiar el to historial de guetes?</string>
+  <string name="search_history_deleted">Desanicióse l\'historial de guetes</string>
+  <string name="Achievements">Llogros</string>
+  <string name="statistics">ESTADÍSTIQUES</string>
+  <string name="statistics_thanks">Agradecimientos recibíos</string>
+  <string name="statistics_featured">Imáxenes destacaes</string>
+  <string name="level">NIVEL</string>
+  <string name="images_uploaded">Imáxenes xubíes</string>
+  <string name="image_reverts">Imáxenes ensin revertir</string>
+  <string name="images_used_by_wiki">Imáxenes utilizaes</string>
+  <string name="achievements_share_message">¡Comparte los tos llogros colos collacios!</string>
+  <string name="achievements_info_message">El to nivel aumenta conforme cumples con estos requisitos. Los elementos de la sección «estadístiques» nun cunten pal to nivel.</string>
+  <string name="achievements_revert_limit_message">mínimu riquíu:</string>
+  <string name="images_uploaded_explanation">El númberu d\'imaxes que xubisti a Commons, usando cualquier software pa xubiles</string>
+  <string name="images_reverted_explanation">El porcentaxe d\'imáxenes que xubisti a Commons que nun se desaniciaron</string>
+  <string name="images_used_explanation">El númberu d\'imáxenes que xubisti a Commons que s\'utilizaron n\'artículos de Wikimedia</string>
+  <string name="notifications_channel_name_all">Avisu de Commons</string>
 </resources>
