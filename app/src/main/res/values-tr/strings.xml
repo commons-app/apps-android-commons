@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Authors:
 * Chansey
+* Dual
 * Emperyan
 * Hedda
 * Incelemeelemani
@@ -9,10 +10,13 @@
 * Neslihan Turan
 * Rapsar
 * Sayginer
+* TmY e12
 * Trockya
 * VikipediBilgini
 -->
 <resources>
+  <string name="title_activity_explore">Keşfet</string>
+  <string name="navigation_item_explore">Keşfet</string>
   <string name="preference_category_appearance">Görünüm</string>
   <string name="preference_category_general">Genel</string>
   <string name="preference_category_feedback">Geri bildirim</string>
@@ -20,6 +24,7 @@
   <string name="app_name">Commons</string>
   <string name="bullet">•</string>
   <string name="menu_settings">Ayarlar</string>
+  <string name="intent_share_upload_label">Commons\'a yükle</string>
   <string name="username">Kullanıcı adı</string>
   <string name="password">Parola</string>
   <string name="login_credential">Commons Beta hesabına giriş yap</string>
@@ -66,6 +71,7 @@
   <string name="login_failed_generic">Oturum açma başarısız</string>
   <string name="share_upload_button">Yükle</string>
   <string name="multiple_share_base_title">Bu grubun adı</string>
+  <string name="add_set_name_toast">Lütfen bu set için bir isim verin</string>
   <string name="provider_modifications">Değişiklikler</string>
   <string name="menu_upload_single">Yükle</string>
   <string name="categories_search_text_hint">Kategorileri ara</string>
@@ -94,6 +100,7 @@
   <string name="title_activity_settings">Ayarlar</string>
   <string name="title_activity_signup">Kaydol</string>
   <string name="title_activity_featured_images">Seçkin Resimler</string>
+  <string name="title_activity_category_details">Kategori</string>
   <string name="menu_about">Hakkında</string>
   <string name="about_license">Wikimedia Commons uygulaması, Wikimedia topluluğunun imtiyaz sahibi ve gönüllüleri tarafından oluşturulmuş ve sürdürülmüş açık kaynak kodlu bir uygulamadır. Vikipedi Vakfı, uygulamanın oluşturulması, geliştirilmesi veya bakımına dahil değildir.</string>
   <string name="about_improve">GitHub üzerinde &lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;Kaynak&lt;/a&gt; ve &lt;a href=\"https://commons-app.github.io/\"&gt;website&lt;/a&gt;. Hata raporları ve önerileri için yeni bir &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;GitHub sorunu&lt;/a&gt; oluştur.</string>
@@ -202,6 +209,8 @@
   <string name="background_image">Arka plan görüntüsü</string>
   <string name="mediaimage_failed">Medya Görüntüsü Başarısız Oldu</string>
   <string name="no_image_found">Resim Bulunamadı</string>
+  <string name="no_subcategory_found">Alt kategori bulunamadı</string>
+  <string name="no_parentcategory_found">Üst kategori bulunamadı</string>
   <string name="upload_image">Resim Yükle</string>
   <string name="welcome_image_mount_zao">Zao Dağı</string>
   <string name="welcome_image_llamas">Lamalar</string>
@@ -245,7 +254,15 @@
   <string name="null_url">Hata! URL bulunamadı</string>
   <string name="nominate_deletion">Silinmeye aday göster</string>
   <string name="nominated_for_deletion">Bu görsel silinmesi için aday gösterildi.</string>
+  <string name="nominated_see_more">&lt;u&gt;Web sayfasının detaylarını gör&lt;/u&gt;</string>
   <string name="view_browser">Tarayıcıda görüntüle</string>
+  <string name="skip_login">Geç</string>
+  <string name="navigation_item_login">Oturum aç</string>
+  <string name="skip_login_title">Giriş işlemini gerçekten atlamak istiyor musunuz?</string>
+  <string name="skip_login_message">Resim yükleyemeyeceksiniz.</string>
+  <string name="login_alert_message">Bu özelliği kullanmak için lütfen giriş yapın</string>
+  <string name="copy_wikicode">Wikicode\'yi panoya kopyala</string>
+  <string name="wikicode_copied">Wikicode panoya kopyalandı</string>
   <string name="nearby_location_has_not_changed">Konum değiştirilmedi</string>
   <string name="nearby_location_not_available">Konum kullanılamıyor.</string>
   <string name="location_permission_rationale_nearby">Yakındaki yerler listesini görüntülemek için izin vermeniz gerekiyor</string>
@@ -280,14 +297,40 @@
   <string name="no_images_found">Resim bulunamadı!</string>
   <string name="error_loading_images">Resimler yüklenirken hata oluştu.</string>
   <string name="image_uploaded_by">Yükleyen: %1$s</string>
+  <string name="block_notification">Commons\'dan engellendiniz</string>
   <string name="appwidget_img">Günün Resmi</string>
   <string name="app_widget_heading">Günün Resmi</string>
+  <string name="menu_search_button">Ara</string>
+  <string name="search_commons">Commons üzerinde ara</string>
+  <string name="images_not_found">%1$ ile eşleşen resim bulunamadı</string>
+  <string name="title_activity_search">Ara</string>
+  <string name="search_recent_header">Son aramalar:</string>
+  <string name="provider_searches">Son aranan sorgular</string>
+  <string name="error_loading_categories">Kategoriler yüklenirken hata oluştu.</string>
   <string name="successful_wikidata_edit">Resim, Vikiveri\'de %1$s içine başarıyla eklendi.</string>
   <string name="wikidata_edit_failure">Karşılık gelen Vikiveri varlığı güncellenemedi!</string>
-  <string name="menu_set_wallpaper" fuzzy="true">Duvar kağıdı ayarla</string>
+  <string name="menu_set_wallpaper">Duvar kağıdı olarak ayarla</string>
   <string name="wallpaper_set_successfully">Duvar kağıdı başarıyla ayarlandı!</string>
+  <string name="quiz">Bilgi yarışması</string>
+  <string name="quiz_question_string">Bu resim yüklemek için uygun mu?</string>
+  <string name="question">Soru</string>
+  <string name="result">Sonuç</string>
   <string name="user_not_logged_in">Oturumun süresi doldu, lütfen tekrar giriş yapın.</string>
+  <string name="continue_message">Devam et</string>
+  <string name="correct">Doğru Cevap</string>
+  <string name="wrong">Yanlış Cevap</string>
   <string name="share_app_title">Uygulamayı Paylaş</string>
   <string name="share_coordinates_not_present">Koordinatlar görüntü seçimi sırasında belirlenmedi</string>
   <string name="error_fetching_nearby_places">Yakındaki yerler alınırken hata oluştu.</string>
+  <string name="add_description">+ Açıklama ekle</string>
+  <string name="search_history_deleted">Arama geçmişi silindi</string>
+  <string name="Achievements">Başarılar</string>
+  <string name="statistics">İSTATİSTİKLER</string>
+  <string name="statistics_thanks">Alınan Teşekkürler</string>
+  <string name="statistics_featured">Öne Çıkan Görüntüler</string>
+  <string name="level">SEVİYE</string>
+  <string name="images_uploaded">Resimler Yüklendi</string>
+  <string name="images_used_by_wiki">Resimler Kullanıldı</string>
+  <string name="achievements_revert_limit_message">Minimum gerekli:</string>
+  <string name="notifications_channel_name_all">Commons Bildirimi</string>
 </resources>

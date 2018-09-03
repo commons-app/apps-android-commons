@@ -166,6 +166,7 @@
   <string name="welcome_copyright_subtext">Evite material com direito autoral que você encontrou na internet assim como imagens de posters, capas de livros, etc.</string>
   <string name="welcome_final_text">Você acha que conseguiu?</string>
   <string name="welcome_final_button_text">Sim!</string>
+  <string name="welcome_help_button_text">&lt;u&gt;Mais Informações&lt;/u&gt;</string>
   <string name="detail_panel_cats_label">Categorias</string>
   <string name="detail_panel_cats_loading">Carregando…</string>
   <string name="detail_panel_cats_none">Nenhum selecionado</string>
@@ -253,12 +254,15 @@
   <string name="null_url">Erro! URL não encontrado</string>
   <string name="nominate_deletion">Nomear para a exclusão</string>
   <string name="nominated_for_deletion">Esta imagem foi nomeada para eliminação.</string>
+  <string name="nominated_see_more">&lt;u&gt;Veja a página para detalhes&lt;/u&gt;</string>
   <string name="view_browser">Exibir no navegador</string>
   <string name="skip_login">Pular</string>
   <string name="navigation_item_login">Entrar</string>
   <string name="skip_login_title">Você realmente quer pular a entrada?</string>
   <string name="skip_login_message">Você não poderá enviar fotos.</string>
   <string name="login_alert_message">Entre para usar esta funcionalidade</string>
+  <string name="copy_wikicode">Copie o Wikicode para a área de transferência</string>
+  <string name="wikicode_copied">Wikicode copiado para a área de transferência</string>
   <string name="nearby_location_has_not_changed">O local não mudou.</string>
   <string name="nearby_location_not_available">Localização não disponível.</string>
   <string name="location_permission_rationale_nearby">Permissão necessária para exibir uma lista de locais próximos</string>

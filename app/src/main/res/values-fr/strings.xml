@@ -171,6 +171,7 @@
   <string name="welcome_copyright_subtext">Évitez les œuvres protégées que vous pouvez trouver sur l’Internet ainsi que les images d’affiches, couvertures de livres, etc.</string>
   <string name="welcome_final_text">Vous pensez que c’est bon ?</string>
   <string name="welcome_final_button_text">Oui !</string>
+  <string name="welcome_help_button_text">&lt;u&gt;Davantage d\'informations&lt;/u&gt;</string>
   <string name="detail_panel_cats_label">Catégories</string>
   <string name="detail_panel_cats_loading">Chargement…</string>
   <string name="detail_panel_cats_none">Aucune catégorie sélectionnée</string>
@@ -265,6 +266,8 @@
   <string name="skip_login_title">Voulez-vous vraiment ne pas vous connecter ?</string>
   <string name="skip_login_message">Vous ne pourrez pas téléverser d\'images.</string>
   <string name="login_alert_message">Veuillez vous connecter pour utiliser cette fonctionnalité</string>
+  <string name="copy_wikicode">Copier le code Wiki dans le presse-papiers</string>
+  <string name="wikicode_copied">Code wiki copié dans le presse-papiers</string>
   <string name="nearby_location_has_not_changed">L\'emplacement n\'a pas changé.</string>
   <string name="nearby_location_not_available">Emplacement non disponible.</string>
   <string name="location_permission_rationale_nearby">Une permission est requise pour afficher une liste de lieux relatifs</string>

@@ -259,6 +259,8 @@
   <string name="skip_login_title">您確定要略過登入嗎？</string>
   <string name="skip_login_message">您將無法上傳圖片。</string>
   <string name="login_alert_message">請登入來使用此功能</string>
+  <string name="copy_wikicode">複製 wiki 代碼到剪貼簿</string>
+  <string name="wikicode_copied">Wiki 代碼已複製到剪貼簿</string>
   <string name="nearby_location_has_not_changed">位置無法更改。</string>
   <string name="nearby_location_not_available">位置無效。</string>
   <string name="location_permission_rationale_nearby">需權限來顯示附近地點清單</string>
