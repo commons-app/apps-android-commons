@@ -5,7 +5,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.v7.app.AlertDialog.Builder;
-import android.util.Log;
 
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.WelcomeActivity;
@@ -89,12 +88,16 @@ public class QuizChecker {
      */
     private void setRevertCount() {
             compositeDisposable.add(mediaWikiApi
-                    .getRevertRespObjectSingle(userName)
+                    .getAchievements(userName)
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe(
-                            object -> setRevertParameter(object.getInt("deletedUploads"))
-                    ));
+                            response -> {
+                                if (response != null) {
+                                    setRevertParameter(response.getDeletedUploads());
+                                }
+                            })
+            );
     }
 
     /**

@@ -24,7 +24,6 @@ import org.apache.http.impl.conn.tsccm.ThreadSafeClientConnManager;
 import org.apache.http.params.BasicHttpParams;
 import org.apache.http.params.CoreProtocolPNames;
 import org.apache.http.util.EntityUtils;
-import org.json.JSONObject;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
@@ -45,6 +44,7 @@ import java.util.concurrent.Callable;
 import fr.free.nrw.commons.BuildConfig;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.PageTitle;
+import fr.free.nrw.commons.achievements.FeedbackResponse;
 import fr.free.nrw.commons.auth.AccountUtil;
 import fr.free.nrw.commons.category.CategoryImageUtils;
 import fr.free.nrw.commons.category.QueryContinue;
@@ -76,14 +76,17 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
     private SharedPreferences defaultPreferences;
     private SharedPreferences categoryPreferences;
     private Gson gson;
+    private final OkHttpClient okHttpClient;
 
     public ApacheHttpClientMediaWikiApi(Context context,
                                         String apiURL,
                                         String wikidatApiURL,
                                         SharedPreferences defaultPreferences,
                                         SharedPreferences categoryPreferences,
-                                        Gson gson) {
+                                        Gson gson,
+                                        OkHttpClient okHttpClient) {
         this.context = context;
+        this.okHttpClient = okHttpClient;
         BasicHttpParams params = new BasicHttpParams();
         SchemeRegistry schemeRegistry = new SchemeRegistry();
         schemeRegistry.register(new Scheme("http", PlainSocketFactory.getSocketFactory(), 80));
@@ -966,9 +969,8 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
      * @param userName
      * @return
      */
-    @NonNull
     @Override
-    public Single<JSONObject> getAchievements(String userName) {
+    public Single<FeedbackResponse> getAchievements(String userName) {
         final String fetchAchievementUrlTemplate =
                 wikiMediaToolforgeUrl + "urbanecmbot/commonsmisc/feedback.py";
         return Single.fromCallable(() -> {
@@ -982,44 +984,14 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
             Request request = new Request.Builder()
                     .url(urlBuilder.toString())
                     .build();
-            OkHttpClient client = new OkHttpClient();
-            Response response = client.newCall(request).execute();
-            String jsonData = response.body().string();
-            JSONObject jsonObject = new JSONObject(jsonData);
-            return jsonObject;
+            Response response = okHttpClient.newCall(request).execute();
+            if (response.body() != null && response.isSuccessful()) {
+                String json = response.body().string();
+                return gson.fromJson(json, FeedbackResponse.class);
+            }
+            return null;
         });
 
-    }
-
-    /**
-     * This takes userName as input, which is then used to fetch the no of images deleted
-     * using OkHttp and JavaRx. This function return JSONObject
-     * @param userName
-     * @return
-     */
-    @NonNull
-    @Override
-    public Single<JSONObject> getRevertRespObjectSingle(String userName){
-        final String fetchRevertCountUrlTemplate =
-                wikiMediaToolforgeUrl + "urbanecmbot/commonsmisc/feedback.py";
-        return Single.fromCallable(() -> {
-            String url = String.format(
-                    Locale.ENGLISH,
-                    fetchRevertCountUrlTemplate,
-                    new PageTitle(userName).getText());
-            HttpUrl.Builder urlBuilder = HttpUrl.parse(url).newBuilder();
-            urlBuilder.addQueryParameter("user", userName);
-            urlBuilder.addQueryParameter("fetch","deletedUploads");
-            Log.i("url", urlBuilder.toString());
-            Request request = new Request.Builder()
-                    .url(urlBuilder.toString())
-                    .build();
-            OkHttpClient client = new OkHttpClient();
-            Response response = client.newCall(request).execute();
-            String jsonData = response.body().string();
-            JSONObject jsonRevertObject = new JSONObject(jsonData);
-            return jsonRevertObject;
-        });
     }
 
     private Date parseMWDate(String mwDate) {
