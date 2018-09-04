@@ -1,5 +1,18 @@
 # Wikimedia Commons for Android
 
+## v2.8.1
+- Fixed bug with category edits not being sent to server
+
+## v2.8.0
+- Fixed failed uploads by modifying auth token
+- Fixed crashes during upload by storing file temporarily
+- Added automatic Wikidata p18 edits upon Nearby upload
+- Added Explore feature to browse other Commons images, including featured images
+- Added Achievements feature to see current level and upload stats
+- Added quiz for users with high deletion rates
+- Added first run tutorial for Nearby
+- Various small improvements to ShareActivity UI
+
 ## v2.7.2
 - Modified subtext for "automatically get current location" setting to emphasize that it will reveal user's location
 

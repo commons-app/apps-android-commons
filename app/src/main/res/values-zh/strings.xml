@@ -9,6 +9,7 @@
 * Shizhao
 * Wxyveronica
 * Yfdyh000
+* 阿pp
 -->
 <resources>
   <string name="title_activity_explore">探索</string>
@@ -94,7 +95,7 @@
   <string name="title_activity_settings">设置</string>
   <string name="title_activity_signup">注册</string>
   <string name="title_activity_featured_images">特色图片</string>
-  <string name="title_activity_category_details">类别</string>
+  <string name="title_activity_category_details">分类</string>
   <string name="menu_about">关于</string>
   <string name="about_license">维基共享资源应用程序是由维基媒体社区的受助者和志愿者创建和维护的开源应用程序。维基媒体基金会不参与该应用程序的创立，开发或维护。</string>
   <string name="about_improve">创建新的&lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;GitHub问题&lt;/a&gt;以发送错误报告和建议。</string>
@@ -160,6 +161,7 @@
   <string name="welcome_copyright_subtext">请避免上传您在互联网找到的有版权的素材以及海报的图像、图书封面等。</string>
   <string name="welcome_final_text">您明白了吗？</string>
   <string name="welcome_final_button_text">是！</string>
+  <string name="welcome_help_button_text">&lt;u&gt;更多信息&lt;/u&gt;</string>
   <string name="detail_panel_cats_label">分类</string>
   <string name="detail_panel_cats_loading">正在载入…</string>
   <string name="detail_panel_cats_none">未选择</string>
@@ -202,7 +204,7 @@
   <string name="background_image">背景图片</string>
   <string name="mediaimage_failed">媒体图片失败</string>
   <string name="no_image_found">找不到图片</string>
-  <string name="no_subcategory_found">找不到子类别</string>
+  <string name="no_subcategory_found">找不到子分类</string>
   <string name="no_parentcategory_found">找不到父分类</string>
   <string name="upload_image">上传图片</string>
   <string name="welcome_image_mount_zao">藏王连峰</string>
@@ -247,6 +249,7 @@
   <string name="null_url">错误！找不到URL</string>
   <string name="nominate_deletion">提交删除</string>
   <string name="nominated_for_deletion">此图片已被提交删除。</string>
+  <string name="nominated_see_more">&lt;u&gt;查看网页获取详情&lt;/u&gt;</string>
   <string name="view_browser">在浏览器中预览</string>
   <string name="nearby_location_has_not_changed">位置没有更新。</string>
   <string name="nearby_location_not_available">位置不可用。</string>
@@ -282,19 +285,33 @@
   <string name="no_images_found">找不到图片！</string>
   <string name="error_loading_images">加载图片时出错。</string>
   <string name="image_uploaded_by">由%1$s上传</string>
-  <string name="share_app_title">分享应用</string>
-  <string name="share_coordinates_not_present">图片选择时，坐标并未指定</string>
-  <string name="error_fetching_nearby_places">检索附近地点时出错。</string>
   <string name="appwidget_img">每日图片</string>
   <string name="app_widget_heading">每日图片</string>
   <string name="menu_search_button">搜索</string>
   <string name="images_not_found">找不到匹配%1$s的图片</string>
   <string name="title_activity_search">搜索</string>
-  <string name="error_loading_subcategories">加载子类别时发生错误。</string>
+  <string name="error_loading_subcategories">加载子分类时发生错误。</string>
   <string name="successful_wikidata_edit">图片已成功添加到维基数据上的%1$s！</string>
   <string name="wikidata_edit_failure">更新对应维基数据实体失败！</string>
-  <string name="menu_set_wallpaper">设置墙纸</string>
+  <string name="menu_set_wallpaper" fuzzy="true">设置墙纸</string>
   <string name="wallpaper_set_successfully">墙纸已成功设置！</string>
-  <string name="delete_recent_searches_dialog">您确认要清除您的搜索历史？</string>
   <string name="user_not_logged_in">登录会话已过期，请重新登录。</string>
+  <string name="share_app_title">分享应用</string>
+  <string name="share_coordinates_not_present">图片选择时，坐标并未指定</string>
+  <string name="error_fetching_nearby_places">检索附近地点时出错。</string>
+  <string name="delete_recent_searches_dialog">您确认要清除您的搜索历史？</string>
+  <string name="Achievements">成就</string>
+  <string name="statistics">统计</string>
+  <string name="statistics_thanks">已收到感谢</string>
+  <string name="statistics_featured">特色图片</string>
+  <string name="level">等级</string>
+  <string name="images_uploaded">已上传图片</string>
+  <string name="image_reverts">未还原图片</string>
+  <string name="images_used_by_wiki">使用过的图片</string>
+  <string name="achievements_share_message">与朋友分享您的所得！</string>
+  <string name="achievements_info_message">当您满足这些要求时，您的等级会增加。“统计”部分的项目不计入等级计算范围。</string>
+  <string name="achievements_revert_limit_message">最低要求：</string>
+  <string name="images_uploaded_explanation">您通过任一上传软件上传至共享资源的图片总数量</string>
+  <string name="images_reverted_explanation">您上传至共享资源的图片中未经删除的数量占上传总数量的百分比</string>
+  <string name="images_used_explanation">您上传至共享资源，并用于维基媒体条目的图片数量</string>
 </resources>

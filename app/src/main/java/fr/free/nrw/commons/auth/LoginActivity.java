@@ -16,6 +16,7 @@ import android.support.annotation.StringRes;
 import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.NavUtils;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatDelegate;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -26,6 +27,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.io.IOException;
 import java.util.Locale;
@@ -41,6 +43,7 @@ import fr.free.nrw.commons.PageTitle;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.Utils;
 import fr.free.nrw.commons.WelcomeActivity;
+import fr.free.nrw.commons.category.CategoryImagesActivity;
 import fr.free.nrw.commons.contributions.ContributionsActivity;
 import fr.free.nrw.commons.di.ApplicationlessInjection;
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
@@ -55,15 +58,14 @@ import timber.log.Timber;
 import static android.view.KeyEvent.KEYCODE_ENTER;
 import static android.view.View.VISIBLE;
 import static android.view.inputmethod.EditorInfo.IME_ACTION_DONE;
-import static fr.free.nrw.commons.auth.AccountUtil.ACCOUNT_TYPE;
 import static fr.free.nrw.commons.auth.AccountUtil.AUTH_TOKEN_TYPE;
 
 public class LoginActivity extends AccountAuthenticatorActivity {
 
     public static final String PARAM_USERNAME = "fr.free.nrw.commons.login.username";
+    private static final String FEATURED_IMAGES_CATEGORY = "Category:Featured_pictures_on_Wikimedia_Commons";
 
     @Inject MediaWikiApi mwApi;
-    @Inject AccountUtil accountUtil;
     @Inject SessionManager sessionManager;
     @Inject @Named("application_preferences") SharedPreferences prefs;
     @Inject @Named("default_preferences") SharedPreferences defaultPrefs;
@@ -78,6 +80,7 @@ public class LoginActivity extends AccountAuthenticatorActivity {
     @BindView(R.id.login_credentials) TextView loginCredentials;
     @BindView(R.id.two_factor_container) TextInputLayout twoFactorContainer;
     @BindView(R.id.forgotPassword) HtmlTextView forgotPasswordText;
+    @BindView(R.id.skipLogin) HtmlTextView skipLoginText;
 
     ProgressDialog progressDialog;
     private AppCompatDelegate delegate;
@@ -127,12 +130,32 @@ public class LoginActivity extends AccountAuthenticatorActivity {
         signupButton.setOnClickListener(view -> signUp());
 
         forgotPasswordText.setOnClickListener(view -> forgotPassword());
+        skipLoginText.setOnClickListener(view -> new AlertDialog.Builder(this).setTitle(R.string.skip_login_title)
+                .setMessage(R.string.skip_login_message)
+                .setCancelable(false)
+                .setPositiveButton(R.string.yes, (dialog, which) -> {
+                    dialog.cancel();
+                    skipLogin();
+                })
+                .setNegativeButton(R.string.no, (dialog, which) -> dialog.cancel())
+                .show());
 
         if(BuildConfig.FLAVOR.equals("beta")){
             loginCredentials.setText(getString(R.string.login_credential));
         } else {
             loginCredentials.setVisibility(View.GONE);
         }
+    }
+
+    /**
+     * This function is called when user skips the login.
+     * It redirects the user to Explore Activity.
+     */
+    private void skipLogin() {
+        prefs.edit().putBoolean("login_skipped", true).apply();
+        CategoryImagesActivity.startYourself(this, getString(R.string.title_activity_explore), FEATURED_IMAGES_CATEGORY);
+        finish();
+
     }
 
     private void forgotPassword() {
@@ -161,9 +184,15 @@ public class LoginActivity extends AccountAuthenticatorActivity {
         if (sessionManager.getCurrentAccount() != null
                 && sessionManager.isUserLoggedIn()
                 && sessionManager.getCachedAuthCookie() != null) {
+            prefs.edit().putBoolean("login_skipped", false).apply();
             sessionManager.revalidateAuthToken();
             startMainActivity();
         }
+
+        if (prefs.getBoolean("login_skipped", false)){
+            skipLogin();
+        }
+
     }
 
     @Override
@@ -243,12 +272,12 @@ public class LoginActivity extends AccountAuthenticatorActivity {
             if (response != null) {
                 Bundle authResult = new Bundle();
                 authResult.putString(AccountManager.KEY_ACCOUNT_NAME, username);
-                authResult.putString(AccountManager.KEY_ACCOUNT_TYPE, ACCOUNT_TYPE);
+                authResult.putString(AccountManager.KEY_ACCOUNT_TYPE, BuildConfig.ACCOUNT_TYPE);
                 response.onResult(authResult);
             }
         }
 
-        accountUtil.createAccount(response, username, password);
+        sessionManager.createAccount(response, username, password);
         startMainActivity();
     }
 

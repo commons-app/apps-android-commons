@@ -117,7 +117,13 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment {
         if (resultCode == RESULT_OK) {
             Timber.d("OnActivityResult() parameters: Req code: %d Result code: %d Data: %s",
                     requestCode, resultCode, data);
-            controller.handleImagePicked(requestCode, data, false, null);
+            if (requestCode == ContributionController.SELECT_FROM_CAMERA) {
+                // If coming from camera, pass null as uri. Because camera photos get saved to a
+                // fixed directory
+                controller.handleImagePicked(requestCode, null, false, null);
+            } else {
+                controller.handleImagePicked(requestCode, data.getData(), false, null);
+            }
         } else {
             Timber.e("OnActivityResult() parameters: Req code: %d Result code: %d Data: %s",
                     requestCode, resultCode, data);
@@ -145,11 +151,11 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment {
 
                             new AlertDialog.Builder(getActivity())
                                     .setMessage(getString(R.string.read_storage_permission_rationale))
-                                    .setPositiveButton("OK", (dialog, which) -> {
+                                    .setPositiveButton(android.R.string.ok, (dialog, which) -> {
                                         requestPermissions(new String[]{READ_EXTERNAL_STORAGE}, 1);
                                         dialog.dismiss();
                                     })
-                                    .setNegativeButton("Cancel", null)
+                                    .setNegativeButton(android.R.string.cancel, null)
                                     .create()
                                     .show();
 
@@ -187,11 +193,11 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment {
                             // sees the explanation, try again to request the permission.
                             new AlertDialog.Builder(getActivity())
                                     .setMessage(getString(R.string.write_storage_permission_rationale))
-                                    .setPositiveButton("OK", (dialog, which) -> {
+                                    .setPositiveButton(android.R.string.ok, (dialog, which) -> {
                                         requestPermissions(new String[]{WRITE_EXTERNAL_STORAGE}, 3);
                                         dialog.dismiss();
                                     })
-                                    .setNegativeButton("Cancel", null)
+                                    .setNegativeButton(android.R.string.cancel, null)
                                     .create()
                                     .show();
                         } else {

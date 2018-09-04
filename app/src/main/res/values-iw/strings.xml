@@ -12,6 +12,8 @@
 * YaronSh
 -->
 <resources>
+  <string name="title_activity_explore">לחקור</string>
+  <string name="navigation_item_explore">לחקור</string>
   <string name="preference_category_appearance">מראה</string>
   <string name="preference_category_general">כללי</string>
   <string name="preference_category_feedback">משוב</string>
@@ -19,8 +21,9 @@
   <string name="app_name">ויקישיתוף</string>
   <string name="bullet">•</string>
   <string name="menu_settings">הגדרות</string>
+  <string name="intent_share_upload_label">להעלות לוויקישיתוף</string>
   <string name="username">שם משתמש</string>
-  <string name="password">ססמה</string>
+  <string name="password">סיסמה</string>
   <string name="login_credential">כניסה לחשבון Commons Beta שלך</string>
   <string name="login">כניסה</string>
   <string name="forgot_password">שכחת את הסיסמה?</string>
@@ -65,6 +68,7 @@
   <string name="login_failed_generic">ההעלאלה נכשלה</string>
   <string name="share_upload_button">העלאה</string>
   <string name="multiple_share_base_title">שם האוסף</string>
+  <string name="add_set_name_toast">נא לספק שם לערכה הזאת</string>
   <string name="provider_modifications">שינויים</string>
   <string name="menu_upload_single">העלאה</string>
   <string name="categories_search_text_hint">חיפוש קטגוריות</string>
@@ -93,6 +97,7 @@
   <string name="title_activity_settings">הגדרות</string>
   <string name="title_activity_signup">רישום</string>
   <string name="title_activity_featured_images">תמונות מומלצות</string>
+  <string name="title_activity_category_details">קטגוריה</string>
   <string name="menu_about">אודות</string>
   <string name="about_license">יישום ויקישיתוף (Wikimedia Commons app) הוא יישום קוד פתוח שמפותח ומתוחזק על־ידי מקבלי מלגות ומתנדבים של קהילת ויקימדיה. קרן ויקימדיה אינה מעורבת ביצירה, פיתוח, או תחזוקה של היישום.</string>
   <string name="about_improve">נא ליצור &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;דיווח בגיטהאב&lt;/a&gt; בשביל באגים והצעות.</string>
@@ -200,6 +205,8 @@
   <string name="background_image">תמונת רקע</string>
   <string name="mediaimage_failed">תמונת המדיה נכשלה</string>
   <string name="no_image_found">לא נמצאה תמונה</string>
+  <string name="no_subcategory_found">לא נמצאו תת־קטגוריות</string>
+  <string name="no_parentcategory_found">לא נמצאו קטגוריות הורות</string>
   <string name="upload_image">העלאת תמונה</string>
   <string name="welcome_image_mount_zao">הר זאו</string>
   <string name="welcome_image_llamas">לאמות</string>
@@ -245,6 +252,11 @@
   <string name="nominated_for_deletion">התמונה הזאת מועמדת למחיקה</string>
   <string name="nominated_see_more"/>
   <string name="view_browser">הצגה בדפדפן</string>
+  <string name="skip_login">לדלג</string>
+  <string name="navigation_item_login">כניסה לחשבון</string>
+  <string name="skip_login_title">האם באמת לדלג על הכניסה לחשבון?</string>
+  <string name="skip_login_message">לא תהיה לך אפשרות להעלות תמונות.</string>
+  <string name="login_alert_message">נא להיכנס לחשבון כדי להשתמש באפשרות הזאת</string>
   <string name="nearby_location_has_not_changed">המיקום לא השתנה.</string>
   <string name="nearby_location_not_available">המיקום אינו זמין.</string>
   <string name="location_permission_rationale_nearby">נדרשת הרשאה כדי להציג רשימה של מקומות בסביבה</string>
@@ -279,14 +291,31 @@
   <string name="no_images_found">לא נמצאו תמונות!</string>
   <string name="error_loading_images">אירעה שגיאה בטעינת התמונות.</string>
   <string name="image_uploaded_by">הועלתה על־ידי: %1$s</string>
+  <string name="block_notification">נחסמת מעריכת ויקישיתוף</string>
+  <string name="appwidget_img">תמונת היום</string>
+  <string name="app_widget_heading">תמונת היום</string>
+  <string name="menu_search_button">חיפוש</string>
+  <string name="search_commons">חיפוש בוויקישיתוף</string>
+  <string name="images_not_found">לא נמצאו תמונות שמתאימות לחיפוש %1$s</string>
+  <string name="title_activity_search">חיפוש</string>
+  <string name="search_recent_header">חיפוש אחרונים:</string>
+  <string name="provider_searches">דברים שחיפשת לאחרונה</string>
+  <string name="error_loading_categories">אירעה שגיאה בעת טעינת קטגוריות.</string>
+  <string name="error_loading_subcategories">אירעה שגיאה בעת טעינת תת־קטגוריות.</string>
+  <string name="successful_wikidata_edit">התמונה נוספה בהצלחה ל־%1$s בוויקינתונים!</string>
+  <string name="wikidata_edit_failure">לא ניתן היה לעדכן הישות המתאימה בוויקינתונים!</string>
+  <string name="menu_set_wallpaper">הגדרה בתור טפט</string>
+  <string name="wallpaper_set_successfully">הרקע הוגדר בהצלחה!</string>
+  <string name="quiz">מבחן</string>
+  <string name="quiz_question_string">האם בסדר להעלות את התמונה הזאת?</string>
+  <string name="question">שאלה</string>
+  <string name="result">תוצאה</string>
+  <string name="quiz_back_button">העלאה של תמונות שדורשות מחיקה תגרום להחרמתך. האם באמת לסיים את הבוחן?</string>
+  <string name="quiz_alert_message">יותר מ־%1$s מהתמונות שהעלית נמחקו. אם תמשיך להעלות תמונות שצריך למחוק, חשבונך כנראה ייחסם.\n\nאולי תרצה לראות שוב את המדריך ואז לעשות בוחן כדי לעזור לך ללמוד אילו סוגים של תמונות צריך או לא צריך להעלות?</string>
+  <string name="selfie_answer">בתמנות עצמיות (סלפי) אין ערך אנציקלופדי. נא לא להעלות תמונות של עצמך אלא אם כן יש עליך ערך בוויקיפדיה.</string>
+  <string name="taj_mahal_answer">מותר להעלות תמונות של אנדרטאות ונופים ברוב המדינות. נא לשים לב לכך שיצירות אומנות שמוצבות באופן זמני בחוץ מוגבלות לעיתים קרובות בזכויות יוצרים, ואסור להעלות אותן.</string>
+  <string name="user_not_logged_in">זמן הכניסה לחשבון פקע, נא להיכנס שוב.</string>
   <string name="share_app_title">שיתוף היישום</string>
   <string name="share_coordinates_not_present">לא צוינו קואורדינטות בעת בחירת התמונה</string>
   <string name="error_fetching_nearby_places">שגיאה באחזור המקומות בסביבתך.</string>
-  <string name="appwidget_img">תמונת היום</string>
-  <string name="app_widget_heading">תמונת היום</string>
-  <string name="successful_wikidata_edit">התמונה נוספה בהצלחה ל־%1$s בוויקינתונים!</string>
-  <string name="wikidata_edit_failure">לא ניתן היה לעדכן הישות המתאימה בוויקינתונים!</string>
-  <string name="menu_set_wallpaper">הגדרת רקע</string>
-  <string name="wallpaper_set_successfully">הרקע הוגדר בהצלחה!</string>
-  <string name="user_not_logged_in">זמן הכניסה לחשבון פקע, נא להיכנס שוב.</string>
 </resources>

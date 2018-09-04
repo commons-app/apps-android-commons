@@ -30,14 +30,13 @@
 
     <ImageView
         android:id="@+id/user_icon"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
         app:srcCompat="@drawable/ic_person_black_24dp"
         android:textColor="@color/item_white_background"
         android:textSize="@dimen/subheading_text_size"
         android:layout_below="@+id/pictureOfTheDay"
-        android:layout_marginHorizontal="@dimen/activity_margin_horizontal"
-        android:layout_toRightOf="@+id/username"
-        android:paddingBottom="@dimen/small_gap"/>
+        android:layout_marginLeft="8dp"
+        android:layout_toRightOf="@+id/username" />
 
 </RelativeLayout>

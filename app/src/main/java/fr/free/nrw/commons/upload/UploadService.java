@@ -13,6 +13,8 @@ import android.support.v4.app.NotificationCompat;
 import android.webkit.MimeTypeMap;
 import android.widget.Toast;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
@@ -23,6 +25,8 @@ import java.util.regex.Pattern;
 
 import javax.inject.Inject;
 
+import fr.free.nrw.commons.BuildConfig;
+import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.HandlerService;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.Utils;
@@ -31,7 +35,6 @@ import fr.free.nrw.commons.contributions.Contribution;
 import fr.free.nrw.commons.contributions.ContributionDao;
 import fr.free.nrw.commons.contributions.ContributionsActivity;
 import fr.free.nrw.commons.contributions.ContributionsContentProvider;
-import fr.free.nrw.commons.modifications.ModificationsContentProvider;
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
 import fr.free.nrw.commons.mwapi.UploadResult;
 import fr.free.nrw.commons.wikidata.WikidataEditService;
@@ -178,30 +181,8 @@ public class UploadService extends HandlerService<Contribution> {
     }
 
     @SuppressLint("StringFormatInvalid")
-    private void uploadContribution(Contribution contribution) {
-        InputStream file;
-
-        String notificationTag = contribution.getLocalUri().toString();
-
-        try {
-            //FIXME: Google Photos bug
-            file = this.getContentResolver().openInputStream(contribution.getLocalUri());
-        } catch (FileNotFoundException e) {
-            Timber.d("File not found");
-            Toast fileNotFound = Toast.makeText(this, R.string.upload_failed, Toast.LENGTH_LONG);
-            fileNotFound.show();
-            return;
-        }
-
-        //As the file is null there's no point in continuing the upload process
-        //mwapi.upload accepts a NonNull input stream
-        if(file == null) {
-            Timber.d("File not found");
-            return;
-        }
-
-        Timber.d("Before execution!");
-        curProgressNotification = new NotificationCompat.Builder(this).setAutoCancel(true)
+    private NotificationCompat.Builder getNotificationBuilder(Contribution contribution, String channelId) {
+        return new NotificationCompat.Builder(this, channelId).setAutoCancel(true)
                 .setSmallIcon(R.drawable.ic_launcher)
                 .setLargeIcon(BitmapFactory.decodeResource(getResources(), R.drawable.ic_launcher))
                 .setAutoCancel(true)
@@ -211,7 +192,36 @@ public class UploadService extends HandlerService<Contribution> {
                 .setProgress(100, 0, true)
                 .setContentIntent(PendingIntent.getActivity(this, 0, new Intent(this, ContributionsActivity.class), 0))
                 .setTicker(getString(R.string.upload_progress_notification_title_in_progress, contribution.getDisplayTitle()));
+    }
 
+    private void uploadContribution(Contribution contribution) {
+        InputStream fileInputStream;
+
+        String notificationTag = contribution.getLocalUri().toString();
+
+        try {
+            //FIXME: Google Photos bug
+            File file1 = new File(contribution.getLocalUri().getPath());
+            fileInputStream = new FileInputStream(file1);
+            //fileInputStream = this.getContentResolver().openInputStream(contribution.getLocalUri());
+        } catch (FileNotFoundException e) {
+            Timber.d("File not found");
+            Toast fileNotFound = Toast.makeText(this, R.string.upload_failed, Toast.LENGTH_LONG);
+            fileNotFound.show();
+            return;
+        }
+
+        //As the fileInputStream is null there's no point in continuing the upload process
+        //mwapi.upload accepts a NonNull input stream
+        if(fileInputStream == null) {
+            Timber.d("File not found");
+            return;
+        }
+
+        Timber.d("Before execution!");
+        curProgressNotification = getNotificationBuilder(
+                contribution,
+                CommonsApplication.NOTIFICATION_CHANNEL_ID_ALL);
         this.startForeground(NOTIFICATION_UPLOAD_IN_PROGRESS, curProgressNotification.build());
 
         String filename = null;
@@ -243,7 +253,7 @@ public class UploadService extends HandlerService<Contribution> {
                     getString(R.string.upload_progress_notification_title_finishing, contribution.getDisplayTitle()),
                     contribution
             );
-            UploadResult uploadResult = mwApi.uploadFile(filename, file, contribution.getDataLength(), contribution.getPageContents(), contribution.getEditSummary(), notificationUpdater);
+            UploadResult uploadResult = mwApi.uploadFile(filename, fileInputStream, contribution.getDataLength(), contribution.getPageContents(), contribution.getEditSummary(), contribution.getLocalUri(), contribution.getContentProviderUri(), notificationUpdater);
 
             Timber.d("Response is %s", uploadResult.toString());
 
@@ -272,7 +282,7 @@ public class UploadService extends HandlerService<Contribution> {
             toUpload--;
             if (toUpload == 0) {
                 // Sync modifications right after all uplaods are processed
-                ContentResolver.requestSync(sessionManager.getCurrentAccount(), ModificationsContentProvider.MODIFICATIONS_AUTHORITY, new Bundle());
+                ContentResolver.requestSync(sessionManager.getCurrentAccount(), BuildConfig.MODIFICATION_AUTHORITY, new Bundle());
                 stopForeground(true);
             }
         }

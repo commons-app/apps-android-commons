@@ -35,9 +35,12 @@ import javax.inject.Named;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.auth.SessionManager;
+import fr.free.nrw.commons.category.CategoryDetailsActivity;
+import fr.free.nrw.commons.category.CategoryImagesActivity;
 import fr.free.nrw.commons.contributions.Contribution;
 import fr.free.nrw.commons.contributions.ContributionsActivity;
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
+import fr.free.nrw.commons.explore.SearchActivity;
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
 import fr.free.nrw.commons.utils.ImageUtils;
 import timber.log.Timber;
@@ -62,6 +65,7 @@ public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment imple
     ViewPager pager;
     private Boolean editable;
     private boolean isFeaturedImage;
+    MediaDetailAdapter adapter;
 
     public MediaDetailPagerFragment() {
         this(false, false);
@@ -81,7 +85,7 @@ public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment imple
         ButterKnife.bind(this,view);
         pager.addOnPageChangeListener(this);
 
-        final MediaDetailAdapter adapter = new MediaDetailAdapter(getChildFragmentManager());
+        adapter = new MediaDetailAdapter(getChildFragmentManager());
 
         if (savedInstanceState != null) {
             final int pageNumber = savedInstanceState.getInt("current-page");
@@ -90,6 +94,12 @@ public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment imple
             view.postDelayed(() -> {
                 pager.setAdapter(adapter);
                 pager.setCurrentItem(pageNumber, false);
+
+                if(getActivity() == null) {
+                    Timber.d("Returning as activity is destroyed!");
+                    return;
+                }
+
                 getActivity().supportInvalidateOptionsMenu();
                 adapter.notifyDataSetChanged();
             }, 100);
@@ -119,6 +129,10 @@ public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment imple
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+        if(getActivity() == null) {
+            Timber.d("Returning as activity is destroyed!");
+            return true;
+        }
         MediaDetailProvider provider = (MediaDetailProvider) getActivity();
         Media m = provider.getMediaAtPosition(pager.getCurrentItem());
         switch (item.getItemId()) {
@@ -185,10 +199,13 @@ public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment imple
      * @param m Media file to download
      */
     private void downloadMedia(Media m) {
-        String imageUrl = m.getImageUrl(),
-                fileName = m.getFilename();
+        String imageUrl = m.getImageUrl(), fileName = m.getFilename();
 
-        if (imageUrl == null || fileName == null) {
+        if (imageUrl == null
+                || fileName == null
+                || getContext() ==  null
+                || getActivity() == null) {
+            Timber.d("Skipping download media as either imageUrl %s or filename %s activity is null", imageUrl, fileName);
             return;
         }
 
@@ -230,6 +247,10 @@ public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment imple
             inflater.inflate(R.menu.fragment_image_detail, menu);
             if (pager != null) {
                 MediaDetailProvider provider = (MediaDetailProvider) getActivity();
+                if(provider == null) {
+                    return;
+                }
+
                 Media m = provider.getMediaAtPosition(pager.getCurrentItem());
                 if (m != null) {
                     // Enable default set of actions, then re-enable different set of actions only if it is a failed contrib
@@ -269,11 +290,39 @@ public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment imple
 
     public void showImage(int i) {
         Handler handler =  new Handler();
-        handler.postDelayed(() -> pager.setCurrentItem(i), 10);
+        handler.postDelayed(() -> pager.setCurrentItem(i), 5);
+    }
+
+    /**
+     * The method notify the viewpager that number of items have changed.
+     */
+    public void notifyDataSetChanged(){
+        adapter.notifyDataSetChanged();
     }
 
     @Override
     public void onPageScrolled(int i, float v, int i2) {
+        if(getActivity() == null) {
+            Timber.d("Returning as activity is destroyed!");
+            return;
+        }
+        if (i+1 >= adapter.getCount()){
+            try{
+                ((CategoryImagesActivity) getContext()).requestMoreImages();
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+            try{
+                ((CategoryDetailsActivity) getContext()).requestMoreImages();
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+            try{
+                ((SearchActivity) getContext()).requestMoreImages();
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+        }
         getActivity().supportInvalidateOptionsMenu();
     }
 
@@ -308,6 +357,10 @@ public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment imple
         public Fragment getItem(int i) {
             if (i == 0) {
                 // See bug https://code.google.com/p/android/issues/detail?id=27526
+                if(getActivity() == null) {
+                    Timber.d("Skipping getItem. Returning as activity is destroyed!");
+                    return null;
+                }
                 pager.postDelayed(() -> getActivity().supportInvalidateOptionsMenu(), 5);
             }
             return MediaDetailFragment.forMedia(i, editable, isFeaturedImage);
@@ -315,6 +368,10 @@ public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment imple
 
         @Override
         public int getCount() {
+            if(getActivity() == null) {
+                Timber.d("Skipping getCount. Returning as activity is destroyed!");
+                return 0;
+            }
             return ((MediaDetailProvider) getActivity()).getTotalMediaCount();
         }
     }
