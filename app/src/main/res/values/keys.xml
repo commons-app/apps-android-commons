@@ -9,5 +9,7 @@
     <string name="exif_tag_author" translatable="false">Author</string>
     <string name="exif_tag_copyright" translatable="false">Copyright</string>
     <string name="exif_tag_model" translatable="false">Camera Model</string>
+    <string name="exif_tag_lens_model" translatable="false">Lens Model</string>
+    <string name="exif_tag_serial" translatable="false">Serial Numbers</string>
     <string name="exif_tag_software" translatable="false">Software</string>
 </resources>

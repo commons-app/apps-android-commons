@@ -310,8 +310,8 @@
   <string name="menu_set_wallpaper">Set as wallpaper</string>
   <string name="wallpaper_set_successfully">Wallpaper set successfully!</string>
 
-    <string name="redact_exif_tags">Remove EXIF Tags</string>
-    <string name="redact_exif_tags_summary">Select which EXIF tags to remove from uploads.</string>
+    <string name="manage_exif_tags">Manage EXIF Tags</string>
+    <string name="manage_exif_tags_summary">Select which EXIF tags to include in uploads.</string>
     <string name="location_accuracy">Set Location Accuracy</string>
     <string name="location_accuracy_pref_remove">Remove all location data.</string>
     <string name="location_accuracy_pref_20km">Reduce accuracy to 20km</string>
@@ -324,7 +324,9 @@
     <string name="exif_tag_name_author">Author</string>
     <string name="exif_tag_name_copyright">Copyright</string>
     <string name="exif_tag_name_model">Camera Model</string>
-    <string name="exif_tag_name_software">Software</string>
+  <string name="exif_tag_name_lens_model">Lens Model</string>
+  <string name="exif_tag_name_serial">Serial Numbers</string>
+  <string name="exif_tag_name_software">Software</string>
 
 <string name="quiz">Quiz</string>
   <string name="quiz_question_string">Is this picture OK to upload?</string>
@@ -368,5 +370,7 @@
   <string name="images_uploaded_explanation">The number of images you have uploaded to Commons, via any upload software</string>
   <string name="images_reverted_explanation">The percentage of images you have uploaded to Commons that were not deleted</string>
   <string name="images_used_explanation">The number of images you have uploaded to Commons that were used in Wikimedia articles</string>
+  <string name="keep_xmp">Keep XMP Metadata</string>
+  <string name="keep_xmp_summary">XMP is another form of image metadata storage, but it is currently not possible to remove individual XMP tags from the image. You are encouraged to disable this option if anonymity is a concern.</string>
   <string name="notifications_channel_name_all">Commons Notification</string>
 </resources>

@@ -19,6 +19,8 @@
         <item>@string/exif_tag_name_author</item>
         <item>@string/exif_tag_name_copyright</item>
         <item>@string/exif_tag_name_model</item>
+        <item>@string/exif_tag_name_lens_model</item>
+        <item>@string/exif_tag_name_serial</item>
         <item>@string/exif_tag_name_software</item>
     </array>
 
@@ -26,8 +28,19 @@
         <item>@string/exif_tag_author</item>
         <item>@string/exif_tag_copyright</item>
         <item>@string/exif_tag_model</item>
+        <item>@string/exif_tag_lens_model</item>
+        <item>@string/exif_tag_serial</item>
         <item>@string/exif_tag_software</item>
     </array>
+
+    <array name="pref_exifTag_default_values">
+        <item>@string/exif_tag_author</item>
+        <item>@string/exif_tag_copyright</item>
+        <item>@string/exif_tag_model</item>
+        <item>@string/exif_tag_lens_model</item>
+        <item>@string/exif_tag_software</item>
+    </array>
+
 
     <array name="pref_locationAccuracy_entries">
         <item>@string/location_accuracy_pref_remove</item>

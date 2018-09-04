@@ -1,11 +1,11 @@
 package fr.free.nrw.commons.upload;
 
+
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.location.Location;
 import android.support.media.ExifInterface;
 import android.net.Uri;
 import android.os.Build;
@@ -27,9 +27,12 @@ import java.util.Set;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import fr.free.nrw.commons.R;
+import fr.free.nrw.commons.Utils;
 import fr.free.nrw.commons.caching.CacheController;
 import fr.free.nrw.commons.di.ApplicationlessInjection;
 import fr.free.nrw.commons.mwapi.CategoryApi;
+import io.reactivex.Observable;
 import io.reactivex.schedulers.Schedulers;
 import timber.log.Timber;
 
@@ -56,24 +59,25 @@ public class FileProcessor implements SimilarImageDialogFragment.onResponse {
     private String decimalCoords;
     private boolean haveCheckedForOtherImages = false;
     private String filePath;
-    private String fileOrCopyPath=null;
+    private String fileOrCopyPath = null;
     private boolean prefUseExtStorage;
     private boolean cacheFound;
     private GPSExtractor tempImageObj;
-    private Set<String> prefRedactEXIFTags;
+    private Set<String> prefManageEXIFTags;
     private double prefLocationAccuracy;
-
+    private final boolean prefKeepXmp;
 
     FileProcessor(Uri mediaUri, ContentResolver contentResolver, Context context) {
         this.mediaUri = mediaUri;
-        Timber.d("mediaUri:"+ (this.mediaUri != null ? this.mediaUri.getPath() : "null"));
+        Timber.d("mediaUri:" + (this.mediaUri != null ? this.mediaUri.getPath() : "null"));
         this.contentResolver = contentResolver;
         this.context = context;
         ApplicationlessInjection.getInstance(context.getApplicationContext()).getCommonsApplicationComponent().inject(this);
         prefUseExtStorage = prefs.getBoolean("useExternalStorage", true);
-        prefRedactEXIFTags = prefs.getStringSet("redactExifTags", Collections.emptySet() );
-        prefLocationAccuracy = Double.valueOf(prefs.getString("locationAccuracy", "0"))/111300; //about 111300 meters in one degree
-        Timber.d("prefLocationAccuracy:"+prefLocationAccuracy);
+        prefManageEXIFTags = prefs.getStringSet("manageExifTags", Collections.emptySet());
+        prefLocationAccuracy = Double.valueOf(prefs.getString("locationAccuracy", "0")) / 111300; //about 111300 meters in one degree
+        prefKeepXmp = prefs.getBoolean("keepXmp", false);
+        Timber.d("prefLocationAccuracy:" + prefLocationAccuracy);
     }
 
     /**
@@ -85,11 +89,11 @@ public class FileProcessor implements SimilarImageDialogFragment.onResponse {
      */
     @Nullable
     private String getPathOfMediaOrCopy() {
-        if (fileOrCopyPath!=null)
+        if (fileOrCopyPath != null)
             return fileOrCopyPath;
         filePath = FileUtils.getPath(context, mediaUri);
         Timber.d("Filepath: " + filePath);
-        if (filePath == null || !prefRedactEXIFTags.isEmpty()) {
+        if (filePath == null || !prefManageEXIFTags.isEmpty()) {
             try {
                 ParcelFileDescriptor descriptor = contentResolver.openFileDescriptor(mediaUri, "r");
                 if (descriptor != null) {
@@ -107,7 +111,7 @@ public class FileProcessor implements SimilarImageDialogFragment.onResponse {
                 return null;
             }
         }
-        fileOrCopyPath=filePath;
+        fileOrCopyPath = filePath;
         return filePath;
     }
 
@@ -159,9 +163,9 @@ public class FileProcessor implements SimilarImageDialogFragment.onResponse {
      * @param input
      * @return The coordinate with reduced accuracy.
      */
-    double anonymizeCoord(double input){
-        double intermediate=Math.round(input/prefLocationAccuracy)*prefLocationAccuracy;
-        return Math.round(intermediate*100000.0)/100000.0; //Round to 5th decimal place.
+    double anonymizeCoord(double input) {
+        double intermediate = Math.round(input / prefLocationAccuracy) * prefLocationAccuracy;
+        return Math.round(intermediate * 100000.0) / 100000.0; //Round to 5th decimal place.
     }
 
     /**
@@ -169,21 +173,20 @@ public class FileProcessor implements SimilarImageDialogFragment.onResponse {
      *
      * @return The coordinates with reduced accuracy in "lat|long" format
      */
-    String getAnonymizedDecimalCoords(){
-        Timber.d("Anonymizing coords with setting:"+prefLocationAccuracy);
-        if(prefLocationAccuracy<0)
+    String getAnonymizedDecimalCoords() {
+        Timber.d("Anonymizing coords with setting:" + prefLocationAccuracy);
+        if (prefLocationAccuracy < 0)
             return null;
-        else if (prefLocationAccuracy==0)
+        else if (prefLocationAccuracy == 0)
             return decimalCoords;
-        else{
-            return  String.valueOf(anonymizeCoord(imageObj.getDecLatitude())) + "|"
+        else {
+            return String.valueOf(anonymizeCoord(imageObj.getDecLatitude())) + "|"
                     + String.valueOf(anonymizeCoord(imageObj.getDecLongitude()));
         }
     }
 
     /**
      * Find other images around the same location that were taken within the last 20 sec
-     *
      */
     private void findOtherImages() {
         Timber.d("filePath" + getPathOfMediaOrCopy());
@@ -285,36 +288,49 @@ public class FileProcessor implements SimilarImageDialogFragment.onResponse {
 
 
     /**
-    *Redacts EXIF data from the file.
-    *
+     * Redacts EXIF data from the file.
+     *
      * @return Uri of the new file.
-    **/
+     **/
+    @SuppressLint("CheckResult")
     public Uri redactEXIFData() {
+        String newFilePath = getPathOfMediaOrCopy();
         try {
-            Timber.d("Tags to be redacted:"+ Arrays.toString(prefRedactEXIFTags.toArray()));
-            Timber.v("File path:"+getPathOfMediaOrCopy());
-            if (!prefRedactEXIFTags.isEmpty() && getPathOfMediaOrCopy() != null) {
-                ExifInterface exif = new ExifInterface(getPathOfMediaOrCopy());//Temporary EXIF interface to redact data.
-                for (String tag : prefRedactEXIFTags) {
-                    String oldValue = exif.getAttribute(tag);
-                    if (oldValue != null && !oldValue.isEmpty()) {
-                        Timber.d("Exif tag " + tag + " with value " + oldValue + " redacted.");
-                        exif.setAttribute(tag, null);
-                    }
+            Timber.d("Tags to be redacted:" + Arrays.toString(prefManageEXIFTags.toArray()));
+            Timber.v("File path:" + getPathOfMediaOrCopy());
+            if (getPathOfMediaOrCopy() != null) {
+                if (!prefKeepXmp) {
+                    newFilePath = context.getCacheDir().getAbsolutePath() + "/" + new Date().getTime() + ".jpg";
+                    FileMetadataUtils.removeXmpAndWriteToFile(getPathOfMediaOrCopy(), newFilePath);
                 }
-                if (prefLocationAccuracy<0) {
+                ExifInterface exif = new ExifInterface(newFilePath);//Temporary EXIF interface to redact data.
+                Set<String> redactTags = Utils.toSet(context.getResources().getStringArray(R.array.pref_exifTag_values));
+                Timber.d(redactTags.toString());
+                redactTags.removeAll(prefManageEXIFTags);
+                Observable.fromIterable(redactTags)
+                        .flatMap(FileMetadataUtils::getTagsFromPref)
+                        .forEach(tag -> {
+                            Timber.d("Checking for tag:" + tag);
+                            String oldValue = exif.getAttribute(tag);
+                            if (oldValue != null && !oldValue.isEmpty()) {
+                                Timber.d("Exif tag " + tag + " with value " + oldValue + " redacted.");
+                                exif.setAttribute(tag, null);
+                            }
+                        });
+
+                if (prefLocationAccuracy < 0) {
                     Timber.d("Setting EXIF coordinates to 0");
                     exif.setLatLong(0d, 0d);
-                }else if (prefLocationAccuracy!=0){
+                } else if (prefLocationAccuracy != 0) {
                     exif.setLatLong(anonymizeCoord(imageObj.getDecLatitude()), anonymizeCoord(imageObj.getDecLongitude()));
                 }
                 exif.saveAttributes();
             }
         } catch (IOException e) {
             Timber.w(e);
-			throw new RuntimeException("EXIF redaction failed.");
+            throw new RuntimeException("EXIF redaction failed.");
         }
-        return Uri.parse("file://" + getPathOfMediaOrCopy());
+        return Uri.parse("file://" + newFilePath);
     }
 
     /**
