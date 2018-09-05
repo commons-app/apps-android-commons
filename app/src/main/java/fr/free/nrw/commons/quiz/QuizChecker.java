@@ -96,7 +96,7 @@ public class QuizChecker {
                                 if (response != null) {
                                     setRevertParameter(response.getDeletedUploads());
                                 }
-                            })
+                            }, throwable -> Timber.e(throwable, "Fetching feedback failed"))
             );
     }
 
