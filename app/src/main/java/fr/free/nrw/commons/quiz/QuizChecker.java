@@ -1,7 +1,6 @@
 package fr.free.nrw.commons.quiz;
 
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.v7.app.AlertDialog.Builder;
@@ -33,16 +32,16 @@ public class QuizChecker {
     private SharedPreferences revertPref;
     private SharedPreferences countPref;
 
-    private final int UPLOAD_COUNT_THRESHOLD = 5;
-    private final String REVERT_PERCENTAGE_FOR_MESSAGE = "50%";
+    private static final int UPLOAD_COUNT_THRESHOLD = 5;
+    private static final String REVERT_PERCENTAGE_FOR_MESSAGE = "50%";
     private final String REVERT_SHARED_PREFERENCE = "revertCount";
     private final String UPLOAD_SHARED_PREFERENCE = "uploadCount";
 
     /**
      * constructor to set the parameters for quiz
-     * @param context
-     * @param userName
-     * @param mediaWikiApi
+     * @param context context
+     * @param userName Commons user name
+     * @param mediaWikiApi instance of MediaWikiApi
      */
     public QuizChecker(Context context, String userName, MediaWikiApi mediaWikiApi) {
         this.context = context;
@@ -62,8 +61,7 @@ public class QuizChecker {
                     .getUploadCount(userName)
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe(
-                            uploadCount -> setTotalUploadCount(uploadCount),
+                    .subscribe(this::setTotalUploadCount,
                             t -> Timber.e(t, "Fetching upload count failed")
                     ));
     }
@@ -71,7 +69,7 @@ public class QuizChecker {
     /**
      * set the sub Title of Contibutions Activity and
      * call function to check for quiz
-     * @param uploadCount
+     * @param uploadCount user's upload count
      */
     private void setTotalUploadCount(int uploadCount) {
         totalUploadCount = uploadCount - countPref.getInt(UPLOAD_SHARED_PREFERENCE,0);
@@ -102,7 +100,7 @@ public class QuizChecker {
 
     /**
      * to calculate the number of images reverted after previous quiz
-     * @param revertCountFetched
+     * @param revertCountFetched count of deleted uploads
      */
     private void setRevertParameter(int revertCountFetched) {
         revertCount = revertCountFetched - revertPref.getInt(REVERT_SHARED_PREFERENCE,0);
@@ -133,30 +131,22 @@ public class QuizChecker {
     /**
      * Alert which prompts to quiz
      */
-    public void callQuiz() {
+    private void callQuiz() {
         Builder alert = new Builder(context);
         alert.setTitle(context.getResources().getString(R.string.quiz));
         alert.setMessage(context.getResources().getString(R.string.quiz_alert_message,
                 REVERT_PERCENTAGE_FOR_MESSAGE));
-        alert.setPositiveButton("Proceed", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-               int newRevetSharedPrefs = revertCount+ revertPref.getInt(REVERT_SHARED_PREFERENCE,0);
-                revertPref.edit().putInt(REVERT_SHARED_PREFERENCE, newRevetSharedPrefs).apply();
-                int newUploadCount = totalUploadCount + countPref.getInt(UPLOAD_SHARED_PREFERENCE,0);
-                countPref.edit().putInt(UPLOAD_SHARED_PREFERENCE,newUploadCount).apply();
-                Intent i = new Intent(context, WelcomeActivity.class);
-                i.putExtra("isQuiz", true);
-                dialog.dismiss();
-                context.startActivity(i);
-            }
+        alert.setPositiveButton("Proceed", (dialog, which) -> {
+            int newRevetSharedPrefs = revertCount + revertPref.getInt(REVERT_SHARED_PREFERENCE, 0);
+            revertPref.edit().putInt(REVERT_SHARED_PREFERENCE, newRevetSharedPrefs).apply();
+            int newUploadCount = totalUploadCount + countPref.getInt(UPLOAD_SHARED_PREFERENCE, 0);
+            countPref.edit().putInt(UPLOAD_SHARED_PREFERENCE, newUploadCount).apply();
+            Intent i = new Intent(context, WelcomeActivity.class);
+            i.putExtra("isQuiz", true);
+            dialog.dismiss();
+            context.startActivity(i);
         });
-        alert.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                dialogInterface.cancel();
-            }
-        });
+        alert.setNegativeButton("Cancel", (dialogInterface, i) -> dialogInterface.cancel());
         android.support.v7.app.AlertDialog dialog = alert.create();
         dialog.show();
     }

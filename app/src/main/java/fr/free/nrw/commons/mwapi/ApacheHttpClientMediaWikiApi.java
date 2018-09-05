@@ -966,7 +966,7 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
     /**
      * This takes userName as input, which is then used to fetch the feedback/achievements
      * statistics using OkHttp and JavaRx. This function return JSONObject
-     * @param userName
+     * @param userName MediaWiki user name
      * @return
      */
     @Override
@@ -985,8 +985,11 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
                     .url(urlBuilder.toString())
                     .build();
             Response response = okHttpClient.newCall(request).execute();
-            if (response.body() != null && response.isSuccessful()) {
+            if (response != null && response.body() != null && response.isSuccessful()) {
                 String json = response.body().string();
+                if (json == null) {
+                    return null;
+                }
                 return gson.fromJson(json, FeedbackResponse.class);
             }
             return null;

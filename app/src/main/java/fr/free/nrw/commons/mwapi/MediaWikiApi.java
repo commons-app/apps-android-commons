@@ -99,7 +99,6 @@ public interface MediaWikiApi {
 
     boolean isUserBlockedFromCommons();
 
-    @NonNull
     Single<FeedbackResponse> getAchievements(String userName);
 
     interface ProgressListener {
