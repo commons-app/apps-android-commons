@@ -17,6 +17,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import java.util.Map;
+import java.util.Set;
 
 import fr.free.nrw.commons.settings.SettingsActivity;
 
@@ -51,6 +52,8 @@ public class SettingsActivityTest {
                             editor.putBoolean(key, (Boolean)val);
                         } else if (val instanceof Integer) {
                             editor.putInt(key, (Integer)val);
+                        } else if (val instanceof Set){
+                            editor.putStringSet(key, (Set<String>)val);
                         } else {
                             throw new RuntimeException("type not implemented: " + entry);
                         }
