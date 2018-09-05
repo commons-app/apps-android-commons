@@ -167,6 +167,8 @@ public class CustomMwApi {
         // I should be doing more validation here, but meh
         isLoggedIn = false;
         this.action("logout").post();
+        removeAllCookies();
+        authCookie = null;
     }
 
     private CustomApiResult makeRequest(String method, HashMap<String, Object> params) throws IOException {
