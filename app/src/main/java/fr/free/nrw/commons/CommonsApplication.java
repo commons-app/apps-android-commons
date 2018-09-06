@@ -54,6 +54,11 @@ public class CommonsApplication extends Application {
     @Inject @Named("application_preferences") SharedPreferences applicationPrefs;
     @Inject @Named("prefs") SharedPreferences otherPrefs;
 
+    /**
+     * Constants begin
+     */
+    public static final int OPEN_APPLICATION_DETAIL_SETTINGS = 1001;
+
     public static final String DEFAULT_EDIT_SUMMARY = "Uploaded using [[COM:MOA|Commons Mobile App]]";
 
     public static final String FEEDBACK_EMAIL = "commons-app-android@googlegroups.com";
@@ -65,6 +70,10 @@ public class CommonsApplication extends Application {
     public static final String LOGS_PRIVATE_EMAIL_SUBJECT = "Commons Android App (%s) Logs";
 
     public static final String NOTIFICATION_CHANNEL_ID_ALL = "CommonsNotificationAll";
+
+    /**
+     * Constants End
+     */
 
     private RefWatcher refWatcher;
 
