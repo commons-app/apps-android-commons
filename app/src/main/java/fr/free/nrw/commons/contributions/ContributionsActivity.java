@@ -7,7 +7,6 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.util.Log;
 
 import javax.inject.Inject;
 
@@ -22,8 +21,7 @@ import fr.free.nrw.commons.upload.UploadService;
 
 import static android.content.ContentResolver.requestSync;
 
-public  class       ContributionsActivity
-        extends     AuthenticatedActivity {
+public class ContributionsActivity extends AuthenticatedActivity {
 
     @Inject
     SessionManager sessionManager;
@@ -52,8 +50,7 @@ public  class       ContributionsActivity
         requestAuthToken();
         initDrawer();
         setTitle(getString(R.string.navigation_item_home)); // Should I create a new string variable with another name instead?
-
-        // Add tabs and fragments after Auth cookie received
+        // Add tabs and fragments onAuthCookieAcquired
     }
 
     @Override

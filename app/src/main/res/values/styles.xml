@@ -1,6 +1,7 @@
 <resources>
 
     <style name="DarkAppTheme" parent="Theme.AppCompat.NoActionBar">
+        <item name="contributionsListBackground">@color/contributionListDarkBackground</item>
         <item name="mainBackground">@color/main_background_dark</item>
         <item name="colorPrimary">@color/primaryColor</item>
         <item name="colorPrimaryDark">@color/primaryDarkColor</item>
@@ -22,6 +23,7 @@
     </style>
 
     <style name="LightAppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="contributionsListBackground">@color/primaryColor</item>
         <item name="mainBackground">@color/main_background_light</item>
         <item name="colorPrimaryDark">@color/primaryDarkColor</item>
         <item name="colorAccent">@color/primaryColor</item>
