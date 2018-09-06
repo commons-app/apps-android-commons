@@ -166,12 +166,12 @@ public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment imple
                 return true;
             case R.id.menu_retry_current_image:
                 // Retry
-                ((ContributionsActivity) getActivity()).retryUpload(pager.getCurrentItem());
+                // TODO: Neslihan open later ((ContributionsActivity) getActivity()).retryUpload(pager.getCurrentItem());
                 getActivity().getSupportFragmentManager().popBackStack();
                 return true;
             case R.id.menu_cancel_current_image:
                 // todo: delete image
-                ((ContributionsActivity) getActivity()).deleteUpload(pager.getCurrentItem());
+                // TODO: Neslihan open later ((ContributionsActivity) getActivity()).deleteUpload(pager.getCurrentItem());
                 getActivity().getSupportFragmentManager().popBackStack();
                 return true;
             default:

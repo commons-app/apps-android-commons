@@ -91,7 +91,7 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment {
         this.contributionsList.setAdapter(adapter);
 
         if(BuildConfig.FLAVOR.equalsIgnoreCase("beta")){
-            ((ContributionsActivity) getActivity()).betaSetUploadCount(adapter.getCount());
+            // TODO: Neslihan open later ((ContributionsActivity) getActivity()).betaSetUploadCount(adapter.getCount());
         }
     }
 
