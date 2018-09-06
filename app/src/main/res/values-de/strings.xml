@@ -346,4 +346,6 @@
   <string name="images_reverted_explanation">Der Prozentsatz an Bildern, die du auf Commons hochgeladen hast und die nicht gelöscht wurden.</string>
   <string name="images_used_explanation">Die Anzahl der Bilder, die du auf Commons hochgeladen hast und in Wikimedia-Artikeln verwendet werden.</string>
   <string name="notifications_channel_name_all">Commons-Benachrichtigung</string>
+  <string name="storage_permission">Speicherberechtigung</string>
+  <string name="write_storage_permission_rationale_for_image_share">Wir benötigen deine Berechtigung für den Zugriff auf den externen Speicher deines Geräts, um Bilder hochzuladen.</string>
 </resources>
