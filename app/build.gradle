@@ -87,6 +87,9 @@ dependencies {
     debugImplementation "com.squareup.leakcanary:leakcanary-android:$LEAK_CANARY"
     releaseImplementation "com.squareup.leakcanary:leakcanary-android-no-op:$LEAK_CANARY"
     testImplementation "com.squareup.leakcanary:leakcanary-android-no-op:$LEAK_CANARY"
+    //For handling runtime permissions
+    implementation 'com.karumi:dexter:5.0.0'
+
 }
 
 android {
