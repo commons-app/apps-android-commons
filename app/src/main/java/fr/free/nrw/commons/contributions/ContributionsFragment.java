@@ -1,4 +1,6 @@
 package fr.free.nrw.commons.contributions;
 
-public class ContributionsFragment {
+import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
+
+public class ContributionsFragment extends CommonsDaggerSupportFragment {
 }
