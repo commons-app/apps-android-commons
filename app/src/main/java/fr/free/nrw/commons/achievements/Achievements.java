@@ -1,7 +1,5 @@
 package fr.free.nrw.commons.achievements;
 
-import android.util.Log;
-
 /**
  * represnts Achievements class ans stores all the parameters
  */
@@ -42,6 +40,23 @@ public class Achievements {
         this.featuredImages = featuredImages;
         this.imagesUploaded = imagesUploaded;
         this.revertCount = revertCount;
+    }
+
+    /**
+     * Get Achievements object from FeedbackResponse
+     *
+     * @param response
+     * @return
+     */
+    public static Achievements from(FeedbackResponse response) {
+        return new Achievements(response.getUniqueUsedImages(),
+                response.getArticlesUsingImages(),
+                response.getThanksReceived(),
+                response.getImagesEditedBySomeoneElse(),
+                response.getFeaturedImages().getQualityImages()
+                        + response.getFeaturedImages().getFeaturedPicturesOnWikimediaCommons(),
+                0,
+                response.getDeletedUploads());
     }
 
     /**
