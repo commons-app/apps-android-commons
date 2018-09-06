@@ -54,10 +54,7 @@ public class AchievementsActivity extends NavigationBaseActivity {
 
     private static final double BADGE_IMAGE_WIDTH_RATIO = 0.4;
     private static final double BADGE_IMAGE_HEIGHT_RATIO = 0.3;
-    private Boolean isUploadFetched = false;
-    private Boolean isStatisticsFetched = false;
-    private Boolean isRevertFetched = false;
-    private Achievements achievements = new Achievements();
+
     private LevelController.LevelInfo levelInfo;
 
     @BindView(R.id.achievement_badge)
@@ -129,7 +126,6 @@ public class AchievementsActivity extends NavigationBaseActivity {
         progressBar.setVisibility(View.VISIBLE);
         hideLayouts();
         setAchievements();
-        setUploadCount();
         initDrawer();
     }
 
@@ -189,7 +185,6 @@ public class AchievementsActivity extends NavigationBaseActivity {
      * which then calls parseJson when results are fetched
      */
     private void setAchievements() {
-
         if(checkAccount()) {
             compositeDisposable.add(mediaWikiApi
                     .getAchievements(Objects.requireNonNull(sessionManager.getCurrentAccount()).name)
@@ -198,29 +193,42 @@ public class AchievementsActivity extends NavigationBaseActivity {
                     .subscribe(
                             response -> {
                                 if (response != null) {
-                                    achievements = Achievements.from(response);
-                                    isRevertFetched = true;
-                                    isStatisticsFetched = true;
+                                    setUploadCount(Achievements.from(response));
+                                } else {
+                                    onError();
                                 }
-                                hideProgressBar();
                             },
-                            t -> Timber.e(t, "Fetching achievements statisticss failed")
+                            t -> {
+                                Timber.e(t, "Fetching achievements statistics failed");
+                                onError();
+                            }
                     ));
         }
     }
 
     /**
+     * Shows a generic error toast when error occurs while loading achievements or uploads
+     */
+    private void onError() {
+        ViewUtil.showLongToast(this, getResources().getString(R.string.error_occurred));
+        progressBar.setVisibility(View.GONE);
+    }
+
+    /**
      * used to the count of images uploaded by user
      */
-    private void setUploadCount() {
+    private void setUploadCount(Achievements achievements) {
         if(checkAccount()) {
             compositeDisposable.add(mediaWikiApi
                     .getUploadCount(Objects.requireNonNull(sessionManager.getCurrentAccount()).name)
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe(
-                            this::setAchievementsUploadCount,
-                            t -> Timber.e(t, "Fetching upload count failed")
+                            uploadCount -> setAchievementsUploadCount(achievements, uploadCount),
+                            t -> {
+                                Timber.e(t, "Fetching upload count failed");
+                                onError();
+                            }
                     ));
         }
     }
@@ -229,10 +237,9 @@ public class AchievementsActivity extends NavigationBaseActivity {
      * used to set achievements upload count and call hideProgressbar
      * @param uploadCount
      */
-    private void setAchievementsUploadCount(int uploadCount){
+    private void setAchievementsUploadCount(Achievements achievements, int uploadCount) {
         achievements.setImagesUploaded(uploadCount);
-        isUploadFetched = true;
-        hideProgressBar();
+        hideProgressBar(achievements);
     }
 
     /**
@@ -293,8 +300,8 @@ public class AchievementsActivity extends NavigationBaseActivity {
     /**
      * to hide progressbar
      */
-    private void hideProgressBar() {
-        if (progressBar != null && isUploadFetched && isStatisticsFetched && isRevertFetched) {
+    private void hideProgressBar(Achievements achievements) {
+        if (progressBar != null) {
             levelInfo = LevelController.LevelInfo.from(achievements.getImagesUploaded(),
                     achievements.getUniqueUsedImages(),
                     achievements.getNotRevertPercentage());
