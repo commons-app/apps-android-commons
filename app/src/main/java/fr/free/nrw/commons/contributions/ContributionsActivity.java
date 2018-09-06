@@ -36,7 +36,7 @@ public  class       ContributionsActivity
     private final int NEARBY_TAB_POSITION = 1;
 
     public ContributionsFragment contributionsFragment;
-    private NewNearbyFragment nearbyFragment;
+    private NearbyFragment nearbyFragment;
     public boolean isContributionsFragmentVisible = true; // False means nearby fragment is visible
 
     public void onCreate(Bundle savedInstanceState) {
