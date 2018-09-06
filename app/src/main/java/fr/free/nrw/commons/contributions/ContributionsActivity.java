@@ -53,8 +53,6 @@ public  class       ContributionsActivity
         initDrawer();
         setTitle(getString(R.string.navigation_item_home)); // Should I create a new string variable with another name instead?
 
-        //prepareForContributions();
-        //prepareForNearby();
         // Add tabs and fragments after Auth cookie received
     }
 
@@ -83,7 +81,7 @@ public  class       ContributionsActivity
         //contributionsFragment = ((NewContributionsFragment)contributionsActivityPagerAdapter.getItem(CONTRIBUTIONS_TAB_POSITION));
 
         if (uploadServiceIntent != null) { // If auth cookie already acquired
-            ((NewContributionsFragment)contributionsActivityPagerAdapter.getItem(CONTRIBUTIONS_TAB_POSITION)).onAuthCookieAcquired(uploadServiceIntent);
+            // TODO Neslihan ((ContributionsFragment)contributionsActivityPagerAdapter.getItem(CONTRIBUTIONS_TAB_POSITION)).onAuthCookieAcquired(uploadServiceIntent);
         }
         //nearbyFragment = ((NewNearbyFragment)contributionsActivityPagerAdapter.getItem(NEARBY_TAB_POSITION));
 
