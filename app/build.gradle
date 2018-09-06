@@ -90,8 +90,8 @@ android {
 
     defaultConfig {
         applicationId 'fr.free.nrw.commons'
-        versionCode 89
-        versionName '2.8.2'
+        versionCode 90
+        versionName '2.8.3'
         setProperty("archivesBaseName", "app-commons-v$versionName-" + getBranchName())
 
         minSdkVersion project.minSdkVersion
