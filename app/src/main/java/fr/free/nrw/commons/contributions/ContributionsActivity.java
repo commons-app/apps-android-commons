@@ -31,6 +31,14 @@ public  class       ContributionsActivity
     public Intent uploadServiceIntent;
     public boolean isAuthCookieAcquired = false;
 
+    //public ContributionsActivityPagerAdapter contributionsActivityPagerAdapter;
+    private final int CONTRIBUTIONS_TAB_POSITION = 0;
+    private final int NEARBY_TAB_POSITION = 1;
+
+    public ContributionsFragment contributionsFragment;
+    private NewNearbyFragment nearbyFragment;
+    public boolean isContributionsFragmentVisible = true; // False means nearby fragment is visible
+
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_contributions);
@@ -38,7 +46,7 @@ public  class       ContributionsActivity
 
         requestAuthToken();
         initDrawer();
-        setTitle(getString(R.string.navigation_item_home)); // Should I create a new string with another name instead?
+        setTitle(getString(R.string.navigation_item_home)); // Should I create a new string variable with another name instead?
 
         //prepareForContributions();
         //prepareForNearby();
@@ -53,11 +61,28 @@ public  class       ContributionsActivity
         uploadServiceIntent.setAction(UploadService.ACTION_START_SERVICE);
         startService(uploadServiceIntent);
 
-        //addTabsAndFragments();
+        addTabsAndFragments();
         isAuthCookieAcquired = true;
         /*if (contributionsFragment != null) {
             contributionsFragment.onAuthCookieAcquired(uploadServiceIntent);
         }*/
+    }
+
+    private void addTabsAndFragments() {
+        contributionsActivityPagerAdapter = new ContributionsActivityPagerAdapter(getSupportFragmentManager());
+        viewPager.setAdapter(contributionsActivityPagerAdapter);
+
+        tabLayout.addTab(tabLayout.newTab().setText(getResources().getString(R.string.contributions_fragment)));
+        tabLayout.addTab(tabLayout.newTab().setText(getResources().getString(R.string.nearby_fragment)));
+
+        //contributionsFragment = ((NewContributionsFragment)contributionsActivityPagerAdapter.getItem(CONTRIBUTIONS_TAB_POSITION));
+
+        if (uploadServiceIntent != null) { // If auth cookie already acquired
+            ((NewContributionsFragment)contributionsActivityPagerAdapter.getItem(CONTRIBUTIONS_TAB_POSITION)).onAuthCookieAcquired(uploadServiceIntent);
+        }
+        //nearbyFragment = ((NewNearbyFragment)contributionsActivityPagerAdapter.getItem(NEARBY_TAB_POSITION));
+
+        setTabAndViewPagerSynchronisation();
     }
 
     @Override
