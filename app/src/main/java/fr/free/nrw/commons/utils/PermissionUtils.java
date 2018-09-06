@@ -9,6 +9,7 @@ import android.support.v4.content.ContextCompat;
 
 import fr.free.nrw.commons.CommonsApplication;
 
+
 public class PermissionUtils {
 
     public static final int CAMERA_PERMISSION_FROM_CONTRIBUTION_LIST = 100;
