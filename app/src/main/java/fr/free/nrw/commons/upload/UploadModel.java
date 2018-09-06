@@ -71,7 +71,7 @@ public class UploadModel {
         this.context = context;
         this.mwApi = mwApi;
         this.contentResolver = context.getContentResolver();
-        useExtStorage = prefs.getBoolean("useExternalStorage", true);
+        useExtStorage = this.prefs.getBoolean("useExternalStorage", true);
     }
 
     @SuppressLint("CheckResult")

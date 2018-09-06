@@ -1,6 +1,7 @@
 package fr.free.nrw.commons.explore.images;
 
 
+import android.annotation.SuppressLint;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.os.Bundle;
@@ -121,6 +122,7 @@ public class SearchImageFragment extends CommonsDaggerSupportFragment {
      * Checks for internet connection and then initializes the recycler view with 25 images of the searched query
      * Clearing imageAdapter every time new keyword is searched so that user can see only new results
      */
+    @SuppressLint("CheckResult")
     public void updateImageList(String query) {
         this.query = query;
         imagesNotFoundView.setVisibility(GONE);
@@ -142,6 +144,7 @@ public class SearchImageFragment extends CommonsDaggerSupportFragment {
     /**
      * Adds more results to existing search results
      */
+    @SuppressLint("CheckResult")
     public void addImagesToList(String query) {
         this.query = query;
         progressBar.setVisibility(View.VISIBLE);
@@ -159,13 +162,11 @@ public class SearchImageFragment extends CommonsDaggerSupportFragment {
      */
     private void handlePaginationSuccess(List<Media> mediaList) {
         progressBar.setVisibility(View.GONE);
-        if (mediaList.size()!=0){
-            if (!queryList.get(queryList.size()-1).getFilename().equals(mediaList.get(mediaList.size()-1).getFilename())) {
-                queryList.addAll(mediaList);
-                imagesAdapter.addAll(mediaList);
-                imagesAdapter.notifyDataSetChanged();
-                ((SearchActivity)getContext()).viewPagerNotifyDataSetChanged();
-            }
+        if (mediaList.size() != 0 || !queryList.get(queryList.size() - 1).getFilename().equals(mediaList.get(mediaList.size() - 1).getFilename())) {
+            queryList.addAll(mediaList);
+            imagesAdapter.addAll(mediaList);
+            imagesAdapter.notifyDataSetChanged();
+            ((SearchActivity) getContext()).viewPagerNotifyDataSetChanged();
         }
     }
 
