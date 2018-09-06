@@ -78,14 +78,63 @@ public  class       ContributionsActivity
         tabLayout.addTab(tabLayout.newTab().setText(getResources().getString(R.string.contributions_fragment)));
         tabLayout.addTab(tabLayout.newTab().setText(getResources().getString(R.string.nearby_fragment)));
 
-        //contributionsFragment = ((NewContributionsFragment)contributionsActivityPagerAdapter.getItem(CONTRIBUTIONS_TAB_POSITION));
-
         if (uploadServiceIntent != null) { // If auth cookie already acquired
             // TODO Neslihan ((ContributionsFragment)contributionsActivityPagerAdapter.getItem(CONTRIBUTIONS_TAB_POSITION)).onAuthCookieAcquired(uploadServiceIntent);
         }
-        //nearbyFragment = ((NewNearbyFragment)contributionsActivityPagerAdapter.getItem(NEARBY_TAB_POSITION));
 
         setTabAndViewPagerSynchronisation();
+    }
+
+    /**
+     * Normally tab layout and view pager has no relation, which means when you swipe view pager
+     * tab won't change and vice versa. So we have to notify each of them.
+     */
+    private void setTabAndViewPagerSynchronisation() {
+        viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                switch (position) {
+                    case CONTRIBUTIONS_TAB_POSITION:
+                        tabLayout.getTabAt(CONTRIBUTIONS_TAB_POSITION).select();
+                        isContributionsFragmentVisible = true;
+                        break;
+                    case NEARBY_TAB_POSITION:
+                        tabLayout.getTabAt(NEARBY_TAB_POSITION).select();
+                        isContributionsFragmentVisible = false;
+                        break;
+                    default:
+                        tabLayout.getTabAt(CONTRIBUTIONS_TAB_POSITION).select();
+                        break;
+                }
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
+
+        tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+                viewPager.setCurrentItem(tab.getPosition());
+            }
+
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
+
+            }
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
+
+            }
+        });
     }
 
     @Override
