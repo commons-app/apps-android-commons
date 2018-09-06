@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Authors:
 * NoiX180
+* Notanotheramy
 -->
 <resources>
   <string name="app_name">Commons</string>
@@ -165,4 +166,5 @@
   <string name="navigation_item_logout">Metu log</string>
   <string name="nearby_info_menu_commons_article" fuzzy="true">Artikel Commons</string>
   <string name="nearby_info_menu_wikidata_article">Wiji Wikidata</string>
+  <string name="question">Pitakon</string>
 </resources>

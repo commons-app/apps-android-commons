@@ -24,7 +24,6 @@ import fr.free.nrw.commons.wikidata.WikidataEditListenerImpl;
 import okhttp3.OkHttpClient;
 
 import static android.content.Context.MODE_PRIVATE;
-import static fr.free.nrw.commons.explore.recentsearches.RecentSearchesContentProvider.RECENT_SEARCH_AUTHORITY;
 
 @Module
 @SuppressWarnings({"WeakerAccess", "unused"})
@@ -60,7 +59,7 @@ public class CommonsApplicationModule {
     @Provides
     @Named("recentsearch")
     public ContentProviderClient provideRecentSearchContentProviderClient(Context context) {
-        return context.getContentResolver().acquireContentProviderClient(RECENT_SEARCH_AUTHORITY);
+        return context.getContentResolver().acquireContentProviderClient(BuildConfig.RECENT_SEARCH_AUTHORITY);
     }
 
     @Provides

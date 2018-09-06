@@ -136,7 +136,7 @@ public class QuizChecker {
         alert.setTitle(context.getResources().getString(R.string.quiz));
         alert.setMessage(context.getResources().getString(R.string.quiz_alert_message,
                 REVERT_PERCENTAGE_FOR_MESSAGE));
-        alert.setPositiveButton("Proceed", (dialog, which) -> {
+        alert.setPositiveButton(R.string.about_translate_proceed, (dialog, which) -> {
             int newRevetSharedPrefs = revertCount + revertPref.getInt(REVERT_SHARED_PREFERENCE, 0);
             revertPref.edit().putInt(REVERT_SHARED_PREFERENCE, newRevetSharedPrefs).apply();
             int newUploadCount = totalUploadCount + countPref.getInt(UPLOAD_SHARED_PREFERENCE, 0);
@@ -146,7 +146,7 @@ public class QuizChecker {
             dialog.dismiss();
             context.startActivity(i);
         });
-        alert.setNegativeButton("Cancel", (dialogInterface, i) -> dialogInterface.cancel());
+        alert.setNegativeButton(android.R.string.cancel, (dialogInterface, i) -> dialogInterface.cancel());
         android.support.v7.app.AlertDialog dialog = alert.create();
         dialog.show();
     }

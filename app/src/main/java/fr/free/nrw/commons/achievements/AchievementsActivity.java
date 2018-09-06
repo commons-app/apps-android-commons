@@ -343,8 +343,8 @@ public class AchievementsActivity extends NavigationBaseActivity {
         TextView shareMessage = (TextView) view.findViewById(R.id.alert_text);
         shareMessage.setText(R.string.achievements_share_message);
         alertadd.setView(view);
-        alertadd.setPositiveButton("Proceed", (dialog, which) -> shareScreen(screenshot));
-        alertadd.setNegativeButton("Cancel", (dialog, which) -> dialog.cancel());
+        alertadd.setPositiveButton(R.string.about_translate_proceed, (dialog, which) -> shareScreen(screenshot));
+        alertadd.setNegativeButton(android.R.string.cancel, (dialog, which) -> dialog.cancel());
         alertadd.show();
     }
 

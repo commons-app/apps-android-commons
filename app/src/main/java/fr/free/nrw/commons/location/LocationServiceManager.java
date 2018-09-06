@@ -106,6 +106,9 @@ public class LocationServiceManager implements LocationListener {
             if (lastKL == null) {
                 lastKL = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
             }
+            if (lastKL == null) {
+                return null;
+            }
             return LatLng.from(lastKL);
         } else {
             return null;
