@@ -146,17 +146,20 @@ public  class       ContributionsActivity
         initDrawer();
         setTitle(getString(R.string.title_activity_contributions));
 
-
+        //FIXME: The call below has been temporarily removed as a stopgap fix for a high priority crash
+        //Feel free to reimplement once https://github.com/commons-app/apps-android-commons/issues/1876 has been fixed
+/*
         if(checkAccount()) {
             new QuizChecker(this,
                     sessionManager.getCurrentAccount().name,
                     mediaWikiApi);
-        }
+        }*/
         if(!BuildConfig.FLAVOR.equalsIgnoreCase("beta")){
             setUploadCount();
         }
 
     }
+
 
     @Override
     protected void onSaveInstanceState(Bundle outState) {
