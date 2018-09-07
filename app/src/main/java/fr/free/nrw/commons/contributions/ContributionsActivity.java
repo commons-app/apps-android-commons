@@ -64,9 +64,9 @@ public class ContributionsActivity extends AuthenticatedActivity implements Frag
 
         addTabsAndFragments();
         isAuthCookieAcquired = true;
-        /*if (contributionsFragment != null) {
+        if (contributionsFragment != null) {
             contributionsFragment.onAuthCookieAcquired(uploadServiceIntent);
-        }*/
+        }
     }
 
     private void addTabsAndFragments() {

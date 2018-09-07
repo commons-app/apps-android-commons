@@ -140,6 +140,9 @@ public class ContributionsFragment
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
+        if (((ContributionsActivity)getActivity()).isAuthCookieAcquired) {
+            onAuthCookieAcquired(((ContributionsActivity)getActivity()).uploadServiceIntent);
+        }
     }
 
     /**
