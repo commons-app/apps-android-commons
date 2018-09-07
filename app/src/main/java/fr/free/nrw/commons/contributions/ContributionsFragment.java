@@ -312,17 +312,25 @@ public class ContributionsFragment
 
     @Override
     public void refreshSource() {
-
+        getActivity().getSupportLoaderManager().restartLoader(0, null, this);
     }
 
     @Override
     public Media getMediaAtPosition(int i) {
-        return null;
+        if (contributionsListFragment.getAdapter() == null) {
+            // not yet ready to return data
+            return null;
+        } else {
+            return contributionDao.fromCursor((Cursor) contributionsListFragment.getAdapter().getItem(i));
+        }
     }
 
     @Override
     public int getTotalMediaCount() {
-        return 0;
+        if (contributionsListFragment.getAdapter() == null) {
+            return 0;
+        }
+        return contributionsListFragment.getAdapter().getCount();
     }
 
     @Override
