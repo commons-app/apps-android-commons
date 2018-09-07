@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="?attr/mainBackground"
+    android:background="?attr/contributionsListBackground"
     >
 
     <TextView
@@ -23,7 +23,6 @@
         android:layout_centerInParent="true"
         android:id="@+id/loadingContributionsProgressBar"
         />
-
     <GridView
         android:id="@+id/contributionsList"
         android:layout_height="match_parent"
@@ -36,4 +35,66 @@
         android:fastScrollEnabled="true"
         />
 
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="24dp"
+        android:layout_marginBottom="24dp"
+        android:orientation="vertical"
+        android:gravity="center_vertical"
+        >
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/fab_camera"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:scaleType="center"
+            android:tint="@color/button_blue"
+            android:visibility="invisible"
+            app:backgroundTint="@color/main_background_light"
+            app:elevation="6dp"
+            app:fabSize="mini"
+            android:layout_marginBottom="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
+            app:pressedTranslationZ="12dp"
+            app:srcCompat="@drawable/ic_photo_camera_white_24dp" />
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/fab_galery"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:scaleType="center"
+            android:tint="@color/button_blue"
+            android:visibility="invisible"
+            app:backgroundTint="@color/main_background_light"
+            app:elevation="6dp"
+            app:fabSize="mini"
+            android:layout_marginBottom="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
+            app:pressedTranslationZ="12dp"
+            app:srcCompat="@drawable/ic_photo_camera_white_24dp" />
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/fab_plus"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:gravity="center_vertical"
+            android:clickable="true"
+            android:visibility="visible"
+            app:backgroundTint="@color/button_blue"
+            app:elevation="6dp"
+            app:fabSize="normal"
+            android:layout_marginBottom="12dp"
+            app:pressedTranslationZ="12dp"
+            app:srcCompat="@drawable/ic_add_white_24dp" />
+
+    </LinearLayout>
+
 </RelativeLayout>
+
