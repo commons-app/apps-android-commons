@@ -60,7 +60,7 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.fragment_contributions, container, false);
+        View v = inflater.inflate(R.layout.fragment_contributions_list, container, false);
         ButterKnife.bind(this, v);
 
         contributionsList.setOnItemClickListener((AdapterView.OnItemClickListener) getActivity());

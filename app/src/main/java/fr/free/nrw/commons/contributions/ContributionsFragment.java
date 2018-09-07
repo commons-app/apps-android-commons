@@ -8,18 +8,24 @@ import android.content.Loader;
 import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.DataSetObserver;
+import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.content.ContextCompat;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import java.util.List;
 
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import fr.free.nrw.commons.BuildConfig;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
@@ -49,10 +55,25 @@ public class ContributionsFragment
     @Inject
     NotificationController notificationController;
 
+    public TextView numberOfUploads;
+    public ProgressBar numberOfUploadsProgressBar;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return super.onCreateView(inflater, container, savedInstanceState);
+        View view = inflater.inflate(R.layout.fragment_contributions, container, false);
+        numberOfUploads = view.findViewById(R.id.numOfUploads);
+
+        numberOfUploadsProgressBar = view.findViewById(R.id.progressBar);
+        numberOfUploadsProgressBar.setVisibility(View.VISIBLE);
+        numberOfUploadsProgressBar.getIndeterminateDrawable().setColorFilter(ContextCompat.getColor(getActivity(), R.color.white), PorterDuff.Mode.SRC_IN );
+        
+
+        if(!BuildConfig.FLAVOR.equalsIgnoreCase("beta")){
+            setUploadCount();
+        }
+
+        return view;
     }
 
     @Override

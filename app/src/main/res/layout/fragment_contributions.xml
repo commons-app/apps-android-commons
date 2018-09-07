@@ -1,39 +1,64 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="?attr/mainBackground"
-    >
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/waiting_first_sync"
-        android:id="@+id/waitingMessage"
-        android:layout_gravity="center"
-        android:visibility="gone"
-        android:layout_centerHorizontal="true"
-        />
-
-    <ProgressBar
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:id="@+id/loadingContributionsProgressBar"
-        />
-
-    <GridView
-        android:id="@+id/contributionsList"
-        android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical">
+    <!--
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:stretchMode="columnWidth"
-        android:columnWidth="240dp"
-        android:numColumns="auto_fit"
-        android:listSelector="@null"
-        android:fadingEdge="none"
-        android:fastScrollEnabled="true"
-        />
+        android:layout_height="wrap_content">
 
-</RelativeLayout>
+        <fr.free.nrw.commons.contributions.CustomNotificationsCardView
+            android:id="@+id/card_view_notifications"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            app:cardBackgroundColor="?attr/mainCardBackround"
+            >
+
+            <ProgressBar
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:id="@+id/customNotificationsProgressBar"
+
+                />
+
+        </fr.free.nrw.commons.contributions.CustomNotificationsCardView>
+    </RelativeLayout>
+    -->
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        >
+
+        <ProgressBar
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            android:layout_margin="15dp"
+            android:id="@+id/progressBar"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/numOfUploads"
+            android:visibility="gone"
+            android:layout_margin="15dp"
+            style="@android:style/TextAppearance.Holo.Widget.ActionBar.Subtitle"
+            android:textColor="@android:color/white"
+            />
+
+    </RelativeLayout>
+
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:background="#000"
+        android:layout_height="match_parent"
+        android:id="@+id/root_frame">
+    </FrameLayout>
+
+</LinearLayout>
