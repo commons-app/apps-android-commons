@@ -29,9 +29,8 @@
             android:elevation="6dp"
             android:minHeight="?attr/actionBarSize"
             app:tabIndicatorColor="@android:color/white"
-            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"/>
-        <!-- TODO: Neslihan android:background="?attr/mainTabBackground"-->
-
+            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+            android:background="?attr/mainTabBackground"/>
 
         <FrameLayout android:layout_width="match_parent"
             android:layout_height="match_parent"

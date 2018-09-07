@@ -17,7 +17,7 @@
     <attr name="textEnabled" format="reference"/>
 
     <attr name="contributionsListBackground" format="reference"/>
-
+    <attr name="mainTabBackground" format="reference"/>
 
     <declare-styleable name="CompatTextView">
         <attr name="drawablePadding" format="dimension"/>
