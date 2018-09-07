@@ -1,5 +1,6 @@
 package fr.free.nrw.commons;
 
+import android.annotation.SuppressLint;
 import android.app.Application;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
@@ -14,6 +15,8 @@ import com.facebook.imagepipeline.core.ImagePipelineConfig;
 import com.facebook.stetho.Stetho;
 import com.squareup.leakcanary.LeakCanary;
 import com.squareup.leakcanary.RefWatcher;
+import com.tspoon.traceur.Traceur;
+import com.tspoon.traceur.TraceurConfig;
 
 import org.acra.ACRA;
 import org.acra.ReportingInteractionMode;
@@ -84,6 +87,12 @@ public class CommonsApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+        if (BuildConfig.DEBUG) {
+            //FIXME: Traceur should be disabled for release builds until error fixed
+            //See https://github.com/commons-app/apps-android-commons/issues/1877
+            Traceur.enableLogging();
+        }
+
         ApplicationlessInjection
                 .getInstance(this)
                 .getCommonsApplicationComponent()
@@ -152,6 +161,7 @@ public class CommonsApplication extends Application {
      * @param context Application context
      * @param logoutListener Implementation of interface LogoutListener
      */
+    @SuppressLint("CheckResult")
     public void clearApplicationData(Context context, LogoutListener logoutListener) {
         File cacheDirectory = context.getCacheDir();
         File applicationDirectory = new File(cacheDirectory.getParent());
@@ -164,7 +174,7 @@ public class CommonsApplication extends Application {
             }
         }
 
-        sessionManager.clearAllAccounts()
+        sessionManager.logout()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(() -> {
@@ -175,7 +185,6 @@ public class CommonsApplication extends Application {
                     applicationPrefs.edit().putBoolean("firstrun", false).apply();
                     otherPrefs.edit().clear().apply();
                     updateAllDatabases();
-
                     logoutListener.onLogoutComplete();
                 });
     }

@@ -351,6 +351,8 @@
   <string name="images_uploaded_explanation">The number of images you have uploaded to Commons, via any upload software</string>
   <string name="images_reverted_explanation">The percentage of images you have uploaded to Commons that were not deleted</string>
   <string name="images_used_explanation">The number of images you have uploaded to Commons that were used in Wikimedia articles</string>
+
+  <string name="error_occurred">Error occurred!</string>
   <string name="notifications_channel_name_all">Commons Notification</string>
   <string name="storage_permission">Storage Permission</string>
   <string name="write_storage_permission_rationale_for_image_share">We need your permission to access the external storage of your device in order to upload images.</string>
