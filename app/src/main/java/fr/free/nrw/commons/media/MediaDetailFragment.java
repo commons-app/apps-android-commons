@@ -437,13 +437,14 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
         categoryContainer.removeAllViews();
         // @fixme add the category items
 
-        //As per issue #1826, some categories come suffixed with strings prefixed with |. As per the discussion
+        //As per issue #1826(see https://github.com/commons-app/apps-android-commons/issues/1826), some categories come suffixed with strings prefixed with |. As per the discussion
         //that was meant for alphabetical sorting of the categories and can be safely removed.
-        for(int i=0;i<categoryNames.size();i++){
+        for (int i = 0; i < categoryNames.size(); i++) {
             String categoryName = categoryNames.get(i);
             //Removed everything after '|'
-            if (categoryName.indexOf('|') != -1) {
-                categoryName = categoryName.substring(0, categoryName.indexOf('|'));
+            int indexOfPipe = categoryName.indexOf('|');
+            if (indexOfPipe != -1) {
+                categoryName = categoryName.substring(0, indexOfPipe);
                 //Set the updated category to the list as well
                 categoryNames.set(i, categoryName);
             }
