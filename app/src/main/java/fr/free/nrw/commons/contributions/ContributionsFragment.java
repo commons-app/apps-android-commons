@@ -272,7 +272,11 @@ public class ContributionsFragment
      * Called when user selects a contribution.
      */
     private void showDetail(int i) {
-
+        if (mediaDetailPagerFragment == null || !mediaDetailPagerFragment.isVisible()) {
+            mediaDetailPagerFragment = new MediaDetailPagerFragment();
+            setMediaDetailPagerFragment();
+        }
+        mediaDetailPagerFragment.showImage(i);
     }
 
     /**
