@@ -997,6 +997,44 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
 
     }
 
+    /**
+     * The method returns the picture of the day
+     *
+     * @return Media object corresponding to the picture of the day
+     */
+    @Override
+    @Nullable
+    public Single<Media> getPictureOfTheDay() {
+        return Single.fromCallable(() -> {
+            CustomApiResult apiResult = null;
+            try {
+                String template = "Template:Potd/2018-09-07";
+                CustomMwApi.RequestBuilder requestBuilder = api.action("query")
+                        .param("generator", "images")
+                        .param("format", "xml")
+                        .param("titles", template)
+                        .param("prop", "imageinfo")
+                        .param("iiprop", "url|extmetadata");
+
+                apiResult = requestBuilder.get();
+            } catch (IOException e) {
+                Timber.e("Failed to obtain searchCategories", e);
+            }
+
+            if (apiResult == null) {
+                return null;
+            }
+
+            CustomApiResult imageNode = apiResult.getNode("/api/query/pages/page");
+            if (imageNode == null
+                    || imageNode.getDocument() == null) {
+                return null;
+            }
+
+            return CategoryImageUtils.getMediaFromPage(imageNode.getDocument());
+        });
+    }
+
     private Date parseMWDate(String mwDate) {
         SimpleDateFormat isoFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'", Locale.ENGLISH); // Assuming MW always gives me UTC
         isoFormat.setTimeZone(TimeZone.getTimeZone("UTC"));

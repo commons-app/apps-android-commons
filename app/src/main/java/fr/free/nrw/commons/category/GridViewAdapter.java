@@ -2,6 +2,7 @@ package fr.free.nrw.commons.category;
 
 import android.app.Activity;
 import android.content.Context;
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,10 +11,12 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.MediaWikiImageView;
 import fr.free.nrw.commons.R;
+import fr.free.nrw.commons.ui.widget.HtmlTextView;
 
 /**
  * This is created to only display UI implementation. Needs to be changed in real implementation
@@ -92,7 +95,9 @@ public class GridViewAdapter extends ArrayAdapter {
     private void setAuthorView(Media item, TextView author) {
         if (item.getCreator() != null && !item.getCreator().equals("")) {
             String uploadedByTemplate = context.getString(R.string.image_uploaded_by);
-            author.setText(String.format(uploadedByTemplate, item.getCreator()));
+
+            String uploadedBy = String.format(Locale.getDefault(), uploadedByTemplate, item.getCreator());
+            author.setText(uploadedBy);
         } else {
             author.setVisibility(View.GONE);
         }

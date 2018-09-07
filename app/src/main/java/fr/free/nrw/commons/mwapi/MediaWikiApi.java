@@ -101,6 +101,8 @@ public interface MediaWikiApi {
 
     Single<FeedbackResponse> getAchievements(String userName);
 
+    Single<Media> getPictureOfTheDay();
+
     void logout();
 
     interface ProgressListener {
