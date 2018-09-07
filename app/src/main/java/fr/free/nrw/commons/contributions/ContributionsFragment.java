@@ -333,20 +333,24 @@ public class ContributionsFragment
     }
 
     @Override
-    public void notifyDatasetChanged() {
-
-    }
-
-    @Override
     public void registerDataSetObserver(DataSetObserver observer) {
-
+        Adapter adapter = contributionsListFragment.getAdapter();
+        if (adapter == null) {
+            observersWaitingForLoad.add(observer);
+        } else {
+            adapter.registerDataSetObserver(observer);
+        }
     }
 
     @Override
     public void unregisterDataSetObserver(DataSetObserver observer) {
-
+        Adapter adapter = contributionsListFragment.getAdapter();
+        if (adapter == null) {
+            observersWaitingForLoad.remove(observer);
+        } else {
+            adapter.unregisterDataSetObserver(observer);
+        }
     }
-
 
     @SuppressWarnings("ConstantConditions")
     private void setUploadCount() {
