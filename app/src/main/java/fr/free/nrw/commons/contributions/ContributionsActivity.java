@@ -77,7 +77,7 @@ public class ContributionsActivity extends AuthenticatedActivity {
         tabLayout.addTab(tabLayout.newTab().setText(getResources().getString(R.string.nearby_fragment)));
 
         if (uploadServiceIntent != null) { // If auth cookie already acquired
-            // TODO Neslihan ((ContributionsFragment)contributionsActivityPagerAdapter.getItem(CONTRIBUTIONS_TAB_POSITION)).onAuthCookieAcquired(uploadServiceIntent);
+            ((ContributionsFragment)contributionsActivityPagerAdapter.getItem(CONTRIBUTIONS_TAB_POSITION)).onAuthCookieAcquired(uploadServiceIntent);
         }
 
         setTabAndViewPagerSynchronisation();
@@ -184,9 +184,9 @@ public class ContributionsActivity extends AuthenticatedActivity {
                          * MediaDetailsFragment. If below decides which child will be visible.
                          */
                         if (isContributionsListFragment) {
-                            // TODO: Neslihan retainedContributionsFragment.setContributionsListFragment();
+                            retainedContributionsFragment.setContributionsListFragment();
                         } else {
-                            // TODO: Neslihan retainedContributionsFragment.setMediaDetailPagerFragment();
+                            retainedContributionsFragment.setMediaDetailPagerFragment();
                         }
                         contributionsFragment = retainedContributionsFragment;
                         return retainedContributionsFragment;
