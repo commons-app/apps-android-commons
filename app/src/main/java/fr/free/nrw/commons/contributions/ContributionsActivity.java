@@ -7,6 +7,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.view.View;
 
 import javax.inject.Inject;
 
@@ -132,6 +133,18 @@ public class ContributionsActivity extends AuthenticatedActivity {
 
             }
         });
+    }
+
+    public void hideTabs() {
+        if (tabLayout != null) {
+            tabLayout.setVisibility(View.GONE);
+        }
+    }
+
+    public void showTabs() {
+        if (tabLayout != null) {
+            tabLayout.setVisibility(View.VISIBLE);
+        }
     }
 
     @Override

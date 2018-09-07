@@ -11,6 +11,7 @@ import android.database.DataSetObserver;
 import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -58,6 +59,11 @@ public class ContributionsFragment
     public TextView numberOfUploads;
     public ProgressBar numberOfUploadsProgressBar;
 
+    private ContributionsListFragment contributionsListFragment;
+    private MediaDetailPagerFragment mediaDetailPagerFragment;
+    public static final String CONTRIBUTION_LIST_FRAGMENT_TAG = "ContributionListFragmentTag";
+    public static final String MEDIA_DETAIL_PAGER_FRAGMENT_TAG = "MediaDetailFragmentTag";
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -67,7 +73,19 @@ public class ContributionsFragment
         numberOfUploadsProgressBar = view.findViewById(R.id.progressBar);
         numberOfUploadsProgressBar.setVisibility(View.VISIBLE);
         numberOfUploadsProgressBar.getIndeterminateDrawable().setColorFilter(ContextCompat.getColor(getActivity(), R.color.white), PorterDuff.Mode.SRC_IN );
-        
+
+        if (savedInstanceState != null) {
+            mediaDetailPagerFragment = (MediaDetailPagerFragment)getChildFragmentManager().findFragmentByTag(MEDIA_DETAIL_PAGER_FRAGMENT_TAG);
+            contributionsListFragment = (ContributionsListFragment) getChildFragmentManager().findFragmentByTag(CONTRIBUTION_LIST_FRAGMENT_TAG);
+            //getSupportLoaderManager().initLoader(0, null, this);
+            if (savedInstanceState.getBoolean("mediaDetailsVisible")) {
+                setMediaDetailPagerFragment();
+            } else {
+                setContributionsListFragment();
+            }
+        } else {
+            setContributionsListFragment();
+        }
 
         if(!BuildConfig.FLAVOR.equalsIgnoreCase("beta")){
             setUploadCount();
@@ -86,7 +104,19 @@ public class ContributionsFragment
      * Creates new one if null.
      */
     public void setContributionsListFragment() {
+        // show tabs on contribution list is visible
+        ((ContributionsActivity)getActivity()).showTabs();
 
+        // Create if null
+        if (getContributionsListFragment() == null) {
+            contributionsListFragment =  new ContributionsListFragment();
+        }
+        FragmentTransaction transaction = getChildFragmentManager().beginTransaction();
+        // When this container fragment is created, we fill it with our ContributionsListFragment
+        transaction.replace(R.id.root_frame, contributionsListFragment, CONTRIBUTION_LIST_FRAGMENT_TAG);
+        transaction.addToBackStack(CONTRIBUTION_LIST_FRAGMENT_TAG);
+        transaction.commit();
+        getChildFragmentManager().executePendingTransactions();
     }
 
     /**
@@ -94,15 +124,28 @@ public class ContributionsFragment
      * Creates new one if null.
      */
     public void setMediaDetailPagerFragment() {
+        // hide tabs on media detail view is visible
+        ((ContributionsActivity)getActivity()).hideTabs();
 
+        // Create if null
+        if (getMediaDetailPagerFragment() == null) {
+            mediaDetailPagerFragment =  new MediaDetailPagerFragment();
+        }
+        FragmentTransaction transaction = getChildFragmentManager().beginTransaction();
+        // When this container fragment is created, we fill it with our MediaDetailPagerFragment
+        //transaction.addToBackStack(null);
+        transaction.add(R.id.root_frame, mediaDetailPagerFragment, MEDIA_DETAIL_PAGER_FRAGMENT_TAG);
+        transaction.addToBackStack(MEDIA_DETAIL_PAGER_FRAGMENT_TAG);
+        transaction.commit();
+        getChildFragmentManager().executePendingTransactions();
     }
 
     /**
      * Just getter method of ContributionsListFragment child of ContributionsFragment
      * @return contributionsListFragment, if any created
      */
-    public NewContributionsListFragment getContributionsListFragment() {
-        return null;
+    public ContributionsListFragment getContributionsListFragment() {
+        return contributionsListFragment;
     }
 
     /**
@@ -110,11 +153,8 @@ public class ContributionsFragment
      * @return mediaDetailsFragment, if any created
      */
     public MediaDetailPagerFragment getMediaDetailPagerFragment() {
-        return null;
+        return mediaDetailPagerFragment;
     }
-
-
-
 
     @Override
     public void onBackStackChanged() {
