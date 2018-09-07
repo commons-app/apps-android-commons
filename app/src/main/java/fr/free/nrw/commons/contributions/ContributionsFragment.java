@@ -49,6 +49,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 import timber.log.Timber;
 
+import static fr.free.nrw.commons.contributions.Contribution.STATE_FAILED;
 import static fr.free.nrw.commons.contributions.ContributionDao.Table.ALL_FIELDS;
 import static fr.free.nrw.commons.contributions.ContributionsContentProvider.BASE_URI;
 import static fr.free.nrw.commons.settings.Prefs.UPLOADS_SHOWING;
@@ -284,7 +285,14 @@ public class ContributionsFragment
      * @param i position of upload which will be retried
      */
     public void retryUpload(int i) {
-
+        allContributions.moveToPosition(i);
+        Contribution c = contributionDao.fromCursor(allContributions);
+        if (c.getState() == STATE_FAILED) {
+            uploadService.queue(UploadService.ACTION_UPLOAD_FILE, c);
+            Timber.d("Restarting for %s", c.toString());
+        } else {
+            Timber.d("Skipping re-upload for non-failed %s", c.toString());
+        }
     }
 
     /**
@@ -292,7 +300,14 @@ public class ContributionsFragment
      * @param i position of upload attempt which will be deteled
      */
     public void deleteUpload(int i) {
-
+        allContributions.moveToPosition(i);
+        Contribution c = contributionDao.fromCursor(allContributions);
+        if (c.getState() == STATE_FAILED) {
+            Timber.d("Deleting failed contrib %s", c.toString());
+            contributionDao.delete(c);
+        } else {
+            Timber.d("Skipping deletion for non-failed contrib %s", c.toString());
+        }
     }
 
     @Override
