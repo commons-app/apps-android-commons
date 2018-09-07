@@ -152,6 +152,32 @@ public class ContributionsActivity extends AuthenticatedActivity {
 
     }
 
+    @Override
+    public void onBackPressed() {
+        String contributionsFragmentTag = ((ContributionsActivityPagerAdapter) viewPager.getAdapter()).makeFragmentName(R.id.pager, 0);
+        if (getSupportFragmentManager().findFragmentByTag(contributionsFragmentTag) != null && isContributionsFragmentVisible) {
+            // Meas that contribution fragment is visible (not nearby fragment)
+            ContributionsFragment contributionsFragment = (ContributionsFragment) getSupportFragmentManager().findFragmentByTag(contributionsFragmentTag);
+
+            if (contributionsFragment.getChildFragmentManager().findFragmentByTag(ContributionsFragment.MEDIA_DETAIL_PAGER_FRAGMENT_TAG) != null) {
+                // Means that media details fragment is visible to uer instead of contributions list fragment (As chils fragment)
+                // Then we want to go back to contributions list fragment on backbutton pressed from media detail fragment
+                contributionsFragment.getChildFragmentManager().popBackStack();
+                // Tabs were invisible when Media Details Fragment is active, make them visible again on Contrib List Fragment active
+                showTabs();
+                // Make number of uploads visible when Contributions List is visible
+                // TODO Neslihan: ContributionListViewUtils.setIndicatorVisibility(contributionsFragment.numberOfUploads, contributionsFragment.numberOfUploadsProgressBar, true, false);
+                // TODO Neslihan: ContributionListViewUtils.setIndicatorVisibility(contributionsFragment.notificationsCardView, contributionsFragment.notificationsCardViewProgressBar, true, false);
+            } else {
+                //super.onBackPressed();
+                finish();
+            }
+        } else {
+            // TODO handle nearby fragment is active posibility here.
+            super.onBackPressed();
+        }
+    }
+
     public class ContributionsActivityPagerAdapter extends FragmentPagerAdapter {
         FragmentManager fragmentManager;
         private boolean isContributionsListFragment = true; // to know what to put in first tab, Contributions of Media Details
@@ -252,5 +278,4 @@ public class ContributionsActivity extends AuthenticatedActivity {
             this.isContributionsListFragment = isContributionsListFragment;
         }
     }
-
 }

@@ -197,7 +197,7 @@ public class ContributionsFragment
 
     @Override
     public void onBackStackChanged() {
-
+        ((ContributionsActivity)getActivity()).initBackButton();
     }
 
     @Override
@@ -206,7 +206,6 @@ public class ContributionsFragment
         return new CursorLoader(getActivity(), BASE_URI, //TODO find out the reason we pass activity here
                 ALL_FIELDS, "", null,
                 ContributionDao.CONTRIBUTION_SORT + "LIMIT " + uploads);
-
     }
 
     @Override
