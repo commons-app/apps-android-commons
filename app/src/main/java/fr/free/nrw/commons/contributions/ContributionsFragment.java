@@ -1,32 +1,41 @@
 package fr.free.nrw.commons.contributions;
 
 import android.app.FragmentManager;
-import android.app.LoaderManager;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
-import android.content.Loader;
+import android.content.ServiceConnection;
 import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.DataSetObserver;
 import android.graphics.PorterDuff;
 import android.os.Bundle;
+import android.os.IBinder;
 import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentTransaction;
+
 import android.support.v4.content.ContextCompat;
+import android.support.v4.content.CursorLoader;
+import android.support.v4.content.Loader;
+import android.support.v4.app.LoaderManager;
+import android.support.v4.widget.CursorAdapter;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Adapter;
 import android.widget.AdapterView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
 import javax.inject.Named;
 
 import fr.free.nrw.commons.BuildConfig;
+import fr.free.nrw.commons.HandlerService;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
@@ -35,9 +44,14 @@ import fr.free.nrw.commons.mwapi.MediaWikiApi;
 import fr.free.nrw.commons.nearby.NearbyPlaces;
 import fr.free.nrw.commons.notification.Notification;
 import fr.free.nrw.commons.notification.NotificationController;
+import fr.free.nrw.commons.upload.UploadService;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 import timber.log.Timber;
+
+import static fr.free.nrw.commons.contributions.ContributionDao.Table.ALL_FIELDS;
+import static fr.free.nrw.commons.contributions.ContributionsContentProvider.BASE_URI;
+import static fr.free.nrw.commons.settings.Prefs.UPLOADS_SHOWING;
 
 public class ContributionsFragment
         extends CommonsDaggerSupportFragment
@@ -56,6 +70,11 @@ public class ContributionsFragment
     @Inject
     NotificationController notificationController;
 
+    private ArrayList<DataSetObserver> observersWaitingForLoad = new ArrayList<>();
+    private Cursor allContributions;
+    private UploadService uploadService;
+    private boolean isUploadServiceConnected;
+
     public TextView numberOfUploads;
     public ProgressBar numberOfUploadsProgressBar;
 
@@ -63,6 +82,25 @@ public class ContributionsFragment
     private MediaDetailPagerFragment mediaDetailPagerFragment;
     public static final String CONTRIBUTION_LIST_FRAGMENT_TAG = "ContributionListFragmentTag";
     public static final String MEDIA_DETAIL_PAGER_FRAGMENT_TAG = "MediaDetailFragmentTag";
+
+    /**
+     * Since we will need to use parent activity on onAuthCookieAcquired, we have to wait
+     * fragment to be attached. Latch will be responsible for this sync.
+     */
+    private ServiceConnection uploadServiceConnection = new ServiceConnection() {
+        @Override
+        public void onServiceConnected(ComponentName componentName, IBinder binder) {
+            uploadService = (UploadService) ((HandlerService.HandlerServiceLocalBinder) binder)
+                    .getService();
+            isUploadServiceConnected = true;
+        }
+
+        @Override
+        public void onServiceDisconnected(ComponentName componentName) {
+            // this should never happen
+            Timber.e(new RuntimeException("UploadService died but the rest of the process did not!"));
+        }
+    };
 
     @Nullable
     @Override
@@ -163,17 +201,49 @@ public class ContributionsFragment
 
     @Override
     public Loader<Cursor> onCreateLoader(int i, Bundle bundle) {
-        return null;
+        int uploads = prefs.getInt(UPLOADS_SHOWING, 100);
+        return new CursorLoader(getActivity(), BASE_URI, //TODO find out the reason we pass activity here
+                ALL_FIELDS, "", null,
+                ContributionDao.CONTRIBUTION_SORT + "LIMIT " + uploads);
+
     }
 
     @Override
-    public void onLoadFinished(Loader<Cursor> loader, Cursor cursor) {
+    public void onLoadFinished(Loader<Cursor> cursorLoader, Cursor cursor) {
+        if (contributionsListFragment != null) {
+            contributionsListFragment.changeProgressBarVisibility(false);
 
+            if (contributionsListFragment.getAdapter() == null) {
+                Log.d("deneme", "contributionsListFragment adapter set");
+                contributionsListFragment.setAdapter(new ContributionsListAdapter(getActivity().getApplicationContext(),
+                        cursor, 0, contributionDao));
+            } else {
+                ((CursorAdapter) contributionsListFragment.getAdapter()).swapCursor(cursor);
+            }
+
+            contributionsListFragment.clearSyncMessage();
+            notifyAndMigrateDataSetObservers();
+        }
     }
 
     @Override
-    public void onLoaderReset(Loader<Cursor> loader) {
+    public void onLoaderReset(Loader<Cursor> cursorLoader) {
+        ((CursorAdapter) contributionsListFragment.getAdapter()).swapCursor(null);
+    }
 
+    private void notifyAndMigrateDataSetObservers() {
+        Adapter adapter = contributionsListFragment.getAdapter();
+
+        // First, move the observers over to the adapter now that we have it.
+        for (DataSetObserver observer : observersWaitingForLoad) {
+            adapter.registerDataSetObserver(observer);
+        }
+        observersWaitingForLoad.clear();
+
+        // Now fire off a first notification...
+        for (DataSetObserver observer : observersWaitingForLoad) {
+            observer.onChanged();
+        }
     }
 
     /**
@@ -181,12 +251,19 @@ public class ContributionsFragment
      * @param uploadServiceIntent
      */
     public void onAuthCookieAcquired(Intent uploadServiceIntent) {
+        // Since we call onAuthCookieAcquired method from onAttach, isAdded is still false. So don't use it
 
+        if (getActivity() != null) { // If fragment is attached to parent activity
+            getActivity().bindService(uploadServiceIntent, uploadServiceConnection, Context.BIND_AUTO_CREATE);
+            allContributions = contributionDao.loadAllContributions();
+            getActivity().getSupportLoaderManager().initLoader(0, null, ContributionsFragment.this);
+        }
     }
 
     @Override
     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-
+        // show detail at a position
+        showDetail(i);
     }
 
     /**
