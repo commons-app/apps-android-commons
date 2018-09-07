@@ -47,6 +47,7 @@ import fr.free.nrw.commons.notification.Notification;
 import fr.free.nrw.commons.notification.NotificationController;
 import fr.free.nrw.commons.settings.Prefs;
 import fr.free.nrw.commons.upload.UploadService;
+import fr.free.nrw.commons.utils.ContributionListViewUtils;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.schedulers.Schedulers;
@@ -163,6 +164,8 @@ public class ContributionsFragment
         transaction.addToBackStack(CONTRIBUTION_LIST_FRAGMENT_TAG);
         transaction.commit();
         getChildFragmentManager().executePendingTransactions();
+        // Both should be visible and number of uploads are ready
+        ContributionListViewUtils.setIndicatorVisibility(numberOfUploads, numberOfUploadsProgressBar,true, false);
     }
 
     /**
@@ -184,6 +187,10 @@ public class ContributionsFragment
         transaction.addToBackStack(MEDIA_DETAIL_PAGER_FRAGMENT_TAG);
         transaction.commit();
         getChildFragmentManager().executePendingTransactions();
+
+        // Make number of uploads invisible when Media Details Activity is visible
+        ContributionListViewUtils.setIndicatorVisibility(numberOfUploads, numberOfUploadsProgressBar,false, true);
+
     }
 
     /**
@@ -368,11 +375,11 @@ public class ContributionsFragment
     private void setUploadCount() {
         if (getChildFragmentManager().findFragmentByTag(MEDIA_DETAIL_PAGER_FRAGMENT_TAG) != null) {
             // Means Media Details Fragment is active
-            // TODO: Neslihan ContributionListViewUtils.setIndicatorVisibility(numberOfUploads, numberOfUploadsProgressBar,false, true);
+            ContributionListViewUtils.setIndicatorVisibility(numberOfUploads, numberOfUploadsProgressBar,false, true);
 
         } else {
             // Means Contribution List Fragment is visible to user
-            // TODO: Neslihan ContributionListViewUtils.setIndicatorVisibility(numberOfUploads, numberOfUploadsProgressBar,false, false);
+            ContributionListViewUtils.setIndicatorVisibility(numberOfUploads, numberOfUploadsProgressBar,false, false);
         }
         compositeDisposable.add(mediaWikiApi
                 .getUploadCount(((ContributionsActivity)getActivity()).sessionManager.getCurrentAccount().name)
@@ -395,11 +402,11 @@ public class ContributionsFragment
                         uploadCount, uploadCount));
         if (getChildFragmentManager().findFragmentByTag(MEDIA_DETAIL_PAGER_FRAGMENT_TAG) != null) {
             // Means Media Details Fragment is active
-            // TODO: Neslihan ContributionListViewUtils.setIndicatorVisibility(numberOfUploads, numberOfUploadsProgressBar,false, true);
+            ContributionListViewUtils.setIndicatorVisibility(numberOfUploads, numberOfUploadsProgressBar,false, true);
 
         } else {
             // Means Contribution List Fragment is visible to user
-            // TODO: Neslihan ContributionListViewUtils.setIndicatorVisibility(numberOfUploads, numberOfUploadsProgressBar,true, false);
+            ContributionListViewUtils.setIndicatorVisibility(numberOfUploads, numberOfUploadsProgressBar,true, false);
         }
     }
 
