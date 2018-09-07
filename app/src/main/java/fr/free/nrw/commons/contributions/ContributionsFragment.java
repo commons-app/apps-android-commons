@@ -1,6 +1,5 @@
 package fr.free.nrw.commons.contributions;
 
-import android.app.FragmentManager;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
@@ -12,6 +11,7 @@ import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.support.annotation.Nullable;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 
 import android.support.v4.content.ContextCompat;
@@ -30,6 +30,7 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.CountDownLatch;
 
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -44,8 +45,10 @@ import fr.free.nrw.commons.mwapi.MediaWikiApi;
 import fr.free.nrw.commons.nearby.NearbyPlaces;
 import fr.free.nrw.commons.notification.Notification;
 import fr.free.nrw.commons.notification.NotificationController;
+import fr.free.nrw.commons.settings.Prefs;
 import fr.free.nrw.commons.upload.UploadService;
 import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.schedulers.Schedulers;
 import timber.log.Timber;
 
@@ -75,7 +78,8 @@ public class ContributionsFragment
     private Cursor allContributions;
     private UploadService uploadService;
     private boolean isUploadServiceConnected;
-
+    private CompositeDisposable compositeDisposable = new CompositeDisposable();
+    CountDownLatch waitForContributionsListFragment = new CountDownLatch(1);
     public TextView numberOfUploads;
     public ProgressBar numberOfUploadsProgressBar;
 
@@ -333,6 +337,11 @@ public class ContributionsFragment
     }
 
     @Override
+    public void notifyDatasetChanged() {
+
+    }
+
+    @Override
     public void registerDataSetObserver(DataSetObserver observer) {
         Adapter adapter = contributionsListFragment.getAdapter();
         if (adapter == null) {
@@ -354,12 +363,41 @@ public class ContributionsFragment
 
     @SuppressWarnings("ConstantConditions")
     private void setUploadCount() {
+        if (getChildFragmentManager().findFragmentByTag(MEDIA_DETAIL_PAGER_FRAGMENT_TAG) != null) {
+            // Means Media Details Fragment is active
+            // TODO: Neslihan ContributionListViewUtils.setIndicatorVisibility(numberOfUploads, numberOfUploadsProgressBar,false, true);
 
+        } else {
+            // Means Contribution List Fragment is visible to user
+            // TODO: Neslihan ContributionListViewUtils.setIndicatorVisibility(numberOfUploads, numberOfUploadsProgressBar,false, false);
+        }
+        compositeDisposable.add(mediaWikiApi
+                .getUploadCount(((ContributionsActivity)getActivity()).sessionManager.getCurrentAccount().name)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(this::displayUploadCount,
+                        t -> Timber.e(t, "Fetching upload count failed")
+                ));
     }
 
-
     private void displayUploadCount(Integer uploadCount) {
+        if (getActivity().isFinishing()
+                || numberOfUploads == null
+                || getResources() == null) {
+            return;
+        }
 
+        numberOfUploads.setText(getResources()
+                .getQuantityString(R.plurals.contributions_subtitle,
+                        uploadCount, uploadCount));
+        if (getChildFragmentManager().findFragmentByTag(MEDIA_DETAIL_PAGER_FRAGMENT_TAG) != null) {
+            // Means Media Details Fragment is active
+            // TODO: Neslihan ContributionListViewUtils.setIndicatorVisibility(numberOfUploads, numberOfUploadsProgressBar,false, true);
+
+        } else {
+            // Means Contribution List Fragment is visible to user
+            // TODO: Neslihan ContributionListViewUtils.setIndicatorVisibility(numberOfUploads, numberOfUploadsProgressBar,true, false);
+        }
     }
 
     public void betaSetUploadCount(int betaUploadCount) {
@@ -380,6 +418,36 @@ public class ContributionsFragment
      */
     public void updateNearbyNotification(List<NearbyPlaces> nearbyPlaces) {
 
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        boolean mediaDetailsVisible = mediaDetailPagerFragment != null && mediaDetailPagerFragment.isVisible();
+        outState.putBoolean("mediaDetailsVisible", mediaDetailsVisible);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        boolean isSettingsChanged = prefs.getBoolean(Prefs.IS_CONTRIBUTION_COUNT_CHANGED, false);
+        prefs.edit().putBoolean(Prefs.IS_CONTRIBUTION_COUNT_CHANGED, false).apply();
+        if (isSettingsChanged) {
+            refreshSource();
+        }
+    }
+
+    @Override
+    public void onDestroy() {
+        compositeDisposable.clear();
+        getChildFragmentManager().removeOnBackStackChangedListener(this);
+        super.onDestroy();
+
+        if (isUploadServiceConnected) {
+            if (getActivity() != null) {
+                getActivity().unbindService(uploadServiceConnection);
+            }
+        }
     }
 }
 

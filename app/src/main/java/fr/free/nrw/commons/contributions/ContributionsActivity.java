@@ -22,7 +22,7 @@ import fr.free.nrw.commons.upload.UploadService;
 
 import static android.content.ContentResolver.requestSync;
 
-public class ContributionsActivity extends AuthenticatedActivity {
+public class ContributionsActivity extends AuthenticatedActivity implements FragmentManager.OnBackStackChangedListener {
 
     @Inject
     SessionManager sessionManager;
@@ -176,6 +176,11 @@ public class ContributionsActivity extends AuthenticatedActivity {
             // TODO handle nearby fragment is active posibility here.
             super.onBackPressed();
         }
+    }
+
+    @Override
+    public void onBackStackChanged() {
+
     }
 
     public class ContributionsActivityPagerAdapter extends FragmentPagerAdapter {
