@@ -252,8 +252,8 @@
   <string name="skip_login_title">Do you really want to skip login?</string>
   <string name="skip_login_message">You will not be able to upload pictures.</string>
   <string name="login_alert_message">Please log in to use this feature</string>
-  <string name="copy_wikicode">Copy Wikicode to clipboard</string>
-  <string name="wikicode_copied">Wikicode copied to clipboard</string>
+  <string name="copy_wikicode">Copy the wikitext to the clipboard</string>
+  <string name="wikicode_copied">The wikitext was copied to the clipboard</string>
 
   <string name="nearby_location_has_not_changed">Location has not changed.</string>
   <string name="nearby_location_not_available">Location not available.</string>
