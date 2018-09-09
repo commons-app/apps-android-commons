@@ -1,6 +1,5 @@
 package fr.free.nrw.commons.upload;
 
-import android.Manifest;
 import android.app.Activity;
 
 import com.karumi.dexter.Dexter;
@@ -13,6 +12,8 @@ import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.utils.DialogUtil;
 import fr.free.nrw.commons.utils.ExternalStorageUtils;
 import fr.free.nrw.commons.utils.PermissionUtils;
+import io.reactivex.Completable;
+import io.reactivex.subjects.CompletableSubject;
 import timber.log.Timber;
 
 public class DexterPermissionObtainer {
@@ -23,36 +24,53 @@ public class DexterPermissionObtainer {
 
     private PermissionDeniedResponse permissionDeniedResponse;
 
-    private boolean receivedSharedItems;
     private boolean storagePromptInProgress;
-    private Runnable onPermissionObtained;
 
     private final String rationaleTitle;
     private final String rationaleText;
 
     private Activity activity;
 
+    public CompletableSubject storagePromptObservable;
+
     /**
-     * @param activity The activity that is requesting the permission
-     * @param requestedPermission The permission being requested in the form of Manifest.permission.*
-     * @param rationaleTitle The title of the rationale dialog
-     * @param rationaleText The text inside the rationale dialog
-     * @param onPermissionObtained The function to be called when the permission is obtained.
+     * @param activity             The activity that is requesting the permission
+     * @param requestedPermission  The permission being requested in the form of Manifest.permission.*
+     * @param rationaleTitle       The title of the rationale dialog
+     * @param rationaleText        The text inside the rationale dialog
      */
-    public DexterPermissionObtainer(Activity activity, String requestedPermission, String rationaleTitle, String rationaleText, Runnable onPermissionObtained){
-        this.activity=activity;
+    public DexterPermissionObtainer(Activity activity, String requestedPermission, String rationaleTitle, String rationaleText) {
+        this.activity = activity;
         this.rationaleTitle = rationaleTitle;
         this.rationaleText = rationaleText;
-        this.requestedPermission=requestedPermission;
-        this.onPermissionObtained=onPermissionObtained;
+        this.requestedPermission = requestedPermission;
+        this.storagePromptObservable = CompletableSubject.create();
         initPermissionsRationaleDialog();
     }
-
 
     /**
      * Checks if storage permissions are obtained, prompts the users to grant storage permissions if necessary.
      * When storage permission is present, onPermissionObtained is called.
      */
+    public Completable confirmStoragePermissions() {
+        if (ExternalStorageUtils.isStoragePermissionGranted(activity)) {
+            Timber.i("Storage permissions already granted.");
+            storagePromptObservable.onComplete();
+        } else if (!storagePromptInProgress) {
+            if (storagePromptObservable.hasComplete()) {
+                storagePromptObservable = CompletableSubject.create();
+            }
+            //If permission is not there, ask for it
+            storagePromptInProgress = true;
+            askDexterToHandleExternalStoragePermission();
+        }
+        return storagePromptObservable;
+    }
+
+    /* *
+     * Checks if storage permissions are obtained, prompts the users to grant storage permissions if necessary.
+     * When storage permission is present, onPermissionObtained is called.
+     *
     public void confirmStoragePermissions() {
         if (ExternalStorageUtils.isStoragePermissionGranted(activity)) {
             Timber.i("Storage permissions already granted.");
@@ -63,13 +81,13 @@ public class DexterPermissionObtainer {
             askDexterToHandleExternalStoragePermission();
         }
         //return storagePermissionReady;return null;
-    }
+    }*/
 
 
     /**
      * To be called when the user returns to the original activity after manually enabling storage permissions.
      */
-    public void onManualPermissionReturned(){
+    public void onManualPermissionReturned() {
         //OnActivity result, no matter what the result is, our function can handle that.
         askDexterToHandleExternalStoragePermission();
     }
@@ -90,7 +108,8 @@ public class DexterPermissionObtainer {
                             Timber.d(TAG, "User has granted us the permission for writing the external storage");
                             //If permission is granted, well and good
                             storagePromptInProgress = false;
-                            onPermissionObtained.run();
+                            storagePromptObservable.onComplete();
+                            //onPermissionObtained.run();
                         }
 
                         @Override
