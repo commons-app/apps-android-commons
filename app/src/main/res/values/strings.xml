@@ -69,8 +69,8 @@
   <plurals name="contributions_subtitle">
     <!--zero is not used in english. Category mentioned here for easy reference in future-->
     <item quantity="zero">@string/contributions_subtitle_zero</item>
-    <item quantity="one">%1$d upload</item>
-    <item quantity="other">%1$d uploads</item>
+    <item quantity="one">(%1$d)</item>
+    <item quantity="other">(%1$d)</item>
   </plurals>
   <plurals name="starting_multiple_uploads">
     <item quantity="one">Starting %1$d upload</item>

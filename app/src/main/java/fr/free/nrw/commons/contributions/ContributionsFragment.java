@@ -397,6 +397,7 @@ public class ContributionsFragment
             return;
         }
 
+        ((ContributionsActivity)getActivity()).setNumOfUploads(uploadCount);
         numberOfUploads.setText(getResources()
                 .getQuantityString(R.plurals.contributions_subtitle,
                         uploadCount, uploadCount));

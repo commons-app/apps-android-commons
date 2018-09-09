@@ -83,6 +83,12 @@ public class ContributionsActivity extends AuthenticatedActivity implements Frag
         setTabAndViewPagerSynchronisation();
     }
 
+    public void setNumOfUploads(int uploadCount) {
+        tabLayout.getTabAt(0).setText(getResources().getString(R.string.contributions_fragment) +" "+ getResources()
+                .getQuantityString(R.plurals.contributions_subtitle,
+                        uploadCount, uploadCount));
+    }
+
     /**
      * Normally tab layout and view pager has no relation, which means when you swipe view pager
      * tab won't change and vice versa. So we have to notify each of them.
