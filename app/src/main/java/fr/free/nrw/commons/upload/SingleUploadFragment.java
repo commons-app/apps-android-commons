@@ -59,27 +59,34 @@ import static android.view.MotionEvent.ACTION_UP;
 
 public class SingleUploadFragment extends CommonsDaggerSupportFragment {
 
-    @BindView(R.id.titleEdit) EditText titleEdit;
-    @BindView(R.id.rv_descriptions) RecyclerView rvDescriptions;
-    @BindView(R.id.titleDescButton) Button titleDescButton;
-    @BindView(R.id.share_license_summary) TextView licenseSummaryView;
-    @BindView(R.id.licenseSpinner) Spinner licenseSpinner;
+    //@BindView(R.id.titleEdit)
+    EditText titleEdit;
+    //@BindView(R.id.rv_descriptions)
+    RecyclerView rvDescriptions;
+    //@BindView(R.id.titleDescButton)
+    Button titleDescButton;
+    //@BindView(R.id.share_license_summary)
+    TextView licenseSummaryView;
+    //@BindView(R.id.licenseSpinner)
+    Spinner licenseSpinner;
 
 
-    @Inject @Named("default_preferences") SharedPreferences prefs;
-    @Inject @Named("direct_nearby_upload_prefs") SharedPreferences directPrefs;
+    //@Inject //@Named("default_preferences")
+    SharedPreferences prefs;
+    //@Inject //@Named("direct_nearby_upload_prefs")
+    SharedPreferences directPrefs;
 
     private String license;
     private OnUploadActionInitiated uploadActionInitiatedHandler;
     private TitleTextWatcher textWatcher = new TitleTextWatcher();
     private DescriptionsAdapter descriptionsAdapter;
 
-    @Override
+    //@Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         inflater.inflate(R.menu.activity_share, menu);
     }
 
-    @Override
+    //@Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             //What happens when the 'submit' icon is tapped
@@ -124,7 +131,7 @@ public class SingleUploadFragment extends CommonsDaggerSupportFragment {
         return descriptions;
     }
 
-    @Override
+    //@Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
            Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_single_upload, container, false);
@@ -230,13 +237,13 @@ public class SingleUploadFragment extends CommonsDaggerSupportFragment {
         return languages;
     }
 
-    @Override
+    //@Override
     public void onDestroyView() {
         titleEdit.removeTextChangedListener(textWatcher);
         super.onDestroyView();
     }
 
-    @OnItemSelected(R.id.licenseSpinner)
+    //@OnItemSelected(R.id.licenseSpinner)
     void onLicenseSelected(AdapterView<?> parent, View view, int position, long id) {
         String licenseName = parent.getItemAtPosition(position).toString();
 
@@ -269,7 +276,7 @@ public class SingleUploadFragment extends CommonsDaggerSupportFragment {
     }
 
 
-    @OnClick(R.id.titleDescButton)
+    //@OnClick(R.id.titleDescButton)
     void setTitleDescButton() {
         //Retrieve last title and desc entered
         String title = prefs.getString("Title", "");
@@ -288,7 +295,7 @@ public class SingleUploadFragment extends CommonsDaggerSupportFragment {
     /**
      * Copied from https://stackoverflow.com/a/26269435/8065933
      */
-    @OnTouch(R.id.titleEdit)
+    //@OnTouch(R.id.titleEdit)
     boolean titleInfo(View view, MotionEvent motionEvent) {
         final int value;
         if (ViewCompat.getLayoutDirection(getView()) == ViewCompat.LAYOUT_DIRECTION_LTR) {
@@ -308,21 +315,21 @@ public class SingleUploadFragment extends CommonsDaggerSupportFragment {
         return false;
     }
 
-    @SuppressLint("StringFormatInvalid")
+    //@SuppressLint("StringFormatInvalid")
     private void setLicenseSummary(String license) {
         String licenseHyperLink = "<a href='" + licenseUrlFor(license)+"'>"+ getString(Utils.licenseNameFor(license)) + "</a><br>";
         licenseSummaryView.setMovementMethod(LinkMovementMethod.getInstance());
         licenseSummaryView.setText(Html.fromHtml(getString(R.string.share_license_summary, licenseHyperLink)));
  }
 
-    @Override
+    //@Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         setHasOptionsMenu(true);
         uploadActionInitiatedHandler = (OnUploadActionInitiated) getActivity();
     }
 
-    @Override
+    //@Override
     public void onStop() {
         super.onStop();
 
@@ -331,7 +338,7 @@ public class SingleUploadFragment extends CommonsDaggerSupportFragment {
         ViewUtil.hideKeyboard(target);
     }
 
-    @NonNull
+    //@NonNull
     private String licenseUrlFor(String license) {
         switch (license) {
             case Prefs.Licenses.CC_BY_3:
@@ -355,15 +362,15 @@ public class SingleUploadFragment extends CommonsDaggerSupportFragment {
 
     private class TitleTextWatcher implements TextWatcher {
 
-        @Override
+        //@Override
         public void beforeTextChanged(CharSequence charSequence, int i, int i2, int i3) {
         }
 
-        @Override
+        //@Override
         public void onTextChanged(CharSequence charSequence, int i, int i2, int i3) {
         }
 
-        @Override
+        //@Override
         public void afterTextChanged(Editable editable) {
             if (getActivity() != null) {
                 getActivity().invalidateOptionsMenu();
@@ -382,7 +389,7 @@ public class SingleUploadFragment extends CommonsDaggerSupportFragment {
                 .show();
     }
 
-    @OnClick(R.id.ll_add_description)
+    //@OnClick(R.id.ll_add_description)
     public void onLLAddDescriptionClicked() {
         descriptionsAdapter.addDescription(new Description());
         rvDescriptions.scrollToPosition(descriptionsAdapter.getItemCount() - 1);

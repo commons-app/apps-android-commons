@@ -87,38 +87,40 @@ public class ShareActivity
     final Rect startBounds = new Rect();
     final Rect finalBounds = new Rect();
     final Point globalOffset = new Point();
-    @Inject
+    //@Inject
     MediaWikiApi mwApi;
-    @Inject
+    //@Inject
     CacheController cacheController;
-    @Inject
+    //@Inject
     SessionManager sessionManager;
-    @Inject
+    //@Inject
     UploadController uploadController;
-    @Inject
+    //@Inject
     ModifierSequenceDao modifierSequenceDao;
-    @Inject
+    //@Inject
     CategoryApi apiCall;
-    @Inject @Named("application_preferences") SharedPreferences applicationPrefs;
-    @Inject
-    @Named("default_preferences")
+    //@Inject
+    //@Named("application_preferences")
+    SharedPreferences applicationPrefs;
+    //@Inject
+    //@Named("default_preferences")
     SharedPreferences prefs;
-    @Inject
+    //@Inject
     GpsCategoryModel gpsCategoryModel;
 
-    @BindView(R.id.container)
+    //@BindView(R.id.container)
     FrameLayout flContainer;
-    @BindView(R.id.backgroundImage)
+    //@BindView(R.id.backgroundImage)
     SimpleDraweeView backgroundImageView;
-    @BindView(R.id.media_map)
+    //@BindView(R.id.media_map)
     FloatingActionButton mapButton;
-    @BindView(R.id.media_upload_zoom_in)
+    //@BindView(R.id.media_upload_zoom_in)
     FloatingActionButton zoomInButton;
-    @BindView(R.id.media_upload_zoom_out)
+    //@BindView(R.id.media_upload_zoom_out)
     FloatingActionButton zoomOutButton;
-    @BindView(R.id.main_fab)
+    //@BindView(R.id.main_fab)
     FloatingActionButton mainFab;
-    @BindView(R.id.expanded_image)
+    //@BindView(R.id.expanded_image)
     PhotoView expandedImageView;
 
     private String source;
@@ -153,7 +155,7 @@ public class ShareActivity
      * Requests Storage permission, if needed.
      */
 
-    @Override
+    //@Override
     public void uploadActionInitiated(String title, String description) {
 
         this.title = title;
@@ -186,9 +188,9 @@ public class ShareActivity
      * Checks whether storage permissions need to be requested.
      * Permissions are needed if the file is not owned by this application, (e.g. shared from the Gallery)
      *
-     * @return true if file is not owned by this application and permission hasn't been granted beforehand
+     * //@return true if file is not owned by this application and permission hasn't been granted beforehand
      */
-    @RequiresApi(16)
+    //@RequiresApi(16)
     private boolean needsToRequestStoragePermission() {
         return !FileUtils.isSelfOwned(getApplicationContext(), mediaUri)
                 && (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE)
@@ -238,9 +240,9 @@ public class ShareActivity
     /**
      * Send categories to modifications queue after they are selected
      *
-     * @param categories categories selected
+     * //@param categories categories selected
      */
-    @Override
+    //@Override
     public void onCategoriesSave(List<String> categories) {
         if (categories.size() > 0) {
             ModifierSequence categoriesSequence = new ModifierSequence(contribution.getContentUri());
@@ -257,7 +259,7 @@ public class ShareActivity
         finish();
     }
 
-    @Override
+    //@Override
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         if (contribution != null) {
@@ -265,12 +267,12 @@ public class ShareActivity
         }
     }
 
-    @Override
+    //@Override
     protected void onAuthCookieAcquired(String authCookie) {
         mwApi.setAuthCookie(authCookie);
     }
 
-    @Override
+    //@Override
     protected void onAuthFailure() {
         Toast failureToast = Toast.makeText(this, R.string.authentication_failed, Toast.LENGTH_LONG);
         failureToast.show();
@@ -278,7 +280,7 @@ public class ShareActivity
     }
 
 
-    @Override
+    //@Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         isUploadFinalised = false;
@@ -302,7 +304,7 @@ public class ShareActivity
         }
     }
 
-    @Override
+    //@Override
     protected void onStop() {
         // If upload is not finalised with failure or success, but contribution is created,
         // we have to remove temp file, to prevent using unnecessary memory
@@ -403,11 +405,11 @@ public class ShareActivity
         mainFab.animate().rotationBy(-180);
         mapButton.animate().translationY(0);
         zoomInButton.animate().translationY(0).setListener(new Animator.AnimatorListener() {
-            @Override
+            //@Override
             public void onAnimationStart(Animator animator) {
             }
 
-            @Override
+            //@Override
             public void onAnimationEnd(Animator animator) {
                 if (!isFABOpen) {
                     mapButton.setVisibility(View.GONE);
@@ -415,11 +417,11 @@ public class ShareActivity
                 }
             }
 
-            @Override
+            //@Override
             public void onAnimationCancel(Animator animator) {
             }
 
-            @Override
+            //@Override
             public void onAnimationRepeat(Animator animator) {
             }
         });
@@ -428,7 +430,7 @@ public class ShareActivity
     /**
      * Checks if upload was initiated via Nearby
      *
-     * @return true if upload was initiated via Nearby
+     * //@return true if upload was initiated via Nearby
      */
     protected boolean isNearbyUpload() {
         return isNearbyUpload;
@@ -437,11 +439,11 @@ public class ShareActivity
     /**
      * Handles submit button permission request (for storage)
      *
-     * @param requestCode  type of request
-     * @param permissions  permissions requested
-     * @param grantResults grant results
+     * //@param requestCode  type of request
+     * //@param permissions  permissions requested
+     * //@param grantResults grant results
      */
-    @Override
+    //@Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         if (requestCode == 1 && grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
             Timber.d("onRequestPermissionsResult external storage permission granted");
@@ -493,18 +495,18 @@ public class ShareActivity
         }
     }
 
-    @Override
+    //@Override
     public void onPause() {
         super.onPause();
     }
 
-    @Override
+    //@Override
     protected void onDestroy() {
         super.onDestroy();
         uploadController.cleanup();
     }
 
-    @Override
+    //@Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
@@ -569,12 +571,12 @@ public class ShareActivity
         set.setDuration(ShortAnimationDuration);
         set.setInterpolator(new DecelerateInterpolator());
         set.addListener(new AnimatorListenerAdapter() {
-            @Override
+            //@Override
             public void onAnimationEnd(Animator animation) {
                 CurrentAnimator = null;
             }
 
-            @Override
+            //@Override
             public void onAnimationCancel(Animator animation) {
                 CurrentAnimator = null;
             }
@@ -591,7 +593,7 @@ public class ShareActivity
     /**
      * Called when user taps the ^ FAB button, expands to show Zoom and Map
      */
-    @OnClick(R.id.main_fab)
+    //@OnClick(R.id.main_fab)
     public void onMainFabClicked() {
         if (!isFABOpen) {
             showFABMenu();
@@ -600,7 +602,7 @@ public class ShareActivity
         }
     }
 
-    @OnClick(R.id.media_upload_zoom_in)
+    //@OnClick(R.id.media_upload_zoom_in)
     public void onZoomInFabClicked() {
         try {
             zoomImageFromThumb(backgroundImageView, mediaUri);
@@ -609,7 +611,7 @@ public class ShareActivity
         }
     }
 
-    @OnClick(R.id.media_upload_zoom_out)
+    //@OnClick(R.id.media_upload_zoom_out)
     public void onZoomOutFabClicked() {
         if (CurrentAnimator != null) {
             CurrentAnimator.cancel();
@@ -629,7 +631,7 @@ public class ShareActivity
         set.setDuration(ShortAnimationDuration);
         set.setInterpolator(new DecelerateInterpolator());
         set.addListener(new AnimatorListenerAdapter() {
-            @Override
+            //@Override
             public void onAnimationEnd(Animator animation) {
                 //background image view is thumbView
                 backgroundImageView.setAlpha(1f);
@@ -637,7 +639,7 @@ public class ShareActivity
                 CurrentAnimator = null;
             }
 
-            @Override
+            //@Override
             public void onAnimationCancel(Animator animation) {
                 //background image view is thumbView
                 backgroundImageView.setAlpha(1f);
@@ -649,7 +651,7 @@ public class ShareActivity
         CurrentAnimator = set;
     }
 
-    @OnClick(R.id.media_map)
+    //@OnClick(R.id.media_map)
     public void onFabShowMapsClicked() {
         if (gpsObj != null && gpsObj.imageCoordsExists) {
             Uri gmmIntentUri = Uri.parse("google.streetview:cbll=" + gpsObj.getDecLatitude() + "," + gpsObj.getDecLongitude());
@@ -659,7 +661,7 @@ public class ShareActivity
         }
     }
 
-    @Override
+    //@Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         switch (keyCode) {
             case KeyEvent.KEYCODE_BACK:

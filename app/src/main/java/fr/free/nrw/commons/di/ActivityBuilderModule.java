@@ -15,8 +15,6 @@ import fr.free.nrw.commons.explore.SearchActivity;
 
 import fr.free.nrw.commons.notification.NotificationActivity;
 import fr.free.nrw.commons.settings.SettingsActivity;
-import fr.free.nrw.commons.upload.MultipleShareActivity;
-import fr.free.nrw.commons.upload.ShareActivity;
 import fr.free.nrw.commons.upload.UploadActivity;
 
 @Module
@@ -29,11 +27,11 @@ public abstract class ActivityBuilderModule {
     @ContributesAndroidInjector
     abstract WelcomeActivity bindWelcomeActivity();
 
-    @ContributesAndroidInjector
-    abstract ShareActivity bindShareActivity();
+    //@ContributesAndroidInjector
+    //abstract ShareActivity bindShareActivity();
 
-    @ContributesAndroidInjector
-    abstract MultipleShareActivity bindMultipleShareActivity();
+    //@ContributesAndroidInjector
+    //abstract MultipleShareActivity bindMultipleShareActivity();
 
     @ContributesAndroidInjector
     abstract MainActivity bindContributionsActivity();

@@ -20,7 +20,6 @@ import fr.free.nrw.commons.nearby.NearbyMapFragment;
 import fr.free.nrw.commons.nearby.NoPermissionsFragment;
 import fr.free.nrw.commons.settings.SettingsFragment;
 import fr.free.nrw.commons.upload.MultipleUploadListFragment;
-import fr.free.nrw.commons.upload.SingleUploadFragment;
 
 @Module
 @SuppressWarnings({"WeakerAccess", "unused"})
@@ -53,8 +52,8 @@ public abstract class FragmentBuilderModule {
     @ContributesAndroidInjector
     abstract MultipleUploadListFragment bindMultipleUploadListFragment();
 
-    @ContributesAndroidInjector
-    abstract SingleUploadFragment bindSingleUploadFragment();
+    //@ContributesAndroidInjector
+    //abstract SingleUploadFragment bindSingleUploadFragment();
 
     @ContributesAndroidInjector
     abstract CategoryImagesListFragment bindFeaturedImagesListFragment();

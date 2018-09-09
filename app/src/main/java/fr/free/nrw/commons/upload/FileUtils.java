@@ -100,9 +100,9 @@ public class FileUtils {
      * @return path of copy
      */
     @NonNull
-    static String createCopyPathAndCopy(Uri uri, ContentResolver contentResolver) throws IOException {
-        FileDescriptor fileDescriptor = contentResolver.openFileDescriptor(uri, "r").getFileDescriptor();
-        String copyPath = getApplicationContext().getCacheDir().getAbsolutePath() + "/" + new Date().getTime() + "." + getFileExt(uri, contentResolver);
+    static String createCopyPathAndCopy(Uri uri, Context context) throws IOException {
+        FileDescriptor fileDescriptor = context.getContentResolver().openFileDescriptor(uri, "r").getFileDescriptor();
+        String copyPath = context.getCacheDir().getAbsolutePath() + "/" + new Date().getTime() + "." + getFileExt(uri, context.getContentResolver());
         FileUtils.copy(fileDescriptor, copyPath);
         Timber.d("Filepath (copied): %s", copyPath);
         return copyPath;
