@@ -146,7 +146,7 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        detailProvider = (MediaDetailPagerFragment.MediaDetailProvider) getActivity();
+        detailProvider = (MediaDetailPagerFragment.MediaDetailProvider) (getParentFragment().getParentFragment());
 
         if (savedInstanceState != null) {
             editable = savedInstanceState.getBoolean("editable");
