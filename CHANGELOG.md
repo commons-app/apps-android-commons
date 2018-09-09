@@ -1,5 +1,13 @@
 # Wikimedia Commons for Android
 
+## v2.8.3
+- Fixed issues with session tokens not being cleared in 2FA, which should reduce p18 edit failures as well
+- Fixed crash caused by bug in fetching revert count
+- Fixed crash potentially caused by Traceur library
+
+## v2.8.2
+- Fixed bug with uploads sent via Share being given .jpeg extensions and overwriting files of the same name
+
 ## v2.8.1
 - Fixed bug with category edits not being sent to server
 

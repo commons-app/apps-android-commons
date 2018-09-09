@@ -148,6 +148,7 @@
   <string name="welcome_copyright_subtext">Evita materiali protetti da copyright che hai trovato su Internet, come pure le immagini di poster, copertine di libri, ecc.</string>
   <string name="welcome_final_text">Pensi di aver capito?</string>
   <string name="welcome_final_button_text">Sì!</string>
+  <string name="welcome_help_button_text">&lt;u&gt;Ulteriori informazioni&lt;/u&gt;</string>
   <string name="detail_panel_cats_label">Categorie</string>
   <string name="detail_panel_cats_loading">Caricamento…</string>
   <string name="detail_panel_cats_none">Nessuna selezione</string>

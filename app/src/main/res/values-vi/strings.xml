@@ -3,6 +3,7 @@
 * Harriettruong3
 * Leducthn
 * Minh Nguyen
+* Nhatminh01
 * Thanhtai2009
 * Tuankiet65
 -->
@@ -150,6 +151,7 @@
   <string name="welcome_copyright_subtext">Tránh dùng các hình ảnh có bản quyền bạn tìm được trên Internet, cũng như các hình chụp áp phích, bìa sách, v.v.</string>
   <string name="welcome_final_text">Bạn hiểu rồi chứ?</string>
   <string name="welcome_final_button_text">Có!</string>
+  <string name="welcome_help_button_text">&lt;u&gt;Thông tin thêm&lt;/u&gt;</string>
   <string name="detail_panel_cats_label">Thể loại</string>
   <string name="detail_panel_cats_loading">Đang tải…</string>
   <string name="detail_panel_cats_none">Chưa chọn</string>

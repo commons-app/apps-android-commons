@@ -1,7 +1,5 @@
 package fr.free.nrw.commons.achievements;
 
-import android.util.Log;
-
 /**
  * represnts Achievements class ans stores all the parameters
  */
@@ -45,62 +43,20 @@ public class Achievements {
     }
 
     /**
-     * Builder class for Achievements class
+     * Get Achievements object from FeedbackResponse
+     *
+     * @param response
+     * @return
      */
-    public class AchievementsBuilder {
-        private int nestedUniqueUsedImages;
-        private int nestedArticlesUsingImages;
-        private int nestedThanksReceived;
-        private int nestedImagesEditedBySomeoneElse;
-        private int nestedFeaturedImages;
-        private int nestedImagesUploaded;
-        private int nestedRevertCount;
-
-        public AchievementsBuilder setUniqueUsedImages(int uniqueUsedImages) {
-            this.nestedUniqueUsedImages = uniqueUsedImages;
-            return this;
-        }
-
-        public AchievementsBuilder setArticlesUsingImages(int articlesUsingImages) {
-            this.nestedArticlesUsingImages = articlesUsingImages;
-            return this;
-        }
-
-        public AchievementsBuilder setThanksReceived(int thanksReceived) {
-            this.nestedThanksReceived = thanksReceived;
-            return this;
-        }
-
-        public AchievementsBuilder setImagesEditedBySomeoneElse(int imagesEditedBySomeoneElse) {
-            this.nestedImagesEditedBySomeoneElse = imagesEditedBySomeoneElse;
-            return this;
-        }
-
-        public AchievementsBuilder setFeaturedImages(int featuredImages) {
-            this.nestedFeaturedImages = featuredImages;
-            return this;
-        }
-
-        public AchievementsBuilder setImagesUploaded(int imagesUploaded) {
-            this.nestedImagesUploaded = imagesUploaded;
-            return this;
-        }
-
-        public AchievementsBuilder setRevertCount( int revertCount){
-            this.nestedRevertCount = revertCount;
-            return this;
-        }
-
-        public Achievements createAchievements(){
-            return new Achievements(nestedUniqueUsedImages,
-                    nestedArticlesUsingImages,
-                    nestedThanksReceived,
-                    nestedImagesEditedBySomeoneElse,
-                    nestedFeaturedImages,
-                    nestedImagesUploaded,
-                    nestedRevertCount);
-        }
-
+    public static Achievements from(FeedbackResponse response) {
+        return new Achievements(response.getUniqueUsedImages(),
+                response.getArticlesUsingImages(),
+                response.getThanksReceived(),
+                response.getImagesEditedBySomeoneElse(),
+                response.getFeaturedImages().getQualityImages()
+                        + response.getFeaturedImages().getFeaturedPicturesOnWikimediaCommons(),
+                0,
+                response.getDeletedUploads());
     }
 
     /**

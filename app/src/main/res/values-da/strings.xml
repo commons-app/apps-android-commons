@@ -160,6 +160,7 @@
   <string name="welcome_copyright_subtext">Undgå ophavsretligt beskyttede materialer du har fundet på internettet samt billeder af plakater, bogomslag osv.</string>
   <string name="welcome_final_text">Forstået?</string>
   <string name="welcome_final_button_text">Ja!</string>
+  <string name="welcome_help_button_text">&lt;u&gt;Mere information&lt;/u&gt;</string>
   <string name="detail_panel_cats_label">Kategorier</string>
   <string name="detail_panel_cats_loading">Indlæser…</string>
   <string name="detail_panel_cats_none">Ingen valgt</string>
@@ -245,6 +246,7 @@
   <string name="no_web_browser">Ingen internetbrowser fundet til at åbne adresse</string>
   <string name="null_url">Fejl! Adressen blev ikke fundet</string>
   <string name="nominate_deletion">Nomineret til sletning</string>
+  <string name="nominated_see_more">&lt;u&gt;Se webside for detaljer&lt;/u&gt;</string>
   <string name="view_browser">Se i browser</string>
   <string name="skip_login">Spring over</string>
   <string name="navigation_item_login">Log på</string>
@@ -269,6 +271,7 @@
   <string name="internet_established">Internet tilgængeligt</string>
   <string name="about_translate">&lt;u&gt;Oversæt&lt;/u&gt;</string>
   <string name="about_translate_title">Sprog</string>
+  <string name="about_translate_proceed">Fortsæt</string>
   <string name="about_translate_cancel">Annullér</string>
   <string name="retry">Prøv igen</string>
   <string name="showcase_view_got_it_button">Forstået!</string>
@@ -291,4 +294,5 @@
   <string name="Achievements">Præstationer</string>
   <string name="statistics_thanks">Tak modtaget</string>
   <string name="statistics_featured">Udvalgte billeder</string>
+  <string name="images_used_by_wiki">Billeder brugt</string>
 </resources>

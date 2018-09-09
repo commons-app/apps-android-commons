@@ -39,11 +39,9 @@ We try to have an extensive documentation at [our wiki here at Github][5]:
 * [Fresco][27]
 * [Stetho][28]
 * [Dagger][29]
-* [AndroidSVG][30]
-* [Java-HTTP-Fluent][31]
-* [CircleProgressBar][32]
-* [Glide][33]
-* [Leak Canary][34]
+* [Java-HTTP-Fluent][30]
+* [CircleProgressBar][31]
+* [Leak Canary][32]
 
 ## License ##
 
@@ -80,8 +78,6 @@ This software is open source, licensed under the [Apache License 2.0][4].
 [27]: https://github.com/facebook/fresco
 [28]: https://github.com/facebook/stetho
 [29]: https://github.com/google/dagger
-[30]: https://github.com/BigBadaboom/androidsvg
-[31]: https://github.com/yuvipanda/java-http-fluent/blob/master/src/main/java/in/yuvi/http/fluent/Http.java
-[32]: https://github.com/dinuscxj/CircleProgressBar
-[33]: https://github.com/bumptech/glide
-[34]: https://github.com/square/leakcanary
+[30]: https://github.com/yuvipanda/java-http-fluent/blob/master/src/main/java/in/yuvi/http/fluent/Http.java
+[31]: https://github.com/dinuscxj/CircleProgressBar
+[32]: https://github.com/square/leakcanary
