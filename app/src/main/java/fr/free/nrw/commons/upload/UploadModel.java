@@ -77,6 +77,7 @@ public class UploadModel {
     @SuppressLint("CheckResult")
     public void receive(List<Uri> mediaUri, String mimeType, String source) {
         currentStepIndex = 0;
+
         Observable<UploadItem> itemObservable = Observable.fromIterable(mediaUri)
                 .map(this::cacheFileUpload)
                 .map(filePath -> {
@@ -265,6 +266,7 @@ public class UploadModel {
 
     public void receiveDirect(Uri media, String mimeType, String source, String wikidataEntityIdPref, String title, String desc) {
         currentStepIndex = 0;
+        items=new ArrayList<>();
         String filePath = this.cacheFileUpload(media);
         Uri uri = Uri.fromFile(new File(filePath));
         FileProcessor fp = new FileProcessor(uri, context.getContentResolver(), context);

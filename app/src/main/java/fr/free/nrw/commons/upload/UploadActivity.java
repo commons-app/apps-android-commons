@@ -157,9 +157,9 @@ public class UploadActivity extends AuthenticatedActivity implements UploadView 
     private CompositeDisposable compositeDisposable;
 
     DexterPermissionObtainer dexterPermissionObtainer;
-    private boolean receivedSharedItems;
 
 
+    @SuppressLint("CheckResult")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -181,20 +181,12 @@ public class UploadActivity extends AuthenticatedActivity implements UploadView 
         //storagePermissionReady.subscribe(b -> Timber.i("storagePermissionReady:" + b));
         presenter.initFromSavedState(savedInstanceState);
 
-        receivedSharedItems = false;
         dexterPermissionObtainer = new DexterPermissionObtainer(this,
                 Manifest.permission.WRITE_EXTERNAL_STORAGE,
                 getString(R.string.storage_permission),
-                getString(R.string.write_storage_permission_rationale_for_image_share),
-                () -> {
-                    if (receivedSharedItems) {
-                        presenter.addView(this);
-                    } else {
-                        receiveSharedItems();
-                    }
-                });
+                getString(R.string.write_storage_permission_rationale_for_image_share));
 
-        dexterPermissionObtainer.confirmStoragePermissions();
+        dexterPermissionObtainer.confirmStoragePermissions().subscribe(this::receiveSharedItems);
     }
 
     @Override
@@ -219,7 +211,9 @@ public class UploadActivity extends AuthenticatedActivity implements UploadView 
     protected void onResume() {
         super.onResume();
         checkIfLoggedIn();
-        dexterPermissionObtainer.confirmStoragePermissions();
+        compositeDisposable.add(
+                dexterPermissionObtainer.confirmStoragePermissions()
+                        .subscribe(() -> presenter.addView(this)));
         compositeDisposable.add(
                 RxTextView.textChanges(categoriesSearch)
                         .doOnEach(v -> categoriesSearchContainer.setError(null))
@@ -233,8 +227,6 @@ public class UploadActivity extends AuthenticatedActivity implements UploadView 
     @Override
     protected void onPause() {
         presenter.removeView();
-        //storagePermissionReady.onNext(false);
-
 //        imageTitle.removeTextChangedListener(titleWatcher);
 //        imageDescription.removeTextChangedListener(descriptionWatcher);
         compositeDisposable.dispose();
@@ -550,7 +542,6 @@ public class UploadActivity extends AuthenticatedActivity implements UploadView 
     }
 
     private void receiveSharedItems() {
-        receivedSharedItems = true;
         Intent intent = getIntent();
         String mimeType = intent.getType();
         String source;
@@ -563,16 +554,19 @@ public class UploadActivity extends AuthenticatedActivity implements UploadView 
 
         if (Intent.ACTION_SEND.equals(intent.getAction())) {
             Uri mediaUri = intent.getParcelableExtra(Intent.EXTRA_STREAM);
-            if (intent.hasExtra("isDirectUpload")) {
+            if (intent.getBooleanExtra("isDirectUpload", false)) {
                 String imageTitle = directPrefs.getString("Title", "");
                 String imageDesc = directPrefs.getString("Desc", "");
+                Timber.i("Received direct upload with title" + imageTitle + "and description %s" + imageDesc);
                 String wikidataEntityIdPref = intent.getStringExtra(WIKIDATA_ENTITY_ID_PREF);
                 presenter.receiveDirect(mediaUri, mimeType, source, wikidataEntityIdPref, imageTitle, imageDesc);
             } else {
+                Timber.i("Received single upload");
                 presenter.receive(mediaUri, mimeType, source);
             }
         } else if (Intent.ACTION_SEND_MULTIPLE.equals(intent.getAction())) {
             ArrayList<Uri> urisList = intent.getParcelableArrayListExtra(Intent.EXTRA_STREAM);
+            Timber.i("Received multiple upload");
             presenter.receive(urisList, mimeType, source);
         }
     }
