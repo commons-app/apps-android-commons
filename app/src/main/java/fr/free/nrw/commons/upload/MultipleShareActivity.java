@@ -1,6 +1,8 @@
 package fr.free.nrw.commons.upload;
 
 import android.Manifest;
+import android.Manifest.permission;
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.ContentResolver;
 import android.content.Context;
@@ -12,7 +14,6 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.ParcelFileDescriptor;
-import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentManager;
@@ -23,6 +24,15 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.Toast;
 
+import com.karumi.dexter.Dexter;
+import com.karumi.dexter.DexterBuilder;
+import com.karumi.dexter.listener.PermissionDeniedResponse;
+import com.karumi.dexter.listener.PermissionGrantedResponse;
+import com.karumi.dexter.listener.single.BasePermissionListener;
+import fr.free.nrw.commons.CommonsApplication;
+import fr.free.nrw.commons.utils.DialogUtil;
+import fr.free.nrw.commons.utils.DialogUtil.Callback;
+import fr.free.nrw.commons.utils.PermissionUtils;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
@@ -41,7 +51,6 @@ import fr.free.nrw.commons.category.OnCategoriesSaveHandler;
 import fr.free.nrw.commons.contributions.Contribution;
 import fr.free.nrw.commons.media.MediaDetailPagerFragment;
 import fr.free.nrw.commons.modifications.CategoryModifier;
-import fr.free.nrw.commons.modifications.ModificationsContentProvider;
 import fr.free.nrw.commons.modifications.ModifierSequence;
 import fr.free.nrw.commons.modifications.ModifierSequenceDao;
 import fr.free.nrw.commons.modifications.TemplateRemoveModifier;
@@ -81,6 +90,11 @@ public class MultipleShareActivity extends AuthenticatedActivity
     private boolean locationPermitted = false;
     private boolean isMultipleUploadsPrepared = false;
     private boolean isMultipleUploadsFinalised = false; // Checks is user clicked to upload button or regret before this phase
+    private final String TAG="#MultipleShareActivity#";
+    private AlertDialog storagePermissionInfoDialog;
+    private DexterBuilder dexterStoragePermissionBuilder;
+
+    private PermissionDeniedResponse permissionDeniedResponse;
 
     @Override
     public Media getMediaAtPosition(int i) {
@@ -122,17 +136,6 @@ public class MultipleShareActivity extends AuthenticatedActivity
         // No need to request external permission here, because if user can reach this point, then she permission granted
         Timber.d("OnMultipleUploadInitiated");
         multipleUploadBegins();
-    }
-
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        if (requestCode == 1 && grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-            Timber.d("onRequestPermissionsResult external storage permission granted");
-            prepareMultipleUpoadList();
-        } else {
-            // Permission is not granted, close activity
-            finish();
-        }
     }
 
     private void multipleUploadBegins() {
@@ -216,6 +219,7 @@ public class MultipleShareActivity extends AuthenticatedActivity
         setContentView(R.layout.activity_multiple_uploads);
         ButterKnife.bind(this);
         initDrawer();
+        initPermissionsRationaleDialog();
 
         if (savedInstanceState != null) {
             photosList = savedInstanceState.getParcelableArrayList("uploadsList");
@@ -230,6 +234,47 @@ public class MultipleShareActivity extends AuthenticatedActivity
              {
                 locationPermitted = true;
             }
+        }
+    }
+
+
+    /**
+     * We have agreed to show a dialog showing why we need a particular permission.
+     * This method is used to initialise the dialog which is going to show the permission's rationale.
+     * The dialog is initialised along with a callback for positive and negative user actions.
+     */
+    private void initPermissionsRationaleDialog() {
+        if (storagePermissionInfoDialog == null) {
+            storagePermissionInfoDialog = DialogUtil
+                    .getAlertDialogWithPositiveAndNegativeCallbacks(
+                            MultipleShareActivity.this,
+                            getString(R.string.storage_permission), getString(
+                                    R.string.write_storage_permission_rationale_for_image_share),
+                            R.drawable.ic_launcher, new Callback() {
+                                @Override
+                                public void onPositiveButtonClicked() {
+                                    //If the user is willing to give us the permission
+                                    //But had somehow previously choose never ask again, we take him to app settings to manually enable permission
+                                    if(null== permissionDeniedResponse){
+                                        //Dexter returned null, lets see if this ever happens
+                                        return;
+                                    }
+                                    else if (permissionDeniedResponse.isPermanentlyDenied()) {
+                                        PermissionUtils.askUserToManuallyEnablePermissionFromSettings(MultipleShareActivity.this);
+                                    } else {
+                                        //or if we still have chance to show runtime permission dialog, we show him that.
+                                        askDexterToHandleExternalStoragePermission();
+                                    }
+                                }
+
+                                @Override
+                                public void onNegativeButtonClicked() {
+                                    //This was the behaviour as of now, I was planning to maybe snack him with some message
+                                    //and then call finish after some time, or may be it could be associated with some action on the snack
+                                    //If the user does not want us to give the permission, even after showing rationale dialog, lets not trouble him anymore
+                                    finish();
+                                }
+                            });
         }
     }
 
@@ -275,12 +320,55 @@ public class MultipleShareActivity extends AuthenticatedActivity
         isMultipleUploadsPrepared = false;
         mwApi.setAuthCookie(authCookie);
         if (!ExternalStorageUtils.isStoragePermissionGranted(this)) {
-            ExternalStorageUtils.requestExternalStoragePermission(this);
+            //If permission is not there, handle the negative cases
+            askDexterToHandleExternalStoragePermission();
             isMultipleUploadsPrepared = false;
             return; // Postpone operation to do after gettion permission
         } else {
             isMultipleUploadsPrepared = true;
-            prepareMultipleUpoadList();
+            prepareMultipleUploadList();
+        }
+    }
+
+    /**
+     * This method initialised the Dexter's permission builder (if not already initialised). Also makes sure that the builder is initialised
+     * only once, otherwise we would'nt know on which instance of it, the user is working on. And after the builder is initialised, it checks for the required
+     * permission and then handles the permission status, thanks to Dexter's appropriate callbacks.
+     */
+    private void askDexterToHandleExternalStoragePermission() {
+        Timber.d(TAG, "External storage permission is being requested");
+        if (null == dexterStoragePermissionBuilder) {
+            dexterStoragePermissionBuilder = Dexter.withActivity(this)
+                    .withPermission(permission.WRITE_EXTERNAL_STORAGE)
+                    .withListener(new BasePermissionListener() {
+                        @Override
+                        public void onPermissionGranted(PermissionGrantedResponse response) {
+                            Timber.d(TAG,"User has granted us the permission for writing the external storage");
+                            //If permission is granted, well and good
+                            prepareMultipleUploadList();
+                        }
+
+                        @Override
+                        public void onPermissionDenied(PermissionDeniedResponse response) {
+                            Timber.d(TAG,"User has granted us the permission for writing the external storage");
+                            //If permission is not granted in whatsoever scenario, we show him a dialog stating why we need the permission
+                            permissionDeniedResponse=response;
+                            if (null != storagePermissionInfoDialog && !storagePermissionInfoDialog
+                                    .isShowing()) {
+                                storagePermissionInfoDialog.show();
+                            }
+                        }
+                    });
+        }
+        dexterStoragePermissionBuilder.check();
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == CommonsApplication.OPEN_APPLICATION_DETAIL_SETTINGS) {
+            //OnActivity result, no matter what the result is, our function can handle that.
+            askDexterToHandleExternalStoragePermission();
         }
     }
 
@@ -288,7 +376,7 @@ public class MultipleShareActivity extends AuthenticatedActivity
      * Prepares a list from files will be uploaded. Saves these files temporarily to external
      * storage. Adds them to uploads list
      */
-    private void prepareMultipleUpoadList() {
+    private void prepareMultipleUploadList() {
         Intent intent = getIntent();
 
         if (Intent.ACTION_SEND_MULTIPLE.equals(intent.getAction())) {

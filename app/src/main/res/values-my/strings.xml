@@ -122,6 +122,7 @@
   <string name="welcome_copyright_subtext">ပိုစတာရုပ်ပုံ၊ စာအုပ်မျက်နှာဖုံးကဲ့သို့သော အင်တာနက်ပေါ်ရှိ သင်တွေ့ရှိမိသမျှ မူပိုင်ပစ္စည်းများကို ရှောင်ကြဉ်ပါ။</string>
   <string name="welcome_final_text">သင် သဘောပေါက်သည်ဟု ထင်ပါသလား</string>
   <string name="welcome_final_button_text">ဟုတ်ကဲ့</string>
+  <string name="welcome_help_button_text">&lt;u&gt;သတင်းအချက်အလက် ပို၍&lt;/u&gt;</string>
   <string name="detail_panel_cats_label">ကဏ္ဍများ</string>
   <string name="detail_panel_cats_loading">ဝန်ဆွဲတင်နေသည်...</string>
   <string name="detail_panel_cats_none">ဘာမှရွေးချယ်မထားပါ</string>
@@ -175,6 +176,7 @@
   <string name="login_to_your_account">သင်၏အကောင့်သို့ ဝင်ရန်</string>
   <string name="nominate_deletion">ဖျက်ပစ်ရန် အဆိုပြုပါ</string>
   <string name="nominated_for_deletion">ဤရုပ်ပုံအား ဖျက်ပစ်ရန် အဆိုပြုခံထားရသည်။</string>
+  <string name="nominated_see_more">&lt;u&gt;အသေးစိတ်အတွက် ဝဘ်စာမျက်ကိုကြည့်ပါ&lt;/u&gt;</string>
   <string name="view_browser">ဘရောက်ဆာတွင် ကြည့်ရန်</string>
   <string name="skip_login">ကျော်ရန်</string>
   <string name="navigation_item_login">အကောင့်ဝင်ရန်</string>
@@ -232,5 +234,6 @@
   <string name="level">အဆင့်</string>
   <string name="achievements_share_message">သင်၏အောင်မြင်မှုများကို မိတ်ဆွေများနှင့် မျှဝေလိုက်ပါ</string>
   <string name="achievements_revert_limit_message">အနည်းဆုံး လိုအပ်ချက်:</string>
+  <string name="images_reverted_explanation">ဖျက်ဆီးခြင်းမခံရသည့် ကွန်မွန်းစ်သို့ သင် အက်ပလုတ်တင်ထားသော ရုပ်ပုံများ၏ ရာခိုင်နှုန်း</string>
   <string name="notifications_channel_name_all">ကွန်မွန်းစ် အသိပေးချက်</string>
 </resources>

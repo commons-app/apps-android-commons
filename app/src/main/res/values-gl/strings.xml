@@ -161,6 +161,7 @@
   <string name="welcome_copyright_subtext">Evite os materiais protexidos por dereitos de autoría que se atopen na internet, así como imaxes de pósters, portadas de libros etc.</string>
   <string name="welcome_final_text">Entende como vai?</string>
   <string name="welcome_final_button_text">Si!</string>
+  <string name="welcome_help_button_text">&lt;u&gt;Máis Información&lt;/u&gt;</string>
   <string name="detail_panel_cats_label">Categorías</string>
   <string name="detail_panel_cats_loading">Cargando…</string>
   <string name="detail_panel_cats_none">Ningunha seleccionada</string>
@@ -249,6 +250,13 @@
   <string name="nominate_deletion">Nomear para borrado</string>
   <string name="nominated_for_deletion">Esta imaxe foi nomeada para borrar.</string>
   <string name="view_browser">Ver en navegador</string>
+  <string name="skip_login">Omitir</string>
+  <string name="navigation_item_login">Acceder ao sistema</string>
+  <string name="skip_login_title">Realmente quere saltar o inicio de sesión?</string>
+  <string name="skip_login_message">Non poderá subir imaxes.</string>
+  <string name="login_alert_message">Por favor, inicie a sesión para usar esta funcionalidade</string>
+  <string name="copy_wikicode">Copiar o texto wiki ó portapapeis</string>
+  <string name="wikicode_copied">Texto wiki copiado ó portapapeis</string>
   <string name="nearby_location_has_not_changed">A localización non cambiou.</string>
   <string name="nearby_location_not_available">A localización non está dispoñible.</string>
   <string name="location_permission_rationale_nearby">Precísase permiso para amosar unha lista de lugares preto de aquí</string>
@@ -296,7 +304,7 @@
   <string name="error_loading_subcategories">Houbo un erro ó cargar subcategorías.</string>
   <string name="successful_wikidata_edit">A imaxe engadiuse con éxito a %1$s en Wikidata!</string>
   <string name="wikidata_edit_failure">Fallou a actualización da entidade do Wikidata correspondente!</string>
-  <string name="menu_set_wallpaper" fuzzy="true">Definir imaxe de fondo</string>
+  <string name="menu_set_wallpaper">Poñer como imaxe de fondo</string>
   <string name="wallpaper_set_successfully">A imaxe de fondo configurouse correctamenteǃ</string>
   <string name="quiz">Cuestionario</string>
   <string name="question">Pregunta</string>
@@ -315,9 +323,12 @@
   <string name="add_description">+ Engadir descrición</string>
   <string name="Achievements">Logros</string>
   <string name="statistics">ESTATÍSTICAS</string>
+  <string name="statistics_thanks">Agradecementos recibidos</string>
+  <string name="statistics_featured">Imaxes destacadas</string>
   <string name="level">NIVEL</string>
   <string name="images_uploaded">Imaxes cargadas</string>
   <string name="image_reverts">Imaxes non revertidas</string>
   <string name="images_used_by_wiki">Imaxes usadas</string>
   <string name="achievements_revert_limit_message">mínimo requirido:</string>
+  <string name="notifications_channel_name_all">Notificación de Commons</string>
 </resources>
