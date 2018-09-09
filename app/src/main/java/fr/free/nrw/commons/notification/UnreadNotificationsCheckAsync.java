@@ -59,7 +59,6 @@ public class UnreadNotificationsCheckAsync extends AsyncTask<Void, Void, List<No
 
         } else {
             // This case is not possible ever?
-            Log.d("deneme","You read all notifications");
             Timber.d("You read all notifications of your at"+lastReadNotificationDateStored +"++curr date is:"+currentDate);
         }
         return unreadNotifications;
@@ -73,8 +72,7 @@ public class UnreadNotificationsCheckAsync extends AsyncTask<Void, Void, List<No
         if (context.get().getWindow().getDecorView().isShown() && !context.get().isFinishing()) {
             // Check if fragment is not null and visible
             if (context.get().isContributionsFragmentVisible && context.get().contributionsActivityPagerAdapter.contributionsFragment != null) {
-                //Log.d("deneme3","context.get().contributionsFragment"+((NewContributionsFragment)context.get().contributionsFragment).toString());
-                ((ContributionsFragment)context.get().contributionsActivityPagerAdapter.contributionsFragment).updateNotificationsNotification(unreadNotification);
+                (context.get().contributionsActivityPagerAdapter.contributionsFragment).updateNotificationsNotification(unreadNotification);
             }
         }
     }

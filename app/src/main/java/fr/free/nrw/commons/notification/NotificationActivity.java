@@ -16,6 +16,7 @@ import android.widget.RelativeLayout;
 
 import com.pedrogomez.renderers.RVRendererAdapter;
 
+import java.util.Calendar;
 import java.util.Collections;
 import java.util.List;
 
@@ -86,6 +87,11 @@ public class NotificationActivity extends NavigationBaseActivity {
     @SuppressLint("CheckResult")
     private void addNotifications() {
         Timber.d("Add notifications");
+
+        // Store when add notification is called last
+        long currentDate = Calendar.getInstance().getTime().getTime();
+        getSharedPreferences("prefs", MODE_PRIVATE).edit().putLong("last_read_notification_date", currentDate).apply();
+        Timber.d("Set last notification read date to current date:"+ currentDate);
 
         if(mNotificationWorkerFragment == null){
             Observable.fromCallable(() -> {
