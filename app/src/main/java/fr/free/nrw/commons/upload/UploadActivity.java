@@ -1,5 +1,6 @@
 package fr.free.nrw.commons.upload;
 
+import android.Manifest;
 import android.animation.LayoutTransition;
 import android.annotation.SuppressLint;
 import android.content.ActivityNotFoundException;
@@ -37,7 +38,6 @@ import com.pedrogomez.renderers.RVRendererAdapter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Locale;
 import java.util.concurrent.TimeUnit;
 
 import javax.inject.Inject;
@@ -45,6 +45,7 @@ import javax.inject.Named;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.Utils;
 import fr.free.nrw.commons.auth.AuthenticatedActivity;
@@ -70,7 +71,8 @@ public class UploadActivity extends AuthenticatedActivity implements UploadView 
     MediaWikiApi mwApi;
 
 
-    @Inject @Named("direct_nearby_upload_prefs")
+    @Inject
+    @Named("direct_nearby_upload_prefs")
     SharedPreferences directPrefs;
 
     @Inject
@@ -109,10 +111,6 @@ public class UploadActivity extends AuthenticatedActivity implements UploadView 
     Button previous;
     @BindView(R.id.bottom_card_add_desc)
     Button bottomCardAddDescription;
-//    @BindView(R.id.image_title)
-//    EditText imageTitle;
-//    @BindView(R.id.image_description)
-//    EditText imageDescription;
 
     //Right Card
     @BindView(R.id.right_card)
@@ -158,6 +156,10 @@ public class UploadActivity extends AuthenticatedActivity implements UploadView 
     private RVRendererAdapter<CategoryItem> categoriesAdapter;
     private CompositeDisposable compositeDisposable;
 
+    DexterPermissionObtainer dexterPermissionObtainer;
+    private boolean receivedSharedItems;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -175,9 +177,24 @@ public class UploadActivity extends AuthenticatedActivity implements UploadView 
         configureRightCard();
         configureNavigationButtons();
 
+        //storagePermissionReady = BehaviorSubject.createDefault(false);
+        //storagePermissionReady.subscribe(b -> Timber.i("storagePermissionReady:" + b));
         presenter.initFromSavedState(savedInstanceState);
 
-        receiveSharedItems();
+        receivedSharedItems = false;
+        dexterPermissionObtainer = new DexterPermissionObtainer(this,
+                Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                getString(R.string.storage_permission),
+                getString(R.string.write_storage_permission_rationale_for_image_share),
+                () -> {
+                    if (receivedSharedItems) {
+                        presenter.addView(this);
+                    } else {
+                        receiveSharedItems();
+                    }
+                });
+
+        dexterPermissionObtainer.confirmStoragePermissions();
     }
 
     @Override
@@ -202,7 +219,7 @@ public class UploadActivity extends AuthenticatedActivity implements UploadView 
     protected void onResume() {
         super.onResume();
         checkIfLoggedIn();
-        presenter.addView(this);
+        dexterPermissionObtainer.confirmStoragePermissions();
         compositeDisposable.add(
                 RxTextView.textChanges(categoriesSearch)
                         .doOnEach(v -> categoriesSearchContainer.setError(null))
@@ -216,6 +233,8 @@ public class UploadActivity extends AuthenticatedActivity implements UploadView 
     @Override
     protected void onPause() {
         presenter.removeView();
+        //storagePermissionReady.onNext(false);
+
 //        imageTitle.removeTextChangedListener(titleWatcher);
 //        imageDescription.removeTextChangedListener(descriptionWatcher);
         compositeDisposable.dispose();
@@ -402,6 +421,16 @@ public class UploadActivity extends AuthenticatedActivity implements UploadView 
         mwApi.setAuthCookie(authCookie);
     }
 
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == CommonsApplication.OPEN_APPLICATION_DETAIL_SETTINGS) {
+            dexterPermissionObtainer.onManualPermissionReturned();
+        }
+    }
+
+
     @Override
     protected void onAuthFailure() {
         Toast failureToast = Toast.makeText(this, R.string.authentication_failed, Toast.LENGTH_LONG);
@@ -521,6 +550,7 @@ public class UploadActivity extends AuthenticatedActivity implements UploadView 
     }
 
     private void receiveSharedItems() {
+        receivedSharedItems = true;
         Intent intent = getIntent();
         String mimeType = intent.getType();
         String source;

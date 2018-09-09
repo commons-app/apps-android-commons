@@ -69,16 +69,16 @@ public class MultipleShareActivity extends AuthenticatedActivity
         OnCategoriesSaveHandler,
         ActivityCompat.OnRequestPermissionsResultCallback{
 
-    @Inject
+    //@Inject
     MediaWikiApi mwApi;
-    @Inject
+    //@Inject
     SessionManager sessionManager;
-    @Inject
+    //@Inject
     UploadController uploadController;
-    @Inject
+    //@Inject
     ModifierSequenceDao modifierSequenceDao;
-    @Inject
-    @Named("default_preferences")
+    //@Inject
+    //@Named("default_preferences")
     SharedPreferences prefs;
 
     private ArrayList<Contribution> photosList = null;

@@ -71,7 +71,7 @@ public class UploadModel {
         this.context = context;
         this.mwApi = mwApi;
         this.contentResolver = context.getContentResolver();
-        useExtStorage = this.prefs.getBoolean("useExternalStorage", true);
+        useExtStorage = this.prefs.getBoolean("useExternalStorage", false);
     }
 
     @SuppressLint("CheckResult")
@@ -240,7 +240,7 @@ public class UploadModel {
             if (useExtStorage)
                 copyPath = FileUtils.createExternalCopyPathAndCopy(media, contentResolver);
             else
-                copyPath = FileUtils.createCopyPathAndCopy(media, contentResolver);
+                copyPath = FileUtils.createCopyPathAndCopy(media, context);
             Timber.i("File path is " + copyPath);
             return copyPath;
         } catch (IOException e) {
