@@ -81,8 +81,6 @@ public class ContributionsFragment
     private boolean isUploadServiceConnected;
     private CompositeDisposable compositeDisposable = new CompositeDisposable();
     CountDownLatch waitForContributionsListFragment = new CountDownLatch(1);
-    public TextView numberOfUploads;
-    public ProgressBar numberOfUploadsProgressBar;
 
     private ContributionsListFragment contributionsListFragment;
     private MediaDetailPagerFragment mediaDetailPagerFragment;
@@ -112,11 +110,6 @@ public class ContributionsFragment
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_contributions, container, false);
-        numberOfUploads = view.findViewById(R.id.numOfUploads);
-
-        numberOfUploadsProgressBar = view.findViewById(R.id.progressBar);
-        numberOfUploadsProgressBar.setVisibility(View.VISIBLE);
-        numberOfUploadsProgressBar.getIndeterminateDrawable().setColorFilter(ContextCompat.getColor(getActivity(), R.color.white), PorterDuff.Mode.SRC_IN );
 
         if (savedInstanceState != null) {
             mediaDetailPagerFragment = (MediaDetailPagerFragment)getChildFragmentManager().findFragmentByTag(MEDIA_DETAIL_PAGER_FRAGMENT_TAG);
@@ -164,8 +157,6 @@ public class ContributionsFragment
         transaction.addToBackStack(CONTRIBUTION_LIST_FRAGMENT_TAG);
         transaction.commit();
         getChildFragmentManager().executePendingTransactions();
-        // Both should be visible and number of uploads are ready
-        ContributionListViewUtils.setIndicatorVisibility(numberOfUploads, numberOfUploadsProgressBar,true, false);
     }
 
     /**
@@ -187,9 +178,6 @@ public class ContributionsFragment
         transaction.addToBackStack(MEDIA_DETAIL_PAGER_FRAGMENT_TAG);
         transaction.commit();
         getChildFragmentManager().executePendingTransactions();
-
-        // Make number of uploads invisible when Media Details Activity is visible
-        ContributionListViewUtils.setIndicatorVisibility(numberOfUploads, numberOfUploadsProgressBar,false, true);
 
     }
 
@@ -373,14 +361,7 @@ public class ContributionsFragment
 
     @SuppressWarnings("ConstantConditions")
     private void setUploadCount() {
-        if (getChildFragmentManager().findFragmentByTag(MEDIA_DETAIL_PAGER_FRAGMENT_TAG) != null) {
-            // Means Media Details Fragment is active
-            ContributionListViewUtils.setIndicatorVisibility(numberOfUploads, numberOfUploadsProgressBar,false, true);
 
-        } else {
-            // Means Contribution List Fragment is visible to user
-            ContributionListViewUtils.setIndicatorVisibility(numberOfUploads, numberOfUploadsProgressBar,false, false);
-        }
         compositeDisposable.add(mediaWikiApi
                 .getUploadCount(((ContributionsActivity)getActivity()).sessionManager.getCurrentAccount().name)
                 .subscribeOn(Schedulers.io())
@@ -392,23 +373,12 @@ public class ContributionsFragment
 
     private void displayUploadCount(Integer uploadCount) {
         if (getActivity().isFinishing()
-                || numberOfUploads == null
                 || getResources() == null) {
             return;
         }
 
         ((ContributionsActivity)getActivity()).setNumOfUploads(uploadCount);
-        numberOfUploads.setText(getResources()
-                .getQuantityString(R.plurals.contributions_subtitle,
-                        uploadCount, uploadCount));
-        if (getChildFragmentManager().findFragmentByTag(MEDIA_DETAIL_PAGER_FRAGMENT_TAG) != null) {
-            // Means Media Details Fragment is active
-            ContributionListViewUtils.setIndicatorVisibility(numberOfUploads, numberOfUploadsProgressBar,false, true);
 
-        } else {
-            // Means Contribution List Fragment is visible to user
-            ContributionListViewUtils.setIndicatorVisibility(numberOfUploads, numberOfUploadsProgressBar,true, false);
-        }
     }
 
     public void betaSetUploadCount(int betaUploadCount) {

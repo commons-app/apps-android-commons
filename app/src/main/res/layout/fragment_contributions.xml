@@ -28,32 +28,6 @@
     </RelativeLayout>
     -->
 
-    <RelativeLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_vertical"
-        >
-
-        <ProgressBar
-            android:layout_width="15dp"
-            android:layout_height="15dp"
-            android:layout_margin="15dp"
-            android:id="@+id/progressBar"
-            />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/numOfUploads"
-            android:visibility="gone"
-            android:layout_margin="15dp"
-            style="@android:style/TextAppearance.Holo.Widget.ActionBar.Subtitle"
-            android:textColor="@android:color/white"
-            />
-
-    </RelativeLayout>
-
-
     <FrameLayout
         android:layout_width="match_parent"
         android:background="#000"

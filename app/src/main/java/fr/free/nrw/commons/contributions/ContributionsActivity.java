@@ -83,6 +83,11 @@ public class ContributionsActivity extends AuthenticatedActivity implements Frag
         setTabAndViewPagerSynchronisation();
     }
 
+    /**
+     * Adds number of uploads next to tab text "Contributions" then it will look like
+     * "Contributions (NUMBER)"
+     * @param uploadCount
+     */
     public void setNumOfUploads(int uploadCount) {
         tabLayout.getTabAt(0).setText(getResources().getString(R.string.contributions_fragment) +" "+ getResources()
                 .getQuantityString(R.plurals.contributions_subtitle,
