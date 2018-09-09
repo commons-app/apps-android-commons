@@ -108,6 +108,17 @@ public class CommonsApplicationModule {
         return context.getSharedPreferences("direct_nearby_upload_prefs", MODE_PRIVATE);
     }
 
+    /**
+     * Is used to determine when user is viewed notifications activity last
+     * @param context
+     * @return date of lastReadNotificationDate
+     */
+    @Provides
+    @Named("last_read_notification_date")
+    public SharedPreferences providesLastReadNotificationDatePreferences(Context context) {
+        return context.getSharedPreferences("last_read_notification_date", MODE_PRIVATE);
+    }
+
     @Provides
     public UploadController providesUploadController(SessionManager sessionManager, @Named("default_preferences") SharedPreferences sharedPreferences, Context context) {
         return new UploadController(sessionManager, context, sharedPreferences);
