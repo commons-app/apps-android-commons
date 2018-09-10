@@ -392,6 +392,7 @@ public class ContributionsFragment
      */
     public void updateNotificationsNotification(List<Notification> unreadNotifications) {
         Log.d("deneme","notification updates are called");
+        ((ContributionsActivity)getActivity()).updateNotificationIcon(unreadNotifications.size());
     }
 
     /**

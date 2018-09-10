@@ -1,14 +1,16 @@
 package fr.free.nrw.commons.contributions;
 
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 import android.view.Menu;
-import android.view.MenuItem;
+import android.view.MenuInflater;
 import android.view.View;
 
 import javax.inject.Inject;
@@ -44,6 +46,7 @@ public class ContributionsActivity extends AuthenticatedActivity implements Frag
     public ContributionsFragment contributionsFragment;
     private NearbyFragment nearbyFragment;
     public boolean isContributionsFragmentVisible = true; // False means nearby fragment is visible
+    private Menu menu;
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -199,7 +202,27 @@ public class ContributionsActivity extends AuthenticatedActivity implements Frag
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        return super.onCreateOptionsMenu(menu);
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.contribution_activity_notification_menu, menu);
+        if (!deviceHasCamera()) {
+            menu.findItem(R.id.notifications).setEnabled(false);
+        }
+        this.menu = menu;
+        return true;
+    }
+
+    private boolean deviceHasCamera() {
+        PackageManager pm = getPackageManager();
+        return pm.hasSystemFeature(PackageManager.FEATURE_CAMERA) ||
+                pm.hasSystemFeature(PackageManager.FEATURE_CAMERA_FRONT);
+    }
+
+    public void updateNotificationIcon(int unreadNotificationListSize) {
+        if (unreadNotificationListSize==0) {
+            menu.findItem(R.id.notifications).setIcon(ContextCompat.getDrawable(this, R.drawable.ic_notifications_white_24dp));
+        } else {
+            menu.findItem(R.id.notifications).setIcon(ContextCompat.getDrawable(this, R.drawable.ic_notifications_white_with_marker));
+        }
     }
 
     public class ContributionsActivityPagerAdapter extends FragmentPagerAdapter {
