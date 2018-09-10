@@ -7,6 +7,8 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 
 import javax.inject.Inject;
@@ -191,7 +193,13 @@ public class ContributionsActivity extends AuthenticatedActivity implements Frag
 
     @Override
     public void onBackStackChanged() {
+        initBackButton();
+    }
 
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        return super.onCreateOptionsMenu(menu);
     }
 
     public class ContributionsActivityPagerAdapter extends FragmentPagerAdapter {

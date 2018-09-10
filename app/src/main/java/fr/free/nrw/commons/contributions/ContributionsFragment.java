@@ -45,6 +45,7 @@ import fr.free.nrw.commons.mwapi.MediaWikiApi;
 import fr.free.nrw.commons.nearby.NearbyPlaces;
 import fr.free.nrw.commons.notification.Notification;
 import fr.free.nrw.commons.notification.NotificationController;
+import fr.free.nrw.commons.notification.UnreadNotificationsCheckAsync;
 import fr.free.nrw.commons.settings.Prefs;
 import fr.free.nrw.commons.upload.UploadService;
 import fr.free.nrw.commons.utils.ContributionListViewUtils;
@@ -390,7 +391,7 @@ public class ContributionsFragment
      * @param unreadNotifications
      */
     public void updateNotificationsNotification(List<Notification> unreadNotifications) {
-
+        Log.d("deneme","notification updates are called");
     }
 
     /**
@@ -416,6 +417,8 @@ public class ContributionsFragment
         if (isSettingsChanged) {
             refreshSource();
         }
+
+        new UnreadNotificationsCheckAsync((ContributionsActivity) getActivity(), notificationController).execute();
     }
 
     @Override
