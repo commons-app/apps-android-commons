@@ -388,11 +388,11 @@ public class ContributionsFragment
 
     /**
      * Updates notification indicator on toolbar to indicate there are unread notifications
-     * @param unreadNotifications
+     * @param isThereUnreadNotifications true if user checked notifications before last notification date
      */
-    public void updateNotificationsNotification(List<Notification> unreadNotifications) {
+    public void updateNotificationsNotification(boolean isThereUnreadNotifications) {
         Log.d("deneme","notification updates are called");
-        ((ContributionsActivity)getActivity()).updateNotificationIcon(unreadNotifications.size());
+        ((ContributionsActivity)getActivity()).updateNotificationIcon(isThereUnreadNotifications);
     }
 
     /**

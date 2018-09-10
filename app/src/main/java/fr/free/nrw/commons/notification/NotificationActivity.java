@@ -10,6 +10,7 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
@@ -18,6 +19,7 @@ import com.pedrogomez.renderers.RVRendererAdapter;
 
 import java.util.Calendar;
 import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -89,7 +91,8 @@ public class NotificationActivity extends NavigationBaseActivity {
         Timber.d("Add notifications");
 
         // Store when add notification is called last
-        long currentDate = Calendar.getInstance().getTime().getTime();
+        long currentDate = new Date(System.currentTimeMillis()).getTime();
+        Log.d("denemeee", "current date"+currentDate);
         getSharedPreferences("prefs", MODE_PRIVATE).edit().putLong("last_read_notification_date", currentDate).apply();
         Timber.d("Set last notification read date to current date:"+ currentDate);
 

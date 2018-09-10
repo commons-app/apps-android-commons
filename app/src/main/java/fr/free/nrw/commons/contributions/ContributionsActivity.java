@@ -223,12 +223,12 @@ public class ContributionsActivity extends AuthenticatedActivity implements Frag
                 pm.hasSystemFeature(PackageManager.FEATURE_CAMERA_FRONT);
     }
 
-    public void updateNotificationIcon(int unreadNotificationListSize) {
-        if (unreadNotificationListSize==0) {
-            isThereUnreadNotifications = false;
+    public void updateNotificationIcon(boolean isThereUnreadNotifications) {
+        if (!isThereUnreadNotifications) {
+            this.isThereUnreadNotifications = false;
             menu.findItem(R.id.notifications).setIcon(ContextCompat.getDrawable(this, R.drawable.ic_notifications_white_24dp));
         } else {
-            isThereUnreadNotifications = true;
+            this.isThereUnreadNotifications = true;
             menu.findItem(R.id.notifications).setIcon(ContextCompat.getDrawable(this, R.drawable.ic_notifications_white_with_marker));
         }
     }
