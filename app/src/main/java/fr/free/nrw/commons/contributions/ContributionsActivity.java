@@ -47,6 +47,7 @@ public class ContributionsActivity extends AuthenticatedActivity implements Frag
     private NearbyFragment nearbyFragment;
     public boolean isContributionsFragmentVisible = true; // False means nearby fragment is visible
     private Menu menu;
+    private boolean isThereUnreadNotifications = false;
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -208,6 +209,11 @@ public class ContributionsActivity extends AuthenticatedActivity implements Frag
             menu.findItem(R.id.notifications).setEnabled(false);
         }
         this.menu = menu;
+        if (!isThereUnreadNotifications) {
+            menu.findItem(R.id.notifications).setIcon(ContextCompat.getDrawable(this, R.drawable.ic_notifications_white_24dp));
+        } else {
+            menu.findItem(R.id.notifications).setIcon(ContextCompat.getDrawable(this, R.drawable.ic_notifications_white_with_marker));
+        }
         return true;
     }
 
@@ -219,8 +225,10 @@ public class ContributionsActivity extends AuthenticatedActivity implements Frag
 
     public void updateNotificationIcon(int unreadNotificationListSize) {
         if (unreadNotificationListSize==0) {
+            isThereUnreadNotifications = false;
             menu.findItem(R.id.notifications).setIcon(ContextCompat.getDrawable(this, R.drawable.ic_notifications_white_24dp));
         } else {
+            isThereUnreadNotifications = true;
             menu.findItem(R.id.notifications).setIcon(ContextCompat.getDrawable(this, R.drawable.ic_notifications_white_with_marker));
         }
     }
