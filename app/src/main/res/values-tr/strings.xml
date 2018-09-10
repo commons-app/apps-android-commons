@@ -180,7 +180,7 @@
   <string name="title_activity_nearby">Yakındaki yerler</string>
   <string name="no_nearby">Yakınlardaki yer bulunamadı</string>
   <string name="warning">Uyarı</string>
-  <string name="upload_image_duplicate">Bu dosya zaten Commons\'da var. Devam etmek istediğinizden emin misiniz?</string>
+  <string name="upload_image_problem_duplicate">Bu dosya zaten Commons\'da var. Devam etmek istediğinizden emin misiniz?</string>
   <string name="yes">Evet</string>
   <string name="no">Hayır</string>
   <string name="media_detail_title">Başlık</string>
@@ -242,8 +242,8 @@
   <string name="error_while_cache">Resimler önbelleğe alınırken hata oluştu</string>
   <string name="title_info">Dosya için dosya adı olarak kullanılacak benzersiz açıklayıcı bir başlık olmalıdır. Boşluk bırakarak sade bir dil kullanabilirsiniz. Dosya uzantısını dahil etmeyin</string>
   <string name="description_info">Lütfen medyayı mümkün olduğunca açıklayın: Nerede çekildi? Ne gösteriyor? Bağlam nedir? Lütfen nesneleri veya kişileri tanımlayın. Kolay tahmin edilemeyen bilgileri açıklayın, örneğin bir manzara ise günün saatini belirtin. Medya alışılmadık bir şey gösteriyorsa lütfen olağandışı yapan şeyleri açıklayın.</string>
-  <string name="upload_image_too_dark">Bu fotoğraf çok karanlık, yine de yüklemek istiyor musunuz? Wikimedia Commons yalnızca ansiklopedik değeri olan fotoğraflar içindir.</string>
-  <string name="upload_image_blurry">Bu fotoğraf bulanık, yine de yüklemek istiyor musunuz? Wikimedia Commons yalnızca ansiklopedik değeri olan fotoğraflar içindir.</string>
+  <string name="upload_image_problem_dark">Bu fotoğraf çok karanlık, yine de yüklemek istiyor musunuz? Wikimedia Commons yalnızca ansiklopedik değeri olan fotoğraflar içindir.</string>
+  <string name="upload_image_problem_blurry">Bu fotoğraf bulanık, yine de yüklemek istiyor musunuz? Wikimedia Commons yalnızca ansiklopedik değeri olan fotoğraflar içindir.</string>
   <string name="give_permission">İzin ver</string>
   <string name="use_external_storage">Harici depolamayı kullanın</string>
   <string name="use_external_storage_summary">Uygulama kamerası kullanıldığında çekilen fotoğrafları cihazına kaydedin</string>

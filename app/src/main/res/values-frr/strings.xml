@@ -141,7 +141,7 @@
   <string name="title_activity_nearby">Steeden naibi</string>
   <string name="no_nearby">Nian steeden uun a naite fünjen</string>
   <string name="warning">Wäärnang</string>
-  <string name="upload_image_duplicate">Detdiar datei jaft det al üüb Commons. Beest dü seeker, dat dü widjer maage wel?</string>
+  <string name="upload_image_problem_duplicate">Detdiar datei jaft det al üüb Commons. Beest dü seeker, dat dü widjer maage wel?</string>
   <string name="yes">Ja</string>
   <string name="no">Naan</string>
   <string name="media_detail_title">Tiitel</string>

@@ -143,7 +143,7 @@
   <string name="title_activity_nearby">Idigen iqeṛben</string>
   <string name="no_nearby">Ulac ayen yettwafen s lqerb</string>
   <string name="warning">Ɣur-k</string>
-  <string name="upload_image_duplicate">Afaylu yella yakan di Commons. Tebɣiḍ ad tedduḍ ar zdat?</string>
+  <string name="upload_image_problem_duplicate">Afaylu yella yakan di Commons. Tebɣiḍ ad tedduḍ ar zdat?</string>
   <string name="yes">Ih</string>
   <string name="no">Uhu</string>
   <string name="media_detail_title">Azwel</string>

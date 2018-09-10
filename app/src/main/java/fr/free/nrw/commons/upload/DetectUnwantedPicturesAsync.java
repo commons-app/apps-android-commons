@@ -23,7 +23,7 @@ import timber.log.Timber;
  * <p>todo: Detect selfies?
  */
 
-public class DetectUnwantedPicturesAsync extends AsyncTask<Void, Void, ImageUtils.Result> {
+public class DetectUnwantedPicturesAsync extends AsyncTask<Void, Void, Integer> {
 
     private final String imageMediaFilePath;
     public final WeakReference<Activity> activityWeakReference;
@@ -35,11 +35,11 @@ public class DetectUnwantedPicturesAsync extends AsyncTask<Void, Void, ImageUtil
     }
 
     @Override
-    protected ImageUtils.Result doInBackground(Void... voids) {
+    protected @ImageUtils.Result Integer doInBackground(Void... voids) {
         try {
             Timber.d("FilePath: " + imageMediaFilePath);
             if (imageMediaFilePath == null) {
-                return ImageUtils.Result.IMAGE_OK;
+                return ImageUtils.IMAGE_OK;
             }
 
             BitmapRegionDecoder decoder = BitmapRegionDecoder.newInstance(imageMediaFilePath,false);
@@ -47,18 +47,18 @@ public class DetectUnwantedPicturesAsync extends AsyncTask<Void, Void, ImageUtil
             return ImageUtils.checkIfImageIsTooDark(decoder);
         } catch (IOException ioe) {
             Timber.e(ioe, "IO Exception");
-            return ImageUtils.Result.IMAGE_OK;
+            return ImageUtils.IMAGE_OK;
         }
     }
 
     @Override
-    protected void onPostExecute(ImageUtils.Result result) {
+    protected void onPostExecute(@ImageUtils.Result Integer result) {
         super.onPostExecute(result);
         Activity activity = activityWeakReference.get();
 
-        if (result != ImageUtils.Result.IMAGE_OK) {
+        if (result != ImageUtils.IMAGE_OK) {
             //show appropriate error message
-            String errorMessage = result == ImageUtils.Result.IMAGE_DARK ? activity.getString(R.string.upload_image_too_dark) : activity.getString(R.string.upload_image_blurry);
+            String errorMessage = result == ImageUtils.IMAGE_DARK ? activity.getString(R.string.upload_image_problem_dark) : activity.getString(R.string.upload_image_problem_blurry);
             AlertDialog.Builder errorDialogBuilder = new AlertDialog.Builder(activity);
             errorDialogBuilder.setMessage(errorMessage);
             errorDialogBuilder.setTitle(activity.getString(R.string.warning));

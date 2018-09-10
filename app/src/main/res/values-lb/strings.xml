@@ -161,7 +161,7 @@
   <string name="title_activity_nearby">Plazen nobäi</string>
   <string name="no_nearby">Keng Plazen nobäi fonnt</string>
   <string name="warning">Warnung</string>
-  <string name="upload_image_duplicate">Dëse Fichier gëtt et schonn op Commons. Sidd Dir sécher datt Dir virufuere wëllt?</string>
+  <string name="upload_image_problem_duplicate">Dëse Fichier gëtt et schonn op Commons. Sidd Dir sécher datt Dir virufuere wëllt?</string>
   <string name="yes">Jo</string>
   <string name="no">Neen</string>
   <string name="media_detail_title">Titel</string>

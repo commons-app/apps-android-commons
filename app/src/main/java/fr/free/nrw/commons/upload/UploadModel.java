@@ -5,10 +5,12 @@ import android.annotation.SuppressLint;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.graphics.BitmapRegionDecoder;
 import android.net.Uri;
 import android.support.annotation.Nullable;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
@@ -27,8 +29,10 @@ import fr.free.nrw.commons.settings.Prefs;
 import fr.free.nrw.commons.utils.ImageUtils;
 import fr.free.nrw.commons.utils.ViewUtil;
 import io.reactivex.Observable;
+import io.reactivex.Single;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Consumer;
+import io.reactivex.schedulers.Schedulers;
 import io.reactivex.subjects.BehaviorSubject;
 import timber.log.Timber;
 
@@ -77,7 +81,6 @@ public class UploadModel {
     @SuppressLint("CheckResult")
     public void receive(List<Uri> mediaUri, String mimeType, String source) {
         currentStepIndex = 0;
-
         Observable<UploadItem> itemObservable = Observable.fromIterable(mediaUri)
                 .map(this::cacheFileUpload)
                 .map(filePath -> {
@@ -85,11 +88,51 @@ public class UploadModel {
                     FileProcessor fp = new FileProcessor(uri, context.getContentResolver(), context);
                     UploadItem item = new UploadItem(uri, mimeType, source, fp.processFileCoordinates(false),
                             FileUtils.getFileExt(filePath), null);
-                    new DetectBadPicturesAsync(new WeakReference<>(item.imageQuality), new WeakReference<>(context),
-                            new WeakReference<>(mwApi), uri).execute();
+                    Single.zip(
+                            Single.fromCallable(() ->
+                                    new FileInputStream(filePath))
+                                    .map(FileUtils::getSHA1)
+                                    .map(mwApi::existingFile)
+                                    .map(b -> b ? ImageUtils.IMAGE_DUPLICATE : ImageUtils.IMAGE_OK),
+                            Single.fromCallable(() ->
+                                    new FileInputStream(filePath))
+                                    .map(file -> BitmapRegionDecoder.newInstance(file, false))
+                                    .map(ImageUtils::checkIfImageIsTooDark), //Returns IMAGE_DARK or IMAGE_OK
+                            (dupe, dark) -> dupe | dark)
+                            .observeOn(Schedulers.io())
+                            .subscribe(item.imageQuality::onNext, Timber::e);
                     return item;
                 });
         items = itemObservable.toList().blockingGet();
+        items.get(0).selected = true;
+        items.get(0).first = true;
+    }
+
+    @SuppressLint("CheckResult")
+    public void receiveDirect(Uri media, String mimeType, String source, String wikidataEntityIdPref, String title, String desc) {
+        currentStepIndex = 0;
+        items = new ArrayList<>();
+        String filePath = this.cacheFileUpload(media);
+        Uri uri = Uri.fromFile(new File(filePath));
+        FileProcessor fp = new FileProcessor(uri, context.getContentResolver(), context);
+        UploadItem item = new UploadItem(uri, mimeType, source, fp.processFileCoordinates(false),
+                FileUtils.getFileExt(filePath), wikidataEntityIdPref);
+        item.title.setTitleText(title);
+        item.descriptions.get(0).setDescriptionText(desc);
+        //TODO figure out if default descriptions in other languages exist
+        item.descriptions.get(0).setLanguageCode("en");
+        Single.zip(
+                Single.fromCallable(() ->
+                        new FileInputStream(filePath))
+                        .map(FileUtils::getSHA1)
+                        .map(mwApi::existingFile)
+                        .map(b -> b ? ImageUtils.IMAGE_DUPLICATE : ImageUtils.IMAGE_OK),
+                Single.fromCallable(() ->
+                        new FileInputStream(filePath))
+                        .map(file -> BitmapRegionDecoder.newInstance(file, false))
+                        .map(ImageUtils::checkIfImageIsTooDark), //Returns IMAGE_DARK or IMAGE_OK
+                (dupe, dark) -> dupe | dark).subscribe(item.imageQuality::onNext);
+        items.add(item);
         items.get(0).selected = true;
         items.get(0).first = true;
     }
@@ -233,7 +276,7 @@ public class UploadModel {
      * Copy files into local storage and return file path
      *
      * @param media Uri of the file
-     * @return
+     * @return path of the enw file
      */
     private String cacheFileUpload(Uri media) {
         try {
@@ -246,12 +289,12 @@ public class UploadModel {
             return copyPath;
         } catch (IOException e) {
             Timber.w(e, "Error in copying URI " + media.getPath());
+            return null;
         }
-        return null;
     }
 
     public void keepPicture() {
-        items.get(currentStepIndex).imageQuality.onNext(ImageUtils.Result.IMAGE_KEEP);
+        items.get(currentStepIndex).imageQuality.onNext(ImageUtils.IMAGE_KEEP);
     }
 
     public void deletePicture() {
@@ -260,27 +303,8 @@ public class UploadModel {
         updateItemState();
     }
 
-    public void subscribeBadPicture(Consumer<ImageUtils.Result> consumer) {
+    public void subscribeBadPicture(Consumer<Integer> consumer) {
         badImageSubscription = getCurrentItem().imageQuality.subscribe(consumer, Timber::e);
-    }
-
-    public void receiveDirect(Uri media, String mimeType, String source, String wikidataEntityIdPref, String title, String desc) {
-        currentStepIndex = 0;
-        items=new ArrayList<>();
-        String filePath = this.cacheFileUpload(media);
-        Uri uri = Uri.fromFile(new File(filePath));
-        FileProcessor fp = new FileProcessor(uri, context.getContentResolver(), context);
-        UploadItem item = new UploadItem(uri, mimeType, source, fp.processFileCoordinates(false),
-                FileUtils.getFileExt(filePath), wikidataEntityIdPref);
-        item.title.setTitleText(title);
-        item.descriptions.get(0).setDescriptionText(desc);
-        //TODO figure out if default descriptions in other languages exist
-        item.descriptions.get(0).setLanguageCode("en");
-        new DetectBadPicturesAsync(new WeakReference<>(item.imageQuality), new WeakReference<>(context),
-                new WeakReference<>(mwApi), uri).execute();
-        items.add(item);
-        items.get(0).selected = true;
-        items.get(0).first = true;
     }
 
     public boolean isLoggedIn() {
@@ -299,7 +323,7 @@ public class UploadModel {
         public boolean selected = false;
         public boolean first = false;
         public String fileExt;
-        public BehaviorSubject<ImageUtils.Result> imageQuality;
+        public BehaviorSubject<Integer> imageQuality;
         Title title;
         List<Description> descriptions;
         public String wikidataEntityId;
@@ -318,8 +342,8 @@ public class UploadModel {
             this.source = source;
             this.gpsCoords = gpsCoords;
             this.fileExt = fileExt;
-            imageQuality = BehaviorSubject.createDefault(ImageUtils.Result.IMAGE_WAIT);
-//                imageQuality.subscribe(iq->Timber.i("New value of imageQuality:"+ImageUtils.Result.IMAGE_OK));
+            imageQuality = BehaviorSubject.createDefault(ImageUtils.IMAGE_WAIT);
+//                imageQuality.subscribe(iq->Timber.i("New value of imageQuality:"+ImageUtils.IMAGE_OK));
         }
 
         public boolean isDummy() {

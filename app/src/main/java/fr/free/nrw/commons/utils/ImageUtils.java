@@ -7,6 +7,7 @@ import android.graphics.BitmapRegionDecoder;
 import android.graphics.Color;
 import android.graphics.Rect;
 import android.net.Uri;
+import android.support.annotation.IntDef;
 import android.support.annotation.Nullable;
 
 import com.facebook.common.executors.CallerThreadExecutor;
@@ -20,6 +21,8 @@ import com.facebook.imagepipeline.request.ImageRequest;
 import com.facebook.imagepipeline.request.ImageRequestBuilder;
 
 import java.io.IOException;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
 
 import fr.free.nrw.commons.R;
 import timber.log.Timber;
@@ -35,15 +38,27 @@ public class ImageUtils {
     private static final double MINIMUM_BLURRYNESS_FACTOR = 0.50;
     private static final int LAPLACIAN_VARIANCE_THRESHOLD = 70;
 
-    public enum Result {
-        IMAGE_DARK,
-        IMAGE_BLURRY,
-        IMAGE_DUPLICATE,
-        IMAGE_OK,
-        IMAGE_KEEP,
-        IMAGE_WAIT
-    }
+    public static final int IMAGE_DARK = 1;
+    public static final int IMAGE_BLURRY = 1 << 1;
+    public static final int IMAGE_DUPLICATE = 1 << 2;
+    public static final int IMAGE_OK = 0;
+    public static final int IMAGE_KEEP = -1;
+    public static final int IMAGE_WAIT = -2;
 
+    @IntDef(
+            flag = true,
+            value = {
+                    IMAGE_DARK,
+                    IMAGE_BLURRY,
+                    IMAGE_DUPLICATE,
+                    IMAGE_OK,
+                    IMAGE_KEEP,
+                    IMAGE_WAIT
+            }
+    )
+    @Retention(RetentionPolicy.SOURCE)
+    public @interface Result {
+    }
 
     /**
      * BitmapRegionDecoder allows us to process a large bitmap by breaking it down into smaller rectangles. The rectangles
@@ -54,13 +69,14 @@ public class ImageUtils {
      * was divided, we will declare the image as wanted/unwanted
      *
      * @param bitmapRegionDecoder BitmapRegionDecoder for the image we wish to process
-     * @return Result.IMAGE_OK if image is neither dark nor blurry or if the input bitmapRegionDecoder provided is null
-     * Result.IMAGE_DARK if image is too dark
+     * @return IMAGE_OK if image is neither dark nor blurry or if the input bitmapRegionDecoder provided is null
+     * IMAGE_DARK if image is too dark
      */
-    public static Result checkIfImageIsTooDark(BitmapRegionDecoder bitmapRegionDecoder) {
+    public static @Result
+    int checkIfImageIsTooDark(BitmapRegionDecoder bitmapRegionDecoder) {
         if (bitmapRegionDecoder == null) {
             Timber.e("Expected bitmapRegionDecoder was null");
-            return Result.IMAGE_OK;
+            return IMAGE_OK;
         }
 
         int loadImageHeight = bitmapRegionDecoder.getHeight();
@@ -100,10 +116,10 @@ public class ImageUtils {
         Timber.d("dark rectangles count = " + numberOfDarkRectangles + ", total rectangles count = " + totalDividedRectangles);
 
         if (numberOfDarkRectangles > totalDividedRectangles * MINIMUM_DARKNESS_FACTOR) {
-            return Result.IMAGE_DARK;
+            return IMAGE_DARK;
         }
 
-        return Result.IMAGE_OK;
+        return IMAGE_OK;
     }
 
     /**
@@ -159,8 +175,8 @@ public class ImageUtils {
      * Downloads the image from the URL and sets it as the phone's wallpaper
      * Fails silently if download or setting wallpaper fails.
      *
-     * @param context
-     * @param imageUrl
+     * @param context context
+     * @param imageUrl Url of the image
      */
     public static void setWallpaperFromImageUrl(Context context, Uri imageUrl) {
         Timber.d("Trying to set wallpaper from url %s", imageUrl.toString());

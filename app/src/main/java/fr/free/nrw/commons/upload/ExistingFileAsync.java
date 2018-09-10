@@ -74,7 +74,7 @@ public class ExistingFileAsync extends AsyncTask<Void, Void, Boolean> {
         // Use soft warning for now (user able to choose to proceed) until have determined that implementation works without bugs
         if (fileExists) {
             AlertDialog.Builder builder = new AlertDialog.Builder(context.get());
-            builder.setMessage(R.string.upload_image_duplicate)
+            builder.setMessage(R.string.upload_image_problem_duplicate)
                     .setTitle(R.string.warning);
             builder.setPositiveButton(R.string.no, (dialog, id) -> {
                 //Go back to ContributionsActivity

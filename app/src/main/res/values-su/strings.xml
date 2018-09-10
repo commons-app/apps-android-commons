@@ -169,7 +169,7 @@
   <string name="title_activity_nearby">Tempat Sabudeureun</string>
   <string name="no_nearby">Teu kapanggih tempat sabudeureun</string>
   <string name="warning">Mangkahadé</string>
-  <string name="upload_image_duplicate">Ieu berkas geus aya di Commons. Rék diteruskeun baé ieu téh?</string>
+  <string name="upload_image_problem_duplicate">Ieu berkas geus aya di Commons. Rék diteruskeun baé ieu téh?</string>
   <string name="yes">Nya</string>
   <string name="no">Henteu</string>
   <string name="media_detail_title">Judul</string>
@@ -230,8 +230,8 @@
   <string name="error_while_cache">Kasalahan nalika muat gambar</string>
   <string name="title_info">Judul déskriptif anu unik pikeun berkas, anu bakal miboga fungsi minangka ngaran berkas. Anjeun bisa maké basa basajan kalawan spasi. Ulah ngawuwuhkeun éksténsi berkas</string>
   <string name="description_info">Pék émbarkeun wincikan média saloba-lobabana: Dimana éta dicokot? Naon nu titojokeunna? Naon kontéksna? Pék jéntrékeun obyék atawa jalmana. Ébré informasi anu teu gampang kajudi, kawas wayah mun éta mangrupa pamandangan. Ari média nu némbongkeun perkara nu teu guyub, pék jéntrékeun naon nu ngabalukarkeun éta téh teu guyub.</string>
-  <string name="upload_image_too_dark">Ieu gambar poék teuing, rék diunggah waé? Wikimedia Commons téh ukur pikeun gambar anu boga ajén énsiklopédik.</string>
-  <string name="upload_image_blurry">Potona teu cékas, rék diunggah waé? Wikimedia Commons mah ukur pikeun gambar anu boga ajén énsiklopédik.</string>
+  <string name="upload_image_problem_dark">Ieu gambar poék teuing, rék diunggah waé? Wikimedia Commons téh ukur pikeun gambar anu boga ajén énsiklopédik.</string>
+  <string name="upload_image_problem_blurry">Potona teu cékas, rék diunggah waé? Wikimedia Commons mah ukur pikeun gambar anu boga ajén énsiklopédik.</string>
   <string name="give_permission">Béré idin</string>
   <string name="use_external_storage">Paké panyimpenan éksternal</string>
   <string name="use_external_storage_summary">Simpen gambar nu nyomotna ku aplikasi kaména na parangkat anjeun</string>

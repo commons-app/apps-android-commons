@@ -76,7 +76,7 @@
   <string name="menu_refresh">Обновяване</string>
   <string name="ok">Добре</string>
   <string name="warning">Предупреждение</string>
-  <string name="upload_image_duplicate">Този файл вече съществува в Общомедия. Наистина ли искате да продължите?</string>
+  <string name="upload_image_problem_duplicate">Този файл вече съществува в Общомедия. Наистина ли искате да продължите?</string>
   <string name="yes">Да</string>
   <string name="no">Не</string>
   <string name="media_detail_title">Заглавие</string>

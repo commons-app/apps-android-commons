@@ -174,7 +174,7 @@
   <string name="title_activity_nearby">কাছাকাছি স্থান</string>
   <string name="no_nearby">কাছাকাছি কোন স্থান পাওয়া যায়নি</string>
   <string name="warning">সতর্কীকরণ</string>
-  <string name="upload_image_duplicate">এই ফাইলটি ইতিমধ্যে কমন্সে বিদ্যমান। আপনি কি নিশ্চিত আপনি সামনে এগুতে চান?</string>
+  <string name="upload_image_problem_duplicate">এই ফাইলটি ইতিমধ্যে কমন্সে বিদ্যমান। আপনি কি নিশ্চিত আপনি সামনে এগুতে চান?</string>
   <string name="yes">হ্যাঁ</string>
   <string name="no">না</string>
   <string name="media_detail_title">শিরোনাম</string>
@@ -233,8 +233,8 @@
   <string name="error_while_cache">ছবি আনার সময় ত্রুটি</string>
   <string name="title_info">ফাইলের একটি স্বতন্ত্র বর্ণনামূলক নাম যা ফাইলের নাম হিসাবে কাজ করবে। অাপনি সাধারণ ভাষা ব্যবহার করতে পারেন শূন্যস্থানসহ। ফাইলের এক্সটেনশন যুক্ত করবেন না।</string>
   <string name="description_info">যতটা সম্ভব মিডিয়াটি বর্ণনা করুন: এটি কোথায় ধারণ করা হয়েছিল? এটি কি প্রদর্শন করে? এটির প্রসঙ্গ কি? ধারণকৃত বস্তু অথবা ব্যক্তির বর্ণনা করুন। সহজে অনুমান করা যায়না সেরকম তথ্য উদঘাটন করুন, উদাহরণস্বরূপ, যদি ল্যান্ডস্কেপ হয় তাহলে দিবসকালের সময় দিন।</string>
-  <string name="upload_image_too_dark">এই ছবিটি খুবই অন্ধকারময়, আপনি কি এটি আপলোড করতে চান? উইকিমিডিয়া কমন্স শুধুমাত্র বিশ্বকোষীয় মানের ছবির জন্য।</string>
-  <string name="upload_image_blurry">এই ছবিটি অস্পষ্ট, আপনি কি এটি আপলোড করতে চান? উইকিমিডিয়া কমন্স শুধুমাত্র বিশ্বকোষীয় মানের ছবির জন্য।</string>
+  <string name="upload_image_problem_dark">এই ছবিটি খুবই অন্ধকারময়, আপনি কি এটি আপলোড করতে চান? উইকিমিডিয়া কমন্স শুধুমাত্র বিশ্বকোষীয় মানের ছবির জন্য।</string>
+  <string name="upload_image_problem_blurry">এই ছবিটি অস্পষ্ট, আপনি কি এটি আপলোড করতে চান? উইকিমিডিয়া কমন্স শুধুমাত্র বিশ্বকোষীয় মানের ছবির জন্য।</string>
   <string name="give_permission">অনুমতি দিন</string>
   <string name="use_external_storage">বাহ্যিক সঞ্চয়স্থান ব্যবহার করুন</string>
   <string name="use_external_storage_summary">অাপনার ডিভাইসের নিজস্ব ক্যামেরায় ধারণকৃত ছবি সংরক্ষণ করুন</string>

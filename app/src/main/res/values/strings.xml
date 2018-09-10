@@ -167,7 +167,6 @@
     <string name="title_activity_nearby">Nearby Places</string>
     <string name="no_nearby">No nearby places found</string>
     <string name="warning">Warning</string>
-    <string name="upload_image_duplicate">This file already exists on Commons. Are you sure you want to proceed?</string>
     <string name="yes">Yes</string>
     <string name="no">No</string>
     <string name="media_detail_title">Title</string>
@@ -233,8 +232,15 @@
     <string name="error_while_cache">Error while caching pictures</string>
     <string name="title_info">A unique descriptive title for the file, which will serve as a filename. You may use plain language with spaces. Do not include the file extension</string>
     <string name="description_info">Please describe the media as much as possible: Where was it taken? What does it show? What is the context? Please describe the objects or persons. Reveal information that can not be easily guessed, for instance the time of day if it is a landscape. If the media shows something unusual, please explain what makes it unusual.</string>
-    <string name="upload_image_too_dark">This picture is too dark, are you sure you want to upload it? Wikimedia Commons is only for pictures with encyclopedic value.</string>
-    <string name="upload_image_blurry">This picture is blurry, are you sure you want to upload it? Wikimedia Commons is only for pictures with encyclopedic value.</string>
+
+    <string name="upload_image_problem_duplicate">This file already exists on Commons. Are you sure you want to proceed?</string>
+    <string name="upload_image_problem_dark">This picture is too dark, are you sure you want to upload it? Wikimedia Commons is only for pictures with encyclopedic value.</string>
+    <string name="upload_image_problem_blurry">This picture is blurry, are you sure you want to upload it? Wikimedia Commons is only for pictures with encyclopedic value.</string>
+    <string name="upload_image_problem_dark_duplicate">This picture is too dark and already exists on Commons, are you sure you want to upload it? Please only upload pictures with encyclopedic value.</string>
+    <string name="upload_image_problem_blurry_duplicate">This picture is blurry and already exists on Commons, are you sure you want to upload it? Please only upload pictures with encyclopedic value.</string>
+    <string name="upload_image_problem_dark_blurry">This picture is too dark and is blurry, are you sure you want to upload it? Please only upload pictures with encyclopedic value.</string>
+    <string name="upload_image_problem_dark_blurry_duplicate">This picture is too dark, is blurry and already exists on Commons, are you sure you want to upload it? Please only upload pictures with encyclopedic value.</string>
+
     <string name="give_permission">Give permission</string>
     <string name="use_external_storage">Use external storage</string>
     <string name="use_external_storage_summary">Save pictures taken with the in-app camera on your device</string>

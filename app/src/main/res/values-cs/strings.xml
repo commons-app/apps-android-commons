@@ -181,7 +181,7 @@
   <string name="title_activity_nearby">Místa v okolí</string>
   <string name="no_nearby">Poblíž nebylo nic nalezeno</string>
   <string name="warning">Upozornění</string>
-  <string name="upload_image_duplicate">Tento soubor již na Commons existuje. Jste si jist, že chcete pokračovat?</string>
+  <string name="upload_image_problem_duplicate">Tento soubor již na Commons existuje. Jste si jist, že chcete pokračovat?</string>
   <string name="yes">Ano</string>
   <string name="no">Ne</string>
   <string name="media_detail_title">Název</string>
@@ -243,8 +243,8 @@
   <string name="error_while_cache">Chyba při meziukládání obrázků</string>
   <string name="title_info">Unikátní a popisný název pro daný soubor, který bude sloužit jako název souboru. Můžete použít běžný psaný jazyk s mezerami; nezahrnujte koncovku souboru.</string>
   <string name="description_info">Popište prosím obrázek, jak jen to je možné: Kde byl pořízen? Co znázorňuje? Jaký je kontext obrázku? Popisujte prosím významné předměty nebo osoby na obrázku a nezapomeňte na informace, které není možné snadno odhadnout ze samotného obrázku, jako je například denní doba, pokud jde o krajinu. Pokud je na obrázku něco neobvyklého, popište, co to dělá neobvyklým.</string>
-  <string name="upload_image_too_dark">Tento obrázek je příliš tmavý, jste si jist/a, že ho chcete nahrát? Wikimedia Commons slouží jenom pro obrázky s encyklopedickou hodnotou.</string>
-  <string name="upload_image_blurry">Tento obrázek je rozmazaný, jste si jist/a, že ho chcete nahrát? Wikimedia Commons slouží jenom pro obrázky s encyklopedickou hodnotou.</string>
+  <string name="upload_image_problem_dark">Tento obrázek je příliš tmavý, jste si jist/a, že ho chcete nahrát? Wikimedia Commons slouží jenom pro obrázky s encyklopedickou hodnotou.</string>
+  <string name="upload_image_problem_blurry">Tento obrázek je rozmazaný, jste si jist/a, že ho chcete nahrát? Wikimedia Commons slouží jenom pro obrázky s encyklopedickou hodnotou.</string>
   <string name="give_permission">Dát povolení</string>
   <string name="use_external_storage">Použít externí úložiště</string>
   <string name="use_external_storage_summary">Uložit obrázky pořízené fotoaparátem, jenž je součástí této aplikace</string>
