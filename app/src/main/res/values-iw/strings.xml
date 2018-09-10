@@ -163,6 +163,7 @@
   <string name="welcome_copyright_subtext">נא להימנע מחומרים מוגבלים בזכויות יוצרים שמצאתם באינטרנט וכן מתמונות של כרזות, עטיפות ספרים, וכו\'.</string>
   <string name="welcome_final_text">נראה לך שקלטת?</string>
   <string name="welcome_final_button_text">כן!</string>
+  <string name="welcome_help_button_text">&lt;u&gt;מידע נוסף&lt;/u&gt;</string>
   <string name="detail_panel_cats_label">קטגוריות</string>
   <string name="detail_panel_cats_loading">טעינה...</string>
   <string name="detail_panel_cats_none">לא נבחר דבר</string>
@@ -257,6 +258,8 @@
   <string name="skip_login_title">האם באמת לדלג על הכניסה לחשבון?</string>
   <string name="skip_login_message">לא תהיה לך אפשרות להעלות תמונות.</string>
   <string name="login_alert_message">נא להיכנס לחשבון כדי להשתמש באפשרות הזאת</string>
+  <string name="copy_wikicode" fuzzy="true">העתקת קוד ויקי ללוח</string>
+  <string name="wikicode_copied" fuzzy="true">קוד הוויקי הועתק ללוח</string>
   <string name="nearby_location_has_not_changed">המיקום לא השתנה.</string>
   <string name="nearby_location_not_available">המיקום אינו זמין.</string>
   <string name="location_permission_rationale_nearby">נדרשת הרשאה כדי להציג רשימה של מקומות בסביבה</string>

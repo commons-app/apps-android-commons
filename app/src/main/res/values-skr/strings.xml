@@ -136,4 +136,5 @@
   <string name="question">سوال</string>
   <string name="result">نتیجہ</string>
   <string name="statistics">شماریات</string>
+  <string name="error_occurred">خرابی تھی ڳئی ہے!</string>
 </resources>

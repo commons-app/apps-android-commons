@@ -261,8 +261,8 @@
   <string name="skip_login_title">Giriş işlemini gerçekten atlamak istiyor musunuz?</string>
   <string name="skip_login_message">Resim yükleyemeyeceksiniz.</string>
   <string name="login_alert_message">Bu özelliği kullanmak için lütfen giriş yapın</string>
-  <string name="copy_wikicode">Wikicode\'yi panoya kopyala</string>
-  <string name="wikicode_copied">Wikicode panoya kopyalandı</string>
+  <string name="copy_wikicode" fuzzy="true">Wikicode\'yi panoya kopyala</string>
+  <string name="wikicode_copied" fuzzy="true">Wikicode panoya kopyalandı</string>
   <string name="nearby_location_has_not_changed">Konum değiştirilmedi</string>
   <string name="nearby_location_not_available">Konum kullanılamıyor.</string>
   <string name="location_permission_rationale_nearby">Yakındaki yerler listesini görüntülemek için izin vermeniz gerekiyor</string>

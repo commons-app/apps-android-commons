@@ -39,7 +39,7 @@
   <string name="upload_progress_notification_title_in_progress">Cargando \"%1$s\"</string>
   <string name="upload_progress_notification_title_finishing">Rematando a carga de \"%1$s\"</string>
   <string name="upload_failed_notification_title">Erro ao cargar \"%1$s\"</string>
-  <string name="upload_failed_notification_subtitle">Prema para mostralo</string>
+  <string name="upload_failed_notification_subtitle">Prema para amosalo</string>
   <plurals name="uploads_pending_notification_indicator">
     <item quantity="one">Cargando %1$d ficheiro</item>
     <item quantity="other">Cargando %1$d ficheiros</item>
@@ -54,7 +54,7 @@
   <string name="menu_nearby">Preto</string>
   <string name="provider_contributions">As miñas subidas</string>
   <string name="menu_share">Compartir</string>
-  <string name="menu_open_in_browser">Mostrar no navegador</string>
+  <string name="menu_open_in_browser">Amosar no navegador</string>
   <string name="share_title_hint">Título</string>
   <string name="add_title_toast">Por favor, proporcione un título para este ficheiro</string>
   <string name="share_description_hint">Descrición</string>
@@ -255,8 +255,8 @@
   <string name="skip_login_title">Realmente quere saltar o inicio de sesión?</string>
   <string name="skip_login_message">Non poderá subir imaxes.</string>
   <string name="login_alert_message">Por favor, inicie a sesión para usar esta funcionalidade</string>
-  <string name="copy_wikicode">Copiar o texto wiki ó portapapeis</string>
-  <string name="wikicode_copied">Texto wiki copiado ó portapapeis</string>
+  <string name="copy_wikicode" fuzzy="true">Copiar o texto wiki ó portapapeis</string>
+  <string name="wikicode_copied" fuzzy="true">Texto wiki copiado ó portapapeis</string>
   <string name="nearby_location_has_not_changed">A localización non cambiou.</string>
   <string name="nearby_location_not_available">A localización non está dispoñible.</string>
   <string name="location_permission_rationale_nearby">Precísase permiso para amosar unha lista de lugares preto de aquí</string>

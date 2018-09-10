@@ -303,4 +303,5 @@
   <string name="share_coordinates_not_present">Під час вибору зображення не були вказані координати</string>
   <string name="error_fetching_nearby_places">Помилка отримання місць поблизу.</string>
   <string name="add_description">+ Додати опис</string>
+  <string name="error_occurred">Відбулася помилка!</string>
 </resources>
