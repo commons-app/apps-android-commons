@@ -11,11 +11,9 @@ import java.util.List;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
-import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.category.CategoriesModel;
 import fr.free.nrw.commons.contributions.Contribution;
 import fr.free.nrw.commons.utils.ImageUtils;
-import fr.free.nrw.commons.utils.ViewUtil;
 import io.reactivex.Completable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
@@ -150,11 +148,11 @@ public class UploadPresenter {
 
 
     /**
-     * Called by {@link DetectBadPicturesAsync} when a result is obtained.
+     * Called by the image processors when a result is obtained.
      *
-     * @param result the result returned by DetectBadPicturesAsync.
+     * @param result the result returned by the image procesors.
      */
-    private void handleBadPicture(ImageUtils.Result result) {
+    private void handleBadPicture(@ImageUtils.Result int result) {
         view.showBadPicturePopup(result);
     }
 

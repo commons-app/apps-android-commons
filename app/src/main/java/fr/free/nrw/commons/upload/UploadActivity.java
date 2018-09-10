@@ -359,15 +359,22 @@ public class UploadActivity extends AuthenticatedActivity implements UploadView 
     }
 
     @Override
-    public void showBadPicturePopup(ImageUtils.Result result) {
-        Timber.i(result.name());
+    public void showBadPicturePopup(@ImageUtils.Result int result) {
         int errorMessage;
-        if (result == ImageUtils.Result.IMAGE_DARK)
-            errorMessage = R.string.upload_image_too_dark;
-        else if (result == ImageUtils.Result.IMAGE_BLURRY)
-            errorMessage = R.string.upload_image_blurry;
-        else if (result == ImageUtils.Result.IMAGE_DUPLICATE)
-            errorMessage = R.string.upload_image_duplicate;
+        if (result == ImageUtils.IMAGE_DARK)
+            errorMessage = R.string.upload_image_problem_dark;
+        else if (result == ImageUtils.IMAGE_BLURRY)
+            errorMessage = R.string.upload_image_problem_blurry;
+        else if (result == ImageUtils.IMAGE_DUPLICATE)
+            errorMessage = R.string.upload_image_problem_duplicate;
+        else if (result == (ImageUtils.IMAGE_DARK|ImageUtils.IMAGE_BLURRY))
+            errorMessage = R.string.upload_image_problem_dark_blurry;
+        else if (result == (ImageUtils.IMAGE_DARK|ImageUtils.IMAGE_DUPLICATE))
+            errorMessage = R.string.upload_image_problem_dark_duplicate;
+        else if (result == (ImageUtils.IMAGE_BLURRY|ImageUtils.IMAGE_DUPLICATE))
+            errorMessage = R.string.upload_image_problem_blurry_duplicate;
+        else if (result == (ImageUtils.IMAGE_DARK|ImageUtils.IMAGE_BLURRY|ImageUtils.IMAGE_DUPLICATE))
+            errorMessage = R.string.upload_image_problem_dark_blurry_duplicate;
         else
             return;
         AlertDialog.Builder errorDialogBuilder = new AlertDialog.Builder(this);
@@ -450,9 +457,7 @@ public class UploadActivity extends AuthenticatedActivity implements UploadView 
             cardLayout.getLayoutTransition().enableTransitionType(LayoutTransition.CHANGING);
         }
         background.setScaleType(ImageView.ScaleType.CENTER_CROP);
-        background.setOnScaleChangeListener((scaleFactor, x, y) -> {
-            presenter.closeAllCards();
-        });
+        background.setOnScaleChangeListener((scaleFactor, x, y) -> presenter.closeAllCards());
     }
 
     private void configureTopCard() {

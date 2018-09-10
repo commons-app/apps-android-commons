@@ -175,7 +175,7 @@
   <string name="title_activity_nearby">Plasser i nærheten</string>
   <string name="no_nearby">Ingen steder i nærheten funnet</string>
   <string name="warning">Advarsel</string>
-  <string name="upload_image_duplicate">Denne filen eksisterer allerede på Commons. Er du sikker på at du vil fortsette?</string>
+  <string name="upload_image_problem_duplicate">Denne filen eksisterer allerede på Commons. Er du sikker på at du vil fortsette?</string>
   <string name="yes">Ja</string>
   <string name="no">Nei</string>
   <string name="media_detail_title">Tittel</string>
@@ -237,8 +237,8 @@
   <string name="error_while_cache">Feil under mellomlagring av bilder</string>
   <string name="title_info">En unik beskrivende tittel for fila, som vil fungere som filnavn. Du kan bruke vanlig språk med mellomrom. Ikke ta med filendelsen</string>
   <string name="description_info">Beskriv bidraget så mye som mulig: Hvor ble det tatt? Hva viser det? Hva er konteksten? Beskriv objektene eller personene. Gi informasjon som ikke kan gjettes lett, for eksempel når på dagen bildet ble tatt om det er et landskapsbilde. Om bildet viser noe uvanlig, forklar hva som gjør det uvanlig.</string>
-  <string name="upload_image_too_dark">Dette bildet er for mørkt, er du sikker på at du ønsker å laste det opp? Wikimedia Commons er kun for bilder med ensyklopedisk verdi.</string>
-  <string name="upload_image_blurry">Dette bildet er uklart, er du sikker på at du ønsker å laste det opp? Wikimedia Commons er bare for bilder med ensyklopedisk verdi.</string>
+  <string name="upload_image_problem_dark">Dette bildet er for mørkt, er du sikker på at du ønsker å laste det opp? Wikimedia Commons er kun for bilder med ensyklopedisk verdi.</string>
+  <string name="upload_image_problem_blurry">Dette bildet er uklart, er du sikker på at du ønsker å laste det opp? Wikimedia Commons er bare for bilder med ensyklopedisk verdi.</string>
   <string name="give_permission">Gi tillatelse</string>
   <string name="use_external_storage">Bruk ekstern lagring</string>
   <string name="use_external_storage_summary">Lagre bilder som er tatt med kameraet i appen på enheten din</string>

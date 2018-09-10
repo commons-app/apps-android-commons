@@ -1,12 +1,10 @@
 package fr.free.nrw.commons.upload;
 
-import android.content.Context;
 import android.graphics.BitmapRegionDecoder;
-import android.net.Uri;
 import android.os.AsyncTask;
 
+import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.lang.ref.WeakReference;
 
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
@@ -23,43 +21,40 @@ import timber.log.Timber;
  * <p>todo: Detect selfies?
  */
 
-public class DetectBadPicturesAsync extends AsyncTask<Void, Void, ImageUtils.Result> {
+public class DetectBadPicturesAsync extends AsyncTask<Void, Void, Integer> {
 
-    public final WeakReference<MediaWikiApi> mwApiWeakReference;
-    private final Uri mediaUri;
-    public final WeakReference<BehaviorSubject<ImageUtils.Result>> subjectWeakReference;
-    public final WeakReference<Context> contextWeakReference;
+    private final WeakReference<MediaWikiApi> mwApiWeakReference;
+    private final String mediaPath;
+    private final WeakReference<BehaviorSubject<Integer>> subjectWeakReference;
 
-    DetectBadPicturesAsync(WeakReference<BehaviorSubject<ImageUtils.Result>> subjectWeakReference, WeakReference<Context> contextWeakReference, WeakReference<MediaWikiApi> mwApiWeakReference, Uri mediaUri) {
+    DetectBadPicturesAsync(WeakReference<BehaviorSubject<Integer>> subjectWeakReference, WeakReference<MediaWikiApi> mwApiWeakReference, String mediaPath) {
         //this.callback = callback;
-        this.mediaUri = mediaUri;
+        this.mediaPath = mediaPath;
         this.subjectWeakReference = subjectWeakReference;
-        this.contextWeakReference = contextWeakReference;
         this.mwApiWeakReference = mwApiWeakReference;
     }
 
     @Override
-    protected ImageUtils.Result doInBackground(Void... voids) {
+    protected @ImageUtils.Result Integer doInBackground(Void... voids) {
         try {
-            InputStream inputStream = contextWeakReference.get().getContentResolver().openInputStream(mediaUri);
-            String fileSha1 = FileUtils.getSHA1(inputStream);
+            String fileSha1 = FileUtils.getSHA1(new FileInputStream(mediaPath));
             // https://commons.wikimedia.org/w/api.php?action=query&list=allimages&format=xml&aisha1=801957214aba50cb63bb6eb1b0effa50188900ba
             if (mwApiWeakReference.get().existingFile(fileSha1)) {
-                Timber.d("File %s already exists in Commons", mediaUri);
-                return ImageUtils.Result.IMAGE_DUPLICATE;
+                Timber.d("File %s already exists in Commons", mediaPath);
+                return ImageUtils.IMAGE_DUPLICATE;
             }
 
-            BitmapRegionDecoder decoder = BitmapRegionDecoder.newInstance(inputStream, false);
+            BitmapRegionDecoder decoder = BitmapRegionDecoder.newInstance(new FileInputStream(mediaPath), false);
 
             return ImageUtils.checkIfImageIsTooDark(decoder);
         } catch (IOException ioe) {
-            Timber.e(ioe, "IO Exception");
-            return ImageUtils.Result.IMAGE_OK;
+            Timber.e(ioe, "IO Exception with file:"+mediaPath);
+            return ImageUtils.IMAGE_OK;
         }
     }
 
     @Override
-    protected void onPostExecute(ImageUtils.Result result) {
+    protected void onPostExecute(@ImageUtils.Result Integer result) {
         super.onPostExecute(result);
         subjectWeakReference.get().onNext(result);
     }

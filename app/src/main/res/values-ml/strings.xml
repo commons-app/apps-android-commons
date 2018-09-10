@@ -133,7 +133,7 @@
   <string name="ok">ശരി</string>
   <string name="title_activity_nearby">സമീപ സ്ഥലങ്ങൾ</string>
   <string name="warning">മുന്നറിയിപ്പ്</string>
-  <string name="upload_image_duplicate">ഈ പ്രമാണം കോമൺസിൽ നിലവിലുണ്ട്. തുടരണം എന്ന് താങ്കൾക്കുറപ്പാണോ?</string>
+  <string name="upload_image_problem_duplicate">ഈ പ്രമാണം കോമൺസിൽ നിലവിലുണ്ട്. തുടരണം എന്ന് താങ്കൾക്കുറപ്പാണോ?</string>
   <string name="yes">അതെ</string>
   <string name="no">അല്ല</string>
   <string name="media_detail_title">ശീർഷകം</string>

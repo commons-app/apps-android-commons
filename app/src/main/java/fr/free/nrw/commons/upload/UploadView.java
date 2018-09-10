@@ -7,7 +7,6 @@ import java.lang.annotation.Retention;
 import java.util.List;
 
 import fr.free.nrw.commons.utils.ImageUtils;
-import io.reactivex.subjects.CompletableSubject;
 
 import static java.lang.annotation.RetentionPolicy.SOURCE;
 
@@ -65,7 +64,7 @@ public interface UploadView {
 
     void dismissKeyboard();
 
-    void showBadPicturePopup(ImageUtils.Result errorMessage);
+    void showBadPicturePopup(@ImageUtils.Result int errorMessage);
 
     void finish();
 

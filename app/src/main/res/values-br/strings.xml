@@ -159,7 +159,7 @@
   <string name="title_activity_nearby">Lec\'hioù nes</string>
   <string name="no_nearby">N\'eus bet kavet netra tostik</string>
   <string name="warning">Diwallit</string>
-  <string name="upload_image_duplicate">Emañ ar restr-mañ war Commons c\'hoazh. Ha sur oc\'h e fell deoc\'h kenderc\'hel ?</string>
+  <string name="upload_image_problem_duplicate">Emañ ar restr-mañ war Commons c\'hoazh. Ha sur oc\'h e fell deoc\'h kenderc\'hel ?</string>
   <string name="yes">Ya</string>
   <string name="no">Ket</string>
   <string name="media_detail_title">Titl</string>
