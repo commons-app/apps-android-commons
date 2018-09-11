@@ -254,8 +254,8 @@
   <string name="skip_login_title">Vil du hoppe over logg inn?</string>
   <string name="skip_login_message">Du kan ikke laste opp bilder.</string>
   <string name="login_alert_message">Logg vennligst inn for å bruke denne funksjonen</string>
-  <string name="copy_wikicode">Kopier wikikoden til utklippstavlen</string>
-  <string name="wikicode_copied">Wikikode kopiert til utklippstavlen</string>
+  <string name="copy_wikicode" fuzzy="true">Kopier wikikoden til utklippstavlen</string>
+  <string name="wikicode_copied" fuzzy="true">Wikikode kopiert til utklippstavlen</string>
   <string name="nearby_location_has_not_changed">Stedet har ikke blitt endret.</string>
   <string name="nearby_location_not_available">Sted ikke tilgjengelig.</string>
   <string name="location_permission_rationale_nearby">Tillatelse kreves for å vise listen over steder i nærheten</string>

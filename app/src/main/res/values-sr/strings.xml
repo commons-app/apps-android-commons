@@ -20,6 +20,7 @@
   <string name="app_name">Остава</string>
   <string name="bullet">•</string>
   <string name="menu_settings">Подешавања</string>
+  <string name="intent_share_upload_label">Отпреми на Оставу</string>
   <string name="username">Корисничко име</string>
   <string name="password">Лозинка</string>
   <string name="login_credential">Пријавите се на свој Commons Beta налог</string>
@@ -31,7 +32,7 @@
   <string name="login_success">Успешно сте пријављени.</string>
   <string name="login_failed">Пријављивање није успело.</string>
   <string name="upload_failed">Датотека није пронађена. Покушајте са другом датотеком.</string>
-  <string name="authentication_failed" fuzzy="true">Провера идентитета није успела.</string>
+  <string name="authentication_failed">Потврда идентитета није успела. Пријавите се поново.</string>
   <string name="uploading_started">Отпремање је започето.</string>
   <string name="upload_completed_notification_title">Датотека „%1$s“ је отпремљена.</string>
   <string name="upload_completed_notification_text">Додирните да бисте видели отпремање</string>
@@ -66,6 +67,7 @@
   <string name="login_failed_generic">Пријава није успела</string>
   <string name="share_upload_button">Отпреми</string>
   <string name="multiple_share_base_title">Дајте име овом комплету</string>
+  <string name="add_set_name_toast">Унесите име за овај скуп</string>
   <string name="provider_modifications">Измене</string>
   <string name="menu_upload_single">Отпреми</string>
   <string name="categories_search_text_hint">Претражи категорије</string>
@@ -203,6 +205,8 @@
   <string name="background_image">Позадинска слика</string>
   <string name="mediaimage_failed">Медијска слика неуспешна</string>
   <string name="no_image_found">Слика није пронађена</string>
+  <string name="no_subcategory_found">Поткатегорије нису пронађене</string>
+  <string name="no_parentcategory_found">Надређене категорије нису пронађене</string>
   <string name="upload_image">Отпреми слику</string>
   <string name="welcome_image_mount_zao">Планина Зао</string>
   <string name="welcome_image_llamas">Ламе</string>
@@ -248,8 +252,13 @@
   <string name="nominated_for_deletion">Ова слика је била номинована за брисање</string>
   <string name="nominated_see_more"/>
   <string name="view_browser">Види у претраживачу</string>
-  <string name="copy_wikicode">Копирај викикод у привремену меморију</string>
-  <string name="wikicode_copied">Викикод копиран у привремену меморију</string>
+  <string name="skip_login">Прескочи</string>
+  <string name="navigation_item_login">Пријави ме</string>
+  <string name="skip_login_title">Заиста желите да прескочите пријаву?</string>
+  <string name="skip_login_message">Нећете моћи да отпремате слике.</string>
+  <string name="login_alert_message">Пријавите се да бисте користили ову функцију</string>
+  <string name="copy_wikicode" fuzzy="true">Копирај викикод у привремену меморију</string>
+  <string name="wikicode_copied" fuzzy="true">Викикод копиран у привремену меморију</string>
   <string name="nearby_location_has_not_changed">Локација није промењена.</string>
   <string name="nearby_location_not_available">Локација није доступна.</string>
   <string name="location_permission_rationale_nearby">Потребна је дозвола за приказивање листе локација у близини</string>
@@ -284,9 +293,15 @@
   <string name="no_images_found">Нису пронађене слике!</string>
   <string name="error_loading_images">Десила се грешка при учитавању слика.</string>
   <string name="image_uploaded_by">Отпремио/ла: %1$s</string>
+  <string name="block_notification">Блокирано вам је уређивање Оставе</string>
+  <string name="appwidget_img">Слика дана</string>
+  <string name="app_widget_heading">Слика дана</string>
   <string name="menu_search_button">Претражи</string>
   <string name="search_commons">Претрага Оставе</string>
+  <string name="images_not_found">Нису пронађене слике које одговарају %1$s</string>
   <string name="title_activity_search">Претрага</string>
+  <string name="search_recent_header">Недавне претраге:</string>
+  <string name="provider_searches">Недавни упити</string>
   <string name="successful_wikidata_edit">Слика успешно додата у %1$s на Википодацима!</string>
   <string name="wikidata_edit_failure">Неуспешно ажурирање одговарајућег ентитета на Википодацима!</string>
   <string name="menu_set_wallpaper">Постави као позадину</string>
@@ -299,5 +314,8 @@
   <string name="statistics">СТАТИСТИКЕ</string>
   <string name="statistics_featured">Изабране слике</string>
   <string name="level">НИВО</string>
+  <string name="error_occurred">Дошло је до грешке.</string>
   <string name="notifications_channel_name_all">Обавештења Оставе</string>
+  <string name="storage_permission">Дозвола за складиштење</string>
+  <string name="write_storage_permission_rationale_for_image_share">Потребна нам је ваша дозвола да бисмо приступили спољашњем складишту вашег уређаја како бисмо отпремали слике.</string>
 </resources>

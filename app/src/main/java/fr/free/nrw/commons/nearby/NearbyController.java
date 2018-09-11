@@ -2,6 +2,7 @@ package fr.free.nrw.commons.nearby;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.support.graphics.drawable.VectorDrawableCompat;
 
@@ -135,9 +136,14 @@ public class NearbyController {
 
         placeList = placeList.subList(0, Math.min(placeList.size(), MAX_RESULTS));
 
-        VectorDrawableCompat vectorDrawable = VectorDrawableCompat.create(
-                context.getResources(), R.drawable.ic_custom_map_marker, context.getTheme()
-        );
+        VectorDrawableCompat vectorDrawable = null;
+        try {
+            vectorDrawable = VectorDrawableCompat.create(
+                    context.getResources(), R.drawable.ic_custom_map_marker, context.getTheme()
+            );
+        } catch (Resources.NotFoundException e) {
+            // ignore when running tests.
+        }
         if (vectorDrawable != null) {
             Bitmap icon = UiUtils.getBitmap(vectorDrawable);
 

@@ -249,8 +249,8 @@
   <string name="skip_login_title">Дали навистина сакате да ја прескокнете најавата?</string>
   <string name="skip_login_message">Нема да можете да подигате слики.</string>
   <string name="login_alert_message">Најавете се за да ја користите оваа можност.</string>
-  <string name="copy_wikicode">Прекопирај го викикодот во меѓускладот</string>
-  <string name="wikicode_copied">Викикодот е прекопиран во меѓускладот</string>
+  <string name="copy_wikicode" fuzzy="true">Прекопирај го викикодот во меѓускладот</string>
+  <string name="wikicode_copied" fuzzy="true">Викикодот е прекопиран во меѓускладот</string>
   <string name="nearby_location_has_not_changed">Местоположбата не е сменета.</string>
   <string name="nearby_location_not_available">Местоположбата е недостапна.</string>
   <string name="location_permission_rationale_nearby">Се бара дозвола за приказ на список на околни места</string>
@@ -340,5 +340,8 @@
   <string name="images_uploaded_explanation">Бројот на слики што сте ги подигнале на Ризницата преку секоја алатка за подигање</string>
   <string name="images_reverted_explanation">Постоток од подигнатите слики на Ризницата кои не се избришани</string>
   <string name="images_used_explanation">Бројот на слики што сте ги подигнале на Ризницата кои се користат во статии</string>
+  <string name="error_occurred">Се појави грешка!</string>
   <string name="notifications_channel_name_all">Известување од Ризницата</string>
+  <string name="storage_permission">Дозвола за складирање</string>
+  <string name="write_storage_permission_rationale_for_image_share">Ни треба ваша дозвола за пристап до надворешниот склад на вашиот уред за да се подигнат сликите.</string>
 </resources>

@@ -346,5 +346,6 @@
   <string name="images_uploaded_explanation">Ο αριθμός εικόνων που ανεβάσατε στα Κοινά, μέσω οποιουδήποτε λογισμικού ανεβάσματος</string>
   <string name="images_reverted_explanation">Το ποσοστό εικόνων που ανεβάσατε στα Κοινά που δεν διεγράφη</string>
   <string name="images_used_explanation">Ο αριθμός εικόνων που ανεβάσατε στα Κοινά που χρησιμοποιήθηκαν σε λήμματα του Wikimedia</string>
+  <string name="error_occurred">Συνέβη σφάλμα!</string>
   <string name="notifications_channel_name_all">Ειδοποίηση Κοινών</string>
 </resources>
