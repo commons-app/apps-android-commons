@@ -19,73 +19,102 @@ import com.facebook.imagepipeline.datasource.BaseBitmapDataSubscriber;
 import com.facebook.imagepipeline.image.CloseableImage;
 import com.facebook.imagepipeline.request.ImageRequest;
 import com.facebook.imagepipeline.request.ImageRequestBuilder;
-import com.prof.rssparser.Article;
-import com.prof.rssparser.Parser;
 
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
-import org.jsoup.select.Elements;
+import javax.inject.Inject;
 
-import java.util.ArrayList;
-
-import fr.free.nrw.commons.BuildConfig;
 import fr.free.nrw.commons.R;
+import fr.free.nrw.commons.di.ApplicationlessInjection;
+import fr.free.nrw.commons.mwapi.MediaWikiApi;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.CompositeDisposable;
+import io.reactivex.schedulers.Schedulers;
+import timber.log.Timber;
 
 /**
  * Implementation of App Widget functionality.
  */
 public class PicOfDayAppWidget extends AppWidgetProvider {
 
-    static void updateAppWidget(Context context, AppWidgetManager appWidgetManager, int appWidgetId) {
+    private CompositeDisposable compositeDisposable = new CompositeDisposable();
+
+    @Inject
+    MediaWikiApi mediaWikiApi;
+
+    void updateAppWidget(Context context, AppWidgetManager appWidgetManager, int appWidgetId) {
         RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.pic_of_day_app_widget);
+        loadPictureOfTheDay(context, views, appWidgetManager, appWidgetId);
+    }
 
-        String urlString = BuildConfig.WIKIMEDIA_API_POTD;
-        Parser parser = new Parser();
-        parser.execute(urlString);
-        parser.onFinish(new Parser.OnTaskCompleted() {
+    /**
+     * Loads the picture of the day using media wiki API
+     * @param context
+     * @param views
+     * @param appWidgetManager
+     * @param appWidgetId
+     */
+    private void loadPictureOfTheDay(Context context,
+                                     RemoteViews views,
+                                     AppWidgetManager appWidgetManager,
+                                     int appWidgetId) {
+        compositeDisposable.add(mediaWikiApi.getPictureOfTheDay()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(
+                        response -> {
+                            if (response != null) {
+                                loadImageFromUrl(response.getImageUrl(), context, views, appWidgetManager, appWidgetId);
+                            }
+                        },
+                        t -> {
+                            Timber.e(t, "Fetching picture of the day failed");
+                        }
+                ));
+    }
+
+    /**
+     * Uses Fresco to load an image from Url
+     * @param imageUrl
+     * @param context
+     * @param views
+     * @param appWidgetManager
+     * @param appWidgetId
+     */
+    private void loadImageFromUrl(String imageUrl,
+                                  Context context,
+                                  RemoteViews views,
+                                  AppWidgetManager appWidgetManager,
+                                  int appWidgetId) {
+        ImageRequest request = ImageRequestBuilder.newBuilderWithSource(Uri.parse(imageUrl)).build();
+        ImagePipeline imagePipeline = Fresco.getImagePipeline();
+        DataSource<CloseableReference<CloseableImage>> dataSource
+                = imagePipeline.fetchDecodedImage(request, context);
+        dataSource.subscribe(new BaseBitmapDataSubscriber() {
             @Override
-            public void onTaskCompleted(ArrayList<Article> list) {
-                String desc = list.get(list.size() - 1).getDescription();
-                if (desc != null) {
-                    Document document = Jsoup.parse(desc);
-                    Elements elements = document.select("img");
-                    String imageUrl = elements.get(0).attr("src");
-                    if (imageUrl != null && imageUrl.length() > 0) {
-
-                        ImageRequest request = ImageRequestBuilder.newBuilderWithSource(Uri.parse(imageUrl)).build();
-                        ImagePipeline imagePipeline = Fresco.getImagePipeline();
-                        DataSource<CloseableReference<CloseableImage>> dataSource
-                                = imagePipeline.fetchDecodedImage(request, context);
-                        dataSource.subscribe(new BaseBitmapDataSubscriber() {
-                            @Override
-                            protected void onNewResultImpl(@Nullable Bitmap tempBitmap) {
-                                Bitmap bitmap = null;
-                                if (tempBitmap != null) {
-                                    bitmap = Bitmap.createBitmap(tempBitmap.getWidth(), tempBitmap.getHeight(), Bitmap.Config.ARGB_8888);
-                                    Canvas canvas = new Canvas(bitmap);
-                                    canvas.drawBitmap(tempBitmap, 0f, 0f, new Paint());
-                                }
-                                views.setImageViewBitmap(R.id.appwidget_image, bitmap);
-                                appWidgetManager.updateAppWidget(appWidgetId, views);
-                            }
-
-                            @Override
-                            protected void onFailureImpl(DataSource<CloseableReference<CloseableImage>> dataSource) {
-                                // Ignore failure for now.
-                            }
-                        }, CallerThreadExecutor.getInstance());
-                    }
+            protected void onNewResultImpl(@Nullable Bitmap tempBitmap) {
+                Bitmap bitmap = null;
+                if (tempBitmap != null) {
+                    bitmap = Bitmap.createBitmap(tempBitmap.getWidth(), tempBitmap.getHeight(), Bitmap.Config.ARGB_8888);
+                    Canvas canvas = new Canvas(bitmap);
+                    canvas.drawBitmap(tempBitmap, 0f, 0f, new Paint());
                 }
+                views.setImageViewBitmap(R.id.appwidget_image, bitmap);
+                appWidgetManager.updateAppWidget(appWidgetId, views);
             }
 
             @Override
-            public void onError() {
+            protected void onFailureImpl(DataSource<CloseableReference<CloseableImage>> dataSource) {
+                // Ignore failure for now.
             }
-        });
+        }, CallerThreadExecutor.getInstance());
     }
 
     @Override
     public void onUpdate(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds) {
+        ApplicationlessInjection
+                .getInstance(context
+                        .getApplicationContext())
+                .getCommonsApplicationComponent()
+                .inject(this);
         // There may be multiple widgets active, so update all of them
         for (int appWidgetId : appWidgetIds) {
             updateAppWidget(context, appWidgetManager, appWidgetId);

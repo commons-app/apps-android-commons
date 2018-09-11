@@ -34,6 +34,7 @@ import java.net.URL;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
@@ -51,6 +52,7 @@ import fr.free.nrw.commons.category.QueryContinue;
 import fr.free.nrw.commons.notification.Notification;
 import fr.free.nrw.commons.notification.NotificationUtils;
 import fr.free.nrw.commons.utils.ContributionUtils;
+import fr.free.nrw.commons.utils.DateUtils;
 import in.yuvi.http.fluent.Http;
 import io.reactivex.Observable;
 import io.reactivex.Single;
@@ -995,6 +997,44 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
             return null;
         });
 
+    }
+
+    /**
+     * The method returns the picture of the day
+     *
+     * @return Media object corresponding to the picture of the day
+     */
+    @Override
+    @Nullable
+    public Single<Media> getPictureOfTheDay() {
+        return Single.fromCallable(() -> {
+            CustomApiResult apiResult = null;
+            try {
+                String template = "Template:Potd/" + DateUtils.getCurrentDate();
+                CustomMwApi.RequestBuilder requestBuilder = api.action("query")
+                        .param("generator", "images")
+                        .param("format", "xml")
+                        .param("titles", template)
+                        .param("prop", "imageinfo")
+                        .param("iiprop", "url|extmetadata");
+
+                apiResult = requestBuilder.get();
+            } catch (IOException e) {
+                Timber.e("Failed to obtain searchCategories", e);
+            }
+
+            if (apiResult == null) {
+                return null;
+            }
+
+            CustomApiResult imageNode = apiResult.getNode("/api/query/pages/page");
+            if (imageNode == null
+                    || imageNode.getDocument() == null) {
+                return null;
+            }
+
+            return CategoryImageUtils.getMediaFromPage(imageNode.getDocument());
+        });
     }
 
     private Date parseMWDate(String mwDate) {
