@@ -60,7 +60,6 @@ This software is open source, licensed under the [Apache License 2.0][4].
 [9]: https://github.com/commons-app/apps-android-commons/wiki/Volunteers-welcome%21
 [10]: https://meta.wikimedia.org/wiki/Grants:Project/Improve_%27Upload_to_Commons%27_Android_App/Renewal
 [11]: https://github.com/square/picasso
-[12]: https://github.com/prof18/RSS-Parser
 [13]: https://github.com/avianey/Android-ViewPagerIndicator
 [14]: https://github.com/chrisbanes/PhotoView
 [15]: https://github.com/ACRA/acra
@@ -74,7 +73,6 @@ This software is open source, licensed under the [Apache License 2.0][4].
 [23]: https://github.com/square/okhttp
 [24]: https://github.com/square/okio
 [25]: https://github.com/ReactiveX/RxJava
-[26]: https://github.com/jhy/jsoup
 [27]: https://github.com/facebook/fresco
 [28]: https://github.com/facebook/stetho
 [29]: https://github.com/google/dagger
