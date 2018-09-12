@@ -4,29 +4,21 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
-    <!--
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <fr.free.nrw.commons.contributions.CustomNotificationsCardView
-            android:id="@+id/card_view_notifications"
+        <fr.free.nrw.commons.nearby.NearbyNoificationCardView
+            android:id="@+id/card_view_nearby"
             android:layout_height="wrap_content"
             android:layout_width="match_parent"
-            app:cardBackgroundColor="?attr/mainCardBackround"
+            app:cardBackgroundColor="?attr/mainCardBackground"
             >
 
-            <ProgressBar
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:id="@+id/customNotificationsProgressBar"
-
-                />
-
-        </fr.free.nrw.commons.contributions.CustomNotificationsCardView>
+        </fr.free.nrw.commons.nearby.NearbyNoificationCardView>
     </RelativeLayout>
-    -->
+
 
     <FrameLayout
         android:layout_width="match_parent"

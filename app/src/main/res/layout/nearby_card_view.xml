@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="?attr/mainCardBackround"
+    android:background="?attr/mainCardBackground"
     android:layout_centerVertical="true"
     android:minHeight="72dp">
 
