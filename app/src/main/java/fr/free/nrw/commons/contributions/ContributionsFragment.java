@@ -42,6 +42,7 @@ import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
 import fr.free.nrw.commons.media.MediaDetailPagerFragment;
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
+import fr.free.nrw.commons.nearby.NearbyNoificationCardView;
 import fr.free.nrw.commons.nearby.NearbyPlaces;
 import fr.free.nrw.commons.notification.Notification;
 import fr.free.nrw.commons.notification.NotificationController;
@@ -88,6 +89,9 @@ public class ContributionsFragment
     public static final String CONTRIBUTION_LIST_FRAGMENT_TAG = "ContributionListFragmentTag";
     public static final String MEDIA_DETAIL_PAGER_FRAGMENT_TAG = "MediaDetailFragmentTag";
 
+    public NearbyNoificationCardView nearbyNoificationCardView;
+
+
     /**
      * Since we will need to use parent activity on onAuthCookieAcquired, we have to wait
      * fragment to be attached. Latch will be responsible for this sync.
@@ -111,7 +115,7 @@ public class ContributionsFragment
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_contributions, container, false);
-
+        
         if (savedInstanceState != null) {
             mediaDetailPagerFragment = (MediaDetailPagerFragment)getChildFragmentManager().findFragmentByTag(MEDIA_DETAIL_PAGER_FRAGMENT_TAG);
             contributionsListFragment = (ContributionsListFragment) getChildFragmentManager().findFragmentByTag(CONTRIBUTION_LIST_FRAGMENT_TAG);

@@ -18,6 +18,8 @@
 
     <attr name="contributionsListBackground" format="reference"/>
     <attr name="mainTabBackground" format="reference"/>
+    <attr name="mainCardBackground" format="reference"/>
+
 
     <declare-styleable name="CompatTextView">
         <attr name="drawablePadding" format="dimension"/>
