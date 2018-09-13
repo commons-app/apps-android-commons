@@ -97,8 +97,8 @@
   <string name="title_activity_featured_images">Nabarmendutako irudiak</string>
   <string name="title_activity_category_details">Kategoria</string>
   <string name="menu_about">Honi buruz</string>
-  <string name="about_license" fuzzy="true">Open Source softwarea &lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/COPYING\"&gt;Apache v2 Lizentziaren&lt;/a&gt; pean egina. Wikimedia Commons eta bere logoa Wikimedia Fundazioaren marka erregistratuak dira eta Wikimedia Fundazioaren baimenarekin erabiltzen dira. Ez gaude Wikimedia Fundaziora afiliatuta.</string>
-  <string name="about_improve" fuzzy="true">GitHub-eko &lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;Iturria&lt;/a&gt; eta &lt;a href=\"https://commons-app.github.io/\"&gt;webgunea&lt;/a&gt;. &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;GitHub-eko gai&lt;/a&gt; berria sortu erroreen berri emateko.</string>
+  <string name="about_license">Wikimedia Commons iturri-irekiko aplikazioa da Wikimedia komunitateko bolondresek sortu eta mantendutakoa. Wikimedia Fundazioa ez dago aplikazioaren sorreran, garapenean, edota mantenuan ibili.</string>
+  <string name="about_improve">&lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;GitHub-eko gai&lt;/a&gt; berria sortu errore eta iradokizunen berri emateko.</string>
   <string name="about_privacy_policy">&lt;u&gt;Pribatutasun politika&lt;/u&gt;</string>
   <string name="about_credits">&lt;u&gt;Kredituak&lt;/u&gt;</string>
   <string name="title_activity_about">Honi buruz</string>
@@ -158,6 +158,7 @@
   <string name="welcome_copyright_subtext">Saihestu copyright-a daukaten materialak, Interneten aurkitutakoak edo posterretakoak, liburuen azalak, etab.</string>
   <string name="welcome_final_text">Lortu duzula uste duzu?</string>
   <string name="welcome_final_button_text">Bai!</string>
+  <string name="welcome_help_button_text">&lt;u&gt;Informazio gehiago&lt;/u&gt;</string>
   <string name="detail_panel_cats_label">Kategoriak</string>
   <string name="detail_panel_cats_loading">Kargatzen…</string>
   <string name="detail_panel_cats_none">Bat ere ez da aukeratu</string>
@@ -261,6 +262,7 @@
   <string name="nearby_wikipedia">WIKIPEDIA</string>
   <string name="nearby_commons">COMMONS</string>
   <string name="about_rate_us">&lt;u&gt;Baloratu gaitzazu&lt;/u&gt;</string>
+  <string name="about_faq">&lt;u&gt;Maiz egindako galderak&lt;/u&gt;</string>
   <string name="welcome_skip_button">Tutoriala jauzi</string>
   <string name="no_internet">Interneta ez dago erabilgarri</string>
   <string name="internet_established">Interneta erabilgarri</string>
@@ -292,7 +294,7 @@
   <string name="error_loading_subcategories">Arazo bat egon da azpikategoriak kargatzerakoan.</string>
   <string name="successful_wikidata_edit">Irudia arazorik gabe gehitu da %1$s-(e)ra Wikidatan!</string>
   <string name="wikidata_edit_failure">Ezin izan da dagokion Wikidata entitatea eguneratu!</string>
-  <string name="menu_set_wallpaper" fuzzy="true">Horma papera ezarri</string>
+  <string name="menu_set_wallpaper">Horma-paper gisa ezarri</string>
   <string name="wallpaper_set_successfully">Horma papera ezarri da!</string>
   <string name="quiz">Galdetegia</string>
   <string name="quiz_question_string">Ondo dago argazki hau igotzeko?</string>
@@ -331,4 +333,7 @@
   <string name="images_uploaded_explanation">Commons-era edozein karga software erabilita igo dituzun irudien kopurua</string>
   <string name="images_reverted_explanation">Commons-era igo dituzun eta Wikimedia artikuluetan erabili diren irudien ehunekoa</string>
   <string name="images_used_explanation">Commons-era igo dituzun eta Wikimedia artikuluetan erabili diren irudien kopurua</string>
+  <string name="error_occurred">Errorea gertatu da!</string>
+  <string name="notifications_channel_name_all">Commons Jakinarazpena</string>
+  <string name="storage_permission">Biltegiratze baimena</string>
 </resources>

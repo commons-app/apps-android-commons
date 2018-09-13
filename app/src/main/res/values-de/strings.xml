@@ -254,8 +254,8 @@
   <string name="skip_login_title">Möchtest du wirklich die Anmeldung überspringen?</string>
   <string name="skip_login_message">Du wirst keine Bilder hochladen können.</string>
   <string name="login_alert_message">Bitte melde dich an, um diese Funktion zu nutzen.</string>
-  <string name="copy_wikicode" fuzzy="true">Wikicode in die Zwischenablage kopieren</string>
-  <string name="wikicode_copied" fuzzy="true">Wikicode in die Zwischenablage kopiert</string>
+  <string name="copy_wikicode">Den Wikitext in die Zwischenablage kopieren</string>
+  <string name="wikicode_copied">Der Wikitext wurde in die Zwischenablage kopiert</string>
   <string name="nearby_location_has_not_changed">Der Standort hat sich nicht geändert.</string>
   <string name="nearby_location_not_available">Der Standort ist nicht verfügbar.</string>
   <string name="location_permission_rationale_nearby">Berechtigung zur Anzeige einer Liste mit Orten in der Nähe erforderlich</string>

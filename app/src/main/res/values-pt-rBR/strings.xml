@@ -261,8 +261,8 @@
   <string name="skip_login_title">Você realmente quer pular a entrada?</string>
   <string name="skip_login_message">Você não poderá enviar fotos.</string>
   <string name="login_alert_message">Entre para usar esta funcionalidade</string>
-  <string name="copy_wikicode" fuzzy="true">Copie o Wikicode para a área de transferência</string>
-  <string name="wikicode_copied" fuzzy="true">Wikicode copiado para a área de transferência</string>
+  <string name="copy_wikicode">Copie o wikitexto para a área de transferência</string>
+  <string name="wikicode_copied">O wikitexto foi copiado para a área de transferência</string>
   <string name="nearby_location_has_not_changed">O local não mudou.</string>
   <string name="nearby_location_not_available">Localização não disponível.</string>
   <string name="location_permission_rationale_nearby">Permissão necessária para exibir uma lista de locais próximos</string>

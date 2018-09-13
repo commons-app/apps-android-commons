@@ -248,9 +248,15 @@
   <string name="title_activity_search">ڳوليو</string>
   <string name="search_recent_header">تازيون ڳولائون:</string>
   <string name="provider_searches">تازه ڳوليل مسودا</string>
-  <string name="menu_set_wallpaper" fuzzy="true">وال پيپر لڳايو</string>
+  <string name="menu_set_wallpaper">وال پيپر طور لڳايو</string>
   <string name="wallpaper_set_successfully">وال پيپر ڪاميابيءَ سان لڳي ويو!</string>
+  <string name="question">سوال</string>
+  <string name="result">نتيجو</string>
   <string name="user_not_logged_in">لاگ اِن سيشن ايڪسپائير ٿي ويو آهي، مهرباني ڪري وري لاڳ اِن ٿيو.</string>
+  <string name="continue_message">جاري رکو</string>
   <string name="share_app_title">ايپ ونڊيو</string>
   <string name="search_history_deleted">ڳولا سوانح ڊاٿي وئي</string>
+  <string name="statistics">انگ اکر</string>
+  <string name="error_occurred">خلل ٿيو!</string>
+  <string name="write_storage_permission_rationale_for_image_share">اسان کي اوهان جي ڊوائس جي اسٽورج جي اجازت گھرجي جيئن تصويرون چاڙهي سگھجن.</string>
 </resources>
