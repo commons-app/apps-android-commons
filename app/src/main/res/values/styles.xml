@@ -22,6 +22,8 @@
         <item name="textDisabled">@color/disabled_button_text_color_dark</item>
         <item name="textEnabled">@color/enabled_button_text_color_dark</item>
         <item name="mainCardBackground">@color/main_background_dark</item>
+        <item name="mainScreenNearbyPermissionbutton">@style/DarkFlatNearbyPermissionButton</item>
+
     </style>
 
     <style name="LightAppTheme" parent="Theme.AppCompat.Light.NoActionBar">
@@ -45,6 +47,8 @@
         <item name="textDisabled">@color/disabled_button_text_color_light</item>
         <item name="textEnabled">@color/enabled_button_text_color_light</item>
         <item name="mainCardBackground">@color/primaryDarkColor</item>
+        <item name="mainScreenNearbyPermissionbutton">@style/LightFlatNearbyPermissionButton</item>
+
     </style>
 
     <style name="DarkSpinnerTheme" parent="DarkAppTheme">
@@ -53,6 +57,14 @@
 
     <style name="LightSpinnerTheme" parent="LightAppTheme">
         <item name="colorControlNormal">#ffffff</item>
+    </style>
+
+    <style name="DarkFlatNearbyPermissionButton" parent="DarkAppTheme">
+        <item name="colorControlHighlight">@color/contributionListDarkBackground</item>
+    </style>
+
+    <style name="LightFlatNearbyPermissionButton" parent="LightAppTheme">
+        <item name="colorControlHighlight">@color/colorPrimary</item>
     </style>
 
     <style name="ProgressBar" parent="Widget.AppCompat.ProgressBar.Horizontal" />

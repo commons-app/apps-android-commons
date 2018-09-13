@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextSwitcher;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,8 +23,8 @@ import fr.free.nrw.commons.notification.Notification;
 public class NearbyNoificationCardView  extends CardView{
 
     private Context context;
-    private TextSwitcher notificationTextSwitcher;
-    private TextSwitcher notificationTimeSwitcher;
+    private TextView notificationTextSwitcher;
+    private TextView notificationTimeSwitcher;
     private ImageView notificationIcon;
 
     public NearbyNoificationCardView(@NonNull Context context) {
