@@ -5,11 +5,14 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.database.DataSetObserver;
 import android.graphics.PorterDuff;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.IBinder;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -40,6 +43,9 @@ import fr.free.nrw.commons.HandlerService;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
+import fr.free.nrw.commons.location.LatLng;
+import fr.free.nrw.commons.location.LocationServiceManager;
+import fr.free.nrw.commons.location.LocationUpdateListener;
 import fr.free.nrw.commons.media.MediaDetailPagerFragment;
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
 import fr.free.nrw.commons.nearby.NearbyNoificationCardView;
@@ -58,6 +64,7 @@ import timber.log.Timber;
 import static fr.free.nrw.commons.contributions.Contribution.STATE_FAILED;
 import static fr.free.nrw.commons.contributions.ContributionDao.Table.ALL_FIELDS;
 import static fr.free.nrw.commons.contributions.ContributionsContentProvider.BASE_URI;
+import static fr.free.nrw.commons.location.LocationServiceManager.LOCATION_REQUEST;
 import static fr.free.nrw.commons.settings.Prefs.UPLOADS_SHOWING;
 
 public class ContributionsFragment
@@ -66,7 +73,9 @@ public class ContributionsFragment
                     AdapterView.OnItemClickListener,
                     MediaDetailPagerFragment.MediaDetailProvider,
                     FragmentManager.OnBackStackChangedListener,
-                    ContributionsListFragment.SourceRefresher {
+                    ContributionsListFragment.SourceRefresher,
+                    LocationUpdateListener
+                    {
     @Inject
     @Named("default_preferences")
     SharedPreferences prefs;
@@ -76,6 +85,8 @@ public class ContributionsFragment
     MediaWikiApi mediaWikiApi;
     @Inject
     NotificationController notificationController;
+    @Inject
+    public LocationServiceManager locationManager;
 
     private ArrayList<DataSetObserver> observersWaitingForLoad = new ArrayList<>();
     private Cursor allContributions;
@@ -90,7 +101,6 @@ public class ContributionsFragment
     public static final String MEDIA_DETAIL_PAGER_FRAGMENT_TAG = "MediaDetailFragmentTag";
 
     public NearbyNoificationCardView nearbyNoificationCardView;
-
 
     /**
      * Since we will need to use parent activity on onAuthCookieAcquired, we have to wait
@@ -266,6 +276,28 @@ public class ContributionsFragment
             allContributions = contributionDao.loadAllContributions();
             getActivity().getSupportLoaderManager().initLoader(0, null, ContributionsFragment.this);
         }
+
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        switch (requestCode) {
+            case LOCATION_REQUEST: {
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    Timber.d("Location permission granted, refreshing view");
+                    // No need to display permission request button anymore
+                    nearbyNoificationCardView.displayPermissionRequestButton(false);
+                } else {
+                    // No need to display permission request button anymore
+                    nearbyNoificationCardView.displayPermissionRequestButton(false);
+                }
+            }
+            break;
+
+            default:
+                // This is needed to allow the request codes from the Fragments to be routed appropriately
+                super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        }
     }
 
     @Override
@@ -273,6 +305,7 @@ public class ContributionsFragment
         // show detail at a position
         showDetail(i);
     }
+
 
     /**
      * Replace whatever is in the current contributionsFragmentContainer view with
@@ -409,6 +442,20 @@ public class ContributionsFragment
     }
 
     @Override
+    public void onStart() {
+        super.onStart();
+        locationManager.addLocationListener(this);
+
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        locationManager.removeLocationListener(this);
+        locationManager.unregisterLocationManager();
+    }
+
+    @Override
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         boolean mediaDetailsVisible = mediaDetailPagerFragment != null && mediaDetailPagerFragment.isVisible();
@@ -425,6 +472,18 @@ public class ContributionsFragment
         }
 
         new UnreadNotificationsCheckAsync((ContributionsActivity) getActivity(), notificationController).execute();
+
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            if (locationManager.isLocationPermissionGranted()) {
+                // Display nearest location, first listen
+                nearbyNoificationCardView.displayPermissionRequestButton(false);
+
+            } else {
+                // Display tab to see button, since permission is not granted and you have to grant it first
+                nearbyNoificationCardView.displayPermissionRequestButton(true);
+            }
+        }
     }
 
     @Override
@@ -438,6 +497,16 @@ public class ContributionsFragment
                 getActivity().unbindService(uploadServiceConnection);
             }
         }
+    }
+
+    @Override
+    public void onLocationChangedSignificantly(LatLng latLng) {
+
+    }
+
+    @Override
+    public void onLocationChangedSlightly(LatLng latLng) {
+
     }
 }
 

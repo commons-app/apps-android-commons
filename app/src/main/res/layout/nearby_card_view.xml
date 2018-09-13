@@ -10,6 +10,7 @@
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:id="@+id/permission_request_button"
             android:text="Tab to see closest wikidata item needs photo"
             android:layout_centerInParent="true"
             android:layout_marginLeft="8dp"
@@ -24,7 +25,9 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:id="@+id/content_layout"
+            >
 
             <ImageView
                 android:id="@+id/nearby_icon"
