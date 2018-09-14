@@ -472,16 +472,22 @@ public class ContributionsFragment
         new UnreadNotificationsCheckAsync((ContributionsActivity) getActivity(), notificationController).execute();
 
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            if (((ContributionsActivity)getActivity()).locationManager.isLocationPermissionGranted()) {
-                // Display nearest location, first listen
-                nearbyNoificationCardView.displayPermissionRequestButton(false);
+        if (prefs.getBoolean("displayNearbyCardView", true)) {
+            nearbyNoificationCardView.setVisibility(View.VISIBLE);
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                if (((ContributionsActivity)getActivity()).locationManager.isLocationPermissionGranted()) {
+                    // Display nearest location, first listen
+                    nearbyNoificationCardView.displayPermissionRequestButton(false);
 
-            } else {
-                // Display tab to see button, since permission is not granted and you have to grant it first
-                nearbyNoificationCardView.displayPermissionRequestButton(true);
+                } else {
+                    // Display tab to see button, since permission is not granted and you have to grant it first
+                    nearbyNoificationCardView.displayPermissionRequestButton(true);
+                }
             }
+        } else {
+            nearbyNoificationCardView.setVisibility(View.GONE);
         }
+
     }
 
     @Override

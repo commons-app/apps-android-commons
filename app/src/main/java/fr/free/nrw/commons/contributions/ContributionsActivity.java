@@ -1,6 +1,7 @@
 package fr.free.nrw.commons.contributions;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
@@ -15,6 +16,7 @@ import android.view.MenuItem;
 import android.view.View;
 
 import javax.inject.Inject;
+import javax.inject.Named;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -40,6 +42,9 @@ public class ContributionsActivity extends AuthenticatedActivity implements Frag
     ViewPager viewPager;
     @Inject
     public LocationServiceManager locationManager;
+    @Inject
+    @Named("default_preferences")
+    public SharedPreferences prefs;
 
 
     public Intent uploadServiceIntent;

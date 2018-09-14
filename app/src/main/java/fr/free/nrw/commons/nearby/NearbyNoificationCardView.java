@@ -1,6 +1,8 @@
 package fr.free.nrw.commons.nearby;
 
 import android.content.Context;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.CoordinatorLayout;
@@ -18,6 +20,9 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.inject.Inject;
+import javax.inject.Named;
 
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.contributions.ContributionsActivity;
@@ -83,8 +88,8 @@ public class NearbyNoificationCardView  extends CardView{
                  * make view invisible at all.
                  */
                 NearbyNoificationCardView.this.setVisibility(GONE);
-
                 // Save shared preference for nearby card view accordingly
+                ((ContributionsActivity) context).prefs.edit().putBoolean("displayNearbyCardView", false).apply();
             }
 
             @Override
