@@ -3,6 +3,8 @@ package fr.free.nrw.commons.nearby;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.widget.CoordinatorLayout;
+import android.support.design.widget.SwipeDismissBehavior;
 import android.support.v7.widget.CardView;
 import android.util.AttributeSet;
 import android.util.Log;
@@ -65,9 +67,35 @@ public class NearbyNoificationCardView  extends CardView{
         notificationIcon = rootView.findViewById(R.id.nearby_icon);
 
         setActionListeners();
-
-        Log.d("deneme2",context.toString());
     }
+
+    @Override
+    protected void onAttachedToWindow() {
+        super.onAttachedToWindow();
+        // Add swipe and dismiss property
+        SwipeDismissBehavior swipeDismissBehavior = new SwipeDismissBehavior();
+        swipeDismissBehavior.setSwipeDirection(SwipeDismissBehavior.SWIPE_DIRECTION_ANY);
+        swipeDismissBehavior.setListener(new SwipeDismissBehavior.OnDismissListener() {
+            @Override
+            public void onDismiss(View view) {
+                /**
+                 * Only dismissing view results a space after dismissed view. Since, we need to
+                 * make view invisible at all.
+                 */
+                NearbyNoificationCardView.this.setVisibility(GONE);
+
+                // Save shared preference for nearby card view accordingly
+            }
+
+            @Override
+            public void onDragStateChanged(int state) {
+
+            }
+        });
+        CoordinatorLayout.LayoutParams layoutParams = (CoordinatorLayout.LayoutParams) this.getLayoutParams();
+        layoutParams.setBehavior(swipeDismissBehavior);
+    }
+
 
     private void setActionListeners() {
         permissionRequestButton.setOnClickListener(new OnClickListener() {

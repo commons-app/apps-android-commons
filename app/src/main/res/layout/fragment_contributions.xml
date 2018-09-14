@@ -5,7 +5,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
 
-    <RelativeLayout
+    <android.support.design.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
@@ -17,7 +17,7 @@
             >
 
         </fr.free.nrw.commons.nearby.NearbyNoificationCardView>
-    </RelativeLayout>
+    </android.support.design.widget.CoordinatorLayout>
 
 
     <FrameLayout
