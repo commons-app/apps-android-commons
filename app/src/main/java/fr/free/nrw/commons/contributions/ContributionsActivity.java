@@ -22,6 +22,7 @@ import fr.free.nrw.commons.BuildConfig;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.auth.AuthenticatedActivity;
 import fr.free.nrw.commons.auth.SessionManager;
+import fr.free.nrw.commons.location.LocationServiceManager;
 import fr.free.nrw.commons.nearby.NearbyFragment;
 import fr.free.nrw.commons.notification.NotificationActivity;
 import fr.free.nrw.commons.theme.NavigationBaseActivity;
@@ -37,6 +38,8 @@ public class ContributionsActivity extends AuthenticatedActivity implements Frag
     TabLayout tabLayout;
     @BindView(R.id.pager)
     ViewPager viewPager;
+    @Inject
+    public LocationServiceManager locationManager;
 
 
     public Intent uploadServiceIntent;

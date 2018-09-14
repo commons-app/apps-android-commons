@@ -74,8 +74,7 @@ public class NearbyNoificationCardView  extends CardView{
             @Override
             public void onClick(View view) {
                 if (!((ContributionsActivity)context).isFinishing()) {
-                    // TODO: why location manager is null
-                    ((ContributionsActivity) context).contributionsFragment.locationManager.requestPermissions((ContributionsActivity) context);
+                    ((ContributionsActivity) context).locationManager.requestPermissions((ContributionsActivity) context);
                 }
             }
         });
@@ -83,9 +82,11 @@ public class NearbyNoificationCardView  extends CardView{
 
     public void displayPermissionRequestButton(boolean isPermissionRequestButtonNeeded) {
         if (isPermissionRequestButtonNeeded) {
+            Log.d("deneme","called1");
             contentLayout.setVisibility(GONE);
             permissionRequestButton.setVisibility(VISIBLE);
         } else {
+            Log.d("deneme","called2");
             contentLayout.setVisibility(VISIBLE);
             permissionRequestButton.setVisibility(GONE);
         }

@@ -85,8 +85,6 @@ public class ContributionsFragment
     MediaWikiApi mediaWikiApi;
     @Inject
     NotificationController notificationController;
-    @Inject
-    public LocationServiceManager locationManager;
 
     private ArrayList<DataSetObserver> observersWaitingForLoad = new ArrayList<>();
     private Cursor allContributions;
@@ -288,8 +286,8 @@ public class ContributionsFragment
                     // No need to display permission request button anymore
                     nearbyNoificationCardView.displayPermissionRequestButton(false);
                 } else {
-                    // No need to display permission request button anymore
-                    nearbyNoificationCardView.displayPermissionRequestButton(false);
+                    // Still ask for permission
+                    nearbyNoificationCardView.displayPermissionRequestButton(true);
                 }
             }
             break;
@@ -444,15 +442,15 @@ public class ContributionsFragment
     @Override
     public void onStart() {
         super.onStart();
-        locationManager.addLocationListener(this);
+        ((ContributionsActivity)getActivity()).locationManager.addLocationListener(this);
 
     }
 
     @Override
     public void onPause() {
         super.onPause();
-        locationManager.removeLocationListener(this);
-        locationManager.unregisterLocationManager();
+        ((ContributionsActivity)getActivity()).locationManager.removeLocationListener(this);
+        ((ContributionsActivity)getActivity()).locationManager.unregisterLocationManager();
     }
 
     @Override
@@ -475,7 +473,7 @@ public class ContributionsFragment
 
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            if (locationManager.isLocationPermissionGranted()) {
+            if (((ContributionsActivity)getActivity()).locationManager.isLocationPermissionGranted()) {
                 // Display nearest location, first listen
                 nearbyNoificationCardView.displayPermissionRequestButton(false);
 
