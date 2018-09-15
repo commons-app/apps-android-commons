@@ -167,6 +167,7 @@
   <string name="welcome_copyright_subtext">Evita materiales con derechos de autor\nque hayas encontrado en Internet, así como\nimágenes de carteles, portadas de libro, etc.</string>
   <string name="welcome_final_text">¿Crees que ya lo tienes?</string>
   <string name="welcome_final_button_text">¡Sí!</string>
+  <string name="welcome_help_button_text">&lt;u&gt;Mas información&lt;/u&gt;</string>
   <string name="detail_panel_cats_label">Categorías</string>
   <string name="detail_panel_cats_loading">Cargando…</string>
   <string name="detail_panel_cats_none">No hay nada seleccionado</string>
@@ -254,12 +255,15 @@
   <string name="null_url">Error: no se encontró el URL</string>
   <string name="nominate_deletion">Nominar para borrado</string>
   <string name="nominated_for_deletion">Se ha nominado esta imagen para su borrado.</string>
+  <string name="nominated_see_more">&lt;u&gt;Ve página web para detalles&lt;/u&gt;</string>
   <string name="view_browser">Ver en navegador</string>
   <string name="skip_login">Omitir</string>
   <string name="navigation_item_login">Acceder</string>
   <string name="skip_login_title">¿Realmente querés omitir el inicio de sesión?</string>
   <string name="skip_login_message">No serás capaz de subir imágenes.</string>
   <string name="login_alert_message">Por favor inicia sesion para usar esta característica</string>
+  <string name="copy_wikicode" fuzzy="true">Copia el Wikicódigo al portapapeles</string>
+  <string name="wikicode_copied" fuzzy="true">Wikicódigo copiado al portapapeles</string>
   <string name="nearby_location_has_not_changed">La ubicación no ha cambiado.</string>
   <string name="nearby_location_not_available">La ubicación no está disponible.</string>
   <string name="location_permission_rationale_nearby">Se necesita permiso para mostrar una lista de lugares cercanos</string>
@@ -269,6 +273,7 @@
   <string name="notifications_talk_page_message">%1$s dejó un mensaje en tu página de discusión</string>
   <string name="notifications_thank_you_edit">Gracias por realizar una edición</string>
   <string name="notifications_mention">%1$s te ha mencionado en %2$s.</string>
+  <string name="toggle_view_button">Cambiar vista</string>
   <string name="nearby_directions">CÓMO LLEGAR</string>
   <string name="nearby_wikidata">WIKIDATA</string>
   <string name="nearby_wikipedia">WIKIPEDIA</string>
@@ -308,11 +313,26 @@
   <string name="wikidata_edit_failure">¡Fallo la actualización de la entrada de Wikidata correspondiente!</string>
   <string name="menu_set_wallpaper">Poner como papel tapiz</string>
   <string name="wallpaper_set_successfully">¡El papel tapiz se aplicó correctamente!</string>
+  <string name="quiz">Concurso</string>
+  <string name="quiz_question_string">¿esta bien la imagen como para ser subida?</string>
   <string name="question">Pregunta</string>
   <string name="result">Resultado</string>
+  <string name="quiz_back_button">Si continuas subiendo imágenes que requieran ser eliminadas, tu cuenta probablemente sea bloqueada. ¿Estas segura que querés terminar la encuesta?</string>
+  <string name="quiz_alert_message">Mas del %1$s  de las imágenes que subiste han sido eliminadas. Si continuas subiendo imágenes que deban ser borradas, probablemente bloqueen tu cuenta.\n\n¿Te gustaría ver nuevamente el tutorial y hacer una pequeña guía que te ayudara a entender que tipo de imágenes se deben o no subir?</string>
+  <string name="selfie_answer">Los autorretratos no tienen suficiente valor enciclopédico. Por favor no subas imágenes de vos misma salvo que tengas un articulo de Wikipedia sobre vos.</string>
+  <string name="taj_mahal_answer">En la mayoría de los países las fotografiás de monumentos o paisajes pueden ser cargadas. Tené en cuenta que las instalaciones temporales de arte en exteriores a menudo tienen derechos de autor y subirlas no es correcto.</string>
+  <string name="screenshot_answer">Las capturas de pantalla de sitios web son consideradas trabajos derivados y están sujetos a derechos de autor. Sin ese permiso, cualquier obra que crees basado en su trabajo esta considerado legalmente como una copia sin licencia de la cual es dueño el autor original.</string>
+  <string name="blurry_image_answer">Uno de los objetivos de Commons es reunir imágenes de calidad. Para ello, las imágenes borrosas no deben ser subidas. Siempre intentá sacar fotos con buena iluminación.</string>
+  <string name="construction_event_answer">Fotografiás que muestren tecnología o cultura son bienvenidas en Commons</string>
+  <string name="warning_for_image_reverts">AVISO: Mas del %1$s  de las imágenes que subiste han sido eliminadas. Si continuas subiendo imágenes que deban ser borradas, probablemente bloqueen tu cuenta.</string>
+  <string name="congratulatory_message_quiz">Tenes el %1$s de respuestas correctas. ¡Felicitaciones!</string>
+  <string name="warning_for_no_answer">Elegí una de las dos opciones para responder la pregunta</string>
+  <string name="user_not_logged_in">La sesión expiró, por favor volvé a iniciar sesión.</string>
+  <string name="quiz_result_share_message">¡Comparte la encuesta con tus amigas!</string>
   <string name="continue_message">Continuar</string>
   <string name="correct">Respuesta correcta</string>
   <string name="wrong">Respuesta incorrecta</string>
+  <string name="quiz_screenshot_question">¿Esta captura de pantalla esta bien para ser subida?</string>
   <string name="share_app_title">Compartir aplicación</string>
   <string name="share_coordinates_not_present">No se especificaron las coordenadas al seleccionar la imagen</string>
   <string name="error_fetching_nearby_places">Error al recuperar los lugares cercanos.</string>
@@ -333,4 +353,8 @@
   <string name="images_uploaded_explanation">El número de imágenes que has subido a Commons, por medio de cualquier software de carga</string>
   <string name="images_reverted_explanation">El porcentaje de imágenes que has subido a Commons que no fueron eliminadas</string>
   <string name="images_used_explanation">El número de imágenes que has subido a Commons que fueron utilizadas en artículos de Wikimedia</string>
+  <string name="error_occurred">¡Ocurrió un error!</string>
+  <string name="notifications_channel_name_all">Notificación de Commons</string>
+  <string name="storage_permission">Permiso de almacenamiento</string>
+  <string name="write_storage_permission_rationale_for_image_share">Necesitamos tu permiso para acceder al almacenamiento externo de tu dispositivo para poder subir imágenes.</string>
 </resources>

@@ -97,18 +97,24 @@ public class CommonsApplication extends Application {
                 .getInstance(this)
                 .getCommonsApplicationComponent()
                 .inject(this);
+
+        Timber.plant(new Timber.DebugTree());
+
 //        Set DownsampleEnabled to True to downsample the image in case it's heavy
         ImagePipelineConfig config = ImagePipelineConfig.newBuilder(this)
                 .setDownsampleEnabled(true)
                 .build();
-        Fresco.initialize(this,config);
+        try {
+            Fresco.initialize(this, config);
+        } catch (Exception e) {
+            Timber.e(e);
+            // TODO: Remove when we're able to initialize Fresco in test builds.
+        }
         if (setupLeakCanary() == RefWatcher.DISABLED) {
             return;
         }
         // Empty temp directory in case some temp files are created and never removed.
         ContributionUtils.emptyTemporaryDirectory();
-
-        Timber.plant(new Timber.DebugTree());
 
         if (!BuildConfig.DEBUG) {
             ACRA.init(this);

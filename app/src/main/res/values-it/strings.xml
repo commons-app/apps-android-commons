@@ -210,6 +210,8 @@
   <string name="login_to_your_account">Accedi alla tua utenza</string>
   <string name="null_url">Errore! URL non trovato</string>
   <string name="nominated_for_deletion">Questa immagine è stata proposta per la cancellazione.</string>
+  <string name="copy_wikicode">Copia il wikitesto negli appunti</string>
+  <string name="wikicode_copied">Il wikitesto è stato copiato negli appunti</string>
   <string name="nearby_location_has_not_changed">La posizione non è cambiata.</string>
   <string name="nearby_location_not_available">Posizione non disponibile.</string>
   <string name="get_directions">OTTIENI DIREZIONI</string>

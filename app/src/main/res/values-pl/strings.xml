@@ -277,5 +277,6 @@
   <string name="images_uploaded_explanation">Liczba zdjęć przesłanych do Commons za pomocą dowolnego oprogramowania</string>
   <string name="images_reverted_explanation">Procent zdjęć przesłanych do Commons, które nie zostały usunięte</string>
   <string name="images_used_explanation">Liczba zdjęć przesłanych do Commons, które zostały wykorzystane w artykułach Wikimedia</string>
+  <string name="error_occurred">Wystąpił błąd!</string>
   <string name="notifications_channel_name_all">Powiadomienia Commons</string>
 </resources>

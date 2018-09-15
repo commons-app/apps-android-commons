@@ -247,8 +247,8 @@
   <string name="skip_login_title">¿Realmente quiés saltar l\'aniciu de sesión?</string>
   <string name="skip_login_message">Nun vas poder xubir imaxes.</string>
   <string name="login_alert_message">Anicia sesión pa usar esta función</string>
-  <string name="copy_wikicode">Copiar el códigu wiki al cartafueyu</string>
-  <string name="wikicode_copied">Copióse\'l códigu wiki al cartafueyu</string>
+  <string name="copy_wikicode" fuzzy="true">Copiar el códigu wiki al cartafueyu</string>
+  <string name="wikicode_copied" fuzzy="true">Copióse\'l códigu wiki al cartafueyu</string>
   <string name="nearby_location_has_not_changed">L\'allugamientu nun camudó.</string>
   <string name="nearby_location_not_available">L\'allugamientu nun ta disponible.</string>
   <string name="location_permission_rationale_nearby">Ríquese permisu p\'amosar una llista de llugares cercanos</string>

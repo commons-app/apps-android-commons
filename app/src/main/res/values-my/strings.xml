@@ -67,6 +67,7 @@
     <item quantity="one">%1$d ခု တင်ထားသည်</item>
     <item quantity="other">%1$d ခု တင်ထားသည်</item>
   </plurals>
+  <string name="categories_not_found">%1$ နှင့်ကိုက်ညီသော ကဏ္ဍများ မတွေ့ရှိပါ</string>
   <string name="categories_activity_title">ကဏ္ဍများ</string>
   <string name="title_activity_settings">အပြင်အဆင်များ</string>
   <string name="title_activity_signup">မှတ်ပုံတင်ရန်</string>
@@ -143,8 +144,10 @@
   <string name="media_detail_uploaded_date">တင်ခဲ့သည် ရက်စွဲ</string>
   <string name="media_detail_license">လိုင်စင်</string>
   <string name="media_detail_coordinates">ကိုဩဒိနိတ်</string>
+  <string name="number_of_uploads">မိမိ၏ လတ်တလော အပ်ပလုတ်ကန့်သတ်ချက်</string>
   <string name="maximum_limit">အများဆုံး ကန့်သတ်ချက်</string>
   <string name="maximum_limit_alert">၅၀၀ ထက်ပို၍ မပြသနိုင်ပါ</string>
+  <string name="set_limit">လတ်တလော အပ်ပလုတ်ကန့်သတ်ချက် သတ်မှတ်ရန်</string>
   <string name="logout_verification">အမှန်တကယ် ထွက်သွားလိုပါသလား</string>
   <string name="commons_logo">ကွန်မွန်းစ် လိုဂို</string>
   <string name="commons_website">ကွန်မွန်းစ် ဝဘ်ဆိုဒ်</string>
@@ -152,6 +155,7 @@
   <string name="background_image">နောက်ခံ ဓါတ်ပုံ</string>
   <string name="no_image_found">ပုံ မတွေ့ပါ</string>
   <string name="no_subcategory_found">ကဏ္ဍခွဲများ မတွေ့ရှိပါ</string>
+  <string name="upload_image">ရုပ်ပုံ အက်ပလုတ်တင်ရန်</string>
   <string name="welcome_image_welcome_wikipedia">ဝီကီပီးဒီးယားမှ ကြိုဆိုပါသည်။</string>
   <string name="welcome_image_welcome_copyright">မူပိုင်ခွင့်မှ ကြိုဆိုပါသည်</string>
   <string name="cancel">မလုပ်တော့ပါ</string>
@@ -166,6 +170,7 @@
   <string name="navigation_item_logout">အကောင့်မှပြန်ထွက်ခြင်း</string>
   <string name="navigation_item_info">ကစားနည်းသင်ကြားရန်</string>
   <string name="navigation_item_notification">အသိပေးချက်များ</string>
+  <string name="navigation_item_featured_images">အထူး</string>
   <string name="nearby_needs_permissions">တည်နေရာ ခွင့်ပြုချက်မရှိဘဲ အနီးအနားနေရာများကို မပြနိုင်ပါ</string>
   <string name="no_description_found">ဖော်ပြချက် မတွေ့ပါ</string>
   <string name="nearby_info_menu_commons_article">ကွန်မွန်းစ် ဖိုင်စာမျက်နှာ</string>
@@ -204,11 +209,13 @@
   <string name="retry">ပြန်လုပ်</string>
   <string name="showcase_view_got_it_button">သဘောပေါက်ပြီ</string>
   <string name="no_images_found">ရုပ်ပုံများ မတွေ့ပါ</string>
+  <string name="error_loading_images">ရုပ်ပုံများကို ဝန်ဆွဲတင်နေစဉ် အမှားဖြစ်ပွားခဲ့ပါသည်။</string>
   <string name="block_notification">သင့်အား ကွန်မွန်းစ်တွင် တည်းဖြတ်ခြင်းကို ပိတ်ပင်လိုက်သည်</string>
   <string name="appwidget_img">ယနေ့အတွက် အထူးဓာတ်ပုံ</string>
   <string name="app_widget_heading">ယနေ့အတွက် အထူးဓာတ်ပုံ</string>
   <string name="menu_search_button">ရှာဖွေရန်</string>
   <string name="search_commons">ကွန်မွန်းစ်တွင် ရှာဖွေရန်</string>
+  <string name="images_not_found">%1$ နှင့်ကိုက်ညီသော ရုပ်ပုံများ မတွေ့ရှိပါ</string>
   <string name="title_activity_search">ရှာဖွေရန်</string>
   <string name="search_recent_header">လတ်တလော ရှာဖွေမှုများ :</string>
   <string name="error_loading_categories">ကဏ္ဍများကို ဝန်ဆွဲတင်နေစဉ် အမှားဖြစ်ပွားခဲ့ပါသည်။</string>
@@ -235,5 +242,7 @@
   <string name="achievements_share_message">သင်၏အောင်မြင်မှုများကို မိတ်ဆွေများနှင့် မျှဝေလိုက်ပါ</string>
   <string name="achievements_revert_limit_message">အနည်းဆုံး လိုအပ်ချက်:</string>
   <string name="images_reverted_explanation">ဖျက်ဆီးခြင်းမခံရသည့် ကွန်မွန်းစ်သို့ သင် အက်ပလုတ်တင်ထားသော ရုပ်ပုံများ၏ ရာခိုင်နှုန်း</string>
+  <string name="error_occurred">အမှား ဖြစ်ပွားခဲ့သည်</string>
   <string name="notifications_channel_name_all">ကွန်မွန်းစ် အသိပေးချက်</string>
+  <string name="storage_permission">သိုလှောင်ခန်း ခွင်ပြုချက်</string>
 </resources>

@@ -1,6 +1,5 @@
 package fr.free.nrw.commons.category;
 
-import org.jsoup.Jsoup;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
@@ -15,6 +14,7 @@ import java.util.List;
 import javax.annotation.Nullable;
 
 import fr.free.nrw.commons.Media;
+import fr.free.nrw.commons.utils.StringUtils;
 import timber.log.Timber;
 
 public class CategoryImageUtils {
@@ -57,7 +57,7 @@ public class CategoryImageUtils {
      * @param node
      * @return
      */
-    private static Media getMediaFromPage(Node node) {
+    public static Media getMediaFromPage(Node node) {
         Media media = new Media(null,
                 getImageUrl(node),
                 getFileName(node),
@@ -103,17 +103,12 @@ public class CategoryImageUtils {
 
     /**
      * Returns the parsed value of artist from the response
-     * The artist information is returned as a HTML string from the API. Jsoup library parses the HTML string
-     * to extract just the text value
+     * The artist information is returned as a HTML string from the API. Using HTML parser to parse the HTML
      * @param document
      * @return
      */
     private static String getCreator(Node document) {
-        String artist = getMetaDataValue(document, "Artist");
-        if (artist != null) {
-            return Jsoup.parse(artist).text();
-        }
-        return null;
+        return StringUtils.getParsedStringFromHtml(getMetaDataValue(document, "Artist"));
     }
 
     /**

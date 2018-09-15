@@ -39,7 +39,7 @@
   <string name="upload_progress_notification_title_in_progress">Cargando \"%1$s\"</string>
   <string name="upload_progress_notification_title_finishing">Rematando a carga de \"%1$s\"</string>
   <string name="upload_failed_notification_title">Erro ao cargar \"%1$s\"</string>
-  <string name="upload_failed_notification_subtitle">Prema para mostralo</string>
+  <string name="upload_failed_notification_subtitle">Prema para amosalo</string>
   <plurals name="uploads_pending_notification_indicator">
     <item quantity="one">Cargando %1$d ficheiro</item>
     <item quantity="other">Cargando %1$d ficheiros</item>
@@ -54,7 +54,7 @@
   <string name="menu_nearby">Preto</string>
   <string name="provider_contributions">As miñas subidas</string>
   <string name="menu_share">Compartir</string>
-  <string name="menu_open_in_browser">Mostrar no navegador</string>
+  <string name="menu_open_in_browser">Amosar no navegador</string>
   <string name="share_title_hint">Título</string>
   <string name="add_title_toast">Por favor, proporcione un título para este ficheiro</string>
   <string name="share_description_hint">Descrición</string>
@@ -249,6 +249,7 @@
   <string name="null_url">Errorǃ Nos se atopou a URL</string>
   <string name="nominate_deletion">Nomear para borrado</string>
   <string name="nominated_for_deletion">Esta imaxe foi nomeada para borrar.</string>
+  <string name="nominated_see_more">&lt;u&gt;Consulte a páxina web para ter máis para detalles&lt;/u&gt;</string>
   <string name="view_browser">Ver en navegador</string>
   <string name="skip_login">Omitir</string>
   <string name="navigation_item_login">Acceder ao sistema</string>
@@ -307,8 +308,13 @@
   <string name="menu_set_wallpaper">Poñer como imaxe de fondo</string>
   <string name="wallpaper_set_successfully">A imaxe de fondo configurouse correctamenteǃ</string>
   <string name="quiz">Cuestionario</string>
+  <string name="quiz_question_string">Esta foto pode ser subida?</string>
   <string name="question">Pregunta</string>
   <string name="result">Resultado</string>
+  <string name="quiz_back_button">Se continúa cargando imaxes que requiran ser eliminadas, a súa conta probablemente sexa bloqueada. Está seguro de que quere rematar o cuestionario?</string>
+  <string name="quiz_alert_message">Máis do %1$s das imaxes que cargou foron eliminadas. Se continúa cargando imaxes que requiran ser borradas, probablemente a súa conta sexa bloqueada.\n\nGustaríalle ver de novo o titorial e facer un pequeno cuestionario que axuda a entender que tipo de imaxes se deben ou non se deben cargar?</string>
+  <string name="selfie_answer">Os autorretratos non teñen valor enciclopédico abondo. Por favor no cargue imaxes de vostede mesmo salvo que haxa un artigo de Wikipedia sobre vostede.</string>
+  <string name="taj_mahal_answer">As fotografías de monumentos e paisaxes de exterior poden ser cargadas na maioría dos países. Teña en conta, por favor, que as instalacións de arte temporais en exteriores normalmente teñen dereitos de autor protexidos e non poden ser cargadas.</string>
   <string name="warning_for_image_reverts">Aviso: Máis do 1%  das imaxes cargadas por vostede foron borradas. Se segue a cargar imaxes que precisan borrado o máis probable é que a súa conta sexa anulada.</string>
   <string name="congratulatory_message_quiz">Acadou un %1$s de respostas correctas. Parabéns!</string>
   <string name="warning_for_no_answer">Escolla unha das dúas opcións para contestar a pregunta</string>
