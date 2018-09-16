@@ -113,6 +113,31 @@ public class Utils {
     }
 
     /**
+     * Generates license url with given ID
+     * @param license License ID
+     * @return Url of license
+     */
+
+
+    @NonNull
+    public static String licenseUrlFor(String license) {
+        switch (license) {
+            case Prefs.Licenses.CC_BY_3:
+                return "https://creativecommons.org/licenses/by/3.0/";
+            case Prefs.Licenses.CC_BY_4:
+                return "https://creativecommons.org/licenses/by/4.0/";
+            case Prefs.Licenses.CC_BY_SA_3:
+                return "https://creativecommons.org/licenses/by-sa/3.0/";
+            case Prefs.Licenses.CC_BY_SA_4:
+                return "https://creativecommons.org/licenses/by-sa/4.0/";
+            case Prefs.Licenses.CC0:
+                return "https://creativecommons.org/publicdomain/zero/1.0/";
+            default:
+                throw new RuntimeException("Unrecognized license value: " + license);
+        }
+    }
+
+    /**
      * Adds extension to filename. Converts to .jpg if system provides .jpeg, adds .jpg if no extension detected
      * @param title File name
      * @param extension Correct extension

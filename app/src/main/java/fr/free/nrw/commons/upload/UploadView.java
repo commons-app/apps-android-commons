@@ -54,6 +54,8 @@ public interface UploadView {
 
     void setBottomCardVisibility(@UploadPage int page);
 
+    void updateRightCardContent(boolean gpsPresent);
+
     void updateBottomCardContent(int currentStep, int stepCount, UploadModel.UploadItem uploadItem);
 
     void updateLicenses(List<String> licenses, String selectedLicense);
