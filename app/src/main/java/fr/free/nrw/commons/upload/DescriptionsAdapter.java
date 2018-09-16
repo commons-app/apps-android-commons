@@ -131,7 +131,7 @@ class DescriptionsAdapter extends RecyclerView.Adapter<DescriptionsAdapter.ViewH
             super(itemView);
             ButterKnife.bind(this, itemView);
             this.view = itemView;
-            Timber.i("descItemEditText:" + descItemEditText + " and descItemEditText:" + descItemEditText);
+            Timber.i("descItemEditText:" + descItemEditText);
         }
 
         public void init(int position) {
@@ -142,7 +142,11 @@ class DescriptionsAdapter extends RecyclerView.Adapter<DescriptionsAdapter.ViewH
                 } else {
                     descItemEditText.setText("");
                 }
-                descItemEditText.addTextChangedListener(new AbstractTextWatcher(titleText -> {
+                Drawable drawableRight = context.getResources()
+                        .getDrawable(R.drawable.mapbox_info_icon_default);
+                descItemEditText.setCompoundDrawablesWithIntrinsicBounds(null, null, drawableRight, null);
+
+                descItemEditText.addTextChangedListener(new AbstractTextWatcher(titleText ->{
                     title.setTitleText(titleText);
                     titleChangedSubject.onNext(titleText);
                 }));
@@ -161,9 +165,9 @@ class DescriptionsAdapter extends RecyclerView.Adapter<DescriptionsAdapter.ViewH
                 } else {
                     descItemEditText.setText("");
                 }
-                Drawable drawableRight = context.getResources()
-                        .getDrawable(R.drawable.mapbox_info_icon_default);
                 if (position == 1) {
+                    Drawable drawableRight = context.getResources()
+                            .getDrawable(R.drawable.mapbox_info_icon_default);
                     descItemEditText.setCompoundDrawablesWithIntrinsicBounds(null, null, drawableRight, null);
                 } else {
                     descItemEditText.setCompoundDrawablesWithIntrinsicBounds(null, null, null, null);
@@ -222,14 +226,31 @@ class DescriptionsAdapter extends RecyclerView.Adapter<DescriptionsAdapter.ViewH
         @Optional
         @OnTouch(R.id.description_item_edit_text)
         boolean descriptionInfo(View view, MotionEvent motionEvent) {
-            if (getAdapterPosition() == 1) {
-                //Description info is visible only for the first item
+            //Title info is visible only for the title
+            if (getAdapterPosition() == 0) {
+                if (ViewCompat.getLayoutDirection(view) == ViewCompat.LAYOUT_DIRECTION_LTR) {
+                    final int value = view.getRight() - descItemEditText
+                            .getCompoundDrawables()[2]
+                            .getBounds().width();
+                    if (motionEvent.getAction() == ACTION_UP && motionEvent.getRawX() >= value) {
+                        callback.showAlert(R.string.media_detail_title, R.string.title_info);
+                        return true;
+                    }
+                } else {
+                    final int value = descItemEditText.getLeft() + descItemEditText
+                            .getCompoundDrawables()[0]
+                            .getBounds().width();
+                    if (motionEvent.getAction() == ACTION_UP && motionEvent.getRawX() <= value) {
+                        callback.showAlert(R.string.media_detail_title, R.string.title_info);
+                        return true;
+                    }
+                }
+            //Description info is visible only for the first description
+            }else if (getAdapterPosition() == 1) {
                 final int value;
                 if (ViewCompat.getLayoutDirection(view) == ViewCompat.LAYOUT_DIRECTION_LTR) {
-                    value = view.getRight() - descItemEditText
-                            .getCompoundDrawables()[2]
-                            .getBounds().width() - etDescriptionText.getPaddingRight();
-                    if (motionEvent.getAction() == ACTION_UP && motionEvent.getX() >= value) {
+                    value = view.getRight() - descItemEditText.getCompoundDrawables()[2].getBounds().width();
+                    if (motionEvent.getAction() == ACTION_UP && motionEvent.getRawX() >= value) {
                         callback.showAlert(R.string.media_detail_description,
                                 R.string.description_info);
                         return true;
