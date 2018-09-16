@@ -113,15 +113,6 @@ android {
         // use main assets and resources in test
         test.assets.srcDirs += 'src/main/assets'
         test.resources.srcDirs += 'src/main/resoures'
-
-        main {
-            java {
-                exclude 'fr/free/nrw/commons/upload/ShareActivity.java'
-                exclude 'fr/free/nrw/commons/upload/MultipleShareActivity.java'
-                exclude 'fr/free/nrw/commons/upload/SingleUploadFragment.java'
-
-            }
-        }
     }
 
     buildTypes {
