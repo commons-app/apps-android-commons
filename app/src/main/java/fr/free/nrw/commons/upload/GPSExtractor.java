@@ -60,6 +60,15 @@ public class GPSExtractor {
         }
     }
 
+    /**
+     * Construct from the file path of the image.
+     * @param exif exif interface of the image
+     *
+     */
+    public GPSExtractor(@NonNull ExifInterface exif){
+        processCoords(exif);
+    }
+
     private void processCoords(ExifInterface exif){
         //If image has no EXIF data and user has enabled GPS setting, get user's location
         //Always return null as a temporary fix for #1599
