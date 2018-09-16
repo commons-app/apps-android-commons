@@ -43,7 +43,8 @@
             android:entries="@array/pref_locationAccuracy_entries"
             android:entryValues="@array/pref_locationAccuracy_values"
             android:key="locationAccuracy"
-            android:title="@string/location_accuracy"/>
+            android:title="@string/location_accuracy"
+            android:defaultValue="@string/location_accuracy_pref_do_nothing"/>
 
         <!-- The key 'allowGps' was used before and has since been removed based on the discussion at #1599.
           Do not reuse this key unless you revive the same feature with the changes mentioned at #1599.-->
