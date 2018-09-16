@@ -16,7 +16,9 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.Html;
 import android.text.TextUtils;
+import android.text.method.LinkMovementMethod;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
@@ -242,6 +244,17 @@ public class UploadActivity extends AuthenticatedActivity implements UploadView 
     }
 
     @Override
+    public void updateRightCardContent(boolean gpsPresent) {
+        if(gpsPresent){
+            rightCardMapButton.setVisibility(View.VISIBLE);
+        }else{
+            rightCardMapButton.setVisibility(View.GONE);
+        }
+        //The card should be disabled if it has no buttons.
+        setRightCardVisibility(gpsPresent);
+    }
+
+    @Override
     public void updateBottomCardContent(int currentStep, int stepCount, UploadModel.UploadItem uploadItem) {
         String cardTitle = getResources().getString(R.string.step_count, currentStep, stepCount);
         bottomCardTitle.setText(cardTitle);
@@ -271,9 +284,13 @@ public class UploadActivity extends AuthenticatedActivity implements UploadView 
     }
 
     @Override
-    @SuppressLint("StringFormatInvalid")
     public void updateLicenseSummary(String selectedLicense) {
-        licenseSummary.setText(getString(R.string.share_license_summary, getString(Utils.licenseNameFor(selectedLicense))));
+        String licenseHyperLink = "<a href='" + Utils.licenseUrlFor(selectedLicense)+"'>" +
+                getString(Utils.licenseNameFor(selectedLicense)) + "</a><br>";
+        licenseSummary.setMovementMethod(LinkMovementMethod.getInstance());
+        licenseSummary.setText(
+                Html.fromHtml(
+                        getString(R.string.share_license_summary, licenseHyperLink)));
     }
 
     @Override
@@ -337,7 +354,7 @@ public class UploadActivity extends AuthenticatedActivity implements UploadView 
 
     @Override
     public void setBottomCardState(boolean state) {
-        updateCardState(state, bottomCardExpandButton, rvDescriptions, previous, next);
+        updateCardState(state, bottomCardExpandButton, rvDescriptions, previous, next, bottomCardAddDescription);
     }
 
     @Override
@@ -432,8 +449,7 @@ public class UploadActivity extends AuthenticatedActivity implements UploadView 
 
     @Override
     protected void onAuthFailure() {
-        Toast failureToast = Toast.makeText(this, R.string.authentication_failed, Toast.LENGTH_LONG);
-        failureToast.show();
+        Toast.makeText(this, R.string.authentication_failed, Toast.LENGTH_LONG).show();
         finish();
     }
 
@@ -491,6 +507,7 @@ public class UploadActivity extends AuthenticatedActivity implements UploadView 
         // Finally, the previous / submit buttons on the final page of the wizard
         licensePrevious.setOnClickListener(v -> presenter.handlePrevious());
         submit.setOnClickListener(v -> {
+            Toast.makeText(this, R.string.uploading_started, Toast.LENGTH_LONG).show();
             presenter.handleSubmit(categoriesModel);
             finish();
         });
@@ -636,6 +653,4 @@ public class UploadActivity extends AuthenticatedActivity implements UploadView 
                 .create()
                 .show();
     }
-
-
 }

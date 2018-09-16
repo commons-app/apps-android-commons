@@ -287,7 +287,11 @@ public class UploadPresenter {
         view.setBackground(uploadModel.getCurrentItem().mediaUri);
 
         view.updateBottomCardContent(uploadModel.getCurrentStep(), uploadModel.getStepCount(), uploadModel.getCurrentItem());
+
         view.updateTopCardContent();
+
+        GPSExtractor gpsObj = uploadModel.getCurrentItem().gpsCoords;
+        view.updateRightCardContent(gpsObj != null && gpsObj.imageCoordsExists);
 
         showCorrectCards(uploadModel.getCurrentStep(), uploadModel.getCount());
     }
@@ -305,7 +309,6 @@ public class UploadPresenter {
         } else if (currentStep <= uploadCount) {
             page = UploadView.TITLE_CARD;
             view.setTopCardVisibility(uploadModel.getCount() > 1);
-            view.setRightCardVisibility(true);
         } else if (currentStep == uploadCount + 1) {
             page = UploadView.CATEGORIES;
             view.setTopCardVisibility(false);
