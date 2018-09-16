@@ -12,7 +12,6 @@ import android.support.annotation.Nullable;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -21,13 +20,11 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 import fr.free.nrw.commons.CommonsApplication;
-import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.auth.SessionManager;
 import fr.free.nrw.commons.contributions.Contribution;
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
 import fr.free.nrw.commons.settings.Prefs;
 import fr.free.nrw.commons.utils.ImageUtils;
-import fr.free.nrw.commons.utils.ViewUtil;
 import io.reactivex.Observable;
 import io.reactivex.Single;
 import io.reactivex.disposables.Disposable;
@@ -85,8 +82,8 @@ public class UploadModel {
                 .map(this::cacheFileUpload)
                 .map(filePath -> {
                     Uri uri = Uri.fromFile(new File(filePath));
-                    FileProcessor fp = new FileProcessor(uri, context.getContentResolver(), context);
-                    UploadItem item = new UploadItem(uri, mimeType, source, fp.processFileCoordinates(false),
+                    FileProcessor fp = new FileProcessor(filePath, context.getContentResolver(), context);
+                    UploadItem item = new UploadItem(uri, mimeType, source, fp.processFileCoordinates(),
                             FileUtils.getFileExt(filePath), null);
                     Single.zip(
                             Single.fromCallable(() ->
@@ -114,8 +111,8 @@ public class UploadModel {
         items = new ArrayList<>();
         String filePath = this.cacheFileUpload(media);
         Uri uri = Uri.fromFile(new File(filePath));
-        FileProcessor fp = new FileProcessor(uri, context.getContentResolver(), context);
-        UploadItem item = new UploadItem(uri, mimeType, source, fp.processFileCoordinates(false),
+        FileProcessor fp = new FileProcessor(filePath, context.getContentResolver(), context);
+        UploadItem item = new UploadItem(uri, mimeType, source, fp.processFileCoordinates(),
                 FileUtils.getFileExt(filePath), wikidataEntityIdPref);
         item.title.setTitleText(title);
         item.descriptions.get(0).setDescriptionText(desc);
