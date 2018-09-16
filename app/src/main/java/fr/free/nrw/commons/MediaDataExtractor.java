@@ -204,7 +204,7 @@ public class MediaDataExtractor {
         return findTemplateParameter(templateNode, new TemplateChildNodeComparator() {
             @Override
             public boolean match(Node node) {
-                Element el = (Element)node;
+                Element el = (Element) node;
                 if (el.getTextContent().trim().equals(theIndex)) {
                     return true;
                 } else if (el.getAttribute("index") != null && el.getAttribute("index").trim().equals(theIndex)) {
