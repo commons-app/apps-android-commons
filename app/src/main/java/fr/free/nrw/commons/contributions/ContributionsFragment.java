@@ -474,6 +474,7 @@ public class ContributionsFragment
 
         if (prefs.getBoolean("displayNearbyCardView", true)) {
             nearbyNoificationCardView.setVisibility(View.VISIBLE);
+
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                 if (((ContributionsActivity)getActivity()).locationManager.isLocationPermissionGranted()) {
                     // Display nearest location, first listen

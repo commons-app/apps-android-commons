@@ -99,6 +99,13 @@ public class NearbyNoificationCardView  extends CardView{
         });
         CoordinatorLayout.LayoutParams layoutParams = (CoordinatorLayout.LayoutParams) this.getLayoutParams();
         layoutParams.setBehavior(swipeDismissBehavior);
+
+        // If you don't setVisibility after getting layout params, then you will se an empty space in place of nerabyNotificationCardView
+        if (((ContributionsActivity)context).prefs.getBoolean("displayNearbyCardView", true)) {
+            this.setVisibility(VISIBLE);
+        } else {
+            this.setVisibility(GONE);
+        }
     }
 
 
