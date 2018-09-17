@@ -239,8 +239,8 @@
   <string name="error_while_cache">שגיאה במשירת תמונות במטמון</string>
   <string name="title_info">כותרת מתארת ייחודית לקובץ, שתשמש שם קובץ. אפשר להשתמש בשפה פשוטה עם רווחים. אין לכלול סיומת קובץ</string>
   <string name="description_info">נא לתאר את המדיה כמה שיותר: איפה היא נוצרה? מה היא מראה? מה ההקשר? נא לתאר את העצמים או את האנשים. נא לחשוף מידע שאי־אפשר לנחש בקלות, למשל, הזמן ביום אם זאת תמונת נוף. אם המדיה מציגה משהו בלתי־רגיל, נא להסביר מה מיוחד בה.</string>
-  <string name="upload_image_too_dark">התמונה הזאת חשוכה מדי, האם ברצונך באמת להעלות אותה? ויקישיתוף מיועד רק לתמונות בלות ערך אנציקלופדי.</string>
-  <string name="upload_image_blurry">התמונה הזאת מטושטשת, האם ברצונך באמת להעלות אותה? ויקישיתוף מיועד רק לתמונות בלות ערך אנציקלופדי.</string>
+  <string name="upload_image_too_dark">התמונה הזאת חשוכה מדי, האם ברצונך באמת להעלות אותה? ויקישיתוף מיועד רק לתמונות בעלות ערך אנציקלופדי.</string>
+  <string name="upload_image_blurry">התמונה הזאת מטושטשת, האם ברצונך באמת להעלות אותה? ויקישיתוף מיועד רק לתמונות בעלות ערך אנציקלופדי.</string>
   <string name="give_permission">לתת הרשאה</string>
   <string name="use_external_storage">להשתמש באחסון חיצוני</string>
   <string name="use_external_storage_summary">שמירת תמונות שצולמו באמצעות מצלמה בתוך היישום במכשיר שלך</string>
@@ -258,8 +258,8 @@
   <string name="skip_login_title">האם באמת לדלג על הכניסה לחשבון?</string>
   <string name="skip_login_message">לא תהיה לך אפשרות להעלות תמונות.</string>
   <string name="login_alert_message">נא להיכנס לחשבון כדי להשתמש באפשרות הזאת</string>
-  <string name="copy_wikicode" fuzzy="true">העתקת קוד ויקי ללוח</string>
-  <string name="wikicode_copied" fuzzy="true">קוד הוויקי הועתק ללוח</string>
+  <string name="copy_wikicode">העתקת קוד ויקי ללוח</string>
+  <string name="wikicode_copied">קוד הוויקי הועתק ללוח</string>
   <string name="nearby_location_has_not_changed">המיקום לא השתנה.</string>
   <string name="nearby_location_not_available">המיקום אינו זמין.</string>
   <string name="location_permission_rationale_nearby">נדרשת הרשאה כדי להציג רשימה של מקומות בסביבה</string>

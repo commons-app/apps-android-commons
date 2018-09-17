@@ -62,7 +62,7 @@
   <string name="login_failed_wrong_credentials">Kunne ikke logge inn – sjekk brukernavnet og passordet ditt</string>
   <string name="login_failed_throttled">For mange misslykkede forsøk. Vennligst prøv igjen om noen få minutter.</string>
   <string name="login_failed_blocked">Beklager, denne brukeren har blitt blokkert på Commons</string>
-  <string name="login_failed_2fa_needed">Du må oppgi tofaktorautentiseringskoden din.</string>
+  <string name="login_failed_2fa_needed">Du må oppgi koden din for totrinns pålogging.</string>
   <string name="login_failed_generic">Innlogging feilet</string>
   <string name="share_upload_button">Last opp</string>
   <string name="multiple_share_base_title">Navngi dette settet</string>
@@ -195,7 +195,7 @@
   <string name="maximum_limit">Maksimumsgrense</string>
   <string name="maximum_limit_alert">Kan ikke vise mer enn 500</string>
   <string name="set_limit">Sett grense for seneste opplastinger</string>
-  <string name="login_failed_2fa_not_supported">Tofaktorautentisering støttes ikke ennå.</string>
+  <string name="login_failed_2fa_not_supported">Totrinns pålogging støttes ikke ennå.</string>
   <string name="logout_verification">Ønsker du virkelig å logge ut?</string>
   <string name="commons_logo">Commons-logo</string>
   <string name="commons_website">Commons-nettsted</string>

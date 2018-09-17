@@ -360,5 +360,5 @@
   <string name="error_occurred">Une erreur s’est produite !</string>
   <string name="notifications_channel_name_all">Notification de Commons</string>
   <string name="storage_permission">Droit de stockage</string>
-  <string name="write_storage_permission_rationale_for_image_share">Nous avons besoin de votre autorisation pour accéder au stockage externe de votre appareil, afin de télécharger des images.</string>
+  <string name="write_storage_permission_rationale_for_image_share">Nous avons besoin de votre autorisation pour accéder au stockage externe de votre appareil, afin de téléverser des images.</string>
 </resources>
