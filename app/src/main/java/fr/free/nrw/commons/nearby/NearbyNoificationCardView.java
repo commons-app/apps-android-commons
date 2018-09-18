@@ -1,8 +1,6 @@
 package fr.free.nrw.commons.nearby;
 
 import android.content.Context;
-import android.content.SharedPreferences;
-import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.CoordinatorLayout;
@@ -11,23 +9,13 @@ import android.support.v7.widget.CardView;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
-import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
-import android.widget.TextSwitcher;
 import android.widget.TextView;
-
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.inject.Inject;
-import javax.inject.Named;
 
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.contributions.ContributionsActivity;
-import fr.free.nrw.commons.contributions.ContributionsFragment;
-import fr.free.nrw.commons.notification.Notification;
 
 /**
  * Custom card view for nearby notification card view on main screen, above contributions list
@@ -38,8 +26,8 @@ public class NearbyNoificationCardView  extends CardView{
 
     private Button permissionRequestButton;
     private RelativeLayout contentLayout;
-    private TextView notificationTextSwitcher;
-    private TextView notificationTimeSwitcher;
+    private TextView notificationTitle;
+    private TextView notificationDistance;
     private ImageView notificationIcon;
 
     public NearbyNoificationCardView(@NonNull Context context) {
@@ -66,8 +54,8 @@ public class NearbyNoificationCardView  extends CardView{
         permissionRequestButton = rootView.findViewById(R.id.permission_request_button);
         contentLayout = rootView.findViewById(R.id.content_layout);
 
-        notificationTextSwitcher = rootView.findViewById(R.id.nearby_title);
-        notificationTimeSwitcher = rootView.findViewById(R.id.nearby_distance);
+        notificationTitle = rootView.findViewById(R.id.nearby_title);
+        notificationDistance = rootView.findViewById(R.id.nearby_distance);
 
         notificationIcon = rootView.findViewById(R.id.nearby_icon);
 
@@ -129,6 +117,16 @@ public class NearbyNoificationCardView  extends CardView{
             Log.d("deneme","called2");
             contentLayout.setVisibility(VISIBLE);
             permissionRequestButton.setVisibility(GONE);
+        }
+    }
+
+    public void updateContent(boolean isClosestNearbyPlaceFound, Place place) {
+        if (isClosestNearbyPlaceFound) {
+            notificationTitle.setText(place.name);
+            notificationDistance.setText(place.distance);
+        } else {
+            notificationDistance.setText("");
+            notificationTitle.setText("No nearby places found around you");
         }
     }
 }
