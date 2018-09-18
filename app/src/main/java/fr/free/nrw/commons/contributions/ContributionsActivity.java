@@ -221,9 +221,9 @@ public class ContributionsActivity extends AuthenticatedActivity implements Frag
         }
         this.menu = menu;
         if (!isThereUnreadNotifications) {
-            menu.findItem(R.id.notifications).setIcon(ContextCompat.getDrawable(this, R.drawable.ic_notifications_white_24dp));
+           // menu.findItem(R.id.notifications).setIcon(ContextCompat.getDrawable(this, R.drawable.ic_notifications_white_24dp));
         } else {
-            menu.findItem(R.id.notifications).setIcon(ContextCompat.getDrawable(this, R.drawable.ic_notifications_white_with_marker));
+          //  menu.findItem(R.id.notifications).setIcon(ContextCompat.getDrawable(this, R.drawable.ic_notifications_white_with_marker));
         }
         return true;
     }
