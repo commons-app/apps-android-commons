@@ -46,6 +46,10 @@ public class UnreadNotificationsCheckAsync extends AsyncTask<Void, Void, Notific
     protected void onPostExecute(Notification lastNotification) {
         super.onPostExecute(lastNotification);
 
+        if (lastNotification == null) {
+            return;
+        }
+
         Date lastNotificationCheckDate = new Date(context.get()
                 .getSharedPreferences("prefs",0)
                 .getLong("last_read_notification_date", 0));
@@ -71,6 +75,10 @@ public class UnreadNotificationsCheckAsync extends AsyncTask<Void, Void, Notific
     }
 
     private Notification findLastNotification(List<Notification> allNotifications) {
-        return allNotifications.get(allNotifications.size()-1);
+        if (allNotifications.size() > 0) {
+            return allNotifications.get(allNotifications.size()-1);
+        } else {
+            return null;
+        }
     }
 }
