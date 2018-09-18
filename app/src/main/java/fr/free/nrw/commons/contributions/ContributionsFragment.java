@@ -48,16 +48,20 @@ import fr.free.nrw.commons.location.LocationServiceManager;
 import fr.free.nrw.commons.location.LocationUpdateListener;
 import fr.free.nrw.commons.media.MediaDetailPagerFragment;
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
+import fr.free.nrw.commons.nearby.NearbyController;
 import fr.free.nrw.commons.nearby.NearbyNoificationCardView;
 import fr.free.nrw.commons.nearby.NearbyPlaces;
+import fr.free.nrw.commons.nearby.Place;
 import fr.free.nrw.commons.notification.Notification;
 import fr.free.nrw.commons.notification.NotificationController;
 import fr.free.nrw.commons.notification.UnreadNotificationsCheckAsync;
 import fr.free.nrw.commons.settings.Prefs;
 import fr.free.nrw.commons.upload.UploadService;
 import fr.free.nrw.commons.utils.ContributionListViewUtils;
+import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
+import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 import timber.log.Timber;
 
@@ -66,6 +70,7 @@ import static fr.free.nrw.commons.contributions.ContributionDao.Table.ALL_FIELDS
 import static fr.free.nrw.commons.contributions.ContributionsContentProvider.BASE_URI;
 import static fr.free.nrw.commons.location.LocationServiceManager.LOCATION_REQUEST;
 import static fr.free.nrw.commons.settings.Prefs.UPLOADS_SHOWING;
+import static fr.free.nrw.commons.utils.LengthUtils.formatDistanceBetween;
 
 public class ContributionsFragment
         extends CommonsDaggerSupportFragment
@@ -85,6 +90,8 @@ public class ContributionsFragment
     MediaWikiApi mediaWikiApi;
     @Inject
     NotificationController notificationController;
+    @Inject
+    NearbyController nearbyController;
 
     private ArrayList<DataSetObserver> observersWaitingForLoad = new ArrayList<>();
     private Cursor allContributions;
@@ -99,8 +106,11 @@ public class ContributionsFragment
     public static final String MEDIA_DETAIL_PAGER_FRAGMENT_TAG = "MediaDetailFragmentTag";
 
     public NearbyNoificationCardView nearbyNoificationCardView;
+    private Disposable placesDisposable;
+    private LatLng curLatLng;
 
-    /**
+
+                        /**
      * Since we will need to use parent activity on onAuthCookieAcquired, we have to wait
      * fragment to be attached. Latch will be responsible for this sync.
      */
@@ -285,6 +295,9 @@ public class ContributionsFragment
                     Timber.d("Location permission granted, refreshing view");
                     // No need to display permission request button anymore
                     nearbyNoificationCardView.displayPermissionRequestButton(false);
+                    ((ContributionsActivity)getActivity()).locationManager.registerLocationManager();
+                    Log.d("deneme","location manager registered, location manager:"+((ContributionsActivity)getActivity()).locationManager);
+
                 } else {
                     // Still ask for permission
                     nearbyNoificationCardView.displayPermissionRequestButton(true);
@@ -427,16 +440,7 @@ public class ContributionsFragment
      * @param isThereUnreadNotifications true if user checked notifications before last notification date
      */
     public void updateNotificationsNotification(boolean isThereUnreadNotifications) {
-        Log.d("deneme","notification updates are called");
         ((ContributionsActivity)getActivity()).updateNotificationIcon(isThereUnreadNotifications);
-    }
-
-    /**
-     * Update nearby indicator on cardview on main screen
-     * @param nearbyPlaces
-     */
-    public void updateNearbyNotification(List<NearbyPlaces> nearbyPlaces) {
-
     }
 
     @Override
@@ -479,16 +483,53 @@ public class ContributionsFragment
                 if (((ContributionsActivity)getActivity()).locationManager.isLocationPermissionGranted()) {
                     // Display nearest location, first listen
                     nearbyNoificationCardView.displayPermissionRequestButton(false);
-
+                    ((ContributionsActivity)getActivity()).locationManager.registerLocationManager();
+                    Log.d("deneme","location manager registered, location manager:"+((ContributionsActivity)getActivity()).locationManager);
                 } else {
                     // Display tab to see button, since permission is not granted and you have to grant it first
                     nearbyNoificationCardView.displayPermissionRequestButton(true);
                 }
+            } else {
+                nearbyNoificationCardView.displayPermissionRequestButton(false);
+                ((ContributionsActivity)getActivity()).locationManager.registerLocationManager();
             }
         } else {
             nearbyNoificationCardView.setVisibility(View.GONE);
         }
 
+    }
+
+    private void updateClosestNearbyCardViewInfo() {
+        Log.d("deneme"," updateClosestNearbyCardViewInfo called");
+
+        curLatLng = ((ContributionsActivity)getActivity()).locationManager.getLastLocation();
+
+        placesDisposable = Observable.fromCallable(() -> nearbyController
+                .loadAttractionsFromLocation(curLatLng, true)) // thanks to boolean, it will only return closest result
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(this::updateNearbyNotification,
+                        throwable -> {
+                            Timber.d(throwable);
+                            Log.d("deneme","error");
+                        });
+    }
+
+    private void updateNearbyNotification(NearbyController.NearbyPlacesInfo nearbyPlacesInfo) {
+        Log.d("deneme", "update nearby location called");
+        List<Place> placeList = nearbyPlacesInfo.placeList;
+        Log.d("deneme", "placeList is:"+placeList);
+
+        if (placeList != null && placeList.size() > 0) {
+            Place closestNearbyPlace = placeList.get(0);
+            String distance = formatDistanceBetween(curLatLng, closestNearbyPlace.location);
+            closestNearbyPlace.setDistance(distance);
+            nearbyNoificationCardView.updateContent (true, closestNearbyPlace);
+            Log.d("deneme","placelist size > 0");
+        } else {
+            Log.d("deneme","placelist bos");
+            nearbyNoificationCardView.updateContent (false, null);
+        }
     }
 
     @Override
@@ -502,15 +543,24 @@ public class ContributionsFragment
                 getActivity().unbindService(uploadServiceConnection);
             }
         }
+
+        if (placesDisposable != null) {
+            placesDisposable.dispose();
+        }
     }
 
     @Override
     public void onLocationChangedSignificantly(LatLng latLng) {
-
+        // Will be called if location changed more than 1000 meter
+        // Do nothing on slight changes for using network efficiently
+        Log.d("deneme","onLocationChangedSignificantly called");
+        updateClosestNearbyCardViewInfo();
     }
 
     @Override
     public void onLocationChangedSlightly(LatLng latLng) {
+        // Update closest nearby notification card onLocationChangedSlightly
+        Log.d("deneme","onLocationChangedSlightly called");
 
     }
 }
