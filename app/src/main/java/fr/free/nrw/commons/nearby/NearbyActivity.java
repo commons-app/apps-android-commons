@@ -173,7 +173,7 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
                         // If dismissed, we can inform fragment to start showcase sequence there
                         @Override
                         public void onShowcaseDismissed(MaterialShowcaseView materialShowcaseView) {
-                                nearbyMapFragment.onNearbyMaterialShowcaseDismissed();
+                            nearbyMapFragment.onNearbyMaterialShowcaseDismissed();
                         }
                     })
                     .build();
@@ -435,7 +435,7 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
             bundle.putString("CurLatLng", gsonCurLatLng);
 
             placesDisposable = Observable.fromCallable(() -> nearbyController
-                    .loadAttractionsFromLocation(curLatLng))
+                    .loadAttractionsFromLocation(curLatLng, false))
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe(this::populatePlaces,
@@ -525,12 +525,12 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
     }
 
     public void setMapViewTutorialShowCase() {
-           /*
-            *This showcase view will be the first step of our nearbyMaterialShowcaseSequence. The reason we use a
-            * single item instead of adding another step to nearbyMaterialShowcaseSequence is that we are not able to
-            * call withoutShape() method on steps. For mapView we need an showcase view without
-            * any circle on it, it should cover the whole page.
-            * */
+        /*
+         *This showcase view will be the first step of our nearbyMaterialShowcaseSequence. The reason we use a
+         * single item instead of adding another step to nearbyMaterialShowcaseSequence is that we are not able to
+         * call withoutShape() method on steps. For mapView we need an showcase view without
+         * any circle on it, it should cover the whole page.
+         * */
         MaterialShowcaseView firstSingleShowCaseView = new MaterialShowcaseView.Builder(this)
                 .setTarget(nearbyMapFragment.mapView)
                 .setDismissText(getString(R.string.showcase_view_got_it_button))
@@ -547,9 +547,9 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
 
                     @Override
                     public void onShowcaseDismissed(MaterialShowcaseView materialShowcaseView) {
-                            /* Add other nearbyMaterialShowcaseSequence here, it will make the user feel as they are a
-                            * nearbyMaterialShowcaseSequence whole together.
-                            * */
+                        /* Add other nearbyMaterialShowcaseSequence here, it will make the user feel as they are a
+                         * nearbyMaterialShowcaseSequence whole together.
+                         * */
                         secondSingleShowCaseView.show(NearbyActivity.this);
                     }
                 })
@@ -605,21 +605,21 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
 
     private void updateMapFragment(boolean isSlightUpdate) {
         /*
-        * Significant update means updating nearby place markers. Slightly update means only
-        * updating current location marker and camera target.
-        * We update our map Significantly on each 1000 meter change, but we can't never know
-        * the frequency of nearby places. Thus we check if we are close to the boundaries of
-        * our nearby markers, we update our map Significantly.
-        * */
+         * Significant update means updating nearby place markers. Slightly update means only
+         * updating current location marker and camera target.
+         * We update our map Significantly on each 1000 meter change, but we can't never know
+         * the frequency of nearby places. Thus we check if we are close to the boundaries of
+         * our nearby markers, we update our map Significantly.
+         * */
 
         NearbyMapFragment nearbyMapFragment = getMapFragment();
 
         if (nearbyMapFragment != null && curLatLng != null) {
             hideProgressBar(); // In case it is visible (this happens, not an impossible case)
             /*
-            * If we are close to nearby places boundaries, we need a significant update to
-            * get new nearby places. Check order is south, north, west, east
-            * */
+             * If we are close to nearby places boundaries, we need a significant update to
+             * get new nearby places. Check order is south, north, west, east
+             * */
             if (nearbyMapFragment.boundaryCoordinates != null
                     && (curLatLng.getLatitude() <= nearbyMapFragment.boundaryCoordinates[0].getLatitude()
                     || curLatLng.getLatitude() >= nearbyMapFragment.boundaryCoordinates[1].getLatitude()
@@ -627,7 +627,7 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
                     || curLatLng.getLongitude() >= nearbyMapFragment.boundaryCoordinates[3].getLongitude())) {
                 // populate places
                 placesDisposable = Observable.fromCallable(() -> nearbyController
-                        .loadAttractionsFromLocation(curLatLng))
+                        .loadAttractionsFromLocation(curLatLng, false))
                         .subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())
                         .subscribe(this::populatePlaces,
