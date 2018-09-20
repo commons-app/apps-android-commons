@@ -319,6 +319,7 @@
   <string name="congratulatory_message_quiz">Acadou un %1$s de respostas correctas. Parabéns!</string>
   <string name="warning_for_no_answer">Escolla unha das dúas opcións para contestar a pregunta</string>
   <string name="user_not_logged_in">A sesión caducou, por favor inicia unha nova sesión.</string>
+  <string name="quiz_result_share_message">Comparta o seu cuestionario cos seus amigos!</string>
   <string name="continue_message">Continuar</string>
   <string name="correct">Resposta correcta</string>
   <string name="wrong">Resposta incorrecta</string>
@@ -327,6 +328,8 @@
   <string name="share_coordinates_not_present">Non se indicaron as coordenadas ó seleccionar a imaxe</string>
   <string name="error_fetching_nearby_places">Erro ó procurar os lugares próximos.</string>
   <string name="add_description">+ Engadir descrición</string>
+  <string name="delete_recent_searches_dialog">Está seguro de querer borrar o seu historial de procuras?</string>
+  <string name="search_history_deleted">Eliminouse o historial de procuras</string>
   <string name="Achievements">Logros</string>
   <string name="statistics">ESTATÍSTICAS</string>
   <string name="statistics_thanks">Agradecementos recibidos</string>
@@ -335,6 +338,14 @@
   <string name="images_uploaded">Imaxes cargadas</string>
   <string name="image_reverts">Imaxes non revertidas</string>
   <string name="images_used_by_wiki">Imaxes usadas</string>
+  <string name="achievements_share_message">Comparta os seus logros cos seus amigos!</string>
+  <string name="achievements_info_message">O seu nivel increméntase segundo vai cumprindo estes requisitos. Os elementos na sección \"estatísticas\" non contan cara ó seu nivel.</string>
   <string name="achievements_revert_limit_message">mínimo requirido:</string>
+  <string name="images_uploaded_explanation">O número de imaxes que cargou en Commons, por medio de calquera software de carga</string>
+  <string name="images_reverted_explanation">O número de imaxes que cargou en Commons e que non foron eliminadas</string>
+  <string name="images_used_explanation">O número de imaxes que cargou en Commons e que foron utilizadas en artigos de Wikimedia</string>
+  <string name="error_occurred">Ocorreu un erro!</string>
   <string name="notifications_channel_name_all">Notificación de Commons</string>
+  <string name="storage_permission">Permiso de almacenamento</string>
+  <string name="write_storage_permission_rationale_for_image_share">Precisamos o seu permiso para acceder ó almacenamento externo do seu dispositivo para cargar imaxes.</string>
 </resources>
