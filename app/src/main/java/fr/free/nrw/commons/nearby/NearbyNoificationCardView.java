@@ -110,6 +110,13 @@ public class NearbyNoificationCardView  extends CardView{
                 }
             }
         });
+
+        this.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ((ContributionsActivity)context).viewPager.setCurrentItem(1);
+            }
+        });
     }
 
     public void displayPermissionRequestButton(boolean isPermissionRequestButtonNeeded) {

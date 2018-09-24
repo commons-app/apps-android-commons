@@ -39,7 +39,7 @@ public class ContributionsActivity extends AuthenticatedActivity implements Frag
     @BindView(R.id.tab_layout)
     TabLayout tabLayout;
     @BindView(R.id.pager)
-    ViewPager viewPager;
+    public ViewPager viewPager;
     @Inject
     public LocationServiceManager locationManager;
     @Inject
@@ -195,11 +195,7 @@ public class ContributionsActivity extends AuthenticatedActivity implements Frag
                 showTabs();
                 // Nearby Notification Card View was invisible when Media Details Fragment is active, make it visible again on Contrib List Fragment active
                 contributionsFragment.nearbyNoificationCardView.setVisibility(View.VISIBLE);
-                // Make number of uploads visible when Contributions List is visible
-                // TODO Neslihan: ContributionListViewUtils.setIndicatorVisibility(contributionsFragment.numberOfUploads, contributionsFragment.numberOfUploadsProgressBar, true, false);
-                // TODO Neslihan: ContributionListViewUtils.setIndicatorVisibility(contributionsFragment.notificationsCardView, contributionsFragment.notificationsCardViewProgressBar, true, false);
             } else {
-                //super.onBackPressed();
                 finish();
             }
         } else {
