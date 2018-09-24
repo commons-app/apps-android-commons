@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -29,6 +30,7 @@ public class NearbyNoificationCardView  extends CardView{
     private TextView notificationTitle;
     private TextView notificationDistance;
     private ImageView notificationIcon;
+    private ProgressBar progressBar;
 
     public NearbyNoificationCardView(@NonNull Context context) {
         super(context);
@@ -58,6 +60,8 @@ public class NearbyNoificationCardView  extends CardView{
         notificationDistance = rootView.findViewById(R.id.nearby_distance);
 
         notificationIcon = rootView.findViewById(R.id.nearby_icon);
+
+        progressBar = rootView.findViewById(R.id.progressBar);
 
         setActionListeners();
     }
@@ -116,11 +120,24 @@ public class NearbyNoificationCardView  extends CardView{
         } else {
             Log.d("deneme","called2");
             contentLayout.setVisibility(VISIBLE);
+            // Set visibility of elements in content layout once it become visible
+            progressBar.setVisibility(VISIBLE);
+            notificationTitle.setVisibility(GONE);
+            notificationDistance.setVisibility(GONE);
+            notificationIcon.setVisibility(GONE);
+
             permissionRequestButton.setVisibility(GONE);
         }
     }
 
     public void updateContent(boolean isClosestNearbyPlaceFound, Place place) {
+        // Make progress bar invisible once data is ready
+        progressBar.setVisibility(GONE);
+        // And content views visible since they are ready
+        notificationTitle.setVisibility(VISIBLE);
+        notificationDistance.setVisibility(VISIBLE);
+        notificationIcon.setVisibility(VISIBLE);
+
         if (isClosestNearbyPlaceFound) {
             notificationTitle.setText(place.name);
             notificationDistance.setText(place.distance);

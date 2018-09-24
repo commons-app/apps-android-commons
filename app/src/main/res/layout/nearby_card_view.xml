@@ -29,6 +29,13 @@
             android:id="@+id/content_layout"
             >
 
+            <ProgressBar
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/progressBar"
+                android:layout_centerInParent="true"
+                />
+
             <ImageView
                 android:id="@+id/nearby_icon"
                 android:layout_width="40dp"
@@ -36,8 +43,6 @@
                 android:layout_marginLeft="16dp"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
-                android:contentDescription="@string/no_image_found"
-                android:visibility="gone"
                 android:scaleType="centerCrop"
                 app:srcCompat="@drawable/ic_location_white_24dp"/>
 
