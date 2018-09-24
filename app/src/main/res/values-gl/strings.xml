@@ -4,6 +4,7 @@
 * Banjo
 * Chairego apc
 * Elisardojm
+* Maria zaos
 * Navhy
 * Toliño
 * Vivaelcelta
@@ -38,7 +39,7 @@
   <string name="upload_progress_notification_title_in_progress">Cargando \"%1$s\"</string>
   <string name="upload_progress_notification_title_finishing">Rematando a carga de \"%1$s\"</string>
   <string name="upload_failed_notification_title">Erro ao cargar \"%1$s\"</string>
-  <string name="upload_failed_notification_subtitle">Prema para mostralo</string>
+  <string name="upload_failed_notification_subtitle">Prema para amosalo</string>
   <plurals name="uploads_pending_notification_indicator">
     <item quantity="one">Cargando %1$d ficheiro</item>
     <item quantity="other">Cargando %1$d ficheiros</item>
@@ -53,7 +54,7 @@
   <string name="menu_nearby">Preto</string>
   <string name="provider_contributions">As miñas subidas</string>
   <string name="menu_share">Compartir</string>
-  <string name="menu_open_in_browser">Mostrar no navegador</string>
+  <string name="menu_open_in_browser">Amosar no navegador</string>
   <string name="share_title_hint">Título</string>
   <string name="add_title_toast">Por favor, proporcione un título para este ficheiro</string>
   <string name="share_description_hint">Descrición</string>
@@ -65,6 +66,7 @@
   <string name="login_failed_generic">Erro durante o inición de sesión</string>
   <string name="share_upload_button">Subir</string>
   <string name="multiple_share_base_title">Dea un nome a este conxunto</string>
+  <string name="add_set_name_toast">Por favor, proporcione un título para este conxunto</string>
   <string name="provider_modifications">Modificacións</string>
   <string name="menu_upload_single">Subir</string>
   <string name="categories_search_text_hint">Procurar categorías</string>
@@ -159,6 +161,7 @@
   <string name="welcome_copyright_subtext">Evite os materiais protexidos por dereitos de autoría que se atopen na internet, así como imaxes de pósters, portadas de libros etc.</string>
   <string name="welcome_final_text">Entende como vai?</string>
   <string name="welcome_final_button_text">Si!</string>
+  <string name="welcome_help_button_text">&lt;u&gt;Máis Información&lt;/u&gt;</string>
   <string name="detail_panel_cats_label">Categorías</string>
   <string name="detail_panel_cats_loading">Cargando…</string>
   <string name="detail_panel_cats_none">Ningunha seleccionada</string>
@@ -246,7 +249,15 @@
   <string name="null_url">Errorǃ Nos se atopou a URL</string>
   <string name="nominate_deletion">Nomear para borrado</string>
   <string name="nominated_for_deletion">Esta imaxe foi nomeada para borrar.</string>
+  <string name="nominated_see_more">&lt;u&gt;Consulte a páxina web para ter máis para detalles&lt;/u&gt;</string>
   <string name="view_browser">Ver en navegador</string>
+  <string name="skip_login">Omitir</string>
+  <string name="navigation_item_login">Acceder ao sistema</string>
+  <string name="skip_login_title">Realmente quere saltar o inicio de sesión?</string>
+  <string name="skip_login_message">Non poderá subir imaxes.</string>
+  <string name="login_alert_message">Por favor, inicie a sesión para usar esta funcionalidade</string>
+  <string name="copy_wikicode">Copiar o texto wiki ó portapapeis</string>
+  <string name="wikicode_copied">Texto wiki copiado ó portapapeis</string>
   <string name="nearby_location_has_not_changed">A localización non cambiou.</string>
   <string name="nearby_location_not_available">A localización non está dispoñible.</string>
   <string name="location_permission_rationale_nearby">Precísase permiso para amosar unha lista de lugares preto de aquí</string>
@@ -282,26 +293,59 @@
   <string name="error_loading_images">Houbo un erro ó subir as imaxes.</string>
   <string name="image_uploaded_by">Subida porː %1$s</string>
   <string name="block_notification">Está bloqueado e non pode editar en Commons</string>
-  <string name="share_app_title">Compartir a aplicación</string>
-  <string name="share_coordinates_not_present">Non se indicaron as coordenadas ó seleccionar a imaxe</string>
-  <string name="error_fetching_nearby_places">Erro ó procurar os lugares próximos.</string>
   <string name="appwidget_img">Imaxe do día</string>
   <string name="app_widget_heading">Imaxe do día</string>
   <string name="menu_search_button">Procurar</string>
   <string name="search_commons">Procurar en Commons</string>
+  <string name="images_not_found">Non se atopou ningunha imaxe que coincida con %1$s</string>
   <string name="title_activity_search">Procurar</string>
+  <string name="search_recent_header">Buscas recentes:</string>
+  <string name="provider_searches">Consultas buscadas recentemente</string>
+  <string name="error_loading_categories">Houbo un erro ó cargar categorías.</string>
+  <string name="error_loading_subcategories">Houbo un erro ó cargar subcategorías.</string>
   <string name="successful_wikidata_edit">A imaxe engadiuse con éxito a %1$s en Wikidata!</string>
   <string name="wikidata_edit_failure">Fallou a actualización da entidade do Wikidata correspondente!</string>
-  <string name="menu_set_wallpaper">Definir imaxe de fondo</string>
+  <string name="menu_set_wallpaper">Poñer como imaxe de fondo</string>
   <string name="wallpaper_set_successfully">A imaxe de fondo configurouse correctamenteǃ</string>
+  <string name="quiz">Cuestionario</string>
+  <string name="quiz_question_string">Esta foto pode ser subida?</string>
   <string name="question">Pregunta</string>
   <string name="result">Resultado</string>
+  <string name="quiz_back_button">Se continúa cargando imaxes que requiran ser eliminadas, a súa conta probablemente sexa bloqueada. Está seguro de que quere rematar o cuestionario?</string>
+  <string name="quiz_alert_message">Máis do %1$s das imaxes que cargou foron eliminadas. Se continúa cargando imaxes que requiran ser borradas, probablemente a súa conta sexa bloqueada.\n\nGustaríalle ver de novo o titorial e facer un pequeno cuestionario que axuda a entender que tipo de imaxes se deben ou non se deben cargar?</string>
+  <string name="selfie_answer">Os autorretratos non teñen valor enciclopédico abondo. Por favor no cargue imaxes de vostede mesmo salvo que haxa un artigo de Wikipedia sobre vostede.</string>
+  <string name="taj_mahal_answer">As fotografías de monumentos e paisaxes de exterior poden ser cargadas na maioría dos países. Teña en conta, por favor, que as instalacións de arte temporais en exteriores normalmente teñen dereitos de autor protexidos e non poden ser cargadas.</string>
+  <string name="warning_for_image_reverts">Aviso: Máis do 1%  das imaxes cargadas por vostede foron borradas. Se segue a cargar imaxes que precisan borrado o máis probable é que a súa conta sexa anulada.</string>
+  <string name="congratulatory_message_quiz">Acadou un %1$s de respostas correctas. Parabéns!</string>
+  <string name="warning_for_no_answer">Escolla unha das dúas opcións para contestar a pregunta</string>
   <string name="user_not_logged_in">A sesión caducou, por favor inicia unha nova sesión.</string>
+  <string name="quiz_result_share_message">Comparta o seu cuestionario cos seus amigos!</string>
   <string name="continue_message">Continuar</string>
   <string name="correct">Resposta correcta</string>
   <string name="wrong">Resposta incorrecta</string>
+  <string name="quiz_screenshot_question">Pódese subir esta captura de pantalla?</string>
+  <string name="share_app_title">Compartir a aplicación</string>
+  <string name="share_coordinates_not_present">Non se indicaron as coordenadas ó seleccionar a imaxe</string>
+  <string name="error_fetching_nearby_places">Erro ó procurar os lugares próximos.</string>
+  <string name="add_description">+ Engadir descrición</string>
+  <string name="delete_recent_searches_dialog">Está seguro de querer borrar o seu historial de procuras?</string>
+  <string name="search_history_deleted">Eliminouse o historial de procuras</string>
   <string name="Achievements">Logros</string>
   <string name="statistics">ESTATÍSTICAS</string>
+  <string name="statistics_thanks">Agradecementos recibidos</string>
+  <string name="statistics_featured">Imaxes destacadas</string>
   <string name="level">NIVEL</string>
+  <string name="images_uploaded">Imaxes cargadas</string>
+  <string name="image_reverts">Imaxes non revertidas</string>
   <string name="images_used_by_wiki">Imaxes usadas</string>
+  <string name="achievements_share_message">Comparta os seus logros cos seus amigos!</string>
+  <string name="achievements_info_message">O seu nivel increméntase segundo vai cumprindo estes requisitos. Os elementos na sección \"estatísticas\" non contan cara ó seu nivel.</string>
+  <string name="achievements_revert_limit_message">mínimo requirido:</string>
+  <string name="images_uploaded_explanation">O número de imaxes que cargou en Commons, por medio de calquera software de carga</string>
+  <string name="images_reverted_explanation">O número de imaxes que cargou en Commons e que non foron eliminadas</string>
+  <string name="images_used_explanation">O número de imaxes que cargou en Commons e que foron utilizadas en artigos de Wikimedia</string>
+  <string name="error_occurred">Ocorreu un erro!</string>
+  <string name="notifications_channel_name_all">Notificación de Commons</string>
+  <string name="storage_permission">Permiso de almacenamento</string>
+  <string name="write_storage_permission_rationale_for_image_share">Precisamos o seu permiso para acceder ó almacenamento externo do seu dispositivo para cargar imaxes.</string>
 </resources>

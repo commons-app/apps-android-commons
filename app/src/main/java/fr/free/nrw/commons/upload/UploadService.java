@@ -10,7 +10,6 @@ import android.content.Intent;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.v4.app.NotificationCompat;
-import android.util.Log;
 import android.webkit.MimeTypeMap;
 import android.widget.Toast;
 
@@ -27,6 +26,7 @@ import java.util.regex.Pattern;
 import javax.inject.Inject;
 
 import fr.free.nrw.commons.BuildConfig;
+import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.HandlerService;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.Utils;
@@ -35,7 +35,6 @@ import fr.free.nrw.commons.contributions.Contribution;
 import fr.free.nrw.commons.contributions.ContributionDao;
 import fr.free.nrw.commons.contributions.ContributionsActivity;
 import fr.free.nrw.commons.contributions.ContributionsContentProvider;
-import fr.free.nrw.commons.modifications.ModificationsContentProvider;
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
 import fr.free.nrw.commons.mwapi.UploadResult;
 import fr.free.nrw.commons.wikidata.WikidataEditService;
@@ -182,6 +181,19 @@ public class UploadService extends HandlerService<Contribution> {
     }
 
     @SuppressLint("StringFormatInvalid")
+    private NotificationCompat.Builder getNotificationBuilder(Contribution contribution, String channelId) {
+        return new NotificationCompat.Builder(this, channelId).setAutoCancel(true)
+                .setSmallIcon(R.drawable.ic_launcher)
+                .setLargeIcon(BitmapFactory.decodeResource(getResources(), R.drawable.ic_launcher))
+                .setAutoCancel(true)
+                .setContentTitle(getString(R.string.upload_progress_notification_title_start, contribution.getDisplayTitle()))
+                .setContentText(getResources().getQuantityString(R.plurals.uploads_pending_notification_indicator, toUpload, toUpload))
+                .setOngoing(true)
+                .setProgress(100, 0, true)
+                .setContentIntent(PendingIntent.getActivity(this, 0, new Intent(this, ContributionsActivity.class), 0))
+                .setTicker(getString(R.string.upload_progress_notification_title_in_progress, contribution.getDisplayTitle()));
+    }
+
     private void uploadContribution(Contribution contribution) {
         InputStream fileInputStream;
 
@@ -207,17 +219,9 @@ public class UploadService extends HandlerService<Contribution> {
         }
 
         Timber.d("Before execution!");
-        curProgressNotification = new NotificationCompat.Builder(this).setAutoCancel(true)
-                .setSmallIcon(R.drawable.ic_launcher)
-                .setLargeIcon(BitmapFactory.decodeResource(getResources(), R.drawable.ic_launcher))
-                .setAutoCancel(true)
-                .setContentTitle(getString(R.string.upload_progress_notification_title_start, contribution.getDisplayTitle()))
-                .setContentText(getResources().getQuantityString(R.plurals.uploads_pending_notification_indicator, toUpload, toUpload))
-                .setOngoing(true)
-                .setProgress(100, 0, true)
-                .setContentIntent(PendingIntent.getActivity(this, 0, new Intent(this, ContributionsActivity.class), 0))
-                .setTicker(getString(R.string.upload_progress_notification_title_in_progress, contribution.getDisplayTitle()));
-
+        curProgressNotification = getNotificationBuilder(
+                contribution,
+                CommonsApplication.NOTIFICATION_CHANNEL_ID_ALL);
         this.startForeground(NOTIFICATION_UPLOAD_IN_PROGRESS, curProgressNotification.build());
 
         String filename = null;

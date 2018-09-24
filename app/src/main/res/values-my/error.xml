@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Authors:
+* Dr Lotus Black
+-->
+<resources>
+  <string name="crash_dialog_title">ကွန်မွန်းစ်သည် crash ဖြစ်သွားခဲ့ပါသည်</string>
+  <string name="crash_dialog_text">တစ်ခုခု မှားယွင်းသွားခဲ့ပါသည်။</string>
+  <string name="crash_dialog_comment_prompt">သင် ဘာလုပ်နေခဲ့သလဲ မိမိတို့အား ပြောပြပါ၊ ပြီးလျင် အီးမေးလ်မှတဆင့် မျှဝေပါ။ ယင်းက မိမိတို့ကို ပြန်ပြင်ရန် ကူညီပေးပါလိမ့်မည်။</string>
+  <string name="crash_dialog_ok_toast">ကျေးဇူးတင်ပါသည်</string>
+</resources>

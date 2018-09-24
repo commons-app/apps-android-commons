@@ -11,6 +11,8 @@
 * Милан Јелисавчић
 -->
 <resources>
+  <string name="title_activity_explore">Истрага</string>
+  <string name="navigation_item_explore">Истрага</string>
   <string name="preference_category_appearance">Изглед</string>
   <string name="preference_category_general">Опште</string>
   <string name="preference_category_feedback">Повратне информације</string>
@@ -18,6 +20,7 @@
   <string name="app_name">Остава</string>
   <string name="bullet">•</string>
   <string name="menu_settings">Подешавања</string>
+  <string name="intent_share_upload_label">Отпреми на Оставу</string>
   <string name="username">Корисничко име</string>
   <string name="password">Лозинка</string>
   <string name="login_credential">Пријавите се на свој Commons Beta налог</string>
@@ -29,7 +32,7 @@
   <string name="login_success">Успешно сте пријављени.</string>
   <string name="login_failed">Пријављивање није успело.</string>
   <string name="upload_failed">Датотека није пронађена. Покушајте са другом датотеком.</string>
-  <string name="authentication_failed" fuzzy="true">Провера идентитета није успела.</string>
+  <string name="authentication_failed">Потврда идентитета није успела. Пријавите се поново.</string>
   <string name="uploading_started">Отпремање је започето.</string>
   <string name="upload_completed_notification_title">Датотека „%1$s“ је отпремљена.</string>
   <string name="upload_completed_notification_text">Додирните да бисте видели отпремање</string>
@@ -64,6 +67,7 @@
   <string name="login_failed_generic">Пријава није успела</string>
   <string name="share_upload_button">Отпреми</string>
   <string name="multiple_share_base_title">Дајте име овом комплету</string>
+  <string name="add_set_name_toast">Унесите име за овај скуп</string>
   <string name="provider_modifications">Измене</string>
   <string name="menu_upload_single">Отпреми</string>
   <string name="categories_search_text_hint">Претражи категорије</string>
@@ -92,6 +96,7 @@
   <string name="title_activity_settings">Подешавања</string>
   <string name="title_activity_signup">Отвори налог</string>
   <string name="title_activity_featured_images">Изабране слике</string>
+  <string name="title_activity_category_details">Категорија</string>
   <string name="menu_about">О апликацији</string>
   <string name="about_license">Софтвер отвореног кода доступан под лиценцом &lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/COPYING\"&gt;Apache вер. 2&lt;/a&gt; Викимедијина Остава и њен лого су заштитни знаци Викимедијине Фондације и користе се са дозволом Викимедијине Фондацине. Ми не одобравамо или подржавмо Викимедијину Фондацију.\n\nАпликација за Викимедијину оставу је апликација отвореног кода која је направљена и која се одржава помоћу грантова и волонтера Викимедијине заједнице. Задужбина Викимедија није укључена у стварање, развој или одржавање апликације.</string>
   <string name="about_improve">Направите нови &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;захтев на GitHub-у&lt;/a&gt; да бисте пријавили грешке или дали предлоге.</string>
@@ -200,6 +205,8 @@
   <string name="background_image">Позадинска слика</string>
   <string name="mediaimage_failed">Медијска слика неуспешна</string>
   <string name="no_image_found">Слика није пронађена</string>
+  <string name="no_subcategory_found">Поткатегорије нису пронађене</string>
+  <string name="no_parentcategory_found">Надређене категорије нису пронађене</string>
   <string name="upload_image">Отпреми слику</string>
   <string name="welcome_image_mount_zao">Планина Зао</string>
   <string name="welcome_image_llamas">Ламе</string>
@@ -245,6 +252,13 @@
   <string name="nominated_for_deletion">Ова слика је била номинована за брисање</string>
   <string name="nominated_see_more"/>
   <string name="view_browser">Види у претраживачу</string>
+  <string name="skip_login">Прескочи</string>
+  <string name="navigation_item_login">Пријави ме</string>
+  <string name="skip_login_title">Заиста желите да прескочите пријаву?</string>
+  <string name="skip_login_message">Нећете моћи да отпремате слике.</string>
+  <string name="login_alert_message">Пријавите се да бисте користили ову функцију</string>
+  <string name="copy_wikicode">Копирај викитекст у оставу</string>
+  <string name="wikicode_copied">Викитекст је копиран у оставу</string>
   <string name="nearby_location_has_not_changed">Локација није промењена.</string>
   <string name="nearby_location_not_available">Локација није доступна.</string>
   <string name="location_permission_rationale_nearby">Потребна је дозвола за приказивање листе локација у близини</string>
@@ -279,11 +293,57 @@
   <string name="no_images_found">Нису пронађене слике!</string>
   <string name="error_loading_images">Десила се грешка при учитавању слика.</string>
   <string name="image_uploaded_by">Отпремио/ла: %1$s</string>
+  <string name="block_notification">Блокирано вам је уређивање Оставе</string>
+  <string name="appwidget_img">Слика дана</string>
+  <string name="app_widget_heading">Слика дана</string>
+  <string name="menu_search_button">Претражи</string>
+  <string name="search_commons">Претрага Оставе</string>
+  <string name="images_not_found">Нису пронађене слике које одговарају %1$s</string>
+  <string name="title_activity_search">Претрага</string>
+  <string name="search_recent_header">Недавне претраге:</string>
+  <string name="provider_searches">Недавнo претражени упити</string>
+  <string name="error_loading_categories">Дошло је до грешке при учитавању категорија.</string>
+  <string name="error_loading_subcategories">Дошло је до грешке при учитавању поткатегорија.</string>
+  <string name="successful_wikidata_edit">Слика успешно додата у %1$s на Википодацима!</string>
+  <string name="wikidata_edit_failure">Неуспешно ажурирање одговарајућег ентитета на Википодацима!</string>
+  <string name="menu_set_wallpaper">Постави као позадину</string>
+  <string name="wallpaper_set_successfully">Позадина успешно постављена!</string>
+  <string name="quiz">Квиз</string>
+  <string name="quiz_question_string">Желите ли да отпремите ову слику?</string>
+  <string name="question">Питање</string>
+  <string name="result">Резултат</string>
+  <string name="quiz_back_button">Ако наставите са отпремањем слика које захтевају брисање, ваш налог ће вероватно бити блокиран. Заиста желите да завршите квиз?</string>
+  <string name="construction_event_answer">Слике из области технологије или културе су добродошле на Остави.</string>
+  <string name="congratulatory_message_quiz">Тачних одговора: %1$s. Честитамо!</string>
+  <string name="warning_for_no_answer">Изаберите једну од две опције да бисте одговорили на питање</string>
+  <string name="user_not_logged_in">Сесија пријаве је истекла. Пријавите се поново.</string>
+  <string name="quiz_result_share_message">Делите квиз са пријатељима.</string>
+  <string name="continue_message">Настави</string>
+  <string name="correct">Тачан одговор</string>
+  <string name="wrong">Погрешан одговор</string>
+  <string name="quiz_screenshot_question">Желите ли да отпремите овај снимак екрана?</string>
   <string name="share_app_title">Подели апликацију</string>
   <string name="share_coordinates_not_present">Координате нису биле одређене током селекције слике</string>
   <string name="error_fetching_nearby_places">Грешка при фечовању оближњих места.</string>
-  <string name="successful_wikidata_edit">Слика успешно додата у %1$s на Википодацима!</string>
-  <string name="wikidata_edit_failure">Неуспешно ажурирање одговарајућег ентитета на Википодацима!</string>
-  <string name="menu_set_wallpaper">Постави позадину</string>
-  <string name="wallpaper_set_successfully">Позадина успешно постављена!</string>
+  <string name="add_description">+ Додај опис</string>
+  <string name="delete_recent_searches_dialog">Да ли сте сигурни да желите да очистите своју историју претраге?</string>
+  <string name="search_history_deleted">Историја претраге је избрисана</string>
+  <string name="Achievements">Достигнућа</string>
+  <string name="statistics">СТАТИСТИКЕ</string>
+  <string name="statistics_thanks">Примљене захвале</string>
+  <string name="statistics_featured">Изабране слике</string>
+  <string name="level">НИВО</string>
+  <string name="images_uploaded">Отпремљене слике</string>
+  <string name="image_reverts">Слике које нису опозване</string>
+  <string name="images_used_by_wiki">Искоришћене слике</string>
+  <string name="achievements_share_message">Делите своја достигнућа са пријатељима.</string>
+  <string name="achievements_info_message">Ваш ниво се повећава ако се придржавате ових захтева. Предмети у одељку „Статистика” се не рачунају.</string>
+  <string name="achievements_revert_limit_message">потребно бар:</string>
+  <string name="images_uploaded_explanation">Број слика које сте отпремили на Оставу помоћу било ког софтвера за отпремање</string>
+  <string name="images_reverted_explanation">Проценат слика који сте отпремили на Оставу, а које нису избрисане</string>
+  <string name="images_used_explanation">Број слика које сте отпремили на Оставу а користе се у чланцима на Викимедији</string>
+  <string name="error_occurred">Дошло је до грешке.</string>
+  <string name="notifications_channel_name_all">Обавештења Оставе</string>
+  <string name="storage_permission">Дозвола за складиштење</string>
+  <string name="write_storage_permission_rationale_for_image_share">Потребна нам је ваша дозвола да бисмо приступили спољашњем складишту вашег уређаја како бисмо отпремали слике.</string>
 </resources>

@@ -18,6 +18,7 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.annotation.RequiresApi;
 import android.support.design.widget.FloatingActionButton;
@@ -103,6 +104,7 @@ public class ShareActivity
     ModifierSequenceDao modifierSequenceDao;
     @Inject
     CategoryApi apiCall;
+    @Inject @Named("application_preferences") SharedPreferences applicationPrefs;
     @Inject
     @Named("default_preferences")
     SharedPreferences prefs;
@@ -341,6 +343,12 @@ public class ShareActivity
         checkIfFileExists();
         gpsObj = fileObj.processFileCoordinates(locationPermitted);
         decimalCoords = fileObj.getDecimalCoords();
+        if (sessionManager.getCurrentAccount() == null) {
+            Toast.makeText(this, getString(R.string.login_alert_message), Toast.LENGTH_SHORT).show();
+            applicationPrefs.edit().putBoolean("login_skipped", false).apply();
+            Intent loginIntent = new Intent(ShareActivity.this, LoginActivity.class);
+            startActivity(loginIntent);
+        }
     }
 
     /**
@@ -523,7 +531,7 @@ public class ShareActivity
             CurrentAnimator.cancel();
         }
         isZoom = true;
-        ViewUtil.hideKeyboard(ShareActivity.this.findViewById(R.id.titleEdit | R.id.descEdit));
+        ViewUtil.hideKeyboard(ShareActivity.this.findViewById(R.id.titleEdit));
         closeFABMenu();
         mainFab.setVisibility(View.GONE);
 

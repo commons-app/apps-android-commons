@@ -223,6 +223,8 @@
   <string name="nominate_deletion">Nominéiere fir ze Läschen</string>
   <string name="nominated_for_deletion">Dëst Bild gouf virgeschloe fir geläscht ze ginn.</string>
   <string name="view_browser">Am Browser weisen</string>
+  <string name="skip_login">Iwwersprangen</string>
+  <string name="navigation_item_login">Aloggen</string>
   <string name="nearby_location_has_not_changed">De Plaz huet net geännert.</string>
   <string name="nearby_location_not_available">Plaz ass net disponibel.</string>
   <string name="read_article">ARTIKEL LIESEN</string>
@@ -256,7 +258,7 @@
   <string name="search_commons">Op Commons sichen</string>
   <string name="title_activity_search">Sichen</string>
   <string name="wikidata_edit_failure">Déi entspriechend Wikidata-Entitéit konnt net aktualiséiert ginn!</string>
-  <string name="menu_set_wallpaper">Hannergrondbild festleeën</string>
+  <string name="menu_set_wallpaper">Als Hannergrondbild festleeën</string>
   <string name="wallpaper_set_successfully">Hannergrondbild festgeluecht</string>
   <string name="quiz">Quiz</string>
   <string name="question">Fro</string>
@@ -264,10 +266,14 @@
   <string name="continue_message">Virufueren</string>
   <string name="correct">Richteg Äntwert</string>
   <string name="wrong">Falsch Äntwert</string>
+  <string name="add_description">+ Beschreiwung derbäisetzen</string>
   <string name="Achievements">Realisatiounen</string>
   <string name="statistics">STATISTIKEN</string>
   <string name="statistics_thanks">Merci\'e kritt</string>
   <string name="statistics_featured">Bemierkenswäert Biller</string>
   <string name="level">NIVEAU</string>
   <string name="images_uploaded">Eropgeluede Biller</string>
+  <string name="image_reverts">Biller net zréckgesat</string>
+  <string name="error_occurred">Feeler opgetrueden!</string>
+  <string name="notifications_channel_name_all">Notifikatioun vu Commons</string>
 </resources>

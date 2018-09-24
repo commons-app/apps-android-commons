@@ -4,6 +4,7 @@
 * KlaasZ4usV
 * Mainframe98
 * Mar(c)
+* Optilete
 * Patio
 * Siebrand
 * Sjoerddebruin
@@ -177,4 +178,6 @@
   <string name="about_translate_message">Selecteer de taal waarvoor u vertalingen wil indienen</string>
   <string name="about_translate_proceed">Ga door</string>
   <string name="about_translate_cancel">Annuleren</string>
+  <string name="error_occurred">Fout opgetreden!</string>
+  <string name="storage_permission">Toestemming om op te slaan</string>
 </resources>

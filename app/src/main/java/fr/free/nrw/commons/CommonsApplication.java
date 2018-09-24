@@ -1,9 +1,14 @@
 package fr.free.nrw.commons;
 
+import android.annotation.SuppressLint;
+import android.app.Application;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.database.sqlite.SQLiteDatabase;
-import android.support.multidex.MultiDexApplication;
+import android.os.Build;
+import android.support.annotation.RequiresApi;
 
 import com.facebook.drawee.backends.pipeline.Fresco;
 import com.facebook.imagepipeline.core.ImagePipelineConfig;
@@ -43,7 +48,7 @@ import timber.log.Timber;
         resDialogCommentPrompt = R.string.crash_dialog_comment_prompt,
         resDialogOkToast = R.string.crash_dialog_ok_toast
 )
-public class CommonsApplication extends MultiDexApplication {
+public class CommonsApplication extends Application {
 
     @Inject SessionManager sessionManager;
     @Inject DBOpenHelper dbOpenHelper;
@@ -51,6 +56,11 @@ public class CommonsApplication extends MultiDexApplication {
     @Inject @Named("default_preferences") SharedPreferences defaultPrefs;
     @Inject @Named("application_preferences") SharedPreferences applicationPrefs;
     @Inject @Named("prefs") SharedPreferences otherPrefs;
+
+    /**
+     * Constants begin
+     */
+    public static final int OPEN_APPLICATION_DETAIL_SETTINGS = 1001;
 
     public static final String DEFAULT_EDIT_SUMMARY = "Uploaded using [[COM:MOA|Commons Mobile App]]";
 
@@ -62,6 +72,12 @@ public class CommonsApplication extends MultiDexApplication {
 
     public static final String LOGS_PRIVATE_EMAIL_SUBJECT = "Commons Android App (%s) Logs";
 
+    public static final String NOTIFICATION_CHANNEL_ID_ALL = "CommonsNotificationAll";
+
+    /**
+     * Constants End
+     */
+
     private RefWatcher refWatcher;
 
 
@@ -71,24 +87,34 @@ public class CommonsApplication extends MultiDexApplication {
     @Override
     public void onCreate() {
         super.onCreate();
-        Traceur.enableLogging();
+        if (BuildConfig.DEBUG) {
+            //FIXME: Traceur should be disabled for release builds until error fixed
+            //See https://github.com/commons-app/apps-android-commons/issues/1877
+            Traceur.enableLogging();
+        }
 
         ApplicationlessInjection
                 .getInstance(this)
                 .getCommonsApplicationComponent()
                 .inject(this);
+
+        Timber.plant(new Timber.DebugTree());
+
 //        Set DownsampleEnabled to True to downsample the image in case it's heavy
         ImagePipelineConfig config = ImagePipelineConfig.newBuilder(this)
                 .setDownsampleEnabled(true)
                 .build();
-        Fresco.initialize(this,config);
+        try {
+            Fresco.initialize(this, config);
+        } catch (Exception e) {
+            Timber.e(e);
+            // TODO: Remove when we're able to initialize Fresco in test builds.
+        }
         if (setupLeakCanary() == RefWatcher.DISABLED) {
             return;
         }
         // Empty temp directory in case some temp files are created and never removed.
         ContributionUtils.emptyTemporaryDirectory();
-
-        Timber.plant(new Timber.DebugTree());
 
         if (!BuildConfig.DEBUG) {
             ACRA.init(this);
@@ -96,10 +122,23 @@ public class CommonsApplication extends MultiDexApplication {
             Stetho.initializeWithDefaults(this);
         }
 
+
+        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.O) {
+            createNotificationChannel();
+        }
+
         // Fire progress callbacks for every 3% of uploaded content
         System.setProperty("in.yuvi.http.fluent.PROGRESS_TRIGGER_THRESHOLD", "3.0");
     }
 
+    @RequiresApi(26)
+    private void createNotificationChannel() {
+        NotificationChannel channel = new NotificationChannel(
+                NOTIFICATION_CHANNEL_ID_ALL,
+                getString(R.string.notifications_channel_name_all), NotificationManager.IMPORTANCE_NONE);
+        NotificationManager manager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+        manager.createNotificationChannel(channel);
+    }
 
     /**
      * Helps in setting up LeakCanary library
@@ -128,6 +167,7 @@ public class CommonsApplication extends MultiDexApplication {
      * @param context Application context
      * @param logoutListener Implementation of interface LogoutListener
      */
+    @SuppressLint("CheckResult")
     public void clearApplicationData(Context context, LogoutListener logoutListener) {
         File cacheDirectory = context.getCacheDir();
         File applicationDirectory = new File(cacheDirectory.getParent());
@@ -140,7 +180,7 @@ public class CommonsApplication extends MultiDexApplication {
             }
         }
 
-        sessionManager.clearAllAccounts()
+        sessionManager.logout()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(() -> {
@@ -151,7 +191,6 @@ public class CommonsApplication extends MultiDexApplication {
                     applicationPrefs.edit().putBoolean("firstrun", false).apply();
                     otherPrefs.edit().clear().apply();
                     updateAllDatabases();
-
                     logoutListener.onLogoutComplete();
                 });
     }

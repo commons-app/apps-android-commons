@@ -56,6 +56,7 @@
   <string name="login_failed_generic">Login failed</string>
   <string name="share_upload_button">Upload</string>
   <string name="multiple_share_base_title">Name this set</string>
+  <string name="add_set_name_toast">Please provide a name for this set</string>
   <string name="provider_modifications">Modifications</string>
   <string name="menu_upload_single">Upload</string>
   <string name="categories_search_text_hint">Search categories</string>
@@ -152,7 +153,7 @@
   <string name="welcome_copyright_subtext">Avoid copyrighted materials you found from the Internet as well as images of posters, book covers, etc.</string>
   <string name="welcome_final_text">You think you got it?</string>
   <string name="welcome_final_button_text">Yes!</string>
-  <string name="welcome_help_button_text"><u>More Information</u></string>
+  <string name="welcome_help_button_text"><![CDATA[<u>More Information</u>]]></string>
   <string name="detail_panel_cats_label">Categories</string>
   <string name="detail_panel_cats_loading">Loading…</string>
   <string name="detail_panel_cats_none">None selected</string>
@@ -237,60 +238,64 @@
   <string name="give_permission">Give permission</string>
   <string name="use_external_storage">Use external storage</string>
   <string name="use_external_storage_summary">Save pictures taken with the in-app camera on your device</string>
-  <string name="login_to_your_account">Login to your account</string>
+  <string name="login_to_your_account">Log in to your account</string>
   <string name="send_log_file">Send log file</string>
   <string name="send_log_file_description">Send log file to developers via email</string>
   <string name="no_web_browser">No web browser found to open URL</string>
   <string name="null_url">Error! URL not found</string>
   <string name="nominate_deletion">Nominate for Deletion</string>
   <string name="nominated_for_deletion">This image has been nominated for deletion.</string>
-  <string name="nominated_see_more"><u>See webpage for details</u></string>
+  <string name="nominated_see_more"><![CDATA[<u>See webpage for details</u>]]></string>
   <string name="view_browser">View in Browser</string>
+  <string name="skip_login">Skip</string>
+  <string name="navigation_item_login">Log in</string>
+  <string name="skip_login_title">Do you really want to skip login?</string>
+  <string name="skip_login_message">You will not be able to upload pictures.</string>
+  <string name="login_alert_message">Please log in to use this feature</string>
+  <string name="copy_wikicode">Copy the wikitext to the clipboard</string>
+  <string name="wikicode_copied">The wikitext was copied to the clipboard</string>
 
-    <string name="nearby_location_has_not_changed">Location has not changed.</string>
-    <string name="nearby_location_not_available">Location not available.</string>
-    <string name="location_permission_rationale_nearby">Permission required to display a list of nearby places</string>
-    <string name="get_directions">GET DIRECTIONS</string>
-    <string name="read_article">READ ARTICLE</string>
+  <string name="nearby_location_has_not_changed">Location has not changed.</string>
+  <string name="nearby_location_not_available">Location not available.</string>
+  <string name="location_permission_rationale_nearby">Permission required to display a list of nearby places</string>
+  <string name="get_directions">GET DIRECTIONS</string>
+  <string name="read_article">READ ARTICLE</string>
 
-    <string name="notifications_welcome" formatted="false">Welcome to Wikimedia Commons, %1$s! We\'re glad you\'re here.</string>
-    <string name="notifications_talk_page_message">%1$s left a message on your talk page</string>
-    <string name="notifications_thank_you_edit">Thank you for making an edit</string>
-    <string name="notifications_mention">%1$s mentioned you on %2$s.</string>
-    <string name="toggle_view_button">Toggle view</string>
-    <string name="nearby_directions">DIRECTIONS</string>
-    <string name="nearby_wikidata">WIKIDATA</string>
-    <string name="nearby_wikipedia">WIKIPEDIA</string>
-    <string name="nearby_commons">COMMONS</string>
-    <string name="about_rate_us"><![CDATA[<u>Rate us</u>]]></string>
-    <string name="about_faq"><![CDATA[<u>FAQ</u>]]></string>
-    <string name="welcome_skip_button">Skip Tutorial</string>
-    <string name="no_internet">Internet unavailable</string>
-    <string name="internet_established">Internet available</string>
-    <string name="error_notifications">Error fetching notifications</string>
-    <string name="no_notifications">No notifications found</string>
-    <string name="about_translate"><![CDATA[<u>Translate</u>]]></string>
-    <string name="about_translate_title">Languages</string>
-    <string name="about_translate_message">Select the language that you would like to submit translations for</string>
-    <string name="about_translate_proceed">Proceed</string>
-    <string name="about_translate_cancel">Cancel</string>
-    <string name="retry">Retry</string>
+  <string formatted="false" name="notifications_welcome">Welcome to Wikimedia Commons, %1$s! We\'re glad you\'re here.</string>
+  <string name="notifications_talk_page_message">%1$s left a message on your talk page</string>
+  <string name="notifications_thank_you_edit">Thank you for making an edit</string>
+  <string name="notifications_mention">%1$s mentioned you on %2$s.</string>
+  <string name="toggle_view_button">Toggle view</string>
+  <string name="nearby_directions">DIRECTIONS</string>
+  <string name="nearby_wikidata">WIKIDATA</string>
+  <string name="nearby_wikipedia">WIKIPEDIA</string>
+  <string name="nearby_commons">COMMONS</string>
+  <string name="about_rate_us"><![CDATA[<u>Rate us</u>]]></string>
+  <string name="about_faq"><![CDATA[<u>FAQ</u>]]></string>
+  <string name="welcome_skip_button">Skip Tutorial</string>
+  <string name="no_internet">Internet unavailable</string>
+  <string name="internet_established">Internet available</string>
+  <string name="error_notifications">Error fetching notifications</string>
+  <string name="no_notifications">No notifications found</string>
+  <string name="about_translate"><![CDATA[<u>Translate</u>]]></string>
+  <string name="about_translate_title">Languages</string>
+  <string name="about_translate_message">Select the language that you would like to submit translations for</string>
+  <string name="about_translate_proceed">Proceed</string>
+  <string name="about_translate_cancel">Cancel</string>
+  <string name="retry">Retry</string>
 
-    <string name="showcase_view_got_it_button">Got it!</string>
-    <string name="showcase_view_whole_nearby_activity">These are the places near you that need pictures to illustrate their Wikipedia articles</string>
-    <string name="showcase_view_list_icon">Tapping this button brings up a list of these places</string>
-    <string name="showcase_view_plus_fab">You can upload a picture for any place from your gallery or camera</string>
+  <string name="showcase_view_got_it_button">Got it!</string>
+  <string name="showcase_view_whole_nearby_activity">These are the places near you that need pictures to illustrate their Wikipedia articles</string>
+  <string name="showcase_view_list_icon">Tapping this button brings up a list of these places</string>
+  <string name="showcase_view_plus_fab">You can upload a picture for any place from your gallery or camera</string>
 
-    <string name="no_images_found">No images found!</string>
-    <string name="error_loading_images">Error occurred while loading images.</string>
-    <string name="image_uploaded_by">Uploaded by: %1$s</string>
+  <string name="no_images_found">No images found!</string>
+  <string name="error_loading_images">Error occurred while loading images.</string>
+  <string name="image_uploaded_by">Uploaded by: %1$s</string>
 
-    <string name="block_notification">You are blocked from editing Commons</string>
-    <string name="share_app_title">Share App</string>
-    <string name="share_coordinates_not_present">Coordinates were not specified during image selection</string>
-    <string name="error_fetching_nearby_places">Error fetching nearby places.</string>
-    <string name="appwidget_img">Pic of the Day</string>
-    <string name="app_widget_heading">Pic of the Day</string>
+  <string name="block_notification">You are blocked from editing Commons</string>
+  <string name="appwidget_img">Pic of the Day</string>
+  <string name="app_widget_heading">Pic of the Day</string>
   <string name="menu_search_button">Search</string>
   <string name="search_commons">Search Commons</string>
   <string name="images_not_found">No Images matching %1$s found</string>
@@ -302,7 +307,7 @@
 
   <string name="successful_wikidata_edit">Image successfully added to %1$s on Wikidata!</string>
   <string name="wikidata_edit_failure">Failed to update corresponding Wikidata entity!</string>
-  <string name="menu_set_wallpaper">Set wallpaper</string>
+  <string name="menu_set_wallpaper">Set as wallpaper</string>
   <string name="wallpaper_set_successfully">Wallpaper set successfully!</string>
   <string name="quiz">Quiz</string>
   <string name="quiz_question_string">Is this picture OK to upload?</string>
@@ -311,11 +316,11 @@
   <string name="quiz_back_button">If you carry on uploading images that require deletion, your account will likely be banned. Are you sure you want to end the quiz?</string>
   <string name="quiz_alert_message">More than %1$s of the images you uploaded have been deleted. If you carry on uploading images that require deletion, your account will likely be banned.\n\nWould you like to view the tutorial again and then take a quiz to help you learn what type of images you should or shouldn\'t upload?</string>
   <string name="selfie_answer">Selfies do not have much encyclopedic value. Please do not upload a picture of yourself unless you already have a Wikipedia article about you.</string>
-  <string name="taj_mahal_answer">Pictures of monuments and outside scenery is OK to upload in most countries. Please note that temporary art installations outside are often copyrighted and not OK to upload.</string>
+  <string name="taj_mahal_answer">Pictures of monuments and outside scenery are OK to upload in most countries. Please note that temporary art installations outside are often copyrighted and not OK to upload.</string>
   <string name="screenshot_answer">Screenshots of websites are considered derivatives works and subject to any copyright on the website itself. These can be used after permission from the author. Without such permission, any art you create based on their work is legally considered an unlicensed copy owned by the original author.</string>
   <string name="blurry_image_answer">One of the goals of Commons is to gather quality images. Therefore, blurry images shouldn\'t be uploaded. Always try to take nice pictures with good lighting.</string>
   <string name="construction_event_answer">Pictures showing technology or culture are very welcome on Commons.</string>
-  <string name="warning_for_image_reverts">WARNING : More than %1$s of the images you uploaded have been deleted. If you carry on uploading images that require deletion, your account will likely be banned.</string>
+  <string name="warning_for_image_reverts">WARNING: More than %1$s of the images you uploaded have been deleted. If you carry on uploading images that require deletion, your account will likely be banned.</string>
   <string name="congratulatory_message_quiz">You got %1$s of the answers correct. Congratulations!</string>
   <string name="warning_for_no_answer">Select one of the two options to answer the question</string>
   <string name="user_not_logged_in">Login session expired, please log in again.</string>
@@ -324,6 +329,10 @@
   <string name="correct">Correct Answer</string>
   <string name="wrong">Wrong Answer</string>
   <string name="quiz_screenshot_question">Is this screenshot OK to upload?</string>
+  <string name="share_app_title">Share App</string>
+  <string name="share_coordinates_not_present">Coordinates were not specified during image selection</string>
+  <string name="error_fetching_nearby_places">Error fetching nearby places.</string>
+  <string name="add_description">+ Add description</string>
 
   <string name="delete_recent_searches_dialog">Are you sure you want to clear your search history?</string>
   <string name="search_history_deleted">Search history deleted</string>
@@ -342,4 +351,9 @@
   <string name="images_uploaded_explanation">The number of images you have uploaded to Commons, via any upload software</string>
   <string name="images_reverted_explanation">The percentage of images you have uploaded to Commons that were not deleted</string>
   <string name="images_used_explanation">The number of images you have uploaded to Commons that were used in Wikimedia articles</string>
+
+  <string name="error_occurred">Error occurred!</string>
+  <string name="notifications_channel_name_all">Commons Notification</string>
+  <string name="storage_permission">Storage Permission</string>
+  <string name="write_storage_permission_rationale_for_image_share">We need your permission to access the external storage of your device in order to upload images.</string>
 </resources>

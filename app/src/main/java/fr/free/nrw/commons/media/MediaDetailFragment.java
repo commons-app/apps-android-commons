@@ -1,6 +1,8 @@
 package fr.free.nrw.commons.media;
 
 import android.app.AlertDialog;
+import android.content.ClipData;
+import android.content.ClipboardManager;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.DataSetObserver;
@@ -9,6 +11,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.text.Editable;
+import android.text.Html;
 import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.util.TypedValue;
@@ -50,6 +53,7 @@ import fr.free.nrw.commons.mwapi.MediaWikiApi;
 import fr.free.nrw.commons.ui.widget.CompatTextView;
 import timber.log.Timber;
 
+import static android.content.Context.CLIPBOARD_SERVICE;
 import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
 import static android.widget.Toast.LENGTH_SHORT;
@@ -60,6 +64,7 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
     private boolean isCategoryImage;
     private MediaDetailPagerFragment.MediaDetailProvider detailProvider;
     private int index;
+    private Locale locale;
 
     public static MediaDetailFragment forMedia(int index, boolean editable, boolean isCategoryImage) {
         MediaDetailFragment mf = new MediaDetailFragment();
@@ -161,6 +166,7 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
         final View view = inflater.inflate(R.layout.fragment_media_detail, container, false);
 
         ButterKnife.bind(this,view);
+        seeMore.setText(Html.fromHtml(getString(R.string.nominated_see_more)));
 
         if (isCategoryImage){
             authorLayout.setVisibility(VISIBLE);
@@ -198,6 +204,7 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
             }
         };
         view.getViewTreeObserver().addOnGlobalLayoutListener(layoutListener);
+        locale = getResources().getConfiguration().locale;
         return view;
     }
 
@@ -349,6 +356,17 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
         }
     }
 
+    @OnClick(R.id.copyWikicode)
+    public void onCopyWikicodeClicked(){
+        String data = "[[" + media.getFilename() + "|thumb|" + media.getDescription() + "]]";
+        ClipboardManager clipboard = (ClipboardManager) getContext().getApplicationContext().getSystemService(CLIPBOARD_SERVICE);
+        clipboard.setPrimaryClip(ClipData.newPlainText("wikiCode", data));
+
+        Timber.d("Generated wikidata copy code: %s", data);
+
+        Toast.makeText(getContext(), getString(R.string.wikicode_copied), Toast.LENGTH_SHORT).show();
+    }
+
     @OnClick(R.id.nominateDeletion)
     public void onDeleteButtonClicked(){
         //Reviewer correct me if i have misunderstood something over here
@@ -455,7 +473,7 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
 
     private String prettyDescription(Media media) {
         // @todo use UI language when multilingual descs are available
-        String desc = media.getDescription("en").trim();
+        String desc = media.getDescription(locale.getLanguage()).trim();
         if (desc.equals("")) {
             return getString(R.string.detail_description_empty);
         } else {

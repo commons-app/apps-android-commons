@@ -6,6 +6,7 @@
 * JohSan65
 * Jon Harald Søby
 * Laaknor
+* Orf3us
 * SuperPotato
 -->
 <resources>
@@ -61,10 +62,11 @@
   <string name="login_failed_wrong_credentials">Kunne ikke logge inn – sjekk brukernavnet og passordet ditt</string>
   <string name="login_failed_throttled">For mange misslykkede forsøk. Vennligst prøv igjen om noen få minutter.</string>
   <string name="login_failed_blocked">Beklager, denne brukeren har blitt blokkert på Commons</string>
-  <string name="login_failed_2fa_needed">Du må oppgi tofaktorautentiseringskoden din.</string>
+  <string name="login_failed_2fa_needed">Du må oppgi koden din for totrinns pålogging.</string>
   <string name="login_failed_generic">Innlogging feilet</string>
   <string name="share_upload_button">Last opp</string>
   <string name="multiple_share_base_title">Navngi dette settet</string>
+  <string name="add_set_name_toast">Angi et navn for dette settet</string>
   <string name="provider_modifications">Endringer</string>
   <string name="menu_upload_single">Last opp</string>
   <string name="categories_search_text_hint">Søk kategorier</string>
@@ -159,6 +161,7 @@
   <string name="welcome_copyright_subtext">Unngå opphavsrettsbeskyttet materiale som du har funnet på internett samt bilder av plakater, bokomslag, osv.</string>
   <string name="welcome_final_text">Forstått?</string>
   <string name="welcome_final_button_text">Ja!</string>
+  <string name="welcome_help_button_text">&lt;u&gt;Mer informasjon&lt;/u&gt;</string>
   <string name="detail_panel_cats_label">Kategorier</string>
   <string name="detail_panel_cats_loading">Laster …</string>
   <string name="detail_panel_cats_none">Ingen valgt</string>
@@ -192,7 +195,7 @@
   <string name="maximum_limit">Maksimumsgrense</string>
   <string name="maximum_limit_alert">Kan ikke vise mer enn 500</string>
   <string name="set_limit">Sett grense for seneste opplastinger</string>
-  <string name="login_failed_2fa_not_supported">Tofaktorautentisering støttes ikke ennå.</string>
+  <string name="login_failed_2fa_not_supported">Totrinns pålogging støttes ikke ennå.</string>
   <string name="logout_verification">Ønsker du virkelig å logge ut?</string>
   <string name="commons_logo">Commons-logo</string>
   <string name="commons_website">Commons-nettsted</string>
@@ -246,7 +249,15 @@
   <string name="null_url">Feil! URL ikke funnet</string>
   <string name="nominate_deletion">Nominer for sletting</string>
   <string name="nominated_for_deletion">Dette bildet har blitt nominert for sletting.</string>
+  <string name="nominated_see_more">&lt;u&gt;Se nettsiden for detaljer&lt;/u&gt;</string>
   <string name="view_browser">Vis i nettleseren</string>
+  <string name="skip_login">Hopp over</string>
+  <string name="navigation_item_login">Logg inn</string>
+  <string name="skip_login_title">Vil du hoppe over logg inn?</string>
+  <string name="skip_login_message">Du kan ikke laste opp bilder.</string>
+  <string name="login_alert_message">Logg vennligst inn for å bruke denne funksjonen</string>
+  <string name="copy_wikicode">Kopier wikiteksten til utklippstavlen</string>
+  <string name="wikicode_copied">Wikiteksten har blitt kopiert til utklippstavlen</string>
   <string name="nearby_location_has_not_changed">Stedet har ikke blitt endret.</string>
   <string name="nearby_location_not_available">Sted ikke tilgjengelig.</string>
   <string name="location_permission_rationale_nearby">Tillatelse kreves for å vise listen over steder i nærheten</string>
@@ -282,9 +293,6 @@
   <string name="error_loading_images">Feil oppsto under lasting av bilder.</string>
   <string name="image_uploaded_by">Lastet opp av: %1$s</string>
   <string name="block_notification">Du er blokkert fra å redigere Commons</string>
-  <string name="share_app_title">Del appen</string>
-  <string name="share_coordinates_not_present">Koordinater ble ikke spesifisert under bildevalget</string>
-  <string name="error_fetching_nearby_places">Feil under henting av steder i nærheten.</string>
   <string name="appwidget_img">Dagens bilde</string>
   <string name="app_widget_heading">Dagens bilde</string>
   <string name="menu_search_button">Søk</string>
@@ -299,7 +307,30 @@
   <string name="wikidata_edit_failure">Kunne ikke oppdatere tilsvarende Wikidata-element!</string>
   <string name="menu_set_wallpaper">Angi som bakgrunnsbilde</string>
   <string name="wallpaper_set_successfully">Bakgrunnsbildet ble endret!</string>
+  <string name="quiz">Kviss</string>
+  <string name="quiz_question_string">Kan dette bildet lastes opp?</string>
+  <string name="question">Spørsmål</string>
+  <string name="result">Resultat</string>
+  <string name="quiz_back_button">Om du fortsetter å laste opp bilder som må slettes vil kontoen din trolig bli blokkert. Er du sikker på at du vil avslutte kvissen?</string>
+  <string name="quiz_alert_message">Mer enn %1$s av bildene du har lastet opp har blitt slettet. Om du fortsetter å laste opp bilder som må slettes vil kntoen din sannsynligvis bli blokkert.\n\nØnsker du å sjekke veiviseren igjen og ta en kviss som kan lære deg hva slags bilder som bør eller ikke bør lastes opp?</string>
+  <string name="selfie_answer">Selfier har ikke mye ensyklopedisk verdi. Ikke last opp et bilde av deg selv med mindre det allerede fins en Wikipedia-artikkel om deg.</string>
+  <string name="taj_mahal_answer">Bilder av kulturminner og landskap kan lastes opp i de fleste land. Merk at midlertidige utendørs kunstinstallasjoner ofte er opphavsrettsbeskyttet og kan dermed ikke lastes opp.</string>
+  <string name="screenshot_answer">Skjermbilder av nettsteder anses som derivative verk og er gjenstand for nettstedets opphavsrett. Disse kan brukes med tillatelse fra opphavspersonen. Uten slik tillatelse vil verk du skaper basert på deres verk juridisk anses som en ulisensiert kopi eid av den opprinnelige opphavspersonen.</string>
+  <string name="blurry_image_answer">Et av målene til Commons er å samle kvalitetsbilder. Uskarpe bilder bør derfor ikke lastes opp. Prøv alltid å ta fine bilder med god lyssetting.</string>
+  <string name="construction_event_answer">Bilder som viser teknologi eller kultur er veldig velkomne på Commons.</string>
+  <string name="warning_for_image_reverts">ADVARSEL: Mer enn %1$s av bildene du har lastet opp har blitt slettet. Om du fortsetter å laste opp bilder som må slettes vil kontoen din sannsynligvis bli blokkert.</string>
+  <string name="congratulatory_message_quiz">Du svarte rett på %1$s av spørsmålene. Gratulerer!</string>
+  <string name="warning_for_no_answer">Velg ett av de to alternativene for å besvare spørsmålet</string>
   <string name="user_not_logged_in">Innloggingsøkten har utløpt, logg inn på nytt.</string>
+  <string name="quiz_result_share_message">Del kvissen din med vennene dine!</string>
+  <string name="continue_message">Fortsett</string>
+  <string name="correct">Riktig svar</string>
+  <string name="wrong">Galt svar</string>
+  <string name="quiz_screenshot_question">Kan dette skjermbildet lastes opp?</string>
+  <string name="share_app_title">Del appen</string>
+  <string name="share_coordinates_not_present">Koordinater ble ikke spesifisert under bildevalget</string>
+  <string name="error_fetching_nearby_places">Feil under henting av steder i nærheten.</string>
+  <string name="add_description">+ Legg til beskrivelse</string>
   <string name="delete_recent_searches_dialog">Er du sikker på at du vil tømme søkehistorikken din?</string>
   <string name="search_history_deleted">Søkehistorikk slettet</string>
   <string name="Achievements">Prestasjoner</string>
@@ -316,4 +347,8 @@
   <string name="images_uploaded_explanation">Antallet bilder du har lastet opp på Commons via enhver opplastingsmåte</string>
   <string name="images_reverted_explanation">Prosentandelen av bildene du har lastet opp til Commons som ikke har blitt slettet</string>
   <string name="images_used_explanation">Antall bilder du har lastet opp på Commons som er brukt i Wikimedia-artikler</string>
+  <string name="error_occurred">En feil oppsto!</string>
+  <string name="notifications_channel_name_all">Commons-varsel</string>
+  <string name="storage_permission">Lagringstillatelse</string>
+  <string name="write_storage_permission_rationale_for_image_share">Vi trenger din tillatelse for å få tilgang til enhetens eksterne lagring for å kunne laste opp bilder.</string>
 </resources>

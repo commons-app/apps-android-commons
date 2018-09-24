@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  android:layout_width="match_parent"
+  android:layout_height="wrap_content"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:orientation="horizontal"
+  android:weightSum="10">
+
+  <android.support.v7.widget.AppCompatSpinner
+    android:id="@+id/spinner_description_languages"
+    android:layout_width="0dp"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center_vertical"
+    android:layout_weight="3"
+    tools:listitem="@layout/row_item_languages_spinner"
+    android:spinnerMode="dialog"></android.support.v7.widget.AppCompatSpinner>
+
+  <android.support.design.widget.TextInputLayout
+    android:layout_width="0dp"
+    android:layout_height="wrap_content"
+    android:layout_weight="7">
+
+    <EditText
+      android:id="@+id/et_description_text"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:drawableEnd="@drawable/mapbox_info_icon_default"
+      android:drawableRight="@drawable/mapbox_info_icon_default"
+      android:hint="@string/share_description_hint"
+      android:imeOptions="flagNoExtractUi"
+      android:inputType="textMultiLine"/>
+  </android.support.design.widget.TextInputLayout>
+
+
+</LinearLayout>

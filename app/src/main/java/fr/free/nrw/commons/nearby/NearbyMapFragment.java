@@ -15,6 +15,7 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.BottomSheetBehavior;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v7.app.AlertDialog;
 import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -53,8 +54,10 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 import dagger.android.support.DaggerFragment;
+import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.Utils;
+import fr.free.nrw.commons.auth.LoginActivity;
 import fr.free.nrw.commons.contributions.ContributionController;
 import fr.free.nrw.commons.utils.ContributionUtils;
 import fr.free.nrw.commons.utils.UriDeserializer;
@@ -68,6 +71,8 @@ import static fr.free.nrw.commons.wikidata.WikidataConstants.WIKIDATA_ENTITY_ID_
 
 public class NearbyMapFragment extends DaggerFragment {
 
+    @Inject
+    @Named("application_preferences") SharedPreferences applicationPrefs;
     public MapView mapView;
     private List<NearbyBaseMarker> baseMarkerOptions;
     private fr.free.nrw.commons.location.LatLng curLatLng;
@@ -373,7 +378,23 @@ public class NearbyMapFragment extends DaggerFragment {
     }
 
     private void setListeners() {
-        fabPlus.setOnClickListener(view -> animateFAB(isFabOpen));
+        fabPlus.setOnClickListener(view -> {
+            if (applicationPrefs.getBoolean("login_skipped", false)) {
+                // prompt the user to login
+                new AlertDialog.Builder(getContext())
+                        .setMessage(R.string.login_alert_message)
+                        .setPositiveButton(R.string.login, (dialog, which) -> {
+                            // logout of the app
+                            BaseLogoutListener logoutListener = new BaseLogoutListener();
+                            CommonsApplication app = (CommonsApplication) getActivity().getApplication();
+                            app.clearApplicationData(getContext(), logoutListener);
+
+                        })
+                        .show();
+            }else {
+                animateFAB(isFabOpen);
+            }
+        });
 
         bottomSheetDetails.setOnClickListener(view -> {
             if (bottomSheetDetailsBehavior.getState() == BottomSheetBehavior.STATE_COLLAPSED) {
@@ -489,6 +510,21 @@ public class NearbyMapFragment extends DaggerFragment {
             }
         });
         mapView.setStyleUrl("asset://mapstyle.json");
+    }
+
+    /**
+     * onLogoutComplete is called after shared preferences and data stored in local database are cleared.
+     */
+    private class BaseLogoutListener implements CommonsApplication.LogoutListener {
+        @Override
+        public void onLogoutComplete() {
+            Timber.d("Logout complete callback received.");
+            Intent nearbyIntent = new Intent( getActivity(), LoginActivity.class);
+            nearbyIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            nearbyIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(nearbyIntent);
+            getActivity().finish();
+        }
     }
 
     /**

@@ -148,6 +148,7 @@
   <string name="welcome_copyright_subtext">Evita materiali protetti da copyright che hai trovato su Internet, come pure le immagini di poster, copertine di libri, ecc.</string>
   <string name="welcome_final_text">Pensi di aver capito?</string>
   <string name="welcome_final_button_text">Sì!</string>
+  <string name="welcome_help_button_text">&lt;u&gt;Ulteriori informazioni&lt;/u&gt;</string>
   <string name="detail_panel_cats_label">Categorie</string>
   <string name="detail_panel_cats_loading">Caricamento…</string>
   <string name="detail_panel_cats_none">Nessuna selezione</string>
@@ -209,6 +210,8 @@
   <string name="login_to_your_account">Accedi alla tua utenza</string>
   <string name="null_url">Errore! URL non trovato</string>
   <string name="nominated_for_deletion">Questa immagine è stata proposta per la cancellazione.</string>
+  <string name="copy_wikicode">Copia il wikitesto negli appunti</string>
+  <string name="wikicode_copied">Il wikitesto è stato copiato negli appunti</string>
   <string name="nearby_location_has_not_changed">La posizione non è cambiata.</string>
   <string name="nearby_location_not_available">Posizione non disponibile.</string>
   <string name="get_directions">OTTIENI DIREZIONI</string>
@@ -232,7 +235,6 @@
   <string name="no_images_found">Nessuna immagine trovata!</string>
   <string name="error_loading_images">Si è verificato un errore durante il caricamento delle immagini.</string>
   <string name="image_uploaded_by">Caricato da: %1$s</string>
-  <string name="share_app_title">Condividi applicazione</string>
   <string name="appwidget_img">Foto del giorno</string>
   <string name="app_widget_heading">Foto del giorno</string>
   <string name="menu_search_button">Cerca</string>
@@ -241,7 +243,13 @@
   <string name="search_recent_header">Ricerche recenti:</string>
   <string name="error_loading_categories">Si è verificato un errore durante il caricamento delle categorie.</string>
   <string name="error_loading_subcategories">Si è verificato un errore durante il caricamento delle sottocategorie.</string>
+  <string name="question">Domanda</string>
+  <string name="result">Risultato</string>
   <string name="user_not_logged_in">Sessione di login scaduta, accedi nuovamente.</string>
+  <string name="continue_message">Continua</string>
+  <string name="correct">Risposta corretta</string>
+  <string name="wrong">Risposta sbagliata</string>
+  <string name="share_app_title">Condividi applicazione</string>
   <string name="delete_recent_searches_dialog">Sei sicuro di voler cancellare la tua cronologia di ricerca?</string>
   <string name="search_history_deleted">Cronologia di ricerca cancellata</string>
   <string name="Achievements">Risultati</string>

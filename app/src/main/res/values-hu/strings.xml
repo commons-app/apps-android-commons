@@ -13,6 +13,8 @@
 * ViDam
 -->
 <resources>
+  <string name="title_activity_explore">Felfedezés</string>
+  <string name="navigation_item_explore">Felfedezés</string>
   <string name="preference_category_appearance">Megjelenés</string>
   <string name="preference_category_general">Általános</string>
   <string name="preference_category_feedback">Visszajelzés</string>
@@ -20,6 +22,7 @@
   <string name="app_name">Commons</string>
   <string name="bullet">•</string>
   <string name="menu_settings">Beállítások</string>
+  <string name="intent_share_upload_label">Feltöltés a Commonsra</string>
   <string name="username">Felhasználónév</string>
   <string name="password">Jelszó</string>
   <string name="login_credential">Jelentkezz be a Commons Béta fiókoddal</string>
@@ -31,7 +34,7 @@
   <string name="login_success">Sikeres bejelentkezés</string>
   <string name="login_failed">A bejelentkezés nem sikerült.</string>
   <string name="upload_failed">A fájl nem található. Próbálkozz másik fájllal.</string>
-  <string name="authentication_failed" fuzzy="true">Sikertelen hitelesítés.</string>
+  <string name="authentication_failed">Sikertelen hitelesítés, kérlek jelentkezz be újra</string>
   <string name="uploading_started">Feltöltés elindult.</string>
   <string name="upload_completed_notification_title">%1$s feltöltve.</string>
   <string name="upload_completed_notification_text">Feltöltés megtekintése</string>
@@ -94,6 +97,7 @@
   <string name="title_activity_settings">Beállítások</string>
   <string name="title_activity_signup">Regisztráció</string>
   <string name="title_activity_featured_images">Kiemelt képek</string>
+  <string name="title_activity_category_details">Kategória</string>
   <string name="menu_about">Névjegy</string>
   <string name="about_license">A Wikimedia Commons applikáció egy nyílt forráskódú szoftver, amit a Wikimedia-közösség önkéntesei készítettek és tartanak karban. A Wikimédia Alapítvány nem vesz részt az applikáció megalkotásában, fejlesztésében és üzemeltetésében.</string>
   <string name="about_improve">Nyiss egy új &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;GitHub-problémát&lt;/a&gt; hibabejelentéssel vagy fejlesztési javaslattal.</string>
@@ -238,6 +242,12 @@
   <string name="nominate_deletion">Törlésre jelölés</string>
   <string name="nominated_for_deletion">Ezt a képet törlésre jelölték.</string>
   <string name="view_browser">Megtekintés böngészőben</string>
+  <string name="skip_login">Kihagyás</string>
+  <string name="navigation_item_login">Bejelentkezés</string>
+  <string name="skip_login_title">Biztos ki akarod hagyni a bejelentkezést?</string>
+  <string name="login_alert_message">A funkció használatához kérlek jelentkezz be.</string>
+  <string name="copy_wikicode">Wikiszöveg vágólapra másolása</string>
+  <string name="wikicode_copied">A wikiszöveg a vágólapra lett másolva</string>
   <string name="nearby_location_has_not_changed">A hely nem változott.</string>
   <string name="nearby_location_not_available">A hely nem érhető el.</string>
   <string name="location_permission_rationale_nearby">Közeli helyek listájának megtekintéséhez engedély szükséges</string>
@@ -266,7 +276,25 @@
   <string name="no_images_found">Nem található kép!</string>
   <string name="error_loading_images">Képbetöltés közben hiba történt</string>
   <string name="image_uploaded_by">Feltöltötte: %1$s</string>
+  <string name="appwidget_img">A nap képe</string>
+  <string name="app_widget_heading">A nap képe</string>
+  <string name="menu_search_button">Keresés</string>
+  <string name="search_commons">Keresés a Commonson</string>
+  <string name="title_activity_search">Keresés</string>
+  <string name="search_recent_header">Legutóbbi keresések:</string>
+  <string name="menu_set_wallpaper">Beállítás háttérképként</string>
+  <string name="quiz">Kvíz</string>
+  <string name="continue_message">Folytatás</string>
+  <string name="correct">Helyes válasz</string>
+  <string name="wrong">Rossz válasz</string>
   <string name="share_app_title">Alkalmazás megosztása</string>
   <string name="share_coordinates_not_present">A koordináták nem lettek megadva a kép kiválasztásakor.</string>
   <string name="error_fetching_nearby_places">Hiba a közeli helyek elérésekor.</string>
+  <string name="delete_recent_searches_dialog">Biztosan törölni szeretnéd a keresési előzményeidet?</string>
+  <string name="search_history_deleted">Keresési előzmények törölve</string>
+  <string name="Achievements">Eredmények</string>
+  <string name="statistics">Statisztikák</string>
+  <string name="statistics_thanks">Kapott köszönetek</string>
+  <string name="statistics_featured">Kiemelt képek</string>
+  <string name="achievements_share_message">Oszd meg eredményeidet a barátaiddal!</string>
 </resources>

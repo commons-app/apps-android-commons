@@ -61,6 +61,7 @@
   <string name="add_title_toast">এই ফাইলটির জন্য একটি শিরোনাম প্রদান করুন</string>
   <string name="share_description_hint">বিবরণ</string>
   <string name="login_failed_network">প্রবেশ করা যাচ্ছে না - নেটওয়ার্ক ব্যর্থতা</string>
+  <string name="login_failed_wrong_credentials">প্রবেশ করতে অক্ষম - দয়া করে আপনার ব্যবহারকারী নাম এবং পাসওয়ার্ড পরীক্ষা করুন</string>
   <string name="login_failed_throttled">খুব বেশি অসফল প্রচেষ্টা। অনুগ্রহ করে কয়েক মিনিট পরে আবারও চেষ্টা করুন।</string>
   <string name="login_failed_blocked">দুঃখিত, এই ব্যবহারকারীকে কমন্সে বাধা দেয়া হয়েছে</string>
   <string name="login_failed_2fa_needed">অাপনাকে অবশ্যই অাপনার দু\'স্তরের সত্যায়নকরণ কোড দিতে হবে।</string>
@@ -243,6 +244,8 @@
   <string name="null_url">ত্রুটি! ইউআরএল পাওয়া যায়নি</string>
   <string name="nominate_deletion">অপসারণের জন্য মনোনীত</string>
   <string name="view_browser">ব্রাউজারে দেখুন</string>
+  <string name="skip_login">এড়ান</string>
+  <string name="navigation_item_login">প্রবেশ করুন</string>
   <string name="nearby_location_has_not_changed">অবস্থান পরিবর্তন হয়নি।</string>
   <string name="nearby_location_not_available">অবস্থান উপলব্ধ নয়।</string>
   <string name="location_permission_rationale_nearby">কাছাকাছি স্থানসমূহের একটি তালিকা প্রদর্শন করতে অনুমতি প্রয়োজন</string>
@@ -267,8 +270,22 @@
   <string name="showcase_view_got_it_button">বুঝেছি!</string>
   <string name="no_images_found">কোন চিত্র পাওয়া যায়নি!</string>
   <string name="image_uploaded_by">আপলোড করেছেন: %1$s</string>
-  <string name="error_fetching_nearby_places">কাছাকাছি স্থানগুলি আনতে ত্রুটি।</string>
+  <string name="appwidget_img">আজকের চিত্র</string>
+  <string name="app_widget_heading">আজকের চিত্র</string>
   <string name="menu_search_button">অনুসন্ধান</string>
   <string name="search_commons">কমন্সে অনুসন্ধান করুন</string>
   <string name="title_activity_search">অনুসন্ধান</string>
+  <string name="quiz">কুইজ</string>
+  <string name="question">প্রশ্ন</string>
+  <string name="result">ফলাফল</string>
+  <string name="continue_message">অগ্রসর হোন</string>
+  <string name="correct">সঠিক উত্তর</string>
+  <string name="wrong">ভুল উত্তর</string>
+  <string name="error_fetching_nearby_places">কাছাকাছি স্থানগুলি আনতে ত্রুটি।</string>
+  <string name="add_description">+ বিবরণ যোগ করুন</string>
+  <string name="Achievements">কৃতিত্বগুলি</string>
+  <string name="statistics">পরিসংখ্যান</string>
+  <string name="statistics_featured">নির্বাচিত ছবি</string>
+  <string name="level">স্তর</string>
+  <string name="notifications_channel_name_all">কমন্স বিজ্ঞপ্তি</string>
 </resources>

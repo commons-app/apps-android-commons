@@ -207,6 +207,16 @@
                     android:layout_marginBottom="@dimen/standard_gap"
                     android:text="@string/forgot_password" />
 
+                <fr.free.nrw.commons.ui.widget.HtmlTextView
+                    android:visibility="visible"
+                    android:id="@+id/skipLogin"
+                    android:layout_width="match_parent"
+                    android:gravity="center_horizontal"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/forgotPassword"
+                    android:layout_marginBottom="@dimen/standard_gap"
+                    android:text="@string/skip_login" />
+
             </RelativeLayout>
 
         </android.support.v7.widget.CardView>
