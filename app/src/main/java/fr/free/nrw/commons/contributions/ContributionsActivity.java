@@ -193,6 +193,8 @@ public class ContributionsActivity extends AuthenticatedActivity implements Frag
                 contributionsFragment.getChildFragmentManager().popBackStack();
                 // Tabs were invisible when Media Details Fragment is active, make them visible again on Contrib List Fragment active
                 showTabs();
+                // Nearby Notification Card View was invisible when Media Details Fragment is active, make it visible again on Contrib List Fragment active
+                contributionsFragment.nearbyNoificationCardView.setVisibility(View.VISIBLE);
                 // Make number of uploads visible when Contributions List is visible
                 // TODO Neslihan: ContributionListViewUtils.setIndicatorVisibility(contributionsFragment.numberOfUploads, contributionsFragment.numberOfUploadsProgressBar, true, false);
                 // TODO Neslihan: ContributionListViewUtils.setIndicatorVisibility(contributionsFragment.notificationsCardView, contributionsFragment.notificationsCardViewProgressBar, true, false);

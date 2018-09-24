@@ -170,6 +170,9 @@ public class ContributionsFragment
     public void setContributionsListFragment() {
         // show tabs on contribution list is visible
         ((ContributionsActivity)getActivity()).showTabs();
+        // show nearby card view on contributions list is visible
+        nearbyNoificationCardView.setVisibility(View.GONE);
+
 
         // Create if null
         if (getContributionsListFragment() == null) {
@@ -190,6 +193,8 @@ public class ContributionsFragment
     public void setMediaDetailPagerFragment() {
         // hide tabs on media detail view is visible
         ((ContributionsActivity)getActivity()).hideTabs();
+        // hide nearby card view on media detail is visible
+        nearbyNoificationCardView.setVisibility(View.GONE);
 
         // Create if null
         if (getMediaDetailPagerFragment() == null) {

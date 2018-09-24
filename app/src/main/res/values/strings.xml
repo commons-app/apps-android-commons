@@ -355,7 +355,7 @@
 
   <string name="contributions_fragment">Contributions</string>
   <string name="nearby_fragment">Nearby</string>
-  <string name="notifictions">Notifications</string>
+  <string name="notifications">Notifications</string>
   <string name="display_nearby_notification">Display nearby notification</string>
   <string name="display_nearby_notification_summary">Display closest wikidata item needs an image, above contribution list</string>
 
