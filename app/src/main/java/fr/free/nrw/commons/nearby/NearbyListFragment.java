@@ -30,13 +30,11 @@ import dagger.android.support.DaggerFragment;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.contributions.ContributionController;
 import fr.free.nrw.commons.location.LatLng;
-import fr.free.nrw.commons.utils.ContributionUtils;
 import fr.free.nrw.commons.utils.UriDeserializer;
 import timber.log.Timber;
 
 import static android.app.Activity.RESULT_OK;
 import static android.content.pm.PackageManager.PERMISSION_GRANTED;
-import static fr.free.nrw.commons.wikidata.WikidataConstants.WIKIDATA_ENTITY_ID_PREF;
 
 public class NearbyListFragment extends DaggerFragment {
     private Bundle bundleForUpdates; // Carry information from activity about changed nearby places and current location
@@ -75,7 +73,7 @@ public class NearbyListFragment extends DaggerFragment {
                              ViewGroup container,
                              Bundle savedInstanceState) {
         Timber.d("NearbyListFragment created");
-        View view = inflater.inflate(R.layout.fragment_nearby, container, false);
+        View view = inflater.inflate(R.layout.fragment_nearby_list, container, false);
         recyclerView = view.findViewById(R.id.listView);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
