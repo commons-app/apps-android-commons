@@ -138,6 +138,7 @@ public class NearbyNoificationCardView  extends CardView{
     }
 
     public void updateContent(boolean isClosestNearbyPlaceFound, Place place) {
+        Log.d("deneme","called3");
         // Make progress bar invisible once data is ready
         progressBar.setVisibility(GONE);
         // And content views visible since they are ready
@@ -150,7 +151,7 @@ public class NearbyNoificationCardView  extends CardView{
             notificationDistance.setText(place.distance);
         } else {
             notificationDistance.setText("");
-            notificationTitle.setText("No nearby places found around you");
+            notificationTitle.setText(R.string.no_close_nearby);
         }
     }
 }

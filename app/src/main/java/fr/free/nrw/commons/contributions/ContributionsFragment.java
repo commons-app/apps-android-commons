@@ -1,5 +1,6 @@
 package fr.free.nrw.commons.contributions;
 
+import android.Manifest;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
@@ -21,6 +22,7 @@ import android.support.v4.content.ContextCompat;
 import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
 import android.support.v4.app.LoaderManager;
+import android.support.v4.content.PermissionChecker;
 import android.support.v4.widget.CursorAdapter;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -451,8 +453,6 @@ public class ContributionsFragment
     @Override
     public void onStart() {
         super.onStart();
-        ((ContributionsActivity)getActivity()).locationManager.addLocationListener(this);
-
     }
 
     @Override
@@ -472,6 +472,9 @@ public class ContributionsFragment
     @Override
     public void onResume() {
         super.onResume();
+
+        ((ContributionsActivity)getActivity()).locationManager.addLocationListener(this);
+
         boolean isSettingsChanged = prefs.getBoolean(Prefs.IS_CONTRIBUTION_COUNT_CHANGED, false);
         prefs.edit().putBoolean(Prefs.IS_CONTRIBUTION_COUNT_CHANGED, false).apply();
         if (isSettingsChanged) {
@@ -489,7 +492,7 @@ public class ContributionsFragment
                     // Display nearest location, first listen
                     nearbyNoificationCardView.displayPermissionRequestButton(false);
                     ((ContributionsActivity)getActivity()).locationManager.registerLocationManager();
-                    Log.d("deneme","location manager registered, location manager:"+((ContributionsActivity)getActivity()).locationManager);
+                    Log.d("deneme","location manager registered*, location manager:"+((ContributionsActivity)getActivity()).locationManager);
                 } else {
                     // Display tab to see button, since permission is not granted and you have to grant it first
                     nearbyNoificationCardView.displayPermissionRequestButton(true);
@@ -497,8 +500,10 @@ public class ContributionsFragment
             } else {
                 nearbyNoificationCardView.displayPermissionRequestButton(false);
                 ((ContributionsActivity)getActivity()).locationManager.registerLocationManager();
+                Log.d("deneme","location manager registered"+((ContributionsActivity)getActivity()).locationManager.isLocationPermissionGranted());
             }
         } else {
+            // Hide nearby notification card view if related shared preferences is false
             nearbyNoificationCardView.setVisibility(View.GONE);
         }
 
@@ -532,6 +537,7 @@ public class ContributionsFragment
             nearbyNoificationCardView.updateContent (true, closestNearbyPlace);
             Log.d("deneme","placelist size > 0");
         } else {
+            // Means that no close nearby place is found
             Log.d("deneme","placelist bos");
             nearbyNoificationCardView.updateContent (false, null);
         }
@@ -541,6 +547,8 @@ public class ContributionsFragment
     public void onDestroy() {
         compositeDisposable.clear();
         getChildFragmentManager().removeOnBackStackChangedListener(this);
+        ((ContributionsActivity)getActivity()).locationManager.unregisterLocationManager();
+        ((ContributionsActivity)getActivity()).locationManager.removeLocationListener(this);
         super.onDestroy();
 
         if (isUploadServiceConnected) {
