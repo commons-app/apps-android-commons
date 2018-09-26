@@ -123,7 +123,7 @@ public class CommonsApplication extends Application {
         }
 
 
-        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.O) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             createNotificationChannel();
         }
 
@@ -133,11 +133,13 @@ public class CommonsApplication extends Application {
 
     @RequiresApi(26)
     private void createNotificationChannel() {
-        NotificationChannel channel = new NotificationChannel(
-                NOTIFICATION_CHANNEL_ID_ALL,
-                getString(R.string.notifications_channel_name_all), NotificationManager.IMPORTANCE_NONE);
         NotificationManager manager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-        manager.createNotificationChannel(channel);
+        NotificationChannel channel = manager.getNotificationChannel(NOTIFICATION_CHANNEL_ID_ALL);
+        if (channel == null) {
+            channel = new NotificationChannel(NOTIFICATION_CHANNEL_ID_ALL,
+                    getString(R.string.notifications_channel_name_all), NotificationManager.IMPORTANCE_NONE);
+            manager.createNotificationChannel(channel);
+        }
     }
 
     /**
