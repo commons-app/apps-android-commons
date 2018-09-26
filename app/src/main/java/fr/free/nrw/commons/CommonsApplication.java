@@ -101,10 +101,24 @@ public class CommonsApplication extends MultiDexApplication {
             Stetho.initializeWithDefaults(this);
         }
 
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            createNotificationChannel();
+        }
+
         // Fire progress callbacks for every 3% of uploaded content
         System.setProperty("in.yuvi.http.fluent.PROGRESS_TRIGGER_THRESHOLD", "3.0");
     }
 
+    @RequiresApi(26)
+    private void createNotificationChannel() {
+        NotificationManager manager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+        NotificationChannel channel = manager.getNotificationChannel(NOTIFICATION_CHANNEL_ID_ALL);
+        if (channel == null) {
+            channel = new NotificationChannel(NOTIFICATION_CHANNEL_ID_ALL,
+                    getString(R.string.notifications_channel_name_all), NotificationManager.IMPORTANCE_NONE);
+            manager.createNotificationChannel(channel);
+        }
+    }
 
     /**
      * Helps in setting up LeakCanary library
