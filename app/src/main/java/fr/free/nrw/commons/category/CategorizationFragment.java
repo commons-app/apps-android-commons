@@ -377,10 +377,10 @@ public class CategorizationFragment extends CommonsDaggerSupportFragment {
                 .setMessage("Are you sure you want to go back? The image will not "
                         + "have any categories saved.")
                 .setTitle("Warning")
-                .setPositiveButton(android.R.string.no, (dialog, id) -> {
+                .setPositiveButton("No", (dialog, id) -> {
                     //No need to do anything, user remains on categorization screen
                 })
-                .setNegativeButton(android.R.string.yes, (dialog, id) -> getActivity().finish())
+                .setNegativeButton("Yes", (dialog, id) -> getActivity().finish())
                 .create()
                 .show();
     }
@@ -391,10 +391,10 @@ public class CategorizationFragment extends CommonsDaggerSupportFragment {
                         + "Are you sure you want to submit without selecting "
                         + "categories?")
                 .setTitle("No Categories Selected")
-                .setPositiveButton(android.R.string.no, (dialog, id) -> {
+                .setPositiveButton("No, go back", (dialog, id) -> {
                     //Exit menuItem so user can select their categories
                 })
-                .setNegativeButton(android.R.string.yes, (dialog, id) -> {
+                .setNegativeButton("Yes, submit", (dialog, id) -> {
                     //Proceed to submission
                     onCategoriesSaveHandler.onCategoriesSave(getStringList(selectedCategories));
                 })

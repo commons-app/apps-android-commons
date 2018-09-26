@@ -1,0 +1,124 @@
+﻿Revert "Merge branch 'master' into 2.8-release"
+
+This reverts commit 15f98953360434ec7e240c13dbc1ca68cbd36e1f, reversing
+changes made to d3dfdc8c9c5a2db765f9e7fe29e95ba7cc8d98ac.
+
+# Please enter the commit message for your changes. Lines starting
+# with '#' will be ignored, and an empty message aborts the commit.
+#
+# On branch 2.8-release
+# Your branch is up-to-date with 'origin/2.8-release'.
+#
+# Changes to be committed:
+#	modified:   CREDITS
+#	modified:   README.md
+#	modified:   app/build.gradle
+#	new file:   app/proguard-glide.txt
+#	modified:   app/src/main/AndroidManifest.xml
+#	modified:   app/src/main/java/fr/free/nrw/commons/AboutActivity.java
+#	modified:   app/src/main/java/fr/free/nrw/commons/CommonsApplication.java
+#	modified:   app/src/main/java/fr/free/nrw/commons/MediaDataExtractor.java
+#	modified:   app/src/main/java/fr/free/nrw/commons/WelcomeActivity.java
+#	modified:   app/src/main/java/fr/free/nrw/commons/WelcomePagerAdapter.java
+#	modified:   app/src/main/java/fr/free/nrw/commons/achievements/AchievementsActivity.java
+#	modified:   app/src/main/java/fr/free/nrw/commons/achievements/LevelController.java
+#	modified:   app/src/main/java/fr/free/nrw/commons/auth/LoginActivity.java
+#	modified:   app/src/main/java/fr/free/nrw/commons/category/CategorizationFragment.java
+#	modified:   app/src/main/java/fr/free/nrw/commons/contributions/Contribution.java
+#	modified:   app/src/main/java/fr/free/nrw/commons/contributions/ContributionsListFragment.java
+#	modified:   app/src/main/java/fr/free/nrw/commons/delete/DeleteTask.java
+#	modified:   app/src/main/java/fr/free/nrw/commons/di/CommonsApplicationModule.java
+#	modified:   app/src/main/java/fr/free/nrw/commons/explore/recentsearches/RecentSearchesContentProvider.java
+#	modified:   app/src/main/java/fr/free/nrw/commons/explore/recentsearches/RecentSearchesFragment.java
+#	new file:   app/src/main/java/fr/free/nrw/commons/glide/SvgDecoder.java
+#	new file:   app/src/main/java/fr/free/nrw/commons/glide/SvgDrawableTranscoder.java
+#	new file:   app/src/main/java/fr/free/nrw/commons/glide/SvgSoftwareLayerSetter.java
+#	modified:   app/src/main/java/fr/free/nrw/commons/location/LocationServiceManager.java
+#	modified:   app/src/main/java/fr/free/nrw/commons/media/MediaDetailFragment.java
+#	modified:   app/src/main/java/fr/free/nrw/commons/media/MediaDetailPagerFragment.java
+#	modified:   app/src/main/java/fr/free/nrw/commons/nearby/DirectUpload.java
+#	modified:   app/src/main/java/fr/free/nrw/commons/nearby/NearbyActivity.java
+#	modified:   app/src/main/java/fr/free/nrw/commons/nearby/NearbyController.java
+#	modified:   app/src/main/java/fr/free/nrw/commons/nearby/NearbyMapFragment.java
+#	modified:   app/src/main/java/fr/free/nrw/commons/nearby/NearbyPlaces.java
+#	modified:   app/src/main/java/fr/free/nrw/commons/nearby/PlaceRenderer.java
+#	modified:   app/src/main/java/fr/free/nrw/commons/notification/NotificationRenderer.java
+#	new file:   app/src/main/java/fr/free/nrw/commons/notification/SvgModule.java
+#	modified:   app/src/main/java/fr/free/nrw/commons/quiz/QuizChecker.java
+#	modified:   app/src/main/java/fr/free/nrw/commons/quiz/QuizController.java
+#	modified:   app/src/main/java/fr/free/nrw/commons/quiz/QuizResultActivity.java
+#	modified:   app/src/main/java/fr/free/nrw/commons/theme/NavigationBaseActivity.java
+#	deleted:    app/src/main/java/fr/free/nrw/commons/upload/Description.java
+#	deleted:    app/src/main/java/fr/free/nrw/commons/upload/DescriptionsAdapter.java
+#	deleted:    app/src/main/java/fr/free/nrw/commons/upload/Language.java
+#	modified:   app/src/main/java/fr/free/nrw/commons/upload/MultipleShareActivity.java
+#	modified:   app/src/main/java/fr/free/nrw/commons/upload/MultipleUploadListFragment.java
+#	modified:   app/src/main/java/fr/free/nrw/commons/upload/ShareActivity.java
+#	modified:   app/src/main/java/fr/free/nrw/commons/upload/SingleUploadFragment.java
+#	deleted:    app/src/main/java/fr/free/nrw/commons/upload/SpinnerLanguagesAdapter.java
+#	modified:   app/src/main/java/fr/free/nrw/commons/upload/UploadService.java
+#	modified:   app/src/main/java/fr/free/nrw/commons/utils/DialogUtil.java
+#	modified:   app/src/main/java/fr/free/nrw/commons/utils/ImageUtils.java
+#	deleted:    app/src/main/java/fr/free/nrw/commons/utils/PermissionUtils.java
+#	modified:   app/src/main/java/fr/free/nrw/commons/widget/PicOfDayAppWidget.java
+#	modified:   app/src/main/res/layout-land/activity_login.xml
+#	modified:   app/src/main/res/layout-xlarge/activity_login.xml
+#	modified:   app/src/main/res/layout/activity_login.xml
+#	modified:   app/src/main/res/layout/drawer_header.xml
+#	modified:   app/src/main/res/layout/fragment_media_detail.xml
+#	modified:   app/src/main/res/layout/fragment_single_upload.xml
+#	modified:   app/src/main/res/layout/item_notification.xml
+#	deleted:    app/src/main/res/layout/row_item_description.xml
+#	deleted:    app/src/main/res/layout/row_item_languages_spinner.xml
+#	modified:   app/src/main/res/layout/welcome_final.xml
+#	modified:   app/src/main/res/menu/drawer.xml
+#	modified:   app/src/main/res/values-ar/strings.xml
+#	modified:   app/src/main/res/values-ast/strings.xml
+#	modified:   app/src/main/res/values-bn/strings.xml
+#	modified:   app/src/main/res/values-cs/strings.xml
+#	modified:   app/src/main/res/values-da/strings.xml
+#	modified:   app/src/main/res/values-de/strings.xml
+#	modified:   app/src/main/res/values-el/strings.xml
+#	modified:   app/src/main/res/values-es/strings.xml
+#	modified:   app/src/main/res/values-eu/strings.xml
+#	modified:   app/src/main/res/values-fa/strings.xml
+#	modified:   app/src/main/res/values-fi/strings.xml
+#	modified:   app/src/main/res/values-fr/strings.xml
+#	modified:   app/src/main/res/values-gl/strings.xml
+#	modified:   app/src/main/res/values-hu/strings.xml
+#	modified:   app/src/main/res/values-it/strings.xml
+#	modified:   app/src/main/res/values-iw/strings.xml
+#	modified:   app/src/main/res/values-ja/strings.xml
+#	modified:   app/src/main/res/values-jv/strings.xml
+#	modified:   app/src/main/res/values-ko/strings.xml
+#	modified:   app/src/main/res/values-lb/strings.xml
+#	modified:   app/src/main/res/values-lv/strings.xml
+#	modified:   app/src/main/res/values-mk/strings.xml
+#	deleted:    app/src/main/res/values-my/error.xml
+#	deleted:    app/src/main/res/values-my/strings.xml
+#	modified:   app/src/main/res/values-nb/strings.xml
+#	modified:   app/src/main/res/values-ne/strings.xml
+#	modified:   app/src/main/res/values-pl/strings.xml
+#	modified:   app/src/main/res/values-pms/strings.xml
+#	modified:   app/src/main/res/values-pt-rBR/strings.xml
+#	modified:   app/src/main/res/values-pt/strings.xml
+#	modified:   app/src/main/res/values-qq/strings.xml
+#	modified:   app/src/main/res/values-ru/error.xml
+#	modified:   app/src/main/res/values-ru/strings.xml
+#	modified:   app/src/main/res/values-sd/strings.xml
+#	modified:   app/src/main/res/values-skr/strings.xml
+#	modified:   app/src/main/res/values-sr/strings.xml
+#	modified:   app/src/main/res/values-su/strings.xml
+#	modified:   app/src/main/res/values-sv/strings.xml
+#	modified:   app/src/main/res/values-tcy/strings.xml
+#	modified:   app/src/main/res/values-tr/strings.xml
+#	modified:   app/src/main/res/values-ug/strings.xml
+#	modified:   app/src/main/res/values-uk/strings.xml
+#	modified:   app/src/main/res/values-vi/strings.xml
+#	modified:   app/src/main/res/values-zh-rTW/error.xml
+#	modified:   app/src/main/res/values-zh-rTW/strings.xml
+#	modified:   app/src/main/res/values-zh/strings.xml
+#	modified:   app/src/main/res/values/strings.xml
+#	new file:   assets-source/ic_launcher.psd
+#
+

@@ -1,14 +1,10 @@
 package fr.free.nrw.commons;
 
 import android.annotation.SuppressLint;
-import android.app.Application;
-import android.app.NotificationChannel;
-import android.app.NotificationManager;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.database.sqlite.SQLiteDatabase;
-import android.os.Build;
-import android.support.annotation.RequiresApi;
+import android.support.multidex.MultiDexApplication;
 
 import com.facebook.drawee.backends.pipeline.Fresco;
 import com.facebook.imagepipeline.core.ImagePipelineConfig;
@@ -48,7 +44,7 @@ import timber.log.Timber;
         resDialogCommentPrompt = R.string.crash_dialog_comment_prompt,
         resDialogOkToast = R.string.crash_dialog_ok_toast
 )
-public class CommonsApplication extends Application {
+public class CommonsApplication extends MultiDexApplication {
 
     @Inject SessionManager sessionManager;
     @Inject DBOpenHelper dbOpenHelper;
@@ -56,11 +52,6 @@ public class CommonsApplication extends Application {
     @Inject @Named("default_preferences") SharedPreferences defaultPrefs;
     @Inject @Named("application_preferences") SharedPreferences applicationPrefs;
     @Inject @Named("prefs") SharedPreferences otherPrefs;
-
-    /**
-     * Constants begin
-     */
-    public static final int OPEN_APPLICATION_DETAIL_SETTINGS = 1001;
 
     public static final String DEFAULT_EDIT_SUMMARY = "Uploaded using [[COM:MOA|Commons Mobile App]]";
 
@@ -71,12 +62,6 @@ public class CommonsApplication extends Application {
     public static final String LOGS_PRIVATE_EMAIL = "commons-app-android-private@googlegroups.com";
 
     public static final String LOGS_PRIVATE_EMAIL_SUBJECT = "Commons Android App (%s) Logs";
-
-    public static final String NOTIFICATION_CHANNEL_ID_ALL = "CommonsNotificationAll";
-
-    /**
-     * Constants End
-     */
 
     private RefWatcher refWatcher;
 
@@ -116,23 +101,10 @@ public class CommonsApplication extends Application {
             Stetho.initializeWithDefaults(this);
         }
 
-
-        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.O) {
-            createNotificationChannel();
-        }
-
         // Fire progress callbacks for every 3% of uploaded content
         System.setProperty("in.yuvi.http.fluent.PROGRESS_TRIGGER_THRESHOLD", "3.0");
     }
 
-    @RequiresApi(26)
-    private void createNotificationChannel() {
-        NotificationChannel channel = new NotificationChannel(
-                NOTIFICATION_CHANNEL_ID_ALL,
-                getString(R.string.notifications_channel_name_all), NotificationManager.IMPORTANCE_NONE);
-        NotificationManager manager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-        manager.createNotificationChannel(channel);
-    }
 
     /**
      * Helps in setting up LeakCanary library

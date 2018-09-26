@@ -2,7 +2,6 @@
 <!-- Authors:
 * Arash.pt
 * Ebraminio
-* Fatemi127
 * Mjbmr
 * Omidh
 * Ommmmid
@@ -11,8 +10,6 @@
 * جواد
 -->
 <resources>
-  <string name="title_activity_explore">کاوش</string>
-  <string name="navigation_item_explore">کاوش</string>
   <string name="preference_category_appearance">نمایش صفحه</string>
   <string name="preference_category_general">عمومی</string>
   <string name="preference_category_feedback">بازخورد</string>
@@ -20,7 +17,6 @@
   <string name="app_name">ویکی‌انبار</string>
   <string name="bullet">•</string>
   <string name="menu_settings">تنظیمات</string>
-  <string name="intent_share_upload_label">بارگذاری در انبار</string>
   <string name="username">نام کاربری</string>
   <string name="password">گذرواژه</string>
   <string name="login_credential">به حساب کاربری ویکی‌انبار آزمایشی وارد شوید</string>
@@ -32,7 +28,7 @@
   <string name="login_success">ورود موفق!</string>
   <string name="login_failed">ورود ناموفق!</string>
   <string name="upload_failed">پرونده یافت نشد لطفاً پرونده دیگری را امتحان کنید.</string>
-  <string name="authentication_failed">تأیید اعتبار انجام نشد! لطفاً دوباره وارد شوید.</string>
+  <string name="authentication_failed" fuzzy="true">تأیید اعتبار انجام نشد!</string>
   <string name="uploading_started">بارگذاری آغاز شد!</string>
   <string name="upload_completed_notification_title">%1$s بارگذاری شد!</string>
   <string name="upload_completed_notification_text">برای دیدن بارگذاریتان بر روی صفحه انگشت بزنید</string>
@@ -89,7 +85,6 @@
   <string name="categories_activity_title">رده‌ها</string>
   <string name="title_activity_settings">تنظیمات</string>
   <string name="title_activity_signup">ثبت نام</string>
-  <string name="title_activity_category_details">رده</string>
   <string name="menu_about">درباره</string>
   <string name="about_license">اپلیکیشن ویکی‌انبار بنیاد ویکی‌مدیا یک نرم‌افزار آزاد است که توسط کاربران داوطلب و پاداش‌بگیر ایجاد و نگهداری می‌شود. بنیاد ویکی‌مدیا در ایجاد، نگهداری و توسعهٔ آن دخالتی ندارد.</string>
   <string name="about_improve">ایجاد یک &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;درخواست در گیت‌هاب&lt;/a&gt; برای گزارش باگ و یا پیشنهاد یک خصوصیت جدید.</string>

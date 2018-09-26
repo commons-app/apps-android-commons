@@ -25,19 +25,7 @@ public class LevelController {
         LEVEL_12(12,R.style.LevelTwo,65 , 130, 90),
         LEVEL_13(13,R.style.LevelThree, 70, 140, 90),
         LEVEL_14(14,R.style.LevelFour, 75 , 150, 90),
-        LEVEL_15(15,R.style.LevelFive, 80, 160, 90),
-        LEVEL_16(16,R.style.LevelOne, 160, 320, 91),
-        LEVEL_17(17,R.style.LevelTwo, 320, 640, 92),
-        LEVEL_18(18,R.style.LevelThree, 640, 1280, 93),
-        LEVEL_19(19,R.style.LevelFour, 1280, 2560, 94),
-        LEVEL_20(20,R.style.LevelFive, 2560, 5120, 95),
-        LEVEL_21(21,R.style.LevelOne, 5120, 10240, 96),
-        LEVEL_22(22,R.style.LevelTwo, 10240, 20480, 97),
-        LEVEL_23(23,R.style.LevelThree, 20480, 40960, 98),
-        LEVEL_24(24,R.style.LevelFour, 40960, 81920, 98),
-        LEVEL_25(25,R.style.LevelFive, 81920, 163840, 98),
-        LEVEL_26(26,R.style.LevelOne, 163840, 327680, 98),
-        LEVEL_27(27,R.style.LevelTwo, 327680, 655360, 98);
+        LEVEL_15(15,R.style.LevelFive, 80, 160, 90);
 
         private int levelNumber;
         private int levelStyle;

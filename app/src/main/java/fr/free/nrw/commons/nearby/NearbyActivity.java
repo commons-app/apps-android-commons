@@ -15,6 +15,7 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.BottomSheetBehavior;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AlertDialog;
+
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -50,10 +51,8 @@ import timber.log.Timber;
 import uk.co.deanwild.materialshowcaseview.IShowcaseListener;
 import uk.co.deanwild.materialshowcaseview.MaterialShowcaseView;
 
-import static fr.free.nrw.commons.location.LocationServiceManager.LocationChangeType.LOCATION_SIGNIFICANTLY_CHANGED;
-import static fr.free.nrw.commons.location.LocationServiceManager.LocationChangeType.LOCATION_SLIGHTLY_CHANGED;
+import static fr.free.nrw.commons.location.LocationServiceManager.LocationChangeType.*;
 import static fr.free.nrw.commons.location.LocationServiceManager.LocationChangeType.MAP_UPDATED;
-import static fr.free.nrw.commons.location.LocationServiceManager.LocationChangeType.PERMISSION_JUST_GRANTED;
 
 
 public class NearbyActivity extends NavigationBaseActivity implements LocationUpdateListener,
@@ -292,11 +291,11 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
                     // sees the explanation, try again to request the permission.
                     new AlertDialog.Builder(this)
                             .setMessage(getString(R.string.location_permission_rationale_nearby))
-                            .setPositiveButton(android.R.string.ok, (dialog, which) -> {
+                            .setPositiveButton("OK", (dialog, which) -> {
                                 requestLocationPermissions();
                                 dialog.dismiss();
                             })
-                            .setNegativeButton(android.R.string.cancel, (dialog, id) -> {
+                            .setNegativeButton("Cancel", (dialog, id) -> {
                                 showLocationPermissionDeniedErrorDialog();
                                 dialog.cancel();
                             })
@@ -467,11 +466,11 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
                 if (locationManager.isPermissionExplanationRequired(this)) {
                     new AlertDialog.Builder(this)
                             .setMessage(getString(R.string.location_permission_rationale_nearby))
-                            .setPositiveButton(android.R.string.ok, (dialog, which) -> {
+                            .setPositiveButton("OK", (dialog, which) -> {
                                 requestLocationPermissions();
                                 dialog.dismiss();
                             })
-                            .setNegativeButton(android.R.string.cancel, (dialog, id) -> {
+                            .setNegativeButton("Cancel", (dialog, id) -> {
                                 showLocationPermissionDeniedErrorDialog();
                                 dialog.cancel();
                             })

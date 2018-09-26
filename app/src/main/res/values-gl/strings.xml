@@ -4,14 +4,11 @@
 * Banjo
 * Chairego apc
 * Elisardojm
-* Maria zaos
 * Navhy
 * Toliño
 * Vivaelcelta
 -->
 <resources>
-  <string name="title_activity_explore">Explorar</string>
-  <string name="navigation_item_explore">Explorar</string>
   <string name="preference_category_appearance">Aparencia</string>
   <string name="preference_category_general">Xeral</string>
   <string name="preference_category_feedback">Comentarios</string>
@@ -66,7 +63,6 @@
   <string name="login_failed_generic">Erro durante o inición de sesión</string>
   <string name="share_upload_button">Subir</string>
   <string name="multiple_share_base_title">Dea un nome a este conxunto</string>
-  <string name="add_set_name_toast">Por favor, proporcione un título para este conxunto</string>
   <string name="provider_modifications">Modificacións</string>
   <string name="menu_upload_single">Subir</string>
   <string name="categories_search_text_hint">Procurar categorías</string>
@@ -95,7 +91,6 @@
   <string name="title_activity_settings">Configuracións</string>
   <string name="title_activity_signup">Rexistrarse</string>
   <string name="title_activity_featured_images">Imaxes destacadas</string>
-  <string name="title_activity_category_details">Categoría</string>
   <string name="menu_about">Acerca de</string>
   <string name="about_license">A aplicación Wikimedia Commons é unha aplicación de código aberto creada e mantida polos cesionarios e voluntarios da comunidade de Wikimedia. A Fundación Wikimedia non está involucrada na creación, desenvolvemento ou mantemento da aplicación.</string>
   <string name="about_improve">Crear unha nova &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;incidencia&lt;/a&gt; para informar de problemas e suxestións.</string>
@@ -161,7 +156,6 @@
   <string name="welcome_copyright_subtext">Evite os materiais protexidos por dereitos de autoría que se atopen na internet, así como imaxes de pósters, portadas de libros etc.</string>
   <string name="welcome_final_text">Entende como vai?</string>
   <string name="welcome_final_button_text">Si!</string>
-  <string name="welcome_help_button_text">&lt;u&gt;Máis Información&lt;/u&gt;</string>
   <string name="detail_panel_cats_label">Categorías</string>
   <string name="detail_panel_cats_loading">Cargando…</string>
   <string name="detail_panel_cats_none">Ningunha seleccionada</string>
@@ -204,8 +198,6 @@
   <string name="background_image">Imaxe de fondo</string>
   <string name="mediaimage_failed">Fallou a imaxe de multimedia</string>
   <string name="no_image_found">Non se atopou imaxe</string>
-  <string name="no_subcategory_found">Non se atoparon subcategorías</string>
-  <string name="no_parentcategory_found">Non se atoparon categorías nais</string>
   <string name="upload_image">Subir imaxe</string>
   <string name="welcome_image_mount_zao">Monte Zao</string>
   <string name="welcome_image_llamas">Llamas</string>
@@ -250,13 +242,6 @@
   <string name="nominate_deletion">Nomear para borrado</string>
   <string name="nominated_for_deletion">Esta imaxe foi nomeada para borrar.</string>
   <string name="view_browser">Ver en navegador</string>
-  <string name="skip_login">Omitir</string>
-  <string name="navigation_item_login">Acceder ao sistema</string>
-  <string name="skip_login_title">Realmente quere saltar o inicio de sesión?</string>
-  <string name="skip_login_message">Non poderá subir imaxes.</string>
-  <string name="login_alert_message">Por favor, inicie a sesión para usar esta funcionalidade</string>
-  <string name="copy_wikicode">Copiar o texto wiki ó portapapeis</string>
-  <string name="wikicode_copied">Texto wiki copiado ó portapapeis</string>
   <string name="nearby_location_has_not_changed">A localización non cambiou.</string>
   <string name="nearby_location_not_available">A localización non está dispoñible.</string>
   <string name="location_permission_rationale_nearby">Precísase permiso para amosar unha lista de lugares preto de aquí</string>
@@ -292,43 +277,14 @@
   <string name="error_loading_images">Houbo un erro ó subir as imaxes.</string>
   <string name="image_uploaded_by">Subida porː %1$s</string>
   <string name="block_notification">Está bloqueado e non pode editar en Commons</string>
-  <string name="appwidget_img">Imaxe do día</string>
-  <string name="app_widget_heading">Imaxe do día</string>
-  <string name="menu_search_button">Procurar</string>
-  <string name="search_commons">Procurar en Commons</string>
-  <string name="images_not_found">Non se atopou ningunha imaxe que coincida con %1$s</string>
-  <string name="title_activity_search">Procurar</string>
-  <string name="search_recent_header">Buscas recentes:</string>
-  <string name="provider_searches">Consultas buscadas recentemente</string>
-  <string name="error_loading_categories">Houbo un erro ó cargar categorías.</string>
-  <string name="error_loading_subcategories">Houbo un erro ó cargar subcategorías.</string>
-  <string name="successful_wikidata_edit">A imaxe engadiuse con éxito a %1$s en Wikidata!</string>
-  <string name="wikidata_edit_failure">Fallou a actualización da entidade do Wikidata correspondente!</string>
-  <string name="menu_set_wallpaper">Poñer como imaxe de fondo</string>
-  <string name="wallpaper_set_successfully">A imaxe de fondo configurouse correctamenteǃ</string>
-  <string name="quiz">Cuestionario</string>
-  <string name="question">Pregunta</string>
-  <string name="result">Resultado</string>
-  <string name="warning_for_image_reverts">Aviso: Máis do 1%  das imaxes cargadas por vostede foron borradas. Se segue a cargar imaxes que precisan borrado o máis probable é que a súa conta sexa anulada.</string>
-  <string name="congratulatory_message_quiz">Acadou un %1$s de respostas correctas. Parabéns!</string>
-  <string name="warning_for_no_answer">Escolla unha das dúas opcións para contestar a pregunta</string>
-  <string name="user_not_logged_in">A sesión caducou, por favor inicia unha nova sesión.</string>
-  <string name="continue_message">Continuar</string>
-  <string name="correct">Resposta correcta</string>
-  <string name="wrong">Resposta incorrecta</string>
-  <string name="quiz_screenshot_question">Pódese subir esta captura de pantalla?</string>
   <string name="share_app_title">Compartir a aplicación</string>
   <string name="share_coordinates_not_present">Non se indicaron as coordenadas ó seleccionar a imaxe</string>
   <string name="error_fetching_nearby_places">Erro ó procurar os lugares próximos.</string>
-  <string name="add_description">+ Engadir descrición</string>
-  <string name="Achievements">Logros</string>
-  <string name="statistics">ESTATÍSTICAS</string>
-  <string name="statistics_thanks">Agradecementos recibidos</string>
-  <string name="statistics_featured">Imaxes destacadas</string>
-  <string name="level">NIVEL</string>
-  <string name="images_uploaded">Imaxes cargadas</string>
-  <string name="image_reverts">Imaxes non revertidas</string>
-  <string name="images_used_by_wiki">Imaxes usadas</string>
-  <string name="achievements_revert_limit_message">mínimo requirido:</string>
-  <string name="notifications_channel_name_all">Notificación de Commons</string>
+  <string name="appwidget_img">Imaxe do día</string>
+  <string name="app_widget_heading">Imaxe do día</string>
+  <string name="successful_wikidata_edit">A imaxe engadiuse con éxito a %1$s en Wikidata!</string>
+  <string name="wikidata_edit_failure">Fallou a actualización da entidade do Wikidata correspondente!</string>
+  <string name="menu_set_wallpaper">Definir imaxe de fondo</string>
+  <string name="wallpaper_set_successfully">A imaxe de fondo configurouse correctamenteǃ</string>
+  <string name="user_not_logged_in">A sesión caducou, por favor inicia unha nova sesión.</string>
 </resources>

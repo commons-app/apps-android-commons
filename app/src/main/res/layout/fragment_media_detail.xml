@@ -305,20 +305,12 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="center"
+                        android:text="@string/nominated_see_more"
                         android:paddingTop="@dimen/standard_gap"
                         android:textColor="@color/primaryTextColor"
                         android:textSize="@dimen/normal_text"
                         android:textStyle="bold"/>
                 </LinearLayout>
-
-                <Button
-                    android:id="@+id/copyWikicode"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/standard_gap"
-                    android:background="@color/button_blue"
-                    android:text="@string/copy_wikicode"
-                    android:textColor="@color/primaryTextColor" />
 
                 <Button
                     android:id="@+id/nominateDeletion"
@@ -327,7 +319,8 @@
                     android:layout_margin="@dimen/standard_gap"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/nominate_deletion"/>
+                    android:text="@string/nominate_deletion"
+                    android:visibility="gone"/>
             </LinearLayout>
         </LinearLayout>
     </ScrollView>

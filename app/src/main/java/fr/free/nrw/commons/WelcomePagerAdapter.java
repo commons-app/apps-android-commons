@@ -3,7 +3,6 @@ package fr.free.nrw.commons;
 import android.net.Uri;
 import android.support.annotation.Nullable;
 import android.support.v4.view.PagerAdapter;
-import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -67,13 +66,6 @@ public class WelcomePagerAdapter extends PagerAdapter {
             }
             ViewHolder holder = new ViewHolder(layout);
             layout.setTag(holder);
-
-            if(position == PAGE_FINAL){
-                TextView moreInfo = layout.findViewById(R.id.welcomeInfo);
-                moreInfo.setText(Html.fromHtml(WelcomeActivity.moreInformation));
-                ViewHolder holder1 = new ViewHolder(layout);
-                layout.setTag(holder1);
-            }
         } else {
             if (position == PAGE_FINAL) {
                 ViewHolder holder = new ViewHolder(layout);

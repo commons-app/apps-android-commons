@@ -1,16 +1,12 @@
 package fr.free.nrw.commons.utils;
 
 import android.app.Activity;
-import android.app.AlertDialog;
-import android.app.AlertDialog.Builder;
 import android.app.Dialog;
-import android.content.Context;
 import android.os.Build;
 import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.FragmentActivity;
 
-import fr.free.nrw.commons.R;
 import timber.log.Timber;
 
 public class DialogUtil {
@@ -95,32 +91,5 @@ public class DialogUtil {
         } catch (IllegalStateException e) {
             Timber.e(e, "Could not show dialog.");
         }
-    }
-
-    public static AlertDialog getAlertDialogWithPositiveAndNegativeCallbacks(
-            Context context, String title, String message, int iconResourceId, Callback callback) {
-
-        AlertDialog alertDialog = new Builder(context)
-                .setTitle(title)
-                .setMessage(message)
-                .setPositiveButton(context.getString(R.string.ok), (dialog, which) -> {
-                    callback.onPositiveButtonClicked();
-                    dialog.dismiss();
-                })
-                .setNegativeButton(context.getString(R.string.cancel), (dialog, which) -> {
-                    callback.onNegativeButtonClicked();
-                    dialog.dismiss();
-                })
-                .setIcon(iconResourceId).create();
-
-        return alertDialog;
-
-    }
-
-    public  interface Callback {
-
-        void onPositiveButtonClicked();
-
-        void onNegativeButtonClicked();
     }
 }

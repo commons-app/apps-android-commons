@@ -13,7 +13,7 @@ import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.settings.Prefs;
 
-public class  Contribution extends Media {
+public class Contribution extends Media {
 
     public static Creator<Contribution> CREATOR = new Creator<Contribution>() {
         @Override

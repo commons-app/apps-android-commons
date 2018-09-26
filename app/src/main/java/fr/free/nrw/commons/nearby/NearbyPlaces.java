@@ -5,7 +5,6 @@ import android.net.Uri;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.io.InterruptedIOException;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.ArrayList;
@@ -46,12 +45,7 @@ public class NearbyPlaces {
 
             // increase the radius gradually to find a satisfactory number of nearby places
             while (radius <= MAX_RADIUS) {
-                try {
-                    places = getFromWikidataQuery(curLatLng, lang, radius);
-                } catch (InterruptedIOException e) {
-                    Timber.d("exception in fetching nearby places", e.getLocalizedMessage());
-                    return places;
-                }
+                places = getFromWikidataQuery(curLatLng, lang, radius);
                 Timber.d("%d results at radius: %f", places.size(), radius);
                 if (places.size() >= MIN_RESULTS) {
                     break;

@@ -190,7 +190,7 @@
 
         <provider
             android:name=".explore.recentsearches.RecentSearchesContentProvider"
-            android:authorities="${applicationId}.explore.recentsearches.contentprovider"
+            android:authorities="fr.free.nrw.commons.explore.recentsearches.contentprovider"
             android:exported="false"
             android:label="@string/provider_searches"
             android:syncable="false" />

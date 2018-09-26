@@ -3,7 +3,6 @@
 * Harriettruong3
 * Leducthn
 * Minh Nguyen
-* Nhatminh01
 * Thanhtai2009
 * Tuankiet65
 -->
@@ -88,7 +87,7 @@
   <string name="title_activity_featured_images">Hình ảnh chọn lọc</string>
   <string name="menu_about">Giới thiệu</string>
   <string name="about_license">Ứng dụng Wikimedia Commons là ứng dụng mã nguồn mở được sáng tạo và quản lý bởi các tình nguyện viên và những người được tin tưởng của cộng đồng Wikipedia. Wikimedia Foundation không tham gia vào sự tạo lập, phát triển cũng như quản lý của ứng dụng.</string>
-  <string name="about_improve">Báo cáo lỗi cũng như đưa ra các ý tưởng &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;trên GitHub&lt;/a&gt;.</string>
+  <string name="about_improve">Tạo một &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;thảo luận (issue) mới trên GitHub&lt;/a&gt;  để báo cáo lỗi cũng như đưa ra các ý tưởng.</string>
   <string name="about_privacy_policy">&lt;u&gt;Chính sách riêng tư&lt;/u&gt;</string>
   <string name="about_credits">&lt;u&gt;Công trạng&lt;/u&gt;</string>
   <string name="title_activity_about">Giới thiệu</string>
@@ -151,7 +150,6 @@
   <string name="welcome_copyright_subtext">Tránh dùng các hình ảnh có bản quyền bạn tìm được trên Internet, cũng như các hình chụp áp phích, bìa sách, v.v.</string>
   <string name="welcome_final_text">Bạn hiểu rồi chứ?</string>
   <string name="welcome_final_button_text">Có!</string>
-  <string name="welcome_help_button_text">&lt;u&gt;Thông tin thêm&lt;/u&gt;</string>
   <string name="detail_panel_cats_label">Thể loại</string>
   <string name="detail_panel_cats_loading">Đang tải…</string>
   <string name="detail_panel_cats_none">Chưa chọn</string>
@@ -265,9 +263,6 @@
   <string name="no_images_found">Không tìm thấy hình ảnh!</string>
   <string name="error_loading_images">Đã xuất hiện lỗi khi tải hình ảnh.</string>
   <string name="image_uploaded_by">Tải lên bởi: %1$s</string>
-  <string name="menu_set_wallpaper">Đặt làm hình nền</string>
-  <string name="taj_mahal_answer">Hình chứa di tích và cảnh vật thiên nhiên thường được chấp nhận tải lên ở hầu hết các quốc gia. Xin lưu ý rằng các công trình nghệ thuật được trưng bày tạm thời thường có bản quyền và không được chấp nhận tải lên.</string>
-  <string name="warning_for_image_reverts">CẢNH BÁO: Hơn %1$s hình mà bạn tải lên đã bị xoá. Nếu tiếp tục tải lên hình ảnh bị yêu cầu xoá, tài khoản của bạn có thể bị chặn.</string>
   <string name="share_app_title">Chia sẻ Ứng dụng</string>
   <string name="share_coordinates_not_present">Tọa độ không được chỉ định khi chọn hình ảnh</string>
   <string name="error_fetching_nearby_places">Lỗi khi lấy các nơi lân cận.</string>

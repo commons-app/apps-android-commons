@@ -14,7 +14,6 @@ import java.util.Locale;
 
 import javax.inject.Inject;
 
-import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.auth.SessionManager;
@@ -45,17 +44,14 @@ public class DeleteTask extends AsyncTask<Void, Integer, Boolean> {
     }
 
     @Override
-    protected void onPreExecute() {
+    protected void onPreExecute(){
         ApplicationlessInjection
                 .getInstance(context.getApplicationContext())
                 .getCommonsApplicationComponent()
                 .inject(this);
 
-        notificationManager =
-                (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
-        notificationBuilder = new NotificationCompat.Builder(
-                context,
-                CommonsApplication.NOTIFICATION_CHANNEL_ID_ALL);
+        notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
+        notificationBuilder = new NotificationCompat.Builder(context);
         Toast toast = new Toast(context);
         toast.setGravity(Gravity.CENTER,0,0);
         toast = Toast.makeText(context,"Trying to nominate "+media.getDisplayTitle()+ " for deletion",Toast.LENGTH_SHORT);

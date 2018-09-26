@@ -41,7 +41,7 @@ public class RecentSearchesFragment extends CommonsDaggerSupportFragment {
         recent_searches_delete_button.setOnClickListener(v -> {
             new AlertDialog.Builder(getContext())
                 .setMessage(getString(R.string.delete_recent_searches_dialog))
-                .setPositiveButton(android.R.string.yes, (dialog, which) -> {
+                .setPositiveButton("YES", (dialog, which) -> {
                     recentSearchesDao.deleteAll(recentSearches);
                     Toast.makeText(getContext(),getString(R.string.search_history_deleted),Toast.LENGTH_SHORT).show();
                     recentSearches = recentSearchesDao.recentSearches(10);
@@ -50,7 +50,7 @@ public class RecentSearchesFragment extends CommonsDaggerSupportFragment {
                     adapter.notifyDataSetChanged();
                     dialog.dismiss();
                 })
-                .setNegativeButton(android.R.string.no, null)
+                .setNegativeButton("NO", null)
                 .create()
                 .show();
         });

@@ -31,12 +31,12 @@ class DirectUpload {
                 if (fragment.shouldShowRequestPermissionRationale(READ_EXTERNAL_STORAGE)) {
                     new AlertDialog.Builder(fragment.getActivity())
                             .setMessage(fragment.getActivity().getString(R.string.read_storage_permission_rationale))
-                            .setPositiveButton(android.R.string.ok, (dialog, which) -> {
+                            .setPositiveButton("OK", (dialog, which) -> {
                                 Timber.d("Requesting permissions for read external storage");
                                 fragment.requestPermissions(new String[]{READ_EXTERNAL_STORAGE}, 4);
                                 dialog.dismiss();
                             })
-                            .setNegativeButton(android.R.string.cancel, null)
+                            .setNegativeButton("Cancel", null)
                             .create()
                             .show();
                 } else {
@@ -58,11 +58,11 @@ class DirectUpload {
                 if (fragment.shouldShowRequestPermissionRationale(WRITE_EXTERNAL_STORAGE)) {
                     new AlertDialog.Builder(fragment.getActivity())
                             .setMessage(fragment.getActivity().getString(R.string.write_storage_permission_rationale))
-                            .setPositiveButton(android.R.string.ok, (dialog, which) -> {
+                            .setPositiveButton("OK", (dialog, which) -> {
                                 fragment.requestPermissions(new String[]{WRITE_EXTERNAL_STORAGE}, 5);
                                 dialog.dismiss();
                             })
-                            .setNegativeButton(android.R.string.cancel, null)
+                            .setNegativeButton("Cancel", null)
                             .create()
                             .show();
                 } else {

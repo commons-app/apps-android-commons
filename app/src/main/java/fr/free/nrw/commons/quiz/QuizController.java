@@ -43,7 +43,7 @@ public class QuizController {
         quiz.add(q3);
 
         QuizQuestion q4 = new QuizQuestion(4,
-                context.getResources().getString(R.string.quiz_screenshot_question),
+                context.getResources().getString(R.string.quiz_question_string),
                 URL_FOR_SCREENSHOT,
                 false,
                 context.getResources().getString(R.string.screenshot_answer));

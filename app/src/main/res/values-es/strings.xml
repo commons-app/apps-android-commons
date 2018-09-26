@@ -6,13 +6,10 @@
 * Benfutbol10
 * Fitoschido
 * Jduranboger
-* Jelou
-* Ktranz
 * Luisangelrg
 * Macofe
 * MarionaDSR
 * Miguel2706
-* Tiberius1701
 * Vivaelcelta
 -->
 <resources>
@@ -72,7 +69,6 @@
   <string name="login_failed_generic">Falló el inicio de sesión</string>
   <string name="share_upload_button">Subir</string>
   <string name="multiple_share_base_title">Nombrar este conjunto</string>
-  <string name="add_set_name_toast">Proporciona un nombre para este conjunto</string>
   <string name="provider_modifications">Modificaciones</string>
   <string name="menu_upload_single">Subir</string>
   <string name="categories_search_text_hint">Buscar categorías</string>
@@ -121,7 +117,7 @@
   <string name="preference_license">Licencia predeterminada</string>
   <string name="use_previous">Usar título/descripción anteriores</string>
   <string name="allow_gps">Obtener ubicación actual automáticamente</string>
-  <string name="allow_gps_summary">Recupera la ubicación actual si la imagen no esta geolocalizada, y le aplica la geolocalizacion. Aviso: Esto revelará tu ubicación actual.</string>
+  <string name="allow_gps_summary" fuzzy="true">Recuperar ubicación actual para ofrecer sugerencias de categorías si la imagen no tiene etiquetas geográficas</string>
   <string name="preference_theme">Modo nocturno</string>
   <string name="preference_theme_summary">Usar tema oscuro</string>
   <string name="license_name_cc_by_sa_four"> Atribución-CompartirIgual 4.0</string>
@@ -188,7 +184,6 @@
   <string name="media_detail_description">Descripción</string>
   <string name="media_detail_description_explanation">Aquí va la descripción del archivo multimedia. Esta puede ser muy extensa, en cuyo caso deberá ajustarse en varios renglones. No obstante, esperamos que se vea bien.</string>
   <string name="media_detail_author">Autor</string>
-  <string name="media_detail_author_explanation">El usuario del autor de la imagen mencionada va aquí.</string>
   <string name="media_detail_uploaded_date">Fecha de subida</string>
   <string name="media_detail_license">Licencia</string>
   <string name="media_detail_coordinates">Coordenadas</string>
@@ -210,7 +205,6 @@
   <string name="mediaimage_failed">Falló la imagen de multimedia</string>
   <string name="no_image_found">No se encontró ninguna imagen</string>
   <string name="no_subcategory_found">No se encontró ninguna subcategoría</string>
-  <string name="no_parentcategory_found">No se encontró ninguna categoría contenedora</string>
   <string name="upload_image">Subir imagen</string>
   <string name="welcome_image_mount_zao">Monte Zao</string>
   <string name="welcome_image_llamas">Llamas</string>
@@ -255,11 +249,6 @@
   <string name="nominate_deletion">Nominar para borrado</string>
   <string name="nominated_for_deletion">Se ha nominado esta imagen para su borrado.</string>
   <string name="view_browser">Ver en navegador</string>
-  <string name="skip_login">Omitir</string>
-  <string name="navigation_item_login">Acceder</string>
-  <string name="skip_login_title">¿Realmente querés omitir el inicio de sesión?</string>
-  <string name="skip_login_message">No serás capaz de subir imágenes.</string>
-  <string name="login_alert_message">Por favor inicia sesion para usar esta característica</string>
   <string name="nearby_location_has_not_changed">La ubicación no ha cambiado.</string>
   <string name="nearby_location_not_available">La ubicación no está disponible.</string>
   <string name="location_permission_rationale_nearby">Se necesita permiso para mostrar una lista de lugares cercanos</string>
@@ -273,7 +262,6 @@
   <string name="nearby_wikidata">WIKIDATA</string>
   <string name="nearby_wikipedia">WIKIPEDIA</string>
   <string name="nearby_commons">COMMONS</string>
-  <string name="about_rate_us">&lt;u&gt;Valorarnos&lt;/u&gt;</string>
   <string name="about_faq">&lt;u&gt;Preguntas frecuentes&lt;/u&gt;</string>
   <string name="welcome_skip_button">Omitir tutorial</string>
   <string name="no_internet">Internet no disponible</string>
@@ -283,54 +271,25 @@
   <string name="about_translate">&lt;u&gt;Traducir&lt;/u&gt;</string>
   <string name="about_translate_title">Idiomas</string>
   <string name="about_translate_message">Selecciona el idioma en que quieres enviar traducciones</string>
-  <string name="about_translate_proceed">Proceder</string>
   <string name="about_translate_cancel">Cancelar</string>
   <string name="retry">Reintentar</string>
   <string name="showcase_view_got_it_button">Entendido</string>
   <string name="showcase_view_whole_nearby_activity">Estos sitios cercanos a ti necesitan imágenes para ilustrar sus artículos de Wikipedia</string>
-  <string name="showcase_view_list_icon">Tocando este botón se desplegara una lista de estos lugares</string>
   <string name="showcase_view_plus_fab">Puedes cargar una imagen para cualquier sitio desde la galería o la cámara</string>
   <string name="no_images_found">No se encontró ninguna imagen.</string>
   <string name="error_loading_images">Se produjo un error al cargar las imágenes.</string>
   <string name="image_uploaded_by">Cargada por: %1$s</string>
-  <string name="block_notification">Estás bloqueado para editar Commons</string>
+  <string name="share_app_title">Compartir aplicación</string>
+  <string name="share_coordinates_not_present">No se especificaron las coordenadas al seleccionar la imagen</string>
+  <string name="error_fetching_nearby_places">Error al recuperar los lugares cercanos.</string>
   <string name="appwidget_img">Foto del día</string>
   <string name="app_widget_heading">Foto del día</string>
   <string name="menu_search_button">Buscar</string>
   <string name="search_commons">Buscar en Commons</string>
-  <string name="images_not_found">No se encontró ninguna imagen que coincida con %1$s</string>
   <string name="title_activity_search">Buscar</string>
   <string name="search_recent_header">Búsquedas recientes:</string>
-  <string name="provider_searches">Consultas recientemente buscadas</string>
   <string name="error_loading_categories">Se produjo un error al cargar las categorías.</string>
   <string name="error_loading_subcategories">Se produjo un error al cargar las subcategorías.</string>
-  <string name="successful_wikidata_edit">¡La imagen ha sido añadida exitosamente a %1$s en Wikidata!</string>
-  <string name="wikidata_edit_failure">¡Fallo la actualización de la entrada de Wikidata correspondiente!</string>
-  <string name="menu_set_wallpaper">Poner como papel tapiz</string>
-  <string name="wallpaper_set_successfully">¡El papel tapiz se aplicó correctamente!</string>
-  <string name="question">Pregunta</string>
-  <string name="result">Resultado</string>
-  <string name="continue_message">Continuar</string>
-  <string name="correct">Respuesta correcta</string>
-  <string name="wrong">Respuesta incorrecta</string>
-  <string name="share_app_title">Compartir aplicación</string>
-  <string name="share_coordinates_not_present">No se especificaron las coordenadas al seleccionar la imagen</string>
-  <string name="error_fetching_nearby_places">Error al recuperar los lugares cercanos.</string>
-  <string name="add_description">+ Añadir descripción</string>
   <string name="delete_recent_searches_dialog">¿Confirmas que quieres vaciar el historial de búsquedas?</string>
   <string name="search_history_deleted">Historial de búsqueda eliminado</string>
-  <string name="Achievements">Logros</string>
-  <string name="statistics">ESTADÍSTICAS</string>
-  <string name="statistics_thanks">Agradecimientos recibidos</string>
-  <string name="statistics_featured">Imágenes destacadas</string>
-  <string name="level">NIVEL</string>
-  <string name="images_uploaded">Las imágenes han sido subidas</string>
-  <string name="image_reverts">Imágenes no revertidas</string>
-  <string name="images_used_by_wiki">Imágenes utilizadas</string>
-  <string name="achievements_share_message">¡Comparte tus logros con tus amigos!</string>
-  <string name="achievements_info_message">Tu nivel aumenta conforme cumples con estos requisitos. Los elementos de la sección «estadísticas» no se cuentan para tu nivel.</string>
-  <string name="achievements_revert_limit_message">mínimo requerido:</string>
-  <string name="images_uploaded_explanation">El número de imágenes que has subido a Commons, por medio de cualquier software de carga</string>
-  <string name="images_reverted_explanation">El porcentaje de imágenes que has subido a Commons que no fueron eliminadas</string>
-  <string name="images_used_explanation">El número de imágenes que has subido a Commons que fueron utilizadas en artículos de Wikimedia</string>
 </resources>

@@ -6,7 +6,7 @@
     android:foreground="?selectableItemBackground"
     android:minHeight="72dp">
 
-    <android.support.v7.widget.AppCompatImageView
+    <ImageView
         android:id="@+id/icon"
         android:layout_width="40dp"
         android:layout_height="40dp"
@@ -16,8 +16,8 @@
         android:background="@android:color/white"
         android:contentDescription="@string/no_image_found"
         android:scaleType="centerCrop"
-        app:srcCompat="@drawable/ic_message_black_24dp"
-        app:tint="@color/primaryDarkColor"
+        android:src="@drawable/empty_photo"
+        android:tint="@color/primaryDarkColor"
         />
 
     <TextView

@@ -11,7 +11,6 @@ import android.text.TextUtils;
 
 import javax.inject.Inject;
 
-import fr.free.nrw.commons.BuildConfig;
 import fr.free.nrw.commons.contributions.ContributionDao;
 import fr.free.nrw.commons.data.DBOpenHelper;
 import fr.free.nrw.commons.di.CommonsDaggerContentProvider;
@@ -29,16 +28,17 @@ import static fr.free.nrw.commons.explore.recentsearches.RecentSearchesDao.Table
  **/
 public class RecentSearchesContentProvider extends CommonsDaggerContentProvider {
 
+    public static final String RECENT_SEARCH_AUTHORITY = "fr.free.nrw.commons.explore.recentsearches.contentprovider";
     // For URI matcher
     private static final int RECENT_SEARCHES = 1;
     private static final int RECENT_SEARCHES_ID = 2;
     private static final String BASE_PATH = "recent_searches";
-    public static final Uri BASE_URI = Uri.parse("content://" + BuildConfig.RECENT_SEARCH_AUTHORITY + "/" + BASE_PATH);
+    public static final Uri BASE_URI = Uri.parse("content://" + RECENT_SEARCH_AUTHORITY + "/" + BASE_PATH);
     private static final UriMatcher uriMatcher = new UriMatcher(NO_MATCH);
 
     static {
-        uriMatcher.addURI(BuildConfig.RECENT_SEARCH_AUTHORITY, BASE_PATH, RECENT_SEARCHES);
-        uriMatcher.addURI(BuildConfig.RECENT_SEARCH_AUTHORITY, BASE_PATH + "/#", RECENT_SEARCHES_ID);
+        uriMatcher.addURI(RECENT_SEARCH_AUTHORITY, BASE_PATH, RECENT_SEARCHES);
+        uriMatcher.addURI(RECENT_SEARCH_AUTHORITY, BASE_PATH + "/#", RECENT_SEARCHES_ID);
     }
 
     public static Uri uriForId(int id) {

@@ -5,27 +5,18 @@
 * چۈشكۈن
 -->
 <resources>
-  <string name="title_activity_explore">ئىزدىنىش</string>
-  <string name="navigation_item_explore">ئىزدىنىش</string>
-  <string name="preference_category_appearance">تاشقى كۆرۈنۈش</string>
-  <string name="preference_category_general">ئادەتتە</string>
-  <string name="preference_category_feedback">ئىنكاس</string>
-  <string name="preference_category_location">ئورنى</string>
   <string name="app_name">بايلىق ھەمبەھىرلەش</string>
-  <string name="bullet">.</string>
   <string name="menu_settings">تەڭشەكلەر</string>
-  <string name="intent_share_upload_label">ئورۇن بايلىقىنى يوللاش</string>
   <string name="username">ئىشلەتكۇچى ئىسمى</string>
   <string name="password">پارول</string>
   <string name="login">تىزىمغا كىرىڭ</string>
-  <string name="forgot_password">پارول ئۇنتۇلغان</string>
   <string name="signup">خەتلىتىش</string>
   <string name="logging_in_title">تىزىمغا كىرىۋاتىدۇ</string>
   <string name="logging_in_message">سەل كۈتۈڭ…</string>
   <string name="login_success">تىزىمغا كىرىش مۇۋەپپەقىيەتلىك!</string>
   <string name="login_failed">تىزىمغا كىرەلمىدى!</string>
   <string name="upload_failed">ھۆججەت تېپىلمىدى . سىناپ بېقىڭ ، باشقا ھۆججەتلەر .</string>
-  <string name="authentication_failed">سالاھىيەتنى تەكشۈرەلمىدى، قايتىدىن كىرىڭ</string>
+  <string name="authentication_failed" fuzzy="true">سالاھىيەتنى ئىسپاتىنى تەكشۈرۈش مەغلۇپ بولدى !</string>
   <string name="uploading_started">يۈكلەش باشلاندى!</string>
   <string name="upload_completed_notification_title">%1$s يۈكلەندى!</string>
   <string name="upload_completed_notification_text">چېكىپ كۆرۈپ بېقىڭ ، سىزنىڭ يۇقىرىغا يوللاش</string>
@@ -48,7 +39,6 @@
   <string name="share_title_hint">ماۋزۇ</string>
   <string name="share_description_hint">چۈشەندۈرۈش</string>
   <string name="login_failed_network">تىزىملىتىش - تور كاشىلىسى</string>
-  <string name="login_failed_wrong_credentials">كىرەلمىدى، ئابۇنىت نامى ۋە پارولىڭىزنى تەكشۈرۈڭ.</string>
   <string name="login_failed_throttled">مەغلۇپ بولغان قېتىم سانى بەك كۆپ .  نەچچە مىنۇتتىن كېيىن قايتا سىناڭ .</string>
   <string name="login_failed_blocked">كەچۈرۈڭ، بۇ ئابونت ئاللىقاچان ئورتاق بەھرىمەن بولىدىغان بايلىق مەنبەسى دائىرىلىك</string>
   <string name="login_failed_2fa_needed">سىز چوقۇم سىزنىڭ قوش ئامىل تەكشۈرۈش كودىنى تاپشۇرىسىز .</string>
@@ -60,23 +50,13 @@
   <string name="categories_search_text_hint">كاتېگورىيىنى ئىزدەڭ</string>
   <string name="menu_save_categories">ساقلاڭ</string>
   <string name="refresh_button">يېڭىلاش</string>
-  <string name="display_list_button">تىزىم</string>
   <string name="gps_disabled">GPS سىزنىڭ ئۈسكۈنەم ئىشلىتىشتىن توختىدى . سىز قوزغىتامسىز يوق ؟</string>
   <string name="enable_gps">ئىشلىشكە باشلاشGPS</string>
-  <string name="categories_activity_title">تۈرلەر</string>
   <string name="title_activity_settings">تەڭشەكلەر</string>
-  <string name="title_activity_signup">تىزىملىتىش</string>
-  <string name="title_activity_featured_images">جۇڭگوچە رەسىم</string>
-  <string name="title_activity_category_details">تۈر</string>
   <string name="menu_about">ھەققىدە</string>
-  <string name="about_privacy_policy">شەخسى سىر سىياسىتى</string>
-  <string name="about_credits">ياسىغۇچى</string>
-  <string name="title_activity_about">ھەققىدە</string>
-  <string name="menu_feedback">ئىنكاس ئەۋەتىش(تور خەت ئارقىلىق ئەۋەتىش)</string>
-  <string name="no_email_client">تور خەت تېرمىنالى ئورنىتىلمىغان</string>
   <string name="menu_cancel_upload">ۋاز كەچ</string>
   <string name="menu_download">چۈشۈرۈڭ</string>
-  <string name="preference_license">ئىجازەتنامە</string>
+  <string name="preference_license" fuzzy="true">ئىجازەتنامە</string>
   <string name="license_name_cc_by_sa">ئوخشاش  ئىمزالىق ئورتاق  ھەمبەھىرلىنىش</string>
   <string name="license_name_cc_by">ئىمزا قويۇش</string>
   <string name="license_name_cc0">CC0</string>
@@ -90,9 +70,7 @@
   <string name="license_name_cc_by_sa_3_0_pl">CC BY-SA 3.0 (پولشا)</string>
   <string name="license_name_cc_by_sa_3_0_ro">CC BY-SA 3.0 (رومىنىيە)</string>
   <string name="license_name_cc_by_3_0">CC BY 3.0</string>
-  <string name="license_name_cc_by_sa_4_0">CC BY-SA 4.0</string>
   <string name="license_name_cc_zero">CC0</string>
-  <string name="welcome_final_text">چۈشەندىڭىزمۇ؟</string>
   <string name="welcome_final_button_text">ھەئە!</string>
   <string name="detail_panel_cats_label">تۈرلەر</string>
   <string name="detail_panel_cats_loading">يۈكلىنۋاتىدۇ…</string>
