@@ -1,6 +1,8 @@
 package fr.free.nrw.commons;
 
 import android.annotation.SuppressLint;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.database.sqlite.SQLiteDatabase;
@@ -65,6 +67,7 @@ public class CommonsApplication extends MultiDexApplication {
     public static final String LOGS_PRIVATE_EMAIL = "commons-app-android-private@googlegroups.com";
 
     public static final String LOGS_PRIVATE_EMAIL_SUBJECT = "Commons Android App (%s) Logs";
+    public static final String NOTIFICATION_CHANNEL_ID_ALL = "CommonsNotificationAll";
 
     private RefWatcher refWatcher;
 
