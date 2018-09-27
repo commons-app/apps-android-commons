@@ -27,6 +27,7 @@ import java.util.regex.Pattern;
 import javax.inject.Inject;
 
 import fr.free.nrw.commons.BuildConfig;
+import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.HandlerService;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.Utils;
