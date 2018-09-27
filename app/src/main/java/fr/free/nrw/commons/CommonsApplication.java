@@ -8,6 +8,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Build;
+import android.support.annotation.NonNull;
 import android.support.annotation.RequiresApi;
 
 import com.facebook.drawee.backends.pipeline.Fresco;
@@ -122,22 +123,22 @@ public class CommonsApplication extends Application {
             Stetho.initializeWithDefaults(this);
         }
 
-
-        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.O) {
-            createNotificationChannel();
-        }
+        createNotificationChannel(this);
 
         // Fire progress callbacks for every 3% of uploaded content
         System.setProperty("in.yuvi.http.fluent.PROGRESS_TRIGGER_THRESHOLD", "3.0");
     }
 
-    @RequiresApi(26)
-    private void createNotificationChannel() {
-        NotificationChannel channel = new NotificationChannel(
-                NOTIFICATION_CHANNEL_ID_ALL,
-                getString(R.string.notifications_channel_name_all), NotificationManager.IMPORTANCE_NONE);
-        NotificationManager manager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-        manager.createNotificationChannel(channel);
+    public static void createNotificationChannel(@NonNull Context context) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            NotificationManager manager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
+            NotificationChannel channel = manager.getNotificationChannel(NOTIFICATION_CHANNEL_ID_ALL);
+            if (channel == null) {
+                channel = new NotificationChannel(NOTIFICATION_CHANNEL_ID_ALL,
+                        context.getString(R.string.notifications_channel_name_all), NotificationManager.IMPORTANCE_DEFAULT);
+                manager.createNotificationChannel(channel);
+            }
+        }
     }
 
     /**
