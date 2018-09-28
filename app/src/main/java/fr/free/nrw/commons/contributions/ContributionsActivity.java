@@ -267,6 +267,12 @@ public class ContributionsActivity extends AuthenticatedActivity implements Frag
                 NavigationBaseActivity.startActivityWithFlags(this, NotificationActivity.class, Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 finish();
                 return true;
+
+            case R.id.list_sheet:
+                if (contributionsActivityPagerAdapter.nearbyFragment != null) {
+                    contributionsActivityPagerAdapter.nearbyFragment.listOptionMenuIteClicked();
+                }
+                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }

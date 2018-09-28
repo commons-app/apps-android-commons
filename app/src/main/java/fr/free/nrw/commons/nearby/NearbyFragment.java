@@ -100,15 +100,18 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
         super.onViewCreated(view, savedInstanceState);
     }
 
-    /*
-    @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        inflater.inflate(R.menu.menu_nearby, menu);
+    /**
+     * Hide or expand bottom sheet according to states of all sheets
+     */
+    public void listOptionMenuIteClicked() {
+        if(bottomSheetBehavior.getState()==BottomSheetBehavior.STATE_COLLAPSED || bottomSheetBehavior.getState()==BottomSheetBehavior.STATE_HIDDEN){
+            bottomSheetBehaviorForDetails.setState(BottomSheetBehavior.STATE_HIDDEN);
+            bottomSheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
+        }else if(bottomSheetBehavior.getState()==BottomSheetBehavior.STATE_EXPANDED){
+            bottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
+        }
 
-        new Handler().post(() -> {
-            listButton = findViewById(R.id.action_display_list);
-        });
-    }*/
+    }
 
     private void resumeFragment() {
         // Find the retained fragment on activity restarts
