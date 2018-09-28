@@ -1,5 +1,8 @@
 # Wikimedia Commons for Android
 
+## v2.8.4
+- Hotfix for constant upload crashes for Oreo users
+
 ## v2.8.3
 - Fixed issues with session tokens not being cleared in 2FA, which should reduce p18 edit failures as well
 - Fixed crash caused by bug in fetching revert count
