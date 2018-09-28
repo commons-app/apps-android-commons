@@ -359,5 +359,6 @@
   <string name="display_nearby_notification">Display nearby notification</string>
   <string name="display_nearby_notification_summary">Display closest wikidata item needs an image, above contribution list</string>
   <string name="no_close_nearby">No nearby places found close to you</string>
+  <string name="list_sheet">List</string>
 
 </resources>

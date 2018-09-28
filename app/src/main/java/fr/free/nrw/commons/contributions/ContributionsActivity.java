@@ -10,6 +10,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -128,10 +129,12 @@ public class ContributionsActivity extends AuthenticatedActivity implements Frag
                     case CONTRIBUTIONS_TAB_POSITION:
                         tabLayout.getTabAt(CONTRIBUTIONS_TAB_POSITION).select();
                         isContributionsFragmentVisible = true;
+                        updateMenuItem();
                         break;
                     case NEARBY_TAB_POSITION:
                         tabLayout.getTabAt(NEARBY_TAB_POSITION).select();
                         isContributionsFragmentVisible = false;
+                        updateMenuItem();
                         break;
                     default:
                         tabLayout.getTabAt(CONTRIBUTIONS_TAB_POSITION).select();
@@ -214,16 +217,36 @@ public class ContributionsActivity extends AuthenticatedActivity implements Frag
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.contribution_activity_notification_menu, menu);
-        if (!deviceHasCamera()) {
-            menu.findItem(R.id.notifications).setEnabled(false);
-        }
-        this.menu = menu;
+
         if (!isThereUnreadNotifications) {
-           // menu.findItem(R.id.notifications).setIcon(ContextCompat.getDrawable(this, R.drawable.ic_notifications_white_24dp));
+            // menu.findItem(R.id.notifications).setIcon(ContextCompat.getDrawable(this, R.drawable.ic_notifications_white_24dp));
         } else {
-          //  menu.findItem(R.id.notifications).setIcon(ContextCompat.getDrawable(this, R.drawable.ic_notifications_white_with_marker));
+            //  menu.findItem(R.id.notifications).setIcon(ContextCompat.getDrawable(this, R.drawable.ic_notifications_white_with_marker));
         }
+
+        this.menu = menu;
+
+        updateMenuItem();
+
         return true;
+    }
+
+    /**
+     * Responsible with displaying required menu items according to displayed fragment.
+     * Notifications icon when contributions list is visible, list sheet icon when nearby is visible
+     */
+    private void updateMenuItem() {
+        if (isContributionsFragmentVisible) {
+            // Display notifications menu item
+            Log.d("deneme6","notifications is visible");
+            menu.findItem(R.id.notifications).setVisible(true);
+            menu.findItem(R.id.list_sheet).setVisible(false);
+        } else {
+            // Display bottom list menu item
+            Log.d("deneme6","notifications is invisible");
+            menu.findItem(R.id.notifications).setVisible(false);
+            menu.findItem(R.id.list_sheet).setVisible(true);
+        }
     }
 
     @Override

@@ -5,4 +5,10 @@
           app:showAsAction="ifRoom|withText"
           android:icon="@drawable/ic_notifications_white_24dp"
             />
+
+    <item android:id="@+id/list_sheet"
+        android:title="@string/list_sheet"
+        app:showAsAction="ifRoom|withText"
+        android:icon="@drawable/ic_list_white_24dp"
+        />
 </menu>

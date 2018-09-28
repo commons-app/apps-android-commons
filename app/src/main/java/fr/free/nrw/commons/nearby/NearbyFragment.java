@@ -1,12 +1,16 @@
 package fr.free.nrw.commons.nearby;
 
 import android.content.SharedPreferences;
+import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.BottomSheetBehavior;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
@@ -27,11 +31,14 @@ import fr.free.nrw.commons.location.LocationServiceManager;
 import fr.free.nrw.commons.location.LocationUpdateListener;
 import fr.free.nrw.commons.utils.NetworkUtils;
 import fr.free.nrw.commons.utils.UriSerializer;
+import fr.free.nrw.commons.utils.ViewUtil;
 import fr.free.nrw.commons.wikidata.WikidataEditListener;
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 import timber.log.Timber;
+import uk.co.deanwild.materialshowcaseview.IShowcaseListener;
+import uk.co.deanwild.materialshowcaseview.MaterialShowcaseView;
 
 import static fr.free.nrw.commons.location.LocationServiceManager.LocationChangeType.LOCATION_SIGNIFICANTLY_CHANGED;
 import static fr.free.nrw.commons.location.LocationServiceManager.LocationChangeType.LOCATION_SLIGHTLY_CHANGED;
@@ -83,10 +90,25 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
         // Resume the fragment if exist
         resumeFragment();
         bundle = new Bundle();
-
         initBottomSheetBehaviour();
+        wikidataEditListener.setAuthenticationStateListener(this);
         return view;
     }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+    }
+
+    /*
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        inflater.inflate(R.menu.menu_nearby, menu);
+
+        new Handler().post(() -> {
+            listButton = findViewById(R.id.action_display_list);
+        });
+    }*/
 
     private void resumeFragment() {
         // Find the retained fragment on activity restarts
@@ -152,7 +174,9 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
     public void prepareViewsForSheetPosition(int bottomSheetState) {
         // TODO
     }
-    
+
+
+
     @Override
     public void onLocationChangedSignificantly(LatLng latLng) {
         //refreshView(LOCATION_SIGNIFICANTLY_CHANGED);
