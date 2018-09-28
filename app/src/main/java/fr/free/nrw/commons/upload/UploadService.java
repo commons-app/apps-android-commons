@@ -122,7 +122,7 @@ public class UploadService extends HandlerService<Contribution> {
     @Override
     public void onCreate() {
         super.onCreate();
-        CommonsApplication.createNotificationChannel(getApplicationContext());
+
         notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
     }
 
