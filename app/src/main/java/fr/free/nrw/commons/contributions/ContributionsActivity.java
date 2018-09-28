@@ -30,6 +30,7 @@ import fr.free.nrw.commons.nearby.NearbyFragment;
 import fr.free.nrw.commons.notification.NotificationActivity;
 import fr.free.nrw.commons.theme.NavigationBaseActivity;
 import fr.free.nrw.commons.upload.UploadService;
+import timber.log.Timber;
 
 import static android.content.ContentResolver.requestSync;
 
@@ -55,7 +56,7 @@ public class ContributionsActivity extends AuthenticatedActivity implements Frag
     private final int CONTRIBUTIONS_TAB_POSITION = 0;
     private final int NEARBY_TAB_POSITION = 1;
 
-    public ContributionsFragment contributionsFragment;
+    //public ContributionsFragment contributionsFragment;
     private NearbyFragment nearbyFragment;
     public boolean isContributionsFragmentVisible = true; // False means nearby fragment is visible
     private Menu menu;
@@ -82,8 +83,8 @@ public class ContributionsActivity extends AuthenticatedActivity implements Frag
 
         addTabsAndFragments();
         isAuthCookieAcquired = true;
-        if (contributionsFragment != null) {
-            contributionsFragment.onAuthCookieAcquired(uploadServiceIntent);
+        if (contributionsActivityPagerAdapter.contributionsFragment != null) {
+            contributionsActivityPagerAdapter.contributionsFragment.onAuthCookieAcquired(uploadServiceIntent);
         }
     }
 
@@ -130,11 +131,21 @@ public class ContributionsActivity extends AuthenticatedActivity implements Frag
                         tabLayout.getTabAt(CONTRIBUTIONS_TAB_POSITION).select();
                         isContributionsFragmentVisible = true;
                         updateMenuItem();
+                        // If contrib tab, nearby notification card view top of contrib list should be visible
+                        if (contributionsActivityPagerAdapter.contributionsFragment != null && contributionsActivityPagerAdapter.contributionsFragment.nearbyNoificationCardView != null) {
+                            contributionsActivityPagerAdapter.contributionsFragment.nearbyNoificationCardView.setVisibility(View.VISIBLE);
+                            Log.d("deneme","called23");
+                        }
                         break;
                     case NEARBY_TAB_POSITION:
                         tabLayout.getTabAt(NEARBY_TAB_POSITION).select();
                         isContributionsFragmentVisible = false;
                         updateMenuItem();
+                        // If nearby tab, nearby notifiction card view top of contrib list should be invisible
+                        if (contributionsActivityPagerAdapter.contributionsFragment != null && contributionsActivityPagerAdapter.contributionsFragment.nearbyNoificationCardView != null) {
+                            contributionsActivityPagerAdapter.contributionsFragment.nearbyNoificationCardView.setVisibility(View.GONE);
+                            Log.d("deneme","called22");
+                        }
                         break;
                     default:
                         tabLayout.getTabAt(CONTRIBUTIONS_TAB_POSITION).select();
@@ -238,14 +249,14 @@ public class ContributionsActivity extends AuthenticatedActivity implements Frag
     private void updateMenuItem() {
         if (isContributionsFragmentVisible) {
             // Display notifications menu item
-            Log.d("deneme6","notifications is visible");
             menu.findItem(R.id.notifications).setVisible(true);
             menu.findItem(R.id.list_sheet).setVisible(false);
+            Timber.d("Contributions activity notifications menu item is visible");
         } else {
             // Display bottom list menu item
-            Log.d("deneme6","notifications is invisible");
             menu.findItem(R.id.notifications).setVisible(false);
             menu.findItem(R.id.list_sheet).setVisible(true);
+            Timber.d("Contributions activity list sheet menu item is visible");
         }
     }
 
