@@ -26,6 +26,7 @@ import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.auth.AuthenticatedActivity;
 import fr.free.nrw.commons.auth.SessionManager;
 import fr.free.nrw.commons.location.LocationServiceManager;
+import fr.free.nrw.commons.nearby.NearbyController;
 import fr.free.nrw.commons.nearby.NearbyFragment;
 import fr.free.nrw.commons.notification.NotificationActivity;
 import fr.free.nrw.commons.theme.NavigationBaseActivity;
@@ -56,8 +57,6 @@ public class ContributionsActivity extends AuthenticatedActivity implements Frag
     private final int CONTRIBUTIONS_TAB_POSITION = 0;
     private final int NEARBY_TAB_POSITION = 1;
 
-    //public ContributionsFragment contributionsFragment;
-    private NearbyFragment nearbyFragment;
     public boolean isContributionsFragmentVisible = true; // False means nearby fragment is visible
     private Menu menu;
     private boolean isThereUnreadNotifications = false;
@@ -326,7 +325,7 @@ public class ContributionsActivity extends AuthenticatedActivity implements Frag
                             retainedContributionsFragment.setMediaDetailPagerFragment();
                         }
                         contributionsFragment = retainedContributionsFragment;
-                        return retainedContributionsFragment;
+                        return contributionsFragment;
                     }
 
                     // If we reach here, retainedContributionsFragment is null
@@ -339,10 +338,22 @@ public class ContributionsActivity extends AuthenticatedActivity implements Frag
 
                     return contributionsFragment;
                 case 1:
-                    if (getNearbyFragment(1) != null) {
-                        return getNearbyFragment(1);
+                    NearbyFragment retainedNearbyFragment = getNearbyFragment(1);
+
+                    if (retainedNearbyFragment != null) {
+                        nearbyFragment = retainedNearbyFragment;
+                        return  nearbyFragment;
                     }
-                    return new NearbyFragment();// nearby places needs photo
+
+                    // If we reach here, retainedNearbyFragment is null
+                    nearbyFragment = new NearbyFragment();
+                    String nearbyFragmentTag = makeFragmentName(R.id.pager, 1);
+                    fragmentManager.beginTransaction()
+                            .replace(R.id.pager, nearbyFragment, nearbyFragmentTag)
+                            .addToBackStack(nearbyFragmentTag)
+                            .commit();
+
+                    return nearbyFragment;
                 default:
                     return null;
             }
