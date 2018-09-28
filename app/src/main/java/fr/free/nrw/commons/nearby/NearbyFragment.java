@@ -2,7 +2,13 @@ package fr.free.nrw.commons.nearby;
 
 import android.content.SharedPreferences;
 import android.net.Uri;
+import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+import android.support.design.widget.BottomSheetBehavior;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 
@@ -13,6 +19,7 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
 import fr.free.nrw.commons.location.LatLng;
@@ -55,24 +62,110 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
     NearbyController nearbyController;
     @Inject
     WikidataEditListener wikidataEditListener;
-
     @Inject
     @Named("application_preferences")
     SharedPreferences applicationPrefs;
 
+    public NearbyMapFragment nearbyMapFragment;
+    private NearbyListFragment nearbyListFragment;
+    private static final String TAG_RETAINED_MAP_FRAGMENT = NearbyMapFragment.class.getSimpleName();
+    private static final String TAG_RETAINED_LIST_FRAGMENT = NearbyListFragment.class.getSimpleName();
+    private Bundle bundle;
+    private BottomSheetBehavior bottomSheetBehavior; // Behavior for list bottom sheet
+    private BottomSheetBehavior bottomSheetBehaviorForDetails; // Behavior for details bottom sheet
+
+    @Nullable
+    @Override
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_nearby, container, false);
+        ButterKnife.bind(this, view);
+
+        // Resume the fragment if exist
+        resumeFragment();
+        bundle = new Bundle();
+
+        initBottomSheetBehaviour();
+        return view;
+    }
+
+    private void resumeFragment() {
+        // Find the retained fragment on activity restarts
+        nearbyMapFragment = getMapFragment();
+        nearbyListFragment = getListFragment();
+    }
+
+    private NearbyMapFragment getMapFragment() {
+        return (NearbyMapFragment) getFragmentManager().findFragmentByTag(TAG_RETAINED_MAP_FRAGMENT);
+    }
+
+    private void removeMapFragment() {
+        if (nearbyMapFragment != null) {
+            android.support.v4.app.FragmentManager fm = getFragmentManager();
+            fm.beginTransaction().remove(nearbyMapFragment).commit();
+            nearbyMapFragment = null;
+        }
+    }
+
+    private NearbyListFragment getListFragment() {
+        return (NearbyListFragment) getFragmentManager().findFragmentByTag(TAG_RETAINED_LIST_FRAGMENT);
+    }
+
+    private void removeListFragment() {
+        if (nearbyListFragment != null) {
+            android.support.v4.app.FragmentManager fm = getFragmentManager();
+            fm.beginTransaction().remove(nearbyListFragment).commit();
+            nearbyListFragment = null;
+        }
+    }
+
+    /**
+     * Initialize bottom sheet behaviour (sheet for map list.) Set height 9/16 of all window.
+     * Add callback for bottom sheet changes, so that we can sync it with bottom sheet for details
+     * (sheet for nearby details)
+     */
+    private void initBottomSheetBehaviour() {
+
+        transparentView.setAlpha(0);
+
+        bottomSheet.getLayoutParams().height = getActivity().getWindowManager()
+                .getDefaultDisplay().getHeight() / 16 * 9;
+        bottomSheetBehavior = BottomSheetBehavior.from(bottomSheet);
+        // TODO initProperBottomSheetBehavior();
+        bottomSheetBehavior.setBottomSheetCallback(new BottomSheetBehavior.BottomSheetCallback() {
+
+            @Override
+            public void onStateChanged(View bottomSheet, int newState) {
+                prepareViewsForSheetPosition(newState);
+            }
+
+            @Override
+            public void onSlide(View bottomSheet, float slideOffset) {
+
+            }
+        });
+
+        bottomSheetBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
+        bottomSheetBehaviorForDetails = BottomSheetBehavior.from(bottomSheetDetails);
+        bottomSheetBehaviorForDetails.setState(BottomSheetBehavior.STATE_HIDDEN);
+    }
+
+    public void prepareViewsForSheetPosition(int bottomSheetState) {
+        // TODO
+    }
+    
     @Override
     public void onLocationChangedSignificantly(LatLng latLng) {
-        refreshView(LOCATION_SIGNIFICANTLY_CHANGED);
+        //refreshView(LOCATION_SIGNIFICANTLY_CHANGED);
     }
 
     @Override
     public void onLocationChangedSlightly(LatLng latLng) {
-        refreshView(LOCATION_SLIGHTLY_CHANGED);
+        //refreshView(LOCATION_SLIGHTLY_CHANGED);
     }
 
     @Override
     public void onWikidataEditSuccessful() {
-        refreshView(MAP_UPDATED);
+        //refreshView(MAP_UPDATED);
     }
 
     /**
@@ -80,7 +173,7 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
      *
      * @param locationChangeType defines if location shanged significantly or slightly
      */
-    private void refreshView(LocationServiceManager.LocationChangeType locationChangeType) {
+   /* private void refreshView(LocationServiceManager.LocationChangeType locationChangeType) {
         if (lockNearbyView) {
             return;
         }
@@ -141,6 +234,8 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
             updateMapFragment(true);
         }
     }
-
+*/
 
 }
+
+
