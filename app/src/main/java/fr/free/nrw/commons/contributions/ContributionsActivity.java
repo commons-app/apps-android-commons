@@ -132,23 +132,12 @@ public class ContributionsActivity extends AuthenticatedActivity implements Frag
                         tabLayout.getTabAt(CONTRIBUTIONS_TAB_POSITION).select();
                         isContributionsFragmentVisible = true;
                         updateMenuItem();
-                        Log.d("deneme","contributions fragment is:"+contributionsActivityPagerAdapter.contributionsFragment);
-                        // If contrib tab, nearby notification card view top of contrib list should be visible
-                        if (contributionsActivityPagerAdapter.contributionsFragment != null && contributionsActivityPagerAdapter.contributionsFragment.nearbyNoificationCardView != null) {
-                            contributionsActivityPagerAdapter.contributionsFragment.nearbyNoificationCardView.setVisibility(View.VISIBLE);
-                            Log.d("deneme","called23");
-                        }
+
                         break;
                     case NEARBY_TAB_POSITION:
                         tabLayout.getTabAt(NEARBY_TAB_POSITION).select();
                         isContributionsFragmentVisible = false;
                         updateMenuItem();
-                        Log.d("deneme","nearby fragment is:"+contributionsActivityPagerAdapter.nearbyFragment);
-                        // If nearby tab, nearby notifiction card view top of contrib list should be invisible
-                        if (contributionsActivityPagerAdapter.contributionsFragment != null && contributionsActivityPagerAdapter.contributionsFragment.nearbyNoificationCardView != null) {
-                            contributionsActivityPagerAdapter.contributionsFragment.nearbyNoificationCardView.setVisibility(View.GONE);
-                            Log.d("deneme","called22");
-                        }
                         break;
                     default:
                         tabLayout.getTabAt(CONTRIBUTIONS_TAB_POSITION).select();
