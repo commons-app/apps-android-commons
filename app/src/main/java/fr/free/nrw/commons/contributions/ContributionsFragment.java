@@ -173,7 +173,11 @@ public class ContributionsFragment
         // show tabs on contribution list is visible
         ((ContributionsActivity)getActivity()).showTabs();
         // show nearby card view on contributions list is visible
-        nearbyNoificationCardView.setVisibility(View.GONE);
+        if (prefs.getBoolean("displayNearbyCardView", true)) {
+            nearbyNoificationCardView.setVisibility(View.VISIBLE);
+        } else {
+            nearbyNoificationCardView.setVisibility(View.GONE);
+        }
 
 
         // Create if null
