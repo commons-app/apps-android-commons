@@ -97,6 +97,7 @@ public class ContributionsActivity extends AuthenticatedActivity implements Frag
 
         if (uploadServiceIntent != null) { // If auth cookie already acquired
             ((ContributionsFragment)contributionsActivityPagerAdapter.getItem(CONTRIBUTIONS_TAB_POSITION)).onAuthCookieAcquired(uploadServiceIntent);
+            //contributionsActivityPagerAdapter.contributionsFragment.onAuthCookieAcquired(uploadServiceIntent);
         }
 
         setTabAndViewPagerSynchronisation();
@@ -131,6 +132,7 @@ public class ContributionsActivity extends AuthenticatedActivity implements Frag
                         tabLayout.getTabAt(CONTRIBUTIONS_TAB_POSITION).select();
                         isContributionsFragmentVisible = true;
                         updateMenuItem();
+                        Log.d("deneme","contributions fragment is:"+contributionsActivityPagerAdapter.contributionsFragment);
                         // If contrib tab, nearby notification card view top of contrib list should be visible
                         if (contributionsActivityPagerAdapter.contributionsFragment != null && contributionsActivityPagerAdapter.contributionsFragment.nearbyNoificationCardView != null) {
                             contributionsActivityPagerAdapter.contributionsFragment.nearbyNoificationCardView.setVisibility(View.VISIBLE);
@@ -141,6 +143,7 @@ public class ContributionsActivity extends AuthenticatedActivity implements Frag
                         tabLayout.getTabAt(NEARBY_TAB_POSITION).select();
                         isContributionsFragmentVisible = false;
                         updateMenuItem();
+                        Log.d("deneme","nearby fragment is:"+contributionsActivityPagerAdapter.nearbyFragment);
                         // If nearby tab, nearby notifiction card view top of contrib list should be invisible
                         if (contributionsActivityPagerAdapter.contributionsFragment != null && contributionsActivityPagerAdapter.contributionsFragment.nearbyNoificationCardView != null) {
                             contributionsActivityPagerAdapter.contributionsFragment.nearbyNoificationCardView.setVisibility(View.GONE);
@@ -288,10 +291,10 @@ public class ContributionsActivity extends AuthenticatedActivity implements Frag
     public void updateNotificationIcon(boolean isThereUnreadNotifications) {
         if (!isThereUnreadNotifications) {
             this.isThereUnreadNotifications = false;
-            menu.findItem(R.id.notifications).setIcon(ContextCompat.getDrawable(this, R.drawable.ic_notifications_white_24dp));
+            //menu.findItem(R.id.notifications).setIcon(ContextCompat.getDrawable(this, R.drawable.ic_notifications_white_24dp));
         } else {
             this.isThereUnreadNotifications = true;
-            menu.findItem(R.id.notifications).setIcon(ContextCompat.getDrawable(this, R.drawable.ic_notifications_white_with_marker));
+            //menu.findItem(R.id.notifications).setIcon(ContextCompat.getDrawable(this, R.drawable.ic_notifications_white_with_marker));
         }
     }
 
@@ -321,7 +324,6 @@ public class ContributionsActivity extends AuthenticatedActivity implements Frag
                 case 0:
                     ContributionsFragment retainedContributionsFragment = getContributionsFragment(0);
                     if (retainedContributionsFragment != null) {
-
                         /**
                          * ContributionsFragment is parent of ContributionsListFragment and
                          * MediaDetailsFragment. If below decides which child will be visible.
@@ -333,22 +335,23 @@ public class ContributionsActivity extends AuthenticatedActivity implements Frag
                         }
                         contributionsFragment = retainedContributionsFragment;
                         return retainedContributionsFragment;
+                    } else {
+                        // If we reach here, retainedContributionsFragment is null
+                        contributionsFragment = new ContributionsFragment();
+                        return contributionsFragment;
+
                     }
 
-                    // If we reach here, retainedContributionsFragment is null
-                    contributionsFragment = new ContributionsFragment();
-                    String contributionsFragmentTag = makeFragmentName(R.id.pager, 0);
-                    fragmentManager.beginTransaction()
-                            .replace(R.id.pager, contributionsFragment, contributionsFragmentTag)
-                            .addToBackStack(contributionsFragmentTag)
-                            .commit();
-
-                    return contributionsFragment;
                 case 1:
-                    if (getNearbyFragment(1) != null) {
-                        return getNearbyFragment(1);
+                    NearbyFragment retainedNearbyFragment = getNearbyFragment(1);
+                    if (retainedNearbyFragment != null) {
+                        nearbyFragment = retainedNearbyFragment;
+                        return retainedNearbyFragment;
+                    } else {
+                        // If we reach here, retainedContributionsFragment is null
+                        nearbyFragment = new NearbyFragment();
+                        return nearbyFragment;
                     }
-                    return new NearbyFragment();// nearby places needs photo
                 default:
                     return null;
             }
