@@ -1,13 +1,21 @@
 package fr.free.nrw.commons.nearby;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.graphics.Typeface;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.BottomSheetBehavior;
+import android.support.v4.app.FragmentTransaction;
+import android.support.v7.app.AlertDialog;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -18,6 +26,8 @@ import android.widget.ProgressBar;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+
+import java.util.List;
 
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -35,6 +45,7 @@ import fr.free.nrw.commons.utils.ViewUtil;
 import fr.free.nrw.commons.wikidata.WikidataEditListener;
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 import timber.log.Timber;
 import uk.co.deanwild.materialshowcaseview.IShowcaseListener;
@@ -81,6 +92,16 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
     private BottomSheetBehavior bottomSheetBehavior; // Behavior for list bottom sheet
     private BottomSheetBehavior bottomSheetBehaviorForDetails; // Behavior for details bottom sheet
 
+    private LatLng curLatLng;
+    private Disposable placesDisposable;
+    private boolean lockNearbyView; //Determines if the nearby places needs to be refreshed
+    private View view;
+
+    private LatLng lastKnownLocation;
+
+    private final String NETWORK_INTENT_ACTION = "android.net.conn.CONNECTIVITY_CHANGE";
+    private BroadcastReceiver broadcastReceiver;
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -92,6 +113,7 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
         bundle = new Bundle();
         initBottomSheetBehaviour();
         wikidataEditListener.setAuthenticationStateListener(this);
+        this.view = view;
         return view;
     }
 
@@ -178,21 +200,19 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
         // TODO
     }
 
-
-
     @Override
     public void onLocationChangedSignificantly(LatLng latLng) {
-        //refreshView(LOCATION_SIGNIFICANTLY_CHANGED);
+        refreshView(LOCATION_SIGNIFICANTLY_CHANGED);
     }
 
     @Override
     public void onLocationChangedSlightly(LatLng latLng) {
-        //refreshView(LOCATION_SLIGHTLY_CHANGED);
+        refreshView(LOCATION_SLIGHTLY_CHANGED);
     }
 
     @Override
     public void onWikidataEditSuccessful() {
-        //refreshView(MAP_UPDATED);
+        refreshView(MAP_UPDATED);
     }
 
     /**
@@ -200,12 +220,13 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
      *
      * @param locationChangeType defines if location shanged significantly or slightly
      */
-   /* private void refreshView(LocationServiceManager.LocationChangeType locationChangeType) {
+    private void refreshView(LocationServiceManager.LocationChangeType locationChangeType) {
+        Log.d("deneme","refreshView is called");
         if (lockNearbyView) {
             return;
         }
 
-        if (!NetworkUtils.isInternetConnectionEstablished(this)) {
+        if (!NetworkUtils.isInternetConnectionEstablished(getActivity())) {
             hideProgressBar();
             return;
         }
@@ -261,8 +282,325 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
             updateMapFragment(true);
         }
     }
-*/
 
+    private void populatePlaces(NearbyController.NearbyPlacesInfo nearbyPlacesInfo) {
+        Log.d("deneme","populate places is called");
+        List<Place> placeList = nearbyPlacesInfo.placeList;
+        LatLng[] boundaryCoordinates = nearbyPlacesInfo.boundaryCoordinates;
+        Gson gson = new GsonBuilder()
+                .registerTypeAdapter(Uri.class, new UriSerializer())
+                .create();
+        String gsonPlaceList = gson.toJson(placeList);
+        String gsonCurLatLng = gson.toJson(curLatLng);
+        String gsonBoundaryCoordinates = gson.toJson(boundaryCoordinates);
+
+        if (placeList.size() == 0) {
+            ViewUtil.showSnackbar(view.findViewById(R.id.container), R.string.no_nearby);
+        }
+
+        Log.d("deneme","placeList size:"+placeList.size());
+
+        bundle.putString("PlaceList", gsonPlaceList);
+        //bundle.putString("CurLatLng", gsonCurLatLng);
+        bundle.putString("BoundaryCoord", gsonBoundaryCoordinates);
+
+        // First time to init fragments
+        if (nearbyMapFragment == null) {
+            Timber.d("Init map fragment for the first time");
+            lockNearbyView(true);
+            setMapFragment();
+            setListFragment();
+            hideProgressBar();
+            lockNearbyView(false);
+        } else {
+            // There are fragments, just update the map and list
+            Timber.d("Map fragment already exists, just update the map and list");
+            updateMapFragment(false);
+            updateListFragment();
+        }
+
+    }
+
+    private void lockNearbyView(boolean lock) {
+        if (lock) {
+            lockNearbyView = true;
+            locationManager.unregisterLocationManager();
+            locationManager.removeLocationListener(this);
+        } else {
+            lockNearbyView = false;
+            registerLocationUpdates();
+            locationManager.addLocationListener(this);
+        }
+    }
+
+    private void updateMapFragment(boolean isSlightUpdate) {
+        /*
+         * Significant update means updating nearby place markers. Slightly update means only
+         * updating current location marker and camera target.
+         * We update our map Significantly on each 1000 meter change, but we can't never know
+         * the frequency of nearby places. Thus we check if we are close to the boundaries of
+         * our nearby markers, we update our map Significantly.
+         * */
+
+        NearbyMapFragment nearbyMapFragment = getMapFragment();
+
+        if (nearbyMapFragment != null && curLatLng != null) {
+            hideProgressBar(); // In case it is visible (this happens, not an impossible case)
+            /*
+             * If we are close to nearby places boundaries, we need a significant update to
+             * get new nearby places. Check order is south, north, west, east
+             * */
+            if (nearbyMapFragment.boundaryCoordinates != null
+                    && (curLatLng.getLatitude() <= nearbyMapFragment.boundaryCoordinates[0].getLatitude()
+                    || curLatLng.getLatitude() >= nearbyMapFragment.boundaryCoordinates[1].getLatitude()
+                    || curLatLng.getLongitude() <= nearbyMapFragment.boundaryCoordinates[2].getLongitude()
+                    || curLatLng.getLongitude() >= nearbyMapFragment.boundaryCoordinates[3].getLongitude())) {
+                // populate places
+                placesDisposable = Observable.fromCallable(() -> nearbyController
+                        .loadAttractionsFromLocation(curLatLng, false))
+                        .subscribeOn(Schedulers.io())
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribe(this::populatePlaces,
+                                throwable -> {
+                                    Timber.d(throwable);
+                                    showErrorMessage(getString(R.string.error_fetching_nearby_places));
+                                    progressBar.setVisibility(View.GONE);
+                                });
+                nearbyMapFragment.setBundleForUpdtes(bundle);
+                nearbyMapFragment.updateMapSignificantly();
+                updateListFragment();
+                return;
+            }
+
+            if (isSlightUpdate) {
+                nearbyMapFragment.setBundleForUpdtes(bundle);
+                nearbyMapFragment.updateMapSlightly();
+            } else {
+                nearbyMapFragment.setBundleForUpdtes(bundle);
+                nearbyMapFragment.updateMapSignificantly();
+                updateListFragment();
+            }
+        } else {
+            lockNearbyView(true);
+            setMapFragment();
+            setListFragment();
+            hideProgressBar();
+            lockNearbyView(false);
+        }
+    }
+
+    private void updateListFragment() {
+        nearbyListFragment.setBundleForUpdates(bundle);
+        nearbyListFragment.updateNearbyListSignificantly();
+    }
+
+    /**
+     * Calls fragment for map view.
+     */
+    private void setMapFragment() {
+        FragmentTransaction fragmentTransaction = getChildFragmentManager().beginTransaction();
+        nearbyMapFragment = new NearbyMapFragment();
+        nearbyMapFragment.setArguments(bundle);
+        fragmentTransaction.replace(R.id.container, nearbyMapFragment, TAG_RETAINED_MAP_FRAGMENT);
+        fragmentTransaction.commitAllowingStateLoss();
+    }
+
+    /**
+     * Calls fragment for list view.
+     */
+    private void setListFragment() {
+        FragmentTransaction fragmentTransaction = getChildFragmentManager().beginTransaction();
+        nearbyListFragment = new NearbyListFragment();
+        nearbyListFragment.setArguments(bundle);
+        fragmentTransaction.replace(R.id.container_sheet, nearbyListFragment, TAG_RETAINED_LIST_FRAGMENT);
+        initBottomSheetBehaviour();
+        bottomSheetBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
+        fragmentTransaction.commitAllowingStateLoss();
+    }
+
+    private void hideProgressBar() {
+        if (progressBar != null) {
+            progressBar.setVisibility(View.GONE);
+        }
+    }
+
+    /**
+     * This method first checks if the location permissions has been granted and then register the location manager for updates.
+     */
+    private void registerLocationUpdates() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            if (locationManager.isLocationPermissionGranted()) {
+                locationManager.registerLocationManager();
+            } else {
+                // Should we show an explanation?
+                if (locationManager.isPermissionExplanationRequired(getActivity())) {
+                    new AlertDialog.Builder(getActivity())
+                            .setMessage(getString(R.string.location_permission_rationale_nearby))
+                            .setPositiveButton(android.R.string.ok, (dialog, which) -> {
+                                requestLocationPermissions();
+                                dialog.dismiss();
+                            })
+                            .setNegativeButton(android.R.string.cancel, (dialog, id) -> {
+                                showLocationPermissionDeniedErrorDialog();
+                                dialog.cancel();
+                            })
+                            .create()
+                            .show();
+
+                } else {
+                    // No explanation needed, we can request the permission.
+                    requestLocationPermissions();
+                }
+            }
+        } else {
+            locationManager.registerLocationManager();
+        }
+    }
+
+    private void requestLocationPermissions() {
+        if (!getActivity().isFinishing()) {
+            locationManager.requestPermissions(getActivity());
+        }
+    }
+
+    private void showLocationPermissionDeniedErrorDialog() {
+        new AlertDialog.Builder(getActivity())
+                .setMessage(R.string.nearby_needs_permissions)
+                .setCancelable(false)
+                .setPositiveButton(R.string.give_permission, (dialog, which) -> {
+                    //will ask for the location permission again
+                    checkGps();
+                })
+                .setNegativeButton(R.string.cancel, (dialog, which) -> {
+                    //dismiss dialog and finish activity
+                    dialog.cancel();
+                    getActivity().finish();
+                })
+                .create()
+                .show();
+    }
+
+    private void checkGps() {
+        if (!locationManager.isProviderEnabled()) {
+            Timber.d("GPS is not enabled");
+            new AlertDialog.Builder(getActivity())
+                    .setMessage(R.string.gps_disabled)
+                    .setCancelable(false)
+                    .setPositiveButton(R.string.enable_gps,
+                            (dialog, id) -> {
+                                Intent callGPSSettingIntent = new Intent(
+                                        android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+                                Timber.d("Loaded settings page");
+                                startActivityForResult(callGPSSettingIntent, 1);
+                            })
+                    .setNegativeButton(R.string.menu_cancel_upload, (dialog, id) -> {
+                        showLocationPermissionDeniedErrorDialog();
+                        dialog.cancel();
+                    })
+                    .create()
+                    .show();
+        } else {
+            Timber.d("GPS is enabled");
+            checkLocationPermission();
+        }
+    }
+
+    private void checkLocationPermission() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            if (locationManager.isLocationPermissionGranted()) {
+                refreshView(LOCATION_SIGNIFICANTLY_CHANGED);
+            } else {
+                // Should we show an explanation?
+                if (locationManager.isPermissionExplanationRequired(getActivity())) {
+                    // Show an explanation to the user *asynchronously* -- don't block
+                    // this thread waiting for the user's response! After the user
+                    // sees the explanation, try again to request the permission.
+                    new AlertDialog.Builder(getActivity())
+                            .setMessage(getString(R.string.location_permission_rationale_nearby))
+                            .setPositiveButton(android.R.string.ok, (dialog, which) -> {
+                                requestLocationPermissions();
+                                dialog.dismiss();
+                            })
+                            .setNegativeButton(android.R.string.cancel, (dialog, id) -> {
+                                showLocationPermissionDeniedErrorDialog();
+                                dialog.cancel();
+                            })
+                            .create()
+                            .show();
+
+                } else {
+                    // No explanation needed, we can request the permission.
+                    requestLocationPermissions();
+                }
+            }
+        } else {
+            refreshView(LOCATION_SIGNIFICANTLY_CHANGED);
+        }
+    }
+
+    private void showErrorMessage(String message) {
+        ViewUtil.showLongToast(getActivity(), message);
+    }
+
+    private void addNetworkBroadcastReceiver() {
+        IntentFilter intentFilter = new IntentFilter(NETWORK_INTENT_ACTION);
+
+        broadcastReceiver = new BroadcastReceiver() {
+
+            @Override
+            public void onReceive(Context context, Intent intent) {
+                if (NetworkUtils.isInternetConnectionEstablished(getActivity())) {
+                    refreshView(LOCATION_SIGNIFICANTLY_CHANGED);
+                } else {
+                    ViewUtil.showLongToast(getActivity(), getString(R.string.no_internet));
+                }
+            }
+        };
+
+        getActivity().registerReceiver(broadcastReceiver, intentFilter);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        lockNearbyView = false;
+        checkGps();
+        addNetworkBroadcastReceiver();
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        if (placesDisposable != null) {
+            placesDisposable.dispose();
+        }
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        locationManager.addLocationListener(this);
+        registerLocationUpdates();
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        // this means that this activity will not be recreated now, user is leaving it
+        // or the activity is otherwise finishing
+        if(getActivity().isFinishing()) {
+            // we will not need this fragment anymore, this may also be a good place to signal
+            // to the retained fragment object to perform its own cleanup.
+            removeMapFragment();
+            removeListFragment();
+
+        }
+        getActivity().unregisterReceiver(broadcastReceiver);
+        broadcastReceiver = null;
+        locationManager.removeLocationListener(this);
+        locationManager.unregisterLocationManager();
+
+    }
 }
 
 
