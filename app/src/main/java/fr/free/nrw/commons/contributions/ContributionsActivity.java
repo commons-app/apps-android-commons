@@ -14,6 +14,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 
 import javax.inject.Inject;
@@ -41,7 +42,7 @@ public class ContributionsActivity extends AuthenticatedActivity implements Frag
     @BindView(R.id.tab_layout)
     TabLayout tabLayout;
     @BindView(R.id.pager)
-    public ViewPager viewPager;
+    public UnswipableViewPager viewPager;
     @Inject
     public LocationServiceManager locationManager;
     @Inject
@@ -119,6 +120,9 @@ public class ContributionsActivity extends AuthenticatedActivity implements Frag
      * tab won't change and vice versa. So we have to notify each of them.
      */
     private void setTabAndViewPagerSynchronisation() {
+        //viewPager.canScrollHorizontally(false);
+        viewPager.setFocusableInTouchMode(true);
+
         viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
