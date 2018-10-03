@@ -178,6 +178,7 @@ public class NearbyMapFragment extends DaggerFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         Timber.d("onCreateView called");
+        Log.d("deneme","on create view is called");
         if (curLatLng != null) {
             Timber.d("curLatLng found, setting up map view...");
             setupMapView(savedInstanceState);
@@ -491,6 +492,7 @@ public class NearbyMapFragment extends DaggerFragment {
     }
 
     private void setupMapView(Bundle savedInstanceState) {
+        Log.d("deneme","setupMapView called");
         MapboxMapOptions options = new MapboxMapOptions()
                 .compassGravity(Gravity.BOTTOM | Gravity.LEFT)
                 .compassMargins(new int[]{12, 0, 0, 24})

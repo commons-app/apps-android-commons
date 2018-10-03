@@ -142,7 +142,7 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
     }
 
     private NearbyMapFragment getMapFragment() {
-        return (NearbyMapFragment) getFragmentManager().findFragmentByTag(TAG_RETAINED_MAP_FRAGMENT);
+        return (NearbyMapFragment) getChildFragmentManager().findFragmentByTag(TAG_RETAINED_MAP_FRAGMENT);
     }
 
     private void removeMapFragment() {
@@ -154,7 +154,7 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
     }
 
     private NearbyListFragment getListFragment() {
-        return (NearbyListFragment) getFragmentManager().findFragmentByTag(TAG_RETAINED_LIST_FRAGMENT);
+        return (NearbyListFragment) getChildFragmentManager().findFragmentByTag(TAG_RETAINED_LIST_FRAGMENT);
     }
 
     private void removeListFragment() {
@@ -202,11 +202,15 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
 
     @Override
     public void onLocationChangedSignificantly(LatLng latLng) {
+        Log.d("deneme","onLocationChangedSignificantly");
+
         refreshView(LOCATION_SIGNIFICANTLY_CHANGED);
     }
 
     @Override
     public void onLocationChangedSlightly(LatLng latLng) {
+
+        Log.d("deneme","onLocationChangedSlightly");
         refreshView(LOCATION_SLIGHTLY_CHANGED);
     }
 
@@ -345,8 +349,10 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
          * */
 
         NearbyMapFragment nearbyMapFragment = getMapFragment();
+        Log.d("deneme","nearbyMapFragment is"+nearbyMapFragment);
 
         if (nearbyMapFragment != null && curLatLng != null) {
+            Log.d("deneme","ife girdi");
             hideProgressBar(); // In case it is visible (this happens, not an impossible case)
             /*
              * If we are close to nearby places boundaries, we need a significant update to
@@ -375,14 +381,17 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
             }
 
             if (isSlightUpdate) {
+                Log.d("deneme","isSlightUpdate : true");
                 nearbyMapFragment.setBundleForUpdtes(bundle);
                 nearbyMapFragment.updateMapSlightly();
             } else {
+                Log.d("deneme","isSlightUpdate : false");
                 nearbyMapFragment.setBundleForUpdtes(bundle);
                 nearbyMapFragment.updateMapSignificantly();
                 updateListFragment();
             }
         } else {
+            Log.d("deneme","else girdi");
             lockNearbyView(true);
             setMapFragment();
             setListFragment();

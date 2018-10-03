@@ -30,7 +30,7 @@ public class LocationServiceManager implements LocationListener {
     private Context context;
     private LocationManager locationManager;
     private Location lastLocation;
-    private Location lastLocationDuplicate; // Will be used for nearby card view on contributions activity
+    //private Location lastLocationDuplicate; // Will be used for nearby card view on contributions activity
     private final List<LocationUpdateListener> locationListeners = new CopyOnWriteArrayList<>();
     private boolean isLocationManagerRegistered = false;
     private Set<Activity> locationExplanationDisplayed = new HashSet<>();
@@ -118,7 +118,7 @@ public class LocationServiceManager implements LocationListener {
     }
 
     public LatLng getLastLocation() {
-        if (lastLocation == null || lastLocationDuplicate == null) {
+        if (lastLocation == null) {
             return null;
         }
         return LatLng.from(lastLocation);
@@ -259,14 +259,14 @@ public class LocationServiceManager implements LocationListener {
             if (isBetterLocation(location, lastLocation)
                     .equals(LocationChangeType.LOCATION_SIGNIFICANTLY_CHANGED)) {
                 lastLocation = location;
-                lastLocationDuplicate = location;
+                //lastLocationDuplicate = location;
                 for (LocationUpdateListener listener : locationListeners) {
                     listener.onLocationChangedSignificantly(LatLng.from(lastLocation));
                 }
             } else if (isBetterLocation(location, lastLocation)
                     .equals(LocationChangeType.LOCATION_SLIGHTLY_CHANGED)) {
                 lastLocation = location;
-                lastLocationDuplicate = location;
+                //lastLocationDuplicate = location;
                 for (LocationUpdateListener listener : locationListeners) {
                     listener.onLocationChangedSlightly(LatLng.from(lastLocation));
                 }
