@@ -95,7 +95,7 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
     private LatLng curLatLng;
     private Disposable placesDisposable;
     private boolean lockNearbyView; //Determines if the nearby places needs to be refreshed
-    private View view;
+    public View view;
 
     private LatLng lastKnownLocation;
 
@@ -307,6 +307,7 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
         // First time to init fragments
         if (nearbyMapFragment == null) {
             Timber.d("Init map fragment for the first time");
+            Log.d("deneme","nearbyMapFragment == null");
             lockNearbyView(true);
             setMapFragment();
             setListFragment();
@@ -334,6 +335,7 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
     }
 
     private void updateMapFragment(boolean isSlightUpdate) {
+        Log.d("deneme","Nearby fragment updateMapFragment is called");
         /*
          * Significant update means updating nearby place markers. Slightly update means only
          * updating current location marker and camera target.
@@ -398,6 +400,7 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
      * Calls fragment for map view.
      */
     private void setMapFragment() {
+        Log.d("deneme","setMapFragment is called");
         FragmentTransaction fragmentTransaction = getChildFragmentManager().beginTransaction();
         nearbyMapFragment = new NearbyMapFragment();
         nearbyMapFragment.setArguments(bundle);

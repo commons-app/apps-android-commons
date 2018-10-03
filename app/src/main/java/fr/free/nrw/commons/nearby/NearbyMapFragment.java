@@ -16,6 +16,7 @@ import android.support.design.widget.BottomSheetBehavior;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AlertDialog;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -211,6 +212,7 @@ public class NearbyMapFragment extends DaggerFragment {
     }
 
     public void updateMapSlightly() {
+        Log.d("deneme","update map slightly is called, bundle is:"+bundleForUpdtes);
         if (mapboxMap != null) {
             Gson gson = new GsonBuilder()
                     .registerTypeAdapter(Uri.class, new UriDeserializer())
@@ -226,6 +228,7 @@ public class NearbyMapFragment extends DaggerFragment {
     }
 
     public void updateMapSignificantly() {
+        Log.d("deneme","update map signicitantly is called, bundle is:"+bundleForUpdtes);
         if (mapboxMap != null) {
             if (bundleForUpdtes != null) {
                 Gson gson = new GsonBuilder()
@@ -341,39 +344,40 @@ public class NearbyMapFragment extends DaggerFragment {
     }
 
     private void initViews() {
-        bottomSheetList = getActivity().findViewById(R.id.bottom_sheet);
+        Log.d("deneme","init views is called");
+        bottomSheetList = ((NearbyFragment)getParentFragment()).view.findViewById(R.id.bottom_sheet);
         bottomSheetListBehavior = BottomSheetBehavior.from(bottomSheetList);
-        bottomSheetDetails = getActivity().findViewById(R.id.bottom_sheet_details);
+        bottomSheetDetails = ((NearbyFragment)getParentFragment()).view.findViewById(R.id.bottom_sheet_details);
         bottomSheetDetailsBehavior = BottomSheetBehavior.from(bottomSheetDetails);
         bottomSheetDetailsBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
         bottomSheetDetails.setVisibility(View.VISIBLE);
 
-        fabPlus = getActivity().findViewById(R.id.fab_plus);
-        fabCamera = getActivity().findViewById(R.id.fab_camera);
-        fabGallery = getActivity().findViewById(R.id.fab_galery);
-        fabRecenter = getActivity().findViewById(R.id.fab_recenter);
+        fabPlus = ((NearbyFragment)getParentFragment()).view.findViewById(R.id.fab_plus);
+        fabCamera = ((NearbyFragment)getParentFragment()).view.findViewById(R.id.fab_camera);
+        fabGallery = ((NearbyFragment)getParentFragment()).view.findViewById(R.id.fab_galery);
+        fabRecenter = ((NearbyFragment)getParentFragment()).view.findViewById(R.id.fab_recenter);
 
-        fab_open = AnimationUtils.loadAnimation(getActivity(), R.anim.fab_open);
-        fab_close = AnimationUtils.loadAnimation(getActivity(), R.anim.fab_close);
-        rotate_forward = AnimationUtils.loadAnimation(getActivity(), R.anim.rotate_forward);
-        rotate_backward = AnimationUtils.loadAnimation(getActivity(), R.anim.rotate_backward);
+        fab_open = AnimationUtils.loadAnimation(getParentFragment().getActivity(), R.anim.fab_open);
+        fab_close = AnimationUtils.loadAnimation(getParentFragment().getActivity(), R.anim.fab_close);
+        rotate_forward = AnimationUtils.loadAnimation(getParentFragment().getActivity(), R.anim.rotate_forward);
+        rotate_backward = AnimationUtils.loadAnimation(getParentFragment().getActivity(), R.anim.rotate_backward);
 
-        transparentView = getActivity().findViewById(R.id.transparentView);
+        transparentView = ((NearbyFragment)getParentFragment()).view.findViewById(R.id.transparentView);
 
-        description = getActivity().findViewById(R.id.description);
-        title = getActivity().findViewById(R.id.title);
-        distance = getActivity().findViewById(R.id.category);
-        icon = getActivity().findViewById(R.id.icon);
+        description = ((NearbyFragment)getParentFragment()).view.findViewById(R.id.description);
+        title = ((NearbyFragment)getParentFragment()).view.findViewById(R.id.title);
+        distance = ((NearbyFragment)getParentFragment()).view.findViewById(R.id.category);
+        icon = ((NearbyFragment)getParentFragment()).view.findViewById(R.id.icon);
 
-        wikidataButton = getActivity().findViewById(R.id.wikidataButton);
-        wikipediaButton = getActivity().findViewById(R.id.wikipediaButton);
-        directionsButton = getActivity().findViewById(R.id.directionsButton);
-        commonsButton = getActivity().findViewById(R.id.commonsButton);
+        wikidataButton = ((NearbyFragment)getParentFragment()).view.findViewById(R.id.wikidataButton);
+        wikipediaButton = ((NearbyFragment)getParentFragment()).view.findViewById(R.id.wikipediaButton);
+        directionsButton = ((NearbyFragment)getParentFragment()).view.findViewById(R.id.directionsButton);
+        commonsButton = ((NearbyFragment)getParentFragment()).view.findViewById(R.id.commonsButton);
 
-        wikidataButtonText = getActivity().findViewById(R.id.wikidataButtonText);
-        wikipediaButtonText = getActivity().findViewById(R.id.wikipediaButtonText);
-        directionsButtonText = getActivity().findViewById(R.id.directionsButtonText);
-        commonsButtonText = getActivity().findViewById(R.id.commonsButtonText);
+        wikidataButtonText = ((NearbyFragment)getParentFragment()).view.findViewById(R.id.wikidataButtonText);
+        wikipediaButtonText = ((NearbyFragment)getParentFragment()).view.findViewById(R.id.wikipediaButtonText);
+        directionsButtonText = ((NearbyFragment)getParentFragment()).view.findViewById(R.id.directionsButtonText);
+        commonsButtonText = ((NearbyFragment)getParentFragment()).view.findViewById(R.id.commonsButtonText);
 
     }
 
@@ -499,12 +503,12 @@ public class NearbyMapFragment extends DaggerFragment {
                         .build());
 
         // create map
-        mapView = new MapView(getActivity(), options);
+        mapView = new MapView(getParentFragment().getActivity(), options);
         mapView.onCreate(savedInstanceState);
         mapView.getMapAsync(new OnMapReadyCallback() {
             @Override
             public void onMapReady(MapboxMap mapboxMap) {
-                ((NearbyActivity)getActivity()).setMapViewTutorialShowCase();
+                // TODO: ((NearbyActivity)getActivity()).setMapViewTutorialShowCase();
                 NearbyMapFragment.this.mapboxMap = mapboxMap;
                 updateMapSignificantly();
             }
@@ -538,6 +542,7 @@ public class NearbyMapFragment extends DaggerFragment {
      * move.
      */
     private void addCurrentLocationMarker(MapboxMap mapboxMap) {
+        Log.d("deneme","addCurrentLocationMarker is called");
         if (currentLocationMarker != null) {
             currentLocationMarker.remove(); // Remove previous marker, we are not Hansel and Gretel
         }
@@ -558,10 +563,12 @@ public class NearbyMapFragment extends DaggerFragment {
                 .strokeColor(Color.parseColor("#55000000"))
                 .fillColor(Color.parseColor("#11000000"));
         mapboxMap.addPolygon(currentLocationPolygonOptions);
+        Log.d("deneme","mapboxMap.addPolygon(currentLocationPolygonOptions) is called");
     }
 
     private void addNearbyMarkerstoMapBoxMap() {
 
+        Log.d("deneme","addNearbyMarkerstoMapBoxMap is called");
         mapboxMap.addMarkers(baseMarkerOptions);
 
         mapboxMap.setOnInfoWindowCloseListener(marker -> {
@@ -675,12 +682,12 @@ public class NearbyMapFragment extends DaggerFragment {
 
     private void showFAB() {
 
-        addAnchorToBigFABs(fabPlus, getActivity().findViewById(R.id.bottom_sheet_details).getId());
+        addAnchorToBigFABs(fabPlus, ((NearbyFragment)getParentFragment()).view.findViewById(R.id.bottom_sheet_details).getId());
         fabPlus.show();
 
-        addAnchorToSmallFABs(fabGallery, getActivity().findViewById(R.id.empty_view).getId());
+        addAnchorToSmallFABs(fabGallery, ((NearbyFragment)getParentFragment()).view.findViewById(R.id.empty_view).getId());
 
-        addAnchorToSmallFABs(fabCamera, getActivity().findViewById(R.id.empty_view1).getId());
+        addAnchorToSmallFABs(fabCamera, ((NearbyFragment)getParentFragment()).view.findViewById(R.id.empty_view1).getId());
         thirdSingleShowCaseView = new MaterialShowcaseView.Builder(this.getActivity())
                 .setTarget(fabPlus)
                 .setDismissText(getString(R.string.showcase_view_got_it_button))
@@ -886,6 +893,7 @@ public class NearbyMapFragment extends DaggerFragment {
     @Override
     public void onResume() {
         super.onResume();
+        Log.d("deneme","NEarbymap fragment, on resume is called");
         if (mapView != null) {
             mapView.onResume();
         }
