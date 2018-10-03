@@ -3,6 +3,7 @@
 * Ale.salmo
 * Beta16
 * Davio
+* Gianfranco
 * Nemo bis
 * S4b1nuz E.656
 * Sarah Bernabei
@@ -17,10 +18,12 @@
   <string name="preference_category_feedback">Commenti</string>
   <string name="preference_category_location">Posizione</string>
   <string name="app_name">Commons</string>
+  <string name="bullet">•</string>
   <string name="menu_settings">Impostazioni</string>
   <string name="intent_share_upload_label">Carica su Commons</string>
   <string name="username">Nome utente</string>
   <string name="password">Password</string>
+  <string name="login_credential">Accedi alla tua utenza in Commons Beta</string>
   <string name="login">Entra</string>
   <string name="forgot_password">Password dimenticata?</string>
   <string name="signup">Registrati</string>
@@ -54,14 +57,17 @@
   <string name="menu_share">Condividi</string>
   <string name="menu_open_in_browser">Visualizza nel browser</string>
   <string name="share_title_hint">Titolo</string>
+  <string name="add_title_toast">Per favore, dai un titolo a questo file</string>
   <string name="share_description_hint">Descrizione</string>
   <string name="login_failed_network">Impossibile effettuare l\'accesso - errore di rete</string>
+  <string name="login_failed_wrong_credentials">Accesso non riuscito - controlla nome utente e password</string>
   <string name="login_failed_throttled">Troppi tentativi falliti. Riprova tra alcuni minuti.</string>
   <string name="login_failed_blocked">Spiacente, questo utente è stato bloccato su Commons</string>
   <string name="login_failed_2fa_needed">Devi fornire il tuo codice di autenticazione a due fattori.</string>
   <string name="login_failed_generic">Accesso non riuscito</string>
   <string name="share_upload_button">Carica</string>
   <string name="multiple_share_base_title">Nome di questo set</string>
+  <string name="add_set_name_toast">Per favore indica un nome per questo set</string>
   <string name="provider_modifications">Modifiche</string>
   <string name="menu_upload_single">Carica</string>
   <string name="categories_search_text_hint">Cerca categorie</string>
@@ -105,6 +111,7 @@
   <string name="menu_retry_upload">Riprova</string>
   <string name="menu_cancel_upload">Annulla</string>
   <string name="share_license_summary">Questa immagine sarà rilasciata in base alla licenza %1$s</string>
+  <string name="media_upload_policy">Caricando questa immagine, dichiaro che questa è una mia opera, che non contiene materiale protetto da copyright o ritratti, e che comunque è conforme alle &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines\"&gt;Policy di Wikimedia Commons&lt;/a&gt;.</string>
   <string name="menu_download">Scarica</string>
   <string name="preference_license">Licenza predefinita</string>
   <string name="use_previous">Utilizza titolo/descrizione precedente</string>

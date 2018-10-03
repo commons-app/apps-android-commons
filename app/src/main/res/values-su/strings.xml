@@ -39,7 +39,7 @@
     <item quantity="one">ngunjal %1$d berkas</item>
     <item quantity="other">ngunjal %1$d berkas</item>
   </plurals>
-  <string name="title_activity_contributions">Unjalan panungtung kuring</string>
+  <string name="title_activity_contributions">Unjalan kami panungtung</string>
   <string name="contribution_state_queued">Antrian</string>
   <string name="contribution_state_failed">Gagal</string>
   <string name="contribution_state_in_progress">%1$d%% bérés</string>
@@ -47,7 +47,7 @@
   <string name="menu_from_gallery">Ti Galeri</string>
   <string name="menu_from_camera">Potrét poto</string>
   <string name="menu_nearby">Sabudeureun</string>
-  <string name="provider_contributions">Unjalan kuring</string>
+  <string name="provider_contributions">Unjalan kami</string>
   <string name="menu_share">Bagikeun</string>
   <string name="menu_open_in_browser">Tęmbong dina panyungsi</string>
   <string name="share_title_hint">Judul</string>
@@ -105,7 +105,7 @@
   <string name="menu_retry_upload">Cobaan deui</string>
   <string name="menu_cancel_upload">Bolay</string>
   <string name="share_license_summary">Ieu gambar bakal ditangtayungan ku lisénsi %1$s</string>
-  <string name="media_upload_policy">Ku ngirimkeun ieu gambar, kuring ngedalkeun yén ieu mangrupa karya kuring sorangan, yén ieu karya teu ngandung matéri atawa hak pribadi nu ditangtayungan ku hak cipta, sarta mun teu nurut kana &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines\"&gt;Kawijakan Wikimedia Commons&lt;/a&gt;.</string>
+  <string name="media_upload_policy">Ku ngirimkeun ieu gambar, kami ngedalkeun yén ieu mangrupa karya kami sorangan, yén ieu karya teu ngandung matéri atawa hak pribadi nu ditangtayungan ku hak cipta, sarta mun teu nurut kana &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines\"&gt;Kawijakan Wikimedia Commons&lt;/a&gt;.</string>
   <string name="menu_download">Undeur</string>
   <string name="preference_license">Lisénsi buhun</string>
   <string name="use_previous">Paké baé judul/pedaran saméméhna</string>
@@ -184,7 +184,7 @@
   <string name="become_a_tester_title">Jadi tukang ngetés Béta</string>
   <string name="become_a_tester_description">Pilihan asup kana saluran béta kami di Google Play sarta meunangkeun aksés munggaran pikeun fitur anyar jeung pameneran kutu</string>
   <string name="_2fa_code">Kode 2FA</string>
-  <string name="number_of_uploads">Water Unjal Panungtung Kuring</string>
+  <string name="number_of_uploads">Wates Unjalan Kami Panungtung</string>
   <string name="maximum_limit">Wates Maksimum</string>
   <string name="maximum_limit_alert">Teu bisa midangkeun leuwih ti 500</string>
   <string name="set_limit">Atur Wates Unjal Panungtung</string>
