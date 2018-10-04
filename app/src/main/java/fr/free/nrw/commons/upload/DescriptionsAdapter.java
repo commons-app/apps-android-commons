@@ -184,8 +184,8 @@ class DescriptionsAdapter extends RecyclerView.Adapter<DescriptionsAdapter.ViewH
                 if (ViewCompat.getLayoutDirection(view) == ViewCompat.LAYOUT_DIRECTION_LTR) {
                     value = etDescriptionText.getRight() - etDescriptionText
                             .getCompoundDrawables()[2]
-                            .getBounds().width();
-                    if (motionEvent.getAction() == ACTION_UP && motionEvent.getRawX() >= value) {
+                            .getBounds().width() - etDescriptionText.getPaddingRight();
+                    if (motionEvent.getAction() == ACTION_UP && motionEvent.getX() >= value) {
                         callback.showAlert(R.string.media_detail_description,
                                 R.string.description_info);
                         return true;
