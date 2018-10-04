@@ -391,4 +391,14 @@ public class ContributionsActivity extends AuthenticatedActivity implements Frag
             this.isContributionsListFragment = isContributionsListFragment;
         }
     }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        ContributionsListFragment contributionsListFragment =
+                        (ContributionsListFragment) contributionsActivityPagerAdapter
+                        .contributionsFragment.getChildFragmentManager()
+                        .findFragmentByTag(ContributionsFragment.CONTRIBUTION_LIST_FRAGMENT_TAG);
+        contributionsListFragment.onActivityResult(requestCode, resultCode, data);
+    }
 }

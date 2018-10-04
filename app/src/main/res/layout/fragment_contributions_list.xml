@@ -41,10 +41,9 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
-        android:layout_marginRight="24dp"
-        android:layout_marginBottom="24dp"
+        android:layout_marginRight="12dp"
         android:orientation="vertical"
-        android:gravity="center_vertical"
+        android:gravity="center"
         >
 
         <android.support.design.widget.FloatingActionButton
@@ -57,10 +56,8 @@
             app:backgroundTint="@color/main_background_light"
             app:elevation="6dp"
             app:fabSize="mini"
-            android:layout_marginBottom="8dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginLeft="8dp"
             app:pressedTranslationZ="12dp"
+            app:useCompatPadding="true"
             app:srcCompat="@drawable/ic_photo_camera_white_24dp" />
 
         <android.support.design.widget.FloatingActionButton
@@ -73,11 +70,9 @@
             app:backgroundTint="@color/main_background_light"
             app:elevation="6dp"
             app:fabSize="mini"
-            android:layout_marginBottom="8dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginLeft="8dp"
+            app:useCompatPadding="true"
             app:pressedTranslationZ="12dp"
-            app:srcCompat="@drawable/ic_photo_camera_white_24dp" />
+            app:srcCompat="@drawable/ic_photo_white_24dp" />
 
         <android.support.design.widget.FloatingActionButton
             android:id="@+id/fab_plus"
@@ -87,10 +82,10 @@
             android:gravity="center_vertical"
             android:clickable="true"
             android:visibility="visible"
-            app:backgroundTint="@color/button_blue"
+            app:backgroundTint="@color/status_bar_blue"
+            app:useCompatPadding="true"
             app:elevation="6dp"
             app:fabSize="normal"
-            android:layout_marginBottom="12dp"
             app:pressedTranslationZ="12dp"
             app:srcCompat="@drawable/ic_add_white_24dp" />
 

@@ -1,9 +1,17 @@
 package fr.free.nrw.commons.contributions;
 
 import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v4.content.ContextCompat;
+import android.support.v7.app.AlertDialog;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,14 +21,24 @@ import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.ListAdapter;
 import android.widget.ProgressBar;
+import static android.content.pm.PackageManager.PERMISSION_GRANTED;
 import android.widget.TextView;
+
+import java.util.Arrays;
+
+import javax.inject.Inject;
+import javax.inject.Named;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import fr.free.nrw.commons.BuildConfig;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
+import timber.log.Timber;
 
+import static android.Manifest.permission.READ_EXTERNAL_STORAGE;
+import static android.Manifest.permission.WRITE_EXTERNAL_STORAGE;
+import static android.app.Activity.RESULT_OK;
 import static android.view.View.GONE;
 
 /**
@@ -42,6 +60,10 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment {
     @BindView(R.id.fab_galery)
     FloatingActionButton fabGalery;
 
+    @Inject
+    @Named("default_preferences")
+    SharedPreferences defaultPrefs;
+
     private Animation fab_close;
     private Animation fab_open;
     private Animation rotate_forward;
@@ -49,6 +71,7 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment {
 
 
     private boolean isFabOpen = false;
+    private ContributionController controller;
 
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_contributions_list, container, false);
@@ -58,6 +81,21 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment {
 
         changeProgressBarVisibility(true);
         return view;
+    }
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        if (controller == null) {
+            controller = new ContributionController(this);
+        }
+        controller.loadState(savedInstanceState);
+    }
+
+    @Override
+    public void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+        controller.saveState(outState);
     }
 
     @Override
@@ -75,7 +113,94 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment {
     }
 
     private void setListeners() {
+
         fabPlus.setOnClickListener(view -> animateFAB(isFabOpen));
+        fabCamera.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                boolean useExtStorage = defaultPrefs.getBoolean("useExternalStorage", true);
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && useExtStorage) {
+                    // Here, thisActivity is the current activity
+                    if (ContextCompat.checkSelfPermission(getActivity(), WRITE_EXTERNAL_STORAGE)
+                            != PackageManager.PERMISSION_GRANTED) {
+                        if (shouldShowRequestPermissionRationale(WRITE_EXTERNAL_STORAGE)) {
+                            // Show an explanation to the user *asynchronously* -- don't block
+                            // this thread waiting for the user's response! After the user
+                            // sees the explanation, try again to request the permission.
+                            new AlertDialog.Builder(getActivity())
+                                    .setMessage(getString(R.string.write_storage_permission_rationale))
+                                    .setPositiveButton(android.R.string.ok, (dialog, which) -> {
+                                        requestPermissions(new String[]{WRITE_EXTERNAL_STORAGE}, 3);
+                                        dialog.dismiss();
+                                    })
+                                    .setNegativeButton(android.R.string.cancel, null)
+                                    .create()
+                                    .show();
+                        } else {
+                            // No explanation needed, we can request the permission.
+                            requestPermissions(new String[]{WRITE_EXTERNAL_STORAGE},
+                                    3);
+                            // MY_PERMISSIONS_WRITE_EXTERNAL_STORAGE is an
+                            // app-defined int constant. The callback method gets the
+                            // result of the request.
+                        }
+                    } else {
+                        controller.startCameraCapture();
+                    }
+                } else {
+                    controller.startCameraCapture();
+                }
+            }
+        });
+
+        fabGalery.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+            //Gallery crashes before reach ShareActivity screen so must implement permissions check here
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+
+                    // Here, thisActivity is the current activity
+                    if (ContextCompat.checkSelfPermission(getActivity(),
+                            READ_EXTERNAL_STORAGE)
+                            != PERMISSION_GRANTED) {
+
+                        // Should we show an explanation?
+                        if (shouldShowRequestPermissionRationale(READ_EXTERNAL_STORAGE)) {
+
+                            // Show an explanation to the user *asynchronously* -- don't block
+                            // this thread waiting for the user's response! After the user
+                            // sees the explanation, try again to request the permission.
+
+                            new AlertDialog.Builder(getActivity())
+                                    .setMessage(getString(R.string.read_storage_permission_rationale))
+                                    .setPositiveButton(android.R.string.ok, (dialog, which) -> {
+                                        requestPermissions(new String[]{READ_EXTERNAL_STORAGE}, 1);
+                                        dialog.dismiss();
+                                    })
+                                    .setNegativeButton(android.R.string.cancel, null)
+                                    .create()
+                                    .show();
+
+                        } else {
+
+                            // No explanation needed, we can request the permission.
+
+                            requestPermissions(new String[]{READ_EXTERNAL_STORAGE},
+                                    1);
+
+                            // MY_PERMISSIONS_REQUEST_READ_CONTACTS is an
+                            // app-defined int constant. The callback method gets the
+                            // result of the request.
+                        }
+                    } else {
+                        controller.startGalleryPick();
+                    }
+
+                } else {
+                    controller.startGalleryPick();
+                }
+            }
+        });
     }
 
     private void animateFAB(boolean isFabOpen) {
@@ -104,6 +229,60 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment {
         ContributionsFragment parentFragment = (ContributionsFragment)getParentFragment();
         parentFragment.waitForContributionsListFragment.countDown();
     }
+
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (resultCode == RESULT_OK) {
+            Timber.d("OnActivityResult() parameters: Req code: %d Result code: %d Data: %s",
+                    requestCode, resultCode, data);
+            if (requestCode == ContributionController.SELECT_FROM_CAMERA) {
+                // If coming from camera, pass null as uri. Because camera photos get saved to a
+                // fixed directory
+                Log.d("deneme8","ife girdi controller"+controller+" request code is:"+requestCode);
+                controller.handleImagePicked(requestCode, null, false, null);
+            } else if (requestCode == ContributionController.SELECT_FROM_GALLERY){
+                Log.d("deneme8","elsee girdi controller"+controller+" data is:"+data+" request code is:"+requestCode);
+                controller.handleImagePicked(requestCode, data.getData(), false, null);
+            }
+        } else {
+            Timber.e("OnActivityResult() parameters: Req code: %d Result code: %d Data: %s",
+                    requestCode, resultCode, data);
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        Timber.d("onRequestPermissionsResult: req code = " + " perm = "
+                + Arrays.toString(permissions) + " grant =" + Arrays.toString(grantResults));
+
+        switch (requestCode) {
+            // 1 = Storage allowed when gallery selected
+            case 1: {
+                if (grantResults.length > 0 && grantResults[0] == PERMISSION_GRANTED) {
+                    Timber.d("Call controller.startGalleryPick()");
+                    controller.startGalleryPick();
+                }
+            }
+            break;
+            // 2 = Location allowed when 'nearby places' selected
+            case 2: {
+                // TODO: anla ve duzelt
+                /*if (grantResults.length > 0 && grantResults[0] == PERMISSION_GRANTED) {
+                    Timber.d("Location permission granted");
+                    Intent nearbyIntent = new Intent(getActivity(), ContributionsActivity.class);
+                    startActivity(nearbyIntent);
+                }*/
+            }
+            break;
+            case 3: {
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    Timber.d("Call controller.startCameraCapture()");
+                    controller.startCameraCapture();
+                }
+            }
+        }
+    }
+
 
     /**
      * Responsible to set progress bar invisible and visible
