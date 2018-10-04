@@ -95,7 +95,7 @@ public class NearbyController {
             return nearbyPlacesInfo;
         }
         else {
-            return null;
+            return nearbyPlacesInfo;
         }
     }
 

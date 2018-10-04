@@ -518,9 +518,10 @@ public class ContributionsFragment
     }
 
     private void updateClosestNearbyCardViewInfo() {
-        Log.d("deneme"," updateClosestNearbyCardViewInfo called");
 
         curLatLng = ((ContributionsActivity)getActivity()).locationManager.getLastLocation();
+
+        Log.d("deneme7"," updateClosestNearbyCardViewInfo called/ curlatlng is:"+curLatLng+" nearby controller is:"+nearbyController);
 
         placesDisposable = Observable.fromCallable(() -> nearbyController
                 .loadAttractionsFromLocation(curLatLng, true)) // thanks to boolean, it will only return closest result
@@ -529,17 +530,16 @@ public class ContributionsFragment
                 .subscribe(this::updateNearbyNotification,
                         throwable -> {
                             Timber.d(throwable);
-                            Log.d("deneme","error");
+                            Log.d("deneme7","error"+throwable);
+                            updateNearbyNotification(null);
                         });
     }
 
-    private void updateNearbyNotification(NearbyController.NearbyPlacesInfo nearbyPlacesInfo) {
-        Log.d("deneme", "update nearby location called");
-        List<Place> placeList = nearbyPlacesInfo.placeList;
-        Log.d("deneme", "placeList is:"+placeList);
+    private void updateNearbyNotification(@Nullable NearbyController.NearbyPlacesInfo nearbyPlacesInfo) {
+        Log.d("deneme7", "update nearby location called");
 
-        if (placeList != null && placeList.size() > 0) {
-            Place closestNearbyPlace = placeList.get(0);
+        if (nearbyPlacesInfo != null && nearbyPlacesInfo.placeList != null && nearbyPlacesInfo.placeList.size() > 0) {
+            Place closestNearbyPlace = nearbyPlacesInfo.placeList.get(0);
             String distance = formatDistanceBetween(curLatLng, closestNearbyPlace.location);
             closestNearbyPlace.setDistance(distance);
             nearbyNoificationCardView.updateContent (true, closestNearbyPlace);
