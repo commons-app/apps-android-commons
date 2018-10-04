@@ -504,18 +504,21 @@ public class NearbyMapFragment extends DaggerFragment {
                         .zoom(11)
                         .build());
 
-        // create map
-        mapView = new MapView(getParentFragment().getActivity(), options);
-        mapView.onCreate(savedInstanceState);
-        mapView.getMapAsync(new OnMapReadyCallback() {
-            @Override
-            public void onMapReady(MapboxMap mapboxMap) {
-                // TODO: ((NearbyActivity)getActivity()).setMapViewTutorialShowCase();
-                NearbyMapFragment.this.mapboxMap = mapboxMap;
-                updateMapSignificantly();
-            }
-        });
-        mapView.setStyleUrl("asset://mapstyle.json");
+        if (!getParentFragment().getActivity().isFinishing()) {
+            mapView = new MapView(getParentFragment().getActivity(), options);
+            // create map
+            mapView.onCreate(savedInstanceState);
+            mapView.getMapAsync(new OnMapReadyCallback() {
+                @Override
+                public void onMapReady(MapboxMap mapboxMap) {
+                    // TODO: ((NearbyActivity)getActivity()).setMapViewTutorialShowCase();
+                    NearbyMapFragment.this.mapboxMap = mapboxMap;
+                    updateMapSignificantly();
+                }
+            });
+            mapView.setStyleUrl("asset://mapstyle.json");
+        }
+        
     }
 
     /**
