@@ -111,6 +111,8 @@ public class ContributionsFragment
     private Disposable placesDisposable;
     private LatLng curLatLng;
 
+    private boolean firstLocationUpdate = true;
+
 
                         /**
      * Since we will need to use parent activity on onAuthCookieAcquired, we have to wait
@@ -477,6 +479,7 @@ public class ContributionsFragment
     public void onResume() {
         super.onResume();
 
+        firstLocationUpdate = true;
         ((ContributionsActivity)getActivity()).locationManager.addLocationListener(this);
 
         boolean isSettingsChanged = prefs.getBoolean(Prefs.IS_CONTRIBUTION_COUNT_CHANGED, false);
@@ -496,7 +499,7 @@ public class ContributionsFragment
                     // Display nearest location, first listen
                     nearbyNoificationCardView.displayPermissionRequestButton(false);
                     ((ContributionsActivity)getActivity()).locationManager.registerLocationManager();
-                    Log.d("deneme","location manager registered*, location manager:"+((ContributionsActivity)getActivity()).locationManager);
+                    Log.d("deneme7","location manager registered*, location manager:"+((ContributionsActivity)getActivity()).locationManager);
                 } else {
                     // Display tab to see button, since permission is not granted and you have to grant it first
                     nearbyNoificationCardView.displayPermissionRequestButton(true);
@@ -504,12 +507,13 @@ public class ContributionsFragment
             } else {
                 nearbyNoificationCardView.displayPermissionRequestButton(false);
                 ((ContributionsActivity)getActivity()).locationManager.registerLocationManager();
-                Log.d("deneme","location manager registered"+((ContributionsActivity)getActivity()).locationManager.isLocationPermissionGranted());
+                Log.d("deneme7","location manager registered"+((ContributionsActivity)getActivity()).locationManager.isLocationPermissionGranted());
             }
         } else {
             // Hide nearby notification card view if related shared preferences is false
             nearbyNoificationCardView.setVisibility(View.GONE);
         }
+
 
     }
 
@@ -570,15 +574,23 @@ public class ContributionsFragment
     public void onLocationChangedSignificantly(LatLng latLng) {
         // Will be called if location changed more than 1000 meter
         // Do nothing on slight changes for using network efficiently
-        Log.d("deneme","onLocationChangedSignificantly called");
+        Log.d("deneme7","onLocationChangedSignificantly called");
+        firstLocationUpdate = false;
         updateClosestNearbyCardViewInfo();
     }
 
     @Override
     public void onLocationChangedSlightly(LatLng latLng) {
         // Update closest nearby notification card onLocationChangedSlightly
-        Log.d("deneme","onLocationChangedSlightly called");
-
+        Log.d("deneme7","onLocationChangedSlightly called");
+        // If first time to update location after onResume, then no need to wait for significant
+        // location change. Any closest location is better than no location
+        if (firstLocationUpdate) {
+            updateClosestNearbyCardViewInfo();
+            // Turn it to false, since it is not first location update anymore. To change closest location
+            // notifiction, we need to wait for a significant location change.
+            firstLocationUpdate = false;
+        }
     }
 }
 

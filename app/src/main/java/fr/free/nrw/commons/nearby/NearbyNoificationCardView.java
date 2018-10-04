@@ -139,6 +139,11 @@ public class NearbyNoificationCardView  extends CardView{
 
     public void updateContent(boolean isClosestNearbyPlaceFound, Place place) {
         Log.d("deneme","called3");
+        if (this.getVisibility() == GONE) {
+            Log.d("deneme7","nearby card view visiblity was gone, we are in update content");
+            return; // If nearby card view is invisible because of preferences, do nothing
+        }
+
         // Make progress bar invisible once data is ready
         progressBar.setVisibility(GONE);
         // And content views visible since they are ready
