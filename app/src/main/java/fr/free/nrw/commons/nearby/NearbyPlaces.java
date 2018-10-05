@@ -51,7 +51,7 @@ public class NearbyPlaces {
         if (returnClosestResult) {
             MIN_RESULTS = 1; // Return closest nearby place
             MAX_RADIUS = 5;  // Return places only in 5 km area
-            radius = INITIAL_RADIUS; // refresh radius again
+            radius = INITIAL_RADIUS; // refresh radius again, otherwise increased radius is grater than MAX_RADIUS, thus returns null
         } else {
             MIN_RESULTS = 40;
             MAX_RADIUS = 300.0; // in kilometers

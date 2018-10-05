@@ -32,21 +32,26 @@ public class NearbyNoificationCardView  extends CardView{
     private ImageView notificationIcon;
     private ProgressBar progressBar;
 
+    public CardViewVisibilityState cardViewVisibilityState;
+
     public NearbyNoificationCardView(@NonNull Context context) {
         super(context);
         this.context = context;
+        cardViewVisibilityState = CardViewVisibilityState.INVISIBLE;
         init();
     }
 
     public NearbyNoificationCardView(@NonNull Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
         this.context = context;
+        cardViewVisibilityState = CardViewVisibilityState.INVISIBLE;
         init();
     }
 
     public NearbyNoificationCardView(@NonNull Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         this.context = context;
+        cardViewVisibilityState = CardViewVisibilityState.INVISIBLE;
         init();
     }
 
@@ -122,9 +127,11 @@ public class NearbyNoificationCardView  extends CardView{
     public void displayPermissionRequestButton(boolean isPermissionRequestButtonNeeded) {
         if (isPermissionRequestButtonNeeded) {
             Log.d("deneme","called1");
+            cardViewVisibilityState = CardViewVisibilityState.ASK_PERMISSION;
             contentLayout.setVisibility(GONE);
             permissionRequestButton.setVisibility(VISIBLE);
         } else {
+            cardViewVisibilityState = CardViewVisibilityState.LOADING;
             Log.d("deneme","called2");
             contentLayout.setVisibility(VISIBLE);
             // Set visibility of elements in content layout once it become visible
@@ -143,13 +150,17 @@ public class NearbyNoificationCardView  extends CardView{
             Log.d("deneme7","nearby card view visiblity was gone, we are in update content");
             return; // If nearby card view is invisible because of preferences, do nothing
         }
-
+        cardViewVisibilityState = CardViewVisibilityState.READY;
+        contentLayout.setVisibility(VISIBLE);
         // Make progress bar invisible once data is ready
         progressBar.setVisibility(GONE);
         // And content views visible since they are ready
         notificationTitle.setVisibility(VISIBLE);
         notificationDistance.setVisibility(VISIBLE);
         notificationIcon.setVisibility(VISIBLE);
+
+        Log.d("deneme","called4"+this.getVisibility()+" place is:"+place.name);
+
 
         if (isClosestNearbyPlaceFound) {
             notificationTitle.setText(place.name);
@@ -159,4 +170,50 @@ public class NearbyNoificationCardView  extends CardView{
             notificationTitle.setText(R.string.no_close_nearby);
         }
     }
+
+    @Override
+    protected void onVisibilityChanged(@NonNull View changedView, int visibility) {
+        super.onVisibilityChanged(changedView, visibility);
+        if (visibility == VISIBLE) {
+            /**
+             * Sometimes we need to preserve previous state of notification card view without getting
+             * any data from user. Ie. wen user came back from Media Details fragment to Contrib List
+             * fragment, we need to know what was the state of card view, and set it to exact same state.
+             */
+            switch (cardViewVisibilityState) {
+                case READY:
+                    contentLayout.setVisibility(VISIBLE);
+                    // Make progress bar invisible once data is ready
+                    progressBar.setVisibility(GONE);
+                    // And content views visible since they are ready
+                    notificationTitle.setVisibility(VISIBLE);
+                    notificationDistance.setVisibility(VISIBLE);
+                    notificationIcon.setVisibility(VISIBLE);
+                    break;
+                case LOADING:
+                    contentLayout.setVisibility(VISIBLE);
+                    // Set visibility of elements in content layout once it become visible
+                    progressBar.setVisibility(VISIBLE);
+                    notificationTitle.setVisibility(GONE);
+                    notificationDistance.setVisibility(GONE);
+                    notificationIcon.setVisibility(GONE);
+                    permissionRequestButton.setVisibility(GONE);
+                    break;
+                case ASK_PERMISSION:
+                    contentLayout.setVisibility(GONE);
+                    permissionRequestButton.setVisibility(VISIBLE);
+                    break;
+                default:
+                    break;
+            }
+        }
+    }
+
+    public enum CardViewVisibilityState {
+        LOADING,
+        READY,
+        INVISIBLE,
+        ASK_PERMISSION,
+    }
+
 }

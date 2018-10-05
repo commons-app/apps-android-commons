@@ -178,8 +178,11 @@ public class ContributionsFragment
         // show nearby card view on contributions list is visible
         if (prefs.getBoolean("displayNearbyCardView", true)) {
             nearbyNoificationCardView.setVisibility(View.VISIBLE);
+            Log.d("deneme9","nearbyNoificationCardView.setVisibility(View.VISIBLE)");
         } else {
             nearbyNoificationCardView.setVisibility(View.GONE);
+            Log.d("deneme9","nearbyNoificationCardView.setVisibility(View.GONE)");
+
         }
 
 
@@ -204,6 +207,8 @@ public class ContributionsFragment
         ((ContributionsActivity)getActivity()).hideTabs();
         // hide nearby card view on media detail is visible
         nearbyNoificationCardView.setVisibility(View.GONE);
+        Log.d("deneme9","nearbyNoificationCardView.setVisibility(View.VISIBLE)");
+
 
         // Create if null
         if (getMediaDetailPagerFragment() == null) {
@@ -479,7 +484,7 @@ public class ContributionsFragment
     @Override
     public void onResume() {
         super.onResume();
-
+        Log.d("deneme10","onResume, card view"+nearbyNoificationCardView);
         locationManager = new LocationServiceManager(getActivity());
 
         firstLocationUpdate = true;
@@ -495,7 +500,9 @@ public class ContributionsFragment
 
 
         if (prefs.getBoolean("displayNearbyCardView", true)) {
+            nearbyNoificationCardView.cardViewVisibilityState = NearbyNoificationCardView.CardViewVisibilityState.LOADING;
             nearbyNoificationCardView.setVisibility(View.VISIBLE);
+            Log.d("deneme9","nearbyNoificationCardView.setVisibility(View.VISIBLE)");
 
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                 if (locationManager.isLocationPermissionGranted()) {
@@ -515,6 +522,7 @@ public class ContributionsFragment
         } else {
             // Hide nearby notification card view if related shared preferences is false
             nearbyNoificationCardView.setVisibility(View.GONE);
+            Log.d("deneme9","nearbyNoificationCardView.setVisibility(View.GONE)");
         }
 
 
