@@ -310,7 +310,7 @@ public class ContributionsFragment
                     // No need to display permission request button anymore
                     nearbyNoificationCardView.displayPermissionRequestButton(false);
                     locationManager.registerLocationManager();
-                    Log.d("deneme","location manager registered, location manager:"+((ContributionsActivity)getActivity()).locationManager);
+                    Log.d("deneme7","location manager registered, location manager:"+((ContributionsActivity)getActivity()).locationManager);
 
                 } else {
                     // Still ask for permission
@@ -540,16 +540,17 @@ public class ContributionsFragment
 
     private void updateNearbyNotification(@Nullable NearbyController.NearbyPlacesInfo nearbyPlacesInfo) {
         Log.d("deneme7", "update nearby location called");
+        Log.d("deneme7", "nearbyPlacesInfo:"+nearbyPlacesInfo+" nearbyPlacesInfo.placeList:"+nearbyPlacesInfo.placeList+" nearbyPlacesInfo.placeList.size():"+nearbyPlacesInfo.placeList.size());
 
         if (nearbyPlacesInfo != null && nearbyPlacesInfo.placeList != null && nearbyPlacesInfo.placeList.size() > 0) {
             Place closestNearbyPlace = nearbyPlacesInfo.placeList.get(0);
             String distance = formatDistanceBetween(curLatLng, closestNearbyPlace.location);
             closestNearbyPlace.setDistance(distance);
             nearbyNoificationCardView.updateContent (true, closestNearbyPlace);
-            Log.d("deneme","placelist size > 0");
+            Log.d("deneme7","placelist size > 0");
         } else {
             // Means that no close nearby place is found
-            Log.d("deneme","placelist bos");
+            Log.d("deneme7","placelist bos");
             nearbyNoificationCardView.updateContent (false, null);
         }
     }

@@ -214,6 +214,14 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
         refreshView(LOCATION_SLIGHTLY_CHANGED);
     }
 
+
+    @Override
+    public void onLocationChangedMedium(LatLng latLng) {
+        // For nearby map actions, there are no differences between 500 meter location change (aka medium change) and slight change
+        Log.d("deneme","onLocationChangedMedium");
+        refreshView(LOCATION_SLIGHTLY_CHANGED);
+    }
+
     @Override
     public void onWikidataEditSuccessful() {
         refreshView(MAP_UPDATED);

@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.support.graphics.drawable.VectorDrawableCompat;
+import android.util.Log;
 
 import com.mapbox.mapboxsdk.annotations.IconFactory;
 
@@ -20,6 +21,7 @@ import javax.inject.Named;
 
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.location.LatLng;
+import fr.free.nrw.commons.location.LocationServiceManager;
 import fr.free.nrw.commons.utils.UiUtils;
 import timber.log.Timber;
 
@@ -47,11 +49,13 @@ public class NearbyController {
      * and boundary coordinates of current Place List
      */
     public NearbyPlacesInfo loadAttractionsFromLocation(LatLng curLatLng, boolean returnClosestResult) throws IOException {
+        Log.d("deneme7","loadAttractionsFromLocation");
 
         Timber.d("Loading attractions near %s", curLatLng);
         NearbyPlacesInfo nearbyPlacesInfo = new NearbyPlacesInfo();
 
         if (curLatLng == null) {
+            Log.d("deneme7","curLatLng == null");
             return null;
         }
         List<Place> places = nearbyPlaces.getFromWikidataQuery(curLatLng, Locale.getDefault().getLanguage(), returnClosestResult);
@@ -92,10 +96,14 @@ public class NearbyController {
             }
             nearbyPlacesInfo.placeList = places;
             nearbyPlacesInfo.boundaryCoordinates = boundaryCoordinates;
+
+            Log.d("deneme7","return nearbyPlacesInfo");
+
             return nearbyPlacesInfo;
         }
         else {
-            return nearbyPlacesInfo;
+            Log.d("deneme7","null == places || places.size() <= 0/ will return null");
+            return null;
         }
     }
 
