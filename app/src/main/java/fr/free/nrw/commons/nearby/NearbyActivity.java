@@ -698,6 +698,12 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
         refreshView(LOCATION_SLIGHTLY_CHANGED);
     }
 
+    @Override
+    public void onLocationChangedMedium(LatLng latLng) {
+        // When it comes to nearby map, actions for medium change and slight change are same
+        refreshView(LOCATION_SLIGHTLY_CHANGED);
+    }
+
     public void prepareViewsForSheetPosition(int bottomSheetState) {
         // TODO
     }

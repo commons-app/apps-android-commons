@@ -112,6 +112,7 @@ public class ContributionsFragment
     private LatLng curLatLng;
 
     private boolean firstLocationUpdate = true;
+    private LocationServiceManager locationManager;
 
 
                         /**
@@ -308,7 +309,7 @@ public class ContributionsFragment
                     Timber.d("Location permission granted, refreshing view");
                     // No need to display permission request button anymore
                     nearbyNoificationCardView.displayPermissionRequestButton(false);
-                    ((ContributionsActivity)getActivity()).locationManager.registerLocationManager();
+                    locationManager.registerLocationManager();
                     Log.d("deneme","location manager registered, location manager:"+((ContributionsActivity)getActivity()).locationManager);
 
                 } else {
@@ -464,8 +465,8 @@ public class ContributionsFragment
     @Override
     public void onPause() {
         super.onPause();
-        ((ContributionsActivity)getActivity()).locationManager.removeLocationListener(this);
-        ((ContributionsActivity)getActivity()).locationManager.unregisterLocationManager();
+        locationManager.removeLocationListener(this);
+        locationManager.unregisterLocationManager();
     }
 
     @Override
@@ -479,8 +480,10 @@ public class ContributionsFragment
     public void onResume() {
         super.onResume();
 
+        locationManager = new LocationServiceManager(getActivity());
+
         firstLocationUpdate = true;
-        ((ContributionsActivity)getActivity()).locationManager.addLocationListener(this);
+        locationManager.addLocationListener(this);
 
         boolean isSettingsChanged = prefs.getBoolean(Prefs.IS_CONTRIBUTION_COUNT_CHANGED, false);
         prefs.edit().putBoolean(Prefs.IS_CONTRIBUTION_COUNT_CHANGED, false).apply();
@@ -495,10 +498,10 @@ public class ContributionsFragment
             nearbyNoificationCardView.setVisibility(View.VISIBLE);
 
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                if (((ContributionsActivity)getActivity()).locationManager.isLocationPermissionGranted()) {
+                if (locationManager.isLocationPermissionGranted()) {
                     // Display nearest location, first listen
                     nearbyNoificationCardView.displayPermissionRequestButton(false);
-                    ((ContributionsActivity)getActivity()).locationManager.registerLocationManager();
+                    locationManager.registerLocationManager();
                     Log.d("deneme7","location manager registered*, location manager:"+((ContributionsActivity)getActivity()).locationManager);
                 } else {
                     // Display tab to see button, since permission is not granted and you have to grant it first
@@ -506,8 +509,8 @@ public class ContributionsFragment
                 }
             } else {
                 nearbyNoificationCardView.displayPermissionRequestButton(false);
-                ((ContributionsActivity)getActivity()).locationManager.registerLocationManager();
-                Log.d("deneme7","location manager registered"+((ContributionsActivity)getActivity()).locationManager.isLocationPermissionGranted());
+                locationManager.registerLocationManager();
+                Log.d("deneme7","location manager registered"+ locationManager.isLocationPermissionGranted());
             }
         } else {
             // Hide nearby notification card view if related shared preferences is false
@@ -519,7 +522,7 @@ public class ContributionsFragment
 
     private void updateClosestNearbyCardViewInfo() {
 
-        curLatLng = ((ContributionsActivity)getActivity()).locationManager.getLastLocation();
+        curLatLng = locationManager.getLastLocation();
 
         Log.d("deneme7"," updateClosestNearbyCardViewInfo called/ curlatlng is:"+curLatLng+" nearby controller is:"+nearbyController);
 
@@ -555,8 +558,8 @@ public class ContributionsFragment
     public void onDestroy() {
         compositeDisposable.clear();
         getChildFragmentManager().removeOnBackStackChangedListener(this);
-        ((ContributionsActivity)getActivity()).locationManager.unregisterLocationManager();
-        ((ContributionsActivity)getActivity()).locationManager.removeLocationListener(this);
+        locationManager.unregisterLocationManager();
+        locationManager.removeLocationListener(this);
         super.onDestroy();
 
         if (isUploadServiceConnected) {
@@ -591,6 +594,12 @@ public class ContributionsFragment
             // notifiction, we need to wait for a significant location change.
             firstLocationUpdate = false;
         }
+    }
+
+    @Override
+    public void onLocationChangedMedium(LatLng latLng) {
+        // Update closest nearby card view if location changed more than 500 meters
+        updateClosestNearbyCardViewInfo();
     }
 }
 

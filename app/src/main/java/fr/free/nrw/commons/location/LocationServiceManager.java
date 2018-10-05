@@ -263,7 +263,14 @@ public class LocationServiceManager implements LocationListener {
                 for (LocationUpdateListener listener : locationListeners) {
                     listener.onLocationChangedSignificantly(LatLng.from(lastLocation));
                 }
-            } else if (isBetterLocation(location, lastLocation)
+            } else if (location.distanceTo(lastLocation) >= 500) {
+                // Update nearby notification card at every 500 meters.
+                for (LocationUpdateListener listener : locationListeners) {
+                    listener.onLocationChangedMedium(LatLng.from(lastLocation));
+                }
+            }
+
+            else if (isBetterLocation(location, lastLocation)
                     .equals(LocationChangeType.LOCATION_SLIGHTLY_CHANGED)) {
                 lastLocation = location;
                 //lastLocationDuplicate = location;
@@ -291,6 +298,7 @@ public class LocationServiceManager implements LocationListener {
     public enum LocationChangeType{
         LOCATION_SIGNIFICANTLY_CHANGED, //Went out of borders of nearby markers
         LOCATION_SLIGHTLY_CHANGED,      //User might be walking or driving
+        LOCATION_MEDIUM_CHANGED,      //Between slight and significant changes, will be used for nearby card view updates.
         LOCATION_NOT_CHANGED,
         PERMISSION_JUST_GRANTED,
         MAP_UPDATED
