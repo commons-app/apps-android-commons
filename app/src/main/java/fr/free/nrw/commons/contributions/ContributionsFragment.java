@@ -504,21 +504,8 @@ public class ContributionsFragment
             nearbyNoificationCardView.setVisibility(View.VISIBLE);
             Log.d("deneme9","nearbyNoificationCardView.setVisibility(View.VISIBLE)");
 
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                if (locationManager.isLocationPermissionGranted()) {
-                    // Display nearest location, first listen
-                    nearbyNoificationCardView.displayPermissionRequestButton(false);
-                    locationManager.registerLocationManager();
-                    Log.d("deneme7","location manager registered*, location manager:"+((ContributionsActivity)getActivity()).locationManager);
-                } else {
-                    // Display tab to see button, since permission is not granted and you have to grant it first
-                    nearbyNoificationCardView.displayPermissionRequestButton(true);
-                }
-            } else {
-                nearbyNoificationCardView.displayPermissionRequestButton(false);
-                locationManager.registerLocationManager();
-                Log.d("deneme7","location manager registered"+ locationManager.isLocationPermissionGranted());
-            }
+            checkGPS();
+
         } else {
             // Hide nearby notification card view if related shared preferences is false
             nearbyNoificationCardView.setVisibility(View.GONE);
@@ -527,6 +514,37 @@ public class ContributionsFragment
 
 
     }
+
+    private void checkGPS() {
+        if (!locationManager.isProviderEnabled()) {
+            Timber.d("GPS is not enabled");
+            nearbyNoificationCardView.permissionType = NearbyNoificationCardView.PermissionType.ENABLE_GPS;
+            nearbyNoificationCardView.displayPermissionRequestButton(true);
+        } else {
+            Log.d("deneme11","GPS is enabled");
+            Timber.d("GPS is enabled");
+            checkLocationPermission();
+        }
+    }
+
+    private void checkLocationPermission() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            if (locationManager.isLocationPermissionGranted()) {
+                nearbyNoificationCardView.permissionType = NearbyNoificationCardView.PermissionType.NO_PERMISSION_NEEDED;
+                nearbyNoificationCardView.displayPermissionRequestButton(false);
+                locationManager.registerLocationManager();
+            } else {
+                nearbyNoificationCardView.permissionType = NearbyNoificationCardView.PermissionType.ENABLE_LOCATION_PERMISSON;
+                nearbyNoificationCardView.displayPermissionRequestButton(true);
+            }
+        } else {
+            // If device is under Marshmallow, we already checked for GPS
+            nearbyNoificationCardView.permissionType = NearbyNoificationCardView.PermissionType.NO_PERMISSION_NEEDED;
+            nearbyNoificationCardView.displayPermissionRequestButton(false);
+            locationManager.registerLocationManager();
+        }
+    }
+
 
     private void updateClosestNearbyCardViewInfo() {
 
@@ -610,5 +628,6 @@ public class ContributionsFragment
         // Update closest nearby card view if location changed more than 500 meters
         updateClosestNearbyCardViewInfo();
     }
+
 }
 

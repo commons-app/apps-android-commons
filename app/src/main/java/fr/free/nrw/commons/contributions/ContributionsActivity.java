@@ -418,6 +418,7 @@ public class ContributionsActivity extends AuthenticatedActivity implements Frag
                 // If request is cancelled, the result arrays are empty.
                 if (grantResults.length > 0
                         && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    Log.d("deneme12","permision is granted");
 
                 } else {
                     // If nearby fragment is visible and location permission is not given, send user back to contrib fragment

@@ -1,10 +1,12 @@
 package fr.free.nrw.commons.nearby;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.SwipeDismissBehavior;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.CardView;
 import android.util.AttributeSet;
 import android.util.Log;
@@ -17,6 +19,7 @@ import android.widget.TextView;
 
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.contributions.ContributionsActivity;
+import timber.log.Timber;
 
 /**
  * Custom card view for nearby notification card view on main screen, above contributions list
@@ -33,6 +36,8 @@ public class NearbyNoificationCardView  extends CardView{
     private ProgressBar progressBar;
 
     public CardViewVisibilityState cardViewVisibilityState;
+
+    public PermissionType permissionType;
 
     public NearbyNoificationCardView(@NonNull Context context) {
         super(context);
@@ -107,15 +112,6 @@ public class NearbyNoificationCardView  extends CardView{
 
 
     private void setActionListeners() {
-        permissionRequestButton.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (!((ContributionsActivity)context).isFinishing()) {
-                    ((ContributionsActivity) context).locationManager.requestPermissions((ContributionsActivity) context);
-                }
-            }
-        });
-
         this.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -130,6 +126,44 @@ public class NearbyNoificationCardView  extends CardView{
             cardViewVisibilityState = CardViewVisibilityState.ASK_PERMISSION;
             contentLayout.setVisibility(GONE);
             permissionRequestButton.setVisibility(VISIBLE);
+
+            if (permissionType == PermissionType.ENABLE_LOCATION_PERMISSON) {
+
+                permissionRequestButton.setOnClickListener(new OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        if (!((ContributionsActivity)context).isFinishing()) {
+                            ((ContributionsActivity) context).locationManager.requestPermissions((ContributionsActivity) context);
+                        }
+                    }
+                });
+
+            } else if (permissionType == PermissionType.ENABLE_GPS) {
+
+                permissionRequestButton.setOnClickListener(new OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        new AlertDialog.Builder(context)
+                                .setMessage(R.string.gps_disabled)
+                                .setCancelable(false)
+                                .setPositiveButton(R.string.enable_gps,
+                                        (dialog, id) -> {
+                                            Intent callGPSSettingIntent = new Intent(
+                                                    android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+                                            Timber.d("Loaded settings page");
+                                            ((ContributionsActivity) context).startActivityForResult(callGPSSettingIntent, 1);
+                                        })
+                                .setNegativeButton(R.string.menu_cancel_upload, (dialog, id) -> {
+                                    dialog.cancel();
+                                    displayPermissionRequestButton(true);
+                                })
+                                .create()
+                                .show();
+                    }
+                });
+            }
+
+
         } else {
             cardViewVisibilityState = CardViewVisibilityState.LOADING;
             Log.d("deneme","called2");
@@ -220,4 +254,10 @@ public class NearbyNoificationCardView  extends CardView{
         ASK_PERMISSION,
     }
 
+
+    public enum PermissionType {
+        ENABLE_GPS,
+        ENABLE_LOCATION_PERMISSON, // For only after Marsmallow
+        NO_PERMISSION_NEEDED
+    }
 }
