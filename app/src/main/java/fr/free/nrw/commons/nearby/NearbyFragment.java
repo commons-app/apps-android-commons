@@ -493,15 +493,16 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
                     checkGps();
                 })
                 .setNegativeButton(R.string.cancel, (dialog, which) -> {
-                    //dismiss dialog and finish activity
+                    //dismiss dialog and send user to contributions tab instead
                     dialog.cancel();
-                    getActivity().finish();
+                    ((ContributionsActivity)getActivity()).viewPager.setCurrentItem(((ContributionsActivity)getActivity()).CONTRIBUTIONS_TAB_POSITION);
                 })
                 .create()
                 .show();
     }
 
     private void checkGps() {
+        Log.d("deneme11","Nearby Fragment checkGps");
         if (!locationManager.isProviderEnabled()) {
             Timber.d("GPS is not enabled");
             new AlertDialog.Builder(getActivity())
@@ -584,8 +585,10 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
     @Override
     public void onResume() {
         super.onResume();
+        Log.d("deneme11","Nearby Fragment on resume");
         // Only check permission and add network broadcast receiver if contribution fragment is invisible and nearby fragment visible
         if (!((ContributionsActivity)getActivity()).isContributionsFragmentVisible) {
+            Log.d("deneme11","Nearby Fragment on resume2");
             lockNearbyView = false;
             checkGps();
             addNetworkBroadcastReceiver();
@@ -593,6 +596,7 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
     }
 
     public void onTabSelected() {
+        Log.d("deneme11","Nearby Fragment onTabSelected");
         lockNearbyView = false;
         checkGps();
         addNetworkBroadcastReceiver();

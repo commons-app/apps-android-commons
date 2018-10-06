@@ -54,8 +54,8 @@ public class ContributionsActivity extends AuthenticatedActivity implements Frag
     public boolean isAuthCookieAcquired = false;
 
     public ContributionsActivityPagerAdapter contributionsActivityPagerAdapter;
-    private final int CONTRIBUTIONS_TAB_POSITION = 0;
-    private final int NEARBY_TAB_POSITION = 1;
+    public final int CONTRIBUTIONS_TAB_POSITION = 0;
+    public final int NEARBY_TAB_POSITION = 1;
 
     //public ContributionsFragment contributionsFragment;
     private NearbyFragment nearbyFragment;
