@@ -35,6 +35,7 @@ import javax.inject.Named;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import fr.free.nrw.commons.R;
+import fr.free.nrw.commons.contributions.ContributionsActivity;
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
 import fr.free.nrw.commons.location.LatLng;
 import fr.free.nrw.commons.location.LocationServiceManager;
@@ -583,6 +584,15 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
     @Override
     public void onResume() {
         super.onResume();
+        // Only check permission and add network broadcast receiver if contribution fragment is invisible and nearby fragment visible
+        if (!((ContributionsActivity)getActivity()).isContributionsFragmentVisible) {
+            lockNearbyView = false;
+            checkGps();
+            addNetworkBroadcastReceiver();
+        }
+    }
+
+    public void onTabSelected() {
         lockNearbyView = false;
         checkGps();
         addNetworkBroadcastReceiver();
@@ -615,11 +625,15 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
             removeListFragment();
 
         }
-        getActivity().unregisterReceiver(broadcastReceiver);
-        broadcastReceiver = null;
-        locationManager.removeLocationListener(this);
-        locationManager.unregisterLocationManager();
+        if (broadcastReceiver != null) {
+            getActivity().unregisterReceiver(broadcastReceiver);
+            broadcastReceiver = null;
+        }
 
+        if (locationManager != null) {
+            locationManager.removeLocationListener(this);
+            locationManager.unregisterLocationManager();
+        }
     }
 }
 

@@ -133,15 +133,19 @@ public class ContributionsActivity extends AuthenticatedActivity implements Frag
             public void onPageSelected(int position) {
                 switch (position) {
                     case CONTRIBUTIONS_TAB_POSITION:
+                        Log.d("deneme9","viewpager on tab selected CONTRIBUTIONS_TAB_POSITION");
                         tabLayout.getTabAt(CONTRIBUTIONS_TAB_POSITION).select();
                         isContributionsFragmentVisible = true;
                         updateMenuItem();
 
                         break;
                     case NEARBY_TAB_POSITION:
+                        Log.d("deneme9","viewpager on tab selected NEARBY_TAB_POSITION");
                         tabLayout.getTabAt(NEARBY_TAB_POSITION).select();
                         isContributionsFragmentVisible = false;
                         updateMenuItem();
+                        // Do all permission and GPS related tasks on tab selected, not on create
+                        contributionsActivityPagerAdapter.nearbyFragment.onTabSelected();
                         break;
                     default:
                         tabLayout.getTabAt(CONTRIBUTIONS_TAB_POSITION).select();
@@ -158,6 +162,7 @@ public class ContributionsActivity extends AuthenticatedActivity implements Frag
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
+                Log.d("deneme9","tab layout tab selected:"+tab.getPosition());
                 viewPager.setCurrentItem(tab.getPosition());
             }
 
@@ -315,6 +320,7 @@ public class ContributionsActivity extends AuthenticatedActivity implements Frag
         public Fragment getItem(int position) {
             switch (position){
                 case 0:
+                    Log.d("deneme9","viewpager case0");
                     ContributionsFragment retainedContributionsFragment = getContributionsFragment(0);
                     if (retainedContributionsFragment != null) {
                         /**
@@ -336,6 +342,7 @@ public class ContributionsActivity extends AuthenticatedActivity implements Frag
                     }
 
                 case 1:
+                    Log.d("deneme9","viewpager case1");
                     NearbyFragment retainedNearbyFragment = getNearbyFragment(1);
                     if (retainedNearbyFragment != null) {
                         nearbyFragment = retainedNearbyFragment;
