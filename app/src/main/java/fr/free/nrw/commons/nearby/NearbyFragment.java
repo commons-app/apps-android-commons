@@ -595,14 +595,16 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
         // Only check permission and add network broadcast receiver if contribution fragment is invisible and nearby fragment visible
         if (!((ContributionsActivity)getActivity()).isContributionsFragmentVisible) {
             Log.d("deneme11","Nearby Fragment on resume2");
-            lockNearbyView = false;
-            checkGps();
-            addNetworkBroadcastReceiver();
+            performNearbyOperations();
         }
     }
 
     public void onTabSelected() {
         Log.d("deneme11","Nearby Fragment onTabSelected");
+        performNearbyOperations();
+    }
+
+    private void performNearbyOperations() {
         lockNearbyView = false;
         checkGps();
         addNetworkBroadcastReceiver();
