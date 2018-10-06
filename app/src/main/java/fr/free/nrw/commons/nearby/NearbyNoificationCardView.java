@@ -133,6 +133,7 @@ public class NearbyNoificationCardView  extends CardView{
         } else {
             cardViewVisibilityState = CardViewVisibilityState.LOADING;
             Log.d("deneme","called2");
+            permissionRequestButton.setVisibility(GONE);
             contentLayout.setVisibility(VISIBLE);
             // Set visibility of elements in content layout once it become visible
             progressBar.setVisibility(VISIBLE);
@@ -151,6 +152,7 @@ public class NearbyNoificationCardView  extends CardView{
             return; // If nearby card view is invisible because of preferences, do nothing
         }
         cardViewVisibilityState = CardViewVisibilityState.READY;
+        permissionRequestButton.setVisibility(GONE);
         contentLayout.setVisibility(VISIBLE);
         // Make progress bar invisible once data is ready
         progressBar.setVisibility(GONE);
@@ -182,6 +184,7 @@ public class NearbyNoificationCardView  extends CardView{
              */
             switch (cardViewVisibilityState) {
                 case READY:
+                    permissionRequestButton.setVisibility(GONE);
                     contentLayout.setVisibility(VISIBLE);
                     // Make progress bar invisible once data is ready
                     progressBar.setVisibility(GONE);
@@ -191,6 +194,7 @@ public class NearbyNoificationCardView  extends CardView{
                     notificationIcon.setVisibility(VISIBLE);
                     break;
                 case LOADING:
+                    permissionRequestButton.setVisibility(GONE);
                     contentLayout.setVisibility(VISIBLE);
                     // Set visibility of elements in content layout once it become visible
                     progressBar.setVisibility(VISIBLE);
