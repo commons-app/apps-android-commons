@@ -423,7 +423,9 @@ public class ContributionsActivity extends AuthenticatedActivity implements Frag
                     // If nearby fragment is visible and location permission is not given, send user back to contrib fragment
                     if (!isContributionsFragmentVisible) {
                         viewPager.setCurrentItem(CONTRIBUTIONS_TAB_POSITION);
-                    } else { // If contrib fragment is visible and location permission is not given, display permission request button
+
+                    // If contrib fragment is visible and location permission is not given, display permission request button
+                    } else {
 
                     }
                 }
