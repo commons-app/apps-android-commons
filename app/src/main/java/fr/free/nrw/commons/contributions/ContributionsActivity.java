@@ -34,6 +34,7 @@ import fr.free.nrw.commons.upload.UploadService;
 import timber.log.Timber;
 
 import static android.content.ContentResolver.requestSync;
+import static fr.free.nrw.commons.location.LocationServiceManager.LOCATION_REQUEST;
 
 public class ContributionsActivity extends AuthenticatedActivity implements FragmentManager.OnBackStackChangedListener {
 
@@ -407,5 +408,30 @@ public class ContributionsActivity extends AuthenticatedActivity implements Frag
                         .contributionsFragment.getChildFragmentManager()
                         .findFragmentByTag(ContributionsFragment.CONTRIBUTION_LIST_FRAGMENT_TAG);
         contributionsListFragment.onActivityResult(requestCode, resultCode, data);
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode,
+                                           String permissions[], int[] grantResults) {
+        switch (requestCode) {
+            case LOCATION_REQUEST: {
+                // If request is cancelled, the result arrays are empty.
+                if (grantResults.length > 0
+                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+
+                } else {
+                    // If nearby fragment is visible and location permission is not given, send user back to contrib fragment
+                    if (!isContributionsFragmentVisible) {
+                        viewPager.setCurrentItem(CONTRIBUTIONS_TAB_POSITION);
+                    } else { // If contrib fragment is visible and location permission is not given, display permission request button
+
+                    }
+                }
+                return;
+            }
+
+            // other 'case' lines to check for other
+            // permissions this app might request.
+        }
     }
 }

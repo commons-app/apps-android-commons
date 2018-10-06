@@ -479,12 +479,14 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
     }
 
     private void requestLocationPermissions() {
+        Log.d("deneme11","requestLocationPermissions ");
         if (!getActivity().isFinishing()) {
             locationManager.requestPermissions(getActivity());
         }
     }
 
     private void showLocationPermissionDeniedErrorDialog() {
+        Log.d("deneme11","showLocationPermissionDeniedErrorDialog ");
         new AlertDialog.Builder(getActivity())
                 .setMessage(R.string.nearby_needs_permissions)
                 .setCancelable(false)
@@ -504,6 +506,7 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
     private void checkGps() {
         Log.d("deneme11","Nearby Fragment checkGps");
         if (!locationManager.isProviderEnabled()) {
+            Log.d("deneme11","GPS is not enabled");
             Timber.d("GPS is not enabled");
             new AlertDialog.Builder(getActivity())
                     .setMessage(R.string.gps_disabled)
@@ -522,18 +525,21 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
                     .create()
                     .show();
         } else {
+            Log.d("deneme11","GPS is enabled");
             Timber.d("GPS is enabled");
             checkLocationPermission();
         }
     }
 
     private void checkLocationPermission() {
+        Log.d("deneme11","checkLocationPermission");
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             if (locationManager.isLocationPermissionGranted()) {
                 refreshView(LOCATION_SIGNIFICANTLY_CHANGED);
             } else {
                 // Should we show an explanation?
                 if (locationManager.isPermissionExplanationRequired(getActivity())) {
+                    Log.d("deneme11","isPermissionExplanationRequired true");
                     // Show an explanation to the user *asynchronously* -- don't block
                     // this thread waiting for the user's response! After the user
                     // sees the explanation, try again to request the permission.
