@@ -169,8 +169,12 @@ public class ContributionsFragment
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        if (((ContributionsActivity)getActivity()).isAuthCookieAcquired) {
+        if (((ContributionsActivity)getActivity()).isAuthCookieAcquired && !((ContributionsActivity)getActivity()).contribFragmentAlreadyCreated) {
             onAuthCookieAcquired(((ContributionsActivity)getActivity()).uploadServiceIntent);
+            ((ContributionsActivity)getActivity()).contribFragmentAlreadyCreated = true;
+
+            new UnreadNotificationsCheckAsync((ContributionsActivity) getActivity(), notificationController).execute();
+
         }
     }
 
@@ -501,8 +505,6 @@ public class ContributionsFragment
         if (isSettingsChanged) {
             refreshSource();
         }
-
-        new UnreadNotificationsCheckAsync((ContributionsActivity) getActivity(), notificationController).execute();
 
 
         if (prefs.getBoolean("displayNearbyCardView", true)) {
