@@ -12,6 +12,7 @@ import java.util.Date;
 import java.util.List;
 
 import fr.free.nrw.commons.contributions.ContributionsActivity;
+import fr.free.nrw.commons.contributions.ContributionsFragment;
 import timber.log.Timber;
 
 /**
@@ -68,8 +69,8 @@ public class UnreadNotificationsCheckAsync extends AsyncTask<Void, Void, Notific
         // Check if activity is still running
         if (context.get().getWindow().getDecorView().isShown() && !context.get().isFinishing()) {
             // Check if fragment is not null and visible
-            if (context.get().isContributionsFragmentVisible && context.get().contributionsActivityPagerAdapter.contributionsFragment != null) {
-                (context.get().contributionsActivityPagerAdapter.contributionsFragment).updateNotificationsNotification(isThereUnreadNotifications);
+            if (context.get().isContributionsFragmentVisible && context.get().contributionsActivityPagerAdapter.getItem(0) != null) {
+                ((ContributionsFragment)(context.get().contributionsActivityPagerAdapter.getItem(0))).updateNotificationsNotification(isThereUnreadNotifications);
             }
         }
     }

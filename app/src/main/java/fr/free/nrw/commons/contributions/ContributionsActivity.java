@@ -59,7 +59,7 @@ public class ContributionsActivity extends AuthenticatedActivity implements Frag
     public final int NEARBY_TAB_POSITION = 1;
 
     //public ContributionsFragment contributionsFragment;
-    private NearbyFragment nearbyFragment;
+    //private NearbyFragment nearbyFragment;
     public boolean isContributionsFragmentVisible = true; // False means nearby fragment is visible
     private Menu menu;
     private boolean isThereUnreadNotifications = false;
@@ -85,8 +85,8 @@ public class ContributionsActivity extends AuthenticatedActivity implements Frag
 
         addTabsAndFragments();
         isAuthCookieAcquired = true;
-        if (contributionsActivityPagerAdapter.contributionsFragment != null) {
-            contributionsActivityPagerAdapter.contributionsFragment.onAuthCookieAcquired(uploadServiceIntent);
+        if (contributionsActivityPagerAdapter.getItem(0) != null) {
+            ((ContributionsFragment)contributionsActivityPagerAdapter.getItem(0)).onAuthCookieAcquired(uploadServiceIntent);
         }
     }
 
@@ -146,7 +146,7 @@ public class ContributionsActivity extends AuthenticatedActivity implements Frag
                         isContributionsFragmentVisible = false;
                         updateMenuItem();
                         // Do all permission and GPS related tasks on tab selected, not on create
-                        contributionsActivityPagerAdapter.nearbyFragment.onTabSelected();
+                        ((NearbyFragment)contributionsActivityPagerAdapter.getItem(1)).onTabSelected();
                         break;
                     default:
                         tabLayout.getTabAt(CONTRIBUTIONS_TAB_POSITION).select();
@@ -272,8 +272,8 @@ public class ContributionsActivity extends AuthenticatedActivity implements Frag
                 return true;
 
             case R.id.list_sheet:
-                if (contributionsActivityPagerAdapter.nearbyFragment != null) {
-                    contributionsActivityPagerAdapter.nearbyFragment.listOptionMenuIteClicked();
+                if (contributionsActivityPagerAdapter.getItem(1) != null) {
+                    ((NearbyFragment)contributionsActivityPagerAdapter.getItem(1)).listOptionMenuIteClicked();
                 }
                 return true;
             default:
@@ -300,8 +300,7 @@ public class ContributionsActivity extends AuthenticatedActivity implements Frag
     public class ContributionsActivityPagerAdapter extends FragmentPagerAdapter {
         FragmentManager fragmentManager;
         private boolean isContributionsListFragment = true; // to know what to put in first tab, Contributions of Media Details
-        public ContributionsFragment contributionsFragment;
-        public NearbyFragment nearbyFragment;
+
 
         public ContributionsActivityPagerAdapter(FragmentManager fragmentManager) {
             super(fragmentManager);
@@ -321,8 +320,8 @@ public class ContributionsActivity extends AuthenticatedActivity implements Frag
         public Fragment getItem(int position) {
             switch (position){
                 case 0:
-                    Log.d("deneme9","viewpager case0");
                     ContributionsFragment retainedContributionsFragment = getContributionsFragment(0);
+                    Log.d("deneme13","viewpager case0 contributions fragment is:"+retainedContributionsFragment);
                     if (retainedContributionsFragment != null) {
                         /**
                          * ContributionsFragment is parent of ContributionsListFragment and
@@ -333,25 +332,25 @@ public class ContributionsActivity extends AuthenticatedActivity implements Frag
                         } else {
                             retainedContributionsFragment.setMediaDetailPagerFragment();
                         }
-                        contributionsFragment = retainedContributionsFragment;
+                        //contributionsFragment = retainedContributionsFragment;
                         return retainedContributionsFragment;
                     } else {
                         // If we reach here, retainedContributionsFragment is null
-                        contributionsFragment = new ContributionsFragment();
-                        return contributionsFragment;
+                        //contributionsFragment = new ContributionsFragment();
+                        return new ContributionsFragment();
 
                     }
 
                 case 1:
-                    Log.d("deneme9","viewpager case1");
                     NearbyFragment retainedNearbyFragment = getNearbyFragment(1);
+                    Log.d("deneme13","viewpager case0 contributions fragment is:"+retainedNearbyFragment);
                     if (retainedNearbyFragment != null) {
-                        nearbyFragment = retainedNearbyFragment;
+                        //nearbyFragment = retainedNearbyFragment;
                         return retainedNearbyFragment;
                     } else {
                         // If we reach here, retainedContributionsFragment is null
-                        nearbyFragment = new NearbyFragment();
-                        return nearbyFragment;
+                        //nearbyFragment = new NearbyFragment();
+                        return new NearbyFragment();
                     }
                 default:
                     return null;
@@ -405,7 +404,7 @@ public class ContributionsActivity extends AuthenticatedActivity implements Frag
         super.onActivityResult(requestCode, resultCode, data);
         ContributionsListFragment contributionsListFragment =
                         (ContributionsListFragment) contributionsActivityPagerAdapter
-                        .contributionsFragment.getChildFragmentManager()
+                        .getItem(0).getChildFragmentManager()
                         .findFragmentByTag(ContributionsFragment.CONTRIBUTION_LIST_FRAGMENT_TAG);
         contributionsListFragment.onActivityResult(requestCode, resultCode, data);
     }
