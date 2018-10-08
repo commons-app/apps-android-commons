@@ -114,6 +114,8 @@ public class ContributionsFragment
     private boolean firstLocationUpdate = true;
     private LocationServiceManager locationManager;
 
+    private boolean isFragmentAttachedBefore = false;
+
 
                         /**
      * Since we will need to use parent activity on onAuthCookieAcquired, we have to wait
@@ -169,10 +171,9 @@ public class ContributionsFragment
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        if (((ContributionsActivity)getActivity()).isAuthCookieAcquired && !((ContributionsActivity)getActivity()).contribFragmentAlreadyCreated) {
+        if (((ContributionsActivity)getActivity()).isAuthCookieAcquired && !isFragmentAttachedBefore) {
             onAuthCookieAcquired(((ContributionsActivity)getActivity()).uploadServiceIntent);
-            ((ContributionsActivity)getActivity()).contribFragmentAlreadyCreated = true;
-
+            isFragmentAttachedBefore = true;
             new UnreadNotificationsCheckAsync((ContributionsActivity) getActivity(), notificationController).execute();
 
         }

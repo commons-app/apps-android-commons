@@ -64,8 +64,6 @@ public class ContributionsActivity extends AuthenticatedActivity implements Frag
     private Menu menu;
     private boolean isThereUnreadNotifications = false;
 
-    public boolean contribFragmentAlreadyCreated = false;
-
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_contributions);
