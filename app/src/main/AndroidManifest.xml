@@ -122,6 +122,10 @@
             android:name=".achievements.AchievementsActivity"
             android:label="@string/Achievements" />
 
+        <activity
+            android:name=".bookmarks.BookmarksActivity"
+            android:label="@string/title_activity_bookmarks" />
+
         <service android:name=".upload.UploadService" />
         <service
             android:name=".auth.WikiAccountAuthenticatorService"

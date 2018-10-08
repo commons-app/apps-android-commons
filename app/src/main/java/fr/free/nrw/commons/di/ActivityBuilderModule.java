@@ -7,6 +7,7 @@ import fr.free.nrw.commons.WelcomeActivity;
 import fr.free.nrw.commons.achievements.AchievementsActivity;
 import fr.free.nrw.commons.auth.LoginActivity;
 import fr.free.nrw.commons.auth.SignupActivity;
+import fr.free.nrw.commons.bookmarks.BookmarksActivity;
 import fr.free.nrw.commons.category.CategoryDetailsActivity;
 import fr.free.nrw.commons.contributions.ContributionsActivity;
 import fr.free.nrw.commons.category.CategoryImagesActivity;
@@ -63,5 +64,8 @@ public abstract class ActivityBuilderModule {
 
     @ContributesAndroidInjector
     abstract AchievementsActivity bindAchievementsActivity();
+
+    @ContributesAndroidInjector
+    abstract BookmarksActivity bindBookmarksActivity();
 
 }

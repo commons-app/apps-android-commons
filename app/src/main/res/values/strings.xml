@@ -357,4 +357,5 @@
   <string name="storage_permission">Storage Permission</string>
   <string name="write_storage_permission_rationale_for_image_share">We need your permission to access the external storage of your device in order to upload images.</string>
   <string name="navigation_item_bookmarks">Bookmarks</string>
+  <string name="title_activity_bookmarks">Bookmarks</string>
 </resources>

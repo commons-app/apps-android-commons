@@ -33,12 +33,12 @@ import fr.free.nrw.commons.WelcomeActivity;
 import fr.free.nrw.commons.achievements.AchievementsActivity;
 import fr.free.nrw.commons.auth.AccountUtil;
 import fr.free.nrw.commons.auth.LoginActivity;
+import fr.free.nrw.commons.bookmarks.BookmarksActivity;
 import fr.free.nrw.commons.contributions.ContributionsActivity;
 import fr.free.nrw.commons.category.CategoryImagesActivity;
 import fr.free.nrw.commons.nearby.NearbyActivity;
 import fr.free.nrw.commons.notification.NotificationActivity;
 import fr.free.nrw.commons.settings.SettingsActivity;
-import fr.free.nrw.commons.utils.ViewUtil;
 import timber.log.Timber;
 
 public abstract class NavigationBaseActivity extends BaseActivity
@@ -79,6 +79,7 @@ public abstract class NavigationBaseActivity extends BaseActivity
             nav_Menu.findItem(R.id.action_notifications).setVisible(false);
             nav_Menu.findItem(R.id.action_settings).setVisible(false);
             nav_Menu.findItem(R.id.action_logout).setVisible(false);
+            nav_Menu.findItem(R.id.action_bookmarks).setVisible(false);
         }else {
             userIcon.setVisibility(View.VISIBLE);
             nav_Menu.findItem(R.id.action_login).setVisible(false);
@@ -86,6 +87,7 @@ public abstract class NavigationBaseActivity extends BaseActivity
             nav_Menu.findItem(R.id.action_notifications).setVisible(true);
             nav_Menu.findItem(R.id.action_settings).setVisible(true);
             nav_Menu.findItem(R.id.action_logout).setVisible(true);
+            nav_Menu.findItem(R.id.action_bookmarks).setVisible(true);
         }
     }
 
@@ -214,7 +216,7 @@ public abstract class NavigationBaseActivity extends BaseActivity
                 return true;
             case R.id.action_bookmarks:
                 drawerLayout.closeDrawer(navigationView);
-                ViewUtil.showSnackbar(navigationView, R.string.not_used);
+                BookmarksActivity.startYourself(this);
                 return true;
             default:
                 Timber.e("Unknown option [%s] selected from the navigation menu", itemId);
