@@ -123,7 +123,9 @@ public class SearchImageFragment extends CommonsDaggerSupportFragment {
      */
     public void updateImageList(String query) {
         this.query = query;
-        imagesNotFoundView.setVisibility(GONE);
+        if(imagesNotFoundView != null) {
+            imagesNotFoundView.setVisibility(GONE);
+        }
         if(!NetworkUtils.isInternetConnectionEstablished(getContext())) {
             handleNoInternet();
             return;
