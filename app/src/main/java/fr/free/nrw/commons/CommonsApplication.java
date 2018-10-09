@@ -29,6 +29,7 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 import fr.free.nrw.commons.auth.SessionManager;
+import fr.free.nrw.commons.bookmarks.BookmarkDao;
 import fr.free.nrw.commons.category.CategoryDao;
 import fr.free.nrw.commons.contributions.ContributionDao;
 import fr.free.nrw.commons.data.DBOpenHelper;
@@ -206,6 +207,7 @@ public class CommonsApplication extends Application {
         ModifierSequenceDao.Table.onDelete(db);
         CategoryDao.Table.onDelete(db);
         ContributionDao.Table.onDelete(db);
+        BookmarkDao.Table.onDelete(db);
     }
 
     /**
