@@ -103,6 +103,9 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
     private final String NETWORK_INTENT_ACTION = "android.net.conn.CONNECTIVITY_CHANGE";
     private BroadcastReceiver broadcastReceiver;
 
+    private boolean isFragmentAttachedBefore = false;
+    private boolean onOrientationChanged = false;
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -209,7 +212,7 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
 
     @Override
     public void onLocationChangedSignificantly(LatLng latLng) {
-        Log.d("deneme","onLocationChangedSignificantly");
+        Log.d("deneme14","onLocationChangedSignificantly");
 
         refreshView(LOCATION_SIGNIFICANTLY_CHANGED);
     }
@@ -217,7 +220,7 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
     @Override
     public void onLocationChangedSlightly(LatLng latLng) {
 
-        Log.d("deneme","onLocationChangedSlightly");
+        Log.d("deneme14","onLocationChangedSlightly");
         refreshView(LOCATION_SLIGHTLY_CHANGED);
     }
 
@@ -225,7 +228,7 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
     @Override
     public void onLocationChangedMedium(LatLng latLng) {
         // For nearby map actions, there are no differences between 500 meter location change (aka medium change) and slight change
-        Log.d("deneme","onLocationChangedMedium");
+        Log.d("deneme14","onLocationChangedMedium");
         refreshView(LOCATION_SLIGHTLY_CHANGED);
     }
 
@@ -240,7 +243,7 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
      * @param locationChangeType defines if location shanged significantly or slightly
      */
     private void refreshView(LocationServiceManager.LocationChangeType locationChangeType) {
-        Log.d("deneme","refreshView is called");
+        Log.d("deneme14","refreshView is called");
         if (lockNearbyView) {
             return;
         }
@@ -270,7 +273,9 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
 
         if (locationChangeType.equals(LOCATION_SIGNIFICANTLY_CHANGED)
                 || locationChangeType.equals(PERMISSION_JUST_GRANTED)
-                || locationChangeType.equals(MAP_UPDATED)) {
+                || locationChangeType.equals(MAP_UPDATED)
+                || onOrientationChanged) {
+            Log.d("deneme16","refresh view sıgnıfıcant, bundle is:"+bundle+" nearbyController:"+nearbyController+" curLatLng"+curLatLng);
             progressBar.setVisibility(View.VISIBLE);
 
             //TODO: This hack inserts curLatLng before populatePlaces is called (see #1440). Ideally a proper fix should be found
@@ -303,7 +308,7 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
     }
 
     private void populatePlaces(NearbyController.NearbyPlacesInfo nearbyPlacesInfo) {
-        Log.d("deneme","populate places is called");
+        Log.d("deneme16","populate places is called "+nearbyPlacesInfo.placeList);
         List<Place> placeList = nearbyPlacesInfo.placeList;
         LatLng[] boundaryCoordinates = nearbyPlacesInfo.boundaryCoordinates;
         Gson gson = new GsonBuilder()
@@ -314,6 +319,7 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
         String gsonBoundaryCoordinates = gson.toJson(boundaryCoordinates);
 
         if (placeList.size() == 0) {
+            Log.d("deneme16","placeList.size() == 0 "+placeList.size());
             ViewUtil.showSnackbar(view.findViewById(R.id.container), R.string.no_nearby);
         }
 
@@ -326,13 +332,14 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
         // First time to init fragments
         if (nearbyMapFragment == null) {
             Timber.d("Init map fragment for the first time");
-            Log.d("deneme","nearbyMapFragment == null");
+            Log.d("deneme16","nearbyMapFragment == null");
             lockNearbyView(true);
             setMapFragment();
             setListFragment();
             hideProgressBar();
             lockNearbyView(false);
         } else {
+            Log.d("deneme16","nearbyMapFragment == null");
             // There are fragments, just update the map and list
             Timber.d("Map fragment already exists, just update the map and list");
             updateMapFragment(false);
@@ -354,7 +361,7 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
     }
 
     private void updateMapFragment(boolean isSlightUpdate) {
-        Log.d("deneme","Nearby fragment updateMapFragment is called");
+        Log.d("deneme17","Nearby fragment updateMapFragment is called");
         /*
          * Significant update means updating nearby place markers. Slightly update means only
          * updating current location marker and camera target.
@@ -364,10 +371,10 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
          * */
 
         NearbyMapFragment nearbyMapFragment = getMapFragment();
-        Log.d("deneme","nearbyMapFragment is"+nearbyMapFragment);
+        Log.d("deneme17","nearbyMapFragment is"+nearbyMapFragment);
 
         if (nearbyMapFragment != null && curLatLng != null) {
-            Log.d("deneme","ife girdi");
+            Log.d("deneme17","ife girdi");
             hideProgressBar(); // In case it is visible (this happens, not an impossible case)
             /*
              * If we are close to nearby places boundaries, we need a significant update to
@@ -395,18 +402,24 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
                 return;
             }
 
+            if (onOrientationChanged) {
+                isSlightUpdate = false;
+                onOrientationChanged = false;
+            }
+
             if (isSlightUpdate) {
-                Log.d("deneme","isSlightUpdate : true");
+
+                Log.d("deneme17","isSlightUpdate : true");
                 nearbyMapFragment.setBundleForUpdtes(bundle);
                 nearbyMapFragment.updateMapSlightly();
             } else {
-                Log.d("deneme","isSlightUpdate : false");
+                Log.d("deneme17","isSlightUpdate : false");
                 nearbyMapFragment.setBundleForUpdtes(bundle);
                 nearbyMapFragment.updateMapSignificantly();
                 updateListFragment();
             }
         } else {
-            Log.d("deneme","else girdi");
+            Log.d("deneme17","else girdi");
             lockNearbyView(true);
             setMapFragment();
             setListFragment();
@@ -485,14 +498,14 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
     }
 
     private void requestLocationPermissions() {
-        Log.d("deneme11","requestLocationPermissions ");
+        Log.d("deneme14","requestLocationPermissions ");
         if (!getActivity().isFinishing()) {
             locationManager.requestPermissions(getActivity());
         }
     }
 
     private void showLocationPermissionDeniedErrorDialog() {
-        Log.d("deneme11","showLocationPermissionDeniedErrorDialog ");
+        Log.d("deneme14","showLocationPermissionDeniedErrorDialog ");
         new AlertDialog.Builder(getActivity())
                 .setMessage(R.string.nearby_needs_permissions)
                 .setCancelable(false)
@@ -510,9 +523,9 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
     }
 
     private void checkGps() {
-        Log.d("deneme11","Nearby Fragment checkGps");
+        Log.d("deneme14","Nearby Fragment checkGps");
         if (!locationManager.isProviderEnabled()) {
-            Log.d("deneme11","GPS is not enabled");
+            Log.d("deneme14","GPS is not enabled");
             Timber.d("GPS is not enabled");
             new AlertDialog.Builder(getActivity())
                     .setMessage(R.string.gps_disabled)
@@ -531,14 +544,14 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
                     .create()
                     .show();
         } else {
-            Log.d("deneme11","GPS is enabled");
+            Log.d("deneme14","GPS is enabled");
             Timber.d("GPS is enabled");
             checkLocationPermission();
         }
     }
 
     private void checkLocationPermission() {
-        Log.d("deneme11","checkLocationPermission");
+        Log.d("deneme14","checkLocationPermission");
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             if (locationManager.isLocationPermissionGranted()) {
                 refreshView(LOCATION_SIGNIFICANTLY_CHANGED);
@@ -597,23 +610,33 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
     @Override
     public void onResume() {
         super.onResume();
-        Log.d("deneme11","Nearby Fragment on resume");
+        Log.d("deneme14","Nearby Fragment on resume");
         // Only check permission and add network broadcast receiver if contribution fragment is invisible and nearby fragment visible
-        if (!((ContributionsActivity)getActivity()).isContributionsFragmentVisible) {
-            Log.d("deneme11","Nearby Fragment on resume2");
+        /*if (!((ContributionsActivity)getActivity()).isContributionsFragmentVisible && !isFragmentAttachedBefore) {
+            isFragmentAttachedBefore = true;
+            Log.d("deneme14","Nearby Fragment on resume2");
             performNearbyOperations();
-        }
+        }*/
     }
 
-    public void onTabSelected() {
-        Log.d("deneme11","Nearby Fragment onTabSelected");
+    public void onTabSelected(boolean onOrientationChanged) {
+        Log.d("deneme14","Nearby Fragment onTabSelected");
+        this.onOrientationChanged = onOrientationChanged;
         performNearbyOperations();
+
     }
 
     private void performNearbyOperations() {
+        locationManager.addLocationListener(this);
+        registerLocationUpdates();
         lockNearbyView = false;
         checkGps();
         addNetworkBroadcastReceiver();
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
     }
 
     @Override
@@ -627,8 +650,6 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
     @Override
     public void onStart() {
         super.onStart();
-        locationManager.addLocationListener(this);
-        registerLocationUpdates();
     }
 
     @Override

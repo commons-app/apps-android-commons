@@ -64,6 +64,8 @@ public class ContributionsActivity extends AuthenticatedActivity implements Frag
     private Menu menu;
     private boolean isThereUnreadNotifications = false;
 
+    private boolean onOrientationChanged = false;
+
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_contributions);
@@ -77,10 +79,11 @@ public class ContributionsActivity extends AuthenticatedActivity implements Frag
         //}
         // If orientation change
         if (savedInstanceState != null ) {
+            onOrientationChanged = true;
             //and nerby map was visible
             if (savedInstanceState.getInt("viewPagerCurrentItem") == 1) {
                 Log.d("deneme14","viewpager current item nearby");
-                ((NearbyFragment)contributionsActivityPagerAdapter.getItem(1)).onTabSelected();
+                ((NearbyFragment)contributionsActivityPagerAdapter.getItem(1)).onTabSelected(onOrientationChanged);
             }
         }
     }
@@ -162,7 +165,8 @@ public class ContributionsActivity extends AuthenticatedActivity implements Frag
                         isContributionsFragmentVisible = false;
                         updateMenuItem();
                         // Do all permission and GPS related tasks on tab selected, not on create
-                        ((NearbyFragment)contributionsActivityPagerAdapter.getItem(1)).onTabSelected();
+                            ((NearbyFragment)contributionsActivityPagerAdapter.getItem(1)).onTabSelected(onOrientationChanged);
+
                         break;
                     default:
                         tabLayout.getTabAt(CONTRIBUTIONS_TAB_POSITION).select();
