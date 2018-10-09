@@ -6,6 +6,7 @@ import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
+import org.acra.ACRA;
 import org.acra.data.CrashReportData;
 import org.acra.sender.ReportSender;
 import org.apache.commons.codec.Charsets;
@@ -38,15 +39,16 @@ public abstract class LogsSender implements ReportSender {
 
     @Override
     public void send(@NonNull final Context context, @Nullable CrashReportData report) {
-        Timber.d("Trying to send a new report");
+        Timber.d("Trying to send a new report %s", ACRA.isACRASenderServiceProcess());
         sendLogs(context, report);
     }
 
     private void sendLogs(Context context, CrashReportData report) {
-        final Uri logFileUri = getZippedLogFileUri(context, report);
-        if (logFileUri != null) {
-            sendEmail(context, logFileUri);
-        }
+        ACRA.getErrorReporter().handleSilentException(null);
+//        final Uri logFileUri = getZippedLogFileUri(context, report);
+//        if (logFileUri != null) {
+//            sendEmail(context, logFileUri);
+//        }
     }
 
     /***

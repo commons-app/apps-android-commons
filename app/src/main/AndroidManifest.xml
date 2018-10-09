@@ -159,6 +159,11 @@
                 android:resource="@xml/modifications_sync_adapter" />
         </service>
 
+        <service
+            android:name="org.acra.sender.SenderService"
+            android:exported="false"
+            android:process=":acra" />
+
         <provider
             android:name="android.support.v4.content.FileProvider"
             android:authorities="${applicationId}.provider"

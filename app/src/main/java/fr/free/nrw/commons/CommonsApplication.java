@@ -72,7 +72,8 @@ public class CommonsApplication extends Application {
 
     public static final String DEFAULT_EDIT_SUMMARY = "Uploaded using [[COM:MOA|Commons Mobile App]]";
 
-    public static final String FEEDBACK_EMAIL = "commons-app-android@googlegroups.com";
+    //public static final String FEEDBACK_EMAIL = "commons-app-android@googlegroups.com";
+    public static final String FEEDBACK_EMAIL = "maskaravivek@gmail.com";
 
     public static final String FEEDBACK_EMAIL_SUBJECT = "Commons Android App (%s) Feedback";
 
@@ -122,6 +123,7 @@ public class CommonsApplication extends Application {
         // Empty temp directory in case some temp files are created and never removed.
         ContributionUtils.emptyTemporaryDirectory();
 
+        initAcra();
         if (BuildConfig.DEBUG) {
             Stetho.initializeWithDefaults(this);
         }
@@ -147,14 +149,14 @@ public class CommonsApplication extends Application {
         Timber.plant(new Timber.DebugTree());
     }
 
-    @Override
-    protected void attachBaseContext(Context base) {
-        super.attachBaseContext(base);
-        initAcra();
-    }
-
     private void initAcra() {
+        Thread.UncaughtExceptionHandler exceptionHandler = Thread.getDefaultUncaughtExceptionHandler();
         ACRA.init(this);
+        /* Remove ACRA's UncaughtExceptionHandler
+           We do this because ACRA's handler spawns a new process screwing up with Door auth
+           (and possibly other things)
+        */
+        Thread.setDefaultUncaughtExceptionHandler(exceptionHandler);
     }
 
     private ThreadPoolService getFileLoggingThreadPool() {
