@@ -1,5 +1,6 @@
 package fr.free.nrw.commons.logging;
 
+import android.support.annotation.NonNull;
 import android.util.Log;
 
 import org.slf4j.Logger;
@@ -37,7 +38,7 @@ public class FileLoggingTree extends Timber.DebugTree implements LogLevelSettabl
     }
 
     @Override
-    protected void log(final int priority, final String tag, final String message, Throwable t) {
+    protected void log(final int priority, final String tag, @NonNull final String message, Throwable t) {
         executor.execute(() -> logMessage(priority, tag, message));
 
     }

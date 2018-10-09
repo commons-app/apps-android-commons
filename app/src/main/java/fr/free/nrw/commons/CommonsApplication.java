@@ -106,6 +106,8 @@ public class CommonsApplication extends Application {
                 .getCommonsApplicationComponent()
                 .inject(this);
 
+        initTimber();
+
 //        Set DownsampleEnabled to True to downsample the image in case it's heavy
         ImagePipelineConfig config = ImagePipelineConfig.newBuilder(this)
                 .setDownsampleEnabled(true)
@@ -116,13 +118,9 @@ public class CommonsApplication extends Application {
             Timber.e(e);
             // TODO: Remove when we're able to initialize Fresco in test builds.
         }
-        if (setupLeakCanary() == RefWatcher.DISABLED) {
-            return;
-        }
+
         // Empty temp directory in case some temp files are created and never removed.
         ContributionUtils.emptyTemporaryDirectory();
-
-        initTimber();
 
         if (BuildConfig.DEBUG) {
             Stetho.initializeWithDefaults(this);
@@ -130,6 +128,10 @@ public class CommonsApplication extends Application {
 
         createNotificationChannel(this);
 
+
+        if (setupLeakCanary() == RefWatcher.DISABLED) {
+            return;
+        }
         // Fire progress callbacks for every 3% of uploaded content
         System.setProperty("in.yuvi.http.fluent.PROGRESS_TRIGGER_THRESHOLD", "3.0");
     }

@@ -122,6 +122,8 @@
             android:name=".achievements.AchievementsActivity"
             android:label="@string/Achievements" />
 
+        <activity android:name="com.github.pedrovgs.lynx.LynxActivity"/>
+
         <service android:name=".upload.UploadService" />
         <service
             android:name=".auth.WikiAccountAuthenticatorService"

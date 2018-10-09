@@ -133,10 +133,6 @@ public class SettingsFragment extends PreferenceFragment {
     }
 
     private void sendLogs() {
-        try {
-            commonsLogSender.send(getActivity(), null);
-        } catch (ReportSenderException e) {
-            Timber.e(e, "Unable to report send logs");
-        }
+        commonsLogSender.send(getActivity(),null);
     }
 }

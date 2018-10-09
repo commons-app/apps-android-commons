@@ -18,6 +18,8 @@ import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.github.pedrovgs.lynx.LynxActivity;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -116,6 +118,11 @@ public class AboutActivity extends NavigationBaseActivity {
     @OnClick(R.id.about_faq)
     public void launchFrequentlyAskedQuesions(View view) {
         Utils.handleWebUrl(this,Uri.parse("https://github.com/commons-app/apps-android-commons/wiki/Frequently-Asked-Questions\\"));
+    }
+
+    @OnClick(R.id.about_logs)
+    public void showLogs() {
+        startActivity(LynxActivity.getIntent(this));
     }
 
     @Override

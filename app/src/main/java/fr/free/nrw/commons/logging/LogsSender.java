@@ -3,10 +3,11 @@ package fr.free.nrw.commons.logging;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 
 import org.acra.data.CrashReportData;
 import org.acra.sender.ReportSender;
-import org.acra.sender.ReportSenderException;
 import org.apache.commons.codec.Charsets;
 
 import java.io.BufferedInputStream;
@@ -25,18 +26,18 @@ import static fr.free.nrw.commons.CommonsApplication.FEEDBACK_EMAIL;
 
 public abstract class LogsSender implements ReportSender {
 
-    protected String logFileName;
-    protected String emailSubject;
-    protected String emailBody;
+    String logFileName;
+    String emailSubject;
+    String emailBody;
 
     private final SessionManager sessionManager;
 
-    protected LogsSender(SessionManager sessionManager) {
+    LogsSender(SessionManager sessionManager) {
         this.sessionManager = sessionManager;
     }
 
     @Override
-    public void send(final Context context, CrashReportData report) throws ReportSenderException {
+    public void send(@NonNull final Context context, @Nullable CrashReportData report) {
         Timber.d("Trying to send a new report");
         sendLogs(context, report);
     }

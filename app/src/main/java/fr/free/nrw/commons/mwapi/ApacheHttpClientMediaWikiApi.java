@@ -8,7 +8,6 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.VisibleForTesting;
 import android.text.TextUtils;
-import android.util.Log;
 
 import com.google.gson.Gson;
 
@@ -34,7 +33,6 @@ import java.net.URL;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
@@ -893,7 +891,7 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
 
         CustomApiResult result = api.upload(filename, file, dataLength, pageContents, editSummary, getCentralAuthToken(), getEditToken(), progressListener::onProgress);
 
-        Log.e("WTF", "Result: " + result.toString());
+        Timber.wtf("Result: " + result.toString());
 
         String resultStatus = result.getString("/api/upload/@result");
 
@@ -980,7 +978,7 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
                     new PageTitle(userName).getText());
             HttpUrl.Builder urlBuilder = HttpUrl.parse(url).newBuilder();
             urlBuilder.addQueryParameter("user", userName);
-            Log.i("url", urlBuilder.toString());
+            Timber.i("Url %s", urlBuilder.toString());
             Request request = new Request.Builder()
                     .url(urlBuilder.toString())
                     .build();

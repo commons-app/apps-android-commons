@@ -3,8 +3,6 @@ package fr.free.nrw.commons.logging;
 import android.content.Context;
 import android.os.Environment;
 
-import timber.log.Timber;
-
 public final class LogUtils {
     private LogUtils() {
     }
