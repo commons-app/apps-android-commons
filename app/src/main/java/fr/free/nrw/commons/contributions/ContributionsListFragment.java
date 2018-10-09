@@ -95,7 +95,11 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment {
     @Override
     public void onSaveInstanceState(@NonNull Bundle outState) {
         super.onSaveInstanceState(outState);
-        controller.saveState(outState);
+        if (controller != null) {
+            controller.saveState(outState);
+        } else {
+            controller = new ContributionController(this);
+        }
     }
 
     @Override

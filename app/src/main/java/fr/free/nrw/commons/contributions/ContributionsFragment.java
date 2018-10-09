@@ -311,6 +311,7 @@ public class ContributionsFragment
 
         if (getActivity() != null) { // If fragment is attached to parent activity
             getActivity().bindService(uploadServiceIntent, uploadServiceConnection, Context.BIND_AUTO_CREATE);
+            isUploadServiceConnected = true;
             allContributions = contributionDao.loadAllContributions();
             getActivity().getSupportLoaderManager().initLoader(0, null, ContributionsFragment.this);
         }
@@ -601,6 +602,7 @@ public class ContributionsFragment
         if (isUploadServiceConnected) {
             if (getActivity() != null) {
                 getActivity().unbindService(uploadServiceConnection);
+                isUploadServiceConnected = false;
             }
         }
 

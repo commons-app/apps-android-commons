@@ -75,6 +75,20 @@ public class ContributionsActivity extends AuthenticatedActivity implements Frag
             setTitle(getString(R.string.navigation_item_home)); // Should I create a new string variable with another name instead?
             // Add tabs and fragments onAuthCookieAcquired
         //}
+        // If orientation change
+        if (savedInstanceState != null ) {
+            //and nerby map was visible
+            if (savedInstanceState.getInt("viewPagerCurrentItem") == 1) {
+                Log.d("deneme14","viewpager current item nearby");
+                ((NearbyFragment)contributionsActivityPagerAdapter.getItem(1)).onTabSelected();
+            }
+        }
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putInt("viewPagerCurrentItem", viewPager.getCurrentItem());
     }
 
     @Override
