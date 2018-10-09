@@ -7,15 +7,21 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.view.ViewPager;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.auth.AuthenticatedActivity;
+import fr.free.nrw.commons.bookmarks.locations.BookmarkLocationListFragment;
+import fr.free.nrw.commons.bookmarks.pictures.BookmarkPictureListFragment;
 
 public class BookmarksActivity extends AuthenticatedActivity
         implements FragmentManager.OnBackStackChangedListener {
 
     private FragmentManager supportFragmentManager;
+    private BookmarksPagerAdapter adapter;
     @BindView(R.id.viewPagerBookmarks)
     ViewPager viewPager;
     @BindView(R.id.tabLayoutBookmarks)
@@ -44,7 +50,20 @@ public class BookmarksActivity extends AuthenticatedActivity
         requestAuthToken();
         initDrawer();
 
+        adapter = new BookmarksPagerAdapter(supportFragmentManager);
+        viewPager.setAdapter(adapter);
         tabLayout.setupWithViewPager(viewPager);
+
+        List<BookmarkPages> pages = new ArrayList<>();
+        pages.add(new BookmarkPages(
+                BookmarkPictureListFragment.newInstance(),
+                getString(R.string.title_page_bookmarks_pictures)
+        ));
+        pages.add(new BookmarkPages(
+                BookmarkLocationListFragment.newInstance(),
+                getString(R.string.title_page_bookmarks_locations)
+        ));
+        adapter.updatePages(pages);
     }
 
     /**
