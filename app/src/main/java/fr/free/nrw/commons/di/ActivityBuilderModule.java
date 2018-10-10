@@ -12,7 +12,6 @@ import fr.free.nrw.commons.contributions.ContributionsActivity;
 import fr.free.nrw.commons.category.CategoryImagesActivity;
 import fr.free.nrw.commons.explore.SearchActivity;
 
-import fr.free.nrw.commons.nearby.NearbyActivity;
 import fr.free.nrw.commons.notification.NotificationActivity;
 import fr.free.nrw.commons.settings.SettingsActivity;
 import fr.free.nrw.commons.upload.MultipleShareActivity;
@@ -45,9 +44,6 @@ public abstract class ActivityBuilderModule {
 
     @ContributesAndroidInjector
     abstract SignupActivity bindSignupActivity();
-
-    @ContributesAndroidInjector
-    abstract NearbyActivity bindNearbyActivity();
 
     @ContributesAndroidInjector
     abstract NotificationActivity bindNotificationActivity();

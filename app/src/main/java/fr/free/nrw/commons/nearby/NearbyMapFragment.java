@@ -523,7 +523,6 @@ public class NearbyMapFragment extends DaggerFragment {
             mapView.getMapAsync(new OnMapReadyCallback() {
                 @Override
                 public void onMapReady(MapboxMap mapboxMap) {
-                    // TODO: ((NearbyActivity)getActivity()).setMapViewTutorialShowCase();
                     NearbyMapFragment.this.mapboxMap = mapboxMap;
                     updateMapSignificantly();
                 }
@@ -815,7 +814,7 @@ public class NearbyMapFragment extends DaggerFragment {
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         Timber.d("onRequestPermissionsResult: req code = " + " perm = " + permissions + " grant =" + grantResults);
 
-        // Do not use requestCode 1 as it will conflict with NearbyActivity's requestCodes
+        // Do not use requestCode 1 as it will conflict with NearbyFragment's requestCodes
         switch (requestCode) {
             // 4 = "Read external storage" allowed when gallery selected
             case 4: {

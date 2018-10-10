@@ -35,7 +35,6 @@ import fr.free.nrw.commons.auth.AccountUtil;
 import fr.free.nrw.commons.auth.LoginActivity;
 import fr.free.nrw.commons.contributions.ContributionsActivity;
 import fr.free.nrw.commons.category.CategoryImagesActivity;
-import fr.free.nrw.commons.nearby.NearbyActivity;
 import fr.free.nrw.commons.notification.NotificationActivity;
 import fr.free.nrw.commons.settings.SettingsActivity;
 import timber.log.Timber;
@@ -158,10 +157,6 @@ public abstract class NavigationBaseActivity extends BaseActivity
                 startActivityWithFlags(
                         this, ContributionsActivity.class, Intent.FLAG_ACTIVITY_CLEAR_TOP,
                         Intent.FLAG_ACTIVITY_SINGLE_TOP);
-                return true;
-            case R.id.action_nearby:
-                drawerLayout.closeDrawer(navigationView);
-                startActivityWithFlags(this, NearbyActivity.class, Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
                 return true;
             case R.id.action_about:
                 drawerLayout.closeDrawer(navigationView);
