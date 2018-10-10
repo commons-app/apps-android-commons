@@ -199,6 +199,13 @@
             android:label="@string/provider_searches"
             android:syncable="false" />
 
+        <provider
+            android:name=".bookmarks.BookmarkContentProvider"
+            android:authorities="${applicationId}.bookmarks.contentprovider"
+            android:exported="false"
+            android:label="@string/provider_bookmarks"
+            android:syncable="false" />
+
         <receiver android:name=".widget.PicOfDayAppWidget">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />

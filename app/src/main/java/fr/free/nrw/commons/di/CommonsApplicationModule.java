@@ -75,7 +75,7 @@ public class CommonsApplicationModule {
     }
 
     @Provides
-    @Named("bookmark")
+    @Named("bookmarks")
     public ContentProviderClient provideBookmarkContentProviderClient(Context context) {
         return context.getContentResolver().acquireContentProviderClient(BuildConfig.BOOKMARK_AUTHORITY);
     }
