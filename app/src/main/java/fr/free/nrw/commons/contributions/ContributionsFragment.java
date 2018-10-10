@@ -20,7 +20,6 @@ import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.widget.CursorAdapter;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -141,7 +140,7 @@ public class ContributionsFragment
         if (savedInstanceState != null) {
             mediaDetailPagerFragment = (MediaDetailPagerFragment)getChildFragmentManager().findFragmentByTag(MEDIA_DETAIL_PAGER_FRAGMENT_TAG);
             contributionsListFragment = (ContributionsListFragment) getChildFragmentManager().findFragmentByTag(CONTRIBUTION_LIST_FRAGMENT_TAG);
-            //getSupportLoaderManager().initLoader(0, null, this);
+
             if (savedInstanceState.getBoolean("mediaDetailsVisible")) {
                 setMediaDetailPagerFragment();
             } else {
@@ -161,6 +160,13 @@ public class ContributionsFragment
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
+        /*
+        - There are some operations we need auth, so we need to make sure isAuthCookieAcquired.
+        - And since we use same retained fragment doesn't want to make all network operations
+        all over again on same fragment attached to recreated activity, we do this network
+        operations on first time fragment atached to an activity. Then they will be retained
+        until fragment life time ends.
+         */
         if (((MainActivity)getActivity()).isAuthCookieAcquired && !isFragmentAttachedBefore) {
             onAuthCookieAcquired(((MainActivity)getActivity()).uploadServiceIntent);
             isFragmentAttachedBefore = true;
@@ -179,13 +185,9 @@ public class ContributionsFragment
         // show nearby card view on contributions list is visible
         if (prefs.getBoolean("displayNearbyCardView", true)) {
             nearbyNoificationCardView.setVisibility(View.VISIBLE);
-            Log.d("deneme9","nearbyNoificationCardView.setVisibility(View.VISIBLE)");
         } else {
             nearbyNoificationCardView.setVisibility(View.GONE);
-            Log.d("deneme9","nearbyNoificationCardView.setVisibility(View.GONE)");
-
         }
-
 
         // Create if null
         if (getContributionsListFragment() == null) {
@@ -208,8 +210,6 @@ public class ContributionsFragment
         ((MainActivity)getActivity()).hideTabs();
         // hide nearby card view on media detail is visible
         nearbyNoificationCardView.setVisibility(View.GONE);
-        Log.d("deneme9","nearbyNoificationCardView.setVisibility(View.VISIBLE)");
-
 
         // Create if null
         if (getMediaDetailPagerFragment() == null) {
@@ -260,7 +260,6 @@ public class ContributionsFragment
             contributionsListFragment.changeProgressBarVisibility(false);
 
             if (contributionsListFragment.getAdapter() == null) {
-                Log.d("deneme", "contributionsListFragment adapter set");
                 contributionsListFragment.setAdapter(new ContributionsListAdapter(getActivity().getApplicationContext(),
                         cursor, 0, contributionDao));
             } else {
@@ -317,8 +316,6 @@ public class ContributionsFragment
                     // No need to display permission request button anymore
                     nearbyNoificationCardView.displayPermissionRequestButton(false);
                     locationManager.registerLocationManager();
-                    Log.d("deneme7","location manager registered, location manager:"+((MainActivity)getActivity()).locationManager);
-
                 } else {
                     // Still ask for permission
                     nearbyNoificationCardView.displayPermissionRequestButton(true);
@@ -486,7 +483,6 @@ public class ContributionsFragment
     @Override
     public void onResume() {
         super.onResume();
-        Log.d("deneme10","onResume, card view"+nearbyNoificationCardView);
         locationManager = new LocationServiceManager(getActivity());
 
         firstLocationUpdate = true;
@@ -502,26 +498,26 @@ public class ContributionsFragment
         if (prefs.getBoolean("displayNearbyCardView", true)) {
             nearbyNoificationCardView.cardViewVisibilityState = NearbyNoificationCardView.CardViewVisibilityState.LOADING;
             nearbyNoificationCardView.setVisibility(View.VISIBLE);
-            Log.d("deneme9","nearbyNoificationCardView.setVisibility(View.VISIBLE)");
-
             checkGPS();
 
         } else {
             // Hide nearby notification card view if related shared preferences is false
             nearbyNoificationCardView.setVisibility(View.GONE);
-            Log.d("deneme9","nearbyNoificationCardView.setVisibility(View.GONE)");
         }
 
 
     }
 
+
+    /**
+     * Check GPS to decide displaying request permission button or not.
+     */
     private void checkGPS() {
         if (!locationManager.isProviderEnabled()) {
             Timber.d("GPS is not enabled");
             nearbyNoificationCardView.permissionType = NearbyNoificationCardView.PermissionType.ENABLE_GPS;
             nearbyNoificationCardView.displayPermissionRequestButton(true);
         } else {
-            Log.d("deneme11","GPS is enabled");
             Timber.d("GPS is enabled");
             checkLocationPermission();
         }
@@ -550,8 +546,6 @@ public class ContributionsFragment
 
         curLatLng = locationManager.getLastLocation();
 
-        Log.d("deneme7"," updateClosestNearbyCardViewInfo called/ curlatlng is:"+curLatLng+" nearby controller is:"+nearbyController);
-
         placesDisposable = Observable.fromCallable(() -> nearbyController
                 .loadAttractionsFromLocation(curLatLng, true)) // thanks to boolean, it will only return closest result
                 .subscribeOn(Schedulers.io())
@@ -559,24 +553,19 @@ public class ContributionsFragment
                 .subscribe(this::updateNearbyNotification,
                         throwable -> {
                             Timber.d(throwable);
-                            Log.d("deneme7","error"+throwable);
                             updateNearbyNotification(null);
                         });
     }
 
     private void updateNearbyNotification(@Nullable NearbyController.NearbyPlacesInfo nearbyPlacesInfo) {
-        Log.d("deneme7", "update nearby location called");
-        Log.d("deneme7", "nearbyPlacesInfo:"+nearbyPlacesInfo+" nearbyPlacesInfo.placeList:"+nearbyPlacesInfo.placeList+" nearbyPlacesInfo.placeList.size():"+nearbyPlacesInfo.placeList.size());
 
         if (nearbyPlacesInfo != null && nearbyPlacesInfo.placeList != null && nearbyPlacesInfo.placeList.size() > 0) {
             Place closestNearbyPlace = nearbyPlacesInfo.placeList.get(0);
             String distance = formatDistanceBetween(curLatLng, closestNearbyPlace.location);
             closestNearbyPlace.setDistance(distance);
             nearbyNoificationCardView.updateContent (true, closestNearbyPlace);
-            Log.d("deneme7","placelist size > 0");
         } else {
             // Means that no close nearby place is found
-            Log.d("deneme7","placelist bos");
             nearbyNoificationCardView.updateContent (false, null);
         }
     }
@@ -605,17 +594,16 @@ public class ContributionsFragment
     public void onLocationChangedSignificantly(LatLng latLng) {
         // Will be called if location changed more than 1000 meter
         // Do nothing on slight changes for using network efficiently
-        Log.d("deneme7","onLocationChangedSignificantly called");
         firstLocationUpdate = false;
         updateClosestNearbyCardViewInfo();
     }
 
     @Override
     public void onLocationChangedSlightly(LatLng latLng) {
-        // Update closest nearby notification card onLocationChangedSlightly
-        Log.d("deneme7","onLocationChangedSlightly called");
-        // If first time to update location after onResume, then no need to wait for significant
-        // location change. Any closest location is better than no location
+        /* Update closest nearby notification card onLocationChangedSlightly
+        If first time to update location after onResume, then no need to wait for significant
+        location change. Any closest location is better than no location
+        */
         if (firstLocationUpdate) {
             updateClosestNearbyCardViewInfo();
             // Turn it to false, since it is not first location update anymore. To change closest location
@@ -629,6 +617,5 @@ public class ContributionsFragment
         // Update closest nearby card view if location changed more than 500 meters
         updateClosestNearbyCardViewInfo();
     }
-
 }
 
