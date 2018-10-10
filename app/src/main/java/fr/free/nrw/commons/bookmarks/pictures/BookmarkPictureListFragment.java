@@ -73,13 +73,18 @@ public class BookmarkPictureListFragment extends DaggerFragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         gridView.setOnItemClickListener((AdapterView.OnItemClickListener) getActivity());
-        initList();
     }
 
     @Override
     public void onStop() {
         super.onStop();
         controller.stop();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        initList();
     }
 
     /**

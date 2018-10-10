@@ -75,6 +75,7 @@ public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment imple
     private Boolean editable;
     private boolean isFeaturedImage;
     MediaDetailAdapter adapter;
+    private Bookmark bookmark;
 
     public MediaDetailPagerFragment() {
         this(false, false);
@@ -147,7 +148,8 @@ public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment imple
         switch (item.getItemId()) {
             case R.id.menu_bookmark_current_image:
                 // TODO Update image state in database and in UI
-                ViewUtil.showSnackbar(getView(), R.string.menu_bookmark);
+                bookmarkDao.updateBookmark(bookmark);
+                updateBookmarkState(item, m);
                 return true;
             case R.id.menu_share_current_image:
                 Intent shareIntent = new Intent(Intent.ACTION_SEND);
@@ -274,7 +276,12 @@ public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment imple
                     menu.findItem(R.id.menu_download_current_image).setEnabled(true).setVisible(true);
                     menu.findItem(R.id.menu_bookmark_current_image).setEnabled(true).setVisible(true);
 
-                    updateBookmarkState(m);
+                    // Initialize bookmark object
+                    bookmark = new Bookmark(
+                            m.getFilename(),
+                            m.getCreator()
+                    );
+                    updateBookmarkState(menu.findItem(R.id.menu_bookmark_current_image), m);
 
                     if (m instanceof Contribution ) {
                         Contribution c = (Contribution) m;
@@ -306,14 +313,10 @@ public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment imple
         }
     }
 
-    private void updateBookmarkState(Media m) {
-        Bookmark bookmark = new Bookmark(
-                m.getLocalUri(),
-                m.getFilename(),
-                m.getCreator(),
-                m.getDateCreated()
-        );
-        // TODO Check if bookmark is in DB
+    private void updateBookmarkState(MenuItem item, Media m) {
+        boolean isBookmarked = bookmarkDao.findBookmark(bookmark);
+        int icon = isBookmarked ? R.drawable.ic_round_star_filled_24px : R.drawable.ic_round_star_border_24px;
+        item.setIcon(icon);
     }
 
     public void showImage(int i) {

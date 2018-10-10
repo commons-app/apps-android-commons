@@ -2,34 +2,21 @@ package fr.free.nrw.commons.bookmarks;
 
 import android.net.Uri;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
-
 public class Bookmark {
     public Uri contentUri;
     private String mediaName;
     private String mediaCreator;
-    private String mediaCreationDate;
 
-    Bookmark(Uri contentUri, String mediaName, String mediaCreator, String mediaCreationDate) {
-        this.contentUri = contentUri;
-        this.mediaName = mediaName;
-        this.mediaCreator = mediaCreator;
-        this.mediaCreationDate = mediaCreationDate;
-    }
-
-    public Bookmark(Uri contentUri, String mediaName, String mediaCreator, Date mediaCreationDate) {
-        this.contentUri = contentUri;
-        this.mediaName = mediaName;
-        this.mediaCreator = mediaCreator;
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-dd-mm");
-        this.mediaCreationDate = formatter.format(mediaCreationDate);
+    public Bookmark(String mediaName, String mediaCreator) {
+        this.contentUri = BookmarkContentProvider.uriForName(mediaName);
+        this.mediaName = mediaName == null ? "" : mediaName;
+        this.mediaCreator = mediaCreator == null ? "" : mediaCreator;
     }
 
     /**
-     * Gets mediaName
+     * Gets the file name
      *
-     * @return mediaName
+     * @return the file name
      */
     public String getMediaName() {
         return mediaName;
@@ -45,26 +32,16 @@ public class Bookmark {
     }
 
     /**
-     * Gets last used date
+     * Gets media creator
      *
-     * @return Last used date
+     * @return creator name
      */
     public String getMediaCreator() { return mediaCreator;  }
 
-    /**
-     * Gets no. of times the category is used
-     *
-     * @return no. of times used
-     */
-    public String getMediaCreationDate() {
-        return mediaCreationDate;
-    }
-
 
     public boolean isEqual(String name, String creator, String creationDate) {
-        return (name.equals(this.mediaName) && creator.equals(this.mediaCreator) && creationDate.equals(this.mediaCreationDate));
+        return (name.equals(this.mediaName) && creator.equals(this.mediaCreator));
     }
-
 
 
     /**

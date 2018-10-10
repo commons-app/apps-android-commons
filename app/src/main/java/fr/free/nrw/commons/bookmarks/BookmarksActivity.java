@@ -58,20 +58,9 @@ public class BookmarksActivity extends AuthenticatedActivity
         requestAuthToken();
         initDrawer();
 
-        adapter = new BookmarksPagerAdapter(supportFragmentManager);
+        adapter = new BookmarksPagerAdapter(supportFragmentManager, this);
         viewPager.setAdapter(adapter);
         tabLayout.setupWithViewPager(viewPager);
-
-        List<BookmarkPages> pages = new ArrayList<>();
-        pages.add(new BookmarkPages(
-                BookmarkPictureListFragment.newInstance(),
-                getString(R.string.title_page_bookmarks_pictures)
-        ));
-        pages.add(new BookmarkPages(
-                BookmarkLocationListFragment.newInstance(),
-                getString(R.string.title_page_bookmarks_locations)
-        ));
-        adapter.updatePages(pages);
     }
 
     /**
