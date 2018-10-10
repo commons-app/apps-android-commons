@@ -2,17 +2,28 @@ package fr.free.nrw.commons.bookmarks;
 
 import android.net.Uri;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 public class Bookmark {
     public Uri contentUri;
     private String mediaName;
     private String mediaCreator;
     private String mediaCreationDate;
 
-    public Bookmark(Uri contentUri, String mediaName, String mediaCreator, String mediaCreationDate) {
+    Bookmark(Uri contentUri, String mediaName, String mediaCreator, String mediaCreationDate) {
         this.contentUri = contentUri;
         this.mediaName = mediaName;
         this.mediaCreator = mediaCreator;
         this.mediaCreationDate = mediaCreationDate;
+    }
+
+    public Bookmark(Uri contentUri, String mediaName, String mediaCreator, Date mediaCreationDate) {
+        this.contentUri = contentUri;
+        this.mediaName = mediaName;
+        this.mediaCreator = mediaCreator;
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-dd-mm");
+        this.mediaCreationDate = formatter.format(mediaCreationDate);
     }
 
     /**
