@@ -273,7 +273,7 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment {
                 // TODO: anla ve duzelt
                 /*if (grantResults.length > 0 && grantResults[0] == PERMISSION_GRANTED) {
                     Timber.d("Location permission granted");
-                    Intent nearbyIntent = new Intent(getActivity(), ContributionsActivity.class);
+                    Intent nearbyIntent = new Intent(getActivity(), MainActivity.class);
                     startActivity(nearbyIntent);
                 }*/
             }

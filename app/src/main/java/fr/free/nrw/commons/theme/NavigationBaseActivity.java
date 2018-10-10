@@ -31,9 +31,8 @@ import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.WelcomeActivity;
 import fr.free.nrw.commons.achievements.AchievementsActivity;
-import fr.free.nrw.commons.auth.AccountUtil;
 import fr.free.nrw.commons.auth.LoginActivity;
-import fr.free.nrw.commons.contributions.ContributionsActivity;
+import fr.free.nrw.commons.contributions.MainActivity;
 import fr.free.nrw.commons.category.CategoryImagesActivity;
 import fr.free.nrw.commons.notification.NotificationActivity;
 import fr.free.nrw.commons.settings.SettingsActivity;
@@ -155,7 +154,7 @@ public abstract class NavigationBaseActivity extends BaseActivity
             case R.id.action_home:
                 drawerLayout.closeDrawer(navigationView);
                 startActivityWithFlags(
-                        this, ContributionsActivity.class, Intent.FLAG_ACTIVITY_CLEAR_TOP,
+                        this, MainActivity.class, Intent.FLAG_ACTIVITY_CLEAR_TOP,
                         Intent.FLAG_ACTIVITY_SINGLE_TOP);
                 return true;
             case R.id.action_about:

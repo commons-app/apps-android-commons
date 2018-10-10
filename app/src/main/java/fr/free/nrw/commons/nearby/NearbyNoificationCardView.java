@@ -17,7 +17,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import fr.free.nrw.commons.R;
-import fr.free.nrw.commons.contributions.ContributionsActivity;
+import fr.free.nrw.commons.contributions.MainActivity;
 import timber.log.Timber;
 
 /**
@@ -90,7 +90,7 @@ public class NearbyNoificationCardView  extends CardView{
                  */
                 NearbyNoificationCardView.this.setVisibility(GONE);
                 // Save shared preference for nearby card view accordingly
-                ((ContributionsActivity) context).prefs.edit().putBoolean("displayNearbyCardView", false).apply();
+                ((MainActivity) context).prefs.edit().putBoolean("displayNearbyCardView", false).apply();
             }
 
             @Override
@@ -102,7 +102,7 @@ public class NearbyNoificationCardView  extends CardView{
         layoutParams.setBehavior(swipeDismissBehavior);
 
         // If you don't setVisibility after getting layout params, then you will se an empty space in place of nerabyNotificationCardView
-        if (((ContributionsActivity)context).prefs.getBoolean("displayNearbyCardView", true)) {
+        if (((MainActivity)context).prefs.getBoolean("displayNearbyCardView", true)) {
             this.setVisibility(VISIBLE);
         } else {
             this.setVisibility(GONE);
@@ -114,7 +114,7 @@ public class NearbyNoificationCardView  extends CardView{
         this.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
-                ((ContributionsActivity)context).viewPager.setCurrentItem(1);
+                ((MainActivity)context).viewPager.setCurrentItem(1);
             }
         });
     }
@@ -135,8 +135,8 @@ public class NearbyNoificationCardView  extends CardView{
                 permissionRequestButton.setOnClickListener(new OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        if (!((ContributionsActivity)context).isFinishing()) {
-                            ((ContributionsActivity) context).locationManager.requestPermissions((ContributionsActivity) context);
+                        if (!((MainActivity)context).isFinishing()) {
+                            ((MainActivity) context).locationManager.requestPermissions((MainActivity) context);
                         }
                     }
                 });
@@ -154,7 +154,7 @@ public class NearbyNoificationCardView  extends CardView{
                                             Intent callGPSSettingIntent = new Intent(
                                                     android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS);
                                             Timber.d("Loaded settings page");
-                                            ((ContributionsActivity) context).startActivityForResult(callGPSSettingIntent, 1);
+                                            ((MainActivity) context).startActivityForResult(callGPSSettingIntent, 1);
                                         })
                                 .setNegativeButton(R.string.menu_cancel_upload, (dialog, id) -> {
                                     dialog.cancel();

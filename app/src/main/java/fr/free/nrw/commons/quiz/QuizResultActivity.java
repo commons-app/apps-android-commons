@@ -8,7 +8,6 @@ import android.net.Uri;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 
 import com.dinuscxj.progressbar.CircleProgressBar;
 
@@ -16,7 +15,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import fr.free.nrw.commons.R;
-import fr.free.nrw.commons.contributions.ContributionsActivity;
+import fr.free.nrw.commons.contributions.MainActivity;
 
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
@@ -55,7 +54,7 @@ public class QuizResultActivity extends AppCompatActivity {
             setScore(score);
         }else{
             startActivityWithFlags(
-                    this, ContributionsActivity.class, Intent.FLAG_ACTIVITY_CLEAR_TOP,
+                    this, MainActivity.class, Intent.FLAG_ACTIVITY_CLEAR_TOP,
                     Intent.FLAG_ACTIVITY_SINGLE_TOP);
             super.onBackPressed();
         }
@@ -79,14 +78,14 @@ public class QuizResultActivity extends AppCompatActivity {
     @OnClick(R.id.quiz_result_next)
     public void launchContributionActivity(){
         startActivityWithFlags(
-                this, ContributionsActivity.class, Intent.FLAG_ACTIVITY_CLEAR_TOP,
+                this, MainActivity.class, Intent.FLAG_ACTIVITY_CLEAR_TOP,
                 Intent.FLAG_ACTIVITY_SINGLE_TOP);
     }
 
     @Override
     public void onBackPressed() {
         startActivityWithFlags(
-                this, ContributionsActivity.class, Intent.FLAG_ACTIVITY_CLEAR_TOP,
+                this, MainActivity.class, Intent.FLAG_ACTIVITY_CLEAR_TOP,
                 Intent.FLAG_ACTIVITY_SINGLE_TOP);
         super.onBackPressed();
     }

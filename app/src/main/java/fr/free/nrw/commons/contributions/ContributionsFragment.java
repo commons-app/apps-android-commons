@@ -1,6 +1,5 @@
 package fr.free.nrw.commons.contributions;
 
-import android.Manifest;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
@@ -9,7 +8,6 @@ import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.database.DataSetObserver;
-import android.graphics.PorterDuff;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.IBinder;
@@ -18,11 +16,9 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 
-import android.support.v4.content.ContextCompat;
 import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
 import android.support.v4.app.LoaderManager;
-import android.support.v4.content.PermissionChecker;
 import android.support.v4.widget.CursorAdapter;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -30,11 +26,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Adapter;
 import android.widget.AdapterView;
-import android.widget.ProgressBar;
-import android.widget.TextView;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.concurrent.CountDownLatch;
 
 import javax.inject.Inject;
@@ -52,14 +45,11 @@ import fr.free.nrw.commons.media.MediaDetailPagerFragment;
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
 import fr.free.nrw.commons.nearby.NearbyController;
 import fr.free.nrw.commons.nearby.NearbyNoificationCardView;
-import fr.free.nrw.commons.nearby.NearbyPlaces;
 import fr.free.nrw.commons.nearby.Place;
-import fr.free.nrw.commons.notification.Notification;
 import fr.free.nrw.commons.notification.NotificationController;
 import fr.free.nrw.commons.notification.UnreadNotificationsCheckAsync;
 import fr.free.nrw.commons.settings.Prefs;
 import fr.free.nrw.commons.upload.UploadService;
-import fr.free.nrw.commons.utils.ContributionListViewUtils;
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
@@ -171,10 +161,10 @@ public class ContributionsFragment
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        if (((ContributionsActivity)getActivity()).isAuthCookieAcquired && !isFragmentAttachedBefore) {
-            onAuthCookieAcquired(((ContributionsActivity)getActivity()).uploadServiceIntent);
+        if (((MainActivity)getActivity()).isAuthCookieAcquired && !isFragmentAttachedBefore) {
+            onAuthCookieAcquired(((MainActivity)getActivity()).uploadServiceIntent);
             isFragmentAttachedBefore = true;
-            new UnreadNotificationsCheckAsync((ContributionsActivity) getActivity(), notificationController).execute();
+            new UnreadNotificationsCheckAsync((MainActivity) getActivity(), notificationController).execute();
 
         }
     }
@@ -185,7 +175,7 @@ public class ContributionsFragment
      */
     public void setContributionsListFragment() {
         // show tabs on contribution list is visible
-        ((ContributionsActivity)getActivity()).showTabs();
+        ((MainActivity)getActivity()).showTabs();
         // show nearby card view on contributions list is visible
         if (prefs.getBoolean("displayNearbyCardView", true)) {
             nearbyNoificationCardView.setVisibility(View.VISIBLE);
@@ -215,7 +205,7 @@ public class ContributionsFragment
      */
     public void setMediaDetailPagerFragment() {
         // hide tabs on media detail view is visible
-        ((ContributionsActivity)getActivity()).hideTabs();
+        ((MainActivity)getActivity()).hideTabs();
         // hide nearby card view on media detail is visible
         nearbyNoificationCardView.setVisibility(View.GONE);
         Log.d("deneme9","nearbyNoificationCardView.setVisibility(View.VISIBLE)");
@@ -253,7 +243,7 @@ public class ContributionsFragment
 
     @Override
     public void onBackStackChanged() {
-        ((ContributionsActivity)getActivity()).initBackButton();
+        ((MainActivity)getActivity()).initBackButton();
     }
 
     @Override
@@ -327,7 +317,7 @@ public class ContributionsFragment
                     // No need to display permission request button anymore
                     nearbyNoificationCardView.displayPermissionRequestButton(false);
                     locationManager.registerLocationManager();
-                    Log.d("deneme7","location manager registered, location manager:"+((ContributionsActivity)getActivity()).locationManager);
+                    Log.d("deneme7","location manager registered, location manager:"+((MainActivity)getActivity()).locationManager);
 
                 } else {
                     // Still ask for permission
@@ -444,7 +434,7 @@ public class ContributionsFragment
     private void setUploadCount() {
 
         compositeDisposable.add(mediaWikiApi
-                .getUploadCount(((ContributionsActivity)getActivity()).sessionManager.getCurrentAccount().name)
+                .getUploadCount(((MainActivity)getActivity()).sessionManager.getCurrentAccount().name)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(this::displayUploadCount,
@@ -458,7 +448,7 @@ public class ContributionsFragment
             return;
         }
 
-        ((ContributionsActivity)getActivity()).setNumOfUploads(uploadCount);
+        ((MainActivity)getActivity()).setNumOfUploads(uploadCount);
 
     }
 
@@ -471,7 +461,7 @@ public class ContributionsFragment
      * @param isThereUnreadNotifications true if user checked notifications before last notification date
      */
     public void updateNotificationsNotification(boolean isThereUnreadNotifications) {
-        ((ContributionsActivity)getActivity()).updateNotificationIcon(isThereUnreadNotifications);
+        ((MainActivity)getActivity()).updateNotificationIcon(isThereUnreadNotifications);
     }
 
     @Override

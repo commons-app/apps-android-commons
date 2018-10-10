@@ -13,7 +13,6 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.BottomSheetBehavior;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AlertDialog;
-import android.util.Log;
 import android.view.LayoutInflater;
 
 import android.view.View;
@@ -32,7 +31,7 @@ import javax.inject.Named;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import fr.free.nrw.commons.R;
-import fr.free.nrw.commons.contributions.ContributionsActivity;
+import fr.free.nrw.commons.contributions.MainActivity;
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
 import fr.free.nrw.commons.location.LatLng;
 import fr.free.nrw.commons.location.LocationServiceManager;
@@ -509,7 +508,7 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
                 .setNegativeButton(R.string.cancel, (dialog, which) -> {
                     //dismiss dialog and send user to contributions tab instead
                     dialog.cancel();
-                    ((ContributionsActivity)getActivity()).viewPager.setCurrentItem(((ContributionsActivity)getActivity()).CONTRIBUTIONS_TAB_POSITION);
+                    ((MainActivity)getActivity()).viewPager.setCurrentItem(((MainActivity)getActivity()).CONTRIBUTIONS_TAB_POSITION);
                 })
                 .create()
                 .show();

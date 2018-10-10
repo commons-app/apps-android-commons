@@ -36,7 +36,7 @@ import timber.log.Timber;
 import static android.content.ContentResolver.requestSync;
 import static fr.free.nrw.commons.location.LocationServiceManager.LOCATION_REQUEST;
 
-public class ContributionsActivity extends AuthenticatedActivity implements FragmentManager.OnBackStackChangedListener {
+public class MainActivity extends AuthenticatedActivity implements FragmentManager.OnBackStackChangedListener {
 
     @Inject
     SessionManager sessionManager;
@@ -58,8 +58,6 @@ public class ContributionsActivity extends AuthenticatedActivity implements Frag
     public final int CONTRIBUTIONS_TAB_POSITION = 0;
     public final int NEARBY_TAB_POSITION = 1;
 
-    //public ContributionsFragment contributionsFragment;
-    //private NearbyFragment nearbyFragment;
     public boolean isContributionsFragmentVisible = true; // False means nearby fragment is visible
     private Menu menu;
     private boolean isThereUnreadNotifications = false;
@@ -71,16 +69,14 @@ public class ContributionsActivity extends AuthenticatedActivity implements Frag
         setContentView(R.layout.activity_contributions);
         ButterKnife.bind(this);
 
-        //if (savedInstanceState == null) {
-            requestAuthToken();
-            initDrawer();
-            setTitle(getString(R.string.navigation_item_home)); // Should I create a new string variable with another name instead?
-            // Add tabs and fragments onAuthCookieAcquired
-        //}
-        // If orientation change
+        requestAuthToken();
+        initDrawer();
+        setTitle(getString(R.string.navigation_item_home)); // Should I create a new string variable with another name instead?
+
         if (savedInstanceState != null ) {
-            onOrientationChanged = true;
-            //and nerby map was visible
+            onOrientationChanged = true; // Will be used in nearby fragment to determine significant update of map
+
+            //If nearby map was visible, call on Tab Selected to call all nearby operations
             if (savedInstanceState.getInt("viewPagerCurrentItem") == 1) {
                 Log.d("deneme14","viewpager current item nearby");
                 ((NearbyFragment)contributionsActivityPagerAdapter.getItem(1)).onTabSelected(onOrientationChanged);
@@ -116,11 +112,10 @@ public class ContributionsActivity extends AuthenticatedActivity implements Frag
         tabLayout.addTab(tabLayout.newTab().setText(getResources().getString(R.string.contributions_fragment)));
         tabLayout.addTab(tabLayout.newTab().setText(getResources().getString(R.string.nearby_fragment)));
 
-        if (uploadServiceIntent != null) { // If auth cookie already acquired
+        if (uploadServiceIntent != null) {
+            // If auth cookie already acquired notify contrib fragmnet so that it san operate auth required actions
             ((ContributionsFragment)contributionsActivityPagerAdapter.getItem(CONTRIBUTIONS_TAB_POSITION)).onAuthCookieAcquired(uploadServiceIntent);
-            //contributionsActivityPagerAdapter.contributionsFragment.onAuthCookieAcquired(uploadServiceIntent);
         }
-
         setTabAndViewPagerSynchronisation();
     }
 
@@ -153,14 +148,14 @@ public class ContributionsActivity extends AuthenticatedActivity implements Frag
             public void onPageSelected(int position) {
                 switch (position) {
                     case CONTRIBUTIONS_TAB_POSITION:
-                        Log.d("deneme9","viewpager on tab selected CONTRIBUTIONS_TAB_POSITION");
+                        Timber.d("Contributions tab selected");
                         tabLayout.getTabAt(CONTRIBUTIONS_TAB_POSITION).select();
                         isContributionsFragmentVisible = true;
                         updateMenuItem();
 
                         break;
                     case NEARBY_TAB_POSITION:
-                        Log.d("deneme9","viewpager on tab selected NEARBY_TAB_POSITION");
+                        Timber.d("Nearby tab selected");
                         tabLayout.getTabAt(NEARBY_TAB_POSITION).select();
                         isContributionsFragmentVisible = false;
                         updateMenuItem();
@@ -183,7 +178,6 @@ public class ContributionsActivity extends AuthenticatedActivity implements Frag
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
-                Log.d("deneme9","tab layout tab selected:"+tab.getPosition());
                 viewPager.setCurrentItem(tab.getPosition());
             }
 
@@ -252,9 +246,10 @@ public class ContributionsActivity extends AuthenticatedActivity implements Frag
         inflater.inflate(R.menu.contribution_activity_notification_menu, menu);
 
         if (!isThereUnreadNotifications) {
-            // menu.findItem(R.id.notifications).setIcon(ContextCompat.getDrawable(this, R.drawable.ic_notifications_white_24dp));
+            // TODO: used vectors are not compatible with API 19 and below, change them
+            menu.findItem(R.id.notifications).setIcon(ContextCompat.getDrawable(this, R.drawable.ic_notifications_white_24dp));
         } else {
-            //  menu.findItem(R.id.notifications).setIcon(ContextCompat.getDrawable(this, R.drawable.ic_notifications_white_with_marker));
+            menu.findItem(R.id.notifications).setIcon(ContextCompat.getDrawable(this, R.drawable.ic_notifications_white_with_marker));
         }
 
         this.menu = menu;
@@ -311,13 +306,18 @@ public class ContributionsActivity extends AuthenticatedActivity implements Frag
                 pm.hasSystemFeature(PackageManager.FEATURE_CAMERA_FRONT);
     }
 
+    /**
+     * Updte notification icon if there is an unread notification
+     * @param isThereUnreadNotifications true if user didn't visit notifications activity since
+     *                                   latest notification came to account
+     */
     public void updateNotificationIcon(boolean isThereUnreadNotifications) {
         if (!isThereUnreadNotifications) {
             this.isThereUnreadNotifications = false;
-            //menu.findItem(R.id.notifications).setIcon(ContextCompat.getDrawable(this, R.drawable.ic_notifications_white_24dp));
+            menu.findItem(R.id.notifications).setIcon(ContextCompat.getDrawable(this, R.drawable.ic_notifications_white_24dp));
         } else {
             this.isThereUnreadNotifications = true;
-            //menu.findItem(R.id.notifications).setIcon(ContextCompat.getDrawable(this, R.drawable.ic_notifications_white_with_marker));
+            menu.findItem(R.id.notifications).setIcon(ContextCompat.getDrawable(this, R.drawable.ic_notifications_white_with_marker));
         }
     }
 
@@ -345,7 +345,6 @@ public class ContributionsActivity extends AuthenticatedActivity implements Frag
             switch (position){
                 case 0:
                     ContributionsFragment retainedContributionsFragment = getContributionsFragment(0);
-                    Log.d("deneme13","viewpager case0 contributions fragment is:"+retainedContributionsFragment);
                     if (retainedContributionsFragment != null) {
                         /**
                          * ContributionsFragment is parent of ContributionsListFragment and
@@ -356,24 +355,19 @@ public class ContributionsActivity extends AuthenticatedActivity implements Frag
                         } else {
                             retainedContributionsFragment.setMediaDetailPagerFragment();
                         }
-                        //contributionsFragment = retainedContributionsFragment;
                         return retainedContributionsFragment;
                     } else {
                         // If we reach here, retainedContributionsFragment is null
-                        //contributionsFragment = new ContributionsFragment();
                         return new ContributionsFragment();
 
                     }
 
                 case 1:
                     NearbyFragment retainedNearbyFragment = getNearbyFragment(1);
-                    Log.d("deneme13","viewpager case0 contributions fragment is:"+retainedNearbyFragment);
                     if (retainedNearbyFragment != null) {
-                        //nearbyFragment = retainedNearbyFragment;
                         return retainedNearbyFragment;
                     } else {
-                        // If we reach here, retainedContributionsFragment is null
-                        //nearbyFragment = new NearbyFragment();
+                        // If we reach here, retainedNearbyFragment is null
                         return new NearbyFragment();
                     }
                 default:
@@ -441,23 +435,19 @@ public class ContributionsActivity extends AuthenticatedActivity implements Frag
                 // If request is cancelled, the result arrays are empty.
                 if (grantResults.length > 0
                         && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    Log.d("deneme12","permision is granted");
-
+                    Timber.d("Location permission given");
                 } else {
                     // If nearby fragment is visible and location permission is not given, send user back to contrib fragment
                     if (!isContributionsFragmentVisible) {
                         viewPager.setCurrentItem(CONTRIBUTIONS_TAB_POSITION);
 
-                    // If contrib fragment is visible and location permission is not given, display permission request button
+                    // TODO: If contrib fragment is visible and location permission is not given, display permission request button
                     } else {
 
                     }
                 }
                 return;
             }
-
-            // other 'case' lines to check for other
-            // permissions this app might request.
         }
     }
 }

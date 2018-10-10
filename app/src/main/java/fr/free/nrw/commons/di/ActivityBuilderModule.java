@@ -8,7 +8,7 @@ import fr.free.nrw.commons.achievements.AchievementsActivity;
 import fr.free.nrw.commons.auth.LoginActivity;
 import fr.free.nrw.commons.auth.SignupActivity;
 import fr.free.nrw.commons.category.CategoryDetailsActivity;
-import fr.free.nrw.commons.contributions.ContributionsActivity;
+import fr.free.nrw.commons.contributions.MainActivity;
 import fr.free.nrw.commons.category.CategoryImagesActivity;
 import fr.free.nrw.commons.explore.SearchActivity;
 
@@ -34,7 +34,7 @@ public abstract class ActivityBuilderModule {
     abstract MultipleShareActivity bindMultipleShareActivity();
 
     @ContributesAndroidInjector
-    abstract ContributionsActivity bindContributionsActivity();
+    abstract MainActivity bindContributionsActivity();
 
     @ContributesAndroidInjector
     abstract SettingsActivity bindSettingsActivity();

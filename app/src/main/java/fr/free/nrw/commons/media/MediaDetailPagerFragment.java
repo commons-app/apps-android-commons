@@ -16,9 +16,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.content.ContextCompat;
-import android.support.v4.view.MenuItemCompat;
 import android.support.v4.view.ViewPager;
-import android.support.v7.widget.ShareActionProvider;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -38,7 +36,6 @@ import fr.free.nrw.commons.auth.SessionManager;
 import fr.free.nrw.commons.category.CategoryDetailsActivity;
 import fr.free.nrw.commons.category.CategoryImagesActivity;
 import fr.free.nrw.commons.contributions.Contribution;
-import fr.free.nrw.commons.contributions.ContributionsActivity;
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
 import fr.free.nrw.commons.explore.SearchActivity;
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
@@ -166,12 +163,12 @@ public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment imple
                 return true;
             case R.id.menu_retry_current_image:
                 // Retry
-                //((ContributionsActivity) getActivity()).retryUpload(pager.getCurrentItem());
+                //((MainActivity) getActivity()).retryUpload(pager.getCurrentItem());
                 getActivity().getSupportFragmentManager().popBackStack();
                 return true;
             case R.id.menu_cancel_current_image:
                 // todo: delete image
-                //((ContributionsActivity) getActivity()).deleteUpload(pager.getCurrentItem());
+                //((MainActivity) getActivity()).deleteUpload(pager.getCurrentItem());
                 getActivity().getSupportFragmentManager().popBackStack();
                 return true;
             default:

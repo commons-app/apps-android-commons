@@ -1,17 +1,13 @@
 package fr.free.nrw.commons.notification;
 
 import android.os.AsyncTask;
-import android.util.Log;
 
 import java.io.IOException;
 import java.lang.ref.WeakReference;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
-import fr.free.nrw.commons.contributions.ContributionsActivity;
+import fr.free.nrw.commons.contributions.MainActivity;
 import fr.free.nrw.commons.contributions.ContributionsFragment;
 import timber.log.Timber;
 
@@ -21,11 +17,11 @@ import timber.log.Timber;
 
 public class UnreadNotificationsCheckAsync extends AsyncTask<Void, Void, Notification> {
 
-    WeakReference<ContributionsActivity> context;
+    WeakReference<MainActivity> context;
     NotificationController notificationController;
 
 
-    public UnreadNotificationsCheckAsync(ContributionsActivity context, NotificationController notificationController) {
+    public UnreadNotificationsCheckAsync(MainActivity context, NotificationController notificationController) {
         this.context = new WeakReference<>(context);
         this.notificationController = notificationController;
     }

@@ -33,7 +33,7 @@ import fr.free.nrw.commons.Utils;
 import fr.free.nrw.commons.auth.SessionManager;
 import fr.free.nrw.commons.contributions.Contribution;
 import fr.free.nrw.commons.contributions.ContributionDao;
-import fr.free.nrw.commons.contributions.ContributionsActivity;
+import fr.free.nrw.commons.contributions.MainActivity;
 import fr.free.nrw.commons.contributions.ContributionsContentProvider;
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
 import fr.free.nrw.commons.mwapi.UploadResult;
@@ -190,7 +190,7 @@ public class UploadService extends HandlerService<Contribution> {
                 .setContentText(getResources().getQuantityString(R.plurals.uploads_pending_notification_indicator, toUpload, toUpload))
                 .setOngoing(true)
                 .setProgress(100, 0, true)
-                .setContentIntent(PendingIntent.getActivity(this, 0, new Intent(this, ContributionsActivity.class), 0))
+                .setContentIntent(PendingIntent.getActivity(this, 0, new Intent(this, MainActivity.class), 0))
                 .setTicker(getString(R.string.upload_progress_notification_title_in_progress, contribution.getDisplayTitle()));
     }
 
@@ -293,7 +293,7 @@ public class UploadService extends HandlerService<Contribution> {
         Notification failureNotification = new NotificationCompat.Builder(this).setAutoCancel(true)
                 .setSmallIcon(R.drawable.ic_launcher)
                 .setAutoCancel(true)
-                .setContentIntent(PendingIntent.getActivity(this, 0, new Intent(this, ContributionsActivity.class), 0))
+                .setContentIntent(PendingIntent.getActivity(this, 0, new Intent(this, MainActivity.class), 0))
                 .setTicker(getString(R.string.upload_failed_notification_title, contribution.getDisplayTitle()))
                 .setContentTitle(getString(R.string.upload_failed_notification_title, contribution.getDisplayTitle()))
                 .setContentText(getString(R.string.upload_failed_notification_subtitle))
