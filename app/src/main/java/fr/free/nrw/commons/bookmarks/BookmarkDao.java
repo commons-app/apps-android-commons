@@ -6,6 +6,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.RemoteException;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,20 +27,10 @@ public class BookmarkDao {
         this.clientProvider = clientProvider;
     }
 
-//    Cursor getAllBookmarks() {
-//        ContentProviderClient db = clientProvider.get();
-//        try {
-//            return db.query(BASE_URI, ALL_FIELDS, "", null, null);
-//        } catch (RemoteException e) {
-//            return null;
-//        } finally {
-//            db.release();
-//        }
-//    }
 
     @NonNull
-    List<String> getAllBookmarks() {
-        List<String> items = new ArrayList<>();
+    public List<Bookmark> getAllBookmarks() {
+        List<Bookmark> items = new ArrayList<>();
         Cursor cursor = null;
         ContentProviderClient db = clientProvider.get();
         try {
@@ -50,7 +41,7 @@ public class BookmarkDao {
                     new String[]{},
                     null);
             while (cursor != null && cursor.moveToNext()) {
-                items.add(fromCursor(cursor).getMediaName());
+                items.add(fromCursor(cursor));
             }
         } catch (RemoteException e) {
             throw new RuntimeException(e);
@@ -63,7 +54,18 @@ public class BookmarkDao {
         return items;
     }
 
-    public void setBookmark(Bookmark bookmark) {
+    public boolean updateBookmark(Bookmark bookmark) {
+        boolean bookmarkExists = findBookmark(bookmark.getMediaName());
+        if(bookmarkExists) {
+            deleteBookmark(bookmark);
+        }
+        else {
+            addBookmark(bookmark);
+        }
+        return !bookmarkExists;
+    }
+
+    private void addBookmark(Bookmark bookmark) {
         ContentProviderClient db = clientProvider.get();
         try {
             if (bookmark.getContentUri() == null) {
@@ -78,7 +80,7 @@ public class BookmarkDao {
         }
     }
 
-    public void unsetBookmark(Bookmark bookmark) {
+    private void deleteBookmark(Bookmark bookmark) {
         ContentProviderClient db = clientProvider.get();
         try {
             if (bookmark.getContentUri() == null) {
@@ -92,6 +94,32 @@ public class BookmarkDao {
             db.release();
         }
     }
+
+    @Nullable
+    public boolean findBookmark(String bookmarkName) {
+            Cursor cursor = null;
+            ContentProviderClient db = clientProvider.get();
+            try {
+                cursor = db.query(
+                        BookmarkContentProvider.BASE_URI,
+                        Table.ALL_FIELDS,
+                        Table.COLUMN_MEDIA_NAME + "=?",
+                        new String[]{bookmarkName},
+                        null);
+                if (cursor != null && cursor.moveToFirst()) {
+                    return true;
+                }
+            } catch (RemoteException e) {
+                // This feels lazy, but to hell with checked exceptions. :)
+                throw new RuntimeException(e);
+            } finally {
+                if (cursor != null) {
+                    cursor.close();
+                }
+                db.release();
+            }
+            return false;
+        }
 
     @NonNull
     Bookmark fromCursor(Cursor cursor) {
