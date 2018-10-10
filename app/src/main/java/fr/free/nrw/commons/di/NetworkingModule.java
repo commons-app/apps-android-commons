@@ -7,6 +7,8 @@ import android.support.annotation.NonNull;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
+import java.io.File;
+
 import javax.inject.Named;
 import javax.inject.Singleton;
 
@@ -15,6 +17,7 @@ import dagger.Provides;
 import fr.free.nrw.commons.BuildConfig;
 import fr.free.nrw.commons.mwapi.ApacheHttpClientMediaWikiApi;
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
+import okhttp3.Cache;
 import okhttp3.HttpUrl;
 import okhttp3.OkHttpClient;
 
@@ -25,8 +28,11 @@ public class NetworkingModule {
 
     @Provides
     @Singleton
-    public OkHttpClient provideOkHttpClient() {
-        return new OkHttpClient.Builder().build();
+    public OkHttpClient provideOkHttpClient(Context context) {
+        File dir = new File(context.getCacheDir(), "okHttpCache");
+        return new OkHttpClient.Builder()
+                .cache(new Cache(dir, OK_HTTP_CACHE_SIZE))
+                .build();
     }
 
     @Provides
@@ -34,8 +40,9 @@ public class NetworkingModule {
     public MediaWikiApi provideMediaWikiApi(Context context,
                                             @Named("default_preferences") SharedPreferences defaultPreferences,
                                             @Named("category_prefs") SharedPreferences categoryPrefs,
-                                            Gson gson) {
-        return new ApacheHttpClientMediaWikiApi(context, BuildConfig.WIKIMEDIA_API_HOST, BuildConfig.WIKIDATA_API_HOST, defaultPreferences, categoryPrefs, gson);
+                                            Gson gson,
+                                            OkHttpClient okHttpClient) {
+        return new ApacheHttpClientMediaWikiApi(context, BuildConfig.WIKIMEDIA_API_HOST, BuildConfig.WIKIDATA_API_HOST, defaultPreferences, categoryPrefs, gson, okHttpClient);
     }
 
     @Provides

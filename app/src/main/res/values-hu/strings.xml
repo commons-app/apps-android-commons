@@ -242,6 +242,12 @@
   <string name="nominate_deletion">Törlésre jelölés</string>
   <string name="nominated_for_deletion">Ezt a képet törlésre jelölték.</string>
   <string name="view_browser">Megtekintés böngészőben</string>
+  <string name="skip_login">Kihagyás</string>
+  <string name="navigation_item_login">Bejelentkezés</string>
+  <string name="skip_login_title">Biztos ki akarod hagyni a bejelentkezést?</string>
+  <string name="login_alert_message">A funkció használatához kérlek jelentkezz be.</string>
+  <string name="copy_wikicode">Wikiszöveg vágólapra másolása</string>
+  <string name="wikicode_copied">A wikiszöveg a vágólapra lett másolva</string>
   <string name="nearby_location_has_not_changed">A hely nem változott.</string>
   <string name="nearby_location_not_available">A hely nem érhető el.</string>
   <string name="location_permission_rationale_nearby">Közeli helyek listájának megtekintéséhez engedély szükséges</string>
@@ -276,6 +282,8 @@
   <string name="search_commons">Keresés a Commonson</string>
   <string name="title_activity_search">Keresés</string>
   <string name="search_recent_header">Legutóbbi keresések:</string>
+  <string name="menu_set_wallpaper">Beállítás háttérképként</string>
+  <string name="quiz">Kvíz</string>
   <string name="continue_message">Folytatás</string>
   <string name="correct">Helyes válasz</string>
   <string name="wrong">Rossz válasz</string>

@@ -10,7 +10,7 @@ import org.robolectric.RuntimeEnvironment
 import org.robolectric.annotation.Config
 
 @RunWith(RobolectricTestRunner::class)
-@Config(constants = BuildConfig::class, sdk = intArrayOf(21), application = TestCommonsApplication::class)
+@Config(constants = BuildConfig::class, sdk = [21], application = TestCommonsApplication::class)
 class NearbyControllerTest {
 
     @Test

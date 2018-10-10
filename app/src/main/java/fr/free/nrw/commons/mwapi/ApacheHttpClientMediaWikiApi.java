@@ -24,7 +24,6 @@ import org.apache.http.impl.conn.tsccm.ThreadSafeClientConnManager;
 import org.apache.http.params.BasicHttpParams;
 import org.apache.http.params.CoreProtocolPNames;
 import org.apache.http.util.EntityUtils;
-import org.json.JSONObject;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
@@ -35,6 +34,7 @@ import java.net.URL;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
@@ -45,12 +45,14 @@ import java.util.concurrent.Callable;
 import fr.free.nrw.commons.BuildConfig;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.PageTitle;
+import fr.free.nrw.commons.achievements.FeedbackResponse;
 import fr.free.nrw.commons.auth.AccountUtil;
 import fr.free.nrw.commons.category.CategoryImageUtils;
 import fr.free.nrw.commons.category.QueryContinue;
 import fr.free.nrw.commons.notification.Notification;
 import fr.free.nrw.commons.notification.NotificationUtils;
 import fr.free.nrw.commons.utils.ContributionUtils;
+import fr.free.nrw.commons.utils.DateUtils;
 import in.yuvi.http.fluent.Http;
 import io.reactivex.Observable;
 import io.reactivex.Single;
@@ -76,14 +78,17 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
     private SharedPreferences defaultPreferences;
     private SharedPreferences categoryPreferences;
     private Gson gson;
+    private final OkHttpClient okHttpClient;
 
     public ApacheHttpClientMediaWikiApi(Context context,
                                         String apiURL,
                                         String wikidatApiURL,
                                         SharedPreferences defaultPreferences,
                                         SharedPreferences categoryPreferences,
-                                        Gson gson) {
+                                        Gson gson,
+                                        OkHttpClient okHttpClient) {
         this.context = context;
+        this.okHttpClient = okHttpClient;
         BasicHttpParams params = new BasicHttpParams();
         SchemeRegistry schemeRegistry = new SchemeRegistry();
         schemeRegistry.register(new Scheme("http", PlainSocketFactory.getSocketFactory(), 80));
@@ -233,17 +238,27 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
 
     @Override
     public String getCentralAuthToken() throws IOException {
-        String centralAuthToken = api.action("centralauthtoken")
-                .get()
-                .getString("/api/centralauthtoken/@centralauthtoken");
+        CustomApiResult result = api.action("centralauthtoken").get();
+        String centralAuthToken = result.getString("/api/centralauthtoken/@centralauthtoken");
+
         Timber.d("MediaWiki Central auth token is %s", centralAuthToken);
 
-        if(centralAuthToken == null || centralAuthToken.isEmpty()) {
+        if ((centralAuthToken == null || centralAuthToken.isEmpty())
+                && "notLoggedIn".equals(result.getString("api/error/@code"))) {
+            Timber.d("Central auth token isn't valid. Trying to fetch a fresh token");
             api.removeAllCookies();
-            String login = login(AccountUtil.getUserName(context), AccountUtil.getPassword(context));
-            if(login.equals("PASS")) {
+            String loginResultCode = login(AccountUtil.getUserName(context), AccountUtil.getPassword(context));
+            if(loginResultCode.equals("PASS")) {
                 return getCentralAuthToken();
+            } else if(loginResultCode.equals("2FA")) {
+                Timber.e("Cannot refresh session for 2FA enabled user. Login required");
+            } else {
+                Timber.e("Error occurred in refreshing session. Error code is %s", loginResultCode);
             }
+        } else {
+            Timber.e("Error occurred while fetching auth token. Error code is %s and message is %s",
+                    result.getString("api/error/@code"),
+                    result.getString("api/error/@info"));
         }
         return centralAuthToken;
     }
@@ -467,13 +482,12 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
             return false;
         }
 
-        Node node = result.getNode("api").getDocument();
-        Element element = (Element) node;
-
-        if (element != null && element.getAttribute("status").equals("success")) {
+        if ("success".equals(result.getString("api/tag/result/@status"))) {
             return true;
         } else {
-            Timber.e(result.getString("api/error/@code") + " " + result.getString("api/error/@info"));
+            Timber.e("Error occurred in creating claim. Error code is: %s and message is %s",
+                    result.getString("api/error/@code"),
+                    result.getString("api/error/@info"));
         }
         return false;
     }
@@ -954,12 +968,11 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
     /**
      * This takes userName as input, which is then used to fetch the feedback/achievements
      * statistics using OkHttp and JavaRx. This function return JSONObject
-     * @param userName
+     * @param userName MediaWiki user name
      * @return
      */
-    @NonNull
     @Override
-    public Single<JSONObject> getAchievements(String userName) {
+    public Single<FeedbackResponse> getAchievements(String userName) {
         final String fetchAchievementUrlTemplate =
                 wikiMediaToolforgeUrl + "urbanecmbot/commonsmisc/feedback.py";
         return Single.fromCallable(() -> {
@@ -973,43 +986,54 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
             Request request = new Request.Builder()
                     .url(urlBuilder.toString())
                     .build();
-            OkHttpClient client = new OkHttpClient();
-            Response response = client.newCall(request).execute();
-            String jsonData = response.body().string();
-            JSONObject jsonObject = new JSONObject(jsonData);
-            return jsonObject;
+            Response response = okHttpClient.newCall(request).execute();
+            if (response != null && response.body() != null && response.isSuccessful()) {
+                String json = response.body().string();
+                if (json == null) {
+                    return null;
+                }
+                return gson.fromJson(json, FeedbackResponse.class);
+            }
+            return null;
         });
 
     }
 
     /**
-     * This takes userName as input, which is then used to fetch the no of images deleted
-     * using OkHttp and JavaRx. This function return JSONObject
-     * @param userName
-     * @return
+     * The method returns the picture of the day
+     *
+     * @return Media object corresponding to the picture of the day
      */
-    @NonNull
     @Override
-    public Single<JSONObject> getRevertRespObjectSingle(String userName){
-        final String fetchRevertCountUrlTemplate =
-                wikiMediaToolforgeUrl + "urbanecmbot/commonsmisc/feedback.py";
+    @Nullable
+    public Single<Media> getPictureOfTheDay() {
         return Single.fromCallable(() -> {
-            String url = String.format(
-                    Locale.ENGLISH,
-                    fetchRevertCountUrlTemplate,
-                    new PageTitle(userName).getText());
-            HttpUrl.Builder urlBuilder = HttpUrl.parse(url).newBuilder();
-            urlBuilder.addQueryParameter("user", userName);
-            urlBuilder.addQueryParameter("fetch","deletedUploads");
-            Log.i("url", urlBuilder.toString());
-            Request request = new Request.Builder()
-                    .url(urlBuilder.toString())
-                    .build();
-            OkHttpClient client = new OkHttpClient();
-            Response response = client.newCall(request).execute();
-            String jsonData = response.body().string();
-            JSONObject jsonRevertObject = new JSONObject(jsonData);
-            return jsonRevertObject;
+            CustomApiResult apiResult = null;
+            try {
+                String template = "Template:Potd/" + DateUtils.getCurrentDate();
+                CustomMwApi.RequestBuilder requestBuilder = api.action("query")
+                        .param("generator", "images")
+                        .param("format", "xml")
+                        .param("titles", template)
+                        .param("prop", "imageinfo")
+                        .param("iiprop", "url|extmetadata");
+
+                apiResult = requestBuilder.get();
+            } catch (IOException e) {
+                Timber.e("Failed to obtain searchCategories", e);
+            }
+
+            if (apiResult == null) {
+                return null;
+            }
+
+            CustomApiResult imageNode = apiResult.getNode("/api/query/pages/page");
+            if (imageNode == null
+                    || imageNode.getDocument() == null) {
+                return null;
+            }
+
+            return CategoryImageUtils.getMediaFromPage(imageNode.getDocument());
         });
     }
 
@@ -1020,6 +1044,17 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
             return isoFormat.parse(mwDate);
         } catch (ParseException e) {
             throw new RuntimeException(e);
+        }
+    }
+
+    /**
+     * Calls media wiki's logout API
+     */
+    public void logout() {
+        try {
+            api.logout();
+        } catch (IOException e) {
+            Timber.e(e, "Error occurred while logging out");
         }
     }
 

@@ -7,10 +7,13 @@
 * Mykola Swarnyk
 * Piramidion
 * SimondR
+* Viiictorrr
 * Vlad5250
 * Ата
 -->
 <resources>
+  <string name="title_activity_explore">Дослідити</string>
+  <string name="navigation_item_explore">Дослідити</string>
   <string name="preference_category_appearance">Зовнішній вигляд</string>
   <string name="preference_category_general">Загальні</string>
   <string name="preference_category_feedback">Зворотний зв\'язок</string>
@@ -67,6 +70,7 @@
   <string name="login_failed_generic">Не вдалося увійти</string>
   <string name="share_upload_button">Завантажити</string>
   <string name="multiple_share_base_title">Назвіть цю серію</string>
+  <string name="add_set_name_toast">Будь ласка, вкажіть назву цього набору</string>
   <string name="provider_modifications">Модифікації</string>
   <string name="menu_upload_single">Завантажити</string>
   <string name="categories_search_text_hint">Пошук категорій</string>
@@ -211,6 +215,7 @@
   <string name="mediaimage_failed">Помилка медіазображення</string>
   <string name="no_image_found">Не знайдено зображення</string>
   <string name="no_subcategory_found">Підкатегорій не знайдено</string>
+  <string name="no_parentcategory_found">Не знайдено батьківських категорій</string>
   <string name="upload_image">Завантажити зображення</string>
   <string name="welcome_image_mount_zao">Гора Зао</string>
   <string name="welcome_image_llamas">Лами</string>
@@ -256,6 +261,13 @@
   <string name="nominated_for_deletion">Цей файл номіновано на вилучення.</string>
   <string name="nominated_see_more"/>
   <string name="view_browser">Переглянути в браузері</string>
+  <string name="skip_login">Пропустити</string>
+  <string name="navigation_item_login">Увійти</string>
+  <string name="skip_login_title">Ви дійсно бажаєте пропустити авторизацію?</string>
+  <string name="skip_login_message">Ви не зможете завантажити зображення.</string>
+  <string name="login_alert_message">Увійдіть, щоб використати цю функцію</string>
+  <string name="copy_wikicode">Скопіювати вікітекст у буфер обміну</string>
+  <string name="wikicode_copied">Вікітекст скопійовано у буфер обміну</string>
   <string name="nearby_location_has_not_changed">Розташування не змінено</string>
   <string name="nearby_location_not_available">Місцезнаходження недоступне</string>
   <string name="location_permission_rationale_nearby">Потрібний дозвіл для показу списку місць поблизу</string>
@@ -293,14 +305,60 @@
   <string name="block_notification">Редагування у до Вікісховищі вам було заблоковано</string>
   <string name="appwidget_img">Зображення дня</string>
   <string name="app_widget_heading">Зображення дня</string>
+  <string name="menu_search_button">Пошук</string>
+  <string name="search_commons">Шукати у Вікісховищі</string>
+  <string name="images_not_found">Не знайдено зображень, що відповідають %1$s</string>
+  <string name="title_activity_search">Пошук</string>
   <string name="search_recent_header">Недавні пошуки:</string>
+  <string name="provider_searches">Недавні запити пошуку</string>
+  <string name="error_loading_categories">Сталася помилка під час завантаження категорій.</string>
+  <string name="error_loading_subcategories">Сталася помилка під час завантаження підкатегорій.</string>
   <string name="successful_wikidata_edit">Зображення успішно додано до сторінки %1$s у Вікіданих!</string>
   <string name="wikidata_edit_failure">Не вдалось оновити відповідну сторінку Вікіданих!</string>
-  <string name="menu_set_wallpaper" fuzzy="true">Поставити шпалерами екрану</string>
+  <string name="menu_set_wallpaper">Поставити шпалерами екрану</string>
   <string name="wallpaper_set_successfully">Шпалери екрану виставлено успішно!</string>
+  <string name="quiz">Тест</string>
+  <string name="quiz_question_string">Чи можна завантажувати це зображення?</string>
+  <string name="question">Запитання</string>
+  <string name="result">Результат</string>
+  <string name="quiz_back_button">Якщо ви продовжите завантажувати зображення, які підлягають вилученню, ваш обліковий запис можуть забанити. Ви впевнені, що хочете закінчити тест?</string>
+  <string name="quiz_alert_message">Понад %1$s завантажених вами зображень було вилучено. Якщо ви продовжите завантажувати зображення, які підлягають вилучення, ваш обліковий запис можуть забанити. \n\nХочете переглянути посібник ще раз і тоді пройти тест, що допоможе дізнатися, які зображення можна, а які не можна завантажувати?</string>
+  <string name="selfie_answer">Селфі не мають значної енциклопедичної цінності. Будь ласка, не завантажуйте фото самих себе, якщо про вас нема статті у Вікіпедії.</string>
+  <string name="taj_mahal_answer">Зображення пам\'яток і пейзажів можна завантажувати у більшості країн. Зважте, будь ласка, що сучасні мистецькі інсталяції на вулиці часто захищені авторськими правами і їх НЕ можна завантажувати.</string>
+  <string name="screenshot_answer">Знімки екрану веб-сайтів вважаються похідними роботами і є таким же об\'єктом авторських прав, як і сам веб-сайт. Їх можна використовувати з дозволу авторів сайту. Без такого дозволу, будь-який твір, який ви створите на основі їхньої роботи, юридично вважається неліцензованою копією, яка належить оригінальному автору.</string>
+  <string name="blurry_image_answer">Одна з цілей Вікісховища — зібрати якісні зображення. Тому розмиті зображення завантажувати не треба. Завжди старайтеся зробити гарні знімки при хорошому освітленні.</string>
+  <string name="construction_event_answer">Зображення технологій чи культури дуже бажані для Вікісховища.</string>
+  <string name="warning_for_image_reverts">УВАГА: Понад %1$s завантажених вами зображень було вилучено. Якщо ви продовжите завантажувати зображення, які підлягають вилучення, ваш обліковий запис можуть забанити.</string>
+  <string name="congratulatory_message_quiz">Ви дали %1$s правильних відповідей. Вітаємо!</string>
+  <string name="warning_for_no_answer">Оберіть один з двох варіантів відповіді на запитання</string>
   <string name="user_not_logged_in">Сесія авторизації спливла. Будь ласка, авторизуйтесь знову.</string>
+  <string name="quiz_result_share_message">Поділіться своїм результатом із друзями!</string>
+  <string name="continue_message">Продовжити</string>
+  <string name="correct">Правильна відповідь</string>
+  <string name="wrong">Хибна відповідь</string>
+  <string name="quiz_screenshot_question">Чи можна завантажувати цей скріншот?</string>
   <string name="share_app_title">Поділитися програмою</string>
   <string name="share_coordinates_not_present">Під час вибору зображення не були вказані координати</string>
   <string name="error_fetching_nearby_places">Помилка отримання місць поблизу.</string>
   <string name="add_description">+ Додати опис</string>
+  <string name="delete_recent_searches_dialog">Ви впевнені, що хочете стерти історію пошукових запитів?</string>
+  <string name="search_history_deleted">Історія пошуку очищена</string>
+  <string name="Achievements">Досягнення</string>
+  <string name="statistics">СТАТИСТИКА</string>
+  <string name="statistics_thanks">Отримані подяки</string>
+  <string name="statistics_featured">Вибрані зображення</string>
+  <string name="level">РІВЕНЬ</string>
+  <string name="images_uploaded">Завантажені зображення</string>
+  <string name="image_reverts">Не відхилені зображення</string>
+  <string name="images_used_by_wiki">Використані зображення</string>
+  <string name="achievements_share_message">Поділіться своїми досягненнями з друзями!</string>
+  <string name="achievements_info_message">Ваш рівень зростає, коли ви відповідаєте вимогам. Елементи в розділі «статистика» не впливають на ваш рівень.</string>
+  <string name="achievements_revert_limit_message">необхідний мінімум:</string>
+  <string name="images_uploaded_explanation">Кількість зображень, які ви завантажили у Вікісховище будь-яким методом</string>
+  <string name="images_reverted_explanation">Відсоток завантажених вами у Вікісховище зображень, що не були вилучені</string>
+  <string name="images_used_explanation">Кількість завантажених вами у Вікісховище зображень, що використані у статтях Вікімедіа</string>
+  <string name="error_occurred">Відбулася помилка!</string>
+  <string name="notifications_channel_name_all">Сповіщення Вікісховища</string>
+  <string name="storage_permission">Дозвіл сховища</string>
+  <string name="write_storage_permission_rationale_for_image_share">Нам потрібен ваш дозвіл на доступ до зовнішнього сховища на вашому пристрої, щоб завантажувати зображення.</string>
 </resources>

@@ -154,6 +154,7 @@
   <string name="welcome_copyright_subtext">Evite los materiales con drechos d\'autor qu\'atopó per internet, lo mesmo qu\'imaxes de cartelos, portaes de llibros, etc.</string>
   <string name="welcome_final_text">¿Cree que yá sabe cómo va?</string>
   <string name="welcome_final_button_text">¡Si!</string>
+  <string name="welcome_help_button_text">&lt;u&gt;Mas información&lt;/u&gt;</string>
   <string name="detail_panel_cats_label">Categoríes</string>
   <string name="detail_panel_cats_loading">Cargando…</string>
   <string name="detail_panel_cats_none">Nenguna seleicionada</string>
@@ -241,14 +242,15 @@
   <string name="null_url">¡Error! Nun s\'alcontró la URL</string>
   <string name="nominate_deletion">Marcada pa desaniciar</string>
   <string name="nominated_for_deletion">Esta imaxe marcóse pa desaniciar.</string>
+  <string name="nominated_see_more">&lt;u&gt;Ver la páxina web pa más detalles&lt;/u&gt;</string>
   <string name="view_browser">Ver nel restolador</string>
   <string name="skip_login">Saltar</string>
   <string name="navigation_item_login">Aniciar sesión</string>
   <string name="skip_login_title">¿Realmente quiés saltar l\'aniciu de sesión?</string>
   <string name="skip_login_message">Nun vas poder xubir imaxes.</string>
   <string name="login_alert_message">Anicia sesión pa usar esta función</string>
-  <string name="copy_wikicode">Copiar el códigu wiki al cartafueyu</string>
-  <string name="wikicode_copied">Copióse\'l códigu wiki al cartafueyu</string>
+  <string name="copy_wikicode">Copiar el testu wiki al cartafueyu</string>
+  <string name="wikicode_copied">Copióse\'l testu wiki al cartafueyu</string>
   <string name="nearby_location_has_not_changed">L\'allugamientu nun camudó.</string>
   <string name="nearby_location_not_available">L\'allugamientu nun ta disponible.</string>
   <string name="location_permission_rationale_nearby">Ríquese permisu p\'amosar una llista de llugares cercanos</string>
@@ -338,5 +340,8 @@
   <string name="images_uploaded_explanation">El númberu d\'imaxes que xubisti a Commons, usando cualquier software pa xubiles</string>
   <string name="images_reverted_explanation">El porcentaxe d\'imáxenes que xubisti a Commons que nun se desaniciaron</string>
   <string name="images_used_explanation">El númberu d\'imáxenes que xubisti a Commons que s\'utilizaron n\'artículos de Wikimedia</string>
+  <string name="error_occurred">¡Asocedió un error!</string>
   <string name="notifications_channel_name_all">Avisu de Commons</string>
+  <string name="storage_permission">Permisu d\'almacenamientu</string>
+  <string name="write_storage_permission_rationale_for_image_share">Precisamos el to permisu p\'aportar al almacenamientu esternu del to preséu pa poder xubir imaxes.</string>
 </resources>

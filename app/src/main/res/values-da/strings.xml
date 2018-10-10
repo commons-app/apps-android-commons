@@ -114,7 +114,7 @@
   <string name="preference_license">Standardlicens</string>
   <string name="use_previous">Brug forrige titel/beskrivelse</string>
   <string name="allow_gps">Hent automatisk nuværende placering</string>
-  <string name="allow_gps_summary" fuzzy="true">Hent nuværende placering for at tilbyde kategoriforslag hvis billedet ikke er geografisk mærket</string>
+  <string name="allow_gps_summary">Henter den nuværende placering for at tilbyde kategoriforslag hvis billedet ikke er geografisk mærket og geomærker billedet. Advarsel: Dette vil afsløre din nuværende placering.</string>
   <string name="preference_theme">Nat-tilstand</string>
   <string name="preference_theme_summary">Brug mørkt tema</string>
   <string name="license_name_cc_by_sa_four"> Attribution-ShareAlike 4.0</string>
@@ -160,14 +160,15 @@
   <string name="welcome_copyright_subtext">Undgå ophavsretligt beskyttede materialer du har fundet på internettet samt billeder af plakater, bogomslag osv.</string>
   <string name="welcome_final_text">Forstået?</string>
   <string name="welcome_final_button_text">Ja!</string>
+  <string name="welcome_help_button_text">&lt;u&gt;Mere information&lt;/u&gt;</string>
   <string name="detail_panel_cats_label">Kategorier</string>
   <string name="detail_panel_cats_loading">Indlæser…</string>
   <string name="detail_panel_cats_none">Ingen valgt</string>
   <string name="detail_description_empty">Ingen beskrivelse</string>
   <string name="detail_license_empty">Ukendt licens</string>
   <string name="menu_refresh">Opdater</string>
-  <string name="read_storage_permission_rationale" fuzzy="true">Krævet tilladelse: Læs eksternt lager. Programmet kan ikke fungere uden denne tilladelse.</string>
-  <string name="write_storage_permission_rationale" fuzzy="true">Krævet tilladelse: Skriv til eksternt lager. Program kan ikke fungere uden denne funktion.</string>
+  <string name="read_storage_permission_rationale">Krævet tilladelse: Læs eksternt lager. Programmet kan ikke tilgå dit galleri uden denne tilladelse.</string>
+  <string name="write_storage_permission_rationale">Krævet tilladelse: Skriv til eksternt lager. Program kan ikke tilgå dit kamera uden denne funktion.</string>
   <string name="location_permission_rationale">Valgfri tilladelse: Hent nuværende position for kategoriforslag</string>
   <string name="ok">O.k.</string>
   <string name="title_activity_nearby">Steder i nærheden</string>
@@ -245,6 +246,8 @@
   <string name="no_web_browser">Ingen internetbrowser fundet til at åbne adresse</string>
   <string name="null_url">Fejl! Adressen blev ikke fundet</string>
   <string name="nominate_deletion">Nomineret til sletning</string>
+  <string name="nominated_for_deletion">Dette billede er blevet nomineret til sletning.</string>
+  <string name="nominated_see_more">&lt;u&gt;Se webside for detaljer&lt;/u&gt;</string>
   <string name="view_browser">Se i browser</string>
   <string name="skip_login">Spring over</string>
   <string name="navigation_item_login">Log på</string>
@@ -267,28 +270,42 @@
   <string name="welcome_skip_button">Udelad øvelse</string>
   <string name="no_internet">Internet er utilgængeligt</string>
   <string name="internet_established">Internet tilgængeligt</string>
+  <string name="no_notifications">Ingen notifikationer fundet</string>
   <string name="about_translate">&lt;u&gt;Oversæt&lt;/u&gt;</string>
   <string name="about_translate_title">Sprog</string>
+  <string name="about_translate_message">Vælg det sprog som du ønsker at indsende oversættelser for</string>
+  <string name="about_translate_proceed">Fortsæt</string>
   <string name="about_translate_cancel">Annullér</string>
   <string name="retry">Prøv igen</string>
   <string name="showcase_view_got_it_button">Forstået!</string>
   <string name="no_images_found">Ingen billeder fundet!</string>
+  <string name="error_loading_images">Der opstod en fejl under indlæsningen af billeder.</string>
   <string name="image_uploaded_by">Lagt op af: %1$s</string>
+  <string name="block_notification">Du er blokeret fra at redigere Commons</string>
   <string name="appwidget_img">Dagens billede</string>
   <string name="app_widget_heading">Dagens billede</string>
   <string name="menu_search_button">Søg</string>
   <string name="search_commons">Søgning på Commons</string>
+  <string name="images_not_found">Ingen billeder der svarer til %1$s fundet</string>
   <string name="title_activity_search">Søg</string>
   <string name="search_recent_header">Seneste søgninger:</string>
+  <string name="quiz_question_string">Er det i orden at lægge dette billede op?</string>
   <string name="question">Spørgsmål</string>
   <string name="result">Resultat</string>
   <string name="continue_message">Fortsæt</string>
   <string name="correct">Rigtigt svar</string>
   <string name="wrong">Forkert svar</string>
+  <string name="quiz_screenshot_question">Er det i orden at lægge dette skærmbillede op?</string>
   <string name="share_app_title">Del appen</string>
   <string name="add_description">+ Tilføj en beskrivelse</string>
   <string name="search_history_deleted">Søgehistorik slettet</string>
   <string name="Achievements">Præstationer</string>
+  <string name="statistics">STATISTIKKER</string>
   <string name="statistics_thanks">Tak modtaget</string>
   <string name="statistics_featured">Udvalgte billeder</string>
+  <string name="level">NIVEAU</string>
+  <string name="images_uploaded">Oplagte billeder</string>
+  <string name="images_used_by_wiki">Billeder brugt</string>
+  <string name="error_occurred">Der opstod en fejl!</string>
+  <string name="storage_permission">Lagringstilladelse</string>
 </resources>

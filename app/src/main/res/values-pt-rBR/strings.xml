@@ -261,8 +261,8 @@
   <string name="skip_login_title">Você realmente quer pular a entrada?</string>
   <string name="skip_login_message">Você não poderá enviar fotos.</string>
   <string name="login_alert_message">Entre para usar esta funcionalidade</string>
-  <string name="copy_wikicode">Copie o Wikicode para a área de transferência</string>
-  <string name="wikicode_copied">Wikicode copiado para a área de transferência</string>
+  <string name="copy_wikicode">Copie o wikitexto para a área de transferência</string>
+  <string name="wikicode_copied">O wikitexto foi copiado para a área de transferência</string>
   <string name="nearby_location_has_not_changed">O local não mudou.</string>
   <string name="nearby_location_not_available">Localização não disponível.</string>
   <string name="location_permission_rationale_nearby">Permissão necessária para exibir uma lista de locais próximos</string>
@@ -352,5 +352,8 @@
   <string name="images_uploaded_explanation">O número de imagens que carregou na wiki Commons, através de qualquer programa de carregamento</string>
   <string name="images_reverted_explanation">A percentagem das imagens que carregou na wiki Commons que não foram eliminadas</string>
   <string name="images_used_explanation">O número de imagens que carregou na wiki Commons que foram usadas em artigos na Wikimedia</string>
+  <string name="error_occurred">Erro ocorrido!</string>
   <string name="notifications_channel_name_all">Notificação da wiki Commons</string>
+  <string name="storage_permission">Permissão de Armazenamento</string>
+  <string name="write_storage_permission_rationale_for_image_share">Precisamos da sua permissão para acessar o armazenamento externo do seu dispositivo para fazer upload de imagens.</string>
 </resources>

@@ -12,19 +12,16 @@ env:
     - ADB_INSTALL_TIMEOUT=12 # in minutes
 
 jdk:
-  # - openjdk8 # not yet available
   - oraclejdk8
 
 android:
   components:
     - tools
     - platform-tools
-    - build-tools-27.0.0
+    - build-tools-27.0.3
     - extra-google-m2repository
     - extra-android-m2repository
-    - ${ANDROID_TARGET}
-    - android-25
-    - android-26
+    - android-22
     - android-27
     - sys-img-${ANDROID_ABI}-${ANDROID_TARGET}
   licenses:

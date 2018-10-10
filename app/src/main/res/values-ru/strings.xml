@@ -267,6 +267,8 @@
   <string name="skip_login_title">Вы действительно хотите пропустить авторизацию?</string>
   <string name="skip_login_message">Вы не сможете загрузить изображения.</string>
   <string name="login_alert_message">Войдите, чтобы использовать эту функцию</string>
+  <string name="copy_wikicode" fuzzy="true">Копирование викикода в буфер обмена</string>
+  <string name="wikicode_copied" fuzzy="true">Викикод скопирован в буфер обмена</string>
   <string name="nearby_location_has_not_changed">Местоположение не изменено.</string>
   <string name="nearby_location_not_available">Местоположение недоступно.</string>
   <string name="location_permission_rationale_nearby">Необходимо разрешение для отображения списка мест поблизости</string>
@@ -356,5 +358,8 @@
   <string name="images_uploaded_explanation">Число изображений, загруженных на Викисклад любыми приложениями</string>
   <string name="images_reverted_explanation">Число изображений, загруженных на Викисклад и не удалённых</string>
   <string name="images_used_explanation">Число изображений, загруженных на Викисклад, которые используются в статьях Викимедиа</string>
+  <string name="error_occurred">Произошла ошибка!</string>
   <string name="notifications_channel_name_all">Уведомления Викисклада</string>
+  <string name="storage_permission">Разрешение для хранилища</string>
+  <string name="write_storage_permission_rationale_for_image_share">Нам требуется разрешение доступа к внешнему хранилищу вашего устройства для того, чтобы загружать изображения.</string>
 </resources>

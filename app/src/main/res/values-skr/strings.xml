@@ -4,6 +4,7 @@
 -->
 <resources>
   <string name="title_activity_explore">پھرولو</string>
+  <string name="navigation_item_explore">پھرولو</string>
   <string name="preference_category_appearance">شکل و صورت</string>
   <string name="preference_category_general">عمومی</string>
   <string name="preference_category_feedback">تہاڈی رائے</string>
@@ -56,8 +57,10 @@
   <string name="categories_activity_title">ونکیاں</string>
   <string name="title_activity_settings">ترتیباں</string>
   <string name="title_activity_signup">سائن اپ</string>
+  <string name="title_activity_featured_images">خاص تصویراں</string>
   <string name="title_activity_category_details">ون٘کی</string>
   <string name="menu_about">تعارف</string>
+  <string name="about_privacy_policy">&lt;u&gt;رازداری پالیسی&lt;/u&gt;</string>
   <string name="title_activity_about">تعارف</string>
   <string name="provider_categories">حالیہ ورتیاں ڳیاں ونکیاں</string>
   <string name="menu_retry_upload">ولدا کوشش کرو</string>
@@ -92,10 +95,11 @@
   <string name="media_detail_media_title">میڈیا دا عنوان</string>
   <string name="media_detail_description">تفصیل</string>
   <string name="media_detail_author">مصنف</string>
-  <string name="media_detail_uploaded_date">اپ لوڈ تھیوݨ دی تاریخ</string>
+  <string name="media_detail_uploaded_date">اپ لوڈ تھیوݨ دی تریخ</string>
   <string name="media_detail_license">لائیسنس</string>
   <string name="media_detail_coordinates">کوآرڈینیٹ</string>
   <string name="media_detail_coordinates_empty">کجھ نی ݙسیا</string>
+  <string name="become_a_tester_title">بیٹا ٹیسٹر بݨو</string>
   <string name="number_of_uploads">میݙے حالیہ اپ لوڈ دی حد</string>
   <string name="maximum_limit">زیادہ حد</string>
   <string name="set_limit">حالیہ اپ لوڈ دی حد مقرر کرو</string>
@@ -116,12 +120,15 @@
   <string name="navigation_item_feedback">تہاڈی رائے</string>
   <string name="navigation_item_logout">لاگ آؤٹ</string>
   <string name="navigation_item_info">ٹیٹوریل</string>
+  <string name="navigation_item_notification">اطلاع نامے</string>
   <string name="navigation_item_featured_images">خاص</string>
   <string name="nearby_info_menu_wikidata_article">وکی ڈیٹا آئٹم</string>
   <string name="nearby_info_menu_wikipedia_article">وکی پیڈیا دا مضمون</string>
   <string name="give_permission">اجازت ݙیوو</string>
   <string name="login_to_your_account">آپݨے کھاتے وچ لاگ ان تھیوو</string>
-  <string name="send_log_file">لاگ فائل بھیجو</string>
+  <string name="send_log_file">لاگ فائل بھیڄو</string>
+  <string name="skip_login">چھوڑو</string>
+  <string name="navigation_item_login">لاگ ان تھیوو</string>
   <string name="nearby_wikidata">وکی ڈیٹا</string>
   <string name="nearby_wikipedia">وکی پیڈیا</string>
   <string name="nearby_commons">عام</string>
@@ -132,8 +139,15 @@
   <string name="about_translate_cancel">منسوخ</string>
   <string name="retry">ولدا کوشش کرو</string>
   <string name="showcase_view_got_it_button">گھن گھندا</string>
+  <string name="appwidget_img">اڄ دی تصویر</string>
+  <string name="app_widget_heading">اڄ دی تصویر</string>
   <string name="menu_search_button">ڳولو</string>
+  <string name="title_activity_search">ڳولو</string>
+  <string name="search_recent_header">حالیہ ڳول:</string>
   <string name="question">سوال</string>
   <string name="result">نتیجہ</string>
+  <string name="continue_message">جاری رکھو</string>
   <string name="statistics">شماریات</string>
+  <string name="level">سطح</string>
+  <string name="error_occurred">خرابی تھی ڳئی ہے!</string>
 </resources>

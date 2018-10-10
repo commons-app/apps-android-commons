@@ -1,5 +1,6 @@
 package fr.free.nrw.commons;
 
+import android.annotation.SuppressLint;
 import android.app.Application;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
@@ -7,6 +8,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Build;
+import android.support.annotation.NonNull;
 import android.support.annotation.RequiresApi;
 
 import com.facebook.drawee.backends.pipeline.Fresco;
@@ -14,6 +16,8 @@ import com.facebook.imagepipeline.core.ImagePipelineConfig;
 import com.facebook.stetho.Stetho;
 import com.squareup.leakcanary.LeakCanary;
 import com.squareup.leakcanary.RefWatcher;
+import com.tspoon.traceur.Traceur;
+import com.tspoon.traceur.TraceurConfig;
 
 import org.acra.ACRA;
 import org.acra.ReportingInteractionMode;
@@ -54,6 +58,11 @@ public class CommonsApplication extends Application {
     @Inject @Named("application_preferences") SharedPreferences applicationPrefs;
     @Inject @Named("prefs") SharedPreferences otherPrefs;
 
+    /**
+     * Constants begin
+     */
+    public static final int OPEN_APPLICATION_DETAIL_SETTINGS = 1001;
+
     public static final String DEFAULT_EDIT_SUMMARY = "Uploaded using [[COM:MOA|Commons Mobile App]]";
 
     public static final String FEEDBACK_EMAIL = "commons-app-android@googlegroups.com";
@@ -66,6 +75,10 @@ public class CommonsApplication extends Application {
 
     public static final String NOTIFICATION_CHANNEL_ID_ALL = "CommonsNotificationAll";
 
+    /**
+     * Constants End
+     */
+
     private RefWatcher refWatcher;
 
 
@@ -75,22 +88,34 @@ public class CommonsApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+        if (BuildConfig.DEBUG) {
+            //FIXME: Traceur should be disabled for release builds until error fixed
+            //See https://github.com/commons-app/apps-android-commons/issues/1877
+            Traceur.enableLogging();
+        }
+
         ApplicationlessInjection
                 .getInstance(this)
                 .getCommonsApplicationComponent()
                 .inject(this);
+
+        Timber.plant(new Timber.DebugTree());
+
 //        Set DownsampleEnabled to True to downsample the image in case it's heavy
         ImagePipelineConfig config = ImagePipelineConfig.newBuilder(this)
                 .setDownsampleEnabled(true)
                 .build();
-        Fresco.initialize(this,config);
+        try {
+            Fresco.initialize(this, config);
+        } catch (Exception e) {
+            Timber.e(e);
+            // TODO: Remove when we're able to initialize Fresco in test builds.
+        }
         if (setupLeakCanary() == RefWatcher.DISABLED) {
             return;
         }
         // Empty temp directory in case some temp files are created and never removed.
         ContributionUtils.emptyTemporaryDirectory();
-
-        Timber.plant(new Timber.DebugTree());
 
         if (!BuildConfig.DEBUG) {
             ACRA.init(this);
@@ -98,22 +123,22 @@ public class CommonsApplication extends Application {
             Stetho.initializeWithDefaults(this);
         }
 
-
-        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.O) {
-            createNotificationChannel();
-        }
+        createNotificationChannel(this);
 
         // Fire progress callbacks for every 3% of uploaded content
         System.setProperty("in.yuvi.http.fluent.PROGRESS_TRIGGER_THRESHOLD", "3.0");
     }
 
-    @RequiresApi(26)
-    private void createNotificationChannel() {
-        NotificationChannel channel = new NotificationChannel(
-                NOTIFICATION_CHANNEL_ID_ALL,
-                getString(R.string.notifications_channel_name_all), NotificationManager.IMPORTANCE_NONE);
-        NotificationManager manager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-        manager.createNotificationChannel(channel);
+    public static void createNotificationChannel(@NonNull Context context) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            NotificationManager manager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
+            NotificationChannel channel = manager.getNotificationChannel(NOTIFICATION_CHANNEL_ID_ALL);
+            if (channel == null) {
+                channel = new NotificationChannel(NOTIFICATION_CHANNEL_ID_ALL,
+                        context.getString(R.string.notifications_channel_name_all), NotificationManager.IMPORTANCE_DEFAULT);
+                manager.createNotificationChannel(channel);
+            }
+        }
     }
 
     /**
@@ -143,6 +168,7 @@ public class CommonsApplication extends Application {
      * @param context Application context
      * @param logoutListener Implementation of interface LogoutListener
      */
+    @SuppressLint("CheckResult")
     public void clearApplicationData(Context context, LogoutListener logoutListener) {
         File cacheDirectory = context.getCacheDir();
         File applicationDirectory = new File(cacheDirectory.getParent());
@@ -155,7 +181,7 @@ public class CommonsApplication extends Application {
             }
         }
 
-        sessionManager.clearAllAccounts()
+        sessionManager.logout()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(() -> {
@@ -166,7 +192,6 @@ public class CommonsApplication extends Application {
                     applicationPrefs.edit().putBoolean("firstrun", false).apply();
                     otherPrefs.edit().clear().apply();
                     updateAllDatabases();
-
                     logoutListener.onLogoutComplete();
                 });
     }

@@ -21,6 +21,7 @@ import fr.free.nrw.commons.nearby.NearbyPlaces;
 import fr.free.nrw.commons.upload.UploadController;
 import fr.free.nrw.commons.wikidata.WikidataEditListener;
 import fr.free.nrw.commons.wikidata.WikidataEditListenerImpl;
+import okhttp3.OkHttpClient;
 
 import static android.content.Context.MODE_PRIVATE;
 

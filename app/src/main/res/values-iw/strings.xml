@@ -163,6 +163,7 @@
   <string name="welcome_copyright_subtext">נא להימנע מחומרים מוגבלים בזכויות יוצרים שמצאתם באינטרנט וכן מתמונות של כרזות, עטיפות ספרים, וכו\'.</string>
   <string name="welcome_final_text">נראה לך שקלטת?</string>
   <string name="welcome_final_button_text">כן!</string>
+  <string name="welcome_help_button_text">&lt;u&gt;מידע נוסף&lt;/u&gt;</string>
   <string name="detail_panel_cats_label">קטגוריות</string>
   <string name="detail_panel_cats_loading">טעינה...</string>
   <string name="detail_panel_cats_none">לא נבחר דבר</string>
@@ -238,8 +239,8 @@
   <string name="error_while_cache">שגיאה במשירת תמונות במטמון</string>
   <string name="title_info">כותרת מתארת ייחודית לקובץ, שתשמש שם קובץ. אפשר להשתמש בשפה פשוטה עם רווחים. אין לכלול סיומת קובץ</string>
   <string name="description_info">נא לתאר את המדיה כמה שיותר: איפה היא נוצרה? מה היא מראה? מה ההקשר? נא לתאר את העצמים או את האנשים. נא לחשוף מידע שאי־אפשר לנחש בקלות, למשל, הזמן ביום אם זאת תמונת נוף. אם המדיה מציגה משהו בלתי־רגיל, נא להסביר מה מיוחד בה.</string>
-  <string name="upload_image_too_dark">התמונה הזאת חשוכה מדי, האם ברצונך באמת להעלות אותה? ויקישיתוף מיועד רק לתמונות בלות ערך אנציקלופדי.</string>
-  <string name="upload_image_blurry">התמונה הזאת מטושטשת, האם ברצונך באמת להעלות אותה? ויקישיתוף מיועד רק לתמונות בלות ערך אנציקלופדי.</string>
+  <string name="upload_image_too_dark">התמונה הזאת חשוכה מדי, האם ברצונך באמת להעלות אותה? ויקישיתוף מיועד רק לתמונות בעלות ערך אנציקלופדי.</string>
+  <string name="upload_image_blurry">התמונה הזאת מטושטשת, האם ברצונך באמת להעלות אותה? ויקישיתוף מיועד רק לתמונות בעלות ערך אנציקלופדי.</string>
   <string name="give_permission">לתת הרשאה</string>
   <string name="use_external_storage">להשתמש באחסון חיצוני</string>
   <string name="use_external_storage_summary">שמירת תמונות שצולמו באמצעות מצלמה בתוך היישום במכשיר שלך</string>
@@ -257,6 +258,8 @@
   <string name="skip_login_title">האם באמת לדלג על הכניסה לחשבון?</string>
   <string name="skip_login_message">לא תהיה לך אפשרות להעלות תמונות.</string>
   <string name="login_alert_message">נא להיכנס לחשבון כדי להשתמש באפשרות הזאת</string>
+  <string name="copy_wikicode">העתקת קוד ויקי ללוח</string>
+  <string name="wikicode_copied">קוד הוויקי הועתק ללוח</string>
   <string name="nearby_location_has_not_changed">המיקום לא השתנה.</string>
   <string name="nearby_location_not_available">המיקום אינו זמין.</string>
   <string name="location_permission_rationale_nearby">נדרשת הרשאה כדי להציג רשימה של מקומות בסביבה</string>
@@ -314,6 +317,10 @@
   <string name="quiz_alert_message">יותר מ־%1$s מהתמונות שהעלית נמחקו. אם תמשיך להעלות תמונות שצריך למחוק, חשבונך כנראה ייחסם.\n\nאולי תרצה לראות שוב את המדריך ואז לעשות בוחן כדי לעזור לך ללמוד אילו סוגים של תמונות צריך או לא צריך להעלות?</string>
   <string name="selfie_answer">בתמנות עצמיות (סלפי) אין ערך אנציקלופדי. נא לא להעלות תמונות של עצמך אלא אם כן יש עליך ערך בוויקיפדיה.</string>
   <string name="taj_mahal_answer">מותר להעלות תמונות של אנדרטאות ונופים ברוב המדינות. נא לשים לב לכך שיצירות אומנות שמוצבות באופן זמני בחוץ מוגבלות לעיתים קרובות בזכויות יוצרים, ואסור להעלות אותן.</string>
+  <string name="screenshot_answer">צילומי מסך של אתרי אינטרנט נחשבים ליצירות נגזרות ונתונים לאותם תנאי זכויות היוצרים כמו האתר עצמו. אפשר להשתמש בהם אחרי אישור מהיוצר. ללא אישור כזה, כל יצירה שמבוססת על העבודה שלהם נחשבת לעותק בלתי־מורשה בבעלות היוצר המקורי.</string>
+  <string name="blurry_image_answer">אחת מהמטרות של ויקישיתוף היא לאסוף תמונות איכותיות. לפיכך, אין להעלות תמונות מטושטשות. השתדלו תמיד לצלם תמונות יפות עם תאורה טובה.</string>
+  <string name="construction_event_answer">תמונות שמציגות טכנולוגיה אם תרבות מתקבלות בברכה בוויקישיתוף.</string>
+  <string name="warning_for_image_reverts">אזהרה: יותר מ־%1$s מהתמונות שהעלית נמחקו. המשך העלאת תמונות שצריכות להימחק כנראה יוביל לכך שהחשבון שלך ייחסם.</string>
   <string name="user_not_logged_in">זמן הכניסה לחשבון פקע, נא להיכנס שוב.</string>
   <string name="share_app_title">שיתוף היישום</string>
   <string name="share_coordinates_not_present">לא צוינו קואורדינטות בעת בחירת התמונה</string>

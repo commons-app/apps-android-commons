@@ -252,8 +252,8 @@
   <string name="skip_login_title">Do you really want to skip login?</string>
   <string name="skip_login_message">You will not be able to upload pictures.</string>
   <string name="login_alert_message">Please log in to use this feature</string>
-  <string name="copy_wikicode">Copy Wikicode to clipboard</string>
-  <string name="wikicode_copied">Wikicode copied to clipboard</string>
+  <string name="copy_wikicode">Copy the wikitext to the clipboard</string>
+  <string name="wikicode_copied">The wikitext was copied to the clipboard</string>
 
   <string name="nearby_location_has_not_changed">Location has not changed.</string>
   <string name="nearby_location_not_available">Location not available.</string>
@@ -351,6 +351,8 @@
   <string name="images_uploaded_explanation">The number of images you have uploaded to Commons, via any upload software</string>
   <string name="images_reverted_explanation">The percentage of images you have uploaded to Commons that were not deleted</string>
   <string name="images_used_explanation">The number of images you have uploaded to Commons that were used in Wikimedia articles</string>
+
+  <string name="error_occurred">Error occurred!</string>
   <string name="notifications_channel_name_all">Commons Notification</string>
 
   <string name="contributions_fragment">Contributions</string>
@@ -361,4 +363,6 @@
   <string name="no_close_nearby">No nearby places found close to you</string>
   <string name="list_sheet">List</string>
 
+  <string name="storage_permission">Storage Permission</string>
+  <string name="write_storage_permission_rationale_for_image_share">We need your permission to access the external storage of your device in order to upload images.</string>
 </resources>

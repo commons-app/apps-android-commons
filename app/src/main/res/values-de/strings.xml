@@ -254,8 +254,8 @@
   <string name="skip_login_title">Möchtest du wirklich die Anmeldung überspringen?</string>
   <string name="skip_login_message">Du wirst keine Bilder hochladen können.</string>
   <string name="login_alert_message">Bitte melde dich an, um diese Funktion zu nutzen.</string>
-  <string name="copy_wikicode">Wikicode in die Zwischenablage kopieren</string>
-  <string name="wikicode_copied">Wikicode in die Zwischenablage kopiert</string>
+  <string name="copy_wikicode">Den Wikitext in die Zwischenablage kopieren</string>
+  <string name="wikicode_copied">Der Wikitext wurde in die Zwischenablage kopiert</string>
   <string name="nearby_location_has_not_changed">Der Standort hat sich nicht geändert.</string>
   <string name="nearby_location_not_available">Der Standort ist nicht verfügbar.</string>
   <string name="location_permission_rationale_nearby">Berechtigung zur Anzeige einer Liste mit Orten in der Nähe erforderlich</string>
@@ -345,5 +345,8 @@
   <string name="images_uploaded_explanation">Die Anzahl der Bilder, die du über eine Hochladesoftware auf Commons hochgeladen hast.</string>
   <string name="images_reverted_explanation">Der Prozentsatz an Bildern, die du auf Commons hochgeladen hast und die nicht gelöscht wurden.</string>
   <string name="images_used_explanation">Die Anzahl der Bilder, die du auf Commons hochgeladen hast und in Wikimedia-Artikeln verwendet werden.</string>
+  <string name="error_occurred">Fehler aufgetreten!</string>
   <string name="notifications_channel_name_all">Commons-Benachrichtigung</string>
+  <string name="storage_permission">Speicherberechtigung</string>
+  <string name="write_storage_permission_rationale_for_image_share">Wir benötigen deine Berechtigung für den Zugriff auf den externen Speicher deines Geräts, um Bilder hochzuladen.</string>
 </resources>

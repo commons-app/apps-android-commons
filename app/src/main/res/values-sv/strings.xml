@@ -255,6 +255,8 @@
   <string name="skip_login_title">Vill du verkligen hoppa över inloggningen?</string>
   <string name="skip_login_message">Du kommer inte kunna ladda upp bilder.</string>
   <string name="login_alert_message">Logga in för att använda denna funktion</string>
+  <string name="copy_wikicode" fuzzy="true">Kopiera wikikod till urklipp</string>
+  <string name="wikicode_copied" fuzzy="true">Wikikod kopierades till urklipp</string>
   <string name="nearby_location_has_not_changed">Platsen har inte ändrats.</string>
   <string name="nearby_location_not_available">Platsen är inte tillgänglig.</string>
   <string name="location_permission_rationale_nearby">Behörighet krävs för att visa en lista över platser i närheten</string>
@@ -344,5 +346,8 @@
   <string name="images_uploaded_explanation">Antalet bilder du har laddat upp till Commons med något uppladdningsprogram</string>
   <string name="images_reverted_explanation">Procentandelen av bilder du har laddat upp till Commons som inte har raderats</string>
   <string name="images_used_explanation">Antalet bilder du har laddat upp till Commons som användes i Wikimedia-artiklar</string>
+  <string name="error_occurred">Ett fel uppstod!</string>
   <string name="notifications_channel_name_all">Commons-aviseringar</string>
+  <string name="storage_permission">Lagringsbehörighet</string>
+  <string name="write_storage_permission_rationale_for_image_share">Vi behöver ditt tillstånd för att komma åt externa lagringen för din enhet för att ladda upp bilder.</string>
 </resources>
