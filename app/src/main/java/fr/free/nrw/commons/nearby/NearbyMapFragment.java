@@ -16,7 +16,6 @@ import android.support.design.widget.BottomSheetBehavior;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AlertDialog;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -60,7 +59,6 @@ import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.Utils;
 import fr.free.nrw.commons.auth.LoginActivity;
 import fr.free.nrw.commons.contributions.ContributionController;
-import fr.free.nrw.commons.utils.ContributionUtils;
 import fr.free.nrw.commons.utils.UriDeserializer;
 import fr.free.nrw.commons.utils.ViewUtil;
 import timber.log.Timber;
@@ -178,7 +176,6 @@ public class NearbyMapFragment extends DaggerFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         Timber.d("onCreateView called");
-        Log.d("deneme","on create view is called");
         if (curLatLng != null) {
             Timber.d("curLatLng found, setting up map view...");
             setupMapView(savedInstanceState);
@@ -212,8 +209,12 @@ public class NearbyMapFragment extends DaggerFragment {
         });
     }
 
+    /**
+     * Updates map slightly means it doesn't updates all nearby markers around. It just updates
+     * location tracker marker of user.
+     */
     public void updateMapSlightly() {
-        Log.d("deneme","update map slightly is called, bundle is:"+bundleForUpdtes);
+        Timber.d("updateMapSlightly called, bundle is:"+bundleForUpdtes);
         if (mapboxMap != null) {
             Gson gson = new GsonBuilder()
                     .registerTypeAdapter(Uri.class, new UriDeserializer())
@@ -228,8 +229,13 @@ public class NearbyMapFragment extends DaggerFragment {
 
     }
 
+    /**
+     * Updates map significantly means it updates nearby markers and location tracker marker. It is
+     * called when user is out of boundaries (south, north, east or west) of markers drawn by
+     * previous nearby call.
+     */
     public void updateMapSignificantly() {
-        Log.d("deneme","update map signicitantly is called, bundle is:"+bundleForUpdtes);
+        Timber.d("updateMapSignificantly called, bundle is:"+bundleForUpdtes);
         if (mapboxMap != null) {
             if (bundleForUpdtes != null) {
                 Gson gson = new GsonBuilder()
@@ -309,6 +315,12 @@ public class NearbyMapFragment extends DaggerFragment {
         }
     }
 
+    /**
+     * Updates camera position according to list sheet status. If list sheet is collapsed, camera
+     * focus should be in the center. If list sheet is expanded, camera focus should be visible
+     * on the gap between list sheet and tab layout.
+     * @param isBottomListSheetExpanded
+     */
     private void updateMapCameraAccordingToBottomSheet(boolean isBottomListSheetExpanded) {
         CameraPosition position;
         this.isBottomListSheetExpanded = isBottomListSheetExpanded;
@@ -345,7 +357,7 @@ public class NearbyMapFragment extends DaggerFragment {
     }
 
     private void initViews() {
-        Log.d("deneme","init views is called");
+        Timber.d("initViews called");
         bottomSheetList = ((NearbyFragment)getParentFragment()).view.findViewById(R.id.bottom_sheet);
         bottomSheetListBehavior = BottomSheetBehavior.from(bottomSheetList);
         bottomSheetDetails = ((NearbyFragment)getParentFragment()).view.findViewById(R.id.bottom_sheet_details);
@@ -492,7 +504,7 @@ public class NearbyMapFragment extends DaggerFragment {
     }
 
     private void setupMapView(Bundle savedInstanceState) {
-        Log.d("deneme","setupMapView called");
+        Timber.d("setupMapView called");
         MapboxMapOptions options = new MapboxMapOptions()
                 .compassGravity(Gravity.BOTTOM | Gravity.LEFT)
                 .compassMargins(new int[]{12, 0, 0, 24})
@@ -518,7 +530,6 @@ public class NearbyMapFragment extends DaggerFragment {
             });
             mapView.setStyleUrl("asset://mapstyle.json");
         }
-        
     }
 
     /**
@@ -547,7 +558,7 @@ public class NearbyMapFragment extends DaggerFragment {
      * move.
      */
     private void addCurrentLocationMarker(MapboxMap mapboxMap) {
-        Log.d("deneme","addCurrentLocationMarker is called");
+        Timber.d("addCurrentLocationMarker is called");
         if (currentLocationMarker != null) {
             currentLocationMarker.remove(); // Remove previous marker, we are not Hansel and Gretel
         }
@@ -568,12 +579,13 @@ public class NearbyMapFragment extends DaggerFragment {
                 .strokeColor(Color.parseColor("#55000000"))
                 .fillColor(Color.parseColor("#11000000"));
         mapboxMap.addPolygon(currentLocationPolygonOptions);
-        Log.d("deneme","mapboxMap.addPolygon(currentLocationPolygonOptions) is called");
     }
 
+    /**
+     * Adds markers for nearby places to mapbox map
+     */
     private void addNearbyMarkerstoMapBoxMap() {
-
-        Log.d("deneme","addNearbyMarkerstoMapBoxMap is called");
+        Timber.d("addNearbyMarkerstoMapBoxMap is called");
         mapboxMap.addMarkers(baseMarkerOptions);
 
         mapboxMap.setOnInfoWindowCloseListener(marker -> {
@@ -632,6 +644,12 @@ public class NearbyMapFragment extends DaggerFragment {
         return circle;
     }
 
+    /**
+     * If nearby details bottom sheet state is collapsed: show fab plus
+     * If nearby details bottom sheet state is expanded: show fab plus
+     * If nearby details bottom sheet state is hidden: hide all fabs
+     * @param bottomSheetState
+     */
     public void prepareViewsForSheetPosition(int bottomSheetState) {
 
         switch (bottomSheetState) {
@@ -656,6 +674,9 @@ public class NearbyMapFragment extends DaggerFragment {
         }
     }
 
+    /**
+     * Hides all fabs
+     */
     private void hideFAB() {
 
         removeAnchorFromFABs(fabPlus);
@@ -732,6 +753,11 @@ public class NearbyMapFragment extends DaggerFragment {
         floatingActionButton.setLayoutParams(params);
     }
 
+    /**
+     * Same botom sheet carries information for all nearby places, so we need to pass information
+     * (title, description, distance and links) to view on nearby marker click
+     * @param place Place of clicked nearby marker
+     */
     private void passInfoToSheet(Place place) {
         this.place = place;
         wikipediaButton.setEnabled(place.hasWikipediaLink());
@@ -867,6 +893,9 @@ public class NearbyMapFragment extends DaggerFragment {
         }
     }
 
+    /**
+     * This bundle is sent whenever and updte for nearby map comes, not for recreation, for updates
+     */
     public void setBundleForUpdtes(Bundle bundleForUpdtes) {
         this.bundleForUpdtes = bundleForUpdtes;
     }
@@ -898,7 +927,6 @@ public class NearbyMapFragment extends DaggerFragment {
     @Override
     public void onResume() {
         super.onResume();
-        Log.d("deneme","NEarbymap fragment, on resume is called");
         if (mapView != null) {
             mapView.onResume();
         }
