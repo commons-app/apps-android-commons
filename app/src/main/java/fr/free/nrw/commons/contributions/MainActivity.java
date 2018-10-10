@@ -78,7 +78,6 @@ public class MainActivity extends AuthenticatedActivity implements FragmentManag
 
             //If nearby map was visible, call on Tab Selected to call all nearby operations
             if (savedInstanceState.getInt("viewPagerCurrentItem") == 1) {
-                Log.d("deneme14","viewpager current item nearby");
                 ((NearbyFragment)contributionsActivityPagerAdapter.getItem(1)).onTabSelected(onOrientationChanged);
             }
         }
@@ -239,7 +238,6 @@ public class MainActivity extends AuthenticatedActivity implements FragmentManag
         initBackButton();
     }
 
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
@@ -258,8 +256,6 @@ public class MainActivity extends AuthenticatedActivity implements FragmentManag
 
         return true;
     }
-
-
 
     /**
      * Responsible with displaying required menu items according to displayed fragment.
