@@ -9,7 +9,6 @@ import android.support.design.widget.SwipeDismissBehavior;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.CardView;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -120,9 +119,13 @@ public class NearbyNoificationCardView  extends CardView{
         });
     }
 
+    /**
+     * Sets permission request button visible and content layout invisible, then adds correct
+     * permission request actions to permission request button according to PermissionType enum
+     * @param isPermissionRequestButtonNeeded true if permissions missing
+     */
     public void displayPermissionRequestButton(boolean isPermissionRequestButtonNeeded) {
         if (isPermissionRequestButtonNeeded) {
-            Log.d("deneme","called1");
             cardViewVisibilityState = CardViewVisibilityState.ASK_PERMISSION;
             contentLayout.setVisibility(GONE);
             permissionRequestButton.setVisibility(VISIBLE);
@@ -166,7 +169,6 @@ public class NearbyNoificationCardView  extends CardView{
 
         } else {
             cardViewVisibilityState = CardViewVisibilityState.LOADING;
-            Log.d("deneme","called2");
             permissionRequestButton.setVisibility(GONE);
             contentLayout.setVisibility(VISIBLE);
             // Set visibility of elements in content layout once it become visible
@@ -179,10 +181,13 @@ public class NearbyNoificationCardView  extends CardView{
         }
     }
 
+    /**
+     * Pass place information to views.
+     * @param isClosestNearbyPlaceFound false if there are no close place
+     * @param place Closes place where we will get information from
+     */
     public void updateContent(boolean isClosestNearbyPlaceFound, Place place) {
-        Log.d("deneme","called3");
         if (this.getVisibility() == GONE) {
-            Log.d("deneme7","nearby card view visiblity was gone, we are in update content");
             return; // If nearby card view is invisible because of preferences, do nothing
         }
         cardViewVisibilityState = CardViewVisibilityState.READY;
@@ -194,9 +199,6 @@ public class NearbyNoificationCardView  extends CardView{
         notificationTitle.setVisibility(VISIBLE);
         notificationDistance.setVisibility(VISIBLE);
         notificationIcon.setVisibility(VISIBLE);
-
-        Log.d("deneme","called4"+this.getVisibility()+" place is:"+place.name);
-
 
         if (isClosestNearbyPlaceFound) {
             notificationTitle.setText(place.name);
@@ -247,6 +249,9 @@ public class NearbyNoificationCardView  extends CardView{
         }
     }
 
+    /**
+     * This states will help us to preserve progress bar and content layout states
+     */
     public enum CardViewVisibilityState {
         LOADING,
         READY,
@@ -254,7 +259,10 @@ public class NearbyNoificationCardView  extends CardView{
         ASK_PERMISSION,
     }
 
-
+    /**
+     * We need to know which kind of permission we need to request, then update permission request
+     * button action accordingly
+     */
     public enum PermissionType {
         ENABLE_GPS,
         ENABLE_LOCATION_PERMISSON, // For only after Marsmallow
