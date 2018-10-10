@@ -11,7 +11,6 @@ import android.location.LocationManager;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
-import android.util.Log;
 
 import java.util.HashSet;
 import java.util.List;
@@ -255,7 +254,7 @@ public class LocationServiceManager implements LocationListener {
 
     @Override
     public void onLocationChanged(Location location) {
-        Log.d("deneme","onLocationChanged is called");
+        Timber.d("on location changed");
             if (isBetterLocation(location, lastLocation)
                     .equals(LocationChangeType.LOCATION_SIGNIFICANTLY_CHANGED)) {
                 lastLocation = location;
