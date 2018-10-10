@@ -186,20 +186,19 @@ public class UploadService extends HandlerService<Contribution> {
 
     @SuppressLint("StringFormatInvalid")
     private void uploadContribution(Contribution contribution) {
-        InputStream fileInputStream=null;
-        InputStream tempFileInputStream=null;
-        ContentInfo contentInfo=null;
+        InputStream fileInputStream = null;
+        InputStream tempFileInputStream = null;
+        ContentInfo contentInfo = null;
         String notificationTag = contribution.getLocalUri().toString();
 
         try {
             File file1 = new File(contribution.getLocalUri().getPath());
             fileInputStream = new FileInputStream(file1);
             tempFileInputStream = new FileInputStream(file1);
-            if(contentInfoUtil==null){
-                contentInfoUtil=new ContentInfoUtil();
+            if (contentInfoUtil == null) {
+                contentInfoUtil = new ContentInfoUtil();
             }
-            contentInfo= contentInfoUtil.findMatch(tempFileInputStream);
-            //fileInputStream = this.getContentResolver().openInputStream(contribution.getLocalUri());
+            contentInfo = contentInfoUtil.findMatch(tempFileInputStream);
         } catch (FileNotFoundException e) {
             Timber.d("File not found");
             Toast fileNotFound = Toast.makeText(this, R.string.upload_failed, Toast.LENGTH_LONG);
@@ -243,10 +242,10 @@ public class UploadService extends HandlerService<Contribution> {
             //try to fetch the MIME type from contentInfo first and then use the tag to do it
             //Note : the tag has not proven trustworthy in the past
             String mimeType;
-            if(contentInfo==null || contentInfo.getMimeType()==null){
-                mimeType=(String)contribution.getTag("mimeType");
-            }else{
-                mimeType=contentInfo.getMimeType();
+            if (contentInfo == null || contentInfo.getMimeType() == null) {
+                mimeType = (String) contribution.getTag("mimeType");
+            } else {
+                mimeType = contentInfo.getMimeType();
             }
             filename = Utils.fixExtension(
                     contribution.getFilename(),
