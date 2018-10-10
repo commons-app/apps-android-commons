@@ -27,6 +27,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import javax.inject.Inject;
@@ -35,6 +38,8 @@ import javax.inject.Named;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.auth.SessionManager;
+import fr.free.nrw.commons.bookmarks.Bookmark;
+import fr.free.nrw.commons.bookmarks.BookmarkDao;
 import fr.free.nrw.commons.category.CategoryDetailsActivity;
 import fr.free.nrw.commons.category.CategoryImagesActivity;
 import fr.free.nrw.commons.contributions.Contribution;
@@ -43,6 +48,7 @@ import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
 import fr.free.nrw.commons.explore.SearchActivity;
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
 import fr.free.nrw.commons.utils.ImageUtils;
+import fr.free.nrw.commons.utils.ViewUtil;
 import timber.log.Timber;
 
 import static android.Manifest.permission.READ_EXTERNAL_STORAGE;
@@ -60,6 +66,9 @@ public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment imple
     @Inject
     @Named("default_preferences")
     SharedPreferences prefs;
+
+    @Inject
+    BookmarkDao bookmarkDao;
 
     @BindView(R.id.mediaDetailsPager)
     ViewPager pager;
@@ -136,6 +145,10 @@ public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment imple
         MediaDetailProvider provider = (MediaDetailProvider) getActivity();
         Media m = provider.getMediaAtPosition(pager.getCurrentItem());
         switch (item.getItemId()) {
+            case R.id.menu_bookmark_current_image:
+                // TODO Update image state in database and in UI
+                ViewUtil.showSnackbar(getView(), R.string.menu_bookmark);
+                return true;
             case R.id.menu_share_current_image:
                 Intent shareIntent = new Intent(Intent.ACTION_SEND);
                 shareIntent.setType("text/plain");
@@ -259,6 +272,9 @@ public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment imple
                     menu.findItem(R.id.menu_browser_current_image).setEnabled(true).setVisible(true);
                     menu.findItem(R.id.menu_share_current_image).setEnabled(true).setVisible(true);
                     menu.findItem(R.id.menu_download_current_image).setEnabled(true).setVisible(true);
+                    menu.findItem(R.id.menu_bookmark_current_image).setEnabled(true).setVisible(true);
+
+                    updateBookmarkState(m);
 
                     if (m instanceof Contribution ) {
                         Contribution c = (Contribution) m;
@@ -269,6 +285,7 @@ public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment imple
                                 menu.findItem(R.id.menu_browser_current_image).setEnabled(false).setVisible(false);
                                 menu.findItem(R.id.menu_share_current_image).setEnabled(false).setVisible(false);
                                 menu.findItem(R.id.menu_download_current_image).setEnabled(false).setVisible(false);
+                                menu.findItem(R.id.menu_bookmark_current_image).setEnabled(false).setVisible(false);
                                 break;
                             case Contribution.STATE_IN_PROGRESS:
                             case Contribution.STATE_QUEUED:
@@ -277,6 +294,7 @@ public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment imple
                                 menu.findItem(R.id.menu_browser_current_image).setEnabled(false).setVisible(false);
                                 menu.findItem(R.id.menu_share_current_image).setEnabled(false).setVisible(false);
                                 menu.findItem(R.id.menu_download_current_image).setEnabled(false).setVisible(false);
+                                menu.findItem(R.id.menu_bookmark_current_image).setEnabled(false).setVisible(false);
                                 break;
                             case Contribution.STATE_COMPLETED:
                                 // Default set of menu items works fine. Treat same as regular media object
@@ -286,6 +304,16 @@ public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment imple
                 }
             }
         }
+    }
+
+    private void updateBookmarkState(Media m) {
+        Bookmark bookmark = new Bookmark(
+                m.getLocalUri(),
+                m.getFilename(),
+                m.getCreator(),
+                m.getDateCreated()
+        );
+        // TODO Check if bookmark is in DB
     }
 
     public void showImage(int i) {
