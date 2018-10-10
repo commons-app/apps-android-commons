@@ -11,7 +11,6 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -241,10 +240,8 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment {
             if (requestCode == ContributionController.SELECT_FROM_CAMERA) {
                 // If coming from camera, pass null as uri. Because camera photos get saved to a
                 // fixed directory
-                Log.d("deneme8","ife girdi controller"+controller+" request code is:"+requestCode);
                 controller.handleImagePicked(requestCode, null, false, null);
             } else if (requestCode == ContributionController.SELECT_FROM_GALLERY){
-                Log.d("deneme8","elsee girdi controller"+controller+" data is:"+data+" request code is:"+requestCode);
                 controller.handleImagePicked(requestCode, data.getData(), false, null);
             }
         } else {
@@ -270,7 +267,7 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment {
             break;
             // 2 = Location allowed when 'nearby places' selected
             case 2: {
-                // TODO: anla ve duzelt
+                // TODO: understand and fix
                 /*if (grantResults.length > 0 && grantResults[0] == PERMISSION_GRANTED) {
                     Timber.d("Location permission granted");
                     Intent nearbyIntent = new Intent(getActivity(), MainActivity.class);
