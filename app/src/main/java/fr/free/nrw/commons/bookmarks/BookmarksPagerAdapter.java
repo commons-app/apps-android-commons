@@ -4,9 +4,12 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.widget.ListAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import fr.free.nrw.commons.bookmarks.pictures.BookmarkPictureListFragment;
 
 public class BookmarksPagerAdapter extends FragmentPagerAdapter {
 
@@ -37,5 +40,10 @@ public class BookmarksPagerAdapter extends FragmentPagerAdapter {
         pages.clear();
         pages.addAll(newPages);
         notifyDataSetChanged();
+    }
+
+    public ListAdapter getMediaAdapter() {
+        BookmarkPictureListFragment fragment = (BookmarkPictureListFragment)(pages.get(0).getPage());
+        return fragment.getAdapter();
     }
 }
