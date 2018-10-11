@@ -377,17 +377,13 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
         final EditText input = new EditText(getActivity());
         alert.setView(input);
         input.requestFocus();
-        alert.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int whichButton) {
-                String reason = input.getText().toString();
-                DeleteTask deleteTask = new DeleteTask(getActivity(), media, reason);
-                deleteTask.execute();
-                enableDeleteButton(false);
-            }
+        alert.setPositiveButton(R.string.ok, (dialog, whichButton) -> {
+            String reason = input.getText().toString();
+            DeleteTask deleteTask = new DeleteTask(getActivity(), media, reason);
+            deleteTask.execute();
+            enableDeleteButton(false);
         });
-        alert.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int whichButton) {
-            }
+        alert.setNegativeButton(R.string.cancel, (dialog, whichButton) -> {
         });
         AlertDialog d = alert.create();
         input.addTextChangedListener(new TextWatcher() {

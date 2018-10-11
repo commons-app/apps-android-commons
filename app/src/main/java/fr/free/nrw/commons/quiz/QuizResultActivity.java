@@ -183,17 +183,8 @@ public class QuizResultActivity extends AppCompatActivity {
         TextView shareMessage = (TextView) view.findViewById(R.id.alert_text);
         shareMessage.setText(R.string.quiz_result_share_message);
         alertadd.setView(view);
-        alertadd.setPositiveButton(R.string.about_translate_proceed, new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int which) {
-                shareScreen(screenshot);
-            }
-        });
-        alertadd.setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                dialog.cancel();
-            }
-        });
+        alertadd.setPositiveButton(R.string.about_translate_proceed, (dialog, which) -> shareScreen(screenshot));
+        alertadd.setNegativeButton(android.R.string.cancel, (dialog, which) -> dialog.cancel());
         alertadd.show();
     }
 }

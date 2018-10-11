@@ -501,13 +501,10 @@ public class NearbyMapFragment extends DaggerFragment {
         // create map
         mapView = new MapView(getActivity(), options);
         mapView.onCreate(savedInstanceState);
-        mapView.getMapAsync(new OnMapReadyCallback() {
-            @Override
-            public void onMapReady(MapboxMap mapboxMap) {
-                ((NearbyActivity)getActivity()).setMapViewTutorialShowCase();
-                NearbyMapFragment.this.mapboxMap = mapboxMap;
-                updateMapSignificantly();
-            }
+        mapView.getMapAsync(mapboxMap -> {
+            ((NearbyActivity)getActivity()).setMapViewTutorialShowCase();
+            NearbyMapFragment.this.mapboxMap = mapboxMap;
+            updateMapSignificantly();
         });
         mapView.setStyleUrl("asset://mapstyle.json");
     }
