@@ -58,6 +58,7 @@ import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.Utils;
 import fr.free.nrw.commons.auth.LoginActivity;
+import fr.free.nrw.commons.bookmarks.locations.BookmarkLocationDao;
 import fr.free.nrw.commons.contributions.ContributionController;
 import fr.free.nrw.commons.utils.ContributionUtils;
 import fr.free.nrw.commons.utils.UriDeserializer;
@@ -134,6 +135,8 @@ public class NearbyMapFragment extends DaggerFragment {
     @Inject
     @Named("direct_nearby_upload_prefs")
     SharedPreferences directPrefs;
+    @Inject
+    BookmarkLocationDao bookmarkLocationDao;
 
     public NearbyMapFragment() {
     }
@@ -728,12 +731,17 @@ public class NearbyMapFragment extends DaggerFragment {
     private void passInfoToSheet(Place place) {
         this.place = place;
 
+        int bookmarkIcon;
+        if (bookmarkLocationDao.findBookmarkLocation(place)) {
+            bookmarkIcon = R.drawable.ic_round_star_filled_24px;
+        } else {
+            bookmarkIcon = R.drawable.ic_round_star_border_24px;
+        }
+        bookmarkButtonImage.setImageResource(bookmarkIcon);
         bookmarkButton.setOnClickListener(view -> {
-            // TODO Update location bookmark state in DB
-            boolean isBookmarked = false; // TODO Call Dao
-            int icon = isBookmarked ? R.drawable.ic_round_star_filled_24px : R.drawable.ic_round_star_border_24px;
-            bookmarkButtonImage.setImageResource(icon);
-            ViewUtil.showSnackbar(view, R.string.error_occurred);
+            boolean isBookmarked = bookmarkLocationDao.updateBookmarkLocation(place);
+            int updatedIcon = isBookmarked ? R.drawable.ic_round_star_filled_24px : R.drawable.ic_round_star_border_24px;
+            bookmarkButtonImage.setImageResource(updatedIcon);
         });
 
         wikipediaButton.setEnabled(place.hasWikipediaLink());

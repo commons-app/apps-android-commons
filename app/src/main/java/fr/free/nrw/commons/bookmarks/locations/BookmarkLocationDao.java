@@ -30,7 +30,6 @@ public class BookmarkLocationDao {
         this.clientProvider = clientProvider;
     }
 
-
     @NonNull
     public List<Place> getAllBookmarksLocations() {
         List<Place> items = new ArrayList<>();
@@ -59,10 +58,9 @@ public class BookmarkLocationDao {
 
     public boolean updateBookmarkLocation(Place bookmarkLocation) {
         boolean bookmarkExists = findBookmarkLocation(bookmarkLocation);
-        if(bookmarkExists) {
+        if (bookmarkExists) {
             deleteBookmarkLocation(bookmarkLocation);
-        }
-        else {
+        } else {
             addBookmarkLocation(bookmarkLocation);
         }
         return !bookmarkExists;
@@ -129,9 +127,7 @@ public class BookmarkLocationDao {
         //(cursor.getInt(cursor.getColumnIndex(Table.COLUMN_LABEL_ICON))));
 
 
-
-        Uri uri = null;
-        uri.parse(cursor.getString(cursor.getColumnIndex(Table.COLUMN_IMAGE_URL)));
+        Uri uri = Uri.parse(cursor.getString(cursor.getColumnIndex(Table.COLUMN_IMAGE_URL)));
 
         return new Place(
                 cursor.getString(cursor.getColumnIndex(Table.COLUMN_NAME)),
@@ -162,7 +158,7 @@ public class BookmarkLocationDao {
 
 
     public static class Table {
-        public static final String TABLE_NAME = "bookmarks";
+        public static final String TABLE_NAME = "bookmarksLocations";
 
         static final String COLUMN_NAME = "location_name";
         static final String COLUMN_DESCRIPTION = "location_description";

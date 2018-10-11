@@ -29,6 +29,7 @@ import butterknife.ButterKnife;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.Utils;
 import fr.free.nrw.commons.auth.LoginActivity;
+import fr.free.nrw.commons.bookmarks.locations.BookmarkLocationDao;
 import fr.free.nrw.commons.contributions.ContributionController;
 import fr.free.nrw.commons.di.ApplicationlessInjection;
 import fr.free.nrw.commons.utils.ViewUtil;
@@ -67,7 +68,7 @@ public class PlaceRenderer extends Renderer<Place> {
     private Fragment fragment;
     private ContributionController controller;
 
-
+    @Inject BookmarkLocationDao bookmarkLocationDao;
     @Inject @Named("prefs") SharedPreferences prefs;
     @Inject @Named("direct_nearby_upload_prefs") SharedPreferences directPrefs;
 
@@ -170,11 +171,9 @@ public class PlaceRenderer extends Renderer<Place> {
                         })
                         .show();
             } else {
-                // TODO Update location bookmark state in DB
-                boolean isBookmarked = false; // TODO Call Dao
+                boolean isBookmarked = bookmarkLocationDao.updateBookmarkLocation(place);
                 int icon = isBookmarked ? R.drawable.ic_round_star_filled_24px : R.drawable.ic_round_star_border_24px;
                 bookmarkButtonImage.setImageResource(icon);
-                ViewUtil.showSnackbar(view, R.string.error_occurred);
             }
         });
     }
@@ -223,6 +222,13 @@ public class PlaceRenderer extends Renderer<Place> {
         iconOverflow.setVisibility(showMenu() ? View.VISIBLE : View.GONE);
         iconOverflow.setOnClickListener(v -> popupMenuListener());
 
+        int icon;
+        if (bookmarkLocationDao.findBookmarkLocation(place)) {
+            icon = R.drawable.ic_round_star_filled_24px;
+        } else {
+            icon = R.drawable.ic_round_star_border_24px;
+        }
+        bookmarkButtonImage.setImageResource(icon);
     }
 
     private void popupMenuListener() {

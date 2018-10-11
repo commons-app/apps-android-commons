@@ -81,6 +81,12 @@ public class CommonsApplicationModule {
     }
 
     @Provides
+    @Named("bookmarksLocation")
+    public ContentProviderClient provideBookmarkLocationContentProviderClient(Context context) {
+        return context.getContentResolver().acquireContentProviderClient(BuildConfig.BOOKMARK_LOCATIONS_AUTHORITY);
+    }
+
+    @Provides
     @Named("application_preferences")
     public SharedPreferences providesApplicationSharedPreferences(Context context) {
         return context.getSharedPreferences("fr.free.nrw.commons", MODE_PRIVATE);

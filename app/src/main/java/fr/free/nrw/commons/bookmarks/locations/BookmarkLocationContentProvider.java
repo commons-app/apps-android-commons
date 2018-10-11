@@ -20,8 +20,8 @@ import static fr.free.nrw.commons.bookmarks.locations.BookmarkLocationDao.Table.
 
 public class BookmarkLocationContentProvider extends CommonsDaggerContentProvider {
 
-    private static final String BASE_PATH = "bookmarksLocation";
-    public static final Uri BASE_URI = Uri.parse("content://" + BuildConfig.BOOKMARK_AUTHORITY + "/" + BASE_PATH);
+    private static final String BASE_PATH = "bookmarksLocations";
+    public static final Uri BASE_URI = Uri.parse("content://" + BuildConfig.BOOKMARK_LOCATIONS_AUTHORITY + "/" + BASE_PATH);
 
     public static Uri uriForName(String name) {
         return Uri.parse(BASE_URI.toString() + "/" + name);

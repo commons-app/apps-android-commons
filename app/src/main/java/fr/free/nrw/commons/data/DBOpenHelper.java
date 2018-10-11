@@ -5,6 +5,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 import fr.free.nrw.commons.bookmarks.BookmarkDao;
+import fr.free.nrw.commons.bookmarks.locations.BookmarkLocationDao;
 import fr.free.nrw.commons.category.CategoryDao;
 import fr.free.nrw.commons.contributions.ContributionDao;
 import fr.free.nrw.commons.explore.recentsearches.RecentSearchesDao;
@@ -29,6 +30,7 @@ public class DBOpenHelper  extends SQLiteOpenHelper {
         ModifierSequenceDao.Table.onCreate(sqLiteDatabase);
         CategoryDao.Table.onCreate(sqLiteDatabase);
         BookmarkDao.Table.onCreate(sqLiteDatabase);
+        BookmarkLocationDao.Table.onCreate(sqLiteDatabase);
         RecentSearchesDao.Table.onCreate(sqLiteDatabase);
     }
 
@@ -38,6 +40,7 @@ public class DBOpenHelper  extends SQLiteOpenHelper {
         ModifierSequenceDao.Table.onUpdate(sqLiteDatabase, from, to);
         CategoryDao.Table.onUpdate(sqLiteDatabase, from, to);
         BookmarkDao.Table.onUpdate(sqLiteDatabase, from, to);
+        BookmarkLocationDao.Table.onUpdate(sqLiteDatabase, from, to);
         RecentSearchesDao.Table.onUpdate(sqLiteDatabase, from, to);
     }
 }
