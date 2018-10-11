@@ -123,10 +123,6 @@ public class BookmarkLocationDao {
         builder.setWikidataLink(cursor.getString(cursor.getColumnIndex(Table.COLUMN_WIKIDATA_LINK)));
         builder.setCommonsLink(cursor.getString(cursor.getColumnIndex(Table.COLUMN_COMMONS_LINK)));
 
-        //Place.Label label = new Place.Label((cursor.getString(cursor.getColumnIndex(Table.COLUMN_LABEL_TEXT))),
-        //(cursor.getInt(cursor.getColumnIndex(Table.COLUMN_LABEL_ICON))));
-
-
         Uri uri = Uri.parse(cursor.getString(cursor.getColumnIndex(Table.COLUMN_IMAGE_URL)));
 
         return new Place(
@@ -155,7 +151,6 @@ public class BookmarkLocationDao {
         cv.put(BookmarkLocationDao.Table.COLUMN_LONG, bookmarkLocation.location.getLongitude());
         return cv;
     }
-
 
     public static class Table {
         public static final String TABLE_NAME = "bookmarksLocations";

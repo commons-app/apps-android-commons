@@ -9,7 +9,6 @@ import android.content.SharedPreferences;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Build;
 import android.support.annotation.NonNull;
-import android.support.annotation.RequiresApi;
 
 import com.facebook.drawee.backends.pipeline.Fresco;
 import com.facebook.imagepipeline.core.ImagePipelineConfig;
@@ -17,7 +16,6 @@ import com.facebook.stetho.Stetho;
 import com.squareup.leakcanary.LeakCanary;
 import com.squareup.leakcanary.RefWatcher;
 import com.tspoon.traceur.Traceur;
-import com.tspoon.traceur.TraceurConfig;
 
 import org.acra.ACRA;
 import org.acra.ReportingInteractionMode;
@@ -29,7 +27,7 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 import fr.free.nrw.commons.auth.SessionManager;
-import fr.free.nrw.commons.bookmarks.BookmarkDao;
+import fr.free.nrw.commons.bookmarks.pictures.BookmarkPictureDao;
 import fr.free.nrw.commons.category.CategoryDao;
 import fr.free.nrw.commons.contributions.ContributionDao;
 import fr.free.nrw.commons.data.DBOpenHelper;
@@ -207,7 +205,7 @@ public class CommonsApplication extends Application {
         ModifierSequenceDao.Table.onDelete(db);
         CategoryDao.Table.onDelete(db);
         ContributionDao.Table.onDelete(db);
-        BookmarkDao.Table.onDelete(db);
+        BookmarkPictureDao.Table.onDelete(db);
     }
 
     /**

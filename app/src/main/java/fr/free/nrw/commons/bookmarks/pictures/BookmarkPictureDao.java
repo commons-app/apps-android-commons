@@ -1,4 +1,4 @@
-package fr.free.nrw.commons.bookmarks;
+package fr.free.nrw.commons.bookmarks.pictures;
 
 import android.content.ContentProviderClient;
 import android.content.ContentValues;
@@ -14,18 +14,18 @@ import javax.inject.Inject;
 import javax.inject.Named;
 import javax.inject.Provider;
 
+import fr.free.nrw.commons.bookmarks.Bookmark;
 
-import static fr.free.nrw.commons.bookmarks.BookmarkContentProvider.BASE_URI;
+import static fr.free.nrw.commons.bookmarks.pictures.BookmarkPictureContentProvider.BASE_URI;
 
-public class BookmarkDao {
+public class BookmarkPictureDao {
 
     private final Provider<ContentProviderClient> clientProvider;
 
     @Inject
-    public BookmarkDao(@Named("bookmarks") Provider<ContentProviderClient> clientProvider) {
+    public BookmarkPictureDao(@Named("bookmarks") Provider<ContentProviderClient> clientProvider) {
         this.clientProvider = clientProvider;
     }
-
 
     @NonNull
     public List<Bookmark> getAllBookmarks() {
@@ -34,7 +34,7 @@ public class BookmarkDao {
         ContentProviderClient db = clientProvider.get();
         try {
             cursor = db.query(
-                    BookmarkContentProvider.BASE_URI,
+                    BookmarkPictureContentProvider.BASE_URI,
                     Table.ALL_FIELDS,
                     null,
                     new String[]{},
@@ -55,10 +55,9 @@ public class BookmarkDao {
 
     public boolean updateBookmark(Bookmark bookmark) {
         boolean bookmarkExists = findBookmark(bookmark);
-        if(bookmarkExists) {
+        if (bookmarkExists) {
             deleteBookmark(bookmark);
-        }
-        else {
+        } else {
             addBookmark(bookmark);
         }
         return !bookmarkExists;
@@ -91,29 +90,29 @@ public class BookmarkDao {
     }
 
     public boolean findBookmark(Bookmark bookmark) {
-            Cursor cursor = null;
-            ContentProviderClient db = clientProvider.get();
-            try {
-                cursor = db.query(
-                        BookmarkContentProvider.BASE_URI,
-                        Table.ALL_FIELDS,
-                        Table.COLUMN_MEDIA_NAME + "=?",
-                        new String[]{bookmark.getMediaName()},
-                        null);
-                if (cursor != null && cursor.moveToFirst()) {
-                    return true;
-                }
-            } catch (RemoteException e) {
-                // This feels lazy, but to hell with checked exceptions. :)
-                throw new RuntimeException(e);
-            } finally {
-                if (cursor != null) {
-                    cursor.close();
-                }
-                db.release();
+        Cursor cursor = null;
+        ContentProviderClient db = clientProvider.get();
+        try {
+            cursor = db.query(
+                    BookmarkPictureContentProvider.BASE_URI,
+                    Table.ALL_FIELDS,
+                    Table.COLUMN_MEDIA_NAME + "=?",
+                    new String[]{bookmark.getMediaName()},
+                    null);
+            if (cursor != null && cursor.moveToFirst()) {
+                return true;
             }
-            return false;
+        } catch (RemoteException e) {
+            // This feels lazy, but to hell with checked exceptions. :)
+            throw new RuntimeException(e);
+        } finally {
+            if (cursor != null) {
+                cursor.close();
+            }
+            db.release();
         }
+        return false;
+    }
 
     @NonNull
     Bookmark fromCursor(Cursor cursor) {
@@ -125,8 +124,8 @@ public class BookmarkDao {
 
     private ContentValues toContentValues(Bookmark bookmark) {
         ContentValues cv = new ContentValues();
-        cv.put(BookmarkDao.Table.COLUMN_MEDIA_NAME, bookmark.getMediaName());
-        cv.put(BookmarkDao.Table.COLUMN_CREATOR, bookmark.getMediaCreator());
+        cv.put(BookmarkPictureDao.Table.COLUMN_MEDIA_NAME, bookmark.getMediaName());
+        cv.put(BookmarkPictureDao.Table.COLUMN_CREATOR, bookmark.getMediaCreator());
         return cv;
     }
 

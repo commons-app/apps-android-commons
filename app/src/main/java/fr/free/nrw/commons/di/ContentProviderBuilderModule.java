@@ -2,7 +2,7 @@ package fr.free.nrw.commons.di;
 
 import dagger.Module;
 import dagger.android.ContributesAndroidInjector;
-import fr.free.nrw.commons.bookmarks.BookmarkContentProvider;
+import fr.free.nrw.commons.bookmarks.pictures.BookmarkPictureContentProvider;
 import fr.free.nrw.commons.bookmarks.locations.BookmarkLocationContentProvider;
 import fr.free.nrw.commons.category.CategoryContentProvider;
 import fr.free.nrw.commons.contributions.ContributionsContentProvider;
@@ -26,7 +26,7 @@ public abstract class ContentProviderBuilderModule {
     abstract RecentSearchesContentProvider bindRecentSearchesContentProvider();
 
     @ContributesAndroidInjector
-    abstract BookmarkContentProvider bindBookmarkContentProvider();
+    abstract BookmarkPictureContentProvider bindBookmarkContentProvider();
 
     @ContributesAndroidInjector
     abstract BookmarkLocationContentProvider bindBookmarkLocationContentProvider();

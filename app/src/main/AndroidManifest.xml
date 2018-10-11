@@ -200,7 +200,7 @@
             android:syncable="false" />
 
         <provider
-            android:name=".bookmarks.BookmarkContentProvider"
+            android:name=".bookmarks.pictures.BookmarkPictureContentProvider"
             android:authorities="${applicationId}.bookmarks.contentprovider"
             android:exported="false"
             android:label="@string/provider_bookmarks"

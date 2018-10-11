@@ -8,7 +8,6 @@ import javax.inject.Singleton;
 
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.bookmarks.Bookmark;
-import fr.free.nrw.commons.bookmarks.BookmarkDao;
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
 
 @Singleton
@@ -17,7 +16,7 @@ public class BookmarkPictureListController {
     private MediaWikiApi mediaWikiApi;
 
     @Inject
-    BookmarkDao bookmarkDao;
+    BookmarkPictureDao bookmarkDao;
 
     @Inject public BookmarkPictureListController(MediaWikiApi mediaWikiApi) {
         this.mediaWikiApi = mediaWikiApi;

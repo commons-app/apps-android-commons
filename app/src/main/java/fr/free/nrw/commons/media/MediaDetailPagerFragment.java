@@ -16,9 +16,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.content.ContextCompat;
-import android.support.v4.view.MenuItemCompat;
 import android.support.v4.view.ViewPager;
-import android.support.v7.widget.ShareActionProvider;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -26,9 +24,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
-
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -39,7 +34,7 @@ import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.auth.SessionManager;
 import fr.free.nrw.commons.bookmarks.Bookmark;
-import fr.free.nrw.commons.bookmarks.BookmarkDao;
+import fr.free.nrw.commons.bookmarks.pictures.BookmarkPictureDao;
 import fr.free.nrw.commons.category.CategoryDetailsActivity;
 import fr.free.nrw.commons.category.CategoryImagesActivity;
 import fr.free.nrw.commons.contributions.Contribution;
@@ -48,7 +43,6 @@ import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
 import fr.free.nrw.commons.explore.SearchActivity;
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
 import fr.free.nrw.commons.utils.ImageUtils;
-import fr.free.nrw.commons.utils.ViewUtil;
 import timber.log.Timber;
 
 import static android.Manifest.permission.READ_EXTERNAL_STORAGE;
@@ -68,7 +62,7 @@ public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment imple
     SharedPreferences prefs;
 
     @Inject
-    BookmarkDao bookmarkDao;
+    BookmarkPictureDao bookmarkDao;
 
     @BindView(R.id.mediaDetailsPager)
     ViewPager pager;
