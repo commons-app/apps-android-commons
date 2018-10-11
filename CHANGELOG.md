@@ -1,5 +1,8 @@
 # Wikimedia Commons for Android
 
+## v2.8.5
+- Fixed issues with sporadic upload failures due to wrong mimeType
+
 ## v2.8.4
 - Hotfix for constant upload crashes for Oreo users
 
