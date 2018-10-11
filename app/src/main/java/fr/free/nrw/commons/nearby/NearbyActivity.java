@@ -13,6 +13,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomSheetBehavior;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AlertDialog;
 import android.view.Menu;
@@ -379,7 +380,7 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
                 if (NetworkUtils.isInternetConnectionEstablished(NearbyActivity.this)) {
                     refreshView(LOCATION_SIGNIFICANTLY_CHANGED);
                 } else {
-                    ViewUtil.showLongToast(NearbyActivity.this, getString(R.string.no_internet));
+                    Snackbar.make(transparentView , R.string.no_internet, Snackbar.LENGTH_INDEFINITE).show();
                 }
             }
         };
