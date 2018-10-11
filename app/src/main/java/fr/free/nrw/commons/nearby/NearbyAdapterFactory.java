@@ -12,7 +12,7 @@ import java.util.List;
 
 import fr.free.nrw.commons.contributions.ContributionController;
 
-class NearbyAdapterFactory {
+public class NearbyAdapterFactory {
 
     private Fragment fragment;
     private ContributionController controller;
@@ -21,7 +21,7 @@ class NearbyAdapterFactory {
 
     }
 
-    NearbyAdapterFactory(Fragment fragment, ContributionController controller) {
+    public NearbyAdapterFactory(Fragment fragment, ContributionController controller) {
         this.fragment = fragment;
         this.controller = controller;
     }
