@@ -149,13 +149,30 @@ public class BookmarkPictureListFragment extends DaggerFragment {
     }
 
     /**
+     * Handles the UI updates when there is no bookmarks
+     */
+    private void initEmptyBookmarkListView() {
+        progressBar.setVisibility(GONE);
+        if (gridAdapter == null || gridAdapter.isEmpty()) {
+            statusTextView.setVisibility(VISIBLE);
+            statusTextView.setText(getString(R.string.bookmark_empty));
+        } else {
+            statusTextView.setVisibility(GONE);
+        }
+    }
+
+    /**
      * Handles the success scenario
      * On first load, it initializes the grid view. On subsequent loads, it adds items to the adapter
      * @param collection List of new Media to be displayed
      */
     private void handleSuccess(List<Media> collection) {
-        if(collection == null || collection.isEmpty()) {
+        if(collection == null) {
             initErrorView();
+            return;
+        }
+        if (collection.isEmpty()) {
+            initEmptyBookmarkListView();
             return;
         }
 

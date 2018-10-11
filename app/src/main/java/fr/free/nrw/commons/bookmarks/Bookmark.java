@@ -15,7 +15,6 @@ public class Bookmark {
 
     /**
      * Gets the file name
-     *
      * @return the file name
      */
     public String getMediaName() {
@@ -23,9 +22,8 @@ public class Bookmark {
     }
 
     /**
-     * Modifies name
-     *
-     * @param name Category name
+     * Modifies file name
+     * @param name file name
      */
     public void setMediaName(String name) {
         this.mediaName = name;
@@ -33,7 +31,6 @@ public class Bookmark {
 
     /**
      * Gets media creator
-     *
      * @return creator name
      */
     public String getMediaCreator() { return mediaCreator;  }
@@ -46,7 +43,6 @@ public class Bookmark {
 
     /**
      * Gets the content URI for this bookmark
-     *
      * @return content URI
      */
     public Uri getContentUri() {
@@ -55,7 +51,6 @@ public class Bookmark {
 
     /**
      * Modifies the content URI - marking this bookmark as already saved in the database
-     *
      * @param contentUri the content URI
      */
     public void setContentUri(Uri contentUri) {

@@ -47,6 +47,10 @@ public class BookmarksPagerAdapter extends FragmentPagerAdapter {
         return pages.get(position).getTitle();
     }
 
+    /**
+     * Return the Adapter used to display the picture gridview
+     * @return adapter
+     */
     public ListAdapter getMediaAdapter() {
         BookmarkPictureListFragment fragment = (BookmarkPictureListFragment)(pages.get(0).getPage());
         return fragment.getAdapter();

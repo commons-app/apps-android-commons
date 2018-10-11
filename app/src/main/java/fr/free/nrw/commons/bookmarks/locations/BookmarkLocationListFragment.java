@@ -71,10 +71,25 @@ public class BookmarkLocationListFragment extends DaggerFragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        progressBar.setVisibility(View.VISIBLE);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        initList();
+    }
+
+    /**
+     * Initialize the recycler view with bookmarked locations
+     */
+    private void initList() {
         List<Place> places = controller.loadFavoritesLocations();
         recyclerView.setAdapter(adapterFactory.create(new ArrayList<Place>()));
         adapterFactory.updateAdapterData(places, (RVRendererAdapter<Place>) recyclerView.getAdapter());
+        progressBar.setVisibility(View.GONE);
+        if (places.size() <= 0) {
+            statusTextView.setText(R.string.bookmark_empty);
+            statusTextView.setVisibility(View.VISIBLE);
+        } else {
+            statusTextView.setVisibility(View.GONE);
+        }
     }
 
     @Override

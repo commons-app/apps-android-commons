@@ -2,6 +2,9 @@ package fr.free.nrw.commons.bookmarks;
 
 import android.support.v4.app.Fragment;
 
+/**
+ * Data class for handling a bookmark fragment and it title
+ */
 public class BookmarkPages {
     private Fragment page;
     private String title;
@@ -11,10 +14,18 @@ public class BookmarkPages {
         this.page = fragment;
     }
 
+    /**
+     * Return the fragment
+     * @return fragment object
+     */
     public Fragment getPage() {
         return page;
     }
 
+    /**
+     * Return the fragment title
+     * @return title
+     */
     public String getTitle() {
         return title;
     }

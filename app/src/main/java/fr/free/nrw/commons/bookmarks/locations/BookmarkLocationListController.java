@@ -12,13 +12,13 @@ import fr.free.nrw.commons.nearby.Place;
 @Singleton
 public class BookmarkLocationListController {
 
-    private MediaWikiApi mediaWikiApi;
-
     @Inject
-    public BookmarkLocationListController(MediaWikiApi mediaWikiApi) {
-        this.mediaWikiApi = mediaWikiApi;
-    }
+    public BookmarkLocationListController() {}
 
+    /**
+     * Load from DB the bookmarked locations
+     * @return a list of Place objects.
+     */
     public List<Place> loadFavoritesLocations() {
         List<Place> places = new ArrayList<>();
         /*places.add(new Place(

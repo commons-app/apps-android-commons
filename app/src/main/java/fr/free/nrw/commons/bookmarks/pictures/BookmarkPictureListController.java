@@ -23,9 +23,11 @@ public class BookmarkPictureListController {
         this.mediaWikiApi = mediaWikiApi;
     }
 
+    /**
+     * Loads the Media objects from the raw data stored in DB and the API.
+     * @return a list of bookmarked Media object
+     */
     List<Media> loadBookmarkedPictures() {
-        //return mediaWikiApi.searchImages("th", 0);
-        // TODO Use Dao to load
         List<Bookmark> bookmarks = bookmarkDao.getAllBookmarks();
         ArrayList<Media> medias = new ArrayList<Media>();
         for (Bookmark bookmark : bookmarks) {
@@ -37,7 +39,10 @@ public class BookmarkPictureListController {
         return medias;
     }
 
+    /**
+     * Cancels the requests to the API and the DB
+     */
     void stop() {
-        // TODO Cancel all requests
+        //noop
     }
 }

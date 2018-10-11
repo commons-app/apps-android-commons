@@ -10,16 +10,11 @@ import android.support.v4.view.ViewPager;
 import android.view.View;
 import android.widget.AdapterView;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.auth.AuthenticatedActivity;
-import fr.free.nrw.commons.bookmarks.locations.BookmarkLocationListFragment;
-import fr.free.nrw.commons.bookmarks.pictures.BookmarkPictureListFragment;
 import fr.free.nrw.commons.media.MediaDetailPagerFragment;
 
 public class BookmarksActivity extends AuthenticatedActivity
