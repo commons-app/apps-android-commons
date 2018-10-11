@@ -110,9 +110,7 @@ public class WikidataEditService {
                     } else {
                         Timber.d("Wikidata edit couldn't be tagged");
                     }
-                }, throwable -> {
-                    Timber.e(throwable, "Error occurred while adding tag to the edit");
-                });
+                }, throwable -> Timber.e(throwable, "Error occurred while adding tag to the edit"));
     }
 
     /**
