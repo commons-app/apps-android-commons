@@ -444,7 +444,7 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
 
     private View buildCatLabel(final String catName, ViewGroup categoryContainer) {
         final View item = LayoutInflater.from(getContext()).inflate(R.layout.detail_category_item, categoryContainer, false);
-        final CompatTextView textView = (CompatTextView) item.findViewById(R.id.mediaDetailCategoryItemText);
+        final CompatTextView textView = item.findViewById(R.id.mediaDetailCategoryItemText);
 
         textView.setText(catName);
         if (categoriesLoaded && categoriesPresent) {

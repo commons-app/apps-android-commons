@@ -339,9 +339,9 @@ public class AchievementsActivity extends NavigationBaseActivity {
         AlertDialog.Builder alertadd = new AlertDialog.Builder(AchievementsActivity.this);
         LayoutInflater factory = LayoutInflater.from(AchievementsActivity.this);
         final View view = factory.inflate(R.layout.image_alert_layout, null);
-        ImageView screenShotImage = (ImageView) view.findViewById(R.id.alert_image);
+        ImageView screenShotImage = view.findViewById(R.id.alert_image);
         screenShotImage.setImageBitmap(screenshot);
-        TextView shareMessage = (TextView) view.findViewById(R.id.alert_text);
+        TextView shareMessage = view.findViewById(R.id.alert_text);
         shareMessage.setText(R.string.achievements_share_message);
         alertadd.setView(view);
         alertadd.setPositiveButton(R.string.about_translate_proceed, (dialog, which) -> shareScreen(screenshot));

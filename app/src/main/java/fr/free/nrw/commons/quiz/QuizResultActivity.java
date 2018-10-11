@@ -178,9 +178,9 @@ public class QuizResultActivity extends AppCompatActivity {
         AlertDialog.Builder alertadd = new AlertDialog.Builder(QuizResultActivity.this);
         LayoutInflater factory = LayoutInflater.from(QuizResultActivity.this);
         final View view = factory.inflate(R.layout.image_alert_layout, null);
-        ImageView screenShotImage = (ImageView) view.findViewById(R.id.alert_image);
+        ImageView screenShotImage = view.findViewById(R.id.alert_image);
         screenShotImage.setImageBitmap(screenshot);
-        TextView shareMessage = (TextView) view.findViewById(R.id.alert_text);
+        TextView shareMessage = view.findViewById(R.id.alert_text);
         shareMessage.setText(R.string.quiz_result_share_message);
         alertadd.setView(view);
         alertadd.setPositiveButton(R.string.about_translate_proceed, new DialogInterface.OnClickListener() {
