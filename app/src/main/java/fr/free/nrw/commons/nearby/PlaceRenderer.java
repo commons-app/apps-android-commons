@@ -31,6 +31,7 @@ import fr.free.nrw.commons.Utils;
 import fr.free.nrw.commons.auth.LoginActivity;
 import fr.free.nrw.commons.contributions.ContributionController;
 import fr.free.nrw.commons.di.ApplicationlessInjection;
+import fr.free.nrw.commons.utils.ViewUtil;
 import timber.log.Timber;
 
 import static fr.free.nrw.commons.theme.NavigationBaseActivity.startActivityWithFlags;
@@ -52,6 +53,9 @@ public class PlaceRenderer extends Renderer<Place> {
     @BindView(R.id.iconOverflow) LinearLayout iconOverflow;
     @BindView(R.id.cameraButtonText) TextView cameraButtonText;
     @BindView(R.id.galleryButtonText) TextView galleryButtonText;
+    @BindView(R.id.bookmarkButton) LinearLayout bookmarkButton;
+    @BindView(R.id.bookmarkButtonText) TextView bookmarkButtonText;
+    @BindView(R.id.bookmarkButtonImage) ImageView bookmarkButtonImage;
 
     @BindView(R.id.directionsButtonText) TextView directionsButtonText;
     @BindView(R.id.iconOverflowText) TextView iconOverflowText;
@@ -153,6 +157,26 @@ public class PlaceRenderer extends Renderer<Place> {
             }
         });
 
+        bookmarkButton.setOnClickListener(view4 -> {
+            if (applicationPrefs.getBoolean("login_skipped", false)) {
+                // prompt the user to login
+                new AlertDialog.Builder(getContext())
+                        .setMessage(R.string.login_alert_message)
+                        .setPositiveButton(R.string.login, (dialog, which) -> {
+                            startActivityWithFlags( getContext(), LoginActivity.class, Intent.FLAG_ACTIVITY_CLEAR_TOP,
+                                    Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                            prefs.edit().putBoolean("login_skipped", false).apply();
+                            fragment.getActivity().finish();
+                        })
+                        .show();
+            } else {
+                // TODO Update location bookmark state in DB
+                boolean isBookmarked = false; // TODO Call Dao
+                int icon = isBookmarked ? R.drawable.ic_round_star_filled_24px : R.drawable.ic_round_star_border_24px;
+                bookmarkButtonImage.setImageResource(icon);
+                ViewUtil.showSnackbar(view, R.string.error_occurred);
+            }
+        });
     }
 
     private void storeSharedPrefs() {
