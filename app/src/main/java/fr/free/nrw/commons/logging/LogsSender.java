@@ -6,7 +6,6 @@ import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
-import org.acra.ACRA;
 import org.acra.collector.CrashReportData;
 import org.acra.sender.ReportSender;
 import org.apache.commons.codec.Charsets;
@@ -23,26 +22,40 @@ import java.util.zip.ZipOutputStream;
 import fr.free.nrw.commons.auth.SessionManager;
 import timber.log.Timber;
 
-import static fr.free.nrw.commons.CommonsApplication.FEEDBACK_EMAIL;
-
+/**
+ * Abstract class that implements Acra's log sender
+ */
 public abstract class LogsSender implements ReportSender {
 
+    String mailTo;
     String logFileName;
     String emailSubject;
     String emailBody;
 
     private final SessionManager sessionManager;
+    private final boolean isBeta;
 
-    LogsSender(SessionManager sessionManager) {
+    LogsSender(SessionManager sessionManager,
+               boolean isBeta) {
         this.sessionManager = sessionManager;
+        this.isBeta = isBeta;
     }
 
+    /**
+     * Overrides send method of ACRA's ReportSender to send logs
+     * @param context
+     * @param report
+     */
     @Override
     public void send(@NonNull final Context context, @Nullable CrashReportData report) {
-        Timber.d("Trying to send a new report %s", ACRA.isACRASenderServiceProcess());
         sendLogs(context, report);
     }
 
+    /**
+     * Gets zipped log files and sends it via email. Can be modified to change the send log mechanism
+     * @param context
+     * @param report
+     */
     private void sendLogs(Context context, CrashReportData report) {
         final Uri logFileUri = getZippedLogFileUri(context, report);
         if (logFileUri != null) {
@@ -58,12 +71,17 @@ public abstract class LogsSender implements ReportSender {
      */
     protected abstract String getExtraInfo();
 
+    /**
+     * Fires an intent to send email with logs
+     * @param context
+     * @param logFileUri
+     */
     private void sendEmail(Context context, Uri logFileUri) {
         String subject = emailSubject;
         String body = emailBody;
 
         Intent emailIntent = new Intent(Intent.ACTION_SENDTO);
-        emailIntent.setData(Uri.fromParts("mailto", FEEDBACK_EMAIL, null));
+        emailIntent.setData(Uri.fromParts("mailto", mailTo, null));
         emailIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         emailIntent.putExtra(Intent.EXTRA_SUBJECT, subject);
         emailIntent.putExtra(Intent.EXTRA_TEXT, body);
@@ -71,6 +89,12 @@ public abstract class LogsSender implements ReportSender {
         context.startActivity(emailIntent);
     }
 
+    /**
+     * Returns the URI for the zipped log file
+     * @param context
+     * @param report
+     * @return
+     */
     private Uri getZippedLogFileUri(Context context, CrashReportData report) {
         try {
             StringBuilder builder = new StringBuilder();
@@ -81,7 +105,7 @@ public abstract class LogsSender implements ReportSender {
             attachExtraInfo(builder);
             byte[] metaData = builder.toString().getBytes(Charsets.UTF_8);
             File zipFile = new File(context.getExternalFilesDir(null), logFileName);
-            writeLogToZipFile(context, metaData, zipFile);
+            writeLogToZipFile(metaData, zipFile);
             return Uri.fromFile(zipFile);
         } catch (IOException e) {
             Timber.w(e, "Error in generating log file");
@@ -89,6 +113,11 @@ public abstract class LogsSender implements ReportSender {
         return null;
     }
 
+    /**
+     * Checks if there are any pending crash reports and attaches them to the logs
+     * @param report
+     * @param builder
+     */
     private void attachCrashInfo(CrashReportData report, StringBuilder builder) {
         if (report == null) {
             return;
@@ -96,21 +125,35 @@ public abstract class LogsSender implements ReportSender {
         builder.append(report);
     }
 
+    /**
+     * Attaches username to the the meta_data file
+     * @param builder
+     */
     private void attachUserInfo(StringBuilder builder) {
         builder.append("MediaWiki Username = ").append(sessionManager.getUserName()).append("\n");
     }
 
+    /**
+     * Gets any extra meta information to be attached with the log files
+     * @param builder
+     */
     private void attachExtraInfo(StringBuilder builder) {
         String infoToBeAttached = getExtraInfo();
         builder.append(infoToBeAttached);
         builder.append("\n");
     }
 
-    private void writeLogToZipFile(Context context, byte[] metaData, File zipFile) throws IOException {
+    /**
+     * Zips the logs and meta information
+     * @param metaData
+     * @param zipFile
+     * @throws IOException
+     */
+    private void writeLogToZipFile(byte[] metaData, File zipFile) throws IOException {
         FileOutputStream fos = new FileOutputStream(zipFile);
         BufferedOutputStream bos = new BufferedOutputStream(fos);
         ZipOutputStream zos = new ZipOutputStream(bos);
-        File logDir = new File(LogUtils.getLogDirectory(context));
+        File logDir = new File(LogUtils.getLogDirectory(isBeta));
         byte[] buffer = new byte[1024];
         for (File file : logDir.listFiles()) {
             FileInputStream fis = new FileInputStream(file);

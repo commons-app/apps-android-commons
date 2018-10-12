@@ -59,6 +59,9 @@ public class CommonsApplication extends Application {
     @Inject @Named("default_preferences") SharedPreferences defaultPrefs;
     @Inject @Named("application_preferences") SharedPreferences applicationPrefs;
     @Inject @Named("prefs") SharedPreferences otherPrefs;
+    @Inject
+    @Named("isBeta")
+    boolean isBeta;
 
     /**
      * Constants begin
@@ -67,14 +70,9 @@ public class CommonsApplication extends Application {
 
     public static final String DEFAULT_EDIT_SUMMARY = "Uploaded using [[COM:MOA|Commons Mobile App]]";
 
-    //public static final String FEEDBACK_EMAIL = "commons-app-android@googlegroups.com";
-    public static final String FEEDBACK_EMAIL = "maskaravivek@gmail.com";
+    public static final String FEEDBACK_EMAIL = "commons-app-android@googlegroups.com";
 
     public static final String FEEDBACK_EMAIL_SUBJECT = "Commons Android App (%s) Feedback";
-
-    public static final String LOGS_PRIVATE_EMAIL = "commons-app-android-private@googlegroups.com";
-
-    public static final String LOGS_PRIVATE_EMAIL_SUBJECT = "Commons Android App (%s) Logs";
 
     public static final String NOTIFICATION_CHANNEL_ID_ALL = "CommonsNotificationAll";
 
@@ -133,10 +131,18 @@ public class CommonsApplication extends Application {
         System.setProperty("in.yuvi.http.fluent.PROGRESS_TRIGGER_THRESHOLD", "3.0");
     }
 
+    /**
+     * Plants debug and file logging tree.
+     * Timber lets you plant your own logging trees.
+     *
+     */
     private void initTimber() {
+        String logFileName = isBeta ? "CommonsBetaAppLogs" : "CommonsAppLogs";
+        String logDirectory = LogUtils.getLogDirectory(isBeta);
         FileLoggingTree tree = new FileLoggingTree(
                 Log.DEBUG,
-                LogUtils.getLogDirectory(this),
+                logFileName,
+                logDirectory,
                 1000,
                 getFileLoggingThreadPool());
 
@@ -144,13 +150,13 @@ public class CommonsApplication extends Application {
         Timber.plant(new Timber.DebugTree());
     }
 
+    /**
+     * Remove ACRA's UncaughtExceptionHandler
+     * We do this because ACRA's handler spawns a new process possibly screwing up with a few things
+     */
     private void initAcra() {
         Thread.UncaughtExceptionHandler exceptionHandler = Thread.getDefaultUncaughtExceptionHandler();
         ACRA.init(this);
-        /* Remove ACRA's UncaughtExceptionHandler
-           We do this because ACRA's handler spawns a new process screwing up with Door auth
-           (and possibly other things)
-        */
         Thread.setDefaultUncaughtExceptionHandler(exceptionHandler);
     }
 

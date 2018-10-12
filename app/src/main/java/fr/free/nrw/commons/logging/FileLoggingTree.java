@@ -17,32 +17,57 @@ import ch.qos.logback.core.rolling.RollingFileAppender;
 import ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy;
 import timber.log.Timber;
 
+/**
+ * Extends Timber's debug tree to write logs to a file
+ */
 public class FileLoggingTree extends Timber.DebugTree implements LogLevelSettableTree {
     private final Logger logger = LoggerFactory.getLogger(Logger.ROOT_LOGGER_NAME);
     private int logLevel;
-    private final String logFileName = "CommonsApp";
+    private final String logFileName;
     private int fileSize;
     private FixedWindowRollingPolicy rollingPolicy;
     private final Executor executor;
 
-    public FileLoggingTree(int logLevel, String logDirectory, int fileSizeInKb, Executor executor) {
+    public FileLoggingTree(int logLevel,
+                           String logFileName,
+                           String logDirectory,
+                           int fileSizeInKb,
+                           Executor executor) {
         this.logLevel = logLevel;
+        this.logFileName = logFileName;
         this.fileSize = fileSizeInKb;
         configureLogger(logDirectory);
         this.executor = executor;
     }
 
+    /**
+     * Can be overridden to change file's log level
+     * @param logLevel
+     */
     @Override
     public void setLogLevel(int logLevel) {
         this.logLevel = logLevel;
     }
 
+    /**
+     * Check and log any message
+     * @param priority
+     * @param tag
+     * @param message
+     * @param t
+     */
     @Override
     protected void log(final int priority, final String tag, @NonNull final String message, Throwable t) {
         executor.execute(() -> logMessage(priority, tag, message));
 
     }
 
+    /**
+     * Log any message based on the priority
+     * @param priority
+     * @param tag
+     * @param message
+     */
     private void logMessage(int priority, String tag, String message) {
         String messageWithTag = String.format("[%s] : %s", tag, message);
         switch (priority) {
@@ -67,11 +92,21 @@ public class FileLoggingTree extends Timber.DebugTree implements LogLevelSettabl
         }
     }
 
+    /**
+     * Checks if a particular log line should be logged in the file or not
+     * @param priority
+     * @return
+     */
     @Override
     protected boolean isLoggable(int priority) {
         return priority >= logLevel;
     }
 
+    /**
+     * Configures the logger with a file size rolling policy (SizeBasedTriggeringPolicy)
+     * https://github.com/tony19/logback-android/wiki
+     * @param logDir
+     */
     private void configureLogger(String logDir) {
         LoggerContext loggerContext = (LoggerContext) LoggerFactory.getILoggerFactory();
         loggerContext.reset();
