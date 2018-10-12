@@ -55,4 +55,12 @@ public class BookmarksPagerAdapter extends FragmentPagerAdapter {
         BookmarkPictureListFragment fragment = (BookmarkPictureListFragment)(pages.get(0).getPage());
         return fragment.getAdapter();
     }
+
+    /**
+     * Update the pictures list for the bookmark fragment
+     */
+    public void requestPictureListUpdate() {
+        BookmarkPictureListFragment fragment = (BookmarkPictureListFragment)(pages.get(0).getPage());
+        fragment.onResume();
+    }
 }

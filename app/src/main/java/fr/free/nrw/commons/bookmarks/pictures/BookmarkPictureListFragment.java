@@ -73,6 +73,7 @@ public class BookmarkPictureListFragment extends DaggerFragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         gridView.setOnItemClickListener((AdapterView.OnItemClickListener) getActivity());
+        initList();
     }
 
     @Override
@@ -84,7 +85,18 @@ public class BookmarkPictureListFragment extends DaggerFragment {
     @Override
     public void onResume() {
         super.onResume();
-        initList();
+        if (controller.needRefreshBookmarkedPictures()) {
+            gridView.setVisibility(GONE);
+            if (gridAdapter != null) {
+                gridAdapter.clear();
+                try {
+                    ((BookmarksActivity) getContext()).viewPagerNotifyDataSetChanged();
+                }catch (Exception e){
+                    e.printStackTrace();
+                }
+            }
+            initList();
+        }
     }
 
     /**
@@ -188,15 +200,11 @@ public class BookmarkPictureListFragment extends DaggerFragment {
             }catch (Exception e){
                 e.printStackTrace();
             }
-            try {
-                ((BookmarksActivity) getContext()).viewPagerNotifyDataSetChanged();
-            }catch (Exception e){
-                e.printStackTrace();
-            }
         }
         progressBar.setVisibility(GONE);
         isLoading = false;
         statusTextView.setVisibility(GONE);
+        gridView.setVisibility(VISIBLE);
     }
 
     /**

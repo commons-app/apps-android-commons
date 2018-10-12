@@ -51,10 +51,19 @@ public class GridViewAdapter extends ArrayAdapter {
      * @param images
      */
     public boolean containsAll(List<Media> images){
+        if (images == null || images.isEmpty()) {
+            return false;
+        }
         if (data == null) {
             data = new ArrayList<>();
+            return false;
         }
-        return images.get(0).getFilename().equals(data.get(0).getFilename());
+        if (data.size() <= 0) {
+            return false;
+        }
+        String fileName = data.get(0).getFilename();
+        String imageName = images.get(0).getFilename();
+        return imageName.equals(fileName);
     }
 
     @Override
