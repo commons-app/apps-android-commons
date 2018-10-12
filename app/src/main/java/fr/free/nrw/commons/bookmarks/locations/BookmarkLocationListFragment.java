@@ -30,6 +30,7 @@ import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.contributions.ContributionController;
 import fr.free.nrw.commons.nearby.NearbyAdapterFactory;
 import fr.free.nrw.commons.nearby.Place;
+import fr.free.nrw.commons.nearby.PlaceRenderer;
 import timber.log.Timber;
 
 import static android.app.Activity.RESULT_OK;
@@ -73,6 +74,19 @@ public class BookmarkLocationListFragment extends DaggerFragment {
         super.onViewCreated(view, savedInstanceState);
         progressBar.setVisibility(View.VISIBLE);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        recyclerView.setAdapter(
+                adapterFactory.create(
+                        new ArrayList<Place>(),
+                        () -> {
+                            initList();
+                        }
+                )
+        );
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
         initList();
     }
 
@@ -81,7 +95,6 @@ public class BookmarkLocationListFragment extends DaggerFragment {
      */
     private void initList() {
         List<Place> places = controller.loadFavoritesLocations();
-        recyclerView.setAdapter(adapterFactory.create(new ArrayList<Place>()));
         adapterFactory.updateAdapterData(places, (RVRendererAdapter<Place>) recyclerView.getAdapter());
         progressBar.setVisibility(View.GONE);
         if (places.size() <= 0) {

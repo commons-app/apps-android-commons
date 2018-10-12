@@ -27,8 +27,15 @@ public class NearbyAdapterFactory {
     }
 
     public RVRendererAdapter<Place> create(List<Place> placeList) {
+        return create(placeList, null);
+    }
+
+    public RVRendererAdapter<Place> create(
+            List<Place> placeList,
+            PlaceRenderer.OnBookmarkClick onBookmarkClick
+    ) {
         RendererBuilder<Place> builder = new RendererBuilder<Place>()
-                .bind(Place.class, new PlaceRenderer(fragment, controller));
+                .bind(Place.class, new PlaceRenderer(fragment, controller, onBookmarkClick));
         ListAdapteeCollection<Place> collection = new ListAdapteeCollection<>(
                 placeList != null ? placeList : Collections.emptyList());
         return new RVRendererAdapter<>(builder, collection);
