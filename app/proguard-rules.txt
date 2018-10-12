@@ -58,10 +58,6 @@
 # --- /Gson ---
 
 
-# --- /timber ---
-
--keep class timber.** { *; }
-
 # --- /logback ---
 
 -keep class ch.qos.** { *; }
@@ -69,3 +65,8 @@
 -keepattributes *Annotation*
 
 -dontwarn ch.qos.logback.core.net.*
+
+# --- /acra ---
+-keep class org.acra.** { *; }
+-keepattributes SourceFile,LineNumberTable
+-keepattributes *Annotation*

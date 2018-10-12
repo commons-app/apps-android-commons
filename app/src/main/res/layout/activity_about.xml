@@ -153,16 +153,6 @@
                 android:gravity="center"
                 />
 
-            <TextView
-                android:id="@+id/about_logs"
-                style="?android:textAppearanceSmall"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/standard_gap"
-                android:gravity="center"
-                android:text="@string/show_logs"
-                android:textColor="@color/primaryColor" />
-
         </LinearLayout>
         </RelativeLayout>
     </ScrollView>

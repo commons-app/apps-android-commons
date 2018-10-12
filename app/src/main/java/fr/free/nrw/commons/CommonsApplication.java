@@ -20,16 +20,14 @@ import com.squareup.leakcanary.RefWatcher;
 import com.tspoon.traceur.Traceur;
 
 import org.acra.ACRA;
-import org.acra.annotation.AcraCore;
-import org.acra.annotation.AcraToast;
-import org.acra.data.StringFormat;
+import org.acra.ReportingInteractionMode;
+import org.acra.annotation.ReportsCrashes;
 
 import java.io.File;
 
 import javax.inject.Inject;
 import javax.inject.Named;
 
-import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.auth.SessionManager;
 import fr.free.nrw.commons.category.CategoryDao;
 import fr.free.nrw.commons.concurrency.BackgroundPoolExceptionHandler;
@@ -37,7 +35,6 @@ import fr.free.nrw.commons.concurrency.ThreadPoolService;
 import fr.free.nrw.commons.contributions.ContributionDao;
 import fr.free.nrw.commons.data.DBOpenHelper;
 import fr.free.nrw.commons.di.ApplicationlessInjection;
-import fr.free.nrw.commons.logging.CommonsLogSenderFactory;
 import fr.free.nrw.commons.logging.FileLoggingTree;
 import fr.free.nrw.commons.logging.LogUtils;
 import fr.free.nrw.commons.modifications.ModifierSequenceDao;
@@ -47,16 +44,14 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 import timber.log.Timber;
 
-import static org.acra.ReportField.ANDROID_VERSION;
-import static org.acra.ReportField.APP_VERSION_CODE;
-import static org.acra.ReportField.CUSTOM_DATA;
-import static org.acra.ReportField.LOGCAT;
-import static org.acra.ReportField.PHONE_MODEL;
-import static org.acra.ReportField.STACK_TRACE;
-
-@AcraCore(reportContent = {APP_VERSION_CODE, ANDROID_VERSION, PHONE_MODEL, CUSTOM_DATA, STACK_TRACE, LOGCAT},
-        buildConfigClass = BuildConfig.class,
-        reportSenderFactoryClasses = CommonsLogSenderFactory.class)
+@ReportsCrashes(
+        mailTo = "commons-app-android-private@googlegroups.com",
+        mode = ReportingInteractionMode.DIALOG,
+        resDialogText = R.string.crash_dialog_text,
+        resDialogTitle = R.string.crash_dialog_title,
+        resDialogCommentPrompt = R.string.crash_dialog_comment_prompt,
+        resDialogOkToast = R.string.crash_dialog_ok_toast
+)
 public class CommonsApplication extends Application {
     @Inject SessionManager sessionManager;
     @Inject DBOpenHelper dbOpenHelper;
