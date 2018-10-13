@@ -147,11 +147,11 @@ public  class       ContributionsActivity
         setTitle(getString(R.string.title_activity_contributions));
 
 
-//        if(checkAccount()) {
-//            new QuizChecker(this,
-//                    sessionManager.getCurrentAccount().name,
-//                    mediaWikiApi);
-//        }
+        if(checkAccount()) {
+            new QuizChecker(this,
+                    sessionManager.getCurrentAccount().name,
+                    mediaWikiApi);
+        }
         if(!BuildConfig.FLAVOR.equalsIgnoreCase("beta")){
             setUploadCount();
         }
