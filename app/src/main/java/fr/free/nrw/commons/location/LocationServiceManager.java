@@ -102,14 +102,11 @@ public class LocationServiceManager implements LocationListener {
     @SuppressLint("MissingPermission")
     public LatLng getLKL() {
         if (isLocationPermissionGranted()) {
-            Location lastKL = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
-            if (lastKL == null) {
-                lastKL = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
+            lastLocation = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+            if (lastLocation == null) {
+                lastLocation = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
             }
-            if (lastKL == null) {
-                return null;
-            }
-            return LatLng.from(lastKL);
+            return(getLastLocation());
         } else {
             return null;
         }
