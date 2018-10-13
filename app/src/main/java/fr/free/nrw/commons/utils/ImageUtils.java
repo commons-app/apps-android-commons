@@ -80,7 +80,7 @@ public class ImageUtils {
         Bitmap processBitmap = bitmapRegionDecoder.decodeRegion(rect,null);
 
         if (checkIfImageIsDark(processBitmap)) {
-            return Result.IMAGE_DARK;
+            return IMAGE_DARK;
         }
 
         return IMAGE_OK;
