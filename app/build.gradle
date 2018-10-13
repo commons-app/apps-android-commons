@@ -64,7 +64,6 @@ dependencies {
     androidTestImplementation 'com.android.support.test:rules:1.0.2'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
-
     debugImplementation "com.squareup.leakcanary:leakcanary-android:$LEAK_CANARY"
     releaseImplementation "com.squareup.leakcanary:leakcanary-android-no-op:$LEAK_CANARY"
     testImplementation "com.squareup.leakcanary:leakcanary-android-no-op:$LEAK_CANARY"
@@ -72,6 +71,7 @@ dependencies {
     //For handling runtime permissions
     implementation 'com.karumi:dexter:5.0.0'
 
+    implementation files('libs/simplemagic-1.9.jar')
 }
 
 android {
@@ -80,8 +80,8 @@ android {
 
     defaultConfig {
         applicationId 'fr.free.nrw.commons'
-        versionCode 90
-        versionName '2.8.3'
+        versionCode 92
+        versionName '2.8.5'
         setProperty("archivesBaseName", "app-commons-v$versionName-" + getBranchName())
 
         minSdkVersion 15
