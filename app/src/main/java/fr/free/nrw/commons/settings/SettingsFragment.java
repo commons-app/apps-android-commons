@@ -114,6 +114,9 @@ public class SettingsFragment extends PreferenceFragment {
         }
     }
 
+    /**
+     * Requests external storage permissions and shows a toast stating that log collection has started
+     */
     private void requestExternalStoragePermissions() {
         Dexter.withActivity(getActivity())
                 .withPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE)
