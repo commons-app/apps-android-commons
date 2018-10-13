@@ -1,5 +1,6 @@
 package fr.free.nrw.commons;
 
+import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -14,9 +15,6 @@ import android.widget.Toast;
 import org.apache.commons.codec.binary.Hex;
 import org.apache.commons.codec.digest.DigestUtils;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.LinkedHashMap;
@@ -201,6 +199,18 @@ public class Utils {
         CustomTabsIntent customTabsIntent = builder.build();
         customTabsIntent.intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         customTabsIntent.launchUrl(context, url);
+    }
+
+    public static void handleGeoCoordinates(Context context, String coords) {
+        try {
+            Uri gmmIntentUri = Uri.parse("google.streetview:cbll=" + coords);
+            Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
+            mapIntent.setPackage("com.google.android.apps.maps");
+            context.startActivity(mapIntent);
+        } catch (ActivityNotFoundException ex) {
+            Toast toast = Toast.makeText(context, context.getString(R.string.map_application_missing), LENGTH_SHORT);
+            toast.show();
+        }
     }
 
     /**

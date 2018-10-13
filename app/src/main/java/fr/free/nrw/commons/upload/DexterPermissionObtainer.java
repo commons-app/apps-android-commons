@@ -98,14 +98,14 @@ public class DexterPermissionObtainer {
      * for the required permission and then handles the permission status, thanks to Dexter's appropriate callbacks.
      */
     private void askDexterToHandleExternalStoragePermission() {
-        Timber.d(TAG, "External storage permission is being requested");
+        Timber.d("External storage permission is being requested");
         if (null == dexterStoragePermissionBuilder) {
             dexterStoragePermissionBuilder = Dexter.withActivity(activity)
                     .withPermission(requestedPermission)
                     .withListener(new BasePermissionListener() {
                         @Override
                         public void onPermissionGranted(PermissionGrantedResponse response) {
-                            Timber.d(TAG, "User has granted us the permission for writing the external storage");
+                            Timber.d("User has granted us the permission for writing the external storage");
                             //If permission is granted, well and good
                             storagePromptInProgress = false;
                             storagePromptObservable.onComplete();
@@ -114,7 +114,7 @@ public class DexterPermissionObtainer {
 
                         @Override
                         public void onPermissionDenied(PermissionDeniedResponse response) {
-                            Timber.d(TAG, "User has granted us the permission for writing the external storage");
+                            Timber.d("User has granted us the permission for writing the external storage");
                             //If permission is not granted in whatsoever scenario, we show him a dialog stating why we need the permission
                             permissionDeniedResponse = response;
                             if (null != storagePermissionInfoDialog && !storagePermissionInfoDialog

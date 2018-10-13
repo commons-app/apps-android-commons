@@ -27,12 +27,6 @@ public abstract class ActivityBuilderModule {
     @ContributesAndroidInjector
     abstract WelcomeActivity bindWelcomeActivity();
 
-    //@ContributesAndroidInjector
-    //abstract ShareActivity bindShareActivity();
-
-    //@ContributesAndroidInjector
-    //abstract MultipleShareActivity bindMultipleShareActivity();
-
     @ContributesAndroidInjector
     abstract MainActivity bindContributionsActivity();
 

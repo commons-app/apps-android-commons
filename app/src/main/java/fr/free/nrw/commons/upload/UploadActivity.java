@@ -67,92 +67,53 @@ import timber.log.Timber;
 import static fr.free.nrw.commons.wikidata.WikidataConstants.WIKIDATA_ENTITY_ID_PREF;
 
 public class UploadActivity extends AuthenticatedActivity implements UploadView {
-    @Inject
-    InputMethodManager inputMethodManager;
-    @Inject
-    MediaWikiApi mwApi;
-
-
-    @Inject
-    @Named("direct_nearby_upload_prefs")
-    SharedPreferences directPrefs;
-
-    @Inject
-    UploadPresenter presenter;
-    @Inject
-    CategoriesModel categoriesModel;
+    @Inject InputMethodManager inputMethodManager;
+    @Inject MediaWikiApi mwApi;
+    @Inject @Named("direct_nearby_upload_prefs") SharedPreferences directPrefs;
+    @Inject UploadPresenter presenter;
+    @Inject CategoriesModel categoriesModel;
 
     // Main GUI
-    @BindView(R.id.backgroundImage)
-    PhotoView background;
-    @BindView(R.id.activity_upload_cards)
-    ConstraintLayout cardLayout;
-    @BindView(R.id.view_flipper)
-    ViewFlipper viewFlipper;
+    @BindView(R.id.backgroundImage) PhotoView background;
+    @BindView(R.id.activity_upload_cards) ConstraintLayout cardLayout;
+    @BindView(R.id.view_flipper) ViewFlipper viewFlipper;
 
     // Top Card
-    @BindView(R.id.top_card)
-    CardView topCard;
-    @BindView(R.id.top_card_expand_button)
-    ImageView topCardExpandButton;
-    @BindView(R.id.top_card_title)
-    TextView topCardTitle;
-    @BindView(R.id.top_card_thumbnails)
-    RecyclerView topCardThumbnails;
+    @BindView(R.id.top_card) CardView topCard;
+    @BindView(R.id.top_card_expand_button) ImageView topCardExpandButton;
+    @BindView(R.id.top_card_title) TextView topCardTitle;
+    @BindView(R.id.top_card_thumbnails) RecyclerView topCardThumbnails;
 
     // Bottom Card
-    @BindView(R.id.bottom_card)
-    CardView bottomCard;
-    @BindView(R.id.bottom_card_expand_button)
-    ImageView bottomCardExpandButton;
-    @BindView(R.id.bottom_card_title)
-    TextView bottomCardTitle;
-    @BindView(R.id.bottom_card_next)
-    Button next;
-    @BindView(R.id.bottom_card_previous)
-    Button previous;
-    @BindView(R.id.bottom_card_add_desc)
-    Button bottomCardAddDescription;
+    @BindView(R.id.bottom_card) CardView bottomCard;
+    @BindView(R.id.bottom_card_expand_button) ImageView bottomCardExpandButton;
+    @BindView(R.id.bottom_card_title) TextView bottomCardTitle;
+    @BindView(R.id.bottom_card_next) Button next;
+    @BindView(R.id.bottom_card_previous) Button previous;
+    @BindView(R.id.bottom_card_add_desc) Button bottomCardAddDescription;
 
     //Right Card
-    @BindView(R.id.right_card)
-    CardView rightCard;
-    @BindView(R.id.right_card_expand_button)
-    ImageView rightCardExpandButton;
-    @BindView(R.id.right_card_map_button)
-    View rightCardMapButton;
+    @BindView(R.id.right_card) CardView rightCard;
+    @BindView(R.id.right_card_expand_button) ImageView rightCardExpandButton;
+    @BindView(R.id.right_card_map_button) View rightCardMapButton;
 
     // Category Search
-    @BindView(R.id.categories_title)
-    TextView categoryTitle;
-    @BindView(R.id.category_next)
-    Button categoryNext;
-    @BindView(R.id.category_previous)
-    Button categoryPrevious;
-    @BindView(R.id.categoriesSearchInProgress)
-    ProgressBar categoriesSearchInProgress;
-    @BindView(R.id.category_search)
-    EditText categoriesSearch;
-    @BindView(R.id.category_search_container)
-    TextInputLayout categoriesSearchContainer;
-    @BindView(R.id.categories)
-    RecyclerView categoriesList;
+    @BindView(R.id.categories_title) TextView categoryTitle;
+    @BindView(R.id.category_next) Button categoryNext;
+    @BindView(R.id.category_previous) Button categoryPrevious;
+    @BindView(R.id.categoriesSearchInProgress) ProgressBar categoriesSearchInProgress;
+    @BindView(R.id.category_search) EditText categoriesSearch;
+    @BindView(R.id.category_search_container) TextInputLayout categoriesSearchContainer;
+    @BindView(R.id.categories) RecyclerView categoriesList;
 
     // Final Submission
-    @BindView(R.id.license_title)
-    TextView licenseTitle;
-    @BindView(R.id.share_license_summary)
-    TextView licenseSummary;
-    @BindView(R.id.media_upload_policy)
-    TextView licensePolicy;
-    @BindView(R.id.license_list)
-    Spinner licenseSpinner;
-    @BindView(R.id.submit)
-    Button submit;
-    @BindView(R.id.license_previous)
-    Button licensePrevious;
-    @BindView(R.id.rv_descriptions)
-    RecyclerView rvDescriptions;
+    @BindView(R.id.license_title) TextView licenseTitle;
+    @BindView(R.id.share_license_summary) TextView licenseSummary;
+    @BindView(R.id.media_upload_policy) TextView licensePolicy;
+    @BindView(R.id.license_list) Spinner licenseSpinner;
+    @BindView(R.id.submit) Button submit;
+    @BindView(R.id.license_previous) Button licensePrevious;
+    @BindView(R.id.rv_descriptions) RecyclerView rvDescriptions;
 
     private DescriptionsAdapter descriptionsAdapter;
     private RVRendererAdapter<CategoryItem> categoriesAdapter;
@@ -414,6 +375,11 @@ public class UploadActivity extends AuthenticatedActivity implements UploadView 
         }
     }
 
+    @Override
+    public void launchMapActivity(String decCoords) {
+        Utils.handleGeoCoordinates(this, decCoords);
+    }
+
     public void showDuplicateTitlePopup(String title) {
         showInfoAlert(R.string.warning, R.string.upload_title_duplicate, title);
     }
@@ -579,7 +545,7 @@ public class UploadActivity extends AuthenticatedActivity implements UploadView 
             if (intent.getBooleanExtra("isDirectUpload", false)) {
                 String imageTitle = directPrefs.getString("Title", "");
                 String imageDesc = directPrefs.getString("Desc", "");
-                Timber.i("Received direct upload with title" + imageTitle + "and description %s" + imageDesc);
+                Timber.i("Received direct upload with title %s and description %s", imageTitle, imageDesc);
                 String wikidataEntityIdPref = intent.getStringExtra(WIKIDATA_ENTITY_ID_PREF);
                 presenter.receiveDirect(mediaUri, mimeType, source, wikidataEntityIdPref, imageTitle, imageDesc);
             } else {
@@ -588,7 +554,7 @@ public class UploadActivity extends AuthenticatedActivity implements UploadView 
             }
         } else if (Intent.ACTION_SEND_MULTIPLE.equals(intent.getAction())) {
             ArrayList<Uri> urisList = intent.getParcelableArrayListExtra(Intent.EXTRA_STREAM);
-            Timber.i("Received multiple upload");
+            Timber.i("Received multiple upload %s", urisList.size());
             presenter.receive(urisList, mimeType, source);
         }
     }
@@ -598,27 +564,6 @@ public class UploadActivity extends AuthenticatedActivity implements UploadView 
         if (content != null) {
             for (View view : content) {
                 view.setVisibility(state ? View.VISIBLE : View.GONE);
-            }
-        }
-    }
-
-    public void launchMapActivity(String decCoords) {
-        try {
-            Uri gmmIntentUri = Uri.parse("google.streetview:cbll=" + decCoords);
-            Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
-            mapIntent.setPackage("com.google.android.apps.maps");
-            startActivity(mapIntent);
-        } catch (ActivityNotFoundException ex) {
-            AlertDialog.Builder errorDialogBuilder = new AlertDialog.Builder(this);
-            errorDialogBuilder.setMessage(R.string.map_application_missing);
-            errorDialogBuilder.setTitle(R.string.warning);
-            //just dismiss the dialog
-            errorDialogBuilder.setPositiveButton(R.string.ok, (dialogInterface, i) -> {
-            });
-
-            AlertDialog errorDialog = errorDialogBuilder.create();
-            if (!isFinishing()) {
-                errorDialog.show();
             }
         }
     }
