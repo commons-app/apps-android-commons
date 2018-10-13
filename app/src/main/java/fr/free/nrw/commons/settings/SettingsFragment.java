@@ -3,30 +3,27 @@ package fr.free.nrw.commons.settings;
 import android.Manifest;
 import android.app.AlertDialog;
 import android.content.SharedPreferences;
-import android.content.pm.PackageManager;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
-import android.preference.SwitchPreference;
 import android.preference.EditTextPreference;
 import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.PreferenceFragment;
-import android.support.annotation.NonNull;
-import android.support.v4.content.ContextCompat;
+import android.preference.SwitchPreference;
 
-import org.acra.sender.ReportSenderException;
+import com.karumi.dexter.Dexter;
+import com.karumi.dexter.listener.PermissionGrantedResponse;
+import com.karumi.dexter.listener.single.BasePermissionListener;
 
 import javax.inject.Inject;
 import javax.inject.Named;
 
-import fr.free.nrw.commons.BuildConfig;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.Utils;
 import fr.free.nrw.commons.di.ApplicationlessInjection;
 import fr.free.nrw.commons.logging.CommonsLogSender;
-import fr.free.nrw.commons.logging.LogsSender;
-import timber.log.Timber;
+import fr.free.nrw.commons.utils.PermissionUtils;
+import fr.free.nrw.commons.utils.ViewUtil;
 
 public class SettingsFragment extends PreferenceFragment {
 
@@ -96,43 +93,35 @@ public class SettingsFragment extends PreferenceFragment {
 
         Preference betaTesterPreference = findPreference("becomeBetaTester");
         betaTesterPreference.setOnPreferenceClickListener(preference -> {
-                Utils.handleWebUrl(getActivity(),Uri.parse(getResources().getString(R.string.beta_opt_in_link)));
-                return true;
+            Utils.handleWebUrl(getActivity(), Uri.parse(getResources().getString(R.string.beta_opt_in_link)));
+            return true;
         });
         Preference sendLogsPreference = findPreference("sendLogFile");
         sendLogsPreference.setOnPreferenceClickListener(preference -> {
-            //first we need to check if we have the necessary permissions
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                if (ContextCompat.checkSelfPermission(
-                        getActivity(),
-                        Manifest.permission.WRITE_EXTERNAL_STORAGE)
-                        ==
-                        PackageManager.PERMISSION_GRANTED) {
-                    sendLogs();
-                } else {
-                    //first get the necessary permission
-                    requestPermissions(new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
-                            REQUEST_CODE_WRITE_EXTERNAL_STORAGE);
-                }
-            } else {
-                sendLogs();
-            }
-
+            checkPermissionsAndSendLogs();
             return true;
         });
     }
 
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        if (requestCode == REQUEST_CODE_WRITE_EXTERNAL_STORAGE && grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-             {
-                sendLogs();
-            }
+    /**
+     * First checks for external storage permissions and then sends logs via email
+     */
+    private void checkPermissionsAndSendLogs() {
+        if (PermissionUtils.hasPermission(getActivity(), Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
+            commonsLogSender.send(getActivity(), null);
+        } else {
+            requestExternalStoragePermissions();
         }
     }
 
-    private void sendLogs() {
-        commonsLogSender.send(getActivity(),null);
+    private void requestExternalStoragePermissions() {
+        Dexter.withActivity(getActivity())
+                .withPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                .withListener(new BasePermissionListener() {
+                    @Override
+                    public void onPermissionGranted(PermissionGrantedResponse response) {
+                        ViewUtil.showLongToast(getActivity(), getResources().getString(R.string.log_collection_started));
+                    }
+                }).check();
     }
 }
