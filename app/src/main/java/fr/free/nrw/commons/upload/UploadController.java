@@ -1,7 +1,7 @@
 package fr.free.nrw.commons.upload;
 
-import android.annotation.SuppressLint;
 import android.accounts.Account;
+import android.annotation.SuppressLint;
 import android.content.ComponentName;
 import android.content.ContentResolver;
 import android.content.Context;
@@ -26,11 +26,7 @@ import java.util.concurrent.Executors;
 
 import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.HandlerService;
-
-import fr.free.nrw.commons.auth.LoginActivity;
-
 import fr.free.nrw.commons.R;
-
 import fr.free.nrw.commons.auth.SessionManager;
 import fr.free.nrw.commons.contributions.Contribution;
 import fr.free.nrw.commons.settings.Prefs;
