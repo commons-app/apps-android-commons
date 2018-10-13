@@ -265,6 +265,7 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
                                 Intent callGPSSettingIntent = new Intent(
                                         android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS);
                                 Timber.d("Loaded settings page");
+                                dialog.dismiss();
                                 startActivityForResult(callGPSSettingIntent, 1);
                             })
                     .setNegativeButton(R.string.menu_cancel_upload, (dialog, id) -> {
