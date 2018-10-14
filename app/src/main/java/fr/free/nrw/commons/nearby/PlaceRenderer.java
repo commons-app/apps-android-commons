@@ -97,6 +97,7 @@ public class PlaceRenderer extends Renderer<Place> {
     @Override
     protected void setUpView(View view) {
         ButterKnife.bind(this, view);
+        closeLayout(buttonLayout);
     }
 
     @Override
