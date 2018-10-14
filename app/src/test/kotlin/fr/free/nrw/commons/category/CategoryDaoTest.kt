@@ -87,6 +87,20 @@ class CategoryDaoTest {
     }
 
     @Test
+    fun migrateTableVersionFrom_v6_to_v7() {
+        onUpdate(database, 6, 7)
+        // Table didnt change in version 7
+        verifyZeroInteractions(database)
+    }
+
+    @Test
+    fun migrateTableVersionFrom_v7_to_v8() {
+        onUpdate(database, 7, 8)
+        // Table didnt change in version 8
+        verifyZeroInteractions(database)
+    }
+
+    @Test
     fun createFromCursor() {
         createCursor(1).let { cursor ->
             cursor.moveToFirst()

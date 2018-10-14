@@ -188,7 +188,27 @@ public class BookmarkPicturesDao {
         }
 
         public static void onUpdate(SQLiteDatabase db, int from, int to) {
-            //noop
+            if (from == to) {
+                return;
+            }
+            if (from < 7) {
+                // doesn't exist yet
+                from++;
+                onUpdate(db, from, to);
+                return;
+            }
+            if (from == 7) {
+                // table added in version 8
+                onCreate(db);
+                from++;
+                onUpdate(db, from, to);
+                return;
+            }
+            if (from == 8) {
+                from++;
+                onUpdate(db, from, to);
+                return;
+            }
         }
     }
 }
