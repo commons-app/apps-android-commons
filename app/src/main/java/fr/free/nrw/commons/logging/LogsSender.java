@@ -154,6 +154,11 @@ public abstract class LogsSender implements ReportSender {
         BufferedOutputStream bos = new BufferedOutputStream(fos);
         ZipOutputStream zos = new ZipOutputStream(bos);
         File logDir = new File(LogUtils.getLogDirectory(isBeta));
+
+        if (!logDir.exists() || logDir.listFiles().length == 0) {
+            return;
+        }
+        
         byte[] buffer = new byte[1024];
         for (File file : logDir.listFiles()) {
             FileInputStream fis = new FileInputStream(file);
