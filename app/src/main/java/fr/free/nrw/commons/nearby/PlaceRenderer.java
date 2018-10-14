@@ -32,7 +32,6 @@ import fr.free.nrw.commons.auth.LoginActivity;
 import fr.free.nrw.commons.bookmarks.locations.BookmarkLocationDao;
 import fr.free.nrw.commons.contributions.ContributionController;
 import fr.free.nrw.commons.di.ApplicationlessInjection;
-import fr.free.nrw.commons.utils.ViewUtil;
 import timber.log.Timber;
 
 import static fr.free.nrw.commons.theme.NavigationBaseActivity.startActivityWithFlags;
@@ -67,6 +66,7 @@ public class PlaceRenderer extends Renderer<Place> {
 
     private Fragment fragment;
     private ContributionController controller;
+    private OnBookmarkClick onBookmarkClick;
 
     @Inject BookmarkLocationDao bookmarkLocationDao;
     @Inject @Named("prefs") SharedPreferences prefs;
@@ -76,10 +76,15 @@ public class PlaceRenderer extends Renderer<Place> {
         openedItems = new ArrayList<>();
     }
 
-    public PlaceRenderer(Fragment fragment, ContributionController controller) {
+    public PlaceRenderer(
+            Fragment fragment,
+            ContributionController controller,
+            OnBookmarkClick onBookmarkClick
+    ) {
         this.fragment = fragment;
         this.controller = controller;
         openedItems = new ArrayList<>();
+        this.onBookmarkClick = onBookmarkClick;
     }
 
     @Override
@@ -174,6 +179,9 @@ public class PlaceRenderer extends Renderer<Place> {
                 boolean isBookmarked = bookmarkLocationDao.updateBookmarkLocation(place);
                 int icon = isBookmarked ? R.drawable.ic_round_star_filled_24px : R.drawable.ic_round_star_border_24px;
                 bookmarkButtonImage.setImageResource(icon);
+                if (onBookmarkClick != null) {
+                    onBookmarkClick.onClick();
+                }
             }
         });
     }
@@ -271,6 +279,10 @@ public class PlaceRenderer extends Renderer<Place> {
 
     private boolean showMenu() {
         return place.hasCommonsLink() || place.hasWikidataLink();
+    }
+
+    public interface OnBookmarkClick {
+        void onClick();
     }
 
 }

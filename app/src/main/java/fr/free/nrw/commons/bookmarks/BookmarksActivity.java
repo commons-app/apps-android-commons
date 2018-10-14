@@ -70,7 +70,11 @@ public class BookmarksActivity extends AuthenticatedActivity
 
     @Override
     public void onBackStackChanged() {
-        // noop
+        if (supportFragmentManager.getBackStackEntryCount() == 0) {
+            // The activity has the focus
+            adapter.requestPictureListUpdate();
+            initDrawer();
+        }
     }
 
     /**

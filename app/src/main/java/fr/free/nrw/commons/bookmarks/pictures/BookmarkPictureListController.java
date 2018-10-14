@@ -18,8 +18,11 @@ public class BookmarkPictureListController {
     @Inject
     BookmarkPictureDao bookmarkDao;
 
+    private List<Bookmark> currentBookmarks;
+
     @Inject public BookmarkPictureListController(MediaWikiApi mediaWikiApi) {
         this.mediaWikiApi = mediaWikiApi;
+        currentBookmarks = new ArrayList<>();
     }
 
     /**
@@ -28,14 +31,30 @@ public class BookmarkPictureListController {
      */
     List<Media> loadBookmarkedPictures() {
         List<Bookmark> bookmarks = bookmarkDao.getAllBookmarks();
+        currentBookmarks = bookmarks;
         ArrayList<Media> medias = new ArrayList<Media>();
         for (Bookmark bookmark : bookmarks) {
             List<Media> tmpMedias = mediaWikiApi.searchImages(bookmark.getMediaName(), 0);
-            if (tmpMedias.size() > 0) {
-                medias.add(tmpMedias.get(0));
+            for (Media m : tmpMedias) {
+                if (m.getCreator().equals(bookmark.getMediaCreator())) {
+                    medias.add(m);
+                    break;
+                }
             }
         }
         return medias;
+    }
+
+    /**
+     * Loads the Media objects from the raw data stored in DB and the API.
+     * @return a list of bookmarked Media object
+     */
+    boolean needRefreshBookmarkedPictures() {
+        List<Bookmark> bookmarks = bookmarkDao.getAllBookmarks();
+        if (bookmarks.size() == currentBookmarks.size()) {
+            return false;
+        }
+        return true;
     }
 
     /**
