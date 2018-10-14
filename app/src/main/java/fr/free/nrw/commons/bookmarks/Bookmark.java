@@ -5,7 +5,7 @@ import android.net.Uri;
 import fr.free.nrw.commons.bookmarks.pictures.BookmarkPictureContentProvider;
 
 public class Bookmark {
-    public Uri contentUri;
+    private Uri contentUri;
     private String mediaName;
     private String mediaCreator;
 

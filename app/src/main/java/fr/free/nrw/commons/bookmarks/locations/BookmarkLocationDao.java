@@ -208,7 +208,7 @@ public class BookmarkLocationDao {
         }
 
         public static void onUpdate(SQLiteDatabase db, int from, int to) {
-            return;
+            //noop
         }
     }
 }

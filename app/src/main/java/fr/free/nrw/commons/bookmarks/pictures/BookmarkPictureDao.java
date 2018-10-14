@@ -133,8 +133,8 @@ public class BookmarkPictureDao {
     public static class Table {
         public static final String TABLE_NAME = "bookmarks";
 
-        static final String COLUMN_MEDIA_NAME = "media_name";
-        static final String COLUMN_CREATOR = "media_creator";
+        public static final String COLUMN_MEDIA_NAME = "media_name";
+        public static final String COLUMN_CREATOR = "media_creator";
 
         // NOTE! KEEP IN SAME ORDER AS THEY ARE DEFINED UP THERE. HELPS HARD CODE COLUMN INDICES.
         public static final String[] ALL_FIELDS = {
@@ -142,9 +142,9 @@ public class BookmarkPictureDao {
                 COLUMN_CREATOR
         };
 
-        static final String DROP_TABLE_STATEMENT = "DROP TABLE IF EXISTS " + TABLE_NAME;
+        public static final String DROP_TABLE_STATEMENT = "DROP TABLE IF EXISTS " + TABLE_NAME;
 
-        static final String CREATE_TABLE_STATEMENT = "CREATE TABLE " + TABLE_NAME + " ("
+        public static final String CREATE_TABLE_STATEMENT = "CREATE TABLE " + TABLE_NAME + " ("
                 + COLUMN_MEDIA_NAME + " STRING PRIMARY KEY,"
                 + COLUMN_CREATOR + " STRING"
                 + ");";
@@ -159,7 +159,7 @@ public class BookmarkPictureDao {
         }
 
         public static void onUpdate(SQLiteDatabase db, int from, int to) {
-            return;
+            //noop
         }
     }
 }
