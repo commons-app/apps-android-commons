@@ -113,6 +113,7 @@ public class BookmarkPicturesFragment extends DaggerFragment {
 
         isLoading = true;
         progressBar.setVisibility(VISIBLE);
+        statusTextView.setVisibility(GONE);
 
         Observable.fromCallable(() -> controller.loadBookmarkedPictures())
                 .subscribeOn(Schedulers.io())
