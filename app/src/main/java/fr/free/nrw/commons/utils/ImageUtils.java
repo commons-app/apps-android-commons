@@ -8,7 +8,6 @@ import android.graphics.Color;
 import android.graphics.Rect;
 import android.net.Uri;
 import android.support.annotation.Nullable;
-import android.util.Log;
 
 import com.facebook.common.executors.CallerThreadExecutor;
 import com.facebook.common.references.CloseableReference;
@@ -89,7 +88,7 @@ public class ImageUtils {
 
         int allPixelsCount = bitmapWidth * bitmapHeight;
         int[] bitmapPixels = new int[allPixelsCount];
-        Log.e("total", Integer.toString(allPixelsCount));
+        Timber.d("total %s", Integer.toString(allPixelsCount));
 
         bitmap.getPixels(bitmapPixels,0,bitmapWidth,0,0,bitmapWidth,bitmapHeight);
         int numberOfBrightPixels = 0;

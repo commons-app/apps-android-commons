@@ -1,14 +1,12 @@
 package fr.free.nrw.commons.nearby;
 
 import android.content.Intent;
-
-import android.net.Uri;
 import android.content.SharedPreferences;
-import android.support.v4.app.Fragment;
+import android.net.Uri;
 import android.support.transition.TransitionManager;
+import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.PopupMenu;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -104,7 +102,7 @@ public class PlaceRenderer extends Renderer<Place> {
     protected void hookListeners(View view) {
 
         final View.OnClickListener listener = view12 -> {
-            Log.d("Renderer", "clicked");
+            Timber.d("Renderer clicked");
             TransitionManager.beginDelayedTransition(buttonLayout);
 
             if (buttonLayout.isShown()) {

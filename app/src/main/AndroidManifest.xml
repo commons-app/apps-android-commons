@@ -126,6 +126,8 @@
             android:name=".bookmarks.BookmarksActivity"
             android:label="@string/title_activity_bookmarks" />
 
+        <activity android:name="com.github.pedrovgs.lynx.LynxActivity"/>
+
         <service android:name=".upload.UploadService" />
         <service
             android:name=".auth.WikiAccountAuthenticatorService"
@@ -160,6 +162,11 @@
                 android:name="android.content.SyncAdapter"
                 android:resource="@xml/modifications_sync_adapter" />
         </service>
+
+        <service
+            android:name="org.acra.sender.SenderService"
+            android:exported="false"
+            android:process=":acra" />
 
         <provider
             android:name="android.support.v4.content.FileProvider"

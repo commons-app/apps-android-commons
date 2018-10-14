@@ -2,7 +2,6 @@ package fr.free.nrw.commons.category;
 
 import android.app.Activity;
 import android.content.Context;
-import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,7 +15,6 @@ import java.util.Locale;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.MediaWikiImageView;
 import fr.free.nrw.commons.R;
-import fr.free.nrw.commons.ui.widget.HtmlTextView;
 
 /**
  * This is created to only display UI implementation. Needs to be changed in real implementation

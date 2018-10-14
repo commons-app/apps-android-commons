@@ -29,10 +29,7 @@ import com.karumi.dexter.DexterBuilder;
 import com.karumi.dexter.listener.PermissionDeniedResponse;
 import com.karumi.dexter.listener.PermissionGrantedResponse;
 import com.karumi.dexter.listener.single.BasePermissionListener;
-import fr.free.nrw.commons.CommonsApplication;
-import fr.free.nrw.commons.utils.DialogUtil;
-import fr.free.nrw.commons.utils.DialogUtil.Callback;
-import fr.free.nrw.commons.utils.PermissionUtils;
+
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
@@ -42,6 +39,7 @@ import javax.inject.Named;
 
 import butterknife.ButterKnife;
 import fr.free.nrw.commons.BuildConfig;
+import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.auth.AuthenticatedActivity;
@@ -56,7 +54,10 @@ import fr.free.nrw.commons.modifications.ModifierSequenceDao;
 import fr.free.nrw.commons.modifications.TemplateRemoveModifier;
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
 import fr.free.nrw.commons.utils.ContributionUtils;
+import fr.free.nrw.commons.utils.DialogUtil;
+import fr.free.nrw.commons.utils.DialogUtil.Callback;
 import fr.free.nrw.commons.utils.ExternalStorageUtils;
+import fr.free.nrw.commons.utils.PermissionUtils;
 import timber.log.Timber;
 
 //TODO: We should use this class to see how multiple uploads are handled, and then REMOVE it.

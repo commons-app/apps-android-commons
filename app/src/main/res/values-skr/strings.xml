@@ -60,6 +60,7 @@
   <string name="title_activity_featured_images">خاص تصویراں</string>
   <string name="title_activity_category_details">ون٘کی</string>
   <string name="menu_about">تعارف</string>
+  <string name="about_privacy_policy">&lt;u&gt;رازداری پالیسی&lt;/u&gt;</string>
   <string name="title_activity_about">تعارف</string>
   <string name="provider_categories">حالیہ ورتیاں ڳیاں ونکیاں</string>
   <string name="menu_retry_upload">ولدا کوشش کرو</string>

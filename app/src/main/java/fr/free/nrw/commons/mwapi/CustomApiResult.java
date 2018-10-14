@@ -38,9 +38,6 @@ public class CustomApiResult {
 
     static CustomApiResult fromRequestBuilder(Http.HttpRequestBuilder builder, HttpClient client) throws IOException {
 
-        Timber.d("API request is %s", builder.toString());
-        Timber.d("API params are %s", client.getParams());
-
         try {
             DocumentBuilder docBuilder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
             Document doc = docBuilder.parse(builder.use(client).charset("utf-8").data("format", "xml").asResponse().getEntity().getContent());

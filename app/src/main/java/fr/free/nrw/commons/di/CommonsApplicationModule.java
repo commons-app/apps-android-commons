@@ -21,7 +21,6 @@ import fr.free.nrw.commons.nearby.NearbyPlaces;
 import fr.free.nrw.commons.upload.UploadController;
 import fr.free.nrw.commons.wikidata.WikidataEditListener;
 import fr.free.nrw.commons.wikidata.WikidataEditListenerImpl;
-import okhttp3.OkHttpClient;
 
 import static android.content.Context.MODE_PRIVATE;
 
@@ -162,5 +161,16 @@ public class CommonsApplicationModule {
     @Singleton
     public WikidataEditListener provideWikidataEditListener() {
         return new WikidataEditListenerImpl();
+    }
+
+    /**
+     * Provides app flavour. Can be used to alter flows in the app
+     * @return
+     */
+    @Named("isBeta")
+    @Provides
+    @Singleton
+    public boolean provideIsBetaVariant() {
+        return BuildConfig.FLAVOR.equals("beta");
     }
 }
