@@ -143,7 +143,7 @@ public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment imple
             case R.id.menu_bookmark_current_image:
                 // TODO Update image state in database and in UI
                 bookmarkDao.updateBookmark(bookmark);
-                updateBookmarkState(item, m);
+                updateBookmarkState(item);
                 return true;
             case R.id.menu_share_current_image:
                 Intent shareIntent = new Intent(Intent.ACTION_SEND);
@@ -275,7 +275,7 @@ public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment imple
                             m.getFilename(),
                             m.getCreator()
                     );
-                    updateBookmarkState(menu.findItem(R.id.menu_bookmark_current_image), m);
+                    updateBookmarkState(menu.findItem(R.id.menu_bookmark_current_image));
 
                     if (m instanceof Contribution ) {
                         Contribution c = (Contribution) m;
@@ -307,7 +307,7 @@ public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment imple
         }
     }
 
-    private void updateBookmarkState(MenuItem item, Media m) {
+    private void updateBookmarkState(MenuItem item) {
         boolean isBookmarked = bookmarkDao.findBookmark(bookmark);
         int icon = isBookmarked ? R.drawable.ic_round_star_filled_24px : R.drawable.ic_round_star_border_24px;
         item.setIcon(icon);
