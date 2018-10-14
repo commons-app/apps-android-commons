@@ -56,3 +56,17 @@
 -keep class * implements com.google.gson.JsonSerializer
 -keep class * implements com.google.gson.JsonDeserializer
 # --- /Gson ---
+
+
+# --- /logback ---
+
+-keep class ch.qos.** { *; }
+-keep class org.slf4j.** { *; }
+-keepattributes *Annotation*
+
+-dontwarn ch.qos.logback.core.net.*
+
+# --- /acra ---
+-keep class org.acra.** { *; }
+-keepattributes SourceFile,LineNumberTable
+-keepattributes *Annotation*

@@ -2,8 +2,10 @@ package fr.free.nrw.commons.utils;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.provider.Settings;
+import android.support.v4.content.ContextCompat;
 
 import fr.free.nrw.commons.CommonsApplication;
 
@@ -20,5 +22,17 @@ public class PermissionUtils {
         Uri uri = Uri.fromParts("package", activity.getPackageName(), null);
         intent.setData(uri);
         activity.startActivityForResult(intent,CommonsApplication.OPEN_APPLICATION_DETAIL_SETTINGS);
+    }
+
+    /**
+     * Checks whether the app already has a particular permission
+     *
+     * @param activity
+     * @param permission permission to be checked
+     * @return
+     */
+    public static boolean hasPermission(Activity activity, String permission) {
+        return ContextCompat.checkSelfPermission(activity, permission) == PackageManager.PERMISSION_GRANTED;
+
     }
 }

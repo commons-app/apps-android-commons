@@ -150,4 +150,15 @@ public class CommonsApplicationModule {
     public WikidataEditListener provideWikidataEditListener() {
         return new WikidataEditListenerImpl();
     }
+
+    /**
+     * Provides app flavour. Can be used to alter flows in the app
+     * @return
+     */
+    @Named("isBeta")
+    @Provides
+    @Singleton
+    public boolean provideIsBetaVariant() {
+        return BuildConfig.FLAVOR.equals("beta");
+    }
 }
