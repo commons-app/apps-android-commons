@@ -12,7 +12,6 @@ import android.text.TextUtils;
 import javax.inject.Inject;
 
 import fr.free.nrw.commons.BuildConfig;
-import fr.free.nrw.commons.contributions.ContributionDao;
 import fr.free.nrw.commons.data.DBOpenHelper;
 import fr.free.nrw.commons.di.CommonsDaggerContentProvider;
 import timber.log.Timber;

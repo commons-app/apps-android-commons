@@ -3,7 +3,6 @@ package fr.free.nrw.commons.mwapi;
 import org.apache.http.cookie.Cookie;
 import org.apache.http.impl.client.AbstractHttpClient;
 import org.apache.http.impl.cookie.BasicClientCookie;
-import org.mediawiki.api.ApiResult;
 
 import java.io.IOException;
 import java.io.InputStream;

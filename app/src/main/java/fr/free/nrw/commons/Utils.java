@@ -131,7 +131,6 @@ public class Utils {
 
         // If extension is still null, make it jpg. (Hotfix for https://github.com/commons-app/apps-android-commons/issues/228)
         // If title has an extension in it, if won't be true
-        // FIXME: .png uploads fail when uploaded via Share
         if (extension == null && title.lastIndexOf(".")<=0) {
            extension = "jpg";
            title += "." + extension;

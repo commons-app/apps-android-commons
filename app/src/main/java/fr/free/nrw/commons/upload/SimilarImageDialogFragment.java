@@ -13,9 +13,6 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.Button;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
 import com.facebook.drawee.generic.GenericDraweeHierarchyBuilder;
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.facebook.imagepipeline.listener.RequestListener;
@@ -25,6 +22,9 @@ import java.io.File;
 import java.util.HashSet;
 import java.util.Set;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
 import fr.free.nrw.commons.R;
 
 /**

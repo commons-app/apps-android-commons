@@ -1,11 +1,10 @@
 package fr.free.nrw.commons.nearby;
 
 import android.content.Intent;
-
-import android.net.Uri;
 import android.content.SharedPreferences;
-import android.support.v4.app.Fragment;
+import android.net.Uri;
 import android.support.transition.TransitionManager;
+import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.PopupMenu;
 import android.view.LayoutInflater;
