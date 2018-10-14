@@ -1,10 +1,16 @@
 package fr.free.nrw.commons;
 
 import android.annotation.SuppressLint;
+import android.app.Application;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.database.sqlite.SQLiteDatabase;
-import android.support.multidex.MultiDexApplication;
+import android.os.Build;
+import android.os.Process;
+import android.support.annotation.NonNull;
+import android.util.Log;
 
 import com.facebook.drawee.backends.pipeline.Fresco;
 import com.facebook.imagepipeline.core.ImagePipelineConfig;
@@ -25,9 +31,13 @@ import javax.inject.Named;
 
 import fr.free.nrw.commons.auth.SessionManager;
 import fr.free.nrw.commons.category.CategoryDao;
+import fr.free.nrw.commons.concurrency.BackgroundPoolExceptionHandler;
+import fr.free.nrw.commons.concurrency.ThreadPoolService;
 import fr.free.nrw.commons.contributions.ContributionDao;
 import fr.free.nrw.commons.data.DBOpenHelper;
 import fr.free.nrw.commons.di.ApplicationlessInjection;
+import fr.free.nrw.commons.logging.FileLoggingTree;
+import fr.free.nrw.commons.logging.LogUtils;
 import fr.free.nrw.commons.modifications.ModifierSequenceDao;
 import fr.free.nrw.commons.upload.FileUtils;
 import fr.free.nrw.commons.utils.ContributionUtils;
@@ -35,7 +45,6 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 import timber.log.Timber;
 
-// TODO: Use ProGuard to rip out reporting when publishing
 @ReportsCrashes(
         mailTo = "commons-app-android-private@googlegroups.com",
         mode = ReportingInteractionMode.DIALOG,
@@ -44,14 +53,16 @@ import timber.log.Timber;
         resDialogCommentPrompt = R.string.crash_dialog_comment_prompt,
         resDialogOkToast = R.string.crash_dialog_ok_toast
 )
-public class CommonsApplication extends MultiDexApplication {
-
+public class CommonsApplication extends Application {
     @Inject SessionManager sessionManager;
     @Inject DBOpenHelper dbOpenHelper;
 
     @Inject @Named("default_preferences") SharedPreferences defaultPrefs;
     @Inject @Named("application_preferences") SharedPreferences applicationPrefs;
     @Inject @Named("prefs") SharedPreferences otherPrefs;
+    @Inject
+    @Named("isBeta")
+    boolean isBeta;
 
     public static final String DEFAULT_EDIT_SUMMARY = "Uploaded using [[COM:MOA|Commons Mobile App]]";
 
@@ -59,9 +70,11 @@ public class CommonsApplication extends MultiDexApplication {
 
     public static final String FEEDBACK_EMAIL_SUBJECT = "Commons Android App (%s) Feedback";
 
-    public static final String LOGS_PRIVATE_EMAIL = "commons-app-android-private@googlegroups.com";
+    public static final String NOTIFICATION_CHANNEL_ID_ALL = "CommonsNotificationAll";
 
-    public static final String LOGS_PRIVATE_EMAIL_SUBJECT = "Commons Android App (%s) Logs";
+    /**
+     * Constants End
+     */
 
     private RefWatcher refWatcher;
 
@@ -82,29 +95,86 @@ public class CommonsApplication extends MultiDexApplication {
                 .getInstance(this)
                 .getCommonsApplicationComponent()
                 .inject(this);
+
+        initTimber();
+
 //        Set DownsampleEnabled to True to downsample the image in case it's heavy
         ImagePipelineConfig config = ImagePipelineConfig.newBuilder(this)
                 .setDownsampleEnabled(true)
                 .build();
-        Fresco.initialize(this,config);
-        if (setupLeakCanary() == RefWatcher.DISABLED) {
-            return;
+        try {
+            Fresco.initialize(this, config);
+        } catch (Exception e) {
+            Timber.e(e);
+            // TODO: Remove when we're able to initialize Fresco in test builds.
         }
+
         // Empty temp directory in case some temp files are created and never removed.
         ContributionUtils.emptyTemporaryDirectory();
 
-        Timber.plant(new Timber.DebugTree());
-
-        if (!BuildConfig.DEBUG) {
-            ACRA.init(this);
-        } else {
+        initAcra();
+        if (BuildConfig.DEBUG) {
             Stetho.initializeWithDefaults(this);
         }
 
+        createNotificationChannel(this);
+
+
+        if (setupLeakCanary() == RefWatcher.DISABLED) {
+            return;
+        }
         // Fire progress callbacks for every 3% of uploaded content
         System.setProperty("in.yuvi.http.fluent.PROGRESS_TRIGGER_THRESHOLD", "3.0");
     }
 
+    /**
+     * Plants debug and file logging tree.
+     * Timber lets you plant your own logging trees.
+     *
+     */
+    private void initTimber() {
+        String logFileName = isBeta ? "CommonsBetaAppLogs" : "CommonsAppLogs";
+        String logDirectory = LogUtils.getLogDirectory(isBeta);
+        FileLoggingTree tree = new FileLoggingTree(
+                Log.DEBUG,
+                logFileName,
+                logDirectory,
+                1000,
+                getFileLoggingThreadPool());
+
+        Timber.plant(tree);
+        Timber.plant(new Timber.DebugTree());
+    }
+
+    /**
+     * Remove ACRA's UncaughtExceptionHandler
+     * We do this because ACRA's handler spawns a new process possibly screwing up with a few things
+     */
+    private void initAcra() {
+        Thread.UncaughtExceptionHandler exceptionHandler = Thread.getDefaultUncaughtExceptionHandler();
+        ACRA.init(this);
+        Thread.setDefaultUncaughtExceptionHandler(exceptionHandler);
+    }
+
+    private ThreadPoolService getFileLoggingThreadPool() {
+        return new ThreadPoolService.Builder("file-logging-thread")
+                .setPriority(Process.THREAD_PRIORITY_LOWEST)
+                .setPoolSize(1)
+                .setExceptionHandler(new BackgroundPoolExceptionHandler())
+                .build();
+    }
+
+    public static void createNotificationChannel(@NonNull Context context) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            NotificationManager manager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
+            NotificationChannel channel = manager.getNotificationChannel(NOTIFICATION_CHANNEL_ID_ALL);
+            if (channel == null) {
+                channel = new NotificationChannel(NOTIFICATION_CHANNEL_ID_ALL,
+                        context.getString(R.string.notifications_channel_name_all), NotificationManager.IMPORTANCE_DEFAULT);
+                manager.createNotificationChannel(channel);
+            }
+        }
+    }
 
     /**
      * Helps in setting up LeakCanary library
