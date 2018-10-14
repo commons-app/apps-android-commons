@@ -10,8 +10,8 @@ import android.os.RemoteException
 import com.nhaarman.mockito_kotlin.*
 import fr.free.nrw.commons.BuildConfig
 import fr.free.nrw.commons.TestCommonsApplication
-import fr.free.nrw.commons.bookmarks.locations.BookmarkLocationContentProvider.BASE_URI
-import fr.free.nrw.commons.bookmarks.locations.BookmarkLocationDao.Table.*
+import fr.free.nrw.commons.bookmarks.locations.BookmarkLocationsContentProvider.BASE_URI
+import fr.free.nrw.commons.bookmarks.locations.BookmarkLocationsDao.Table.*
 import fr.free.nrw.commons.location.LatLng
 import fr.free.nrw.commons.nearby.Place
 import fr.free.nrw.commons.nearby.Sitelinks
@@ -40,7 +40,7 @@ class BookMarkLocationDaoTest {
     private val database: SQLiteDatabase = mock()
     private val captor = argumentCaptor<ContentValues>()
 
-    private lateinit var testObject: BookmarkLocationDao
+    private lateinit var testObject: BookmarkLocationsDao
     private lateinit var examplePlaceBookmark: Place
     private lateinit var exampleLabel: Place.Label
     private lateinit var exampleUri: Uri
@@ -61,7 +61,7 @@ class BookMarkLocationDaoTest {
 
         examplePlaceBookmark = Place("placeName", exampleLabel, "placeDescription",
                 exampleUri, exampleLocation, "placeCategory", builder.build())
-        testObject = BookmarkLocationDao { client }
+        testObject = BookmarkLocationsDao { client }
     }
 
     @Test
@@ -165,7 +165,7 @@ class BookMarkLocationDaoTest {
         whenever(client.query(any(), any(), any(), any(), anyOrNull())).thenReturn(createCursor(1))
 
         assertFalse(testObject.updateBookmarkLocation(examplePlaceBookmark))
-        verify(client).delete(eq(BookmarkLocationContentProvider.uriForName(examplePlaceBookmark.name)), isNull(), isNull())
+        verify(client).delete(eq(BookmarkLocationsContentProvider.uriForName(examplePlaceBookmark.name)), isNull(), isNull())
     }
 
     @Test

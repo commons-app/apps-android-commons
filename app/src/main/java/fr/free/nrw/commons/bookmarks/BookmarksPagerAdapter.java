@@ -10,8 +10,8 @@ import android.widget.ListAdapter;
 import java.util.ArrayList;
 
 import fr.free.nrw.commons.R;
-import fr.free.nrw.commons.bookmarks.locations.BookmarkLocationListFragment;
-import fr.free.nrw.commons.bookmarks.pictures.BookmarkPictureListFragment;
+import fr.free.nrw.commons.bookmarks.locations.BookmarkLocationsFragment;
+import fr.free.nrw.commons.bookmarks.pictures.BookmarkPicturesFragment;
 
 public class BookmarksPagerAdapter extends FragmentPagerAdapter {
 
@@ -21,11 +21,11 @@ public class BookmarksPagerAdapter extends FragmentPagerAdapter {
         super(fm);
         pages = new ArrayList<>();
         pages.add(new BookmarkPages(
-                BookmarkPictureListFragment.newInstance(),
+                BookmarkPicturesFragment.newInstance(),
                 context.getString(R.string.title_page_bookmarks_pictures)
         ));
         pages.add(new BookmarkPages(
-                BookmarkLocationListFragment.newInstance(),
+                BookmarkLocationsFragment.newInstance(),
                 context.getString(R.string.title_page_bookmarks_locations)
         ));
         notifyDataSetChanged();
@@ -52,7 +52,7 @@ public class BookmarksPagerAdapter extends FragmentPagerAdapter {
      * @return adapter
      */
     public ListAdapter getMediaAdapter() {
-        BookmarkPictureListFragment fragment = (BookmarkPictureListFragment)(pages.get(0).getPage());
+        BookmarkPicturesFragment fragment = (BookmarkPicturesFragment)(pages.get(0).getPage());
         return fragment.getAdapter();
     }
 
@@ -60,7 +60,7 @@ public class BookmarksPagerAdapter extends FragmentPagerAdapter {
      * Update the pictures list for the bookmark fragment
      */
     public void requestPictureListUpdate() {
-        BookmarkPictureListFragment fragment = (BookmarkPictureListFragment)(pages.get(0).getPage());
+        BookmarkPicturesFragment fragment = (BookmarkPicturesFragment)(pages.get(0).getPage());
         fragment.onResume();
     }
 }

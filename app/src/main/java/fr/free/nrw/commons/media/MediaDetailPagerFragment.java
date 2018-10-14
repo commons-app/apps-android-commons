@@ -34,7 +34,7 @@ import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.auth.SessionManager;
 import fr.free.nrw.commons.bookmarks.Bookmark;
-import fr.free.nrw.commons.bookmarks.pictures.BookmarkPictureDao;
+import fr.free.nrw.commons.bookmarks.pictures.BookmarkPicturesDao;
 import fr.free.nrw.commons.category.CategoryDetailsActivity;
 import fr.free.nrw.commons.category.CategoryImagesActivity;
 import fr.free.nrw.commons.contributions.Contribution;
@@ -62,7 +62,7 @@ public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment imple
     SharedPreferences prefs;
 
     @Inject
-    BookmarkPictureDao bookmarkDao;
+    BookmarkPicturesDao bookmarkDao;
 
     @BindView(R.id.mediaDetailsPager)
     ViewPager pager;

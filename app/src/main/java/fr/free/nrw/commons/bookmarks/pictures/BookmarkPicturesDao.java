@@ -16,14 +16,14 @@ import javax.inject.Provider;
 
 import fr.free.nrw.commons.bookmarks.Bookmark;
 
-import static fr.free.nrw.commons.bookmarks.pictures.BookmarkPictureContentProvider.BASE_URI;
+import static fr.free.nrw.commons.bookmarks.pictures.BookmarkPicturesContentProvider.BASE_URI;
 
-public class BookmarkPictureDao {
+public class BookmarkPicturesDao {
 
     private final Provider<ContentProviderClient> clientProvider;
 
     @Inject
-    public BookmarkPictureDao(@Named("bookmarks") Provider<ContentProviderClient> clientProvider) {
+    public BookmarkPicturesDao(@Named("bookmarks") Provider<ContentProviderClient> clientProvider) {
         this.clientProvider = clientProvider;
     }
 
@@ -34,7 +34,7 @@ public class BookmarkPictureDao {
         ContentProviderClient db = clientProvider.get();
         try {
             cursor = db.query(
-                    BookmarkPictureContentProvider.BASE_URI,
+                    BookmarkPicturesContentProvider.BASE_URI,
                     Table.ALL_FIELDS,
                     null,
                     new String[]{},
@@ -94,7 +94,7 @@ public class BookmarkPictureDao {
         ContentProviderClient db = clientProvider.get();
         try {
             cursor = db.query(
-                    BookmarkPictureContentProvider.BASE_URI,
+                    BookmarkPicturesContentProvider.BASE_URI,
                     Table.ALL_FIELDS,
                     Table.COLUMN_MEDIA_NAME + "=?",
                     new String[]{bookmark.getMediaName()},
@@ -124,8 +124,8 @@ public class BookmarkPictureDao {
 
     private ContentValues toContentValues(Bookmark bookmark) {
         ContentValues cv = new ContentValues();
-        cv.put(BookmarkPictureDao.Table.COLUMN_MEDIA_NAME, bookmark.getMediaName());
-        cv.put(BookmarkPictureDao.Table.COLUMN_CREATOR, bookmark.getMediaCreator());
+        cv.put(BookmarkPicturesDao.Table.COLUMN_MEDIA_NAME, bookmark.getMediaName());
+        cv.put(BookmarkPicturesDao.Table.COLUMN_CREATOR, bookmark.getMediaCreator());
         return cv;
     }
 

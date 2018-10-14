@@ -15,10 +15,10 @@ import fr.free.nrw.commons.data.DBOpenHelper;
 import fr.free.nrw.commons.di.CommonsDaggerContentProvider;
 import timber.log.Timber;
 
-import static fr.free.nrw.commons.bookmarks.locations.BookmarkLocationDao.Table.COLUMN_NAME;
-import static fr.free.nrw.commons.bookmarks.locations.BookmarkLocationDao.Table.TABLE_NAME;
+import static fr.free.nrw.commons.bookmarks.locations.BookmarkLocationsDao.Table.COLUMN_NAME;
+import static fr.free.nrw.commons.bookmarks.locations.BookmarkLocationsDao.Table.TABLE_NAME;
 
-public class BookmarkLocationContentProvider extends CommonsDaggerContentProvider {
+public class BookmarkLocationsContentProvider extends CommonsDaggerContentProvider {
 
     private static final String BASE_PATH = "bookmarksLocations";
     public static final Uri BASE_URI = Uri.parse("content://" + BuildConfig.BOOKMARK_LOCATIONS_AUTHORITY + "/" + BASE_PATH);
@@ -72,7 +72,7 @@ public class BookmarkLocationContentProvider extends CommonsDaggerContentProvide
     @Override
     public Uri insert(@NonNull Uri uri, ContentValues contentValues) {
         SQLiteDatabase sqlDB = dbOpenHelper.getWritableDatabase();
-        long id = sqlDB.insert(BookmarkLocationDao.Table.TABLE_NAME, null, contentValues);
+        long id = sqlDB.insert(BookmarkLocationsDao.Table.TABLE_NAME, null, contentValues);
         getContext().getContentResolver().notifyChange(uri, null);
         return Uri.parse(BASE_URI + "/" + id);
     }

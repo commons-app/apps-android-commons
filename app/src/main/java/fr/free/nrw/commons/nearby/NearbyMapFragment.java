@@ -58,9 +58,8 @@ import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.Utils;
 import fr.free.nrw.commons.auth.LoginActivity;
-import fr.free.nrw.commons.bookmarks.locations.BookmarkLocationDao;
+import fr.free.nrw.commons.bookmarks.locations.BookmarkLocationsDao;
 import fr.free.nrw.commons.contributions.ContributionController;
-import fr.free.nrw.commons.utils.ContributionUtils;
 import fr.free.nrw.commons.utils.UriDeserializer;
 import fr.free.nrw.commons.utils.ViewUtil;
 import timber.log.Timber;
@@ -136,7 +135,7 @@ public class NearbyMapFragment extends DaggerFragment {
     @Named("direct_nearby_upload_prefs")
     SharedPreferences directPrefs;
     @Inject
-    BookmarkLocationDao bookmarkLocationDao;
+    BookmarkLocationsDao bookmarkLocationDao;
 
     public NearbyMapFragment() {
     }

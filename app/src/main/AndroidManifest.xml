@@ -200,14 +200,14 @@
             android:syncable="false" />
 
         <provider
-            android:name=".bookmarks.pictures.BookmarkPictureContentProvider"
+            android:name=".bookmarks.pictures.BookmarkPicturesContentProvider"
             android:authorities="${applicationId}.bookmarks.contentprovider"
             android:exported="false"
             android:label="@string/provider_bookmarks"
             android:syncable="false" />
 
         <provider
-            android:name=".bookmarks.locations.BookmarkLocationContentProvider"
+            android:name=".bookmarks.locations.BookmarkLocationsContentProvider"
             android:authorities="${applicationId}.bookmarks.locations.contentprovider"
             android:exported="false"
             android:label="@string/provider_bookmarks_location"

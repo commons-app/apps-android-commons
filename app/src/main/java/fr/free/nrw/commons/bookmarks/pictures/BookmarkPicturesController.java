@@ -11,16 +11,16 @@ import fr.free.nrw.commons.bookmarks.Bookmark;
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
 
 @Singleton
-public class BookmarkPictureListController {
+public class BookmarkPicturesController {
 
     private MediaWikiApi mediaWikiApi;
 
     @Inject
-    BookmarkPictureDao bookmarkDao;
+    BookmarkPicturesDao bookmarkDao;
 
     private List<Bookmark> currentBookmarks;
 
-    @Inject public BookmarkPictureListController(MediaWikiApi mediaWikiApi) {
+    @Inject public BookmarkPicturesController(MediaWikiApi mediaWikiApi) {
         this.mediaWikiApi = mediaWikiApi;
         currentBookmarks = new ArrayList<>();
     }

@@ -10,11 +10,11 @@ import com.nhaarman.mockito_kotlin.*
 import fr.free.nrw.commons.BuildConfig
 import fr.free.nrw.commons.TestCommonsApplication
 import fr.free.nrw.commons.bookmarks.Bookmark
-import fr.free.nrw.commons.bookmarks.pictures.BookmarkPictureContentProvider.BASE_URI
+import fr.free.nrw.commons.bookmarks.pictures.BookmarkPicturesContentProvider.BASE_URI
 import org.junit.runner.RunWith
 import org.robolectric.RobolectricTestRunner
 import org.robolectric.annotation.Config
-import fr.free.nrw.commons.bookmarks.pictures.BookmarkPictureDao.Table.*
+import fr.free.nrw.commons.bookmarks.pictures.BookmarkPicturesDao.Table.*
 import org.junit.Assert.*
 import org.junit.Before
 import org.junit.Test
@@ -28,13 +28,13 @@ class BookmarkPictureDaoTest {
     private val database: SQLiteDatabase = mock()
     private val captor = argumentCaptor<ContentValues>()
 
-    private lateinit var testObject: BookmarkPictureDao
+    private lateinit var testObject: BookmarkPicturesDao
     private lateinit var exampleBookmark: Bookmark
 
     @Before
     fun setUp() {
         exampleBookmark = Bookmark("mediaName", "creatorName")
-        testObject = BookmarkPictureDao { client }
+        testObject = BookmarkPicturesDao { client }
     }
 
     @Test

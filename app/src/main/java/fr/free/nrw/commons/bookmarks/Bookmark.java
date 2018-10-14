@@ -2,7 +2,7 @@ package fr.free.nrw.commons.bookmarks;
 
 import android.net.Uri;
 
-import fr.free.nrw.commons.bookmarks.pictures.BookmarkPictureContentProvider;
+import fr.free.nrw.commons.bookmarks.pictures.BookmarkPicturesContentProvider;
 
 public class Bookmark {
     private Uri contentUri;
@@ -10,7 +10,7 @@ public class Bookmark {
     private String mediaCreator;
 
     public Bookmark(String mediaName, String mediaCreator) {
-        this.contentUri = BookmarkPictureContentProvider.uriForName(mediaName);
+        this.contentUri = BookmarkPicturesContentProvider.uriForName(mediaName);
         this.mediaName = mediaName == null ? "" : mediaName;
         this.mediaCreator = mediaCreator == null ? "" : mediaCreator;
     }

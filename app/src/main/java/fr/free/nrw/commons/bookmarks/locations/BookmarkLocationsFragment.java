@@ -30,20 +30,20 @@ import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.contributions.ContributionController;
 import fr.free.nrw.commons.nearby.NearbyAdapterFactory;
 import fr.free.nrw.commons.nearby.Place;
-import fr.free.nrw.commons.nearby.PlaceRenderer;
 import timber.log.Timber;
 
 import static android.app.Activity.RESULT_OK;
 import static android.content.pm.PackageManager.PERMISSION_GRANTED;
 
-public class BookmarkLocationListFragment extends DaggerFragment {
+public class BookmarkLocationsFragment extends DaggerFragment {
 
     @BindView(R.id.statusMessage) TextView statusTextView;
     @BindView(R.id.loadingImagesProgressBar) ProgressBar progressBar;
     @BindView(R.id.listView) RecyclerView recyclerView;
     @BindView(R.id.parentLayout) RelativeLayout parentLayout;
 
-    @Inject BookmarkLocationListController controller;
+    @Inject
+    BookmarkLocationsController controller;
     @Inject @Named("direct_nearby_upload_prefs") SharedPreferences directPrefs;
     private NearbyAdapterFactory adapterFactory;
     private ContributionController contributionController;
@@ -52,8 +52,8 @@ public class BookmarkLocationListFragment extends DaggerFragment {
      * Create an instance of the fragment with the right bundle parameters
      * @return an instance of the fragment
      */
-    public static BookmarkLocationListFragment newInstance() {
-        return new BookmarkLocationListFragment();
+    public static BookmarkLocationsFragment newInstance() {
+        return new BookmarkLocationsFragment();
     }
 
     @Override

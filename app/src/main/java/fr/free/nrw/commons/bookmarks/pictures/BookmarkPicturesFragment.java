@@ -36,7 +36,7 @@ import timber.log.Timber;
 import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
 
-public class BookmarkPictureListFragment extends DaggerFragment {
+public class BookmarkPicturesFragment extends DaggerFragment {
 
     private static final int TIMEOUT_SECONDS = 15;
 
@@ -48,14 +48,15 @@ public class BookmarkPictureListFragment extends DaggerFragment {
     @BindView(R.id.bookmarkedPicturesList) GridView gridView;
     @BindView(R.id.parentLayout) RelativeLayout parentLayout;
 
-    @Inject BookmarkPictureListController controller;
+    @Inject
+    BookmarkPicturesController controller;
 
     /**
      * Create an instance of the fragment with the right bundle parameters
      * @return an instance of the fragment
      */
-    public static BookmarkPictureListFragment newInstance() {
-        return new BookmarkPictureListFragment();
+    public static BookmarkPicturesFragment newInstance() {
+        return new BookmarkPicturesFragment();
     }
 
     @Override
