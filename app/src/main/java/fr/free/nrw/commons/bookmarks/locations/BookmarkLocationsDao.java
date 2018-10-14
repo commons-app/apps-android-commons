@@ -30,6 +30,11 @@ public class BookmarkLocationsDao {
         this.clientProvider = clientProvider;
     }
 
+    /**
+     *  Find all persisted locations bookmarks on database
+     *
+     * @return list of Place
+     */
     @NonNull
     public List<Place> getAllBookmarksLocations() {
         List<Place> items = new ArrayList<>();
@@ -56,6 +61,12 @@ public class BookmarkLocationsDao {
         return items;
     }
 
+    /**
+     * Look for a place in bookmarks table in order to insert or delete it
+     *
+     * @param bookmarkLocation : Place object
+     * @return is Place now fav ?
+     */
     public boolean updateBookmarkLocation(Place bookmarkLocation) {
         boolean bookmarkExists = findBookmarkLocation(bookmarkLocation);
         if (bookmarkExists) {
@@ -66,6 +77,11 @@ public class BookmarkLocationsDao {
         return !bookmarkExists;
     }
 
+    /**
+     * Add a Place to bookmarks table
+     *
+     * @param bookmarkLocation : Place to add
+     */
     private void addBookmarkLocation(Place bookmarkLocation) {
         ContentProviderClient db = clientProvider.get();
         try {
@@ -77,6 +93,11 @@ public class BookmarkLocationsDao {
         }
     }
 
+    /**
+     * Delete a Place from bookmarks table
+     *
+     * @param bookmarkLocation : Place to delete
+     */
     private void deleteBookmarkLocation(Place bookmarkLocation) {
         ContentProviderClient db = clientProvider.get();
         try {
@@ -88,6 +109,12 @@ public class BookmarkLocationsDao {
         }
     }
 
+    /**
+     * Find a Place from database based on its name
+     *
+     * @param bookmarkLocation : Place to find
+     * @return boolean : is Place in database ?
+     */
     public boolean findBookmarkLocation(Place bookmarkLocation) {
         Cursor cursor = null;
         ContentProviderClient db = clientProvider.get();

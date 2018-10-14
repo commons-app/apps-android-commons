@@ -27,6 +27,12 @@ public class BookmarkPicturesDao {
         this.clientProvider = clientProvider;
     }
 
+
+    /**
+     * Find all persisted pictures bookmarks on database
+     *
+     * @return list of bookmarks
+     */
     @NonNull
     public List<Bookmark> getAllBookmarks() {
         List<Bookmark> items = new ArrayList<>();
@@ -53,6 +59,13 @@ public class BookmarkPicturesDao {
         return items;
     }
 
+
+    /**
+     * Look for a bookmark in database and in order to insert or delete it
+     *
+     * @param bookmark : Bookmark object
+     * @return boolean : is bookmark now fav ?
+     */
     public boolean updateBookmark(Bookmark bookmark) {
         boolean bookmarkExists = findBookmark(bookmark);
         if (bookmarkExists) {
@@ -63,6 +76,11 @@ public class BookmarkPicturesDao {
         return !bookmarkExists;
     }
 
+    /**
+     * Add a Bookmark to database
+     *
+     * @param bookmark : Bookmark to add
+     */
     private void addBookmark(Bookmark bookmark) {
         ContentProviderClient db = clientProvider.get();
         try {
@@ -74,6 +92,11 @@ public class BookmarkPicturesDao {
         }
     }
 
+    /**
+     * Delete a bookmark from database
+     *
+     * @param bookmark : Bookmark to delete
+     */
     private void deleteBookmark(Bookmark bookmark) {
         ContentProviderClient db = clientProvider.get();
         try {
@@ -89,6 +112,12 @@ public class BookmarkPicturesDao {
         }
     }
 
+    /**
+     * Find a bookmark from database based on its name
+     *
+     * @param bookmark : Bookmark to find
+     * @return boolean : is bookmark in database ?
+     */
     public boolean findBookmark(Bookmark bookmark) {
         Cursor cursor = null;
         ContentProviderClient db = clientProvider.get();

@@ -16,20 +16,13 @@ public class Bookmark {
     }
 
     /**
-     * Gets the file name
-     * @return the file name
+     * Gets the media name
+     * @return the media name
      */
     public String getMediaName() {
         return mediaName;
     }
 
-    /**
-     * Modifies file name
-     * @param name file name
-     */
-    public void setMediaName(String name) {
-        this.mediaName = name;
-    }
 
     /**
      * Gets media creator
@@ -37,10 +30,6 @@ public class Bookmark {
      */
     public String getMediaCreator() { return mediaCreator;  }
 
-
-    public boolean isEqual(String name, String creator, String creationDate) {
-        return (name.equals(this.mediaName) && creator.equals(this.mediaCreator));
-    }
 
 
     /**
