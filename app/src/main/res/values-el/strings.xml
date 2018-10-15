@@ -245,7 +245,7 @@
   <string name="use_external_storage_summary">Αποθηκεύσετε εικόνες που παίρνονται στην κάμερα εφαρμογής στην συσκευή σας</string>
   <string name="login_to_your_account">Συνδεθείτε στο λογαριασμό σας.</string>
   <string name="send_log_file">Αποστείλατε τον φάκελλο σύνδεσης</string>
-  <string name="send_log_file_description">Στείλατε τον φάκελλο σύνδεσης στους δημιουργούς μέσω email</string>
+  <string name="send_log_file_description" fuzzy="true">Στείλατε τον φάκελλο σύνδεσης στους δημιουργούς μέσω email</string>
   <string name="no_web_browser">Δεν βρέθηκε φυλλομετρητής για το άνοιγμα της διευθύνσεως URL</string>
   <string name="null_url">Σφάλμα! Η διεύθυνση URL δεν βρέθηκε</string>
   <string name="nominate_deletion">Προτείνετε για διαγραφή</string>

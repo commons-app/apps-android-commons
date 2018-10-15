@@ -242,7 +242,7 @@
   <string name="use_external_storage_summary">Gem billeder taget med din enheds program på kameraet</string>
   <string name="login_to_your_account">Log ind på din konto</string>
   <string name="send_log_file">Send logfil</string>
-  <string name="send_log_file_description">Send logfil til udviklerne via e-post</string>
+  <string name="send_log_file_description" fuzzy="true">Send logfil til udviklerne via e-post</string>
   <string name="no_web_browser">Ingen internetbrowser fundet til at åbne adresse</string>
   <string name="null_url">Fejl! Adressen blev ikke fundet</string>
   <string name="nominate_deletion">Nomineret til sletning</string>

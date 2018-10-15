@@ -249,7 +249,7 @@
   <string name="use_external_storage_summary">Salvar as fotos tiradas com a câmera no aplicativo no seu dispositivo</string>
   <string name="login_to_your_account">Faça login na sua conta</string>
   <string name="send_log_file">Enviar arquivo de registro</string>
-  <string name="send_log_file_description">Enviar arquivo de log para desenvolvedores por e-mail</string>
+  <string name="send_log_file_description">Enviar arquivo de registro para desenvolvedores via e-mail para ajudar a depurar problemas com o aplicativo. Nota: os registros podem conter informações de identificação</string>
   <string name="no_web_browser">Nenhum navegador da Web foi encontrado para abrir o URL</string>
   <string name="null_url">Erro! URL não encontrado</string>
   <string name="nominate_deletion">Nomear para a exclusão</string>
@@ -356,4 +356,5 @@
   <string name="notifications_channel_name_all">Notificação da wiki Commons</string>
   <string name="storage_permission">Permissão de Armazenamento</string>
   <string name="write_storage_permission_rationale_for_image_share">Precisamos da sua permissão para acessar o armazenamento externo do seu dispositivo para fazer upload de imagens.</string>
+  <string name="log_collection_started">Recolha de registro iniciada. Por favor, reinicie o aplicativo, execute a ação que você deseja registrar e toque em \"Enviar registros\" novamente</string>
 </resources>

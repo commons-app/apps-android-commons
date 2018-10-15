@@ -240,7 +240,7 @@
   <string name="use_external_storage_summary">ಈ ಸಾಧನಟ್ ಅಪ್ಲಿಕೇಶನ್ ಕ್ಯಾಮೆರಾದೊಂಟ್ಟಗ್ ದೆತ್ತಿನ ಚಿತ್ರೊನ್ ಒರಿಪಾಲೆ.</string>
   <string name="login_to_your_account">ಇರೇನಾ ಖಾತೆಗ್ ಲಾಗಿನ್ ಅಲೇ.</string>
   <string name="send_log_file">ಲಾಗ್ ಫೈಲ್ ಕಡ್ಪುಡ್ಲೆ.</string>
-  <string name="send_log_file_description">ಇಮೇಲ್ ಮೂಲಕೊ developers ಲಾಗ್ ಫೈಲ್ ಕಡಪ್ಪುಡ್ಲೆ.</string>
+  <string name="send_log_file_description" fuzzy="true">ಇಮೇಲ್ ಮೂಲಕೊ developers ಲಾಗ್ ಫೈಲ್ ಕಡಪ್ಪುಡ್ಲೆ.</string>
   <string name="no_web_browser">URLನ್ ದೆಪ್ಪಿಯರ ಒವೆ ವೆಬ್ ಬ್ರೌಸರ್ ತೋಜಾತ್ ಬರ್ಪುಜ್ಜಿ.</string>
   <string name="null_url">\nದೋಷೊ! URL ತೋಜಾತ್ ಬರ್ಪುಜ್ಜಿ.</string>
   <string name="nominate_deletion">ಮಾಜಾಯರ ನಾಮನಿರ್ದೇಶನೊ.</string>

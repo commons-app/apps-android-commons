@@ -246,7 +246,7 @@
   <string name="use_external_storage_summary">שמירת תמונות שצולמו באמצעות מצלמה בתוך היישום במכשיר שלך</string>
   <string name="login_to_your_account">כניסה לחשבון שלך</string>
   <string name="send_log_file">שליחת קובץ יומן</string>
-  <string name="send_log_file_description">שליחת קובץ יומן למפתחים בדואר אלקטרוני</string>
+  <string name="send_log_file_description" fuzzy="true">שליחת קובץ יומן למפתחים בדואר אלקטרוני</string>
   <string name="no_web_browser">לא נמצא דפדפן שיוכל לפתוח את הכתובת</string>
   <string name="null_url">שגיאה! כתובת ה־URL לא נמצאה</string>
   <string name="nominate_deletion">להציע מחיקה</string>

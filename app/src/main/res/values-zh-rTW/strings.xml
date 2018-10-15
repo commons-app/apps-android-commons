@@ -247,7 +247,7 @@
   <string name="use_external_storage_summary">在您的裝置上使用照相機應用程式來儲存照片</string>
   <string name="login_to_your_account">登入您的帳號</string>
   <string name="send_log_file">寄送日誌檔案</string>
-  <string name="send_log_file_description">經由電子郵件寄送日誌檔案給開發人員</string>
+  <string name="send_log_file_description">透過電子郵件寄送日誌檔案給開發人員，來協助除錯應用程式上的問題。注意：日誌可能會包含識別方面的資訊</string>
   <string name="no_web_browser">找不到可以打開 URL 的網頁瀏覽器</string>
   <string name="null_url">錯誤！查無 URL</string>
   <string name="nominate_deletion">提名刪除</string>
@@ -354,4 +354,5 @@
   <string name="notifications_channel_name_all">共享資源通知</string>
   <string name="storage_permission">存儲裝置權限</string>
   <string name="write_storage_permission_rationale_for_image_share">為了上傳圖片，我們需要存取裝置的外部儲存空間的權限。</string>
+  <string name="log_collection_started">已開始日誌採集。請重新啟動應用程式，執行您所想記下來的操作，然後再次輕觸「發送日誌」</string>
 </resources>

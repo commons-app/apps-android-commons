@@ -242,7 +242,7 @@
   <string name="use_external_storage_summary">Mit der In-App-Kamera aufgenommene Bilder auf deinem Gerät speichern</string>
   <string name="login_to_your_account">Bei deinem Benutzerkonto anmelden</string>
   <string name="send_log_file">Logdatei senden</string>
-  <string name="send_log_file_description">Logdatei an die Entwickler per E-Mail senden</string>
+  <string name="send_log_file_description">Logdatei an die Entwickler per E-Mail senden, um Probleme mit der App zu beheben. Hinweis: Die Protokolle können potentiell Informationen zur Identifizierung enthalten.</string>
   <string name="no_web_browser">Zum Öffnen der URL wurde kein Webbrowser gefunden</string>
   <string name="null_url">Fehler! URL nicht gefunden</string>
   <string name="nominate_deletion">Zur Löschung vorschlagen</string>
@@ -349,4 +349,5 @@
   <string name="notifications_channel_name_all">Commons-Benachrichtigung</string>
   <string name="storage_permission">Speicherberechtigung</string>
   <string name="write_storage_permission_rationale_for_image_share">Wir benötigen deine Berechtigung für den Zugriff auf den externen Speicher deines Geräts, um Bilder hochzuladen.</string>
+  <string name="log_collection_started">Protokollsammlung gestartet. Bitte STARTE die App NEU, führe die zu protokollierende Aktion aus und tippe erneut auf „Logs senden“.</string>
 </resources>

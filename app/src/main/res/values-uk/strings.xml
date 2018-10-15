@@ -254,7 +254,7 @@
   <string name="use_external_storage_summary">Зберігати зображення, виконані вбудованою камерою Вашого пристрою</string>
   <string name="login_to_your_account">Увійдіть у свій обліковий запис</string>
   <string name="send_log_file">Надіслати файл журналу</string>
-  <string name="send_log_file_description">Надіслати файл журналу розробникам електронною поштою</string>
+  <string name="send_log_file_description" fuzzy="true">Надіслати файл журналу розробникам електронною поштою</string>
   <string name="no_web_browser">Не знайдено браузера, щоб відкрити посилання</string>
   <string name="null_url">Помилка! Посилання не знайдено</string>
   <string name="nominate_deletion">Номінувати на вилучення</string>
