@@ -41,7 +41,6 @@ public class BookmarkPicturesFragment extends DaggerFragment {
     private static final int TIMEOUT_SECONDS = 15;
 
     private GridViewAdapter gridAdapter;
-    private boolean isLoading = true;
 
     @BindView(R.id.statusMessage) TextView statusTextView;
     @BindView(R.id.loadingImagesProgressBar) ProgressBar progressBar;
@@ -111,7 +110,6 @@ public class BookmarkPicturesFragment extends DaggerFragment {
             return;
         }
 
-        isLoading = true;
         progressBar.setVisibility(VISIBLE);
         statusTextView.setVisibility(GONE);
 
@@ -204,7 +202,6 @@ public class BookmarkPicturesFragment extends DaggerFragment {
             }
         }
         progressBar.setVisibility(GONE);
-        isLoading = false;
         statusTextView.setVisibility(GONE);
         gridView.setVisibility(VISIBLE);
     }
