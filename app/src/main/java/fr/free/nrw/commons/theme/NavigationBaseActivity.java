@@ -79,7 +79,7 @@ public abstract class NavigationBaseActivity extends BaseActivity
             nav_Menu.findItem(R.id.action_notifications).setVisible(false);
             nav_Menu.findItem(R.id.action_settings).setVisible(false);
             nav_Menu.findItem(R.id.action_logout).setVisible(false);
-            nav_Menu.findItem(R.id.action_bookmarks).setVisible(false);
+            nav_Menu.findItem(R.id.action_bookmarks).setVisible(true);
         }else {
             userIcon.setVisibility(View.VISIBLE);
             nav_Menu.findItem(R.id.action_login).setVisible(false);

@@ -16,8 +16,9 @@ import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.auth.AuthenticatedActivity;
 import fr.free.nrw.commons.media.MediaDetailPagerFragment;
+import fr.free.nrw.commons.theme.NavigationBaseActivity;
 
-public class BookmarksActivity extends AuthenticatedActivity
+public class BookmarksActivity extends NavigationBaseActivity
         implements FragmentManager.OnBackStackChangedListener,
         MediaDetailPagerFragment.MediaDetailProvider,
         AdapterView.OnItemClickListener {
@@ -31,16 +32,6 @@ public class BookmarksActivity extends AuthenticatedActivity
     TabLayout tabLayout;
 
     @Override
-    protected void onAuthCookieAcquired(String authCookie) {
-        // noop
-    }
-
-    @Override
-    protected void onAuthFailure() {
-        // noop
-    }
-
-    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_bookmarks);
@@ -50,7 +41,6 @@ public class BookmarksActivity extends AuthenticatedActivity
         // reference to the Fragment from FragmentManager, using findFragmentById()
         supportFragmentManager = getSupportFragmentManager();
         supportFragmentManager.addOnBackStackChangedListener(this);
-        requestAuthToken();
         initDrawer();
 
         adapter = new BookmarksPagerAdapter(supportFragmentManager, this);
