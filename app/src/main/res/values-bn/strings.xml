@@ -246,7 +246,7 @@
   <string name="use_external_storage_summary">অাপনার ডিভাইসের নিজস্ব ক্যামেরায় ধারণকৃত ছবি সংরক্ষণ করুন</string>
   <string name="login_to_your_account">আপনার অ্যাকাউন্টে প্রবেশ করুন</string>
   <string name="send_log_file">লগ ফাইল পাঠান</string>
-  <string name="send_log_file_description">ইমেইলের মাধ্যমে উন্নয়নকারীর কাছে লগ ফাইল পাঠান</string>
+  <string name="send_log_file_description" fuzzy="true">ইমেইলের মাধ্যমে উন্নয়নকারীর কাছে লগ ফাইল পাঠান</string>
   <string name="null_url">ত্রুটি! ইউআরএল পাওয়া যায়নি</string>
   <string name="nominate_deletion">অপসারণের জন্য মনোনীত</string>
   <string name="view_browser">ব্রাউজারে দেখুন</string>

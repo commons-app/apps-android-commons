@@ -237,7 +237,7 @@
   <string name="use_external_storage_summary">Simpen gambar nu nyomotna ku aplikasi kaména na parangkat anjeun</string>
   <string name="login_to_your_account">Asup log kana akun anjeun</string>
   <string name="send_log_file">Kirim berkas log</string>
-  <string name="send_log_file_description">Kirim berkas log ka pamekar liwat surélék</string>
+  <string name="send_log_file_description" fuzzy="true">Kirim berkas log ka pamekar liwat surélék</string>
   <string name="no_web_browser">Taya panyungsi raramat anu bisa dipaké pikeun muka URL</string>
   <string name="null_url">Salah! URL teu kapanggih</string>
   <string name="nominate_deletion">Usulkeun Dihapus</string>

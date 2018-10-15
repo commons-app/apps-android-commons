@@ -247,7 +247,7 @@
   <string name="use_external_storage_summary">احفظ الصور الملتقطة بالكاميرا داخل التطبيق على جهازك</string>
   <string name="login_to_your_account">تسجيل الدخول إلى حسابك</string>
   <string name="send_log_file">أرسل ملف السجل</string>
-  <string name="send_log_file_description">إرسال ملف السجل للمطورين عبر البريد الإلكتروني</string>
+  <string name="send_log_file_description" fuzzy="true">إرسال ملف السجل للمطورين عبر البريد الإلكتروني</string>
   <string name="no_web_browser">لم يتم العثور على متصفح ويب لفتح المسار</string>
   <string name="null_url">خطأ! المسار غير موجود</string>
   <string name="nominate_deletion">ترشيح للحذف</string>

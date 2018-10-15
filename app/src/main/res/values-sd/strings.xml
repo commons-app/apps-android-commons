@@ -209,7 +209,7 @@
   <string name="use_external_storage_summary">ايپ ۾ ڪئمرا سان ڪڍيل تصويرون پنھنجي ڊوائيس تي سانڍيو</string>
   <string name="login_to_your_account">پنھنجي کاتي ۾ داخل ٿيو</string>
   <string name="send_log_file">لاگ فائيل موڪليو</string>
-  <string name="send_log_file_description">لاگ فائيل سرجڻھارن کي برقٽپال ذريعي موڪليو</string>
+  <string name="send_log_file_description" fuzzy="true">لاگ فائيل سرجڻھارن کي برقٽپال ذريعي موڪليو</string>
   <string name="null_url">خلل: يو آر ايل نه لڌو</string>
   <string name="nominated_for_deletion">هن تصوير کي ڊاهڻ لاءِ مقرر ڪيو ويو آهي.</string>
   <string name="view_browser">برائوزر ۾ ڏسو</string>

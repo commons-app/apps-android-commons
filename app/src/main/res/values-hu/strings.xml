@@ -236,7 +236,7 @@
   <string name="use_external_storage_summary">Az alkalmazáson belüli kamerával készült képek mentése az eszközre</string>
   <string name="login_to_your_account">Bejelentkezés a fiókodba</string>
   <string name="send_log_file">Naplófájlok küldése</string>
-  <string name="send_log_file_description">Naplófájlok küldése e-mailben a fejlesztőknek</string>
+  <string name="send_log_file_description" fuzzy="true">Naplófájlok küldése e-mailben a fejlesztőknek</string>
   <string name="no_web_browser">Nem található böngésző az URL megnyitásához</string>
   <string name="null_url">Hiba! URL nem található.</string>
   <string name="nominate_deletion">Törlésre jelölés</string>
