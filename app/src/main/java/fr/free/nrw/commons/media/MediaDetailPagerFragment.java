@@ -141,7 +141,6 @@ public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment imple
         Media m = provider.getMediaAtPosition(pager.getCurrentItem());
         switch (item.getItemId()) {
             case R.id.menu_bookmark_current_image:
-                // TODO Update image state in database and in UI
                 bookmarkDao.updateBookmark(bookmark);
                 updateBookmarkState(item);
                 return true;
