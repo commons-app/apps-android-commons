@@ -9,6 +9,7 @@ import android.support.design.widget.SwipeDismissBehavior;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.CardView;
 import android.util.AttributeSet;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -16,6 +17,7 @@ import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import android.widget.Toast;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.contributions.MainActivity;
 import timber.log.Timber;
@@ -37,6 +39,8 @@ public class NearbyNoificationCardView  extends CardView{
     public CardViewVisibilityState cardViewVisibilityState;
 
     public PermissionType permissionType;
+
+    float x1,x2;
 
     public NearbyNoificationCardView(@NonNull Context context) {
         super(context);
@@ -78,29 +82,6 @@ public class NearbyNoificationCardView  extends CardView{
     @Override
     protected void onAttachedToWindow() {
         super.onAttachedToWindow();
-        // Add swipe and dismiss property
-        SwipeDismissBehavior swipeDismissBehavior = new SwipeDismissBehavior();
-        swipeDismissBehavior.setSwipeDirection(SwipeDismissBehavior.SWIPE_DIRECTION_ANY);
-        swipeDismissBehavior.setListener(new SwipeDismissBehavior.OnDismissListener() {
-            @Override
-            public void onDismiss(View view) {
-                /**
-                 * Only dismissing view results a space after dismissed view. Since, we need to
-                 * make view invisible at all.
-                 */
-                NearbyNoificationCardView.this.setVisibility(GONE);
-                // Save shared preference for nearby card view accordingly
-                ((MainActivity) context).prefs.edit().putBoolean("displayNearbyCardView", false).apply();
-            }
-
-            @Override
-            public void onDragStateChanged(int state) {
-
-            }
-        });
-        CoordinatorLayout.LayoutParams layoutParams = (CoordinatorLayout.LayoutParams) this.getLayoutParams();
-        layoutParams.setBehavior(swipeDismissBehavior);
-
         // If you don't setVisibility after getting layout params, then you will se an empty space in place of nerabyNotificationCardView
         if (((MainActivity)context).prefs.getBoolean("displayNearbyCardView", true)) {
             this.setVisibility(VISIBLE);
@@ -111,12 +92,36 @@ public class NearbyNoificationCardView  extends CardView{
 
 
     private void setActionListeners() {
-        this.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                ((MainActivity)context).viewPager.setCurrentItem(1);
-            }
-        });
+        this.setOnClickListener(view -> ((MainActivity)context).viewPager.setCurrentItem(1));
+
+        this.setOnTouchListener(
+                (v, event) -> {
+                    boolean isSwipe = false;
+                    switch (event.getAction()) {
+                        case MotionEvent.ACTION_DOWN:
+                            x1 = event.getX();
+                            break;
+                        case MotionEvent.ACTION_UP:
+                            x2 = event.getX();
+                            float deltaX = x2 - x1;
+                            if (deltaX < 0) {
+                                //Right to left swipe
+                                isSwipe = true;
+                            } else if (deltaX > 0) {
+                                //Left to right swipe
+                                isSwipe = true;
+                            }
+                            break;
+                    }
+                    if (isSwipe) {
+                        v.setVisibility(GONE);
+                        // Save shared preference for nearby card view accordingly
+                        ((MainActivity) context).prefs.edit()
+                                .putBoolean("displayNearbyCardView", false).apply();
+                        return true;
+                    }
+                    return false;
+                });
     }
 
     /**
