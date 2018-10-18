@@ -237,7 +237,7 @@
   <string name="use_external_storage_summary">Argistré le plance pijà con la màchina fòto ëd sò angign</string>
   <string name="login_to_your_account">Ch\'as colega a sò cont</string>
   <string name="send_log_file">Mandé l\'archivi d\'argistr</string>
-  <string name="send_log_file_description" fuzzy="true">Mandé l\'archivi d\'argistr ai dësvlupator për pòsta eletrònica</string>
+  <string name="send_log_file_description">Mandé l\'archivi d\'argistr ai dësvlupator për pòsta eletrònica për giuté a corege ij problema dl\'aplicassion. Nòta: j\'argistr a peulo potensialman conten-e d\'anformassion d\'identificassion</string>
   <string name="no_web_browser">Gnun navigador trovà për duverté l\'adrëssa an sl\'aragnà</string>
   <string name="null_url">Eror! Liura nen trovà</string>
   <string name="nominate_deletion">Propon-e për la scancelassion</string>
@@ -249,8 +249,8 @@
   <string name="skip_login_title">Veul-lo për da bon sauté la procedura d\'intrada ant ël sistema?</string>
   <string name="skip_login_message">A podrà nen carié \'d fòto.</string>
   <string name="login_alert_message">Për piasì, ch\'a rintra ant ël sistema për podèj dovré costa fonsionalità</string>
-  <string name="copy_wikicode" fuzzy="true">Copié ël còdes wiki ant ël pògia-feuj</string>
-  <string name="wikicode_copied" fuzzy="true">Còdes wiki copià ant ël pògia-feuj</string>
+  <string name="copy_wikicode">Copié ël test wiki ant ël pògia-feuj</string>
+  <string name="wikicode_copied">Ël test wiki a l\'é stàit copià ant ël pògia-feuj</string>
   <string name="nearby_location_has_not_changed">Ël leu a l\'é nen cangià.</string>
   <string name="nearby_location_not_available">Leu nen disponìbil.</string>
   <string name="location_permission_rationale_nearby">A-i é da manca dël përmess pr\'ësmon-e na lista dij pòst davzin</string>
@@ -344,4 +344,5 @@
   <string name="notifications_channel_name_all">Notìfica ëd Commons</string>
   <string name="storage_permission">Përmess d\'anmagasinament</string>
   <string name="write_storage_permission_rationale_for_image_share">I l\'oma damanca ëd sò përmess për acede a l\'anmagasinament estern ëd so aparechio për carié dle plance.</string>
+  <string name="log_collection_started">Argistrassion ancaminà. Për piasì, ch\'a DUVERTA TORNA l\'aplicassion, ch\'a fasa l\'assion ch\'a veul argistré, e ch\'a sgnaca torna si \'Mandé j\'argistr\'</string>
 </resources>

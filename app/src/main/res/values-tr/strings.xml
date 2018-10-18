@@ -249,7 +249,7 @@
   <string name="use_external_storage_summary">Uygulama kamerası kullanıldığında çekilen fotoğrafları cihazına kaydedin</string>
   <string name="login_to_your_account">Hesabınızda oturum açın</string>
   <string name="send_log_file">Kayıt dosyasını gönder</string>
-  <string name="send_log_file_description" fuzzy="true">Kayıt dosyasını, e-posta aracılığıyla geliştiricilere gönderin</string>
+  <string name="send_log_file_description">Kayıt dosyasını, e-postayla geliştiricilere göndererek uygulamadaki hataların ayıklanmasına yardımcı olun. Not: Kayıtların kullanıcı kimliğinize dair bilgi içerme olasılığı bulunabilir.</string>
   <string name="no_web_browser">URL\'yi açabilecek bir tarayıcı bulunamadı</string>
   <string name="null_url">Hata! URL bulunamadı</string>
   <string name="nominate_deletion">Silinmeye aday göster</string>
@@ -356,4 +356,5 @@
   <string name="notifications_channel_name_all">Commons Bildirimi</string>
   <string name="storage_permission">Depolama İzni</string>
   <string name="write_storage_permission_rationale_for_image_share">Görüntüleri yüklemek için cihazınızın harici belleğine erişim iznine sahip olmamız gerekiyor.</string>
+  <string name="log_collection_started">Günlük koleksiyonu başlatıldı. Lütfen uygulamayı YENİDEN BAŞLATIN, günlüğe kaydetmek istediğiniz eylemi gerçekleştirin ve ardından \'Gönderme Günleri\'ne tekrar dokunun.</string>
 </resources>
