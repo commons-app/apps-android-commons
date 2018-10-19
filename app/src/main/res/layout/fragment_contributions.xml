@@ -14,7 +14,10 @@
         android:text="@string/no_uploads"
         android:gravity="center"
         android:layout_centerInParent="true"
-        android:visibility="gone" />
+        android:visibility="gone"
+        android:layout_marginRight="@dimen/tiny_gap"
+        android:layout_marginEnd="@dimen/tiny_gap"
+        />
 
     <TextView
         android:layout_width="wrap_content"
