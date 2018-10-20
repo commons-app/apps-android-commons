@@ -2,20 +2,32 @@ package fr.free.nrw.commons;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 
 import com.viewpagerindicator.CirclePageIndicator;
 
+import javax.inject.Inject;
+import javax.inject.Named;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
+import butterknife.Optional;
 import fr.free.nrw.commons.quiz.QuizActivity;
 import fr.free.nrw.commons.theme.BaseActivity;
 
 public class WelcomeActivity extends BaseActivity {
 
-    @BindView(R.id.welcomePager) ViewPager pager;
-    @BindView(R.id.welcomePagerIndicator) CirclePageIndicator indicator;
+    @Inject
+    @Named("application_preferences")
+    SharedPreferences prefs;
+
+    @BindView(R.id.welcomePager)
+    ViewPager pager;
+    @BindView(R.id.welcomePagerIndicator)
+    CirclePageIndicator indicator;
 
     private WelcomePagerAdapter adapter = new WelcomePagerAdapter();
     private boolean isQuiz;
@@ -33,12 +45,12 @@ public class WelcomeActivity extends BaseActivity {
 
         moreInformation = this.getString(R.string.welcome_help_button_text);
 
-        if(getIntent() != null) {
+        if (getIntent() != null) {
             Bundle bundle = getIntent().getExtras();
             if (bundle != null) {
                 isQuiz = bundle.getBoolean("isQuiz");
             }
-        } else{
+        } else {
             isQuiz = false;
         }
 
@@ -46,7 +58,7 @@ public class WelcomeActivity extends BaseActivity {
 
         pager.setAdapter(adapter);
         indicator.setViewPager(pager);
-        adapter.setCallback(this::finish);
+        adapter.setCallback(this::finishTutorial);
     }
 
     /**
@@ -54,7 +66,7 @@ public class WelcomeActivity extends BaseActivity {
      */
     @Override
     public void onDestroy() {
-        if(isQuiz){
+        if (isQuiz) {
             Intent i = new Intent(WelcomeActivity.this, QuizActivity.class);
             startActivity(i);
         }
@@ -70,5 +82,30 @@ public class WelcomeActivity extends BaseActivity {
     public static void startYourself(Context context) {
         Intent welcomeIntent = new Intent(context, WelcomeActivity.class);
         context.startActivity(welcomeIntent);
+    }
+
+    /**
+     * Triggers on click callback on button click
+     */
+    @Optional
+    @OnClick(R.id.welcomeYesButton)
+    void onClicked() {
+        finishTutorial();
+    }
+
+    @Override
+    public void onBackPressed() {
+        // going back on tutorial, if at zero, finishing the tut.
+        if (pager.getCurrentItem() != 0) {
+            pager.setCurrentItem(pager.getCurrentItem() - 1, true);
+        } else {
+            finish();
+        }
+
+    }
+
+    private void finishTutorial() {
+        prefs.edit().putBoolean("firstrun", false).apply();
+        this.finish(); // welcomeYesButton moved to this activity.
     }
 }
