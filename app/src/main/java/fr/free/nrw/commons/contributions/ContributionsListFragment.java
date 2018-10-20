@@ -47,6 +47,8 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment {
     TextView waitingMessage;
     @BindView(R.id.loadingContributionsProgressBar)
     ProgressBar progressBar;
+    @BindView(R.id.noDataYet)
+    TextView noDataYet;
 
     @Inject
     @Named("prefs")
@@ -79,6 +81,7 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment {
             waitingMessage.setVisibility(GONE);
         }
 
+        changeEmptyScreen(true);
         changeProgressBarVisibility(true);
         return v;
     }
@@ -93,6 +96,10 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment {
         if(BuildConfig.FLAVOR.equalsIgnoreCase("beta")){
             ((ContributionsActivity) getActivity()).betaSetUploadCount(adapter.getCount());
         }
+    }
+
+    public void changeEmptyScreen(boolean isEmpty){
+        this.noDataYet.setVisibility(isEmpty ? View.VISIBLE : View.GONE);
     }
 
     public void changeProgressBarVisibility(boolean isVisible) {
