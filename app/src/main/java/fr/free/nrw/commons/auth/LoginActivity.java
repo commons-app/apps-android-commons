@@ -177,7 +177,6 @@ public class LoginActivity extends AccountAuthenticatorActivity {
         super.onResume();
         if (prefs.getBoolean("firstrun", true)) {
             WelcomeActivity.startYourself(this);
-            prefs.edit().putBoolean("firstrun", false).apply();
         }
 
         if (sessionManager.getCurrentAccount() != null
