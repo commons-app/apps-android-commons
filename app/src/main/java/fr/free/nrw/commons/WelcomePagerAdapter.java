@@ -61,10 +61,7 @@ public class WelcomePagerAdapter extends PagerAdapter {
         LayoutInflater inflater = LayoutInflater.from(container.getContext());
         ViewGroup layout = (ViewGroup) inflater.inflate(PAGE_LAYOUTS[position], container, false);
         if( BuildConfig.FLAVOR == "beta"){
-            TextView textView = (TextView) layout.findViewById(R.id.welcomeYesButton);
-            if( textView.getVisibility() != View.VISIBLE){
-                textView.setVisibility(View.VISIBLE);
-            }
+
             ViewHolder holder = new ViewHolder(layout);
             layout.setTag(holder);
 
@@ -107,6 +104,7 @@ public class WelcomePagerAdapter extends PagerAdapter {
         /**
          * Triggers on click callback on button click
          */
+        @Optional
         @OnClick(R.id.welcomeYesButton)
         void onClicked() {
             if (callback != null) {
