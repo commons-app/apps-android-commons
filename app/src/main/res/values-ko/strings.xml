@@ -348,4 +348,5 @@
   <string name="notifications_channel_name_all">공용 알림</string>
   <string name="storage_permission">기억 장치 권한</string>
   <string name="write_storage_permission_rationale_for_image_share">이미지를 업로드하려면 외부 기억 장치에 접근할 권한이 필요합니다.</string>
+  <string name="no_uploads">공용에 오신 것을 환영합니다!\n\n상단의 카메라나 갤러리 아이콘을 터치하여 당신의 첫 미디어를 올리십시오.</string>
 </resources>

@@ -357,4 +357,5 @@
   <string name="storage_permission">Permissão de Armazenamento</string>
   <string name="write_storage_permission_rationale_for_image_share">Precisamos da sua permissão para acessar o armazenamento externo do seu dispositivo para fazer upload de imagens.</string>
   <string name="log_collection_started">Recolha de registro iniciada. Por favor, reinicie o aplicativo, execute a ação que você deseja registrar e toque em \"Enviar registros\" novamente</string>
+  <string name="no_uploads">Bem-vindo ao Commons!\n\nCarregue a sua primeira mídia tocando no ícone da câmera ou galeria acima.</string>
 </resources>
