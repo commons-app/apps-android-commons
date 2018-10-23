@@ -350,4 +350,5 @@
   <string name="storage_permission">Speicherberechtigung</string>
   <string name="write_storage_permission_rationale_for_image_share">Wir benötigen deine Berechtigung für den Zugriff auf den externen Speicher deines Geräts, um Bilder hochzuladen.</string>
   <string name="log_collection_started">Protokollsammlung gestartet. Bitte STARTE die App NEU, führe die zu protokollierende Aktion aus und tippe erneut auf „Logs senden“.</string>
+  <string name="no_uploads">Willkommen bei Commons!\n\nLade deine erste Datei hoch, indem du oben auf das Kamera- oder Galeriesymbol tippst.</string>
 </resources>
