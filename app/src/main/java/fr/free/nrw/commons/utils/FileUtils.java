@@ -46,8 +46,8 @@ public class FileUtils {
             e.printStackTrace();
         } finally {
             try {
-                Objects.requireNonNull(out).close();
-                Objects.requireNonNull(in).close();
+                 out.close();
+                in.close();
             } catch (IOException e) {
                 e.printStackTrace();
             }
