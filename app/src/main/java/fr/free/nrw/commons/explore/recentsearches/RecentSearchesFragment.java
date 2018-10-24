@@ -1,6 +1,7 @@
 package fr.free.nrw.commons.explore.recentsearches;
 
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -31,6 +32,7 @@ public class RecentSearchesFragment extends CommonsDaggerSupportFragment {
     ArrayAdapter adapter;
     @BindView(R.id.recent_searches_delete_button)
     ImageView recent_searches_delete_button;
+    boolean currentThemeIsDark = false;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -54,7 +56,12 @@ public class RecentSearchesFragment extends CommonsDaggerSupportFragment {
                 .create()
                 .show();
         });
-        adapter = new ArrayAdapter<String>(getContext(),R.layout.item_recent_searches, recentSearches);
+        currentThemeIsDark = PreferenceManager.getDefaultSharedPreferences(getContext()).getBoolean("theme", false);
+        if (currentThemeIsDark) {
+            adapter = new ArrayAdapter<String>(getContext(), R.layout.item_recent_searches_dark_theme, recentSearches);
+        } else {
+            adapter = new ArrayAdapter<String>(getContext(), R.layout.item_recent_searches, recentSearches);
+        }
         recentSearchesList.setAdapter(adapter);
         recentSearchesList.setOnItemClickListener((parent, view, position, id) -> (
                 (SearchActivity)getContext()).updateText(recentSearches.get(position)));
@@ -78,7 +85,11 @@ public class RecentSearchesFragment extends CommonsDaggerSupportFragment {
      */
     public void updateRecentSearches() {
         recentSearches = recentSearchesDao.recentSearches(10);
-        adapter = new ArrayAdapter<String>(getContext(),R.layout.item_recent_searches, recentSearches);
+        if (currentThemeIsDark) {
+            adapter = new ArrayAdapter<String>(getContext(), R.layout.item_recent_searches_dark_theme, recentSearches);
+        } else {
+            adapter = new ArrayAdapter<String>(getContext(), R.layout.item_recent_searches, recentSearches);
+        }
         recentSearchesList.setAdapter(adapter);
         adapter.notifyDataSetChanged();
     }

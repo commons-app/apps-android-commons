@@ -9,6 +9,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.util.Objects;
 
 /**
  * Created for file operations
@@ -45,8 +46,8 @@ public class FileUtils {
             e.printStackTrace();
         } finally {
             try {
-                out.close();
-                in.close();
+                Objects.requireNonNull(out).close();
+                Objects.requireNonNull(in).close();
             } catch (IOException e) {
                 e.printStackTrace();
             }
