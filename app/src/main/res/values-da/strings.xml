@@ -308,4 +308,5 @@
   <string name="images_used_by_wiki">Billeder brugt</string>
   <string name="error_occurred">Der opstod en fejl!</string>
   <string name="storage_permission">Lagringstilladelse</string>
+  <string name="no_uploads">Velkommen til Commons!\n\nOplæg dit første medie ved at trykke på kamera eller galleri ikonet foroven.</string>
 </resources>

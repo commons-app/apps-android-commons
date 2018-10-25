@@ -364,5 +364,7 @@
   <string name="provider_bookmarks">Bookmarks</string>
   <string name="bookmark_empty">You haven\'t added any bookmarks</string>
   <string name="provider_bookmarks_location">Bookmarks</string>
-  <string name="log_collection_started">Log collection started. Please RESTART the app, perform action that you wish to log, and then tap \'Send Logs\' again</string>
+  <string name="log_collection_started">Log collection started. Please RESTART the app, perform action that you wish to log, and then tap \'Send log file\' again</string>
+  <string name="no_uploads">Welcome to Commons!\n
+Upload your first media by touching the camera or gallery icon above.</string>
 </resources>

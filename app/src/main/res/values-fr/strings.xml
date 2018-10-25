@@ -364,4 +364,5 @@
   <string name="navigation_item_bookmarks">Favoris</string>
   <string name="title_activity_bookmarks">Favoris</string>
   <string name="log_collection_started">Enregistrement dans le journal, commencé. Veuillez REDEMARRER l\'application, exécutez l\'action que vous souhaitez tracer, et cliquez de nouveau sur \'Envoyer les journaux\'</string>
+  <string name="no_uploads">Bienvenue sur Commons !\n\nTéléversez votre premier média en cliquant sur l’icône de l’appareil photo ou sur la galerie ci-dessus.</string>
 </resources>

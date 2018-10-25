@@ -208,9 +208,9 @@
   <string name="login_failed_2fa_not_supported">Двофакторна автентифікація наразі не підтримується.</string>
   <string name="logout_verification">Ви справді хочете вийти із системи?</string>
   <string name="commons_logo">Логотип Вікісховища</string>
-  <string name="commons_website">Веб-сайт Commons</string>
-  <string name="commons_facebook">Facebook-сторінка Commons</string>
-  <string name="commons_github">Програмний код Commons на GitHub</string>
+  <string name="commons_website">Веб-сайт Вікісховища</string>
+  <string name="commons_facebook">Facebook-сторінка Вікісховища</string>
+  <string name="commons_github">Програмний код Вікісховища на GitHub</string>
   <string name="background_image">Фонове зображення</string>
   <string name="mediaimage_failed">Помилка медіазображення</string>
   <string name="no_image_found">Не знайдено зображення</string>
@@ -254,7 +254,7 @@
   <string name="use_external_storage_summary">Зберігати зображення, виконані вбудованою камерою Вашого пристрою</string>
   <string name="login_to_your_account">Увійдіть у свій обліковий запис</string>
   <string name="send_log_file">Надіслати файл журналу</string>
-  <string name="send_log_file_description" fuzzy="true">Надіслати файл журналу розробникам електронною поштою</string>
+  <string name="send_log_file_description">Надіслати файл журналу розробникам електронною поштою, щоб допомогти розв\'язати проблему із програмою. Зауважте, що журнали можуть містити ідентифікаційну інформацію.</string>
   <string name="no_web_browser">Не знайдено браузера, щоб відкрити посилання</string>
   <string name="null_url">Помилка! Посилання не знайдено</string>
   <string name="nominate_deletion">Номінувати на вилучення</string>
@@ -302,7 +302,7 @@
   <string name="no_images_found">Зображень не знайдено!</string>
   <string name="error_loading_images">Сталася помилка при завантаженні зображень.</string>
   <string name="image_uploaded_by">Завантажено: %1$s</string>
-  <string name="block_notification">Редагування у до Вікісховищі вам було заблоковано</string>
+  <string name="block_notification">Вам було заблоковано редагування у Вікісховищі</string>
   <string name="appwidget_img">Зображення дня</string>
   <string name="app_widget_heading">Зображення дня</string>
   <string name="menu_search_button">Пошук</string>
@@ -361,4 +361,6 @@
   <string name="notifications_channel_name_all">Сповіщення Вікісховища</string>
   <string name="storage_permission">Дозвіл сховища</string>
   <string name="write_storage_permission_rationale_for_image_share">Нам потрібен ваш дозвіл на доступ до зовнішнього сховища на вашому пристрої, щоб завантажувати зображення.</string>
+  <string name="log_collection_started">Почався збір інформації з журналів. Будь ласка ПЕРЕЗАПУСТІТЬ програму, потім виконайте дію, що призводить до помилки і натисніть знов «Відправити журнали».</string>
+  <string name="no_uploads">Ласкаво просимо у Вікісховищі!\n\nЗавантажите ваш перший файл, натиснув іконку камери або галереї.</string>
 </resources>

@@ -346,4 +346,5 @@
   <string name="notifications_channel_name_all">Обавештења Оставе</string>
   <string name="storage_permission">Дозвола за складиштење</string>
   <string name="write_storage_permission_rationale_for_image_share">Потребна нам је ваша дозвола да бисмо приступили спољашњем складишту вашег уређаја како бисмо отпремали слике.</string>
+  <string name="no_uploads">Добро дошли на Оставу!\n\nОтпремите прве медије додиром горенаведене иконице камере или галерије.</string>
 </resources>

@@ -355,4 +355,5 @@
   <string name="storage_permission">存儲裝置權限</string>
   <string name="write_storage_permission_rationale_for_image_share">為了上傳圖片，我們需要存取裝置的外部儲存空間的權限。</string>
   <string name="log_collection_started">已開始日誌採集。請重新啟動應用程式，執行您所想記下來的操作，然後再次輕觸「發送日誌」</string>
+  <string name="no_uploads">歡迎來到維基共享資源！\n\n透過觸碰上方照相機或圖片庫圖標來上傳您的首個多媒體內容。</string>
 </resources>

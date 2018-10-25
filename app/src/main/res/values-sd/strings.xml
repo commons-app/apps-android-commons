@@ -61,6 +61,7 @@
   <string name="login_failed_generic">داخل ٿيڻ ناڪام</string>
   <string name="share_upload_button">چاڙھيو</string>
   <string name="multiple_share_base_title">ھن سيٽ کي نالو ڏيو</string>
+  <string name="add_set_name_toast">هن سيٽ لاءِ ڪو نالو ڏيو</string>
   <string name="provider_modifications">ردوبدل</string>
   <string name="menu_upload_single">چاڙھيو</string>
   <string name="categories_search_text_hint">زمرا ڳوليو</string>
