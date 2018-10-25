@@ -362,4 +362,5 @@
   <string name="storage_permission">Droit de stockage</string>
   <string name="write_storage_permission_rationale_for_image_share">Nous avons besoin de votre autorisation pour accéder au stockage externe de votre appareil, afin de téléverser des images.</string>
   <string name="log_collection_started">Enregistrement dans le journal, commencé. Veuillez REDEMARRER l\'application, exécutez l\'action que vous souhaitez tracer, et cliquez de nouveau sur \'Envoyer les journaux\'</string>
+  <string name="no_uploads">Bienvenue sur Commons !\n\nTéléversez votre premier média en cliquant sur l’icône de l’appareil photo ou sur la galerie ci-dessus.</string>
 </resources>

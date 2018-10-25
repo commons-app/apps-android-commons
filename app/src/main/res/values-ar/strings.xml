@@ -355,4 +355,5 @@
   <string name="storage_permission">سماح التخزين</string>
   <string name="write_storage_permission_rationale_for_image_share">نحتاج إلى سماحك للوصول إلى التخزين الخارجي لجهازك من أجل رفع الصور.</string>
   <string name="log_collection_started">بدأت مجموعة السجل، تُرجَى إعادة تشغيل التطبيق، وتنفيذ الإجراء الذي ترغب في تسجيله، ثم النقر فوق \"إرسال السجلات\" مرة أخرى</string>
+  <string name="no_uploads">مرحبا بك في كومنز! \n\nارفع الوسائط الأولى عن طريق لمس أيقونة الكاميرا أو المعرض أعلاه.</string>
 </resources>

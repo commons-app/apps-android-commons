@@ -345,4 +345,5 @@
   <string name="storage_permission">Përmess d\'anmagasinament</string>
   <string name="write_storage_permission_rationale_for_image_share">I l\'oma damanca ëd sò përmess për acede a l\'anmagasinament estern ëd so aparechio për carié dle plance.</string>
   <string name="log_collection_started">Argistrassion ancaminà. Për piasì, ch\'a DUVERTA TORNA l\'aplicassion, ch\'a fasa l\'assion ch\'a veul argistré, e ch\'a sgnaca torna si \'Mandé j\'argistr\'</string>
+  <string name="no_uploads">Bin-ëvnù su Commons!\n\nCh\'a caria sò prim archivi multimedial an sgnacand an sla plancia dla màchina fòto o an sla galarìa sì-dzora.</string>
 </resources>

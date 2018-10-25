@@ -356,4 +356,5 @@
   <string name="storage_permission">Autorização de acesso</string>
   <string name="write_storage_permission_rationale_for_image_share">Precisamos da sua autorização para aceder ao armazenamento externo do seu dispositivo para carregar imagens.</string>
   <string name="log_collection_started">A recolha de registos foi iniciada. REINICIE a aplicação, execute a operação que pretende registar e prima outra vez \"Enviar registos\"</string>
+  <string name="no_uploads">Bem-vindo(a) à wiki Commons!\n\nCarregue o seu primeiro ficheiro multimédia tocando no ícone da câmara ou da galeria acima.</string>
 </resources>
