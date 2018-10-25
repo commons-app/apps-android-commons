@@ -33,6 +33,8 @@ import butterknife.ButterKnife;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.auth.SessionManager;
+import fr.free.nrw.commons.bookmarks.Bookmark;
+import fr.free.nrw.commons.bookmarks.pictures.BookmarkPicturesDao;
 import fr.free.nrw.commons.category.CategoryDetailsActivity;
 import fr.free.nrw.commons.category.CategoryImagesActivity;
 import fr.free.nrw.commons.contributions.Contribution;
@@ -59,11 +61,15 @@ public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment imple
     @Named("default_preferences")
     SharedPreferences prefs;
 
+    @Inject
+    BookmarkPicturesDao bookmarkDao;
+
     @BindView(R.id.mediaDetailsPager)
     ViewPager pager;
     private Boolean editable;
     private boolean isFeaturedImage;
     MediaDetailAdapter adapter;
+    private Bookmark bookmark;
 
     public MediaDetailPagerFragment() {
         this(false, false);
@@ -134,6 +140,10 @@ public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment imple
         MediaDetailProvider provider = (MediaDetailProvider) getActivity();
         Media m = provider.getMediaAtPosition(pager.getCurrentItem());
         switch (item.getItemId()) {
+            case R.id.menu_bookmark_current_image:
+                bookmarkDao.updateBookmark(bookmark);
+                updateBookmarkState(item);
+                return true;
             case R.id.menu_share_current_image:
                 Intent shareIntent = new Intent(Intent.ACTION_SEND);
                 shareIntent.setType("text/plain");
@@ -257,6 +267,14 @@ public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment imple
                     menu.findItem(R.id.menu_browser_current_image).setEnabled(true).setVisible(true);
                     menu.findItem(R.id.menu_share_current_image).setEnabled(true).setVisible(true);
                     menu.findItem(R.id.menu_download_current_image).setEnabled(true).setVisible(true);
+                    menu.findItem(R.id.menu_bookmark_current_image).setEnabled(true).setVisible(true);
+
+                    // Initialize bookmark object
+                    bookmark = new Bookmark(
+                            m.getFilename(),
+                            m.getCreator()
+                    );
+                    updateBookmarkState(menu.findItem(R.id.menu_bookmark_current_image));
 
                     if (m instanceof Contribution ) {
                         Contribution c = (Contribution) m;
@@ -267,6 +285,7 @@ public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment imple
                                 menu.findItem(R.id.menu_browser_current_image).setEnabled(false).setVisible(false);
                                 menu.findItem(R.id.menu_share_current_image).setEnabled(false).setVisible(false);
                                 menu.findItem(R.id.menu_download_current_image).setEnabled(false).setVisible(false);
+                                menu.findItem(R.id.menu_bookmark_current_image).setEnabled(false).setVisible(false);
                                 break;
                             case Contribution.STATE_IN_PROGRESS:
                             case Contribution.STATE_QUEUED:
@@ -275,6 +294,7 @@ public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment imple
                                 menu.findItem(R.id.menu_browser_current_image).setEnabled(false).setVisible(false);
                                 menu.findItem(R.id.menu_share_current_image).setEnabled(false).setVisible(false);
                                 menu.findItem(R.id.menu_download_current_image).setEnabled(false).setVisible(false);
+                                menu.findItem(R.id.menu_bookmark_current_image).setEnabled(false).setVisible(false);
                                 break;
                             case Contribution.STATE_COMPLETED:
                                 // Default set of menu items works fine. Treat same as regular media object
@@ -284,6 +304,12 @@ public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment imple
                 }
             }
         }
+    }
+
+    private void updateBookmarkState(MenuItem item) {
+        boolean isBookmarked = bookmarkDao.findBookmark(bookmark);
+        int icon = isBookmarked ? R.drawable.ic_round_star_filled_24px : R.drawable.ic_round_star_border_24px;
+        item.setIcon(icon);
     }
 
     public void showImage(int i) {

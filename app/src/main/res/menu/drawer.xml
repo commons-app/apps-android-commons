@@ -22,6 +22,11 @@
             android:icon="@drawable/ic_explore_24dp"
             android:title="@string/navigation_item_explore"/>
 
+        <item
+            android:id="@+id/action_bookmarks"
+            android:icon="@drawable/ic_round_star_filled_24px"
+            android:title="@string/navigation_item_bookmarks"/>
+
     </group>
     <group android:id="@+id/drawer_account">
         <item

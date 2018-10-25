@@ -122,6 +122,10 @@
             android:name=".achievements.AchievementsActivity"
             android:label="@string/Achievements" />
 
+        <activity
+            android:name=".bookmarks.BookmarksActivity"
+            android:label="@string/title_activity_bookmarks" />
+
         <activity android:name="com.github.pedrovgs.lynx.LynxActivity"/>
 
         <service android:name=".upload.UploadService" />
@@ -200,6 +204,20 @@
             android:authorities="${applicationId}.explore.recentsearches.contentprovider"
             android:exported="false"
             android:label="@string/provider_searches"
+            android:syncable="false" />
+
+        <provider
+            android:name=".bookmarks.pictures.BookmarkPicturesContentProvider"
+            android:authorities="${applicationId}.bookmarks.contentprovider"
+            android:exported="false"
+            android:label="@string/provider_bookmarks"
+            android:syncable="false" />
+
+        <provider
+            android:name=".bookmarks.locations.BookmarkLocationsContentProvider"
+            android:authorities="${applicationId}.bookmarks.locations.contentprovider"
+            android:exported="false"
+            android:label="@string/provider_bookmarks_location"
             android:syncable="false" />
 
         <receiver android:name=".widget.PicOfDayAppWidget">

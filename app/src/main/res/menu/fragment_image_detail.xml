@@ -3,10 +3,15 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
+        android:id="@+id/menu_bookmark_current_image"
+        android:icon="@drawable/ic_round_star_border_24px"
+        android:title="@string/menu_bookmark"
+        app:showAsAction="always" />
+    <item
         android:id="@+id/menu_share_current_image"
         android:icon="@drawable/ic_share_black_24dp"
         android:title="@string/menu_share"
-        app:showAsAction="ifRoom" />
+        app:showAsAction="always" />
     <item
         android:id="@+id/menu_browser_current_image"
         android:title="@string/menu_open_in_browser"
