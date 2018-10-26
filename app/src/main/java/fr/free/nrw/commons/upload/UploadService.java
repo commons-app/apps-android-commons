@@ -199,7 +199,7 @@ public class UploadService extends HandlerService<Contribution> {
 
         //As the file is null there's no point in continuing the upload process
         //mwapi.upload accepts a NonNull input stream
-        if(file == null) {
+        if (file == null) {
             Timber.d("File not found");
             return;
         }
