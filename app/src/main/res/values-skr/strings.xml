@@ -60,6 +60,7 @@
   <string name="title_activity_featured_images">خاص تصویراں</string>
   <string name="title_activity_category_details">ون٘کی</string>
   <string name="menu_about">تعارف</string>
+  <string name="about_privacy_policy">&lt;u&gt;رازداری پالیسی&lt;/u&gt;</string>
   <string name="title_activity_about">تعارف</string>
   <string name="provider_categories">حالیہ ورتیاں ڳیاں ونکیاں</string>
   <string name="menu_retry_upload">ولدا کوشش کرو</string>
@@ -125,7 +126,7 @@
   <string name="nearby_info_menu_wikipedia_article">وکی پیڈیا دا مضمون</string>
   <string name="give_permission">اجازت ݙیوو</string>
   <string name="login_to_your_account">آپݨے کھاتے وچ لاگ ان تھیوو</string>
-  <string name="send_log_file">لاگ فائل بھیجو</string>
+  <string name="send_log_file">لاگ فائل بھیڄو</string>
   <string name="skip_login">چھوڑو</string>
   <string name="navigation_item_login">لاگ ان تھیوو</string>
   <string name="nearby_wikidata">وکی ڈیٹا</string>

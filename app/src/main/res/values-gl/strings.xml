@@ -244,7 +244,7 @@
   <string name="use_external_storage_summary">Gardar as imaxes capturadas coa cámara do seu dispositivo</string>
   <string name="login_to_your_account">Comezar sesión na súa conta</string>
   <string name="send_log_file">Enviar ficheiro de rexistro</string>
-  <string name="send_log_file_description">Enviar ficheiro de rexistro ós desenvolvedores por correo electrónico</string>
+  <string name="send_log_file_description">Enviar o rexistro ós desenvolvedores por correo electrónico para axudar na corrección de problemas coa aplicación. Nota: os rexistros poden conter información potencialmente identificativa</string>
   <string name="no_web_browser">Non se atopou ningún navegador co que abrir a URL</string>
   <string name="null_url">Errorǃ Nos se atopou a URL</string>
   <string name="nominate_deletion">Nomear para borrado</string>
@@ -315,6 +315,9 @@
   <string name="quiz_alert_message">Máis do %1$s das imaxes que cargou foron eliminadas. Se continúa cargando imaxes que requiran ser borradas, probablemente a súa conta sexa bloqueada.\n\nGustaríalle ver de novo o titorial e facer un pequeno cuestionario que axuda a entender que tipo de imaxes se deben ou non se deben cargar?</string>
   <string name="selfie_answer">Os autorretratos non teñen valor enciclopédico abondo. Por favor no cargue imaxes de vostede mesmo salvo que haxa un artigo de Wikipedia sobre vostede.</string>
   <string name="taj_mahal_answer">As fotografías de monumentos e paisaxes de exterior poden ser cargadas na maioría dos países. Teña en conta, por favor, que as instalacións de arte temporais en exteriores normalmente teñen dereitos de autor protexidos e non poden ser cargadas.</string>
+  <string name="screenshot_answer">As capturas de pantalla de sitios web son consideradas traballos derivados e están suxeitas a dereitos de autor. Poden ser usadas despois de obter a autorización do autor. Sen ese permiso, calquera obra que cree baseada no seu traballo está considerada legalmente como unha copia sen licenza, cuxa propiedade é mantida polo autor orixinal.</string>
+  <string name="blurry_image_answer">Un dos obxectivos de Commons é reunir imaxes de calidade. Para iso, as imaxes borrosas non deben ser subidas. Intente sempre sacar boas fotos coa iluminación axeitada.</string>
+  <string name="construction_event_answer">Fotografiás que amosen tecnoloxía ou cultura son moi benvidas en Commons</string>
   <string name="warning_for_image_reverts">Aviso: Máis do 1%  das imaxes cargadas por vostede foron borradas. Se segue a cargar imaxes que precisan borrado o máis probable é que a súa conta sexa anulada.</string>
   <string name="congratulatory_message_quiz">Acadou un %1$s de respostas correctas. Parabéns!</string>
   <string name="warning_for_no_answer">Escolla unha das dúas opcións para contestar a pregunta</string>
@@ -348,4 +351,5 @@
   <string name="notifications_channel_name_all">Notificación de Commons</string>
   <string name="storage_permission">Permiso de almacenamento</string>
   <string name="write_storage_permission_rationale_for_image_share">Precisamos o seu permiso para acceder ó almacenamento externo do seu dispositivo para cargar imaxes.</string>
+  <string name="log_collection_started">Comezou a gravación de rexistros. Por favor reinicie a aplicación, realice a acción que desexa rexistrar, e pulse \"Enviar rexistros\" de novo</string>
 </resources>

@@ -114,7 +114,7 @@
   <string name="preference_license">Standardlicens</string>
   <string name="use_previous">Brug forrige titel/beskrivelse</string>
   <string name="allow_gps">Hent automatisk nuværende placering</string>
-  <string name="allow_gps_summary" fuzzy="true">Hent nuværende placering for at tilbyde kategoriforslag hvis billedet ikke er geografisk mærket</string>
+  <string name="allow_gps_summary">Henter den nuværende placering for at tilbyde kategoriforslag hvis billedet ikke er geografisk mærket og geomærker billedet. Advarsel: Dette vil afsløre din nuværende placering.</string>
   <string name="preference_theme">Nat-tilstand</string>
   <string name="preference_theme_summary">Brug mørkt tema</string>
   <string name="license_name_cc_by_sa_four"> Attribution-ShareAlike 4.0</string>
@@ -167,8 +167,8 @@
   <string name="detail_description_empty">Ingen beskrivelse</string>
   <string name="detail_license_empty">Ukendt licens</string>
   <string name="menu_refresh">Opdater</string>
-  <string name="read_storage_permission_rationale" fuzzy="true">Krævet tilladelse: Læs eksternt lager. Programmet kan ikke fungere uden denne tilladelse.</string>
-  <string name="write_storage_permission_rationale" fuzzy="true">Krævet tilladelse: Skriv til eksternt lager. Program kan ikke fungere uden denne funktion.</string>
+  <string name="read_storage_permission_rationale">Krævet tilladelse: Læs eksternt lager. Programmet kan ikke tilgå dit galleri uden denne tilladelse.</string>
+  <string name="write_storage_permission_rationale">Krævet tilladelse: Skriv til eksternt lager. Program kan ikke tilgå dit kamera uden denne funktion.</string>
   <string name="location_permission_rationale">Valgfri tilladelse: Hent nuværende position for kategoriforslag</string>
   <string name="ok">O.k.</string>
   <string name="title_activity_nearby">Steder i nærheden</string>
@@ -242,7 +242,7 @@
   <string name="use_external_storage_summary">Gem billeder taget med din enheds program på kameraet</string>
   <string name="login_to_your_account">Log ind på din konto</string>
   <string name="send_log_file">Send logfil</string>
-  <string name="send_log_file_description">Send logfil til udviklerne via e-post</string>
+  <string name="send_log_file_description" fuzzy="true">Send logfil til udviklerne via e-post</string>
   <string name="no_web_browser">Ingen internetbrowser fundet til at åbne adresse</string>
   <string name="null_url">Fejl! Adressen blev ikke fundet</string>
   <string name="nominate_deletion">Nomineret til sletning</string>
@@ -308,4 +308,5 @@
   <string name="images_used_by_wiki">Billeder brugt</string>
   <string name="error_occurred">Der opstod en fejl!</string>
   <string name="storage_permission">Lagringstilladelse</string>
+  <string name="no_uploads">Velkommen til Commons!\n\nOplæg dit første medie ved at trykke på kamera eller galleri ikonet foroven.</string>
 </resources>

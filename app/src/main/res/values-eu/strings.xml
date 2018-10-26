@@ -236,7 +236,7 @@
   <string name="use_external_storage_summary">Aplikazioaren kamerarekin ateratako argazkiak zure gailuan gorde</string>
   <string name="login_to_your_account">Zure kontuan saioa hasi</string>
   <string name="send_log_file">Erregistro fitxategia bidali</string>
-  <string name="send_log_file_description">Bidali erregistro fitxategia garatzaileei emailaren bitartez</string>
+  <string name="send_log_file_description" fuzzy="true">Bidali erregistro fitxategia garatzaileei emailaren bitartez</string>
   <string name="no_web_browser">Ez da URLa irekitzeko nabigatzailerik aurkitu</string>
   <string name="null_url">Errorea! Ez da URLa aurkitu</string>
   <string name="nominate_deletion">Ezabaketarako izendatu</string>

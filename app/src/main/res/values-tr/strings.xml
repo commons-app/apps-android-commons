@@ -249,7 +249,7 @@
   <string name="use_external_storage_summary">Uygulama kamerası kullanıldığında çekilen fotoğrafları cihazına kaydedin</string>
   <string name="login_to_your_account">Hesabınızda oturum açın</string>
   <string name="send_log_file">Kayıt dosyasını gönder</string>
-  <string name="send_log_file_description">Kayıt dosyasını, e-posta aracılığıyla geliştiricilere gönderin</string>
+  <string name="send_log_file_description">Kayıt dosyasını, e-postayla geliştiricilere göndererek uygulamadaki hataların ayıklanmasına yardımcı olun. Not: Kayıtların kullanıcı kimliğinize dair bilgi içerme olasılığı bulunabilir.</string>
   <string name="no_web_browser">URL\'yi açabilecek bir tarayıcı bulunamadı</string>
   <string name="null_url">Hata! URL bulunamadı</string>
   <string name="nominate_deletion">Silinmeye aday göster</string>
@@ -261,8 +261,8 @@
   <string name="skip_login_title">Giriş işlemini gerçekten atlamak istiyor musunuz?</string>
   <string name="skip_login_message">Resim yükleyemeyeceksiniz.</string>
   <string name="login_alert_message">Bu özelliği kullanmak için lütfen giriş yapın</string>
-  <string name="copy_wikicode" fuzzy="true">Wikicode\'yi panoya kopyala</string>
-  <string name="wikicode_copied" fuzzy="true">Wikicode panoya kopyalandı</string>
+  <string name="copy_wikicode">Vikimetini panoya kopyala</string>
+  <string name="wikicode_copied">Vikikod panoya kopyalandı</string>
   <string name="nearby_location_has_not_changed">Konum değiştirilmedi</string>
   <string name="nearby_location_not_available">Konum kullanılamıyor.</string>
   <string name="location_permission_rationale_nearby">Yakındaki yerler listesini görüntülemek için izin vermeniz gerekiyor</string>
@@ -307,6 +307,7 @@
   <string name="search_recent_header">Son aramalar:</string>
   <string name="provider_searches">Son aranan sorgular</string>
   <string name="error_loading_categories">Kategoriler yüklenirken hata oluştu.</string>
+  <string name="error_loading_subcategories">Alt kategoriler yüklenirken hata oluştu.</string>
   <string name="successful_wikidata_edit">Resim, Vikiveri\'de %1$s içine başarıyla eklendi.</string>
   <string name="wikidata_edit_failure">Karşılık gelen Vikiveri varlığı güncellenemedi!</string>
   <string name="menu_set_wallpaper">Duvar kağıdı olarak ayarla</string>
@@ -315,14 +316,27 @@
   <string name="quiz_question_string">Bu resim yüklemek için uygun mu?</string>
   <string name="question">Soru</string>
   <string name="result">Sonuç</string>
+  <string name="quiz_back_button">Silmesi gereken resimler yüklüyorsanız, hesabınız büyük olasılıkla yasaklanacaktır. Testi bitirmek istediğinizden emin misiniz?</string>
+  <string name="quiz_alert_message">Yüklediğiniz görsellerin %1$’inden fazlası silinmiştir. Silme gerektiren resimler yüklüyorsanız, hesabınız büyük olasılıkla yasaklanacaktır.\n\n\nEğitimi tekrar görüntülemek ve daha sonra ne tür görseller yükleyebileceğinizi öğrenmenize yardımcı olmak ister misiniz?</string>
+  <string name="selfie_answer">Öz çekimlerin ansiklopedik değeri yoktur. Sizin hakkınızda bir Vikipedi maddeniz olmadıkça lütfen kendi fotoğraflarınızı yüklemeyin.</string>
+  <string name="taj_mahal_answer">Anıtların ve dış manzaraların resimleri çoğu ülkede yüklenebilir. Lütfen dışarıdaki geçici sanat enstalasyonlarının genellikle telif hakkıyla korunduğunu ve yüklenemiyeceğini unutmayın.</string>
+  <string name="screenshot_answer">Web sitelerinin ekran görüntüleri, türev ürünler olarak kabul edilir ve web sitesinin kendisinde herhangi bir telif hakkına tabidir. Bunlar yazarın izni alındıktan sonra kullanılabilir. Bu izin olmadan, eserlerine göre oluşturduğunuz herhangi bir sanat, yasal olarak orijinal yazarın sahip olduğu lisanssız bir kopya olarak kabul edilir.</string>
+  <string name="blurry_image_answer">Commons\'un amaçlarından biri kaliteli görüntüler toplamaktır. Bu nedenle, bulanık görüntüler yüklenmemelidir. Her zaman iyi aydınlatma ile güzel fotoğraflar çekmeye çalışın.</string>
+  <string name="construction_event_answer">Teknoloji veya kültürü gösteren resimler Commons\'a açıktır ve desteklenir.</string>
+  <string name="warning_for_image_reverts">UYARI: Yüklediğiniz görsellerin %1$’inden fazlası silinmiştir. Silme gerektiren resimler yüklüyorsanız, hesabınız büyük olasılıkla yasaklanacaktır.</string>
+  <string name="congratulatory_message_quiz">Cevapların %1$\'i doğru. Tebrikler!</string>
+  <string name="warning_for_no_answer">Soruyu cevaplamak için iki seçenekten birini seçin</string>
   <string name="user_not_logged_in">Oturumun süresi doldu, lütfen tekrar giriş yapın.</string>
+  <string name="quiz_result_share_message">Testinizi arkadaşlarınızla paylaşın!</string>
   <string name="continue_message">Devam et</string>
   <string name="correct">Doğru Cevap</string>
   <string name="wrong">Yanlış Cevap</string>
+  <string name="quiz_screenshot_question">Bu ekran görüntüsü yüklensin mi?</string>
   <string name="share_app_title">Uygulamayı Paylaş</string>
   <string name="share_coordinates_not_present">Koordinatlar görüntü seçimi sırasında belirlenmedi</string>
   <string name="error_fetching_nearby_places">Yakındaki yerler alınırken hata oluştu.</string>
   <string name="add_description">+ Açıklama ekle</string>
+  <string name="delete_recent_searches_dialog">Arama geçmişinizi silmek istediğinize emin misiniz?</string>
   <string name="search_history_deleted">Arama geçmişi silindi</string>
   <string name="Achievements">Başarılar</string>
   <string name="statistics">İSTATİSTİKLER</string>
@@ -330,7 +344,17 @@
   <string name="statistics_featured">Öne Çıkan Görüntüler</string>
   <string name="level">SEVİYE</string>
   <string name="images_uploaded">Resimler Yüklendi</string>
+  <string name="image_reverts">Görüntüler Geri Dönülmedi</string>
   <string name="images_used_by_wiki">Resimler Kullanıldı</string>
+  <string name="achievements_share_message">Başarılarınızı arkadaşlarınızla paylaşın!</string>
+  <string name="achievements_info_message">Bu gereksinimleri karşıladığınızda seviyeniz artar. \"İstatistikler\" bölümündeki öğeler, seviyenizde sayılmaz.</string>
   <string name="achievements_revert_limit_message">Minimum gerekli:</string>
+  <string name="images_uploaded_explanation">Herhangi bir yükleme yazılımı ile Commons\'a yüklediğiniz görüntü sayısı</string>
+  <string name="images_reverted_explanation">Silinmemiş olan, Commons\'a yüklediğiniz görsellerin yüzdesi</string>
+  <string name="images_used_explanation">Wikimedia makalelerinde kullanılan Commons\'a yüklediğiniz görüntü sayısı</string>
+  <string name="error_occurred">Hata oluştu!</string>
   <string name="notifications_channel_name_all">Commons Bildirimi</string>
+  <string name="storage_permission">Depolama İzni</string>
+  <string name="write_storage_permission_rationale_for_image_share">Görüntüleri yüklemek için cihazınızın harici belleğine erişim iznine sahip olmamız gerekiyor.</string>
+  <string name="log_collection_started">Günlük koleksiyonu başlatıldı. Lütfen uygulamayı YENİDEN BAŞLATIN, günlüğe kaydetmek istediğiniz eylemi gerçekleştirin ve ardından \'Gönderme Günleri\'ne tekrar dokunun.</string>
 </resources>

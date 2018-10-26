@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Authors:
+* A Chinese Wikipedian
 * Aefgh39622
 * Deathkon
 * Hydra
@@ -9,6 +10,7 @@
 * Shizhao
 * Wxyveronica
 * Yfdyh000
+* 夢蝶葬花
 * 阿pp
 -->
 <resources>
@@ -246,7 +248,7 @@
   <string name="use_external_storage_summary">在您的设备上，使用应用中的照相机保存照片</string>
   <string name="login_to_your_account">登录您的账户</string>
   <string name="send_log_file">发送日志文件</string>
-  <string name="send_log_file_description">通过电子邮件将日志文件发送给开发人员</string>
+  <string name="send_log_file_description" fuzzy="true">通过电子邮件将日志文件发送给开发人员</string>
   <string name="no_web_browser">找不到可以打开URL的网页浏览器</string>
   <string name="null_url">错误！找不到URL</string>
   <string name="nominate_deletion">提交删除</string>
@@ -313,14 +315,28 @@
   <string name="quiz_question_string">这个图片可以上传吗？</string>
   <string name="question">问题</string>
   <string name="result">成绩</string>
+  <string name="quiz_back_button">如果您继续上传需要删除的图片，您的帐户可能会被封禁。你确定要结束测验吗？</string>
+  <string name="quiz_alert_message">您上传的图片超过%1$s已被删除。如果您继续上传需要删除的图片，您的帐户可能会被封禁。\n\n您是否希望再次查看该教程，然后进行测验以帮助您了解应该或不应上传的图像类型？</string>
+  <string name="selfie_answer">自拍没有太多的百科全书价值。除非您已经有关于您的维基百科文章，否则请不要上传自己的照片。</string>
+  <string name="taj_mahal_answer">在大多数国家/地区都可以上传古迹和外景的图片。请注意，外面的临时艺术装置通常受版权保护，无法上传。</string>
+  <string name="screenshot_answer">网站的屏幕截图被视为衍生作品，并受网站本身的任何版权保护。这些可以在作者许可之后使用。未经此类许可，您根据其作品创作的任何艺术品在法律上均被视为原作者拥有的未经许可的副本。</string>
+  <string name="blurry_image_answer">维基共享资源的目标之一是收集高质量的图像。因此，不应上传模糊的图像。因此请尝试用良好的照明拍摄漂亮的照片。</string>
+  <string name="construction_event_answer">维基共享资源非常欢迎展示技术或文化的图片。</string>
+  <string name="warning_for_image_reverts">警告：您上传的图片超过%1$s已被删除。如果您继续上传需要删除的图片，您的帐户可能会被封禁。</string>
+  <string name="congratulatory_message_quiz">您得到%1$s的答案是正确的。祝贺您！</string>
+  <string name="warning_for_no_answer">选择两个选项之一来回答问题</string>
   <string name="user_not_logged_in">登录会话已过期，请重新登录。</string>
+  <string name="quiz_result_share_message">与朋友分享您的测验！</string>
   <string name="continue_message">继续</string>
+  <string name="correct">正确答案</string>
+  <string name="wrong">错误答案</string>
   <string name="quiz_screenshot_question">这个屏幕截图可以上传吗？</string>
   <string name="share_app_title">分享应用</string>
   <string name="share_coordinates_not_present">图片选择时，坐标并未指定</string>
   <string name="error_fetching_nearby_places">检索附近地点时出错。</string>
   <string name="add_description">+ 添加描述</string>
   <string name="delete_recent_searches_dialog">您确认要清除您的搜索历史？</string>
+  <string name="search_history_deleted">搜索历史已删除</string>
   <string name="Achievements">成就</string>
   <string name="statistics">统计</string>
   <string name="statistics_thanks">已收到感谢</string>
@@ -337,4 +353,6 @@
   <string name="images_used_explanation">您上传至共享资源，并用于维基媒体条目的图片数量</string>
   <string name="error_occurred">发生错误！</string>
   <string name="notifications_channel_name_all">共享资源通知</string>
+  <string name="storage_permission">存储权限</string>
+  <string name="write_storage_permission_rationale_for_image_share">我们需要您的许可才能访问设备的外部存储空间以上传图片。</string>
 </resources>

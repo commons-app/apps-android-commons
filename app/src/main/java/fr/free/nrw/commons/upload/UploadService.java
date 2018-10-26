@@ -13,9 +13,12 @@ import android.support.v4.app.NotificationCompat;
 import android.webkit.MimeTypeMap;
 import android.widget.Toast;
 
+import com.j256.simplemagic.ContentInfo;
+import com.j256.simplemagic.ContentInfoUtil;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FilterInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.HashSet;
@@ -68,6 +71,7 @@ public class UploadService extends HandlerService<Contribution> {
     public static final int NOTIFICATION_UPLOAD_IN_PROGRESS = 1;
     public static final int NOTIFICATION_UPLOAD_COMPLETE = 2;
     public static final int NOTIFICATION_UPLOAD_FAILED = 3;
+    private ContentInfoUtil contentInfoUtil;
 
     public UploadService() {
         super("UploadService");
@@ -121,7 +125,7 @@ public class UploadService extends HandlerService<Contribution> {
     @Override
     public void onCreate() {
         super.onCreate();
-
+        CommonsApplication.createNotificationChannel(getApplicationContext());
         notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
     }
 
@@ -129,7 +133,6 @@ public class UploadService extends HandlerService<Contribution> {
     protected void handle(int what, Contribution contribution) {
         switch (what) {
             case ACTION_UPLOAD_FILE:
-                //FIXME: Google Photos bug
                 uploadContribution(contribution);
                 break;
             default:
@@ -195,20 +198,34 @@ public class UploadService extends HandlerService<Contribution> {
     }
 
     private void uploadContribution(Contribution contribution) {
-        InputStream fileInputStream;
-
+        InputStream fileInputStream = null;
+        InputStream tempFileInputStream = null;
+        ContentInfo contentInfo = null;
         String notificationTag = contribution.getLocalUri().toString();
 
         try {
-            //FIXME: Google Photos bug
             File file1 = new File(contribution.getLocalUri().getPath());
             fileInputStream = new FileInputStream(file1);
-            //fileInputStream = this.getContentResolver().openInputStream(contribution.getLocalUri());
+            tempFileInputStream = new FileInputStream(file1);
+            if (contentInfoUtil == null) {
+                contentInfoUtil = new ContentInfoUtil();
+            }
+            contentInfo = contentInfoUtil.findMatch(tempFileInputStream);
         } catch (FileNotFoundException e) {
             Timber.d("File not found");
             Toast fileNotFound = Toast.makeText(this, R.string.upload_failed, Toast.LENGTH_LONG);
             fileNotFound.show();
             return;
+        } catch (IOException e) {
+            Timber.d("exception while fetching MIME type: "+e);
+        } finally {
+            try {
+                if (null != tempFileInputStream) {
+                    tempFileInputStream.close();
+                }
+            } catch (IOException e) {
+                Timber.d("File not found");
+            }
         }
 
         //As the fileInputStream is null there's no point in continuing the upload process
@@ -226,9 +243,17 @@ public class UploadService extends HandlerService<Contribution> {
 
         String filename = null;
         try {
+            //try to fetch the MIME type from contentInfo first and then use the tag to do it
+            //Note : the tag has not proven trustworthy in the past
+            String mimeType;
+            if (contentInfo == null || contentInfo.getMimeType() == null) {
+                mimeType = (String) contribution.getTag("mimeType");
+            } else {
+                mimeType = contentInfo.getMimeType();
+            }
             filename = Utils.fixExtension(
                     contribution.getFilename(),
-                    MimeTypeMap.getSingleton().getExtensionFromMimeType((String)contribution.getTag("mimeType")));
+                    MimeTypeMap.getSingleton().getExtensionFromMimeType(mimeType));
 
             synchronized (unfinishedUploads) {
                 Timber.d("making sure of uniqueness of name: %s", filename);

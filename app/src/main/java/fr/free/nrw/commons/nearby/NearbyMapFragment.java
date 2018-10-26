@@ -58,8 +58,8 @@ import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.Utils;
 import fr.free.nrw.commons.auth.LoginActivity;
+import fr.free.nrw.commons.bookmarks.locations.BookmarkLocationsDao;
 import fr.free.nrw.commons.contributions.ContributionController;
-import fr.free.nrw.commons.utils.ContributionUtils;
 import fr.free.nrw.commons.utils.UriDeserializer;
 import fr.free.nrw.commons.utils.ViewUtil;
 import timber.log.Timber;
@@ -87,6 +87,7 @@ public class NearbyMapFragment extends DaggerFragment {
     private LinearLayout wikidataButton;
     private LinearLayout directionsButton;
     private LinearLayout commonsButton;
+    private LinearLayout bookmarkButton;
     private FloatingActionButton fabPlus;
     private FloatingActionButton fabCamera;
     private FloatingActionButton fabGallery;
@@ -96,6 +97,7 @@ public class NearbyMapFragment extends DaggerFragment {
     private TextView title;
     private TextView distance;
     private ImageView icon;
+    private ImageView bookmarkButtonImage;
 
     private TextView wikipediaButtonText;
     private TextView wikidataButtonText;
@@ -132,6 +134,8 @@ public class NearbyMapFragment extends DaggerFragment {
     @Inject
     @Named("direct_nearby_upload_prefs")
     SharedPreferences directPrefs;
+    @Inject
+    BookmarkLocationsDao bookmarkLocationDao;
 
     public NearbyMapFragment() {
     }
@@ -374,6 +378,9 @@ public class NearbyMapFragment extends DaggerFragment {
         wikipediaButtonText = getActivity().findViewById(R.id.wikipediaButtonText);
         directionsButtonText = getActivity().findViewById(R.id.directionsButtonText);
         commonsButtonText = getActivity().findViewById(R.id.commonsButtonText);
+
+        bookmarkButton = getActivity().findViewById(R.id.bookmarkButton);
+        bookmarkButtonImage = getActivity().findViewById(R.id.bookmarkButtonImage);
 
     }
 
@@ -722,6 +729,20 @@ public class NearbyMapFragment extends DaggerFragment {
 
     private void passInfoToSheet(Place place) {
         this.place = place;
+
+        int bookmarkIcon;
+        if (bookmarkLocationDao.findBookmarkLocation(place)) {
+            bookmarkIcon = R.drawable.ic_round_star_filled_24px;
+        } else {
+            bookmarkIcon = R.drawable.ic_round_star_border_24px;
+        }
+        bookmarkButtonImage.setImageResource(bookmarkIcon);
+        bookmarkButton.setOnClickListener(view -> {
+            boolean isBookmarked = bookmarkLocationDao.updateBookmarkLocation(place);
+            int updatedIcon = isBookmarked ? R.drawable.ic_round_star_filled_24px : R.drawable.ic_round_star_border_24px;
+            bookmarkButtonImage.setImageResource(updatedIcon);
+        });
+
         wikipediaButton.setEnabled(place.hasWikipediaLink());
         wikipediaButton.setOnClickListener(view -> openWebView(place.siteLinks.getWikipediaLink()));
 

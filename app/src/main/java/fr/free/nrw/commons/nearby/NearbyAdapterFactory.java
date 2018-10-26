@@ -12,7 +12,7 @@ import java.util.List;
 
 import fr.free.nrw.commons.contributions.ContributionController;
 
-class NearbyAdapterFactory {
+public class NearbyAdapterFactory {
 
     private Fragment fragment;
     private ContributionController controller;
@@ -21,14 +21,21 @@ class NearbyAdapterFactory {
 
     }
 
-    NearbyAdapterFactory(Fragment fragment, ContributionController controller) {
+    public NearbyAdapterFactory(Fragment fragment, ContributionController controller) {
         this.fragment = fragment;
         this.controller = controller;
     }
 
     public RVRendererAdapter<Place> create(List<Place> placeList) {
+        return create(placeList, null);
+    }
+
+    public RVRendererAdapter<Place> create(
+            List<Place> placeList,
+            PlaceRenderer.OnBookmarkClick onBookmarkClick
+    ) {
         RendererBuilder<Place> builder = new RendererBuilder<Place>()
-                .bind(Place.class, new PlaceRenderer(fragment, controller));
+                .bind(Place.class, new PlaceRenderer(fragment, controller, onBookmarkClick));
         ListAdapteeCollection<Place> collection = new ListAdapteeCollection<>(
                 placeList != null ? placeList : Collections.emptyList());
         return new RVRendererAdapter<>(builder, collection);

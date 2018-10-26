@@ -222,7 +222,7 @@
   <string name="use_external_storage_summary">ذخیرهٔ تصویرهای گرفته شده توسط دوربین درونکار اپلیکیشن بر روی دستگاه شما</string>
   <string name="login_to_your_account">ورود به حساب کاربریتان</string>
   <string name="send_log_file">ارسال فایل سیاهه</string>
-  <string name="send_log_file_description">ارسال فایل سیاهه به‌وسیلهٔ ایمیل برای توسعه‌دهندگان</string>
+  <string name="send_log_file_description" fuzzy="true">ارسال فایل سیاهه به‌وسیلهٔ ایمیل برای توسعه‌دهندگان</string>
   <string name="nominated_see_more"> .</string>
   <string name="view_browser">مشاهده در مرورگر</string>
   <string name="nearby_location_has_not_changed">مکان تغییر نکرده‌است.</string>

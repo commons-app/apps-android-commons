@@ -248,7 +248,7 @@
   <string name="use_external_storage_summary">Gravar as fotografias tiradas com a câmara da aplicação no seu dispositivo</string>
   <string name="login_to_your_account">Inicie sessão na sua conta</string>
   <string name="send_log_file">Enviar ficheiro de registo</string>
-  <string name="send_log_file_description">Enviar o ficheiro de registo aos programadores por correio eletrónico</string>
+  <string name="send_log_file_description">Enviar o ficheiro de registo aos programadores por correio eletrónico para ajudar a corrigir problemas da aplicação. Nota: os registos podem conter informações identificativas</string>
   <string name="no_web_browser">Não foi encontrado nenhum navegador da Internet para abrir o URL</string>
   <string name="null_url">Erro! Não foi possível encontrar o URL</string>
   <string name="nominate_deletion">Nomear para eliminação</string>
@@ -260,8 +260,8 @@
   <string name="skip_login_title">Pretende realmente saltar o início de sessão?</string>
   <string name="skip_login_message">Não poderá carregar fotografias.</string>
   <string name="login_alert_message">Inicie uma sessão para usar esta funcionalidade</string>
-  <string name="copy_wikicode" fuzzy="true">Copiar o texto wiki para a área de transferência</string>
-  <string name="wikicode_copied" fuzzy="true">Texto wiki copiado para a área de transferência</string>
+  <string name="copy_wikicode">Copiar o texto wiki para a área de transferência</string>
+  <string name="wikicode_copied">O texto wiki foi copiado para a área de transferência</string>
   <string name="nearby_location_has_not_changed">A localização não foi alterada.</string>
   <string name="nearby_location_not_available">A localização não está disponível.</string>
   <string name="location_permission_rationale_nearby">É necessária a permissão para mostrar uma lista dos sítios aqui perto</string>
@@ -355,4 +355,6 @@
   <string name="notifications_channel_name_all">Notificação da wiki Commons</string>
   <string name="storage_permission">Autorização de acesso</string>
   <string name="write_storage_permission_rationale_for_image_share">Precisamos da sua autorização para aceder ao armazenamento externo do seu dispositivo para carregar imagens.</string>
+  <string name="log_collection_started">A recolha de registos foi iniciada. REINICIE a aplicação, execute a operação que pretende registar e prima outra vez \"Enviar registos\"</string>
+  <string name="no_uploads">Bem-vindo(a) à wiki Commons!\n\nCarregue o seu primeiro ficheiro multimédia tocando no ícone da câmara ou da galeria acima.</string>
 </resources>

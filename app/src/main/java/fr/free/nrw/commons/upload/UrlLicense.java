@@ -1,7 +1,6 @@
 package fr.free.nrw.commons.upload;
 
 import java.util.HashMap;
-import java.util.Locale;
 
 /**
  * This is a Util class which provides the necessary token to open the Commons License

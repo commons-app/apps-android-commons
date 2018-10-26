@@ -3,7 +3,6 @@ package fr.free.nrw.commons.mwapi;
 import org.apache.http.cookie.Cookie;
 import org.apache.http.impl.client.AbstractHttpClient;
 import org.apache.http.impl.cookie.BasicClientCookie;
-import org.mediawiki.api.ApiResult;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -141,8 +140,6 @@ public class CustomMwApi {
     }
 
     public CustomApiResult upload(String filename, InputStream file, long length, String text, String comment, String centralAuthToken, String token, ProgressListener uploadProgressListener) throws IOException {
-        Timber.d("Token being used is %s", token);
-
         Http.HttpRequestBuilder builder = Http.multipart(apiURL)
                 .data("action", "upload")
                 .data("token", token)
@@ -157,8 +154,6 @@ public class CustomMwApi {
         } else {
             builder.file("file", filename, file);
         }
-
-        Timber.d("Final cookies are %s", client.getCookieStore().getCookies().toString());
 
         return CustomApiResult.fromRequestBuilder(builder, client);
     }
