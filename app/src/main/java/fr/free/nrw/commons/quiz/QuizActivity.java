@@ -51,7 +51,7 @@ public class QuizActivity extends AppCompatActivity {
      */
     @OnClick(R.id.next_button)
     public void setNextQuestion(){
-        if( questionIndex <= quiz.size() && (positiveAnswer.isChecked() || negativeAnswer.isChecked())) {
+        if ( questionIndex <= quiz.size() && (positiveAnswer.isChecked() || negativeAnswer.isChecked())) {
             evaluateScore();
         } else if ( !positiveAnswer.isChecked() && !negativeAnswer.isChecked()){
             AlertDialog.Builder alert = new AlertDialog.Builder(this);
@@ -120,7 +120,7 @@ public class QuizActivity extends AppCompatActivity {
      * to evaluate score and check whether answer is correct or wrong
      */
     public void evaluateScore() {
-        if((quiz.get(questionIndex).isAnswer() && positiveAnswer.isChecked()) ||
+        if ((quiz.get(questionIndex).isAnswer() && positiveAnswer.isChecked()) ||
                 (!quiz.get(questionIndex).isAnswer() && negativeAnswer.isChecked()) ){
             customAlert(getResources().getString(R.string.correct),quiz.get(questionIndex).getAnswerMessage() );
             score++;
@@ -142,7 +142,7 @@ public class QuizActivity extends AppCompatActivity {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 questionIndex++;
-                if(questionIndex == quiz.size()){
+                if (questionIndex == quiz.size()){
                     Intent i = new Intent(QuizActivity.this, QuizResultActivity.class);
                     dialog.dismiss();
                     i.putExtra("QuizResult",score);

@@ -139,7 +139,7 @@ public class LoginActivity extends AccountAuthenticatorActivity {
                 .setNegativeButton(R.string.no, (dialog, which) -> dialog.cancel())
                 .show());
 
-        if(BuildConfig.FLAVOR.equals("beta")){
+        if (BuildConfig.FLAVOR.equals("beta")){
             loginCredentials.setText(getString(R.string.login_credential));
         } else {
             loginCredentials.setVisibility(View.GONE);
@@ -381,10 +381,10 @@ public class LoginActivity extends AccountAuthenticatorActivity {
         super.onRestoreInstanceState(savedInstanceState);
         loginCurrentlyInProgress = savedInstanceState.getBoolean(LOGING_IN, false);
         errorMessageShown = savedInstanceState.getBoolean(ERROR_MESSAGE_SHOWN, false);
-        if(loginCurrentlyInProgress){
+        if (loginCurrentlyInProgress){
             performLogin();
         }
-        if(errorMessageShown){
+        if (errorMessageShown){
             resultantError = savedInstanceState.getString(RESULTANT_ERROR);
             handleOtherResults(resultantError);
         }
@@ -399,7 +399,7 @@ public class LoginActivity extends AccountAuthenticatorActivity {
 
     public void showMessageAndCancelDialog(@StringRes int resId) {
         showMessage(resId, R.color.secondaryDarkColor);
-        if(progressDialog != null){
+        if (progressDialog != null){
             progressDialog.cancel();
         }
     }

@@ -87,7 +87,7 @@ public class NotificationActivity extends NavigationBaseActivity {
     private void addNotifications() {
         Timber.d("Add notifications");
 
-        if(mNotificationWorkerFragment == null){
+        if (mNotificationWorkerFragment == null){
             Observable.fromCallable(() -> {
                 progressBar.setVisibility(View.VISIBLE);
                 return controller.getNotifications();
@@ -117,7 +117,7 @@ public class NotificationActivity extends NavigationBaseActivity {
     }
 
     private void setAdapter(List<Notification> notificationList) {
-        if(notificationList == null || notificationList.isEmpty()) {
+        if (notificationList == null || notificationList.isEmpty()) {
             ViewUtil.showSnackbar(relativeLayout, R.string.no_notifications);
             return;
         }

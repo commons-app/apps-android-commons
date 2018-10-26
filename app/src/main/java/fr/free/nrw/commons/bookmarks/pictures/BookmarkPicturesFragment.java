@@ -105,7 +105,7 @@ public class BookmarkPicturesFragment extends DaggerFragment {
      */
     @SuppressLint("CheckResult")
     private void initList() {
-        if(!NetworkUtils.isInternetConnectionEstablished(getContext())) {
+        if (!NetworkUtils.isInternetConnectionEstablished(getContext())) {
             handleNoInternet();
             return;
         }
@@ -179,7 +179,7 @@ public class BookmarkPicturesFragment extends DaggerFragment {
      * @param collection List of new Media to be displayed
      */
     private void handleSuccess(List<Media> collection) {
-        if(collection == null) {
+        if (collection == null) {
             initErrorView();
             return;
         }
@@ -188,7 +188,7 @@ public class BookmarkPicturesFragment extends DaggerFragment {
             return;
         }
 
-        if(gridAdapter == null) {
+        if (gridAdapter == null) {
             setAdapter(collection);
         } else {
             if (gridAdapter.containsAll(collection)) {
