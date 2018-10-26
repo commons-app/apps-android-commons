@@ -195,10 +195,10 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
         // Handle item selection
         switch (item.getItemId()) {
             case R.id.action_display_list:
-                if(bottomSheetBehavior.getState()==BottomSheetBehavior.STATE_COLLAPSED || bottomSheetBehavior.getState()==BottomSheetBehavior.STATE_HIDDEN){
+                if (bottomSheetBehavior.getState()==BottomSheetBehavior.STATE_COLLAPSED || bottomSheetBehavior.getState()==BottomSheetBehavior.STATE_HIDDEN){
                     bottomSheetBehaviorForDetails.setState(BottomSheetBehavior.STATE_HIDDEN);
                     bottomSheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
-                }else if(bottomSheetBehavior.getState()==BottomSheetBehavior.STATE_EXPANDED){
+                }else if (bottomSheetBehavior.getState()==BottomSheetBehavior.STATE_EXPANDED){
                     bottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
                 }
 
@@ -355,7 +355,7 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
         super.onPause();
         // this means that this activity will not be recreated now, user is leaving it
         // or the activity is otherwise finishing
-        if(isFinishing()) {
+        if (isFinishing()) {
             // we will not need this fragment anymore, this may also be a good place to signal
             // to the retained fragment object to perform its own cleanup.
             removeMapFragment();

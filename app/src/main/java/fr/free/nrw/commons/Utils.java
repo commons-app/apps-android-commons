@@ -78,7 +78,7 @@ public class Utils {
      * @return string with capitalized first character
      */
     public static String capitalize(String string) {
-        if(string.length() > 0) {
+        if (string.length() > 0) {
             return string.substring(0, 1).toUpperCase(Locale.getDefault()) + string.substring(1);
         } else {
             return string;

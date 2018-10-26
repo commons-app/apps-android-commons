@@ -99,7 +99,7 @@ public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment imple
                 pager.setAdapter(adapter);
                 pager.setCurrentItem(pageNumber, false);
 
-                if(getActivity() == null) {
+                if (getActivity() == null) {
                     Timber.d("Returning as activity is destroyed!");
                     return;
                 }
@@ -133,7 +133,7 @@ public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment imple
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if(getActivity() == null) {
+        if (getActivity() == null) {
             Timber.d("Returning as activity is destroyed!");
             return true;
         }
@@ -156,7 +156,7 @@ public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment imple
                 viewIntent.setAction(ACTION_VIEW);
                 viewIntent.setData(m.getFilePageTitle().getMobileUri());
                 //check if web browser available
-                if(viewIntent.resolveActivity(getActivity().getPackageManager()) != null){
+                if (viewIntent.resolveActivity(getActivity().getPackageManager()) != null){
                     startActivity(viewIntent);
                 } else {
                     Toast toast = Toast.makeText(getContext(), getString(R.string.no_web_browser), LENGTH_SHORT);
@@ -193,7 +193,7 @@ public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment imple
      * @param media
      */
     private void setWallpaper(Media media) {
-        if(media.getImageUrl() == null || media.getImageUrl().isEmpty()) {
+        if (media.getImageUrl() == null || media.getImageUrl().isEmpty()) {
             Timber.d("Media URL not present");
             return;
         }
@@ -255,7 +255,7 @@ public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment imple
             inflater.inflate(R.menu.fragment_image_detail, menu);
             if (pager != null) {
                 MediaDetailProvider provider = (MediaDetailProvider) getActivity();
-                if(provider == null) {
+                if (provider == null) {
                     return;
                 }
 
@@ -326,7 +326,7 @@ public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment imple
 
     @Override
     public void onPageScrolled(int i, float v, int i2) {
-        if(getActivity() == null) {
+        if (getActivity() == null) {
             Timber.d("Returning as activity is destroyed!");
             return;
         }
@@ -381,7 +381,7 @@ public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment imple
         public Fragment getItem(int i) {
             if (i == 0) {
                 // See bug https://code.google.com/p/android/issues/detail?id=27526
-                if(getActivity() == null) {
+                if (getActivity() == null) {
                     Timber.d("Skipping getItem. Returning as activity is destroyed!");
                     return null;
                 }
@@ -392,7 +392,7 @@ public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment imple
 
         @Override
         public int getCount() {
-            if(getActivity() == null) {
+            if (getActivity() == null) {
                 Timber.d("Skipping getCount. Returning as activity is destroyed!");
                 return 0;
             }

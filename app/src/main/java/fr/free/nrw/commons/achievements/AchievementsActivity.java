@@ -185,7 +185,7 @@ public class AchievementsActivity extends NavigationBaseActivity {
      * which then calls parseJson when results are fetched
      */
     private void setAchievements() {
-        if(checkAccount()) {
+        if (checkAccount()) {
             compositeDisposable.add(mediaWikiApi
                     .getAchievements(Objects.requireNonNull(sessionManager.getCurrentAccount()).name)
                     .subscribeOn(Schedulers.io())
@@ -218,7 +218,7 @@ public class AchievementsActivity extends NavigationBaseActivity {
      * used to the count of images uploaded by user
      */
     private void setUploadCount(Achievements achievements) {
-        if(checkAccount()) {
+        if (checkAccount()) {
             compositeDisposable.add(mediaWikiApi
                     .getUploadCount(Objects.requireNonNull(sessionManager.getCurrentAccount()).name)
                     .subscribeOn(Schedulers.io())
@@ -387,7 +387,7 @@ public class AchievementsActivity extends NavigationBaseActivity {
      */
     private boolean checkAccount(){
         Account currentAccount = sessionManager.getCurrentAccount();
-        if(currentAccount == null) {
+        if (currentAccount == null) {
         Timber.d("Current account is null");
         ViewUtil.showLongToast(this, getResources().getString(R.string.user_not_logged_in));
         sessionManager.forceLogin(this);

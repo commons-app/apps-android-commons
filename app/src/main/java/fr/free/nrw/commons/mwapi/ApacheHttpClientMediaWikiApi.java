@@ -244,9 +244,9 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
             Timber.d("Central auth token isn't valid. Trying to fetch a fresh token");
             api.removeAllCookies();
             String loginResultCode = login(AccountUtil.getUserName(context), AccountUtil.getPassword(context));
-            if(loginResultCode.equals("PASS")) {
+            if (loginResultCode.equals("PASS")) {
                 return getCentralAuthToken();
-            } else if(loginResultCode.equals("2FA")) {
+            } else if (loginResultCode.equals("2FA")) {
                 Timber.e("Cannot refresh session for 2FA enabled user. Login required");
             } else {
                 Timber.e("Error occurred in refreshing session. Error code is %s", loginResultCode);
