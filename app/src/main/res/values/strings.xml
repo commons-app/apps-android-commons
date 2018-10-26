@@ -239,7 +239,7 @@
   <string name="use_external_storage_summary">Save pictures taken with the in-app camera on your device</string>
   <string name="login_to_your_account">Login to your account</string>
   <string name="send_log_file">Send log file</string>
-  <string name="send_log_file_description">Send log file to developers via email</string>
+  <string name="send_log_file_description">Send log file to developers via email to help debug problems with the app. Note: logs may potentially contain identifying information</string>
   <string name="no_web_browser">No web browser found to open URL</string>
   <string name="null_url">Error! URL not found</string>
   <string name="nominate_deletion">Nominate for Deletion</string>
@@ -343,4 +343,9 @@
   <string name="images_used_explanation">The number of images you have uploaded to Commons that were used in Wikimedia articles</string>
 
   <string name="error_occurred">Error occurred!</string>
+  <string name="notifications_channel_name_all">Commons Notification</string>
+  <string name="storage_permission">Storage Permission</string>
+  <string name="write_storage_permission_rationale_for_image_share">We need your permission to access the external storage of your device in order to upload images.</string>
+
+  <string name="log_collection_started">Log collection started. Please RESTART the app, perform action that you wish to log, and then tap \'Send Logs\' again</string>
 </resources>

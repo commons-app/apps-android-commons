@@ -2,41 +2,35 @@ package fr.free.nrw.commons.settings;
 
 import android.Manifest;
 import android.app.AlertDialog;
-import android.content.ActivityNotFoundException;
-import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.preference.SwitchPreference;
 import android.preference.EditTextPreference;
 import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.PreferenceFragment;
+import android.preference.SwitchPreference;
 import android.support.annotation.NonNull;
 import android.support.v4.content.ContextCompat;
-import android.support.v4.content.FileProvider;
-import android.widget.Toast;
-
-import java.io.File;
 
 import javax.inject.Inject;
 import javax.inject.Named;
 
-import fr.free.nrw.commons.BuildConfig;
-import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.Utils;
 import fr.free.nrw.commons.di.ApplicationlessInjection;
-import fr.free.nrw.commons.upload.FileUtils;
+import fr.free.nrw.commons.logging.CommonsLogSender;
+import fr.free.nrw.commons.utils.ViewUtil;
 
 public class SettingsFragment extends PreferenceFragment {
 
     private static final int REQUEST_CODE_WRITE_EXTERNAL_STORAGE = 100;
 
     @Inject @Named("default_preferences") SharedPreferences prefs;
+    @Inject
+    CommonsLogSender commonsLogSender;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -99,28 +93,12 @@ public class SettingsFragment extends PreferenceFragment {
 
         Preference betaTesterPreference = findPreference("becomeBetaTester");
         betaTesterPreference.setOnPreferenceClickListener(preference -> {
-                Utils.handleWebUrl(getActivity(),Uri.parse(getResources().getString(R.string.beta_opt_in_link)));
-                return true;
+            Utils.handleWebUrl(getActivity(), Uri.parse(getResources().getString(R.string.beta_opt_in_link)));
+            return true;
         });
         Preference sendLogsPreference = findPreference("sendLogFile");
         sendLogsPreference.setOnPreferenceClickListener(preference -> {
-            //first we need to check if we have the necessary permissions
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                if (ContextCompat.checkSelfPermission(
-                        getActivity(),
-                        Manifest.permission.WRITE_EXTERNAL_STORAGE)
-                        ==
-                        PackageManager.PERMISSION_GRANTED) {
-                    sendAppLogsViaEmail();
-                } else {
-                    //first get the necessary permission
-                    requestPermissions(new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
-                            REQUEST_CODE_WRITE_EXTERNAL_STORAGE);
-                }
-            } else {
-                sendAppLogsViaEmail();
-            }
-
+            checkPermissionsAndSendLogs();
             return true;
         });
     }
@@ -129,42 +107,31 @@ public class SettingsFragment extends PreferenceFragment {
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         if (requestCode == REQUEST_CODE_WRITE_EXTERNAL_STORAGE && grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-             {
-                sendAppLogsViaEmail();
+            {
+                ViewUtil.showLongToast(getActivity(), getResources().getString(R.string.log_collection_started));
             }
         }
     }
 
-    private void sendAppLogsViaEmail() {
-        String appLogs = Utils.getAppLogs();
-        File appLogsFile = FileUtils.createAndGetAppLogsFile(appLogs);
-
-        Context applicationContext = getActivity().getApplicationContext();
-        Uri appLogsFilePath = FileProvider.getUriForFile(
-                getActivity(),
-                applicationContext.getPackageName() + ".provider",
-                appLogsFile
-        );
-
-        //initialize the emailSelectorIntent
-        Intent emailSelectorIntent = new Intent(Intent.ACTION_SENDTO);
-        emailSelectorIntent.setData(Uri.parse("mailto:"));
-        //initialize the emailIntent
-        final Intent emailIntent = new Intent(Intent.ACTION_SEND);
-        // Logs must be sent to the PRIVATE email. Please do not modify this without good reason!
-        emailIntent.putExtra(Intent.EXTRA_EMAIL, new String[]{CommonsApplication.LOGS_PRIVATE_EMAIL});
-        emailIntent.putExtra(Intent.EXTRA_SUBJECT, String.format(CommonsApplication.LOGS_PRIVATE_EMAIL_SUBJECT, BuildConfig.VERSION_NAME));
-        emailIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-        emailIntent.addFlags(Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
-        emailIntent.setSelector( emailSelectorIntent );
-        //adding the attachment to the intent
-        emailIntent.putExtra(Intent.EXTRA_STREAM, appLogsFilePath);
-
-        try {
-            startActivity(Intent.createChooser(emailIntent, "Send mail.."));
-        } catch (ActivityNotFoundException e) {
-            Toast.makeText(getActivity(), R.string.no_email_client, Toast.LENGTH_SHORT).show();
+    /**
+     * First checks for external storage permissions and then sends logs via email
+     */
+    private void checkPermissionsAndSendLogs() {
+        //first we need to check if we have the necessary permissions
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            if (ContextCompat.checkSelfPermission(
+                    getActivity(),
+                    Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                    ==
+                    PackageManager.PERMISSION_GRANTED) {
+                commonsLogSender.send(getActivity(), null);
+            } else {
+                //first get the necessary permission
+                requestPermissions(new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
+                        REQUEST_CODE_WRITE_EXTERNAL_STORAGE);
+            }
+        } else {
+            commonsLogSender.send(getActivity(), null);
         }
     }
-
 }

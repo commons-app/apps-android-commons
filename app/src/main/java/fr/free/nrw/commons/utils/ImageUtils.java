@@ -126,6 +126,7 @@ public class ImageUtils {
 
         int allPixelsCount = bitmapWidth * bitmapHeight;
         int[] bitmapPixels = new int[allPixelsCount];
+        Timber.d("total %s", Integer.toString(allPixelsCount));
 
         bitmap.getPixels(bitmapPixels,0,bitmapWidth,0,0,bitmapWidth,bitmapHeight);
         boolean isImageDark = false;

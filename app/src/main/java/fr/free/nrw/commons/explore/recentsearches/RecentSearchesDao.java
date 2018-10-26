@@ -7,7 +7,6 @@ import android.database.sqlite.SQLiteDatabase;
 import android.os.RemoteException;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -16,6 +15,8 @@ import java.util.List;
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.inject.Provider;
+
+import timber.log.Timber;
 
 /**
  * This class doesn't execute queries in database directly instead it contains the logic behind
@@ -62,12 +63,12 @@ public class RecentSearchesDao {
                 if (recentSearch.getContentUri() == null) {
                     throw new RuntimeException("tried to delete item with no content URI");
                 } else {
-                    Log.d("QUERY_NAME",recentSearch.getContentUri()+"- delete tried");
+                    Timber.d("QUERY_NAME %s - delete tried", recentSearch.getContentUri());
                     db.delete(recentSearch.getContentUri(), null, null);
-                    Log.d("QUERY_NAME",recentSearch.getQuery()+"- query deleted");
+                    Timber.d("QUERY_NAME %s - query deleted", recentSearch.getQuery());
                 }
             } catch (RemoteException e) {
-                Log.d("Exception",e+"- query deleted");
+                Timber.e(e, "query deleted");
                 throw new RuntimeException(e);
             } finally {
                 db.release();
