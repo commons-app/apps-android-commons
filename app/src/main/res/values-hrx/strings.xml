@@ -1,4 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- Authors:
+* Envlh
+* Paul Beppler
+-->
 <resources>
   <string name="app_name" fuzzy="true">Wikimedia Commons (Wikimedia Allmend)</string>
   <string name="menu_settings">Instellunge</string>
@@ -9,7 +13,7 @@
   <string name="logging_in_message" fuzzy="true">Bittschön woorte …</string>
   <string name="login_success">Oonmeldung erfollichreich!</string>
   <string name="login_failed">Oonmeldung fehlgeschlooht!</string>
-  <string name="authentication_failed">Authentifizierung fehlgeschlooht!</string>
+  <string name="authentication_failed" fuzzy="true">Authentifizierung fehlgeschlooht!</string>
   <string name="uploading_started">Hochloode oongefang!</string>
   <string name="upload_completed_notification_title">„%1$s“ hochgelood!</string>
   <string name="upload_completed_notification_text">Tippe mit dein Fingerspitze, um dein Upload (Ufflloodung) oonzusiehn</string>
@@ -31,8 +35,6 @@
   <string name="share_title_hint">Titel</string>
   <string name="share_description_hint">Beschreibung</string>
   <string name="login_failed_network">Oonmeldung fehlgeschlooht – Netzwerrekfehler</string>
-  <string name="login_failed_username">Oonmeldung fehlgeschlooht – Bittschön Benutzernoome üwerprüfe</string>
-  <string name="login_failed_password">Oonmeldung fehlgeschlooht – Bittschön Passwort üwerprüfe</string>
   <string name="login_failed_throttled" fuzzy="true">Zu viele erfollichlose Versuche. Bittschön in en poor Minute wieder erneit versuche.</string>
   <string name="login_failed_blocked">Der Benutzer woard leider uff Commons gesperrt</string>
   <string name="login_failed_generic">Oonmeldung fehlgeschlooht</string>
@@ -59,21 +61,21 @@
   <string name="menu_cancel_upload">Abbreche</string>
   <string name="share_license_summary">Das Bild weard lizenziert unner %1$s</string>
   <string name="menu_download">Herunnerloode</string>
-  <string name="preference_license">Lizenz</string>
+  <string name="preference_license" fuzzy="true">Lizenz</string>
   <string name="license_name_cc_by_sa" fuzzy="true">CC Attribution-ShareAlike 3.0</string>
   <string name="license_name_cc_by" fuzzy="true">CC Attribution 3.0</string>
   <string name="license_name_cc0">CC0</string>
-  <string name="license_name_cc_by_sa_3_0">CC-BY-SA 3.0</string>
-  <string name="license_name_cc_by_sa_3_0_at">CC-BY-SA 3.0 (Österreich)</string>
-  <string name="license_name_cc_by_sa_3_0_de">CC-BY-SA 3.0 (Deitschland)</string>
-  <string name="license_name_cc_by_sa_3_0_ee">CC-BY-SA 3.0 (Estland)</string>
-  <string name="license_name_cc_by_sa_3_0_es">CC-BY-SA 3.0 (Spanie)</string>
-  <string name="license_name_cc_by_sa_3_0_hr">CC-BY-SA 3.0 (Kroatie)</string>
-  <string name="license_name_cc_by_sa_3_0_lu">CC-BY-SA 3.0 (Luxemburg)</string>
-  <string name="license_name_cc_by_sa_3_0_nl">CC-BY-SA 3.0 (Niederlande)</string>
-  <string name="license_name_cc_by_sa_3_0_no">CC-BY-SA 3.0 (Norweche)</string>
-  <string name="license_name_cc_by_sa_3_0_pl">CC-BY-SA 3.0 (Polen)</string>
-  <string name="license_name_cc_by_sa_3_0_ro">CC-BY-SA 3.0 (Rumänie)</string>
+  <string name="license_name_cc_by_sa_3_0">CC BY-SA 3.0</string>
+  <string name="license_name_cc_by_sa_3_0_at">CC BY-SA 3.0 (Österreich)</string>
+  <string name="license_name_cc_by_sa_3_0_de">CC BY-SA 3.0 (Deitschland)</string>
+  <string name="license_name_cc_by_sa_3_0_ee">CC BY-SA 3.0 (Estland)</string>
+  <string name="license_name_cc_by_sa_3_0_es">CC BY-SA 3.0 (Spanie)</string>
+  <string name="license_name_cc_by_sa_3_0_hr">CC BY-SA 3.0 (Kroatie)</string>
+  <string name="license_name_cc_by_sa_3_0_lu">CC BY-SA 3.0 (Luxemburg)</string>
+  <string name="license_name_cc_by_sa_3_0_nl">CC BY-SA 3.0 (Niederlande)</string>
+  <string name="license_name_cc_by_sa_3_0_no">CC BY-SA 3.0 (Norweche)</string>
+  <string name="license_name_cc_by_sa_3_0_pl">CC BY-SA 3.0 (Polen)</string>
+  <string name="license_name_cc_by_sa_3_0_ro">CC BY-SA 3.0 (Rumänie)</string>
   <string name="license_name_cc_by_3_0">CC-BY 3.0</string>
   <string name="license_name_cc_zero">CC Zero</string>
   <string name="welcome_wikipedia_text">Teil deine Bilder. Erweck Wikipedia-Artikel zum Lewe!</string>

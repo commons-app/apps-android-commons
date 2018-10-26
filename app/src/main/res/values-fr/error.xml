@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- Authors:
+* Blurby
+-->
 <resources>
   <string name="crash_dialog_title">Commons a planté</string>
   <string name="crash_dialog_text">Oups ! Quelque chose s’est mal passé !</string>

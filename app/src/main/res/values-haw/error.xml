@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- Authors:
+* Kolonahe
+-->
 <resources>
   <string name="crash_dialog_title">Ua haki ʻO Kahilehulehu</string>
   <string name="crash_dialog_text">ʻAuwē. Loaʻa i ka pilikia!</string>

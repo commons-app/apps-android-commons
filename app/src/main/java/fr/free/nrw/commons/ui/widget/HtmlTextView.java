@@ -14,6 +14,11 @@ import android.util.AttributeSet;
  */
 public class HtmlTextView extends AppCompatTextView {
 
+    /**
+     * Constructs a new instance of HtmlTextView
+     * @param context the context of the view
+     * @param attrs the set of attributes for the view
+     */
     public HtmlTextView(Context context, AttributeSet attrs) {
         super(context, attrs);
 
@@ -21,6 +26,10 @@ public class HtmlTextView extends AppCompatTextView {
         setText(fromHtml(getText().toString()));
     }
 
+    /**
+     * Sets the text to be displayed
+     * @param newText the text to be displayed
+     */
     public void setHtmlText(String newText) {
         setText(fromHtml(newText));
     }

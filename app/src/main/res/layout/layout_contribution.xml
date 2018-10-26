@@ -31,7 +31,7 @@
         android:layout_gravity="center|bottom"
         android:background="#AA000000"
         android:orientation="vertical"
-        android:padding="8dp"
+        android:padding="@dimen/small_gap"
         >
         <ProgressBar
             android:id="@+id/contributionProgress"

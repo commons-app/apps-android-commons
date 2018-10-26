@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- Authors:
+* Cedric31
+-->
 <resources>
   <string name="crash_dialog_title">Commons a fracassat</string>
   <string name="crash_dialog_text">Ops! Quicòm a trucat !</string>

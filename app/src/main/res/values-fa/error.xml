@@ -1,4 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- Authors:
+* Ebraminio
+* Mjbmr
+* Reza1615
+* جواد
+-->
 <resources>
   <string name="crash_dialog_title">ویکی‌انبار متوقف شده‌است</string>
   <string name="crash_dialog_text">اوه. خطایی در کار است!</string>

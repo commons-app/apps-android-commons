@@ -15,12 +15,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
-        <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-            android:id="@+id/uploadsFragmentContainer"
+        <FrameLayout android:id="@+id/uploadsFragmentContainer"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_below="@id/toolbar"
-            android:orientation="vertical"></FrameLayout>
+            android:orientation="vertical" />
     </RelativeLayout>
 
     <android.support.design.widget.NavigationView

@@ -1,4 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- Authors:
+* Sachinkatiyar
+* Sfic
+-->
 <resources>
   <string name="crash_dialog_title">कॉमन्स क्रैश हो गया</string>
   <string name="crash_dialog_text">ओह, कुछ गलत हो गया!</string>

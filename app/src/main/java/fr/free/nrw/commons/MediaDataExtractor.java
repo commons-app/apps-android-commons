@@ -1,6 +1,7 @@
 package fr.free.nrw.commons;
 
 import android.support.annotation.Nullable;
+import android.text.TextUtils;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -35,6 +36,7 @@ import timber.log.Timber;
 public class MediaDataExtractor {
     private final MediaWikiApi mediaWikiApi;
     private boolean fetched;
+    private boolean deletionStatus;
     private ArrayList<String> categories;
     private Map<String, String> descriptions;
     private String license;
@@ -57,6 +59,14 @@ public class MediaDataExtractor {
     public void fetch(String filename, LicenseList licenseList) throws IOException {
         if (fetched) {
             throw new IllegalStateException("Tried to call MediaDataExtractor.fetch() again.");
+        }
+
+        try{
+            deletionStatus = mediaWikiApi.pageExists("Commons:Deletion_requests/" + filename);
+            Timber.d("Nominated for deletion: " + deletionStatus);
+        }
+        catch (Exception e){
+            Timber.d(e.getMessage());
         }
 
         MediaResult result = mediaWikiApi.fetchMediaByFilename(filename);
@@ -152,7 +162,11 @@ public class MediaDataExtractor {
             Node node = nodes.item(i);
             if (node.getNodeName().equals("template")) {
                 String foundTitle = getTemplateTitle(node);
-                if (title.equals(new PageTitle(foundTitle).getDisplayText())) {
+                String displayText = new PageTitle(foundTitle).getDisplayText();
+                //replaced equals with contains because multiple sources had multiple formats
+                //say from two sources I had {{Location|12.958117388888889|77.6440805}} & {{Location dec|47.99081|7.845416|heading:255.9}},
+                //So exact string match would show null results for uploads via web
+                if (!(TextUtils.isEmpty(displayText)) && displayText.contains(title)) {
                     return node;
                 }
             }
@@ -283,7 +297,7 @@ public class MediaDataExtractor {
     /**
      * Take our metadata and inject it into a live Media object.
      * Media object might contain stale or cached data, or emptiness.
-     * @param media
+     * @param media Media object to inject into
      */
     public void fill(Media media) {
         if (!fetched) {
@@ -295,6 +309,9 @@ public class MediaDataExtractor {
         media.setCoordinates(coordinates);
         if (license != null) {
             media.setLicense(license);
+        }
+        if (deletionStatus){
+            media.setRequestedDeletion();
         }
 
         // add author, date, etc fields

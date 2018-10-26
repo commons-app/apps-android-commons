@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- Authors:
+* Kolonahe
+-->
 <resources>
   <string name="app_name" fuzzy="true">Kahilehulehu Wikimedia</string>
   <string name="menu_settings">Makemake</string>
@@ -9,7 +12,7 @@
   <string name="logging_in_message">E kali ke ʻoluʻolu…</string>
   <string name="login_success">ʻEʻe kūleʻa</string>
   <string name="login_failed">Hāʻule ka ʻeʻena</string>
-  <string name="authentication_failed">Hāʻule ka hōʻoiaʻiʻo ʻike</string>
+  <string name="authentication_failed" fuzzy="true">Hāʻule ka hōʻoiaʻiʻo ʻike</string>
   <string name="uploading_started">Ua hoʻomaka ka hoʻouka!</string>
   <string name="upload_completed_notification_title">Ua hoʻouka ʻia ʻo %1$s</string>
   <string name="upload_completed_notification_text">Kīkē no ka ʻike ʻana o kāu hoʻouka</string>
@@ -31,8 +34,6 @@
   <string name="share_title_hint">Poʻo Inoa</string>
   <string name="share_description_hint">Hōʻike ʻAno</string>
   <string name="login_failed_network">Hiki ʻole ke ʻeʻe - hāʻule pūnaewele</string>
-  <string name="login_failed_username">Hiki ʻole ke ʻeʻe - hōʻoiaʻiʻo i kāu inoa mea hoʻohana ke ʻoluʻolu</string>
-  <string name="login_failed_password">Hiki ʻole ke ʻeʻe - hōʻoiaʻiʻo i kāu ʻōlelo hūnā ke ʻoluʻolu</string>
   <string name="login_failed_throttled" fuzzy="true">Hoʻāʻo ʻeʻe ʻole he nui kā. E ʻoluʻolu, e hana hou i ka wā hou aku</string>
   <string name="login_failed_blocked">E kala mai, ua pale ʻia kēia mea hoʻohana ma ke Kahilehulehu</string>
   <string name="login_failed_generic">Hāʻule ka ʻeʻena</string>
@@ -59,7 +60,7 @@
   <string name="menu_cancel_upload">Hoʻōki</string>
   <string name="share_license_summary">E laikini ana kēia kiʻi ma lalo o %1$s</string>
   <string name="menu_download">Hoʻoili</string>
-  <string name="preference_license">Laikini</string>
+  <string name="preference_license" fuzzy="true">Laikini</string>
   <string name="license_name_cc_by_sa" fuzzy="true">CC Attribution-ShareAlike 3.0</string>
   <string name="license_name_cc_by" fuzzy="true">CC Attribution 3.0</string>
   <string name="license_name_cc0">CC0</string>

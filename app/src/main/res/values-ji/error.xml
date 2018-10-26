@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- Authors:
+* פוילישער
+-->
 <resources>
   <string name="crash_dialog_title">קאמאנסט איז אײַנגעפֿאלן</string>
   <string name="crash_dialog_text">אוי, עפעס טויג נישט!</string>

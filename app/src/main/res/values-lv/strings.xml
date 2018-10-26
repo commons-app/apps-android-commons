@@ -1,6 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- Authors:
+* Admresdeserv.
+* Papuass
+* Silraks
+-->
 <resources>
   <string name="app_name">Commons</string>
+  <string name="bullet">•</string>
   <string name="menu_settings">Iestatījumi</string>
   <string name="username">Lietotājvārds</string>
   <string name="password">Parole</string>
@@ -10,7 +16,7 @@
   <string name="logging_in_message">Lūdzu, uzgaidiet…</string>
   <string name="login_success">Ieiešana veiksmīga</string>
   <string name="login_failed">Pieteikšanās neizdevās.</string>
-  <string name="authentication_failed">Autentifikācija neizdevās!</string>
+  <string name="authentication_failed" fuzzy="true">Autentifikācija neizdevās!</string>
   <string name="uploading_started">Augšupielāde sākās!</string>
   <string name="upload_completed_notification_title">%1$s augšupielādēti!</string>
   <string name="upload_progress_notification_title_start">Uzsāk %1$s augšupielādi</string>
@@ -42,8 +48,8 @@
   <string name="title_activity_settings">Iestatījumi</string>
   <string name="title_activity_signup">Reģistrēties</string>
   <string name="menu_about">Par</string>
-  <string name="about_improve">&lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;Izejas kods&lt;/a&gt; un &lt;a href=\"https://commons-app.github.io/\"&gt;tīmekļa vietne&lt;/a&gt; GitHub. Izveido jaunu &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;GitHub pieteikumu&lt;/a&gt; kļūdas ziņojumam vai ieteikumam.</string>
-  <string name="about_privacy_policy">&lt;a href=\"https://github.com/commons-app/apps-android-commons/wiki/Privacy-policy\"&gt;Privātuma politika&lt;/a&gt;</string>
+  <string name="about_improve" fuzzy="true">&lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;Izejas kods&lt;/a&gt; un &lt;a href=\"https://commons-app.github.io/\"&gt;tīmekļa vietne&lt;/a&gt; GitHub. Izveido jaunu &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;GitHub pieteikumu&lt;/a&gt; kļūdas ziņojumam vai ieteikumam.</string>
+  <string name="about_privacy_policy" fuzzy="true">&lt;a href=\"https://github.com/commons-app/apps-android-commons/wiki/Privacy-policy\"&gt;Privātuma politika&lt;/a&gt;</string>
   <string name="title_activity_about">Par</string>
   <string name="menu_feedback">Nosūtīt atsauksmes (pa e-pastu)</string>
   <string name="provider_categories">Nesen lietotās kategorijas</string>
@@ -52,7 +58,7 @@
   <string name="menu_retry_upload">Mēģināt vēlreiz</string>
   <string name="menu_cancel_upload">Atcelt</string>
   <string name="menu_download">Lejupielādēt</string>
-  <string name="preference_license">Licence</string>
+  <string name="preference_license" fuzzy="true">Licence</string>
   <string name="preference_theme">Nakts režīms</string>
   <string name="license_name_cc0">CC0</string>
   <string name="license_name_cc_by_sa_3_0">CC BY-SA 3.0</string>
@@ -73,6 +79,7 @@
   <string name="no">Nē</string>
   <string name="media_detail_title">Nosaukums</string>
   <string name="media_detail_description">Apraksts</string>
+  <string name="media_detail_author">Autors</string>
   <string name="media_detail_uploaded_date">Augšupielādēšanas datums</string>
   <string name="media_detail_license">Licence</string>
   <string name="media_detail_coordinates">Koordinātas</string>
@@ -96,4 +103,14 @@
   <string name="no_description_found">apraksts nav atrasts</string>
   <string name="give_permission">Atļaut</string>
   <string name="use_external_storage">Izmantot ārējo krātuvi</string>
+  <string name="skip_login">Izlaist</string>
+  <string name="read_article">LASĪT RAKSTU</string>
+  <string name="notifications_thank_you_edit">Paldies par labojumu</string>
+  <string name="toggle_view_button">Pārslēgt skatu</string>
+  <string name="about_translate_title">Valodas</string>
+  <string name="about_translate_proceed">Turpināt</string>
+  <string name="about_translate_cancel">Atcelt</string>
+  <string name="showcase_view_got_it_button">Sapratu!</string>
+  <string name="question">Jautājums</string>
+  <string name="add_description">+ Pievienot aprakstu</string>
 </resources>

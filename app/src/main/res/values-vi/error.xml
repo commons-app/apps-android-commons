@@ -1,4 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- Authors:
+* Minh Nguyen
+* Tuankiet65
+-->
 <resources>
   <string name="crash_dialog_title">Commons đã có sự cố</string>
   <string name="crash_dialog_text">Oái, đã có trục trặc xảy ra!</string>

@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- Authors:
+* Ooswesthoesbes
+-->
 <resources>
   <string name="crash_dialog_title">Commons is vasgeloupe</string>
   <string name="crash_dialog_text">Oj. Get góng verkieërdj!</string>

@@ -22,6 +22,14 @@ public class LogBuilder {
     private final String schema;
     private final SharedPreferences prefs;
 
+    /**
+     * Main constructor of LogBuilder
+     *
+     * @param schema   Log schema
+     * @param revision Log revision
+     * @param mwApi    Wiki media API instance
+     * @param prefs    Instance of SharedPreferences
+     */
     LogBuilder(String schema, long revision, MediaWikiApi mwApi, SharedPreferences prefs) {
         this.prefs = prefs;
         this.data = new JSONObject();
@@ -30,6 +38,12 @@ public class LogBuilder {
         this.mwApi = mwApi;
     }
 
+    /**
+     * Adds data to preferences
+     * @param key Log key
+     * @param value Log object value
+     * @return LogBuilder
+     */
     public LogBuilder param(String key, Object value) {
         try {
             data.put(key, value);
@@ -39,6 +53,10 @@ public class LogBuilder {
         return this;
     }
 
+    /**
+     * Encodes JSON object to URL
+     * @return URL to JSON object
+     */
     URL toUrl() {
         JSONObject fullData = new JSONObject();
         try {
@@ -65,7 +83,7 @@ public class LogBuilder {
         LogTask logTask = new LogTask(mwApi);
         logTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, this);
     }
-
+    
     public void log() {
         log(false);
     }

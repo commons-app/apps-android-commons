@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- Authors:
+* Michawiki
+-->
 <resources>
   <string name="crash_dialog_title">Commons je spadnył</string>
   <string name="crash_dialog_text">Hopla. Něšto je so nimokuliło!</string>

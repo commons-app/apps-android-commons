@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- Authors:
+* Praveenp
+-->
 <resources>
   <string name="crash_dialog_title">കോമൺസ് തകർന്നു</string>
   <string name="crash_dialog_text">അയ്യോ. എന്തോ പ്രശ്നമുണ്ടായി!</string>

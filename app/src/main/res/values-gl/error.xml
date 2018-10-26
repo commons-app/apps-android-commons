@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- Authors:
+* Toliño
+-->
 <resources>
   <string name="crash_dialog_title">Commons fallou</string>
   <string name="crash_dialog_text">Vaites! Algo foi mal!</string>

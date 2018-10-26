@@ -1,11 +1,13 @@
 package fr.free.nrw.commons.upload;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.v7.app.AlertDialog;
 
 import java.io.IOException;
+import java.lang.ref.WeakReference;
 
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.contributions.ContributionsActivity;
@@ -28,12 +30,14 @@ public class ExistingFileAsync extends AsyncTask<Void, Void, Boolean> {
         DUPLICATE_CANCELLED
     }
 
+    private final WeakReference<Activity> activity;
     private final MediaWikiApi api;
     private final String fileSha1;
-    private final Context context;
+    private final WeakReference<Context> context;
     private final Callback callback;
 
-    public ExistingFileAsync(String fileSha1, Context context, Callback callback, MediaWikiApi mwApi) {
+    public ExistingFileAsync(WeakReference<Activity> activity, String fileSha1, WeakReference<Context> context, Callback callback, MediaWikiApi mwApi) {
+        this.activity = activity;
         this.fileSha1 = fileSha1;
         this.context = context;
         this.callback = callback;
@@ -69,19 +73,21 @@ public class ExistingFileAsync extends AsyncTask<Void, Void, Boolean> {
         // If file exists, display warning to user.
         // Use soft warning for now (user able to choose to proceed) until have determined that implementation works without bugs
         if (fileExists) {
-            AlertDialog.Builder builder = new AlertDialog.Builder(context);
+            AlertDialog.Builder builder = new AlertDialog.Builder(context.get());
             builder.setMessage(R.string.file_exists)
                     .setTitle(R.string.warning);
             builder.setPositiveButton(R.string.no, (dialog, id) -> {
                 //Go back to ContributionsActivity
-                Intent intent = new Intent(context, ContributionsActivity.class);
-                context.startActivity(intent);
+                Intent intent = new Intent(context.get(), ContributionsActivity.class);
+                context.get().startActivity(intent);
                 callback.onResult(Result.DUPLICATE_CANCELLED);
             });
             builder.setNegativeButton(R.string.yes, (dialog, id) -> callback.onResult(Result.DUPLICATE_PROCEED));
 
             AlertDialog dialog = builder.create();
-            dialog.show();
+            if (!activity.get().isFinishing()) {
+                dialog.show();
+            }
         } else {
             callback.onResult(Result.NO_DUPLICATE);
         }

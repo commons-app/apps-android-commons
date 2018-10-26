@@ -1,4 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- Authors:
+* Dj
+* Misibacsi
+* Máté
+-->
 <resources>
   <string name="crash_dialog_title">Az alkalmazás összeomlott</string>
   <string name="crash_dialog_text">Hoppá! Valami elromlott!</string>

@@ -1,17 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- Authors:
+* BanKris
+* Bencemac
+* Dj
+* Einstein2
+* Envlh
+* MeskoBalazs
+* Misibacsi
+* Máté
+* Tacsipacsi
+* Urbalazs
+* ViDam
+-->
 <resources>
+  <string name="title_activity_explore">Felfedezés</string>
+  <string name="navigation_item_explore">Felfedezés</string>
+  <string name="preference_category_appearance">Megjelenés</string>
+  <string name="preference_category_general">Általános</string>
+  <string name="preference_category_feedback">Visszajelzés</string>
+  <string name="preference_category_location">Helyszín</string>
   <string name="app_name">Commons</string>
+  <string name="bullet">•</string>
   <string name="menu_settings">Beállítások</string>
+  <string name="intent_share_upload_label">Feltöltés a Commonsra</string>
   <string name="username">Felhasználónév</string>
   <string name="password">Jelszó</string>
+  <string name="login_credential">Jelentkezz be a Commons Béta fiókoddal</string>
   <string name="login">Bejelentkezés</string>
+  <string name="forgot_password">Elfelejtett jelszó:</string>
   <string name="signup">Regisztráció</string>
   <string name="logging_in_title">Belépés…</string>
   <string name="logging_in_message">Kérlek várj…</string>
   <string name="login_success">Sikeres bejelentkezés</string>
   <string name="login_failed">A bejelentkezés nem sikerült.</string>
   <string name="upload_failed">A fájl nem található. Próbálkozz másik fájllal.</string>
-  <string name="authentication_failed">Sikertelen hitelesítés.</string>
+  <string name="authentication_failed">Sikertelen hitelesítés, kérlek jelentkezz be újra</string>
   <string name="uploading_started">Feltöltés elindult.</string>
   <string name="upload_completed_notification_title">%1$s feltöltve.</string>
   <string name="upload_completed_notification_text">Feltöltés megtekintése</string>
@@ -21,8 +44,8 @@
   <string name="upload_failed_notification_title">%1$s feltöltése sikertelen</string>
   <string name="upload_failed_notification_subtitle">Érintsd meg a megtekintéshez</string>
   <plurals name="uploads_pending_notification_indicator">
-    <item quantity="one">%d fájl feltöltése folyamatban</item>
-    <item quantity="other">%d fájl feltöltése folyamatban</item>
+    <item quantity="one">%1$d fájl feltöltése folyamatban</item>
+    <item quantity="other">%1$d fájl feltöltése folyamatban</item>
   </plurals>
   <string name="title_activity_contributions">Legutóbbi feltöltéseim</string>
   <string name="contribution_state_queued">Várólistán</string>
@@ -36,10 +59,10 @@
   <string name="menu_share">Megosztás</string>
   <string name="menu_open_in_browser">Megtekintés böngészőben</string>
   <string name="share_title_hint">Cím</string>
+  <string name="add_title_toast">Kérlek, adj címet a fájlnak</string>
   <string name="share_description_hint">Leírás</string>
   <string name="login_failed_network">Nem lehet bejelentkezni - hálózati hiba</string>
-  <string name="login_failed_username">Nem lehet bejelentkezni - ellenőrizd a felhasználóneved</string>
-  <string name="login_failed_password">Nem lehet bejelentkezni - ellenőrizd a jelszavad</string>
+  <string name="login_failed_wrong_credentials">Nem sikerült bejelentkezni – kérlek, ellenőrizd a felhasználónevedet és a jelszavadat</string>
   <string name="login_failed_throttled">Túl sok sikertelen próbálkozás. Próbálkozz újra pár perc múlva.</string>
   <string name="login_failed_blocked">Sajnáljuk, ezt a felhasználót blokkolták a Commonson</string>
   <string name="login_failed_2fa_needed">Meg kell adnia a kétlépcsős hitelesítő kódját.</string>
@@ -51,32 +74,35 @@
   <string name="categories_search_text_hint">Keresés a kategóriák között</string>
   <string name="menu_save_categories">Mentés</string>
   <string name="refresh_button">Frissítés</string>
+  <string name="display_list_button">Lista</string>
   <string name="gps_disabled">A GPS le van tiltva az eszközén. Szeretné engedélyezni?</string>
   <string name="enable_gps">GPS engedélyezése</string>
   <string name="contributions_subtitle_zero">Még nincsenek feltöltések</string>
   <plurals name="contributions_subtitle">
     <item quantity="zero">\@string/contributions_subtitle_zero</item>
-    <item quantity="one">%d feltöltés</item>
-    <item quantity="other">%d feltöltés</item>
+    <item quantity="one">%1$d feltöltés</item>
+    <item quantity="other">%1$d feltöltés</item>
   </plurals>
   <plurals name="starting_multiple_uploads">
-    <item quantity="one">%d feltöltés kezdése</item>
-    <item quantity="other">%d feltöltés kezdése</item>
+    <item quantity="one">%1$d feltöltés kezdése</item>
+    <item quantity="other">%1$d feltöltés kezdése</item>
   </plurals>
   <plurals name="multiple_uploads_title">
-    <item quantity="one">%d feltöltés</item>
-    <item quantity="other">%d feltöltés</item>
+    <item quantity="one">%1$d feltöltés</item>
+    <item quantity="other">%1$d feltöltés</item>
   </plurals>
   <string name="categories_not_found">Nincs a(z) „%1$s” keresési kifejezésnek megfelelő kategória</string>
-  <string name="categories_skip_explanation" fuzzy="true">Adj kategóriákat a képekhez, hogy könnyebben meg lehessen találni őket a Commonson.\n\nKezdd el beírni a kategória nevét, hogy hozzáadd.\nKattints erre az üzenetre a lépés kihagyásához</string>
+  <string name="categories_skip_explanation">Adj kategóriákat a képekhez, hogy könnyebben meg lehessen találni őket a Commonson.\nKezdd el beírni a kategória nevét, hogy hozzáadd.\nBökj erre az üzenetre (vagy a vissza gombra) a lépés kihagyásához</string>
   <string name="categories_activity_title">Kategóriák</string>
   <string name="title_activity_settings">Beállítások</string>
   <string name="title_activity_signup">Regisztráció</string>
+  <string name="title_activity_featured_images">Kiemelt képek</string>
+  <string name="title_activity_category_details">Kategória</string>
   <string name="menu_about">Névjegy</string>
   <string name="about_license">A Wikimedia Commons applikáció egy nyílt forráskódú szoftver, amit a Wikimedia-közösség önkéntesei készítettek és tartanak karban. A Wikimédia Alapítvány nem vesz részt az applikáció megalkotásában, fejlesztésében és üzemeltetésében.</string>
-  <string name="about_improve">&lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;Forráskód&lt;/a&gt; és &lt;a href=\"https://commons-app.github.io/\"&gt;weboldal&lt;/a&gt; a GitHubon. Nyiss egy új &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;GitHub-problémát&lt;/a&gt; hibabejelentéssel vagy fejlesztési javaslattal.</string>
-  <string name="about_privacy_policy">&lt;a href=\"https://github.com/commons-app/apps-android-commons/wiki/Privacy-policy\"&gt;Adatvédelmi irányelvek&lt;/a&gt;</string>
-  <string name="about_credits">&lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/CREDITS\"&gt;Köszönetnyilvánítás&lt;/a&gt;</string>
+  <string name="about_improve">Nyiss egy új &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;GitHub-problémát&lt;/a&gt; hibabejelentéssel vagy fejlesztési javaslattal.</string>
+  <string name="about_privacy_policy">&lt;u&gt;Adatvédelmi irányelvek&lt;/u&gt;</string>
+  <string name="about_credits">&lt;u&gt;Köszönetnyilvánítás&lt;/u&gt;</string>
   <string name="title_activity_about">Névjegy</string>
   <string name="menu_feedback">Visszajelzés küldése (e-mailben)</string>
   <string name="no_email_client">Nincs telepített levelezőprogram</string>
@@ -88,10 +114,10 @@
   <string name="share_license_summary">Ez a kép %1$s licenc alatt kerül feltöltésre</string>
   <string name="media_upload_policy">A kép feltöltésével kijelentem, hogy ez a saját munkám és nem tartalmaz jogvédett anyagot, nem szelfi és megfelel a&lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines\"&gt;Wikimedia Commons irányelveinek&lt;/a&gt;.</string>
   <string name="menu_download">Letöltés</string>
-  <string name="preference_license">Licenc</string>
+  <string name="preference_license">Alapértelmezett licenc</string>
   <string name="use_previous">Előző cím/leírás használata</string>
   <string name="allow_gps">Automatikusan megkapja a jelenlegi helyet</string>
-  <string name="allow_gps_summary">Lekéri a jelenlegi helyet, hogy lehetőség legyen kategóriajavaslatokra a nem földrajzi címkézett képeknél.</string>
+  <string name="allow_gps_summary" fuzzy="true">Lekéri a jelenlegi helyet, hogy lehetőség legyen kategóriajavaslatokra a nem földrajzi címkézett képeknél.</string>
   <string name="preference_theme">Éjszakai mód</string>
   <string name="preference_theme_summary">Sötét téma használata</string>
   <string name="license_name_cc_by_sa_four">Nevezd meg! – Így add tovább! 4.0</string>
@@ -99,7 +125,7 @@
   <string name="license_name_cc_by_sa">Nevezd meg! – Így add tovább! 3.0</string>
   <string name="license_name_cc_by">Attribution 3.0</string>
   <string name="license_name_cc0">CC0</string>
-  <string name="license_name_cc_by_sa_3_0">CC-BY-SA 3.0</string>
+  <string name="license_name_cc_by_sa_3_0">CC BY-SA 3.0</string>
   <string name="license_name_cc_by_sa_3_0_at">CC BY-SA 3.0 (Ausztria)</string>
   <string name="license_name_cc_by_sa_3_0_de">CC BY-SA 3.0 (Németország)</string>
   <string name="license_name_cc_by_sa_3_0_ee">CC BY-SA 3.0 (Észtország)</string>
@@ -117,11 +143,16 @@
   <string name="tutorial_1_text">A Wikimédia Commons tárolja a Wikipédián használt képek többségét.</string>
   <string name="tutorial_1_subtext">A képeid segítik az ismeretterjesztést az egész világon!</string>
   <string name="tutorial_2_text">Kérjük, tölts fel képeket, amelyeket teljes mértékben te fotóztál vagy készítettél:</string>
-  <string name="tutorial_2_subtext">- Természeti tárgyak (virágok, állatok, hegyek)\n- Hasznos tárgyak (kerékpárok, vasútállomások)\n- Híres emberek (a polgármestered, olimpikonok, akikkel találkoztál)</string>
+  <string name="tutorial_2_subtext">Természeti tárgyak (virágok, állatok, hegyek)\n• Hasznos tárgyak (kerékpárok, vasútállomások)\n• Híres emberek (a polgármestered, olimpikonok, akikkel találkoztál)</string>
+  <string name="tutorial_2_subtext_1">Természeti tárgyak (virágok, állatok, hegyek)</string>
+  <string name="tutorial_2_subtext_2">Hasznos tárgyak (kerékpárok, vasútállomások)</string>
+  <string name="tutorial_2_subtext_3">Híres emberek (a polgármestered, olimpikonok, akikkel találkoztál)</string>
   <string name="tutorial_3_text">Kérjük, NE tölts fel:</string>
   <string name="tutorial_3_subtext">- Szelfiket vagy képeket a barátaidról\n- Internetröl letöltött képeket\n- Kereskedelmi alkalmazások képernyőképeit</string>
+  <string name="tutorial_3_subtext_2">Az Internetről letöltött képek</string>
   <string name="tutorial_4_text">Példa feltöltés:</string>
-  <string name="tutorial_4_subtext">- Cím: Sydney-i Operaház\n- Leírás: A Sydney-i Operaház az öböl túlpartjáról\n- Kategóriák: Sydney Opera House, Sydney Opera House from the west, Sydney Opera House remote views</string>
+  <string name="tutorial_4_subtext">- Cím: Sydney-i Operaház\n- Leírás: A Sydney-i Operaház az öböl túlpartjáról\n- Kategóriák: Sydney Opera House from the west, Sydney Opera House remote views</string>
+  <string name="tutorial_4_subtext_1">Cím: Sydney-i Operaház</string>
   <string name="welcome_wikipedia_text">Tedd közzé a képeidet! Segíts életre kelteni a Wikipédia-szócikkeket!</string>
   <string name="welcome_wikipedia_subtext">A Wikipédián található képek a Wikimédia Commonsből származnak.</string>
   <string name="welcome_copyright_text">A képeid segítenek a világ minden táján élő emberek oktatásában.</string>
@@ -135,7 +166,7 @@
   <string name="detail_license_empty">Ismeretlen licenc</string>
   <string name="menu_refresh">Frissítés</string>
   <string name="read_storage_permission_rationale">Szükséges engedély: Külső tárhely olvasása. Az alkalmazás nem működik enélkül.</string>
-  <string name="write_storage_permission_rationale">Szükséges engedély: Külső tárhely írása. Az alkalmazás nem működik enélkül.</string>
+  <string name="write_storage_permission_rationale">Szükséges engedély: Külső tárhely írása. Az alkalmazás nem tudja használni a kamerát enélkül.</string>
   <string name="location_permission_rationale">Lehetséges engedély: Jelenlegi hely megszerzése, a kategóriajavaslatok lehetőségéért.</string>
   <string name="ok">OK</string>
   <string name="title_activity_nearby">Közeli helyek</string>
@@ -148,14 +179,13 @@
   <string name="media_detail_media_title">Média címe</string>
   <string name="media_detail_description">Leírás</string>
   <string name="media_detail_description_explanation">A média leírása kerül ide. Ez akár egészen hosszú is lehet, és több sorba fog kerülni. Azért reméljük, jól néz majd ki.</string>
+  <string name="media_detail_author">Szerző</string>
   <string name="media_detail_uploaded_date">Feltöltési dátum</string>
   <string name="media_detail_license">Licenc</string>
   <string name="media_detail_coordinates">Koordináták</string>
   <string name="media_detail_coordinates_empty">Nincs megadva</string>
   <string name="become_a_tester_title">Béta tesztelővé válás</string>
   <string name="become_a_tester_description">Jelentkezz a béta csatornánkra a Google Playen, hogy hamarabb megkapd a hibajavításokat és az új funkciókat</string>
-  <string name="use_wikidata">Wikidata használata</string>
-  <string name="use_wikidata_summary">(Figyelmeztetés: a kikapcsolása nagy mobiladat-forgalmat eredményezhet)</string>
   <string name="_2fa_code">2LH kód</string>
   <string name="number_of_uploads">Legutóbbi feltöltéseim korlátja</string>
   <string name="maximum_limit">Legnagyobb korlát</string>
@@ -164,6 +194,9 @@
   <string name="login_failed_2fa_not_supported">A kétlépcsős hitelesítés jelenleg nem támogatott.</string>
   <string name="logout_verification">Kilépsz?</string>
   <string name="commons_logo">Commons Logo</string>
+  <string name="commons_website">Commons weboldal</string>
+  <string name="commons_facebook">Commons Facebook-oldal</string>
+  <string name="commons_github">Commons Github forráskód</string>
   <string name="background_image">Háttérkép</string>
   <string name="no_image_found">Nem található kép</string>
   <string name="upload_image">Kép feltöltése</string>
@@ -186,19 +219,82 @@
   <string name="navigation_item_feedback">Visszajelzés</string>
   <string name="navigation_item_logout">Kijelentkezés</string>
   <string name="navigation_item_info">Bevezető</string>
+  <string name="navigation_item_notification">Értesítések</string>
+  <string name="navigation_item_featured_images">Kiemelt</string>
   <string name="nearby_needs_permissions">Közeli helyek nem megjeleníthetőek a helyadatokhoz való hozzáférés engedélyezése nélkül</string>
   <string name="no_description_found">nincs leírás</string>
   <string name="nearby_info_menu_commons_article">Commons leírólap</string>
   <string name="nearby_info_menu_wikidata_article">Wikidata-elem</string>
+  <string name="nearby_info_menu_wikipedia_article">Wikipédia-cikk</string>
   <string name="error_while_cache">Hiba a képek gyorsítótárazásakor</string>
   <string name="title_info">Egy egyedi, leíró cím a fájlnak, ami fájlnévként fog szolgálni. Egyszerű nyelvezetet használhatsz szóközökkel. Ne tedd bele a kiterjesztést.</string>
   <string name="description_info">Kérlek a lehető legteljesebb módon írd le a fájlt: hol készült, mit ábrázol, mi a kontextus? Kérlek add meg az objektumokat vagy személyeket a képen, valamint a nehezen kitalálható információkat (például a kép készítésének dátumát, ha az egy tájkép). Amennyiben a média valami szokatlant ábrázol, kérlek fejtsd ki, hogy mi teszi szokatlanná.</string>
+  <string name="upload_image_too_dark">Ez a fénykép túl sötét, biztos fel akarod tölteni? A Wikimédia Commons csak enciklopédikus értékkel bíró képeket tart meg.</string>
+  <string name="upload_image_blurry">Ez a fénykép homályos, biztos fel akarod tölteni? A Wikimédia Commons csak enciklopédikus értékkel bíró képeket tart meg.</string>
   <string name="give_permission">Engedély adása</string>
   <string name="use_external_storage">Külső tárhely használata</string>
   <string name="use_external_storage_summary">Az alkalmazáson belüli kamerával készült képek mentése az eszközre</string>
-  <string name="send_log_file">Naplófájlok küldése</string>
-  <string name="send_log_file_description">Naplófájlok küldése e-mailben a fejlesztőknek</string>
   <string name="login_to_your_account">Bejelentkezés a fiókodba</string>
+  <string name="send_log_file">Naplófájlok küldése</string>
+  <string name="send_log_file_description" fuzzy="true">Naplófájlok küldése e-mailben a fejlesztőknek</string>
+  <string name="no_web_browser">Nem található böngésző az URL megnyitásához</string>
+  <string name="null_url">Hiba! URL nem található.</string>
+  <string name="nominate_deletion">Törlésre jelölés</string>
+  <string name="nominated_for_deletion">Ezt a képet törlésre jelölték.</string>
+  <string name="view_browser">Megtekintés böngészőben</string>
+  <string name="skip_login">Kihagyás</string>
+  <string name="navigation_item_login">Bejelentkezés</string>
+  <string name="skip_login_title">Biztos ki akarod hagyni a bejelentkezést?</string>
+  <string name="login_alert_message">A funkció használatához kérlek jelentkezz be.</string>
+  <string name="copy_wikicode">Wikiszöveg vágólapra másolása</string>
+  <string name="wikicode_copied">A wikiszöveg a vágólapra lett másolva</string>
   <string name="nearby_location_has_not_changed">A hely nem változott.</string>
   <string name="nearby_location_not_available">A hely nem érhető el.</string>
+  <string name="location_permission_rationale_nearby">Közeli helyek listájának megtekintéséhez engedély szükséges</string>
+  <string name="read_article">SZÓCIKK OLVASÁSA</string>
+  <string name="notifications_welcome">Üdvözlünk a Wikimedia Commonson, %1$s! Örülünk, hogy itt vagy.</string>
+  <string name="notifications_talk_page_message">%1$s üzenetet hagyott a vitalapodon</string>
+  <string name="notifications_thank_you_edit">Köszönjük a szerkesztésedet!</string>
+  <string name="nearby_wikidata">WIKIDATA</string>
+  <string name="nearby_wikipedia">WIKIPÉDIA</string>
+  <string name="nearby_commons">COMMONS</string>
+  <string name="about_rate_us">&lt;u&gt;Értékelj minket&lt;/u&gt;</string>
+  <string name="about_faq">&lt;u&gt;GYIK&lt;/u&gt;</string>
+  <string name="welcome_skip_button">Útmutató átugrása</string>
+  <string name="no_internet">Internet nem elérhető</string>
+  <string name="internet_established">Internet elérhető</string>
+  <string name="no_notifications">Nincs értesítés</string>
+  <string name="about_translate">&lt;u&gt;Fordítás&lt;/u&gt;</string>
+  <string name="about_translate_title">Nyelvek</string>
+  <string name="about_translate_proceed">Folytatás</string>
+  <string name="about_translate_cancel">Mégse</string>
+  <string name="retry">Újra</string>
+  <string name="showcase_view_got_it_button">Értettem!</string>
+  <string name="showcase_view_whole_nearby_activity">Ezek a helyek vannak a közeledben, amikről van Wikipédia szócikk és nincs bennük kép.</string>
+  <string name="showcase_view_list_icon">A gombra koppintva bejön egy lista, ami ezeket a helyeket mutatja.</string>
+  <string name="showcase_view_plus_fab">Bármelyik helyhez feltölthetsz képet a galériádból vagy készíthetsz újat a kamerával.</string>
+  <string name="no_images_found">Nem található kép!</string>
+  <string name="error_loading_images">Képbetöltés közben hiba történt</string>
+  <string name="image_uploaded_by">Feltöltötte: %1$s</string>
+  <string name="appwidget_img">A nap képe</string>
+  <string name="app_widget_heading">A nap képe</string>
+  <string name="menu_search_button">Keresés</string>
+  <string name="search_commons">Keresés a Commonson</string>
+  <string name="title_activity_search">Keresés</string>
+  <string name="search_recent_header">Legutóbbi keresések:</string>
+  <string name="menu_set_wallpaper">Beállítás háttérképként</string>
+  <string name="quiz">Kvíz</string>
+  <string name="continue_message">Folytatás</string>
+  <string name="correct">Helyes válasz</string>
+  <string name="wrong">Rossz válasz</string>
+  <string name="share_app_title">Alkalmazás megosztása</string>
+  <string name="share_coordinates_not_present">A koordináták nem lettek megadva a kép kiválasztásakor.</string>
+  <string name="error_fetching_nearby_places">Hiba a közeli helyek elérésekor.</string>
+  <string name="delete_recent_searches_dialog">Biztosan törölni szeretnéd a keresési előzményeidet?</string>
+  <string name="search_history_deleted">Keresési előzmények törölve</string>
+  <string name="Achievements">Eredmények</string>
+  <string name="statistics">Statisztikák</string>
+  <string name="statistics_thanks">Kapott köszönetek</string>
+  <string name="statistics_featured">Kiemelt képek</string>
+  <string name="achievements_share_message">Oszd meg eredményeidet a barátaiddal!</string>
 </resources>

@@ -1,4 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- Authors:
+* DCLXVI
+* Vodnokon4e
+-->
 <resources>
   <string name="crash_dialog_title">Неуспех с Общомедия</string>
   <string name="crash_dialog_text">Опа. Нещо се обърка!</string>

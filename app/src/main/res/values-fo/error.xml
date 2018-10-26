@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- Authors:
+* EileenSanda
+-->
 <resources>
   <string name="crash_dialog_title">Commons er óvirkið í løtuni</string>
   <string name="crash_dialog_text">Ups. Okkurt gekk galið!</string>

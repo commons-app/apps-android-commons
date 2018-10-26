@@ -1,4 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- Authors:
+* Lloffiwr
+* Robin Owain
+-->
 <resources>
   <string name="crash_dialog_title">Aeth rhywbeth o\'i le yn Comin</string>
   <string name="crash_dialog_text">Wwwwps. Aeth rhywbeth o\'i le!</string>

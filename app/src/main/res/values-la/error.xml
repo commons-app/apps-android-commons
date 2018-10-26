@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- Authors:
+* Autokrator
+-->
 <resources>
   <string name="crash_dialog_title">Error</string>
   <string name="crash_dialog_text">Error</string>

@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- Authors:
+* Danmichaelo
+-->
 <resources>
   <string name="crash_dialog_title">Commons har kræsjet</string>
   <string name="crash_dialog_text">Oisann. Noe gikk galt!</string>

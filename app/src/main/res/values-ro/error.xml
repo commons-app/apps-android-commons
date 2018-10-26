@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- Authors:
+* Minisarm
+-->
 <resources>
   <string name="crash_dialog_title">Commons s-a blocat</string>
   <string name="crash_dialog_text">Hopa! Ceva nu a mers bine!</string>

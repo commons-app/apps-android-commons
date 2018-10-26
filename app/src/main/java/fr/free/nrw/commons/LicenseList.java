@@ -13,10 +13,18 @@ import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 
+/**
+ * Represents a list of Licenses
+ */
 public class LicenseList {
     private Map<String, License> licenses = new HashMap<>();
     private Resources res;
 
+    /**
+     * Constructs new instance of LicenceList
+     *
+     * @param activity License activity
+     */
     public LicenseList(Activity activity) {
         res = activity.getResources();
         XmlPullParser parser = res.getXml(R.xml.wikimedia_licenses);
@@ -31,14 +39,28 @@ public class LicenseList {
         }
     }
 
+    /**
+     * Gets a collection of licenses
+     * @return License values
+     */
     public Collection<License> values() {
         return licenses.values();
     }
 
+    /**
+     * Gets license
+     * @param key License key
+     * @return License that matches key
+     */
     public License get(String key) {
         return licenses.get(key);
     }
 
+    /**
+     * Creates a license from template
+     * @param template License template
+     * @return null
+     */
     @Nullable
     License licenseForTemplate(String template) {
         String ucTemplate = new PageTitle(template).getDisplayText();
@@ -50,6 +72,11 @@ public class LicenseList {
         return null;
     }
 
+    /**
+     * Gets template name id
+     * @param template License template
+     * @return name id of template
+     */
     private String nameIdForTemplate(String template) {
         // hack :D (converts dashes and periods to underscores)
         // cc-by-sa-3.0 -> cc_by_sa_3_0
@@ -57,6 +84,11 @@ public class LicenseList {
                 "_").replace(".", "_");
     }
 
+    /**
+     * Gets name of given template
+     * @param template License template
+     * @return name of template
+     */
     private String nameForTemplate(String template) {
         int nameId = res.getIdentifier("fr.free.nrw.commons:string/"
                 + nameIdForTemplate(template), null, null);

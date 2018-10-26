@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- Authors:
+* Maksat
+-->
 <resources>
   <string name="crash_dialog_title">Кыйроо</string>
   <string name="crash_dialog_text">Уупс. Бир нерсе туура эмес болду!</string>

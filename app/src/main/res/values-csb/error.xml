@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- Authors:
+* Kaszeba
+-->
 <resources>
   <string name="crash_dialog_title">Pókôza sã fela Commons.</string>
   <string name="crash_dialog_text">Wejle! Cos je lëchò  pòszłé!</string>

@@ -1,17 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- Authors:
+* NoiX180
+* Notanotheramy
+-->
 <resources>
+  <string name="title_activity_explore">Dlajah</string>
+  <string name="navigation_item_explore">Dlajah</string>
+  <string name="preference_category_appearance">Cakrik</string>
+  <string name="preference_category_general">Umum</string>
+  <string name="preference_category_feedback">Pamrayoga</string>
+  <string name="preference_category_location">Pernah</string>
   <string name="app_name">Commons</string>
+  <string name="bullet">•</string>
   <string name="menu_settings">Setèlan</string>
+  <string name="intent_share_upload_label">Unggah menyang Commons</string>
   <string name="username">Jeneng panganggo</string>
   <string name="password">Tembung wadi</string>
+  <string name="login_credential">Mlebu log akun Commons Beta panjenengan</string>
   <string name="login">Mlebu log</string>
+  <string name="forgot_password">Lali Tembung Wadi?</string>
   <string name="signup">Dhaftar</string>
   <string name="logging_in_title">Lagi mlebu log</string>
   <string name="logging_in_message">Entènana sadhela…</string>
   <string name="login_success">Kasil mlebu log!</string>
   <string name="login_failed">Wurung mlebu log!</string>
   <string name="upload_failed">Barkas ora katemu. Jajalana barkas liyané.</string>
-  <string name="authentication_failed">Wurung otèntifikasi!</string>
+  <string name="authentication_failed">Otèntikasi ora dadi, sumangga mlebu log manèh</string>
   <string name="uploading_started">Wiwit ngunggah!</string>
   <string name="upload_completed_notification_title">%1$s kaunggah!</string>
   <string name="upload_completed_notification_text">Dudul saperlu ndeleng unggahané panjenengan</string>
@@ -21,7 +35,8 @@
   <string name="upload_failed_notification_title">Wurung ngunggah %1$s</string>
   <string name="upload_failed_notification_subtitle">Tunyuk saperlu ndeleng</string>
   <plurals name="uploads_pending_notification_indicator">
-    <item quantity="one">%d barkas lagi diunggah</item>
+    <item quantity="one">%1$d barkas lagi kaunggah</item>
+    <item quantity="other">%1$d barkas lagi kaunggah</item>
   </plurals>
   <string name="title_activity_contributions">Unggahanku Sing Anyar</string>
   <string name="contribution_state_queued">Antrian</string>
@@ -35,56 +50,61 @@
   <string name="menu_share">Dum</string>
   <string name="menu_open_in_browser">Deleng ing Pangluru</string>
   <string name="share_title_hint">Sesirah</string>
+  <string name="add_title_toast">Wènèhi barkas iki sesirah</string>
   <string name="share_description_hint">Wedharan</string>
   <string name="login_failed_network">Ora bisa mlebu log - jaringané gagal</string>
-  <string name="login_failed_username">Ora bisa mlebu log - tiliki jeneng panganggoné panjenengan</string>
-  <string name="login_failed_password">Ora bisa mlebu log - tiliki tembung wadiné panjenengan</string>
+  <string name="login_failed_wrong_credentials">Ora bisa mlebu log - priksa jeneng panganggo lan tembung wadi panjenengan</string>
   <string name="login_failed_throttled">Kakèhan upaya sing gagal. Jajalana manèh mengko.</string>
   <string name="login_failed_blocked">Ngapunten, panganggo iki wis diblokir ing Commons</string>
   <string name="login_failed_2fa_needed">Panjenengan kudu ngisi kodhe otèntifikasi rong faktoré panjenengan</string>
   <string name="login_failed_generic">Wurung mlebu log</string>
   <string name="share_upload_button">Unggah</string>
   <string name="multiple_share_base_title">Jenengi sèt iki</string>
+  <string name="add_set_name_toast">Wènèhi setèlan iki sesirah</string>
   <string name="provider_modifications">Owahan</string>
   <string name="menu_upload_single">Unggah</string>
   <string name="categories_search_text_hint">Golèk kategori</string>
   <string name="menu_save_categories">Simpen</string>
   <string name="refresh_button">Anyarana</string>
+  <string name="display_list_button">Pratélan</string>
   <string name="gps_disabled">GPS dipatèni ing pirantiné panjenengan. Panjenengan arep ngurubaké?</string>
   <string name="enable_gps">Urubaké GPS</string>
   <string name="contributions_subtitle_zero">Durung ana unggahan</string>
   <plurals name="contributions_subtitle">
     <item quantity="zero">\@string/contributions_subtitle_zero</item>
-    <item quantity="one">%d unggahan</item>
-    <item quantity="other">%d unggahan</item>
+    <item quantity="one">%1$d unggahan</item>
+    <item quantity="other">%1$d unggahan</item>
   </plurals>
   <plurals name="starting_multiple_uploads">
-    <item quantity="one">Miwiti %d unggahan</item>
-    <item quantity="other">Miwiti %d unggahan</item>
+    <item quantity="one">Miwiti %1$d unggahan</item>
+    <item quantity="other">Miwiti %1$d unggahan</item>
   </plurals>
   <plurals name="multiple_uploads_title">
-    <item quantity="one">%d unggahan</item>
-    <item quantity="other">%d unggahan</item>
+    <item quantity="one">%1$d unggahan</item>
+    <item quantity="other">%1$d unggahan</item>
   </plurals>
-  <string name="categories_not_found">Ora ana kategori sing cocog karo %1$s</string>
+  <string name="categories_not_found">Ora ana kategori kang cocog karo %1$s</string>
+  <string name="categories_skip_explanation">Wuwuh kategori supaya gambar-gambaré panjenengan gampang tinemu ing Wikimedia Commons.\nWiwit nulis saperlu muwuhi kategori.</string>
   <string name="categories_activity_title">Kategori</string>
   <string name="title_activity_settings">Setèlan</string>
   <string name="title_activity_signup">Ndhaftar</string>
+  <string name="title_activity_featured_images">Gambar Pilihan</string>
+  <string name="title_activity_category_details">Kategori</string>
   <string name="menu_about">Ngenani</string>
-  <string name="about_improve">&lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;Sumber&lt;/a&gt; lan &lt;a href=\"https://commons-app.github.io/\"&gt;situs jaringan&lt;/a&gt; ing GitHub. Gawé anyar &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;bab GitHub&lt;/a&gt; ngenani lapuran ama lan saran.</string>
+  <string name="about_improve" fuzzy="true">&lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;Sumber&lt;/a&gt; lan &lt;a href=\"https://commons-app.github.io/\"&gt;situs jaringan&lt;/a&gt; ing GitHub. Gawé anyar &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;bab GitHub&lt;/a&gt; ngenani lapuran ama lan saran.</string>
   <string name="about_privacy_policy" fuzzy="true">&lt;a href=\"https://wikimediafoundation.org/wiki/Privacy_policy\"&gt;Pranatan priangga&lt;/a&gt;</string>
-  <string name="about_credits">&lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/CREDITS\"&gt;Krèdhit&lt;/a&gt;</string>
+  <string name="about_credits" fuzzy="true">&lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/CREDITS\"&gt;Krèdhit&lt;/a&gt;</string>
   <string name="title_activity_about">Ngenani</string>
   <string name="menu_feedback">Kirim Pamrayoga (lumantar Layang-Èl)</string>
   <string name="no_email_client">Ora ana klièn layang-èl sing dipasang</string>
-  <string name="provider_categories">Kategori sing mentas dianggo</string>
+  <string name="provider_categories">Kategori kang mentas kaanggo</string>
   <string name="waiting_first_sync">Nunggu sinkronisasi pisanan…</string>
   <string name="no_uploads_yet">Panjenengan durung tau ngunggah foto.</string>
   <string name="menu_retry_upload">Jajal manèh</string>
   <string name="menu_cancel_upload">Wurung</string>
   <string name="share_license_summary">Gambar iki bakal dilisènsèkaké nganggo %1$s</string>
   <string name="menu_download">Undhuh</string>
-  <string name="preference_license">Lisènsi</string>
+  <string name="preference_license" fuzzy="true">Lisènsi</string>
   <string name="use_previous">Anggo sesirah/wedharan sadurungé</string>
   <string name="allow_gps">Otomatis masang lokasi saiki</string>
   <string name="preference_theme">Modhe wengi</string>
@@ -119,7 +139,7 @@
   <string name="detail_description_empty">Tanpa katerangan</string>
   <string name="detail_license_empty">Lisènsi ora kaweruhan</string>
   <string name="menu_refresh">Anyarana</string>
-  <string name="read_storage_permission_rationale">Butuh palilah: Maca panyimpenan njaba. Aplikasi mokal mlaku yèn tanpa iki.</string>
+  <string name="read_storage_permission_rationale" fuzzy="true">Butuh palilah: Maca panyimpenan njaba. Aplikasi mokal mlaku yèn tanpa iki.</string>
   <string name="location_permission_rationale">Palilah manasuka: Njupuk pernah saiki kanggo saran ing kategori</string>
   <string name="ok">Oké</string>
   <string name="title_activity_nearby">Papan Cedhak Kéné</string>
@@ -131,9 +151,13 @@
   <string name="media_detail_title">Sesirah</string>
   <string name="media_detail_media_title">Sesirahé médhia</string>
   <string name="media_detail_description">Wedharan</string>
+  <string name="media_detail_author">Kang ngripta</string>
+  <string name="media_detail_author_explanation">Jeneng kang ngripta gambar pilihan kapacak ing kéné.</string>
   <string name="media_detail_uploaded_date">Tanggal ngunggah</string>
+  <string name="media_detail_license">Lisènsi</string>
+  <string name="media_detail_coordinates">Koordhinat</string>
+  <string name="media_detail_coordinates_empty">Ora ana kang nyepakaké</string>
   <string name="become_a_tester_title">Dadi Pangetès Béta</string>
-  <string name="use_wikidata">Anggo Wikidata</string>
   <string name="_2fa_code">Kodhe 2FA</string>
   <string name="number_of_uploads">Watesan Unggahan Anyarku</string>
   <string name="maximum_limit">Watesan Akèh Dhéwé</string>
@@ -142,9 +166,14 @@
   <string name="login_failed_2fa_not_supported">Otèntifikasi rong faktor saiki durung bisa.</string>
   <string name="logout_verification">Panjenengan yakin arep metu log?</string>
   <string name="commons_logo">Logo Commons</string>
+  <string name="commons_website">Situswèb Commons</string>
+  <string name="commons_facebook">Kaca Facebook Commons</string>
+  <string name="commons_github">Kodhe Sumber Github Commons</string>
   <string name="background_image">Gambar Latar Wuri</string>
   <string name="mediaimage_failed">Gambar Médhia Wurung</string>
   <string name="no_image_found">Gambar Ora Katemu</string>
+  <string name="no_subcategory_found">Anak kategori ora tinemu</string>
+  <string name="no_parentcategory_found">Kategori babon ora tinemu</string>
   <string name="upload_image">Unggah Gambar</string>
   <string name="welcome_image_mount_zao">Gunung Zao</string>
   <string name="welcome_image_llamas">Llama</string>
@@ -163,6 +192,24 @@
   <string name="navigation_item_settings">Setèlan</string>
   <string name="navigation_item_feedback">Pamrayoga</string>
   <string name="navigation_item_logout">Metu log</string>
-  <string name="nearby_info_menu_commons_article" fuzzy="true">Artikel Commons</string>
+  <string name="navigation_item_info">Panuntun</string>
+  <string name="navigation_item_notification">Pambiwara</string>
+  <string name="navigation_item_featured_images">Pinilih</string>
+  <string name="no_description_found">dhèksripsi ora tinemu</string>
+  <string name="nearby_info_menu_commons_article">Kaca barkas Commons</string>
   <string name="nearby_info_menu_wikidata_article">Wiji Wikidata</string>
+  <string name="nearby_info_menu_wikipedia_article">Artikel Wikipédia</string>
+  <string name="give_permission">Awèh idin</string>
+  <string name="use_external_storage">Anggo panyimpenan njaba</string>
+  <string name="login_to_your_account">Mlebu log ing akun panjenengan</string>
+  <string name="send_log_file">Kirim barkas log</string>
+  <string name="send_log_file_description" fuzzy="true">Kirim barkas log menyang juru pangembang lumantar pos-èl</string>
+  <string name="null_url">Masalah! URL ora tinemu</string>
+  <string name="nominate_deletion">Usulaké supaya binusek</string>
+  <string name="nominated_for_deletion">Gambar iki kausulaké supaya binusek.</string>
+  <string name="nominated_see_more">&lt;u&gt;Deleng kaca wèb bab rerincèné&lt;/u&gt;</string>
+  <string name="skip_login">Langkahi</string>
+  <string name="navigation_item_login">Mlebu log</string>
+  <string name="skip_login_title">Apa panjenengan temen ora péngin mlebu log?</string>
+  <string name="question">Pitakon</string>
 </resources>

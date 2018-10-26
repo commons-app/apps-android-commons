@@ -1,4 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- Authors:
+* Fitoschido
+* Jduranboger
+* Vivaelcelta
+-->
 <resources>
   <string name="crash_dialog_title">Commons falló</string>
   <string name="crash_dialog_text">Vaya. ¡Algo salió mal!</string>

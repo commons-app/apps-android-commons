@@ -13,6 +13,12 @@
         <item name="buttonBackground">@color/button_background_dark</item>
         <item name="uploadOverlayBackground">@color/upload_overlay_background_dark</item>
         <item name="spinnerTheme">@style/DarkSpinnerTheme</item>
+        <item name="iconsTheme">@color/main_background_light</item>
+        <item name="bottomBar">@color/bottom_bar_dark</item>
+        <item name="buttonBackgroundFocused">@color/focused_button_dark</item>
+        <item name="buttonBackgroundPressed">@color/pressed_button_dark</item>
+        <item name="textDisabled">@color/disabled_button_text_color_dark</item>
+        <item name="textEnabled">@color/enabled_button_text_color_dark</item>
     </style>
 
     <style name="LightAppTheme" parent="Theme.AppCompat.Light.NoActionBar">
@@ -27,6 +33,12 @@
         <item name="buttonBackground">@color/button_background_light</item>
         <item name="uploadOverlayBackground">@color/upload_overlay_background_light</item>
         <item name="spinnerTheme">@style/LightSpinnerTheme</item>
+        <item name="iconsTheme">@color/main_background_dark</item>
+        <item name="bottomBar">@color/bottom_bar_light</item>
+        <item name="buttonBackgroundFocused">@color/focused_button_light</item>
+        <item name="buttonBackgroundPressed">@color/pressed_button_light</item>
+        <item name="textDisabled">@color/disabled_button_text_color_light</item>
+        <item name="textEnabled">@color/enabled_button_text_color_light</item>
     </style>
 
     <style name="DarkSpinnerTheme" parent="DarkAppTheme">
@@ -43,6 +55,36 @@
         <item name="android:windowNoTitle">true</item>
         <item name="android:windowIsFloating">true</item>
         <item name="android:background">@android:color/transparent</item>
+    </style>
+
+    <style name="LevelOne">
+        <item name="boundary">#ddb4aa</item>
+        <item name="camera">#ae403a</item>
+        <item name="centerRegion">#bc6853</item>
+    </style>
+
+    <style name="LevelTwo">
+        <item name="boundary">#a8a8c0</item>
+        <item name="camera">#604890</item>
+        <item name="centerRegion">#6060a8</item>
+    </style>
+
+    <style name="LevelThree">
+        <item name="boundary">#90c0a8</item>
+        <item name="camera">#487878</item>
+        <item name="centerRegion">#48a8a8</item>
+    </style>
+
+    <style name="LevelFour">
+        <item name="boundary">#ffc078</item>
+        <item name="camera">#d87818</item>
+        <item name="centerRegion">#f09018</item>
+    </style>
+
+    <style name="LevelFive">
+        <item name="boundary">#c0a8c0</item>
+        <item name="camera">#784878</item>
+        <item name="centerRegion">#906078</item>
     </style>
 
 </resources>

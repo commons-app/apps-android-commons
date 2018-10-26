@@ -2,46 +2,47 @@ package fr.free.nrw.commons.settings;
 
 import android.Manifest;
 import android.app.AlertDialog;
-import android.content.ActivityNotFoundException;
-import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.pm.PackageManager;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
-import android.preference.CheckBoxPreference;
 import android.preference.EditTextPreference;
 import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.PreferenceFragment;
+import android.preference.SwitchPreference;
 import android.support.annotation.NonNull;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.content.FileProvider;
 import android.widget.Toast;
 
-import java.io.File;
+import com.karumi.dexter.Dexter;
+import com.karumi.dexter.listener.PermissionGrantedResponse;
+import com.karumi.dexter.listener.single.BasePermissionListener;
 
 import javax.inject.Inject;
 import javax.inject.Named;
 
-import dagger.android.AndroidInjection;
-import fr.free.nrw.commons.BuildConfig;
-import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.Utils;
-import fr.free.nrw.commons.utils.FileUtils;
+import fr.free.nrw.commons.di.ApplicationlessInjection;
+import fr.free.nrw.commons.logging.CommonsLogSender;
+import fr.free.nrw.commons.utils.PermissionUtils;
+import fr.free.nrw.commons.utils.ViewUtil;
 
 public class SettingsFragment extends PreferenceFragment {
 
     private static final int REQUEST_CODE_WRITE_EXTERNAL_STORAGE = 100;
 
     @Inject @Named("default_preferences") SharedPreferences prefs;
+    @Inject CommonsLogSender commonsLogSender;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
-        AndroidInjection.inject(this);
         super.onCreate(savedInstanceState);
+        ApplicationlessInjection
+                .getInstance(getActivity().getApplicationContext())
+                .getCommonsApplicationComponent()
+                .inject(this);
 
         // Load the preferences from an XML resource
         addPreferencesFromResource(R.xml.preferences);
@@ -56,7 +57,7 @@ public class SettingsFragment extends PreferenceFragment {
             return true;
         });
 
-        CheckBoxPreference themePreference = (CheckBoxPreference) findPreference("theme");
+        SwitchPreference themePreference = (SwitchPreference) findPreference("theme");
         themePreference.setOnPreferenceChangeListener((preference, newValue) -> {
             getActivity().recreate();
             return true;
@@ -67,7 +68,12 @@ public class SettingsFragment extends PreferenceFragment {
         uploadLimit.setText(uploads + "");
         uploadLimit.setSummary(uploads + "");
         uploadLimit.setOnPreferenceChangeListener((preference, newValue) -> {
-            int value = Integer.parseInt(newValue.toString());
+            int value;
+            try {
+                value = Integer.parseInt(newValue.toString());
+            } catch(Exception e) {
+                value = 100; //Default number
+            }
             final SharedPreferences.Editor editor = prefs.edit();
             if (value > 500) {
                 new AlertDialog.Builder(getActivity())
@@ -81,71 +87,48 @@ public class SettingsFragment extends PreferenceFragment {
                 uploadLimit.setSummary(500 + "");
                 uploadLimit.setText(500 + "");
             } else {
-                editor.putInt(Prefs.UPLOADS_SHOWING, Integer.parseInt(newValue.toString()));
+                editor.putInt(Prefs.UPLOADS_SHOWING, value);
                 editor.putBoolean(Prefs.IS_CONTRIBUTION_COUNT_CHANGED,true);
-                uploadLimit.setSummary(newValue.toString());
+                uploadLimit.setSummary(String.valueOf(value));
             }
             editor.apply();
             return true;
         });
 
+        Preference betaTesterPreference = findPreference("becomeBetaTester");
+        betaTesterPreference.setOnPreferenceClickListener(preference -> {
+            Utils.handleWebUrl(getActivity(), Uri.parse(getResources().getString(R.string.beta_opt_in_link)));
+            return true;
+        });
         Preference sendLogsPreference = findPreference("sendLogFile");
         sendLogsPreference.setOnPreferenceClickListener(preference -> {
-            //first we need to check if we have the necessary permissions
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                if (ContextCompat.checkSelfPermission(
-                        getActivity(),
-                        Manifest.permission.WRITE_EXTERNAL_STORAGE)
-                        ==
-                        PackageManager.PERMISSION_GRANTED) {
-                    sendAppLogsViaEmail();
-                } else {
-                    //first get the necessary permission
-                    requestPermissions(new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
-                            REQUEST_CODE_WRITE_EXTERNAL_STORAGE);
-                }
-            } else {
-                sendAppLogsViaEmail();
-            }
-
+            checkPermissionsAndSendLogs();
             return true;
         });
     }
 
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        if (requestCode == REQUEST_CODE_WRITE_EXTERNAL_STORAGE) {
-            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                sendAppLogsViaEmail();
-            }
+    /**
+     * First checks for external storage permissions and then sends logs via email
+     */
+    private void checkPermissionsAndSendLogs() {
+        if (PermissionUtils.hasPermission(getActivity(), Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
+            commonsLogSender.send(getActivity(), null);
+        } else {
+            requestExternalStoragePermissions();
         }
     }
 
-    private void sendAppLogsViaEmail() {
-        String appLogs = Utils.getAppLogs();
-        File appLogsFile = FileUtils.createAndGetAppLogsFile(appLogs);
-
-        Context applicationContext = getActivity().getApplicationContext();
-        Uri appLogsFilePath = FileProvider.getUriForFile(
-                getActivity(),
-                applicationContext.getPackageName() + ".provider",
-                appLogsFile
-        );
-
-        Intent feedbackIntent = new Intent(Intent.ACTION_SEND);
-        feedbackIntent.setType("message/rfc822");
-        feedbackIntent.putExtra(Intent.EXTRA_EMAIL,
-                new String[]{CommonsApplication.LOGS_PRIVATE_EMAIL});
-        feedbackIntent.putExtra(Intent.EXTRA_SUBJECT,
-                String.format(CommonsApplication.FEEDBACK_EMAIL_SUBJECT,
-                        BuildConfig.VERSION_NAME));
-        feedbackIntent.putExtra(Intent.EXTRA_STREAM,appLogsFilePath);
-
-        try {
-            startActivity(feedbackIntent);
-        } catch (ActivityNotFoundException e) {
-            Toast.makeText(getActivity(), R.string.no_email_client, Toast.LENGTH_SHORT).show();
-        }
+    /**
+     * Requests external storage permissions and shows a toast stating that log collection has started
+     */
+    private void requestExternalStoragePermissions() {
+        Dexter.withActivity(getActivity())
+                .withPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                .withListener(new BasePermissionListener() {
+                    @Override
+                    public void onPermissionGranted(PermissionGrantedResponse response) {
+                        ViewUtil.showLongToast(getActivity(), getResources().getString(R.string.log_collection_started));
+                    }
+                }).check();
     }
 }

@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- Authors:
+* Babanwalia
+-->
 <resources>
   <string name="crash_dialog_title">ਕਾਮਨਜ਼ ਖ਼ਰਾਬ ਹੋ ਗਿਆ ਹੈ</string>
   <string name="crash_dialog_text">ਓ ਹੋ। ਕੁਝ ਗ਼ਲਤ ਹੋ ਗਿਆ!</string>

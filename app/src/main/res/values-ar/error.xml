@@ -1,4 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- Authors:
+* Ali1
+* Mido
+-->
 <resources>
   <string name="crash_dialog_title">لقد تعطل كومنز</string>
   <string name="crash_dialog_text">عفوا. حدث خطأ!</string>

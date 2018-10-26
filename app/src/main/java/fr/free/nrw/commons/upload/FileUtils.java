@@ -3,24 +3,95 @@ package fr.free.nrw.commons.upload;
 import android.annotation.SuppressLint;
 import android.content.ContentUris;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Environment;
+import android.os.ParcelFileDescriptor;
+import android.preference.PreferenceManager;
 import android.provider.DocumentsContract;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
+import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileDescriptor;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.math.BigInteger;
 import java.nio.channels.FileChannel;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.util.Date;
 
 import timber.log.Timber;
 
 public class FileUtils {
+
+    /**
+     * Get SHA1 of file from input stream
+     */
+    static String getSHA1(InputStream is) {
+
+        MessageDigest digest;
+        try {
+            digest = MessageDigest.getInstance("SHA1");
+        } catch (NoSuchAlgorithmException e) {
+            Timber.e(e, "Exception while getting Digest");
+            return "";
+        }
+
+        byte[] buffer = new byte[8192];
+        int read;
+        try {
+            while ((read = is.read(buffer)) > 0) {
+                digest.update(buffer, 0, read);
+            }
+            byte[] md5sum = digest.digest();
+            BigInteger bigInt = new BigInteger(1, md5sum);
+            String output = bigInt.toString(16);
+            // Fill to 40 chars
+            output = String.format("%40s", output).replace(' ', '0');
+            Timber.i("File SHA1: %s", output);
+
+            return output;
+        } catch (IOException e) {
+            Timber.e(e, "IO Exception");
+            return "";
+        } finally {
+            try {
+                is.close();
+            } catch (IOException e) {
+                Timber.e(e, "Exception on closing MD5 input stream");
+            }
+        }
+    }
+
+    /**
+     * In older devices getPath() may fail depending on the source URI. Creating and using a copy of the file seems to work instead.
+     * @return path of copy
+     */
+    @Nullable
+    static String createCopyPath(ParcelFileDescriptor descriptor) {
+        try {
+            String copyPath = Environment.getExternalStorageDirectory().toString() + "/CommonsApp/" + new Date().getTime() + ".jpg";
+            File newFile = new File(Environment.getExternalStorageDirectory().toString() + "/CommonsApp");
+            newFile.mkdir();
+            FileUtils.copy(descriptor.getFileDescriptor(), copyPath);
+            Timber.d("Filepath (copied): %s", copyPath);
+            return copyPath;
+        } catch (IOException e) {
+            Timber.e(e);
+            return null;
+        }
+    }
 
     /**
      * Get a file path from a Uri. This will get the the path for Storage Access
@@ -28,7 +99,7 @@ public class FileUtils {
      * other file-based ContentProviders.
      *
      * @param context The context.
-     * @param uri The Uri to query.
+     * @param uri     The Uri to query.
      * @author paulburke
      */
     // Can be safely suppressed, checks for isKitKat before running isDocumentUri
@@ -36,6 +107,7 @@ public class FileUtils {
     @Nullable
     public static String getPath(Context context, Uri uri) {
 
+        String returnPath = null;
         final boolean isKitKat = Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT;
 
         // DocumentProvider
@@ -47,31 +119,34 @@ public class FileUtils {
                 final String type = split[0];
 
                 if ("primary".equalsIgnoreCase(type)) {
-                    return Environment.getExternalStorageDirectory() + "/" + split[1];
+                    returnPath = Environment.getExternalStorageDirectory() + "/" + split[1];
                 }
-            }
-            // DownloadsProvider
-            else if (isDownloadsDocument(uri)) {
+            } else if (isDownloadsDocument(uri))  { // DownloadsProvider
 
                 final String id = DocumentsContract.getDocumentId(uri);
                 final Uri contentUri = ContentUris.withAppendedId(
-                        Uri.parse("content://downloads/public_downloads"), Long.valueOf(id));
+                        Uri.parse("content://downloads/document"), Long.valueOf(id));
 
-                return getDataColumn(context, contentUri, null, null);
-            }
-            // MediaProvider
-            else if (isMediaDocument(uri)) {
+                returnPath =  getDataColumn(context, contentUri, null, null);
+            } else if (isMediaDocument(uri)) { // MediaProvider
+
                 final String docId = DocumentsContract.getDocumentId(uri);
                 final String[] split = docId.split(":");
                 final String type = split[0];
 
                 Uri contentUri = null;
-                if ("image".equals(type)) {
-                    contentUri = MediaStore.Images.Media.EXTERNAL_CONTENT_URI;
-                } else if ("video".equals(type)) {
-                    contentUri = MediaStore.Video.Media.EXTERNAL_CONTENT_URI;
-                } else if ("audio".equals(type)) {
-                    contentUri = MediaStore.Audio.Media.EXTERNAL_CONTENT_URI;
+                switch (type) {
+                    case "image":
+                        contentUri = MediaStore.Images.Media.EXTERNAL_CONTENT_URI;
+                        break;
+                    case "video":
+                        contentUri = MediaStore.Video.Media.EXTERNAL_CONTENT_URI;
+                        break;
+                    case "audio":
+                        contentUri = MediaStore.Audio.Media.EXTERNAL_CONTENT_URI;
+                        break;
+                    default:
+                        break;
                 }
 
                 final String selection = "_id=?";
@@ -79,16 +154,55 @@ public class FileUtils {
                         split[1]
                 };
 
-                return getDataColumn(context, contentUri, selection, selectionArgs);
+                returnPath = getDataColumn(context, contentUri, selection, selectionArgs);
             }
         }
         // MediaStore (and general)
         else if ("content".equalsIgnoreCase(uri.getScheme())) {
-            return getDataColumn(context, uri, null, null);
+            returnPath = getDataColumn(context, uri, null, null);
         }
         // File
         else if ("file".equalsIgnoreCase(uri.getScheme())) {
-            return uri.getPath();
+            returnPath = uri.getPath();
+        }
+
+        if(returnPath == null) {
+            //fetching path may fail depending on the source URI and all hope is lost
+            //so we will create and use a copy of the file, which seems to work
+            String copyPath = null;
+            try {
+                ParcelFileDescriptor descriptor
+                        = context.getContentResolver().openFileDescriptor(uri, "r");
+                if (descriptor != null) {
+
+                    SharedPreferences sharedPref = PreferenceManager
+                            .getDefaultSharedPreferences(context);
+                    boolean useExtStorage = sharedPref.getBoolean("useExternalStorage", true);
+                    if (useExtStorage) {
+                        copyPath = Environment.getExternalStorageDirectory().toString()
+                                + "/CommonsApp/" + new Date().getTime() + ".jpg";
+                        File newFile = new File(Environment.getExternalStorageDirectory().toString() + "/CommonsApp");
+                        newFile.mkdir();
+                        FileUtils.copy(
+                                descriptor.getFileDescriptor(),
+                                copyPath);
+                        Timber.d("Filepath (copied): %s", copyPath);
+                        return copyPath;
+                    }
+                    copyPath = context.getCacheDir().getAbsolutePath()
+                            + "/" + new Date().getTime() + ".jpg";
+                    FileUtils.copy(
+                            descriptor.getFileDescriptor(),
+                            copyPath);
+                    Timber.d("Filepath (copied): %s", copyPath);
+                    return copyPath;
+                }
+            } catch (IOException e) {
+                Timber.w(e, "Error in file " + copyPath);
+                return null;
+            }
+        } else {
+            return returnPath;
         }
 
         return null;
@@ -109,7 +223,7 @@ public class FileUtils {
                                        String[] selectionArgs) {
 
         Cursor cursor = null;
-        final String column = "_data";
+        final String column = MediaStore.Images.ImageColumns.DATA;
         final String[] projection = {
                 column
         };
@@ -163,7 +277,8 @@ public class FileUtils {
 
     /**
      * Copy content from source file to destination file.
-     * @param source stream copied from
+     *
+     * @param source      stream copied from
      * @param destination stream copied to
      * @throws IOException thrown when failing to read source or opening destination file
      */
@@ -176,13 +291,90 @@ public class FileUtils {
 
     /**
      * Copy content from source file to destination file.
-     * @param source file descriptor copied from
+     *
+     * @param source      file descriptor copied from
      * @param destination file path copied to
      * @throws IOException thrown when failing to read source or opening destination file
      */
     public static void copy(@NonNull FileDescriptor source, @NonNull String destination)
             throws IOException {
         copy(new FileInputStream(source), new FileOutputStream(destination));
+    }
+
+
+    /**
+     * Read and return the content of a resource file as string.
+     * @param fileName asset file's path (e.g. "/queries/nearby_query.rq")
+     * @return the content of the file
+     */
+    public static String readFromResource(String fileName) throws IOException {
+        StringBuilder buffer = new StringBuilder();
+        BufferedReader reader = null;
+        try {
+            InputStream inputStream = FileUtils.class.getResourceAsStream(fileName);
+            if (inputStream == null) {
+                throw new FileNotFoundException(fileName);
+            }
+            reader = new BufferedReader(new InputStreamReader(inputStream, "UTF-8"));
+            String line;
+            while ((line = reader.readLine()) != null) {
+                buffer.append(line).append("\n");
+            }
+        } finally {
+            if (reader != null) {
+                reader.close();
+            }
+        }
+        return buffer.toString();
+    }
+
+    /**
+     * Deletes files.
+     * @param file context
+     */
+    public static boolean deleteFile(File file) {
+        boolean deletedAll = true;
+        if (file != null) {
+            if (file.isDirectory()) {
+                String[] children = file.list();
+                for (String child : children) {
+                    deletedAll = deleteFile(new File(file, child)) && deletedAll;
+                }
+            } else {
+                deletedAll = file.delete();
+            }
+        }
+
+        return deletedAll;
+    }
+
+    public static File createAndGetAppLogsFile(String logs) {
+        try {
+            File commonsAppDirectory = new File(Environment.getExternalStorageDirectory().toString() + "/CommonsApp");
+            if (!commonsAppDirectory.exists()) {
+                commonsAppDirectory.mkdir();
+            }
+
+            File logsFile = new File(commonsAppDirectory,"logs.txt");
+            if (logsFile.exists()) {
+                //old logs file is useless
+                logsFile.delete();
+            }
+
+            logsFile.createNewFile();
+
+            FileOutputStream outputStream = new FileOutputStream(logsFile);
+            OutputStreamWriter outputStreamWriter = new OutputStreamWriter(outputStream);
+            outputStreamWriter.append(logs);
+            outputStreamWriter.close();
+            outputStream.flush();
+            outputStream.close();
+
+            return logsFile;
+        } catch (IOException ioe) {
+            Timber.e(ioe);
+            return null;
+        }
     }
 
 }

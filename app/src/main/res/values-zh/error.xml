@@ -1,4 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- Authors:
+* Davidzdh
+* Liuxinyu970226
+* Shizhao
+-->
 <resources>
   <string name="crash_dialog_title">共享资源已崩溃</string>
   <string name="crash_dialog_text">呀。出错啦！</string>

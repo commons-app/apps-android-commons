@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- Authors:
+* Shirayuki
+-->
 <resources>
   <string name="crash_dialog_title">Title of dialog to show when the app crashes</string>
   <string name="crash_dialog_comment_prompt">Prompt asking people to enter info about what they were doing when the app crashed</string>

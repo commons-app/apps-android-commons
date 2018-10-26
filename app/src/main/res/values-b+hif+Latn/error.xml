@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- Authors:
+* Thakurji
+-->
 <resources>
   <string name="crash_dialog_title">Commons crash hoe gais</string>
   <string name="crash_dialog_text">Oops, Koi chij wrong hoe gais</string>

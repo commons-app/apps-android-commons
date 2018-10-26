@@ -1,4 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- Authors:
+* Base
+* Mykola Swarnyk
+* Ата
+-->
 <resources>
   <string name="crash_dialog_title">Крах додатку</string>
   <string name="crash_dialog_text">Ой. Щось пішло не так!</string>

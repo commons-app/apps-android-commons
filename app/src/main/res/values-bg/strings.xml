@@ -1,4 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- Authors:
+* DCLXVI
+* MegaAlex
+* StanProg
+* Vodnokon4e
+* АдмиралАнимЕ
+-->
 <resources>
   <string name="app_name">Общомедия</string>
   <string name="menu_settings">Настройки</string>
@@ -8,10 +15,10 @@
   <string name="signup">Регистриране</string>
   <string name="logging_in_title">Влизане в системата</string>
   <string name="logging_in_message">Изчакайте…</string>
-  <string name="login_success">Успешно вписване.</string>
-  <string name="login_failed">Неуспешно вписване!</string>
+  <string name="login_success">Успешно влизане.</string>
+  <string name="login_failed">Неуспешно влизане!</string>
   <string name="upload_failed">Файлът не е намерен. Моля, опитайте с друг файл.</string>
-  <string name="authentication_failed">Неуспешен опит за удостоверяване!</string>
+  <string name="authentication_failed" fuzzy="true">Неуспешен опит за удостоверяване!</string>
   <string name="uploading_started">Качването започна!</string>
   <string name="upload_completed_notification_title">Файл %1$s е качен!</string>
   <string name="upload_completed_notification_text">Докоснете, за да видите качения файл</string>
@@ -25,15 +32,13 @@
   <string name="share_title_hint">Заглавие</string>
   <string name="share_description_hint">Описание</string>
   <string name="login_failed_network">Неуспешно влизане – проблем в мрежата</string>
-  <string name="login_failed_username">Неуспешно влизане – моля проверете потребителското си име</string>
-  <string name="login_failed_password">Неуспешно влизане – моля проверете паролата си</string>
   <string name="share_upload_button">Качване</string>
   <string name="provider_modifications">Изменения</string>
   <string name="menu_upload_single">Качване</string>
   <string name="menu_save_categories">Съхраняване</string>
   <plurals name="multiple_uploads_title">
-    <item quantity="one">%d качване</item>
-    <item quantity="other">%d качвания</item>
+    <item quantity="one">%1$d качване</item>
+    <item quantity="other">%1$d качвания</item>
   </plurals>
   <string name="categories_activity_title">Категории</string>
   <string name="title_activity_settings">Настройки</string>
@@ -42,9 +47,9 @@
   <string name="title_activity_about">Относно</string>
   <string name="no_email_client">Не е инсталирана програма за електронна поща</string>
   <string name="menu_retry_upload">Повторен опит</string>
-  <string name="menu_cancel_upload">Отказване</string>
+  <string name="menu_cancel_upload">Отказ</string>
   <string name="menu_download">Изтегляне</string>
-  <string name="preference_license">Лиценз</string>
+  <string name="preference_license" fuzzy="true">Лиценз</string>
   <string name="preference_theme">Нощен режим</string>
   <string name="license_name_cc0">CC0</string>
   <string name="license_name_cc_by_sa_3_0">CC BY-SA 3.0</string>
@@ -90,4 +95,7 @@
   <string name="navigation_item_feedback">Обратна връзка</string>
   <string name="navigation_item_logout">Излизане</string>
   <string name="navigation_item_info">Ръководство</string>
+  <string name="navigation_item_login">Влизане</string>
+  <string name="toggle_view_button">Превключване на изгледа</string>
+  <string name="about_translate_cancel">Отказ</string>
 </resources>

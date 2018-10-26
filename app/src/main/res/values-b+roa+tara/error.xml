@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- Authors:
+* Joetaras
+-->
 <resources>
   <string name="crash_dialog_title">Commons ha sckattate</string>
   <string name="crash_dialog_text">Mudu. Quacchecose ha sciute male!</string>

@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- Authors:
+* Mehtab ahmed
+-->
 <resources>
   <string name="crash_dialog_title">العام ڪريش ٿي پيو آھي</string>
   <string name="crash_dialog_text">اڙي. ڪجھ غلط ٿي ويو!</string>

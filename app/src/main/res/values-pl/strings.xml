@@ -1,17 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- Authors:
+* Alan ffm
+* Chrumps
+* DeRudySoulStorm
+* InternerowyGołąb
+* Krottyianock
+* Mazab IZW
+* Railfail536
+* Rezonansowy
+* Rzuwig
+* Sp5uhe
+* Ty221
+* Vesihiisi
+* Wojtas
+* Woytecr
+-->
 <resources>
+  <string name="preference_category_appearance">Wygląd</string>
+  <string name="preference_category_general">Ogólne</string>
+  <string name="preference_category_feedback">Opinia</string>
+  <string name="preference_category_location">Lokalizacja</string>
   <string name="app_name">Commons</string>
+  <string name="bullet">•</string>
   <string name="menu_settings">Ustawienia</string>
   <string name="username">Nazwa użytkownika</string>
   <string name="password">Hasło</string>
   <string name="login">Zaloguj się</string>
+  <string name="forgot_password">Nie pamiętasz hasła?</string>
   <string name="signup">Zarejestruj się</string>
   <string name="logging_in_title">Logowanie</string>
   <string name="logging_in_message">Proszę czekać…</string>
   <string name="login_success">Zalogowano pomyślnie!</string>
   <string name="login_failed">Logowanie nie powiodło się!</string>
   <string name="upload_failed">Nie znaleziono pliku. Spróbuj znaleźć inny.</string>
-  <string name="authentication_failed">Błąd uwierzytelniania!</string>
+  <string name="authentication_failed">Uwierzytelnianie nie powiodło się, zaloguj się ponownie</string>
   <string name="uploading_started">Wysyłanie rozpoczęte!</string>
   <string name="upload_completed_notification_title">Przesłano %1$s!</string>
   <string name="upload_completed_notification_text">Dotknij, aby zobaczyć przesłany plik</string>
@@ -21,8 +43,8 @@
   <string name="upload_failed_notification_title">Wysyłanie %1$s nieudane</string>
   <string name="upload_failed_notification_subtitle">Dotknij, aby zobaczyć</string>
   <plurals name="uploads_pending_notification_indicator">
-    <item quantity="one">Przesyłanie %d pliku</item>
-    <item quantity="other">Przesyłanie %d plików</item>
+    <item quantity="one">Przesyłanie %1$d pliku</item>
+    <item quantity="other">Przesyłanie %1$d plików</item>
   </plurals>
   <string name="title_activity_contributions">Niedawno przesłane</string>
   <string name="contribution_state_queued">W kolejce</string>
@@ -38,8 +60,7 @@
   <string name="share_title_hint">Tytuł</string>
   <string name="share_description_hint">Opis</string>
   <string name="login_failed_network">Nie można zalogować - błąd sieci</string>
-  <string name="login_failed_username">Nie można zalogować - sprawdź nazwę użytkownika</string>
-  <string name="login_failed_password">Nie można zalogować - sprawdź hasło</string>
+  <string name="login_failed_wrong_credentials">Nie można się zalogować - sprawdź swoją nazwę użytkownika i hasło</string>
   <string name="login_failed_throttled">Zbyt wiele nieudanych prób zalogowania. Spróbuj ponownie za kilka minut.</string>
   <string name="login_failed_blocked">Przepraszamy, ten użytkownik został zablokowany na Commons</string>
   <string name="login_failed_2fa_needed">Wprowadź swój kod dla  dwuetapowej autoryzacji.</string>
@@ -51,32 +72,35 @@
   <string name="categories_search_text_hint">Szukaj kategorii</string>
   <string name="menu_save_categories">Zapisz</string>
   <string name="refresh_button">Odśwież</string>
+  <string name="display_list_button">Lista</string>
   <string name="gps_disabled">GPS w twoim urządzeniu jest wyłączony. Czy chcesz go włączyć?</string>
   <string name="enable_gps">Włącz GPS</string>
   <string name="contributions_subtitle_zero">Na razie brak przesłanych plików!</string>
   <plurals name="contributions_subtitle">
     <item quantity="zero">Przesłano @string/contributions_subtitle_zero</item>
-    <item quantity="one">Przesłano %d plik</item>
-    <item quantity="other">Przesłano %d pliki</item>
+    <item quantity="one">Przesłano %1$d plik</item>
+    <item quantity="other">Przesłano %1$d pliki</item>
   </plurals>
   <plurals name="starting_multiple_uploads">
-    <item quantity="one">Rozpoczęto %d przesyłanie</item>
-    <item quantity="other">Rozpoczęto %d przesyłania</item>
+    <item quantity="one">Rozpoczęto %1$d przesyłanie</item>
+    <item quantity="other">Rozpoczęto %1$d przesyłania</item>
   </plurals>
   <plurals name="multiple_uploads_title">
-    <item quantity="one">%d przesłanie</item>
-    <item quantity="other">%d przesłania</item>
+    <item quantity="one">%1$d przesłanie</item>
+    <item quantity="other">%1$d przesłania</item>
   </plurals>
   <string name="categories_not_found">Nie znaleziono kategorii pasujących do %1$s</string>
-  <string name="categories_skip_explanation" fuzzy="true">Dodaj kategorie, aby ułatwić odnalezienie plików w Wikimedia Commons.\n\nZacznij pisać, aby dodać kategorię.\nKliknij ten komunikat lub naciśnij „cofnij”, aby pominąć ten krok.</string>
+  <string name="categories_skip_explanation">Dodaj kategorie, aby ułatwić odnalezienie plików w Wikimedia Commons.\nZacznij pisać, aby dodać kategorie.</string>
   <string name="categories_activity_title">Kategorie</string>
   <string name="title_activity_settings">Ustawienia</string>
   <string name="title_activity_signup">Zarejestruj się</string>
+  <string name="title_activity_featured_images">Wyróżniony obrazek</string>
+  <string name="title_activity_category_details">Kategoria</string>
   <string name="menu_about">O aplikacji</string>
-  <string name="about_license" fuzzy="true">Oprogramowanie Open Source, wydane na licencji &lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/COPYING\"&gt;Apache License v2&lt;/a&gt;. Wikimedia Commons i jego logo są znakami towarowymi Wikimedia Foundation i są wykorzystywane za zgodą Wikimedia Foundation. Nie jesteśmy powiązani z Wikimedia Foundation.</string>
-  <string name="about_improve">&lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;Kod źródłowy&lt;/a&gt; oraz &lt;a href=\"https://commons-app.github.io/\"&gt;strona internetowa&lt;/a&gt; na GitHub. Aby zgłosić błąd lub sugestię, utwórz nowe &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;zgłoszenie na GitHub&lt;/a&gt;.</string>
-  <string name="about_privacy_policy" fuzzy="true">&lt;a href=\"https://wikimediafoundation.org/wiki/Privacy_policy\"&gt;Polityka prywatności&lt;/a&gt;</string>
-  <string name="about_credits">&lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/CREDITS\"&gt;Twórcy&lt;/a&gt;</string>
+  <string name="about_license">Aplikacja Wikimedia Commons jest oprogramowaniem typu open-source tworzonym i rozwijanym przez stypendystów i wolontariuszy ze społeczności Wikimedii. Fundacja Wikimedia nie bierze udziału w tworzeniu, rozwijaniu ani utrzymywaniu aplikacji.</string>
+  <string name="about_improve" fuzzy="true">&lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;Kod źródłowy&lt;/a&gt; oraz &lt;a href=\"https://commons-app.github.io/\"&gt;strona internetowa&lt;/a&gt; na GitHub. Aby zgłosić błąd lub sugestię, utwórz nowe &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;zgłoszenie na GitHub&lt;/a&gt;.</string>
+  <string name="about_privacy_policy">&lt;u&gt;Polityka prywatności&lt;/u&gt;</string>
+  <string name="about_credits">&lt;u&gt;Twórcy&lt;/u&gt;</string>
   <string name="title_activity_about">O aplikacji</string>
   <string name="menu_feedback">Wyślij opinię (przez e-mail)</string>
   <string name="no_email_client">Klient e-mail nie jest zainstalowany</string>
@@ -87,10 +111,10 @@
   <string name="menu_cancel_upload">Anuluj</string>
   <string name="share_license_summary">Ten obraz będzie udostępniany na licencji %1$s</string>
   <string name="menu_download">Pobieranie</string>
-  <string name="preference_license">Licencja</string>
+  <string name="preference_license">Domyślna licencja</string>
   <string name="use_previous">Użyj poprzedniego tytułu/opisu</string>
   <string name="allow_gps">Automatycznie uzyskaj bieżącą lokalizację</string>
-  <string name="allow_gps_summary">Pobierz aktualną lokalizację, aby uzyskać propozycje kategorii, jeśli obraz nie zawiera znaczników geograficznych</string>
+  <string name="allow_gps_summary" fuzzy="true">Pobierz aktualną lokalizację, aby uzyskać propozycje kategorii, jeśli obraz nie zawiera znaczników geograficznych</string>
   <string name="preference_theme">Tryb nocny</string>
   <string name="preference_theme_summary">Użyj ciemnej skórki</string>
   <string name="license_name_cc_by_sa_four">Uznanie autorstwa-Na tych samych warunkach 4.0</string>
@@ -116,11 +140,14 @@
   <string name="tutorial_1_text">Wikimedia Commons przechowuje większość ilustracji wykorzystywanych w Wikipedii.</string>
   <string name="tutorial_1_subtext">Twoje ilustracje pomogą edukować ludzi na całym świecie!</string>
   <string name="tutorial_2_text">Możesz przesyłać zdjęcia lub obrazy stworzone samodzielnie przez Ciebie:</string>
-  <string name="tutorial_2_subtext">- Natura (kwiaty, zwierzęta, góry)\n- Przydatne przedmioty (rowery, dworce kolejowe)\n- Znani ludzie, których spotkałeś (burmistrz, olimpijczyk)</string>
+  <string name="tutorial_2_subtext">Obiekty naturalne (kwiaty, zwierzęta, góry)\n• Przydatne przedmioty (rowery, dworce kolejowe)\n• Znani ludzie, których spotkałeś (burmistrz, olimpijczyk)</string>
+  <string name="tutorial_2_subtext_1">Obiekty naturalne (kwiaty, zwierzęta, góry)</string>
+  <string name="tutorial_2_subtext_2">Przydatne obiekty (rowery, stacje kolejowe)</string>
+  <string name="tutorial_2_subtext_3">Znani ludzie, których spotkałeś (burmistrz, olimpijczyk)</string>
   <string name="tutorial_3_text">Prosimy NIE wysyłać:</string>
   <string name="tutorial_3_subtext">- Zdjęć przedstawiających siebie lub znajomych\n- Zdjęć pobranych z Internetu\n- Zrzutów ekranów płatnych aplikacji</string>
   <string name="tutorial_4_text">Przykład przesłania pliku:</string>
-  <string name="tutorial_4_subtext">- Nazwa: Zamek Królewski w Warszawie\n- Opis: Zamek Królewski w Warszawie, widok od strony kolumny Zygmunta\n- Kategorie: Western facade (Royal Castle, Warsaw), Southern facade (Royal Castle, Warsaw), Castle Square in Warsaw</string>
+  <string name="tutorial_4_subtext" fuzzy="true">- Nazwa: Zamek Królewski w Warszawie\n- Opis: Zamek Królewski w Warszawie, widok od strony kolumny Zygmunta\n- Kategorie: Western facade (Royal Castle, Warsaw), Southern facade (Royal Castle, Warsaw), Castle Square in Warsaw</string>
   <string name="welcome_wikipedia_text">Dodaj swoje ilustracje. Pomóż ożyć artykułom w Wikipedii!</string>
   <string name="welcome_wikipedia_subtext">Ilustracje w Wikipedii pochodzą z Wikimedia Commons.</string>
   <string name="welcome_copyright_text">Twoje ilustracje pomagają w edukacji ludzi na całym świecie.</string>
@@ -133,7 +160,8 @@
   <string name="detail_description_empty">Brak opisu</string>
   <string name="detail_license_empty">Nieznana licencja</string>
   <string name="menu_refresh">Odśwież</string>
-  <string name="read_storage_permission_rationale">Wymagane uprawnienia: odczyt z dysku zewnętrznego. Aplikacja nie będzie w stanie funkcjonować bez tego.</string>
+  <string name="read_storage_permission_rationale" fuzzy="true">Wymagane uprawnienia: odczyt z dysku zewnętrznego. Aplikacja nie będzie w stanie funkcjonować bez tego.</string>
+  <string name="write_storage_permission_rationale">Wymagane uprawnienia: odczyt z dysku zewnętrznego. Aplikacja nie będzie w stanie funkcjonować bez tego.</string>
   <string name="location_permission_rationale">Opcjonalne zezwolenie: uzyskiwanie bieżącej lokalizacji dla wygenerowania propozycji kategorii</string>
   <string name="ok">OK</string>
   <string name="title_activity_nearby">Pobliskie miejsca</string>
@@ -146,12 +174,13 @@
   <string name="media_detail_media_title">Tytuł pliku</string>
   <string name="media_detail_description">Opis</string>
   <string name="media_detail_description_explanation">Tu jest miejsce na opis pliku. Mogą być dość długie i wymagać przewijania podczas czytania. Chcemy, by wszystko wyglądało dobrze.</string>
+  <string name="media_detail_author">Autor</string>
   <string name="media_detail_uploaded_date">Data przesłania</string>
   <string name="media_detail_license">Licencja</string>
   <string name="media_detail_coordinates">Współrzędne</string>
+  <string name="media_detail_coordinates_empty">Nie dostarczone</string>
   <string name="become_a_tester_title">Zostań beta-testerem</string>
   <string name="become_a_tester_description">Dołącz do kanału bety w Google Play i dostań wczesny dostęp do nowych funkcji i łatek</string>
-  <string name="use_wikidata">Użyj Wikidanych</string>
   <string name="_2fa_code">Kod 2FA</string>
   <string name="maximum_limit">Górna Granica</string>
   <string name="maximum_limit_alert">Nie można wyświetlić ponad 500</string>
@@ -159,6 +188,8 @@
   <string name="logout_verification">Czy na pewno wylogować?</string>
   <string name="commons_logo">Logo Commons</string>
   <string name="background_image">Obraz w tle</string>
+  <string name="no_subcategory_found">Nie znaleziono podkategorii</string>
+  <string name="no_parentcategory_found">Nie znaleziono kategorii nadrzędnych</string>
   <string name="upload_image">Załaduj zdjęcie</string>
   <string name="welcome_image_mount_zao">Zaō</string>
   <string name="welcome_image_llamas">Lamy</string>
@@ -179,8 +210,73 @@
   <string name="navigation_item_feedback">Opinie</string>
   <string name="navigation_item_logout">Wyloguj</string>
   <string name="navigation_item_info">Samouczek</string>
+  <string name="navigation_item_notification">Powiadomienia</string>
+  <string name="navigation_item_featured_images">Wyróżnione</string>
   <string name="no_description_found">nie znaleziono opisu</string>
   <string name="nearby_info_menu_wikidata_article">Element Wikidanych</string>
+  <string name="nearby_info_menu_wikipedia_article">Artykuł na Wikipedii</string>
   <string name="title_info">Podaj krótką, opisową i unikalną nazwę, która będzie służyła jako nazwa pliku. Możesz używać prostego języka i spacji. Nie dodawaj rozszerzenia pliku.</string>
+  <string name="give_permission">Uzyskaj uprawnienie</string>
   <string name="login_to_your_account">Zaloguj się na swoje konto</string>
+  <string name="null_url">Błąd! Nie znaleziono adresu URL</string>
+  <string name="nominate_deletion">Zgłoszone do usunięcia</string>
+  <string name="nominated_for_deletion">Ta grafika została zgłoszona do usunięcia.</string>
+  <string name="view_browser">Otwórz w przeglądarce</string>
+  <string name="skip_login">Pomiń</string>
+  <string name="navigation_item_login">Zaloguj się</string>
+  <string name="skip_login_title">Czy na pewno chcesz pominąć logowanie?</string>
+  <string name="login_alert_message">Zaloguj się, aby skorzystać z tej funkcji</string>
+  <string name="notifications_welcome">Witamy w Wikimedia Commons, %1$s! Cieszymy się, że tu jesteś.</string>
+  <string name="notifications_thank_you_edit">Dziękujemy za dokonanie edycji</string>
+  <string name="notifications_mention">%1$s wspomniał o Tobie w %2$s.</string>
+  <string name="toggle_view_button">Przełącz widok</string>
+  <string name="nearby_directions">WSKAZÓWKI</string>
+  <string name="nearby_wikidata">WIKIDANE</string>
+  <string name="nearby_wikipedia">WIKIPEDIA</string>
+  <string name="nearby_commons">POWSZECHNE</string>
+  <string name="about_faq">&lt;u&gt;FAQ&lt;/u&gt;</string>
+  <string name="welcome_skip_button">Pomiń samouczek</string>
+  <string name="no_notifications">Nie znaleziono powiadomień</string>
+  <string name="about_translate_title">Języki</string>
+  <string name="about_translate_proceed">Dalej</string>
+  <string name="about_translate_cancel">Anuluj</string>
+  <string name="retry">Ponów próbę</string>
+  <string name="showcase_view_got_it_button">Wszystko jasne!</string>
+  <string name="no_images_found">Nie znaleziono grafik!</string>
+  <string name="error_loading_images">Wystąpił błąd podczas ładowania grafik.</string>
+  <string name="image_uploaded_by">Przesłano przez $1</string>
+  <string name="menu_search_button">Szukaj</string>
+  <string name="search_recent_header">Ostatnie wyszukiwania:</string>
+  <string name="provider_searches">Ostatnio wyszukiwane zapytania</string>
+  <string name="error_loading_categories">Wystąpił błąd podczas ładowania kategorii.</string>
+  <string name="error_loading_subcategories">Wystąpił błąd podczas ładowania podkategorii.</string>
+  <string name="menu_set_wallpaper">Ustaw jako tapetę</string>
+  <string name="wallpaper_set_successfully">Tapeta ustawiona pomyślnie!</string>
+  <string name="quiz">Quiz</string>
+  <string name="quiz_question_string">Czy to zdjęcie nadaje się do przesłania?</string>
+  <string name="question">Pytanie</string>
+  <string name="result">Wynik</string>
+  <string name="quiz_alert_message">Ponad %1$s przesłanych prze Ciebie zdjęć zostało usuniętych. Jeśli dalej będziesz przesyłać zdjęcia wymagające usunięcia, Twoje konto zostanie prawdopodobnie zablokowane.\n\nCzy chcesz ponownie wyświetlić samouczek, a następnie wziąć udział w quizie, aby dowiedzieć się, jakiego rodzaju zdjęć powinieneś/nie powinieneś przesłać?</string>
+  <string name="selfie_answer">Selfie nie mają zbyt dużej wartości encyklopedycznej. Nie przesyłaj swojego zdjęcia, chyba że masz już artykuł na swój temat w Wikipedii.</string>
+  <string name="blurry_image_answer">Jednym z celów Commons jest gromadzenie zdjęć wysokiej jakości, dlatego powinny być zamazane. Zawsze staraj się robić ładne zdjęcia z dobrym oświetleniem.</string>
+  <string name="warning_for_image_reverts">OSTRZEŻENIE: Ponad %1$s przesłanych prze Ciebie zdjęć zostało usuniętych. Jeśli dalej będziesz przesyłać zdjęcia wymagające usunięcia, Twoje konto zostanie prawdopodobnie zablokowane.</string>
+  <string name="congratulatory_message_quiz">Masz %1$s poprawnych odpowiedzi. Gratulacje!</string>
+  <string name="warning_for_no_answer">Wybierz jedną z dwóch opcji, aby odpowiedzieć na pytanie</string>
+  <string name="quiz_result_share_message">Podziel się quizem ze swoimi znajomymi!</string>
+  <string name="continue_message">Kontynuuj</string>
+  <string name="correct">Poprawna odpowiedź</string>
+  <string name="wrong">Zła odpowiedź</string>
+  <string name="quiz_screenshot_question">Czy ten zrzut ekranu nadaje się do przesłania?</string>
+  <string name="add_description">+ Dodaj opis</string>
+  <string name="delete_recent_searches_dialog">Czy na pewno chcesz usunąć swoją historię wyszukiwania?</string>
+  <string name="search_history_deleted">Historia wyszukiwania została usunięta</string>
+  <string name="Achievements">Osiągnięcia</string>
+  <string name="statistics">STATYSTYKA</string>
+  <string name="statistics_featured">Wyróżnione ilustracje</string>
+  <string name="level">POZIOM</string>
+  <string name="images_uploaded_explanation">Liczba zdjęć przesłanych do Commons za pomocą dowolnego oprogramowania</string>
+  <string name="images_reverted_explanation">Procent zdjęć przesłanych do Commons, które nie zostały usunięte</string>
+  <string name="images_used_explanation">Liczba zdjęć przesłanych do Commons, które zostały wykorzystane w artykułach Wikimedia</string>
+  <string name="error_occurred">Wystąpił błąd!</string>
+  <string name="notifications_channel_name_all">Powiadomienia Commons</string>
 </resources>

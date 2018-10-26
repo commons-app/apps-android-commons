@@ -28,7 +28,6 @@
   <string name="login_failed_username">लगइन अद्दाइ असमर्थ - कृपया तमरो प्रयोगकर्ता नाउँ हेरऽ</string>
   <string name="login_failed_password">लगइन अद्दाइ असमर्थ - कृपया तमरो पासवर्ड जाँचऽ</string>
   <string name="categories_activity_title">श्रेणीइन</string>
-  <string name="preference_tracking">उपयोग प्रतिवेदनअन</string>
   <string name="title_activity_settings">मिलानअन</string>
   <string name="menu_about">बारेमी</string>
   <string name="title_activity_about">बारेमी</string>
@@ -54,4 +53,5 @@
   <string name="media_detail_media_title">मिडियाऽ शीर्षक</string>
   <string name="media_detail_description">बेलिविस्तार</string>
   <string name="become_a_tester_title">बिटा परीक्षक बनऽ</string>
+  <string name="nearby_location_not_available">स्थान उपलब्ध आथिन।</string>
 </resources>

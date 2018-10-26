@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- Authors:
+* Beta16
+-->
 <resources>
   <string name="crash_dialog_title">Commons è andato in errore</string>
   <string name="crash_dialog_text">Oops. Qualcosa è andato storto!</string>

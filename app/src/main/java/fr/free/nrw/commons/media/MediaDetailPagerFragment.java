@@ -9,54 +9,76 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.Handler;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.content.ContextCompat;
-import android.support.v4.view.MenuItemCompat;
 import android.support.v4.view.ViewPager;
-import android.support.v7.widget.ShareActionProvider;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import javax.inject.Inject;
 import javax.inject.Named;
 
-import dagger.android.support.DaggerFragment;
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.auth.SessionManager;
+import fr.free.nrw.commons.bookmarks.Bookmark;
+import fr.free.nrw.commons.bookmarks.pictures.BookmarkPicturesDao;
+import fr.free.nrw.commons.category.CategoryDetailsActivity;
+import fr.free.nrw.commons.category.CategoryImagesActivity;
 import fr.free.nrw.commons.contributions.Contribution;
 import fr.free.nrw.commons.contributions.ContributionsActivity;
+import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
+import fr.free.nrw.commons.explore.SearchActivity;
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
+import fr.free.nrw.commons.utils.ImageUtils;
+import timber.log.Timber;
 
 import static android.Manifest.permission.READ_EXTERNAL_STORAGE;
 import static android.content.Context.DOWNLOAD_SERVICE;
 import static android.content.Intent.ACTION_VIEW;
 import static android.content.pm.PackageManager.PERMISSION_GRANTED;
+import static android.widget.Toast.LENGTH_SHORT;
 
-public class MediaDetailPagerFragment extends DaggerFragment implements ViewPager.OnPageChangeListener {
+public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment implements ViewPager.OnPageChangeListener {
 
-    @Inject MediaWikiApi mwApi;
-    @Inject SessionManager sessionManager;
-    @Inject @Named("default_preferences") SharedPreferences prefs;
+    @Inject
+    MediaWikiApi mwApi;
+    @Inject
+    SessionManager sessionManager;
+    @Inject
+    @Named("default_preferences")
+    SharedPreferences prefs;
 
-    private ViewPager pager;
+    @Inject
+    BookmarkPicturesDao bookmarkDao;
+
+    @BindView(R.id.mediaDetailsPager)
+    ViewPager pager;
     private Boolean editable;
+    private boolean isFeaturedImage;
+    MediaDetailAdapter adapter;
+    private Bookmark bookmark;
 
     public MediaDetailPagerFragment() {
-        this(false);
+        this(false, false);
     }
 
     @SuppressLint("ValidFragment")
-    public MediaDetailPagerFragment(Boolean editable) {
+    public MediaDetailPagerFragment(Boolean editable, boolean isFeaturedImage) {
         this.editable = editable;
+        this.isFeaturedImage = isFeaturedImage;
     }
 
     @Override
@@ -64,10 +86,10 @@ public class MediaDetailPagerFragment extends DaggerFragment implements ViewPage
                              ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_media_detail_pager, container, false);
-        pager = (ViewPager) view.findViewById(R.id.mediaDetailsPager);
+        ButterKnife.bind(this,view);
         pager.addOnPageChangeListener(this);
 
-        final MediaDetailAdapter adapter = new MediaDetailAdapter(getChildFragmentManager());
+        adapter = new MediaDetailAdapter(getChildFragmentManager());
 
         if (savedInstanceState != null) {
             final int pageNumber = savedInstanceState.getInt("current-page");
@@ -76,6 +98,12 @@ public class MediaDetailPagerFragment extends DaggerFragment implements ViewPage
             view.postDelayed(() -> {
                 pager.setAdapter(adapter);
                 pager.setCurrentItem(pageNumber, false);
+
+                if(getActivity() == null) {
+                    Timber.d("Returning as activity is destroyed!");
+                    return;
+                }
+
                 getActivity().supportInvalidateOptionsMenu();
                 adapter.notifyDataSetChanged();
             }, 100);
@@ -90,6 +118,7 @@ public class MediaDetailPagerFragment extends DaggerFragment implements ViewPage
         super.onSaveInstanceState(outState);
         outState.putInt("current-page", pager.getCurrentItem());
         outState.putBoolean("editable", editable);
+        outState.putBoolean("isFeaturedImage", isFeaturedImage);
     }
 
     @Override
@@ -97,28 +126,51 @@ public class MediaDetailPagerFragment extends DaggerFragment implements ViewPage
         super.onCreate(savedInstanceState);
         if (savedInstanceState != null) {
             editable = savedInstanceState.getBoolean("editable");
+            isFeaturedImage = savedInstanceState.getBoolean("isFeaturedImage");
         }
         setHasOptionsMenu(true);
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+        if(getActivity() == null) {
+            Timber.d("Returning as activity is destroyed!");
+            return true;
+        }
         MediaDetailProvider provider = (MediaDetailProvider) getActivity();
         Media m = provider.getMediaAtPosition(pager.getCurrentItem());
         switch (item.getItemId()) {
+            case R.id.menu_bookmark_current_image:
+                bookmarkDao.updateBookmark(bookmark);
+                updateBookmarkState(item);
+                return true;
             case R.id.menu_share_current_image:
-                // Share - intent set in onCreateOptionsMenu, around line 252
+                Intent shareIntent = new Intent(Intent.ACTION_SEND);
+                shareIntent.setType("text/plain");
+                shareIntent.putExtra(Intent.EXTRA_TEXT, m.getDisplayTitle() + " \n" + m.getFilePageTitle().getCanonicalUri());
+                startActivity(Intent.createChooser(shareIntent, "Share image via..."));
                 return true;
             case R.id.menu_browser_current_image:
                 // View in browser
                 Intent viewIntent = new Intent();
                 viewIntent.setAction(ACTION_VIEW);
                 viewIntent.setData(m.getFilePageTitle().getMobileUri());
-                startActivity(viewIntent);
+                //check if web browser available
+                if(viewIntent.resolveActivity(getActivity().getPackageManager()) != null){
+                    startActivity(viewIntent);
+                } else {
+                    Toast toast = Toast.makeText(getContext(), getString(R.string.no_web_browser), LENGTH_SHORT);
+                    toast.show();
+                }
+
                 return true;
             case R.id.menu_download_current_image:
                 // Download
                 downloadMedia(m);
+                return true;
+            case R.id.menu_set_as_wallpaper:
+                // Set wallpaper
+                setWallpaper(m);
                 return true;
             case R.id.menu_retry_current_image:
                 // Retry
@@ -136,16 +188,32 @@ public class MediaDetailPagerFragment extends DaggerFragment implements ViewPage
     }
 
     /**
+     * Set the media as the device's wallpaper if the imageUrl is not null
+     * Fails silently if setting the wallpaper fails
+     * @param media
+     */
+    private void setWallpaper(Media media) {
+        if(media.getImageUrl() == null || media.getImageUrl().isEmpty()) {
+            Timber.d("Media URL not present");
+            return;
+        }
+        ImageUtils.setWallpaperFromImageUrl(getActivity(), Uri.parse(media.getImageUrl()));
+    }
+
+    /**
      * Start the media file downloading to the local SD card/storage.
      * The file can then be opened in Gallery or other apps.
      *
      * @param m Media file to download
      */
     private void downloadMedia(Media m) {
-        String imageUrl = m.getImageUrl(),
-                fileName = m.getFilename();
+        String imageUrl = m.getImageUrl(), fileName = m.getFilename();
 
-        if (imageUrl == null || fileName == null) {
+        if (imageUrl == null
+                || fileName == null
+                || getContext() ==  null
+                || getActivity() == null) {
+            Timber.d("Skipping download media as either imageUrl %s or filename %s activity is null", imageUrl, fileName);
             return;
         }
 
@@ -164,13 +232,19 @@ public class MediaDetailPagerFragment extends DaggerFragment implements ViewPage
         req.allowScanningByMediaScanner();
         req.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && !(ContextCompat.checkSelfPermission(getContext(), READ_EXTERNAL_STORAGE) == PERMISSION_GRANTED)) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M &&
+                ContextCompat.checkSelfPermission(getContext(), READ_EXTERNAL_STORAGE)
+                        != PERMISSION_GRANTED
+                && getView() != null) {
             Snackbar.make(getView(), R.string.read_storage_permission_rationale,
                     Snackbar.LENGTH_INDEFINITE).setAction(R.string.ok,
                     view -> ActivityCompat.requestPermissions(getActivity(),
                             new String[]{READ_EXTERNAL_STORAGE}, 1)).show();
         } else {
-            ((DownloadManager) getActivity().getSystemService(DOWNLOAD_SERVICE)).enqueue(req);
+            DownloadManager systemService = (DownloadManager) getActivity().getSystemService(DOWNLOAD_SERVICE);
+            if (systemService != null) {
+                systemService.enqueue(req);
+            }
         }
     }
 
@@ -181,6 +255,10 @@ public class MediaDetailPagerFragment extends DaggerFragment implements ViewPage
             inflater.inflate(R.menu.fragment_image_detail, menu);
             if (pager != null) {
                 MediaDetailProvider provider = (MediaDetailProvider) getActivity();
+                if(provider == null) {
+                    return;
+                }
+
                 Media m = provider.getMediaAtPosition(pager.getCurrentItem());
                 if (m != null) {
                     // Enable default set of actions, then re-enable different set of actions only if it is a failed contrib
@@ -189,20 +267,16 @@ public class MediaDetailPagerFragment extends DaggerFragment implements ViewPage
                     menu.findItem(R.id.menu_browser_current_image).setEnabled(true).setVisible(true);
                     menu.findItem(R.id.menu_share_current_image).setEnabled(true).setVisible(true);
                     menu.findItem(R.id.menu_download_current_image).setEnabled(true).setVisible(true);
+                    menu.findItem(R.id.menu_bookmark_current_image).setEnabled(true).setVisible(true);
 
-                    // Set ShareActionProvider Intent
-                    ShareActionProvider mShareActionProvider = (ShareActionProvider) MenuItemCompat.getActionProvider(menu.findItem(R.id.menu_share_current_image));
-                    // On some phones null is returned for some reason:
-                    // https://github.com/commons-app/apps-android-commons/issues/413
-                    if (mShareActionProvider != null) {
-                        Intent shareIntent = new Intent(Intent.ACTION_SEND);
-                        shareIntent.setType("text/plain");
-                        shareIntent.putExtra(Intent.EXTRA_TEXT,
-                                m.getDisplayTitle() + " \n" + m.getFilePageTitle().getCanonicalUri());
-                        mShareActionProvider.setShareIntent(shareIntent);
-                    }
+                    // Initialize bookmark object
+                    bookmark = new Bookmark(
+                            m.getFilename(),
+                            m.getCreator()
+                    );
+                    updateBookmarkState(menu.findItem(R.id.menu_bookmark_current_image));
 
-                    if (m instanceof Contribution) {
+                    if (m instanceof Contribution ) {
                         Contribution c = (Contribution) m;
                         switch (c.getState()) {
                             case Contribution.STATE_FAILED:
@@ -211,6 +285,7 @@ public class MediaDetailPagerFragment extends DaggerFragment implements ViewPage
                                 menu.findItem(R.id.menu_browser_current_image).setEnabled(false).setVisible(false);
                                 menu.findItem(R.id.menu_share_current_image).setEnabled(false).setVisible(false);
                                 menu.findItem(R.id.menu_download_current_image).setEnabled(false).setVisible(false);
+                                menu.findItem(R.id.menu_bookmark_current_image).setEnabled(false).setVisible(false);
                                 break;
                             case Contribution.STATE_IN_PROGRESS:
                             case Contribution.STATE_QUEUED:
@@ -219,6 +294,7 @@ public class MediaDetailPagerFragment extends DaggerFragment implements ViewPage
                                 menu.findItem(R.id.menu_browser_current_image).setEnabled(false).setVisible(false);
                                 menu.findItem(R.id.menu_share_current_image).setEnabled(false).setVisible(false);
                                 menu.findItem(R.id.menu_download_current_image).setEnabled(false).setVisible(false);
+                                menu.findItem(R.id.menu_bookmark_current_image).setEnabled(false).setVisible(false);
                                 break;
                             case Contribution.STATE_COMPLETED:
                                 // Default set of menu items works fine. Treat same as regular media object
@@ -230,12 +306,47 @@ public class MediaDetailPagerFragment extends DaggerFragment implements ViewPage
         }
     }
 
+    private void updateBookmarkState(MenuItem item) {
+        boolean isBookmarked = bookmarkDao.findBookmark(bookmark);
+        int icon = isBookmarked ? R.drawable.ic_round_star_filled_24px : R.drawable.ic_round_star_border_24px;
+        item.setIcon(icon);
+    }
+
     public void showImage(int i) {
-        pager.setCurrentItem(i);
+        Handler handler =  new Handler();
+        handler.postDelayed(() -> pager.setCurrentItem(i), 5);
+    }
+
+    /**
+     * The method notify the viewpager that number of items have changed.
+     */
+    public void notifyDataSetChanged(){
+        adapter.notifyDataSetChanged();
     }
 
     @Override
     public void onPageScrolled(int i, float v, int i2) {
+        if(getActivity() == null) {
+            Timber.d("Returning as activity is destroyed!");
+            return;
+        }
+        if (i+1 >= adapter.getCount()){
+            try{
+                ((CategoryImagesActivity) getContext()).requestMoreImages();
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+            try{
+                ((CategoryDetailsActivity) getContext()).requestMoreImages();
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+            try{
+                ((SearchActivity) getContext()).requestMoreImages();
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+        }
         getActivity().supportInvalidateOptionsMenu();
     }
 
@@ -270,13 +381,21 @@ public class MediaDetailPagerFragment extends DaggerFragment implements ViewPage
         public Fragment getItem(int i) {
             if (i == 0) {
                 // See bug https://code.google.com/p/android/issues/detail?id=27526
+                if(getActivity() == null) {
+                    Timber.d("Skipping getItem. Returning as activity is destroyed!");
+                    return null;
+                }
                 pager.postDelayed(() -> getActivity().supportInvalidateOptionsMenu(), 5);
             }
-            return MediaDetailFragment.forMedia(i, editable);
+            return MediaDetailFragment.forMedia(i, editable, isFeaturedImage);
         }
 
         @Override
         public int getCount() {
+            if(getActivity() == null) {
+                Timber.d("Skipping getCount. Returning as activity is destroyed!");
+                return 0;
+            }
             return ((MediaDetailProvider) getActivity()).getTotalMediaCount();
         }
     }

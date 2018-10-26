@@ -1,4 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- Authors:
+* Dağlı95
+* Khan27
+-->
 <resources>
   <string name="crash_dialog_title">Nasazlıq</string>
   <string name="crash_dialog_text">Uups. Nəsə düzgün çalışmır!</string>

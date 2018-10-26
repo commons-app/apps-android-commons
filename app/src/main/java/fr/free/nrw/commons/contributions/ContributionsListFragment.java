@@ -20,13 +20,16 @@ import android.widget.ListAdapter;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import java.util.Arrays;
+
 import javax.inject.Inject;
 import javax.inject.Named;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import dagger.android.support.DaggerFragment;
+import fr.free.nrw.commons.BuildConfig;
 import fr.free.nrw.commons.R;
+import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
 import fr.free.nrw.commons.nearby.NearbyActivity;
 import timber.log.Timber;
 
@@ -36,7 +39,7 @@ import static android.app.Activity.RESULT_OK;
 import static android.content.pm.PackageManager.PERMISSION_GRANTED;
 import static android.view.View.GONE;
 
-public class ContributionsListFragment extends DaggerFragment {
+public class ContributionsListFragment extends CommonsDaggerSupportFragment {
 
     @BindView(R.id.contributionsList)
     GridView contributionsList;
@@ -44,11 +47,18 @@ public class ContributionsListFragment extends DaggerFragment {
     TextView waitingMessage;
     @BindView(R.id.loadingContributionsProgressBar)
     ProgressBar progressBar;
+    @BindView(R.id.noDataYet)
+    TextView noDataYet;
 
-    @Inject @Named("prefs") SharedPreferences prefs;
-    @Inject @Named("default_preferences") SharedPreferences defaultPrefs;
+    @Inject
+    @Named("prefs")
+    SharedPreferences prefs;
+    @Inject
+    @Named("default_preferences")
+    SharedPreferences defaultPrefs;
 
     private ContributionController controller;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -71,6 +81,7 @@ public class ContributionsListFragment extends DaggerFragment {
             waitingMessage.setVisibility(GONE);
         }
 
+        changeEmptyScreen(true);
         changeProgressBarVisibility(true);
         return v;
     }
@@ -81,6 +92,14 @@ public class ContributionsListFragment extends DaggerFragment {
 
     public void setAdapter(ListAdapter adapter) {
         this.contributionsList.setAdapter(adapter);
+
+        if(BuildConfig.FLAVOR.equalsIgnoreCase("beta")){
+            ((ContributionsActivity) getActivity()).betaSetUploadCount(adapter.getCount());
+        }
+    }
+
+    public void changeEmptyScreen(boolean isEmpty){
+        this.noDataYet.setVisibility(isEmpty ? View.VISIBLE : View.GONE);
     }
 
     public void changeProgressBarVisibility(boolean isVisible) {
@@ -105,7 +124,13 @@ public class ContributionsListFragment extends DaggerFragment {
         if (resultCode == RESULT_OK) {
             Timber.d("OnActivityResult() parameters: Req code: %d Result code: %d Data: %s",
                     requestCode, resultCode, data);
-            controller.handleImagePicked(requestCode, data);
+            if (requestCode == ContributionController.SELECT_FROM_CAMERA) {
+                // If coming from camera, pass null as uri. Because camera photos get saved to a
+                // fixed directory
+                controller.handleImagePicked(requestCode, null, false, null);
+            } else {
+                controller.handleImagePicked(requestCode, data.getData(), false, null);
+            }
         } else {
             Timber.e("OnActivityResult() parameters: Req code: %d Result code: %d Data: %s",
                     requestCode, resultCode, data);
@@ -133,11 +158,11 @@ public class ContributionsListFragment extends DaggerFragment {
 
                             new AlertDialog.Builder(getActivity())
                                     .setMessage(getString(R.string.read_storage_permission_rationale))
-                                    .setPositiveButton("OK", (dialog, which) -> {
+                                    .setPositiveButton(android.R.string.ok, (dialog, which) -> {
                                         requestPermissions(new String[]{READ_EXTERNAL_STORAGE}, 1);
                                         dialog.dismiss();
                                     })
-                                    .setNegativeButton("Cancel", null)
+                                    .setNegativeButton(android.R.string.cancel, null)
                                     .create()
                                     .show();
 
@@ -175,11 +200,11 @@ public class ContributionsListFragment extends DaggerFragment {
                             // sees the explanation, try again to request the permission.
                             new AlertDialog.Builder(getActivity())
                                     .setMessage(getString(R.string.write_storage_permission_rationale))
-                                    .setPositiveButton("OK", (dialog, which) -> {
+                                    .setPositiveButton(android.R.string.ok, (dialog, which) -> {
                                         requestPermissions(new String[]{WRITE_EXTERNAL_STORAGE}, 3);
                                         dialog.dismiss();
                                     })
-                                    .setNegativeButton("Cancel", null)
+                                    .setNegativeButton(android.R.string.cancel, null)
                                     .create()
                                     .show();
                         } else {
@@ -208,7 +233,7 @@ public class ContributionsListFragment extends DaggerFragment {
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
                                            @NonNull int[] grantResults) {
         Timber.d("onRequestPermissionsResult: req code = " + " perm = "
-                + permissions + " grant =" + grantResults);
+                + Arrays.toString(permissions) + " grant =" + Arrays.toString(grantResults));
 
         switch (requestCode) {
             // 1 = Storage allowed when gallery selected

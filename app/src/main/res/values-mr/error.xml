@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- Authors:
+* V.narsikar
+-->
 <resources>
   <string name="crash_dialog_title">कॉमन्स कोसळले आहे</string>
   <string name="crash_dialog_text">ओह. काहीतरी गडबड झाली!</string>

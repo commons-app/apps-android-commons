@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- Authors:
+* Sarilho1
+-->
 <resources>
   <string name="crash_dialog_title">O Commons falhou</string>
   <string name="crash_dialog_text">Ups! Algo correu mal.</string>

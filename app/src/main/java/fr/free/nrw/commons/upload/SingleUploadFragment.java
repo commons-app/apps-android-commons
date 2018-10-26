@@ -1,16 +1,20 @@
 package fr.free.nrw.commons.upload;
 
-import android.content.Context;
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
-import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
+import android.support.v4.view.ViewCompat;
 import android.support.v7.app.AlertDialog;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
+import android.text.Html;
 import android.text.TextWatcher;
+import android.text.method.LinkMovementMethod;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -18,15 +22,22 @@ import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
+import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Locale;
 
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -36,35 +47,35 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.OnItemSelected;
 import butterknife.OnTouch;
-import dagger.android.support.DaggerFragment;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.Utils;
+import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
 import fr.free.nrw.commons.settings.Prefs;
+import fr.free.nrw.commons.utils.ViewUtil;
 import timber.log.Timber;
 
-import static android.view.MotionEvent.ACTION_DOWN;
 import static android.view.MotionEvent.ACTION_UP;
 
-public class SingleUploadFragment extends DaggerFragment {
+public class SingleUploadFragment extends CommonsDaggerSupportFragment {
 
     @BindView(R.id.titleEdit) EditText titleEdit;
-    @BindView(R.id.descEdit) EditText descEdit;
+    @BindView(R.id.rv_descriptions) RecyclerView rvDescriptions;
     @BindView(R.id.titleDescButton) Button titleDescButton;
     @BindView(R.id.share_license_summary) TextView licenseSummaryView;
     @BindView(R.id.licenseSpinner) Spinner licenseSpinner;
 
+
     @Inject @Named("default_preferences") SharedPreferences prefs;
+    @Inject @Named("direct_nearby_upload_prefs") SharedPreferences directPrefs;
 
     private String license;
     private OnUploadActionInitiated uploadActionInitiatedHandler;
     private TitleTextWatcher textWatcher = new TitleTextWatcher();
+    private DescriptionsAdapter descriptionsAdapter;
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         inflater.inflate(R.menu.activity_share, menu);
-        if (titleEdit != null) {
-            menu.findItem(R.id.menu_upload_single).setEnabled(titleEdit.getText().length() != 0);
-        }
     }
 
     @Override
@@ -73,20 +84,43 @@ public class SingleUploadFragment extends DaggerFragment {
             //What happens when the 'submit' icon is tapped
             case R.id.menu_upload_single:
 
+                if (titleEdit.getText().toString().trim().isEmpty()) {
+                    Toast.makeText(getContext(), R.string.add_title_toast, Toast.LENGTH_LONG).show();
+                    return false;
+                }
+
                 String title = titleEdit.getText().toString();
-                String desc = descEdit.getText().toString();
+                String descriptionsInVariousLanguages = getDescriptionsInAppropriateFormat();
 
                 //Save the title/desc in short-lived cache so next time this fragment is loaded, we can access these
                 prefs.edit()
                         .putString("Title", title)
-                        .putString("Desc", desc)
+                        .putString("Desc", new Gson().toJson(descriptionsAdapter
+                                .getDescriptions()))//Description, now is not just a string, its a list of description objects
                         .apply();
 
-                uploadActionInitiatedHandler.uploadActionInitiated(title, desc);
+                uploadActionInitiatedHandler
+                        .uploadActionInitiated(title, descriptionsInVariousLanguages);
                 return true;
-
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    private String getDescriptionsInAppropriateFormat() {
+        List<Description> descriptions = descriptionsAdapter.getDescriptions();
+        StringBuilder descriptionsInAppropriateFormat = new StringBuilder();
+        for (Description description : descriptions) {
+            String individualDescription = String.format("{{%s|1=%s}}", description.getLanguageId(),
+                    description.getDescriptionText());
+            descriptionsInAppropriateFormat.append(individualDescription);
+        }
+        return descriptionsInAppropriateFormat.toString();
+
+    }
+
+    private List<Description> getDescriptions() {
+        List<Description> descriptions = descriptionsAdapter.getDescriptions();
+        return descriptions;
     }
 
     @Override
@@ -94,6 +128,20 @@ public class SingleUploadFragment extends DaggerFragment {
            Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_single_upload, container, false);
         ButterKnife.bind(this, rootView);
+
+        initRecyclerView();
+
+        Intent activityIntent = getActivity().getIntent();
+        if (activityIntent.hasExtra("title")) {
+            titleEdit.setText(activityIntent.getStringExtra("title"));
+        }
+        if (activityIntent.hasExtra("description") && descriptionsAdapter.getDescriptions() != null
+                && descriptionsAdapter.getDescriptions().size() > 0) {
+            descriptionsAdapter.getDescriptions().get(0)
+                    .setDescriptionText(activityIntent.getStringExtra("description"));
+            descriptionsAdapter.notifyItemChanged(0);
+        }
+
 
         ArrayList<String> licenseItems = new ArrayList<>();
         licenseItems.add(getString(R.string.license_name_cc0));
@@ -103,6 +151,22 @@ public class SingleUploadFragment extends DaggerFragment {
         licenseItems.add(getString(R.string.license_name_cc_by_sa_four));
 
         license = prefs.getString(Prefs.DEFAULT_LICENSE, Prefs.Licenses.CC_BY_SA_3);
+
+        // If this is a direct upload from Nearby, autofill title and desc fields with the Place's values
+        boolean isNearbyUpload = ((ShareActivity) getActivity()).isNearbyUpload();
+
+        if (isNearbyUpload) {
+            String imageTitle = directPrefs.getString("Title", "");
+            String imageDesc = directPrefs.getString("Desc", "");
+            String imageCats = directPrefs.getString("Category", "");
+            Timber.d("Image title: " + imageTitle + ", image desc: " + imageDesc + ", image categories: " + imageCats);
+            titleEdit.setText(imageTitle);
+            if (descriptionsAdapter.getDescriptions() != null
+                    && descriptionsAdapter.getDescriptions().size() > 0) {
+                descriptionsAdapter.getDescriptions().get(0).setDescriptionText(imageDesc);
+                descriptionsAdapter.notifyItemChanged(0);
+            }
+        }
 
         // check if this is the first time we have uploaded
         if (prefs.getString("Title", "").trim().length() == 0
@@ -136,9 +200,33 @@ public class SingleUploadFragment extends DaggerFragment {
 
         titleEdit.addTextChangedListener(textWatcher);
 
+        titleEdit.setOnFocusChangeListener((v, hasFocus) -> {
+            if (!hasFocus) {
+                ViewUtil.hideKeyboard(v);
+            }
+        });
+
         setLicenseSummary(license);
 
         return rootView;
+    }
+
+    private void initRecyclerView() {
+        descriptionsAdapter = new DescriptionsAdapter();
+        descriptionsAdapter.setCallback((mediaDetailDescription, descriptionInfo) -> showInfoAlert(mediaDetailDescription,descriptionInfo));
+        descriptionsAdapter.setLanguages(getLocaleSupportedByDevice());
+        rvDescriptions.setLayoutManager(new LinearLayoutManager(getContext()));
+        rvDescriptions.setAdapter(descriptionsAdapter);
+    }
+
+    private List<Language> getLocaleSupportedByDevice() {
+        List<Language> languages = new ArrayList<>();
+        Locale[] localesArray = Locale.getAvailableLocales();
+        List<Locale> locales = Arrays.asList(localesArray);
+        for (Locale locale : locales) {
+            languages.add(new Language(locale));
+        }
+        return languages;
     }
 
     @Override
@@ -176,31 +264,24 @@ public class SingleUploadFragment extends DaggerFragment {
         setLicenseSummary(license);
         prefs.edit()
                 .putString(Prefs.DEFAULT_LICENSE, license)
-                .commit();
+                .apply();
     }
 
-    @OnTouch(R.id.share_license_summary)
-    boolean showLicence(View view, MotionEvent motionEvent) {
-        if (motionEvent.getActionMasked() == ACTION_DOWN) {
-            Intent intent = new Intent();
-            intent.setAction(Intent.ACTION_VIEW);
-            intent.setData(Uri.parse(licenseUrlFor(license)));
-            startActivity(intent);
-            return true;
-        } else {
-            return false;
-        }
-    }
 
     @OnClick(R.id.titleDescButton)
     void setTitleDescButton() {
         //Retrieve last title and desc entered
         String title = prefs.getString("Title", "");
-        String desc = prefs.getString("Desc", "");
-        Timber.d("Title: %s, Desc: %s", title, desc);
+        String descriptionJson = prefs.getString("Desc", "");
+        Timber.d("Title: %s, Desc: %s", title, descriptionJson);
 
         titleEdit.setText(title);
-        descEdit.setText(desc);
+        Type typeOfDest = new TypeToken<List<Description>>() {
+        }.getType();
+
+        List<Description> descriptions = new Gson().fromJson(descriptionJson, typeOfDest);
+        descriptionsAdapter.setDescriptions(descriptions);
+
     }
 
     /**
@@ -208,42 +289,30 @@ public class SingleUploadFragment extends DaggerFragment {
      */
     @OnTouch(R.id.titleEdit)
     boolean titleInfo(View view, MotionEvent motionEvent) {
-        //Should replace right with end to support different right-to-left languages as well
-        final int value = titleEdit.getRight() - titleEdit.getCompoundDrawables()[2].getBounds().width();
-
-        if (motionEvent.getAction() == ACTION_UP && motionEvent.getRawX() >= value) {
-            new AlertDialog.Builder(getContext())
-                    .setTitle(R.string.media_detail_title)
-                    .setMessage(R.string.title_info)
-                    .setCancelable(true)
-                    .setNeutralButton(android.R.string.ok, (dialog, id) -> dialog.cancel())
-                    .create()
-                    .show();
-            return true;
+        final int value;
+        if (ViewCompat.getLayoutDirection(getView()) == ViewCompat.LAYOUT_DIRECTION_LTR) {
+            value = titleEdit.getRight() - titleEdit.getCompoundDrawables()[2].getBounds().width();
+            if (motionEvent.getAction() == ACTION_UP && motionEvent.getRawX() >= value) {
+                showInfoAlert(R.string.media_detail_title, R.string.title_info);
+                return true;
+            }
+        }
+        else {
+            value = titleEdit.getLeft() + titleEdit.getCompoundDrawables()[0].getBounds().width();
+            if (motionEvent.getAction() == ACTION_UP && motionEvent.getRawX() <= value) {
+                showInfoAlert(R.string.media_detail_title, R.string.title_info);
+                return true;
+            }
         }
         return false;
     }
 
-    @OnTouch(R.id.descEdit)
-    boolean descriptionInfo(View view, MotionEvent motionEvent) {
-        final int value = descEdit.getRight() - descEdit.getCompoundDrawables()[2].getBounds().width();
-
-        if (motionEvent.getAction() == ACTION_UP && motionEvent.getRawX() >= value) {
-            new AlertDialog.Builder(getContext())
-                    .setTitle(R.string.media_detail_description)
-                    .setMessage(R.string.description_info)
-                    .setCancelable(true)
-                    .setNeutralButton(android.R.string.ok, (dialog, id) -> dialog.cancel())
-                    .create()
-                    .show();
-            return true;
-        }
-        return false;
-    }
-
+    @SuppressLint("StringFormatInvalid")
     private void setLicenseSummary(String license) {
-        licenseSummaryView.setText(getString(R.string.share_license_summary, getString(Utils.licenseNameFor(license))));
-    }
+        String licenseHyperLink = "<a href='" + licenseUrlFor(license)+"'>"+ getString(Utils.licenseNameFor(license)) + "</a><br>";
+        licenseSummaryView.setMovementMethod(LinkMovementMethod.getInstance());
+        licenseSummaryView.setText(Html.fromHtml(getString(R.string.share_license_summary, licenseHyperLink)));
+ }
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
@@ -257,11 +326,8 @@ public class SingleUploadFragment extends DaggerFragment {
         super.onStop();
 
         // FIXME: Stops the keyboard from being shown 'stale' while moving out of this fragment into the next
-        View target = getView().findFocus();
-        if (target != null) {
-            InputMethodManager imm = (InputMethodManager) target.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
-            imm.hideSoftInputFromWindow(target.getWindowToken(), 0);
-        }
+        View target = getActivity().getCurrentFocus();
+        ViewUtil.hideKeyboard(target);
     }
 
     @NonNull
@@ -282,10 +348,12 @@ public class SingleUploadFragment extends DaggerFragment {
     }
 
     public interface OnUploadActionInitiated {
+
         void uploadActionInitiated(String title, String description);
     }
 
     private class TitleTextWatcher implements TextWatcher {
+
         @Override
         public void beforeTextChanged(CharSequence charSequence, int i, int i2, int i3) {
         }
@@ -300,5 +368,22 @@ public class SingleUploadFragment extends DaggerFragment {
                 getActivity().invalidateOptionsMenu();
             }
         }
+    }
+
+
+    private void showInfoAlert (int titleStringID, int messageStringID){
+        new AlertDialog.Builder(getContext())
+                .setTitle(titleStringID)
+                .setMessage(messageStringID)
+                .setCancelable(true)
+                .setNeutralButton(android.R.string.ok, (dialog, id) -> dialog.cancel())
+                .create()
+                .show();
+    }
+
+    @OnClick(R.id.ll_add_description)
+    public void onLLAddDescriptionClicked() {
+        descriptionsAdapter.addDescription(new Description());
+        rvDescriptions.scrollToPosition(descriptionsAdapter.getItemCount() - 1);
     }
 }

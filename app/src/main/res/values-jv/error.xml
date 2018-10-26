@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- Authors:
+* NoiX180
+-->
 <resources>
   <string name="crash_dialog_title">Commons lagi kaco</string>
   <string name="crash_dialog_text">Wadhuh. Ana sing luput!</string>

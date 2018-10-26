@@ -1,6 +1,7 @@
 package fr.free.nrw.commons.nearby;
 
-import android.support.annotation.NonNull;
+
+import android.support.v4.app.Fragment;
 
 import com.pedrogomez.renderers.ListAdapteeCollection;
 import com.pedrogomez.renderers.RVRendererAdapter;
@@ -9,18 +10,39 @@ import com.pedrogomez.renderers.RendererBuilder;
 import java.util.Collections;
 import java.util.List;
 
-class NearbyAdapterFactory {
-    private PlaceRenderer.PlaceClickedListener listener;
+import fr.free.nrw.commons.contributions.ContributionController;
 
-    NearbyAdapterFactory(@NonNull PlaceRenderer.PlaceClickedListener listener) {
-        this.listener = listener;
+public class NearbyAdapterFactory {
+
+    private Fragment fragment;
+    private ContributionController controller;
+
+    NearbyAdapterFactory(){
+
+    }
+
+    public NearbyAdapterFactory(Fragment fragment, ContributionController controller) {
+        this.fragment = fragment;
+        this.controller = controller;
     }
 
     public RVRendererAdapter<Place> create(List<Place> placeList) {
+        return create(placeList, null);
+    }
+
+    public RVRendererAdapter<Place> create(
+            List<Place> placeList,
+            PlaceRenderer.OnBookmarkClick onBookmarkClick
+    ) {
         RendererBuilder<Place> builder = new RendererBuilder<Place>()
-                .bind(Place.class, new PlaceRenderer(listener));
+                .bind(Place.class, new PlaceRenderer(fragment, controller, onBookmarkClick));
         ListAdapteeCollection<Place> collection = new ListAdapteeCollection<>(
-                placeList != null ? placeList : Collections.<Place>emptyList());
+                placeList != null ? placeList : Collections.emptyList());
         return new RVRendererAdapter<>(builder, collection);
+    }
+
+    public void updateAdapterData(List<Place> newPlaceList, RVRendererAdapter<Place> rendererAdapter) {
+        rendererAdapter.notifyDataSetChanged();
+        rendererAdapter.diffUpdate(newPlaceList);
     }
 }

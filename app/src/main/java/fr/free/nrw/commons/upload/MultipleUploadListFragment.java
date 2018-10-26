@@ -5,6 +5,7 @@ import android.graphics.Point;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.graphics.drawable.VectorDrawableCompat;
+import android.support.v4.app.Fragment;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
@@ -15,7 +16,6 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.EditText;
@@ -23,24 +23,32 @@ import android.widget.FrameLayout;
 import android.widget.GridView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.facebook.drawee.generic.GenericDraweeHierarchyBuilder;
 import com.facebook.drawee.view.SimpleDraweeView;
 
-import dagger.android.support.DaggerFragment;
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import dagger.android.support.AndroidSupportInjection;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.contributions.Contribution;
 import fr.free.nrw.commons.media.MediaDetailPagerFragment;
+import fr.free.nrw.commons.utils.ViewUtil;
 
-public class MultipleUploadListFragment extends DaggerFragment {
+public class MultipleUploadListFragment extends Fragment {
 
     public interface OnMultipleUploadInitiatedHandler {
         void OnMultipleUploadInitiated();
     }
 
-    private GridView photosGrid;
+    @BindView(R.id.multipleShareBackground)
+    GridView photosGrid;
+
+    @BindView(R.id.multipleBaseTitle)
+    EditText baseTitle;
+
     private PhotoDisplayAdapter photosAdapter;
-    private EditText baseTitle;
     private TitleTextWatcher textWatcher = new TitleTextWatcher();
 
     private Point photoSize;
@@ -54,6 +62,12 @@ public class MultipleUploadListFragment extends DaggerFragment {
         private SimpleDraweeView image;
         private TextView title;
         private RelativeLayout overlay;
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        AndroidSupportInjection.inject(this);
+        super.onAttach(context);
     }
 
     private class PhotoDisplayAdapter extends BaseAdapter {
@@ -80,9 +94,9 @@ public class MultipleUploadListFragment extends DaggerFragment {
             if (view == null) {
                 view = LayoutInflater.from(getContext()).inflate(R.layout.layout_upload_item, viewGroup, false);
                 holder = new UploadHolderView();
-                holder.image = (SimpleDraweeView) view.findViewById(R.id.uploadImage);
-                holder.title = (TextView) view.findViewById(R.id.uploadTitle);
-                holder.overlay = (RelativeLayout) view.findViewById(R.id.uploadOverlay);
+                holder.image = view.findViewById(R.id.uploadImage);
+                holder.title = view.findViewById(R.id.uploadTitle);
+                holder.overlay = view.findViewById(R.id.uploadOverlay);
 
                 holder.image.setLayoutParams(new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, photoSize.y));
                 holder.image.setHierarchy(GenericDraweeHierarchyBuilder
@@ -120,11 +134,8 @@ public class MultipleUploadListFragment extends DaggerFragment {
         super.onStop();
 
         // FIXME: Stops the keyboard from being shown 'stale' while moving out of this fragment into the next
-        View target = getView().findFocus();
-        if (target != null) {
-            InputMethodManager imm = (InputMethodManager) target.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
-            imm.hideSoftInputFromWindow(target.getWindowToken(), 0);
-        }
+        View target = getActivity().getCurrentFocus();
+        ViewUtil.hideKeyboard(target);
     }
 
     // FIXME: Wrong result type
@@ -160,9 +171,7 @@ public class MultipleUploadListFragment extends DaggerFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_multiple_uploads_list, container, false);
-        photosGrid = (GridView) view.findViewById(R.id.multipleShareBackground);
-        baseTitle = (EditText) view.findViewById(R.id.multipleBaseTitle);
-
+        ButterKnife.bind(this,view);
         photosAdapter = new PhotoDisplayAdapter();
         photosGrid.setAdapter(photosAdapter);
         photosGrid.setOnItemClickListener((AdapterView.OnItemClickListener) getActivity());
@@ -170,6 +179,13 @@ public class MultipleUploadListFragment extends DaggerFragment {
         photosGrid.setColumnWidth(photoSize.x);
 
         baseTitle.addTextChangedListener(textWatcher);
+
+        baseTitle.setOnFocusChangeListener((v, hasFocus) -> {
+            if (!hasFocus) {
+                ViewUtil.hideKeyboard(v);
+            }
+        });
+
         return view;
     }
 
@@ -190,6 +206,10 @@ public class MultipleUploadListFragment extends DaggerFragment {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.menu_upload_multiple:
+                if (baseTitle.getText().toString().trim().isEmpty()) {
+                    Toast.makeText(getContext(), R.string.add_set_name_toast, Toast.LENGTH_LONG).show();
+                    return false;
+                }
                 multipleUploadInitiatedHandler.OnMultipleUploadInitiated();
                 return true;
         }

@@ -8,9 +8,9 @@ import android.os.IBinder;
 import android.os.Looper;
 import android.os.Message;
 
-import dagger.android.DaggerService;
+import fr.free.nrw.commons.di.CommonsDaggerService;
 
-public abstract class HandlerService<T> extends DaggerService {
+public abstract class HandlerService<T> extends CommonsDaggerService {
     private volatile Looper threadLooper;
     private volatile ServiceHandler threadHandler;
     private String serviceName;

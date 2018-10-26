@@ -1,4 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- Authors:
+* Farras
+* Rv77ax
+-->
 <resources>
   <string name="crash_dialog_title">Commons mendadak kacau</string>
   <string name="crash_dialog_text">Ups. Ada yang tidak beres!</string>
