@@ -2,10 +2,8 @@ package fr.free.nrw.commons.explore;
 
 import android.content.res.Configuration;
 import android.database.DataSetObserver;
-import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.support.annotation.RequiresApi;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -57,7 +55,6 @@ public class SearchActivity extends NavigationBaseActivity implements MediaDetai
     ViewPagerAdapter viewPagerAdapter;
     private String query;
 
-    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -66,10 +63,10 @@ public class SearchActivity extends NavigationBaseActivity implements MediaDetai
         ButterKnife.bind(this);
         initDrawer();
         if (currentThemeIsDark) {
-            searchView.setBackground(getResources().getDrawable(R.color.vpi__bright_foreground_disabled_holo_dark));
-            tabLayout.setBackground(getResources().getDrawable(R.color.vpi__bright_foreground_disabled_holo_dark));
-            toolbar.setBackground(getResources().getDrawable(R.color.vpi__bright_foreground_disabled_holo_dark));
-            viewPager.setBackground(getResources().getDrawable(R.color.vpi__bright_foreground_disabled_holo_dark));
+            searchView.setBackgroundResource(R.color.vpi__bright_foreground_disabled_holo_dark);
+            tabLayout.setBackgroundResource(R.color.vpi__bright_foreground_disabled_holo_dark);
+            toolbar.setBackgroundResource(R.color.vpi__bright_foreground_disabled_holo_dark);
+            viewPager.setBackgroundResource(R.color.vpi__bright_foreground_disabled_holo_dark);
         }
         setTitle(getString(R.string.title_activity_search));
         toolbar.setNavigationOnClickListener(v->onBackPressed());
