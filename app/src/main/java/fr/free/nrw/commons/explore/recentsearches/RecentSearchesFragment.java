@@ -54,7 +54,7 @@ public class RecentSearchesFragment extends CommonsDaggerSupportFragment {
                 .create()
                 .show();
         });
-        adapter = new ArrayAdapter<String>(getContext(), R.layout.item_recent_searches, recentSearches);
+        adapter = new ArrayAdapter<String>(getContext(),R.layout.item_recent_searches, recentSearches);
         recentSearchesList.setAdapter(adapter);
         recentSearchesList.setOnItemClickListener((parent, view, position, id) -> (
                 (SearchActivity)getContext()).updateText(recentSearches.get(position)));
@@ -78,7 +78,7 @@ public class RecentSearchesFragment extends CommonsDaggerSupportFragment {
      */
     public void updateRecentSearches() {
         recentSearches = recentSearchesDao.recentSearches(10);
-        adapter = new ArrayAdapter<String>(getContext(), R.layout.item_recent_searches, recentSearches);
+        adapter = new ArrayAdapter<String>(getContext(),R.layout.item_recent_searches, recentSearches);
         recentSearchesList.setAdapter(adapter);
         adapter.notifyDataSetChanged();
     }
