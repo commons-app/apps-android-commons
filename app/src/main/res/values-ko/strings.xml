@@ -348,6 +348,14 @@
   <string name="notifications_channel_name_all">공용 알림</string>
   <string name="storage_permission">기억 장치 권한</string>
   <string name="write_storage_permission_rationale_for_image_share">이미지를 업로드하려면 외부 기억 장치에 접근할 권한이 필요합니다.</string>
-  <string name="log_collection_started">로그 수집이 시작되었습니다. 이 앱을 다시 시작하고 기록을 원하는 동작을 수행한 다음 \'로그 보내기\'를 다시 탭해 주십시오</string>
+  <string name="navigation_item_bookmarks">북마크</string>
+  <string name="title_activity_bookmarks">북마크</string>
+  <string name="title_page_bookmarks_pictures">사진</string>
+  <string name="title_page_bookmarks_locations">위치</string>
+  <string name="menu_bookmark">북마크에 추가/제거</string>
+  <string name="provider_bookmarks">북마크</string>
+  <string name="bookmark_empty">북마크를 추가하지 않았습니다</string>
+  <string name="provider_bookmarks_location">북마크</string>
+  <string name="log_collection_started">로그 수집이 시작되었습니다. 이 앱을 다시 시작하고 기록을 원하는 동작을 수행한 다음 \'로그 파일 보내기\'를 다시 탭해 주십시오</string>
   <string name="no_uploads">공용에 오신 것을 환영합니다!\n\n상단의 카메라나 갤러리 아이콘을 터치하여 당신의 첫 미디어를 올리십시오.</string>
 </resources>
