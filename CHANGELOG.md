@@ -1,5 +1,8 @@
 # Wikimedia Commons for Android
 
+## v2.8.6
+- Cherrypicked Send Logs from master to allow easier debugging of issues for v2.9
+
 ## v2.8.5
 - Fixed issues with sporadic upload failures due to wrong mimeType
 
