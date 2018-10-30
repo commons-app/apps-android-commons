@@ -57,7 +57,7 @@ public class NotificationRenderer extends Renderer<Notification> {
      * @param notificationText
      */
     private void setTitle(String notificationText) {
-        notificationText = notificationText.trim().replaceAll("(^\\h*)|(\\h*$)", "");
+        notificationText = notificationText.trim().replaceAll("(^\\s*)|(\\s*$)", "");
         notificationText = Html.fromHtml(notificationText).toString();
         notificationText = notificationText.concat(" ");
         title.setText(notificationText);
