@@ -136,11 +136,8 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
 
     //Had to make this class variable, to implement various onClicks, which access the media, also I fell why make separate variables when one can serve the purpose
     private Media media;
-    private String reasonList[] = {"I uploaded it by mistake",
-            "I did not know it would be publicly visible",
-            "I realized it is bad for my privacy",
-            "Sorry this picture is not interesting for an encyclopedia",
-            "I changed my mind, I don't want it to be publicly visible anymore"};
+    private ArrayList<String> reasonList;
+
 
     @Override
     public void onSaveInstanceState(Bundle outState) {
@@ -172,6 +169,13 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
             index = getArguments().getInt("index");
             initialListTop = 0;
         }
+
+        reasonList = new ArrayList<>();
+        reasonList.add(getString(R.string.deletion_reason_1));
+        reasonList.add(getString(R.string.deletion_reason_2));
+        reasonList.add(getString(R.string.deletion_reason_3));
+        reasonList.add(getString(R.string.deletion_reason_4));
+        reasonList.add(getString(R.string.deletion_reason_5));
 
         categoryNames = new ArrayList<>();
         categoryNames.add(getString(R.string.detail_panel_cats_loading));

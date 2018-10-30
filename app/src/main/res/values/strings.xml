@@ -366,6 +366,12 @@
   <string name="bookmark_empty">You haven\'t added any bookmarks</string>
   <string name="provider_bookmarks_location">Bookmarks</string>
   <string name="log_collection_started">Log collection started. Please RESTART the app, perform action that you wish to log, and then tap \'Send log file\' again</string>
-  <string name="no_uploads">Welcome to Commons!\n
-Upload your first media by touching the camera or gallery icon above.</string>
+  <string name="no_uploads">Welcome to Commons!\n Upload your first media by touching the camera or gallery icon above.</string>
+
+  <string name="deletion_reason_1">I uploaded it by mistake</string>
+  <string name="deletion_reason_2">I did not know it would be publicly visible</string>
+  <string name="deletion_reason_3">I realized it is bad for my privacy</string>
+  <string name="deletion_reason_4">I changed my mind, I don\'t want it to be publicly visible anymore</string>
+  <string name="deletion_reason_5">Sorry this picture is not interesting for an encyclopedia</string>
+
 </resources>
