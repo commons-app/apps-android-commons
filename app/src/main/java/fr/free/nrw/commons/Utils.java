@@ -148,6 +148,10 @@ public class Utils {
         return PreferenceManager.getDefaultSharedPreferences(context).getBoolean("theme", false);
     }
 
+    /**
+     * Launches intent to rate app
+     * @param context
+     */
     public static void rateApp(Context context) {
         final String appPackageName = BuildConfig.class.getPackage().getName();
         try {
@@ -158,6 +162,11 @@ public class Utils {
         }
     }
 
+    /**
+     * Launches intent for web URL
+     * @param context
+     * @param url
+     */
     public static void handleWebUrl(Context context, Uri url) {
         Timber.d("Launching web url %s", url.toString());
         Intent browserIntent = new Intent(Intent.ACTION_VIEW, url);
