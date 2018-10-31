@@ -24,6 +24,11 @@ public class NotificationUtils {
     private static final String WIKIDATA_WIKI = "wikidatawiki";
     private static final String WIKIPEDIA_WIKI = "enwiki";
 
+    /**
+     * Returns true if the wiki attribute corresponds to commonswiki
+     * @param document
+     * @return
+     */
     public static boolean isCommonsNotification(Node document) {
         if (document == null || !document.hasAttributes()) {
             return false;
@@ -58,6 +63,11 @@ public class NotificationUtils {
         return WIKIPEDIA_WIKI.equals(element.getAttribute("wiki"));
     }
 
+    /**
+     * Returns document notification type
+     * @param document
+     * @return NotificationType
+     */
     public static NotificationType getNotificationType(Node document) {
         Element element = (Element) document;
         String type = element.getAttribute("type");

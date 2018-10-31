@@ -42,15 +42,27 @@ class DescriptionsAdapter extends RecyclerView.Adapter<DescriptionsAdapter.ViewH
         languages = new ArrayList<>();
     }
 
+    /**
+     * Sets callback
+     * @param callback
+     */
     public void setCallback(Callback callback) {
         this.callback = callback;
     }
 
+    /**
+     * Sets description list and notifies of dataset change
+     * @param descriptions
+     */
     public void setDescriptions(List<Description> descriptions) {
         this.descriptions = descriptions;
         notifyDataSetChanged();
     }
 
+    /**
+     * Sets languages list
+     * @param languages
+     */
     public void setLanguages(List<Language> languages) {
         this.languages = languages;
     }
@@ -74,6 +86,10 @@ class DescriptionsAdapter extends RecyclerView.Adapter<DescriptionsAdapter.ViewH
         return descriptions.size();
     }
 
+    /**
+     * Gets descriptions
+     * @return List of descriptions
+     */
     public List<Description> getDescriptions() {
         return descriptions;
     }
@@ -206,6 +222,10 @@ class DescriptionsAdapter extends RecyclerView.Adapter<DescriptionsAdapter.ViewH
         }
     }
 
+    /**
+     * Gets index of language local
+     * @return int
+     */
     private int getIndexOfUserDefaultLocale() {
         for (int i = 0; i < languages.size(); i++) {
             if (languages.get(i).getLocale()
@@ -216,6 +236,11 @@ class DescriptionsAdapter extends RecyclerView.Adapter<DescriptionsAdapter.ViewH
         return 0;
     }
 
+    /**
+     * Sets language from position at description
+     * @param description
+     * @param position
+     */
     private void updateDescriptionBasedOnSelectedLanguageIndex(Description description,
             int position) {
         Language language = languages.get(position);
