@@ -359,7 +359,7 @@
   <string name="nearby_fragment">Nearby</string>
   <string name="notifications">Notifications</string>
   <string name="display_nearby_notification">Display nearby notification</string>
-  <string name="display_nearby_notification_summary">Display closest wikidata item needs an image, above contribution list</string>
+  <string name="display_nearby_notification_summary">Tap here to see the nearest place that needs pictures</string>
   <string name="no_close_nearby">No nearby places found close to you</string>
   <string name="list_sheet">List</string>
 
