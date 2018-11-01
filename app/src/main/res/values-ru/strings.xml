@@ -362,6 +362,14 @@
   <string name="notifications_channel_name_all">Уведомления Викисклада</string>
   <string name="storage_permission">Разрешение для хранилища</string>
   <string name="write_storage_permission_rationale_for_image_share">Нам требуется разрешение доступа к внешнему хранилищу вашего устройства для того, чтобы загружать изображения.</string>
-  <string name="log_collection_started">Начался процесс собирания журналов. ПЕРЕЗАПУСТИТЕ приложение, выполните действие, которое вы хотите захватить, затем снова нажмите «Отправить журналы»</string>
+  <string name="navigation_item_bookmarks">Закладки</string>
+  <string name="title_activity_bookmarks">Закладки</string>
+  <string name="title_page_bookmarks_pictures">Изображения</string>
+  <string name="title_page_bookmarks_locations">Места</string>
+  <string name="menu_bookmark">Добавить/удалить закладки</string>
+  <string name="provider_bookmarks">Закладки</string>
+  <string name="bookmark_empty">Вы не добавили ни одной закладки</string>
+  <string name="provider_bookmarks_location">Закладки</string>
+  <string name="log_collection_started">Начался процесс сбора журналов. ПЕРЕЗАПУСТИТЕ приложение, выполните действие, которое вы хотите запротоколировать, затем снова нажмите «Выслать лог-файл»</string>
   <string name="no_uploads">Добро пожаловать на Викисклад!\n\nЗагрузите ваш первый файл, нажав на значок камеры или галереи.</string>
 </resources>

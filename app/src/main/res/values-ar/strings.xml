@@ -246,7 +246,7 @@
   <string name="use_external_storage">استخدم تخزينا خارجيا</string>
   <string name="use_external_storage_summary">احفظ الصور الملتقطة بالكاميرا داخل التطبيق على جهازك</string>
   <string name="login_to_your_account">تسجيل الدخول إلى حسابك</string>
-  <string name="send_log_file">أرسل ملف السجل</string>
+  <string name="send_log_file">إرسال ملف السجل</string>
   <string name="send_log_file_description">إرسال ملف السجل للمطورين عبر البريد الإلكتروني للمساعدة في تصحيح مشكلات التطبيق. ملاحظة: من المحتمل أن تحتوي السجلات على معلومات تعريف</string>
   <string name="no_web_browser">لم يتم العثور على متصفح ويب لفتح المسار</string>
   <string name="null_url">خطأ! المسار غير موجود</string>
@@ -354,6 +354,14 @@
   <string name="notifications_channel_name_all">إشعار كومنز</string>
   <string name="storage_permission">سماح التخزين</string>
   <string name="write_storage_permission_rationale_for_image_share">نحتاج إلى سماحك للوصول إلى التخزين الخارجي لجهازك من أجل رفع الصور.</string>
-  <string name="log_collection_started">بدأت مجموعة السجل، تُرجَى إعادة تشغيل التطبيق، وتنفيذ الإجراء الذي ترغب في تسجيله، ثم النقر فوق \"إرسال السجلات\" مرة أخرى</string>
+  <string name="navigation_item_bookmarks">العلامات</string>
+  <string name="title_activity_bookmarks">العلامات</string>
+  <string name="title_page_bookmarks_pictures">الصور</string>
+  <string name="title_page_bookmarks_locations">المواقع</string>
+  <string name="menu_bookmark">إضافة إلى/إزالة من العلامات</string>
+  <string name="provider_bookmarks">العلامات</string>
+  <string name="bookmark_empty">أنت لم تضف أي علامات</string>
+  <string name="provider_bookmarks_location">العلامات</string>
+  <string name="log_collection_started">بدأ جمع السجل. من فضلك أعد تشغيل التطبيق، ونفذ الإجراء الذي ترغب في تسجيله، ثم اضغط على \'إرسال ملف السجل\' مرة أخرى</string>
   <string name="no_uploads">مرحبا بك في كومنز! \n\nارفع الوسائط الأولى عن طريق لمس أيقونة الكاميرا أو المعرض أعلاه.</string>
 </resources>

@@ -350,6 +350,14 @@
   <string name="notifications_channel_name_all">Commons-aviseringar</string>
   <string name="storage_permission">Lagringsbehörighet</string>
   <string name="write_storage_permission_rationale_for_image_share">Vi behöver ditt tillstånd för att komma åt externa lagringen för din enhet för att ladda upp bilder.</string>
-  <string name="log_collection_started">Logginsamling startades. STARTA OM appen, gör det du vill logga och tryck sedan på \"Skicka loggar\" igen.</string>
+  <string name="navigation_item_bookmarks">Bokmärken</string>
+  <string name="title_activity_bookmarks">Bokmärken</string>
+  <string name="title_page_bookmarks_pictures">Bilder</string>
+  <string name="title_page_bookmarks_locations">Platser</string>
+  <string name="menu_bookmark">Lägg till/ta bort bokmärke</string>
+  <string name="provider_bookmarks">Bokmärken</string>
+  <string name="bookmark_empty">Du har inte lagt till några bokmärken</string>
+  <string name="provider_bookmarks_location">Bokmärken</string>
+  <string name="log_collection_started">Logginsamling startades. STARTA OM appen, gör det du vill logga och tryck sedan på \"Skicka loggfil\" igen</string>
   <string name="no_uploads">Välkommen till Commons!\n\nLadda upp din första mediafil genom att trycka på kameran eller galleriikonen ovan.</string>
 </resources>

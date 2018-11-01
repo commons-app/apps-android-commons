@@ -239,7 +239,7 @@
   <string name="use_external_storage_summary">アプリ内のカメラで撮影した写真を端末に保存する</string>
   <string name="login_to_your_account">自分のアカウントにログイン</string>
   <string name="send_log_file">ログファイルを送信する</string>
-  <string name="send_log_file_description" fuzzy="true">メールで開発者にログファイルを送信する</string>
+  <string name="send_log_file_description">メールで開発者にログファイルを送信、アプリのバグ解消をサポートする。注記：ログには利用者特定情報が含まれることがあります</string>
   <string name="no_web_browser">URLを開くブラウザーが見つかりません</string>
   <string name="null_url">エラーが発生しました。URL が見つかりません</string>
   <string name="nominate_deletion">削除の提案</string>

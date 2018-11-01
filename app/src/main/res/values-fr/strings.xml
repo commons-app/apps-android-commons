@@ -361,8 +361,14 @@
   <string name="notifications_channel_name_all">Notification de Commons</string>
   <string name="storage_permission">Droit de stockage</string>
   <string name="write_storage_permission_rationale_for_image_share">Nous avons besoin de votre autorisation pour accéder au stockage externe de votre appareil, afin de téléverser des images.</string>
-  <string name="navigation_item_bookmarks">Favoris</string>
-  <string name="title_activity_bookmarks">Favoris</string>
-  <string name="log_collection_started">Enregistrement dans le journal, commencé. Veuillez REDEMARRER l\'application, exécutez l\'action que vous souhaitez tracer, et cliquez de nouveau sur \'Envoyer les journaux\'</string>
+  <string name="navigation_item_bookmarks">Signets</string>
+  <string name="title_activity_bookmarks">Signets</string>
+  <string name="title_page_bookmarks_pictures">Images</string>
+  <string name="title_page_bookmarks_locations">Emplacements</string>
+  <string name="menu_bookmark">Ajouter/Supprimer des signets</string>
+  <string name="provider_bookmarks">Signets</string>
+  <string name="bookmark_empty">Vous n\'avez ajouté aucun signet</string>
+  <string name="provider_bookmarks_location">Signets</string>
+  <string name="log_collection_started">Enregistrement dans le journal, commencé. Veuillez REDEMARRER l\'application, exécutez l\'action que vous souhaitez tracer, et cliquez de nouveau sur \'Envoyer les fichiers journaux\'</string>
   <string name="no_uploads">Bienvenue sur Commons !\n\nTéléversez votre premier média en cliquant sur l’icône de l’appareil photo ou sur la galerie ci-dessus.</string>
 </resources>

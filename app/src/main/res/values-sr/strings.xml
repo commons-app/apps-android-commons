@@ -245,7 +245,7 @@
   <string name="use_external_storage_summary">Спремање слика направљених камером апликације на Вашем уређају</string>
   <string name="login_to_your_account">Пријавите се на свој налог</string>
   <string name="send_log_file">Пошаљи дневничку датотеку</string>
-  <string name="send_log_file_description" fuzzy="true">Пошаљи дневничку датотеку девелоперима преко имејла</string>
+  <string name="send_log_file_description">Пошаљите датотеку са евиденцијом програмерима путем имејла како бисте помогли у решавању проблема са апликацијом. Напомена: евиденције могу потенцијално садржавати идентификационе информације</string>
   <string name="no_web_browser">Није пронађен веб-претраживач за отварање URL-а</string>
   <string name="null_url">Грешка! URL није пронађен</string>
   <string name="nominate_deletion">Номиновање за брисање</string>
@@ -346,5 +346,13 @@
   <string name="notifications_channel_name_all">Обавештења Оставе</string>
   <string name="storage_permission">Дозвола за складиштење</string>
   <string name="write_storage_permission_rationale_for_image_share">Потребна нам је ваша дозвола да бисмо приступили спољашњем складишту вашег уређаја како бисмо отпремали слике.</string>
+  <string name="navigation_item_bookmarks">Обележивачи</string>
+  <string name="title_activity_bookmarks">Обележивачи</string>
+  <string name="title_page_bookmarks_pictures">Слике</string>
+  <string name="title_page_bookmarks_locations">Локације</string>
+  <string name="menu_bookmark">Додај/уклони обележивач</string>
+  <string name="provider_bookmarks">Обележивачи</string>
+  <string name="bookmark_empty">Нисте додали ниједан обележивач</string>
+  <string name="provider_bookmarks_location">Обележивачи</string>
   <string name="no_uploads">Добро дошли на Оставу!\n\nОтпремите прве медије додиром горенаведене иконице камере или галерије.</string>
 </resources>
