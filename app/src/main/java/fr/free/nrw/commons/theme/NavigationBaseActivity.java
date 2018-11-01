@@ -34,6 +34,7 @@ import fr.free.nrw.commons.achievements.AchievementsActivity;
 import fr.free.nrw.commons.auth.LoginActivity;
 import fr.free.nrw.commons.contributions.MainActivity;
 import fr.free.nrw.commons.category.CategoryImagesActivity;
+import fr.free.nrw.commons.bookmarks.BookmarksActivity;
 import fr.free.nrw.commons.notification.NotificationActivity;
 import fr.free.nrw.commons.settings.SettingsActivity;
 import timber.log.Timber;
@@ -76,6 +77,7 @@ public abstract class NavigationBaseActivity extends BaseActivity
             nav_Menu.findItem(R.id.action_notifications).setVisible(false);
             nav_Menu.findItem(R.id.action_settings).setVisible(false);
             nav_Menu.findItem(R.id.action_logout).setVisible(false);
+            nav_Menu.findItem(R.id.action_bookmarks).setVisible(true);
         }else {
             userIcon.setVisibility(View.VISIBLE);
             nav_Menu.findItem(R.id.action_login).setVisible(false);
@@ -83,6 +85,7 @@ public abstract class NavigationBaseActivity extends BaseActivity
             nav_Menu.findItem(R.id.action_notifications).setVisible(true);
             nav_Menu.findItem(R.id.action_settings).setVisible(true);
             nav_Menu.findItem(R.id.action_logout).setVisible(true);
+            nav_Menu.findItem(R.id.action_bookmarks).setVisible(true);
         }
     }
 
@@ -204,6 +207,10 @@ public abstract class NavigationBaseActivity extends BaseActivity
             case R.id.action_explore:
                 drawerLayout.closeDrawer(navigationView);
                 CategoryImagesActivity.startYourself(this, getString(R.string.title_activity_explore), FEATURED_IMAGES_CATEGORY);
+                return true;
+            case R.id.action_bookmarks:
+                drawerLayout.closeDrawer(navigationView);
+                BookmarksActivity.startYourself(this);
                 return true;
             default:
                 Timber.e("Unknown option [%s] selected from the navigation menu", itemId);

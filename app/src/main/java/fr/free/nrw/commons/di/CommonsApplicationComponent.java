@@ -13,8 +13,8 @@ import fr.free.nrw.commons.contributions.ContributionsSyncAdapter;
 import fr.free.nrw.commons.delete.DeleteTask;
 import fr.free.nrw.commons.modifications.ModificationsSyncAdapter;
 import fr.free.nrw.commons.nearby.PlaceRenderer;
-import fr.free.nrw.commons.upload.FileProcessor;
 import fr.free.nrw.commons.settings.SettingsFragment;
+import fr.free.nrw.commons.upload.FileProcessor;
 import fr.free.nrw.commons.widget.PicOfDayAppWidget;
 
 

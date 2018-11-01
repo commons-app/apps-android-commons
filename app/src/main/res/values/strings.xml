@@ -77,8 +77,8 @@
     <item quantity="other">Starting %1$d uploads</item>
   </plurals>
   <plurals name="multiple_uploads_title">
-     <item quantity="one">%1$d upload</item>
-     <item quantity="other">%1$d uploads</item>
+    <item quantity="one">%1$d upload</item>
+    <item quantity="other">%1$d uploads</item>
   </plurals>
   <string name="categories_not_found">No categories matching %1$s found</string>
   <string name="categories_skip_explanation">Add categories to make your images more discoverable on Wikimedia Commons.\nStart typing to add categories.</string>
@@ -192,7 +192,7 @@
   <string name="maximum_limit_alert">Unable to display more than 500</string>
   <string name="set_limit">Set Recent Upload Limit</string>
   <string name="login_failed_2fa_not_supported">Two factor authentication is currently not supported.</string>
-    <string name="logout_verification">Do you really want to logout?</string>
+  <string name="logout_verification">Do you really want to logout?</string>
   <string name="commons_logo">Commons Logo</string>
   <string name="commons_website">Commons Website</string>
   <string name="commons_facebook">Commons Facebook Page</string>
@@ -240,7 +240,7 @@
   <string name="use_external_storage_summary">Save pictures taken with the in-app camera on your device</string>
   <string name="login_to_your_account">Log in to your account</string>
   <string name="send_log_file">Send log file</string>
-  <string name="send_log_file_description">Send log file to developers via email</string>
+  <string name="send_log_file_description">Send log file to developers via email to help debug problems with the app. Note: logs may potentially contain identifying information</string>
   <string name="no_web_browser">No web browser found to open URL</string>
   <string name="null_url">Error! URL not found</string>
   <string name="nominate_deletion">Nominate for Deletion</string>
@@ -366,4 +366,15 @@
   <string name="storage_permission">Storage Permission</string>
   <string name="write_storage_permission_rationale_for_image_share">We need your permission to access the external storage of your device in order to upload images.</string>
   <string name="nearby_notification_dismiss_message">You won\'t see the nearest place that needs pictures anymore. However, you can re-enable this notification in Settings if you wish.</string>
+  <string name="navigation_item_bookmarks">Bookmarks</string>
+  <string name="title_activity_bookmarks">Bookmarks</string>
+  <string name="title_page_bookmarks_pictures">Pictures</string>
+  <string name="title_page_bookmarks_locations">Locations</string>
+  <string name="menu_bookmark">Add/Remove to bookmarks</string>
+  <string name="provider_bookmarks">Bookmarks</string>
+  <string name="bookmark_empty">You haven\'t added any bookmarks</string>
+  <string name="provider_bookmarks_location">Bookmarks</string>
+  <string name="log_collection_started">Log collection started. Please RESTART the app, perform action that you wish to log, and then tap \'Send log file\' again</string>
+  <string name="no_uploads">Welcome to Commons!\n
+Upload your first media by touching the camera or gallery icon above.</string>
 </resources>

@@ -244,7 +244,7 @@
   <string name="use_external_storage_summary">Gardar as imaxes capturadas coa cámara do seu dispositivo</string>
   <string name="login_to_your_account">Comezar sesión na súa conta</string>
   <string name="send_log_file">Enviar ficheiro de rexistro</string>
-  <string name="send_log_file_description">Enviar ficheiro de rexistro ós desenvolvedores por correo electrónico</string>
+  <string name="send_log_file_description">Enviar o rexistro ós desenvolvedores por correo electrónico para axudar na corrección de problemas coa aplicación. Nota: os rexistros poden conter información potencialmente identificativa</string>
   <string name="no_web_browser">Non se atopou ningún navegador co que abrir a URL</string>
   <string name="null_url">Errorǃ Nos se atopou a URL</string>
   <string name="nominate_deletion">Nomear para borrado</string>
@@ -351,4 +351,5 @@
   <string name="notifications_channel_name_all">Notificación de Commons</string>
   <string name="storage_permission">Permiso de almacenamento</string>
   <string name="write_storage_permission_rationale_for_image_share">Precisamos o seu permiso para acceder ó almacenamento externo do seu dispositivo para cargar imaxes.</string>
+  <string name="log_collection_started" fuzzy="true">Comezou a gravación de rexistros. Por favor reinicie a aplicación, realice a acción que desexa rexistrar, e pulse \"Enviar rexistros\" de novo</string>
 </resources>

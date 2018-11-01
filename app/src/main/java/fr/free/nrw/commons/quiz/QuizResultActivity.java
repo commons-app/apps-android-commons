@@ -5,9 +5,9 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
+import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 
 import com.dinuscxj.progressbar.CircleProgressBar;
 
@@ -27,6 +27,7 @@ import android.widget.TextView;
 
 import java.io.File;
 import java.io.FileOutputStream;
+
 
 /**
  *  Displays the final score of quiz and congratulates the user

@@ -10,16 +10,24 @@ dependencies {
     implementation 'fr.avianey.com.viewpagerindicator:library:2.4.1.1@aar'
     implementation 'in.yuvi:http.fluent:1.3'
     implementation 'com.github.chrisbanes:PhotoView:2.0.0'
+
     implementation 'ch.acra:acra:4.9.2'
+
     implementation 'org.mediawiki:api:1.3'
     implementation 'commons-codec:commons-codec:1.10'
     implementation 'com.github.pedrovgs:renderers:3.3.3'
     implementation 'com.google.code.gson:gson:2.8.5'
-    implementation 'com.jakewharton.timber:timber:4.6.0'
+    implementation 'com.jakewharton.timber:timber:4.4.0'
     implementation 'info.debatty:java-string-similarity:0.24'
     implementation 'com.borjabravo:readmoretextview:2.1.0'
 
     implementation 'com.android.support.constraint:constraint-layout:1.1.3'
+
+    implementation 'org.slf4j:slf4j-api:1.7.25'
+    api ("com.github.tony19:logback-android-classic:1.1.1-6") {
+        exclude group: 'com.google.android', module: 'android'
+    }
+
     implementation('com.mapbox.mapboxsdk:mapbox-android-sdk:5.5.0@aar') {
         transitive = true
     }
@@ -64,7 +72,6 @@ dependencies {
     androidTestImplementation 'com.android.support.test:rules:1.0.2'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
-
     debugImplementation "com.squareup.leakcanary:leakcanary-android:$LEAK_CANARY"
     releaseImplementation "com.squareup.leakcanary:leakcanary-android-no-op:$LEAK_CANARY"
     testImplementation "com.squareup.leakcanary:leakcanary-android-no-op:$LEAK_CANARY"
@@ -72,6 +79,7 @@ dependencies {
     //For handling runtime permissions
     implementation 'com.karumi:dexter:5.0.0'
 
+    implementation files('libs/simplemagic-1.9.jar')
 }
 
 android {
@@ -80,8 +88,8 @@ android {
 
     defaultConfig {
         applicationId 'fr.free.nrw.commons'
-        versionCode 90
-        versionName '2.8.3'
+        versionCode 92
+        versionName '2.8.5'
         setProperty("archivesBaseName", "app-commons-v$versionName-" + getBranchName())
 
         minSdkVersion 15
@@ -145,6 +153,8 @@ android {
             buildConfigField "String", "MODIFICATION_AUTHORITY", "\"fr.free.nrw.commons.modifications.contentprovider\""
             buildConfigField "String", "CATEGORY_AUTHORITY", "\"fr.free.nrw.commons.categories.contentprovider\""
             buildConfigField "String", "RECENT_SEARCH_AUTHORITY", "\"fr.free.nrw.commons.explore.recentsearches.contentprovider\""
+            buildConfigField "String", "BOOKMARK_AUTHORITY", "\"fr.free.nrw.commons.beta.bookmarks.contentprovider\""
+            buildConfigField "String", "BOOKMARK_LOCATIONS_AUTHORITY", "\"fr.free.nrw.commons.beta.bookmarks.locations.contentprovider\""
 
             dimension 'tier'
         }
@@ -172,6 +182,8 @@ android {
             buildConfigField "String", "MODIFICATION_AUTHORITY", "\"fr.free.nrw.commons.beta.modifications.contentprovider\""
             buildConfigField "String", "CATEGORY_AUTHORITY", "\"fr.free.nrw.commons.beta.categories.contentprovider\""
             buildConfigField "String", "RECENT_SEARCH_AUTHORITY", "\"fr.free.nrw.commons.beta.explore.recentsearches.contentprovider\""
+            buildConfigField "String", "BOOKMARK_AUTHORITY", "\"fr.free.nrw.commons.beta.bookmarks.contentprovider\""
+            buildConfigField "String", "BOOKMARK_LOCATIONS_AUTHORITY", "\"fr.free.nrw.commons.beta.bookmarks.locations.contentprovider\""
 
             dimension 'tier'
         }

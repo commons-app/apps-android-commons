@@ -3,16 +3,12 @@ package fr.free.nrw.commons.utils;
 import android.content.Context;
 import android.net.Uri;
 
-import java.io.BufferedInputStream;
-import java.io.BufferedOutputStream;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.net.URI;
 
 /**
  * Created for file operations
@@ -49,8 +45,12 @@ public class FileUtils {
             e.printStackTrace();
         } finally {
             try {
-                out.close();
-                in.close();
+                if(out != null) {
+                    out.close();
+                }
+                if(in != null) {
+                    in.close();
+                }
             } catch (IOException e) {
                 e.printStackTrace();
             }

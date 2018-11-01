@@ -126,7 +126,7 @@
   <string name="give_permission">권한 주기</string>
   <string name="use_external_storage">외부기억기 사용하기</string>
   <string name="send_log_file">일지서류 발신하기</string>
-  <string name="send_log_file_description">전자우편으로 개발자에게 일지서류 발신하기</string>
+  <string name="send_log_file_description" fuzzy="true">전자우편으로 개발자에게 일지서류 발신하기</string>
   <string name="notifications_welcome">%1$s님, 위키매체공용에 오신것을 환영합니다! 반갑습니다.</string>
   <string name="notifications_talk_page_message">%1$s님이 당신의 사용자 토론 문서에 글을 남겼습니다</string>
   <string name="notifications_thank_you_edit">편집해 주셔서 감사합니다</string>
