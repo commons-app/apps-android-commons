@@ -245,7 +245,7 @@
   <string name="use_external_storage_summary">Спремање слика направљених камером апликације на Вашем уређају</string>
   <string name="login_to_your_account">Пријавите се на свој налог</string>
   <string name="send_log_file">Пошаљи дневничку датотеку</string>
-  <string name="send_log_file_description">Пошаљите датотеку евиденције програмерима путем е-поште како бисте помогли у решавању проблема са апликацијом.\nНапомена: дневници могу потенцијално садржати идентификационе информације</string>
+  <string name="send_log_file_description">Пошаљите датотеку са евиденцијом програмерима путем имејла како бисте помогли у решавању проблема са апликацијом. Напомена: евиденције могу потенцијално садржавати идентификационе информације</string>
   <string name="no_web_browser">Није пронађен веб-претраживач за отварање URL-а</string>
   <string name="null_url">Грешка! URL није пронађен</string>
   <string name="nominate_deletion">Номиновање за брисање</string>
