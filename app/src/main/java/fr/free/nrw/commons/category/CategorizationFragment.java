@@ -195,19 +195,25 @@ public class CategorizationFragment extends CommonsDaggerSupportFragment {
         onCategoriesSaveHandler = (OnCategoriesSaveHandler) getActivity();
         getActivity().setTitle(R.string.categories_activity_title);
     }
-    void removeduplicates(RVRendererAdapter<CategoryItem> categoriesAdapter){
-        List<CategoryItem> al = new ArrayList<>();
-        // add elements to al, including duplicates
-        for (int i = 0; i<categoriesAdapter.getItemCount();i++){
-            al.add(categoriesAdapter.getItem(i));
+    
+    /**
+     * Removes duplicates from a RVRendererAdapter<CategoryItem> in place, while maintaining order
+     * @param Category adapter to remove duplicates from
+     */
+    private void removeDuplicates(RVRendererAdapter<CategoryItem> catAdapter) {
+        List<CategoryItem> catList = new ArrayList<>();
+        // add elements to catList, including duplicates
+        for (int i = 0; i < catAdapter.getItemCount(); i++) {
+            al.add(catAdapter.getItem(i));
         }
-        //Linked Hash Set contains only single valued items and the order is maintained
-        LinkedHashSet<CategoryItem> hs = new LinkedHashSet<>();
-        hs.addAll(al);
-        al.clear();
-        al.addAll(hs);
-        categoriesAdapter.clear();
-        categoriesAdapter.addAll(al);
+        
+        // Linked Hash Set contains only single valued items and the order is maintained
+        LinkedHashSet<CategoryItem> catSet = new LinkedHashSet<>();
+        catSet.addAll(catList);
+        catList.clear();
+        catList.addAll(catSet);
+        catAdapter.clear();
+        catAdapter.addAll(catList);
     }
 
     private void updateCategoryList(String filter) {
@@ -235,7 +241,7 @@ public class CategorizationFragment extends CommonsDaggerSupportFragment {
                         s -> categoriesAdapter.add(s),
                         Timber::e,
                         () -> {
-                            removeduplicates(categoriesAdapter);
+                            removeDuplicates(categoriesAdapter);
                             categoriesAdapter.notifyDataSetChanged();
                             categoriesSearchInProgress.setVisibility(View.GONE);
 
