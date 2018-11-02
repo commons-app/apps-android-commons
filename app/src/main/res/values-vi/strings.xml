@@ -229,7 +229,7 @@
   <string name="use_external_storage_summary">Lưu các hình ảnh được chụp bằng máy chụp hình trong ứng dụng vào thiết bị của bạn</string>
   <string name="login_to_your_account">Đăng nhập vào tài khoản của bạn</string>
   <string name="send_log_file">Gửi tập tin nhật trình</string>
-  <string name="send_log_file_description">Gửi tập tin nhật trình cho nhà phát triển qua thư điện tử</string>
+  <string name="send_log_file_description" fuzzy="true">Gửi tập tin nhật trình cho nhà phát triển qua thư điện tử</string>
   <string name="no_web_browser">Không tìm thấy trình duyệt để mở URL</string>
   <string name="null_url">Lỗi! Không tìm thấy URL</string>
   <string name="nominate_deletion">Bầu chọn để xóa</string>

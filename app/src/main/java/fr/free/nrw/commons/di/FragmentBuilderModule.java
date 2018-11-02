@@ -2,6 +2,8 @@ package fr.free.nrw.commons.di;
 
 import dagger.Module;
 import dagger.android.ContributesAndroidInjector;
+import fr.free.nrw.commons.bookmarks.locations.BookmarkLocationsFragment;
+import fr.free.nrw.commons.bookmarks.pictures.BookmarkPicturesFragment;
 import fr.free.nrw.commons.category.CategorizationFragment;
 import fr.free.nrw.commons.category.CategoryImagesListFragment;
 import fr.free.nrw.commons.category.SubCategoryListFragment;
@@ -66,5 +68,11 @@ public abstract class FragmentBuilderModule {
 
     @ContributesAndroidInjector
     abstract RecentSearchesFragment bindRecentSearchesFragment();
+
+    @ContributesAndroidInjector
+    abstract BookmarkPicturesFragment bindBookmarkPictureListFragment();
+
+    @ContributesAndroidInjector
+    abstract BookmarkLocationsFragment bindBookmarkLocationListFragment();
 
 }

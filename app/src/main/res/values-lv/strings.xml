@@ -113,4 +113,8 @@
   <string name="showcase_view_got_it_button">Sapratu!</string>
   <string name="question">Jautājums</string>
   <string name="add_description">+ Pievienot aprakstu</string>
+  <string name="navigation_item_bookmarks">Grāmatzīmes</string>
+  <string name="title_activity_bookmarks">Grāmatzīmes</string>
+  <string name="provider_bookmarks">Grāmatzīmes</string>
+  <string name="provider_bookmarks_location">Grāmatzīmes</string>
 </resources>

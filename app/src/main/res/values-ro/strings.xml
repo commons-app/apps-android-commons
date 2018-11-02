@@ -1,22 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Authors:
 * C1pr1an
+* Kyouko
 * Minisarm
 * Strainu
 -->
 <resources>
+  <string name="preference_category_appearance">Aspect</string>
+  <string name="preference_category_general">General</string>
+  <string name="preference_category_location">Locație</string>
   <string name="app_name">Commons</string>
+  <string name="bullet">•</string>
   <string name="menu_settings">Setări</string>
   <string name="username">Nume de utilizator</string>
   <string name="password">Parolă</string>
   <string name="login">Autentificare</string>
+  <string name="forgot_password">V-aţi  uitat parola?</string>
   <string name="signup">Înregistrare</string>
   <string name="logging_in_title">Se conectează</string>
   <string name="logging_in_message">Vă rugăm să așteptați ...</string>
   <string name="login_success">Autentificare reușită!</string>
   <string name="login_failed">Autentificare nereușită!</string>
   <string name="upload_failed">Fișierul nu a fost găsit. Încercați cu un alt fișier.</string>
-  <string name="authentication_failed" fuzzy="true">Certificare nereușită!</string>
+  <string name="authentication_failed">Autentificare nereușită, vă rugăm să încercați din nou</string>
   <string name="uploading_started">Încărcarea a început!</string>
   <string name="upload_completed_notification_title">%1$s s-a încărcat!</string>
   <string name="upload_completed_notification_text">Atingeți pentru a vizualiza elementul încărcat</string>
@@ -55,6 +61,7 @@
   <string name="categories_search_text_hint">Căutare categorii</string>
   <string name="menu_save_categories">Salvare</string>
   <string name="refresh_button">Reîncarcă</string>
+  <string name="display_list_button">Listă</string>
   <string name="gps_disabled">GPS-ul este dezactivat pe device-ul dumneavoastră. Doriți să-l activați?</string>
   <string name="enable_gps">Activează GPS</string>
   <string name="contributions_subtitle_zero">Niciun fișier încă!</string>
@@ -79,6 +86,7 @@
   <string name="categories_activity_title">Categorii</string>
   <string name="title_activity_settings">Setări</string>
   <string name="title_activity_signup">Înregistrare</string>
+  <string name="title_activity_category_details">Categorie</string>
   <string name="menu_about">Despre</string>
   <string name="about_license">Aplicația Wikimedia Commons este un software cu sursă deschisă creat și menținut de bursieri și voluntari ai comunității Wikimedia. Fundația Wikimedia nu este implicată în crearea, dezvoltarea sau mentenanța aplicației.</string>
   <string name="about_improve">Creați un nou &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;tichet pe GitHub&lt;/a&gt; pentru a raporta buguri sau sugestii.</string>
@@ -95,6 +103,8 @@
   <string name="menu_download">Descarcă</string>
   <string name="preference_license" fuzzy="true">Licență</string>
   <string name="allow_gps">Obține în mod automat locația curentă</string>
+  <string name="preference_theme">Mod de noapte</string>
+  <string name="preference_theme_summary">Folosește o temă întunecată</string>
   <string name="license_name_cc_by_sa_four">Atribuire și distribuire în condiții identice 4.0</string>
   <string name="license_name_cc_by_four">Atribuire 4.0</string>
   <string name="license_name_cc_by_sa">Atribuire și distribuire în condiții identice 3.0</string>
@@ -115,6 +125,9 @@
   <string name="license_name_cc_by_sa_4_0">CC BY-SA 4.0</string>
   <string name="license_name_cc_by_4_0">CC BY 4.0</string>
   <string name="license_name_cc_zero">CC Zero</string>
+  <string name="tutorial_1_subtext">Imaginile dumneavoastră ajută la educarea oamenilor\ndin întreaga lume!</string>
+  <string name="tutorial_2_text">Vă rugăm să încărcați imagini care sunt făcute sau create în totalitate de dumneavoastră:</string>
+  <string name="tutorial_2_subtext">Obiecte naturale (flori, animale, munți)\n• Obiecte folositoare (biciclete, stații de tren)\n• Oameni faimoși (primarul dumneavoastră, atleți olimpici pe care i-ați întâlnit)</string>
   <string name="tutorial_3_text">Vă rugăm să NU încărcați:</string>
   <string name="tutorial_3_subtext">— Selfies sau poze cu prietenii\n— Fotografii descărcate de pe Internet\n— Capturi de ecran din programe sau aplicații proprietare</string>
   <string name="tutorial_4_text">Exemplu de încărcare:</string>
