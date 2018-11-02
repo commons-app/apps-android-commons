@@ -37,8 +37,10 @@ public class FileUtils {
 
     /**
      * Get SHA1 of file from input stream
+     * @param is inputStream of file to be hashed
+     * @return A string representing the SHA1 hash in hexadecimal
      */
-    static String getSHA1(InputStream is) {
+    public static String getSHA1(InputStream is) {
 
         MessageDigest digest;
         try {
@@ -76,7 +78,8 @@ public class FileUtils {
 
     /**
      * In older devices getPath() may fail depending on the source URI. Creating and using a copy of the file seems to work instead.
-     * @return path of copy
+     * @param descriptor ParcelFileDescriptor to file to be copied
+     * @return Path to the copy
      */
     @Nullable
     static String createCopyPath(ParcelFileDescriptor descriptor) {
@@ -219,27 +222,29 @@ public class FileUtils {
      * @return The value of the _data column, which is typically a file path.
      */
     @Nullable
-    public static String getDataColumn(Context context, Uri uri, String selection,
-                                       String[] selectionArgs) {
+    public static String getDataColumn(Context context, Uri uri, String selection, String[] selectionArgs) {
 
+        // Prepare arguments to get DATA column from MediaStore.Images
+        final String columnName = MediaStore.Images.ImageColumns.DATA;
+        final String[] projection = { columnName };
+
+        // Try to get the data column as a string, from the file with the given uri
+        // If success: return data column string
+        // If fail: log error, return null
         Cursor cursor = null;
-        final String column = MediaStore.Images.ImageColumns.DATA;
-        final String[] projection = {
-                column
-        };
-
         try {
-            cursor = context.getContentResolver().query(uri, projection, selection, selectionArgs, null);
+            cursor = context
+                    .getContentResolver()
+                    .query(uri, projection, selection, selectionArgs, null);
+
             if (cursor != null && cursor.moveToFirst()) {
-                final int column_index = cursor.getColumnIndexOrThrow(column);
+                final int column_index = cursor.getColumnIndexOrThrow(columnName);
                 return cursor.getString(column_index);
             }
         } catch (IllegalArgumentException e) {
             Timber.d(e);
         } finally {
-            if (cursor != null) {
-                cursor.close();
-            }
+            if (cursor != null) cursor.close();
         }
         return null;
     }
@@ -330,7 +335,7 @@ public class FileUtils {
 
     /**
      * Deletes files.
-     * @param file context
+     * @param file File to delete
      */
     public static boolean deleteFile(File file) {
         boolean deletedAll = true;
@@ -355,9 +360,11 @@ public class FileUtils {
                 commonsAppDirectory.mkdir();
             }
 
+            // Create logs.txt in commonsAppDirectory
             File logsFile = new File(commonsAppDirectory,"logs.txt");
+
+            // Delete old logs
             if (logsFile.exists()) {
-                //old logs file is useless
                 logsFile.delete();
             }
 
