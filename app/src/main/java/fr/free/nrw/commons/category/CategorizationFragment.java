@@ -198,22 +198,21 @@ public class CategorizationFragment extends CommonsDaggerSupportFragment {
     
     /**
      * Removes duplicates from a RVRendererAdapter<CategoryItem> in place, while maintaining order
-     * @param Category adapter to remove duplicates from
+     * @param catAdapter Category adapter to remove duplicates from
      */
     private void removeDuplicates(RVRendererAdapter<CategoryItem> catAdapter) {
-        List<CategoryItem> catList = new ArrayList<>();
-        // add elements to catList, including duplicates
+        // Copy adapter items into an ArrayList
+        ArrayList<CategoryItem> catList = new ArrayList<CategoryItem>();
         for (int i = 0; i < catAdapter.getItemCount(); i++) {
-            al.add(catAdapter.getItem(i));
+            catList.add(catAdapter.getItem(i));
         }
-        
-        // Linked Hash Set contains only single valued items and the order is maintained
-        LinkedHashSet<CategoryItem> catSet = new LinkedHashSet<>();
-        catSet.addAll(catList);
-        catList.clear();
-        catList.addAll(catSet);
+
+        // Convert ArrayList to LinkedHashSet, to remove duplicates but maintain order
+        LinkedHashSet<CategoryItem> catSet = new LinkedHashSet<>(catList);
+
+        // Clear the adapter and then add all the elements of catSet back to it
         catAdapter.clear();
-        catAdapter.addAll(catList);
+        catAdapter.addAll(catSet);
     }
 
     private void updateCategoryList(String filter) {
