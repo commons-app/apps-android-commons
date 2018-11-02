@@ -203,7 +203,7 @@
   <string name="use_external_storage">Anggo panyimpenan njaba</string>
   <string name="login_to_your_account">Mlebu log ing akun panjenengan</string>
   <string name="send_log_file">Kirim barkas log</string>
-  <string name="send_log_file_description">Kirim barkas log menyang juru pangembang lumantar pos-èl</string>
+  <string name="send_log_file_description" fuzzy="true">Kirim barkas log menyang juru pangembang lumantar pos-èl</string>
   <string name="null_url">Masalah! URL ora tinemu</string>
   <string name="nominate_deletion">Usulaké supaya binusek</string>
   <string name="nominated_for_deletion">Gambar iki kausulaké supaya binusek.</string>

@@ -9,12 +9,13 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import fr.free.nrw.commons.R;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Locale;
 
 public class SpinnerLanguagesAdapter extends ArrayAdapter {
 

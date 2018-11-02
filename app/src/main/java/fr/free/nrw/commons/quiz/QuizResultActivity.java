@@ -5,10 +5,10 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
+import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 
 import com.dinuscxj.progressbar.CircleProgressBar;
 
@@ -26,8 +26,16 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.dinuscxj.progressbar.CircleProgressBar;
+
 import java.io.File;
 import java.io.FileOutputStream;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
+import fr.free.nrw.commons.R;
+import fr.free.nrw.commons.contributions.ContributionsActivity;
 
 /**
  *  Displays the final score of quiz and congratulates the user

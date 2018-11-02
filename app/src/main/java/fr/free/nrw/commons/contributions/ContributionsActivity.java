@@ -256,6 +256,9 @@ public  class       ContributionsActivity
             ((CursorAdapter) contributionsList.getAdapter()).swapCursor(cursor);
         }
 
+        if(contributionsList.getAdapter().getCount()>0){
+            contributionsList.changeEmptyScreen(false);
+        }
         contributionsList.clearSyncMessage();
         notifyAndMigrateDataSetObservers();
     }

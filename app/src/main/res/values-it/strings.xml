@@ -267,4 +267,12 @@
   <string name="images_uploaded_explanation">Il numero di immagini che hai caricato su Commons, tramite qualsiasi software di caricamento</string>
   <string name="images_reverted_explanation">La percentuale di immagini che hai caricato su Commons che non sono state cancellate</string>
   <string name="images_used_explanation">Il numero di immagini che hai caricato su Commons che sono state usate nelle voci di Wikimedia</string>
+  <string name="navigation_item_bookmarks">Segnalibri</string>
+  <string name="title_activity_bookmarks">Segnalibri</string>
+  <string name="title_page_bookmarks_pictures">Immagini</string>
+  <string name="title_page_bookmarks_locations">Località</string>
+  <string name="provider_bookmarks">Segnalibri</string>
+  <string name="bookmark_empty">Non hai aggiunto alcun segnalibro</string>
+  <string name="provider_bookmarks_location">Segnalibri</string>
+  <string name="no_uploads">Benvenuto su Commons!\n\nCarica il tuo primo file multimediale toccando l\'icona della fotocamera o della galleria sopra.</string>
 </resources>

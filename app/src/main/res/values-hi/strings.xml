@@ -217,7 +217,7 @@
   <string name="use_external_storage_summary">आप अपने डिवाइस के इन-ऐप कैमरा से ली गई तस्वीरों को सहेजें।</string>
   <string name="login_to_your_account">अपने खाते में प्रवेश करें</string>
   <string name="send_log_file">लॉग फाइल भेजें</string>
-  <string name="send_log_file_description">डेवेलपर्स को लॉग फाइल ई-मेल से भेजें</string>
+  <string name="send_log_file_description" fuzzy="true">डेवेलपर्स को लॉग फाइल ई-मेल से भेजें</string>
   <string name="nearby_location_has_not_changed">स्थान परिवर्तन नहीं हुआ।</string>
   <string name="nearby_location_not_available">स्थान उपलब्ध नहीं।</string>
   <string name="location_permission_rationale_nearby">आसपास के स्थान दिखाने के लिए अनुमति चाहिए</string>

@@ -218,7 +218,7 @@
   <string name="use_external_storage_summary">Biller späicheren déi mat der in-app Kamera vun Ärem Apparat gemaach goufen</string>
   <string name="login_to_your_account">An Äre Benotzerkont aloggen</string>
   <string name="send_log_file">Log-Fichier schécken</string>
-  <string name="send_log_file_description">Log-Fichier per E-Mail un d\'Entwéckler schécken</string>
+  <string name="send_log_file_description" fuzzy="true">Log-Fichier per E-Mail un d\'Entwéckler schécken</string>
   <string name="null_url">Feeler! URL net fonnt</string>
   <string name="nominate_deletion">Nominéiere fir ze Läschen</string>
   <string name="nominated_for_deletion">Dëst Bild gouf virgeschloe fir geläscht ze ginn.</string>
@@ -276,4 +276,11 @@
   <string name="image_reverts">Biller net zréckgesat</string>
   <string name="error_occurred">Feeler opgetrueden!</string>
   <string name="notifications_channel_name_all">Notifikatioun vu Commons</string>
+  <string name="navigation_item_bookmarks">Lieszeechen</string>
+  <string name="title_activity_bookmarks">Lieszeechen</string>
+  <string name="title_page_bookmarks_pictures">Biller</string>
+  <string name="title_page_bookmarks_locations">Plazen</string>
+  <string name="provider_bookmarks">Lieszeechen</string>
+  <string name="bookmark_empty">Dir hutt keng Lieszeechen derbäigesat</string>
+  <string name="provider_bookmarks_location">Lieszeechen</string>
 </resources>

@@ -1,7 +1,5 @@
 package fr.free.nrw.commons.upload;
 
-import static android.view.MotionEvent.ACTION_UP;
-
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.support.v4.view.ViewCompat;
@@ -17,16 +15,19 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.EditText;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Locale;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnTouch;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.utils.ViewUtil;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Locale;
+
+import static android.view.MotionEvent.ACTION_UP;
 
 class DescriptionsAdapter extends RecyclerView.Adapter<DescriptionsAdapter.ViewHolder> {
 
@@ -184,8 +185,8 @@ class DescriptionsAdapter extends RecyclerView.Adapter<DescriptionsAdapter.ViewH
                 if (ViewCompat.getLayoutDirection(view) == ViewCompat.LAYOUT_DIRECTION_LTR) {
                     value = etDescriptionText.getRight() - etDescriptionText
                             .getCompoundDrawables()[2]
-                            .getBounds().width();
-                    if (motionEvent.getAction() == ACTION_UP && motionEvent.getRawX() >= value) {
+                            .getBounds().width() - etDescriptionText.getPaddingRight();
+                    if (motionEvent.getAction() == ACTION_UP && motionEvent.getX() >= value) {
                         callback.showAlert(R.string.media_detail_description,
                                 R.string.description_info);
                         return true;

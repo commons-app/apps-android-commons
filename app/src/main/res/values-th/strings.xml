@@ -220,7 +220,7 @@
   <string name="use_external_storage_summary">บันทึกรูปภาพที่ถ่ายด้วยกล้องในแอปบนอุปกรณ์ของคุณ</string>
   <string name="login_to_your_account">ลงชื่อเข้าใช้บัญชีของคุณ</string>
   <string name="send_log_file">ส่งไฟล์ปูม</string>
-  <string name="send_log_file_description">ส่งไฟล์ปูมไปยังนักพัฒนาผ่านทางอีเมล</string>
+  <string name="send_log_file_description" fuzzy="true">ส่งไฟล์ปูมไปยังนักพัฒนาผ่านทางอีเมล</string>
   <string name="no_web_browser">ไม่พบเว็บเบราว์เซอร์ที่จะเปิด URL</string>
   <string name="null_url">ข้อผิดพลาด! ไม่พบ URL</string>
   <string name="nominate_deletion">เสนอการลบ</string>
