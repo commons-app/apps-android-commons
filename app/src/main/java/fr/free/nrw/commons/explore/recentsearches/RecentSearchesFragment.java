@@ -1,5 +1,6 @@
 package fr.free.nrw.commons.explore.recentsearches;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AlertDialog;
@@ -57,11 +58,7 @@ public class RecentSearchesFragment extends CommonsDaggerSupportFragment {
                 .show();
         });
         currentThemeIsDark = PreferenceManager.getDefaultSharedPreferences(getContext()).getBoolean("theme", false);
-        if (currentThemeIsDark) {
-            adapter = new ArrayAdapter<String>(getContext(), R.layout.item_recent_searches_dark_theme, recentSearches);
-        } else {
-            adapter = new ArrayAdapter<String>(getContext(), R.layout.item_recent_searches, recentSearches);
-        }
+        setAdapterForThemes(getContext(), currentThemeIsDark);
         recentSearchesList.setAdapter(adapter);
         recentSearchesList.setOnItemClickListener((parent, view, position, id) -> (
                 (SearchActivity)getContext()).updateText(recentSearches.get(position)));
@@ -85,12 +82,16 @@ public class RecentSearchesFragment extends CommonsDaggerSupportFragment {
      */
     public void updateRecentSearches() {
         recentSearches = recentSearchesDao.recentSearches(10);
+        setAdapterForThemes(getContext(), currentThemeIsDark);
+        recentSearchesList.setAdapter(adapter);
+        adapter.notifyDataSetChanged();
+    }
+
+    private void setAdapterForThemes(Context context, boolean currentThemeIsDark) {
         if (currentThemeIsDark) {
             adapter = new ArrayAdapter<String>(getContext(), R.layout.item_recent_searches_dark_theme, recentSearches);
         } else {
             adapter = new ArrayAdapter<String>(getContext(), R.layout.item_recent_searches, recentSearches);
         }
-        recentSearchesList.setAdapter(adapter);
-        adapter.notifyDataSetChanged();
     }
 }
