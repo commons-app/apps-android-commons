@@ -89,9 +89,9 @@ public class RecentSearchesFragment extends CommonsDaggerSupportFragment {
 
     private void setAdapterForThemes(Context context, boolean currentThemeIsDark) {
         if (currentThemeIsDark) {
-            adapter = new ArrayAdapter<String>(getContext(), R.layout.item_recent_searches_dark_theme, recentSearches);
+            adapter = new ArrayAdapter<String>(context, R.layout.item_recent_searches_dark_theme, recentSearches);
         } else {
-            adapter = new ArrayAdapter<String>(getContext(), R.layout.item_recent_searches, recentSearches);
+            adapter = new ArrayAdapter<String>(context, R.layout.item_recent_searches, recentSearches);
         }
     }
 }
