@@ -372,6 +372,7 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
 
     private void addNetworkBroadcastReceiver() {
         IntentFilter intentFilter = new IntentFilter(NETWORK_INTENT_ACTION);
+        Snackbar snackbar = Snackbar.make(transparentView , R.string.no_internet, Snackbar.LENGTH_INDEFINITE);
 
         broadcastReceiver = new BroadcastReceiver() {
 
@@ -379,8 +380,9 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
             public void onReceive(Context context, Intent intent) {
                 if (NetworkUtils.isInternetConnectionEstablished(NearbyActivity.this)) {
                     refreshView(LOCATION_SIGNIFICANTLY_CHANGED);
+                    snackbar.dismiss();
                 } else {
-                    Snackbar.make(transparentView , R.string.no_internet, Snackbar.LENGTH_INDEFINITE).show();
+                    snackbar.show();
                 }
             }
         };
