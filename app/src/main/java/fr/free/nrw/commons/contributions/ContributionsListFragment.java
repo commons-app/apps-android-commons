@@ -305,6 +305,7 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment {
      */
     protected void clearSyncMessage() {
         waitingMessage.setVisibility(GONE);
+        noDataYet.setVisibility(GONE);
     }
 
     public ListAdapter getAdapter() {
