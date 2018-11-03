@@ -285,7 +285,7 @@ public class MainActivity extends AuthenticatedActivity implements FragmentManag
             // TODO: used vectors are not compatible with API 19 and below, change them
             menu.findItem(R.id.notifications).setIcon(ContextCompat.getDrawable(this, R.drawable.ic_notifications_white_24dp));
         } else {
-            menu.findItem(R.id.notifications).setIcon(ContextCompat.getDrawable(this, R.drawable.ic_notifications_white_with_marker));
+            menu.findItem(R.id.notifications).setIcon(ContextCompat.getDrawable(this, R.drawable.ic_notifications_active_white_24dp));
         }
 
         this.menu = menu;
@@ -351,7 +351,7 @@ public class MainActivity extends AuthenticatedActivity implements FragmentManag
             menu.findItem(R.id.notifications).setIcon(ContextCompat.getDrawable(this, R.drawable.ic_notifications_white_24dp));
         } else {
             this.isThereUnreadNotifications = true;
-            menu.findItem(R.id.notifications).setIcon(ContextCompat.getDrawable(this, R.drawable.ic_notifications_white_with_marker));
+            menu.findItem(R.id.notifications).setIcon(ContextCompat.getDrawable(this, R.drawable.ic_notifications_active_white_24dp));
         }
     }
 
