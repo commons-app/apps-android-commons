@@ -63,9 +63,9 @@ public class LicenseList {
      */
     @Nullable
     License licenseForTemplate(String template) {
-        String ucTemplate = new PageTitle(template).getDisplayText();
+        String ucTemplate = new PageTitle(template).getDisplayTitle();
         for (License license : values()) {
-            if (ucTemplate.equals(new PageTitle(license.getTemplate()).getDisplayText())) {
+            if (ucTemplate.equals(new PageTitle(license.getTemplate()).getDisplayTitle())) {
                 return license;
             }
         }

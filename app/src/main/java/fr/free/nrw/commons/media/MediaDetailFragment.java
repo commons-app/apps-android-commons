@@ -414,8 +414,8 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
 
     @OnClick(R.id.seeMore)
     public void onSeeMoreClicked(){
-        if (nominatedForDeletion.getVisibility()== VISIBLE) {
-            openWebBrowser(media.getFilePageTitle().getMobileUri().toString());
+        if(nominatedForDeletion.getVisibility()== VISIBLE) {
+            openWebBrowser(media.getFilePageTitle().getMobileCommonsUri().toString());
         }
     }
 

@@ -137,7 +137,7 @@ public class Media implements Parcelable {
             return "";
         }
         // FIXME: Gross hack because my regex skills suck maybe or I am too lazy who knows
-        String title = getFilePageTitle().getDisplayText().replaceFirst("^File:", "");
+        String title = getFilePageTitle().getDisplayTitle().replaceFirst("^File:", "");
         Matcher matcher = displayTitlePattern.matcher(title);
         if (matcher.matches()) {
             return matcher.group(1);

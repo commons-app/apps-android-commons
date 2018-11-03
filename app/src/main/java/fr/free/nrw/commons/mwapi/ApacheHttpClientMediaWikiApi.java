@@ -919,7 +919,7 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
             String url = String.format(
                     Locale.ENGLISH,
                     uploadCountUrlTemplate,
-                    new PageTitle(userName).getText());
+                    new PageTitle(userName).getKey());
             HttpResponse response = Http.get(url).use(httpClient)
                     .data("user", userName)
                     .asResponse();
@@ -975,7 +975,7 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
             String url = String.format(
                     Locale.ENGLISH,
                     fetchAchievementUrlTemplate,
-                    new PageTitle(userName).getText());
+                    new PageTitle(userName).getKey());
             HttpUrl.Builder urlBuilder = HttpUrl.parse(url).newBuilder();
             urlBuilder.addQueryParameter("user", userName);
             Timber.i("Url %s", urlBuilder.toString());

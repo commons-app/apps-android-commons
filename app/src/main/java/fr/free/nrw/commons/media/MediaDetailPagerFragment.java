@@ -147,14 +147,14 @@ public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment imple
             case R.id.menu_share_current_image:
                 Intent shareIntent = new Intent(Intent.ACTION_SEND);
                 shareIntent.setType("text/plain");
-                shareIntent.putExtra(Intent.EXTRA_TEXT, m.getDisplayTitle() + " \n" + m.getFilePageTitle().getCanonicalUri());
+                shareIntent.putExtra(Intent.EXTRA_TEXT, m.getDisplayTitle() + " \n" + m.getFilePageTitle().getCommonsURI());
                 startActivity(Intent.createChooser(shareIntent, "Share image via..."));
                 return true;
             case R.id.menu_browser_current_image:
                 // View in browser
                 Intent viewIntent = new Intent();
                 viewIntent.setAction(ACTION_VIEW);
-                viewIntent.setData(m.getFilePageTitle().getMobileUri());
+                viewIntent.setData(m.getFilePageTitle().getMobileCommonsUri());
                 //check if web browser available
                 if (viewIntent.resolveActivity(getActivity().getPackageManager()) != null){
                     startActivity(viewIntent);

@@ -326,7 +326,7 @@ public class LoginActivity extends AccountAuthenticatorActivity {
      * @return String canonicial username
      */
     private String canonicializeUsername(String username) {
-        return new PageTitle(username).getText();
+        return new PageTitle(username).getKey();
     }
 
     @Override

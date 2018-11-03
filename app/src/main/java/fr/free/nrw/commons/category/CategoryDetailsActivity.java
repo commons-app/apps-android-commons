@@ -222,7 +222,7 @@ public class CategoryDetailsActivity extends NavigationBaseActivity
             case R.id.menu_browser_current_category:
                 Intent viewIntent = new Intent();
                 viewIntent.setAction(Intent.ACTION_VIEW);
-                viewIntent.setData(new PageTitle(categoryName).getCanonicalUri());
+                viewIntent.setData(new PageTitle(categoryName).getCommonsURI());
                 //check if web browser available
                 if (viewIntent.resolveActivity(this.getPackageManager()) != null) {
                     startActivity(viewIntent);
