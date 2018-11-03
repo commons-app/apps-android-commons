@@ -16,7 +16,7 @@ import java.util.Locale;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import fr.free.nrw.commons.Utils;
+import fr.free.nrw.commons.utils.Utils;
 import fr.free.nrw.commons.location.LatLng;
 import fr.free.nrw.commons.upload.FileUtils;
 import timber.log.Timber;

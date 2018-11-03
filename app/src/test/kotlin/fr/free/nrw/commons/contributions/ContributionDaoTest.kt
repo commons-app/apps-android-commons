@@ -9,7 +9,7 @@ import android.os.RemoteException
 import com.nhaarman.mockito_kotlin.*
 import fr.free.nrw.commons.BuildConfig
 import fr.free.nrw.commons.TestCommonsApplication
-import fr.free.nrw.commons.Utils
+import fr.free.nrw.commons.utils.Utils
 import fr.free.nrw.commons.contributions.Contribution.*
 import fr.free.nrw.commons.contributions.ContributionDao.Table
 import fr.free.nrw.commons.contributions.ContributionsContentProvider.BASE_URI

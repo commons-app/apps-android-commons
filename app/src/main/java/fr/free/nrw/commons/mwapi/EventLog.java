@@ -3,7 +3,7 @@ package fr.free.nrw.commons.mwapi;
 import android.content.SharedPreferences;
 import android.os.Build;
 
-import fr.free.nrw.commons.Utils;
+import fr.free.nrw.commons.utils.Utils;
 
 public class EventLog {
     static final String DEVICE;

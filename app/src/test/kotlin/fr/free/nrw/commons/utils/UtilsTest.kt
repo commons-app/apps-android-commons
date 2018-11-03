@@ -1,6 +1,5 @@
 package fr.free.nrw.commons.utils
 
-import fr.free.nrw.commons.Utils
 import org.junit.Assert
 import org.junit.Test
 import org.hamcrest.CoreMatchers.`is` as _is

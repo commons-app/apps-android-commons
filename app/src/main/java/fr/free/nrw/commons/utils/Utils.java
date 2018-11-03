@@ -1,4 +1,4 @@
-package fr.free.nrw.commons;
+package fr.free.nrw.commons.utils;
 
 import android.content.Context;
 import android.content.Intent;
@@ -23,6 +23,9 @@ import java.util.Locale;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import fr.free.nrw.commons.BuildConfig;
+import fr.free.nrw.commons.PageTitle;
+import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.settings.Prefs;
 import timber.log.Timber;
 

@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.Map;
 
 import fr.free.nrw.commons.PageTitle;
-import fr.free.nrw.commons.Utils;
+import fr.free.nrw.commons.utils.Utils;
 import fr.free.nrw.commons.location.LatLng;
 
 public class Media implements Parcelable {

@@ -3,6 +3,8 @@ package fr.free.nrw.commons;
 import android.net.Uri;
 import android.support.annotation.NonNull;
 
+import fr.free.nrw.commons.utils.Utils;
+
 public class PageTitle {
     private final String namespace;
     private final String key;

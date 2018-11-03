@@ -12,6 +12,7 @@ import android.widget.TextView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Optional;
+import fr.free.nrw.commons.utils.Utils;
 
 public class WelcomePagerAdapter extends PagerAdapter {
     static final int[] PAGE_LAYOUTS = new int[]{

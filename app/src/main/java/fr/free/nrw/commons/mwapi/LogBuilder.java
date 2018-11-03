@@ -11,7 +11,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 
 import fr.free.nrw.commons.BuildConfig;
-import fr.free.nrw.commons.Utils;
+import fr.free.nrw.commons.utils.Utils;
 import fr.free.nrw.commons.settings.Prefs;
 
 @SuppressWarnings("WeakerAccess")
