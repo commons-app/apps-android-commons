@@ -42,7 +42,7 @@ import java.util.concurrent.Callable;
 
 import fr.free.nrw.commons.BuildConfig;
 import fr.free.nrw.commons.media.Media;
-import fr.free.nrw.commons.PageTitle;
+import fr.free.nrw.commons.utils.PageTitle;
 import fr.free.nrw.commons.achievements.FeedbackResponse;
 import fr.free.nrw.commons.auth.AccountUtil;
 import fr.free.nrw.commons.category.CategoryImageUtils;

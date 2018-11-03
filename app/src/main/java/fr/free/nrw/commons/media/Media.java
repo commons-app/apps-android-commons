@@ -11,7 +11,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import fr.free.nrw.commons.PageTitle;
+import fr.free.nrw.commons.utils.PageTitle;
 import fr.free.nrw.commons.utils.Utils;
 import fr.free.nrw.commons.location.LatLng;
 

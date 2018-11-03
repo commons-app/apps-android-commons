@@ -14,9 +14,6 @@ import android.widget.Toast;
 import org.apache.commons.codec.binary.Hex;
 import org.apache.commons.codec.digest.DigestUtils;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.Locale;
@@ -24,7 +21,6 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import fr.free.nrw.commons.BuildConfig;
-import fr.free.nrw.commons.PageTitle;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.settings.Prefs;
 import timber.log.Timber;

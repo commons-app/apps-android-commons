@@ -1,8 +1,9 @@
-package fr.free.nrw.commons;
+package fr.free.nrw.commons.utils;
 
 import android.net.Uri;
 import android.support.annotation.NonNull;
 
+import fr.free.nrw.commons.BuildConfig;
 import fr.free.nrw.commons.utils.Utils;
 
 public class PageTitle {

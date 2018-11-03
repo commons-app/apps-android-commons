@@ -1,5 +1,6 @@
 package fr.free.nrw.commons
 
+import fr.free.nrw.commons.utils.PageTitle
 import org.junit.Assert.assertEquals
 import org.junit.Test
 import org.junit.runner.RunWith
