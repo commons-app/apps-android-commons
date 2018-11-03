@@ -335,7 +335,7 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
     @OnClick(R.id.mediaDetailLicense)
     public void onMediaDetailLicenceClicked(){
         if (!TextUtils.isEmpty(licenseLink(media))) {
-            openWebBrowser(licenseLink(media));
+            openWebBrowser(Uri.parse(licenseLink(media)));
         } else {
             if (isCategoryImage) {
                 Timber.d("Unable to fetch license URL for %s", media.getLicense());
@@ -413,7 +413,7 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
     @OnClick(R.id.seeMore)
     public void onSeeMoreClicked(){
         if(nominatedForDeletion.getVisibility()== VISIBLE) {
-            openWebBrowser(media.getPageTitle().getMobileCommonsUri().toString());
+            openWebBrowser(media.getPageTitle().getMobileCommonsUri());
         }
     }
 
@@ -533,8 +533,8 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
         }
     }
 
-    private void openWebBrowser(String url) {
-        Intent browser = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+    private void openWebBrowser(Uri url) {
+        Intent browser = new Intent(Intent.ACTION_VIEW, url);
         //check if web browser available
         if (browser.resolveActivity(getActivity().getPackageManager()) != null) {
             startActivity(browser);
