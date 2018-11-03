@@ -9,7 +9,7 @@ import com.pedrogomez.renderers.Renderer;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import fr.free.nrw.commons.Media;
+import fr.free.nrw.commons.media.Media;
 import fr.free.nrw.commons.MediaWikiImageView;
 import fr.free.nrw.commons.R;
 

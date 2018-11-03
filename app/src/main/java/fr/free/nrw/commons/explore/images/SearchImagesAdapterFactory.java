@@ -7,7 +7,7 @@ import com.pedrogomez.renderers.RendererBuilder;
 import java.util.Collections;
 import java.util.List;
 
-import fr.free.nrw.commons.Media;
+import fr.free.nrw.commons.media.Media;
 
 /**
  * This class helps in creating adapter for imagesRecyclerView in SearchImagesFragment,

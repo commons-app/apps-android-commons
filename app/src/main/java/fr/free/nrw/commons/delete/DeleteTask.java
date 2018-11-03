@@ -15,7 +15,7 @@ import java.util.Locale;
 import javax.inject.Inject;
 
 import fr.free.nrw.commons.CommonsApplication;
-import fr.free.nrw.commons.Media;
+import fr.free.nrw.commons.media.Media;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.auth.SessionManager;
 import fr.free.nrw.commons.di.ApplicationlessInjection;

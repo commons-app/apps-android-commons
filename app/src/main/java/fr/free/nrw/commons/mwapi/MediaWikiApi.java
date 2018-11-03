@@ -8,7 +8,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
 
-import fr.free.nrw.commons.Media;
+import fr.free.nrw.commons.media.Media;
 import fr.free.nrw.commons.achievements.FeedbackResponse;
 import fr.free.nrw.commons.notification.Notification;
 import io.reactivex.Observable;

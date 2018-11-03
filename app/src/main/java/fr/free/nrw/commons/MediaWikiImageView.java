@@ -15,6 +15,7 @@ import com.facebook.drawee.view.SimpleDraweeView;
 import javax.inject.Inject;
 
 import fr.free.nrw.commons.di.ApplicationlessInjection;
+import fr.free.nrw.commons.media.Media;
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
 import timber.log.Timber;
 

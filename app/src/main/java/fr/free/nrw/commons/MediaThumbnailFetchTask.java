@@ -3,6 +3,7 @@ package fr.free.nrw.commons;
 import android.os.AsyncTask;
 import android.support.annotation.NonNull;
 
+import fr.free.nrw.commons.media.Media;
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
 
 class MediaThumbnailFetchTask extends AsyncTask<String, String, String> {

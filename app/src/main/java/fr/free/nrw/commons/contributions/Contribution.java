@@ -10,7 +10,7 @@ import java.util.Locale;
 
 import fr.free.nrw.commons.BuildConfig;
 import fr.free.nrw.commons.CommonsApplication;
-import fr.free.nrw.commons.Media;
+import fr.free.nrw.commons.media.Media;
 import fr.free.nrw.commons.settings.Prefs;
 
 public class  Contribution extends Media {

@@ -13,7 +13,7 @@ import java.util.List;
 
 import javax.annotation.Nullable;
 
-import fr.free.nrw.commons.Media;
+import fr.free.nrw.commons.media.Media;
 import fr.free.nrw.commons.utils.StringUtils;
 import timber.log.Timber;
 

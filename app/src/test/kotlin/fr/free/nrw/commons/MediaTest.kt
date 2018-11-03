@@ -1,5 +1,6 @@
 package fr.free.nrw.commons
 
+import fr.free.nrw.commons.media.Media
 import org.junit.Assert.assertEquals
 import org.junit.Test
 import org.junit.runner.RunWith

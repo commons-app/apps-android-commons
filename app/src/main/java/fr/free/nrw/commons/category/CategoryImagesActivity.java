@@ -13,7 +13,7 @@ import android.view.View;
 import android.widget.AdapterView;
 
 import butterknife.ButterKnife;
-import fr.free.nrw.commons.Media;
+import fr.free.nrw.commons.media.Media;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.auth.AuthenticatedActivity;
 import fr.free.nrw.commons.explore.SearchActivity;

@@ -1,4 +1,4 @@
-package fr.free.nrw.commons;
+package fr.free.nrw.commons.media;
 
 import android.net.Uri;
 import android.os.Parcel;
@@ -11,6 +11,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import fr.free.nrw.commons.PageTitle;
+import fr.free.nrw.commons.Utils;
 import fr.free.nrw.commons.location.LatLng;
 
 public class Media implements Parcelable {

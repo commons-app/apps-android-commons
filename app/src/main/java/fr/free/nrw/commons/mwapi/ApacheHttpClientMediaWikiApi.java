@@ -41,7 +41,7 @@ import java.util.TimeZone;
 import java.util.concurrent.Callable;
 
 import fr.free.nrw.commons.BuildConfig;
-import fr.free.nrw.commons.Media;
+import fr.free.nrw.commons.media.Media;
 import fr.free.nrw.commons.PageTitle;
 import fr.free.nrw.commons.achievements.FeedbackResponse;
 import fr.free.nrw.commons.auth.AccountUtil;
