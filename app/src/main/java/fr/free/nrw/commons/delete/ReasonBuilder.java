@@ -17,6 +17,7 @@ import javax.inject.Inject;
 
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.R;
+import fr.free.nrw.commons.achievements.FeedbackResponse;
 import fr.free.nrw.commons.auth.SessionManager;
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
 import fr.free.nrw.commons.utils.ViewUtil;
@@ -69,14 +70,10 @@ public class ReasonBuilder {
         }
     }
 
-    private void appendArticlesUsed(JSONObject object){
-        try {
-            reason += ". Uploaded by myself on" + prettyUploadedDate(media);
-            reason += ",used in " + object.getInt("articlesUsingImages") + " articles";
-            Log.i("New Reason", reason);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
+    private void appendArticlesUsed(FeedbackResponse object){
+        reason += ". Uploaded by myself on" + prettyUploadedDate(media);
+        reason += ",used in " + object.getArticlesUsingImages() + " articles";
+        Log.i("New Reason", reason);
     }
 
 
