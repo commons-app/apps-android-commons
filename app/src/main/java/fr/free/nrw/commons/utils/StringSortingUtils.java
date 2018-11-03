@@ -12,14 +12,13 @@ public class StringSortingUtils {
     }
 
     /**
-     * Returns Comparator for sorting strings by its similarity with Levenshtein
-     * algorithm. By using this Comparator we get results from the highest to
-     * the lowest match.
+     * Returns Comparator for sorting strings by their similarity to the filter.
+     * By using this Comparator we get results
+     * from the highest to the lowest similarity with the filter.
      *
-     * @param filter pattern to compare similarity
+     * @param filter String to compare similarity with
      * @return Comparator with string similarity
      */
-
     public static Comparator<String> sortBySimilarity(final String filter) {
         return (firstItem, secondItem) -> {
             double firstItemSimilarity = calculateSimilarity(firstItem, filter);
@@ -28,20 +27,22 @@ public class StringSortingUtils {
         };
     }
 
-    private static double calculateSimilarity(String firstString, String secondString) {
-        String longer = firstString.toLowerCase(Locale.getDefault());
-        String shorter = secondString.toLowerCase(Locale.getDefault());
 
-        if (firstString.length() < secondString.length()) {
-            longer = secondString;
-            shorter = firstString;
-        }
-        int longerLength = longer.length();
+    /**
+     * Determines String similarity between str1 and str2 on scale from 0.0 to 1.0
+     * Uses the Levenshtein algorithm.
+     * @param str1 String 1
+     * @param str2 String 2
+     * @return Double between 0.0 and 1.0 that reflects string similarity
+     */
+    private static double calculateSimilarity(String str1, String str2) {
+        int longerLength = Math.max(str1.length(), str2.length());
+
         if (longerLength == 0) {
             return 1.0;
         }
 
-        double distanceBetweenStrings = new Levenshtein().distance(longer, shorter);
+        double distanceBetweenStrings = new Levenshtein().distance(str1, str2);
         return (longerLength - distanceBetweenStrings) / (double) longerLength;
     }
 }
