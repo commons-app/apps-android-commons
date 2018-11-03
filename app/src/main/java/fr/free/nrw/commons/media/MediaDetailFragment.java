@@ -165,7 +165,7 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
         ButterKnife.bind(this,view);
         seeMore.setText(Html.fromHtml(getString(R.string.nominated_see_more)));
 
-        if (isCategoryImage){
+        if (isCategoryImage) {
             authorLayout.setVisibility(VISIBLE);
         } else {
             authorLayout.setVisibility(GONE);
@@ -333,7 +333,7 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
     }
 
     @OnClick(R.id.mediaDetailLicense)
-    public void onMediaDetailLicenceClicked(){
+    public void onMediaDetailLicenceClicked() {
         if (!TextUtils.isEmpty(licenseLink(media))) {
             openWebBrowser(Uri.parse(licenseLink(media)));
         } else {
@@ -347,14 +347,14 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
     }
 
     @OnClick(R.id.mediaDetailCoordinates)
-    public void onMediaDetailCoordinatesClicked(){
+    public void onMediaDetailCoordinatesClicked() {
         if (media.getCoordinates() != null) {
             openMap(media.getCoordinates());
         }
     }
 
     @OnClick(R.id.copyWikicode)
-    public void onCopyWikicodeClicked(){
+    public void onCopyWikicodeClicked() {
         String data = "[[" + media.getFilename() + "|thumb|" + media.getDescription() + "]]";
         ClipboardManager clipboard = (ClipboardManager) getContext().getApplicationContext().getSystemService(CLIPBOARD_SERVICE);
         clipboard.setPrimaryClip(ClipData.newPlainText("wikiCode", data));
@@ -365,7 +365,7 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
     }
 
     @OnClick(R.id.nominateDeletion)
-    public void onDeleteButtonClicked(){
+    public void onDeleteButtonClicked() {
         //Reviewer correct me if i have misunderstood something over here
         //But how does this  if (delete.getVisibility() == View.VISIBLE) {
         //            enableDeleteButton(true);   makes sense ?
@@ -411,8 +411,8 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
     }
 
     @OnClick(R.id.seeMore)
-    public void onSeeMoreClicked(){
-        if(nominatedForDeletion.getVisibility()== VISIBLE) {
+    public void onSeeMoreClicked() {
+        if (nominatedForDeletion.getVisibility() == VISIBLE) {
             openWebBrowser(media.getPageTitle().getMobileCommonsUri());
         }
     }
@@ -509,8 +509,8 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
         return media.getCoordinates().getPrettyCoordinateString();
     }
 
-    private void checkDeletion(Media media){
-        if (media.getRequestedDeletion()){
+    private void checkDeletion(Media media) {
+        if (media.getRequestedDeletion()) {
             delete.setVisibility(GONE);
             nominatedForDeletion.setVisibility(VISIBLE);
         } else if (!isCategoryImage) {
