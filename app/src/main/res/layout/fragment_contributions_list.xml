@@ -67,8 +67,8 @@
             app:backgroundTint="@color/main_background_light"
             app:elevation="6dp"
             app:fabSize="mini"
+            android:layout_margin="8dp"
             app:pressedTranslationZ="12dp"
-            app:useCompatPadding="true"
             app:srcCompat="@drawable/ic_photo_camera_white_24dp" />
 
         <android.support.design.widget.FloatingActionButton
@@ -81,7 +81,7 @@
             app:backgroundTint="@color/main_background_light"
             app:elevation="6dp"
             app:fabSize="mini"
-            app:useCompatPadding="true"
+            android:layout_margin="8dp"
             app:pressedTranslationZ="12dp"
             app:srcCompat="@drawable/ic_photo_white_24dp" />
 
@@ -94,9 +94,9 @@
             android:clickable="true"
             android:visibility="visible"
             app:backgroundTint="@color/status_bar_blue"
-            app:useCompatPadding="true"
             app:elevation="6dp"
             app:fabSize="normal"
+            android:layout_margin="8dp"
             app:pressedTranslationZ="12dp"
             app:srcCompat="@drawable/ic_add_white_24dp" />
 
