@@ -253,8 +253,12 @@ public class MainActivity extends AuthenticatedActivity implements FragmentManag
                 contributionsFragment.getChildFragmentManager().popBackStack();
                 // Tabs were invisible when Media Details Fragment is active, make them visible again on Contrib List Fragment active
                 showTabs();
-                // Nearby Notification Card View was invisible when Media Details Fragment is active, make it visible again on Contrib List Fragment active
-                contributionsFragment.nearbyNoificationCardView.setVisibility(View.VISIBLE);
+                // Nearby Notification Card View was invisible when Media Details Fragment is active, make it visible again on Contrib List Fragment active, according to preferences
+                if (prefs.getBoolean("displayNearbyCardView", true)) {
+                    contributionsFragment.nearbyNoificationCardView.setVisibility(View.VISIBLE);
+                } else {
+                    contributionsFragment.nearbyNoificationCardView.setVisibility(View.GONE);
+                }
             } else {
                 finish();
             }
