@@ -6,49 +6,71 @@ import fr.free.nrw.commons.location.LatLng;
 
 public class LengthUtils {
     /** Returns a formatted distance string between two points.
-     * @param point1 LatLng type point1
-     * @param point2 LatLng type point2
+     * @param point1 one of the two end points
+     * @param point2 one of the two end points
+     * @throws NullPointerException if one or both the points are null
      * @return string distance
      */
     public static String formatDistanceBetween(LatLng point1, LatLng point2) {
-        if (point1 == null || point2 == null) {
-            return null;
+        int distance = (int) Math.round(computeDistanceBetween(point1, point2));
+        return formatDistance(distance);
+    }
+
+    /**
+     * Format a distance (in meters) as a string
+     * Example: 140 -> "140m"
+     *          3841 -> "3.8km"
+     * @param distance Distance, in meters
+     * @return A string representing the distance
+     * @throws IllegalArgumentException If distance is negative
+     */
+    public static String formatDistance(int distance) {
+        if(distance < 0) {
+            throw new IllegalArgumentException("Distance must be non-negative");
         }
 
         NumberFormat numberFormat = NumberFormat.getNumberInstance();
-        double distance = Math.round(computeDistanceBetween(point1, point2));
 
-        // Adjust to KM if M goes over 1000 (see javadoc of method for note
-        // on only supporting metric)
+        // Adjust to km if distance is over 1000m (1km)
         if (distance >= 1000) {
             numberFormat.setMaximumFractionDigits(1);
-            return numberFormat.format(distance / 1000) + "km";
+            return numberFormat.format(distance / 1000.0) + "km";
         }
+
+        // Otherwise just return in meters
         return numberFormat.format(distance) + "m";
     }
 
     /**
      * Computes the distance between two points.
-     * @param from one of the two end points
-     * @param to one of the two end points
-     * @return distance between the points in meter
+     * @param point1 one of the two end points
+     * @param point2 one of the two end points
+     * @return distance between the points in meters
+     * @throws NullPointerException if one or both the points are null
      */
-    public static double computeDistanceBetween(LatLng from, LatLng to) {
-        return computeAngleBetween(from, to) * 6371009.0D; // Earth's radius in meter
+    public static double computeDistanceBetween(LatLng point1, LatLng point2) {
+        return computeAngleBetween(point1, point2) * 6371009.0D; // Earth's radius in meter
     }
 
     /**
      * Computes angle between two points
      *
-     * @param from Point A
-     * @param to   Point B
+     * @param point1 one of the two end points
+     * @param point2 one of the two end points
      * @return Angle in radius
+     * @throws NullPointerException if one or both the points are null
      */
-    private static double computeAngleBetween(LatLng from, LatLng to) {
-        return distanceRadians(Math.toRadians(from.getLatitude()),
-                Math.toRadians(from.getLongitude()),
-                Math.toRadians(to.getLatitude()),
-                Math.toRadians(to.getLongitude()));
+    private static double computeAngleBetween(LatLng point1, LatLng point2) {
+        if(point1 == null || point2 == null) {
+            throw new NullPointerException("One or both of the points are null");
+        }
+
+        return distanceRadians(
+                Math.toRadians(point1.getLatitude()),
+                Math.toRadians(point1.getLongitude()),
+                Math.toRadians(point2.getLatitude()),
+                Math.toRadians(point2.getLongitude())
+        );
     }
 
     /**
