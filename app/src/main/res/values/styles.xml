@@ -27,7 +27,7 @@
     </style>
 
     <style name="LightAppTheme" parent="Theme.AppCompat.Light.NoActionBar">
-        <item name="contributionsListBackground">@color/primaryColor</item>
+        <item name="contributionsListBackground">@color/white</item>
         <item name="mainTabBackground">@color/primaryColor</item>
         <item name="mainBackground">@color/main_background_light</item>
         <item name="colorPrimaryDark">@color/primaryDarkColor</item>
