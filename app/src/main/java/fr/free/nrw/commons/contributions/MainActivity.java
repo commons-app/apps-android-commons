@@ -242,6 +242,7 @@ public class MainActivity extends AuthenticatedActivity implements FragmentManag
     @Override
     public void onBackPressed() {
         String contributionsFragmentTag = ((ContributionsActivityPagerAdapter) viewPager.getAdapter()).makeFragmentName(R.id.pager, 0);
+        String nearbyFragmentTag = ((ContributionsActivityPagerAdapter) viewPager.getAdapter()).makeFragmentName(R.id.pager, 1);
         if (getSupportFragmentManager().findFragmentByTag(contributionsFragmentTag) != null && isContributionsFragmentVisible) {
             // Meas that contribution fragment is visible (not nearby fragment)
             ContributionsFragment contributionsFragment = (ContributionsFragment) getSupportFragmentManager().findFragmentByTag(contributionsFragmentTag);
@@ -257,8 +258,11 @@ public class MainActivity extends AuthenticatedActivity implements FragmentManag
             } else {
                 finish();
             }
+        } else if (getSupportFragmentManager().findFragmentByTag(nearbyFragmentTag) != null && !isContributionsFragmentVisible) {
+            // Meas that nearby fragment is visible (not contributions fragment)
+            // Set current item to contributions activity instead of closing the activity
+            viewPager.setCurrentItem(0);
         } else {
-            // TODO handle nearby fragment is active posibility here.
             super.onBackPressed();
         }
     }
