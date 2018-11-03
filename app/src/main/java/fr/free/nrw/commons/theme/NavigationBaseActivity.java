@@ -13,6 +13,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -87,6 +88,21 @@ public abstract class NavigationBaseActivity extends BaseActivity
             nav_Menu.findItem(R.id.action_logout).setVisible(true);
             nav_Menu.findItem(R.id.action_bookmarks).setVisible(true);
         }
+    }
+
+    public void changeDrawerIconToBakcButton() {
+        toggle.setDrawerIndicatorEnabled(false);
+        toggle.setHomeAsUpIndicator(R.drawable.ic_arrow_back_white_24dp);
+        toggle.setToolbarNavigationClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onBackPressed();
+            }
+        });
+    }
+
+    public void changeDrawerIconToDefault() {
+        toggle.setDrawerIndicatorEnabled(true);
     }
 
     /**
