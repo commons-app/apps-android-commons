@@ -61,7 +61,7 @@ public class WelcomePagerAdapter extends PagerAdapter {
         LayoutInflater inflater = LayoutInflater.from(container.getContext());
         ViewGroup layout = (ViewGroup) inflater.inflate(PAGE_LAYOUTS[position], container, false);
         if( BuildConfig.FLAVOR == "beta"){
-            TextView textView = (TextView) layout.findViewById(R.id.welcomeYesButton);
+            TextView textView = layout.findViewById(R.id.welcomeYesButton);
             if( textView.getVisibility() != View.VISIBLE){
                 textView.setVisibility(View.VISIBLE);
             }
