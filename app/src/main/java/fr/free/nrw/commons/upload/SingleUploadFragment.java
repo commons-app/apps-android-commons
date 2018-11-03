@@ -213,7 +213,7 @@ public class SingleUploadFragment extends CommonsDaggerSupportFragment {
 
     private void initRecyclerView() {
         descriptionsAdapter = new DescriptionsAdapter();
-        descriptionsAdapter.setCallback((mediaDetailDescription, descriptionInfo) -> showInfoAlert(mediaDetailDescription,descriptionInfo));
+        descriptionsAdapter.setCallback(this::showInfoAlert);
         descriptionsAdapter.setLanguages(getLocaleSupportedByDevice());
         rvDescriptions.setLayoutManager(new LinearLayoutManager(getContext()));
         rvDescriptions.setAdapter(descriptionsAdapter);

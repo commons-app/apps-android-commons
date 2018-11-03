@@ -155,22 +155,14 @@ public class AboutActivity extends NavigationBaseActivity {
         builder.setView(spinner);
         builder.setTitle(R.string.about_translate_title)
                 .setMessage(R.string.about_translate_message)
-                .setPositiveButton(R.string.about_translate_proceed, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        String languageSelected = spinner.getSelectedItem().toString();
-                        TokensTranslations tokensTranslations = new TokensTranslations();
-                        tokensTranslations.initailize();
-                        String token = tokensTranslations.getTranslationToken(languageSelected);
-                        Utils.handleWebUrl(AboutActivity.this,Uri.parse("https://translatewiki.net/w/i.php?title=Special:Translate&language="+token+"&group=commons-android-strings&filter=%21translated&action=translate ?"));
-                    }
+                .setPositiveButton(R.string.about_translate_proceed, (dialog, which) -> {
+                    String languageSelected = spinner.getSelectedItem().toString();
+                    TokensTranslations tokensTranslations = new TokensTranslations();
+                    tokensTranslations.initailize();
+                    String token = tokensTranslations.getTranslationToken(languageSelected);
+                    Utils.handleWebUrl(AboutActivity.this,Uri.parse("https://translatewiki.net/w/i.php?title=Special:Translate&language="+token+"&group=commons-android-strings&filter=%21translated&action=translate ?"));
                 });
-        builder.setNegativeButton(R.string.about_translate_cancel, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                finish();
-            }
-        });
+        builder.setNegativeButton(R.string.about_translate_cancel, (dialog, which) -> finish());
         builder.create().show();
 
     }
