@@ -10,8 +10,6 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import fr.free.nrw.commons.location.LatLng;
 
@@ -29,7 +27,6 @@ public class Media implements Parcelable {
         }
     };
 
-    private static Pattern displayTitlePattern = Pattern.compile("(.*)(\\.\\w+)", Pattern.CASE_INSENSITIVE);
     // Primary metadata fields
     protected Uri localUri;
     protected String imageUrl;
@@ -130,28 +127,38 @@ public class Media implements Parcelable {
 
     /**
      * Gets media display title
-     * @return Media title
+     * @return Media display title. If this.filename is null, returns "Untitled"
      */
     public String getDisplayTitle() {
-        if (filename == null) {
-            return "";
+        if (getFilename() == null) {
+            return "Untitled";
         }
-        // FIXME: Gross hack because my regex skills suck maybe or I am too lazy who knows
-        String title = getFilePageTitle().getDisplayTitle().replaceFirst("^File:", "");
-        Matcher matcher = displayTitlePattern.matcher(title);
-        if (matcher.matches()) {
-            return matcher.group(1);
-        } else {
-            return title;
+
+        // Get filename without "File:" prefix and with spaces instead of underscores
+        String title = getPageTitle().getDisplayKey();
+
+        // Remove extension if present
+        if (title.contains(".")) {
+            title = title.substring(0, title.lastIndexOf('.'));
         }
+
+        return title;
     }
 
     /**
-     * Gets file page title
-     * @return New media page title
+     * Gets media's page title as a PageTitle object
+     * @return Media's page title as a PageTitle object
+     * @throws NullPointerException If filename is null
      */
-    public PageTitle getFilePageTitle() {
-        return new PageTitle("File:" + getFilename().replaceFirst("^File:", ""));
+    public PageTitle getPageTitle() {
+        if (getFilename() == null) {
+            throw new NullPointerException("Filename is null");
+        }
+
+        if (getFilename().startsWith("File:")) {
+            return new PageTitle(getFilename());
+        }
+        return new PageTitle("File:" + getFilename());
     }
 
     /**
@@ -164,7 +171,6 @@ public class Media implements Parcelable {
 
     /**
      * Gets image URL
-     * can be null.
      * @return Image URL
      */
     @Nullable
@@ -355,30 +361,42 @@ public class Media implements Parcelable {
      * Modifies (or sets) media descriptions
      * @param descriptions Media descriptions
      */
-    void setDescriptions(Map<String, String> descriptions) {
+    public void setDescriptions(Map<String, String> descriptions) {
         this.descriptions.clear();
         this.descriptions.putAll(descriptions);
     }
 
     /**
-     * Gets media description in preferred language
-     * @param preferredLanguage Language preferred
-     * @return Description in preferred language
+     * Gets media description in the preferred language if possible.
+     * If there is no description in the preferred language it falls back to English.
+     * If there is no description in English it'll return in any language it can.
+     * If there are no descriptions, it returns an empty string.
+     * @param preferredLanguage Preferred language
+     * @return Description as a string. Might not be in preferred language, also might be empty.
      */
     public String getDescription(String preferredLanguage) {
-        if (descriptions.containsKey(preferredLanguage)) {
-            // See if the requested language is there.
-            return descriptions.get(preferredLanguage);
-        } else if (descriptions.containsKey("en")) {
-            // Ah, English. Language of the world, until the Chinese crush us.
-            return descriptions.get("en");
-        } else if (descriptions.containsKey("default")) {
-            // No languages marked...
-            return descriptions.get("default");
-        } else {
-            // FIXME: return the first available non-English description?
+        // If there are no descriptions, return an empty string
+        if (descriptions.isEmpty()) {
             return "";
         }
+
+        // Try to get the description in preferredLanguage
+        if (descriptions.containsKey(preferredLanguage)) {
+            return descriptions.get(preferredLanguage);
+        }
+
+        // Ah, English. Language of the world, until the Chinese crush us.
+        if (descriptions.containsKey("en")) {
+            return descriptions.get("en");
+        }
+
+        // Fall back to default description
+        if (descriptions.containsKey("default")) {
+            return descriptions.get("default");
+        }
+
+        // Getting desperate now... Fallback to any description
+        return descriptions.values().toArray(new String[0])[0];
     }
 
     /**

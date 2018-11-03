@@ -174,11 +174,6 @@ public class  Contribution extends Media {
         return buffer.toString();
     }
 
-    @Override
-    public void setFilename(String filename) {
-        this.filename = filename;
-    }
-
     public void setImageUrl(String imageUrl) {
         this.imageUrl = imageUrl;
     }
