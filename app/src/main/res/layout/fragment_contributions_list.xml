@@ -53,6 +53,7 @@
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
         android:layout_marginRight="12dp"
+        android:layout_marginBottom="8dp"
         android:orientation="vertical"
         android:gravity="center"
         >
@@ -94,7 +95,7 @@
             android:clickable="true"
             android:visibility="visible"
             app:backgroundTint="@color/status_bar_blue"
-            app:elevation="6dp"
+            app:elevation="12dp"
             app:fabSize="normal"
             android:layout_margin="8dp"
             app:pressedTranslationZ="12dp"
