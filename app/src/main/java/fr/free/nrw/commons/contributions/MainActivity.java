@@ -10,12 +10,17 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
+import android.support.v7.app.AlertDialog;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.PopupWindow;
 
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -24,6 +29,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import fr.free.nrw.commons.BuildConfig;
 import fr.free.nrw.commons.R;
+import fr.free.nrw.commons.achievements.AchievementsActivity;
 import fr.free.nrw.commons.auth.AuthenticatedActivity;
 import fr.free.nrw.commons.auth.SessionManager;
 import fr.free.nrw.commons.location.LocationServiceManager;
@@ -31,6 +37,7 @@ import fr.free.nrw.commons.nearby.NearbyFragment;
 import fr.free.nrw.commons.notification.NotificationActivity;
 import fr.free.nrw.commons.theme.NavigationBaseActivity;
 import fr.free.nrw.commons.upload.UploadService;
+import fr.free.nrw.commons.utils.ViewUtil;
 import timber.log.Timber;
 
 import static android.content.ContentResolver.requestSync;
@@ -110,6 +117,27 @@ public class MainActivity extends AuthenticatedActivity implements FragmentManag
 
         tabLayout.addTab(tabLayout.newTab().setText(getResources().getString(R.string.contributions_fragment)));
         tabLayout.addTab(tabLayout.newTab().setText(getResources().getString(R.string.nearby_fragment)));
+
+        // Set custom view to add nearby info icon next to text
+        View nearbyTabLinearLayout = LayoutInflater.from(this).inflate(R.layout.custom_nearby_tab_layout, null);
+        View nearbyInfoPopupWindowLayout = LayoutInflater.from(this).inflate(R.layout.nearby_info_popup_layout, null);
+        ImageView nearbyInfo = nearbyTabLinearLayout.findViewById(R.id.nearby_info_image);
+        tabLayout.getTabAt(1).setCustomView(nearbyTabLinearLayout);
+
+        nearbyInfo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                /*new AlertDialog.Builder(MainActivity.this)
+                        .setTitle(R.string.title_activity_nearby)
+                        .setMessage(R.string.showcase_view_whole_nearby_activity)
+                        .setCancelable(true)
+                        .setNeutralButton(android.R.string.ok, (dialog, id) -> dialog.cancel())
+                        .create()
+                        .show();*/
+                String popupText = getResources().getString(R.string.showcase_view_whole_nearby_activity);
+                ViewUtil.displayPopupWindow(nearbyInfo, MainActivity.this, nearbyInfoPopupWindowLayout, popupText);
+            }
+        });
 
         if (uploadServiceIntent != null) {
             // If auth cookie already acquired notify contrib fragmnet so that it san operate auth required actions
