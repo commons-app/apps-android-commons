@@ -13,6 +13,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomSheetBehavior;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AlertDialog;
 import android.view.Menu;
@@ -371,6 +372,7 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
 
     private void addNetworkBroadcastReceiver() {
         IntentFilter intentFilter = new IntentFilter(NETWORK_INTENT_ACTION);
+        Snackbar snackbar = Snackbar.make(transparentView , R.string.no_internet, Snackbar.LENGTH_INDEFINITE);
 
         broadcastReceiver = new BroadcastReceiver() {
 
@@ -378,8 +380,9 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
             public void onReceive(Context context, Intent intent) {
                 if (NetworkUtils.isInternetConnectionEstablished(NearbyActivity.this)) {
                     refreshView(LOCATION_SIGNIFICANTLY_CHANGED);
+                    snackbar.dismiss();
                 } else {
-                    ViewUtil.showLongToast(NearbyActivity.this, getString(R.string.no_internet));
+                    snackbar.show();
                 }
             }
         };
