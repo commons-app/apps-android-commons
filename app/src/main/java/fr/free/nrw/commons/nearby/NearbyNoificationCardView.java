@@ -20,6 +20,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.contributions.MainActivity;
+import fr.free.nrw.commons.utils.ViewUtil;
 import timber.log.Timber;
 
 /**
@@ -118,6 +119,7 @@ public class NearbyNoificationCardView  extends CardView{
                         // Save shared preference for nearby card view accordingly
                         ((MainActivity) context).prefs.edit()
                                 .putBoolean("displayNearbyCardView", false).apply();
+                        ViewUtil.showLongToast(context, getResources().getString(R.string.nearby_notification_dismiss_message));
                         return true;
                     }
                     return false;

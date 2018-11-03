@@ -1,7 +1,7 @@
 package fr.free.nrw.commons.upload;
 
-import android.annotation.SuppressLint;
 import android.accounts.Account;
+import android.annotation.SuppressLint;
 import android.content.ComponentName;
 import android.content.ContentResolver;
 import android.content.Context;
@@ -15,7 +15,6 @@ import android.os.AsyncTask;
 import android.os.IBinder;
 import android.provider.MediaStore;
 import android.text.TextUtils;
-import android.util.Log;
 
 import java.io.BufferedInputStream;
 import java.io.File;
@@ -26,11 +25,7 @@ import java.util.concurrent.Executors;
 
 import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.HandlerService;
-
-import fr.free.nrw.commons.auth.LoginActivity;
-
 import fr.free.nrw.commons.R;
-
 import fr.free.nrw.commons.auth.SessionManager;
 import fr.free.nrw.commons.contributions.Contribution;
 import fr.free.nrw.commons.settings.Prefs;
@@ -171,7 +166,7 @@ public class UploadController {
 
                     //TODO: understand do we really need this code
                     if (contribution.getDataLength() <= 0) {
-                        Log.d("deneme","UploadController/doInBackground, contribution.getLocalUri():"+contribution.getLocalUri());
+                        Timber.d("UploadController/doInBackground, contribution.getLocalUri():" + contribution.getLocalUri());
                         AssetFileDescriptor assetFileDescriptor = contentResolver
                                 .openAssetFileDescriptor(Uri.fromFile(new File(contribution.getLocalUri().getPath())), "r");
                         if (assetFileDescriptor != null) {

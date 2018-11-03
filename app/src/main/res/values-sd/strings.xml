@@ -61,6 +61,7 @@
   <string name="login_failed_generic">داخل ٿيڻ ناڪام</string>
   <string name="share_upload_button">چاڙھيو</string>
   <string name="multiple_share_base_title">ھن سيٽ کي نالو ڏيو</string>
+  <string name="add_set_name_toast">هن سيٽ لاءِ ڪو نالو ڏيو</string>
   <string name="provider_modifications">ردوبدل</string>
   <string name="menu_upload_single">چاڙھيو</string>
   <string name="categories_search_text_hint">زمرا ڳوليو</string>
@@ -209,7 +210,7 @@
   <string name="use_external_storage_summary">ايپ ۾ ڪئمرا سان ڪڍيل تصويرون پنھنجي ڊوائيس تي سانڍيو</string>
   <string name="login_to_your_account">پنھنجي کاتي ۾ داخل ٿيو</string>
   <string name="send_log_file">لاگ فائيل موڪليو</string>
-  <string name="send_log_file_description">لاگ فائيل سرجڻھارن کي برقٽپال ذريعي موڪليو</string>
+  <string name="send_log_file_description" fuzzy="true">لاگ فائيل سرجڻھارن کي برقٽپال ذريعي موڪليو</string>
   <string name="null_url">خلل: يو آر ايل نه لڌو</string>
   <string name="nominated_for_deletion">هن تصوير کي ڊاهڻ لاءِ مقرر ڪيو ويو آهي.</string>
   <string name="view_browser">برائوزر ۾ ڏسو</string>

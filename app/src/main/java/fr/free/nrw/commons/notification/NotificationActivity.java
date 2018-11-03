@@ -75,9 +75,7 @@ public class NotificationActivity extends NavigationBaseActivity {
         if (!NetworkUtils.isInternetConnectionEstablished(this)) {
             progressBar.setVisibility(View.GONE);
             Snackbar.make(relativeLayout , R.string.no_internet, Snackbar.LENGTH_INDEFINITE)
-                    .setAction(R.string.retry, view -> {
-                        refresh();
-                    }).show();
+                    .setAction(R.string.retry, view -> refresh()).show();
         }else {
             progressBar.setVisibility(View.VISIBLE);
             addNotifications();

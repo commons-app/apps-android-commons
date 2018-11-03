@@ -52,6 +52,8 @@ public class Place {
         this.distance = distance;
     }
 
+    public Uri getSecondaryImageUrl() { return this.secondaryImageUrl; }
+
     /**
      * Extracts the entity id from the wikidata link
      * @return returns the entity id if wikidata link exists

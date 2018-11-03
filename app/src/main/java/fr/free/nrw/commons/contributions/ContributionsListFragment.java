@@ -58,6 +58,8 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment {
     FloatingActionButton fabCamera;
     @BindView(R.id.fab_galery)
     FloatingActionButton fabGalery;
+    @BindView(R.id.noDataYet)
+    TextView noDataYet;
 
     @Inject
     @Named("default_preferences")
@@ -78,6 +80,7 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment {
 
         contributionsList.setOnItemClickListener((AdapterView.OnItemClickListener) getParentFragment());
 
+        changeEmptyScreen(true);
         changeProgressBarVisibility(true);
         return view;
     }
@@ -106,6 +109,10 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment {
         super.onViewCreated(view, savedInstanceState);
         initializeAnimations();
         setListeners();
+    }
+
+    public void changeEmptyScreen(boolean isEmpty){
+        this.noDataYet.setVisibility(isEmpty ? View.VISIBLE : View.GONE);
     }
 
     private void initializeAnimations() {
@@ -298,6 +305,7 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment {
      */
     protected void clearSyncMessage() {
         waitingMessage.setVisibility(GONE);
+        noDataYet.setVisibility(GONE);
     }
 
     public ListAdapter getAdapter() {

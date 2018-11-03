@@ -4,7 +4,6 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
-import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
@@ -16,7 +15,6 @@ import android.text.Editable;
 import android.text.Html;
 import android.text.TextWatcher;
 import android.text.method.LinkMovementMethod;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -34,14 +32,13 @@ import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import fr.free.nrw.commons.upload.DescriptionsAdapter.Callback;
+
 import java.lang.reflect.Type;
 import java.util.ArrayList;
-import java.util.Locale;
-
 import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
+
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -216,7 +213,7 @@ public class SingleUploadFragment extends CommonsDaggerSupportFragment {
 
     private void initRecyclerView() {
         descriptionsAdapter = new DescriptionsAdapter();
-        descriptionsAdapter.setCallback((mediaDetailDescription, descriptionInfo) -> showInfoAlert(mediaDetailDescription,descriptionInfo));
+        descriptionsAdapter.setCallback(this::showInfoAlert);
         descriptionsAdapter.setLanguages(getLocaleSupportedByDevice());
         rvDescriptions.setLayoutManager(new LinearLayoutManager(getContext()));
         rvDescriptions.setAdapter(descriptionsAdapter);

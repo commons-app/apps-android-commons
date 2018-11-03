@@ -5,7 +5,9 @@ import android.content.Context;
 import android.support.design.widget.Snackbar;
 import android.view.Display;
 import android.view.View;
+import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.PopupWindow;
 import android.widget.Toast;
 
 public class ViewUtil {
@@ -47,6 +49,17 @@ public class ViewUtil {
                 manager.hideSoftInputFromWindow(view.getWindowToken(), 0);
             }
         }
+    }
+
+    public static void displayPopupWindow(View anchorView, Context context, View popupWindowLayout, String text) {
+
+        PopupWindow popup = new PopupWindow(context);
+        popup.setContentView(popupWindowLayout);
+        // Closes the popup window when touch outside of it - when looses focus
+        popup.setOutsideTouchable(true);
+        popup.setFocusable(true);
+        // Show anchored to button
+        popup.showAsDropDown(anchorView);
     }
 
 }

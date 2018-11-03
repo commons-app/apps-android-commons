@@ -15,10 +15,10 @@ class ContributionViewHolder {
     final ProgressBar progressView;
 
     ContributionViewHolder(View parent) {
-        imageView = (MediaWikiImageView) parent.findViewById(R.id.contributionImage);
-        titleView = (TextView)parent.findViewById(R.id.contributionTitle);
-        stateView = (TextView)parent.findViewById(R.id.contributionState);
-        seqNumView = (TextView)parent.findViewById(R.id.contributionSequenceNumber);
-        progressView = (ProgressBar)parent.findViewById(R.id.contributionProgress);
+        imageView = parent.findViewById(R.id.contributionImage);
+        titleView = parent.findViewById(R.id.contributionTitle);
+        stateView = parent.findViewById(R.id.contributionState);
+        seqNumView = parent.findViewById(R.id.contributionSequenceNumber);
+        progressView = parent.findViewById(R.id.contributionProgress);
     }
 }

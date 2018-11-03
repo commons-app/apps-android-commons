@@ -10,12 +10,17 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
+import android.support.v7.app.AlertDialog;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.PopupWindow;
 
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -24,6 +29,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import fr.free.nrw.commons.BuildConfig;
 import fr.free.nrw.commons.R;
+import fr.free.nrw.commons.achievements.AchievementsActivity;
 import fr.free.nrw.commons.auth.AuthenticatedActivity;
 import fr.free.nrw.commons.auth.SessionManager;
 import fr.free.nrw.commons.location.LocationServiceManager;
@@ -31,6 +37,7 @@ import fr.free.nrw.commons.nearby.NearbyFragment;
 import fr.free.nrw.commons.notification.NotificationActivity;
 import fr.free.nrw.commons.theme.NavigationBaseActivity;
 import fr.free.nrw.commons.upload.UploadService;
+import fr.free.nrw.commons.utils.ViewUtil;
 import timber.log.Timber;
 
 import static android.content.ContentResolver.requestSync;
@@ -110,6 +117,27 @@ public class MainActivity extends AuthenticatedActivity implements FragmentManag
 
         tabLayout.addTab(tabLayout.newTab().setText(getResources().getString(R.string.contributions_fragment)));
         tabLayout.addTab(tabLayout.newTab().setText(getResources().getString(R.string.nearby_fragment)));
+
+        // Set custom view to add nearby info icon next to text
+        View nearbyTabLinearLayout = LayoutInflater.from(this).inflate(R.layout.custom_nearby_tab_layout, null);
+        View nearbyInfoPopupWindowLayout = LayoutInflater.from(this).inflate(R.layout.nearby_info_popup_layout, null);
+        ImageView nearbyInfo = nearbyTabLinearLayout.findViewById(R.id.nearby_info_image);
+        tabLayout.getTabAt(1).setCustomView(nearbyTabLinearLayout);
+
+        nearbyInfo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                /*new AlertDialog.Builder(MainActivity.this)
+                        .setTitle(R.string.title_activity_nearby)
+                        .setMessage(R.string.showcase_view_whole_nearby_activity)
+                        .setCancelable(true)
+                        .setNeutralButton(android.R.string.ok, (dialog, id) -> dialog.cancel())
+                        .create()
+                        .show();*/
+                String popupText = getResources().getString(R.string.showcase_view_whole_nearby_activity);
+                ViewUtil.displayPopupWindow(nearbyInfo, MainActivity.this, nearbyInfoPopupWindowLayout, popupText);
+            }
+        });
 
         if (uploadServiceIntent != null) {
             // If auth cookie already acquired notify contrib fragmnet so that it san operate auth required actions
@@ -193,12 +221,14 @@ public class MainActivity extends AuthenticatedActivity implements FragmentManag
     }
 
     public void hideTabs() {
+        changeDrawerIconToBakcButton();
         if (tabLayout != null) {
             tabLayout.setVisibility(View.GONE);
         }
     }
 
     public void showTabs() {
+        changeDrawerIconToDefault();
         if (tabLayout != null) {
             tabLayout.setVisibility(View.VISIBLE);
         }
@@ -212,6 +242,7 @@ public class MainActivity extends AuthenticatedActivity implements FragmentManag
     @Override
     public void onBackPressed() {
         String contributionsFragmentTag = ((ContributionsActivityPagerAdapter) viewPager.getAdapter()).makeFragmentName(R.id.pager, 0);
+        String nearbyFragmentTag = ((ContributionsActivityPagerAdapter) viewPager.getAdapter()).makeFragmentName(R.id.pager, 1);
         if (getSupportFragmentManager().findFragmentByTag(contributionsFragmentTag) != null && isContributionsFragmentVisible) {
             // Meas that contribution fragment is visible (not nearby fragment)
             ContributionsFragment contributionsFragment = (ContributionsFragment) getSupportFragmentManager().findFragmentByTag(contributionsFragmentTag);
@@ -222,13 +253,20 @@ public class MainActivity extends AuthenticatedActivity implements FragmentManag
                 contributionsFragment.getChildFragmentManager().popBackStack();
                 // Tabs were invisible when Media Details Fragment is active, make them visible again on Contrib List Fragment active
                 showTabs();
-                // Nearby Notification Card View was invisible when Media Details Fragment is active, make it visible again on Contrib List Fragment active
-                contributionsFragment.nearbyNoificationCardView.setVisibility(View.VISIBLE);
+                // Nearby Notification Card View was invisible when Media Details Fragment is active, make it visible again on Contrib List Fragment active, according to preferences
+                if (prefs.getBoolean("displayNearbyCardView", true)) {
+                    contributionsFragment.nearbyNoificationCardView.setVisibility(View.VISIBLE);
+                } else {
+                    contributionsFragment.nearbyNoificationCardView.setVisibility(View.GONE);
+                }
             } else {
                 finish();
             }
+        } else if (getSupportFragmentManager().findFragmentByTag(nearbyFragmentTag) != null && !isContributionsFragmentVisible) {
+            // Meas that nearby fragment is visible (not contributions fragment)
+            // Set current item to contributions activity instead of closing the activity
+            viewPager.setCurrentItem(0);
         } else {
-            // TODO handle nearby fragment is active posibility here.
             super.onBackPressed();
         }
     }
@@ -247,7 +285,7 @@ public class MainActivity extends AuthenticatedActivity implements FragmentManag
             // TODO: used vectors are not compatible with API 19 and below, change them
             menu.findItem(R.id.notifications).setIcon(ContextCompat.getDrawable(this, R.drawable.ic_notifications_white_24dp));
         } else {
-            menu.findItem(R.id.notifications).setIcon(ContextCompat.getDrawable(this, R.drawable.ic_notifications_white_with_marker));
+            menu.findItem(R.id.notifications).setIcon(ContextCompat.getDrawable(this, R.drawable.ic_notifications_active_white_24dp));
         }
 
         this.menu = menu;
@@ -313,7 +351,7 @@ public class MainActivity extends AuthenticatedActivity implements FragmentManag
             menu.findItem(R.id.notifications).setIcon(ContextCompat.getDrawable(this, R.drawable.ic_notifications_white_24dp));
         } else {
             this.isThereUnreadNotifications = true;
-            menu.findItem(R.id.notifications).setIcon(ContextCompat.getDrawable(this, R.drawable.ic_notifications_white_with_marker));
+            menu.findItem(R.id.notifications).setIcon(ContextCompat.getDrawable(this, R.drawable.ic_notifications_active_white_24dp));
         }
     }
 
