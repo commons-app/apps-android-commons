@@ -11,6 +11,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.Point;
 import android.graphics.Rect;
@@ -18,6 +19,7 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
+import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.annotation.RequiresApi;
 import android.support.design.widget.FloatingActionButton;
@@ -35,6 +37,7 @@ import com.facebook.drawee.generic.GenericDraweeHierarchyBuilder;
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.github.chrisbanes.photoview.PhotoView;
 
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
@@ -125,7 +128,6 @@ public class ShareActivity
     private String mimeType;
     private CategorizationFragment categorizationFragment;
     private Uri mediaUri;
-    private Uri contentProviderUri;
     private Contribution contribution;
     private GPSExtractor gpsObj;
     private String decimalCoords;
@@ -214,7 +216,7 @@ public class ShareActivity
             Timber.d("Cache the categories found");
         }
 
-        uploadController.startUpload(title, contentProviderUri, mediaUri, description, mimeType, source, decimalCoords, wikiDataEntityId, c -> {
+        uploadController.startUpload(title,mediaUri, description, mimeType, source, decimalCoords, wikiDataEntityId, c -> {
             ShareActivity.this.contribution = c;
             showPostUpload();
         });
@@ -354,9 +356,12 @@ public class ShareActivity
 
         if (Intent.ACTION_SEND.equals(intent.getAction())) {
             mediaUri = intent.getParcelableExtra(Intent.EXTRA_STREAM);
-            contentProviderUri = mediaUri;
-            mediaUri = ContributionUtils.saveFileBeingUploadedTemporarily(this, mediaUri);
-
+            String imageFilePath = getImageFilePath(mediaUri);
+            if(imageFilePath==null){
+                //TODO handle this properly
+                return;
+            }
+            mediaUri=Uri.parse(imageFilePath);
             if (intent.hasExtra(UploadService.EXTRA_SOURCE)) {
                 source = intent.getStringExtra(UploadService.EXTRA_SOURCE);
             } else {
@@ -377,6 +382,26 @@ public class ShareActivity
         if (mediaUri != null) {
             backgroundImageView.setImageURI(mediaUri);
         }
+    }
+
+    public String getImageFilePath(Uri uri) {
+        String path = null, image_id = null;
+
+        Cursor cursor1 = getContentResolver().query(uri, null, null, null, null);
+        if (cursor1 != null) {
+            cursor1.moveToFirst();
+            image_id = cursor1.getString(0);
+            image_id = image_id.substring(image_id.lastIndexOf(":") + 1);
+            cursor1.close();
+        }
+
+        Cursor cursor = getContentResolver().query(android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI, null, MediaStore.Images.Media._ID + " = ? ", new String[]{image_id}, null);
+        if (cursor!=null) {
+            cursor.moveToFirst();
+            path = cursor.getString(cursor.getColumnIndex(MediaStore.Images.Media.DATA));
+            cursor.close();
+        }
+        return path;
     }
 
     /**

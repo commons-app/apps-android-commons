@@ -96,21 +96,9 @@ public class UploadController {
      * @param wikiDataEntityId
      * @param onComplete    the progress tracker
      */
-    public void startUpload(String title, Uri contentProviderUri, Uri mediaUri, String description, String mimeType, String source, String decimalCoords, String wikiDataEntityId, ContributionUploadProgress onComplete) {
+    public void startUpload(String title, Uri mediaUri, String description, String mimeType, String source, String decimalCoords, String wikiDataEntityId, ContributionUploadProgress onComplete) {
         Contribution contribution;
-
-
-            //TODO: Modify this to include coords
-            contribution = new Contribution(mediaUri, null, title, description, -1,
-                    null, null, sessionManager.getCurrentAccount().name,
-                    CommonsApplication.DEFAULT_EDIT_SUMMARY, decimalCoords);
-
-
-            contribution.setTag("mimeType", mimeType);
-            contribution.setSource(source);
-
         Timber.d("Wikidata entity ID received from Share activity is %s", wikiDataEntityId);
-        //TODO: Modify this to include coords
         Account currentAccount = sessionManager.getCurrentAccount();
         if(currentAccount == null) {
             Timber.d("Current account is null");
@@ -118,16 +106,19 @@ public class UploadController {
             sessionManager.forceLogin(context);
             return;
         }
+        String fileAbsolutePath = mediaUri.toString();
+        File file=new File(fileAbsolutePath);
+        long lastModified = file.lastModified();
+        Date lastModifiedDate=new Date(lastModified);
         contribution = new Contribution(mediaUri, null, title, description, -1,
-                null, null, currentAccount.name,
+                lastModifiedDate, new Date(System.currentTimeMillis()), currentAccount.name,
                 CommonsApplication.DEFAULT_EDIT_SUMMARY, decimalCoords);
 
 
         contribution.setTag("mimeType", mimeType);
         contribution.setSource(source);
         contribution.setWikiDataEntityId(wikiDataEntityId);
-        contribution.setContentProviderUri(contentProviderUri);
-
+        contribution.setContentProviderUri(mediaUri);
         //Calls the next overloaded method
         startUpload(contribution, onComplete);
     }
@@ -188,35 +179,13 @@ public class UploadController {
                 }
 
                 String mimeType = (String) contribution.getTag("mimeType");
-                Boolean imagePrefix = false;
-
                 if (mimeType == null || TextUtils.isEmpty(mimeType) || mimeType.endsWith("*")) {
                     mimeType = contentResolver.getType(contribution.getLocalUri());
                 }
 
                 if (mimeType != null) {
                     contribution.setTag("mimeType", mimeType);
-                    imagePrefix = mimeType.startsWith("image/");
                     Timber.d("MimeType is: %s", mimeType);
-                }
-
-                if (imagePrefix && contribution.getDateCreated() == null) {
-                    Timber.d("local uri   " + contribution.getLocalUri());
-                    Cursor cursor = contentResolver.query(contribution.getLocalUri(),
-                            new String[]{MediaStore.Images.ImageColumns.DATE_TAKEN}, null, null, null);
-                    if (cursor != null && cursor.getCount() != 0 && cursor.getColumnCount() != 0) {
-                        cursor.moveToFirst();
-                        Date dateCreated = new Date(cursor.getLong(0));
-                        Date epochStart = new Date(0);
-                        if (dateCreated.equals(epochStart) || dateCreated.before(epochStart)) {
-                            // If date is incorrect (1st second of unix time) then set it to the current date
-                            dateCreated = new Date();
-                        }
-                        contribution.setDateCreated(dateCreated);
-                        cursor.close();
-                    } else {
-                        contribution.setDateCreated(new Date());
-                    }
                 }
             return contribution;
             }
