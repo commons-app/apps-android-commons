@@ -11,7 +11,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
-import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.Point;
 import android.graphics.Rect;
@@ -19,7 +18,6 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
-import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.annotation.RequiresApi;
 import android.support.design.widget.FloatingActionButton;
@@ -37,7 +35,7 @@ import com.facebook.drawee.generic.GenericDraweeHierarchyBuilder;
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.github.chrisbanes.photoview.PhotoView;
 
-import java.io.File;
+import fr.free.nrw.commons.Utils;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
@@ -356,11 +354,7 @@ public class ShareActivity
 
         if (Intent.ACTION_SEND.equals(intent.getAction())) {
             mediaUri = intent.getParcelableExtra(Intent.EXTRA_STREAM);
-            String imageFilePath = getImageFilePath(mediaUri);
-            if(imageFilePath==null){
-                //TODO handle this properly
-                return;
-            }
+            String imageFilePath = Utils.getImageFileAbsolutePath(this, mediaUri);
             mediaUri=Uri.parse(imageFilePath);
             if (intent.hasExtra(UploadService.EXTRA_SOURCE)) {
                 source = intent.getStringExtra(UploadService.EXTRA_SOURCE);
@@ -382,26 +376,6 @@ public class ShareActivity
         if (mediaUri != null) {
             backgroundImageView.setImageURI(mediaUri);
         }
-    }
-
-    public String getImageFilePath(Uri uri) {
-        String path = null, image_id = null;
-
-        Cursor cursor1 = getContentResolver().query(uri, null, null, null, null);
-        if (cursor1 != null) {
-            cursor1.moveToFirst();
-            image_id = cursor1.getString(0);
-            image_id = image_id.substring(image_id.lastIndexOf(":") + 1);
-            cursor1.close();
-        }
-
-        Cursor cursor = getContentResolver().query(android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI, null, MediaStore.Images.Media._ID + " = ? ", new String[]{image_id}, null);
-        if (cursor!=null) {
-            cursor.moveToFirst();
-            path = cursor.getString(cursor.getColumnIndex(MediaStore.Images.Media.DATA));
-            cursor.close();
-        }
-        return path;
     }
 
     /**

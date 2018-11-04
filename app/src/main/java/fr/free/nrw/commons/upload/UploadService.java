@@ -2,12 +2,14 @@ package fr.free.nrw.commons.upload;
 
 import android.annotation.SuppressLint;
 import android.app.Notification;
+import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.ContentResolver;
 import android.content.ContentValues;
 import android.content.Intent;
 import android.graphics.BitmapFactory;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.NotificationCompat;
 import android.webkit.MimeTypeMap;
@@ -185,16 +187,30 @@ public class UploadService extends HandlerService<Contribution> {
 
     @SuppressLint("StringFormatInvalid")
     private NotificationCompat.Builder getNotificationBuilder(Contribution contribution, String channelId) {
-        return new NotificationCompat.Builder(this, channelId).setAutoCancel(true)
+        NotificationCompat.Builder builder =
+            new NotificationCompat.Builder(this, channelId).setAutoCancel(true)
                 .setSmallIcon(R.drawable.ic_launcher)
                 .setLargeIcon(BitmapFactory.decodeResource(getResources(), R.drawable.ic_launcher))
                 .setAutoCancel(true)
-                .setContentTitle(getString(R.string.upload_progress_notification_title_start, contribution.getDisplayTitle()))
-                .setContentText(getResources().getQuantityString(R.plurals.uploads_pending_notification_indicator, toUpload, toUpload))
+                .setContentTitle(getString(R.string.upload_progress_notification_title_start,
+                    contribution.getDisplayTitle()))
+                .setContentText(getResources().getQuantityString(
+                    R.plurals.uploads_pending_notification_indicator, toUpload, toUpload))
                 .setOngoing(true)
                 .setProgress(100, 0, true)
-                .setContentIntent(PendingIntent.getActivity(this, 0, new Intent(this, ContributionsActivity.class), 0))
-                .setTicker(getString(R.string.upload_progress_notification_title_in_progress, contribution.getDisplayTitle()));
+                .setContentIntent(PendingIntent.getActivity(this, 0,
+                    new Intent(this, ContributionsActivity.class), 0))
+                .setTicker(getString(R.string.upload_progress_notification_title_in_progress,
+                    contribution.getDisplayTitle()));
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            if (null == notificationManager.getNotificationChannel(channelId)) {
+                notificationManager.createNotificationChannel(new NotificationChannel(channelId,
+                    CommonsApplication.NOTIFICATION_CHANNEL_TITLE,
+                    NotificationManager.IMPORTANCE_DEFAULT));
+            }
+            builder.setChannelId(channelId);
+        }
+        return builder;
     }
 
     private void uploadContribution(Contribution contribution) {
@@ -205,6 +221,11 @@ public class UploadService extends HandlerService<Contribution> {
 
         try {
             File file1 = new File(contribution.getLocalUri().getPath());
+            if(!file1.canRead()){
+                Timber.d("file does not have read access");
+                Toast.makeText(this, R.string.file_doesnot_have_read_access, Toast.LENGTH_LONG).show();
+                return;
+            }
             fileInputStream = new FileInputStream(file1);
             tempFileInputStream = new FileInputStream(file1);
             if (contentInfoUtil == null) {

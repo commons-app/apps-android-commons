@@ -10,6 +10,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.database.DataSetObserver;
+import android.media.ExifInterface;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -30,8 +31,11 @@ import com.karumi.dexter.listener.PermissionDeniedResponse;
 import com.karumi.dexter.listener.PermissionGrantedResponse;
 import com.karumi.dexter.listener.single.BasePermissionListener;
 
+import fr.free.nrw.commons.Utils;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -385,16 +389,25 @@ public class MultipleShareActivity extends AuthenticatedActivity
                 photosList = new ArrayList<>();
                 ArrayList<Uri> urisList = intent.getParcelableArrayListExtra(Intent.EXTRA_STREAM);
                 for (int i = 0; i < urisList.size(); i++) {
-                    Contribution up = new Contribution();
-                    Uri uri = urisList.get(i);
-                    // Use temporarily saved file Uri instead
-                    uri = ContributionUtils.saveFileBeingUploadedTemporarily(this, uri);
-                    up.setLocalUri(uri);
+                    Uri contentUri = urisList.get(i);
+                    Uri absoluteUri=contentUri = Uri.parse(Utils.getImageFileAbsolutePath(this,contentUri));
+                    File file=new File(absoluteUri.toString());
+                    Contribution up=new Contribution();
+                    up.setDateCreated(new Date(file.lastModified()));//Set the date created
+                    up.setLocalUri(absoluteUri);
                     up.setTag("mimeType", intent.getType());
                     up.setTag("sequence", i);
                     up.setSource(Contribution.SOURCE_EXTERNAL);
+                    //Lets add the image dimensions as well..does not hurt to add it.
+                    try {
+                        ExifInterface exifInterface=new ExifInterface(absoluteUri.toString());
+                        up.setHeight(Integer.parseInt(exifInterface.getAttribute(ExifInterface.TAG_IMAGE_WIDTH)));
+                        up.setWidth(Integer.parseInt(exifInterface.getAttribute(ExifInterface.TAG_IMAGE_LENGTH)));
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
                     up.setMultiple(true);
-                    String imageGpsCoordinates = extractImageGpsData(uri);
+                    String imageGpsCoordinates = extractImageGpsData(contentUri);
                     if (imageGpsCoordinates != null) {
                         Timber.d("GPS data for image found!");
                         up.setDecimalCoords(imageGpsCoordinates);

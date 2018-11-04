@@ -2,9 +2,11 @@ package fr.free.nrw.commons;
 
 import android.content.Context;
 import android.content.Intent;
+import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.preference.PreferenceManager;
+import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.customtabs.CustomTabsIntent;
 import android.support.v4.content.ContextCompat;
@@ -188,6 +190,33 @@ public class Utils {
         Bitmap bitmap = Bitmap.createBitmap(screenView.getDrawingCache());
         screenView.setDrawingCacheEnabled(false);
         return bitmap;
+    }
+
+    /**
+     * returns absolute path from uri
+     * @param uri
+     * @return
+     */
+    public static String getImageFileAbsolutePath(Context context, Uri uri) {
+        String path = null, image_id = null;
+
+        Cursor cursor1 = context.getContentResolver().query(uri, null, null, null, null);
+        if (cursor1 != null) {
+            cursor1.moveToFirst();
+            image_id = cursor1.getString(0);
+            image_id = image_id.substring(image_id.lastIndexOf(":") + 1);
+            cursor1.close();
+        }
+
+        Cursor cursor = context.getContentResolver()
+            .query(android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI, null,
+                MediaStore.Images.Media._ID + " = ? ", new String[] { image_id }, null);
+        if (cursor != null) {
+            cursor.moveToFirst();
+            path = cursor.getString(cursor.getColumnIndex(MediaStore.Images.Media.DATA));
+            cursor.close();
+        }
+        return path;
     }
 
 }

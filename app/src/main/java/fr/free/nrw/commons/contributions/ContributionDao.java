@@ -98,7 +98,7 @@ public class ContributionDao {
             cv.put(Table.COLUMN_UPLOADED, contribution.getDateUploaded().getTime());
         }
         cv.put(Table.COLUMN_LENGTH, contribution.getDataLength());
-        cv.put(Table.COLUMN_TIMESTAMP, contribution.getTimestamp().getTime());
+        cv.put(Table.COLUMN_TIMESTAMP, contribution.getDateCreated().getTime());//This is the date created column [Previously it used to store uploaded date giving wrong created date in case of retries]
         cv.put(Table.COLUMN_STATE, contribution.getState());
         cv.put(Table.COLUMN_TRANSFERRED, contribution.getTransferred());
         cv.put(Table.COLUMN_SOURCE, contribution.getSource());
