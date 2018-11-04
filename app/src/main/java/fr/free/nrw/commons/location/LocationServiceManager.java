@@ -26,7 +26,7 @@ public class LocationServiceManager implements LocationListener {
     private static final long MIN_LOCATION_UPDATE_REQUEST_TIME_IN_MILLIS = 2 * 60 * 100;
     private static final long MIN_LOCATION_UPDATE_REQUEST_DISTANCE_IN_METERS = 10;
 
-    private Context context;
+    public Context context;
     private LocationManager locationManager;
     private Location lastLocation;
     //private Location lastLocationDuplicate; // Will be used for nearby card view on contributions activity

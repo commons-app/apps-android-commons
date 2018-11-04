@@ -576,6 +576,8 @@ public class ContributionsFragment
         getChildFragmentManager().removeOnBackStackChangedListener(this);
         locationManager.unregisterLocationManager();
         locationManager.removeLocationListener(this);
+        // Try to prevent a possible NPE
+        locationManager.context = null;
         super.onDestroy();
 
         if (isUploadServiceConnected) {
