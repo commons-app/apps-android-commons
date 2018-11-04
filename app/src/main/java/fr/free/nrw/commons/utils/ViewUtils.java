@@ -2,6 +2,7 @@ package fr.free.nrw.commons.utils;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.res.Configuration;
 import android.support.design.widget.Snackbar;
 import android.view.Display;
 import android.view.View;
@@ -46,12 +47,7 @@ public class ViewUtils {
      * @return true if screen is portrait, false otherwise
      */
     public static boolean isPortrait(Context context) {
-        Display orientation = ((Activity)context).getWindowManager().getDefaultDisplay();
-        if (orientation.getWidth() < orientation.getHeight()){
-            return true;
-        } else {
-            return false;
-        }
+        return context.getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT;
     }
 
     /**
