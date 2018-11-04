@@ -57,12 +57,7 @@ public class QuizActivity extends AppCompatActivity {
             AlertDialog.Builder alert = new AlertDialog.Builder(this);
             alert.setTitle(getResources().getString(R.string.warning));
             alert.setMessage(getResources().getString(R.string.warning_for_no_answer));
-            alert.setPositiveButton(R.string.continue_message, new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    dialog.dismiss();
-                }
-            });
+            alert.setPositiveButton(R.string.continue_message, (dialog, which) -> dialog.dismiss());
             AlertDialog dialog = alert.create();
             dialog.show();
         }
@@ -77,21 +72,13 @@ public class QuizActivity extends AppCompatActivity {
         AlertDialog.Builder alert = new AlertDialog.Builder(this);
         alert.setTitle(getResources().getString(R.string.warning));
         alert.setMessage(getResources().getString(R.string.quiz_back_button));
-        alert.setPositiveButton(R.string.continue_message, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                Intent i = new Intent(QuizActivity.this, QuizResultActivity.class);
-                dialog.dismiss();
-                i.putExtra("QuizResult",score);
-                startActivity(i);
-            }
+        alert.setPositiveButton(R.string.continue_message, (dialog, which) -> {
+            Intent i = new Intent(QuizActivity.this, QuizResultActivity.class);
+            dialog.dismiss();
+            i.putExtra("QuizResult",score);
+            startActivity(i);
         });
-        alert.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                dialogInterface.dismiss();
-            }
-        });
+        alert.setNegativeButton("Cancel", (dialogInterface, i) -> dialogInterface.dismiss());
         AlertDialog dialog = alert.create();
         dialog.show();
     }
@@ -124,7 +111,7 @@ public class QuizActivity extends AppCompatActivity {
                 (!quiz.get(questionIndex).isAnswer() && negativeAnswer.isChecked()) ){
             customAlert(getResources().getString(R.string.correct),quiz.get(questionIndex).getAnswerMessage() );
             score++;
-        } else{
+        } else {
             customAlert(getResources().getString(R.string.wrong), quiz.get(questionIndex).getAnswerMessage());
         }
     }
@@ -138,18 +125,15 @@ public class QuizActivity extends AppCompatActivity {
         AlertDialog.Builder alert = new AlertDialog.Builder(this);
         alert.setTitle(title);
         alert.setMessage(Message);
-        alert.setPositiveButton(R.string.continue_message, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                questionIndex++;
-                if (questionIndex == quiz.size()){
-                    Intent i = new Intent(QuizActivity.this, QuizResultActivity.class);
-                    dialog.dismiss();
-                    i.putExtra("QuizResult",score);
-                    startActivity(i);
-                }else {
-                    displayQuestion();
-                }
+        alert.setPositiveButton(R.string.continue_message, (dialog, which) -> {
+            questionIndex++;
+            if (questionIndex == quiz.size()) {
+                Intent i = new Intent(QuizActivity.this, QuizResultActivity.class);
+                dialog.dismiss();
+                i.putExtra("QuizResult",score);
+                startActivity(i);
+            } else {
+                displayQuestion();
             }
         });
         AlertDialog dialog = alert.create();

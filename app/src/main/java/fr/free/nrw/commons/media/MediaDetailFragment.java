@@ -376,17 +376,13 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
         final EditText input = new EditText(getActivity());
         alert.setView(input);
         input.requestFocus();
-        alert.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int whichButton) {
-                String reason = input.getText().toString();
-                DeleteTask deleteTask = new DeleteTask(getActivity(), media, reason);
-                deleteTask.execute();
-                enableDeleteButton(false);
-            }
+        alert.setPositiveButton(R.string.ok, (dialog, whichButton) -> {
+            String reason = input.getText().toString();
+            DeleteTask deleteTask = new DeleteTask(getActivity(), media, reason);
+            deleteTask.execute();
+            enableDeleteButton(false);
         });
-        alert.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int whichButton) {
-            }
+        alert.setNegativeButton(R.string.cancel, (dialog, whichButton) -> {
         });
         AlertDialog d = alert.create();
         input.addTextChangedListener(new TextWatcher() {
@@ -443,7 +439,7 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
 
     private View buildCatLabel(final String catName, ViewGroup categoryContainer) {
         final View item = LayoutInflater.from(getContext()).inflate(R.layout.detail_category_item, categoryContainer, false);
-        final CompatTextView textView = (CompatTextView) item.findViewById(R.id.mediaDetailCategoryItemText);
+        final CompatTextView textView = item.findViewById(R.id.mediaDetailCategoryItemText);
 
         textView.setText(catName);
         if (categoriesLoaded && categoriesPresent) {
