@@ -32,7 +32,8 @@ public class CategoriesModel implements CategoryClickedListener {
 
     @Inject GpsCategoryModel gpsCategoryModel;
     @Inject
-    public CategoriesModel(MediaWikiApi mwApi, CategoryDao categoryDao,
+    public CategoriesModel(MediaWikiApi mwApi,
+                           CategoryDao categoryDao,
                            @Named("default_preferences") SharedPreferences prefs,
                            @Named("direct_nearby_upload_prefs") SharedPreferences directPrefs) {
         this.mwApi = mwApi;
@@ -97,11 +98,11 @@ public class CategoriesModel implements CategoryClickedListener {
     //endregion
 
     //region Category searching
-    public Observable<CategoryItem> searchAll(String term) {
+    public Observable<CategoryItem> searchAll(String term, List<String> imageTitleList) {
         //If user hasn't typed anything in yet, get GPS and recent items
         if (TextUtils.isEmpty(term)) {
             return gpsCategories()
-                    .concatWith(titleCategories())
+                    .concatWith(titleCategories(imageTitleList))
                     .concatWith(recentCategories());
         }
 
@@ -117,11 +118,11 @@ public class CategoriesModel implements CategoryClickedListener {
                 .map(name -> new CategoryItem(name, false));
     }
 
-    public Observable<CategoryItem> searchCategories(String term) {
+    public Observable<CategoryItem> searchCategories(String term, List<String> imageTitleList) {
         //If user hasn't typed anything in yet, get GPS and recent items
         if (TextUtils.isEmpty(term)) {
             return gpsCategories()
-                    .concatWith(titleCategories())
+                    .concatWith(titleCategories(imageTitleList))
                     .concatWith(recentCategories());
         }
 
@@ -134,18 +135,18 @@ public class CategoriesModel implements CategoryClickedListener {
         return categoriesCache.get(term);
     }
 
-    public Observable<CategoryItem> defaultCategories() {
+    public Observable<CategoryItem> defaultCategories(List<String> titleList) {
         Observable<CategoryItem> directCat = directCategories();
         if (hasDirectCategories()) {
             Timber.d("Image has direct Cat");
             return directCat
                     .concatWith(gpsCategories())
-                    .concatWith(titleCategories())
+                    .concatWith(titleCategories(titleList))
                     .concatWith(recentCategories());
         } else {
             Timber.d("Image has no direct Cat");
             return gpsCategories()
-                    .concatWith(titleCategories())
+                    .concatWith(titleCategories(titleList))
                     .concatWith(recentCategories());
         }
     }
@@ -171,12 +172,13 @@ public class CategoriesModel implements CategoryClickedListener {
                 .map(name -> new CategoryItem(name, false));
     }
 
-    private Observable<CategoryItem> titleCategories() {
-        //Retrieve the title that was saved when user tapped submit icon
-        String title = prefs.getString("Title", "");
+    private Observable<CategoryItem> titleCategories(List<String> titleList) {
+        return Observable.fromIterable(titleList)
+                .concatMap(this::getTitleCategories);
+    }
 
-        return mwApi
-                .searchTitles(title, SEARCH_CATS_LIMIT)
+    private Observable<CategoryItem> getTitleCategories(String title) {
+        return mwApi.searchTitles(title, SEARCH_CATS_LIMIT)
                 .map(name -> new CategoryItem(name, false));
     }
 

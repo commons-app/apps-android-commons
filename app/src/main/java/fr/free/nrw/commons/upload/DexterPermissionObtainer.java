@@ -17,7 +17,6 @@ import io.reactivex.subjects.CompletableSubject;
 import timber.log.Timber;
 
 public class DexterPermissionObtainer {
-    private final String TAG = "#MultipleShareActivity#";
     private final String requestedPermission;
     private android.app.AlertDialog storagePermissionInfoDialog;
     private DexterBuilder dexterStoragePermissionBuilder;
@@ -31,7 +30,7 @@ public class DexterPermissionObtainer {
 
     private Activity activity;
 
-    public CompletableSubject storagePromptObservable;
+    private CompletableSubject storagePromptObservable;
 
     /**
      * @param activity             The activity that is requesting the permission
@@ -39,7 +38,7 @@ public class DexterPermissionObtainer {
      * @param rationaleTitle       The title of the rationale dialog
      * @param rationaleText        The text inside the rationale dialog
      */
-    public DexterPermissionObtainer(Activity activity, String requestedPermission, String rationaleTitle, String rationaleText) {
+    DexterPermissionObtainer(Activity activity, String requestedPermission, String rationaleTitle, String rationaleText) {
         this.activity = activity;
         this.rationaleTitle = rationaleTitle;
         this.rationaleText = rationaleText;
@@ -52,7 +51,7 @@ public class DexterPermissionObtainer {
      * Checks if storage permissions are obtained, prompts the users to grant storage permissions if necessary.
      * When storage permission is present, onPermissionObtained is called.
      */
-    public Completable confirmStoragePermissions() {
+    Completable confirmStoragePermissions() {
         if (ExternalStorageUtils.isStoragePermissionGranted(activity)) {
             Timber.i("Storage permissions already granted.");
             storagePromptObservable.onComplete();
@@ -67,27 +66,11 @@ public class DexterPermissionObtainer {
         return storagePromptObservable;
     }
 
-    /* *
-     * Checks if storage permissions are obtained, prompts the users to grant storage permissions if necessary.
-     * When storage permission is present, onPermissionObtained is called.
-     *
-    public void confirmStoragePermissions() {
-        if (ExternalStorageUtils.isStoragePermissionGranted(activity)) {
-            Timber.i("Storage permissions already granted.");
-            onPermissionObtained.run();
-        } else if (!storagePromptInProgress) {
-            //If permission is not there, ask for it
-            storagePromptInProgress = true;
-            askDexterToHandleExternalStoragePermission();
-        }
-        //return storagePermissionReady;return null;
-    }*/
-
 
     /**
      * To be called when the user returns to the original activity after manually enabling storage permissions.
      */
-    public void onManualPermissionReturned() {
+    void onManualPermissionReturned() {
         //OnActivity result, no matter what the result is, our function can handle that.
         askDexterToHandleExternalStoragePermission();
     }

@@ -4,7 +4,6 @@ import dagger.Module;
 import dagger.android.ContributesAndroidInjector;
 import fr.free.nrw.commons.bookmarks.locations.BookmarkLocationsFragment;
 import fr.free.nrw.commons.bookmarks.pictures.BookmarkPicturesFragment;
-import fr.free.nrw.commons.category.CategorizationFragment;
 import fr.free.nrw.commons.category.CategoryImagesListFragment;
 import fr.free.nrw.commons.category.SubCategoryListFragment;
 import fr.free.nrw.commons.contributions.ContributionsFragment;
@@ -23,9 +22,6 @@ import fr.free.nrw.commons.settings.SettingsFragment;
 @Module
 @SuppressWarnings({"WeakerAccess", "unused"})
 public abstract class FragmentBuilderModule {
-
-    @ContributesAndroidInjector
-    abstract CategorizationFragment bindCategorizationFragment();
 
     @ContributesAndroidInjector
     abstract ContributionsListFragment bindContributionsListFragment();

@@ -25,6 +25,7 @@ import fr.free.nrw.commons.contributions.Contribution;
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
 import fr.free.nrw.commons.settings.Prefs;
 import fr.free.nrw.commons.utils.ImageUtils;
+import fr.free.nrw.commons.utils.StringUtils;
 import io.reactivex.Observable;
 import io.reactivex.Single;
 import io.reactivex.disposables.Disposable;
@@ -304,11 +305,6 @@ public class UploadModel {
         badImageSubscription = getCurrentItem().imageQuality.subscribe(consumer, Timber::e);
     }
 
-    public boolean isLoggedIn() {
-        Account currentAccount = sessionManager.getCurrentAccount();
-        return currentAccount != null;
-    }
-
 
     @SuppressWarnings("WeakerAccess")
     static class UploadItem {
@@ -340,7 +336,6 @@ public class UploadModel {
             this.gpsCoords = gpsCoords;
             this.fileExt = fileExt;
             imageQuality = BehaviorSubject.createDefault(ImageUtils.IMAGE_WAIT);
-//                imageQuality.subscribe(iq->Timber.i("New value of imageQuality:"+ImageUtils.IMAGE_OK));
         }
 
         public boolean isDummy() {

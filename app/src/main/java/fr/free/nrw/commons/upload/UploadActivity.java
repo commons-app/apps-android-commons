@@ -3,7 +3,6 @@ package fr.free.nrw.commons.upload;
 import android.Manifest;
 import android.animation.LayoutTransition;
 import android.annotation.SuppressLint;
-import android.content.ActivityNotFoundException;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -38,7 +37,6 @@ import com.jakewharton.rxbinding2.widget.RxTextView;
 import com.pedrogomez.renderers.RVRendererAdapter;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -88,6 +86,7 @@ public class UploadActivity extends AuthenticatedActivity implements UploadView 
     @BindView(R.id.bottom_card) CardView bottomCard;
     @BindView(R.id.bottom_card_expand_button) ImageView bottomCardExpandButton;
     @BindView(R.id.bottom_card_title) TextView bottomCardTitle;
+    @BindView(R.id.bottom_card_subtitle) TextView bottomCardSubtitle;
     @BindView(R.id.bottom_card_next) Button next;
     @BindView(R.id.bottom_card_previous) Button previous;
     @BindView(R.id.bottom_card_add_desc) Button bottomCardAddDescription;
@@ -131,17 +130,15 @@ public class UploadActivity extends AuthenticatedActivity implements UploadView 
         ButterKnife.bind(this);
         compositeDisposable = new CompositeDisposable();
 
-        configureCategories(savedInstanceState);
-        configureLicenses();
         configureLayout();
         configureTopCard();
         configureBottomCard();
         initRecyclerView();
         configureRightCard();
         configureNavigationButtons();
+        configureCategories();
+        configureLicenses();
 
-        //storagePermissionReady = BehaviorSubject.createDefault(false);
-        //storagePermissionReady.subscribe(b -> Timber.i("storagePermissionReady:" + b));
         presenter.initFromSavedState(savedInstanceState);
 
         dexterPermissionObtainer = new DexterPermissionObtainer(this,
@@ -190,8 +187,6 @@ public class UploadActivity extends AuthenticatedActivity implements UploadView 
     @Override
     protected void onPause() {
         presenter.removeView();
-//        imageTitle.removeTextChangedListener(titleWatcher);
-//        imageDescription.removeTextChangedListener(descriptionWatcher);
         compositeDisposable.dispose();
         compositeDisposable = new CompositeDisposable();
         super.onPause();
@@ -218,13 +213,13 @@ public class UploadActivity extends AuthenticatedActivity implements UploadView 
     @Override
     public void updateBottomCardContent(int currentStep, int stepCount, UploadModel.UploadItem uploadItem) {
         String cardTitle = getResources().getString(R.string.step_count, currentStep, stepCount);
+        String cardSubTitle = getResources().getString(R.string.image_in_set_label, currentStep);
         bottomCardTitle.setText(cardTitle);
+        bottomCardSubtitle.setText(cardSubTitle);
         categoryTitle.setText(cardTitle);
         licenseTitle.setText(cardTitle);
-        if (!uploadItem.isDummy()) {
-            descriptionsAdapter.setItems(uploadItem.title, uploadItem.descriptions);
-            rvDescriptions.setAdapter(descriptionsAdapter);
-        }
+        descriptionsAdapter.setItems(uploadItem.title, uploadItem.descriptions);
+        rvDescriptions.setAdapter(descriptionsAdapter);
     }
 
     @Override
@@ -244,6 +239,7 @@ public class UploadActivity extends AuthenticatedActivity implements UploadView 
         licenseSpinner.setSelection(position);
     }
 
+    @SuppressLint("StringFormatInvalid")
     @Override
     public void updateLicenseSummary(String selectedLicense) {
         String licenseHyperLink = "<a href='" + Utils.licenseUrlFor(selectedLicense)+"'>" +
@@ -338,26 +334,30 @@ public class UploadActivity extends AuthenticatedActivity implements UploadView 
 
     @Override
     public void showBadPicturePopup(@ImageUtils.Result int result) {
-        int errorMessage;
+        String errorTitle = getString(R.string.warning);
+        String errorMessage;
         if (result == ImageUtils.IMAGE_DARK)
-            errorMessage = R.string.upload_image_problem_dark;
+            errorMessage = getString(R.string.upload_image_problem_dark);
         else if (result == ImageUtils.IMAGE_BLURRY)
-            errorMessage = R.string.upload_image_problem_blurry;
+            errorMessage = getString(R.string.upload_image_problem_blurry);
         else if (result == ImageUtils.IMAGE_DUPLICATE)
-            errorMessage = R.string.upload_image_problem_duplicate;
+            errorMessage = getString(R.string.upload_image_problem_duplicate);
         else if (result == (ImageUtils.IMAGE_DARK|ImageUtils.IMAGE_BLURRY))
-            errorMessage = R.string.upload_image_problem_dark_blurry;
+            errorMessage = getString(R.string.upload_image_problem_dark_blurry);
         else if (result == (ImageUtils.IMAGE_DARK|ImageUtils.IMAGE_DUPLICATE))
-            errorMessage = R.string.upload_image_problem_dark_duplicate;
+            errorMessage = getString(R.string.upload_image_problem_dark_duplicate);
         else if (result == (ImageUtils.IMAGE_BLURRY|ImageUtils.IMAGE_DUPLICATE))
-            errorMessage = R.string.upload_image_problem_blurry_duplicate;
+            errorMessage = getString(R.string.upload_image_problem_blurry_duplicate);
         else if (result == (ImageUtils.IMAGE_DARK|ImageUtils.IMAGE_BLURRY|ImageUtils.IMAGE_DUPLICATE))
-            errorMessage = R.string.upload_image_problem_dark_blurry_duplicate;
+            errorMessage = getString(R.string.upload_image_problem_dark_blurry_duplicate);
+        else if (result == ImageUtils.FILE_NAME_EXISTS)
+            errorMessage = String.format(getString(R.string.upload_title_duplicate), presenter.getCurrentImageFileName());
         else
             return;
+
         AlertDialog.Builder errorDialogBuilder = new AlertDialog.Builder(this);
         errorDialogBuilder.setMessage(errorMessage);
-        errorDialogBuilder.setTitle(R.string.warning);
+        errorDialogBuilder.setTitle(errorTitle);
         //user does not wish to upload the picture, delete it
         errorDialogBuilder.setPositiveButton(R.string.no, (dialogInterface, i) -> {
             presenter.deletePicture();
@@ -366,6 +366,29 @@ public class UploadActivity extends AuthenticatedActivity implements UploadView 
         //user wishes to go ahead with the upload of this picture, just dismiss this dialog
         errorDialogBuilder.setNegativeButton(R.string.yes, (DialogInterface dialogInterface, int i) -> {
             presenter.keepPicture();
+            dialogInterface.dismiss();
+            if(result == ImageUtils.FILE_NAME_EXISTS) {
+                presenter.handleNext(categoriesModel, false);
+            }
+        });
+
+        AlertDialog errorDialog = errorDialogBuilder.create();
+        if (!isFinishing()) {
+            errorDialog.show();
+        }
+    }
+
+    public void showNoCategorySelectedWarning() {
+        AlertDialog.Builder errorDialogBuilder = new AlertDialog.Builder(this);
+        errorDialogBuilder.setMessage(R.string.no_categories_selected_warning_desc);
+        errorDialogBuilder.setTitle(R.string.no_categories_selected);
+        //user does not wish to upload the picture, delete it
+        errorDialogBuilder.setPositiveButton(R.string.no_go_back, (dialogInterface, i) -> {
+            dialogInterface.dismiss();
+        });
+        //user wishes to go ahead with the upload of this picture, just dismiss this dialog
+        errorDialogBuilder.setNegativeButton(R.string.yes_submit, (DialogInterface dialogInterface, int i) -> {
+            presenter.handleNext(categoriesModel, true);
             dialogInterface.dismiss();
         });
 
@@ -380,8 +403,14 @@ public class UploadActivity extends AuthenticatedActivity implements UploadView 
         Utils.handleGeoCoordinates(this, decCoords);
     }
 
-    public void showDuplicateTitlePopup(String title) {
-        showInfoAlert(R.string.warning, R.string.upload_title_duplicate, title);
+    @Override
+    public void showErrorMessage(int resourceId) {
+        ViewUtil.showShortToast(this, resourceId);
+    }
+
+    @Override
+    public void initDefaultCategories() {
+        updateCategoryList("");
     }
 
     @Override
@@ -463,14 +492,14 @@ public class UploadActivity extends AuthenticatedActivity implements UploadView 
 
     private void configureNavigationButtons() {
         // Navigation next / previous for each image as we're collecting title + description
-        next.setOnClickListener(v -> presenter.handleNext());
+        next.setOnClickListener(v -> presenter.handleNext(categoriesModel, false));
         previous.setOnClickListener(v -> presenter.handlePrevious());
 
-        // Next / previous for the category selection page
-        categoryNext.setOnClickListener(v -> presenter.handleNext());
+        // Next / previous for the category selection currentPage
+        categoryNext.setOnClickListener(v -> presenter.handleNext(categoriesModel, false));
         categoryPrevious.setOnClickListener(v -> presenter.handlePrevious());
 
-        // Finally, the previous / submit buttons on the final page of the wizard
+        // Finally, the previous / submit buttons on the final currentPage of the wizard
         licensePrevious.setOnClickListener(v -> presenter.handlePrevious());
         submit.setOnClickListener(v -> {
             Toast.makeText(this, R.string.uploading_started, Toast.LENGTH_LONG).show();
@@ -480,21 +509,15 @@ public class UploadActivity extends AuthenticatedActivity implements UploadView 
 
     }
 
-    private void configureCategories(Bundle savedInstanceState) {
-        ArrayList<CategoryItem> items = new ArrayList<>();
-        if (savedInstanceState != null) {
-            items.addAll(savedInstanceState.getParcelableArrayList("currentCategories"));
-            //noinspection unchecked
-            categoriesModel.cacheAll((HashMap<String, ArrayList<String>>) savedInstanceState
-                    .getSerializable("categoriesCache"));
-        }
-        categoriesAdapter = new UploadCategoriesAdapterFactory(categoriesModel).create(items);
+    private void configureCategories() {
+        categoriesAdapter = new UploadCategoriesAdapterFactory(categoriesModel).create(new ArrayList<>());
         categoriesList.setLayoutManager(new LinearLayoutManager(this));
         categoriesList.setAdapter(categoriesAdapter);
     }
 
     @SuppressLint("CheckResult")
     private void updateCategoryList(String filter) {
+        List<String> imageTitleList = presenter.getImageTitleList();
         Observable.fromIterable(categoriesModel.getSelectedCategories())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -505,10 +528,10 @@ public class UploadActivity extends AuthenticatedActivity implements UploadView 
                 })
                 .observeOn(Schedulers.io())
                 .concatWith(
-                        categoriesModel.searchAll(filter)
-                                .mergeWith(categoriesModel.searchCategories(filter))
+                        categoriesModel.searchAll(filter, imageTitleList)
+                                .mergeWith(categoriesModel.searchCategories(filter, imageTitleList))
                                 .concatWith(TextUtils.isEmpty(filter)
-                                        ? categoriesModel.defaultCategories() : Observable.empty())
+                                        ? categoriesModel.defaultCategories(imageTitleList) : Observable.empty())
                 )
                 .filter(categoryItem -> !categoriesModel.containsYear(categoryItem.getName()))
                 .distinct()
@@ -574,18 +597,10 @@ public class UploadActivity extends AuthenticatedActivity implements UploadView 
     }
 
     private void initRecyclerView() {
-        descriptionsAdapter = new DescriptionsAdapter();
+        descriptionsAdapter = new DescriptionsAdapter(this);
         descriptionsAdapter.setCallback(this::showInfoAlert);
         rvDescriptions.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
         rvDescriptions.setAdapter(descriptionsAdapter);
-        compositeDisposable.add(
-                descriptionsAdapter.getTitleChangeObserver()
-                        .debounce(1000, TimeUnit.MILLISECONDS)
-                        .observeOn(Schedulers.io())
-                        .filter(title -> mwApi.fileExistsWithName(title + "." + presenter.getCurrentItem().fileExt))
-                        .observeOn(AndroidSchedulers.mainThread())
-                        .subscribe(title -> showDuplicateTitlePopup(title + "." + presenter.getCurrentItem().fileExt), Timber::e)
-        );
     }
 
 

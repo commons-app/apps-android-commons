@@ -5,19 +5,30 @@ import android.net.Uri;
 import android.os.Bundle;
 
 import java.lang.reflect.Proxy;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
+import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.category.CategoriesModel;
 import fr.free.nrw.commons.contributions.Contribution;
+import fr.free.nrw.commons.mwapi.MediaWikiApi;
 import fr.free.nrw.commons.utils.ImageUtils;
 import io.reactivex.Completable;
+import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.schedulers.Schedulers;
 import timber.log.Timber;
+
+import static fr.free.nrw.commons.upload.UploadModel.UploadItem;
+import static fr.free.nrw.commons.utils.ImageUtils.EMPTY_TITLE;
+import static fr.free.nrw.commons.utils.ImageUtils.FILE_NAME_EXISTS;
+import static fr.free.nrw.commons.utils.ImageUtils.IMAGE_KEEP;
+import static fr.free.nrw.commons.utils.ImageUtils.IMAGE_OK;
 
 /**
  * The MVP pattern presenter of Upload GUI
@@ -29,15 +40,24 @@ public class UploadPresenter {
 
     private final UploadModel uploadModel;
     private final UploadController uploadController;
+    private final MediaWikiApi mediaWikiApi;
+
+    private CompositeDisposable compositeDisposable;
+
     private static final UploadView DUMMY = (UploadView) Proxy.newProxyInstance(UploadView.class.getClassLoader(),
             new Class[]{UploadView.class}, (proxy, method, methodArgs) -> null);
     private UploadView view = DUMMY;
 
+    @UploadView.UploadPage int currentPage = UploadView.PLEASE_WAIT;
+
 
     @Inject
-    public UploadPresenter(UploadModel uploadModel, UploadController uploadController) {
+    public UploadPresenter(UploadModel uploadModel,
+                           UploadController uploadController,
+                           MediaWikiApi mediaWikiApi) {
         this.uploadModel = uploadModel;
         this.uploadController = uploadController;
+        this.mediaWikiApi = mediaWikiApi;
     }
 
     public void receive(Uri mediaUri, String mimeType, String source) {
@@ -100,11 +120,76 @@ public class UploadPresenter {
     /**
      * Called by the next button in {@link UploadActivity}
      */
-    public void handleNext() {
+    @SuppressLint("CheckResult")
+    public void handleNext(CategoriesModel categoriesModel, boolean noCategoryWarningShown) {
+        if(currentPage == UploadView.TITLE_CARD) {
+            validateCurrentItemTitle()
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe(this::handleImage);
+        } else if(currentPage == UploadView.CATEGORIES) {
+            if (categoriesModel.selectedCategoriesCount() < 1 && !noCategoryWarningShown) {
+                view.showNoCategorySelectedWarning();
+            } else {
+                nextUploadedItem();
+            }
+        } else {
+            nextUploadedItem();
+        }
+    }
+
+    private void handleImage(Integer errorCode) {
+        switch (errorCode) {
+            case EMPTY_TITLE:
+                view.showErrorMessage(R.string.add_title_toast);
+                break;
+            case FILE_NAME_EXISTS:
+                if(getCurrentItem().imageQuality.getValue().equals(IMAGE_KEEP)) {
+                    nextUploadedItem();
+                } else {
+                    view.showBadPicturePopup(FILE_NAME_EXISTS);
+                }
+                break;
+            case IMAGE_OK:
+            default:
+                nextUploadedItem();
+        }
+    }
+
+    private void nextUploadedItem() {
         uploadModel.next();
         updateContent();
-        if (uploadModel.isShowingItem()) uploadModel.subscribeBadPicture(this::handleBadPicture);
+        if (uploadModel.isShowingItem()) {
+            uploadModel.subscribeBadPicture(this::handleBadPicture);
+        }
         view.dismissKeyboard();
+    }
+
+    private Title getCurrentImageTitle() {
+        return getCurrentItem().title;
+    }
+
+    public String getCurrentImageFileName() {
+        UploadItem currentItem = getCurrentItem();
+        return currentItem.title + "." + uploadModel.getCurrentItem().fileExt;
+    }
+
+    @SuppressLint("CheckResult")
+    private Observable<Integer> validateCurrentItemTitle() {
+        Title title = getCurrentImageTitle();
+        if (title.isEmpty()) {
+            view.showErrorMessage(R.string.add_title_toast);
+            return Observable.just(EMPTY_TITLE);
+        }
+
+        return Observable.fromCallable(() -> mediaWikiApi.fileExistsWithName(getCurrentImageFileName()))
+                .subscribeOn(Schedulers.io())
+                .map(doesFileExist -> {
+                    if (doesFileExist) {
+                        return FILE_NAME_EXISTS;
+                    }
+                    return IMAGE_OK;
+                });
     }
 
     /**
@@ -113,14 +198,16 @@ public class UploadPresenter {
     public void handlePrevious() {
         uploadModel.previous();
         updateContent();
-        if (uploadModel.isShowingItem()) uploadModel.subscribeBadPicture(this::handleBadPicture);
+        if (uploadModel.isShowingItem()) {
+            uploadModel.subscribeBadPicture(this::handleBadPicture);
+        }
         view.dismissKeyboard();
     }
 
     /**
      * Called when one of the pictures on the top card is clicked on in {@link UploadActivity}
      */
-    public void thumbnailClicked(UploadModel.UploadItem item) {
+    public void thumbnailClicked(UploadItem item) {
         uploadModel.jumpTo(item);
         updateContent();
     }
@@ -276,10 +363,10 @@ public class UploadPresenter {
     }
 
     /**
-     * Updates the cards and the background when a new page is selected.
+     * Updates the cards and the background when a new currentPage is selected.
      */
     private void updateContent() {
-        Timber.i("Updating content for page" + uploadModel.getCurrentStep());
+        Timber.i("Updating content for currentPage" + uploadModel.getCurrentStep());
         view.setNextEnabled(uploadModel.isNextAvailable());
         view.setPreviousEnabled(uploadModel.isPreviousAvailable());
         view.setSubmitEnabled(uploadModel.isSubmitAvailable());
@@ -303,22 +390,22 @@ public class UploadPresenter {
      * @param uploadCount how many items are being uploaded
      */
     private void showCorrectCards(int currentStep, int uploadCount) {
-        @UploadView.UploadPage int page;
         if (uploadCount == 0) {
-            page = UploadView.PLEASE_WAIT;
+            currentPage = UploadView.PLEASE_WAIT;
         } else if (currentStep <= uploadCount) {
-            page = UploadView.TITLE_CARD;
+            currentPage = UploadView.TITLE_CARD;
             view.setTopCardVisibility(uploadModel.getCount() > 1);
         } else if (currentStep == uploadCount + 1) {
-            page = UploadView.CATEGORIES;
+            currentPage = UploadView.CATEGORIES;
             view.setTopCardVisibility(false);
             view.setRightCardVisibility(false);
+            view.initDefaultCategories();
         } else {
-            page = UploadView.LICENSE;
+            currentPage = UploadView.LICENSE;
             view.setTopCardVisibility(false);
             view.setRightCardVisibility(false);
         }
-        view.setBottomCardVisibility(page);
+        view.setBottomCardVisibility(currentPage);
     }
 
     //endregion
@@ -326,8 +413,18 @@ public class UploadPresenter {
     /**
      * @return the item currently being displayed
      */
-    public UploadModel.UploadItem getCurrentItem() {
+    public UploadItem getCurrentItem() {
         return uploadModel.getCurrentItem();
+    }
+
+    public List<String> getImageTitleList() {
+        List<String> titleList = new ArrayList<>();
+        for (UploadItem item : uploadModel.getUploads()) {
+            if (item.title.isSet()) {
+                titleList.add(item.title.toString());
+            }
+        }
+        return titleList;
     }
 
 }

@@ -376,11 +376,12 @@
   <string name="write_storage_permission_rationale_for_image_share">We need your permission to access the external storage of your device in order to upload images.</string>
   <string name="nearby_notification_dismiss_message">You won\'t see the nearest place that needs pictures anymore. However, you can re-enable this notification in Settings if you wish.</string>
 
-    <string name="step_count">Step %1$d of %2$d</string>
+  <string name="step_count">Step %1$d of %2$d</string>
+  <string name="image_in_set_label">Image %1$d in set</string>
   <string name="next">Next</string>
   <string name="previous">Previous</string>
   <string name="submit">Submit</string>
-  <string name="upload_title_duplicate">A file with the file name %1$s exists. Please consider changing it.</string>
+  <string name="upload_title_duplicate">A file with the file name %1$s exists. Are you sure you want to proceed?</string>
   <string name="map_application_missing">No compatible map application could be found on your device. Please install a map application to use this feature.</string>
   <plurals name="upload_count_title">
         <item quantity="one">%1$d Upload</item>
@@ -405,5 +406,13 @@ Upload your first media by touching the camera or gallery icon above.</string>
   <string name="desc_language_Africa">Africa</string>
   <string name="desc_language_Asia">Asia</string>
   <string name="desc_language_Pacific">Pacific</string>
+
+  <string name="no_categories_selected">No Categories Selected</string>
+  <string name="no_categories_selected_warning_desc">Images without categories are rarely usable. Are you sure you want to submit without selecting categories?</string>
+
+  <string name="yes_submit">Yes, Submit</string>
+  <string name="no_go_back">No, Go Back</string>
+
+  <string name="upload_flow_all_images_in_set">(For all images in set)</string>
 
 </resources>

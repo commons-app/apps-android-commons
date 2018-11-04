@@ -24,6 +24,22 @@
         android:textStyle="bold"
         tools:text="Step 1 of 15" />
 
+    <TextView
+        android:id="@+id/categories_subtitle"
+        android:layout_width="wrap_content"
+        android:layout_height="24dp"
+        android:layout_marginStart="@dimen/standard_gap"
+        android:layout_marginLeft="@dimen/standard_gap"
+        android:layout_marginTop="@dimen/tiny_gap"
+        android:layout_marginEnd="@dimen/standard_gap"
+        android:layout_marginRight="@dimen/standard_gap"
+        android:layout_alignParentLeft="true"
+        android:gravity="center_vertical"
+        android:textSize="@dimen/subtitle_text"
+        android:text="@string/upload_flow_all_images_in_set"
+        android:layout_below="@+id/categories_title"
+        tools:text="(For all images in set)" />
+
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content" android:id="@+id/category_search_layout"
@@ -31,7 +47,7 @@
         android:layout_marginLeft="@dimen/standard_gap"
         android:layout_marginEnd="@dimen/standard_gap"
         android:layout_marginRight="@dimen/standard_gap"
-        android:layout_below="@id/categories_title">
+        android:layout_below="@id/categories_subtitle">
 
         <android.support.design.widget.TextInputLayout
             android:id="@+id/category_search_container"

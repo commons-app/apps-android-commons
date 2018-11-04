@@ -71,4 +71,10 @@ public interface UploadView {
     void finish();
 
     void launchMapActivity(String decCoords);
+
+    void showErrorMessage(int resourceId);
+
+    void initDefaultCategories();
+
+    void showNoCategorySelectedWarning();
 }
