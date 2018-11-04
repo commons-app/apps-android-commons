@@ -8,7 +8,7 @@ import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Toast;
 
-public class ViewUtil {
+public class ViewUtils {
 
     public static final String SHOWCASE_VIEW_ID_1 = "SHOWCASE_VIEW_ID_1";
     public static final String SHOWCASE_VIEW_ID_2 = "SHOWCASE_VIEW_ID_2";

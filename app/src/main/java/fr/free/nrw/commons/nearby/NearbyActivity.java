@@ -41,7 +41,7 @@ import fr.free.nrw.commons.location.LocationUpdateListener;
 import fr.free.nrw.commons.theme.NavigationBaseActivity;
 import fr.free.nrw.commons.utils.NetworkUtils;
 import fr.free.nrw.commons.utils.UriSerializer;
-import fr.free.nrw.commons.utils.ViewUtil;
+import fr.free.nrw.commons.utils.ViewUtils;
 import fr.free.nrw.commons.wikidata.WikidataEditListener;
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -163,7 +163,7 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
                     .setDismissText(getString(R.string.showcase_view_got_it_button))
                     .setContentText(getString(R.string.showcase_view_list_icon))
                     .setDelay(500) // optional but starting animations immediately in onCreate can make them choppy
-                    .singleUse(ViewUtil.SHOWCASE_VIEW_ID_1) // provide a unique ID used to ensure it is only shown once
+                    .singleUse(ViewUtils.SHOWCASE_VIEW_ID_1) // provide a unique ID used to ensure it is only shown once
                     .setDismissStyle(Typeface.defaultFromStyle(Typeface.BOLD))
                     .setListener(new IShowcaseListener() {
                         @Override
@@ -502,7 +502,7 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
         String gsonBoundaryCoordinates = gson.toJson(boundaryCoordinates);
 
         if (placeList.size() == 0) {
-            ViewUtil.showSnackbar(findViewById(R.id.container), R.string.no_nearby);
+            ViewUtils.showSnackbar(findViewById(R.id.container), R.string.no_nearby);
         }
 
         bundle.putString("PlaceList", gsonPlaceList);
@@ -539,7 +539,7 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
                 .setDismissText(getString(R.string.showcase_view_got_it_button))
                 .setContentText(getString(R.string.showcase_view_whole_nearby_activity))
                 .setDelay(500) // optional but starting animations immediately in onCreate can make them choppy
-                .singleUse(ViewUtil.SHOWCASE_VIEW_ID_2) // provide a unique ID used to ensure it is only shown once
+                .singleUse(ViewUtils.SHOWCASE_VIEW_ID_2) // provide a unique ID used to ensure it is only shown once
                 .withoutShape() // no shape on map view since there are no view to focus on
                 .setDismissStyle(Typeface.defaultFromStyle(Typeface.BOLD))
                 .setListener(new IShowcaseListener() {
@@ -706,7 +706,7 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
     }
 
     private void showErrorMessage(String message) {
-        ViewUtil.showLongToast(NearbyActivity.this, message);
+        ViewUtils.showLongToast(NearbyActivity.this, message);
     }
 
     @Override

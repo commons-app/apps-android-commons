@@ -34,7 +34,7 @@ import fr.free.nrw.commons.explore.recentsearches.RecentSearch;
 import fr.free.nrw.commons.explore.recentsearches.RecentSearchesDao;
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
 import fr.free.nrw.commons.utils.NetworkUtils;
-import fr.free.nrw.commons.utils.ViewUtil;
+import fr.free.nrw.commons.utils.ViewUtils;
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
@@ -205,7 +205,7 @@ public class SearchImageFragment extends CommonsDaggerSupportFragment {
     private void handleError(Throwable throwable) {
         Timber.e(throwable, "Error occurred while loading queried images");
         try {
-            ViewUtil.showSnackbar(imagesRecyclerView, R.string.error_loading_images);
+            ViewUtils.showSnackbar(imagesRecyclerView, R.string.error_loading_images);
         }catch (Exception e){
             e.printStackTrace();
         }
@@ -225,7 +225,7 @@ public class SearchImageFragment extends CommonsDaggerSupportFragment {
      */
     private void handleNoInternet() {
         progressBar.setVisibility(GONE);
-        ViewUtil.showSnackbar(imagesRecyclerView, R.string.no_internet);
+        ViewUtils.showSnackbar(imagesRecyclerView, R.string.no_internet);
     }
 
     /**

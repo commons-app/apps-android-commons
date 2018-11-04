@@ -29,7 +29,7 @@ import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.auth.SessionManager;
 import fr.free.nrw.commons.contributions.Contribution;
 import fr.free.nrw.commons.settings.Prefs;
-import fr.free.nrw.commons.utils.ViewUtil;
+import fr.free.nrw.commons.utils.ViewUtils;
 import timber.log.Timber;
 
 public class UploadController {
@@ -114,7 +114,7 @@ public class UploadController {
         Account currentAccount = sessionManager.getCurrentAccount();
         if (currentAccount == null) {
             Timber.d("Current account is null");
-            ViewUtil.showLongToast(context, context.getString(R.string.user_not_logged_in));
+            ViewUtils.showLongToast(context, context.getString(R.string.user_not_logged_in));
             sessionManager.forceLogin(context);
             return;
         }

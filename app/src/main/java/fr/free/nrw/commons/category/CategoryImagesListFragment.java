@@ -27,7 +27,7 @@ import dagger.android.support.DaggerFragment;
 import fr.free.nrw.commons.media.Media;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.utils.NetworkUtils;
-import fr.free.nrw.commons.utils.ViewUtil;
+import fr.free.nrw.commons.utils.ViewUtils;
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
@@ -124,7 +124,7 @@ public class CategoryImagesListFragment extends DaggerFragment {
             statusTextView.setVisibility(VISIBLE);
             statusTextView.setText(getString(R.string.no_internet));
         } else {
-            ViewUtil.showSnackbar(parentLayout, R.string.no_internet);
+            ViewUtils.showSnackbar(parentLayout, R.string.no_internet);
         }
     }
 
@@ -135,7 +135,7 @@ public class CategoryImagesListFragment extends DaggerFragment {
     private void handleError(Throwable throwable) {
         Timber.e(throwable, "Error occurred while loading images inside a category");
         try{
-            ViewUtil.showSnackbar(parentLayout, R.string.error_loading_images);
+            ViewUtils.showSnackbar(parentLayout, R.string.error_loading_images);
             initErrorView();
         }catch (Exception e){
             e.printStackTrace();

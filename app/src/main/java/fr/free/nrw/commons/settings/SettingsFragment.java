@@ -23,7 +23,7 @@ import fr.free.nrw.commons.utils.Utils;
 import fr.free.nrw.commons.di.ApplicationlessInjection;
 import fr.free.nrw.commons.logging.CommonsLogSender;
 import fr.free.nrw.commons.utils.PermissionUtils;
-import fr.free.nrw.commons.utils.ViewUtil;
+import fr.free.nrw.commons.utils.ViewUtils;
 
 public class SettingsFragment extends PreferenceFragment {
 
@@ -123,7 +123,7 @@ public class SettingsFragment extends PreferenceFragment {
                 .withListener(new BasePermissionListener() {
                     @Override
                     public void onPermissionGranted(PermissionGrantedResponse response) {
-                        ViewUtil.showLongToast(getActivity(), getResources().getString(R.string.log_collection_started));
+                        ViewUtils.showLongToast(getActivity(), getResources().getString(R.string.log_collection_started));
                     }
                 }).check();
     }

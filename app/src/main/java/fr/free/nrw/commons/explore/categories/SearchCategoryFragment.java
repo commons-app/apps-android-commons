@@ -33,7 +33,7 @@ import fr.free.nrw.commons.explore.recentsearches.RecentSearch;
 import fr.free.nrw.commons.explore.recentsearches.RecentSearchesDao;
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
 import fr.free.nrw.commons.utils.NetworkUtils;
-import fr.free.nrw.commons.utils.ViewUtil;
+import fr.free.nrw.commons.utils.ViewUtils;
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
@@ -196,7 +196,7 @@ public class SearchCategoryFragment extends CommonsDaggerSupportFragment {
         Timber.e(throwable, "Error occurred while loading queried categories");
         try {
             initErrorView();
-            ViewUtil.showSnackbar(categoriesRecyclerView, R.string.error_loading_categories);
+            ViewUtils.showSnackbar(categoriesRecyclerView, R.string.error_loading_categories);
         }catch (Exception e){
             e.printStackTrace();
         }
@@ -217,6 +217,6 @@ public class SearchCategoryFragment extends CommonsDaggerSupportFragment {
      */
     private void handleNoInternet() {
         progressBar.setVisibility(GONE);
-        ViewUtil.showSnackbar(categoriesRecyclerView, R.string.no_internet);
+        ViewUtils.showSnackbar(categoriesRecyclerView, R.string.no_internet);
     }
 }

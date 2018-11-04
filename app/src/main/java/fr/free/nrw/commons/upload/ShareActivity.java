@@ -64,7 +64,7 @@ import fr.free.nrw.commons.mwapi.CategoryApi;
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
 import fr.free.nrw.commons.utils.ContributionUtils;
 import fr.free.nrw.commons.utils.ExternalStorageUtils;
-import fr.free.nrw.commons.utils.ViewUtil;
+import fr.free.nrw.commons.utils.ViewUtils;
 import timber.log.Timber;
 
 import static fr.free.nrw.commons.upload.ExistingFileAsync.Result.DUPLICATE_PROCEED;
@@ -526,7 +526,7 @@ public class ShareActivity
             CurrentAnimator.cancel();
         }
         isZoom = true;
-        ViewUtil.hideKeyboard(ShareActivity.this.findViewById(R.id.titleEdit));
+        ViewUtils.hideKeyboard(ShareActivity.this.findViewById(R.id.titleEdit));
         closeFABMenu();
         mainFab.setVisibility(View.GONE);
 

@@ -30,7 +30,7 @@ import fr.free.nrw.commons.explore.images.SearchImageFragment;
 import fr.free.nrw.commons.explore.recentsearches.RecentSearchesFragment;
 import fr.free.nrw.commons.media.MediaDetailPagerFragment;
 import fr.free.nrw.commons.theme.NavigationBaseActivity;
-import fr.free.nrw.commons.utils.ViewUtil;
+import fr.free.nrw.commons.utils.ViewUtils;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 
 /**
@@ -181,7 +181,7 @@ public class SearchActivity extends NavigationBaseActivity implements MediaDetai
      * @param index item index that should be opened
      */
     public void onSearchImageClicked(int index) {
-        ViewUtil.hideKeyboard(this.findViewById(R.id.searchBox));
+        ViewUtils.hideKeyboard(this.findViewById(R.id.searchBox));
         toolbar.setVisibility(View.GONE);
         tabLayout.setVisibility(View.GONE);
         viewPager.setVisibility(View.GONE);

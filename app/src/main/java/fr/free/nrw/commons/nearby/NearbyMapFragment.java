@@ -60,7 +60,7 @@ import fr.free.nrw.commons.auth.LoginActivity;
 import fr.free.nrw.commons.bookmarks.locations.BookmarkLocationsDao;
 import fr.free.nrw.commons.contributions.ContributionController;
 import fr.free.nrw.commons.utils.UriDeserializer;
-import fr.free.nrw.commons.utils.ViewUtil;
+import fr.free.nrw.commons.utils.ViewUtils;
 import timber.log.Timber;
 import uk.co.deanwild.materialshowcaseview.MaterialShowcaseView;
 
@@ -280,7 +280,7 @@ public class NearbyMapFragment extends DaggerFragment {
 
                 // Make camera to follow user on location change
                 CameraPosition position ;
-                if (ViewUtil.isPortrait(getActivity())){
+                if (ViewUtils.isPortrait(getActivity())) {
                     position = new CameraPosition.Builder()
                             .target(isBottomListSheetExpanded ?
                                     new LatLng(curMapBoxLatLng.getLatitude()- CAMERA_TARGET_SHIFT_FACTOR_PORTRAIT,
@@ -314,7 +314,7 @@ public class NearbyMapFragment extends DaggerFragment {
         if (mapboxMap != null && curLatLng != null) {
             if (isBottomListSheetExpanded) {
                 // Make camera to follow user on location change
-                if (ViewUtil.isPortrait(getActivity())) {
+                if (ViewUtils.isPortrait(getActivity())) {
                     position = new CameraPosition.Builder()
                             .target(new LatLng(curLatLng.getLatitude() - CAMERA_TARGET_SHIFT_FACTOR_PORTRAIT,
                                     curLatLng.getLongitude())) // Sets the new camera target above
@@ -415,7 +415,7 @@ public class NearbyMapFragment extends DaggerFragment {
                 mapView.getMapAsync(mapboxMap -> {
                     CameraPosition position;
 
-                    if (ViewUtil.isPortrait(getActivity())){
+                    if (ViewUtils.isPortrait(getActivity())) {
                         position = new CameraPosition.Builder()
                                 .target(isBottomListSheetExpanded ?
                                         new LatLng(curLatLng.getLatitude()- CAMERA_TARGET_SHIFT_FACTOR_PORTRAIT,
@@ -425,7 +425,7 @@ public class NearbyMapFragment extends DaggerFragment {
                                         11 // zoom level is fixed to 11 when bottom sheet is expanded
                                         :mapboxMap.getCameraPosition().zoom) // Same zoom level
                                 .build();
-                    }else {
+                    } else {
                         position = new CameraPosition.Builder()
                                 .target(isBottomListSheetExpanded ?
                                         new LatLng(curLatLng.getLatitude()- CAMERA_TARGET_SHIFT_FACTOR_LANDSCAPE,
@@ -689,7 +689,7 @@ public class NearbyMapFragment extends DaggerFragment {
                 .setDismissText(getString(R.string.showcase_view_got_it_button))
                 .setContentText(getString(R.string.showcase_view_plus_fab))
                 .setDelay(500) // optional but starting animations immediately in onCreate can make them choppy
-                .singleUse(ViewUtil.SHOWCASE_VIEW_ID_3) // provide a unique ID used to ensure it is only shown once
+                .singleUse(ViewUtils.SHOWCASE_VIEW_ID_3) // provide a unique ID used to ensure it is only shown once
                 .setDismissStyle(Typeface.defaultFromStyle(Typeface.BOLD))
                 .build();
 

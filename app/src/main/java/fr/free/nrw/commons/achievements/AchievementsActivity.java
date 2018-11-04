@@ -41,7 +41,7 @@ import fr.free.nrw.commons.utils.Utils;
 import fr.free.nrw.commons.auth.SessionManager;
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
 import fr.free.nrw.commons.theme.NavigationBaseActivity;
-import fr.free.nrw.commons.utils.ViewUtil;
+import fr.free.nrw.commons.utils.ViewUtils;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.schedulers.Schedulers;
@@ -210,7 +210,7 @@ public class AchievementsActivity extends NavigationBaseActivity {
      * Shows a generic error toast when error occurs while loading achievements or uploads
      */
     private void onError() {
-        ViewUtil.showLongToast(this, getResources().getString(R.string.error_occurred));
+        ViewUtils.showLongToast(this, getResources().getString(R.string.error_occurred));
         progressBar.setVisibility(View.GONE);
     }
 
@@ -389,7 +389,7 @@ public class AchievementsActivity extends NavigationBaseActivity {
         Account currentAccount = sessionManager.getCurrentAccount();
         if (currentAccount == null) {
         Timber.d("Current account is null");
-        ViewUtil.showLongToast(this, getResources().getString(R.string.user_not_logged_in));
+        ViewUtils.showLongToast(this, getResources().getString(R.string.user_not_logged_in));
         sessionManager.forceLogin(this);
         return false;
         }

@@ -54,8 +54,8 @@ import fr.free.nrw.commons.modifications.ModifierSequenceDao;
 import fr.free.nrw.commons.modifications.TemplateRemoveModifier;
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
 import fr.free.nrw.commons.utils.ContributionUtils;
-import fr.free.nrw.commons.utils.DialogUtil;
-import fr.free.nrw.commons.utils.DialogUtil.Callback;
+import fr.free.nrw.commons.utils.DialogUtils;
+import fr.free.nrw.commons.utils.DialogUtils.Callback;
 import fr.free.nrw.commons.utils.ExternalStorageUtils;
 import fr.free.nrw.commons.utils.PermissionUtils;
 import timber.log.Timber;
@@ -246,7 +246,7 @@ public class MultipleShareActivity extends AuthenticatedActivity
      */
     private void initPermissionsRationaleDialog() {
         if (storagePermissionInfoDialog == null) {
-            storagePermissionInfoDialog = DialogUtil
+            storagePermissionInfoDialog = DialogUtils
                     .getAlertDialogWithPositiveAndNegativeCallbacks(
                             MultipleShareActivity.this,
                             getString(R.string.storage_permission), getString(

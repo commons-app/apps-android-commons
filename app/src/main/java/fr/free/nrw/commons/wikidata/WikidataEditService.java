@@ -12,7 +12,7 @@ import javax.inject.Singleton;
 
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
-import fr.free.nrw.commons.utils.ViewUtil;
+import fr.free.nrw.commons.utils.ViewUtils;
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
@@ -80,7 +80,7 @@ public class WikidataEditService {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(revisionId -> handleClaimResult(wikidataEntityId, revisionId), throwable -> {
                     Timber.e(throwable, "Error occurred while making claim");
-                    ViewUtil.showLongToast(context, context.getString(R.string.wikidata_edit_failure));
+                    ViewUtils.showLongToast(context, context.getString(R.string.wikidata_edit_failure));
                 });
     }
 
@@ -91,7 +91,7 @@ public class WikidataEditService {
             logEdit(revisionId);
         } else {
             Timber.d("Unable to make wiki data edit for entity %s", wikidataEntityId);
-            ViewUtil.showLongToast(context, context.getString(R.string.wikidata_edit_failure));
+            ViewUtils.showLongToast(context, context.getString(R.string.wikidata_edit_failure));
         }
     }
 
@@ -120,7 +120,7 @@ public class WikidataEditService {
         String title = directPrefs.getString("Title", "");
         String successStringTemplate = context.getString(R.string.successful_wikidata_edit);
         String successMessage = String.format(Locale.getDefault(), successStringTemplate, title);
-        ViewUtil.showLongToast(context, successMessage);
+        ViewUtils.showLongToast(context, successMessage);
     }
 
     /**

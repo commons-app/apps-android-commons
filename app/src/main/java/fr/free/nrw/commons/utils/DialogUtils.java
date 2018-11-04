@@ -13,7 +13,7 @@ import android.support.v4.app.FragmentActivity;
 import fr.free.nrw.commons.R;
 import timber.log.Timber;
 
-public class DialogUtil {
+public class DialogUtils {
 
     /**
      * Dismisses a dialog safely.

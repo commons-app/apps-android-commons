@@ -41,7 +41,7 @@ import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
 import fr.free.nrw.commons.upload.GpsCategoryModel;
 import fr.free.nrw.commons.utils.StringSortingUtils;
-import fr.free.nrw.commons.utils.ViewUtil;
+import fr.free.nrw.commons.utils.ViewUtils;
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
@@ -116,7 +116,7 @@ public class CategorizationFragment extends CommonsDaggerSupportFragment {
 
         categoriesFilter.setOnFocusChangeListener((v, hasFocus) -> {
             if (!hasFocus) {
-                ViewUtil.hideKeyboard(v);
+                ViewUtils.hideKeyboard(v);
             }
         });
 

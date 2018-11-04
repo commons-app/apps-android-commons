@@ -48,7 +48,7 @@ import fr.free.nrw.commons.di.ApplicationlessInjection;
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
 import fr.free.nrw.commons.theme.NavigationBaseActivity;
 import fr.free.nrw.commons.ui.widget.HtmlTextView;
-import fr.free.nrw.commons.utils.ViewUtil;
+import fr.free.nrw.commons.utils.ViewUtils;
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
@@ -111,14 +111,14 @@ public class LoginActivity extends AccountAuthenticatorActivity {
         usernameEdit.addTextChangedListener(textWatcher);
         usernameEdit.setOnFocusChangeListener((v, hasFocus) -> {
             if (!hasFocus) {
-                ViewUtil.hideKeyboard(v);
+                ViewUtils.hideKeyboard(v);
             }
         });
 
         passwordEdit.addTextChangedListener(textWatcher);
         passwordEdit.setOnFocusChangeListener((v, hasFocus) -> {
             if (!hasFocus) {
-                ViewUtil.hideKeyboard(v);
+                ViewUtils.hideKeyboard(v);
             }
         });
 

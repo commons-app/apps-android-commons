@@ -28,7 +28,7 @@ import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
 import fr.free.nrw.commons.explore.categories.SearchCategoriesAdapterFactory;
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
 import fr.free.nrw.commons.utils.NetworkUtils;
-import fr.free.nrw.commons.utils.ViewUtil;
+import fr.free.nrw.commons.utils.ViewUtils;
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
@@ -135,10 +135,10 @@ public class SubCategoryListFragment extends CommonsDaggerSupportFragment {
     private void handleError(Throwable throwable) {
         if (!isParentCategory){
             Timber.e(throwable, "Error occurred while loading queried subcategories");
-            ViewUtil.showSnackbar(categoriesRecyclerView,R.string.error_loading_categories);
+            ViewUtils.showSnackbar(categoriesRecyclerView,R.string.error_loading_categories);
         }else {
             Timber.e(throwable, "Error occurred while loading queried parentcategories");
-            ViewUtil.showSnackbar(categoriesRecyclerView,R.string.error_loading_categories);
+            ViewUtils.showSnackbar(categoriesRecyclerView,R.string.error_loading_categories);
         }
     }
 
@@ -161,6 +161,6 @@ public class SubCategoryListFragment extends CommonsDaggerSupportFragment {
      */
     private void handleNoInternet() {
         progressBar.setVisibility(GONE);
-        ViewUtil.showSnackbar(categoriesRecyclerView, R.string.no_internet);
+        ViewUtils.showSnackbar(categoriesRecyclerView, R.string.no_internet);
     }
 }

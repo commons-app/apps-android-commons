@@ -7,7 +7,7 @@ import javax.inject.Inject;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
 import fr.free.nrw.commons.theme.NavigationBaseActivity;
-import fr.free.nrw.commons.utils.ViewUtil;
+import fr.free.nrw.commons.utils.ViewUtils;
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
@@ -63,7 +63,7 @@ public abstract class AuthenticatedActivity extends NavigationBaseActivity {
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .filter(result -> result)
-                .subscribe(result -> ViewUtil.showSnackbar(findViewById(android.R.id.content), R.string.block_notification)
+                .subscribe(result -> ViewUtils.showSnackbar(findViewById(android.R.id.content), R.string.block_notification)
                 );
     }
 }

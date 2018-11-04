@@ -25,7 +25,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnTouch;
 import fr.free.nrw.commons.R;
-import fr.free.nrw.commons.utils.ViewUtil;
+import fr.free.nrw.commons.utils.ViewUtils;
 
 import static android.view.MotionEvent.ACTION_UP;
 
@@ -133,7 +133,7 @@ class DescriptionsAdapter extends RecyclerView.Adapter<DescriptionsAdapter.ViewH
 
             etDescriptionText.setOnFocusChangeListener((v, hasFocus) -> {
                 if (!hasFocus) {
-                    ViewUtil.hideKeyboard(v);
+                    ViewUtils.hideKeyboard(v);
                 }
             });
 

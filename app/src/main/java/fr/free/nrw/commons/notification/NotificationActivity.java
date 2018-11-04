@@ -28,7 +28,7 @@ import fr.free.nrw.commons.utils.Utils;
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
 import fr.free.nrw.commons.theme.NavigationBaseActivity;
 import fr.free.nrw.commons.utils.NetworkUtils;
-import fr.free.nrw.commons.utils.ViewUtil;
+import fr.free.nrw.commons.utils.ViewUtils;
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
@@ -99,7 +99,7 @@ public class NotificationActivity extends NavigationBaseActivity {
                         progressBar.setVisibility(View.GONE);
                     }, throwable -> {
                         Timber.e(throwable, "Error occurred while loading notifications");
-                        ViewUtil.showSnackbar(relativeLayout, R.string.error_notifications);
+                        ViewUtils.showSnackbar(relativeLayout, R.string.error_notifications);
                         progressBar.setVisibility(View.GONE);
                     });
         } else {
@@ -116,7 +116,7 @@ public class NotificationActivity extends NavigationBaseActivity {
 
     private void setAdapter(List<Notification> notificationList) {
         if (notificationList == null || notificationList.isEmpty()) {
-            ViewUtil.showSnackbar(relativeLayout, R.string.no_notifications);
+            ViewUtils.showSnackbar(relativeLayout, R.string.no_notifications);
             return;
         }
         notificationAdapterFactory = new NotificationAdapterFactory(notification -> {

@@ -51,7 +51,7 @@ import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.utils.Utils;
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
 import fr.free.nrw.commons.settings.Prefs;
-import fr.free.nrw.commons.utils.ViewUtil;
+import fr.free.nrw.commons.utils.ViewUtils;
 import timber.log.Timber;
 
 import static android.view.MotionEvent.ACTION_UP;
@@ -202,7 +202,7 @@ public class SingleUploadFragment extends CommonsDaggerSupportFragment {
 
         titleEdit.setOnFocusChangeListener((v, hasFocus) -> {
             if (!hasFocus) {
-                ViewUtil.hideKeyboard(v);
+                ViewUtils.hideKeyboard(v);
             }
         });
 
@@ -327,7 +327,7 @@ public class SingleUploadFragment extends CommonsDaggerSupportFragment {
 
         // FIXME: Stops the keyboard from being shown 'stale' while moving out of this fragment into the next
         View target = getActivity().getCurrentFocus();
-        ViewUtil.hideKeyboard(target);
+        ViewUtils.hideKeyboard(target);
     }
 
     @NonNull
