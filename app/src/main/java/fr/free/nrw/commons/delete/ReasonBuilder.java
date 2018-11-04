@@ -71,8 +71,10 @@ public class ReasonBuilder {
     }
 
     private void appendArticlesUsed(FeedbackResponse object){
-        reason += ". Uploaded by myself on" + prettyUploadedDate(media);
-        reason += ",used in " + object.getArticlesUsingImages() + " articles";
+        reason += context.getString(R.string.uploaded_by_myself).toString() + prettyUploadedDate(media);
+        reason += context.getString(R.string.used_by).toString()
+                + object.getArticlesUsingImages()
+                + context.getString(R.string.articles).toString();
         Log.i("New Reason", reason);
     }
 

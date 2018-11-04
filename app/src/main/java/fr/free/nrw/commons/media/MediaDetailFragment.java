@@ -171,11 +171,11 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
         }
 
         reasonList = new ArrayList<>();
-        reasonList.add(getString(R.string.deletion_reason_1));
-        reasonList.add(getString(R.string.deletion_reason_2));
-        reasonList.add(getString(R.string.deletion_reason_3));
-        reasonList.add(getString(R.string.deletion_reason_4));
-        reasonList.add(getString(R.string.deletion_reason_5));
+        reasonList.add(getString(R.string.deletion_reason_uploaded_by_mistake));
+        reasonList.add(getString(R.string.deletion_reason_publicly_visible));
+        reasonList.add(getString(R.string.deletion_reason_not_interesting));
+        reasonList.add(getString(R.string.deletion_reason_no_longer_want_public));
+        reasonList.add(getString(R.string.deletion_reason_bad_for_my_privacy));
 
         categoryNames = new ArrayList<>();
         categoryNames.add(getString(R.string.detail_panel_cats_loading));
