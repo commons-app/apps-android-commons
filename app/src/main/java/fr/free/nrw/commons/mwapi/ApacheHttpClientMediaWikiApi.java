@@ -80,7 +80,7 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
 
     public ApacheHttpClientMediaWikiApi(Context context,
                                         String apiURL,
-                                        String wikidatApiURL,
+                                        String wikidataApiURL,
                                         SharedPreferences defaultPreferences,
                                         SharedPreferences categoryPreferences,
                                         Gson gson,
@@ -99,12 +99,16 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
             httpClient.addRequestInterceptor(NetworkInterceptors.getHttpRequestInterceptor());
         }
         api = new CustomMwApi(apiURL, httpClient);
-        wikidataApi = new CustomMwApi(wikidatApiURL, httpClient);
+        wikidataApi = new CustomMwApi(wikidataApiURL, httpClient);
         this.defaultPreferences = defaultPreferences;
         this.categoryPreferences = categoryPreferences;
         this.gson = gson;
     }
 
+    /**
+     * Get user agent
+     * @return User agent string
+     */
     @Override
     @NonNull
     public String getUserAgent() {
@@ -117,8 +121,8 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
     }
 
     /**
-     * @param username String
-     * @param password String
+     * @param username Username string
+     * @param password Password string
      * @return String as returned by this.getErrorCodeToReturn()
      * @throws IOException On api request IO issue
      */
@@ -135,9 +139,9 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
     }
 
     /**
-     * @param username      String
-     * @param password      String
-     * @param twoFactorCode String
+     * @param username      Username string
+     * @param password      Password string
+     * @param twoFactorCode 2FA code string
      * @return String as returned by this.getErrorCodeToReturn()
      * @throws IOException On api request IO issue
      */
@@ -154,6 +158,11 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
                 .post());
     }
 
+    /**
+     * Get login token from commons
+     * @return logintoken as a String
+     * @throws IOException On api request IO issue
+     */
     private String getLoginToken() throws IOException {
         return api.action("query")
                 .param("action", "query")
@@ -459,11 +468,10 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
 
     /**
      * Adds the wikimedia-commons-app tag to the edits made on wikidata
-     * @param revisionId
-     * @return
+     * @param revisionId revisionId to tag edit with
+     * @return true on success, false on failure
      * @throws IOException
      */
-    @Nullable
     @Override
     public boolean addWikidataEditTag(String revisionId) throws IOException {
         CustomApiResult result = wikidataApi.action("tag")
@@ -480,11 +488,12 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
 
         if ("success".equals(result.getString("api/tag/result/@status"))) {
             return true;
-        } else {
-            Timber.e("Error occurred in creating claim. Error code is: %s and message is %s",
-                    result.getString("api/error/@code"),
-                    result.getString("api/error/@info"));
         }
+
+        Timber.e("Error occurred in creating claim. Error code is: %s and message is %s",
+                result.getString("api/error/@code"),
+                result.getString("api/error/@info"));
+
         return false;
     }
 
@@ -601,11 +610,11 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
     }
 
     /**
-     * The method takes categoryName as input and returns a List of Subcategories
+     * The method takes categoryName as input and returns a List of subcategories
      * It uses the generator query API to get the subcategories in a category, 500 at a time.
      * Uses the query continue values for fetching paginated responses
-     * @param categoryName Category name as defined on commons
-     * @return
+     * @param categoryName Category name as defined on Commons
+     * @return List of subcategories
      */
     @Override
     @NonNull
@@ -646,7 +655,7 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
      * The method takes categoryName as input and returns a List of parent categories
      * It uses the generator query API to get the parent categories of a category, 500 at a time.
      * @param categoryName Category name as defined on commons
-     * @return
+     * @return List of parent categories
      */
     @Override
     @NonNull
@@ -688,7 +697,7 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
      * It uses the generator query API to get the images in a category, 10 at a time.
      * Uses the query continue values for fetching paginated responses
      * @param categoryName Category name as defined on commons
-     * @return
+     * @return List of Media objects in a category
      */
     @Override
     @NonNull
@@ -740,10 +749,10 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
     }
 
     /**
-     * This method takes search keyword as input and returns a list of  Media objects filtered using search query
+     * This method takes search keyword as input and returns a list of Media objects filtered by search query
      * It uses the generator query API to get the images searched using a query, 25 at a time.
      * @param query keyword to search images on commons
-     * @return
+     * @return List of Media objects filtered by search query
      */
     @Override
     @NonNull
@@ -784,10 +793,10 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
     }
 
     /**
-     * This method takes search keyword as input and returns a list of categories objects filtered using search query
+     * This method takes a search keyword as input and returns a list of categories filtered by search query
      * It uses the generator query API to get the categories searched using a query, 25 at a time.
      * @param query keyword to search categories on commons
-     * @return
+     * @return List of categories filtered by search query
      */
     @Override
     @NonNull
@@ -929,9 +938,8 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
     }
 
     /**
-
-     * Checks to see if a user is currently blocked from Commons
-     * @return whether or not the user is blocked from Commons
+     * Checks whether a user is currently blocked from Commons
+     * @return true if the user is blocked from Commons
      */
     @Override
     public boolean isUserBlockedFromCommons() {
@@ -962,10 +970,10 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
     }
 
     /**
-     * This takes userName as input, which is then used to fetch the feedback/achievements
+     * Takes userName as input, which is then used to fetch the feedback/achievements
      * statistics using OkHttp and JavaRx. This function return JSONObject
      * @param userName MediaWiki user name
-     * @return
+     * @return Single&lt;FeedbackResponse&gt; holding achievements statistics
      */
     @Override
     public Single<FeedbackResponse> getAchievements(String userName) {
@@ -996,9 +1004,8 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
     }
 
     /**
-     * The method returns the picture of the day
-     *
-     * @return Media object corresponding to the picture of the day
+     * Returns the picture of the day
+     * @return Single&lt;Media&gt; object corresponding to the picture of the day
      */
     @Override
     @Nullable
@@ -1033,6 +1040,11 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
         });
     }
 
+    /**
+     * Parse a MediaWiki formatted dateString as a Java Date object
+     * @param mwDate MediaWiki formatted dateString
+     * @return Java Date object
+     */
     private Date parseMWDate(String mwDate) {
         SimpleDateFormat isoFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'", Locale.ENGLISH); // Assuming MW always gives me UTC
         isoFormat.setTimeZone(TimeZone.getTimeZone("UTC"));
@@ -1044,7 +1056,7 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
     }
 
     /**
-     * Calls media wiki's logout API
+     * Calls media wiki's logout API, logging out the user
      */
     public void logout() {
         try {
