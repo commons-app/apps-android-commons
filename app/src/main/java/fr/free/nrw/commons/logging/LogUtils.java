@@ -16,7 +16,7 @@ public final class LogUtils {
      * @return
      */
     public static String getLogDirectory(boolean isBeta) {
-        if(isBeta) {
+        if (isBeta) {
             return Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS) + "/logs/beta";
         } else {
             return Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS) + "/logs/prod";

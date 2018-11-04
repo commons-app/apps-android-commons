@@ -253,7 +253,7 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
             @Override
             protected Boolean doInBackground(Void... voids) {
                 // Local files have no filename yet
-                if(media.getFilename() == null) {
+                if (media.getFilename() == null) {
                     return Boolean.FALSE;
                 }
                 try {
@@ -325,7 +325,7 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
         }
         rebuildCatList();
 
-        if(media.getCreator() == null || media.getCreator().equals("")) {
+        if (media.getCreator() == null || media.getCreator().equals("")) {
             authorLayout.setVisibility(GONE);
         } else {
             author.setText(media.getCreator());
@@ -339,7 +339,7 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
         if (!TextUtils.isEmpty(licenseLink(media))) {
             openWebBrowser(licenseLink(media));
         } else {
-            if(isCategoryImage) {
+            if (isCategoryImage) {
                 Timber.d("Unable to fetch license URL for %s", media.getLicense());
             } else {
                 Toast toast = Toast.makeText(getContext(), getString(R.string.null_url), Toast.LENGTH_SHORT);
@@ -414,14 +414,14 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
 
     @OnClick(R.id.seeMore)
     public void onSeeMoreClicked(){
-        if(nominatedForDeletion.getVisibility()== VISIBLE) {
+        if (nominatedForDeletion.getVisibility()== VISIBLE) {
             openWebBrowser(media.getFilePageTitle().getMobileUri().toString());
         }
     }
 
     private void enableDeleteButton(boolean visibility) {
         delete.setEnabled(visibility);
-        if(visibility) {
+        if (visibility) {
             delete.setTextColor(getResources().getColor(R.color.primaryTextColor));
         } else {
             delete.setTextColor(getResources().getColor(R.color.deleteButtonLight));

@@ -57,7 +57,7 @@ public class QuizResultActivity extends AppCompatActivity {
         ButterKnife.bind(this);
         setSupportActionBar(toolbar);
 
-        if( getIntent() != null) {
+        if ( getIntent() != null) {
             Bundle extras = getIntent().getExtras();
             int score = extras.getInt("QuizResult");
             setScore(score);

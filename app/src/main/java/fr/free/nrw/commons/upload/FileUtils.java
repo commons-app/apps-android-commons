@@ -166,7 +166,7 @@ public class FileUtils {
             returnPath = uri.getPath();
         }
 
-        if(returnPath == null) {
+        if (returnPath == null) {
             //fetching path may fail depending on the source URI and all hope is lost
             //so we will create and use a copy of the file, which seems to work
             String copyPath = null;
