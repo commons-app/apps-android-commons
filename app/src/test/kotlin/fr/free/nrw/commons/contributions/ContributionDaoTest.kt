@@ -340,7 +340,7 @@ class ContributionDaoTest {
                 source = SOURCE_CAMERA
                 license = "007"
                 multiple = isMultiple
-                dateCreated = Date(System.currentTimeMillis())
+                dateCreated = Date(321L)
                 width = 640
                 height = 480  // VGA should be enough for anyone, right?
             }
