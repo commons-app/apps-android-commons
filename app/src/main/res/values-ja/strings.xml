@@ -93,6 +93,7 @@
   <string name="title_activity_settings">設定</string>
   <string name="title_activity_signup">利用者登録</string>
   <string name="title_activity_featured_images">秀逸な画像</string>
+  <string name="title_activity_category_details">カテゴリ</string>
   <string name="menu_about">このアプリについて</string>
   <string name="about_license">ウィキメディア・コモンズ・アプリはウィキメディア・コミュニティの助成金受給者とボランティアが製作・管理しているオープンソースソフトウェアです。ウィキメディア財団はこのアプリの製作・開発・メンテナンスに関与していません。</string>
   <string name="about_improve">バグとアイディアは &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;Github&lt;/a&gt; へ。</string>
@@ -238,12 +239,13 @@
   <string name="use_external_storage_summary">アプリ内のカメラで撮影した写真を端末に保存する</string>
   <string name="login_to_your_account">自分のアカウントにログイン</string>
   <string name="send_log_file">ログファイルを送信する</string>
-  <string name="send_log_file_description" fuzzy="true">メールで開発者にログファイルを送信する</string>
+  <string name="send_log_file_description">メールで開発者にログファイルを送信、アプリのバグ解消をサポートする。注記：ログには利用者特定情報が含まれることがあります</string>
   <string name="no_web_browser">URLを開くブラウザーが見つかりません</string>
   <string name="null_url">エラーが発生しました。URL が見つかりません</string>
   <string name="nominate_deletion">削除の提案</string>
   <string name="nominated_for_deletion">この画像の削除が提案されています。</string>
   <string name="view_browser">ブラウザーで表示</string>
+  <string name="skip_login">スキップ</string>
   <string name="navigation_item_login">ログイン</string>
   <string name="login_alert_message">この機能を使うにはログインしてください</string>
   <string name="nearby_location_has_not_changed">場所は変更されていません。</string>
@@ -282,11 +284,16 @@
   <string name="image_uploaded_by">アップロードした人: %1$</string>
   <string name="appwidget_img">今日の一枚</string>
   <string name="app_widget_heading">今日の一枚</string>
+  <string name="menu_search_button">検索</string>
+  <string name="title_activity_search">検索</string>
   <string name="successful_wikidata_edit">ウィキデータの%1$sに画像を追加しました !</string>
   <string name="wikidata_edit_failure">対応するウィキデータの更新に失敗しました！</string>
   <string name="menu_set_wallpaper">壁紙として設定</string>
   <string name="wallpaper_set_successfully">壁紙の設定ができました!</string>
+  <string name="result">結果</string>
+  <string name="continue_message">続行</string>
   <string name="share_app_title">アプリをシェアする</string>
   <string name="share_coordinates_not_present">画像の選択中に位置情報を特定できませんでした</string>
   <string name="error_fetching_nearby_places">付近の場所を取得しようとしてエラーが発生しました。</string>
+  <string name="statistics">統計</string>
 </resources>

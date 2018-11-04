@@ -74,9 +74,7 @@ public class NotificationActivity extends NavigationBaseActivity {
         if (!NetworkUtils.isInternetConnectionEstablished(this)) {
             progressBar.setVisibility(View.GONE);
             Snackbar.make(relativeLayout , R.string.no_internet, Snackbar.LENGTH_INDEFINITE)
-                    .setAction(R.string.retry, view -> {
-                        refresh();
-                    }).show();
+                    .setAction(R.string.retry, view -> refresh()).show();
         }else {
             progressBar.setVisibility(View.VISIBLE);
             addNotifications();
@@ -87,7 +85,7 @@ public class NotificationActivity extends NavigationBaseActivity {
     private void addNotifications() {
         Timber.d("Add notifications");
 
-        if(mNotificationWorkerFragment == null){
+        if (mNotificationWorkerFragment == null){
             Observable.fromCallable(() -> {
                 progressBar.setVisibility(View.VISIBLE);
                 return controller.getNotifications();
@@ -117,7 +115,7 @@ public class NotificationActivity extends NavigationBaseActivity {
     }
 
     private void setAdapter(List<Notification> notificationList) {
-        if(notificationList == null || notificationList.isEmpty()) {
+        if (notificationList == null || notificationList.isEmpty()) {
             ViewUtil.showSnackbar(relativeLayout, R.string.no_notifications);
             return;
         }

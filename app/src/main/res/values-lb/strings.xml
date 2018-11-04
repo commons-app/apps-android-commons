@@ -276,4 +276,11 @@
   <string name="image_reverts">Biller net zréckgesat</string>
   <string name="error_occurred">Feeler opgetrueden!</string>
   <string name="notifications_channel_name_all">Notifikatioun vu Commons</string>
+  <string name="navigation_item_bookmarks">Lieszeechen</string>
+  <string name="title_activity_bookmarks">Lieszeechen</string>
+  <string name="title_page_bookmarks_pictures">Biller</string>
+  <string name="title_page_bookmarks_locations">Plazen</string>
+  <string name="provider_bookmarks">Lieszeechen</string>
+  <string name="bookmark_empty">Dir hutt keng Lieszeechen derbäigesat</string>
+  <string name="provider_bookmarks_location">Lieszeechen</string>
 </resources>

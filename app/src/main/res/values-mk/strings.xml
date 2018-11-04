@@ -344,5 +344,14 @@
   <string name="notifications_channel_name_all">Известување од Ризницата</string>
   <string name="storage_permission">Дозвола за складирање</string>
   <string name="write_storage_permission_rationale_for_image_share">Ни треба ваша дозвола за пристап до надворешниот склад на вашиот уред за да се подигнат сликите.</string>
-  <string name="log_collection_started">Заведувањето од дневникот започна. ПРЕВКЛУЧЕТЕ го прилогот, извршете го дејството што сакате да се заведе, а потоа повторно допрете на „Испрати дневници“</string>
+  <string name="navigation_item_bookmarks">Обележани</string>
+  <string name="title_activity_bookmarks">Обележани</string>
+  <string name="title_page_bookmarks_pictures">Слики</string>
+  <string name="title_page_bookmarks_locations">Места</string>
+  <string name="menu_bookmark">Додај/отстрани обележани</string>
+  <string name="provider_bookmarks">Обележани</string>
+  <string name="bookmark_empty">Немате додадено ниеден бележник</string>
+  <string name="provider_bookmarks_location">Обележани</string>
+  <string name="log_collection_started">Заведувањето од дневникот започна. ПРЕВКЛУЧЕТЕ го прилогот, извршете го дејството што сакате да се заведе, а потоа повторно допрете на „Испрати дневничка податотека“</string>
+  <string name="no_uploads">Добре дојдовте на Ризницата!\n\nПодигнете ја вашата прва слика или снимка допирајќи ја иконката за камера или галерија.</string>
 </resources>

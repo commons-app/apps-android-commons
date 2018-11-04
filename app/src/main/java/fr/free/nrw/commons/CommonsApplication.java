@@ -29,6 +29,8 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 import fr.free.nrw.commons.auth.SessionManager;
+import fr.free.nrw.commons.bookmarks.locations.BookmarkLocationsDao;
+import fr.free.nrw.commons.bookmarks.pictures.BookmarkPicturesDao;
 import fr.free.nrw.commons.category.CategoryDao;
 import fr.free.nrw.commons.concurrency.BackgroundPoolExceptionHandler;
 import fr.free.nrw.commons.concurrency.ThreadPoolService;
@@ -245,6 +247,8 @@ public class CommonsApplication extends Application {
         ModifierSequenceDao.Table.onDelete(db);
         CategoryDao.Table.onDelete(db);
         ContributionDao.Table.onDelete(db);
+        BookmarkPicturesDao.Table.onDelete(db);
+        BookmarkLocationsDao.Table.onDelete(db);
     }
 
     /**

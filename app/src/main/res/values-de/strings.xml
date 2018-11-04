@@ -349,5 +349,14 @@
   <string name="notifications_channel_name_all">Commons-Benachrichtigung</string>
   <string name="storage_permission">Speicherberechtigung</string>
   <string name="write_storage_permission_rationale_for_image_share">Wir benötigen deine Berechtigung für den Zugriff auf den externen Speicher deines Geräts, um Bilder hochzuladen.</string>
-  <string name="log_collection_started">Protokollsammlung gestartet. Bitte STARTE die App NEU, führe die zu protokollierende Aktion aus und tippe erneut auf „Logs senden“.</string>
+  <string name="navigation_item_bookmarks">Lesezeichen</string>
+  <string name="title_activity_bookmarks">Lesezeichen</string>
+  <string name="title_page_bookmarks_pictures">Bilder</string>
+  <string name="title_page_bookmarks_locations">Standorte</string>
+  <string name="menu_bookmark">Zu den Lesezeichen hinzufügen/entfernen</string>
+  <string name="provider_bookmarks">Lesezeichen</string>
+  <string name="bookmark_empty">Du hast keine Lesezeichen hinzugefügt</string>
+  <string name="provider_bookmarks_location">Lesezeichen</string>
+  <string name="log_collection_started">Protokollsammlung gestartet. Bitte STARTE die App NEU, führe die zu protokollierende Aktion aus und tippe erneut auf „Logdatei senden“.</string>
+  <string name="no_uploads">Willkommen bei Commons!\n\nLade deine erste Datei hoch, indem du oben auf das Kamera- oder Galeriesymbol tippst.</string>
 </resources>

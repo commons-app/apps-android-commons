@@ -348,4 +348,10 @@
   <string name="images_used_explanation">Ο αριθμός εικόνων που ανεβάσατε στα Κοινά που χρησιμοποιήθηκαν σε λήμματα του Wikimedia</string>
   <string name="error_occurred">Συνέβη σφάλμα!</string>
   <string name="notifications_channel_name_all">Ειδοποίηση Κοινών</string>
+  <string name="navigation_item_bookmarks">Σελιδοδείκτες</string>
+  <string name="title_activity_bookmarks">Σελιδοδείκτες</string>
+  <string name="title_page_bookmarks_pictures">εικόνες</string>
+  <string name="title_page_bookmarks_locations">Τοποθεσίες</string>
+  <string name="provider_bookmarks">Σελιδοδείκτες</string>
+  <string name="provider_bookmarks_location">Σελιδοδείκτες</string>
 </resources>
