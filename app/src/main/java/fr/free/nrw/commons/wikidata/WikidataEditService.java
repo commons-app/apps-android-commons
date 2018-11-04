@@ -80,7 +80,7 @@ public class WikidataEditService {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(revisionId -> handleClaimResult(wikidataEntityId, revisionId), throwable -> {
                     Timber.e(throwable, "Error occurred while making claim");
-                    ViewUtils.showLongToast(context, context.getString(R.string.wikidata_edit_failure));
+                    ViewUtils.showLongToast(context, R.string.wikidata_edit_failure);
                 });
     }
 
@@ -91,7 +91,7 @@ public class WikidataEditService {
             logEdit(revisionId);
         } else {
             Timber.d("Unable to make wiki data edit for entity %s", wikidataEntityId);
-            ViewUtils.showLongToast(context, context.getString(R.string.wikidata_edit_failure));
+            ViewUtils.showLongToast(context, R.string.wikidata_edit_failure);
         }
     }
 

@@ -210,7 +210,7 @@ public class AchievementsActivity extends NavigationBaseActivity {
      * Shows a generic error toast when error occurs while loading achievements or uploads
      */
     private void onError() {
-        ViewUtils.showLongToast(this, getResources().getString(R.string.error_occurred));
+        ViewUtils.showLongToast(this, R.string.error_occurred);
         progressBar.setVisibility(View.GONE);
     }
 
@@ -389,7 +389,7 @@ public class AchievementsActivity extends NavigationBaseActivity {
         Account currentAccount = sessionManager.getCurrentAccount();
         if (currentAccount == null) {
         Timber.d("Current account is null");
-        ViewUtils.showLongToast(this, getResources().getString(R.string.user_not_logged_in));
+        ViewUtils.showLongToast(this, R.string.user_not_logged_in);
         sessionManager.forceLogin(this);
         return false;
         }

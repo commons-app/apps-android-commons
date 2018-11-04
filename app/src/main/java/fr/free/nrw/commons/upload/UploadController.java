@@ -114,7 +114,7 @@ public class UploadController {
         Account currentAccount = sessionManager.getCurrentAccount();
         if (currentAccount == null) {
             Timber.d("Current account is null");
-            ViewUtils.showLongToast(context, context.getString(R.string.user_not_logged_in));
+            ViewUtils.showLongToast(context, R.string.user_not_logged_in);
             sessionManager.forceLogin(context);
             return;
         }

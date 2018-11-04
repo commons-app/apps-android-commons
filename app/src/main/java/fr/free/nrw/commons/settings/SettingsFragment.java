@@ -123,7 +123,7 @@ public class SettingsFragment extends PreferenceFragment {
                 .withListener(new BasePermissionListener() {
                     @Override
                     public void onPermissionGranted(PermissionGrantedResponse response) {
-                        ViewUtils.showLongToast(getActivity(), getResources().getString(R.string.log_collection_started));
+                        ViewUtils.showLongToast(getActivity(), R.string.log_collection_started);
                     }
                 }).check();
     }

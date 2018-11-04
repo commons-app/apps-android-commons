@@ -171,7 +171,7 @@ public class ImageUtils {
         WallpaperManager wallpaperManager = WallpaperManager.getInstance(context);
         try {
             wallpaperManager.setBitmap(bitmap);
-            ViewUtils.showLongToast(context, context.getString(R.string.wallpaper_set_successfully));
+            ViewUtils.showLongToast(context, R.string.wallpaper_set_successfully);
         } catch (IOException e) {
             Timber.e(e,"Error setting wallpaper");
         }

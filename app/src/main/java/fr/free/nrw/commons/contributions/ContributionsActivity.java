@@ -363,7 +363,7 @@ public  class       ContributionsActivity
         Account currentAccount = sessionManager.getCurrentAccount();
         if (currentAccount == null) {
             Timber.d("Current account is null");
-            ViewUtils.showLongToast(this, getResources().getString(R.string.user_not_logged_in));
+            ViewUtils.showLongToast(this, R.string.user_not_logged_in);
             sessionManager.forceLogin(this);
             return false;
         }

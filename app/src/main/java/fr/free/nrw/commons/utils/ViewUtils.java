@@ -9,6 +9,8 @@ import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Toast;
 
+import timber.log.Timber;
+
 public class ViewUtils {
 
     public static final String SHOWCASE_VIEW_ID_1 = "SHOWCASE_VIEW_ID_1";
@@ -17,11 +19,12 @@ public class ViewUtils {
 
     /**
      * Show a short snackbar
-     * @param view View to show a long toast in
-     * @param messageResourceId ResourceId of text to show in toast
+     * @param view View to show a snackbar in
+     * @param messageResourceId ResourceId of text to show in snackbar
      */
     public static void showSnackbar(View view, int messageResourceId) {
         if (view.getContext() == null) {
+            Timber.d("Tried to show a snackbar, but was given a null context");
             return;
         }
 
@@ -31,10 +34,25 @@ public class ViewUtils {
     /**
      * Show a long toast
      * @param context Context to show a long toast in
-     * @param text Text to show in toast
+     * @param messageResourceId ResourceId of text to show in toast
+     */
+    public static void showLongToast(Context context, int messageResourceId) {
+        if (context == null) {
+            Timber.d("Tried to show a long toast, but was given a null context");
+            return;
+        }
+
+        ExecutorUtils.uiExecutor().execute(() -> Toast.makeText(context, messageResourceId, Toast.LENGTH_LONG).show());
+    }
+
+    /**
+     * Show a long toast
+     * @param context Context to show a long toast in
+     * @param text String of text to show in toast
      */
     public static void showLongToast(Context context, String text) {
         if (context == null) {
+            Timber.d("Tried to show a long toast, but was given a null context");
             return;
         }
 

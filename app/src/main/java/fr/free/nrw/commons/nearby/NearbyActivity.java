@@ -444,7 +444,7 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
                     .subscribe(this::populatePlaces,
                             throwable -> {
                                 Timber.d(throwable);
-                                showErrorMessage(getString(R.string.error_fetching_nearby_places));
+                                showErrorMessage(R.string.error_fetching_nearby_places);
                                 progressBar.setVisibility(View.GONE);
                             });
         } else if (locationChangeType
@@ -636,7 +636,7 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
                         .subscribe(this::populatePlaces,
                                 throwable -> {
                                     Timber.d(throwable);
-                                    showErrorMessage(getString(R.string.error_fetching_nearby_places));
+                                    showErrorMessage(R.string.error_fetching_nearby_places);
                                     progressBar.setVisibility(View.GONE);
                                 });
                 nearbyMapFragment.setBundleForUpdtes(bundle);
@@ -705,8 +705,12 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
         // TODO
     }
 
-    private void showErrorMessage(String message) {
-        ViewUtils.showLongToast(NearbyActivity.this, message);
+    /**
+     * Show the error message text with a given messageResourceId
+     * @param messageResourceId ResourceId of error message text to show
+     */
+    private void showErrorMessage(int messageResourceId) {
+        ViewUtils.showLongToast(this, messageResourceId);
     }
 
     @Override
