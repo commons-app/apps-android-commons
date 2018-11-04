@@ -11,7 +11,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/permission_request_button"
-            android:text="Tab to see closest wikidata item needs photo"
+            android:text="@string/display_nearby_notification_summary"
             android:layout_centerInParent="true"
             android:layout_marginLeft="8dp"
             android:layout_marginRight="8dp"
