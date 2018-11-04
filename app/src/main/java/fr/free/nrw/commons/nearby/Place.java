@@ -126,14 +126,13 @@ public class Place {
         CHURCH("Q16970", R.drawable.round_icon_church), //changed from church to church building
         RAILWAY_STATION("Q55488", R.drawable.round_icon_railway_station),
         GATEHOUSE("Q277760", R.drawable.round_icon_gatehouse),
-        MILESTONE("Q2143762", R.drawable.round_icon_milestone), //def #1
-        MILESTONE2("Q10145", R.drawable.round_icon_milestone), // another def for milestone
+        MILESTONE("Q10145", R.drawable.round_icon_milestone),
         INN("Q256020", R.drawable.round_icon_house), //Q27686
-        HOTEL("Q27686", R.drawable.round_icon_house), //there was inn but not hotel?
+        HOTEL("Q27686", R.drawable.round_icon_house),
         CITY("Q515", R.drawable.round_icon_city),
         UNIVERSITY("Q3918",R.drawable.round_icon_school), //added university
-        SECONDARY_SCHOOL("Q3914", R.drawable.round_icon_school), //changed from "secondary school" to school
-        EDU("Q8434", R.drawable.round_icon_school), //changed from edu to education, there is no id for "edu"
+        SCHOOL("Q3914", R.drawable.round_icon_school), //changed from "secondary school" to school
+        EDUCATION("Q8434", R.drawable.round_icon_school), //changed from edu to education, there is no id for "edu"
         ISLE("Q23442", R.drawable.round_icon_island),
         MOUNTAIN("Q8502", R.drawable.round_icon_mountain),
         AIRPORT("Q1248784", R.drawable.round_icon_airport),
@@ -143,6 +142,7 @@ public class Place {
         PARK("Q22698", R.drawable.round_icon_park),
         RIVER("Q4022", R.drawable.round_icon_river),
         WATERFALL("Q34038", R.drawable.round_icon_waterfall),
+        TEMPLE("Q44539",R.drawable.round_icon_church),
         UNKNOWN("?", R.drawable.round_icon_unknown);
 
         private static final Map<String, Label> TEXT_TO_DESCRIPTION

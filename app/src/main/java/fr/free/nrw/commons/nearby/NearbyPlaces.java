@@ -104,7 +104,11 @@ public class NearbyPlaces {
             String wikiDataLink = Utils.stripLocalizedString(fields[1]);
             String name = Utils.stripLocalizedString(fields[2]);
 
-            String identifier = Utils.stripLocalizedString(fields[3]).split("/")[Utils.stripLocalizedString(fields[3]).split("/").length-1];
+            //getting icon link here
+            String identifier = Utils.stripLocalizedString(fields[3]);
+            //getting the ID which is at the end of link
+            identifier = identifier.split("/")[Utils.stripLocalizedString(fields[3]).split("/").length-1];
+            //replaced the extra > char from fields
             identifier = identifier.replace(">","");
 
             String type = Utils.stripLocalizedString(fields[4]);
@@ -127,7 +131,6 @@ public class NearbyPlaces {
             } catch (NumberFormatException e) {
                 throw new RuntimeException("LatLng parse error: " + point);
             }
-            Timber.d("Identifier: "+identifier);
 
             places.add(new Place(
                     name,
