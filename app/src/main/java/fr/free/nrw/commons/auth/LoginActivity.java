@@ -215,6 +215,7 @@ public class LoginActivity extends AccountAuthenticatorActivity {
         loginCurrentlyInProgress = true;
         Timber.d("Login to start!");
         final String username = canonicializeUsername(usernameEdit.getText().toString());
+        final String rawUsername = Utils.capitalize(usernameEdit.getText().toString().trim());
         final String password = passwordEdit.getText().toString();
         String twoFactorCode = twoFactorEdit.getText().toString();
 
@@ -222,7 +223,7 @@ public class LoginActivity extends AccountAuthenticatorActivity {
         Observable.fromCallable(() -> login(username, password, twoFactorCode))
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(result -> handleLogin(username, password, result));
+                .subscribe(result -> handleLogin(username, rawUsername, password, result));
     }
 
     private String login(String username, String password, String twoFactorCode) {
@@ -238,10 +239,10 @@ public class LoginActivity extends AccountAuthenticatorActivity {
         }
     }
 
-    private void handleLogin(String username, String password, String result) {
+    private void handleLogin(String username, String rawUsername, String password, String result) {
         Timber.d("Login done!");
         if (result.equals("PASS")) {
-            handlePassResult(username, password);
+            handlePassResult(username, rawUsername , password);
         } else {
             loginCurrentlyInProgress = false;
             errorMessageShown = true;
@@ -259,7 +260,7 @@ public class LoginActivity extends AccountAuthenticatorActivity {
         progressDialog.show();
     }
 
-    private void handlePassResult(String username, String password) {
+    private void handlePassResult(String username, String rawUsername, String password) {
         showSuccessAndDismissDialog();
         requestAuthToken();
         AccountAuthenticatorResponse response = null;
@@ -276,7 +277,7 @@ public class LoginActivity extends AccountAuthenticatorActivity {
             }
         }
 
-        sessionManager.createAccount(response, username, password);
+        sessionManager.createAccount(response, username, rawUsername, password);
         startMainActivity();
     }
 

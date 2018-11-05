@@ -102,7 +102,7 @@ public class UploadController {
 
             //TODO: Modify this to include coords
             contribution = new Contribution(mediaUri, null, title, description, -1,
-                    null, null, sessionManager.getCurrentAccount().name,
+                    null, null, sessionManager.getRawUserName(),
                     CommonsApplication.DEFAULT_EDIT_SUMMARY, decimalCoords);
 
 
@@ -119,7 +119,7 @@ public class UploadController {
             return;
         }
         contribution = new Contribution(mediaUri, null, title, description, -1,
-                null, null, currentAccount.name,
+                null, null, sessionManager.getRawUserName(),
                 CommonsApplication.DEFAULT_EDIT_SUMMARY, decimalCoords);
 
 
@@ -142,7 +142,7 @@ public class UploadController {
     public void startUpload(final Contribution contribution, final ContributionUploadProgress onComplete) {
         //Set creator, desc, and license
         if (TextUtils.isEmpty(contribution.getCreator())) {
-            contribution.setCreator(sessionManager.getCurrentAccount().name);
+            contribution.setCreator(sessionManager.getRawUserName());
         }
 
         if (contribution.getDescription() == null) {
