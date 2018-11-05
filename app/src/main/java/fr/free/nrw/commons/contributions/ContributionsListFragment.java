@@ -33,6 +33,7 @@ import butterknife.ButterKnife;
 import fr.free.nrw.commons.BuildConfig;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
+import fr.free.nrw.commons.utils.PermissionUtils;
 import timber.log.Timber;
 
 import static android.Manifest.permission.READ_EXTERNAL_STORAGE;
@@ -72,7 +73,7 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment {
 
 
     private boolean isFabOpen = false;
-    private ContributionController controller;
+    public ContributionController controller;
 
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_contributions_list, container, false);
@@ -137,10 +138,11 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment {
                             // Show an explanation to the user *asynchronously* -- don't block
                             // this thread waiting for the user's response! After the user
                             // sees the explanation, try again to request the permission.
-                            new AlertDialog.Builder(getActivity())
+                            new AlertDialog.Builder(getParentFragment().getActivity())
                                     .setMessage(getString(R.string.write_storage_permission_rationale))
                                     .setPositiveButton(android.R.string.ok, (dialog, which) -> {
-                                        requestPermissions(new String[]{WRITE_EXTERNAL_STORAGE}, 3);
+                                        getActivity().requestPermissions
+                                                (new String[]{WRITE_EXTERNAL_STORAGE}, PermissionUtils.CAMERA_PERMISSION_FROM_CONTRIBUTION_LIST);
                                         dialog.dismiss();
                                     })
                                     .setNegativeButton(android.R.string.cancel, null)
@@ -181,10 +183,11 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment {
                             // this thread waiting for the user's response! After the user
                             // sees the explanation, try again to request the permission.
 
-                            new AlertDialog.Builder(getActivity())
+                            new AlertDialog.Builder(getParentFragment().getActivity())
                                     .setMessage(getString(R.string.read_storage_permission_rationale))
                                     .setPositiveButton(android.R.string.ok, (dialog, which) -> {
-                                        requestPermissions(new String[]{READ_EXTERNAL_STORAGE}, 1);
+                                        getActivity().requestPermissions
+                                                (new String[]{READ_EXTERNAL_STORAGE}, PermissionUtils.GALLERY_PERMISSION_FROM_CONTRIBUTION_LIST);
                                         dialog.dismiss();
                                     })
                                     .setNegativeButton(android.R.string.cancel, null)

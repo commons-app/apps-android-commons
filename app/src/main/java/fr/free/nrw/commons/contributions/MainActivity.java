@@ -1,5 +1,6 @@
 package fr.free.nrw.commons.contributions;
 
+import android.Manifest;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
@@ -37,6 +38,7 @@ import fr.free.nrw.commons.nearby.NearbyFragment;
 import fr.free.nrw.commons.notification.NotificationActivity;
 import fr.free.nrw.commons.theme.NavigationBaseActivity;
 import fr.free.nrw.commons.upload.UploadService;
+import fr.free.nrw.commons.utils.PermissionUtils;
 import fr.free.nrw.commons.utils.ViewUtil;
 import timber.log.Timber;
 
@@ -482,6 +484,37 @@ public class MainActivity extends AuthenticatedActivity implements FragmentManag
                 }
                 return;
             }
+            // Storage permission for gallery
+            case PermissionUtils.GALLERY_PERMISSION_FROM_CONTRIBUTION_LIST: {
+                // If request is cancelled, the result arrays are empty.
+                if (grantResults.length > 0
+                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    // Storage permission given
+                    ContributionsListFragment contributionsListFragment =
+                            (ContributionsListFragment) contributionsActivityPagerAdapter
+                                    .getItem(0).getChildFragmentManager()
+                                    .findFragmentByTag(ContributionsFragment.CONTRIBUTION_LIST_FRAGMENT_TAG);
+                    contributionsListFragment.controller.startGalleryPick();
+                }
+                return;
+            }
+
+            case PermissionUtils.CAMERA_PERMISSION_FROM_CONTRIBUTION_LIST: {
+                // If request is cancelled, the result arrays are empty.
+                if (grantResults.length > 0
+                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    // Storage permission given
+                    ContributionsListFragment contributionsListFragment =
+                            (ContributionsListFragment) contributionsActivityPagerAdapter
+                                    .getItem(0).getChildFragmentManager()
+                                    .findFragmentByTag(ContributionsFragment.CONTRIBUTION_LIST_FRAGMENT_TAG);
+                    contributionsListFragment.controller.startCameraCapture();
+                }
+                return;
+            }
+
+            default:
+                return;
         }
     }
 }
