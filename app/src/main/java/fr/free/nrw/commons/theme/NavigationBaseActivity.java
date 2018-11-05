@@ -102,7 +102,9 @@ public abstract class NavigationBaseActivity extends BaseActivity
     }
 
     public void changeDrawerIconToDefault() {
-        toggle.setDrawerIndicatorEnabled(true);
+        if (toggle != null) {
+            toggle.setDrawerIndicatorEnabled(true);
+        }
     }
 
     /**

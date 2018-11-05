@@ -467,7 +467,6 @@ public class MainActivity extends AuthenticatedActivity implements FragmentManag
     @Override
     public void onRequestPermissionsResult(int requestCode,
                                            String permissions[], int[] grantResults) {
-        Log.d("deneme7","requestCode"+requestCode);
         switch (requestCode) {
             case LOCATION_REQUEST: {
                 // If request is cancelled, the result arrays are empty.

@@ -15,8 +15,6 @@ public class PermissionUtils {
     public static final int GALLERY_PERMISSION_FROM_CONTRIBUTION_LIST = 101;
     public static final int CAMERA_PERMISSION_FROM_NEARBY_MAP = 102;
     public static final int GALLERY_PERMISSION_FROM_NEARBY_MAP = 103;
-    public static final int CAMERA_PERMISSION_FROM_NEARBY_LIST = 104;
-    public static final int GALLERY_PERMISSION_FROM_NEARBY_LIST = 105;
 
     /**
      * This method can be used by any activity which requires a permission which has been blocked(marked never ask again by the user)
