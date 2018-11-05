@@ -60,15 +60,15 @@ public class WelcomePagerAdapter extends PagerAdapter {
         this.container=container;
         LayoutInflater inflater = LayoutInflater.from(container.getContext());
         ViewGroup layout = (ViewGroup) inflater.inflate(PAGE_LAYOUTS[position], container, false);
-        if( BuildConfig.FLAVOR == "beta"){
-            TextView textView = (TextView) layout.findViewById(R.id.welcomeYesButton);
-            if( textView.getVisibility() != View.VISIBLE){
+        if (BuildConfig.FLAVOR == "beta") {
+            TextView textView = layout.findViewById(R.id.welcomeYesButton);
+            if (textView.getVisibility() != View.VISIBLE) {
                 textView.setVisibility(View.VISIBLE);
             }
             ViewHolder holder = new ViewHolder(layout);
             layout.setTag(holder);
 
-            if(position == PAGE_FINAL){
+            if (position == PAGE_FINAL){
                 TextView moreInfo = layout.findViewById(R.id.welcomeInfo);
                 moreInfo.setText(Html.fromHtml(WelcomeActivity.moreInformation));
                 ViewHolder holder1 = new ViewHolder(layout);

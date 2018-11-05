@@ -1,6 +1,11 @@
 package fr.free.nrw.commons.notification;
 
+import android.graphics.Color;
 import android.text.Html;
+import android.text.SpannableString;
+import android.text.Spanned;
+import android.text.TextPaint;
+import android.text.style.ClickableSpan;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -60,7 +65,25 @@ public class NotificationRenderer extends Renderer<Notification> {
         notificationText = notificationText.trim().replaceAll("(^\\s*)|(\\s*$)", "");
         notificationText = Html.fromHtml(notificationText).toString();
         notificationText = notificationText.concat(" ");
-        title.setText(notificationText);
+
+        SpannableString ss = new SpannableString(notificationText);
+        ClickableSpan clickableSpan = new ClickableSpan() {
+            @Override
+            public void onClick(View view) {
+                listener.notificationClicked(getContent());
+            }
+
+            @Override
+            public void updateDrawState(TextPaint ds) {
+                super.updateDrawState(ds);
+                ds.setUnderlineText(false);
+                ds.setColor(Color.BLACK);
+            }
+        };
+
+        // Attach a ClickableSpan to the range (start:0, end:notificationText.length()) of the String
+        ss.setSpan(clickableSpan, 0, notificationText.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+        title.setText(ss, TextView.BufferType.SPANNABLE);
     }
 
     public interface NotificationClicked{

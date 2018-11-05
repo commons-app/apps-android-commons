@@ -101,7 +101,7 @@ public class CategoryImagesListFragment extends DaggerFragment {
      */
     @SuppressLint("CheckResult")
     private void initList() {
-        if(!NetworkUtils.isInternetConnectionEstablished(getContext())) {
+        if (!NetworkUtils.isInternetConnectionEstablished(getContext())) {
             handleNoInternet();
             return;
         }
@@ -208,7 +208,7 @@ public class CategoryImagesListFragment extends DaggerFragment {
      */
     @SuppressLint("CheckResult")
     private void fetchMoreImages() {
-        if(!NetworkUtils.isInternetConnectionEstablished(getContext())) {
+        if (!NetworkUtils.isInternetConnectionEstablished(getContext())) {
             handleNoInternet();
             return;
         }
@@ -227,13 +227,13 @@ public class CategoryImagesListFragment extends DaggerFragment {
      * @param collection List of new Media to be displayed
      */
     private void handleSuccess(List<Media> collection) {
-        if(collection == null || collection.isEmpty()) {
+        if (collection == null || collection.isEmpty()) {
             initErrorView();
             hasMoreImages = false;
             return;
         }
 
-        if(gridAdapter == null) {
+        if (gridAdapter == null) {
             setAdapter(collection);
         } else {
             if (gridAdapter.containsAll(collection)) {

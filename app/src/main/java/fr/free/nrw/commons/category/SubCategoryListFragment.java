@@ -73,7 +73,7 @@ public class SubCategoryListFragment extends CommonsDaggerSupportFragment {
         categoryName = getArguments().getString("categoryName");
         isParentCategory = getArguments().getBoolean("isParentCategory");
         initSubCategoryList();
-        if(getActivity().getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT){
+        if (getActivity().getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT){
             categoriesRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         }
         else{
@@ -91,7 +91,7 @@ public class SubCategoryListFragment extends CommonsDaggerSupportFragment {
      */
     public void initSubCategoryList() {
         categoriesNotFoundView.setVisibility(GONE);
-        if(!NetworkUtils.isInternetConnectionEstablished(getContext())) {
+        if (!NetworkUtils.isInternetConnectionEstablished(getContext())) {
             handleNoInternet();
             return;
         }
@@ -118,7 +118,7 @@ public class SubCategoryListFragment extends CommonsDaggerSupportFragment {
      * @param subCategoryList
      */
     private void handleSuccess(List<String> subCategoryList) {
-        if(subCategoryList == null || subCategoryList.isEmpty()) {
+        if (subCategoryList == null || subCategoryList.isEmpty()) {
             initEmptyView();
         }
         else {

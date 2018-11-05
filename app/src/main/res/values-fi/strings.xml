@@ -318,4 +318,15 @@
   <string name="Achievements">Saavutukset</string>
   <string name="statistics">TILASTOT</string>
   <string name="level">TASO</string>
+  <string name="images_uploaded">Kuvia tallennettu</string>
+  <string name="images_used_by_wiki">Kuvia käytetty</string>
+  <string name="navigation_item_bookmarks">Kirjanmerkit</string>
+  <string name="title_activity_bookmarks">Kirjanmerkit</string>
+  <string name="title_page_bookmarks_pictures">Kuvat</string>
+  <string name="title_page_bookmarks_locations">Sijainnit</string>
+  <string name="menu_bookmark">Lisää kirjanmerkkeihin/Poista kirjanmerkeistä</string>
+  <string name="provider_bookmarks">Kirjanmerkit</string>
+  <string name="bookmark_empty">Et ole lisännyt yhtään kirjanmerkkejä</string>
+  <string name="provider_bookmarks_location">Kirjanmerkit</string>
+  <string name="no_uploads">Tervetuloa Commonsiin!\n\nTallenna ensimmäinen mediasi koskettamalla kamera tai galleriakuvaketta yllä.</string>
 </resources>

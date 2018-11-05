@@ -95,7 +95,7 @@ public class SearchCategoryFragment extends CommonsDaggerSupportFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_browse_image, container, false);
         ButterKnife.bind(this, rootView);
-        if(getActivity().getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT){
+        if (getActivity().getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT){
             categoriesRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         }
         else{
@@ -124,7 +124,7 @@ public class SearchCategoryFragment extends CommonsDaggerSupportFragment {
     public void updateCategoryList(String query) {
         this.query = query;
         categoriesNotFoundView.setVisibility(GONE);
-        if(!NetworkUtils.isInternetConnectionEstablished(getContext())) {
+        if (!NetworkUtils.isInternetConnectionEstablished(getContext())) {
             handleNoInternet();
             return;
         }
@@ -173,7 +173,7 @@ public class SearchCategoryFragment extends CommonsDaggerSupportFragment {
      */
     private void handleSuccess(List<String> mediaList) {
         queryList = mediaList;
-        if(mediaList == null || mediaList.isEmpty()) {
+        if (mediaList == null || mediaList.isEmpty()) {
             initErrorView();
         }
         else {

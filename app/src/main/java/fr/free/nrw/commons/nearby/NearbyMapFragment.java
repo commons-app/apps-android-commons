@@ -281,7 +281,7 @@ public class NearbyMapFragment extends DaggerFragment {
 
                 // Make camera to follow user on location change
                 CameraPosition position ;
-                if(ViewUtil.isPortrait(getActivity())){
+                if (ViewUtil.isPortrait(getActivity())){
                     position = new CameraPosition.Builder()
                             .target(isBottomListSheetExpanded ?
                                     new LatLng(curMapBoxLatLng.getLatitude()- CAMERA_TARGET_SHIFT_FACTOR_PORTRAIT,
@@ -315,7 +315,7 @@ public class NearbyMapFragment extends DaggerFragment {
         if (mapboxMap != null && curLatLng != null) {
             if (isBottomListSheetExpanded) {
                 // Make camera to follow user on location change
-                if(ViewUtil.isPortrait(getActivity())) {
+                if (ViewUtil.isPortrait(getActivity())) {
                     position = new CameraPosition.Builder()
                             .target(new LatLng(curLatLng.getLatitude() - CAMERA_TARGET_SHIFT_FACTOR_PORTRAIT,
                                     curLatLng.getLongitude())) // Sets the new camera target above
@@ -416,7 +416,7 @@ public class NearbyMapFragment extends DaggerFragment {
                 mapView.getMapAsync(mapboxMap -> {
                     CameraPosition position;
 
-                    if(ViewUtil.isPortrait(getActivity())){
+                    if (ViewUtil.isPortrait(getActivity())){
                         position = new CameraPosition.Builder()
                                 .target(isBottomListSheetExpanded ?
                                         new LatLng(curLatLng.getLatitude()- CAMERA_TARGET_SHIFT_FACTOR_PORTRAIT,
@@ -508,13 +508,10 @@ public class NearbyMapFragment extends DaggerFragment {
         // create map
         mapView = new MapView(getActivity(), options);
         mapView.onCreate(savedInstanceState);
-        mapView.getMapAsync(new OnMapReadyCallback() {
-            @Override
-            public void onMapReady(MapboxMap mapboxMap) {
-                ((NearbyActivity)getActivity()).setMapViewTutorialShowCase();
-                NearbyMapFragment.this.mapboxMap = mapboxMap;
-                updateMapSignificantly();
-            }
+        mapView.getMapAsync(mapboxMap -> {
+            ((NearbyActivity)getActivity()).setMapViewTutorialShowCase();
+            NearbyMapFragment.this.mapboxMap = mapboxMap;
+            updateMapSignificantly();
         });
         mapView.setStyleUrl("asset://mapstyle.json");
     }
