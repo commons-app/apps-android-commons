@@ -109,7 +109,7 @@ public class NearbyMapFragment extends DaggerFragment {
     private Animation fab_close;
     private Animation fab_open;
     private Animation rotate_forward;
-    private ContributionController controller;
+    public ContributionController controller;
     private DirectUpload directUpload;
 
     private Place place;

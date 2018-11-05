@@ -35,6 +35,7 @@ import fr.free.nrw.commons.auth.AuthenticatedActivity;
 import fr.free.nrw.commons.auth.SessionManager;
 import fr.free.nrw.commons.location.LocationServiceManager;
 import fr.free.nrw.commons.nearby.NearbyFragment;
+import fr.free.nrw.commons.nearby.NearbyMapFragment;
 import fr.free.nrw.commons.notification.NotificationActivity;
 import fr.free.nrw.commons.theme.NavigationBaseActivity;
 import fr.free.nrw.commons.upload.UploadService;
@@ -466,6 +467,7 @@ public class MainActivity extends AuthenticatedActivity implements FragmentManag
     @Override
     public void onRequestPermissionsResult(int requestCode,
                                            String permissions[], int[] grantResults) {
+        Log.d("deneme7","requestCode"+requestCode);
         switch (requestCode) {
             case LOCATION_REQUEST: {
                 // If request is cancelled, the result arrays are empty.
@@ -509,6 +511,32 @@ public class MainActivity extends AuthenticatedActivity implements FragmentManag
                                     .getItem(0).getChildFragmentManager()
                                     .findFragmentByTag(ContributionsFragment.CONTRIBUTION_LIST_FRAGMENT_TAG);
                     contributionsListFragment.controller.startCameraCapture();
+                }
+                return;
+            }
+
+            case PermissionUtils.CAMERA_PERMISSION_FROM_NEARBY_MAP: {
+                // If request is cancelled, the result arrays are empty.
+                if (grantResults.length > 0
+                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    // Storage permission given
+                    NearbyMapFragment nearbyMapFragment =
+                            ((NearbyFragment) contributionsActivityPagerAdapter
+                                    .getItem(1)).nearbyMapFragment;
+                    nearbyMapFragment.controller.startCameraCapture();
+                }
+                return;
+            }
+
+            case PermissionUtils.GALLERY_PERMISSION_FROM_NEARBY_MAP: {
+                // If request is cancelled, the result arrays are empty.
+                if (grantResults.length > 0
+                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    // Storage permission given
+                    NearbyMapFragment nearbyMapFragment =
+                            ((NearbyFragment) contributionsActivityPagerAdapter
+                                    .getItem(1)).nearbyMapFragment;
+                    nearbyMapFragment.controller.startGalleryPick();
                 }
                 return;
             }
