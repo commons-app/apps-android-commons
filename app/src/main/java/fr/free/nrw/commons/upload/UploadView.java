@@ -68,6 +68,8 @@ public interface UploadView {
 
     void showBadPicturePopup(@ImageUtils.Result int errorMessage);
 
+    void showDuplicatePicturePopup();
+
     void finish();
 
     void launchMapActivity(String decCoords);

@@ -100,7 +100,7 @@ public class ContributionController {
             Timber.d("Fragment is not added, startActivityForResult cannot be called");
             return;
         }
-        Timber.d("startGalleryPick() called with pickImageIntent");
+        Timber.d("startSingleGalleryPick() called with pickImageIntent");
 
         fragment.startActivityForResult(pickImageIntent, SELECT_FROM_GALLERY);
     }
@@ -114,7 +114,7 @@ public class ContributionController {
             Timber.d("Fragment is not added, startActivityForResult cannot be called");
             return;
         }
-        Timber.d("startGalleryPick() called with pickImageIntent");
+        Timber.d("startMultipleGalleryPick() called with pickImageIntent");
 
         fragment.startActivityForResult(pickImageIntent, PICK_IMAGE_MULTIPLE);
     }

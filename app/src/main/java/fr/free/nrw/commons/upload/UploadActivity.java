@@ -3,7 +3,6 @@ package fr.free.nrw.commons.upload;
 import android.Manifest;
 import android.animation.LayoutTransition;
 import android.annotation.SuppressLint;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
@@ -55,6 +54,7 @@ import fr.free.nrw.commons.category.CategoriesModel;
 import fr.free.nrw.commons.category.CategoryItem;
 import fr.free.nrw.commons.contributions.Contribution;
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
+import fr.free.nrw.commons.utils.DialogUtil;
 import fr.free.nrw.commons.utils.ImageUtils;
 import fr.free.nrw.commons.utils.ViewUtil;
 import io.reactivex.Observable;
@@ -140,7 +140,7 @@ public class UploadActivity extends AuthenticatedActivity implements UploadView,
         configureCategories();
         configureLicenses();
 
-        presenter.initFromSavedState(savedInstanceState);
+        presenter.init();
 
         dexterPermissionObtainer = new DexterPermissionObtainer(this,
                 Manifest.permission.WRITE_EXTERNAL_STORAGE,
@@ -330,12 +330,11 @@ public class UploadActivity extends AuthenticatedActivity implements UploadView,
 
     @Override
     public void dismissKeyboard() {
-//        inputMethodManager.hideSoftInputFromWindow(imageTitle.getWindowToken(), 0);
+
     }
 
     @Override
     public void showBadPicturePopup(@ImageUtils.Result int result) {
-        String errorTitle = getString(R.string.warning);
         String errorMessage;
         if (result == ImageUtils.IMAGE_DARK)
             errorMessage = getString(R.string.upload_image_problem_dark);
@@ -351,52 +350,36 @@ public class UploadActivity extends AuthenticatedActivity implements UploadView,
             errorMessage = getString(R.string.upload_image_problem_blurry_duplicate);
         else if (result == (ImageUtils.IMAGE_DARK|ImageUtils.IMAGE_BLURRY|ImageUtils.IMAGE_DUPLICATE))
             errorMessage = getString(R.string.upload_image_problem_dark_blurry_duplicate);
-        else if (result == ImageUtils.FILE_NAME_EXISTS)
-            errorMessage = String.format(getString(R.string.upload_title_duplicate), presenter.getCurrentImageFileName());
         else
             return;
 
-        AlertDialog.Builder errorDialogBuilder = new AlertDialog.Builder(this);
-        errorDialogBuilder.setMessage(errorMessage);
-        errorDialogBuilder.setTitle(errorTitle);
-        //user does not wish to upload the picture, delete it
-        errorDialogBuilder.setPositiveButton(R.string.no, (dialogInterface, i) -> {
-            presenter.deletePicture();
-            dialogInterface.dismiss();
-        });
-        //user wishes to go ahead with the upload of this picture, just dismiss this dialog
-        errorDialogBuilder.setNegativeButton(R.string.yes, (DialogInterface dialogInterface, int i) -> {
-            presenter.keepPicture();
-            dialogInterface.dismiss();
-            if(result == ImageUtils.FILE_NAME_EXISTS) {
-                presenter.handleNext(categoriesModel, false);
-            }
-        });
+        DialogUtil.showAlertDialog(this,
+                getString(R.string.warning),
+                errorMessage,
+                () -> presenter.deletePicture(),
+                () -> presenter.keepPicture());
+    }
 
-        AlertDialog errorDialog = errorDialogBuilder.create();
-        if (!isFinishing()) {
-            errorDialog.show();
-        }
+    @Override
+    public void showDuplicatePicturePopup() {
+        DialogUtil.showAlertDialog(this,
+                getString(R.string.warning),
+                String.format(getString(R.string.upload_title_duplicate), presenter.getCurrentImageFileName()),
+                null,
+                () -> {
+                    presenter.keepPicture();
+                    presenter.handleNext(categoriesModel, false);
+                });
     }
 
     public void showNoCategorySelectedWarning() {
-        AlertDialog.Builder errorDialogBuilder = new AlertDialog.Builder(this);
-        errorDialogBuilder.setMessage(R.string.no_categories_selected_warning_desc);
-        errorDialogBuilder.setTitle(R.string.no_categories_selected);
-        //user does not wish to upload the picture, delete it
-        errorDialogBuilder.setPositiveButton(R.string.no_go_back, (dialogInterface, i) -> {
-            dialogInterface.dismiss();
-        });
-        //user wishes to go ahead with the upload of this picture, just dismiss this dialog
-        errorDialogBuilder.setNegativeButton(R.string.yes_submit, (DialogInterface dialogInterface, int i) -> {
-            presenter.handleNext(categoriesModel, true);
-            dialogInterface.dismiss();
-        });
-
-        AlertDialog errorDialog = errorDialogBuilder.create();
-        if (!isFinishing()) {
-            errorDialog.show();
-        }
+        DialogUtil.showAlertDialog(this,
+                getString(R.string.no_categories_selected),
+                getString(R.string.no_categories_selected_warning_desc),
+                getString(R.string.no_go_back),
+                getString(R.string.yes_submit),
+                null,
+                () -> presenter.handleNext(categoriesModel, true));
     }
 
     @Override
@@ -412,20 +395,6 @@ public class UploadActivity extends AuthenticatedActivity implements UploadView,
     @Override
     public void initDefaultCategories() {
         updateCategoryList("");
-    }
-
-    @Override
-    protected void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
-        Bundle state = presenter.getSavedState();
-        outState.putAll(state);
-        int itemCount = categoriesAdapter.getItemCount();
-        ArrayList<CategoryItem> items = new ArrayList<>(itemCount);
-        for (int i = 0; i < itemCount; i++) {
-            items.add(categoriesAdapter.getItem(i));
-        }
-        outState.putParcelableArrayList("currentCategories", items);
-        outState.putSerializable("categoriesCache", categoriesModel.getCategoriesCache());
     }
 
     @Override

@@ -2,7 +2,6 @@ package fr.free.nrw.commons.upload;
 
 import android.annotation.SuppressLint;
 import android.net.Uri;
-import android.os.Bundle;
 
 import java.lang.reflect.Proxy;
 import java.util.ArrayList;
@@ -20,7 +19,6 @@ import fr.free.nrw.commons.utils.ImageUtils;
 import io.reactivex.Completable;
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.schedulers.Schedulers;
 import timber.log.Timber;
 
@@ -35,8 +33,6 @@ import static fr.free.nrw.commons.utils.ImageUtils.IMAGE_OK;
  */
 @Singleton
 public class UploadPresenter {
-    private static final String TOP_CARD_STATE = "fr.free.nrw.commons.upload.top_card_state";
-    private static final String BOTTOM_CARD_STATE = "fr.free.nrw.commons.upload.bottom_card_state";
 
     private final UploadModel uploadModel;
     private final UploadController uploadController;
@@ -149,7 +145,7 @@ public class UploadPresenter {
                 if(getCurrentItem().imageQuality.getValue().equals(IMAGE_KEEP)) {
                     nextUploadedItem();
                 } else {
-                    view.showBadPicturePopup(FILE_NAME_EXISTS);
+                    view.showDuplicatePicturePopup();
                 }
                 break;
             case IMAGE_OK:
@@ -310,24 +306,12 @@ public class UploadPresenter {
     //endregion
 
     //region View / Lifecycle management
-    public void initFromSavedState(Bundle state) {
-        if (state != null) {
-            Timber.i("Saved state is not null.");
-            uploadModel.setTopCardState(state.getBoolean(TOP_CARD_STATE, true));
-            uploadModel.setBottomCardState(state.getBoolean(BOTTOM_CARD_STATE, true));
-        }
+    public void init() {
         uploadController.prepareService();
     }
 
     public void cleanup() {
         uploadController.cleanup();
-    }
-
-    public Bundle getSavedState() {
-        Bundle bundle = new Bundle();
-        bundle.putBoolean(TOP_CARD_STATE, uploadModel.isTopCardState());
-        bundle.putBoolean(BOTTOM_CARD_STATE, uploadModel.isBottomCardState());
-        return bundle;
     }
 
     public void removeView() {
