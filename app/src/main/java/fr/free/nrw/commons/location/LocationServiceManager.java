@@ -32,7 +32,7 @@ public class LocationServiceManager implements LocationListener {
     //private Location lastLocationDuplicate; // Will be used for nearby card view on contributions activity
     private final List<LocationUpdateListener> locationListeners = new CopyOnWriteArrayList<>();
     private boolean isLocationManagerRegistered = false;
-    private Set<Activity> locationExplanationDisplayed = new HashSet<>();
+    public Set<Activity> locationExplanationDisplayed = new HashSet<>();
 
     /**
      * Constructs a new instance of LocationServiceManager.

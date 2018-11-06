@@ -544,4 +544,12 @@ public class MainActivity extends AuthenticatedActivity implements FragmentManag
                 return;
         }
     }
+
+    @Override
+    protected void onDestroy() {
+        locationManager.unregisterLocationManager();
+        // Remove ourself from hashmap to prevent memory leaks
+        locationManager = null;
+        super.onDestroy();
+    }
 }
