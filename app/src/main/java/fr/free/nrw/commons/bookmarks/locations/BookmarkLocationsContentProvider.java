@@ -55,7 +55,7 @@ public class BookmarkLocationsContentProvider extends CommonsDaggerContentProvid
         SQLiteDatabase sqlDB = dbOpenHelper.getWritableDatabase();
         int rowsUpdated;
         if (TextUtils.isEmpty(selection)) {
-            int id = Integer.valueOf(uri.getLastPathSegment());
+            int id = Integer.parseInt(uri.getLastPathSegment());
             rowsUpdated = sqlDB.update(TABLE_NAME,
                     contentValues,
                     COLUMN_NAME + " = ?",

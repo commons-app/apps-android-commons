@@ -175,7 +175,7 @@ public class CategorizationFragment extends CommonsDaggerSupportFragment {
     public boolean onOptionsItemSelected(MenuItem menuItem) {
         switch (menuItem.getItemId()) {
             case R.id.menu_save_categories:
-                if (selectedCategories.size() > 0) {
+                if (!selectedCategories.isEmpty()) {
                     //Some categories selected, proceed to submission
                     onCategoriesSaveHandler.onCategoriesSave(getStringList(selectedCategories));
                 } else {

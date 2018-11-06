@@ -18,6 +18,7 @@ import android.widget.TextView;
 import com.pedrogomez.renderers.RVRendererAdapter;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -76,10 +77,8 @@ public class BookmarkLocationsFragment extends DaggerFragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setAdapter(
                 adapterFactory.create(
-                        new ArrayList<Place>(),
-                        () -> {
-                            initList();
-                        }
+                        new ArrayList<>(),
+                        this::initList
                 )
         );
     }
@@ -97,7 +96,7 @@ public class BookmarkLocationsFragment extends DaggerFragment {
         List<Place> places = controller.loadFavoritesLocations();
         adapterFactory.updateAdapterData(places, (RVRendererAdapter<Place>) recyclerView.getAdapter());
         progressBar.setVisibility(View.GONE);
-        if (places.size() <= 0) {
+        if (!places.isEmpty()) {
             statusTextView.setText(R.string.bookmark_empty);
             statusTextView.setVisibility(View.VISIBLE);
         } else {
@@ -107,25 +106,26 @@ public class BookmarkLocationsFragment extends DaggerFragment {
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        Timber.d("onRequestPermissionsResult: req code = " + " perm = " + permissions + " grant =" + grantResults);
+        Timber.d("onRequestPermissionsResult: req code = " + " perm = " + Arrays.toString(permissions) + " grant =" + Arrays.toString(grantResults));
 
         switch (requestCode) {
             // 4 = "Read external storage" allowed when gallery selected
-            case 4: {
+            case 4:
                 if (grantResults.length > 0 && grantResults[0] == PERMISSION_GRANTED) {
                     Timber.d("Call controller.startGalleryPick()");
                     contributionController.startGalleryPick();
                 }
-            }
-            break;
+                break;
 
             // 5 = "Write external storage" allowed when camera selected
-            case 5: {
+            case 5:
                 if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     Timber.d("Call controller.startCameraCapture()");
                     contributionController.startCameraCapture();
                 }
-            }
+                break;
+                default:
+                    throw new UnsupportedOperationException("Permission not recognised or required");
         }
     }
 

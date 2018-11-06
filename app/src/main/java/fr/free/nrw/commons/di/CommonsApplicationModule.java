@@ -40,7 +40,7 @@ public class CommonsApplicationModule {
 
     @Provides
     public AccountUtil providesAccountUtil(Context context) {
-        return new AccountUtil(context);
+        return new AccountUtil();
     }
 
     @Provides

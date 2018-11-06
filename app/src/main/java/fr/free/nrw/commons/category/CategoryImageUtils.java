@@ -20,6 +20,12 @@ import timber.log.Timber;
 public class CategoryImageUtils {
 
     /**
+     * Private constructor to hide the implicit one.
+     * Since util classes only contains static methods, we shouldn't allow object creation.
+     */
+    private CategoryImageUtils(){}
+
+    /**
      * The method iterates over the child nodes to return a list of Media objects
      * @param childNodes
      * @return

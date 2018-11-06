@@ -120,6 +120,7 @@ public class CategoryDetailsActivity extends NavigationBaseActivity
         if (mediaDetails == null || !mediaDetails.isVisible()) {
             // set isFeaturedImage true for featured images, to include author field on media detail
             mediaDetails = new MediaDetailPagerFragment(false, true);
+            //FIXME: Is this even required. Check it once.
             FragmentManager supportFragmentManager = getSupportFragmentManager();
             supportFragmentManager
                     .beginTransaction()

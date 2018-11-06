@@ -81,7 +81,7 @@ public class LoginActivity extends AccountAuthenticatorActivity {
     @BindView(R.id.forgotPassword) HtmlTextView forgotPasswordText;
     @BindView(R.id.skipLogin) HtmlTextView skipLoginText;
 
-    ProgressDialog progressDialog;
+    private ProgressDialog progressDialog;
     private AppCompatDelegate delegate;
     private LoginTextWatcher textWatcher = new LoginTextWatcher();
 
@@ -297,12 +297,9 @@ public class LoginActivity extends AccountAuthenticatorActivity {
         if (result.equals("NetworkFailure")) {
             // Matches NetworkFailure which is created by the doInBackground method
             showMessageAndCancelDialog(R.string.login_failed_network);
-        } else if (result.toLowerCase(Locale.getDefault()).contains("nosuchuser".toLowerCase()) || result.toLowerCase().contains("noname".toLowerCase())) {
-            // Matches nosuchuser, nosuchusershort, noname
-            showMessageAndCancelDialog(R.string.login_failed_wrong_credentials);
-            emptySensitiveEditFields();
-        } else if (result.toLowerCase(Locale.getDefault()).contains("wrongpassword".toLowerCase())) {
-            // Matches wrongpassword, wrongpasswordempty
+        } else if (result.toLowerCase(Locale.getDefault()).contains("nosuchuser".toLowerCase()) || result.toLowerCase().contains("noname".toLowerCase())
+                || result.toLowerCase(Locale.getDefault()).contains("wrongpassword".toLowerCase())) {
+            // Matches nosuchuser, nosuchusershort, noname, wrongpassword, wrongpasswordempty
             showMessageAndCancelDialog(R.string.login_failed_wrong_credentials);
             emptySensitiveEditFields();
         } else if (result.toLowerCase(Locale.getDefault()).contains("throttle".toLowerCase())) {
@@ -358,8 +355,9 @@ public class LoginActivity extends AccountAuthenticatorActivity {
             case android.R.id.home:
                 NavUtils.navigateUpFromSameTask(this);
                 return true;
+                default:
+                    return super.onOptionsItemSelected(item);
         }
-        return super.onOptionsItemSelected(item);
     }
 
     @Override
@@ -426,14 +424,11 @@ public class LoginActivity extends AccountAuthenticatorActivity {
 
     private TextView.OnEditorActionListener newLoginInputActionListener() {
         return (textView, actionId, keyEvent) -> {
-            if (loginButton.isEnabled()) {
-                if (actionId == IME_ACTION_DONE) {
-                    performLogin();
-                    return true;
-                } else if ((keyEvent != null) && keyEvent.getKeyCode() == KEYCODE_ENTER) {
-                    performLogin();
-                    return true;
-                }
+            if (loginButton.isEnabled() &&
+                    (actionId == IME_ACTION_DONE ||
+                            (keyEvent != null) && keyEvent.getKeyCode() == KEYCODE_ENTER)) {
+                performLogin();
+                return true;
             }
             return false;
         };
