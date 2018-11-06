@@ -49,7 +49,6 @@ public class  Contribution extends Media {
     private Uri contentUri;
     private String source;
     private String editSummary;
-    private Date timestamp;
     private int state;
     private long transferred;
     private String decimalCoords;
@@ -57,14 +56,13 @@ public class  Contribution extends Media {
     private String wikiDataEntityId;
     private Uri contentProviderUri;
 
-    public Contribution(Uri contentUri, String filename, Uri localUri, String imageUrl, Date timestamp,
+    public Contribution(Uri contentUri, String filename, Uri localUri, String imageUrl, Date dateCreated,
                         int state, long dataLength, Date dateUploaded, long transferred,
                         String source, String description, String creator, boolean isMultiple,
                         int width, int height, String license) {
-        super(localUri, imageUrl, filename, description, dataLength, timestamp, dateUploaded, creator);
+        super(localUri, imageUrl, filename, description, dataLength, dateCreated, dateUploaded, creator);
         this.contentUri = contentUri;
         this.state = state;
-        this.timestamp = timestamp;
         this.transferred = transferred;
         this.source = source;
         this.isMultiple = isMultiple;
@@ -78,14 +76,12 @@ public class  Contribution extends Media {
         super(localUri, imageUrl, filename, description, dataLength, dateCreated, dateUploaded, creator);
         this.decimalCoords = decimalCoords;
         this.editSummary = editSummary;
-        timestamp = new Date(System.currentTimeMillis());
     }
 
     public Contribution(Parcel in) {
         super(in);
         contentUri = in.readParcelable(Uri.class.getClassLoader());
         source = in.readString();
-        timestamp = (Date) in.readSerializable();
         state = in.readInt();
         transferred = in.readLong();
         isMultiple = in.readInt() == 1;
@@ -96,11 +92,12 @@ public class  Contribution extends Media {
         super.writeToParcel(parcel, flags);
         parcel.writeParcelable(contentUri, flags);
         parcel.writeString(source);
-        parcel.writeSerializable(timestamp);
         parcel.writeInt(state);
         parcel.writeLong(transferred);
         parcel.writeInt(isMultiple ? 1 : 0);
     }
+
+
 
     public boolean getMultiple() {
         return isMultiple;
@@ -128,14 +125,6 @@ public class  Contribution extends Media {
 
     public void setContentUri(Uri contentUri) {
         this.contentUri = contentUri;
-    }
-
-    public Date getTimestamp() {
-        return timestamp;
-    }
-
-    public void setTimestamp(Date timestamp) {
-        this.timestamp = timestamp;
     }
 
     public int getState() {
@@ -196,7 +185,7 @@ public class  Contribution extends Media {
     }
 
     public Contribution() {
-        timestamp = new Date(System.currentTimeMillis());
+
     }
 
     public String getSource() {
