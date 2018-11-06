@@ -286,9 +286,9 @@ public class MainActivity extends AuthenticatedActivity implements FragmentManag
 
         if (!isThereUnreadNotifications) {
             // TODO: used vectors are not compatible with API 19 and below, change them
-            menu.findItem(R.id.notifications).setIcon(ContextCompat.getDrawable(this, R.drawable.ic_notifications_white_24dp));
+            menu.findItem(R.id.notifications).setIcon(ContextCompat.getDrawable(this, R.drawable.ic_notification_white_clip_art));
         } else {
-            menu.findItem(R.id.notifications).setIcon(ContextCompat.getDrawable(this, R.drawable.ic_notifications_active_white_24dp));
+            menu.findItem(R.id.notifications).setIcon(ContextCompat.getDrawable(this, R.drawable.ic_notification_white_clip_art_dot));
         }
 
         this.menu = menu;
@@ -351,10 +351,10 @@ public class MainActivity extends AuthenticatedActivity implements FragmentManag
     public void updateNotificationIcon(boolean isThereUnreadNotifications) {
         if (!isThereUnreadNotifications) {
             this.isThereUnreadNotifications = false;
-            menu.findItem(R.id.notifications).setIcon(ContextCompat.getDrawable(this, R.drawable.ic_notifications_white_24dp));
+            menu.findItem(R.id.notifications).setIcon(ContextCompat.getDrawable(this, R.drawable.ic_notification_white_clip_art));
         } else {
             this.isThereUnreadNotifications = true;
-            menu.findItem(R.id.notifications).setIcon(ContextCompat.getDrawable(this, R.drawable.ic_notifications_active_white_24dp));
+            menu.findItem(R.id.notifications).setIcon(ContextCompat.getDrawable(this, R.drawable.ic_notification_white_clip_art_dot));
         }
     }
 
