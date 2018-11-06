@@ -12,6 +12,12 @@ import android.graphics.drawable.Drawable;
 public class BitmapUtils {
 
     /**
+     * Private constructor to hide the implicit one.
+     * Since util classes only contains static methods, we shouldn't allow object creation.
+     */
+    private BitmapUtils(){}
+
+    /**
      *  write level Number on the badge
      * @param bm
      * @param text
@@ -28,11 +34,11 @@ public class BitmapUtils {
         Paint paint = new Paint(Paint.ANTI_ALIAS_FLAG);
         paint.setStyle(Paint.Style.FILL);
         paint.setColor(Color.WHITE);
-        paint.setTextSize(Math.round(canvas.getHeight()/2));
+        paint.setTextSize(canvas.getHeight()/2);
         paint.setTextAlign(Paint.Align.CENTER);
         Rect rectText = new Rect();
         paint.getTextBounds(text,0, text.length(),rectText);
-        canvas.drawText(text, Math.round(canvas.getWidth()/2),Math.round(canvas.getHeight()/1.35), paint);
+        canvas.drawText(text, canvas.getWidth()/2,Math.round(canvas.getHeight()/1.35), paint);
         return new BitmapDrawable(context.getResources(), bitmap);
     }
 

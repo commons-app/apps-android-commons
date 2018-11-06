@@ -7,6 +7,7 @@ import fr.free.nrw.commons.R;
  */
 public class LevelController {
 
+    //FIXME: Do we need this here? It has no usage in project. The method below uses a local variable.
     public LevelInfo level;
     public enum LevelInfo{
         LEVEL_1(1, R.style.LevelOne, 5, 20, 85),

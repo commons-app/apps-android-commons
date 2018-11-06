@@ -5,8 +5,10 @@ package fr.free.nrw.commons.achievements;
  */
 public class Achievements {
     private int uniqueUsedImages;
+    //FIXME: Can't find any use for this in code. Is it worth keeping?
     private int articlesUsingImages;
     private int thanksReceived;
+    //FIXME: Can't find any use for this in code. Is it worth keeping?
     private int imagesEditedBySomeoneElse;
     private int featuredImages;
     private int imagesUploaded;
