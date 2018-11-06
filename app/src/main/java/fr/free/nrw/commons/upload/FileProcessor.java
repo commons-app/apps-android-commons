@@ -70,14 +70,14 @@ public class FileProcessor implements SimilarImageDialogFragment.onResponse {
     /**
      * Processes file coordinates, either from EXIF data or user location
      */
-    GPSExtractor processFileCoordinates() {
+    GPSExtractor processFileCoordinates(SimilarImageInterface similarImageInterface) {
         Timber.d("Calling GPSExtractor");
         imageObj = new GPSExtractor(exifInterface);
         decimalCoords = imageObj.getCoords();
         if (decimalCoords == null || !imageObj.imageCoordsExists) {
             //Find other photos taken around the same time which has gps coordinates
             if (!haveCheckedForOtherImages)
-                findOtherImages();// Do not do repeat the process
+                findOtherImages(similarImageInterface);// Do not do repeat the process
         } else {
             useImageCoords();
         }
@@ -91,8 +91,9 @@ public class FileProcessor implements SimilarImageDialogFragment.onResponse {
 
     /**
      * Find other images around the same location that were taken within the last 20 sec
+     * @param similarImageInterface
      */
-    private void findOtherImages() {
+    private void findOtherImages(SimilarImageInterface similarImageInterface) {
         Timber.d("filePath" + filePath);
 
         long timeOfCreation = new File(filePath).lastModified();//Time when the original image was created
@@ -127,12 +128,7 @@ public class FileProcessor implements SimilarImageDialogFragment.onResponse {
                     if (tempImageObj.getCoords() != null && tempImageObj.imageCoordsExists) {
                         // Current image has gps coordinates and it's not current gps locaiton
                         Timber.d("This file has image coords:" + file.getAbsolutePath());
-                        SimilarImageDialogFragment newFragment = new SimilarImageDialogFragment();
-                        Bundle args = new Bundle();
-                        args.putString("originalImagePath", filePath);
-                        args.putString("possibleImagePath", file.getAbsolutePath());
-                        newFragment.setArguments(args);
-                        newFragment.show(((AppCompatActivity) context).getSupportFragmentManager(), "dialog");
+                        similarImageInterface.showSimilarImageFragment(filePath, file.getAbsolutePath());
                         break;
                     }
                 }

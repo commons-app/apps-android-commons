@@ -42,11 +42,13 @@ public class UploadPresenter {
     private final UploadController uploadController;
     private final MediaWikiApi mediaWikiApi;
 
-    private CompositeDisposable compositeDisposable;
-
     private static final UploadView DUMMY = (UploadView) Proxy.newProxyInstance(UploadView.class.getClassLoader(),
             new Class[]{UploadView.class}, (proxy, method, methodArgs) -> null);
     private UploadView view = DUMMY;
+
+    private static final SimilarImageInterface SIMILAR_IMAGE = (SimilarImageInterface) Proxy.newProxyInstance(SimilarImageInterface.class.getClassLoader(),
+            new Class[]{SimilarImageInterface.class}, (proxy, method, methodArgs) -> null);
+    private SimilarImageInterface similarImageInterface = SIMILAR_IMAGE;
 
     @UploadView.UploadPage int currentPage = UploadView.PLEASE_WAIT;
 
@@ -73,7 +75,7 @@ public class UploadPresenter {
      */
     @SuppressLint("CheckResult")
     public void receive(List<Uri> media, String mimeType, @Contribution.FileSource String source) {
-        Completable.fromRunnable(() -> uploadModel.receive(media, mimeType, source))
+        Completable.fromRunnable(() -> uploadModel.receive(media, mimeType, source, similarImageInterface))
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(() -> {
@@ -94,7 +96,7 @@ public class UploadPresenter {
      */
     @SuppressLint("CheckResult")
     public void receiveDirect(Uri media, String mimeType, @Contribution.FileSource String source, String wikidataEntityIdPref, String title, String desc) {
-        Completable.fromRunnable(() -> uploadModel.receiveDirect(media, mimeType, source, wikidataEntityIdPref, title, desc))
+        Completable.fromRunnable(() -> uploadModel.receiveDirect(media, mimeType, source, wikidataEntityIdPref, title, desc, similarImageInterface))
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(() -> {

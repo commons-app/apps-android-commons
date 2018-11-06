@@ -64,7 +64,7 @@ import timber.log.Timber;
 
 import static fr.free.nrw.commons.wikidata.WikidataConstants.WIKIDATA_ENTITY_ID_PREF;
 
-public class UploadActivity extends AuthenticatedActivity implements UploadView {
+public class UploadActivity extends AuthenticatedActivity implements UploadView, SimilarImageInterface {
     @Inject InputMethodManager inputMethodManager;
     @Inject MediaWikiApi mwApi;
     @Inject @Named("direct_nearby_upload_prefs") SharedPreferences directPrefs;
@@ -612,5 +612,15 @@ public class UploadActivity extends AuthenticatedActivity implements UploadView 
                 .setNeutralButton(android.R.string.ok, (dialog, id) -> dialog.cancel())
                 .create()
                 .show();
+    }
+
+    @Override
+    public void showSimilarImageFragment(String originalFilePath, String possibleFilePath) {
+        SimilarImageDialogFragment newFragment = new SimilarImageDialogFragment();
+        Bundle args = new Bundle();
+        args.putString("originalImagePath", originalFilePath);
+        args.putString("possibleImagePath", possibleFilePath);
+        newFragment.setArguments(args);
+        newFragment.show(getSupportFragmentManager(), "dialog");
     }
 }

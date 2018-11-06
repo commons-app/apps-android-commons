@@ -77,14 +77,14 @@ public class UploadModel {
     }
 
     @SuppressLint("CheckResult")
-    public void receive(List<Uri> mediaUri, String mimeType, String source) {
+    public void receive(List<Uri> mediaUri, String mimeType, String source, SimilarImageInterface similarImageInterface) {
         currentStepIndex = 0;
         Observable<UploadItem> itemObservable = Observable.fromIterable(mediaUri)
                 .map(this::cacheFileUpload)
                 .map(filePath -> {
                     Uri uri = Uri.fromFile(new File(filePath));
                     FileProcessor fp = new FileProcessor(filePath, context.getContentResolver(), context);
-                    UploadItem item = new UploadItem(uri, mimeType, source, fp.processFileCoordinates(),
+                    UploadItem item = new UploadItem(uri, mimeType, source, fp.processFileCoordinates(similarImageInterface),
                             FileUtils.getFileExt(filePath), null);
                     Single.zip(
                             Single.fromCallable(() ->
@@ -107,13 +107,13 @@ public class UploadModel {
     }
 
     @SuppressLint("CheckResult")
-    public void receiveDirect(Uri media, String mimeType, String source, String wikidataEntityIdPref, String title, String desc) {
+    public void receiveDirect(Uri media, String mimeType, String source, String wikidataEntityIdPref, String title, String desc, SimilarImageInterface similarImageInterface) {
         currentStepIndex = 0;
         items = new ArrayList<>();
         String filePath = this.cacheFileUpload(media);
         Uri uri = Uri.fromFile(new File(filePath));
         FileProcessor fp = new FileProcessor(filePath, context.getContentResolver(), context);
-        UploadItem item = new UploadItem(uri, mimeType, source, fp.processFileCoordinates(),
+        UploadItem item = new UploadItem(uri, mimeType, source, fp.processFileCoordinates(similarImageInterface),
                 FileUtils.getFileExt(filePath), wikidataEntityIdPref);
         item.title.setTitleText(title);
         item.descriptions.get(0).setDescriptionText(desc);
