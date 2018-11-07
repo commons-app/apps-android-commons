@@ -237,28 +237,27 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment {
 
         switch (requestCode) {
             // 1 = Storage allowed when gallery selected
-            case 1: {
+            case 1:
                 if (grantResults.length > 0 && grantResults[0] == PERMISSION_GRANTED) {
                     Timber.d("Call controller.startGalleryPick()");
                     controller.startGalleryPick();
                 }
-            }
             break;
             // 2 = Location allowed when 'nearby places' selected
-            case 2: {
+            case 2:
                 if (grantResults.length > 0 && grantResults[0] == PERMISSION_GRANTED) {
                     Timber.d("Location permission granted");
                     Intent nearbyIntent = new Intent(getActivity(), NearbyActivity.class);
                     startActivity(nearbyIntent);
                 }
-            }
             break;
-            case 3: {
+            case 3:
                 if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     Timber.d("Call controller.startCameraCapture()");
                     controller.startCameraCapture();
                 }
-            }
+                default:
+                    throw new UnsupportedOperationException("Permission not recognised or required");
         }
     }
 

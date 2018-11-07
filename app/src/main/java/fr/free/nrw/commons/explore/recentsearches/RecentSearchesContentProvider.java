@@ -181,7 +181,7 @@ public class RecentSearchesContentProvider extends CommonsDaggerContentProvider 
         switch (uriType) {
             case RECENT_SEARCHES_ID:
                 if (TextUtils.isEmpty(selection)) {
-                    int id = Integer.valueOf(uri.getLastPathSegment());
+                    int id = Integer.parseInt(uri.getLastPathSegment());
                     rowsUpdated = sqlDB.update(TABLE_NAME,
                             contentValues,
                             COLUMN_ID + " = ?",

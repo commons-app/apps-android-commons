@@ -164,7 +164,7 @@ public class ContributionsContentProvider extends CommonsDaggerContentProvider {
                 rowsUpdated = sqlDB.update(TABLE_NAME, contentValues, selection, selectionArgs);
                 break;
             case CONTRIBUTIONS_ID:
-                int id = Integer.valueOf(uri.getLastPathSegment());
+                int id = Integer.parseInt(uri.getLastPathSegment());
 
                 if (TextUtils.isEmpty(selection)) {
                     rowsUpdated = sqlDB.update(TABLE_NAME,

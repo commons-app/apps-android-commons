@@ -27,7 +27,7 @@ public class ApplicationlessInjection
         HasBroadcastReceiverInjector,
         HasContentProviderInjector {
 
-    private static ApplicationlessInjection instance = null;
+    private static volatile ApplicationlessInjection instance = null;
 
     @Inject DispatchingAndroidInjector<Activity> activityInjector;
     @Inject DispatchingAndroidInjector<BroadcastReceiver> broadcastReceiverInjector;

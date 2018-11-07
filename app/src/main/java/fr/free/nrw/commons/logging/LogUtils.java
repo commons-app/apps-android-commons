@@ -1,6 +1,5 @@
 package fr.free.nrw.commons.logging;
 
-import android.content.Context;
 import android.os.Environment;
 
 /**

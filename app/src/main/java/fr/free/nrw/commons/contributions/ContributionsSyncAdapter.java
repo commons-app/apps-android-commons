@@ -39,7 +39,7 @@ public class ContributionsSyncAdapter extends AbstractThreadedSyncAdapter {
     private static final String[] existsQuery = {COLUMN_FILENAME};
     private static final String existsSelection = COLUMN_FILENAME + " = ?";
     private static final ContentValues[] EMPTY = {};
-    private static int COMMIT_THRESHOLD = 10;
+    private static final int COMMIT_THRESHOLD = 10;
 
     @SuppressWarnings("WeakerAccess")
     @Inject MediaWikiApi mwApi;
@@ -138,7 +138,7 @@ public class ContributionsSyncAdapter extends AbstractThreadedSyncAdapter {
                 }
             }
 
-            if (imageValues.size() != 0) {
+            if (!imageValues.isEmpty()) {
                 try {
                     contentProviderClient.bulkInsert(BASE_URI, imageValues.toArray(EMPTY));
                 } catch (RemoteException e) {

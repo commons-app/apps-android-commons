@@ -64,6 +64,8 @@ class ContributionsListAdapter extends CursorAdapter {
                 views.stateView.setText(R.string.contribution_state_failed);
                 views.progressView.setVisibility(View.GONE);
                 break;
+                default:
+                    break;
         }
     }
 }

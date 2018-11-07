@@ -163,14 +163,14 @@ public class SearchImageFragment extends CommonsDaggerSupportFragment {
      */
     private void handlePaginationSuccess(List<Media> mediaList) {
         progressBar.setVisibility(View.GONE);
-        if (mediaList.size()!=0){
-            if (!queryList.get(queryList.size()-1).getFilename().equals(mediaList.get(mediaList.size()-1).getFilename())) {
-                queryList.addAll(mediaList);
-                imagesAdapter.addAll(mediaList);
-                imagesAdapter.notifyDataSetChanged();
-                ((SearchActivity)getContext()).viewPagerNotifyDataSetChanged();
-            }
+        if (!mediaList.isEmpty() &&
+                (!queryList.get(queryList.size()-1).getFilename().equals(mediaList.get(mediaList.size()-1).getFilename()))) {
+            queryList.addAll(mediaList);
+            imagesAdapter.addAll(mediaList);
+            imagesAdapter.notifyDataSetChanged();
+            ((SearchActivity) getContext()).viewPagerNotifyDataSetChanged();
         }
+
     }
 
 

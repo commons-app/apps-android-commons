@@ -13,9 +13,9 @@ import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.settings.Prefs;
 
-public class  Contribution extends Media {
+public class Contribution extends Media {
 
-    public static Creator<Contribution> CREATOR = new Creator<Contribution>() {
+    public static final Creator<Contribution> CREATOR = new Creator<Contribution>() {
         @Override
         public Contribution createFromParcel(Parcel parcel) {
             return new Contribution(parcel);
@@ -220,9 +220,10 @@ public class  Contribution extends Media {
                 return "{{self|cc-by-3.0}}";
             case Prefs.Licenses.CC_BY_SA:
                 return "{{self|cc-by-sa-3.0}}";
-        }
+                default:
+                    throw new RuntimeException("Unrecognized license value: " + license);
 
-        throw new RuntimeException("Unrecognized license value: " + license);
+        }
     }
 
     public String getWikiDataEntityId() {

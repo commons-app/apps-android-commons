@@ -30,7 +30,7 @@ public class RecentSearchesFragment extends CommonsDaggerSupportFragment {
     List<String> recentSearches;
     ArrayAdapter adapter;
     @BindView(R.id.recent_searches_delete_button)
-    ImageView recent_searches_delete_button;
+    ImageView recentSearchesDeleteButton;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -38,7 +38,7 @@ public class RecentSearchesFragment extends CommonsDaggerSupportFragment {
         View rootView = inflater.inflate(R.layout.fragment_search_history, container, false);
         ButterKnife.bind(this, rootView);
         recentSearches = recentSearchesDao.recentSearches(10);
-        recent_searches_delete_button.setOnClickListener(v -> new AlertDialog.Builder(getContext())
+        recentSearchesDeleteButton.setOnClickListener(v -> new AlertDialog.Builder(getContext())
             .setMessage(getString(R.string.delete_recent_searches_dialog))
             .setPositiveButton(android.R.string.yes, (dialog, which) -> {
                 recentSearchesDao.deleteAll(recentSearches);

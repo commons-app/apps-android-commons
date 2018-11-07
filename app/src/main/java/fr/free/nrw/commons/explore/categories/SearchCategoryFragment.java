@@ -48,7 +48,7 @@ import static android.view.View.VISIBLE;
 
 public class SearchCategoryFragment extends CommonsDaggerSupportFragment {
 
-    private static int TIMEOUT_SECONDS = 15;
+    private static final int TIMEOUT_SECONDS = 15;
 
     @BindView(R.id.imagesListBox)
     RecyclerView categoriesRecyclerView;

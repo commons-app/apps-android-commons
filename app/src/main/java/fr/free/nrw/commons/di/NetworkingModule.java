@@ -24,7 +24,7 @@ import okhttp3.OkHttpClient;
 @Module
 @SuppressWarnings({"WeakerAccess", "unused"})
 public class NetworkingModule {
-    public static final long OK_HTTP_CACHE_SIZE = 10 * 1024 * 1024;
+    public static final long OK_HTTP_CACHE_SIZE = 10 * 1024 * 1024L;
 
     @Provides
     @Singleton

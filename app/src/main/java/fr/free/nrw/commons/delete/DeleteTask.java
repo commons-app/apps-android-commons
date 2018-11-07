@@ -147,6 +147,8 @@ public class DeleteTask extends AsyncTask<Void, Integer, Boolean> {
             case 5:
                 message = "Done";
                 break;
+                default:
+                    break;
         }
 
         notificationBuilder.setContentTitle("Nominating "+media.getDisplayTitle()+" for deletion")
