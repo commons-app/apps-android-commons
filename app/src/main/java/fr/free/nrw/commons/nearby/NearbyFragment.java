@@ -56,11 +56,8 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
         implements LocationUpdateListener,
                     WikidataEditListener.WikidataP18EditListener {
 
-    private static final int LOCATION_REQUEST = 1;
-
     @BindView(R.id.progressBar)
     ProgressBar progressBar;
-
     @BindView(R.id.bottom_sheet)
     LinearLayout bottomSheet;
     @BindView(R.id.bottom_sheet_details)
@@ -92,6 +89,7 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
     private Disposable placesDisposable;
     private boolean lockNearbyView; //Determines if the nearby places needs to be refreshed
     public View view;
+    private Snackbar snackbar;
 
     private LatLng lastKnownLocation;
 
@@ -112,8 +110,8 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
         View view = inflater.inflate(R.layout.fragment_nearby, container, false);
         ButterKnife.bind(this, view);
 
-        // Resume the fragment if exist
-        resumeFragment();
+        /*// Resume the fragment if exist
+        resumeFragment();*/
         bundle = new Bundle();
         initBottomSheetBehaviour();
         wikidataEditListener.setAuthenticationStateListener(this);
@@ -124,6 +122,10 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        if (savedInstanceState != null) {
+            onOrientationChanged = true;
+            refreshView(LOCATION_SIGNIFICANTLY_CHANGED);
+        }
     }
 
     /**
@@ -255,7 +257,9 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
 
         if (curLatLng != null && curLatLng.equals(lastLocation)
                 && !locationChangeType.equals(MAP_UPDATED)) { //refresh view only if location has changed
-            return;
+            if (!onOrientationChanged) {
+                return;
+            }
         }
         curLatLng = lastLocation;
 
@@ -589,17 +593,19 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
 
     private void addNetworkBroadcastReceiver() {
         IntentFilter intentFilter = new IntentFilter(NETWORK_INTENT_ACTION);
-            Snackbar snackbar = Snackbar.make(transparentView , R.string.no_internet, Snackbar.LENGTH_INDEFINITE);
+            snackbar = Snackbar.make(transparentView , R.string.no_internet, Snackbar.LENGTH_INDEFINITE);
 
             broadcastReceiver = new BroadcastReceiver() {
 
             @Override
             public void onReceive(Context context, Intent intent) {
-                if (NetworkUtils.isInternetConnectionEstablished(getActivity())) {
-                    refreshView(LOCATION_SIGNIFICANTLY_CHANGED);
-                    snackbar.dismiss();
-                } else {
-                    snackbar.show();
+                if (snackbar != null) {
+                    if (NetworkUtils.isInternetConnectionEstablished(getActivity())) {
+                        refreshView(LOCATION_SIGNIFICANTLY_CHANGED);
+                        snackbar.dismiss();
+                    } else {
+                        snackbar.show();
+                    }
                 }
             }
         };
@@ -611,7 +617,9 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
     @Override
     public void onResume() {
         super.onResume();
-    }
+        // Resume the fragment if exist
+        resumeFragment();
+        }
 
     public void onTabSelected(boolean onOrientationChanged) {
         Timber.d("On nearby tab selected");
@@ -645,6 +653,13 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
     }
 
     @Override
+    public void onDetach() {
+        super.onDetach();
+        snackbar = null;
+        broadcastReceiver = null;
+    }
+
+    @Override
     public void onStart() {
         super.onStart();
     }
@@ -657,7 +672,7 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
         if(getActivity().isFinishing()) {
             // we will not need this fragment anymore, this may also be a good place to signal
             // to the retained fragment object to perform its own cleanup.
-            removeMapFragment();
+            //removeMapFragment();
             removeListFragment();
 
         }

@@ -7,7 +7,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
-import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -16,6 +15,7 @@ import android.support.design.widget.BottomSheetBehavior;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AlertDialog;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -122,9 +122,7 @@ public class NearbyMapFragment extends DaggerFragment {
     private final double CAMERA_TARGET_SHIFT_FACTOR_PORTRAIT = 0.06;
     private final double CAMERA_TARGET_SHIFT_FACTOR_LANDSCAPE = 0.04;
 
-    private boolean isSecondMaterialShowcaseDismissed;
     private boolean isMapReady;
-    private MaterialShowcaseView thirdSingleShowCaseView;
 
     private Bundle bundleForUpdtes;// Carry information from activity about changed nearby places and current location
 
@@ -175,6 +173,13 @@ public class NearbyMapFragment extends DaggerFragment {
             MapboxTelemetry.getInstance().setTelemetryEnabled(false);
         }
         setRetainInstance(true);
+    }
+
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+
     }
 
     @Override
@@ -721,19 +726,8 @@ public class NearbyMapFragment extends DaggerFragment {
         addAnchorToSmallFABs(fabGallery, ((NearbyFragment)getParentFragment()).view.findViewById(R.id.empty_view).getId());
 
         addAnchorToSmallFABs(fabCamera, ((NearbyFragment)getParentFragment()).view.findViewById(R.id.empty_view1).getId());
-        thirdSingleShowCaseView = new MaterialShowcaseView.Builder(this.getActivity())
-                .setTarget(fabPlus)
-                .setDismissText(getString(R.string.showcase_view_got_it_button))
-                .setContentText(getString(R.string.showcase_view_plus_fab))
-                .setDelay(500) // optional but starting animations immediately in onCreate can make them choppy
-                .singleUse(ViewUtil.SHOWCASE_VIEW_ID_3) // provide a unique ID used to ensure it is only shown once
-                .setDismissStyle(Typeface.defaultFromStyle(Typeface.BOLD))
-                .build();
 
         isMapReady = true;
-        if (isSecondMaterialShowcaseDismissed) {
-            thirdSingleShowCaseView.show(getActivity());
-        }
     }
 
 
@@ -920,14 +914,6 @@ public class NearbyMapFragment extends DaggerFragment {
     public void setBundleForUpdtes(Bundle bundleForUpdtes) {
         this.bundleForUpdtes = bundleForUpdtes;
     }
-
-    public void onNearbyMaterialShowcaseDismissed() {
-        isSecondMaterialShowcaseDismissed = true;
-        if (isMapReady) {
-            thirdSingleShowCaseView.show(getActivity());
-        }
-    }
-
 
     @Override
     public void onStart() {
