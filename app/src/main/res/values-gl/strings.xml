@@ -351,5 +351,14 @@
   <string name="notifications_channel_name_all">Notificación de Commons</string>
   <string name="storage_permission">Permiso de almacenamento</string>
   <string name="write_storage_permission_rationale_for_image_share">Precisamos o seu permiso para acceder ó almacenamento externo do seu dispositivo para cargar imaxes.</string>
-  <string name="log_collection_started" fuzzy="true">Comezou a gravación de rexistros. Por favor reinicie a aplicación, realice a acción que desexa rexistrar, e pulse \"Enviar rexistros\" de novo</string>
+  <string name="navigation_item_bookmarks">Favoritos</string>
+  <string name="title_activity_bookmarks">Favoritos</string>
+  <string name="title_page_bookmarks_pictures">Imaxes</string>
+  <string name="title_page_bookmarks_locations">Localizacións</string>
+  <string name="menu_bookmark">Engadir/borrar favoritos</string>
+  <string name="provider_bookmarks">Favoritos</string>
+  <string name="bookmark_empty">Non engadiu ningún favorito</string>
+  <string name="provider_bookmarks_location">Favoritos</string>
+  <string name="log_collection_started">Comezou a gravación de rexistros. Por favor reinicie a aplicación, realice a acción que desexa rexistrar, e pulse \"Enviar ficheiro de rexistros\" de novo</string>
+  <string name="no_uploads">Benvido a Commonsǃ\n\nCargue o seu primeiro ficheiro premendo na icona da cámara ou da galería enriba.</string>
 </resources>
