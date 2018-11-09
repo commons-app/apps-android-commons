@@ -248,7 +248,7 @@
   <string name="use_external_storage_summary">Gravar as fotografias tiradas com a câmara da aplicação no seu dispositivo</string>
   <string name="login_to_your_account">Inicie sessão na sua conta</string>
   <string name="send_log_file">Enviar ficheiro de registo</string>
-  <string name="send_log_file_description">Enviar o ficheiro de registo aos programadores por correio eletrónico</string>
+  <string name="send_log_file_description">Enviar o ficheiro de registo aos programadores por correio eletrónico para ajudar a corrigir problemas da aplicação. Nota: os registos podem conter informações identificativas</string>
   <string name="no_web_browser">Não foi encontrado nenhum navegador da Internet para abrir o URL</string>
   <string name="null_url">Erro! Não foi possível encontrar o URL</string>
   <string name="nominate_deletion">Nomear para eliminação</string>
@@ -317,7 +317,7 @@
   <string name="result">Resultado</string>
   <string name="quiz_back_button">Se continuar a carregar imagens que precisam de ser eliminadas a sua conta será provavelmente banida. Tem a certeza de que pretende terminar o questionário?</string>
   <string name="quiz_alert_message">Mais de %1$s das imagens que carregou foram eliminadas. Se continuar a carregar imagens que precisam de ser eliminadas a sua conta será provavelmente banida.\n\nQuer ver o guia prático outra vez e depois preencher um questionário que ajuda a aprender que tipos de imagens deve ou não deve carregar?</string>
-  <string name="selfie_answer">As autofotografias \'\'(selfies)\'\' não têm grande valor enciclopédico. Não carregue fotografias de si próprio, por favor, a menos que já exista um artigo na Wikipédia acerca de si.</string>
+  <string name="selfie_answer">Os autorretratos \'\'(selfies)\'\' não têm grande valor enciclopédico. Não carregue fotografias de si próprio, por favor, a menos que já exista um artigo na Wikipédia acerca de si.</string>
   <string name="taj_mahal_answer">As fotografias de monumentos e cenários de exterior podem ser carregadas na maioria dos países. Note, por favor, que as instalações de arte temporárias em exteriores normalmente têm o respetivo direito de autor protegido e não podem ser carregadas.</string>
   <string name="screenshot_answer">As capturas de ecrã de \'\'sites\'\' da Internet são consideradas obras derivadas e estão sujeitas aos direitos de autor definidos para o respetivo \'\'site.\'\' Estas imagens podem ser usadas depois de obter autorização do autor. Sem esta autorização, todas as obras que criar baseadas na obra são consideradas cópias não licenciadas, cuja propriedade é detida pelo autor original.</string>
   <string name="blurry_image_answer">Um dos objetivos da wiki Commons é recolher imagens de qualidade. Assim, não devem ser carregadas imagens desfocadas. Tente sempre tirar boas fotografias com iluminação adequada.</string>
@@ -355,4 +355,14 @@
   <string name="notifications_channel_name_all">Notificação da wiki Commons</string>
   <string name="storage_permission">Autorização de acesso</string>
   <string name="write_storage_permission_rationale_for_image_share">Precisamos da sua autorização para aceder ao armazenamento externo do seu dispositivo para carregar imagens.</string>
+  <string name="navigation_item_bookmarks">Marcadores</string>
+  <string name="title_activity_bookmarks">Marcadores</string>
+  <string name="title_page_bookmarks_pictures">Fotografias</string>
+  <string name="title_page_bookmarks_locations">Locais</string>
+  <string name="menu_bookmark">Adicionar ou remover dos marcadores</string>
+  <string name="provider_bookmarks">Marcadores</string>
+  <string name="bookmark_empty">Não adicionou nenhum marcador</string>
+  <string name="provider_bookmarks_location">Marcadores</string>
+  <string name="log_collection_started">A recolha de registos foi iniciada. REINICIE a aplicação, execute a operação que pretende registar e prima outra vez \"Enviar ficheiro de registos\"</string>
+  <string name="no_uploads">Bem-vindo(a) à wiki Commons!\n\nCarregue o seu primeiro ficheiro multimédia tocando no ícone da câmara ou da galeria acima.</string>
 </resources>

@@ -62,6 +62,34 @@
         >
 
         <LinearLayout
+            android:id="@+id/bookmarkButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:padding="16dp"
+            android:clickable="true"
+            android:orientation="vertical"
+            android:background="@drawable/button_background_selector"
+            >
+            <ImageView
+                android:id="@+id/bookmarkButtonImage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                app:srcCompat="@drawable/ic_round_star_border_24px"
+                android:tint="@color/button_blue"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/bookmarkButtonText"
+                android:paddingTop="8dp"
+                android:layout_gravity="center_horizontal"
+                android:text="CAMERA"
+                android:visibility="gone"
+                />
+        </LinearLayout>
+
+        <LinearLayout
             android:id="@+id/directionsButton"
             android:layout_width="0dp"
             android:layout_height="wrap_content"

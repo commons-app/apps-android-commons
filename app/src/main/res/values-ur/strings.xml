@@ -4,9 +4,16 @@
 * BukhariSaeed
 * Muhammad Shuaib
 * Noor2020
+* Saraiki
 * Sayam Asjad
 -->
 <resources>
+  <string name="title_activity_explore">ایکسپلور</string>
+  <string name="navigation_item_explore">ایکسپلور</string>
+  <string name="preference_category_appearance">ظاہریت</string>
+  <string name="preference_category_general">عمومی</string>
+  <string name="preference_category_feedback">آپ کی رائے</string>
+  <string name="preference_category_location">محل وقوع</string>
   <string name="app_name">کامنز</string>
   <string name="menu_settings">ترتیبات</string>
   <string name="username">صارف نام</string>
@@ -78,6 +85,7 @@
   <string name="categories_activity_title">زمرہ جات</string>
   <string name="title_activity_settings">ترتیبات</string>
   <string name="title_activity_signup">کھاتہ بنائیں</string>
+  <string name="title_activity_category_details">زمرہ</string>
   <string name="menu_about">بابت</string>
   <string name="about_license">ویکیمیڈیا کامنز ایپ ایک اوپن سورس ایپ ہے جو موہوب الیہ اور رضاکاروں کی جانب سے برقرار رکھی جاتی اور بنائی گئی ہے۔ ویکیمیڈیا فاؤنڈیش کا اس ایپ کی برقراری اور تخلیق سے کوئی واسطہ نہیں ہے۔</string>
   <string name="about_improve">&lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;ماخذ&lt;/a&gt; اور &lt;a href=\"https://commons-app.github.io/\"&gt;ویب سائٹ&lt;/a&gt; در گٹ ہب۔&lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;نیا گٹ ہب اجرا بنائیں&lt;/a&gt; تاکہ آپ bug شکایتیں اور تجایز دیں سکیں</string>
@@ -119,17 +127,30 @@
   <string name="detail_license_empty">نامعلوم اجازت نامہ</string>
   <string name="menu_refresh">ریفریش کریں</string>
   <string name="ok">ٹھیک ہے</string>
+  <string name="warning">انتباہ</string>
   <string name="yes">جی</string>
   <string name="no">نہیں</string>
+  <string name="media_detail_title">عنوان</string>
+  <string name="media_detail_author">مصنف</string>
   <string name="media_detail_license">اجازت نامہ</string>
   <string name="media_detail_coordinates">متناسقات</string>
   <string name="commons_logo">کامنز لوگو</string>
   <string name="welcome_image_no_selfies">کوئی سیلفی نہیں</string>
+  <string name="cancel">منسوخ</string>
+  <string name="navigation_drawer_open">کھولیں</string>
+  <string name="navigation_drawer_close">بند</string>
+  <string name="navigation_item_home">گھر</string>
+  <string name="navigation_item_upload">اپ لوڈ کریں</string>
+  <string name="navigation_item_nearby">قریبی</string>
   <string name="navigation_item_about">تعارف</string>
   <string name="navigation_item_settings">ترتیبات</string>
   <string name="navigation_item_feedback">آپ کی رائے</string>
   <string name="navigation_item_logout">لاگ آوٹ</string>
   <string name="navigation_item_info">معلمی</string>
+  <string name="navigation_item_notification">اطلاعات</string>
+  <string name="navigation_item_featured_images">نمایاں</string>
+  <string name="skip_login">چھوڑیں</string>
+  <string name="navigation_item_login">داخل ہوں</string>
   <string name="notifications_welcome">%1$s، ویکیمیڈیا کامنز میں خوش آمدید! آپ کو یہاں پا کر ہمیں خوشی ہوئی۔</string>
   <string name="nearby_directions">ہدایات</string>
   <string name="nearby_commons">عام</string>

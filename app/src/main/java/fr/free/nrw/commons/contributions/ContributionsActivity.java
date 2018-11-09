@@ -147,12 +147,12 @@ public  class       ContributionsActivity
         setTitle(getString(R.string.title_activity_contributions));
 
 
-        if(checkAccount()) {
+        if (checkAccount()) {
             new QuizChecker(this,
                     sessionManager.getCurrentAccount().name,
                     mediaWikiApi);
         }
-        if(!BuildConfig.FLAVOR.equalsIgnoreCase("beta")){
+        if (!BuildConfig.FLAVOR.equalsIgnoreCase("beta")){
             setUploadCount();
         }
 
@@ -256,6 +256,9 @@ public  class       ContributionsActivity
             ((CursorAdapter) contributionsList.getAdapter()).swapCursor(cursor);
         }
 
+        if (contributionsList.getAdapter().getCount()>0){
+            contributionsList.changeEmptyScreen(false);
+        }
         contributionsList.clearSyncMessage();
         notifyAndMigrateDataSetObservers();
     }

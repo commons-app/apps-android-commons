@@ -662,7 +662,7 @@ public class ShareActivity
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         switch (keyCode) {
             case KeyEvent.KEYCODE_BACK:
-                if(isZoom) {
+                if (isZoom) {
                     onZoomOutFabClicked();
                     return true;
                 }

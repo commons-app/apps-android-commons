@@ -58,6 +58,7 @@ import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.Utils;
 import fr.free.nrw.commons.auth.LoginActivity;
+import fr.free.nrw.commons.bookmarks.locations.BookmarkLocationsDao;
 import fr.free.nrw.commons.contributions.ContributionController;
 import fr.free.nrw.commons.utils.UriDeserializer;
 import fr.free.nrw.commons.utils.ViewUtil;
@@ -86,6 +87,7 @@ public class NearbyMapFragment extends DaggerFragment {
     private LinearLayout wikidataButton;
     private LinearLayout directionsButton;
     private LinearLayout commonsButton;
+    private LinearLayout bookmarkButton;
     private FloatingActionButton fabPlus;
     private FloatingActionButton fabCamera;
     private FloatingActionButton fabGallery;
@@ -95,6 +97,7 @@ public class NearbyMapFragment extends DaggerFragment {
     private TextView title;
     private TextView distance;
     private ImageView icon;
+    private ImageView bookmarkButtonImage;
 
     private TextView wikipediaButtonText;
     private TextView wikidataButtonText;
@@ -131,6 +134,8 @@ public class NearbyMapFragment extends DaggerFragment {
     @Inject
     @Named("direct_nearby_upload_prefs")
     SharedPreferences directPrefs;
+    @Inject
+    BookmarkLocationsDao bookmarkLocationDao;
 
     public NearbyMapFragment() {
     }
@@ -276,7 +281,7 @@ public class NearbyMapFragment extends DaggerFragment {
 
                 // Make camera to follow user on location change
                 CameraPosition position ;
-                if(ViewUtil.isPortrait(getActivity())){
+                if (ViewUtil.isPortrait(getActivity())){
                     position = new CameraPosition.Builder()
                             .target(isBottomListSheetExpanded ?
                                     new LatLng(curMapBoxLatLng.getLatitude()- CAMERA_TARGET_SHIFT_FACTOR_PORTRAIT,
@@ -310,7 +315,7 @@ public class NearbyMapFragment extends DaggerFragment {
         if (mapboxMap != null && curLatLng != null) {
             if (isBottomListSheetExpanded) {
                 // Make camera to follow user on location change
-                if(ViewUtil.isPortrait(getActivity())) {
+                if (ViewUtil.isPortrait(getActivity())) {
                     position = new CameraPosition.Builder()
                             .target(new LatLng(curLatLng.getLatitude() - CAMERA_TARGET_SHIFT_FACTOR_PORTRAIT,
                                     curLatLng.getLongitude())) // Sets the new camera target above
@@ -374,6 +379,9 @@ public class NearbyMapFragment extends DaggerFragment {
         directionsButtonText = getActivity().findViewById(R.id.directionsButtonText);
         commonsButtonText = getActivity().findViewById(R.id.commonsButtonText);
 
+        bookmarkButton = getActivity().findViewById(R.id.bookmarkButton);
+        bookmarkButtonImage = getActivity().findViewById(R.id.bookmarkButtonImage);
+
     }
 
     private void setListeners() {
@@ -408,7 +416,7 @@ public class NearbyMapFragment extends DaggerFragment {
                 mapView.getMapAsync(mapboxMap -> {
                     CameraPosition position;
 
-                    if(ViewUtil.isPortrait(getActivity())){
+                    if (ViewUtil.isPortrait(getActivity())){
                         position = new CameraPosition.Builder()
                                 .target(isBottomListSheetExpanded ?
                                         new LatLng(curLatLng.getLatitude()- CAMERA_TARGET_SHIFT_FACTOR_PORTRAIT,
@@ -500,13 +508,10 @@ public class NearbyMapFragment extends DaggerFragment {
         // create map
         mapView = new MapView(getActivity(), options);
         mapView.onCreate(savedInstanceState);
-        mapView.getMapAsync(new OnMapReadyCallback() {
-            @Override
-            public void onMapReady(MapboxMap mapboxMap) {
-                ((NearbyActivity)getActivity()).setMapViewTutorialShowCase();
-                NearbyMapFragment.this.mapboxMap = mapboxMap;
-                updateMapSignificantly();
-            }
+        mapView.getMapAsync(mapboxMap -> {
+            ((NearbyActivity)getActivity()).setMapViewTutorialShowCase();
+            NearbyMapFragment.this.mapboxMap = mapboxMap;
+            updateMapSignificantly();
         });
         mapView.setStyleUrl("asset://mapstyle.json");
     }
@@ -721,6 +726,20 @@ public class NearbyMapFragment extends DaggerFragment {
 
     private void passInfoToSheet(Place place) {
         this.place = place;
+
+        int bookmarkIcon;
+        if (bookmarkLocationDao.findBookmarkLocation(place)) {
+            bookmarkIcon = R.drawable.ic_round_star_filled_24px;
+        } else {
+            bookmarkIcon = R.drawable.ic_round_star_border_24px;
+        }
+        bookmarkButtonImage.setImageResource(bookmarkIcon);
+        bookmarkButton.setOnClickListener(view -> {
+            boolean isBookmarked = bookmarkLocationDao.updateBookmarkLocation(place);
+            int updatedIcon = isBookmarked ? R.drawable.ic_round_star_filled_24px : R.drawable.ic_round_star_border_24px;
+            bookmarkButtonImage.setImageResource(updatedIcon);
+        });
+
         wikipediaButton.setEnabled(place.hasWikipediaLink());
         wikipediaButton.setOnClickListener(view -> openWebView(place.siteLinks.getWikipediaLink()));
 

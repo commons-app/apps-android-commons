@@ -150,4 +150,10 @@
   <string name="statistics">شماریات</string>
   <string name="level">سطح</string>
   <string name="error_occurred">خرابی تھی ڳئی ہے!</string>
+  <string name="navigation_item_bookmarks">کتاب نشان</string>
+  <string name="title_activity_bookmarks">کتاب نشان</string>
+  <string name="title_page_bookmarks_pictures">تصویراں</string>
+  <string name="title_page_bookmarks_locations">محل وقوع</string>
+  <string name="provider_bookmarks">کتاب نشان</string>
+  <string name="provider_bookmarks_location">کتاب نشان</string>
 </resources>

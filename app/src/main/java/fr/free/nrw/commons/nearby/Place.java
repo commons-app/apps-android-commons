@@ -52,6 +52,8 @@ public class Place {
         this.distance = distance;
     }
 
+    public Uri getSecondaryImageUrl() { return this.secondaryImageUrl; }
+
     /**
      * Extracts the entity id from the wikidata link
      * @return returns the entity id if wikidata link exists
@@ -119,27 +121,30 @@ public class Place {
      */
     public enum Label {
 
-        BUILDING("building", R.drawable.round_icon_generic_building),
-        HOUSE("house", R.drawable.round_icon_house),
-        COTTAGE("cottage", R.drawable.round_icon_house),
-        FARMHOUSE("farmhouse", R.drawable.round_icon_house),
-        CHURCH("church", R.drawable.round_icon_church),
-        RAILWAY_STATION("railway station", R.drawable.round_icon_railway_station),
-        GATEHOUSE("gatehouse", R.drawable.round_icon_gatehouse),
-        MILESTONE("milestone", R.drawable.round_icon_milestone),
-        INN("inn", R.drawable.round_icon_house),
-        CITY("city", R.drawable.round_icon_city),
-        SECONDARY_SCHOOL("secondary school", R.drawable.round_icon_school),
-        EDU("edu", R.drawable.round_icon_school),
-        ISLE("isle", R.drawable.round_icon_island),
-        MOUNTAIN("mountain", R.drawable.round_icon_mountain),
-        AIRPORT("airport", R.drawable.round_icon_airport),
-        BRIDGE("bridge", R.drawable.round_icon_bridge),
-        ROAD("road", R.drawable.round_icon_road),
-        FOREST("forest", R.drawable.round_icon_forest),
-        PARK("park", R.drawable.round_icon_park),
-        RIVER("river", R.drawable.round_icon_river),
-        WATERFALL("waterfall", R.drawable.round_icon_waterfall),
+        BUILDING("Q41176", R.drawable.round_icon_generic_building),
+        HOUSE("Q3947", R.drawable.round_icon_house),
+        COTTAGE("Q5783996", R.drawable.round_icon_house),
+        FARMHOUSE("Q489357", R.drawable.round_icon_house),
+        CHURCH("Q16970", R.drawable.round_icon_church), //changed from church to church building
+        RAILWAY_STATION("Q55488", R.drawable.round_icon_railway_station),
+        GATEHOUSE("Q277760", R.drawable.round_icon_gatehouse),
+        MILESTONE("Q10145", R.drawable.round_icon_milestone),
+        INN("Q256020", R.drawable.round_icon_house), //Q27686
+        HOTEL("Q27686", R.drawable.round_icon_house),
+        CITY("Q515", R.drawable.round_icon_city),
+        UNIVERSITY("Q3918",R.drawable.round_icon_school), //added university
+        SCHOOL("Q3914", R.drawable.round_icon_school), //changed from "secondary school" to school
+        EDUCATION("Q8434", R.drawable.round_icon_school), //changed from edu to education, there is no id for "edu"
+        ISLE("Q23442", R.drawable.round_icon_island),
+        MOUNTAIN("Q8502", R.drawable.round_icon_mountain),
+        AIRPORT("Q1248784", R.drawable.round_icon_airport),
+        BRIDGE("Q12280", R.drawable.round_icon_bridge),
+        ROAD("Q34442", R.drawable.round_icon_road),
+        FOREST("Q4421", R.drawable.round_icon_forest),
+        PARK("Q22698", R.drawable.round_icon_park),
+        RIVER("Q4022", R.drawable.round_icon_river),
+        WATERFALL("Q34038", R.drawable.round_icon_waterfall),
+        TEMPLE("Q44539",R.drawable.round_icon_church),
         UNKNOWN("?", R.drawable.round_icon_unknown);
 
         private static final Map<String, Label> TEXT_TO_DESCRIPTION

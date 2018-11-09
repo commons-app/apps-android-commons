@@ -153,6 +153,8 @@ android {
             buildConfigField "String", "MODIFICATION_AUTHORITY", "\"fr.free.nrw.commons.modifications.contentprovider\""
             buildConfigField "String", "CATEGORY_AUTHORITY", "\"fr.free.nrw.commons.categories.contentprovider\""
             buildConfigField "String", "RECENT_SEARCH_AUTHORITY", "\"fr.free.nrw.commons.explore.recentsearches.contentprovider\""
+            buildConfigField "String", "BOOKMARK_AUTHORITY", "\"fr.free.nrw.commons.bookmarks.contentprovider\""
+            buildConfigField "String", "BOOKMARK_LOCATIONS_AUTHORITY", "\"fr.free.nrw.commons.bookmarks.locations.contentprovider\""
 
             dimension 'tier'
         }
@@ -180,6 +182,8 @@ android {
             buildConfigField "String", "MODIFICATION_AUTHORITY", "\"fr.free.nrw.commons.beta.modifications.contentprovider\""
             buildConfigField "String", "CATEGORY_AUTHORITY", "\"fr.free.nrw.commons.beta.categories.contentprovider\""
             buildConfigField "String", "RECENT_SEARCH_AUTHORITY", "\"fr.free.nrw.commons.beta.explore.recentsearches.contentprovider\""
+            buildConfigField "String", "BOOKMARK_AUTHORITY", "\"fr.free.nrw.commons.beta.bookmarks.contentprovider\""
+            buildConfigField "String", "BOOKMARK_LOCATIONS_AUTHORITY", "\"fr.free.nrw.commons.beta.bookmarks.locations.contentprovider\""
 
             dimension 'tier'
         }

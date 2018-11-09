@@ -237,7 +237,7 @@
   <string name="use_external_storage_summary">Зачувување на направените слики во прилогот со камерата на вашиот уред</string>
   <string name="login_to_your_account">Најавете се со вашата сметка</string>
   <string name="send_log_file">Испрати дневничка податотека</string>
-  <string name="send_log_file_description">Испрати дневничка податотека на разработувачите по е-пошта</string>
+  <string name="send_log_file_description">Испрати дневничка податотека на разработувачите по е-пошта за да се решат грешките во прилогот. Напомена: дневниците потенцијално може да содржат лични податоци.</string>
   <string name="no_web_browser">Не најдов прелистувач за да ја отворам URL</string>
   <string name="null_url">Грешка! Не ја пронајдов URL</string>
   <string name="nominate_deletion">Предложи за бришење</string>
@@ -249,8 +249,8 @@
   <string name="skip_login_title">Дали навистина сакате да ја прескокнете најавата?</string>
   <string name="skip_login_message">Нема да можете да подигате слики.</string>
   <string name="login_alert_message">Најавете се за да ја користите оваа можност.</string>
-  <string name="copy_wikicode" fuzzy="true">Прекопирај го викикодот во меѓускладот</string>
-  <string name="wikicode_copied" fuzzy="true">Викикодот е прекопиран во меѓускладот</string>
+  <string name="copy_wikicode">Прекопирај го викитекстот во меѓускладот</string>
+  <string name="wikicode_copied">Викитекстот е прекопиран во меѓускладот</string>
   <string name="nearby_location_has_not_changed">Местоположбата не е сменета.</string>
   <string name="nearby_location_not_available">Местоположбата е недостапна.</string>
   <string name="location_permission_rationale_nearby">Се бара дозвола за приказ на список на околни места</string>
@@ -344,4 +344,14 @@
   <string name="notifications_channel_name_all">Известување од Ризницата</string>
   <string name="storage_permission">Дозвола за складирање</string>
   <string name="write_storage_permission_rationale_for_image_share">Ни треба ваша дозвола за пристап до надворешниот склад на вашиот уред за да се подигнат сликите.</string>
+  <string name="navigation_item_bookmarks">Обележани</string>
+  <string name="title_activity_bookmarks">Обележани</string>
+  <string name="title_page_bookmarks_pictures">Слики</string>
+  <string name="title_page_bookmarks_locations">Места</string>
+  <string name="menu_bookmark">Додај/отстрани обележани</string>
+  <string name="provider_bookmarks">Обележани</string>
+  <string name="bookmark_empty">Немате додадено ниеден бележник</string>
+  <string name="provider_bookmarks_location">Обележани</string>
+  <string name="log_collection_started">Заведувањето од дневникот започна. ПРЕВКЛУЧЕТЕ го прилогот, извршете го дејството што сакате да се заведе, а потоа повторно допрете на „Испрати дневничка податотека“</string>
+  <string name="no_uploads">Добре дојдовте на Ризницата!\n\nПодигнете ја вашата прва слика или снимка допирајќи ја иконката за камера или галерија.</string>
 </resources>

@@ -228,7 +228,7 @@
   <string name="use_external_storage_summary">Vistaðu myndir sem teknar hafa verið með innbyggðu myndavélinni í tækinu þínu</string>
   <string name="login_to_your_account">Skrá inn á aðganginn þinn</string>
   <string name="send_log_file">Senda atvikaskrá</string>
-  <string name="send_log_file_description">Senda atvikaskrá til forritaranna með tölvupósti</string>
+  <string name="send_log_file_description" fuzzy="true">Senda atvikaskrá til forritaranna með tölvupósti</string>
   <string name="no_web_browser">Gat ekki ræst vefvafra til að opna slóð</string>
   <string name="null_url">Villa: Slóð fannst ekki</string>
   <string name="nominate_deletion">Tilnefna til eyðingar</string>

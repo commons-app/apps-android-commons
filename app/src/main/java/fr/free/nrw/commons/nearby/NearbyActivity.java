@@ -13,6 +13,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomSheetBehavior;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AlertDialog;
 import android.view.Menu;
@@ -195,10 +196,10 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
         // Handle item selection
         switch (item.getItemId()) {
             case R.id.action_display_list:
-                if(bottomSheetBehavior.getState()==BottomSheetBehavior.STATE_COLLAPSED || bottomSheetBehavior.getState()==BottomSheetBehavior.STATE_HIDDEN){
+                if (bottomSheetBehavior.getState()==BottomSheetBehavior.STATE_COLLAPSED || bottomSheetBehavior.getState()==BottomSheetBehavior.STATE_HIDDEN){
                     bottomSheetBehaviorForDetails.setState(BottomSheetBehavior.STATE_HIDDEN);
                     bottomSheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
-                }else if(bottomSheetBehavior.getState()==BottomSheetBehavior.STATE_EXPANDED){
+                }else if (bottomSheetBehavior.getState()==BottomSheetBehavior.STATE_EXPANDED){
                     bottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
                 }
 
@@ -355,7 +356,7 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
         super.onPause();
         // this means that this activity will not be recreated now, user is leaving it
         // or the activity is otherwise finishing
-        if(isFinishing()) {
+        if (isFinishing()) {
             // we will not need this fragment anymore, this may also be a good place to signal
             // to the retained fragment object to perform its own cleanup.
             removeMapFragment();
@@ -371,6 +372,7 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
 
     private void addNetworkBroadcastReceiver() {
         IntentFilter intentFilter = new IntentFilter(NETWORK_INTENT_ACTION);
+        Snackbar snackbar = Snackbar.make(transparentView , R.string.no_internet, Snackbar.LENGTH_INDEFINITE);
 
         broadcastReceiver = new BroadcastReceiver() {
 
@@ -378,8 +380,9 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
             public void onReceive(Context context, Intent intent) {
                 if (NetworkUtils.isInternetConnectionEstablished(NearbyActivity.this)) {
                     refreshView(LOCATION_SIGNIFICANTLY_CHANGED);
+                    snackbar.dismiss();
                 } else {
-                    ViewUtil.showLongToast(NearbyActivity.this, getString(R.string.no_internet));
+                    snackbar.show();
                 }
             }
         };
