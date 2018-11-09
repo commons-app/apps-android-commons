@@ -193,7 +193,7 @@ public class NotificationUtils {
     private static String getNotificationIconUrl(Node document) {
         String format = "%s%s";
         Node iconUrl = getNode(getModel(document), "iconUrl");
-        if(iconUrl == null) {
+        if (iconUrl == null) {
             return null;
         } else {
             String url = iconUrl.getTextContent();

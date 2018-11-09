@@ -116,12 +116,19 @@ public class NearbyPlaces {
             String point = fields[0];
             String wikiDataLink = Utils.stripLocalizedString(fields[1]);
             String name = Utils.stripLocalizedString(fields[2]);
+
+            //getting icon link here
+            String identifier = Utils.stripLocalizedString(fields[3]);
+            //getting the ID which is at the end of link
+            identifier = identifier.split("/")[Utils.stripLocalizedString(fields[3]).split("/").length-1];
+            //replaced the extra > char from fields
+            identifier = identifier.replace(">","");
+
             String type = Utils.stripLocalizedString(fields[4]);
             String icon = fields[5];
             String wikipediaSitelink = Utils.stripLocalizedString(fields[7]);
             String commonsSitelink = Utils.stripLocalizedString(fields[8]);
             String category = Utils.stripLocalizedString(fields[9]);
-
             Timber.v("Name: " + name + ", type: " + type + ", category: " + category + ", wikipediaSitelink: " + wikipediaSitelink + ", commonsSitelink: " + commonsSitelink);
 
             double latitude;
@@ -140,7 +147,7 @@ public class NearbyPlaces {
 
             places.add(new Place(
                     name,
-                    Place.Label.fromText(type), // list
+                    Place.Label.fromText(identifier), // list
                     type, // details
                     Uri.parse(icon),
                     new LatLng(latitude, longitude, 0),

@@ -121,7 +121,7 @@ public class NotificationActivity extends NavigationBaseActivity {
     }
 
     private void setAdapter(List<Notification> notificationList) {
-        if(notificationList == null || notificationList.isEmpty()) {
+        if (notificationList == null || notificationList.isEmpty()) {
             ViewUtil.showSnackbar(relativeLayout, R.string.no_notifications);
             return;
         }
