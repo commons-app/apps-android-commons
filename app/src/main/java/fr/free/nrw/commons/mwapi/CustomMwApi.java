@@ -21,7 +21,7 @@ public class CustomMwApi {
         private CustomMwApi api;
 
         RequestBuilder(CustomMwApi api) {
-            params = new HashMap<String, Object>();
+            params = new HashMap<>();
             this.api = api;
         }
 
@@ -177,4 +177,3 @@ public class CustomMwApi {
         return CustomApiResult.fromRequestBuilder(builder, client);
     }
 }
-;

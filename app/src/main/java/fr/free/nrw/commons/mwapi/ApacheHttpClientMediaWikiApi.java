@@ -261,11 +261,11 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
 
     @Override
     public boolean fileExistsWithName(String fileName) throws IOException {
-        return api.action("query")
+        return !api.action("query")
                 .param("prop", "imageinfo")
                 .param("titles", "File:" + fileName)
                 .get()
-                .getNodes("/api/query/pages/page/imageinfo").size() > 0;
+                .getNodes("/api/query/pages/page/imageinfo").isEmpty();
     }
 
     @Override
@@ -769,7 +769,7 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
         }
 
         if (imageNodes == null) {
-            return new ArrayList<Media>();
+            return new ArrayList<>();
         }
 
         List<Media> images = new ArrayList<>();
@@ -809,7 +809,7 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
         }
 
         if (categoryNodes == null) {
-            return new ArrayList<String>();
+            return new ArrayList<>();
         }
 
         List<String> categories = new ArrayList<>();
@@ -847,12 +847,12 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
 
     @Override
     public boolean existingFile(String fileSha1) throws IOException {
-        return api.action("query")
+        return !api.action("query")
                 .param("format", "xml")
                 .param("list", "allimages")
                 .param("aisha1", fileSha1)
                 .get()
-                .getNodes("/api/query/allimages/img").size() > 0;
+                .getNodes("/api/query/allimages/img").isEmpty();
     }
 
     @Override

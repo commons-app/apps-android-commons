@@ -3,7 +3,6 @@ package fr.free.nrw.commons.media;
 import android.app.AlertDialog;
 import android.content.ClipData;
 import android.content.ClipboardManager;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.DataSetObserver;
 import android.net.Uri;
@@ -318,7 +317,7 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
         categoryNames.addAll(media.getCategories());
 
         categoriesLoaded = true;
-        categoriesPresent = (categoryNames.size() > 0);
+        categoriesPresent = !categoryNames.isEmpty();
         if (!categoriesPresent) {
             // Stick in a filler element.
             categoryNames.add(getString(R.string.detail_panel_cats_none));
@@ -388,11 +387,7 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
         input.addTextChangedListener(new TextWatcher() {
             private void handleText() {
                 final Button okButton = d.getButton(AlertDialog.BUTTON_POSITIVE);
-                if (input.getText().length() == 0) {
-                    okButton.setEnabled(false);
-                } else {
-                    okButton.setEnabled(true);
-                }
+                okButton.setEnabled(input.getText().length() == 0);
             }
 
             @Override

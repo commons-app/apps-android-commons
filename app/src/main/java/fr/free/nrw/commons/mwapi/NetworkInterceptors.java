@@ -45,12 +45,10 @@ public class NetworkInterceptors {
                     && cps.getRequestParams() instanceof HttpParamsNames) {
                 names.addAll(((HttpParamsNames) cps.getApplicationParams()).getNames());
             }
-            if (cps.getClientParams() != null
-                    && cps.getClientParams() instanceof HttpParamsNames) {
+            if (cps.getClientParams() instanceof HttpParamsNames) {
                 names.addAll(((HttpParamsNames) cps.getClientParams()).getNames());
             }
-            if (cps.getRequestParams() != null
-                    && cps.getRequestParams() instanceof HttpParamsNames) {
+            if (cps.getRequestParams() instanceof HttpParamsNames) {
                 names.addAll(((HttpParamsNames) cps.getRequestParams()).getNames());
             }
             if (cps.getOverrideParams() != null

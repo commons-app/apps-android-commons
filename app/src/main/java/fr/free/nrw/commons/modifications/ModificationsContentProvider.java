@@ -141,7 +141,7 @@ public class ModificationsContentProvider extends CommonsDaggerContentProvider {
                         selectionArgs);
                 break;
             case MODIFICATIONS_ID:
-                int id = Integer.valueOf(uri.getLastPathSegment());
+                int id = Integer.parseInt(uri.getLastPathSegment());
 
                 if (TextUtils.isEmpty(selection)) {
                     rowsUpdated = sqlDB.update(TABLE_NAME,
