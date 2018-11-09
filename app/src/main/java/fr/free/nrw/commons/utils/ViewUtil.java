@@ -17,7 +17,7 @@ public class ViewUtil {
     public static final String SHOWCASE_VIEW_ID_3 = "SHOWCASE_VIEW_ID_3";
 
     public static void showSnackbar(View view, int messageResourceId) {
-        if(view.getContext() == null) {
+        if (view.getContext() == null) {
             return;
         }
 
@@ -34,7 +34,7 @@ public class ViewUtil {
 
     public static boolean isPortrait(Context context) {
         Display orientation = ((Activity)context).getWindowManager().getDefaultDisplay();
-        if(orientation.getWidth() < orientation.getHeight()){
+        if (orientation.getWidth() < orientation.getHeight()){
             return true;
         } else {
             return false;

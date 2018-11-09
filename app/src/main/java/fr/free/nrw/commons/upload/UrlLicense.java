@@ -62,7 +62,7 @@ public class UrlLicense {
         urlLicense.put("zh","https://commons.wikimedia.org/wiki/Commons:Licensing/zh");
     }
     public String getLicenseUrl ( String language){
-        if(urlLicense.containsKey(language)) {
+        if (urlLicense.containsKey(language)) {
             return urlLicense.get(language);
         } else {
             return urlLicense.get("en");

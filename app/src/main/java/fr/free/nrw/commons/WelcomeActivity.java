@@ -33,7 +33,7 @@ public class WelcomeActivity extends BaseActivity {
 
         moreInformation = this.getString(R.string.welcome_help_button_text);
 
-        if(getIntent() != null) {
+        if (getIntent() != null) {
             Bundle bundle = getIntent().getExtras();
             if (bundle != null) {
                 isQuiz = bundle.getBoolean("isQuiz");
@@ -54,7 +54,7 @@ public class WelcomeActivity extends BaseActivity {
      */
     @Override
     public void onDestroy() {
-        if(isQuiz){
+        if (isQuiz){
             Intent i = new Intent(WelcomeActivity.this, QuizActivity.class);
             startActivity(i);
         }

@@ -294,4 +294,10 @@
   <string name="statistics_featured">নির্বাচিত ছবি</string>
   <string name="level">স্তর</string>
   <string name="notifications_channel_name_all">কমন্স বিজ্ঞপ্তি</string>
+  <string name="navigation_item_bookmarks">বুকমার্ক</string>
+  <string name="title_activity_bookmarks">বুকমার্ক</string>
+  <string name="title_page_bookmarks_pictures">চিত্র</string>
+  <string name="title_page_bookmarks_locations">অবস্থান</string>
+  <string name="provider_bookmarks">বুকমার্ক</string>
+  <string name="provider_bookmarks_location">বুকমার্ক</string>
 </resources>

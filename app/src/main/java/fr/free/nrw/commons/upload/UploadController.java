@@ -112,7 +112,7 @@ public class UploadController {
         Timber.d("Wikidata entity ID received from Share activity is %s", wikiDataEntityId);
         //TODO: Modify this to include coords
         Account currentAccount = sessionManager.getCurrentAccount();
-        if(currentAccount == null) {
+        if (currentAccount == null) {
             Timber.d("Current account is null");
             ViewUtil.showLongToast(context, context.getString(R.string.user_not_logged_in));
             sessionManager.forceLogin(context);

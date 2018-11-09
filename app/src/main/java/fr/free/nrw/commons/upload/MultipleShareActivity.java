@@ -256,7 +256,7 @@ public class MultipleShareActivity extends AuthenticatedActivity
                                 public void onPositiveButtonClicked() {
                                     //If the user is willing to give us the permission
                                     //But had somehow previously choose never ask again, we take him to app settings to manually enable permission
-                                    if(null== permissionDeniedResponse){
+                                    if (null== permissionDeniedResponse){
                                         //Dexter returned null, lets see if this ever happens
                                         return;
                                     }
