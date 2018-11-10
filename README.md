@@ -17,6 +17,7 @@ We try to have an extensive documentation at [our wiki here at Github][4]:
 * [Contributor Documentation][6]
   * [Volunteers Welcome!][7]
 * [Developer Documentation][8]
+  * [Libraries Used][9]
 
 ## Contributors ##
 
@@ -35,7 +36,7 @@ Thank you all for your work!
 
 ## License ##
 
-This software is open source, licensed under the [Apache License 2.0][9].
+This software is open source, licensed under the [Apache License 2.0][10].
 
 
 [1]: https://play.google.com/store/apps/details?id=fr.free.nrw.commons
@@ -47,5 +48,6 @@ This software is open source, licensed under the [Apache License 2.0][9].
 [6]: https://github.com/commons-app/apps-android-commons/wiki#contributor-documentation
 [7]: https://github.com/commons-app/apps-android-commons/wiki/Volunteers-welcome%21
 [8]: https://github.com/commons-app/apps-android-commons/wiki#developer-documentation
+[9]: https://github.com/commons-app/apps-android-commons/wiki/Libraries-used
 
-[9]: https://www.apache.org/licenses/LICENSE-2.0
+[10]: https://www.apache.org/licenses/LICENSE-2.0
