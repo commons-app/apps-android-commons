@@ -139,9 +139,8 @@ class DescriptionsAdapter extends RecyclerView.Adapter<DescriptionsAdapter.ViewH
                 } else {
                     descItemEditText.setText("");
                 }
-                Drawable drawableRight = context.getResources()
-                        .getDrawable(R.drawable.mapbox_info_icon_default);
-                descItemEditText.setCompoundDrawablesWithIntrinsicBounds(null, null, drawableRight, null);
+
+                descItemEditText.setCompoundDrawablesWithIntrinsicBounds(null, null, getInfoIcon(), null);
 
                 descItemEditText.addTextChangedListener(new AbstractTextWatcher(titleText ->{
                     title.setTitleText(titleText);
@@ -165,14 +164,14 @@ class DescriptionsAdapter extends RecyclerView.Adapter<DescriptionsAdapter.ViewH
                     descItemEditText.setText("");
                 }
                 if (position == 1) {
-                    Drawable drawableRight = context.getResources()
-                            .getDrawable(R.drawable.mapbox_info_icon_default);
-                    descItemEditText.setCompoundDrawablesWithIntrinsicBounds(null, null, drawableRight, null);
+                    descItemEditText.setCompoundDrawablesWithIntrinsicBounds(null, null, getInfoIcon(), null);
                 } else {
                     descItemEditText.setCompoundDrawablesWithIntrinsicBounds(null, null, null, null);
                 }
 
-                descItemEditText.addTextChangedListener(new AbstractTextWatcher(description::setDescriptionText));
+                descItemEditText.addTextChangedListener(new AbstractTextWatcher(descriptionText -> {
+                    description.setDescriptionText(descriptionText);
+                }));
                 descItemEditText.setOnFocusChangeListener((v, hasFocus) -> {
                     if (!hasFocus) {
                         ViewUtil.hideKeyboard(v);
@@ -243,7 +242,7 @@ class DescriptionsAdapter extends RecyclerView.Adapter<DescriptionsAdapter.ViewH
                     }
                 }
             //Description info is visible only for the first description
-            }else if (getAdapterPosition() == 1) {
+            } else if (getAdapterPosition() == 1) {
                 final int value;
                 if (ViewCompat.getLayoutDirection(view) == ViewCompat.LAYOUT_DIRECTION_LTR) {
                     value = view.getRight() - descItemEditText.getCompoundDrawables()[2].getBounds().width();
@@ -265,6 +264,11 @@ class DescriptionsAdapter extends RecyclerView.Adapter<DescriptionsAdapter.ViewH
             }
             return false;
         }
+    }
+
+    private Drawable getInfoIcon() {
+        return context.getResources()
+                .getDrawable(R.drawable.mapbox_info_icon_default);
     }
 
     public interface Callback {
