@@ -10,7 +10,7 @@ import java.io.IOException;
 import java.lang.ref.WeakReference;
 
 import fr.free.nrw.commons.R;
-import fr.free.nrw.commons.contributions.ContributionsActivity;
+import fr.free.nrw.commons.contributions.MainActivity;
 import fr.free.nrw.commons.utils.ImageUtils;
 import timber.log.Timber;
 
@@ -63,8 +63,8 @@ public class DetectUnwantedPicturesAsync extends AsyncTask<Void, Void, ImageUtil
             errorDialogBuilder.setMessage(errorMessage);
             errorDialogBuilder.setTitle(activity.getString(R.string.warning));
             errorDialogBuilder.setPositiveButton(activity.getString(R.string.no), (dialogInterface, i) -> {
-                //user does not wish to upload the picture, take them back to ContributionsActivity
-                Intent intent = new Intent(activity, ContributionsActivity.class);
+                //user does not wish to upload the picture, take them back to MainActivity
+                Intent intent = new Intent(activity, MainActivity.class);
                 dialogInterface.dismiss();
                 activity.startActivity(intent);
             });

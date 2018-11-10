@@ -69,8 +69,8 @@
   <plurals name="contributions_subtitle">
     <!--zero is not used in english. Category mentioned here for easy reference in future-->
     <item quantity="zero">@string/contributions_subtitle_zero</item>
-    <item quantity="one">%1$d upload</item>
-    <item quantity="other">%1$d uploads</item>
+    <item quantity="one">(%1$d)</item>
+    <item quantity="other">(%1$d)</item>
   </plurals>
   <plurals name="starting_multiple_uploads">
     <item quantity="one">Starting %1$d upload</item>
@@ -354,8 +354,18 @@
 
   <string name="error_occurred">Error occurred!</string>
   <string name="notifications_channel_name_all">Commons Notification</string>
+
+  <string name="contributions_fragment">Contributions</string>
+  <string name="nearby_fragment">Nearby</string>
+  <string name="notifications">Notifications</string>
+  <string name="display_nearby_notification">Display nearby notification</string>
+  <string name="display_nearby_notification_summary">Tap here to see the nearest place that needs pictures</string>
+  <string name="no_close_nearby">No nearby places found close to you</string>
+  <string name="list_sheet">List</string>
+
   <string name="storage_permission">Storage Permission</string>
   <string name="write_storage_permission_rationale_for_image_share">We need your permission to access the external storage of your device in order to upload images.</string>
+  <string name="nearby_notification_dismiss_message">You won\'t see the nearest place that needs pictures anymore. However, you can re-enable this notification in Settings if you wish.</string>
   <string name="navigation_item_bookmarks">Bookmarks</string>
   <string name="title_activity_bookmarks">Bookmarks</string>
   <string name="title_page_bookmarks_pictures">Pictures</string>
