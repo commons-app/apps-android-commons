@@ -10,7 +10,7 @@ import java.io.IOException;
 import java.lang.ref.WeakReference;
 
 import fr.free.nrw.commons.R;
-import fr.free.nrw.commons.contributions.ContributionsActivity;
+import fr.free.nrw.commons.contributions.MainActivity;
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
 import timber.log.Timber;
 
@@ -77,8 +77,8 @@ public class ExistingFileAsync extends AsyncTask<Void, Void, Boolean> {
             builder.setMessage(R.string.file_exists)
                     .setTitle(R.string.warning);
             builder.setPositiveButton(R.string.no, (dialog, id) -> {
-                //Go back to ContributionsActivity
-                Intent intent = new Intent(context.get(), ContributionsActivity.class);
+                //Go back to MainActivity
+                Intent intent = new Intent(context.get(), MainActivity.class);
                 context.get().startActivity(intent);
                 callback.onResult(Result.DUPLICATE_CANCELLED);
             });

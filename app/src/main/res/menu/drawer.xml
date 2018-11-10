@@ -11,11 +11,6 @@
             android:id="@+id/action_home"
             android:icon="@drawable/ic_home_black_24dp"
             android:title="@string/navigation_item_home" />
-
-        <item
-            android:id="@+id/action_nearby"
-            android:icon="@drawable/ic_location_black_24dp"
-            android:title="@string/navigation_item_nearby" />
       
         <item
             android:id="@+id/action_explore"

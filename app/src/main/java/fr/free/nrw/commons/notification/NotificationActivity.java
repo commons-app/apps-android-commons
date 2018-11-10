@@ -17,6 +17,7 @@ import android.widget.RelativeLayout;
 import com.pedrogomez.renderers.RVRendererAdapter;
 
 import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -85,7 +86,12 @@ public class NotificationActivity extends NavigationBaseActivity {
     private void addNotifications() {
         Timber.d("Add notifications");
 
-        if (mNotificationWorkerFragment == null){
+        // Store when add notification is called last
+        long currentDate = new Date(System.currentTimeMillis()).getTime();
+        getSharedPreferences("prefs", MODE_PRIVATE).edit().putLong("last_read_notification_date", currentDate).apply();
+        Timber.d("Set last notification read date to current date:"+ currentDate);
+
+        if(mNotificationWorkerFragment == null){
             Observable.fromCallable(() -> {
                 progressBar.setVisibility(View.VISIBLE);
                 return controller.getNotifications();
