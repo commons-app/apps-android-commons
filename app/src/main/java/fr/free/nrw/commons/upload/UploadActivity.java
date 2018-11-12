@@ -3,10 +3,8 @@ package fr.free.nrw.commons.upload;
 import android.Manifest;
 import android.animation.LayoutTransition;
 import android.annotation.SuppressLint;
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.database.Cursor;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -19,7 +17,6 @@ import android.support.v7.widget.RecyclerView;
 import android.text.Html;
 import android.text.TextUtils;
 import android.text.method.LinkMovementMethod;
-import android.util.AttributeSet;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
@@ -307,6 +304,7 @@ public class UploadActivity extends AuthenticatedActivity implements UploadView,
             viewFlipper.setDisplayedChild(1);
         } else if (page == LICENSE) {
             viewFlipper.setDisplayedChild(2);
+            dismissKeyboard();
         } else if (page == PLEASE_WAIT) {
             viewFlipper.setDisplayedChild(3);
         }
@@ -332,7 +330,12 @@ public class UploadActivity extends AuthenticatedActivity implements UploadView,
 
     @Override
     public void dismissKeyboard() {
+        InputMethodManager imm = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
 
+        // verify if the soft keyboard is open
+        if (imm != null && imm.isAcceptingText() && getCurrentFocus() != null) {
+            imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
+        }
     }
 
     @Override

@@ -38,10 +38,6 @@ public class UploadModel {
 
     private MediaWikiApi mwApi;
     private static UploadItem DUMMY = new UploadItem(Uri.EMPTY, "", "", GPSExtractor.DUMMY, "", null,-1l) {
-        @Override
-        public boolean isDummy() {
-            return true;
-        }
     };
     private final SharedPreferences prefs;
     private final List<String> licenses;
@@ -374,7 +370,6 @@ public class UploadModel {
             descriptions = new ArrayList<>();
             descriptions.add(new Description());
             this.wikidataEntityId = wikidataEntityId;
-
             this.mediaUri = mediaUri;
             this.mimeType = mimeType;
             this.source = source;
@@ -382,11 +377,6 @@ public class UploadModel {
             this.fileExt = fileExt;
             imageQuality = BehaviorSubject.createDefault(ImageUtils.IMAGE_WAIT);
             this.createdTimestamp=createdTimestamp;
-//                imageQuality.subscribe(iq->Timber.i("New value of imageQuality:"+ImageUtils.IMAGE_OK));
-        }
-
-        public boolean isDummy() {
-            return false;
         }
     }
 

@@ -35,8 +35,8 @@ import static android.view.MotionEvent.ACTION_UP;
 
 class DescriptionsAdapter extends RecyclerView.Adapter<DescriptionsAdapter.ViewHolder> {
 
-    Title title;
-    List<Description> descriptions;
+    private Title title;
+    private List<Description> descriptions;
     private Context context;
     private Callback callback;
     private Subject<String> titleChangedSubject;
@@ -44,7 +44,7 @@ class DescriptionsAdapter extends RecyclerView.Adapter<DescriptionsAdapter.ViewH
     private BiMap<AdapterView, String> selectedLanguages;
     private UploadView uploadView;
 
-    public DescriptionsAdapter(UploadView uploadView) {
+    DescriptionsAdapter(UploadView uploadView) {
         title = new Title();
         descriptions = new ArrayList<>();
         descriptions.add(new Description());
@@ -53,11 +53,11 @@ class DescriptionsAdapter extends RecyclerView.Adapter<DescriptionsAdapter.ViewH
         this.uploadView = uploadView;
     }
 
-    public void setCallback(Callback callback) {
+    void setCallback(Callback callback) {
         this.callback = callback;
     }
 
-    public void setItems(Title title, List<Description> descriptions) {
+    void setItems(Title title, List<Description> descriptions) {
         this.descriptions = descriptions;
         this.title = title;
         selectedLanguages = new BiMap<>();
@@ -95,11 +95,11 @@ class DescriptionsAdapter extends RecyclerView.Adapter<DescriptionsAdapter.ViewH
         return descriptions.size() + 1;
     }
 
-    public List<Description> getDescriptions() {
+    List<Description> getDescriptions() {
         return descriptions;
     }
 
-    public void addDescription(Description description) {
+    void addDescription(Description description) {
         this.descriptions.add(description);
         notifyItemInserted(descriptions.size() + 1);
     }
