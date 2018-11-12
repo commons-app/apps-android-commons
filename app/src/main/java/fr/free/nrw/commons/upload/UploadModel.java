@@ -36,7 +36,7 @@ import timber.log.Timber;
 
 public class UploadModel {
 
-    MediaWikiApi mwApi;
+    private MediaWikiApi mwApi;
     private static UploadItem DUMMY = new UploadItem(Uri.EMPTY, "", "", GPSExtractor.DUMMY, "", null,-1l) {
         @Override
         public boolean isDummy() {
@@ -78,8 +78,8 @@ public class UploadModel {
     }
 
     @SuppressLint("CheckResult")
-    public void receive(List<Uri> mediaUri, String mimeType, String source, SimilarImageInterface similarImageInterface) {
-        currentStepIndex = 0;
+    void receive(List<Uri> mediaUri, String mimeType, String source, SimilarImageInterface similarImageInterface) {
+        initDefaultValues();
         Observable<UploadItem> itemObservable = Observable.fromIterable(mediaUri)
                 .map(media -> {
                     currentMediaUri=media;
@@ -112,9 +112,8 @@ public class UploadModel {
     }
 
     @SuppressLint("CheckResult")
-    public void receiveDirect(Uri media, String mimeType, String source, String wikidataEntityIdPref, String title, String desc, SimilarImageInterface similarImageInterface) {
-        currentStepIndex = 0;
-        items = new ArrayList<>();
+    void receiveDirect(Uri media, String mimeType, String source, String wikidataEntityIdPref, String title, String desc, SimilarImageInterface similarImageInterface) {
+        initDefaultValues();
         long fileCreatedDate = getFileCreatedDate(media);
         String filePath = this.cacheFileUpload(media);
         Uri uri = Uri.fromFile(new File(filePath));
@@ -139,6 +138,14 @@ public class UploadModel {
         items.add(item);
         items.get(0).selected = true;
         items.get(0).first = true;
+    }
+
+    private void initDefaultValues() {
+        currentStepIndex = 0;
+        topCardState = true;
+        bottomCardState = true;
+        rightCardState = true;
+        items = new ArrayList<>();
     }
 
     /**
@@ -168,15 +175,15 @@ public class UploadModel {
         }
     }
 
-    public boolean isPreviousAvailable() {
+    boolean isPreviousAvailable() {
         return currentStepIndex > 0;
     }
 
-    public boolean isNextAvailable() {
+    boolean isNextAvailable() {
         return currentStepIndex < (items.size() + 1);
     }
 
-    public boolean isSubmitAvailable() {
+    boolean isSubmitAvailable() {
         int count = items.size();
         boolean hasError = license == null;
         for (int i = 0; i < count; i++) {
@@ -186,11 +193,11 @@ public class UploadModel {
         return !hasError;
     }
 
-    public int getCurrentStep() {
+    int getCurrentStep() {
         return currentStepIndex + 1;
     }
 
-    public int getStepCount() {
+    int getStepCount() {
         return items.size() + 2;
     }
 
@@ -202,27 +209,27 @@ public class UploadModel {
         return items;
     }
 
-    public boolean isTopCardState() {
+    boolean isTopCardState() {
         return topCardState;
     }
 
-    public void setTopCardState(boolean topCardState) {
+    void setTopCardState(boolean topCardState) {
         this.topCardState = topCardState;
     }
 
-    public boolean isBottomCardState() {
+    boolean isBottomCardState() {
         return bottomCardState;
     }
 
-    public void setRightCardState(boolean rightCardState) {
+    void setRightCardState(boolean rightCardState) {
         this.rightCardState = rightCardState;
     }
 
-    public boolean isRightCardState() {
+    boolean isRightCardState() {
         return rightCardState;
     }
 
-    public void setBottomCardState(boolean bottomCardState) {
+    void setBottomCardState(boolean bottomCardState) {
         this.bottomCardState = bottomCardState;
     }
 
@@ -246,17 +253,17 @@ public class UploadModel {
         updateItemState();
     }
 
-    public void jumpTo(UploadItem item) {
+    void jumpTo(UploadItem item) {
         currentStepIndex = items.indexOf(item);
         item.visited = true;
         updateItemState();
     }
 
-    public UploadItem getCurrentItem() {
+    UploadItem getCurrentItem() {
         return isShowingItem() ? items.get(currentStepIndex) : DUMMY;
     }
 
-    public boolean isShowingItem() {
+    boolean isShowingItem() {
         return currentStepIndex < items.size();
     }
 
@@ -279,15 +286,15 @@ public class UploadModel {
         return licenses;
     }
 
-    public String getSelectedLicense() {
+    String getSelectedLicense() {
         return license;
     }
 
-    public void setSelectedLicense(String licenseName) {
+    void setSelectedLicense(String licenseName) {
         this.license = licensesByName.get(licenseName);
     }
 
-    public Observable<Contribution> buildContributions(List<String> categoryStringList) {
+    Observable<Contribution> buildContributions(List<String> categoryStringList) {
         return Observable.fromIterable(items).map(item ->
         {
             Contribution contribution = new Contribution(item.mediaUri, null, item.title + "." + item.fileExt,
@@ -328,17 +335,17 @@ public class UploadModel {
         }
     }
 
-    public void keepPicture() {
+    void keepPicture() {
         items.get(currentStepIndex).imageQuality.onNext(ImageUtils.IMAGE_KEEP);
     }
 
-    public void deletePicture() {
+    void deletePicture() {
         badImageSubscription.dispose();
         items.remove(currentStepIndex).imageQuality.onComplete();
         updateItemState();
     }
 
-    public void subscribeBadPicture(Consumer<Integer> consumer) {
+    void subscribeBadPicture(Consumer<Integer> consumer) {
         badImageSubscription = getCurrentItem().imageQuality.subscribe(consumer, Timber::e);
     }
 

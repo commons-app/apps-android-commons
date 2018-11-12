@@ -46,19 +46,20 @@ public class UploadPresenter {
             new Class[]{SimilarImageInterface.class}, (proxy, method, methodArgs) -> null);
     private SimilarImageInterface similarImageInterface = SIMILAR_IMAGE;
 
-    @UploadView.UploadPage int currentPage = UploadView.PLEASE_WAIT;
+    @UploadView.UploadPage
+    private int currentPage = UploadView.PLEASE_WAIT;
 
 
     @Inject
-    public UploadPresenter(UploadModel uploadModel,
-                           UploadController uploadController,
-                           MediaWikiApi mediaWikiApi) {
+    UploadPresenter(UploadModel uploadModel,
+                    UploadController uploadController,
+                    MediaWikiApi mediaWikiApi) {
         this.uploadModel = uploadModel;
         this.uploadController = uploadController;
         this.mediaWikiApi = mediaWikiApi;
     }
 
-    public void receive(Uri mediaUri, String mimeType, String source) {
+    void receive(Uri mediaUri, String mimeType, String source) {
         receive(Collections.singletonList(mediaUri), mimeType, source);
     }
 
@@ -70,7 +71,7 @@ public class UploadPresenter {
      * @param source   File source from {@link Contribution.FileSource}
      */
     @SuppressLint("CheckResult")
-    public void receive(List<Uri> media, String mimeType, @Contribution.FileSource String source) {
+    void receive(List<Uri> media, String mimeType, @Contribution.FileSource String source) {
         Completable.fromRunnable(() -> uploadModel.receive(media, mimeType, source, similarImageInterface))
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -91,7 +92,7 @@ public class UploadPresenter {
      * @param source File source from {@link Contribution.FileSource}
      */
     @SuppressLint("CheckResult")
-    public void receiveDirect(Uri media, String mimeType, @Contribution.FileSource String source, String wikidataEntityIdPref, String title, String desc) {
+    void receiveDirect(Uri media, String mimeType, @Contribution.FileSource String source, String wikidataEntityIdPref, String title, String desc) {
         Completable.fromRunnable(() -> uploadModel.receiveDirect(media, mimeType, source, wikidataEntityIdPref, title, desc, similarImageInterface))
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -108,7 +109,7 @@ public class UploadPresenter {
      *
      * @param licenseName license name
      */
-    public void selectLicense(String licenseName) {
+    void selectLicense(String licenseName) {
         uploadModel.setSelectedLicense(licenseName);
         view.updateLicenseSummary(uploadModel.getSelectedLicense());
     }
@@ -119,7 +120,7 @@ public class UploadPresenter {
      * Called by the next button in {@link UploadActivity}
      */
     @SuppressLint("CheckResult")
-    public void handleNext(CategoriesModel categoriesModel, boolean noCategoryWarningShown) {
+    void handleNext(CategoriesModel categoriesModel, boolean noCategoryWarningShown) {
         if(currentPage == UploadView.TITLE_CARD) {
             validateCurrentItemTitle()
                     .subscribeOn(Schedulers.io())
@@ -167,7 +168,7 @@ public class UploadPresenter {
         return getCurrentItem().title;
     }
 
-    public String getCurrentImageFileName() {
+    String getCurrentImageFileName() {
         UploadItem currentItem = getCurrentItem();
         return currentItem.title + "." + uploadModel.getCurrentItem().fileExt;
     }
@@ -193,7 +194,7 @@ public class UploadPresenter {
     /**
      * Called by the previous button in {@link UploadActivity}
      */
-    public void handlePrevious() {
+    void handlePrevious() {
         uploadModel.previous();
         updateContent();
         if (uploadModel.isShowingItem()) {
@@ -205,7 +206,7 @@ public class UploadPresenter {
     /**
      * Called when one of the pictures on the top card is clicked on in {@link UploadActivity}
      */
-    public void thumbnailClicked(UploadItem item) {
+    void thumbnailClicked(UploadItem item) {
         uploadModel.jumpTo(item);
         updateContent();
     }
@@ -214,7 +215,7 @@ public class UploadPresenter {
      * Called by the submit button in {@link UploadActivity}
      */
     @SuppressLint("CheckResult")
-    public void handleSubmit(CategoriesModel categoriesModel) {
+    void handleSubmit(CategoriesModel categoriesModel) {
         if (view.checkIfLoggedIn())
             uploadModel.buildContributions(categoriesModel.getCategoryStringList())
                     .observeOn(Schedulers.io())
@@ -224,7 +225,7 @@ public class UploadPresenter {
     /**
      * Called by the map button on the right card in {@link UploadActivity}
      */
-    public void openCoordinateMap() {
+    void openCoordinateMap() {
         GPSExtractor gpsObj = uploadModel.getCurrentItem().gpsCoords;
         if (gpsObj != null && gpsObj.imageCoordsExists) {
             view.launchMapActivity(gpsObj.getDecLatitude() + "," + gpsObj.getDecLongitude());
@@ -241,11 +242,11 @@ public class UploadPresenter {
         view.showBadPicturePopup(result);
     }
 
-    public void keepPicture() {
+    void keepPicture() {
         uploadModel.keepPicture();
     }
 
-    public void deletePicture() {
+    void deletePicture() {
         if (uploadModel.getCount() == 1)
             view.finish();
         else {
@@ -265,7 +266,7 @@ public class UploadPresenter {
     /**
      * Toggles the top card's state between open and closed.
      */
-    public void toggleTopCardState() {
+    void toggleTopCardState() {
         uploadModel.setTopCardState(!uploadModel.isTopCardState());
         view.setTopCardState(uploadModel.isTopCardState());
     }
@@ -273,7 +274,7 @@ public class UploadPresenter {
     /**
      * Toggles the bottom card's state between open and closed.
      */
-    public void toggleBottomCardState() {
+    void toggleBottomCardState() {
         uploadModel.setBottomCardState(!uploadModel.isBottomCardState());
         view.setBottomCardState(uploadModel.isBottomCardState());
     }
@@ -281,7 +282,7 @@ public class UploadPresenter {
     /**
      * Toggles the right card's state between open and closed.
      */
-    public void toggleRightCardState() {
+    void toggleRightCardState() {
         uploadModel.setRightCardState(!uploadModel.isRightCardState());
         view.setRightCardState(uploadModel.isRightCardState());
     }
@@ -289,7 +290,7 @@ public class UploadPresenter {
     /**
      * Sets all the cards' states to closed.
      */
-    public void closeAllCards() {
+    void closeAllCards() {
         if (uploadModel.isTopCardState()) {
             uploadModel.setTopCardState(false);
             view.setTopCardState(false);
@@ -310,15 +311,15 @@ public class UploadPresenter {
         uploadController.prepareService();
     }
 
-    public void cleanup() {
+    void cleanup() {
         uploadController.cleanup();
     }
 
-    public void removeView() {
+    void removeView() {
         this.view = DUMMY;
     }
 
-    public void addView(UploadView view) {
+    void addView(UploadView view) {
         this.view = view;
 
         updateCards();
@@ -399,11 +400,11 @@ public class UploadPresenter {
     /**
      * @return the item currently being displayed
      */
-    public UploadItem getCurrentItem() {
+    private UploadItem getCurrentItem() {
         return uploadModel.getCurrentItem();
     }
 
-    public List<String> getImageTitleList() {
+    List<String> getImageTitleList() {
         List<String> titleList = new ArrayList<>();
         for (UploadItem item : uploadModel.getUploads()) {
             if (item.title.isSet()) {
