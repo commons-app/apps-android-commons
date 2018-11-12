@@ -26,6 +26,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.Utils;
+import fr.free.nrw.commons.contributions.MainActivity;
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
 import fr.free.nrw.commons.theme.NavigationBaseActivity;
 import fr.free.nrw.commons.utils.NetworkUtils;
@@ -146,4 +147,10 @@ public class NotificationActivity extends NavigationBaseActivity {
                 .commit();
         mNotificationWorkerFragment.setNotificationList(notificationList);
     }
+
+    @Override
+    public void onBackPressed() {
+        startActivityWithFlags(
+                this, MainActivity.class, Intent.FLAG_ACTIVITY_CLEAR_TOP,
+                Intent.FLAG_ACTIVITY_SINGLE_TOP);    }
 }
