@@ -2,6 +2,7 @@ package fr.free.nrw.commons.nearby;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.CoordinatorLayout;
@@ -28,6 +29,7 @@ import timber.log.Timber;
  */
 public class NearbyNoificationCardView  extends CardView{
 
+    private static final float MINIMUM_THRESHOLD_FOR_SWIPE = 100;
     private Context context;
 
     private Button permissionRequestButton;
@@ -98,13 +100,14 @@ public class NearbyNoificationCardView  extends CardView{
         this.setOnTouchListener(
                 (v, event) -> {
                     boolean isSwipe = false;
+                    float deltaX=0.0f;
                     switch (event.getAction()) {
                         case MotionEvent.ACTION_DOWN:
                             x1 = event.getX();
                             break;
                         case MotionEvent.ACTION_UP:
                             x2 = event.getX();
-                            float deltaX = x2 - x1;
+                            deltaX = x2 - x1;
                             if (deltaX < 0) {
                                 //Right to left swipe
                                 isSwipe = true;
@@ -114,7 +117,7 @@ public class NearbyNoificationCardView  extends CardView{
                             }
                             break;
                     }
-                    if (isSwipe) {
+                    if (isSwipe && (pixelToDp(Math.abs(deltaX)) > MINIMUM_THRESHOLD_FOR_SWIPE)) {
                         v.setVisibility(GONE);
                         // Save shared preference for nearby card view accordingly
                         ((MainActivity) context).prefs.edit()
@@ -124,6 +127,10 @@ public class NearbyNoificationCardView  extends CardView{
                     }
                     return false;
                 });
+    }
+
+    private float pixelToDp(float pixels) {
+        return (pixels / Resources.getSystem().getDisplayMetrics().density);
     }
 
     /**
