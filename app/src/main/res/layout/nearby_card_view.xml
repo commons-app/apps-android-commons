@@ -23,6 +23,22 @@
             style="@style/Widget.AppCompat.Button.Borderless"/>
             />
 
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/retry_button"
+            android:text="@string/tab_to_retry_nearby_notification"
+            android:layout_centerInParent="true"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginTop="8dp"
+            android:minWidth="48dp"
+            android:textColor="@android:color/white"
+            android:singleLine="true"
+            android:theme="?attr/mainScreenNearbyPermissionbutton"
+            style="@style/Widget.AppCompat.Button.Borderless"/>
+        />
+
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

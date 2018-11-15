@@ -20,7 +20,6 @@ import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.widget.CursorAdapter;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -102,7 +101,7 @@ public class ContributionsFragment
     private LatLng curLatLng;
 
     private boolean firstLocationUpdate = true;
-    private LocationServiceManager locationManager;
+    public LocationServiceManager locationManager;
 
     private boolean isFragmentAttachedBefore = false;
 
@@ -546,7 +545,7 @@ public class ContributionsFragment
 
 
     private void updateClosestNearbyCardViewInfo() {
-
+        Timber.d("Fetch and update closest nearby info");
         curLatLng = locationManager.getLastLocation();
 
         placesDisposable = Observable.fromCallable(() -> nearbyController

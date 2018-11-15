@@ -3,6 +3,7 @@ package fr.free.nrw.commons.nearby;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
+import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.CoordinatorLayout;
@@ -10,6 +11,7 @@ import android.support.design.widget.SwipeDismissBehavior;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.CardView;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
@@ -20,6 +22,7 @@ import android.widget.TextView;
 
 import android.widget.Toast;
 import fr.free.nrw.commons.R;
+import fr.free.nrw.commons.contributions.ContributionsFragment;
 import fr.free.nrw.commons.contributions.MainActivity;
 import fr.free.nrw.commons.utils.ViewUtil;
 import timber.log.Timber;
@@ -33,6 +36,7 @@ public class NearbyNoificationCardView  extends CardView{
     private Context context;
 
     private Button permissionRequestButton;
+    private Button retryButton;
     private RelativeLayout contentLayout;
     private TextView notificationTitle;
     private TextView notificationDistance;
@@ -70,6 +74,7 @@ public class NearbyNoificationCardView  extends CardView{
         View rootView = inflate(context, R.layout.nearby_card_view, this);
 
         permissionRequestButton = rootView.findViewById(R.id.permission_request_button);
+        retryButton = rootView.findViewById(R.id.retry_button);
         contentLayout = rootView.findViewById(R.id.content_layout);
 
         notificationTitle = rootView.findViewById(R.id.nearby_title);
@@ -133,6 +138,23 @@ public class NearbyNoificationCardView  extends CardView{
         return (pixels / Resources.getSystem().getDisplayMetrics().density);
     }
 
+    public void displayRetryButton() {
+        cardViewVisibilityState = CardViewVisibilityState.RETRY;
+
+        contentLayout.setVisibility(GONE);
+        permissionRequestButton.setVisibility(GONE);
+        retryButton.setVisibility(VISIBLE);
+
+        retryButton.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (!((MainActivity)context).isFinishing()) {
+                    ((ContributionsFragment)(((MainActivity) context).contributionsActivityPagerAdapter.getItem(0))).locationManager.registerLocationManager();
+                }
+            }
+        });
+    }
+
     /**
      * Sets permission request button visible and content layout invisible, then adds correct
      * permission request actions to permission request button according to PermissionType enum
@@ -142,6 +164,7 @@ public class NearbyNoificationCardView  extends CardView{
         if (isPermissionRequestButtonNeeded) {
             cardViewVisibilityState = CardViewVisibilityState.ASK_PERMISSION;
             contentLayout.setVisibility(GONE);
+            retryButton.setVisibility(GONE);
             permissionRequestButton.setVisibility(VISIBLE);
 
             if (permissionType == PermissionType.ENABLE_LOCATION_PERMISSON) {
@@ -184,6 +207,7 @@ public class NearbyNoificationCardView  extends CardView{
         } else {
             cardViewVisibilityState = CardViewVisibilityState.LOADING;
             permissionRequestButton.setVisibility(GONE);
+            retryButton.setVisibility(GONE);
             contentLayout.setVisibility(VISIBLE);
             // Set visibility of elements in content layout once it become visible
             progressBar.setVisibility(VISIBLE);
@@ -192,6 +216,20 @@ public class NearbyNoificationCardView  extends CardView{
             notificationIcon.setVisibility(GONE);
 
             permissionRequestButton.setVisibility(GONE);
+
+            Handler nearbyNotificationHandler = new Handler();
+            Runnable nearbyNotificationRunnable = new Runnable() {
+                @Override
+                public void run() {
+                    if (cardViewVisibilityState != NearbyNoificationCardView.CardViewVisibilityState.READY
+                            || cardViewVisibilityState != NearbyNoificationCardView.CardViewVisibilityState.ASK_PERMISSION
+                            || cardViewVisibilityState != NearbyNoificationCardView.CardViewVisibilityState.INVISIBLE) {
+                        // If after 30 seconds, card view is not ready
+                        displayRetryButton();
+                    }
+                }
+            };
+            nearbyNotificationHandler.postDelayed(nearbyNotificationRunnable, 30000);
         }
     }
 
@@ -206,6 +244,7 @@ public class NearbyNoificationCardView  extends CardView{
         }
         cardViewVisibilityState = CardViewVisibilityState.READY;
         permissionRequestButton.setVisibility(GONE);
+        retryButton.setVisibility(GONE);
         contentLayout.setVisibility(VISIBLE);
         // Make progress bar invisible once data is ready
         progressBar.setVisibility(GONE);
@@ -245,6 +284,7 @@ public class NearbyNoificationCardView  extends CardView{
                     break;
                 case LOADING:
                     permissionRequestButton.setVisibility(GONE);
+                    retryButton.setVisibility(GONE);
                     contentLayout.setVisibility(VISIBLE);
                     // Set visibility of elements in content layout once it become visible
                     progressBar.setVisibility(VISIBLE);
@@ -255,6 +295,7 @@ public class NearbyNoificationCardView  extends CardView{
                     break;
                 case ASK_PERMISSION:
                     contentLayout.setVisibility(GONE);
+                    retryButton.setVisibility(GONE);
                     permissionRequestButton.setVisibility(VISIBLE);
                     break;
                 default:
@@ -269,6 +310,7 @@ public class NearbyNoificationCardView  extends CardView{
     public enum CardViewVisibilityState {
         LOADING,
         READY,
+        RETRY,
         INVISIBLE,
         ASK_PERMISSION,
     }
