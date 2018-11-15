@@ -100,7 +100,7 @@ public class ContributionsFragment
     private Disposable placesDisposable;
     private LatLng curLatLng;
 
-    private boolean firstLocationUpdate = true;
+    public boolean firstLocationUpdate = true;
     public LocationServiceManager locationManager;
 
     private boolean isFragmentAttachedBefore = false;
@@ -573,6 +573,12 @@ public class ContributionsFragment
     }
 
     @Override
+    public void onDestroyView() {
+        nearbyNoificationCardView.nearbyNotificationHandler.removeCallbacksAndMessages(null);
+        super.onDestroyView();
+    }
+
+                        @Override
     public void onDestroy() {
         compositeDisposable.clear();
         getChildFragmentManager().removeOnBackStackChangedListener(this);

@@ -46,6 +46,8 @@ public class NearbyNoificationCardView  extends CardView{
     public CardViewVisibilityState cardViewVisibilityState;
 
     public PermissionType permissionType;
+    public Handler nearbyNotificationHandler;
+    public Runnable nearbyNotificationRunnable;
 
     float x1,x2;
 
@@ -149,7 +151,19 @@ public class NearbyNoificationCardView  extends CardView{
             @Override
             public void onClick(View view) {
                 if (!((MainActivity)context).isFinishing()) {
+                    ((ContributionsFragment)(((MainActivity) context).contributionsActivityPagerAdapter.getItem(0))).firstLocationUpdate = true;
                     ((ContributionsFragment)(((MainActivity) context).contributionsActivityPagerAdapter.getItem(0))).locationManager.registerLocationManager();
+
+                    cardViewVisibilityState = CardViewVisibilityState.LOADING;
+                    cardViewVisibilityState = CardViewVisibilityState.LOADING;
+                    permissionRequestButton.setVisibility(GONE);
+                    retryButton.setVisibility(GONE);
+                    contentLayout.setVisibility(VISIBLE);
+                    // Set visibility of elements in content layout once it become visible
+                    progressBar.setVisibility(VISIBLE);
+                    notificationTitle.setVisibility(GONE);
+                    notificationDistance.setVisibility(GONE);
+                    notificationIcon.setVisibility(GONE);
                 }
             }
         });
@@ -217,13 +231,13 @@ public class NearbyNoificationCardView  extends CardView{
 
             permissionRequestButton.setVisibility(GONE);
 
-            Handler nearbyNotificationHandler = new Handler();
-            Runnable nearbyNotificationRunnable = new Runnable() {
+            nearbyNotificationHandler = new Handler();
+            nearbyNotificationRunnable = new Runnable() {
                 @Override
                 public void run() {
                     if (cardViewVisibilityState != NearbyNoificationCardView.CardViewVisibilityState.READY
-                            || cardViewVisibilityState != NearbyNoificationCardView.CardViewVisibilityState.ASK_PERMISSION
-                            || cardViewVisibilityState != NearbyNoificationCardView.CardViewVisibilityState.INVISIBLE) {
+                            && cardViewVisibilityState != NearbyNoificationCardView.CardViewVisibilityState.ASK_PERMISSION
+                            && cardViewVisibilityState != NearbyNoificationCardView.CardViewVisibilityState.INVISIBLE) {
                         // If after 30 seconds, card view is not ready
                         displayRetryButton();
                     }
