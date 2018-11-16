@@ -45,6 +45,7 @@ import fr.free.nrw.commons.MediaDataExtractor;
 import fr.free.nrw.commons.MediaWikiImageView;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.category.CategoryDetailsActivity;
+import fr.free.nrw.commons.contributions.ContributionsFragment;
 import fr.free.nrw.commons.delete.DeleteTask;
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
 import fr.free.nrw.commons.location.LatLng;
@@ -204,12 +205,14 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
         };
         view.getViewTreeObserver().addOnGlobalLayoutListener(layoutListener);
         locale = getResources().getConfiguration().locale;
+
         return view;
     }
 
     @Override
     public void onResume() {
         super.onResume();
+        ((ContributionsFragment)(getParentFragment().getParentFragment())).nearbyNoificationCardView.setVisibility(View.GONE);
         media = detailProvider.getMediaAtPosition(index);
         if (media == null) {
             // Ask the detail provider to ping us when we're ready

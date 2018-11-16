@@ -201,9 +201,7 @@ public class NearbyNoificationCardView  extends CardView{
      * @param place Closes place where we will get information from
      */
     public void updateContent(boolean isClosestNearbyPlaceFound, Place place) {
-        if (this.getVisibility() == GONE) {
-            return; // If nearby card view is invisible because of preferences, do nothing
-        }
+        Timber.d("Update nearby card notification content");
         cardViewVisibilityState = CardViewVisibilityState.READY;
         permissionRequestButton.setVisibility(GONE);
         contentLayout.setVisibility(VISIBLE);
