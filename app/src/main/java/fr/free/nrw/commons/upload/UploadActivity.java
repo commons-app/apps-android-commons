@@ -54,7 +54,7 @@ import fr.free.nrw.commons.category.CategoryItem;
 import fr.free.nrw.commons.contributions.Contribution;
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
 import fr.free.nrw.commons.utils.DialogUtil;
-import fr.free.nrw.commons.utils.ImageUtils;
+import fr.free.nrw.commons.utils.StringUtils;
 import fr.free.nrw.commons.utils.ViewUtil;
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -62,6 +62,8 @@ import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.schedulers.Schedulers;
 import timber.log.Timber;
 
+import static fr.free.nrw.commons.utils.ImageUtils.Result;
+import static fr.free.nrw.commons.utils.ImageUtils.getErrorMessageForResult;
 import static fr.free.nrw.commons.wikidata.WikidataConstants.WIKIDATA_ENTITY_ID_PREF;
 
 public class UploadActivity extends AuthenticatedActivity implements UploadView, SimilarImageInterface {
@@ -211,15 +213,20 @@ public class UploadActivity extends AuthenticatedActivity implements UploadView,
     }
 
     @Override
-    public void updateBottomCardContent(int currentStep, int stepCount, UploadModel.UploadItem uploadItem) {
+    public void updateBottomCardContent(int currentStep,
+                                        int stepCount,
+                                        UploadModel.UploadItem uploadItem,
+                                        boolean isShowingItem) {
         String cardTitle = getResources().getString(R.string.step_count, currentStep, stepCount);
         String cardSubTitle = getResources().getString(R.string.image_in_set_label, currentStep);
         bottomCardTitle.setText(cardTitle);
         bottomCardSubtitle.setText(cardSubTitle);
         categoryTitle.setText(cardTitle);
         licenseTitle.setText(cardTitle);
-        descriptionsAdapter.setItems(uploadItem.title, uploadItem.descriptions);
-        rvDescriptions.setAdapter(descriptionsAdapter);
+        if(isShowingItem) {
+            descriptionsAdapter.setItems(uploadItem.title, uploadItem.descriptions);
+            rvDescriptions.setAdapter(descriptionsAdapter);
+        }
     }
 
     @Override
@@ -339,28 +346,15 @@ public class UploadActivity extends AuthenticatedActivity implements UploadView,
     }
 
     @Override
-    public void showBadPicturePopup(@ImageUtils.Result int result) {
-        String errorMessage;
-        if (result == ImageUtils.IMAGE_DARK)
-            errorMessage = getString(R.string.upload_image_problem_dark);
-        else if (result == ImageUtils.IMAGE_BLURRY)
-            errorMessage = getString(R.string.upload_image_problem_blurry);
-        else if (result == ImageUtils.IMAGE_DUPLICATE)
-            errorMessage = getString(R.string.upload_image_problem_duplicate);
-        else if (result == (ImageUtils.IMAGE_DARK|ImageUtils.IMAGE_BLURRY))
-            errorMessage = getString(R.string.upload_image_problem_dark_blurry);
-        else if (result == (ImageUtils.IMAGE_DARK|ImageUtils.IMAGE_DUPLICATE))
-            errorMessage = getString(R.string.upload_image_problem_dark_duplicate);
-        else if (result == (ImageUtils.IMAGE_BLURRY|ImageUtils.IMAGE_DUPLICATE))
-            errorMessage = getString(R.string.upload_image_problem_blurry_duplicate);
-        else if (result == (ImageUtils.IMAGE_DARK|ImageUtils.IMAGE_BLURRY|ImageUtils.IMAGE_DUPLICATE))
-            errorMessage = getString(R.string.upload_image_problem_dark_blurry_duplicate);
-        else
+    public void showBadPicturePopup(@Result int result) {
+        String errorMessageForResult = getErrorMessageForResult(this, result);
+        if (StringUtils.isNullOrWhiteSpace(errorMessageForResult)) {
             return;
+        }
 
         DialogUtil.showAlertDialog(this,
                 getString(R.string.warning),
-                errorMessage,
+                errorMessageForResult,
                 () -> presenter.deletePicture(),
                 () -> presenter.keepPicture());
     }
@@ -373,7 +367,7 @@ public class UploadActivity extends AuthenticatedActivity implements UploadView,
                 null,
                 () -> {
                     presenter.keepPicture();
-                    presenter.handleNext(categoriesModel, false);
+                    presenter.handleNext(descriptionsAdapter.getTitle(), getDescriptions());
                 });
     }
 
@@ -384,7 +378,7 @@ public class UploadActivity extends AuthenticatedActivity implements UploadView,
                 getString(R.string.no_go_back),
                 getString(R.string.yes_submit),
                 null,
-                () -> presenter.handleNext(categoriesModel, true));
+                () -> presenter.handleCategoryNext(categoriesModel, true));
     }
 
     @Override
@@ -454,10 +448,12 @@ public class UploadActivity extends AuthenticatedActivity implements UploadView,
 
     private void configureBottomCard() {
         bottomCardExpandButton.setOnClickListener(v -> presenter.toggleBottomCardState());
-        bottomCardAddDescription.setOnClickListener(v -> {
-            descriptionsAdapter.addDescription(new Description());
-            rvDescriptions.scrollToPosition(descriptionsAdapter.getItemCount() - 1);
-        });
+        bottomCardAddDescription.setOnClickListener(v -> addNewDescription());
+    }
+
+    private void addNewDescription() {
+        descriptionsAdapter.addDescription(new Description());
+        rvDescriptions.scrollToPosition(descriptionsAdapter.getItemCount() - 1);
     }
 
     private void configureRightCard() {
@@ -467,11 +463,15 @@ public class UploadActivity extends AuthenticatedActivity implements UploadView,
 
     private void configureNavigationButtons() {
         // Navigation next / previous for each image as we're collecting title + description
-        next.setOnClickListener(v -> presenter.handleNext(categoriesModel, false));
+        next.setOnClickListener(v -> {
+            setTitleAndDescriptions();
+            presenter.handleNext(descriptionsAdapter.getTitle(),
+                    descriptionsAdapter.getDescriptions());
+        });
         previous.setOnClickListener(v -> presenter.handlePrevious());
 
         // Next / previous for the category selection currentPage
-        categoryNext.setOnClickListener(v -> presenter.handleNext(categoriesModel, false));
+        categoryNext.setOnClickListener(v -> presenter.handleCategoryNext(categoriesModel, false));
         categoryPrevious.setOnClickListener(v -> presenter.handlePrevious());
 
         // Finally, the previous / submit buttons on the final currentPage of the wizard
@@ -482,6 +482,11 @@ public class UploadActivity extends AuthenticatedActivity implements UploadView,
             finish();
         });
 
+    }
+
+    private void setTitleAndDescriptions() {
+        List<Description> descriptions = descriptionsAdapter.getDescriptions();
+        Timber.d("Descriptions size is %d are %s", descriptions.size(), descriptions);
     }
 
     private void configureCategories() {
@@ -576,6 +581,7 @@ public class UploadActivity extends AuthenticatedActivity implements UploadView,
         descriptionsAdapter.setCallback(this::showInfoAlert);
         rvDescriptions.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
         rvDescriptions.setAdapter(descriptionsAdapter);
+        addNewDescription();
     }
 
 

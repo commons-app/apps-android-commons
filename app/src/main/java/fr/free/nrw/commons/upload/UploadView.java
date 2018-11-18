@@ -56,7 +56,7 @@ public interface UploadView {
 
     void updateRightCardContent(boolean gpsPresent);
 
-    void updateBottomCardContent(int currentStep, int stepCount, UploadModel.UploadItem uploadItem);
+    void updateBottomCardContent(int currentStep, int stepCount, UploadModel.UploadItem uploadItem, boolean isShowingItem);
 
     void updateLicenses(List<String> licenses, String selectedLicense);
 

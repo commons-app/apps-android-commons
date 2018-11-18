@@ -239,6 +239,23 @@ public class UploadModel {
         updateItemState();
     }
 
+    public void setCurrentTitleAndDescriptions(Title title, List<Description> descriptions) {
+        setCurrentUploadTitle(title);
+        setCurrentUploadDescriptions(descriptions);
+    }
+
+    private void setCurrentUploadTitle(Title title) {
+        if (currentStepIndex < items.size() && currentStepIndex >= 0) {
+            items.get(currentStepIndex).title = title;
+        }
+    }
+
+    private void setCurrentUploadDescriptions(List<Description> descriptions) {
+        if (currentStepIndex < items.size() && currentStepIndex >= 0) {
+            items.get(currentStepIndex).descriptions = descriptions;
+        }
+    }
+
     public void previous() {
         if (badImageSubscription != null)
             badImageSubscription.dispose();
@@ -295,7 +312,7 @@ public class UploadModel {
         {
             Contribution contribution = new Contribution(item.mediaUri, null, item.title + "." + item.fileExt,
                     Description.formatList(item.descriptions), -1,
-                    null, null, sessionManager.getCurrentAccount().name,
+                    null, null, sessionManager.getUserName(),
                     CommonsApplication.DEFAULT_EDIT_SUMMARY, item.gpsCoords.getCoords());
             contribution.setWikiDataEntityId(item.wikidataEntityId);
             contribution.setCategories(categoryStringList);

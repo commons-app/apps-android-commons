@@ -120,30 +120,35 @@ public class UploadPresenter {
      * Called by the next button in {@link UploadActivity}
      */
     @SuppressLint("CheckResult")
-    void handleNext(CategoriesModel categoriesModel, boolean noCategoryWarningShown) {
-        if(currentPage == UploadView.TITLE_CARD) {
-            validateCurrentItemTitle()
-                    .subscribeOn(Schedulers.io())
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe(this::handleImage);
-        } else if(currentPage == UploadView.CATEGORIES) {
-            if (categoriesModel.selectedCategoriesCount() < 1 && !noCategoryWarningShown) {
-                view.showNoCategorySelectedWarning();
-            } else {
-                nextUploadedItem();
-            }
+    void handleNext(Title title,
+                    List<Description> descriptions) {
+        validateCurrentItemTitle()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(errorCode -> handleImage(errorCode, title, descriptions));
+    }
+
+    /**
+     * Called by the next button in {@link UploadActivity}
+     */
+    @SuppressLint("CheckResult")
+    void handleCategoryNext(CategoriesModel categoriesModel,
+                    boolean noCategoryWarningShown) {
+        if (categoriesModel.selectedCategoriesCount() < 1 && !noCategoryWarningShown) {
+            view.showNoCategorySelectedWarning();
         } else {
             nextUploadedItem();
         }
     }
 
-    private void handleImage(Integer errorCode) {
+    private void handleImage(Integer errorCode, Title title, List<Description> descriptions) {
         switch (errorCode) {
             case EMPTY_TITLE:
                 view.showErrorMessage(R.string.add_title_toast);
                 break;
             case FILE_NAME_EXISTS:
                 if(getCurrentItem().imageQuality.getValue().equals(IMAGE_KEEP)) {
+                    setTitleAndDescription(title, descriptions);
                     nextUploadedItem();
                 } else {
                     view.showDuplicatePicturePopup();
@@ -151,6 +156,7 @@ public class UploadPresenter {
                 break;
             case IMAGE_OK:
             default:
+                setTitleAndDescription(title, descriptions);
                 nextUploadedItem();
         }
     }
@@ -162,6 +168,10 @@ public class UploadPresenter {
             uploadModel.subscribeBadPicture(this::handleBadPicture);
         }
         view.dismissKeyboard();
+    }
+
+    private void setTitleAndDescription(Title title, List<Description> descriptions) {
+        uploadModel.setCurrentTitleAndDescriptions(title, descriptions);
     }
 
     private Title getCurrentImageTitle() {
@@ -360,7 +370,10 @@ public class UploadPresenter {
 
         view.setBackground(uploadModel.getCurrentItem().mediaUri);
 
-        view.updateBottomCardContent(uploadModel.getCurrentStep(), uploadModel.getStepCount(), uploadModel.getCurrentItem());
+        view.updateBottomCardContent(uploadModel.getCurrentStep(),
+                uploadModel.getStepCount(),
+                uploadModel.getCurrentItem(),
+                uploadModel.isShowingItem());
 
         view.updateTopCardContent();
 

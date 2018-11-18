@@ -47,7 +47,6 @@ class DescriptionsAdapter extends RecyclerView.Adapter<DescriptionsAdapter.ViewH
     DescriptionsAdapter(UploadView uploadView) {
         title = new Title();
         descriptions = new ArrayList<>();
-        descriptions.add(new Description());
         titleChangedSubject = BehaviorSubject.create();
         selectedLanguages = new BiMap<>();
         this.uploadView = uploadView;

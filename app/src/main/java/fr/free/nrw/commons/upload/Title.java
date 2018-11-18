@@ -16,7 +16,6 @@ class Title{
     }
 
     public void setTitleText(String titleText) {
-        Timber.i("Setting title text to "+titleText);
         this.titleText = titleText;
 
         if (!TextUtils.isEmpty(titleText)) {

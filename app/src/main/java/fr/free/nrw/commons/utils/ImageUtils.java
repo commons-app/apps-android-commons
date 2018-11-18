@@ -204,4 +204,26 @@ public class ImageUtils {
             Timber.e(e, "Error setting wallpaper");
         }
     }
+
+    public static String getErrorMessageForResult(Context context, @Result int result) {
+        String errorMessage;
+        if (result == ImageUtils.IMAGE_DARK)
+            errorMessage = context.getString(R.string.upload_image_problem_dark);
+        else if (result == ImageUtils.IMAGE_BLURRY)
+            errorMessage = context.getString(R.string.upload_image_problem_blurry);
+        else if (result == ImageUtils.IMAGE_DUPLICATE)
+            errorMessage = context.getString(R.string.upload_image_problem_duplicate);
+        else if (result == (ImageUtils.IMAGE_DARK|ImageUtils.IMAGE_BLURRY))
+            errorMessage = context.getString(R.string.upload_image_problem_dark_blurry);
+        else if (result == (ImageUtils.IMAGE_DARK|ImageUtils.IMAGE_DUPLICATE))
+            errorMessage = context.getString(R.string.upload_image_problem_dark_duplicate);
+        else if (result == (ImageUtils.IMAGE_BLURRY|ImageUtils.IMAGE_DUPLICATE))
+            errorMessage = context.getString(R.string.upload_image_problem_blurry_duplicate);
+        else if (result == (ImageUtils.IMAGE_DARK|ImageUtils.IMAGE_BLURRY|ImageUtils.IMAGE_DUPLICATE))
+            errorMessage = context.getString(R.string.upload_image_problem_dark_blurry_duplicate);
+        else
+            return "";
+
+        return errorMessage;
+    }
 }
