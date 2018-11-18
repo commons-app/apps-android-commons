@@ -14,18 +14,15 @@ import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Locale;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.utils.BiMap;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import fr.free.nrw.commons.R;
 
 public class SpinnerLanguagesAdapter extends ArrayAdapter {
 
@@ -51,12 +48,27 @@ public class SpinnerLanguagesAdapter extends ArrayAdapter {
 
     private void prepareLanguages(Context context) {
         Resources resources = context.getResources();
-        for (int i = 0; i < Language.languageNames.length; i++) {
+        List<Language> languages = getLocaleSupportedByDevice();
+
+        for(Language language: languages) {
+            languageNamesList.add(language.getLocale().getDisplayName());
+            languageCodesList.add(language.getLocale().getDisplayScript());
+        }
+        for (int i = 0; i < languages.size(); i++) {
             languageNamesList.add(resources.getString(Language.languageGroups[i]));
             languageCodesList.add("");
             languageNamesList.addAll(Arrays.asList(resources.getStringArray(Language.languageNames[i])));
             languageCodesList.addAll(Arrays.asList(resources.getStringArray(Language.languageCodes[i])));
         }
+    }
+
+    private List<Language> getLocaleSupportedByDevice() {
+        List<Language> languages = new ArrayList<>();
+        Locale[] localesArray = Locale.getAvailableLocales();
+        for (Locale locale : localesArray) {
+            languages.add(new Language(locale));
+        }
+        return languages;
     }
 
     @Override
