@@ -1,7 +1,6 @@
 package fr.free.nrw.commons.upload;
 
 import android.content.Context;
-import android.content.res.Resources;
 import android.graphics.Color;
 import android.os.Build;
 import android.support.annotation.NonNull;
@@ -15,7 +14,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
 
@@ -42,23 +41,18 @@ public class SpinnerLanguagesAdapter extends ArrayAdapter {
         this.layoutInflater = LayoutInflater.from(context);
         languageNamesList = new ArrayList<>();
         languageCodesList = new ArrayList<>();
-        prepareLanguages(context);
+        prepareLanguages();
         this.selectedLanguages = selectedLanguages;
     }
 
-    private void prepareLanguages(Context context) {
-        Resources resources = context.getResources();
+    private void prepareLanguages() {
         List<Language> languages = getLocaleSupportedByDevice();
 
         for(Language language: languages) {
-            languageNamesList.add(language.getLocale().getDisplayName());
-            languageCodesList.add(language.getLocale().getDisplayScript());
-        }
-        for (int i = 0; i < languages.size(); i++) {
-            languageNamesList.add(resources.getString(Language.languageGroups[i]));
-            languageCodesList.add("");
-            languageNamesList.addAll(Arrays.asList(resources.getStringArray(Language.languageNames[i])));
-            languageCodesList.addAll(Arrays.asList(resources.getStringArray(Language.languageCodes[i])));
+            if(!languageCodesList.contains(language.getLocale().getLanguage())) {
+                languageNamesList.add(language.getLocale().getDisplayName());
+                languageCodesList.add(language.getLocale().getLanguage());
+            }
         }
     }
 
@@ -68,6 +62,9 @@ public class SpinnerLanguagesAdapter extends ArrayAdapter {
         for (Locale locale : localesArray) {
             languages.add(new Language(locale));
         }
+
+        Collections.sort(languages, (language, t1) -> language.getLocale().getDisplayName()
+                .compareTo(t1.getLocale().getDisplayName()));
         return languages;
     }
 
@@ -146,11 +143,11 @@ public class SpinnerLanguagesAdapter extends ArrayAdapter {
         }
     }
 
-    public String getLanguageCode(int position) {
+    String getLanguageCode(int position) {
         return languageCodesList.get(position);
     }
 
-    public int getIndexOfUserDefaultLocale(Context context) {
+    int getIndexOfUserDefaultLocale(Context context) {
         return languageCodesList.indexOf(context.getResources().getConfiguration().locale.getLanguage());
     }
 
