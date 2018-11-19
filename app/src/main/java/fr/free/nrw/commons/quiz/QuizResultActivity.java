@@ -8,7 +8,6 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 
 import com.dinuscxj.progressbar.CircleProgressBar;
 
@@ -16,7 +15,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import fr.free.nrw.commons.R;
-import fr.free.nrw.commons.contributions.ContributionsActivity;
+import fr.free.nrw.commons.contributions.MainActivity;
 
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
@@ -26,16 +25,9 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.dinuscxj.progressbar.CircleProgressBar;
-
 import java.io.File;
 import java.io.FileOutputStream;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
-import fr.free.nrw.commons.R;
-import fr.free.nrw.commons.contributions.ContributionsActivity;
 
 /**
  *  Displays the final score of quiz and congratulates the user
@@ -57,13 +49,13 @@ public class QuizResultActivity extends AppCompatActivity {
         ButterKnife.bind(this);
         setSupportActionBar(toolbar);
 
-        if( getIntent() != null) {
+        if ( getIntent() != null) {
             Bundle extras = getIntent().getExtras();
             int score = extras.getInt("QuizResult");
             setScore(score);
         }else{
             startActivityWithFlags(
-                    this, ContributionsActivity.class, Intent.FLAG_ACTIVITY_CLEAR_TOP,
+                    this, MainActivity.class, Intent.FLAG_ACTIVITY_CLEAR_TOP,
                     Intent.FLAG_ACTIVITY_SINGLE_TOP);
             super.onBackPressed();
         }
@@ -87,14 +79,14 @@ public class QuizResultActivity extends AppCompatActivity {
     @OnClick(R.id.quiz_result_next)
     public void launchContributionActivity(){
         startActivityWithFlags(
-                this, ContributionsActivity.class, Intent.FLAG_ACTIVITY_CLEAR_TOP,
+                this, MainActivity.class, Intent.FLAG_ACTIVITY_CLEAR_TOP,
                 Intent.FLAG_ACTIVITY_SINGLE_TOP);
     }
 
     @Override
     public void onBackPressed() {
         startActivityWithFlags(
-                this, ContributionsActivity.class, Intent.FLAG_ACTIVITY_CLEAR_TOP,
+                this, MainActivity.class, Intent.FLAG_ACTIVITY_CLEAR_TOP,
                 Intent.FLAG_ACTIVITY_SINGLE_TOP);
         super.onBackPressed();
     }
@@ -186,22 +178,13 @@ public class QuizResultActivity extends AppCompatActivity {
         AlertDialog.Builder alertadd = new AlertDialog.Builder(QuizResultActivity.this);
         LayoutInflater factory = LayoutInflater.from(QuizResultActivity.this);
         final View view = factory.inflate(R.layout.image_alert_layout, null);
-        ImageView screenShotImage = (ImageView) view.findViewById(R.id.alert_image);
+        ImageView screenShotImage = view.findViewById(R.id.alert_image);
         screenShotImage.setImageBitmap(screenshot);
-        TextView shareMessage = (TextView) view.findViewById(R.id.alert_text);
+        TextView shareMessage = view.findViewById(R.id.alert_text);
         shareMessage.setText(R.string.quiz_result_share_message);
         alertadd.setView(view);
-        alertadd.setPositiveButton(R.string.about_translate_proceed, new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int which) {
-                shareScreen(screenshot);
-            }
-        });
-        alertadd.setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                dialog.cancel();
-            }
-        });
+        alertadd.setPositiveButton(R.string.about_translate_proceed, (dialog, which) -> shareScreen(screenshot));
+        alertadd.setNegativeButton(android.R.string.cancel, (dialog, which) -> dialog.cancel());
         alertadd.show();
     }
 }

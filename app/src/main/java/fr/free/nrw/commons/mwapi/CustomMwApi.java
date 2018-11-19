@@ -58,7 +58,7 @@ public class CustomMwApi {
     }
 
     public String getAuthCookie() {
-        if(authCookie == null){
+        if (authCookie == null){
             authCookie = "";
             List<Cookie> cookies = client.getCookieStore().getCookies();
             for(Cookie cookie: cookies) {
@@ -102,14 +102,14 @@ public class CustomMwApi {
     }
 
     public String getUserID() throws IOException {
-        if(this.userID == null || this.userID.equals("0")) {
+        if (this.userID == null || this.userID.equals("0")) {
             this.validateLogin();
         }
         return userID;
     }
 
     public String getUserName() throws IOException {
-        if(this.userID == null || this.userID.equals("0")) {
+        if (this.userID == null || this.userID.equals("0")) {
             this.validateLogin();
         }
         return userName;
@@ -122,7 +122,7 @@ public class CustomMwApi {
             String token = tokenData.getString("/api/login/@token");
             CustomApiResult confirmData = this.action("login").param("lgname", username).param("lgpassword", password).param("lgtoken", token).post();
             String finalResult = confirmData.getString("/api/login/@result");
-            if(finalResult.equals("Success")) {
+            if (finalResult.equals("Success")) {
                 isLoggedIn = true;
             }
             return finalResult;
@@ -149,7 +149,7 @@ public class CustomMwApi {
                 .data("comment", comment)
                 .data("filename", filename)
                 .sendProgressListener(uploadProgressListener);
-        if(length != -1) {
+        if (length != -1) {
             builder.file("file", filename, file, length);
         } else {
             builder.file("file", filename, file);

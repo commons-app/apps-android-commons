@@ -66,7 +66,7 @@ public class FileUtils {
      */
     public static boolean checkIfDirectoryExists(String pathToCheck) {
         File director = new File(pathToCheck);
-        if(director.exists() && director.isDirectory()) {
+        if (director.exists() && director.isDirectory()) {
             return true;
         } else {
             return false;

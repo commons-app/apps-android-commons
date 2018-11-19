@@ -6,14 +6,19 @@
 * Strainu
 -->
 <resources>
+  <string name="title_activity_explore">Explorare</string>
+  <string name="navigation_item_explore">Explorare</string>
   <string name="preference_category_appearance">Aspect</string>
   <string name="preference_category_general">General</string>
+  <string name="preference_category_feedback">Feedback</string>
   <string name="preference_category_location">Locație</string>
   <string name="app_name">Commons</string>
   <string name="bullet">•</string>
   <string name="menu_settings">Setări</string>
+  <string name="intent_share_upload_label">Încarcă la Commons</string>
   <string name="username">Nume de utilizator</string>
   <string name="password">Parolă</string>
+  <string name="login_credential">Intrați în contul dumneavoastră Commons Beta</string>
   <string name="login">Autentificare</string>
   <string name="forgot_password">V-aţi  uitat parola?</string>
   <string name="signup">Înregistrare</string>
@@ -86,11 +91,13 @@
   <string name="categories_activity_title">Categorii</string>
   <string name="title_activity_settings">Setări</string>
   <string name="title_activity_signup">Înregistrare</string>
+  <string name="title_activity_featured_images">Imagini recomandate</string>
   <string name="title_activity_category_details">Categorie</string>
   <string name="menu_about">Despre</string>
   <string name="about_license">Aplicația Wikimedia Commons este un software cu sursă deschisă creat și menținut de bursieri și voluntari ai comunității Wikimedia. Fundația Wikimedia nu este implicată în crearea, dezvoltarea sau mentenanța aplicației.</string>
   <string name="about_improve">Creați un nou &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;tichet pe GitHub&lt;/a&gt; pentru a raporta buguri sau sugestii.</string>
-  <string name="about_privacy_policy" fuzzy="true">&lt;a href=\"https://github.com/commons-app/apps-android-commons/wiki/Privacy-policy\"&gt;Politica de confidențialitate&lt;/a&gt;</string>
+  <string name="about_privacy_policy">&lt;u&gt;Politica de confidențialitate&lt;/u&gt;</string>
+  <string name="about_credits">&lt;u&gt;Autori&lt;/u&gt;</string>
   <string name="title_activity_about">Despre</string>
   <string name="menu_feedback">Trimitere reacții (prin e-mail)</string>
   <string name="no_email_client">Niciun client de email instalat</string>
@@ -101,7 +108,8 @@
   <string name="menu_cancel_upload">Revocare</string>
   <string name="share_license_summary">Această imagine va fi licențiată sub %1$s</string>
   <string name="menu_download">Descarcă</string>
-  <string name="preference_license" fuzzy="true">Licență</string>
+  <string name="preference_license">Licență implicită</string>
+  <string name="use_previous">Folosiți titlul/descrierea anterioară</string>
   <string name="allow_gps">Obține în mod automat locația curentă</string>
   <string name="preference_theme">Mod de noapte</string>
   <string name="preference_theme_summary">Folosește o temă întunecată</string>
@@ -151,9 +159,16 @@
   <string name="media_detail_media_title">Titlul fișierului</string>
   <string name="media_detail_description">Descriere</string>
   <string name="media_detail_description_explanation">Descrierea fișierului vine aici. Aceasta poate fi destul de lungă și va trebuie distribuită pe mai multe linii. Sperăm totuși că arată bine.</string>
+  <string name="media_detail_author">Autor</string>
+  <string name="media_detail_uploaded_date">Data încărcării</string>
+  <string name="media_detail_license">Licență</string>
+  <string name="media_detail_coordinates">Coordonate</string>
+  <string name="media_detail_coordinates_empty">Nefurnizat</string>
   <string name="become_a_tester_title">Deveniți beta-tester</string>
   <string name="become_a_tester_description">Abonați-vă la canalul nostru beta pe Google Play și a obține acces rapid la noi caracteristici și corecții de erori</string>
   <string name="_2fa_code">Code 2FA</string>
+  <string name="maximum_limit">Limită maximă</string>
+  <string name="maximum_limit_alert">Nu pot afișa mai mult de 500</string>
   <string name="commons_logo">Logoul Commons</string>
   <string name="commons_website">Site-ul Commons</string>
   <string name="commons_facebook">Pagina de Facebook a Commons</string>
@@ -180,4 +195,36 @@
   <string name="navigation_item_info">Tutorial</string>
   <string name="navigation_item_notification">Notificări</string>
   <string name="nearby_info_menu_wikidata_article">Element Wikidata</string>
+  <string name="view_browser">Vizualizează cu navigatorul</string>
+  <string name="skip_login">Omite</string>
+  <string name="navigation_item_login">Autentificare</string>
+  <string name="about_rate_us">&lt;u&gt;Dă-ne o notă&lt;/u&gt;</string>
+  <string name="about_faq">&lt;u&gt;FAQ&lt;/u&gt;</string>
+  <string name="welcome_skip_button">Sari peste tutorial</string>
+  <string name="no_internet">Nu aveți internet</string>
+  <string name="internet_established">Aveți internet</string>
+  <string name="about_translate">&lt;u&gt;Tranduceți&lt;/u&gt;</string>
+  <string name="about_translate_title">Limbi</string>
+  <string name="image_uploaded_by">Încărcată de: %1$s</string>
+  <string name="appwidget_img">Imaginea zilei</string>
+  <string name="app_widget_heading">Imaginea zilei</string>
+  <string name="menu_search_button">Căutare</string>
+  <string name="search_commons">Căutare pe Commons</string>
+  <string name="title_activity_search">Căutare</string>
+  <string name="search_recent_header">Căutări recente:</string>
+  <string name="quiz">Quiz</string>
+  <string name="question">Întrebare</string>
+  <string name="result">Rezultat</string>
+  <string name="continue_message">Continuați</string>
+  <string name="correct">Răspuns corect</string>
+  <string name="wrong">Răspuns greșit</string>
+  <string name="add_description">+Adaugă descriere</string>
+  <string name="navigation_item_bookmarks">Semne de carte</string>
+  <string name="title_activity_bookmarks">Semne de carte</string>
+  <string name="title_page_bookmarks_pictures">Imagini</string>
+  <string name="title_page_bookmarks_locations">Locuri</string>
+  <string name="menu_bookmark">Adaugă/scoate din semnele de carte</string>
+  <string name="provider_bookmarks">Semne de carte</string>
+  <string name="bookmark_empty">Nu ați adăugat niciun semn de carte</string>
+  <string name="provider_bookmarks_location">Semne de carte</string>
 </resources>

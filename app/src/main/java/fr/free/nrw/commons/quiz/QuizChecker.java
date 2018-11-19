@@ -73,7 +73,7 @@ public class QuizChecker {
      */
     private void setTotalUploadCount(int uploadCount) {
         totalUploadCount = uploadCount - countPref.getInt(UPLOAD_SHARED_PREFERENCE,0);
-        if( totalUploadCount < 0){
+        if ( totalUploadCount < 0){
             totalUploadCount = 0;
             countPref.edit().putInt(UPLOAD_SHARED_PREFERENCE,0).apply();
         }
@@ -104,7 +104,7 @@ public class QuizChecker {
      */
     private void setRevertParameter(int revertCountFetched) {
         revertCount = revertCountFetched - revertPref.getInt(REVERT_SHARED_PREFERENCE,0);
-        if(revertCount < 0){
+        if (revertCount < 0){
             revertCount = 0;
             revertPref.edit().putInt(REVERT_SHARED_PREFERENCE, 0).apply();
         }
@@ -116,7 +116,7 @@ public class QuizChecker {
      * to check whether the criterion to call quiz is satisfied
      */
     private void calculateRevertParameter() {
-        if( revertCount < 0 || totalUploadCount < 0){
+        if ( revertCount < 0 || totalUploadCount < 0){
             revertPref.edit().putInt(REVERT_SHARED_PREFERENCE, 0).apply();
             countPref.edit().putInt(UPLOAD_SHARED_PREFERENCE,0).apply();
             return;
