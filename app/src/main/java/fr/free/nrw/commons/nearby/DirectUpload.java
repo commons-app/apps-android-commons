@@ -47,11 +47,11 @@ class DirectUpload {
                     fragment.getActivity().requestPermissions(new String[]{READ_EXTERNAL_STORAGE}, PermissionUtils.GALLERY_PERMISSION_FROM_NEARBY_MAP);
                 }
             } else {
-                controller.startGalleryPick();
+                controller.startSingleGalleryPick();
             }
         }
         else {
-            controller.startGalleryPick();
+            controller.startSingleGalleryPick();
         }
     }
 

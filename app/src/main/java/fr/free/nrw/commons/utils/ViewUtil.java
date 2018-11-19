@@ -2,6 +2,7 @@ package fr.free.nrw.commons.utils;
 
 import android.app.Activity;
 import android.content.Context;
+import android.support.annotation.StringRes;
 import android.support.design.widget.Snackbar;
 import android.view.Display;
 import android.view.View;
@@ -30,6 +31,30 @@ public class ViewUtil {
         }
 
         ExecutorUtils.uiExecutor().execute(() -> Toast.makeText(context, text, Toast.LENGTH_LONG).show());
+    }
+
+    public static void showLongToast(Context context, @StringRes int stringResourceId) {
+        if (context == null) {
+            return;
+        }
+
+        ExecutorUtils.uiExecutor().execute(() -> Toast.makeText(context, context.getString(stringResourceId), Toast.LENGTH_LONG).show());
+    }
+
+    public static void showShortToast(Context context, String text) {
+        if (context == null) {
+            return;
+        }
+
+        ExecutorUtils.uiExecutor().execute(() -> Toast.makeText(context, text, Toast.LENGTH_SHORT).show());
+    }
+
+    public static void showShortToast(Context context, @StringRes int stringResourceId) {
+        if (context == null) {
+            return;
+        }
+
+        ExecutorUtils.uiExecutor().execute(() -> Toast.makeText(context, context.getString(stringResourceId), Toast.LENGTH_SHORT).show());
     }
 
     public static boolean isPortrait(Context context) {

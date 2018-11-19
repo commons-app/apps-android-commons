@@ -546,7 +546,6 @@ public class ContributionsFragment
 
 
     private void updateClosestNearbyCardViewInfo() {
-
         curLatLng = locationManager.getLastLocation();
 
         placesDisposable = Observable.fromCallable(() -> nearbyController
