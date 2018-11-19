@@ -1,5 +1,6 @@
 package fr.free.nrw.commons.category;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,7 +12,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import fr.free.nrw.commons.R;
 
-class CategoriesRenderer extends Renderer<CategoryItem> {
+public class CategoriesRenderer extends Renderer<CategoryItem> {
     @BindView(R.id.tvName) CheckedTextView checkedView;
     private final CategoryClickedListener listener;
 
@@ -44,11 +45,8 @@ class CategoriesRenderer extends Renderer<CategoryItem> {
     @Override
     public void render() {
         CategoryItem item = getContent();
+        Log.e("Commons", "Rendering: "+item);
         checkedView.setChecked(item.isSelected());
         checkedView.setText(item.getName());
-    }
-
-    interface CategoryClickedListener {
-        void categoryClicked(CategoryItem item);
     }
 }

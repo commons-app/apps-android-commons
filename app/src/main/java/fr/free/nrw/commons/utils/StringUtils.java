@@ -12,4 +12,8 @@ public class StringUtils {
             return Html.fromHtml(source).toString();
         }
     }
+
+    public static boolean isNullOrWhiteSpace(String value) {
+        return value == null || value.trim().isEmpty();
+    }
 }
