@@ -244,7 +244,7 @@
   <string name="use_external_storage_summary">Tallenna sovelluksen sisäisen kameran kanssa otetut kuvat laitteellesi</string>
   <string name="login_to_your_account">Kirjaudu tilillesi</string>
   <string name="send_log_file">Lähetä lokitiedosto</string>
-  <string name="send_log_file_description" fuzzy="true">Lähetä lokitiedosto kehittäjille sähköpostin kautta</string>
+  <string name="send_log_file_description">Lähetä lokitiedosto kehittäjille sähköpostin välityksellä auttaaksesi sovelluksen ongelmien korjaamisessa. Huomautus: lokit saattavat mahdollisesti sisältää tunnistettavaa tietoa</string>
   <string name="no_web_browser">Ei verkkoselainta jolla avata URL-osoite</string>
   <string name="null_url">Virhe! URL-osoitetta ei löytynyt</string>
   <string name="nominate_deletion">Ehdotettu poistettavaksi</string>

@@ -2,6 +2,7 @@
 <!-- Authors:
 * Arash.pt
 * Ebraminio
+* Eshagh79
 * Fatemi127
 * Mehdi
 * Mjbmr
@@ -61,12 +62,14 @@
   <string name="add_title_toast">لطفاً نامی را برای این پرونده انتخاب کنید</string>
   <string name="share_description_hint">توضیحات</string>
   <string name="login_failed_network">قادر به ورود نیست - شکست شبکه‌ای</string>
+  <string name="login_failed_wrong_credentials">ورود به سیستم امکان پذیر نیست . لطفا نام کاربری و رمز عبور خود را بررسی کنید.</string>
   <string name="login_failed_throttled">تلاش ناموفق بیش از حد. لطفاً چند دقیقهٔ دیگر دوباره تلاش کنید</string>
   <string name="login_failed_blocked">پوزش، کاربر در ویکی‌انبار بسته شده‌است</string>
   <string name="login_failed_2fa_needed">باید تأیید دومرحله‌ای را فعال کنید.</string>
   <string name="login_failed_generic">ورود ناموفق بود</string>
   <string name="share_upload_button">بارگذاری</string>
   <string name="multiple_share_base_title">نام این مجموعه</string>
+  <string name="add_set_name_toast">لطفا یک نام برای آن قرار دهید.</string>
   <string name="provider_modifications">تغییرها</string>
   <string name="menu_upload_single">بارگذاری</string>
   <string name="categories_search_text_hint">جستجوی رده‌ها</string>
@@ -111,7 +114,7 @@
   <string name="preference_license">مجوز پیش‌فرض</string>
   <string name="use_previous">از عنوان/توضیحات پیشین استفاده کنید</string>
   <string name="allow_gps">دریافت خودکار موقعیت کنونی</string>
-  <string name="allow_gps_summary" fuzzy="true">درحال دریافت موقعیت برای پیشنهاد رده در صورتی که برچسب جغرافیایی وجود نداشته باشد.</string>
+  <string name="allow_gps_summary">درحال دریافت موقعیت برای پیشنهاد رده در صورتی که برچسب جغرافیایی وجود نداشته باشد.</string>
   <string name="preference_theme">حالت شبانه</string>
   <string name="preference_theme_summary">استفاده از حالت تیره</string>
   <string name="license_name_cc_by_sa_four">CC Attribution-ShareAlike 4.0</string>
@@ -138,10 +141,19 @@
   <string name="tutorial_1_subtext">تصاویر شما به مردم در اقصی نقاط دنیا کمک می‌کند!</string>
   <string name="tutorial_2_text">لطفاً تصاویری که توسط خودتان گرفته شده‌اند یا ایجاد شده‌اند را بارگذاری کنید:</string>
   <string name="tutorial_2_subtext">•اجسام طبیعی (گیاه، جانور، کوه)\n•اجسام کاربردی (دوچرخه، ایستگاه قطار)\n•افراد مشهور (شهردار، قهرمانان المپیک)</string>
+  <string name="tutorial_2_subtext_1">اشیاء طبیعی (گل ها، حیوانات، کوه ها)</string>
+  <string name="tutorial_2_subtext_2">اشیاء مفید (دوچرخه، ایستگاه قطار)</string>
+  <string name="tutorial_2_subtext_3">افراد معروف (شهردار، ورزشکاران المپیک که ملاقات کرده اید)</string>
   <string name="tutorial_3_text">لطفاً بارگذاری نکنید:</string>
   <string name="tutorial_3_subtext">-سلفی خودتان یا تصویر دوستانتان\n-تصاویری که از اینترنت دانلود کردید\n-نماگرفت از دیگر اپلیکیشن‌‌ها</string>
+  <string name="tutorial_3_subtext_1">سلفی یا تصویر از دوستانتان</string>
+  <string name="tutorial_3_subtext_2">تصاویری که از اینترنت دانلود کرده اید</string>
+  <string name="tutorial_3_subtext_3">عکس از صفحه از برنامه های اختصاصی</string>
   <string name="tutorial_4_text">نمونه بارگذاری:</string>
   <string name="tutorial_4_subtext">-عنوان: خانهٔ اپرای سیدنی\n-توضیحات: خانهٔ اپرای سیدنی از آن طرف خلیج\n-رده‌ها: Sydney Opera House from the west, Sydney Opera House remote views</string>
+  <string name="tutorial_4_subtext_1">عنوان: اپرای سیدنی</string>
+  <string name="tutorial_4_subtext_2">توضیحات: خانه اپرای سیدنی از سراسر خلیج دیده شده است</string>
+  <string name="tutorial_4_subtext_3">دسته بندی: خانه اپرای سیدنی از غرب، منظره دیدنی اپرای سیدنی</string>
   <string name="welcome_wikipedia_text">عکس‌های خود را به اشتراک بگذارید. به ویکی‌پدیا کمک کنید تا مقالاتش زنده شوند!</string>
   <string name="welcome_wikipedia_subtext">ویکی‌پدیا از تصویرهای ویکی‌انبار استفاده می‌کند.</string>
   <string name="welcome_copyright_text">تصویرهای شما به مطالعهٔ مردم در سراسر دنیا کمک می‌کنند.</string>
@@ -156,7 +168,7 @@
   <string name="detail_license_empty">مجوز ناشناخته</string>
   <string name="menu_refresh">تازه‌کردن</string>
   <string name="read_storage_permission_rationale">اجازه‌های مورد نیاز: مطالعهٔ حافظهٔ خارجی. اپلیکیشن بدون آن نمی‌تواند کار کند.</string>
-  <string name="write_storage_permission_rationale" fuzzy="true">اجازه‌های مورد نیاز: نوشتن حافظهٔ خارجی. اپلیکیشن بدون آن نمی‌تواند کار کند.</string>
+  <string name="write_storage_permission_rationale">اجازه‌های مورد نیاز: نوشتن در حافظهٔ خارجی. اپلیکیشن نمیتواند به دبین دسترسی داشته باشد.</string>
   <string name="location_permission_rationale">اجازه‌های اختیاری: دریافت موقعیت برای پیشنهاد رده</string>
   <string name="ok">تأیید</string>
   <string name="title_activity_nearby">مکان‌‌های اطراف</string>
@@ -170,6 +182,7 @@
   <string name="media_detail_description">توضیح</string>
   <string name="media_detail_description_explanation">توضیحات رسانه اینجا می‌روند. امکان دارد طولانی باشد و نیاز به چند خط شدن داشته باشد. امیدواریم خوب دیده شود.</string>
   <string name="media_detail_author">نویسنده</string>
+  <string name="media_detail_author_explanation">تصویر نویسنده و نام کاربری در اینجا نمایش داده میشود.</string>
   <string name="media_detail_uploaded_date">تاریخ بارگذاری</string>
   <string name="media_detail_license">مجوز</string>
   <string name="media_detail_coordinates">مختصات‌ها</string>
@@ -234,10 +247,15 @@
   <string name="no_web_browser">مرورگر اینترنتی برای باز کردن نشانی یافت نشد</string>
   <string name="null_url">خطا! نشانی یافت نشد</string>
   <string name="nominate_deletion">نامزد شده برای حذف</string>
+  <string name="nominated_for_deletion">این تصویر برای حذف شدن علامت گذاری شده.</string>
   <string name="nominated_see_more"> .</string>
   <string name="view_browser">مشاهده در مرورگر</string>
   <string name="skip_login">رها کردن</string>
   <string name="navigation_item_login">ورود به سامانه</string>
+  <string name="skip_login_title">آیا واقعا میخواهید وارد شوید؟</string>
+  <string name="skip_login_message">شما نمیتوانید تصاویر را آپلود کنید.</string>
+  <string name="login_alert_message">لطفا برای استفاده از این ویژگی وارد شوید</string>
+  <string name="copy_wikicode">از ویکی واژه به کلیپ برد کپی کنید.</string>
   <string name="nearby_location_has_not_changed">مکان تغییر نکرده‌است.</string>
   <string name="nearby_location_not_available">مکان موجود نیست.</string>
   <string name="location_permission_rationale_nearby">برای نمایش مکان‌ّای اطراف نیاز به اجازه است.</string>
