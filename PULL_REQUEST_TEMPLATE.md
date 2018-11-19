@@ -1,19 +1,17 @@
-## Title (required)
+**Description (required)**
 
-Fixes #{GitHub issue number and title (Please do not forget adding title) } 
+Fixes #{GitHub issue number} {Github issue title}
 
-## Description (required)
+What changes did you make and why?
 
-Fixes #{GitHub issue number and title}
+**Tests performed (required)**
 
-{Describe the changes made and why they were made.}
+Tested {build variant, e.g. ProdDebug} on {name of device or emulator} with API level {API level}.
 
-## Tests performed (required)
+**Screenshots showing what changed (optional - for UI changes)**
 
-Tested on {API level & name of device/emulator}, with {build variant, e.g. ProdDebug}.
+Need help? See https://support.google.com/android/answer/9075928
 
-## Screenshots showing what changed (optional)
- 
-{Only for user interface changes, otherwise remove this section. See [how to take a screenshot](https://android.stackexchange.com/questions/1759/how-to-take-a-screenshot-with-an-android-device)}
+---
 
 _Note: Please ensure that you have read CONTRIBUTING.md if this is your first pull request._

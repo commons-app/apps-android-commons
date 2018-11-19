@@ -45,6 +45,7 @@ import fr.free.nrw.commons.MediaDataExtractor;
 import fr.free.nrw.commons.MediaWikiImageView;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.category.CategoryDetailsActivity;
+import fr.free.nrw.commons.contributions.ContributionsFragment;
 import fr.free.nrw.commons.delete.DeleteTask;
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
 import fr.free.nrw.commons.location.LatLng;
@@ -145,7 +146,7 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        detailProvider = (MediaDetailPagerFragment.MediaDetailProvider) getActivity();
+        detailProvider = (MediaDetailPagerFragment.MediaDetailProvider) (getParentFragment().getParentFragment());
 
         if (savedInstanceState != null) {
             editable = savedInstanceState.getBoolean("editable");
@@ -204,12 +205,14 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
         };
         view.getViewTreeObserver().addOnGlobalLayoutListener(layoutListener);
         locale = getResources().getConfiguration().locale;
+
         return view;
     }
 
     @Override
     public void onResume() {
         super.onResume();
+        ((ContributionsFragment)(getParentFragment().getParentFragment())).nearbyNoificationCardView.setVisibility(View.GONE);
         media = detailProvider.getMediaAtPosition(index);
         if (media == null) {
             // Ask the detail provider to ping us when we're ready
@@ -253,7 +256,7 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
             @Override
             protected Boolean doInBackground(Void... voids) {
                 // Local files have no filename yet
-                if(media.getFilename() == null) {
+                if (media.getFilename() == null) {
                     return Boolean.FALSE;
                 }
                 try {
@@ -325,7 +328,7 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
         }
         rebuildCatList();
 
-        if(media.getCreator() == null || media.getCreator().equals("")) {
+        if (media.getCreator() == null || media.getCreator().equals("")) {
             authorLayout.setVisibility(GONE);
         } else {
             author.setText(media.getCreator());
@@ -339,7 +342,7 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
         if (!TextUtils.isEmpty(licenseLink(media))) {
             openWebBrowser(licenseLink(media));
         } else {
-            if(isCategoryImage) {
+            if (isCategoryImage) {
                 Timber.d("Unable to fetch license URL for %s", media.getLicense());
             } else {
                 Toast toast = Toast.makeText(getContext(), getString(R.string.null_url), Toast.LENGTH_SHORT);
@@ -376,17 +379,13 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
         final EditText input = new EditText(getActivity());
         alert.setView(input);
         input.requestFocus();
-        alert.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int whichButton) {
-                String reason = input.getText().toString();
-                DeleteTask deleteTask = new DeleteTask(getActivity(), media, reason);
-                deleteTask.execute();
-                enableDeleteButton(false);
-            }
+        alert.setPositiveButton(R.string.ok, (dialog, whichButton) -> {
+            String reason = input.getText().toString();
+            DeleteTask deleteTask = new DeleteTask(getActivity(), media, reason);
+            deleteTask.execute();
+            enableDeleteButton(false);
         });
-        alert.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int whichButton) {
-            }
+        alert.setNegativeButton(R.string.cancel, (dialog, whichButton) -> {
         });
         AlertDialog d = alert.create();
         input.addTextChangedListener(new TextWatcher() {
@@ -418,14 +417,14 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
 
     @OnClick(R.id.seeMore)
     public void onSeeMoreClicked(){
-        if(nominatedForDeletion.getVisibility()== VISIBLE) {
+        if (nominatedForDeletion.getVisibility()== VISIBLE) {
             openWebBrowser(media.getFilePageTitle().getMobileUri().toString());
         }
     }
 
     private void enableDeleteButton(boolean visibility) {
         delete.setEnabled(visibility);
-        if(visibility) {
+        if (visibility) {
             delete.setTextColor(getResources().getColor(R.color.primaryTextColor));
         } else {
             delete.setTextColor(getResources().getColor(R.color.deleteButtonLight));
@@ -435,15 +434,26 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
     private void rebuildCatList() {
         categoryContainer.removeAllViews();
         // @fixme add the category items
-        for (String cat : categoryNames) {
-            View catLabel = buildCatLabel(cat, categoryContainer);
+
+        //As per issue #1826(see https://github.com/commons-app/apps-android-commons/issues/1826), some categories come suffixed with strings prefixed with |. As per the discussion
+        //that was meant for alphabetical sorting of the categories and can be safely removed.
+        for (int i = 0; i < categoryNames.size(); i++) {
+            String categoryName = categoryNames.get(i);
+            //Removed everything after '|'
+            int indexOfPipe = categoryName.indexOf('|');
+            if (indexOfPipe != -1) {
+                categoryName = categoryName.substring(0, indexOfPipe);
+                //Set the updated category to the list as well
+                categoryNames.set(i, categoryName);
+            }
+            View catLabel = buildCatLabel(categoryName, categoryContainer);
             categoryContainer.addView(catLabel);
         }
     }
 
     private View buildCatLabel(final String catName, ViewGroup categoryContainer) {
         final View item = LayoutInflater.from(getContext()).inflate(R.layout.detail_category_item, categoryContainer, false);
-        final CompatTextView textView = (CompatTextView) item.findViewById(R.id.mediaDetailCategoryItemText);
+        final CompatTextView textView = item.findViewById(R.id.mediaDetailCategoryItemText);
 
         textView.setText(catName);
         if (categoriesLoaded && categoriesPresent) {

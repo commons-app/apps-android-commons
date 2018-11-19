@@ -6,13 +6,13 @@
     android:clickable="true"
     android:focusable="true"
     android:focusableInTouchMode="true"
+    android:nestedScrollingEnabled="false"
     android:paddingBottom="@dimen/small_gap"
     android:paddingEnd="@dimen/standard_gap"
     android:paddingLeft="@dimen/standard_gap"
     android:paddingRight="@dimen/standard_gap"
     android:paddingStart="@dimen/standard_gap"
     android:paddingTop="@dimen/small_gap"
-    android:nestedScrollingEnabled="false"
     android:theme="@style/DarkAppTheme">
 
     <LinearLayout
@@ -31,39 +31,42 @@
                 android:layout_height="wrap_content"
                 android:drawableEnd="@drawable/mapbox_info_icon_default"
                 android:drawableRight="@drawable/mapbox_info_icon_default"
-                android:maxLines="1"
-                android:maxLength="80"
                 android:hint="@string/share_title_hint"
                 android:imeOptions="flagNoExtractUi"
                 android:inputType="text"
+                android:maxLength="80"
+                android:maxLines="1"
                 android:scrollHorizontally="false" />
         </android.support.design.widget.TextInputLayout>
 
         <LinearLayout
-          android:layout_width="match_parent"
-          android:layout_height="wrap_content"
-          android:orientation="vertical">
-        <android.support.v7.widget.RecyclerView
-          android:id="@+id/rv_descriptions"
-          android:layout_width="match_parent"
-          android:layout_height="wrap_content"/>
-          <LinearLayout
-            android:layout_marginTop="4dp"
-            android:orientation="horizontal"
-            android:id="@+id/ll_add_description"
-            android:layout_width="wrap_content"
-            android:layout_gravity="right"
-            android:gravity="right"
-            android:padding="10dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            >
-            <TextView
-              style="@style/TextAppearance.AppCompat.Body1"
-              android:text="@string/add_description"
-              android:layout_width="wrap_content"
-              android:layout_height="wrap_content"/>
-          </LinearLayout>
+            android:orientation="vertical">
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/rv_descriptions"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <LinearLayout
+                android:id="@+id/ll_add_description"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:layout_marginTop="4dp"
+                android:gravity="right"
+                android:orientation="horizontal"
+                android:padding="10dp">
+
+                <TextView
+                    style="@style/TextAppearance.AppCompat.Body1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/add_description" />
+            </LinearLayout>
         </LinearLayout>
+
         <Spinner
             android:id="@+id/licenseSpinner"
             android:layout_width="match_parent"
@@ -82,10 +85,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/standard_gap"
-            android:gravity="center"
             android:clickable="true"
-            android:textColorLink="@color/button_blue"
-            android:text="@string/share_license_summary" />
+            android:gravity="center"
+            android:text="@string/share_license_summary"
+            android:textColorLink="@color/button_blue" />
 
         <fr.free.nrw.commons.ui.widget.HtmlTextView
             android:id="@+id/media_upload_policy"

@@ -169,7 +169,7 @@
   <string name="title_activity_nearby">Mesta u blizini</string>
   <string name="no_nearby">Nisu pronađena obližnja mesta</string>
   <string name="warning">Upozorenje</string>
-  <string name="file_exists">Ova datoteka je već dostupna na Ostavi. Da li ste sigurni da želite da nastavite?</string>
+  <string name="upload_image_problem_duplicate">Ova datoteka je već dostupna na Ostavi. Da li ste sigurni da želite da nastavite?</string>
   <string name="yes">Da</string>
   <string name="no">Ne</string>
   <string name="media_detail_title">Naslov</string>

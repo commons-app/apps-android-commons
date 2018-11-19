@@ -81,6 +81,7 @@
   <string name="categories_activity_title">Kategoriyi</string>
   <string name="title_activity_settings">Sazi</string>
   <string name="title_activity_signup">Qeyd be</string>
+  <string name="title_activity_category_details">Kategoriye</string>
   <string name="menu_about">Heq te cı</string>
   <string name="about_improve">Qandê yew &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;GitHub-cıkewtış&lt;/a&gt;ê neweyi rê rapor û teklifan bıaferne.</string>
   <string name="about_privacy_policy">&lt;u&gt;Politikaya nımıtışi&lt;/u&gt;</string>
@@ -137,7 +138,11 @@
   <string name="navigation_item_home">Keye</string>
   <string name="navigation_item_upload">Bar ke</string>
   <string name="navigation_item_logout">Veciyayış</string>
+  <string name="navigation_item_login">Cı kewe</string>
+  <string name="about_translate_title">Zıwani</string>
   <string name="about_translate_cancel">Bıtexelne</string>
   <string name="retry">Anciya bıcerrebne</string>
   <string name="showcase_view_got_it_button">Mı fehm kerd!</string>
+  <string name="menu_search_button">Cıgeyrayış</string>
+  <string name="title_activity_search">Cıgeyrayış</string>
 </resources>
