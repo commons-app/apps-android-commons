@@ -31,6 +31,7 @@ dependencies {
         transitive = true
     }
     implementation 'com.github.deano2390:MaterialShowcaseView:1.2.0'
+
     //noinspection GradleCompatible
     implementation "com.android.support:support-v4:$SUPPORT_LIB_VERSION"
     implementation "com.android.support:appcompat-v7:$SUPPORT_LIB_VERSION"
@@ -43,6 +44,7 @@ dependencies {
     implementation 'com.squareup.okio:okio:1.14.0'
     implementation 'io.reactivex.rxjava2:rxandroid:2.1.0'
     // Because RxAndroid releases are few and far between, it is recommended you also
+
     // explicitly depend on RxJava's latest version for bug fixes and new features.
     implementation 'io.reactivex.rxjava2:rxjava:2.2.0'
     implementation 'com.jakewharton.rxbinding2:rxbinding:2.1.1'
@@ -130,7 +132,7 @@ android {
     flavorDimensions 'tier'
     productFlavors {
         prod {
-		
+
 			applicationId 'fr.free.nrw.commons'
 
             buildConfigField "String", "WIKIMEDIA_API_POTD", "\"https://commons.wikimedia.org/w/api.php?action=featuredfeed&feed=potd&feedformat=rss&language=en\""

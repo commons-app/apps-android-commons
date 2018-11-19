@@ -144,7 +144,7 @@
   <string name="ok">OK</string>
   <string name="title_activity_nearby">Plaatsen in de buurt</string>
   <string name="warning">Waarschuwing</string>
-  <string name="file_exists">Dit bestand bestaat al op Commons. Weet u zeker dat u wilt doorgaan?</string>
+  <string name="upload_image_problem_duplicate">Dit bestand bestaat al op Commons. Weet u zeker dat u wilt doorgaan?</string>
   <string name="yes">Ja</string>
   <string name="no">Nee</string>
   <string name="media_detail_title">Titel</string>

@@ -1,5 +1,6 @@
 package fr.free.nrw.commons;
 
+import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -14,12 +15,11 @@ import android.widget.Toast;
 import org.apache.commons.codec.binary.Hex;
 import org.apache.commons.codec.digest.DigestUtils;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
+import java.util.LinkedHashMap;
 import java.util.Locale;
+import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -111,6 +111,31 @@ public class Utils {
     }
 
     /**
+     * Generates license url with given ID
+     * @param license License ID
+     * @return Url of license
+     */
+
+
+    @NonNull
+    public static String licenseUrlFor(String license) {
+        switch (license) {
+            case Prefs.Licenses.CC_BY_3:
+                return "https://creativecommons.org/licenses/by/3.0/";
+            case Prefs.Licenses.CC_BY_4:
+                return "https://creativecommons.org/licenses/by/4.0/";
+            case Prefs.Licenses.CC_BY_SA_3:
+                return "https://creativecommons.org/licenses/by-sa/3.0/";
+            case Prefs.Licenses.CC_BY_SA_4:
+                return "https://creativecommons.org/licenses/by-sa/4.0/";
+            case Prefs.Licenses.CC0:
+                return "https://creativecommons.org/publicdomain/zero/1.0/";
+            default:
+                throw new RuntimeException("Unrecognized license value: " + license);
+        }
+    }
+
+    /**
      * Adds extension to filename. Converts to .jpg if system provides .jpeg, adds .jpg if no extension detected
      * @param title File name
      * @param extension Correct extension
@@ -176,6 +201,18 @@ public class Utils {
         customTabsIntent.launchUrl(context, url);
     }
 
+    public static void handleGeoCoordinates(Context context, String coords) {
+        try {
+            Uri gmmIntentUri = Uri.parse("google.streetview:cbll=" + coords);
+            Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
+            mapIntent.setPackage("com.google.android.apps.maps");
+            context.startActivity(mapIntent);
+        } catch (ActivityNotFoundException ex) {
+            Toast toast = Toast.makeText(context, context.getString(R.string.map_application_missing), LENGTH_SHORT);
+            toast.show();
+        }
+    }
+
     /**
      * To take screenshot of the screen and return it in Bitmap format
      *
@@ -188,6 +225,16 @@ public class Utils {
         Bitmap bitmap = Bitmap.createBitmap(screenView.getDrawingCache());
         screenView.setDrawingCacheEnabled(false);
         return bitmap;
+    }
+
+    public static <K,V> Map<K,V>  arraysToMap(K[] kArray, V[] vArray){
+        if(kArray.length!=vArray.length)
+            throw new RuntimeException("arraysToMap array sizes don't match");
+        Map<K,V> map=new LinkedHashMap<>();
+        for (int i=0;i<vArray.length;i++){
+            map.put(kArray[i], vArray[i]);
+        }
+        return map;
     }
 
 }
