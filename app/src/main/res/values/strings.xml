@@ -345,6 +345,7 @@
 
   <string name="delete_recent_searches_dialog">Are you sure you want to clear your search history?</string>
   <string name="search_history_deleted">Search history deleted</string>
+  <string name="nominate_delete">Nominate For Deletion</string>
 
   <string name="Achievements">Achievements</string>
   <string name="statistics">STATISTICS</string>
@@ -396,6 +397,16 @@
   <string name="bookmark_empty">You haven\'t added any bookmarks</string>
   <string name="provider_bookmarks_location">Bookmarks</string>
   <string name="log_collection_started">Log collection started. Please RESTART the app, perform action that you wish to log, and then tap \'Send log file\' again</string>
+
+  <string name="deletion_reason_uploaded_by_mistake">I uploaded it by mistake</string>
+  <string name="deletion_reason_publicly_visible">I did not know it would be publicly visible</string>
+  <string name="deletion_reason_bad_for_my_privacy">I realized it is bad for my privacy</string>
+  <string name="deletion_reason_no_longer_want_public">I changed my mind, I don\'t want it to be publicly visible anymore</string>
+  <string name="deletion_reason_not_interesting">Sorry this picture is not interesting for an encyclopedia</string>
+  <string name="uploaded_by_myself">Uploaded by myself on</string>
+  <string name="used_by">,used in</string>
+  <string name="articles">articles</string>
+
   <string name="no_uploads">Welcome to Commons!\n
 Upload your first media by touching the camera or gallery icon above.</string>
 
