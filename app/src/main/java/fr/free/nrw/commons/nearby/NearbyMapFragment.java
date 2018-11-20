@@ -306,7 +306,7 @@ public class NearbyMapFragment extends DaggerFragment {
                                             curMapBoxLatLng.getLongitude())
                                     : curMapBoxLatLng ) // Sets the new camera position
                             .zoom(isBottomListSheetExpanded ?
-                                    ZOOM_LEVEL // zoom level is fixed to 18 when bottom sheet is expanded
+                                    ZOOM_LEVEL // zoom level is fixed when bottom sheet is expanded
                                     :mapboxMap.getCameraPosition().zoom) // Same zoom level
                             .build();
                 }else {
@@ -316,7 +316,7 @@ public class NearbyMapFragment extends DaggerFragment {
                                             curMapBoxLatLng.getLongitude())
                                     : curMapBoxLatLng ) // Sets the new camera position
                             .zoom(isBottomListSheetExpanded ?
-                                    ZOOM_LEVEL // zoom level is fixed to 18 when bottom sheet is expanded
+                                    ZOOM_LEVEL // zoom level is fixed when bottom sheet is expanded
                                     :mapboxMap.getCameraPosition().zoom) // Same zoom level
                             .build();
                 }
