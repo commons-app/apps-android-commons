@@ -19,7 +19,7 @@ public class BitmapUtils {
      */
     public static BitmapDrawable writeOnDrawable(Bitmap bm, String text, Context context){
         Bitmap.Config config = bm.getConfig();
-        if(config == null){
+        if (config == null){
             config = Bitmap.Config.ARGB_8888;
         }
         Bitmap bitmap = Bitmap.createBitmap(bm.getWidth(),bm.getHeight(),config);

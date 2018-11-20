@@ -139,7 +139,7 @@
   <string name="ok">Gerai</string>
   <string name="title_activity_nearby">Netoliese Esančios Vietos</string>
   <string name="warning">Įspėjimas</string>
-  <string name="file_exists">Šis failas jau egzistuoja Commons. Ar tikrai norite tęsti?</string>
+  <string name="upload_image_problem_duplicate">Šis failas jau egzistuoja Commons. Ar tikrai norite tęsti?</string>
   <string name="yes">Taip</string>
   <string name="no">Ne</string>
   <string name="media_detail_title">Pavadinimas</string>

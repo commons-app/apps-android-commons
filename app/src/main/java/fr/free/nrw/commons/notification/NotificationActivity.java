@@ -17,6 +17,7 @@ import android.widget.RelativeLayout;
 import com.pedrogomez.renderers.RVRendererAdapter;
 
 import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -25,6 +26,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.Utils;
+import fr.free.nrw.commons.contributions.MainActivity;
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
 import fr.free.nrw.commons.theme.NavigationBaseActivity;
 import fr.free.nrw.commons.utils.NetworkUtils;
@@ -85,6 +87,11 @@ public class NotificationActivity extends NavigationBaseActivity {
     private void addNotifications() {
         Timber.d("Add notifications");
 
+        // Store when add notification is called last
+        long currentDate = new Date(System.currentTimeMillis()).getTime();
+        getSharedPreferences("prefs", MODE_PRIVATE).edit().putLong("last_read_notification_date", currentDate).apply();
+        Timber.d("Set last notification read date to current date:"+ currentDate);
+
         if(mNotificationWorkerFragment == null){
             Observable.fromCallable(() -> {
                 progressBar.setVisibility(View.VISIBLE);
@@ -115,7 +122,7 @@ public class NotificationActivity extends NavigationBaseActivity {
     }
 
     private void setAdapter(List<Notification> notificationList) {
-        if(notificationList == null || notificationList.isEmpty()) {
+        if (notificationList == null || notificationList.isEmpty()) {
             ViewUtil.showSnackbar(relativeLayout, R.string.no_notifications);
             return;
         }
@@ -140,4 +147,10 @@ public class NotificationActivity extends NavigationBaseActivity {
                 .commit();
         mNotificationWorkerFragment.setNotificationList(notificationList);
     }
+
+    @Override
+    public void onBackPressed() {
+        startActivityWithFlags(
+                this, MainActivity.class, Intent.FLAG_ACTIVITY_CLEAR_TOP,
+                Intent.FLAG_ACTIVITY_SINGLE_TOP);    }
 }

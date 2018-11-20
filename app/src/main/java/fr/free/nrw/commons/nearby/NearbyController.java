@@ -39,6 +39,7 @@ public class NearbyController {
         this.prefs = prefs;
     }
 
+
     /**
      * Prepares Place list to make their distance information update later.
      *
@@ -46,15 +47,15 @@ public class NearbyController {
      * @return NearbyPlacesInfo a variable holds Place list without distance information
      * and boundary coordinates of current Place List
      */
-    public NearbyPlacesInfo loadAttractionsFromLocation(LatLng curLatLng) throws IOException {
-
+    public NearbyPlacesInfo loadAttractionsFromLocation(LatLng curLatLng, boolean returnClosestResult) throws IOException {
         Timber.d("Loading attractions near %s", curLatLng);
         NearbyPlacesInfo nearbyPlacesInfo = new NearbyPlacesInfo();
 
         if (curLatLng == null) {
+            Timber.d("Loading attractions neari, but curLatLng is null");
             return null;
         }
-        List<Place> places = nearbyPlaces.getFromWikidataQuery(curLatLng, Locale.getDefault().getLanguage());
+        List<Place> places = nearbyPlaces.getFromWikidataQuery(curLatLng, Locale.getDefault().getLanguage(), returnClosestResult);
 
         if (null != places && places.size() > 0) {
             LatLng[] boundaryCoordinates = {places.get(0).location,   // south
@@ -168,7 +169,7 @@ public class NearbyController {
     }
 
     public class NearbyPlacesInfo {
-        List<Place> placeList; // List of nearby places
-        LatLng[] boundaryCoordinates; // Corners of nearby area
+        public List<Place> placeList; // List of nearby places
+        public LatLng[] boundaryCoordinates; // Corners of nearby area
     }
 }

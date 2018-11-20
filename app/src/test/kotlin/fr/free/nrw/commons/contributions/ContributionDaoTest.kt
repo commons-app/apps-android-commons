@@ -279,7 +279,6 @@ class ContributionDaoTest {
                 assertEquals("file", it.filename)
                 assertEquals(localUri, it.localUri.toString())
                 assertEquals("image", it.imageUrl)
-                assertEquals(created, it.timestamp.time)
                 assertEquals(created, it.dateCreated.time)
                 assertEquals(STATE_QUEUED, it.state)
                 assertEquals(222L, it.dataLength)
@@ -299,7 +298,6 @@ class ContributionDaoTest {
     fun createFromCursor_nullableTimestamps() {
         createCursor(0L, 0L, false, localUri).let { mc ->
             testObject.fromCursor(mc).let {
-                assertNull(it.timestamp)
                 assertNull(it.dateCreated)
                 assertNull(it.dateUploaded)
             }
@@ -342,7 +340,6 @@ class ContributionDaoTest {
                 source = SOURCE_CAMERA
                 license = "007"
                 multiple = isMultiple
-                timestamp = Date(321L)
                 width = 640
                 height = 480  // VGA should be enough for anyone, right?
             }

@@ -36,6 +36,12 @@
             android:inputType="numberDecimal"
             android:maxLength="3" />
 
+        <fr.free.nrw.commons.ui.LongTitlePreferences.LongTitleSwitchPreference
+            android:key="displayNearbyCardView"
+            android:title="@string/display_nearby_notification"
+            android:defaultValue="true"
+            android:summary="@string/display_nearby_notification_summary" />
+
     </fr.free.nrw.commons.ui.LongTitlePreferences.LongTitlePreferenceCategory>
 
     <!-- The key 'allowGps' was used before and has since been removed based on the discussion at #1599.

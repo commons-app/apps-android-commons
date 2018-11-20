@@ -166,7 +166,7 @@
   <string name="title_activity_nearby">Luoghi nelle vicinanze</string>
   <string name="no_nearby">Nessun luogo trovato nelle vicinanze</string>
   <string name="warning">Attenzione</string>
-  <string name="file_exists">Questo file esiste già su Commons. Sei sicuro di voler continuare?</string>
+  <string name="upload_image_problem_duplicate">Questo file esiste già su Commons. Sei sicuro di voler continuare?</string>
   <string name="yes">Sì</string>
   <string name="no">No</string>
   <string name="media_detail_title">Titolo</string>

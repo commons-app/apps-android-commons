@@ -44,7 +44,7 @@ public class RadioGroupHelper {
     public RadioGroupHelper(View rootView, int... radiosIDs) {
         super();
         for (int radioButtonID : radiosIDs) {
-            add((RadioButton)rootView.findViewById(radioButtonID));
+            add(rootView.findViewById(radioButtonID));
         }
     }
 
@@ -58,7 +58,7 @@ public class RadioGroupHelper {
      */
     View.OnClickListener onClickListener = v -> {
         for (CompoundButton rb : radioButtons) {
-            if(rb != v) rb.setChecked(false);
+            if (rb != v) rb.setChecked(false);
         }
     };
 }

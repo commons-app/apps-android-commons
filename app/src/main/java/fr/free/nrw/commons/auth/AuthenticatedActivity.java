@@ -16,7 +16,8 @@ import static fr.free.nrw.commons.auth.AccountUtil.AUTH_COOKIE;
 
 public abstract class AuthenticatedActivity extends NavigationBaseActivity {
 
-    @Inject SessionManager sessionManager;
+    @Inject
+    protected SessionManager sessionManager;
     @Inject
     MediaWikiApi mediaWikiApi;
     private String authCookie;

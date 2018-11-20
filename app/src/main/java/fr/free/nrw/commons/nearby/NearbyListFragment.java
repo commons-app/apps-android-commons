@@ -73,7 +73,7 @@ public class NearbyListFragment extends DaggerFragment {
                              ViewGroup container,
                              Bundle savedInstanceState) {
         Timber.d("NearbyListFragment created");
-        View view = inflater.inflate(R.layout.fragment_nearby, container, false);
+        View view = inflater.inflate(R.layout.fragment_nearby_list, container, false);
         recyclerView = view.findViewById(R.id.listView);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 

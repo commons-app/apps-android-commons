@@ -48,12 +48,12 @@ public class WikidataEditService {
      * @param fileName
      */
     public void createClaimWithLogging(String wikidataEntityId, String fileName) {
-        if(wikidataEntityId == null) {
+        if (wikidataEntityId == null) {
             Timber.d("Skipping creation of claim as Wikidata entity ID is null");
             return;
         }
 
-        if(fileName == null) {
+        if (fileName == null) {
             Timber.d("Skipping creation of claim as fileName entity ID is null");
             return;
         }
