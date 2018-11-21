@@ -323,11 +323,9 @@ public class ContributionsFragment
                 if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     Timber.d("Location permission granted, refreshing view");
                     // No need to display permission request button anymore
-                    //nearbyNoificationCardView.displayPermissionRequestButton(false);
                     locationManager.registerLocationManager();
                 } else {
                     // Still ask for permission
-                    //nearbyNoificationCardView.displayPermissionRequestButton(true);
                     DialogUtil.showAlertDialog(getActivity(),
                             "Info",
                             "Please give permission",
@@ -531,7 +529,6 @@ public class ContributionsFragment
         if (!locationManager.isProviderEnabled()) {
             Timber.d("GPS is not enabled");
             nearbyNoificationCardView.permissionType = NearbyNoificationCardView.PermissionType.ENABLE_GPS;
-            //nearbyNoificationCardView.displayPermissionRequestButton(true);
             DialogUtil.showAlertDialog(getActivity(),
                     "Info",
                     "Please give permission",
@@ -547,11 +544,9 @@ public class ContributionsFragment
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             if (locationManager.isLocationPermissionGranted()) {
                 nearbyNoificationCardView.permissionType = NearbyNoificationCardView.PermissionType.NO_PERMISSION_NEEDED;
-                //nearbyNoificationCardView.displayPermissionRequestButton(false);
                 locationManager.registerLocationManager();
             } else {
                 nearbyNoificationCardView.permissionType = NearbyNoificationCardView.PermissionType.ENABLE_LOCATION_PERMISSON;
-                //nearbyNoificationCardView.displayPermissionRequestButton(true);
                 // If user didn't selected Don't ask again
                 if (shouldShowRequestPermissionRationale(Manifest.permission.ACCESS_FINE_LOCATION)) {
                         DialogUtil.showAlertDialog(getActivity(),
@@ -564,7 +559,6 @@ public class ContributionsFragment
         } else {
             // If device is under Marshmallow, we already checked for GPS
             nearbyNoificationCardView.permissionType = NearbyNoificationCardView.PermissionType.NO_PERMISSION_NEEDED;
-            //nearbyNoificationCardView.displayPermissionRequestButton(false);
             locationManager.registerLocationManager();
         }
     }
