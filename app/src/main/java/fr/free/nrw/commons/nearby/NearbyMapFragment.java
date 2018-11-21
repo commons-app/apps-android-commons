@@ -327,47 +327,6 @@ public class NearbyMapFragment extends DaggerFragment {
         }
     }
 
-    /**
-     * Updates camera position according to list sheet status. If list sheet is collapsed, camera
-     * focus should be in the center. If list sheet is expanded, camera focus should be visible
-     * on the gap between list sheet and tab layout.
-     * @param isBottomListSheetExpanded
-     */
-    private void updateMapCameraAccordingToBottomSheet(boolean isBottomListSheetExpanded) {
-        CameraPosition position;
-        this.isBottomListSheetExpanded = isBottomListSheetExpanded;
-        if (mapboxMap != null && curLatLng != null) {
-            if (isBottomListSheetExpanded) {
-                // Make camera to follow user on location change
-                if (ViewUtil.isPortrait(getActivity())) {
-                    position = new CameraPosition.Builder()
-                            .target(new LatLng(curLatLng.getLatitude() - CAMERA_TARGET_SHIFT_FACTOR_PORTRAIT,
-                                    curLatLng.getLongitude())) // Sets the new camera target above
-                            // current to make it visible when sheet is expanded
-                            .zoom(ZOOM_LEVEL) // Fixed zoom level
-                            .build();
-                } else {
-                    position = new CameraPosition.Builder()
-                            .target(new LatLng(curLatLng.getLatitude() - CAMERA_TARGET_SHIFT_FACTOR_LANDSCAPE,
-                                    curLatLng.getLongitude())) // Sets the new camera target above
-                            // current to make it visible when sheet is expanded
-                            .zoom(ZOOM_LEVEL) // Fixed zoom level
-                            .build();
-                }
-
-            } else {
-                // Make camera to follow user on location change
-                position = new CameraPosition.Builder()
-                        .target(new LatLng(curLatLng.getLatitude(),
-                                curLatLng.getLongitude())) // Sets the new camera target to curLatLng
-                        .zoom(mapboxMap.getCameraPosition().zoom) // Same zoom level
-                        .build();
-            }
-            mapboxMap.animateCamera(CameraUpdateFactory
-                    .newCameraPosition(position), 1000);
-        }
-    }
-
     private void initViews() {
         Timber.d("initViews called");
         bottomSheetList = ((NearbyFragment)getParentFragment()).view.findViewById(R.id.bottom_sheet);
@@ -496,9 +455,6 @@ public class NearbyMapFragment extends DaggerFragment {
             public void onStateChanged(@NonNull View bottomSheet, int newState) {
                 if (newState == BottomSheetBehavior.STATE_EXPANDED) {
                     bottomSheetDetailsBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
-                    updateMapCameraAccordingToBottomSheet(true);
-                } else {
-                    updateMapCameraAccordingToBottomSheet(false);
                 }
             }
 
