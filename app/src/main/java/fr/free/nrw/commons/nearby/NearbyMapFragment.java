@@ -135,7 +135,7 @@ public class NearbyMapFragment extends DaggerFragment {
     @Inject
     BookmarkLocationsDao bookmarkLocationDao;
 
-    private static final double ZOOM_LEVEL = 12f;
+    private static final double ZOOM_LEVEL = 14f;
 
     public NearbyMapFragment() {
     }
