@@ -20,6 +20,7 @@ import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.widget.CursorAdapter;
+import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -50,6 +51,8 @@ import fr.free.nrw.commons.notification.NotificationController;
 import fr.free.nrw.commons.notification.UnreadNotificationsCheckAsync;
 import fr.free.nrw.commons.settings.Prefs;
 import fr.free.nrw.commons.upload.UploadService;
+import fr.free.nrw.commons.utils.DialogUtil;
+import fr.free.nrw.commons.utils.ViewUtil;
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
@@ -102,7 +105,7 @@ public class ContributionsFragment
     private LatLng curLatLng;
 
     private boolean firstLocationUpdate = true;
-    private LocationServiceManager locationManager;
+    public LocationServiceManager locationManager;
 
     private boolean isFragmentAttachedBefore = false;
 
@@ -186,7 +189,9 @@ public class ContributionsFragment
         // show nearby card view on contributions list is visible
         if (nearbyNoificationCardView != null) {
             if (prefs.getBoolean("displayNearbyCardView", true)) {
-                nearbyNoificationCardView.setVisibility(View.VISIBLE);
+                if (nearbyNoificationCardView.cardViewVisibilityState == NearbyNoificationCardView.CardViewVisibilityState.READY) {
+                    nearbyNoificationCardView.setVisibility(View.VISIBLE);
+                }
             } else {
                 nearbyNoificationCardView.setVisibility(View.GONE);
             }
@@ -312,16 +317,22 @@ public class ContributionsFragment
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        Timber.d("onRequestPermissionsResult");
         switch (requestCode) {
             case LOCATION_REQUEST: {
                 if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     Timber.d("Location permission granted, refreshing view");
                     // No need to display permission request button anymore
-                    nearbyNoificationCardView.displayPermissionRequestButton(false);
+                    //nearbyNoificationCardView.displayPermissionRequestButton(false);
                     locationManager.registerLocationManager();
                 } else {
                     // Still ask for permission
-                    nearbyNoificationCardView.displayPermissionRequestButton(true);
+                    //nearbyNoificationCardView.displayPermissionRequestButton(true);
+                    DialogUtil.showAlertDialog(getActivity(),
+                            "Info",
+                            "Please give permission",
+                            () -> displayYouWontSeeNearbyMessage(),
+                            () -> enableLocationPermission());
                 }
             }
             break;
@@ -499,9 +510,10 @@ public class ContributionsFragment
 
 
         if (prefs.getBoolean("displayNearbyCardView", true)) {
-            nearbyNoificationCardView.cardViewVisibilityState = NearbyNoificationCardView.CardViewVisibilityState.LOADING;
-            nearbyNoificationCardView.setVisibility(View.VISIBLE);
             checkGPS();
+            if (nearbyNoificationCardView.cardViewVisibilityState == NearbyNoificationCardView.CardViewVisibilityState.READY) {
+                nearbyNoificationCardView.setVisibility(View.VISIBLE);
+            }
 
         } else {
             // Hide nearby notification card view if related shared preferences is false
@@ -519,7 +531,12 @@ public class ContributionsFragment
         if (!locationManager.isProviderEnabled()) {
             Timber.d("GPS is not enabled");
             nearbyNoificationCardView.permissionType = NearbyNoificationCardView.PermissionType.ENABLE_GPS;
-            nearbyNoificationCardView.displayPermissionRequestButton(true);
+            //nearbyNoificationCardView.displayPermissionRequestButton(true);
+            DialogUtil.showAlertDialog(getActivity(),
+                    "Info",
+                    "Please give permission",
+                    () -> displayYouWontSeeNearbyMessage(),
+                    () -> enableGPS());
         } else {
             Timber.d("GPS is enabled");
             checkLocationPermission();
@@ -530,18 +547,52 @@ public class ContributionsFragment
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             if (locationManager.isLocationPermissionGranted()) {
                 nearbyNoificationCardView.permissionType = NearbyNoificationCardView.PermissionType.NO_PERMISSION_NEEDED;
-                nearbyNoificationCardView.displayPermissionRequestButton(false);
+                //nearbyNoificationCardView.displayPermissionRequestButton(false);
                 locationManager.registerLocationManager();
             } else {
                 nearbyNoificationCardView.permissionType = NearbyNoificationCardView.PermissionType.ENABLE_LOCATION_PERMISSON;
-                nearbyNoificationCardView.displayPermissionRequestButton(true);
+                //nearbyNoificationCardView.displayPermissionRequestButton(true);
+                DialogUtil.showAlertDialog(getActivity(),
+                        "Info",
+                        "Please give permission",
+                        () -> displayYouWontSeeNearbyMessage(),
+                        () -> enableLocationPermission());
             }
         } else {
             // If device is under Marshmallow, we already checked for GPS
             nearbyNoificationCardView.permissionType = NearbyNoificationCardView.PermissionType.NO_PERMISSION_NEEDED;
-            nearbyNoificationCardView.displayPermissionRequestButton(false);
+            //nearbyNoificationCardView.displayPermissionRequestButton(false);
             locationManager.registerLocationManager();
         }
+    }
+
+    private void enableLocationPermission() {
+        if (!getActivity().isFinishing()) {
+            ((MainActivity) getActivity()).locationManager.requestPermissions(getActivity());
+        }
+    }
+
+    private void enableGPS() {
+        new AlertDialog.Builder(getActivity())
+                .setMessage(R.string.gps_disabled)
+                .setCancelable(false)
+                .setPositiveButton(R.string.enable_gps,
+                        (dialog, id) -> {
+                            Intent callGPSSettingIntent = new Intent(
+                                    android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+                            Timber.d("Loaded settings page");
+                            ((MainActivity) getActivity()).startActivityForResult(callGPSSettingIntent, 1);
+                        })
+                .setNegativeButton(R.string.menu_cancel_upload, (dialog, id) -> {
+                    dialog.cancel();
+                    displayYouWontSeeNearbyMessage();
+                })
+                .create()
+                .show();
+    }
+
+    private void displayYouWontSeeNearbyMessage() {
+        ViewUtil.showLongToast(getActivity(), "You wont see narby place since you didn't gave permission");
     }
 
 

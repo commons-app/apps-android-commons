@@ -31,6 +31,7 @@ import fr.free.nrw.commons.auth.SessionManager;
 import fr.free.nrw.commons.location.LocationServiceManager;
 import fr.free.nrw.commons.nearby.NearbyFragment;
 import fr.free.nrw.commons.nearby.NearbyMapFragment;
+import fr.free.nrw.commons.nearby.NearbyNoificationCardView;
 import fr.free.nrw.commons.notification.NotificationActivity;
 import fr.free.nrw.commons.theme.NavigationBaseActivity;
 import fr.free.nrw.commons.upload.UploadService;
@@ -253,7 +254,9 @@ public class MainActivity extends AuthenticatedActivity implements FragmentManag
                 showTabs();
                 // Nearby Notification Card View was invisible when Media Details Fragment is active, make it visible again on Contrib List Fragment active, according to preferences
                 if (prefs.getBoolean("displayNearbyCardView", true)) {
-                    contributionsFragment.nearbyNoificationCardView.setVisibility(View.VISIBLE);
+                    if (contributionsFragment.nearbyNoificationCardView.cardViewVisibilityState == NearbyNoificationCardView.CardViewVisibilityState.READY) {
+                        contributionsFragment.nearbyNoificationCardView.setVisibility(View.VISIBLE);
+                    }
                 } else {
                     contributionsFragment.nearbyNoificationCardView.setVisibility(View.GONE);
                 }
@@ -468,6 +471,8 @@ public class MainActivity extends AuthenticatedActivity implements FragmentManag
                 if (grantResults.length > 0
                         && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     Timber.d("Location permission given");
+                    ((ContributionsFragment)contributionsActivityPagerAdapter
+                            .getItem(0)).locationManager.registerLocationManager();
                 } else {
                     // If nearby fragment is visible and location permission is not given, send user back to contrib fragment
                     if (!isContributionsFragmentVisible) {

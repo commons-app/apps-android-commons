@@ -3,6 +3,7 @@ package fr.free.nrw.commons.nearby;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
+import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.CoordinatorLayout;
@@ -10,6 +11,7 @@ import android.support.design.widget.SwipeDismissBehavior;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.CardView;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
@@ -19,6 +21,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import android.widget.Toast;
+
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.contributions.MainActivity;
 import fr.free.nrw.commons.utils.ViewUtil;
@@ -86,7 +89,7 @@ public class NearbyNoificationCardView  extends CardView{
     protected void onAttachedToWindow() {
         super.onAttachedToWindow();
         // If you don't setVisibility after getting layout params, then you will se an empty space in place of nerabyNotificationCardView
-        if (((MainActivity)context).prefs.getBoolean("displayNearbyCardView", true)) {
+        if (((MainActivity)context).prefs.getBoolean("displayNearbyCardView", true) && this.cardViewVisibilityState == NearbyNoificationCardView.CardViewVisibilityState.READY) {
             this.setVisibility(VISIBLE);
         } else {
             this.setVisibility(GONE);
@@ -183,7 +186,7 @@ public class NearbyNoificationCardView  extends CardView{
 
         } else {
             cardViewVisibilityState = CardViewVisibilityState.LOADING;
-            permissionRequestButton.setVisibility(GONE);
+            /*permissionRequestButton.setVisibility(GONE);
             contentLayout.setVisibility(VISIBLE);
             // Set visibility of elements in content layout once it become visible
             progressBar.setVisibility(VISIBLE);
@@ -191,8 +194,33 @@ public class NearbyNoificationCardView  extends CardView{
             notificationDistance.setVisibility(GONE);
             notificationIcon.setVisibility(GONE);
 
-            permissionRequestButton.setVisibility(GONE);
+            permissionRequestButton.setVisibility(GONE);*/
+
+            this.setVisibility(GONE);
+            Handler nearbyNotificationHandler = new Handler();
+            Runnable nearbyNotificationRunnable = new Runnable() {
+                @Override
+                public void run() {
+                    if (cardViewVisibilityState != NearbyNoificationCardView.CardViewVisibilityState.READY
+                            && cardViewVisibilityState != NearbyNoificationCardView.CardViewVisibilityState.ASK_PERMISSION
+                            && cardViewVisibilityState != NearbyNoificationCardView.CardViewVisibilityState.INVISIBLE) {
+                        // If after 30 seconds, card view is not ready
+                        errorOcured();
+                    } else {
+                        suceeded();
+                    }
+                }
+            };
+            nearbyNotificationHandler.postDelayed(nearbyNotificationRunnable, 30000);
         }
+    }
+
+    private void errorOcured() {
+        this.setVisibility(GONE);
+    }
+
+    private void suceeded() {
+        this.setVisibility(VISIBLE);
     }
 
     /**
@@ -202,6 +230,7 @@ public class NearbyNoificationCardView  extends CardView{
      */
     public void updateContent(boolean isClosestNearbyPlaceFound, Place place) {
         Timber.d("Update nearby card notification content");
+        this.setVisibility(VISIBLE);
         cardViewVisibilityState = CardViewVisibilityState.READY;
         permissionRequestButton.setVisibility(GONE);
         contentLayout.setVisibility(VISIBLE);
@@ -269,6 +298,7 @@ public class NearbyNoificationCardView  extends CardView{
         READY,
         INVISIBLE,
         ASK_PERMISSION,
+        ERROR_OCURED
     }
 
     /**
