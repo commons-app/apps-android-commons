@@ -1,5 +1,6 @@
 package fr.free.nrw.commons.contributions;
 
+import android.Manifest;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
@@ -21,7 +22,6 @@ import android.support.v4.content.Loader;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.widget.CursorAdapter;
 import android.support.v7.app.AlertDialog;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -552,11 +552,14 @@ public class ContributionsFragment
             } else {
                 nearbyNoificationCardView.permissionType = NearbyNoificationCardView.PermissionType.ENABLE_LOCATION_PERMISSON;
                 //nearbyNoificationCardView.displayPermissionRequestButton(true);
-                DialogUtil.showAlertDialog(getActivity(),
-                        "Info",
-                        "Please give permission",
-                        () -> displayYouWontSeeNearbyMessage(),
-                        () -> enableLocationPermission());
+                // If user didn't selected Don't ask again
+                if (shouldShowRequestPermissionRationale(Manifest.permission.ACCESS_FINE_LOCATION)) {
+                        DialogUtil.showAlertDialog(getActivity(),
+                                "Info",
+                                "Please give permission",
+                                () -> displayYouWontSeeNearbyMessage(),
+                                () -> enableLocationPermission());
+                }
             }
         } else {
             // If device is under Marshmallow, we already checked for GPS
