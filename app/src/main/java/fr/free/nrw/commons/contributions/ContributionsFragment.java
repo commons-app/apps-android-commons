@@ -327,8 +327,8 @@ public class ContributionsFragment
                 } else {
                     // Still ask for permission
                     DialogUtil.showAlertDialog(getActivity(),
-                            "Info",
-                            "Please give permission",
+                            getString(R.string.nearby_card_permission_title),
+                            getString(R.string.nearby_card_permission_explanation),
                             () -> displayYouWontSeeNearbyMessage(),
                             () -> enableLocationPermission());
                 }
@@ -521,7 +521,6 @@ public class ContributionsFragment
 
     }
 
-
     /**
      * Check GPS to decide displaying request permission button or not.
      */
@@ -530,8 +529,8 @@ public class ContributionsFragment
             Timber.d("GPS is not enabled");
             nearbyNoificationCardView.permissionType = NearbyNoificationCardView.PermissionType.ENABLE_GPS;
             DialogUtil.showAlertDialog(getActivity(),
-                    "Info",
-                    "Please give permission",
+                    getString(R.string.nearby_card_permission_title),
+                    getString(R.string.nearby_card_permission_explanation),
                     () -> displayYouWontSeeNearbyMessage(),
                     () -> enableGPS());
         } else {
@@ -550,8 +549,8 @@ public class ContributionsFragment
                 // If user didn't selected Don't ask again
                 if (shouldShowRequestPermissionRationale(Manifest.permission.ACCESS_FINE_LOCATION)) {
                         DialogUtil.showAlertDialog(getActivity(),
-                                "Info",
-                                "Please give permission",
+                                getString(R.string.nearby_card_permission_title),
+                                getString(R.string.nearby_card_permission_explanation),
                                 () -> displayYouWontSeeNearbyMessage(),
                                 () -> enableLocationPermission());
                 }

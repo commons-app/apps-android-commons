@@ -414,5 +414,7 @@ Upload your first media by touching the camera or gallery icon above.</string>
   <string name="no_go_back">No, Go Back</string>
 
   <string name="upload_flow_all_images_in_set">(For all images in set)</string>
+  <string name="nearby_card_permission_title">Permission Request</string>
+  <string name="nearby_card_permission_explanation">Please give location permission to see the nearest place that needs pictures</string>
 
 </resources>
