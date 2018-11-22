@@ -61,7 +61,7 @@
   <string name="provider_contributions">Moje obrázky</string>
   <string name="menu_share">Sdílet</string>
   <string name="menu_open_in_browser">Zobrazit v prohlížeči</string>
-  <string name="share_title_hint">Název</string>
+  <string name="share_title_hint" fuzzy="true">Název</string>
   <string name="add_title_toast">Vložte prosím název tohoto souboru</string>
   <string name="share_description_hint">Popis</string>
   <string name="login_failed_network">Nelze se přihlásit - selhání sítě</string>
@@ -82,7 +82,7 @@
   <string name="gps_disabled">GPS ve vašem zařízení není povoleno. Chtěli byste ho spustit?</string>
   <string name="enable_gps">Spustit GPS</string>
   <string name="contributions_subtitle_zero">Žádné nahrané soubory</string>
-  <plurals name="contributions_subtitle">
+  <plurals name="contributions_subtitle" fuzzy="true">
     <item quantity="zero">\@string/contributions_subtitle_zero</item>
     <item quantity="one">1 soubor</item>
     <item quantity="other">%1$d souborů</item>
@@ -181,7 +181,6 @@
   <string name="title_activity_nearby">Místa v okolí</string>
   <string name="no_nearby">Poblíž nebylo nic nalezeno</string>
   <string name="warning">Upozornění</string>
-  <string name="upload_image_problem_duplicate">Tento soubor již na Commons existuje. Jste si jist, že chcete pokračovat?</string>
   <string name="yes">Ano</string>
   <string name="no">Ne</string>
   <string name="media_detail_title">Název</string>
@@ -243,6 +242,7 @@
   <string name="error_while_cache">Chyba při meziukládání obrázků</string>
   <string name="title_info">Unikátní a popisný název pro daný soubor, který bude sloužit jako název souboru. Můžete použít běžný psaný jazyk s mezerami; nezahrnujte koncovku souboru.</string>
   <string name="description_info">Popište prosím obrázek, jak jen to je možné: Kde byl pořízen? Co znázorňuje? Jaký je kontext obrázku? Popisujte prosím významné předměty nebo osoby na obrázku a nezapomeňte na informace, které není možné snadno odhadnout ze samotného obrázku, jako je například denní doba, pokud jde o krajinu. Pokud je na obrázku něco neobvyklého, popište, co to dělá neobvyklým.</string>
+  <string name="upload_image_problem_duplicate">Tento soubor již na Commons existuje. Jste si jist, že chcete pokračovat?</string>
   <string name="upload_image_problem_dark">Tento obrázek je příliš tmavý, jste si jist/a, že ho chcete nahrát? Wikimedia Commons slouží jenom pro obrázky s encyklopedickou hodnotou.</string>
   <string name="upload_image_problem_blurry">Tento obrázek je rozmazaný, jste si jist/a, že ho chcete nahrát? Wikimedia Commons slouží jenom pro obrázky s encyklopedickou hodnotou.</string>
   <string name="give_permission">Dát povolení</string>

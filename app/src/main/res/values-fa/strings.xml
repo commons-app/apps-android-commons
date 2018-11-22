@@ -58,7 +58,7 @@
   <string name="provider_contributions">بارگذاری‌های من</string>
   <string name="menu_share">به اشتراک‌گذاشتن</string>
   <string name="menu_open_in_browser">مشاهده در مرورگر</string>
-  <string name="share_title_hint">عنوان</string>
+  <string name="share_title_hint">عنوان (مورد نیاز)</string>
   <string name="add_title_toast">لطفاً نامی را برای این پرونده انتخاب کنید</string>
   <string name="share_description_hint">توضیحات</string>
   <string name="login_failed_network">قادر به ورود نیست - شکست شبکه‌ای</string>
@@ -79,7 +79,7 @@
   <string name="gps_disabled">مکان‌یاب در دستگاه شما خاموش است. آیا دوست دارید فعال شود؟</string>
   <string name="enable_gps">فعال کردن مکان‌یاب</string>
   <string name="contributions_subtitle_zero">هنوز هیچ بارگذاری</string>
-  <string name="contributions_subtitle">{{%1$d|zero=@string/contributions_subtitle_zero|one=بارگذاری شد|%1$d بارگذاری شد}}</string>
+  <string name="contributions_subtitle" fuzzy="true">{{%1$d|zero=@string/contributions_subtitle_zero|one=بارگذاری شد|%1$d بارگذاری شد}}</string>
   <plurals name="starting_multiple_uploads">
     <item quantity="one">شروع %1$d بارگذاری پرونده</item>
     <item quantity="other">شروع بارگذاری %1$d پرونده</item>
@@ -174,7 +174,6 @@
   <string name="title_activity_nearby">مکان‌‌های اطراف</string>
   <string name="no_nearby">مکانی در نزدیکی یافت نشد</string>
   <string name="warning">هشدار</string>
-  <string name="upload_image_problem_duplicate">پرونده در ویکی‌انبار موجود است. آیا مطمئنید که می‌خواهید ادامه دهید؟</string>
   <string name="yes">بله</string>
   <string name="no">خیر</string>
   <string name="media_detail_title">عنوان</string>
@@ -236,6 +235,7 @@
   <string name="error_while_cache">خطا در زمان دریافت تصاویر</string>
   <string name="title_info">عنوانی توصیفی و یکتا برای پرونده که به عنوان نام پرونده در نظر گرفته خواهد شد. ترجیحاً به زبان ساده باشد، می‌توانید فاصله هم به کار ببرید. پسوند پرونده را ننویسید.</string>
   <string name="description_info">لطفاً تصویر را تا حد توان شرح دهید. کجا گرفته شده‌است؟ شامل چه چیزی می‌شود؟ لطفاً اشیا یا افراد را شرح دهید. اطلاعاتی که به راحتی قابل مشاهده هستند را صرفه‌نظر کنید. اگر چیزی در تصویر غیر طبیعی به نظر می‌رسد آن را شرح دهید.</string>
+  <string name="upload_image_problem_duplicate">پرونده در ویکی‌انبار موجود است. آیا مطمئنید که می‌خواهید ادامه دهید؟</string>
   <string name="upload_image_problem_dark">این تصویر خیلی تیره است آیا مطمئنید که می‌خواهید آن را بارگذاری کنید؟ ویکی‌انبار فقط برای نگهداری از تصاویری که ارزش دانشنامه‌ای داشته باشند، است.</string>
   <string name="upload_image_problem_blurry">این تصویر خیلی تار است آیا مطمئنید که می‌خواهید آن را بارگذاری کنید؟ ویکی‌انبار فقط برای نگهداری از تصاویری که ارزش دانشنامه‌ای داشته باشند، است.</string>
   <string name="give_permission">اجازه بده</string>
@@ -312,7 +312,14 @@
   <string name="achievements_revert_limit_message">حداقل مورد نیاز:</string>
   <string name="error_occurred">خطا رخ‌داده!</string>
   <string name="notifications_channel_name_all">آگاه‌سازی ویکی‌انبار</string>
+  <string name="contributions_fragment">مشارکت‌ها</string>
+  <string name="nearby_fragment">در نزدیکی</string>
+  <string name="notifications">آگاه‌سازی‌ها</string>
+  <string name="list_sheet">فهرست</string>
   <string name="storage_permission">اجازه ذخیره</string>
+  <string name="next">بعدی</string>
+  <string name="previous">قبلی</string>
+  <string name="submit">ارسال</string>
   <string name="navigation_item_bookmarks">نشانک‌ها</string>
   <string name="title_activity_bookmarks">نشانک‌ها</string>
   <string name="title_page_bookmarks_pictures">تصویرها</string>
@@ -320,4 +327,15 @@
   <string name="menu_bookmark">افزودن/حذف نشانک‌ها</string>
   <string name="provider_bookmarks">نشانک‌ها</string>
   <string name="provider_bookmarks_location">نشانک‌ها</string>
+  <string name="desc_language_Worldwide">در سراسر جهان</string>
+  <string name="desc_language_America">آمریکا</string>
+  <string name="desc_language_Europe">اروپا</string>
+  <string name="desc_language_Middle_East">خاورمیانه</string>
+  <string name="desc_language_Africa">آفریقا</string>
+  <string name="desc_language_Asia">آسیا</string>
+  <string name="desc_language_Pacific">اقیانوس آرام</string>
+  <string name="no_categories_selected">رده‌ای انتخاب نشده‌است</string>
+  <string name="yes_submit">بله، ارسال شود</string>
+  <string name="no_go_back">نه، به قبل بازگرد</string>
+  <string name="upload_flow_all_images_in_set">(برای همهٔ تصاویر موجود در مجموعه)</string>
 </resources>

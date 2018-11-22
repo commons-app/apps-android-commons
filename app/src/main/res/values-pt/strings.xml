@@ -59,7 +59,7 @@
   <string name="provider_contributions">Meus carregamentos</string>
   <string name="menu_share">Partilhar</string>
   <string name="menu_open_in_browser">Ver no navegador</string>
-  <string name="share_title_hint">Título</string>
+  <string name="share_title_hint" fuzzy="true">Título</string>
   <string name="add_title_toast">Forneça um título para este ficheiro, por favor</string>
   <string name="share_description_hint">Descrição</string>
   <string name="login_failed_network">Não foi possível iniciar sessão - falha de rede</string>
@@ -80,7 +80,7 @@
   <string name="gps_disabled">O GPS está desativado no seu dispositivo. Gostarias de ativá-lo?</string>
   <string name="enable_gps">Ativar GPS</string>
   <string name="contributions_subtitle_zero">Ainda não foram enviados ficheiros</string>
-  <plurals name="contributions_subtitle">
+  <plurals name="contributions_subtitle" fuzzy="true">
     <item quantity="zero">\@string/contributions_subtitle_zero</item>
     <item quantity="one">%1$d carregamento</item>
     <item quantity="other">%1$d carregamentos</item>
@@ -179,7 +179,6 @@
   <string name="title_activity_nearby">Locais Próximos</string>
   <string name="no_nearby">Não foram encontrados locais próximos.</string>
   <string name="warning">Aviso</string>
-  <string name="upload_image_problem_duplicate">Este ficheiro já existe na wiki Commons. Tem a certeza de que deseja continuar?</string>
   <string name="yes">Sim</string>
   <string name="no">Não</string>
   <string name="media_detail_title">Título</string>
@@ -241,6 +240,7 @@
   <string name="error_while_cache">Erro ao colocar imagens na cache</string>
   <string name="title_info">Um título descritivo exclusivo para o ficheiro, que servirá como um nome de ficheiro. Pode utilizar uma linguagem simples com espaços. Não inclua a extensão do ficheiro</string>
   <string name="description_info">Por favor, descreva o ficheiro da melhor forma possível: Onde foi tirado? O que isso mostra? Qual é o contexto? Por favor, descreva os objetos ou as pessoas. Indique as informações que não podem ser facilmente adivinhadas, por exemplo, a hora do dia, se for uma paisagem. Se o ficheiro mostrar algo incomum, explique o que torna incomum.</string>
+  <string name="upload_image_problem_duplicate">Este ficheiro já existe na wiki Commons. Tem a certeza de que deseja continuar?</string>
   <string name="upload_image_problem_dark">Esta imagem está demasiada escura; tem a certeza de que deseja carregá-la? A wiki Wikimedia Commons só aceita as imagens de valor enciclopédico.</string>
   <string name="upload_image_problem_blurry">Esta imagem está desfocada; tem a certeza de que deseja carregá-la? A wiki Wikimedia Commons serve apenas para imagens de valor enciclopédico.</string>
   <string name="give_permission">Permitir</string>

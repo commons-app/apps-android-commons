@@ -55,7 +55,7 @@
   <string name="provider_contributions">自分のアップロード</string>
   <string name="menu_share">共有</string>
   <string name="menu_open_in_browser">ブラウザーで表示</string>
-  <string name="share_title_hint">タイトル</string>
+  <string name="share_title_hint" fuzzy="true">タイトル</string>
   <string name="add_title_toast">ファイル名をつけてください</string>
   <string name="share_description_hint">説明</string>
   <string name="login_failed_network">ログインできません - ネットワークのエラーです</string>
@@ -75,7 +75,7 @@
   <string name="gps_disabled">お使いのデバイスではGPSが無効になっています。有効にしますか?</string>
   <string name="enable_gps">GPSを有効にする</string>
   <string name="contributions_subtitle_zero">まだ何もアップロードされていません。</string>
-  <plurals name="contributions_subtitle">
+  <plurals name="contributions_subtitle" fuzzy="true">
     <item quantity="zero">\@string/contributions_subtitle_zero</item>
     <item quantity="other">pne=%1$d upload</item>
   </plurals>
@@ -172,7 +172,6 @@
   <string name="title_activity_nearby">近くの場所</string>
   <string name="no_nearby">付近の場所が見つかりません</string>
   <string name="warning">警告</string>
-  <string name="upload_image_problem_duplicate">このファイルは既にコモンズにあります。本当にアップロードしますか？</string>
   <string name="yes">はい</string>
   <string name="no">いいえ</string>
   <string name="media_detail_title">タイトル</string>
@@ -232,6 +231,7 @@
   <string name="error_while_cache">画像をキャッシュする際のエラー</string>
   <string name="title_info">ファイル固有の説明的な表題。ファイル名として使われます。平易な言葉を使い、空白を入れることができます。拡張子は含めないでください。</string>
   <string name="description_info">可能な限りメディアを説明してください: 撮影地はどこですか? それは何を示していますか? どんな文脈がありますか? 被写体の物や人を説明してください。容易に推測できない情報、例えば風景であれば時刻を明示します。特筆すべき物事が映っている場合は、何が珍しいのかを説明してください。</string>
+  <string name="upload_image_problem_duplicate">このファイルは既にコモンズにあります。本当にアップロードしますか？</string>
   <string name="upload_image_problem_dark">この画像は暗すぎますがアップロードしますか？ ウィキメディア・コモンズは百科事典に適した画像のみ受け付けます。</string>
   <string name="upload_image_problem_blurry">ピントが合っていませんが、アップロードしますか？ ウィキメディア・コモンズは百科事典に適した画像のみ受け付けます。</string>
   <string name="give_permission">権限を付与</string>

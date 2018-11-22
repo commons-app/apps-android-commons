@@ -44,7 +44,7 @@
   <string name="provider_contributions">मेरा अपलोडहरू</string>
   <string name="menu_share">बाड्ने</string>
   <string name="menu_open_in_browser">ब्राउजरमा हेर्ने</string>
-  <string name="share_title_hint">शीर्षक</string>
+  <string name="share_title_hint" fuzzy="true">शीर्षक</string>
   <string name="share_description_hint">वर्णन</string>
   <string name="login_failed_network">प्रवेश गर्न असमर्थ - जडान खराबी</string>
   <string name="login_failed_throttled" fuzzy="true">धेरै असफल प्रयासहरू भए । कृपया केही मिनेट पछि पुन: प्रयास गर्नुहोस</string>

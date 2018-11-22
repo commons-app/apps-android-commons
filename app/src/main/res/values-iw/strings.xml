@@ -57,7 +57,7 @@
   <string name="provider_contributions">ההעלאות שלי</string>
   <string name="menu_share">שיתוף</string>
   <string name="menu_open_in_browser">הצגה בדפדפן</string>
-  <string name="share_title_hint">כותרת</string>
+  <string name="share_title_hint">כותרת (נדרש)</string>
   <string name="add_title_toast">נא לתת כותרת לקובץ הזה</string>
   <string name="share_description_hint">תיאור</string>
   <string name="login_failed_network">לא ניתן להיכנס – כשל בתקשורת</string>
@@ -80,8 +80,8 @@
   <string name="contributions_subtitle_zero">לא הועלה עדיין שום דבר</string>
   <plurals name="contributions_subtitle">
     <item quantity="zero">\@string/contributions_subtitle_zero</item>
-    <item quantity="one">העלאה אחת</item>
-    <item quantity="other">%1$d העלאות</item>
+    <item quantity="one">(%1$d)</item>
+    <item quantity="other">(%1$d)</item>
   </plurals>
   <plurals name="starting_multiple_uploads">
     <item quantity="one">התחלת העלאה</item>
@@ -241,6 +241,9 @@
   <string name="description_info">נא לתאר את המדיה כמה שיותר: איפה היא נוצרה? מה היא מראה? מה ההקשר? נא לתאר את העצמים או את האנשים. נא לחשוף מידע שאי־אפשר לנחש בקלות, למשל, הזמן ביום אם זאת תמונת נוף. אם המדיה מציגה משהו בלתי־רגיל, נא להסביר מה מיוחד בה.</string>
   <string name="upload_image_too_dark">התמונה הזאת חשוכה מדי, האם ברצונך באמת להעלות אותה? ויקישיתוף מיועד רק לתמונות בעלות ערך אנציקלופדי.</string>
   <string name="upload_image_blurry">התמונה הזאת מטושטשת, האם ברצונך באמת להעלות אותה? ויקישיתוף מיועד רק לתמונות בעלות ערך אנציקלופדי.</string>
+  <string name="upload_image_problem_duplicate">הקובץ הזה כבר קיים בוויקישיתוף. האם להמשיך?</string>
+  <string name="upload_image_problem_dark">התמונה הזאת חשוכה מדי, האם ברצונך באמת להעלות אותה? ויקישיתוף מיועד רק לתמונות בעלות ערך אנציקלופדי.</string>
+  <string name="upload_image_problem_blurry">התמונה הזאת מטושטשת, האם ברצונך באמת להעלות אותה? ויקישיתוף מיועד רק לתמונות בעלות ערך אנציקלופדי.</string>
   <string name="give_permission">לתת הרשאה</string>
   <string name="use_external_storage">להשתמש באחסון חיצוני</string>
   <string name="use_external_storage_summary">שמירת תמונות שצולמו באמצעות מצלמה בתוך היישום במכשיר שלך</string>

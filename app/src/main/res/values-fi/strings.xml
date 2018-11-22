@@ -58,7 +58,7 @@
   <string name="provider_contributions">Omat tallennukset</string>
   <string name="menu_share">Jaa</string>
   <string name="menu_open_in_browser">Näytä selaimessa</string>
-  <string name="share_title_hint">Otsikko</string>
+  <string name="share_title_hint" fuzzy="true">Otsikko</string>
   <string name="add_title_toast">Anna tälle tiedostolle otsikko</string>
   <string name="share_description_hint">Kuvaus</string>
   <string name="login_failed_network">Kirjautuminen epäonnistui - verkkovirhe</string>
@@ -78,7 +78,7 @@
   <string name="gps_disabled">GPS ei ole käytössä. Haluatko ottaa sen käyttöön?</string>
   <string name="enable_gps">Ota GPS käyttöön</string>
   <string name="contributions_subtitle_zero">Ei tallennuksia vielä</string>
-  <plurals name="contributions_subtitle">
+  <plurals name="contributions_subtitle" fuzzy="true">
     <item quantity="zero">\@string/contributions_subtitle_zero</item>
     <item quantity="one">%1$d tallennus</item>
     <item quantity="other">%1$d tallennusta</item>
@@ -176,7 +176,6 @@
   <string name="title_activity_nearby">Lähellä olevat paikat</string>
   <string name="no_nearby">Lähistöltä ei löytynyt paikkoja</string>
   <string name="warning">Varoitus</string>
-  <string name="upload_image_problem_duplicate">Tämä tiedosto on jo Wikimedia Commonsissa. Haluatko varmasti jatkaa?</string>
   <string name="yes">Kyllä</string>
   <string name="no">Ei</string>
   <string name="media_detail_title">Otsikko</string>
@@ -237,6 +236,7 @@
   <string name="error_while_cache">Virhe varastoidessa kuvia</string>
   <string name="title_info">Tiedoston yksilöllinen ja kuvaava otsikko, jota käytetään tiedostonimenä. Voit käyttää tavallista kieltä välilyönnein. Älä sisällytä tiedoston päätettä.</string>
   <string name="description_info">Kuvaile mediaa niin paljon kuin mahdollista: Missä se otettiin? Mitä se esittää? Mikä on asiayhteys? Kuvaile esineitä tai henkilöitä. Tuo ilmi tietoja, joita ei ole helppo arvailla, esimerkiksi vuorokaudenaika, jos se on maisema. Jos media esittää jotain epätavallista, selitä, mikä tekee siitä epätavallisen.</string>
+  <string name="upload_image_problem_duplicate">Tämä tiedosto on jo Wikimedia Commonsissa. Haluatko varmasti jatkaa?</string>
   <string name="upload_image_problem_dark">Tämä kuva on liian tumma, haluatko varmasti ladata sen? Wikimedia Commons on vain kuville, joilla on tietosanakirja-arvo.</string>
   <string name="upload_image_problem_blurry">Tämä kuva on epäselvä, haluatko varmasti ladata sen? Wikimedia Commons on vain kuville, joilla on tietosanakirja-arvo.</string>
   <string name="give_permission">Anna lupa</string>

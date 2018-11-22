@@ -54,7 +54,7 @@
   <string name="provider_contributions">Mina uppladdningar</string>
   <string name="menu_share">Dela</string>
   <string name="menu_open_in_browser">Visa i webbläsaren</string>
-  <string name="share_title_hint">Titel</string>
+  <string name="share_title_hint" fuzzy="true">Titel</string>
   <string name="add_title_toast">Var god ange en titel för denna fil</string>
   <string name="share_description_hint">Beskrivning</string>
   <string name="login_failed_network">Det gick inte att logga in - nätverksfel</string>
@@ -75,7 +75,7 @@
   <string name="gps_disabled">GPS:en är inaktiverad på denna enhet. Vill du aktivera den?</string>
   <string name="enable_gps">Aktivera GPS</string>
   <string name="contributions_subtitle_zero">Inga uppladdningar ännu</string>
-  <plurals name="contributions_subtitle">
+  <plurals name="contributions_subtitle" fuzzy="true">
     <item quantity="zero">\@string/contributions_subtitle_zero</item>
     <item quantity="one">%1$d uppladdning</item>
     <item quantity="other">%1$d uppladdningar</item>
@@ -174,7 +174,6 @@
   <string name="title_activity_nearby">Platser i närheten</string>
   <string name="no_nearby">Inga platser i närheten hittades</string>
   <string name="warning">Varning</string>
-  <string name="upload_image_problem_duplicate">Denna fil finns redan på Commons. Är du säker på att du vill fortsätta?</string>
   <string name="yes">Ja</string>
   <string name="no">Nej</string>
   <string name="media_detail_title">Titel</string>
@@ -236,6 +235,7 @@
   <string name="error_while_cache">Fel uppstod när bilder cachelagras</string>
   <string name="title_info">En unik beskrivande titel för filen, som kommer att fungera som ett filnamn. Du kan använda klarspråk med mellanslag. Ta inte med filändelsen</string>
   <string name="description_info">Beskriv mediafilen så mycket som möjligt. Var togs den? Vad visar den? Vad är sammanhanget? Beskriv föremålen eller personerna. Ge information som inte kan gissas fram, t.ex. tidpunkten om det är ett landskap. Om mediafilen visar någonting ovanligt, förklara vad som gör den ovanlig.</string>
+  <string name="upload_image_problem_duplicate">Denna fil finns redan på Commons. Är du säker på att du vill fortsätta?</string>
   <string name="upload_image_problem_dark">Denna bild är för mörk, är du säker på att du vill ladda upp den? Wikimedia Commons är endast till för bilder med encyklopediskt värde.</string>
   <string name="upload_image_problem_blurry">Denna bild är suddig, är du säker på att du vill ladda upp den? Wikimedia Commons är endast till för bilder med encyklopediskt värde.</string>
   <string name="give_permission">Ge behörighet</string>

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Authors:
+* Elroy
 * Festina90
 * KlaasZ4usV
 * Mainframe98
@@ -11,18 +12,28 @@
 * Smile4ever
 -->
 <resources>
+  <string name="title_activity_explore">Verkennen</string>
+  <string name="navigation_item_explore">Verkennen</string>
+  <string name="preference_category_appearance">Uiterlijk</string>
+  <string name="preference_category_general">Algemeen</string>
+  <string name="preference_category_feedback">Terugkoppeling</string>
+  <string name="preference_category_location">Locatie</string>
   <string name="app_name">Commons</string>
+  <string name="bullet">•</string>
   <string name="menu_settings">Instellingen</string>
+  <string name="intent_share_upload_label">Naar Commons versturen</string>
   <string name="username">Gebruikersnaam</string>
   <string name="password">Wachtwoord</string>
+  <string name="login_credential">Aanmelden bij je Commons Beta-profiel</string>
   <string name="login">Aanmelden</string>
+  <string name="forgot_password">Wachtwoord vergeten?</string>
   <string name="signup">Registreren</string>
   <string name="logging_in_title">Bezig met aanmelden</string>
   <string name="logging_in_message">Een ogenblik geduld…</string>
   <string name="login_success">Aanmelden geslaagd</string>
   <string name="login_failed">Aanmelden mislukt</string>
   <string name="upload_failed">Bestand niet gevonden. Probeer een ander bestand.</string>
-  <string name="authentication_failed" fuzzy="true">Verificatie is mislukt</string>
+  <string name="authentication_failed">Verifiëring is mislukt. Meld je opnieuw aan.</string>
   <string name="uploading_started">Uploaden is begonnen</string>
   <string name="upload_completed_notification_title">%1$s geüpload</string>
   <string name="upload_completed_notification_text">Wijs aan om uw upload te bekijken</string>
@@ -46,7 +57,7 @@
   <string name="provider_contributions">Mijn uploads</string>
   <string name="menu_share">Delen</string>
   <string name="menu_open_in_browser">In browser bekijken</string>
-  <string name="share_title_hint">Naam</string>
+  <string name="share_title_hint" fuzzy="true">Naam</string>
   <string name="share_description_hint">Beschrijving</string>
   <string name="login_failed_network">Aanmelden niet mogelijk. Er is een probleem met het netwerk</string>
   <string name="login_failed_throttled">U hebt te vaak geprobeerd aan te melden. Probeer het over een aantal minuten opnieuw.</string>
@@ -61,7 +72,7 @@
   <string name="refresh_button">Vernieuwen</string>
   <string name="display_list_button">Lijst</string>
   <string name="contributions_subtitle_zero">Nog geen uploads</string>
-  <plurals name="contributions_subtitle">
+  <plurals name="contributions_subtitle" fuzzy="true">
     <item quantity="zero">\@string/contributions_subtitle_zero</item>
     <item quantity="one">%1$d upload</item>
     <item quantity="other">%1$d uploads</item>
@@ -125,6 +136,7 @@
   <string name="tutorial_2_subtext" fuzzy="true">- Natuurlijke objecten (bloemen, dieren, bergen)\n- Nuttige objecten (fietsen, treinstations)\n- Beroemde mensen (uw burgemeester, Olympische atleten u hebt ontmoet)</string>
   <string name="tutorial_3_text">Gelieve NIET te uploaden:</string>
   <string name="tutorial_3_subtext">- Selfies of foto\'s van uw vrienden\n- Foto\'s die u hebt gedownload van het Internet\n- Screenshots van eigen apps</string>
+  <string name="tutorial_3_subtext_3">Schermfoto\'s van oorspronkelijke toepassingen</string>
   <string name="tutorial_4_text">Voorbeeld van een upload:</string>
   <string name="tutorial_4_subtext" fuzzy="true">- Titel: Sydney Opera House\n- Beschrijving: het Sydney Opera House gezien vanaf de overkant van de baai\n- Categorieën: Sydney Opera House, Sydney Opera House from the west, Sydney Opera House remote views</string>
   <string name="welcome_wikipedia_text">Draag uw afbeelding bij. Help pagina\'s in Wikipedia tot leven te laten komen!</string>
@@ -134,7 +146,7 @@
   <string name="welcome_final_text">Begrijpt u het?</string>
   <string name="welcome_final_button_text">Ja!</string>
   <string name="detail_panel_cats_label">Categorieën</string>
-  <string name="detail_panel_cats_loading" fuzzy="true">Bezig met laden…</string>
+  <string name="detail_panel_cats_loading">Laden...</string>
   <string name="detail_panel_cats_none">Geen selectie</string>
   <string name="detail_description_empty">Geen beschrijving</string>
   <string name="detail_license_empty">Onbekende licentie</string>
@@ -144,40 +156,70 @@
   <string name="ok">OK</string>
   <string name="title_activity_nearby">Plaatsen in de buurt</string>
   <string name="warning">Waarschuwing</string>
-  <string name="upload_image_problem_duplicate">Dit bestand bestaat al op Commons. Weet u zeker dat u wilt doorgaan?</string>
   <string name="yes">Ja</string>
   <string name="no">Nee</string>
   <string name="media_detail_title">Titel</string>
   <string name="media_detail_media_title">Titel van het bestand</string>
   <string name="media_detail_description">Beschrijving</string>
+  <string name="media_detail_author">Auteur</string>
   <string name="media_detail_uploaded_date">Uploaddatum</string>
   <string name="_2fa_code">2FA-code</string>
+  <string name="upload_image">Afbeelding plaatsen</string>
   <string name="welcome_image_no_selfies">Geen selfies</string>
   <string name="cancel">Annuleren</string>
   <string name="navigation_drawer_open">Openen</string>
   <string name="navigation_drawer_close">Sluiten</string>
+  <string name="navigation_item_home">Start</string>
   <string name="navigation_item_upload">Uploaden</string>
   <string name="navigation_item_nearby">In de buurt</string>
   <string name="navigation_item_about">Over</string>
   <string name="navigation_item_settings">Instellingen</string>
   <string name="navigation_item_feedback">Terugkoppeling</string>
   <string name="navigation_item_logout">Afmelden</string>
+  <string name="navigation_item_info">Zelfstudie</string>
+  <string name="navigation_item_notification">Meldingen</string>
+  <string name="navigation_item_featured_images">Aanbevolen</string>
+  <string name="no_description_found">geen beschrijving gevonden</string>
   <string name="nearby_info_menu_wikipedia_article">Wikipedia-artikel</string>
   <string name="error_while_cache">Error tijdens het laden van de afbeeldingen</string>
+  <string name="upload_image_problem_duplicate">Dit bestand bestaat al op Commons. Weet u zeker dat u wilt doorgaan?</string>
+  <string name="login_to_your_account">Aanmelden bij je profiel</string>
+  <string name="send_log_file">Logboekbestand verzenden</string>
   <string name="nominate_deletion">Nomineer voor Verwijdering</string>
   <string name="nominated_for_deletion">Deze afbeelding is genomineerd voor verwijdering.</string>
   <string name="view_browser">Bekijk in Browser</string>
+  <string name="skip_login">Overslaan</string>
+  <string name="navigation_item_login">Aanmelden</string>
+  <string name="skip_login_title">Weet je zeker dat je het aanmelden wilt overslaan?</string>
+  <string name="skip_login_message">Je kunt dan geen afbeeldingen plaatsen.</string>
+  <string name="login_alert_message">Meld je aan om deze functie te gebruiken</string>
   <string name="nearby_directions">VERWIJZINGEN</string>
   <string name="nearby_wikidata">WIKIDATA</string>
-  <string name="about_faq" fuzzy="true">Vaak gestelde vragen</string>
+  <string name="nearby_wikipedia">WIKIPEDIA</string>
+  <string name="nearby_commons">COMMONS</string>
+  <string name="about_rate_us">&lt;u&gt;Waardeer ons&lt;/u&gt;</string>
+  <string name="about_faq">&lt;u&gt;Vraag en antwoord&lt;/u&gt;</string>
+  <string name="welcome_skip_button">Zelfstudie overslaan</string>
   <string name="no_internet">Geen internet</string>
   <string name="internet_established">Internet beschikbaar</string>
   <string name="error_notifications">Fout bij ophalen berichten.</string>
   <string name="no_notifications">Geen berichten.</string>
+  <string name="about_translate">&lt;u&gt;Vertalen&lt;/u&gt;</string>
   <string name="about_translate_title">Talen</string>
   <string name="about_translate_message">Selecteer de taal waarvoor u vertalingen wil indienen</string>
   <string name="about_translate_proceed">Ga door</string>
   <string name="about_translate_cancel">Annuleren</string>
+  <string name="retry">Opnieuw proberen</string>
+  <string name="showcase_view_got_it_button">Begrepen!</string>
+  <string name="menu_search_button">Zoeken</string>
+  <string name="search_commons">Commons doorzoeken</string>
+  <string name="quiz">Vragenspel</string>
+  <string name="quiz_question_string">Kan je afbeelding worden geplaatst?</string>
+  <string name="question">Vraag</string>
+  <string name="result">Uitslag</string>
+  <string name="continue_message">Doorgaan</string>
+  <string name="share_app_title">Toepassing delen</string>
+  <string name="add_description">+ Beschrijving toevoegen</string>
   <string name="error_occurred">Fout opgetreden!</string>
   <string name="storage_permission">Toestemming om op te slaan</string>
 </resources>

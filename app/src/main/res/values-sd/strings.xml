@@ -50,7 +50,7 @@
   <string name="provider_contributions">منھنجا چاڙھ</string>
   <string name="menu_share">ونڊيو</string>
   <string name="menu_open_in_browser">جھانگوءَ ۾ ڏسو</string>
-  <string name="share_title_hint">عنوان</string>
+  <string name="share_title_hint" fuzzy="true">عنوان</string>
   <string name="add_title_toast">هن فائيل لاءِ ڪا سُرخي ڏيو</string>
   <string name="share_description_hint">تشريح</string>
   <string name="login_failed_network">ناقابلِ داخل ٿيڻ - باھمڄار ناڪامي</string>
@@ -71,7 +71,7 @@
   <string name="gps_disabled">اوهان جي ڊوائيس ۾ جي پي ايس بند آهي. ڇا اوهان ان کي کولڻ چاهيو ٿا؟</string>
   <string name="enable_gps">جي پي ايس چالو ڪيو (اين ايبل جي پي ايس)</string>
   <string name="contributions_subtitle_zero">اڃان تائين ڪو به ڄاڙهه (اَپلوڊ) نه ٿيو آهي</string>
-  <plurals name="contributions_subtitle">
+  <plurals name="contributions_subtitle" fuzzy="true">
     <item quantity="zero">\@string/contributions_subtitle_zero</item>
     <item quantity="one">%1$d چاڙھ</item>
     <item quantity="other">%1$d چاڙھَ</item>
@@ -161,7 +161,6 @@
   <string name="title_activity_nearby">ويجھڙائيءَ ۾ جڳھون</string>
   <string name="no_nearby">آپاس وارو جڳهه نه لڌو</string>
   <string name="warning">چتاءُ</string>
-  <string name="upload_image_problem_duplicate">فائل اڳ ئي العام ۾ موجود آھي. ڇا توھان کي پڪ آھي تہ توھان اڳتي وڌڻ ٿا چاھيو؟</string>
   <string name="yes">ها</string>
   <string name="no">نہ</string>
   <string name="media_detail_title">عنوان</string>
@@ -205,6 +204,7 @@
   <string name="nearby_info_menu_commons_article">ڪامن فائيل جو ورق</string>
   <string name="nearby_info_menu_wikidata_article">وڪيڊيٽا جزو (وڪيڊيٽا آئيٽم)</string>
   <string name="nearby_info_menu_wikipedia_article">وڪيپيڊيا مضمون</string>
+  <string name="upload_image_problem_duplicate">فائل اڳ ئي العام ۾ موجود آھي. ڇا توھان کي پڪ آھي تہ توھان اڳتي وڌڻ ٿا چاھيو؟</string>
   <string name="give_permission">اجازت ڏيو</string>
   <string name="use_external_storage">ٻاھري سنڀار استعمال ڪريو</string>
   <string name="use_external_storage_summary">ايپ ۾ ڪئمرا سان ڪڍيل تصويرون پنھنجي ڊوائيس تي سانڍيو</string>

@@ -61,7 +61,7 @@
   <string name="provider_contributions">Mis subidas</string>
   <string name="menu_share">Compartir</string>
   <string name="menu_open_in_browser">Ver en el navegador</string>
-  <string name="share_title_hint">Título</string>
+  <string name="share_title_hint" fuzzy="true">Título</string>
   <string name="add_title_toast">Proporciona un título para este archivo</string>
   <string name="share_description_hint">Descripción</string>
   <string name="login_failed_network">No se pudo iniciar sesión: falla de red</string>
@@ -82,7 +82,7 @@
   <string name="gps_disabled">El GPS está desactivado en tu dispositivo. ¿Quieres activarlo?</string>
   <string name="enable_gps">Activar GPS</string>
   <string name="contributions_subtitle_zero">No hay subidas aún</string>
-  <plurals name="contributions_subtitle">
+  <plurals name="contributions_subtitle" fuzzy="true">
     <item quantity="zero">\@string/contributions_subtitle_zero</item>
     <item quantity="one">%1$d carga</item>
     <item quantity="other">%1$d cargas</item>
@@ -181,7 +181,6 @@
   <string name="title_activity_nearby">Lugares cercanos</string>
   <string name="no_nearby">No se encontraron lugares cercanos</string>
   <string name="warning">Atención</string>
-  <string name="upload_image_problem_duplicate">Este archivo ya existe en Commons. ¿Confirmas que quieres continuar?</string>
   <string name="yes">Sí</string>
   <string name="no">No</string>
   <string name="media_detail_title">Título</string>
@@ -243,6 +242,7 @@
   <string name="error_while_cache">Error al almacenar imágenes en la antememoria</string>
   <string name="title_info">Un título único descriptivo para el archivo, que servirá como un nombre de archivo. Puede usar un lenguaje claro con espacios. No incluya la extensión del archivo.</string>
   <string name="description_info">Por favor, describa el elemento multimedia tanto como sea posible: ¿dónde fue tomado?, ¿qué muestra?, ¿cuál es el contexto? Por favor, describa los objetos o personas. Ofrezca la información que no puede ser inferida tan fácilmente, por ejemplo el momento del día si es un paisaje. Si el medio muestra algo inusual, explique qué lo hace insual.</string>
+  <string name="upload_image_problem_duplicate">Este archivo ya existe en Commons. ¿Confirmas que quieres continuar?</string>
   <string name="upload_image_problem_dark">Esta imagen es demasiado oscura. ¿Confirmas que quieres cargarla? Wikimedia Commons solo acepta imágenes con valor enciclopédico.</string>
   <string name="upload_image_problem_blurry">Esta imagen se ve borrosa. ¿Confirmas que quieres cargarla? Wikimedia Commons solo acepta imágenes con valor enciclopédico.</string>
   <string name="give_permission">Otorgar permiso</string>
