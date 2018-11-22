@@ -1,6 +1,7 @@
 package fr.free.nrw.commons.upload;
 
 import android.annotation.SuppressLint;
+import android.content.ContentResolver;
 import android.content.ContentUris;
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -12,6 +13,7 @@ import android.os.ParcelFileDescriptor;
 import android.preference.PreferenceManager;
 import android.provider.DocumentsContract;
 import android.provider.MediaStore;
+import android.provider.OpenableColumns;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
@@ -32,6 +34,8 @@ import java.security.NoSuchAlgorithmException;
 import java.util.Date;
 
 import timber.log.Timber;
+
+import static com.mapbox.mapboxsdk.Mapbox.getApplicationContext;
 
 public class FileUtils {
 
@@ -76,21 +80,32 @@ public class FileUtils {
 
     /**
      * In older devices getPath() may fail depending on the source URI. Creating and using a copy of the file seems to work instead.
+     *
      * @return path of copy
      */
-    @Nullable
-    static String createCopyPath(ParcelFileDescriptor descriptor) {
-        try {
-            String copyPath = Environment.getExternalStorageDirectory().toString() + "/CommonsApp/" + new Date().getTime() + ".jpg";
-            File newFile = new File(Environment.getExternalStorageDirectory().toString() + "/CommonsApp");
-            newFile.mkdir();
-            FileUtils.copy(descriptor.getFileDescriptor(), copyPath);
-            Timber.d("Filepath (copied): %s", copyPath);
-            return copyPath;
-        } catch (IOException e) {
-            Timber.e(e);
-            return null;
-        }
+    @NonNull
+    static String createExternalCopyPathAndCopy(Uri uri, ContentResolver contentResolver) throws IOException {
+        FileDescriptor fileDescriptor = contentResolver.openFileDescriptor(uri, "r").getFileDescriptor();
+        String copyPath = Environment.getExternalStorageDirectory().toString() + "/CommonsApp/" + new Date().getTime() + "." + getFileExt(uri, contentResolver);
+        File newFile = new File(Environment.getExternalStorageDirectory().toString() + "/CommonsApp");
+        newFile.mkdir();
+        FileUtils.copy(fileDescriptor, copyPath);
+        Timber.d("Filepath (copied): %s", copyPath);
+        return copyPath;
+    }
+
+    /**
+     * In older devices getPath() may fail depending on the source URI. Creating and using a copy of the file seems to work instead.
+     *
+     * @return path of copy
+     */
+    @NonNull
+    static String createCopyPathAndCopy(Uri uri, Context context) throws IOException {
+        FileDescriptor fileDescriptor = context.getContentResolver().openFileDescriptor(uri, "r").getFileDescriptor();
+        String copyPath = context.getCacheDir().getAbsolutePath() + "/" + new Date().getTime() + "." + getFileExt(uri, context.getContentResolver());
+        FileUtils.copy(fileDescriptor, copyPath);
+        Timber.d("Filepath (copied): %s", copyPath);
+        return copyPath;
     }
 
     /**
@@ -121,13 +136,13 @@ public class FileUtils {
                 if ("primary".equalsIgnoreCase(type)) {
                     returnPath = Environment.getExternalStorageDirectory() + "/" + split[1];
                 }
-            } else if (isDownloadsDocument(uri))  { // DownloadsProvider
+            } else if (isDownloadsDocument(uri)) { // DownloadsProvider
 
                 final String id = DocumentsContract.getDocumentId(uri);
                 final Uri contentUri = ContentUris.withAppendedId(
                         Uri.parse("content://downloads/document"), Long.valueOf(id));
 
-                returnPath =  getDataColumn(context, contentUri, null, null);
+                returnPath = getDataColumn(context, contentUri, null, null);
             } else if (isMediaDocument(uri)) { // MediaProvider
 
                 final String docId = DocumentsContract.getDocumentId(uri);
@@ -304,6 +319,7 @@ public class FileUtils {
 
     /**
      * Read and return the content of a resource file as string.
+     *
      * @param fileName asset file's path (e.g. "/queries/nearby_query.rq")
      * @return the content of the file
      */
@@ -330,6 +346,7 @@ public class FileUtils {
 
     /**
      * Deletes files.
+     *
      * @param file context
      */
     public static boolean deleteFile(File file) {
@@ -355,7 +372,7 @@ public class FileUtils {
                 commonsAppDirectory.mkdir();
             }
 
-            File logsFile = new File(commonsAppDirectory,"logs.txt");
+            File logsFile = new File(commonsAppDirectory, "logs.txt");
             if (logsFile.exists()) {
                 //old logs file is useless
                 logsFile.delete();
@@ -377,4 +394,39 @@ public class FileUtils {
         }
     }
 
+    public static String getFilename(Uri uri, ContentResolver contentResolver) {
+        if (android.os.Build.VERSION.SDK_INT < android.os.Build.VERSION_CODES.JELLY_BEAN)
+            return "";
+        String result = null;
+        if (uri.getScheme().equals("content")) {
+            try (Cursor cursor = contentResolver.query(uri, null, null, null, null)) {
+                if (cursor != null && cursor.moveToFirst()) {
+                    result = cursor.getString(cursor.getColumnIndex(OpenableColumns.DISPLAY_NAME));
+                }
+            }
+        }
+        if (result == null) {
+            result = uri.getPath();
+            int cut = result.lastIndexOf('/');
+            if (cut != -1) {
+                result = result.substring(cut + 1);
+            }
+        }
+        return result;
+    }
+
+    public static String getFileExt(String fileName){
+        //Default file extension
+        String extension=".jpg";
+
+        int i = fileName.lastIndexOf('.');
+        if (i > 0) {
+            extension = fileName.substring(i+1);
+        }
+        return extension;
+    }
+
+    public static String getFileExt(Uri uri, ContentResolver contentResolver) {
+        return getFileExt(getFilename(uri, contentResolver));
+    }
 }

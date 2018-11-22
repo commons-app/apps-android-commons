@@ -7,6 +7,6 @@
     android:checked="false"
     android:gravity="center_vertical"
     android:padding="@dimen/tiny_gap"
-    android:theme="@style/DarkAppTheme">
+    android:textColor="@color/primaryDarkColor">
 
 </CheckedTextView>

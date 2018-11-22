@@ -58,7 +58,7 @@
   <string name="provider_contributions">Omat tallennukset</string>
   <string name="menu_share">Jaa</string>
   <string name="menu_open_in_browser">Näytä selaimessa</string>
-  <string name="share_title_hint">Otsikko</string>
+  <string name="share_title_hint" fuzzy="true">Otsikko</string>
   <string name="add_title_toast">Anna tälle tiedostolle otsikko</string>
   <string name="share_description_hint">Kuvaus</string>
   <string name="login_failed_network">Kirjautuminen epäonnistui - verkkovirhe</string>
@@ -78,7 +78,7 @@
   <string name="gps_disabled">GPS ei ole käytössä. Haluatko ottaa sen käyttöön?</string>
   <string name="enable_gps">Ota GPS käyttöön</string>
   <string name="contributions_subtitle_zero">Ei tallennuksia vielä</string>
-  <plurals name="contributions_subtitle">
+  <plurals name="contributions_subtitle" fuzzy="true">
     <item quantity="zero">\@string/contributions_subtitle_zero</item>
     <item quantity="one">%1$d tallennus</item>
     <item quantity="other">%1$d tallennusta</item>
@@ -176,7 +176,6 @@
   <string name="title_activity_nearby">Lähellä olevat paikat</string>
   <string name="no_nearby">Lähistöltä ei löytynyt paikkoja</string>
   <string name="warning">Varoitus</string>
-  <string name="file_exists">Tämä tiedosto on jo Wikimedia Commonsissa. Haluatko varmasti jatkaa?</string>
   <string name="yes">Kyllä</string>
   <string name="no">Ei</string>
   <string name="media_detail_title">Otsikko</string>
@@ -237,14 +236,15 @@
   <string name="error_while_cache">Virhe varastoidessa kuvia</string>
   <string name="title_info">Tiedoston yksilöllinen ja kuvaava otsikko, jota käytetään tiedostonimenä. Voit käyttää tavallista kieltä välilyönnein. Älä sisällytä tiedoston päätettä.</string>
   <string name="description_info">Kuvaile mediaa niin paljon kuin mahdollista: Missä se otettiin? Mitä se esittää? Mikä on asiayhteys? Kuvaile esineitä tai henkilöitä. Tuo ilmi tietoja, joita ei ole helppo arvailla, esimerkiksi vuorokaudenaika, jos se on maisema. Jos media esittää jotain epätavallista, selitä, mikä tekee siitä epätavallisen.</string>
-  <string name="upload_image_too_dark">Tämä kuva on liian tumma, haluatko varmasti ladata sen? Wikimedia Commons on vain kuville, joilla on tietosanakirja-arvo.</string>
-  <string name="upload_image_blurry">Tämä kuva on epäselvä, haluatko varmasti ladata sen? Wikimedia Commons on vain kuville, joilla on tietosanakirja-arvo.</string>
+  <string name="upload_image_problem_duplicate">Tämä tiedosto on jo Wikimedia Commonsissa. Haluatko varmasti jatkaa?</string>
+  <string name="upload_image_problem_dark">Tämä kuva on liian tumma, haluatko varmasti ladata sen? Wikimedia Commons on vain kuville, joilla on tietosanakirja-arvo.</string>
+  <string name="upload_image_problem_blurry">Tämä kuva on epäselvä, haluatko varmasti ladata sen? Wikimedia Commons on vain kuville, joilla on tietosanakirja-arvo.</string>
   <string name="give_permission">Anna lupa</string>
   <string name="use_external_storage">Käytä ulkoista tallennustilaa</string>
   <string name="use_external_storage_summary">Tallenna sovelluksen sisäisen kameran kanssa otetut kuvat laitteellesi</string>
   <string name="login_to_your_account">Kirjaudu tilillesi</string>
   <string name="send_log_file">Lähetä lokitiedosto</string>
-  <string name="send_log_file_description" fuzzy="true">Lähetä lokitiedosto kehittäjille sähköpostin kautta</string>
+  <string name="send_log_file_description">Lähetä lokitiedosto kehittäjille sähköpostin välityksellä auttaaksesi sovelluksen ongelmien korjaamisessa. Huomautus: lokit saattavat mahdollisesti sisältää tunnistettavaa tietoa</string>
   <string name="no_web_browser">Ei verkkoselainta jolla avata URL-osoite</string>
   <string name="null_url">Virhe! URL-osoitetta ei löytynyt</string>
   <string name="nominate_deletion">Ehdotettu poistettavaksi</string>
@@ -255,6 +255,8 @@
   <string name="skip_login_title">Haluatko todella ohittaa kirjautumisen?</string>
   <string name="skip_login_message">Et voi ladata kuvia.</string>
   <string name="login_alert_message">Kirjaudu sisään käyttääksesi tätä ominaisuutta</string>
+  <string name="copy_wikicode">Kopioi wikiteksti leikepöydälle</string>
+  <string name="wikicode_copied">Wikiteksti kopioitiin leikepöydälle</string>
   <string name="nearby_location_has_not_changed">Sijainti ei ole muuttunut.</string>
   <string name="nearby_location_not_available">Sijainti ei käytettävissä.</string>
   <string name="location_permission_rationale_nearby">Lupa vaaditaan läheisten paikkojen luettelon näyttämiseen</string>
@@ -304,11 +306,16 @@
   <string name="quiz_question_string">Onko tämä kuva OK tallennettavaksi?</string>
   <string name="question">Kysymys</string>
   <string name="result">Tulos</string>
+  <string name="construction_event_answer">Kuvat, jotka esittävät teknologiaa tai kulttuuria ovat erittäin tervetulleita Commonsiin.</string>
+  <string name="warning_for_image_reverts">VAROITUS: Enemmän kuin %1$s tallentamistasi kuvista on poistettu. Jos jatkat poistamista vaativien kuvien tallentamista, tilisi todennäköisesti estetään.</string>
+  <string name="congratulatory_message_quiz">Sait %1$s vastausta oikein. Onnittelut!</string>
   <string name="warning_for_no_answer">Valitse yksi kahdesta vaihtoehdosta vastataksesi kysymykseen</string>
   <string name="user_not_logged_in">Istuntosi on vanhentunut. Kirjaudu sisään uudelleen.</string>
+  <string name="quiz_result_share_message">Jaa visailusi ystäviesi kanssa!</string>
   <string name="continue_message">Jatka</string>
   <string name="correct">Oikea vastaus</string>
   <string name="wrong">Väärä vastaus</string>
+  <string name="quiz_screenshot_question">Onko tämä kuvakaappaus OK tallennettavaksi?</string>
   <string name="share_app_title">Jaa sovellus</string>
   <string name="share_coordinates_not_present">Koordinaatteja ei annettu kuvaa valittaessa</string>
   <string name="error_fetching_nearby_places">Virhe paikkoja haettaessa.</string>
@@ -317,9 +324,14 @@
   <string name="search_history_deleted">Hakuhistoria poistettu</string>
   <string name="Achievements">Saavutukset</string>
   <string name="statistics">TILASTOT</string>
+  <string name="statistics_thanks">Kiitos vastaanotettu</string>
+  <string name="statistics_featured">Suositellut kuvat</string>
   <string name="level">TASO</string>
   <string name="images_uploaded">Kuvia tallennettu</string>
   <string name="images_used_by_wiki">Kuvia käytetty</string>
+  <string name="achievements_share_message">Jaa saavutuksesi ystäviesi kanssa!</string>
+  <string name="error_occurred">Tapahtui virhe!</string>
+  <string name="notifications_channel_name_all">Commons-ilmoitus</string>
   <string name="navigation_item_bookmarks">Kirjanmerkit</string>
   <string name="title_activity_bookmarks">Kirjanmerkit</string>
   <string name="title_page_bookmarks_pictures">Kuvat</string>

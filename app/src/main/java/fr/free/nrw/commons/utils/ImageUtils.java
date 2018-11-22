@@ -7,6 +7,7 @@ import android.graphics.BitmapRegionDecoder;
 import android.graphics.Color;
 import android.graphics.Rect;
 import android.net.Uri;
+import android.support.annotation.IntDef;
 import android.support.annotation.Nullable;
 
 import com.facebook.common.executors.CallerThreadExecutor;
@@ -20,6 +21,8 @@ import com.facebook.imagepipeline.request.ImageRequest;
 import com.facebook.imagepipeline.request.ImageRequestBuilder;
 
 import java.io.IOException;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
 
 import fr.free.nrw.commons.R;
 import timber.log.Timber;
@@ -30,20 +33,44 @@ import timber.log.Timber;
 
 public class ImageUtils {
 
-    public enum Result {
-        IMAGE_DARK,
-        IMAGE_OK
+    public static final int IMAGE_DARK = 1;
+    public static final int IMAGE_BLURRY = 1 << 1;
+    public static final int IMAGE_DUPLICATE = 1 << 2;
+    public static final int IMAGE_OK = 0;
+    public static final int IMAGE_KEEP = -1;
+    public static final int IMAGE_WAIT = -2;
+    public static final int EMPTY_TITLE = -3;
+    public static final int FILE_NAME_EXISTS = -4;
+    public static final int NO_CATEGORY_SELECTED = -5;
+
+    @IntDef(
+            flag = true,
+            value = {
+                    IMAGE_DARK,
+                    IMAGE_BLURRY,
+                    IMAGE_DUPLICATE,
+                    IMAGE_OK,
+                    IMAGE_KEEP,
+                    IMAGE_WAIT,
+                    EMPTY_TITLE,
+                    FILE_NAME_EXISTS,
+                    NO_CATEGORY_SELECTED
+            }
+    )
+    @Retention(RetentionPolicy.SOURCE)
+    public @interface Result {
     }
 
     /**
      * @param bitmapRegionDecoder BitmapRegionDecoder for the image we wish to process
-     * @return Result.IMAGE_OK if image is neither dark nor blurry or if the input bitmapRegionDecoder provided is null
-     *         Result.IMAGE_DARK if image is too dark
+     * @return IMAGE_OK if image is neither dark nor blurry or if the input bitmapRegionDecoder provided is null
+     * IMAGE_DARK if image is too dark
      */
-    public static Result checkIfImageIsTooDark(BitmapRegionDecoder bitmapRegionDecoder) {
+    public static @Result
+    int checkIfImageIsTooDark(BitmapRegionDecoder bitmapRegionDecoder) {
         if (bitmapRegionDecoder == null) {
             Timber.e("Expected bitmapRegionDecoder was null");
-            return Result.IMAGE_OK;
+            return IMAGE_OK;
         }
 
         int loadImageHeight = bitmapRegionDecoder.getHeight();
@@ -59,10 +86,10 @@ public class ImageUtils {
         Bitmap processBitmap = bitmapRegionDecoder.decodeRegion(rect,null);
 
         if (checkIfImageIsDark(processBitmap)) {
-            return Result.IMAGE_DARK;
+            return IMAGE_DARK;
         }
 
-        return Result.IMAGE_OK;
+        return IMAGE_OK;
     }
 
     /**
@@ -132,8 +159,9 @@ public class ImageUtils {
     /**
      * Downloads the image from the URL and sets it as the phone's wallpaper
      * Fails silently if download or setting wallpaper fails.
-     * @param context
-     * @param imageUrl
+     *
+     * @param context context
+     * @param imageUrl Url of the image
      */
     public static void setWallpaperFromImageUrl(Context context, Uri imageUrl) {
         Timber.d("Trying to set wallpaper from url %s", imageUrl.toString());
@@ -150,7 +178,7 @@ public class ImageUtils {
 
             @Override
             public void onNewResultImpl(@Nullable Bitmap bitmap) {
-                if (dataSource.isFinished() && bitmap != null){
+                if (dataSource.isFinished() && bitmap != null) {
                     Timber.d("Bitmap loaded from url %s", imageUrl.toString());
                     setWallpaper(context, Bitmap.createBitmap(bitmap));
                     dataSource.close();
@@ -173,7 +201,29 @@ public class ImageUtils {
             wallpaperManager.setBitmap(bitmap);
             ViewUtil.showLongToast(context, context.getString(R.string.wallpaper_set_successfully));
         } catch (IOException e) {
-            Timber.e(e,"Error setting wallpaper");
+            Timber.e(e, "Error setting wallpaper");
         }
+    }
+
+    public static String getErrorMessageForResult(Context context, @Result int result) {
+        String errorMessage;
+        if (result == ImageUtils.IMAGE_DARK)
+            errorMessage = context.getString(R.string.upload_image_problem_dark);
+        else if (result == ImageUtils.IMAGE_BLURRY)
+            errorMessage = context.getString(R.string.upload_image_problem_blurry);
+        else if (result == ImageUtils.IMAGE_DUPLICATE)
+            errorMessage = context.getString(R.string.upload_image_problem_duplicate);
+        else if (result == (ImageUtils.IMAGE_DARK|ImageUtils.IMAGE_BLURRY))
+            errorMessage = context.getString(R.string.upload_image_problem_dark_blurry);
+        else if (result == (ImageUtils.IMAGE_DARK|ImageUtils.IMAGE_DUPLICATE))
+            errorMessage = context.getString(R.string.upload_image_problem_dark_duplicate);
+        else if (result == (ImageUtils.IMAGE_BLURRY|ImageUtils.IMAGE_DUPLICATE))
+            errorMessage = context.getString(R.string.upload_image_problem_blurry_duplicate);
+        else if (result == (ImageUtils.IMAGE_DARK|ImageUtils.IMAGE_BLURRY|ImageUtils.IMAGE_DUPLICATE))
+            errorMessage = context.getString(R.string.upload_image_problem_dark_blurry_duplicate);
+        else
+            return "";
+
+        return errorMessage;
     }
 }

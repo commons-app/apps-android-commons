@@ -49,7 +49,7 @@
   <string name="provider_contributions">Barkerdışê mı</string>
   <string name="menu_share">Vıla ke</string>
   <string name="menu_open_in_browser">Rovıte dı akê</string>
-  <string name="share_title_hint">Sername</string>
+  <string name="share_title_hint" fuzzy="true">Sername</string>
   <string name="share_description_hint">Şınasnayış</string>
   <string name="login_failed_network">Xırabiya kewten-network xeta</string>
   <string name="login_failed_throttled">Şıma xeylê rayi kerd ke cı kewê, a ser nêvıst. Şıma rê zehmet 2-3 deqey ra tepeya reyna bıcerrebnên.</string>
@@ -63,7 +63,7 @@
   <string name="menu_save_categories">Star ke</string>
   <string name="refresh_button">Newe ke</string>
   <string name="display_list_button">Liste</string>
-  <plurals name="contributions_subtitle">
+  <plurals name="contributions_subtitle" fuzzy="true">
     <item quantity="zero">\@string/contributions_subtitle_zero</item>
     <item quantity="one">Yew  barbiyayış</item>
     <item quantity="other">%1$d barbiyayışi</item>
@@ -81,6 +81,7 @@
   <string name="categories_activity_title">Kategoriyi</string>
   <string name="title_activity_settings">Sazi</string>
   <string name="title_activity_signup">Qeyd be</string>
+  <string name="title_activity_category_details">Kategoriye</string>
   <string name="menu_about">Heq te cı</string>
   <string name="about_improve">Qandê yew &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;GitHub-cıkewtış&lt;/a&gt;ê neweyi rê rapor û teklifan bıaferne.</string>
   <string name="about_privacy_policy">&lt;u&gt;Politikaya nımıtışi&lt;/u&gt;</string>
@@ -137,7 +138,11 @@
   <string name="navigation_item_home">Keye</string>
   <string name="navigation_item_upload">Bar ke</string>
   <string name="navigation_item_logout">Veciyayış</string>
+  <string name="navigation_item_login">Cı kewe</string>
+  <string name="about_translate_title">Zıwani</string>
   <string name="about_translate_cancel">Bıtexelne</string>
   <string name="retry">Anciya bıcerrebne</string>
   <string name="showcase_view_got_it_button">Mı fehm kerd!</string>
+  <string name="menu_search_button">Cıgeyrayış</string>
+  <string name="title_activity_search">Cıgeyrayış</string>
 </resources>

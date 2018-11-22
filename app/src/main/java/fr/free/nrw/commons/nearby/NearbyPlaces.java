@@ -23,9 +23,9 @@ import timber.log.Timber;
 
 public class NearbyPlaces {
 
-    private static final int MIN_RESULTS = 40;
+    private static int MIN_RESULTS = 40;
     private static final double INITIAL_RADIUS = 1.0; // in kilometers
-    private static final double MAX_RADIUS = 300.0; // in kilometers
+    private static double MAX_RADIUS = 300.0; // in kilometers
     private static final double RADIUS_MULTIPLIER = 1.618;
     private static final Uri WIKIDATA_QUERY_URL = Uri.parse("https://query.wikidata.org/sparql");
     private static final Uri WIKIDATA_QUERY_UI_URL = Uri.parse("https://query.wikidata.org/");
@@ -41,8 +41,21 @@ public class NearbyPlaces {
         }
     }
 
-    List<Place> getFromWikidataQuery(LatLng curLatLng, String lang) throws IOException {
+    List<Place> getFromWikidataQuery(LatLng curLatLng, String lang, boolean returnClosestResult) throws IOException {
         List<Place> places = Collections.emptyList();
+
+        /**
+         * If returnClosestResult is true, then this means that we are trying to get closest point
+         * to use in cardView above contributions list
+         */
+        if (returnClosestResult) {
+            MIN_RESULTS = 1; // Return closest nearby place
+            MAX_RADIUS = 5;  // Return places only in 5 km area
+            radius = INITIAL_RADIUS; // refresh radius again, otherwise increased radius is grater than MAX_RADIUS, thus returns null
+        } else {
+            MIN_RESULTS = 40;
+            MAX_RADIUS = 300.0; // in kilometers
+        }
 
             // increase the radius gradually to find a satisfactory number of nearby places
             while (radius <= MAX_RADIUS) {
@@ -150,4 +163,5 @@ public class NearbyPlaces {
 
         return places;
     }
+
 }
