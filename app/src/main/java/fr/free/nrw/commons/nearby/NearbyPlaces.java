@@ -30,7 +30,7 @@ public class NearbyPlaces {
     private static final Uri WIKIDATA_QUERY_URL = Uri.parse("https://query.wikidata.org/sparql");
     private static final Uri WIKIDATA_QUERY_UI_URL = Uri.parse("https://query.wikidata.org/");
     private final String wikidataQuery;
-    private double radius = INITIAL_RADIUS;
+    public double radius = INITIAL_RADIUS;
 
     public NearbyPlaces() {
         try {

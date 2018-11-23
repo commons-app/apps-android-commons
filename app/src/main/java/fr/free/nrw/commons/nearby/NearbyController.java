@@ -31,6 +31,8 @@ public class NearbyController {
     private static final int MAX_RESULTS = 1000;
     private final NearbyPlaces nearbyPlaces;
     private final SharedPreferences prefs;
+    public static double searchedRadius = 10.0; //in kilometers
+    public static LatLng currentLocation;
 
     @Inject
     public NearbyController(NearbyPlaces nearbyPlaces,
@@ -93,6 +95,11 @@ public class NearbyController {
             }
             nearbyPlacesInfo.placeList = places;
             nearbyPlacesInfo.boundaryCoordinates = boundaryCoordinates;
+            if (!returnClosestResult) {
+                // Do not update searched radius, if controller is used for nearby card notification
+                searchedRadius = nearbyPlaces.radius;
+                currentLocation = curLatLng;
+            }
             return nearbyPlacesInfo;
         }
         else {

@@ -12,6 +12,16 @@
             android:background="@color/status_bar_blue"
             >
 
+            <Button
+                android:id="@+id/search_this_area_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:visibility="gone"
+                android:background="@color/white"
+                android:textColor="@color/status_bar_blue"
+                android:text="Search this area" />
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"

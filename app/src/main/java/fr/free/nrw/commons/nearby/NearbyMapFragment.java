@@ -23,6 +23,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -117,6 +118,8 @@ public class NearbyMapFragment extends DaggerFragment {
     private Marker currentLocationMarker;
     private MapboxMap mapboxMap;
     private PolygonOptions currentLocationPolygonOptions;
+
+    private Button searchThisAreaButton;
 
     private boolean isBottomListSheetExpanded;
     private final double CAMERA_TARGET_SHIFT_FACTOR_PORTRAIT = 0.06;
@@ -405,6 +408,8 @@ public class NearbyMapFragment extends DaggerFragment {
         bookmarkButton = getActivity().findViewById(R.id.bookmarkButton);
         bookmarkButtonImage = getActivity().findViewById(R.id.bookmarkButtonImage);
 
+        searchThisAreaButton = ((NearbyFragment)getParentFragment()).view.findViewById(R.id.search_this_area_button);
+
     }
 
     private void setListeners() {
@@ -537,11 +542,32 @@ public class NearbyMapFragment extends DaggerFragment {
                 @Override
                 public void onMapReady(MapboxMap mapboxMap) {
                     NearbyMapFragment.this.mapboxMap = mapboxMap;
+                    addMapMovementListeners();
                     updateMapSignificantly();
                 }
             });
             mapView.setStyleUrl("asset://mapstyle.json");
         }
+    }
+
+    private void addMapMovementListeners() {
+        mapboxMap.addOnCameraMoveListener(new MapboxMap.OnCameraMoveListener() {
+            @Override
+            public void onCameraMove() {
+                Log.d("deneme","target:"+mapboxMap.getCameraPosition().target);
+                if (NearbyController.currentLocation != null) {
+                    double distance = mapboxMap.getCameraPosition().target
+                            .distanceTo(new LatLng(NearbyController.currentLocation.getLatitude()
+                                    , NearbyController.currentLocation.getLongitude()));
+                    if (distance > NearbyController.searchedRadius*1000) {
+                        Log.d("deneme","You went too far");
+                        if (searchThisAreaButton.getVisibility() != View.VISIBLE) {
+                            searchThisAreaButton.setVisibility(View.VISIBLE);
+                        }
+                    }
+                }
+            }
+        });
     }
 
     /**
