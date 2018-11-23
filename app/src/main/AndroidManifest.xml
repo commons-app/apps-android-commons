@@ -44,7 +44,7 @@
         <activity android:name=".WelcomeActivity" />
 
         <activity android:name=".upload.UploadActivity"
-            android:icon="@drawable/ic_launcher"
+            android:icon="@mipmap/ic_launcher"
             android:label="@string/app_name">
             <intent-filter android:label="@string/intent_share_upload_label">
                 <action android:name="android.intent.action.SEND" />
@@ -65,7 +65,7 @@
         </activity>
         <activity
             android:name=".contributions.MainActivity"
-            android:icon="@drawable/ic_launcher"
+            android:icon="@mipmap/ic_launcher"
             android:label="@string/app_name" />
         <activity
             android:name=".settings.SettingsActivity"
