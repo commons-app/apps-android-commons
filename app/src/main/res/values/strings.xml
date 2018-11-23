@@ -425,5 +425,6 @@ Upload your first media by touching the camera or gallery icon above.</string>
   <string name="no_go_back">No, Go Back</string>
 
   <string name="upload_flow_all_images_in_set">(For all images in set)</string>
+  <string name="search_this_area">Search this area</string>
 
 </resources>

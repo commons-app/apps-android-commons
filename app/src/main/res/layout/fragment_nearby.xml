@@ -20,7 +20,7 @@
                 android:visibility="gone"
                 android:background="@color/white"
                 android:textColor="@color/status_bar_blue"
-                android:text="Search this area" />
+                android:text="@string/search_this_area" />
 
             <LinearLayout
                 android:layout_width="match_parent"
