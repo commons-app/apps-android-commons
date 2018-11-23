@@ -45,7 +45,7 @@
   <string name="provider_contributions">My uploads</string>
   <string name="menu_share">Share</string>
   <string name="menu_open_in_browser">View in Browser</string>
-  <string name="share_title_hint">Title</string>
+  <string name="share_title_hint">Title (Required)</string>
   <string name="add_title_toast">Please provide a title for this file</string>
   <string name="share_description_hint">Description</string>
   <string name="login_failed_network">Unable to login - network failure</string>
@@ -69,8 +69,8 @@
   <plurals name="contributions_subtitle">
     <!--zero is not used in english. Category mentioned here for easy reference in future-->
     <item quantity="zero">@string/contributions_subtitle_zero</item>
-    <item quantity="one">%1$d upload</item>
-    <item quantity="other">%1$d uploads</item>
+    <item quantity="one">(%1$d)</item>
+    <item quantity="other">(%1$d)</item>
   </plurals>
   <plurals name="starting_multiple_uploads">
     <item quantity="one">Starting %1$d upload</item>
@@ -167,7 +167,7 @@
   <string name="title_activity_nearby">Nearby Places</string>
   <string name="no_nearby">No nearby places found</string>
   <string name="warning">Warning</string>
-  <string name="file_exists">This file already exists on Commons. Are you sure you want to proceed?</string>
+  <string name="upload_image_duplicate">This file already exists on Commons. Are you sure you want to proceed?</string>
   <string name="yes">Yes</string>
   <string name="no">No</string>
   <string name="media_detail_title">Title</string>
@@ -235,6 +235,15 @@
   <string name="description_info">Please describe the media as much as possible: Where was it taken? What does it show? What is the context? Please describe the objects or persons. Reveal information that can not be easily guessed, for instance the time of day if it is a landscape. If the media shows something unusual, please explain what makes it unusual.</string>
   <string name="upload_image_too_dark">This picture is too dark, are you sure you want to upload it? Wikimedia Commons is only for pictures with encyclopedic value.</string>
   <string name="upload_image_blurry">This picture is blurry, are you sure you want to upload it? Wikimedia Commons is only for pictures with encyclopedic value.</string>
+
+  <string name="upload_image_problem_duplicate">This file already exists on Commons. Are you sure you want to proceed?</string>
+  <string name="upload_image_problem_dark">This picture is too dark, are you sure you want to upload it? Wikimedia Commons is only for pictures with encyclopedic value.</string>
+  <string name="upload_image_problem_blurry">This picture is blurry, are you sure you want to upload it? Wikimedia Commons is only for pictures with encyclopedic value.</string>
+  <string name="upload_image_problem_dark_duplicate">This picture is too dark and already exists on Commons, are you sure you want to upload it? Please only upload pictures with encyclopedic value.</string>
+  <string name="upload_image_problem_blurry_duplicate">This picture is blurry and already exists on Commons, are you sure you want to upload it? Please only upload pictures with encyclopedic value.</string>
+  <string name="upload_image_problem_dark_blurry">This picture is too dark and is blurry, are you sure you want to upload it? Please only upload pictures with encyclopedic value.</string>
+  <string name="upload_image_problem_dark_blurry_duplicate">This picture is too dark, is blurry and already exists on Commons, are you sure you want to upload it? Please only upload pictures with encyclopedic value.</string>
+
   <string name="give_permission">Give permission</string>
   <string name="use_external_storage">Use external storage</string>
   <string name="use_external_storage_summary">Save pictures taken with the in-app camera on your device</string>
@@ -336,6 +345,7 @@
 
   <string name="delete_recent_searches_dialog">Are you sure you want to clear your search history?</string>
   <string name="search_history_deleted">Search history deleted</string>
+  <string name="nominate_delete">Nominate For Deletion</string>
 
   <string name="Achievements">Achievements</string>
   <string name="statistics">STATISTICS</string>
@@ -354,8 +364,30 @@
 
   <string name="error_occurred">Error occurred!</string>
   <string name="notifications_channel_name_all">Commons Notification</string>
+
+  <string name="contributions_fragment">Contributions</string>
+  <string name="nearby_fragment">Nearby</string>
+  <string name="notifications">Notifications</string>
+  <string name="display_nearby_notification">Display nearby notification</string>
+  <string name="display_nearby_notification_summary">Tap here to see the nearest place that needs pictures</string>
+  <string name="no_close_nearby">No nearby places found close to you</string>
+  <string name="list_sheet">List</string>
+
   <string name="storage_permission">Storage Permission</string>
   <string name="write_storage_permission_rationale_for_image_share">We need your permission to access the external storage of your device in order to upload images.</string>
+  <string name="nearby_notification_dismiss_message">You won\'t see the nearest place that needs pictures anymore. However, you can re-enable this notification in Settings if you wish.</string>
+
+  <string name="step_count">Step %1$d of %2$d</string>
+  <string name="image_in_set_label">Image %1$d in set</string>
+  <string name="next">Next</string>
+  <string name="previous">Previous</string>
+  <string name="submit">Submit</string>
+  <string name="upload_title_duplicate">A file with the file name %1$s exists. Are you sure you want to proceed?</string>
+  <string name="map_application_missing">No compatible map application could be found on your device. Please install a map application to use this feature.</string>
+  <plurals name="upload_count_title">
+        <item quantity="one">%1$d Upload</item>
+        <item quantity="other">%1$d Uploads</item>
+    </plurals>
   <string name="navigation_item_bookmarks">Bookmarks</string>
   <string name="title_activity_bookmarks">Bookmarks</string>
   <string name="title_page_bookmarks_pictures">Pictures</string>
@@ -365,6 +397,33 @@
   <string name="bookmark_empty">You haven\'t added any bookmarks</string>
   <string name="provider_bookmarks_location">Bookmarks</string>
   <string name="log_collection_started">Log collection started. Please RESTART the app, perform action that you wish to log, and then tap \'Send log file\' again</string>
+
+  <string name="deletion_reason_uploaded_by_mistake">I uploaded it by mistake</string>
+  <string name="deletion_reason_publicly_visible">I did not know it would be publicly visible</string>
+  <string name="deletion_reason_bad_for_my_privacy">I realized it is bad for my privacy</string>
+  <string name="deletion_reason_no_longer_want_public">I changed my mind, I don\'t want it to be publicly visible anymore</string>
+  <string name="deletion_reason_not_interesting">Sorry this picture is not interesting for an encyclopedia</string>
+  <string name="uploaded_by_myself">Uploaded by myself on</string>
+  <string name="used_by">,used in</string>
+  <string name="articles">articles</string>
+
   <string name="no_uploads">Welcome to Commons!\n
 Upload your first media by touching the camera or gallery icon above.</string>
+
+  <string name="desc_language_Worldwide">Worldwide</string>
+  <string name="desc_language_America">America</string>
+  <string name="desc_language_Europe">Europe</string>
+  <string name="desc_language_Middle_East">Middle East</string>
+  <string name="desc_language_Africa">Africa</string>
+  <string name="desc_language_Asia">Asia</string>
+  <string name="desc_language_Pacific">Pacific</string>
+
+  <string name="no_categories_selected">No Categories Selected</string>
+  <string name="no_categories_selected_warning_desc">Images without categories are rarely usable. Are you sure you want to submit without selecting categories?</string>
+
+  <string name="yes_submit">Yes, Submit</string>
+  <string name="no_go_back">No, Go Back</string>
+
+  <string name="upload_flow_all_images_in_set">(For all images in set)</string>
+
 </resources>

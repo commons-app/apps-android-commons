@@ -47,7 +47,7 @@
   <string name="provider_contributions">Fy uwchlwythiadau</string>
   <string name="menu_share">Rhannu</string>
   <string name="menu_open_in_browser">Agor yn y Porwr</string>
-  <string name="share_title_hint">Teitl</string>
+  <string name="share_title_hint" fuzzy="true">Teitl</string>
   <string name="add_title_toast">Rhowch deitl i\'r ffeil</string>
   <string name="share_description_hint">Disgrifiad</string>
   <string name="login_failed_network">Yn methu mewngofnodi - methodd y rhwydwaith</string>
@@ -67,7 +67,7 @@
   <string name="gps_disabled">Ataliwyd GPS ar eich dyfais. Ydych chi am ei droi\'n weithredol?</string>
   <string name="enable_gps">Gweithredu\'r GPS</string>
   <string name="contributions_subtitle_zero">Heb uwchlwytho eto</string>
-  <plurals name="contributions_subtitle">
+  <plurals name="contributions_subtitle" fuzzy="true">
     <item quantity="zero">\@string/contributions_subtitle_zero</item>
     <item quantity="one">%1$d upload</item>
     <item quantity="other">%1$d uwchlwythiad</item>

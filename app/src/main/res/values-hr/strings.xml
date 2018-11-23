@@ -45,7 +45,7 @@
   <string name="provider_contributions">Moja postavljanja</string>
   <string name="menu_share">Podijeli</string>
   <string name="menu_open_in_browser">Pogledaj u pregledniku</string>
-  <string name="share_title_hint">Naziv</string>
+  <string name="share_title_hint" fuzzy="true">Naziv</string>
   <string name="add_title_toast">Molimo imenujte ovu datoteku</string>
   <string name="share_description_hint">Opis</string>
   <string name="login_failed_network">Prijava nije moguća - mrežna pogrješka</string>
@@ -65,7 +65,7 @@
   <string name="gps_disabled">GPS je onemogućen na Vašem uređaju. Želite li ga omogućiti?</string>
   <string name="enable_gps">Omogući GPS</string>
   <string name="contributions_subtitle_zero">Nemate još postavljenih datoteka</string>
-  <plurals name="contributions_subtitle">
+  <plurals name="contributions_subtitle" fuzzy="true">
     <item quantity="zero">\@string/contributions_subtitle_zero</item>
     <item quantity="one">%1$d postavljena datoteka</item>
     <item quantity="other">%1$d postavljene datoteke</item>
@@ -162,7 +162,6 @@
   <string name="title_activity_nearby">Mjesta u blizini</string>
   <string name="no_nearby">Nisu pronađena mjesta u blizini</string>
   <string name="warning">Upozorenje</string>
-  <string name="file_exists">Ova datoteka već postoji na Zajedničkom poslužitelju. Jeste li sigurni da želite nastaviti?</string>
   <string name="yes">Da</string>
   <string name="no">Ne</string>
   <string name="media_detail_title">Naslov</string>
@@ -222,8 +221,9 @@
   <string name="error_while_cache">Pogrješka predmemoriranja slika</string>
   <string name="title_info">Jedinstveni naziv datoteke koji će služiti kao njeno ime. Možete koristiti uobičajeni jezik s razmacima. Ne uključuje datotečni nastavak.</string>
   <string name="description_info">Opišite medij što je više moguće: gdje je napravljen, što prikazuje,... Opišite objekte ili osobe. Napišite informacije koje ne mogu biti lako okrivene, npr. doba dana ako je u pitanju pejzaž. Ako medij prikazuje nešto neobično, molimo objasnite što je neobično.</string>
-  <string name="upload_image_too_dark">Slika je pretamna, želite ili je ipak ostaviti? Zajednički poslužitelj je namijenjen slikama od enciklopedijske vrijednosti.</string>
-  <string name="upload_image_blurry">Slika je mutna, želite ili je ipak ostaviti? Zajednički poslužitelj je namijenjen slikama od enciklopedijske vrijednosti.</string>
+  <string name="upload_image_problem_duplicate">Ova datoteka već postoji na Zajedničkom poslužitelju. Jeste li sigurni da želite nastaviti?</string>
+  <string name="upload_image_problem_dark">Slika je pretamna, želite ili je ipak ostaviti? Zajednički poslužitelj je namijenjen slikama od enciklopedijske vrijednosti.</string>
+  <string name="upload_image_problem_blurry">Slika je mutna, želite ili je ipak ostaviti? Zajednički poslužitelj je namijenjen slikama od enciklopedijske vrijednosti.</string>
   <string name="give_permission">Daj dopuštenje</string>
   <string name="use_external_storage">Rabi vanjsku pohranu</string>
   <string name="use_external_storage_summary">Spremite slike načinjene kamerom Vašeg uređaja</string>

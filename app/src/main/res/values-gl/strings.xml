@@ -55,7 +55,7 @@
   <string name="provider_contributions">As miñas subidas</string>
   <string name="menu_share">Compartir</string>
   <string name="menu_open_in_browser">Amosar no navegador</string>
-  <string name="share_title_hint">Título</string>
+  <string name="share_title_hint" fuzzy="true">Título</string>
   <string name="add_title_toast">Por favor, proporcione un título para este ficheiro</string>
   <string name="share_description_hint">Descrición</string>
   <string name="login_failed_network">Erro ao acceder ao sistema: Fallou a rede</string>
@@ -76,7 +76,7 @@
   <string name="gps_disabled">O GPS está desactivado no seu dispositivo. Quere activalo?</string>
   <string name="enable_gps">Activar GPS</string>
   <string name="contributions_subtitle_zero">Aínda non hai subas</string>
-  <plurals name="contributions_subtitle">
+  <plurals name="contributions_subtitle" fuzzy="true">
     <item quantity="zero">\@string/contributions_subtitle_zero</item>
     <item quantity="one">%1$d carga</item>
     <item quantity="other">%1$d cargas</item>
@@ -175,7 +175,6 @@
   <string name="title_activity_nearby">Lugares próximos</string>
   <string name="no_nearby">Non se atoparon lugares preto</string>
   <string name="warning">Aviso</string>
-  <string name="file_exists">Este ficheiro xa existe en Commons. Está seguro de que quere continuar?</string>
   <string name="yes">Si</string>
   <string name="no">Non</string>
   <string name="media_detail_title">Título</string>
@@ -237,8 +236,9 @@
   <string name="error_while_cache">Erro mentras se gardaban as imaxes na caché</string>
   <string name="title_info">Un título único descritivo para o ficheiro, que servirá como un nome de ficheiro. Pode usar unha linguaxe clara con espazos. Non inclúa a extensión do ficheiro</string>
   <string name="description_info">Por favor, describa o ficheiro todo o posibleː Onde se gravou? Cal é o contexto? Por favor, describa os obxectos ou persoas. Indique información que non pode ser adiviñada de forma doada, por exemplo, a hora do día se é unha paisaxe. Se o ficheiro amosa algo pouco habitual, por favor, explique que é o que o fai excepcional.</string>
-  <string name="upload_image_too_dark">Esta imaxe é demasiado escura. Confirma que quere subila? Wikimedia Commons só acepta imaxes con valor enciclopédico.</string>
-  <string name="upload_image_blurry">Esta imaxe está borrosa. Confirma que quere subila? Wikimedia Commons só acepta imaxes con valor enciclopédico.</string>
+  <string name="upload_image_problem_duplicate">Este ficheiro xa existe en Commons. Está seguro de que quere continuar?</string>
+  <string name="upload_image_problem_dark">Esta imaxe é demasiado escura. Confirma que quere subila? Wikimedia Commons só acepta imaxes con valor enciclopédico.</string>
+  <string name="upload_image_problem_blurry">Esta imaxe está borrosa. Confirma que quere subila? Wikimedia Commons só acepta imaxes con valor enciclopédico.</string>
   <string name="give_permission">Outorgar permiso</string>
   <string name="use_external_storage">Usar o almacenamento externo</string>
   <string name="use_external_storage_summary">Gardar as imaxes capturadas coa cámara do seu dispositivo</string>

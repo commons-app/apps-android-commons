@@ -45,7 +45,7 @@
   <string name="provider_contributions">Innsendu skrárnar mínar</string>
   <string name="menu_share">Deila</string>
   <string name="menu_open_in_browser">Skoða í vafra</string>
-  <string name="share_title_hint">Titill</string>
+  <string name="share_title_hint" fuzzy="true">Titill</string>
   <string name="add_title_toast">Gefðu þessari skrá einhvern titil</string>
   <string name="share_description_hint">Lýsing</string>
   <string name="login_failed_network">Innskráning mistókst - bilun í neti</string>
@@ -64,7 +64,7 @@
   <string name="gps_disabled">GPS er óvirkt í tækinu þínu. Viltu virkja það?</string>
   <string name="enable_gps">Virkja GPS</string>
   <string name="contributions_subtitle_zero">Engar innsendingar ennþá</string>
-  <plurals name="contributions_subtitle">
+  <plurals name="contributions_subtitle" fuzzy="true">
     <item quantity="zero">\@string/contributions_subtitle_zero</item>
     <item quantity="one">%1$d innsending</item>
     <item quantity="other">%1$d innsendingar</item>
@@ -161,7 +161,6 @@
   <string name="title_activity_nearby">Staðir í nágrenninu</string>
   <string name="no_nearby">Engir staðir fundust í nágrenninu</string>
   <string name="warning">Aðvörun</string>
-  <string name="file_exists">Þessi skrá er þegar fyrirliggjandi á Commons. Ertu viss um að þú viljir halda áfram?</string>
   <string name="yes">Já</string>
   <string name="no">Nei</string>
   <string name="media_detail_title">Titill</string>
@@ -221,8 +220,9 @@
   <string name="error_while_cache">Villa kom upp í skyndiminni mynda</string>
   <string name="title_info">Einstakur og lýsandi titill, sem mun verða skráarheiti. Þú mátt nota einfaldan texta með bilum. Ekki hafa með neina skráarendingu</string>
   <string name="description_info">Lýstu gögnunum eins vel og auðið er: Hvar er myndin tekin? Hvað sýnir hún? Hvert er samhengið? Lýstu fólki og fyrirbærum. Gefðu upp þær upplýsingar sem ekki er auðvelt að giska á, til dæmis á hvaða tíma dags myndin er tekin ef hún sýnir landslag. Ef gögnin sýna eitthvað óvenjulegt, útskýrðu þá hvað það er sem sé sérstakt.</string>
-  <string name="upload_image_too_dark">Þessi mynd er of dökk, ertu viss um að þú viljir senda hana inn? Wikimedia Commons er aðeins fyrir myndir sem hafa eitthvað fræðslugildi.</string>
-  <string name="upload_image_blurry">Þessi mynd er ekki skörp, ertu viss um að þú viljir senda hana inn? Wikimedia Commons er aðeins fyrir myndir sem hafa eitthvað fræðslugildi.</string>
+  <string name="upload_image_problem_duplicate">Þessi skrá er þegar fyrirliggjandi á Commons. Ertu viss um að þú viljir halda áfram?</string>
+  <string name="upload_image_problem_dark">Þessi mynd er of dökk, ertu viss um að þú viljir senda hana inn? Wikimedia Commons er aðeins fyrir myndir sem hafa eitthvað fræðslugildi.</string>
+  <string name="upload_image_problem_blurry">Þessi mynd er ekki skörp, ertu viss um að þú viljir senda hana inn? Wikimedia Commons er aðeins fyrir myndir sem hafa eitthvað fræðslugildi.</string>
   <string name="give_permission">Gefa heimild</string>
   <string name="use_external_storage">Nota ytri gagnageymslu</string>
   <string name="use_external_storage_summary">Vistaðu myndir sem teknar hafa verið með innbyggðu myndavélinni í tækinu þínu</string>
