@@ -61,10 +61,10 @@ import fr.free.nrw.commons.Utils;
 import fr.free.nrw.commons.auth.LoginActivity;
 import fr.free.nrw.commons.bookmarks.locations.BookmarkLocationsDao;
 import fr.free.nrw.commons.contributions.ContributionController;
+import fr.free.nrw.commons.utils.LocationUtils;
 import fr.free.nrw.commons.utils.UriDeserializer;
 import fr.free.nrw.commons.utils.ViewUtil;
 import timber.log.Timber;
-import uk.co.deanwild.materialshowcaseview.MaterialShowcaseView;
 
 import static android.app.Activity.RESULT_OK;
 import static android.content.pm.PackageManager.PERMISSION_GRANTED;
@@ -247,8 +247,8 @@ public class NearbyMapFragment extends DaggerFragment {
      * called when user is out of boundaries (south, north, east or west) of markers drawn by
      * previous nearby call.
      */
-    public void updateMapSignificantly() {
-        Timber.d("updateMapSignificantly called, bundle is:"+bundleForUpdtes);
+    public void updateMapSignificantlyForCurrentLocation() {
+        Timber.d("updateMapSignificantlyForCurrentLocation called, bundle is:"+bundleForUpdtes);
         if (mapboxMap != null) {
             if (bundleForUpdtes != null) {
                 Gson gson = new GsonBuilder()
@@ -272,8 +272,19 @@ public class NearbyMapFragment extends DaggerFragment {
             mapboxMap.clear();
             addCurrentLocationMarker(mapboxMap);
             updateMapToTrackPosition();
-            addNearbyMarkerstoMapBoxMap();
+            // We are trying to find nearby places around our current location, thus custom parameter is nullified
+            addNearbyMarkerstoMapBoxMap(null);
         }
+    }
+
+    public void updateMapSignificantlyForCustomLocation(fr.free.nrw.commons.location.LatLng customLatLng, List<Place> placeList) {
+        List<NearbyBaseMarker> customBaseMarkerOptions =  NearbyController
+                .loadAttractionsFromLocationToBaseMarkerOptions(customLatLng,
+                        placeList,
+                        getActivity());
+        mapboxMap.clear();
+        // We are trying to find nearby places around our custom searched area, thus custom parameter is nonnull
+        addNearbyMarkerstoMapBoxMap(customBaseMarkerOptions);
     }
 
     // Only update current position marker and camera view
@@ -543,7 +554,7 @@ public class NearbyMapFragment extends DaggerFragment {
                 public void onMapReady(MapboxMap mapboxMap) {
                     NearbyMapFragment.this.mapboxMap = mapboxMap;
                     addMapMovementListeners();
-                    updateMapSignificantly();
+                    updateMapSignificantlyForCurrentLocation();
                 }
             });
             mapView.setStyleUrl("asset://mapstyle.json");
@@ -560,9 +571,18 @@ public class NearbyMapFragment extends DaggerFragment {
                             .distanceTo(new LatLng(NearbyController.currentLocation.getLatitude()
                                     , NearbyController.currentLocation.getLongitude()));
                     if (distance > NearbyController.searchedRadius*1000) {
-                        Log.d("deneme","You went too far");
                         if (searchThisAreaButton.getVisibility() != View.VISIBLE) {
+                            Log.d("deneme","You went too far");
                             searchThisAreaButton.setVisibility(View.VISIBLE);
+
+                            searchThisAreaButton.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View view) {
+                                    ((NearbyFragment)getParentFragment())
+                                            .refreshViewForCustomLocation(LocationUtils
+                                                    .mapBoxLatLngToCommonsLatLng(mapboxMap.getCameraPosition().target));
+                                }
+                            });
                         }
                     }
                 }
@@ -622,10 +642,17 @@ public class NearbyMapFragment extends DaggerFragment {
     /**
      * Adds markers for nearby places to mapbox map
      */
-    private void addNearbyMarkerstoMapBoxMap() {
+    private void addNearbyMarkerstoMapBoxMap(@Nullable List<NearbyBaseMarker> customNearbyBaseMarker) {
+        List<NearbyBaseMarker> baseMarkerOptions;
         Timber.d("addNearbyMarkerstoMapBoxMap is called");
+        if (customNearbyBaseMarker != null) {
+            // If we try to update nearby points for a custom location choosen from map (we are not there)
+            baseMarkerOptions = customNearbyBaseMarker;
+        } else {
+            // If we try to display nearby markers around our curret location
+            baseMarkerOptions = this.baseMarkerOptions;
+        }
         mapboxMap.addMarkers(baseMarkerOptions);
-
         mapboxMap.setOnInfoWindowCloseListener(marker -> {
             if (marker == selected) {
                 bottomSheetDetailsBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
