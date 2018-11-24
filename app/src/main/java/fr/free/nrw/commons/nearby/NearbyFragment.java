@@ -87,11 +87,13 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
 
     private LatLng curLatLng;
     private Disposable placesDisposable;
+    private Disposable placesDisposableCustom;
     private boolean lockNearbyView; //Determines if the nearby places needs to be refreshed
     public View view;
     private Snackbar snackbar;
 
     private LatLng lastKnownLocation;
+    private LatLng customLatLng;
 
     private final String NETWORK_INTENT_ACTION = "android.net.conn.CONNECTIVITY_CHANGE";
     private BroadcastReceiver broadcastReceiver;
@@ -312,6 +314,27 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
         }
     }
 
+    public void refreshViewForCustomLocation(LatLng customLatLng) {
+        this.customLatLng = customLatLng;
+        placesDisposableCustom = Observable.fromCallable(() -> nearbyController
+                .loadAttractionsFromLocation(customLatLng, false))
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(this::populatePlacesFromCustomLocation,
+                        throwable -> {
+                            Timber.d(throwable);
+                            showErrorMessage(getString(R.string.error_fetching_nearby_places));
+                        });
+    }
+
+    private void populatePlacesFromCustomLocation(NearbyController.NearbyPlacesInfo nearbyPlacesInfo) {
+        NearbyMapFragment nearbyMapFragment = getMapFragment();
+
+        if (nearbyMapFragment != null && curLatLng != null) {
+            nearbyMapFragment.updateMapSignificantlyForCustomLocation(customLatLng, nearbyPlacesInfo.placeList);
+        }
+    }
+
     private void populatePlaces(NearbyController.NearbyPlacesInfo nearbyPlacesInfo) {
         Timber.d("Populating nearby places");
         List<Place> placeList = nearbyPlacesInfo.placeList;
@@ -397,7 +420,7 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
                                     progressBar.setVisibility(View.GONE);
                                 });
                 nearbyMapFragment.setBundleForUpdtes(bundle);
-                nearbyMapFragment.updateMapSignificantly();
+                nearbyMapFragment.updateMapSignificantlyForCurrentLocation();
                 updateListFragment();
                 return;
             }
@@ -416,7 +439,7 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
                 nearbyMapFragment.updateMapSlightly();
             } else {
                 nearbyMapFragment.setBundleForUpdtes(bundle);
-                nearbyMapFragment.updateMapSignificantly();
+                nearbyMapFragment.updateMapSignificantlyForCurrentLocation();
                 updateListFragment();
             }
         } else {
@@ -649,6 +672,9 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
         super.onDestroy();
         if (placesDisposable != null) {
             placesDisposable.dispose();
+        }
+        if (placesDisposableCustom != null) {
+            placesDisposableCustom.dispose();
         }
     }
 
