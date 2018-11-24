@@ -12,23 +12,12 @@
             android:background="@color/status_bar_blue"
             >
 
-            <Button
-                android:id="@+id/search_this_area_button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
-                android:visibility="gone"
-                android:background="@color/white"
-                android:textColor="@color/status_bar_blue"
-                android:text="@string/search_this_area" />
-
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_below="@id/toolbar"
                 android:gravity="center_vertical"
                 android:orientation="horizontal">
-
 
                 <ProgressBar
                     android:id="@+id/progressBar"
@@ -80,6 +69,17 @@
             android:id="@+id/bottom_sheet_details"
             layout="@layout/bottom_sheet_details" />
 
+        <Button
+            android:id="@+id/search_this_area_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:background="@color/white"
+            android:singleLine="true"
+            android:visibility="gone"
+            app:elevation="6dp"
+            android:textColor="@color/status_bar_blue"
+            android:text="@string/search_this_area" />
 
         <android.support.design.widget.FloatingActionButton
             android:id="@+id/fab_plus"
