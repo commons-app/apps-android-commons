@@ -74,10 +74,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
+            android:layout_gravity="center_horizontal"
             android:background="@color/white"
             android:singleLine="true"
             android:visibility="gone"
             app:elevation="6dp"
+            android:layout_margin="8dp"
+            android:padding="8dp"
             android:textColor="@color/status_bar_blue"
             android:text="@string/search_this_area" />
 

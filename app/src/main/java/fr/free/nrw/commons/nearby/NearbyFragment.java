@@ -218,24 +218,36 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
 
     @Override
     public void onLocationChangedSignificantly(LatLng latLng) {
-        refreshView(LOCATION_SIGNIFICANTLY_CHANGED);
+        // Do not refresh nearby map if we are checking other areas with search this area button
+        if (!nearbyMapFragment.searchThisAreaModeOn) {
+            refreshView(LOCATION_SIGNIFICANTLY_CHANGED);
+        }
     }
 
     @Override
     public void onLocationChangedSlightly(LatLng latLng) {
-        refreshView(LOCATION_SLIGHTLY_CHANGED);
+        // Do not refresh nearby map if we are checking other areas with search this area button
+        if (!nearbyMapFragment.searchThisAreaModeOn) {
+            refreshView(LOCATION_SLIGHTLY_CHANGED);
+        }
     }
 
 
     @Override
     public void onLocationChangedMedium(LatLng latLng) {
         // For nearby map actions, there are no differences between 500 meter location change (aka medium change) and slight change
-        refreshView(LOCATION_SLIGHTLY_CHANGED);
+        // Do not refresh nearby map if we are checking other areas with search this area button
+        if (!nearbyMapFragment.searchThisAreaModeOn) {
+            refreshView(LOCATION_SLIGHTLY_CHANGED);
+        }
     }
 
     @Override
     public void onWikidataEditSuccessful() {
-        refreshView(MAP_UPDATED);
+        // Do not refresh nearby map if we are checking other areas with search this area button
+        if (!nearbyMapFragment.searchThisAreaModeOn) {
+            refreshView(MAP_UPDATED);
+        }
     }
 
     /**

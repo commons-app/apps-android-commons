@@ -126,6 +126,7 @@ public class NearbyMapFragment extends DaggerFragment {
     private final double CAMERA_TARGET_SHIFT_FACTOR_LANDSCAPE = 0.04;
 
     private boolean isMapReady;
+    public boolean searchThisAreaModeOn;
 
     private Bundle bundleForUpdtes;// Carry information from activity about changed nearby places and current location
 
@@ -571,6 +572,8 @@ public class NearbyMapFragment extends DaggerFragment {
                             .distanceTo(new LatLng(NearbyController.currentLocation.getLatitude()
                                     , NearbyController.currentLocation.getLongitude()));
                     if (distance > NearbyController.searchedRadius*1000) {
+                        searchThisAreaModeOn = true;
+
                         if (searchThisAreaButton.getVisibility() != View.VISIBLE) {
                             Log.d("deneme","You went too far");
                             searchThisAreaButton.setVisibility(View.VISIBLE);
@@ -584,6 +587,8 @@ public class NearbyMapFragment extends DaggerFragment {
                                 }
                             });
                         }
+                    } else {
+                        searchThisAreaModeOn = false;
                     }
                 }
             }
