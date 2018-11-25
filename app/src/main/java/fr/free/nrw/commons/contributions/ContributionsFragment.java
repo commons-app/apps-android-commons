@@ -588,7 +588,7 @@ public class ContributionsFragment
     }
 
     private void displayYouWontSeeNearbyMessage() {
-        ViewUtil.showLongToast(getActivity(), "You wont see narby place since you didn't gave permission");
+        ViewUtil.showLongToast(getActivity(), getResources().getString(R.string.unable_to_display_nearest_place));
     }
 
 
