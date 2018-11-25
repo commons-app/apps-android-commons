@@ -568,11 +568,11 @@ public class NearbyMapFragment extends DaggerFragment {
             @Override
             public void onCameraMove() {
                 Log.d("deneme","target:"+mapboxMap.getCameraPosition().target);
-                if (NearbyController.currentLocation != null) {
+                if (NearbyController.currentLocation != null) { // If our nearby markers are calculated at least once
                     double distance = mapboxMap.getCameraPosition().target
                             .distanceTo(new LatLng(NearbyController.currentLocation.getLatitude()
                                     , NearbyController.currentLocation.getLongitude()));
-                    if (distance > NearbyController.searchedRadius*1000) {
+                    if (distance > NearbyController.searchedRadius*1000) { //Convert to meter, and compare
                         searchThisAreaModeOn = true;
 
                         if (searchThisAreaButton.getVisibility() != View.VISIBLE) {
@@ -591,9 +591,11 @@ public class NearbyMapFragment extends DaggerFragment {
                     } else {
                         // Restore nearby map according to current location again.
                         searchThisAreaModeOn = false;
-                        searchThisAreaButton.setVisibility(View.GONE);
-                        ((NearbyFragment)getParentFragment())
-                                .refreshView(LocationServiceManager.LocationChangeType.LOCATION_SIGNIFICANTLY_CHANGED);
+                        if (searchThisAreaButton.getVisibility() == View.VISIBLE) {
+                            searchThisAreaButton.setVisibility(View.GONE);
+                            ((NearbyFragment)getParentFragment())
+                                    .refreshView(LocationServiceManager.LocationChangeType.LOCATION_SIGNIFICANTLY_CHANGED);
+                        }
                     }
                 }
             }
