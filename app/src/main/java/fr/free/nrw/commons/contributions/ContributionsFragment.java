@@ -27,6 +27,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Adapter;
 import android.widget.AdapterView;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 
 import java.util.ArrayList;
 import java.util.concurrent.CountDownLatch;
@@ -108,7 +110,8 @@ public class ContributionsFragment
     public LocationServiceManager locationManager;
 
     private boolean isFragmentAttachedBefore = false;
-
+    private View checkBoxView;
+    private CheckBox checkBox;
 
                         /**
      * Since we will need to use parent activity on onAuthCookieAcquired, we have to wait
@@ -140,6 +143,17 @@ public class ContributionsFragment
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_contributions, container, false);
         nearbyNoificationCardView = view.findViewById(R.id.card_view_nearby);
+        checkBoxView = View.inflate(getActivity(), R.layout.nearby_permission_dialog, null);
+        checkBox = (CheckBox) checkBoxView.findViewById(R.id.never_ask_again);
+        checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    
+                }
+            }
+        });
 
         if (savedInstanceState != null) {
             mediaDetailPagerFragment = (MediaDetailPagerFragment)getChildFragmentManager().findFragmentByTag(MEDIA_DETAIL_PAGER_FRAGMENT_TAG);
@@ -330,7 +344,9 @@ public class ContributionsFragment
                             getString(R.string.nearby_card_permission_title),
                             getString(R.string.nearby_card_permission_explanation),
                             () -> displayYouWontSeeNearbyMessage(),
-                            () -> enableLocationPermission());
+                            () -> enableLocationPermission(),
+                            checkBoxView,
+                            false);
                 }
             }
             break;
@@ -532,7 +548,9 @@ public class ContributionsFragment
                     getString(R.string.nearby_card_permission_title),
                     getString(R.string.nearby_card_permission_explanation),
                     () -> displayYouWontSeeNearbyMessage(),
-                    () -> enableGPS());
+                    () -> enableGPS(),
+                    checkBoxView,
+                    false);
         } else {
             Timber.d("GPS is enabled");
             checkLocationPermission();
@@ -552,7 +570,9 @@ public class ContributionsFragment
                                 getString(R.string.nearby_card_permission_title),
                                 getString(R.string.nearby_card_permission_explanation),
                                 () -> displayYouWontSeeNearbyMessage(),
-                                () -> enableLocationPermission());
+                                () -> enableLocationPermission(),
+                                checkBoxView,
+                                false);
                 }
             }
         } else {
