@@ -150,7 +150,7 @@ public class ContributionsFragment
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
-                    
+                    prefs.edit().putBoolean("neverAskLocationPermissionAgain",true).apply();
                 }
             }
         });
@@ -339,14 +339,16 @@ public class ContributionsFragment
                     // No need to display permission request button anymore
                     locationManager.registerLocationManager();
                 } else {
-                    // Still ask for permission
-                    DialogUtil.showAlertDialog(getActivity(),
-                            getString(R.string.nearby_card_permission_title),
-                            getString(R.string.nearby_card_permission_explanation),
-                            () -> displayYouWontSeeNearbyMessage(),
-                            () -> enableLocationPermission(),
-                            checkBoxView,
-                            false);
+                    if (!prefs.getBoolean("neverAskLocationPermissionAgain", false)) {
+                        // Still ask for permission
+                        DialogUtil.showAlertDialog(getActivity(),
+                                getString(R.string.nearby_card_permission_title),
+                                getString(R.string.nearby_card_permission_explanation),
+                                () -> displayYouWontSeeNearbyMessage(),
+                                () -> enableLocationPermission(),
+                                checkBoxView,
+                                false);
+                    }
                 }
             }
             break;
@@ -544,13 +546,15 @@ public class ContributionsFragment
         if (!locationManager.isProviderEnabled()) {
             Timber.d("GPS is not enabled");
             nearbyNoificationCardView.permissionType = NearbyNoificationCardView.PermissionType.ENABLE_GPS;
-            DialogUtil.showAlertDialog(getActivity(),
-                    getString(R.string.nearby_card_permission_title),
-                    getString(R.string.nearby_card_permission_explanation),
-                    () -> displayYouWontSeeNearbyMessage(),
-                    () -> enableGPS(),
-                    checkBoxView,
-                    false);
+            if (!prefs.getBoolean("neverAskLocationPermissionAgain", false)) {
+                DialogUtil.showAlertDialog(getActivity(),
+                        getString(R.string.nearby_card_permission_title),
+                        getString(R.string.nearby_card_permission_explanation),
+                        () -> displayYouWontSeeNearbyMessage(),
+                        () -> enableGPS(),
+                        checkBoxView,
+                        false);
+            }
         } else {
             Timber.d("GPS is enabled");
             checkLocationPermission();
@@ -565,7 +569,8 @@ public class ContributionsFragment
             } else {
                 nearbyNoificationCardView.permissionType = NearbyNoificationCardView.PermissionType.ENABLE_LOCATION_PERMISSON;
                 // If user didn't selected Don't ask again
-                if (shouldShowRequestPermissionRationale(Manifest.permission.ACCESS_FINE_LOCATION)) {
+                if (shouldShowRequestPermissionRationale(Manifest.permission.ACCESS_FINE_LOCATION)
+                        && !prefs.getBoolean("neverAskLocationPermissionAgain", false)) {
                         DialogUtil.showAlertDialog(getActivity(),
                                 getString(R.string.nearby_card_permission_title),
                                 getString(R.string.nearby_card_permission_explanation),
