@@ -61,6 +61,7 @@ import fr.free.nrw.commons.Utils;
 import fr.free.nrw.commons.auth.LoginActivity;
 import fr.free.nrw.commons.bookmarks.locations.BookmarkLocationsDao;
 import fr.free.nrw.commons.contributions.ContributionController;
+import fr.free.nrw.commons.location.LocationServiceManager;
 import fr.free.nrw.commons.utils.LocationUtils;
 import fr.free.nrw.commons.utils.UriDeserializer;
 import fr.free.nrw.commons.utils.ViewUtil;
@@ -126,7 +127,7 @@ public class NearbyMapFragment extends DaggerFragment {
     private final double CAMERA_TARGET_SHIFT_FACTOR_LANDSCAPE = 0.04;
 
     private boolean isMapReady;
-    public boolean searchThisAreaModeOn;
+    public boolean searchThisAreaModeOn = false;
 
     private Bundle bundleForUpdtes;// Carry information from activity about changed nearby places and current location
 
@@ -588,7 +589,11 @@ public class NearbyMapFragment extends DaggerFragment {
                             });
                         }
                     } else {
+                        // Restore nearby map according to current location again.
                         searchThisAreaModeOn = false;
+                        searchThisAreaButton.setVisibility(View.GONE);
+                        ((NearbyFragment)getParentFragment())
+                                .refreshView(LocationServiceManager.LocationChangeType.LOCATION_SIGNIFICANTLY_CHANGED);
                     }
                 }
             }

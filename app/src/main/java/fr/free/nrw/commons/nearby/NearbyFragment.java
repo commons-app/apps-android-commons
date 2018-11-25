@@ -218,28 +218,19 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
 
     @Override
     public void onLocationChangedSignificantly(LatLng latLng) {
-        // Do not refresh nearby map if we are checking other areas with search this area button
-        if (!nearbyMapFragment.searchThisAreaModeOn) {
             refreshView(LOCATION_SIGNIFICANTLY_CHANGED);
-        }
     }
 
     @Override
     public void onLocationChangedSlightly(LatLng latLng) {
-        // Do not refresh nearby map if we are checking other areas with search this area button
-        if (!nearbyMapFragment.searchThisAreaModeOn) {
             refreshView(LOCATION_SLIGHTLY_CHANGED);
-        }
     }
 
 
     @Override
     public void onLocationChangedMedium(LatLng latLng) {
         // For nearby map actions, there are no differences between 500 meter location change (aka medium change) and slight change
-        // Do not refresh nearby map if we are checking other areas with search this area button
-        if (!nearbyMapFragment.searchThisAreaModeOn) {
             refreshView(LOCATION_SLIGHTLY_CHANGED);
-        }
     }
 
     @Override
@@ -255,7 +246,7 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
      *
      * @param locationChangeType defines if location shanged significantly or slightly
      */
-    private void refreshView(LocationServiceManager.LocationChangeType locationChangeType) {
+    public void refreshView(LocationServiceManager.LocationChangeType locationChangeType) {
         Timber.d("Refreshing nearby places");
         if (lockNearbyView) {
             return;
@@ -409,7 +400,7 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
          */
         NearbyMapFragment nearbyMapFragment = getMapFragment();
 
-        if (nearbyMapFragment != null && curLatLng != null) {
+        if (nearbyMapFragment != null && curLatLng != null && !nearbyMapFragment.searchThisAreaModeOn) {
             hideProgressBar(); // In case it is visible (this happens, not an impossible case)
             /*
              * If we are close to nearby places boundaries, we need a significant update to
