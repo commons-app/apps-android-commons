@@ -49,7 +49,7 @@ public class NearbyController {
      * @return NearbyPlacesInfo a variable holds Place list without distance information
      * and boundary coordinates of current Place List
      */
-    public NearbyPlacesInfo loadAttractionsFromLocation(LatLng curLatLng, boolean returnClosestResult) throws IOException {
+    public NearbyPlacesInfo loadAttractionsFromLocation(LatLng curLatLng, boolean returnClosestResult, boolean searchThisAreaModeOn) throws IOException {
         Timber.d("Loading attractions near %s", curLatLng);
         NearbyPlacesInfo nearbyPlacesInfo = new NearbyPlacesInfo();
 
@@ -98,7 +98,9 @@ public class NearbyController {
             if (!returnClosestResult) {
                 // Do not update searched radius, if controller is used for nearby card notification
                 searchedRadius = nearbyPlaces.radius;
-                currentLocation = curLatLng;
+                if (!searchThisAreaModeOn) {
+                    currentLocation = curLatLng;
+                }
             }
             return nearbyPlacesInfo;
         }

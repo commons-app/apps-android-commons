@@ -549,7 +549,7 @@ public class ContributionsFragment
         curLatLng = locationManager.getLastLocation();
 
         placesDisposable = Observable.fromCallable(() -> nearbyController
-                .loadAttractionsFromLocation(curLatLng, true)) // thanks to boolean, it will only return closest result
+                .loadAttractionsFromLocation(curLatLng, true, false)) // thanks to boolean, it will only return closest result
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(this::updateNearbyNotification,

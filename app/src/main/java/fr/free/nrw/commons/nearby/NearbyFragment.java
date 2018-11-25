@@ -297,7 +297,7 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
             bundle.putString("CurLatLng", gsonCurLatLng);
 
             placesDisposable = Observable.fromCallable(() -> nearbyController
-                    .loadAttractionsFromLocation(curLatLng, false))
+                    .loadAttractionsFromLocation(curLatLng, false, false))
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe(this::populatePlaces,
@@ -320,7 +320,7 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
     public void refreshViewForCustomLocation(LatLng customLatLng) {
         this.customLatLng = customLatLng;
         placesDisposableCustom = Observable.fromCallable(() -> nearbyController
-                .loadAttractionsFromLocation(customLatLng, false))
+                .loadAttractionsFromLocation(customLatLng, false, true))
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(this::populatePlacesFromCustomLocation,
@@ -391,6 +391,11 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
     }
 
     private void updateMapFragment(boolean isSlightUpdate) {
+
+        if (nearbyMapFragment.searchThisAreaModeOn) {
+            return;
+        }
+
         /*
         Significant update means updating nearby place markers. Slightly update means only
         updating current location marker and camera target.
@@ -400,7 +405,7 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
          */
         NearbyMapFragment nearbyMapFragment = getMapFragment();
 
-        if (nearbyMapFragment != null && curLatLng != null && !nearbyMapFragment.searchThisAreaModeOn) {
+        if (nearbyMapFragment != null && curLatLng != null) {
             hideProgressBar(); // In case it is visible (this happens, not an impossible case)
             /*
              * If we are close to nearby places boundaries, we need a significant update to
@@ -413,7 +418,7 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
                     || curLatLng.getLongitude() >= nearbyMapFragment.boundaryCoordinates[3].getLongitude())) {
                 // populate places
                 placesDisposable = Observable.fromCallable(() -> nearbyController
-                        .loadAttractionsFromLocation(curLatLng, false))
+                        .loadAttractionsFromLocation(curLatLng, false, false))
                         .subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())
                         .subscribe(this::populatePlaces,
