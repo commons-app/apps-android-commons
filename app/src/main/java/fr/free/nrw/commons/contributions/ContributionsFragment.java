@@ -150,7 +150,8 @@ public class ContributionsFragment
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
-                    prefs.edit().putBoolean("neverAskLocationPermissionAgain",true).apply();
+                    // Do not ask for permission on activity start again
+                    prefs.edit().putBoolean("displayLocationPermissionForCardView",false).apply();
                 }
             }
         });
@@ -339,7 +340,7 @@ public class ContributionsFragment
                     // No need to display permission request button anymore
                     locationManager.registerLocationManager();
                 } else {
-                    if (!prefs.getBoolean("neverAskLocationPermissionAgain", false)) {
+                    if (prefs.getBoolean("displayLocationPermissionForCardView", true)) {
                         // Still ask for permission
                         DialogUtil.showAlertDialog(getActivity(),
                                 getString(R.string.nearby_card_permission_title),
@@ -546,7 +547,7 @@ public class ContributionsFragment
         if (!locationManager.isProviderEnabled()) {
             Timber.d("GPS is not enabled");
             nearbyNoificationCardView.permissionType = NearbyNoificationCardView.PermissionType.ENABLE_GPS;
-            if (!prefs.getBoolean("neverAskLocationPermissionAgain", false)) {
+            if (prefs.getBoolean("displayLocationPermissionForCardView", true)) {
                 DialogUtil.showAlertDialog(getActivity(),
                         getString(R.string.nearby_card_permission_title),
                         getString(R.string.nearby_card_permission_explanation),
@@ -570,7 +571,7 @@ public class ContributionsFragment
                 nearbyNoificationCardView.permissionType = NearbyNoificationCardView.PermissionType.ENABLE_LOCATION_PERMISSON;
                 // If user didn't selected Don't ask again
                 if (shouldShowRequestPermissionRationale(Manifest.permission.ACCESS_FINE_LOCATION)
-                        && !prefs.getBoolean("neverAskLocationPermissionAgain", false)) {
+                        && prefs.getBoolean("displayLocationPermissionForCardView", true)) {
                         DialogUtil.showAlertDialog(getActivity(),
                                 getString(R.string.nearby_card_permission_title),
                                 getString(R.string.nearby_card_permission_explanation),
