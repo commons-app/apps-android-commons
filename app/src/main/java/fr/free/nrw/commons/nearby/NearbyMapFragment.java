@@ -287,6 +287,8 @@ public class NearbyMapFragment extends DaggerFragment {
         mapboxMap.clear();
         // We are trying to find nearby places around our custom searched area, thus custom parameter is nonnull
         addNearbyMarkerstoMapBoxMap(customBaseMarkerOptions);
+        // Re-enable mapbox gestures on custom location markers load
+        mapboxMap.getUiSettings().setAllGesturesEnabled(true);
     }
 
     // Only update current position marker and camera view
@@ -582,6 +584,8 @@ public class NearbyMapFragment extends DaggerFragment {
                             searchThisAreaButton.setOnClickListener(new View.OnClickListener() {
                                 @Override
                                 public void onClick(View view) {
+                                    // Lock map operations during search this area operation
+                                    mapboxMap.getUiSettings().setAllGesturesEnabled(false);
                                     ((NearbyFragment)getParentFragment())
                                             .refreshViewForCustomLocation(LocationUtils
                                                     .mapBoxLatLngToCommonsLatLng(mapboxMap.getCameraPosition().target));
