@@ -26,6 +26,7 @@ import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
@@ -121,6 +122,7 @@ public class NearbyMapFragment extends DaggerFragment {
     private PolygonOptions currentLocationPolygonOptions;
 
     private Button searchThisAreaButton;
+    private ProgressBar searchThisAreaButtonProgressBar;
 
     private boolean isBottomListSheetExpanded;
     private final double CAMERA_TARGET_SHIFT_FACTOR_PORTRAIT = 0.06;
@@ -289,6 +291,7 @@ public class NearbyMapFragment extends DaggerFragment {
         addNearbyMarkerstoMapBoxMap(customBaseMarkerOptions);
         // Re-enable mapbox gestures on custom location markers load
         mapboxMap.getUiSettings().setAllGesturesEnabled(true);
+        searchThisAreaButtonProgressBar.setVisibility(View.GONE);
     }
 
     // Only update current position marker and camera view
@@ -424,6 +427,7 @@ public class NearbyMapFragment extends DaggerFragment {
         bookmarkButtonImage = getActivity().findViewById(R.id.bookmarkButtonImage);
 
         searchThisAreaButton = ((NearbyFragment)getParentFragment()).view.findViewById(R.id.search_this_area_button);
+        searchThisAreaButtonProgressBar = ((NearbyFragment)getParentFragment()).view.findViewById(R.id.search_this_area_button_progres_bar);
 
     }
 
@@ -586,6 +590,7 @@ public class NearbyMapFragment extends DaggerFragment {
                                 public void onClick(View view) {
                                     // Lock map operations during search this area operation
                                     mapboxMap.getUiSettings().setAllGesturesEnabled(false);
+                                    searchThisAreaButtonProgressBar.setVisibility(View.VISIBLE);
                                     ((NearbyFragment)getParentFragment())
                                             .refreshViewForCustomLocation(LocationUtils
                                                     .mapBoxLatLngToCommonsLatLng(mapboxMap.getCameraPosition().target));

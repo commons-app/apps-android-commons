@@ -84,6 +84,14 @@
             android:textColor="@color/status_bar_blue"
             android:text="@string/search_this_area" />
 
+        <ProgressBar
+            android:id="@+id/search_this_area_button_progres_bar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:visibility="gone"
+            />
+
         <android.support.design.widget.FloatingActionButton
             android:id="@+id/fab_plus"
             android:layout_width="wrap_content"
