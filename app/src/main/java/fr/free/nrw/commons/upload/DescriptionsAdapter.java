@@ -202,6 +202,11 @@ class DescriptionsAdapter extends RecyclerView.Adapter<DescriptionsAdapter.ViewH
 
         }
 
+        /**
+         * Extracted out the function to init the language spinner with different system supported languages
+         * @param position
+         * @param description
+         */
         private void initLanguageSpinner(int position, Description description) {
             SpinnerLanguagesAdapter languagesAdapter = new SpinnerLanguagesAdapter(context,
                     R.layout.row_item_languages_spinner, selectedLanguages);
@@ -240,6 +245,10 @@ class DescriptionsAdapter extends RecyclerView.Adapter<DescriptionsAdapter.ViewH
             });
         }
 
+        /**
+         * Extracted out the method to get the icon drawable
+         * @return
+         */
         private Drawable getInfoIcon() {
             return context.getResources().getDrawable(R.drawable.mapbox_info_icon_default);
         }

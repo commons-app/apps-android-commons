@@ -9,6 +9,10 @@ import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.widget.EditText;
 
+/**
+ * Custom edit text with a drawable click listener
+ * https://stackoverflow.com/questions/13135447/setting-onclicklistener-for-the-drawable-right-of-an-edittext
+ */
 @SuppressLint("AppCompatCustomView")
 public class CustomEditText extends EditText {
 
@@ -58,6 +62,11 @@ public class CustomEditText extends EditText {
         super.setCompoundDrawables(left, top, right, bottom);
     }
 
+    /**
+     * Fires the appropriate drawable click listener on touching the icon
+     * @param event
+     * @return
+     */
     @Override
     public boolean onTouchEvent(MotionEvent event) {
         Rect bounds;
@@ -176,13 +185,19 @@ public class CustomEditText extends EditText {
         super.finalize();
     }
 
+    /**
+     * Attaches the drawable click listener to the custom edit text
+     * @param listener
+     */
     public void setDrawableClickListener(DrawableClickListener listener) {
         this.clickListener = listener;
     }
 
+    /**
+     * Interface for drawable click listener
+     */
     public interface DrawableClickListener {
         enum DrawablePosition {TOP, BOTTOM, LEFT, RIGHT}
-
         void onClick(DrawablePosition target);
     }
 
