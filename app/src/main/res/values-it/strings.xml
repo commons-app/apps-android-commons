@@ -291,6 +291,7 @@
   <string name="deletion_reason_publicly_visible">Non sapevo che sarebbe stata visibile pubblicamente</string>
   <string name="deletion_reason_no_longer_want_public">Ho cambiato idea, non voglio più che sia pubblicamente visibile</string>
   <string name="deletion_reason_not_interesting">Spiacente, questa immagine non è interessante per un\'enciclopedia</string>
+  <string name="uploaded_by_myself">Caricato da me stesso il</string>
   <string name="articles">voci</string>
   <string name="no_uploads">Benvenuto su Commons!\n\nCarica il tuo primo file multimediale toccando l\'icona della fotocamera o della galleria sopra.</string>
   <string name="desc_language_Worldwide">Tutto il mondo</string>

@@ -351,7 +351,7 @@
   <string name="add_description">+ Добавление описания</string>
   <string name="delete_recent_searches_dialog">Вы уверены, что хотите очистить историю поисковых запросов?</string>
   <string name="search_history_deleted">История поиска очищена</string>
-  <string name="nominate_delete">Номинированные на удаление</string>
+  <string name="nominate_delete">Номинировать к удалению</string>
   <string name="Achievements">Достижения</string>
   <string name="statistics">СТАТИСТИКА</string>
   <string name="statistics_thanks">Получены благодарности</string>
@@ -400,9 +400,9 @@
   <string name="provider_bookmarks_location">Закладки</string>
   <string name="log_collection_started">Начался процесс сбора журналов. ПЕРЕЗАПУСТИТЕ приложение, выполните действие, которое вы хотите запротоколировать, затем снова нажмите «Выслать лог-файл»</string>
   <string name="deletion_reason_uploaded_by_mistake">Загружено по ошибке</string>
-  <string name="deletion_reason_publicly_visible">Было неизвестно, что станет доступным публично</string>
-  <string name="deletion_reason_bad_for_my_privacy">Разглашает мою приватность</string>
-  <string name="deletion_reason_no_longer_want_public">Больше не хочу чтобы было доступным публично</string>
+  <string name="deletion_reason_publicly_visible">Я не знаю, что это станет доступным публично</string>
+  <string name="deletion_reason_bad_for_my_privacy">Я понял, что это разглашает мою приватность</string>
+  <string name="deletion_reason_no_longer_want_public">Я передумал. Больше не хочу чтобы было доступным публично</string>
   <string name="deletion_reason_not_interesting">Извините, это изображение не для энциклопедии</string>
   <string name="uploaded_by_myself">Загружено мною на</string>
   <string name="used_by">,использовано в</string>

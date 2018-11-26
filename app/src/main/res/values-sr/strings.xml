@@ -335,6 +335,7 @@
   <string name="add_description">+ Додај опис</string>
   <string name="delete_recent_searches_dialog">Да ли сте сигурни да желите да очистите своју историју претраге?</string>
   <string name="search_history_deleted">Историја претраге је избрисана</string>
+  <string name="nominate_delete">Номиновање за брисање</string>
   <string name="Achievements">Достигнућа</string>
   <string name="statistics">СТАТИСТИКЕ</string>
   <string name="statistics_thanks">Примљене захвале</string>

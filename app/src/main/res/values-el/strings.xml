@@ -395,5 +395,6 @@
   <string name="desc_language_Asia">Ασία</string>
   <string name="desc_language_Pacific">Ειρηνικός</string>
   <string name="no_categories_selected_warning_desc">Εικόνες χωρίς κατηγορίες χρησιμοποιούνται σπάνια. Θέλετε πράγματι να στείλετε δίχως να επιλέξετε κατηγορίες?</string>
+  <string name="yes_submit">Ναι, υποβολή</string>
   <string name="no_go_back">Όχι, Επιστροφή</string>
 </resources>

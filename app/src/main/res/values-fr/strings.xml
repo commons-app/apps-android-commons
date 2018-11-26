@@ -372,11 +372,11 @@
   <string name="notifications">Notifications</string>
   <string name="display_nearby_notification">Afficher la notification de proximité</string>
   <string name="display_nearby_notification_summary">Taper ici pour voir l’endroit le plus proche qui a besoin d’images</string>
-  <string name="no_close_nearby">Aucun endroit à proximité trouvé près de vous</string>
+  <string name="no_close_nearby">Aucun endroit à proximité trouvé près de chez vous</string>
   <string name="list_sheet">Lister</string>
   <string name="storage_permission">Droit de stockage</string>
   <string name="write_storage_permission_rationale_for_image_share">Nous avons besoin de votre autorisation pour accéder au stockage externe de votre appareil, afin de téléverser des images.</string>
-  <string name="nearby_notification_dismiss_message">Vous ne verrez plus l’endroit le plus proche ayant besoin d’image. Toutefois, vous pouvez réactiver cette notification dans les paramètres, si vous le souhaitez.</string>
+  <string name="nearby_notification_dismiss_message">Vous ne verrez plus l’endroit le plus proche ayant besoin d’images. Toutefois, vous pouvez réactiver cette notification dans les paramètres, si vous le souhaitez.</string>
   <string name="step_count">Etape %1$d de %2$d</string>
   <string name="image_in_set_label">L’image %1$d dans l’ensemble</string>
   <string name="next">Suivant</string>
