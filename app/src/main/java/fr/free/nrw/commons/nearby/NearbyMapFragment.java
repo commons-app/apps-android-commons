@@ -135,6 +135,8 @@ public class NearbyMapFragment extends DaggerFragment {
     @Inject
     BookmarkLocationsDao bookmarkLocationDao;
 
+    private static final double ZOOM_LEVEL = 14f;
+
     public NearbyMapFragment() {
     }
 
@@ -304,7 +306,7 @@ public class NearbyMapFragment extends DaggerFragment {
                                             curMapBoxLatLng.getLongitude())
                                     : curMapBoxLatLng ) // Sets the new camera position
                             .zoom(isBottomListSheetExpanded ?
-                                    11 // zoom level is fixed to 11 when bottom sheet is expanded
+                                    ZOOM_LEVEL // zoom level is fixed when bottom sheet is expanded
                                     :mapboxMap.getCameraPosition().zoom) // Same zoom level
                             .build();
                 }else {
@@ -314,7 +316,7 @@ public class NearbyMapFragment extends DaggerFragment {
                                             curMapBoxLatLng.getLongitude())
                                     : curMapBoxLatLng ) // Sets the new camera position
                             .zoom(isBottomListSheetExpanded ?
-                                    11 // zoom level is fixed to 11 when bottom sheet is expanded
+                                    ZOOM_LEVEL // zoom level is fixed when bottom sheet is expanded
                                     :mapboxMap.getCameraPosition().zoom) // Same zoom level
                             .build();
                 }
@@ -322,47 +324,6 @@ public class NearbyMapFragment extends DaggerFragment {
                 mapboxMap.animateCamera(CameraUpdateFactory
                         .newCameraPosition(position), 1000);
 
-        }
-    }
-
-    /**
-     * Updates camera position according to list sheet status. If list sheet is collapsed, camera
-     * focus should be in the center. If list sheet is expanded, camera focus should be visible
-     * on the gap between list sheet and tab layout.
-     * @param isBottomListSheetExpanded
-     */
-    private void updateMapCameraAccordingToBottomSheet(boolean isBottomListSheetExpanded) {
-        CameraPosition position;
-        this.isBottomListSheetExpanded = isBottomListSheetExpanded;
-        if (mapboxMap != null && curLatLng != null) {
-            if (isBottomListSheetExpanded) {
-                // Make camera to follow user on location change
-                if (ViewUtil.isPortrait(getActivity())) {
-                    position = new CameraPosition.Builder()
-                            .target(new LatLng(curLatLng.getLatitude() - CAMERA_TARGET_SHIFT_FACTOR_PORTRAIT,
-                                    curLatLng.getLongitude())) // Sets the new camera target above
-                            // current to make it visible when sheet is expanded
-                            .zoom(11) // Fixed zoom level
-                            .build();
-                } else {
-                    position = new CameraPosition.Builder()
-                            .target(new LatLng(curLatLng.getLatitude() - CAMERA_TARGET_SHIFT_FACTOR_LANDSCAPE,
-                                    curLatLng.getLongitude())) // Sets the new camera target above
-                            // current to make it visible when sheet is expanded
-                            .zoom(11) // Fixed zoom level
-                            .build();
-                }
-
-            } else {
-                // Make camera to follow user on location change
-                position = new CameraPosition.Builder()
-                        .target(new LatLng(curLatLng.getLatitude(),
-                                curLatLng.getLongitude())) // Sets the new camera target to curLatLng
-                        .zoom(mapboxMap.getCameraPosition().zoom) // Same zoom level
-                        .build();
-            }
-            mapboxMap.animateCamera(CameraUpdateFactory
-                    .newCameraPosition(position), 1000);
         }
     }
 
@@ -446,7 +407,7 @@ public class NearbyMapFragment extends DaggerFragment {
                                                 curLatLng.getLongitude())
                                         : new LatLng(curLatLng.getLatitude(), curLatLng.getLongitude(), 0)) // Sets the new camera position
                                 .zoom(isBottomListSheetExpanded ?
-                                        11 // zoom level is fixed to 11 when bottom sheet is expanded
+                                        ZOOM_LEVEL
                                         :mapboxMap.getCameraPosition().zoom) // Same zoom level
                                 .build();
                     }else {
@@ -456,7 +417,7 @@ public class NearbyMapFragment extends DaggerFragment {
                                                 curLatLng.getLongitude())
                                         : new LatLng(curLatLng.getLatitude(), curLatLng.getLongitude(), 0)) // Sets the new camera position
                                 .zoom(isBottomListSheetExpanded ?
-                                        11 // zoom level is fixed to 11 when bottom sheet is expanded
+                                        ZOOM_LEVEL
                                         :mapboxMap.getCameraPosition().zoom) // Same zoom level
                                 .build();
                     }
@@ -494,9 +455,6 @@ public class NearbyMapFragment extends DaggerFragment {
             public void onStateChanged(@NonNull View bottomSheet, int newState) {
                 if (newState == BottomSheetBehavior.STATE_EXPANDED) {
                     bottomSheetDetailsBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
-                    updateMapCameraAccordingToBottomSheet(true);
-                } else {
-                    updateMapCameraAccordingToBottomSheet(false);
                 }
             }
 
@@ -526,7 +484,7 @@ public class NearbyMapFragment extends DaggerFragment {
                 .attributionEnabled(false)
                 .camera(new CameraPosition.Builder()
                         .target(new LatLng(curLatLng.getLatitude(), curLatLng.getLongitude()))
-                        .zoom(11)
+                        .zoom(ZOOM_LEVEL)
                         .build());
 
         if (!getParentFragment().getActivity().isFinishing()) {
