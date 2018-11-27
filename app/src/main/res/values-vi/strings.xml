@@ -165,7 +165,6 @@
   <string name="title_activity_nearby">Nơi Lân cận</string>
   <string name="no_nearby">Không tìm thấy nơi lân cận</string>
   <string name="warning">Cảnh báo</string>
-  <string name="upload_image_problem_duplicate">Tập tin này đã tồn tại ở Commons. Bạn có chắc chắn muốn tiếp tục?</string>
   <string name="yes">Có</string>
   <string name="no">Không</string>
   <string name="media_detail_title">Tiêu đề</string>
