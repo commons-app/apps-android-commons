@@ -90,7 +90,7 @@ android {
 
     defaultConfig {
         applicationId 'fr.free.nrw.commons'
-        versionCode 93
+        versionCode 94
         versionName '2.9.0'
         setProperty("archivesBaseName", "app-commons-v$versionName-" + getBranchName())
 
