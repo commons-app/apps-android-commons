@@ -157,8 +157,11 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        detailProvider = (MediaDetailPagerFragment.MediaDetailProvider) (getParentFragment().getParentFragment());
-
+        if (getParentFragment() != null
+            && getParentFragment() instanceof MediaDetailPagerFragment) {
+            detailProvider =
+                ((MediaDetailPagerFragment) getParentFragment()).getMediaDetailProvider();
+        }
         if (savedInstanceState != null) {
             editable = savedInstanceState.getBoolean("editable");
             isCategoryImage = savedInstanceState.getBoolean("isCategoryImage");
@@ -230,7 +233,12 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
     @Override
     public void onResume() {
         super.onResume();
-        ((ContributionsFragment)(getParentFragment().getParentFragment())).nearbyNoificationCardView.setVisibility(View.GONE);
+        if(getParentFragment()!=null && getParentFragment().getParentFragment()!=null) {
+            //Added a check because, not necessarily, the parent fragment will have a parent fragment, say
+            // in the case when MediaDetailPagerFragment is directly started by the CategoryImagesActivity
+            ((ContributionsFragment) (getParentFragment().getParentFragment())).nearbyNoificationCardView
+                .setVisibility(View.GONE);
+        }
         media = detailProvider.getMediaAtPosition(index);
         if (media == null) {
             // Ask the detail provider to ping us when we're ready

@@ -69,6 +69,7 @@ public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment imple
     private boolean isFeaturedImage;
     MediaDetailAdapter adapter;
     private Bookmark bookmark;
+    private MediaDetailProvider provider;
 
     public MediaDetailPagerFragment() {
         this(false, false);
@@ -128,6 +129,23 @@ public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment imple
             isFeaturedImage = savedInstanceState.getBoolean("isFeaturedImage");
         }
         setHasOptionsMenu(true);
+        initProvider();
+    }
+
+    /**
+     * initialise the provider, based on from where the fragment was started, as in from an activity
+     * or a fragment
+     */
+    private void initProvider() {
+        if (getParentFragment() != null) {
+            provider = (MediaDetailProvider) getParentFragment();
+        } else {
+            provider = (MediaDetailProvider) getActivity();
+        }
+    }
+
+    public MediaDetailProvider getMediaDetailProvider() {
+        return provider;
     }
 
     @Override
@@ -136,7 +154,7 @@ public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment imple
             Timber.d("Returning as activity is destroyed!");
             return true;
         }
-        MediaDetailProvider provider = (MediaDetailProvider) getParentFragment();
+
         Media m = provider.getMediaAtPosition(pager.getCurrentItem());
         switch (item.getItemId()) {
             case R.id.menu_bookmark_current_image:
@@ -346,7 +364,7 @@ public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment imple
                 e.printStackTrace();
             }
         }
-        getParentFragment().getActivity().supportInvalidateOptionsMenu();
+        getActivity().invalidateOptionsMenu();
     }
 
     @Override
@@ -384,7 +402,7 @@ public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment imple
                     Timber.d("Skipping getItem. Returning as activity is destroyed!");
                     return null;
                 }
-                pager.postDelayed(() -> getParentFragment().getActivity().supportInvalidateOptionsMenu(), 5);
+                pager.postDelayed(() -> getActivity().invalidateOptionsMenu(), 5);
             }
             return MediaDetailFragment.forMedia(i, editable, isFeaturedImage);
         }
@@ -395,7 +413,7 @@ public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment imple
                 Timber.d("Skipping getCount. Returning as activity is destroyed!");
                 return 0;
             }
-            return ((MediaDetailProvider) getParentFragment()).getTotalMediaCount();
+            return provider.getTotalMediaCount();
         }
     }
 }

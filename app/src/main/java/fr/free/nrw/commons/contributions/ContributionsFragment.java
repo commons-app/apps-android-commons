@@ -1,5 +1,6 @@
 package fr.free.nrw.commons.contributions;
 
+import android.Manifest;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
@@ -20,12 +21,14 @@ import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.widget.CursorAdapter;
-import android.util.Log;
+import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Adapter;
 import android.widget.AdapterView;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 
 import java.util.ArrayList;
 import java.util.concurrent.CountDownLatch;
@@ -50,6 +53,8 @@ import fr.free.nrw.commons.notification.NotificationController;
 import fr.free.nrw.commons.notification.UnreadNotificationsCheckAsync;
 import fr.free.nrw.commons.settings.Prefs;
 import fr.free.nrw.commons.upload.UploadService;
+import fr.free.nrw.commons.utils.DialogUtil;
+import fr.free.nrw.commons.utils.ViewUtil;
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
@@ -102,10 +107,11 @@ public class ContributionsFragment
     private LatLng curLatLng;
 
     private boolean firstLocationUpdate = true;
-    private LocationServiceManager locationManager;
+    public LocationServiceManager locationManager;
 
     private boolean isFragmentAttachedBefore = false;
-
+    private View checkBoxView;
+    private CheckBox checkBox;
 
                         /**
      * Since we will need to use parent activity on onAuthCookieAcquired, we have to wait
@@ -137,6 +143,18 @@ public class ContributionsFragment
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_contributions, container, false);
         nearbyNoificationCardView = view.findViewById(R.id.card_view_nearby);
+        checkBoxView = View.inflate(getActivity(), R.layout.nearby_permission_dialog, null);
+        checkBox = (CheckBox) checkBoxView.findViewById(R.id.never_ask_again);
+        checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    // Do not ask for permission on activity start again
+                    prefs.edit().putBoolean("displayLocationPermissionForCardView",false).apply();
+                }
+            }
+        });
 
         if (savedInstanceState != null) {
             mediaDetailPagerFragment = (MediaDetailPagerFragment)getChildFragmentManager().findFragmentByTag(MEDIA_DETAIL_PAGER_FRAGMENT_TAG);
@@ -186,7 +204,9 @@ public class ContributionsFragment
         // show nearby card view on contributions list is visible
         if (nearbyNoificationCardView != null) {
             if (prefs.getBoolean("displayNearbyCardView", true)) {
-                nearbyNoificationCardView.setVisibility(View.VISIBLE);
+                if (nearbyNoificationCardView.cardViewVisibilityState == NearbyNoificationCardView.CardViewVisibilityState.READY) {
+                    nearbyNoificationCardView.setVisibility(View.VISIBLE);
+                }
             } else {
                 nearbyNoificationCardView.setVisibility(View.GONE);
             }
@@ -312,16 +332,24 @@ public class ContributionsFragment
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        Timber.d("onRequestPermissionsResult");
         switch (requestCode) {
             case LOCATION_REQUEST: {
                 if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     Timber.d("Location permission granted, refreshing view");
                     // No need to display permission request button anymore
-                    nearbyNoificationCardView.displayPermissionRequestButton(false);
                     locationManager.registerLocationManager();
                 } else {
-                    // Still ask for permission
-                    nearbyNoificationCardView.displayPermissionRequestButton(true);
+                    if (prefs.getBoolean("displayLocationPermissionForCardView", true)) {
+                        // Still ask for permission
+                        DialogUtil.showAlertDialog(getActivity(),
+                                getString(R.string.nearby_card_permission_title),
+                                getString(R.string.nearby_card_permission_explanation),
+                                () -> displayYouWontSeeNearbyMessage(),
+                                () -> enableLocationPermission(),
+                                checkBoxView,
+                                false);
+                    }
                 }
             }
             break;
@@ -499,9 +527,10 @@ public class ContributionsFragment
 
 
         if (prefs.getBoolean("displayNearbyCardView", true)) {
-            nearbyNoificationCardView.cardViewVisibilityState = NearbyNoificationCardView.CardViewVisibilityState.LOADING;
-            nearbyNoificationCardView.setVisibility(View.VISIBLE);
             checkGPS();
+            if (nearbyNoificationCardView.cardViewVisibilityState == NearbyNoificationCardView.CardViewVisibilityState.READY) {
+                nearbyNoificationCardView.setVisibility(View.VISIBLE);
+            }
 
         } else {
             // Hide nearby notification card view if related shared preferences is false
@@ -511,7 +540,6 @@ public class ContributionsFragment
 
     }
 
-
     /**
      * Check GPS to decide displaying request permission button or not.
      */
@@ -519,7 +547,15 @@ public class ContributionsFragment
         if (!locationManager.isProviderEnabled()) {
             Timber.d("GPS is not enabled");
             nearbyNoificationCardView.permissionType = NearbyNoificationCardView.PermissionType.ENABLE_GPS;
-            nearbyNoificationCardView.displayPermissionRequestButton(true);
+            if (prefs.getBoolean("displayLocationPermissionForCardView", true)) {
+                DialogUtil.showAlertDialog(getActivity(),
+                        getString(R.string.nearby_card_permission_title),
+                        getString(R.string.nearby_card_permission_explanation),
+                        () -> displayYouWontSeeNearbyMessage(),
+                        () -> enableGPS(),
+                        checkBoxView,
+                        false);
+            }
         } else {
             Timber.d("GPS is enabled");
             checkLocationPermission();
@@ -530,18 +566,55 @@ public class ContributionsFragment
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             if (locationManager.isLocationPermissionGranted()) {
                 nearbyNoificationCardView.permissionType = NearbyNoificationCardView.PermissionType.NO_PERMISSION_NEEDED;
-                nearbyNoificationCardView.displayPermissionRequestButton(false);
                 locationManager.registerLocationManager();
             } else {
                 nearbyNoificationCardView.permissionType = NearbyNoificationCardView.PermissionType.ENABLE_LOCATION_PERMISSON;
-                nearbyNoificationCardView.displayPermissionRequestButton(true);
+                // If user didn't selected Don't ask again
+                if (shouldShowRequestPermissionRationale(Manifest.permission.ACCESS_FINE_LOCATION)
+                        && prefs.getBoolean("displayLocationPermissionForCardView", true)) {
+                        DialogUtil.showAlertDialog(getActivity(),
+                                getString(R.string.nearby_card_permission_title),
+                                getString(R.string.nearby_card_permission_explanation),
+                                () -> displayYouWontSeeNearbyMessage(),
+                                () -> enableLocationPermission(),
+                                checkBoxView,
+                                false);
+                }
             }
         } else {
             // If device is under Marshmallow, we already checked for GPS
             nearbyNoificationCardView.permissionType = NearbyNoificationCardView.PermissionType.NO_PERMISSION_NEEDED;
-            nearbyNoificationCardView.displayPermissionRequestButton(false);
             locationManager.registerLocationManager();
         }
+    }
+
+    private void enableLocationPermission() {
+        if (!getActivity().isFinishing()) {
+            ((MainActivity) getActivity()).locationManager.requestPermissions(getActivity());
+        }
+    }
+
+    private void enableGPS() {
+        new AlertDialog.Builder(getActivity())
+                .setMessage(R.string.gps_disabled)
+                .setCancelable(false)
+                .setPositiveButton(R.string.enable_gps,
+                        (dialog, id) -> {
+                            Intent callGPSSettingIntent = new Intent(
+                                    android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+                            Timber.d("Loaded settings page");
+                            ((MainActivity) getActivity()).startActivityForResult(callGPSSettingIntent, 1);
+                        })
+                .setNegativeButton(R.string.menu_cancel_upload, (dialog, id) -> {
+                    dialog.cancel();
+                    displayYouWontSeeNearbyMessage();
+                })
+                .create()
+                .show();
+    }
+
+    private void displayYouWontSeeNearbyMessage() {
+        ViewUtil.showLongToast(getActivity(), getResources().getString(R.string.unable_to_display_nearest_place));
     }
 
 

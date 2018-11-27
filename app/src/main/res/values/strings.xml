@@ -425,5 +425,11 @@ Upload your first media by touching the camera or gallery icon above.</string>
   <string name="no_go_back">No, Go Back</string>
 
   <string name="upload_flow_all_images_in_set">(For all images in set)</string>
+  <string name="nearby_card_permission_title">Permission Request</string>
+  <string name="nearby_card_permission_explanation">Would you like us to use your current location to display the nearest place that needs pictures?</string>
+  <string name="unable_to_display_nearest_place">Unable to display nearest place that needs pictures without location permissions</string>
+  <string name="never_ask_again">Never ask this again</string>
+  <string name="display_location_permission_title">Display location permission</string>
+  <string name="display_location_permission_explanation">Ask for location permission when needed for nearby notification card view feature.</string>
 
 </resources>
