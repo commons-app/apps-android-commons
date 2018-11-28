@@ -47,24 +47,20 @@ public class FileProcessor implements SimilarImageDialogFragment.onResponse {
     private String filePath;
     private ContentResolver contentResolver;
     private GPSExtractor imageObj;
-    private Context context;
     private String decimalCoords;
     private ExifInterface exifInterface;
-    private boolean useExtStorage;
     private boolean haveCheckedForOtherImages = false;
     private GPSExtractor tempImageObj;
 
     FileProcessor(@NonNull String filePath, ContentResolver contentResolver, Context context) {
         this.filePath = filePath;
         this.contentResolver = contentResolver;
-        this.context = context;
         ApplicationlessInjection.getInstance(context.getApplicationContext()).getCommonsApplicationComponent().inject(this);
         try {
             exifInterface=new ExifInterface(filePath);
         } catch (IOException e) {
             Timber.e(e);
         }
-        useExtStorage = prefs.getBoolean("useExternalStorage", true);
     }
 
     /**

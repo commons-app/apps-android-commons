@@ -49,7 +49,7 @@
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/ic_expand_less_black_24dp" />
 
-        <fr.free.nrw.commons.upload.HeightLimitedRecyclerView
+        <fr.free.nrw.commons.widget.HeightLimitedRecyclerView
             android:id="@+id/rv_descriptions"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

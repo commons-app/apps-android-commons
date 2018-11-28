@@ -77,6 +77,8 @@ dependencies {
     releaseImplementation "com.squareup.leakcanary:leakcanary-android-no-op:$LEAK_CANARY"
     testImplementation "com.squareup.leakcanary:leakcanary-android-no-op:$LEAK_CANARY"
 
+    androidTestImplementation "org.mockito:mockito-core:2.10.0"
+
     //For handling runtime permissions
     implementation 'com.karumi:dexter:5.0.0'
 
@@ -100,6 +102,8 @@ android {
     }
 
     testOptions {
+        unitTests.returnDefaultValues = true
+
         unitTests.all {
             jvmArgs '-noverify'
         }
