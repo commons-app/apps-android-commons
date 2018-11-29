@@ -477,60 +477,6 @@ public class MainActivity extends AuthenticatedActivity implements FragmentManag
                 }
                 return;
             }
-            // Storage permission for gallery
-            case PermissionUtils.GALLERY_PERMISSION_FROM_CONTRIBUTION_LIST: {
-                // If request is cancelled, the result arrays are empty.
-                if (grantResults.length > 0
-                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    // Storage permission given
-                    ContributionsListFragment contributionsListFragment =
-                            (ContributionsListFragment) contributionsActivityPagerAdapter
-                                    .getItem(0).getChildFragmentManager()
-                                    .findFragmentByTag(ContributionsFragment.CONTRIBUTION_LIST_FRAGMENT_TAG);
-                    contributionsListFragment.controller.startGalleryPick();
-                }
-                return;
-            }
-
-            case PermissionUtils.CAMERA_PERMISSION_FROM_CONTRIBUTION_LIST: {
-                // If request is cancelled, the result arrays are empty.
-                if (grantResults.length > 0
-                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    // Storage permission given
-                    ContributionsListFragment contributionsListFragment =
-                            (ContributionsListFragment) contributionsActivityPagerAdapter
-                                    .getItem(0).getChildFragmentManager()
-                                    .findFragmentByTag(ContributionsFragment.CONTRIBUTION_LIST_FRAGMENT_TAG);
-                    contributionsListFragment.controller.startCameraCapture();
-                }
-                return;
-            }
-
-            case PermissionUtils.CAMERA_PERMISSION_FROM_NEARBY_MAP: {
-                // If request is cancelled, the result arrays are empty.
-                if (grantResults.length > 0
-                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    // Storage permission given
-                    NearbyMapFragment nearbyMapFragment =
-                            ((NearbyFragment) contributionsActivityPagerAdapter
-                                    .getItem(1)).nearbyMapFragment;
-                    nearbyMapFragment.controller.startCameraCapture();
-                }
-                return;
-            }
-
-            case PermissionUtils.GALLERY_PERMISSION_FROM_NEARBY_MAP: {
-                // If request is cancelled, the result arrays are empty.
-                if (grantResults.length > 0
-                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    // Storage permission given
-                    NearbyMapFragment nearbyMapFragment =
-                            ((NearbyFragment) contributionsActivityPagerAdapter
-                                    .getItem(1)).nearbyMapFragment;
-                    nearbyMapFragment.controller.startGalleryPick();
-                }
-                return;
-            }
 
             default:
                 return;
