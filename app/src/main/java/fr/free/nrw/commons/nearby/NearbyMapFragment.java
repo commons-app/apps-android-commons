@@ -118,7 +118,7 @@ public class NearbyMapFragment extends DaggerFragment {
     private Place place;
     private Marker selected;
     private Marker currentLocationMarker;
-    private MapboxMap mapboxMap;
+    public MapboxMap mapboxMap;
     private PolygonOptions currentLocationPolygonOptions;
 
     private Button searchThisAreaButton;
@@ -132,6 +132,8 @@ public class NearbyMapFragment extends DaggerFragment {
     public boolean searchThisAreaModeOn = false;
 
     private Bundle bundleForUpdtes;// Carry information from activity about changed nearby places and current location
+
+    public boolean isRecenterButtonClickedArtificially = false;
 
     @Inject
     @Named("prefs")
@@ -573,13 +575,12 @@ public class NearbyMapFragment extends DaggerFragment {
         mapboxMap.addOnCameraMoveListener(new MapboxMap.OnCameraMoveListener() {
             @Override
             public void onCameraMove() {
-                Log.d("deneme","target:"+mapboxMap.getCameraPosition().target);
+                //Log.d("deneme","target:"+mapboxMap.getCameraPosition().target);
                 if (NearbyController.currentLocation != null) { // If our nearby markers are calculated at least once
                     double distance = mapboxMap.getCameraPosition().target
                             .distanceTo(new LatLng(NearbyController.currentLocation.getLatitude()
                                     , NearbyController.currentLocation.getLongitude()));
-                    if (distance > NearbyController.searchedRadius*1000) { //Convert to meter, and compare
-                        searchThisAreaModeOn = true;
+                    if (distance*2 > NearbyController.searchedRadius*1000) { //Convert to meter, and compare
 
                         if (searchThisAreaButton.getVisibility() != View.VISIBLE) {
                             Log.d("deneme","You went too far");
@@ -588,6 +589,7 @@ public class NearbyMapFragment extends DaggerFragment {
                             searchThisAreaButton.setOnClickListener(new View.OnClickListener() {
                                 @Override
                                 public void onClick(View view) {
+                                    searchThisAreaModeOn = true;
                                     // Lock map operations during search this area operation
                                     mapboxMap.getUiSettings().setAllGesturesEnabled(false);
                                     searchThisAreaButtonProgressBar.setVisibility(View.VISIBLE);
@@ -599,11 +601,16 @@ public class NearbyMapFragment extends DaggerFragment {
                         }
                     } else {
                         // Restore nearby map according to current location again.
-                        searchThisAreaModeOn = false;
                         if (searchThisAreaButton.getVisibility() == View.VISIBLE) {
                             searchThisAreaButton.setVisibility(View.GONE);
-                            ((NearbyFragment)getParentFragment())
-                                    .fabRecenter.performClick();
+                            if (searchThisAreaModeOn == true) { // If search this area button is clicked before
+                                searchThisAreaModeOn = false;
+                                isRecenterButtonClickedArtificially = true;
+                                mapboxMap.getUiSettings().setAllGesturesEnabled(false);
+                                ((NearbyFragment)getParentFragment()).refreshView(LocationServiceManager.LocationChangeType.LOCATION_SIGNIFICANTLY_CHANGED);
+                                fabRecenter.callOnClick();
+                                Log.d("deneme", "callOnClick");
+                            }
                         }
                     }
                 }
@@ -612,6 +619,7 @@ public class NearbyMapFragment extends DaggerFragment {
     }
 
     public void recenterMapView() {
+        Log.d("deneme","recenterMapView is called");
         if (curLatLng != null) {
             mapView.getMapAsync(mapboxMap -> {
                 CameraPosition position;

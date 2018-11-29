@@ -14,6 +14,7 @@ import android.support.design.widget.BottomSheetBehavior;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AlertDialog;
+import android.util.Log;
 import android.view.LayoutInflater;
 
 import android.view.View;
@@ -64,8 +65,6 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
     LinearLayout bottomSheetDetails;
     @BindView(R.id.transparentView)
     View transparentView;
-    @BindView(R.id.fab_recenter)
-    View fabRecenter;
 
     @Inject
     LocationServiceManager locationManager;
@@ -99,7 +98,6 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
     private BroadcastReceiver broadcastReceiver;
 
     private boolean onOrientationChanged = false;
-    private boolean isRecenterButtonClicked = false;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -125,14 +123,6 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        fabRecenter.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                isRecenterButtonClicked = true;
-                refreshView(LocationServiceManager.LocationChangeType.LOCATION_SIGNIFICANTLY_CHANGED);
-                ((NearbyMapFragment)getParentFragment()).recenterMapView();
-            }
-        });
         if (savedInstanceState != null) {
             onOrientationChanged = true;
             refreshView(LOCATION_SIGNIFICANTLY_CHANGED);
@@ -271,8 +261,10 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
 
         if (curLatLng != null && curLatLng.equals(lastLocation)
                 && !locationChangeType.equals(MAP_UPDATED)) { //refresh view only if location has changed
+            Log.d("deneme","0");
             // Two exceptional cases to refresh nearby map manually.
-            if (!onOrientationChanged && !isRecenterButtonClicked) {
+            if (!onOrientationChanged && !nearbyMapFragment.isRecenterButtonClickedArtificially) {
+                Log.d("deneme","1");
                 return;
             }
 
@@ -285,6 +277,7 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
 
         if (curLatLng == null) {
             Timber.d("Skipping update of nearby places as location is unavailable");
+            Log.d("deneme","2");
             return;
         }
 
@@ -298,6 +291,7 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
                 || locationChangeType.equals(MAP_UPDATED)
                 || onOrientationChanged) {
             progressBar.setVisibility(View.VISIBLE);
+            Log.d("deneme","3");
 
             //TODO: This hack inserts curLatLng before populatePlaces is called (see #1440). Ideally a proper fix should be found
             Gson gson = new GsonBuilder()
@@ -318,7 +312,10 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
                                 progressBar.setVisibility(View.GONE);
                             });
             // We updated map accoridng to recenter button request, so request is no more valid, until next click
-            isRecenterButtonClicked = false;
+            if (nearbyMapFragment != null && nearbyMapFragment.mapboxMap != null) {
+                nearbyMapFragment.mapboxMap.getUiSettings().setAllGesturesEnabled(true);
+                nearbyMapFragment.isRecenterButtonClickedArtificially = false;
+            }
         } else if (locationChangeType
                 .equals(LOCATION_SLIGHTLY_CHANGED)) {
             Gson gson = new GsonBuilder()
