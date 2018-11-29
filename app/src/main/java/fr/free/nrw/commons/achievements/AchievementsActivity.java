@@ -205,10 +205,10 @@ public class AchievementsActivity extends NavigationBaseActivity {
     }
 
     private void showSnackBarWithRetry() {
+        progressBar.setVisibility(View.GONE);
         if (onClickListener == null) {
             onClickListener = view -> {
                 setAchievements();
-                progressBar.setVisibility(View.GONE);
             };
         }
         ViewUtil.showDismissibleSnackBar(findViewById(android.R.id.content),
