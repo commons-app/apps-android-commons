@@ -319,6 +319,9 @@ public class NearbyMapFragment extends DaggerFragment {
 
                 // Make camera to follow user on location change
                 CameraPosition position ;
+
+            // Do not update camera position is search this area mode on
+            if (!searchThisAreaModeOn) {
                 if (ViewUtil.isPortrait(getActivity())){
                     position = new CameraPosition.Builder()
                             .target(isBottomListSheetExpanded ?
@@ -343,7 +346,7 @@ public class NearbyMapFragment extends DaggerFragment {
 
                 mapboxMap.animateCamera(CameraUpdateFactory
                         .newCameraPosition(position), 1000);
-
+            }
         }
     }
 
@@ -355,36 +358,38 @@ public class NearbyMapFragment extends DaggerFragment {
      */
     private void updateMapCameraAccordingToBottomSheet(boolean isBottomListSheetExpanded) {
         CameraPosition position;
-        this.isBottomListSheetExpanded = isBottomListSheetExpanded;
-        if (mapboxMap != null && curLatLng != null) {
-            if (isBottomListSheetExpanded) {
-                // Make camera to follow user on location change
-                if (ViewUtil.isPortrait(getActivity())) {
-                    position = new CameraPosition.Builder()
-                            .target(new LatLng(curLatLng.getLatitude() - CAMERA_TARGET_SHIFT_FACTOR_PORTRAIT,
-                                    curLatLng.getLongitude())) // Sets the new camera target above
-                            // current to make it visible when sheet is expanded
-                            .zoom(11) // Fixed zoom level
-                            .build();
+        if (!searchThisAreaModeOn) {
+            this.isBottomListSheetExpanded = isBottomListSheetExpanded;
+            if (mapboxMap != null && curLatLng != null) {
+                if (isBottomListSheetExpanded) {
+                    // Make camera to follow user on location change
+                    if (ViewUtil.isPortrait(getActivity())) {
+                        position = new CameraPosition.Builder()
+                                .target(new LatLng(curLatLng.getLatitude() - CAMERA_TARGET_SHIFT_FACTOR_PORTRAIT,
+                                        curLatLng.getLongitude())) // Sets the new camera target above
+                                // current to make it visible when sheet is expanded
+                                .zoom(11) // Fixed zoom level
+                                .build();
+                    } else {
+                        position = new CameraPosition.Builder()
+                                .target(new LatLng(curLatLng.getLatitude() - CAMERA_TARGET_SHIFT_FACTOR_LANDSCAPE,
+                                        curLatLng.getLongitude())) // Sets the new camera target above
+                                // current to make it visible when sheet is expanded
+                                .zoom(11) // Fixed zoom level
+                                .build();
+                    }
+
                 } else {
+                    // Make camera to follow user on location change
                     position = new CameraPosition.Builder()
-                            .target(new LatLng(curLatLng.getLatitude() - CAMERA_TARGET_SHIFT_FACTOR_LANDSCAPE,
-                                    curLatLng.getLongitude())) // Sets the new camera target above
-                            // current to make it visible when sheet is expanded
-                            .zoom(11) // Fixed zoom level
+                            .target(new LatLng(curLatLng.getLatitude(),
+                                    curLatLng.getLongitude())) // Sets the new camera target to curLatLng
+                            .zoom(mapboxMap.getCameraPosition().zoom) // Same zoom level
                             .build();
                 }
-
-            } else {
-                // Make camera to follow user on location change
-                position = new CameraPosition.Builder()
-                        .target(new LatLng(curLatLng.getLatitude(),
-                                curLatLng.getLongitude())) // Sets the new camera target to curLatLng
-                        .zoom(mapboxMap.getCameraPosition().zoom) // Same zoom level
-                        .build();
+                mapboxMap.animateCamera(CameraUpdateFactory
+                        .newCameraPosition(position), 1000);
             }
-            mapboxMap.animateCamera(CameraUpdateFactory
-                    .newCameraPosition(position), 1000);
         }
     }
 
