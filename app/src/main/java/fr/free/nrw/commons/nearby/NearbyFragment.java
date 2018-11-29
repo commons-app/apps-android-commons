@@ -114,7 +114,6 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
         resumeFragment();*/
         bundle = new Bundle();
         initBottomSheetBehaviour();
-        wikidataEditListener.setAuthenticationStateListener(this);
         this.view = view;
         return view;
     }
@@ -642,6 +641,7 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
+        wikidataEditListener.setAuthenticationStateListener(this);
     }
 
     @Override
@@ -650,6 +650,7 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
         if (placesDisposable != null) {
             placesDisposable.dispose();
         }
+        wikidataEditListener.setAuthenticationStateListener(null);
     }
 
     @Override
@@ -657,6 +658,7 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
         super.onDetach();
         snackbar = null;
         broadcastReceiver = null;
+        wikidataEditListener.setAuthenticationStateListener(null);
     }
 
     @Override
