@@ -54,9 +54,8 @@ public class NearbyListFragment extends DaggerFragment {
     private ContributionController controller;
 
 
-    @Inject
-    @Named("direct_nearby_upload_prefs")
-    SharedPreferences directPrefs;
+    @Inject @Named("direct_nearby_upload_prefs") SharedPreferences directPrefs;
+    @Inject @Named("default_preferences") SharedPreferences defaultPrefs;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -79,7 +78,7 @@ public class NearbyListFragment extends DaggerFragment {
         recyclerView = view.findViewById(R.id.listView);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
-        controller = new ContributionController(this);
+        controller = new ContributionController(this, defaultPrefs);
         adapterFactory = new NearbyAdapterFactory(this, controller);
         return view;
     }
@@ -138,31 +137,6 @@ public class NearbyListFragment extends DaggerFragment {
 
         return placeList;
     }
-
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        Timber.d("onRequestPermissionsResult: req code = " + " perm = " + permissions + " grant =" + grantResults);
-
-        switch (requestCode) {
-            // 4 = "Read external storage" allowed when gallery selected
-            case 4: {
-                if (grantResults.length > 0 && grantResults[0] == PERMISSION_GRANTED) {
-                    Timber.d("Call controller.startGalleryPick()");
-                    controller.startGalleryPick();
-                }
-            }
-            break;
-
-            // 5 = "Write external storage" allowed when camera selected
-            case 5: {
-                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    Timber.d("Call controller.startCameraCapture()");
-                    controller.startCameraCapture();
-                }
-            }
-        }
-    }
-
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {

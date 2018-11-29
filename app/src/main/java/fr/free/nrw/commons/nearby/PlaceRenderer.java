@@ -72,6 +72,9 @@ public class PlaceRenderer extends Renderer<Place> {
     BookmarkLocationsDao bookmarkLocationDao;
     @Inject @Named("prefs") SharedPreferences prefs;
     @Inject @Named("direct_nearby_upload_prefs") SharedPreferences directPrefs;
+    @Inject
+    @Named("default_preferences")
+    SharedPreferences defaultPrefs;
 
     public PlaceRenderer(){
         openedItems = new ArrayList<>();
@@ -138,9 +141,8 @@ public class PlaceRenderer extends Renderer<Place> {
                         .show();
             } else {
                 Timber.d("Camera button tapped. Image title: " + place.getName() + "Image desc: " + place.getLongDescription());
-                DirectUpload directUpload = new DirectUpload(fragment, controller);
                 storeSharedPrefs();
-                directUpload.initiateCameraUpload();
+                controller.initiateCameraPick(fragment.getActivity());
             }
         });
 
@@ -159,9 +161,8 @@ public class PlaceRenderer extends Renderer<Place> {
                         .show();
             }else {
                 Timber.d("Gallery button tapped. Image title: " + place.getName() + "Image desc: " + place.getLongDescription());
-                DirectUpload directUpload = new DirectUpload(fragment, controller);
                 storeSharedPrefs();
-                directUpload.initiateGalleryUpload();
+                controller.initiateGalleryPick(fragment.getActivity());
             }
         });
 

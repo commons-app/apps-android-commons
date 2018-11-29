@@ -179,13 +179,13 @@ public class DialogUtil {
                 onPositiveBtnClick,
                 onNegativeBtnClick,
                 customView,
-                false);
+                cancelable);
     }
 
     /*
     Shows alert dialog with custom view
      */
-    private static void showAlertDialog(Activity activity,
+    public static void showAlertDialog(Activity activity,
                                        String title,
                                        String message,
                                        String positiveButtonText,
