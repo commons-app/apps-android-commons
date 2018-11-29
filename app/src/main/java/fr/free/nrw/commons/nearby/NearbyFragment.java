@@ -321,6 +321,11 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
     }
 
     public void refreshViewForCustomLocation(LatLng customLatLng) {
+        if (customLatLng == null) {
+            // If still null, return
+            return;
+        }
+
         this.customLatLng = customLatLng;
         placesDisposableCustom = Observable.fromCallable(() -> nearbyController
                 .loadAttractionsFromLocation(customLatLng, false, true))

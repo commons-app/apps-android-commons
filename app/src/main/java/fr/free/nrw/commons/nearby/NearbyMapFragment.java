@@ -608,7 +608,9 @@ public class NearbyMapFragment extends DaggerFragment {
                                 searchThisAreaButtonProgressBar.setVisibility(View.VISIBLE);
                                 // Recenter map camera
                                 fabRecenter.callOnClick();
-                                ((NearbyFragment)getParentFragment()).refreshViewForCustomLocation(NearbyController.currentLocation);
+                                // TODO: fetch and use current location instead
+                                ((NearbyFragment)getParentFragment())
+                                        .refreshViewForCustomLocation(((NearbyFragment)getParentFragment()).locationManager.getLastLocation());
                                 Log.d("deneme", "callOnClick");
                             }
                         }
