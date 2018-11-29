@@ -28,4 +28,8 @@ public class FragmentUtils {
         }
         return false;
     }
+
+    public static boolean isFragmentUIActive(Fragment fragment) {
+        return fragment.getActivity() != null && fragment.isAdded() && !fragment.isDetached() && !fragment.isRemoving();
+    }
 }

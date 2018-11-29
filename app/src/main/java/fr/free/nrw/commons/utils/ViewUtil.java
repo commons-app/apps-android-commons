@@ -17,12 +17,20 @@ public class ViewUtil {
     public static final String SHOWCASE_VIEW_ID_2 = "SHOWCASE_VIEW_ID_2";
     public static final String SHOWCASE_VIEW_ID_3 = "SHOWCASE_VIEW_ID_3";
 
-    public static void showSnackbar(View view, int messageResourceId) {
+    public static void showShortSnackbar(View view, int messageResourceId) {
         if (view.getContext() == null) {
             return;
         }
 
         ExecutorUtils.uiExecutor().execute(() -> Snackbar.make(view, messageResourceId, Snackbar.LENGTH_SHORT).show());
+    }
+
+    public static void showIndefiniteSnackbar(View view, int messageResourceId) {
+        if (view.getContext() == null) {
+            return;
+        }
+
+        ExecutorUtils.uiExecutor().execute(() -> Snackbar.make(view, messageResourceId, Snackbar.LENGTH_INDEFINITE).show());
     }
 
     public static void showLongToast(Context context, String text) {
