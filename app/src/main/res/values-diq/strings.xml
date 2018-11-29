@@ -130,6 +130,7 @@
   <string name="media_detail_title">Sername</string>
   <string name="media_detail_description">Şınasnayış</string>
   <string name="media_detail_author">Nuştekar</string>
+  <string name="media_detail_uploaded_date">Tarixê barkerdışi</string>
   <string name="media_detail_license">Lisans</string>
   <string name="media_detail_coordinates">Koordinati</string>
   <string name="welcome_image_tulip">Korbıze</string>

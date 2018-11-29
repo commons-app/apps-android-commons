@@ -221,5 +221,21 @@
   <string name="share_app_title">Toepassing delen</string>
   <string name="add_description">+ Beschrijving toevoegen</string>
   <string name="error_occurred">Fout opgetreden!</string>
+  <string name="contributions_fragment">Bijdragen</string>
+  <string name="nearby_fragment">Dichtbij</string>
+  <string name="notifications">Meldingen</string>
+  <string name="display_nearby_notification">Meldingen dichtbij weergeven</string>
+  <string name="list_sheet">Lijst</string>
   <string name="storage_permission">Toestemming om op te slaan</string>
+  <string name="step_count">Stap %1$d van %2$d</string>
+  <string name="next">Volgende</string>
+  <string name="previous">Vorige</string>
+  <string name="submit">Verzenden</string>
+  <string name="desc_language_Worldwide">Wereldwijd</string>
+  <string name="desc_language_America">Amerika</string>
+  <string name="desc_language_Europe">Europa</string>
+  <string name="nearby_card_permission_title">Machtigingsverzoek</string>
+  <string name="never_ask_again">Niet meer vragen</string>
+  <string name="display_location_permission_title">Machtiging voor locatie weergeven</string>
+  <string name="display_location_permission_explanation">Naar machtiging voor locatie vragen als dat nodig is voor de functie meldingskaart dichtbij weergeven.</string>
 </resources>

@@ -2,6 +2,7 @@
 <!-- Authors:
 * Alan ffm
 * Chrumps
+* CiaPan
 * DeRudySoulStorm
 * InternerowyGołąb
 * Krottyianock
@@ -57,7 +58,7 @@
   <string name="provider_contributions">Wysłane przeze mnie pliki</string>
   <string name="menu_share">Udostępnij</string>
   <string name="menu_open_in_browser">Zobacz w przeglądarce</string>
-  <string name="share_title_hint" fuzzy="true">Tytuł</string>
+  <string name="share_title_hint">Tytuł (wymagany)</string>
   <string name="share_description_hint">Opis</string>
   <string name="login_failed_network">Nie można zalogować - błąd sieci</string>
   <string name="login_failed_wrong_credentials">Nie można się zalogować - sprawdź swoją nazwę użytkownika i hasło</string>
@@ -270,6 +271,7 @@
   <string name="add_description">+ Dodaj opis</string>
   <string name="delete_recent_searches_dialog">Czy na pewno chcesz usunąć swoją historię wyszukiwania?</string>
   <string name="search_history_deleted">Historia wyszukiwania została usunięta</string>
+  <string name="nominate_delete">Zgłoś do usunięcia</string>
   <string name="Achievements">Osiągnięcia</string>
   <string name="statistics">STATYSTYKA</string>
   <string name="statistics_featured">Wyróżnione ilustracje</string>

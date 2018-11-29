@@ -267,6 +267,7 @@
   <string name="correct">Richteg Äntwert</string>
   <string name="wrong">Falsch Äntwert</string>
   <string name="add_description">+ Beschreiwung derbäisetzen</string>
+  <string name="nominate_delete">Nominéiere fir ze Läschen</string>
   <string name="Achievements">Realisatiounen</string>
   <string name="statistics">STATISTIKEN</string>
   <string name="statistics_thanks">Merci\'e kritt</string>
@@ -280,6 +281,7 @@
   <string name="nearby_fragment">Nobäi</string>
   <string name="notifications">Notifikatiounen</string>
   <string name="list_sheet">Lëscht</string>
+  <string name="step_count">Schrëtt %1$d vu(n) %2$d</string>
   <string name="next">Weider</string>
   <string name="previous">Vireg</string>
   <string name="submit">Späicheren</string>
@@ -291,6 +293,7 @@
   <string name="bookmark_empty">Dir hutt keng Lieszeechen derbäigesat</string>
   <string name="provider_bookmarks_location">Lieszeechen</string>
   <string name="deletion_reason_uploaded_by_mistake">Ech hunn et iertemlech eropgelueden</string>
+  <string name="deletion_reason_publicly_visible">Ech wousst net datt et ëffentlech visibel wier</string>
   <string name="deletion_reason_not_interesting">Pardon, dëst Bild ass net interessant fir eng Enzyklopedie</string>
   <string name="articles">Artikelen</string>
   <string name="desc_language_Worldwide">Weltwäit</string>
@@ -302,4 +305,5 @@
   <string name="desc_language_Pacific">Pazifik</string>
   <string name="no_categories_selected">Keng Kategorien erausgesicht</string>
   <string name="no_go_back">Neen, zréck goen</string>
+  <string name="never_ask_again">Dëst ni méi froen</string>
 </resources>

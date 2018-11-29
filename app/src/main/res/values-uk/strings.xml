@@ -185,7 +185,6 @@
   <string name="title_activity_nearby">Місця поблизу</string>
   <string name="no_nearby">Не знайдено місць поблизу</string>
   <string name="warning">Попередження</string>
-  <string name="file_exists">Цей файл вже існує на Вікісховищі. Ви впевнені, що хочете продовжити?</string>
   <string name="yes">Так</string>
   <string name="no">Ні</string>
   <string name="media_detail_title">Назва</string>

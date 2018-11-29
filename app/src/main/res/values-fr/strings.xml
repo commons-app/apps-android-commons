@@ -418,4 +418,10 @@
   <string name="yes_submit">Oui, soumettre</string>
   <string name="no_go_back">Non, revenir en arrière</string>
   <string name="upload_flow_all_images_in_set">(Pour toutes les images de l\'ensemble)</string>
+  <string name="nearby_card_permission_title">Demande d\'autorisation</string>
+  <string name="nearby_card_permission_explanation">Voudriez-vous que nous utilisions votre géolocalisation actuelle pour afficher les endroits du voisinage qui ont besoin d\'images ?</string>
+  <string name="unable_to_display_nearest_place">Impossible d\'afficher les endroits du voisinage qui ont besoin d\'images sans avoir les droits pour géolocaliser</string>
+  <string name="never_ask_again">Ne plus jamais demander cela</string>
+  <string name="display_location_permission_title">Afficher l\'autorisation de géolocalisation</string>
+  <string name="display_location_permission_explanation">Demander le droit de géolocaliser quand cela est nécessaire pour la fonction de visualisation de la carte des notifications de voisinage.</string>
 </resources>

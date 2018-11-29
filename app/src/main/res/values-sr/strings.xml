@@ -402,4 +402,10 @@
   <string name="yes_submit">Да, пошаљи</string>
   <string name="no_go_back">Не, врати се</string>
   <string name="upload_flow_all_images_in_set">(За све слике у скупу)</string>
+  <string name="nearby_card_permission_title">Захтев за дозволу</string>
+  <string name="nearby_card_permission_explanation">Желите ли да користимо вашу тренутну локацију да би приказали најближе место којем требају слике?</string>
+  <string name="unable_to_display_nearest_place">Није могуће приказати најближе место којем требају слике без дозволе за локацију.</string>
+  <string name="never_ask_again">Не питај ово поново</string>
+  <string name="display_location_permission_title">Дозвола за приказ локације</string>
+  <string name="display_location_permission_explanation">Тражи дозволу за локацију када је то потребно за функцију приказа картице обавештења у близини.</string>
 </resources>
