@@ -288,7 +288,6 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
                 || locationChangeType.equals(MAP_UPDATED)
                 || onOrientationChanged) {
             progressBar.setVisibility(View.VISIBLE);
-            Log.d("deneme","3");
 
             //TODO: This hack inserts curLatLng before populatePlaces is called (see #1440). Ideally a proper fix should be found
             Gson gson = new GsonBuilder()
@@ -322,7 +321,7 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
 
     public void refreshViewForCustomLocation(LatLng customLatLng) {
         if (customLatLng == null) {
-            // If still null, return
+            // If null, return
             return;
         }
 
@@ -343,6 +342,7 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
 
         if (nearbyMapFragment != null && curLatLng != null) {
             nearbyMapFragment.updateMapSignificantlyForCustomLocation(customLatLng, nearbyPlacesInfo.placeList);
+            updateListFragmentForCustomLocation(nearbyPlacesInfo.placeList);
         }
     }
 
@@ -470,6 +470,10 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
     private void updateListFragment() {
         nearbyListFragment.setBundleForUpdates(bundle);
         nearbyListFragment.updateNearbyListSignificantly();
+    }
+
+    private void updateListFragmentForCustomLocation(List<Place> placeList) {
+        nearbyListFragment.updateNearbyListSignificantlyForCustomLocation(placeList);
     }
 
     /**

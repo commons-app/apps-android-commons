@@ -574,7 +574,6 @@ public class NearbyMapFragment extends DaggerFragment {
         mapboxMap.addOnCameraMoveListener(new MapboxMap.OnCameraMoveListener() {
             @Override
             public void onCameraMove() {
-                //Log.d("deneme","target:"+mapboxMap.getCameraPosition().target);
                 if (NearbyController.currentLocation != null) { // If our nearby markers are calculated at least once
                     double distance = mapboxMap.getCameraPosition().target
                             .distanceTo(new LatLng(NearbyController.currentLocation.getLatitude()
@@ -582,7 +581,6 @@ public class NearbyMapFragment extends DaggerFragment {
                     if (distance*2 > NearbyController.searchedRadius*1000) { //Convert to meter, and compare
 
                         if (searchThisAreaButton.getVisibility() != View.VISIBLE) {
-                            Log.d("deneme","You went too far");
                             searchThisAreaButton.setVisibility(View.VISIBLE);
 
                             searchThisAreaButton.setOnClickListener(new View.OnClickListener() {
@@ -608,10 +606,8 @@ public class NearbyMapFragment extends DaggerFragment {
                                 searchThisAreaButtonProgressBar.setVisibility(View.VISIBLE);
                                 // Recenter map camera
                                 fabRecenter.callOnClick();
-                                // TODO: fetch and use current location instead
                                 ((NearbyFragment)getParentFragment())
                                         .refreshViewForCustomLocation(((NearbyFragment)getParentFragment()).locationManager.getLastLocation());
-                                Log.d("deneme", "callOnClick");
                             }
                         }
                     }
