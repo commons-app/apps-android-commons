@@ -92,11 +92,11 @@ public class ViewUtil {
      * A snack bar which has an action button which on click dismisses the snackbar and invokes the listener passed
      * @param view
      * @param messageResourceId
-     * @param retryButtonResourceId
+     * @param actionButtonResourceId
      * @param onClickListener
      */
     public static void showDismissibleSnackBar(View view, int messageResourceId,
-        int retryButtonResourceId, View.OnClickListener onClickListener) {
+        int actionButtonResourceId, View.OnClickListener onClickListener) {
         if (view.getContext() == null) {
             return;
         }
@@ -105,7 +105,7 @@ public class ViewUtil {
             Snackbar snackbar =
                 Snackbar.make(view, view.getContext().getString(messageResourceId),
                     Snackbar.LENGTH_INDEFINITE);
-            snackbar.setAction(view.getContext().getString(retryButtonResourceId), v -> {
+            snackbar.setAction(view.getContext().getString(actionButtonResourceId), v -> {
                 snackbar.dismiss();
                 onClickListener.onClick(v);
             });

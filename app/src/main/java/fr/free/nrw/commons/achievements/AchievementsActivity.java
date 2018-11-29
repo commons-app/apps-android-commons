@@ -87,7 +87,6 @@ public class AchievementsActivity extends NavigationBaseActivity {
     MediaWikiApi mediaWikiApi;
 
     private CompositeDisposable compositeDisposable = new CompositeDisposable();
-    private View.OnClickListener onClickListener;
 
     /**
      * This method helps in the creation Achievement screen and
@@ -206,13 +205,8 @@ public class AchievementsActivity extends NavigationBaseActivity {
 
     private void showSnackBarWithRetry() {
         progressBar.setVisibility(View.GONE);
-        if (onClickListener == null) {
-            onClickListener = view -> {
-                setAchievements();
-            };
-        }
         ViewUtil.showDismissibleSnackBar(findViewById(android.R.id.content),
-            R.string.achievements_fetch_failed, R.string.retry, onClickListener);
+            R.string.achievements_fetch_failed, R.string.retry, view -> setAchievements());
     }
 
     /**
