@@ -603,12 +603,46 @@ public class NearbyMapFragment extends DaggerFragment {
                         if (searchThisAreaButton.getVisibility() == View.VISIBLE) {
                             searchThisAreaButton.setVisibility(View.GONE);
                             ((NearbyFragment)getParentFragment())
-                                    .refreshView(LocationServiceManager.LocationChangeType.LOCATION_SIGNIFICANTLY_CHANGED);
+                                    .fabRecenter.performClick();
                         }
                     }
                 }
             }
         });
+    }
+
+    public void recenterMapView() {
+        if (curLatLng != null) {
+            mapView.getMapAsync(mapboxMap -> {
+                CameraPosition position;
+
+                if (ViewUtil.isPortrait(getActivity())){
+                    position = new CameraPosition.Builder()
+                            .target(isBottomListSheetExpanded ?
+                                    new LatLng(curLatLng.getLatitude()- CAMERA_TARGET_SHIFT_FACTOR_PORTRAIT,
+                                            curLatLng.getLongitude())
+                                    : new LatLng(curLatLng.getLatitude(), curLatLng.getLongitude(), 0)) // Sets the new camera position
+                            .zoom(isBottomListSheetExpanded ?
+                                    11
+                                    :mapboxMap.getCameraPosition().zoom) // Same zoom level
+                            .build();
+                }else {
+                    position = new CameraPosition.Builder()
+                            .target(isBottomListSheetExpanded ?
+                                    new LatLng(curLatLng.getLatitude()- CAMERA_TARGET_SHIFT_FACTOR_LANDSCAPE,
+                                            curLatLng.getLongitude())
+                                    : new LatLng(curLatLng.getLatitude(), curLatLng.getLongitude(), 0)) // Sets the new camera position
+                            .zoom(isBottomListSheetExpanded ?
+                                    11
+                                    :mapboxMap.getCameraPosition().zoom) // Same zoom level
+                            .build();
+                }
+
+                mapboxMap.animateCamera(CameraUpdateFactory
+                        .newCameraPosition(position), 1000);
+
+            });
+        }
     }
 
     /**

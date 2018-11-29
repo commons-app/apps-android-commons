@@ -99,6 +99,7 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
     private BroadcastReceiver broadcastReceiver;
 
     private boolean onOrientationChanged = false;
+    private boolean isRecenterButtonClicked = false;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -124,6 +125,14 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        fabRecenter.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                isRecenterButtonClicked = true;
+                refreshView(LocationServiceManager.LocationChangeType.LOCATION_SIGNIFICANTLY_CHANGED);
+                ((NearbyMapFragment)getParentFragment()).recenterMapView();
+            }
+        });
         if (savedInstanceState != null) {
             onOrientationChanged = true;
             refreshView(LOCATION_SIGNIFICANTLY_CHANGED);
@@ -262,9 +271,11 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
 
         if (curLatLng != null && curLatLng.equals(lastLocation)
                 && !locationChangeType.equals(MAP_UPDATED)) { //refresh view only if location has changed
-            if (!onOrientationChanged) {
+            // Two exceptional cases to refresh nearby map manually.
+            if (!onOrientationChanged && !isRecenterButtonClicked) {
                 return;
             }
+
         }
         curLatLng = lastLocation;
 
@@ -306,6 +317,8 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
                                 showErrorMessage(getString(R.string.error_fetching_nearby_places));
                                 progressBar.setVisibility(View.GONE);
                             });
+            // We updated map accoridng to recenter button request, so request is no more valid, until next click
+            isRecenterButtonClicked = false;
         } else if (locationChangeType
                 .equals(LOCATION_SLIGHTLY_CHANGED)) {
             Gson gson = new GsonBuilder()
