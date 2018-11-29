@@ -9,6 +9,7 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.v4.content.res.ResourcesCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.Toolbar;
@@ -23,19 +24,10 @@ import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-
-import com.dinuscxj.progressbar.CircleProgressBar;
-
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.util.Objects;
-
-import javax.inject.Inject;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import com.dinuscxj.progressbar.CircleProgressBar;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.Utils;
 import fr.free.nrw.commons.auth.SessionManager;
@@ -45,6 +37,11 @@ import fr.free.nrw.commons.utils.ViewUtil;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.schedulers.Schedulers;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.util.Objects;
+import javax.inject.Inject;
 import timber.log.Timber;
 
 /**
@@ -185,6 +182,7 @@ public class AchievementsActivity extends NavigationBaseActivity {
      * which then calls parseJson when results are fetched
      */
     private void setAchievements() {
+        progressBar.setVisibility(View.VISIBLE);
         if (checkAccount()) {
             compositeDisposable.add(mediaWikiApi
                     .getAchievements(Objects.requireNonNull(sessionManager.getCurrentAccount()).name)
@@ -195,15 +193,30 @@ public class AchievementsActivity extends NavigationBaseActivity {
                                 if (response != null) {
                                     setUploadCount(Achievements.from(response));
                                 } else {
-                                    onError();
+                                    showSnackBarWithRetry();
                                 }
                             },
                             t -> {
                                 Timber.e(t, "Fetching achievements statistics failed");
-                                onError();
+                                showSnackBarWithRetry();
                             }
                     ));
         }
+    }
+
+    /**
+     * As there would be no other way to refresh data when api call fails, lets give him an option
+     * to retry using the snackbar
+     */
+    private void showSnackBarWithRetry() {
+        progressBar.setVisibility(View.GONE);
+        Snackbar snackbar = Snackbar.make(findViewById(android.R.id.content),
+            getString(R.string.achievements_fetch_failed), Snackbar.LENGTH_INDEFINITE);
+        snackbar.setAction(getString(R.string.retry), view -> {
+            snackbar.dismiss();
+            setAchievements();
+        });
+        snackbar.show();
     }
 
     /**
