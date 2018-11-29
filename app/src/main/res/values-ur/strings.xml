@@ -157,4 +157,7 @@
   <string name="no_internet">انٹرنیٹ دستیاب نہیں</string>
   <string name="internet_established">انٹرنیٹ دستیاب</string>
   <string name="retry">دوبارہ کوشش کریں</string>
+  <string name="list_sheet">فہرست</string>
+  <string name="desc_language_Middle_East">مشرق وسطی</string>
+  <string name="desc_language_Africa">افریقا</string>
 </resources>

@@ -25,7 +25,7 @@
   <string name="intent_share_upload_label">Tallenna Commonsiin</string>
   <string name="username">Käyttäjätunnus</string>
   <string name="password">Salasana</string>
-  <string name="login_credential">Kirjaudu Commons Beta-tilillesi</string>
+  <string name="login_credential">Kirjaudu Commons Beta -tilillesi</string>
   <string name="login">Kirjaudu sisään</string>
   <string name="forgot_password">Unohtuiko salasana?</string>
   <string name="signup">Rekisteröidy</string>
@@ -189,7 +189,7 @@
   <string name="media_detail_coordinates">Koordinaatit</string>
   <string name="media_detail_coordinates_empty">ei annettu</string>
   <string name="become_a_tester_title">Ryhdy beetatestaajaksi</string>
-  <string name="become_a_tester_description">Valitse beta-kanavamme Google Playssa ja hanki varhainen pääsy uusiin ominaisuuksiin ja virheenkorjauksiin</string>
+  <string name="become_a_tester_description">Valitse beeta-kanavamme Google Playssa ja hanki varhainen pääsy uusiin ominaisuuksiin ja virheenkorjauksiin</string>
   <string name="_2fa_code">2FA koodi</string>
   <string name="number_of_uploads">Tuorein latausrajani</string>
   <string name="maximum_limit">Maksimimäärä</string>
@@ -332,6 +332,9 @@
   <string name="achievements_share_message">Jaa saavutuksesi ystäviesi kanssa!</string>
   <string name="error_occurred">Tapahtui virhe!</string>
   <string name="notifications_channel_name_all">Commons-ilmoitus</string>
+  <string name="next">Seuraava</string>
+  <string name="previous">Edellinen</string>
+  <string name="submit">Lähetä</string>
   <string name="navigation_item_bookmarks">Kirjanmerkit</string>
   <string name="title_activity_bookmarks">Kirjanmerkit</string>
   <string name="title_page_bookmarks_pictures">Kuvat</string>
@@ -340,5 +343,12 @@
   <string name="provider_bookmarks">Kirjanmerkit</string>
   <string name="bookmark_empty">Et ole lisännyt yhtään kirjanmerkkejä</string>
   <string name="provider_bookmarks_location">Kirjanmerkit</string>
+  <string name="deletion_reason_uploaded_by_mistake">Tallensin sen vahingossa</string>
   <string name="no_uploads">Tervetuloa Commonsiin!\n\nTallenna ensimmäinen mediasi koskettamalla kamera tai galleriakuvaketta yllä.</string>
+  <string name="desc_language_America">Amerikka</string>
+  <string name="desc_language_Europe">Eurooppa</string>
+  <string name="desc_language_Middle_East">Lähi-itä</string>
+  <string name="desc_language_Africa">Afrikka</string>
+  <string name="desc_language_Asia">Aasia</string>
+  <string name="desc_language_Pacific">Tyynenmeren alue</string>
 </resources>

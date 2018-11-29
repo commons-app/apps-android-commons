@@ -343,6 +343,7 @@
   <string name="add_description">+ إضافة الوصف</string>
   <string name="delete_recent_searches_dialog">هل أنت متأكد من أنك تريد مسح سجل بحثك؟</string>
   <string name="search_history_deleted">تم حذف سجل البحث</string>
+  <string name="nominate_delete">ترشيح للحذف</string>
   <string name="Achievements">الإنجازات</string>
   <string name="statistics">إحصاءات</string>
   <string name="statistics_thanks">تم تلقي الشكر</string>
@@ -389,6 +390,14 @@
   <string name="bookmark_empty">أنت لم تضف أي علامات</string>
   <string name="provider_bookmarks_location">العلامات</string>
   <string name="log_collection_started">بدأ جمع السجل. من فضلك أعد تشغيل التطبيق، ونفذ الإجراء الذي ترغب في تسجيله، ثم اضغط على \'إرسال ملف السجل\' مرة أخرى</string>
+  <string name="deletion_reason_uploaded_by_mistake">رفعته عن طريق الخطأ</string>
+  <string name="deletion_reason_publicly_visible">لم أكن أعلم أنه سيكون مرئيا بشكل علني</string>
+  <string name="deletion_reason_bad_for_my_privacy">أدركت أنه سيئ لخصوصيتي</string>
+  <string name="deletion_reason_no_longer_want_public">لقد غيرت رأيي، ولا أريد أن يكون مرئيا للجميع بعد الآن</string>
+  <string name="deletion_reason_not_interesting">آسف هذه الصورة ليست مثيرة للاهتمام لموسوعة</string>
+  <string name="uploaded_by_myself">رفعته بنفسي على</string>
+  <string name="used_by">،مستعمل في</string>
+  <string name="articles">مقالات</string>
   <string name="no_uploads">مرحبا بك في كومنز! \n\nارفع الوسائط الأولى عن طريق لمس أيقونة الكاميرا أو المعرض أعلاه.</string>
   <string name="desc_language_Worldwide">في جميع أنحاء العالم</string>
   <string name="desc_language_America">أمريكا</string>

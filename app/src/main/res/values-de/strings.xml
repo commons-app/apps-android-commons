@@ -6,6 +6,7 @@
 * Kghbln
 * Metalhead64
 * Sujan
+* Sushi
 -->
 <resources>
   <string name="title_activity_explore">Entdecken</string>
@@ -241,8 +242,8 @@
   <string name="upload_image_problem_dark">Dieses Bild ist zu dunkel. Bist du sicher, dass du es hochladen möchtest? Wikimedia Commons ist nur für Bilder mit enzyklopädischem Wert gedacht.</string>
   <string name="upload_image_problem_blurry">Dieses Bild ist verschwommen. Bist du sicher, dass du es hochladen möchtest? Wikimedia Commons ist nur für Bilder mit enzyklopädischem Wert gedacht.</string>
   <string name="upload_image_problem_dark_duplicate">Dieses Bild ist zu dunkel und bereits auf Commons vorhanden. Bist du sicher, dass du es hochladen möchtest? Lade bitte nur Bilder mit enzyklopädischem Wert hoch.</string>
-  <string name="upload_image_problem_blurry_duplicate">Dieses Bild ist unscharf und bereits auf Commons vorhanden. Bist du sicher, dass du es hochladen möchtest? Lade bitte nur Bilder mit enzyklopädischem Wert hoch.</string>
-  <string name="upload_image_problem_dark_blurry">Dieses Bild ist zu dunkel und unscharf. Bist du sicher, dass du es hochladen möchtest? Lade bitte nur Bilder mit enzyklopädischem Wert hoch.</string>
+  <string name="upload_image_problem_blurry_duplicate">Dieses Bild ist unscharf und bereits auf Commons vorhanden. Bist du sicher, dass du es hochladen möchtest? Bitte lade nur Bilder mit enzyklopädischem Wert hoch.</string>
+  <string name="upload_image_problem_dark_blurry">Dieses Bild ist zu dunkel und unscharf. Bist du sicher, dass du es hochladen möchtest? Bitte lade nur Bilder mit enzyklopädischem Wert hoch.</string>
   <string name="upload_image_problem_dark_blurry_duplicate">Dieses Bild ist zu dunkel, unscharf und bereits auf Commons vorhanden. Bist du sicher, dass du es hochladen möchtest? Lade bitte nur Bilder mit enzyklopädischem Wert hoch.</string>
   <string name="give_permission">Berechtigung geben</string>
   <string name="use_external_storage">Externen Speicher verwenden</string>
@@ -360,16 +361,16 @@
   <string name="notifications">Benachrichtigungen</string>
   <string name="display_nearby_notification">Benachrichtigungen in der Nähe anzeigen</string>
   <string name="display_nearby_notification_summary">Hier tippen, um Orte in der Nähe anzusehen, die Bilder benötigen.</string>
-  <string name="no_close_nearby">Keine Orte in deiner näheren Umgebung gefunden.</string>
+  <string name="no_close_nearby">Keine Orte in deiner Umgebung gefunden.</string>
   <string name="list_sheet">Liste</string>
   <string name="storage_permission">Speicherberechtigung</string>
   <string name="write_storage_permission_rationale_for_image_share">Wir benötigen deine Berechtigung für den Zugriff auf den externen Speicher deines Geräts, um Bilder hochzuladen.</string>
-  <string name="nearby_notification_dismiss_message">Du wirst keine Orte in der Nähe mehr sehen, die Bilder benötigen. Du kannst jedoch diese Benachrichtigung in den Einstellungen erneut aktivieren, falls du das möchtest.</string>
+  <string name="nearby_notification_dismiss_message">Du wirst nicht mehr den nähersten Ort sehen, der noch Bilder braucht. Du kannst jedoch diese Benachrichtigung in den Einstellungen erneut aktivieren, falls du das zu wünschen tust.</string>
   <string name="step_count">Schritt %1$d von %2$d</string>
   <string name="image_in_set_label">Bild %1$d im Satz</string>
   <string name="next">Nächste</string>
   <string name="previous">Vorherige</string>
-  <string name="submit">Übermitteln</string>
+  <string name="submit">Einreichen</string>
   <string name="upload_title_duplicate">Eine Datei mit dem Namen %1$s ist bereits vorhanden. Bist du sicher, dass du fortfahren möchtest?</string>
   <string name="map_application_missing">Auf deinem Gerät konnte keine kompatible Karten-App gefunden werden. Bitte installiere eine Karten-App, um diese Funktion nutzen zu können.</string>
   <plurals name="upload_count_title">
@@ -389,7 +390,7 @@
   <string name="deletion_reason_publicly_visible">Ich wusste nicht, dass es öffentlich sichtbar sein würde.</string>
   <string name="deletion_reason_bad_for_my_privacy">Ich habe erkannt, dass es schlecht für meine Privatsphäre ist.</string>
   <string name="deletion_reason_no_longer_want_public">Ich habe meine Meinung geändert. Ich möchte nicht mehr, dass es öffentlich sichtbar ist.</string>
-  <string name="deletion_reason_not_interesting">Dieses Bild ist leider nicht für eine Enzyklopädie interessant.</string>
+  <string name="deletion_reason_not_interesting">Entschuldigung, aber dieses Bild ist nicht für eine Enzyklopädie relevant.</string>
   <string name="uploaded_by_myself">Von mir hochgeladen am</string>
   <string name="used_by">, verwendet in</string>
   <string name="articles">Artikel</string>
@@ -403,7 +404,13 @@
   <string name="desc_language_Pacific">Pazifik</string>
   <string name="no_categories_selected">Keine Kategorien ausgewählt</string>
   <string name="no_categories_selected_warning_desc">Bilder ohne Kategorien sind selten nutzbar. Bist du sicher, dass du ohne die Auswahl von Kategorien hochladen möchtest?</string>
-  <string name="yes_submit">Ja, übermitteln</string>
+  <string name="yes_submit">Ja, einreichen</string>
   <string name="no_go_back">Nein, zurück gehen</string>
   <string name="upload_flow_all_images_in_set">(für alle Bilder im Satz)</string>
+  <string name="nearby_card_permission_title">Berechtigungsanfrage</string>
+  <string name="nearby_card_permission_explanation">Dürfen wir deinen aktuellen Standort verwenden, um den nächsten Ort anzuzeigen, der Bilder benötigt?</string>
+  <string name="unable_to_display_nearest_place">Der nächste Ort, der Bilder benötigt, kann ohne Standortberechtigungen nicht angezeigt werden.</string>
+  <string name="never_ask_again">Nicht erneut fragen</string>
+  <string name="display_location_permission_title">Standortberechtigung anzeigen</string>
+  <string name="display_location_permission_explanation">Anfrage für eine Standortberechtigung, die für die Nachbarbenachrichtigungskartenansichtsfunktion erforderlich ist.</string>
 </resources>

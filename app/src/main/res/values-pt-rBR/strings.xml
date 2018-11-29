@@ -413,4 +413,10 @@
   <string name="yes_submit">Sim, enviar</string>
   <string name="no_go_back">Não, voltar</string>
   <string name="upload_flow_all_images_in_set">(Para todas as imagens no conjunto)</string>
+  <string name="nearby_card_permission_title">Pedido de Permissão</string>
+  <string name="nearby_card_permission_explanation">Você gostaria que usássemos sua localização atual para exibir o local mais próximo que precisa de fotos?</string>
+  <string name="unable_to_display_nearest_place">Não é possível exibir o local mais próximo que precisa de fotos sem permissões de localização</string>
+  <string name="never_ask_again">Nunca mais pergunte isso</string>
+  <string name="display_location_permission_title">Exibir permissão de local</string>
+  <string name="display_location_permission_explanation">Peça permissão de localização quando necessário para o recurso de exibição de cartão de notificação nas proximidades.</string>
 </resources>

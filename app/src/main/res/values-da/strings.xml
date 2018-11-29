@@ -299,6 +299,7 @@
   <string name="share_app_title">Del appen</string>
   <string name="add_description">+ Tilføj en beskrivelse</string>
   <string name="search_history_deleted">Søgehistorik slettet</string>
+  <string name="nominate_delete">Nominer til sletning</string>
   <string name="Achievements">Præstationer</string>
   <string name="statistics">STATISTIKKER</string>
   <string name="statistics_thanks">Tak modtaget</string>
@@ -338,4 +339,5 @@
   <string name="desc_language_Asia">Asien</string>
   <string name="yes_submit">Ja, indsend</string>
   <string name="no_go_back">Nej, gå tilbage</string>
+  <string name="never_ask_again">Spørg aldrig om dette igen</string>
 </resources>

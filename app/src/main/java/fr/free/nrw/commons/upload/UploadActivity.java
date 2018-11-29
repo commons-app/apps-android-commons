@@ -223,6 +223,9 @@ public class UploadActivity extends AuthenticatedActivity implements UploadView,
         bottomCardSubtitle.setText(cardSubTitle);
         categoryTitle.setText(cardTitle);
         licenseTitle.setText(cardTitle);
+        if (currentStep == stepCount) {
+            dismissKeyboard();
+        }
         if(isShowingItem) {
             descriptionsAdapter.setItems(uploadItem.title, uploadItem.descriptions);
             rvDescriptions.setAdapter(descriptionsAdapter);

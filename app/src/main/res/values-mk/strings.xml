@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Authors:
 * Bjankuloski06
+* Vlad5250
 -->
 <resources>
   <string name="title_activity_explore">Истражи</string>
@@ -333,6 +334,7 @@
   <string name="add_description">+ Додај опис</string>
   <string name="delete_recent_searches_dialog">Дали сте сигурни дека сакате да ја избришете историјата на пребарувања?</string>
   <string name="search_history_deleted">Историјата на пребарување е избришана</string>
+  <string name="nominate_delete">Предложи за бришење</string>
   <string name="Achievements">Достигнувања</string>
   <string name="statistics">СТАТИСТИКА</string>
   <string name="statistics_thanks">Примени благодарници</string>
@@ -379,6 +381,14 @@
   <string name="bookmark_empty">Немате додадено ниеден бележник</string>
   <string name="provider_bookmarks_location">Обележани</string>
   <string name="log_collection_started">Заведувањето од дневникот започна. ПРЕВКЛУЧЕТЕ го прилогот, извршете го дејството што сакате да се заведе, а потоа повторно допрете на „Испрати дневничка податотека“</string>
+  <string name="deletion_reason_uploaded_by_mistake">Ја подигнав по грешка</string>
+  <string name="deletion_reason_publicly_visible">Не знаев дека ќе биде јавно видлива</string>
+  <string name="deletion_reason_bad_for_my_privacy">Сфатив дека ќе ми ја наруши приватноста</string>
+  <string name="deletion_reason_no_longer_want_public">Се премислив. Не сакам повеќе да биде видлива</string>
+  <string name="deletion_reason_not_interesting">За жал, сликава не е соодветна за енциклопедија</string>
+  <string name="uploaded_by_myself">Подигната од мене на</string>
+  <string name="used_by">, се користи во</string>
+  <string name="articles">статии</string>
   <string name="no_uploads">Добре дојдовте на Ризницата!\n\nПодигнете ја вашата прва слика или снимка допирајќи ја иконката за камера или галерија.</string>
   <string name="desc_language_Worldwide">Цел свет</string>
   <string name="desc_language_America">Америка</string>
