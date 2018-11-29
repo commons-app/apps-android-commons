@@ -261,10 +261,8 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
 
         if (curLatLng != null && curLatLng.equals(lastLocation)
                 && !locationChangeType.equals(MAP_UPDATED)) { //refresh view only if location has changed
-            Log.d("deneme","0");
             // Two exceptional cases to refresh nearby map manually.
-            if (!onOrientationChanged && !nearbyMapFragment.isRecenterButtonClickedArtificially) {
-                Log.d("deneme","1");
+            if (!onOrientationChanged) {
                 return;
             }
 
@@ -277,7 +275,6 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
 
         if (curLatLng == null) {
             Timber.d("Skipping update of nearby places as location is unavailable");
-            Log.d("deneme","2");
             return;
         }
 
@@ -311,11 +308,7 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
                                 showErrorMessage(getString(R.string.error_fetching_nearby_places));
                                 progressBar.setVisibility(View.GONE);
                             });
-            // We updated map accoridng to recenter button request, so request is no more valid, until next click
-            if (nearbyMapFragment != null && nearbyMapFragment.mapboxMap != null) {
-                nearbyMapFragment.mapboxMap.getUiSettings().setAllGesturesEnabled(true);
-                nearbyMapFragment.isRecenterButtonClickedArtificially = false;
-            }
+
         } else if (locationChangeType
                 .equals(LOCATION_SLIGHTLY_CHANGED)) {
             Gson gson = new GsonBuilder()

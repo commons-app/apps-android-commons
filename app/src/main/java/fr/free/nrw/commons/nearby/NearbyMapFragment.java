@@ -133,8 +133,6 @@ public class NearbyMapFragment extends DaggerFragment {
 
     private Bundle bundleForUpdtes;// Carry information from activity about changed nearby places and current location
 
-    public boolean isRecenterButtonClickedArtificially = false;
-
     @Inject
     @Named("prefs")
     SharedPreferences prefs;
@@ -291,6 +289,7 @@ public class NearbyMapFragment extends DaggerFragment {
         mapboxMap.clear();
         // We are trying to find nearby places around our custom searched area, thus custom parameter is nonnull
         addNearbyMarkerstoMapBoxMap(customBaseMarkerOptions);
+        addCurrentLocationMarker(mapboxMap);
         // Re-enable mapbox gestures on custom location markers load
         mapboxMap.getUiSettings().setAllGesturesEnabled(true);
         searchThisAreaButtonProgressBar.setVisibility(View.GONE);
@@ -605,10 +604,11 @@ public class NearbyMapFragment extends DaggerFragment {
                             searchThisAreaButton.setVisibility(View.GONE);
                             if (searchThisAreaModeOn == true) { // If search this area button is clicked before
                                 searchThisAreaModeOn = false;
-                                isRecenterButtonClickedArtificially = true;
                                 mapboxMap.getUiSettings().setAllGesturesEnabled(false);
-                                ((NearbyFragment)getParentFragment()).refreshView(LocationServiceManager.LocationChangeType.LOCATION_SIGNIFICANTLY_CHANGED);
+                                searchThisAreaButtonProgressBar.setVisibility(View.VISIBLE);
+                                // Recenter map camera
                                 fabRecenter.callOnClick();
+                                ((NearbyFragment)getParentFragment()).refreshViewForCustomLocation(NearbyController.currentLocation);
                                 Log.d("deneme", "callOnClick");
                             }
                         }
@@ -616,41 +616,6 @@ public class NearbyMapFragment extends DaggerFragment {
                 }
             }
         });
-    }
-
-    public void recenterMapView() {
-        Log.d("deneme","recenterMapView is called");
-        if (curLatLng != null) {
-            mapView.getMapAsync(mapboxMap -> {
-                CameraPosition position;
-
-                if (ViewUtil.isPortrait(getActivity())){
-                    position = new CameraPosition.Builder()
-                            .target(isBottomListSheetExpanded ?
-                                    new LatLng(curLatLng.getLatitude()- CAMERA_TARGET_SHIFT_FACTOR_PORTRAIT,
-                                            curLatLng.getLongitude())
-                                    : new LatLng(curLatLng.getLatitude(), curLatLng.getLongitude(), 0)) // Sets the new camera position
-                            .zoom(isBottomListSheetExpanded ?
-                                    11
-                                    :mapboxMap.getCameraPosition().zoom) // Same zoom level
-                            .build();
-                }else {
-                    position = new CameraPosition.Builder()
-                            .target(isBottomListSheetExpanded ?
-                                    new LatLng(curLatLng.getLatitude()- CAMERA_TARGET_SHIFT_FACTOR_LANDSCAPE,
-                                            curLatLng.getLongitude())
-                                    : new LatLng(curLatLng.getLatitude(), curLatLng.getLongitude(), 0)) // Sets the new camera position
-                            .zoom(isBottomListSheetExpanded ?
-                                    11
-                                    :mapboxMap.getCameraPosition().zoom) // Same zoom level
-                            .build();
-                }
-
-                mapboxMap.animateCamera(CameraUpdateFactory
-                        .newCameraPosition(position), 1000);
-
-            });
-        }
     }
 
     /**
