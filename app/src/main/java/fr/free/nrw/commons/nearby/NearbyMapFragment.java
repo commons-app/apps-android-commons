@@ -213,12 +213,19 @@ public class NearbyMapFragment extends DaggerFragment {
                         .STATE_COLLAPSED) {
                     bottomSheetDetailsBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
                     mapView.getMapAsync(MapboxMap::deselectMarkers);
-                    selected = null;
+                    selected = getNearestMarker();
                     return true;
                 }
             }
             return false;
         });
+    }
+
+    public Marker getNearestMarker()
+    {
+        Marker marker = baseMarkerOptions.get(0).getMarker();
+
+        return marker;
     }
 
     /**
@@ -237,6 +244,7 @@ public class NearbyMapFragment extends DaggerFragment {
                 curLatLng = gson.fromJson(gsonLatLng, curLatLngType);
             }
             updateMapToTrackPosition();
+            selectNearestMarker();
         }
 
     }
@@ -272,6 +280,19 @@ public class NearbyMapFragment extends DaggerFragment {
             addCurrentLocationMarker(mapboxMap);
             updateMapToTrackPosition();
             addNearbyMarkerstoMapBoxMap();
+            selectNearestMarker();
+        }
+    }
+
+    /**
+     * Selects the nearest marker and displays that marker's infowindow. Previous markers are deselected
+     * beforehand to prevent rendering multiple infowindows for the same marker as the latlong coords change.
+     */
+    private void selectNearestMarker()
+    {
+        mapboxMap.deselectMarkers();
+        if (baseMarkerOptions != null){
+            mapboxMap.selectMarker(baseMarkerOptions.get(0).getMarker());
         }
     }
 
@@ -933,5 +954,8 @@ public class NearbyMapFragment extends DaggerFragment {
             return latLng;
         }
     }
+
+
+
 }
 
