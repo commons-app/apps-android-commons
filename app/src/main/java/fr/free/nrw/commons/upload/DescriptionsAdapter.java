@@ -4,34 +4,28 @@ import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v4.view.ViewCompat;
 import android.support.v7.widget.AppCompatSpinner;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
-import android.widget.EditText;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.OnTouch;
-import butterknife.Optional;
 import fr.free.nrw.commons.R;
+import fr.free.nrw.commons.ui.widget.CustomEditText;
 import fr.free.nrw.commons.utils.AbstractTextWatcher;
 import fr.free.nrw.commons.utils.BiMap;
 import fr.free.nrw.commons.utils.ViewUtil;
 import io.reactivex.subjects.BehaviorSubject;
 import io.reactivex.subjects.Subject;
 import timber.log.Timber;
-
-import static android.view.MotionEvent.ACTION_UP;
 
 class DescriptionsAdapter extends RecyclerView.Adapter<DescriptionsAdapter.ViewHolder> {
 
@@ -119,7 +113,7 @@ class DescriptionsAdapter extends RecyclerView.Adapter<DescriptionsAdapter.ViewH
         AppCompatSpinner spinnerDescriptionLanguages;
 
         @BindView(R.id.description_item_edit_text)
-        EditText descItemEditText;
+        CustomEditText descItemEditText;
 
         private View view;
 
@@ -154,6 +148,18 @@ class DescriptionsAdapter extends RecyclerView.Adapter<DescriptionsAdapter.ViewH
                     }
                 });
 
+                descItemEditText.setDrawableClickListener(target -> {
+                    switch (target) {
+                        case RIGHT:
+                            if (getAdapterPosition() == 0) {
+                                callback.showAlert(R.string.media_detail_title, R.string.title_info);
+                            }
+                            break;
+                        default:
+                            break;
+                    }
+                });
+
             } else {
                 Description description = descriptions.get(position - 1);
                 Timber.d("Description is " + description);
@@ -168,9 +174,7 @@ class DescriptionsAdapter extends RecyclerView.Adapter<DescriptionsAdapter.ViewH
                     descItemEditText.setCompoundDrawablesWithIntrinsicBounds(null, null, null, null);
                 }
 
-                descItemEditText.addTextChangedListener(new AbstractTextWatcher(descriptionText -> {
-                    description.setDescriptionText(descriptionText);
-                }));
+                descItemEditText.addTextChangedListener(new AbstractTextWatcher(description::setDescriptionText));
                 descItemEditText.setOnFocusChangeListener((v, hasFocus) -> {
                     if (!hasFocus) {
                         ViewUtil.hideKeyboard(v);
@@ -179,95 +183,75 @@ class DescriptionsAdapter extends RecyclerView.Adapter<DescriptionsAdapter.ViewH
                     }
                 });
 
-                SpinnerLanguagesAdapter languagesAdapter = new SpinnerLanguagesAdapter(context,
-                        R.layout.row_item_languages_spinner, selectedLanguages);
-                languagesAdapter.notifyDataSetChanged();
-                spinnerDescriptionLanguages.setAdapter(languagesAdapter);
 
-                if (description.getSelectedLanguageIndex() == -1) {
-                    if (position == 1) {
-                        int defaultLocaleIndex = languagesAdapter.getIndexOfUserDefaultLocale(context);
-                        spinnerDescriptionLanguages.setSelection(defaultLocaleIndex);
-                    } else {
-                        spinnerDescriptionLanguages.setSelection(0);
-                    }
-                } else {
-                    spinnerDescriptionLanguages.setSelection(description.getSelectedLanguageIndex());
-                    selectedLanguages.put(spinnerDescriptionLanguages, description.getLanguageCode());
-                }
-
-                //TODO do it the butterknife way
-                spinnerDescriptionLanguages.setOnItemSelectedListener(new OnItemSelectedListener() {
-                    @Override
-                    public void onItemSelected(AdapterView<?> adapterView, View view, int position,
-                                               long l) {
-                        description.setSelectedLanguageIndex(position);
-                        String languageCode = ((SpinnerLanguagesAdapter) adapterView.getAdapter()).getLanguageCode(position);
-                        description.setLanguageCode(languageCode);
-                        selectedLanguages.remove(adapterView);
-                        selectedLanguages.put(adapterView, languageCode);
-                        ((SpinnerLanguagesAdapter) adapterView.getAdapter()).selectedLangCode = languageCode;
-                    }
-
-                    @Override
-                    public void onNothingSelected(AdapterView<?> adapterView) {
-
+                descItemEditText.setDrawableClickListener(target -> {
+                    switch (target) {
+                        case RIGHT:
+                            if (getAdapterPosition() == 1) {
+                                callback.showAlert(R.string.media_detail_description,
+                                        R.string.description_info);
+                            }
+                            break;
+                        default:
+                            break;
                     }
                 });
+
+                initLanguageSpinner(position, description);
             }
 
         }
 
-        @Optional
-        @OnTouch(R.id.description_item_edit_text)
-        boolean descriptionInfo(View view, MotionEvent motionEvent) {
-            //Title info is visible only for the title
-            if (getAdapterPosition() == 0) {
-                if (ViewCompat.getLayoutDirection(view) == ViewCompat.LAYOUT_DIRECTION_LTR) {
-                    final int value = view.getRight() - descItemEditText
-                            .getCompoundDrawables()[2]
-                            .getBounds().width();
-                    if (motionEvent.getAction() == ACTION_UP && motionEvent.getRawX() >= value) {
-                        callback.showAlert(R.string.media_detail_title, R.string.title_info);
-                        return true;
-                    }
-                } else {
-                    final int value = descItemEditText.getLeft() + descItemEditText
-                            .getCompoundDrawables()[0]
-                            .getBounds().width();
-                    if (motionEvent.getAction() == ACTION_UP && motionEvent.getRawX() <= value) {
-                        callback.showAlert(R.string.media_detail_title, R.string.title_info);
-                        return true;
-                    }
-                }
-            //Description info is visible only for the first description
-            } else if (getAdapterPosition() == 1) {
-                final int value;
-                if (ViewCompat.getLayoutDirection(view) == ViewCompat.LAYOUT_DIRECTION_LTR) {
-                    value = view.getRight() - descItemEditText.getCompoundDrawables()[2].getBounds().width();
-                    if (motionEvent.getAction() == ACTION_UP && motionEvent.getRawX() >= value) {
-                        callback.showAlert(R.string.media_detail_description,
-                                R.string.description_info);
-                        return true;
-                    }
-                } else {
-                    value = descItemEditText.getLeft() + descItemEditText
-                            .getCompoundDrawables()[0]
-                            .getBounds().width();
-                    if (motionEvent.getAction() == ACTION_UP && motionEvent.getRawX() <= value) {
-                        callback.showAlert(R.string.media_detail_description,
-                                R.string.description_info);
-                        return true;
-                    }
-                }
-            }
-            return false;
-        }
-    }
+        /**
+         * Extracted out the function to init the language spinner with different system supported languages
+         * @param position
+         * @param description
+         */
+        private void initLanguageSpinner(int position, Description description) {
+            SpinnerLanguagesAdapter languagesAdapter = new SpinnerLanguagesAdapter(context,
+                    R.layout.row_item_languages_spinner, selectedLanguages);
+            languagesAdapter.notifyDataSetChanged();
+            spinnerDescriptionLanguages.setAdapter(languagesAdapter);
 
-    private Drawable getInfoIcon() {
-        return context.getResources()
-                .getDrawable(R.drawable.mapbox_info_icon_default);
+            if (description.getSelectedLanguageIndex() == -1) {
+                if (position == 1) {
+                    int defaultLocaleIndex = languagesAdapter.getIndexOfUserDefaultLocale(context);
+                    spinnerDescriptionLanguages.setSelection(defaultLocaleIndex);
+                } else {
+                    spinnerDescriptionLanguages.setSelection(0);
+                }
+            } else {
+                spinnerDescriptionLanguages.setSelection(description.getSelectedLanguageIndex());
+                selectedLanguages.put(spinnerDescriptionLanguages, description.getLanguageCode());
+            }
+
+            //TODO do it the butterknife way
+            spinnerDescriptionLanguages.setOnItemSelectedListener(new OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> adapterView, View view, int position,
+                                           long l) {
+                    description.setSelectedLanguageIndex(position);
+                    String languageCode = ((SpinnerLanguagesAdapter) adapterView.getAdapter()).getLanguageCode(position);
+                    description.setLanguageCode(languageCode);
+                    selectedLanguages.remove(adapterView);
+                    selectedLanguages.put(adapterView, languageCode);
+                    ((SpinnerLanguagesAdapter) adapterView.getAdapter()).selectedLangCode = languageCode;
+                }
+
+                @Override
+                public void onNothingSelected(AdapterView<?> adapterView) {
+
+                }
+            });
+        }
+
+        /**
+         * Extracted out the method to get the icon drawable
+         * @return
+         */
+        private Drawable getInfoIcon() {
+            return context.getResources().getDrawable(R.drawable.mapbox_info_icon_default);
+        }
     }
 
     public interface Callback {
