@@ -271,7 +271,7 @@ public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment imple
             menu.clear(); // see http://stackoverflow.com/a/8495697/17865
             inflater.inflate(R.menu.fragment_image_detail, menu);
             if (pager != null) {
-                MediaDetailProvider provider = (MediaDetailProvider) getParentFragment();
+                MediaDetailProvider provider = getMediaDetailProvider();
                 if(provider == null) {
                     return;
                 }
