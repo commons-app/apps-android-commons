@@ -76,15 +76,4 @@ public class ViewUtil {
         }
     }
 
-    public static void displayPopupWindow(View anchorView, Context context, View popupWindowLayout, String text) {
-
-        PopupWindow popup = new PopupWindow(context);
-        popup.setContentView(popupWindowLayout);
-        // Closes the popup window when touch outside of it - when looses focus
-        popup.setOutsideTouchable(true);
-        popup.setFocusable(true);
-        // Show anchored to button
-        popup.showAsDropDown(anchorView);
-    }
-
 }
