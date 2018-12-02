@@ -312,7 +312,7 @@ public class UploadModel {
         {
             Contribution contribution = new Contribution(item.mediaUri, null, item.title + "." + item.fileExt,
                     Description.formatList(item.descriptions), -1,
-                    null, null, sessionManager.getUserName(),
+                    null, null, sessionManager.getRawUserName(),
                     CommonsApplication.DEFAULT_EDIT_SUMMARY, item.gpsCoords.getCoords());
             contribution.setWikiDataEntityId(item.wikidataEntityId);
             contribution.setCategories(categoryStringList);
