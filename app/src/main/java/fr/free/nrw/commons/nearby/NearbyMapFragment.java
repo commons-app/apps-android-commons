@@ -282,6 +282,13 @@ public class NearbyMapFragment extends DaggerFragment {
         }
     }
 
+    /**
+     * Will be used for map vew updates for custom locations (ie. with search this area method).
+     * Clears the map, adds current location marker, adds nearby markers around custom location,
+     * re-enables map gestures which was locked during place load, remove progress bar.
+     * @param customLatLng custom location that we will search around
+     * @param placeList places around of custom location
+     */
     public void updateMapSignificantlyForCustomLocation(fr.free.nrw.commons.location.LatLng customLatLng, List<Place> placeList) {
         List<NearbyBaseMarker> customBaseMarkerOptions =  NearbyController
                 .loadAttractionsFromLocationToBaseMarkerOptions(customLatLng,

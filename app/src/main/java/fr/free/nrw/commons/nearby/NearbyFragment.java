@@ -319,6 +319,12 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
         }
     }
 
+    /**
+     * This method should be used with "Search this are button". This method will search nearby
+     * points around any custom location (target location when user clicked on search this area)
+     * button. It populates places for custom location.
+     * @param customLatLng Custom area which we will search around
+     */
     public void refreshViewForCustomLocation(LatLng customLatLng) {
         if (customLatLng == null) {
             // If null, return
@@ -337,6 +343,11 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
                         });
     }
 
+    /**
+     * Populates places for custom location, should be used for finding nearby places around a
+     * location where you are not at.
+     * @param nearbyPlacesInfo This variable has place list information and distances.
+     */
     private void populatePlacesFromCustomLocation(NearbyController.NearbyPlacesInfo nearbyPlacesInfo) {
         NearbyMapFragment nearbyMapFragment = getMapFragment();
 
@@ -472,6 +483,11 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
         nearbyListFragment.updateNearbyListSignificantly();
     }
 
+    /**
+     * Updates nearby list for custom location, will be used with search this area method. When you
+     * want to search for a place where you are not at.
+     * @param placeList List of places around your manually chosen target location from map.
+     */
     private void updateListFragmentForCustomLocation(List<Place> placeList) {
         nearbyListFragment.updateNearbyListSignificantlyForCustomLocation(placeList);
     }

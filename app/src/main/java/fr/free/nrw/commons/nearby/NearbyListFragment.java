@@ -98,6 +98,11 @@ public class NearbyListFragment extends DaggerFragment {
         }
     }
 
+    /**
+     * While nearby updates for current location held with bundle, automatically, custom updates are
+     * done by calling this methods, triddered by search this are button input from user.
+     * @param placeList
+     */
     public void updateNearbyListSignificantlyForCustomLocation(List<Place> placeList) {
         try {
             adapterFactory.updateAdapterData(placeList, (RVRendererAdapter<Place>) recyclerView.getAdapter());
