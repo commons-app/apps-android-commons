@@ -213,19 +213,12 @@ public class NearbyMapFragment extends DaggerFragment {
                         .STATE_COLLAPSED) {
                     bottomSheetDetailsBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
                     mapView.getMapAsync(MapboxMap::deselectMarkers);
-                    selected = getNearestMarker();
+                    selected = null;
                     return true;
                 }
             }
             return false;
         });
-    }
-
-    public Marker getNearestMarker()
-    {
-        Marker marker = baseMarkerOptions.get(0).getMarker();
-
-        return marker;
     }
 
     /**
@@ -235,6 +228,7 @@ public class NearbyMapFragment extends DaggerFragment {
     public void updateMapSlightly() {
         Timber.d("updateMapSlightly called, bundle is:"+bundleForUpdtes);
         if (mapboxMap != null) {
+            deselectAllMarkers();
             Gson gson = new GsonBuilder()
                     .registerTypeAdapter(Uri.class, new UriDeserializer())
                     .create();
@@ -256,8 +250,10 @@ public class NearbyMapFragment extends DaggerFragment {
      */
     public void updateMapSignificantly() {
         Timber.d("updateMapSignificantly called, bundle is:"+bundleForUpdtes);
+
         if (mapboxMap != null) {
             if (bundleForUpdtes != null) {
+                deselectAllMarkers();
                 Gson gson = new GsonBuilder()
                         .registerTypeAdapter(Uri.class, new UriDeserializer())
                         .create();
@@ -285,16 +281,24 @@ public class NearbyMapFragment extends DaggerFragment {
     }
 
     /**
-     * Selects the nearest marker and displays that marker's infowindow. Previous markers are deselected
-     * beforehand to prevent rendering multiple infowindows for the same marker as the latlong coords change.
+     * Selects the nearest marker and displays that marker's infowindow.
      */
     private void selectNearestMarker()
     {
-        mapboxMap.deselectMarkers();
         if (baseMarkerOptions != null){
             mapboxMap.selectMarker(baseMarkerOptions.get(0).getMarker());
         }
     }
+
+    /**
+     * Deselects all markers' infowindows.
+     */
+    private void deselectAllMarkers()
+    {
+        mapboxMap.deselectMarkers();
+    }
+
+
 
     // Only update current position marker and camera view
     private void updateMapToTrackPosition() {
