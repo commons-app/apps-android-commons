@@ -46,18 +46,20 @@ public class NearbyController {
      * Prepares Place list to make their distance information update later.
      *
      * @param curLatLng current location for user
+     * @param latLangToSearchAround the location user wants to search around
+     * @param returnClosestResult if this search is done to find closest result or all results
      * @return NearbyPlacesInfo a variable holds Place list without distance information
      * and boundary coordinates of current Place List
      */
-    public NearbyPlacesInfo loadAttractionsFromLocation(LatLng curLatLng, boolean returnClosestResult, boolean searchThisAreaModeOn) throws IOException {
-        Timber.d("Loading attractions near %s", curLatLng);
+    public NearbyPlacesInfo loadAttractionsFromLocation(LatLng curLatLng, LatLng latLangToSearchAround, boolean returnClosestResult, boolean isSearchThisAreaModeOn) throws IOException {
+        Timber.d("Loading attractions near %s", latLangToSearchAround);
         NearbyPlacesInfo nearbyPlacesInfo = new NearbyPlacesInfo();
 
-        if (curLatLng == null) {
+        if (latLangToSearchAround == null) {
             Timber.d("Loading attractions neari, but curLatLng is null");
             return null;
         }
-        List<Place> places = nearbyPlaces.getFromWikidataQuery(curLatLng, Locale.getDefault().getLanguage(), returnClosestResult);
+        List<Place> places = nearbyPlaces.getFromWikidataQuery(latLangToSearchAround, Locale.getDefault().getLanguage(), returnClosestResult);
 
         if (null != places && places.size() > 0) {
             LatLng[] boundaryCoordinates = {places.get(0).location,   // south
@@ -98,9 +100,7 @@ public class NearbyController {
             if (!returnClosestResult) {
                 // Do not update searched radius, if controller is used for nearby card notification
                 searchedRadius = nearbyPlaces.radius;
-                if (!searchThisAreaModeOn) {
-                    currentLocation = curLatLng;
-                }
+                currentLocation = curLatLng;
             }
             return nearbyPlacesInfo;
         }

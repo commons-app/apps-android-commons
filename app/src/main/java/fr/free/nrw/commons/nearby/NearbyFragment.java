@@ -298,7 +298,7 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
             bundle.putString("CurLatLng", gsonCurLatLng);
 
             placesDisposable = Observable.fromCallable(() -> nearbyController
-                    .loadAttractionsFromLocation(curLatLng, false, false))
+                    .loadAttractionsFromLocation(curLatLng, curLatLng, false, false))
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe(this::populatePlaces,
@@ -333,7 +333,7 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
 
         this.customLatLng = customLatLng;
         placesDisposableCustom = Observable.fromCallable(() -> nearbyController
-                .loadAttractionsFromLocation(customLatLng, false, true))
+                .loadAttractionsFromLocation(curLatLng, customLatLng, false, nearbyMapFragment.searchThisAreaModeOn))
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(this::populatePlacesFromCustomLocation,
@@ -430,14 +430,14 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
              * If we are close to nearby places boundaries, we need a significant update to
              * get new nearby places. Check order is south, north, west, east
              * */
-            if (nearbyMapFragment.boundaryCoordinates != null
+            if (nearbyMapFragment.boundaryCoordinates != null && !nearbyMapFragment.searchThisAreaModeOn
                     && (curLatLng.getLatitude() <= nearbyMapFragment.boundaryCoordinates[0].getLatitude()
                     || curLatLng.getLatitude() >= nearbyMapFragment.boundaryCoordinates[1].getLatitude()
                     || curLatLng.getLongitude() <= nearbyMapFragment.boundaryCoordinates[2].getLongitude()
                     || curLatLng.getLongitude() >= nearbyMapFragment.boundaryCoordinates[3].getLongitude())) {
                 // populate places
                 placesDisposable = Observable.fromCallable(() -> nearbyController
-                        .loadAttractionsFromLocation(curLatLng, false, false))
+                        .loadAttractionsFromLocation(curLatLng, curLatLng, false, nearbyMapFragment.searchThisAreaModeOn))
                         .subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())
                         .subscribe(this::populatePlaces,

@@ -538,45 +538,35 @@ public class NearbyMapFragment extends DaggerFragment {
     }
 
     private void addMapMovementListeners() {
+        searchThisAreaButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                searchThisAreaModeOn = true;
+                // Lock map operations during search this area operation
+                mapboxMap.getUiSettings().setAllGesturesEnabled(false);
+                searchThisAreaButtonProgressBar.setVisibility(View.VISIBLE);
+                searchThisAreaButton.setVisibility(View.GONE);
+                ((NearbyFragment)getParentFragment())
+                        .refreshViewForCustomLocation(LocationUtils
+                                .mapBoxLatLngToCommonsLatLng(mapboxMap.getCameraPosition().target));
+            }
+        });
         mapboxMap.addOnCameraMoveListener(new MapboxMap.OnCameraMoveListener() {
             @Override
             public void onCameraMove() {
+                if (searchThisAreaButton.getVisibility() == View.GONE) {
+                    searchThisAreaButton.setVisibility(View.VISIBLE);
+                }
+
                 if (NearbyController.currentLocation != null) { // If our nearby markers are calculated at least once
                     double distance = mapboxMap.getCameraPosition().target
                             .distanceTo(new LatLng(NearbyController.currentLocation.getLatitude()
                                     , NearbyController.currentLocation.getLongitude()));
                     if (distance*2 > NearbyController.searchedRadius*1000) { //Convert to meter, and compare
-
-                        if (searchThisAreaButton.getVisibility() != View.VISIBLE) {
-                            searchThisAreaButton.setVisibility(View.VISIBLE);
-
-                            searchThisAreaButton.setOnClickListener(new View.OnClickListener() {
-                                @Override
-                                public void onClick(View view) {
-                                    searchThisAreaModeOn = true;
-                                    // Lock map operations during search this area operation
-                                    mapboxMap.getUiSettings().setAllGesturesEnabled(false);
-                                    searchThisAreaButtonProgressBar.setVisibility(View.VISIBLE);
-                                    ((NearbyFragment)getParentFragment())
-                                            .refreshViewForCustomLocation(LocationUtils
-                                                    .mapBoxLatLngToCommonsLatLng(mapboxMap.getCameraPosition().target));
-                                }
-                            });
-                        }
+                        searchThisAreaModeOn = true;
                     } else {
-                        // Restore nearby map according to current location again.
-                        if (searchThisAreaButton.getVisibility() == View.VISIBLE) {
-                            searchThisAreaButton.setVisibility(View.GONE);
-                            if (searchThisAreaModeOn == true) { // If search this area button is clicked before
-                                searchThisAreaModeOn = false;
-                                mapboxMap.getUiSettings().setAllGesturesEnabled(false);
-                                searchThisAreaButtonProgressBar.setVisibility(View.VISIBLE);
-                                // Recenter map camera
-                                fabRecenter.callOnClick();
-                                ((NearbyFragment)getParentFragment())
-                                        .refreshViewForCustomLocation(((NearbyFragment)getParentFragment()).locationManager.getLastLocation());
-                            }
-                        }
+                        searchThisAreaModeOn = false; // This flag will help us to understand should we folor users location or not
+                        // If we are close to users location then follow
                     }
                 }
             }

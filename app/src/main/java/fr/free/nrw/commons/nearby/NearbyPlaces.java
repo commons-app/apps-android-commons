@@ -55,6 +55,7 @@ public class NearbyPlaces {
         } else {
             MIN_RESULTS = 40;
             MAX_RADIUS = 300.0; // in kilometers
+            radius = INITIAL_RADIUS;
         }
 
             // increase the radius gradually to find a satisfactory number of nearby places
