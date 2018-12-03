@@ -120,7 +120,7 @@ public class NearbyMapFragment extends DaggerFragment {
     public MapboxMap mapboxMap;
     private PolygonOptions currentLocationPolygonOptions;
 
-    private Button searchThisAreaButton;
+    public Button searchThisAreaButton;
     private ProgressBar searchThisAreaButtonProgressBar;
 
     private boolean isBottomListSheetExpanded;
@@ -291,7 +291,7 @@ public class NearbyMapFragment extends DaggerFragment {
      */
     public void updateMapSignificantlyForCustomLocation(fr.free.nrw.commons.location.LatLng customLatLng, List<Place> placeList) {
         List<NearbyBaseMarker> customBaseMarkerOptions =  NearbyController
-                .loadAttractionsFromLocationToBaseMarkerOptions(customLatLng,
+                .loadAttractionsFromLocationToBaseMarkerOptions(curLatLng, // Curlatlang will be used to calculate distances
                         placeList,
                         getActivity());
         mapboxMap.clear();
@@ -552,16 +552,19 @@ public class NearbyMapFragment extends DaggerFragment {
             }
         });
         mapboxMap.addOnCameraMoveListener(new MapboxMap.OnCameraMoveListener() {
+
             @Override
             public void onCameraMove() {
-                if (searchThisAreaButton.getVisibility() == View.GONE) {
-                    searchThisAreaButton.setVisibility(View.VISIBLE);
-                }
 
                 if (NearbyController.currentLocation != null) { // If our nearby markers are calculated at least once
+
+                    if (searchThisAreaButton.getVisibility() == View.GONE) {
+                        searchThisAreaButton.setVisibility(View.VISIBLE);
+                    }
                     double distance = mapboxMap.getCameraPosition().target
                             .distanceTo(new LatLng(NearbyController.currentLocation.getLatitude()
                                     , NearbyController.currentLocation.getLongitude()));
+
                     if (distance*2 > NearbyController.searchedRadius*1000) { //Convert to meter, and compare
                         searchThisAreaModeOn = true;
                     } else {

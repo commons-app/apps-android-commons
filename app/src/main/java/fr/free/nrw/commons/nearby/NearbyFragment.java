@@ -317,6 +317,10 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
             bundle.putString("CurLatLng", gsonCurLatLng);
             updateMapFragment(true);
         }
+
+        if (nearbyMapFragment != null) {
+            nearbyMapFragment.searchThisAreaButton.setVisibility(View.GONE);
+        }
     }
 
     /**
@@ -326,6 +330,7 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
      * @param customLatLng Custom area which we will search around
      */
     public void refreshViewForCustomLocation(LatLng customLatLng) {
+
         if (customLatLng == null) {
             // If null, return
             return;
@@ -341,6 +346,10 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
                             Timber.d(throwable);
                             showErrorMessage(getString(R.string.error_fetching_nearby_places));
                         });
+
+        if (nearbyMapFragment != null) {
+            nearbyMapFragment.searchThisAreaButton.setVisibility(View.GONE);
+        }
     }
 
     /**
