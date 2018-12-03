@@ -110,7 +110,7 @@ public class UploadController {
                 sessionManager.forceLogin(context);
                 return;
             }
-            contribution.setCreator(currentAccount.name);
+            contribution.setCreator(sessionManager.getAuthorName());
         }
 
         if (contribution.getDescription() == null) {
