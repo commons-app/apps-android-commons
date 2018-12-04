@@ -15,6 +15,7 @@ import android.support.design.widget.BottomSheetBehavior;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AlertDialog;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -538,23 +539,12 @@ public class NearbyMapFragment extends DaggerFragment {
     }
 
     private void addMapMovementListeners() {
-        searchThisAreaButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                searchThisAreaModeOn = true;
-                // Lock map operations during search this area operation
-                mapboxMap.getUiSettings().setAllGesturesEnabled(false);
-                searchThisAreaButtonProgressBar.setVisibility(View.VISIBLE);
-                searchThisAreaButton.setVisibility(View.GONE);
-                ((NearbyFragment)getParentFragment())
-                        .refreshViewForCustomLocation(LocationUtils
-                                .mapBoxLatLngToCommonsLatLng(mapboxMap.getCameraPosition().target));
-            }
-        });
+
         mapboxMap.addOnCameraMoveListener(new MapboxMap.OnCameraMoveListener() {
 
             @Override
             public void onCameraMove() {
+                Log.d("deneme","camera moving");
 
                 if (NearbyController.currentLocation != null) { // If our nearby markers are calculated at least once
 
@@ -565,11 +555,44 @@ public class NearbyMapFragment extends DaggerFragment {
                             .distanceTo(new LatLng(NearbyController.currentLocation.getLatitude()
                                     , NearbyController.currentLocation.getLongitude()));
 
-                    if (distance*2 > NearbyController.searchedRadius*1000) { //Convert to meter, and compare
-                        searchThisAreaModeOn = true;
+                    if (distance > 3000) { //Convert to meter, and compare
+                        Log.d("deneme","distance:"+distance+", searched radius:"+NearbyController.searchedRadius*100+" true"+" this"+this);
+                        if (!searchThisAreaModeOn) { // If we are changing mode, then change click action
+                            searchThisAreaModeOn = true;
+                            searchThisAreaButton.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View view) {
+                                    searchThisAreaModeOn = true;
+                                    // Lock map operations during search this area operation
+                                    mapboxMap.getUiSettings().setAllGesturesEnabled(false);
+                                    searchThisAreaButtonProgressBar.setVisibility(View.VISIBLE);
+                                    searchThisAreaButton.setVisibility(View.GONE);
+                                    ((NearbyFragment)getParentFragment())
+                                            .refreshViewForCustomLocation(LocationUtils
+                                                    .mapBoxLatLngToCommonsLatLng(mapboxMap.getCameraPosition().target), false);
+                                }
+                            });
+                        }
+
                     } else {
-                        searchThisAreaModeOn = false; // This flag will help us to understand should we folor users location or not
-                        // If we are close to users location then follow
+                        Log.d("deneme","distance:"+distance+", searched radius:"+NearbyController.searchedRadius*100+" false"+" this"+this);
+                        if (searchThisAreaModeOn) {
+                            searchThisAreaModeOn = false; // This flag will help us to understand should we folor users location or not
+                            searchThisAreaButton.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View view) {
+                                    searchThisAreaModeOn = true;
+                                    // Lock map operations during search this area operation
+                                    mapboxMap.getUiSettings().setAllGesturesEnabled(false);
+                                    searchThisAreaButtonProgressBar.setVisibility(View.VISIBLE);
+                                    fabRecenter.callOnClick();
+                                    searchThisAreaButton.setVisibility(View.GONE);
+                                    ((NearbyFragment)getParentFragment())
+                                            .refreshViewForCustomLocation(LocationUtils
+                                                    .mapBoxLatLngToCommonsLatLng(mapboxMap.getCameraPosition().target), true);
+                                }
+                            });
+                        }
                     }
                 }
             }

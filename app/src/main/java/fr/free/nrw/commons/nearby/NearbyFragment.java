@@ -98,6 +98,7 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
     private BroadcastReceiver broadcastReceiver;
 
     private boolean onOrientationChanged = false;
+    private boolean populateForCurrentLocation = false;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -315,7 +316,7 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
                     .create();
             String gsonCurLatLng = gson.toJson(curLatLng);
             bundle.putString("CurLatLng", gsonCurLatLng);
-            updateMapFragment(true);
+            updateMapFragment(false,true, null, null);
         }
 
         if (nearbyMapFragment != null) {
@@ -329,13 +330,14 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
      * button. It populates places for custom location.
      * @param customLatLng Custom area which we will search around
      */
-    public void refreshViewForCustomLocation(LatLng customLatLng) {
+    public void refreshViewForCustomLocation(LatLng customLatLng, boolean refreshForCurrentLocation) {
 
         if (customLatLng == null) {
             // If null, return
             return;
         }
 
+        populateForCurrentLocation = refreshForCurrentLocation;
         this.customLatLng = customLatLng;
         placesDisposableCustom = Observable.fromCallable(() -> nearbyController
                 .loadAttractionsFromLocation(curLatLng, customLatLng, false, nearbyMapFragment.searchThisAreaModeOn))
@@ -361,12 +363,20 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
         NearbyMapFragment nearbyMapFragment = getMapFragment();
 
         if (nearbyMapFragment != null && curLatLng != null) {
-            nearbyMapFragment.updateMapSignificantlyForCustomLocation(customLatLng, nearbyPlacesInfo.placeList);
+            if (!populateForCurrentLocation) {
+                Log.d("deneme","if"+" this"+nearbyMapFragment);
+                nearbyMapFragment.updateMapSignificantlyForCustomLocation(customLatLng, nearbyPlacesInfo.placeList);
+            } else {
+                Log.d("deneme","else"+" this"+nearbyMapFragment);
+                updateMapFragment(true,true, customLatLng, nearbyPlacesInfo);
+            }
             updateListFragmentForCustomLocation(nearbyPlacesInfo.placeList);
         }
+        Log.d("deneme","none");
     }
 
     private void populatePlaces(NearbyController.NearbyPlacesInfo nearbyPlacesInfo) {
+        Log.d("deneme","populate places is called");
         Timber.d("Populating nearby places");
         List<Place> placeList = nearbyPlacesInfo.placeList;
         LatLng[] boundaryCoordinates = nearbyPlacesInfo.boundaryCoordinates;
@@ -396,7 +406,7 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
         } else {
             // There are fragments, just update the map and list
             Timber.d("Map fragment already exists, just update the map and list");
-            updateMapFragment(false);
+            updateMapFragment(false,false, null, null);
             updateListFragment();
         }
     }
@@ -418,12 +428,14 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
         }
     }
 
-    private void updateMapFragment(boolean isSlightUpdate) {
+    private void updateMapFragment(boolean updateViaButton, boolean isSlightUpdate, @Nullable LatLng customLatLng, @Nullable NearbyController.NearbyPlacesInfo nearbyPlacesInfo) {
+
+        Log.d("deneme","updatemapfragment is called"+" updateViaButton"+updateViaButton+", isSlightUpdate"+isSlightUpdate+", customLatLng"+customLatLng);
 
         if (nearbyMapFragment.searchThisAreaModeOn) {
+            Log.d("deneme","search this area mode on returns");
             return;
         }
-
         /*
         Significant update means updating nearby place markers. Slightly update means only
         updating current location marker and camera target.
@@ -458,6 +470,11 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
                 nearbyMapFragment.setBundleForUpdtes(bundle);
                 nearbyMapFragment.updateMapSignificantlyForCurrentLocation();
                 updateListFragment();
+                return;
+            }
+
+            if (updateViaButton) {
+                nearbyMapFragment.updateMapSignificantlyForCustomLocation(customLatLng, nearbyPlacesInfo.placeList);
                 return;
             }
 
