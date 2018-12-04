@@ -347,6 +347,7 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
     @Override
     @NonNull
     public Observable<String> searchCategories(String filterValue, int searchCatsLimit) {
+        List<String> categories = new ArrayList<>();
         return Single.fromCallable(() -> {
             List<CustomApiResult> categoryNodes = null;
             try {
@@ -367,11 +368,12 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
                 return new ArrayList<String>();
             }
 
-            List<String> categories = new ArrayList<>();
             for (CustomApiResult categoryNode : categoryNodes) {
                 String cat = categoryNode.getDocument().getTextContent();
                 String catString = cat.replace("Category:", "");
-                categories.add(catString);
+                if (!categories.contains(catString)) {
+                    categories.add(catString);
+                }
             }
 
             return categories;
