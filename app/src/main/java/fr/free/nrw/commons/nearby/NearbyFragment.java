@@ -299,7 +299,7 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
             bundle.putString("CurLatLng", gsonCurLatLng);
 
             placesDisposable = Observable.fromCallable(() -> nearbyController
-                    .loadAttractionsFromLocation(curLatLng, curLatLng, false, false))
+                    .loadAttractionsFromLocation(curLatLng, curLatLng, false, true))
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe(this::populatePlaces,
@@ -340,7 +340,7 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
         populateForCurrentLocation = refreshForCurrentLocation;
         this.customLatLng = customLatLng;
         placesDisposableCustom = Observable.fromCallable(() -> nearbyController
-                .loadAttractionsFromLocation(curLatLng, customLatLng, false, nearbyMapFragment.searchThisAreaModeOn))
+                .loadAttractionsFromLocation(curLatLng, customLatLng, false, populateForCurrentLocation))
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(this::populatePlacesFromCustomLocation,
@@ -360,7 +360,10 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
      * @param nearbyPlacesInfo This variable has place list information and distances.
      */
     private void populatePlacesFromCustomLocation(NearbyController.NearbyPlacesInfo nearbyPlacesInfo) {
-        NearbyMapFragment nearbyMapFragment = getMapFragment();
+        //NearbyMapFragment nearbyMapFragment = getMapFragment();
+        if (nearbyMapFragment != null) {
+            nearbyMapFragment.searchThisAreaButtonProgressBar.setVisibility(View.GONE);
+        }
 
         if (nearbyMapFragment != null && curLatLng != null) {
             if (!populateForCurrentLocation) {
@@ -425,7 +428,7 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
     }
 
     private void updateMapFragment(boolean updateViaButton, boolean isSlightUpdate, @Nullable LatLng customLatLng, @Nullable NearbyController.NearbyPlacesInfo nearbyPlacesInfo) {
-        
+
         if (nearbyMapFragment.searchThisAreaModeOn) {
             return;
         }
@@ -451,7 +454,7 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
                     || curLatLng.getLongitude() >= nearbyMapFragment.boundaryCoordinates[3].getLongitude())) {
                 // populate places
                 placesDisposable = Observable.fromCallable(() -> nearbyController
-                        .loadAttractionsFromLocation(curLatLng, curLatLng, false, nearbyMapFragment.searchThisAreaModeOn))
+                        .loadAttractionsFromLocation(curLatLng, curLatLng, false, updateViaButton))
                         .subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())
                         .subscribe(this::populatePlaces,

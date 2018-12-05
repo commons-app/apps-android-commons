@@ -122,7 +122,7 @@ public class NearbyMapFragment extends DaggerFragment {
     private PolygonOptions currentLocationPolygonOptions;
 
     public Button searchThisAreaButton;
-    private ProgressBar searchThisAreaButtonProgressBar;
+    public ProgressBar searchThisAreaButtonProgressBar;
 
     private boolean isBottomListSheetExpanded;
     private final double CAMERA_TARGET_SHIFT_FACTOR_PORTRAIT = 0.06;

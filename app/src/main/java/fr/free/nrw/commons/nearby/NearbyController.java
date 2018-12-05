@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.support.graphics.drawable.VectorDrawableCompat;
+import android.util.Log;
 
 import com.mapbox.mapboxsdk.annotations.IconFactory;
 
@@ -51,7 +52,9 @@ public class NearbyController {
      * @return NearbyPlacesInfo a variable holds Place list without distance information
      * and boundary coordinates of current Place List
      */
-    public NearbyPlacesInfo loadAttractionsFromLocation(LatLng curLatLng, LatLng latLangToSearchAround, boolean returnClosestResult, boolean isSearchThisAreaModeOn) throws IOException {
+    public NearbyPlacesInfo loadAttractionsFromLocation(LatLng curLatLng, LatLng latLangToSearchAround, boolean returnClosestResult, boolean checkingAroundCurrentLocation) throws IOException {
+        Log.d("deneme","checking around current location"+checkingAroundCurrentLocation);
+
         Timber.d("Loading attractions near %s", latLangToSearchAround);
         NearbyPlacesInfo nearbyPlacesInfo = new NearbyPlacesInfo();
 
@@ -97,7 +100,7 @@ public class NearbyController {
             }
             nearbyPlacesInfo.placeList = places;
             nearbyPlacesInfo.boundaryCoordinates = boundaryCoordinates;
-            if (!returnClosestResult) {
+            if (!returnClosestResult && checkingAroundCurrentLocation) {
                 // Do not update searched radius, if controller is used for nearby card notification
                 searchedRadius = nearbyPlaces.radius;
                 currentLocation = curLatLng;
