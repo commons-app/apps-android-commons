@@ -15,7 +15,6 @@ import android.support.design.widget.Snackbar;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
-
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
@@ -37,6 +36,7 @@ import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
 import fr.free.nrw.commons.location.LatLng;
 import fr.free.nrw.commons.location.LocationServiceManager;
 import fr.free.nrw.commons.location.LocationUpdateListener;
+import fr.free.nrw.commons.utils.FragmentUtils;
 import fr.free.nrw.commons.utils.NetworkUtils;
 import fr.free.nrw.commons.utils.UriSerializer;
 import fr.free.nrw.commons.utils.ViewUtil;
@@ -323,7 +323,7 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
         String gsonBoundaryCoordinates = gson.toJson(boundaryCoordinates);
 
         if (placeList.size() == 0) {
-            ViewUtil.showSnackbar(view.findViewById(R.id.container), R.string.no_nearby);
+            ViewUtil.showShortSnackbar(view.findViewById(R.id.container), R.string.no_nearby);
         }
 
         bundle.putString("PlaceList", gsonPlaceList);
@@ -591,14 +591,17 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
     }
 
     private void addNetworkBroadcastReceiver() {
+        if (!FragmentUtils.isFragmentUIActive(this)) {
+            return;
+        }
+        
         IntentFilter intentFilter = new IntentFilter(NETWORK_INTENT_ACTION);
-            snackbar = Snackbar.make(transparentView , R.string.no_internet, Snackbar.LENGTH_INDEFINITE);
+        snackbar = Snackbar.make(transparentView, R.string.no_internet, Snackbar.LENGTH_INDEFINITE);
 
-            broadcastReceiver = new BroadcastReceiver() {
-
+        broadcastReceiver = new BroadcastReceiver() {
             @Override
             public void onReceive(Context context, Intent intent) {
-                if (snackbar != null) {
+                if (snackbar != null && getActivity() != null) {
                     if (NetworkUtils.isInternetConnectionEstablished(getActivity())) {
                         refreshView(LOCATION_SIGNIFICANTLY_CHANGED);
                         snackbar.dismiss();
@@ -608,6 +611,10 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
                 }
             }
         };
+
+        if (getActivity() == null) {
+            return;
+        }
 
         getActivity().registerReceiver(broadcastReceiver, intentFilter);
 

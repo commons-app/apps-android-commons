@@ -17,7 +17,12 @@ public class ViewUtil {
     public static final String SHOWCASE_VIEW_ID_2 = "SHOWCASE_VIEW_ID_2";
     public static final String SHOWCASE_VIEW_ID_3 = "SHOWCASE_VIEW_ID_3";
 
-    public static void showSnackbar(View view, int messageResourceId) {
+    /**
+     * Utility function to show short snack bar
+     * @param view
+     * @param messageResourceId
+     */
+    public static void showShortSnackbar(View view, int messageResourceId) {
         if (view.getContext() == null) {
             return;
         }
