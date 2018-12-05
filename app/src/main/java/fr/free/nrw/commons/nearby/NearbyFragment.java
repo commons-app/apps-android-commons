@@ -364,19 +364,15 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
 
         if (nearbyMapFragment != null && curLatLng != null) {
             if (!populateForCurrentLocation) {
-                Log.d("deneme","if"+" this"+nearbyMapFragment);
                 nearbyMapFragment.updateMapSignificantlyForCustomLocation(customLatLng, nearbyPlacesInfo.placeList);
             } else {
-                Log.d("deneme","else"+" this"+nearbyMapFragment);
                 updateMapFragment(true,true, customLatLng, nearbyPlacesInfo);
             }
             updateListFragmentForCustomLocation(nearbyPlacesInfo.placeList);
         }
-        Log.d("deneme","none");
     }
 
     private void populatePlaces(NearbyController.NearbyPlacesInfo nearbyPlacesInfo) {
-        Log.d("deneme","populate places is called");
         Timber.d("Populating nearby places");
         List<Place> placeList = nearbyPlacesInfo.placeList;
         LatLng[] boundaryCoordinates = nearbyPlacesInfo.boundaryCoordinates;
@@ -429,11 +425,8 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
     }
 
     private void updateMapFragment(boolean updateViaButton, boolean isSlightUpdate, @Nullable LatLng customLatLng, @Nullable NearbyController.NearbyPlacesInfo nearbyPlacesInfo) {
-
-        Log.d("deneme","updatemapfragment is called"+" updateViaButton"+updateViaButton+", isSlightUpdate"+isSlightUpdate+", customLatLng"+customLatLng);
-
+        
         if (nearbyMapFragment.searchThisAreaModeOn) {
-            Log.d("deneme","search this area mode on returns");
             return;
         }
         /*

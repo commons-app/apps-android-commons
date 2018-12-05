@@ -132,6 +132,7 @@ public class NearbyMapFragment extends DaggerFragment {
     public boolean searchThisAreaModeOn = false;
 
     private Bundle bundleForUpdtes;// Carry information from activity about changed nearby places and current location
+    private boolean searchedAroundCurrentLocation = true;
 
     @Inject
     @Named("prefs")
@@ -544,7 +545,6 @@ public class NearbyMapFragment extends DaggerFragment {
 
             @Override
             public void onCameraMove() {
-                Log.d("deneme","camera moving");
 
                 if (NearbyController.currentLocation != null) { // If our nearby markers are calculated at least once
 
@@ -556,7 +556,6 @@ public class NearbyMapFragment extends DaggerFragment {
                                     , NearbyController.currentLocation.getLongitude()));
 
                     if (distance > 3000) { //Convert to meter, and compare
-                        Log.d("deneme","distance:"+distance+", searched radius:"+NearbyController.searchedRadius*100+" true"+" this"+this);
                         if (!searchThisAreaModeOn) { // If we are changing mode, then change click action
                             searchThisAreaModeOn = true;
                             searchThisAreaButton.setOnClickListener(new View.OnClickListener() {
@@ -567,6 +566,7 @@ public class NearbyMapFragment extends DaggerFragment {
                                     mapboxMap.getUiSettings().setAllGesturesEnabled(false);
                                     searchThisAreaButtonProgressBar.setVisibility(View.VISIBLE);
                                     searchThisAreaButton.setVisibility(View.GONE);
+                                    searchedAroundCurrentLocation = false;
                                     ((NearbyFragment)getParentFragment())
                                             .refreshViewForCustomLocation(LocationUtils
                                                     .mapBoxLatLngToCommonsLatLng(mapboxMap.getCameraPosition().target), false);
@@ -575,7 +575,6 @@ public class NearbyMapFragment extends DaggerFragment {
                         }
 
                     } else {
-                        Log.d("deneme","distance:"+distance+", searched radius:"+NearbyController.searchedRadius*100+" false"+" this"+this);
                         if (searchThisAreaModeOn) {
                             searchThisAreaModeOn = false; // This flag will help us to understand should we folor users location or not
                             searchThisAreaButton.setOnClickListener(new View.OnClickListener() {
@@ -587,11 +586,15 @@ public class NearbyMapFragment extends DaggerFragment {
                                     searchThisAreaButtonProgressBar.setVisibility(View.VISIBLE);
                                     fabRecenter.callOnClick();
                                     searchThisAreaButton.setVisibility(View.GONE);
+                                    searchedAroundCurrentLocation = true;
                                     ((NearbyFragment)getParentFragment())
                                             .refreshViewForCustomLocation(LocationUtils
                                                     .mapBoxLatLngToCommonsLatLng(mapboxMap.getCameraPosition().target), true);
                                 }
                             });
+                        }
+                        if (searchedAroundCurrentLocation) {
+                            searchThisAreaButton.setVisibility(View.GONE);
                         }
                     }
                 }
