@@ -428,8 +428,7 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
     }
 
     private void updateMapFragment(boolean updateViaButton, boolean isSlightUpdate, @Nullable LatLng customLatLng, @Nullable NearbyController.NearbyPlacesInfo nearbyPlacesInfo) {
-
-        if (nearbyMapFragment.searchThisAreaModeOn) {
+        if (nearbyMapFragment.checkingAround) {
             return;
         }
         /*
