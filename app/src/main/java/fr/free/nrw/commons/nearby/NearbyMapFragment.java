@@ -1011,6 +1011,7 @@ public class NearbyMapFragment extends DaggerFragment {
         searchThisAreaModeOn = false;
         checkingAround = false;
         searchedAroundCurrentLocation = true;
+        boundaryCoordinates = null;
         initViews();
         setListeners();
         transparentView.setClickable(false);
