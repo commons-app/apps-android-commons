@@ -119,7 +119,7 @@ public class CommonsApplication extends Application {
         ContributionUtils.emptyTemporaryDirectory();
 
         initAcra();
-        if (BuildConfig.DEBUG) {
+        if (BuildConfig.DEBUG && !isRoboUnitTest()) {
             Stetho.initializeWithDefaults(this);
         }
 
@@ -160,6 +160,10 @@ public class CommonsApplication extends Application {
         Thread.UncaughtExceptionHandler exceptionHandler = Thread.getDefaultUncaughtExceptionHandler();
         ACRA.init(this);
         Thread.setDefaultUncaughtExceptionHandler(exceptionHandler);
+    }
+
+    public static boolean isRoboUnitTest() {
+        return "robolectric".equals(Build.FINGERPRINT);
     }
 
     private ThreadPoolService getFileLoggingThreadPool() {
