@@ -8,9 +8,7 @@ class GPSExtractorTest {
 
     @Test
     fun getCoords() {
-        val fileDescriptor = mock(FileDescriptor::class.java)
-        val gpsExtractor = GPSExtractor(fileDescriptor)
-        val coords = gpsExtractor.coords
+
     }
 
     @Test
