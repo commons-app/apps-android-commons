@@ -1,6 +1,7 @@
 package fr.free.nrw.commons.upload;
 
 import android.annotation.SuppressLint;
+import android.content.SharedPreferences;
 import android.net.Uri;
 
 import java.lang.reflect.Proxy;
@@ -9,12 +10,14 @@ import java.util.Collections;
 import java.util.List;
 
 import javax.inject.Inject;
+import javax.inject.Named;
 import javax.inject.Singleton;
 
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.category.CategoriesModel;
 import fr.free.nrw.commons.contributions.Contribution;
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
+import fr.free.nrw.commons.settings.Prefs;
 import fr.free.nrw.commons.utils.ImageUtils;
 import io.reactivex.Completable;
 import io.reactivex.Observable;
@@ -49,6 +52,7 @@ public class UploadPresenter {
     @UploadView.UploadPage
     private int currentPage = UploadView.PLEASE_WAIT;
 
+    @Inject @Named("default_preferences")SharedPreferences prefs;
 
     @Inject
     UploadPresenter(UploadModel uploadModel,
@@ -354,7 +358,7 @@ public class UploadPresenter {
      * Sets the list of licences and the default license.
      */
     private void updateLicenses() {
-        String selectedLicense = uploadModel.getSelectedLicense();
+        String selectedLicense = prefs.getString(Prefs.DEFAULT_LICENSE, Prefs.Licenses.CC_BY_SA_3);
         view.updateLicenses(uploadModel.getLicenses(), selectedLicense);
         view.updateLicenseSummary(selectedLicense);
     }
