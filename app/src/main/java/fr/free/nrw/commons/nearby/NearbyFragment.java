@@ -731,6 +731,7 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
         }
 
     public void onTabSelected(boolean onOrientationChanged) {
+        Log.d("deneme***","onTabSelected");
         Timber.d("On nearby tab selected");
         this.onOrientationChanged = onOrientationChanged;
         performNearbyOperations();
