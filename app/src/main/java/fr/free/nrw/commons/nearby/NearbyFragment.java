@@ -127,8 +127,6 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
         super.onViewCreated(view, savedInstanceState);
         if (savedInstanceState != null) {
             onOrientationChanged = true;
-            Log.d("deneme","onViewCreated");
-            //refreshView(LOCATION_SIGNIFICANTLY_CHANGED);
         }
     }
 
@@ -220,22 +218,17 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
 
     @Override
     public void onLocationChangedSignificantly(LatLng latLng) {
-        Log.d("deneme","onLocationChangedSignificantly");
             refreshView(LOCATION_SIGNIFICANTLY_CHANGED);
     }
 
     @Override
     public void onLocationChangedSlightly(LatLng latLng) {
-        Log.d("deneme","onLocationChangedSlightly");
-
         refreshView(LOCATION_SLIGHTLY_CHANGED);
     }
 
 
     @Override
     public void onLocationChangedMedium(LatLng latLng) {
-        Log.d("deneme","onLocationChangedMedium");
-
         // For nearby map actions, there are no differences between 500 meter location change (aka medium change) and slight change
             refreshView(LOCATION_SLIGHTLY_CHANGED);
     }
@@ -244,7 +237,6 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
     public void onWikidataEditSuccessful() {
         // Do not refresh nearby map if we are checking other areas with search this area button
         if (!nearbyMapFragment.searchThisAreaModeOn) {
-            Log.d("deneme","onWikidateEditSuccesful");
             refreshView(MAP_UPDATED);
         }
     }
@@ -255,7 +247,6 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
      * @param locationChangeType defines if location shanged significantly or slightly
      */
     public void refreshView(LocationServiceManager.LocationChangeType locationChangeType) {
-        Log.d("deneme","refreshView");
         Timber.d("Refreshing nearby places");
         if (lockNearbyView) {
             return;
@@ -307,7 +298,6 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
             bundle.clear();
             bundle.putString("CurLatLng", gsonCurLatLng);
 
-            Log.d("deneme","popuate places is called from here");
             placesDisposable = Observable.fromCallable(() -> nearbyController
                     .loadAttractionsFromLocation(curLatLng, curLatLng, false, true))
                     .subscribeOn(Schedulers.io())
@@ -341,7 +331,6 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
      * @param customLatLng Custom area which we will search around
      */
     public void refreshViewForCustomLocation(LatLng customLatLng, boolean refreshForCurrentLocation) {
-        Log.d("deneme","refreshViewForCutomLocatiom");
         if (customLatLng == null) {
             // If null, return
             return;
@@ -370,7 +359,6 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
      * @param nearbyPlacesInfo This variable has place list information and distances.
      */
     private void populatePlacesFromCustomLocation(NearbyController.NearbyPlacesInfo nearbyPlacesInfo) {
-        Log.d("deneme","populatePlacesFromCustomLocation");
         //NearbyMapFragment nearbyMapFragment = getMapFragment();
         if (nearbyMapFragment != null) {
             nearbyMapFragment.searchThisAreaButtonProgressBar.setVisibility(View.GONE);
@@ -387,8 +375,6 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
     }
 
     private void populatePlaces(NearbyController.NearbyPlacesInfo nearbyPlacesInfo) {
-        Log.d("deneme","populatePlaces");
-
         Timber.d("Populating nearby places");
         List<Place> placeList = nearbyPlacesInfo.placeList;
         LatLng[] boundaryCoordinates = nearbyPlacesInfo.boundaryCoordinates;
@@ -441,9 +427,6 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
     }
 
     private void updateMapFragment(boolean updateViaButton, boolean isSlightUpdate, @Nullable LatLng customLatLng, @Nullable NearbyController.NearbyPlacesInfo nearbyPlacesInfo) {
-        Log.d("deneme","update Map fragment"+" updateViaButton:"+updateViaButton+", isSlightUpdate:"+isSlightUpdate);
-        Log.d("deneme","update Map fragment status"+" checking around:"+nearbyMapFragment.checkingAround+", searchThisAreaModeOn:"+nearbyMapFragment.searchThisAreaModeOn+", onOrientationChanged:"+onOrientationChanged);
-
         if (nearbyMapFragment.checkingAround) {
             return;
         }
@@ -470,7 +453,6 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
                     || curLatLng.getLatitude() > nearbyMapFragment.boundaryCoordinates[1].getLatitude()
                     || curLatLng.getLongitude() < nearbyMapFragment.boundaryCoordinates[2].getLongitude()
                     || curLatLng.getLongitude() > nearbyMapFragment.boundaryCoordinates[3].getLongitude())) {
-                Log.d("deneme","boundary is working");
                 // populate places
                 placesDisposable = Observable.fromCallable(() -> nearbyController
                         .loadAttractionsFromLocation(curLatLng, curLatLng, false, updateViaButton))
@@ -657,7 +639,6 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
         Timber.d("Checking location permission");
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             if (locationManager.isLocationPermissionGranted()) {
-                Log.d("deneme","Check location permission if");
                 refreshView(LOCATION_SIGNIFICANTLY_CHANGED);
             } else {
                 // Should we show an explanation?
@@ -684,7 +665,6 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
                 }
             }
         } else {
-            Log.d("deneme","Check location permission else");
             refreshView(LOCATION_SIGNIFICANTLY_CHANGED);
         }
     }
@@ -703,10 +683,7 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
             public void onReceive(Context context, Intent intent) {
                 if (snackbar != null) {
                     if (NetworkUtils.isInternetConnectionEstablished(getActivity())) {
-                        Log.d("deneme","NetworkUtils.isInternetConnectionEstablished(getActivity())");
                         if (isNetworkErrorOccured) {
-                            Log.d("deneme","NetworkUtils.isInternetConnectionEstablished(getActivity())");
-                            Log.d("deneme","isNetworkErrorOccured refreshed");
                             refreshView(LOCATION_SIGNIFICANTLY_CHANGED);
                             isNetworkErrorOccured = false;
                         }
@@ -731,7 +708,6 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
         }
 
     public void onTabSelected(boolean onOrientationChanged) {
-        Log.d("deneme***","onTabSelected");
         Timber.d("On nearby tab selected");
         this.onOrientationChanged = onOrientationChanged;
         performNearbyOperations();
