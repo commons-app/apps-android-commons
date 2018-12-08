@@ -54,13 +54,13 @@
   <string name="contribution_state_failed">Başarısız</string>
   <string name="contribution_state_in_progress">%1$d%% tamamlandı</string>
   <string name="contribution_state_starting">Yükleniyor</string>
-  <string name="menu_from_gallery">Galeri\'den</string>
+  <string name="menu_from_gallery">Galeriden</string>
   <string name="menu_from_camera">Fotoğraf çek</string>
   <string name="menu_nearby">Yakınındakiler</string>
   <string name="provider_contributions">Yüklemelerim</string>
   <string name="menu_share">Paylaş</string>
   <string name="menu_open_in_browser">Tarayıcıda görüntüle</string>
-  <string name="share_title_hint">Başlık</string>
+  <string name="share_title_hint" fuzzy="true">Başlık</string>
   <string name="add_title_toast">Lütfen bu dosya için bir başlık ekleyin</string>
   <string name="share_description_hint">Açıklama</string>
   <string name="login_failed_network">Oturum açılamıyor - ağ hatası</string>
@@ -81,7 +81,7 @@
   <string name="gps_disabled">GPS, cihazınızda devre dışı bırakılmıştır. Etkinleştirmek ister misiniz?</string>
   <string name="enable_gps">GPS\'i etkinleştir</string>
   <string name="contributions_subtitle_zero">Henüz yüklenmedi</string>
-  <plurals name="contributions_subtitle">
+  <plurals name="contributions_subtitle" fuzzy="true">
     <item quantity="zero">\@string/contributions_subtitle_zero</item>
     <item quantity="one">%1$d yükleme</item>
     <item quantity="other">%1$d yükleme</item>
@@ -180,7 +180,6 @@
   <string name="title_activity_nearby">Yakındaki yerler</string>
   <string name="no_nearby">Yakınlardaki yer bulunamadı</string>
   <string name="warning">Uyarı</string>
-  <string name="file_exists">Bu dosya zaten Commons\'da var. Devam etmek istediğinizden emin misiniz?</string>
   <string name="yes">Evet</string>
   <string name="no">Hayır</string>
   <string name="media_detail_title">Başlık</string>
@@ -242,8 +241,9 @@
   <string name="error_while_cache">Resimler önbelleğe alınırken hata oluştu</string>
   <string name="title_info">Dosya için dosya adı olarak kullanılacak benzersiz açıklayıcı bir başlık olmalıdır. Boşluk bırakarak sade bir dil kullanabilirsiniz. Dosya uzantısını dahil etmeyin</string>
   <string name="description_info">Lütfen medyayı mümkün olduğunca açıklayın: Nerede çekildi? Ne gösteriyor? Bağlam nedir? Lütfen nesneleri veya kişileri tanımlayın. Kolay tahmin edilemeyen bilgileri açıklayın, örneğin bir manzara ise günün saatini belirtin. Medya alışılmadık bir şey gösteriyorsa lütfen olağandışı yapan şeyleri açıklayın.</string>
-  <string name="upload_image_too_dark">Bu fotoğraf çok karanlık, yine de yüklemek istiyor musunuz? Wikimedia Commons yalnızca ansiklopedik değeri olan fotoğraflar içindir.</string>
-  <string name="upload_image_blurry">Bu fotoğraf bulanık, yine de yüklemek istiyor musunuz? Wikimedia Commons yalnızca ansiklopedik değeri olan fotoğraflar içindir.</string>
+  <string name="upload_image_problem_duplicate">Bu dosya zaten Commons\'da var. Devam etmek istediğinizden emin misiniz?</string>
+  <string name="upload_image_problem_dark">Bu fotoğraf çok karanlık, yine de yüklemek istiyor musunuz? Wikimedia Commons yalnızca ansiklopedik değeri olan fotoğraflar içindir.</string>
+  <string name="upload_image_problem_blurry">Bu fotoğraf bulanık, yine de yüklemek istiyor musunuz? Wikimedia Commons yalnızca ansiklopedik değeri olan fotoğraflar içindir.</string>
   <string name="give_permission">İzin ver</string>
   <string name="use_external_storage">Harici depolamayı kullanın</string>
   <string name="use_external_storage_summary">Uygulama kamerası kullanıldığında çekilen fotoğrafları cihazına kaydedin</string>
@@ -356,5 +356,14 @@
   <string name="notifications_channel_name_all">Commons Bildirimi</string>
   <string name="storage_permission">Depolama İzni</string>
   <string name="write_storage_permission_rationale_for_image_share">Görüntüleri yüklemek için cihazınızın harici belleğine erişim iznine sahip olmamız gerekiyor.</string>
-  <string name="log_collection_started">Günlük koleksiyonu başlatıldı. Lütfen uygulamayı YENİDEN BAŞLATIN, günlüğe kaydetmek istediğiniz eylemi gerçekleştirin ve ardından \'Gönderme Günleri\'ne tekrar dokunun.</string>
+  <string name="navigation_item_bookmarks">Yer imleri</string>
+  <string name="title_activity_bookmarks">Yer imleri</string>
+  <string name="title_page_bookmarks_pictures">Resim</string>
+  <string name="title_page_bookmarks_locations">Konumlar</string>
+  <string name="menu_bookmark">Yer imlerini ekle/kaldır</string>
+  <string name="provider_bookmarks">Yer imleri</string>
+  <string name="bookmark_empty">Henüz yer imlerine bir şey eklemediniz</string>
+  <string name="provider_bookmarks_location">Yer imleri</string>
+  <string name="log_collection_started">Günlük koleksiyonu başlatıldı. Lütfen uygulamayı YENİDEN BAŞLATIN, günlüğe kaydetmek istediğiniz eylemi gerçekleştirin ve ardından \'Günlüğü Gönder\'e tekrar dokunun.</string>
+  <string name="no_uploads">Commons\'a Hoş Geldiniz!\n\nYukarıdaki kamera ya da galeri simgesine dokunarak ilk medyanızı yükleyin.</string>
 </resources>

@@ -59,7 +59,7 @@
   <string name="provider_contributions">Мої завантаження</string>
   <string name="menu_share">Поділитися</string>
   <string name="menu_open_in_browser">Відкрити у браузері</string>
-  <string name="share_title_hint">Назва</string>
+  <string name="share_title_hint" fuzzy="true">Назва</string>
   <string name="add_title_toast">Будь ласка, вкажіть назву цього файлу</string>
   <string name="share_description_hint">Опис</string>
   <string name="login_failed_network">Неможливо увійти — збій у мережі</string>
@@ -80,7 +80,7 @@
   <string name="gps_disabled">GPS вимкнено на Вашому пристрої. Бажаєте увімкнути його?</string>
   <string name="enable_gps">Увімкнути GPS</string>
   <string name="contributions_subtitle_zero">Ще нема завантажень</string>
-  <plurals name="contributions_subtitle">
+  <plurals name="contributions_subtitle" fuzzy="true">
     <item quantity="zero">\@string/contributions_subtitle_zero</item>
     <item quantity="one">%1$d завантаження</item>
     <item quantity="few">%1$d завантаження</item>
@@ -185,7 +185,6 @@
   <string name="title_activity_nearby">Місця поблизу</string>
   <string name="no_nearby">Не знайдено місць поблизу</string>
   <string name="warning">Попередження</string>
-  <string name="file_exists">Цей файл вже існує на Вікісховищі. Ви впевнені, що хочете продовжити?</string>
   <string name="yes">Так</string>
   <string name="no">Ні</string>
   <string name="media_detail_title">Назва</string>
@@ -247,8 +246,9 @@
   <string name="error_while_cache">Помилка кешування зображень</string>
   <string name="title_info">Унікальна описова назва файлу. Ви можете використовувати простий текст з пробілами. Не вказуйте розширення файлу</string>
   <string name="description_info">Будь ласка, докладно опишіть файл: де його було зроблено? що на ньому зображено? який контекст? Будь ласка, опишіть об\'єкти чи осіб. Додайте інформацію, яку не можна легко здогадатися, наприклад, пору доби для фотографії пейзажу. Якщо зображено щось незвичайне, спробуйте пояснити, що робить його незвичайним.</string>
-  <string name="upload_image_too_dark">Це зображення надто темне. Ви упевнені, що хочете його завантажити? Вікісховище призначене лише для зображень, що мають енциклопедичну цінність.</string>
-  <string name="upload_image_blurry">Це зображення розмите. Ви упевнені, що хочете його завантажити? Вікісховище призначене лише для зображень, що мають енциклопедичну цінність.</string>
+  <string name="upload_image_problem_duplicate">Цей файл вже існує на Вікісховищі. Ви впевнені, що хочете продовжити?</string>
+  <string name="upload_image_problem_dark">Це зображення надто темне. Ви упевнені, що хочете його завантажити? Вікісховище призначене лише для зображень, що мають енциклопедичну цінність.</string>
+  <string name="upload_image_problem_blurry">Це зображення розмите. Ви упевнені, що хочете його завантажити? Вікісховище призначене лише для зображень, що мають енциклопедичну цінність.</string>
   <string name="give_permission">Надати дозвіл</string>
   <string name="use_external_storage">Використовувати зовнішнє сховище</string>
   <string name="use_external_storage_summary">Зберігати зображення, виконані вбудованою камерою Вашого пристрою</string>
@@ -361,6 +361,14 @@
   <string name="notifications_channel_name_all">Сповіщення Вікісховища</string>
   <string name="storage_permission">Дозвіл сховища</string>
   <string name="write_storage_permission_rationale_for_image_share">Нам потрібен ваш дозвіл на доступ до зовнішнього сховища на вашому пристрої, щоб завантажувати зображення.</string>
-  <string name="log_collection_started">Почався збір інформації з журналів. Будь ласка ПЕРЕЗАПУСТІТЬ програму, потім виконайте дію, що призводить до помилки і натисніть знов «Відправити журнали».</string>
+  <string name="navigation_item_bookmarks">Закладки</string>
+  <string name="title_activity_bookmarks">Закладки</string>
+  <string name="title_page_bookmarks_pictures">Зображення</string>
+  <string name="title_page_bookmarks_locations">Місця</string>
+  <string name="menu_bookmark">Додати/вилучити закладки</string>
+  <string name="provider_bookmarks">Закладки</string>
+  <string name="bookmark_empty">Ви не додали жодної закладки</string>
+  <string name="provider_bookmarks_location">Закладки</string>
+  <string name="log_collection_started">Почався збір інформації з журналів. Будь ласка, ПЕРЕЗАПУСТІТЬ програму, потім виконайте дію, що призводить до помилки і натисніть знов «Відправити файл журналу»</string>
   <string name="no_uploads">Ласкаво просимо у Вікісховищі!\n\nЗавантажите ваш перший файл, натиснув іконку камери або галереї.</string>
 </resources>

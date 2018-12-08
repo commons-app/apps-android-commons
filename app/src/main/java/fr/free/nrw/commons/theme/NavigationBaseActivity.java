@@ -13,6 +13,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -32,11 +33,9 @@ import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.WelcomeActivity;
 import fr.free.nrw.commons.achievements.AchievementsActivity;
 import fr.free.nrw.commons.auth.LoginActivity;
-import fr.free.nrw.commons.bookmarks.BookmarksActivity;
-import fr.free.nrw.commons.contributions.ContributionsActivity;
+import fr.free.nrw.commons.contributions.MainActivity;
 import fr.free.nrw.commons.category.CategoryImagesActivity;
-import fr.free.nrw.commons.contributions.ContributionsActivity;
-import fr.free.nrw.commons.nearby.NearbyActivity;
+import fr.free.nrw.commons.bookmarks.BookmarksActivity;
 import fr.free.nrw.commons.notification.NotificationActivity;
 import fr.free.nrw.commons.settings.SettingsActivity;
 import timber.log.Timber;
@@ -91,6 +90,23 @@ public abstract class NavigationBaseActivity extends BaseActivity
         }
     }
 
+    public void changeDrawerIconToBakcButton() {
+        toggle.setDrawerIndicatorEnabled(false);
+        toggle.setHomeAsUpIndicator(R.drawable.ic_arrow_back_white);
+        toggle.setToolbarNavigationClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onBackPressed();
+            }
+        });
+    }
+
+    public void changeDrawerIconToDefault() {
+        if (toggle != null) {
+            toggle.setDrawerIndicatorEnabled(true);
+        }
+    }
+
     /**
      * Set the username in navigationHeader.
      */
@@ -104,12 +120,9 @@ public abstract class NavigationBaseActivity extends BaseActivity
             username.setText(allAccounts[0].name);
         }
         ImageView userIcon = navHeaderView.findViewById(R.id.user_icon);
-        userIcon.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                drawerLayout.closeDrawer(navigationView);
-                AchievementsActivity.startYourself(NavigationBaseActivity.this);
-            }
+        userIcon.setOnClickListener(v -> {
+            drawerLayout.closeDrawer(navigationView);
+            AchievementsActivity.startYourself(NavigationBaseActivity.this);
         });
     }
 
@@ -159,12 +172,8 @@ public abstract class NavigationBaseActivity extends BaseActivity
             case R.id.action_home:
                 drawerLayout.closeDrawer(navigationView);
                 startActivityWithFlags(
-                        this, ContributionsActivity.class, Intent.FLAG_ACTIVITY_CLEAR_TOP,
+                        this, MainActivity.class, Intent.FLAG_ACTIVITY_CLEAR_TOP,
                         Intent.FLAG_ACTIVITY_SINGLE_TOP);
-                return true;
-            case R.id.action_nearby:
-                drawerLayout.closeDrawer(navigationView);
-                startActivityWithFlags(this, NearbyActivity.class, Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
                 return true;
             case R.id.action_about:
                 drawerLayout.closeDrawer(navigationView);

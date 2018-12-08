@@ -41,7 +41,7 @@
   <string name="provider_contributions">میݙے اپ لوڈ</string>
   <string name="menu_share">شیئر</string>
   <string name="menu_open_in_browser">براؤزر وچ ݙیکھو</string>
-  <string name="share_title_hint">عنوان</string>
+  <string name="share_title_hint" fuzzy="true">عنوان</string>
   <string name="share_description_hint">تفصیل</string>
   <string name="login_failed_generic">لاگ ان ناکام</string>
   <string name="share_upload_button">اپلوڈ</string>
@@ -150,4 +150,10 @@
   <string name="statistics">شماریات</string>
   <string name="level">سطح</string>
   <string name="error_occurred">خرابی تھی ڳئی ہے!</string>
+  <string name="navigation_item_bookmarks">کتاب نشان</string>
+  <string name="title_activity_bookmarks">کتاب نشان</string>
+  <string name="title_page_bookmarks_pictures">تصویراں</string>
+  <string name="title_page_bookmarks_locations">محل وقوع</string>
+  <string name="provider_bookmarks">کتاب نشان</string>
+  <string name="provider_bookmarks_location">کتاب نشان</string>
 </resources>

@@ -5,6 +5,7 @@
 * Geraki
 * Glavkos
 * KATRINE1992
+* KATRINE1993
 * ManosHacker
 * Nikosgranturismogt
 * Nikosguard
@@ -56,7 +57,7 @@
   <string name="provider_contributions">Οι επιφορτώσεις μου</string>
   <string name="menu_share">Κοινοποίηση</string>
   <string name="menu_open_in_browser">Προβολή στον περιηγητή</string>
-  <string name="share_title_hint">Τίτλος</string>
+  <string name="share_title_hint">Τίτλος (Υποχρεωτικό)</string>
   <string name="add_title_toast">Παρακαλώ παρέχετε ένα τίτλο για αυτό το αρχείο</string>
   <string name="share_description_hint">Περιγραφή</string>
   <string name="login_failed_network">Δεν είναι δυνατή η σύνδεση - αποτυχία του δικτύου</string>
@@ -78,9 +79,9 @@
   <string name="enable_gps">  Ενεργοποιήσετε το GPS</string>
   <string name="contributions_subtitle_zero">Δεν έχουν ακόμη επιφορτωθεί αρχεία</string>
   <plurals name="contributions_subtitle">
-    <item quantity="zero">Δεν υπάρχουν επιφορτώσεις ακόμη</item>
-    <item quantity="one">%1$d επιφόρτωση</item>
-    <item quantity="other">%1$d επιφορτώσεις</item>
+    <item quantity="zero">Δεν υπάρχουν φορτώσεις ακόμη</item>
+    <item quantity="one">%1$d φόρτωση</item>
+    <item quantity="other">%1$d φορτώσεις</item>
   </plurals>
   <plurals name="starting_multiple_uploads">
     <item quantity="one">Έναρξη %1$d επιφόρτωσης</item>
@@ -176,7 +177,7 @@
   <string name="title_activity_nearby">Κοντινοί Τόποι</string>
   <string name="no_nearby">Δεν βρέθηκαν τόποι εδώ κοντά</string>
   <string name="warning">Προειδοποίηση</string>
-  <string name="file_exists">Αυτό το αρχείο υπάρχει ήδη στα Commons. Είστε σίγουρος ότι θέλετε να συνεχίσετε;</string>
+  <string name="upload_image_duplicate">Αυτό το αρχείο υπάρχει ήδη στα Commons. Είστε σίγουρος ότι θέλετε να συνεχίσετε;</string>
   <string name="yes">Ναι</string>
   <string name="no">Όχι</string>
   <string name="media_detail_title">Τίτλος</string>
@@ -238,8 +239,14 @@
   <string name="error_while_cache">Υπήρξε σφάλμα κατά την σκίαση εικόνων</string>
   <string name="title_info">Ένας μοναδικός τίτλος περιγραφής του φακέλλου, που θα χρησιμεύσει ως όνομα φακέλλου. Μπορείτε να χρησιμοποιήσετε τις ήδη υπάρχουσες γλώσσες με διαστήματα. Μην συμπεριλάβετε την επέκταση φακέλλου</string>
   <string name="description_info">\nΠαρακαλώ περιγράψετε τα μέσα το δυνατό περισσότερο : Πού οδηγήθηκε αυτό; Τι δείχνει; Ποιο είναι το περιεχόμενο του; Παρακαλώ περιγράψετε τα αντικείμενα ή τα πρόσωπα. Αποκαλύψετε πληροφορίες που δεν μπορούν εύκολο να μαντέψει κανείς, για παράδειγμα την ώρα εντός της ημέρας αν πρόκειται για τοπίο. Αν τα μέσα δείξουν κάτι ασύνηθες, παρακαλώ εξηγήστε τι το καθιστά μη συνηθισμένα.</string>
-  <string name="upload_image_too_dark">Αυτή η εικόνα είναι πολύ σκοτεινή, είστε βέβαιοι ότι θέλετε να την ανεβάσετε; Το Wikimedia Commons είναι μόνο για εικόνες με εγκυκλοπαιδική αξία.</string>
-  <string name="upload_image_blurry">Αυτή η εικόνα είναι θολή, είστε βέβαιοι ότι θέλετε να την ανεβάσετε; Το Wikimedia Commons είναι μόνο για εικόνες με εγκυκλοπαιδική αξία.</string>
+  <string name="upload_image_too_dark">Αυτή η εικόνα είναι πολύ σκούρα, θέλετε πράγματι να την φορτώσετε? Το Wikipedia Commons είναι μόνο για εικόνες με εγκυκλοπαιδική αξία.</string>
+  <string name="upload_image_blurry">Αυτή η εικόνα είναι θολή , θέλετε όντως να την ανεβάσετε? \n Το Wikimedia Commons είναι μόνο για εικόνες εγκυκλοπαίδειας.</string>
+  <string name="upload_image_problem_duplicate">Αυτό το αρχείο υπάρχει ήδη στα Commons. Είστε σίγουρος ότι θέλετε να συνεχίσετε;</string>
+  <string name="upload_image_problem_dark">Αυτή η εικόνα είναι πολύ σκοτεινή, είστε βέβαιοι ότι θέλετε να την ανεβάσετε; Το Wikimedia Commons είναι μόνο για εικόνες με εγκυκλοπαιδική αξία.</string>
+  <string name="upload_image_problem_blurry">Αυτή η εικόνα είναι θολή, είστε βέβαιοι ότι θέλετε να την ανεβάσετε; Το Wikimedia Commons είναι μόνο για εικόνες με εγκυκλοπαιδική αξία.</string>
+  <string name="upload_image_problem_blurry_duplicate">Αυτή η εικόνα είναι θολή και ήδη υπάρχει στο  Commons, θέλετε να την ανεβάσετε ? Παρακαλώ ανεβάζετε εικόνες με εγκυκλοπαιδική αξία.</string>
+  <string name="upload_image_problem_dark_blurry">Αυτή η εικόνα είναι πολύ σκοτεινή και θαμπή, θέλετε να την ανεβάσετε. Παρακαλώ ανεβάζετε εικόνες μόνο που προορίζονται για εγκυκλοπαίδεια.</string>
+  <string name="upload_image_problem_dark_blurry_duplicate">Αυτή η εικόνα είναι πολύ σκοτεινή, είναι θαμπή και ήδη υπάρχει στο Commons, είστε σίγουροι πως θέλετε να την φορτώσετε? Παρακαλώ ανεβάζετε εικόνες μόνο με εγκυκλοπαιδική αξία.</string>
   <string name="give_permission">Χορηγήστε άδεια</string>
   <string name="use_external_storage">Χρησιμοποιήσετε την εξωτερική αποθήκευση</string>
   <string name="use_external_storage_summary">Αποθηκεύσετε εικόνες που παίρνονται στην κάμερα εφαρμογής στην συσκευή σας</string>
@@ -332,6 +339,7 @@
   <string name="add_description">+ Προσθήκη περιγραφής</string>
   <string name="delete_recent_searches_dialog">Είστε σίγουρος ότι θέλετε να καθαρίσετε το ιστορικό αναζήτησης;</string>
   <string name="search_history_deleted">Το ιστορικό αναζήτησης διεγράφη</string>
+  <string name="nominate_delete">Ορίστε για Αφαίρεση</string>
   <string name="Achievements">Κατορθώματα</string>
   <string name="statistics">Στατιστικά</string>
   <string name="statistics_thanks">Ευχαριστίες που έχουν ληφθεί</string>
@@ -348,4 +356,45 @@
   <string name="images_used_explanation">Ο αριθμός εικόνων που ανεβάσατε στα Κοινά που χρησιμοποιήθηκαν σε λήμματα του Wikimedia</string>
   <string name="error_occurred">Συνέβη σφάλμα!</string>
   <string name="notifications_channel_name_all">Ειδοποίηση Κοινών</string>
+  <string name="contributions_fragment">Συνεισφορές</string>
+  <string name="nearby_fragment">Κοντά σας</string>
+  <string name="notifications">Ενημερώσεις</string>
+  <string name="display_nearby_notification_summary">Πατήστε εδώ για να δείτε την πιο κοντινή θέση που χρειάζεται εικόνες</string>
+  <string name="no_close_nearby">Δεν βρέθηκαν μέρη κοντά σας</string>
+  <string name="list_sheet">Λίστα</string>
+  <string name="nearby_notification_dismiss_message">Δεν θα δείτε την πιο κοντινή τοποθεσία που χρειάζεται επιπλέον εικόνες. Ωστόσο, μπορείτε να ενεργοποιήσετε ξανά αυτή την ειδοποίηση στις Ρυθμίσεις αν θέλετε.</string>
+  <string name="image_in_set_label">Εγκατάσταση εικόνας %1$d</string>
+  <string name="next">Επόμενο</string>
+  <string name="previous">Προηγούμενο</string>
+  <string name="submit">Υποβολή</string>
+  <string name="upload_title_duplicate">Υπάρχει ήδη ένας φάκελλος με όνομα %1$s. Είστε σίγουρος πως θέλετε να προχωρήσετε ?</string>
+  <string name="map_application_missing">Καμία εφαρμογή χάρτη δεν βρέθηκε στον υπολογιστή. Παρακαλώ εγκαταστήστε εφαρμογή χάρτη για να χρησιμοποιήσετε αυτήν την ιδιότητα.</string>
+  <plurals name="upload_count_title">
+    <item quantity="one">%1$d Ανέβασμα στον υπολογιστή</item>
+    <item quantity="other">%1$d Ανεβάσματα στον υπολογιστή</item>
+  </plurals>
+  <string name="navigation_item_bookmarks">Σελιδοδείκτες</string>
+  <string name="title_activity_bookmarks">Σελιδοδείκτες</string>
+  <string name="title_page_bookmarks_pictures">εικόνες</string>
+  <string name="title_page_bookmarks_locations">Τοποθεσίες</string>
+  <string name="provider_bookmarks">Σελιδοδείκτες</string>
+  <string name="provider_bookmarks_location">Σελιδοδείκτες</string>
+  <string name="deletion_reason_uploaded_by_mistake">Το ανέβασα κατά λάθος</string>
+  <string name="deletion_reason_publicly_visible">Δεν ήξερα ότι θα δημοσιευόταν</string>
+  <string name="deletion_reason_bad_for_my_privacy">Κατάλαβα πως δεν προστατεύονται τα ατομικά μου στοιχεία</string>
+  <string name="deletion_reason_no_longer_want_public">Άλλαξα γνώμη, δεν θέλω να προβάλλεται πλέον δημόσια</string>
+  <string name="deletion_reason_not_interesting">Λυπάμαι αυτή η εικόνα δεν έχει ενδιαφέρον για εγκυκλοπαίδεια</string>
+  <string name="uploaded_by_myself">Φορτώθηκε από μένα σε</string>
+  <string name="used_by">χρησιμοποιήθηκε στο</string>
+  <string name="articles">άρθρα</string>
+  <string name="desc_language_Worldwide">Παγκόσμιες</string>
+  <string name="desc_language_America">Αμερική</string>
+  <string name="desc_language_Europe">Ευρώπη</string>
+  <string name="desc_language_Middle_East">Μέση Ανατολή</string>
+  <string name="desc_language_Africa">Αφρική</string>
+  <string name="desc_language_Asia">Ασία</string>
+  <string name="desc_language_Pacific">Ειρηνικός</string>
+  <string name="no_categories_selected_warning_desc">Εικόνες χωρίς κατηγορίες χρησιμοποιούνται σπάνια. Θέλετε πράγματι να στείλετε δίχως να επιλέξετε κατηγορίες?</string>
+  <string name="yes_submit">Ναι, υποβολή</string>
+  <string name="no_go_back">Όχι, Επιστροφή</string>
 </resources>

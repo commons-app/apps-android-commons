@@ -16,7 +16,8 @@ import static fr.free.nrw.commons.auth.AccountUtil.AUTH_COOKIE;
 
 public abstract class AuthenticatedActivity extends NavigationBaseActivity {
 
-    @Inject SessionManager sessionManager;
+    @Inject
+    protected SessionManager sessionManager;
     @Inject
     MediaWikiApi mediaWikiApi;
     private String authCookie;
@@ -63,9 +64,7 @@ public abstract class AuthenticatedActivity extends NavigationBaseActivity {
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .filter(result -> result)
-                .subscribe(result -> {
-                            ViewUtil.showSnackbar(findViewById(android.R.id.content), R.string.block_notification);
-                        }
+                .subscribe(result -> ViewUtil.showSnackbar(findViewById(android.R.id.content), R.string.block_notification)
                 );
     }
 }

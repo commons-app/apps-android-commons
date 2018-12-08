@@ -39,7 +39,7 @@
   <string name="provider_contributions">Ifuyla i suliɣ</string>
   <string name="menu_share">Bḍu</string>
   <string name="menu_open_in_browser">Sken deg yiminig</string>
-  <string name="share_title_hint">Azwel</string>
+  <string name="share_title_hint" fuzzy="true">Azwel</string>
   <string name="share_description_hint">Aglam</string>
   <string name="login_failed_network">Ur izmir ara ad yeqqen - tuccḍa n uẓeṭṭa</string>
   <string name="login_failed_throttled">Ddeq n uɛraḍ ur yeddin ara. Ɛreḍ akka di kra n tisdatin</string>
@@ -56,7 +56,7 @@
   <string name="gps_disabled">GPS ur yermid ɣef yibenk-ik. Tebɣiḍ ad tremdeḍ-t?</string>
   <string name="enable_gps">Rmed GPS</string>
   <string name="contributions_subtitle_zero">Usla ayen yulin</string>
-  <plurals name="contributions_subtitle">
+  <plurals name="contributions_subtitle" fuzzy="true">
     <item quantity="zero">\@string/contributions_subtitle_zero</item>
     <item quantity="one">%1$d n usali</item>
     <item quantity="other">%1$d n usali</item>
@@ -143,7 +143,6 @@
   <string name="title_activity_nearby">Idigen iqeṛben</string>
   <string name="no_nearby">Ulac ayen yettwafen s lqerb</string>
   <string name="warning">Ɣur-k</string>
-  <string name="file_exists">Afaylu yella yakan di Commons. Tebɣiḍ ad tedduḍ ar zdat?</string>
   <string name="yes">Ih</string>
   <string name="no">Uhu</string>
   <string name="media_detail_title">Azwel</string>
@@ -199,6 +198,7 @@
   <string name="error_while_cache">Tuccḍa di tririt n tugniwin ar tuffirt</string>
   <string name="title_info">Azwul n useglem asuf i ufaylu, ara ttwasqedcen d isem n ufaylu. Tzemreḍ ad tesqedceḍ tutlayt fessusen s isekkilen ilmawen. Ur sedday ara asiɣzef n ufaylu</string>
   <string name="description_info">Ma ulac aɣilf, seglem amidya s wayen akk i tzemreḍ: Anida yettwasekles? Acu i d-yemmal? D acu-t usatal-is? Seglem tiɣawsiwin neɣ imdanen. Mudd-d talɣut ur yezmiren ad tettwaf s wudem fessusen, amedya akud n wass ma yella d agama. Ma yella admidya yaskan-d ayen ur nuɣ ara tanumi, ini-d d aci i tyettarran d ayen ifazen.</string>
+  <string name="upload_image_problem_duplicate">Afaylu yella yakan di Commons. Tebɣiḍ ad tedduḍ ar zdat?</string>
   <string name="give_permission">Mudd tasiregt</string>
   <string name="use_external_storage">Seqdec asekles azɣaray</string>
   <string name="use_external_storage_summary">Sekles tiwlafin yettwaṭṭfen s tkamirat yellan deg ibenk</string>

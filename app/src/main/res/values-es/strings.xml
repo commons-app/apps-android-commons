@@ -5,6 +5,7 @@
 * Astroemi
 * Benfutbol10
 * Fitoschido
+* JO777
 * Jduranboger
 * Jelou
 * Ktranz
@@ -19,7 +20,7 @@
   <string name="title_activity_explore">Explorar</string>
   <string name="navigation_item_explore">Explorar</string>
   <string name="preference_category_appearance">Apariencia</string>
-  <string name="preference_category_general">Generales</string>
+  <string name="preference_category_general">General</string>
   <string name="preference_category_feedback">Sugerencias</string>
   <string name="preference_category_location">Ubicación</string>
   <string name="app_name">Commons</string>
@@ -61,7 +62,7 @@
   <string name="provider_contributions">Mis subidas</string>
   <string name="menu_share">Compartir</string>
   <string name="menu_open_in_browser">Ver en el navegador</string>
-  <string name="share_title_hint">Título</string>
+  <string name="share_title_hint">Título (Requerido)</string>
   <string name="add_title_toast">Proporciona un título para este archivo</string>
   <string name="share_description_hint">Descripción</string>
   <string name="login_failed_network">No se pudo iniciar sesión: falla de red</string>
@@ -84,8 +85,8 @@
   <string name="contributions_subtitle_zero">No hay subidas aún</string>
   <plurals name="contributions_subtitle">
     <item quantity="zero">\@string/contributions_subtitle_zero</item>
-    <item quantity="one">%1$d carga</item>
-    <item quantity="other">%1$d cargas</item>
+    <item quantity="one">(%1$d)</item>
+    <item quantity="other">(%1$d)</item>
   </plurals>
   <plurals name="starting_multiple_uploads">
     <item quantity="one">Iniciando %1$d carga</item>
@@ -181,7 +182,7 @@
   <string name="title_activity_nearby">Lugares cercanos</string>
   <string name="no_nearby">No se encontraron lugares cercanos</string>
   <string name="warning">Atención</string>
-  <string name="file_exists">Este archivo ya existe en Commons. ¿Confirmas que quieres continuar?</string>
+  <string name="upload_image_duplicate">Este archivo ya existe en Commons. ¿Deseas continuar?</string>
   <string name="yes">Sí</string>
   <string name="no">No</string>
   <string name="media_detail_title">Título</string>
@@ -243,14 +244,21 @@
   <string name="error_while_cache">Error al almacenar imágenes en la antememoria</string>
   <string name="title_info">Un título único descriptivo para el archivo, que servirá como un nombre de archivo. Puede usar un lenguaje claro con espacios. No incluya la extensión del archivo.</string>
   <string name="description_info">Por favor, describa el elemento multimedia tanto como sea posible: ¿dónde fue tomado?, ¿qué muestra?, ¿cuál es el contexto? Por favor, describa los objetos o personas. Ofrezca la información que no puede ser inferida tan fácilmente, por ejemplo el momento del día si es un paisaje. Si el medio muestra algo inusual, explique qué lo hace insual.</string>
-  <string name="upload_image_too_dark">Esta imagen es demasiado oscura. ¿Confirmas que quieres cargarla? Wikimedia Commons solo acepta imágenes con valor enciclopédico.</string>
-  <string name="upload_image_blurry">Esta imagen se ve borrosa. ¿Confirmas que quieres cargarla? Wikimedia Commons solo acepta imágenes con valor enciclopédico.</string>
+  <string name="upload_image_too_dark">La imagen está demasiado oscura, ¿seguro que quieres subirla? Wikimedia Commons solo acepta imágenes con valor enciclopédico.</string>
+  <string name="upload_image_blurry">La imagen está borrosa, ¿seguro que quieres subirla? Sube solo imágenes con valor enciclopédico.</string>
+  <string name="upload_image_problem_duplicate">Este archivo ya existe en Commons. ¿Confirmas que quieres continuar?</string>
+  <string name="upload_image_problem_dark">Esta imagen es demasiado oscura. ¿Confirmas que quieres cargarla? Wikimedia Commons solo acepta imágenes con valor enciclopédico.</string>
+  <string name="upload_image_problem_blurry">Esta imagen se ve borrosa. ¿Confirmas que quieres cargarla? Wikimedia Commons solo acepta imágenes con valor enciclopédico.</string>
+  <string name="upload_image_problem_dark_duplicate">La imagen esta demasiado oscura y ya existe en Commons, ¿seguro que quieres subirla? Sube solo imágenes con valor enciclopédico.</string>
+  <string name="upload_image_problem_blurry_duplicate">La imagen está borrosa y ya existe en Commons, ¿seguro que quieres subirla? Sube solo imágenes con valor enciclopédico.</string>
+  <string name="upload_image_problem_dark_blurry">La imagen está oscura y borrosa, ¿seguro que quieres subirla? Sube solo imágenes con valor enciclopédico.</string>
+  <string name="upload_image_problem_dark_blurry_duplicate">La imagen está demasiado oscura, borrosa y ya existe en Commons, ¿seguro que quieres subirla? Sube solo imágenes con valor enciclopédico.</string>
   <string name="give_permission">Otorgar permiso</string>
   <string name="use_external_storage">Utilizar almacenamiento externo</string>
   <string name="use_external_storage_summary">Guardar en el dispositivo imágenes capturadas con la cámara de la aplicación</string>
   <string name="login_to_your_account">Accede a tu cuenta</string>
   <string name="send_log_file">Enviar archivo de registro</string>
-  <string name="send_log_file_description" fuzzy="true">Enviar archivo de registro a los desarrolladores por correo electrónico</string>
+  <string name="send_log_file_description">Enviar archivo de registro a los desarrolladores por correo electrónico para ayudar a depurar problemas con la aplicación. Nota: los registros pueden potencialmente contener información que te identifique</string>
   <string name="no_web_browser">No se encontró ningún navegador con el que abrir el URL</string>
   <string name="null_url">Error: no se encontró el URL</string>
   <string name="nominate_deletion">Nominar para borrado</string>
@@ -262,8 +270,8 @@
   <string name="skip_login_title">¿Realmente querés omitir el inicio de sesión?</string>
   <string name="skip_login_message">No serás capaz de subir imágenes.</string>
   <string name="login_alert_message">Por favor inicia sesion para usar esta característica</string>
-  <string name="copy_wikicode" fuzzy="true">Copia el Wikicódigo al portapapeles</string>
-  <string name="wikicode_copied" fuzzy="true">Wikicódigo copiado al portapapeles</string>
+  <string name="copy_wikicode">Copia el Wikicódigo al portapapeles</string>
+  <string name="wikicode_copied">El Wikitexto fue copiado al portapapeles</string>
   <string name="nearby_location_has_not_changed">La ubicación no ha cambiado.</string>
   <string name="nearby_location_not_available">La ubicación no está disponible.</string>
   <string name="location_permission_rationale_nearby">Se necesita permiso para mostrar una lista de lugares cercanos</string>
@@ -339,6 +347,7 @@
   <string name="add_description">+ Añadir descripción</string>
   <string name="delete_recent_searches_dialog">¿Confirmas que quieres vaciar el historial de búsquedas?</string>
   <string name="search_history_deleted">Historial de búsqueda eliminado</string>
+  <string name="nominate_delete">Nominar para borrado</string>
   <string name="Achievements">Logros</string>
   <string name="statistics">ESTADÍSTICAS</string>
   <string name="statistics_thanks">Agradecimientos recibidos</string>
@@ -355,6 +364,55 @@
   <string name="images_used_explanation">El número de imágenes que has subido a Commons que fueron utilizadas en artículos de Wikimedia</string>
   <string name="error_occurred">¡Ocurrió un error!</string>
   <string name="notifications_channel_name_all">Notificación de Commons</string>
+  <string name="contributions_fragment">Contribuciones</string>
+  <string name="nearby_fragment">Cercanos</string>
+  <string name="notifications">Notificaciones</string>
+  <string name="display_nearby_notification">Mostrar notificaciones de cercanía</string>
+  <string name="display_nearby_notification_summary">Toca aquí para ver el lugar más cercano que necesita fotos</string>
+  <string name="no_close_nearby">No se encontraron lugares cercanos cerca de ti</string>
+  <string name="list_sheet">Lista</string>
   <string name="storage_permission">Permiso de almacenamiento</string>
   <string name="write_storage_permission_rationale_for_image_share">Necesitamos tu permiso para acceder al almacenamiento externo de tu dispositivo para poder subir imágenes.</string>
+  <string name="nearby_notification_dismiss_message">Ya no verás el lugar más cercano que necesita fotos. Sin embargo, puedes volver a habilitar esta notificación en la configuración.</string>
+  <string name="step_count">Paso %1$d de %2$d</string>
+  <string name="image_in_set_label">Imagen %1$d del conjunto</string>
+  <string name="next">Siguiente</string>
+  <string name="previous">Anterior</string>
+  <string name="submit">Enviar</string>
+  <string name="upload_title_duplicate">Ya existe un archivo con el nombre %1$. ¿Seguro que deseas continuar?</string>
+  <string name="map_application_missing">No se encontró una aplicación para mapas compatible en tu dispositivo. Instala una para usar esta característica.</string>
+  <plurals name="upload_count_title">
+    <item quantity="one">%1$d Subida</item>
+    <item quantity="other">%1$d Subidas</item>
+  </plurals>
+  <string name="navigation_item_bookmarks">Marcadores</string>
+  <string name="title_activity_bookmarks">Marcadores</string>
+  <string name="title_page_bookmarks_pictures">Imágenes</string>
+  <string name="title_page_bookmarks_locations">Ubicaciones</string>
+  <string name="menu_bookmark">Añadir o quitar de marcadores</string>
+  <string name="provider_bookmarks">Marcadores</string>
+  <string name="bookmark_empty">No has añadido ningún marcador</string>
+  <string name="provider_bookmarks_location">Marcadores</string>
+  <string name="log_collection_started">Se inició la recopilación de registros. Reinicie la aplicación, realice la acción que desea registrar y luego presione «Enviar archivo de registro» nuevamente</string>
+  <string name="deletion_reason_uploaded_by_mistake">Lo subí por error</string>
+  <string name="deletion_reason_publicly_visible">No sabía que sería visible públicamente</string>
+  <string name="deletion_reason_bad_for_my_privacy">Me di cuenta que es malo para mi privacidad</string>
+  <string name="deletion_reason_no_longer_want_public">Cambié de opinión, no quiero que siga siendo visible públicamente</string>
+  <string name="deletion_reason_not_interesting">Perdón esta imagen no es interesante para una enciclopedia</string>
+  <string name="uploaded_by_myself">Subida por mí mismo el</string>
+  <string name="used_by">,usado en</string>
+  <string name="articles">artículos</string>
+  <string name="no_uploads">¡Bienvenido a Commons!\n\nSube tu primer archivo tocando el icono de la cámara o galería arriba.</string>
+  <string name="desc_language_Worldwide">Mundial</string>
+  <string name="desc_language_America">América</string>
+  <string name="desc_language_Europe">Europa</string>
+  <string name="desc_language_Middle_East">Medio Oriente</string>
+  <string name="desc_language_Africa">África</string>
+  <string name="desc_language_Asia">Asia</string>
+  <string name="desc_language_Pacific">Pacífico</string>
+  <string name="no_categories_selected">No hay categorías seleccionadas</string>
+  <string name="no_categories_selected_warning_desc">Las imágenes sin categorías raramente se pueden usar. ¿Seguro que quieres enviar sin seleccionar ninguna categoría?</string>
+  <string name="yes_submit">Sí, enviar</string>
+  <string name="no_go_back">No, regresar</string>
+  <string name="upload_flow_all_images_in_set">(Para todas las imágenes en el conjunto)</string>
 </resources>

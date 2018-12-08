@@ -14,15 +14,18 @@ import android.text.Editable;
 import android.text.Html;
 import android.text.TextUtils;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -44,8 +47,11 @@ import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.MediaDataExtractor;
 import fr.free.nrw.commons.MediaWikiImageView;
 import fr.free.nrw.commons.R;
+import fr.free.nrw.commons.auth.SessionManager;
 import fr.free.nrw.commons.category.CategoryDetailsActivity;
+import fr.free.nrw.commons.contributions.ContributionsFragment;
 import fr.free.nrw.commons.delete.DeleteTask;
+import fr.free.nrw.commons.delete.ReasonBuilder;
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
 import fr.free.nrw.commons.location.LatLng;
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
@@ -64,6 +70,8 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
     private MediaDetailPagerFragment.MediaDetailProvider detailProvider;
     private int index;
     private Locale locale;
+    private boolean isDeleted = false;
+
 
     public static MediaDetailFragment forMedia(int index, boolean editable, boolean isCategoryImage) {
         MediaDetailFragment mf = new MediaDetailFragment();
@@ -84,6 +92,8 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
     Provider<MediaDataExtractor> mediaDataExtractorProvider;
     @Inject
     MediaWikiApi mwApi;
+    @Inject
+    SessionManager sessionManager;
 
     private int initialListTop = 0;
 
@@ -127,6 +137,8 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
 
     //Had to make this class variable, to implement various onClicks, which access the media, also I fell why make separate variables when one can serve the purpose
     private Media media;
+    private ArrayList<String> reasonList;
+
 
     @Override
     public void onSaveInstanceState(Bundle outState) {
@@ -145,8 +157,11 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        detailProvider = (MediaDetailPagerFragment.MediaDetailProvider) getActivity();
-
+        if (getParentFragment() != null
+            && getParentFragment() instanceof MediaDetailPagerFragment) {
+            detailProvider =
+                ((MediaDetailPagerFragment) getParentFragment()).getMediaDetailProvider();
+        }
         if (savedInstanceState != null) {
             editable = savedInstanceState.getBoolean("editable");
             isCategoryImage = savedInstanceState.getBoolean("isCategoryImage");
@@ -158,6 +173,13 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
             index = getArguments().getInt("index");
             initialListTop = 0;
         }
+
+        reasonList = new ArrayList<>();
+        reasonList.add(getString(R.string.deletion_reason_uploaded_by_mistake));
+        reasonList.add(getString(R.string.deletion_reason_publicly_visible));
+        reasonList.add(getString(R.string.deletion_reason_not_interesting));
+        reasonList.add(getString(R.string.deletion_reason_no_longer_want_public));
+        reasonList.add(getString(R.string.deletion_reason_bad_for_my_privacy));
 
         categoryNames = new ArrayList<>();
         categoryNames.add(getString(R.string.detail_panel_cats_loading));
@@ -204,12 +226,19 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
         };
         view.getViewTreeObserver().addOnGlobalLayoutListener(layoutListener);
         locale = getResources().getConfiguration().locale;
+
         return view;
     }
 
     @Override
     public void onResume() {
         super.onResume();
+        if(getParentFragment()!=null && getParentFragment().getParentFragment()!=null) {
+            //Added a check because, not necessarily, the parent fragment will have a parent fragment, say
+            // in the case when MediaDetailPagerFragment is directly started by the CategoryImagesActivity
+            ((ContributionsFragment) (getParentFragment().getParentFragment())).nearbyNoificationCardView
+                .setVisibility(View.GONE);
+        }
         media = detailProvider.getMediaAtPosition(index);
         if (media == null) {
             // Ask the detail provider to ping us when we're ready
@@ -253,7 +282,7 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
             @Override
             protected Boolean doInBackground(Void... voids) {
                 // Local files have no filename yet
-                if(media.getFilename() == null) {
+                if (media.getFilename() == null) {
                     return Boolean.FALSE;
                 }
                 try {
@@ -325,7 +354,7 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
         }
         rebuildCatList();
 
-        if(media.getCreator() == null || media.getCreator().equals("")) {
+        if (media.getCreator() == null || media.getCreator().equals("")) {
             authorLayout.setVisibility(GONE);
         } else {
             author.setText(media.getCreator());
@@ -339,7 +368,7 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
         if (!TextUtils.isEmpty(licenseLink(media))) {
             openWebBrowser(licenseLink(media));
         } else {
-            if(isCategoryImage) {
+            if (isCategoryImage) {
                 Timber.d("Unable to fetch license URL for %s", media.getLicense());
             } else {
                 Toast toast = Toast.makeText(getContext(), getString(R.string.null_url), Toast.LENGTH_SHORT);
@@ -368,64 +397,55 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
 
     @OnClick(R.id.nominateDeletion)
     public void onDeleteButtonClicked(){
-        //Reviewer correct me if i have misunderstood something over here
-        //But how does this  if (delete.getVisibility() == View.VISIBLE) {
-        //            enableDeleteButton(true);   makes sense ?
-        AlertDialog.Builder alert = new AlertDialog.Builder(getActivity());
-        alert.setMessage("Why should this file be deleted?");
-        final EditText input = new EditText(getActivity());
-        alert.setView(input);
-        input.requestFocus();
-        alert.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int whichButton) {
-                String reason = input.getText().toString();
-                DeleteTask deleteTask = new DeleteTask(getActivity(), media, reason);
-                deleteTask.execute();
-                enableDeleteButton(false);
+        final ArrayAdapter<String> languageAdapter = new ArrayAdapter<String>(getActivity(),
+                R.layout.simple_spinner_dropdown_list, reasonList);
+        final Spinner spinner = new Spinner(getActivity());
+        spinner.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT));
+        spinner.setAdapter(languageAdapter);
+        spinner.setGravity(17);
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        builder.setView(spinner);
+        builder.setTitle(R.string.nominate_delete)
+                .setPositiveButton(R.string.about_translate_proceed, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        String reason = spinner.getSelectedItem().toString();
+                        ReasonBuilder reasonBuilder = new ReasonBuilder(reason,
+                                getActivity(),
+                                media,
+                                sessionManager,
+                                mwApi);
+                        reason = reasonBuilder.getReason();
+                        DeleteTask deleteTask = new DeleteTask(getActivity(), media, reason);
+                        deleteTask.execute();
+                        isDeleted = true;
+                        enableDeleteButton(false);
+                    }
+                });
+        builder.setNegativeButton(R.string.about_translate_cancel, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
             }
         });
-        alert.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int whichButton) {
-            }
-        });
-        AlertDialog d = alert.create();
-        input.addTextChangedListener(new TextWatcher() {
-            private void handleText() {
-                final Button okButton = d.getButton(AlertDialog.BUTTON_POSITIVE);
-                if (input.getText().length() == 0) {
-                    okButton.setEnabled(false);
-                } else {
-                    okButton.setEnabled(true);
-                }
-            }
-
-            @Override
-            public void afterTextChanged(Editable arg0) {
-                handleText();
-            }
-
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-            }
-        });
-        d.show();
-        d.getButton(AlertDialog.BUTTON_POSITIVE).setEnabled(false);
+        AlertDialog dialog = builder.create();
+        dialog.show();
+        if(isDeleted) {
+            dialog.getButton(AlertDialog.BUTTON_POSITIVE).setEnabled(false);
+        }
     }
 
     @OnClick(R.id.seeMore)
     public void onSeeMoreClicked(){
-        if(nominatedForDeletion.getVisibility()== VISIBLE) {
+        if (nominatedForDeletion.getVisibility()== VISIBLE) {
             openWebBrowser(media.getFilePageTitle().getMobileUri().toString());
         }
     }
 
     private void enableDeleteButton(boolean visibility) {
         delete.setEnabled(visibility);
-        if(visibility) {
+        if (visibility) {
             delete.setTextColor(getResources().getColor(R.color.primaryTextColor));
         } else {
             delete.setTextColor(getResources().getColor(R.color.deleteButtonLight));
@@ -435,15 +455,26 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
     private void rebuildCatList() {
         categoryContainer.removeAllViews();
         // @fixme add the category items
-        for (String cat : categoryNames) {
-            View catLabel = buildCatLabel(cat, categoryContainer);
+
+        //As per issue #1826(see https://github.com/commons-app/apps-android-commons/issues/1826), some categories come suffixed with strings prefixed with |. As per the discussion
+        //that was meant for alphabetical sorting of the categories and can be safely removed.
+        for (int i = 0; i < categoryNames.size(); i++) {
+            String categoryName = categoryNames.get(i);
+            //Removed everything after '|'
+            int indexOfPipe = categoryName.indexOf('|');
+            if (indexOfPipe != -1) {
+                categoryName = categoryName.substring(0, indexOfPipe);
+                //Set the updated category to the list as well
+                categoryNames.set(i, categoryName);
+            }
+            View catLabel = buildCatLabel(categoryName, categoryContainer);
             categoryContainer.addView(catLabel);
         }
     }
 
     private View buildCatLabel(final String catName, ViewGroup categoryContainer) {
         final View item = LayoutInflater.from(getContext()).inflate(R.layout.detail_category_item, categoryContainer, false);
-        final CompatTextView textView = (CompatTextView) item.findViewById(R.id.mediaDetailCategoryItemText);
+        final CompatTextView textView = item.findViewById(R.id.mediaDetailCategoryItemText);
 
         textView.setText(catName);
         if (categoriesLoaded && categoriesPresent) {

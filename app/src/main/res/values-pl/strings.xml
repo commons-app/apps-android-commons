@@ -2,6 +2,7 @@
 <!-- Authors:
 * Alan ffm
 * Chrumps
+* CiaPan
 * DeRudySoulStorm
 * InternerowyGołąb
 * Krottyianock
@@ -57,7 +58,7 @@
   <string name="provider_contributions">Wysłane przeze mnie pliki</string>
   <string name="menu_share">Udostępnij</string>
   <string name="menu_open_in_browser">Zobacz w przeglądarce</string>
-  <string name="share_title_hint">Tytuł</string>
+  <string name="share_title_hint">Tytuł (wymagany)</string>
   <string name="share_description_hint">Opis</string>
   <string name="login_failed_network">Nie można zalogować - błąd sieci</string>
   <string name="login_failed_wrong_credentials">Nie można się zalogować - sprawdź swoją nazwę użytkownika i hasło</string>
@@ -76,7 +77,7 @@
   <string name="gps_disabled">GPS w twoim urządzeniu jest wyłączony. Czy chcesz go włączyć?</string>
   <string name="enable_gps">Włącz GPS</string>
   <string name="contributions_subtitle_zero">Na razie brak przesłanych plików!</string>
-  <plurals name="contributions_subtitle">
+  <plurals name="contributions_subtitle" fuzzy="true">
     <item quantity="zero">Przesłano @string/contributions_subtitle_zero</item>
     <item quantity="one">Przesłano %1$d plik</item>
     <item quantity="other">Przesłano %1$d pliki</item>
@@ -167,7 +168,6 @@
   <string name="title_activity_nearby">Pobliskie miejsca</string>
   <string name="no_nearby">Nie znaleziono niczego w pobliżu</string>
   <string name="warning">Ostrzeżenie</string>
-  <string name="file_exists">Ten plik już istnieje na Commons. Jesteś pewien, że chcesz kontynuować?</string>
   <string name="yes">Tak</string>
   <string name="no">Nie</string>
   <string name="media_detail_title">Tytuł</string>
@@ -216,6 +216,7 @@
   <string name="nearby_info_menu_wikidata_article">Element Wikidanych</string>
   <string name="nearby_info_menu_wikipedia_article">Artykuł na Wikipedii</string>
   <string name="title_info">Podaj krótką, opisową i unikalną nazwę, która będzie służyła jako nazwa pliku. Możesz używać prostego języka i spacji. Nie dodawaj rozszerzenia pliku.</string>
+  <string name="upload_image_problem_duplicate">Ten plik już istnieje na Commons. Jesteś pewien, że chcesz kontynuować?</string>
   <string name="give_permission">Uzyskaj uprawnienie</string>
   <string name="login_to_your_account">Zaloguj się na swoje konto</string>
   <string name="null_url">Błąd! Nie znaleziono adresu URL</string>
@@ -270,6 +271,7 @@
   <string name="add_description">+ Dodaj opis</string>
   <string name="delete_recent_searches_dialog">Czy na pewno chcesz usunąć swoją historię wyszukiwania?</string>
   <string name="search_history_deleted">Historia wyszukiwania została usunięta</string>
+  <string name="nominate_delete">Zgłoś do usunięcia</string>
   <string name="Achievements">Osiągnięcia</string>
   <string name="statistics">STATYSTYKA</string>
   <string name="statistics_featured">Wyróżnione ilustracje</string>
@@ -279,4 +281,15 @@
   <string name="images_used_explanation">Liczba zdjęć przesłanych do Commons, które zostały wykorzystane w artykułach Wikimedia</string>
   <string name="error_occurred">Wystąpił błąd!</string>
   <string name="notifications_channel_name_all">Powiadomienia Commons</string>
+  <string name="notifications">Powiadomienia</string>
+  <string name="step_count">Krok %1$d z %2$d</string>
+  <string name="navigation_item_bookmarks">Zakładki</string>
+  <string name="title_activity_bookmarks">Zakładki</string>
+  <string name="provider_bookmarks">Zakładki</string>
+  <string name="provider_bookmarks_location">Zakładki</string>
+  <string name="desc_language_America">Ameryka</string>
+  <string name="desc_language_Europe">Europa</string>
+  <string name="desc_language_Middle_East">Bliski Wschód</string>
+  <string name="desc_language_Africa">Afryka</string>
+  <string name="desc_language_Asia">Azja</string>
 </resources>

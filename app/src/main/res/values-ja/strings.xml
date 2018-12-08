@@ -55,7 +55,7 @@
   <string name="provider_contributions">自分のアップロード</string>
   <string name="menu_share">共有</string>
   <string name="menu_open_in_browser">ブラウザーで表示</string>
-  <string name="share_title_hint">タイトル</string>
+  <string name="share_title_hint">タイトル (必須)</string>
   <string name="add_title_toast">ファイル名をつけてください</string>
   <string name="share_description_hint">説明</string>
   <string name="login_failed_network">ログインできません - ネットワークのエラーです</string>
@@ -77,7 +77,8 @@
   <string name="contributions_subtitle_zero">まだ何もアップロードされていません。</string>
   <plurals name="contributions_subtitle">
     <item quantity="zero">\@string/contributions_subtitle_zero</item>
-    <item quantity="other">pne=%1$d upload</item>
+    <item quantity="one">(%1$d)</item>
+    <item quantity="other">(%1$d件のアップロード)</item>
   </plurals>
   <plurals name="starting_multiple_uploads">
     <item quantity="one">Starting %1$d upload</item>
@@ -172,7 +173,6 @@
   <string name="title_activity_nearby">近くの場所</string>
   <string name="no_nearby">付近の場所が見つかりません</string>
   <string name="warning">警告</string>
-  <string name="file_exists">このファイルは既にコモンズにあります。本当にアップロードしますか？</string>
   <string name="yes">はい</string>
   <string name="no">いいえ</string>
   <string name="media_detail_title">タイトル</string>
@@ -232,14 +232,15 @@
   <string name="error_while_cache">画像をキャッシュする際のエラー</string>
   <string name="title_info">ファイル固有の説明的な表題。ファイル名として使われます。平易な言葉を使い、空白を入れることができます。拡張子は含めないでください。</string>
   <string name="description_info">可能な限りメディアを説明してください: 撮影地はどこですか? それは何を示していますか? どんな文脈がありますか? 被写体の物や人を説明してください。容易に推測できない情報、例えば風景であれば時刻を明示します。特筆すべき物事が映っている場合は、何が珍しいのかを説明してください。</string>
-  <string name="upload_image_too_dark">この画像は暗すぎますがアップロードしますか？ ウィキメディア・コモンズは百科事典に適した画像のみ受け付けます。</string>
-  <string name="upload_image_blurry">ピントが合っていませんが、アップロードしますか？ ウィキメディア・コモンズは百科事典に適した画像のみ受け付けます。</string>
+  <string name="upload_image_problem_duplicate">このファイルは既にコモンズにあります。本当にアップロードしますか？</string>
+  <string name="upload_image_problem_dark">この画像は暗すぎますがアップロードしますか？ ウィキメディア・コモンズは百科事典に適した画像のみ受け付けます。</string>
+  <string name="upload_image_problem_blurry">ピントが合っていませんが、アップロードしますか？ ウィキメディア・コモンズは百科事典に適した画像のみ受け付けます。</string>
   <string name="give_permission">権限を付与</string>
   <string name="use_external_storage">外部ストレージを使用</string>
   <string name="use_external_storage_summary">アプリ内のカメラで撮影した写真を端末に保存する</string>
   <string name="login_to_your_account">自分のアカウントにログイン</string>
   <string name="send_log_file">ログファイルを送信する</string>
-  <string name="send_log_file_description" fuzzy="true">メールで開発者にログファイルを送信する</string>
+  <string name="send_log_file_description">メールで開発者にログファイルを送信、アプリのバグ解消をサポートする。注記：ログには利用者特定情報が含まれることがあります</string>
   <string name="no_web_browser">URLを開くブラウザーが見つかりません</string>
   <string name="null_url">エラーが発生しました。URL が見つかりません</string>
   <string name="nominate_deletion">削除の提案</string>

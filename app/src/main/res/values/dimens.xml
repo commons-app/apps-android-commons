@@ -26,6 +26,7 @@
     <dimen name="description_text_size">14sp</dimen>
     <dimen name="first_fab">15dp</dimen>
     <dimen name="second_fab">25dp</dimen>
+    <dimen name="subtitle_text">12sp</dimen>
 
     <!--
 Refer to App Widget Documentation for margin information

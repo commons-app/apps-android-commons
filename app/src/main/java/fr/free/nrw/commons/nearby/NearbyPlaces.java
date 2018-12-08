@@ -23,14 +23,14 @@ import timber.log.Timber;
 
 public class NearbyPlaces {
 
-    private static final int MIN_RESULTS = 40;
+    private static int MIN_RESULTS = 40;
     private static final double INITIAL_RADIUS = 1.0; // in kilometers
-    private static final double MAX_RADIUS = 300.0; // in kilometers
+    private static double MAX_RADIUS = 300.0; // in kilometers
     private static final double RADIUS_MULTIPLIER = 1.618;
     private static final Uri WIKIDATA_QUERY_URL = Uri.parse("https://query.wikidata.org/sparql");
     private static final Uri WIKIDATA_QUERY_UI_URL = Uri.parse("https://query.wikidata.org/");
     private final String wikidataQuery;
-    private double radius = INITIAL_RADIUS;
+    public double radius = INITIAL_RADIUS;
 
     public NearbyPlaces() {
         try {
@@ -41,8 +41,22 @@ public class NearbyPlaces {
         }
     }
 
-    List<Place> getFromWikidataQuery(LatLng curLatLng, String lang) throws IOException {
+    List<Place> getFromWikidataQuery(LatLng curLatLng, String lang, boolean returnClosestResult) throws IOException {
         List<Place> places = Collections.emptyList();
+
+        /**
+         * If returnClosestResult is true, then this means that we are trying to get closest point
+         * to use in cardView above contributions list
+         */
+        if (returnClosestResult) {
+            MIN_RESULTS = 1; // Return closest nearby place
+            MAX_RADIUS = 5;  // Return places only in 5 km area
+            radius = INITIAL_RADIUS; // refresh radius again, otherwise increased radius is grater than MAX_RADIUS, thus returns null
+        } else {
+            MIN_RESULTS = 40;
+            MAX_RADIUS = 300.0; // in kilometers
+            radius = INITIAL_RADIUS;
+        }
 
             // increase the radius gradually to find a satisfactory number of nearby places
             while (radius <= MAX_RADIUS) {
@@ -103,12 +117,19 @@ public class NearbyPlaces {
             String point = fields[0];
             String wikiDataLink = Utils.stripLocalizedString(fields[1]);
             String name = Utils.stripLocalizedString(fields[2]);
+
+            //getting icon link here
+            String identifier = Utils.stripLocalizedString(fields[3]);
+            //getting the ID which is at the end of link
+            identifier = identifier.split("/")[Utils.stripLocalizedString(fields[3]).split("/").length-1];
+            //replaced the extra > char from fields
+            identifier = identifier.replace(">","");
+
             String type = Utils.stripLocalizedString(fields[4]);
             String icon = fields[5];
             String wikipediaSitelink = Utils.stripLocalizedString(fields[7]);
             String commonsSitelink = Utils.stripLocalizedString(fields[8]);
             String category = Utils.stripLocalizedString(fields[9]);
-
             Timber.v("Name: " + name + ", type: " + type + ", category: " + category + ", wikipediaSitelink: " + wikipediaSitelink + ", commonsSitelink: " + commonsSitelink);
 
             double latitude;
@@ -127,7 +148,7 @@ public class NearbyPlaces {
 
             places.add(new Place(
                     name,
-                    Place.Label.fromText(type), // list
+                    Place.Label.fromText(identifier), // list
                     type, // details
                     Uri.parse(icon),
                     new LatLng(latitude, longitude, 0),
@@ -143,4 +164,5 @@ public class NearbyPlaces {
 
         return places;
     }
+
 }

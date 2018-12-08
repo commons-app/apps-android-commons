@@ -39,7 +39,7 @@
   <string name="provider_contributions">ჩემი ატვირთვები</string>
   <string name="menu_share">გაზიარება</string>
   <string name="menu_open_in_browser">ბრაუზერში გახსნა</string>
-  <string name="share_title_hint">სათაური</string>
+  <string name="share_title_hint" fuzzy="true">სათაური</string>
   <string name="share_description_hint">აღწერა</string>
   <string name="login_failed_network">შესვლა ვერ ხერხდება - ქსელის შეცდომა</string>
   <string name="login_failed_throttled">ძალიან ბევრი წარუმატებელი მცდელობა. გთხოვთ, რამდენიმე წუთში სცადეთ კვლავ.</string>
