@@ -16,7 +16,7 @@ import static android.Manifest.permission.WRITE_EXTERNAL_STORAGE;
 import static android.content.pm.PackageManager.PERMISSION_GRANTED;
 
 /**
- * This class handles the uploads made from a Nearby Place, in both the list and map views.
+ * Initiates the uploads made from a Nearby Place, in both the list and map views.
  */
 class DirectUpload {
 
