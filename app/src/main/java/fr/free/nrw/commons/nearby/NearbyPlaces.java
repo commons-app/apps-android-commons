@@ -41,13 +41,19 @@ public class NearbyPlaces {
         }
     }
 
-    List<Place> getFromWikidataQuery(LatLng curLatLng, String lang, boolean returnClosestResult) throws IOException {
+    /**
+     * Expands the radius as needed for the Wikidata query
+     * @param curLatLng user's location
+     * @param lang user's language
+     * @param returnClosestResult true if only the nearest point is desired
+     * @return list of places obtained
+     * @throws IOException if query fails
+     */
+    List<Place> radiusExpander(LatLng curLatLng, String lang, boolean returnClosestResult) throws IOException {
         List<Place> places = Collections.emptyList();
 
-        /**
-         * If returnClosestResult is true, then this means that we are trying to get closest point
-         * to use in cardView above contributions list
-         */
+        // If returnClosestResult is true, then this means that we are trying to get closest point
+        // to use in cardView in Contributions fragment
         if (returnClosestResult) {
             MIN_RESULTS = 1; // Return closest nearby place
             MAX_RADIUS = 5;  // Return places only in 5 km area
@@ -58,7 +64,7 @@ public class NearbyPlaces {
             radius = INITIAL_RADIUS;
         }
 
-            // increase the radius gradually to find a satisfactory number of nearby places
+            // Increase the radius gradually to find a satisfactory number of nearby places
             while (radius <= MAX_RADIUS) {
                 try {
                     places = getFromWikidataQuery(curLatLng, lang, radius);
@@ -81,9 +87,7 @@ public class NearbyPlaces {
         return places;
     }
 
-    private List<Place> getFromWikidataQuery(LatLng cur,
-                                             String lang,
-                                             double radius)
+    private List<Place> getFromWikidataQuery(LatLng cur, String lang, double radius)
             throws IOException {
         List<Place> places = new ArrayList<>();
 

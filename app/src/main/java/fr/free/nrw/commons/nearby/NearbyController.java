@@ -5,7 +5,6 @@ import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.support.graphics.drawable.VectorDrawableCompat;
-import android.util.Log;
 
 import com.mapbox.mapboxsdk.annotations.IconFactory;
 
@@ -61,7 +60,7 @@ public class NearbyController {
             Timber.d("Loading attractions neari, but curLatLng is null");
             return null;
         }
-        List<Place> places = nearbyPlaces.getFromWikidataQuery(latLangToSearchAround, Locale.getDefault().getLanguage(), returnClosestResult);
+        List<Place> places = nearbyPlaces.radiusExpander(latLangToSearchAround, Locale.getDefault().getLanguage(), returnClosestResult);
 
         if (null != places && places.size() > 0) {
             LatLng[] boundaryCoordinates = {places.get(0).location,   // south
