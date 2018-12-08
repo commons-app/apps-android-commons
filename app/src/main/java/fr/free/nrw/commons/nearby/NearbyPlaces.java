@@ -24,7 +24,6 @@ import timber.log.Timber;
 public class NearbyPlaces {
 
     private static final double INITIAL_RADIUS = 1.0; // in kilometers
-    private static double MAX_RADIUS = 300.0; // in kilometers
     private static final double RADIUS_MULTIPLIER = 1.618;
     private static final Uri WIKIDATA_QUERY_URL = Uri.parse("https://query.wikidata.org/sparql");
     private static final Uri WIKIDATA_QUERY_UI_URL = Uri.parse("https://query.wikidata.org/");
