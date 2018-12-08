@@ -5,7 +5,6 @@ import android.os.Build;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
-import android.util.Log;
 
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.contributions.ContributionController;
