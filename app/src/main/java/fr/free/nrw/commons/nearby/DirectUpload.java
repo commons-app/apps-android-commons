@@ -40,18 +40,18 @@ class DirectUpload {
             if (parentActivity != null) {
                 if (ContextCompat.checkSelfPermission(parentActivity, READ_EXTERNAL_STORAGE) != PERMISSION_GRANTED) {
                     if (fragment.shouldShowRequestPermissionRationale(READ_EXTERNAL_STORAGE)) {
-                        new AlertDialog.Builder(fragment.getActivity())
-                                .setMessage(fragment.getActivity().getString(R.string.read_storage_permission_rationale))
+                        new AlertDialog.Builder(parentActivity)
+                                .setMessage(parentActivity.getString(R.string.read_storage_permission_rationale))
                                 .setPositiveButton(android.R.string.ok, (dialog, which) -> {
                                     Timber.d("Requesting permissions for read external storage");
-                                    fragment.getActivity().requestPermissions (new String[]{READ_EXTERNAL_STORAGE}, PermissionUtils.GALLERY_PERMISSION_FROM_NEARBY_MAP);
+                                    parentActivity.requestPermissions (new String[]{READ_EXTERNAL_STORAGE}, PermissionUtils.GALLERY_PERMISSION_FROM_NEARBY_MAP);
                                     dialog.dismiss();
                                 })
                                 .setNegativeButton(android.R.string.cancel, null)
                                 .create()
                                 .show();
                     } else {
-                        fragment.getActivity().requestPermissions(new String[]{READ_EXTERNAL_STORAGE}, PermissionUtils.GALLERY_PERMISSION_FROM_NEARBY_MAP);
+                        parentActivity.requestPermissions(new String[]{READ_EXTERNAL_STORAGE}, PermissionUtils.GALLERY_PERMISSION_FROM_NEARBY_MAP);
                     }
                 } else {
                     controller.startSingleGalleryPick();
@@ -73,17 +73,17 @@ class DirectUpload {
             if (parentActivity != null) {
                 if (ContextCompat.checkSelfPermission(parentActivity, WRITE_EXTERNAL_STORAGE) != PERMISSION_GRANTED) {
                     if (fragment.shouldShowRequestPermissionRationale(WRITE_EXTERNAL_STORAGE)) {
-                        new AlertDialog.Builder(fragment.getActivity())
-                                .setMessage(fragment.getActivity().getString(R.string.write_storage_permission_rationale))
+                        new AlertDialog.Builder(parentActivity)
+                                .setMessage(parentActivity.getString(R.string.write_storage_permission_rationale))
                                 .setPositiveButton(android.R.string.ok, (dialog, which) -> {
-                                    fragment.getActivity().requestPermissions (new String[]{WRITE_EXTERNAL_STORAGE}, PermissionUtils.CAMERA_PERMISSION_FROM_NEARBY_MAP);
+                                    parentActivity.requestPermissions (new String[]{WRITE_EXTERNAL_STORAGE}, PermissionUtils.CAMERA_PERMISSION_FROM_NEARBY_MAP);
                                     dialog.dismiss();
                                 })
                                 .setNegativeButton(android.R.string.cancel, null)
                                 .create()
                                 .show();
                     } else {
-                        fragment.getActivity().requestPermissions(new String[]{WRITE_EXTERNAL_STORAGE}, PermissionUtils.CAMERA_PERMISSION_FROM_NEARBY_MAP);
+                        parentActivity.requestPermissions(new String[]{WRITE_EXTERNAL_STORAGE}, PermissionUtils.CAMERA_PERMISSION_FROM_NEARBY_MAP);
                     }
                 } else {
                     controller.startCameraCapture();
