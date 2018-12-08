@@ -108,8 +108,7 @@ public class NearbyPlaces {
 
         // format as a URL
         Timber.d(WIKIDATA_QUERY_UI_URL.buildUpon().fragment(query).build().toString());
-        String url = WIKIDATA_QUERY_URL.buildUpon()
-                .appendQueryParameter("query", query).build().toString();
+        String url = WIKIDATA_QUERY_URL.buildUpon().appendQueryParameter("query", query).build().toString();
         URLConnection conn = new URL(url).openConnection();
         conn.setRequestProperty("Accept", "text/tab-separated-values");
         BufferedReader in = new BufferedReader(new InputStreamReader(conn.getInputStream()));
@@ -145,8 +144,7 @@ public class NearbyPlaces {
 
             double latitude;
             double longitude;
-            Matcher matcher =
-                    Pattern.compile("Point\\(([^ ]+) ([^ ]+)\\)").matcher(point);
+            Matcher matcher = Pattern.compile("Point\\(([^ ]+) ([^ ]+)\\)").matcher(point);
             if (!matcher.find()) {
                 continue;
             }
