@@ -21,6 +21,9 @@ import fr.free.nrw.commons.location.LatLng;
 import fr.free.nrw.commons.upload.FileUtils;
 import timber.log.Timber;
 
+/**
+ * Handles the Wikidata query to obtain Places around search location
+ */
 public class NearbyPlaces {
 
     private static final double INITIAL_RADIUS = 1.0; // in kilometers
