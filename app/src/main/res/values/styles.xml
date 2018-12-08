@@ -6,7 +6,7 @@
         <item name="mainBackground">@color/main_background_dark</item>
         <item name="colorPrimary">@color/primaryColor</item>
         <item name="colorPrimaryDark">@color/primaryDarkColor</item>
-        <item name="colorAccent">@color/primaryColor</item>
+        <item name="colorAccent">@color/main_background_light</item>
         <item name="colorButtonNormal">@color/primaryColor</item>
 
         <item name="semitransparentText">@color/commons_app_blue_dark</item>
