@@ -17,7 +17,7 @@ import static android.Manifest.permission.WRITE_EXTERNAL_STORAGE;
 import static android.content.pm.PackageManager.PERMISSION_GRANTED;
 
 /**
- * This class handles the uploads made from a Nearby Place
+ * This class handles the uploads made from a Nearby Place, in both the list and map views.
  */
 class DirectUpload {
 
@@ -44,8 +44,7 @@ class DirectUpload {
                                 .setMessage(fragment.getActivity().getString(R.string.read_storage_permission_rationale))
                                 .setPositiveButton(android.R.string.ok, (dialog, which) -> {
                                     Timber.d("Requesting permissions for read external storage");
-                                    fragment.getActivity().requestPermissions
-                                            (new String[]{READ_EXTERNAL_STORAGE}, PermissionUtils.GALLERY_PERMISSION_FROM_NEARBY_MAP);
+                                    fragment.getActivity().requestPermissions (new String[]{READ_EXTERNAL_STORAGE}, PermissionUtils.GALLERY_PERMISSION_FROM_NEARBY_MAP);
                                     dialog.dismiss();
                                 })
                                 .setNegativeButton(android.R.string.cancel, null)
@@ -77,8 +76,7 @@ class DirectUpload {
                         new AlertDialog.Builder(fragment.getActivity())
                                 .setMessage(fragment.getActivity().getString(R.string.write_storage_permission_rationale))
                                 .setPositiveButton(android.R.string.ok, (dialog, which) -> {
-                                    fragment.getActivity().requestPermissions
-                                            (new String[]{WRITE_EXTERNAL_STORAGE}, PermissionUtils.CAMERA_PERMISSION_FROM_NEARBY_MAP);
+                                    fragment.getActivity().requestPermissions (new String[]{WRITE_EXTERNAL_STORAGE}, PermissionUtils.CAMERA_PERMISSION_FROM_NEARBY_MAP);
                                     dialog.dismiss();
                                 })
                                 .setNegativeButton(android.R.string.cancel, null)
