@@ -22,7 +22,7 @@ public class Place {
     private final String category;
 
     public Bitmap image;
-    public Bitmap secondaryImage;
+    private Bitmap secondaryImage;
     public String distance;
     public final Sitelinks siteLinks;
 
@@ -59,7 +59,7 @@ public class Place {
      * @return returns the entity id if wikidata link exists
      */
     @Nullable
-    public String getWikiDataEntityId() {
+    String getWikiDataEntityId() {
         if (!hasWikidataLink()) {
             Timber.d("Wikidata entity ID is null for place with sitelink %s", siteLinks.toString());
             return null;
@@ -70,15 +70,15 @@ public class Place {
         return wikiDataLink.replace("http://www.wikidata.org/entity/", "");
     }
 
-    public boolean hasWikipediaLink() {
+    boolean hasWikipediaLink() {
         return !(siteLinks == null || Uri.EMPTY.equals(siteLinks.getWikipediaLink()));
     }
 
-    public boolean hasWikidataLink() {
+    boolean hasWikidataLink() {
         return !(siteLinks == null || Uri.EMPTY.equals(siteLinks.getWikidataLink()));
     }
 
-    public boolean hasCommonsLink() {
+    boolean hasCommonsLink() {
         return !(siteLinks == null || Uri.EMPTY.equals(siteLinks.getCommonsLink()));
     }
 
