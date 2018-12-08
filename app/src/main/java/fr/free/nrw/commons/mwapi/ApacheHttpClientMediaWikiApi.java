@@ -43,6 +43,7 @@ import java.util.concurrent.Callable;
 import fr.free.nrw.commons.BuildConfig;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.PageTitle;
+import fr.free.nrw.commons.achievements.FeaturedImages;
 import fr.free.nrw.commons.achievements.FeedbackResponse;
 import fr.free.nrw.commons.auth.AccountUtil;
 import fr.free.nrw.commons.category.CategoryImageUtils;
@@ -988,7 +989,15 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
                 if (json == null) {
                     return null;
                 }
-                return gson.fromJson(json, FeedbackResponse.class);
+                Timber.d(json);
+                try {
+                    return gson.fromJson(String.valueOf(response.body()), FeedbackResponse.class);
+                }
+                catch (Exception e){
+                    return new FeedbackResponse("",0,0,0,new FeaturedImages(0,0),0,"",0);
+                }
+
+
             }
             return null;
         });

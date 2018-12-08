@@ -3,6 +3,7 @@ package fr.free.nrw.commons.achievements;
 import android.accounts.Account;
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
@@ -13,6 +14,7 @@ import android.support.v4.content.res.ResourcesCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.Toolbar;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -25,6 +27,8 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.dinuscxj.progressbar.CircleProgressBar;
+
+import org.w3c.dom.Text;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -42,6 +46,7 @@ import fr.free.nrw.commons.auth.SessionManager;
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
 import fr.free.nrw.commons.theme.NavigationBaseActivity;
 import fr.free.nrw.commons.utils.ViewUtil;
+import io.reactivex.Single;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.schedulers.Schedulers;
@@ -85,6 +90,12 @@ public class AchievementsActivity extends NavigationBaseActivity {
     RelativeLayout layoutImageUsedByWiki;
     @BindView(R.id.layout_statistics)
     LinearLayout layoutStatistics;
+    @BindView(R.id.images_used_by_wiki_text)
+    TextView imageByWikiText;
+    @BindView(R.id.images_reverted_text)
+    TextView imageRevertedText;
+    @BindView(R.id.images_upload_text_param)
+    TextView imageUploadedText;
     @Inject
     SessionManager sessionManager;
     @Inject
@@ -186,23 +197,42 @@ public class AchievementsActivity extends NavigationBaseActivity {
      */
     private void setAchievements() {
         if (checkAccount()) {
-            compositeDisposable.add(mediaWikiApi
-                    .getAchievements(Objects.requireNonNull(sessionManager.getCurrentAccount()).name)
-                    .subscribeOn(Schedulers.io())
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe(
-                            response -> {
-                                if (response != null) {
-                                    setUploadCount(Achievements.from(response));
-                                } else {
+            //Timber.d(String.valueOf(mediaWikiApi.getAchievements(sessionManager.getCurrentAccount().name)));
+                /*layoutImageReverts.setVisibility(View.VISIBLE);
+                imageView.setVisibility(View.VISIBLE);*/
+            try{
+
+                compositeDisposable.add(mediaWikiApi
+                        .getAchievements(Objects.requireNonNull(sessionManager.getCurrentAccount()).name)
+                        .subscribeOn(Schedulers.io())
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribe(
+                                response -> {
+                                    if (response != null) {
+                                        setUploadCount(Achievements.from(response));
+                                    } else {
+                                        Timber.d("success");
+                                        layoutImageReverts.setVisibility(View.INVISIBLE);
+                                        imageView.setVisibility(View.INVISIBLE);
+                                        levelNumber.setText("You haven't qualified any level yet");
+                                        //onError();
+                                    }
+                                },
+                                t -> {
+                                    Timber.e(t, "Fetching achievements statistics failed");
                                     onError();
                                 }
-                            },
-                            t -> {
-                                Timber.e(t, "Fetching achievements statistics failed");
-                                onError();
-                            }
-                    ));
+                        ));
+            }
+            catch (Exception e){
+                Timber.d(e+"success");
+                    /*layoutImageReverts.setVisibility(View.INVISIBLE);
+                    imageView.setVisibility(View.INVISIBLE);
+                    levelNumber.setText("You haven't qualified any level yet");*/
+            }
+
+
+
         }
     }
 
@@ -247,10 +277,38 @@ public class AchievementsActivity extends NavigationBaseActivity {
      * @param uploadCount
      */
     private void setUploadProgress(int uploadCount){
-        imagesUploadedProgressbar.setProgress
-                (100*uploadCount/levelInfo.getMaxUploadCount());
-        imagesUploadedProgressbar.setProgressTextFormatPattern
-                (uploadCount +"/" + levelInfo.getMaxUploadCount() );
+        if (uploadCount==0){
+            setZeroAchievements();
+        }else {
+
+            imagesUploadedProgressbar.setProgress
+                    (100*uploadCount/levelInfo.getMaxUploadCount());
+            imagesUploadedProgressbar.setProgressTextFormatPattern
+                    (uploadCount +"/" + levelInfo.getMaxUploadCount() );
+        }
+
+    }
+
+    private void setZeroAchievements() {
+        AlertDialog.Builder builder=new AlertDialog.Builder(this)
+                .setMessage("You haven't made any contributions yet")
+                .setPositiveButton("Ok", (dialog, which) -> {
+                    //dismiss
+                });
+        AlertDialog dialog = builder.create();
+        dialog.show();
+        imagesUploadedProgressbar.setVisibility(View.INVISIBLE);
+        imageRevertsProgressbar.setVisibility(View.INVISIBLE);
+        imagesUsedByWikiProgessbar.setVisibility(View.INVISIBLE);
+        //levelNumber.setText("LEVEL 0");
+        imageView.setVisibility(View.INVISIBLE);
+        imageByWikiText.setText("No images used");
+        imageRevertedText.setText("No image reverted");
+        imageUploadedText.setText("No images Uploaded");
+        /*BitmapDrawable bitmapImage = BitmapUtils.writeOnDrawable(bitmap, Integer.toString(levelInfo.getLevelNumber()),this);
+        imageView.setImageDrawable(bitmapImage);*/
+        imageView.setVisibility(View.INVISIBLE);
+
     }
 
     /**
@@ -315,6 +373,7 @@ public class AchievementsActivity extends NavigationBaseActivity {
             layoutStatistics.setVisibility(View.VISIBLE);
             imageView.setVisibility(View.VISIBLE);
             levelNumber.setVisibility(View.VISIBLE);
+            //levelNumber.setText("You haven't qualified any level yet");
         }
     }
 
@@ -388,10 +447,10 @@ public class AchievementsActivity extends NavigationBaseActivity {
     private boolean checkAccount(){
         Account currentAccount = sessionManager.getCurrentAccount();
         if (currentAccount == null) {
-        Timber.d("Current account is null");
-        ViewUtil.showLongToast(this, getResources().getString(R.string.user_not_logged_in));
-        sessionManager.forceLogin(this);
-        return false;
+            Timber.d("Current account is null");
+            ViewUtil.showLongToast(this, getResources().getString(R.string.user_not_logged_in));
+            sessionManager.forceLogin(this);
+            return false;
         }
         return true;
     }
