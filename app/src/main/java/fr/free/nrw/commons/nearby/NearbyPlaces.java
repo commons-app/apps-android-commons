@@ -23,7 +23,6 @@ import timber.log.Timber;
 
 public class NearbyPlaces {
 
-    private static int MIN_RESULTS = 40;
     private static final double INITIAL_RADIUS = 1.0; // in kilometers
     private static double MAX_RADIUS = 300.0; // in kilometers
     private static final double RADIUS_MULTIPLIER = 1.618;
@@ -50,22 +49,25 @@ public class NearbyPlaces {
      * @throws IOException if query fails
      */
     List<Place> radiusExpander(LatLng curLatLng, String lang, boolean returnClosestResult) throws IOException {
+
+        int minResults;
+        double maxRadius;
         List<Place> places = Collections.emptyList();
 
         // If returnClosestResult is true, then this means that we are trying to get closest point
         // to use in cardView in Contributions fragment
         if (returnClosestResult) {
-            MIN_RESULTS = 1; // Return closest nearby place
-            MAX_RADIUS = 5;  // Return places only in 5 km area
+            minResults = 1; // Return closest nearby place
+            maxRadius = 5;  // Return places only in 5 km area
             radius = INITIAL_RADIUS; // refresh radius again, otherwise increased radius is grater than MAX_RADIUS, thus returns null
         } else {
-            MIN_RESULTS = 40;
-            MAX_RADIUS = 300.0; // in kilometers
+            minResults = 40;
+            maxRadius = 300.0; // in kilometers
             radius = INITIAL_RADIUS;
         }
 
             // Increase the radius gradually to find a satisfactory number of nearby places
-            while (radius <= MAX_RADIUS) {
+            while (radius <= maxRadius) {
                 try {
                     places = getFromWikidataQuery(curLatLng, lang, radius);
                 } catch (InterruptedIOException e) {
@@ -73,15 +75,15 @@ public class NearbyPlaces {
                     return places;
                 }
                 Timber.d("%d results at radius: %f", places.size(), radius);
-                if (places.size() >= MIN_RESULTS) {
+                if (places.size() >= minResults) {
                     break;
                 } else {
                     radius *= RADIUS_MULTIPLIER;
                 }
             }
         // make sure we will be able to send at least one request next time
-        if (radius > MAX_RADIUS) {
-            radius = MAX_RADIUS;
+        if (radius > maxRadius) {
+            radius = maxRadius;
         }
         return places;
     }
