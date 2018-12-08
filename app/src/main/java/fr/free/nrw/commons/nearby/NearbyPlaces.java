@@ -43,7 +43,7 @@ public class NearbyPlaces {
 
     /**
      * Expands the radius as needed for the Wikidata query
-     * @param curLatLng user's location
+     * @param curLatLng coordinates of search location
      * @param lang user's language
      * @param returnClosestResult true if only the nearest point is desired
      * @return list of places obtained
@@ -83,12 +83,18 @@ public class NearbyPlaces {
         if (radius > MAX_RADIUS) {
             radius = MAX_RADIUS;
         }
-
         return places;
     }
 
-    private List<Place> getFromWikidataQuery(LatLng cur, String lang, double radius)
-            throws IOException {
+    /**
+     * Runs the Wikidata query to populate the Places around search location
+     * @param cur coordinates of search location
+     * @param lang user's language
+     * @param radius radius for search, as determined by radiusExpander()
+     * @return list of places obtained
+     * @throws IOException if query fails
+     */
+    private List<Place> getFromWikidataQuery(LatLng cur, String lang, double radius) throws IOException {
         List<Place> places = new ArrayList<>();
 
         String query = wikidataQuery
@@ -168,5 +174,4 @@ public class NearbyPlaces {
 
         return places;
     }
-
 }
