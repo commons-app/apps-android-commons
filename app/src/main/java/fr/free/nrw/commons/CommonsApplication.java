@@ -91,6 +91,7 @@ public class CommonsApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+        ACRA.init(this);
         if (BuildConfig.DEBUG) {
             //FIXME: Traceur should be disabled for release builds until error fixed
             //See https://github.com/commons-app/apps-android-commons/issues/1877
