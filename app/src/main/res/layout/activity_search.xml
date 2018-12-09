@@ -23,8 +23,6 @@
         <android.support.v7.widget.Toolbar
             android:id="@+id/toolbar_search"
             android:layout_width="match_parent"
-            app:navigationIcon="@drawable/ic_arrow_back_primary_24dp"
-            android:background="@color/item_white_background"
             android:layout_height="wrap_content">
             <SearchView
                 android:id="@+id/searchBox"
