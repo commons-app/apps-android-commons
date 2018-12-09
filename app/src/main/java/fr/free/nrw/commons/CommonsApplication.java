@@ -119,7 +119,6 @@ public class CommonsApplication extends Application {
         // Empty temp directory in case some temp files are created and never removed.
         ContributionUtils.emptyTemporaryDirectory();
 
-        initAcra();
         if (BuildConfig.DEBUG) {
             Stetho.initializeWithDefaults(this);
         }
@@ -151,16 +150,6 @@ public class CommonsApplication extends Application {
 
         Timber.plant(tree);
         Timber.plant(new Timber.DebugTree());
-    }
-
-    /**
-     * Remove ACRA's UncaughtExceptionHandler
-     * We do this because ACRA's handler spawns a new process possibly screwing up with a few things
-     */
-    private void initAcra() {
-        Thread.UncaughtExceptionHandler exceptionHandler = Thread.getDefaultUncaughtExceptionHandler();
-        ACRA.init(this);
-        Thread.setDefaultUncaughtExceptionHandler(exceptionHandler);
     }
 
     private ThreadPoolService getFileLoggingThreadPool() {
