@@ -8,6 +8,7 @@ import android.database.Cursor;
 import android.graphics.BitmapRegionDecoder;
 import android.net.Uri;
 import android.support.annotation.Nullable;
+import android.util.Log;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -116,6 +117,7 @@ public class UploadModel {
         FileProcessor fp = new FileProcessor(filePath, context.getContentResolver(), context);
         UploadItem item = new UploadItem(uri, mimeType, source, fp.processFileCoordinates(similarImageInterface),
                 FileUtils.getFileExt(filePath), wikidataEntityIdPref,fileCreatedDate);
+        Log.d("deneme","wikidate entity id preference"+wikidataEntityIdPref);
         item.title.setTitleText(title);
         item.descriptions.get(0).setDescriptionText(desc);
         //TODO figure out if default descriptions in other languages exist
@@ -127,10 +129,15 @@ public class UploadModel {
                         .map(mwApi::existingFile)
                         .map(b -> b ? ImageUtils.IMAGE_DUPLICATE : ImageUtils.IMAGE_OK),
                 Single.fromCallable(() ->
+                        filePath)
+                        .map(FileUtils::getGeolocation)
+                        .map(ImageUtils::checkImageGeolocationIsDifferent)
+                        .map(b -> b ? ImageUtils.IMAGE_GEOLOCATION_DIFFERENT : ImageUtils.IMAGE_OK),
+                Single.fromCallable(() ->
                         new FileInputStream(filePath))
                         .map(file -> BitmapRegionDecoder.newInstance(file, false))
                         .map(ImageUtils::checkIfImageIsTooDark), //Returns IMAGE_DARK or IMAGE_OK
-                (dupe, dark) -> dupe | dark).subscribe(item.imageQuality::onNext);
+                (dupe, wrongGeo, dark) -> dupe | wrongGeo | dark).subscribe(item.imageQuality::onNext);
         items.add(item);
         items.get(0).selected = true;
         items.get(0).first = true;
