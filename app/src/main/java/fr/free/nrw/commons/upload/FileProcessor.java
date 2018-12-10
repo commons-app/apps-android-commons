@@ -50,7 +50,7 @@ public class FileProcessor implements SimilarImageDialogFragment.onResponse {
     FileProcessor() {
     }
 
-    public void initFileDetails(@NonNull String filePath, ContentResolver contentResolver) {
+    void initFileDetails(@NonNull String filePath, ContentResolver contentResolver) {
         this.filePath = filePath;
         this.contentResolver = contentResolver;
         try {
@@ -76,10 +76,6 @@ public class FileProcessor implements SimilarImageDialogFragment.onResponse {
         }
 
         return imageObj;
-    }
-
-    String getDecimalCoords() {
-        return decimalCoords;
     }
 
     /**
@@ -135,7 +131,7 @@ public class FileProcessor implements SimilarImageDialogFragment.onResponse {
      * Then initiates the calls to MediaWiki API through an instance of CategoryApi.
      */
     @SuppressLint("CheckResult")
-    public void useImageCoords() {
+    private void useImageCoords() {
         if (decimalCoords != null) {
             Timber.d("Decimal coords of image: %s", decimalCoords);
             Timber.d("is EXIF data present:" + imageObj.imageCoordsExists + " from findOther image");
