@@ -9,6 +9,7 @@ import android.graphics.Rect;
 import android.net.Uri;
 import android.support.annotation.IntDef;
 import android.support.annotation.Nullable;
+import android.util.Log;
 
 import com.facebook.common.executors.CallerThreadExecutor;
 import com.facebook.common.references.CloseableReference;
@@ -36,13 +37,13 @@ public class ImageUtils {
     public static final int IMAGE_DARK = 1;
     public static final int IMAGE_BLURRY = 1 << 1;
     public static final int IMAGE_DUPLICATE = 1 << 2;
+    public static final int IMAGE_GEOLOCATION_DIFFERENT = 1 << 3;
     public static final int IMAGE_OK = 0;
     public static final int IMAGE_KEEP = -1;
     public static final int IMAGE_WAIT = -2;
     public static final int EMPTY_TITLE = -3;
     public static final int FILE_NAME_EXISTS = -4;
     public static final int NO_CATEGORY_SELECTED = -5;
-    public static final int IMAGE_GEOLOCATION_DIFFERENT = -6;
 
     @IntDef(
             flag = true,
@@ -97,9 +98,10 @@ public class ImageUtils {
     /**
      * @param geolocation Geolocation of image. If geotag doesn't exists, then this will be an empty string
      * @return IMAGE_OK if image is neither dark nor blurry or if the input bitmapRegionDecoder provided is null
-     * IMAGE_DARK if image is too dark
+     * IMAGE_GEOLOCATION_DIFFERENT if geolocation of the image and
      */
     public static boolean checkImageGeolocationIsDifferent(String geolocation) {
+        Log.d("deneme","checkking for image location");
         return true;
     }
 
@@ -212,14 +214,30 @@ public class ImageUtils {
             errorMessage = context.getString(R.string.upload_image_problem_blurry);
         else if (result == ImageUtils.IMAGE_DUPLICATE)
             errorMessage = context.getString(R.string.upload_image_problem_duplicate);
+        else if (result == ImageUtils.IMAGE_GEOLOCATION_DIFFERENT)
+            errorMessage = context.getString(R.string.upload_image_problem_wrong_location);
+        else if (result == (ImageUtils.IMAGE_DARK|ImageUtils.IMAGE_GEOLOCATION_DIFFERENT))
+            errorMessage = context.getString(R.string.upload_image_problem_wrong_location_dark);
+        else if (result == (ImageUtils.IMAGE_BLURRY|ImageUtils.IMAGE_GEOLOCATION_DIFFERENT))
+            errorMessage = context.getString(R.string.upload_image_problem_wrong_location_blurry);
+        else if (result == (ImageUtils.IMAGE_DUPLICATE|ImageUtils.IMAGE_GEOLOCATION_DIFFERENT))
+            errorMessage = context.getString(R.string.upload_image_problem_wrong_location_duplicate);
         else if (result == (ImageUtils.IMAGE_DARK|ImageUtils.IMAGE_BLURRY))
             errorMessage = context.getString(R.string.upload_image_problem_dark_blurry);
+        else if (result == (ImageUtils.IMAGE_DARK|ImageUtils.IMAGE_BLURRY|ImageUtils.IMAGE_GEOLOCATION_DIFFERENT))
+            errorMessage = context.getString(R.string.upload_image_problem_dark_blurry_wrong_location);
         else if (result == (ImageUtils.IMAGE_DARK|ImageUtils.IMAGE_DUPLICATE))
             errorMessage = context.getString(R.string.upload_image_problem_dark_duplicate);
+        else if (result == (ImageUtils.IMAGE_DARK|ImageUtils.IMAGE_DUPLICATE|IMAGE_GEOLOCATION_DIFFERENT))
+            errorMessage = context.getString(R.string.upload_image_problem_blurry_duplicate_wrong_location);
         else if (result == (ImageUtils.IMAGE_BLURRY|ImageUtils.IMAGE_DUPLICATE))
             errorMessage = context.getString(R.string.upload_image_problem_blurry_duplicate);
+        else if (result == (ImageUtils.IMAGE_BLURRY|ImageUtils.IMAGE_DUPLICATE|ImageUtils.IMAGE_GEOLOCATION_DIFFERENT))
+            errorMessage = context.getString(R.string.upload_image_problem_blurry_duplicate_wrong_location);
         else if (result == (ImageUtils.IMAGE_DARK|ImageUtils.IMAGE_BLURRY|ImageUtils.IMAGE_DUPLICATE))
             errorMessage = context.getString(R.string.upload_image_problem_dark_blurry_duplicate);
+        else if (result == (ImageUtils.IMAGE_DARK|ImageUtils.IMAGE_BLURRY|ImageUtils.IMAGE_DUPLICATE|ImageUtils.IMAGE_GEOLOCATION_DIFFERENT))
+            errorMessage = context.getString(R.string.upload_image_problem_dark_blurry_duplicate_wrong_location);
         else
             return "";
 
