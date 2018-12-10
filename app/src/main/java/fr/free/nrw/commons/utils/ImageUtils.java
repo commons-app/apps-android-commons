@@ -42,6 +42,7 @@ public class ImageUtils {
     public static final int EMPTY_TITLE = -3;
     public static final int FILE_NAME_EXISTS = -4;
     public static final int NO_CATEGORY_SELECTED = -5;
+    public static final int IMAGE_GEOLOCATION_DIFFERENT = -6;
 
     @IntDef(
             flag = true,
@@ -54,7 +55,8 @@ public class ImageUtils {
                     IMAGE_WAIT,
                     EMPTY_TITLE,
                     FILE_NAME_EXISTS,
-                    NO_CATEGORY_SELECTED
+                    NO_CATEGORY_SELECTED,
+                    IMAGE_GEOLOCATION_DIFFERENT
             }
     )
     @Retention(RetentionPolicy.SOURCE)
@@ -93,17 +95,14 @@ public class ImageUtils {
     }
 
     /**
-     * Pulls the pixels into an array and then runs through it while checking the brightness of each pixel.
-     * The calculation of brightness of each pixel is done by extracting the RGB constituents of the pixel
-     * and then applying the formula to calculate its "Luminance".
-     * Pixels with luminance greater than 40% are considered to be bright pixels while the ones with luminance
-     * greater than 26% but less than 40% are considered to be pixels with medium brightness. The rest are
-     * dark pixels.
-     * If the number of bright pixels is more than 2.5% or the number of pixels with medium brightness is
-     * more than 30% of the total number of pixels then the image is considered to be OK else dark.
-     * @param bitmap The bitmap that needs to be checked.
-     * @return true if bitmap is dark or null, false if bitmap is bright
+     * @param geolocation Geolocation of image. If geotag doesn't exists, then this will be an empty string
+     * @return IMAGE_OK if image is neither dark nor blurry or if the input bitmapRegionDecoder provided is null
+     * IMAGE_DARK if image is too dark
      */
+    public static boolean checkImageGeolocationIsDifferent(String geolocation) {
+        return true;
+    }
+
     private static boolean checkIfImageIsDark(Bitmap bitmap) {
         if (bitmap == null) {
             Timber.e("Expected bitmap was null");
