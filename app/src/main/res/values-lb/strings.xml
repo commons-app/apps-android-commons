@@ -304,6 +304,7 @@
   <string name="desc_language_Asia">Asien</string>
   <string name="desc_language_Pacific">Pazifik</string>
   <string name="no_categories_selected">Keng Kategorien erausgesicht</string>
+  <string name="yes_submit">Jo, schécken</string>
   <string name="no_go_back">Neen, zréck goen</string>
   <string name="never_ask_again">Dëst ni méi froen</string>
 </resources>
