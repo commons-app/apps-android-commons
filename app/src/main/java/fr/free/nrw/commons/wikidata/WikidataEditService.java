@@ -58,6 +58,11 @@ public class WikidataEditService {
             return;
         }
 
+        if (!(directPrefs.getBoolean("Picture_Has_Correct_Location",true))) {
+            Timber.d("Image location and nearby place location missmatched, so wikidata item won't be edited");
+            return;
+        }
+
         editWikidataProperty(wikidataEntityId, fileName);
     }
 
