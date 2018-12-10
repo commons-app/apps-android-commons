@@ -6,6 +6,7 @@ import android.content.ContentUris;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.database.Cursor;
+import android.media.ExifInterface;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Environment;
@@ -75,6 +76,25 @@ public class FileUtils {
             } catch (IOException e) {
                 Timber.e(e, "Exception on closing MD5 input stream");
             }
+        }
+    }
+
+    /**
+     * Get Geolocation of file from input stream
+     */
+    static String getGeolocation(String filePath) {
+
+        try {
+            ExifInterface exifInterface=new ExifInterface(filePath);
+            GPSExtractor imageObj = new GPSExtractor(exifInterface);
+            if (imageObj.imageCoordsExists) { // If image has geolocation information in its EXIF
+                return imageObj.getCoords();
+            } else {
+                return "";
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+            return "";
         }
     }
 
