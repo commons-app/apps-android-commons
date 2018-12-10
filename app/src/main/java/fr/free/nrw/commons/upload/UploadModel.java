@@ -109,7 +109,7 @@ public class UploadModel {
     }
 
     @SuppressLint("CheckResult")
-    void receiveDirect(Uri media, String mimeType, String source, String wikidataEntityIdPref, String title, String desc, SimilarImageInterface similarImageInterface) {
+    void receiveDirect(Uri media, String mimeType, String source, String wikidataEntityIdPref, String title, String desc, SimilarImageInterface similarImageInterface, String wikidataItemLocation) {
         initDefaultValues();
         long fileCreatedDate = getFileCreatedDate(media);
         String filePath = this.cacheFileUpload(media);
