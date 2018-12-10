@@ -2,6 +2,7 @@ package fr.free.nrw.commons.upload;
 
 import android.annotation.SuppressLint;
 import android.net.Uri;
+import android.util.Log;
 
 import java.lang.reflect.Proxy;
 import java.util.ArrayList;
@@ -92,8 +93,8 @@ public class UploadPresenter {
      * @param source File source from {@link Contribution.FileSource}
      */
     @SuppressLint("CheckResult")
-    void receiveDirect(Uri media, String mimeType, @Contribution.FileSource String source, String wikidataEntityIdPref, String title, String desc) {
-        Completable.fromRunnable(() -> uploadModel.receiveDirect(media, mimeType, source, wikidataEntityIdPref, title, desc, similarImageInterface))
+    void receiveDirect(Uri media, String mimeType, @Contribution.FileSource String source, String wikidataEntityIdPref, String title, String desc, String wikidataItemLocation) {
+        Completable.fromRunnable(() -> uploadModel.receiveDirect(media, mimeType, source, wikidataEntityIdPref, title, desc, similarImageInterface, wikidataItemLocation))
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(() -> {
@@ -249,6 +250,7 @@ public class UploadPresenter {
      * @param result the result returned by the image procesors.
      */
     private void handleBadPicture(@ImageUtils.Result int result) {
+        Log.d("deneme","result:"+result);
         view.showBadPicturePopup(result);
     }
 

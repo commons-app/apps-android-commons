@@ -199,7 +199,7 @@ public class UploadService extends HandlerService<Contribution> {
                 .setTicker(getString(R.string.upload_progress_notification_title_in_progress, contribution.getDisplayTitle()));
     }
 
-    private void uploadContribution(Contribution contribution) {
+    private void uploadContribution(Contribution contribution, boolean isIt) {
         InputStream fileInputStream = null;
         InputStream tempFileInputStream = null;
         ContentInfo contentInfo = null;
