@@ -51,7 +51,7 @@ public class UploadController {
     }
 
     private boolean isUploadServiceConnected;
-    private ServiceConnection uploadServiceConnection = new ServiceConnection() {
+    public ServiceConnection uploadServiceConnection = new ServiceConnection() {
         @Override
         public void onServiceConnected(ComponentName componentName, IBinder binder) {
             uploadService = (UploadService) ((HandlerService.HandlerServiceLocalBinder) binder).getService();
@@ -61,6 +61,7 @@ public class UploadController {
         @Override
         public void onServiceDisconnected(ComponentName componentName) {
             // this should never happen
+            isUploadServiceConnected = false;
             Timber.e(new RuntimeException("UploadService died but the rest of the process did not!"));
         }
     };
@@ -68,7 +69,7 @@ public class UploadController {
     /**
      * Prepares the upload service.
      */
-    public void prepareService() {
+    void prepareService() {
         Intent uploadServiceIntent = new Intent(context, UploadService.class);
         uploadServiceIntent.setAction(UploadService.ACTION_START_SERVICE);
         context.startService(uploadServiceIntent);
@@ -78,7 +79,7 @@ public class UploadController {
     /**
      * Disconnects the upload service.
      */
-    public void cleanup() {
+    void cleanup() {
         if (isUploadServiceConnected) {
             context.unbindService(uploadServiceConnection);
         }
@@ -89,7 +90,7 @@ public class UploadController {
      *
      * @param contribution the contribution object
      */
-    public void startUpload(Contribution contribution) {
+    void startUpload(Contribution contribution) {
         startUpload(contribution, c -> {});
     }
 
@@ -100,7 +101,7 @@ public class UploadController {
      * @param onComplete   the progress tracker
      */
     @SuppressLint("StaticFieldLeak")
-    public void startUpload(final Contribution contribution, final ContributionUploadProgress onComplete) {
+    private void startUpload(final Contribution contribution, final ContributionUploadProgress onComplete) {
         //Set creator, desc, and license
         if (TextUtils.isEmpty(contribution.getCreator())) {
             Account currentAccount = sessionManager.getCurrentAccount();
@@ -110,7 +111,7 @@ public class UploadController {
                 sessionManager.forceLogin(context);
                 return;
             }
-            contribution.setCreator(currentAccount.name);
+            contribution.setCreator(sessionManager.getAuthorName());
         }
 
         if (contribution.getDescription() == null) {

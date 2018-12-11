@@ -119,7 +119,7 @@ public class CommonsApplication extends Application {
         // Empty temp directory in case some temp files are created and never removed.
         ContributionUtils.emptyTemporaryDirectory();
 
-        if (BuildConfig.DEBUG) {
+        if (BuildConfig.DEBUG && !isRoboUnitTest()) {
             Stetho.initializeWithDefaults(this);
         }
 
@@ -150,6 +150,10 @@ public class CommonsApplication extends Application {
 
         Timber.plant(tree);
         Timber.plant(new Timber.DebugTree());
+    }
+
+    public static boolean isRoboUnitTest() {
+        return "robolectric".equals(Build.FINGERPRINT);
     }
 
     private ThreadPoolService getFileLoggingThreadPool() {

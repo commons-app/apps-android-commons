@@ -53,16 +53,20 @@ public class UploadModel {
     private boolean useExtStorage;
     private Disposable badImageSubscription;
 
-    @Inject
-    SessionManager sessionManager;
+    private SessionManager sessionManager;
     private Uri currentMediaUri;
+    private FileUtilsWrapper fileUtilsWrapper;
+    private FileProcessor fileProcessor;
 
     @Inject
     UploadModel(@Named("licenses") List<String> licenses,
                 @Named("default_preferences") SharedPreferences prefs,
                 @Named("licenses_by_name") Map<String, String> licensesByName,
                 Context context,
-                MediaWikiApi mwApi) {
+                MediaWikiApi mwApi,
+                SessionManager sessionManager,
+                FileUtilsWrapper fileUtilsWrapper,
+                FileProcessor fileProcessor) {
         this.licenses = licenses;
         this.prefs = prefs;
         this.license = Prefs.Licenses.CC_BY_SA_3;
@@ -70,6 +74,9 @@ public class UploadModel {
         this.context = context;
         this.mwApi = mwApi;
         this.contentResolver = context.getContentResolver();
+        this.sessionManager = sessionManager;
+        this.fileUtilsWrapper = fileUtilsWrapper;
+        this.fileProcessor = fileProcessor;
         useExtStorage = this.prefs.getBoolean("useExternalStorage", false);
     }
 
@@ -84,17 +91,17 @@ public class UploadModel {
                 .map(filePath -> {
                     long fileCreatedDate = getFileCreatedDate(currentMediaUri);
                     Uri uri = Uri.fromFile(new File(filePath));
-                    FileProcessor fp = new FileProcessor(filePath, context.getContentResolver(), context);
-                    UploadItem item = new UploadItem(uri, mimeType, source, fp.processFileCoordinates(similarImageInterface),
-                            FileUtils.getFileExt(filePath), null,fileCreatedDate);
+                    fileProcessor.initFileDetails(filePath, context.getContentResolver());
+                    UploadItem item = new UploadItem(uri, mimeType, source, fileProcessor.processFileCoordinates(similarImageInterface),
+                            fileUtilsWrapper.getFileExt(filePath), null,fileCreatedDate);
                     Single.zip(
                             Single.fromCallable(() ->
-                                    new FileInputStream(filePath))
-                                    .map(FileUtils::getSHA1)
+                                    fileUtilsWrapper.getFileInputStream(filePath))
+                                    .map(fileUtilsWrapper::getSHA1)
                                     .map(mwApi::existingFile)
                                     .map(b -> b ? ImageUtils.IMAGE_DUPLICATE : ImageUtils.IMAGE_OK),
                             Single.fromCallable(() ->
-                                    new FileInputStream(filePath))
+                                    fileUtilsWrapper.getFileInputStream(filePath))
                                     .map(file -> BitmapRegionDecoder.newInstance(file, false))
                                     .map(ImageUtils::checkIfImageIsTooDark), //Returns IMAGE_DARK or IMAGE_OK
                             (dupe, dark) -> dupe | dark)
@@ -113,24 +120,24 @@ public class UploadModel {
         long fileCreatedDate = getFileCreatedDate(media);
         String filePath = this.cacheFileUpload(media);
         Uri uri = Uri.fromFile(new File(filePath));
-        FileProcessor fp = new FileProcessor(filePath, context.getContentResolver(), context);
-        UploadItem item = new UploadItem(uri, mimeType, source, fp.processFileCoordinates(similarImageInterface),
-                FileUtils.getFileExt(filePath), wikidataEntityIdPref,fileCreatedDate);
+        fileProcessor.initFileDetails(filePath, context.getContentResolver());
+        UploadItem item = new UploadItem(uri, mimeType, source, fileProcessor.processFileCoordinates(similarImageInterface),
+                fileUtilsWrapper.getFileExt(filePath), wikidataEntityIdPref,fileCreatedDate);
         item.title.setTitleText(title);
         item.descriptions.get(0).setDescriptionText(desc);
         //TODO figure out if default descriptions in other languages exist
         item.descriptions.get(0).setLanguageCode("en");
         Single.zip(
                 Single.fromCallable(() ->
-                        new FileInputStream(filePath))
-                        .map(FileUtils::getSHA1)
+                        fileUtilsWrapper.getFileInputStream(filePath))
+                        .map(fileUtilsWrapper::getSHA1)
                         .map(mwApi::existingFile)
                         .map(b -> b ? ImageUtils.IMAGE_DUPLICATE : ImageUtils.IMAGE_OK),
                 Single.fromCallable(() ->
-                        new FileInputStream(filePath))
+                        fileUtilsWrapper.getFileInputStream(filePath))
                         .map(file -> BitmapRegionDecoder.newInstance(file, false))
                         .map(ImageUtils::checkIfImageIsTooDark), //Returns IMAGE_DARK or IMAGE_OK
-                (dupe, dark) -> dupe | dark).subscribe(item.imageQuality::onNext);
+                (dupe, dark) -> dupe | dark).subscribe(item.imageQuality::onNext, Timber::e);
         items.add(item);
         items.get(0).selected = true;
         items.get(0).first = true;
@@ -239,7 +246,7 @@ public class UploadModel {
         updateItemState();
     }
 
-    public void setCurrentTitleAndDescriptions(Title title, List<Description> descriptions) {
+    void setCurrentTitleAndDescriptions(Title title, List<Description> descriptions) {
         setCurrentUploadTitle(title);
         setCurrentUploadDescriptions(descriptions);
     }
@@ -312,7 +319,7 @@ public class UploadModel {
         {
             Contribution contribution = new Contribution(item.mediaUri, null, item.title + "." + item.fileExt,
                     Description.formatList(item.descriptions), -1,
-                    null, null, sessionManager.getUserName(),
+                    null, null, sessionManager.getAuthorName(),
                     CommonsApplication.DEFAULT_EDIT_SUMMARY, item.gpsCoords.getCoords());
             contribution.setWikiDataEntityId(item.wikidataEntityId);
             contribution.setCategories(categoryStringList);
@@ -337,9 +344,9 @@ public class UploadModel {
         try {
             String copyPath;
             if (useExtStorage)
-                copyPath = FileUtils.createExternalCopyPathAndCopy(media, contentResolver);
+                copyPath = fileUtilsWrapper.createExternalCopyPathAndCopy(media, contentResolver);
             else
-                copyPath = FileUtils.createCopyPathAndCopy(media, context);
+                copyPath = fileUtilsWrapper.createCopyPathAndCopy(media, context);
             Timber.i("File path is " + copyPath);
             return copyPath;
         } catch (IOException e) {
@@ -362,6 +369,9 @@ public class UploadModel {
         badImageSubscription = getCurrentItem().imageQuality.subscribe(consumer, Timber::e);
     }
 
+    public List<UploadItem> getItems() {
+        return items;
+    }
 
     @SuppressWarnings("WeakerAccess")
     static class UploadItem {

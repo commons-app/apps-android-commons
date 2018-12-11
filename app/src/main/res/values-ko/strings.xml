@@ -388,6 +388,7 @@
   <string name="deletion_reason_publicly_visible">공개가 되는 줄 몰랐습니다</string>
   <string name="deletion_reason_bad_for_my_privacy">제 프라이버시에 부적절하다는 것을 인식했습니다</string>
   <string name="deletion_reason_no_longer_want_public">생각이 바뀌어서 더 이상 공개하고 싶지 않습니다</string>
+  <string name="deletion_reason_not_interesting">죄송합니다. 이 사진은 백과사전의 관심 대상이 아닙니다</string>
   <string name="articles">문서</string>
   <string name="no_uploads">공용에 오신 것을 환영합니다!\n\n상단의 카메라나 갤러리 아이콘을 터치하여 당신의 첫 미디어를 올리십시오.</string>
   <string name="desc_language_Worldwide">전 세계</string>
@@ -401,6 +402,7 @@
   <string name="no_categories_selected_warning_desc">분류가 없는 그림은 거의 유용하지 않습니다. 분류를 선택하지 않고 제출하시겠습니까?</string>
   <string name="yes_submit">예. 제출합니다</string>
   <string name="no_go_back">아니오, 뒤로 돌아갑니다</string>
+  <string name="search_this_area">여기를 검색</string>
   <string name="nearby_card_permission_title">권한 요청</string>
   <string name="nearby_card_permission_explanation">사진이 필요한 주변 장소를 표시하기 위해 현재 위치를 사용하시겠습니까?</string>
   <string name="unable_to_display_nearest_place">위치 권한 없이 사진이 필요한 주변 장소를 표시할 수 없습니다</string>

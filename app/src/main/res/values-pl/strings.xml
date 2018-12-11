@@ -281,8 +281,15 @@
   <string name="images_used_explanation">Liczba zdjęć przesłanych do Commons, które zostały wykorzystane w artykułach Wikimedia</string>
   <string name="error_occurred">Wystąpił błąd!</string>
   <string name="notifications_channel_name_all">Powiadomienia Commons</string>
+  <string name="notifications">Powiadomienia</string>
+  <string name="step_count">Krok %1$d z %2$d</string>
   <string name="navigation_item_bookmarks">Zakładki</string>
   <string name="title_activity_bookmarks">Zakładki</string>
   <string name="provider_bookmarks">Zakładki</string>
   <string name="provider_bookmarks_location">Zakładki</string>
+  <string name="desc_language_America">Ameryka</string>
+  <string name="desc_language_Europe">Europa</string>
+  <string name="desc_language_Middle_East">Bliski Wschód</string>
+  <string name="desc_language_Africa">Afryka</string>
+  <string name="desc_language_Asia">Azja</string>
 </resources>

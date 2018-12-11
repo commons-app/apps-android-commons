@@ -14,6 +14,7 @@ import android.support.design.widget.BottomSheetBehavior;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AlertDialog;
+import android.util.Log;
 import android.view.LayoutInflater;
 
 import android.view.View;
@@ -64,8 +65,6 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
     LinearLayout bottomSheetDetails;
     @BindView(R.id.transparentView)
     View transparentView;
-    @BindView(R.id.fab_recenter)
-    View fabRecenter;
 
     @Inject
     LocationServiceManager locationManager;
@@ -87,16 +86,19 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
 
     private LatLng curLatLng;
     private Disposable placesDisposable;
+    private Disposable placesDisposableCustom;
     private boolean lockNearbyView; //Determines if the nearby places needs to be refreshed
     public View view;
     private Snackbar snackbar;
 
     private LatLng lastKnownLocation;
+    private LatLng customLatLng;
 
     private final String NETWORK_INTENT_ACTION = "android.net.conn.CONNECTIVITY_CHANGE";
     private BroadcastReceiver broadcastReceiver;
 
     private boolean onOrientationChanged = false;
+    private boolean populateForCurrentLocation = false;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -216,24 +218,27 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
 
     @Override
     public void onLocationChangedSignificantly(LatLng latLng) {
-        refreshView(LOCATION_SIGNIFICANTLY_CHANGED);
+            refreshView(LOCATION_SIGNIFICANTLY_CHANGED);
     }
 
     @Override
     public void onLocationChangedSlightly(LatLng latLng) {
-        refreshView(LOCATION_SLIGHTLY_CHANGED);
+            refreshView(LOCATION_SLIGHTLY_CHANGED);
     }
 
 
     @Override
     public void onLocationChangedMedium(LatLng latLng) {
         // For nearby map actions, there are no differences between 500 meter location change (aka medium change) and slight change
-        refreshView(LOCATION_SLIGHTLY_CHANGED);
+            refreshView(LOCATION_SLIGHTLY_CHANGED);
     }
 
     @Override
     public void onWikidataEditSuccessful() {
-        refreshView(MAP_UPDATED);
+        // Do not refresh nearby map if we are checking other areas with search this area button
+        if (!nearbyMapFragment.searchThisAreaModeOn) {
+            refreshView(MAP_UPDATED);
+        }
     }
 
     /**
@@ -241,7 +246,7 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
      *
      * @param locationChangeType defines if location shanged significantly or slightly
      */
-    private void refreshView(LocationServiceManager.LocationChangeType locationChangeType) {
+    public void refreshView(LocationServiceManager.LocationChangeType locationChangeType) {
         Timber.d("Refreshing nearby places");
         if (lockNearbyView) {
             return;
@@ -257,9 +262,11 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
 
         if (curLatLng != null && curLatLng.equals(lastLocation)
                 && !locationChangeType.equals(MAP_UPDATED)) { //refresh view only if location has changed
+            // Two exceptional cases to refresh nearby map manually.
             if (!onOrientationChanged) {
                 return;
             }
+
         }
         curLatLng = lastLocation;
 
@@ -292,7 +299,7 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
             bundle.putString("CurLatLng", gsonCurLatLng);
 
             placesDisposable = Observable.fromCallable(() -> nearbyController
-                    .loadAttractionsFromLocation(curLatLng, false))
+                    .loadAttractionsFromLocation(curLatLng, curLatLng, false, true))
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe(this::populatePlaces,
@@ -301,6 +308,7 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
                                 showErrorMessage(getString(R.string.error_fetching_nearby_places));
                                 progressBar.setVisibility(View.GONE);
                             });
+
         } else if (locationChangeType
                 .equals(LOCATION_SLIGHTLY_CHANGED)) {
             Gson gson = new GsonBuilder()
@@ -308,7 +316,62 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
                     .create();
             String gsonCurLatLng = gson.toJson(curLatLng);
             bundle.putString("CurLatLng", gsonCurLatLng);
-            updateMapFragment(true);
+            updateMapFragment(false,true, null, null);
+        }
+
+        if (nearbyMapFragment != null) {
+            nearbyMapFragment.searchThisAreaButton.setVisibility(View.GONE);
+        }
+    }
+
+    /**
+     * This method should be used with "Search this are button". This method will search nearby
+     * points around any custom location (target location when user clicked on search this area)
+     * button. It populates places for custom location.
+     * @param customLatLng Custom area which we will search around
+     */
+    public void refreshViewForCustomLocation(LatLng customLatLng, boolean refreshForCurrentLocation) {
+
+        if (customLatLng == null) {
+            // If null, return
+            return;
+        }
+
+        populateForCurrentLocation = refreshForCurrentLocation;
+        this.customLatLng = customLatLng;
+        placesDisposableCustom = Observable.fromCallable(() -> nearbyController
+                .loadAttractionsFromLocation(curLatLng, customLatLng, false, populateForCurrentLocation))
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(this::populatePlacesFromCustomLocation,
+                        throwable -> {
+                            Timber.d(throwable);
+                            showErrorMessage(getString(R.string.error_fetching_nearby_places));
+                        });
+
+        if (nearbyMapFragment != null) {
+            nearbyMapFragment.searchThisAreaButton.setVisibility(View.GONE);
+        }
+    }
+
+    /**
+     * Populates places for custom location, should be used for finding nearby places around a
+     * location where you are not at.
+     * @param nearbyPlacesInfo This variable has place list information and distances.
+     */
+    private void populatePlacesFromCustomLocation(NearbyController.NearbyPlacesInfo nearbyPlacesInfo) {
+        //NearbyMapFragment nearbyMapFragment = getMapFragment();
+        if (nearbyMapFragment != null) {
+            nearbyMapFragment.searchThisAreaButtonProgressBar.setVisibility(View.GONE);
+        }
+
+        if (nearbyMapFragment != null && curLatLng != null) {
+            if (!populateForCurrentLocation) {
+                nearbyMapFragment.updateMapSignificantlyForCustomLocation(customLatLng, nearbyPlacesInfo.placeList);
+            } else {
+                updateMapFragment(true,true, customLatLng, nearbyPlacesInfo);
+            }
+            updateListFragmentForCustomLocation(nearbyPlacesInfo.placeList);
         }
     }
 
@@ -342,7 +405,7 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
         } else {
             // There are fragments, just update the map and list
             Timber.d("Map fragment already exists, just update the map and list");
-            updateMapFragment(false);
+            updateMapFragment(false,false, null, null);
             updateListFragment();
         }
     }
@@ -364,7 +427,11 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
         }
     }
 
-    private void updateMapFragment(boolean isSlightUpdate) {
+    private void updateMapFragment(boolean updateViaButton, boolean isSlightUpdate, @Nullable LatLng customLatLng, @Nullable NearbyController.NearbyPlacesInfo nearbyPlacesInfo) {
+
+        if (nearbyMapFragment.searchThisAreaModeOn) {
+            return;
+        }
         /*
         Significant update means updating nearby place markers. Slightly update means only
         updating current location marker and camera target.
@@ -380,14 +447,14 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
              * If we are close to nearby places boundaries, we need a significant update to
              * get new nearby places. Check order is south, north, west, east
              * */
-            if (nearbyMapFragment.boundaryCoordinates != null
+            if (nearbyMapFragment.boundaryCoordinates != null && !nearbyMapFragment.searchThisAreaModeOn
                     && (curLatLng.getLatitude() <= nearbyMapFragment.boundaryCoordinates[0].getLatitude()
                     || curLatLng.getLatitude() >= nearbyMapFragment.boundaryCoordinates[1].getLatitude()
                     || curLatLng.getLongitude() <= nearbyMapFragment.boundaryCoordinates[2].getLongitude()
                     || curLatLng.getLongitude() >= nearbyMapFragment.boundaryCoordinates[3].getLongitude())) {
                 // populate places
                 placesDisposable = Observable.fromCallable(() -> nearbyController
-                        .loadAttractionsFromLocation(curLatLng, false))
+                        .loadAttractionsFromLocation(curLatLng, curLatLng, false, updateViaButton))
                         .subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())
                         .subscribe(this::populatePlaces,
@@ -397,8 +464,13 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
                                     progressBar.setVisibility(View.GONE);
                                 });
                 nearbyMapFragment.setBundleForUpdtes(bundle);
-                nearbyMapFragment.updateMapSignificantly();
+                nearbyMapFragment.updateMapSignificantlyForCurrentLocation();
                 updateListFragment();
+                return;
+            }
+
+            if (updateViaButton) {
+                nearbyMapFragment.updateMapSignificantlyForCustomLocation(customLatLng, nearbyPlacesInfo.placeList);
                 return;
             }
 
@@ -416,7 +488,7 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
                 nearbyMapFragment.updateMapSlightly();
             } else {
                 nearbyMapFragment.setBundleForUpdtes(bundle);
-                nearbyMapFragment.updateMapSignificantly();
+                nearbyMapFragment.updateMapSignificantlyForCurrentLocation();
                 updateListFragment();
             }
         } else {
@@ -431,6 +503,15 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
     private void updateListFragment() {
         nearbyListFragment.setBundleForUpdates(bundle);
         nearbyListFragment.updateNearbyListSignificantly();
+    }
+
+    /**
+     * Updates nearby list for custom location, will be used with search this area method. When you
+     * want to search for a place where you are not at.
+     * @param placeList List of places around your manually chosen target location from map.
+     */
+    private void updateListFragmentForCustomLocation(List<Place> placeList) {
+        nearbyListFragment.updateNearbyListSignificantlyForCustomLocation(placeList);
     }
 
     /**
@@ -649,6 +730,9 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
         super.onDestroy();
         if (placesDisposable != null) {
             placesDisposable.dispose();
+        }
+        if (placesDisposableCustom != null) {
+            placesDisposableCustom.dispose();
         }
     }
 
