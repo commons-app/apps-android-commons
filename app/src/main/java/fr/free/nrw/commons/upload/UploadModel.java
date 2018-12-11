@@ -130,9 +130,9 @@ public class UploadModel {
                         .map(b -> b ? ImageUtils.IMAGE_DUPLICATE : ImageUtils.IMAGE_OK),
                 Single.fromCallable(() ->
                         filePath)
-                        .map(FileUtils::getGeolocation)
-                        .map(ImageUtils::checkImageGeolocationIsDifferent)
-                        .map(b -> b ? ImageUtils.IMAGE_GEOLOCATION_DIFFERENT : ImageUtils.IMAGE_OK),
+                        .map(FileUtils::getGeolocationOfFile)
+                        .map(geoLocation -> ImageUtils.checkImageGeolocationIsDifferent(geoLocation,wikidataItemLocation))
+                        .map(r -> r ? ImageUtils.IMAGE_GEOLOCATION_DIFFERENT : ImageUtils.IMAGE_OK),
                 Single.fromCallable(() ->
                         new FileInputStream(filePath))
                         .map(file -> BitmapRegionDecoder.newInstance(file, false))

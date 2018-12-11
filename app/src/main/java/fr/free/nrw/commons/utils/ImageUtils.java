@@ -26,6 +26,7 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
 import fr.free.nrw.commons.R;
+import fr.free.nrw.commons.location.LatLng;
 import timber.log.Timber;
 
 /**
@@ -96,13 +97,28 @@ public class ImageUtils {
     }
 
     /**
-     * @param geolocation Geolocation of image. If geotag doesn't exists, then this will be an empty string
+     * @param geolocationOfFileString Geolocation of image. If geotag doesn't exists, then this will be an empty string
      * @return IMAGE_OK if image is neither dark nor blurry or if the input bitmapRegionDecoder provided is null
      * IMAGE_GEOLOCATION_DIFFERENT if geolocation of the image and
      */
-    public static boolean checkImageGeolocationIsDifferent(String geolocation) {
-        Log.d("deneme","checkking for image location");
-        return true;
+    public static boolean checkImageGeolocationIsDifferent(String geolocationOfFileString, String wikidataItemLocationString) {
+        Log.d("deneme","checkking for image location:"+geolocationOfFileString+" ** wikidataItem location:"+wikidataItemLocationString);
+        if (geolocationOfFileString == null || geolocationOfFileString == "") { // Means that geolocation for this image is not given
+            return false; // Since we don't know geolocation of file, we choose letting upload
+        }
+
+        String[] geolocationOfFile = geolocationOfFileString.split("\\|");
+        String[] wikidataItemLocation = wikidataItemLocationString.split("/");
+        Log.d("deneme","geolocation:"+geolocationOfFile[0]+" 1:"+geolocationOfFile[1]);
+        Double distance = LengthUtils.computeDistanceBetween(
+                new LatLng(Double.parseDouble(geolocationOfFile[0]),Double.parseDouble(geolocationOfFile[1]),0)
+                , new LatLng(Double.parseDouble(wikidataItemLocation[0]), Double.parseDouble(wikidataItemLocation[1]),0));
+        Log.d("deneme","distance is:"+distance);
+        if ( distance >= 1000 ) {// Distance is more than 1 km, means that geolocation is wrong
+            return true;
+        } else {
+            return false;
+        }
     }
 
     private static boolean checkIfImageIsDark(Bitmap bitmap) {

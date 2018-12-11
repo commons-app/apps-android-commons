@@ -82,7 +82,7 @@ public class FileUtils {
     /**
      * Get Geolocation of file from input stream
      */
-    static String getGeolocation(String filePath) {
+    static String getGeolocationOfFile(String filePath) {
 
         try {
             ExifInterface exifInterface=new ExifInterface(filePath);
