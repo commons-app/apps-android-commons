@@ -286,7 +286,13 @@ public class NearbyMapFragment extends DaggerFragment {
     private void selectNearestMarker()
     {
         if (baseMarkerOptions != null){
-            mapboxMap.selectMarker(baseMarkerOptions.get(0).getMarker());
+            NearbyMarker nearbymarker = baseMarkerOptions.get(0).getMarker();
+            this.selected = nearbymarker;
+            Place place = nearbymarker.getNearbyBaseMarker().getPlace();
+            passInfoToSheet(place);
+            bottomSheetListBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
+            bottomSheetDetailsBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
+            mapboxMap.selectMarker(nearbymarker);
         }
     }
 
