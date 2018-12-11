@@ -117,7 +117,6 @@ public class UploadModel {
         FileProcessor fp = new FileProcessor(filePath, context.getContentResolver(), context);
         UploadItem item = new UploadItem(uri, mimeType, source, fp.processFileCoordinates(similarImageInterface),
                 FileUtils.getFileExt(filePath), wikidataEntityIdPref,fileCreatedDate);
-        Log.d("deneme","wikidate entity id preference"+wikidataEntityIdPref);
         item.title.setTitleText(title);
         item.descriptions.get(0).setDescriptionText(desc);
         //TODO figure out if default descriptions in other languages exist

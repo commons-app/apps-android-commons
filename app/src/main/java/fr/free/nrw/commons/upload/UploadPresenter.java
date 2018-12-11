@@ -250,7 +250,6 @@ public class UploadPresenter {
      * @param result the result returned by the image procesors.
      */
     private void handleBadPicture(@ImageUtils.Result int result) {
-        Log.d("deneme","result:"+result);
         view.showBadPicturePopup(result);
     }
 
