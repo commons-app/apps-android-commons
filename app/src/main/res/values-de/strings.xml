@@ -407,6 +407,7 @@
   <string name="yes_submit">Ja, einreichen</string>
   <string name="no_go_back">Nein, zurück gehen</string>
   <string name="upload_flow_all_images_in_set">(für alle Bilder im Satz)</string>
+  <string name="search_this_area">Diesen Bereich durchsuchen</string>
   <string name="nearby_card_permission_title">Berechtigungsanfrage</string>
   <string name="nearby_card_permission_explanation">Dürfen wir deinen aktuellen Standort verwenden, um den nächsten Ort anzuzeigen, der Bilder benötigt?</string>
   <string name="unable_to_display_nearest_place">Der nächste Ort, der Bilder benötigt, kann ohne Standortberechtigungen nicht angezeigt werden.</string>

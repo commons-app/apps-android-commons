@@ -60,7 +60,7 @@
   <string name="provider_contributions">Yüklemelerim</string>
   <string name="menu_share">Paylaş</string>
   <string name="menu_open_in_browser">Tarayıcıda görüntüle</string>
-  <string name="share_title_hint" fuzzy="true">Başlık</string>
+  <string name="share_title_hint">Başlık (Zorunlu)</string>
   <string name="add_title_toast">Lütfen bu dosya için bir başlık ekleyin</string>
   <string name="share_description_hint">Açıklama</string>
   <string name="login_failed_network">Oturum açılamıyor - ağ hatası</string>
@@ -81,10 +81,10 @@
   <string name="gps_disabled">GPS, cihazınızda devre dışı bırakılmıştır. Etkinleştirmek ister misiniz?</string>
   <string name="enable_gps">GPS\'i etkinleştir</string>
   <string name="contributions_subtitle_zero">Henüz yüklenmedi</string>
-  <plurals name="contributions_subtitle" fuzzy="true">
+  <plurals name="contributions_subtitle">
     <item quantity="zero">\@string/contributions_subtitle_zero</item>
-    <item quantity="one">%1$d yükleme</item>
-    <item quantity="other">%1$d yükleme</item>
+    <item quantity="one">(%1$d</item>
+    <item quantity="other">(%1$d)</item>
   </plurals>
   <plurals name="starting_multiple_uploads">
     <item quantity="one">%1$d yüklenmeye başlanıyor</item>
@@ -180,6 +180,7 @@
   <string name="title_activity_nearby">Yakındaki yerler</string>
   <string name="no_nearby">Yakınlardaki yer bulunamadı</string>
   <string name="warning">Uyarı</string>
+  <string name="upload_image_duplicate">Bu dosya Commons\'ta zaten var. Devam etmek istediğine emin misin?</string>
   <string name="yes">Evet</string>
   <string name="no">Hayır</string>
   <string name="media_detail_title">Başlık</string>
@@ -241,9 +242,15 @@
   <string name="error_while_cache">Resimler önbelleğe alınırken hata oluştu</string>
   <string name="title_info">Dosya için dosya adı olarak kullanılacak benzersiz açıklayıcı bir başlık olmalıdır. Boşluk bırakarak sade bir dil kullanabilirsiniz. Dosya uzantısını dahil etmeyin</string>
   <string name="description_info">Lütfen medyayı mümkün olduğunca açıklayın: Nerede çekildi? Ne gösteriyor? Bağlam nedir? Lütfen nesneleri veya kişileri tanımlayın. Kolay tahmin edilemeyen bilgileri açıklayın, örneğin bir manzara ise günün saatini belirtin. Medya alışılmadık bir şey gösteriyorsa lütfen olağandışı yapan şeyleri açıklayın.</string>
+  <string name="upload_image_too_dark">Bu fotoğraf çok karanlık, yine de yüklemek istiyor musunuz? Wikimedia Commons yalnızca ansiklopedik değeri olan fotoğraflar içindir.</string>
+  <string name="upload_image_blurry">Bu fotoğraf bulanık, yine de yüklemek istiyor musunuz? Wikimedia Commons yalnızca ansiklopedik değeri olan fotoğraflar içindir.</string>
   <string name="upload_image_problem_duplicate">Bu dosya zaten Commons\'da var. Devam etmek istediğinizden emin misiniz?</string>
   <string name="upload_image_problem_dark">Bu fotoğraf çok karanlık, yine de yüklemek istiyor musunuz? Wikimedia Commons yalnızca ansiklopedik değeri olan fotoğraflar içindir.</string>
   <string name="upload_image_problem_blurry">Bu fotoğraf bulanık, yine de yüklemek istiyor musunuz? Wikimedia Commons yalnızca ansiklopedik değeri olan fotoğraflar içindir.</string>
+  <string name="upload_image_problem_dark_duplicate">Bu resim çok karanlık ve Commons\'ta zaten var, yüklemek istediğinize emin misiniz? Lütfen sadece ansiklopedik değeri olan resimleri yükleyin.</string>
+  <string name="upload_image_problem_blurry_duplicate">Bu resim bulanık ve Commons\'ta zaten var, yüklemek istediğinize emin misiniz? Lütfen sadece ansiklopedik değeri olan resimleri yükleyin.</string>
+  <string name="upload_image_problem_dark_blurry">Bu resim çok karanlık ve bulanık, yüklemek istediğinize emin misiniz? Lütfen sadece ansiklopedik değeri olan resimleri yükleyin.</string>
+  <string name="upload_image_problem_dark_blurry_duplicate">Bu resim çok karanlık, bulanık ve Commons\'ta zaten var, yüklemek istediğinize emin misiniz? Lütfen sadece ansiklopedik değeri olan resimleri yükleyin.</string>
   <string name="give_permission">İzin ver</string>
   <string name="use_external_storage">Harici depolamayı kullanın</string>
   <string name="use_external_storage_summary">Uygulama kamerası kullanıldığında çekilen fotoğrafları cihazına kaydedin</string>
@@ -338,6 +345,7 @@
   <string name="add_description">+ Açıklama ekle</string>
   <string name="delete_recent_searches_dialog">Arama geçmişinizi silmek istediğinize emin misiniz?</string>
   <string name="search_history_deleted">Arama geçmişi silindi</string>
+  <string name="nominate_delete">Silinmeye aday göster</string>
   <string name="Achievements">Başarılar</string>
   <string name="statistics">İSTATİSTİKLER</string>
   <string name="statistics_thanks">Alınan Teşekkürler</string>
@@ -354,8 +362,21 @@
   <string name="images_used_explanation">Wikimedia makalelerinde kullanılan Commons\'a yüklediğiniz görüntü sayısı</string>
   <string name="error_occurred">Hata oluştu!</string>
   <string name="notifications_channel_name_all">Commons Bildirimi</string>
+  <string name="contributions_fragment">Katkılar</string>
+  <string name="nearby_fragment">Yakınındakiler</string>
+  <string name="notifications">Bildirimler</string>
+  <string name="display_nearby_notification">Yakındaki bildirimi görüntüle</string>
+  <string name="display_nearby_notification_summary">Resimlere en yakın yeri görmek için buraya dokunun</string>
+  <string name="no_close_nearby">Size yakın bir yer bulunamadı</string>
+  <string name="list_sheet">Liste</string>
   <string name="storage_permission">Depolama İzni</string>
   <string name="write_storage_permission_rationale_for_image_share">Görüntüleri yüklemek için cihazınızın harici belleğine erişim iznine sahip olmamız gerekiyor.</string>
+  <string name="nearby_notification_dismiss_message">Artık size en yakın yerleri görmeyeceksiniz. Ancak, isterseniz bu bildirimi Ayarlar\'da yeniden etkinleştirebilirsiniz.</string>
+  <string name="step_count">Aşama %1$d/%2$d</string>
+  <string name="image_in_set_label">Resim %1$d kayıtta</string>
+  <string name="next">Sıradaki</string>
+  <string name="previous">Önceki</string>
+  <string name="submit">Gönder</string>
   <string name="navigation_item_bookmarks">Yer imleri</string>
   <string name="title_activity_bookmarks">Yer imleri</string>
   <string name="title_page_bookmarks_pictures">Resim</string>
@@ -365,5 +386,20 @@
   <string name="bookmark_empty">Henüz yer imlerine bir şey eklemediniz</string>
   <string name="provider_bookmarks_location">Yer imleri</string>
   <string name="log_collection_started">Günlük koleksiyonu başlatıldı. Lütfen uygulamayı YENİDEN BAŞLATIN, günlüğe kaydetmek istediğiniz eylemi gerçekleştirin ve ardından \'Günlüğü Gönder\'e tekrar dokunun.</string>
+  <string name="used_by">,kullanılan</string>
+  <string name="articles">maddeler</string>
   <string name="no_uploads">Commons\'a Hoş Geldiniz!\n\nYukarıdaki kamera ya da galeri simgesine dokunarak ilk medyanızı yükleyin.</string>
+  <string name="desc_language_Worldwide">Dünya çapında</string>
+  <string name="desc_language_America">Amerika</string>
+  <string name="desc_language_Europe">Avrupa</string>
+  <string name="desc_language_Middle_East">Orta Doğu</string>
+  <string name="desc_language_Africa">Afrika</string>
+  <string name="desc_language_Asia">Asya</string>
+  <string name="desc_language_Pacific">Pasifik</string>
+  <string name="no_categories_selected">Kategori Seçilmedi</string>
+  <string name="yes_submit">Evet, Gönder</string>
+  <string name="no_go_back">Hayır, Geri Dön</string>
+  <string name="nearby_card_permission_title">Yetki İsteği</string>
+  <string name="never_ask_again">Bunu bir daha sorma</string>
+  <string name="display_location_permission_title">Yerleşim iznini görüntüle</string>
 </resources>

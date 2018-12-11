@@ -303,4 +303,5 @@
   <string name="desc_language_Pacific">Pacifico</string>
   <string name="no_categories_selected">Nessuna categoria selezionata</string>
   <string name="yes_submit">Sì, invia</string>
+  <string name="search_this_area">Cerca in questa area</string>
 </resources>
