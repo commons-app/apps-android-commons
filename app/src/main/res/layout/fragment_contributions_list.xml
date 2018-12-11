@@ -91,13 +91,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
-            android:gravity="center_vertical"
+            android:layout_margin="8dp"
             android:clickable="true"
+            android:gravity="center_vertical"
             android:visibility="visible"
             app:backgroundTint="@color/status_bar_blue"
             app:elevation="12dp"
             app:fabSize="normal"
-            android:layout_margin="8dp"
             app:pressedTranslationZ="12dp"
             app:srcCompat="@drawable/ic_add_white_24dp" />
 
