@@ -239,18 +239,18 @@
   <string name="upload_image_problem_duplicate">This file already exists on Commons. Are you sure you want to proceed?</string>
   <string name="upload_image_problem_dark">This picture is too dark, are you sure you want to upload it? Wikimedia Commons is only for pictures with encyclopedic value.</string>
   <string name="upload_image_problem_blurry">This picture is blurry, are you sure you want to upload it? Wikimedia Commons is only for pictures with encyclopedic value.</string>
-  <string name="upload_image_problem_wrong_location">This picture is taken on another location, are you sure you want to upload for this place?</string>
-  <string name="upload_image_problem_wrong_location_dark">This picture is too dark and taken on another location, are you sure you want to upload for this place? Wikimedia Commons is only for pictures with encyclopedic value.</string>
-  <string name="upload_image_problem_wrong_location_duplicate">This picture is already exists on Commons and taken on another location, are you sure you want to upload for this place? Wikimedia Commons is only for pictures with encyclopedic value.</string>
-  <string name="upload_image_problem_wrong_location_blurry">This picture is blurry and taken on another location, are you sure you want to upload for this place? Wikimedia Commons is only for pictures with encyclopedic value.</string>
+  <string name="upload_image_problem_wrong_location">This picture is taken at another location, are you sure you want to upload for this place?</string>
+  <string name="upload_image_problem_wrong_location_dark">This picture is too dark and taken at another location, are you sure you want to upload for this place? Wikimedia Commons is only for pictures with encyclopedic value.</string>
+  <string name="upload_image_problem_wrong_location_duplicate">This picture is already exists on Commons and taken at another location, are you sure you want to upload for this place? Wikimedia Commons is only for pictures with encyclopedic value.</string>
+  <string name="upload_image_problem_wrong_location_blurry">This picture is blurry and taken at another location, are you sure you want to upload for this place? Wikimedia Commons is only for pictures with encyclopedic value.</string>
   <string name="upload_image_problem_dark_duplicate">This picture is too dark and already exists on Commons, are you sure you want to upload it? Please only upload pictures with encyclopedic value.</string>
-  <string name="upload_image_problem_dark_duplicate_wrong_location">This picture is too dark, duplicate and taken on another location, are you sure you want to upload it, for this place?</string>
+  <string name="upload_image_problem_dark_duplicate_wrong_location">This picture is too dark, duplicate and taken at another location, are you sure you want to upload it, for this place?</string>
   <string name="upload_image_problem_blurry_duplicate">This picture is blurry and already exists on Commons, are you sure you want to upload it? Please only upload pictures with encyclopedic value.</string>
-  <string name="upload_image_problem_blurry_duplicate_wrong_location">This picture is blurry, duplicate and taken on another location, are you sure you want to upload it, for this place?</string>
+  <string name="upload_image_problem_blurry_duplicate_wrong_location">This picture is blurry, duplicate and taken at another location, are you sure you want to upload it, for this place?</string>
   <string name="upload_image_problem_dark_blurry">This picture is too dark and is blurry, are you sure you want to upload it? Please only upload pictures with encyclopedic value.</string>
-  <string name="upload_image_problem_dark_blurry_wrong_location">This picture is too dark, blurry and is taken on another location, are you sure you want to upload it, for this place?</string>
+  <string name="upload_image_problem_dark_blurry_wrong_location">This picture is too dark, blurry and is taken at another location, are you sure you want to upload it, for this place?</string>
   <string name="upload_image_problem_dark_blurry_duplicate">This picture is too dark, is blurry and already exists on Commons, are you sure you want to upload it? Please only upload pictures with encyclopedic value.</string>
-  <string name="upload_image_problem_dark_blurry_duplicate_wrong_location">This picture is too dark, blurry, duplicate and is taken on another location, are you sure you want to upload it, for this place?</string>
+  <string name="upload_image_problem_dark_blurry_duplicate_wrong_location">This picture is too dark, blurry, duplicate and is taken at another location, are you sure you want to upload it, for this place?</string>
 
   <string name="give_permission">Give permission</string>
   <string name="use_external_storage">Use external storage</string>
