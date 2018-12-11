@@ -80,7 +80,7 @@ public class FileUtils {
     }
 
     /**
-     * Get Geolocation of file from input stream
+     * Get Geolocation of file from input file path
      */
     static String getGeolocationOfFile(String filePath) {
 
