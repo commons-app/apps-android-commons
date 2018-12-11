@@ -134,12 +134,6 @@ public class NotificationActivity extends NavigationBaseActivity {
         recyclerView.setAdapter(adapter);
     }
 
-    public static void startYourself(Context context) {
-        Intent intent = new Intent(context, NotificationActivity.class);
-        intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-        context.startActivity(intent);
-    }
-
     private void initializeAndSetNotificationList(List<Notification> notificationList){
         FragmentManager fm = getFragmentManager();
         mNotificationWorkerFragment = new NotificationWorkerFragment();
@@ -147,10 +141,4 @@ public class NotificationActivity extends NavigationBaseActivity {
                 .commit();
         mNotificationWorkerFragment.setNotificationList(notificationList);
     }
-
-    @Override
-    public void onBackPressed() {
-        startActivityWithFlags(
-                this, MainActivity.class, Intent.FLAG_ACTIVITY_CLEAR_TOP,
-                Intent.FLAG_ACTIVITY_SINGLE_TOP);    }
 }

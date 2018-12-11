@@ -217,7 +217,7 @@ public abstract class NavigationBaseActivity extends BaseActivity
                 return true;
             case R.id.action_notifications:
                 drawerLayout.closeDrawer(navigationView);
-                NotificationActivity.startYourself(this);
+                startActivityWithFlags(this, NotificationActivity.class, Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
                 return true;
             case R.id.action_explore:
                 drawerLayout.closeDrawer(navigationView);

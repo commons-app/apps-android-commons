@@ -321,8 +321,7 @@ public class MainActivity extends AuthenticatedActivity implements FragmentManag
         switch (item.getItemId()) {
             case R.id.notifications:
                 // Starts notification activity on click to notification icon
-                NavigationBaseActivity.startActivityWithFlags(this, NotificationActivity.class, Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                finish();
+                NavigationBaseActivity.startActivityWithFlags(this, NotificationActivity.class, Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
                 return true;
 
             case R.id.list_sheet:
