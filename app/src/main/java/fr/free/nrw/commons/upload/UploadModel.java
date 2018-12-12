@@ -65,7 +65,7 @@ public class UploadModel {
                 MediaWikiApi mwApi) {
         this.licenses = licenses;
         this.prefs = prefs;
-        this.license = Prefs.Licenses.CC_BY_SA_3;
+        this.license = prefs.getString(Prefs.DEFAULT_LICENSE, Prefs.Licenses.CC_BY_SA_3);
         this.licensesByName = licensesByName;
         this.context = context;
         this.mwApi = mwApi;
@@ -300,7 +300,7 @@ public class UploadModel {
     }
 
     String getSelectedLicense() {
-        return license;
+        return prefs.getString(Prefs.DEFAULT_LICENSE, Prefs.Licenses.CC_BY_SA_3);
     }
 
     void setSelectedLicense(String licenseName) {
