@@ -85,5 +85,9 @@ public class RecentSearchesFragment extends CommonsDaggerSupportFragment {
         adapter = new ArrayAdapter<String>(getContext(),R.layout.item_recent_searches, recentSearches);
         recentSearchesList.setAdapter(adapter);
         adapter.notifyDataSetChanged();
+
+        if(!recentSearches.isEmpty()) {
+            recent_searches_delete_button.setVisibility(View.VISIBLE);
+        }
     }
 }
