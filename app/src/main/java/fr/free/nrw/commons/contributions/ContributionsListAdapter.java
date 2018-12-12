@@ -3,6 +3,7 @@ package fr.free.nrw.commons.contributions;
 import android.content.Context;
 import android.database.Cursor;
 import android.support.v4.widget.CursorAdapter;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -37,20 +38,40 @@ class ContributionsListAdapter extends CursorAdapter {
         views.seqNumView.setText(String.valueOf(cursor.getPosition() + 1));
         views.seqNumView.setVisibility(View.VISIBLE);
 
+        views.retryButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.d("deneme","Retry button is clicked");
+            }
+        });
+
+        views.cancelButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.d("deneme","Cancel button is clicked");
+            }
+        });
+
         switch (contribution.getState()) {
             case Contribution.STATE_COMPLETED:
                 views.stateView.setVisibility(View.GONE);
                 views.progressView.setVisibility(View.GONE);
+                views.retryButton.setVisibility(View.GONE);
+                views.cancelButton.setVisibility(View.GONE);
                 views.stateView.setText("");
                 break;
             case Contribution.STATE_QUEUED:
                 views.stateView.setVisibility(View.VISIBLE);
                 views.progressView.setVisibility(View.GONE);
                 views.stateView.setText(R.string.contribution_state_queued);
+                views.retryButton.setVisibility(View.GONE);
+                views.cancelButton.setVisibility(View.GONE);
                 break;
             case Contribution.STATE_IN_PROGRESS:
                 views.stateView.setVisibility(View.GONE);
                 views.progressView.setVisibility(View.VISIBLE);
+                views.retryButton.setVisibility(View.GONE);
+                views.cancelButton.setVisibility(View.GONE);
                 long total = contribution.getDataLength();
                 long transferred = contribution.getTransferred();
                 if (transferred == 0 || transferred >= total) {
@@ -63,6 +84,8 @@ class ContributionsListAdapter extends CursorAdapter {
                 views.stateView.setVisibility(View.VISIBLE);
                 views.stateView.setText(R.string.contribution_state_failed);
                 views.progressView.setVisibility(View.GONE);
+                views.retryButton.setVisibility(View.VISIBLE);
+                views.cancelButton.setVisibility(View.VISIBLE);
                 break;
         }
     }

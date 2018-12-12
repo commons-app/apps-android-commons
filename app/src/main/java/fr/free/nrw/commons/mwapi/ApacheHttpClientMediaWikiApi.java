@@ -8,6 +8,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.VisibleForTesting;
 import android.text.TextUtils;
+import android.util.Log;
 
 import com.google.gson.Gson;
 
@@ -897,6 +898,7 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
 
         if (!resultStatus.equals("Success")) {
             String errorCode = result.getString("/api/error/@code");
+            Log.d("deneme","error code: "+errorCode);
             Timber.e(errorCode);
             return new UploadResult(resultStatus, errorCode);
         } else {
