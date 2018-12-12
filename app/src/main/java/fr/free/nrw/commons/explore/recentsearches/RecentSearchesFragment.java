@@ -38,10 +38,16 @@ public class RecentSearchesFragment extends CommonsDaggerSupportFragment {
         View rootView = inflater.inflate(R.layout.fragment_search_history, container, false);
         ButterKnife.bind(this, rootView);
         recentSearches = recentSearchesDao.recentSearches(10);
+
+        if(recentSearches.isEmpty()) {
+            recent_searches_delete_button.setVisibility(View.GONE);
+        }
+
         recent_searches_delete_button.setOnClickListener(v -> new AlertDialog.Builder(getContext())
             .setMessage(getString(R.string.delete_recent_searches_dialog))
             .setPositiveButton(android.R.string.yes, (dialog, which) -> {
                 recentSearchesDao.deleteAll(recentSearches);
+                recent_searches_delete_button.setVisibility(View.GONE);
                 Toast.makeText(getContext(),getString(R.string.search_history_deleted),Toast.LENGTH_SHORT).show();
                 recentSearches = recentSearchesDao.recentSearches(10);
                 adapter = new ArrayAdapter<String>(getContext(),R.layout.item_recent_searches, recentSearches);
