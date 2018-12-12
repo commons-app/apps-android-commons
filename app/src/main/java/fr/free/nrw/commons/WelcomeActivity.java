@@ -93,15 +93,16 @@ public class WelcomeActivity extends BaseActivity {
         finishTutorial();
     }
 
+    /**
+     * Override onBackPressed() to go to previous tutorial 'pages' if not on first page
+     */
     @Override
     public void onBackPressed() {
-        // going back on tutorial, if at zero, finishing the tut.
         if (pager.getCurrentItem() != 0) {
             pager.setCurrentItem(pager.getCurrentItem() - 1, true);
         } else {
             finish();
         }
-
     }
 
     private void finishTutorial() {
