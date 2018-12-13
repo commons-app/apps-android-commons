@@ -189,16 +189,6 @@ public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment imple
                 // Set wallpaper
                 setWallpaper(m);
                 return true;
-            case R.id.menu_retry_current_image:
-                // Retry
-                //((MainActivity) getActivity()).retryUpload(pager.getCurrentItem());
-                getActivity().getSupportFragmentManager().popBackStack();
-                return true;
-            case R.id.menu_cancel_current_image:
-                // todo: delete image
-                //((MainActivity) getActivity()).deleteUpload(pager.getCurrentItem());
-                getActivity().getSupportFragmentManager().popBackStack();
-                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
@@ -279,8 +269,6 @@ public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment imple
                 Media m = provider.getMediaAtPosition(pager.getCurrentItem());
                 if (m != null) {
                     // Enable default set of actions, then re-enable different set of actions only if it is a failed contrib
-                    menu.findItem(R.id.menu_retry_current_image).setEnabled(false).setVisible(false);
-                    menu.findItem(R.id.menu_cancel_current_image).setEnabled(false).setVisible(false);
                     menu.findItem(R.id.menu_browser_current_image).setEnabled(true).setVisible(true);
                     menu.findItem(R.id.menu_share_current_image).setEnabled(true).setVisible(true);
                     menu.findItem(R.id.menu_download_current_image).setEnabled(true).setVisible(true);
@@ -297,8 +285,6 @@ public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment imple
                         Contribution c = (Contribution) m;
                         switch (c.getState()) {
                             case Contribution.STATE_FAILED:
-                                menu.findItem(R.id.menu_retry_current_image).setEnabled(true).setVisible(true);
-                                menu.findItem(R.id.menu_cancel_current_image).setEnabled(true).setVisible(true);
                                 menu.findItem(R.id.menu_browser_current_image).setEnabled(false).setVisible(false);
                                 menu.findItem(R.id.menu_share_current_image).setEnabled(false).setVisible(false);
                                 menu.findItem(R.id.menu_download_current_image).setEnabled(false).setVisible(false);
@@ -306,8 +292,6 @@ public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment imple
                                 break;
                             case Contribution.STATE_IN_PROGRESS:
                             case Contribution.STATE_QUEUED:
-                                menu.findItem(R.id.menu_retry_current_image).setEnabled(false).setVisible(false);
-                                menu.findItem(R.id.menu_cancel_current_image).setEnabled(false).setVisible(false);
                                 menu.findItem(R.id.menu_browser_current_image).setEnabled(false).setVisible(false);
                                 menu.findItem(R.id.menu_share_current_image).setEnabled(false).setVisible(false);
                                 menu.findItem(R.id.menu_download_current_image).setEnabled(false).setVisible(false);
