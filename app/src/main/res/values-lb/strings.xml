@@ -50,7 +50,7 @@
   <string name="provider_contributions">Meng eropgeluede Fichieren</string>
   <string name="menu_share">Deelen</string>
   <string name="menu_open_in_browser">Am Browser kucken</string>
-  <string name="share_title_hint">Titel</string>
+  <string name="share_title_hint">Titel (Obligatoresch)</string>
   <string name="share_description_hint">Beschreiwung</string>
   <string name="login_failed_network">Aloggen huet net funktionéiert - Feeler mam Reseau</string>
   <string name="login_failed_throttled">Ze dacks ouni Succès probéiert. Probéiert w.e.g. an e puer Minutten nach eng Kéier.</string>
@@ -67,7 +67,7 @@
   <string name="gps_disabled">GPS ass op Ärem Apparat ausgeschalt. Wëllt Dir en aktivéieren?</string>
   <string name="enable_gps">GPS aktivéieren</string>
   <string name="contributions_subtitle_zero">Nach keng eropgeluede Fichieren</string>
-  <plurals name="contributions_subtitle">
+  <plurals name="contributions_subtitle" fuzzy="true">
     <item quantity="zero">N@string/contributions_subtitle_zero</item>
     <item quantity="one">Ee Fichier eropgelueden</item>
     <item quantity="other">%1$d Fichieren eropgelueden</item>
@@ -161,7 +161,6 @@
   <string name="title_activity_nearby">Plazen nobäi</string>
   <string name="no_nearby">Keng Plazen nobäi fonnt</string>
   <string name="warning">Warnung</string>
-  <string name="file_exists">Dëse Fichier gëtt et schonn op Commons. Sidd Dir sécher datt Dir virufuere wëllt?</string>
   <string name="yes">Jo</string>
   <string name="no">Neen</string>
   <string name="media_detail_title">Titel</string>
@@ -213,6 +212,7 @@
   <string name="nearby_info_menu_commons_article">Commons-Fichierssäit</string>
   <string name="nearby_info_menu_wikidata_article">Wikidata-Element</string>
   <string name="nearby_info_menu_wikipedia_article">Wikipedia-Artikel</string>
+  <string name="upload_image_problem_duplicate">Dëse Fichier gëtt et schonn op Commons. Sidd Dir sécher datt Dir virufuere wëllt?</string>
   <string name="give_permission">Autorisatioun ginn</string>
   <string name="use_external_storage">Externe Späicher benotzen</string>
   <string name="use_external_storage_summary">Biller späicheren déi mat der in-app Kamera vun Ärem Apparat gemaach goufen</string>
@@ -267,6 +267,7 @@
   <string name="correct">Richteg Äntwert</string>
   <string name="wrong">Falsch Äntwert</string>
   <string name="add_description">+ Beschreiwung derbäisetzen</string>
+  <string name="nominate_delete">Nominéiere fir ze Läschen</string>
   <string name="Achievements">Realisatiounen</string>
   <string name="statistics">STATISTIKEN</string>
   <string name="statistics_thanks">Merci\'e kritt</string>
@@ -276,6 +277,14 @@
   <string name="image_reverts">Biller net zréckgesat</string>
   <string name="error_occurred">Feeler opgetrueden!</string>
   <string name="notifications_channel_name_all">Notifikatioun vu Commons</string>
+  <string name="contributions_fragment">Kontributiounen</string>
+  <string name="nearby_fragment">Nobäi</string>
+  <string name="notifications">Notifikatiounen</string>
+  <string name="list_sheet">Lëscht</string>
+  <string name="step_count">Schrëtt %1$d vu(n) %2$d</string>
+  <string name="next">Weider</string>
+  <string name="previous">Vireg</string>
+  <string name="submit">Späicheren</string>
   <string name="navigation_item_bookmarks">Lieszeechen</string>
   <string name="title_activity_bookmarks">Lieszeechen</string>
   <string name="title_page_bookmarks_pictures">Biller</string>
@@ -283,4 +292,19 @@
   <string name="provider_bookmarks">Lieszeechen</string>
   <string name="bookmark_empty">Dir hutt keng Lieszeechen derbäigesat</string>
   <string name="provider_bookmarks_location">Lieszeechen</string>
+  <string name="deletion_reason_uploaded_by_mistake">Ech hunn et iertemlech eropgelueden</string>
+  <string name="deletion_reason_publicly_visible">Ech wousst net datt et ëffentlech visibel wier</string>
+  <string name="deletion_reason_not_interesting">Pardon, dëst Bild ass net interessant fir eng Enzyklopedie</string>
+  <string name="articles">Artikelen</string>
+  <string name="desc_language_Worldwide">Weltwäit</string>
+  <string name="desc_language_America">Amerika</string>
+  <string name="desc_language_Europe">Europa</string>
+  <string name="desc_language_Middle_East">Mëttleren Osten</string>
+  <string name="desc_language_Africa">Afrika</string>
+  <string name="desc_language_Asia">Asien</string>
+  <string name="desc_language_Pacific">Pazifik</string>
+  <string name="no_categories_selected">Keng Kategorien erausgesicht</string>
+  <string name="yes_submit">Jo, schécken</string>
+  <string name="no_go_back">Neen, zréck goen</string>
+  <string name="never_ask_again">Dëst ni méi froen</string>
 </resources>

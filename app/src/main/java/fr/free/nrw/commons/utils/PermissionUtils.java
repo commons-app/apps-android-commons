@@ -9,7 +9,13 @@ import android.support.v4.content.ContextCompat;
 
 import fr.free.nrw.commons.CommonsApplication;
 
+
 public class PermissionUtils {
+
+    public static final int CAMERA_PERMISSION_FROM_CONTRIBUTION_LIST = 100;
+    public static final int GALLERY_PERMISSION_FROM_CONTRIBUTION_LIST = 101;
+    public static final int CAMERA_PERMISSION_FROM_NEARBY_MAP = 102;
+    public static final int GALLERY_PERMISSION_FROM_NEARBY_MAP = 103;
 
     /**
      * This method can be used by any activity which requires a permission which has been blocked(marked never ask again by the user)

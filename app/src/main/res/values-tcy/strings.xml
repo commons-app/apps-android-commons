@@ -51,7 +51,7 @@
   <string name="provider_contributions">ಎನ್ನ ದಿಂಜಯೀನಾ ವಿಚಾರೊಲು</string>
   <string name="menu_share">ಪಟ್ಟುಲೆ</string>
   <string name="menu_open_in_browser">ಬ್ರೌಸರ್‌ಡ್ ತೂಲೆ</string>
-  <string name="share_title_hint">ತರೆಬರವು</string>
+  <string name="share_title_hint" fuzzy="true">ತರೆಬರವು</string>
   <string name="add_title_toast">ದಯ ಮಾಲ್ತ್ ಈ ಫೈಲ್‌ಗ್ ಶೀರ್ಷಿಕೆನ್ ಒದಗಾಲೆ.</string>
   <string name="share_description_hint">ವಿವರಣೆ</string>
   <string name="login_failed_network">ಲಾಗಿನ್ ಅತುಜಿ - ನೆಟ್ವರ್ಕ್ ತಿಕೊಂತಿಜ್ಜಿ</string>
@@ -72,7 +72,7 @@
   <string name="gps_disabled">ಇರೇನಾ ಈ ಮೊಬೈಲ್ ಡ್ ಜಿಪಿಸ್ ವಜಾ ಅತುಂಡು. ಆಯಿನ್ ಬೇಲೆ</string>
   <string name="enable_gps">ಜಿಪಿಎಸ್ ಸಕ್ರಿಯ ಮಾಲ್ಪುಲೆ.</string>
   <string name="contributions_subtitle_zero">ಇಂದೆಟ್ ಒವೆ ಅಪ್ಲೋಡ್ ಇಜ್ಜಿ.</string>
-  <plurals name="contributions_subtitle">
+  <plurals name="contributions_subtitle" fuzzy="true">
     <item quantity="zero">\@string/contributions_subtitle_zero</item>
     <item quantity="one">%1$d upload</item>
     <item quantity="other">%1$d uploads</item>
@@ -171,7 +171,6 @@
   <string name="title_activity_nearby">ಕೈದಲ್ತಾ ಜಾಗೆಲು</string>
   <string name="no_nearby">ಮುಟ್ಟ ಇಪ್ಪುನ ಜಾಗೆ ತೋಜಾತ್ ಬರ್ಪುಜ್ಜಿ.</string>
   <string name="warning">ಎಚ್ಚರಿಕೆ</string>
-  <string name="file_exists">ಕಾಮನ್ಸ್‌ಡ್ತ್ ಇಂಚಿಗ್ ಈ ಫೈಲ್ ಅಸ್ತಿತ್ವಟ್ ಇಜ್ಜಿ. ದುಂಬು ಪೊಯರ ಇರ್ ಖಚಿತವಾತ್ ಬಯಸುವರಾ?</string>
   <string name="yes">ಅಂದ್</string>
   <string name="no">ಅತ್ತ್</string>
   <string name="media_detail_title">ತರೆಬರವು</string>
@@ -233,8 +232,9 @@
   <string name="error_while_cache">ಚಿತ್ರೊಲೆನ್ ಕ್ಯಾಶಿಂಗ್ ಮಾಲ್ಪುನಗ ದೋಷೊ.</string>
   <string name="title_info">ಫೈಲ್ಗಾತ್ ಒಂಜಿ ಬೇತೆ ವಿವರಣಾತ್ಮಕೊ ಪುದಾರ್, ಉಂದು ಫೈಲ್ ಪುದಾರ್ ಆತ್ ಕಾರ್ಯನಿರ್ವಹಣೆ ಅಪುಂಡು. ಇರೆನ ಜಾಗೆತೊಟ್ಟಗ್ ಸರಳ ಭಾಷೆನ್ ಬಲಕೆ ಮಾಪ್ಲೊಲಿ. ಫೈಲ್ ವಿಸ್ತರಣೆನ್ ಮಾಲ್ಪೊಲಿ.</string>
   <string name="description_info">ದಯಮಾಲ್ತ್ ಸಾಧ್ಯವಾಯಿನ ಮಾಧ್ಯಮಟ್ ವಿವರಣೆ ಕೊರ್ಲೆ: ಒಲ್ಪಾ ಅಯಿನ್ ದೆಪ್ಪೊಲಿ? ಉಂದೆನ್ ಎಂಚ ತೋಜಾವೊಲಿ? ಸನ್ನಿವೇಶ ಪಂಡದಾದ? ದಯಮಾಲ್ತ್ ವಸ್ತುಲು ಅತ್ತಂದೆ ವ್ಯಕ್ತಿಲು ಸುಲಭವಾತ್ ಊಹಿಸಲು ಸಾದ್ಯ ಇಜ್ಜಿ ಮಾಹಿತಿನ್ ಬಹಿರಂಗ ಮಾಲ್ಪುಲೆ, ಉದಾಹರಣೆಗ್ ಉಂದು ಭೂದೃಶ್ಯವಾತ್ ಇತ್ತಂಡ್ ದಿನೊತ ಸಮಯ. ಮಾಧ್ಯಮೊ ಅಸಾಮಾನ್ಯವಾತ್ ಇಪ್ಪುನಯಿನ್ ತೋಜಾತ್, ಅವು ಅಸಾಮಾನ್ಯವಾತ್ ವಿವರಣೆ ಇಪ್ಪು.</string>
-  <string name="upload_image_too_dark">ಈ ಚಿತ್ರೊ ತೀರ ಗಾಢವಾತ್, ಅಯಿನ್ ಅಪ್ಲೋಡ್ ಮಾಲ್ಪಿಯರ ಇರ್ ಖಚಿತವಾತ್ ಉಪ್ಪುವರಾ? ವಿಕಿಮೀಡಿಯ ಕಾಮನ್ಸ್ ಮಾತ್ರೊ ವಿಶ್ವಕೋಶತ ಮೌಲ್ಯದೊಂಟ್ಟ್‌ಗ್ ಚಿತ್ರೊನ್ ಹೊಂದಾಣಿಕೆ ಮಾಲ್ಪುಲೆ.</string>
-  <string name="upload_image_blurry">ಈ ಚಿತ್ರೊ ತೆಳುವಾಯಿನ, ಇರ್ ಅಯಿನ್ ಅಪ್ಲೋಡ್ ಮಾಲ್ಪಿಯರ ಖಚಿತವಾತ್ ಬಯಸುವರಾ? ವಿಕಿಮೀಡಿಯ ಕಾಮನ್ಸ್ ಮಾತ್ರೊ ವಿಶ್ವಕೋಶತ ಮೌಲ್ಯದೊಂಟ್ಟ್‌ಗ್ ಚಿತ್ರೊನ್ ಹೊಂದಾಣಿಕೆ ಮಾಲ್ಪುಲೆ.</string>
+  <string name="upload_image_problem_duplicate">ಕಾಮನ್ಸ್‌ಡ್ತ್ ಇಂಚಿಗ್ ಈ ಫೈಲ್ ಅಸ್ತಿತ್ವಟ್ ಇಜ್ಜಿ. ದುಂಬು ಪೊಯರ ಇರ್ ಖಚಿತವಾತ್ ಬಯಸುವರಾ?</string>
+  <string name="upload_image_problem_dark">ಈ ಚಿತ್ರೊ ತೀರ ಗಾಢವಾತ್, ಅಯಿನ್ ಅಪ್ಲೋಡ್ ಮಾಲ್ಪಿಯರ ಇರ್ ಖಚಿತವಾತ್ ಉಪ್ಪುವರಾ? ವಿಕಿಮೀಡಿಯ ಕಾಮನ್ಸ್ ಮಾತ್ರೊ ವಿಶ್ವಕೋಶತ ಮೌಲ್ಯದೊಂಟ್ಟ್‌ಗ್ ಚಿತ್ರೊನ್ ಹೊಂದಾಣಿಕೆ ಮಾಲ್ಪುಲೆ.</string>
+  <string name="upload_image_problem_blurry">ಈ ಚಿತ್ರೊ ತೆಳುವಾಯಿನ, ಇರ್ ಅಯಿನ್ ಅಪ್ಲೋಡ್ ಮಾಲ್ಪಿಯರ ಖಚಿತವಾತ್ ಬಯಸುವರಾ? ವಿಕಿಮೀಡಿಯ ಕಾಮನ್ಸ್ ಮಾತ್ರೊ ವಿಶ್ವಕೋಶತ ಮೌಲ್ಯದೊಂಟ್ಟ್‌ಗ್ ಚಿತ್ರೊನ್ ಹೊಂದಾಣಿಕೆ ಮಾಲ್ಪುಲೆ.</string>
   <string name="give_permission">ಒಪ್ಪಿಗೆ ಪಡೆಲೆ.</string>
   <string name="use_external_storage">ಉಂದು ಎಕ್ಸ್‌ಟರ್ನಲ್ ಸ್ಟೊರೆಜ್.</string>
   <string name="use_external_storage_summary">ಈ ಸಾಧನಟ್ ಅಪ್ಲಿಕೇಶನ್ ಕ್ಯಾಮೆರಾದೊಂಟ್ಟಗ್ ದೆತ್ತಿನ ಚಿತ್ರೊನ್ ಒರಿಪಾಲೆ.</string>

@@ -26,12 +26,13 @@ public class LocationServiceManager implements LocationListener {
     private static final long MIN_LOCATION_UPDATE_REQUEST_TIME_IN_MILLIS = 2 * 60 * 100;
     private static final long MIN_LOCATION_UPDATE_REQUEST_DISTANCE_IN_METERS = 10;
 
-    private Context context;
+    public Context context;
     private LocationManager locationManager;
     private Location lastLocation;
+    //private Location lastLocationDuplicate; // Will be used for nearby card view on contributions activity
     private final List<LocationUpdateListener> locationListeners = new CopyOnWriteArrayList<>();
     private boolean isLocationManagerRegistered = false;
-    private Set<Activity> locationExplanationDisplayed = new HashSet<>();
+    public Set<Activity> locationExplanationDisplayed = new HashSet<>();
 
     /**
      * Constructs a new instance of LocationServiceManager.
@@ -253,15 +254,25 @@ public class LocationServiceManager implements LocationListener {
 
     @Override
     public void onLocationChanged(Location location) {
+        Timber.d("on location changed");
             if (isBetterLocation(location, lastLocation)
                     .equals(LocationChangeType.LOCATION_SIGNIFICANTLY_CHANGED)) {
                 lastLocation = location;
+                //lastLocationDuplicate = location;
                 for (LocationUpdateListener listener : locationListeners) {
                     listener.onLocationChangedSignificantly(LatLng.from(lastLocation));
                 }
-            } else if (isBetterLocation(location, lastLocation)
+            } else if (location.distanceTo(lastLocation) >= 500) {
+                // Update nearby notification card at every 500 meters.
+                for (LocationUpdateListener listener : locationListeners) {
+                    listener.onLocationChangedMedium(LatLng.from(lastLocation));
+                }
+            }
+
+            else if (isBetterLocation(location, lastLocation)
                     .equals(LocationChangeType.LOCATION_SLIGHTLY_CHANGED)) {
                 lastLocation = location;
+                //lastLocationDuplicate = location;
                 for (LocationUpdateListener listener : locationListeners) {
                     listener.onLocationChangedSlightly(LatLng.from(lastLocation));
                 }
@@ -286,6 +297,7 @@ public class LocationServiceManager implements LocationListener {
     public enum LocationChangeType{
         LOCATION_SIGNIFICANTLY_CHANGED, //Went out of borders of nearby markers
         LOCATION_SLIGHTLY_CHANGED,      //User might be walking or driving
+        LOCATION_MEDIUM_CHANGED,      //Between slight and significant changes, will be used for nearby card view updates.
         LOCATION_NOT_CHANGED,
         PERMISSION_JUST_GRANTED,
         MAP_UPDATED

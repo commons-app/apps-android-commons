@@ -3,7 +3,6 @@ package fr.free.nrw.commons.upload;
 import java.util.Locale;
 
 class Language {
-
     private Locale locale;
     private boolean isSet = false;
 

@@ -28,7 +28,8 @@ public class SessionManager {
     private final MediaWikiApi mediaWikiApi;
     private Account currentAccount; // Unlike a savings account...  ;-)
     private SharedPreferences sharedPreferences;
-
+    private static final String KEY_RAWUSERNAME = "rawusername";
+    private Bundle userdata = new Bundle();
 
     public SessionManager(Context context,
                           MediaWikiApi mediaWikiApi,
@@ -44,13 +45,15 @@ public class SessionManager {
      *
      * @param response
      * @param username
+     * @param rawusername
      * @param password
      */
     public void createAccount(@Nullable AccountAuthenticatorResponse response,
-                              String username, String password) {
+                              String username, String rawusername, String password) {
 
         Account account = new Account(username, BuildConfig.ACCOUNT_TYPE);
-        boolean created = accountManager().addAccountExplicitly(account, password, null);
+        userdata.putString(KEY_RAWUSERNAME, rawusername);
+        boolean created = accountManager().addAccountExplicitly(account, password, userdata);
 
         Timber.d("account creation " + (created ? "successful" : "failure"));
 
@@ -96,6 +99,17 @@ public class SessionManager {
         Account account = getCurrentAccount();
         return account == null ? null : account.name;
     }
+
+    @Nullable
+    public String getRawUserName() {
+        Account account = getCurrentAccount();
+        return account == null ? null : accountManager().getUserData(account, KEY_RAWUSERNAME);
+    }
+
+    public String getAuthorName(){
+        return getRawUserName() == null ? getUserName() : getRawUserName();
+    }
+
 
     @Nullable
     public String getPassword() {

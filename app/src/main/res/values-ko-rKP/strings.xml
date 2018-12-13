@@ -39,7 +39,7 @@
   <string name="provider_contributions">내 올리적재</string>
   <string name="menu_share">공유</string>
   <string name="menu_open_in_browser">열람기로 보기</string>
-  <string name="share_title_hint">제목</string>
+  <string name="share_title_hint" fuzzy="true">제목</string>
   <string name="share_description_hint">설명</string>
   <string name="login_failed_network">가입할수 없습니다 - 망 오유입니다</string>
   <string name="login_failed_throttled">실패한 시도가 너무 많습니다. 몇분후에 다시 시도하세요.</string>
@@ -56,7 +56,7 @@
   <string name="gps_disabled">장치에서 GPS가 금지되여있습니다. 허가하시겠습니까?</string>
   <string name="enable_gps">GPS 허가</string>
   <string name="contributions_subtitle_zero">아직 올리적재가 없습니다</string>
-  <plurals name="contributions_subtitle">
+  <plurals name="contributions_subtitle" fuzzy="true">
     <item quantity="zero">\@string/contributions_subtitle_zero</item>
     <item quantity="one">%1$d개 올리적재</item>
   </plurals>

@@ -52,7 +52,7 @@
   <string name="provider_contributions">Ma enporzhiadennoù</string>
   <string name="menu_share">Rannañ</string>
   <string name="menu_open_in_browser">Diskwel er meerder</string>
-  <string name="share_title_hint">Titl</string>
+  <string name="share_title_hint" fuzzy="true">Titl</string>
   <string name="add_title_toast">Roit un titl d\'ar restr-mañ, mar plij</string>
   <string name="share_description_hint">Deskrivadur</string>
   <string name="login_failed_network">Ne c\'haller ket kevreañ - rouedad sac\'het</string>
@@ -72,7 +72,7 @@
   <string name="gps_disabled">Diwerededkaet eo ar GPS war hoc\'h ardivink.\nHa c\'hoant ho peus da weredekaat anezhañ ?</string>
   <string name="enable_gps">Gweredekaat ar GPS</string>
   <string name="contributions_subtitle_zero">Enporzhiadenn ebet c\'hoazh !</string>
-  <plurals name="contributions_subtitle">
+  <plurals name="contributions_subtitle" fuzzy="true">
     <item quantity="zero">Pellgardenn ebet c\'hoazh</item>
     <item quantity="one">%1$d bellgargadenn</item>
     <item quantity="other">%1$d Pellgargadennoù</item>
@@ -166,7 +166,6 @@
   <string name="title_activity_nearby">Lec\'hioù nes</string>
   <string name="no_nearby">N\'eus bet kavet netra tostik</string>
   <string name="warning">Diwallit</string>
-  <string name="file_exists">Emañ ar restr-mañ war Commons c\'hoazh. Ha sur oc\'h e fell deoc\'h kenderc\'hel ?</string>
   <string name="yes">Ya</string>
   <string name="no">Ket</string>
   <string name="media_detail_title">Titl</string>
@@ -220,6 +219,7 @@
   <string name="nearby_info_menu_commons_article">Pajennad restroù Commons</string>
   <string name="nearby_info_menu_wikidata_article">Elfenn Wikidata</string>
   <string name="nearby_info_menu_wikipedia_article">Pennad Wikipedia</string>
+  <string name="upload_image_problem_duplicate">Emañ ar restr-mañ war Commons c\'hoazh. Ha sur oc\'h e fell deoc\'h kenderc\'hel ?</string>
   <string name="give_permission">Reiñ ar gwir</string>
   <string name="use_external_storage">Implijout ar stokañ diavaez</string>
   <string name="use_external_storage_summary">Enrollit ar skeudennoù tennet gant luc\'hskeudennerez ho penveg</string>

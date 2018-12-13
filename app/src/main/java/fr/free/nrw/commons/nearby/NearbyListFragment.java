@@ -73,7 +73,7 @@ public class NearbyListFragment extends DaggerFragment {
                              ViewGroup container,
                              Bundle savedInstanceState) {
         Timber.d("NearbyListFragment created");
-        View view = inflater.inflate(R.layout.fragment_nearby, container, false);
+        View view = inflater.inflate(R.layout.fragment_nearby_list, container, false);
         recyclerView = view.findViewById(R.id.listView);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
@@ -93,6 +93,19 @@ public class NearbyListFragment extends DaggerFragment {
     public void updateNearbyListSignificantly() {
         try {
             adapterFactory.updateAdapterData(getPlaceListFromBundle(bundleForUpdates), (RVRendererAdapter<Place>) recyclerView.getAdapter());
+        } catch (NullPointerException e) {
+            Timber.e("Null pointer exception from calling recyclerView.getAdapter()");
+        }
+    }
+
+    /**
+     * While nearby updates for current location held with bundle, automatically, custom updates are
+     * done by calling this methods, triddered by search this are button input from user.
+     * @param placeList
+     */
+    public void updateNearbyListSignificantlyForCustomLocation(List<Place> placeList) {
+        try {
+            adapterFactory.updateAdapterData(placeList, (RVRendererAdapter<Place>) recyclerView.getAdapter());
         } catch (NullPointerException e) {
             Timber.e("Null pointer exception from calling recyclerView.getAdapter()");
         }
