@@ -10,6 +10,8 @@ import android.view.ViewGroup;
 
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.upload.UploadService;
+import fr.free.nrw.commons.utils.NetworkUtils;
+import fr.free.nrw.commons.utils.ViewUtil;
 import timber.log.Timber;
 
 import static fr.free.nrw.commons.contributions.Contribution.STATE_FAILED;
@@ -110,14 +112,18 @@ class ContributionsListAdapter extends CursorAdapter {
      * @param cursor cursor will be retried
      */
     public void retryUpload(Cursor cursor) {
-        // TODO: first check for internet connection, if not display a message and do nothing.
-        Contribution c = contributionDao.fromCursor(cursor);
-        if (c.getState() == STATE_FAILED) {
-            uploadService.queue(UploadService.ACTION_UPLOAD_FILE, c);
-            Timber.d("Restarting for %s", c.toString());
+        if (NetworkUtils.isInternetConnectionEstablished(mContext)) {
+            Contribution c = contributionDao.fromCursor(cursor);
+            if (c.getState() == STATE_FAILED) {
+                uploadService.queue(UploadService.ACTION_UPLOAD_FILE, c);
+                Timber.d("Restarting for %s", c.toString());
+            } else {
+                Timber.d("Skipping re-upload for non-failed %s", c.toString());
+            }
         } else {
-            Timber.d("Skipping re-upload for non-failed %s", c.toString());
+            ViewUtil.showLongToast(mContext,R.string.this_function_needs_network_connection);
         }
+
     }
 
     /**
@@ -125,14 +131,17 @@ class ContributionsListAdapter extends CursorAdapter {
      * @param cursor cursor which will be deleted
      */
     public void deleteUpload(Cursor cursor) {
-        // TODO: check internet connection, warn user and do nothing is a problem occurred
-
-        Contribution c = contributionDao.fromCursor(cursor);
-        if (c.getState() == STATE_FAILED) {
-            Timber.d("Deleting failed contrib %s", c.toString());
-            contributionDao.delete(c);
+        if (NetworkUtils.isInternetConnectionEstablished(mContext)) {
+            Contribution c = contributionDao.fromCursor(cursor);
+            if (c.getState() == STATE_FAILED) {
+                Timber.d("Deleting failed contrib %s", c.toString());
+                contributionDao.delete(c);
+            } else {
+                Timber.d("Skipping deletion for non-failed contrib %s", c.toString());
+            }
         } else {
-            Timber.d("Skipping deletion for non-failed contrib %s", c.toString());
+            ViewUtil.showLongToast(mContext,R.string.this_function_needs_network_connection);
         }
+
     }
 }
