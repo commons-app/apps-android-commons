@@ -8,6 +8,7 @@ env:
   - ANDROID_TARGET=android-22
   - ANDROID_ABI=armeabi-v7a
   - ADB_INSTALL_TIMEOUT=12
+  - secure: okdkna5DaH/2Fay9vI6Enrx7u9UwRm4/IJXvcaWJcvjF3JTsLQr0r+dlMT2X5E1GsNk4WcoGcfZJcVonULkaW4S96B43g3EyevWbLFWjii0cMUO00OshToKyboSvNUf+d5B6rghrbnxTIBNel2ZBFj8MXHdtz6Az20q8VywqPeBZupo7olyKKS1nYdvoo7ypNScVjDGEjEPonWplztYlSDT1w81Vww4kF9oiOPEzDOPw1lOiD8FTyKLXhK0WYlnc3cnyFjZwVMlKcomnFYPfe/J2zO6OP/XInxYSXRkZ6wiOC5gMPYAYanUAuzm91vsTBQMk6jMCglSM9Nl6dPusGgEqOyTwLVALlgvS3km9HNVsHuVJhU+bmJ6scFBWrAOhbsV2ioSEsQ8NgU0Zv1SC0wN9ZruF4ae03Re+k+eHgwA3taZXrT2pvkkSmfRex6oFZReypcPGFQYiHo31NsO39WPRYYxr4edYisVXw75x/BJyOcUULhG1YmwHYYeXOzbNp0Sf9ADtUDi0oip/BO2tkLxbE+z1GJSmC83fX2YpoK+IwDHNm+4w8OJAJBvdxA3Q4HrJBAbd8jnQYP+sBBaki8t5WuwJmfOucx0vgKJ7pzqRY/MOUVe/dACnjLgFDLuS7MMqr6xU/oMM6/rrt4209tL+GQbn/R98UKtmMRRq1hY=
 jdk:
 - oraclejdk8
 android:
@@ -28,6 +29,9 @@ before_script:
 - android-wait-for-emulator
 script:
 - "./gradlew clean check connectedCheck jacocoTestReport"
+- if [ "$TRAVIS_PULL_REQUEST" == "false" ]; then
+  ./gradlew publishBundle;
+  fi
 after_success:
 - bash <(curl -s https://codecov.io/bash)
 after_failure:
@@ -43,5 +47,9 @@ cache:
   - "$HOME/.gradle/caches/"
   - "$HOME/.gradle/wrapper/"
 before_install:
-- openssl aes-256-cbc -K $encrypted_7b5c925cc32c_key -iv $encrypted_7b5c925cc32c_iv
-  -in nr-commons.keystore.enc -out nr-commons.keystore -d
+- if [ "$TRAVIS_PULL_REQUEST" == "false" ]; then
+  openssl aes-256-cbc -K $encrypted_7b5c925cc32c_key -iv $encrypted_7b5c925cc32c_iv -in nr-commons.keystore.enc -out nr-commons.keystore -d;
+  fi
+- if [ "$TRAVIS_PULL_REQUEST" == "false" ]; then
+  openssl aes-256-cbc -K $encrypted_38ac1a5053f6_key -iv $encrypted_38ac1a5053f6_iv -in play.p12.enc -out play.p12 -d;
+  fi
