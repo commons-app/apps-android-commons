@@ -331,7 +331,6 @@ public class UploadService extends HandlerService<Contribution> {
 
         contribution.setState(Contribution.STATE_FAILED);
         contributionDao.save(contribution);
-        Log.d("deneme","failed and contrib saved, contribution name is"+contribution.getFilename());
     }
 
     private String findUniqueFilename(String fileName) throws IOException {

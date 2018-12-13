@@ -89,8 +89,6 @@ class ContributionsListAdapter extends CursorAdapter {
                 views.retryButton.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        Log.d("deneme","contex:"+context);
-                        Log.d("deneme","Retry button is clicked");
                         retryUpload(cursor);
                     }
                 });
@@ -98,7 +96,6 @@ class ContributionsListAdapter extends CursorAdapter {
                 views.cancelButton.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        Log.d("deneme","Cancel button is clicked");
                         deleteUpload(cursor);
                     }
                 });
@@ -110,27 +107,22 @@ class ContributionsListAdapter extends CursorAdapter {
 
     /**
      * Retry upload when it is failed
-     * @param cursor position of upload which will be retried
+     * @param cursor cursor will be retried
      */
     public void retryUpload(Cursor cursor) {
         // TODO: first check for internet connection, if not display a message and do nothing.
-        Log.d("deneme","Retrying i:"+cursor.getColumnName(1));
         Contribution c = contributionDao.fromCursor(cursor);
         if (c.getState() == STATE_FAILED) {
             uploadService.queue(UploadService.ACTION_UPLOAD_FILE, c);
             Timber.d("Restarting for %s", c.toString());
-            Log.d("deneme","Restarting for %s"+ c.getFilename());
-
         } else {
             Timber.d("Skipping re-upload for non-failed %s", c.toString());
-            Log.d("deneme","Skipping re-upload for non-failed %s"+ c.getFilename());
-
         }
     }
 
     /**
      * Delete a failed upload attempt
-     * @param cursor position of upload attempt which will be deteled
+     * @param cursor cursor which will be deleted
      */
     public void deleteUpload(Cursor cursor) {
         // TODO: check internet connection, warn user and do nothing is a problem occurred
@@ -138,11 +130,9 @@ class ContributionsListAdapter extends CursorAdapter {
         Contribution c = contributionDao.fromCursor(cursor);
         if (c.getState() == STATE_FAILED) {
             Timber.d("Deleting failed contrib %s", c.toString());
-            Log.d("deneme","Deleting failed:"+c.getFilename());
             contributionDao.delete(c);
         } else {
             Timber.d("Skipping deletion for non-failed contrib %s", c.toString());
-            Log.d("deneme","Skipping deletion for non-failed contrib"+c.getFilename());
         }
     }
 }
