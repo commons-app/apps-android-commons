@@ -16,13 +16,15 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * The presenter for the campaigns view, fetches the campaigns from the api and informs the view on success and error
+ * The presenter for the campaigns view, fetches the campaigns from the api and informs the view on
+ * success and error
  */
 public class CampaignsPresenter implements BasePresenter {
     private final String TAG = "#CampaignsPresenter#";
     private ICampaignsView view;
     private MediaWikiApi mediaWikiApi;
     private Disposable disposable;
+    private Campaign campaign;
 
     @Override public void onAttachView(MvpView view) {
         this.view = (ICampaignsView) view;
@@ -34,12 +36,21 @@ public class CampaignsPresenter implements BasePresenter {
         disposable.dispose();
     }
 
+    /**
+     * make the api call to fetch the campaigns
+     */
     public void getCampaigns() {
         if (view != null && mediaWikiApi != null) {
+            //If we already have a campaign, lets not make another call
+            if (this.campaign != null) {
+                view.showCampaigns(campaign);
+                return;
+            }
             Single<CampaignResponseDTO> campaigns = mediaWikiApi.getCampaigns();
             campaigns.observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
                 .subscribeWith(new SingleObserver<CampaignResponseDTO>() {
+
                     @Override public void onSubscribe(Disposable d) {
                         disposable = d;
                     }
@@ -52,7 +63,7 @@ public class CampaignsPresenter implements BasePresenter {
                             view.showCampaigns(null);
                         }
                         Collections.sort(campaigns, (campaign, t1) -> {
-                            Date date1, date2 = null;
+                            Date date1, date2;
                             try {
                                 date1 = dateFormat.parse(campaign.getStartDate());
                                 date2 = dateFormat.parse(t1.getStartDate());
@@ -71,7 +82,8 @@ public class CampaignsPresenter implements BasePresenter {
                         if (campaignEndDate == null) {
                             view.showCampaigns(null);
                         } else if (campaignEndDate.compareTo(new Date()) > 0) {
-                            view.showCampaigns(campaigns.get(0));
+                            campaign = campaigns.get(0);
+                            view.showCampaigns(campaign);
                         } else {
                             Log.e(TAG, "The campaigns has already finished");
                             view.showCampaigns(null);

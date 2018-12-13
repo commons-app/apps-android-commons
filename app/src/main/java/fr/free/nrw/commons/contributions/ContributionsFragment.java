@@ -14,6 +14,7 @@ import android.os.Bundle;
 import android.os.IBinder;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 
@@ -23,6 +24,7 @@ import android.support.v4.app.LoaderManager;
 import android.support.v4.widget.CursorAdapter;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -124,6 +126,7 @@ public class ContributionsFragment
     private CheckBox checkBox;
     private CampaignsPresenter presenter;
 
+
     @BindView(R.id.campaigns_view) CampaignView campaignView;
 
                         /**
@@ -190,6 +193,27 @@ public class ContributionsFragment
         if(!BuildConfig.FLAVOR.equalsIgnoreCase("beta")){
             setUploadCount();
         }
+
+        getChildFragmentManager().registerFragmentLifecycleCallbacks(
+            new FragmentManager.FragmentLifecycleCallbacks() {
+                @Override public void onFragmentResumed(FragmentManager fm, Fragment f) {
+                    super.onFragmentResumed(fm, f);
+                    //If media detail pager fragment is visible, hide the campaigns view [might not be the best way to do, this but yeah, this proves to work for now]
+                    Log.e("#CF#", "onFragmentResumed" + f.getClass().getName());
+                    if (f instanceof MediaDetailPagerFragment) {
+                        campaignView.setVisibility(View.GONE);
+                    }
+                }
+
+                @Override public void onFragmentDetached(FragmentManager fm, Fragment f) {
+                    super.onFragmentDetached(fm, f);
+                    Log.e("#CF#", "onFragmentDetached" + f.getClass().getName());
+                    //If media detail pager fragment is detached, ContributionsList fragment is gonna be visible, [becomes tightly coupled though]
+                    if (f instanceof MediaDetailPagerFragment) {
+                        fetchCampaigns();
+                    }
+                }
+            }, true);
 
         return view;
     }

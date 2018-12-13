@@ -5,8 +5,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:paddingBottom="16dp"
-    android:paddingTop="16dp"
+    android:paddingBottom="10dp"
+    android:paddingEnd="10dp"
+    android:paddingRight="10dp"
+    android:paddingTop="10dp"
     >
 
   <ImageView
@@ -25,7 +27,7 @@
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:layout_marginLeft="16dp"
-      android:paddingRight="2dp"
+      android:layout_marginRight="4dp"
       app:layout_constraintLeft_toRightOf="@id/iv_campaign"
       >
     <TextView
@@ -35,19 +37,24 @@
         android:layout_marginLeft="16dp"
         android:textColor="@android:color/white"
         tools:text="Campaign Title"
+        android:textStyle="bold"
         />
 
     <TextView
+        android:paddingTop="2dp"
         android:id="@+id/tv_description"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="16dp"
+        android:gravity="start"
+        android:textAlignment="textStart"
         android:textColor="@android:color/white"
         app:layout_constraintTop_toBottomOf="@id/tv_title"
         tools:text="Campaign Description"
         />
 
     <TextView
+        android:paddingTop="2dp"
         android:id="@+id/tv_dates"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
