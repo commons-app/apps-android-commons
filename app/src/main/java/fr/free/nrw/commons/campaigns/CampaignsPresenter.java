@@ -15,6 +15,9 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
+/**
+ * The presenter for the campaigns view, fetches the campaigns from the api and informs the view on success and error
+ */
 public class CampaignsPresenter implements BasePresenter {
     private final String TAG = "#CampaignsPresenter#";
     private ICampaignsView view;

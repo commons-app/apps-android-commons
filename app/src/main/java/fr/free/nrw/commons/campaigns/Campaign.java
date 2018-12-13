@@ -2,6 +2,9 @@ package fr.free.nrw.commons.campaigns;
 
 import com.google.gson.annotations.SerializedName;
 
+/**
+ * A data class to hold a campaign
+ */
 public class Campaign {
 
     @SerializedName("title") private String title;

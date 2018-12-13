@@ -61,6 +61,9 @@ public abstract class SwipableCardView extends CardView {
         });
     }
 
+    /**
+     * abstract function which informs swipe events to those who have inherited from it
+     */
     public abstract boolean onSwipe(View view);
 
     private float pixelToDp(float pixels) {

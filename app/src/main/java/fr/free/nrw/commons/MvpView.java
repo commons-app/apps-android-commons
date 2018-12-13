@@ -1,6 +1,8 @@
 package fr.free.nrw.commons;
 
-import fr.free.nrw.commons.mwapi.MediaWikiApi;
-
+/**
+ * Base interface for all the views
+ */
 public interface MvpView {
+    void showMessage(String message);
 }

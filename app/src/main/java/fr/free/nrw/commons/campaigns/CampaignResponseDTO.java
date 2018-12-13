@@ -3,6 +3,9 @@ package fr.free.nrw.commons.campaigns;
 import com.google.gson.annotations.SerializedName;
 import java.util.List;
 
+/**
+ * Data class to hold the response from the campaigns api
+ */
 public class CampaignResponseDTO {
 
     @SerializedName("config")

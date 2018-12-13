@@ -14,7 +14,13 @@ import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.contributions.MainActivity;
 import fr.free.nrw.commons.utils.SwipableCardView;
 import fr.free.nrw.commons.utils.ViewUtil;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
+/**
+ * A view which represents a single campaign
+ */
 public class CampaignView extends SwipableCardView {
     Campaign campaign = null;
     private ViewHolder viewHolder;
@@ -46,7 +52,9 @@ public class CampaignView extends SwipableCardView {
 
     @Override public boolean onSwipe(View view) {
         view.setVisibility(View.GONE);
-        ((MainActivity) getContext()).prefs.edit().putBoolean("displayCampaignsCardView", false).apply();
+        ((MainActivity) getContext()).prefs.edit()
+            .putBoolean("displayCampaignsCardView", false)
+            .apply();
         ViewUtil.showLongToast(getContext(),
             getResources().getString(R.string.nearby_campaign_dismiss_message));
         return true;
@@ -56,12 +64,15 @@ public class CampaignView extends SwipableCardView {
         View rootView = inflate(getContext(), R.layout.layout_campagin, this);
         viewHolder = new ViewHolder(rootView);
         setOnClickListener(view -> {
-                if(campaign!=null){
-                    showCampaignInBrowser(campaign.getLink());
-                }
+            if (campaign != null) {
+                showCampaignInBrowser(campaign.getLink());
+            }
         });
     }
 
+    /**
+     * open the url associated with the campaign in the system's default browser
+     */
     private void showCampaignInBrowser(String link) {
         Intent view = new Intent();
         view.setAction(Intent.ACTION_VIEW);
@@ -73,8 +84,7 @@ public class CampaignView extends SwipableCardView {
 
         @BindView(R.id.tv_title) TextView tvTitle;
         @BindView(R.id.tv_description) TextView tvDescription;
-        @BindView(R.id.tv_start_date) TextView tvStartDate;
-        @BindView(R.id.tv_end_date) TextView tvEndDate;
+        @BindView(R.id.tv_dates) TextView tvDates;
 
         public ViewHolder(View itemView) {
             ButterKnife.bind(this, itemView);
@@ -84,8 +94,16 @@ public class CampaignView extends SwipableCardView {
             if (campaign != null) {
                 tvTitle.setText(campaign.getTitle());
                 tvDescription.setText(campaign.getDescription());
-                tvStartDate.setText(campaign.getStartDate());
-                tvEndDate.setText(campaign.getEndDate());
+                SimpleDateFormat inputDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+                SimpleDateFormat outputDateFormat = new SimpleDateFormat("dd MMM");
+                try {
+                    Date startDate = inputDateFormat.parse(campaign.getStartDate());
+                    Date endDate = inputDateFormat.parse(campaign.getEndDate());
+                    tvDates.setText(String.format("%1s - %2s", outputDateFormat.format(startDate),
+                        outputDateFormat.format(endDate)));
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
             }
         }
     }

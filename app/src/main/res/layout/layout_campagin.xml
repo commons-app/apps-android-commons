@@ -5,85 +5,57 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="10dp"
+    android:paddingBottom="16dp"
+    android:paddingTop="16dp"
     >
 
-  <TextView
-      android:id="@+id/tv_title"
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:padding="2dp"
-      android:textColor="@android:color/white"
-      android:textSize="16sp"
-      android:textStyle="bold"
-      tools:text="Campaign Title"
+  <ImageView
+      android:id="@+id/iv_campaign"
+      android:layout_width="40dp"
+      android:layout_height="40dp"
+      android:layout_marginLeft="16dp"
+      android:layout_marginTop="16dp"
+      android:scaleType="centerCrop"
+      app:layout_constraintLeft_toLeftOf="parent"
+      app:layout_constraintTop_toTopOf="parent"
+      app:srcCompat="@drawable/ic_campaign"
       />
 
-  <TextView
-      android:id="@+id/tv_description"
-      android:layout_width="match_parent"
+  <android.support.constraint.ConstraintLayout
+      android:layout_width="wrap_content"
       android:layout_height="wrap_content"
-      android:padding="2dp"
-      android:textColor="@android:color/white"
-      app:layout_constraintTop_toBottomOf="@id/tv_title"
-      tools:text="Campaign Description"
-      />
-
-  <LinearLayout
-      android:id="@+id/ll_container_campaign_start_date"
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:orientation="horizontal"
-      android:padding="2dp"
-      android:visibility="gone"
-      app:layout_constraintTop_toBottomOf="@id/tv_description"
+      android:layout_marginLeft="16dp"
+      android:paddingRight="2dp"
+      app:layout_constraintLeft_toRightOf="@id/iv_campaign"
       >
-
     <TextView
-        android:layout_width="0dp"
+        android:id="@+id/tv_title"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:text="Start Date"
+        android:layout_marginLeft="16dp"
         android:textColor="@android:color/white"
+        tools:text="Campaign Title"
         />
 
     <TextView
-        android:id="@+id/tv_start_date"
-        android:layout_width="0dp"
+        android:id="@+id/tv_description"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
+        android:layout_marginLeft="16dp"
         android:textColor="@android:color/white"
-        tools:text="Campaign Start Date"
+        app:layout_constraintTop_toBottomOf="@id/tv_title"
+        tools:text="Campaign Description"
         />
 
-  </LinearLayout>
-
-  <LinearLayout
-      android:id="@+id/ll_container_campaign_end_date"
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:orientation="horizontal"
-      android:padding="2dp"
-      app:layout_constraintTop_toBottomOf="@id/ll_container_campaign_start_date"
-      >
-
     <TextView
+        android:id="@+id/tv_dates"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
         android:layout_weight="1"
         android:text="@string/ends_on"
         android:textColor="@android:color/white"
+        app:layout_constraintTop_toBottomOf="@id/tv_description"
         />
-
-    <TextView
-        android:id="@+id/tv_end_date"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:textColor="@android:color/white"
-        tools:text="Campaign End Date"
-        />
-
-  </LinearLayout>
-
+  </android.support.constraint.ConstraintLayout>
 </android.support.constraint.ConstraintLayout>
