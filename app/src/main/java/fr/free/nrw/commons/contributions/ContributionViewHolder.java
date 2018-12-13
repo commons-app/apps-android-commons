@@ -17,6 +17,7 @@ class ContributionViewHolder {
     final ProgressBar progressView;
     final ImageButton retryButton;
     final ImageButton cancelButton;
+    int position;
 
     ContributionViewHolder(View parent) {
         imageView = parent.findViewById(R.id.contributionImage);
@@ -26,5 +27,6 @@ class ContributionViewHolder {
         progressView = parent.findViewById(R.id.contributionProgress);
         retryButton = parent.findViewById(R.id.retryButton);
         cancelButton = parent.findViewById(R.id.cancelButton);
+        position = 0;
     }
 }

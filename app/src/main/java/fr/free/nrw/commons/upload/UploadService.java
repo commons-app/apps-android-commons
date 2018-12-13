@@ -10,6 +10,7 @@ import android.content.Intent;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.v4.app.NotificationCompat;
+import android.util.Log;
 import android.webkit.MimeTypeMap;
 import android.widget.Toast;
 
@@ -330,6 +331,7 @@ public class UploadService extends HandlerService<Contribution> {
 
         contribution.setState(Contribution.STATE_FAILED);
         contributionDao.save(contribution);
+        Log.d("deneme","failed and contrib saved, contribution name is"+contribution.getFilename());
     }
 
     private String findUniqueFilename(String fileName) throws IOException {

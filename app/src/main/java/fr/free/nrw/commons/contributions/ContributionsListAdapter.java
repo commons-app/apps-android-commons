@@ -9,14 +9,25 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import fr.free.nrw.commons.R;
+import fr.free.nrw.commons.upload.UploadService;
+import timber.log.Timber;
+
+import static fr.free.nrw.commons.contributions.Contribution.STATE_FAILED;
 
 class ContributionsListAdapter extends CursorAdapter {
 
     private final ContributionDao contributionDao;
+    private Cursor allContributions;
+    private UploadService uploadService;
 
     public ContributionsListAdapter(Context context, Cursor c, int flags, ContributionDao contributionDao) {
         super(context, c, flags);
         this.contributionDao = contributionDao;
+    }
+
+    public void setUploadService(Cursor allContributions, UploadService uploadService) {
+        this.allContributions = allContributions;
+        this.uploadService = uploadService;
     }
 
     @Override
@@ -37,20 +48,8 @@ class ContributionsListAdapter extends CursorAdapter {
 
         views.seqNumView.setText(String.valueOf(cursor.getPosition() + 1));
         views.seqNumView.setVisibility(View.VISIBLE);
+        views.position = cursor.getPosition();
 
-        views.retryButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Log.d("deneme","Retry button is clicked");
-            }
-        });
-
-        views.cancelButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Log.d("deneme","Cancel button is clicked");
-            }
-        });
 
         switch (contribution.getState()) {
             case Contribution.STATE_COMPLETED:
@@ -86,7 +85,45 @@ class ContributionsListAdapter extends CursorAdapter {
                 views.progressView.setVisibility(View.GONE);
                 views.retryButton.setVisibility(View.VISIBLE);
                 views.cancelButton.setVisibility(View.VISIBLE);
+
+                views.retryButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Log.d("deneme","contex:"+context);
+                        Log.d("deneme","Retry button is clicked");
+                        retryUpload(cursor);
+                    }
+                });
+
+                views.cancelButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Log.d("deneme","Cancel button is clicked");
+                    }
+                });
+
+
                 break;
+        }
+    }
+
+    /**
+     * Retry upload when it is failed
+     * @param cursor position of upload which will be retried
+     */
+    public void retryUpload(Cursor cursor) {
+        // TODO: first check for internet connection, if not display a message and do nothing.
+        Log.d("deneme","Retrying i:"+cursor.getColumnName(1));
+        Contribution c = contributionDao.fromCursor(cursor);
+        if (c.getState() == STATE_FAILED) {
+            uploadService.queue(UploadService.ACTION_UPLOAD_FILE, c);
+            Timber.d("Restarting for %s", c.toString());
+            Log.d("deneme","Restarting for %s"+ c.getFilename());
+
+        } else {
+            Timber.d("Skipping re-upload for non-failed %s", c.toString());
+            Log.d("deneme","Skipping re-upload for non-failed %s"+ c.getFilename());
+
         }
     }
 }
