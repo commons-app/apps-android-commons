@@ -1,4 +1,4 @@
-package fr.free.nrw.commons
+package fr.free.nrw.commons.utils
 
 import fr.free.nrw.commons.location.LatLng
 import fr.free.nrw.commons.utils.LengthUtils
