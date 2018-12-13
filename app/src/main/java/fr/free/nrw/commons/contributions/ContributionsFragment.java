@@ -22,6 +22,7 @@ import android.support.v4.content.Loader;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.widget.CursorAdapter;
 import android.support.v7.app.AlertDialog;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,6 +31,14 @@ import android.widget.AdapterView;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 
+import android.widget.Toast;
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import fr.free.nrw.commons.campaigns.Campaign;
+import fr.free.nrw.commons.campaigns.CampaignResponseDTO;
+import fr.free.nrw.commons.campaigns.CampaignView;
+import fr.free.nrw.commons.campaigns.CampaignsPresenter;
+import fr.free.nrw.commons.campaigns.ICampaignsView;
 import java.util.ArrayList;
 import java.util.concurrent.CountDownLatch;
 
@@ -60,6 +69,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
+import org.acra.util.ToastSender;
 import timber.log.Timber;
 
 import static fr.free.nrw.commons.contributions.Contribution.STATE_FAILED;
@@ -76,7 +86,7 @@ public class ContributionsFragment
                     MediaDetailPagerFragment.MediaDetailProvider,
                     FragmentManager.OnBackStackChangedListener,
                     ContributionsListFragment.SourceRefresher,
-                    LocationUpdateListener
+                    LocationUpdateListener,ICampaignsView
                     {
     @Inject
     @Named("default_preferences")
@@ -112,6 +122,9 @@ public class ContributionsFragment
     private boolean isFragmentAttachedBefore = false;
     private View checkBoxView;
     private CheckBox checkBox;
+    private CampaignsPresenter presenter;
+
+    @BindView(R.id.campaigns_view) CampaignView campaignView;
 
                         /**
      * Since we will need to use parent activity on onAuthCookieAcquired, we have to wait
@@ -142,6 +155,11 @@ public class ContributionsFragment
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_contributions, container, false);
+        ButterKnife.bind(this, view);
+        presenter = new CampaignsPresenter();
+        presenter = new CampaignsPresenter();
+        presenter.onAttachView(this);
+        campaignView.setVisibility(View.GONE);
         nearbyNoificationCardView = view.findViewById(R.id.card_view_nearby);
         checkBoxView = View.inflate(getActivity(), R.layout.nearby_permission_dialog, null);
         checkBox = (CheckBox) checkBoxView.findViewById(R.id.never_ask_again);
@@ -537,7 +555,7 @@ public class ContributionsFragment
             nearbyNoificationCardView.setVisibility(View.GONE);
         }
 
-
+        fetchCampaigns();
     }
 
     /**
@@ -693,6 +711,39 @@ public class ContributionsFragment
     public void onLocationChangedMedium(LatLng latLng) {
         // Update closest nearby card view if location changed more than 500 meters
         updateClosestNearbyCardViewInfo();
+    }
+
+    @Override public void onViewCreated(@NonNull View view,
+        @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+    }
+
+    /**
+     * ask the presenter to fetch the campaigns only if user has not manually disabled it
+     */
+    private void fetchCampaigns() {
+        if (prefs.getBoolean("displayCampaignsCardView", true)) {
+            presenter.getCampaigns();
+        }
+    }
+
+    @Override public void showMessage(String message) {
+        Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override public MediaWikiApi getMediaWikiApi() {
+        return mediaWikiApi;
+    }
+
+    @Override public void showCampaigns(Campaign campaign) {
+        if (campaign != null) {
+            campaignView.setCampaign(campaign);
+        }
+    }
+
+    @Override public void onDestroyView() {
+        super.onDestroyView();
+        presenter.onDetachView();
     }
 }
 

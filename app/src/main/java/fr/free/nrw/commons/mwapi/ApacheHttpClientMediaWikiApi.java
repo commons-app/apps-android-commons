@@ -11,6 +11,7 @@ import android.text.TextUtils;
 
 import com.google.gson.Gson;
 
+import fr.free.nrw.commons.campaigns.CampaignResponseDTO;
 import org.apache.http.HttpResponse;
 import org.apache.http.conn.ClientConnectionManager;
 import org.apache.http.conn.scheme.PlainSocketFactory;
@@ -1056,4 +1057,20 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
         }
     }
 
+    @Override public Single<CampaignResponseDTO> getCampaigns() {
+        return Single.fromCallable(() -> {
+            Request request = new Request.Builder().url(
+                "https://raw.githubusercontent.com/ashishkumar468/campaigns/master/campaigns.json")
+                .build();
+            Response response = okHttpClient.newCall(request).execute();
+            if (response != null && response.body() != null && response.isSuccessful()) {
+                String json = response.body().string();
+                if (json == null) {
+                    return null;
+                }
+                return gson.fromJson(json, CampaignResponseDTO.class);
+            }
+            return null;
+        });
+    }
 }
