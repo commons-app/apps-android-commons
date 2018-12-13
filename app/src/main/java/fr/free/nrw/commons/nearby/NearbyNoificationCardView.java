@@ -27,7 +27,6 @@ import timber.log.Timber;
  */
 public class NearbyNoificationCardView  extends SwipableCardView {
 
-    private static final float MINIMUM_THRESHOLD_FOR_SWIPE = 100;
     private Context context;
 
     private Button permissionRequestButton;
