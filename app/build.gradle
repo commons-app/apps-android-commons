@@ -142,7 +142,7 @@ android {
 
     if (isRunningOnTravis) {
         // configure keystore based on env vars in Travis for automated alpha builds
-        signingConfigs.release.storeFile = file("../OurStore.keystore")
+        signingConfigs.release.storeFile = file("../nr-commons.keystore")
         signingConfigs.release.storePassword = System.getenv("keystore_password")
         signingConfigs.release.keyAlias = System.getenv("key_alias")
         signingConfigs.release.keyPassword = System.getenv("key_password")
