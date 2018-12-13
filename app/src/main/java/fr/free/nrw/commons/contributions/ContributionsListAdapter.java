@@ -99,6 +99,7 @@ class ContributionsListAdapter extends CursorAdapter {
                     @Override
                     public void onClick(View view) {
                         Log.d("deneme","Cancel button is clicked");
+                        deleteUpload(cursor);
                     }
                 });
 
@@ -124,6 +125,24 @@ class ContributionsListAdapter extends CursorAdapter {
             Timber.d("Skipping re-upload for non-failed %s", c.toString());
             Log.d("deneme","Skipping re-upload for non-failed %s"+ c.getFilename());
 
+        }
+    }
+
+    /**
+     * Delete a failed upload attempt
+     * @param cursor position of upload attempt which will be deteled
+     */
+    public void deleteUpload(Cursor cursor) {
+        // TODO: check internet connection, warn user and do nothing is a problem occurred
+
+        Contribution c = contributionDao.fromCursor(cursor);
+        if (c.getState() == STATE_FAILED) {
+            Timber.d("Deleting failed contrib %s", c.toString());
+            Log.d("deneme","Deleting failed:"+c.getFilename());
+            contributionDao.delete(c);
+        } else {
+            Timber.d("Skipping deletion for non-failed contrib %s", c.toString());
+            Log.d("deneme","Skipping deletion for non-failed contrib"+c.getFilename());
         }
     }
 }
