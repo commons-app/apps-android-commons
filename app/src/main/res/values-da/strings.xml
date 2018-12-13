@@ -308,6 +308,7 @@
   <string name="level">NIVEAU</string>
   <string name="images_uploaded">Oplagte billeder</string>
   <string name="images_used_by_wiki">Billeder brugt</string>
+  <string name="achievements_revert_limit_message">minimumskrav:</string>
   <string name="error_occurred">Der opstod en fejl!</string>
   <string name="contributions_fragment">Bidrag</string>
   <string name="nearby_fragment">I nærheden</string>
