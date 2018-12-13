@@ -343,6 +343,7 @@
   <string name="error_fetching_nearby_places">Error fetching nearby places.</string>
   <string name="add_description">+ Add description</string>
 
+  <string name="no_recent_searches">No recent searches</string>
   <string name="delete_recent_searches_dialog">Are you sure you want to clear your search history?</string>
   <string name="search_history_deleted">Search history deleted</string>
   <string name="nominate_delete">Nominate For Deletion</string>
