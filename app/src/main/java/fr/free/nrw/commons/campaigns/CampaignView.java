@@ -1,6 +1,8 @@
 package fr.free.nrw.commons.campaigns;
 
 import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
@@ -53,6 +55,18 @@ public class CampaignView extends SwipableCardView {
     private void init() {
         View rootView = inflate(getContext(), R.layout.layout_campagin, this);
         viewHolder = new ViewHolder(rootView);
+        setOnClickListener(view -> {
+                if(campaign!=null){
+                    showCampaignInBrowser(campaign.getLink());
+                }
+        });
+    }
+
+    private void showCampaignInBrowser(String link) {
+        Intent view = new Intent();
+        view.setAction(Intent.ACTION_VIEW);
+        view.setData(Uri.parse(link));
+        getContext().startActivity(view);
     }
 
     public class ViewHolder {

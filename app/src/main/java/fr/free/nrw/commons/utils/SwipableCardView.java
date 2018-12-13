@@ -57,7 +57,7 @@ public abstract class SwipableCardView extends CardView {
             if (isSwipe && (pixelToDp(Math.abs(deltaX)) > MINIMUM_THRESHOLD_FOR_SWIPE)) {
                 return onSwipe(v);
             }
-            return true;
+            return false;
         });
     }
 
