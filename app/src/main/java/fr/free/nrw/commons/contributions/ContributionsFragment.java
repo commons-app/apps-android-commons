@@ -292,7 +292,7 @@ public class ContributionsFragment
             contributionsListFragment.clearSyncMessage();
             notifyAndMigrateDataSetObservers();
 
-            ((ContributionsListAdapter)contributionsListFragment.getAdapter()).setUploadService(allContributions, uploadService);
+            ((ContributionsListAdapter)contributionsListFragment.getAdapter()).setUploadService(uploadService);
         }
     }
 

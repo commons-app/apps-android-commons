@@ -19,7 +19,6 @@ import static fr.free.nrw.commons.contributions.Contribution.STATE_FAILED;
 class ContributionsListAdapter extends CursorAdapter {
 
     private final ContributionDao contributionDao;
-    private Cursor allContributions;
     private UploadService uploadService;
 
     public ContributionsListAdapter(Context context, Cursor c, int flags, ContributionDao contributionDao) {
@@ -27,8 +26,7 @@ class ContributionsListAdapter extends CursorAdapter {
         this.contributionDao = contributionDao;
     }
 
-    public void setUploadService(Cursor allContributions, UploadService uploadService) {
-        this.allContributions = allContributions;
+    public void setUploadService( UploadService uploadService) {
         this.uploadService = uploadService;
     }
 
