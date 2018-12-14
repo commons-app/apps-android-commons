@@ -772,7 +772,7 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
         }
 
         if (imageNodes == null) {
-            return new ArrayList<Media>();
+            return new ArrayList<>();
         }
 
         List<Media> images = new ArrayList<>();
@@ -812,7 +812,7 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
         }
 
         if (categoryNodes == null) {
-            return new ArrayList<String>();
+            return new ArrayList<>();
         }
 
         List<String> categories = new ArrayList<>();

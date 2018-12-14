@@ -76,7 +76,7 @@ public class BookmarkLocationsFragment extends DaggerFragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setAdapter(
                 adapterFactory.create(
-                        new ArrayList<Place>(),
+                        new ArrayList<>(),
                         () -> {
                             initList();
                         }

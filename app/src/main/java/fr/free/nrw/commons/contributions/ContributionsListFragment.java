@@ -309,7 +309,7 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN
                 && data.getClipData() != null) {
             ClipData mClipData = data.getClipData();
-            ArrayList<Uri> mArrayUri = new ArrayList<Uri>();
+            ArrayList<Uri> mArrayUri = new ArrayList<>();
             for (int i = 0; i < mClipData.getItemCount(); i++) {
 
                 ClipData.Item item = mClipData.getItemAt(i);
