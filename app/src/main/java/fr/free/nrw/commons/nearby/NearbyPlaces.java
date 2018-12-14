@@ -44,9 +44,9 @@ public class NearbyPlaces {
     List<Place> getFromWikidataQuery(LatLng curLatLng, String lang, boolean returnClosestResult) throws IOException {
         List<Place> places = Collections.emptyList();
 
-        /**
-         * If returnClosestResult is true, then this means that we are trying to get closest point
-         * to use in cardView above contributions list
+        /*
+          If returnClosestResult is true, then this means that we are trying to get closest point
+          to use in cardView above contributions list
          */
         if (returnClosestResult) {
             MIN_RESULTS = 1; // Return closest nearby place
