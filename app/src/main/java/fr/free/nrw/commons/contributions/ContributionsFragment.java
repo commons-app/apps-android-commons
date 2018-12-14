@@ -530,11 +530,6 @@ public class ContributionsFragment
     }
 
     @Override
-    public void onStart() {
-        super.onStart();
-    }
-
-    @Override
     public void onPause() {
         super.onPause();
         locationManager.removeLocationListener(this);

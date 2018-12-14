@@ -205,10 +205,6 @@ public class SearchActivity extends NavigationBaseActivity implements MediaDetai
         mediaDetails.showImage(index);
         forceInitBackButton();
     }
-    @Override
-    public void onConfigurationChanged(Configuration newConfig) {
-        super.onConfigurationChanged(newConfig);
-    }
 
     /**
      * This method is called on Screen Rotation

@@ -721,11 +721,6 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
     }
 
     @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-    }
-
-    @Override
     public void onDestroy() {
         super.onDestroy();
         if (placesDisposable != null) {
@@ -741,11 +736,6 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
         super.onDetach();
         snackbar = null;
         broadcastReceiver = null;
-    }
-
-    @Override
-    public void onStart() {
-        super.onStart();
     }
 
     @Override

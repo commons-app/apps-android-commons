@@ -34,16 +34,6 @@ public class CustomEditText extends EditText {
         super(context, attrs, defStyle);
     }
 
-    protected void onDraw(Canvas canvas) {
-        super.onDraw(canvas);
-
-    }
-
-    @Override
-    protected void onSizeChanged(int w, int h, int oldw, int oldh) {
-        super.onSizeChanged(w, h, oldw, oldh);
-    }
-
     @Override
     public void setCompoundDrawables(Drawable left, Drawable top,
                                      Drawable right, Drawable bottom) {
