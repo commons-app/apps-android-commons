@@ -229,6 +229,11 @@ if(isRunningOnTravis && file('../play.p12').exists()) {
         track = "alpha"
         userFraction = 1
         serviceAccountEmail = System.getenv("SERVICE_ACCOUNT_NAME")
-        pk12File = file("../play.p12")
+        serviceAccountCredentials = file("../play.p12")
+
+        resolutionStrategy = "auto"
+        outputProcessor { // this: ApkVariantOutput
+            versionNameOverride = "$versionNameOverride.$versionCode"
+        }
     }
 }
