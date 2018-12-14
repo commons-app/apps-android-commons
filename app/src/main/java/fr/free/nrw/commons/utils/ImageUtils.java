@@ -223,40 +223,37 @@ public class ImageUtils {
     }
 
     public static String getErrorMessageForResult(Context context, @Result int result) {
-        String errorMessage;
-        if (result == ImageUtils.IMAGE_DARK)
-            errorMessage = context.getString(R.string.upload_image_problem_dark);
-        else if (result == ImageUtils.IMAGE_BLURRY)
-            errorMessage = context.getString(R.string.upload_image_problem_blurry);
-        else if (result == ImageUtils.IMAGE_DUPLICATE)
-            errorMessage = context.getString(R.string.upload_image_problem_duplicate);
-        else if (result == ImageUtils.IMAGE_GEOLOCATION_DIFFERENT)
-            errorMessage = context.getString(R.string.upload_image_problem_wrong_location);
-        else if (result == (ImageUtils.IMAGE_DARK|ImageUtils.IMAGE_GEOLOCATION_DIFFERENT))
-            errorMessage = context.getString(R.string.upload_image_problem_wrong_location_dark);
-        else if (result == (ImageUtils.IMAGE_BLURRY|ImageUtils.IMAGE_GEOLOCATION_DIFFERENT))
-            errorMessage = context.getString(R.string.upload_image_problem_wrong_location_blurry);
-        else if (result == (ImageUtils.IMAGE_DUPLICATE|ImageUtils.IMAGE_GEOLOCATION_DIFFERENT))
-            errorMessage = context.getString(R.string.upload_image_problem_wrong_location_duplicate);
-        else if (result == (ImageUtils.IMAGE_DARK|ImageUtils.IMAGE_BLURRY))
-            errorMessage = context.getString(R.string.upload_image_problem_dark_blurry);
-        else if (result == (ImageUtils.IMAGE_DARK|ImageUtils.IMAGE_BLURRY|ImageUtils.IMAGE_GEOLOCATION_DIFFERENT))
-            errorMessage = context.getString(R.string.upload_image_problem_dark_blurry_wrong_location);
-        else if (result == (ImageUtils.IMAGE_DARK|ImageUtils.IMAGE_DUPLICATE))
-            errorMessage = context.getString(R.string.upload_image_problem_dark_duplicate);
-        else if (result == (ImageUtils.IMAGE_DARK|ImageUtils.IMAGE_DUPLICATE|IMAGE_GEOLOCATION_DIFFERENT))
-            errorMessage = context.getString(R.string.upload_image_problem_blurry_duplicate_wrong_location);
-        else if (result == (ImageUtils.IMAGE_BLURRY|ImageUtils.IMAGE_DUPLICATE))
-            errorMessage = context.getString(R.string.upload_image_problem_blurry_duplicate);
-        else if (result == (ImageUtils.IMAGE_BLURRY|ImageUtils.IMAGE_DUPLICATE|ImageUtils.IMAGE_GEOLOCATION_DIFFERENT))
-            errorMessage = context.getString(R.string.upload_image_problem_blurry_duplicate_wrong_location);
-        else if (result == (ImageUtils.IMAGE_DARK|ImageUtils.IMAGE_BLURRY|ImageUtils.IMAGE_DUPLICATE))
-            errorMessage = context.getString(R.string.upload_image_problem_dark_blurry_duplicate);
-        else if (result == (ImageUtils.IMAGE_DARK|ImageUtils.IMAGE_BLURRY|ImageUtils.IMAGE_DUPLICATE|ImageUtils.IMAGE_GEOLOCATION_DIFFERENT))
-            errorMessage = context.getString(R.string.upload_image_problem_dark_blurry_duplicate_wrong_location);
-        else
-            return "";
+        /**
+         * Result variable is a result of an or operation of all possbile problems. Ie. if result
+         * is 0001 means IMAGE_DARK, if result is 1100 IMAGE_DUPLICATE and IMAGE_GEOLOCATION_DIFFERENT
+         */
+        StringBuilder errorMessage = new StringBuilder();
+        if (((IMAGE_DARK | IMAGE_GEOLOCATION_DIFFERENT | IMAGE_BLURRY | IMAGE_DUPLICATE) & result) == 0 ) {
+            Timber.d("No issues to warn user is found");
+        } else {
+            Timber.d("Issues found to warn user");
 
-        return errorMessage;
+            errorMessage.append(context.getResources().getString(R.string.upload_problem_exist));
+
+            if ((IMAGE_DARK & result) != 0 ) { // We are checking image dark bit to see if that bit is set or not
+                errorMessage.append(context.getResources().getString(R.string.upload_problem_image_dark));
+            }
+
+            if ((IMAGE_BLURRY & result) != 0 ) {
+                errorMessage.append(context.getResources().getString(R.string.upload_image_problem_blurry));
+            }
+
+            if ((IMAGE_DUPLICATE & result) != 0 ) {
+                errorMessage.append(context.getResources().getString(R.string.upload_problem_image_duplicate));
+            }
+
+            if ((IMAGE_GEOLOCATION_DIFFERENT & result) != 0 ) {
+                errorMessage.append(context.getResources().getString(R.string.upload_problem_different_geolocation));
+            }
+
+            errorMessage.append(context.getResources().getString(R.string.upload_problem_do_you_continue));
+        }
+
+        return errorMessage.toString();
     }
 }
