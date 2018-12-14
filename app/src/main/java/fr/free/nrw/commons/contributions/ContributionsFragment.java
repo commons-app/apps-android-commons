@@ -160,7 +160,6 @@ public class ContributionsFragment
         View view = inflater.inflate(R.layout.fragment_contributions, container, false);
         ButterKnife.bind(this, view);
         presenter = new CampaignsPresenter();
-        presenter = new CampaignsPresenter();
         presenter.onAttachView(this);
         campaignView.setVisibility(View.GONE);
         nearbyNoificationCardView = view.findViewById(R.id.card_view_nearby);
