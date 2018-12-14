@@ -30,7 +30,7 @@ before_script:
 script:
 - "./gradlew clean check connectedCheck jacocoTestReport"
 - if [ "$TRAVIS_PULL_REQUEST" == "false" ]; then
-  ./gradlew publishBundle;
+  ./gradlew publishProdReleaseApk;
   fi
 after_success:
 - bash <(curl -s https://codecov.io/bash)
