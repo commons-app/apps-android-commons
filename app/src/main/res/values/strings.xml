@@ -434,5 +434,6 @@ Upload your first media by touching the camera or gallery icon above.</string>
   <string name="display_location_permission_explanation">Ask for location permission when needed for nearby notification card view feature.</string>
 
   <string name="this_function_needs_network_connection">This function requires network connection, please check your connection settings.</string>
+  <string name="bad_token_error_proposed_solution">Upload failed with "badtoken" error. Logging out and in again usually help to solve this issue. Meanwhile, we are working to prevent this error. </string>
 
 </resources>
