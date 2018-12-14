@@ -3,7 +3,10 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
 apply plugin: 'jacoco-android'
+apply plugin: 'com.github.triplet.play'
 apply from: 'quality.gradle'
+
+def isRunningOnTravis = System.getenv("CI") == "true"
 
 dependencies {
     implementation 'com.github.nicolas-raoul:Quadtree:ac16ea8035bf07'
@@ -138,8 +141,6 @@ android {
         }
     }
 	
-    def isRunningOnTravis = System.getenv("CI") == "true"
-
     if (isRunningOnTravis) {
         // configure keystore based on env vars in Travis for automated alpha builds
         signingConfigs.release.storeFile = file("../nr-commons.keystore")
@@ -221,4 +222,13 @@ android {
     }
 
     buildToolsVersion buildToolsVersion
+}
+
+if(isRunningOnTravis && file('../play.p12').exists()) {
+    play {
+        track = "alpha"
+        userFraction = 1
+        serviceAccountEmail = System.getenv("SERVICE_ACCOUNT_NAME")
+        serviceAccountCredentials = file("../play.p12")
+    }
 }
