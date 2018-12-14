@@ -117,12 +117,17 @@ android {
         test.assets.srcDirs += 'src/main/assets'
         test.resources.srcDirs += 'src/main/resoures'
     }
+	
+	signingConfigs {
+        release
+    }
 
     buildTypes {
         release {
             minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
             testProguardFile 'test-proguard-rules.txt'
+			signingConfig signingConfigs.release
         }
         debug {
             minifyEnabled true
@@ -131,6 +136,16 @@ android {
             testProguardFile 'test-proguard-rules.txt'
             versionNameSuffix "-debug-" + getBranchName() + "~" + getBuildVersion()
         }
+    }
+	
+    def isRunningOnTravis = System.getenv("CI") == "true"
+
+    if (isRunningOnTravis) {
+        // configure keystore based on env vars in Travis for automated alpha builds
+        signingConfigs.release.storeFile = file("../nr-commons.keystore")
+        signingConfigs.release.storePassword = System.getenv("keystore_password")
+        signingConfigs.release.keyAlias = System.getenv("key_alias")
+        signingConfigs.release.keyPassword = System.getenv("key_password")
     }
 
     flavorDimensions 'tier'
