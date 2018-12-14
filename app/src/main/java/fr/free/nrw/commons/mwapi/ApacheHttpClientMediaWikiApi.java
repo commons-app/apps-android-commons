@@ -78,6 +78,8 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
     private SharedPreferences categoryPreferences;
     private Gson gson;
     private final OkHttpClient okHttpClient;
+    private final String WIKIMEDIA_CAMPAIGNS_BASE_URL =
+        "https://raw.githubusercontent.com/commons-app/campaigns/master/campaigns.json";
 
     public ApacheHttpClientMediaWikiApi(Context context,
                                         String apiURL,
@@ -1059,9 +1061,7 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
 
     @Override public Single<CampaignResponseDTO> getCampaigns() {
         return Single.fromCallable(() -> {
-            Request request = new Request.Builder().url(
-                "https://raw.githubusercontent.com/ashishkumar468/campaigns/master/campaigns.json")
-                .build();
+            Request request = new Request.Builder().url(WIKIMEDIA_CAMPAIGNS_BASE_URL).build();
             Response response = okHttpClient.newCall(request).execute();
             if (response != null && response.body() != null && response.isSuccessful()) {
                 String json = response.body().string();
