@@ -74,14 +74,7 @@ public class BookmarkLocationsFragment extends DaggerFragment {
         super.onViewCreated(view, savedInstanceState);
         progressBar.setVisibility(View.VISIBLE);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        recyclerView.setAdapter(
-                adapterFactory.create(
-                        new ArrayList<>(),
-                        () -> {
-                            initList();
-                        }
-                )
-        );
+        recyclerView.setAdapter(adapterFactory.create(new ArrayList<>(), this::initList));
     }
 
     @Override

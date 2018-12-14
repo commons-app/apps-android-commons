@@ -382,8 +382,8 @@ public class ContributionsFragment
                         DialogUtil.showAlertDialog(getActivity(),
                                 getString(R.string.nearby_card_permission_title),
                                 getString(R.string.nearby_card_permission_explanation),
-                                () -> displayYouWontSeeNearbyMessage(),
-                                () -> enableLocationPermission(),
+                                this::displayYouWontSeeNearbyMessage,
+                                this::enableLocationPermission,
                                 checkBoxView,
                                 false);
                     }
@@ -588,8 +588,8 @@ public class ContributionsFragment
                 DialogUtil.showAlertDialog(getActivity(),
                         getString(R.string.nearby_card_permission_title),
                         getString(R.string.nearby_card_permission_explanation),
-                        () -> displayYouWontSeeNearbyMessage(),
-                        () -> enableGPS(),
+                        this::displayYouWontSeeNearbyMessage,
+                        this::enableGPS,
                         checkBoxView,
                         false);
             }
@@ -612,8 +612,8 @@ public class ContributionsFragment
                         DialogUtil.showAlertDialog(getActivity(),
                                 getString(R.string.nearby_card_permission_title),
                                 getString(R.string.nearby_card_permission_explanation),
-                                () -> displayYouWontSeeNearbyMessage(),
-                                () -> enableLocationPermission(),
+                                this::displayYouWontSeeNearbyMessage,
+                                this::enableLocationPermission,
                                 checkBoxView,
                                 false);
                 }
