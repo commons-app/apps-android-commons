@@ -43,5 +43,5 @@ cache:
   - "$HOME/.gradle/caches/"
   - "$HOME/.gradle/wrapper/"
 before_install:
-- openssl aes-256-cbc -K $encrypted_38a0ba8cc247_key -iv $encrypted_38a0ba8cc247_iv
+- openssl aes-256-cbc -K $encrypted_7b5c925cc32c_key -iv $encrypted_7b5c925cc32c_iv
   -in nr-commons.keystore.enc -out nr-commons.keystore -d
