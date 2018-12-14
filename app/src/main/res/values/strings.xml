@@ -348,6 +348,7 @@
   <string name="search_history_deleted">Search history deleted</string>
   <string name="nominate_delete">Nominate For Deletion</string>
 
+
   <string name="Achievements">Achievements</string>
   <string name="statistics">STATISTICS</string>
   <string name="statistics_thanks">Thanks Received</string>
@@ -398,7 +399,6 @@
   <string name="bookmark_empty">You haven\'t added any bookmarks</string>
   <string name="provider_bookmarks_location">Bookmarks</string>
   <string name="log_collection_started">Log collection started. Please RESTART the app, perform action that you wish to log, and then tap \'Send log file\' again</string>
-
   <string name="deletion_reason_uploaded_by_mistake">I uploaded it by mistake</string>
   <string name="deletion_reason_publicly_visible">I did not know it would be publicly visible</string>
   <string name="deletion_reason_bad_for_my_privacy">I realized it is bad for my privacy</string>
@@ -407,7 +407,6 @@
   <string name="uploaded_by_myself">Uploaded by myself on</string>
   <string name="used_by">,used in</string>
   <string name="articles">articles</string>
-
   <string name="no_uploads">Welcome to Commons!\n
 Upload your first media by touching the camera or gallery icon above.</string>
 
@@ -433,5 +432,10 @@ Upload your first media by touching the camera or gallery icon above.</string>
   <string name="never_ask_again">Never ask this again</string>
   <string name="display_location_permission_title">Display location permission</string>
   <string name="display_location_permission_explanation">Ask for location permission when needed for nearby notification card view feature.</string>
+  <string name="achievements_fetch_failed">Something went wrong, We could not fetch your achievements</string>
+  <string name="ends_on">Ends on:</string>
+  <string name="display_campaigns">Display campaigns</string>
+  <string name="display_campaigns_explanation">Tap here to see the ongoing campaigns</string>
+  <string name="nearby_campaign_dismiss_message">You won\'t see the campaigns anymore. However, you can re-enable this notification in Settings if you wish.</string>
 
 </resources>
