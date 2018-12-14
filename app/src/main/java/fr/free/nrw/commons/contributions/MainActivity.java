@@ -123,19 +123,16 @@ public class MainActivity extends AuthenticatedActivity implements FragmentManag
         ImageView nearbyInfo = nearbyTabLinearLayout.findViewById(R.id.nearby_info_image);
         tabLayout.getTabAt(1).setCustomView(nearbyTabLinearLayout);
 
-        nearbyInfo.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                /*new AlertDialog.Builder(MainActivity.this)
-                        .setTitle(R.string.title_activity_nearby)
-                        .setMessage(R.string.showcase_view_whole_nearby_activity)
-                        .setCancelable(true)
-                        .setNeutralButton(android.R.string.ok, (dialog, id) -> dialog.cancel())
-                        .create()
-                        .show();*/
-                String popupText = getResources().getString(R.string.showcase_view_whole_nearby_activity);
-                ViewUtil.displayPopupWindow(nearbyInfo, MainActivity.this, nearbyInfoPopupWindowLayout, popupText);
-            }
+        nearbyInfo.setOnClickListener(view -> {
+            /*new AlertDialog.Builder(MainActivity.this)
+                    .setTitle(R.string.title_activity_nearby)
+                    .setMessage(R.string.showcase_view_whole_nearby_activity)
+                    .setCancelable(true)
+                    .setNeutralButton(android.R.string.ok, (dialog, id) -> dialog.cancel())
+                    .create()
+                    .show();*/
+            String popupText = getResources().getString(R.string.showcase_view_whole_nearby_activity);
+            ViewUtil.displayPopupWindow(nearbyInfo, MainActivity.this, nearbyInfoPopupWindowLayout, popupText);
         });
 
         if (uploadServiceIntent != null) {

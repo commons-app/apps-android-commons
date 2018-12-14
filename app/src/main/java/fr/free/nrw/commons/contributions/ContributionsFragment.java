@@ -165,14 +165,10 @@ public class ContributionsFragment
         nearbyNoificationCardView = view.findViewById(R.id.card_view_nearby);
         checkBoxView = View.inflate(getActivity(), R.layout.nearby_permission_dialog, null);
         checkBox = (CheckBox) checkBoxView.findViewById(R.id.never_ask_again);
-        checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (isChecked) {
-                    // Do not ask for permission on activity start again
-                    prefs.edit().putBoolean("displayLocationPermissionForCardView",false).apply();
-                }
+        checkBox.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            if (isChecked) {
+                // Do not ask for permission on activity start again
+                prefs.edit().putBoolean("displayLocationPermissionForCardView",false).apply();
             }
         });
 

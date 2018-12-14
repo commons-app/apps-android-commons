@@ -527,13 +527,10 @@ public class NearbyMapFragment extends DaggerFragment {
             mapView = new MapView(getParentFragment().getActivity(), options);
             // create map
             mapView.onCreate(savedInstanceState);
-            mapView.getMapAsync(new OnMapReadyCallback() {
-                @Override
-                public void onMapReady(MapboxMap mapboxMap) {
-                    NearbyMapFragment.this.mapboxMap = mapboxMap;
-                    addMapMovementListeners();
-                    updateMapSignificantlyForCurrentLocation();
-                }
+            mapView.getMapAsync(mapboxMap -> {
+                NearbyMapFragment.this.mapboxMap = mapboxMap;
+                addMapMovementListeners();
+                updateMapSignificantlyForCurrentLocation();
             });
             mapView.setStyleUrl("asset://mapstyle.json");
         }
@@ -541,61 +538,51 @@ public class NearbyMapFragment extends DaggerFragment {
 
     private void addMapMovementListeners() {
 
-        mapboxMap.addOnCameraMoveListener(new MapboxMap.OnCameraMoveListener() {
+        mapboxMap.addOnCameraMoveListener(() -> {
 
-            @Override
-            public void onCameraMove() {
+            if (NearbyController.currentLocation != null) { // If our nearby markers are calculated at least once
 
-                if (NearbyController.currentLocation != null) { // If our nearby markers are calculated at least once
+                if (searchThisAreaButton.getVisibility() == View.GONE) {
+                    searchThisAreaButton.setVisibility(View.VISIBLE);
+                }
+                double distance = mapboxMap.getCameraPosition().target
+                        .distanceTo(new LatLng(NearbyController.currentLocation.getLatitude()
+                                , NearbyController.currentLocation.getLongitude()));
 
-                    if (searchThisAreaButton.getVisibility() == View.GONE) {
-                        searchThisAreaButton.setVisibility(View.VISIBLE);
-                    }
-                    double distance = mapboxMap.getCameraPosition().target
-                            .distanceTo(new LatLng(NearbyController.currentLocation.getLatitude()
-                                    , NearbyController.currentLocation.getLongitude()));
-
-                    if (distance > NearbyController.searchedRadius*1000*3/4) { //Convert to meter, and compare if our distance is bigger than 3/4 or our searched area
-                        if (!searchThisAreaModeOn) { // If we are changing mode, then change click action
+                if (distance > NearbyController.searchedRadius*1000*3/4) { //Convert to meter, and compare if our distance is bigger than 3/4 or our searched area
+                    if (!searchThisAreaModeOn) { // If we are changing mode, then change click action
+                        searchThisAreaModeOn = true;
+                        searchThisAreaButton.setOnClickListener(view -> {
                             searchThisAreaModeOn = true;
-                            searchThisAreaButton.setOnClickListener(new View.OnClickListener() {
-                                @Override
-                                public void onClick(View view) {
-                                    searchThisAreaModeOn = true;
-                                    // Lock map operations during search this area operation
-                                    mapboxMap.getUiSettings().setAllGesturesEnabled(false);
-                                    searchThisAreaButtonProgressBar.setVisibility(View.VISIBLE);
-                                    searchThisAreaButton.setVisibility(View.GONE);
-                                    searchedAroundCurrentLocation = false;
-                                    ((NearbyFragment)getParentFragment())
-                                            .refreshViewForCustomLocation(LocationUtils
-                                                    .mapBoxLatLngToCommonsLatLng(mapboxMap.getCameraPosition().target), false);
-                                }
-                            });
-                        }
-
-                    } else {
-                        if (searchThisAreaModeOn) {
-                            searchThisAreaModeOn = false; // This flag will help us to understand should we folor users location or not
-                            searchThisAreaButton.setOnClickListener(new View.OnClickListener() {
-                                @Override
-                                public void onClick(View view) {
-                                    searchThisAreaModeOn = true;
-                                    // Lock map operations during search this area operation
-                                    mapboxMap.getUiSettings().setAllGesturesEnabled(false);
-                                    searchThisAreaButtonProgressBar.setVisibility(View.VISIBLE);
-                                    fabRecenter.callOnClick();
-                                    searchThisAreaButton.setVisibility(View.GONE);
-                                    searchedAroundCurrentLocation = true;
-                                    ((NearbyFragment)getParentFragment())
-                                            .refreshViewForCustomLocation(LocationUtils
-                                                    .mapBoxLatLngToCommonsLatLng(mapboxMap.getCameraPosition().target), true);
-                                }
-                            });
-                        }
-                        if (searchedAroundCurrentLocation) {
+                            // Lock map operations during search this area operation
+                            mapboxMap.getUiSettings().setAllGesturesEnabled(false);
+                            searchThisAreaButtonProgressBar.setVisibility(View.VISIBLE);
                             searchThisAreaButton.setVisibility(View.GONE);
-                        }
+                            searchedAroundCurrentLocation = false;
+                            ((NearbyFragment)getParentFragment())
+                                    .refreshViewForCustomLocation(LocationUtils
+                                            .mapBoxLatLngToCommonsLatLng(mapboxMap.getCameraPosition().target), false);
+                        });
+                    }
+
+                } else {
+                    if (searchThisAreaModeOn) {
+                        searchThisAreaModeOn = false; // This flag will help us to understand should we folor users location or not
+                        searchThisAreaButton.setOnClickListener(view -> {
+                            searchThisAreaModeOn = true;
+                            // Lock map operations during search this area operation
+                            mapboxMap.getUiSettings().setAllGesturesEnabled(false);
+                            searchThisAreaButtonProgressBar.setVisibility(View.VISIBLE);
+                            fabRecenter.callOnClick();
+                            searchThisAreaButton.setVisibility(View.GONE);
+                            searchedAroundCurrentLocation = true;
+                            ((NearbyFragment)getParentFragment())
+                                    .refreshViewForCustomLocation(LocationUtils
+                                            .mapBoxLatLngToCommonsLatLng(mapboxMap.getCameraPosition().target), true);
+                        });
+                    }
+                    if (searchedAroundCurrentLocation) {
+                        searchThisAreaButton.setVisibility(View.GONE);
                     }
                 }
             }

@@ -407,28 +407,20 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setView(spinner);
         builder.setTitle(R.string.nominate_delete)
-                .setPositiveButton(R.string.about_translate_proceed, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        String reason = spinner.getSelectedItem().toString();
-                        ReasonBuilder reasonBuilder = new ReasonBuilder(reason,
-                                getActivity(),
-                                media,
-                                sessionManager,
-                                mwApi);
-                        reason = reasonBuilder.getReason();
-                        DeleteTask deleteTask = new DeleteTask(getActivity(), media, reason);
-                        deleteTask.execute();
-                        isDeleted = true;
-                        enableDeleteButton(false);
-                    }
+                .setPositiveButton(R.string.about_translate_proceed, (dialog, which) -> {
+                    String reason = spinner.getSelectedItem().toString();
+                    ReasonBuilder reasonBuilder = new ReasonBuilder(reason,
+                            getActivity(),
+                            media,
+                            sessionManager,
+                            mwApi);
+                    reason = reasonBuilder.getReason();
+                    DeleteTask deleteTask = new DeleteTask(getActivity(), media, reason);
+                    deleteTask.execute();
+                    isDeleted = true;
+                    enableDeleteButton(false);
                 });
-        builder.setNegativeButton(R.string.about_translate_cancel, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                dialog.dismiss();
-            }
-        });
+        builder.setNegativeButton(R.string.about_translate_cancel, (dialog, which) -> dialog.dismiss());
         AlertDialog dialog = builder.create();
         dialog.show();
         if(isDeleted) {

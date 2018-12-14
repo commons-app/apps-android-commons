@@ -117,38 +117,30 @@ public class NearbyNoificationCardView  extends SwipableCardView {
 
             if (permissionType == PermissionType.ENABLE_LOCATION_PERMISSON) {
 
-                permissionRequestButton.setOnClickListener(new OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        if (!((MainActivity)context).isFinishing()) {
-                            ((MainActivity) context).locationManager.requestPermissions((MainActivity) context);
-                        }
+                permissionRequestButton.setOnClickListener(view -> {
+                    if (!((MainActivity)context).isFinishing()) {
+                        ((MainActivity) context).locationManager.requestPermissions((MainActivity) context);
                     }
                 });
 
             } else if (permissionType == PermissionType.ENABLE_GPS) {
 
-                permissionRequestButton.setOnClickListener(new OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        new AlertDialog.Builder(context)
-                                .setMessage(R.string.gps_disabled)
-                                .setCancelable(false)
-                                .setPositiveButton(R.string.enable_gps,
-                                        (dialog, id) -> {
-                                            Intent callGPSSettingIntent = new Intent(
-                                                    android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS);
-                                            Timber.d("Loaded settings page");
-                                            ((MainActivity) context).startActivityForResult(callGPSSettingIntent, 1);
-                                        })
-                                .setNegativeButton(R.string.menu_cancel_upload, (dialog, id) -> {
-                                    dialog.cancel();
-                                    displayPermissionRequestButton(true);
+                permissionRequestButton.setOnClickListener(view -> new AlertDialog.Builder(context)
+                        .setMessage(R.string.gps_disabled)
+                        .setCancelable(false)
+                        .setPositiveButton(R.string.enable_gps,
+                                (dialog, id) -> {
+                                    Intent callGPSSettingIntent = new Intent(
+                                            android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+                                    Timber.d("Loaded settings page");
+                                    ((MainActivity) context).startActivityForResult(callGPSSettingIntent, 1);
                                 })
-                                .create()
-                                .show();
-                    }
-                });
+                        .setNegativeButton(R.string.menu_cancel_upload, (dialog, id) -> {
+                            dialog.cancel();
+                            displayPermissionRequestButton(true);
+                        })
+                        .create()
+                        .show());
             }
 
 
@@ -166,17 +158,14 @@ public class NearbyNoificationCardView  extends SwipableCardView {
 
             this.setVisibility(GONE);
             Handler nearbyNotificationHandler = new Handler();
-            Runnable nearbyNotificationRunnable = new Runnable() {
-                @Override
-                public void run() {
-                    if (cardViewVisibilityState != NearbyNoificationCardView.CardViewVisibilityState.READY
-                            && cardViewVisibilityState != NearbyNoificationCardView.CardViewVisibilityState.ASK_PERMISSION
-                            && cardViewVisibilityState != NearbyNoificationCardView.CardViewVisibilityState.INVISIBLE) {
-                        // If after 30 seconds, card view is not ready
-                        errorOcured();
-                    } else {
-                        suceeded();
-                    }
+            Runnable nearbyNotificationRunnable = () -> {
+                if (cardViewVisibilityState != CardViewVisibilityState.READY
+                        && cardViewVisibilityState != CardViewVisibilityState.ASK_PERMISSION
+                        && cardViewVisibilityState != CardViewVisibilityState.INVISIBLE) {
+                    // If after 30 seconds, card view is not ready
+                    errorOcured();
+                } else {
+                    suceeded();
                 }
             };
             nearbyNotificationHandler.postDelayed(nearbyNotificationRunnable, 30000);
