@@ -354,7 +354,7 @@ public class UploadPresenter {
      * Sets the list of licences and the default license.
      */
     private void updateLicenses() {
-        String selectedLicense = uploadModel.getSelectedLicense();
+        String selectedLicense = uploadModel.getDefaultLicense();
         view.updateLicenses(uploadModel.getLicenses(), selectedLicense);
         view.updateLicenseSummary(selectedLicense);
     }
