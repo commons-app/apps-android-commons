@@ -236,22 +236,22 @@ public class ImageUtils {
             errorMessage.append(context.getResources().getString(R.string.upload_problem_exist));
 
             if ((IMAGE_DARK & result) != 0 ) { // We are checking image dark bit to see if that bit is set or not
-                errorMessage.append(context.getResources().getString(R.string.upload_problem_image_dark));
+                errorMessage.append("\n - ").append(context.getResources().getString(R.string.upload_problem_image_dark));
             }
 
             if ((IMAGE_BLURRY & result) != 0 ) {
-                errorMessage.append(context.getResources().getString(R.string.upload_image_problem_blurry));
+                errorMessage.append("\n - ").append(context.getResources().getString(R.string.upload_image_problem_blurry));
             }
 
             if ((IMAGE_DUPLICATE & result) != 0 ) {
-                errorMessage.append(context.getResources().getString(R.string.upload_problem_image_duplicate));
+                errorMessage.append("\n - ").append(context.getResources().getString(R.string.upload_problem_image_duplicate));
             }
 
             if ((IMAGE_GEOLOCATION_DIFFERENT & result) != 0 ) {
-                errorMessage.append(context.getResources().getString(R.string.upload_problem_different_geolocation));
+                errorMessage.append("\n - ").append(context.getResources().getString(R.string.upload_problem_different_geolocation));
             }
 
-            errorMessage.append(context.getResources().getString(R.string.upload_problem_do_you_continue));
+            errorMessage.append("\n\n").append(context.getResources().getString(R.string.upload_problem_do_you_continue));
         }
 
         return errorMessage.toString();
