@@ -5,7 +5,6 @@ import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.support.graphics.drawable.VectorDrawableCompat;
-import android.util.Log;
 
 import com.mapbox.mapboxsdk.annotations.IconFactory;
 
