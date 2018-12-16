@@ -174,7 +174,10 @@ class DescriptionsAdapter extends RecyclerView.Adapter<DescriptionsAdapter.ViewH
                     descItemEditText.setCompoundDrawablesWithIntrinsicBounds(null, null, null, null);
                 }
 
-                descItemEditText.addTextChangedListener(new AbstractTextWatcher(description::setDescriptionText));
+                descItemEditText.addTextChangedListener(new AbstractTextWatcher(descriptionText->{
+                    setNewDescription(description,descriptionText,position);
+                }));
+
                 descItemEditText.setOnFocusChangeListener((v, hasFocus) -> {
                     if (!hasFocus) {
                         ViewUtil.hideKeyboard(v);
@@ -238,8 +241,8 @@ class DescriptionsAdapter extends RecyclerView.Adapter<DescriptionsAdapter.ViewH
                     ((SpinnerLanguagesAdapter) adapterView.getAdapter()).selectedLangCode = languageCode;
                 }
 
-                    @Override
-                    public void onNothingSelected(AdapterView<?> adapterView) {
+                @Override
+                public void onNothingSelected(AdapterView<?> adapterView) {
 
                 }
             });
@@ -252,6 +255,11 @@ class DescriptionsAdapter extends RecyclerView.Adapter<DescriptionsAdapter.ViewH
         private Drawable getInfoIcon() {
             return context.getResources().getDrawable(R.drawable.mapbox_info_icon_default);
         }
+    }
+
+    private void setNewDescription(Description description, String descriptionText, int position) {
+        description=descriptions.get(position-1);
+        description.setDescriptionText(descriptionText);
     }
 
     public interface Callback {
