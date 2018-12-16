@@ -3,7 +3,6 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
 apply plugin: 'jacoco-android'
-apply plugin: 'com.github.triplet.play'
 apply from: 'quality.gradle'
 
 def isRunningOnTravis = System.getenv("CI") == "true"
@@ -120,7 +119,7 @@ android {
         test.assets.srcDirs += 'src/main/assets'
         test.resources.srcDirs += 'src/main/resoures'
     }
-	
+
 	signingConfigs {
         release
     }
@@ -236,4 +235,8 @@ if(isRunningOnTravis && file('../play.p12').exists()) {
             versionNameOverride = "$versionNameOverride.$versionCode"
         }
     }
+}
+
+if(isRunningOnTravis) {
+    apply plugin: 'com.github.triplet.play'
 }
