@@ -39,9 +39,7 @@ public class NearbyNoificationCardView  extends SwipableCardView {
     public CardViewVisibilityState cardViewVisibilityState;
 
     public PermissionType permissionType;
-
-    float x1,x2;
-
+    
     public NearbyNoificationCardView(@NonNull Context context) {
         super(context);
         this.context = context;
@@ -105,76 +103,6 @@ public class NearbyNoificationCardView  extends SwipableCardView {
         ViewUtil.showLongToast(context,
             getResources().getString(R.string.nearby_notification_dismiss_message));
         return true;
-    }
-
-    /**
-     * Sets permission request button visible and content layout invisible, then adds correct
-     * permission request actions to permission request button according to PermissionType enum
-     * @param isPermissionRequestButtonNeeded true if permissions missing
-     */
-    public void displayPermissionRequestButton(boolean isPermissionRequestButtonNeeded) {
-        if (isPermissionRequestButtonNeeded) {
-            cardViewVisibilityState = CardViewVisibilityState.ASK_PERMISSION;
-            contentLayout.setVisibility(GONE);
-            permissionRequestButton.setVisibility(VISIBLE);
-
-            if (permissionType == PermissionType.ENABLE_LOCATION_PERMISSON) {
-
-                permissionRequestButton.setOnClickListener(new OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        if (!((MainActivity)context).isFinishing()) {
-                            ((MainActivity) context).locationManager.requestPermissions((MainActivity) context);
-                        }
-                    }
-                });
-
-            } else if (permissionType == PermissionType.ENABLE_GPS) {
-
-                permissionRequestButton.setOnClickListener(new OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        new AlertDialog.Builder(context)
-                                .setMessage(R.string.gps_disabled)
-                                .setCancelable(false)
-                                .setPositiveButton(R.string.enable_gps,
-                                        (dialog, id) -> {
-                                            Intent callGPSSettingIntent = new Intent(
-                                                    android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS);
-                                            Timber.d("Loaded settings page");
-                                            ((MainActivity) context).startActivityForResult(callGPSSettingIntent, 1);
-                                        })
-                                .setNegativeButton(R.string.menu_cancel_upload, (dialog, id) -> {
-                                    dialog.cancel();
-                                    displayPermissionRequestButton(true);
-                                })
-                                .create()
-                                .show();
-                    }
-                });
-            }
-
-
-        } else {
-            cardViewVisibilityState = CardViewVisibilityState.LOADING;
-
-            this.setVisibility(GONE);
-            Handler nearbyNotificationHandler = new Handler();
-            Runnable nearbyNotificationRunnable = new Runnable() {
-                @Override
-                public void run() {
-                    if (cardViewVisibilityState != NearbyNoificationCardView.CardViewVisibilityState.READY
-                            && cardViewVisibilityState != NearbyNoificationCardView.CardViewVisibilityState.ASK_PERMISSION
-                            && cardViewVisibilityState != NearbyNoificationCardView.CardViewVisibilityState.INVISIBLE) {
-                        // If after 30 seconds, card view is not ready
-                        errorOcured();
-                    } else {
-                        suceeded();
-                    }
-                }
-            };
-            nearbyNotificationHandler.postDelayed(nearbyNotificationRunnable, 30000);
-        }
     }
 
     /**
