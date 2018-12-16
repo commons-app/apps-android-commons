@@ -236,12 +236,12 @@
   <string name="upload_image_too_dark">This picture is too dark, are you sure you want to upload it? Wikimedia Commons is only for pictures with encyclopedic value.</string>
   <string name="upload_image_blurry">This picture is blurry, are you sure you want to upload it? Wikimedia Commons is only for pictures with encyclopedic value.</string>
 
-  <string name="upload_problem_exist">This image might not be proper to be uploaded:</string>
+  <string name="upload_problem_exist">Potential problems with this image:</string>
   <string name="upload_problem_image_dark">\n - Image is too dark.</string>
   <string name="upload_problem_image_blurry">\n - Image is blurry.</string>
   <string name="upload_problem_image_duplicate">\n - Image is already on Commons.</string>
-  <string name="upload_problem_different_geolocation">\n - This picture is taken at another location than you attempt to upload to.</string>
-  <string name="upload_problem_do_you_continue">\n Do you still want to upload this picture?</string>
+  <string name="upload_problem_different_geolocation">\n - This picture was taken at a different location.</string>
+  <string name="upload_problem_do_you_continue">\n\nDo you still want to upload this picture?</string>
 
   <string name="give_permission">Give permission</string>
   <string name="use_external_storage">Use external storage</string>
