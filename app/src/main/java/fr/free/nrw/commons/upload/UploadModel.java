@@ -8,6 +8,7 @@ import android.database.Cursor;
 import android.graphics.BitmapRegionDecoder;
 import android.net.Uri;
 import android.support.annotation.Nullable;
+import android.util.Log;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -115,7 +116,7 @@ public class UploadModel {
     }
 
     @SuppressLint("CheckResult")
-    void receiveDirect(Uri media, String mimeType, String source, String wikidataEntityIdPref, String title, String desc, SimilarImageInterface similarImageInterface) {
+    void receiveDirect(Uri media, String mimeType, String source, String wikidataEntityIdPref, String title, String desc, SimilarImageInterface similarImageInterface, String wikidataItemLocation) {
         initDefaultValues();
         long fileCreatedDate = getFileCreatedDate(media);
         String filePath = this.cacheFileUpload(media);
@@ -134,10 +135,15 @@ public class UploadModel {
                         .map(mwApi::existingFile)
                         .map(b -> b ? ImageUtils.IMAGE_DUPLICATE : ImageUtils.IMAGE_OK),
                 Single.fromCallable(() ->
+                        filePath)
+                        .map(FileUtils::getGeolocationOfFile)
+                        .map(geoLocation -> ImageUtils.checkImageGeolocationIsDifferent(geoLocation,wikidataItemLocation))
+                        .map(r -> r ? ImageUtils.IMAGE_GEOLOCATION_DIFFERENT : ImageUtils.IMAGE_OK),
+                Single.fromCallable(() ->
                         fileUtilsWrapper.getFileInputStream(filePath))
                         .map(file -> BitmapRegionDecoder.newInstance(file, false))
                         .map(ImageUtils::checkIfImageIsTooDark), //Returns IMAGE_DARK or IMAGE_OK
-                (dupe, dark) -> dupe | dark).subscribe(item.imageQuality::onNext, Timber::e);
+                (dupe, wrongGeo, dark) -> dupe | wrongGeo | dark).subscribe(item.imageQuality::onNext);
         items.add(item);
         items.get(0).selected = true;
         items.get(0).first = true;

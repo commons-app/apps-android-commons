@@ -236,13 +236,12 @@
   <string name="upload_image_too_dark">This picture is too dark, are you sure you want to upload it? Wikimedia Commons is only for pictures with encyclopedic value.</string>
   <string name="upload_image_blurry">This picture is blurry, are you sure you want to upload it? Wikimedia Commons is only for pictures with encyclopedic value.</string>
 
-  <string name="upload_image_problem_duplicate">This file already exists on Commons. Are you sure you want to proceed?</string>
-  <string name="upload_image_problem_dark">This picture is too dark, are you sure you want to upload it? Wikimedia Commons is only for pictures with encyclopedic value.</string>
-  <string name="upload_image_problem_blurry">This picture is blurry, are you sure you want to upload it? Wikimedia Commons is only for pictures with encyclopedic value.</string>
-  <string name="upload_image_problem_dark_duplicate">This picture is too dark and already exists on Commons, are you sure you want to upload it? Please only upload pictures with encyclopedic value.</string>
-  <string name="upload_image_problem_blurry_duplicate">This picture is blurry and already exists on Commons, are you sure you want to upload it? Please only upload pictures with encyclopedic value.</string>
-  <string name="upload_image_problem_dark_blurry">This picture is too dark and is blurry, are you sure you want to upload it? Please only upload pictures with encyclopedic value.</string>
-  <string name="upload_image_problem_dark_blurry_duplicate">This picture is too dark, is blurry and already exists on Commons, are you sure you want to upload it? Please only upload pictures with encyclopedic value.</string>
+  <string name="upload_problem_exist">Potential problems with this image:</string>
+  <string name="upload_problem_image_dark">\n - Image is too dark.</string>
+  <string name="upload_problem_image_blurry">\n - Image is blurry.</string>
+  <string name="upload_problem_image_duplicate">\n - Image is already on Commons.</string>
+  <string name="upload_problem_different_geolocation">\n - This picture was taken at a different location.</string>
+  <string name="upload_problem_do_you_continue">\n\nDo you still want to upload this picture?</string>
 
   <string name="give_permission">Give permission</string>
   <string name="use_external_storage">Use external storage</string>
