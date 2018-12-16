@@ -14,7 +14,6 @@ import android.support.design.widget.BottomSheetBehavior;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AlertDialog;
-import android.util.Log;
 import android.view.LayoutInflater;
 
 import android.view.View;
@@ -360,7 +359,6 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
      * @param nearbyPlacesInfo This variable has place list information and distances.
      */
     private void populatePlacesFromCustomLocation(NearbyController.NearbyPlacesInfo nearbyPlacesInfo) {
-        //NearbyMapFragment nearbyMapFragment = getMapFragment();
         if (nearbyMapFragment != null) {
             nearbyMapFragment.searchThisAreaButtonProgressBar.setVisibility(View.GONE);
         }
@@ -375,6 +373,10 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
         }
     }
 
+    /**
+     *
+     * @param nearbyPlacesInfo
+     */
     private void populatePlaces(NearbyController.NearbyPlacesInfo nearbyPlacesInfo) {
         Timber.d("Populating nearby places");
         List<Place> placeList = nearbyPlacesInfo.placeList;
@@ -391,7 +393,6 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
         }
 
         bundle.putString("PlaceList", gsonPlaceList);
-        //bundle.putString("CurLatLng", gsonCurLatLng);
         bundle.putString("BoundaryCoord", gsonBoundaryCoordinates);
 
         // First time to init fragments
@@ -702,6 +703,10 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
         resumeFragment();
         }
 
+    /**
+     * Perform nearby operations on nearby tab selected
+     * @param onOrientationChanged pass orientation changed info to fragment
+     */
     public void onTabSelected(boolean onOrientationChanged) {
         Timber.d("On nearby tab selected");
         this.onOrientationChanged = onOrientationChanged;
