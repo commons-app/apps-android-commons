@@ -32,6 +32,10 @@ public class NearbyPlaces {
     private final String wikidataQuery;
     public double radius = INITIAL_RADIUS;
 
+    /**
+     * Reads Wikidata query to check nearby wikidata items which needs picture, with a circular
+     * search. As a point is center of a circle with a radius will be set later.
+     */
     public NearbyPlaces() {
         try {
             wikidataQuery = FileUtils.readFromResource("/queries/nearby_query.rq");
