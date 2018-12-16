@@ -63,6 +63,9 @@ public class NearbyNoificationCardView  extends SwipableCardView {
         init();
     }
 
+    /**
+     * Initializes views and action listeners
+     */
     private void init() {
         View rootView = inflate(context, R.layout.nearby_card_view, this);
 
@@ -154,15 +157,6 @@ public class NearbyNoificationCardView  extends SwipableCardView {
 
         } else {
             cardViewVisibilityState = CardViewVisibilityState.LOADING;
-            /*permissionRequestButton.setVisibility(GONE);
-            contentLayout.setVisibility(VISIBLE);
-            // Set visibility of elements in content layout once it become visible
-            progressBar.setVisibility(VISIBLE);
-            notificationTitle.setVisibility(GONE);
-            notificationDistance.setVisibility(GONE);
-            notificationIcon.setVisibility(GONE);
-
-            permissionRequestButton.setVisibility(GONE);*/
 
             this.setVisibility(GONE);
             Handler nearbyNotificationHandler = new Handler();
@@ -183,10 +177,16 @@ public class NearbyNoificationCardView  extends SwipableCardView {
         }
     }
 
+    /**
+     * Time is up, data for card view is not ready, so do not display it
+     */
     private void errorOcured() {
         this.setVisibility(GONE);
     }
 
+    /**
+     * Data for card view is ready, display card view
+     */
     private void suceeded() {
         this.setVisibility(VISIBLE);
     }
