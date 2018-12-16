@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
+import android.view.View;
 
 import com.viewpagerindicator.CirclePageIndicator;
 
@@ -54,6 +55,11 @@ public class WelcomeActivity extends BaseActivity {
             isQuiz = false;
         }
 
+        // Enable skip button if beta flavor
+        if (BuildConfig.FLAVOR == "beta") {
+            findViewById(R.id.finishTutorialButton).setVisibility(View.VISIBLE);
+        }
+
         ButterKnife.bind(this);
 
         pager.setAdapter(adapter);
@@ -85,15 +91,6 @@ public class WelcomeActivity extends BaseActivity {
     }
 
     /**
-     * Triggers on click callback on button click
-     */
-    @Optional
-    @OnClick(R.id.welcomeYesButton)
-    void onClicked() {
-        finishTutorial();
-    }
-
-    /**
      * Override onBackPressed() to go to previous tutorial 'pages' if not on first page
      */
     @Override
@@ -105,8 +102,9 @@ public class WelcomeActivity extends BaseActivity {
         }
     }
 
-    private void finishTutorial() {
+    @OnClick(R.id.finishTutorialButton)
+    public void finishTutorial() {
         prefs.edit().putBoolean("firstrun", false).apply();
-        this.finish(); // welcomeYesButton moved to this activity.
+        finish();
     }
 }
