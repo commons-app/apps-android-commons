@@ -130,7 +130,6 @@ public class NearbyMapFragment extends DaggerFragment {
     private final double CAMERA_TARGET_SHIFT_FACTOR_PORTRAIT = 0.06;
     private final double CAMERA_TARGET_SHIFT_FACTOR_LANDSCAPE = 0.04;
 
-    private boolean isMapReady;
     public boolean searchThisAreaModeOn = false;
 
     private Bundle bundleForUpdtes;// Carry information from activity about changed nearby places and current location
@@ -793,9 +792,7 @@ public class NearbyMapFragment extends DaggerFragment {
         addAnchorToSmallFABs(fabGallery, ((NearbyFragment)getParentFragment()).view.findViewById(R.id.empty_view).getId());
 
         addAnchorToSmallFABs(fabCamera, ((NearbyFragment)getParentFragment()).view.findViewById(R.id.empty_view1).getId());
-
-        isMapReady = true;
-    }
+        }
 
 
     /*
