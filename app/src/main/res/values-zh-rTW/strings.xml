@@ -411,6 +411,7 @@
   <string name="yes_submit">是的，提交</string>
   <string name="no_go_back">不，返回</string>
   <string name="upload_flow_all_images_in_set">（在集合的所有圖片）</string>
+  <string name="search_this_area">搜尋此區域</string>
   <string name="nearby_card_permission_title">權限請求</string>
   <string name="nearby_card_permission_explanation">您是否願意讓我們使用您的目前位置，來顯示出缺少圖片的最近地點？</string>
   <string name="unable_to_display_nearest_place">沒有位置權限會無法顯示缺少圖片的最近地點</string>

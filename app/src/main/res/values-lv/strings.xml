@@ -123,4 +123,6 @@
   <string name="desc_language_Middle_East">Vidējie Austrumi</string>
   <string name="desc_language_Asia">Āzija</string>
   <string name="yes_submit">Jā, iesniegt</string>
+  <string name="nearby_card_permission_title">Atļaujas pieprasījums</string>
+  <string name="never_ask_again">Nekad vairs šo nejautāt</string>
 </resources>

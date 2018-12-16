@@ -1,4 +1,4 @@
-package fr.free.nrw.commons.upload;
+package fr.free.nrw.commons.widget;
 
 import android.app.Activity;
 import android.content.Context;
@@ -13,10 +13,7 @@ import android.view.Display;
  * Created by Ilgaz Er on 8/7/2018.
  */
 public class HeightLimitedRecyclerView extends RecyclerView {
-
     int height;
-
-
     public HeightLimitedRecyclerView(Context context) {
         super(context);
         DisplayMetrics displayMetrics = new DisplayMetrics();

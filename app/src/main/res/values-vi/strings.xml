@@ -2,6 +2,7 @@
 <!-- Authors:
 * Harriettruong3
 * Leducthn
+* Leduyquang753
 * Minh Nguyen
 * Nhatminh01
 * Thanhtai2009
@@ -271,4 +272,5 @@
   <string name="share_app_title">Chia sẻ Ứng dụng</string>
   <string name="share_coordinates_not_present">Tọa độ không được chỉ định khi chọn hình ảnh</string>
   <string name="error_fetching_nearby_places">Lỗi khi lấy các nơi lân cận.</string>
+  <string name="search_this_area">Tìm kiếm khu vực này</string>
 </resources>

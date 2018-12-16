@@ -3,7 +3,10 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
 apply plugin: 'jacoco-android'
+apply plugin: 'com.github.triplet.play'
 apply from: 'quality.gradle'
+
+def isRunningOnTravis = System.getenv("CI") == "true"
 
 dependencies {
     implementation 'com.github.nicolas-raoul:Quadtree:ac16ea8035bf07'
@@ -77,6 +80,8 @@ dependencies {
     releaseImplementation "com.squareup.leakcanary:leakcanary-android-no-op:$LEAK_CANARY"
     testImplementation "com.squareup.leakcanary:leakcanary-android-no-op:$LEAK_CANARY"
 
+    androidTestImplementation "org.mockito:mockito-core:2.10.0"
+
     //For handling runtime permissions
     implementation 'com.karumi:dexter:5.0.0'
 
@@ -100,6 +105,8 @@ android {
     }
 
     testOptions {
+        unitTests.returnDefaultValues = true
+
         unitTests.all {
             jvmArgs '-noverify'
         }
@@ -113,12 +120,17 @@ android {
         test.assets.srcDirs += 'src/main/assets'
         test.resources.srcDirs += 'src/main/resoures'
     }
+	
+	signingConfigs {
+        release
+    }
 
     buildTypes {
         release {
             minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
             testProguardFile 'test-proguard-rules.txt'
+			signingConfig signingConfigs.release
         }
         debug {
             minifyEnabled true
@@ -127,6 +139,14 @@ android {
             testProguardFile 'test-proguard-rules.txt'
             versionNameSuffix "-debug-" + getBranchName() + "~" + getBuildVersion()
         }
+    }
+	
+    if (isRunningOnTravis) {
+        // configure keystore based on env vars in Travis for automated alpha builds
+        signingConfigs.release.storeFile = file("../nr-commons.keystore")
+        signingConfigs.release.storePassword = System.getenv("keystore_password")
+        signingConfigs.release.keyAlias = System.getenv("key_alias")
+        signingConfigs.release.keyPassword = System.getenv("key_password")
     }
 
     flavorDimensions 'tier'
@@ -202,4 +222,18 @@ android {
     }
 
     buildToolsVersion buildToolsVersion
+}
+
+if(isRunningOnTravis && file('../play.p12').exists()) {
+    play {
+        track = "alpha"
+        userFraction = 1
+        serviceAccountEmail = System.getenv("SERVICE_ACCOUNT_NAME")
+        serviceAccountCredentials = file("../play.p12")
+
+        resolutionStrategy = "auto"
+        outputProcessor { // this: ApkVariantOutput
+            versionNameOverride = "$versionNameOverride.$versionCode"
+        }
+    }
 }

@@ -1,6 +1,7 @@
 package fr.free.nrw.commons.notification;
 
 import android.graphics.Color;
+import android.preference.PreferenceManager;
 import android.text.Html;
 import android.text.SpannableString;
 import android.text.Spanned;
@@ -77,7 +78,13 @@ public class NotificationRenderer extends Renderer<Notification> {
             public void updateDrawState(TextPaint ds) {
                 super.updateDrawState(ds);
                 ds.setUnderlineText(false);
-                ds.setColor(Color.BLACK);
+
+                if(PreferenceManager.getDefaultSharedPreferences(getContext()).getBoolean("theme", false)) {
+                    ds.setColor(Color.WHITE);
+                }
+                else {
+                    ds.setColor(Color.BLACK);
+                }
             }
         };
 

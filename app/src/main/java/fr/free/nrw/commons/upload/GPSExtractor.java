@@ -14,12 +14,12 @@ import timber.log.Timber;
  * Extracts geolocation to be passed to API for category suggestions. If a picture with geolocation
  * is uploaded, extract latitude and longitude from EXIF data of image.
  */
-public class GPSExtractor {
+class GPSExtractor {
 
-    public static final GPSExtractor DUMMY= new GPSExtractor();
+    static final GPSExtractor DUMMY= new GPSExtractor();
     private double decLatitude;
     private double decLongitude;
-    public boolean imageCoordsExists;
+    boolean imageCoordsExists;
     private String latitude;
     private String longitude;
     private String latitudeRef;
@@ -37,7 +37,7 @@ public class GPSExtractor {
      * @param fileDescriptor the file descriptor of the image
      */
     @RequiresApi(24)
-    public GPSExtractor(@NonNull FileDescriptor fileDescriptor) {
+    GPSExtractor(@NonNull FileDescriptor fileDescriptor) {
         try {
             ExifInterface exif = new ExifInterface(fileDescriptor);
             processCoords(exif);
@@ -51,7 +51,7 @@ public class GPSExtractor {
      * @param path file path of the image
      *
      */
-    public GPSExtractor(@NonNull String path) {
+    GPSExtractor(@NonNull String path) {
         try {
             ExifInterface exif = new ExifInterface(path);
             processCoords(exif);
@@ -65,7 +65,7 @@ public class GPSExtractor {
      * @param exif exif interface of the image
      *
      */
-    public GPSExtractor(@NonNull ExifInterface exif){
+    GPSExtractor(@NonNull ExifInterface exif){
         processCoords(exif);
     }
 
@@ -89,7 +89,7 @@ public class GPSExtractor {
      * @return coordinates as string (needs to be passed as a String in API query)
      */
     @Nullable
-    public String getCoords() {
+    String getCoords() {
         if(decimalCoords!=null){
             return decimalCoords;
         }else if (latitude!=null && latitudeRef!=null && longitude!=null && longitudeRef!=null) {
@@ -103,11 +103,11 @@ public class GPSExtractor {
         }
     }
 
-    public double getDecLatitude() {
+    double getDecLatitude() {
         return decLatitude;
     }
 
-    public double getDecLongitude() {
+    double getDecLongitude() {
         return decLongitude;
     }
 

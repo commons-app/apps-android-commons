@@ -255,11 +255,11 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment {
             if (requestCode == ContributionController.SELECT_FROM_CAMERA) {
                 // If coming from camera, pass null as uri. Because camera photos get saved to a
                 // fixed directory
-                controller.handleImagePicked(requestCode, null, false, null);
+                controller.handleImagePicked(requestCode, null, false, null, null);
             } else if (requestCode == ContributionController.PICK_IMAGE_MULTIPLE) {
                 handleMultipleImages(requestCode, data);
             } else if (requestCode == ContributionController.SELECT_FROM_GALLERY){
-                controller.handleImagePicked(requestCode, data.getData(), false, null);
+                controller.handleImagePicked(requestCode, data.getData(), false, null, null);
             }
         } else {
             Timber.e("OnActivityResult() parameters: Req code: %d Result code: %d Data: %s",
@@ -319,7 +319,7 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment {
             Log.v("LOG_TAG", "Selected Images" + mArrayUri.size());
             controller.handleImagesPicked(requestCode, mArrayUri);
         } else if(data.getData() != null) {
-            controller.handleImagePicked(SELECT_FROM_GALLERY, data.getData(), false, null);
+            controller.handleImagePicked(SELECT_FROM_GALLERY, data.getData(), false, null, null);
         }
     }
 
