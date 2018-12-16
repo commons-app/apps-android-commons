@@ -39,7 +39,7 @@ public class NearbyNoificationCardView  extends SwipableCardView {
     public CardViewVisibilityState cardViewVisibilityState;
 
     public PermissionType permissionType;
-    
+
     public NearbyNoificationCardView(@NonNull Context context) {
         super(context);
         this.context = context;
