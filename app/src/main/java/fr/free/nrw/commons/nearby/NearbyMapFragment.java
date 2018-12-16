@@ -360,7 +360,10 @@ public class NearbyMapFragment extends DaggerFragment {
             }
         }
     }
-    
+
+    /**
+     * Initialize all views. TODO: Use bind view instead.
+     */
     private void initViews() {
         Timber.d("initViews called");
         bottomSheetList = ((NearbyFragment)getParentFragment()).view.findViewById(R.id.bottom_sheet);
@@ -405,6 +408,9 @@ public class NearbyMapFragment extends DaggerFragment {
 
     }
 
+    /**
+     * Sets click listeners of FABs, and 2 bottom sheets
+     */
     private void setListeners() {
         fabPlus.setOnClickListener(view -> {
             if (applicationPrefs.getBoolean("login_skipped", false)) {
@@ -511,6 +517,10 @@ public class NearbyMapFragment extends DaggerFragment {
         }
     }
 
+    /**
+     * Sets up map view of first time it created, it passes MapBoxMap options and style assets.
+     * @param savedInstanceState bundle coming from Nearby Fragment
+     */
     private void setupMapView(Bundle savedInstanceState) {
         Timber.d("setupMapView called");
         MapboxMapOptions options = new MapboxMapOptions()
@@ -540,6 +550,10 @@ public class NearbyMapFragment extends DaggerFragment {
         }
     }
 
+    /**
+     * Adds map movement listener to understand swiping with fingers. So that we can display search
+     * this area button to search nearby places for other locations
+     */
     private void addMapMovementListeners() {
 
         mapboxMap.addOnCameraMoveListener(new MapboxMap.OnCameraMoveListener() {
@@ -943,6 +957,10 @@ public class NearbyMapFragment extends DaggerFragment {
         Utils.handleWebUrl(getContext(), link);
     }
 
+    /**
+     * Starts animation of fab plus (turning on opening) and other FABs
+     * @param isFabOpen state of FAB buttons, open when clicked on fab button, closed on other click
+     */
     private void animateFAB(boolean isFabOpen) {
             this.isFabOpen = !isFabOpen;
         if (fabPlus.isShown()){
@@ -963,6 +981,10 @@ public class NearbyMapFragment extends DaggerFragment {
         }
     }
 
+    /**
+     * Hides camera and gallery FABs, turn back plus FAB
+     * @param isFabOpen
+     */
     private void closeFabs ( boolean isFabOpen){
         if (isFabOpen) {
             fabPlus.startAnimation(rotate_backward);
