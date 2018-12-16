@@ -12,6 +12,9 @@ import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.location.LatLng;
 import timber.log.Timber;
 
+/**
+ * A single geolocated Wikidata item
+ */
 public class Place {
 
     public final String name;
@@ -38,20 +41,44 @@ public class Place {
         this.siteLinks = siteLinks;
     }
 
+    /**
+     * Gets the name of the place
+     * @return name
+     */
     public String getName() { return name; }
 
+    /** Gets the label of the place
+     * e.g. "building", "city", etc
+     * @return label
+     */
     public Label getLabel() {
         return label;
     }
 
+    /**
+     * Gets the long description of the place
+     * @return long description
+     */
     public String getLongDescription() { return longDescription; }
 
+    /**
+     * Gets the Commons category of the place
+     * @return Commons category
+     */
     public String getCategory() {return category; }
 
+    /**
+     * Sets the distance of the place from the user's location
+     * @param distance distance of place from user's location
+     */
     public void setDistance(String distance) {
         this.distance = distance;
     }
 
+    /**
+     * Gets the secondary image url for bookmarks
+     * @return secondary image url
+     */
     public Uri getSecondaryImageUrl() { return this.secondaryImageUrl; }
 
     /**
@@ -70,18 +97,35 @@ public class Place {
         return wikiDataLink.replace("http://www.wikidata.org/entity/", "");
     }
 
+    /**
+     * Checks if the Wikidata item has a Wikipedia page associated with it
+     * @return true if there is a Wikipedia link
+     */
     boolean hasWikipediaLink() {
         return !(siteLinks == null || Uri.EMPTY.equals(siteLinks.getWikipediaLink()));
     }
 
+    /**
+     * Checks if the Wikidata item has a Wikidata page associated with it
+     * @return true if there is a Wikidata link
+     */
     boolean hasWikidataLink() {
         return !(siteLinks == null || Uri.EMPTY.equals(siteLinks.getWikidataLink()));
     }
 
+    /**
+     * Checks if the Wikidata item has a Commons page associated with it
+     * @return true if there is a Commons link
+     */
     boolean hasCommonsLink() {
         return !(siteLinks == null || Uri.EMPTY.equals(siteLinks.getCommonsLink()));
     }
 
+    /**
+     * Check if we already have the exact same Place
+     * @param o Place being tested
+     * @return true if name and location of Place is exactly the same
+     */
     @Override
     public boolean equals(Object o) {
         if (o instanceof Place) {
