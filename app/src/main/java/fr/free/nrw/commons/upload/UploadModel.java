@@ -8,10 +8,8 @@ import android.database.Cursor;
 import android.graphics.BitmapRegionDecoder;
 import android.net.Uri;
 import android.support.annotation.Nullable;
-import android.util.Log;
 
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
@@ -26,7 +24,9 @@ import fr.free.nrw.commons.auth.SessionManager;
 import fr.free.nrw.commons.contributions.Contribution;
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
 import fr.free.nrw.commons.settings.Prefs;
+import fr.free.nrw.commons.utils.BitmapRegionDecoderWrapper;
 import fr.free.nrw.commons.utils.ImageUtils;
+import fr.free.nrw.commons.utils.ImageUtilsWrapper;
 import io.reactivex.Observable;
 import io.reactivex.Single;
 import io.reactivex.disposables.Disposable;
@@ -57,6 +57,8 @@ public class UploadModel {
     private SessionManager sessionManager;
     private Uri currentMediaUri;
     private FileUtilsWrapper fileUtilsWrapper;
+    private ImageUtilsWrapper imageUtilsWrapper;
+    private BitmapRegionDecoderWrapper bitmapRegionDecoderWrapper;
     private FileProcessor fileProcessor;
 
     @Inject
@@ -67,9 +69,12 @@ public class UploadModel {
                 MediaWikiApi mwApi,
                 SessionManager sessionManager,
                 FileUtilsWrapper fileUtilsWrapper,
+                ImageUtilsWrapper imageUtilsWrapper,
+                BitmapRegionDecoderWrapper bitmapRegionDecoderWrapper,
                 FileProcessor fileProcessor) {
         this.licenses = licenses;
         this.prefs = prefs;
+        this.bitmapRegionDecoderWrapper = bitmapRegionDecoderWrapper;
         this.license = Prefs.Licenses.CC_BY_SA_3;
         this.licensesByName = licensesByName;
         this.context = context;
@@ -78,6 +83,7 @@ public class UploadModel {
         this.sessionManager = sessionManager;
         this.fileUtilsWrapper = fileUtilsWrapper;
         this.fileProcessor = fileProcessor;
+        this.imageUtilsWrapper = imageUtilsWrapper;
         useExtStorage = this.prefs.getBoolean("useExternalStorage", false);
     }
 
@@ -103,8 +109,8 @@ public class UploadModel {
                                     .map(b -> b ? ImageUtils.IMAGE_DUPLICATE : ImageUtils.IMAGE_OK),
                             Single.fromCallable(() ->
                                     fileUtilsWrapper.getFileInputStream(filePath))
-                                    .map(file -> BitmapRegionDecoder.newInstance(file, false))
-                                    .map(ImageUtils::checkIfImageIsTooDark), //Returns IMAGE_DARK or IMAGE_OK
+                                    .map(file -> bitmapRegionDecoderWrapper.newInstance(file, false))
+                                    .map(imageUtilsWrapper::checkIfImageIsTooDark), //Returns IMAGE_DARK or IMAGE_OK
                             (dupe, dark) -> dupe | dark)
                             .observeOn(Schedulers.io())
                             .subscribe(item.imageQuality::onNext, Timber::e);
@@ -134,15 +140,14 @@ public class UploadModel {
                         .map(fileUtilsWrapper::getSHA1)
                         .map(mwApi::existingFile)
                         .map(b -> b ? ImageUtils.IMAGE_DUPLICATE : ImageUtils.IMAGE_OK),
-                Single.fromCallable(() ->
-                        filePath)
-                        .map(FileUtils::getGeolocationOfFile)
-                        .map(geoLocation -> ImageUtils.checkImageGeolocationIsDifferent(geoLocation,wikidataItemLocation))
+                Single.fromCallable(() -> filePath)
+                        .map(fileUtilsWrapper::getGeolocationOfFile)
+                        .map(geoLocation -> imageUtilsWrapper.checkImageGeolocationIsDifferent(geoLocation,wikidataItemLocation))
                         .map(r -> r ? ImageUtils.IMAGE_GEOLOCATION_DIFFERENT : ImageUtils.IMAGE_OK),
                 Single.fromCallable(() ->
                         fileUtilsWrapper.getFileInputStream(filePath))
-                        .map(file -> BitmapRegionDecoder.newInstance(file, false))
-                        .map(ImageUtils::checkIfImageIsTooDark), //Returns IMAGE_DARK or IMAGE_OK
+                        .map(file -> bitmapRegionDecoderWrapper.newInstance(file, false))
+                        .map(imageUtilsWrapper::checkIfImageIsTooDark), //Returns IMAGE_DARK or IMAGE_OK
                 (dupe, wrongGeo, dark) -> dupe | wrongGeo | dark).subscribe(item.imageQuality::onNext);
         items.add(item);
         items.get(0).selected = true;
