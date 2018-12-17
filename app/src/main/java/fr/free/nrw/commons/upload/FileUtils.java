@@ -43,7 +43,7 @@ public class FileUtils {
     /**
      * Get SHA1 of file from input stream
      */
-    static String getSHA1(InputStream is) {
+    public static String getSHA1(InputStream is) {
 
         MessageDigest digest;
         try {
