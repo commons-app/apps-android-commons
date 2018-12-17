@@ -24,7 +24,7 @@
 
     <application
         android:name=".CommonsApplication"
-        android:icon="@drawable/ic_launcher"
+        android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/LightAppTheme"
         android:supportsRtl="true" >
@@ -44,7 +44,7 @@
         <activity android:name=".WelcomeActivity" />
 
         <activity android:name=".upload.UploadActivity"
-            android:icon="@drawable/ic_launcher"
+            android:icon="@mipmap/ic_launcher"
             android:label="@string/app_name">
             <intent-filter android:label="@string/intent_share_upload_label">
                 <action android:name="android.intent.action.SEND" />
@@ -65,7 +65,7 @@
         </activity>
         <activity
             android:name=".contributions.MainActivity"
-            android:icon="@drawable/ic_launcher"
+            android:icon="@mipmap/ic_launcher"
             android:label="@string/app_name" />
         <activity
             android:name=".settings.SettingsActivity"
@@ -102,7 +102,7 @@
         <activity
             android:name=".explore.SearchActivity"
             android:label="@string/title_activity_search"
-            android:configChanges="orientation|keyboardHidden"
+            android:configChanges="orientation|keyboardHidden|screenSize"
             android:parentActivityName=".contributions.MainActivity"
             />
 

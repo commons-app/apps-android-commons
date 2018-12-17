@@ -39,4 +39,8 @@ public class FileUtilsWrapper {
     public FileInputStream getFileInputStream(String filePath) throws FileNotFoundException {
         return FileUtils.getFileInputStream(filePath);
     }
+
+    public String getGeolocationOfFile(String filePath) {
+        return FileUtils.getGeolocationOfFile(filePath);
+    }
 }

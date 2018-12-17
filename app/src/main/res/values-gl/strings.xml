@@ -239,9 +239,6 @@
   <string name="description_info">Por favor, describa o ficheiro todo o posibleː Onde se gravou? Cal é o contexto? Por favor, describa os obxectos ou persoas. Indique información que non pode ser adiviñada de forma doada, por exemplo, a hora do día se é unha paisaxe. Se o ficheiro amosa algo pouco habitual, por favor, explique que é o que o fai excepcional.</string>
   <string name="upload_image_too_dark">Esta imaxe está demasiado escura; está seguro de que desexa subila? Wikimedia Commons só acepta imaxes de valor enciclopédico.</string>
   <string name="upload_image_blurry">Esta imaxe está desenfocada, está seguro que quere subila? Wikimedia Commons só acepta imaxes con valor enciclopédico.</string>
-  <string name="upload_image_problem_duplicate">Este ficheiro xa existe en Commons. Está seguro de que quere continuar?</string>
-  <string name="upload_image_problem_dark">Esta imaxe é demasiado escura. Confirma que quere subila? Wikimedia Commons só acepta imaxes con valor enciclopédico.</string>
-  <string name="upload_image_problem_blurry">Esta imaxe está borrosa. Confirma que quere subila? Wikimedia Commons só acepta imaxes con valor enciclopédico.</string>
   <string name="give_permission">Outorgar permiso</string>
   <string name="use_external_storage">Usar o almacenamento externo</string>
   <string name="use_external_storage_summary">Gardar as imaxes capturadas coa cámara do seu dispositivo</string>
