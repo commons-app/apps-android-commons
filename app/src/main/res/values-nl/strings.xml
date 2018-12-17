@@ -182,7 +182,6 @@
   <string name="no_description_found">geen beschrijving gevonden</string>
   <string name="nearby_info_menu_wikipedia_article">Wikipedia-artikel</string>
   <string name="error_while_cache">Error tijdens het laden van de afbeeldingen</string>
-  <string name="upload_image_problem_duplicate">Dit bestand bestaat al op Commons. Weet u zeker dat u wilt doorgaan?</string>
   <string name="login_to_your_account">Aanmelden bij je profiel</string>
   <string name="send_log_file">Logboekbestand verzenden</string>
   <string name="nominate_deletion">Nomineer voor Verwijdering</string>

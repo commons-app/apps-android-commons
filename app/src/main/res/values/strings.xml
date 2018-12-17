@@ -236,13 +236,12 @@
   <string name="upload_image_too_dark">This picture is too dark, are you sure you want to upload it? Wikimedia Commons is only for pictures with encyclopedic value.</string>
   <string name="upload_image_blurry">This picture is blurry, are you sure you want to upload it? Wikimedia Commons is only for pictures with encyclopedic value.</string>
 
-  <string name="upload_image_problem_duplicate">This file already exists on Commons. Are you sure you want to proceed?</string>
-  <string name="upload_image_problem_dark">This picture is too dark, are you sure you want to upload it? Wikimedia Commons is only for pictures with encyclopedic value.</string>
-  <string name="upload_image_problem_blurry">This picture is blurry, are you sure you want to upload it? Wikimedia Commons is only for pictures with encyclopedic value.</string>
-  <string name="upload_image_problem_dark_duplicate">This picture is too dark and already exists on Commons, are you sure you want to upload it? Please only upload pictures with encyclopedic value.</string>
-  <string name="upload_image_problem_blurry_duplicate">This picture is blurry and already exists on Commons, are you sure you want to upload it? Please only upload pictures with encyclopedic value.</string>
-  <string name="upload_image_problem_dark_blurry">This picture is too dark and is blurry, are you sure you want to upload it? Please only upload pictures with encyclopedic value.</string>
-  <string name="upload_image_problem_dark_blurry_duplicate">This picture is too dark, is blurry and already exists on Commons, are you sure you want to upload it? Please only upload pictures with encyclopedic value.</string>
+  <string name="upload_problem_exist">Potential problems with this image:</string>
+  <string name="upload_problem_image_dark">Image is too dark.</string>
+  <string name="upload_problem_image_blurry">Image is blurry.</string>
+  <string name="upload_problem_image_duplicate">Image is already on Commons.</string>
+  <string name="upload_problem_different_geolocation">This picture was taken at a different location.</string>
+  <string name="upload_problem_do_you_continue">Do you still want to upload this picture?</string>
 
   <string name="give_permission">Give permission</string>
   <string name="use_external_storage">Use external storage</string>
@@ -313,6 +312,8 @@
   <string name="provider_searches">Recently searched queries</string>
   <string name="error_loading_categories">Error occurred while loading categories.</string>
   <string name="error_loading_subcategories">Error occurred while loading subcategories.</string>
+  <string name="search_tab_title_media">MEDIA</string>
+  <string name="search_tab_title_categories">CATEGORIES</string>
 
   <string name="successful_wikidata_edit">Image successfully added to %1$s on Wikidata!</string>
   <string name="wikidata_edit_failure">Failed to update corresponding Wikidata entity!</string>
@@ -343,6 +344,7 @@
   <string name="error_fetching_nearby_places">Error fetching nearby places.</string>
   <string name="add_description">+ Add description</string>
 
+  <string name="no_recent_searches">No recent searches</string>
   <string name="delete_recent_searches_dialog">Are you sure you want to clear your search history?</string>
   <string name="search_history_deleted">Search history deleted</string>
   <string name="nominate_delete">Nominate For Deletion</string>
@@ -432,5 +434,9 @@ Upload your first media by touching the camera or gallery icon above.</string>
   <string name="never_ask_again">Never ask this again</string>
   <string name="display_location_permission_title">Display location permission</string>
   <string name="display_location_permission_explanation">Ask for location permission when needed for nearby notification card view feature.</string>
+  <string name="ends_on">Ends on:</string>
+  <string name="display_campaigns">Display campaigns</string>
+  <string name="display_campaigns_explanation">Tap here to see the ongoing campaigns</string>
+  <string name="nearby_campaign_dismiss_message">You won\'t see the campaigns anymore. However, you can re-enable this notification in Settings if you wish.</string>
 
 </resources>

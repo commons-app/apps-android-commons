@@ -47,6 +47,11 @@
             android:title="@string/display_location_permission_title"
             android:defaultValue="true"
             android:summary="@string/display_location_permission_explanation" />
+        <fr.free.nrw.commons.ui.LongTitlePreferences.LongTitleSwitchPreference
+            android:key="displayCampaignsCardView"
+            android:title="@string/display_campaigns"
+            android:defaultValue="true"
+            android:summary="@string/display_campaigns_explanation" />
 
     </fr.free.nrw.commons.ui.LongTitlePreferences.LongTitlePreferenceCategory>
 

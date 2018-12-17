@@ -171,7 +171,6 @@
   <string name="nearby_info_menu_commons_article">കോമൺസ് പ്രമാണ താൾ</string>
   <string name="nearby_info_menu_wikidata_article">വിക്കിഡേറ്റാ ഇനം</string>
   <string name="nearby_info_menu_wikipedia_article">വിക്കിപീഡിയ ലേഖനം</string>
-  <string name="upload_image_problem_duplicate">ഈ പ്രമാണം കോമൺസിൽ നിലവിലുണ്ട്. തുടരണം എന്ന് താങ്കൾക്കുറപ്പാണോ?</string>
   <string name="give_permission">അനുമതി നൽകുക</string>
   <string name="login_to_your_account">താങ്കളുടെ അംഗത്വത്തിൽ പ്രവേശിക്കുക</string>
   <string name="view_browser">ബ്രൗസറിൽ കാണുക</string>

@@ -170,7 +170,6 @@
   <string name="navigation_item_notification">නිවේදන</string>
   <string name="no_description_found">කිසිම තොරතුරක් සොයාගැනීමට නොමැත</string>
   <string name="nearby_info_menu_wikidata_article">විකිදත්ත අයිතමය</string>
-  <string name="upload_image_problem_duplicate">මෙම ගොනුව දැනටමත් කොමන්ස් හි ඇත. ඔබට ඉදිරියට ‍යෑම ගැන විශ්වාසද?</string>
   <string name="use_external_storage">භාහිර ගබඩාව භාවිතා කරන්න</string>
   <string name="login_to_your_account">ඔබගේ ගිණුමට පිවිසෙන්න</string>
   <string name="nearby_location_has_not_changed">ස්ථානය වෙනස් වී නොමැත</string>

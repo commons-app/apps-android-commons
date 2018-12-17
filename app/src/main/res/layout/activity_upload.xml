@@ -23,7 +23,7 @@
             android:layout_height="match_parent"
             android:layout_below="@id/toolbar"
             android:background="@color/commons_app_blue_dark"
-            app:actualImageScaleType="centerCrop" />
+            app:actualImageScaleType="fitCenter" />
 
         <android.support.constraint.ConstraintLayout
             android:id="@+id/activity_upload_cards"
