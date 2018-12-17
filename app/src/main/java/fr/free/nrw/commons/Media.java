@@ -208,15 +208,15 @@ public class Media implements Parcelable {
     }
 
     /**
-     * Gets the datalength of the file.
-     * @return file datalength as a long
+     * Gets the dataLength of the file.
+     * @return file dataLength as a long
      */
     public long getDataLength() {
         return dataLength;
     }
 
     /**
-     * Sets the datalength of the file.
+     * Sets the dataLength of the file.
      * @param dataLength as a long
      */
     public void setDataLength(long dataLength) {

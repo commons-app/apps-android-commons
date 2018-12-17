@@ -198,7 +198,7 @@
                         android:layout_marginRight="32dp"
                         android:progress="50"
                         app:progress_text_size="9dp"
-                        android:id="@+id/images_used_by_wiki_progressbar"
+                        android:id="@+id/images_used_by_wiki_progress_bar"
                         app:progress_end_color="#8C8B98"
                         app:progress_start_color="#3A3381"
                         app:progress_stroke_width="2.5dp"

@@ -2,13 +2,11 @@ package fr.free.nrw.commons.nearby;
 
 import android.content.Context;
 import android.content.Intent;
-import android.content.res.Resources;
 import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
 import android.util.AttributeSet;
-import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -25,7 +23,7 @@ import timber.log.Timber;
 /**
  * Custom card view for nearby notification card view on main screen, above contributions list
  */
-public class NearbyNoificationCardView  extends SwipableCardView {
+public class NearbyNotificationCardView extends SwipableCardView {
 
     private Context context;
 
@@ -42,21 +40,21 @@ public class NearbyNoificationCardView  extends SwipableCardView {
 
     float x1,x2;
 
-    public NearbyNoificationCardView(@NonNull Context context) {
+    public NearbyNotificationCardView(@NonNull Context context) {
         super(context);
         this.context = context;
         cardViewVisibilityState = CardViewVisibilityState.INVISIBLE;
         init();
     }
 
-    public NearbyNoificationCardView(@NonNull Context context, @Nullable AttributeSet attrs) {
+    public NearbyNotificationCardView(@NonNull Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
         this.context = context;
         cardViewVisibilityState = CardViewVisibilityState.INVISIBLE;
         init();
     }
 
-    public NearbyNoificationCardView(@NonNull Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
+    public NearbyNotificationCardView(@NonNull Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         this.context = context;
         cardViewVisibilityState = CardViewVisibilityState.INVISIBLE;
@@ -82,8 +80,8 @@ public class NearbyNoificationCardView  extends SwipableCardView {
     @Override
     protected void onAttachedToWindow() {
         super.onAttachedToWindow();
-        // If you don't setVisibility after getting layout params, then you will se an empty space in place of nerabyNotificationCardView
-        if (((MainActivity)context).prefs.getBoolean("displayNearbyCardView", true) && this.cardViewVisibilityState == NearbyNoificationCardView.CardViewVisibilityState.READY) {
+        // If you don't setVisibility after getting layout params, then you will se an empty space in place of nearby NotificationCardView
+        if (((MainActivity)context).prefs.getBoolean("displayNearbyCardView", true) && this.cardViewVisibilityState == NearbyNotificationCardView.CardViewVisibilityState.READY) {
             this.setVisibility(VISIBLE);
         } else {
             this.setVisibility(GONE);
@@ -115,7 +113,7 @@ public class NearbyNoificationCardView  extends SwipableCardView {
             contentLayout.setVisibility(GONE);
             permissionRequestButton.setVisibility(VISIBLE);
 
-            if (permissionType == PermissionType.ENABLE_LOCATION_PERMISSON) {
+            if (permissionType == PermissionType.ENABLE_LOCATION_PERMISSION) {
 
                 permissionRequestButton.setOnClickListener(new OnClickListener() {
                     @Override
@@ -169,13 +167,13 @@ public class NearbyNoificationCardView  extends SwipableCardView {
             Runnable nearbyNotificationRunnable = new Runnable() {
                 @Override
                 public void run() {
-                    if (cardViewVisibilityState != NearbyNoificationCardView.CardViewVisibilityState.READY
-                            && cardViewVisibilityState != NearbyNoificationCardView.CardViewVisibilityState.ASK_PERMISSION
-                            && cardViewVisibilityState != NearbyNoificationCardView.CardViewVisibilityState.INVISIBLE) {
+                    if (cardViewVisibilityState != NearbyNotificationCardView.CardViewVisibilityState.READY
+                            && cardViewVisibilityState != NearbyNotificationCardView.CardViewVisibilityState.ASK_PERMISSION
+                            && cardViewVisibilityState != NearbyNotificationCardView.CardViewVisibilityState.INVISIBLE) {
                         // If after 30 seconds, card view is not ready
-                        errorOcured();
+                        errorOccurred();
                     } else {
-                        suceeded();
+                        succeeded();
                     }
                 }
             };
@@ -183,11 +181,11 @@ public class NearbyNoificationCardView  extends SwipableCardView {
         }
     }
 
-    private void errorOcured() {
+    private void errorOccurred() {
         this.setVisibility(GONE);
     }
 
-    private void suceeded() {
+    private void succeeded() {
         this.setVisibility(VISIBLE);
     }
 
@@ -266,7 +264,7 @@ public class NearbyNoificationCardView  extends SwipableCardView {
         READY,
         INVISIBLE,
         ASK_PERMISSION,
-        ERROR_OCURED
+        ERROR_OCCURRED
     }
 
     /**
@@ -275,7 +273,7 @@ public class NearbyNoificationCardView  extends SwipableCardView {
      */
     public enum PermissionType {
         ENABLE_GPS,
-        ENABLE_LOCATION_PERMISSON, // For only after Marsmallow
+        ENABLE_LOCATION_PERMISSION, // For only after Marshmallow
         NO_PERMISSION_NEEDED
     }
 }

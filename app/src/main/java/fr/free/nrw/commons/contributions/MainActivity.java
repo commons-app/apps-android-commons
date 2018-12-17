@@ -31,7 +31,7 @@ import fr.free.nrw.commons.auth.SessionManager;
 import fr.free.nrw.commons.location.LocationServiceManager;
 import fr.free.nrw.commons.nearby.NearbyFragment;
 import fr.free.nrw.commons.nearby.NearbyMapFragment;
-import fr.free.nrw.commons.nearby.NearbyNoificationCardView;
+import fr.free.nrw.commons.nearby.NearbyNotificationCardView;
 import fr.free.nrw.commons.notification.NotificationActivity;
 import fr.free.nrw.commons.theme.NavigationBaseActivity;
 import fr.free.nrw.commons.upload.UploadService;
@@ -139,7 +139,7 @@ public class MainActivity extends AuthenticatedActivity implements FragmentManag
         });
 
         if (uploadServiceIntent != null) {
-            // If auth cookie already acquired notify contrib fragmnet so that it san operate auth required actions
+            // If auth cookie already acquired notify contrib fragment so that it san operate auth required actions
             ((ContributionsFragment)contributionsActivityPagerAdapter.getItem(CONTRIBUTIONS_TAB_POSITION)).onAuthCookieAcquired(uploadServiceIntent);
         }
         setTabAndViewPagerSynchronisation();
@@ -254,11 +254,11 @@ public class MainActivity extends AuthenticatedActivity implements FragmentManag
                 showTabs();
                 // Nearby Notification Card View was invisible when Media Details Fragment is active, make it visible again on Contrib List Fragment active, according to preferences
                 if (prefs.getBoolean("displayNearbyCardView", true)) {
-                    if (contributionsFragment.nearbyNoificationCardView.cardViewVisibilityState == NearbyNoificationCardView.CardViewVisibilityState.READY) {
-                        contributionsFragment.nearbyNoificationCardView.setVisibility(View.VISIBLE);
+                    if (contributionsFragment.nearbyNotificationCardView.cardViewVisibilityState == NearbyNotificationCardView.CardViewVisibilityState.READY) {
+                        contributionsFragment.nearbyNotificationCardView.setVisibility(View.VISIBLE);
                     }
                 } else {
-                    contributionsFragment.nearbyNoificationCardView.setVisibility(View.GONE);
+                    contributionsFragment.nearbyNotificationCardView.setVisibility(View.GONE);
                 }
             } else {
                 finish();
@@ -342,7 +342,7 @@ public class MainActivity extends AuthenticatedActivity implements FragmentManag
     }
 
     /**
-     * Updte notification icon if there is an unread notification
+     * Update notification icon if there is an unread notification
      * @param isThereUnreadNotifications true if user didn't visit notifications activity since
      *                                   latest notification came to account
      */
@@ -372,7 +372,7 @@ public class MainActivity extends AuthenticatedActivity implements FragmentManag
         }
 
         /*
-         * Do not use getItem method to access fragments on pager adapter. User reference vairables
+         * Do not use getItem method to access fragments on pager adapter. User reference variables
          * instead.
          * */
         @Override
