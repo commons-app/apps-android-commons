@@ -312,8 +312,8 @@
   <string name="provider_searches">Recently searched queries</string>
   <string name="error_loading_categories">Error occurred while loading categories.</string>
   <string name="error_loading_subcategories">Error occurred while loading subcategories.</string>
-  <string name="search_media_by_name">MEDIA</string>
-  <string name="search_media_by_categories">CATEGORIES</string>
+  <string name="search_tab_title_media">MEDIA</string>
+  <string name="search_tab_title_categories">CATEGORIES</string>
 
   <string name="successful_wikidata_edit">Image successfully added to %1$s on Wikidata!</string>
   <string name="wikidata_edit_failure">Failed to update corresponding Wikidata entity!</string>
