@@ -26,7 +26,7 @@
                 android:id="@+id/backgroundImage"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                app:actualImageScaleType="centerCrop" />
+                app:actualImageScaleType="fitCenter" />
 
             <FrameLayout
                 android:id="@+id/single_upload_fragment_container"
