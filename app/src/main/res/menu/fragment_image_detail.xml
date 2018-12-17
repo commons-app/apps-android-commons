@@ -13,12 +13,13 @@
         android:title="@string/menu_share"
         app:showAsAction="always" />
     <item
+        android:id="@+id/menu_download_current_image"
+        android:icon="@drawable/ic_download_white_24dp"
+        android:title="@string/menu_download"
+        app:showAsAction="always" />
+    <item
         android:id="@+id/menu_browser_current_image"
         android:title="@string/menu_open_in_browser"
-        app:showAsAction="never" />
-    <item
-        android:id="@+id/menu_download_current_image"
-        android:title="@string/menu_download"
         app:showAsAction="never" />
     <item
         android:id="@+id/menu_set_as_wallpaper"

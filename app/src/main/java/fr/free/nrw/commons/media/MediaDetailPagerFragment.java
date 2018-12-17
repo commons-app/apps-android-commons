@@ -38,7 +38,6 @@ import fr.free.nrw.commons.bookmarks.pictures.BookmarkPicturesDao;
 import fr.free.nrw.commons.category.CategoryDetailsActivity;
 import fr.free.nrw.commons.category.CategoryImagesActivity;
 import fr.free.nrw.commons.contributions.Contribution;
-import fr.free.nrw.commons.contributions.ContributionsActivity;
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
 import fr.free.nrw.commons.explore.SearchActivity;
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
@@ -70,6 +69,7 @@ public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment imple
     private boolean isFeaturedImage;
     MediaDetailAdapter adapter;
     private Bookmark bookmark;
+    private MediaDetailProvider provider;
 
     public MediaDetailPagerFragment() {
         this(false, false);
@@ -129,6 +129,23 @@ public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment imple
             isFeaturedImage = savedInstanceState.getBoolean("isFeaturedImage");
         }
         setHasOptionsMenu(true);
+        initProvider();
+    }
+
+    /**
+     * initialise the provider, based on from where the fragment was started, as in from an activity
+     * or a fragment
+     */
+    private void initProvider() {
+        if (getParentFragment() != null) {
+            provider = (MediaDetailProvider) getParentFragment();
+        } else {
+            provider = (MediaDetailProvider) getActivity();
+        }
+    }
+
+    public MediaDetailProvider getMediaDetailProvider() {
+        return provider;
     }
 
     @Override
@@ -137,7 +154,7 @@ public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment imple
             Timber.d("Returning as activity is destroyed!");
             return true;
         }
-        MediaDetailProvider provider = (MediaDetailProvider) getActivity();
+
         Media m = provider.getMediaAtPosition(pager.getCurrentItem());
         switch (item.getItemId()) {
             case R.id.menu_bookmark_current_image:
@@ -174,12 +191,12 @@ public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment imple
                 return true;
             case R.id.menu_retry_current_image:
                 // Retry
-                ((ContributionsActivity) getActivity()).retryUpload(pager.getCurrentItem());
+                //((MainActivity) getActivity()).retryUpload(pager.getCurrentItem());
                 getActivity().getSupportFragmentManager().popBackStack();
                 return true;
             case R.id.menu_cancel_current_image:
                 // todo: delete image
-                ((ContributionsActivity) getActivity()).deleteUpload(pager.getCurrentItem());
+                //((MainActivity) getActivity()).deleteUpload(pager.getCurrentItem());
                 getActivity().getSupportFragmentManager().popBackStack();
                 return true;
             default:
@@ -254,8 +271,8 @@ public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment imple
             menu.clear(); // see http://stackoverflow.com/a/8495697/17865
             inflater.inflate(R.menu.fragment_image_detail, menu);
             if (pager != null) {
-                MediaDetailProvider provider = (MediaDetailProvider) getActivity();
-                if (provider == null) {
+                MediaDetailProvider provider = (MediaDetailProvider) getParentFragment();
+                if(provider == null) {
                     return;
                 }
 
@@ -326,7 +343,7 @@ public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment imple
 
     @Override
     public void onPageScrolled(int i, float v, int i2) {
-        if (getActivity() == null) {
+        if(getActivity() == null) {
             Timber.d("Returning as activity is destroyed!");
             return;
         }
@@ -347,7 +364,7 @@ public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment imple
                 e.printStackTrace();
             }
         }
-        getActivity().supportInvalidateOptionsMenu();
+        getActivity().invalidateOptionsMenu();
     }
 
     @Override
@@ -381,11 +398,11 @@ public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment imple
         public Fragment getItem(int i) {
             if (i == 0) {
                 // See bug https://code.google.com/p/android/issues/detail?id=27526
-                if (getActivity() == null) {
+                if(getActivity() == null) {
                     Timber.d("Skipping getItem. Returning as activity is destroyed!");
                     return null;
                 }
-                pager.postDelayed(() -> getActivity().supportInvalidateOptionsMenu(), 5);
+                pager.postDelayed(() -> getActivity().invalidateOptionsMenu(), 5);
             }
             return MediaDetailFragment.forMedia(i, editable, isFeaturedImage);
         }
@@ -396,7 +413,7 @@ public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment imple
                 Timber.d("Skipping getCount. Returning as activity is destroyed!");
                 return 0;
             }
-            return ((MediaDetailProvider) getActivity()).getTotalMediaCount();
+            return provider.getTotalMediaCount();
         }
     }
 }
