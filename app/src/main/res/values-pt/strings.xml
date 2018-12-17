@@ -243,13 +243,6 @@
   <string name="description_info">Por favor, descreva o ficheiro da melhor forma possível: Onde foi tirado? O que isso mostra? Qual é o contexto? Por favor, descreva os objetos ou as pessoas. Indique as informações que não podem ser facilmente adivinhadas, por exemplo, a hora do dia, se for uma paisagem. Se o ficheiro mostrar algo incomum, explique o que torna incomum.</string>
   <string name="upload_image_too_dark">Esta imagem está demasiado escura; tem a certeza de que deseja carregá-la? A wiki Wikimedia Commons só aceita as imagens de valor enciclopédico.</string>
   <string name="upload_image_blurry">Esta imagem está desfocada; tem a certeza de que deseja carregá-la? A wiki Wikimedia Commons serve apenas para imagens de valor enciclopédico.</string>
-  <string name="upload_image_problem_duplicate">Este ficheiro já existe na wiki Commons. Tem a certeza de que deseja continuar?</string>
-  <string name="upload_image_problem_dark">Esta imagem está demasiado escura; tem a certeza de que deseja carregá-la? A wiki Wikimedia Commons só aceita as imagens de valor enciclopédico.</string>
-  <string name="upload_image_problem_blurry">Esta imagem está desfocada; tem a certeza de que deseja carregá-la? A wiki Wikimedia Commons serve apenas para imagens de valor enciclopédico.</string>
-  <string name="upload_image_problem_dark_duplicate">Esta imagem está demasiado escura e já existe na wiki Commons; tem a certeza de que deseja carregá-la? Carregue só imagens de valor enciclopédico, por favor.</string>
-  <string name="upload_image_problem_blurry_duplicate">Esta imagem está desfocada e já existe na wiki Commons; tem a certeza de que deseja carregá-la? Carregue só imagens de valor enciclopédico, por favor.</string>
-  <string name="upload_image_problem_dark_blurry">Esta imagem está demasiado escura e está desfocada; tem a certeza de que deseja carregá-la? Carregue só imagens de valor enciclopédico, por favor.</string>
-  <string name="upload_image_problem_dark_blurry_duplicate">Esta imagem está demasiado escura, está desfocada e já existe na wiki Commons; tem a certeza de que deseja carregá-la? Carregue só imagens de valor enciclopédico, por favor.</string>
   <string name="give_permission">Permitir</string>
   <string name="use_external_storage">Utilizar a armazenagem externa</string>
   <string name="use_external_storage_summary">Gravar as fotografias tiradas com a câmara da aplicação no seu dispositivo</string>

@@ -175,7 +175,6 @@
   <string name="nearby_info_menu_commons_article">ကွန်မွန်းစ် ဖိုင်စာမျက်နှာ</string>
   <string name="nearby_info_menu_wikidata_article">ဝီကီးဒေတာ item</string>
   <string name="nearby_info_menu_wikipedia_article">ဝီကီပီးဒီးယား ဆောင်းပါး</string>
-  <string name="upload_image_problem_duplicate">ဤဖိုင်သည် ကွန်မွန်းစ်ပေါ်တွင် ရှိနှင့်ပြီးဖြစ်သည်။ ဆက်လုပ်ရန် သေချာပါသလား။</string>
   <string name="give_permission">ခွင့်ပြုချက် ပေးမည်</string>
   <string name="use_external_storage">ပြင်ပြသိုလှောင်ခန်းကို သုံးမည်</string>
   <string name="login_to_your_account">သင်၏အကောင့်သို့ ဝင်ရန်</string>
