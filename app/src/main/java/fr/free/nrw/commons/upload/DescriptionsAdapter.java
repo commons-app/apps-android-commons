@@ -175,7 +175,7 @@ class DescriptionsAdapter extends RecyclerView.Adapter<DescriptionsAdapter.ViewH
                 }
 
                 descItemEditText.addTextChangedListener(new AbstractTextWatcher(descriptionText->{
-                    setNewDescription(description,descriptionText,position);
+                    descriptions.get(position - 1).setDescriptionText(descriptionText);
                 }));
 
                 descItemEditText.setOnFocusChangeListener((v, hasFocus) -> {
@@ -255,11 +255,6 @@ class DescriptionsAdapter extends RecyclerView.Adapter<DescriptionsAdapter.ViewH
         private Drawable getInfoIcon() {
             return context.getResources().getDrawable(R.drawable.mapbox_info_icon_default);
         }
-    }
-
-    private void setNewDescription(Description description, String descriptionText, int position) {
-        description=descriptions.get(position-1);
-        description.setDescriptionText(descriptionText);
     }
 
     public interface Callback {
