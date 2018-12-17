@@ -1,6 +1,7 @@
 package fr.free.nrw.commons.utils
 
 import fr.free.nrw.commons.upload.FileUtils
+import fr.free.nrw.commons.upload.FileUtilsWrapper
 import org.junit.Assert.assertEquals
 import org.junit.Test
 import java.io.*
@@ -29,24 +30,26 @@ class FileUtilsTest {
 
     @Test
     fun testSHA1() {
+        val fileUtilsWrapper = FileUtilsWrapper()
+
         assertEquals(
                 "907d14fb3af2b0d4f18c2d46abe8aedce17367bd",
-                FileUtils.getSHA1(toInputStream("Hello, World"))
+                fileUtilsWrapper.getSHA1(toInputStream("Hello, World"))
         )
 
         assertEquals(
                 "8b971da6347bd126872ea2f4f8d394e70c74073a",
-                FileUtils.getSHA1(toInputStream("apps-android-commons"))
+                fileUtilsWrapper.getSHA1(toInputStream("apps-android-commons"))
         )
 
         assertEquals(
                 "e9d30f5a3a82792b9d79c258366bd53207ceaeb3",
-                FileUtils.getSHA1(toInputStream("domdomegg was here"))
+                fileUtilsWrapper.getSHA1(toInputStream("domdomegg was here"))
         )
 
         assertEquals(
                 "96e733a3e59261c0621ba99be5bd10bb21abe53e",
-                FileUtils.getSHA1(toInputStream("iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNk+A8AAQUBAScY42YAAAAASUVORK5CYII="))
+                fileUtilsWrapper.getSHA1(toInputStream("iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNk+A8AAQUBAScY42YAAAAASUVORK5CYII="))
         )
     }
 
