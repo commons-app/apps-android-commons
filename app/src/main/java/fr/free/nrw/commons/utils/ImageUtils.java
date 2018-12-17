@@ -240,7 +240,7 @@ public class ImageUtils {
             }
 
             if ((IMAGE_BLURRY & result) != 0 ) {
-                errorMessage.append(context.getResources().getString(R.string.upload_problem_image_blurry));
+                errorMessage.append("\n - ").append(context.getResources().getString(R.string.upload_problem_image_blurry));
             }
 
             if ((IMAGE_DUPLICATE & result) != 0 ) {
