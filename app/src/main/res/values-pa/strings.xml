@@ -40,7 +40,7 @@
   <string name="provider_contributions">ਮੇਰੇ ਅੱਪਲੋਡ</string>
   <string name="menu_share">ਸਾਂਝਾ ਕਰੋ</string>
   <string name="menu_open_in_browser">ਬਰਾਊਜ਼ਰ ਵਿਚ ਵੇਖੋ</string>
-  <string name="share_title_hint">ਸਿਰਲੇਖ</string>
+  <string name="share_title_hint" fuzzy="true">ਸਿਰਲੇਖ</string>
   <string name="share_description_hint">ਵੇਰਵਾ</string>
   <string name="login_failed_network">ਦਾਖ਼ਲਾ ਨਹੀਂ ਹੋ ਰਿਹਾ - ਨੈੱਟਵਰਕ ਫੇਲ੍ਹ ਹੋਇਆ ਹੈ</string>
   <string name="login_failed_throttled">ਬਹੁਤ ਸਾਰੀਆਂ ਅਸਫ਼ਲ ਕੋਸ਼ਿਸ਼ਾਂ। ਥੋੜ੍ਹੀ ਦੇਰ ਬਾਅਦ ਕੋਸ਼ਿਸ਼ ਕਰੋ ਜੀ।</string>
@@ -56,7 +56,7 @@
   <string name="gps_disabled">ਤੁਹਾਡੇ ਉਪਕਰਣ ਦਾ ਜੀਪੀਐੱਸ ਬੰਦ ਹੈ। ਇਸਨੂੰ ਚਲਾਉਣਾ ਚਾਹੋਂਗੇ?</string>
   <string name="enable_gps">ਜੀਪੀਐੱਸ ਚਾਲੂ ਕਰੋ</string>
   <string name="contributions_subtitle_zero">ਫ਼ਿਲਹਾਲ ਕੋਈ ਅੱਪਲੋਡ ਨਹੀਂ</string>
-  <plurals name="contributions_subtitle">
+  <plurals name="contributions_subtitle" fuzzy="true">
     <item quantity="zero">\@string/contributions_subtitle_zero</item>
     <item quantity="one">%1$d upload</item>
     <item quantity="other">%1$d ਅੱਪਲੋਡ</item>
@@ -140,7 +140,6 @@
   <string name="title_activity_nearby">ਨਜ਼ਦੀਕੀ ਥਾਵਾਂ</string>
   <string name="no_nearby">ਕੋਈ ਨਜ਼ਦੀਕੀ ਥਾਵਾਂ ਨਹੀਂ ਮਿਲੀਆਂ</string>
   <string name="warning">ਖ਼ਬਰਦਾਰ</string>
-  <string name="file_exists">ਇਹ ਤਸਵੀਰ ਕਾਮਨਜ਼ \'ਤੇ ਪਹਿਲਾਂ ਹੀ ਮੌਜੂਦ ਹੈ। ਕੀ ਤੁਸੀਂ ਫਿਰ ਵੀ ਚਾਹੋਂਗੇ?</string>
   <string name="yes">ਹਾਂ</string>
   <string name="no">ਨਹੀਂ</string>
   <string name="media_detail_title">ਸਿਰਲੇਖ</string>

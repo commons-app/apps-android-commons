@@ -63,7 +63,6 @@ public class NotificationRenderer extends Renderer<Notification> {
             notificationText = notificationText.concat("...");
         }
         notificationText = notificationText.concat(" ");
-
         title.setText(notificationText);
     }
 

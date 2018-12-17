@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.support.graphics.drawable.VectorDrawableCompat;
+import android.util.Log;
 
 import com.mapbox.mapboxsdk.annotations.IconFactory;
 
@@ -31,6 +32,8 @@ public class NearbyController {
     private static final int MAX_RESULTS = 1000;
     private final NearbyPlaces nearbyPlaces;
     private final SharedPreferences prefs;
+    public static double searchedRadius = 10.0; //in kilometers
+    public static LatLng currentLocation;
 
     @Inject
     public NearbyController(NearbyPlaces nearbyPlaces,
@@ -39,22 +42,26 @@ public class NearbyController {
         this.prefs = prefs;
     }
 
+
     /**
      * Prepares Place list to make their distance information update later.
      *
      * @param curLatLng current location for user
+     * @param latLangToSearchAround the location user wants to search around
+     * @param returnClosestResult if this search is done to find closest result or all results
      * @return NearbyPlacesInfo a variable holds Place list without distance information
      * and boundary coordinates of current Place List
      */
-    public NearbyPlacesInfo loadAttractionsFromLocation(LatLng curLatLng) throws IOException {
+    public NearbyPlacesInfo loadAttractionsFromLocation(LatLng curLatLng, LatLng latLangToSearchAround, boolean returnClosestResult, boolean checkingAroundCurrentLocation) throws IOException {
 
-        Timber.d("Loading attractions near %s", curLatLng);
+        Timber.d("Loading attractions near %s", latLangToSearchAround);
         NearbyPlacesInfo nearbyPlacesInfo = new NearbyPlacesInfo();
 
-        if (curLatLng == null) {
+        if (latLangToSearchAround == null) {
+            Timber.d("Loading attractions neari, but curLatLng is null");
             return null;
         }
-        List<Place> places = nearbyPlaces.getFromWikidataQuery(curLatLng, Locale.getDefault().getLanguage());
+        List<Place> places = nearbyPlaces.getFromWikidataQuery(latLangToSearchAround, Locale.getDefault().getLanguage(), returnClosestResult);
 
         if (null != places && places.size() > 0) {
             LatLng[] boundaryCoordinates = {places.get(0).location,   // south
@@ -92,6 +99,11 @@ public class NearbyController {
             }
             nearbyPlacesInfo.placeList = places;
             nearbyPlacesInfo.boundaryCoordinates = boundaryCoordinates;
+            if (!returnClosestResult && checkingAroundCurrentLocation) {
+                // Do not update searched radius, if controller is used for nearby card notification
+                searchedRadius = nearbyPlaces.radius;
+                currentLocation = curLatLng;
+            }
             return nearbyPlacesInfo;
         }
         else {
@@ -168,7 +180,7 @@ public class NearbyController {
     }
 
     public class NearbyPlacesInfo {
-        List<Place> placeList; // List of nearby places
-        LatLng[] boundaryCoordinates; // Corners of nearby area
+        public List<Place> placeList; // List of nearby places
+        public LatLng[] boundaryCoordinates; // Corners of nearby area
     }
 }

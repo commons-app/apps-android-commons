@@ -54,7 +54,7 @@
   <string name="provider_contributions">Mine uploads</string>
   <string name="menu_share">Del</string>
   <string name="menu_open_in_browser">Åbn i browser</string>
-  <string name="share_title_hint">Titel</string>
+  <string name="share_title_hint">Titel (Påkrævet)</string>
   <string name="add_title_toast">Angiv venligt en titel for denne fil</string>
   <string name="share_description_hint">Beskrivelse</string>
   <string name="login_failed_network">Kan ikke logge på - netværksfejl</string>
@@ -75,7 +75,7 @@
   <string name="gps_disabled">GPS er deaktiveret i din enhed. Ønsker du at aktivere den?</string>
   <string name="enable_gps">Aktiver GPS</string>
   <string name="contributions_subtitle_zero">Ingen overførelser endnu</string>
-  <plurals name="contributions_subtitle">
+  <plurals name="contributions_subtitle" fuzzy="true">
     <item quantity="zero">\@string/contributions_subtitle_zero</item>
     <item quantity="one">%1$d overførsel</item>
     <item quantity="other">%1$d overførsler</item>
@@ -174,7 +174,7 @@
   <string name="title_activity_nearby">Steder i nærheden</string>
   <string name="no_nearby">Ingen steder i nærheden fundet</string>
   <string name="warning">Advarsel</string>
-  <string name="file_exists">Denne fil findes allerede på Commons. Er du sikker på, at du ønsker at fortsætte?</string>
+  <string name="upload_image_duplicate">Denne fil findes allerede på Commons. Er du sikker på, at du ønsker at fortsætte?</string>
   <string name="yes">Ja</string>
   <string name="no">Nej</string>
   <string name="media_detail_title">Titel</string>
@@ -235,8 +235,6 @@
   <string name="error_while_cache">Fejl under mellemlagring af billeder</string>
   <string name="title_info">En unik beskrivelse for filen, som vil fungere som et filnavn. Du kan bruge normalt sprog med mellemrum. Udelad filendelsen.</string>
   <string name="description_info">Beskriv mediet så godt som muligt: Hvor blev det taget? Hvad viser det? Hvad er konteksten? Beskriv objekterne eller personerne. Giv information som ikke nemt kan gættes, for eksempel hvornår på dagen billedet blev taget, om det er et landskabsbillede. Om billedet viser noget usædvanligt, forklar hvad som gør det usædvanlig.</string>
-  <string name="upload_image_too_dark">Billedet er for mørkt. Er du sikker på, at du ønsker at overføre det? Wikimedia Commons er kun for billeder encyklopædisk værdi.</string>
-  <string name="upload_image_blurry">Dette billede er sløret. Er du sikker på, at du ønsker at overføre det? Wikimedia Commons er kun for billeder med encyklopædisk værdi.</string>
   <string name="give_permission">Giv tilladelse</string>
   <string name="use_external_storage">Brug eksternt lager</string>
   <string name="use_external_storage_summary">Gem billeder taget med din enheds program på kameraet</string>
@@ -298,7 +296,9 @@
   <string name="quiz_screenshot_question">Er det i orden at lægge dette skærmbillede op?</string>
   <string name="share_app_title">Del appen</string>
   <string name="add_description">+ Tilføj en beskrivelse</string>
+  <string name="no_recent_searches">Ingen seneste søgninger</string>
   <string name="search_history_deleted">Søgehistorik slettet</string>
+  <string name="nominate_delete">Nominer til sletning</string>
   <string name="Achievements">Præstationer</string>
   <string name="statistics">STATISTIKKER</string>
   <string name="statistics_thanks">Tak modtaget</string>
@@ -306,8 +306,17 @@
   <string name="level">NIVEAU</string>
   <string name="images_uploaded">Oplagte billeder</string>
   <string name="images_used_by_wiki">Billeder brugt</string>
+  <string name="achievements_revert_limit_message">minimumskrav:</string>
   <string name="error_occurred">Der opstod en fejl!</string>
+  <string name="contributions_fragment">Bidrag</string>
+  <string name="nearby_fragment">I nærheden</string>
+  <string name="no_close_nearby">Ingen steder i nærheden fundet der var tæt på dig</string>
+  <string name="list_sheet">Liste</string>
   <string name="storage_permission">Lagringstilladelse</string>
+  <string name="step_count">Trin %1$d af %2$d</string>
+  <string name="next">Næste</string>
+  <string name="previous">Forrige</string>
+  <string name="submit">Indsend</string>
   <string name="navigation_item_bookmarks">Bogmærker</string>
   <string name="title_activity_bookmarks">Bogmærker</string>
   <string name="title_page_bookmarks_pictures">Billeder</string>
@@ -316,5 +325,24 @@
   <string name="provider_bookmarks">Bogmærker</string>
   <string name="bookmark_empty">Du har ikke tilføjet nogen bogmærker</string>
   <string name="provider_bookmarks_location">Bogmærker</string>
+  <string name="deletion_reason_uploaded_by_mistake">Jeg lagde dette op ved en fejl</string>
+  <string name="deletion_reason_publicly_visible">Jeg vidste ikke, det ville være til offentligt skue</string>
+  <string name="deletion_reason_bad_for_my_privacy">Jeg indså, det var skidt for mit privatliv</string>
+  <string name="used_by">,brugt i</string>
+  <string name="articles">artikler</string>
   <string name="no_uploads">Velkommen til Commons!\n\nOplæg dit første medie ved at trykke på kamera eller galleri ikonet foroven.</string>
+  <string name="desc_language_Worldwide">Verdensomspændende</string>
+  <string name="desc_language_America">Amerika</string>
+  <string name="desc_language_Europe">Europa</string>
+  <string name="desc_language_Middle_East">Mellemøsten</string>
+  <string name="desc_language_Africa">Afrika</string>
+  <string name="desc_language_Asia">Asien</string>
+  <string name="desc_language_Pacific">Stillehavet</string>
+  <string name="no_categories_selected">Ingen valgte kategorier</string>
+  <string name="yes_submit">Ja, indsend</string>
+  <string name="no_go_back">Nej, gå tilbage</string>
+  <string name="search_this_area">Søg i dette område</string>
+  <string name="never_ask_again">Spørg aldrig om dette igen</string>
+  <string name="display_location_permission_title">Vis placeringstilladelse</string>
+  <string name="display_campaigns">Vis kampagner</string>
 </resources>

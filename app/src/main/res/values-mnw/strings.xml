@@ -27,7 +27,7 @@
   <string name="menu_from_camera">ကေတ်ရုပ်</string>
   <string name="menu_nearby">ဗဒဲါဒၞာဲဏအ်</string>
   <string name="menu_share">ပါ်ပရအ်</string>
-  <string name="share_title_hint">က္ဍိုပ်လိက်</string>
+  <string name="share_title_hint" fuzzy="true">က္ဍိုပ်လိက်</string>
   <string name="share_description_hint">မဗမံက်ထ္ၜး</string>
   <string name="login_failed_generic">လံက်အေန် လီု</string>
   <string name="share_upload_button">ပတိုန်</string>

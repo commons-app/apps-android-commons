@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingBottom="16dp"
+    android:paddingEnd="10dp"
+    android:paddingRight="10dp"
+    android:paddingTop="16dp"
+    >
+
+  <ImageView
+      android:id="@+id/iv_campaign"
+      android:layout_width="40dp"
+      android:layout_height="40dp"
+      android:layout_marginLeft="16dp"
+      android:scaleType="centerCrop"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintLeft_toLeftOf="parent"
+      app:layout_constraintTop_toTopOf="parent"
+      app:srcCompat="@drawable/ic_campaign"
+      />
+
+  <android.support.constraint.ConstraintLayout
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginLeft="16dp"
+      android:layout_marginRight="4dp"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintLeft_toRightOf="@id/iv_campaign"
+      app:layout_constraintTop_toTopOf="parent"
+      >
+    <TextView
+        android:id="@+id/tv_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:textColor="@android:color/white"
+        android:textStyle="bold"
+        tools:text="Campaign Title"
+        />
+
+    <TextView
+        android:id="@+id/tv_description"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:gravity="start"
+        android:paddingTop="2dp"
+        android:textAlignment="textStart"
+        android:textColor="@android:color/white"
+        android:visibility="gone"
+        app:layout_constraintTop_toBottomOf="@id/tv_title"
+        tools:text="Campaign Description"
+        />
+
+    <TextView
+        android:id="@+id/tv_dates"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:layout_weight="1"
+        android:paddingTop="2dp"
+        android:text="@string/ends_on"
+        android:textColor="@android:color/white"
+        app:layout_constraintTop_toBottomOf="@id/tv_description"
+        />
+  </android.support.constraint.ConstraintLayout>
+</android.support.constraint.ConstraintLayout>

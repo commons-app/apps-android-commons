@@ -4,6 +4,7 @@
 * Beta16
 * Davio
 * Gianfranco
+* Lorelai87
 * Nemo bis
 * S4b1nuz E.656
 * Sarah Bernabei
@@ -56,7 +57,7 @@
   <string name="provider_contributions">I miei caricamenti</string>
   <string name="menu_share">Condividi</string>
   <string name="menu_open_in_browser">Visualizza nel browser</string>
-  <string name="share_title_hint">Titolo</string>
+  <string name="share_title_hint">Titolo (obbligatorio)</string>
   <string name="add_title_toast">Per favore, dai un titolo a questo file</string>
   <string name="share_description_hint">Descrizione</string>
   <string name="login_failed_network">Impossibile effettuare l\'accesso - errore di rete</string>
@@ -79,8 +80,8 @@
   <string name="contributions_subtitle_zero">Non è stato ancora caricato niente</string>
   <plurals name="contributions_subtitle">
     <item quantity="zero">\@string/contributions_subtitle_zero</item>
-    <item quantity="one">%1$d caricamento</item>
-    <item quantity="other">%1$d caricamenti</item>
+    <item quantity="one">(%1$d)</item>
+    <item quantity="other">(%1$d)</item>
   </plurals>
   <plurals name="starting_multiple_uploads">
     <item quantity="one">Iniziato %1$d caricamento</item>
@@ -166,7 +167,7 @@
   <string name="title_activity_nearby">Luoghi nelle vicinanze</string>
   <string name="no_nearby">Nessun luogo trovato nelle vicinanze</string>
   <string name="warning">Attenzione</string>
-  <string name="file_exists">Questo file esiste già su Commons. Sei sicuro di voler continuare?</string>
+  <string name="upload_image_duplicate">Questo file esiste già su Commons. Sei sicuro di voler continuare?</string>
   <string name="yes">Sì</string>
   <string name="no">No</string>
   <string name="media_detail_title">Titolo</string>
@@ -257,8 +258,10 @@
   <string name="correct">Risposta corretta</string>
   <string name="wrong">Risposta sbagliata</string>
   <string name="share_app_title">Condividi applicazione</string>
+  <string name="no_recent_searches">Nessuna ricerca recente</string>
   <string name="delete_recent_searches_dialog">Sei sicuro di voler cancellare la tua cronologia di ricerca?</string>
   <string name="search_history_deleted">Cronologia di ricerca cancellata</string>
+  <string name="nominate_delete">Proponi per la cancellazione</string>
   <string name="Achievements">Risultati</string>
   <string name="statistics_featured">Immagini in evidenza</string>
   <string name="images_uploaded">Immagini caricate</string>
@@ -267,6 +270,17 @@
   <string name="images_uploaded_explanation">Il numero di immagini che hai caricato su Commons, tramite qualsiasi software di caricamento</string>
   <string name="images_reverted_explanation">La percentuale di immagini che hai caricato su Commons che non sono state cancellate</string>
   <string name="images_used_explanation">Il numero di immagini che hai caricato su Commons che sono state usate nelle voci di Wikimedia</string>
+  <string name="contributions_fragment">Contributi</string>
+  <string name="notifications">Notifiche</string>
+  <string name="list_sheet">Elenco</string>
+  <string name="step_count">Passo %1$d di %2$d</string>
+  <string name="next">Successivo</string>
+  <string name="previous">Precedente</string>
+  <string name="submit">Invia</string>
+  <plurals name="upload_count_title">
+    <item quantity="one">%1$d caricamento</item>
+    <item quantity="other">%1$d caricamenti</item>
+  </plurals>
   <string name="navigation_item_bookmarks">Segnalibri</string>
   <string name="title_activity_bookmarks">Segnalibri</string>
   <string name="title_page_bookmarks_pictures">Immagini</string>
@@ -274,5 +288,21 @@
   <string name="provider_bookmarks">Segnalibri</string>
   <string name="bookmark_empty">Non hai aggiunto alcun segnalibro</string>
   <string name="provider_bookmarks_location">Segnalibri</string>
+  <string name="deletion_reason_uploaded_by_mistake">L\'ho caricata per errore</string>
+  <string name="deletion_reason_publicly_visible">Non sapevo che sarebbe stata visibile pubblicamente</string>
+  <string name="deletion_reason_no_longer_want_public">Ho cambiato idea, non voglio più che sia pubblicamente visibile</string>
+  <string name="deletion_reason_not_interesting">Spiacente, questa immagine non è interessante per un\'enciclopedia</string>
+  <string name="uploaded_by_myself">Caricato da me stesso il</string>
+  <string name="articles">voci</string>
   <string name="no_uploads">Benvenuto su Commons!\n\nCarica il tuo primo file multimediale toccando l\'icona della fotocamera o della galleria sopra.</string>
+  <string name="desc_language_Worldwide">Tutto il mondo</string>
+  <string name="desc_language_America">America</string>
+  <string name="desc_language_Europe">Europa</string>
+  <string name="desc_language_Middle_East">Medio oriente</string>
+  <string name="desc_language_Africa">Africa</string>
+  <string name="desc_language_Asia">Asia</string>
+  <string name="desc_language_Pacific">Pacifico</string>
+  <string name="no_categories_selected">Nessuna categoria selezionata</string>
+  <string name="yes_submit">Sì, invia</string>
+  <string name="search_this_area">Cerca in questa area</string>
 </resources>

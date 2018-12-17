@@ -6,6 +6,7 @@
 * Kghbln
 * Metalhead64
 * Sujan
+* Sushi
 -->
 <resources>
   <string name="title_activity_explore">Entdecken</string>
@@ -53,7 +54,7 @@
   <string name="provider_contributions">Meine hochgeladenen Dateien</string>
   <string name="menu_share">Teilen</string>
   <string name="menu_open_in_browser">Im Browser anzeigen</string>
-  <string name="share_title_hint">Titel</string>
+  <string name="share_title_hint">Titel (erforderlich)</string>
   <string name="add_title_toast">Bitte gib einen Titel für diese Datei an</string>
   <string name="share_description_hint">Beschreibung</string>
   <string name="login_failed_network">Anmeldung fehlgeschlagen – Netzwerkfehler</string>
@@ -173,7 +174,7 @@
   <string name="title_activity_nearby">Orte in der Nähe</string>
   <string name="no_nearby">Keine Orte in der Nähe gefunden</string>
   <string name="warning">Warnung</string>
-  <string name="file_exists">Diese Datei ist bereits auf Commons vorhanden. Bist du sicher, dass du fortfahren möchtest?</string>
+  <string name="upload_image_duplicate">Diese Datei ist bereits auf Commons vorhanden. Bist du sicher, dass du fortfahren möchtest?</string>
   <string name="yes">Ja</string>
   <string name="no">Nein</string>
   <string name="media_detail_title">Titel</string>
@@ -329,8 +330,10 @@
   <string name="share_coordinates_not_present">Während der Bildauswahl wurden keine Koordinaten angegeben</string>
   <string name="error_fetching_nearby_places">Fehler beim Abrufen der Orte in der Nähe.</string>
   <string name="add_description">+ Beschreibung hinzufügen</string>
+  <string name="no_recent_searches">Keine letzten Suchanfragen</string>
   <string name="delete_recent_searches_dialog">Bist du sicher, dass du deinen Suchverlauf löschen möchtest?</string>
   <string name="search_history_deleted">Suchverlauf gelöscht</string>
+  <string name="nominate_delete">Zur Löschung vorschlagen</string>
   <string name="Achievements">Errungenschaften</string>
   <string name="statistics">STATISTIKEN</string>
   <string name="statistics_thanks">Erhaltene Dankeschöns</string>
@@ -347,8 +350,27 @@
   <string name="images_used_explanation">Die Anzahl der Bilder, die du auf Commons hochgeladen hast und in Wikimedia-Artikeln verwendet werden.</string>
   <string name="error_occurred">Fehler aufgetreten!</string>
   <string name="notifications_channel_name_all">Commons-Benachrichtigung</string>
+  <string name="contributions_fragment">Beiträge</string>
+  <string name="nearby_fragment">In der Nähe</string>
+  <string name="notifications">Benachrichtigungen</string>
+  <string name="display_nearby_notification">Benachrichtigungen in der Nähe anzeigen</string>
+  <string name="display_nearby_notification_summary">Hier tippen, um Orte in der Nähe anzusehen, die Bilder benötigen.</string>
+  <string name="no_close_nearby">Keine Orte in deiner Umgebung gefunden.</string>
+  <string name="list_sheet">Liste</string>
   <string name="storage_permission">Speicherberechtigung</string>
   <string name="write_storage_permission_rationale_for_image_share">Wir benötigen deine Berechtigung für den Zugriff auf den externen Speicher deines Geräts, um Bilder hochzuladen.</string>
+  <string name="nearby_notification_dismiss_message">Du wirst nicht mehr den nähersten Ort sehen, der noch Bilder braucht. Du kannst jedoch diese Benachrichtigung in den Einstellungen erneut aktivieren, falls du das zu wünschen tust.</string>
+  <string name="step_count">Schritt %1$d von %2$d</string>
+  <string name="image_in_set_label">Bild %1$d im Satz</string>
+  <string name="next">Nächste</string>
+  <string name="previous">Vorherige</string>
+  <string name="submit">Einreichen</string>
+  <string name="upload_title_duplicate">Eine Datei mit dem Namen %1$s ist bereits vorhanden. Bist du sicher, dass du fortfahren möchtest?</string>
+  <string name="map_application_missing">Auf deinem Gerät konnte keine kompatible Karten-App gefunden werden. Bitte installiere eine Karten-App, um diese Funktion nutzen zu können.</string>
+  <plurals name="upload_count_title">
+    <item quantity="one">Eine hochgeladene Datei</item>
+    <item quantity="other">%1$d hochgeladene Dateien</item>
+  </plurals>
   <string name="navigation_item_bookmarks">Lesezeichen</string>
   <string name="title_activity_bookmarks">Lesezeichen</string>
   <string name="title_page_bookmarks_pictures">Bilder</string>
@@ -358,5 +380,36 @@
   <string name="bookmark_empty">Du hast keine Lesezeichen hinzugefügt</string>
   <string name="provider_bookmarks_location">Lesezeichen</string>
   <string name="log_collection_started">Protokollsammlung gestartet. Bitte STARTE die App NEU, führe die zu protokollierende Aktion aus und tippe erneut auf „Logdatei senden“.</string>
+  <string name="deletion_reason_uploaded_by_mistake">Ich habe es aus Versehen hochgeladen.</string>
+  <string name="deletion_reason_publicly_visible">Ich wusste nicht, dass es öffentlich sichtbar sein würde.</string>
+  <string name="deletion_reason_bad_for_my_privacy">Ich habe erkannt, dass es schlecht für meine Privatsphäre ist.</string>
+  <string name="deletion_reason_no_longer_want_public">Ich habe meine Meinung geändert. Ich möchte nicht mehr, dass es öffentlich sichtbar ist.</string>
+  <string name="deletion_reason_not_interesting">Entschuldigung, aber dieses Bild ist nicht für eine Enzyklopädie relevant.</string>
+  <string name="uploaded_by_myself">Von mir hochgeladen am</string>
+  <string name="used_by">, verwendet in</string>
+  <string name="articles">Artikel</string>
   <string name="no_uploads">Willkommen bei Commons!\n\nLade deine erste Datei hoch, indem du oben auf das Kamera- oder Galeriesymbol tippst.</string>
+  <string name="desc_language_Worldwide">Weltweit</string>
+  <string name="desc_language_America">Amerika</string>
+  <string name="desc_language_Europe">Europa</string>
+  <string name="desc_language_Middle_East">Mittlerer Osten</string>
+  <string name="desc_language_Africa">Afrika</string>
+  <string name="desc_language_Asia">Asien</string>
+  <string name="desc_language_Pacific">Pazifik</string>
+  <string name="no_categories_selected">Keine Kategorien ausgewählt</string>
+  <string name="no_categories_selected_warning_desc">Bilder ohne Kategorien sind selten nutzbar. Bist du sicher, dass du ohne die Auswahl von Kategorien hochladen möchtest?</string>
+  <string name="yes_submit">Ja, einreichen</string>
+  <string name="no_go_back">Nein, zurück gehen</string>
+  <string name="upload_flow_all_images_in_set">(für alle Bilder im Satz)</string>
+  <string name="search_this_area">Diesen Bereich durchsuchen</string>
+  <string name="nearby_card_permission_title">Berechtigungsanfrage</string>
+  <string name="nearby_card_permission_explanation">Dürfen wir deinen aktuellen Standort verwenden, um den nächsten Ort anzuzeigen, der Bilder benötigt?</string>
+  <string name="unable_to_display_nearest_place">Der nächste Ort, der Bilder benötigt, kann ohne Standortberechtigungen nicht angezeigt werden.</string>
+  <string name="never_ask_again">Nicht erneut fragen</string>
+  <string name="display_location_permission_title">Standortberechtigung anzeigen</string>
+  <string name="display_location_permission_explanation">Anfrage für eine Standortberechtigung, die für die Nachbarbenachrichtigungskartenansichtsfunktion erforderlich ist.</string>
+  <string name="ends_on">Endet am:</string>
+  <string name="display_campaigns">Kampagnen anzeigen</string>
+  <string name="display_campaigns_explanation">Hier tippen, um die laufenden Kampagnen anzusehen.</string>
+  <string name="nearby_campaign_dismiss_message">Du wirst die Kampagnen nicht mehr sehen. Du kannst dennoch diese Benachrichtigung in den Einstellungen erneut aktivieren, falls du dies möchtest.</string>
 </resources>
