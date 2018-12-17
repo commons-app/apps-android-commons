@@ -77,9 +77,9 @@ public class CampaignsPresenter implements BasePresenter {
                         Date currentDate = new Date();
                         try {
                             for (Campaign aCampaign : campaigns) {
-                                campaignEndDate = dateFormat.parse(campaigns.get(0).getEndDate());
+                                campaignEndDate = dateFormat.parse(aCampaign.getEndDate());
                                 campaignStartDate =
-                                    dateFormat.parse(campaigns.get(0).getStartDate());
+                                    dateFormat.parse(aCampaign.getStartDate());
                                 if (campaignEndDate.compareTo(currentDate) >= 0
                                     && campaignStartDate.compareTo(currentDate) <= 0) {
                                     campaign = aCampaign;
