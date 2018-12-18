@@ -1,19 +1,12 @@
 package fr.free.nrw.commons.notification;
 
-import android.graphics.Color;
-import android.preference.PreferenceManager;
 import android.text.Html;
-import android.text.SpannableString;
-import android.text.Spanned;
-import android.text.TextPaint;
-import android.text.style.ClickableSpan;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.borjabravo.readmoretextview.ReadMoreTextView;
 import com.pedrogomez.renderers.Renderer;
 
 import butterknife.BindView;
@@ -25,7 +18,7 @@ import fr.free.nrw.commons.R;
  */
 
 public class NotificationRenderer extends Renderer<Notification> {
-    @BindView(R.id.title) ReadMoreTextView title;
+    @BindView(R.id.title) TextView title;
     @BindView(R.id.time) TextView time;
     @BindView(R.id.icon) ImageView icon;
     private NotificationClicked listener;
@@ -65,32 +58,12 @@ public class NotificationRenderer extends Renderer<Notification> {
     private void setTitle(String notificationText) {
         notificationText = notificationText.trim().replaceAll("(^\\s*)|(\\s*$)", "");
         notificationText = Html.fromHtml(notificationText).toString();
+        if(notificationText.length()>280){
+            notificationText = notificationText.substring(0,279);
+            notificationText = notificationText.concat("...");
+        }
         notificationText = notificationText.concat(" ");
-
-        SpannableString ss = new SpannableString(notificationText);
-        ClickableSpan clickableSpan = new ClickableSpan() {
-            @Override
-            public void onClick(View view) {
-                listener.notificationClicked(getContent());
-            }
-
-            @Override
-            public void updateDrawState(TextPaint ds) {
-                super.updateDrawState(ds);
-                ds.setUnderlineText(false);
-
-                if(PreferenceManager.getDefaultSharedPreferences(getContext()).getBoolean("theme", false)) {
-                    ds.setColor(Color.WHITE);
-                }
-                else {
-                    ds.setColor(Color.BLACK);
-                }
-            }
-        };
-
-        // Attach a ClickableSpan to the range (start:0, end:notificationText.length()) of the String
-        ss.setSpan(clickableSpan, 0, notificationText.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-        title.setText(ss, TextView.BufferType.SPANNABLE);
+        title.setText(notificationText);
     }
 
     public interface NotificationClicked{
