@@ -29,7 +29,7 @@ before_script:
 - android-wait-for-emulator
 script:
 - "./gradlew clean check connectedCheck jacocoTestReport"
-- if [ "$TRAVIS_PULL_REQUEST" == "false" ]; then
+- if [ "$TRAVIS_PULL_REQUEST" == "false" ] && ["$TRAVIS_BRANCH" == "master" ]; then
   ./gradlew publishProdReleaseApk;
   fi
 after_success:
@@ -47,9 +47,9 @@ cache:
   - "$HOME/.gradle/caches/"
   - "$HOME/.gradle/wrapper/"
 before_install:
-- if [ "$TRAVIS_PULL_REQUEST" == "false" ]; then
+- if [ "$TRAVIS_PULL_REQUEST" == "false" ] && ["$TRAVIS_BRANCH" == "master" ]; then
   openssl aes-256-cbc -K $encrypted_7b5c925cc32c_key -iv $encrypted_7b5c925cc32c_iv -in nr-commons.keystore.enc -out nr-commons.keystore -d;
   fi
-- if [ "$TRAVIS_PULL_REQUEST" == "false" ]; then
+- if [ "$TRAVIS_PULL_REQUEST" == "false" ] && ["$TRAVIS_BRANCH" == "master" ]; then
   openssl aes-256-cbc -K $encrypted_38ac1a5053f6_key -iv $encrypted_38ac1a5053f6_iv -in play.p12.enc -out play.p12 -d;
   fi
