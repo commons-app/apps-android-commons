@@ -14,7 +14,6 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:background="@android:color/white"
-        android:contentDescription="@string/no_image_found"
         android:scaleType="centerCrop"
         app:srcCompat="@drawable/ic_message_black_24dp"
         app:tint="@color/primaryDarkColor"
@@ -30,7 +29,6 @@
         android:layout_marginRight="16dp"
         android:layout_marginTop="16dp"
         android:textAppearance="@style/TextAppearance.AppCompat.Caption"
-        tools:text="@string/placeholder_place_distance"
         />
 
     <TextView
@@ -47,7 +45,6 @@
         android:ellipsize="end"
         android:layout_alignParentTop="true"
         android:textAppearance="@style/TextAppearance.AppCompat.Body2"
-        tools:text="@string/placeholder_place_name"
         android:padding="12dp"
         />
 </RelativeLayout>
