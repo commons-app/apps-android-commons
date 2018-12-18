@@ -256,9 +256,14 @@ public class UploadActivity extends AuthenticatedActivity implements UploadView,
         String licenseHyperLink = "<a href='" + Utils.licenseUrlFor(selectedLicense)+"'>" +
                 getString(Utils.licenseNameFor(selectedLicense)) + "</a><br>";
         licenseSummary.setMovementMethod(LinkMovementMethod.getInstance());
-        licenseSummary.setText(
-                Html.fromHtml(
-                        getString(R.string.share_license_summary, licenseHyperLink)));
+        if(getIntent().getAction() == Intent.ACTION_SEND) {
+            licenseSummary.setText(
+                    Html.fromHtml(
+                            getString(R.string.share_license_summary, licenseHyperLink)));
+        } else {
+            licenseSummary.setText(Html.fromHtml(
+                    getString(R.string.share_licenses_summary, licenseHyperLink)));
+        }
     }
 
     @Override
