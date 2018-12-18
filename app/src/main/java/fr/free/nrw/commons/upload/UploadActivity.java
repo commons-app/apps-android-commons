@@ -252,13 +252,14 @@ public class UploadActivity extends AuthenticatedActivity implements UploadView,
 
     @SuppressLint("StringFormatInvalid")
     @Override
-    public void updateLicenseSummary(String selectedLicense) {
+    public void updateLicenseSummary(String selectedLicense, int imageCount) {
         String licenseHyperLink = "<a href='" + Utils.licenseUrlFor(selectedLicense)+"'>" +
                 getString(Utils.licenseNameFor(selectedLicense)) + "</a><br>";
         licenseSummary.setMovementMethod(LinkMovementMethod.getInstance());
         licenseSummary.setText(
                 Html.fromHtml(
-                        getString(R.string.share_license_summary, licenseHyperLink)));
+                        getResources().getQuantityString(R.plurals.share_license_summary,
+                                imageCount, licenseHyperLink)));
     }
 
     @Override

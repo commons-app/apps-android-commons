@@ -112,7 +112,7 @@ public class UploadPresenter {
      */
     void selectLicense(String licenseName) {
         uploadModel.setSelectedLicense(licenseName);
-        view.updateLicenseSummary(uploadModel.getSelectedLicense());
+        view.updateLicenseSummary(uploadModel.getSelectedLicense(), uploadModel.getCount());
     }
 
     //region Wizard step management
@@ -357,7 +357,7 @@ public class UploadPresenter {
     private void updateLicenses() {
         String selectedLicense = uploadModel.getSelectedLicense();
         view.updateLicenses(uploadModel.getLicenses(), selectedLicense);
-        view.updateLicenseSummary(selectedLicense);
+        view.updateLicenseSummary(selectedLicense, uploadModel.getCount());
     }
 
     /**
