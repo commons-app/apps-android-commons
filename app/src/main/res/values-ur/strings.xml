@@ -49,7 +49,7 @@
   <string name="provider_contributions">میرے اپلوڈ کردہ</string>
   <string name="menu_share">شیئر</string>
   <string name="menu_open_in_browser">براؤزر میں کھولیں</string>
-  <string name="share_title_hint">عنوان</string>
+  <string name="share_title_hint" fuzzy="true">عنوان</string>
   <string name="share_description_hint">وضاحت</string>
   <string name="login_failed_network">لاگ ان ہونے میں ناکام - نیٹ ورک ناکامی</string>
   <string name="login_failed_throttled">بے شمار ناکام کوششیں کچھ منٹوں میں دوبارہ کوشش کریں۔</string>
@@ -157,4 +157,7 @@
   <string name="no_internet">انٹرنیٹ دستیاب نہیں</string>
   <string name="internet_established">انٹرنیٹ دستیاب</string>
   <string name="retry">دوبارہ کوشش کریں</string>
+  <string name="list_sheet">فہرست</string>
+  <string name="desc_language_Middle_East">مشرق وسطی</string>
+  <string name="desc_language_Africa">افریقا</string>
 </resources>

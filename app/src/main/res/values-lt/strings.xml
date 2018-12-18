@@ -49,7 +49,7 @@
   <string name="provider_contributions">Mano įkėlimai</string>
   <string name="menu_share">Dalintis</string>
   <string name="menu_open_in_browser">Atidaryti naršyklėje</string>
-  <string name="share_title_hint">Pavadinimas</string>
+  <string name="share_title_hint" fuzzy="true">Pavadinimas</string>
   <string name="add_title_toast">Prašome pateikti šiam failui pavadinimą</string>
   <string name="share_description_hint">Aprašymas</string>
   <string name="login_failed_network">Negalima prisijungti - tinklo klaida</string>
@@ -69,7 +69,7 @@
   <string name="gps_disabled">GPS išjungta jūsų įrenginyje. Ar norite įjungti?</string>
   <string name="enable_gps">Išjungti GPS</string>
   <string name="contributions_subtitle_zero">Nėra įkėlimų kol kas</string>
-  <plurals name="contributions_subtitle">
+  <plurals name="contributions_subtitle" fuzzy="true">
     <item quantity="zero">\@string/contributions_subtitle_zero</item>
     <item quantity="one">1 įkėlimas</item>
     <item quantity="other">%1$d įkėlimai</item>
@@ -139,7 +139,6 @@
   <string name="ok">Gerai</string>
   <string name="title_activity_nearby">Netoliese Esančios Vietos</string>
   <string name="warning">Įspėjimas</string>
-  <string name="upload_image_problem_duplicate">Šis failas jau egzistuoja Commons. Ar tikrai norite tęsti?</string>
   <string name="yes">Taip</string>
   <string name="no">Ne</string>
   <string name="media_detail_title">Pavadinimas</string>

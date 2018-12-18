@@ -65,6 +65,7 @@ import timber.log.Timber;
 import static fr.free.nrw.commons.utils.ImageUtils.Result;
 import static fr.free.nrw.commons.utils.ImageUtils.getErrorMessageForResult;
 import static fr.free.nrw.commons.wikidata.WikidataConstants.WIKIDATA_ENTITY_ID_PREF;
+import static fr.free.nrw.commons.wikidata.WikidataConstants.WIKIDATA_ITEM_LOCATION;
 
 public class UploadActivity extends AuthenticatedActivity implements UploadView, SimilarImageInterface {
     @Inject InputMethodManager inputMethodManager;
@@ -223,6 +224,9 @@ public class UploadActivity extends AuthenticatedActivity implements UploadView,
         bottomCardSubtitle.setText(cardSubTitle);
         categoryTitle.setText(cardTitle);
         licenseTitle.setText(cardTitle);
+        if (currentStep == stepCount) {
+            dismissKeyboard();
+        }
         if(isShowingItem) {
             descriptionsAdapter.setItems(uploadItem.title, uploadItem.descriptions);
             rvDescriptions.setAdapter(descriptionsAdapter);
@@ -347,6 +351,9 @@ public class UploadActivity extends AuthenticatedActivity implements UploadView,
 
     @Override
     public void showBadPicturePopup(@Result int result) {
+        if (result >= 8 ) { // If location of image and nearby does not match, then set shared preferences to disable wikidata edits
+            directPrefs.edit().putBoolean("Picture_Has_Correct_Location",false);
+        }
         String errorMessageForResult = getErrorMessageForResult(this, result);
         if (StringUtils.isNullOrWhiteSpace(errorMessageForResult)) {
             return;
@@ -550,7 +557,8 @@ public class UploadActivity extends AuthenticatedActivity implements UploadView,
                 String imageDesc = directPrefs.getString("Desc", "");
                 Timber.i("Received direct upload with title %s and description %s", imageTitle, imageDesc);
                 String wikidataEntityIdPref = intent.getStringExtra(WIKIDATA_ENTITY_ID_PREF);
-                presenter.receiveDirect(mediaUri, mimeType, source, wikidataEntityIdPref, imageTitle, imageDesc);
+                String wikidataItemLocation = intent.getStringExtra(WIKIDATA_ITEM_LOCATION);
+                presenter.receiveDirect(mediaUri, mimeType, source, wikidataEntityIdPref, imageTitle, imageDesc, wikidataItemLocation);
             } else {
                 Timber.i("Received single upload");
                 presenter.receive(mediaUri, mimeType, source);

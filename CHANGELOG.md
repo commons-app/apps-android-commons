@@ -1,5 +1,15 @@
 # Wikimedia Commons for Android
 
+## v2.9.0
+- New main screen UI with Nearby tab
+- New upload UI and flow
+- Multiple uploads
+- Send Log File revamp
+- Fixed issues with wrong "image taken" date
+- Fixed default zoom level in Nearby map
+- Incremented target SDK to 27, with corresponding notification channel fix
+- Removed several redundant libraries to reduce bloat
+
 ## v2.8.5
 - Fixed issues with sporadic upload failures due to wrong mimeType
 

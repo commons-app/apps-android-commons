@@ -56,7 +56,7 @@
         android:layout_height="@dimen/overflow_button_dimen"
         android:layout_marginTop="@dimen/standard_gap"
         android:text="@string/welcome_final_button_text"
-        android:id="@+id/welcomeYesButton"
+        android:id="@+id/finishTutorialButton"
         android:textSize="@dimen/normal_text"
         android:layout_gravity="center"
         android:background="@android:color/white"
