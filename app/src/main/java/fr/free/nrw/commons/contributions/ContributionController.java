@@ -30,6 +30,7 @@ import static fr.free.nrw.commons.contributions.Contribution.SOURCE_CAMERA;
 import static fr.free.nrw.commons.contributions.Contribution.SOURCE_GALLERY;
 import static fr.free.nrw.commons.upload.UploadService.EXTRA_SOURCE;
 import static fr.free.nrw.commons.wikidata.WikidataConstants.WIKIDATA_ENTITY_ID_PREF;
+import static fr.free.nrw.commons.wikidata.WikidataConstants.WIKIDATA_ITEM_LOCATION;
 
 public class ContributionController {
 
@@ -131,7 +132,7 @@ public class ContributionController {
         }
     }
 
-    public void handleImagePicked(int requestCode, @Nullable Uri uri, boolean isDirectUpload, String wikiDataEntityId) {
+    public void handleImagePicked(int requestCode, @Nullable Uri uri, boolean isDirectUpload, String wikiDataEntityId, String wikidateItemLocation) {
         FragmentActivity activity = fragment.getActivity();
         Timber.d("handleImagePicked() called with onActivityResult(). Boolean isDirectUpload: " + isDirectUpload + "String wikiDataEntityId: " + wikiDataEntityId);
         Intent shareIntent = new Intent(activity, UploadActivity.class);
@@ -163,6 +164,7 @@ public class ContributionController {
         try {
             if (wikiDataEntityId != null && !wikiDataEntityId.equals("")) {
                 shareIntent.putExtra(WIKIDATA_ENTITY_ID_PREF, wikiDataEntityId);
+                shareIntent.putExtra(WIKIDATA_ITEM_LOCATION, wikidateItemLocation);
             }
         } catch (SecurityException e) {
             Timber.e(e, "Security Exception");

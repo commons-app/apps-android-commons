@@ -52,7 +52,7 @@
   <string name="provider_contributions">Încărcările mele</string>
   <string name="menu_share">Partajare</string>
   <string name="menu_open_in_browser">Afișează în navigator</string>
-  <string name="share_title_hint">Titlu</string>
+  <string name="share_title_hint" fuzzy="true">Titlu</string>
   <string name="share_description_hint">Descriere</string>
   <string name="login_failed_network">Autentificare nereușită – defecțiune de rețea</string>
   <string name="login_failed_throttled">Prea multe încercări nereușite. Încercați din nou peste câteva minute.</string>
@@ -70,7 +70,7 @@
   <string name="gps_disabled">GPS-ul este dezactivat pe device-ul dumneavoastră. Doriți să-l activați?</string>
   <string name="enable_gps">Activează GPS</string>
   <string name="contributions_subtitle_zero">Niciun fișier încă!</string>
-  <plurals name="contributions_subtitle">
+  <plurals name="contributions_subtitle" fuzzy="true">
     <item quantity="zero">\@string/contributions_subtitle_zero</item>
     <item quantity="one">%1$d încărcare</item>
     <item quantity="few">%1$d încărcări</item>

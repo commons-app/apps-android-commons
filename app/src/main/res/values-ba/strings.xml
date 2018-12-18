@@ -46,7 +46,7 @@
   <string name="provider_contributions">Минең тейәүҙәрем</string>
   <string name="menu_share">Уртаҡлашырға</string>
   <string name="menu_open_in_browser">Браузерҙа асырға</string>
-  <string name="share_title_hint">Исем</string>
+  <string name="share_title_hint" fuzzy="true">Исем</string>
   <string name="add_title_toast">Был файлдың атамаһын күрһәт</string>
   <string name="share_description_hint">Тасуирлама</string>
   <string name="login_failed_network">Инеп булмай - интернет хатаһы</string>
@@ -62,7 +62,7 @@
   <string name="gps_disabled">Ҡоролмағыҙҙа GPS һүнгән. Тоҡандырырғамы?</string>
   <string name="enable_gps">GPS-ты тоҡандырыу</string>
   <string name="contributions_subtitle_zero">Тейәүҙәр әлегә юҡ</string>
-  <plurals name="contributions_subtitle">
+  <plurals name="contributions_subtitle" fuzzy="true">
     <item quantity="zero">\@string/contributions_subtitle_zero</item>
     <item quantity="one">%1$d тейәү</item>
     <item quantity="other">%1$d тейәүҙәр</item>
@@ -157,7 +157,6 @@
   <string name="location_permission_rationale">Мотлаҡ булмаған рөхсәт: категория тәҡдиме өсөн ошо урынды алыу</string>
   <string name="title_activity_nearby">Яҡындағы урындар</string>
   <string name="no_nearby">Яҡындағы урындар табылманы</string>
-  <string name="upload_image_problem_duplicate">Был файл Викискладта бар. Дауам итергә ризаһыңмы?</string>
   <string name="media_detail_title">Атама</string>
   <string name="media_detail_media_title">Мәғлүмәт йөрөтөүсенең атамаһы</string>
   <string name="media_detail_description_explanation">Мәғлүмәт йөрөтөүсене һүрәтләү ошонда яҙыла.Уның ярайһы уҡ оҙон, хатта бер-нисә юлға һуҙылып китеүе лә бар. Шулай булһа ла ул бик матур күренер тип уйлайбыҙ.</string>
@@ -204,8 +203,6 @@
   <string name="error_while_cache">Рәсемде кэшлағандағы хата</string>
   <string name="title_info">Файлдың исеме булараҡ һаҡланасаҡ үҙенсәлекле һәртәләү. Тәбиғи телегеҙҙе, һүҙҙәр араһын айырып, ҡулланырға була. Зинһар, файл киңәйтеүҙәрен күрһәтмәгеҙ.</string>
   <string name="description_info">Зинһар, тейәләсәк файлды тәфсирләп һүрәтлә:ҡайҙа төшөрөлгән? нимә һәрәтләнә? һүрәт нимәне аңлата? Рәсемдәге кешеләр йәки объекттарҙы ла һүрәтлә. Һүрәткә ҡарап ҡына белеп булмаған мәғлүмәттәрҙе өҫтә: мәҫәлән, тәүлектең ниндәй мәлендә, ҡасан төшөрөлгән был файл. Әгәр ғәҙәти булмаған әйбер төшөрөлһә, уның нимәһе шаҡ ҡатырғанын аңлат.</string>
-  <string name="upload_image_problem_dark">Был рәсем бик ҡараңғы күренә. Тейәргәме? Викискладта энциклопедик йәһәттән ҡиммәте булған фоторәсемдәр генә ҡәҙерле.</string>
-  <string name="upload_image_problem_blurry">Был рәсем асыҡ түгел. Тейәргәме? Викискладта энциклопедик йәһәттән ҡиммәте булған фоторәсемдәр генә ҡәҙерле.</string>
   <string name="give_permission">Рөхсәт бирәм</string>
   <string name="use_external_storage">Тышҡы һаҡлағысты ҡуллан</string>
   <string name="use_external_storage_summary">Ҡулайламаның камераһы ярҙамында төшөрөлгән һүрәттәрҙе һаҡлау</string>

@@ -46,7 +46,7 @@
   <string name="provider_contributions">မိမိ တင်ထားသည်များ</string>
   <string name="menu_share">မျှဝေ</string>
   <string name="menu_open_in_browser">ဘရောက်ဆာတွင် ကြည့်ရန်</string>
-  <string name="share_title_hint">ခေါင်းစဉ်</string>
+  <string name="share_title_hint" fuzzy="true">ခေါင်းစဉ်</string>
   <string name="add_title_toast">ခေါင်းစဉ်</string>
   <string name="share_description_hint">ဖော်ပြချက်</string>
   <string name="login_failed_network">လော့အင် မဝင်နိုင်ပါ - ကွန်ရက် အမှား</string>
@@ -134,7 +134,6 @@
   <string name="title_activity_nearby">အနီးအနား နေရာများ</string>
   <string name="no_nearby">အနီးအနား နေရာများ မတွေ့ပါ</string>
   <string name="warning">သတိပေးချက်</string>
-  <string name="file_exists">ဤဖိုင်သည် ကွန်မွန်းစ်ပေါ်တွင် ရှိနှင့်ပြီးဖြစ်သည်။ ဆက်လုပ်ရန် သေချာပါသလား။</string>
   <string name="yes">မှန်</string>
   <string name="no">မလုပ်ပါ</string>
   <string name="media_detail_title">ခေါင်းစဉ်</string>
