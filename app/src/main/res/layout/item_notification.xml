@@ -33,7 +33,7 @@
         tools:text="@string/placeholder_place_distance"
         />
 
-    <com.borjabravo.readmoretextview.ReadMoreTextView
+    <TextView
         android:id="@+id/title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -45,10 +45,7 @@
         android:layout_toRightOf="@id/icon"
         android:layout_toStartOf="@id/time"
         android:ellipsize="end"
-        app:trimMode="trimModeLength"
-        app:trimLength="60"
         android:layout_alignParentTop="true"
-        app:colorClickableText="#969494"
         android:textAppearance="@style/TextAppearance.AppCompat.Body2"
         tools:text="@string/placeholder_place_name"
         android:padding="12dp"

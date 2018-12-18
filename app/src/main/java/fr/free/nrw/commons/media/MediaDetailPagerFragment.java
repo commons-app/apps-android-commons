@@ -343,7 +343,7 @@ public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment imple
 
     @Override
     public void onPageScrolled(int i, float v, int i2) {
-        if(getParentFragment().getActivity() == null) {
+        if(getActivity() == null) {
             Timber.d("Returning as activity is destroyed!");
             return;
         }
@@ -398,7 +398,7 @@ public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment imple
         public Fragment getItem(int i) {
             if (i == 0) {
                 // See bug https://code.google.com/p/android/issues/detail?id=27526
-                if(getParentFragment().getActivity() == null) {
+                if(getActivity() == null) {
                     Timber.d("Skipping getItem. Returning as activity is destroyed!");
                     return null;
                 }

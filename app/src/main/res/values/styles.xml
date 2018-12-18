@@ -64,7 +64,7 @@
     </style>
 
     <style name="LightFlatNearbyPermissionButton" parent="LightAppTheme">
-        <item name="colorControlHighlight">@color/colorPrimary</item>
+        <item name="colorControlHighlight">@color/primaryColor</item>
     </style>
 
     <style name="ProgressBar" parent="Widget.AppCompat.ProgressBar.Horizontal" />

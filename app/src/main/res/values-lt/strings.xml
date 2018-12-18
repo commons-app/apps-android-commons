@@ -158,7 +158,6 @@
   <string name="navigation_item_settings">Nustatymai</string>
   <string name="navigation_item_feedback">Atsiliepimai</string>
   <string name="navigation_item_logout">Atsijungti</string>
-  <string name="upload_image_problem_duplicate">Šis failas jau egzistuoja Commons. Ar tikrai norite tęsti?</string>
   <string name="give_permission">Suteikti leidimą</string>
   <string name="login_to_your_account">Prisijunkite prie savo paskyros</string>
   <string name="notifications_talk_page_message">%1$s paliko žinutę jūsų aptarimo puslapyje</string>
