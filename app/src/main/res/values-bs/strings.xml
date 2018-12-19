@@ -40,7 +40,7 @@
   <string name="provider_contributions">Moje postavljene datoteke</string>
   <string name="menu_share">Podijeli</string>
   <string name="menu_open_in_browser">Vidi u pregledniku</string>
-  <string name="share_title_hint">Naslov</string>
+  <string name="share_title_hint" fuzzy="true">Naslov</string>
   <string name="share_description_hint">Opis</string>
   <string name="login_failed_network">Ne mogu Vas prijaviti – mreža ne radi</string>
   <string name="login_failed_throttled">Napravili ste previše grešaka u prijavi. Pokušajte ponovo za nekoliko minuta.</string>
@@ -142,7 +142,6 @@
   <string name="title_activity_nearby">Mjesta u blizini</string>
   <string name="no_nearby">Nema okolnih mjesta</string>
   <string name="warning">Upozorenje</string>
-  <string name="upload_image_problem_duplicate">Ova datoteka već postoji na Commonsu. Jeste li sigurni da želite nastaviti?</string>
   <string name="yes">Da</string>
   <string name="no">Ne</string>
   <string name="media_detail_title">Naslov</string>

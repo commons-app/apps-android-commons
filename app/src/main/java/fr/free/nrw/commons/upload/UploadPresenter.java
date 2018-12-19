@@ -2,6 +2,7 @@ package fr.free.nrw.commons.upload;
 
 import android.annotation.SuppressLint;
 import android.net.Uri;
+import android.util.Log;
 
 import java.lang.reflect.Proxy;
 import java.util.ArrayList;
@@ -92,8 +93,8 @@ public class UploadPresenter {
      * @param source File source from {@link Contribution.FileSource}
      */
     @SuppressLint("CheckResult")
-    void receiveDirect(Uri media, String mimeType, @Contribution.FileSource String source, String wikidataEntityIdPref, String title, String desc) {
-        Completable.fromRunnable(() -> uploadModel.receiveDirect(media, mimeType, source, wikidataEntityIdPref, title, desc, similarImageInterface))
+    void receiveDirect(Uri media, String mimeType, @Contribution.FileSource String source, String wikidataEntityIdPref, String title, String desc, String wikidataItemLocation) {
+        Completable.fromRunnable(() -> uploadModel.receiveDirect(media, mimeType, source, wikidataEntityIdPref, title, desc, similarImageInterface, wikidataItemLocation))
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(() -> {
@@ -111,7 +112,7 @@ public class UploadPresenter {
      */
     void selectLicense(String licenseName) {
         uploadModel.setSelectedLicense(licenseName);
-        view.updateLicenseSummary(uploadModel.getSelectedLicense());
+        view.updateLicenseSummary(uploadModel.getSelectedLicense(), uploadModel.getCount());
     }
 
     //region Wizard step management
@@ -356,7 +357,7 @@ public class UploadPresenter {
     private void updateLicenses() {
         String selectedLicense = uploadModel.getSelectedLicense();
         view.updateLicenses(uploadModel.getLicenses(), selectedLicense);
-        view.updateLicenseSummary(selectedLicense);
+        view.updateLicenseSummary(selectedLicense, uploadModel.getCount());
     }
 
     /**

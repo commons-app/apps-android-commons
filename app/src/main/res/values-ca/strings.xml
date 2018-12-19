@@ -47,7 +47,7 @@
   <string name="provider_contributions">Les meves càrregues</string>
   <string name="menu_share">Comparteix</string>
   <string name="menu_open_in_browser">Mostra al navegador</string>
-  <string name="share_title_hint">Títol</string>
+  <string name="share_title_hint" fuzzy="true">Títol</string>
   <string name="share_description_hint">Descripció</string>
   <string name="login_failed_network">No s\'ha pogut iniciar la sessió – error de xarxa</string>
   <string name="login_failed_throttled">Massa intents erronis – Proveu-ho de nou d\'aquí uns minuts.</string>
@@ -64,7 +64,7 @@
   <string name="gps_disabled">El vostre dispositiu no té el GPS habilitat. El voleu habilitar?</string>
   <string name="enable_gps">Habilita el GPS</string>
   <string name="contributions_subtitle_zero">Encara no hi ha cap càrrega</string>
-  <plurals name="contributions_subtitle">
+  <plurals name="contributions_subtitle" fuzzy="true">
     <item quantity="zero">\@string/contributions_subtitle_zero</item>
     <item quantity="one">%1$d càrrega</item>
     <item quantity="other">%1$d càrregues</item>
@@ -139,7 +139,6 @@
   <string name="title_activity_nearby">Llocs propers</string>
   <string name="no_nearby">No s\'han trobat llocs propers</string>
   <string name="warning">Avís</string>
-  <string name="upload_image_problem_duplicate">El fitxer ja existeix a Commons. Segur que voleu procedir?</string>
   <string name="yes">Sí</string>
   <string name="no">No</string>
   <string name="media_detail_title">Títol</string>

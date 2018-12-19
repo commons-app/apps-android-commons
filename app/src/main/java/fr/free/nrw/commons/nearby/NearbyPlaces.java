@@ -30,7 +30,7 @@ public class NearbyPlaces {
     private static final Uri WIKIDATA_QUERY_URL = Uri.parse("https://query.wikidata.org/sparql");
     private static final Uri WIKIDATA_QUERY_UI_URL = Uri.parse("https://query.wikidata.org/");
     private final String wikidataQuery;
-    private double radius = INITIAL_RADIUS;
+    public double radius = INITIAL_RADIUS;
 
     public NearbyPlaces() {
         try {
@@ -55,6 +55,7 @@ public class NearbyPlaces {
         } else {
             MIN_RESULTS = 40;
             MAX_RADIUS = 300.0; // in kilometers
+            radius = INITIAL_RADIUS;
         }
 
             // increase the radius gradually to find a satisfactory number of nearby places

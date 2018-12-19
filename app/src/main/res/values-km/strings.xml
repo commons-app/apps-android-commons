@@ -41,7 +41,7 @@
   <string name="provider_contributions">អ្វីដែលខ្ញុំផ្ទុកឡើង</string>
   <string name="menu_share">ចែកចាយ</string>
   <string name="menu_open_in_browser">មើលក្នុងឧបករណ៍រាយរក</string>
-  <string name="share_title_hint">ចំណងជើង</string>
+  <string name="share_title_hint" fuzzy="true">ចំណងជើង</string>
   <string name="add_title_toast">សូមដាក់ចំណងជើងអោយឯកសារនេះ</string>
   <string name="share_description_hint">ការពិពណ៌នា</string>
   <string name="login_failed_network">មិនអាចកត់ឈ្មោះចូលបានទេ ព្រោះបណ្ដាញកំពុងមានបញ្ហា។</string>

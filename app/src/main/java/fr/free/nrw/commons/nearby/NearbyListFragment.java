@@ -35,6 +35,8 @@ import timber.log.Timber;
 
 import static android.app.Activity.RESULT_OK;
 import static android.content.pm.PackageManager.PERMISSION_GRANTED;
+import static fr.free.nrw.commons.wikidata.WikidataConstants.WIKIDATA_ENTITY_ID_PREF;
+import static fr.free.nrw.commons.wikidata.WikidataConstants.WIKIDATA_ITEM_LOCATION;
 
 public class NearbyListFragment extends DaggerFragment {
     private Bundle bundleForUpdates; // Carry information from activity about changed nearby places and current location
@@ -98,6 +100,19 @@ public class NearbyListFragment extends DaggerFragment {
         }
     }
 
+    /**
+     * While nearby updates for current location held with bundle, automatically, custom updates are
+     * done by calling this methods, triddered by search this are button input from user.
+     * @param placeList
+     */
+    public void updateNearbyListSignificantlyForCustomLocation(List<Place> placeList) {
+        try {
+            adapterFactory.updateAdapterData(placeList, (RVRendererAdapter<Place>) recyclerView.getAdapter());
+        } catch (NullPointerException e) {
+            Timber.e("Null pointer exception from calling recyclerView.getAdapter()");
+        }
+    }
+
     private List<Place> getPlaceListFromBundle(Bundle bundle) {
         List<Place> placeList = Collections.emptyList();
 
@@ -146,13 +161,14 @@ public class NearbyListFragment extends DaggerFragment {
         if (resultCode == RESULT_OK) {
             Timber.d("OnActivityResult() parameters: Req code: %d Result code: %d Data: %s",
                     requestCode, resultCode, data);
-            String wikidataEntityId = directPrefs.getString("WikiDataEntityId", null);
+            String wikidataEntityId = directPrefs.getString(WIKIDATA_ENTITY_ID_PREF, null);
+            String wikidataItemLocation = directPrefs.getString(WIKIDATA_ITEM_LOCATION, null);
             if (requestCode == ContributionController.SELECT_FROM_CAMERA) {
                 // If coming from camera, pass null as uri. Because camera photos get saved to a
                 // fixed directory
-                controller.handleImagePicked(requestCode, null, true, wikidataEntityId);
+                controller.handleImagePicked(requestCode, null, true, wikidataEntityId, wikidataItemLocation);
             } else {
-                controller.handleImagePicked(requestCode, data.getData(), true, wikidataEntityId);
+                controller.handleImagePicked(requestCode, data.getData(), true, wikidataEntityId, wikidataItemLocation);
             }
         } else {
             Timber.e("OnActivityResult() parameters: Req code: %d Result code: %d Data: %s",
