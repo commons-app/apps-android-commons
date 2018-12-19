@@ -294,9 +294,9 @@ public class AchievementsActivity extends NavigationBaseActivity {
         imageRevertsProgressbar.setVisibility(View.INVISIBLE);
         imagesUsedByWikiProgessbar.setVisibility(View.INVISIBLE);
         imageView.setVisibility(View.INVISIBLE);
-        imageByWikiText.setText("No images used");
-        imageRevertedText.setText("No image reverted");
-        imageUploadedText.setText("No images Uploaded");
+        imageByWikiText.setText(R.string.no_image);
+        imageRevertedText.setText(R.string.no_image_reverted);
+        imageUploadedText.setText(R.string.no_image_uploaded);
         imageView.setVisibility(View.INVISIBLE);
 
     }
@@ -437,7 +437,6 @@ public class AchievementsActivity extends NavigationBaseActivity {
     private boolean checkAccount(){
         Account currentAccount = sessionManager.getCurrentAccount();
         if (currentAccount == null) {
-            Timber.d("Current account is null");
             ViewUtil.showLongToast(this, getResources().getString(R.string.user_not_logged_in));
             sessionManager.forceLogin(this);
             return false;
