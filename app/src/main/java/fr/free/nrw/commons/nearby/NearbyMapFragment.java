@@ -45,7 +45,6 @@ import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.MapboxMapOptions;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
-import com.mapbox.services.android.telemetry.MapboxTelemetry;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
@@ -61,7 +60,6 @@ import fr.free.nrw.commons.Utils;
 import fr.free.nrw.commons.auth.LoginActivity;
 import fr.free.nrw.commons.bookmarks.locations.BookmarkLocationsDao;
 import fr.free.nrw.commons.contributions.ContributionController;
-
 import fr.free.nrw.commons.utils.LocationUtils;
 import fr.free.nrw.commons.utils.PlaceUtils;
 import fr.free.nrw.commons.utils.UriDeserializer;
@@ -180,7 +178,7 @@ public class NearbyMapFragment extends DaggerFragment {
         if (curLatLng != null) {
             Mapbox.getInstance(getActivity(),
                     getString(R.string.mapbox_commons_app_token));
-            MapboxTelemetry.getInstance().setTelemetryEnabled(false);
+            Mapbox.getTelemetry().setUserTelemetryRequestState(false);
         }
         setRetainInstance(true);
     }
