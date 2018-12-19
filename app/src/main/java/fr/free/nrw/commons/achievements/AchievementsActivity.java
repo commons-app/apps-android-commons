@@ -197,9 +197,6 @@ public class AchievementsActivity extends NavigationBaseActivity {
      */
     private void setAchievements() {
         if (checkAccount()) {
-            //Timber.d(String.valueOf(mediaWikiApi.getAchievements(sessionManager.getCurrentAccount().name)));
-                /*layoutImageReverts.setVisibility(View.VISIBLE);
-                imageView.setVisibility(View.VISIBLE);*/
             try{
 
                 compositeDisposable.add(mediaWikiApi
@@ -226,9 +223,6 @@ public class AchievementsActivity extends NavigationBaseActivity {
             }
             catch (Exception e){
                 Timber.d(e+"success");
-                    /*layoutImageReverts.setVisibility(View.INVISIBLE);
-                    imageView.setVisibility(View.INVISIBLE);
-                    levelNumber.setText("You haven't qualified any level yet");*/
             }
 
 
@@ -293,20 +287,16 @@ public class AchievementsActivity extends NavigationBaseActivity {
         AlertDialog.Builder builder=new AlertDialog.Builder(this)
                 .setMessage("You haven't made any contributions yet")
                 .setPositiveButton("Ok", (dialog, which) -> {
-                    //dismiss
                 });
         AlertDialog dialog = builder.create();
         dialog.show();
         imagesUploadedProgressbar.setVisibility(View.INVISIBLE);
         imageRevertsProgressbar.setVisibility(View.INVISIBLE);
         imagesUsedByWikiProgessbar.setVisibility(View.INVISIBLE);
-        //levelNumber.setText("LEVEL 0");
         imageView.setVisibility(View.INVISIBLE);
         imageByWikiText.setText("No images used");
         imageRevertedText.setText("No image reverted");
         imageUploadedText.setText("No images Uploaded");
-        /*BitmapDrawable bitmapImage = BitmapUtils.writeOnDrawable(bitmap, Integer.toString(levelInfo.getLevelNumber()),this);
-        imageView.setImageDrawable(bitmapImage);*/
         imageView.setVisibility(View.INVISIBLE);
 
     }
