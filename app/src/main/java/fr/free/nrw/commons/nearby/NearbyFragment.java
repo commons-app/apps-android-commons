@@ -211,6 +211,10 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
         bottomSheetBehaviorForDetails.setState(BottomSheetBehavior.STATE_HIDDEN);
     }
 
+    /**
+     * Sets camera position, zoom level according to sheet positions
+     * @param bottomSheetState expanded, collapsed or hidden
+     */
     public void prepareViewsForSheetPosition(int bottomSheetState) {
         // TODO
     }
@@ -243,7 +247,7 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
     /**
      * This method should be the single point to load/refresh nearby places
      *
-     * @param locationChangeType defines if location shanged significantly or slightly
+     * @param locationChangeType defines if location changed significantly or slightly
      */
     public void refreshView(LocationServiceManager.LocationChangeType locationChangeType) {
         Timber.d("Refreshing nearby places");
@@ -374,8 +378,9 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
     }
 
     /**
-     *
-     * @param nearbyPlacesInfo
+     * Turns nearby place lists and boundary coordinates into gson and update map and list fragments
+     * accordingly
+     * @param nearbyPlacesInfo a variable holds both nearby place list and boundary coordinates
      */
     private void populatePlaces(NearbyController.NearbyPlacesInfo nearbyPlacesInfo) {
         Timber.d("Populating nearby places");
@@ -414,7 +419,7 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
     /**
      * Lock nearby view updates while updating map or list. Because we don't want new update calls
      * when we already updating for old location update.
-     * @param lock
+     * @param lock true if we should lock nearby map
      */
     private void lockNearbyView(boolean lock) {
         if (lock) {
@@ -428,6 +433,18 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
         }
     }
 
+    /**
+     * Updates map fragment,
+     * For slight update: camera follows users location
+     * For significant update: nearby markers are removed and new markers added again
+     * Slight updates stop if user is checking another area of map
+     *
+     * @param updateViaButton search this area button is clicked
+     * @param isSlightUpdate Means no need to update markers, just follow user location with camera
+     * @param customLatLng Will be used for updates for other locations than users current location.
+     *                     Ie. when we use search this area feature
+     * @param nearbyPlacesInfo Includes nearby places list and boundary coordinates
+     */
     private void updateMapFragment(boolean updateViaButton, boolean isSlightUpdate, @Nullable LatLng customLatLng, @Nullable NearbyController.NearbyPlacesInfo nearbyPlacesInfo) {
 
         if (nearbyMapFragment.searchThisAreaModeOn) {
@@ -501,6 +518,10 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
         }
     }
 
+    /**
+     * Updates already existing list fragment with bundle includes nearby places and boundary
+     * coordinates
+     */
     private void updateListFragment() {
         nearbyListFragment.setBundleForUpdates(bundle);
         nearbyListFragment.updateNearbyListSignificantly();
@@ -539,6 +560,9 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
         fragmentTransaction.commitAllowingStateLoss();
     }
 
+    /**
+     * Hides progress bar
+     */
     private void hideProgressBar() {
         if (progressBar != null) {
             progressBar.setVisibility(View.GONE);
@@ -578,12 +602,18 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
         }
     }
 
+    /**
+     * Requests location permission if activity is not null
+     */
     private void requestLocationPermissions() {
         if (!getActivity().isFinishing()) {
             locationManager.requestPermissions(getActivity());
         }
     }
 
+    /**
+     * Will warn user if location is denied
+     */
     private void showLocationPermissionDeniedErrorDialog() {
         new AlertDialog.Builder(getActivity())
                 .setMessage(R.string.nearby_needs_permissions)
@@ -673,6 +703,9 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
         ViewUtil.showLongToast(getActivity(), message);
     }
 
+    /**
+     * Adds network broadcast receiver to recognize connection established
+     */
     private void addNetworkBroadcastReceiver() {
         IntentFilter intentFilter = new IntentFilter(NETWORK_INTENT_ACTION);
             snackbar = Snackbar.make(transparentView , R.string.no_internet, Snackbar.LENGTH_INDEFINITE);
