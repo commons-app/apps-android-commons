@@ -123,18 +123,15 @@ public class MainActivity extends AuthenticatedActivity implements FragmentManag
         ImageView nearbyInfo = nearbyTabLinearLayout.findViewById(R.id.nearby_info_image);
         tabLayout.getTabAt(1).setCustomView(nearbyTabLinearLayout);
 
-        nearbyInfo.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+        nearbyInfo.setOnClickListener(view ->
                 new AlertDialog.Builder(MainActivity.this)
                         .setTitle(R.string.title_activity_nearby)
                         .setMessage(R.string.showcase_view_whole_nearby_activity)
                         .setCancelable(true)
-                        .setNeutralButton(android.R.string.ok, (dialog, id) -> dialog.cancel())
+                        .setPositiveButton(android.R.string.ok, (dialog, id) -> dialog.cancel())
                         .create()
-                        .show();
-            }
-        });
+                        .show()
+        );
 
         if (uploadServiceIntent != null) {
             // If auth cookie already acquired notify contrib fragmnet so that it san operate auth required actions
