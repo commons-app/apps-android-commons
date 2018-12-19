@@ -5,7 +5,6 @@ import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.support.graphics.drawable.VectorDrawableCompat;
-import android.util.Log;
 
 import com.mapbox.mapboxsdk.annotations.IconFactory;
 
@@ -179,6 +178,9 @@ public class NearbyController {
         return baseMarkerOptions;
     }
 
+    /**
+     * We pass this variable as a group of placeList and boundaryCoordinates
+     */
     public class NearbyPlacesInfo {
         public List<Place> placeList; // List of nearby places
         public LatLng[] boundaryCoordinates; // Corners of nearby area
