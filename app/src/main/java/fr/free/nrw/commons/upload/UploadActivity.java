@@ -323,6 +323,27 @@ public class UploadActivity extends AuthenticatedActivity implements UploadView,
     }
 
     @Override
+    public void updateSubtitleVisibility(int imageCount) {
+        TextView categoriesSubtitle = viewFlipper.findViewById(R.id.categories_subtitle);
+        if (categoriesSubtitle != null) {
+            if (imageCount > 1) {
+                categoriesSubtitle.setVisibility(View.VISIBLE);
+            } else {
+                categoriesSubtitle.setVisibility(View.GONE);
+            }
+        }
+
+        TextView licenseSubtitle = viewFlipper.findViewById(R.id.license_subtitle);
+        if (licenseSubtitle != null) {
+            if (imageCount > 1) {
+                licenseSubtitle.setVisibility(View.VISIBLE);
+            } else {
+                licenseSubtitle.setVisibility(View.GONE);
+            }
+        }
+    }
+
+    @Override
     public void setBottomCardState(boolean state) {
         updateCardState(state, bottomCardExpandButton, rvDescriptions, previous, next, bottomCardAddDescription);
     }

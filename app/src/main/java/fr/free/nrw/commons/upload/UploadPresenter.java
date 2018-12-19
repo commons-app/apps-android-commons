@@ -381,6 +381,8 @@ public class UploadPresenter {
         GPSExtractor gpsObj = uploadModel.getCurrentItem().gpsCoords;
         view.updateRightCardContent(gpsObj != null && gpsObj.imageCoordsExists);
 
+        view.updateSubtitleVisibility(uploadModel.getCount());
+
         showCorrectCards(uploadModel.getCurrentStep(), uploadModel.getCount());
     }
 
