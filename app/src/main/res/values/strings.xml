@@ -442,4 +442,7 @@ Upload your first media by touching the camera or gallery icon above.</string>
   <string name="display_campaigns_explanation">Tap here to see the ongoing campaigns</string>
   <string name="nearby_campaign_dismiss_message">You won\'t see the campaigns anymore. However, you can re-enable this notification in Settings if you wish.</string>
 
+  <string name="this_function_needs_network_connection">This function requires network connection, please check your connection settings.</string>
+  <string name="bad_token_error_proposed_solution">Upload failed due to issues with edit token. Please try logging out and in again. </string>
+
 </resources>
