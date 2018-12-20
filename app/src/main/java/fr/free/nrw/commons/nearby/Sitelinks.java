@@ -5,6 +5,9 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import android.support.annotation.Nullable;
 
+/**
+ * Handles the links to Wikipedia, Commons, and Wikidata that are displayed for a Place
+ */
 public class Sitelinks implements Parcelable {
     private final String wikipediaLink;
     private final String commonsLink;
@@ -29,6 +32,9 @@ public class Sitelinks implements Parcelable {
         return 0;
     }
 
+    /**
+     * Creates sitelinks from the parcel
+     */
     public static final Creator<Sitelinks> CREATOR = new Creator<Sitelinks>() {
         @Override
         public Sitelinks createFromParcel(Parcel in) {
@@ -41,18 +47,35 @@ public class Sitelinks implements Parcelable {
         }
     };
 
+    /**
+     * Gets the Wikipedia link for a Place
+     * @return Wikipedia link
+     */
     public Uri getWikipediaLink() {
         return sanitiseString(wikipediaLink);
     }
 
+    /**
+     * Gets the Commons link for a Place
+     * @return Commons link
+     */
     public Uri getCommonsLink() {
         return sanitiseString(commonsLink);
     }
 
+    /**
+     * Gets the Wikidata link for a Place
+     * @return Wikidata link
+     */
     public Uri getWikidataLink() {
         return sanitiseString(wikidataLink);
     }
 
+    /**
+     * Sanitises and parses the links before using them
+     * @param stringUrl unsanitised link
+     * @return sanitised and parsed link
+     */
     private static Uri sanitiseString(String stringUrl) {
         String sanitisedStringUrl = stringUrl.replaceAll("[<>\n\r]", "").trim();
         return Uri.parse(sanitisedStringUrl);
@@ -73,6 +96,9 @@ public class Sitelinks implements Parcelable {
         this.commonsLink = builder.commonsLink;
     }
 
+    /**
+     * Builds a list of Sitelinks for a Place
+     */
     public static class Builder {
         private String wikidataLink;
         private String commonsLink;
