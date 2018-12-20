@@ -206,7 +206,7 @@ public class SearchImageFragment extends CommonsDaggerSupportFragment {
     private void handleError(Throwable throwable) {
         Timber.e(throwable, "Error occurred while loading queried images");
         try {
-            ViewUtil.showSnackbar(imagesRecyclerView, R.string.error_loading_images);
+            ViewUtil.showShortSnackbar(imagesRecyclerView, R.string.error_loading_images);
         }catch (Exception e){
             e.printStackTrace();
         }
@@ -226,7 +226,7 @@ public class SearchImageFragment extends CommonsDaggerSupportFragment {
      */
     private void handleNoInternet() {
         progressBar.setVisibility(GONE);
-        ViewUtil.showSnackbar(imagesRecyclerView, R.string.no_internet);
+        ViewUtil.showShortSnackbar(imagesRecyclerView, R.string.no_internet);
     }
 
     /**

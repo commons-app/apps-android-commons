@@ -33,6 +33,10 @@ public class NearbyPlaces {
     private final String wikidataQuery;
     public double radius = INITIAL_RADIUS;
 
+    /**
+     * Reads Wikidata query to check nearby wikidata items which needs picture, with a circular
+     * search. As a point is center of a circle with a radius will be set later.
+     */
     public NearbyPlaces() {
         try {
             wikidataQuery = FileUtils.readFromResource("/queries/nearby_query.rq");
@@ -54,6 +58,7 @@ public class NearbyPlaces {
 
         int minResults;
         double maxRadius;
+
         List<Place> places = Collections.emptyList();
 
         // If returnClosestResult is true, then this means that we are trying to get closest point
@@ -91,6 +96,7 @@ public class NearbyPlaces {
     }
 
     /**
+<<<<<<< HEAD
      * Runs the Wikidata query to populate the Places around search location
      * @param cur coordinates of search location
      * @param lang user's language

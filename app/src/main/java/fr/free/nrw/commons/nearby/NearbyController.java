@@ -178,6 +178,9 @@ public class NearbyController {
         return baseMarkerOptions;
     }
 
+    /**
+     * We pass this variable as a group of placeList and boundaryCoordinates
+     */
     public class NearbyPlacesInfo {
         public List<Place> placeList; // List of nearby places
         public LatLng[] boundaryCoordinates; // Corners of nearby area

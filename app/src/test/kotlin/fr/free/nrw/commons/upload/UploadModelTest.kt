@@ -4,16 +4,19 @@ import android.app.Application
 import android.content.ContentResolver
 import android.content.Context
 import android.content.SharedPreferences
+import android.graphics.BitmapRegionDecoder
 import android.net.Uri
 import fr.free.nrw.commons.auth.SessionManager
 import fr.free.nrw.commons.mwapi.MediaWikiApi
+import fr.free.nrw.commons.utils.BitmapRegionDecoderWrapper
+import fr.free.nrw.commons.utils.ImageUtils.IMAGE_OK
+import fr.free.nrw.commons.utils.ImageUtilsWrapper
 import org.junit.After
 import org.junit.Assert.assertFalse
 import org.junit.Assert.assertTrue
 import org.junit.Before
 import org.junit.Test
-import org.mockito.ArgumentMatchers.any
-import org.mockito.ArgumentMatchers.anyString
+import org.mockito.ArgumentMatchers.*
 import org.mockito.InjectMocks
 import org.mockito.Mock
 import org.mockito.Mockito.`when`
@@ -45,6 +48,10 @@ class UploadModelTest {
     @Mock
     internal var fileUtilsWrapper: FileUtilsWrapper? = null
     @Mock
+    internal var imageUtilsWrapper: ImageUtilsWrapper? = null
+    @Mock
+    internal var bitmapRegionDecoderWrapper: BitmapRegionDecoderWrapper? = null
+    @Mock
     internal var fileProcessor: FileProcessor? = null
 
     @InjectMocks
@@ -67,6 +74,14 @@ class UploadModelTest {
                 .thenReturn("sha")
         `when`(fileUtilsWrapper!!.getFileInputStream(anyString()))
                 .thenReturn(mock(FileInputStream::class.java))
+        `when`(fileUtilsWrapper!!.getGeolocationOfFile(anyString()))
+                .thenReturn("")
+        `when`(imageUtilsWrapper!!.checkIfImageIsTooDark(any(BitmapRegionDecoder::class.java)))
+                .thenReturn(IMAGE_OK)
+        `when`(imageUtilsWrapper!!.checkImageGeolocationIsDifferent(anyString(), anyString()))
+                .thenReturn(false)
+        `when`(bitmapRegionDecoderWrapper!!.newInstance(any(FileInputStream::class.java), anyBoolean()))
+                .thenReturn(mock(BitmapRegionDecoder::class.java))
 
     }
 
