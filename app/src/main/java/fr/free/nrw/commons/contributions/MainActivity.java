@@ -220,7 +220,7 @@ public class MainActivity extends AuthenticatedActivity implements FragmentManag
     }
 
     public void hideTabs() {
-        changeDrawerIconToBakcButton();
+        changeDrawerIconToBackButton();
         if (tabLayout != null) {
             tabLayout.setVisibility(View.GONE);
         }
