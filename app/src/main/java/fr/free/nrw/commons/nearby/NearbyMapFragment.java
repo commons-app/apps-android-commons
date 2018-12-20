@@ -130,6 +130,7 @@ public class NearbyMapFragment extends DaggerFragment {
     private final double CAMERA_TARGET_SHIFT_FACTOR_LANDSCAPE = 0.04;
 
     public boolean searchThisAreaModeOn = false;
+    public boolean checkingAround = false;
 
     private Bundle bundleForUpdtes;// Carry information from activity about changed nearby places and current location
     private boolean searchedAroundCurrentLocation = true;
@@ -570,6 +571,7 @@ public class NearbyMapFragment extends DaggerFragment {
                                     , NearbyController.currentLocation.getLongitude()));
 
                     if (distance > NearbyController.searchedRadius*1000*3/4) { //Convert to meter, and compare if our distance is bigger than 3/4 or our searched area
+                        checkingAround = true;
                         if (!searchThisAreaModeOn) { // If we are changing mode, then change click action
                             searchThisAreaModeOn = true;
                             searchThisAreaButton.setOnClickListener(new View.OnClickListener() {
@@ -589,6 +591,7 @@ public class NearbyMapFragment extends DaggerFragment {
                         }
 
                     } else {
+                        checkingAround = false;
                         if (searchThisAreaModeOn) {
                             searchThisAreaModeOn = false; // This flag will help us to understand should we folor users location or not
                             searchThisAreaButton.setOnClickListener(new View.OnClickListener() {
@@ -1024,6 +1027,13 @@ public class NearbyMapFragment extends DaggerFragment {
         if (mapView != null) {
             mapView.onResume();
         }
+        if (mapboxMap != null) {
+            mapboxMap.getUiSettings().setAllGesturesEnabled(true);
+        }
+        searchThisAreaModeOn = false;
+        checkingAround = false;
+        searchedAroundCurrentLocation = true;
+        boundaryCoordinates = null;
         initViews();
         setListeners();
         transparentView.setClickable(false);

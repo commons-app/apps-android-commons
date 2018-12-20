@@ -98,6 +98,7 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
 
     private boolean onOrientationChanged = false;
     private boolean populateForCurrentLocation = false;
+    private boolean isNetworkErrorOccured = false;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -124,7 +125,6 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
         super.onViewCreated(view, savedInstanceState);
         if (savedInstanceState != null) {
             onOrientationChanged = true;
-            refreshView(LOCATION_SIGNIFICANTLY_CHANGED);
         }
     }
 
@@ -225,7 +225,7 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
 
     @Override
     public void onLocationChangedSlightly(LatLng latLng) {
-            refreshView(LOCATION_SLIGHTLY_CHANGED);
+        refreshView(LOCATION_SLIGHTLY_CHANGED);
     }
 
 
@@ -333,7 +333,6 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
      * @param customLatLng Custom area which we will search around
      */
     public void refreshViewForCustomLocation(LatLng customLatLng, boolean refreshForCurrentLocation) {
-
         if (customLatLng == null) {
             // If null, return
             return;
@@ -445,8 +444,7 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
      * @param nearbyPlacesInfo Includes nearby places list and boundary coordinates
      */
     private void updateMapFragment(boolean updateViaButton, boolean isSlightUpdate, @Nullable LatLng customLatLng, @Nullable NearbyController.NearbyPlacesInfo nearbyPlacesInfo) {
-
-        if (nearbyMapFragment.searchThisAreaModeOn) {
+        if (nearbyMapFragment.checkingAround) {
             return;
         }
         /*
@@ -464,11 +462,14 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
              * If we are close to nearby places boundaries, we need a significant update to
              * get new nearby places. Check order is south, north, west, east
              * */
-            if (nearbyMapFragment.boundaryCoordinates != null && !nearbyMapFragment.searchThisAreaModeOn
-                    && (curLatLng.getLatitude() <= nearbyMapFragment.boundaryCoordinates[0].getLatitude()
-                    || curLatLng.getLatitude() >= nearbyMapFragment.boundaryCoordinates[1].getLatitude()
-                    || curLatLng.getLongitude() <= nearbyMapFragment.boundaryCoordinates[2].getLongitude()
-                    || curLatLng.getLongitude() >= nearbyMapFragment.boundaryCoordinates[3].getLongitude())) {
+            if (nearbyMapFragment.boundaryCoordinates != null
+                    && !nearbyMapFragment.checkingAround
+                    && !nearbyMapFragment.searchThisAreaModeOn
+                    && !onOrientationChanged
+                    && (curLatLng.getLatitude() < nearbyMapFragment.boundaryCoordinates[0].getLatitude()
+                    || curLatLng.getLatitude() > nearbyMapFragment.boundaryCoordinates[1].getLatitude()
+                    || curLatLng.getLongitude() < nearbyMapFragment.boundaryCoordinates[2].getLongitude()
+                    || curLatLng.getLongitude() > nearbyMapFragment.boundaryCoordinates[3].getLongitude())) {
                 // populate places
                 placesDisposable = Observable.fromCallable(() -> nearbyController
                         .loadAttractionsFromLocation(curLatLng, curLatLng, false, updateViaButton))
@@ -718,9 +719,13 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
             public void onReceive(Context context, Intent intent) {
                 if (snackbar != null && getActivity() != null) {
                     if (NetworkUtils.isInternetConnectionEstablished(getActivity())) {
-                        refreshView(LOCATION_SIGNIFICANTLY_CHANGED);
+                        if (isNetworkErrorOccured) {
+                            refreshView(LOCATION_SIGNIFICANTLY_CHANGED);
+                            isNetworkErrorOccured = false;
+                        }
                         snackbar.dismiss();
                     } else {
+                        isNetworkErrorOccured = true;
                         snackbar.show();
                     }
                 }

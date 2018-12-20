@@ -84,9 +84,9 @@ public class MainActivity extends AuthenticatedActivity implements FragmentManag
             onOrientationChanged = true; // Will be used in nearby fragment to determine significant update of map
 
             //If nearby map was visible, call on Tab Selected to call all nearby operations
-            if (savedInstanceState.getInt("viewPagerCurrentItem") == 1) {
+            /*if (savedInstanceState.getInt("viewPagerCurrentItem") == 1) {
                 ((NearbyFragment)contributionsActivityPagerAdapter.getItem(1)).onTabSelected(onOrientationChanged);
-            }
+            }*/
         }
     }
 
@@ -184,8 +184,7 @@ public class MainActivity extends AuthenticatedActivity implements FragmentManag
                         isContributionsFragmentVisible = false;
                         updateMenuItem();
                         // Do all permission and GPS related tasks on tab selected, not on create
-                            ((NearbyFragment)contributionsActivityPagerAdapter.getItem(1)).onTabSelected(onOrientationChanged);
-
+                        ((NearbyFragment)contributionsActivityPagerAdapter.getItem(1)).onTabSelected(onOrientationChanged);
                         break;
                     default:
                         tabLayout.getTabAt(CONTRIBUTIONS_TAB_POSITION).select();
