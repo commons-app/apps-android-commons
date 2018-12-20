@@ -96,7 +96,6 @@ public class NearbyPlaces {
     }
 
     /**
-<<<<<<< HEAD
      * Runs the Wikidata query to populate the Places around search location
      * @param cur coordinates of search location
      * @param lang user's language
