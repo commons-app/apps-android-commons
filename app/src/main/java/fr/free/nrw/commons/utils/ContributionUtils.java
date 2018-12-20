@@ -63,6 +63,10 @@ public class ContributionUtils {
         }
     }
 
+    /**
+     * Creates a temporary directory and returns pathname
+     * @return
+     */
     private static String decideTempDestinationFileName() {
         int i = 0;
         while (new File(TEMP_EXTERNAL_DIRECTORY + File.separatorChar + i + "_tmp").exists()) {
@@ -79,6 +83,9 @@ public class ContributionUtils {
         return TEMP_EXTERNAL_DIRECTORY + File.separatorChar + timeStamp + multipleUploadRandomParameter + "_tmp";
     }
 
+    /**
+     * Empties files in Temporary Directory
+     */
     public static void emptyTemporaryDirectory() {
         File dir = new File(TEMP_EXTERNAL_DIRECTORY);
         if (dir.isDirectory())
