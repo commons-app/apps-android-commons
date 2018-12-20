@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Authors:
 * Bjankuloski06
+* Vlad5250
 -->
 <resources>
   <string name="title_activity_explore">Истражи</string>
@@ -48,7 +49,7 @@
   <string name="provider_contributions">Мои подигања</string>
   <string name="menu_share">Сподели</string>
   <string name="menu_open_in_browser">Погледај во прелистувач</string>
-  <string name="share_title_hint">Наслов</string>
+  <string name="share_title_hint">Наслов (задолж.)</string>
   <string name="add_title_toast">Ставете ѝ наслов на податотеката</string>
   <string name="share_description_hint">Опис</string>
   <string name="login_failed_network">Не можам да Ве најавам — мрежата не работи</string>
@@ -71,8 +72,8 @@
   <string name="contributions_subtitle_zero">Сè уште нема подигања</string>
   <plurals name="contributions_subtitle">
     <item quantity="zero">\@string/contributions_subtitle_zero</item>
-    <item quantity="one">%1$d подигање</item>
-    <item quantity="other">%1$d подигања</item>
+    <item quantity="one">(%1$d)</item>
+    <item quantity="other">(%1$d)</item>
   </plurals>
   <plurals name="starting_multiple_uploads">
     <item quantity="one">Започнувам %1$d подигање</item>
@@ -154,6 +155,7 @@
   <string name="welcome_copyright_subtext">Избегнуавјте материјали што сте ги нашле на семрежјето, како и слики од плакати, корици од книги и тн.</string>
   <string name="welcome_final_text">Објаснивме добро?</string>
   <string name="welcome_final_button_text">Да!</string>
+  <string name="welcome_help_button_text">&lt;u&gt;Повеќе информации&lt;/u&gt;</string>
   <string name="detail_panel_cats_label">Категории</string>
   <string name="detail_panel_cats_loading">Вчитувам…</string>
   <string name="detail_panel_cats_none">Ништо не е одбрано</string>
@@ -167,7 +169,7 @@
   <string name="title_activity_nearby">Околни места</string>
   <string name="no_nearby">Не најдов околни места</string>
   <string name="warning">Предупредување</string>
-  <string name="file_exists">Податотекава веќе постои на Ризницата. Дали сигурно сакате да продолжите?</string>
+  <string name="upload_image_duplicate">Податотекава веќе постои на Ризницата. Дали сигурно сакате да продолжите?</string>
   <string name="yes">Да</string>
   <string name="no">Не</string>
   <string name="media_detail_title">Наслов</string>
@@ -236,17 +238,20 @@
   <string name="use_external_storage_summary">Зачувување на направените слики во прилогот со камерата на вашиот уред</string>
   <string name="login_to_your_account">Најавете се со вашата сметка</string>
   <string name="send_log_file">Испрати дневничка податотека</string>
-  <string name="send_log_file_description">Испрати дневничка податотека на разработувачите по е-пошта</string>
+  <string name="send_log_file_description">Испрати дневничка податотека на разработувачите по е-пошта за да се решат грешките во прилогот. Напомена: дневниците потенцијално може да содржат лични податоци.</string>
   <string name="no_web_browser">Не најдов прелистувач за да ја отворам URL</string>
   <string name="null_url">Грешка! Не ја пронајдов URL</string>
   <string name="nominate_deletion">Предложи за бришење</string>
   <string name="nominated_for_deletion">Сликава е предложена за бришење.</string>
+  <string name="nominated_see_more">&lt;u&gt;Поподробно ќе најдете на мрежното место&lt;/u&gt;</string>
   <string name="view_browser">Погледај во прелистувач</string>
   <string name="skip_login">Прескокни</string>
   <string name="navigation_item_login">Најава</string>
   <string name="skip_login_title">Дали навистина сакате да ја прескокнете најавата?</string>
   <string name="skip_login_message">Нема да можете да подигате слики.</string>
   <string name="login_alert_message">Најавете се за да ја користите оваа можност.</string>
+  <string name="copy_wikicode">Прекопирај го викитекстот во меѓускладот</string>
+  <string name="wikicode_copied">Викитекстот е прекопиран во меѓускладот</string>
   <string name="nearby_location_has_not_changed">Местоположбата не е сменета.</string>
   <string name="nearby_location_not_available">Местоположбата е недостапна.</string>
   <string name="location_permission_rationale_nearby">Се бара дозвола за приказ на список на околни места</string>
@@ -322,6 +327,7 @@
   <string name="add_description">+ Додај опис</string>
   <string name="delete_recent_searches_dialog">Дали сте сигурни дека сакате да ја избришете историјата на пребарувања?</string>
   <string name="search_history_deleted">Историјата на пребарување е избришана</string>
+  <string name="nominate_delete">Предложи за бришење</string>
   <string name="Achievements">Достигнувања</string>
   <string name="statistics">СТАТИСТИКА</string>
   <string name="statistics_thanks">Примени благодарници</string>
@@ -336,5 +342,57 @@
   <string name="images_uploaded_explanation">Бројот на слики што сте ги подигнале на Ризницата преку секоја алатка за подигање</string>
   <string name="images_reverted_explanation">Постоток од подигнатите слики на Ризницата кои не се избришани</string>
   <string name="images_used_explanation">Бројот на слики што сте ги подигнале на Ризницата кои се користат во статии</string>
+  <string name="error_occurred">Се појави грешка!</string>
   <string name="notifications_channel_name_all">Известување од Ризницата</string>
+  <string name="contributions_fragment">Придонеси</string>
+  <string name="nearby_fragment">Во близина</string>
+  <string name="notifications">Известувања</string>
+  <string name="display_nearby_notification">Известувај ме за места во близина</string>
+  <string name="display_nearby_notification_summary">Допрете тука за да го видите најблиското место без слика</string>
+  <string name="no_close_nearby">Не најдов места во ваша близина</string>
+  <string name="list_sheet">Список</string>
+  <string name="storage_permission">Дозвола за складирање</string>
+  <string name="write_storage_permission_rationale_for_image_share">Ни треба ваша дозвола за пристап до надворешниот склад на вашиот уред за да се подигнат сликите.</string>
+  <string name="nearby_notification_dismiss_message">Повеќе нема да ви се прикажува најблиското место без слика. Доколку се премислите, таа поставка ќе ја најдете во Нагодувањата.</string>
+  <string name="step_count">Чекор %1$d од %2$d</string>
+  <string name="image_in_set_label">Слика %1$d во збирот</string>
+  <string name="next">Следно</string>
+  <string name="previous">Претходно</string>
+  <string name="submit">Поднеси</string>
+  <string name="upload_title_duplicate">Веќе постои податотека со име %1$s. Дали сигурно сакате да продолжите?</string>
+  <string name="map_application_missing">Не пронајдов складен картографски прилог на вашиот уред. Преземете еден таков за да можете да ја користите оваа можност.</string>
+  <plurals name="upload_count_title">
+    <item quantity="one">%1$d подигање</item>
+    <item quantity="other">%1$d подигања</item>
+  </plurals>
+  <string name="navigation_item_bookmarks">Обележани</string>
+  <string name="title_activity_bookmarks">Обележани</string>
+  <string name="title_page_bookmarks_pictures">Слики</string>
+  <string name="title_page_bookmarks_locations">Места</string>
+  <string name="menu_bookmark">Додај/отстрани обележани</string>
+  <string name="provider_bookmarks">Обележани</string>
+  <string name="bookmark_empty">Немате додадено ниеден бележник</string>
+  <string name="provider_bookmarks_location">Обележани</string>
+  <string name="log_collection_started">Заведувањето од дневникот започна. ПРЕВКЛУЧЕТЕ го прилогот, извршете го дејството што сакате да се заведе, а потоа повторно допрете на „Испрати дневничка податотека“</string>
+  <string name="deletion_reason_uploaded_by_mistake">Ја подигнав по грешка</string>
+  <string name="deletion_reason_publicly_visible">Не знаев дека ќе биде јавно видлива</string>
+  <string name="deletion_reason_bad_for_my_privacy">Сфатив дека ќе ми ја наруши приватноста</string>
+  <string name="deletion_reason_no_longer_want_public">Се премислив. Не сакам повеќе да биде видлива</string>
+  <string name="deletion_reason_not_interesting">За жал, сликава не е соодветна за енциклопедија</string>
+  <string name="uploaded_by_myself">Подигната од мене на</string>
+  <string name="used_by">, се користи во</string>
+  <string name="articles">статии</string>
+  <string name="no_uploads">Добре дојдовте на Ризницата!\n\nПодигнете ја вашата прва слика или снимка допирајќи ја иконката за камера или галерија.</string>
+  <string name="desc_language_Worldwide">Цел свет</string>
+  <string name="desc_language_America">Америка</string>
+  <string name="desc_language_Europe">Европа</string>
+  <string name="desc_language_Middle_East">Близок Исток</string>
+  <string name="desc_language_Africa">Африка</string>
+  <string name="desc_language_Asia">Азија</string>
+  <string name="desc_language_Pacific">Океанија</string>
+  <string name="no_categories_selected">Нема избрано категории</string>
+  <string name="no_categories_selected_warning_desc">Некатегоризираните слики се слабо употребливи. Дали сигурно сакате да поднесете без да ставите категории?</string>
+  <string name="yes_submit">Да, поднеси</string>
+  <string name="no_go_back">Не, врати се</string>
+  <string name="upload_flow_all_images_in_set">(За сите слики во збирот)</string>
 </resources>

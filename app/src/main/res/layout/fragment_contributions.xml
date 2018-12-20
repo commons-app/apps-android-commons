@@ -1,39 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="?attr/mainBackground"
-    >
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/waiting_first_sync"
-        android:id="@+id/waitingMessage"
-        android:layout_gravity="center"
-        android:visibility="gone"
-        android:layout_centerHorizontal="true"
-        />
+  <fr.free.nrw.commons.nearby.NearbyNoificationCardView
+    android:id="@+id/card_view_nearby"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:cardBackgroundColor="?attr/mainCardBackground"
+    />
 
-    <ProgressBar
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:id="@+id/loadingContributionsProgressBar"
-        />
+  <fr.free.nrw.commons.campaigns.CampaignView
+      android:id="@+id/campaigns_view"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="2dp"
+      app:cardBackgroundColor="?attr/mainCardBackground"
+      ></fr.free.nrw.commons.campaigns.CampaignView>
 
-    <GridView
-        android:id="@+id/contributionsList"
-        android:layout_height="match_parent"
-        android:layout_width="match_parent"
-        android:stretchMode="columnWidth"
-        android:columnWidth="240dp"
-        android:numColumns="auto_fit"
-        android:listSelector="@null"
-        android:fadingEdge="none"
-        android:fastScrollEnabled="true"
-        />
+  <FrameLayout
+      android:id="@+id/root_frame"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:layout_marginTop="2dp"
+      android:background="#000"
+      >
+  </FrameLayout>
 
-</RelativeLayout>
+</LinearLayout>

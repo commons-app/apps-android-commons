@@ -47,7 +47,7 @@
   <string name="title_activity_about">Относно</string>
   <string name="no_email_client">Не е инсталирана програма за електронна поща</string>
   <string name="menu_retry_upload">Повторен опит</string>
-  <string name="menu_cancel_upload">Отказване</string>
+  <string name="menu_cancel_upload">Отказ</string>
   <string name="menu_download">Изтегляне</string>
   <string name="preference_license" fuzzy="true">Лиценз</string>
   <string name="preference_theme">Нощен режим</string>
@@ -76,7 +76,7 @@
   <string name="menu_refresh">Обновяване</string>
   <string name="ok">Добре</string>
   <string name="warning">Предупреждение</string>
-  <string name="file_exists">Този файл вече съществува в Общомедия. Наистина ли искате да продължите?</string>
+  <string name="upload_image_problem_duplicate">Този файл вече съществува в Общомедия. Наистина ли искате да продължите?</string>
   <string name="yes">Да</string>
   <string name="no">Не</string>
   <string name="media_detail_title">Заглавие</string>
@@ -95,4 +95,7 @@
   <string name="navigation_item_feedback">Обратна връзка</string>
   <string name="navigation_item_logout">Излизане</string>
   <string name="navigation_item_info">Ръководство</string>
+  <string name="navigation_item_login">Влизане</string>
+  <string name="toggle_view_button">Превключване на изгледа</string>
+  <string name="about_translate_cancel">Отказ</string>
 </resources>

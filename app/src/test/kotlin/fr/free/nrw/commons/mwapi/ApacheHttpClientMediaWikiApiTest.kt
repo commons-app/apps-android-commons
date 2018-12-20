@@ -1,11 +1,13 @@
 package fr.free.nrw.commons.mwapi
 
 import android.content.SharedPreferences
+import android.net.Uri
 import android.os.Build
 import android.preference.PreferenceManager
 import com.google.gson.Gson
 import fr.free.nrw.commons.BuildConfig
 import fr.free.nrw.commons.TestCommonsApplication
+import okhttp3.OkHttpClient
 import okhttp3.mockwebserver.MockResponse
 import okhttp3.mockwebserver.MockWebServer
 import okhttp3.mockwebserver.RecordedRequest
@@ -14,9 +16,12 @@ import org.junit.Assert.*
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
+import org.mockito.Mockito.mock
 import org.robolectric.RobolectricTestRunner
 import org.robolectric.RuntimeEnvironment
 import org.robolectric.annotation.Config
+import timber.log.Timber
+import java.io.InputStream
 import java.net.URLDecoder
 import java.text.SimpleDateFormat
 import java.util.*
@@ -30,14 +35,16 @@ class ApacheHttpClientMediaWikiApiTest {
     private lateinit var wikidataServer: MockWebServer
     private lateinit var sharedPreferences: SharedPreferences
     private lateinit var categoryPreferences: SharedPreferences
+    private lateinit var okHttpClient: OkHttpClient
 
     @Before
     fun setUp() {
         server = MockWebServer()
         wikidataServer = MockWebServer()
+        okHttpClient = OkHttpClient()
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(RuntimeEnvironment.application)
         categoryPreferences = PreferenceManager.getDefaultSharedPreferences(RuntimeEnvironment.application)
-        testObject = ApacheHttpClientMediaWikiApi(RuntimeEnvironment.application, "http://" + server.hostName + ":" + server.port + "/", "http://" + wikidataServer.hostName + ":" + wikidataServer.port + "/", sharedPreferences, categoryPreferences, Gson())
+        testObject = ApacheHttpClientMediaWikiApi(RuntimeEnvironment.application, "http://" + server.hostName + ":" + server.port + "/", "http://" + wikidataServer.hostName + ":" + wikidataServer.port + "/", sharedPreferences, categoryPreferences, Gson(), okHttpClient)
         testObject.setWikiMediaToolforgeUrl("http://" + server.hostName + ":" + server.port + "/")
     }
 

@@ -1,7 +1,5 @@
 package fr.free.nrw.commons.achievements;
 
-import android.util.Log;
-
 import fr.free.nrw.commons.R;
 
 /**

@@ -6,17 +6,25 @@
 * सरोज कुमार ढकाल
 -->
 <resources>
+  <string name="title_activity_explore">अन्वेषण</string>
+  <string name="navigation_item_explore">अन्वेषण</string>
+  <string name="preference_category_appearance">स्वरूप</string>
+  <string name="preference_category_general">सामान्य</string>
+  <string name="preference_category_feedback">प्रतिक्रिया</string>
+  <string name="preference_category_location">स्थान</string>
   <string name="app_name">कमन्स</string>
+  <string name="bullet">•</string>
   <string name="menu_settings">सेटिङहरू</string>
   <string name="username">प्रयोगकर्ता नाम</string>
   <string name="password">पासवर्ड</string>
   <string name="login">प्रवेश</string>
+  <string name="signup">साइन अप</string>
   <string name="logging_in_title">प्रवेश गर्दै</string>
   <string name="logging_in_message">कृपया प्रतिक्षा गर्नुहोस् …</string>
   <string name="login_success">प्रवेश सफल!</string>
   <string name="login_failed">प्रवेश सफल हुन सकेन!</string>
   <string name="upload_failed">फाइल भेटिएन। कृपया अर्को फाइल प्रयास गर्नुहोस्।</string>
-  <string name="authentication_failed" fuzzy="true">प्रमाणिकरण असफल भयो!</string>
+  <string name="authentication_failed">प्रमाणिकरण असफल भयो, कृपया पुनः लग इन गर्नुहोस्!</string>
   <string name="uploading_started">अपलोड शुरू भयो!</string>
   <string name="upload_completed_notification_title">%1$s अपलोड गरियो !</string>
   <string name="upload_completed_notification_text">तपाईंको अपलोड हेर्नको लागि ट्याप गर्नुहोस्</string>
@@ -36,7 +44,7 @@
   <string name="provider_contributions">मेरा अपलोडहरू</string>
   <string name="menu_share">बाड्ने</string>
   <string name="menu_open_in_browser">ब्राउजरमा हेर्ने</string>
-  <string name="share_title_hint">शीर्षक</string>
+  <string name="share_title_hint" fuzzy="true">शीर्षक</string>
   <string name="share_description_hint">वर्णन</string>
   <string name="login_failed_network">प्रवेश गर्न असमर्थ - जडान खराबी</string>
   <string name="login_failed_throttled" fuzzy="true">धेरै असफल प्रयासहरू भए । कृपया केही मिनेट पछि पुन: प्रयास गर्नुहोस</string>
@@ -56,8 +64,10 @@
   <string name="about_license">विकिमिडिया कमन्स याप एक स्वतन्त्र स्रोत याप हो। यो याप विकिमिडिया समुदायका अनुदानप्राप्तकर्ताहरू र स्वयंसेवकहरू द्वारा निर्मित एवं प्रबन्धित छ। विकिमीडिया फाउण्डेसन यस यापको निर्माण, विकास र प्रबन्धनमा कुनै पनि प्रकारले संलग्न छैन।</string>
   <string name="about_improve" fuzzy="true">&lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;गिटहब&lt;/a&gt; मा स्रोत। &lt;a href=\" https://github.com/commons-app/apps-android-commons/issues\"&gt;बगजिल्ला&lt;/a&gt; मा बग छ।</string>
   <string name="about_privacy_policy" fuzzy="true">&lt;a href=\"https://wikimediafoundation.org/wiki/Privacy_policy\"&gt;गोपनीयता नीति&lt;/a&gt;</string>
+  <string name="about_credits">&lt;u&gt;श्रेयहरू&lt;/u&gt;</string>
   <string name="title_activity_about">बारेमा</string>
   <string name="menu_feedback">सुझाव पठाउने (इमेल मार्फत)</string>
+  <string name="no_email_client">कुनै पनि इमेल क्लाइन्ट स्थापना गरिएको छैन</string>
   <string name="provider_categories">हालै प्रयोग भएका श्रेणीहरू</string>
   <string name="waiting_first_sync">पहिलो सिङ्कको लागि प्रतिक्षा गर्दै…</string>
   <string name="no_uploads_yet">तपाईंले हालसम्म कुनै पनि फोटो अपलोड गर्नुभएको छैन</string>
@@ -66,8 +76,8 @@
   <string name="share_license_summary">यो तस्विर  %1$s अनुमतिपत्र अनुसार प्राप्त हुनेछ</string>
   <string name="menu_download">डाउनलोड गर्ने</string>
   <string name="preference_license" fuzzy="true">इजाजतपत्र</string>
-  <string name="license_name_cc_by_sa" fuzzy="true">CC एट्रिब्युसन-सेयर अलाइक ३.०</string>
-  <string name="license_name_cc_by" fuzzy="true">CC एट्रिब्युसन ३.०</string>
+  <string name="license_name_cc_by_sa">एट्रिब्युसन- सेयरअलाइक ३.०</string>
+  <string name="license_name_cc_by">एट्रिब्युसन ३.०</string>
   <string name="license_name_cc0">CC०</string>
   <string name="license_name_cc_by_sa_3_0">CC BY-SA ३.०</string>
   <string name="license_name_cc_by_sa_3_0_at">CC BY-SA ३.० (अस्ट्रिया)</string>
@@ -81,6 +91,8 @@
   <string name="license_name_cc_by_sa_3_0_pl">CC BY-SA ३.० (पोल्यान्ड)</string>
   <string name="license_name_cc_by_sa_3_0_ro">CC BY-SA ३.० (रोमानिया)</string>
   <string name="license_name_cc_by_3_0">CC BY-SA ३.०</string>
+  <string name="license_name_cc_by_sa_4_0">CC BY-SA ४.०</string>
+  <string name="license_name_cc_by_4_0">CC BY ४.०</string>
   <string name="license_name_cc_zero">CC शुन्य</string>
   <string name="welcome_wikipedia_text">आफ्नो तस्वीरहरूको योगदान दिनुहोस्। विकिपिडियाका लेखलाई जीवनन्तता पाउन मद्दत गर्नुहोस्!</string>
   <string name="welcome_wikipedia_subtext">विकिपिडियाका तस्विरहरू विकिमिडिया कमन्सबाट आउँछन्।</string>
@@ -94,7 +106,35 @@
   <string name="detail_description_empty">वर्णन छैन</string>
   <string name="detail_license_empty">अज्ञान अनुमतिपत्र</string>
   <string name="menu_refresh">ताजागर्ने</string>
+  <string name="yes">हो</string>
+  <string name="no">होइन</string>
+  <string name="media_detail_title">शीर्षक</string>
+  <string name="media_detail_author">सर्जक</string>
+  <string name="media_detail_license">इजाजतपत्र</string>
+  <string name="media_detail_coordinates">अक्षाङ्शहरू</string>
+  <string name="media_detail_coordinates_empty">कुनै उपलब्ध गराइएकाे छैन</string>
+  <string name="cancel">रद्द गर्ने</string>
+  <string name="navigation_drawer_open">खोल्नुहोस्</string>
+  <string name="navigation_drawer_close">बन्द गर्नुहोस्</string>
+  <string name="navigation_item_home">गृह</string>
+  <string name="navigation_item_upload">अपलोड गर्नुहोस्</string>
+  <string name="navigation_item_nearby">नजिकै</string>
+  <string name="navigation_item_about">बारेमा</string>
+  <string name="navigation_item_settings">सेटिङ्गहरू</string>
+  <string name="navigation_item_feedback">प्रतिक्रिया</string>
+  <string name="navigation_item_logout">निर्गमन (लग आउट)</string>
+  <string name="navigation_item_info">प्रशिक्षण</string>
+  <string name="navigation_item_notification">जानकारीहरू</string>
   <string name="toggle_view_button">टगल दृश्य</string>
   <string name="menu_set_wallpaper" fuzzy="true">भित्तेपत्र चयन गर्नुहोस्</string>
   <string name="wallpaper_set_successfully">भित्तेपत्र सफलतापूर्वक चयन भयो!</string>
+  <string name="list_sheet">सूची</string>
+  <string name="submit">बुझाउनुहोस्</string>
+  <string name="articles">लेखहरू</string>
+  <string name="desc_language_America">अमेरिका</string>
+  <string name="desc_language_Europe">युरोप</string>
+  <string name="desc_language_Africa">अफ्रिका</string>
+  <string name="desc_language_Asia">एसिया</string>
+  <string name="yes_submit">हो, बुझाउनुहोस्</string>
+  <string name="search_this_area">यस क्षेत्रमा खोज्नुहोस्</string>
 </resources>

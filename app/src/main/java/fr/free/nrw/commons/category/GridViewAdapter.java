@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.MediaWikiImageView;
@@ -48,10 +49,19 @@ public class GridViewAdapter extends ArrayAdapter {
      * @param images
      */
     public boolean containsAll(List<Media> images){
+        if (images == null || images.isEmpty()) {
+            return false;
+        }
         if (data == null) {
             data = new ArrayList<>();
+            return false;
         }
-        return images.get(0).getFilename().equals(data.get(0).getFilename());
+        if (data.size() <= 0) {
+            return false;
+        }
+        String fileName = data.get(0).getFilename();
+        String imageName = images.get(0).getFilename();
+        return imageName.equals(fileName);
     }
 
     @Override
@@ -92,7 +102,9 @@ public class GridViewAdapter extends ArrayAdapter {
     private void setAuthorView(Media item, TextView author) {
         if (item.getCreator() != null && !item.getCreator().equals("")) {
             String uploadedByTemplate = context.getString(R.string.image_uploaded_by);
-            author.setText(String.format(uploadedByTemplate, item.getCreator()));
+
+            String uploadedBy = String.format(Locale.getDefault(), uploadedByTemplate, item.getCreator());
+            author.setText(uploadedBy);
         } else {
             author.setVisibility(View.GONE);
         }

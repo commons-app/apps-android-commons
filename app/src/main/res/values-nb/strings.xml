@@ -55,14 +55,14 @@
   <string name="provider_contributions">Mine opplastinger</string>
   <string name="menu_share">Del</string>
   <string name="menu_open_in_browser">Vis i nettleser</string>
-  <string name="share_title_hint">Tittel</string>
+  <string name="share_title_hint" fuzzy="true">Tittel</string>
   <string name="add_title_toast">Angi en tittel for denne fila</string>
   <string name="share_description_hint">Beskrivelse</string>
   <string name="login_failed_network">Innlogging feilet - nettverksproblem</string>
   <string name="login_failed_wrong_credentials">Kunne ikke logge inn – sjekk brukernavnet og passordet ditt</string>
   <string name="login_failed_throttled">For mange misslykkede forsøk. Vennligst prøv igjen om noen få minutter.</string>
   <string name="login_failed_blocked">Beklager, denne brukeren har blitt blokkert på Commons</string>
-  <string name="login_failed_2fa_needed">Du må oppgi tofaktorautentiseringskoden din.</string>
+  <string name="login_failed_2fa_needed">Du må oppgi koden din for totrinns pålogging.</string>
   <string name="login_failed_generic">Innlogging feilet</string>
   <string name="share_upload_button">Last opp</string>
   <string name="multiple_share_base_title">Navngi dette settet</string>
@@ -76,7 +76,7 @@
   <string name="gps_disabled">GPS er slått av på denne enheten. Ønsker du å slå den på?</string>
   <string name="enable_gps">Slå på GPS</string>
   <string name="contributions_subtitle_zero">Ingen opplastinger ennå</string>
-  <plurals name="contributions_subtitle">
+  <plurals name="contributions_subtitle" fuzzy="true">
     <item quantity="zero">\@string/contributions_subtitle_zero</item>
     <item quantity="one">%1$d opplasting</item>
     <item quantity="other">%1$d opplastinger</item>
@@ -161,6 +161,7 @@
   <string name="welcome_copyright_subtext">Unngå opphavsrettsbeskyttet materiale som du har funnet på internett samt bilder av plakater, bokomslag, osv.</string>
   <string name="welcome_final_text">Forstått?</string>
   <string name="welcome_final_button_text">Ja!</string>
+  <string name="welcome_help_button_text">&lt;u&gt;Mer informasjon&lt;/u&gt;</string>
   <string name="detail_panel_cats_label">Kategorier</string>
   <string name="detail_panel_cats_loading">Laster …</string>
   <string name="detail_panel_cats_none">Ingen valgt</string>
@@ -174,7 +175,6 @@
   <string name="title_activity_nearby">Plasser i nærheten</string>
   <string name="no_nearby">Ingen steder i nærheten funnet</string>
   <string name="warning">Advarsel</string>
-  <string name="file_exists">Denne filen eksisterer allerede på Commons. Er du sikker på at du vil fortsette?</string>
   <string name="yes">Ja</string>
   <string name="no">Nei</string>
   <string name="media_detail_title">Tittel</string>
@@ -194,7 +194,7 @@
   <string name="maximum_limit">Maksimumsgrense</string>
   <string name="maximum_limit_alert">Kan ikke vise mer enn 500</string>
   <string name="set_limit">Sett grense for seneste opplastinger</string>
-  <string name="login_failed_2fa_not_supported">Tofaktorautentisering støttes ikke ennå.</string>
+  <string name="login_failed_2fa_not_supported">Totrinns pålogging støttes ikke ennå.</string>
   <string name="logout_verification">Ønsker du virkelig å logge ut?</string>
   <string name="commons_logo">Commons-logo</string>
   <string name="commons_website">Commons-nettsted</string>
@@ -236,24 +236,25 @@
   <string name="error_while_cache">Feil under mellomlagring av bilder</string>
   <string name="title_info">En unik beskrivende tittel for fila, som vil fungere som filnavn. Du kan bruke vanlig språk med mellomrom. Ikke ta med filendelsen</string>
   <string name="description_info">Beskriv bidraget så mye som mulig: Hvor ble det tatt? Hva viser det? Hva er konteksten? Beskriv objektene eller personene. Gi informasjon som ikke kan gjettes lett, for eksempel når på dagen bildet ble tatt om det er et landskapsbilde. Om bildet viser noe uvanlig, forklar hva som gjør det uvanlig.</string>
-  <string name="upload_image_too_dark">Dette bildet er for mørkt, er du sikker på at du ønsker å laste det opp? Wikimedia Commons er kun for bilder med ensyklopedisk verdi.</string>
-  <string name="upload_image_blurry">Dette bildet er uklart, er du sikker på at du ønsker å laste det opp? Wikimedia Commons er bare for bilder med ensyklopedisk verdi.</string>
   <string name="give_permission">Gi tillatelse</string>
   <string name="use_external_storage">Bruk ekstern lagring</string>
   <string name="use_external_storage_summary">Lagre bilder som er tatt med kameraet i appen på enheten din</string>
   <string name="login_to_your_account">Logg inn med kontoen din</string>
   <string name="send_log_file">Send loggfil</string>
-  <string name="send_log_file_description">Send loggfil til utviklerne via epost</string>
+  <string name="send_log_file_description" fuzzy="true">Send loggfil til utviklerne via epost</string>
   <string name="no_web_browser">Ingen internettleser funnet som kan åpne lenken</string>
   <string name="null_url">Feil! URL ikke funnet</string>
   <string name="nominate_deletion">Nominer for sletting</string>
   <string name="nominated_for_deletion">Dette bildet har blitt nominert for sletting.</string>
+  <string name="nominated_see_more">&lt;u&gt;Se nettsiden for detaljer&lt;/u&gt;</string>
   <string name="view_browser">Vis i nettleseren</string>
   <string name="skip_login">Hopp over</string>
   <string name="navigation_item_login">Logg inn</string>
   <string name="skip_login_title">Vil du hoppe over logg inn?</string>
   <string name="skip_login_message">Du kan ikke laste opp bilder.</string>
   <string name="login_alert_message">Logg vennligst inn for å bruke denne funksjonen</string>
+  <string name="copy_wikicode">Kopier wikiteksten til utklippstavlen</string>
+  <string name="wikicode_copied">Wikiteksten har blitt kopiert til utklippstavlen</string>
   <string name="nearby_location_has_not_changed">Stedet har ikke blitt endret.</string>
   <string name="nearby_location_not_available">Sted ikke tilgjengelig.</string>
   <string name="location_permission_rationale_nearby">Tillatelse kreves for å vise listen over steder i nærheten</string>
@@ -343,5 +344,8 @@
   <string name="images_uploaded_explanation">Antallet bilder du har lastet opp på Commons via enhver opplastingsmåte</string>
   <string name="images_reverted_explanation">Prosentandelen av bildene du har lastet opp til Commons som ikke har blitt slettet</string>
   <string name="images_used_explanation">Antall bilder du har lastet opp på Commons som er brukt i Wikimedia-artikler</string>
+  <string name="error_occurred">En feil oppsto!</string>
   <string name="notifications_channel_name_all">Commons-varsel</string>
+  <string name="storage_permission">Lagringstillatelse</string>
+  <string name="write_storage_permission_rationale_for_image_share">Vi trenger din tillatelse for å få tilgang til enhetens eksterne lagring for å kunne laste opp bilder.</string>
 </resources>

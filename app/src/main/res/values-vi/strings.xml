@@ -2,7 +2,9 @@
 <!-- Authors:
 * Harriettruong3
 * Leducthn
+* Leduyquang753
 * Minh Nguyen
+* Nhatminh01
 * Thanhtai2009
 * Tuankiet65
 -->
@@ -49,7 +51,7 @@
   <string name="provider_contributions">Tập tin tôi tải lên</string>
   <string name="menu_share">Chia sẻ</string>
   <string name="menu_open_in_browser">Mở trong Trình duyệt</string>
-  <string name="share_title_hint">Tên</string>
+  <string name="share_title_hint" fuzzy="true">Tên</string>
   <string name="add_title_toast">Xin hãy đặt tiêu đề cho tập tin này</string>
   <string name="share_description_hint">Miêu tả</string>
   <string name="login_failed_network">Không thể đăng nhập – có lỗi mạng</string>
@@ -69,7 +71,7 @@
   <string name="gps_disabled">Chức năng GPS đang tắt trên thiết bị của bạn. Bạn có muốn bật nó lên?</string>
   <string name="enable_gps">Bật GPS</string>
   <string name="contributions_subtitle_zero">Chưa có tập tin tải lên</string>
-  <plurals name="contributions_subtitle">
+  <plurals name="contributions_subtitle" fuzzy="true">
     <item quantity="zero">\@string/contributions_subtitle_zero</item>
     <item quantity="one">%1$d tập tin đã tải lên</item>
     <item quantity="other">%1$d tập tin đã tải lên</item>
@@ -150,6 +152,7 @@
   <string name="welcome_copyright_subtext">Tránh dùng các hình ảnh có bản quyền bạn tìm được trên Internet, cũng như các hình chụp áp phích, bìa sách, v.v.</string>
   <string name="welcome_final_text">Bạn hiểu rồi chứ?</string>
   <string name="welcome_final_button_text">Có!</string>
+  <string name="welcome_help_button_text">&lt;u&gt;Thông tin thêm&lt;/u&gt;</string>
   <string name="detail_panel_cats_label">Thể loại</string>
   <string name="detail_panel_cats_loading">Đang tải…</string>
   <string name="detail_panel_cats_none">Chưa chọn</string>
@@ -163,7 +166,6 @@
   <string name="title_activity_nearby">Nơi Lân cận</string>
   <string name="no_nearby">Không tìm thấy nơi lân cận</string>
   <string name="warning">Cảnh báo</string>
-  <string name="file_exists">Tập tin này đã tồn tại ở Commons. Bạn có chắc chắn muốn tiếp tục?</string>
   <string name="yes">Có</string>
   <string name="no">Không</string>
   <string name="media_detail_title">Tiêu đề</string>
@@ -227,7 +229,7 @@
   <string name="use_external_storage_summary">Lưu các hình ảnh được chụp bằng máy chụp hình trong ứng dụng vào thiết bị của bạn</string>
   <string name="login_to_your_account">Đăng nhập vào tài khoản của bạn</string>
   <string name="send_log_file">Gửi tập tin nhật trình</string>
-  <string name="send_log_file_description">Gửi tập tin nhật trình cho nhà phát triển qua thư điện tử</string>
+  <string name="send_log_file_description" fuzzy="true">Gửi tập tin nhật trình cho nhà phát triển qua thư điện tử</string>
   <string name="no_web_browser">Không tìm thấy trình duyệt để mở URL</string>
   <string name="null_url">Lỗi! Không tìm thấy URL</string>
   <string name="nominate_deletion">Bầu chọn để xóa</string>
@@ -269,4 +271,5 @@
   <string name="share_app_title">Chia sẻ Ứng dụng</string>
   <string name="share_coordinates_not_present">Tọa độ không được chỉ định khi chọn hình ảnh</string>
   <string name="error_fetching_nearby_places">Lỗi khi lấy các nơi lân cận.</string>
+  <string name="search_this_area">Tìm kiếm khu vực này</string>
 </resources>

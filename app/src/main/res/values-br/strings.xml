@@ -8,8 +8,11 @@
 * Y-M D
 -->
 <resources>
+  <string name="title_activity_explore">Ergerzhout</string>
+  <string name="navigation_item_explore">Ergerzhout</string>
   <string name="preference_category_appearance">Neuz</string>
   <string name="preference_category_general">Hollek</string>
+  <string name="preference_category_feedback">Sonjoù</string>
   <string name="preference_category_location">Lec\'hiadur</string>
   <string name="app_name">Commons</string>
   <string name="bullet">•</string>
@@ -25,7 +28,7 @@
   <string name="login_success">Kevreet oc\'h !</string>
   <string name="login_failed">Kudenn gevreañ !</string>
   <string name="upload_failed">N\'eo ket bet kavet ar restr. Klask gant unan all.</string>
-  <string name="authentication_failed" fuzzy="true">Dilesadur c\'hwitet!</string>
+  <string name="authentication_failed">Dilesadur c\'hwitet, kevreit en-dro mar plij</string>
   <string name="uploading_started">Kroget da enporzhiañ!</string>
   <string name="upload_completed_notification_title">%1$s bet enporzhiet !</string>
   <string name="upload_completed_notification_text">Pouezit evit gwelet hoc\'h enporzhiadenn</string>
@@ -49,10 +52,11 @@
   <string name="provider_contributions">Ma enporzhiadennoù</string>
   <string name="menu_share">Rannañ</string>
   <string name="menu_open_in_browser">Diskwel er meerder</string>
-  <string name="share_title_hint">Titl</string>
+  <string name="share_title_hint" fuzzy="true">Titl</string>
   <string name="add_title_toast">Roit un titl d\'ar restr-mañ, mar plij</string>
   <string name="share_description_hint">Deskrivadur</string>
   <string name="login_failed_network">Ne c\'haller ket kevreañ - rouedad sac\'het</string>
+  <string name="login_failed_wrong_credentials">Ne c\'haller ket kevreañ - gwiriit hoc\'h anv implijer hag ho ker-tremen mar plij</string>
   <string name="login_failed_throttled">Re a daolioù-esae. Klaskit en-dro a-benn ur pennadig amzer.</string>
   <string name="login_failed_blocked">Hon digarezit, prennet eo bet an implijer-mañ e Commons</string>
   <string name="login_failed_2fa_needed">Rankout a rit reiñ ho kod dilesa gant daou faktor.</string>
@@ -64,10 +68,11 @@
   <string name="categories_search_text_hint">Klask rummadoù</string>
   <string name="menu_save_categories">Enrollañ</string>
   <string name="refresh_button">Freskaat</string>
+  <string name="display_list_button">Roll</string>
   <string name="gps_disabled">Diwerededkaet eo ar GPS war hoc\'h ardivink.\nHa c\'hoant ho peus da weredekaat anezhañ ?</string>
   <string name="enable_gps">Gweredekaat ar GPS</string>
   <string name="contributions_subtitle_zero">Enporzhiadenn ebet c\'hoazh !</string>
-  <plurals name="contributions_subtitle">
+  <plurals name="contributions_subtitle" fuzzy="true">
     <item quantity="zero">Pellgardenn ebet c\'hoazh</item>
     <item quantity="one">%1$d bellgargadenn</item>
     <item quantity="other">%1$d Pellgargadennoù</item>
@@ -85,6 +90,7 @@
   <string name="categories_activity_title">Rummadoù</string>
   <string name="title_activity_settings">Arventennoù</string>
   <string name="title_activity_signup">En em enskrivañ</string>
+  <string name="title_activity_category_details">Rummad</string>
   <string name="menu_about">Diwar-benn</string>
   <string name="about_license" fuzzy="true">Meziant frank a wirioù embannet dindan &lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/COPYING\"&gt;an Aotre-implijout Apache v2&lt;/a&gt;. Merkoù kenwerzhel eus Diazezadur Wikimedia eo Wikimedia Commons hag e logoioù. Gallout a reont bezañ implijet gant aotre an Diazezadur. N\'omp nag aprouet gant Diazezadur Wiikimedia na stag outañ.</string>
   <string name="about_improve">Krouiñ ur &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;gemennadenn GitHub nevez&lt;/a&gt; evit kelaouiñ a-zivout un draen bennak pe bet kinnigoù.</string>
@@ -146,26 +152,27 @@
   <string name="welcome_copyright_subtext">Diarbenn an dafar gwarezet a vez kavet ganeoc\'h war ar Genrouedad, hag ivez ar skeudennoù skritelloù, ar goloioù levrioù ha kement zo…</string>
   <string name="welcome_final_text">Ha soñjal a rit eo mat ?</string>
   <string name="welcome_final_button_text">Ya !</string>
+  <string name="welcome_help_button_text">&lt;u&gt;Gouzout hiroc\'h&lt;/u&gt;</string>
   <string name="detail_panel_cats_label">Rummadoù</string>
   <string name="detail_panel_cats_loading">O kargañ…</string>
   <string name="detail_panel_cats_none">Hini ebet diuzet</string>
   <string name="detail_description_empty">Deskrivadur ebet</string>
   <string name="detail_license_empty">Aotre-implijout dizanv</string>
   <string name="menu_refresh">Freskaat</string>
-  <string name="read_storage_permission_rationale" fuzzy="true">Aotre rekis : lenn ur stokañ diavaez. Hep se, n\'hall ket an arload mont en-dro.</string>
-  <string name="write_storage_permission_rationale" fuzzy="true">Aotre ret ; skrivañ war al lec\'h stokañ diavaez. Ne c\'hall ket an arload mont en-dro hep an dra-se.</string>
+  <string name="read_storage_permission_rationale">Aotre rekis : lenn ur stokañ diavaez. N\'hall ket an arload tizhout ho palier hep an dra-se.</string>
+  <string name="write_storage_permission_rationale">Aotre ret ; skrivañ war al lec\'h stokañ diavaez. Ne c\'hall ket an arload tizhout ho kamera hep an dra-se.</string>
   <string name="location_permission_rationale">Aotre diret : kaout al lec\'hiadur red evit kinnig rummadoù</string>
   <string name="ok">Mat eo</string>
   <string name="title_activity_nearby">Lec\'hioù nes</string>
   <string name="no_nearby">N\'eus bet kavet netra tostik</string>
   <string name="warning">Diwallit</string>
-  <string name="file_exists">Emañ ar restr-mañ war Commons c\'hoazh. Ha sur oc\'h e fell deoc\'h kenderc\'hel ?</string>
   <string name="yes">Ya</string>
   <string name="no">Ket</string>
   <string name="media_detail_title">Titl</string>
   <string name="media_detail_media_title">Titl ar media</string>
   <string name="media_detail_description">Deskrivadur</string>
   <string name="media_detail_description_explanation">Amañ e lakaer titl ar media. Gallout a ra bezañ hir-mat ha mont dre meur a linenn. Spi hon eus e vo bravik an disoc\'h koulskoude.</string>
+  <string name="media_detail_author">Aozer</string>
   <string name="media_detail_uploaded_date">Deiziad enporzhiañ</string>
   <string name="media_detail_license">Aotre-implijout</string>
   <string name="media_detail_coordinates">Daveennoù</string>
@@ -211,12 +218,40 @@
   <string name="no_description_found">N\'eus bet kavet deskrivadur ebet</string>
   <string name="nearby_info_menu_commons_article">Pajennad restroù Commons</string>
   <string name="nearby_info_menu_wikidata_article">Elfenn Wikidata</string>
+  <string name="nearby_info_menu_wikipedia_article">Pennad Wikipedia</string>
   <string name="give_permission">Reiñ ar gwir</string>
   <string name="use_external_storage">Implijout ar stokañ diavaez</string>
   <string name="use_external_storage_summary">Enrollit ar skeudennoù tennet gant luc\'hskeudennerez ho penveg</string>
   <string name="login_to_your_account">Kevreit ouzh ho kont</string>
+  <string name="null_url">Fazi ! N\'eo ket bet kavet an URL</string>
+  <string name="nominate_deletion">Kinnig evit lemel</string>
+  <string name="nominated_for_deletion">Meneget eo bet ar skeudenn evit lemel.</string>
+  <string name="view_browser">Diskwel er merdeer</string>
+  <string name="skip_login">Lezel a-gostez</string>
+  <string name="navigation_item_login">Kevreañ</string>
   <string name="nearby_location_has_not_changed">N\'eo ket cheñchet al lec\'hiadur.</string>
   <string name="get_directions">Kaout urzhioù</string>
   <string name="read_article">Lenn ar pennad</string>
+  <string name="nearby_wikidata">WIKIDATA</string>
+  <string name="nearby_wikipedia">WIKIPEDIA</string>
+  <string name="about_faq">&lt;u&gt;FAG&lt;/u&gt;</string>
+  <string name="welcome_skip_button">Lezel an tutorial a-gostez</string>
+  <string name="about_translate">&lt;u&gt;Treiñ&lt;/u&gt;</string>
+  <string name="about_translate_title">Yezhoù</string>
+  <string name="about_translate_proceed">Kenderc\'hel</string>
+  <string name="about_translate_cancel">Nullañ</string>
+  <string name="retry">Klask en-dro</string>
+  <string name="showcase_view_got_it_button">Mat eo !</string>
+  <string name="no_images_found">N\'eus bet kavet skeudenn ebet !</string>
+  <string name="error_loading_images">Ur fazi zo c\'hoarvezet p\'eo bet karget ar skeudennoù.</string>
+  <string name="image_uploaded_by">Enporzhiet gant:%1$s</string>
+  <string name="block_notification">Stanket oc\'h bet ha ne c\'hallit ket mui kemmañ war Commons</string>
   <string name="appwidget_img">Skeudenn an deiz</string>
+  <string name="app_widget_heading">Skeudenn an deiz</string>
+  <string name="menu_search_button">Klask</string>
+  <string name="search_commons">Klask e Commons</string>
+  <string name="images_not_found">N\'eus bet kavet skeudenn ebet hag a sell ouzh 1$s</string>
+  <string name="title_activity_search">Klask</string>
+  <string name="search_recent_header">Enklaskoù nevez :</string>
+  <string name="provider_searches">Rekedoù enklask diwezhañ</string>
 </resources>

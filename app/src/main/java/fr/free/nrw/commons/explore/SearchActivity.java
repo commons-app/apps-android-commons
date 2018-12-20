@@ -3,6 +3,7 @@ package fr.free.nrw.commons.explore;
 import android.content.res.Configuration;
 import android.database.DataSetObserver;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -13,7 +14,6 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.SearchView;
-import android.widget.Toast;
 
 import com.jakewharton.rxbinding2.view.RxView;
 import com.jakewharton.rxbinding2.widget.RxSearchView;
@@ -58,9 +58,16 @@ public class SearchActivity extends NavigationBaseActivity implements MediaDetai
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        boolean currentThemeIsDark = PreferenceManager.getDefaultSharedPreferences(this).getBoolean("theme", false);
         setContentView(R.layout.activity_search);
         ButterKnife.bind(this);
         initDrawer();
+        if (currentThemeIsDark) {
+            searchView.setBackgroundResource(R.color.vpi__bright_foreground_disabled_holo_dark);
+            tabLayout.setBackgroundResource(R.color.vpi__bright_foreground_disabled_holo_dark);
+            toolbar.setBackgroundResource(R.color.vpi__bright_foreground_disabled_holo_dark);
+            viewPager.setBackgroundResource(R.color.vpi__bright_foreground_disabled_holo_dark);
+        }
         setTitle(getString(R.string.title_activity_search));
         toolbar.setNavigationOnClickListener(v->onBackPressed());
         supportFragmentManager = getSupportFragmentManager();
@@ -94,9 +101,9 @@ public class SearchActivity extends NavigationBaseActivity implements MediaDetai
         searchImageFragment = new SearchImageFragment();
         searchCategoryFragment= new SearchCategoryFragment();
         fragmentList.add(searchImageFragment);
-        titleList.add("MEDIA");
+        titleList.add(getResources().getString(R.string.search_tab_title_media));
         fragmentList.add(searchCategoryFragment);
-        titleList.add("CATEGORIES");
+        titleList.add(getResources().getString(R.string.search_tab_title_categories));
 
         viewPagerAdapter.setTabData(fragmentList, titleList);
         viewPagerAdapter.notifyDataSetChanged();

@@ -39,7 +39,7 @@
   <string name="provider_contributions">Ifuyla i suliɣ</string>
   <string name="menu_share">Bḍu</string>
   <string name="menu_open_in_browser">Sken deg yiminig</string>
-  <string name="share_title_hint">Azwel</string>
+  <string name="share_title_hint" fuzzy="true">Azwel</string>
   <string name="share_description_hint">Aglam</string>
   <string name="login_failed_network">Ur izmir ara ad yeqqen - tuccḍa n uẓeṭṭa</string>
   <string name="login_failed_throttled">Ddeq n uɛraḍ ur yeddin ara. Ɛreḍ akka di kra n tisdatin</string>
@@ -56,7 +56,7 @@
   <string name="gps_disabled">GPS ur yermid ɣef yibenk-ik. Tebɣiḍ ad tremdeḍ-t?</string>
   <string name="enable_gps">Rmed GPS</string>
   <string name="contributions_subtitle_zero">Usla ayen yulin</string>
-  <plurals name="contributions_subtitle">
+  <plurals name="contributions_subtitle" fuzzy="true">
     <item quantity="zero">\@string/contributions_subtitle_zero</item>
     <item quantity="one">%1$d n usali</item>
     <item quantity="other">%1$d n usali</item>
@@ -143,7 +143,6 @@
   <string name="title_activity_nearby">Idigen iqeṛben</string>
   <string name="no_nearby">Ulac ayen yettwafen s lqerb</string>
   <string name="warning">Ɣur-k</string>
-  <string name="file_exists">Afaylu yella yakan di Commons. Tebɣiḍ ad tedduḍ ar zdat?</string>
   <string name="yes">Ih</string>
   <string name="no">Uhu</string>
   <string name="media_detail_title">Azwel</string>
@@ -204,7 +203,7 @@
   <string name="use_external_storage_summary">Sekles tiwlafin yettwaṭṭfen s tkamirat yellan deg ibenk</string>
   <string name="login_to_your_account">Qqen ar umiḍan-ik</string>
   <string name="send_log_file">Azen afaylu n uɣmis</string>
-  <string name="send_log_file_description">Azen afaylu n uɣmis i yinermisen s yimayl</string>
+  <string name="send_log_file_description" fuzzy="true">Azen afaylu n uɣmis i yinermisen s yimayl</string>
   <string name="nearby_location_has_not_changed">Adeg ur ibeddel ara.</string>
   <string name="nearby_location_not_available">Ulac adeg</string>
   <string name="location_permission_rationale_nearby">Ilaq usireg i uskan tabdart n wadigen iqerben</string>

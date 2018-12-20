@@ -3,6 +3,7 @@ package fr.free.nrw.commons;
 import android.net.Uri;
 import android.support.annotation.Nullable;
 import android.support.v4.view.PagerAdapter;
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,7 +14,7 @@ import butterknife.OnClick;
 import butterknife.Optional;
 
 public class WelcomePagerAdapter extends PagerAdapter {
-    static final int[] PAGE_LAYOUTS = new int[]{
+    private static final int[] PAGE_LAYOUTS = new int[]{
             R.layout.welcome_wikipedia,
             R.layout.welcome_do_upload,
             R.layout.welcome_dont_upload,
@@ -56,22 +57,31 @@ public class WelcomePagerAdapter extends PagerAdapter {
 
     @Override
     public Object instantiateItem(ViewGroup container, int position) {
-        this.container=container;
+        this.container = container;
         LayoutInflater inflater = LayoutInflater.from(container.getContext());
         ViewGroup layout = (ViewGroup) inflater.inflate(PAGE_LAYOUTS[position], container, false);
-        if( BuildConfig.FLAVOR == "beta"){
-            TextView textView = (TextView) layout.findViewById(R.id.welcomeYesButton);
-            if( textView.getVisibility() != View.VISIBLE){
-                textView.setVisibility(View.VISIBLE);
-            }
-            ViewHolder holder = new ViewHolder(layout);
-            layout.setTag(holder);
-        } else {
-            if (position == PAGE_FINAL) {
-                ViewHolder holder = new ViewHolder(layout);
-                layout.setTag(holder);
-            }
+
+        // If final page
+        if (position == PAGE_FINAL) {
+            // Add link to more information
+            TextView moreInfo = layout.findViewById(R.id.welcomeInfo);
+            moreInfo.setText(Html.fromHtml(WelcomeActivity.moreInformation));
+            moreInfo.setOnClickListener(view -> {
+                try {
+                    Utils.handleWebUrl(
+                            container.getContext(),
+                            Uri.parse("https://commons.wikimedia.org/wiki/Help:Contents")
+                    );
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            });
+
+            // Handle click of finishTutorialButton ("YES!" button) inside layout
+            layout.findViewById(R.id.finishTutorialButton)
+                    .setOnClickListener(view -> callback.finishTutorial());
         }
+
         container.addView(layout);
         return layout;
     }
@@ -88,33 +98,6 @@ public class WelcomePagerAdapter extends PagerAdapter {
     }
 
     public interface Callback {
-        void onYesClicked();
-    }
-
-    class ViewHolder {
-        ViewHolder(View view) {
-            ButterKnife.bind(this, view);
-        }
-
-        /**
-         * Triggers on click callback on button click
-         */
-        @OnClick(R.id.welcomeYesButton)
-        void onClicked() {
-            if (callback != null) {
-                callback.onYesClicked();
-            }
-        }
-
-        @Optional
-        @OnClick(R.id.welcomeInfo)
-        void onHelpClicked () {
-            try {
-                Utils.handleWebUrl(container.getContext(),Uri.parse("https://commons.wikimedia.org/wiki/Help:Contents" ));
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-
+        void finishTutorial();
     }
 }

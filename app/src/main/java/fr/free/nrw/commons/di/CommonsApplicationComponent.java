@@ -13,8 +13,9 @@ import fr.free.nrw.commons.contributions.ContributionsSyncAdapter;
 import fr.free.nrw.commons.delete.DeleteTask;
 import fr.free.nrw.commons.modifications.ModificationsSyncAdapter;
 import fr.free.nrw.commons.nearby.PlaceRenderer;
-import fr.free.nrw.commons.upload.FileProcessor;
 import fr.free.nrw.commons.settings.SettingsFragment;
+import fr.free.nrw.commons.upload.FileProcessor;
+import fr.free.nrw.commons.widget.PicOfDayAppWidget;
 
 
 @Singleton
@@ -49,6 +50,8 @@ public interface CommonsApplicationComponent extends AndroidInjector<Application
     void inject(PlaceRenderer placeRenderer);
 
     void inject(FileProcessor fileProcessor);
+
+    void inject(PicOfDayAppWidget picOfDayAppWidget);
 
     @Component.Builder
     @SuppressWarnings({"WeakerAccess", "unused"})

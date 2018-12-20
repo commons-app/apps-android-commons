@@ -1,10 +1,12 @@
 <resources>
 
     <style name="DarkAppTheme" parent="Theme.AppCompat.NoActionBar">
+        <item name="contributionsListBackground">@color/contributionListDarkBackground</item>
+        <item name="mainTabBackground">@color/contributionListDarkBackground</item>
         <item name="mainBackground">@color/main_background_dark</item>
         <item name="colorPrimary">@color/primaryColor</item>
         <item name="colorPrimaryDark">@color/primaryDarkColor</item>
-        <item name="colorAccent">@color/primaryColor</item>
+        <item name="colorAccent">@color/white</item>
         <item name="colorButtonNormal">@color/primaryColor</item>
 
         <item name="semitransparentText">@color/commons_app_blue_dark</item>
@@ -19,9 +21,14 @@
         <item name="buttonBackgroundPressed">@color/pressed_button_dark</item>
         <item name="textDisabled">@color/disabled_button_text_color_dark</item>
         <item name="textEnabled">@color/enabled_button_text_color_dark</item>
+        <item name="mainCardBackground">@color/main_background_dark</item>
+        <item name="mainScreenNearbyPermissionbutton">@style/DarkFlatNearbyPermissionButton</item>
+
     </style>
 
     <style name="LightAppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="contributionsListBackground">@color/white</item>
+        <item name="mainTabBackground">@color/primaryColor</item>
         <item name="mainBackground">@color/main_background_light</item>
         <item name="colorPrimaryDark">@color/primaryDarkColor</item>
         <item name="colorAccent">@color/primaryColor</item>
@@ -39,6 +46,9 @@
         <item name="buttonBackgroundPressed">@color/pressed_button_light</item>
         <item name="textDisabled">@color/disabled_button_text_color_light</item>
         <item name="textEnabled">@color/enabled_button_text_color_light</item>
+        <item name="mainCardBackground">@color/primaryDarkColor</item>
+        <item name="mainScreenNearbyPermissionbutton">@style/LightFlatNearbyPermissionButton</item>
+
     </style>
 
     <style name="DarkSpinnerTheme" parent="DarkAppTheme">
@@ -47,6 +57,14 @@
 
     <style name="LightSpinnerTheme" parent="LightAppTheme">
         <item name="colorControlNormal">#ffffff</item>
+    </style>
+
+    <style name="DarkFlatNearbyPermissionButton" parent="DarkAppTheme">
+        <item name="colorControlHighlight">@color/contributionListDarkBackground</item>
+    </style>
+
+    <style name="LightFlatNearbyPermissionButton" parent="LightAppTheme">
+        <item name="colorControlHighlight">@color/primaryColor</item>
     </style>
 
     <style name="ProgressBar" parent="Widget.AppCompat.ProgressBar.Horizontal" />

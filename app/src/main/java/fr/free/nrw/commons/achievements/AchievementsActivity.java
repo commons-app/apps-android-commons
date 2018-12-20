@@ -2,16 +2,9 @@ package fr.free.nrw.commons.achievements;
 
 import android.accounts.Account;
 import android.annotation.SuppressLint;
-import android.annotation.TargetApi;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.Canvas;
-import android.graphics.Color;
-import android.graphics.Paint;
-import android.graphics.Rect;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
@@ -20,7 +13,6 @@ import android.support.v4.content.res.ResourcesCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.Toolbar;
 import android.util.DisplayMetrics;
-import android.util.Log;
 import android.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -34,13 +26,10 @@ import android.widget.TextView;
 
 import com.dinuscxj.progressbar.CircleProgressBar;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.util.Optional;
+import java.util.Objects;
 
 import javax.inject.Inject;
 
@@ -65,10 +54,7 @@ public class AchievementsActivity extends NavigationBaseActivity {
 
     private static final double BADGE_IMAGE_WIDTH_RATIO = 0.4;
     private static final double BADGE_IMAGE_HEIGHT_RATIO = 0.3;
-    private Boolean isUploadFetched = false;
-    private Boolean isStatisticsFetched = false;
-    private Boolean isRevertFetched = false;
-    private Achievements achievements = new Achievements();
+
     private LevelController.LevelInfo levelInfo;
 
     @BindView(R.id.achievement_badge)
@@ -140,8 +126,6 @@ public class AchievementsActivity extends NavigationBaseActivity {
         progressBar.setVisibility(View.VISIBLE);
         hideLayouts();
         setAchievements();
-        setUploadCount();
-        setRevertCount();
         initDrawer();
     }
 
@@ -201,62 +185,57 @@ public class AchievementsActivity extends NavigationBaseActivity {
      * which then calls parseJson when results are fetched
      */
     private void setAchievements() {
-        if(checkAccount()) {
+        progressBar.setVisibility(View.VISIBLE);
+        if (checkAccount()) {
             compositeDisposable.add(mediaWikiApi
-                    .getAchievements(sessionManager.getCurrentAccount().name)
+                    .getAchievements(Objects.requireNonNull(sessionManager.getCurrentAccount()).name)
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe(
-                            jsonObject -> parseJson(jsonObject),
-                            t -> Timber.e(t, "Fetching achievements statisticss failed")
+                            response -> {
+                                if (response != null) {
+                                    setUploadCount(Achievements.from(response));
+                                } else {
+                                    showSnackBarWithRetry();
+                                }
+                            },
+                            t -> {
+                                Timber.e(t, "Fetching achievements statistics failed");
+                                showSnackBarWithRetry();
+                            }
                     ));
         }
     }
 
-    /**
-     * To call the API to get reverts count in form of JSONObject
-     *
-     */
-
-    private void setRevertCount(){
-        if(checkAccount()) {
-            compositeDisposable.add(mediaWikiApi
-                    .getRevertRespObjectSingle(sessionManager.getCurrentAccount().name)
-                    .subscribeOn(Schedulers.io())
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe(
-                            object -> parseJsonRevertCount(object),
-                            t -> Timber.e(t, "Fetching revert count failed")
-                    ));
-        }
+    private void showSnackBarWithRetry() {
+        progressBar.setVisibility(View.GONE);
+        ViewUtil.showDismissibleSnackBar(findViewById(android.R.id.content),
+            R.string.achievements_fetch_failed, R.string.retry, view -> setAchievements());
     }
 
     /**
-     * used to set number of deleted images
-     * @param object
+     * Shows a generic error toast when error occurs while loading achievements or uploads
      */
-    private void parseJsonRevertCount(JSONObject object){
-        try {
-            achievements.setRevertCount(object.getInt("deletedUploads"));
-        } catch (JSONException e) {
-            Timber.d( e, e.getMessage());
-        }
-        isRevertFetched = true;
-        hideProgressBar();
+    private void onError() {
+        ViewUtil.showLongToast(this, getResources().getString(R.string.error_occurred));
+        progressBar.setVisibility(View.GONE);
     }
 
     /**
      * used to the count of images uploaded by user
      */
-    private void setUploadCount() {
-        if(checkAccount()) {
+    private void setUploadCount(Achievements achievements) {
+        if (checkAccount()) {
             compositeDisposable.add(mediaWikiApi
-                    .getUploadCount(sessionManager.getCurrentAccount().name)
+                    .getUploadCount(Objects.requireNonNull(sessionManager.getCurrentAccount()).name)
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe(
-                            uploadCount -> setAchievementsUploadCount(uploadCount),
-                            t -> Timber.e(t, "Fetching upload count failed")
+                            uploadCount -> setAchievementsUploadCount(achievements, uploadCount),
+                            t -> {
+                                Timber.e(t, "Fetching upload count failed");
+                                onError();
+                            }
                     ));
         }
     }
@@ -265,10 +244,9 @@ public class AchievementsActivity extends NavigationBaseActivity {
      * used to set achievements upload count and call hideProgressbar
      * @param uploadCount
      */
-    private void setAchievementsUploadCount(int uploadCount){
+    private void setAchievementsUploadCount(Achievements achievements, int uploadCount) {
         achievements.setImagesUploaded(uploadCount);
-        isUploadFetched = true;
-        hideProgressBar();
+        hideProgressBar(achievements);
     }
 
     /**
@@ -294,32 +272,11 @@ public class AchievementsActivity extends NavigationBaseActivity {
     }
 
     /**
-     * used to parse the JSONObject containing results
-     * @param object
-     */
-    private void parseJson(JSONObject object) {
-        try {
-            achievements.setUniqueUsedImages(object.getInt("uniqueUsedImages"));
-            achievements.setArticlesUsingImages(object.getInt("articlesUsingImages"));
-            achievements.setThanksReceived(object.getInt("thanksReceived"));
-            achievements.setImagesEditedBySomeoneElse(object.getInt("imagesEditedBySomeoneElse"));
-            JSONObject featuredImages = object.getJSONObject("featuredImages");
-            achievements.setFeaturedImages
-                    (featuredImages.getInt("Quality_images") +
-                            featuredImages.getInt("Featured_pictures_on_Wikimedia_Commons"));
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        isStatisticsFetched = true;
-        hideProgressBar();
-    }
-
-    /**
      * Used the inflate the fetched statistics of the images uploaded by user
      * and assign badge and level
      * @param achievements
      */
-    private void inflateAchievements(Achievements achievements ){
+    private void inflateAchievements(Achievements achievements) {
         thanksReceived.setText(Integer.toString(achievements.getThanksReceived()));
         imagesUsedByWikiProgessbar.setProgress
                 (100*achievements.getUniqueUsedImages()/levelInfo.getMaxUniqueImages() );
@@ -350,8 +307,8 @@ public class AchievementsActivity extends NavigationBaseActivity {
     /**
      * to hide progressbar
      */
-    private void hideProgressBar() {
-        if (progressBar != null && isUploadFetched && isStatisticsFetched && isRevertFetched) {
+    private void hideProgressBar(Achievements achievements) {
+        if (progressBar != null) {
             levelInfo = LevelController.LevelInfo.from(achievements.getImagesUploaded(),
                     achievements.getUniqueUsedImages(),
                     achievements.getNotRevertPercentage());
@@ -388,22 +345,13 @@ public class AchievementsActivity extends NavigationBaseActivity {
         AlertDialog.Builder alertadd = new AlertDialog.Builder(AchievementsActivity.this);
         LayoutInflater factory = LayoutInflater.from(AchievementsActivity.this);
         final View view = factory.inflate(R.layout.image_alert_layout, null);
-        ImageView screenShotImage = (ImageView) view.findViewById(R.id.alert_image);
+        ImageView screenShotImage = view.findViewById(R.id.alert_image);
         screenShotImage.setImageBitmap(screenshot);
-        TextView shareMessage = (TextView) view.findViewById(R.id.alert_text);
+        TextView shareMessage = view.findViewById(R.id.alert_text);
         shareMessage.setText(R.string.achievements_share_message);
         alertadd.setView(view);
-        alertadd.setPositiveButton("Proceed", new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int which) {
-                shareScreen(screenshot);
-            }
-        });
-        alertadd.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                dialog.cancel();
-            }
-        });
+        alertadd.setPositiveButton(R.string.about_translate_proceed, (dialog, which) -> shareScreen(screenshot));
+        alertadd.setNegativeButton(android.R.string.cancel, (dialog, which) -> dialog.cancel());
         alertadd.show();
     }
 
@@ -446,7 +394,7 @@ public class AchievementsActivity extends NavigationBaseActivity {
      */
     private boolean checkAccount(){
         Account currentAccount = sessionManager.getCurrentAccount();
-        if(currentAccount == null) {
+        if (currentAccount == null) {
         Timber.d("Current account is null");
         ViewUtil.showLongToast(this, getResources().getString(R.string.user_not_logged_in));
         sessionManager.forceLogin(this);

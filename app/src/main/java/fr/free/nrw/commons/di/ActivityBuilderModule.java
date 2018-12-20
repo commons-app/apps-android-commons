@@ -7,16 +7,15 @@ import fr.free.nrw.commons.WelcomeActivity;
 import fr.free.nrw.commons.achievements.AchievementsActivity;
 import fr.free.nrw.commons.auth.LoginActivity;
 import fr.free.nrw.commons.auth.SignupActivity;
+import fr.free.nrw.commons.bookmarks.BookmarksActivity;
 import fr.free.nrw.commons.category.CategoryDetailsActivity;
-import fr.free.nrw.commons.contributions.ContributionsActivity;
+import fr.free.nrw.commons.contributions.MainActivity;
 import fr.free.nrw.commons.category.CategoryImagesActivity;
 import fr.free.nrw.commons.explore.SearchActivity;
 
-import fr.free.nrw.commons.nearby.NearbyActivity;
 import fr.free.nrw.commons.notification.NotificationActivity;
 import fr.free.nrw.commons.settings.SettingsActivity;
-import fr.free.nrw.commons.upload.MultipleShareActivity;
-import fr.free.nrw.commons.upload.ShareActivity;
+import fr.free.nrw.commons.upload.UploadActivity;
 
 @Module
 @SuppressWarnings({"WeakerAccess", "unused"})
@@ -29,13 +28,7 @@ public abstract class ActivityBuilderModule {
     abstract WelcomeActivity bindWelcomeActivity();
 
     @ContributesAndroidInjector
-    abstract ShareActivity bindShareActivity();
-
-    @ContributesAndroidInjector
-    abstract MultipleShareActivity bindMultipleShareActivity();
-
-    @ContributesAndroidInjector
-    abstract ContributionsActivity bindContributionsActivity();
+    abstract MainActivity bindContributionsActivity();
 
     @ContributesAndroidInjector
     abstract SettingsActivity bindSettingsActivity();
@@ -47,13 +40,13 @@ public abstract class ActivityBuilderModule {
     abstract SignupActivity bindSignupActivity();
 
     @ContributesAndroidInjector
-    abstract NearbyActivity bindNearbyActivity();
-
-    @ContributesAndroidInjector
     abstract NotificationActivity bindNotificationActivity();
 
     @ContributesAndroidInjector
     abstract CategoryImagesActivity bindFeaturedImagesActivity();
+
+    @ContributesAndroidInjector
+    abstract UploadActivity bindUploadActivity();
 
     @ContributesAndroidInjector
     abstract SearchActivity bindSearchActivity();
@@ -63,5 +56,8 @@ public abstract class ActivityBuilderModule {
 
     @ContributesAndroidInjector
     abstract AchievementsActivity bindAchievementsActivity();
+
+    @ContributesAndroidInjector
+    abstract BookmarksActivity bindBookmarksActivity();
 
 }

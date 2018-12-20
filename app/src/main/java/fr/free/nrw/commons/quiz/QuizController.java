@@ -4,7 +4,6 @@ import android.content.Context;
 
 import java.util.ArrayList;
 
-import butterknife.BindView;
 import fr.free.nrw.commons.R;
 
 /**

@@ -27,7 +27,6 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.io.IOException;
 import java.util.Locale;
@@ -44,7 +43,7 @@ import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.Utils;
 import fr.free.nrw.commons.WelcomeActivity;
 import fr.free.nrw.commons.category.CategoryImagesActivity;
-import fr.free.nrw.commons.contributions.ContributionsActivity;
+import fr.free.nrw.commons.contributions.MainActivity;
 import fr.free.nrw.commons.di.ApplicationlessInjection;
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
 import fr.free.nrw.commons.theme.NavigationBaseActivity;
@@ -140,7 +139,7 @@ public class LoginActivity extends AccountAuthenticatorActivity {
                 .setNegativeButton(R.string.no, (dialog, which) -> dialog.cancel())
                 .show());
 
-        if(BuildConfig.FLAVOR.equals("beta")){
+        if (BuildConfig.FLAVOR.equals("beta")){
             loginCredentials.setText(getString(R.string.login_credential));
         } else {
             loginCredentials.setVisibility(View.GONE);
@@ -178,7 +177,6 @@ public class LoginActivity extends AccountAuthenticatorActivity {
         super.onResume();
         if (prefs.getBoolean("firstrun", true)) {
             WelcomeActivity.startYourself(this);
-            prefs.edit().putBoolean("firstrun", false).apply();
         }
 
         if (sessionManager.getCurrentAccount() != null
@@ -216,6 +214,7 @@ public class LoginActivity extends AccountAuthenticatorActivity {
         loginCurrentlyInProgress = true;
         Timber.d("Login to start!");
         final String username = canonicializeUsername(usernameEdit.getText().toString());
+        final String rawUsername = Utils.capitalize(usernameEdit.getText().toString().trim());
         final String password = passwordEdit.getText().toString();
         String twoFactorCode = twoFactorEdit.getText().toString();
 
@@ -223,7 +222,7 @@ public class LoginActivity extends AccountAuthenticatorActivity {
         Observable.fromCallable(() -> login(username, password, twoFactorCode))
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(result -> handleLogin(username, password, result));
+                .subscribe(result -> handleLogin(username, rawUsername, password, result));
     }
 
     private String login(String username, String password, String twoFactorCode) {
@@ -239,10 +238,10 @@ public class LoginActivity extends AccountAuthenticatorActivity {
         }
     }
 
-    private void handleLogin(String username, String password, String result) {
+    private void handleLogin(String username, String rawUsername, String password, String result) {
         Timber.d("Login done!");
         if (result.equals("PASS")) {
-            handlePassResult(username, password);
+            handlePassResult(username, rawUsername , password);
         } else {
             loginCurrentlyInProgress = false;
             errorMessageShown = true;
@@ -260,7 +259,7 @@ public class LoginActivity extends AccountAuthenticatorActivity {
         progressDialog.show();
     }
 
-    private void handlePassResult(String username, String password) {
+    private void handlePassResult(String username, String rawUsername, String password) {
         showSuccessAndDismissDialog();
         requestAuthToken();
         AccountAuthenticatorResponse response = null;
@@ -277,7 +276,7 @@ public class LoginActivity extends AccountAuthenticatorActivity {
             }
         }
 
-        sessionManager.createAccount(response, username, password);
+        sessionManager.createAccount(response, username, rawUsername, password);
         startMainActivity();
     }
 
@@ -382,10 +381,10 @@ public class LoginActivity extends AccountAuthenticatorActivity {
         super.onRestoreInstanceState(savedInstanceState);
         loginCurrentlyInProgress = savedInstanceState.getBoolean(LOGING_IN, false);
         errorMessageShown = savedInstanceState.getBoolean(ERROR_MESSAGE_SHOWN, false);
-        if(loginCurrentlyInProgress){
+        if (loginCurrentlyInProgress){
             performLogin();
         }
-        if(errorMessageShown){
+        if (errorMessageShown){
             resultantError = savedInstanceState.getString(RESULTANT_ERROR);
             handleOtherResults(resultantError);
         }
@@ -400,7 +399,7 @@ public class LoginActivity extends AccountAuthenticatorActivity {
 
     public void showMessageAndCancelDialog(@StringRes int resId) {
         showMessage(resId, R.color.secondaryDarkColor);
-        if(progressDialog != null){
+        if (progressDialog != null){
             progressDialog.cancel();
         }
     }
@@ -416,7 +415,7 @@ public class LoginActivity extends AccountAuthenticatorActivity {
     }
 
     public void startMainActivity() {
-        NavigationBaseActivity.startActivityWithFlags(this, ContributionsActivity.class, Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        NavigationBaseActivity.startActivityWithFlags(this, MainActivity.class, Intent.FLAG_ACTIVITY_CLEAR_TOP);
         finish();
     }
 

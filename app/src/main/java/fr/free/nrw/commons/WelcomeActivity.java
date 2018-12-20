@@ -2,23 +2,37 @@ package fr.free.nrw.commons;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
+import android.view.View;
 
 import com.viewpagerindicator.CirclePageIndicator;
 
+import javax.inject.Inject;
+import javax.inject.Named;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
+import butterknife.Optional;
 import fr.free.nrw.commons.quiz.QuizActivity;
 import fr.free.nrw.commons.theme.BaseActivity;
 
 public class WelcomeActivity extends BaseActivity {
 
-    @BindView(R.id.welcomePager) ViewPager pager;
-    @BindView(R.id.welcomePagerIndicator) CirclePageIndicator indicator;
+    @Inject
+    @Named("application_preferences")
+    SharedPreferences prefs;
+
+    @BindView(R.id.welcomePager)
+    ViewPager pager;
+    @BindView(R.id.welcomePagerIndicator)
+    CirclePageIndicator indicator;
 
     private WelcomePagerAdapter adapter = new WelcomePagerAdapter();
     private boolean isQuiz;
+    static String moreInformation;
 
     /**
      * Initialises exiting fields and dependencies
@@ -30,20 +44,27 @@ public class WelcomeActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_welcome);
 
-        if(getIntent() != null) {
+        moreInformation = this.getString(R.string.welcome_help_button_text);
+
+        if (getIntent() != null) {
             Bundle bundle = getIntent().getExtras();
             if (bundle != null) {
                 isQuiz = bundle.getBoolean("isQuiz");
             }
-        } else{
+        } else {
             isQuiz = false;
+        }
+
+        // Enable skip button if beta flavor
+        if (BuildConfig.FLAVOR == "beta") {
+            findViewById(R.id.finishTutorialButton).setVisibility(View.VISIBLE);
         }
 
         ButterKnife.bind(this);
 
         pager.setAdapter(adapter);
         indicator.setViewPager(pager);
-        adapter.setCallback(this::finish);
+        adapter.setCallback(this::finishTutorial);
     }
 
     /**
@@ -51,7 +72,7 @@ public class WelcomeActivity extends BaseActivity {
      */
     @Override
     public void onDestroy() {
-        if(isQuiz){
+        if (isQuiz) {
             Intent i = new Intent(WelcomeActivity.this, QuizActivity.class);
             startActivity(i);
         }
@@ -67,5 +88,23 @@ public class WelcomeActivity extends BaseActivity {
     public static void startYourself(Context context) {
         Intent welcomeIntent = new Intent(context, WelcomeActivity.class);
         context.startActivity(welcomeIntent);
+    }
+
+    /**
+     * Override onBackPressed() to go to previous tutorial 'pages' if not on first page
+     */
+    @Override
+    public void onBackPressed() {
+        if (pager.getCurrentItem() != 0) {
+            pager.setCurrentItem(pager.getCurrentItem() - 1, true);
+        } else {
+            finish();
+        }
+    }
+
+    @OnClick(R.id.finishTutorialButton)
+    public void finishTutorial() {
+        prefs.edit().putBoolean("firstrun", false).apply();
+        finish();
     }
 }

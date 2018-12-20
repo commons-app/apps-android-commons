@@ -16,9 +16,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.content.ContextCompat;
-import android.support.v4.view.MenuItemCompat;
 import android.support.v4.view.ViewPager;
-import android.support.v7.widget.ShareActionProvider;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -27,18 +25,19 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.auth.SessionManager;
+import fr.free.nrw.commons.bookmarks.Bookmark;
+import fr.free.nrw.commons.bookmarks.pictures.BookmarkPicturesDao;
 import fr.free.nrw.commons.category.CategoryDetailsActivity;
 import fr.free.nrw.commons.category.CategoryImagesActivity;
 import fr.free.nrw.commons.contributions.Contribution;
-import fr.free.nrw.commons.contributions.ContributionsActivity;
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
 import fr.free.nrw.commons.explore.SearchActivity;
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
@@ -61,11 +60,16 @@ public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment imple
     @Named("default_preferences")
     SharedPreferences prefs;
 
+    @Inject
+    BookmarkPicturesDao bookmarkDao;
+
     @BindView(R.id.mediaDetailsPager)
     ViewPager pager;
     private Boolean editable;
     private boolean isFeaturedImage;
     MediaDetailAdapter adapter;
+    private Bookmark bookmark;
+    private MediaDetailProvider provider;
 
     public MediaDetailPagerFragment() {
         this(false, false);
@@ -95,7 +99,7 @@ public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment imple
                 pager.setAdapter(adapter);
                 pager.setCurrentItem(pageNumber, false);
 
-                if(getActivity() == null) {
+                if (getActivity() == null) {
                     Timber.d("Returning as activity is destroyed!");
                     return;
                 }
@@ -125,17 +129,38 @@ public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment imple
             isFeaturedImage = savedInstanceState.getBoolean("isFeaturedImage");
         }
         setHasOptionsMenu(true);
+        initProvider();
+    }
+
+    /**
+     * initialise the provider, based on from where the fragment was started, as in from an activity
+     * or a fragment
+     */
+    private void initProvider() {
+        if (getParentFragment() != null) {
+            provider = (MediaDetailProvider) getParentFragment();
+        } else {
+            provider = (MediaDetailProvider) getActivity();
+        }
+    }
+
+    public MediaDetailProvider getMediaDetailProvider() {
+        return provider;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if(getActivity() == null) {
+        if (getActivity() == null) {
             Timber.d("Returning as activity is destroyed!");
             return true;
         }
-        MediaDetailProvider provider = (MediaDetailProvider) getActivity();
+
         Media m = provider.getMediaAtPosition(pager.getCurrentItem());
         switch (item.getItemId()) {
+            case R.id.menu_bookmark_current_image:
+                bookmarkDao.updateBookmark(bookmark);
+                updateBookmarkState(item);
+                return true;
             case R.id.menu_share_current_image:
                 Intent shareIntent = new Intent(Intent.ACTION_SEND);
                 shareIntent.setType("text/plain");
@@ -148,7 +173,7 @@ public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment imple
                 viewIntent.setAction(ACTION_VIEW);
                 viewIntent.setData(m.getFilePageTitle().getMobileUri());
                 //check if web browser available
-                if(viewIntent.resolveActivity(getActivity().getPackageManager()) != null){
+                if (viewIntent.resolveActivity(getActivity().getPackageManager()) != null){
                     startActivity(viewIntent);
                 } else {
                     Toast toast = Toast.makeText(getContext(), getString(R.string.no_web_browser), LENGTH_SHORT);
@@ -164,16 +189,6 @@ public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment imple
                 // Set wallpaper
                 setWallpaper(m);
                 return true;
-            case R.id.menu_retry_current_image:
-                // Retry
-                ((ContributionsActivity) getActivity()).retryUpload(pager.getCurrentItem());
-                getActivity().getSupportFragmentManager().popBackStack();
-                return true;
-            case R.id.menu_cancel_current_image:
-                // todo: delete image
-                ((ContributionsActivity) getActivity()).deleteUpload(pager.getCurrentItem());
-                getActivity().getSupportFragmentManager().popBackStack();
-                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
@@ -185,7 +200,7 @@ public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment imple
      * @param media
      */
     private void setWallpaper(Media media) {
-        if(media.getImageUrl() == null || media.getImageUrl().isEmpty()) {
+        if (media.getImageUrl() == null || media.getImageUrl().isEmpty()) {
             Timber.d("Media URL not present");
             return;
         }
@@ -246,7 +261,7 @@ public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment imple
             menu.clear(); // see http://stackoverflow.com/a/8495697/17865
             inflater.inflate(R.menu.fragment_image_detail, menu);
             if (pager != null) {
-                MediaDetailProvider provider = (MediaDetailProvider) getActivity();
+                MediaDetailProvider provider = getMediaDetailProvider();
                 if(provider == null) {
                     return;
                 }
@@ -254,29 +269,33 @@ public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment imple
                 Media m = provider.getMediaAtPosition(pager.getCurrentItem());
                 if (m != null) {
                     // Enable default set of actions, then re-enable different set of actions only if it is a failed contrib
-                    menu.findItem(R.id.menu_retry_current_image).setEnabled(false).setVisible(false);
-                    menu.findItem(R.id.menu_cancel_current_image).setEnabled(false).setVisible(false);
                     menu.findItem(R.id.menu_browser_current_image).setEnabled(true).setVisible(true);
                     menu.findItem(R.id.menu_share_current_image).setEnabled(true).setVisible(true);
                     menu.findItem(R.id.menu_download_current_image).setEnabled(true).setVisible(true);
+                    menu.findItem(R.id.menu_bookmark_current_image).setEnabled(true).setVisible(true);
+
+                    // Initialize bookmark object
+                    bookmark = new Bookmark(
+                            m.getFilename(),
+                            m.getCreator()
+                    );
+                    updateBookmarkState(menu.findItem(R.id.menu_bookmark_current_image));
 
                     if (m instanceof Contribution ) {
                         Contribution c = (Contribution) m;
                         switch (c.getState()) {
                             case Contribution.STATE_FAILED:
-                                menu.findItem(R.id.menu_retry_current_image).setEnabled(true).setVisible(true);
-                                menu.findItem(R.id.menu_cancel_current_image).setEnabled(true).setVisible(true);
                                 menu.findItem(R.id.menu_browser_current_image).setEnabled(false).setVisible(false);
                                 menu.findItem(R.id.menu_share_current_image).setEnabled(false).setVisible(false);
                                 menu.findItem(R.id.menu_download_current_image).setEnabled(false).setVisible(false);
+                                menu.findItem(R.id.menu_bookmark_current_image).setEnabled(false).setVisible(false);
                                 break;
                             case Contribution.STATE_IN_PROGRESS:
                             case Contribution.STATE_QUEUED:
-                                menu.findItem(R.id.menu_retry_current_image).setEnabled(false).setVisible(false);
-                                menu.findItem(R.id.menu_cancel_current_image).setEnabled(false).setVisible(false);
                                 menu.findItem(R.id.menu_browser_current_image).setEnabled(false).setVisible(false);
                                 menu.findItem(R.id.menu_share_current_image).setEnabled(false).setVisible(false);
                                 menu.findItem(R.id.menu_download_current_image).setEnabled(false).setVisible(false);
+                                menu.findItem(R.id.menu_bookmark_current_image).setEnabled(false).setVisible(false);
                                 break;
                             case Contribution.STATE_COMPLETED:
                                 // Default set of menu items works fine. Treat same as regular media object
@@ -286,6 +305,12 @@ public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment imple
                 }
             }
         }
+    }
+
+    private void updateBookmarkState(MenuItem item) {
+        boolean isBookmarked = bookmarkDao.findBookmark(bookmark);
+        int icon = isBookmarked ? R.drawable.ic_round_star_filled_24px : R.drawable.ic_round_star_border_24px;
+        item.setIcon(icon);
     }
 
     public void showImage(int i) {
@@ -323,7 +348,7 @@ public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment imple
                 e.printStackTrace();
             }
         }
-        getActivity().supportInvalidateOptionsMenu();
+        getActivity().invalidateOptionsMenu();
     }
 
     @Override
@@ -361,18 +386,18 @@ public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment imple
                     Timber.d("Skipping getItem. Returning as activity is destroyed!");
                     return null;
                 }
-                pager.postDelayed(() -> getActivity().supportInvalidateOptionsMenu(), 5);
+                pager.postDelayed(() -> getActivity().invalidateOptionsMenu(), 5);
             }
             return MediaDetailFragment.forMedia(i, editable, isFeaturedImage);
         }
 
         @Override
         public int getCount() {
-            if(getActivity() == null) {
+            if (getActivity() == null) {
                 Timber.d("Skipping getCount. Returning as activity is destroyed!");
                 return 0;
             }
-            return ((MediaDetailProvider) getActivity()).getTotalMediaCount();
+            return provider.getTotalMediaCount();
         }
     }
 }

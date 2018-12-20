@@ -4,13 +4,13 @@ import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
-import org.json.JSONObject;
-
+import fr.free.nrw.commons.campaigns.CampaignResponseDTO;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
 
 import fr.free.nrw.commons.Media;
+import fr.free.nrw.commons.achievements.FeedbackResponse;
 import fr.free.nrw.commons.notification.Notification;
 import io.reactivex.Observable;
 import io.reactivex.Single;
@@ -98,13 +98,15 @@ public interface MediaWikiApi {
     @NonNull
     Single<Integer> getUploadCount(String userName);
 
-    @NonNull
-    Single<JSONObject> getRevertRespObjectSingle(String userName);
-
     boolean isUserBlockedFromCommons();
 
-    @NonNull
-    Single<JSONObject> getAchievements(String userName);
+    Single<FeedbackResponse> getAchievements(String userName);
+
+    Single<Media> getPictureOfTheDay();
+
+    void logout();
+
+    Single<CampaignResponseDTO> getCampaigns();
 
     interface ProgressListener {
         void onProgress(long transferred, long total);

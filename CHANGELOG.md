@@ -1,5 +1,29 @@
 # Wikimedia Commons for Android
 
+## v2.9.0
+- New main screen UI with Nearby tab
+- New upload UI and flow
+- Multiple uploads
+- Send Log File revamp
+- Fixed issues with wrong "image taken" date
+- Fixed default zoom level in Nearby map
+- Incremented target SDK to 27, with corresponding notification channel fix
+- Removed several redundant libraries to reduce bloat
+
+## v2.8.5
+- Fixed issues with sporadic upload failures due to wrong mimeType
+
+## v2.8.4
+- Hotfix for constant upload crashes for Oreo users
+
+## v2.8.3
+- Fixed issues with session tokens not being cleared in 2FA, which should reduce p18 edit failures as well
+- Fixed crash caused by bug in fetching revert count
+- Fixed crash potentially caused by Traceur library
+
+## v2.8.2
+- Fixed bug with uploads sent via Share being given .jpeg extensions and overwriting files of the same name
+
 ## v2.8.1
 - Fixed bug with category edits not being sent to server
 

@@ -33,7 +33,7 @@
   <string name="provider_contributions">Manas augsupielades</string>
   <string name="menu_share">Dalīties</string>
   <string name="menu_open_in_browser">Skatīt pārlūkprogrammā</string>
-  <string name="share_title_hint">Nosaukums</string>
+  <string name="share_title_hint" fuzzy="true">Nosaukums</string>
   <string name="share_description_hint">Apraksts</string>
   <string name="login_failed_blocked">Atvainojiet, šis lietotājs tika bloķēts uz Commons</string>
   <string name="login_failed_generic">Pieteikšanās neizdevās</string>
@@ -113,4 +113,16 @@
   <string name="showcase_view_got_it_button">Sapratu!</string>
   <string name="question">Jautājums</string>
   <string name="add_description">+ Pievienot aprakstu</string>
+  <string name="submit">Iesniegt</string>
+  <string name="navigation_item_bookmarks">Grāmatzīmes</string>
+  <string name="title_activity_bookmarks">Grāmatzīmes</string>
+  <string name="provider_bookmarks">Grāmatzīmes</string>
+  <string name="provider_bookmarks_location">Grāmatzīmes</string>
+  <string name="articles">raksti</string>
+  <string name="desc_language_America">Amerika</string>
+  <string name="desc_language_Middle_East">Vidējie Austrumi</string>
+  <string name="desc_language_Asia">Āzija</string>
+  <string name="yes_submit">Jā, iesniegt</string>
+  <string name="nearby_card_permission_title">Atļaujas pieprasījums</string>
+  <string name="never_ask_again">Nekad vairs šo nejautāt</string>
 </resources>

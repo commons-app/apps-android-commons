@@ -1,7 +1,7 @@
 package fr.free.nrw.commons.upload;
 
-import android.annotation.SuppressLint;
 import android.accounts.Account;
+import android.annotation.SuppressLint;
 import android.content.ComponentName;
 import android.content.ContentResolver;
 import android.content.Context;
@@ -16,7 +16,6 @@ import android.os.IBinder;
 import android.preference.PreferenceManager;
 import android.provider.MediaStore;
 import android.text.TextUtils;
-import android.util.Log;
 
 import java.io.BufferedInputStream;
 import java.io.File;
@@ -25,13 +24,8 @@ import java.io.InputStream;
 import java.util.Date;
 import java.util.concurrent.Executors;
 
-import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.HandlerService;
-
-import fr.free.nrw.commons.auth.LoginActivity;
-
 import fr.free.nrw.commons.R;
-
 import fr.free.nrw.commons.auth.SessionManager;
 import fr.free.nrw.commons.contributions.Contribution;
 import fr.free.nrw.commons.settings.Prefs;
@@ -59,7 +53,7 @@ public class UploadController {
     }
 
     private boolean isUploadServiceConnected;
-    private ServiceConnection uploadServiceConnection = new ServiceConnection() {
+    public ServiceConnection uploadServiceConnection = new ServiceConnection() {
         @Override
         public void onServiceConnected(ComponentName componentName, IBinder binder) {
             uploadService = (UploadService) ((HandlerService.HandlerServiceLocalBinder) binder).getService();
@@ -69,6 +63,7 @@ public class UploadController {
         @Override
         public void onServiceDisconnected(ComponentName componentName) {
             // this should never happen
+            isUploadServiceConnected = false;
             Timber.e(new RuntimeException("UploadService died but the rest of the process did not!"));
         }
     };
@@ -76,7 +71,7 @@ public class UploadController {
     /**
      * Prepares the upload service.
      */
-    public void prepareService() {
+    void prepareService() {
         Intent uploadServiceIntent = new Intent(context, UploadService.class);
         uploadServiceIntent.setAction(UploadService.ACTION_START_SERVICE);
         context.startService(uploadServiceIntent);
@@ -86,7 +81,7 @@ public class UploadController {
     /**
      * Disconnects the upload service.
      */
-    public void cleanup() {
+    void cleanup() {
         if (isUploadServiceConnected) {
             context.unbindService(uploadServiceConnection);
         }
@@ -94,49 +89,11 @@ public class UploadController {
 
     /**
      * Starts a new upload task.
-     * @param title         the title of the contribution
-     * @param mediaUri      the media URI of the contribution
-     * @param description   the description of the contribution
-     * @param mimeType      the MIME type of the contribution
-     * @param source        the source of the contribution
-     * @param decimalCoords the coordinates in decimal. (e.g. "37.51136|-77.602615")
-     * @param wikiDataEntityId
-     * @param onComplete    the progress tracker
+     *
+     * @param contribution the contribution object
      */
-    public void startUpload(String title, Uri contentProviderUri, Uri mediaUri, String description, String mimeType, String source, String decimalCoords, String wikiDataEntityId, ContributionUploadProgress onComplete) {
-        Contribution contribution;
-
-
-            //TODO: Modify this to include coords
-            contribution = new Contribution(mediaUri, null, title, description, -1,
-                    null, null, sessionManager.getCurrentAccount().name,
-                    CommonsApplication.DEFAULT_EDIT_SUMMARY, decimalCoords);
-
-
-            contribution.setTag("mimeType", mimeType);
-            contribution.setSource(source);
-
-        Timber.d("Wikidata entity ID received from Share activity is %s", wikiDataEntityId);
-        //TODO: Modify this to include coords
-        Account currentAccount = sessionManager.getCurrentAccount();
-        if(currentAccount == null) {
-            Timber.d("Current account is null");
-            ViewUtil.showLongToast(context, context.getString(R.string.user_not_logged_in));
-            sessionManager.forceLogin(context);
-            return;
-        }
-        contribution = new Contribution(mediaUri, null, title, description, -1,
-                null, null, currentAccount.name,
-                CommonsApplication.DEFAULT_EDIT_SUMMARY, decimalCoords);
-
-
-        contribution.setTag("mimeType", mimeType);
-        contribution.setSource(source);
-        contribution.setWikiDataEntityId(wikiDataEntityId);
-        contribution.setContentProviderUri(contentProviderUri);
-
-        //Calls the next overloaded method
-        startUpload(contribution, onComplete);
+    void startUpload(Contribution contribution) {
+        startUpload(contribution, c -> {});
     }
 
     /**
@@ -146,21 +103,26 @@ public class UploadController {
      * @param onComplete   the progress tracker
      */
     @SuppressLint("StaticFieldLeak")
-    public void startUpload(final Contribution contribution, final ContributionUploadProgress onComplete) {
+    private void startUpload(final Contribution contribution, final ContributionUploadProgress onComplete) {
         //Set creator, desc, and license
 
-        //If author name is enabled and set, use it
+        // If author name is enabled and set, use it
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
 
         if(preferences.getBoolean("useAuthorName", false)) {
             String authorName = preferences.getString("authorName", "");
-            if (!TextUtils.isEmpty(authorName)) {
-                contribution.setCreator(authorName);
-            }
+            contribution.setCreator(authorName);
         }
-
-        else if(TextUtils.isEmpty(contribution.getCreator())){
-                contribution.setCreator(sessionManager.getCurrentAccount().name);
+        
+        if (TextUtils.isEmpty(contribution.getCreator())) {
+            Account currentAccount = sessionManager.getCurrentAccount();
+            if (currentAccount == null) {
+                Timber.d("Current account is null");
+                ViewUtil.showLongToast(context, context.getString(R.string.user_not_logged_in));
+                sessionManager.forceLogin(context);
+                return;
+            }
+            contribution.setCreator(sessionManager.getAuthorName());
         }
 
         if (contribution.getDescription() == null) {
@@ -181,10 +143,8 @@ public class UploadController {
                 long length;
                 ContentResolver contentResolver = context.getContentResolver();
                 try {
-
-                    //TODO: understand do we really need this code
                     if (contribution.getDataLength() <= 0) {
-                        Log.d("deneme","UploadController/doInBackground, contribution.getLocalUri():"+contribution.getLocalUri());
+                        Timber.d("UploadController/doInBackground, contribution.getLocalUri():" + contribution.getLocalUri());
                         AssetFileDescriptor assetFileDescriptor = contentResolver
                                 .openAssetFileDescriptor(Uri.fromFile(new File(contribution.getLocalUri().getPath())), "r");
                         if (assetFileDescriptor != null) {
@@ -236,7 +196,7 @@ public class UploadController {
                         contribution.setDateCreated(new Date());
                     }
                 }
-            return contribution;
+                return contribution;
             }
 
             @Override

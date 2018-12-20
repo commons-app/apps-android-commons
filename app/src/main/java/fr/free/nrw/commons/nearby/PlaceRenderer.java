@@ -1,14 +1,12 @@
 package fr.free.nrw.commons.nearby;
 
 import android.content.Intent;
-
-import android.net.Uri;
 import android.content.SharedPreferences;
-import android.support.v4.app.Fragment;
+import android.net.Uri;
 import android.support.transition.TransitionManager;
+import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.PopupMenu;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -29,12 +27,15 @@ import butterknife.ButterKnife;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.Utils;
 import fr.free.nrw.commons.auth.LoginActivity;
+import fr.free.nrw.commons.bookmarks.locations.BookmarkLocationsDao;
 import fr.free.nrw.commons.contributions.ContributionController;
 import fr.free.nrw.commons.di.ApplicationlessInjection;
+import fr.free.nrw.commons.utils.PlaceUtils;
 import timber.log.Timber;
 
 import static fr.free.nrw.commons.theme.NavigationBaseActivity.startActivityWithFlags;
 import static fr.free.nrw.commons.wikidata.WikidataConstants.WIKIDATA_ENTITY_ID_PREF;
+import static fr.free.nrw.commons.wikidata.WikidataConstants.WIKIDATA_ITEM_LOCATION;
 
 public class PlaceRenderer extends Renderer<Place> {
 
@@ -52,6 +53,9 @@ public class PlaceRenderer extends Renderer<Place> {
     @BindView(R.id.iconOverflow) LinearLayout iconOverflow;
     @BindView(R.id.cameraButtonText) TextView cameraButtonText;
     @BindView(R.id.galleryButtonText) TextView galleryButtonText;
+    @BindView(R.id.bookmarkButton) LinearLayout bookmarkButton;
+    @BindView(R.id.bookmarkButtonText) TextView bookmarkButtonText;
+    @BindView(R.id.bookmarkButtonImage) ImageView bookmarkButtonImage;
 
     @BindView(R.id.directionsButtonText) TextView directionsButtonText;
     @BindView(R.id.iconOverflowText) TextView iconOverflowText;
@@ -62,8 +66,10 @@ public class PlaceRenderer extends Renderer<Place> {
 
     private Fragment fragment;
     private ContributionController controller;
+    private OnBookmarkClick onBookmarkClick;
 
-
+    @Inject
+    BookmarkLocationsDao bookmarkLocationDao;
     @Inject @Named("prefs") SharedPreferences prefs;
     @Inject @Named("direct_nearby_upload_prefs") SharedPreferences directPrefs;
 
@@ -71,10 +77,15 @@ public class PlaceRenderer extends Renderer<Place> {
         openedItems = new ArrayList<>();
     }
 
-    public PlaceRenderer(Fragment fragment, ContributionController controller) {
+    public PlaceRenderer(
+            Fragment fragment,
+            ContributionController controller,
+            OnBookmarkClick onBookmarkClick
+    ) {
         this.fragment = fragment;
         this.controller = controller;
         openedItems = new ArrayList<>();
+        this.onBookmarkClick = onBookmarkClick;
     }
 
     @Override
@@ -86,13 +97,14 @@ public class PlaceRenderer extends Renderer<Place> {
     @Override
     protected void setUpView(View view) {
         ButterKnife.bind(this, view);
+        closeLayout(buttonLayout);
     }
 
     @Override
     protected void hookListeners(View view) {
 
         final View.OnClickListener listener = view12 -> {
-            Log.d("Renderer", "clicked");
+            Timber.d("Renderer clicked");
             TransitionManager.beginDelayedTransition(buttonLayout);
 
             if (buttonLayout.isShown()) {
@@ -153,6 +165,27 @@ public class PlaceRenderer extends Renderer<Place> {
             }
         });
 
+        bookmarkButton.setOnClickListener(view4 -> {
+            if (applicationPrefs.getBoolean("login_skipped", false)) {
+                // prompt the user to login
+                new AlertDialog.Builder(getContext())
+                        .setMessage(R.string.login_alert_message)
+                        .setPositiveButton(R.string.login, (dialog, which) -> {
+                            startActivityWithFlags( getContext(), LoginActivity.class, Intent.FLAG_ACTIVITY_CLEAR_TOP,
+                                    Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                            prefs.edit().putBoolean("login_skipped", false).apply();
+                            fragment.getActivity().finish();
+                        })
+                        .show();
+            } else {
+                boolean isBookmarked = bookmarkLocationDao.updateBookmarkLocation(place);
+                int icon = isBookmarked ? R.drawable.ic_round_star_filled_24px : R.drawable.ic_round_star_border_24px;
+                bookmarkButtonImage.setImageResource(icon);
+                if (onBookmarkClick != null) {
+                    onBookmarkClick.onClick();
+                }
+            }
+        });
     }
 
     private void storeSharedPrefs() {
@@ -162,6 +195,7 @@ public class PlaceRenderer extends Renderer<Place> {
         editor.putString("Desc", place.getLongDescription());
         editor.putString("Category", place.getCategory());
         editor.putString(WIKIDATA_ENTITY_ID_PREF, place.getWikiDataEntityId());
+        editor.putString(WIKIDATA_ITEM_LOCATION, PlaceUtils.latLangToString(place.location));
         editor.apply();
     }
 
@@ -199,6 +233,13 @@ public class PlaceRenderer extends Renderer<Place> {
         iconOverflow.setVisibility(showMenu() ? View.VISIBLE : View.GONE);
         iconOverflow.setOnClickListener(v -> popupMenuListener());
 
+        int icon;
+        if (bookmarkLocationDao.findBookmarkLocation(place)) {
+            icon = R.drawable.ic_round_star_filled_24px;
+        } else {
+            icon = R.drawable.ic_round_star_border_24px;
+        }
+        bookmarkButtonImage.setImageResource(icon);
     }
 
     private void popupMenuListener() {
@@ -241,6 +282,10 @@ public class PlaceRenderer extends Renderer<Place> {
 
     private boolean showMenu() {
         return place.hasCommonsLink() || place.hasWikidataLink();
+    }
+
+    public interface OnBookmarkClick {
+        void onClick();
     }
 
 }

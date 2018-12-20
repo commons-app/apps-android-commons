@@ -7,7 +7,9 @@ import android.graphics.BitmapRegionDecoder;
 import android.graphics.Color;
 import android.graphics.Rect;
 import android.net.Uri;
+import android.support.annotation.IntDef;
 import android.support.annotation.Nullable;
+import android.util.Log;
 
 import com.facebook.common.executors.CallerThreadExecutor;
 import com.facebook.common.references.CloseableReference;
@@ -20,8 +22,11 @@ import com.facebook.imagepipeline.request.ImageRequest;
 import com.facebook.imagepipeline.request.ImageRequestBuilder;
 
 import java.io.IOException;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
 
 import fr.free.nrw.commons.R;
+import fr.free.nrw.commons.location.LatLng;
 import timber.log.Timber;
 
 /**
@@ -29,92 +34,93 @@ import timber.log.Timber;
  */
 
 public class ImageUtils {
-    //atleast 50% of the image in question should be considered dark for the entire image to be dark
-    private static final double MINIMUM_DARKNESS_FACTOR = 0.50;
-    //atleast 50% of the image in question should be considered blurry for the entire image to be blurry
-    private static final double MINIMUM_BLURRYNESS_FACTOR = 0.50;
-    private static final int LAPLACIAN_VARIANCE_THRESHOLD = 70;
 
-    public enum Result {
-        IMAGE_DARK,
-        IMAGE_OK
+    public static final int IMAGE_DARK = 1;
+    public static final int IMAGE_BLURRY = 1 << 1;
+    public static final int IMAGE_DUPLICATE = 1 << 2;
+    public static final int IMAGE_GEOLOCATION_DIFFERENT = 1 << 3;
+    public static final int IMAGE_OK = 0;
+    public static final int IMAGE_KEEP = -1;
+    public static final int IMAGE_WAIT = -2;
+    public static final int EMPTY_TITLE = -3;
+    public static final int FILE_NAME_EXISTS = -4;
+    public static final int NO_CATEGORY_SELECTED = -5;
+
+    @IntDef(
+            flag = true,
+            value = {
+                    IMAGE_DARK,
+                    IMAGE_BLURRY,
+                    IMAGE_DUPLICATE,
+                    IMAGE_OK,
+                    IMAGE_KEEP,
+                    IMAGE_WAIT,
+                    EMPTY_TITLE,
+                    FILE_NAME_EXISTS,
+                    NO_CATEGORY_SELECTED,
+                    IMAGE_GEOLOCATION_DIFFERENT
+            }
+    )
+    @Retention(RetentionPolicy.SOURCE)
+    public @interface Result {
     }
 
     /**
-     * BitmapRegionDecoder allows us to process a large bitmap by breaking it down into smaller rectangles. The rectangles
-     * are obtained by setting an initial width, height and start position of the rectangle as a factor of the width and
-     * height of the original bitmap and then manipulating the width, height and position to loop over the entire original
-     * bitmap. Each individual rectangle is independently processed to check if its too dark. Based on
-     * the factor of "bright enough" individual rectangles amongst the total rectangles into which the image
-     * was divided, we will declare the image as wanted/unwanted
-     *
      * @param bitmapRegionDecoder BitmapRegionDecoder for the image we wish to process
-     * @return Result.IMAGE_OK if image is neither dark nor blurry or if the input bitmapRegionDecoder provided is null
-     *         Result.IMAGE_DARK if image is too dark
+     * @return IMAGE_OK if image is neither dark nor blurry or if the input bitmapRegionDecoder provided is null
+     * IMAGE_DARK if image is too dark
      */
-    public static Result checkIfImageIsTooDark(BitmapRegionDecoder bitmapRegionDecoder) {
+    public static @Result
+    int checkIfImageIsTooDark(BitmapRegionDecoder bitmapRegionDecoder) {
         if (bitmapRegionDecoder == null) {
             Timber.e("Expected bitmapRegionDecoder was null");
-            return Result.IMAGE_OK;
+            return IMAGE_OK;
         }
 
         int loadImageHeight = bitmapRegionDecoder.getHeight();
         int loadImageWidth = bitmapRegionDecoder.getWidth();
 
         int checkImageTopPosition = 0;
-        int checkImageBottomPosition = loadImageHeight / 10;
         int checkImageLeftPosition = 0;
-        int checkImageRightPosition = loadImageWidth / 10;
 
-        int totalDividedRectangles = 0;
-        int numberOfDarkRectangles = 0;
+        Timber.v("left: " + checkImageLeftPosition + " right: " + loadImageWidth + " top: " + checkImageTopPosition + " bottom: " + loadImageHeight);
 
-        while ((checkImageRightPosition <= loadImageWidth) && (checkImageLeftPosition < checkImageRightPosition)) {
-            while ((checkImageBottomPosition <= loadImageHeight) && (checkImageTopPosition < checkImageBottomPosition)) {
-                Timber.v("left: " + checkImageLeftPosition + " right: " + checkImageRightPosition + " top: " + checkImageTopPosition + " bottom: " + checkImageBottomPosition);
+        Rect rect = new Rect(checkImageLeftPosition,checkImageTopPosition, loadImageWidth, loadImageHeight);
 
-                Rect rect = new Rect(checkImageLeftPosition,checkImageTopPosition,checkImageRightPosition,checkImageBottomPosition);
-                totalDividedRectangles++;
+        Bitmap processBitmap = bitmapRegionDecoder.decodeRegion(rect,null);
 
-                Bitmap processBitmap = bitmapRegionDecoder.decodeRegion(rect,null);
-
-                if (checkIfImageIsDark(processBitmap)) {
-                    numberOfDarkRectangles++;
-                }
-
-                checkImageTopPosition = checkImageBottomPosition;
-                checkImageBottomPosition += (checkImageBottomPosition < (loadImageHeight - checkImageBottomPosition)) ? checkImageBottomPosition : (loadImageHeight - checkImageBottomPosition);
-            }
-
-            checkImageTopPosition = 0; //reset to start
-            checkImageBottomPosition = loadImageHeight / 10; //reset to start
-            checkImageLeftPosition = checkImageRightPosition;
-            checkImageRightPosition += (checkImageRightPosition < (loadImageWidth - checkImageRightPosition)) ? checkImageRightPosition : (loadImageWidth - checkImageRightPosition);
+        if (checkIfImageIsDark(processBitmap)) {
+            return IMAGE_DARK;
         }
 
-        Timber.d("dark rectangles count = " + numberOfDarkRectangles + ", total rectangles count = " + totalDividedRectangles);
-
-        if (numberOfDarkRectangles > totalDividedRectangles * MINIMUM_DARKNESS_FACTOR) {
-            return Result.IMAGE_DARK;
-        }
-
-        return Result.IMAGE_OK;
+        return IMAGE_OK;
     }
 
     /**
-     * Pulls the pixels into an array and then runs through it while checking the brightness of each pixel.
-     * The calculation of brightness of each pixel is done by extracting the RGB constituents of the pixel
-     * and then applying the formula to calculate its "Luminance". If this brightness value is less than
-     * 50 then the pixel is considered to be dark. Based on the MINIMUM_DARKNESS_FACTOR if enough pixels
-     * are dark then the entire bitmap is considered to be dark.
-     *
-     * <p>For more information on this brightness/darkness calculation technique refer the accepted answer
-     * on this -> https://stackoverflow.com/questions/35914461/how-to-detect-dark-photos-in-android/35914745
-     * SO question and follow the trail.
-     *
-     * @param bitmap The bitmap that needs to be checked.
-     * @return true if bitmap is dark or null, false if bitmap is bright
+     * @param geolocationOfFileString Geolocation of image. If geotag doesn't exists, then this will be an empty string
+     * @param wikidataItemLocationString Location of wikidata item will be edited after upload
+     * @return false if image is neither dark nor blurry or if the input bitmapRegionDecoder provided is null
+     * true if geolocation of the image and wikidata item are different
      */
+    public static boolean checkImageGeolocationIsDifferent(String geolocationOfFileString, String wikidataItemLocationString) {
+        Timber.d("Comparing geolocation of file with nearby place location");
+        if (geolocationOfFileString == null || geolocationOfFileString == "") { // Means that geolocation for this image is not given
+            return false; // Since we don't know geolocation of file, we choose letting upload
+        }
+
+        String[] geolocationOfFile = geolocationOfFileString.split("\\|");
+        String[] wikidataItemLocation = wikidataItemLocationString.split("/");
+
+        Double distance = LengthUtils.computeDistanceBetween(
+                new LatLng(Double.parseDouble(geolocationOfFile[0]),Double.parseDouble(geolocationOfFile[1]),0)
+                , new LatLng(Double.parseDouble(wikidataItemLocation[0]), Double.parseDouble(wikidataItemLocation[1]),0));
+        if ( distance >= 1000 ) {// Distance is more than 1 km, means that geolocation is wrong
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     private static boolean checkIfImageIsDark(Bitmap bitmap) {
         if (bitmap == null) {
             Timber.e("Expected bitmap was null");
@@ -126,35 +132,53 @@ public class ImageUtils {
 
         int allPixelsCount = bitmapWidth * bitmapHeight;
         int[] bitmapPixels = new int[allPixelsCount];
+        Timber.d("total %s", Integer.toString(allPixelsCount));
 
         bitmap.getPixels(bitmapPixels,0,bitmapWidth,0,0,bitmapWidth,bitmapHeight);
-        boolean isImageDark = false;
-        int darkPixelsCount = 0;
+        int numberOfBrightPixels = 0;
+        int numberOfMediumBrightnessPixels = 0;
+        double brightPixelThreshold = 0.025*allPixelsCount;
+        double mediumBrightPixelThreshold = 0.3*allPixelsCount;
 
         for (int pixel : bitmapPixels) {
             int r = Color.red(pixel);
             int g = Color.green(pixel);
             int b = Color.blue(pixel);
 
-            int brightness = (int) (0.2126 * r + 0.7152 * g + 0.0722 * b);
-            if (brightness < 50) {
-                //pixel is dark
-                darkPixelsCount++;
-                if (darkPixelsCount > allPixelsCount * MINIMUM_DARKNESS_FACTOR) {
-                    isImageDark = true;
-                    break;
+            int secondMax = r>g ? r:g;
+            double max = (secondMax>b ? secondMax:b)/255.0;
+
+            int secondMin = r<g ? r:g;
+            double min = (secondMin<b ? secondMin:b)/255.0;
+
+            double luminance = ((max+min)/2.0)*100;
+
+            int highBrightnessLuminance = 40;
+            int mediumBrightnessLuminance = 26;
+
+            if (luminance<highBrightnessLuminance){
+                if (luminance>mediumBrightnessLuminance){
+                    numberOfMediumBrightnessPixels++;
                 }
             }
-        }
+            else {
+                numberOfBrightPixels++;
+            }
 
-        return isImageDark;
+            if (numberOfBrightPixels>=brightPixelThreshold || numberOfMediumBrightnessPixels>=mediumBrightPixelThreshold){
+                return false;
+            }
+
+        }
+        return true;
     }
 
     /**
      * Downloads the image from the URL and sets it as the phone's wallpaper
      * Fails silently if download or setting wallpaper fails.
-     * @param context
-     * @param imageUrl
+     *
+     * @param context context
+     * @param imageUrl Url of the image
      */
     public static void setWallpaperFromImageUrl(Context context, Uri imageUrl) {
         Timber.d("Trying to set wallpaper from url %s", imageUrl.toString());
@@ -171,7 +195,7 @@ public class ImageUtils {
 
             @Override
             public void onNewResultImpl(@Nullable Bitmap bitmap) {
-                if (dataSource.isFinished() && bitmap != null){
+                if (dataSource.isFinished() && bitmap != null) {
                     Timber.d("Bitmap loaded from url %s", imageUrl.toString());
                     setWallpaper(context, Bitmap.createBitmap(bitmap));
                     dataSource.close();
@@ -194,7 +218,42 @@ public class ImageUtils {
             wallpaperManager.setBitmap(bitmap);
             ViewUtil.showLongToast(context, context.getString(R.string.wallpaper_set_successfully));
         } catch (IOException e) {
-            Timber.e(e,"Error setting wallpaper");
+            Timber.e(e, "Error setting wallpaper");
         }
+    }
+
+    public static String getErrorMessageForResult(Context context, @Result int result) {
+        /**
+         * Result variable is a result of an or operation of all possbile problems. Ie. if result
+         * is 0001 means IMAGE_DARK, if result is 1100 IMAGE_DUPLICATE and IMAGE_GEOLOCATION_DIFFERENT
+         */
+        StringBuilder errorMessage = new StringBuilder();
+        if (result <= 0 ) {
+            Timber.d("No issues to warn user is found");
+        } else {
+            Timber.d("Issues found to warn user");
+
+            errorMessage.append(context.getResources().getString(R.string.upload_problem_exist));
+
+            if ((IMAGE_DARK & result) != 0 ) { // We are checking image dark bit to see if that bit is set or not
+                errorMessage.append("\n - ").append(context.getResources().getString(R.string.upload_problem_image_dark));
+            }
+
+            if ((IMAGE_BLURRY & result) != 0 ) {
+                errorMessage.append("\n - ").append(context.getResources().getString(R.string.upload_problem_image_blurry));
+            }
+
+            if ((IMAGE_DUPLICATE & result) != 0 ) {
+                errorMessage.append("\n - ").append(context.getResources().getString(R.string.upload_problem_image_duplicate));
+            }
+
+            if ((IMAGE_GEOLOCATION_DIFFERENT & result) != 0 ) {
+                errorMessage.append("\n - ").append(context.getResources().getString(R.string.upload_problem_different_geolocation));
+            }
+
+            errorMessage.append("\n\n").append(context.getResources().getString(R.string.upload_problem_do_you_continue));
+        }
+
+        return errorMessage.toString();
     }
 }

@@ -3,7 +3,6 @@ package fr.free.nrw.commons.mwapi;
 import org.apache.http.cookie.Cookie;
 import org.apache.http.impl.client.AbstractHttpClient;
 import org.apache.http.impl.cookie.BasicClientCookie;
-import org.mediawiki.api.ApiResult;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -59,7 +58,7 @@ public class CustomMwApi {
     }
 
     public String getAuthCookie() {
-        if(authCookie == null){
+        if (authCookie == null){
             authCookie = "";
             List<Cookie> cookies = client.getCookieStore().getCookies();
             for(Cookie cookie: cookies) {
@@ -103,14 +102,14 @@ public class CustomMwApi {
     }
 
     public String getUserID() throws IOException {
-        if(this.userID == null || this.userID.equals("0")) {
+        if (this.userID == null || this.userID.equals("0")) {
             this.validateLogin();
         }
         return userID;
     }
 
     public String getUserName() throws IOException {
-        if(this.userID == null || this.userID.equals("0")) {
+        if (this.userID == null || this.userID.equals("0")) {
             this.validateLogin();
         }
         return userName;
@@ -123,7 +122,7 @@ public class CustomMwApi {
             String token = tokenData.getString("/api/login/@token");
             CustomApiResult confirmData = this.action("login").param("lgname", username).param("lgpassword", password).param("lgtoken", token).post();
             String finalResult = confirmData.getString("/api/login/@result");
-            if(finalResult.equals("Success")) {
+            if (finalResult.equals("Success")) {
                 isLoggedIn = true;
             }
             return finalResult;
@@ -141,8 +140,6 @@ public class CustomMwApi {
     }
 
     public CustomApiResult upload(String filename, InputStream file, long length, String text, String comment, String centralAuthToken, String token, ProgressListener uploadProgressListener) throws IOException {
-        Timber.d("Token being used is %s", token);
-
         Http.HttpRequestBuilder builder = Http.multipart(apiURL)
                 .data("action", "upload")
                 .data("token", token)
@@ -152,13 +149,11 @@ public class CustomMwApi {
                 .data("comment", comment)
                 .data("filename", filename)
                 .sendProgressListener(uploadProgressListener);
-        if(length != -1) {
+        if (length != -1) {
             builder.file("file", filename, file, length);
         } else {
             builder.file("file", filename, file);
         }
-
-        Timber.d("Final cookies are %s", client.getCookieStore().getCookies().toString());
 
         return CustomApiResult.fromRequestBuilder(builder, client);
     }
@@ -167,6 +162,8 @@ public class CustomMwApi {
         // I should be doing more validation here, but meh
         isLoggedIn = false;
         this.action("logout").post();
+        removeAllCookies();
+        authCookie = null;
     }
 
     private CustomApiResult makeRequest(String method, HashMap<String, Object> params) throws IOException {

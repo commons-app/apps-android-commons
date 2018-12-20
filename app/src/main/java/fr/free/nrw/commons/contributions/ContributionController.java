@@ -5,33 +5,38 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.annotation.Nullable;
+import android.support.annotation.RequiresApi;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.content.FileProvider;
-import android.util.Log;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import fr.free.nrw.commons.upload.ShareActivity;
+import fr.free.nrw.commons.upload.UploadActivity;
 import timber.log.Timber;
 
 import static android.content.Intent.ACTION_GET_CONTENT;
 import static android.content.Intent.ACTION_SEND;
+import static android.content.Intent.ACTION_SEND_MULTIPLE;
 import static android.content.Intent.EXTRA_STREAM;
 import static fr.free.nrw.commons.contributions.Contribution.SOURCE_CAMERA;
 import static fr.free.nrw.commons.contributions.Contribution.SOURCE_GALLERY;
 import static fr.free.nrw.commons.upload.UploadService.EXTRA_SOURCE;
 import static fr.free.nrw.commons.wikidata.WikidataConstants.WIKIDATA_ENTITY_ID_PREF;
+import static fr.free.nrw.commons.wikidata.WikidataConstants.WIKIDATA_ITEM_LOCATION;
 
 public class ContributionController {
 
     public static final int SELECT_FROM_GALLERY = 1;
     public static final int SELECT_FROM_CAMERA = 2;
+    public static final int PICK_IMAGE_MULTIPLE = 3;
 
     private Fragment fragment;
 
@@ -80,6 +85,14 @@ public class ContributionController {
     }
 
     public void startGalleryPick() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR2) {
+            startMultipleGalleryPick();
+        } else {
+            startSingleGalleryPick();
+        }
+    }
+
+    public void startSingleGalleryPick() {
         //FIXME: Starts gallery (opens Google Photos)
         Intent pickImageIntent = new Intent(ACTION_GET_CONTENT);
         pickImageIntent.setType("image/*");
@@ -88,15 +101,41 @@ public class ContributionController {
             Timber.d("Fragment is not added, startActivityForResult cannot be called");
             return;
         }
-        Timber.d("startGalleryPick() called with pickImageIntent");
+        Timber.d("startSingleGalleryPick() called with pickImageIntent");
 
         fragment.startActivityForResult(pickImageIntent, SELECT_FROM_GALLERY);
     }
 
-    public void handleImagePicked(int requestCode, @Nullable Uri uri, boolean isDirectUpload, String wikiDataEntityId) {
+    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR2)
+    public void startMultipleGalleryPick() {
+        Intent pickImageIntent = new Intent(ACTION_GET_CONTENT);
+        pickImageIntent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
+        pickImageIntent.setType("image/*");
+        if (!fragment.isAdded()) {
+            Timber.d("Fragment is not added, startActivityForResult cannot be called");
+            return;
+        }
+        Timber.d("startMultipleGalleryPick() called with pickImageIntent");
+
+        fragment.startActivityForResult(pickImageIntent, PICK_IMAGE_MULTIPLE);
+    }
+
+    public void handleImagesPicked(int requestCode, @Nullable ArrayList<Uri> uri) {
+        FragmentActivity activity = fragment.getActivity();
+        Intent shareIntent = new Intent(activity, UploadActivity.class);
+        shareIntent.setAction(ACTION_SEND_MULTIPLE);
+        shareIntent.putExtra(EXTRA_SOURCE, SOURCE_GALLERY);
+        shareIntent.putExtra(EXTRA_STREAM, uri);
+        shareIntent.setType("image/jpeg");
+        if (activity != null) {
+            activity.startActivity(shareIntent);
+        }
+    }
+
+    public void handleImagePicked(int requestCode, @Nullable Uri uri, boolean isDirectUpload, String wikiDataEntityId, String wikidateItemLocation) {
         FragmentActivity activity = fragment.getActivity();
         Timber.d("handleImagePicked() called with onActivityResult(). Boolean isDirectUpload: " + isDirectUpload + "String wikiDataEntityId: " + wikiDataEntityId);
-        Intent shareIntent = new Intent(activity, ShareActivity.class);
+        Intent shareIntent = new Intent(activity, UploadActivity.class);
         shareIntent.setAction(ACTION_SEND);
         switch (requestCode) {
             case SELECT_FROM_GALLERY:
@@ -125,6 +164,7 @@ public class ContributionController {
         try {
             if (wikiDataEntityId != null && !wikiDataEntityId.equals("")) {
                 shareIntent.putExtra(WIKIDATA_ENTITY_ID_PREF, wikiDataEntityId);
+                shareIntent.putExtra(WIKIDATA_ITEM_LOCATION, wikidateItemLocation);
             }
         } catch (SecurityException e) {
             Timber.e(e, "Security Exception");

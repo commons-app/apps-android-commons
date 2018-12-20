@@ -106,6 +106,20 @@ class ContributionDaoTest {
     }
 
     @Test
+    fun migrateTableVersionFrom_v6_to_v7() {
+        Table.onUpdate(database, 6, 7)
+        // Table didnt change in version 7
+        verifyZeroInteractions(database)
+    }
+
+    @Test
+    fun migrateTableVersionFrom_v7_to_v8() {
+        Table.onUpdate(database, 7, 8)
+        // Table didnt change in version 8
+        verifyZeroInteractions(database)
+    }
+
+    @Test
     fun saveNewContribution_nonNullFields() {
         whenever(client.insert(isA(), isA())).thenReturn(contentUri)
         val contribution = createContribution(true, null, null, null, null)
@@ -265,7 +279,6 @@ class ContributionDaoTest {
                 assertEquals("file", it.filename)
                 assertEquals(localUri, it.localUri.toString())
                 assertEquals("image", it.imageUrl)
-                assertEquals(created, it.timestamp.time)
                 assertEquals(created, it.dateCreated.time)
                 assertEquals(STATE_QUEUED, it.state)
                 assertEquals(222L, it.dataLength)
@@ -285,7 +298,6 @@ class ContributionDaoTest {
     fun createFromCursor_nullableTimestamps() {
         createCursor(0L, 0L, false, localUri).let { mc ->
             testObject.fromCursor(mc).let {
-                assertNull(it.timestamp)
                 assertNull(it.dateCreated)
                 assertNull(it.dateUploaded)
             }
@@ -328,7 +340,6 @@ class ContributionDaoTest {
                 source = SOURCE_CAMERA
                 license = "007"
                 multiple = isMultiple
-                timestamp = Date(321L)
                 width = 640
                 height = 480  // VGA should be enough for anyone, right?
             }

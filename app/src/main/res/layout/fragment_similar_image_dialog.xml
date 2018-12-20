@@ -13,13 +13,13 @@
             android:layout_width="160dp"
             android:layout_height="240dp"
             android:layout_margin="3dp"
-            app:actualImageScaleType="centerCrop" />
+            app:actualImageScaleType="fitCenter" />
         <com.facebook.drawee.view.SimpleDraweeView
             android:id="@+id/possibleImage"
             android:layout_width="160dp"
             android:layout_height="240dp"
             android:layout_margin="3dp"
-            app:actualImageScaleType="centerCrop" />
+            app:actualImageScaleType="fitCenter" />
     </LinearLayout>
     <TextView
         android:layout_width="match_parent"

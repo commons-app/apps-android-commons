@@ -12,6 +12,9 @@ import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.location.LatLng;
 import timber.log.Timber;
 
+/**
+ * A single geolocated Wikidata item
+ */
 public class Place {
 
     public final String name;
@@ -22,7 +25,7 @@ public class Place {
     private final String category;
 
     public Bitmap image;
-    public Bitmap secondaryImage;
+    private Bitmap secondaryImage;
     public String distance;
     public final Sitelinks siteLinks;
 
@@ -38,26 +41,52 @@ public class Place {
         this.siteLinks = siteLinks;
     }
 
+    /**
+     * Gets the name of the place
+     * @return name
+     */
     public String getName() { return name; }
 
+    /** Gets the label of the place
+     * e.g. "building", "city", etc
+     * @return label
+     */
     public Label getLabel() {
         return label;
     }
 
+    /**
+     * Gets the long description of the place
+     * @return long description
+     */
     public String getLongDescription() { return longDescription; }
 
+    /**
+     * Gets the Commons category of the place
+     * @return Commons category
+     */
     public String getCategory() {return category; }
 
+    /**
+     * Sets the distance of the place from the user's location
+     * @param distance distance of place from user's location
+     */
     public void setDistance(String distance) {
         this.distance = distance;
     }
+
+    /**
+     * Gets the secondary image url for bookmarks
+     * @return secondary image url
+     */
+    public Uri getSecondaryImageUrl() { return this.secondaryImageUrl; }
 
     /**
      * Extracts the entity id from the wikidata link
      * @return returns the entity id if wikidata link exists
      */
     @Nullable
-    public String getWikiDataEntityId() {
+    String getWikiDataEntityId() {
         if (!hasWikidataLink()) {
             Timber.d("Wikidata entity ID is null for place with sitelink %s", siteLinks.toString());
             return null;
@@ -68,18 +97,35 @@ public class Place {
         return wikiDataLink.replace("http://www.wikidata.org/entity/", "");
     }
 
-    public boolean hasWikipediaLink() {
+    /**
+     * Checks if the Wikidata item has a Wikipedia page associated with it
+     * @return true if there is a Wikipedia link
+     */
+    boolean hasWikipediaLink() {
         return !(siteLinks == null || Uri.EMPTY.equals(siteLinks.getWikipediaLink()));
     }
 
-    public boolean hasWikidataLink() {
+    /**
+     * Checks if the Wikidata item has a Wikidata page associated with it
+     * @return true if there is a Wikidata link
+     */
+    boolean hasWikidataLink() {
         return !(siteLinks == null || Uri.EMPTY.equals(siteLinks.getWikidataLink()));
     }
 
-    public boolean hasCommonsLink() {
+    /**
+     * Checks if the Wikidata item has a Commons page associated with it
+     * @return true if there is a Commons link
+     */
+    boolean hasCommonsLink() {
         return !(siteLinks == null || Uri.EMPTY.equals(siteLinks.getCommonsLink()));
     }
 
+    /**
+     * Check if we already have the exact same Place
+     * @param o Place being tested
+     * @return true if name and location of Place is exactly the same
+     */
     @Override
     public boolean equals(Object o) {
         if (o instanceof Place) {
@@ -119,27 +165,30 @@ public class Place {
      */
     public enum Label {
 
-        BUILDING("building", R.drawable.round_icon_generic_building),
-        HOUSE("house", R.drawable.round_icon_house),
-        COTTAGE("cottage", R.drawable.round_icon_house),
-        FARMHOUSE("farmhouse", R.drawable.round_icon_house),
-        CHURCH("church", R.drawable.round_icon_church),
-        RAILWAY_STATION("railway station", R.drawable.round_icon_railway_station),
-        GATEHOUSE("gatehouse", R.drawable.round_icon_gatehouse),
-        MILESTONE("milestone", R.drawable.round_icon_milestone),
-        INN("inn", R.drawable.round_icon_house),
-        CITY("city", R.drawable.round_icon_city),
-        SECONDARY_SCHOOL("secondary school", R.drawable.round_icon_school),
-        EDU("edu", R.drawable.round_icon_school),
-        ISLE("isle", R.drawable.round_icon_island),
-        MOUNTAIN("mountain", R.drawable.round_icon_mountain),
-        AIRPORT("airport", R.drawable.round_icon_airport),
-        BRIDGE("bridge", R.drawable.round_icon_bridge),
-        ROAD("road", R.drawable.round_icon_road),
-        FOREST("forest", R.drawable.round_icon_forest),
-        PARK("park", R.drawable.round_icon_park),
-        RIVER("river", R.drawable.round_icon_river),
-        WATERFALL("waterfall", R.drawable.round_icon_waterfall),
+        BUILDING("Q41176", R.drawable.round_icon_generic_building),
+        HOUSE("Q3947", R.drawable.round_icon_house),
+        COTTAGE("Q5783996", R.drawable.round_icon_house),
+        FARMHOUSE("Q489357", R.drawable.round_icon_house),
+        CHURCH("Q16970", R.drawable.round_icon_church), //changed from church to church building
+        RAILWAY_STATION("Q55488", R.drawable.round_icon_railway_station),
+        GATEHOUSE("Q277760", R.drawable.round_icon_gatehouse),
+        MILESTONE("Q10145", R.drawable.round_icon_milestone),
+        INN("Q256020", R.drawable.round_icon_house), //Q27686
+        HOTEL("Q27686", R.drawable.round_icon_house),
+        CITY("Q515", R.drawable.round_icon_city),
+        UNIVERSITY("Q3918",R.drawable.round_icon_school), //added university
+        SCHOOL("Q3914", R.drawable.round_icon_school), //changed from "secondary school" to school
+        EDUCATION("Q8434", R.drawable.round_icon_school), //changed from edu to education, there is no id for "edu"
+        ISLE("Q23442", R.drawable.round_icon_island),
+        MOUNTAIN("Q8502", R.drawable.round_icon_mountain),
+        AIRPORT("Q1248784", R.drawable.round_icon_airport),
+        BRIDGE("Q12280", R.drawable.round_icon_bridge),
+        ROAD("Q34442", R.drawable.round_icon_road),
+        FOREST("Q4421", R.drawable.round_icon_forest),
+        PARK("Q22698", R.drawable.round_icon_park),
+        RIVER("Q4022", R.drawable.round_icon_river),
+        WATERFALL("Q34038", R.drawable.round_icon_waterfall),
+        TEMPLE("Q44539",R.drawable.round_icon_church),
         UNKNOWN("?", R.drawable.round_icon_unknown);
 
         private static final Map<String, Label> TEXT_TO_DESCRIPTION

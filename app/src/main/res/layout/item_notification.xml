@@ -6,7 +6,7 @@
     android:foreground="?selectableItemBackground"
     android:minHeight="72dp">
 
-    <ImageView
+    <android.support.v7.widget.AppCompatImageView
         android:id="@+id/icon"
         android:layout_width="40dp"
         android:layout_height="40dp"
@@ -14,10 +14,9 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:background="@android:color/white"
-        android:contentDescription="@string/no_image_found"
         android:scaleType="centerCrop"
-        android:src="@drawable/empty_photo"
-        android:tint="@color/primaryDarkColor"
+        app:srcCompat="@drawable/ic_message_black_24dp"
+        app:tint="@color/primaryDarkColor"
         />
 
     <TextView
@@ -30,10 +29,9 @@
         android:layout_marginRight="16dp"
         android:layout_marginTop="16dp"
         android:textAppearance="@style/TextAppearance.AppCompat.Caption"
-        tools:text="@string/placeholder_place_distance"
         />
 
-    <com.borjabravo.readmoretextview.ReadMoreTextView
+    <TextView
         android:id="@+id/title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -45,12 +43,8 @@
         android:layout_toRightOf="@id/icon"
         android:layout_toStartOf="@id/time"
         android:ellipsize="end"
-        app:trimMode="trimModeLength"
-        app:trimLength="60"
         android:layout_alignParentTop="true"
-        app:colorClickableText="#969494"
         android:textAppearance="@style/TextAppearance.AppCompat.Body2"
-        tools:text="@string/placeholder_place_name"
         android:padding="12dp"
         />
 </RelativeLayout>

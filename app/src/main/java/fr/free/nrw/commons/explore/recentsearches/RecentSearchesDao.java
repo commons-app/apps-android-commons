@@ -7,7 +7,6 @@ import android.database.sqlite.SQLiteDatabase;
 import android.os.RemoteException;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -16,6 +15,8 @@ import java.util.List;
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.inject.Provider;
+
+import timber.log.Timber;
 
 /**
  * This class doesn't execute queries in database directly instead it contains the logic behind
@@ -51,26 +52,41 @@ public class RecentSearchesDao {
 
     /**
      * This method is called on confirmation of delete recent searches.
-     * It deletes latest 10 recent searches from the database
-     * @param recentSearchesStringList list of recent searches to be deleted
+     * It deletes all recent searches from the database
      */
-    public void deleteAll(List<String> recentSearchesStringList) {
+    public void deleteAll() {
+        Cursor cursor = null;
         ContentProviderClient db = clientProvider.get();
-        for (String recentSearchName : recentSearchesStringList) {
-            try {
-                RecentSearch recentSearch = find(recentSearchName);
-                if (recentSearch.getContentUri() == null) {
-                    throw new RuntimeException("tried to delete item with no content URI");
-                } else {
-                    Log.d("QUERY_NAME",recentSearch.getContentUri()+"- delete tried");
-                    db.delete(recentSearch.getContentUri(), null, null);
-                    Log.d("QUERY_NAME",recentSearch.getQuery()+"- query deleted");
+        try {
+            cursor = db.query(
+                    RecentSearchesContentProvider.BASE_URI,
+                    Table.ALL_FIELDS,
+                    null,
+                    new String[]{},
+                    Table.COLUMN_LAST_USED + " DESC"
+            );
+            while (cursor != null && cursor.moveToNext()) {
+                try {
+                    RecentSearch recentSearch = find(fromCursor(cursor).getQuery());
+                    if (recentSearch.getContentUri() == null) {
+                        throw new RuntimeException("tried to delete item with no content URI");
+                    } else {
+                        Timber.d("QUERY_NAME %s - delete tried", recentSearch.getContentUri());
+                        db.delete(recentSearch.getContentUri(), null, null);
+                        Timber.d("QUERY_NAME %s - query deleted", recentSearch.getQuery());
+                    }
+                } catch (RemoteException e) {
+                    Timber.e(e, "query deleted");
+                    throw new RuntimeException(e);
+                } finally {
+                    db.release();
                 }
-            } catch (RemoteException e) {
-                Log.d("Exception",e+"- query deleted");
-                throw new RuntimeException(e);
-            } finally {
-                db.release();
+            }
+        } catch (RemoteException e) {
+            throw new RuntimeException(e);
+        } finally {
+            if (cursor != null) {
+                cursor.close();
             }
         }
     }

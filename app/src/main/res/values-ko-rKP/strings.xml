@@ -39,7 +39,7 @@
   <string name="provider_contributions">내 올리적재</string>
   <string name="menu_share">공유</string>
   <string name="menu_open_in_browser">열람기로 보기</string>
-  <string name="share_title_hint">제목</string>
+  <string name="share_title_hint" fuzzy="true">제목</string>
   <string name="share_description_hint">설명</string>
   <string name="login_failed_network">가입할수 없습니다 - 망 오유입니다</string>
   <string name="login_failed_throttled">실패한 시도가 너무 많습니다. 몇분후에 다시 시도하세요.</string>
@@ -56,7 +56,7 @@
   <string name="gps_disabled">장치에서 GPS가 금지되여있습니다. 허가하시겠습니까?</string>
   <string name="enable_gps">GPS 허가</string>
   <string name="contributions_subtitle_zero">아직 올리적재가 없습니다</string>
-  <plurals name="contributions_subtitle">
+  <plurals name="contributions_subtitle" fuzzy="true">
     <item quantity="zero">\@string/contributions_subtitle_zero</item>
     <item quantity="one">%1$d개 올리적재</item>
   </plurals>
@@ -126,7 +126,7 @@
   <string name="give_permission">권한 주기</string>
   <string name="use_external_storage">외부기억기 사용하기</string>
   <string name="send_log_file">일지서류 발신하기</string>
-  <string name="send_log_file_description">전자우편으로 개발자에게 일지서류 발신하기</string>
+  <string name="send_log_file_description" fuzzy="true">전자우편으로 개발자에게 일지서류 발신하기</string>
   <string name="notifications_welcome">%1$s님, 위키매체공용에 오신것을 환영합니다! 반갑습니다.</string>
   <string name="notifications_talk_page_message">%1$s님이 당신의 사용자 토론 문서에 글을 남겼습니다</string>
   <string name="notifications_thank_you_edit">편집해 주셔서 감사합니다</string>
