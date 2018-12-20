@@ -322,24 +322,20 @@ public class UploadActivity extends AuthenticatedActivity implements UploadView,
         }
     }
 
+    /**
+     * Only show the subtitle ("For all images in set") if multiple images being uploaded
+     * @param imageCount Number of images being uploaded
+     */
     @Override
     public void updateSubtitleVisibility(int imageCount) {
         TextView categoriesSubtitle = viewFlipper.findViewById(R.id.categories_subtitle);
         if (categoriesSubtitle != null) {
-            if (imageCount > 1) {
-                categoriesSubtitle.setVisibility(View.VISIBLE);
-            } else {
-                categoriesSubtitle.setVisibility(View.GONE);
-            }
+            categoriesSubtitle.setVisibility(imageCount > 1 ? View.VISIBLE : View.GONE);
         }
 
         TextView licenseSubtitle = viewFlipper.findViewById(R.id.license_subtitle);
         if (licenseSubtitle != null) {
-            if (imageCount > 1) {
-                licenseSubtitle.setVisibility(View.VISIBLE);
-            } else {
-                licenseSubtitle.setVisibility(View.GONE);
-            }
+            licenseSubtitle.setVisibility(imageCount > 1 ? View.VISIBLE : View.GONE);
         }
     }
 
