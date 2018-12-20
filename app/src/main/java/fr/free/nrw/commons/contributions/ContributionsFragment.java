@@ -328,6 +328,8 @@ public class ContributionsFragment
 
             contributionsListFragment.clearSyncMessage();
             notifyAndMigrateDataSetObservers();
+
+            ((ContributionsListAdapter)contributionsListFragment.getAdapter()).setUploadService(uploadService);
         }
     }
 
@@ -415,36 +417,6 @@ public class ContributionsFragment
             setMediaDetailPagerFragment();
         }
         mediaDetailPagerFragment.showImage(i);
-    }
-
-    /**
-     * Retry upload when it is failed
-     * @param i position of upload which will be retried
-     */
-    public void retryUpload(int i) {
-        allContributions.moveToPosition(i);
-        Contribution c = contributionDao.fromCursor(allContributions);
-        if (c.getState() == STATE_FAILED) {
-            uploadService.queue(UploadService.ACTION_UPLOAD_FILE, c);
-            Timber.d("Restarting for %s", c.toString());
-        } else {
-            Timber.d("Skipping re-upload for non-failed %s", c.toString());
-        }
-    }
-
-    /**
-     * Delete a failed upload attempt
-     * @param i position of upload attempt which will be deteled
-     */
-    public void deleteUpload(int i) {
-        allContributions.moveToPosition(i);
-        Contribution c = contributionDao.fromCursor(allContributions);
-        if (c.getState() == STATE_FAILED) {
-            Timber.d("Deleting failed contrib %s", c.toString());
-            contributionDao.delete(c);
-        } else {
-            Timber.d("Skipping deletion for non-failed contrib %s", c.toString());
-        }
     }
 
     @Override

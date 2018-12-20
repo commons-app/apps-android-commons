@@ -10,7 +10,6 @@ import android.net.Uri;
 import android.support.annotation.Nullable;
 
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
@@ -25,7 +24,9 @@ import fr.free.nrw.commons.auth.SessionManager;
 import fr.free.nrw.commons.contributions.Contribution;
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
 import fr.free.nrw.commons.settings.Prefs;
+import fr.free.nrw.commons.utils.BitmapRegionDecoderWrapper;
 import fr.free.nrw.commons.utils.ImageUtils;
+import fr.free.nrw.commons.utils.ImageUtilsWrapper;
 import io.reactivex.Observable;
 import io.reactivex.Single;
 import io.reactivex.disposables.Disposable;
@@ -63,6 +64,8 @@ public class UploadModel {
     private SessionManager sessionManager;
     private Uri currentMediaUri;
     private FileUtilsWrapper fileUtilsWrapper;
+    private ImageUtilsWrapper imageUtilsWrapper;
+    private BitmapRegionDecoderWrapper bitmapRegionDecoderWrapper;
     private FileProcessor fileProcessor;
 
     @Inject
@@ -73,10 +76,13 @@ public class UploadModel {
                 MediaWikiApi mwApi,
                 SessionManager sessionManager,
                 FileUtilsWrapper fileUtilsWrapper,
+                ImageUtilsWrapper imageUtilsWrapper,
+                BitmapRegionDecoderWrapper bitmapRegionDecoderWrapper,
                 FileProcessor fileProcessor) {
         this.licenses = licenses;
         this.prefs = prefs;
-        this.license = Prefs.Licenses.CC_BY_SA_3;
+        this.license = prefs.getString(Prefs.DEFAULT_LICENSE, Prefs.Licenses.CC_BY_SA_3);
+        this.bitmapRegionDecoderWrapper = bitmapRegionDecoderWrapper;
         this.licensesByName = licensesByName;
         this.context = context;
         this.mwApi = mwApi;
@@ -84,6 +90,7 @@ public class UploadModel {
         this.sessionManager = sessionManager;
         this.fileUtilsWrapper = fileUtilsWrapper;
         this.fileProcessor = fileProcessor;
+        this.imageUtilsWrapper = imageUtilsWrapper;
         useExtStorage = this.prefs.getBoolean("useExternalStorage", false);
     }
 
@@ -109,8 +116,8 @@ public class UploadModel {
                                     .map(b -> b ? ImageUtils.IMAGE_DUPLICATE : ImageUtils.IMAGE_OK),
                             Single.fromCallable(() ->
                                     fileUtilsWrapper.getFileInputStream(filePath))
-                                    .map(file -> BitmapRegionDecoder.newInstance(file, false))
-                                    .map(ImageUtils::checkIfImageIsTooDark), //Returns IMAGE_DARK or IMAGE_OK
+                                    .map(file -> bitmapRegionDecoderWrapper.newInstance(file, false))
+                                    .map(imageUtilsWrapper::checkIfImageIsTooDark), //Returns IMAGE_DARK or IMAGE_OK
                             (dupe, dark) -> dupe | dark)
                             .observeOn(Schedulers.io())
                             .subscribe(item.imageQuality::onNext, Timber::e);
@@ -122,7 +129,7 @@ public class UploadModel {
     }
 
     @SuppressLint("CheckResult")
-    void receiveDirect(Uri media, String mimeType, String source, String wikidataEntityIdPref, String title, String desc, SimilarImageInterface similarImageInterface) {
+    void receiveDirect(Uri media, String mimeType, String source, String wikidataEntityIdPref, String title, String desc, SimilarImageInterface similarImageInterface, String wikidataItemLocation) {
         initDefaultValues();
         long fileCreatedDate = getFileCreatedDate(media);
         String filePath = this.cacheFileUpload(media);
@@ -140,11 +147,15 @@ public class UploadModel {
                         .map(fileUtilsWrapper::getSHA1)
                         .map(mwApi::existingFile)
                         .map(b -> b ? ImageUtils.IMAGE_DUPLICATE : ImageUtils.IMAGE_OK),
+                Single.fromCallable(() -> filePath)
+                        .map(fileUtilsWrapper::getGeolocationOfFile)
+                        .map(geoLocation -> imageUtilsWrapper.checkImageGeolocationIsDifferent(geoLocation,wikidataItemLocation))
+                        .map(r -> r ? ImageUtils.IMAGE_GEOLOCATION_DIFFERENT : ImageUtils.IMAGE_OK),
                 Single.fromCallable(() ->
                         fileUtilsWrapper.getFileInputStream(filePath))
-                        .map(file -> BitmapRegionDecoder.newInstance(file, false))
-                        .map(ImageUtils::checkIfImageIsTooDark), //Returns IMAGE_DARK or IMAGE_OK
-                (dupe, dark) -> dupe | dark).subscribe(item.imageQuality::onNext, Timber::e);
+                        .map(file -> bitmapRegionDecoderWrapper.newInstance(file, false))
+                        .map(imageUtilsWrapper::checkIfImageIsTooDark), //Returns IMAGE_DARK or IMAGE_OK
+                (dupe, wrongGeo, dark) -> dupe | wrongGeo | dark).subscribe(item.imageQuality::onNext);
         items.add(item);
         items.get(0).selected = true;
         items.get(0).first = true;

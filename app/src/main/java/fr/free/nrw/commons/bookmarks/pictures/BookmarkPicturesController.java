@@ -36,7 +36,7 @@ public class BookmarkPicturesController {
         for (Bookmark bookmark : bookmarks) {
             List<Media> tmpMedias = mediaWikiApi.searchImages(bookmark.getMediaName(), 0);
             for (Media m : tmpMedias) {
-                if (m.getCreator().equals(bookmark.getMediaCreator())) {
+                if (m.getCreator().trim().equals(bookmark.getMediaCreator().trim())) {
                     medias.add(m);
                     break;
                 }

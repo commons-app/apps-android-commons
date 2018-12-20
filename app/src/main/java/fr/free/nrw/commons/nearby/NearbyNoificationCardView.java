@@ -1,14 +1,10 @@
 package fr.free.nrw.commons.nearby;
 
 import android.content.Context;
-import android.content.Intent;
-import android.content.res.Resources;
-import android.os.Handler;
+
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v7.app.AlertDialog;
 import android.util.AttributeSet;
-import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -40,8 +36,6 @@ public class NearbyNoificationCardView  extends SwipableCardView {
 
     public PermissionType permissionType;
 
-    float x1,x2;
-
     public NearbyNoificationCardView(@NonNull Context context) {
         super(context);
         this.context = context;
@@ -63,6 +57,9 @@ public class NearbyNoificationCardView  extends SwipableCardView {
         init();
     }
 
+    /**
+     * Initializes views and action listeners
+     */
     private void init() {
         View rootView = inflate(context, R.layout.nearby_card_view, this);
 
@@ -105,77 +102,15 @@ public class NearbyNoificationCardView  extends SwipableCardView {
     }
 
     /**
-     * Sets permission request button visible and content layout invisible, then adds correct
-     * permission request actions to permission request button according to PermissionType enum
-     * @param isPermissionRequestButtonNeeded true if permissions missing
+     * Time is up, data for card view is not ready, so do not display it
      */
-    public void displayPermissionRequestButton(boolean isPermissionRequestButtonNeeded) {
-        if (isPermissionRequestButtonNeeded) {
-            cardViewVisibilityState = CardViewVisibilityState.ASK_PERMISSION;
-            contentLayout.setVisibility(GONE);
-            permissionRequestButton.setVisibility(VISIBLE);
-
-            if (permissionType == PermissionType.ENABLE_LOCATION_PERMISSON) {
-
-                permissionRequestButton.setOnClickListener(view -> {
-                    if (!((MainActivity)context).isFinishing()) {
-                        ((MainActivity) context).locationManager.requestPermissions((MainActivity) context);
-                    }
-                });
-
-            } else if (permissionType == PermissionType.ENABLE_GPS) {
-
-                permissionRequestButton.setOnClickListener(view -> new AlertDialog.Builder(context)
-                        .setMessage(R.string.gps_disabled)
-                        .setCancelable(false)
-                        .setPositiveButton(R.string.enable_gps,
-                                (dialog, id) -> {
-                                    Intent callGPSSettingIntent = new Intent(
-                                            android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS);
-                                    Timber.d("Loaded settings page");
-                                    ((MainActivity) context).startActivityForResult(callGPSSettingIntent, 1);
-                                })
-                        .setNegativeButton(R.string.menu_cancel_upload, (dialog, id) -> {
-                            dialog.cancel();
-                            displayPermissionRequestButton(true);
-                        })
-                        .create()
-                        .show());
-            }
-
-
-        } else {
-            cardViewVisibilityState = CardViewVisibilityState.LOADING;
-            /*permissionRequestButton.setVisibility(GONE);
-            contentLayout.setVisibility(VISIBLE);
-            // Set visibility of elements in content layout once it become visible
-            progressBar.setVisibility(VISIBLE);
-            notificationTitle.setVisibility(GONE);
-            notificationDistance.setVisibility(GONE);
-            notificationIcon.setVisibility(GONE);
-
-            permissionRequestButton.setVisibility(GONE);*/
-
-            this.setVisibility(GONE);
-            Handler nearbyNotificationHandler = new Handler();
-            Runnable nearbyNotificationRunnable = () -> {
-                if (cardViewVisibilityState != CardViewVisibilityState.READY
-                        && cardViewVisibilityState != CardViewVisibilityState.ASK_PERMISSION
-                        && cardViewVisibilityState != CardViewVisibilityState.INVISIBLE) {
-                    // If after 30 seconds, card view is not ready
-                    errorOcured();
-                } else {
-                    suceeded();
-                }
-            };
-            nearbyNotificationHandler.postDelayed(nearbyNotificationRunnable, 30000);
-        }
-    }
-
     private void errorOcured() {
         this.setVisibility(GONE);
     }
 
+    /**
+     * Data for card view is ready, display card view
+     */
     private void suceeded() {
         this.setVisibility(VISIBLE);
     }

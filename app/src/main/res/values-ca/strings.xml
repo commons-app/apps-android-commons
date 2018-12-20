@@ -177,7 +177,6 @@
   <string name="nearby_info_menu_commons_article">Article del fitxer a Commons</string>
   <string name="nearby_info_menu_wikidata_article">Element del Wikidata</string>
   <string name="error_while_cache">Error mentre es carregaven les fotografies</string>
-  <string name="upload_image_problem_duplicate">El fitxer ja existeix a Commons. Segur que voleu procedir?</string>
   <string name="give_permission">Dóna permís</string>
   <string name="use_external_storage">Utilitza l’emmagatzematge extern</string>
   <string name="login_to_your_account">Entreu en el vostre compte</string>
