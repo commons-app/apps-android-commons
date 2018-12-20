@@ -4,17 +4,24 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+    <LinearLayout
+        android:id="@+id/toolbarLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="?attr/actionBarSize">
         <include
             android:id="@+id/toolbar"
             layout="@layout/toolbar"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="?attr/actionBarSize" />
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/toolbarLayout"
+        android:layout_marginTop="?attr/actionBarSize">
 
         <fragment
             android:id="@+id/settingsFragment"
@@ -22,7 +29,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             tools:layout="@xml/preferences"
-            android:layout_below="@id/toolbar"/>
+            />
     </RelativeLayout>
 
     <android.support.design.widget.NavigationView
