@@ -1,5 +1,7 @@
 package fr.free.nrw.commons.explore.categories;
 
+import android.content.Context;
+
 import com.pedrogomez.renderers.ListAdapteeCollection;
 import com.pedrogomez.renderers.RVRendererAdapter;
 import com.pedrogomez.renderers.RendererBuilder;
@@ -23,8 +25,9 @@ public class SearchCategoriesAdapterFactory {
      * @param searchImageItemList List of category name to be displayed
      * @return categoriesAdapter
      **/
-    public RVRendererAdapter<String> create(List<String> searchImageItemList) {
-        RendererBuilder<String> builder = new RendererBuilder<String>().bind(String.class, new SearchCategoriesRenderer(listener));
+    public RVRendererAdapter<String> create(List<String> searchImageItemList, Context context) {
+        SearchCategoriesRenderer searchCategoriesRenderer = new SearchCategoriesRenderer(listener, context);
+        RendererBuilder<String> builder = new RendererBuilder<String>().bind(String.class, searchCategoriesRenderer);
         ListAdapteeCollection<String> collection = new ListAdapteeCollection<>(
                 searchImageItemList != null ? searchImageItemList : Collections.<String>emptyList());
         return new RVRendererAdapter<>(builder, collection);

@@ -102,7 +102,7 @@ public class SearchCategoryFragment extends CommonsDaggerSupportFragment {
             categoriesRecyclerView.setLayoutManager(new GridLayoutManager(getContext(), 2));
         }
         ArrayList<String> items = new ArrayList<>();
-        categoriesAdapter = adapterFactory.create(items);
+        categoriesAdapter = adapterFactory.create(items, getContext());
         categoriesRecyclerView.setAdapter(categoriesAdapter);
         categoriesRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override

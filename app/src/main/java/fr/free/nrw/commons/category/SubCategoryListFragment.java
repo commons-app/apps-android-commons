@@ -1,6 +1,7 @@
 package fr.free.nrw.commons.category;
 
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
@@ -67,6 +68,11 @@ public class SubCategoryListFragment extends CommonsDaggerSupportFragment {
     });
 
     @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+    }
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_browse_image, container, false);
         ButterKnife.bind(this, rootView);
@@ -80,7 +86,7 @@ public class SubCategoryListFragment extends CommonsDaggerSupportFragment {
             categoriesRecyclerView.setLayoutManager(new GridLayoutManager(getContext(), 2));
         }
         ArrayList<String> items = new ArrayList<>();
-        categoriesAdapter = adapterFactory.create(items);
+        categoriesAdapter = adapterFactory.create(items, getContext());
         categoriesRecyclerView.setAdapter(categoriesAdapter);
         return rootView;
     }
