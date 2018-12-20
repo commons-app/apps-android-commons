@@ -108,7 +108,7 @@ public class UploadController {
         // If author name is enabled and set, use it
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
 
-        if(preferences.getBoolean("useAuthorName", false)) {
+        if(preferences != null && preferences.getBoolean("useAuthorName", false)) {
             String authorName = preferences.getString("authorName", "");
             contribution.setCreator(authorName);
         }
