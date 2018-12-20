@@ -15,7 +15,6 @@ import android.support.design.widget.BottomSheetBehavior;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AlertDialog;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -62,7 +61,7 @@ import fr.free.nrw.commons.Utils;
 import fr.free.nrw.commons.auth.LoginActivity;
 import fr.free.nrw.commons.bookmarks.locations.BookmarkLocationsDao;
 import fr.free.nrw.commons.contributions.ContributionController;
-import fr.free.nrw.commons.location.LocationServiceManager;
+
 import fr.free.nrw.commons.utils.LocationUtils;
 import fr.free.nrw.commons.utils.PlaceUtils;
 import fr.free.nrw.commons.utils.UriDeserializer;
@@ -130,7 +129,6 @@ public class NearbyMapFragment extends DaggerFragment {
     private final double CAMERA_TARGET_SHIFT_FACTOR_PORTRAIT = 0.06;
     private final double CAMERA_TARGET_SHIFT_FACTOR_LANDSCAPE = 0.04;
 
-    private boolean isMapReady;
     public boolean searchThisAreaModeOn = false;
 
     private Bundle bundleForUpdtes;// Carry information from activity about changed nearby places and current location
@@ -361,7 +359,10 @@ public class NearbyMapFragment extends DaggerFragment {
             }
         }
     }
-    
+
+    /**
+     * Initialize all views. TODO: Use bind view instead.
+     */
     private void initViews() {
         Timber.d("initViews called");
         bottomSheetList = ((NearbyFragment)getParentFragment()).view.findViewById(R.id.bottom_sheet);
@@ -406,6 +407,9 @@ public class NearbyMapFragment extends DaggerFragment {
 
     }
 
+    /**
+     * Sets click listeners of FABs, and 2 bottom sheets
+     */
     private void setListeners() {
         fabPlus.setOnClickListener(view -> {
             if (applicationPrefs.getBoolean("login_skipped", false)) {
@@ -512,6 +516,10 @@ public class NearbyMapFragment extends DaggerFragment {
         }
     }
 
+    /**
+     * Sets up map view of first time it created, it passes MapBoxMap options and style assets.
+     * @param savedInstanceState bundle coming from Nearby Fragment
+     */
     private void setupMapView(Bundle savedInstanceState) {
         Timber.d("setupMapView called");
         MapboxMapOptions options = new MapboxMapOptions()
@@ -541,6 +549,10 @@ public class NearbyMapFragment extends DaggerFragment {
         }
     }
 
+    /**
+     * Adds map movement listener to understand swiping with fingers. So that we can display search
+     * this area button to search nearby places for other locations
+     */
     private void addMapMovementListeners() {
 
         mapboxMap.addOnCameraMoveListener(new MapboxMap.OnCameraMoveListener() {
@@ -793,9 +805,7 @@ public class NearbyMapFragment extends DaggerFragment {
         addAnchorToSmallFABs(fabGallery, ((NearbyFragment)getParentFragment()).view.findViewById(R.id.empty_view).getId());
 
         addAnchorToSmallFABs(fabCamera, ((NearbyFragment)getParentFragment()).view.findViewById(R.id.empty_view1).getId());
-
-        isMapReady = true;
-    }
+        }
 
 
     /*
@@ -946,6 +956,10 @@ public class NearbyMapFragment extends DaggerFragment {
         Utils.handleWebUrl(getContext(), link);
     }
 
+    /**
+     * Starts animation of fab plus (turning on opening) and other FABs
+     * @param isFabOpen state of FAB buttons, open when clicked on fab button, closed on other click
+     */
     private void animateFAB(boolean isFabOpen) {
             this.isFabOpen = !isFabOpen;
         if (fabPlus.isShown()){
@@ -966,6 +980,10 @@ public class NearbyMapFragment extends DaggerFragment {
         }
     }
 
+    /**
+     * Hides camera and gallery FABs, turn back plus FAB
+     * @param isFabOpen
+     */
     private void closeFabs ( boolean isFabOpen){
         if (isFabOpen) {
             fabPlus.startAnimation(rotate_backward);

@@ -112,9 +112,9 @@ public class ContributionUtils {
             out = new FileOutputStream(new File(destinationFilename));
 
             byte[] buf = new byte[1024];
-            int len;
-            while ((len=in.read(buf)) > 0) {
-                out.write(buf, 0, len);
+            int length;
+            while ((length = in.read(buf)) > 0) {
+                out.write(buf, 0, length);
             }
         } catch (FileNotFoundException e) {
             e.printStackTrace();
@@ -123,6 +123,11 @@ public class ContributionUtils {
         } finally {
             try {
                 if (out != null) out.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            try {
                 if (in != null) in.close();
             } catch (IOException e) {
                 e.printStackTrace();
