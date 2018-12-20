@@ -189,16 +189,6 @@ public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment imple
                 // Set wallpaper
                 setWallpaper(m);
                 return true;
-            case R.id.menu_retry_current_image:
-                // Retry
-                //((MainActivity) getActivity()).retryUpload(pager.getCurrentItem());
-                getActivity().getSupportFragmentManager().popBackStack();
-                return true;
-            case R.id.menu_cancel_current_image:
-                // todo: delete image
-                //((MainActivity) getActivity()).deleteUpload(pager.getCurrentItem());
-                getActivity().getSupportFragmentManager().popBackStack();
-                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
@@ -271,7 +261,7 @@ public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment imple
             menu.clear(); // see http://stackoverflow.com/a/8495697/17865
             inflater.inflate(R.menu.fragment_image_detail, menu);
             if (pager != null) {
-                MediaDetailProvider provider = (MediaDetailProvider) getParentFragment();
+                MediaDetailProvider provider = getMediaDetailProvider();
                 if(provider == null) {
                     return;
                 }
@@ -279,8 +269,6 @@ public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment imple
                 Media m = provider.getMediaAtPosition(pager.getCurrentItem());
                 if (m != null) {
                     // Enable default set of actions, then re-enable different set of actions only if it is a failed contrib
-                    menu.findItem(R.id.menu_retry_current_image).setEnabled(false).setVisible(false);
-                    menu.findItem(R.id.menu_cancel_current_image).setEnabled(false).setVisible(false);
                     menu.findItem(R.id.menu_browser_current_image).setEnabled(true).setVisible(true);
                     menu.findItem(R.id.menu_share_current_image).setEnabled(true).setVisible(true);
                     menu.findItem(R.id.menu_download_current_image).setEnabled(true).setVisible(true);
@@ -297,8 +285,6 @@ public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment imple
                         Contribution c = (Contribution) m;
                         switch (c.getState()) {
                             case Contribution.STATE_FAILED:
-                                menu.findItem(R.id.menu_retry_current_image).setEnabled(true).setVisible(true);
-                                menu.findItem(R.id.menu_cancel_current_image).setEnabled(true).setVisible(true);
                                 menu.findItem(R.id.menu_browser_current_image).setEnabled(false).setVisible(false);
                                 menu.findItem(R.id.menu_share_current_image).setEnabled(false).setVisible(false);
                                 menu.findItem(R.id.menu_download_current_image).setEnabled(false).setVisible(false);
@@ -306,8 +292,6 @@ public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment imple
                                 break;
                             case Contribution.STATE_IN_PROGRESS:
                             case Contribution.STATE_QUEUED:
-                                menu.findItem(R.id.menu_retry_current_image).setEnabled(false).setVisible(false);
-                                menu.findItem(R.id.menu_cancel_current_image).setEnabled(false).setVisible(false);
                                 menu.findItem(R.id.menu_browser_current_image).setEnabled(false).setVisible(false);
                                 menu.findItem(R.id.menu_share_current_image).setEnabled(false).setVisible(false);
                                 menu.findItem(R.id.menu_download_current_image).setEnabled(false).setVisible(false);
@@ -343,7 +327,7 @@ public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment imple
 
     @Override
     public void onPageScrolled(int i, float v, int i2) {
-        if(getParentFragment().getActivity() == null) {
+        if(getActivity() == null) {
             Timber.d("Returning as activity is destroyed!");
             return;
         }
@@ -398,7 +382,7 @@ public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment imple
         public Fragment getItem(int i) {
             if (i == 0) {
                 // See bug https://code.google.com/p/android/issues/detail?id=27526
-                if(getParentFragment().getActivity() == null) {
+                if(getActivity() == null) {
                     Timber.d("Skipping getItem. Returning as activity is destroyed!");
                     return null;
                 }

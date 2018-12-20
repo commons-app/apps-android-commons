@@ -101,7 +101,10 @@
   <string name="no_uploads_yet">You have not yet uploaded any photos.</string>
   <string name="menu_retry_upload">Retry</string>
   <string name="menu_cancel_upload">Cancel</string>
-  <string name="share_license_summary">This image will be licensed under %1$s</string>
+  <plurals name="share_license_summary">
+    <item quantity="one">This image will be licensed under %1$s</item>
+    <item quantity="other">These images will be licensed under %1$s</item>
+  </plurals>
   <string name="media_upload_policy">By submitting this picture, I declare that this is my own work, that it does not contain copyrighted material or selfies, and otherwise adheres to &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines\"&gt;Wikimedia Commons policies&lt;/a&gt;.</string>
   <string name="menu_download">Download</string>
   <string name="preference_license">Default License</string>
@@ -237,11 +240,11 @@
   <string name="upload_image_blurry">This picture is blurry, are you sure you want to upload it? Wikimedia Commons is only for pictures with encyclopedic value.</string>
 
   <string name="upload_problem_exist">Potential problems with this image:</string>
-  <string name="upload_problem_image_dark">\n - Image is too dark.</string>
-  <string name="upload_problem_image_blurry">\n - Image is blurry.</string>
-  <string name="upload_problem_image_duplicate">\n - Image is already on Commons.</string>
-  <string name="upload_problem_different_geolocation">\n - This picture was taken at a different location.</string>
-  <string name="upload_problem_do_you_continue">\n\nDo you still want to upload this picture?</string>
+  <string name="upload_problem_image_dark">Image is too dark.</string>
+  <string name="upload_problem_image_blurry">Image is blurry.</string>
+  <string name="upload_problem_image_duplicate">Image is already on Commons.</string>
+  <string name="upload_problem_different_geolocation">This picture was taken at a different location.</string>
+  <string name="upload_problem_do_you_continue">Do you still want to upload this picture?</string>
 
   <string name="give_permission">Give permission</string>
   <string name="use_external_storage">Use external storage</string>
@@ -312,6 +315,8 @@
   <string name="provider_searches">Recently searched queries</string>
   <string name="error_loading_categories">Error occurred while loading categories.</string>
   <string name="error_loading_subcategories">Error occurred while loading subcategories.</string>
+  <string name="search_tab_title_media">MEDIA</string>
+  <string name="search_tab_title_categories">CATEGORIES</string>
 
   <string name="successful_wikidata_edit">Image successfully added to %1$s on Wikidata!</string>
   <string name="wikidata_edit_failure">Failed to update corresponding Wikidata entity!</string>
@@ -432,9 +437,13 @@ Upload your first media by touching the camera or gallery icon above.</string>
   <string name="never_ask_again">Never ask this again</string>
   <string name="display_location_permission_title">Display location permission</string>
   <string name="display_location_permission_explanation">Ask for location permission when needed for nearby notification card view feature.</string>
+  <string name="achievements_fetch_failed">Something went wrong, We could not fetch your achievements</string>
   <string name="ends_on">Ends on:</string>
   <string name="display_campaigns">Display campaigns</string>
   <string name="display_campaigns_explanation">Tap here to see the ongoing campaigns</string>
   <string name="nearby_campaign_dismiss_message">You won\'t see the campaigns anymore. However, you can re-enable this notification in Settings if you wish.</string>
+
+  <string name="this_function_needs_network_connection">This function requires network connection, please check your connection settings.</string>
+  <string name="bad_token_error_proposed_solution">Upload failed due to issues with edit token. Please try logging out and in again. </string>
 
 </resources>

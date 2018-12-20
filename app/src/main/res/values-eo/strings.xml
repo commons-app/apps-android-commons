@@ -167,8 +167,6 @@
   <string name="nearby_info_menu_wikipedia_article">Vikipedia artikolo</string>
   <string name="upload_image_too_dark">La bildo estas tro malluma. Ĉu vi tamen volas alŝuti ĝin? La Komunejo (Wikimedia Commons) estas nur por bildoj kun enciklopedia valoro.</string>
   <string name="upload_image_blurry">La bildo estas malklara. Ĉu vi tamen volas alŝuti ĝin? La Komunejo (Wikimedia Commons) estas nur por bildoj kun enciklopedia valoro.</string>
-  <string name="upload_image_problem_blurry_duplicate">La bildo estas malklara kaj jam ekzistas en la Komunejo. Ĉu vi certe volas alŝuti ĝin? Bonvolu alŝuti nur bildojn kun enciklopedia valoro.</string>
-  <string name="upload_image_problem_dark_blurry">La bildo estas malklara kaj tro malluma. Ĉu vi certe volas alŝuti ĝin? Bonvolu alŝuti nur bildojn kun enciklopedia valoro.</string>
   <string name="give_permission">Doni permeson</string>
   <string name="login_to_your_account">Ensaluti en vian konton</string>
   <string name="send_log_file">Sendi la protokolan dosieron</string>

@@ -219,7 +219,6 @@
   <string name="nearby_info_menu_commons_article">Pajennad restroù Commons</string>
   <string name="nearby_info_menu_wikidata_article">Elfenn Wikidata</string>
   <string name="nearby_info_menu_wikipedia_article">Pennad Wikipedia</string>
-  <string name="upload_image_problem_duplicate">Emañ ar restr-mañ war Commons c\'hoazh. Ha sur oc\'h e fell deoc\'h kenderc\'hel ?</string>
   <string name="give_permission">Reiñ ar gwir</string>
   <string name="use_external_storage">Implijout ar stokañ diavaez</string>
   <string name="use_external_storage_summary">Enrollit ar skeudennoù tennet gant luc\'hskeudennerez ho penveg</string>

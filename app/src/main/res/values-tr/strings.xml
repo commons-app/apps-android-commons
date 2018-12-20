@@ -10,6 +10,7 @@
 * Neslihan Turan
 * Rapsar
 * Sayginer
+* Sucsuzz
 * TmY e12
 * Trockya
 * VikipediBilgini
@@ -244,13 +245,6 @@
   <string name="description_info">Lütfen medyayı mümkün olduğunca açıklayın: Nerede çekildi? Ne gösteriyor? Bağlam nedir? Lütfen nesneleri veya kişileri tanımlayın. Kolay tahmin edilemeyen bilgileri açıklayın, örneğin bir manzara ise günün saatini belirtin. Medya alışılmadık bir şey gösteriyorsa lütfen olağandışı yapan şeyleri açıklayın.</string>
   <string name="upload_image_too_dark">Bu fotoğraf çok karanlık, yine de yüklemek istiyor musunuz? Wikimedia Commons yalnızca ansiklopedik değeri olan fotoğraflar içindir.</string>
   <string name="upload_image_blurry">Bu fotoğraf bulanık, yine de yüklemek istiyor musunuz? Wikimedia Commons yalnızca ansiklopedik değeri olan fotoğraflar içindir.</string>
-  <string name="upload_image_problem_duplicate">Bu dosya zaten Commons\'da var. Devam etmek istediğinizden emin misiniz?</string>
-  <string name="upload_image_problem_dark">Bu fotoğraf çok karanlık, yine de yüklemek istiyor musunuz? Wikimedia Commons yalnızca ansiklopedik değeri olan fotoğraflar içindir.</string>
-  <string name="upload_image_problem_blurry">Bu fotoğraf bulanık, yine de yüklemek istiyor musunuz? Wikimedia Commons yalnızca ansiklopedik değeri olan fotoğraflar içindir.</string>
-  <string name="upload_image_problem_dark_duplicate">Bu resim çok karanlık ve Commons\'ta zaten var, yüklemek istediğinize emin misiniz? Lütfen sadece ansiklopedik değeri olan resimleri yükleyin.</string>
-  <string name="upload_image_problem_blurry_duplicate">Bu resim bulanık ve Commons\'ta zaten var, yüklemek istediğinize emin misiniz? Lütfen sadece ansiklopedik değeri olan resimleri yükleyin.</string>
-  <string name="upload_image_problem_dark_blurry">Bu resim çok karanlık ve bulanık, yüklemek istediğinize emin misiniz? Lütfen sadece ansiklopedik değeri olan resimleri yükleyin.</string>
-  <string name="upload_image_problem_dark_blurry_duplicate">Bu resim çok karanlık, bulanık ve Commons\'ta zaten var, yüklemek istediğinize emin misiniz? Lütfen sadece ansiklopedik değeri olan resimleri yükleyin.</string>
   <string name="give_permission">İzin ver</string>
   <string name="use_external_storage">Harici depolamayı kullanın</string>
   <string name="use_external_storage_summary">Uygulama kamerası kullanıldığında çekilen fotoğrafları cihazına kaydedin</string>
@@ -343,6 +337,7 @@
   <string name="share_coordinates_not_present">Koordinatlar görüntü seçimi sırasında belirlenmedi</string>
   <string name="error_fetching_nearby_places">Yakındaki yerler alınırken hata oluştu.</string>
   <string name="add_description">+ Açıklama ekle</string>
+  <string name="no_recent_searches">Son arama yok</string>
   <string name="delete_recent_searches_dialog">Arama geçmişinizi silmek istediğinize emin misiniz?</string>
   <string name="search_history_deleted">Arama geçmişi silindi</string>
   <string name="nominate_delete">Silinmeye aday göster</string>
@@ -377,6 +372,12 @@
   <string name="next">Sıradaki</string>
   <string name="previous">Önceki</string>
   <string name="submit">Gönder</string>
+  <string name="upload_title_duplicate">%1$s adında zaten bir dosya var. Devam etmek istediğine emin misin?</string>
+  <string name="map_application_missing">Cihazınızda uyumlu bir harita uygulaması bulunamadı. Lütfen bu özelliği kullanmak için bir harita uygulaması yükleyin.</string>
+  <plurals name="upload_count_title">
+    <item quantity="one">%1$d Yükleme</item>
+    <item quantity="other">%1$d Yükleme</item>
+  </plurals>
   <string name="navigation_item_bookmarks">Yer imleri</string>
   <string name="title_activity_bookmarks">Yer imleri</string>
   <string name="title_page_bookmarks_pictures">Resim</string>
@@ -386,6 +387,12 @@
   <string name="bookmark_empty">Henüz yer imlerine bir şey eklemediniz</string>
   <string name="provider_bookmarks_location">Yer imleri</string>
   <string name="log_collection_started">Günlük koleksiyonu başlatıldı. Lütfen uygulamayı YENİDEN BAŞLATIN, günlüğe kaydetmek istediğiniz eylemi gerçekleştirin ve ardından \'Günlüğü Gönder\'e tekrar dokunun.</string>
+  <string name="deletion_reason_uploaded_by_mistake">Yanlışlıkla yükledim</string>
+  <string name="deletion_reason_publicly_visible">Bunun herkese görünür olacağını bilmiyordum</string>
+  <string name="deletion_reason_bad_for_my_privacy">Gizliliğim açısından kötü olduğunu fark ettim</string>
+  <string name="deletion_reason_no_longer_want_public">Fikrimi değiştirdim, bunun herkese görünür olmasını istemiyorum</string>
+  <string name="deletion_reason_not_interesting">Ansiklopedi için gerekli olmayan bir resim</string>
+  <string name="uploaded_by_myself">Kendi tarafımdan yüklendi</string>
   <string name="used_by">,kullanılan</string>
   <string name="articles">maddeler</string>
   <string name="no_uploads">Commons\'a Hoş Geldiniz!\n\nYukarıdaki kamera ya da galeri simgesine dokunarak ilk medyanızı yükleyin.</string>
@@ -397,9 +404,19 @@
   <string name="desc_language_Asia">Asya</string>
   <string name="desc_language_Pacific">Pasifik</string>
   <string name="no_categories_selected">Kategori Seçilmedi</string>
+  <string name="no_categories_selected_warning_desc">Kategorisiz görüntüler nadiren kullanılabilir. Kategorileri seçmeden göndermek istediğinizden emin misiniz?</string>
   <string name="yes_submit">Evet, Gönder</string>
   <string name="no_go_back">Hayır, Geri Dön</string>
+  <string name="upload_flow_all_images_in_set">(Set içindeki tüm görüntüler için)</string>
+  <string name="search_this_area">Bu alanı ara</string>
   <string name="nearby_card_permission_title">Yetki İsteği</string>
+  <string name="nearby_card_permission_explanation">Resimlerinize en yakın yeri eklemek için mevcut konumunuzu kullanmamızı ister misiniz?</string>
+  <string name="unable_to_display_nearest_place">Konum izinleri olmadan resminize yakın yer eklenemiyor.</string>
   <string name="never_ask_again">Bunu bir daha sorma</string>
   <string name="display_location_permission_title">Yerleşim iznini görüntüle</string>
+  <string name="display_location_permission_explanation">Yakındaki bildirim kartı görünümü özelliği için gerektiğinde konum izni isteyin.</string>
+  <string name="ends_on">Bitiş:</string>
+  <string name="display_campaigns">Kampanyaları göster</string>
+  <string name="display_campaigns_explanation">Devam eden kampanyaları görmek için buraya dokunun</string>
+  <string name="nearby_campaign_dismiss_message">Artık kampanyaları görmeyeceksiniz. Ancak isterseniz bu bildirimi Ayarlar\'da yeniden etkinleştirebilirsiniz.</string>
 </resources>

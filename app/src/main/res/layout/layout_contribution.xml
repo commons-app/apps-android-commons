@@ -22,45 +22,89 @@
         android:id="@+id/contributionImage"
         android:layout_width="match_parent"
         android:layout_height="240dp"
-        app:actualImageScaleType="centerCrop"
+        app:actualImageScaleType="fitCenter"
         />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:orientation="horizontal"
         android:layout_gravity="center|bottom"
         android:background="#AA000000"
-        android:orientation="vertical"
-        android:padding="@dimen/small_gap"
+        android:weightSum="4"
         >
-        <ProgressBar
-            android:id="@+id/contributionProgress"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            style="@style/ProgressBar"
-            android:indeterminateOnly="false"
-            android:max="100"
-            android:visibility="gone"
-            />
 
-        <TextView
-            android:id="@+id/contributionState"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            style="?android:textAppearanceSmall"
-            android:textColor="#FFFFFFFF"
-            android:visibility="gone"
-            />
+            android:layout_weight="3"
+            android:layout_gravity="center|bottom"
+            android:orientation="vertical"
+            android:padding="@dimen/small_gap"
+            >
+            <ProgressBar
+                android:id="@+id/contributionProgress"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/ProgressBar"
+                android:indeterminateOnly="false"
+                android:max="100"
+                android:visibility="gone"
+                />
 
-        <TextView
-            android:id="@+id/contributionTitle"
-            android:layout_width="wrap_content"
+            <TextView
+                android:id="@+id/contributionState"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="?android:textAppearanceSmall"
+                android:textColor="#FFFFFFFF"
+                android:visibility="gone"
+                />
+
+            <TextView
+                android:id="@+id/contributionTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#FFFFFFFF"
+                style="?android:textAppearanceMedium"
+                android:maxLines="2"
+                android:ellipsize="end"
+                />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:textColor="#FFFFFFFF"
-            style="?android:textAppearanceMedium"
-            android:maxLines="2"
-            android:ellipsize="end"
-            />
+            android:layout_weight="1"
+            android:orientation="horizontal"
+            android:padding="@dimen/small_gap"
+            >
+
+            <ImageButton
+                android:id="@+id/cancelButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_cancel_white"
+                android:text="@string/menu_cancel_upload"
+                android:background="@android:color/transparent"
+                android:layout_margin="8dp"
+                android:visibility="gone"
+                />
+
+            <ImageButton
+                android:id="@+id/retryButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_retry_white"
+                android:text="@string/menu_retry_upload"
+                android:background="@android:color/transparent"
+                android:layout_margin="8dp"
+                android:visibility="gone"
+                />
+
+        </LinearLayout>
+
     </LinearLayout>
 
 </FrameLayout>

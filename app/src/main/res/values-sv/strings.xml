@@ -238,13 +238,6 @@
   <string name="description_info">Beskriv mediafilen så mycket som möjligt. Var togs den? Vad visar den? Vad är sammanhanget? Beskriv föremålen eller personerna. Ge information som inte kan gissas fram, t.ex. tidpunkten om det är ett landskap. Om mediafilen visar någonting ovanligt, förklara vad som gör den ovanlig.</string>
   <string name="upload_image_too_dark">Denna bild är för mörk, är du säker på att du vill ladda upp den? Wikimedia Commons är endast till för bilder med encyklopediskt värde.</string>
   <string name="upload_image_blurry">Denna bild är suddig, är du säker på att du vill ladda upp den? Wikimedia Commons är endast till för bilder med encyklopediskt värde.</string>
-  <string name="upload_image_problem_duplicate">Denna fil finns redan på Commons. Är du säker på att du vill fortsätta?</string>
-  <string name="upload_image_problem_dark">Denna bild är för mörk, är du säker på att du vill ladda upp den? Wikimedia Commons är endast till för bilder med encyklopediskt värde.</string>
-  <string name="upload_image_problem_blurry">Denna bild är suddig, är du säker på att du vill ladda upp den? Wikimedia Commons är endast till för bilder med encyklopediskt värde.</string>
-  <string name="upload_image_problem_dark_duplicate">Denna bild är för mörk och finns redan på Commons, är du säker på att du vill ladda upp den? Ladda endast upp bilder med encyklopediskt värde.</string>
-  <string name="upload_image_problem_blurry_duplicate">Denna bild är suddig och finns redan på Commons, är du säker på att du vill ladda upp den? Ladda endast upp bilder med encyklopediskt värde.</string>
-  <string name="upload_image_problem_dark_blurry">Denna bild är för mörk och suddig, är du säker på att du vill ladda upp den? Ladda endast upp bilder med encyklopediskt värde.</string>
-  <string name="upload_image_problem_dark_blurry_duplicate">Denna bild är för mörk och suddig samt finns redan på Commons, är du säker på att du vill ladda upp den? Ladda endast upp bilder med encyklopediskt värde.</string>
   <string name="give_permission">Ge behörighet</string>
   <string name="use_external_storage">Använd extern lagring</string>
   <string name="use_external_storage_summary">Spara bilder som tas med kameran i appen på din enhet</string>
