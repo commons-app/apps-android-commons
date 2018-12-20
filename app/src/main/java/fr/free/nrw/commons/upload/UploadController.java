@@ -38,7 +38,6 @@ public class UploadController {
     private Context context;
     private SharedPreferences prefs;
 
-
     public interface ContributionUploadProgress {
         void onUploadStarted(Contribution contribution);
     }

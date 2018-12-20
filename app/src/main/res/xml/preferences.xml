@@ -38,13 +38,13 @@
 
         <fr.free.nrw.commons.ui.LongTitlePreferences.LongTitleSwitchPreference
             android:key="useAuthorName"
-            android:title="@string/use_author_name"
-            android:summary="@string/author_name_chk_summary"/>
+            android:title="@string/preference_author_name_toggle"
+            android:summary="@string/preference_author_name_toggle_summary"/>
 
         <fr.free.nrw.commons.ui.LongTitlePreferences.LongTitleEditTextPreference
             android:key="authorName"
-            android:title="@string/author_name"
-            android:summary="@string/author_name_summary"
+            android:title="@string/preference_author_name"
+            android:summary="@string/preference_author_name_summary"
             />
 
         <fr.free.nrw.commons.ui.LongTitlePreferences.LongTitleSwitchPreference
