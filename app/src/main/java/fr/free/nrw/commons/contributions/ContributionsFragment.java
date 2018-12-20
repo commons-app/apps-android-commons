@@ -14,6 +14,7 @@ import android.os.Bundle;
 import android.os.IBinder;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 
@@ -22,6 +23,8 @@ import android.support.v4.content.Loader;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.widget.CursorAdapter;
 import android.support.v7.app.AlertDialog;
+import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,6 +33,14 @@ import android.widget.AdapterView;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 
+import android.widget.Toast;
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import fr.free.nrw.commons.campaigns.Campaign;
+import fr.free.nrw.commons.campaigns.CampaignResponseDTO;
+import fr.free.nrw.commons.campaigns.CampaignView;
+import fr.free.nrw.commons.campaigns.CampaignsPresenter;
+import fr.free.nrw.commons.campaigns.ICampaignsView;
 import java.util.ArrayList;
 import java.util.concurrent.CountDownLatch;
 
@@ -60,6 +71,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
+import org.acra.util.ToastSender;
 import timber.log.Timber;
 
 import static fr.free.nrw.commons.contributions.Contribution.STATE_FAILED;
@@ -76,7 +88,7 @@ public class ContributionsFragment
                     MediaDetailPagerFragment.MediaDetailProvider,
                     FragmentManager.OnBackStackChangedListener,
                     ContributionsListFragment.SourceRefresher,
-                    LocationUpdateListener
+                    LocationUpdateListener,ICampaignsView
                     {
     @Inject
     @Named("default_preferences")
@@ -112,6 +124,10 @@ public class ContributionsFragment
     private boolean isFragmentAttachedBefore = false;
     private View checkBoxView;
     private CheckBox checkBox;
+    private CampaignsPresenter presenter;
+
+
+    @BindView(R.id.campaigns_view) CampaignView campaignView;
 
                         /**
      * Since we will need to use parent activity on onAuthCookieAcquired, we have to wait
@@ -142,6 +158,10 @@ public class ContributionsFragment
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_contributions, container, false);
+        ButterKnife.bind(this, view);
+        presenter = new CampaignsPresenter();
+        presenter.onAttachView(this);
+        campaignView.setVisibility(View.GONE);
         nearbyNoificationCardView = view.findViewById(R.id.card_view_nearby);
         checkBoxView = View.inflate(getActivity(), R.layout.nearby_permission_dialog, null);
         checkBox = (CheckBox) checkBoxView.findViewById(R.id.never_ask_again);
@@ -172,6 +192,27 @@ public class ContributionsFragment
         if(!BuildConfig.FLAVOR.equalsIgnoreCase("beta")){
             setUploadCount();
         }
+
+        getChildFragmentManager().registerFragmentLifecycleCallbacks(
+            new FragmentManager.FragmentLifecycleCallbacks() {
+                @Override public void onFragmentResumed(FragmentManager fm, Fragment f) {
+                    super.onFragmentResumed(fm, f);
+                    //If media detail pager fragment is visible, hide the campaigns view [might not be the best way to do, this but yeah, this proves to work for now]
+                    Log.e("#CF#", "onFragmentResumed" + f.getClass().getName());
+                    if (f instanceof MediaDetailPagerFragment) {
+                        campaignView.setVisibility(View.GONE);
+                    }
+                }
+
+                @Override public void onFragmentDetached(FragmentManager fm, Fragment f) {
+                    super.onFragmentDetached(fm, f);
+                    Log.e("#CF#", "onFragmentDetached" + f.getClass().getName());
+                    //If media detail pager fragment is detached, ContributionsList fragment is gonna be visible, [becomes tightly coupled though]
+                    if (f instanceof MediaDetailPagerFragment) {
+                        fetchCampaigns();
+                    }
+                }
+            }, true);
 
         return view;
     }
@@ -291,6 +332,8 @@ public class ContributionsFragment
 
             contributionsListFragment.clearSyncMessage();
             notifyAndMigrateDataSetObservers();
+
+            ((ContributionsListAdapter)contributionsListFragment.getAdapter()).setUploadService(uploadService);
         }
     }
 
@@ -378,36 +421,6 @@ public class ContributionsFragment
             setMediaDetailPagerFragment();
         }
         mediaDetailPagerFragment.showImage(i);
-    }
-
-    /**
-     * Retry upload when it is failed
-     * @param i position of upload which will be retried
-     */
-    public void retryUpload(int i) {
-        allContributions.moveToPosition(i);
-        Contribution c = contributionDao.fromCursor(allContributions);
-        if (c.getState() == STATE_FAILED) {
-            uploadService.queue(UploadService.ACTION_UPLOAD_FILE, c);
-            Timber.d("Restarting for %s", c.toString());
-        } else {
-            Timber.d("Skipping re-upload for non-failed %s", c.toString());
-        }
-    }
-
-    /**
-     * Delete a failed upload attempt
-     * @param i position of upload attempt which will be deteled
-     */
-    public void deleteUpload(int i) {
-        allContributions.moveToPosition(i);
-        Contribution c = contributionDao.fromCursor(allContributions);
-        if (c.getState() == STATE_FAILED) {
-            Timber.d("Deleting failed contrib %s", c.toString());
-            contributionDao.delete(c);
-        } else {
-            Timber.d("Skipping deletion for non-failed contrib %s", c.toString());
-        }
     }
 
     @Override
@@ -537,7 +550,7 @@ public class ContributionsFragment
             nearbyNoificationCardView.setVisibility(View.GONE);
         }
 
-
+        fetchCampaigns();
     }
 
     /**
@@ -693,6 +706,39 @@ public class ContributionsFragment
     public void onLocationChangedMedium(LatLng latLng) {
         // Update closest nearby card view if location changed more than 500 meters
         updateClosestNearbyCardViewInfo();
+    }
+
+    @Override public void onViewCreated(@NonNull View view,
+        @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+    }
+
+    /**
+     * ask the presenter to fetch the campaigns only if user has not manually disabled it
+     */
+    private void fetchCampaigns() {
+        if (prefs.getBoolean("displayCampaignsCardView", true)) {
+            presenter.getCampaigns();
+        }
+    }
+
+    @Override public void showMessage(String message) {
+        Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override public MediaWikiApi getMediaWikiApi() {
+        return mediaWikiApi;
+    }
+
+    @Override public void showCampaigns(Campaign campaign) {
+        if (campaign != null) {
+            campaignView.setCampaign(campaign);
+        }
+    }
+
+    @Override public void onDestroyView() {
+        super.onDestroyView();
+        presenter.onDetachView();
     }
 }
 

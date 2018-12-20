@@ -238,13 +238,6 @@
   <string name="description_info">Bitte beschreibe das Medium so gut wie möglich: Wo wurde es aufgenommen? Was zeigt es? Was ist der Kontext? Bitte beschreibe die Objekte oder Personen. Zeige Informationen auf, die nicht einfach erraten werden können, zum Beispiel die Tageszeit, falls es eine Landschaft ist. Falls das Medium etwas Ungewöhnliches zeigt, erkläre bitte, was es ungewöhnlich macht.</string>
   <string name="upload_image_too_dark">Dieses Bild ist zu dunkel. Bist du sicher, dass du es hochladen möchtest? Wikimedia Commons ist nur für Bilder mit enzyklopädischem Wert gedacht.</string>
   <string name="upload_image_blurry">Dieses Bild ist verschwommen. Bist du sicher, dass du es hochladen möchtest? Wikimedia Commons ist nur für Bilder mit enzyklopädischem Wert gedacht.</string>
-  <string name="upload_image_problem_duplicate">Diese Datei ist bereits auf Commons vorhanden. Bist du sicher, dass du fortfahren möchtest?</string>
-  <string name="upload_image_problem_dark">Dieses Bild ist zu dunkel. Bist du sicher, dass du es hochladen möchtest? Wikimedia Commons ist nur für Bilder mit enzyklopädischem Wert gedacht.</string>
-  <string name="upload_image_problem_blurry">Dieses Bild ist verschwommen. Bist du sicher, dass du es hochladen möchtest? Wikimedia Commons ist nur für Bilder mit enzyklopädischem Wert gedacht.</string>
-  <string name="upload_image_problem_dark_duplicate">Dieses Bild ist zu dunkel und bereits auf Commons vorhanden. Bist du sicher, dass du es hochladen möchtest? Lade bitte nur Bilder mit enzyklopädischem Wert hoch.</string>
-  <string name="upload_image_problem_blurry_duplicate">Dieses Bild ist unscharf und bereits auf Commons vorhanden. Bist du sicher, dass du es hochladen möchtest? Bitte lade nur Bilder mit enzyklopädischem Wert hoch.</string>
-  <string name="upload_image_problem_dark_blurry">Dieses Bild ist zu dunkel und unscharf. Bist du sicher, dass du es hochladen möchtest? Bitte lade nur Bilder mit enzyklopädischem Wert hoch.</string>
-  <string name="upload_image_problem_dark_blurry_duplicate">Dieses Bild ist zu dunkel, unscharf und bereits auf Commons vorhanden. Bist du sicher, dass du es hochladen möchtest? Lade bitte nur Bilder mit enzyklopädischem Wert hoch.</string>
   <string name="give_permission">Berechtigung geben</string>
   <string name="use_external_storage">Externen Speicher verwenden</string>
   <string name="use_external_storage_summary">Mit der In-App-Kamera aufgenommene Bilder auf deinem Gerät speichern</string>
@@ -337,6 +330,7 @@
   <string name="share_coordinates_not_present">Während der Bildauswahl wurden keine Koordinaten angegeben</string>
   <string name="error_fetching_nearby_places">Fehler beim Abrufen der Orte in der Nähe.</string>
   <string name="add_description">+ Beschreibung hinzufügen</string>
+  <string name="no_recent_searches">Keine letzten Suchanfragen</string>
   <string name="delete_recent_searches_dialog">Bist du sicher, dass du deinen Suchverlauf löschen möchtest?</string>
   <string name="search_history_deleted">Suchverlauf gelöscht</string>
   <string name="nominate_delete">Zur Löschung vorschlagen</string>
@@ -407,10 +401,15 @@
   <string name="yes_submit">Ja, einreichen</string>
   <string name="no_go_back">Nein, zurück gehen</string>
   <string name="upload_flow_all_images_in_set">(für alle Bilder im Satz)</string>
+  <string name="search_this_area">Diesen Bereich durchsuchen</string>
   <string name="nearby_card_permission_title">Berechtigungsanfrage</string>
   <string name="nearby_card_permission_explanation">Dürfen wir deinen aktuellen Standort verwenden, um den nächsten Ort anzuzeigen, der Bilder benötigt?</string>
   <string name="unable_to_display_nearest_place">Der nächste Ort, der Bilder benötigt, kann ohne Standortberechtigungen nicht angezeigt werden.</string>
   <string name="never_ask_again">Nicht erneut fragen</string>
   <string name="display_location_permission_title">Standortberechtigung anzeigen</string>
   <string name="display_location_permission_explanation">Anfrage für eine Standortberechtigung, die für die Nachbarbenachrichtigungskartenansichtsfunktion erforderlich ist.</string>
+  <string name="ends_on">Endet am:</string>
+  <string name="display_campaigns">Kampagnen anzeigen</string>
+  <string name="display_campaigns_explanation">Hier tippen, um die laufenden Kampagnen anzusehen.</string>
+  <string name="nearby_campaign_dismiss_message">Du wirst die Kampagnen nicht mehr sehen. Du kannst dennoch diese Benachrichtigung in den Einstellungen erneut aktivieren, falls du dies möchtest.</string>
 </resources>

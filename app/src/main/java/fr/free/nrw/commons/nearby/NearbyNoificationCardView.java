@@ -1,18 +1,10 @@
 package fr.free.nrw.commons.nearby;
 
 import android.content.Context;
-import android.content.Intent;
-import android.content.res.Resources;
-import android.os.Handler;
+
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.design.widget.CoordinatorLayout;
-import android.support.design.widget.SwipeDismissBehavior;
-import android.support.v7.app.AlertDialog;
-import android.support.v7.widget.CardView;
 import android.util.AttributeSet;
-import android.util.Log;
-import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -20,19 +12,17 @@ import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import android.widget.Toast;
-
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.contributions.MainActivity;
+import fr.free.nrw.commons.utils.SwipableCardView;
 import fr.free.nrw.commons.utils.ViewUtil;
 import timber.log.Timber;
 
 /**
  * Custom card view for nearby notification card view on main screen, above contributions list
  */
-public class NearbyNoificationCardView  extends CardView{
+public class NearbyNoificationCardView  extends SwipableCardView {
 
-    private static final float MINIMUM_THRESHOLD_FOR_SWIPE = 100;
     private Context context;
 
     private Button permissionRequestButton;
@@ -45,8 +35,6 @@ public class NearbyNoificationCardView  extends CardView{
     public CardViewVisibilityState cardViewVisibilityState;
 
     public PermissionType permissionType;
-
-    float x1,x2;
 
     public NearbyNoificationCardView(@NonNull Context context) {
         super(context);
@@ -69,6 +57,9 @@ public class NearbyNoificationCardView  extends CardView{
         init();
     }
 
+    /**
+     * Initializes views and action listeners
+     */
     private void init() {
         View rootView = inflate(context, R.layout.nearby_card_view, this);
 
@@ -99,126 +90,27 @@ public class NearbyNoificationCardView  extends CardView{
 
     private void setActionListeners() {
         this.setOnClickListener(view -> ((MainActivity)context).viewPager.setCurrentItem(1));
-
-        this.setOnTouchListener(
-                (v, event) -> {
-                    boolean isSwipe = false;
-                    float deltaX=0.0f;
-                    switch (event.getAction()) {
-                        case MotionEvent.ACTION_DOWN:
-                            x1 = event.getX();
-                            break;
-                        case MotionEvent.ACTION_UP:
-                            x2 = event.getX();
-                            deltaX = x2 - x1;
-                            if (deltaX < 0) {
-                                //Right to left swipe
-                                isSwipe = true;
-                            } else if (deltaX > 0) {
-                                //Left to right swipe
-                                isSwipe = true;
-                            }
-                            break;
-                    }
-                    if (isSwipe && (pixelToDp(Math.abs(deltaX)) > MINIMUM_THRESHOLD_FOR_SWIPE)) {
-                        v.setVisibility(GONE);
-                        // Save shared preference for nearby card view accordingly
-                        ((MainActivity) context).prefs.edit()
-                                .putBoolean("displayNearbyCardView", false).apply();
-                        ViewUtil.showLongToast(context, getResources().getString(R.string.nearby_notification_dismiss_message));
-                        return true;
-                    }
-                    return false;
-                });
     }
 
-    private float pixelToDp(float pixels) {
-        return (pixels / Resources.getSystem().getDisplayMetrics().density);
+    @Override public boolean onSwipe(View view) {
+        view.setVisibility(GONE);
+        // Save shared preference for nearby card view accordingly
+        ((MainActivity) context).prefs.edit().putBoolean("displayNearbyCardView", false).apply();
+        ViewUtil.showLongToast(context,
+            getResources().getString(R.string.nearby_notification_dismiss_message));
+        return true;
     }
 
     /**
-     * Sets permission request button visible and content layout invisible, then adds correct
-     * permission request actions to permission request button according to PermissionType enum
-     * @param isPermissionRequestButtonNeeded true if permissions missing
+     * Time is up, data for card view is not ready, so do not display it
      */
-    public void displayPermissionRequestButton(boolean isPermissionRequestButtonNeeded) {
-        if (isPermissionRequestButtonNeeded) {
-            cardViewVisibilityState = CardViewVisibilityState.ASK_PERMISSION;
-            contentLayout.setVisibility(GONE);
-            permissionRequestButton.setVisibility(VISIBLE);
-
-            if (permissionType == PermissionType.ENABLE_LOCATION_PERMISSON) {
-
-                permissionRequestButton.setOnClickListener(new OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        if (!((MainActivity)context).isFinishing()) {
-                            ((MainActivity) context).locationManager.requestPermissions((MainActivity) context);
-                        }
-                    }
-                });
-
-            } else if (permissionType == PermissionType.ENABLE_GPS) {
-
-                permissionRequestButton.setOnClickListener(new OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        new AlertDialog.Builder(context)
-                                .setMessage(R.string.gps_disabled)
-                                .setCancelable(false)
-                                .setPositiveButton(R.string.enable_gps,
-                                        (dialog, id) -> {
-                                            Intent callGPSSettingIntent = new Intent(
-                                                    android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS);
-                                            Timber.d("Loaded settings page");
-                                            ((MainActivity) context).startActivityForResult(callGPSSettingIntent, 1);
-                                        })
-                                .setNegativeButton(R.string.menu_cancel_upload, (dialog, id) -> {
-                                    dialog.cancel();
-                                    displayPermissionRequestButton(true);
-                                })
-                                .create()
-                                .show();
-                    }
-                });
-            }
-
-
-        } else {
-            cardViewVisibilityState = CardViewVisibilityState.LOADING;
-            /*permissionRequestButton.setVisibility(GONE);
-            contentLayout.setVisibility(VISIBLE);
-            // Set visibility of elements in content layout once it become visible
-            progressBar.setVisibility(VISIBLE);
-            notificationTitle.setVisibility(GONE);
-            notificationDistance.setVisibility(GONE);
-            notificationIcon.setVisibility(GONE);
-
-            permissionRequestButton.setVisibility(GONE);*/
-
-            this.setVisibility(GONE);
-            Handler nearbyNotificationHandler = new Handler();
-            Runnable nearbyNotificationRunnable = new Runnable() {
-                @Override
-                public void run() {
-                    if (cardViewVisibilityState != NearbyNoificationCardView.CardViewVisibilityState.READY
-                            && cardViewVisibilityState != NearbyNoificationCardView.CardViewVisibilityState.ASK_PERMISSION
-                            && cardViewVisibilityState != NearbyNoificationCardView.CardViewVisibilityState.INVISIBLE) {
-                        // If after 30 seconds, card view is not ready
-                        errorOcured();
-                    } else {
-                        suceeded();
-                    }
-                }
-            };
-            nearbyNotificationHandler.postDelayed(nearbyNotificationRunnable, 30000);
-        }
-    }
-
     private void errorOcured() {
         this.setVisibility(GONE);
     }
 
+    /**
+     * Data for card view is ready, display card view
+     */
     private void suceeded() {
         this.setVisibility(VISIBLE);
     }
