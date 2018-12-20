@@ -4,7 +4,7 @@
         <item name="contributionsListBackground">@color/contributionListDarkBackground</item>
         <item name="mainTabBackground">@color/contributionListDarkBackground</item>
         <item name="mainBackground">@color/main_background_dark</item>
-        <item name="colorPrimary">@color/primaryDarkColor</item>
+        <item name="colorPrimary">@color/primaryColor</item>
         <item name="colorPrimaryDark">@color/primaryDarkColor</item>
         <item name="colorAccent">@color/primaryColor</item>
         <item name="colorButtonNormal">@color/primaryColor</item>
