@@ -31,9 +31,9 @@ public class NetworkingModule {
     @Singleton
     public OkHttpClient provideOkHttpClient(Context context) {
         File dir = new File(context.getCacheDir(), "okHttpCache");
-        return new OkHttpClient.Builder().connectTimeout(30, TimeUnit.SECONDS)
-            .writeTimeout(30, TimeUnit.SECONDS)
-            .readTimeout(30, TimeUnit.SECONDS)
+        return new OkHttpClient.Builder().connectTimeout(60, TimeUnit.SECONDS)
+            .writeTimeout(60, TimeUnit.SECONDS)
+            .readTimeout(60, TimeUnit.SECONDS)
             .cache(new Cache(dir, OK_HTTP_CACHE_SIZE))
             .build();
     }

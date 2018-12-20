@@ -45,7 +45,7 @@
   <string name="provider_contributions">يۈكلىگەنلىرىم</string>
   <string name="menu_share">ئورتاقلىشىش</string>
   <string name="menu_open_in_browser">توركۆرگۈدە ئېچىڭ</string>
-  <string name="share_title_hint">ماۋزۇ</string>
+  <string name="share_title_hint" fuzzy="true">ماۋزۇ</string>
   <string name="share_description_hint">چۈشەندۈرۈش</string>
   <string name="login_failed_network">تىزىملىتىش - تور كاشىلىسى</string>
   <string name="login_failed_wrong_credentials">كىرەلمىدى، ئابۇنىت نامى ۋە پارولىڭىزنى تەكشۈرۈڭ.</string>

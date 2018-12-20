@@ -50,7 +50,7 @@
   <string name="provider_contributions">Unjalan kami</string>
   <string name="menu_share">Bagikeun</string>
   <string name="menu_open_in_browser">Tęmbong dina panyungsi</string>
-  <string name="share_title_hint">Judul</string>
+  <string name="share_title_hint" fuzzy="true">Judul</string>
   <string name="add_title_toast">Béré judul koropakna</string>
   <string name="share_description_hint">Pedaran</string>
   <string name="login_failed_network">Teu bisa login - gangguan jaringan</string>
@@ -71,7 +71,7 @@
   <string name="gps_disabled">GPS dipareuman na parangkat anjeun. Rék dihurungkeun waé atuh?</string>
   <string name="enable_gps">Hirupan GPS</string>
   <string name="contributions_subtitle_zero">Can aya nu diunjal</string>
-  <plurals name="contributions_subtitle">
+  <plurals name="contributions_subtitle" fuzzy="true">
     <item quantity="zero">\@string/contributions_subtitle_zero</item>
     <item quantity="one">%1$d unjalan</item>
     <item quantity="other">%1$d unjalan</item>
@@ -169,7 +169,6 @@
   <string name="title_activity_nearby">Tempat Sabudeureun</string>
   <string name="no_nearby">Teu kapanggih tempat sabudeureun</string>
   <string name="warning">Mangkahadé</string>
-  <string name="upload_image_problem_duplicate">Ieu berkas geus aya di Commons. Rék diteruskeun baé ieu téh?</string>
   <string name="yes">Nya</string>
   <string name="no">Henteu</string>
   <string name="media_detail_title">Judul</string>
@@ -230,8 +229,6 @@
   <string name="error_while_cache">Kasalahan nalika muat gambar</string>
   <string name="title_info">Judul déskriptif anu unik pikeun berkas, anu bakal miboga fungsi minangka ngaran berkas. Anjeun bisa maké basa basajan kalawan spasi. Ulah ngawuwuhkeun éksténsi berkas</string>
   <string name="description_info">Pék émbarkeun wincikan média saloba-lobabana: Dimana éta dicokot? Naon nu titojokeunna? Naon kontéksna? Pék jéntrékeun obyék atawa jalmana. Ébré informasi anu teu gampang kajudi, kawas wayah mun éta mangrupa pamandangan. Ari média nu némbongkeun perkara nu teu guyub, pék jéntrékeun naon nu ngabalukarkeun éta téh teu guyub.</string>
-  <string name="upload_image_problem_dark">Ieu gambar poék teuing, rék diunggah waé? Wikimedia Commons téh ukur pikeun gambar anu boga ajén énsiklopédik.</string>
-  <string name="upload_image_problem_blurry">Potona teu cékas, rék diunggah waé? Wikimedia Commons mah ukur pikeun gambar anu boga ajén énsiklopédik.</string>
   <string name="give_permission">Béré idin</string>
   <string name="use_external_storage">Paké panyimpenan éksternal</string>
   <string name="use_external_storage_summary">Simpen gambar nu nyomotna ku aplikasi kaména na parangkat anjeun</string>

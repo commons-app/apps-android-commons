@@ -8,6 +8,7 @@
   <string name="preference_category_feedback">פֿידבעק</string>
   <string name="preference_category_location">לאקאציע</string>
   <string name="app_name">קאמאנס</string>
+  <string name="bullet">•</string>
   <string name="menu_settings">איינשטעלונגען</string>
   <string name="username">באַניצער־נאָמען</string>
   <string name="password">פאַסווארט</string>
@@ -18,7 +19,7 @@
   <string name="login_success">אריינלאגירט מיט הצלחה!</string>
   <string name="login_failed">ארײַנלאגירן אדורכגעפאלן!</string>
   <string name="upload_failed">טעקע נישט געראפן.  פרובירט אפשר אן אנדער טעקע.</string>
-  <string name="authentication_failed" fuzzy="true">אויטענטיפֿיצירן דורכגעפֿאלן!</string>
+  <string name="authentication_failed">אויטענטיפֿיצירן דורכגעפֿאלן, ביטע אריינלאגירן נאכאמאל</string>
   <string name="uploading_started">ארויפלאדן אנגעהויבן!</string>
   <string name="upload_completed_notification_title">%1$s ארויפגעלאדן!!</string>
   <string name="upload_completed_notification_text">דרוקט צו זען אײַער ארויפֿלאד</string>
@@ -42,7 +43,8 @@
   <string name="provider_contributions">מײַנע ארויפלאדן</string>
   <string name="menu_share">טיילן</string>
   <string name="menu_open_in_browser">באקוקן אין בלעטערער</string>
-  <string name="share_title_hint">טיטל</string>
+  <string name="share_title_hint">טיטל (געפֿאדערט)</string>
+  <string name="add_title_toast">זייט אזוי גוט און פארזארג א טיטל פאר דער טעקע</string>
   <string name="share_description_hint">באַשרײַבונג</string>
   <string name="login_failed_network">נישט מעגלעך אריינלאגירן – נעצווערק פֿעלער</string>
   <string name="login_failed_generic">ארײַנלאגירן אדורכגעפאלן!</string>
@@ -54,17 +56,24 @@
   <string name="refresh_button">דערפֿרישן</string>
   <string name="display_list_button">ליסטע</string>
   <plurals name="contributions_subtitle">
-    <item quantity="zero">\@string/contributions_subtitle_zero </item>
-    <item quantity="one">איין ארויפֿלאד</item>
-    <item quantity="other">%1$d ארויפֿלאדן</item>
+    <item quantity="zero">\@string/contributions_subtitle_zero</item>
+    <item quantity="one">(%1$d)</item>
+    <item quantity="other">(%1$d)</item>
   </plurals>
   <plurals name="starting_multiple_uploads">
     <item quantity="one">אנהייבן %1$d ארויפֿלאד</item>
     <item quantity="other"> אנהייבן %1$d ארויפֿלאדן</item>
   </plurals>
+  <plurals name="multiple_uploads_title">
+    <item quantity="one">%1$d ארויפֿלאד</item>
+    <item quantity="other">%1$d ארויפֿלאדן</item>
+  </plurals>
+  <string name="categories_not_found">קיין קאטעגאריעס צוגעפאסט צו %1$s נישט געפֿונען</string>
   <string name="categories_activity_title">קאַטעגאריעס</string>
   <string name="title_activity_settings">איינשטעלונגען</string>
+  <string name="title_activity_signup">איינשרייבן</string>
   <string name="title_activity_featured_images">רעקאמענדירטע בילדער</string>
+  <string name="title_activity_category_details">קאַטעגאריע</string>
   <string name="menu_about">וועגן</string>
   <string name="title_activity_about">וועגן</string>
   <string name="menu_feedback">שיקן פֿידבעק (דורך בליצפאסט)</string>
@@ -101,9 +110,12 @@
   <string name="warning">ווארענונג</string>
   <string name="yes">יא</string>
   <string name="no">ניין</string>
+  <string name="media_detail_title">טיטל</string>
   <string name="media_detail_author">מחבר</string>
   <string name="media_detail_license">ליצענץ</string>
   <string name="media_detail_coordinates">קאארדינאטן</string>
+  <string name="logout_verification">איר ווילט טאקע ארויסלאגירן?</string>
+  <string name="commons_logo">קאמאנס־לאגא</string>
   <string name="welcome_image_tulip">טולפאן</string>
   <string name="cancel">אַנולירן</string>
   <string name="navigation_drawer_open">אפֿן</string>

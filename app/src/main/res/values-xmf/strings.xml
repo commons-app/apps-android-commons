@@ -38,7 +38,7 @@
   <string name="provider_contributions">ჩქიმი ეხარგუეფი</string>
   <string name="menu_share">გობჟინაფა</string>
   <string name="menu_open_in_browser">ბრაუზერს გონწყუმა</string>
-  <string name="share_title_hint">დუდჯოხო</string>
+  <string name="share_title_hint" fuzzy="true">დუდჯოხო</string>
   <string name="share_description_hint">ეჭარუა</string>
   <string name="login_failed_network">მიშულაქ ვემიხუჯინუ - რშვილიშ ჩილათა</string>
   <string name="login_failed_throttled">ძალამ მიარე უმწუძინუ ცადება. ქორთხინ, მუხირენ წუთშა ხოლო ქოცადით.</string>
@@ -55,7 +55,7 @@
   <string name="gps_disabled">თქვან მონწყილობას GPS თიშილი რე. თახმო გოკონანო ჩართება?</string>
   <string name="enable_gps">GPS-იშ ჩართება</string>
   <string name="contributions_subtitle_zero">ეხარგუეფი ვა რე</string>
-  <plurals name="contributions_subtitle">
+  <plurals name="contributions_subtitle" fuzzy="true">
     <item quantity="zero">\@string/contributions_subtitle_zero</item>
     <item quantity="one">%1$d ეხარგუა</item>
     <item quantity="other">%1$d ეხარგუა</item>

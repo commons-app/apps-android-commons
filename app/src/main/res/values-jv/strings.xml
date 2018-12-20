@@ -49,7 +49,7 @@
   <string name="provider_contributions">Unggahanku</string>
   <string name="menu_share">Dum</string>
   <string name="menu_open_in_browser">Deleng ing Pangluru</string>
-  <string name="share_title_hint">Sesirah</string>
+  <string name="share_title_hint" fuzzy="true">Sesirah</string>
   <string name="add_title_toast">Wènèhi barkas iki sesirah</string>
   <string name="share_description_hint">Wedharan</string>
   <string name="login_failed_network">Ora bisa mlebu log - jaringané gagal</string>
@@ -70,7 +70,7 @@
   <string name="gps_disabled">GPS dipatèni ing pirantiné panjenengan. Panjenengan arep ngurubaké?</string>
   <string name="enable_gps">Urubaké GPS</string>
   <string name="contributions_subtitle_zero">Durung ana unggahan</string>
-  <plurals name="contributions_subtitle">
+  <plurals name="contributions_subtitle" fuzzy="true">
     <item quantity="zero">\@string/contributions_subtitle_zero</item>
     <item quantity="one">%1$d unggahan</item>
     <item quantity="other">%1$d unggahan</item>
@@ -145,7 +145,6 @@
   <string name="title_activity_nearby">Papan Cedhak Kéné</string>
   <string name="no_nearby">Ora ana papan cedhak kéné</string>
   <string name="warning">Pélik</string>
-  <string name="upload_image_problem_duplicate">Barkasé wis ana ing Commons. Panjenengan yakin arep mbacutaké?</string>
   <string name="yes">Iya</string>
   <string name="no">Ora</string>
   <string name="media_detail_title">Sesirah</string>

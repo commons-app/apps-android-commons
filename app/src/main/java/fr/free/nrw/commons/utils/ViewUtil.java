@@ -17,7 +17,12 @@ public class ViewUtil {
     public static final String SHOWCASE_VIEW_ID_2 = "SHOWCASE_VIEW_ID_2";
     public static final String SHOWCASE_VIEW_ID_3 = "SHOWCASE_VIEW_ID_3";
 
-    public static void showSnackbar(View view, int messageResourceId) {
+    /**
+     * Utility function to show short snack bar
+     * @param view
+     * @param messageResourceId
+     */
+    public static void showShortSnackbar(View view, int messageResourceId) {
         if (view.getContext() == null) {
             return;
         }
@@ -76,17 +81,6 @@ public class ViewUtil {
         }
     }
 
-    public static void displayPopupWindow(View anchorView, Context context, View popupWindowLayout, String text) {
-
-        PopupWindow popup = new PopupWindow(context);
-        popup.setContentView(popupWindowLayout);
-        // Closes the popup window when touch outside of it - when looses focus
-        popup.setOutsideTouchable(true);
-        popup.setFocusable(true);
-        // Show anchored to button
-        popup.showAsDropDown(anchorView);
-    }
-
     /**
      * A snack bar which has an action button which on click dismisses the snackbar and invokes the
      * listener passed
@@ -106,5 +100,4 @@ public class ViewUtil {
             snackbar.show();
         });
     }
-
 }

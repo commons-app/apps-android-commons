@@ -55,7 +55,7 @@
   <string name="provider_contributions">Nire igoerak</string>
   <string name="menu_share">Partekatu</string>
   <string name="menu_open_in_browser">Ikusi nabigatzailean</string>
-  <string name="share_title_hint">Izenburua</string>
+  <string name="share_title_hint" fuzzy="true">Izenburua</string>
   <string name="add_title_toast">Mesedez, eman izenburu bat fitxategi honetarako</string>
   <string name="share_description_hint">Deskribapena</string>
   <string name="login_failed_network">Ezin izan da sartu - sarean akatsa</string>
@@ -76,7 +76,7 @@
   <string name="gps_disabled">GPSa desgaituta dago gailu honetan. Gaitu nahi duzu?</string>
   <string name="enable_gps">GPSa gaitu</string>
   <string name="contributions_subtitle_zero">Oraindik ez da ezer igo</string>
-  <plurals name="contributions_subtitle">
+  <plurals name="contributions_subtitle" fuzzy="true">
     <item quantity="zero">\@string/contributions_subtitle_zero</item>
     <item quantity="one">igoera 1</item>
     <item quantity="other">%1$d igoera</item>
@@ -172,7 +172,6 @@
   <string name="title_activity_nearby">Gertuko lekuak</string>
   <string name="no_nearby">Ez da hurbileko lekurik aurkitu</string>
   <string name="warning">Oharra</string>
-  <string name="upload_image_problem_duplicate">Fifxategia dagoeneko Commonsen existitzen da. Ziur zaude jarraitu nahi duzula?</string>
   <string name="yes">Bai</string>
   <string name="no">Ez</string>
   <string name="media_detail_title">Izenburua</string>
@@ -229,8 +228,6 @@
   <string name="error_while_cache">Argazkiak hartzerakoan sortutako akatsa</string>
   <string name="title_info">Fitxategi izenburu deskribatzaile bakarra, fitxategi-izen gisa balioko duena. Hizkuntza arrunta erabil dezakezu espazioekin. Ez sartu fitxategiaren luzapena.</string>
   <string name="description_info">Mesedez, deskribatu multimedia elementua ahal duzun gehien: non hartu zen? zer erakusten du? zein da bere testuingurua? Mesedez, objektuak eta pertsonak deskribatu. Eman asmatzeko erraza ez den informazioa, adibidez, paisaia bat izatekotan, eguneko zein orudtan hartu den. Multimediak zerbait berezia erakusten badu, mesedez azaldu zerk egiten duen berezia.</string>
-  <string name="upload_image_problem_dark">Argazkia ilunegia da, ziur zaude kargatu nahi duzula? Wikimedia Commons-ek balio entziklopedikoa duten argazkiak bakarrik hartzen ditu.</string>
-  <string name="upload_image_problem_blurry">Argazkia lausoa da, ziur zaude kargatu nahi duzula? Wikimedia Commons-ek balio entziklopedikoa duten argazkiak bakarrik hartzen ditu.</string>
   <string name="give_permission">Baimena eman</string>
   <string name="use_external_storage">Kanpo-biltegia erabili</string>
   <string name="use_external_storage_summary">Aplikazioaren kamerarekin ateratako argazkiak zure gailuan gorde</string>
@@ -336,4 +333,5 @@
   <string name="error_occurred">Errorea gertatu da!</string>
   <string name="notifications_channel_name_all">Commons Jakinarazpena</string>
   <string name="storage_permission">Biltegiratze baimena</string>
+  <string name="desc_language_Asia">Asia</string>
 </resources>
