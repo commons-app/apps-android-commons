@@ -4,7 +4,7 @@
         <item name="contributionsListBackground">@color/contributionListDarkBackground</item>
         <item name="mainTabBackground">@color/contributionListDarkBackground</item>
         <item name="mainBackground">@color/main_background_dark</item>
-        <item name="colorPrimary">@color/primaryColor</item>
+        <item name="colorPrimary">@color/primaryDarkColor</item>
         <item name="colorPrimaryDark">@color/primaryDarkColor</item>
         <item name="colorAccent">@color/primaryColor</item>
         <item name="colorButtonNormal">@color/primaryColor</item>
@@ -24,6 +24,8 @@
         <item name="mainCardBackground">@color/main_background_dark</item>
         <item name="mainScreenNearbyPermissionbutton">@style/DarkFlatNearbyPermissionButton</item>
 
+        <!-- SearchView cursor color -->
+        <item name="colorControlActivated">@android:color/white</item>
     </style>
 
     <style name="LightAppTheme" parent="Theme.AppCompat.Light.NoActionBar">
@@ -49,6 +51,8 @@
         <item name="mainCardBackground">@color/primaryDarkColor</item>
         <item name="mainScreenNearbyPermissionbutton">@style/LightFlatNearbyPermissionButton</item>
 
+        <!-- SearchView cursor color -->
+        <item name="colorControlActivated">@android:color/white</item>
     </style>
 
     <style name="DarkSpinnerTheme" parent="DarkAppTheme">
