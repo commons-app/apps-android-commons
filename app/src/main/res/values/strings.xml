@@ -434,6 +434,6 @@ Upload your first media by touching the camera or gallery icon above.</string>
   <string name="display_location_permission_explanation">Ask for location permission when needed for nearby notification card view feature.</string>
 
   <string name="no_image">No images used</string>
-  <string name="no_image_reverted">No image reverted</string>
-  <string name="no_image_uploaded">No images Uploaded</string>
+  <string name="no_image_reverted">No images reverted</string>
+  <string name="no_image_uploaded">No images uploaded</string>
 </resources>

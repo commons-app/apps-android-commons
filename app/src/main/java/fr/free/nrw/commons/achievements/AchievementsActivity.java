@@ -14,7 +14,6 @@ import android.support.v4.content.res.ResourcesCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.Toolbar;
 import android.util.DisplayMetrics;
-import android.util.Log;
 import android.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -212,7 +211,6 @@ public class AchievementsActivity extends NavigationBaseActivity {
                                         layoutImageReverts.setVisibility(View.INVISIBLE);
                                         imageView.setVisibility(View.INVISIBLE);
                                         levelNumber.setText("You haven't qualified any level yet");
-                                        //onError();
                                     }
                                 },
                                 t -> {
@@ -363,7 +361,6 @@ public class AchievementsActivity extends NavigationBaseActivity {
             layoutStatistics.setVisibility(View.VISIBLE);
             imageView.setVisibility(View.VISIBLE);
             levelNumber.setVisibility(View.VISIBLE);
-            //levelNumber.setText("You haven't qualified any level yet");
         }
     }
 
@@ -437,6 +434,7 @@ public class AchievementsActivity extends NavigationBaseActivity {
     private boolean checkAccount(){
         Account currentAccount = sessionManager.getCurrentAccount();
         if (currentAccount == null) {
+            Timber.d("Current account is null");
             ViewUtil.showLongToast(this, getResources().getString(R.string.user_not_logged_in));
             sessionManager.forceLogin(this);
             return false;
