@@ -42,6 +42,7 @@
     <color name="focused_button_light">#32999999</color>
     <color name="disabled_button_text_color_light">#48000000</color>
     <color name="enabled_button_text_color_light">#B0000000</color>
+    <color name="toggle_switches_color">#D48872</color>
 
     <color name="pressed_button_dark">#40CCCCCC</color>
     <color name="focused_button_dark">#26CCCCCC</color>
