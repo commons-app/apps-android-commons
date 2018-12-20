@@ -32,6 +32,10 @@ public class NearbyPlaces {
     private final String wikidataQuery;
     public double radius = INITIAL_RADIUS;
 
+    /**
+     * Reads Wikidata query to check nearby wikidata items which needs picture, with a circular
+     * search. As a point is center of a circle with a radius will be set later.
+     */
     public NearbyPlaces() {
         try {
             wikidataQuery = FileUtils.readFromResource("/queries/nearby_query.rq");
@@ -41,6 +45,20 @@ public class NearbyPlaces {
         }
     }
 
+    /**
+     * Returns list of nearby places around curLatLng or closest result near curLatLng. This decision
+     * is made according to returnClosestResult variable. If returnClosestResult true, then our
+     * number of min results set to 1, and max radius to search is set to 5. If there is no place
+     * in 5 km radius, empty list will be returned. This method sets radius variable according to
+     * search type (returnClosestResult or not), but search operation will be handled in overloaded
+     * method below, which is called from this method.
+     * @param curLatLng Our reference location
+     * @param lang Language we will display results in
+     * @param returnClosestResult If true, return only first result found, else found satisfactory
+     *                            number of results
+     * @return List of nearby places around, or closest nearby place
+     * @throws IOException
+     */
     List<Place> getFromWikidataQuery(LatLng curLatLng, String lang, boolean returnClosestResult) throws IOException {
         List<Place> places = Collections.emptyList();
 
@@ -81,6 +99,16 @@ public class NearbyPlaces {
         return places;
     }
 
+    /**
+     * Creates and sends query for nearby wikidata items needs picture.
+     * Reads results from query and turns them into meaningful place variables.
+     * Adds them to the list of places.
+     * @param cur Our reference location to check around
+     * @param lang Language we will display results in
+     * @param radius Our query area is a circle, where cur is center and radius is radius
+     * @return
+     * @throws IOException
+     */
     private List<Place> getFromWikidataQuery(LatLng cur,
                                              String lang,
                                              double radius)

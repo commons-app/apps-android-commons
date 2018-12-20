@@ -101,7 +101,10 @@
   <string name="no_uploads_yet">You have not yet uploaded any photos.</string>
   <string name="menu_retry_upload">Retry</string>
   <string name="menu_cancel_upload">Cancel</string>
-  <string name="share_license_summary">This image will be licensed under %1$s</string>
+  <plurals name="share_license_summary">
+    <item quantity="one">This image will be licensed under %1$s</item>
+    <item quantity="other">These images will be licensed under %1$s</item>
+  </plurals>
   <string name="media_upload_policy">By submitting this picture, I declare that this is my own work, that it does not contain copyrighted material or selfies, and otherwise adheres to &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines\"&gt;Wikimedia Commons policies&lt;/a&gt;.</string>
   <string name="menu_download">Download</string>
   <string name="preference_license">Default License</string>
@@ -434,9 +437,13 @@ Upload your first media by touching the camera or gallery icon above.</string>
   <string name="never_ask_again">Never ask this again</string>
   <string name="display_location_permission_title">Display location permission</string>
   <string name="display_location_permission_explanation">Ask for location permission when needed for nearby notification card view feature.</string>
+  <string name="achievements_fetch_failed">Something went wrong, We could not fetch your achievements</string>
   <string name="ends_on">Ends on:</string>
   <string name="display_campaigns">Display campaigns</string>
   <string name="display_campaigns_explanation">Tap here to see the ongoing campaigns</string>
   <string name="nearby_campaign_dismiss_message">You won\'t see the campaigns anymore. However, you can re-enable this notification in Settings if you wish.</string>
+
+  <string name="this_function_needs_network_connection">This function requires network connection, please check your connection settings.</string>
+  <string name="bad_token_error_proposed_solution">Upload failed due to issues with edit token. Please try logging out and in again. </string>
 
 </resources>

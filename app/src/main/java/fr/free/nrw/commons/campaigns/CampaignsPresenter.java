@@ -73,21 +73,23 @@ public class CampaignsPresenter implements BasePresenter {
                             }
                             return date1.compareTo(date2);
                         });
-                        Date campaignEndDate = null;
+                        Date campaignEndDate, campaignStartDate;
+                        Date currentDate = new Date();
                         try {
-                            campaignEndDate = dateFormat.parse(campaigns.get(0).getEndDate());
+                            for (Campaign aCampaign : campaigns) {
+                                campaignEndDate = dateFormat.parse(aCampaign.getEndDate());
+                                campaignStartDate =
+                                    dateFormat.parse(aCampaign.getStartDate());
+                                if (campaignEndDate.compareTo(currentDate) >= 0
+                                    && campaignStartDate.compareTo(currentDate) <= 0) {
+                                    campaign = aCampaign;
+                                    break;
+                                }
+                            }
                         } catch (ParseException e) {
                             e.printStackTrace();
                         }
-                        if (campaignEndDate == null) {
-                            view.showCampaigns(null);
-                        } else if (campaignEndDate.compareTo(new Date()) > 0) {
-                            campaign = campaigns.get(0);
-                            view.showCampaigns(campaign);
-                        } else {
-                            Log.e(TAG, "The campaigns has already finished");
-                            view.showCampaigns(null);
-                        }
+                        view.showCampaigns(campaign);
                     }
 
                     @Override public void onError(Throwable e) {

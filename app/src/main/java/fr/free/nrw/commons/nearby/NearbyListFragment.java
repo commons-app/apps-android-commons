@@ -92,6 +92,9 @@ public class NearbyListFragment extends DaggerFragment {
         recyclerView.setAdapter(adapterFactory.create(getPlaceListFromBundle(bundle)));
     }
 
+    /**
+     * Updates nearby list elements all together
+     */
     public void updateNearbyListSignificantly() {
         try {
             adapterFactory.updateAdapterData(getPlaceListFromBundle(bundleForUpdates), (RVRendererAdapter<Place>) recyclerView.getAdapter());
@@ -103,7 +106,7 @@ public class NearbyListFragment extends DaggerFragment {
     /**
      * While nearby updates for current location held with bundle, automatically, custom updates are
      * done by calling this methods, triddered by search this are button input from user.
-     * @param placeList
+     * @param placeList List of nearby places to be added list fragment
      */
     public void updateNearbyListSignificantlyForCustomLocation(List<Place> placeList) {
         try {
@@ -113,6 +116,13 @@ public class NearbyListFragment extends DaggerFragment {
         }
     }
 
+    /**
+     * When user moved too much, we need to update nearby list too. This operation is made by passing
+     * a bundle from NearbyFragment to NearbyListFragment and NearbyMapFragment. This method extracts
+     * place list from bundle to a list variable.
+     * @param bundle Bundle passed from NearbyFragment on users significant moving
+     * @return List of new nearby places
+     */
     private List<Place> getPlaceListFromBundle(Bundle bundle) {
         List<Place> placeList = Collections.emptyList();
 
@@ -176,6 +186,10 @@ public class NearbyListFragment extends DaggerFragment {
         }
     }
 
+    /**
+     * Sets bundles for updates in map. Ie. user is moved too much so we need to update nearby markers.
+     * @param bundleForUpdates includes new calculated nearby places.
+     */
     public void setBundleForUpdates(Bundle bundleForUpdates) {
         this.bundleForUpdates = bundleForUpdates;
     }

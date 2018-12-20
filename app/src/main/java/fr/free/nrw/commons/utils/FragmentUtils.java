@@ -28,4 +28,13 @@ public class FragmentUtils {
         }
         return false;
     }
+
+    /**
+     * Utility function to check whether the fragment UI is still active or not
+     * @param fragment
+     * @return
+     */
+    public static boolean isFragmentUIActive(Fragment fragment) {
+        return fragment.getActivity() != null && fragment.isAdded() && !fragment.isDetached() && !fragment.isRemoving();
+    }
 }
