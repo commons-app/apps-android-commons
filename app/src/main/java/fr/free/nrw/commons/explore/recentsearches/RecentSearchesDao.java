@@ -58,9 +58,14 @@ public class RecentSearchesDao {
         Cursor cursor = null;
         ContentProviderClient db = clientProvider.get();
         try {
-            cursor = db.query( RecentSearchesContentProvider.BASE_URI, Table.ALL_FIELDS,
-                    null, new String[]{}, Table.COLUMN_LAST_USED + " DESC");
-            while (cursor != null && cursor.moveToNext() ) {
+            cursor = db.query(
+                    RecentSearchesContentProvider.BASE_URI,
+                    Table.ALL_FIELDS,
+                    null,
+                    new String[]{},
+                    Table.COLUMN_LAST_USED + " DESC"
+            );
+            while (cursor != null && cursor.moveToNext()) {
                 try {
                     RecentSearch recentSearch = find(fromCursor(cursor).getQuery());
                     if (recentSearch.getContentUri() == null) {
@@ -80,7 +85,9 @@ public class RecentSearchesDao {
         } catch (RemoteException e) {
             throw new RuntimeException(e);
         } finally {
-            cursor.close();
+            if (cursor != null) {
+                cursor.close();
+            }
         }
     }
 
