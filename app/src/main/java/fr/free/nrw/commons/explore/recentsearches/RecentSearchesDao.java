@@ -52,11 +52,24 @@ public class RecentSearchesDao {
 
     /**
      * This method is called on confirmation of delete recent searches.
-     * It deletes latest 10 recent searches from the database
-     * @param recentSearchesStringList list of recent searches to be deleted
+     * It deletes all recent searches from the database
      */
-    public void deleteAll(List<String> recentSearchesStringList) {
+    public void deleteAll() {
+        List<String> recentSearchesStringList = new ArrayList<>();
+        Cursor cursor = null;
         ContentProviderClient db = clientProvider.get();
+        try {
+            cursor = db.query( RecentSearchesContentProvider.BASE_URI, Table.ALL_FIELDS,
+                    null, new String[]{}, Table.COLUMN_LAST_USED + " DESC");
+            // fixme add a limit on the original query instead of falling out of the loop?
+            while (cursor != null && cursor.moveToNext() ) {
+                recentSearchesStringList.add(fromCursor(cursor).getQuery());
+            }
+        } catch (RemoteException e) {
+            throw new RuntimeException(e);
+        } finally {
+                cursor.close();
+        }
         for (String recentSearchName : recentSearchesStringList) {
             try {
                 RecentSearch recentSearch = find(recentSearchName);
