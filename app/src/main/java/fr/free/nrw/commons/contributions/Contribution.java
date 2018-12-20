@@ -2,8 +2,11 @@ package fr.free.nrw.commons.contributions;
 
 import android.net.Uri;
 import android.os.Parcel;
+import android.support.annotation.IntDef;
 import android.support.annotation.NonNull;
+import android.support.annotation.StringDef;
 
+import java.lang.annotation.Retention;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
@@ -12,6 +15,8 @@ import fr.free.nrw.commons.BuildConfig;
 import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.settings.Prefs;
+
+import static java.lang.annotation.RetentionPolicy.SOURCE;
 
 public class  Contribution extends Media {
 
@@ -33,6 +38,10 @@ public class  Contribution extends Media {
     public static final int STATE_QUEUED = 2;
     public static final int STATE_IN_PROGRESS = 3;
 
+    @Retention(SOURCE)
+    @StringDef({SOURCE_CAMERA, SOURCE_GALLERY, SOURCE_EXTERNAL})
+    public @interface FileSource {}
+
     public static final String SOURCE_CAMERA = "camera";
     public static final String SOURCE_GALLERY = "gallery";
     public static final String SOURCE_EXTERNAL = "external";
@@ -40,7 +49,6 @@ public class  Contribution extends Media {
     private Uri contentUri;
     private String source;
     private String editSummary;
-    private Date timestamp;
     private int state;
     private long transferred;
     private String decimalCoords;
@@ -48,14 +56,13 @@ public class  Contribution extends Media {
     private String wikiDataEntityId;
     private Uri contentProviderUri;
 
-    public Contribution(Uri contentUri, String filename, Uri localUri, String imageUrl, Date timestamp,
+    public Contribution(Uri contentUri, String filename, Uri localUri, String imageUrl, Date dateCreated,
                         int state, long dataLength, Date dateUploaded, long transferred,
                         String source, String description, String creator, boolean isMultiple,
                         int width, int height, String license) {
-        super(localUri, imageUrl, filename, description, dataLength, timestamp, dateUploaded, creator);
+        super(localUri, imageUrl, filename, description, dataLength, dateCreated, dateUploaded, creator);
         this.contentUri = contentUri;
         this.state = state;
-        this.timestamp = timestamp;
         this.transferred = transferred;
         this.source = source;
         this.isMultiple = isMultiple;
@@ -69,14 +76,12 @@ public class  Contribution extends Media {
         super(localUri, imageUrl, filename, description, dataLength, dateCreated, dateUploaded, creator);
         this.decimalCoords = decimalCoords;
         this.editSummary = editSummary;
-        timestamp = new Date(System.currentTimeMillis());
     }
 
     public Contribution(Parcel in) {
         super(in);
         contentUri = in.readParcelable(Uri.class.getClassLoader());
         source = in.readString();
-        timestamp = (Date) in.readSerializable();
         state = in.readInt();
         transferred = in.readLong();
         isMultiple = in.readInt() == 1;
@@ -87,11 +92,12 @@ public class  Contribution extends Media {
         super.writeToParcel(parcel, flags);
         parcel.writeParcelable(contentUri, flags);
         parcel.writeString(source);
-        parcel.writeSerializable(timestamp);
         parcel.writeInt(state);
         parcel.writeLong(transferred);
         parcel.writeInt(isMultiple ? 1 : 0);
     }
+
+
 
     public boolean getMultiple() {
         return isMultiple;
@@ -121,14 +127,6 @@ public class  Contribution extends Media {
         this.contentUri = contentUri;
     }
 
-    public Date getTimestamp() {
-        return timestamp;
-    }
-
-    public void setTimestamp(Date timestamp) {
-        this.timestamp = timestamp;
-    }
-
     public int getState() {
         return state;
     }
@@ -139,10 +137,6 @@ public class  Contribution extends Media {
 
     public void setDateUploaded(Date date) {
         this.dateUploaded = date;
-    }
-
-    public String getTrackingTemplates() {
-        return "{{subst:unc}}";  // Remove when we have categorization
     }
 
     public String getPageContents() {
@@ -169,8 +163,15 @@ public class  Contribution extends Media {
 
         buffer.append("== {{int:license-header}} ==\n")
                 .append(licenseTemplateFor(getLicense())).append("\n\n")
-                .append("{{Uploaded from Mobile|platform=Android|version=").append(BuildConfig.VERSION_NAME).append("}}\n")
-                .append(getTrackingTemplates());
+                .append("{{Uploaded from Mobile|platform=Android|version=").append(BuildConfig.VERSION_NAME).append("}}\n");
+        if(categories!=null&&categories.size()!=0) {
+            for (int i = 0; i < categories.size(); i++) {
+                String category = categories.get(i);
+                buffer.append("\n[[Category:").append(category).append("]]");
+            }
+        }
+        else
+            buffer.append("{{subst:unc}}");
         return buffer.toString();
     }
 
@@ -184,7 +185,7 @@ public class  Contribution extends Media {
     }
 
     public Contribution() {
-        timestamp = new Date(System.currentTimeMillis());
+
     }
 
     public String getSource() {
@@ -232,7 +233,7 @@ public class  Contribution extends Media {
     /**
      * When the corresponding wikidata entity is known as in case of nearby uploads, it can be set
      * using the setter method
-     * @param wikiDataEntityId
+     * @param wikiDataEntityId wikiDataEntityId
      */
     public void setWikiDataEntityId(String wikiDataEntityId) {
         this.wikiDataEntityId = wikiDataEntityId;

@@ -57,7 +57,7 @@
   <string name="provider_contributions">ההעלאות שלי</string>
   <string name="menu_share">שיתוף</string>
   <string name="menu_open_in_browser">הצגה בדפדפן</string>
-  <string name="share_title_hint">כותרת</string>
+  <string name="share_title_hint">כותרת (נדרש)</string>
   <string name="add_title_toast">נא לתת כותרת לקובץ הזה</string>
   <string name="share_description_hint">תיאור</string>
   <string name="login_failed_network">לא ניתן להיכנס – כשל בתקשורת</string>
@@ -80,8 +80,8 @@
   <string name="contributions_subtitle_zero">לא הועלה עדיין שום דבר</string>
   <plurals name="contributions_subtitle">
     <item quantity="zero">\@string/contributions_subtitle_zero</item>
-    <item quantity="one">העלאה אחת</item>
-    <item quantity="other">%1$d העלאות</item>
+    <item quantity="one">(%1$d)</item>
+    <item quantity="other">(%1$d)</item>
   </plurals>
   <plurals name="starting_multiple_uploads">
     <item quantity="one">התחלת העלאה</item>
@@ -177,7 +177,7 @@
   <string name="title_activity_nearby">מקומות בסביבה</string>
   <string name="no_nearby">לא נמצאו מקומות בסביבה</string>
   <string name="warning">אזהרה</string>
-  <string name="file_exists">הקובץ הזה כבר קיים בוויקישיתוף. האם להמשיך?</string>
+  <string name="upload_image_duplicate">הקובץ הזה כבר קיים בוויקישיתוף. האם להמשיך?</string>
   <string name="yes">כן</string>
   <string name="no">לא</string>
   <string name="media_detail_title">כותרת</string>

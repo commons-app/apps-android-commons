@@ -39,7 +39,7 @@
   <string name="provider_contributions">Min huuchschüürd datein</string>
   <string name="menu_share">Skaft</string>
   <string name="menu_open_in_browser">Uun browser uunwise</string>
-  <string name="share_title_hint">Tiitel</string>
+  <string name="share_title_hint" fuzzy="true">Tiitel</string>
   <string name="share_description_hint">Beskriiwang</string>
   <string name="login_failed_network">Bi\'t uunmeldin as wat skiaf gingen - näätwerk-feeler</string>
   <string name="login_failed_throttled">Tu fölsis fersoocht saner lok. Ferschük det uun hög minüüten noch ans nei.</string>
@@ -141,7 +141,6 @@
   <string name="title_activity_nearby">Steeden naibi</string>
   <string name="no_nearby">Nian steeden uun a naite fünjen</string>
   <string name="warning">Wäärnang</string>
-  <string name="file_exists">Detdiar datei jaft det al üüb Commons. Beest dü seeker, dat dü widjer maage wel?</string>
   <string name="yes">Ja</string>
   <string name="no">Naan</string>
   <string name="media_detail_title">Tiitel</string>

@@ -48,13 +48,18 @@ public class WikidataEditService {
      * @param fileName
      */
     public void createClaimWithLogging(String wikidataEntityId, String fileName) {
-        if(wikidataEntityId == null) {
+        if (wikidataEntityId == null) {
             Timber.d("Skipping creation of claim as Wikidata entity ID is null");
             return;
         }
 
-        if(fileName == null) {
+        if (fileName == null) {
             Timber.d("Skipping creation of claim as fileName entity ID is null");
+            return;
+        }
+
+        if (!(directPrefs.getBoolean("Picture_Has_Correct_Location",true))) {
+            Timber.d("Image location and nearby place location mismatched, so Wikidata item won't be edited");
             return;
         }
 
@@ -110,9 +115,7 @@ public class WikidataEditService {
                     } else {
                         Timber.d("Wikidata edit couldn't be tagged");
                     }
-                }, throwable -> {
-                    Timber.e(throwable, "Error occurred while adding tag to the edit");
-                });
+                }, throwable -> Timber.e(throwable, "Error occurred while adding tag to the edit"));
     }
 
     /**

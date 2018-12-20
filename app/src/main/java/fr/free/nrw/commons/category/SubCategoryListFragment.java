@@ -73,7 +73,7 @@ public class SubCategoryListFragment extends CommonsDaggerSupportFragment {
         categoryName = getArguments().getString("categoryName");
         isParentCategory = getArguments().getBoolean("isParentCategory");
         initSubCategoryList();
-        if(getActivity().getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT){
+        if (getActivity().getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT){
             categoriesRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         }
         else{
@@ -91,7 +91,7 @@ public class SubCategoryListFragment extends CommonsDaggerSupportFragment {
      */
     public void initSubCategoryList() {
         categoriesNotFoundView.setVisibility(GONE);
-        if(!NetworkUtils.isInternetConnectionEstablished(getContext())) {
+        if (!NetworkUtils.isInternetConnectionEstablished(getContext())) {
             handleNoInternet();
             return;
         }
@@ -118,7 +118,7 @@ public class SubCategoryListFragment extends CommonsDaggerSupportFragment {
      * @param subCategoryList
      */
     private void handleSuccess(List<String> subCategoryList) {
-        if(subCategoryList == null || subCategoryList.isEmpty()) {
+        if (subCategoryList == null || subCategoryList.isEmpty()) {
             initEmptyView();
         }
         else {
@@ -135,10 +135,10 @@ public class SubCategoryListFragment extends CommonsDaggerSupportFragment {
     private void handleError(Throwable throwable) {
         if (!isParentCategory){
             Timber.e(throwable, "Error occurred while loading queried subcategories");
-            ViewUtil.showSnackbar(categoriesRecyclerView,R.string.error_loading_categories);
+            ViewUtil.showShortSnackbar(categoriesRecyclerView,R.string.error_loading_categories);
         }else {
             Timber.e(throwable, "Error occurred while loading queried parentcategories");
-            ViewUtil.showSnackbar(categoriesRecyclerView,R.string.error_loading_categories);
+            ViewUtil.showShortSnackbar(categoriesRecyclerView,R.string.error_loading_categories);
         }
     }
 
@@ -161,6 +161,6 @@ public class SubCategoryListFragment extends CommonsDaggerSupportFragment {
      */
     private void handleNoInternet() {
         progressBar.setVisibility(GONE);
-        ViewUtil.showSnackbar(categoriesRecyclerView, R.string.no_internet);
+        ViewUtil.showShortSnackbar(categoriesRecyclerView, R.string.no_internet);
     }
 }

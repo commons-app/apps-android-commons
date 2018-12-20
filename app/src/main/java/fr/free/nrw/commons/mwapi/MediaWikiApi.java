@@ -4,6 +4,7 @@ import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
+import fr.free.nrw.commons.campaigns.CampaignResponseDTO;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
@@ -104,6 +105,8 @@ public interface MediaWikiApi {
     Single<Media> getPictureOfTheDay();
 
     void logout();
+
+    Single<CampaignResponseDTO> getCampaigns();
 
     interface ProgressListener {
         void onProgress(long transferred, long total);

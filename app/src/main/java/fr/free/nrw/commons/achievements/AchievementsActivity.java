@@ -185,7 +185,8 @@ public class AchievementsActivity extends NavigationBaseActivity {
      * which then calls parseJson when results are fetched
      */
     private void setAchievements() {
-        if(checkAccount()) {
+        progressBar.setVisibility(View.VISIBLE);
+        if (checkAccount()) {
             compositeDisposable.add(mediaWikiApi
                     .getAchievements(Objects.requireNonNull(sessionManager.getCurrentAccount()).name)
                     .subscribeOn(Schedulers.io())
@@ -195,15 +196,21 @@ public class AchievementsActivity extends NavigationBaseActivity {
                                 if (response != null) {
                                     setUploadCount(Achievements.from(response));
                                 } else {
-                                    onError();
+                                    showSnackBarWithRetry();
                                 }
                             },
                             t -> {
                                 Timber.e(t, "Fetching achievements statistics failed");
-                                onError();
+                                showSnackBarWithRetry();
                             }
                     ));
         }
+    }
+
+    private void showSnackBarWithRetry() {
+        progressBar.setVisibility(View.GONE);
+        ViewUtil.showDismissibleSnackBar(findViewById(android.R.id.content),
+            R.string.achievements_fetch_failed, R.string.retry, view -> setAchievements());
     }
 
     /**
@@ -218,7 +225,7 @@ public class AchievementsActivity extends NavigationBaseActivity {
      * used to the count of images uploaded by user
      */
     private void setUploadCount(Achievements achievements) {
-        if(checkAccount()) {
+        if (checkAccount()) {
             compositeDisposable.add(mediaWikiApi
                     .getUploadCount(Objects.requireNonNull(sessionManager.getCurrentAccount()).name)
                     .subscribeOn(Schedulers.io())
@@ -338,9 +345,9 @@ public class AchievementsActivity extends NavigationBaseActivity {
         AlertDialog.Builder alertadd = new AlertDialog.Builder(AchievementsActivity.this);
         LayoutInflater factory = LayoutInflater.from(AchievementsActivity.this);
         final View view = factory.inflate(R.layout.image_alert_layout, null);
-        ImageView screenShotImage = (ImageView) view.findViewById(R.id.alert_image);
+        ImageView screenShotImage = view.findViewById(R.id.alert_image);
         screenShotImage.setImageBitmap(screenshot);
-        TextView shareMessage = (TextView) view.findViewById(R.id.alert_text);
+        TextView shareMessage = view.findViewById(R.id.alert_text);
         shareMessage.setText(R.string.achievements_share_message);
         alertadd.setView(view);
         alertadd.setPositiveButton(R.string.about_translate_proceed, (dialog, which) -> shareScreen(screenshot));
@@ -387,7 +394,7 @@ public class AchievementsActivity extends NavigationBaseActivity {
      */
     private boolean checkAccount(){
         Account currentAccount = sessionManager.getCurrentAccount();
-        if(currentAccount == null) {
+        if (currentAccount == null) {
         Timber.d("Current account is null");
         ViewUtil.showLongToast(this, getResources().getString(R.string.user_not_logged_in));
         sessionManager.forceLogin(this);

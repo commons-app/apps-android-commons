@@ -1,38 +1,32 @@
 package fr.free.nrw.commons.upload;
 
 import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.content.ContentResolver;
-import android.content.Context;
 import android.content.SharedPreferences;
+import android.media.ExifInterface;
 import android.net.Uri;
 import android.os.Build;
-import android.os.Bundle;
 import android.os.ParcelFileDescriptor;
-import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
+import android.support.annotation.NonNull;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.lang.ref.WeakReference;
-import java.util.Date;
 import java.util.List;
 
 import javax.inject.Inject;
 import javax.inject.Named;
+import javax.inject.Singleton;
 
 import fr.free.nrw.commons.caching.CacheController;
-import fr.free.nrw.commons.di.ApplicationlessInjection;
 import fr.free.nrw.commons.mwapi.CategoryApi;
 import io.reactivex.schedulers.Schedulers;
 import timber.log.Timber;
 
-import static com.mapbox.mapboxsdk.Mapbox.getApplicationContext;
-
 /**
  * Processing of the image file that is about to be uploaded via ShareActivity is done here
  */
+@Singleton
 public class FileProcessor implements SimilarImageDialogFragment.onResponse {
 
     @Inject
@@ -44,102 +38,52 @@ public class FileProcessor implements SimilarImageDialogFragment.onResponse {
     @Inject
     @Named("default_preferences")
     SharedPreferences prefs;
-    private Uri mediaUri;
+    private String filePath;
     private ContentResolver contentResolver;
     private GPSExtractor imageObj;
-    private Context context;
     private String decimalCoords;
+    private ExifInterface exifInterface;
     private boolean haveCheckedForOtherImages = false;
-    private String filePath;
-    private boolean useExtStorage;
-    private boolean cacheFound;
     private GPSExtractor tempImageObj;
 
-    FileProcessor(Uri mediaUri, ContentResolver contentResolver, Context context) {
-        this.mediaUri = mediaUri;
-        this.contentResolver = contentResolver;
-        this.context = context;
-        ApplicationlessInjection.getInstance(context.getApplicationContext()).getCommonsApplicationComponent().inject(this);
-        useExtStorage = prefs.getBoolean("useExternalStorage", true);
+    @Inject
+    FileProcessor() {
     }
 
-    /**
-     * Gets file path from media URI.
-     * In older devices getPath() may fail depending on the source URI, creating and using a copy of the file seems to work instead.
-     *
-     * @return file path of media
-     */
-    @Nullable
-    private String getPathOfMediaOrCopy() {
-        filePath = FileUtils.getPath(context, mediaUri);
-        Timber.d("Filepath: " + filePath);
-        if (filePath == null) {
-            String copyPath = null;
-            try {
-                ParcelFileDescriptor descriptor = contentResolver.openFileDescriptor(mediaUri, "r");
-                if (descriptor != null) {
-                    if (useExtStorage) {
-                        copyPath = FileUtils.createCopyPath(descriptor);
-                        return copyPath;
-                    }
-                    copyPath = getApplicationContext().getCacheDir().getAbsolutePath() + "/" + new Date().getTime() + ".jpg";
-                    FileUtils.copy(descriptor.getFileDescriptor(), copyPath);
-                    Timber.d("Filepath (copied): %s", copyPath);
-                    return copyPath;
-                }
-            } catch (IOException e) {
-                Timber.w(e, "Error in file " + copyPath);
-                return null;
-            }
+    void initFileDetails(@NonNull String filePath, ContentResolver contentResolver) {
+        this.filePath = filePath;
+        this.contentResolver = contentResolver;
+        try {
+            exifInterface = new ExifInterface(filePath);
+        } catch (IOException e) {
+            Timber.e(e);
         }
-        return filePath;
     }
 
     /**
      * Processes file coordinates, either from EXIF data or user location
-     *
-     * @param gpsEnabled if true use GPS
      */
-    GPSExtractor processFileCoordinates(boolean gpsEnabled) {
+    GPSExtractor processFileCoordinates(SimilarImageInterface similarImageInterface) {
         Timber.d("Calling GPSExtractor");
-        try {
-            ParcelFileDescriptor descriptor = contentResolver.openFileDescriptor(mediaUri, "r");
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-                if (descriptor != null) {
-                    imageObj = new GPSExtractor(descriptor.getFileDescriptor());
-                }
-            } else {
-                String filePath = getPathOfMediaOrCopy();
-                if (filePath != null) {
-                    imageObj = new GPSExtractor(filePath);
-                }
-            }
-
-            decimalCoords = imageObj.getCoords();
-            if (decimalCoords == null || !imageObj.imageCoordsExists) {
-                //Find other photos taken around the same time which has gps coordinates
-                if (!haveCheckedForOtherImages)
-                    findOtherImages();// Do not do repeat the process
-            } else {
-                useImageCoords();
-            }
-
-        } catch (FileNotFoundException e) {
-            Timber.w("File not found: " + mediaUri, e);
+        imageObj = new GPSExtractor(exifInterface);
+        decimalCoords = imageObj.getCoords();
+        if (decimalCoords == null || !imageObj.imageCoordsExists) {
+            //Find other photos taken around the same time which has gps coordinates
+            if (!haveCheckedForOtherImages)
+                findOtherImages(similarImageInterface);// Do not do repeat the process
+        } else {
+            useImageCoords();
         }
-        return imageObj;
-    }
 
-    String getDecimalCoords() {
-        return decimalCoords;
+        return imageObj;
     }
 
     /**
      * Find other images around the same location that were taken within the last 20 sec
-     *
+     * @param similarImageInterface
      */
-    private void findOtherImages() {
-        Timber.d("filePath" + getPathOfMediaOrCopy());
+    private void findOtherImages(SimilarImageInterface similarImageInterface) {
+        Timber.d("filePath" + filePath);
 
         long timeOfCreation = new File(filePath).lastModified();//Time when the original image was created
         File folder = new File(filePath.substring(0, filePath.lastIndexOf('/')));
@@ -154,7 +98,7 @@ public class FileProcessor implements SimilarImageDialogFragment.onResponse {
                 tempImageObj = null;//Temporary GPSExtractor to extract coords from these photos
                 ParcelFileDescriptor descriptor = null;
                 try {
-                    descriptor = contentResolver.openFileDescriptor(Uri.parse(file.getAbsolutePath()), "r");
+                    descriptor = contentResolver.openFileDescriptor(Uri.fromFile(file), "r");
                 } catch (FileNotFoundException e) {
                     e.printStackTrace();
                 }
@@ -173,12 +117,7 @@ public class FileProcessor implements SimilarImageDialogFragment.onResponse {
                     if (tempImageObj.getCoords() != null && tempImageObj.imageCoordsExists) {
                         // Current image has gps coordinates and it's not current gps locaiton
                         Timber.d("This file has image coords:" + file.getAbsolutePath());
-                        SimilarImageDialogFragment newFragment = new SimilarImageDialogFragment();
-                        Bundle args = new Bundle();
-                        args.putString("originalImagePath", filePath);
-                        args.putString("possibleImagePath", file.getAbsolutePath());
-                        newFragment.setArguments(args);
-                        newFragment.show(((AppCompatActivity) context).getSupportFragmentManager(), "dialog");
+                        similarImageInterface.showSimilarImageFragment(filePath, file.getAbsolutePath());
                         break;
                     }
                 }
@@ -192,7 +131,7 @@ public class FileProcessor implements SimilarImageDialogFragment.onResponse {
      * Then initiates the calls to MediaWiki API through an instance of CategoryApi.
      */
     @SuppressLint("CheckResult")
-    public void useImageCoords() {
+    private void useImageCoords() {
         if (decimalCoords != null) {
             Timber.d("Decimal coords of image: %s", decimalCoords);
             Timber.d("is EXIF data present:" + imageObj.imageCoordsExists + " from findOther image");
@@ -210,7 +149,6 @@ public class FileProcessor implements SimilarImageDialogFragment.onResponse {
 
             // If no categories found in cache, call MediaWiki API to match image coords with nearby Commons categories
             if (catListEmpty) {
-                cacheFound = false;
                 apiCall.request(decimalCoords)
                         .subscribeOn(Schedulers.io())
                         .observeOn(Schedulers.io())
@@ -223,27 +161,12 @@ public class FileProcessor implements SimilarImageDialogFragment.onResponse {
                         );
                 Timber.d("displayCatList size 0, calling MWAPI %s", displayCatList);
             } else {
-                cacheFound = true;
                 Timber.d("Cache found, setting categoryList in model to %s", displayCatList);
                 gpsCategoryModel.setCategoryList(displayCatList);
             }
         } else {
             Timber.d("EXIF: no coords");
         }
-    }
-
-    boolean isCacheFound() {
-        return cacheFound;
-    }
-
-    /**
-     * Calls the async task that detects if image is fuzzy, too dark, etc
-     */
-    void detectUnwantedPictures() {
-        String imageMediaFilePath = FileUtils.getPath(context, mediaUri);
-        DetectUnwantedPicturesAsync detectUnwantedPicturesAsync
-                = new DetectUnwantedPicturesAsync(new WeakReference<Activity>((Activity) context), imageMediaFilePath);
-        detectUnwantedPicturesAsync.execute();
     }
 
     @Override

@@ -14,21 +14,33 @@ import timber.log.Timber;
  * Extracts geolocation to be passed to API for category suggestions. If a picture with geolocation
  * is uploaded, extract latitude and longitude from EXIF data of image.
  */
-public class GPSExtractor {
+class GPSExtractor {
 
-    private ExifInterface exif;
+    static final GPSExtractor DUMMY= new GPSExtractor();
     private double decLatitude;
     private double decLongitude;
-    public boolean imageCoordsExists;
+    boolean imageCoordsExists;
+    private String latitude;
+    private String longitude;
+    private String latitudeRef;
+    private String longitudeRef;
+    private String decimalCoords;
 
+    /**
+     * Dummy constructor.
+     */
+    private GPSExtractor(){
+
+    }
     /**
      * Construct from the file descriptor of the image (only for API 24 or newer).
      * @param fileDescriptor the file descriptor of the image
      */
     @RequiresApi(24)
-    public GPSExtractor(@NonNull FileDescriptor fileDescriptor) {
+    GPSExtractor(@NonNull FileDescriptor fileDescriptor) {
         try {
-            exif = new ExifInterface(fileDescriptor);
+            ExifInterface exif = new ExifInterface(fileDescriptor);
+            processCoords(exif);
         } catch (IOException | IllegalArgumentException e) {
             Timber.w(e);
         }
@@ -39,31 +51,28 @@ public class GPSExtractor {
      * @param path file path of the image
      *
      */
-    public GPSExtractor(@NonNull String path) {
+    GPSExtractor(@NonNull String path) {
         try {
-            exif = new ExifInterface(path);
+            ExifInterface exif = new ExifInterface(path);
+            processCoords(exif);
         } catch (IOException | IllegalArgumentException e) {
             Timber.w(e);
         }
     }
 
     /**
-     * Extracts geolocation (either of image from EXIF data, or of user)
-     * @return coordinates as string (needs to be passed as a String in API query)
+     * Construct from the file path of the image.
+     * @param exif exif interface of the image
+     *
      */
-    @Nullable
-    public String getCoords() {
-        String latitude;
-        String longitude;
-        String latitudeRef;
-        String longitudeRef;
-        String decimalCoords;
+    GPSExtractor(@NonNull ExifInterface exif){
+        processCoords(exif);
+    }
 
+    private void processCoords(ExifInterface exif){
         //If image has no EXIF data and user has enabled GPS setting, get user's location
-        //TODO: Always return null as a temporary fix for #1599
-        if (exif == null || exif.getAttribute(ExifInterface.TAG_GPS_LATITUDE) == null) {
-            return null;
-        } else {
+        //Always return null as a temporary fix for #1599
+        if (exif != null && exif.getAttribute(ExifInterface.TAG_GPS_LATITUDE) != null) {
             //If image has EXIF data, extract image coords
             imageCoordsExists = true;
             Timber.d("EXIF data has location info");
@@ -72,24 +81,33 @@ public class GPSExtractor {
             latitudeRef = exif.getAttribute(ExifInterface.TAG_GPS_LATITUDE_REF);
             longitude = exif.getAttribute(ExifInterface.TAG_GPS_LONGITUDE);
             longitudeRef = exif.getAttribute(ExifInterface.TAG_GPS_LONGITUDE_REF);
-
-            if (latitude!=null && latitudeRef!=null && longitude!=null && longitudeRef!=null) {
-                Timber.d("Latitude: %s %s", latitude, latitudeRef);
-                Timber.d("Longitude: %s %s", longitude, longitudeRef);
-
-                decimalCoords = getDecimalCoords(latitude, latitudeRef, longitude, longitudeRef);
-                return decimalCoords;
-            } else {
-                return null;
-            }
         }
     }
 
-    public double getDecLatitude() {
+    /**
+     * Extracts geolocation (either of image from EXIF data, or of user)
+     * @return coordinates as string (needs to be passed as a String in API query)
+     */
+    @Nullable
+    String getCoords() {
+        if(decimalCoords!=null){
+            return decimalCoords;
+        }else if (latitude!=null && latitudeRef!=null && longitude!=null && longitudeRef!=null) {
+            Timber.d("Latitude: %s %s", latitude, latitudeRef);
+            Timber.d("Longitude: %s %s", longitude, longitudeRef);
+
+            decimalCoords = getDecimalCoords(latitude, latitudeRef, longitude, longitudeRef);
+            return decimalCoords;
+        } else {
+            return null;
+        }
+    }
+
+    double getDecLatitude() {
         return decLatitude;
     }
 
-    public double getDecLongitude() {
+    double getDecLongitude() {
         return decLongitude;
     }
 

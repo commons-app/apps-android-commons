@@ -1,92 +1,72 @@
 package fr.free.nrw.commons.upload;
 
-import android.text.TextUtils;
+import java.util.List;
 
+/**
+ * Holds a description of an item being uploaded by {@link UploadActivity}
+ */
 class Description {
 
-    private String languageId;
-    private String languageDisplayText;
+    private String languageCode;
     private String descriptionText;
-    private boolean set;
     private int selectedLanguageIndex = -1;
 
     /**
-     * Gets language ID
-     * @return String
+     * @return The language code ie. "en" or "fr"
      */
-    public String getLanguageId() {
-        return languageId;
+    String getLanguageCode() {
+        return languageCode;
     }
 
     /**
-     * Sets language ID
-     * @param languageId
+     * @param languageCode The language code ie. "en" or "fr"
      */
-    public void setLanguageId(String languageId) {
-        this.languageId = languageId;
+    void setLanguageCode(String languageCode) {
+        this.languageCode = languageCode;
     }
 
-    public String getLanguageDisplayText() {
-        return languageDisplayText;
-    }
-
-    /**
-     * Sets language Display Text
-     * @param languageDisplayText
-     */
-    public void setLanguageDisplayText(String languageDisplayText) {
-        this.languageDisplayText = languageDisplayText;
-    }
-
-    /**
-     * Gets description text
-     * @return
-     */
-    public String getDescriptionText() {
+    String getDescriptionText() {
         return descriptionText;
     }
 
-    /**
-     * Sets description text
-     * @param descriptionText
-     */
-    public void setDescriptionText(String descriptionText) {
+    void setDescriptionText(String descriptionText) {
         this.descriptionText = descriptionText;
-
-        if (!TextUtils.isEmpty(descriptionText)) {
-            set = true;
-        }
     }
 
     /**
-     * Checks if set
-     * @return true if set
+     * @return the index of the  language selected in a spinner with {@link SpinnerLanguagesAdapter}
      */
-    public boolean isSet() {
-        return set;
-    }
-
-    /**
-     * Sets set
-     * @param set
-     */
-    public void setSet(boolean set) {
-        this.set = set;
-    }
-
-    /**
-     * Get selected language index
-     * @return int
-     */
-    public int getSelectedLanguageIndex() {
+    int getSelectedLanguageIndex() {
         return selectedLanguageIndex;
     }
 
     /**
-     * Sets selected language index
-     * @param selectedLanguageIndex
+     * @param selectedLanguageIndex the index of the language selected in a spinner with {@link SpinnerLanguagesAdapter}
      */
-    public void setSelectedLanguageIndex(int selectedLanguageIndex) {
+    void setSelectedLanguageIndex(int selectedLanguageIndex) {
         this.selectedLanguageIndex = selectedLanguageIndex;
+    }
+
+
+    /**
+     * Formats the list of descriptions into the format Commons requires for uploads.
+     *
+     * @param descriptions the list of descriptions, description is ignored if text is null.
+     * @return a string with the pattern of {{en|1=descriptionText}}
+     */
+    static String formatList(List<Description> descriptions) {
+        StringBuilder descListString = new StringBuilder();
+        for (Description description : descriptions) {
+            if (!description.isEmpty()) {
+                String individualDescription = String.format("{{%s|1=%s}}", description.getLanguageCode(),
+                        description.getDescriptionText());
+                descListString.append(individualDescription);
+            }
+        }
+        return descListString.toString();
+    }
+
+    public boolean isEmpty() {
+        return descriptionText == null || descriptionText.isEmpty();
     }
 }

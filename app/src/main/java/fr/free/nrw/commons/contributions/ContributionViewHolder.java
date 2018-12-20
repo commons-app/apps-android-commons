@@ -1,6 +1,8 @@
 package fr.free.nrw.commons.contributions;
 
 import android.view.View;
+import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -13,12 +15,18 @@ class ContributionViewHolder {
     final TextView stateView;
     final TextView seqNumView;
     final ProgressBar progressView;
+    final ImageButton retryButton;
+    final ImageButton cancelButton;
+    int position;
 
     ContributionViewHolder(View parent) {
-        imageView = (MediaWikiImageView) parent.findViewById(R.id.contributionImage);
-        titleView = (TextView)parent.findViewById(R.id.contributionTitle);
-        stateView = (TextView)parent.findViewById(R.id.contributionState);
-        seqNumView = (TextView)parent.findViewById(R.id.contributionSequenceNumber);
-        progressView = (ProgressBar)parent.findViewById(R.id.contributionProgress);
+        imageView = parent.findViewById(R.id.contributionImage);
+        titleView = parent.findViewById(R.id.contributionTitle);
+        stateView = parent.findViewById(R.id.contributionState);
+        seqNumView = parent.findViewById(R.id.contributionSequenceNumber);
+        progressView = parent.findViewById(R.id.contributionProgress);
+        retryButton = parent.findViewById(R.id.retryButton);
+        cancelButton = parent.findViewById(R.id.cancelButton);
+        position = 0;
     }
 }

@@ -154,7 +154,7 @@ public class NotificationUtils {
                 notificationText = getWelcomeMessage(context, document);
                 break;
         }
-        return new Notification(type, notificationText, getTimestamp(document), description, link, iconUrl);
+        return new Notification(type, notificationText, getTimestamp(document), description, link, iconUrl, getTimestampWithYear(document));
     }
 
     private static String getNotificationText(Node document) {
@@ -203,7 +203,7 @@ public class NotificationUtils {
     private static String getNotificationIconUrl(Node document) {
         String format = "%s%s";
         Node iconUrl = getNode(getModel(document), "iconUrl");
-        if(iconUrl == null) {
+        if (iconUrl == null) {
             return null;
         } else {
             String url = iconUrl.getTextContent();
@@ -253,6 +253,14 @@ public class NotificationUtils {
         Element timestampElement = (Element) getNode(document, "timestamp");
         if (timestampElement != null) {
             return timestampElement.getAttribute("date");
+        }
+        return "";
+    }
+
+    private static String getTimestampWithYear(Node document) {
+        Element timestampElement = (Element) getNode(document, "timestamp");
+        if (timestampElement != null) {
+            return timestampElement.getAttribute("utcunix");
         }
         return "";
     }

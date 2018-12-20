@@ -2,24 +2,28 @@
 
 Summarize your issue in one sentence (what goes wrong, what did you expect to happen)
 
-_Before creating an issue, please search the existing issues to see if a similar one has already been created. You can search issues by specific labels (e.g. `label:nearby `) or just by typing keywords into the search filter._
+_Before creating an issue, please search the existing issues to see if a similar one has already been created. You can search issues by specific labels (e.g. `label:nearby`) or just by typing keywords into the search filter._
 
 **Steps to reproduce:** 
 
 How can we reproduce the issue? 
 What did you expect the app to do, and what did you see instead?
 
-**Add System logs:**
+**System logs:**
 
+```
 Add logcat files here (if possible).
+
+Need help? See https://github.com/commons-app/apps-android-commons/wiki/Getting-app-logs-from-Android-Studio
+```
 
 **Device and Android version:** 
 
-What make and model device (e.g., Samsung J7) did you encounter this on?  What Android
-version (e.g., Android 4.0 Ice Cream Sandwich or Android 6.0 Marshmallow) are you running?  Is it
- the stock version from the manufacturer or a custom ROM ?
+What make and model device (e.g., Samsung J7) did you encounter this on?
+What Android version (e.g., Android 4.0 Ice Cream Sandwich or Android 6.0 Marshmallow) are you running?
+Is it the stock version from the manufacturer or a custom ROM ?
  
- **Commons app version:** 
+**Commons app version:** 
 
 You can find this information by going to the navigation drawer in the app and tapping 'About'. If you are building from our codebase instead of downloading the app, please also mention the branch and build variant (e.g. master and prodDebug).
 

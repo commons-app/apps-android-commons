@@ -101,7 +101,7 @@ public class CategoryImagesListFragment extends DaggerFragment {
      */
     @SuppressLint("CheckResult")
     private void initList() {
-        if(!NetworkUtils.isInternetConnectionEstablished(getContext())) {
+        if (!NetworkUtils.isInternetConnectionEstablished(getContext())) {
             handleNoInternet();
             return;
         }
@@ -124,7 +124,7 @@ public class CategoryImagesListFragment extends DaggerFragment {
             statusTextView.setVisibility(VISIBLE);
             statusTextView.setText(getString(R.string.no_internet));
         } else {
-            ViewUtil.showSnackbar(parentLayout, R.string.no_internet);
+            ViewUtil.showShortSnackbar(parentLayout, R.string.no_internet);
         }
     }
 
@@ -135,7 +135,7 @@ public class CategoryImagesListFragment extends DaggerFragment {
     private void handleError(Throwable throwable) {
         Timber.e(throwable, "Error occurred while loading images inside a category");
         try{
-            ViewUtil.showSnackbar(parentLayout, R.string.error_loading_images);
+            ViewUtil.showShortSnackbar(parentLayout, R.string.error_loading_images);
             initErrorView();
         }catch (Exception e){
             e.printStackTrace();
@@ -208,7 +208,7 @@ public class CategoryImagesListFragment extends DaggerFragment {
      */
     @SuppressLint("CheckResult")
     private void fetchMoreImages() {
-        if(!NetworkUtils.isInternetConnectionEstablished(getContext())) {
+        if (!NetworkUtils.isInternetConnectionEstablished(getContext())) {
             handleNoInternet();
             return;
         }
@@ -227,13 +227,13 @@ public class CategoryImagesListFragment extends DaggerFragment {
      * @param collection List of new Media to be displayed
      */
     private void handleSuccess(List<Media> collection) {
-        if(collection == null || collection.isEmpty()) {
+        if (collection == null || collection.isEmpty()) {
             initErrorView();
             hasMoreImages = false;
             return;
         }
 
-        if(gridAdapter == null) {
+        if (gridAdapter == null) {
             setAdapter(collection);
         } else {
             if (gridAdapter.containsAll(collection)) {
@@ -263,7 +263,7 @@ public class CategoryImagesListFragment extends DaggerFragment {
      * @return  GridView Adapter
      */
     public ListAdapter getAdapter() {
-        return gridView.getAdapter();
+        return gridAdapter;
     }
 
 }

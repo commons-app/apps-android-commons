@@ -10,6 +10,7 @@ import android.content.Intent;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.v4.app.NotificationCompat;
+import android.util.Log;
 import android.webkit.MimeTypeMap;
 import android.widget.Toast;
 
@@ -36,7 +37,7 @@ import fr.free.nrw.commons.Utils;
 import fr.free.nrw.commons.auth.SessionManager;
 import fr.free.nrw.commons.contributions.Contribution;
 import fr.free.nrw.commons.contributions.ContributionDao;
-import fr.free.nrw.commons.contributions.ContributionsActivity;
+import fr.free.nrw.commons.contributions.MainActivity;
 import fr.free.nrw.commons.contributions.ContributionsContentProvider;
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
 import fr.free.nrw.commons.mwapi.UploadResult;
@@ -62,7 +63,9 @@ public class UploadService extends HandlerService<Contribution> {
     private NotificationCompat.Builder curProgressNotification;
     private int toUpload;
 
-    // The file names of unfinished uploads, used to prevent overwriting
+    /**
+     * The file names of unfinished uploads, used to prevent overwriting
+     */
     private Set<String> unfinishedUploads = new HashSet<>();
 
     // DO NOT HAVE NOTIFICATION ID OF 0 FOR ANYTHING
@@ -86,7 +89,7 @@ public class UploadService extends HandlerService<Contribution> {
         String notificationProgressTitle;
         String notificationFinishingTitle;
 
-        public NotificationUpdateProgressListener(String notificationTag, String notificationProgressTitle, String notificationFinishingTitle, Contribution contribution) {
+        NotificationUpdateProgressListener(String notificationTag, String notificationProgressTitle, String notificationFinishingTitle, Contribution contribution) {
             this.notificationTag = notificationTag;
             this.notificationProgressTitle = notificationProgressTitle;
             this.notificationFinishingTitle = notificationFinishingTitle;
@@ -193,7 +196,7 @@ public class UploadService extends HandlerService<Contribution> {
                 .setContentText(getResources().getQuantityString(R.plurals.uploads_pending_notification_indicator, toUpload, toUpload))
                 .setOngoing(true)
                 .setProgress(100, 0, true)
-                .setContentIntent(PendingIntent.getActivity(this, 0, new Intent(this, ContributionsActivity.class), 0))
+                .setContentIntent(PendingIntent.getActivity(this, 0, new Intent(this, MainActivity.class), 0))
                 .setTicker(getString(R.string.upload_progress_notification_title_in_progress, contribution.getDisplayTitle()));
     }
 
@@ -230,7 +233,7 @@ public class UploadService extends HandlerService<Contribution> {
 
         //As the fileInputStream is null there's no point in continuing the upload process
         //mwapi.upload accepts a NonNull input stream
-        if(fileInputStream == null) {
+        if (fileInputStream == null) {
             Timber.d("File not found");
             return;
         }
@@ -314,11 +317,12 @@ public class UploadService extends HandlerService<Contribution> {
     }
 
     @SuppressLint("StringFormatInvalid")
+    @SuppressWarnings("deprecation")
     private void showFailedNotification(Contribution contribution) {
         Notification failureNotification = new NotificationCompat.Builder(this).setAutoCancel(true)
                 .setSmallIcon(R.drawable.ic_launcher)
                 .setAutoCancel(true)
-                .setContentIntent(PendingIntent.getActivity(this, 0, new Intent(this, ContributionsActivity.class), 0))
+                .setContentIntent(PendingIntent.getActivity(this, 0, new Intent(this, MainActivity.class), 0))
                 .setTicker(getString(R.string.upload_failed_notification_title, contribution.getDisplayTitle()))
                 .setContentTitle(getString(R.string.upload_failed_notification_title, contribution.getDisplayTitle()))
                 .setContentText(getString(R.string.upload_failed_notification_subtitle))
