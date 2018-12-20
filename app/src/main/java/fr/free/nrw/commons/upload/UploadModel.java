@@ -74,8 +74,8 @@ public class UploadModel {
                 FileProcessor fileProcessor) {
         this.licenses = licenses;
         this.prefs = prefs;
+        this.license = prefs.getString(Prefs.DEFAULT_LICENSE, Prefs.Licenses.CC_BY_SA_3);
         this.bitmapRegionDecoderWrapper = bitmapRegionDecoderWrapper;
-        this.license = Prefs.Licenses.CC_BY_SA_3;
         this.licensesByName = licensesByName;
         this.context = context;
         this.mwApi = mwApi;
