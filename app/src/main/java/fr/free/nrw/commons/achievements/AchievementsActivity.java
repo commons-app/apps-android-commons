@@ -185,6 +185,7 @@ public class AchievementsActivity extends NavigationBaseActivity {
      * which then calls parseJson when results are fetched
      */
     private void setAchievements() {
+        progressBar.setVisibility(View.VISIBLE);
         if (checkAccount()) {
             compositeDisposable.add(mediaWikiApi
                     .getAchievements(Objects.requireNonNull(sessionManager.getCurrentAccount()).name)
@@ -195,15 +196,21 @@ public class AchievementsActivity extends NavigationBaseActivity {
                                 if (response != null) {
                                     setUploadCount(Achievements.from(response));
                                 } else {
-                                    onError();
+                                    showSnackBarWithRetry();
                                 }
                             },
                             t -> {
                                 Timber.e(t, "Fetching achievements statistics failed");
-                                onError();
+                                showSnackBarWithRetry();
                             }
                     ));
         }
+    }
+
+    private void showSnackBarWithRetry() {
+        progressBar.setVisibility(View.GONE);
+        ViewUtil.showDismissibleSnackBar(findViewById(android.R.id.content),
+            R.string.achievements_fetch_failed, R.string.retry, view -> setAchievements());
     }
 
     /**

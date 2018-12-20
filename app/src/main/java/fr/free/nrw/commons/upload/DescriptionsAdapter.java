@@ -174,7 +174,10 @@ class DescriptionsAdapter extends RecyclerView.Adapter<DescriptionsAdapter.ViewH
                     descItemEditText.setCompoundDrawablesWithIntrinsicBounds(null, null, null, null);
                 }
 
-                descItemEditText.addTextChangedListener(new AbstractTextWatcher(description::setDescriptionText));
+                descItemEditText.addTextChangedListener(new AbstractTextWatcher(descriptionText->{
+                    descriptions.get(position - 1).setDescriptionText(descriptionText);
+                }));
+
                 descItemEditText.setOnFocusChangeListener((v, hasFocus) -> {
                     if (!hasFocus) {
                         ViewUtil.hideKeyboard(v);
@@ -238,8 +241,8 @@ class DescriptionsAdapter extends RecyclerView.Adapter<DescriptionsAdapter.ViewH
                     ((SpinnerLanguagesAdapter) adapterView.getAdapter()).selectedLangCode = languageCode;
                 }
 
-                    @Override
-                    public void onNothingSelected(AdapterView<?> adapterView) {
+                @Override
+                public void onNothingSelected(AdapterView<?> adapterView) {
 
                 }
             });

@@ -33,7 +33,7 @@ dependencies {
     implementation 'com.github.chrisbanes:PhotoView:2.0.0'
     implementation 'com.github.pedrovgs:renderers:3.3.3'
 
-    implementation 'com.borjabravo:readmoretextview:2.1.0'
+    implementation 'com.mapzen.android:lost:3.0.4'
     implementation('com.mapbox.mapboxsdk:mapbox-android-sdk:5.5.0@aar') {
         transitive = true
     }

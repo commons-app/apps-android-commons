@@ -128,8 +128,8 @@ public class NearbyMapFragment extends DaggerFragment {
     private final double CAMERA_TARGET_SHIFT_FACTOR_PORTRAIT = 0.06;
     private final double CAMERA_TARGET_SHIFT_FACTOR_LANDSCAPE = 0.04;
 
-    private boolean isMapReady;
     public boolean searchThisAreaModeOn = false;
+    public boolean checkingAround = false;
 
     private Bundle bundleForUpdates;// Carry information from activity about changed nearby places and current location
     private boolean searchedAroundCurrentLocation = true;
@@ -359,7 +359,10 @@ public class NearbyMapFragment extends DaggerFragment {
             }
         }
     }
-    
+
+    /**
+     * Initialize all views. TODO: Use bind view instead.
+     */
     private void initViews() {
         Timber.d("initViews called");
         bottomSheetList = ((NearbyFragment)getParentFragment()).view.findViewById(R.id.bottom_sheet);
@@ -404,6 +407,9 @@ public class NearbyMapFragment extends DaggerFragment {
 
     }
 
+    /**
+     * Sets click listeners of FABs, and 2 bottom sheets
+     */
     private void setListeners() {
         fabPlus.setOnClickListener(view -> {
             if (applicationPrefs.getBoolean("login_skipped", false)) {
@@ -510,6 +516,10 @@ public class NearbyMapFragment extends DaggerFragment {
         }
     }
 
+    /**
+     * Sets up map view of first time it created, it passes MapBoxMap options and style assets.
+     * @param savedInstanceState bundle coming from Nearby Fragment
+     */
     private void setupMapView(Bundle savedInstanceState) {
         Timber.d("setupMapView called");
         MapboxMapOptions options = new MapboxMapOptions()
@@ -539,6 +549,10 @@ public class NearbyMapFragment extends DaggerFragment {
         }
     }
 
+    /**
+     * Adds map movement listener to understand swiping with fingers. So that we can display search
+     * this area button to search nearby places for other locations
+     */
     private void addMapMovementListeners() {
 
         mapboxMap.addOnCameraMoveListener(new MapboxMap.OnCameraMoveListener() {
@@ -556,6 +570,7 @@ public class NearbyMapFragment extends DaggerFragment {
                                     , NearbyController.currentLocation.getLongitude()));
 
                     if (distance > NearbyController.searchedRadius*1000*3/4) { //Convert to meter, and compare if our distance is bigger than 3/4 or our searched area
+                        checkingAround = true;
                         if (!searchThisAreaModeOn) { // If we are changing mode, then change click action
                             searchThisAreaModeOn = true;
                             searchThisAreaButton.setOnClickListener(new View.OnClickListener() {
@@ -575,6 +590,7 @@ public class NearbyMapFragment extends DaggerFragment {
                         }
 
                     } else {
+                        checkingAround = false;
                         if (searchThisAreaModeOn) {
                             searchThisAreaModeOn = false; // This flag will help us to understand should we folor users location or not
                             searchThisAreaButton.setOnClickListener(new View.OnClickListener() {
@@ -791,9 +807,7 @@ public class NearbyMapFragment extends DaggerFragment {
         addAnchorToSmallFABs(fabGallery, ((NearbyFragment)getParentFragment()).view.findViewById(R.id.empty_view).getId());
 
         addAnchorToSmallFABs(fabCamera, ((NearbyFragment)getParentFragment()).view.findViewById(R.id.empty_view1).getId());
-
-        isMapReady = true;
-    }
+        }
 
 
     /*
@@ -944,6 +958,10 @@ public class NearbyMapFragment extends DaggerFragment {
         Utils.handleWebUrl(getContext(), link);
     }
 
+    /**
+     * Starts animation of fab plus (turning on opening) and other FABs
+     * @param isFabOpen state of FAB buttons, open when clicked on fab button, closed on other click
+     */
     private void animateFAB(boolean isFabOpen) {
             this.isFabOpen = !isFabOpen;
         if (fabPlus.isShown()){
@@ -964,6 +982,10 @@ public class NearbyMapFragment extends DaggerFragment {
         }
     }
 
+    /**
+     * Hides camera and gallery FABs, turn back plus FAB
+     * @param isFabOpen
+     */
     private void closeFabs ( boolean isFabOpen){
         if (isFabOpen) {
             fabPlus.startAnimation(rotate_backward);
@@ -1004,6 +1026,13 @@ public class NearbyMapFragment extends DaggerFragment {
         if (mapView != null) {
             mapView.onResume();
         }
+        if (mapboxMap != null) {
+            mapboxMap.getUiSettings().setAllGesturesEnabled(true);
+        }
+        searchThisAreaModeOn = false;
+        checkingAround = false;
+        searchedAroundCurrentLocation = true;
+        boundaryCoordinates = null;
         initViews();
         setListeners();
         transparentView.setClickable(false);
