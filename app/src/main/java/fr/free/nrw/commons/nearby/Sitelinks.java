@@ -11,7 +11,7 @@ public class Sitelinks implements Parcelable {
     private final String wikidataLink;
 
 
-    protected Sitelinks(Parcel in) {
+    private Sitelinks(Parcel in) {
         wikipediaLink = in.readString();
         commonsLink = in.readString();
         wikidataLink = in.readString();
