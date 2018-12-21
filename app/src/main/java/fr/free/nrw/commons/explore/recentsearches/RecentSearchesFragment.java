@@ -45,28 +45,28 @@ public class RecentSearchesFragment extends CommonsDaggerSupportFragment {
         ButterKnife.bind(this, rootView);
         recentSearches = recentSearchesDao.recentSearches(10);
 
-      if(recentSearches.isEmpty()) {
+        if (recentSearches.isEmpty()) {
             recent_searches_delete_button.setVisibility(View.GONE);
-          recent_searches_text_view.setText(R.string.no_recent_searches);
-      }
+            recent_searches_text_view.setText(R.string.no_recent_searches);
+        }
 
         recent_searches_delete_button.setOnClickListener(v -> {
             new AlertDialog.Builder(getContext())
-                .setMessage(getString(R.string.delete_recent_searches_dialog))
-                .setPositiveButton(android.R.string.yes, (dialog, which) -> {
-                    recentSearchesDao.deleteAll(recentSearches);
-                    recent_searches_delete_button.setVisibility(View.GONE);
-                    recent_searches_text_view.setText(R.string.no_recent_searches);
-                    Toast.makeText(getContext(),getString(R.string.search_history_deleted),Toast.LENGTH_SHORT).show();
-                    recentSearches = recentSearchesDao.recentSearches(10);
-                    adapter = new ArrayAdapter<String>(getContext(),R.layout.item_recent_searches, recentSearches);
-                    recentSearchesList.setAdapter(adapter);
-                    adapter.notifyDataSetChanged();
-                    dialog.dismiss();
-                })
-                .setNegativeButton(android.R.string.no, null)
-                .create()
-                .show();
+                    .setMessage(getString(R.string.delete_recent_searches_dialog))
+                    .setPositiveButton(android.R.string.yes, (dialog, which) -> {
+                        recentSearchesDao.deleteAll(recentSearches);
+                        recent_searches_delete_button.setVisibility(View.GONE);
+                        recent_searches_text_view.setText(R.string.no_recent_searches);
+                        Toast.makeText(getContext(), getString(R.string.search_history_deleted), Toast.LENGTH_SHORT).show();
+                        recentSearches = recentSearchesDao.recentSearches(10);
+                        adapter = new ArrayAdapter<String>(getContext(), R.layout.item_recent_searches, recentSearches);
+                        recentSearchesList.setAdapter(adapter);
+                        adapter.notifyDataSetChanged();
+                        dialog.dismiss();
+                    })
+                    .setNegativeButton(android.R.string.no, null)
+                    .create()
+                    .show();
         });
         currentThemeIsDark = PreferenceManager.getDefaultSharedPreferences(getContext()).getBoolean("theme", false);
         setAdapterForThemes(getContext(), currentThemeIsDark);
