@@ -58,16 +58,9 @@ public class SearchActivity extends NavigationBaseActivity implements MediaDetai
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        boolean currentThemeIsDark = PreferenceManager.getDefaultSharedPreferences(this).getBoolean("theme", false);
         setContentView(R.layout.activity_search);
         ButterKnife.bind(this);
         initDrawer();
-        if (currentThemeIsDark) {
-            searchView.setBackgroundResource(R.color.vpi__bright_foreground_disabled_holo_dark);
-            tabLayout.setBackgroundResource(R.color.vpi__bright_foreground_disabled_holo_dark);
-            toolbar.setBackgroundResource(R.color.vpi__bright_foreground_disabled_holo_dark);
-            viewPager.setBackgroundResource(R.color.vpi__bright_foreground_disabled_holo_dark);
-        }
         setTitle(getString(R.string.title_activity_search));
         toolbar.setNavigationOnClickListener(v->onBackPressed());
         supportFragmentManager = getSupportFragmentManager();
