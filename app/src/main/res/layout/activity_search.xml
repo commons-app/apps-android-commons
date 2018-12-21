@@ -35,6 +35,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:focusable="true"
+                app:theme="@style/WhiteSearchBarTheme"
                 android:queryBackground="@android:color/transparent"
                 android:searchIcon="@null"
                 android:paddingLeft="-16dp"
