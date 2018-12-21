@@ -1,7 +1,5 @@
 package fr.free.nrw.commons.explore.categories;
 
-import android.content.Context;
-import android.preference.PreferenceManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,9 +19,9 @@ class SearchCategoriesRenderer extends Renderer<String> {
     private final CategoryClickedListener listener;
     private boolean currentThemeIsDark;
 
-    SearchCategoriesRenderer(CategoryClickedListener listener, Context context) {
+    SearchCategoriesRenderer(CategoryClickedListener listener, boolean currentThemeIsDark) {
         this.listener = listener;
-        this.currentThemeIsDark = PreferenceManager.getDefaultSharedPreferences(context).getBoolean("theme", false);
+        this.currentThemeIsDark = currentThemeIsDark;
     }
 
     @Override
