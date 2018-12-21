@@ -67,8 +67,8 @@ public class AchievementsActivity extends NavigationBaseActivity {
     TextView thanksReceived;
     @BindView(R.id.images_uploaded_progressbar)
     CircleProgressBar imagesUploadedProgressbar;
-    @BindView(R.id.images_used_by_wiki_progressbar)
-    CircleProgressBar imagesUsedByWikiProgessbar;
+    @BindView(R.id.images_used_by_wiki_progress_bar)
+    CircleProgressBar imagesUsedByWikiProgressBar;
     @BindView(R.id.image_reverts_progressbar)
     CircleProgressBar imageRevertsProgressbar;
     @BindView(R.id.image_featured)
@@ -274,9 +274,9 @@ public class AchievementsActivity extends NavigationBaseActivity {
      */
     private void inflateAchievements(Achievements achievements) {
         thanksReceived.setText(Integer.toString(achievements.getThanksReceived()));
-        imagesUsedByWikiProgessbar.setProgress
+        imagesUsedByWikiProgressBar.setProgress
                 (100*achievements.getUniqueUsedImages()/levelInfo.getMaxUniqueImages() );
-        imagesUsedByWikiProgessbar.setProgressTextFormatPattern
+        imagesUsedByWikiProgressBar.setProgressTextFormatPattern
                 (achievements.getUniqueUsedImages() + "/" + levelInfo.getMaxUniqueImages());
         imagesFeatured.setText(Integer.toString(achievements.getFeaturedImages()));
         String levelUpInfoString = getString(R.string.level);

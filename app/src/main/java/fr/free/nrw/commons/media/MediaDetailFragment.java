@@ -10,11 +10,8 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.text.Editable;
 import android.text.Html;
 import android.text.TextUtils;
-import android.text.TextWatcher;
-import android.util.Log;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,7 +19,6 @@ import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.Spinner;
@@ -236,7 +232,7 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
         if(getParentFragment()!=null && getParentFragment().getParentFragment()!=null) {
             //Added a check because, not necessarily, the parent fragment will have a parent fragment, say
             // in the case when MediaDetailPagerFragment is directly started by the CategoryImagesActivity
-            ((ContributionsFragment) (getParentFragment().getParentFragment())).nearbyNoificationCardView
+            ((ContributionsFragment) (getParentFragment().getParentFragment())).nearbyNotificationCardView
                 .setVisibility(View.GONE);
         }
         media = detailProvider.getMediaAtPosition(index);

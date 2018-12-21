@@ -61,7 +61,6 @@ import fr.free.nrw.commons.Utils;
 import fr.free.nrw.commons.auth.LoginActivity;
 import fr.free.nrw.commons.bookmarks.locations.BookmarkLocationsDao;
 import fr.free.nrw.commons.contributions.ContributionController;
-
 import fr.free.nrw.commons.utils.LocationUtils;
 import fr.free.nrw.commons.utils.PlaceUtils;
 import fr.free.nrw.commons.utils.UriDeserializer;
@@ -132,7 +131,7 @@ public class NearbyMapFragment extends DaggerFragment {
     public boolean searchThisAreaModeOn = false;
     public boolean checkingAround = false;
 
-    private Bundle bundleForUpdtes;// Carry information from activity about changed nearby places and current location
+    private Bundle bundleForUpdates;// Carry information from activity about changed nearby places and current location
     private boolean searchedAroundCurrentLocation = true;
 
     @Inject
@@ -228,13 +227,13 @@ public class NearbyMapFragment extends DaggerFragment {
      * location tracker marker of user.
      */
     public void updateMapSlightly() {
-        Timber.d("updateMapSlightly called, bundle is:"+bundleForUpdtes);
+        Timber.d("updateMapSlightly called, bundle is:"+ bundleForUpdates);
         if (mapboxMap != null) {
             Gson gson = new GsonBuilder()
                     .registerTypeAdapter(Uri.class, new UriDeserializer())
                     .create();
-            if (bundleForUpdtes != null) {
-                String gsonLatLng = bundleForUpdtes.getString("CurLatLng");
+            if (bundleForUpdates != null) {
+                String gsonLatLng = bundleForUpdates.getString("CurLatLng");
                 Type curLatLngType = new TypeToken<fr.free.nrw.commons.location.LatLng>() {}.getType();
                 curLatLng = gson.fromJson(gsonLatLng, curLatLngType);
             }
@@ -249,16 +248,16 @@ public class NearbyMapFragment extends DaggerFragment {
      * previous nearby call.
      */
     public void updateMapSignificantlyForCurrentLocation() {
-        Timber.d("updateMapSignificantlyForCurrentLocation called, bundle is:"+bundleForUpdtes);
+        Timber.d("updateMapSignificantlyForCurrentLocation called, bundle is:"+ bundleForUpdates);
         if (mapboxMap != null) {
-            if (bundleForUpdtes != null) {
+            if (bundleForUpdates != null) {
                 Gson gson = new GsonBuilder()
                         .registerTypeAdapter(Uri.class, new UriDeserializer())
                         .create();
 
-                String gsonPlaceList = bundleForUpdtes.getString("PlaceList");
-                String gsonLatLng = bundleForUpdtes.getString("CurLatLng");
-                String gsonBoundaryCoordinates = bundleForUpdtes.getString("BoundaryCoord");
+                String gsonPlaceList = bundleForUpdates.getString("PlaceList");
+                String gsonLatLng = bundleForUpdates.getString("CurLatLng");
+                String gsonBoundaryCoordinates = bundleForUpdates.getString("BoundaryCoord");
                 Type listType = new TypeToken<List<Place>>() {}.getType();
                 List<Place> placeList = gson.fromJson(gsonPlaceList, listType);
                 Type curLatLngType = new TypeToken<fr.free.nrw.commons.location.LatLng>() {}.getType();
@@ -274,7 +273,7 @@ public class NearbyMapFragment extends DaggerFragment {
             addCurrentLocationMarker(mapboxMap);
             updateMapToTrackPosition();
             // We are trying to find nearby places around our current location, thus custom parameter is nullified
-            addNearbyMarkerstoMapBoxMap(null);
+            addNearbyMarkersToMapBoxMap(null);
         }
     }
 
@@ -292,7 +291,7 @@ public class NearbyMapFragment extends DaggerFragment {
                         getActivity());
         mapboxMap.clear();
         // We are trying to find nearby places around our custom searched area, thus custom parameter is nonnull
-        addNearbyMarkerstoMapBoxMap(customBaseMarkerOptions);
+        addNearbyMarkersToMapBoxMap(customBaseMarkerOptions);
         addCurrentLocationMarker(mapboxMap);
         // Re-enable mapbox gestures on custom location markers load
         mapboxMap.getUiSettings().setAllGesturesEnabled(true);
@@ -368,7 +367,7 @@ public class NearbyMapFragment extends DaggerFragment {
 
         fabPlus = ((NearbyFragment)getParentFragment()).view.findViewById(R.id.fab_plus);
         fabCamera = ((NearbyFragment)getParentFragment()).view.findViewById(R.id.fab_camera);
-        fabGallery = ((NearbyFragment)getParentFragment()).view.findViewById(R.id.fab_galery);
+        fabGallery = ((NearbyFragment)getParentFragment()).view.findViewById(R.id.fab_gallery);
         fabRecenter = ((NearbyFragment)getParentFragment()).view.findViewById(R.id.fab_recenter);
 
         fab_open = AnimationUtils.loadAnimation(getParentFragment().getActivity(), R.anim.fab_open);
@@ -397,7 +396,7 @@ public class NearbyMapFragment extends DaggerFragment {
         bookmarkButtonImage = getActivity().findViewById(R.id.bookmarkButtonImage);
 
         searchThisAreaButton = ((NearbyFragment)getParentFragment()).view.findViewById(R.id.search_this_area_button);
-        searchThisAreaButtonProgressBar = ((NearbyFragment)getParentFragment()).view.findViewById(R.id.search_this_area_button_progres_bar);
+        searchThisAreaButtonProgressBar = ((NearbyFragment)getParentFragment()).view.findViewById(R.id.search_this_area_button_progress_bar);
 
     }
 
@@ -651,9 +650,9 @@ public class NearbyMapFragment extends DaggerFragment {
     /**
      * Adds markers for nearby places to mapbox map
      */
-    private void addNearbyMarkerstoMapBoxMap(@Nullable List<NearbyBaseMarker> customNearbyBaseMarker) {
+    private void addNearbyMarkersToMapBoxMap(@Nullable List<NearbyBaseMarker> customNearbyBaseMarker) {
         List<NearbyBaseMarker> baseMarkerOptions;
-        Timber.d("addNearbyMarkerstoMapBoxMap is called");
+        Timber.d("addNearbyMarkersToMapBoxMap is called");
         if (customNearbyBaseMarker != null) {
             // If we try to update nearby points for a custom location choosen from map (we are not there)
             baseMarkerOptions = customNearbyBaseMarker;
@@ -979,10 +978,10 @@ public class NearbyMapFragment extends DaggerFragment {
     }
 
     /**
-     * This bundle is sent whenever and updte for nearby map comes, not for recreation, for updates
+     * This bundle is sent whenever and update for nearby map comes, not for recreation, for updates
      */
-    public void setBundleForUpdtes(Bundle bundleForUpdtes) {
-        this.bundleForUpdtes = bundleForUpdtes;
+    public void setBundleForUpdates(Bundle bundleForUpdates) {
+        this.bundleForUpdates = bundleForUpdates;
     }
 
     @Override

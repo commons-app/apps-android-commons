@@ -63,8 +63,8 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment {
     FloatingActionButton fabPlus;
     @BindView(R.id.fab_camera)
     FloatingActionButton fabCamera;
-    @BindView(R.id.fab_galery)
-    FloatingActionButton fabGalery;
+    @BindView(R.id.fab_gallery)
+    FloatingActionButton fabGallery;
     @BindView(R.id.noDataYet)
     TextView noDataYet;
 
@@ -168,8 +168,8 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment {
             }
         });
 
-        fabGalery.setOnClickListener(view -> {
-            //Gallery crashes before reach ShareActivity screen so must implement permissions check here
+        fabGallery.setOnClickListener(view -> {
+            // Gallery crashes before reach ShareActivity screen so must implement permissions check here
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
 
                 // Here, thisActivity is the current activity
@@ -220,15 +220,15 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment {
             if (isFabOpen) {
                 fabPlus.startAnimation(rotate_backward);
                 fabCamera.startAnimation(fab_close);
-                fabGalery.startAnimation(fab_close);
+                fabGallery.startAnimation(fab_close);
                 fabCamera.hide();
-                fabGalery.hide();
+                fabGallery.hide();
             } else {
                 fabPlus.startAnimation(rotate_forward);
                 fabCamera.startAnimation(fab_open);
-                fabGalery.startAnimation(fab_open);
+                fabGallery.startAnimation(fab_open);
                 fabCamera.show();
-                fabGalery.show();
+                fabGallery.show();
             }
             this.isFabOpen=!isFabOpen;
         }
