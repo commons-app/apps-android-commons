@@ -38,7 +38,14 @@ import timber.log.Timber;
 public class UploadModel {
 
     private MediaWikiApi mwApi;
-    private static UploadItem DUMMY = new UploadItem(Uri.EMPTY, "", "", GPSExtractor.DUMMY, "", null,-1l) {
+    private static UploadItem DUMMY = new UploadItem(
+            Uri.EMPTY,
+            "",
+            "",
+            GPSExtractor.DUMMY,
+            "",
+            null,
+            -1L) {
     };
     private final SharedPreferences prefs;
     private final List<String> licenses;
@@ -175,12 +182,12 @@ public class UploadModel {
             }
             //Content provider contracts for opening gallery from the app and that by sharing from gallery from outside are different and we need to handle both the cases
             int lastModifiedColumnIndex = cursor.getColumnIndex("last_modified");//If gallery is opened from in app
-            if(lastModifiedColumnIndex==-1){
-                lastModifiedColumnIndex=cursor.getColumnIndex("datetaken");
+            if (lastModifiedColumnIndex == -1) {
+                lastModifiedColumnIndex = cursor.getColumnIndex("datetaken");
             }
             //If both the content providers do not give the data, lets leave it to Jesus
-            if(lastModifiedColumnIndex==-1){
-                return -1l;
+            if (lastModifiedColumnIndex == -1) {
+                return -1L;
             }
             cursor.moveToFirst();
             return cursor.getLong(lastModifiedColumnIndex);
@@ -337,7 +344,7 @@ public class UploadModel {
             contribution.setTag("mimeType", item.mimeType);
             contribution.setSource(item.source);
             contribution.setContentProviderUri(item.mediaUri);
-            if (item.createdTimestamp != -1l) {
+            if (item.createdTimestamp != -1L) {
                 contribution.setDateCreated(new Date(item.createdTimestamp));
                 //Set the date only if you have it, else the upload service is gonna try it the other way
             }
