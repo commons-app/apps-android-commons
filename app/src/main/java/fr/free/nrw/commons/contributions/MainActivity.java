@@ -123,18 +123,15 @@ public class MainActivity extends AuthenticatedActivity implements FragmentManag
         ImageView nearbyInfo = nearbyTabLinearLayout.findViewById(R.id.nearby_info_image);
         tabLayout.getTabAt(1).setCustomView(nearbyTabLinearLayout);
 
-        nearbyInfo.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+        nearbyInfo.setOnClickListener(view ->
                 new AlertDialog.Builder(MainActivity.this)
-                        .setTitle(R.string.title_activity_nearby)
-                        .setMessage(R.string.showcase_view_whole_nearby_activity)
-                        .setCancelable(true)
-                        .setNeutralButton(android.R.string.ok, (dialog, id) -> dialog.cancel())
-                        .create()
-                        .show();
-            }
-        });
+                    .setTitle(R.string.title_activity_nearby)
+                    .setMessage(R.string.showcase_view_whole_nearby_activity)
+                    .setCancelable(true)
+                    .setNeutralButton(android.R.string.ok, (dialog, id) -> dialog.cancel())
+                    .create()
+                    .show()
+        );
 
         if (uploadServiceIntent != null) {
             // If auth cookie already acquired notify contrib fragment so that it san operate auth required actions
@@ -378,10 +375,8 @@ public class MainActivity extends AuthenticatedActivity implements FragmentManag
                 case 0:
                     ContributionsFragment retainedContributionsFragment = getContributionsFragment(0);
                     if (retainedContributionsFragment != null) {
-                        /**
-                         * ContributionsFragment is parent of ContributionsListFragment and
-                         * MediaDetailsFragment. If below decides which child will be visible.
-                         */
+                        //  ContributionsFragment is parent of ContributionsListFragment and
+                        //  MediaDetailsFragment. If below decides which child will be visible.
                         if (isContributionsListFragment) {
                             retainedContributionsFragment.setContributionsListFragment();
                         } else {

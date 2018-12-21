@@ -43,6 +43,7 @@ import static android.Manifest.permission.READ_EXTERNAL_STORAGE;
 import static android.Manifest.permission.WRITE_EXTERNAL_STORAGE;
 import static android.app.Activity.RESULT_OK;
 import static android.content.pm.PackageManager.PERMISSION_GRANTED;
+import static android.view.View.*;
 import static android.view.View.GONE;
 import static fr.free.nrw.commons.contributions.ContributionController.SELECT_FROM_GALLERY;
 
@@ -118,7 +119,7 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment {
     }
 
     public void changeEmptyScreen(boolean isEmpty){
-        this.noDataYet.setVisibility(isEmpty ? View.VISIBLE : View.GONE);
+        this.noDataYet.setVisibility(isEmpty ? VISIBLE : GONE);
     }
 
     private void initializeAnimations() {
@@ -131,92 +132,84 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment {
     private void setListeners() {
 
         fabPlus.setOnClickListener(view -> animateFAB(isFabOpen));
-        fabCamera.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                boolean useExtStorage = defaultPrefs.getBoolean("useExternalStorage", true);
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && useExtStorage) {
-                    // Here, thisActivity is the current activity
-                    if (ContextCompat.checkSelfPermission(getActivity(), WRITE_EXTERNAL_STORAGE)
-                            != PackageManager.PERMISSION_GRANTED) {
-                        if (shouldShowRequestPermissionRationale(WRITE_EXTERNAL_STORAGE)) {
-                            // Show an explanation to the user *asynchronously* -- don't block
-                            // this thread waiting for the user's response! After the user
-                            // sees the explanation, try again to request the permission.
-                            new AlertDialog.Builder(getParentFragment().getActivity())
-                                    .setMessage(getString(R.string.write_storage_permission_rationale))
-                                    .setPositiveButton(android.R.string.ok, (dialog, which) -> {
-                                        getActivity().requestPermissions
-                                                (new String[]{WRITE_EXTERNAL_STORAGE}, PermissionUtils.CAMERA_PERMISSION_FROM_CONTRIBUTION_LIST);
-                                        dialog.dismiss();
-                                    })
-                                    .setNegativeButton(android.R.string.cancel, null)
-                                    .create()
-                                    .show();
-                        } else {
-                            // No explanation needed, we can request the permission.
-                            requestPermissions(new String[]{WRITE_EXTERNAL_STORAGE},
-                                    3);
-                            // MY_PERMISSIONS_WRITE_EXTERNAL_STORAGE is an
-                            // app-defined int constant. The callback method gets the
-                            // result of the request.
-                        }
+        fabCamera.setOnClickListener(view -> {
+            boolean useExtStorage = defaultPrefs.getBoolean("useExternalStorage", true);
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && useExtStorage) {
+                // Here, thisActivity is the current activity
+                if (ContextCompat.checkSelfPermission(getActivity(), WRITE_EXTERNAL_STORAGE)
+                        != PackageManager.PERMISSION_GRANTED) {
+                    if (shouldShowRequestPermissionRationale(WRITE_EXTERNAL_STORAGE)) {
+                        // Show an explanation to the user *asynchronously* -- don't block
+                        // this thread waiting for the user's response! After the user
+                        // sees the explanation, try again to request the permission.
+                        new AlertDialog.Builder(getParentFragment().getActivity())
+                                .setMessage(getString(R.string.write_storage_permission_rationale))
+                                .setPositiveButton(android.R.string.ok, (dialog, which) -> {
+                                    getActivity().requestPermissions
+                                            (new String[]{WRITE_EXTERNAL_STORAGE}, PermissionUtils.CAMERA_PERMISSION_FROM_CONTRIBUTION_LIST);
+                                    dialog.dismiss();
+                                })
+                                .setNegativeButton(android.R.string.cancel, null)
+                                .create()
+                                .show();
                     } else {
-                        controller.startCameraCapture();
+                        // No explanation needed, we can request the permission.
+                        requestPermissions(new String[]{WRITE_EXTERNAL_STORAGE},
+                                3);
+                        // MY_PERMISSIONS_WRITE_EXTERNAL_STORAGE is an
+                        // app-defined int constant. The callback method gets the
+                        // result of the request.
                     }
                 } else {
                     controller.startCameraCapture();
                 }
+            } else {
+                controller.startCameraCapture();
             }
         });
 
-        fabGallery.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                //Gallery crashes before reach ShareActivity screen so must implement permissions check here
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+        fabGallery.setOnClickListener(view -> {
+            // Gallery crashes before reach ShareActivity screen so must implement permissions check here
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
 
-                    // Here, thisActivity is the current activity
-                    if (ContextCompat.checkSelfPermission(getActivity(),
-                            READ_EXTERNAL_STORAGE)
-                            != PERMISSION_GRANTED) {
+                // Here, thisActivity is the current activity
+                if (ContextCompat.checkSelfPermission(getActivity(), READ_EXTERNAL_STORAGE)
+                        != PERMISSION_GRANTED) {
 
-                        // Should we show an explanation?
-                        if (shouldShowRequestPermissionRationale(READ_EXTERNAL_STORAGE)) {
+                    // Should we show an explanation?
+                    if (shouldShowRequestPermissionRationale(READ_EXTERNAL_STORAGE)) {
 
-                            // Show an explanation to the user *asynchronously* -- don't block
-                            // this thread waiting for the user's response! After the user
-                            // sees the explanation, try again to request the permission.
+                        // Show an explanation to the user *asynchronously* -- don't block
+                        // this thread waiting for the user's response! After the user
+                        // sees the explanation, try again to request the permission.
 
-                            new AlertDialog.Builder(getParentFragment().getActivity())
-                                    .setMessage(getString(R.string.read_storage_permission_rationale))
-                                    .setPositiveButton(android.R.string.ok, (dialog, which) -> {
-                                        getActivity().requestPermissions
-                                                (new String[]{READ_EXTERNAL_STORAGE}, PermissionUtils.GALLERY_PERMISSION_FROM_CONTRIBUTION_LIST);
-                                        dialog.dismiss();
-                                    })
-                                    .setNegativeButton(android.R.string.cancel, null)
-                                    .create()
-                                    .show();
+                        new AlertDialog.Builder(getParentFragment().getActivity())
+                                .setMessage(getString(R.string.read_storage_permission_rationale))
+                                .setPositiveButton(android.R.string.ok, (dialog, which) -> {
+                                    getActivity().requestPermissions
+                                            (new String[]{READ_EXTERNAL_STORAGE}, PermissionUtils.GALLERY_PERMISSION_FROM_CONTRIBUTION_LIST);
+                                    dialog.dismiss();
+                                })
+                                .setNegativeButton(android.R.string.cancel, null)
+                                .create()
+                                .show();
 
-                        } else {
-
-                            // No explanation needed, we can request the permission.
-
-                            requestPermissions(new String[]{READ_EXTERNAL_STORAGE},
-                                    1);
-
-                            // MY_PERMISSIONS_REQUEST_READ_CONTACTS is an
-                            // app-defined int constant. The callback method gets the
-                            // result of the request.
-                        }
                     } else {
-                        controller.startGalleryPick();
-                    }
 
+                        // No explanation needed, we can request the permission.
+
+                        requestPermissions(new String[]{READ_EXTERNAL_STORAGE}, 1);
+
+                        // MY_PERMISSIONS_REQUEST_READ_CONTACTS is an
+                        // app-defined int constant. The callback method gets the
+                        // result of the request.
+                    }
                 } else {
                     controller.startGalleryPick();
                 }
+
+            } else {
+                controller.startGalleryPick();
             }
         });
     }
@@ -309,7 +302,7 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN
                 && data.getClipData() != null) {
             ClipData mClipData = data.getClipData();
-            ArrayList<Uri> mArrayUri = new ArrayList<Uri>();
+            ArrayList<Uri> mArrayUri = new ArrayList<>();
             for (int i = 0; i < mClipData.getItemCount(); i++) {
 
                 ClipData.Item item = mClipData.getItemAt(i);
@@ -329,7 +322,7 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment {
      * @param isVisible True when contributions list should be hidden.
      */
     public void changeProgressBarVisibility(boolean isVisible) {
-        this.progressBar.setVisibility(isVisible ? View.VISIBLE : View.GONE);
+        this.progressBar.setVisibility(isVisible ? VISIBLE : GONE);
     }
 
     /**

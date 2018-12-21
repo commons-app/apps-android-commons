@@ -4,8 +4,12 @@ import java.text.NumberFormat;
 
 import fr.free.nrw.commons.location.LatLng;
 
+import android.support.annotation.NonNull;
+
 public class LengthUtils {
-    /** Returns a formatted distance string between two points.
+    /**
+     * Returns a formatted distance string between two points.
+     *
      * @param point1 LatLng type point1
      * @param point2 LatLng type point2
      * @return string distance
@@ -15,44 +19,68 @@ public class LengthUtils {
             return null;
         }
 
-        NumberFormat numberFormat = NumberFormat.getNumberInstance();
-        double distance = Math.round(computeDistanceBetween(point1, point2));
+        int distance = (int) Math.round(computeDistanceBetween(point1, point2));
+        return formatDistance(distance);
+    }
 
-        // Adjust to KM if M goes over 1000 (see javadoc of method for note
-        // on only supporting metric)
+    /**
+     * Format a distance (in meters) as a string
+     * Example: 140 -> "140m"
+     * 3841 -> "3.8km"
+     *
+     * @param distance Distance, in meters
+     * @return A string representing the distance
+     * @throws IllegalArgumentException If distance is negative
+     */
+    public static String formatDistance(int distance) {
+        if (distance < 0) {
+            throw new IllegalArgumentException("Distance must be non-negative");
+        }
+
+        NumberFormat numberFormat = NumberFormat.getNumberInstance();
+
+        // Adjust to km if distance is over 1000m (1km)
         if (distance >= 1000) {
             numberFormat.setMaximumFractionDigits(1);
-            return numberFormat.format(distance / 1000) + "km";
+            return numberFormat.format(distance / 1000.0) + "km";
         }
+
+        // Otherwise just return in meters
         return numberFormat.format(distance) + "m";
     }
 
     /**
      * Computes the distance between two points.
-     * @param from one of the two end points
-     * @param to one of the two end points
-     * @return distance between the points in meter
+     *
+     * @param point1 LatLng type point1
+     * @param point2 LatLng type point2
+     * @return distance between the points in meters
+     * @throws NullPointerException if one or both the points are null
      */
-    public static double computeDistanceBetween(LatLng from, LatLng to) {
-        return computeAngleBetween(from, to) * 6371009.0D; // Earth's radius in meter
+    public static double computeDistanceBetween(@NonNull LatLng point1, @NonNull LatLng point2) {
+        return computeAngleBetween(point1, point2) * 6371009.0D; // Earth's radius in meter
     }
 
     /**
      * Computes angle between two points
      *
-     * @param from Point A
-     * @param to   Point B
+     * @param point1 one of the two end points
+     * @param point2 one of the two end points
      * @return Angle in radius
+     * @throws NullPointerException if one or both the points are null
      */
-    private static double computeAngleBetween(LatLng from, LatLng to) {
-        return distanceRadians(Math.toRadians(from.getLatitude()),
-                Math.toRadians(from.getLongitude()),
-                Math.toRadians(to.getLatitude()),
-                Math.toRadians(to.getLongitude()));
+    private static double computeAngleBetween(@NonNull LatLng point1, @NonNull LatLng point2) {
+        return distanceRadians(
+                Math.toRadians(point1.getLatitude()),
+                Math.toRadians(point1.getLongitude()),
+                Math.toRadians(point2.getLatitude()),
+                Math.toRadians(point2.getLongitude())
+        );
     }
 
     /**
      * Computes arc length between 2 points
+     *
      * @param lat1 Latitude of point A
      * @param lng1 Longitude of point A
      * @param lat2 Latitude of point B
@@ -65,6 +93,7 @@ public class LengthUtils {
 
     /**
      * Computes inverse of haversine
+     *
      * @param x Angle in radian
      * @return Inverse of haversine
      */
@@ -74,8 +103,9 @@ public class LengthUtils {
 
     /**
      * Computes distance between two points that are on same Longitude
-     * @param lat1 Latitude of point A
-     * @param lat2 Latitude of point B
+     *
+     * @param lat1      Latitude of point A
+     * @param lat2      Latitude of point B
      * @param longitude Longitude on which they lie
      * @return Arc length between points
      */
@@ -85,6 +115,7 @@ public class LengthUtils {
 
     /**
      * Computes haversine
+     *
      * @param x Angle in radians
      * @return Haversine of x
      */

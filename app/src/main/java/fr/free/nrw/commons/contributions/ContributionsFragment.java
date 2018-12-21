@@ -162,14 +162,10 @@ public class ContributionsFragment
         nearbyNotificationCardView = view.findViewById(R.id.card_view_nearby);
         checkBoxView = View.inflate(getActivity(), R.layout.nearby_permission_dialog, null);
         checkBox = (CheckBox) checkBoxView.findViewById(R.id.never_ask_again);
-        checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (isChecked) {
-                    // Do not ask for permission on activity start again
-                    prefs.edit().putBoolean("displayLocationPermissionForCardView",false).apply();
-                }
+        checkBox.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            if (isChecked) {
+                // Do not ask for permission on activity start again
+                prefs.edit().putBoolean("displayLocationPermissionForCardView",false).apply();
             }
         });
 
@@ -385,8 +381,8 @@ public class ContributionsFragment
                         DialogUtil.showAlertDialog(getActivity(),
                                 getString(R.string.nearby_card_permission_title),
                                 getString(R.string.nearby_card_permission_explanation),
-                                () -> displayYouWontSeeNearbyMessage(),
-                                () -> enableLocationPermission(),
+                                this::displayYouWontSeeNearbyMessage,
+                                this::enableLocationPermission,
                                 checkBoxView,
                                 false);
                     }
@@ -503,11 +499,6 @@ public class ContributionsFragment
     }
 
     @Override
-    public void onStart() {
-        super.onStart();
-    }
-
-    @Override
     public void onPause() {
         super.onPause();
         locationManager.removeLocationListener(this);
@@ -561,8 +552,8 @@ public class ContributionsFragment
                 DialogUtil.showAlertDialog(getActivity(),
                         getString(R.string.nearby_card_permission_title),
                         getString(R.string.nearby_card_permission_explanation),
-                        () -> displayYouWontSeeNearbyMessage(),
-                        () -> enableGPS(),
+                        this::displayYouWontSeeNearbyMessage,
+                        this::enableGPS,
                         checkBoxView,
                         false);
             }
@@ -585,8 +576,8 @@ public class ContributionsFragment
                         DialogUtil.showAlertDialog(getActivity(),
                                 getString(R.string.nearby_card_permission_title),
                                 getString(R.string.nearby_card_permission_explanation),
-                                () -> displayYouWontSeeNearbyMessage(),
-                                () -> enableLocationPermission(),
+                                this::displayYouWontSeeNearbyMessage,
+                                this::enableLocationPermission,
                                 checkBoxView,
                                 false);
                 }

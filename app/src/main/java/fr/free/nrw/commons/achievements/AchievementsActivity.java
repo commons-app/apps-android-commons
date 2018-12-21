@@ -104,17 +104,14 @@ public class AchievementsActivity extends NavigationBaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_achievements);
         ButterKnife.bind(this);
-        /**
-         * DisplayMetrics used to fetch the size of the screen
-         */
+
+        // DisplayMetrics used to fetch the size of the screen
         DisplayMetrics displayMetrics = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
         int height = displayMetrics.heightPixels;
         int width = displayMetrics.widthPixels;
 
-        /**
-         * Used for the setting the size of imageView at runtime
-         */
+        // Used for the setting the size of imageView at runtime
         RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams)
                 imageView.getLayoutParams();
         params.height = (int) (height * BADGE_IMAGE_HEIGHT_RATIO);
@@ -130,7 +127,7 @@ public class AchievementsActivity extends NavigationBaseActivity {
     }
 
     /**
-     * to invoke the AlertDialog on clicking info button
+     * To invoke the AlertDialog on clicking info button
      */
     @OnClick(R.id.achievement_info)
     public void showInfoDialog(){
@@ -159,7 +156,6 @@ public class AchievementsActivity extends NavigationBaseActivity {
 
     /**
      * To take bitmap and store it temporary storage and share it
-     *
      * @param bitmap
      */
     void shareScreen(Bitmap bitmap) {

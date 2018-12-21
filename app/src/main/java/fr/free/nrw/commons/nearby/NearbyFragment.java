@@ -796,11 +796,6 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
     }
 
     @Override
-    public void onStart() {
-        super.onStart();
-    }
-
-    @Override
     public void onPause() {
         super.onPause();
         // this means that this activity will not be recreated now, user is leaving it

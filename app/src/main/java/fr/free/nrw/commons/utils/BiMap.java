@@ -8,8 +8,8 @@ import java.util.Set;
  */
 public class BiMap<K, V> {
 
-    private HashMap<K, V> map = new HashMap<K, V>();
-    private HashMap<V, K> inversedMap = new HashMap<V, K>();
+    private HashMap<K, V> map = new HashMap<>();
+    private HashMap<V, K> inversedMap = new HashMap<>();
 
     public void put(K k, V v) {
         map.put(k, v);

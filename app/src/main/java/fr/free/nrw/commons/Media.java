@@ -414,10 +414,17 @@ public class Media implements Parcelable {
         parcel.writeMap(descriptions);
     }
 
+    /**
+     * Set requested deletion to true
+     */
     public void setRequestedDeletion(){
         requestedDeletion = true;
     }
 
+    /**
+     * Get the value of requested deletion
+     * @return boolean requestedDeletion
+     */
     public boolean getRequestedDeletion(){
         return requestedDeletion;
     }

@@ -54,12 +54,12 @@ public class RecentSearchesFragment extends CommonsDaggerSupportFragment {
             new AlertDialog.Builder(getContext())
                 .setMessage(getString(R.string.delete_recent_searches_dialog))
                 .setPositiveButton(android.R.string.yes, (dialog, which) -> {
-                    recentSearchesDao.deleteAll(recentSearches);
+                    recentSearchesDao.deleteAll();
                     recent_searches_delete_button.setVisibility(View.GONE);
                     recent_searches_text_view.setText(R.string.no_recent_searches);
                     Toast.makeText(getContext(),getString(R.string.search_history_deleted),Toast.LENGTH_SHORT).show();
                     recentSearches = recentSearchesDao.recentSearches(10);
-                    adapter = new ArrayAdapter<String>(getContext(),R.layout.item_recent_searches, recentSearches);
+                    adapter = new ArrayAdapter<>(getContext(), R.layout.item_recent_searches, recentSearches);
                     recentSearchesList.setAdapter(adapter);
                     adapter.notifyDataSetChanged();
                     dialog.dismiss();
@@ -70,7 +70,7 @@ public class RecentSearchesFragment extends CommonsDaggerSupportFragment {
         });
         currentThemeIsDark = PreferenceManager.getDefaultSharedPreferences(getContext()).getBoolean("theme", false);
         setAdapterForThemes(getContext(), currentThemeIsDark);
-
+        
         recentSearchesList.setAdapter(adapter);
         recentSearchesList.setOnItemClickListener((parent, view, position, id) -> (
                 (SearchActivity)getContext()).updateText(recentSearches.get(position)));
