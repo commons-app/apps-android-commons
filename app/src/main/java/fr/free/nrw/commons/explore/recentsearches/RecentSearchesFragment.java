@@ -47,8 +47,8 @@ public class RecentSearchesFragment extends CommonsDaggerSupportFragment {
 
       if(recentSearches.isEmpty()) {
             recent_searches_delete_button.setVisibility(View.GONE);
-            recent_searches_text_view.setText(R.string.no_recent_searches);
-        }
+          recent_searches_text_view.setText(R.string.no_recent_searches);
+      }
 
         recent_searches_delete_button.setOnClickListener(v -> {
             new AlertDialog.Builder(getContext())
