@@ -35,6 +35,9 @@ import static fr.free.nrw.commons.contributions.ContributionsContentProvider.BAS
 
 @SuppressWarnings("WeakerAccess")
 public class ContributionsSyncAdapter extends AbstractThreadedSyncAdapter {
+    // Arbitrary limit to cap the number of contributions to ever load. This is a maximum built
+    // into the app, rather than the user's setting. Also see Github issue #52.
+    public static final int ABSOLUTE_CONTRIBUTIONS_LOAD_LIMIT = 500;
 
     private static final String[] existsQuery = {COLUMN_FILENAME};
     private static final String existsSelection = COLUMN_FILENAME + " = ?";
@@ -47,13 +50,6 @@ public class ContributionsSyncAdapter extends AbstractThreadedSyncAdapter {
 
     public ContributionsSyncAdapter(Context context, boolean autoInitialize) {
         super(context, autoInitialize);
-    }
-
-    private int getLimit() {
-
-        int limit = 500;
-        Timber.d("Max number of uploads set to %d", limit);
-        return limit; // FIXME: Parameterize!
     }
 
     private boolean fileExists(ContentProviderClient client, String filename) {
@@ -97,7 +93,7 @@ public class ContributionsSyncAdapter extends AbstractThreadedSyncAdapter {
         while (!done) {
 
             try {
-                result = mwApi.logEvents(user, lastModified, queryContinue, getLimit());
+                result = mwApi.logEvents(user, lastModified, queryContinue, ABSOLUTE_CONTRIBUTIONS_LOAD_LIMIT);
             } catch (IOException e) {
                 // There isn't really much we can do, eh?
                 // FIXME: Perhaps add EventLogging?

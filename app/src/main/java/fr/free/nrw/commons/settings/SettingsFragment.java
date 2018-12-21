@@ -20,6 +20,7 @@ import javax.inject.Named;
 
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.Utils;
+import fr.free.nrw.commons.contributions.ContributionsSyncAdapter;
 import fr.free.nrw.commons.di.ApplicationlessInjection;
 import fr.free.nrw.commons.logging.CommonsLogSender;
 import fr.free.nrw.commons.utils.PermissionUtils;
@@ -66,7 +67,7 @@ public class SettingsFragment extends PreferenceFragment {
         });
 
         final EditTextPreference uploadLimit = (EditTextPreference) findPreference("uploads");
-        int currentUploadLimit = prefs.getInt(Prefs.UPLOADS_SHOWING, 100);
+        int currentUploadLimit = prefs.getInt(Prefs.UPLOADS_SHOWING, 100); // 100 is the default
         uploadLimit.setText(Integer.toString(currentUploadLimit));
         uploadLimit.setSummary(Integer.toString(currentUploadLimit));
         uploadLimit.setOnPreferenceChangeListener((preference, newValue) -> {
@@ -79,8 +80,8 @@ public class SettingsFragment extends PreferenceFragment {
             }
 
             final SharedPreferences.Editor editor = prefs.edit();
-            if (value > 500) {
-                value = 500;
+            if (value > ContributionsSyncAdapter.ABSOLUTE_CONTRIBUTIONS_LOAD_LIMIT) {
+                value = ContributionsSyncAdapter.ABSOLUTE_CONTRIBUTIONS_LOAD_LIMIT;
                 new AlertDialog.Builder(getActivity())
                         .setTitle(R.string.maximum_limit)
                         .setMessage(R.string.maximum_limit_alert)
