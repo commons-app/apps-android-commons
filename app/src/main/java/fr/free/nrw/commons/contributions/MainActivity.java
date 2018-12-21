@@ -128,7 +128,7 @@ public class MainActivity extends AuthenticatedActivity implements FragmentManag
                     .setTitle(R.string.title_activity_nearby)
                     .setMessage(R.string.showcase_view_whole_nearby_activity)
                     .setCancelable(true)
-                    .setNeutralButton(android.R.string.ok, (dialog, id) -> dialog.cancel())
+                    .setPositiveButton(android.R.string.ok, (dialog, id) -> dialog.cancel())
                     .create()
                     .show()
         );
