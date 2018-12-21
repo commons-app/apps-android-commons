@@ -26,7 +26,7 @@ class UtilsTest {
         Assert.assertThat(Utils.capitalize("12x"), _is("12x"))
     }
 
-    @Test fun `capitalize - pass Japanase characters`() {
+    @Test fun `capitalize - pass Japanese characters`() {
         Assert.assertThat(Utils.capitalize("こんにちは"), _is("こんにちは"))
     }
 

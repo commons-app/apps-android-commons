@@ -224,11 +224,11 @@ public class ImageUtils {
 
     public static String getErrorMessageForResult(Context context, @Result int result) {
         /**
-         * Result variable is a result of an or operation of all possbile problems. Ie. if result
+         * Result variable is a result of an or operation of all possible problems. Ie. if result
          * is 0001 means IMAGE_DARK, if result is 1100 IMAGE_DUPLICATE and IMAGE_GEOLOCATION_DIFFERENT
          */
         StringBuilder errorMessage = new StringBuilder();
-        if (((IMAGE_DARK | IMAGE_GEOLOCATION_DIFFERENT | IMAGE_BLURRY | IMAGE_DUPLICATE) & result) == 0 ) {
+        if (result <= 0 ) {
             Timber.d("No issues to warn user is found");
         } else {
             Timber.d("Issues found to warn user");

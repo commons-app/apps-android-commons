@@ -284,7 +284,7 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
         /*
         onOrientation changed is true whenever activities orientation changes. After orientation
         change we want to refresh map significantly, doesn't matter if location changed significantly
-        or not. Thus, we included onOrientatinChanged boolean to if clause
+        or not. Thus, we included onOrientationChanged boolean to if clause
          */
         if (locationChangeType.equals(LOCATION_SIGNIFICANTLY_CHANGED)
                 || locationChangeType.equals(PERMISSION_JUST_GRANTED)
@@ -481,7 +481,7 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
                                     showErrorMessage(getString(R.string.error_fetching_nearby_places));
                                     progressBar.setVisibility(View.GONE);
                                 });
-                nearbyMapFragment.setBundleForUpdtes(bundle);
+                nearbyMapFragment.setBundleForUpdates(bundle);
                 nearbyMapFragment.updateMapSignificantlyForCurrentLocation();
                 updateListFragment();
                 return;
@@ -502,10 +502,10 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
             }
 
             if (isSlightUpdate) {
-                nearbyMapFragment.setBundleForUpdtes(bundle);
+                nearbyMapFragment.setBundleForUpdates(bundle);
                 nearbyMapFragment.updateMapSlightly();
             } else {
-                nearbyMapFragment.setBundleForUpdtes(bundle);
+                nearbyMapFragment.setBundleForUpdates(bundle);
                 nearbyMapFragment.updateMapSignificantlyForCurrentLocation();
                 updateListFragment();
             }
@@ -793,11 +793,6 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
         snackbar = null;
         broadcastReceiver = null;
         wikidataEditListener.setAuthenticationStateListener(null);
-    }
-
-    @Override
-    public void onStart() {
-        super.onStart();
     }
 
     @Override

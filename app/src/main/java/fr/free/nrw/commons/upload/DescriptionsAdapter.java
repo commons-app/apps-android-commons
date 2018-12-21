@@ -88,6 +88,10 @@ class DescriptionsAdapter extends RecyclerView.Adapter<DescriptionsAdapter.ViewH
         return descriptions.size() + 1;
     }
 
+    /**
+     * Gets descriptions
+     * @return List of descriptions
+     */
     List<Description> getDescriptions() {
         return descriptions;
     }

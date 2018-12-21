@@ -1,7 +1,7 @@
 package fr.free.nrw.commons.achievements;
 
 /**
- * represnts Achievements class ans stores all the parameters
+ * Represents Achievements class and stores all the parameters
  */
 public class Achievements {
     private int uniqueUsedImages;

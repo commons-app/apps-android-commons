@@ -31,15 +31,12 @@ public class CommonsLogSender extends LogsSender {
 
     /**
      * Attach any extra meta information about user or device that might help in debugging
-     * @return
+     * @return String with extra meta information useful for debugging
      */
     @Override
     protected String getExtraInfo() {
-        StringBuilder builder = new StringBuilder();
-        builder.append("App Version Name: ")
-                .append(BuildConfig.VERSION_NAME)
-                .append("\n");
-
-        return builder.toString();
+        return "App Version Name: " +
+                BuildConfig.VERSION_NAME +
+                "\n";
     }
 }

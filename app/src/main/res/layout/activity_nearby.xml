@@ -137,7 +137,7 @@
             app:srcCompat="@drawable/ic_photo_camera_white_24dp" />
 
         <android.support.design.widget.FloatingActionButton
-            android:id="@+id/fab_galery"
+            android:id="@+id/fab_gallery"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:scaleType="center"

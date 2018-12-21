@@ -57,7 +57,7 @@ public class NearbyController {
         NearbyPlacesInfo nearbyPlacesInfo = new NearbyPlacesInfo();
 
         if (latLangToSearchAround == null) {
-            Timber.d("Loading attractions neari, but curLatLng is null");
+            Timber.d("Loading attractions nearby, but curLatLng is null");
             return null;
         }
         List<Place> places = nearbyPlaces.radiusExpander(latLangToSearchAround, Locale.getDefault().getLanguage(), returnClosestResult);
