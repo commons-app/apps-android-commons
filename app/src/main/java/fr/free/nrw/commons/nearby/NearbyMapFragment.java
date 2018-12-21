@@ -61,7 +61,6 @@ import fr.free.nrw.commons.Utils;
 import fr.free.nrw.commons.auth.LoginActivity;
 import fr.free.nrw.commons.bookmarks.locations.BookmarkLocationsDao;
 import fr.free.nrw.commons.contributions.ContributionController;
-
 import fr.free.nrw.commons.utils.LocationUtils;
 import fr.free.nrw.commons.utils.PlaceUtils;
 import fr.free.nrw.commons.utils.UriDeserializer;
@@ -130,8 +129,9 @@ public class NearbyMapFragment extends DaggerFragment {
     private final double CAMERA_TARGET_SHIFT_FACTOR_LANDSCAPE = 0.04;
 
     public boolean searchThisAreaModeOn = false;
+    public boolean checkingAround = false;
 
-    private Bundle bundleForUpdtes;// Carry information from activity about changed nearby places and current location
+    private Bundle bundleForUpdates;// Carry information from activity about changed nearby places and current location
     private boolean searchedAroundCurrentLocation = true;
 
     @Inject
@@ -185,13 +185,6 @@ public class NearbyMapFragment extends DaggerFragment {
         setRetainInstance(true);
     }
 
-
-    @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-
-    }
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -234,13 +227,13 @@ public class NearbyMapFragment extends DaggerFragment {
      * location tracker marker of user.
      */
     public void updateMapSlightly() {
-        Timber.d("updateMapSlightly called, bundle is:"+bundleForUpdtes);
+        Timber.d("updateMapSlightly called, bundle is:"+ bundleForUpdates);
         if (mapboxMap != null) {
             Gson gson = new GsonBuilder()
                     .registerTypeAdapter(Uri.class, new UriDeserializer())
                     .create();
-            if (bundleForUpdtes != null) {
-                String gsonLatLng = bundleForUpdtes.getString("CurLatLng");
+            if (bundleForUpdates != null) {
+                String gsonLatLng = bundleForUpdates.getString("CurLatLng");
                 Type curLatLngType = new TypeToken<fr.free.nrw.commons.location.LatLng>() {}.getType();
                 curLatLng = gson.fromJson(gsonLatLng, curLatLngType);
             }
@@ -255,16 +248,16 @@ public class NearbyMapFragment extends DaggerFragment {
      * previous nearby call.
      */
     public void updateMapSignificantlyForCurrentLocation() {
-        Timber.d("updateMapSignificantlyForCurrentLocation called, bundle is:"+bundleForUpdtes);
+        Timber.d("updateMapSignificantlyForCurrentLocation called, bundle is:"+ bundleForUpdates);
         if (mapboxMap != null) {
-            if (bundleForUpdtes != null) {
+            if (bundleForUpdates != null) {
                 Gson gson = new GsonBuilder()
                         .registerTypeAdapter(Uri.class, new UriDeserializer())
                         .create();
 
-                String gsonPlaceList = bundleForUpdtes.getString("PlaceList");
-                String gsonLatLng = bundleForUpdtes.getString("CurLatLng");
-                String gsonBoundaryCoordinates = bundleForUpdtes.getString("BoundaryCoord");
+                String gsonPlaceList = bundleForUpdates.getString("PlaceList");
+                String gsonLatLng = bundleForUpdates.getString("CurLatLng");
+                String gsonBoundaryCoordinates = bundleForUpdates.getString("BoundaryCoord");
                 Type listType = new TypeToken<List<Place>>() {}.getType();
                 List<Place> placeList = gson.fromJson(gsonPlaceList, listType);
                 Type curLatLngType = new TypeToken<fr.free.nrw.commons.location.LatLng>() {}.getType();
@@ -280,7 +273,7 @@ public class NearbyMapFragment extends DaggerFragment {
             addCurrentLocationMarker(mapboxMap);
             updateMapToTrackPosition();
             // We are trying to find nearby places around our current location, thus custom parameter is nullified
-            addNearbyMarkerstoMapBoxMap(null);
+            addNearbyMarkersToMapBoxMap(null);
         }
     }
 
@@ -298,7 +291,7 @@ public class NearbyMapFragment extends DaggerFragment {
                         getActivity());
         mapboxMap.clear();
         // We are trying to find nearby places around our custom searched area, thus custom parameter is nonnull
-        addNearbyMarkerstoMapBoxMap(customBaseMarkerOptions);
+        addNearbyMarkersToMapBoxMap(customBaseMarkerOptions);
         addCurrentLocationMarker(mapboxMap);
         // Re-enable mapbox gestures on custom location markers load
         mapboxMap.getUiSettings().setAllGesturesEnabled(true);
@@ -327,8 +320,8 @@ public class NearbyMapFragment extends DaggerFragment {
                 mapboxMap.addPolygon(currentLocationPolygonOptions);
             }
 
-                // Make camera to follow user on location change
-                CameraPosition position ;
+            // Make camera to follow user on location change
+            CameraPosition position ;
 
             // Do not update camera position is search this area mode on
             if (!searchThisAreaModeOn) {
@@ -374,7 +367,7 @@ public class NearbyMapFragment extends DaggerFragment {
 
         fabPlus = ((NearbyFragment)getParentFragment()).view.findViewById(R.id.fab_plus);
         fabCamera = ((NearbyFragment)getParentFragment()).view.findViewById(R.id.fab_camera);
-        fabGallery = ((NearbyFragment)getParentFragment()).view.findViewById(R.id.fab_galery);
+        fabGallery = ((NearbyFragment)getParentFragment()).view.findViewById(R.id.fab_gallery);
         fabRecenter = ((NearbyFragment)getParentFragment()).view.findViewById(R.id.fab_recenter);
 
         fab_open = AnimationUtils.loadAnimation(getParentFragment().getActivity(), R.anim.fab_open);
@@ -403,7 +396,7 @@ public class NearbyMapFragment extends DaggerFragment {
         bookmarkButtonImage = getActivity().findViewById(R.id.bookmarkButtonImage);
 
         searchThisAreaButton = ((NearbyFragment)getParentFragment()).view.findViewById(R.id.search_this_area_button);
-        searchThisAreaButtonProgressBar = ((NearbyFragment)getParentFragment()).view.findViewById(R.id.search_this_area_button_progres_bar);
+        searchThisAreaButtonProgressBar = ((NearbyFragment)getParentFragment()).view.findViewById(R.id.search_this_area_button_progress_bar);
 
     }
 
@@ -537,13 +530,10 @@ public class NearbyMapFragment extends DaggerFragment {
             mapView = new MapView(getParentFragment().getActivity(), options);
             // create map
             mapView.onCreate(savedInstanceState);
-            mapView.getMapAsync(new OnMapReadyCallback() {
-                @Override
-                public void onMapReady(MapboxMap mapboxMap) {
-                    NearbyMapFragment.this.mapboxMap = mapboxMap;
-                    addMapMovementListeners();
-                    updateMapSignificantlyForCurrentLocation();
-                }
+            mapView.getMapAsync(mapboxMap -> {
+                NearbyMapFragment.this.mapboxMap = mapboxMap;
+                addMapMovementListeners();
+                updateMapSignificantlyForCurrentLocation();
             });
             mapView.setStyleUrl("asset://mapstyle.json");
         }
@@ -555,61 +545,53 @@ public class NearbyMapFragment extends DaggerFragment {
      */
     private void addMapMovementListeners() {
 
-        mapboxMap.addOnCameraMoveListener(new MapboxMap.OnCameraMoveListener() {
+        mapboxMap.addOnCameraMoveListener(() -> {
 
-            @Override
-            public void onCameraMove() {
+            if (NearbyController.currentLocation != null) { // If our nearby markers are calculated at least once
 
-                if (NearbyController.currentLocation != null) { // If our nearby markers are calculated at least once
+                if (searchThisAreaButton.getVisibility() == View.GONE) {
+                    searchThisAreaButton.setVisibility(View.VISIBLE);
+                }
+                double distance = mapboxMap.getCameraPosition().target
+                        .distanceTo(new LatLng(NearbyController.currentLocation.getLatitude()
+                                , NearbyController.currentLocation.getLongitude()));
 
-                    if (searchThisAreaButton.getVisibility() == View.GONE) {
-                        searchThisAreaButton.setVisibility(View.VISIBLE);
-                    }
-                    double distance = mapboxMap.getCameraPosition().target
-                            .distanceTo(new LatLng(NearbyController.currentLocation.getLatitude()
-                                    , NearbyController.currentLocation.getLongitude()));
-
-                    if (distance > NearbyController.searchedRadius*1000*3/4) { //Convert to meter, and compare if our distance is bigger than 3/4 or our searched area
-                        if (!searchThisAreaModeOn) { // If we are changing mode, then change click action
+                if (distance > NearbyController.searchedRadius*1000*3/4) { //Convert to meter, and compare if our distance is bigger than 3/4 or our searched area
+                    checkingAround = true;
+                    if (!searchThisAreaModeOn) { // If we are changing mode, then change click action
+                        searchThisAreaModeOn = true;
+                        searchThisAreaButton.setOnClickListener(view -> {
                             searchThisAreaModeOn = true;
-                            searchThisAreaButton.setOnClickListener(new View.OnClickListener() {
-                                @Override
-                                public void onClick(View view) {
-                                    searchThisAreaModeOn = true;
-                                    // Lock map operations during search this area operation
-                                    mapboxMap.getUiSettings().setAllGesturesEnabled(false);
-                                    searchThisAreaButtonProgressBar.setVisibility(View.VISIBLE);
-                                    searchThisAreaButton.setVisibility(View.GONE);
-                                    searchedAroundCurrentLocation = false;
-                                    ((NearbyFragment)getParentFragment())
-                                            .refreshViewForCustomLocation(LocationUtils
-                                                    .mapBoxLatLngToCommonsLatLng(mapboxMap.getCameraPosition().target), false);
-                                }
-                            });
-                        }
-
-                    } else {
-                        if (searchThisAreaModeOn) {
-                            searchThisAreaModeOn = false; // This flag will help us to understand should we folor users location or not
-                            searchThisAreaButton.setOnClickListener(new View.OnClickListener() {
-                                @Override
-                                public void onClick(View view) {
-                                    searchThisAreaModeOn = true;
-                                    // Lock map operations during search this area operation
-                                    mapboxMap.getUiSettings().setAllGesturesEnabled(false);
-                                    searchThisAreaButtonProgressBar.setVisibility(View.VISIBLE);
-                                    fabRecenter.callOnClick();
-                                    searchThisAreaButton.setVisibility(View.GONE);
-                                    searchedAroundCurrentLocation = true;
-                                    ((NearbyFragment)getParentFragment())
-                                            .refreshViewForCustomLocation(LocationUtils
-                                                    .mapBoxLatLngToCommonsLatLng(mapboxMap.getCameraPosition().target), true);
-                                }
-                            });
-                        }
-                        if (searchedAroundCurrentLocation) {
+                            // Lock map operations during search this area operation
+                            mapboxMap.getUiSettings().setAllGesturesEnabled(false);
+                            searchThisAreaButtonProgressBar.setVisibility(View.VISIBLE);
                             searchThisAreaButton.setVisibility(View.GONE);
-                        }
+                            searchedAroundCurrentLocation = false;
+                            ((NearbyFragment)getParentFragment())
+                                    .refreshViewForCustomLocation(LocationUtils
+                                            .mapBoxLatLngToCommonsLatLng(mapboxMap.getCameraPosition().target), false);
+                        });
+                    }
+
+                } else {
+                    checkingAround = false;
+                    if (searchThisAreaModeOn) {
+                        searchThisAreaModeOn = false; // This flag will help us to understand should we folor users location or not
+                        searchThisAreaButton.setOnClickListener(view -> {
+                            searchThisAreaModeOn = true;
+                            // Lock map operations during search this area operation
+                            mapboxMap.getUiSettings().setAllGesturesEnabled(false);
+                            searchThisAreaButtonProgressBar.setVisibility(View.VISIBLE);
+                            fabRecenter.callOnClick();
+                            searchThisAreaButton.setVisibility(View.GONE);
+                            searchedAroundCurrentLocation = true;
+                            ((NearbyFragment)getParentFragment())
+                                    .refreshViewForCustomLocation(LocationUtils
+                                            .mapBoxLatLngToCommonsLatLng(mapboxMap.getCameraPosition().target), true);
+                        });
+                    }
+                    if (searchedAroundCurrentLocation) {
+                        searchThisAreaButton.setVisibility(View.GONE);
                     }
                 }
             }
@@ -668,9 +650,9 @@ public class NearbyMapFragment extends DaggerFragment {
     /**
      * Adds markers for nearby places to mapbox map
      */
-    private void addNearbyMarkerstoMapBoxMap(@Nullable List<NearbyBaseMarker> customNearbyBaseMarker) {
+    private void addNearbyMarkersToMapBoxMap(@Nullable List<NearbyBaseMarker> customNearbyBaseMarker) {
         List<NearbyBaseMarker> baseMarkerOptions;
-        Timber.d("addNearbyMarkerstoMapBoxMap is called");
+        Timber.d("addNearbyMarkersToMapBoxMap is called");
         if (customNearbyBaseMarker != null) {
             // If we try to update nearby points for a custom location choosen from map (we are not there)
             baseMarkerOptions = customNearbyBaseMarker;
@@ -782,8 +764,8 @@ public class NearbyMapFragment extends DaggerFragment {
     }
 
     /*
-    * We are not able to hide FABs without removing anchors, this method removes anchors
-    * */
+     * We are not able to hide FABs without removing anchors, this method removes anchors
+     * */
     private void removeAnchorFromFABs(FloatingActionButton floatingActionButton) {
         //get rid of anchors
         //Somehow this was the only way https://stackoverflow.com/questions/32732932
@@ -805,12 +787,12 @@ public class NearbyMapFragment extends DaggerFragment {
         addAnchorToSmallFABs(fabGallery, ((NearbyFragment)getParentFragment()).view.findViewById(R.id.empty_view).getId());
 
         addAnchorToSmallFABs(fabCamera, ((NearbyFragment)getParentFragment()).view.findViewById(R.id.empty_view1).getId());
-        }
+    }
 
 
     /*
-    * Add anchors back before making them visible again.
-    * */
+     * Add anchors back before making them visible again.
+     * */
     private void addAnchorToBigFABs(FloatingActionButton floatingActionButton, int anchorID) {
         CoordinatorLayout.LayoutParams params = new CoordinatorLayout.LayoutParams
                 (ViewGroup.LayoutParams.WRAP_CONTENT,ViewGroup.LayoutParams.WRAP_CONTENT);
@@ -820,9 +802,9 @@ public class NearbyMapFragment extends DaggerFragment {
     }
 
     /*
-    * Add anchors back before making them visible again. Big and small fabs have different anchor
-    * gravities, therefore the are two methods.
-    * */
+     * Add anchors back before making them visible again. Big and small fabs have different anchor
+     * gravities, therefore the are two methods.
+     * */
     private void addAnchorToSmallFABs(FloatingActionButton floatingActionButton, int anchorID) {
         CoordinatorLayout.LayoutParams params = new CoordinatorLayout.LayoutParams
                 (ViewGroup.LayoutParams.WRAP_CONTENT,ViewGroup.LayoutParams.WRAP_CONTENT);
@@ -961,7 +943,7 @@ public class NearbyMapFragment extends DaggerFragment {
      * @param isFabOpen state of FAB buttons, open when clicked on fab button, closed on other click
      */
     private void animateFAB(boolean isFabOpen) {
-            this.isFabOpen = !isFabOpen;
+        this.isFabOpen = !isFabOpen;
         if (fabPlus.isShown()){
             if (isFabOpen) {
                 fabPlus.startAnimation(rotate_backward);
@@ -996,10 +978,10 @@ public class NearbyMapFragment extends DaggerFragment {
     }
 
     /**
-     * This bundle is sent whenever and updte for nearby map comes, not for recreation, for updates
+     * This bundle is sent whenever and update for nearby map comes, not for recreation, for updates
      */
-    public void setBundleForUpdtes(Bundle bundleForUpdtes) {
-        this.bundleForUpdtes = bundleForUpdtes;
+    public void setBundleForUpdates(Bundle bundleForUpdates) {
+        this.bundleForUpdates = bundleForUpdates;
     }
 
     @Override
@@ -1024,6 +1006,13 @@ public class NearbyMapFragment extends DaggerFragment {
         if (mapView != null) {
             mapView.onResume();
         }
+        if (mapboxMap != null) {
+            mapboxMap.getUiSettings().setAllGesturesEnabled(true);
+        }
+        searchThisAreaModeOn = false;
+        checkingAround = false;
+        searchedAroundCurrentLocation = true;
+        boundaryCoordinates = null;
         initViews();
         setListeners();
         transparentView.setClickable(false);
@@ -1063,4 +1052,3 @@ public class NearbyMapFragment extends DaggerFragment {
         }
     }
 }
-

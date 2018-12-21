@@ -57,10 +57,10 @@ public class NearbyController {
         NearbyPlacesInfo nearbyPlacesInfo = new NearbyPlacesInfo();
 
         if (latLangToSearchAround == null) {
-            Timber.d("Loading attractions neari, but curLatLng is null");
+            Timber.d("Loading attractions nearby, but curLatLng is null");
             return null;
         }
-        List<Place> places = nearbyPlaces.getFromWikidataQuery(latLangToSearchAround, Locale.getDefault().getLanguage(), returnClosestResult);
+        List<Place> places = nearbyPlaces.radiusExpander(latLangToSearchAround, Locale.getDefault().getLanguage(), returnClosestResult);
 
         if (null != places && places.size() > 0) {
             LatLng[] boundaryCoordinates = {places.get(0).location,   // south

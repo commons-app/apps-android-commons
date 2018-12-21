@@ -21,11 +21,12 @@ import fr.free.nrw.commons.location.LatLng;
 import fr.free.nrw.commons.upload.FileUtils;
 import timber.log.Timber;
 
+/**
+ * Handles the Wikidata query to obtain Places around search location
+ */
 public class NearbyPlaces {
 
-    private static int MIN_RESULTS = 40;
     private static final double INITIAL_RADIUS = 1.0; // in kilometers
-    private static double MAX_RADIUS = 300.0; // in kilometers
     private static final double RADIUS_MULTIPLIER = 1.618;
     private static final Uri WIKIDATA_QUERY_URL = Uri.parse("https://query.wikidata.org/sparql");
     private static final Uri WIKIDATA_QUERY_UI_URL = Uri.parse("https://query.wikidata.org/");
@@ -46,38 +47,34 @@ public class NearbyPlaces {
     }
 
     /**
-     * Returns list of nearby places around curLatLng or closest result near curLatLng. This decision
-     * is made according to returnClosestResult variable. If returnClosestResult true, then our
-     * number of min results set to 1, and max radius to search is set to 5. If there is no place
-     * in 5 km radius, empty list will be returned. This method sets radius variable according to
-     * search type (returnClosestResult or not), but search operation will be handled in overloaded
-     * method below, which is called from this method.
-     * @param curLatLng Our reference location
-     * @param lang Language we will display results in
-     * @param returnClosestResult If true, return only first result found, else found satisfactory
-     *                            number of results
-     * @return List of nearby places around, or closest nearby place
-     * @throws IOException
+     * Expands the radius as needed for the Wikidata query
+     * @param curLatLng coordinates of search location
+     * @param lang user's language
+     * @param returnClosestResult true if only the nearest point is desired
+     * @return list of places obtained
+     * @throws IOException if query fails
      */
-    List<Place> getFromWikidataQuery(LatLng curLatLng, String lang, boolean returnClosestResult) throws IOException {
+    List<Place> radiusExpander(LatLng curLatLng, String lang, boolean returnClosestResult) throws IOException {
+
+        int minResults;
+        double maxRadius;
+
         List<Place> places = Collections.emptyList();
 
-        /**
-         * If returnClosestResult is true, then this means that we are trying to get closest point
-         * to use in cardView above contributions list
-         */
+        // If returnClosestResult is true, then this means that we are trying to get closest point
+        // to use in cardView in Contributions fragment
         if (returnClosestResult) {
-            MIN_RESULTS = 1; // Return closest nearby place
-            MAX_RADIUS = 5;  // Return places only in 5 km area
+            minResults = 1; // Return closest nearby place
+            maxRadius = 5;  // Return places only in 5 km area
             radius = INITIAL_RADIUS; // refresh radius again, otherwise increased radius is grater than MAX_RADIUS, thus returns null
         } else {
-            MIN_RESULTS = 40;
-            MAX_RADIUS = 300.0; // in kilometers
+            minResults = 40;
+            maxRadius = 300.0; // in kilometers
             radius = INITIAL_RADIUS;
         }
 
-            // increase the radius gradually to find a satisfactory number of nearby places
-            while (radius <= MAX_RADIUS) {
+            // Increase the radius gradually to find a satisfactory number of nearby places
+            while (radius <= maxRadius) {
                 try {
                     places = getFromWikidataQuery(curLatLng, lang, radius);
                 } catch (InterruptedIOException e) {
@@ -85,34 +82,28 @@ public class NearbyPlaces {
                     return places;
                 }
                 Timber.d("%d results at radius: %f", places.size(), radius);
-                if (places.size() >= MIN_RESULTS) {
+                if (places.size() >= minResults) {
                     break;
                 } else {
                     radius *= RADIUS_MULTIPLIER;
                 }
             }
         // make sure we will be able to send at least one request next time
-        if (radius > MAX_RADIUS) {
-            radius = MAX_RADIUS;
+        if (radius > maxRadius) {
+            radius = maxRadius;
         }
-
         return places;
     }
 
     /**
-     * Creates and sends query for nearby wikidata items needs picture.
-     * Reads results from query and turns them into meaningful place variables.
-     * Adds them to the list of places.
-     * @param cur Our reference location to check around
-     * @param lang Language we will display results in
-     * @param radius Our query area is a circle, where cur is center and radius is radius
-     * @return
-     * @throws IOException
+     * Runs the Wikidata query to populate the Places around search location
+     * @param cur coordinates of search location
+     * @param lang user's language
+     * @param radius radius for search, as determined by radiusExpander()
+     * @return list of places obtained
+     * @throws IOException if query fails
      */
-    private List<Place> getFromWikidataQuery(LatLng cur,
-                                             String lang,
-                                             double radius)
-            throws IOException {
+    private List<Place> getFromWikidataQuery(LatLng cur, String lang, double radius) throws IOException {
         List<Place> places = new ArrayList<>();
 
         String query = wikidataQuery
@@ -125,8 +116,7 @@ public class NearbyPlaces {
 
         // format as a URL
         Timber.d(WIKIDATA_QUERY_UI_URL.buildUpon().fragment(query).build().toString());
-        String url = WIKIDATA_QUERY_URL.buildUpon()
-                .appendQueryParameter("query", query).build().toString();
+        String url = WIKIDATA_QUERY_URL.buildUpon().appendQueryParameter("query", query).build().toString();
         URLConnection conn = new URL(url).openConnection();
         conn.setRequestProperty("Accept", "text/tab-separated-values");
         BufferedReader in = new BufferedReader(new InputStreamReader(conn.getInputStream()));
@@ -162,8 +152,7 @@ public class NearbyPlaces {
 
             double latitude;
             double longitude;
-            Matcher matcher =
-                    Pattern.compile("Point\\(([^ ]+) ([^ ]+)\\)").matcher(point);
+            Matcher matcher = Pattern.compile("Point\\(([^ ]+) ([^ ]+)\\)").matcher(point);
             if (!matcher.find()) {
                 continue;
             }
@@ -192,5 +181,4 @@ public class NearbyPlaces {
 
         return places;
     }
-
 }

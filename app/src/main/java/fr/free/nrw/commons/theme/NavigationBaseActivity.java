@@ -90,15 +90,10 @@ public abstract class NavigationBaseActivity extends BaseActivity
         }
     }
 
-    public void changeDrawerIconToBakcButton() {
+    public void changeDrawerIconToBackButton() {
         toggle.setDrawerIndicatorEnabled(false);
         toggle.setHomeAsUpIndicator(R.drawable.ic_arrow_back_white);
-        toggle.setToolbarNavigationClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                onBackPressed();
-            }
-        });
+        toggle.setToolbarNavigationClickListener(view -> onBackPressed());
     }
 
     public void changeDrawerIconToDefault() {

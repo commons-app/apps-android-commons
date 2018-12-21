@@ -263,10 +263,7 @@ public class CategoryImagesListFragment extends DaggerFragment {
      * @return  GridView Adapter
      */
     public ListAdapter getAdapter() {
-        if(gridView == null) {
-            return null;
-        }
-        return gridView.getAdapter();
+        return gridAdapter;
     }
 
 }

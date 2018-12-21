@@ -31,7 +31,7 @@ public class QuizActivity extends AppCompatActivity {
     @BindView(R.id.toolbar) Toolbar toolbar;
 
     private QuizController quizController = new QuizController();
-    private ArrayList<QuizQuestion> quiz = new ArrayList<QuizQuestion>();
+    private ArrayList<QuizQuestion> quiz = new ArrayList<>();
     private int questionIndex = 0;
     private int score;
 

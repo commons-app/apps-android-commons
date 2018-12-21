@@ -105,7 +105,7 @@ public class NearbyListFragment extends DaggerFragment {
 
     /**
      * While nearby updates for current location held with bundle, automatically, custom updates are
-     * done by calling this methods, triddered by search this are button input from user.
+     * done by calling this method, triggered by search this are button input from user.
      * @param placeList List of nearby places to be added list fragment
      */
     public void updateNearbyListSignificantlyForCustomLocation(List<Place> placeList) {
