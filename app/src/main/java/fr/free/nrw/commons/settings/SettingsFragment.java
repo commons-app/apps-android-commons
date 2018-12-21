@@ -10,10 +10,6 @@ import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.PreferenceFragment;
 import android.preference.SwitchPreference;
-import android.support.annotation.NonNull;
-import android.support.v4.content.ContextCompat;
-import android.support.v4.content.FileProvider;
-import android.widget.Toast;
 
 import com.karumi.dexter.Dexter;
 import com.karumi.dexter.listener.PermissionGrantedResponse;
@@ -30,9 +26,6 @@ import fr.free.nrw.commons.utils.PermissionUtils;
 import fr.free.nrw.commons.utils.ViewUtil;
 
 public class SettingsFragment extends PreferenceFragment {
-
-    private static final int REQUEST_CODE_WRITE_EXTERNAL_STORAGE = 100;
-
     @Inject @Named("default_preferences") SharedPreferences prefs;
     @Inject CommonsLogSender commonsLogSender;
 
@@ -68,40 +61,42 @@ public class SettingsFragment extends PreferenceFragment {
         EditTextPreference authorName = (EditTextPreference) findPreference("authorName");
         authorName.setEnabled(prefs.getBoolean("useAuthorName", false));
         useAuthorName.setOnPreferenceChangeListener((preference, newValue) -> {
-            authorName.setEnabled((Boolean)newValue);
+            authorName.setEnabled((Boolean) newValue);
             return true;
         });
 
         final EditTextPreference uploadLimit = (EditTextPreference) findPreference("uploads");
-        int uploads = prefs.getInt(Prefs.UPLOADS_SHOWING, 100);
-        uploadLimit.setText(uploads + "");
-        uploadLimit.setSummary(uploads + "");
+        int currentUploadLimit = prefs.getInt(Prefs.UPLOADS_SHOWING, 100);
+        uploadLimit.setText(Integer.toString(currentUploadLimit));
+        uploadLimit.setSummary(Integer.toString(currentUploadLimit));
         uploadLimit.setOnPreferenceChangeListener((preference, newValue) -> {
-            int value;
+            int value = currentUploadLimit;
+
             try {
                 value = Integer.parseInt(newValue.toString());
-            } catch(Exception e) {
-                value = 100; //Default number
+            } catch (NumberFormatException e) {
+                e.printStackTrace();
             }
+
             final SharedPreferences.Editor editor = prefs.edit();
             if (value > 500) {
+                value = 500;
                 new AlertDialog.Builder(getActivity())
                         .setTitle(R.string.maximum_limit)
                         .setMessage(R.string.maximum_limit_alert)
-                        .setPositiveButton(android.R.string.yes, (dialog, which) -> {})
-                        .setIcon(android.R.drawable.ic_dialog_alert)
+                        .setPositiveButton(android.R.string.ok, (dialog, which) -> {})
                         .show();
-                editor.putInt(Prefs.UPLOADS_SHOWING, 500);
-                editor.putBoolean(Prefs.IS_CONTRIBUTION_COUNT_CHANGED,true);
-                uploadLimit.setSummary(500 + "");
-                uploadLimit.setText(500 + "");
-            } else {
-                editor.putInt(Prefs.UPLOADS_SHOWING, value);
-                editor.putBoolean(Prefs.IS_CONTRIBUTION_COUNT_CHANGED,true);
-                uploadLimit.setSummary(String.valueOf(value));
             }
+
+            editor.putInt(Prefs.UPLOADS_SHOWING, value);
+            editor.putBoolean(Prefs.IS_CONTRIBUTION_COUNT_CHANGED, true);
+            uploadLimit.setSummary(Integer.toString(value));
+            uploadLimit.setText(Integer.toString(value));
+
             editor.apply();
-            return true;
+
+            // Return false as we handle setting the editText value
+            return false;
         });
 
         Preference betaTesterPreference = findPreference("becomeBetaTester");
