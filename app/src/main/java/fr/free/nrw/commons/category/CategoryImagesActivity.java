@@ -148,7 +148,7 @@ public class CategoryImagesActivity
      */
     public static void startYourself(Context context, String title, String categoryName) {
         Intent intent = new Intent(context, CategoryImagesActivity.class);
-        intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         intent.putExtra("title", title);
         intent.putExtra("categoryName", categoryName);
         context.startActivity(intent);

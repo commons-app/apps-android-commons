@@ -177,11 +177,11 @@ public abstract class NavigationBaseActivity extends BaseActivity
                 return true;
             case R.id.action_about:
                 drawerLayout.closeDrawer(navigationView);
-                startActivityWithFlags(this, AboutActivity.class, Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+                startActivityWithFlags(this, AboutActivity.class, Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 return true;
             case R.id.action_settings:
                 drawerLayout.closeDrawer(navigationView);
-                startActivityWithFlags(this, SettingsActivity.class, Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+                startActivityWithFlags(this, SettingsActivity.class, Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 return true;
             case R.id.action_introduction:
                 drawerLayout.closeDrawer(navigationView);

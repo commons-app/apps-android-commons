@@ -54,7 +54,7 @@ public class BookmarksActivity extends NavigationBaseActivity
      */
     public static void startYourself(Context context) {
         Intent intent = new Intent(context, BookmarksActivity.class);
-        intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         context.startActivity(intent);
     }
 
