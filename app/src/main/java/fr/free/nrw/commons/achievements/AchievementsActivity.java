@@ -379,7 +379,7 @@ public class AchievementsActivity extends NavigationBaseActivity {
                 .setTitle(title)
                 .setMessage(message)
                 .setCancelable(true)
-                .setNeutralButton(android.R.string.ok, (dialog, id) -> dialog.cancel())
+                .setPositiveButton(android.R.string.ok, (dialog, id) -> dialog.cancel())
                 .create()
                 .show();
     }

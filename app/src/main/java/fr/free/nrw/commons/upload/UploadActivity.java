@@ -599,7 +599,7 @@ public class UploadActivity extends AuthenticatedActivity implements UploadView,
                 .setTitle(titleStringID)
                 .setMessage(getString(messageStringId, (Object[]) formatArgs))
                 .setCancelable(true)
-                .setNeutralButton(android.R.string.ok, (dialog, id) -> dialog.cancel())
+                .setPositiveButton(android.R.string.ok, (dialog, id) -> dialog.cancel())
                 .create()
                 .show();
     }
