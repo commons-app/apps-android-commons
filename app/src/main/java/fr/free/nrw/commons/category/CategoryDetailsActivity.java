@@ -143,11 +143,7 @@ public class CategoryDetailsActivity extends NavigationBaseActivity
      */
     public static void startYourself(Context context, String categoryName) {
         Intent intent = new Intent(context, CategoryDetailsActivity.class);
-<<<<<<< HEAD
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-=======
         intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT | Intent.FLAG_ACTIVITY_SINGLE_TOP);
->>>>>>> HEAD@{1}
         intent.putExtra("categoryName", categoryName);
         context.startActivity(intent);
     }
