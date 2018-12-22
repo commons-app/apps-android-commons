@@ -330,6 +330,7 @@ public class UploadModel {
 
     void setSelectedLicense(String licenseName) {
         this.license = licensesByName.get(licenseName);
+        prefs.edit().putString(Prefs.DEFAULT_LICENSE, license).commit();
     }
 
     Observable<Contribution> buildContributions(List<String> categoryStringList) {
