@@ -1,8 +1,10 @@
 package fr.free.nrw.commons.bookmarks;
 
+import android.app.ActivityManager;
 import android.content.Context;
 import android.content.Intent;
 import android.database.DataSetObserver;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.FragmentManager;
@@ -26,6 +28,7 @@ public class BookmarksActivity extends NavigationBaseActivity
     private FragmentManager supportFragmentManager;
     private BookmarksPagerAdapter adapter;
     private MediaDetailPagerFragment mediaDetails;
+    private boolean mIsRestoredToTop;
     @BindView(R.id.viewPagerBookmarks)
     ViewPager viewPager;
     @BindView(R.id.tabLayoutBookmarks)
@@ -54,9 +57,35 @@ public class BookmarksActivity extends NavigationBaseActivity
      */
     public static void startYourself(Context context) {
         Intent intent = new Intent(context, BookmarksActivity.class);
-        intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+        intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT | Intent.FLAG_ACTIVITY_SINGLE_TOP);
         context.startActivity(intent);
     }
+
+    /* This is a workaround for a known Android bug which is present in some API levels.
+       https://issuetracker.google.com/issues/36986021
+     */
+    @Override
+    protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+        if ((intent.getFlags() | Intent.FLAG_ACTIVITY_REORDER_TO_FRONT) > 0) {
+            mIsRestoredToTop  = true;
+        }
+    }
+
+    @Override
+    public void finish() {
+        super.finish();
+        if (Build.VERSION.SDK_INT == 19 || Build.VERSION.SDK_INT == 24 || Build.VERSION.SDK_INT == 25
+                && !isTaskRoot() && mIsRestoredToTop) {
+            // Issue with FLAG_ACTIVITY_REORDER_TO_FRONT,
+            // Reordered activity back press will go to home unexpectly,
+            // Workaround: move reordered activity current task to front when it's finished.
+            ActivityManager tasksManager = (ActivityManager) getSystemService(ACTIVITY_SERVICE);
+            tasksManager.moveTaskToFront(getTaskId(), ActivityManager.MOVE_TASK_NO_USER_ACTION);
+        }
+    }
+
+
 
     @Override
     public void onBackStackChanged() {
