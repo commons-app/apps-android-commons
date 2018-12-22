@@ -53,7 +53,6 @@ public class NotificationActivity extends NavigationBaseActivity {
 
     private static final String TAG_NOTIFICATION_WORKER_FRAGMENT = "NotificationWorkerFragment";
     private NotificationWorkerFragment mNotificationWorkerFragment;
-    private boolean mIsRestoredToTop;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
