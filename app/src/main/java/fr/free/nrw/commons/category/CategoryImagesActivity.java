@@ -13,6 +13,7 @@ import android.view.View;
 import android.widget.AdapterView;
 
 import butterknife.ButterKnife;
+import fr.free.nrw.commons.BuildConfig;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.auth.AuthenticatedActivity;
@@ -33,6 +34,8 @@ public class CategoryImagesActivity
                     MediaDetailPagerFragment.MediaDetailProvider,
                     AdapterView.OnItemClickListener{
 
+    private static final String FEATURED_IMAGES_CATEGORY = "Category:Featured_pictures_on_Wikimedia_Commons";
+    private static final String UPLOADED_WITH_ANDROID_APP = "Category:Uploaded with Mobile/Android";
 
     private FragmentManager supportFragmentManager;
     private CategoryImagesListFragment categoryImagesListFragment;
@@ -154,6 +157,20 @@ public class CategoryImagesActivity
         context.startActivity(intent);
     }
 
+    /**
+     * Consumers should be simply using this method to use this activity.
+     * This opens the activity with the standard explore categoryName
+     * @param context A Context of the application package implementing this class.
+     * @param title Page title
+     */
+    public static void startYourself(Context context, String title) {
+        if (BuildConfig.FLAVOR.equals("beta")) {
+            startYourself(context, title, UPLOADED_WITH_ANDROID_APP);
+        }
+
+        startYourself(context, title, FEATURED_IMAGES_CATEGORY);
+    }
+    
     /**
      * This method is called mediaDetailPagerFragment. It returns the Media Object at that Index
      * @param i It is the index of which media object is to be returned which is same as
