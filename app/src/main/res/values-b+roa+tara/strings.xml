@@ -73,6 +73,7 @@
   <string name="media_detail_license">Licenze</string>
   <string name="media_detail_coordinates">Coordinate</string>
   <string name="navigation_item_login">Tràse</string>
+  <string name="no_recent_searches">Nisciuna recerche recende</string>
   <string name="contributions_fragment">Condrebbute</string>
   <string name="nearby_fragment">Vicine a</string>
   <string name="notifications">Notifeche</string>

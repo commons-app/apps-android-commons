@@ -9,6 +9,7 @@ import com.google.gson.GsonBuilder;
 
 import java.io.File;
 
+import java.util.concurrent.TimeUnit;
 import javax.inject.Named;
 import javax.inject.Singleton;
 
@@ -30,9 +31,11 @@ public class NetworkingModule {
     @Singleton
     public OkHttpClient provideOkHttpClient(Context context) {
         File dir = new File(context.getCacheDir(), "okHttpCache");
-        return new OkHttpClient.Builder()
-                .cache(new Cache(dir, OK_HTTP_CACHE_SIZE))
-                .build();
+        return new OkHttpClient.Builder().connectTimeout(60, TimeUnit.SECONDS)
+            .writeTimeout(60, TimeUnit.SECONDS)
+            .readTimeout(60, TimeUnit.SECONDS)
+            .cache(new Cache(dir, OK_HTTP_CACHE_SIZE))
+            .build();
     }
 
     @Provides

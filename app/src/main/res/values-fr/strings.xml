@@ -249,13 +249,6 @@
   <string name="description_info">Veuillez décrire le média autant que possible : Où a-t-il été enregistré ? Que montre-t-il ? Quel est le contexte ? Veuillez décrire les objets ou les personnes. Révélez les informations qui ne peuvent pas être devinées facilement, par exemple l’heure de la journée si c’est un paysage. Si le média montre quelque chose d’inhabituel, veuillez expliquer ce qui le rend exceptionnel.</string>
   <string name="upload_image_too_dark">Cette image est trop sombre, êtes-vous sûr de vouloir la téléverser ? Wikimedia Commons est réservé pour les images ayant une valeur encyclopédique.</string>
   <string name="upload_image_blurry">Cette image est floue, êtes-vous sûr de vouloir la télécharger ? Wikimédia Communs n’est destiné qu’à des images de valeur encyclopédique.</string>
-  <string name="upload_image_problem_duplicate">Ce fichier existe déjà sur Commons. Êtes-vous sûr de vouloir continuer ?</string>
-  <string name="upload_image_problem_dark">Cette image est trop sombre, êtes-vous sûr de vouloir la télécharger ? Wikimédia Communs n’est que pour les images avec une valeur encyclopédique.</string>
-  <string name="upload_image_problem_blurry">Cette image est floue, êtes-vous sûr de vouloir la télécharger ? Wikimédia Communs n’est que pour les images ayant une valeur encyclopédique.</string>
-  <string name="upload_image_problem_dark_duplicate">Cette image est trop sombre et existe déjà sur Communs, êtes-vous sûr de vouloir la télécharger ? Veuillez ne télécharger que des images de valeur encyclopédique.</string>
-  <string name="upload_image_problem_blurry_duplicate">Cette image est floue et existe déjà dans Communs, êtes-vous sûr de vouloir la télécharger ? Veuillez ne télécharger que des images de valeur encyclopédique.</string>
-  <string name="upload_image_problem_dark_blurry">Cette image est trop sombre et floue, êtes-vous sûr de vouloir la télécharger ? Veuillez ne télécharger que des images avec une valeur encyclopédique.</string>
-  <string name="upload_image_problem_dark_blurry_duplicate">Cette image est trop sombre, floue et existe déjà dans Communs, êtes-vous sûr de vouloir la télécharger ? Veuillez ne télécharger que des images avec une valeur encyclopédique.</string>
   <string name="give_permission">Accorder le droit</string>
   <string name="use_external_storage">Utiliser le stockage externe</string>
   <string name="use_external_storage_summary">Enregistrer les images prises avec l’appareil photo de votre appareil</string>
@@ -348,6 +341,7 @@
   <string name="share_coordinates_not_present">Les coordonnées n\'ont pas été spécifiées pendant la sélection de l\'image</string>
   <string name="error_fetching_nearby_places">Erreur durant l\'exploration du voisinage.</string>
   <string name="add_description">+ Ajouter une description</string>
+  <string name="no_recent_searches">Aucune recherche récente</string>
   <string name="delete_recent_searches_dialog">Êtes-vous sûr de vouloir effacer votre historique de recherche ?</string>
   <string name="search_history_deleted">Historique de recherche effacée</string>
   <string name="nominate_delete">Proposé à la suppression</string>
@@ -425,4 +419,8 @@
   <string name="never_ask_again">Ne plus jamais demander cela</string>
   <string name="display_location_permission_title">Afficher l\'autorisation de géolocalisation</string>
   <string name="display_location_permission_explanation">Demander le droit de géolocaliser quand cela est nécessaire pour la fonction de visualisation de la carte des notifications de voisinage.</string>
+  <string name="ends_on">Se termine le:</string>
+  <string name="display_campaigns">Campagnes d\'affichage</string>
+  <string name="display_campaigns_explanation">Touchez ici pour voir les campagnes en cours</string>
+  <string name="nearby_campaign_dismiss_message">Vous ne verrez plus les campagnes. Néanmoins, vous pouvez réactiver cette notification dans vos paramètres de configuration, si vous le souhaitez.</string>
 </resources>

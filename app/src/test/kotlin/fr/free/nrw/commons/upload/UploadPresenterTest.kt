@@ -44,7 +44,7 @@ class UploadPresenterTest {
     @Test
     fun receiveDirect() {
         val element = Mockito.mock(Uri::class.java)
-        uploadModel!!.receiveDirect(element, "image/jpeg", "external", "Q1", "Test", "Test"
-        ) { _, _ -> }
+        uploadModel!!.receiveDirect(element, "image/jpeg", "external", "Q1", "Test", "Test", { _, _ -> }
+                , "")
     }
 }

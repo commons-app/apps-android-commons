@@ -67,7 +67,7 @@ class GpsCategoryModelTest {
     }
 
     @Test
-    fun setttingTheListOverwritesExistingValues() {
+    fun settingTheListOverwritesExistingValues() {
         testObject.add("one")
 
         testObject.categoryList = listOf("two")

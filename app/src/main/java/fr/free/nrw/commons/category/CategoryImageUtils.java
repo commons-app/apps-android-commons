@@ -26,9 +26,11 @@ public class CategoryImageUtils {
      */
     public static List<Media> getMediaList(NodeList childNodes) {
         List<Media> categoryImages = new ArrayList<>();
+
         for (int i = 0; i < childNodes.getLength(); i++) {
             Node node = childNodes.item(i);
-            if (getMediaFromPage(node).getFilename().substring(0,5).equals("File:")){
+
+            if (getFileName(node).substring(0, 5).equals("File:")) {
                 categoryImages.add(getMediaFromPage(node));
             }
         }
@@ -46,7 +48,7 @@ public class CategoryImageUtils {
         List<String> subCategories = new ArrayList<>();
         for (int i = 0; i < childNodes.getLength(); i++) {
             Node node = childNodes.item(i);
-            subCategories.add(getMediaFromPage(node).getFilename());
+            subCategories.add(getFileName(node));
         }
         Collections.sort(subCategories);
         return subCategories;

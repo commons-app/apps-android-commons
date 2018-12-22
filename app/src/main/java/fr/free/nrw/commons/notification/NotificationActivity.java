@@ -106,7 +106,7 @@ public class NotificationActivity extends NavigationBaseActivity {
                         progressBar.setVisibility(View.GONE);
                     }, throwable -> {
                         Timber.e(throwable, "Error occurred while loading notifications");
-                        ViewUtil.showSnackbar(relativeLayout, R.string.error_notifications);
+                        ViewUtil.showShortSnackbar(relativeLayout, R.string.error_notifications);
                         progressBar.setVisibility(View.GONE);
                     });
         } else {
@@ -123,7 +123,7 @@ public class NotificationActivity extends NavigationBaseActivity {
 
     private void setAdapter(List<Notification> notificationList) {
         if (notificationList == null || notificationList.isEmpty()) {
-            ViewUtil.showSnackbar(relativeLayout, R.string.no_notifications);
+            ViewUtil.showShortSnackbar(relativeLayout, R.string.no_notifications);
             return;
         }
         notificationAdapterFactory = new NotificationAdapterFactory(notification -> {
@@ -132,6 +132,12 @@ public class NotificationActivity extends NavigationBaseActivity {
         });
         RVRendererAdapter<Notification> adapter = notificationAdapterFactory.create(notificationList);
         recyclerView.setAdapter(adapter);
+    }
+
+    public static void startYourself(Context context) {
+        Intent intent = new Intent(context, NotificationActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+        context.startActivity(intent);
     }
 
     private void initializeAndSetNotificationList(List<Notification> notificationList){

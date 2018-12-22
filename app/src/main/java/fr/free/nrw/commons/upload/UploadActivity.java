@@ -65,6 +65,7 @@ import timber.log.Timber;
 import static fr.free.nrw.commons.utils.ImageUtils.Result;
 import static fr.free.nrw.commons.utils.ImageUtils.getErrorMessageForResult;
 import static fr.free.nrw.commons.wikidata.WikidataConstants.WIKIDATA_ENTITY_ID_PREF;
+import static fr.free.nrw.commons.wikidata.WikidataConstants.WIKIDATA_ITEM_LOCATION;
 
 public class UploadActivity extends AuthenticatedActivity implements UploadView, SimilarImageInterface {
     @Inject InputMethodManager inputMethodManager;
@@ -251,13 +252,14 @@ public class UploadActivity extends AuthenticatedActivity implements UploadView,
 
     @SuppressLint("StringFormatInvalid")
     @Override
-    public void updateLicenseSummary(String selectedLicense) {
+    public void updateLicenseSummary(String selectedLicense, int imageCount) {
         String licenseHyperLink = "<a href='" + Utils.licenseUrlFor(selectedLicense)+"'>" +
                 getString(Utils.licenseNameFor(selectedLicense)) + "</a><br>";
         licenseSummary.setMovementMethod(LinkMovementMethod.getInstance());
         licenseSummary.setText(
                 Html.fromHtml(
-                        getString(R.string.share_license_summary, licenseHyperLink)));
+                        getResources().getQuantityString(R.plurals.share_license_summary,
+                                imageCount, licenseHyperLink)));
     }
 
     @Override
@@ -350,6 +352,9 @@ public class UploadActivity extends AuthenticatedActivity implements UploadView,
 
     @Override
     public void showBadPicturePopup(@Result int result) {
+        if (result >= 8 ) { // If location of image and nearby does not match, then set shared preferences to disable wikidata edits
+            directPrefs.edit().putBoolean("Picture_Has_Correct_Location",false);
+        }
         String errorMessageForResult = getErrorMessageForResult(this, result);
         if (StringUtils.isNullOrWhiteSpace(errorMessageForResult)) {
             return;
@@ -553,7 +558,8 @@ public class UploadActivity extends AuthenticatedActivity implements UploadView,
                 String imageDesc = directPrefs.getString("Desc", "");
                 Timber.i("Received direct upload with title %s and description %s", imageTitle, imageDesc);
                 String wikidataEntityIdPref = intent.getStringExtra(WIKIDATA_ENTITY_ID_PREF);
-                presenter.receiveDirect(mediaUri, mimeType, source, wikidataEntityIdPref, imageTitle, imageDesc);
+                String wikidataItemLocation = intent.getStringExtra(WIKIDATA_ITEM_LOCATION);
+                presenter.receiveDirect(mediaUri, mimeType, source, wikidataEntityIdPref, imageTitle, imageDesc, wikidataItemLocation);
             } else {
                 Timber.i("Received single upload");
                 presenter.receive(mediaUri, mimeType, source);
@@ -593,7 +599,7 @@ public class UploadActivity extends AuthenticatedActivity implements UploadView,
                 .setTitle(titleStringID)
                 .setMessage(getString(messageStringId, (Object[]) formatArgs))
                 .setCancelable(true)
-                .setNeutralButton(android.R.string.ok, (dialog, id) -> dialog.cancel())
+                .setPositiveButton(android.R.string.ok, (dialog, id) -> dialog.cancel())
                 .create()
                 .show();
     }
