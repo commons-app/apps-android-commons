@@ -1,10 +1,8 @@
 package fr.free.nrw.commons.bookmarks;
 
-import android.app.ActivityManager;
 import android.content.Context;
 import android.content.Intent;
 import android.database.DataSetObserver;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.FragmentManager;
@@ -28,7 +26,6 @@ public class BookmarksActivity extends NavigationBaseActivity
     private FragmentManager supportFragmentManager;
     private BookmarksPagerAdapter adapter;
     private MediaDetailPagerFragment mediaDetails;
-    private boolean mIsRestoredToTop;
     @BindView(R.id.viewPagerBookmarks)
     ViewPager viewPager;
     @BindView(R.id.tabLayoutBookmarks)

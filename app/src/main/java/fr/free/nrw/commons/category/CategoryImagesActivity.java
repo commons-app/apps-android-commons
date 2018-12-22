@@ -1,10 +1,8 @@
 package fr.free.nrw.commons.category;
 
-import android.app.ActivityManager;
 import android.content.Context;
 import android.content.Intent;
 import android.database.DataSetObserver;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -39,7 +37,6 @@ public class CategoryImagesActivity
     private FragmentManager supportFragmentManager;
     private CategoryImagesListFragment categoryImagesListFragment;
     private MediaDetailPagerFragment mediaDetails;
-    private boolean mIsRestoredToTop;
 
     @Override
     protected void onAuthCookieAcquired(String authCookie) {
