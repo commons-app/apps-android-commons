@@ -56,7 +56,6 @@ import timber.log.Timber;
 
 @AcraDialog(
         resTheme = R.style.Theme_AppCompat_Dialog,
-        resIcon = R.drawable.warning_placeholder,
         resText = R.string.crash_dialog_text,
         resTitle = R.string.crash_dialog_title,
         resCommentPrompt = R.string.crash_dialog_comment_prompt
