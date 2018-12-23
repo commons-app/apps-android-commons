@@ -55,7 +55,7 @@
                 <data android:mimeType="image/*" />
                 <data android:mimeType="audio/ogg" />
             </intent-filter>
-            <intent-filter>
+            <intent-filter android:label="@string/intent_share_upload_label">
                 <action android:name="android.intent.action.SEND_MULTIPLE" />
 
                 <category android:name="android.intent.category.DEFAULT" />
