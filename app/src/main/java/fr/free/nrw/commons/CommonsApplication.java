@@ -45,14 +45,23 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 import timber.log.Timber;
 
-@ReportsCrashes(
-        mailTo = "commons-app-android-private@googlegroups.com",
-        mode = ReportingInteractionMode.DIALOG,
-        resDialogText = R.string.crash_dialog_text,
-        resDialogTitle = R.string.crash_dialog_title,
-        resDialogCommentPrompt = R.string.crash_dialog_comment_prompt,
-        resDialogOkToast = R.string.crash_dialog_ok_toast
+@AcraCore(
+        buildConfigClass = BuildConfig.class,
+        resReportSendSuccessToast = R.string.crash_dialog_ok_toast
 )
+
+@AcraMailSender(
+        mailTo = "commons-app-android-private@googlegroups.com"
+)
+
+@AcraDialog(
+        resTheme = R.style.Theme_AppCompat_Dialog,
+        resIcon = R.drawable.warning_placeholder,
+        resText = R.string.crash_dialog_text,
+        resTitle = R.string.crash_dialog_title,
+        resCommentPrompt = R.string.crash_dialog_comment_prompt
+)
+
 public class CommonsApplication extends Application {
     @Inject SessionManager sessionManager;
     @Inject DBOpenHelper dbOpenHelper;
