@@ -36,6 +36,8 @@ import fr.free.nrw.commons.contributions.MainActivity;
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
 import fr.free.nrw.commons.mwapi.UploadResult;
 import fr.free.nrw.commons.wikidata.WikidataEditService;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.schedulers.Schedulers;
 import timber.log.Timber;
 
 public class UploadService extends HandlerService<Contribution> {
@@ -244,25 +246,36 @@ public class UploadService extends HandlerService<Contribution> {
                     getString(R.string.upload_progress_notification_title_finishing, contribution.getDisplayTitle()),
                     contribution
             );
-            UploadResult uploadResult = mwApi.uploadFile(filename, fileInputStream, contribution.getDataLength(),
-                    contribution.getPageContents(getApplicationContext()), contribution.getEditSummary(), localUri, contribution.getContentProviderUri(), notificationUpdater);
+            mwApi.uploadFile(
+                    filename, fileInputStream,
+                    contribution.getDataLength(), contribution.getPageContents(getApplicationContext()),
+                    contribution.getEditSummary(), localUri,
+                    contribution.getContentProviderUri(), notificationUpdater
+            )
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(Schedulers.io())
+                    .subscribe(uploadResult -> {
+                        notificationManager.cancel(NOTIFICATION_UPLOAD_IN_PROGRESS);
+                        Timber.d("Response is %s", uploadResult.toString());
 
-            notificationManager.cancel(NOTIFICATION_UPLOAD_IN_PROGRESS);
-            Timber.d("Response is %s", uploadResult.toString());
+                        String resultStatus = uploadResult.getResultStatus();
+                        if (!resultStatus.equals("Success")) {
+                            Timber.d("Contribution upload failed. Wikidata entity won't be edited");
+                            showFailedNotification(contribution);
+                        } else {
+                            String canonicalFilename = uploadResult.getCanonicalFilename();
+                            Timber.d("Contribution upload success. Initiating Wikidata edit for entity id %s",
+                                    contribution.getWikiDataEntityId());
+                            wikidataEditService.createClaimWithLogging(contribution.getWikiDataEntityId(), canonicalFilename);
+                            contribution.setFilename(canonicalFilename);
+                            contribution.setImageUrl(uploadResult.getImageUrl());
+                            contribution.setState(Contribution.STATE_COMPLETED);
+                            contribution.setDateUploaded(uploadResult.getDateUploaded());
+                            contributionDao.save(contribution);
+                        }
+                    }, throwable -> {
 
-            String resultStatus = uploadResult.getResultStatus();
-            if (!resultStatus.equals("Success")) {
-                Timber.d("Contribution upload failed. Wikidata entity won't be edited");
-                showFailedNotification(contribution);
-            } else {
-                Timber.d("Contribution upload success. Initiating Wikidata edit for entity id %s", contribution.getWikiDataEntityId());
-                wikidataEditService.createClaimWithLogging(contribution.getWikiDataEntityId(), filename);
-                contribution.setFilename(uploadResult.getCanonicalFilename());
-                contribution.setImageUrl(uploadResult.getImageUrl());
-                contribution.setState(Contribution.STATE_COMPLETED);
-                contribution.setDateUploaded(uploadResult.getDateUploaded());
-                contributionDao.save(contribution);
-            }
+                    });
         } catch (IOException e) {
             Timber.d("I have a network fuckup");
             notificationManager.cancel(NOTIFICATION_UPLOAD_IN_PROGRESS);
