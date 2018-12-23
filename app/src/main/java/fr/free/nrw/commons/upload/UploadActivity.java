@@ -93,6 +93,8 @@ public class UploadActivity extends AuthenticatedActivity implements UploadView,
     @BindView(R.id.bottom_card_next) Button next;
     @BindView(R.id.bottom_card_previous) Button previous;
     @BindView(R.id.bottom_card_add_desc) Button bottomCardAddDescription;
+    @BindView(R.id.categories_subtitle) TextView categoriesSubtitle;
+    @BindView(R.id.license_subtitle) TextView licenseSubtitle;
 
     //Right Card
     @BindView(R.id.right_card) CardView rightCard;
@@ -328,12 +330,10 @@ public class UploadActivity extends AuthenticatedActivity implements UploadView,
      */
     @Override
     public void updateSubtitleVisibility(int imageCount) {
-        TextView categoriesSubtitle = viewFlipper.findViewById(R.id.categories_subtitle);
         if (categoriesSubtitle != null) {
             categoriesSubtitle.setVisibility(imageCount > 1 ? View.VISIBLE : View.GONE);
         }
 
-        TextView licenseSubtitle = viewFlipper.findViewById(R.id.license_subtitle);
         if (licenseSubtitle != null) {
             licenseSubtitle.setVisibility(imageCount > 1 ? View.VISIBLE : View.GONE);
         }
