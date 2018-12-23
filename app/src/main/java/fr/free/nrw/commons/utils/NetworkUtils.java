@@ -29,8 +29,13 @@ public class NetworkUtils {
         return activeNetwork != null && activeNetwork.isConnectedOrConnecting();
     }
 
-    public static NetworkConnectionType getNetworkType(Context context) {
-        TelephonyManager telephonyManager = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
+    /**
+     * Detect network connection type
+     * @param context
+     * @return
+     */
+    static NetworkConnectionType getNetworkType(Context context) {
+        TelephonyManager telephonyManager = (TelephonyManager) context.getApplicationContext().getSystemService(Context.TELEPHONY_SERVICE);
         NetworkInfo networkInfo = getNetworkInfo(context);
         NetworkConnectionType networkConnectionType;
         if (networkInfo == null) {
@@ -71,6 +76,11 @@ public class NetworkUtils {
         return networkConnectionType;
     }
 
+    /**
+     * Extracted private method to get nullable network info
+     * @param context
+     * @return
+     */
     @Nullable
     private static NetworkInfo getNetworkInfo(Context context) {
         ConnectivityManager connectivityManager =

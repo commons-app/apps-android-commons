@@ -20,6 +20,10 @@ import static fr.free.nrw.commons.utils.model.NetworkConnectionType.TWO_G;
 import static fr.free.nrw.commons.utils.model.NetworkConnectionType.UNKNOWN;
 import static fr.free.nrw.commons.utils.model.NetworkConnectionType.WIFI;
 
+/**
+ * Util class to get any information about the user's device
+ * Ensure that any sensitive information like IMEI is not fetched/shared without user's consent
+ */
 public class DeviceInfoUtil {
     private static final Map<NetworkConnectionType, ConnectionType> TYPE_MAPPING = new HashMap<>();
 
@@ -31,6 +35,11 @@ public class DeviceInfoUtil {
         TYPE_MAPPING.put(UNKNOWN, CELLULAR);
     }
 
+    /**
+     * Get network connection type
+     * @param context
+     * @return wifi/cellular-4g/cellular-3g/cellular-2g/no-internet
+     */
     public static ConnectionType getConnectionType(Context context) {
         if (!NetworkUtils.isInternetConnectionEstablished(context)) {
             return NO_INTERNET;
@@ -40,14 +49,26 @@ public class DeviceInfoUtil {
         return deviceNetworkType == null ? CELLULAR : deviceNetworkType;
     }
 
+    /**
+     * Get Device manufacturer
+     * @return
+     */
     public static String getDeviceManufacturer() {
         return Build.MANUFACTURER;
     }
 
+    /**
+     * Get Device model name
+     * @return
+     */
     public static String getDeviceModel() {
         return Build.DEVICE;
     }
 
+    /**
+     * Get Android version. Eg. 4.4.2
+     * @return
+     */
     public static String getAndroidVersion() {
         return Build.VERSION.RELEASE;
     }
