@@ -6,7 +6,7 @@ import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
-import org.acra.collector.CrashReportData;
+import org.acra.data.CrashReportData;
 import org.acra.sender.ReportSender;
 import org.apache.commons.codec.Charsets;
 
