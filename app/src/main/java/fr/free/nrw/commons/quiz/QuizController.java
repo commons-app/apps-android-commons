@@ -11,7 +11,7 @@ import fr.free.nrw.commons.R;
  */
 public class QuizController {
 
-    ArrayList<QuizQuestion> quiz = new ArrayList<QuizQuestion>();
+    ArrayList<QuizQuestion> quiz = new ArrayList<>();
 
     private final String URL_FOR_SELFIE = "https://i.imgur.com/0fMYcpM.jpg";
     private final String URL_FOR_TAJ_MAHAL = "https://upload.wikimedia.org/wikipedia/commons/1/15/Taj_Mahal-03.jpg";

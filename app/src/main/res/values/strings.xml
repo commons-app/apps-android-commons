@@ -370,6 +370,10 @@
   <string name="error_occurred">Error occurred!</string>
   <string name="notifications_channel_name_all">Commons Notification</string>
 
+  <string name="preference_author_name_toggle">Use custom author name</string>
+  <string name="preference_author_name_toggle_summary">Use a custom author name instead of your username while uploading photos</string>
+  <string name="preference_author_name">Custom author name</string>
+  <string name="preference_author_name_summary">The custom author name to use instead of your username in uploads</string>
   <string name="contributions_fragment">Contributions</string>
   <string name="nearby_fragment">Nearby</string>
   <string name="notifications">Notifications</string>

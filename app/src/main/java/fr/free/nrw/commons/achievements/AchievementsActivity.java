@@ -67,8 +67,8 @@ public class AchievementsActivity extends NavigationBaseActivity {
     TextView thanksReceived;
     @BindView(R.id.images_uploaded_progressbar)
     CircleProgressBar imagesUploadedProgressbar;
-    @BindView(R.id.images_used_by_wiki_progressbar)
-    CircleProgressBar imagesUsedByWikiProgessbar;
+    @BindView(R.id.images_used_by_wiki_progress_bar)
+    CircleProgressBar imagesUsedByWikiProgressBar;
     @BindView(R.id.image_reverts_progressbar)
     CircleProgressBar imageRevertsProgressbar;
     @BindView(R.id.image_featured)
@@ -104,17 +104,14 @@ public class AchievementsActivity extends NavigationBaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_achievements);
         ButterKnife.bind(this);
-        /**
-         * DisplayMetrics used to fetch the size of the screen
-         */
+
+        // DisplayMetrics used to fetch the size of the screen
         DisplayMetrics displayMetrics = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
         int height = displayMetrics.heightPixels;
         int width = displayMetrics.widthPixels;
 
-        /**
-         * Used for the setting the size of imageView at runtime
-         */
+        // Used for the setting the size of imageView at runtime
         RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams)
                 imageView.getLayoutParams();
         params.height = (int) (height * BADGE_IMAGE_HEIGHT_RATIO);
@@ -130,7 +127,7 @@ public class AchievementsActivity extends NavigationBaseActivity {
     }
 
     /**
-     * to invoke the AlertDialog on clicking info button
+     * To invoke the AlertDialog on clicking info button
      */
     @OnClick(R.id.achievement_info)
     public void showInfoDialog(){
@@ -159,7 +156,6 @@ public class AchievementsActivity extends NavigationBaseActivity {
 
     /**
      * To take bitmap and store it temporary storage and share it
-     *
      * @param bitmap
      */
     void shareScreen(Bitmap bitmap) {
@@ -278,9 +274,9 @@ public class AchievementsActivity extends NavigationBaseActivity {
      */
     private void inflateAchievements(Achievements achievements) {
         thanksReceived.setText(Integer.toString(achievements.getThanksReceived()));
-        imagesUsedByWikiProgessbar.setProgress
+        imagesUsedByWikiProgressBar.setProgress
                 (100*achievements.getUniqueUsedImages()/levelInfo.getMaxUniqueImages() );
-        imagesUsedByWikiProgessbar.setProgressTextFormatPattern
+        imagesUsedByWikiProgressBar.setProgressTextFormatPattern
                 (achievements.getUniqueUsedImages() + "/" + levelInfo.getMaxUniqueImages());
         imagesFeatured.setText(Integer.toString(achievements.getFeaturedImages()));
         String levelUpInfoString = getString(R.string.level);
@@ -383,7 +379,7 @@ public class AchievementsActivity extends NavigationBaseActivity {
                 .setTitle(title)
                 .setMessage(message)
                 .setCancelable(true)
-                .setNeutralButton(android.R.string.ok, (dialog, id) -> dialog.cancel())
+                .setPositiveButton(android.R.string.ok, (dialog, id) -> dialog.cancel())
                 .create()
                 .show();
     }
