@@ -219,21 +219,6 @@ public class SearchActivity extends NavigationBaseActivity implements MediaDetai
     }
 
     /**
-     * This method is called on Screen Rotation
-     */
-    @Override
-    protected void onResume() {
-        if (supportFragmentManager.getBackStackEntryCount()==1){
-            //FIXME: Temporary fix for screen rotation inside media details. If we don't call onBackPressed then fragment stack is increasing every time.
-            //FIXME: Similar issue like this https://github.com/commons-app/apps-android-commons/issues/894
-            // This is called on screen rotation when user is inside media details. Ideally it should show Media Details but since we are not saving the state now. We are throwing the user to search screen otherwise the app was crashing.
-            // 
-            onBackPressed();
-        }
-        super.onResume();
-    }
-
-    /**
      * This method is called on backPressed of anyFragment in the activity.
      * If condition is called when mediaDetailFragment is opened.
      */
