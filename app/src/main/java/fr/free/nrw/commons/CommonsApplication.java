@@ -20,6 +20,7 @@ import com.squareup.leakcanary.RefWatcher;
 import com.tspoon.traceur.Traceur;
 
 import org.acra.ACRA;
+import org.acra.ReportingInteractionMode;
 import org.acra.annotation.*;
 
 import java.io.File;
