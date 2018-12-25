@@ -1,11 +1,13 @@
 package fr.free.nrw.commons.category;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
 import fr.free.nrw.commons.Media;
+import fr.free.nrw.commons.mwapi.CategoryImagesResult;
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
 
 @Singleton
@@ -23,7 +25,8 @@ public class CategoryImageController {
      * @param categoryName
      * @return
      */
-    public List<Media> getCategoryImages(String categoryName) {
-        return mediaWikiApi.getCategoryImages(categoryName);
+    public CategoryImagesResult getCategoryImages(String categoryName,
+                                                         Map<String, String> queryContinueParam) {
+        return mediaWikiApi.getCategoryImages(categoryName, queryContinueParam);
     }
 }

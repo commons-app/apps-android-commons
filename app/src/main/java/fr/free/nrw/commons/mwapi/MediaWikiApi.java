@@ -8,6 +8,7 @@ import fr.free.nrw.commons.campaigns.CampaignResponseDTO;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
+import java.util.Map;
 
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.achievements.FeedbackResponse;
@@ -44,7 +45,7 @@ public interface MediaWikiApi {
 
     boolean logEvents(LogBuilder[] logBuilders);
 
-    List<Media> getCategoryImages(String categoryName);
+    CategoryImagesResult getCategoryImages(String categoryName, Map<String, String> queryContinueParam);
 
     List<String> getSubCategoryList(String categoryName);
 

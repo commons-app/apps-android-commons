@@ -15,6 +15,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 import javax.inject.Inject;
@@ -25,7 +26,7 @@ import butterknife.ButterKnife;
 import dagger.android.support.DaggerFragment;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.R;
-import fr.free.nrw.commons.kvstore.BasicKvStore;
+import fr.free.nrw.commons.mwapi.CategoryImagesResult;
 import fr.free.nrw.commons.utils.NetworkUtils;
 import fr.free.nrw.commons.utils.ViewUtil;
 import io.reactivex.Observable;
@@ -55,9 +56,7 @@ public class CategoryImagesListFragment extends DaggerFragment {
     private String categoryName = null;
 
     @Inject CategoryImageController controller;
-    @Inject
-    @Named("category_prefs")
-    BasicKvStore categoryKvStore;
+    private Map<String, String> queryContinueParam;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -81,19 +80,10 @@ public class CategoryImagesListFragment extends DaggerFragment {
         String categoryName = getArguments().getString("categoryName");
         if (getArguments() != null && categoryName != null) {
             this.categoryName = categoryName;
-            resetQueryContinueValues(categoryName);
+            queryContinueParam = null;
             initList();
             setScrollListener();
         }
-    }
-
-    /**
-     * Query continue values determine the last page that was loaded for the particular keyword
-     * This method resets those values, so that the results can be queried from the first page itself
-     * @param keyword
-     */
-    private void resetQueryContinueValues(String keyword) {
-        categoryKvStore.remove(keyword);
     }
 
     /**
@@ -108,7 +98,7 @@ public class CategoryImagesListFragment extends DaggerFragment {
 
         isLoading = true;
         progressBar.setVisibility(VISIBLE);
-        Observable.fromCallable(() -> controller.getCategoryImages(categoryName))
+        Observable.fromCallable(() -> controller.getCategoryImages(categoryName, null))
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .timeout(TIMEOUT_SECONDS, TimeUnit.SECONDS)
@@ -214,7 +204,7 @@ public class CategoryImagesListFragment extends DaggerFragment {
         }
 
         progressBar.setVisibility(VISIBLE);
-        Observable.fromCallable(() -> controller.getCategoryImages(categoryName))
+        Observable.fromCallable(() -> controller.getCategoryImages(categoryName, queryContinueParam))
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .timeout(TIMEOUT_SECONDS, TimeUnit.SECONDS)
@@ -224,12 +214,14 @@ public class CategoryImagesListFragment extends DaggerFragment {
     /**
      * Handles the success scenario
      * On first load, it initializes the grid view. On subsequent loads, it adds items to the adapter
-     * @param collection List of new Media to be displayed
+     * @param result query response from server
      */
-    private void handleSuccess(List<Media> collection) {
+    private void handleSuccess(CategoryImagesResult result) {
+        List<Media> collection = result.getMediaList();
         if (collection == null || collection.isEmpty()) {
             initErrorView();
             hasMoreImages = false;
+            queryContinueParam = null;
             return;
         }
 
@@ -252,6 +244,8 @@ public class CategoryImagesListFragment extends DaggerFragment {
                 e.printStackTrace();
             }
         }
+
+        queryContinueParam = result.getQueryContinueParam();
         progressBar.setVisibility(GONE);
         isLoading = false;
         statusTextView.setVisibility(GONE);

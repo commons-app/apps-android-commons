@@ -8,6 +8,7 @@ import android.support.annotation.Nullable;
 import android.text.TextUtils;
 
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.conn.ClientConnectionManager;
@@ -20,20 +21,25 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.impl.conn.tsccm.ThreadSafeClientConnManager;
 import org.apache.http.params.BasicHttpParams;
 import org.apache.http.params.CoreProtocolPNames;
+import org.w3c.dom.Attr;
 import org.w3c.dom.Element;
+import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.lang.reflect.Type;
 import java.net.URL;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 import java.util.TimeZone;
 import java.util.concurrent.Callable;
 
@@ -42,7 +48,6 @@ import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.auth.AccountUtil;
 import fr.free.nrw.commons.category.CategoryImageUtils;
-import fr.free.nrw.commons.category.QueryContinue;
 import fr.free.nrw.commons.kvstore.BasicKvStore;
 import fr.free.nrw.commons.notification.Notification;
 import fr.free.nrw.commons.notification.NotificationUtils;
@@ -54,8 +59,6 @@ import in.yuvi.http.fluent.Http;
 import io.reactivex.Observable;
 import io.reactivex.Single;
 import timber.log.Timber;
-
-import static fr.free.nrw.commons.utils.ContinueUtils.getQueryContinue;
 
 /**
  * @author Addshore
@@ -698,7 +701,8 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
      */
     @Override
     @NonNull
-    public List<Media> getCategoryImages(String categoryName) {
+    public CategoryImagesResult getCategoryImages(String categoryName,
+                                         @Nullable Map<String, String> queryContinueParam) {
         CustomApiResult apiResult = null;
         try {
             CustomMwApi.RequestBuilder requestBuilder = api.action("query")
@@ -712,18 +716,19 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
                     .param("gcmlimit", "10")
                     .param("iiprop", "url|extmetadata");
 
-            QueryContinue queryContinueValues = getQueryContinueValues(categoryName);
-            if (queryContinueValues != null) {
-                requestBuilder.param("continue", queryContinueValues.getContinueParam());
-                requestBuilder.param("gcmcontinue", queryContinueValues.getGcmContinueParam());
+            if (queryContinueParam != null) {
+                for (Map.Entry<String, String> entry : queryContinueParam.entrySet()) {
+                    requestBuilder.param(entry.getKey(), entry.getValue());
+                }
             }
+
             apiResult = requestBuilder.get();
         } catch (IOException e) {
             Timber.e(e, "Failed to obtain searchCategories");
         }
 
         if (apiResult == null) {
-            return new ArrayList<>();
+            return new CategoryImagesResult(null, null);
         }
 
         CustomApiResult categoryImagesNode = apiResult.getNode("/api/query/pages");
@@ -731,18 +736,16 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
                 || categoryImagesNode.getDocument() == null
                 || categoryImagesNode.getDocument().getChildNodes() == null
                 || categoryImagesNode.getDocument().getChildNodes().getLength() == 0) {
-            return new ArrayList<>();
+            return new CategoryImagesResult(null, null);
         }
 
-        if (apiResult.getNode("/api/continue").getDocument()==null){
-            setQueryContinueValues(categoryName, null);
-        }else {
-            QueryContinue queryContinue = getQueryContinue(apiResult.getNode("/api/continue").getDocument());
-            setQueryContinueValues(categoryName, queryContinue);
-        }
+        CustomApiResult queryContinueNode = apiResult.getNode("/api/continue");
+        HashMap<String, String> newQueryContinueParam = getQueryContinueParameters(
+                queryContinueNode == null ? null : queryContinueNode.getDocument());
 
         NodeList childNodes = categoryImagesNode.getDocument().getChildNodes();
-        return CategoryImageUtils.getMediaList(childNodes);
+        List<Media> mediaList = CategoryImageUtils.getMediaList(childNodes);
+        return new CategoryImagesResult(mediaList, newQueryContinueParam);
     }
 
     /**
@@ -782,27 +785,30 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
         return categories;
     }
 
-
     /**
-     * For APIs that return paginated responses, MediaWiki APIs uses the QueryContinue to facilitate fetching of subsequent pages
-     * https://www.mediawiki.org/wiki/API:Raw_query_continue
-     * After fetching images a page of image for a particular category, shared defaultKvStore are updated with the latest QueryContinue Values
-     * @param keyword
-     * @param queryContinue
-     */
-    private void setQueryContinueValues(String keyword, QueryContinue queryContinue) {
-        categoryKvStore.putString(keyword, gson.toJson(queryContinue));
-    }
-
-    /**
-     * Before making a paginated API call, this method is called to get the latest query continue values to be used
-     * @param keyword
+     * For APIs that return paginated responses, MediaWiki APIs uses the continue element to facilitate fetching of subsequent pages
+     * https://www.mediawiki.org/wiki/API:Query#Continuing_queries
+     * After fetching images a page of image for a particular category, shared prefs are updated with the latest continue element Values
+     * @param continueNode continue Node in API response
      * @return
      */
-    @Nullable
-    private QueryContinue getQueryContinueValues(String keyword) {
-        String queryContinueString = categoryKvStore.getString(keyword, null);
-        return gson.fromJson(queryContinueString, QueryContinue.class);
+    private HashMap<String, String> getQueryContinueParameters(Node continueNode) {
+        if (continueNode == null || continueNode.getAttributes() == null) {
+            return null;
+        }
+
+        NamedNodeMap attributes = continueNode.getAttributes();
+        HashMap<String, String> queryContinueParameters = new HashMap<>();
+        for (int i = 0; i < attributes.getLength(); i++) {
+            if (attributes.item(i) instanceof Attr) {
+                Attr attr = (Attr) attributes.item(i);
+                queryContinueParameters.put(attr.getName(), attr.getValue());
+            } else {
+                Timber.w("failed to parse attribute: " + attributes.item(i).getNodeName());
+            }
+        }
+
+        return queryContinueParameters;
     }
 
     @Override
