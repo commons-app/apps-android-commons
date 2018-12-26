@@ -580,7 +580,7 @@ public class NearbyMapFragment extends DaggerFragment {
                             searchThisAreaModeOn = true;
                             // Lock map operations during search this area operation
                             mapboxMap.getUiSettings().setAllGesturesEnabled(false);
-                            searchThisAreaButtonProgressBar.setVisibility(View.VISIBLE);
+                            searchThisAreaButtonProgressBar.setVisibility(View.GONE);
                             fabRecenter.callOnClick();
                             searchThisAreaButton.setVisibility(View.GONE);
                             searchedAroundCurrentLocation = true;
