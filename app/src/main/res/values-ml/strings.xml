@@ -95,7 +95,7 @@
   <string name="no_uploads_yet">താങ്കളിതുവരെ ചിത്രങ്ങളൊന്നും അപ്‌ലോഡ് ചെയ്തിട്ടില്ല.</string>
   <string name="menu_retry_upload">വീണ്ടും ശ്രമിക്കുക</string>
   <string name="menu_cancel_upload">റദ്ദാക്കുക</string>
-  <string name="share_license_summary">ചിത്രം %1$s പ്രകാരം അനുമതി നൽകപ്പെടുന്നതാണ്</string>
+  <string name="share_license_summary" fuzzy="true">ചിത്രം %1$s പ്രകാരം അനുമതി നൽകപ്പെടുന്നതാണ്</string>
   <string name="menu_download">ഡൗൺലോഡ്</string>
   <string name="preference_license">സ്വതേയുള്ള ഉപയോഗാനുമതി</string>
   <string name="license_name_cc_by_sa_four">ആട്രിബ്യൂഷൻ-ഷെയർ‌എലൈക് 4.0</string>

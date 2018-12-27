@@ -10,6 +10,7 @@
 * Shizhao
 * Wxyveronica
 * Yfdyh000
+* ZhaoGang
 * 夢蝶葬花
 * 阿pp
 -->
@@ -113,7 +114,10 @@
   <string name="no_uploads_yet">您还没有上传任何照片。</string>
   <string name="menu_retry_upload">重试</string>
   <string name="menu_cancel_upload">取消</string>
-  <string name="share_license_summary">该图像会采用%1$s授权</string>
+  <plurals name="share_license_summary">
+    <item quantity="one">该图像的授权协议是 %1$s</item>
+    <item quantity="other">这些图像的授权协议是 %1$s</item>
+  </plurals>
   <string name="media_upload_policy">通过提交该图片，我声明这是我自己的作品，其不包含受版权保护的材料或自拍像，并遵循&lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines\"&gt;维基共享资源&lt;/a&gt;方针。</string>
   <string name="menu_download">下载</string>
   <string name="preference_license">默认许可协议</string>
@@ -243,6 +247,12 @@
   <string name="description_info">请尽可能详细地描述媒体：拍摄在何地？显示什么？例文是什么？请描述对象或个人。透露一些不易猜想到的信息，例如这幅风景画的具体日期时间。如果媒体显示了一些不寻常的事物，请说明为什么它显得不寻常。</string>
   <string name="upload_image_too_dark">这张照片太暗了，您确定要上传吗？维基共享资源只适用于具有百科全书价值的图片。</string>
   <string name="upload_image_blurry">这张图片模糊不清，您确定要上传吗？维基共享资源只适用于具有百科全书价值的图片。</string>
+  <string name="upload_problem_exist">这个图片可能的问题：</string>
+  <string name="upload_problem_image_dark">图片太暗。</string>
+  <string name="upload_problem_image_blurry">图片模糊。</string>
+  <string name="upload_problem_image_duplicate">图片已经在 Commons 了。</string>
+  <string name="upload_problem_different_geolocation">这张图片是在不同的地点拍摄的。</string>
+  <string name="upload_problem_do_you_continue">仍然上传这张图片？</string>
   <string name="give_permission">提供权限</string>
   <string name="use_external_storage">使用外部存储</string>
   <string name="use_external_storage_summary">在您的设备上，使用应用中的照相机保存照片</string>
@@ -307,6 +317,8 @@
   <string name="provider_searches">最近的搜索查询</string>
   <string name="error_loading_categories">载入分类时发生错误。</string>
   <string name="error_loading_subcategories">加载子分类时发生错误。</string>
+  <string name="search_tab_title_media">媒体</string>
+  <string name="search_tab_title_categories">分类</string>
   <string name="successful_wikidata_edit">图片已成功添加到维基数据上的%1$s！</string>
   <string name="wikidata_edit_failure">更新对应维基数据实体失败！</string>
   <string name="menu_set_wallpaper">设为壁纸</string>
@@ -335,6 +347,7 @@
   <string name="share_coordinates_not_present">图片选择时，坐标并未指定</string>
   <string name="error_fetching_nearby_places">检索附近地点时出错。</string>
   <string name="add_description">+ 添加描述</string>
+  <string name="no_recent_searches">还没有最近搜索</string>
   <string name="delete_recent_searches_dialog">您确认要清除您的搜索历史？</string>
   <string name="search_history_deleted">搜索历史已删除</string>
   <string name="nominate_delete">提名删除</string>
@@ -354,6 +367,10 @@
   <string name="images_used_explanation">您上传至共享资源，并用于维基媒体条目的图片数量</string>
   <string name="error_occurred">发生错误！</string>
   <string name="notifications_channel_name_all">共享资源通知</string>
+  <string name="preference_author_name_toggle">使用自定义的作者姓名</string>
+  <string name="preference_author_name_toggle_summary">在上传照片时使用自定义的作者姓名，而不是用户名</string>
+  <string name="preference_author_name">自定义作者姓名</string>
+  <string name="preference_author_name_summary">上传时自定义的作者姓名，不是用户名</string>
   <string name="contributions_fragment">贡献</string>
   <string name="nearby_fragment">附近</string>
   <string name="notifications">通知</string>
@@ -405,10 +422,18 @@
   <string name="yes_submit">确定，提交</string>
   <string name="no_go_back">取消，返回</string>
   <string name="upload_flow_all_images_in_set">（对于集合中的所有图像）</string>
+  <string name="search_this_area">搜索这个区域</string>
   <string name="nearby_card_permission_title">需要许可</string>
   <string name="nearby_card_permission_explanation">您希望我们获取您当前的位置来显示最近的需要图片的地方吗？</string>
   <string name="unable_to_display_nearest_place">无法显示没有位置权限的需要图片的最近位置</string>
   <string name="never_ask_again">不再询问</string>
   <string name="display_location_permission_title">显示位置许可</string>
   <string name="display_location_permission_explanation">当需要附近通知卡查看功能时，请求位置许可。</string>
+  <string name="achievements_fetch_failed">有错误发生，无法获取你的成就</string>
+  <string name="ends_on">结束于：</string>
+  <string name="display_campaigns">显示活动</string>
+  <string name="display_campaigns_explanation">点击此处显示正在进行的活动</string>
+  <string name="nearby_campaign_dismiss_message">你不会再看到这个活动。如果需要可以在设置里重新启用此通知。</string>
+  <string name="this_function_needs_network_connection">这个功能需要网络连接，请检查你的网络设置。</string>
+  <string name="bad_token_error_proposed_solution">因为编辑令牌失效上传失败。请尝试登出后重新登录。</string>
 </resources>

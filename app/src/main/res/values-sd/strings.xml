@@ -101,7 +101,7 @@
   <string name="no_uploads_yet">توھان اڃان تائين ڪي بہ فوٽو انہ چاڙھيا آھن.</string>
   <string name="menu_retry_upload">ٻيھر ڪوشش ڪريو</string>
   <string name="menu_cancel_upload">رد</string>
-  <string name="share_license_summary">ھن عڪس کي %1$s جي تحت لائسنس ٿيندو</string>
+  <string name="share_license_summary" fuzzy="true">ھن عڪس کي %1$s جي تحت لائسنس ٿيندو</string>
   <string name="menu_download">لاھيو</string>
   <string name="preference_license">رٿيل لائسنس</string>
   <string name="use_previous">گذريل عنوان/تشريح استعمال ڪريو</string>

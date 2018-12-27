@@ -83,7 +83,7 @@
   <string name="no_uploads_yet">თქვენ ჯერ არცერთი ფოტო არ აგიტვირთავთ.</string>
   <string name="menu_retry_upload">გამეორება</string>
   <string name="menu_cancel_upload">გაუქმება</string>
-  <string name="share_license_summary">ეს სურათი გავრცელდება %1$s ლიცენზიით</string>
+  <string name="share_license_summary" fuzzy="true">ეს სურათი გავრცელდება %1$s ლიცენზიით</string>
   <string name="menu_download">ჩამოტვირთვა</string>
   <string name="preference_license" fuzzy="true">ლიცენზია</string>
   <string name="use_previous">წინა სათაურის/აღწერის გამოყენება</string>

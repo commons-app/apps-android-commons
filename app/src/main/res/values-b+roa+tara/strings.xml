@@ -72,7 +72,13 @@
   <string name="media_detail_uploaded_date">Date de carecamende</string>
   <string name="media_detail_license">Licenze</string>
   <string name="media_detail_coordinates">Coordinate</string>
+  <string name="upload_problem_exist">Probbleme potenziale cu st\'immaggine:</string>
+  <string name="upload_problem_image_dark">L\'immaggine jè troppe scure.</string>
+  <string name="upload_problem_image_blurry">L\'immaggine jè sfocate.</string>
+  <string name="upload_problem_different_geolocation">Sta fote ha state pigghiate da \'nu luèche diverse.</string>
   <string name="navigation_item_login">Tràse</string>
+  <string name="search_tab_title_media">MEDIA</string>
+  <string name="search_tab_title_categories">CATEGORIJE</string>
   <string name="no_recent_searches">Nisciuna recerche recende</string>
   <string name="contributions_fragment">Condrebbute</string>
   <string name="nearby_fragment">Vicine a</string>

@@ -99,7 +99,7 @@
   <string name="no_uploads_yet">Nid ydych wedi uwchlwytho ffotograffau eto.</string>
   <string name="menu_retry_upload">Ailgynnig</string>
   <string name="menu_cancel_upload">Diddymer</string>
-  <string name="share_license_summary">Caiff y ddelwedd hon ei thrwyddedu yn ôl termau\'r drwydded %1$s.</string>
+  <string name="share_license_summary" fuzzy="true">Caiff y ddelwedd hon ei thrwyddedu yn ôl termau\'r drwydded %1$s.</string>
   <string name="media_upload_policy">Wrth gynnig y llun yma, rwy\'n datgan mai fy ngwaith i ydyw ac nad yw\'n cynnwys unrhyw beth dan hawlfrain, na hunlun, a\'i fod yn cadw at &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines\"&gt;Bolisiau Comin Wicimedia&lt;/a&gt;.</string>
   <string name="menu_download">Lawrlwytho</string>
   <string name="preference_license">Trwydded Ddiofyn (\'default\')</string>

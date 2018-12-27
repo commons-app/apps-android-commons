@@ -81,7 +81,7 @@
   <string name="no_uploads_yet">သင် မည်သည့်ဓာတ်ပုံကိုမှ မတင်ရသေးပါ။</string>
   <string name="menu_retry_upload">ပြန်လုပ်</string>
   <string name="menu_cancel_upload">မလုပ်တော့</string>
-  <string name="share_license_summary">ဤရုပ်ပုံသည် %1$ အောက်တွင် လိုင်စင်သတ်မှတ်ထးပါမည်</string>
+  <string name="share_license_summary" fuzzy="true">ဤရုပ်ပုံသည် %1$ အောက်တွင် လိုင်စင်သတ်မှတ်ထးပါမည်</string>
   <string name="menu_download">ဒေါင်းလုပ်ယူရန်</string>
   <string name="preference_license">နဂို လိုင်စင်</string>
   <string name="use_previous">ယခင် ခေါင်းစဉ်/ဖော်ပြချက် သုံးမည်</string>
