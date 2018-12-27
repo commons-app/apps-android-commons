@@ -38,6 +38,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import fr.free.nrw.commons.BuildConfig;
+import fr.free.nrw.commons.FeedbackActivity;
 import fr.free.nrw.commons.PageTitle;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.Utils;
@@ -121,6 +122,18 @@ public class LoginActivity extends AccountAuthenticatorActivity {
                 ViewUtil.hideKeyboard(v);
             }
         });
+
+        Button feedbackbtn = (Button) findViewById(R.id.feedback);
+        feedbackbtn.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(),FeedbackActivity.class);
+                startActivity(intent);
+
+
+            }
+        });
+
+
 
         twoFactorEdit.addTextChangedListener(textWatcher);
         passwordEdit.setOnEditorActionListener(newLoginInputActionListener());
