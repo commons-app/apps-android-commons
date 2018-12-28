@@ -312,7 +312,7 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
                             });
 
         } else if (locationChangeType
-                .equals(LOCATION_SLIGHTLY_CHANGED)) {
+                .equals(LOCATION_SLIGHTLY_CHANGED) && nearbyMapFragment != null) {
             Gson gson = new GsonBuilder()
                     .registerTypeAdapter(Uri.class, new UriSerializer())
                     .create();
@@ -710,7 +710,7 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
         if (!FragmentUtils.isFragmentUIActive(this)) {
             return;
         }
-        
+
         IntentFilter intentFilter = new IntentFilter(NETWORK_INTENT_ACTION);
         snackbar = Snackbar.make(transparentView, R.string.no_internet, Snackbar.LENGTH_INDEFINITE);
 
