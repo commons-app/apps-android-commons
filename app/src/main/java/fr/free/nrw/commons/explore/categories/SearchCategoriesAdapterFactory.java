@@ -23,8 +23,8 @@ public class SearchCategoriesAdapterFactory {
      * @param searchImageItemList List of category name to be displayed
      * @return categoriesAdapter
      **/
-    public RVRendererAdapter<String> create(List<String> searchImageItemList, boolean currentThemeIsDark) {
-        SearchCategoriesRenderer searchCategoriesRenderer = new SearchCategoriesRenderer(listener, currentThemeIsDark);
+    public RVRendererAdapter<String> create(List<String> searchImageItemList) {
+        SearchCategoriesRenderer searchCategoriesRenderer = new SearchCategoriesRenderer(listener);
         RendererBuilder<String> builder = new RendererBuilder<String>().bind(String.class, searchCategoriesRenderer);
         ListAdapteeCollection<String> collection = new ListAdapteeCollection<>(
                 searchImageItemList != null ? searchImageItemList : Collections.<String>emptyList());
