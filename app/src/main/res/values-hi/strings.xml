@@ -98,7 +98,7 @@
   <string name="no_uploads_yet">आपने अब तक कोई फोटो अपलोड नहीं किया है।</string>
   <string name="menu_retry_upload">फिर प्रयास करें</string>
   <string name="menu_cancel_upload">रद्द करें</string>
-  <string name="share_license_summary">इस छवि का लाइसेन्स %1$s के अंतर्गत होगा।</string>
+  <string name="share_license_summary" fuzzy="true">इस छवि का लाइसेन्स %1$s के अंतर्गत होगा।</string>
   <string name="media_upload_policy">इस तस्वीर को सबमिट करके, मैं घोषणा करता हूं कि यह मेरा अपना काम है, इसमें कॉपीराइट सामग्री या सेल्फी नहीं है, और अन्यथा &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines\"&gt;विकीमीडिया कॉमन्स नीतियां का पालन करता हूँ &lt;/a&gt;</string>
   <string name="menu_download">डाउनलोड</string>
   <string name="preference_license" fuzzy="true">लाइसेन्स</string>

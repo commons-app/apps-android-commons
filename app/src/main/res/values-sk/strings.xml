@@ -2,9 +2,12 @@
 <!-- Authors:
 * AtonX
 * Kusavica
+* Patriccck
 * Sudo77(new)
 -->
 <resources>
+  <string name="title_activity_explore">Objaviť</string>
+  <string name="navigation_item_explore">Objaviť</string>
   <string name="preference_category_appearance">Vzhľad</string>
   <string name="preference_category_general">Všeobecné</string>
   <string name="preference_category_feedback">Spätná väzba</string>
@@ -79,7 +82,7 @@
   <string name="no_uploads_yet">Ešte ste nenahrali žiadne fotografie.</string>
   <string name="menu_retry_upload">Znova</string>
   <string name="menu_cancel_upload">Zrušiť</string>
-  <string name="share_license_summary">Tento obrázok bude licencovaný podľa %1$s</string>
+  <string name="share_license_summary" fuzzy="true">Tento obrázok bude licencovaný podľa %1$s</string>
   <string name="menu_download">Stiahnuť</string>
   <string name="preference_license">Predvolená licencia</string>
   <string name="use_previous">Použiť predchádzajúci názov/popis</string>

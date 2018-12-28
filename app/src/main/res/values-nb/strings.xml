@@ -109,7 +109,7 @@
   <string name="no_uploads_yet">Du har ikke lastet opp nøn bilder ennå.</string>
   <string name="menu_retry_upload">Prøv igjen</string>
   <string name="menu_cancel_upload">Avbryt</string>
-  <string name="share_license_summary">Dette bildet vil bli lisensiert under %1$s</string>
+  <string name="share_license_summary" fuzzy="true">Dette bildet vil bli lisensiert under %1$s</string>
   <string name="media_upload_policy">Ved å laste opp dette bildet erklærer jeg at dette er mitt eget verk, og at det ikke inneholder opphavsrettsbeskyttet materiale eller selvportretter, og ellers er i samsvar med &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines\"&gt;Wikimedia Commons\' retningslinjer&lt;/a&gt;.</string>
   <string name="menu_download">Last ned</string>
   <string name="preference_license">Standardlisens</string>

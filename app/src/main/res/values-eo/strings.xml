@@ -93,7 +93,7 @@
   <string name="no_uploads_yet">Vi ankoraŭ ne alŝutis fotojn.</string>
   <string name="menu_retry_upload">Reprovi</string>
   <string name="menu_cancel_upload">Nuligi</string>
-  <string name="share_license_summary">Ĉi tiu bildo estos sub permesilo %1$s</string>
+  <string name="share_license_summary" fuzzy="true">Ĉi tiu bildo estos sub permesilo %1$s</string>
   <string name="menu_download">Elŝuti</string>
   <string name="preference_license">Defaŭlta permesilo</string>
   <string name="use_previous">Uzi la antaŭan titolon/priskribon</string>

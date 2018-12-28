@@ -128,7 +128,10 @@
   <string name="navigation_item_feedback">פֿידבעק</string>
   <string name="navigation_item_logout">אַרויסלאָגירן</string>
   <string name="navigation_item_featured_images">רעקאמנדירט</string>
+  <string name="upload_problem_image_dark">בילד איז צו טונקל</string>
   <string name="appwidget_img">בילד פונעם טאָג</string>
   <string name="app_widget_heading">בילד פונעם טאָג</string>
+  <string name="search_tab_title_media">מעדיע</string>
+  <string name="search_tab_title_categories">קאַטעגאריעס</string>
   <string name="wikidata_edit_failure">ס׳איז ניט געלונגען צו דערהיינטיקן דעם אַנטשפּרעכנדיקן בלאַט אין וויקידאַטן.</string>
 </resources>

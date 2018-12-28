@@ -99,7 +99,7 @@
   <string name="no_uploads_yet">आपण अद्याप काहीच चित्रे अपभारीत केली नाहीत.</string>
   <string name="menu_retry_upload">पुन्हा प्रयत्न करा</string>
   <string name="menu_cancel_upload">रद्द करा</string>
-  <string name="share_license_summary">ही संचिका %1$s या परवान्यांतर्गत राहील</string>
+  <string name="share_license_summary" fuzzy="true">ही संचिका %1$s या परवान्यांतर्गत राहील</string>
   <string name="media_upload_policy">हे चित्र इथे चढवत असताना, मी हे घोषीत करतो की हे माझेच काम आहे आणि ह्या कामावर इतर कुणाचाही प्रताधिकार नाही तसेच हे सेल्फ़ी नाहीये, म्हणून हे काम ह्या संकेतांचे पालन करेल &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines\"&gt;Wikimedia Commons policies&lt;/a&gt;.</string>
   <string name="menu_download">अधिभारण करा</string>
   <string name="preference_license">डिफॉल्ट परवाना</string>

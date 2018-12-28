@@ -108,7 +108,7 @@
   <string name="no_uploads_yet">まだ写真をアップロードしていません。</string>
   <string name="menu_retry_upload">再試行</string>
   <string name="menu_cancel_upload">キャンセル</string>
-  <string name="share_license_summary">この画像は%1$sライセンスのもとにアップロードされます。</string>
+  <string name="share_license_summary" fuzzy="true">この画像は%1$sライセンスのもとにアップロードされます。</string>
   <string name="media_upload_policy">この画像の投稿に当たり、私はこれが自分自身の作品であり、著作権のあるコンテンツや自撮りは含まれていないと宣言します。</string>
   <string name="menu_download">ダウンロード</string>
   <string name="preference_license">既定のライセンス</string>

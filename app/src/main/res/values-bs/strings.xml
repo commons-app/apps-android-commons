@@ -88,7 +88,7 @@
   <string name="no_uploads_yet">Još niste postavili nijednu fotografiju.</string>
   <string name="menu_retry_upload">Pokušaj ponovo</string>
   <string name="menu_cancel_upload">Otkaži</string>
-  <string name="share_license_summary">Slika će se voditi pod licencom %1$s</string>
+  <string name="share_license_summary" fuzzy="true">Slika će se voditi pod licencom %1$s</string>
   <string name="menu_download">Preuzmi</string>
   <string name="preference_license" fuzzy="true">Licenca</string>
   <string name="use_previous">Koristi prethodni naziv/opis</string>

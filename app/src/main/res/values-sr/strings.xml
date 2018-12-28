@@ -110,7 +110,7 @@
   <string name="no_uploads_yet">Још увек нисте отпремили ниједну фотографију.</string>
   <string name="menu_retry_upload">Покушај поново</string>
   <string name="menu_cancel_upload">Откажи</string>
-  <string name="share_license_summary">Слика ће се водити под лиценцом %1$s</string>
+  <string name="share_license_summary" fuzzy="true">Слика ће се водити под лиценцом %1$s</string>
   <string name="media_upload_policy">Слањем ове слике, ја тврдим да је у питању мој рад, да не садржи материјал или селфије заштићене ауторским правима, те да је на остале начине у складу са &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines\"&gt;смерницама Викимедијине оставе&lt;/a&gt;.</string>
   <string name="menu_download">Преузми</string>
   <string name="preference_license">Подразумевана лиценца</string>
@@ -240,6 +240,12 @@
   <string name="description_info">Молимо да опишете датотеку колико је то могуће: Где је направљена? Шта приказује? Шта је контекст? Опишите објекте и/или особе. Откријте информације које се не могу лако погодити, на пример доба дана ако је у питању пејзаж. Ако датотека приказује нешто необично, молимо да објасните шта је то чини необичном.</string>
   <string name="upload_image_too_dark">Ова слика је претамна; заиста желите да је отпремите? Викимедијина остава је само за слике са енциклопедијском вредношћу.</string>
   <string name="upload_image_blurry">Ова слика је мутна; заиста желите да је отпремите? Викимедијина остава је само за слике са енциклопедијском вредношћу.</string>
+  <string name="upload_problem_exist">Потенцијални проблеми са овом сликом:</string>
+  <string name="upload_problem_image_dark">Слика је сувише тамна.</string>
+  <string name="upload_problem_image_blurry">Слика је мутна.</string>
+  <string name="upload_problem_image_duplicate">Слика је већ на Остави.</string>
+  <string name="upload_problem_different_geolocation">Ова слика је снимљена на другој локацији.</string>
+  <string name="upload_problem_do_you_continue">Желите ли још увек да отпремите ову слику?</string>
   <string name="give_permission">Давање дозволе</string>
   <string name="use_external_storage">Користи спољашње складиште</string>
   <string name="use_external_storage_summary">Чување слика снимљених камером у апликацији на вашем уређају</string>
@@ -304,6 +310,8 @@
   <string name="provider_searches">Недавнo претражени упити</string>
   <string name="error_loading_categories">Дошло је до грешке при учитавању категорија.</string>
   <string name="error_loading_subcategories">Дошло је до грешке при учитавању поткатегорија.</string>
+  <string name="search_tab_title_media">МЕДИЈИ</string>
+  <string name="search_tab_title_categories">КАТЕГОРИЈЕ</string>
   <string name="successful_wikidata_edit">Слика је успешно додата у %1$s на Википодацима.</string>
   <string name="wikidata_edit_failure">Ажурирање одговарајућег ентитета на Википодацима није успело.</string>
   <string name="menu_set_wallpaper">Постави као позадину</string>
@@ -345,6 +353,10 @@
   <string name="images_used_explanation">Број слика које сте отпремили на Оставу а користе се у чланцима на Викимедији</string>
   <string name="error_occurred">Дошло је до грешке.</string>
   <string name="notifications_channel_name_all">Обавештења Оставе</string>
+  <string name="preference_author_name_toggle">Користи прилагођено име аутора</string>
+  <string name="preference_author_name_toggle_summary">Коришћење прилагођеног имена аутора уместо вашег корисничког имена при отпремању фотографија</string>
+  <string name="preference_author_name">Прилагођено име аутора</string>
+  <string name="preference_author_name_summary">Прилагођено име аутора за коришћење уместо вашег корисничког имена у отпремањима</string>
   <string name="contributions_fragment">Доприноси</string>
   <string name="nearby_fragment">У близини</string>
   <string name="notifications">Обавештења</string>
@@ -402,4 +414,7 @@
   <string name="never_ask_again">Не питај ово поново</string>
   <string name="display_location_permission_title">Дозвола за приказ локације</string>
   <string name="display_location_permission_explanation">Тражи дозволу за локацију када је то потребно за функцију приказа картице обавештења у близини.</string>
+  <string name="achievements_fetch_failed">Нешто није у реду. Није могуће добавити достигнућа.</string>
+  <string name="this_function_needs_network_connection">Ова функција захтева мрежну везу. Проверите подешавања везе.</string>
+  <string name="bad_token_error_proposed_solution">Отпремање није успело због проблема са токеном за уређивање. Покушајте да се пријавите поново.</string>
 </resources>
