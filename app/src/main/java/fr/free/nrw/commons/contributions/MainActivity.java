@@ -5,20 +5,19 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.support.design.widget.BottomSheetBehavior;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
-
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
-
 
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -37,11 +36,11 @@ import fr.free.nrw.commons.notification.NotificationActivity;
 import fr.free.nrw.commons.theme.NavigationBaseActivity;
 import fr.free.nrw.commons.upload.UploadService;
 import fr.free.nrw.commons.utils.PermissionUtils;
-import fr.free.nrw.commons.utils.ViewUtil;
 import timber.log.Timber;
 
 import static android.content.ContentResolver.requestSync;
 import static fr.free.nrw.commons.location.LocationServiceManager.LOCATION_REQUEST;
+import static fr.free.nrw.commons.nearby.NearbyFragment.bottomSheetBehavior;
 
 public class MainActivity extends AuthenticatedActivity implements FragmentManager.OnBackStackChangedListener {
 
@@ -260,7 +259,11 @@ public class MainActivity extends AuthenticatedActivity implements FragmentManag
         } else if (getSupportFragmentManager().findFragmentByTag(nearbyFragmentTag) != null && !isContributionsFragmentVisible) {
             // Meas that nearby fragment is visible (not contributions fragment)
             // Set current item to contributions activity instead of closing the activity
-            viewPager.setCurrentItem(0);
+            if (bottomSheetBehavior.getState() == BottomSheetBehavior.STATE_EXPANDED) {
+                bottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
+            } else {
+                viewPager.setCurrentItem(0);
+            }
         } else {
             super.onBackPressed();
         }

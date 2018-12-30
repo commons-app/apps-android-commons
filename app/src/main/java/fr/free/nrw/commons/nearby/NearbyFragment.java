@@ -80,7 +80,7 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
     private static final String TAG_RETAINED_MAP_FRAGMENT = NearbyMapFragment.class.getSimpleName();
     private static final String TAG_RETAINED_LIST_FRAGMENT = NearbyListFragment.class.getSimpleName();
     private Bundle bundle;
-    private BottomSheetBehavior bottomSheetBehavior; // Behavior for list bottom sheet
+    public static BottomSheetBehavior bottomSheetBehavior; // Behavior for list bottom sheet
     private BottomSheetBehavior bottomSheetBehaviorForDetails; // Behavior for details bottom sheet
 
     private LatLng curLatLng;
