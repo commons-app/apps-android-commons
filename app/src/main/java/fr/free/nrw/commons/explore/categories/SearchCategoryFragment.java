@@ -5,7 +5,6 @@ import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.os.Handler;
-import android.preference.PreferenceManager;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -95,7 +94,6 @@ public class SearchCategoryFragment extends CommonsDaggerSupportFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_browse_image, container, false);
-        boolean currentThemeIsDark = PreferenceManager.getDefaultSharedPreferences(getContext()).getBoolean("theme", false);
         ButterKnife.bind(this, rootView);
         if (getActivity().getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT){
             categoriesRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
@@ -104,7 +102,7 @@ public class SearchCategoryFragment extends CommonsDaggerSupportFragment {
             categoriesRecyclerView.setLayoutManager(new GridLayoutManager(getContext(), 2));
         }
         ArrayList<String> items = new ArrayList<>();
-        categoriesAdapter = adapterFactory.create(items, currentThemeIsDark);
+        categoriesAdapter = adapterFactory.create(items);
         categoriesRecyclerView.setAdapter(categoriesAdapter);
         categoriesRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
