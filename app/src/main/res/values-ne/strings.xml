@@ -2,6 +2,7 @@
 <!-- Authors:
 * Drjpoudel
 * Nirajan pant
+* Parbat subedi
 * राम प्रसाद जोशी
 * सरोज कुमार ढकाल
 -->
@@ -126,6 +127,8 @@
   <string name="navigation_item_info">प्रशिक्षण</string>
   <string name="navigation_item_notification">जानकारीहरू</string>
   <string name="toggle_view_button">टगल दृश्य</string>
+  <string name="search_tab_title_media">मिडिया</string>
+  <string name="search_tab_title_categories">श्रेणीहरू</string>
   <string name="menu_set_wallpaper" fuzzy="true">भित्तेपत्र चयन गर्नुहोस्</string>
   <string name="wallpaper_set_successfully">भित्तेपत्र सफलतापूर्वक चयन भयो!</string>
   <string name="list_sheet">सूची</string>

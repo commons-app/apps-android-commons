@@ -8,6 +8,7 @@
 * Guycn2
 * Inkbug
 * Nurick
+* Strayblues
 * Uziel302
 * YaronSh
 -->
@@ -249,7 +250,7 @@
   <string name="upload_problem_image_blurry">התמונה מטושטשת.</string>
   <string name="upload_problem_image_duplicate">התמונה כבר בוויקישיתוף.</string>
   <string name="upload_problem_different_geolocation">התמונה צולמה במקום אחר.</string>
-  <string name="upload_problem_do_you_continue">האם ברצונך עדיין להעלות את התמונה הזאת?</string>
+  <string name="upload_problem_do_you_continue">האם ברצונך להעלות את התמונה הזאת עדיין?</string>
   <string name="give_permission">לתת הרשאה</string>
   <string name="use_external_storage">להשתמש באחסון חיצוני</string>
   <string name="use_external_storage_summary">שמירת תמונות שצולמו באמצעות מצלמה בתוך היישום במכשיר שלך</string>

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Authors:
+* Adithyak1997
 * Akhilan
 * Praveenp
 * Santhosh.thottingal
@@ -183,4 +184,5 @@
   <string name="about_translate_proceed">തുടരുക</string>
   <string name="about_translate_cancel">റദ്ദാക്കുക</string>
   <string name="retry">വീണ്ടും ശ്രമിക്കുക</string>
+  <string name="ends_on">അവസാനിക്കുന്നത്:</string>
 </resources>

@@ -334,6 +334,7 @@
   <string name="share_coordinates_not_present">Координате нису биле наведене током избора слике</string>
   <string name="error_fetching_nearby_places">Грешка при добављању места у близини.</string>
   <string name="add_description">+ Додај опис</string>
+  <string name="no_recent_searches">Нема недавних претрага</string>
   <string name="delete_recent_searches_dialog">Да ли сте сигурни да желите да очистите своју историју претраге?</string>
   <string name="search_history_deleted">Историја претраге је избрисана</string>
   <string name="nominate_delete">Номиновање за брисање</string>
@@ -415,6 +416,8 @@
   <string name="display_location_permission_title">Дозвола за приказ локације</string>
   <string name="display_location_permission_explanation">Тражи дозволу за локацију када је то потребно за функцију приказа картице обавештења у близини.</string>
   <string name="achievements_fetch_failed">Нешто није у реду. Није могуће добавити достигнућа.</string>
+  <string name="display_campaigns">Прикажи кампање</string>
+  <string name="display_campaigns_explanation">Додирните ове да бисте видели кампање у току</string>
   <string name="this_function_needs_network_connection">Ова функција захтева мрежну везу. Проверите подешавања везе.</string>
   <string name="bad_token_error_proposed_solution">Отпремање није успело због проблема са токеном за уређивање. Покушајте да се пријавите поново.</string>
 </resources>

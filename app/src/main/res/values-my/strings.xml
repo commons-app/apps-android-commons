@@ -219,6 +219,8 @@
   <string name="search_recent_header">လတ်တလော ရှာဖွေမှုများ :</string>
   <string name="error_loading_categories">ကဏ္ဍများကို ဝန်ဆွဲတင်နေစဉ် အမှားဖြစ်ပွားခဲ့ပါသည်။</string>
   <string name="error_loading_subcategories">ကဏ္ဍခွဲများကို ဝန်ဆွဲတင်နေစဉ် အမှားဖြစ်ပွားခဲ့ပါသည်။</string>
+  <string name="search_tab_title_media">မီဒီယာ</string>
+  <string name="search_tab_title_categories">ကဏ္ဍများ</string>
   <string name="quiz">ထွက်</string>
   <string name="quiz_question_string">ဤရုပ်ပုံကို တင်ရန် အဆင်ပြေပါ့မလား?</string>
   <string name="question">မေးခွန်း</string>

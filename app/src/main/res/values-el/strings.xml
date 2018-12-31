@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Authors:
 * Astralnet
+* Domdomegg
 * Evropi
 * Geraki
 * Glavkos
@@ -224,7 +225,7 @@
   <string name="navigation_item_home">Αρχική Σελίδα</string>
   <string name="navigation_item_upload">Φορτώστε</string>
   <string name="navigation_item_nearby">Εδώ Κοντά</string>
-  <string name="navigation_item_about">Γύρω από</string>
+  <string name="navigation_item_about">Σχετικά</string>
   <string name="navigation_item_settings">Ρυθμίσεις</string>
   <string name="navigation_item_feedback">Σχόλια</string>
   <string name="navigation_item_logout">Αποσύνδεση</string>
