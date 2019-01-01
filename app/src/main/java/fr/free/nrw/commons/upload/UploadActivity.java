@@ -15,8 +15,11 @@ import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Html;
+import android.text.SpannableStringBuilder;
 import android.text.TextUtils;
 import android.text.method.LinkMovementMethod;
+import android.text.style.ClickableSpan;
+import android.text.style.URLSpan;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
@@ -143,6 +146,7 @@ public class UploadActivity extends AuthenticatedActivity implements UploadView,
         configureNavigationButtons();
         configureCategories();
         configureLicenses();
+        configurePolicy();
 
         presenter.init();
 
@@ -255,13 +259,10 @@ public class UploadActivity extends AuthenticatedActivity implements UploadView,
     @SuppressLint("StringFormatInvalid")
     @Override
     public void updateLicenseSummary(String selectedLicense, int imageCount) {
-        String licenseHyperLink = "<a href='" + Utils.licenseUrlFor(selectedLicense)+"'>" +
+        String licenseHyperLink = "<a href='" + Utils.licenseUrlFor(selectedLicense) + "'>" +
                 getString(Utils.licenseNameFor(selectedLicense)) + "</a><br>";
-        licenseSummary.setMovementMethod(LinkMovementMethod.getInstance());
-        licenseSummary.setText(
-                Html.fromHtml(
-                        getResources().getQuantityString(R.plurals.share_license_summary,
-                                imageCount, licenseHyperLink)));
+
+          setTextViewHTML(licenseSummary, getResources().getQuantityString(R.plurals.share_license_summary, imageCount, licenseHyperLink));
     }
 
     @Override
@@ -437,6 +438,47 @@ public class UploadActivity extends AuthenticatedActivity implements UploadView,
         finish();
     }
 
+    /**
+     * Parses links from HTML string, and makes the links clickable in the specified TextView.<br>
+     * Uses {@link #makeLinkClickable(SpannableStringBuilder, URLSpan)}.
+     * @see <a href="https://stackoverflow.com/questions/12418279/android-textview-with-clickable-links-how-to-capture-clicks">Source</a>
+     */
+    private void setTextViewHTML(TextView text, String html)
+    {
+        CharSequence sequence = Html.fromHtml(html);
+        SpannableStringBuilder strBuilder = new SpannableStringBuilder(sequence);
+        URLSpan[] urls = strBuilder.getSpans(0, sequence.length(), URLSpan.class);
+        for (URLSpan span : urls) {
+            makeLinkClickable(strBuilder, span);
+        }
+        text.setText(strBuilder);
+        text.setMovementMethod(LinkMovementMethod.getInstance());
+    }
+
+    /**
+     * Sets onClick handler to launch browser for the specified URLSpan.
+     * @see <a href="https://stackoverflow.com/questions/12418279/android-textview-with-clickable-links-how-to-capture-clicks">Source</a>
+     */
+    private void makeLinkClickable(SpannableStringBuilder strBuilder, final URLSpan span)
+    {
+        int start = strBuilder.getSpanStart(span);
+        int end = strBuilder.getSpanEnd(span);
+        int flags = strBuilder.getSpanFlags(span);
+        ClickableSpan clickable = new ClickableSpan() {
+            public void onClick(View view) {
+                // Handle hyperlink click
+                String hyperLink = span.getURL();
+                launchBrowser(hyperLink);
+            }
+        };
+        strBuilder.setSpan(clickable, start, end, flags);
+        strBuilder.removeSpan(span);
+    }
+
+    private void launchBrowser(String hyperLink) {
+        Utils.handleWebUrl(this, Uri.parse(hyperLink));
+    }
+
     private void configureLicenses() {
         licenseSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -513,6 +555,10 @@ public class UploadActivity extends AuthenticatedActivity implements UploadView,
         categoriesAdapter = new UploadCategoriesAdapterFactory(categoriesModel).create(new ArrayList<>());
         categoriesList.setLayoutManager(new LinearLayoutManager(this));
         categoriesList.setAdapter(categoriesAdapter);
+    }
+
+    private void configurePolicy() {
+        setTextViewHTML(licensePolicy, getString(R.string.media_upload_policy));
     }
 
     @SuppressLint("CheckResult")
