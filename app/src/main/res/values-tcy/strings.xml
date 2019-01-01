@@ -105,7 +105,7 @@
   <string name="no_uploads_yet">ಇರ್ ಒಂಜಿಲಾ ಪಟೋನ್ ಅಪ್ಲೋಡ್ ಮಾಲ್ತಿಜ್ಜಿ.</string>
   <string name="menu_retry_upload">ನನೊರ ಪ್ರಯತ್ನ ಮಾನ್ಪುಲೇ</string>
   <string name="menu_cancel_upload">ವಜಾ ಮಲ್ಪುಲೆ</string>
-  <string name="share_license_summary">ಈ ಪಟೊ ಲೈಸನ್ಸ್‌ಡ್ %1$s</string>
+  <string name="share_license_summary" fuzzy="true">ಈ ಪಟೊ ಲೈಸನ್ಸ್‌ಡ್ %1$s</string>
   <string name="media_upload_policy">ಈ ಪಟೊನ್ ಕೊರಿಯರ ಅತ್ತಂದೆ, ಉಂದು ಎನ್ನ ಸ್ವಂತ ಬೆಲೆಗ್ ಯಾನ್ ಘೋಷಣೆ ಮಾಲ್ಪೆ, ಅವು ಹಕ್ಕುಸ್ವಾಮ್ಯತ ವಸ್ತು ಅತ್ತಂದೆ ಸ್ವಂತಲಾ ಅತ್ತ್&lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines\"&gt;Wikimedia Commons policies&lt;/a&gt;.</string>
   <string name="menu_download">ಡೌನ್‍ಲೋಡ್</string>
   <string name="preference_license">ಪೂರ್ವನಿಯೋಜಿತ ಲೈಸನ್ಸ್‌.</string>

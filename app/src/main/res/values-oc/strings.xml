@@ -84,7 +84,7 @@
   <string name="no_uploads_yet">Avètz pas encara telecargat cap de fòto.</string>
   <string name="menu_retry_upload">Tornar ensajar</string>
   <string name="menu_cancel_upload">Anullar</string>
-  <string name="share_license_summary">Aqueste imatge serà jos licéncia %1$s</string>
+  <string name="share_license_summary" fuzzy="true">Aqueste imatge serà jos licéncia %1$s</string>
   <string name="menu_download">Telecargar</string>
   <string name="preference_license" fuzzy="true">Licéncia</string>
   <string name="preference_theme">Mòde de nuèit</string>

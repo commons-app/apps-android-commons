@@ -1,5 +1,6 @@
 package fr.free.nrw.commons.contributions;
 
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
@@ -31,7 +32,7 @@ import fr.free.nrw.commons.auth.SessionManager;
 import fr.free.nrw.commons.location.LocationServiceManager;
 import fr.free.nrw.commons.nearby.NearbyFragment;
 import fr.free.nrw.commons.nearby.NearbyMapFragment;
-import fr.free.nrw.commons.nearby.NearbyNoificationCardView;
+import fr.free.nrw.commons.nearby.NearbyNotificationCardView;
 import fr.free.nrw.commons.notification.NotificationActivity;
 import fr.free.nrw.commons.theme.NavigationBaseActivity;
 import fr.free.nrw.commons.upload.UploadService;
@@ -83,9 +84,9 @@ public class MainActivity extends AuthenticatedActivity implements FragmentManag
             onOrientationChanged = true; // Will be used in nearby fragment to determine significant update of map
 
             //If nearby map was visible, call on Tab Selected to call all nearby operations
-            if (savedInstanceState.getInt("viewPagerCurrentItem") == 1) {
+            /*if (savedInstanceState.getInt("viewPagerCurrentItem") == 1) {
                 ((NearbyFragment)contributionsActivityPagerAdapter.getItem(1)).onTabSelected(onOrientationChanged);
-            }
+            }*/
         }
     }
 
@@ -119,27 +120,21 @@ public class MainActivity extends AuthenticatedActivity implements FragmentManag
 
         // Set custom view to add nearby info icon next to text
         View nearbyTabLinearLayout = LayoutInflater.from(this).inflate(R.layout.custom_nearby_tab_layout, null);
-        View nearbyInfoPopupWindowLayout = LayoutInflater.from(this).inflate(R.layout.nearby_info_popup_layout, null);
         ImageView nearbyInfo = nearbyTabLinearLayout.findViewById(R.id.nearby_info_image);
         tabLayout.getTabAt(1).setCustomView(nearbyTabLinearLayout);
 
-        nearbyInfo.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                /*new AlertDialog.Builder(MainActivity.this)
-                        .setTitle(R.string.title_activity_nearby)
-                        .setMessage(R.string.showcase_view_whole_nearby_activity)
-                        .setCancelable(true)
-                        .setNeutralButton(android.R.string.ok, (dialog, id) -> dialog.cancel())
-                        .create()
-                        .show();*/
-                String popupText = getResources().getString(R.string.showcase_view_whole_nearby_activity);
-                ViewUtil.displayPopupWindow(nearbyInfo, MainActivity.this, nearbyInfoPopupWindowLayout, popupText);
-            }
-        });
+        nearbyInfo.setOnClickListener(view ->
+                new AlertDialog.Builder(MainActivity.this)
+                    .setTitle(R.string.title_activity_nearby)
+                    .setMessage(R.string.showcase_view_whole_nearby_activity)
+                    .setCancelable(true)
+                    .setPositiveButton(android.R.string.ok, (dialog, id) -> dialog.cancel())
+                    .create()
+                    .show()
+        );
 
         if (uploadServiceIntent != null) {
-            // If auth cookie already acquired notify contrib fragmnet so that it san operate auth required actions
+            // If auth cookie already acquired notify contrib fragment so that it san operate auth required actions
             ((ContributionsFragment)contributionsActivityPagerAdapter.getItem(CONTRIBUTIONS_TAB_POSITION)).onAuthCookieAcquired(uploadServiceIntent);
         }
         setTabAndViewPagerSynchronisation();
@@ -186,8 +181,7 @@ public class MainActivity extends AuthenticatedActivity implements FragmentManag
                         isContributionsFragmentVisible = false;
                         updateMenuItem();
                         // Do all permission and GPS related tasks on tab selected, not on create
-                            ((NearbyFragment)contributionsActivityPagerAdapter.getItem(1)).onTabSelected(onOrientationChanged);
-
+                        ((NearbyFragment)contributionsActivityPagerAdapter.getItem(1)).onTabSelected(onOrientationChanged);
                         break;
                     default:
                         tabLayout.getTabAt(CONTRIBUTIONS_TAB_POSITION).select();
@@ -220,7 +214,7 @@ public class MainActivity extends AuthenticatedActivity implements FragmentManag
     }
 
     public void hideTabs() {
-        changeDrawerIconToBakcButton();
+        changeDrawerIconToBackButton();
         if (tabLayout != null) {
             tabLayout.setVisibility(View.GONE);
         }
@@ -254,11 +248,11 @@ public class MainActivity extends AuthenticatedActivity implements FragmentManag
                 showTabs();
                 // Nearby Notification Card View was invisible when Media Details Fragment is active, make it visible again on Contrib List Fragment active, according to preferences
                 if (prefs.getBoolean("displayNearbyCardView", true)) {
-                    if (contributionsFragment.nearbyNoificationCardView.cardViewVisibilityState == NearbyNoificationCardView.CardViewVisibilityState.READY) {
-                        contributionsFragment.nearbyNoificationCardView.setVisibility(View.VISIBLE);
+                    if (contributionsFragment.nearbyNotificationCardView.cardViewVisibilityState == NearbyNotificationCardView.CardViewVisibilityState.READY) {
+                        contributionsFragment.nearbyNotificationCardView.setVisibility(View.VISIBLE);
                     }
                 } else {
-                    contributionsFragment.nearbyNoificationCardView.setVisibility(View.GONE);
+                    contributionsFragment.nearbyNotificationCardView.setVisibility(View.GONE);
                 }
             } else {
                 finish();
@@ -342,7 +336,7 @@ public class MainActivity extends AuthenticatedActivity implements FragmentManag
     }
 
     /**
-     * Updte notification icon if there is an unread notification
+     * Update notification icon if there is an unread notification
      * @param isThereUnreadNotifications true if user didn't visit notifications activity since
      *                                   latest notification came to account
      */
@@ -372,7 +366,7 @@ public class MainActivity extends AuthenticatedActivity implements FragmentManag
         }
 
         /*
-         * Do not use getItem method to access fragments on pager adapter. User reference vairables
+         * Do not use getItem method to access fragments on pager adapter. User reference variables
          * instead.
          * */
         @Override
@@ -381,10 +375,8 @@ public class MainActivity extends AuthenticatedActivity implements FragmentManag
                 case 0:
                     ContributionsFragment retainedContributionsFragment = getContributionsFragment(0);
                     if (retainedContributionsFragment != null) {
-                        /**
-                         * ContributionsFragment is parent of ContributionsListFragment and
-                         * MediaDetailsFragment. If below decides which child will be visible.
-                         */
+                        //  ContributionsFragment is parent of ContributionsListFragment and
+                        //  MediaDetailsFragment. If below decides which child will be visible.
                         if (isContributionsListFragment) {
                             retainedContributionsFragment.setContributionsListFragment();
                         } else {

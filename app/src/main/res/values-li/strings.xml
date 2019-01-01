@@ -97,7 +97,7 @@
   <string name="no_uploads_yet">Doe höbs nag gein plaetjes geüpload.</string>
   <string name="menu_retry_upload">Perbeer oppernuuj</string>
   <string name="menu_cancel_upload">Braek aaf</string>
-  <string name="share_license_summary">Dit plaetje weurt gelicenseerd ónger %1$s</string>
+  <string name="share_license_summary" fuzzy="true">Dit plaetje weurt gelicenseerd ónger %1$s</string>
   <string name="media_upload_policy">Door dit plaetje toe te veuge verklaor ich det dit mien eige werk is en det \'t gein auteursrechtelik besjurmp matterjaal of selfies bevatj en angeszins instump mit \'t &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines\"&gt;beleid op Wikimedia Commons&lt;/a&gt;.</string>
   <string name="menu_download">Download</string>
   <string name="preference_license">Standerdlicentie</string>

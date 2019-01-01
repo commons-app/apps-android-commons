@@ -102,7 +102,7 @@
   <string name="no_uploads_yet">Þú ert ekki ennþá búin(n) að senda inn neinar myndir.</string>
   <string name="menu_retry_upload">Reyna aftur</string>
   <string name="menu_cancel_upload">Hætta við</string>
-  <string name="share_license_summary">Þessi mynd verður birt með %1$s notkunarleyfi</string>
+  <string name="share_license_summary" fuzzy="true">Þessi mynd verður birt með %1$s notkunarleyfi</string>
   <string name="media_upload_policy">Með því að senda inn þessa mynd, lýsi ég því hér með yfir að þetta er mitt eigið verk, það inniheldur ekkert höfundarréttarvarið efni eða sjálfsmyndir, og að það samræmist á allan hátt við &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines\"&gt;stefnu Wikimedia Commons varðandi notkun efnis&lt;/a&gt;.</string>
   <string name="menu_download">Sækja</string>
   <string name="preference_license">Sjálfgefið notkunarleyfi</string>

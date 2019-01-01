@@ -14,9 +14,7 @@ import android.support.design.widget.BottomSheetBehavior;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AlertDialog;
-import android.util.Log;
 import android.view.LayoutInflater;
-
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
@@ -38,6 +36,7 @@ import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
 import fr.free.nrw.commons.location.LatLng;
 import fr.free.nrw.commons.location.LocationServiceManager;
 import fr.free.nrw.commons.location.LocationUpdateListener;
+import fr.free.nrw.commons.utils.FragmentUtils;
 import fr.free.nrw.commons.utils.NetworkUtils;
 import fr.free.nrw.commons.utils.UriSerializer;
 import fr.free.nrw.commons.utils.ViewUtil;
@@ -99,6 +98,7 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
 
     private boolean onOrientationChanged = false;
     private boolean populateForCurrentLocation = false;
+    private boolean isNetworkErrorOccured = false;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -116,7 +116,6 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
         resumeFragment();*/
         bundle = new Bundle();
         initBottomSheetBehaviour();
-        wikidataEditListener.setAuthenticationStateListener(this);
         this.view = view;
         return view;
     }
@@ -126,7 +125,6 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
         super.onViewCreated(view, savedInstanceState);
         if (savedInstanceState != null) {
             onOrientationChanged = true;
-            refreshView(LOCATION_SIGNIFICANTLY_CHANGED);
         }
     }
 
@@ -212,6 +210,10 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
         bottomSheetBehaviorForDetails.setState(BottomSheetBehavior.STATE_HIDDEN);
     }
 
+    /**
+     * Sets camera position, zoom level according to sheet positions
+     * @param bottomSheetState expanded, collapsed or hidden
+     */
     public void prepareViewsForSheetPosition(int bottomSheetState) {
         // TODO
     }
@@ -223,7 +225,7 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
 
     @Override
     public void onLocationChangedSlightly(LatLng latLng) {
-            refreshView(LOCATION_SLIGHTLY_CHANGED);
+        refreshView(LOCATION_SLIGHTLY_CHANGED);
     }
 
 
@@ -244,7 +246,7 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
     /**
      * This method should be the single point to load/refresh nearby places
      *
-     * @param locationChangeType defines if location shanged significantly or slightly
+     * @param locationChangeType defines if location changed significantly or slightly
      */
     public void refreshView(LocationServiceManager.LocationChangeType locationChangeType) {
         Timber.d("Refreshing nearby places");
@@ -282,7 +284,7 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
         /*
         onOrientation changed is true whenever activities orientation changes. After orientation
         change we want to refresh map significantly, doesn't matter if location changed significantly
-        or not. Thus, we included onOrientatinChanged boolean to if clause
+        or not. Thus, we included onOrientationChanged boolean to if clause
          */
         if (locationChangeType.equals(LOCATION_SIGNIFICANTLY_CHANGED)
                 || locationChangeType.equals(PERMISSION_JUST_GRANTED)
@@ -331,7 +333,6 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
      * @param customLatLng Custom area which we will search around
      */
     public void refreshViewForCustomLocation(LatLng customLatLng, boolean refreshForCurrentLocation) {
-
         if (customLatLng == null) {
             // If null, return
             return;
@@ -360,7 +361,6 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
      * @param nearbyPlacesInfo This variable has place list information and distances.
      */
     private void populatePlacesFromCustomLocation(NearbyController.NearbyPlacesInfo nearbyPlacesInfo) {
-        //NearbyMapFragment nearbyMapFragment = getMapFragment();
         if (nearbyMapFragment != null) {
             nearbyMapFragment.searchThisAreaButtonProgressBar.setVisibility(View.GONE);
         }
@@ -375,6 +375,11 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
         }
     }
 
+    /**
+     * Turns nearby place lists and boundary coordinates into gson and update map and list fragments
+     * accordingly
+     * @param nearbyPlacesInfo a variable holds both nearby place list and boundary coordinates
+     */
     private void populatePlaces(NearbyController.NearbyPlacesInfo nearbyPlacesInfo) {
         Timber.d("Populating nearby places");
         List<Place> placeList = nearbyPlacesInfo.placeList;
@@ -387,11 +392,10 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
         String gsonBoundaryCoordinates = gson.toJson(boundaryCoordinates);
 
         if (placeList.size() == 0) {
-            ViewUtil.showSnackbar(view.findViewById(R.id.container), R.string.no_nearby);
+            ViewUtil.showShortSnackbar(view.findViewById(R.id.container), R.string.no_nearby);
         }
 
         bundle.putString("PlaceList", gsonPlaceList);
-        //bundle.putString("CurLatLng", gsonCurLatLng);
         bundle.putString("BoundaryCoord", gsonBoundaryCoordinates);
 
         // First time to init fragments
@@ -413,7 +417,7 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
     /**
      * Lock nearby view updates while updating map or list. Because we don't want new update calls
      * when we already updating for old location update.
-     * @param lock
+     * @param lock true if we should lock nearby map
      */
     private void lockNearbyView(boolean lock) {
         if (lock) {
@@ -427,9 +431,20 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
         }
     }
 
+    /**
+     * Updates map fragment,
+     * For slight update: camera follows users location
+     * For significant update: nearby markers are removed and new markers added again
+     * Slight updates stop if user is checking another area of map
+     *
+     * @param updateViaButton search this area button is clicked
+     * @param isSlightUpdate Means no need to update markers, just follow user location with camera
+     * @param customLatLng Will be used for updates for other locations than users current location.
+     *                     Ie. when we use search this area feature
+     * @param nearbyPlacesInfo Includes nearby places list and boundary coordinates
+     */
     private void updateMapFragment(boolean updateViaButton, boolean isSlightUpdate, @Nullable LatLng customLatLng, @Nullable NearbyController.NearbyPlacesInfo nearbyPlacesInfo) {
-
-        if (nearbyMapFragment.searchThisAreaModeOn) {
+        if (nearbyMapFragment.checkingAround) {
             return;
         }
         /*
@@ -447,11 +462,14 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
              * If we are close to nearby places boundaries, we need a significant update to
              * get new nearby places. Check order is south, north, west, east
              * */
-            if (nearbyMapFragment.boundaryCoordinates != null && !nearbyMapFragment.searchThisAreaModeOn
-                    && (curLatLng.getLatitude() <= nearbyMapFragment.boundaryCoordinates[0].getLatitude()
-                    || curLatLng.getLatitude() >= nearbyMapFragment.boundaryCoordinates[1].getLatitude()
-                    || curLatLng.getLongitude() <= nearbyMapFragment.boundaryCoordinates[2].getLongitude()
-                    || curLatLng.getLongitude() >= nearbyMapFragment.boundaryCoordinates[3].getLongitude())) {
+            if (nearbyMapFragment.boundaryCoordinates != null
+                    && !nearbyMapFragment.checkingAround
+                    && !nearbyMapFragment.searchThisAreaModeOn
+                    && !onOrientationChanged
+                    && (curLatLng.getLatitude() < nearbyMapFragment.boundaryCoordinates[0].getLatitude()
+                    || curLatLng.getLatitude() > nearbyMapFragment.boundaryCoordinates[1].getLatitude()
+                    || curLatLng.getLongitude() < nearbyMapFragment.boundaryCoordinates[2].getLongitude()
+                    || curLatLng.getLongitude() > nearbyMapFragment.boundaryCoordinates[3].getLongitude())) {
                 // populate places
                 placesDisposable = Observable.fromCallable(() -> nearbyController
                         .loadAttractionsFromLocation(curLatLng, curLatLng, false, updateViaButton))
@@ -463,7 +481,7 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
                                     showErrorMessage(getString(R.string.error_fetching_nearby_places));
                                     progressBar.setVisibility(View.GONE);
                                 });
-                nearbyMapFragment.setBundleForUpdtes(bundle);
+                nearbyMapFragment.setBundleForUpdates(bundle);
                 nearbyMapFragment.updateMapSignificantlyForCurrentLocation();
                 updateListFragment();
                 return;
@@ -484,10 +502,10 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
             }
 
             if (isSlightUpdate) {
-                nearbyMapFragment.setBundleForUpdtes(bundle);
+                nearbyMapFragment.setBundleForUpdates(bundle);
                 nearbyMapFragment.updateMapSlightly();
             } else {
-                nearbyMapFragment.setBundleForUpdtes(bundle);
+                nearbyMapFragment.setBundleForUpdates(bundle);
                 nearbyMapFragment.updateMapSignificantlyForCurrentLocation();
                 updateListFragment();
             }
@@ -500,6 +518,10 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
         }
     }
 
+    /**
+     * Updates already existing list fragment with bundle includes nearby places and boundary
+     * coordinates
+     */
     private void updateListFragment() {
         nearbyListFragment.setBundleForUpdates(bundle);
         nearbyListFragment.updateNearbyListSignificantly();
@@ -538,6 +560,9 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
         fragmentTransaction.commitAllowingStateLoss();
     }
 
+    /**
+     * Hides progress bar
+     */
     private void hideProgressBar() {
         if (progressBar != null) {
             progressBar.setVisibility(View.GONE);
@@ -577,12 +602,18 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
         }
     }
 
+    /**
+     * Requests location permission if activity is not null
+     */
     private void requestLocationPermissions() {
         if (!getActivity().isFinishing()) {
             locationManager.requestPermissions(getActivity());
         }
     }
 
+    /**
+     * Will warn user if location is denied
+     */
     private void showLocationPermissionDeniedErrorDialog() {
         new AlertDialog.Builder(getActivity())
                 .setMessage(R.string.nearby_needs_permissions)
@@ -672,24 +703,38 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
         ViewUtil.showLongToast(getActivity(), message);
     }
 
+    /**
+     * Adds network broadcast receiver to recognize connection established
+     */
     private void addNetworkBroadcastReceiver() {
+        if (!FragmentUtils.isFragmentUIActive(this)) {
+            return;
+        }
+        
         IntentFilter intentFilter = new IntentFilter(NETWORK_INTENT_ACTION);
-            snackbar = Snackbar.make(transparentView , R.string.no_internet, Snackbar.LENGTH_INDEFINITE);
+        snackbar = Snackbar.make(transparentView, R.string.no_internet, Snackbar.LENGTH_INDEFINITE);
 
-            broadcastReceiver = new BroadcastReceiver() {
-
+        broadcastReceiver = new BroadcastReceiver() {
             @Override
             public void onReceive(Context context, Intent intent) {
-                if (snackbar != null) {
+                if (snackbar != null && getActivity() != null) {
                     if (NetworkUtils.isInternetConnectionEstablished(getActivity())) {
-                        refreshView(LOCATION_SIGNIFICANTLY_CHANGED);
+                        if (isNetworkErrorOccured) {
+                            refreshView(LOCATION_SIGNIFICANTLY_CHANGED);
+                            isNetworkErrorOccured = false;
+                        }
                         snackbar.dismiss();
                     } else {
+                        isNetworkErrorOccured = true;
                         snackbar.show();
                     }
                 }
             }
         };
+
+        if (getActivity() == null) {
+            return;
+        }
 
         getActivity().registerReceiver(broadcastReceiver, intentFilter);
 
@@ -702,6 +747,10 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
         resumeFragment();
         }
 
+    /**
+     * Perform nearby operations on nearby tab selected
+     * @param onOrientationChanged pass orientation changed info to fragment
+     */
     public void onTabSelected(boolean onOrientationChanged) {
         Timber.d("On nearby tab selected");
         this.onOrientationChanged = onOrientationChanged;
@@ -723,6 +772,7 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
+        wikidataEditListener.setAuthenticationStateListener(this);
     }
 
     @Override
@@ -731,6 +781,7 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
         if (placesDisposable != null) {
             placesDisposable.dispose();
         }
+        wikidataEditListener.setAuthenticationStateListener(null);
         if (placesDisposableCustom != null) {
             placesDisposableCustom.dispose();
         }
@@ -741,11 +792,7 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
         super.onDetach();
         snackbar = null;
         broadcastReceiver = null;
-    }
-
-    @Override
-    public void onStart() {
-        super.onStart();
+        wikidataEditListener.setAuthenticationStateListener(null);
     }
 
     @Override

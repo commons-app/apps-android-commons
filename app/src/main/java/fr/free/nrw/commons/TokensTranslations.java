@@ -7,7 +7,7 @@ import java.util.HashMap;
  */
 
 public class TokensTranslations {
-     HashMap<String,String> translationToken = new HashMap<String,String>();
+     HashMap<String,String> translationToken = new HashMap<>();
 
       public void initailize() {
         translationToken.put("Kazakh", "ab");

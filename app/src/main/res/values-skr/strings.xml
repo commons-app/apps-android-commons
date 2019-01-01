@@ -144,6 +144,8 @@
   <string name="menu_search_button">ڳولو</string>
   <string name="title_activity_search">ڳولو</string>
   <string name="search_recent_header">حالیہ ڳول:</string>
+  <string name="search_tab_title_media">میݙیا</string>
+  <string name="search_tab_title_categories">ون٘کیاں</string>
   <string name="question">سوال</string>
   <string name="result">نتیجہ</string>
   <string name="continue_message">جاری رکھو</string>

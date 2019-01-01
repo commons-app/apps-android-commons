@@ -83,7 +83,7 @@ public class CustomApiResult {
 
     public ArrayList<CustomApiResult> getNodes(String xpath) {
         try {
-            ArrayList<CustomApiResult> results = new ArrayList<CustomApiResult>();
+            ArrayList<CustomApiResult> results = new ArrayList<>();
             NodeList nodes = (NodeList) evaluator.evaluate(xpath, doc, XPathConstants.NODESET);
             for(int i = 0; i < nodes.getLength(); i++) {
                 results.add(new CustomApiResult(nodes.item(i)));

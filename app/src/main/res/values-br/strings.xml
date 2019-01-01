@@ -104,7 +104,7 @@
   <string name="no_uploads_yet">N\'ho peus ket enporzhiet skeudennoù c\'hoazh.</string>
   <string name="menu_retry_upload">Klask en-dro</string>
   <string name="menu_cancel_upload">Nullañ</string>
-  <string name="share_license_summary">Gant an aotre-implijout %1$s e vo ar skeudenn-mañ</string>
+  <string name="share_license_summary" fuzzy="true">Gant an aotre-implijout %1$s e vo ar skeudenn-mañ</string>
   <string name="menu_download">Pellgargañ</string>
   <string name="preference_license">Aotre-implijout dre ziouer</string>
   <string name="use_previous">Ober gant an titl/deskrivadur kent</string>

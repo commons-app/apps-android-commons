@@ -7,7 +7,7 @@ public class LocationUtils {
         return new LatLng(mapBoxLatLng.getLatitude(), mapBoxLatLng.getLongitude(), 0);
     }
 
-    public static com.mapbox.mapboxsdk.geometry.LatLng comonsLatLngToMapBoxLatLng(LatLng commonsLatLng) {
+    public static com.mapbox.mapboxsdk.geometry.LatLng commonsLatLngToMapBoxLatLng(LatLng commonsLatLng) {
         return new com.mapbox.mapboxsdk.geometry.LatLng(commonsLatLng.getLatitude(), commonsLatLng.getLongitude());
     }
 }

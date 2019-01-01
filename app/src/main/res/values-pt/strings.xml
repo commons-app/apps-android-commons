@@ -113,7 +113,7 @@
   <string name="no_uploads_yet">Não carregou ainda nenhuma foto.</string>
   <string name="menu_retry_upload">Tente novamente</string>
   <string name="menu_cancel_upload">Cancelar</string>
-  <string name="share_license_summary">Essa imagem será licenciada sob %1$s</string>
+  <string name="share_license_summary" fuzzy="true">Essa imagem será licenciada sob %1$s</string>
   <string name="media_upload_policy">Ao carregar esta imagem, declaro que esta é uma obra própria, que não contém material protegido nem selfies, e que adere às &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines/pt\"&gt;normas da wiki Wikimedia Commons&lt;/a&gt;.</string>
   <string name="menu_download">Descarregar</string>
   <string name="preference_license">Licença padrão</string>

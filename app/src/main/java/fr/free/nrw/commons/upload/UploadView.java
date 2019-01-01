@@ -64,6 +64,8 @@ public interface UploadView {
 
     void updateTopCardContent();
 
+    void updateSubtitleVisibility(int imageCount);
+
     void dismissKeyboard();
 
     void showBadPicturePopup(@ImageUtils.Result int errorMessage);

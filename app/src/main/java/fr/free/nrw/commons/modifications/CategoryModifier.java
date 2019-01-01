@@ -42,7 +42,7 @@ public class CategoryModifier extends PageModifier {
     }
 
     @Override
-    public String getEditSumary() {
+    public String getEditSummary() {
         return "Added " + params.optJSONArray(PARAM_CATEGORIES).length() + " categories.";
     }
 }

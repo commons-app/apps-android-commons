@@ -1,14 +1,9 @@
 package fr.free.nrw.commons.nearby;
 
 import android.content.Context;
-import android.content.Intent;
-import android.content.res.Resources;
-import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v7.app.AlertDialog;
 import android.util.AttributeSet;
-import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -25,7 +20,7 @@ import timber.log.Timber;
 /**
  * Custom card view for nearby notification card view on main screen, above contributions list
  */
-public class NearbyNoificationCardView  extends SwipableCardView {
+public class NearbyNotificationCardView extends SwipableCardView {
 
     private Context context;
 
@@ -40,29 +35,30 @@ public class NearbyNoificationCardView  extends SwipableCardView {
 
     public PermissionType permissionType;
 
-    float x1,x2;
-
-    public NearbyNoificationCardView(@NonNull Context context) {
+    public NearbyNotificationCardView(@NonNull Context context) {
         super(context);
         this.context = context;
         cardViewVisibilityState = CardViewVisibilityState.INVISIBLE;
         init();
     }
 
-    public NearbyNoificationCardView(@NonNull Context context, @Nullable AttributeSet attrs) {
+    public NearbyNotificationCardView(@NonNull Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
         this.context = context;
         cardViewVisibilityState = CardViewVisibilityState.INVISIBLE;
         init();
     }
 
-    public NearbyNoificationCardView(@NonNull Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
+    public NearbyNotificationCardView(@NonNull Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         this.context = context;
         cardViewVisibilityState = CardViewVisibilityState.INVISIBLE;
         init();
     }
 
+    /**
+     * Initializes views and action listeners
+     */
     private void init() {
         View rootView = inflate(context, R.layout.nearby_card_view, this);
 
@@ -82,8 +78,8 @@ public class NearbyNoificationCardView  extends SwipableCardView {
     @Override
     protected void onAttachedToWindow() {
         super.onAttachedToWindow();
-        // If you don't setVisibility after getting layout params, then you will se an empty space in place of nerabyNotificationCardView
-        if (((MainActivity)context).prefs.getBoolean("displayNearbyCardView", true) && this.cardViewVisibilityState == NearbyNoificationCardView.CardViewVisibilityState.READY) {
+        // If you don't setVisibility after getting layout params, then you will se an empty space in place of nearby NotificationCardView
+        if (((MainActivity)context).prefs.getBoolean("displayNearbyCardView", true) && this.cardViewVisibilityState == NearbyNotificationCardView.CardViewVisibilityState.READY) {
             this.setVisibility(VISIBLE);
         } else {
             this.setVisibility(GONE);
@@ -105,89 +101,16 @@ public class NearbyNoificationCardView  extends SwipableCardView {
     }
 
     /**
-     * Sets permission request button visible and content layout invisible, then adds correct
-     * permission request actions to permission request button according to PermissionType enum
-     * @param isPermissionRequestButtonNeeded true if permissions missing
+     * Time is up, data for card view is not ready, so do not display it
      */
-    public void displayPermissionRequestButton(boolean isPermissionRequestButtonNeeded) {
-        if (isPermissionRequestButtonNeeded) {
-            cardViewVisibilityState = CardViewVisibilityState.ASK_PERMISSION;
-            contentLayout.setVisibility(GONE);
-            permissionRequestButton.setVisibility(VISIBLE);
-
-            if (permissionType == PermissionType.ENABLE_LOCATION_PERMISSON) {
-
-                permissionRequestButton.setOnClickListener(new OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        if (!((MainActivity)context).isFinishing()) {
-                            ((MainActivity) context).locationManager.requestPermissions((MainActivity) context);
-                        }
-                    }
-                });
-
-            } else if (permissionType == PermissionType.ENABLE_GPS) {
-
-                permissionRequestButton.setOnClickListener(new OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        new AlertDialog.Builder(context)
-                                .setMessage(R.string.gps_disabled)
-                                .setCancelable(false)
-                                .setPositiveButton(R.string.enable_gps,
-                                        (dialog, id) -> {
-                                            Intent callGPSSettingIntent = new Intent(
-                                                    android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS);
-                                            Timber.d("Loaded settings page");
-                                            ((MainActivity) context).startActivityForResult(callGPSSettingIntent, 1);
-                                        })
-                                .setNegativeButton(R.string.menu_cancel_upload, (dialog, id) -> {
-                                    dialog.cancel();
-                                    displayPermissionRequestButton(true);
-                                })
-                                .create()
-                                .show();
-                    }
-                });
-            }
-
-
-        } else {
-            cardViewVisibilityState = CardViewVisibilityState.LOADING;
-            /*permissionRequestButton.setVisibility(GONE);
-            contentLayout.setVisibility(VISIBLE);
-            // Set visibility of elements in content layout once it become visible
-            progressBar.setVisibility(VISIBLE);
-            notificationTitle.setVisibility(GONE);
-            notificationDistance.setVisibility(GONE);
-            notificationIcon.setVisibility(GONE);
-
-            permissionRequestButton.setVisibility(GONE);*/
-
-            this.setVisibility(GONE);
-            Handler nearbyNotificationHandler = new Handler();
-            Runnable nearbyNotificationRunnable = new Runnable() {
-                @Override
-                public void run() {
-                    if (cardViewVisibilityState != NearbyNoificationCardView.CardViewVisibilityState.READY
-                            && cardViewVisibilityState != NearbyNoificationCardView.CardViewVisibilityState.ASK_PERMISSION
-                            && cardViewVisibilityState != NearbyNoificationCardView.CardViewVisibilityState.INVISIBLE) {
-                        // If after 30 seconds, card view is not ready
-                        errorOcured();
-                    } else {
-                        suceeded();
-                    }
-                }
-            };
-            nearbyNotificationHandler.postDelayed(nearbyNotificationRunnable, 30000);
-        }
-    }
-
-    private void errorOcured() {
+    private void errorOccurred() {
         this.setVisibility(GONE);
     }
 
-    private void suceeded() {
+    /**
+     * Data for card view is ready, display card view
+     */
+    private void succeeded() {
         this.setVisibility(VISIBLE);
     }
 
@@ -222,10 +145,10 @@ public class NearbyNoificationCardView  extends SwipableCardView {
     protected void onVisibilityChanged(@NonNull View changedView, int visibility) {
         super.onVisibilityChanged(changedView, visibility);
         if (visibility == VISIBLE) {
-            /**
-             * Sometimes we need to preserve previous state of notification card view without getting
-             * any data from user. Ie. wen user came back from Media Details fragment to Contrib List
-             * fragment, we need to know what was the state of card view, and set it to exact same state.
+            /*
+              Sometimes we need to preserve previous state of notification card view without getting
+              any data from user. Ie. wen user came back from Media Details fragment to Contrib List
+              fragment, we need to know what was the state of card view, and set it to exact same state.
              */
             switch (cardViewVisibilityState) {
                 case READY:
@@ -266,7 +189,7 @@ public class NearbyNoificationCardView  extends SwipableCardView {
         READY,
         INVISIBLE,
         ASK_PERMISSION,
-        ERROR_OCURED
+        ERROR_OCCURRED
     }
 
     /**
@@ -275,7 +198,7 @@ public class NearbyNoificationCardView  extends SwipableCardView {
      */
     public enum PermissionType {
         ENABLE_GPS,
-        ENABLE_LOCATION_PERMISSON, // For only after Marsmallow
+        ENABLE_LOCATION_PERMISSION, // For only after Marshmallow
         NO_PERMISSION_NEEDED
     }
 }

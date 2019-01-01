@@ -23,7 +23,6 @@ import android.support.v4.content.Loader;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.widget.CursorAdapter;
 import android.support.v7.app.AlertDialog;
-import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -37,7 +36,6 @@ import android.widget.Toast;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import fr.free.nrw.commons.campaigns.Campaign;
-import fr.free.nrw.commons.campaigns.CampaignResponseDTO;
 import fr.free.nrw.commons.campaigns.CampaignView;
 import fr.free.nrw.commons.campaigns.CampaignsPresenter;
 import fr.free.nrw.commons.campaigns.ICampaignsView;
@@ -58,7 +56,7 @@ import fr.free.nrw.commons.location.LocationUpdateListener;
 import fr.free.nrw.commons.media.MediaDetailPagerFragment;
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
 import fr.free.nrw.commons.nearby.NearbyController;
-import fr.free.nrw.commons.nearby.NearbyNoificationCardView;
+import fr.free.nrw.commons.nearby.NearbyNotificationCardView;
 import fr.free.nrw.commons.nearby.Place;
 import fr.free.nrw.commons.notification.NotificationController;
 import fr.free.nrw.commons.notification.UnreadNotificationsCheckAsync;
@@ -71,7 +69,6 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
-import org.acra.util.ToastSender;
 import timber.log.Timber;
 
 import static fr.free.nrw.commons.contributions.Contribution.STATE_FAILED;
@@ -114,7 +111,7 @@ public class ContributionsFragment
     public static final String CONTRIBUTION_LIST_FRAGMENT_TAG = "ContributionListFragmentTag";
     public static final String MEDIA_DETAIL_PAGER_FRAGMENT_TAG = "MediaDetailFragmentTag";
 
-    public NearbyNoificationCardView nearbyNoificationCardView;
+    public NearbyNotificationCardView nearbyNotificationCardView;
     private Disposable placesDisposable;
     private LatLng curLatLng;
 
@@ -162,17 +159,13 @@ public class ContributionsFragment
         presenter = new CampaignsPresenter();
         presenter.onAttachView(this);
         campaignView.setVisibility(View.GONE);
-        nearbyNoificationCardView = view.findViewById(R.id.card_view_nearby);
+        nearbyNotificationCardView = view.findViewById(R.id.card_view_nearby);
         checkBoxView = View.inflate(getActivity(), R.layout.nearby_permission_dialog, null);
         checkBox = (CheckBox) checkBoxView.findViewById(R.id.never_ask_again);
-        checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (isChecked) {
-                    // Do not ask for permission on activity start again
-                    prefs.edit().putBoolean("displayLocationPermissionForCardView",false).apply();
-                }
+        checkBox.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            if (isChecked) {
+                // Do not ask for permission on activity start again
+                prefs.edit().putBoolean("displayLocationPermissionForCardView",false).apply();
             }
         });
 
@@ -224,7 +217,7 @@ public class ContributionsFragment
         - There are some operations we need auth, so we need to make sure isAuthCookieAcquired.
         - And since we use same retained fragment doesn't want to make all network operations
         all over again on same fragment attached to recreated activity, we do this network
-        operations on first time fragment atached to an activity. Then they will be retained
+        operations on first time fragment attached to an activity. Then they will be retained
         until fragment life time ends.
          */
         if (((MainActivity)getActivity()).isAuthCookieAcquired && !isFragmentAttachedBefore) {
@@ -243,13 +236,13 @@ public class ContributionsFragment
         // show tabs on contribution list is visible
         ((MainActivity)getActivity()).showTabs();
         // show nearby card view on contributions list is visible
-        if (nearbyNoificationCardView != null) {
+        if (nearbyNotificationCardView != null) {
             if (prefs.getBoolean("displayNearbyCardView", true)) {
-                if (nearbyNoificationCardView.cardViewVisibilityState == NearbyNoificationCardView.CardViewVisibilityState.READY) {
-                    nearbyNoificationCardView.setVisibility(View.VISIBLE);
+                if (nearbyNotificationCardView.cardViewVisibilityState == NearbyNotificationCardView.CardViewVisibilityState.READY) {
+                    nearbyNotificationCardView.setVisibility(View.VISIBLE);
                 }
             } else {
-                nearbyNoificationCardView.setVisibility(View.GONE);
+                nearbyNotificationCardView.setVisibility(View.GONE);
             }
         }
 
@@ -273,7 +266,7 @@ public class ContributionsFragment
         // hide tabs on media detail view is visible
         ((MainActivity)getActivity()).hideTabs();
         // hide nearby card view on media detail is visible
-        nearbyNoificationCardView.setVisibility(View.GONE);
+        nearbyNotificationCardView.setVisibility(View.GONE);
 
         // Create if null
         if (getMediaDetailPagerFragment() == null) {
@@ -332,6 +325,8 @@ public class ContributionsFragment
 
             contributionsListFragment.clearSyncMessage();
             notifyAndMigrateDataSetObservers();
+
+            ((ContributionsListAdapter)contributionsListFragment.getAdapter()).setUploadService(uploadService);
         }
     }
 
@@ -386,8 +381,8 @@ public class ContributionsFragment
                         DialogUtil.showAlertDialog(getActivity(),
                                 getString(R.string.nearby_card_permission_title),
                                 getString(R.string.nearby_card_permission_explanation),
-                                () -> displayYouWontSeeNearbyMessage(),
-                                () -> enableLocationPermission(),
+                                this::displayYouWontSeeNearbyMessage,
+                                this::enableLocationPermission,
                                 checkBoxView,
                                 false);
                     }
@@ -419,36 +414,6 @@ public class ContributionsFragment
             setMediaDetailPagerFragment();
         }
         mediaDetailPagerFragment.showImage(i);
-    }
-
-    /**
-     * Retry upload when it is failed
-     * @param i position of upload which will be retried
-     */
-    public void retryUpload(int i) {
-        allContributions.moveToPosition(i);
-        Contribution c = contributionDao.fromCursor(allContributions);
-        if (c.getState() == STATE_FAILED) {
-            uploadService.queue(UploadService.ACTION_UPLOAD_FILE, c);
-            Timber.d("Restarting for %s", c.toString());
-        } else {
-            Timber.d("Skipping re-upload for non-failed %s", c.toString());
-        }
-    }
-
-    /**
-     * Delete a failed upload attempt
-     * @param i position of upload attempt which will be deteled
-     */
-    public void deleteUpload(int i) {
-        allContributions.moveToPosition(i);
-        Contribution c = contributionDao.fromCursor(allContributions);
-        if (c.getState() == STATE_FAILED) {
-            Timber.d("Deleting failed contrib %s", c.toString());
-            contributionDao.delete(c);
-        } else {
-            Timber.d("Skipping deletion for non-failed contrib %s", c.toString());
-        }
     }
 
     @Override
@@ -534,11 +499,6 @@ public class ContributionsFragment
     }
 
     @Override
-    public void onStart() {
-        super.onStart();
-    }
-
-    @Override
     public void onPause() {
         super.onPause();
         locationManager.removeLocationListener(this);
@@ -569,13 +529,13 @@ public class ContributionsFragment
 
         if (prefs.getBoolean("displayNearbyCardView", true)) {
             checkGPS();
-            if (nearbyNoificationCardView.cardViewVisibilityState == NearbyNoificationCardView.CardViewVisibilityState.READY) {
-                nearbyNoificationCardView.setVisibility(View.VISIBLE);
+            if (nearbyNotificationCardView.cardViewVisibilityState == NearbyNotificationCardView.CardViewVisibilityState.READY) {
+                nearbyNotificationCardView.setVisibility(View.VISIBLE);
             }
 
         } else {
             // Hide nearby notification card view if related shared preferences is false
-            nearbyNoificationCardView.setVisibility(View.GONE);
+            nearbyNotificationCardView.setVisibility(View.GONE);
         }
 
         fetchCampaigns();
@@ -587,13 +547,13 @@ public class ContributionsFragment
     private void checkGPS() {
         if (!locationManager.isProviderEnabled()) {
             Timber.d("GPS is not enabled");
-            nearbyNoificationCardView.permissionType = NearbyNoificationCardView.PermissionType.ENABLE_GPS;
+            nearbyNotificationCardView.permissionType = NearbyNotificationCardView.PermissionType.ENABLE_GPS;
             if (prefs.getBoolean("displayLocationPermissionForCardView", true)) {
                 DialogUtil.showAlertDialog(getActivity(),
                         getString(R.string.nearby_card_permission_title),
                         getString(R.string.nearby_card_permission_explanation),
-                        () -> displayYouWontSeeNearbyMessage(),
-                        () -> enableGPS(),
+                        this::displayYouWontSeeNearbyMessage,
+                        this::enableGPS,
                         checkBoxView,
                         false);
             }
@@ -606,25 +566,25 @@ public class ContributionsFragment
     private void checkLocationPermission() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             if (locationManager.isLocationPermissionGranted()) {
-                nearbyNoificationCardView.permissionType = NearbyNoificationCardView.PermissionType.NO_PERMISSION_NEEDED;
+                nearbyNotificationCardView.permissionType = NearbyNotificationCardView.PermissionType.NO_PERMISSION_NEEDED;
                 locationManager.registerLocationManager();
             } else {
-                nearbyNoificationCardView.permissionType = NearbyNoificationCardView.PermissionType.ENABLE_LOCATION_PERMISSON;
+                nearbyNotificationCardView.permissionType = NearbyNotificationCardView.PermissionType.ENABLE_LOCATION_PERMISSION;
                 // If user didn't selected Don't ask again
                 if (shouldShowRequestPermissionRationale(Manifest.permission.ACCESS_FINE_LOCATION)
                         && prefs.getBoolean("displayLocationPermissionForCardView", true)) {
                         DialogUtil.showAlertDialog(getActivity(),
                                 getString(R.string.nearby_card_permission_title),
                                 getString(R.string.nearby_card_permission_explanation),
-                                () -> displayYouWontSeeNearbyMessage(),
-                                () -> enableLocationPermission(),
+                                this::displayYouWontSeeNearbyMessage,
+                                this::enableLocationPermission,
                                 checkBoxView,
                                 false);
                 }
             }
         } else {
             // If device is under Marshmallow, we already checked for GPS
-            nearbyNoificationCardView.permissionType = NearbyNoificationCardView.PermissionType.NO_PERMISSION_NEEDED;
+            nearbyNotificationCardView.permissionType = NearbyNotificationCardView.PermissionType.NO_PERMISSION_NEEDED;
             locationManager.registerLocationManager();
         }
     }
@@ -679,10 +639,10 @@ public class ContributionsFragment
             Place closestNearbyPlace = nearbyPlacesInfo.placeList.get(0);
             String distance = formatDistanceBetween(curLatLng, closestNearbyPlace.location);
             closestNearbyPlace.setDistance(distance);
-            nearbyNoificationCardView.updateContent (true, closestNearbyPlace);
+            nearbyNotificationCardView.updateContent (true, closestNearbyPlace);
         } else {
             // Means that no close nearby place is found
-            nearbyNoificationCardView.updateContent (false, null);
+            nearbyNotificationCardView.updateContent (false, null);
         }
     }
 
@@ -725,7 +685,7 @@ public class ContributionsFragment
         if (firstLocationUpdate) {
             updateClosestNearbyCardViewInfo();
             // Turn it to false, since it is not first location update anymore. To change closest location
-            // notifiction, we need to wait for a significant location change.
+            // notification, we need to wait for a significant location change.
             firstLocationUpdate = false;
         }
     }

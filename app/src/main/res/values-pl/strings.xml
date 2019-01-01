@@ -110,7 +110,9 @@
   <string name="no_uploads_yet">Nie przesłałeś jeszcze żadnych zdjęć.</string>
   <string name="menu_retry_upload">Ponów próbę</string>
   <string name="menu_cancel_upload">Anuluj</string>
-  <string name="share_license_summary">Ten obraz będzie udostępniany na licencji %1$s</string>
+  <plurals name="share_license_summary">
+    <item quantity="other">1=Ten obraz będzie udostępniany na licencji %1$s</item>
+  </plurals>
   <string name="menu_download">Pobieranie</string>
   <string name="preference_license">Domyślna licencja</string>
   <string name="use_previous">Użyj poprzedniego tytułu/opisu</string>
@@ -250,6 +252,7 @@
   <string name="provider_searches">Ostatnio wyszukiwane zapytania</string>
   <string name="error_loading_categories">Wystąpił błąd podczas ładowania kategorii.</string>
   <string name="error_loading_subcategories">Wystąpił błąd podczas ładowania podkategorii.</string>
+  <string name="search_tab_title_categories">KATEGORIE</string>
   <string name="menu_set_wallpaper">Ustaw jako tapetę</string>
   <string name="wallpaper_set_successfully">Tapeta ustawiona pomyślnie!</string>
   <string name="quiz">Quiz</string>
