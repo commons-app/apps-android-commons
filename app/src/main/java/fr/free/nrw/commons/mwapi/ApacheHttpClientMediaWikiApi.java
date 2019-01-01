@@ -8,11 +8,9 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.VisibleForTesting;
 import android.text.TextUtils;
-import android.util.Log;
 
 import com.google.gson.Gson;
 
-import fr.free.nrw.commons.campaigns.CampaignResponseDTO;
 import org.apache.http.HttpResponse;
 import org.apache.http.conn.ClientConnectionManager;
 import org.apache.http.conn.scheme.PlainSocketFactory;
@@ -39,9 +37,9 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
+import java.util.Random;
 import java.util.TimeZone;
 import java.util.concurrent.Callable;
-import java.util.Random;
 
 import fr.free.nrw.commons.BuildConfig;
 import fr.free.nrw.commons.Media;
@@ -49,6 +47,7 @@ import fr.free.nrw.commons.PageTitle;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.achievements.FeedbackResponse;
 import fr.free.nrw.commons.auth.AccountUtil;
+import fr.free.nrw.commons.campaigns.CampaignResponseDTO;
 import fr.free.nrw.commons.category.CategoryImageUtils;
 import fr.free.nrw.commons.category.QueryContinue;
 import fr.free.nrw.commons.media.RecentChangesImageUtils;
@@ -296,7 +295,7 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
 
     @Override
     public boolean thank(String editToken, String revision) throws IOException {
-        ApiResult res = api.action("thank")
+        CustomApiResult res = api.action("thank")
                 .param("rev", revision)
                 .param("token", editToken)
                 .param("source", getUserAgent())
@@ -392,7 +391,7 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
                         .get()
                         .getNodes("/api/query/search/p/@title");
             } catch (IOException e) {
-                Timber.e("Failed to obtain searchCategories", e);
+                Timber.e(e, "Failed to obtain searchCategories");
             }
 
             if (categoryNodes == null) {
@@ -424,7 +423,7 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
                         .get()
                         .getNodes("/api/query/allcategories/c");
             } catch (IOException e) {
-                Timber.e("Failed to obtain allCategories", e);
+                Timber.e(e, "Failed to obtain allCategories");
             }
 
             if (categoryNodes == null) {
@@ -538,7 +537,7 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
                         .get()
                         .getNodes("/api/query/search/p/@title");
             } catch (IOException e) {
-                Timber.e("Failed to obtain searchTitles", e);
+                Timber.e(e, "Failed to obtain searchTitles");
                 return Collections.emptyList();
             }
 
@@ -609,7 +608,7 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
     @Nullable
     public Single<Revision> firstRevisionOfFile(String filename) {
         return Single.fromCallable(() -> {
-            ApiResult res = api.action("query")
+            CustomApiResult res = api.action("query")
                     .param("prop", "revisions")
                     .param("rvprop", "timestamp|ids|user")
                     .param("titles", filename)
@@ -637,7 +636,7 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
                     .get()
                     .getNode("/api/query/notifications/list");
         } catch (IOException e) {
-            Timber.e("Failed to obtain searchCategories", e);
+            Timber.e(e, "Failed to obtain searchCategories");
         }
 
         if (notificationNode == null
@@ -674,7 +673,7 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
 
             apiResult = requestBuilder.get();
         } catch (IOException e) {
-            Timber.e("Failed to obtain searchCategories", e);
+            Timber.e(e, "Failed to obtain searchCategories");
         }
 
         if (apiResult == null) {
@@ -714,7 +713,7 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
 
             apiResult = requestBuilder.get();
         } catch (IOException e) {
-            Timber.e("Failed to obtain parent Categories", e);
+            Timber.e(e, "Failed to obtain parent Categories");
         }
 
         if (apiResult == null) {
@@ -764,7 +763,7 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
             }
             apiResult = requestBuilder.get();
         } catch (IOException e) {
-            Timber.e("Failed to obtain searchCategories", e);
+            Timber.e(e, "Failed to obtain searchCategories");
         }
 
         if (apiResult == null) {
@@ -816,7 +815,7 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
             imageNodes= customApiResult.getNodes("/api/query/pages/page/@title");
             authorNodes= customApiResult.getNodes("/api/query/pages/page/imageinfo/ii/@user");
         } catch (IOException e) {
-            Timber.e("Failed to obtain searchImages", e);
+            Timber.e(e, "Failed to obtain searchImages");
         }
 
         if (imageNodes == null) {
@@ -856,7 +855,7 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
                     .get()
                     .getNodes("/api/query/search/p/@title");
         } catch (IOException e) {
-            Timber.e("Failed to obtain searchCategories", e);
+            Timber.e(e, "Failed to obtain searchCategories");
         }
 
         if (categoryNodes == null) {
@@ -1071,7 +1070,7 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
 
                 apiResult = requestBuilder.get();
             } catch (IOException e) {
-                Timber.e("Failed to obtain searchCategories", e);
+                Timber.e(e, "Failed to obtain searchCategories");
             }
 
             if (apiResult == null) {
@@ -1136,9 +1135,9 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
         while (media == null && tries < MAX_RANDOM_TRIES) {
             Date now = new Date();
             Date startDate = new Date(now.getTime() - r.nextInt(RANDOM_SECONDS) * 1000L);
-            ApiResult apiResult = null;
+            CustomApiResult apiResult = null;
             try {
-                MWApi.RequestBuilder requestBuilder = api.action("query")
+                CustomMwApi.RequestBuilder requestBuilder = api.action("query")
                         .param("list", "recentchanges")
                         .param("rcstart", formatMWDate(startDate))
                         .param("rcnamespace", FILE_NAMESPACE)
@@ -1148,10 +1147,10 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
 
                 apiResult = requestBuilder.get();
             } catch (IOException e) {
-                Timber.e("Failed to obtain recent random", e);
+                Timber.e(e, "Failed to obtain recent random");
             }
             if (apiResult != null) {
-                ApiResult recentChangesNode = apiResult.getNode("/api/query/recentchanges");
+                CustomApiResult recentChangesNode = apiResult.getNode("/api/query/recentchanges");
                 if (recentChangesNode != null
                         && recentChangesNode.getDocument() != null
                         && recentChangesNode.getDocument().getChildNodes() != null

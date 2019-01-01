@@ -261,7 +261,6 @@
   <string name="nominated_see_more"><![CDATA[<u>See webpage for details</u>]]></string>
   <string name="nominating_file_for_deletion">Nominating %1$s for deletion.</string>
   <string name="nominating_for_deletion_status">Nominating file for deletion: %1$s</string>
-  <string name="nominated_see_more"><u>See webpage for details</u></string>
   <string name="view_browser">View in Browser</string>
   <string name="skip_login">Skip</string>
   <string name="navigation_item_login">Log in</string>

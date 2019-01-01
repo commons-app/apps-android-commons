@@ -130,7 +130,7 @@ public class ReviewActivity extends AuthenticatedActivity {
 
     private void updateImage(String fileName) {
         if (fileName.length() == 0) {
-            ViewUtil.showSnackbar(drawerLayout, R.string.error_review);
+            ViewUtil.showShortSnackbar(drawerLayout, R.string.error_review);
             return;
         }
         reviewController.onImageRefreshed(fileName); //file name is updated
@@ -155,7 +155,7 @@ public class ReviewActivity extends AuthenticatedActivity {
 
     private void categoryFetchError(Throwable throwable) {
         Timber.e(throwable, "Error fetching categories");
-        ViewUtil.showSnackbar(drawerLayout, R.string.error_review_categories);
+        ViewUtil.showShortSnackbar(drawerLayout, R.string.error_review_categories);
     }
 
     private void updateCategories(ArrayList<String> categories) {
