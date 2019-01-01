@@ -83,10 +83,10 @@ public class ViewUtil {
      * A snack bar which has an action button which on click dismisses the snackbar and invokes the
      * listener passed
      */
-    public static void showSnackBar(View view,
-                                    int messageResourceId,
-                                    int actionButtonResourceId,
-                                    View.OnClickListener onClickListener) {
+    public static void showDismissibleSnackBar(View view,
+                                               int messageResourceId,
+                                               int actionButtonResourceId,
+                                               View.OnClickListener onClickListener) {
         if (view.getContext() == null) {
             return;
         }
