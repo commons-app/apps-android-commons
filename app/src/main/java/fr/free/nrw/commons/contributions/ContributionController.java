@@ -13,7 +13,6 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.content.FileProvider;
@@ -24,8 +23,6 @@ import com.karumi.dexter.listener.PermissionDeniedResponse;
 import com.karumi.dexter.listener.PermissionGrantedResponse;
 import com.karumi.dexter.listener.PermissionRequest;
 import com.karumi.dexter.listener.single.BasePermissionListener;
-import com.karumi.dexter.listener.single.CompositePermissionListener;
-import com.karumi.dexter.listener.single.SnackbarOnDeniedPermissionListener;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -33,6 +30,7 @@ import java.util.Date;
 import java.util.List;
 
 import fr.free.nrw.commons.R;
+import fr.free.nrw.commons.Utils;
 import fr.free.nrw.commons.upload.UploadActivity;
 import fr.free.nrw.commons.utils.DialogUtil;
 import fr.free.nrw.commons.utils.ViewUtil;
@@ -78,9 +76,50 @@ public class ContributionController {
 
     public void initiateCameraPick(Activity activity) {
         boolean useExtStorage = defaultPrefs.getBoolean("useExternalStorage", true);
-        if (useExtStorage) {
+        if (!useExtStorage) {
+            startCameraCapture();
+            return;
+        }
+        Dexter.withActivity(activity)
+                .withPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                .withListener(new BasePermissionListener() {
+                    @Override
+                    public void onPermissionGranted(PermissionGrantedResponse response) {
+                        startCameraCapture();
+                    }
+
+                    @Override
+                    public void onPermissionDenied(PermissionDeniedResponse response) {
+                        if (response.isPermanentlyDenied()) {
+                            DialogUtil.showAlertDialog(activity,
+                                    activity.getString(R.string.storage_permission_title),
+                                    activity.getString(R.string.write_storage_permission_rationale),
+                                    activity.getString(R.string.navigation_item_settings),
+                                    null,
+                                    () -> Utils.openSettings(activity),
+                                    null);
+                        }
+                    }
+
+                    @Override
+                    public void onPermissionRationaleShouldBeShown(PermissionRequest permission, PermissionToken token) {
+                        DialogUtil.showAlertDialog(activity,
+                                activity.getString(R.string.storage_permission_title),
+                                activity.getString(R.string.write_storage_permission_rationale),
+                                activity.getString(android.R.string.ok),
+                                activity.getString(android.R.string.cancel),
+                                token::continuePermissionRequest,
+                                token::cancelPermissionRequest);
+                    }
+                }).check();
+    }
+
+    public void initiateGalleryPick(Activity activity) {
+        if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.JELLY_BEAN) {
+            startGalleryPick();
+        } else {
             Dexter.withActivity(activity)
-                    .withPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                    .withPermission(Manifest.permission.READ_EXTERNAL_STORAGE)
                     .withListener(new BasePermissionListener() {
                         @Override
                         public void onPermissionGranted(PermissionGrantedResponse response) {
@@ -89,67 +128,28 @@ public class ContributionController {
 
                         @Override
                         public void onPermissionDenied(PermissionDeniedResponse response) {
-                            ViewUtil.showShortToast(activity, "Permission denied");
+                            if (response.isPermanentlyDenied()) {
+                                DialogUtil.showAlertDialog(activity,
+                                        activity.getString(R.string.storage_permission_title),
+                                        activity.getString(R.string.read_storage_permission_rationale),
+                                        activity.getString(R.string.navigation_item_settings),
+                                        null,
+                                        () -> Utils.openSettings(activity),
+                                        null);
+                            }
                         }
 
                         @Override
                         public void onPermissionRationaleShouldBeShown(PermissionRequest permission, PermissionToken token) {
                             DialogUtil.showAlertDialog(activity,
                                     activity.getString(R.string.storage_permission_title),
-                                    activity.getString(R.string.write_storage_permission_rationale),
+                                    activity.getString(R.string.read_storage_permission_rationale),
                                     activity.getString(android.R.string.ok),
                                     activity.getString(android.R.string.cancel),
                                     token::continuePermissionRequest,
                                     token::cancelPermissionRequest);
                         }
                     }).check();
-        } else {
-            startCameraCapture();
-        }
-    }
-
-    public void initiateGalleryPick(Activity activity) {
-        if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.JELLY_BEAN) {
-            startGalleryPick();
-        } else {
-            BasePermissionListener permissionListener = new BasePermissionListener() {
-                @Override
-                public void onPermissionGranted(PermissionGrantedResponse response) {
-                    startGalleryPick();
-                }
-
-                @Override
-                public void onPermissionRationaleShouldBeShown(PermissionRequest permission, PermissionToken token) {
-                    DialogUtil.showAlertDialog(activity,
-                            activity.getString(R.string.storage_permission_title),
-                            activity.getString(R.string.read_storage_permission_rationale),
-                            activity.getString(android.R.string.ok),
-                            activity.getString(android.R.string.cancel),
-                            token::continuePermissionRequest,
-                            token::cancelPermissionRequest);
-                }
-            };
-
-            SnackbarOnDeniedPermissionListener deniedPermissionListener = SnackbarOnDeniedPermissionListener
-                    .Builder.with(activity.getWindow().getDecorView(),
-                            R.string.read_storage_permission_rationale)
-                    .withOpenSettingsButton(R.string.navigation_item_settings)
-                    .withCallback(new Snackbar.Callback() {
-                        @Override
-                        public void onShown(Snackbar snackbar) {
-                            super.onShown(snackbar);
-                        }
-
-                        @Override
-                        public void onDismissed(Snackbar snackbar, int event) {
-                            super.onDismissed(snackbar, event);
-                        }
-                    }).build();
-
-            Dexter.withActivity(activity)
-                    .withPermission(Manifest.permission.READ_EXTERNAL_STORAGE)
-                    .withListener(new CompositePermissionListener(permissionListener, deniedPermissionListener))
-                    .check();
         }
     }
 

@@ -127,7 +127,7 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment {
         fabCamera.setOnClickListener(view -> {
             controller.initiateCameraPick(getActivity());
         });
-        fabGalery.setOnClickListener(view -> controller.initiateGalleryPick(getActivity()));
+        fabGallery.setOnClickListener(view -> controller.initiateGalleryPick(getActivity()));
     }
 
     private void animateFAB(boolean isFabOpen) {

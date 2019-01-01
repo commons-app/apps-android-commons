@@ -143,19 +143,23 @@ public class DialogUtil {
         builder.setTitle(title);
         builder.setMessage(message);
 
-        builder.setPositiveButton(positiveButtonText, (dialogInterface, i) -> {
-            dialogInterface.dismiss();
-            if (onPositiveBtnClick != null) {
-                onPositiveBtnClick.run();
-            }
-        });
+        if (!StringUtils.isNullOrWhiteSpace(positiveButtonText)) {
+            builder.setPositiveButton(positiveButtonText, (dialogInterface, i) -> {
+                dialogInterface.dismiss();
+                if (onPositiveBtnClick != null) {
+                    onPositiveBtnClick.run();
+                }
+            });
+        }
 
-        builder.setNegativeButton(negativeButtonText, (DialogInterface dialogInterface, int i) -> {
-            dialogInterface.dismiss();
-            if (onNegativeBtnClick != null) {
-                onNegativeBtnClick.run();
-            }
-        });
+        if (!StringUtils.isNullOrWhiteSpace(negativeButtonText)) {
+            builder.setNegativeButton(negativeButtonText, (DialogInterface dialogInterface, int i) -> {
+                dialogInterface.dismiss();
+                if (onNegativeBtnClick != null) {
+                    onNegativeBtnClick.run();
+                }
+            });
+        }
 
         AlertDialog dialog = builder.create();
         showSafely(activity, dialog);

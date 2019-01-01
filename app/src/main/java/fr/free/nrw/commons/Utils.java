@@ -1,5 +1,6 @@
 package fr.free.nrw.commons;
 
+import android.app.Activity;
 import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
@@ -222,6 +223,10 @@ public class Utils {
             Toast toast = Toast.makeText(context, context.getString(R.string.map_application_missing), LENGTH_SHORT);
             toast.show();
         }
+    }
+
+    public static void openSettings(Activity activity) {
+        activity.startActivityForResult(new Intent(android.provider.Settings.ACTION_SETTINGS), 0);
     }
 
     /**
