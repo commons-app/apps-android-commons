@@ -23,9 +23,6 @@
         <item name="textEnabled">@color/enabled_button_text_color_dark</item>
         <item name="mainCardBackground">@color/main_background_dark</item>
         <item name="mainScreenNearbyPermissionbutton">@style/DarkFlatNearbyPermissionButton</item>
-
-        <!-- SearchView cursor color -->
-        <item name="colorControlActivated">@android:color/white</item>
     </style>
 
     <style name="LightAppTheme" parent="Theme.AppCompat.Light.NoActionBar">
@@ -50,8 +47,9 @@
         <item name="textEnabled">@color/enabled_button_text_color_light</item>
         <item name="mainCardBackground">@color/primaryDarkColor</item>
         <item name="mainScreenNearbyPermissionbutton">@style/LightFlatNearbyPermissionButton</item>
+    </style>
 
-        <!-- SearchView cursor color -->
+    <style name="WhiteSearchBarTheme" parent="DarkAppTheme">
         <item name="colorControlActivated">@android:color/white</item>
     </style>
 
