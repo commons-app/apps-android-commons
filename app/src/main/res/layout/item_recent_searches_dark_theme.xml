@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<TextView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/textView2"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:background="@color/vpi__bright_foreground_disabled_holo_dark"
-    android:padding="@dimen/standard_gap"
-    android:text="@string/search_commons"
-    android:textAppearance="?android:attr/textAppearanceMedium" />
