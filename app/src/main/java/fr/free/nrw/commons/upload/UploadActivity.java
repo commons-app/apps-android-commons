@@ -330,13 +330,8 @@ public class UploadActivity extends AuthenticatedActivity implements UploadView,
      */
     @Override
     public void updateSubtitleVisibility(int imageCount) {
-        if (categoriesSubtitle != null) {
-            categoriesSubtitle.setVisibility(imageCount > 1 ? View.VISIBLE : View.GONE);
-        }
-
-        if (licenseSubtitle != null) {
-            licenseSubtitle.setVisibility(imageCount > 1 ? View.VISIBLE : View.GONE);
-        }
+        categoriesSubtitle.setVisibility(imageCount > 1 ? View.VISIBLE : View.GONE);
+        licenseSubtitle.setVisibility(imageCount > 1 ? View.VISIBLE : View.GONE);
     }
 
     @Override
