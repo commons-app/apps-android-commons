@@ -93,6 +93,8 @@ public class UploadActivity extends AuthenticatedActivity implements UploadView,
     @BindView(R.id.bottom_card_next) Button next;
     @BindView(R.id.bottom_card_previous) Button previous;
     @BindView(R.id.bottom_card_add_desc) Button bottomCardAddDescription;
+    @BindView(R.id.categories_subtitle) TextView categoriesSubtitle;
+    @BindView(R.id.license_subtitle) TextView licenseSubtitle;
 
     //Right Card
     @BindView(R.id.right_card) CardView rightCard;
@@ -320,6 +322,16 @@ public class UploadActivity extends AuthenticatedActivity implements UploadView,
         } else if (page == PLEASE_WAIT) {
             viewFlipper.setDisplayedChild(3);
         }
+    }
+
+    /**
+     * Only show the subtitle ("For all images in set") if multiple images being uploaded
+     * @param imageCount Number of images being uploaded
+     */
+    @Override
+    public void updateSubtitleVisibility(int imageCount) {
+        categoriesSubtitle.setVisibility(imageCount > 1 ? View.VISIBLE : View.GONE);
+        licenseSubtitle.setVisibility(imageCount > 1 ? View.VISIBLE : View.GONE);
     }
 
     @Override
