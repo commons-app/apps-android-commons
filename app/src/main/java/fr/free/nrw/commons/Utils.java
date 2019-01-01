@@ -225,10 +225,6 @@ public class Utils {
         }
     }
 
-    public static void openSettings(Activity activity) {
-        activity.startActivityForResult(new Intent(android.provider.Settings.ACTION_SETTINGS), 0);
-    }
-
     /**
      * To take screenshot of the screen and return it in Bitmap format
      *

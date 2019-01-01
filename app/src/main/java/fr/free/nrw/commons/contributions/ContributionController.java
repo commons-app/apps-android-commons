@@ -33,6 +33,7 @@ import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.Utils;
 import fr.free.nrw.commons.upload.UploadActivity;
 import fr.free.nrw.commons.utils.DialogUtil;
+import fr.free.nrw.commons.utils.PermissionUtils;
 import fr.free.nrw.commons.utils.ViewUtil;
 import timber.log.Timber;
 
@@ -96,7 +97,7 @@ public class ContributionController {
                                     activity.getString(R.string.write_storage_permission_rationale),
                                     activity.getString(R.string.navigation_item_settings),
                                     null,
-                                    () -> Utils.openSettings(activity),
+                                    () -> PermissionUtils.askUserToManuallyEnablePermissionFromSettings(activity),
                                     null);
                         }
                     }
@@ -134,7 +135,7 @@ public class ContributionController {
                                         activity.getString(R.string.read_storage_permission_rationale),
                                         activity.getString(R.string.navigation_item_settings),
                                         null,
-                                        () -> Utils.openSettings(activity),
+                                        () -> PermissionUtils.askUserToManuallyEnablePermissionFromSettings(activity),
                                         null);
                             }
                         }

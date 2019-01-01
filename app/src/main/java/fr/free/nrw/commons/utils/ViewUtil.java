@@ -9,8 +9,6 @@ import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Toast;
 
-import timber.log.Timber;
-
 public class ViewUtil {
 
     public static final String SHOWCASE_VIEW_ID_1 = "SHOWCASE_VIEW_ID_1";
@@ -82,38 +80,19 @@ public class ViewUtil {
     }
 
     /**
-     * Long Snackbar with click listener
-     */
-    public static void showLongSnackBar(View view, int messageResourceId,
-                                              int actionButtonResourceId,
-                                              View.OnClickListener onClickListener) {
-        showSnackBar(view, messageResourceId, actionButtonResourceId, onClickListener, Snackbar.LENGTH_LONG);
-    }
-
-    /**
-     * Indefinite Snackbar with click listener
-     */
-    public static void showIndefiniteSnackBar(View view, int messageResourceId,
-                                              int actionButtonResourceId,
-                                              View.OnClickListener onClickListener) {
-        showSnackBar(view, messageResourceId, actionButtonResourceId, onClickListener, Snackbar.LENGTH_INDEFINITE);
-    }
-
-    /**
      * A snack bar which has an action button which on click dismisses the snackbar and invokes the
      * listener passed
      */
-    private static void showSnackBar(View view,
-                                     int messageResourceId,
-                                     int actionButtonResourceId,
-                                     View.OnClickListener onClickListener,
-                                     int snackbarLength) {
+    public static void showSnackBar(View view,
+                                    int messageResourceId,
+                                    int actionButtonResourceId,
+                                    View.OnClickListener onClickListener) {
         if (view.getContext() == null) {
             return;
         }
         ExecutorUtils.uiExecutor().execute(() -> {
             Snackbar snackbar = Snackbar.make(view, view.getContext().getString(messageResourceId),
-                    snackbarLength);
+                    Snackbar.LENGTH_INDEFINITE);
             snackbar.setAction(view.getContext().getString(actionButtonResourceId), v -> {
                 snackbar.dismiss();
                 onClickListener.onClick(v);
