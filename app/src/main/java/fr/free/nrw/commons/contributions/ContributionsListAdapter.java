@@ -113,8 +113,10 @@ class ContributionsListAdapter extends CursorAdapter {
         if (NetworkUtils.isInternetConnectionEstablished(mContext)) {
             Contribution c = contributionDao.fromCursor(cursor);
             if (c.getState() == STATE_FAILED) {
-                uploadService.queue(UploadService.ACTION_UPLOAD_FILE, c);
-                Timber.d("Restarting for %s", c.toString());
+                if (uploadService != null) {
+                    uploadService.queue(UploadService.ACTION_UPLOAD_FILE, c);
+                    Timber.d("Restarting for %s", c.toString());
+                }
             } else {
                 Timber.d("Skipping re-upload for non-failed %s", c.toString());
             }
