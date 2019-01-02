@@ -27,6 +27,7 @@ import fr.free.nrw.commons.settings.Prefs;
 import fr.free.nrw.commons.utils.BitmapRegionDecoderWrapper;
 import fr.free.nrw.commons.utils.ImageUtils;
 import fr.free.nrw.commons.utils.ImageUtilsWrapper;
+import fr.free.nrw.commons.utils.StringUtils;
 import io.reactivex.Observable;
 import io.reactivex.Single;
 import io.reactivex.disposables.Disposable;
@@ -99,7 +100,7 @@ public class UploadModel {
         initDefaultValues();
         Observable<UploadItem> itemObservable = Observable.fromIterable(mediaUri)
                 .map(media -> {
-                    currentMediaUri=media;
+                    currentMediaUri = media;
                     return cacheFileUpload(media);
                 })
                 .map(filePath -> {
@@ -107,7 +108,7 @@ public class UploadModel {
                     Uri uri = Uri.fromFile(new File(filePath));
                     fileProcessor.initFileDetails(filePath, context.getContentResolver());
                     UploadItem item = new UploadItem(uri, mimeType, source, fileProcessor.processFileCoordinates(similarImageInterface),
-                            fileUtilsWrapper.getFileExt(filePath), null,fileCreatedDate);
+                            fileUtilsWrapper.getFileExt(filePath), null, fileCreatedDate);
                     Single.zip(
                             Single.fromCallable(() ->
                                     fileUtilsWrapper.getFileInputStream(filePath))
@@ -136,7 +137,7 @@ public class UploadModel {
         Uri uri = Uri.fromFile(new File(filePath));
         fileProcessor.initFileDetails(filePath, context.getContentResolver());
         UploadItem item = new UploadItem(uri, mimeType, source, fileProcessor.processFileCoordinates(similarImageInterface),
-                fileUtilsWrapper.getFileExt(filePath), wikidataEntityIdPref,fileCreatedDate);
+                fileUtilsWrapper.getFileExt(filePath), wikidataEntityIdPref, fileCreatedDate);
         item.title.setTitleText(title);
         item.descriptions.get(0).setDescriptionText(desc);
         //TODO figure out if default descriptions in other languages exist
@@ -149,7 +150,7 @@ public class UploadModel {
                         .map(b -> b ? ImageUtils.IMAGE_DUPLICATE : ImageUtils.IMAGE_OK),
                 Single.fromCallable(() -> filePath)
                         .map(fileUtilsWrapper::getGeolocationOfFile)
-                        .map(geoLocation -> imageUtilsWrapper.checkImageGeolocationIsDifferent(geoLocation,wikidataItemLocation))
+                        .map(geoLocation -> imageUtilsWrapper.checkImageGeolocationIsDifferent(geoLocation, wikidataItemLocation))
                         .map(r -> r ? ImageUtils.IMAGE_GEOLOCATION_DIFFERENT : ImageUtils.IMAGE_OK),
                 Single.fromCallable(() ->
                         fileUtilsWrapper.getFileInputStream(filePath))
@@ -171,6 +172,7 @@ public class UploadModel {
 
     /**
      * Get file creation date from uri from all possible content providers
+     *
      * @param media
      * @return
      */
@@ -354,23 +356,25 @@ public class UploadModel {
 
     /**
      * Copy files into local storage and return file path
-     *
+     * If somehow copy fails, it returns the original path
      * @param media Uri of the file
      * @return path of the enw file
      */
     private String cacheFileUpload(Uri media) {
+        String finalFilePath;
         try {
-            String copyPath;
-            if (useExtStorage)
-                copyPath = fileUtilsWrapper.createExternalCopyPathAndCopy(media, contentResolver);
-            else
-                copyPath = fileUtilsWrapper.createCopyPathAndCopy(media, context);
-            Timber.i("File path is " + copyPath);
-            return copyPath;
-        } catch (IOException e) {
-            Timber.w(e, "Error in copying URI " + media.getPath());
-            return null;
+            String copyFilePath = fileUtilsWrapper.createCopyPathAndCopy(useExtStorage, media, contentResolver, context);
+            Timber.i("Copied file path is %s", copyFilePath);
+            finalFilePath = copyFilePath;
+        } catch (Exception e) {
+            Timber.w(e, "Error in copying URI %s. Using original file path instead", media.getPath());
+            finalFilePath = media.getPath();
         }
+
+        if (StringUtils.isNullOrWhiteSpace(finalFilePath)) {
+            finalFilePath = media.getPath();
+        }
+        return finalFilePath;
     }
 
     void keepPicture() {
@@ -421,7 +425,7 @@ public class UploadModel {
             this.gpsCoords = gpsCoords;
             this.fileExt = fileExt;
             imageQuality = BehaviorSubject.createDefault(ImageUtils.IMAGE_WAIT);
-            this.createdTimestamp=createdTimestamp;
+            this.createdTimestamp = createdTimestamp;
         }
     }
 
