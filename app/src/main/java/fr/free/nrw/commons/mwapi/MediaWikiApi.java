@@ -50,8 +50,13 @@ public interface MediaWikiApi {
     List<String> searchCategory(String title, int offset);
 
     @NonNull
-    Single<UploadResult> uploadFile(String filename, InputStream file, long dataLength, String pageContents, String editSummary, Uri fileUri, Uri contentProviderUri, ProgressListener progressListener) throws IOException;
+    Single<UploadStash> uploadFile(String filename, InputStream file,
+                                   long dataLength, Uri fileUri, Uri contentProviderUri,
+                                   final ProgressListener progressListener) throws IOException;
 
+    @NonNull
+    Single<UploadResult> uploadFileFinalize(String filename, String filekey,
+                                            String pageContents, String editSummary) throws IOException;
     @Nullable
     String edit(String editToken, String processedPageContent, String filename, String summary) throws IOException;
 

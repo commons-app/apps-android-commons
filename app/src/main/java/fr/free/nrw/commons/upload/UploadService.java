@@ -1,7 +1,6 @@
 package fr.free.nrw.commons.upload;
 
 import android.annotation.SuppressLint;
-import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.ContentResolver;
 import android.content.ContentValues;
@@ -10,6 +9,7 @@ import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
 import android.widget.Toast;
 
 import java.io.File;
@@ -34,9 +34,8 @@ import fr.free.nrw.commons.contributions.ContributionDao;
 import fr.free.nrw.commons.contributions.ContributionsContentProvider;
 import fr.free.nrw.commons.contributions.MainActivity;
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
-import fr.free.nrw.commons.mwapi.UploadResult;
 import fr.free.nrw.commons.wikidata.WikidataEditService;
-import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.Single;
 import io.reactivex.schedulers.Schedulers;
 import timber.log.Timber;
 
@@ -56,7 +55,7 @@ public class UploadService extends HandlerService<Contribution> {
     @Inject SessionManager sessionManager;
     @Inject ContributionDao contributionDao;
 
-    private NotificationManager notificationManager;
+    private NotificationManagerCompat notificationManager;
     private NotificationCompat.Builder curNotification;
     private int toUpload;
 
@@ -108,7 +107,7 @@ public class UploadService extends HandlerService<Contribution> {
             } else {
                 curNotification.setProgress(100, (int) (((double) transferred / (double) total) * 100), false);
             }
-            notificationManager.notify(NOTIFICATION_UPLOAD_IN_PROGRESS, curNotification.build());
+            notificationManager.notify(notificationTag, NOTIFICATION_UPLOAD_IN_PROGRESS, curNotification.build());
 
             contribution.setTransferred(transferred);
             contributionDao.save(contribution);
@@ -126,7 +125,7 @@ public class UploadService extends HandlerService<Contribution> {
     public void onCreate() {
         super.onCreate();
         CommonsApplication.createNotificationChannel(getApplicationContext());
-        notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+        notificationManager = NotificationManagerCompat.from(this);
         curNotification = getNotificationBuilder(CommonsApplication.NOTIFICATION_CHANNEL_ID_ALL);
     }
 
@@ -154,7 +153,7 @@ public class UploadService extends HandlerService<Contribution> {
                 if (curNotification != null && toUpload != 1) {
                     curNotification.setContentText(getResources().getQuantityString(R.plurals.uploads_pending_notification_indicator, toUpload, toUpload));
                     Timber.d("%d uploads left", toUpload);
-                    notificationManager.notify(NOTIFICATION_UPLOAD_IN_PROGRESS, curNotification.build());
+                    notificationManager.notify(contribution.getLocalUri().toString(), NOTIFICATION_UPLOAD_IN_PROGRESS, curNotification.build());
                 }
 
                 super.queue(what, contribution);
@@ -219,15 +218,12 @@ public class UploadService extends HandlerService<Contribution> {
         curNotification.setContentTitle(getString(R.string.upload_progress_notification_title_start, contribution.getDisplayTitle()))
                 .setContentText(getResources().getQuantityString(R.plurals.uploads_pending_notification_indicator, toUpload, toUpload))
                 .setTicker(getString(R.string.upload_progress_notification_title_in_progress, contribution.getDisplayTitle()));
-        startForeground(NOTIFICATION_UPLOAD_IN_PROGRESS, curNotification.build());
+        notificationManager.notify(notificationTag, NOTIFICATION_UPLOAD_IN_PROGRESS, curNotification.build());
 
         String filename = contribution.getFilename();
+
         try {
-            synchronized (unfinishedUploads) {
-                Timber.d("making sure of uniqueness of name: %s", filename);
-                filename = findUniqueFilename(filename);
-                unfinishedUploads.add(filename);
-            }
+
             if (!mwApi.validateLogin()) {
                 // Need to revalidate!
                 if (sessionManager.revalidateAuthToken()) {
@@ -246,17 +242,39 @@ public class UploadService extends HandlerService<Contribution> {
                     getString(R.string.upload_progress_notification_title_finishing, contribution.getDisplayTitle()),
                     contribution
             );
+            String stashFilename = "Temp_" + contribution.hashCode() + filename;
             mwApi.uploadFile(
-                    filename, fileInputStream,
-                    contribution.getDataLength(), contribution.getPageContents(getApplicationContext()),
-                    contribution.getEditSummary(), localUri,
-                    contribution.getContentProviderUri(), notificationUpdater
-            )
+                    stashFilename, fileInputStream, contribution.getDataLength(),
+                    localUri, contribution.getContentProviderUri(), notificationUpdater)
                     .subscribeOn(Schedulers.io())
                     .observeOn(Schedulers.io())
-                    .subscribe(uploadResult -> {
+                    .flatMap(uploadStash -> {
                         notificationManager.cancel(NOTIFICATION_UPLOAD_IN_PROGRESS);
-                        Timber.d("Response is %s", uploadResult.toString());
+
+                        Timber.d("Stash upload response 1 is %s", uploadStash.toString());
+
+                        String resultStatus = uploadStash.getResultStatus();
+                        if (!resultStatus.equals("Success")) {
+                            Timber.d("Contribution upload failed. Wikidata entity won't be edited");
+                            showFailedNotification(contribution);
+                            return Single.never();
+                        } else {
+                            synchronized (unfinishedUploads) {
+                                Timber.d("making sure of uniqueness of name: %s", filename);
+                                String uniqueFilename = findUniqueFilename(filename);
+                                unfinishedUploads.add(uniqueFilename);
+                                return mwApi.uploadFileFinalize(
+                                        uniqueFilename,
+                                        uploadStash.getFilekey(),
+                                        contribution.getPageContents(getApplicationContext()),
+                                        contribution.getEditSummary());
+                            }
+                        }
+                    })
+                    .subscribe(uploadResult -> {
+                        Timber.d("Stash upload response 2 is %s", uploadResult.toString());
+
+                        notificationManager.cancel(notificationTag, NOTIFICATION_UPLOAD_IN_PROGRESS);
 
                         String resultStatus = uploadResult.getResultStatus();
                         if (!resultStatus.equals("Success")) {
@@ -274,10 +292,10 @@ public class UploadService extends HandlerService<Contribution> {
                             contributionDao.save(contribution);
                         }
                     }, throwable -> {
-
+                        throw new RuntimeException(throwable);
                     });
         } catch (IOException e) {
-            Timber.d("I have a network fuckup");
+            Timber.w(e,"IOException during upload");
             notificationManager.cancel(NOTIFICATION_UPLOAD_IN_PROGRESS);
             showFailedNotification(contribution);
         } finally {
@@ -300,7 +318,7 @@ public class UploadService extends HandlerService<Contribution> {
                 .setContentTitle(getString(R.string.upload_failed_notification_title, contribution.getDisplayTitle()))
                 .setContentText(getString(R.string.upload_failed_notification_subtitle))
                 .setProgress(0, 0, false);
-        notificationManager.notify(NOTIFICATION_UPLOAD_FAILED, curNotification.build());
+        notificationManager.notify(contribution.getLocalUri().toString(), NOTIFICATION_UPLOAD_FAILED, curNotification.build());
 
         contribution.setState(Contribution.STATE_FAILED);
         contributionDao.save(contribution);
