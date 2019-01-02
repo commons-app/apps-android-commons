@@ -47,6 +47,7 @@ public class BookmarkLocationsFragment extends DaggerFragment {
     @Inject
     BookmarkLocationsController controller;
     @Inject @Named("direct_nearby_upload_prefs") SharedPreferences directPrefs;
+    @Inject @Named("default_preferences") SharedPreferences defaultPrefs;
     private NearbyAdapterFactory adapterFactory;
     private ContributionController contributionController;
 
@@ -66,7 +67,7 @@ public class BookmarkLocationsFragment extends DaggerFragment {
     ) {
         View v = inflater.inflate(R.layout.fragment_bookmarks_locations, container, false);
         ButterKnife.bind(this, v);
-        contributionController = new ContributionController(this);
+        contributionController = new ContributionController(this, defaultPrefs);
         adapterFactory = new NearbyAdapterFactory(this, contributionController);
         return v;
     }
@@ -97,30 +98,6 @@ public class BookmarkLocationsFragment extends DaggerFragment {
             statusTextView.setVisibility(View.VISIBLE);
         } else {
             statusTextView.setVisibility(View.GONE);
-        }
-    }
-
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        Timber.d("onRequestPermissionsResult: req code = " + " perm = " + permissions + " grant =" + grantResults);
-
-        switch (requestCode) {
-            // 4 = "Read external storage" allowed when gallery selected
-            case 4: {
-                if (grantResults.length > 0 && grantResults[0] == PERMISSION_GRANTED) {
-                    Timber.d("Call controller.startGalleryPick()");
-                    contributionController.startGalleryPick();
-                }
-            }
-            break;
-
-            // 5 = "Write external storage" allowed when camera selected
-            case 5: {
-                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    Timber.d("Call controller.startCameraCapture()");
-                    contributionController.startCameraCapture();
-                }
-            }
         }
     }
 

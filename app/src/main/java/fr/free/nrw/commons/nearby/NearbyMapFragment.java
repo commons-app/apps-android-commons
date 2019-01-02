@@ -112,7 +112,6 @@ public class NearbyMapFragment extends DaggerFragment {
     private Animation fab_open;
     private Animation rotate_forward;
     public ContributionController controller;
-    private DirectUpload directUpload;
 
     private Place place;
     private Marker selected;
@@ -137,6 +136,9 @@ public class NearbyMapFragment extends DaggerFragment {
     @Named("prefs")
     SharedPreferences prefs;
     @Inject
+    @Named("default_preferences")
+    SharedPreferences defaultPrefs;
+    @Inject
     @Named("direct_nearby_upload_prefs")
     SharedPreferences directPrefs;
     @Inject
@@ -152,9 +154,7 @@ public class NearbyMapFragment extends DaggerFragment {
         super.onCreate(savedInstanceState);
         Timber.d("Nearby map fragment created");
 
-        controller = new ContributionController(this);
-        directUpload = new DirectUpload(this, controller);
-
+        controller = new ContributionController(this, defaultPrefs);
         Bundle bundle = this.getArguments();
         Gson gson = new GsonBuilder()
                 .registerTypeAdapter(Uri.class, new UriDeserializer())
@@ -862,7 +862,7 @@ public class NearbyMapFragment extends DaggerFragment {
             if (fabCamera.isShown()) {
                 Timber.d("Camera button tapped. Place: %s", place.toString());
                 storeSharedPrefs();
-                directUpload.initiateCameraUpload();
+                controller.initiateCameraPick(getActivity());
             }
         });
 
@@ -870,7 +870,7 @@ public class NearbyMapFragment extends DaggerFragment {
             if (fabGallery.isShown()) {
                 Timber.d("Gallery button tapped. Place: %s", place.toString());
                 storeSharedPrefs();
-                directUpload.initiateGalleryUpload();
+                controller.initiateGalleryPick(getActivity());
             }
         });
     }
@@ -883,31 +883,6 @@ public class NearbyMapFragment extends DaggerFragment {
         editor.putString(WIKIDATA_ENTITY_ID_PREF, place.getWikiDataEntityId());
         editor.putString(WIKIDATA_ITEM_LOCATION, PlaceUtils.latLangToString(place.location));
         editor.apply();
-    }
-
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        Timber.d("onRequestPermissionsResult: req code = " + " perm = " + permissions + " grant =" + grantResults);
-
-        // Do not use requestCode 1 as it will conflict with NearbyFragment's requestCodes
-        switch (requestCode) {
-            // 4 = "Read external storage" allowed when gallery selected
-            case 4: {
-                if (grantResults.length > 0 && grantResults[0] == PERMISSION_GRANTED) {
-                    Timber.d("Call controller.startGalleryPick()");
-                    controller.startGalleryPick();
-                }
-            }
-            break;
-
-            // 5 = "Write external storage" allowed when camera selected
-            case 5: {
-                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    Timber.d("Call controller.startCameraCapture()");
-                    controller.startCameraCapture();
-                }
-            }
-        }
     }
 
     @Override
