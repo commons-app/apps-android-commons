@@ -64,7 +64,7 @@ class UploadModelTest {
 
         `when`(context!!.applicationContext)
                 .thenReturn(mock(Application::class.java))
-        `when`(fileUtilsWrapper!!.createCopyPathAndCopy(anyBoolean(), any(Uri::class.java), any(ContentResolver::class.java), any(Context::class.java)))
+        `when`(fileUtilsWrapper!!.createCopyPathAndCopy(anyBoolean(), any(Uri::class.java), nullable(ContentResolver::class.java), any(Context::class.java)))
                 .thenReturn("file.jpg")
         `when`(fileUtilsWrapper!!.getFileExt(anyString()))
                 .thenReturn("jpg")
