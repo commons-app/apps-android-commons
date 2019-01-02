@@ -13,6 +13,8 @@
             android:id="@+id/toolbar_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
+
+            <!-- Toolbar for viewing media -->
         <include
             android:visibility="gone"
             android:id="@+id/toolbar"
@@ -20,19 +22,24 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
+        <!--Toolbar containing search bar -->
         <android.support.v7.widget.Toolbar
             android:id="@+id/toolbar_search"
             android:layout_width="match_parent"
-            app:navigationIcon="@drawable/ic_arrow_back_primary_24dp"
-            android:background="@color/item_white_background"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:background="?attr/colorPrimaryDark"
+            app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+            app:navigationIcon="@drawable/ic_arrow_back_white">
             <SearchView
                 android:id="@+id/searchBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:focusable="true"
+                app:theme="@style/WhiteSearchBarTheme"
                 android:queryBackground="@android:color/transparent"
                 android:searchIcon="@null"
+                android:paddingLeft="-16dp"
+                android:paddingStart="-16dp"
                 app:queryBackground="@android:color/transparent"
                 app:searchIcon="@null"
                 android:imeOptions="actionDone"

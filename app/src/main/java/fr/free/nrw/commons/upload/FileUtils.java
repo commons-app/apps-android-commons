@@ -6,6 +6,7 @@ import android.content.ContentUris;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.database.Cursor;
+import android.media.ExifInterface;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Environment;
@@ -75,6 +76,25 @@ public class FileUtils {
             } catch (IOException e) {
                 Timber.e(e, "Exception on closing MD5 input stream");
             }
+        }
+    }
+
+    /**
+     * Get Geolocation of file from input file path
+     */
+    static String getGeolocationOfFile(String filePath) {
+
+        try {
+            ExifInterface exifInterface=new ExifInterface(filePath);
+            GPSExtractor imageObj = new GPSExtractor(exifInterface);
+            if (imageObj.imageCoordsExists) { // If image has geolocation information in its EXIF
+                return imageObj.getCoords();
+            } else {
+                return "";
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+            return "";
         }
     }
 
@@ -234,8 +254,8 @@ public class FileUtils {
      * @return The value of the _data column, which is typically a file path.
      */
     @Nullable
-    public static String getDataColumn(Context context, Uri uri, String selection,
-                                       String[] selectionArgs) {
+    private static String getDataColumn(Context context, Uri uri, String selection,
+                                        String[] selectionArgs) {
 
         Cursor cursor = null;
         final String column = MediaStore.Images.ImageColumns.DATA;
@@ -311,7 +331,7 @@ public class FileUtils {
      * @param destination file path copied to
      * @throws IOException thrown when failing to read source or opening destination file
      */
-    public static void copy(@NonNull FileDescriptor source, @NonNull String destination)
+    private static void copy(@NonNull FileDescriptor source, @NonNull String destination)
             throws IOException {
         copy(new FileInputStream(source), new FileOutputStream(destination));
     }
@@ -415,7 +435,7 @@ public class FileUtils {
         return result;
     }
 
-    public static String getFileExt(String fileName){
+    static String getFileExt(String fileName){
         //Default file extension
         String extension=".jpg";
 
@@ -426,7 +446,11 @@ public class FileUtils {
         return extension;
     }
 
-    public static String getFileExt(Uri uri, ContentResolver contentResolver) {
+    private static String getFileExt(Uri uri, ContentResolver contentResolver) {
         return getFileExt(getFilename(uri, contentResolver));
+    }
+
+    public static FileInputStream getFileInputStream(String filePath) throws FileNotFoundException {
+        return new FileInputStream(filePath);
     }
 }

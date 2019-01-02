@@ -1,6 +1,7 @@
 package fr.free.nrw.commons.mwapi
 
 import android.content.SharedPreferences
+import android.net.Uri
 import android.os.Build
 import android.preference.PreferenceManager
 import com.google.gson.Gson
@@ -15,9 +16,12 @@ import org.junit.Assert.*
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
+import org.mockito.Mockito.mock
 import org.robolectric.RobolectricTestRunner
 import org.robolectric.RuntimeEnvironment
 import org.robolectric.annotation.Config
+import timber.log.Timber
+import java.io.InputStream
 import java.net.URLDecoder
 import java.text.SimpleDateFormat
 import java.util.*

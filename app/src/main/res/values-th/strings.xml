@@ -90,7 +90,7 @@
   <string name="no_uploads_yet">คุณยังไม่ได้อัปโหลดรูปภาพใดๆ</string>
   <string name="menu_retry_upload">ลองใหม่</string>
   <string name="menu_cancel_upload">ยกเลิก</string>
-  <string name="share_license_summary">รูปภาพนี้จะอนุญาตให้ใช้ได้ภายใต้สัญญาอนุญาต %1$s</string>
+  <string name="share_license_summary" fuzzy="true">รูปภาพนี้จะอนุญาตให้ใช้ได้ภายใต้สัญญาอนุญาต %1$s</string>
   <string name="media_upload_policy">โดยการส่งรูปภาพนี้ ฉันยืนยันว่านี่เป็นงานของฉันเอง ซึ่งไม่ประกอบด้วยเนื้อหาที่ละเมิดลิขสิทธิ์หรือภาพเซลฟี หรืออื่นๆ ตามที่ระบุใน&lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines\"&gt;นโยบายของ Wikimedia Commons&lt;/a&gt;</string>
   <string name="menu_download">ดาวน์โหลด</string>
   <string name="preference_license">สัญญาอนุญาตปริยาย</string>
@@ -212,9 +212,6 @@
   <string name="error_while_cache">ข้อผิดพลาดขณะแคชภาพ</string>
   <string name="title_info">ชื่อเรื่องที่อธิบายลักษณะเฉพาะของไฟล์ ซึ่งจะใช้เป็นชื่อไฟล์ คุณอาจใช้ภาษาธรรมดาที่มีเว้นวรรคก็ได้ อย่ารวมนามสกุลไฟล์</string>
   <string name="description_info">โปรดอธิบายสื่อดังกล่าวให้มากที่สุดเท่าที่จะได้: สื่อนี้ถูกถ่ายที่ไหน? สื่อนี้แสดงถึงอะไร? บริบทคืออะไร? โปรดอธิบายถึงวัตถุหรือบุคคล เปิดเผยข้อมูลที่ไม่อาจคาดเดาได้อย่างง่ายดาย เช่น เวลาที่ถ่าย หากเป็นภาพทิวทัศน์ หากสื่อแสดงถึงสิ่งที่ไม่ธรรมดา โปรดอธิบายว่าอะไรทำให้สื่อดังกล่าวไม่ธรรมดา</string>
-  <string name="upload_image_problem_duplicate">ไฟล์นี้มีอยู่แล้วบนคอมมอนส์ คุณแน่ใจหรือว่าคุณต้องการดำเนินการต่อ?</string>
-  <string name="upload_image_problem_dark">ภาพนี้มืดเกินไป คุณแน่ใจหรือว่าคุณต้องการอัปโหลดภาพนี้? วิกิมีเดียคอมมอนส์นั้นมีไว้สำหรับรูปภาพที่มีคุณค่าในทางสารานุกรมเท่านั้น</string>
-  <string name="upload_image_problem_blurry">ภาพนี้มัว คุณแน่ใจหรือว่าคุณต้องการอัปโหลดภาพนี้? วิกิมีเดียคอมมอนส์นั้นมีไว้สำหรับรูปภาพที่มีคุณค่าในทางสารานุกรมเท่านั้น</string>
   <string name="give_permission">ให้สิทธิ์</string>
   <string name="use_external_storage">ใช้ที่จัดเก็บข้อมูลภายนอก</string>
   <string name="use_external_storage_summary">บันทึกรูปภาพที่ถ่ายด้วยกล้องในแอปบนอุปกรณ์ของคุณ</string>

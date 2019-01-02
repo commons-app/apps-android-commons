@@ -24,7 +24,8 @@ class TestCommonsApplication : CommonsApplication() {
     override fun onCreate() {
         if (mockApplicationComponent == null) {
             mockApplicationComponent = DaggerCommonsApplicationComponent.builder()
-                    .appModule(MockCommonsApplicationModule(this)).build()
+                    .appModule(MockCommonsApplicationModule(this))
+                    .build()
         }
         super.onCreate()
     }

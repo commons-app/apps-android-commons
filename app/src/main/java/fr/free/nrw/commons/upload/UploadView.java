@@ -60,9 +60,11 @@ public interface UploadView {
 
     void updateLicenses(List<String> licenses, String selectedLicense);
 
-    void updateLicenseSummary(String selectedLicense);
+    void updateLicenseSummary(String selectedLicense, int imageCount);
 
     void updateTopCardContent();
+
+    void updateSubtitleVisibility(int imageCount);
 
     void dismissKeyboard();
 

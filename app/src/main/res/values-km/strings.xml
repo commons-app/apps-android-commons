@@ -78,7 +78,7 @@
   <string name="no_uploads_yet">អ្នកមិនទាន់បានផ្ទុករូបថតណាមួយឡើងនៅឡើយទេ។</string>
   <string name="menu_retry_upload">ព្យាយាមម្ដងទៀត</string>
   <string name="menu_cancel_upload">បោះបង់</string>
-  <string name="share_license_summary">រូបភាពនេះនឹងត្រូវដាក់ក្រោមអាជ្ញាបណ្ណ %1$s ។</string>
+  <string name="share_license_summary" fuzzy="true">រូបភាពនេះនឹងត្រូវដាក់ក្រោមអាជ្ញាបណ្ណ %1$s ។</string>
   <string name="menu_download">ទាញយក</string>
   <string name="preference_license" fuzzy="true">អាជ្ញាប័ណ្ណ</string>
   <string name="license_name_cc_by_sa" fuzzy="true">CC Attribution-ShareAlike 3.0</string>

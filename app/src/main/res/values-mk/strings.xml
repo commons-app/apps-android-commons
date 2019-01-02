@@ -103,7 +103,7 @@
   <string name="no_uploads_yet">Сè уште немате подигнато ниедна слика.</string>
   <string name="menu_retry_upload">Пробај пак</string>
   <string name="menu_cancel_upload">Откажи</string>
-  <string name="share_license_summary">Сликава ќе се води под лиценцата %1$s</string>
+  <string name="share_license_summary" fuzzy="true">Сликава ќе се води под лиценцата %1$s</string>
   <string name="media_upload_policy">Поднесувајќи ја сликава, изјавувам дека истата е мое сопствено дело, дека не содржи никаков материјал заштитен со авторски права, не содржи самослици, и дека на секој друг начин е во склад со &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines/mk?uselang=mk\"&gt;правилата на Ризницата&lt;/a&gt;.</string>
   <string name="menu_download">Преземи</string>
   <string name="preference_license">Стандардна лиценца</string>
@@ -233,13 +233,6 @@
   <string name="description_info">Објаснете ја податотеката што подобро можете: Каде е направена? Што е прикажано на неа? Кој е контекстот? Опишете ги предметите, објектите и личностите. Дајте сознанија што не можат лесно да се погодат, како на пр. време од денот ако се работи за природен предел. Ако на неа е претставено нешто необично, објаснете зошто прикажаното е необично.</string>
   <string name="upload_image_too_dark">Сликата ви е претемна. Дали сигурно сакате да ја подигнете? Ризницата е посветена само на слики со енциклопедиска вредност.</string>
   <string name="upload_image_blurry">Сликата ви е матна. Дали сигурно сакате да ја подигнете? Ризницата е посветена само на слики со енциклопедиска вредност.</string>
-  <string name="upload_image_problem_duplicate">Податотекава веќе постои на Ризницата. Дали сигурно сакате да продолжите?</string>
-  <string name="upload_image_problem_dark">Сликата ви е претемна. Дали сигурно сакате да ја подигнете? Ризницата е посветена само на слики со енциклопедиска вредност.</string>
-  <string name="upload_image_problem_blurry">Сликата ви е матна. Дали сигурно сакате да ја подигнете? Ризницата е посветена само на слики со енциклопедиска вредност.</string>
-  <string name="upload_image_problem_dark_duplicate">Сликава е претемна и веќе постои на Ризницата. Дали сигурно сакате да ја подигнете? Подигајте само слики со енциклопедиска вредност.</string>
-  <string name="upload_image_problem_blurry_duplicate">Сликава е прематна и веќе постои на Ризницата. Дали сигурно сакате да ја подигнете? Подигајте само слики со енциклопедиска вредност.</string>
-  <string name="upload_image_problem_dark_blurry">Сликава е претемна и матна. Дали сигурно сакате да ја подигнете? Подигајте само слики со енциклопедиска вредност.</string>
-  <string name="upload_image_problem_dark_blurry_duplicate">Сликава е претемна и матна, а и веќе постои на Ризницата. Дали сигурно сакате да ја подигнете? Подигајте само слики со енциклопедиска вредност.</string>
   <string name="give_permission">Дај дозвола</string>
   <string name="use_external_storage">Користи надворешен склад</string>
   <string name="use_external_storage_summary">Зачувување на направените слики во прилогот со камерата на вашиот уред</string>

@@ -108,14 +108,14 @@ class ContributionDaoTest {
     @Test
     fun migrateTableVersionFrom_v6_to_v7() {
         Table.onUpdate(database, 6, 7)
-        // Table didnt change in version 7
+        // Table didn't change in version 7
         verifyZeroInteractions(database)
     }
 
     @Test
     fun migrateTableVersionFrom_v7_to_v8() {
         Table.onUpdate(database, 7, 8)
-        // Table didnt change in version 8
+        // Table didn't change in version 8
         verifyZeroInteractions(database)
     }
 

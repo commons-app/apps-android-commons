@@ -164,42 +164,42 @@ class BookmarkPictureDaoTest {
     @Test
     fun migrateTableVersionFrom_v1_to_v2() {
         onUpdate(database, 1, 2)
-        // Table didnt exist before v5
+        // Table didn't exist before v5
         verifyZeroInteractions(database)
     }
 
     @Test
     fun migrateTableVersionFrom_v2_to_v3() {
         onUpdate(database, 2, 3)
-        // Table didnt exist before v5
+        // Table didn't exist before v5
         verifyZeroInteractions(database)
     }
 
     @Test
     fun migrateTableVersionFrom_v3_to_v4() {
         onUpdate(database, 3, 4)
-        // Table didnt exist before v5
+        // Table didn't exist before v5
         verifyZeroInteractions(database)
     }
 
     @Test
     fun migrateTableVersionFrom_v4_to_v5() {
         onUpdate(database, 4, 5)
-        // Table didnt change in version 5
+        // Table didn't change in version 5
         verifyZeroInteractions(database)
     }
 
     @Test
     fun migrateTableVersionFrom_v5_to_v6() {
         onUpdate(database, 5, 6)
-        // Table didnt change in version 6
+        // Table didn't change in version 6
         verifyZeroInteractions(database)
     }
 
     @Test
     fun migrateTableVersionFrom_v6_to_v7() {
         onUpdate(database, 6, 7)
-        // Table didnt change in version 7
+        // Table didn't change in version 7
         verifyZeroInteractions(database)
     }
 

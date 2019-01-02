@@ -87,7 +87,7 @@
   <string name="no_uploads_yet">Dü heest noch nian bilen huuchschüürd.</string>
   <string name="menu_retry_upload">Noch ans ferschük</string>
   <string name="menu_cancel_upload">Ufbreeg</string>
-  <string name="share_license_summary">Detdiar bil feit det lisens %1$s</string>
+  <string name="share_license_summary" fuzzy="true">Detdiar bil feit det lisens %1$s</string>
   <string name="menu_download">Deelloose</string>
   <string name="preference_license" fuzzy="true">Lisens</string>
   <string name="use_previous">Ual tiitel/beskriiwang brük</string>
@@ -169,5 +169,4 @@
   <string name="navigation_item_logout">Ufmelde</string>
   <string name="nearby_info_menu_commons_article" fuzzy="true">Commons-artiikel</string>
   <string name="nearby_info_menu_wikidata_article" fuzzy="true">WikiData-artiikel</string>
-  <string name="upload_image_problem_duplicate">Detdiar datei jaft det al üüb Commons. Beest dü seeker, dat dü widjer maage wel?</string>
 </resources>
