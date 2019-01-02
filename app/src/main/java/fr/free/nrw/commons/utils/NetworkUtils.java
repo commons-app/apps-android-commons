@@ -16,6 +16,7 @@ public class NetworkUtils {
     /**
      * https://developer.android.com/training/monitoring-device-state/connectivity-monitoring#java
      * Check if internet connection is established.
+     *
      * @param context context passed to this method could be null.
      * @return Returns current internet connection status. Returns false if null context was passed.
      */
@@ -31,55 +32,49 @@ public class NetworkUtils {
 
     /**
      * Detect network connection type
-     * @param context
-     * @return
      */
     static NetworkConnectionType getNetworkType(Context context) {
         TelephonyManager telephonyManager = (TelephonyManager) context.getApplicationContext().getSystemService(Context.TELEPHONY_SERVICE);
-        NetworkInfo networkInfo = getNetworkInfo(context);
-        NetworkConnectionType networkConnectionType;
-        if (networkInfo == null) {
-            networkConnectionType = NetworkConnectionType.UNKNOWN;
-        } else {
-            int network = networkInfo.getType();
-            if (network == ConnectivityManager.TYPE_WIFI) {
-                networkConnectionType = NetworkConnectionType.WIFI;
-            } else {
-                int mobileNetwork = telephonyManager.getNetworkType();
-                switch (mobileNetwork) {
-                    case TelephonyManager.NETWORK_TYPE_GPRS:
-                    case TelephonyManager.NETWORK_TYPE_EDGE:
-                    case TelephonyManager.NETWORK_TYPE_CDMA:
-                    case TelephonyManager.NETWORK_TYPE_1xRTT:
-                        networkConnectionType = NetworkConnectionType.TWO_G;
-                        break;
-                    case TelephonyManager.NETWORK_TYPE_HSDPA:
-                    case TelephonyManager.NETWORK_TYPE_UMTS:
-                    case TelephonyManager.NETWORK_TYPE_HSUPA:
-                    case TelephonyManager.NETWORK_TYPE_HSPA:
-                    case TelephonyManager.NETWORK_TYPE_EHRPD:
-                    case TelephonyManager.NETWORK_TYPE_EVDO_0:
-                    case TelephonyManager.NETWORK_TYPE_EVDO_A:
-                    case TelephonyManager.NETWORK_TYPE_EVDO_B:
-                        networkConnectionType = NetworkConnectionType.THREE_G;
-                        break;
-                    case TelephonyManager.NETWORK_TYPE_LTE:
-                    case TelephonyManager.NETWORK_TYPE_HSPAP:
-                        networkConnectionType = NetworkConnectionType.FOUR_G;
-                        break;
-                    default:
-                        networkConnectionType = NetworkConnectionType.UNKNOWN;
-                        break;
-                }
-            }
+        if (telephonyManager == null) {
+            return NetworkConnectionType.UNKNOWN;
         }
-        return networkConnectionType;
+
+        NetworkInfo networkInfo = getNetworkInfo(context);
+        if (networkInfo == null) {
+            return NetworkConnectionType.UNKNOWN;
+        }
+
+        int network = networkInfo.getType();
+        if (network == ConnectivityManager.TYPE_WIFI) {
+            return NetworkConnectionType.WIFI;
+        }
+
+        int mobileNetwork = telephonyManager.getNetworkType();
+        switch (mobileNetwork) {
+            case TelephonyManager.NETWORK_TYPE_GPRS:
+            case TelephonyManager.NETWORK_TYPE_EDGE:
+            case TelephonyManager.NETWORK_TYPE_CDMA:
+            case TelephonyManager.NETWORK_TYPE_1xRTT:
+                return NetworkConnectionType.TWO_G;
+            case TelephonyManager.NETWORK_TYPE_HSDPA:
+            case TelephonyManager.NETWORK_TYPE_UMTS:
+            case TelephonyManager.NETWORK_TYPE_HSUPA:
+            case TelephonyManager.NETWORK_TYPE_HSPA:
+            case TelephonyManager.NETWORK_TYPE_EHRPD:
+            case TelephonyManager.NETWORK_TYPE_EVDO_0:
+            case TelephonyManager.NETWORK_TYPE_EVDO_A:
+            case TelephonyManager.NETWORK_TYPE_EVDO_B:
+                return NetworkConnectionType.THREE_G;
+            case TelephonyManager.NETWORK_TYPE_LTE:
+            case TelephonyManager.NETWORK_TYPE_HSPAP:
+                return NetworkConnectionType.FOUR_G;
+            default:
+                return NetworkConnectionType.UNKNOWN;
+        }
     }
 
     /**
      * Extracted private method to get nullable network info
-     * @param context
-     * @return
      */
     @Nullable
     private static NetworkInfo getNetworkInfo(Context context) {
