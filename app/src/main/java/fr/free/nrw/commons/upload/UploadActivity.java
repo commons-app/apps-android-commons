@@ -98,6 +98,7 @@ public class UploadActivity extends AuthenticatedActivity implements UploadView,
     @BindView(R.id.bottom_card_add_desc) Button bottomCardAddDescription;
     @BindView(R.id.categories_subtitle) TextView categoriesSubtitle;
     @BindView(R.id.license_subtitle) TextView licenseSubtitle;
+    @BindView(R.id.please_wait_text_view) TextView pleaseWaitTextView;
 
     //Right Card
     @BindView(R.id.right_card) CardView rightCard;
@@ -312,7 +313,7 @@ public class UploadActivity extends AuthenticatedActivity implements UploadView,
     }
 
     @Override
-    public void setBottomCardVisibility(@UploadPage int page) {
+    public void setBottomCardVisibility(@UploadPage int page, int uploadCount) {
         if (page == TITLE_CARD) {
             viewFlipper.setDisplayedChild(0);
         } else if (page == CATEGORIES) {
@@ -322,6 +323,7 @@ public class UploadActivity extends AuthenticatedActivity implements UploadView,
             dismissKeyboard();
         } else if (page == PLEASE_WAIT) {
             viewFlipper.setDisplayedChild(3);
+            pleaseWaitTextView.setText(getResources().getQuantityText(R.plurals.receiving_shared_content, uploadCount));
         }
     }
 

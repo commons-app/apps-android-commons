@@ -52,7 +52,7 @@ public interface UploadView {
 
     void setBottomCardVisibility(boolean visible);
 
-    void setBottomCardVisibility(@UploadPage int page);
+    void setBottomCardVisibility(@UploadPage int page, int uploadCount);
 
     void updateRightCardContent(boolean gpsPresent);
 
