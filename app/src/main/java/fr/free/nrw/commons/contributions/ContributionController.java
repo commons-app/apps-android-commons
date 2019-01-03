@@ -124,7 +124,7 @@ public class ContributionController {
                     .withListener(new BasePermissionListener() {
                         @Override
                         public void onPermissionGranted(PermissionGrantedResponse response) {
-                            startCameraCapture();
+                            startGalleryPick();
                         }
 
                         @Override
