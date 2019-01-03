@@ -450,4 +450,9 @@ Upload your first media by touching the camera or gallery icon above.</string>
   <string name="this_function_needs_network_connection">This function requires network connection, please check your connection settings.</string>
   <string name="bad_token_error_proposed_solution">Upload failed due to issues with edit token. Please try logging out and in again. </string>
 
+  <plurals name="receiving_shared_content">
+    <item quantity="one">Receiving shared content. Processing the image might take some time depending on the size of the image and your device</item>
+    <item quantity="other">Receiving shared content. Processing the images might take some time depending on the size of the images and your device</item>
+  </plurals>
+
 </resources>
