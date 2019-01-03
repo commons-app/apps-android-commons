@@ -78,10 +78,10 @@
   <string name="gps_disabled">GPS ei ole käytössä. Haluatko ottaa sen käyttöön?</string>
   <string name="enable_gps">Ota GPS käyttöön</string>
   <string name="contributions_subtitle_zero">Ei tallennuksia vielä</string>
-  <plurals name="contributions_subtitle" fuzzy="true">
+  <plurals name="contributions_subtitle">
     <item quantity="zero">\@string/contributions_subtitle_zero</item>
-    <item quantity="one">%1$d tallennus</item>
-    <item quantity="other">%1$d tallennusta</item>
+    <item quantity="one">(%1$d)</item>
+    <item quantity="other">(%1$d)</item>
   </plurals>
   <plurals name="starting_multiple_uploads">
     <item quantity="one">Aloitetaan %1$d tallennus</item>
@@ -257,7 +257,7 @@
   <string name="skip_login">Ohita</string>
   <string name="navigation_item_login">Kirjaudu sisään</string>
   <string name="skip_login_title">Haluatko todella ohittaa kirjautumisen?</string>
-  <string name="skip_login_message">Et voi ladata kuvia.</string>
+  <string name="skip_login_message" fuzzy="true">Et voi ladata kuvia.</string>
   <string name="login_alert_message">Kirjaudu sisään käyttääksesi tätä ominaisuutta</string>
   <string name="copy_wikicode">Kopioi wikiteksti leikepöydälle</string>
   <string name="wikicode_copied">Wikiteksti kopioitiin leikepöydälle</string>
@@ -338,6 +338,9 @@
   <string name="achievements_share_message">Jaa saavutuksesi ystäviesi kanssa!</string>
   <string name="error_occurred">Tapahtui virhe!</string>
   <string name="notifications_channel_name_all">Commons-ilmoitus</string>
+  <string name="nearby_fragment">Lähistöllä</string>
+  <string name="notifications">Ilmoitukset</string>
+  <string name="list_sheet">Lista</string>
   <string name="next">Seuraava</string>
   <string name="previous">Edellinen</string>
   <string name="submit">Lähetä</string>

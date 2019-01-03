@@ -246,7 +246,7 @@
   <string name="skip_login">Preskoči</string>
   <string name="navigation_item_login">Prijavi me</string>
   <string name="skip_login_title">Zaista želite da preskočite prijavu?</string>
-  <string name="skip_login_message">Nećete moći da otpremate slike.</string>
+  <string name="skip_login_message" fuzzy="true">Nećete moći da otpremate slike.</string>
   <string name="login_alert_message">Prijavite se da biste koristili ovu funkciju</string>
   <string name="copy_wikicode">Kopiraj vikitekst u ostavu</string>
   <string name="wikicode_copied">Vikitekst je kopiran u ostavu</string>

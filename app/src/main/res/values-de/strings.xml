@@ -170,6 +170,7 @@
   <string name="detail_description_empty">Keine Beschreibung</string>
   <string name="detail_license_empty">Unbekannte Lizenz</string>
   <string name="menu_refresh">Aktualisieren</string>
+  <string name="storage_permission_title">Anforderung einer Speicherberechtigung</string>
   <string name="read_storage_permission_rationale">Erforderliche Berechtigung: Externen Speicher lesen. Die App kann ohne diese Berechtigung nicht auf deine Galerie zugreifen.</string>
   <string name="write_storage_permission_rationale">Erforderliche Berechtigung: Externen Speicher beschreiben. Die App kann ohne diese Berechtigung nicht auf deine Kamera zugreifen.</string>
   <string name="location_permission_rationale">Optionale Berechtigung: Ruft den aktuellen Standort für Kategorievorschläge ab</string>
@@ -262,7 +263,7 @@
   <string name="skip_login">Überspringen</string>
   <string name="navigation_item_login">Anmelden</string>
   <string name="skip_login_title">Möchtest du wirklich die Anmeldung überspringen?</string>
-  <string name="skip_login_message">Du wirst keine Bilder hochladen können.</string>
+  <string name="skip_login_message" fuzzy="true">Du wirst keine Bilder hochladen können.</string>
   <string name="login_alert_message">Bitte melde dich an, um diese Funktion zu nutzen.</string>
   <string name="copy_wikicode">Den Wikitext in die Zwischenablage kopieren</string>
   <string name="wikicode_copied">Der Wikitext wurde in die Zwischenablage kopiert</string>

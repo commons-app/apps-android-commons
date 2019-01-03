@@ -260,7 +260,7 @@
   <string name="skip_login">Omitir</string>
   <string name="navigation_item_login">Acceder ao sistema</string>
   <string name="skip_login_title">Realmente quere saltar o inicio de sesión?</string>
-  <string name="skip_login_message">Non poderá subir imaxes.</string>
+  <string name="skip_login_message" fuzzy="true">Non poderá subir imaxes.</string>
   <string name="login_alert_message">Por favor, inicie a sesión para usar esta funcionalidade</string>
   <string name="copy_wikicode">Copiar o texto wiki ó portapapeis</string>
   <string name="wikicode_copied">Texto wiki copiado ó portapapeis</string>

@@ -245,7 +245,7 @@
   <string name="skip_login">건너뛰기</string>
   <string name="navigation_item_login">가입</string>
   <string name="skip_login_title">가입을 정말로 건너뛰시겠습니까?</string>
-  <string name="skip_login_message">화상을 올리적재할수 없습니다.</string>
+  <string name="skip_login_message" fuzzy="true">화상을 올리적재할수 없습니다.</string>
   <string name="login_alert_message">이 기능을 사용하려면 가입해주십시오</string>
   <string name="copy_wikicode">위키본문을 오려둠판에 복사</string>
   <string name="wikicode_copied">위키본문을 오려둠판에 복사하였습니다</string>

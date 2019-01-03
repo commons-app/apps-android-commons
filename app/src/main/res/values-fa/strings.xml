@@ -250,7 +250,7 @@
   <string name="skip_login">رها کردن</string>
   <string name="navigation_item_login">ورود به سامانه</string>
   <string name="skip_login_title">آیا واقعا میخواهید وارد شوید؟</string>
-  <string name="skip_login_message">شما نمیتوانید تصاویر را آپلود کنید.</string>
+  <string name="skip_login_message" fuzzy="true">شما نمیتوانید تصاویر را آپلود کنید.</string>
   <string name="login_alert_message">لطفا برای استفاده از این ویژگی وارد شوید</string>
   <string name="copy_wikicode">از ویکی واژه به کلیپ برد کپی کنید.</string>
   <string name="nearby_location_has_not_changed">مکان تغییر نکرده‌است.</string>

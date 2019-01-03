@@ -241,6 +241,6 @@
   <string name="skip_login">Liwatan</string>
   <string name="navigation_item_login">Asup log</string>
   <string name="skip_login_title">Anjeun yakin rék ngaliwatan asup log?</string>
-  <string name="skip_login_message">Anjeun moal bisa ngunjal gambar.</string>
+  <string name="skip_login_message" fuzzy="true">Anjeun moal bisa ngunjal gambar.</string>
   <string name="login_alert_message">Mangga asup log pikeun maké ieu fitur</string>
 </resources>

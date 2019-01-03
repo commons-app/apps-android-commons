@@ -247,7 +247,7 @@
   <string name="skip_login">ಬುಡ್ಲೆ</string>
   <string name="navigation_item_login">ಲಾಗಿನ್ ಆಲೆ.</string>
   <string name="skip_login_title">\nಇರ್ ನಿಜವಾತ್ ಲಾಗಿನ್ ಬುಡಿಯರ ಬಯಸುವರಾ?</string>
-  <string name="skip_login_message">ಇರೆಗ್ ಪಟೊನ್ ಅಪ್ಲೋಡ್ ಮಾಲ್ಪುಯರ ಅವಕಾಶ ಇಜ್ಜಿ.</string>
+  <string name="skip_login_message" fuzzy="true">ಇರೆಗ್ ಪಟೊನ್ ಅಪ್ಲೋಡ್ ಮಾಲ್ಪುಯರ ಅವಕಾಶ ಇಜ್ಜಿ.</string>
   <string name="login_alert_message">ದಯಮಾಲ್ತ್ ಲಾಗೀನ್ ಆಲೆ ಬುಕ್ಕ ಉಪಯೋಗ ಮಾಲ್ಪುಲೆ.</string>
   <string name="copy_wikicode" fuzzy="true">ವಿಕಿಕೋಡನ್ ಕ್ಲಿಪ್ಬೋರ್ಡ್ಗೆ ಅಂಟಾಲೆ.</string>
   <string name="wikicode_copied" fuzzy="true">\nವಿಕಿಕೋಡನ್ ಕ್ಲಿಪ್ಬೋರ್ಡ್ಗೆ ಅಂಟಾಲೆ.</string>
