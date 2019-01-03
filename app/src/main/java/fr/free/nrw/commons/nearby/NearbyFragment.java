@@ -444,9 +444,6 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
      * @param nearbyPlacesInfo Includes nearby places list and boundary coordinates
      */
     private void updateMapFragment(boolean updateViaButton, boolean isSlightUpdate, @Nullable LatLng customLatLng, @Nullable NearbyController.NearbyPlacesInfo nearbyPlacesInfo) {
-        if (nearbyMapFragment.checkingAround) {
-            return;
-        }
         /*
         Significant update means updating nearby place markers. Slightly update means only
         updating current location marker and camera target.
@@ -455,6 +452,13 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
         our nearby markers, we update our map Significantly.
          */
         NearbyMapFragment nearbyMapFragment = getMapFragment();
+
+        if (nearbyMapFragment != null && !nearbyMapFragment.isCurrentLocationMarkerVisible()) {
+            Timber.d("Do not update the map, user is not seeing current location marker" +
+                    " means they are checking around and moving on map");
+            return;
+        }
+
 
         if (nearbyMapFragment != null && curLatLng != null) {
             hideProgressBar(); // In case it is visible (this happens, not an impossible case)
