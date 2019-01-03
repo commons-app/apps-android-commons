@@ -412,7 +412,7 @@ public class UploadPresenter {
             view.setTopCardVisibility(false);
             view.setRightCardVisibility(false);
         }
-        view.setBottomCardVisibility(currentPage);
+        view.setBottomCardVisibility(currentPage, uploadCount);
     }
 
     //endregion

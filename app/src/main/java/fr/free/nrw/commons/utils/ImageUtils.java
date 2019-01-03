@@ -35,8 +35,8 @@ import timber.log.Timber;
 
 public class ImageUtils {
 
-    public static final int IMAGE_DARK = 1;
-    public static final int IMAGE_BLURRY = 1 << 1;
+    static final int IMAGE_DARK = 1;
+    static final int IMAGE_BLURRY = 1 << 1;
     public static final int IMAGE_DUPLICATE = 1 << 2;
     public static final int IMAGE_GEOLOCATION_DIFFERENT = 1 << 3;
     public static final int IMAGE_OK = 0;
@@ -44,7 +44,7 @@ public class ImageUtils {
     public static final int IMAGE_WAIT = -2;
     public static final int EMPTY_TITLE = -3;
     public static final int FILE_NAME_EXISTS = -4;
-    public static final int NO_CATEGORY_SELECTED = -5;
+    static final int NO_CATEGORY_SELECTED = -5;
 
     @IntDef(
             flag = true,
@@ -70,7 +70,7 @@ public class ImageUtils {
      * @return IMAGE_OK if image is neither dark nor blurry or if the input bitmapRegionDecoder provided is null
      * IMAGE_DARK if image is too dark
      */
-    public static @Result
+    static @Result
     int checkIfImageIsTooDark(BitmapRegionDecoder bitmapRegionDecoder) {
         if (bitmapRegionDecoder == null) {
             Timber.e("Expected bitmapRegionDecoder was null");
@@ -102,7 +102,7 @@ public class ImageUtils {
      * @return false if image is neither dark nor blurry or if the input bitmapRegionDecoder provided is null
      * true if geolocation of the image and wikidata item are different
      */
-    public static boolean checkImageGeolocationIsDifferent(String geolocationOfFileString, String wikidataItemLocationString) {
+    static boolean checkImageGeolocationIsDifferent(String geolocationOfFileString, String wikidataItemLocationString) {
         Timber.d("Comparing geolocation of file with nearby place location");
         if (geolocationOfFileString == null || geolocationOfFileString == "") { // Means that geolocation for this image is not given
             return false; // Since we don't know geolocation of file, we choose letting upload
@@ -114,11 +114,8 @@ public class ImageUtils {
         Double distance = LengthUtils.computeDistanceBetween(
                 new LatLng(Double.parseDouble(geolocationOfFile[0]),Double.parseDouble(geolocationOfFile[1]),0)
                 , new LatLng(Double.parseDouble(wikidataItemLocation[0]), Double.parseDouble(wikidataItemLocation[1]),0));
-        if ( distance >= 1000 ) {// Distance is more than 1 km, means that geolocation is wrong
-            return true;
-        } else {
-            return false;
-        }
+        // Distance is more than 1 km, means that geolocation is wrong
+        return distance >= 1000;
     }
 
     private static boolean checkIfImageIsDark(Bitmap bitmap) {

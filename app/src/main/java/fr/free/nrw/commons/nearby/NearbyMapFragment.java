@@ -580,7 +580,7 @@ public class NearbyMapFragment extends DaggerFragment {
                             searchThisAreaModeOn = true;
                             // Lock map operations during search this area operation
                             mapboxMap.getUiSettings().setAllGesturesEnabled(false);
-                            searchThisAreaButtonProgressBar.setVisibility(View.VISIBLE);
+                            searchThisAreaButtonProgressBar.setVisibility(View.GONE);
                             fabRecenter.callOnClick();
                             searchThisAreaButton.setVisibility(View.GONE);
                             searchedAroundCurrentLocation = true;
@@ -644,6 +644,18 @@ public class NearbyMapFragment extends DaggerFragment {
                 .strokeColor(Color.parseColor("#55000000"))
                 .fillColor(Color.parseColor("#11000000"));
         mapboxMap.addPolygon(currentLocationPolygonOptions);
+    }
+
+    /**
+     * Checks whether current location marker is in visible region or not
+     * @return true if point is in region
+     */
+    public boolean isCurrentLocationMarkerVisible() {
+        if (currentLocationMarker != null) {
+            return mapboxMap.getProjection().getVisibleRegion().latLngBounds.contains(currentLocationMarker.getPosition());
+        } else {
+            return false;
+        }
     }
 
     /**

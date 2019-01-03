@@ -262,7 +262,7 @@
   <string name="skip_login">Skip</string>
   <string name="navigation_item_login">Log in</string>
   <string name="skip_login_title">Do you really want to skip login?</string>
-  <string name="skip_login_message">You will not be able to upload pictures.</string>
+  <string name="skip_login_message">You would have to log in to upload pictures in the future.</string>
   <string name="login_alert_message">Please log in to use this feature</string>
   <string name="copy_wikicode">Copy the wikitext to the clipboard</string>
   <string name="wikicode_copied">The wikitext was copied to the clipboard</string>
@@ -450,5 +450,10 @@ Upload your first media by touching the camera or gallery icon above.</string>
 
   <string name="this_function_needs_network_connection">This function requires network connection, please check your connection settings.</string>
   <string name="bad_token_error_proposed_solution">Upload failed due to issues with edit token. Please try logging out and in again. </string>
+
+  <plurals name="receiving_shared_content">
+    <item quantity="one">Receiving shared content. Processing the image might take some time depending on the size of the image and your device</item>
+    <item quantity="other">Receiving shared content. Processing the images might take some time depending on the size of the images and your device</item>
+  </plurals>
 
 </resources>
