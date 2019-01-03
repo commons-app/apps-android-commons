@@ -49,7 +49,11 @@ import io.reactivex.Single;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.schedulers.Schedulers;
+import timber.
 import timber.log.Timber;
+
+
+  .Timber;
 
 /**
  * activity for sharing feedback on uploaded activity
@@ -195,6 +199,7 @@ public class AchievementsActivity extends NavigationBaseActivity {
      * which then calls parseJson when results are fetched
      */
     private void setAchievements() {
+        progressBar.setVisibility(View.VISIBLE);
         if (checkAccount()) {
             try{
 
@@ -210,22 +215,25 @@ public class AchievementsActivity extends NavigationBaseActivity {
                                         Timber.d("success");
                                         layoutImageReverts.setVisibility(View.INVISIBLE);
                                         imageView.setVisibility(View.INVISIBLE);
-                                        levelNumber.setText("You haven't qualified any level yet");
+                                        showSnackBarWithRetry();
                                     }
                                 },
                                 t -> {
                                     Timber.e(t, "Fetching achievements statistics failed");
-                                    onError();
+                                    showSnackBarWithRetry();
                                 }
                         ));
             }
             catch (Exception e){
                 Timber.d(e+"success");
             }
-
-
-
         }
+    }
+
+    private void showSnackBarWithRetry() {
+        progressBar.setVisibility(View.GONE);
+        ViewUtil.showDismissibleSnackBar(findViewById(android.R.id.content),
+                R.string.achievements_fetch_failed, R.string.retry, view -> setAchievements());
     }
 
     /**
