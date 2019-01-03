@@ -97,7 +97,7 @@
   <string name="no_uploads_yet">Nemate još postavljenih slika.</string>
   <string name="menu_retry_upload">Pokušaj ponovo</string>
   <string name="menu_cancel_upload">Odustani</string>
-  <string name="share_license_summary">Ova će slika biti licencirana pod %1$s</string>
+  <string name="share_license_summary" fuzzy="true">Ova će slika biti licencirana pod %1$s</string>
   <string name="media_upload_policy">Slanjem ove slike izjavljujem da je ona moje djelo i ne sadrži materijale zaštićene autorskim pravom ili selfije, te da je u skladu sa &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines\"&gt;smjernicama Zajedničkog poslužitelja&lt;/a&gt;.</string>
   <string name="menu_download">Preuzmi</string>
   <string name="preference_license">Podrazumijevana licencija</string>
@@ -221,9 +221,6 @@
   <string name="error_while_cache">Pogrješka predmemoriranja slika</string>
   <string name="title_info">Jedinstveni naziv datoteke koji će služiti kao njeno ime. Možete koristiti uobičajeni jezik s razmacima. Ne uključuje datotečni nastavak.</string>
   <string name="description_info">Opišite medij što je više moguće: gdje je napravljen, što prikazuje,... Opišite objekte ili osobe. Napišite informacije koje ne mogu biti lako okrivene, npr. doba dana ako je u pitanju pejzaž. Ako medij prikazuje nešto neobično, molimo objasnite što je neobično.</string>
-  <string name="upload_image_problem_duplicate">Ova datoteka već postoji na Zajedničkom poslužitelju. Jeste li sigurni da želite nastaviti?</string>
-  <string name="upload_image_problem_dark">Slika je pretamna, želite ili je ipak ostaviti? Zajednički poslužitelj je namijenjen slikama od enciklopedijske vrijednosti.</string>
-  <string name="upload_image_problem_blurry">Slika je mutna, želite ili je ipak ostaviti? Zajednički poslužitelj je namijenjen slikama od enciklopedijske vrijednosti.</string>
   <string name="give_permission">Daj dopuštenje</string>
   <string name="use_external_storage">Rabi vanjsku pohranu</string>
   <string name="use_external_storage_summary">Spremite slike načinjene kamerom Vašeg uređaja</string>

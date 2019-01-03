@@ -10,6 +10,7 @@ import android.content.Intent;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.v4.app.NotificationCompat;
+import android.util.Log;
 import android.webkit.MimeTypeMap;
 import android.widget.Toast;
 
@@ -88,7 +89,7 @@ public class UploadService extends HandlerService<Contribution> {
         String notificationProgressTitle;
         String notificationFinishingTitle;
 
-        public NotificationUpdateProgressListener(String notificationTag, String notificationProgressTitle, String notificationFinishingTitle, Contribution contribution) {
+        NotificationUpdateProgressListener(String notificationTag, String notificationProgressTitle, String notificationFinishingTitle, Contribution contribution) {
             this.notificationTag = notificationTag;
             this.notificationProgressTitle = notificationProgressTitle;
             this.notificationFinishingTitle = notificationFinishingTitle;

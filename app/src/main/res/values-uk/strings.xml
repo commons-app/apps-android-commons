@@ -59,7 +59,7 @@
   <string name="provider_contributions">Мої завантаження</string>
   <string name="menu_share">Поділитися</string>
   <string name="menu_open_in_browser">Відкрити у браузері</string>
-  <string name="share_title_hint" fuzzy="true">Назва</string>
+  <string name="share_title_hint">Назва (обов\'язково)</string>
   <string name="add_title_toast">Будь ласка, вкажіть назву цього файлу</string>
   <string name="share_description_hint">Опис</string>
   <string name="login_failed_network">Неможливо увійти — збій у мережі</string>
@@ -80,7 +80,7 @@
   <string name="gps_disabled">GPS вимкнено на Вашому пристрої. Бажаєте увімкнути його?</string>
   <string name="enable_gps">Увімкнути GPS</string>
   <string name="contributions_subtitle_zero">Ще нема завантажень</string>
-  <plurals name="contributions_subtitle" fuzzy="true">
+  <plurals name="contributions_subtitle">
     <item quantity="zero">\@string/contributions_subtitle_zero</item>
     <item quantity="one">%1$d завантаження</item>
     <item quantity="few">%1$d завантаження</item>
@@ -119,7 +119,7 @@
   <string name="no_uploads_yet">Ви ще не завантажили жодної світлини.</string>
   <string name="menu_retry_upload">Повторити</string>
   <string name="menu_cancel_upload">Скасувати</string>
-  <string name="share_license_summary">Це зображення буде ліцензоване згідно з %1$s</string>
+  <string name="share_license_summary" fuzzy="true">Це зображення буде ліцензоване згідно з %1$s</string>
   <string name="media_upload_policy">Подаючи це зображення, я підтверджую, що це моя власна робота, яка не містить захищених авторським правом матеріалів чи селфі, а також відповідає &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines/uk\"&gt;правилам Вікісховища&lt;/a&gt;.</string>
   <string name="menu_download">Завантажити</string>
   <string name="preference_license">Стандартна ліцензія</string>
@@ -246,9 +246,6 @@
   <string name="error_while_cache">Помилка кешування зображень</string>
   <string name="title_info">Унікальна описова назва файлу. Ви можете використовувати простий текст з пробілами. Не вказуйте розширення файлу</string>
   <string name="description_info">Будь ласка, докладно опишіть файл: де його було зроблено? що на ньому зображено? який контекст? Будь ласка, опишіть об\'єкти чи осіб. Додайте інформацію, яку не можна легко здогадатися, наприклад, пору доби для фотографії пейзажу. Якщо зображено щось незвичайне, спробуйте пояснити, що робить його незвичайним.</string>
-  <string name="upload_image_problem_duplicate">Цей файл вже існує на Вікісховищі. Ви впевнені, що хочете продовжити?</string>
-  <string name="upload_image_problem_dark">Це зображення надто темне. Ви упевнені, що хочете його завантажити? Вікісховище призначене лише для зображень, що мають енциклопедичну цінність.</string>
-  <string name="upload_image_problem_blurry">Це зображення розмите. Ви упевнені, що хочете його завантажити? Вікісховище призначене лише для зображень, що мають енциклопедичну цінність.</string>
   <string name="give_permission">Надати дозвіл</string>
   <string name="use_external_storage">Використовувати зовнішнє сховище</string>
   <string name="use_external_storage_summary">Зберігати зображення, виконані вбудованою камерою Вашого пристрою</string>

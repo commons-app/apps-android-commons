@@ -111,7 +111,10 @@
   <string name="no_uploads_yet">Et ole vielä tallentanut kuvia.</string>
   <string name="menu_retry_upload">Yritä uudelleen</string>
   <string name="menu_cancel_upload">Peruuta</string>
-  <string name="share_license_summary">Tiedosto tallennetaan lisenssin %1$s ehtojen mukaisesti.</string>
+  <plurals name="share_license_summary">
+    <item quantity="one">Tiedosto tallennetaan lisenssin %1$s ehtojen mukaisesti</item>
+    <item quantity="other">Tiedostot tallennetaan lisenssin %1$s ehtojen mukaisesti</item>
+  </plurals>
   <string name="media_upload_policy">Lisäämällä kuvan, ilmoitan tämän olevan oma työ ja että se ei sisällä tekijänoikeuden alaista materiaalia tai selfietä ja muuten noudattaa &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines\"&gt;Wikimedia Commons policies&lt;/a&gt;.</string>
   <string name="menu_download">Lataa</string>
   <string name="preference_license">Oletuslisenssi</string>
@@ -236,9 +239,10 @@
   <string name="error_while_cache">Virhe varastoidessa kuvia</string>
   <string name="title_info">Tiedoston yksilöllinen ja kuvaava otsikko, jota käytetään tiedostonimenä. Voit käyttää tavallista kieltä välilyönnein. Älä sisällytä tiedoston päätettä.</string>
   <string name="description_info">Kuvaile mediaa niin paljon kuin mahdollista: Missä se otettiin? Mitä se esittää? Mikä on asiayhteys? Kuvaile esineitä tai henkilöitä. Tuo ilmi tietoja, joita ei ole helppo arvailla, esimerkiksi vuorokaudenaika, jos se on maisema. Jos media esittää jotain epätavallista, selitä, mikä tekee siitä epätavallisen.</string>
-  <string name="upload_image_problem_duplicate">Tämä tiedosto on jo Wikimedia Commonsissa. Haluatko varmasti jatkaa?</string>
-  <string name="upload_image_problem_dark">Tämä kuva on liian tumma, haluatko varmasti ladata sen? Wikimedia Commons on vain kuville, joilla on tietosanakirja-arvo.</string>
-  <string name="upload_image_problem_blurry">Tämä kuva on epäselvä, haluatko varmasti ladata sen? Wikimedia Commons on vain kuville, joilla on tietosanakirja-arvo.</string>
+  <string name="upload_problem_image_dark">Kuva on liian tumma.</string>
+  <string name="upload_problem_image_blurry">Kuva on epäselvä.</string>
+  <string name="upload_problem_image_duplicate">Kuva on jo Commonsissa.</string>
+  <string name="upload_problem_do_you_continue">Haluatko silti tallentaa tämän kuvan?</string>
   <string name="give_permission">Anna lupa</string>
   <string name="use_external_storage">Käytä ulkoista tallennustilaa</string>
   <string name="use_external_storage_summary">Tallenna sovelluksen sisäisen kameran kanssa otetut kuvat laitteellesi</string>
@@ -298,6 +302,8 @@
   <string name="search_commons">Hae Commonsista</string>
   <string name="title_activity_search">Haku</string>
   <string name="search_recent_header">Äskettäiset haut:</string>
+  <string name="search_tab_title_media">MEDIA</string>
+  <string name="search_tab_title_categories">LUOKAT</string>
   <string name="successful_wikidata_edit">Kuva onnistuneesti lisätty Wikidata-kohteeseen %1$s!</string>
   <string name="wikidata_edit_failure">Vastaavaa Wikidata-kohdetta ei voitu päivittää!</string>
   <string name="menu_set_wallpaper">Aseta taustakuvaksi</string>

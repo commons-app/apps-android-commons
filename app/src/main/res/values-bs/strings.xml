@@ -88,7 +88,7 @@
   <string name="no_uploads_yet">Još niste postavili nijednu fotografiju.</string>
   <string name="menu_retry_upload">Pokušaj ponovo</string>
   <string name="menu_cancel_upload">Otkaži</string>
-  <string name="share_license_summary">Slika će se voditi pod licencom %1$s</string>
+  <string name="share_license_summary" fuzzy="true">Slika će se voditi pod licencom %1$s</string>
   <string name="menu_download">Preuzmi</string>
   <string name="preference_license" fuzzy="true">Licenca</string>
   <string name="use_previous">Koristi prethodni naziv/opis</string>
@@ -187,5 +187,4 @@
   <string name="no_description_found">nema opisa</string>
   <string name="nearby_info_menu_commons_article" fuzzy="true">Članak na Commonsu</string>
   <string name="nearby_info_menu_wikidata_article">Stavka na Wikipodacima</string>
-  <string name="upload_image_problem_duplicate">Ova datoteka već postoji na Commonsu. Jeste li sigurni da želite nastaviti?</string>
 </resources>

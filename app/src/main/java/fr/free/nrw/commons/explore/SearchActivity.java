@@ -3,6 +3,7 @@ package fr.free.nrw.commons.explore;
 import android.content.res.Configuration;
 import android.database.DataSetObserver;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -93,9 +94,9 @@ public class SearchActivity extends NavigationBaseActivity implements MediaDetai
         searchImageFragment = new SearchImageFragment();
         searchCategoryFragment= new SearchCategoryFragment();
         fragmentList.add(searchImageFragment);
-        titleList.add("MEDIA");
+        titleList.add(getResources().getString(R.string.search_tab_title_media));
         fragmentList.add(searchCategoryFragment);
-        titleList.add("CATEGORIES");
+        titleList.add(getResources().getString(R.string.search_tab_title_categories));
 
         viewPagerAdapter.setTabData(fragmentList, titleList);
         viewPagerAdapter.notifyDataSetChanged();
@@ -204,10 +205,6 @@ public class SearchActivity extends NavigationBaseActivity implements MediaDetai
         }
         mediaDetails.showImage(index);
         forceInitBackButton();
-    }
-    @Override
-    public void onConfigurationChanged(Configuration newConfig) {
-        super.onConfigurationChanged(newConfig);
     }
 
     /**

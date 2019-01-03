@@ -101,7 +101,7 @@
   <string name="no_uploads_yet">توھان اڃان تائين ڪي بہ فوٽو انہ چاڙھيا آھن.</string>
   <string name="menu_retry_upload">ٻيھر ڪوشش ڪريو</string>
   <string name="menu_cancel_upload">رد</string>
-  <string name="share_license_summary">ھن عڪس کي %1$s جي تحت لائسنس ٿيندو</string>
+  <string name="share_license_summary" fuzzy="true">ھن عڪس کي %1$s جي تحت لائسنس ٿيندو</string>
   <string name="menu_download">لاھيو</string>
   <string name="preference_license">رٿيل لائسنس</string>
   <string name="use_previous">گذريل عنوان/تشريح استعمال ڪريو</string>
@@ -204,7 +204,6 @@
   <string name="nearby_info_menu_commons_article">ڪامن فائيل جو ورق</string>
   <string name="nearby_info_menu_wikidata_article">وڪيڊيٽا جزو (وڪيڊيٽا آئيٽم)</string>
   <string name="nearby_info_menu_wikipedia_article">وڪيپيڊيا مضمون</string>
-  <string name="upload_image_problem_duplicate">فائل اڳ ئي العام ۾ موجود آھي. ڇا توھان کي پڪ آھي تہ توھان اڳتي وڌڻ ٿا چاھيو؟</string>
   <string name="give_permission">اجازت ڏيو</string>
   <string name="use_external_storage">ٻاھري سنڀار استعمال ڪريو</string>
   <string name="use_external_storage_summary">ايپ ۾ ڪئمرا سان ڪڍيل تصويرون پنھنجي ڊوائيس تي سانڍيو</string>

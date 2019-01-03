@@ -87,7 +87,7 @@
   <string name="no_uploads_yet">Ur tsuliḍ ara yakan tiwlafin.</string>
   <string name="menu_retry_upload">Ɛref̣ tikelt-nniḍen</string>
   <string name="menu_cancel_upload">Sefsex</string>
-  <string name="share_license_summary">Tugna-agi ad tili daw n turagt %1$s</string>
+  <string name="share_license_summary" fuzzy="true">Tugna-agi ad tili daw n turagt %1$s</string>
   <string name="media_upload_policy">S tuzna n tygna-agi, ad d-wekkdeɣ d akken d ayla-w, ur tegbir ara aferdis yettwaḥerzen s izerfan n umeskar, udiɣ tqudeṛ &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines\"&gt;Tisertiyin n Wikimedia Commons&lt;/a&gt;.</string>
   <string name="menu_download">Sider</string>
   <string name="preference_license" fuzzy="true">Turagt</string>
@@ -198,7 +198,6 @@
   <string name="error_while_cache">Tuccḍa di tririt n tugniwin ar tuffirt</string>
   <string name="title_info">Azwul n useglem asuf i ufaylu, ara ttwasqedcen d isem n ufaylu. Tzemreḍ ad tesqedceḍ tutlayt fessusen s isekkilen ilmawen. Ur sedday ara asiɣzef n ufaylu</string>
   <string name="description_info">Ma ulac aɣilf, seglem amidya s wayen akk i tzemreḍ: Anida yettwasekles? Acu i d-yemmal? D acu-t usatal-is? Seglem tiɣawsiwin neɣ imdanen. Mudd-d talɣut ur yezmiren ad tettwaf s wudem fessusen, amedya akud n wass ma yella d agama. Ma yella admidya yaskan-d ayen ur nuɣ ara tanumi, ini-d d aci i tyettarran d ayen ifazen.</string>
-  <string name="upload_image_problem_duplicate">Afaylu yella yakan di Commons. Tebɣiḍ ad tedduḍ ar zdat?</string>
   <string name="give_permission">Mudd tasiregt</string>
   <string name="use_external_storage">Seqdec asekles azɣaray</string>
   <string name="use_external_storage_summary">Sekles tiwlafin yettwaṭṭfen s tkamirat yellan deg ibenk</string>

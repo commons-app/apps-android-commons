@@ -34,6 +34,8 @@ import timber.log.Timber;
 
 import static android.app.Activity.RESULT_OK;
 import static android.content.pm.PackageManager.PERMISSION_GRANTED;
+import static fr.free.nrw.commons.wikidata.WikidataConstants.WIKIDATA_ENTITY_ID_PREF;
+import static fr.free.nrw.commons.wikidata.WikidataConstants.WIKIDATA_ITEM_LOCATION;
 
 public class BookmarkLocationsFragment extends DaggerFragment {
 
@@ -45,6 +47,7 @@ public class BookmarkLocationsFragment extends DaggerFragment {
     @Inject
     BookmarkLocationsController controller;
     @Inject @Named("direct_nearby_upload_prefs") SharedPreferences directPrefs;
+    @Inject @Named("default_preferences") SharedPreferences defaultPrefs;
     private NearbyAdapterFactory adapterFactory;
     private ContributionController contributionController;
 
@@ -64,7 +67,7 @@ public class BookmarkLocationsFragment extends DaggerFragment {
     ) {
         View v = inflater.inflate(R.layout.fragment_bookmarks_locations, container, false);
         ButterKnife.bind(this, v);
-        contributionController = new ContributionController(this);
+        contributionController = new ContributionController(this, defaultPrefs);
         adapterFactory = new NearbyAdapterFactory(this, contributionController);
         return v;
     }
@@ -74,14 +77,7 @@ public class BookmarkLocationsFragment extends DaggerFragment {
         super.onViewCreated(view, savedInstanceState);
         progressBar.setVisibility(View.VISIBLE);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        recyclerView.setAdapter(
-                adapterFactory.create(
-                        new ArrayList<Place>(),
-                        () -> {
-                            initList();
-                        }
-                )
-        );
+        recyclerView.setAdapter(adapterFactory.create(new ArrayList<>(), this::initList));
     }
 
     @Override
@@ -106,43 +102,20 @@ public class BookmarkLocationsFragment extends DaggerFragment {
     }
 
     @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        Timber.d("onRequestPermissionsResult: req code = " + " perm = " + permissions + " grant =" + grantResults);
-
-        switch (requestCode) {
-            // 4 = "Read external storage" allowed when gallery selected
-            case 4: {
-                if (grantResults.length > 0 && grantResults[0] == PERMISSION_GRANTED) {
-                    Timber.d("Call controller.startGalleryPick()");
-                    contributionController.startGalleryPick();
-                }
-            }
-            break;
-
-            // 5 = "Write external storage" allowed when camera selected
-            case 5: {
-                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    Timber.d("Call controller.startCameraCapture()");
-                    contributionController.startCameraCapture();
-                }
-            }
-        }
-    }
-
-    @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
         if (resultCode == RESULT_OK) {
             Timber.d("OnActivityResult() parameters: Req code: %d Result code: %d Data: %s",
                     requestCode, resultCode, data);
-            String wikidataEntityId = directPrefs.getString("WikiDataEntityId", null);
+            String wikidataEntityId = directPrefs.getString(WIKIDATA_ENTITY_ID_PREF, null);
+            String wikidataItemLocation = directPrefs.getString(WIKIDATA_ITEM_LOCATION, null);
             if (requestCode == ContributionController.SELECT_FROM_CAMERA) {
                 // If coming from camera, pass null as uri. Because camera photos get saved to a
                 // fixed directory
-                contributionController.handleImagePicked(requestCode, null, true, wikidataEntityId);
+                contributionController.handleImagePicked(requestCode, null, true, wikidataEntityId, wikidataItemLocation);
             } else {
-                contributionController.handleImagePicked(requestCode, data.getData(), true, wikidataEntityId);
+                contributionController.handleImagePicked(requestCode, data.getData(), true, wikidataEntityId, wikidataItemLocation);
             }
         } else {
             Timber.e("OnActivityResult() parameters: Req code: %d Result code: %d Data: %s",

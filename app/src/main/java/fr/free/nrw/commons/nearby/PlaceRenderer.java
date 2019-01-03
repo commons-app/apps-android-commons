@@ -30,10 +30,12 @@ import fr.free.nrw.commons.auth.LoginActivity;
 import fr.free.nrw.commons.bookmarks.locations.BookmarkLocationsDao;
 import fr.free.nrw.commons.contributions.ContributionController;
 import fr.free.nrw.commons.di.ApplicationlessInjection;
+import fr.free.nrw.commons.utils.PlaceUtils;
 import timber.log.Timber;
 
 import static fr.free.nrw.commons.theme.NavigationBaseActivity.startActivityWithFlags;
 import static fr.free.nrw.commons.wikidata.WikidataConstants.WIKIDATA_ENTITY_ID_PREF;
+import static fr.free.nrw.commons.wikidata.WikidataConstants.WIKIDATA_ITEM_LOCATION;
 
 public class PlaceRenderer extends Renderer<Place> {
 
@@ -70,6 +72,9 @@ public class PlaceRenderer extends Renderer<Place> {
     BookmarkLocationsDao bookmarkLocationDao;
     @Inject @Named("prefs") SharedPreferences prefs;
     @Inject @Named("direct_nearby_upload_prefs") SharedPreferences directPrefs;
+    @Inject
+    @Named("default_preferences")
+    SharedPreferences defaultPrefs;
 
     public PlaceRenderer(){
         openedItems = new ArrayList<>();
@@ -136,9 +141,8 @@ public class PlaceRenderer extends Renderer<Place> {
                         .show();
             } else {
                 Timber.d("Camera button tapped. Image title: " + place.getName() + "Image desc: " + place.getLongDescription());
-                DirectUpload directUpload = new DirectUpload(fragment, controller);
                 storeSharedPrefs();
-                directUpload.initiateCameraUpload();
+                controller.initiateCameraPick(fragment.getActivity());
             }
         });
 
@@ -157,9 +161,8 @@ public class PlaceRenderer extends Renderer<Place> {
                         .show();
             }else {
                 Timber.d("Gallery button tapped. Image title: " + place.getName() + "Image desc: " + place.getLongDescription());
-                DirectUpload directUpload = new DirectUpload(fragment, controller);
                 storeSharedPrefs();
-                directUpload.initiateGalleryUpload();
+                controller.initiateGalleryPick(fragment.getActivity());
             }
         });
 
@@ -193,6 +196,7 @@ public class PlaceRenderer extends Renderer<Place> {
         editor.putString("Desc", place.getLongDescription());
         editor.putString("Category", place.getCategory());
         editor.putString(WIKIDATA_ENTITY_ID_PREF, place.getWikiDataEntityId());
+        editor.putString(WIKIDATA_ITEM_LOCATION, PlaceUtils.latLangToString(place.location));
         editor.apply();
     }
 

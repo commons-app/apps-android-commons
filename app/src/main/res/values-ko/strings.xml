@@ -111,7 +111,7 @@
   <string name="no_uploads_yet">아직 사진을 올리지 않았습니다.</string>
   <string name="menu_retry_upload">다시 시도</string>
   <string name="menu_cancel_upload">취소</string>
-  <string name="share_license_summary">이 그림은 %1$s에 따라 사용이 허가됩니다</string>
+  <string name="share_license_summary" fuzzy="true">이 그림은 %1$s에 따라 사용이 허가됩니다</string>
   <string name="media_upload_policy">이 이미지에 대해서, 이것이 본인이 창작한 저작물이며, 저작권에 위배되는 것이 포함되지 않았으며, &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines\"&gt;위키미디어 공용 정책&lt;/a&gt;에 위배되지 않는다는 것에 동의합니다.</string>
   <string name="menu_download">다운로드</string>
   <string name="preference_license">기본 라이선스</string>
@@ -241,13 +241,12 @@
   <string name="description_info">미디어에 대해 가능한 많이 설명하십시오: 어디서 촬영한 것인가? 무엇을 보여주는가? 무슨 문맥을 가지는가? 물건이나 사람에 대해 설명하십시오. 풍경에서 시간을 알려주는 것처럼 쉽게 추측할 수 없는 정보를 제공합니다. 미디어가 평범하지 않다면 무엇이 이를 평범하지 않게 만들었는지 설명하십시오.</string>
   <string name="upload_image_too_dark">이 사진은 너무 어둡습니다. 정말 업로드하시겠습니까? 위키미디어 공용은 백과사전적인 가치가 있는 사진을 위한 공간입니다.</string>
   <string name="upload_image_blurry">이 사진은 흐릿합니다. 정말 업로드하시겠습니까? 위키미디어 공용은 백과사전적인 가치가 있는 사진을 위한 공간입니다.</string>
-  <string name="upload_image_problem_duplicate">이 파일은 이미 공용에 존재합니다. 계속하시겠습니까?</string>
-  <string name="upload_image_problem_dark">사진이 너무 어둡습니다. 정말 업로드하겠습니까? 위키미디어 공용은 사전적인 가치가 있는 사진을 위한 공간입니다.</string>
-  <string name="upload_image_problem_blurry">사진이 흐릿합니다. 정말 업로드하겠습니까? 위키미디어 공용은 사전적인 가치가 있는 사진을 위한 공간입니다.</string>
-  <string name="upload_image_problem_dark_duplicate">이 사진은 너무 어둡고 공용에 이미 존재합니다. 정말 업로드하시겠습니까? 위키미디어 공용은 백과사전적인 가치가 있는 사진을 위한 공간입니다.</string>
-  <string name="upload_image_problem_blurry_duplicate">이 사진은 너무 흐릿하며 공용에 이미 존재합니다. 정말 업로드하시겠습니까? 위키미디어 공용은 백과사전적인 가치가 있는 사진을 위한 공간입니다.</string>
-  <string name="upload_image_problem_dark_blurry">이 사진은 너무 어둡고 흐릿합니다. 정말 업로드하시겠습니까? 위키미디어 공용은 백과사전적인 가치가 있는 사진을 위한 공간입니다.</string>
-  <string name="upload_image_problem_dark_blurry_duplicate">이 사진은 너무 어둡고 흐릿하며 공용에 이미 존재합니다. 정말 업로드하시겠습니까? 위키미디어 공용은 백과사전적인 가치가 있는 사진을 위한 공간입니다.</string>
+  <string name="upload_problem_exist">이 그림에 잠재적인 문제가 있습니다:</string>
+  <string name="upload_problem_image_dark">이미지가 너무 어둡습니다.</string>
+  <string name="upload_problem_image_blurry">이미지가 흐릿합니다.</string>
+  <string name="upload_problem_image_duplicate">이미지가 이미 공용에 있습니다.</string>
+  <string name="upload_problem_different_geolocation">이 사진은 다른 위치에서 찍었습니다.</string>
+  <string name="upload_problem_do_you_continue">그래도 이 사진을 업로드하시겠습니까?</string>
   <string name="give_permission">권한 부여</string>
   <string name="use_external_storage">외부 저장소 사용하기</string>
   <string name="use_external_storage_summary">장치의 인앱 카메라로 찍은 사진 저장하기</string>
@@ -312,6 +311,8 @@
   <string name="provider_searches">최근 검색된 쿼리</string>
   <string name="error_loading_categories">분류를 불러오는 동안 오류가 발생했습니다.</string>
   <string name="error_loading_subcategories">하위 분류를 불러오는 동안 오류가 발생했습니다.</string>
+  <string name="search_tab_title_media">미디어</string>
+  <string name="search_tab_title_categories">분류</string>
   <string name="successful_wikidata_edit">위키데이터의 %1$s에 그림을 성공적으로 추가했습니다!</string>
   <string name="wikidata_edit_failure">일치하는 위키데이터 엔티티의 업데이트를 실패했습니다!</string>
   <string name="menu_set_wallpaper">배경화면으로 설정</string>
@@ -340,6 +341,7 @@
   <string name="share_coordinates_not_present">그림 선택 중에 좌표가 지정되지 않았습니다</string>
   <string name="error_fetching_nearby_places">주변 장소를 가져오는데 오류가 있습니다.</string>
   <string name="add_description">+ 설명 추가</string>
+  <string name="no_recent_searches">최근 검색 없음</string>
   <string name="delete_recent_searches_dialog">검색 기록을 지우겠습니까?</string>
   <string name="search_history_deleted">검색 기록 삭제됨</string>
   <string name="nominate_delete">삭제 신청</string>
@@ -402,9 +404,11 @@
   <string name="no_categories_selected_warning_desc">분류가 없는 그림은 거의 유용하지 않습니다. 분류를 선택하지 않고 제출하시겠습니까?</string>
   <string name="yes_submit">예. 제출합니다</string>
   <string name="no_go_back">아니오, 뒤로 돌아갑니다</string>
+  <string name="search_this_area">여기를 검색</string>
   <string name="nearby_card_permission_title">권한 요청</string>
   <string name="nearby_card_permission_explanation">사진이 필요한 주변 장소를 표시하기 위해 현재 위치를 사용하시겠습니까?</string>
   <string name="unable_to_display_nearest_place">위치 권한 없이 사진이 필요한 주변 장소를 표시할 수 없습니다</string>
   <string name="never_ask_again">다시는 묻지 않음</string>
   <string name="display_location_permission_title">위치 권한 표시</string>
+  <string name="bad_token_error_proposed_solution">편집 토큰에 문제가 있어서 업로드를 실패했습니다. 로그아웃한 다음 다시 로그인해 보십시오.</string>
 </resources>

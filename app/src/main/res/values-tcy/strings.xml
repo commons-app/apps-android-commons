@@ -105,7 +105,7 @@
   <string name="no_uploads_yet">ಇರ್ ಒಂಜಿಲಾ ಪಟೋನ್ ಅಪ್ಲೋಡ್ ಮಾಲ್ತಿಜ್ಜಿ.</string>
   <string name="menu_retry_upload">ನನೊರ ಪ್ರಯತ್ನ ಮಾನ್ಪುಲೇ</string>
   <string name="menu_cancel_upload">ವಜಾ ಮಲ್ಪುಲೆ</string>
-  <string name="share_license_summary">ಈ ಪಟೊ ಲೈಸನ್ಸ್‌ಡ್ %1$s</string>
+  <string name="share_license_summary" fuzzy="true">ಈ ಪಟೊ ಲೈಸನ್ಸ್‌ಡ್ %1$s</string>
   <string name="media_upload_policy">ಈ ಪಟೊನ್ ಕೊರಿಯರ ಅತ್ತಂದೆ, ಉಂದು ಎನ್ನ ಸ್ವಂತ ಬೆಲೆಗ್ ಯಾನ್ ಘೋಷಣೆ ಮಾಲ್ಪೆ, ಅವು ಹಕ್ಕುಸ್ವಾಮ್ಯತ ವಸ್ತು ಅತ್ತಂದೆ ಸ್ವಂತಲಾ ಅತ್ತ್&lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines\"&gt;Wikimedia Commons policies&lt;/a&gt;.</string>
   <string name="menu_download">ಡೌನ್‍ಲೋಡ್</string>
   <string name="preference_license">ಪೂರ್ವನಿಯೋಜಿತ ಲೈಸನ್ಸ್‌.</string>
@@ -232,9 +232,6 @@
   <string name="error_while_cache">ಚಿತ್ರೊಲೆನ್ ಕ್ಯಾಶಿಂಗ್ ಮಾಲ್ಪುನಗ ದೋಷೊ.</string>
   <string name="title_info">ಫೈಲ್ಗಾತ್ ಒಂಜಿ ಬೇತೆ ವಿವರಣಾತ್ಮಕೊ ಪುದಾರ್, ಉಂದು ಫೈಲ್ ಪುದಾರ್ ಆತ್ ಕಾರ್ಯನಿರ್ವಹಣೆ ಅಪುಂಡು. ಇರೆನ ಜಾಗೆತೊಟ್ಟಗ್ ಸರಳ ಭಾಷೆನ್ ಬಲಕೆ ಮಾಪ್ಲೊಲಿ. ಫೈಲ್ ವಿಸ್ತರಣೆನ್ ಮಾಲ್ಪೊಲಿ.</string>
   <string name="description_info">ದಯಮಾಲ್ತ್ ಸಾಧ್ಯವಾಯಿನ ಮಾಧ್ಯಮಟ್ ವಿವರಣೆ ಕೊರ್ಲೆ: ಒಲ್ಪಾ ಅಯಿನ್ ದೆಪ್ಪೊಲಿ? ಉಂದೆನ್ ಎಂಚ ತೋಜಾವೊಲಿ? ಸನ್ನಿವೇಶ ಪಂಡದಾದ? ದಯಮಾಲ್ತ್ ವಸ್ತುಲು ಅತ್ತಂದೆ ವ್ಯಕ್ತಿಲು ಸುಲಭವಾತ್ ಊಹಿಸಲು ಸಾದ್ಯ ಇಜ್ಜಿ ಮಾಹಿತಿನ್ ಬಹಿರಂಗ ಮಾಲ್ಪುಲೆ, ಉದಾಹರಣೆಗ್ ಉಂದು ಭೂದೃಶ್ಯವಾತ್ ಇತ್ತಂಡ್ ದಿನೊತ ಸಮಯ. ಮಾಧ್ಯಮೊ ಅಸಾಮಾನ್ಯವಾತ್ ಇಪ್ಪುನಯಿನ್ ತೋಜಾತ್, ಅವು ಅಸಾಮಾನ್ಯವಾತ್ ವಿವರಣೆ ಇಪ್ಪು.</string>
-  <string name="upload_image_problem_duplicate">ಕಾಮನ್ಸ್‌ಡ್ತ್ ಇಂಚಿಗ್ ಈ ಫೈಲ್ ಅಸ್ತಿತ್ವಟ್ ಇಜ್ಜಿ. ದುಂಬು ಪೊಯರ ಇರ್ ಖಚಿತವಾತ್ ಬಯಸುವರಾ?</string>
-  <string name="upload_image_problem_dark">ಈ ಚಿತ್ರೊ ತೀರ ಗಾಢವಾತ್, ಅಯಿನ್ ಅಪ್ಲೋಡ್ ಮಾಲ್ಪಿಯರ ಇರ್ ಖಚಿತವಾತ್ ಉಪ್ಪುವರಾ? ವಿಕಿಮೀಡಿಯ ಕಾಮನ್ಸ್ ಮಾತ್ರೊ ವಿಶ್ವಕೋಶತ ಮೌಲ್ಯದೊಂಟ್ಟ್‌ಗ್ ಚಿತ್ರೊನ್ ಹೊಂದಾಣಿಕೆ ಮಾಲ್ಪುಲೆ.</string>
-  <string name="upload_image_problem_blurry">ಈ ಚಿತ್ರೊ ತೆಳುವಾಯಿನ, ಇರ್ ಅಯಿನ್ ಅಪ್ಲೋಡ್ ಮಾಲ್ಪಿಯರ ಖಚಿತವಾತ್ ಬಯಸುವರಾ? ವಿಕಿಮೀಡಿಯ ಕಾಮನ್ಸ್ ಮಾತ್ರೊ ವಿಶ್ವಕೋಶತ ಮೌಲ್ಯದೊಂಟ್ಟ್‌ಗ್ ಚಿತ್ರೊನ್ ಹೊಂದಾಣಿಕೆ ಮಾಲ್ಪುಲೆ.</string>
   <string name="give_permission">ಒಪ್ಪಿಗೆ ಪಡೆಲೆ.</string>
   <string name="use_external_storage">ಉಂದು ಎಕ್ಸ್‌ಟರ್ನಲ್ ಸ್ಟೊರೆಜ್.</string>
   <string name="use_external_storage_summary">ಈ ಸಾಧನಟ್ ಅಪ್ಲಿಕೇಶನ್ ಕ್ಯಾಮೆರಾದೊಂಟ್ಟಗ್ ದೆತ್ತಿನ ಚಿತ್ರೊನ್ ಒರಿಪಾಲೆ.</string>
