@@ -1,7 +1,6 @@
 package fr.free.nrw.commons.settings;
 
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatDelegate;
 import android.view.MenuItem;
 
@@ -21,13 +20,6 @@ public class SettingsActivity extends NavigationBaseActivity {
      */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        // Check prefs on every activity starts
-        if (PreferenceManager.getDefaultSharedPreferences(this).getBoolean("theme",false)) {
-            setTheme(R.style.DarkAppTheme);
-        } else {
-            setTheme(R.style.LightAppTheme);
-        }
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
 
