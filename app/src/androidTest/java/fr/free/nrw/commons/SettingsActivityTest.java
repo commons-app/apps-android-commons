@@ -3,10 +3,7 @@ package fr.free.nrw.commons;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import android.support.test.espresso.Espresso;
-import android.support.test.espresso.action.ViewActions;
-import android.support.test.espresso.assertion.ViewAssertions;
 import android.support.test.espresso.matcher.PreferenceMatchers;
-import android.support.test.espresso.matcher.ViewMatchers;
 import android.support.test.filters.LargeTest;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
@@ -17,7 +14,16 @@ import org.junit.runner.RunWith;
 
 import java.util.Map;
 
+import fr.free.nrw.commons.settings.Prefs;
 import fr.free.nrw.commons.settings.SettingsActivity;
+
+import static android.support.test.espresso.action.ViewActions.click;
+import static android.support.test.espresso.action.ViewActions.replaceText;
+import static android.support.test.espresso.assertion.ViewAssertions.matches;
+import static android.support.test.espresso.matcher.ViewMatchers.withId;
+import static android.support.test.espresso.matcher.ViewMatchers.withText;
+import static org.hamcrest.Matchers.allOf;
+import static org.junit.Assert.assertEquals;
 
 @LargeTest
 @RunWith(AndroidJUnit4.class)
@@ -27,8 +33,7 @@ public class SettingsActivityTest {
 
     @Rule
     public ActivityTestRule<SettingsActivity> activityRule =
-            new ActivityTestRule<SettingsActivity>(SettingsActivity.class,
-                    false /* Initial touch mode */, true /*  launch activity */) {
+            new ActivityTestRule<SettingsActivity>(SettingsActivity.class, false, true) {
 
                 @Override
                 protected void afterActivityLaunched() {
@@ -59,41 +64,31 @@ public class SettingsActivityTest {
             };
 
     @Test
-    public void oneLicenseIsChecked() {
-        // click "License" (the first item)
-        Espresso.onData(PreferenceMatchers.withKey("defaultLicense"))
-                .inAdapterView(ViewMatchers.withId(android.R.id.list))
-                .atPosition(0)
-                .perform(ViewActions.click());
+    public void setRecentUploadLimitTo100() {
+        // Open "Use external storage" preference
+        Espresso.onData(PreferenceMatchers.withKey("uploads"))
+                .inAdapterView(withId(android.R.id.list))
+                .perform(click());
 
-        // test the selected item
-        Espresso.onView(ViewMatchers.isChecked())
-                .check(ViewAssertions.matches(ViewMatchers.isDisplayed()));
-    }
+        // Try setting it to 100
+        Espresso.onView(withId(android.R.id.edit))
 
-    @Test
-    public void afterClickingCcby4ItWillStay() {
-        // click "License" (the first item)
-        Espresso.onData(PreferenceMatchers.withKey("defaultLicense"))
-                .inAdapterView(ViewMatchers.withId(android.R.id.list))
-                .atPosition(0)
-                .perform(ViewActions.click());
+                .perform(replaceText("100"));
 
-        // click "Attribution 4.0"
-        Espresso.onView(
-                ViewMatchers.withText(R.string.license_name_cc_by_four)
-        ).perform(ViewActions.click());
+        // Click "OK"
+        Espresso.onView(allOf(withId(android.R.id.button1), withText("OK")))
+                .perform(click());
 
-        // click "License" (the first item)
-        Espresso.onData(PreferenceMatchers.withKey("defaultLicense"))
-                .inAdapterView(ViewMatchers.withId(android.R.id.list))
-                .atPosition(0)
-                .perform(ViewActions.click());
+        // Check setting set to 100 in SharedPreferences
+        assertEquals(
+                100,
+                prefs.getInt(Prefs.UPLOADS_SHOWING, 0)
+        );
 
-        // test the value remains "Attribution 4.0"
-        Espresso.onView(ViewMatchers.isChecked())
-                .check(ViewAssertions.matches(
-                        ViewMatchers.withText(R.string.license_name_cc_by_four)
-                ));
+        // Check displaying 100 in summary text
+        Espresso.onData(PreferenceMatchers.withKey("uploads"))
+                .inAdapterView(withId(android.R.id.list))
+                .onChildView(withId(android.R.id.summary))
+                .check(matches(withText("100")));
     }
 }
