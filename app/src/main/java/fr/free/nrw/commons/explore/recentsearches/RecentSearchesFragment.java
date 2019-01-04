@@ -45,11 +45,11 @@ public class RecentSearchesFragment extends CommonsDaggerSupportFragment {
         ButterKnife.bind(this, rootView);
         recentSearches = recentSearchesDao.recentSearches(10);
 
-       if(recentSearches.isEmpty()) {
+      if(recentSearches.isEmpty()) {
             recent_searches_delete_button.setVisibility(View.GONE);
             recent_searches_text_view.setText(R.string.no_recent_searches);
         }
- 
+  
         recent_searches_delete_button.setOnClickListener(v -> {
             new AlertDialog.Builder(getContext())
                 .setMessage(getString(R.string.delete_recent_searches_dialog))
