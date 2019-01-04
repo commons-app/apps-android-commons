@@ -174,6 +174,7 @@
   <string name="detail_description_empty">لا وصف</string>
   <string name="detail_license_empty">ترخيص غير معلوم</string>
   <string name="menu_refresh">تحديث</string>
+  <string name="storage_permission_title">طلب إذن التخزين</string>
   <string name="read_storage_permission_rationale">صلاحية مطلوبة: قراءة وحدة التخزين الخارجية، لا يمكن للتطبيق الوصول إلى معرض الصور الخاص بك بدونها.</string>
   <string name="write_storage_permission_rationale">صلاحية مطلوبة: كتابة وحدة التخزين الخارجية، لا يمكن للتطبيق الوصول إلى معرض الصور الخاص بك بدونها.</string>
   <string name="location_permission_rationale">صلاحية اختيارية: احصل على الموقع الحالي لاقتراحات التصنيفات</string>
@@ -266,7 +267,7 @@
   <string name="skip_login">تخطي</string>
   <string name="navigation_item_login">تسجيل الدخول</string>
   <string name="skip_login_title">هل تريد حقا تخطي تسجيل الدخول؟</string>
-  <string name="skip_login_message">لن تتمكن من رفع الصور.</string>
+  <string name="skip_login_message" fuzzy="true">لن تتمكن من رفع الصور.</string>
   <string name="login_alert_message">الرجاء تسجيل الدخول لاستخدام هذه الميزة</string>
   <string name="copy_wikicode">انسخ نص الويكي إلى الكليب بورد</string>
   <string name="wikicode_copied">نص الويكي تم نسخه إلى الكليب بورد</string>

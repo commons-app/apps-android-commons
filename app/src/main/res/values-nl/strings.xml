@@ -190,7 +190,7 @@
   <string name="skip_login">Overslaan</string>
   <string name="navigation_item_login">Aanmelden</string>
   <string name="skip_login_title">Weet je zeker dat je het aanmelden wilt overslaan?</string>
-  <string name="skip_login_message">Je kunt dan geen afbeeldingen plaatsen.</string>
+  <string name="skip_login_message" fuzzy="true">Je kunt dan geen afbeeldingen plaatsen.</string>
   <string name="login_alert_message">Meld je aan om deze functie te gebruiken</string>
   <string name="nearby_directions">VERWIJZINGEN</string>
   <string name="nearby_wikidata">WIKIDATA</string>

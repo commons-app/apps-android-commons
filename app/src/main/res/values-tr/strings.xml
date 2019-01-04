@@ -261,7 +261,7 @@
   <string name="skip_login">Geç</string>
   <string name="navigation_item_login">Oturum aç</string>
   <string name="skip_login_title">Giriş işlemini gerçekten atlamak istiyor musunuz?</string>
-  <string name="skip_login_message">Resim yükleyemeyeceksiniz.</string>
+  <string name="skip_login_message" fuzzy="true">Resim yükleyemeyeceksiniz.</string>
   <string name="login_alert_message">Bu özelliği kullanmak için lütfen giriş yapın</string>
   <string name="copy_wikicode">Vikimetini panoya kopyala</string>
   <string name="wikicode_copied">Vikikod panoya kopyalandı</string>

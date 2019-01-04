@@ -3,6 +3,7 @@ package fr.free.nrw.commons.achievements;
 import android.accounts.Account;
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
@@ -26,6 +27,8 @@ import android.widget.TextView;
 
 import com.dinuscxj.progressbar.CircleProgressBar;
 
+import org.w3c.dom.Text;
+
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -42,10 +45,13 @@ import fr.free.nrw.commons.auth.SessionManager;
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
 import fr.free.nrw.commons.theme.NavigationBaseActivity;
 import fr.free.nrw.commons.utils.ViewUtil;
+import io.reactivex.Single;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.schedulers.Schedulers;
 import timber.log.Timber;
+
+
 
 /**
  * activity for sharing feedback on uploaded activity
@@ -85,6 +91,12 @@ public class AchievementsActivity extends NavigationBaseActivity {
     RelativeLayout layoutImageUsedByWiki;
     @BindView(R.id.layout_statistics)
     LinearLayout layoutStatistics;
+    @BindView(R.id.images_used_by_wiki_text)
+    TextView imageByWikiText;
+    @BindView(R.id.images_reverted_text)
+    TextView imageRevertedText;
+    @BindView(R.id.images_upload_text_param)
+    TextView imageUploadedText;
     @Inject
     SessionManager sessionManager;
     @Inject
@@ -183,30 +195,39 @@ public class AchievementsActivity extends NavigationBaseActivity {
     private void setAchievements() {
         progressBar.setVisibility(View.VISIBLE);
         if (checkAccount()) {
-            compositeDisposable.add(mediaWikiApi
-                    .getAchievements(Objects.requireNonNull(sessionManager.getCurrentAccount()).name)
-                    .subscribeOn(Schedulers.io())
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe(
-                            response -> {
-                                if (response != null) {
-                                    setUploadCount(Achievements.from(response));
-                                } else {
+            try{
+
+                compositeDisposable.add(mediaWikiApi
+                        .getAchievements(Objects.requireNonNull(sessionManager.getCurrentAccount()).name)
+                        .subscribeOn(Schedulers.io())
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribe(
+                                response -> {
+                                    if (response != null) {
+                                        setUploadCount(Achievements.from(response));
+                                    } else {
+                                        Timber.d("success");
+                                        layoutImageReverts.setVisibility(View.INVISIBLE);
+                                        imageView.setVisibility(View.INVISIBLE);
+                                        showSnackBarWithRetry();
+                                    }
+                                },
+                                t -> {
+                                    Timber.e(t, "Fetching achievements statistics failed");
                                     showSnackBarWithRetry();
                                 }
-                            },
-                            t -> {
-                                Timber.e(t, "Fetching achievements statistics failed");
-                                showSnackBarWithRetry();
-                            }
-                    ));
+                        ));
+            }
+            catch (Exception e){
+                Timber.d(e+"success");
+            }
         }
     }
 
     private void showSnackBarWithRetry() {
         progressBar.setVisibility(View.GONE);
         ViewUtil.showDismissibleSnackBar(findViewById(android.R.id.content),
-            R.string.achievements_fetch_failed, R.string.retry, view -> setAchievements());
+                R.string.achievements_fetch_failed, R.string.retry, view -> setAchievements());
     }
 
     /**
@@ -250,10 +271,34 @@ public class AchievementsActivity extends NavigationBaseActivity {
      * @param uploadCount
      */
     private void setUploadProgress(int uploadCount){
-        imagesUploadedProgressbar.setProgress
-                (100*uploadCount/levelInfo.getMaxUploadCount());
-        imagesUploadedProgressbar.setProgressTextFormatPattern
-                (uploadCount +"/" + levelInfo.getMaxUploadCount() );
+        if (uploadCount==0){
+            setZeroAchievements();
+        }else {
+
+            imagesUploadedProgressbar.setProgress
+                    (100*uploadCount/levelInfo.getMaxUploadCount());
+            imagesUploadedProgressbar.setProgressTextFormatPattern
+                    (uploadCount +"/" + levelInfo.getMaxUploadCount() );
+        }
+
+    }
+
+    private void setZeroAchievements() {
+        AlertDialog.Builder builder=new AlertDialog.Builder(this)
+                .setMessage("You haven't made any contributions yet")
+                .setPositiveButton("Ok", (dialog, which) -> {
+                });
+        AlertDialog dialog = builder.create();
+        dialog.show();
+        imagesUploadedProgressbar.setVisibility(View.INVISIBLE);
+        imageRevertsProgressbar.setVisibility(View.INVISIBLE);
+        imagesUsedByWikiProgressBar.setVisibility(View.INVISIBLE);
+        imageView.setVisibility(View.INVISIBLE);
+        imageByWikiText.setText(R.string.no_image);
+        imageRevertedText.setText(R.string.no_image_reverted);
+        imageUploadedText.setText(R.string.no_image_uploaded);
+        imageView.setVisibility(View.INVISIBLE);
+
     }
 
     /**
@@ -391,10 +436,10 @@ public class AchievementsActivity extends NavigationBaseActivity {
     private boolean checkAccount(){
         Account currentAccount = sessionManager.getCurrentAccount();
         if (currentAccount == null) {
-        Timber.d("Current account is null");
-        ViewUtil.showLongToast(this, getResources().getString(R.string.user_not_logged_in));
-        sessionManager.forceLogin(this);
-        return false;
+            Timber.d("Current account is null");
+            ViewUtil.showLongToast(this, getResources().getString(R.string.user_not_logged_in));
+            sessionManager.forceLogin(this);
+            return false;
         }
         return true;
     }

@@ -183,6 +183,7 @@
   <string name="detail_description_empty">Aucune description</string>
   <string name="detail_license_empty">Licence inconnue</string>
   <string name="menu_refresh">Rafraîchir</string>
+  <string name="storage_permission_title">Demande d\'autorisation d\'accès au dépot</string>
   <string name="read_storage_permission_rationale">Autorisation nécessaire : Lire un stockage externe. L’application ne peut pas accéder à votre galerie sans cela.</string>
   <string name="write_storage_permission_rationale">Permission obligatoire : Écriture sur stockage externe. L’application ne peut pas accéder à votre appareil photo sans cela.</string>
   <string name="location_permission_rationale">Autorisation facultative : Obtenir l’emplacement actuel pour des suggestions de catégorie</string>
@@ -275,7 +276,7 @@
   <string name="skip_login">Plus tard</string>
   <string name="navigation_item_login">Se connecter</string>
   <string name="skip_login_title">Voulez-vous vraiment ne pas vous connecter ?</string>
-  <string name="skip_login_message">Vous ne pourrez pas téléverser d\'images.</string>
+  <string name="skip_login_message" fuzzy="true">Vous ne pourrez pas téléverser d\'images.</string>
   <string name="login_alert_message">Veuillez vous connecter pour utiliser cette fonctionnalité</string>
   <string name="copy_wikicode">Copier le texte wiki dans le presse-papiers</string>
   <string name="wikicode_copied">Texte wiki copié dans le presse-papiers</string>

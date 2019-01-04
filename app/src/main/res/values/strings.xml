@@ -456,4 +456,7 @@ Upload your first media by touching the camera or gallery icon above.</string>
     <item quantity="other">Receiving shared content. Processing the images might take some time depending on the size of the images and your device</item>
   </plurals>
 
+  <string name="no_image">No images used</string>
+  <string name="no_image_reverted">No images reverted</string>
+  <string name="no_image_uploaded">No images uploaded</string>
 </resources>
