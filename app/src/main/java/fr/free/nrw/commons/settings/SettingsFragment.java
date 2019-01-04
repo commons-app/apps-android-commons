@@ -47,16 +47,6 @@ public class SettingsFragment extends PreferenceFragment {
         // Load the preferences from an XML resource
         addPreferencesFromResource(R.xml.preferences);
 
-        // Update spinner to show selected value as summary
-        ListPreference licensePreference = (ListPreference) findPreference(Prefs.DEFAULT_LICENSE);
-        licensePreference.setSummary(getString(Utils.licenseNameFor(licensePreference.getValue())));
-
-        // Keep summary updated when changing value
-        licensePreference.setOnPreferenceChangeListener((preference, newValue) -> {
-            preference.setSummary(getString(Utils.licenseNameFor((String) newValue)));
-            return true;
-        });
-
         SwitchPreference themePreference = (SwitchPreference) findPreference("theme");
         themePreference.setOnPreferenceChangeListener((preference, newValue) -> {
             getActivity().recreate();
