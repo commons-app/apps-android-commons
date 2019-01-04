@@ -1,37 +1,28 @@
 package fr.free.nrw.commons.theme;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 
 import fr.free.nrw.commons.R;
+import fr.free.nrw.commons.Utils;
 import fr.free.nrw.commons.di.CommonsDaggerAppCompatActivity;
 
 public abstract class BaseActivity extends CommonsDaggerAppCompatActivity {
-    protected boolean currentTheme;
+    protected boolean wasPreviouslyDarkTheme;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        boolean currentThemeIsDark = PreferenceManager.getDefaultSharedPreferences(this).getBoolean("theme", false);
-        if (currentThemeIsDark){
-            currentTheme = true;
-            setTheme(R.style.DarkAppTheme);
-        } else {
-            currentTheme = false;
-            setTheme(R.style.LightAppTheme); // default
-        }
+        wasPreviouslyDarkTheme = Utils.isDarkTheme(this);
+        setTheme(wasPreviouslyDarkTheme ? R.style.DarkAppTheme : R.style.LightAppTheme);
         super.onCreate(savedInstanceState);
     }
 
     @Override
     protected void onResume() {
         // Restart activity if theme is changed
-        boolean newTheme = PreferenceManager.getDefaultSharedPreferences(this).getBoolean("theme", false);
-        if (currentTheme != newTheme) { //is activity theme changed
-            Intent intent = getIntent();
-            finish();
-            startActivity(intent);
+        if (wasPreviouslyDarkTheme != Utils.isDarkTheme(this)) {
+            recreate();
         }
+
         super.onResume();
     }
 }

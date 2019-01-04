@@ -85,7 +85,7 @@ public class FileUtils {
     static String getGeolocationOfFile(String filePath) {
 
         try {
-            ExifInterface exifInterface=new ExifInterface(filePath);
+            ExifInterface exifInterface = new ExifInterface(filePath);
             GPSExtractor imageObj = new GPSExtractor(exifInterface);
             if (imageObj.imageCoordsExists) { // If image has geolocation information in its EXIF
                 return imageObj.getCoords();
@@ -98,14 +98,27 @@ public class FileUtils {
         }
     }
 
+    static String createCopyPathAndCopy(boolean useExternalStorage,
+                                        Uri uri,
+                                        ContentResolver contentResolver,
+                                        Context context) throws IOException {
+        return useExternalStorage ? createExternalCopyPathAndCopy(uri, contentResolver) :
+                createCopyPathAndCopy(uri, context);
+    }
+
     /**
      * In older devices getPath() may fail depending on the source URI. Creating and using a copy of the file seems to work instead.
      *
      * @return path of copy
      */
-    @NonNull
-    static String createExternalCopyPathAndCopy(Uri uri, ContentResolver contentResolver) throws IOException {
-        FileDescriptor fileDescriptor = contentResolver.openFileDescriptor(uri, "r").getFileDescriptor();
+    @Nullable
+    private static String createExternalCopyPathAndCopy(Uri uri, ContentResolver contentResolver) throws IOException {
+        ParcelFileDescriptor parcelFileDescriptor = contentResolver.openFileDescriptor(uri, "r");
+        if (parcelFileDescriptor == null) {
+            return null;
+        }
+
+        FileDescriptor fileDescriptor = parcelFileDescriptor.getFileDescriptor();
         String copyPath = Environment.getExternalStorageDirectory().toString() + "/CommonsApp/" + new Date().getTime() + "." + getFileExt(uri, contentResolver);
         File newFile = new File(Environment.getExternalStorageDirectory().toString() + "/CommonsApp");
         newFile.mkdir();
@@ -119,8 +132,8 @@ public class FileUtils {
      *
      * @return path of copy
      */
-    @NonNull
-    static String createCopyPathAndCopy(Uri uri, Context context) throws IOException {
+    @Nullable
+    private static String createCopyPathAndCopy(Uri uri, Context context) throws IOException {
         FileDescriptor fileDescriptor = context.getContentResolver().openFileDescriptor(uri, "r").getFileDescriptor();
         String copyPath = context.getCacheDir().getAbsolutePath() + "/" + new Date().getTime() + "." + getFileExt(uri, context.getContentResolver());
         FileUtils.copy(fileDescriptor, copyPath);
@@ -435,13 +448,13 @@ public class FileUtils {
         return result;
     }
 
-    static String getFileExt(String fileName){
+    static String getFileExt(String fileName) {
         //Default file extension
-        String extension=".jpg";
+        String extension = ".jpg";
 
         int i = fileName.lastIndexOf('.');
         if (i > 0) {
-            extension = fileName.substring(i+1);
+            extension = fileName.substring(i + 1);
         }
         return extension;
     }

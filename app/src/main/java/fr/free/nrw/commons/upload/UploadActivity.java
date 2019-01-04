@@ -71,7 +71,6 @@ import static fr.free.nrw.commons.wikidata.WikidataConstants.WIKIDATA_ENTITY_ID_
 import static fr.free.nrw.commons.wikidata.WikidataConstants.WIKIDATA_ITEM_LOCATION;
 
 public class UploadActivity extends AuthenticatedActivity implements UploadView, SimilarImageInterface {
-    @Inject InputMethodManager inputMethodManager;
     @Inject MediaWikiApi mwApi;
     @Inject @Named("direct_nearby_upload_prefs") SharedPreferences directPrefs;
     @Inject UploadPresenter presenter;
@@ -613,6 +612,10 @@ public class UploadActivity extends AuthenticatedActivity implements UploadView,
 
         if (Intent.ACTION_SEND.equals(intent.getAction())) {
             Uri mediaUri = intent.getParcelableExtra(Intent.EXTRA_STREAM);
+            if(mediaUri == null) {
+                handleNullMedia();
+                return;
+            }
             if (intent.getBooleanExtra("isDirectUpload", false)) {
                 String imageTitle = directPrefs.getString("Title", "");
                 String imageDesc = directPrefs.getString("Desc", "");
@@ -627,8 +630,22 @@ public class UploadActivity extends AuthenticatedActivity implements UploadView,
         } else if (Intent.ACTION_SEND_MULTIPLE.equals(intent.getAction())) {
             ArrayList<Uri> urisList = intent.getParcelableArrayListExtra(Intent.EXTRA_STREAM);
             Timber.i("Received multiple upload %s", urisList.size());
+
+            if(urisList.isEmpty()) {
+                handleNullMedia();
+                return;
+            }
             presenter.receive(urisList, mimeType, source);
         }
+    }
+
+    /**
+     * Handle null URI from the received intent.
+     * Current implementation will simply show a toast and finish the upload activity.
+     */
+    private void handleNullMedia() {
+        ViewUtil.showLongToast(this, R.string.error_processing_image);
+        finish();
     }
 
     private void updateCardState(boolean state, ImageView button, View... content) {
