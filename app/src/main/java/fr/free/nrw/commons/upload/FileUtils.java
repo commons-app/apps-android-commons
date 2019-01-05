@@ -152,4 +152,12 @@ public class FileUtils {
     public static FileInputStream getFileInputStream(String filePath) throws FileNotFoundException {
         return new FileInputStream(filePath);
     }
+
+    public static boolean recursivelyCreateDirs(String dirPath) {
+        File fileDir = new File(dirPath);
+        if (!fileDir.exists()) {
+            return fileDir.mkdirs();
+        }
+        return true;
+    }
 }
