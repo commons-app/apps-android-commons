@@ -15,10 +15,9 @@ import javax.inject.Named;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import butterknife.Optional;
 import fr.free.nrw.commons.quiz.QuizActivity;
 import fr.free.nrw.commons.theme.BaseActivity;
-import fr.free.nrw.commons.utils.BetaCheckerUtil;
+import fr.free.nrw.commons.utils.ConfigUtils;
 
 public class WelcomeActivity extends BaseActivity {
 
@@ -57,7 +56,7 @@ public class WelcomeActivity extends BaseActivity {
         }
 
         // Enable skip button if beta flavor
-        if (BetaCheckerUtil.isBetaFlavour()) {
+        if (ConfigUtils.isBetaFlavour()) {
             findViewById(R.id.finishTutorialButton).setVisibility(View.VISIBLE);
         }
 

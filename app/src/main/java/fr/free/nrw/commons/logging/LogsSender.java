@@ -20,7 +20,7 @@ import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
 import fr.free.nrw.commons.auth.SessionManager;
-import fr.free.nrw.commons.utils.BetaCheckerUtil;
+import fr.free.nrw.commons.utils.ConfigUtils;
 import timber.log.Timber;
 
 /**
@@ -159,7 +159,7 @@ public abstract class LogsSender implements ReportSender {
         FileOutputStream fos = new FileOutputStream(zipFile);
         BufferedOutputStream bos = new BufferedOutputStream(fos);
         ZipOutputStream zos = new ZipOutputStream(bos);
-        boolean isBeta = BetaCheckerUtil.isBetaFlavour();
+        boolean isBeta = ConfigUtils.isBetaFlavour();
         File logDir = new File(LogUtils.getLogDirectory(isBeta));
 
         if (!logDir.exists() || logDir.listFiles().length == 0) {

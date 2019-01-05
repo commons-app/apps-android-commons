@@ -29,14 +29,12 @@ import javax.inject.Named;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import fr.free.nrw.commons.BuildConfig;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
-import fr.free.nrw.commons.utils.BetaCheckerUtil;
+import fr.free.nrw.commons.utils.ConfigUtils;
 import timber.log.Timber;
 
 import static android.app.Activity.RESULT_OK;
-import static android.content.pm.PackageManager.PERMISSION_GRANTED;
 import static android.view.View.*;
 import static android.view.View.GONE;
 import static fr.free.nrw.commons.contributions.ContributionController.SELECT_FROM_GALLERY;
@@ -227,7 +225,7 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment {
     public void setAdapter(ListAdapter adapter) {
         this.contributionsList.setAdapter(adapter);
 
-        if (BetaCheckerUtil.isBetaFlavour()) {
+        if (ConfigUtils.isBetaFlavour()) {
             //TODO: add betaSetUploadCount method
             ((ContributionsFragment) getParentFragment()).betaSetUploadCount(adapter.getCount());
         }

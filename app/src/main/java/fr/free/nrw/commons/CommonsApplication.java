@@ -41,7 +41,7 @@ import fr.free.nrw.commons.logging.FileLoggingTree;
 import fr.free.nrw.commons.logging.LogUtils;
 import fr.free.nrw.commons.modifications.ModifierSequenceDao;
 import fr.free.nrw.commons.upload.FileUtils;
-import fr.free.nrw.commons.utils.BetaCheckerUtil;
+import fr.free.nrw.commons.utils.ConfigUtils;
 import fr.free.nrw.commons.utils.ContributionUtils;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
@@ -137,7 +137,7 @@ public class CommonsApplication extends Application {
      *
      */
     private void initTimber() {
-        boolean isBeta = BetaCheckerUtil.isBetaFlavour();
+        boolean isBeta = ConfigUtils.isBetaFlavour();
         String logFileName = isBeta ? "CommonsBetaAppLogs" : "CommonsAppLogs";
         String logDirectory = LogUtils.getLogDirectory(isBeta);
         FileLoggingTree tree = new FileLoggingTree(
