@@ -32,6 +32,7 @@ import butterknife.ButterKnife;
 import fr.free.nrw.commons.BuildConfig;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
+import fr.free.nrw.commons.utils.BetaCheckerUtil;
 import timber.log.Timber;
 
 import static android.app.Activity.RESULT_OK;
@@ -226,7 +227,7 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment {
     public void setAdapter(ListAdapter adapter) {
         this.contributionsList.setAdapter(adapter);
 
-        if(BuildConfig.FLAVOR.equalsIgnoreCase("beta")){
+        if (BetaCheckerUtil.isBetaFlavour()) {
             //TODO: add betaSetUploadCount method
             ((ContributionsFragment) getParentFragment()).betaSetUploadCount(adapter.getCount());
         }

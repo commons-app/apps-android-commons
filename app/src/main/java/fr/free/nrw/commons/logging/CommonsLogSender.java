@@ -8,6 +8,7 @@ import javax.inject.Singleton;
 
 import fr.free.nrw.commons.BuildConfig;
 import fr.free.nrw.commons.auth.SessionManager;
+import fr.free.nrw.commons.utils.BetaCheckerUtil;
 import fr.free.nrw.commons.utils.DeviceInfoUtil;
 
 /**
@@ -24,12 +25,12 @@ public class CommonsLogSender extends LogsSender {
 
     @Inject
     public CommonsLogSender(SessionManager sessionManager,
-                            Context context,
-                            @Named("isBeta") boolean isBeta) {
-        super(sessionManager, isBeta);
+                            Context context) {
+        super(sessionManager);
 
         this.sessionManager = sessionManager;
         this.context = context;
+        boolean isBeta = BetaCheckerUtil.isBetaFlavour();
         this.logFileName = isBeta ? "CommonsBetaAppLogs.zip" : "CommonsAppLogs.zip";
         String emailSubjectFormat = isBeta ? BETA_LOGS_PRIVATE_EMAIL_SUBJECT : LOGS_PRIVATE_EMAIL_SUBJECT;
         this.emailSubject = String.format(emailSubjectFormat, sessionManager.getUserName());

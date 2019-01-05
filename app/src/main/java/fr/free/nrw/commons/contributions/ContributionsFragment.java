@@ -62,6 +62,7 @@ import fr.free.nrw.commons.notification.NotificationController;
 import fr.free.nrw.commons.notification.UnreadNotificationsCheckAsync;
 import fr.free.nrw.commons.settings.Prefs;
 import fr.free.nrw.commons.upload.UploadService;
+import fr.free.nrw.commons.utils.BetaCheckerUtil;
 import fr.free.nrw.commons.utils.DialogUtil;
 import fr.free.nrw.commons.utils.ViewUtil;
 import io.reactivex.Observable;
@@ -182,7 +183,7 @@ public class ContributionsFragment
             setContributionsListFragment();
         }
 
-        if(!BuildConfig.FLAVOR.equalsIgnoreCase("beta")){
+        if (!BetaCheckerUtil.isBetaFlavour()) {
             setUploadCount();
         }
 
