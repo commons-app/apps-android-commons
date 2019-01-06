@@ -136,6 +136,9 @@ public class ContributionsFragment
             uploadService = (UploadService) ((HandlerService.HandlerServiceLocalBinder) binder)
                     .getService();
             isUploadServiceConnected = true;
+            if (contributionsListFragment.getAdapter() != null) {
+                ((ContributionsListAdapter)contributionsListFragment.getAdapter()).setUploadService(uploadService);
+            }
         }
 
         @Override
@@ -325,7 +328,6 @@ public class ContributionsFragment
 
             contributionsListFragment.clearSyncMessage();
             notifyAndMigrateDataSetObservers();
-
             ((ContributionsListAdapter)contributionsListFragment.getAdapter()).setUploadService(uploadService);
         }
     }
