@@ -67,6 +67,7 @@ import timber.log.Timber;
 
 import static fr.free.nrw.commons.utils.ImageUtils.Result;
 import static fr.free.nrw.commons.utils.ImageUtils.getErrorMessageForResult;
+import static fr.free.nrw.commons.wikidata.WikidataConstants.IS_DIRECT_UPLOAD;
 import static fr.free.nrw.commons.wikidata.WikidataConstants.WIKIDATA_ENTITY_ID_PREF;
 import static fr.free.nrw.commons.wikidata.WikidataConstants.WIKIDATA_ITEM_LOCATION;
 
@@ -610,24 +611,7 @@ public class UploadActivity extends AuthenticatedActivity implements UploadView,
             source = Contribution.SOURCE_EXTERNAL;
         }
 
-        if (Intent.ACTION_SEND.equals(intent.getAction())) {
-            Uri mediaUri = intent.getParcelableExtra(Intent.EXTRA_STREAM);
-            if(mediaUri == null) {
-                handleNullMedia();
-                return;
-            }
-            if (intent.getBooleanExtra("isDirectUpload", false)) {
-                String imageTitle = directPrefs.getString("Title", "");
-                String imageDesc = directPrefs.getString("Desc", "");
-                Timber.i("Received direct upload with title %s and description %s", imageTitle, imageDesc);
-                String wikidataEntityIdPref = intent.getStringExtra(WIKIDATA_ENTITY_ID_PREF);
-                String wikidataItemLocation = intent.getStringExtra(WIKIDATA_ITEM_LOCATION);
-                presenter.receiveDirect(mediaUri, mimeType, source, wikidataEntityIdPref, imageTitle, imageDesc, wikidataItemLocation);
-            } else {
-                Timber.i("Received single upload");
-                presenter.receive(mediaUri, mimeType, source);
-            }
-        } else if (Intent.ACTION_SEND_MULTIPLE.equals(intent.getAction())) {
+        if (Intent.ACTION_SEND_MULTIPLE.equals(intent.getAction())) {
             ArrayList<Uri> urisList = intent.getParcelableArrayListExtra(Intent.EXTRA_STREAM);
             Timber.i("Received multiple upload %s", urisList.size());
 
@@ -635,8 +619,31 @@ public class UploadActivity extends AuthenticatedActivity implements UploadView,
                 handleNullMedia();
                 return;
             }
-            presenter.receive(urisList, mimeType, source);
+
+            if (intent.getBooleanExtra("isDirectUpload", false)) {
+                String imageTitle = directPrefs.getString("Title", "");
+                String imageDesc = directPrefs.getString("Desc", "");
+                Timber.i("Received direct upload with title %s and description %s", imageTitle, imageDesc);
+                String wikidataEntityIdPref = intent.getStringExtra(WIKIDATA_ENTITY_ID_PREF);
+                String wikidataItemLocation = intent.getStringExtra(WIKIDATA_ITEM_LOCATION);
+                presenter.receiveDirect(urisList.get(0), mimeType, source, wikidataEntityIdPref, imageTitle, imageDesc, wikidataItemLocation);
+            } else {
+                presenter.receive(urisList, mimeType, source);
+            }
         }
+
+        resetDirectPrefs();
+    }
+
+    public void resetDirectPrefs() {
+        SharedPreferences.Editor editor = directPrefs.edit();
+        editor.remove("Title");
+        editor.remove("Desc");
+        editor.remove("Category");
+        editor.remove(WIKIDATA_ENTITY_ID_PREF);
+        editor.remove(WIKIDATA_ITEM_LOCATION);
+        editor.remove(IS_DIRECT_UPLOAD);
+        editor.apply();
     }
 
     /**

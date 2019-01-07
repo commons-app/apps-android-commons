@@ -34,6 +34,7 @@ import fr.free.nrw.commons.utils.PlaceUtils;
 import timber.log.Timber;
 
 import static fr.free.nrw.commons.theme.NavigationBaseActivity.startActivityWithFlags;
+import static fr.free.nrw.commons.wikidata.WikidataConstants.IS_DIRECT_UPLOAD;
 import static fr.free.nrw.commons.wikidata.WikidataConstants.WIKIDATA_ENTITY_ID_PREF;
 import static fr.free.nrw.commons.wikidata.WikidataConstants.WIKIDATA_ITEM_LOCATION;
 
@@ -162,7 +163,7 @@ public class PlaceRenderer extends Renderer<Place> {
             }else {
                 Timber.d("Gallery button tapped. Image title: " + place.getName() + "Image desc: " + place.getLongDescription());
                 storeSharedPrefs();
-                controller.initiateGalleryPick(fragment.getActivity());
+                controller.initiateGalleryPick(fragment.getActivity(), 1);
             }
         });
 
@@ -197,6 +198,7 @@ public class PlaceRenderer extends Renderer<Place> {
         editor.putString("Category", place.getCategory());
         editor.putString(WIKIDATA_ENTITY_ID_PREF, place.getWikiDataEntityId());
         editor.putString(WIKIDATA_ITEM_LOCATION, PlaceUtils.latLangToString(place.location));
+        editor.putBoolean(IS_DIRECT_UPLOAD, true);
         editor.apply();
     }
 
