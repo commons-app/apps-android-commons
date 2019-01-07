@@ -30,7 +30,6 @@ import android.view.ViewGroup;
 import android.widget.Adapter;
 import android.widget.AdapterView;
 import android.widget.CheckBox;
-import android.widget.CompoundButton;
 
 import android.widget.Toast;
 import butterknife.BindView;
@@ -45,7 +44,6 @@ import java.util.concurrent.CountDownLatch;
 import javax.inject.Inject;
 import javax.inject.Named;
 
-import fr.free.nrw.commons.BuildConfig;
 import fr.free.nrw.commons.HandlerService;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.R;
@@ -62,6 +60,7 @@ import fr.free.nrw.commons.notification.NotificationController;
 import fr.free.nrw.commons.notification.UnreadNotificationsCheckAsync;
 import fr.free.nrw.commons.settings.Prefs;
 import fr.free.nrw.commons.upload.UploadService;
+import fr.free.nrw.commons.utils.ConfigUtils;
 import fr.free.nrw.commons.utils.DialogUtil;
 import fr.free.nrw.commons.utils.ViewUtil;
 import io.reactivex.Observable;
@@ -71,7 +70,6 @@ import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 import timber.log.Timber;
 
-import static fr.free.nrw.commons.contributions.Contribution.STATE_FAILED;
 import static fr.free.nrw.commons.contributions.ContributionDao.Table.ALL_FIELDS;
 import static fr.free.nrw.commons.contributions.ContributionsContentProvider.BASE_URI;
 import static fr.free.nrw.commons.location.LocationServiceManager.LOCATION_REQUEST;
@@ -182,7 +180,7 @@ public class ContributionsFragment
             setContributionsListFragment();
         }
 
-        if(!BuildConfig.FLAVOR.equalsIgnoreCase("beta")){
+        if (!ConfigUtils.isBetaFlavour()) {
             setUploadCount();
         }
 

@@ -28,6 +28,7 @@ import fr.free.nrw.commons.mwapi.MediaWikiApi;
 import fr.free.nrw.commons.nearby.NearbyPlaces;
 import fr.free.nrw.commons.settings.Prefs;
 import fr.free.nrw.commons.upload.UploadController;
+import fr.free.nrw.commons.utils.ConfigUtils;
 import fr.free.nrw.commons.wikidata.WikidataEditListener;
 import fr.free.nrw.commons.wikidata.WikidataEditListenerImpl;
 
@@ -220,6 +221,6 @@ public class CommonsApplicationModule {
     @Provides
     @Singleton
     public boolean provideIsBetaVariant() {
-        return BuildConfig.FLAVOR.equals("beta");
+        return ConfigUtils.isBetaFlavour();
     }
 }

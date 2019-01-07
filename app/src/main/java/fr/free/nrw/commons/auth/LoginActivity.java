@@ -48,6 +48,7 @@ import fr.free.nrw.commons.di.ApplicationlessInjection;
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
 import fr.free.nrw.commons.theme.NavigationBaseActivity;
 import fr.free.nrw.commons.ui.widget.HtmlTextView;
+import fr.free.nrw.commons.utils.ConfigUtils;
 import fr.free.nrw.commons.utils.ViewUtil;
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -139,7 +140,7 @@ public class LoginActivity extends AccountAuthenticatorActivity {
                 .setNegativeButton(R.string.no, (dialog, which) -> dialog.cancel())
                 .show());
 
-        if (BuildConfig.FLAVOR.equals("beta")){
+        if (ConfigUtils.isBetaFlavour()) {
             loginCredentials.setText(getString(R.string.login_credential));
         } else {
             loginCredentials.setVisibility(View.GONE);
