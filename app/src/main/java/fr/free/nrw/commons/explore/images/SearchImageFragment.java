@@ -171,7 +171,7 @@ public class SearchImageFragment extends CommonsDaggerSupportFragment {
     private void handlePaginationSuccess(List<Media> mediaList) {
         progressBar.setVisibility(View.GONE);
         bottomProgressBar.setVisibility(GONE);
-        if (mediaList.size() != 0 || !queryList.get(queryList.size() - 1).getFilename().equals(mediaList.get(mediaList.size() - 1).getFilename())) {
+        if (mediaList.size() != 0 && !queryList.get(queryList.size() - 1).getFilename().equals(mediaList.get(mediaList.size() - 1).getFilename())) {
             queryList.addAll(mediaList);
             imagesAdapter.addAll(mediaList);
             imagesAdapter.notifyDataSetChanged();
