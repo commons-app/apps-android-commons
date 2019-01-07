@@ -18,6 +18,7 @@
 * Rubin16
 * Vlad5250
 * Wirbel78
+* Евгения
 * ОйЛ
 -->
 <resources>
@@ -413,4 +414,5 @@
   <string name="yes_submit">Да, отправить</string>
   <string name="no_go_back">Нет, вернуться</string>
   <string name="upload_flow_all_images_in_set">(Для всех изображений в наборе)</string>
+  <string name="error_processing_image">Произошла ошибка при загрузке файла. Пожалуйста, попробуйте позднее!</string>
 </resources>

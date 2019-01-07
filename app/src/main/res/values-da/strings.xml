@@ -352,5 +352,7 @@
   <string name="search_this_area">Søg i dette område</string>
   <string name="never_ask_again">Spørg aldrig om dette igen</string>
   <string name="display_location_permission_title">Vis placeringstilladelse</string>
+  <string name="ends_on">Slutter den:</string>
   <string name="display_campaigns">Vis kampagner</string>
+  <string name="no_image">Ingen billeder brugt</string>
 </resources>

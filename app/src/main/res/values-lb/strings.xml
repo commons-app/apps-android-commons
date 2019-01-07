@@ -314,4 +314,6 @@
   <string name="yes_submit">Jo, schécken</string>
   <string name="no_go_back">Neen, zréck goen</string>
   <string name="never_ask_again">Dëst ni méi froen</string>
+  <string name="no_image">Keng Biller benotzt</string>
+  <string name="no_image_uploaded">Keng Biller eropgelueden</string>
 </resources>

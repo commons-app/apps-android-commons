@@ -316,4 +316,7 @@
   <string name="yes_submit">Sì, invia</string>
   <string name="search_this_area">Cerca in questa area</string>
   <string name="ends_on">Termina il:</string>
+  <string name="no_image">Nessuna immagine utilizzata</string>
+  <string name="no_image_reverted">Nessuna immagine ripristinata</string>
+  <string name="no_image_uploaded">Nessuna immagine caricata</string>
 </resources>
