@@ -39,6 +39,7 @@ dependencies {
     implementation files('libs/simplemagic-1.9.jar')
     implementation "com.jakewharton:butterknife:$BUTTERKNIFE_VERSION"
     kapt "com.jakewharton:butterknife-compiler:$BUTTERKNIFE_VERSION"
+    implementation 'com.github.esafirm.android-image-picker:imagepicker:1.13.1'
     
     // Logging
     implementation 'ch.acra:acra:4.9.2'

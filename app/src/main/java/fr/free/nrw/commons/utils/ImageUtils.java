@@ -9,8 +9,8 @@ import android.graphics.Rect;
 import android.net.Uri;
 import android.support.annotation.IntDef;
 import android.support.annotation.Nullable;
-import android.util.Log;
 
+import com.esafirm.imagepicker.model.Image;
 import com.facebook.common.executors.CallerThreadExecutor;
 import com.facebook.common.references.CloseableReference;
 import com.facebook.datasource.DataSource;
@@ -24,6 +24,8 @@ import com.facebook.imagepipeline.request.ImageRequestBuilder;
 import java.io.IOException;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
+import java.util.ArrayList;
+import java.util.List;
 
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.location.LatLng;
@@ -252,5 +254,16 @@ public class ImageUtils {
         }
 
         return errorMessage.toString();
+    }
+
+    public static ArrayList<Uri> getUriListFromImages(List<Image> imageList) {
+        ArrayList<Uri> uriList = new ArrayList<>();
+        for (Image imagePath : imageList) {
+            if (!StringUtils.isNullOrWhiteSpace(imagePath.getPath())) {
+                uriList.add(Uri.parse(imagePath.getPath()));
+            }
+        }
+
+        return uriList;
     }
 }
