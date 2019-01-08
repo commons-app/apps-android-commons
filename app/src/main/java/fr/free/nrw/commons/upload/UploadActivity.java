@@ -57,6 +57,7 @@ import fr.free.nrw.commons.category.CategoryItem;
 import fr.free.nrw.commons.contributions.Contribution;
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
 import fr.free.nrw.commons.utils.DialogUtil;
+import fr.free.nrw.commons.utils.PermissionUtils;
 import fr.free.nrw.commons.utils.StringUtils;
 import fr.free.nrw.commons.utils.ViewUtil;
 import io.reactivex.Observable;
@@ -127,8 +128,6 @@ public class UploadActivity extends AuthenticatedActivity implements UploadView,
     private RVRendererAdapter<CategoryItem> categoriesAdapter;
     private CompositeDisposable compositeDisposable;
 
-    DexterPermissionObtainer dexterPermissionObtainer;
-
 
     @SuppressLint("CheckResult")
     @Override
@@ -151,12 +150,11 @@ public class UploadActivity extends AuthenticatedActivity implements UploadView,
 
         presenter.init();
 
-        dexterPermissionObtainer = new DexterPermissionObtainer(this,
+        PermissionUtils.checkPermissionsAndPerformAction(this,
                 Manifest.permission.WRITE_EXTERNAL_STORAGE,
-                getString(R.string.storage_permission),
-                getString(R.string.write_storage_permission_rationale_for_image_share));
-
-        dexterPermissionObtainer.confirmStoragePermissions().subscribe(this::receiveSharedItems);
+                this::receiveSharedItems,
+                R.string.storage_permission_title,
+                R.string.write_storage_permission_rationale_for_image_share);
     }
 
     @Override
@@ -181,9 +179,8 @@ public class UploadActivity extends AuthenticatedActivity implements UploadView,
     protected void onResume() {
         super.onResume();
         checkIfLoggedIn();
-        compositeDisposable.add(
-                dexterPermissionObtainer.confirmStoragePermissions()
-                        .subscribe(() -> presenter.addView(this)));
+
+        checkStoragePermissions();
         compositeDisposable.add(
                 RxTextView.textChanges(categoriesSearch)
                         .doOnEach(v -> categoriesSearchContainer.setError(null))
@@ -192,6 +189,14 @@ public class UploadActivity extends AuthenticatedActivity implements UploadView,
                         .observeOn(AndroidSchedulers.mainThread())
                         .subscribe(filter -> updateCategoryList(filter.toString()), Timber::e)
         );
+    }
+
+    private void checkStoragePermissions() {
+        PermissionUtils.checkPermissionsAndPerformAction(this,
+                Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                () -> presenter.addView(this),
+                R.string.storage_permission_title,
+                R.string.write_storage_permission_rationale_for_image_share);
     }
 
     @Override
@@ -429,7 +434,7 @@ public class UploadActivity extends AuthenticatedActivity implements UploadView,
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == CommonsApplication.OPEN_APPLICATION_DETAIL_SETTINGS) {
-            dexterPermissionObtainer.onManualPermissionReturned();
+            //TODO: Handle manual permission enabled
         }
     }
 

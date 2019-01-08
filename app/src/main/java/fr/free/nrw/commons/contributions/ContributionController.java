@@ -6,23 +6,15 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Build;
-import android.support.annotation.StringRes;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 
 import com.esafirm.imagepicker.features.ImagePicker;
-import com.karumi.dexter.Dexter;
-import com.karumi.dexter.PermissionToken;
-import com.karumi.dexter.listener.PermissionDeniedResponse;
-import com.karumi.dexter.listener.PermissionGrantedResponse;
-import com.karumi.dexter.listener.PermissionRequest;
-import com.karumi.dexter.listener.single.BasePermissionListener;
 
 import java.util.ArrayList;
 
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.upload.UploadActivity;
-import fr.free.nrw.commons.utils.DialogUtil;
 import fr.free.nrw.commons.utils.PermissionUtils;
 import fr.free.nrw.commons.utils.StringUtils;
 import timber.log.Timber;
@@ -56,55 +48,23 @@ public class ContributionController {
             return;
         }
 
-        checkPermissionsAndInitiateUpload(activity, Manifest.permission.WRITE_EXTERNAL_STORAGE,
-                () -> initiateCameraUpload(activity), R.string.write_storage_permission_rationale);
+        PermissionUtils.checkPermissionsAndPerformAction(activity,
+                Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                () -> initiateCameraUpload(activity),
+                R.string.storage_permission_title,
+                R.string.write_storage_permission_rationale);
     }
 
     public void initiateGalleryPick(Activity activity, int imageLimit) {
         if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.JELLY_BEAN) {
             initiateGalleryUpload(activity, imageLimit);
         } else {
-            checkPermissionsAndInitiateUpload(activity, Manifest.permission.READ_EXTERNAL_STORAGE,
-                    () -> initiateGalleryUpload(activity, imageLimit), R.string.read_storage_permission_rationale);
+            PermissionUtils.checkPermissionsAndPerformAction(activity,
+                    Manifest.permission.READ_EXTERNAL_STORAGE,
+                    () -> initiateGalleryUpload(activity, imageLimit),
+                    R.string.storage_permission_title,
+                    R.string.read_storage_permission_rationale);
         }
-    }
-
-    private void checkPermissionsAndInitiateUpload(Activity activity,
-                                                   String permission,
-                                                   Runnable onPermissionGranted,
-                                                   @StringRes int rationaleMessage) {
-        Dexter.withActivity(activity)
-                .withPermission(permission)
-                .withListener(new BasePermissionListener() {
-                    @Override
-                    public void onPermissionGranted(PermissionGrantedResponse response) {
-                        onPermissionGranted.run();
-                    }
-
-                    @Override
-                    public void onPermissionDenied(PermissionDeniedResponse response) {
-                        if (response.isPermanentlyDenied()) {
-                            DialogUtil.showAlertDialog(activity,
-                                    activity.getString(R.string.storage_permission_title),
-                                    activity.getString(rationaleMessage),
-                                    activity.getString(R.string.navigation_item_settings),
-                                    null,
-                                    () -> PermissionUtils.askUserToManuallyEnablePermissionFromSettings(activity),
-                                    null);
-                        }
-                    }
-
-                    @Override
-                    public void onPermissionRationaleShouldBeShown(PermissionRequest permission, PermissionToken token) {
-                        DialogUtil.showAlertDialog(activity,
-                                activity.getString(R.string.storage_permission_title),
-                                activity.getString(rationaleMessage),
-                                activity.getString(android.R.string.ok),
-                                activity.getString(android.R.string.cancel),
-                                token::continuePermissionRequest,
-                                token::cancelPermissionRequest);
-                    }
-                }).check();
     }
 
     private void initiateGalleryUpload(Activity activity, int imageLimit) {
