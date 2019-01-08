@@ -1,7 +1,6 @@
 package fr.free.nrw.commons.nearby;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.net.Uri;
 import android.support.transition.TransitionManager;
 import android.support.v4.app.Fragment;
@@ -30,6 +29,8 @@ import fr.free.nrw.commons.auth.LoginActivity;
 import fr.free.nrw.commons.bookmarks.locations.BookmarkLocationsDao;
 import fr.free.nrw.commons.contributions.ContributionController;
 import fr.free.nrw.commons.di.ApplicationlessInjection;
+import fr.free.nrw.commons.kvstore.BasicKvStore;
+import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.utils.PlaceUtils;
 import timber.log.Timber;
 
@@ -43,8 +44,6 @@ import static fr.free.nrw.commons.wikidata.WikidataConstants.WIKIDATA_ITEM_LOCAT
 
 public class PlaceRenderer extends Renderer<Place> {
 
-    @Inject
-    @Named("application_preferences") SharedPreferences applicationPrefs;
     @BindView(R.id.tvName) TextView tvName;
     @BindView(R.id.tvDesc) TextView tvDesc;
     @BindView(R.id.distance) TextView distance;
@@ -72,13 +71,11 @@ public class PlaceRenderer extends Renderer<Place> {
     private ContributionController controller;
     private OnBookmarkClick onBookmarkClick;
 
-    @Inject
-    BookmarkLocationsDao bookmarkLocationDao;
-    @Inject @Named("prefs") SharedPreferences prefs;
-    @Inject @Named("direct_nearby_upload_prefs") SharedPreferences directPrefs;
-    @Inject
-    @Named("default_preferences")
-    SharedPreferences defaultPrefs;
+    @Inject BookmarkLocationsDao bookmarkLocationDao;
+    @Inject @Named("application_preferences") BasicKvStore applicationKvStore;
+    @Inject @Named("defaultKvStore") BasicKvStore prefs;
+    @Inject @Named("direct_nearby_upload_prefs") JsonKvStore directKvStore;
+    @Inject @Named("default_preferences") BasicKvStore defaultKvStore;
 
     public PlaceRenderer(){
         openedItems = new ArrayList<>();
@@ -132,14 +129,14 @@ public class PlaceRenderer extends Renderer<Place> {
         });
 
         cameraButton.setOnClickListener(view2 -> {
-            if (applicationPrefs.getBoolean("login_skipped", false)) {
+            if (applicationKvStore.getBoolean("login_skipped", false)) {
                 // prompt the user to login
                 new AlertDialog.Builder(getContext())
                         .setMessage(R.string.login_alert_message)
                         .setPositiveButton(R.string.login, (dialog, which) -> {
                             startActivityWithFlags( getContext(), LoginActivity.class, Intent.FLAG_ACTIVITY_CLEAR_TOP,
                                     Intent.FLAG_ACTIVITY_SINGLE_TOP);
-                            prefs.edit().putBoolean("login_skipped", false).apply();
+                            prefs.putBoolean("login_skipped", false);
                             fragment.getActivity().finish();
                         })
                         .show();
@@ -152,14 +149,14 @@ public class PlaceRenderer extends Renderer<Place> {
 
 
         galleryButton.setOnClickListener(view3 -> {
-            if (applicationPrefs.getBoolean("login_skipped", false)) {
+            if (applicationKvStore.getBoolean("login_skipped", false)) {
                 // prompt the user to login
                 new AlertDialog.Builder(getContext())
                         .setMessage(R.string.login_alert_message)
                         .setPositiveButton(R.string.login, (dialog, which) -> {
                             startActivityWithFlags( getContext(), LoginActivity.class, Intent.FLAG_ACTIVITY_CLEAR_TOP,
                                     Intent.FLAG_ACTIVITY_SINGLE_TOP);
-                            prefs.edit().putBoolean("login_skipped", false).apply();
+                            prefs.putBoolean("login_skipped", false);
                             fragment.getActivity().finish();
                         })
                         .show();
@@ -171,14 +168,14 @@ public class PlaceRenderer extends Renderer<Place> {
         });
 
         bookmarkButton.setOnClickListener(view4 -> {
-            if (applicationPrefs.getBoolean("login_skipped", false)) {
+            if (applicationKvStore.getBoolean("login_skipped", false)) {
                 // prompt the user to login
                 new AlertDialog.Builder(getContext())
                         .setMessage(R.string.login_alert_message)
                         .setPositiveButton(R.string.login, (dialog, which) -> {
                             startActivityWithFlags( getContext(), LoginActivity.class, Intent.FLAG_ACTIVITY_CLEAR_TOP,
                                     Intent.FLAG_ACTIVITY_SINGLE_TOP);
-                            prefs.edit().putBoolean("login_skipped", false).apply();
+                            prefs.putBoolean("login_skipped", false);
                             fragment.getActivity().finish();
                         })
                         .show();
@@ -194,15 +191,13 @@ public class PlaceRenderer extends Renderer<Place> {
     }
 
     private void storeSharedPrefs() {
-        SharedPreferences.Editor editor = directPrefs.edit();
-        Timber.d("directPrefs stored");
-        editor.putString("Title", place.getName());
-        editor.putString("Desc", place.getLongDescription());
-        editor.putString("Category", place.getCategory());
-        editor.putString(WIKIDATA_ENTITY_ID_PREF, place.getWikiDataEntityId());
-        editor.putString(WIKIDATA_ITEM_LOCATION, PlaceUtils.latLangToString(place.location));
-        editor.putBoolean(IS_DIRECT_UPLOAD, true);
-        editor.apply();
+        Timber.d("directKvStore stored");
+        directKvStore.putString("Title", place.getName());
+        directKvStore.putString("Desc", place.getLongDescription());
+        directKvStore.putString("Category", place.getCategory());
+        directKvStore.putString(WIKIDATA_ENTITY_ID_PREF, place.getWikiDataEntityId());
+        directKvStore.putString(WIKIDATA_ITEM_LOCATION, PlaceUtils.latLangToString(place.location));
+        directKvStore.putBoolean(IS_DIRECT_UPLOAD, true);
     }
 
     private void closeLayout(LinearLayout buttonLayout){

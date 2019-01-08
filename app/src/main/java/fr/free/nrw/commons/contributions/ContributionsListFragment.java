@@ -2,7 +2,6 @@ package fr.free.nrw.commons.contributions;
 
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
@@ -29,6 +28,8 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
+import fr.free.nrw.commons.kvstore.BasicKvStore;
+import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.utils.ConfigUtils;
 import fr.free.nrw.commons.utils.ImageUtils;
 import fr.free.nrw.commons.utils.IntentUtils;
@@ -60,8 +61,8 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment {
     @BindView(R.id.noDataYet)
     TextView noDataYet;
 
-    @Inject @Named("default_preferences") SharedPreferences defaultPrefs;
-    @Inject @Named("direct_nearby_upload_prefs") SharedPreferences directPrefs;
+    @Inject @Named("default_preferences") BasicKvStore basicKvStore;
+    @Inject @Named("direct_nearby_upload_prefs") JsonKvStore directKvStore;
     @Inject ContributionController controller;
 
     private Animation fab_close;

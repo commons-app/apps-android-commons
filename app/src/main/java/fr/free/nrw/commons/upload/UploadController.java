@@ -7,13 +7,11 @@ import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
-import android.content.SharedPreferences;
 import android.content.res.AssetFileDescriptor;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.IBinder;
-import android.preference.PreferenceManager;
 import android.provider.MediaStore;
 import android.text.TextUtils;
 
@@ -24,31 +22,37 @@ import java.io.InputStream;
 import java.util.Date;
 import java.util.concurrent.Executors;
 
+import javax.inject.Inject;
+import javax.inject.Singleton;
+
 import fr.free.nrw.commons.HandlerService;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.auth.SessionManager;
 import fr.free.nrw.commons.contributions.Contribution;
+import fr.free.nrw.commons.kvstore.BasicKvStore;
 import fr.free.nrw.commons.settings.Prefs;
 import fr.free.nrw.commons.utils.ViewUtil;
 import timber.log.Timber;
 
+@Singleton
 public class UploadController {
     private UploadService uploadService;
     private SessionManager sessionManager;
     private Context context;
-    private SharedPreferences prefs;
+    private BasicKvStore defaultKvStore;
 
     public interface ContributionUploadProgress {
         void onUploadStarted(Contribution contribution);
     }
 
-    /**
-     * Constructs a new UploadController.
-     */
-    public UploadController(SessionManager sessionManager, Context context, SharedPreferences sharedPreferences) {
+
+    @Inject
+    public UploadController(SessionManager sessionManager,
+                            Context context,
+                            BasicKvStore store) {
         this.sessionManager = sessionManager;
         this.context = context;
-        this.prefs = sharedPreferences;
+        this.defaultKvStore = store;
     }
 
     private boolean isUploadServiceConnected;
@@ -106,13 +110,11 @@ public class UploadController {
         //Set creator, desc, and license
 
         // If author name is enabled and set, use it
-        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
-
-        if(preferences != null && preferences.getBoolean("useAuthorName", false)) {
-            String authorName = preferences.getString("authorName", "");
+        if (defaultKvStore.getBoolean("useAuthorName", false)) {
+            String authorName = defaultKvStore.getString("authorName", "");
             contribution.setCreator(authorName);
         }
-        
+
         if (TextUtils.isEmpty(contribution.getCreator())) {
             Account currentAccount = sessionManager.getCurrentAccount();
             if (currentAccount == null) {
@@ -128,7 +130,7 @@ public class UploadController {
             contribution.setDescription("");
         }
 
-        String license = prefs.getString(Prefs.DEFAULT_LICENSE, Prefs.Licenses.CC_BY_SA_3);
+        String license = defaultKvStore.getString(Prefs.DEFAULT_LICENSE, Prefs.Licenses.CC_BY_SA_3);
         contribution.setLicense(license);
 
         //FIXME: Add permission request here. Only executeAsyncTask if permission has been granted

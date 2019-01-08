@@ -2,11 +2,11 @@ package fr.free.nrw.commons.quiz;
 
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.support.v7.app.AlertDialog.Builder;
 
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.WelcomeActivity;
+import fr.free.nrw.commons.kvstore.BasicKvStore;
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
@@ -29,8 +29,8 @@ public class QuizChecker {
     public Context context;
     private String userName;
     private MediaWikiApi mediaWikiApi;
-    private SharedPreferences revertPref;
-    private SharedPreferences countPref;
+    private BasicKvStore revertKvStore;
+    private BasicKvStore countKvStore;
 
     private static final int UPLOAD_COUNT_THRESHOLD = 5;
     private static final String REVERT_PERCENTAGE_FOR_MESSAGE = "50%";
@@ -43,12 +43,16 @@ public class QuizChecker {
      * @param userName Commons user name
      * @param mediaWikiApi instance of MediaWikiApi
      */
-    public QuizChecker(Context context, String userName, MediaWikiApi mediaWikiApi) {
+    public QuizChecker(Context context,
+                       String userName,
+                       MediaWikiApi mediaWikiApi,
+                       BasicKvStore revertKvStore,
+                       BasicKvStore countKvStore) {
         this.context = context;
         this.userName = userName;
         this.mediaWikiApi = mediaWikiApi;
-        revertPref = context.getSharedPreferences(REVERT_SHARED_PREFERENCE, Context.MODE_PRIVATE);
-        countPref = context.getSharedPreferences(UPLOAD_SHARED_PREFERENCE,Context.MODE_PRIVATE);
+        this.revertKvStore = revertKvStore;
+        this.countKvStore = countKvStore;
         setUploadCount();
         setRevertCount();
     }
@@ -72,10 +76,10 @@ public class QuizChecker {
      * @param uploadCount user's upload count
      */
     private void setTotalUploadCount(int uploadCount) {
-        totalUploadCount = uploadCount - countPref.getInt(UPLOAD_SHARED_PREFERENCE,0);
+        totalUploadCount = uploadCount - countKvStore.getInt(UPLOAD_SHARED_PREFERENCE, 0);
         if ( totalUploadCount < 0){
             totalUploadCount = 0;
-            countPref.edit().putInt(UPLOAD_SHARED_PREFERENCE,0).apply();
+            countKvStore.putInt(UPLOAD_SHARED_PREFERENCE, 0);
         }
         isUploadCountFetched = true;
         calculateRevertParameter();
@@ -103,10 +107,10 @@ public class QuizChecker {
      * @param revertCountFetched count of deleted uploads
      */
     private void setRevertParameter(int revertCountFetched) {
-        revertCount = revertCountFetched - revertPref.getInt(REVERT_SHARED_PREFERENCE,0);
+        revertCount = revertCountFetched - revertKvStore.getInt(REVERT_SHARED_PREFERENCE, 0);
         if (revertCount < 0){
             revertCount = 0;
-            revertPref.edit().putInt(REVERT_SHARED_PREFERENCE, 0).apply();
+            revertKvStore.putInt(REVERT_SHARED_PREFERENCE, 0);
         }
         isRevertCountFetched = true;
         calculateRevertParameter();
@@ -117,8 +121,8 @@ public class QuizChecker {
      */
     private void calculateRevertParameter() {
         if ( revertCount < 0 || totalUploadCount < 0){
-            revertPref.edit().putInt(REVERT_SHARED_PREFERENCE, 0).apply();
-            countPref.edit().putInt(UPLOAD_SHARED_PREFERENCE,0).apply();
+            revertKvStore.putInt(REVERT_SHARED_PREFERENCE, 0);
+            countKvStore.putInt(UPLOAD_SHARED_PREFERENCE, 0);
             return;
         }
         if (isRevertCountFetched && isUploadCountFetched &&
@@ -137,10 +141,10 @@ public class QuizChecker {
         alert.setMessage(context.getResources().getString(R.string.quiz_alert_message,
                 REVERT_PERCENTAGE_FOR_MESSAGE));
         alert.setPositiveButton(R.string.about_translate_proceed, (dialog, which) -> {
-            int newRevetSharedPrefs = revertCount + revertPref.getInt(REVERT_SHARED_PREFERENCE, 0);
-            revertPref.edit().putInt(REVERT_SHARED_PREFERENCE, newRevetSharedPrefs).apply();
-            int newUploadCount = totalUploadCount + countPref.getInt(UPLOAD_SHARED_PREFERENCE, 0);
-            countPref.edit().putInt(UPLOAD_SHARED_PREFERENCE, newUploadCount).apply();
+            int newRevetSharedPrefs = revertCount + revertKvStore.getInt(REVERT_SHARED_PREFERENCE, 0);
+            revertKvStore.putInt(REVERT_SHARED_PREFERENCE, newRevetSharedPrefs);
+            int newUploadCount = totalUploadCount + countKvStore.getInt(UPLOAD_SHARED_PREFERENCE, 0);
+            countKvStore.putInt(UPLOAD_SHARED_PREFERENCE, newUploadCount);
             Intent i = new Intent(context, WelcomeActivity.class);
             i.putExtra("isQuiz", true);
             dialog.dismiss();

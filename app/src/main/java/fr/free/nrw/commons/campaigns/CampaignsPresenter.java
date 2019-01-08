@@ -1,6 +1,13 @@
 package fr.free.nrw.commons.campaigns;
 
 import android.util.Log;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Collections;
+import java.util.Date;
+import java.util.List;
+
 import fr.free.nrw.commons.BasePresenter;
 import fr.free.nrw.commons.MvpView;
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
@@ -9,11 +16,6 @@ import io.reactivex.SingleObserver;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Collections;
-import java.util.Date;
-import java.util.List;
 
 /**
  * The presenter for the campaigns view, fetches the campaigns from the api and informs the view on
@@ -33,7 +35,9 @@ public class CampaignsPresenter implements BasePresenter {
 
     @Override public void onDetachView() {
         this.view = null;
-        disposable.dispose();
+        if (disposable != null) {
+            disposable.dispose();
+        }
     }
 
     /**

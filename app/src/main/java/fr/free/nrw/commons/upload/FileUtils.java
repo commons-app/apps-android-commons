@@ -4,14 +4,12 @@ import android.annotation.SuppressLint;
 import android.content.ContentResolver;
 import android.content.ContentUris;
 import android.content.Context;
-import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.media.ExifInterface;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Environment;
 import android.os.ParcelFileDescriptor;
-import android.preference.PreferenceManager;
 import android.provider.DocumentsContract;
 import android.provider.MediaStore;
 import android.provider.OpenableColumns;
@@ -35,8 +33,6 @@ import java.security.NoSuchAlgorithmException;
 import java.util.Date;
 
 import timber.log.Timber;
-
-import static com.mapbox.mapboxsdk.Mapbox.getApplicationContext;
 
 public class FileUtils {
 
@@ -153,7 +149,9 @@ public class FileUtils {
     // Can be safely suppressed, checks for isKitKat before running isDocumentUri
     @SuppressLint("NewApi")
     @Nullable
-    public static String getPath(Context context, Uri uri) {
+    public static String getPath(Context context,
+                                 Uri uri,
+                                 boolean useExternalStorage) {
 
         String returnPath = null;
         final boolean isKitKat = Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT;
@@ -223,10 +221,7 @@ public class FileUtils {
                         = context.getContentResolver().openFileDescriptor(uri, "r");
                 if (descriptor != null) {
 
-                    SharedPreferences sharedPref = PreferenceManager
-                            .getDefaultSharedPreferences(context);
-                    boolean useExtStorage = sharedPref.getBoolean("useExternalStorage", true);
-                    if (useExtStorage) {
+                    if (useExternalStorage) {
                         copyPath = Environment.getExternalStorageDirectory().toString()
                                 + "/CommonsApp/" + new Date().getTime() + ".jpg";
                         File newFile = new File(Environment.getExternalStorageDirectory().toString() + "/CommonsApp");

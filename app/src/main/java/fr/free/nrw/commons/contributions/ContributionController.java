@@ -3,7 +3,6 @@ package fr.free.nrw.commons.contributions;
 import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Build;
 import android.support.v4.app.Fragment;
@@ -17,6 +16,8 @@ import javax.inject.Named;
 import javax.inject.Singleton;
 
 import fr.free.nrw.commons.R;
+import fr.free.nrw.commons.kvstore.BasicKvStore;
+import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.upload.UploadActivity;
 import fr.free.nrw.commons.utils.PermissionUtils;
 import fr.free.nrw.commons.utils.StringUtils;
@@ -48,21 +49,21 @@ public class ContributionController {
     public static final int NEARBY_UPLOAD_IMAGE_LIMIT = 1;
 
     private final Context context;
-    private final SharedPreferences defaultPrefs;
-    private final SharedPreferences directPrefs;
+    private final BasicKvStore defaultKvStore;
+    private final BasicKvStore directKvStore;
 
     @Inject
     public ContributionController(Context context,
-                                  @Named("default_preferences") SharedPreferences defaultSharedPrefs,
-                                  @Named("direct_nearby_upload_prefs") SharedPreferences directPrefs) {
+                                  @Named("default_preferences") BasicKvStore defaultKvStore,
+                                  @Named("direct_nearby_upload_prefs") JsonKvStore directKvStore) {
         this.context = context;
-        this.defaultPrefs = defaultSharedPrefs;
-        this.directPrefs = directPrefs;
+        this.defaultKvStore = defaultKvStore;
+        this.directKvStore = directKvStore;
     }
 
     public void initiateCameraPick(Fragment fragment,
                                    int requestCode) {
-        boolean useExtStorage = defaultPrefs.getBoolean("useExternalStorage", true);
+        boolean useExtStorage = defaultKvStore.getBoolean("useExternalStorage", true);
         if (!useExtStorage) {
             initiateCameraUpload(fragment, requestCode);
             return;
@@ -118,13 +119,13 @@ public class ContributionController {
         shareIntent.putExtra(EXTRA_STREAM, uriList);
         shareIntent.setType("image/jpeg");
 
-        boolean isDirectUpload = directPrefs.getBoolean(IS_DIRECT_UPLOAD, false);
+        boolean isDirectUpload = directKvStore.getBoolean(IS_DIRECT_UPLOAD, false);
 
         shareIntent.putExtra("isDirectUpload", isDirectUpload);
         Timber.d("Put extras into image intent, isDirectUpload is " + isDirectUpload);
 
-        String wikiDataEntityId = directPrefs.getString(WIKIDATA_ENTITY_ID_PREF, null);
-        String wikiDataItemLocation = directPrefs.getString(WIKIDATA_ITEM_LOCATION, null);
+        String wikiDataEntityId = directKvStore.getString(WIKIDATA_ENTITY_ID_PREF, null);
+        String wikiDataItemLocation = directKvStore.getString(WIKIDATA_ITEM_LOCATION, null);
 
         if (!StringUtils.isNullOrWhiteSpace(wikiDataEntityId)) {
             shareIntent.putExtra(WIKIDATA_ENTITY_ID_PREF, wikiDataEntityId);
