@@ -101,7 +101,7 @@ public class BookmarkLocationsFragment extends DaggerFragment {
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (ImagePicker.shouldHandle(requestCode, resultCode, data)) {
             List<Image> images = ImagePicker.getImages(data);
-            contributionController.handleImagesPicked(ImageUtils.getUriListFromImages(images));
+            contributionController.handleImagesPicked(ImageUtils.getUriListFromImages(images), requestCode);
         }
         super.onActivityResult(requestCode, resultCode, data);
     }

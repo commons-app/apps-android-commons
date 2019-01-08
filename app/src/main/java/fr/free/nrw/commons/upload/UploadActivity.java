@@ -434,7 +434,7 @@ public class UploadActivity extends AuthenticatedActivity implements UploadView,
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == CommonsApplication.OPEN_APPLICATION_DETAIL_SETTINGS) {
-            //TODO: Handle manual permission enabled
+            //TODO: Confirm if handling manual permission enabled is required
         }
     }
 
@@ -616,25 +616,38 @@ public class UploadActivity extends AuthenticatedActivity implements UploadView,
             source = Contribution.SOURCE_EXTERNAL;
         }
 
-        if (Intent.ACTION_SEND_MULTIPLE.equals(intent.getAction())) {
-            ArrayList<Uri> urisList = intent.getParcelableArrayListExtra(Intent.EXTRA_STREAM);
+        Timber.d("Received intent %s with action %s and mimeType %s from source %s",
+                intent.toString(),
+                intent.getAction(),
+                mimeType,
+                source);
+
+        ArrayList<Uri> urisList = new ArrayList<>();
+
+        if (Intent.ACTION_SEND.equals(intent.getAction())) {
+            Uri mediaUri = intent.getParcelableExtra(Intent.EXTRA_STREAM);
+            if (mediaUri != null) {
+                urisList.add(mediaUri);
+            }
+        } else if (Intent.ACTION_SEND_MULTIPLE.equals(intent.getAction())) {
+            urisList = intent.getParcelableArrayListExtra(Intent.EXTRA_STREAM);
             Timber.i("Received multiple upload %s", urisList.size());
+        }
 
-            if(urisList.isEmpty()) {
-                handleNullMedia();
-                return;
-            }
+        if (urisList.isEmpty()) {
+            handleNullMedia();
+            return;
+        }
 
-            if (intent.getBooleanExtra("isDirectUpload", false)) {
-                String imageTitle = directPrefs.getString("Title", "");
-                String imageDesc = directPrefs.getString("Desc", "");
-                Timber.i("Received direct upload with title %s and description %s", imageTitle, imageDesc);
-                String wikidataEntityIdPref = intent.getStringExtra(WIKIDATA_ENTITY_ID_PREF);
-                String wikidataItemLocation = intent.getStringExtra(WIKIDATA_ITEM_LOCATION);
-                presenter.receiveDirect(urisList.get(0), mimeType, source, wikidataEntityIdPref, imageTitle, imageDesc, wikidataItemLocation);
-            } else {
-                presenter.receive(urisList, mimeType, source);
-            }
+        if (intent.getBooleanExtra("isDirectUpload", false)) {
+            String imageTitle = directPrefs.getString("Title", "");
+            String imageDesc = directPrefs.getString("Desc", "");
+            Timber.i("Received direct upload with title %s and description %s", imageTitle, imageDesc);
+            String wikiDataEntityIdPref = intent.getStringExtra(WIKIDATA_ENTITY_ID_PREF);
+            String wikiDataItemLocation = intent.getStringExtra(WIKIDATA_ITEM_LOCATION);
+            presenter.receiveDirect(urisList.get(0), mimeType, source, wikiDataEntityIdPref, imageTitle, imageDesc, wikiDataItemLocation);
+        } else {
+            presenter.receive(urisList, mimeType, source);
         }
 
         resetDirectPrefs();

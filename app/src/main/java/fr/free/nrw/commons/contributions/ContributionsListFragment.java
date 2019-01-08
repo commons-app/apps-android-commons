@@ -34,6 +34,8 @@ import fr.free.nrw.commons.utils.ImageUtils;
 
 import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
+import static fr.free.nrw.commons.contributions.ContributionController.CAMERA_UPLOAD_REQUEST_CODE;
+import static fr.free.nrw.commons.contributions.ContributionController.GALLERY_UPLOAD_REQUEST_CODE;
 
 /**
  * Created by root on 01.06.2018.
@@ -100,8 +102,8 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment {
 
     private void setListeners() {
         fabPlus.setOnClickListener(view -> animateFAB(isFabOpen));
-        fabCamera.setOnClickListener(view -> controller.initiateCameraPick(getActivity()));
-        fabGallery.setOnClickListener(view -> controller.initiateGalleryPick(getActivity(), 5));
+        fabCamera.setOnClickListener(view -> controller.initiateCameraPick(getActivity(), CAMERA_UPLOAD_REQUEST_CODE));
+        fabGallery.setOnClickListener(view -> controller.initiateGalleryPick(getActivity(), 5, GALLERY_UPLOAD_REQUEST_CODE));
     }
 
     private void animateFAB(boolean isFabOpen) {
@@ -134,7 +136,7 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment {
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (ImagePicker.shouldHandle(requestCode, resultCode, data)) {
             List<Image> images = ImagePicker.getImages(data);
-            controller.handleImagesPicked(ImageUtils.getUriListFromImages(images));
+            controller.handleImagesPicked(ImageUtils.getUriListFromImages(images), requestCode);
         }
         super.onActivityResult(requestCode, resultCode, data);
     }

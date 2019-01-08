@@ -67,6 +67,8 @@ import fr.free.nrw.commons.utils.UriDeserializer;
 import fr.free.nrw.commons.utils.ViewUtil;
 import timber.log.Timber;
 
+import static fr.free.nrw.commons.contributions.ContributionController.NEARBY_CAMERA_UPLOAD_REQUEST_CODE;
+import static fr.free.nrw.commons.contributions.ContributionController.NEARBY_GALLERY_UPLOAD_REQUEST_CODE;
 import static fr.free.nrw.commons.wikidata.WikidataConstants.IS_DIRECT_UPLOAD;
 import static fr.free.nrw.commons.wikidata.WikidataConstants.WIKIDATA_ENTITY_ID_PREF;
 import static fr.free.nrw.commons.wikidata.WikidataConstants.WIKIDATA_ITEM_LOCATION;
@@ -874,7 +876,7 @@ public class NearbyMapFragment extends DaggerFragment {
             if (fabCamera.isShown()) {
                 Timber.d("Camera button tapped. Place: %s", place.toString());
                 storeSharedPrefs();
-                controller.initiateCameraPick(getActivity());
+                controller.initiateCameraPick(getActivity(), NEARBY_CAMERA_UPLOAD_REQUEST_CODE);
             }
         });
 
@@ -882,7 +884,7 @@ public class NearbyMapFragment extends DaggerFragment {
             if (fabGallery.isShown()) {
                 Timber.d("Gallery button tapped. Place: %s", place.toString());
                 storeSharedPrefs();
-                controller.initiateGalleryPick(getActivity(), 1);
+                controller.initiateGalleryPick(getActivity(), 1, NEARBY_GALLERY_UPLOAD_REQUEST_CODE);
             }
         });
     }
@@ -902,7 +904,7 @@ public class NearbyMapFragment extends DaggerFragment {
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (ImagePicker.shouldHandle(requestCode, resultCode, data)) {
             List<Image> images = ImagePicker.getImages(data);
-            controller.handleImagesPicked(ImageUtils.getUriListFromImages(images));
+            controller.handleImagesPicked(ImageUtils.getUriListFromImages(images), requestCode);
         }
         super.onActivityResult(requestCode, resultCode, data);
     }

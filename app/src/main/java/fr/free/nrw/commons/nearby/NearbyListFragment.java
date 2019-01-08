@@ -138,7 +138,7 @@ public class NearbyListFragment extends DaggerFragment {
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (ImagePicker.shouldHandle(requestCode, resultCode, data)) {
             List<Image> images = ImagePicker.getImages(data);
-            controller.handleImagesPicked(ImageUtils.getUriListFromImages(images));
+            controller.handleImagesPicked(ImageUtils.getUriListFromImages(images), requestCode);
         }
         super.onActivityResult(requestCode, resultCode, data);
     }

@@ -33,6 +33,8 @@ import fr.free.nrw.commons.di.ApplicationlessInjection;
 import fr.free.nrw.commons.utils.PlaceUtils;
 import timber.log.Timber;
 
+import static fr.free.nrw.commons.contributions.ContributionController.NEARBY_CAMERA_UPLOAD_REQUEST_CODE;
+import static fr.free.nrw.commons.contributions.ContributionController.NEARBY_GALLERY_UPLOAD_REQUEST_CODE;
 import static fr.free.nrw.commons.theme.NavigationBaseActivity.startActivityWithFlags;
 import static fr.free.nrw.commons.wikidata.WikidataConstants.IS_DIRECT_UPLOAD;
 import static fr.free.nrw.commons.wikidata.WikidataConstants.WIKIDATA_ENTITY_ID_PREF;
@@ -143,7 +145,7 @@ public class PlaceRenderer extends Renderer<Place> {
             } else {
                 Timber.d("Camera button tapped. Image title: " + place.getName() + "Image desc: " + place.getLongDescription());
                 storeSharedPrefs();
-                controller.initiateCameraPick(fragment.getActivity());
+                controller.initiateCameraPick(fragment.getActivity(), NEARBY_CAMERA_UPLOAD_REQUEST_CODE);
             }
         });
 
@@ -163,7 +165,7 @@ public class PlaceRenderer extends Renderer<Place> {
             }else {
                 Timber.d("Gallery button tapped. Image title: " + place.getName() + "Image desc: " + place.getLongDescription());
                 storeSharedPrefs();
-                controller.initiateGalleryPick(fragment.getActivity(), 1);
+                controller.initiateGalleryPick(fragment.getActivity(), 1, NEARBY_GALLERY_UPLOAD_REQUEST_CODE);
             }
         });
 
