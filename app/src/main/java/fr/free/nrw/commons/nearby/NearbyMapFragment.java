@@ -115,7 +115,6 @@ public class NearbyMapFragment extends DaggerFragment {
     private Animation fab_close;
     private Animation fab_open;
     private Animation rotate_forward;
-    public ContributionController controller;
 
     private Place place;
     private Marker selected;
@@ -136,17 +135,11 @@ public class NearbyMapFragment extends DaggerFragment {
     private Bundle bundleForUpdates;// Carry information from activity about changed nearby places and current location
     private boolean searchedAroundCurrentLocation = true;
 
-    @Inject
-    @Named("prefs")
-    SharedPreferences prefs;
-    @Inject
-    @Named("default_preferences")
-    SharedPreferences defaultPrefs;
-    @Inject
-    @Named("direct_nearby_upload_prefs")
-    SharedPreferences directPrefs;
-    @Inject
-    BookmarkLocationsDao bookmarkLocationDao;
+    @Inject ContributionController controller;
+    @Inject @Named("prefs") SharedPreferences prefs;
+    @Inject @Named("default_preferences") SharedPreferences defaultPrefs;
+    @Inject @Named("direct_nearby_upload_prefs") SharedPreferences directPrefs;
+    @Inject BookmarkLocationsDao bookmarkLocationDao;
 
     private static final double ZOOM_LEVEL = 14f;
 
@@ -158,7 +151,6 @@ public class NearbyMapFragment extends DaggerFragment {
         super.onCreate(savedInstanceState);
         Timber.d("Nearby map fragment created");
 
-        controller = new ContributionController(this, defaultPrefs, directPrefs);
         Bundle bundle = this.getArguments();
         Gson gson = new GsonBuilder()
                 .registerTypeAdapter(Uri.class, new UriDeserializer())
@@ -878,7 +870,7 @@ public class NearbyMapFragment extends DaggerFragment {
             if (fabCamera.isShown()) {
                 Timber.d("Camera button tapped. Place: %s", place.toString());
                 storeSharedPrefs();
-                controller.initiateCameraPick(getActivity(), NEARBY_CAMERA_UPLOAD_REQUEST_CODE);
+                controller.initiateCameraPick(this, NEARBY_CAMERA_UPLOAD_REQUEST_CODE);
             }
         });
 
@@ -886,7 +878,7 @@ public class NearbyMapFragment extends DaggerFragment {
             if (fabGallery.isShown()) {
                 Timber.d("Gallery button tapped. Place: %s", place.toString());
                 storeSharedPrefs();
-                controller.initiateGalleryPick(getActivity(), NEARBY_UPLOAD_IMAGE_LIMIT, NEARBY_GALLERY_UPLOAD_REQUEST_CODE);
+                controller.initiateGalleryPick(this, NEARBY_UPLOAD_IMAGE_LIMIT, NEARBY_GALLERY_UPLOAD_REQUEST_CODE);
             }
         });
     }
@@ -906,7 +898,10 @@ public class NearbyMapFragment extends DaggerFragment {
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (IntentUtils.shouldNearbyHandle(requestCode, resultCode, data)) {
             List<Image> images = ImagePicker.getImages(data);
-            controller.handleImagesPicked(ImageUtils.getUriListFromImages(images), requestCode);
+            Intent shareIntent = controller.handleImagesPicked(ImageUtils.getUriListFromImages(images), requestCode);
+            startActivity(shareIntent);
+        } else {
+            super.onActivityResult(requestCode, resultCode, data);
         }
     }
 

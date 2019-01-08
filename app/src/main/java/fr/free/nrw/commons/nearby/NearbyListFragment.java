@@ -49,9 +49,8 @@ public class NearbyListFragment extends DaggerFragment {
 
     private NearbyAdapterFactory adapterFactory;
     private RecyclerView recyclerView;
-    private ContributionController controller;
 
-
+    @Inject ContributionController controller;
     @Inject @Named("direct_nearby_upload_prefs") SharedPreferences directPrefs;
     @Inject @Named("default_preferences") SharedPreferences defaultPrefs;
 
@@ -75,8 +74,6 @@ public class NearbyListFragment extends DaggerFragment {
         View view = inflater.inflate(R.layout.fragment_nearby_list, container, false);
         recyclerView = view.findViewById(R.id.listView);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-
-        controller = new ContributionController(this, defaultPrefs, directPrefs);
         adapterFactory = new NearbyAdapterFactory(this, controller);
         return view;
     }
@@ -140,9 +137,11 @@ public class NearbyListFragment extends DaggerFragment {
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (shouldNearbyHandle(requestCode, resultCode, data)) {
             List<Image> images = ImagePicker.getImages(data);
-            controller.handleImagesPicked(ImageUtils.getUriListFromImages(images), requestCode);
+            Intent shareIntent = controller.handleImagesPicked(ImageUtils.getUriListFromImages(images), requestCode);
+            startActivity(shareIntent);
+        } else {
+            super.onActivityResult(requestCode, resultCode, data);
         }
-        super.onActivityResult(requestCode, resultCode, data);
     }
 
     /**

@@ -41,12 +41,11 @@ public class BookmarkLocationsFragment extends DaggerFragment {
     @BindView(R.id.listView) RecyclerView recyclerView;
     @BindView(R.id.parentLayout) RelativeLayout parentLayout;
 
-    @Inject
-    BookmarkLocationsController controller;
+    @Inject BookmarkLocationsController controller;
     @Inject @Named("direct_nearby_upload_prefs") SharedPreferences directPrefs;
     @Inject @Named("default_preferences") SharedPreferences defaultPrefs;
     private NearbyAdapterFactory adapterFactory;
-    private ContributionController contributionController;
+    @Inject ContributionController contributionController;
 
     /**
      * Create an instance of the fragment with the right bundle parameters
@@ -64,7 +63,6 @@ public class BookmarkLocationsFragment extends DaggerFragment {
     ) {
         View v = inflater.inflate(R.layout.fragment_bookmarks_locations, container, false);
         ButterKnife.bind(this, v);
-        contributionController = new ContributionController(this, defaultPrefs, directPrefs);
         adapterFactory = new NearbyAdapterFactory(this, contributionController);
         return v;
     }
@@ -102,7 +100,10 @@ public class BookmarkLocationsFragment extends DaggerFragment {
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (IntentUtils.shouldBookmarksHandle(requestCode, resultCode, data)) {
             List<Image> images = ImagePicker.getImages(data);
-            contributionController.handleImagesPicked(ImageUtils.getUriListFromImages(images), requestCode);
+            Intent shareIntent = contributionController.handleImagesPicked(ImageUtils.getUriListFromImages(images), requestCode);
+            startActivity(shareIntent);
+        } else {
+            super.onActivityResult(requestCode, resultCode, data);
         }
     }
 }

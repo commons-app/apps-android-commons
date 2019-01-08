@@ -62,6 +62,7 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment {
 
     @Inject @Named("default_preferences") SharedPreferences defaultPrefs;
     @Inject @Named("direct_nearby_upload_prefs") SharedPreferences directPrefs;
+    @Inject ContributionController controller;
 
     private Animation fab_close;
     private Animation fab_open;
@@ -70,13 +71,11 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment {
 
 
     private boolean isFabOpen = false;
-    public ContributionController controller;
 
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_contributions_list, container, false);
         ButterKnife.bind(this, view);
 
-        controller = new ContributionController(this, defaultPrefs, directPrefs);
         contributionsList.setOnItemClickListener((AdapterView.OnItemClickListener) getParentFragment());
 
         changeEmptyScreen(true);
@@ -104,8 +103,8 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment {
 
     private void setListeners() {
         fabPlus.setOnClickListener(view -> animateFAB(isFabOpen));
-        fabCamera.setOnClickListener(view -> controller.initiateCameraPick(getActivity(), CAMERA_UPLOAD_REQUEST_CODE));
-        fabGallery.setOnClickListener(view -> controller.initiateGalleryPick(getActivity(), MULTIPLE_UPLOAD_IMAGE_LIMIT, GALLERY_UPLOAD_REQUEST_CODE));
+        fabCamera.setOnClickListener(view -> controller.initiateCameraPick(this, CAMERA_UPLOAD_REQUEST_CODE));
+        fabGallery.setOnClickListener(view -> controller.initiateGalleryPick(this, MULTIPLE_UPLOAD_IMAGE_LIMIT, GALLERY_UPLOAD_REQUEST_CODE));
     }
 
     private void animateFAB(boolean isFabOpen) {
@@ -139,7 +138,10 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment {
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (IntentUtils.shouldContributionsListHandle(requestCode, resultCode, data)) {
             List<Image> images = ImagePicker.getImages(data);
-            controller.handleImagesPicked(ImageUtils.getUriListFromImages(images), requestCode);
+            Intent shareIntent = controller.handleImagesPicked(ImageUtils.getUriListFromImages(images), requestCode);
+            startActivity(shareIntent);
+        } else {
+            super.onActivityResult(requestCode, resultCode, data);
         }
     }
 

@@ -1,17 +1,20 @@
 package fr.free.nrw.commons.contributions;
 
 import android.Manifest;
-import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Build;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
 
 import com.esafirm.imagepicker.features.ImagePicker;
 
 import java.util.ArrayList;
+
+import javax.inject.Inject;
+import javax.inject.Named;
+import javax.inject.Singleton;
 
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.upload.UploadActivity;
@@ -29,6 +32,7 @@ import static fr.free.nrw.commons.wikidata.WikidataConstants.IS_DIRECT_UPLOAD;
 import static fr.free.nrw.commons.wikidata.WikidataConstants.WIKIDATA_ENTITY_ID_PREF;
 import static fr.free.nrw.commons.wikidata.WikidataConstants.WIKIDATA_ITEM_LOCATION;
 
+@Singleton
 public class ContributionController {
 
     //request codes
@@ -43,51 +47,53 @@ public class ContributionController {
     public static final int MULTIPLE_UPLOAD_IMAGE_LIMIT = 5;
     public static final int NEARBY_UPLOAD_IMAGE_LIMIT = 1;
 
-    private Fragment fragment;
-    private SharedPreferences defaultPrefs;
-    private SharedPreferences directPrefs;
+    private final Context context;
+    private final SharedPreferences defaultPrefs;
+    private final SharedPreferences directPrefs;
 
-    public ContributionController(Fragment fragment,
-                                  SharedPreferences defaultSharedPrefs,
-                                  SharedPreferences directPrefs) {
-        this.fragment = fragment;
+    @Inject
+    public ContributionController(Context context,
+                                  @Named("default_preferences") SharedPreferences defaultSharedPrefs,
+                                  @Named("direct_nearby_upload_prefs") SharedPreferences directPrefs) {
+        this.context = context;
         this.defaultPrefs = defaultSharedPrefs;
         this.directPrefs = directPrefs;
     }
 
-    public void initiateCameraPick(Activity activity,
+    public void initiateCameraPick(Fragment fragment,
                                    int requestCode) {
         boolean useExtStorage = defaultPrefs.getBoolean("useExternalStorage", true);
         if (!useExtStorage) {
-            initiateCameraUpload(activity, requestCode);
+            initiateCameraUpload(fragment, requestCode);
             return;
         }
 
-        PermissionUtils.checkPermissionsAndPerformAction(activity,
+        PermissionUtils.checkPermissionsAndPerformAction(fragment.getActivity(),
                 Manifest.permission.WRITE_EXTERNAL_STORAGE,
-                () -> initiateCameraUpload(activity, requestCode),
+                () -> initiateCameraUpload(fragment, requestCode),
                 R.string.storage_permission_title,
                 R.string.write_storage_permission_rationale);
     }
 
-    public void initiateGalleryPick(Activity activity,
+    public void initiateGalleryPick(Fragment fragment,
                                     int imageLimit,
                                     int requestCode) {
         if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.JELLY_BEAN) {
-            initiateGalleryUpload(activity, imageLimit, requestCode);
+            initiateGalleryUpload(fragment, imageLimit, requestCode);
         } else {
-            PermissionUtils.checkPermissionsAndPerformAction(activity,
+            PermissionUtils.checkPermissionsAndPerformAction(fragment.getActivity(),
                     Manifest.permission.READ_EXTERNAL_STORAGE,
-                    () -> initiateGalleryUpload(activity, imageLimit, requestCode),
+                    () -> initiateGalleryUpload(fragment, imageLimit, requestCode),
                     R.string.storage_permission_title,
                     R.string.read_storage_permission_rationale);
         }
     }
 
-    private void initiateGalleryUpload(Activity activity,
+    private void initiateGalleryUpload(Fragment fragment,
                                        int imageLimit,
                                        int requestCode) {
-        ImagePicker imagePicker = ImagePicker.create(activity)
+        ImagePicker imagePicker = ImagePicker.ImagePickerWithFragment
+                .create(fragment)
                 .showCamera(false)
                 .folderMode(true)
                 .includeVideo(false)
@@ -100,14 +106,13 @@ public class ContributionController {
         }
     }
 
-    private void initiateCameraUpload(Activity activity, int requestCode) {
+    private void initiateCameraUpload(Fragment fragment, int requestCode) {
         ImagePicker.cameraOnly()
-                .start(activity, requestCode);
+                .start(fragment, requestCode);
     }
 
-    public void handleImagesPicked(ArrayList<Uri> uriList, int requestCode) {
-        FragmentActivity activity = fragment.getActivity();
-        Intent shareIntent = new Intent(activity, UploadActivity.class);
+    public Intent handleImagesPicked(ArrayList<Uri> uriList, int requestCode) {
+        Intent shareIntent = new Intent(context, UploadActivity.class);
         shareIntent.setAction(ACTION_SEND_MULTIPLE);
         shareIntent.putExtra(EXTRA_SOURCE, getSourceFromRequestCode(requestCode));
         shareIntent.putExtra(EXTRA_STREAM, uriList);
@@ -126,9 +131,7 @@ public class ContributionController {
             shareIntent.putExtra(WIKIDATA_ITEM_LOCATION, wikiDataItemLocation);
         }
 
-        if (activity != null) {
-            activity.startActivity(shareIntent);
-        }
+        return shareIntent;
     }
 
     private String getSourceFromRequestCode(int requestCode) {
