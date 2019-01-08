@@ -34,6 +34,8 @@ import fr.free.nrw.commons.utils.ImageUtils;
 import fr.free.nrw.commons.utils.UriDeserializer;
 import timber.log.Timber;
 
+import static fr.free.nrw.commons.utils.IntentUtils.shouldNearbyHandle;
+
 public class NearbyListFragment extends DaggerFragment {
     private Bundle bundleForUpdates; // Carry information from activity about changed nearby places and current location
 
@@ -136,7 +138,7 @@ public class NearbyListFragment extends DaggerFragment {
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (ImagePicker.shouldHandle(requestCode, resultCode, data)) {
+        if (shouldNearbyHandle(requestCode, resultCode, data)) {
             List<Image> images = ImagePicker.getImages(data);
             controller.handleImagesPicked(ImageUtils.getUriListFromImages(images), requestCode);
         }

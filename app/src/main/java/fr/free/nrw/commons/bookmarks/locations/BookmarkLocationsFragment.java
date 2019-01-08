@@ -32,6 +32,7 @@ import fr.free.nrw.commons.contributions.ContributionController;
 import fr.free.nrw.commons.nearby.NearbyAdapterFactory;
 import fr.free.nrw.commons.nearby.Place;
 import fr.free.nrw.commons.utils.ImageUtils;
+import fr.free.nrw.commons.utils.IntentUtils;
 
 public class BookmarkLocationsFragment extends DaggerFragment {
 
@@ -99,10 +100,9 @@ public class BookmarkLocationsFragment extends DaggerFragment {
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (ImagePicker.shouldHandle(requestCode, resultCode, data)) {
+        if (IntentUtils.shouldBookmarksHandle(requestCode, resultCode, data)) {
             List<Image> images = ImagePicker.getImages(data);
             contributionController.handleImagesPicked(ImageUtils.getUriListFromImages(images), requestCode);
         }
-        super.onActivityResult(requestCode, resultCode, data);
     }
 }

@@ -61,6 +61,7 @@ import fr.free.nrw.commons.auth.LoginActivity;
 import fr.free.nrw.commons.bookmarks.locations.BookmarkLocationsDao;
 import fr.free.nrw.commons.contributions.ContributionController;
 import fr.free.nrw.commons.utils.ImageUtils;
+import fr.free.nrw.commons.utils.IntentUtils;
 import fr.free.nrw.commons.utils.LocationUtils;
 import fr.free.nrw.commons.utils.PlaceUtils;
 import fr.free.nrw.commons.utils.UriDeserializer;
@@ -903,11 +904,10 @@ public class NearbyMapFragment extends DaggerFragment {
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (ImagePicker.shouldHandle(requestCode, resultCode, data)) {
+        if (IntentUtils.shouldNearbyHandle(requestCode, resultCode, data)) {
             List<Image> images = ImagePicker.getImages(data);
             controller.handleImagesPicked(ImageUtils.getUriListFromImages(images), requestCode);
         }
-        super.onActivityResult(requestCode, resultCode, data);
     }
 
     private void openWebView(Uri link) {

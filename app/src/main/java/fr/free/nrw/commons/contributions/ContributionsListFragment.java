@@ -31,6 +31,7 @@ import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
 import fr.free.nrw.commons.utils.ConfigUtils;
 import fr.free.nrw.commons.utils.ImageUtils;
+import fr.free.nrw.commons.utils.IntentUtils;
 
 import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
@@ -134,12 +135,12 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment {
         parentFragment.waitForContributionsListFragment.countDown();
     }
 
+    @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (ImagePicker.shouldHandle(requestCode, resultCode, data)) {
+        if (IntentUtils.shouldContributionsListHandle(requestCode, resultCode, data)) {
             List<Image> images = ImagePicker.getImages(data);
             controller.handleImagesPicked(ImageUtils.getUriListFromImages(images), requestCode);
         }
-        super.onActivityResult(requestCode, resultCode, data);
     }
 
 
