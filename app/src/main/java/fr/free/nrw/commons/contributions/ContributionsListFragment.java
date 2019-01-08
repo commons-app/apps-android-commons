@@ -36,6 +36,7 @@ import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
 import static fr.free.nrw.commons.contributions.ContributionController.CAMERA_UPLOAD_REQUEST_CODE;
 import static fr.free.nrw.commons.contributions.ContributionController.GALLERY_UPLOAD_REQUEST_CODE;
+import static fr.free.nrw.commons.contributions.ContributionController.MULTIPLE_UPLOAD_IMAGE_LIMIT;
 
 /**
  * Created by root on 01.06.2018.
@@ -103,7 +104,7 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment {
     private void setListeners() {
         fabPlus.setOnClickListener(view -> animateFAB(isFabOpen));
         fabCamera.setOnClickListener(view -> controller.initiateCameraPick(getActivity(), CAMERA_UPLOAD_REQUEST_CODE));
-        fabGallery.setOnClickListener(view -> controller.initiateGalleryPick(getActivity(), 5, GALLERY_UPLOAD_REQUEST_CODE));
+        fabGallery.setOnClickListener(view -> controller.initiateGalleryPick(getActivity(), MULTIPLE_UPLOAD_IMAGE_LIMIT, GALLERY_UPLOAD_REQUEST_CODE));
     }
 
     private void animateFAB(boolean isFabOpen) {

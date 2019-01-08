@@ -31,12 +31,17 @@ import static fr.free.nrw.commons.wikidata.WikidataConstants.WIKIDATA_ITEM_LOCAT
 
 public class ContributionController {
 
+    //request codes
     public static final int CAMERA_UPLOAD_REQUEST_CODE = 10011;
     public static final int GALLERY_UPLOAD_REQUEST_CODE = 10012;
     public static final int NEARBY_CAMERA_UPLOAD_REQUEST_CODE = 10013;
     public static final int NEARBY_GALLERY_UPLOAD_REQUEST_CODE = 10014;
     public static final int BOOKMARK_CAMERA_UPLOAD_REQUEST_CODE = 10015;
     public static final int BOOKMARK_GALLERY_UPLOAD_REQUEST_CODE = 10016;
+
+    //upload limits
+    public static final int MULTIPLE_UPLOAD_IMAGE_LIMIT = 5;
+    public static final int NEARBY_UPLOAD_IMAGE_LIMIT = 1;
 
     private Fragment fragment;
     private SharedPreferences defaultPrefs;
