@@ -17,6 +17,7 @@ import javax.inject.Named;
 import javax.inject.Singleton;
 
 import fr.free.nrw.commons.R;
+import fr.free.nrw.commons.media.FrescoImageLoader;
 import fr.free.nrw.commons.upload.UploadActivity;
 import fr.free.nrw.commons.utils.PermissionUtils;
 import fr.free.nrw.commons.utils.StringUtils;
@@ -97,6 +98,7 @@ public class ContributionController {
                 .showCamera(false)
                 .folderMode(true)
                 .includeVideo(false)
+                .imageLoader(new FrescoImageLoader())
                 .enableLog(true);
 
         if (imageLimit > 1) {
