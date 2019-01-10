@@ -190,4 +190,7 @@
   <string name="notifications_mention" fuzzy="true">%1$s us ha mencionat a %2$s.</string>
   <string name="about_faq" fuzzy="true">Preguntes freqüents</string>
   <string name="no_images_found">No s’ha trobat cap imatge.</string>
+  <string name="search_tab_title_media">MULTIMÈDIA</string>
+  <string name="search_tab_title_categories">CATEGORIES</string>
+  <string name="no_recent_searches">No hi ha cap cerca recent</string>
 </resources>
