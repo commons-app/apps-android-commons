@@ -17,6 +17,7 @@ import fr.free.nrw.commons.category.CategoriesModel;
 import fr.free.nrw.commons.contributions.Contribution;
 import fr.free.nrw.commons.kvstore.BasicKvStore;
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
+import fr.free.nrw.commons.nearby.Place;
 import fr.free.nrw.commons.settings.Prefs;
 import fr.free.nrw.commons.utils.ImageUtils;
 import io.reactivex.Completable;
@@ -98,10 +99,8 @@ public class UploadPresenter {
     @SuppressLint("CheckResult")
     void receiveDirect(Uri media, String mimeType,
                        @Contribution.FileSource String source,
-                       String wikidataEntityIdPref,
-                       String title, String desc,
-                       String wikidataItemLocation) {
-        Completable.fromRunnable(() -> uploadModel.receiveDirect(media, mimeType, source, wikidataEntityIdPref, title, desc, similarImageInterface, wikidataItemLocation))
+                       Place place) {
+        Completable.fromRunnable(() -> uploadModel.receiveDirect(media, mimeType, source, place, similarImageInterface))
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(() -> {

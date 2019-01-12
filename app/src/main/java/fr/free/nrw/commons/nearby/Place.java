@@ -62,6 +62,10 @@ public class Place implements Parcelable {
         return label;
     }
 
+    public LatLng getLocation() {
+        return location;
+    }
+
     /**
      * Gets the long description of the place
      * @return long description
@@ -93,7 +97,7 @@ public class Place implements Parcelable {
      * @return returns the entity id if wikidata link exists
      */
     @Nullable
-    String getWikiDataEntityId() {
+    public String getWikiDataEntityId() {
         if (!hasWikidataLink()) {
             Timber.d("Wikidata entity ID is null for place with sitelink %s", siteLinks.toString());
             return null;

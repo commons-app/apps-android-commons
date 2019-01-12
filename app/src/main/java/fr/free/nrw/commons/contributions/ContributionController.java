@@ -18,10 +18,9 @@ import javax.inject.Singleton;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.kvstore.BasicKvStore;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
+import fr.free.nrw.commons.nearby.Place;
 import fr.free.nrw.commons.upload.UploadActivity;
 import fr.free.nrw.commons.utils.PermissionUtils;
-import fr.free.nrw.commons.utils.StringUtils;
-import timber.log.Timber;
 
 import static android.content.Intent.ACTION_SEND_MULTIPLE;
 import static android.content.Intent.EXTRA_STREAM;
@@ -29,9 +28,7 @@ import static fr.free.nrw.commons.contributions.Contribution.SOURCE_CAMERA;
 import static fr.free.nrw.commons.contributions.Contribution.SOURCE_EXTERNAL;
 import static fr.free.nrw.commons.contributions.Contribution.SOURCE_GALLERY;
 import static fr.free.nrw.commons.upload.UploadService.EXTRA_SOURCE;
-import static fr.free.nrw.commons.wikidata.WikidataConstants.IS_DIRECT_UPLOAD;
-import static fr.free.nrw.commons.wikidata.WikidataConstants.WIKIDATA_ENTITY_ID_PREF;
-import static fr.free.nrw.commons.wikidata.WikidataConstants.WIKIDATA_ITEM_LOCATION;
+import static fr.free.nrw.commons.wikidata.WikidataConstants.PLACE_OBJECT;
 
 @Singleton
 public class ContributionController {
@@ -50,7 +47,7 @@ public class ContributionController {
 
     private final Context context;
     private final BasicKvStore defaultKvStore;
-    private final BasicKvStore directKvStore;
+    private final JsonKvStore directKvStore;
 
     @Inject
     public ContributionController(Context context,
@@ -118,18 +115,9 @@ public class ContributionController {
         shareIntent.putExtra(EXTRA_SOURCE, getSourceFromRequestCode(requestCode));
         shareIntent.putExtra(EXTRA_STREAM, uriList);
         shareIntent.setType("image/jpeg");
-
-        boolean isDirectUpload = directKvStore.getBoolean(IS_DIRECT_UPLOAD, false);
-
-        shareIntent.putExtra("isDirectUpload", isDirectUpload);
-        Timber.d("Put extras into image intent, isDirectUpload is " + isDirectUpload);
-
-        String wikiDataEntityId = directKvStore.getString(WIKIDATA_ENTITY_ID_PREF, null);
-        String wikiDataItemLocation = directKvStore.getString(WIKIDATA_ITEM_LOCATION, null);
-
-        if (!StringUtils.isNullOrWhiteSpace(wikiDataEntityId)) {
-            shareIntent.putExtra(WIKIDATA_ENTITY_ID_PREF, wikiDataEntityId);
-            shareIntent.putExtra(WIKIDATA_ITEM_LOCATION, wikiDataItemLocation);
+        Place place = directKvStore.getJson(PLACE_OBJECT, Place.class);
+        if (place != null) {
+            shareIntent.putExtra(PLACE_OBJECT, place);
         }
 
         return shareIntent;

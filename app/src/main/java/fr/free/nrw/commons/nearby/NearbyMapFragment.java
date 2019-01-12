@@ -64,7 +64,6 @@ import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.utils.ImageUtils;
 import fr.free.nrw.commons.utils.IntentUtils;
 import fr.free.nrw.commons.utils.LocationUtils;
-import fr.free.nrw.commons.utils.PlaceUtils;
 import fr.free.nrw.commons.utils.UriDeserializer;
 import fr.free.nrw.commons.utils.ViewUtil;
 import timber.log.Timber;
@@ -72,9 +71,7 @@ import timber.log.Timber;
 import static fr.free.nrw.commons.contributions.ContributionController.NEARBY_CAMERA_UPLOAD_REQUEST_CODE;
 import static fr.free.nrw.commons.contributions.ContributionController.NEARBY_GALLERY_UPLOAD_REQUEST_CODE;
 import static fr.free.nrw.commons.contributions.ContributionController.NEARBY_UPLOAD_IMAGE_LIMIT;
-import static fr.free.nrw.commons.wikidata.WikidataConstants.IS_DIRECT_UPLOAD;
-import static fr.free.nrw.commons.wikidata.WikidataConstants.WIKIDATA_ENTITY_ID_PREF;
-import static fr.free.nrw.commons.wikidata.WikidataConstants.WIKIDATA_ITEM_LOCATION;
+import static fr.free.nrw.commons.wikidata.WikidataConstants.PLACE_OBJECT;
 
 public class NearbyMapFragment extends DaggerFragment {
 
@@ -885,12 +882,8 @@ public class NearbyMapFragment extends DaggerFragment {
     }
 
     void storeSharedPrefs() {
-        directKvStore.putString("Title", place.getName());
-        directKvStore.putString("Desc", place.getLongDescription());
-        directKvStore.putString("Category", place.getCategory());
-        directKvStore.putString(WIKIDATA_ENTITY_ID_PREF, place.getWikiDataEntityId());
-        directKvStore.putString(WIKIDATA_ITEM_LOCATION, PlaceUtils.latLangToString(place.location));
-        directKvStore.putBoolean(IS_DIRECT_UPLOAD, true);
+        Timber.d("Store place object %s", place.toString());
+        directKvStore.putJson(PLACE_OBJECT, place);
     }
 
     @Override

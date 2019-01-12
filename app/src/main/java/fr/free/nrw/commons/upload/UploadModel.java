@@ -20,7 +20,9 @@ import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.auth.SessionManager;
 import fr.free.nrw.commons.contributions.Contribution;
 import fr.free.nrw.commons.kvstore.BasicKvStore;
+import fr.free.nrw.commons.location.LatLng;
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
+import fr.free.nrw.commons.nearby.Place;
 import fr.free.nrw.commons.settings.Prefs;
 import fr.free.nrw.commons.utils.BitmapRegionDecoderWrapper;
 import fr.free.nrw.commons.utils.ImageUtils;
@@ -124,19 +126,19 @@ public class UploadModel {
     }
 
     @SuppressLint("CheckResult")
-    void receiveDirect(Uri media, String mimeType, String source, String wikiDataEntityId, String title, String desc, SimilarImageInterface similarImageInterface, String wikiDataItemLocation) {
+    void receiveDirect(Uri media, String mimeType, String source, Place place, SimilarImageInterface similarImageInterface) {
         initDefaultValues();
         long fileCreatedDate = getFileCreatedDate(media);
         String filePath = this.cacheFileUpload(media);
         Uri uri = Uri.fromFile(new File(filePath));
         fileProcessor.initFileDetails(filePath, context.getContentResolver());
         UploadItem item = new UploadItem(uri, mimeType, source, fileProcessor.processFileCoordinates(similarImageInterface),
-                fileUtilsWrapper.getFileExt(filePath), wikiDataEntityId, fileCreatedDate);
-        item.title.setTitleText(title);
-        item.descriptions.get(0).setDescriptionText(desc);
+                fileUtilsWrapper.getFileExt(filePath), place.getWikiDataEntityId(), fileCreatedDate);
+        item.title.setTitleText(place.getName());
+        item.descriptions.get(0).setDescriptionText(place.getLongDescription());
         //TODO figure out if default descriptions in other languages exist
         item.descriptions.get(0).setLanguageCode("en");
-        checkImageQuality(wikiDataEntityId, wikiDataItemLocation, filePath)
+        checkImageQuality(place.getWikiDataEntityId(), place.getLocation(), filePath)
                 .observeOn(Schedulers.io())
                 .subscribe(item.imageQuality::onNext, Timber::e);
         items.add(item);
@@ -144,10 +146,10 @@ public class UploadModel {
         items.get(0).first = true;
     }
 
-    private Single<Integer> checkImageQuality(String wikiDataEntityId, String wikiDataItemLocation, String filePath) {
+    private Single<Integer> checkImageQuality(String wikiDataEntityId, LatLng latLng, String filePath) {
         return Single.zip(
                 checkDuplicateFile(filePath),
-                checkImageCoordinates(wikiDataEntityId, wikiDataItemLocation, filePath),
+                checkImageCoordinates(wikiDataEntityId, latLng, filePath),
                 checkDarkImage(filePath), //Returns IMAGE_DARK or IMAGE_OK
                 (dupe, wrongGeo, dark) -> dupe | wrongGeo | dark);
     }
@@ -159,13 +161,13 @@ public class UploadModel {
                 .map(imageUtilsWrapper::checkIfImageIsTooDark);
     }
 
-    private Single<Integer> checkImageCoordinates(String wikiDataEntityId, String wikiDataItemLocation, String filePath) {
+    private Single<Integer> checkImageCoordinates(String wikiDataEntityId, LatLng latLng, String filePath) {
         if (StringUtils.isNullOrWhiteSpace(wikiDataEntityId)) {
             return Single.just(IMAGE_OK);
         }
         return Single.fromCallable(() -> filePath)
                 .map(fileUtilsWrapper::getGeolocationOfFile)
-                .map(geoLocation -> imageUtilsWrapper.checkImageGeolocationIsDifferent(geoLocation, wikiDataItemLocation))
+                .map(geoLocation -> imageUtilsWrapper.checkImageGeolocationIsDifferent(geoLocation, latLng))
                 .map(r -> r ? ImageUtils.IMAGE_GEOLOCATION_DIFFERENT : IMAGE_OK);
     }
 

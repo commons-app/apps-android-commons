@@ -100,22 +100,20 @@ public class ImageUtils {
 
     /**
      * @param geolocationOfFileString Geolocation of image. If geotag doesn't exists, then this will be an empty string
-     * @param wikidataItemLocationString Location of wikidata item will be edited after upload
+     * @param latLng Location of wikidata item will be edited after upload
      * @return false if image is neither dark nor blurry or if the input bitmapRegionDecoder provided is null
      * true if geolocation of the image and wikidata item are different
      */
-    static boolean checkImageGeolocationIsDifferent(String geolocationOfFileString, String wikidataItemLocationString) {
+    static boolean checkImageGeolocationIsDifferent(String geolocationOfFileString, LatLng latLng) {
         Timber.d("Comparing geolocation of file with nearby place location");
-        if (geolocationOfFileString == null || geolocationOfFileString == "") { // Means that geolocation for this image is not given
+        if (latLng == null) { // Means that geolocation for this image is not given
             return false; // Since we don't know geolocation of file, we choose letting upload
         }
 
         String[] geolocationOfFile = geolocationOfFileString.split("\\|");
-        String[] wikidataItemLocation = wikidataItemLocationString.split("/");
-
         Double distance = LengthUtils.computeDistanceBetween(
                 new LatLng(Double.parseDouble(geolocationOfFile[0]),Double.parseDouble(geolocationOfFile[1]),0)
-                , new LatLng(Double.parseDouble(wikidataItemLocation[0]), Double.parseDouble(wikidataItemLocation[1]),0));
+                , latLng);
         // Distance is more than 1 km, means that geolocation is wrong
         return distance >= 1000;
     }
