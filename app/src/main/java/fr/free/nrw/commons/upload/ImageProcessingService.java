@@ -10,6 +10,9 @@ import fr.free.nrw.commons.utils.ImageUtilsWrapper;
 import fr.free.nrw.commons.utils.StringUtils;
 import io.reactivex.Single;
 
+/**
+ * Methods for pre-processing images to be uploaded
+ */
 @Singleton
 public class ImageProcessingService {
     private final FileUtilsWrapper fileUtilsWrapper;
@@ -29,10 +32,21 @@ public class ImageProcessingService {
         this.mwApi = mwApi;
     }
 
+    /**
+     * Check image quality before upload
+     * - checks duplicate image
+     * - checks dark image
+     */
     public Single<Integer> checkImageQuality(String filePath) {
         return checkImageQuality(null, null, filePath);
     }
 
+    /**
+     * Check image quality before upload
+     * - checks duplicate image
+     * - checks dark image
+     * - checks geolocation for image
+     */
     public Single<Integer> checkImageQuality(String wikidataEntityIdPref, String wikidataItemLocation, String filePath) {
         return Single.zip(
                 checkDuplicateImage(filePath),
@@ -41,6 +55,11 @@ public class ImageProcessingService {
                 (dupe, wrongGeo, dark) -> dupe | wrongGeo | dark);
     }
 
+    /**
+     * Checks for duplicate image
+     * @param filePath file to be checked
+     * @return IMAGE_DUPLICATE or IMAGE_OK
+     */
     private Single<Integer> checkDuplicateImage(String filePath) {
         return Single.fromCallable(() ->
                 fileUtilsWrapper.getFileInputStream(filePath))
@@ -49,6 +68,11 @@ public class ImageProcessingService {
                 .map(b -> b ? ImageUtils.IMAGE_DUPLICATE : ImageUtils.IMAGE_OK);
     }
 
+    /**
+     * Checks for dark image
+     * @param filePath file to be checked
+     * @return IMAGE_DARK or IMAGE_OK
+     */
     private Single<Integer> checkDarkImage(String filePath) {
         return Single.fromCallable(() ->
                 fileUtilsWrapper.getFileInputStream(filePath))
@@ -56,6 +80,11 @@ public class ImageProcessingService {
                 .flatMap(imageUtilsWrapper::checkIfImageIsTooDark);
     }
 
+    /**
+     * Checks for image geolocation
+     * @param filePath file to be checked
+     * @return IMAGE_GEOLOCATION_DIFFERENT or IMAGE_OK
+     */
     private Single<Integer> checkImageGeoLocation(String wikidataEntityId, String wikidataItemLocation, String filePath) {
         if (StringUtils.isNullOrWhiteSpace(wikidataEntityId)) {
             return Single.just(ImageUtils.IMAGE_OK);
