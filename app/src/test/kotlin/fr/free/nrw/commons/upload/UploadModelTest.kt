@@ -4,7 +4,6 @@ import android.app.Application
 import android.content.ContentResolver
 import android.content.Context
 import android.content.SharedPreferences
-import android.graphics.BitmapRegionDecoder
 import android.net.Uri
 import fr.free.nrw.commons.auth.SessionManager
 import fr.free.nrw.commons.kvstore.BasicKvStore
@@ -13,7 +12,7 @@ import fr.free.nrw.commons.mwapi.MediaWikiApi
 import fr.free.nrw.commons.nearby.Place
 import fr.free.nrw.commons.utils.BitmapRegionDecoderWrapper
 import fr.free.nrw.commons.utils.ImageUtils.IMAGE_OK
-import fr.free.nrw.commons.utils.ImageUtilsWrapper
+import io.reactivex.Single
 import org.junit.After
 import org.junit.Assert.assertFalse
 import org.junit.Assert.assertTrue
@@ -51,11 +50,9 @@ class UploadModelTest {
     @Mock
     internal var fileUtilsWrapper: FileUtilsWrapper? = null
     @Mock
-    internal var imageUtilsWrapper: ImageUtilsWrapper? = null
-    @Mock
-    internal var bitmapRegionDecoderWrapper: BitmapRegionDecoderWrapper? = null
-    @Mock
     internal var fileProcessor: FileProcessor? = null
+    @Mock
+    internal var imageProcessingService: ImageProcessingService? = null
 
     @InjectMocks
     var uploadModel: UploadModel? = null
@@ -77,12 +74,10 @@ class UploadModelTest {
                 .thenReturn(mock(FileInputStream::class.java))
         `when`(fileUtilsWrapper!!.getGeolocationOfFile(anyString()))
                 .thenReturn("")
-        `when`(imageUtilsWrapper!!.checkIfImageIsTooDark(any(BitmapRegionDecoder::class.java)))
-                .thenReturn(IMAGE_OK)
-        `when`(imageUtilsWrapper!!.checkImageGeolocationIsDifferent(anyString(), any(LatLng::class.java)))
-                .thenReturn(false)
-        `when`(bitmapRegionDecoderWrapper!!.newInstance(any(FileInputStream::class.java), anyBoolean()))
-                .thenReturn(mock(BitmapRegionDecoder::class.java))
+        `when`(imageProcessingService!!.checkImageQuality(anyString()))
+                .thenReturn(Single.just(IMAGE_OK))
+        `when`(imageProcessingService!!.checkImageQuality(anyString(), anyString(), anyString()))
+                .thenReturn(Single.just(IMAGE_OK))
 
     }
 

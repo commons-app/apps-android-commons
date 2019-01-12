@@ -29,7 +29,7 @@ import fr.free.nrw.commons.utils.ImageUtils;
 import fr.free.nrw.commons.utils.ImageUtilsWrapper;
 import fr.free.nrw.commons.utils.StringUtils;
 import io.reactivex.Observable;
-import io.reactivex.Single;
+import io.reactivex.Scheduler;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
@@ -67,9 +67,8 @@ public class UploadModel {
     private SessionManager sessionManager;
     private Uri currentMediaUri;
     private FileUtilsWrapper fileUtilsWrapper;
-    private ImageUtilsWrapper imageUtilsWrapper;
-    private BitmapRegionDecoderWrapper bitmapRegionDecoderWrapper;
     private FileProcessor fileProcessor;
+    private final ImageProcessingService imageProcessingService;
 
     @Inject
     UploadModel(@Named("licenses") List<String> licenses,
@@ -79,13 +78,10 @@ public class UploadModel {
                 MediaWikiApi mwApi,
                 SessionManager sessionManager,
                 FileUtilsWrapper fileUtilsWrapper,
-                ImageUtilsWrapper imageUtilsWrapper,
-                BitmapRegionDecoderWrapper bitmapRegionDecoderWrapper,
-                FileProcessor fileProcessor) {
+                FileProcessor fileProcessor, ImageProcessingService imageProcessingService) {
         this.licenses = licenses;
         this.basicKvStore = basicKvStore;
         this.license = basicKvStore.getString(Prefs.DEFAULT_LICENSE, Prefs.Licenses.CC_BY_SA_3);
-        this.bitmapRegionDecoderWrapper = bitmapRegionDecoderWrapper;
         this.licensesByName = licensesByName;
         this.context = context;
         this.mwApi = mwApi;
@@ -93,7 +89,8 @@ public class UploadModel {
         this.sessionManager = sessionManager;
         this.fileUtilsWrapper = fileUtilsWrapper;
         this.fileProcessor = fileProcessor;
-        this.imageUtilsWrapper = imageUtilsWrapper;
+        useExtStorage = this.basicKvStore.getBoolean("useExternalStorage", false);
+        this.imageProcessingService = imageProcessingService;
         useExtStorage = this.basicKvStore.getBoolean("useExternalStorage", false);
     }
 
@@ -115,8 +112,8 @@ public class UploadModel {
                     fileProcessor.initFileDetails(filePath, context.getContentResolver());
                     UploadItem item = new UploadItem(uri, mimeType, source, fileProcessor.processFileCoordinates(similarImageInterface),
                             fileUtilsWrapper.getFileExt(filePath), null, fileCreatedDate);
-                    checkImageQuality(null, null, filePath)
-                            .observeOn(Schedulers.io())
+                    imageProcessingService.checkImageQuality(filePath)
+                            .subscribeOn(Schedulers.computation())
                             .subscribe(item.imageQuality::onNext, Timber::e);
                     return item;
                 });
@@ -138,45 +135,13 @@ public class UploadModel {
         item.descriptions.get(0).setDescriptionText(place.getLongDescription());
         //TODO figure out if default descriptions in other languages exist
         item.descriptions.get(0).setLanguageCode("en");
-        checkImageQuality(place.getWikiDataEntityId(), place.getLocation(), filePath)
-                .observeOn(Schedulers.io())
-                .subscribe(item.imageQuality::onNext, Timber::e);
+        imageProcessingService
+                .checkImageQuality(wikidataEntityIdPref, wikidataItemLocation, filePath)
+                .subscribeOn(Schedulers.computation())
+                .subscribe(item.imageQuality::onNext);
         items.add(item);
         items.get(0).selected = true;
         items.get(0).first = true;
-    }
-
-    private Single<Integer> checkImageQuality(String wikiDataEntityId, LatLng latLng, String filePath) {
-        return Single.zip(
-                checkDuplicateFile(filePath),
-                checkImageCoordinates(wikiDataEntityId, latLng, filePath),
-                checkDarkImage(filePath), //Returns IMAGE_DARK or IMAGE_OK
-                (dupe, wrongGeo, dark) -> dupe | wrongGeo | dark);
-    }
-
-    private Single<Integer> checkDarkImage(String filePath) {
-        return Single.fromCallable(() ->
-                fileUtilsWrapper.getFileInputStream(filePath))
-                .map(file -> bitmapRegionDecoderWrapper.newInstance(file, false))
-                .map(imageUtilsWrapper::checkIfImageIsTooDark);
-    }
-
-    private Single<Integer> checkImageCoordinates(String wikiDataEntityId, LatLng latLng, String filePath) {
-        if (StringUtils.isNullOrWhiteSpace(wikiDataEntityId)) {
-            return Single.just(IMAGE_OK);
-        }
-        return Single.fromCallable(() -> filePath)
-                .map(fileUtilsWrapper::getGeolocationOfFile)
-                .map(geoLocation -> imageUtilsWrapper.checkImageGeolocationIsDifferent(geoLocation, latLng))
-                .map(r -> r ? ImageUtils.IMAGE_GEOLOCATION_DIFFERENT : IMAGE_OK);
-    }
-
-    private Single<Integer> checkDuplicateFile(String filePath) {
-        return Single.fromCallable(() ->
-                fileUtilsWrapper.getFileInputStream(filePath))
-                .map(fileUtilsWrapper::getSHA1)
-                .map(mwApi::existingFile)
-                .map(b -> b ? ImageUtils.IMAGE_DUPLICATE : IMAGE_OK);
     }
 
     private void initDefaultValues() {
