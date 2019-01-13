@@ -7,6 +7,7 @@ import android.content.SharedPreferences
 import android.graphics.BitmapRegionDecoder
 import android.net.Uri
 import fr.free.nrw.commons.auth.SessionManager
+import fr.free.nrw.commons.kvstore.BasicKvStore
 import fr.free.nrw.commons.location.LatLng
 import fr.free.nrw.commons.mwapi.MediaWikiApi
 import fr.free.nrw.commons.nearby.Place
@@ -37,7 +38,7 @@ class UploadModelTest {
     internal var licenses: List<String>? = null
     @Mock
     @field:[Inject Named("default_preferences")]
-    internal var prefs: SharedPreferences? = null
+    internal var prefs: BasicKvStore? = null
     @Mock
     @field:[Inject Named("licenses_by_name")]
     internal var licensesByName: Map<String, String>? = null
