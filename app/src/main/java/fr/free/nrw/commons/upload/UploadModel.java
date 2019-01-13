@@ -20,23 +20,16 @@ import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.auth.SessionManager;
 import fr.free.nrw.commons.contributions.Contribution;
 import fr.free.nrw.commons.kvstore.BasicKvStore;
-import fr.free.nrw.commons.location.LatLng;
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
 import fr.free.nrw.commons.nearby.Place;
 import fr.free.nrw.commons.settings.Prefs;
-import fr.free.nrw.commons.utils.BitmapRegionDecoderWrapper;
 import fr.free.nrw.commons.utils.ImageUtils;
-import fr.free.nrw.commons.utils.ImageUtilsWrapper;
-import fr.free.nrw.commons.utils.StringUtils;
 import io.reactivex.Observable;
-import io.reactivex.Scheduler;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 import io.reactivex.subjects.BehaviorSubject;
 import timber.log.Timber;
-
-import static fr.free.nrw.commons.utils.ImageUtils.IMAGE_OK;
 
 public class UploadModel {
 
@@ -104,7 +97,7 @@ public class UploadModel {
         Observable<UploadItem> itemObservable = Observable.fromIterable(mediaUri)
                 .map(media -> {
                     currentMediaUri = media;
-                    return cacheFileUpload(media);
+                    return media.getPath();
                 })
                 .map(filePath -> {
                     long fileCreatedDate = getFileCreatedDate(currentMediaUri);
@@ -126,7 +119,7 @@ public class UploadModel {
     void receiveDirect(Uri media, String mimeType, String source, Place place, SimilarImageInterface similarImageInterface) {
         initDefaultValues();
         long fileCreatedDate = getFileCreatedDate(media);
-        String filePath = this.cacheFileUpload(media);
+        String filePath = media.getPath();
         Uri uri = Uri.fromFile(new File(filePath));
         fileProcessor.initFileDetails(filePath, context.getContentResolver());
         UploadItem item = new UploadItem(uri, mimeType, source, fileProcessor.processFileCoordinates(similarImageInterface),
@@ -136,7 +129,7 @@ public class UploadModel {
         //TODO figure out if default descriptions in other languages exist
         item.descriptions.get(0).setLanguageCode("en");
         imageProcessingService
-                .checkImageQuality(wikidataEntityIdPref, wikidataItemLocation, filePath)
+                .checkImageQuality(place, filePath)
                 .subscribeOn(Schedulers.computation())
                 .subscribe(item.imageQuality::onNext);
         items.add(item);
@@ -335,29 +328,6 @@ public class UploadModel {
             }
             return contribution;
         });
-    }
-
-    /**
-     * Copy files into local storage and return file path
-     * If somehow copy fails, it returns the original path
-     * @param media Uri of the file
-     * @return path of the enw file
-     */
-    private String cacheFileUpload(Uri media) {
-        String finalFilePath;
-        try {
-            String copyFilePath = fileUtilsWrapper.createCopyPathAndCopy(useExtStorage, media, contentResolver, context);
-            Timber.i("Copied file path is %s", copyFilePath);
-            finalFilePath = copyFilePath;
-        } catch (Exception e) {
-            Timber.w(e, "Error in copying URI %s. Using original file path instead", media.getPath());
-            finalFilePath = media.getPath();
-        }
-
-        if (StringUtils.isNullOrWhiteSpace(finalFilePath)) {
-            finalFilePath = media.getPath();
-        }
-        return finalFilePath;
     }
 
     void keepPicture() {

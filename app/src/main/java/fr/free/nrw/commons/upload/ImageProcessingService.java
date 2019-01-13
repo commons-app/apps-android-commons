@@ -4,6 +4,7 @@ import javax.inject.Inject;
 import javax.inject.Singleton;
 
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
+import fr.free.nrw.commons.nearby.Place;
 import fr.free.nrw.commons.utils.BitmapRegionDecoderWrapper;
 import fr.free.nrw.commons.utils.ImageUtils;
 import fr.free.nrw.commons.utils.ImageUtilsWrapper;
@@ -38,7 +39,7 @@ public class ImageProcessingService {
      * - checks dark image
      */
     public Single<Integer> checkImageQuality(String filePath) {
-        return checkImageQuality(null, null, filePath);
+        return checkImageQuality(null, filePath);
     }
 
     /**
@@ -47,10 +48,10 @@ public class ImageProcessingService {
      * - checks dark image
      * - checks geolocation for image
      */
-    public Single<Integer> checkImageQuality(String wikidataEntityIdPref, String wikidataItemLocation, String filePath) {
+    public Single<Integer> checkImageQuality(Place place, String filePath) {
         return Single.zip(
                 checkDuplicateImage(filePath),
-                checkImageGeoLocation(wikidataEntityIdPref, wikidataItemLocation, filePath),
+                checkImageGeoLocation(place, filePath),
                 checkDarkImage(filePath), //Returns IMAGE_DARK or IMAGE_OK
                 (dupe, wrongGeo, dark) -> dupe | wrongGeo | dark);
     }
@@ -85,12 +86,12 @@ public class ImageProcessingService {
      * @param filePath file to be checked
      * @return IMAGE_GEOLOCATION_DIFFERENT or IMAGE_OK
      */
-    private Single<Integer> checkImageGeoLocation(String wikidataEntityId, String wikidataItemLocation, String filePath) {
-        if (StringUtils.isNullOrWhiteSpace(wikidataEntityId)) {
+    private Single<Integer> checkImageGeoLocation(Place place, String filePath) {
+        if (place == null || StringUtils.isNullOrWhiteSpace(place.getWikiDataEntityId())) {
             return Single.just(ImageUtils.IMAGE_OK);
         }
         return Single.fromCallable(() -> filePath)
                 .map(fileUtilsWrapper::getGeolocationOfFile)
-                .flatMap(geoLocation -> imageUtilsWrapper.checkImageGeolocationIsDifferent(geoLocation, wikidataItemLocation));
+                .flatMap(geoLocation -> imageUtilsWrapper.checkImageGeolocationIsDifferent(geoLocation, place.getLocation()));
     }
 }
