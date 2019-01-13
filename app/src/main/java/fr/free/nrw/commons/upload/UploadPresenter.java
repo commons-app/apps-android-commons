@@ -129,10 +129,12 @@ public class UploadPresenter {
     @SuppressLint("CheckResult")
     void handleNext(Title title,
                     List<Description> descriptions) {
+        Timber.e("Inside handleNext");
         validateCurrentItemTitle()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(errorCode -> handleImage(errorCode, title, descriptions));
+                .subscribe(errorCode -> handleImage(errorCode, title, descriptions),
+                        throwable -> Timber.e(throwable, "Error occurred while handling image"));
     }
 
     /**
@@ -151,33 +153,41 @@ public class UploadPresenter {
     private void handleImage(Integer errorCode, Title title, List<Description> descriptions) {
         switch (errorCode) {
             case EMPTY_TITLE:
+                Timber.d("Title is empty. Showing toast");
                 view.showErrorMessage(R.string.add_title_toast);
                 break;
             case FILE_NAME_EXISTS:
                 if(getCurrentItem().imageQuality.getValue().equals(IMAGE_KEEP)) {
+                    Timber.d("Set title and desc; Show next uploaded item");
                     setTitleAndDescription(title, descriptions);
                     nextUploadedItem();
                 } else {
+                    Timber.d("Trying to show duplicate picture popup");
                     view.showDuplicatePicturePopup();
                 }
                 break;
             case IMAGE_OK:
+                Timber.d("Image is OK. Proceeding");
             default:
+                Timber.d("Default: Setting title and desc; Show next uploaded item");
                 setTitleAndDescription(title, descriptions);
                 nextUploadedItem();
         }
     }
 
     private void nextUploadedItem() {
+        Timber.d("Trying to show next uploaded item");
         uploadModel.next();
         updateContent();
         if (uploadModel.isShowingItem()) {
+            Timber.d("Is showing item is true");
             uploadModel.subscribeBadPicture(this::handleBadPicture);
         }
         view.dismissKeyboard();
     }
 
     private void setTitleAndDescription(Title title, List<Description> descriptions) {
+        Timber.d("setTitleAndDescription: Setting title and desc");
         uploadModel.setCurrentTitleAndDescriptions(title, descriptions);
     }
 

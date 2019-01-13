@@ -232,8 +232,10 @@ public class UploadModel {
     }
 
     public void next() {
+        Timber.d("UploadModel:next; Handling next");
         if (badImageSubscription != null)
             badImageSubscription.dispose();
+        Timber.d("UploadModel:next; disposing badImageSubscription");
         markCurrentUploadVisited();
         if (currentStepIndex < items.size() + 1) {
             currentStepIndex++;
@@ -283,6 +285,7 @@ public class UploadModel {
     }
 
     private void updateItemState() {
+        Timber.d("Updating item state");
         int count = items.size();
         for (int i = 0; i < count; i++) {
             UploadItem item = items.get(i);
@@ -292,6 +295,7 @@ public class UploadModel {
     }
 
     private void markCurrentUploadVisited() {
+        Timber.d("Marking current upload visited");
         if (currentStepIndex < items.size() && currentStepIndex >= 0) {
             items.get(currentStepIndex).visited = true;
         }
