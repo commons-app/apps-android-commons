@@ -1,7 +1,6 @@
 package fr.free.nrw.commons.bookmarks.locations;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -29,6 +28,8 @@ import butterknife.ButterKnife;
 import dagger.android.support.DaggerFragment;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.contributions.ContributionController;
+import fr.free.nrw.commons.kvstore.BasicKvStore;
+import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.nearby.NearbyAdapterFactory;
 import fr.free.nrw.commons.nearby.Place;
 import fr.free.nrw.commons.utils.ImageUtils;
@@ -42,8 +43,8 @@ public class BookmarkLocationsFragment extends DaggerFragment {
     @BindView(R.id.parentLayout) RelativeLayout parentLayout;
 
     @Inject BookmarkLocationsController controller;
-    @Inject @Named("direct_nearby_upload_prefs") SharedPreferences directPrefs;
-    @Inject @Named("default_preferences") SharedPreferences defaultPrefs;
+    @Inject @Named("direct_nearby_upload_prefs") JsonKvStore directKvStore;
+    @Inject @Named("default_preferences") BasicKvStore defaultKvStore;
     private NearbyAdapterFactory adapterFactory;
     @Inject ContributionController contributionController;
 

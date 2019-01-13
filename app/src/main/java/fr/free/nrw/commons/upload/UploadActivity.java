@@ -4,7 +4,6 @@ import android.Manifest;
 import android.animation.LayoutTransition;
 import android.annotation.SuppressLint;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -55,7 +54,9 @@ import fr.free.nrw.commons.auth.LoginActivity;
 import fr.free.nrw.commons.category.CategoriesModel;
 import fr.free.nrw.commons.category.CategoryItem;
 import fr.free.nrw.commons.contributions.Contribution;
+import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
+import fr.free.nrw.commons.nearby.Place;
 import fr.free.nrw.commons.utils.DialogUtil;
 import fr.free.nrw.commons.utils.PermissionUtils;
 import fr.free.nrw.commons.utils.StringUtils;
@@ -69,12 +70,15 @@ import timber.log.Timber;
 import static fr.free.nrw.commons.utils.ImageUtils.Result;
 import static fr.free.nrw.commons.utils.ImageUtils.getErrorMessageForResult;
 import static fr.free.nrw.commons.wikidata.WikidataConstants.IS_DIRECT_UPLOAD;
+import static fr.free.nrw.commons.wikidata.WikidataConstants.PLACE_OBJECT;
 import static fr.free.nrw.commons.wikidata.WikidataConstants.WIKIDATA_ENTITY_ID_PREF;
 import static fr.free.nrw.commons.wikidata.WikidataConstants.WIKIDATA_ITEM_LOCATION;
 
 public class UploadActivity extends AuthenticatedActivity implements UploadView, SimilarImageInterface {
     @Inject MediaWikiApi mwApi;
-    @Inject @Named("direct_nearby_upload_prefs") SharedPreferences directPrefs;
+    @Inject
+    @Named("direct_nearby_upload_prefs")
+    JsonKvStore directKvStore;
     @Inject UploadPresenter presenter;
     @Inject CategoriesModel categoriesModel;
 
@@ -373,7 +377,7 @@ public class UploadActivity extends AuthenticatedActivity implements UploadView,
     @Override
     public void showBadPicturePopup(@Result int result) {
         if (result >= 8 ) { // If location of image and nearby does not match, then set shared preferences to disable wikidata edits
-            directPrefs.edit().putBoolean("Picture_Has_Correct_Location",false);
+            directKvStore.putBoolean("Picture_Has_Correct_Location", false);
         }
         String errorMessageForResult = getErrorMessageForResult(this, result);
         if (StringUtils.isNullOrWhiteSpace(errorMessageForResult)) {
@@ -639,13 +643,9 @@ public class UploadActivity extends AuthenticatedActivity implements UploadView,
             return;
         }
 
-        if (intent.getBooleanExtra("isDirectUpload", false)) {
-            String imageTitle = directPrefs.getString("Title", "");
-            String imageDesc = directPrefs.getString("Desc", "");
-            Timber.i("Received direct upload with title %s and description %s", imageTitle, imageDesc);
-            String wikiDataEntityIdPref = intent.getStringExtra(WIKIDATA_ENTITY_ID_PREF);
-            String wikiDataItemLocation = intent.getStringExtra(WIKIDATA_ITEM_LOCATION);
-            presenter.receiveDirect(urisList.get(0), mimeType, source, wikiDataEntityIdPref, imageTitle, imageDesc, wikiDataItemLocation);
+        if (intent.hasExtra(PLACE_OBJECT)) {
+            Place place = intent.getParcelableExtra(PLACE_OBJECT);
+            presenter.receiveDirect(urisList.get(0), mimeType, source, place);
         } else {
             presenter.receive(urisList, mimeType, source);
         }
@@ -654,14 +654,7 @@ public class UploadActivity extends AuthenticatedActivity implements UploadView,
     }
 
     public void resetDirectPrefs() {
-        SharedPreferences.Editor editor = directPrefs.edit();
-        editor.remove("Title");
-        editor.remove("Desc");
-        editor.remove("Category");
-        editor.remove(WIKIDATA_ENTITY_ID_PREF);
-        editor.remove(WIKIDATA_ITEM_LOCATION);
-        editor.remove(IS_DIRECT_UPLOAD);
-        editor.apply();
+        directKvStore.remove(PLACE_OBJECT);
     }
 
     /**

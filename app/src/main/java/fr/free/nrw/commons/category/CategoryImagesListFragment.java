@@ -1,7 +1,6 @@
 package fr.free.nrw.commons.category;
 
 import android.annotation.SuppressLint;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
@@ -26,6 +25,7 @@ import butterknife.ButterKnife;
 import dagger.android.support.DaggerFragment;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.R;
+import fr.free.nrw.commons.kvstore.BasicKvStore;
 import fr.free.nrw.commons.utils.NetworkUtils;
 import fr.free.nrw.commons.utils.ViewUtil;
 import io.reactivex.Observable;
@@ -55,7 +55,9 @@ public class CategoryImagesListFragment extends DaggerFragment {
     private String categoryName = null;
 
     @Inject CategoryImageController controller;
-    @Inject @Named("category_prefs") SharedPreferences categoryPreferences;
+    @Inject
+    @Named("category_prefs")
+    BasicKvStore categoryKvStore;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -91,9 +93,7 @@ public class CategoryImagesListFragment extends DaggerFragment {
      * @param keyword
      */
     private void resetQueryContinueValues(String keyword) {
-        SharedPreferences.Editor editor = categoryPreferences.edit();
-        editor.remove(keyword);
-        editor.apply();
+        categoryKvStore.remove(keyword);
     }
 
     /**
