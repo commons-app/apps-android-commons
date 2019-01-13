@@ -1,9 +1,7 @@
 package fr.free.nrw.commons.upload;
 
 import android.annotation.SuppressLint;
-import android.content.SharedPreferences;
 import android.net.Uri;
-import android.util.Log;
 
 import java.lang.reflect.Proxy;
 import java.util.ArrayList;
@@ -17,7 +15,9 @@ import javax.inject.Singleton;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.category.CategoriesModel;
 import fr.free.nrw.commons.contributions.Contribution;
+import fr.free.nrw.commons.kvstore.BasicKvStore;
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
+import fr.free.nrw.commons.nearby.Place;
 import fr.free.nrw.commons.settings.Prefs;
 import fr.free.nrw.commons.utils.ImageUtils;
 import io.reactivex.Completable;
@@ -53,7 +53,7 @@ public class UploadPresenter {
     @UploadView.UploadPage
     private int currentPage = UploadView.PLEASE_WAIT;
 
-    @Inject @Named("default_preferences")SharedPreferences prefs;
+    @Inject @Named("default_preferences") BasicKvStore defaultKvStore;
 
     @Inject
     UploadPresenter(UploadModel uploadModel,
@@ -99,10 +99,8 @@ public class UploadPresenter {
     @SuppressLint("CheckResult")
     void receiveDirect(Uri media, String mimeType,
                        @Contribution.FileSource String source,
-                       String wikidataEntityIdPref,
-                       String title, String desc,
-                       String wikidataItemLocation) {
-        Completable.fromRunnable(() -> uploadModel.receiveDirect(media, mimeType, source, wikidataEntityIdPref, title, desc, similarImageInterface, wikidataItemLocation))
+                       Place place) {
+        Completable.fromRunnable(() -> uploadModel.receiveDirect(media, mimeType, source, place, similarImageInterface))
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(() -> {
@@ -363,7 +361,7 @@ public class UploadPresenter {
      * Sets the list of licences and the default license.
      */
     private void updateLicenses() {
-        String selectedLicense = prefs.getString(Prefs.DEFAULT_LICENSE, Prefs.Licenses.CC_BY_SA_3);
+        String selectedLicense = defaultKvStore.getString(Prefs.DEFAULT_LICENSE, Prefs.Licenses.CC_BY_SA_3);
         view.updateLicenses(uploadModel.getLicenses(), selectedLicense);
         view.updateLicenseSummary(selectedLicense, uploadModel.getCount());
     }

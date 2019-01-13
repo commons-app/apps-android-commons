@@ -5,7 +5,6 @@ import android.content.AbstractThreadedSyncAdapter;
 import android.content.ContentProviderClient;
 import android.content.ContentValues;
 import android.content.Context;
-import android.content.SharedPreferences;
 import android.content.SyncResult;
 import android.database.Cursor;
 import android.os.Bundle;
@@ -25,6 +24,7 @@ import javax.inject.Named;
 
 import fr.free.nrw.commons.Utils;
 import fr.free.nrw.commons.di.ApplicationlessInjection;
+import fr.free.nrw.commons.kvstore.BasicKvStore;
 import fr.free.nrw.commons.mwapi.LogEventResult;
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
 import timber.log.Timber;
@@ -43,7 +43,9 @@ public class ContributionsSyncAdapter extends AbstractThreadedSyncAdapter {
 
     @SuppressWarnings("WeakerAccess")
     @Inject MediaWikiApi mwApi;
-    @Inject @Named("prefs") SharedPreferences prefs;
+    @Inject
+    @Named("defaultKvStore")
+    BasicKvStore defaultKvStore;
 
     public ContributionsSyncAdapter(Context context, boolean autoInitialize) {
         super(context, autoInitialize);
@@ -88,7 +90,7 @@ public class ContributionsSyncAdapter extends AbstractThreadedSyncAdapter {
                 .inject(this);
         // This code is fraught with possibilities of race conditions, but lalalalala I can't hear you!
         String user = account.name;
-        String lastModified = prefs.getString("lastSyncTimestamp", "");
+        String lastModified = defaultKvStore.getString("lastSyncTimestamp", "");
         Date curTime = new Date();
         LogEventResult result;
         Boolean done = false;
@@ -151,7 +153,7 @@ public class ContributionsSyncAdapter extends AbstractThreadedSyncAdapter {
                 done = true;
             }
         }
-        prefs.edit().putString("lastSyncTimestamp", toMWDate(curTime)).apply();
+        defaultKvStore.putString("lastSyncTimestamp", toMWDate(curTime));
         Timber.d("Oh hai, everyone! Look, a kitty!");
     }
 

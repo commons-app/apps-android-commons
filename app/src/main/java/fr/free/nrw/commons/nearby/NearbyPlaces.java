@@ -78,7 +78,7 @@ public class NearbyPlaces {
                 try {
                     places = getFromWikidataQuery(curLatLng, lang, radius);
                 } catch (InterruptedIOException e) {
-                    Timber.d("exception in fetching nearby places", e.getLocalizedMessage());
+                    Timber.e(e,"exception in fetching nearby places");
                     return places;
                 }
                 Timber.d("%d results at radius: %f", places.size(), radius);
@@ -165,7 +165,7 @@ public class NearbyPlaces {
 
             places.add(new Place(
                     name,
-                    Place.Label.fromText(identifier), // list
+                    Label.fromText(identifier), // list
                     type, // details
                     Uri.parse(icon),
                     new LatLng(latitude, longitude, 0),
