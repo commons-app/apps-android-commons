@@ -11,7 +11,9 @@ import fr.free.nrw.commons.auth.SessionManager
 import fr.free.nrw.commons.data.DBOpenHelper
 import fr.free.nrw.commons.di.CommonsApplicationComponent
 import fr.free.nrw.commons.di.CommonsApplicationModule
+import fr.free.nrw.commons.di.DaggerCommonsApplicationComponent
 import fr.free.nrw.commons.kvstore.BasicKvStore
+import fr.free.nrw.commons.kvstore.JsonKvStore
 import fr.free.nrw.commons.location.LocationServiceManager
 import fr.free.nrw.commons.mwapi.MediaWikiApi
 import fr.free.nrw.commons.nearby.NearbyPlaces
@@ -49,7 +51,7 @@ class MockCommonsApplicationModule(appContext: Context) : CommonsApplicationModu
     val categoryClient: ContentProviderClient = mock()
     val contributionClient: ContentProviderClient = mock()
     val modificationClient: ContentProviderClient = mock()
-    val uploadPrefs: BasicKvStore = mock()
+    val uploadPrefs: JsonKvStore = mock()
 
     override fun provideCategoryContentProviderClient(context: Context?): ContentProviderClient = categoryClient
 
@@ -57,15 +59,15 @@ class MockCommonsApplicationModule(appContext: Context) : CommonsApplicationModu
 
     override fun provideModificationContentProviderClient(context: Context?): ContentProviderClient = modificationClient
 
-    override fun providesDirectNearbyUploadPreferences(context: Context?): BasicKvStore = uploadPrefs
+    override fun providesDirectNearbyUploadKvStore(context: Context?): JsonKvStore = uploadPrefs
 
     override fun providesAccountUtil(context: Context): AccountUtil = accountUtil
 
-    override fun providesApplicationSharedPreferences(context: Context): BasicKvStore = appSharedPreferences
+    override fun providesApplicationKvStore(context: Context): BasicKvStore = appSharedPreferences
 
-    override fun providesDefaultSharedPreferences(context: Context): BasicKvStore = defaultSharedPreferences
+    override fun providesDefaultKvStore(context: Context): BasicKvStore = defaultSharedPreferences
 
-    override fun providesOtherSharedPreferences(context: Context): BasicKvStore = otherSharedPreferences
+    override fun providesOtherKvStore(context: Context): BasicKvStore = otherSharedPreferences
 
     override fun providesUploadController(sessionManager: SessionManager, sharedPreferences: BasicKvStore, context: Context): UploadController = uploadController
 
