@@ -69,10 +69,7 @@ import timber.log.Timber;
 
 import static fr.free.nrw.commons.utils.ImageUtils.Result;
 import static fr.free.nrw.commons.utils.ImageUtils.getErrorMessageForResult;
-import static fr.free.nrw.commons.wikidata.WikidataConstants.IS_DIRECT_UPLOAD;
 import static fr.free.nrw.commons.wikidata.WikidataConstants.PLACE_OBJECT;
-import static fr.free.nrw.commons.wikidata.WikidataConstants.WIKIDATA_ENTITY_ID_PREF;
-import static fr.free.nrw.commons.wikidata.WikidataConstants.WIKIDATA_ITEM_LOCATION;
 
 public class UploadActivity extends AuthenticatedActivity implements UploadView, SimilarImageInterface {
     @Inject MediaWikiApi mwApi;
@@ -643,12 +640,8 @@ public class UploadActivity extends AuthenticatedActivity implements UploadView,
             return;
         }
 
-        if (intent.hasExtra(PLACE_OBJECT)) {
-            Place place = intent.getParcelableExtra(PLACE_OBJECT);
-            presenter.receiveDirect(urisList.get(0), mimeType, source, place);
-        } else {
-            presenter.receive(urisList, mimeType, source);
-        }
+        Place place = intent.getParcelableExtra(PLACE_OBJECT);
+        presenter.receive(urisList, mimeType, source, place);
 
         resetDirectPrefs();
     }

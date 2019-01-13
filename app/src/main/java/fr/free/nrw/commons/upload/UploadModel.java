@@ -7,7 +7,6 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.support.annotation.Nullable;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -88,53 +87,47 @@ public class UploadModel {
     }
 
     @SuppressLint("CheckResult")
-    void receive(List<Uri> mediaUri,
-                 String mimeType,
-                 String source,
-                 SimilarImageInterface similarImageInterface) {
+    Observable<UploadItem> preProcessImages(List<Uri> mediaUris,
+                                            String mimeType,
+                                            Place place,
+                                            String source,
+                                            SimilarImageInterface similarImageInterface) {
         initDefaultValues();
 
-        Observable<UploadItem> itemObservable = Observable.fromIterable(mediaUri)
-                .map(media -> {
-                    currentMediaUri = media;
-                    return media.getPath();
-                })
-                .map(filePath -> {
+        return Observable.fromIterable(mediaUris)
+                .map(mediaUri -> {
+                    if (mediaUri == null || mediaUri.getPath() == null) {
+                        return null;
+                    }
+                    String filePath = mediaUri.getPath();
                     long fileCreatedDate = getFileCreatedDate(currentMediaUri);
-                    Uri uri = Uri.fromFile(new File(filePath));
+                    String fileExt = fileUtilsWrapper.getFileExt(filePath);
+                    GPSExtractor gpsExtractor = fileProcessor.processFileCoordinates(similarImageInterface);
+
                     fileProcessor.initFileDetails(filePath, context.getContentResolver());
-                    UploadItem item = new UploadItem(uri, mimeType, source, fileProcessor.processFileCoordinates(similarImageInterface),
-                            fileUtilsWrapper.getFileExt(filePath), null, fileCreatedDate);
-                    imageProcessingService.checkImageQuality(filePath)
+                    UploadItem item = new UploadItem(mediaUri, mimeType, source, gpsExtractor,
+                            fileExt, place.getWikiDataEntityId(), fileCreatedDate);
+                    imageProcessingService.checkImageQuality(place, filePath)
                             .subscribeOn(Schedulers.computation())
                             .subscribe(item.imageQuality::onNext, Timber::e);
                     return item;
                 });
-        items = itemObservable.toList().blockingGet();
-        items.get(0).selected = true;
-        items.get(0).first = true;
     }
 
-    @SuppressLint("CheckResult")
-    void receiveDirect(Uri media, String mimeType, String source, Place place, SimilarImageInterface similarImageInterface) {
-        initDefaultValues();
-        long fileCreatedDate = getFileCreatedDate(media);
-        String filePath = media.getPath();
-        Uri uri = Uri.fromFile(new File(filePath));
-        fileProcessor.initFileDetails(filePath, context.getContentResolver());
-        UploadItem item = new UploadItem(uri, mimeType, source, fileProcessor.processFileCoordinates(similarImageInterface),
-                fileUtilsWrapper.getFileExt(filePath), place.getWikiDataEntityId(), fileCreatedDate);
-        item.title.setTitleText(place.getName());
-        item.descriptions.get(0).setDescriptionText(place.getLongDescription());
-        //TODO figure out if default descriptions in other languages exist
-        item.descriptions.get(0).setLanguageCode("en");
-        imageProcessingService
-                .checkImageQuality(place, filePath)
-                .subscribeOn(Schedulers.computation())
-                .subscribe(item.imageQuality::onNext);
-        items.add(item);
-        items.get(0).selected = true;
-        items.get(0).first = true;
+    void onItemsProcessed(Place place, List<UploadItem> uploadItems) {
+        items = uploadItems;
+        if (items.isEmpty()) {
+            return;
+        }
+        UploadItem uploadItem = items.get(0);
+        uploadItem.selected = true;
+        uploadItem.first = true;
+        if (place != null) {
+            uploadItem.title.setTitleText(place.getName());
+            uploadItem.descriptions.get(0).setDescriptionText(place.getLongDescription());
+            //TODO figure out if default descriptions in other languages exist
+            uploadItem.descriptions.get(0).setLanguageCode("en");
+        }
     }
 
     private void initDefaultValues() {

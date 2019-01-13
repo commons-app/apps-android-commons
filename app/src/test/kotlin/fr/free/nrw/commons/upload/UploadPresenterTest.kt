@@ -8,6 +8,7 @@ import org.junit.Test
 import org.mockito.InjectMocks
 import org.mockito.Mock
 import org.mockito.Mockito
+import org.mockito.Mockito.mock
 import org.mockito.MockitoAnnotations
 
 class UploadPresenterTest {
@@ -33,18 +34,6 @@ class UploadPresenterTest {
         val element = Mockito.mock(Uri::class.java)
         val element2 = Mockito.mock(Uri::class.java)
         var uriList: List<Uri> = mutableListOf<Uri>(element, element2)
-        uploadPresenter!!.receive(uriList, "image/jpeg", "external")
-    }
-
-    @Test
-    fun receiveSingleItem() {
-        val element = Mockito.mock(Uri::class.java)
-        uploadPresenter!!.receive(element, "image/jpeg", "external")
-    }
-
-    @Test
-    fun receiveDirect() {
-        val element = Mockito.mock(Uri::class.java)
-        uploadModel!!.receiveDirect(element, "image/jpeg", "external", Mockito.mock(Place::class.java)) { _, _ -> }
+        uploadPresenter!!.receive(uriList, "image/jpeg", "external", mock(Place::class.java))
     }
 }
