@@ -1,16 +1,17 @@
 package fr.free.nrw.commons;
 
+import android.content.Context;
+import android.support.test.InstrumentationRegistry;
 import android.support.test.espresso.Espresso;
 import android.support.test.espresso.matcher.PreferenceMatchers;
 import android.support.test.filters.LargeTest;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
 
+import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-
-import java.util.Map;
 
 import fr.free.nrw.commons.kvstore.BasicKvStore;
 import fr.free.nrw.commons.settings.Prefs;
@@ -23,43 +24,22 @@ import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
 import static org.hamcrest.Matchers.allOf;
 import static org.junit.Assert.assertEquals;
-import static org.mockito.Mockito.mock;
 
 @LargeTest
 @RunWith(AndroidJUnit4.class)
 public class SettingsActivityTest {
-    private BasicKvStore prefs;
-    private Map<String,?> prefValues;
+    BasicKvStore prefs;
 
     @Rule
     public ActivityTestRule<SettingsActivity> activityRule =
-            new ActivityTestRule<SettingsActivity>(SettingsActivity.class, false, true) {
+            new ActivityTestRule<>(SettingsActivity.class, false, true);
 
-                @Override
-                protected void afterActivityLaunched() {
-                    // save preferences
-                    prefs = mock(BasicKvStore.class);
-                    prefValues = prefs.getAll();
-                }
-
-                @Override
-                protected void afterActivityFinished() {
-                    // restore preferences
-                    for (Map.Entry<String,?> entry: prefValues.entrySet()) {
-                        String key = entry.getKey();
-                        Object val = entry.getValue();
-                        if (val instanceof String) {
-                            prefs.putString(key, (String) val);
-                        } else if (val instanceof Boolean) {
-                            prefs.putBoolean(key, (Boolean) val);
-                        } else if (val instanceof Integer) {
-                            prefs.putInt(key, (Integer) val);
-                        } else {
-                            throw new RuntimeException("type not implemented: " + entry);
-                        }
-                    }
-                }
-            };
+    @Before
+    public void setup() {
+        Context context = InstrumentationRegistry.getTargetContext();
+        String storeName = context.getPackageName() + "_preferences";
+        prefs = new BasicKvStore(context, storeName);
+    }
 
     @Test
     public void setRecentUploadLimitTo100() {
@@ -70,7 +50,6 @@ public class SettingsActivityTest {
 
         // Try setting it to 100
         Espresso.onView(withId(android.R.id.edit))
-
                 .perform(replaceText("100"));
 
         // Click "OK"
