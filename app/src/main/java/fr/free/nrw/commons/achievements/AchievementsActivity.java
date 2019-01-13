@@ -3,6 +3,7 @@ package fr.free.nrw.commons.achievements;
 import android.accounts.Account;
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
@@ -26,6 +27,8 @@ import android.widget.TextView;
 
 import com.dinuscxj.progressbar.CircleProgressBar;
 
+import org.w3c.dom.Text;
+
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -42,10 +45,13 @@ import fr.free.nrw.commons.auth.SessionManager;
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
 import fr.free.nrw.commons.theme.NavigationBaseActivity;
 import fr.free.nrw.commons.utils.ViewUtil;
+import io.reactivex.Single;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.schedulers.Schedulers;
 import timber.log.Timber;
+
+
 
 /**
  * activity for sharing feedback on uploaded activity
@@ -67,8 +73,8 @@ public class AchievementsActivity extends NavigationBaseActivity {
     TextView thanksReceived;
     @BindView(R.id.images_uploaded_progressbar)
     CircleProgressBar imagesUploadedProgressbar;
-    @BindView(R.id.images_used_by_wiki_progressbar)
-    CircleProgressBar imagesUsedByWikiProgessbar;
+    @BindView(R.id.images_used_by_wiki_progress_bar)
+    CircleProgressBar imagesUsedByWikiProgressBar;
     @BindView(R.id.image_reverts_progressbar)
     CircleProgressBar imageRevertsProgressbar;
     @BindView(R.id.image_featured)
@@ -85,6 +91,12 @@ public class AchievementsActivity extends NavigationBaseActivity {
     RelativeLayout layoutImageUsedByWiki;
     @BindView(R.id.layout_statistics)
     LinearLayout layoutStatistics;
+    @BindView(R.id.images_used_by_wiki_text)
+    TextView imageByWikiText;
+    @BindView(R.id.images_reverted_text)
+    TextView imageRevertedText;
+    @BindView(R.id.images_upload_text_param)
+    TextView imageUploadedText;
     @Inject
     SessionManager sessionManager;
     @Inject
@@ -104,17 +116,14 @@ public class AchievementsActivity extends NavigationBaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_achievements);
         ButterKnife.bind(this);
-        /**
-         * DisplayMetrics used to fetch the size of the screen
-         */
+
+        // DisplayMetrics used to fetch the size of the screen
         DisplayMetrics displayMetrics = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
         int height = displayMetrics.heightPixels;
         int width = displayMetrics.widthPixels;
 
-        /**
-         * Used for the setting the size of imageView at runtime
-         */
+        // Used for the setting the size of imageView at runtime
         RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams)
                 imageView.getLayoutParams();
         params.height = (int) (height * BADGE_IMAGE_HEIGHT_RATIO);
@@ -130,7 +139,7 @@ public class AchievementsActivity extends NavigationBaseActivity {
     }
 
     /**
-     * to invoke the AlertDialog on clicking info button
+     * To invoke the AlertDialog on clicking info button
      */
     @OnClick(R.id.achievement_info)
     public void showInfoDialog(){
@@ -159,7 +168,6 @@ public class AchievementsActivity extends NavigationBaseActivity {
 
     /**
      * To take bitmap and store it temporary storage and share it
-     *
      * @param bitmap
      */
     void shareScreen(Bitmap bitmap) {
@@ -185,25 +193,41 @@ public class AchievementsActivity extends NavigationBaseActivity {
      * which then calls parseJson when results are fetched
      */
     private void setAchievements() {
+        progressBar.setVisibility(View.VISIBLE);
         if (checkAccount()) {
-            compositeDisposable.add(mediaWikiApi
-                    .getAchievements(Objects.requireNonNull(sessionManager.getCurrentAccount()).name)
-                    .subscribeOn(Schedulers.io())
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe(
-                            response -> {
-                                if (response != null) {
-                                    setUploadCount(Achievements.from(response));
-                                } else {
-                                    onError();
+            try{
+
+                compositeDisposable.add(mediaWikiApi
+                        .getAchievements(Objects.requireNonNull(sessionManager.getCurrentAccount()).name)
+                        .subscribeOn(Schedulers.io())
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribe(
+                                response -> {
+                                    if (response != null) {
+                                        setUploadCount(Achievements.from(response));
+                                    } else {
+                                        Timber.d("success");
+                                        layoutImageReverts.setVisibility(View.INVISIBLE);
+                                        imageView.setVisibility(View.INVISIBLE);
+                                        showSnackBarWithRetry();
+                                    }
+                                },
+                                t -> {
+                                    Timber.e(t, "Fetching achievements statistics failed");
+                                    showSnackBarWithRetry();
                                 }
-                            },
-                            t -> {
-                                Timber.e(t, "Fetching achievements statistics failed");
-                                onError();
-                            }
-                    ));
+                        ));
+            }
+            catch (Exception e){
+                Timber.d(e+"success");
+            }
         }
+    }
+
+    private void showSnackBarWithRetry() {
+        progressBar.setVisibility(View.GONE);
+        ViewUtil.showDismissibleSnackBar(findViewById(android.R.id.content),
+                R.string.achievements_fetch_failed, R.string.retry, view -> setAchievements());
     }
 
     /**
@@ -247,10 +271,34 @@ public class AchievementsActivity extends NavigationBaseActivity {
      * @param uploadCount
      */
     private void setUploadProgress(int uploadCount){
-        imagesUploadedProgressbar.setProgress
-                (100*uploadCount/levelInfo.getMaxUploadCount());
-        imagesUploadedProgressbar.setProgressTextFormatPattern
-                (uploadCount +"/" + levelInfo.getMaxUploadCount() );
+        if (uploadCount==0){
+            setZeroAchievements();
+        }else {
+
+            imagesUploadedProgressbar.setProgress
+                    (100*uploadCount/levelInfo.getMaxUploadCount());
+            imagesUploadedProgressbar.setProgressTextFormatPattern
+                    (uploadCount +"/" + levelInfo.getMaxUploadCount() );
+        }
+
+    }
+
+    private void setZeroAchievements() {
+        AlertDialog.Builder builder=new AlertDialog.Builder(this)
+                .setMessage("You haven't made any contributions yet")
+                .setPositiveButton("Ok", (dialog, which) -> {
+                });
+        AlertDialog dialog = builder.create();
+        dialog.show();
+        imagesUploadedProgressbar.setVisibility(View.INVISIBLE);
+        imageRevertsProgressbar.setVisibility(View.INVISIBLE);
+        imagesUsedByWikiProgressBar.setVisibility(View.INVISIBLE);
+        imageView.setVisibility(View.INVISIBLE);
+        imageByWikiText.setText(R.string.no_image);
+        imageRevertedText.setText(R.string.no_image_reverted);
+        imageUploadedText.setText(R.string.no_image_uploaded);
+        imageView.setVisibility(View.INVISIBLE);
+
     }
 
     /**
@@ -271,9 +319,9 @@ public class AchievementsActivity extends NavigationBaseActivity {
      */
     private void inflateAchievements(Achievements achievements) {
         thanksReceived.setText(Integer.toString(achievements.getThanksReceived()));
-        imagesUsedByWikiProgessbar.setProgress
+        imagesUsedByWikiProgressBar.setProgress
                 (100*achievements.getUniqueUsedImages()/levelInfo.getMaxUniqueImages() );
-        imagesUsedByWikiProgessbar.setProgressTextFormatPattern
+        imagesUsedByWikiProgressBar.setProgressTextFormatPattern
                 (achievements.getUniqueUsedImages() + "/" + levelInfo.getMaxUniqueImages());
         imagesFeatured.setText(Integer.toString(achievements.getFeaturedImages()));
         String levelUpInfoString = getString(R.string.level);
@@ -376,7 +424,7 @@ public class AchievementsActivity extends NavigationBaseActivity {
                 .setTitle(title)
                 .setMessage(message)
                 .setCancelable(true)
-                .setNeutralButton(android.R.string.ok, (dialog, id) -> dialog.cancel())
+                .setPositiveButton(android.R.string.ok, (dialog, id) -> dialog.cancel())
                 .create()
                 .show();
     }
@@ -388,10 +436,10 @@ public class AchievementsActivity extends NavigationBaseActivity {
     private boolean checkAccount(){
         Account currentAccount = sessionManager.getCurrentAccount();
         if (currentAccount == null) {
-        Timber.d("Current account is null");
-        ViewUtil.showLongToast(this, getResources().getString(R.string.user_not_logged_in));
-        sessionManager.forceLogin(this);
-        return false;
+            Timber.d("Current account is null");
+            ViewUtil.showLongToast(this, getResources().getString(R.string.user_not_logged_in));
+            sessionManager.forceLogin(this);
+            return false;
         }
         return true;
     }

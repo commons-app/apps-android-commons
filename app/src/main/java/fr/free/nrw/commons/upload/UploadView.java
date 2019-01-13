@@ -52,7 +52,7 @@ public interface UploadView {
 
     void setBottomCardVisibility(boolean visible);
 
-    void setBottomCardVisibility(@UploadPage int page);
+    void setBottomCardVisibility(@UploadPage int page, int uploadCount);
 
     void updateRightCardContent(boolean gpsPresent);
 
@@ -60,9 +60,11 @@ public interface UploadView {
 
     void updateLicenses(List<String> licenses, String selectedLicense);
 
-    void updateLicenseSummary(String selectedLicense);
+    void updateLicenseSummary(String selectedLicense, int imageCount);
 
     void updateTopCardContent();
+
+    void updateSubtitleVisibility(int imageCount);
 
     void dismissKeyboard();
 

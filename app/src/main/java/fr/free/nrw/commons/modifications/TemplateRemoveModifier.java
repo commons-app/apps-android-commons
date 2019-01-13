@@ -88,7 +88,7 @@ public class TemplateRemoveModifier extends PageModifier {
     }
 
     @Override
-    public String getEditSumary() {
+    public String getEditSummary() {
         return "Removed template " + params.optString(PARAM_TEMPLATE_NAME) + ".";
     }
 }

@@ -18,6 +18,7 @@
 * Rubin16
 * Vlad5250
 * Wirbel78
+* Евгения
 * ОйЛ
 -->
 <resources>
@@ -120,7 +121,10 @@
   <string name="no_uploads_yet">Вы ещё не загрузили ни одного изображения.</string>
   <string name="menu_retry_upload">Повторить</string>
   <string name="menu_cancel_upload">Отмена</string>
-  <string name="share_license_summary">Это изображение будет лицензировано под %1$s</string>
+  <plurals name="share_license_summary">
+    <item quantity="one">Это изображение будет лицензировано под %1$s</item>
+    <item quantity="other">Эти изображения будут лицензированы под %1$s</item>
+  </plurals>
   <string name="media_upload_policy">Отправляя это изображение, я подтверждаю, что это моя собственная работа, которая не содержит защищённых авторским правом материалов или селфи, а также отвечает &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines/ru\"&gt;правилам Викисклада&lt;/a&gt;.</string>
   <string name="menu_download">Скачать</string>
   <string name="preference_license">Лицензия по умолчанию</string>
@@ -250,13 +254,8 @@
   <string name="description_info">Пожалуйста, подробно опишите загружаемый файл: где он был снят? что на нём изображено? каков его контекст? Пожалуйста опишите изображённых персон или объекты. Добавьте информацию, о которой нельзя легко догадаться, например, время суток, когда снимался файл. Если снято что-то необычное, постарайтесь пояснить, что именно в этом необычного.</string>
   <string name="upload_image_too_dark">Это изображение слишком тёмное. Вы уверены, что хотите его загрузить? Викисклад подходит только для фотографий, имеющих энциклопедическую ценность.</string>
   <string name="upload_image_blurry">Это изображение размыто. Вы уверены, что хотите его загрузить? Викисклад подходит только для фотографий, имеющих энциклопедическую ценность.</string>
-  <string name="upload_image_problem_duplicate">Этот файл уже существует на Викискладе. Вы уверены, что хотите продолжить?</string>
-  <string name="upload_image_problem_dark">Это изображение слишком тёмное. Вы уверены, что хотите его загрузить? Викисклад подходит только для фотографий, имеющих энциклопедическую ценность.</string>
-  <string name="upload_image_problem_blurry">Это изображение размыто. Вы уверены, что хотите его загрузить? Викисклад подходит только для фотографий, имеющих энциклопедическую ценность.</string>
-  <string name="upload_image_problem_dark_duplicate">Изображение слишком тёмное и уже существует на Викискладе. Вы уверены, что хотите его загрузить? Загружайте только фотографии, имеющие энциклопедическую ценность.</string>
-  <string name="upload_image_problem_blurry_duplicate">Изображение размыто и уже существует на Викискладе. Вы уверены, что хотите его загрузить? Загружайте только фотографии, имеющие энциклопедическую ценность.</string>
-  <string name="upload_image_problem_dark_blurry">Изображение слишком тёмное и размытое. Вы уверены, что хотите его загрузить? Загружайте только фотографии, имеющие энциклопедическую ценность.</string>
-  <string name="upload_image_problem_dark_blurry_duplicate">Изображение слишком тёмное и размытое, а также уже существует на Викискладе. Вы уверены, что хотите его загрузить? Загружайте только фотографии, имеющие энциклопедическую ценность.</string>
+  <string name="upload_problem_image_dark">Изображение слишком тёмное.</string>
+  <string name="upload_problem_image_blurry">Изображение размыто.</string>
   <string name="give_permission">Разрешить</string>
   <string name="use_external_storage">Использовать внешнее хранилище</string>
   <string name="use_external_storage_summary">Сохранять изображения, сделанные с помощью встроенной камеры на устройстве</string>
@@ -272,7 +271,7 @@
   <string name="skip_login">Пропустить</string>
   <string name="navigation_item_login">Войти</string>
   <string name="skip_login_title">Вы действительно хотите пропустить авторизацию?</string>
-  <string name="skip_login_message">Вы не сможете загрузить изображения.</string>
+  <string name="skip_login_message">Вам следует залогиниться чтобы загружать изображения.</string>
   <string name="login_alert_message">Войдите, чтобы использовать эту функцию</string>
   <string name="copy_wikicode">Копирование викикода в буфер обмена</string>
   <string name="wikicode_copied">Викикод скопирован в буфер обмена</string>
@@ -420,4 +419,5 @@
   <string name="yes_submit">Да, отправить</string>
   <string name="no_go_back">Нет, вернуться</string>
   <string name="upload_flow_all_images_in_set">(Для всех изображений в наборе)</string>
+  <string name="error_processing_image">Произошла ошибка при загрузке файла. Пожалуйста, попробуйте позднее!</string>
 </resources>

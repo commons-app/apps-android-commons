@@ -48,6 +48,7 @@ import fr.free.nrw.commons.di.ApplicationlessInjection;
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
 import fr.free.nrw.commons.theme.NavigationBaseActivity;
 import fr.free.nrw.commons.ui.widget.HtmlTextView;
+import fr.free.nrw.commons.utils.ConfigUtils;
 import fr.free.nrw.commons.utils.ViewUtil;
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -90,7 +91,7 @@ public class LoginActivity extends AccountAuthenticatorActivity {
     private String  resultantError;
     private static final String RESULTANT_ERROR = "resultantError";
     private static final String ERROR_MESSAGE_SHOWN = "errorMessageShown";
-    private static final String LOGING_IN = "logingIn";
+    private static final String LOGGING_IN = "loggingIn";
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -139,7 +140,7 @@ public class LoginActivity extends AccountAuthenticatorActivity {
                 .setNegativeButton(R.string.no, (dialog, which) -> dialog.cancel())
                 .show());
 
-        if (BuildConfig.FLAVOR.equals("beta")){
+        if (ConfigUtils.isBetaFlavour()) {
             loginCredentials.setText(getString(R.string.login_credential));
         } else {
             loginCredentials.setVisibility(View.GONE);
@@ -177,7 +178,6 @@ public class LoginActivity extends AccountAuthenticatorActivity {
         super.onResume();
         if (prefs.getBoolean("firstrun", true)) {
             WelcomeActivity.startYourself(this);
-            prefs.edit().putBoolean("firstrun", false).apply();
         }
 
         if (sessionManager.getCurrentAccount() != null
@@ -372,7 +372,7 @@ public class LoginActivity extends AccountAuthenticatorActivity {
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        outState.putBoolean(LOGING_IN, loginCurrentlyInProgress);
+        outState.putBoolean(LOGGING_IN, loginCurrentlyInProgress);
         outState.putBoolean(ERROR_MESSAGE_SHOWN, errorMessageShown);
         outState.putString(RESULTANT_ERROR, resultantError);
     }
@@ -380,7 +380,7 @@ public class LoginActivity extends AccountAuthenticatorActivity {
     @Override
     protected void onRestoreInstanceState(Bundle savedInstanceState) {
         super.onRestoreInstanceState(savedInstanceState);
-        loginCurrentlyInProgress = savedInstanceState.getBoolean(LOGING_IN, false);
+        loginCurrentlyInProgress = savedInstanceState.getBoolean(LOGGING_IN, false);
         errorMessageShown = savedInstanceState.getBoolean(ERROR_MESSAGE_SHOWN, false);
         if (loginCurrentlyInProgress){
             performLogin();

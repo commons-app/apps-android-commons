@@ -41,6 +41,7 @@ import fr.free.nrw.commons.logging.FileLoggingTree;
 import fr.free.nrw.commons.logging.LogUtils;
 import fr.free.nrw.commons.modifications.ModifierSequenceDao;
 import fr.free.nrw.commons.upload.FileUtils;
+import fr.free.nrw.commons.utils.ConfigUtils;
 import fr.free.nrw.commons.utils.ContributionUtils;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
@@ -61,9 +62,6 @@ public class CommonsApplication extends Application {
     @Inject @Named("default_preferences") SharedPreferences defaultPrefs;
     @Inject @Named("application_preferences") SharedPreferences applicationPrefs;
     @Inject @Named("prefs") SharedPreferences otherPrefs;
-    @Inject
-    @Named("isBeta")
-    boolean isBeta;
 
     /**
      * Constants begin
@@ -91,6 +89,7 @@ public class CommonsApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+        ACRA.init(this);
         if (BuildConfig.DEBUG) {
             //FIXME: Traceur should be disabled for release builds until error fixed
             //See https://github.com/commons-app/apps-android-commons/issues/1877
@@ -118,8 +117,7 @@ public class CommonsApplication extends Application {
         // Empty temp directory in case some temp files are created and never removed.
         ContributionUtils.emptyTemporaryDirectory();
 
-        initAcra();
-        if (BuildConfig.DEBUG) {
+        if (BuildConfig.DEBUG && !isRoboUnitTest()) {
             Stetho.initializeWithDefaults(this);
         }
 
@@ -139,6 +137,7 @@ public class CommonsApplication extends Application {
      *
      */
     private void initTimber() {
+        boolean isBeta = ConfigUtils.isBetaFlavour();
         String logFileName = isBeta ? "CommonsBetaAppLogs" : "CommonsAppLogs";
         String logDirectory = LogUtils.getLogDirectory(isBeta);
         FileLoggingTree tree = new FileLoggingTree(
@@ -152,14 +151,8 @@ public class CommonsApplication extends Application {
         Timber.plant(new Timber.DebugTree());
     }
 
-    /**
-     * Remove ACRA's UncaughtExceptionHandler
-     * We do this because ACRA's handler spawns a new process possibly screwing up with a few things
-     */
-    private void initAcra() {
-        Thread.UncaughtExceptionHandler exceptionHandler = Thread.getDefaultUncaughtExceptionHandler();
-        ACRA.init(this);
-        Thread.setDefaultUncaughtExceptionHandler(exceptionHandler);
+    public static boolean isRoboUnitTest() {
+        return "robolectric".equals(Build.FINGERPRINT);
     }
 
     private ThreadPoolService getFileLoggingThreadPool() {

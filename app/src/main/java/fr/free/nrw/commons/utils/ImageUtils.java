@@ -10,6 +10,7 @@ import android.net.Uri;
 import android.support.annotation.IntDef;
 import android.support.annotation.Nullable;
 
+import com.esafirm.imagepicker.model.Image;
 import com.facebook.common.executors.CallerThreadExecutor;
 import com.facebook.common.references.CloseableReference;
 import com.facebook.datasource.DataSource;
@@ -23,8 +24,11 @@ import com.facebook.imagepipeline.request.ImageRequestBuilder;
 import java.io.IOException;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
+import java.util.ArrayList;
+import java.util.List;
 
 import fr.free.nrw.commons.R;
+import fr.free.nrw.commons.location.LatLng;
 import timber.log.Timber;
 
 /**
@@ -33,15 +37,16 @@ import timber.log.Timber;
 
 public class ImageUtils {
 
-    public static final int IMAGE_DARK = 1;
-    public static final int IMAGE_BLURRY = 1 << 1;
+    static final int IMAGE_DARK = 1;
+    static final int IMAGE_BLURRY = 1 << 1;
     public static final int IMAGE_DUPLICATE = 1 << 2;
+    public static final int IMAGE_GEOLOCATION_DIFFERENT = 1 << 3;
     public static final int IMAGE_OK = 0;
     public static final int IMAGE_KEEP = -1;
     public static final int IMAGE_WAIT = -2;
     public static final int EMPTY_TITLE = -3;
     public static final int FILE_NAME_EXISTS = -4;
-    public static final int NO_CATEGORY_SELECTED = -5;
+    static final int NO_CATEGORY_SELECTED = -5;
 
     @IntDef(
             flag = true,
@@ -54,7 +59,8 @@ public class ImageUtils {
                     IMAGE_WAIT,
                     EMPTY_TITLE,
                     FILE_NAME_EXISTS,
-                    NO_CATEGORY_SELECTED
+                    NO_CATEGORY_SELECTED,
+                    IMAGE_GEOLOCATION_DIFFERENT
             }
     )
     @Retention(RetentionPolicy.SOURCE)
@@ -66,7 +72,7 @@ public class ImageUtils {
      * @return IMAGE_OK if image is neither dark nor blurry or if the input bitmapRegionDecoder provided is null
      * IMAGE_DARK if image is too dark
      */
-    public static @Result
+    static @Result
     int checkIfImageIsTooDark(BitmapRegionDecoder bitmapRegionDecoder) {
         if (bitmapRegionDecoder == null) {
             Timber.e("Expected bitmapRegionDecoder was null");
@@ -93,17 +99,27 @@ public class ImageUtils {
     }
 
     /**
-     * Pulls the pixels into an array and then runs through it while checking the brightness of each pixel.
-     * The calculation of brightness of each pixel is done by extracting the RGB constituents of the pixel
-     * and then applying the formula to calculate its "Luminance".
-     * Pixels with luminance greater than 40% are considered to be bright pixels while the ones with luminance
-     * greater than 26% but less than 40% are considered to be pixels with medium brightness. The rest are
-     * dark pixels.
-     * If the number of bright pixels is more than 2.5% or the number of pixels with medium brightness is
-     * more than 30% of the total number of pixels then the image is considered to be OK else dark.
-     * @param bitmap The bitmap that needs to be checked.
-     * @return true if bitmap is dark or null, false if bitmap is bright
+     * @param geolocationOfFileString Geolocation of image. If geotag doesn't exists, then this will be an empty string
+     * @param wikidataItemLocationString Location of wikidata item will be edited after upload
+     * @return false if image is neither dark nor blurry or if the input bitmapRegionDecoder provided is null
+     * true if geolocation of the image and wikidata item are different
      */
+    static boolean checkImageGeolocationIsDifferent(String geolocationOfFileString, String wikidataItemLocationString) {
+        Timber.d("Comparing geolocation of file with nearby place location");
+        if (geolocationOfFileString == null || geolocationOfFileString == "") { // Means that geolocation for this image is not given
+            return false; // Since we don't know geolocation of file, we choose letting upload
+        }
+
+        String[] geolocationOfFile = geolocationOfFileString.split("\\|");
+        String[] wikidataItemLocation = wikidataItemLocationString.split("/");
+
+        Double distance = LengthUtils.computeDistanceBetween(
+                new LatLng(Double.parseDouble(geolocationOfFile[0]),Double.parseDouble(geolocationOfFile[1]),0)
+                , new LatLng(Double.parseDouble(wikidataItemLocation[0]), Double.parseDouble(wikidataItemLocation[1]),0));
+        // Distance is more than 1 km, means that geolocation is wrong
+        return distance >= 1000;
+    }
+
     private static boolean checkIfImageIsDark(Bitmap bitmap) {
         if (bitmap == null) {
             Timber.e("Expected bitmap was null");
@@ -206,24 +222,48 @@ public class ImageUtils {
     }
 
     public static String getErrorMessageForResult(Context context, @Result int result) {
-        String errorMessage;
-        if (result == ImageUtils.IMAGE_DARK)
-            errorMessage = context.getString(R.string.upload_image_problem_dark);
-        else if (result == ImageUtils.IMAGE_BLURRY)
-            errorMessage = context.getString(R.string.upload_image_problem_blurry);
-        else if (result == ImageUtils.IMAGE_DUPLICATE)
-            errorMessage = context.getString(R.string.upload_image_problem_duplicate);
-        else if (result == (ImageUtils.IMAGE_DARK|ImageUtils.IMAGE_BLURRY))
-            errorMessage = context.getString(R.string.upload_image_problem_dark_blurry);
-        else if (result == (ImageUtils.IMAGE_DARK|ImageUtils.IMAGE_DUPLICATE))
-            errorMessage = context.getString(R.string.upload_image_problem_dark_duplicate);
-        else if (result == (ImageUtils.IMAGE_BLURRY|ImageUtils.IMAGE_DUPLICATE))
-            errorMessage = context.getString(R.string.upload_image_problem_blurry_duplicate);
-        else if (result == (ImageUtils.IMAGE_DARK|ImageUtils.IMAGE_BLURRY|ImageUtils.IMAGE_DUPLICATE))
-            errorMessage = context.getString(R.string.upload_image_problem_dark_blurry_duplicate);
-        else
-            return "";
+        /**
+         * Result variable is a result of an or operation of all possible problems. Ie. if result
+         * is 0001 means IMAGE_DARK, if result is 1100 IMAGE_DUPLICATE and IMAGE_GEOLOCATION_DIFFERENT
+         */
+        StringBuilder errorMessage = new StringBuilder();
+        if (result <= 0 ) {
+            Timber.d("No issues to warn user is found");
+        } else {
+            Timber.d("Issues found to warn user");
 
-        return errorMessage;
+            errorMessage.append(context.getResources().getString(R.string.upload_problem_exist));
+
+            if ((IMAGE_DARK & result) != 0 ) { // We are checking image dark bit to see if that bit is set or not
+                errorMessage.append("\n - ").append(context.getResources().getString(R.string.upload_problem_image_dark));
+            }
+
+            if ((IMAGE_BLURRY & result) != 0 ) {
+                errorMessage.append("\n - ").append(context.getResources().getString(R.string.upload_problem_image_blurry));
+            }
+
+            if ((IMAGE_DUPLICATE & result) != 0 ) {
+                errorMessage.append("\n - ").append(context.getResources().getString(R.string.upload_problem_image_duplicate));
+            }
+
+            if ((IMAGE_GEOLOCATION_DIFFERENT & result) != 0 ) {
+                errorMessage.append("\n - ").append(context.getResources().getString(R.string.upload_problem_different_geolocation));
+            }
+
+            errorMessage.append("\n\n").append(context.getResources().getString(R.string.upload_problem_do_you_continue));
+        }
+
+        return errorMessage.toString();
+    }
+
+    public static ArrayList<Uri> getUriListFromImages(List<Image> imageList) {
+        ArrayList<Uri> uriList = new ArrayList<>();
+        for (Image imagePath : imageList) {
+            if (!StringUtils.isNullOrWhiteSpace(imagePath.getPath())) {
+                uriList.add(Uri.parse(imagePath.getPath()));
+            }
+        }
+
+        return uriList;
     }
 }

@@ -8,9 +8,11 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.VisibleForTesting;
 import android.text.TextUtils;
+import android.util.Log;
 
 import com.google.gson.Gson;
 
+import fr.free.nrw.commons.campaigns.CampaignResponseDTO;
 import org.apache.http.HttpResponse;
 import org.apache.http.conn.ClientConnectionManager;
 import org.apache.http.conn.scheme.PlainSocketFactory;
@@ -43,6 +45,8 @@ import java.util.concurrent.Callable;
 import fr.free.nrw.commons.BuildConfig;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.PageTitle;
+import fr.free.nrw.commons.achievements.FeaturedImages;
+import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.achievements.FeedbackResponse;
 import fr.free.nrw.commons.auth.AccountUtil;
 import fr.free.nrw.commons.category.CategoryImageUtils;
@@ -51,6 +55,7 @@ import fr.free.nrw.commons.notification.Notification;
 import fr.free.nrw.commons.notification.NotificationUtils;
 import fr.free.nrw.commons.utils.ContributionUtils;
 import fr.free.nrw.commons.utils.DateUtils;
+import fr.free.nrw.commons.utils.ViewUtil;
 import in.yuvi.http.fluent.Http;
 import io.reactivex.Observable;
 import io.reactivex.Single;
@@ -59,7 +64,6 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 import timber.log.Timber;
-
 import static fr.free.nrw.commons.utils.ContinueUtils.getQueryContinue;
 
 /**
@@ -77,6 +81,10 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
     private SharedPreferences categoryPreferences;
     private Gson gson;
     private final OkHttpClient okHttpClient;
+    private final String WIKIMEDIA_CAMPAIGNS_BASE_URL =
+        "https://raw.githubusercontent.com/commons-app/campaigns/master/campaigns.json";
+
+    private final String ERROR_CODE_BAD_TOKEN = "badtoken";
 
     public ApacheHttpClientMediaWikiApi(Context context,
                                         String apiURL,
@@ -347,6 +355,7 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
     @Override
     @NonNull
     public Observable<String> searchCategories(String filterValue, int searchCatsLimit) {
+        List<String> categories = new ArrayList<>();
         return Single.fromCallable(() -> {
             List<CustomApiResult> categoryNodes = null;
             try {
@@ -367,11 +376,12 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
                 return new ArrayList<String>();
             }
 
-            List<String> categories = new ArrayList<>();
             for (CustomApiResult categoryNode : categoryNodes) {
                 String cat = categoryNode.getDocument().getTextContent();
                 String catString = cat.replace("Category:", "");
-                categories.add(catString);
+                if (!categories.contains(catString)) {
+                    categories.add(catString);
+                }
             }
 
             return categories;
@@ -769,7 +779,7 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
         }
 
         if (imageNodes == null) {
-            return new ArrayList<Media>();
+            return new ArrayList<>();
         }
 
         List<Media> images = new ArrayList<>();
@@ -809,7 +819,7 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
         }
 
         if (categoryNodes == null) {
-            return new ArrayList<String>();
+            return new ArrayList<>();
         }
 
         List<String> categories = new ArrayList<>();
@@ -898,6 +908,10 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
         if (!resultStatus.equals("Success")) {
             String errorCode = result.getString("/api/error/@code");
             Timber.e(errorCode);
+
+            if (errorCode.equals(ERROR_CODE_BAD_TOKEN)) {
+                ViewUtil.showLongToast(context, R.string.bad_token_error_proposed_solution);
+            }
             return new UploadResult(resultStatus, errorCode);
         } else {
             // If success we have to remove file from temp directory
@@ -988,7 +1002,15 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
                 if (json == null) {
                     return null;
                 }
-                return gson.fromJson(json, FeedbackResponse.class);
+                Timber.d(json);
+                try {
+                    return gson.fromJson(String.valueOf(response.body()), FeedbackResponse.class);
+                }
+                catch (Exception e){
+                    return new FeedbackResponse("",0,0,0,new FeaturedImages(0,0),0,"",0);
+                }
+
+
             }
             return null;
         });
@@ -1054,4 +1076,18 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
         }
     }
 
+    @Override public Single<CampaignResponseDTO> getCampaigns() {
+        return Single.fromCallable(() -> {
+            Request request = new Request.Builder().url(WIKIMEDIA_CAMPAIGNS_BASE_URL).build();
+            Response response = okHttpClient.newCall(request).execute();
+            if (response != null && response.body() != null && response.isSuccessful()) {
+                String json = response.body().string();
+                if (json == null) {
+                    return null;
+                }
+                return gson.fromJson(json, CampaignResponseDTO.class);
+            }
+            return null;
+        });
+    }
 }

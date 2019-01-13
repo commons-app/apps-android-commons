@@ -6,6 +6,7 @@ import android.content.ContentUris;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.database.Cursor;
+import android.media.ExifInterface;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Environment;
@@ -79,13 +80,45 @@ public class FileUtils {
     }
 
     /**
+     * Get Geolocation of file from input file path
+     */
+    static String getGeolocationOfFile(String filePath) {
+
+        try {
+            ExifInterface exifInterface = new ExifInterface(filePath);
+            GPSExtractor imageObj = new GPSExtractor(exifInterface);
+            if (imageObj.imageCoordsExists) { // If image has geolocation information in its EXIF
+                return imageObj.getCoords();
+            } else {
+                return "";
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+            return "";
+        }
+    }
+
+    static String createCopyPathAndCopy(boolean useExternalStorage,
+                                        Uri uri,
+                                        ContentResolver contentResolver,
+                                        Context context) throws IOException {
+        return useExternalStorage ? createExternalCopyPathAndCopy(uri, contentResolver) :
+                createCopyPathAndCopy(uri, context);
+    }
+
+    /**
      * In older devices getPath() may fail depending on the source URI. Creating and using a copy of the file seems to work instead.
      *
      * @return path of copy
      */
-    @NonNull
-    static String createExternalCopyPathAndCopy(Uri uri, ContentResolver contentResolver) throws IOException {
-        FileDescriptor fileDescriptor = contentResolver.openFileDescriptor(uri, "r").getFileDescriptor();
+    @Nullable
+    private static String createExternalCopyPathAndCopy(Uri uri, ContentResolver contentResolver) throws IOException {
+        ParcelFileDescriptor parcelFileDescriptor = contentResolver.openFileDescriptor(uri, "r");
+        if (parcelFileDescriptor == null) {
+            return null;
+        }
+
+        FileDescriptor fileDescriptor = parcelFileDescriptor.getFileDescriptor();
         String copyPath = Environment.getExternalStorageDirectory().toString() + "/CommonsApp/" + new Date().getTime() + "." + getFileExt(uri, contentResolver);
         File newFile = new File(Environment.getExternalStorageDirectory().toString() + "/CommonsApp");
         newFile.mkdir();
@@ -99,8 +132,8 @@ public class FileUtils {
      *
      * @return path of copy
      */
-    @NonNull
-    static String createCopyPathAndCopy(Uri uri, Context context) throws IOException {
+    @Nullable
+    private static String createCopyPathAndCopy(Uri uri, Context context) throws IOException {
         FileDescriptor fileDescriptor = context.getContentResolver().openFileDescriptor(uri, "r").getFileDescriptor();
         String copyPath = context.getCacheDir().getAbsolutePath() + "/" + new Date().getTime() + "." + getFileExt(uri, context.getContentResolver());
         FileUtils.copy(fileDescriptor, copyPath);
@@ -234,8 +267,8 @@ public class FileUtils {
      * @return The value of the _data column, which is typically a file path.
      */
     @Nullable
-    public static String getDataColumn(Context context, Uri uri, String selection,
-                                       String[] selectionArgs) {
+    private static String getDataColumn(Context context, Uri uri, String selection,
+                                        String[] selectionArgs) {
 
         Cursor cursor = null;
         final String column = MediaStore.Images.ImageColumns.DATA;
@@ -311,7 +344,7 @@ public class FileUtils {
      * @param destination file path copied to
      * @throws IOException thrown when failing to read source or opening destination file
      */
-    public static void copy(@NonNull FileDescriptor source, @NonNull String destination)
+    private static void copy(@NonNull FileDescriptor source, @NonNull String destination)
             throws IOException {
         copy(new FileInputStream(source), new FileOutputStream(destination));
     }
@@ -415,18 +448,22 @@ public class FileUtils {
         return result;
     }
 
-    public static String getFileExt(String fileName){
+    static String getFileExt(String fileName) {
         //Default file extension
-        String extension=".jpg";
+        String extension = ".jpg";
 
         int i = fileName.lastIndexOf('.');
         if (i > 0) {
-            extension = fileName.substring(i+1);
+            extension = fileName.substring(i + 1);
         }
         return extension;
     }
 
-    public static String getFileExt(Uri uri, ContentResolver contentResolver) {
+    private static String getFileExt(Uri uri, ContentResolver contentResolver) {
         return getFileExt(getFilename(uri, contentResolver));
+    }
+
+    public static FileInputStream getFileInputStream(String filePath) throws FileNotFoundException {
+        return new FileInputStream(filePath);
     }
 }
