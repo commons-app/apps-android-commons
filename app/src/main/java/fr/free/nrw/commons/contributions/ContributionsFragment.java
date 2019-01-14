@@ -653,11 +653,9 @@ public class ContributionsFragment
         locationManager.context = null;
         super.onDestroy();
 
-        if (isUploadServiceConnected) {
-            if (getActivity() != null) {
+        if (isUploadServiceConnected && getActivity() != null) {
                 getActivity().unbindService(uploadServiceConnection);
                 isUploadServiceConnected = false;
-            }
         }
 
         if (placesDisposable != null) {

@@ -263,12 +263,9 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
         LatLng lastLocation = locationManager.getLastLocation();
 
         if (curLatLng != null && curLatLng.equals(lastLocation)
-                && !locationChangeType.equals(MAP_UPDATED)) { //refresh view only if location has changed
+                && !locationChangeType.equals(MAP_UPDATED) && !onOrientationChanged) { //refresh view only if location has changed
             // Two exceptional cases to refresh nearby map manually.
-            if (!onOrientationChanged) {
                 return;
-            }
-
         }
         curLatLng = lastLocation;
 

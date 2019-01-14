@@ -109,7 +109,7 @@ public class MediaDataExtractor {
             Node descriptionNode = findTemplateParameter(templateNode, "description");
             descriptions = getMultilingualText(descriptionNode);
 
-            Node authorNode = findTemplateParameter(templateNode, "author");
+            //Node authorNode = findTemplateParameter(templateNode, "author");
         }
 
         Node coordinateTemplateNode = findTemplate(doc.getDocumentElement(), "location");

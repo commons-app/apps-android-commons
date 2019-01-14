@@ -63,11 +63,9 @@ public class UnreadNotificationsCheckAsync extends AsyncTask<Void, Void, Notific
         }
 
         // Check if activity is still running
-        if (context.get().getWindow().getDecorView().isShown() && !context.get().isFinishing()) {
+        if (context.get().getWindow().getDecorView().isShown() && !context.get().isFinishing() && context.get().isContributionsFragmentVisible && context.get().contributionsActivityPagerAdapter.getItem(0) != null) {
             // Check if fragment is not null and visible
-            if (context.get().isContributionsFragmentVisible && context.get().contributionsActivityPagerAdapter.getItem(0) != null) {
                 ((ContributionsFragment)(context.get().contributionsActivityPagerAdapter.getItem(0))).updateNotificationsNotification(isThereUnreadNotifications);
-            }
         }
     }
 
