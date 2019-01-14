@@ -2,6 +2,7 @@ package fr.free.nrw.commons.upload
 
 import android.net.Uri
 import fr.free.nrw.commons.mwapi.MediaWikiApi
+import fr.free.nrw.commons.nearby.Place
 import org.junit.Before
 import org.junit.Test
 import org.mockito.InjectMocks
@@ -44,7 +45,6 @@ class UploadPresenterTest {
     @Test
     fun receiveDirect() {
         val element = Mockito.mock(Uri::class.java)
-        uploadModel!!.receiveDirect(element, "image/jpeg", "external", "Q1", "Test", "Test", { _, _ -> }
-                , "")
+        uploadModel!!.receiveDirect(element, "image/jpeg", "external", Mockito.mock(Place::class.java)) { _, _ -> }
     }
 }

@@ -45,7 +45,7 @@
   <string name="upload_completed_notification_title">Se ha cargado %1$s.</string>
   <string name="upload_completed_notification_text">Pulsa para ver tu subida</string>
   <string name="upload_progress_notification_title_start">Empezando la subida de %1$s</string>
-  <string name="upload_progress_notification_title_in_progress">Cargando %1$s</string>
+  <string name="upload_progress_notification_title_in_progress">Subiendo %1$s</string>
   <string name="upload_progress_notification_title_finishing">Finalizando la subida de %1$s</string>
   <string name="upload_failed_notification_title">Falló la carga de %1$s</string>
   <string name="upload_failed_notification_subtitle">Toca para ver</string>
@@ -103,7 +103,7 @@
   <string name="categories_activity_title">Categorías</string>
   <string name="title_activity_settings">Ajustes</string>
   <string name="title_activity_signup">Regístrate</string>
-  <string name="title_activity_featured_images">Imágenes en destaque</string>
+  <string name="title_activity_featured_images">Imágenes destacadas</string>
   <string name="title_activity_category_details">Categoría</string>
   <string name="menu_about">Acerca de</string>
   <string name="about_license">La aplicación de código abierto Wikimedia Commons fue creada por, y recibe mantenimiento de, cesionarios y voluntarios de la comunidad de Wikimedia. La Fundación Wikimedia no está involucrada en la creación, el desarrollo ni el mantenimiento de la aplicación.</string>
@@ -361,7 +361,7 @@
   <string name="statistics_thanks">Agradecimientos recibidos</string>
   <string name="statistics_featured">Imágenes destacadas</string>
   <string name="level">NIVEL</string>
-  <string name="images_uploaded">Las imágenes han sido subidas</string>
+  <string name="images_uploaded">Imágenes subidas</string>
   <string name="image_reverts">Imágenes no revertidas</string>
   <string name="images_used_by_wiki">Imágenes utilizadas</string>
   <string name="achievements_share_message">¡Comparte tus logros con tus amigos!</string>

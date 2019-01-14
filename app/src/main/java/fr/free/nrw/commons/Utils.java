@@ -1,12 +1,10 @@
 package fr.free.nrw.commons;
 
-import android.app.Activity;
 import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
-import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.customtabs.CustomTabsIntent;
 import android.support.v4.content.ContextCompat;
@@ -163,15 +161,6 @@ public class Utils {
         }
 
         return title;
-    }
-
-    /**
-     * Tells whether dark theme is active or not
-     * @param context Activity context
-     * @return The state of dark theme
-     */
-    public static boolean isDarkTheme(Context context) {
-        return PreferenceManager.getDefaultSharedPreferences(context).getBoolean("theme", false);
     }
 
     /**

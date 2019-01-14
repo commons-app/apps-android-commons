@@ -2,7 +2,6 @@ package fr.free.nrw.commons.explore.images;
 
 
 import android.annotation.SuppressLint;
-import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.os.Handler;
@@ -33,6 +32,7 @@ import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
 import fr.free.nrw.commons.explore.SearchActivity;
 import fr.free.nrw.commons.explore.recentsearches.RecentSearch;
 import fr.free.nrw.commons.explore.recentsearches.RecentSearchesDao;
+import fr.free.nrw.commons.kvstore.BasicKvStore;
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
 import fr.free.nrw.commons.utils.NetworkUtils;
 import fr.free.nrw.commons.utils.ViewUtil;
@@ -62,7 +62,7 @@ public class SearchImageFragment extends CommonsDaggerSupportFragment {
 
     @Inject RecentSearchesDao recentSearchesDao;
     @Inject MediaWikiApi mwApi;
-    @Inject @Named("default_preferences") SharedPreferences prefs;
+    @Inject @Named("default_preferences") BasicKvStore defaultKvStore;
 
     private RVRendererAdapter<Media> imagesAdapter;
     private List<Media> queryList = new ArrayList<>();

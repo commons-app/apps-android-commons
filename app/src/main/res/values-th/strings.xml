@@ -6,6 +6,8 @@
 * Octahedron80
 -->
 <resources>
+  <string name="title_activity_explore">สำรวจ</string>
+  <string name="navigation_item_explore">สำรวจ</string>
   <string name="preference_category_appearance">การแสดงผล</string>
   <string name="preference_category_general">ทั่วไป</string>
   <string name="preference_category_feedback">คำติชม</string>
@@ -13,6 +15,7 @@
   <string name="app_name">คอมมอนส์</string>
   <string name="bullet">•</string>
   <string name="menu_settings">การตั้งค่า</string>
+  <string name="intent_share_upload_label">อัปโหลดไปยังคอมมอนส์</string>
   <string name="username">ชื่อผู้ใช้</string>
   <string name="password">รหัสผ่าน</string>
   <string name="login_credential">ลงชื่อเข้าระบบบัญชีคอมมอนส์บีตาของคุณ</string>
@@ -24,7 +27,7 @@
   <string name="login_success">การเข้าสู่ระบบสำเร็จแล้ว!</string>
   <string name="login_failed">การเข้าสู่ระบบล้มเหลว!</string>
   <string name="upload_failed">ไม่พบไฟล์ กรุณาลองใช้ไฟล์อื่น</string>
-  <string name="authentication_failed" fuzzy="true">การตรวจสอบความถูกต้องล้มเหลว!</string>
+  <string name="authentication_failed">การตรวจสอบล้มเหลว โปรดเข้าสู่ระบบอีกครั้ง</string>
   <string name="uploading_started">เริ่มการอัปโหลดแล้ว!</string>
   <string name="upload_completed_notification_title">อัปโหลด %1$s แล้ว!</string>
   <string name="upload_completed_notification_text">แตะเพื่อดูการอัปโหลดของคุณ</string>
@@ -45,7 +48,7 @@
   <string name="provider_contributions">การอัปโหลดของฉัน</string>
   <string name="menu_share">แชร์</string>
   <string name="menu_open_in_browser">ดูในเบราว์เซอร์</string>
-  <string name="share_title_hint" fuzzy="true">ชื่อเรื่อง</string>
+  <string name="share_title_hint">ชื่อเรื่อง (จำเป็น)</string>
   <string name="add_title_toast">กรุณาระบุชืิ่อเรื่องของไฟล์นี้</string>
   <string name="share_description_hint">คำอธิบาย</string>
   <string name="login_failed_network">ไม่สามารถเข้าสู่ระบบได้ - ความล้มเหลวของเครือข่าย</string>
@@ -252,4 +255,7 @@
   <string name="about_translate_proceed">ดำเนินการต่อ</string>
   <string name="about_translate_cancel">ยกเลิก</string>
   <string name="retry">ลองใหม่</string>
+  <string name="no_image">ไม่มีภาพที่ใช้</string>
+  <string name="no_image_reverted">ไม่มีภาพย้อนกลับ</string>
+  <string name="no_image_uploaded">ไม่มีภาพที่อัปโหลด</string>
 </resources>

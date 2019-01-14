@@ -1,19 +1,19 @@
 package fr.free.nrw.commons;
 
-import android.content.SharedPreferences;
-import android.preference.PreferenceManager;
+import android.content.Context;
+import android.support.test.InstrumentationRegistry;
 import android.support.test.espresso.Espresso;
 import android.support.test.espresso.matcher.PreferenceMatchers;
 import android.support.test.filters.LargeTest;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
 
+import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import java.util.Map;
-
+import fr.free.nrw.commons.kvstore.BasicKvStore;
 import fr.free.nrw.commons.settings.Prefs;
 import fr.free.nrw.commons.settings.SettingsActivity;
 
@@ -28,40 +28,18 @@ import static org.junit.Assert.assertEquals;
 @LargeTest
 @RunWith(AndroidJUnit4.class)
 public class SettingsActivityTest {
-    private SharedPreferences prefs;
-    private Map<String,?> prefValues;
+    BasicKvStore prefs;
 
     @Rule
     public ActivityTestRule<SettingsActivity> activityRule =
-            new ActivityTestRule<SettingsActivity>(SettingsActivity.class, false, true) {
+            new ActivityTestRule<>(SettingsActivity.class, false, true);
 
-                @Override
-                protected void afterActivityLaunched() {
-                    // save preferences
-                    prefs = PreferenceManager.getDefaultSharedPreferences(this.getActivity());
-                    prefValues = prefs.getAll();
-                }
-
-                @Override
-                protected void afterActivityFinished() {
-                    // restore preferences
-                    SharedPreferences.Editor editor = prefs.edit();
-                    for (Map.Entry<String,?> entry: prefValues.entrySet()) {
-                        String key = entry.getKey();
-                        Object val = entry.getValue();
-                        if (val instanceof String) {
-                            editor.putString(key, (String)val);
-                        } else if (val instanceof Boolean) {
-                            editor.putBoolean(key, (Boolean)val);
-                        } else if (val instanceof Integer) {
-                            editor.putInt(key, (Integer)val);
-                        } else {
-                            throw new RuntimeException("type not implemented: " + entry);
-                        }
-                    }
-                    editor.apply();
-                }
-            };
+    @Before
+    public void setup() {
+        Context context = InstrumentationRegistry.getTargetContext();
+        String storeName = context.getPackageName() + "_preferences";
+        prefs = new BasicKvStore(context, storeName);
+    }
 
     @Test
     public void setRecentUploadLimitTo100() {
@@ -72,7 +50,6 @@ public class SettingsActivityTest {
 
         // Try setting it to 100
         Espresso.onView(withId(android.R.id.edit))
-
                 .perform(replaceText("100"));
 
         // Click "OK"
