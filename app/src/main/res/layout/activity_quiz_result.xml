@@ -30,7 +30,8 @@
                 android:layout_height="wrap_content"
                 xmlns:app="http://schemas.android.com/apk/res-auto"
                 android:orientation="vertical"
-                tools:context="fr.free.nrw.commons.quiz.QuizResultActivity">
+                tools:context="fr.free.nrw.commons.quiz.QuizResultActivity"
+                android:id="@+id/quiz_result">
 
 
                 <TextView
@@ -76,6 +77,7 @@
                 android:layout_alignParentBottom="true"
                 android:layout_alignParentRight="true"
                 android:layout_marginRight="@dimen/activity_margin_horizontal"
+                android:layout_below="@+id/quiz_result"
                 android:id="@+id/quiz_result_next"
                 android:layout_marginBottom="@dimen/activity_margin_vertical"
                 android:paddingHorizontal="@dimen/activity_margin_horizontal"
