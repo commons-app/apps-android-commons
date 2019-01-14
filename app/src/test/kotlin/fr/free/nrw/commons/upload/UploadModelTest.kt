@@ -7,7 +7,10 @@ import android.content.SharedPreferences
 import android.graphics.BitmapRegionDecoder
 import android.net.Uri
 import fr.free.nrw.commons.auth.SessionManager
+import fr.free.nrw.commons.kvstore.BasicKvStore
+import fr.free.nrw.commons.location.LatLng
 import fr.free.nrw.commons.mwapi.MediaWikiApi
+import fr.free.nrw.commons.nearby.Place
 import fr.free.nrw.commons.utils.BitmapRegionDecoderWrapper
 import fr.free.nrw.commons.utils.ImageUtils.IMAGE_OK
 import fr.free.nrw.commons.utils.ImageUtilsWrapper
@@ -35,7 +38,7 @@ class UploadModelTest {
     internal var licenses: List<String>? = null
     @Mock
     @field:[Inject Named("default_preferences")]
-    internal var prefs: SharedPreferences? = null
+    internal var prefs: BasicKvStore? = null
     @Mock
     @field:[Inject Named("licenses_by_name")]
     internal var licensesByName: Map<String, String>? = null
@@ -76,7 +79,7 @@ class UploadModelTest {
                 .thenReturn("")
         `when`(imageUtilsWrapper!!.checkIfImageIsTooDark(any(BitmapRegionDecoder::class.java)))
                 .thenReturn(IMAGE_OK)
-        `when`(imageUtilsWrapper!!.checkImageGeolocationIsDifferent(anyString(), anyString()))
+        `when`(imageUtilsWrapper!!.checkImageGeolocationIsDifferent(anyString(), any(LatLng::class.java)))
                 .thenReturn(false)
         `when`(bitmapRegionDecoderWrapper!!.newInstance(any(FileInputStream::class.java), anyBoolean()))
                 .thenReturn(mock(BitmapRegionDecoder::class.java))
@@ -100,24 +103,21 @@ class UploadModelTest {
     @Test
     fun receiveDirect() {
         val element = mock(Uri::class.java)
-        uploadModel!!.receiveDirect(element, "image/jpeg", "external", "Q1", "Test", "Test", { _, _ -> }
-                , "")
+        uploadModel!!.receiveDirect(element, "image/jpeg", "external", mock(Place::class.java)) { _, _ -> }
         assertTrue(uploadModel!!.items.size == 1)
     }
 
     @Test
     fun verifyPreviousNotAvailableForDirectUpload() {
         val element = mock(Uri::class.java)
-        uploadModel!!.receiveDirect(element, "image/jpeg", "external", "Q1", "Test", "Test", { _, _ -> }
-                , "")
+        uploadModel!!.receiveDirect(element, "image/jpeg", "external", mock(Place::class.java)) { _, _ -> }
         assertFalse(uploadModel!!.isPreviousAvailable)
     }
 
     @Test
     fun verifyNextAvailableForDirectUpload() {
         val element = mock(Uri::class.java)
-        uploadModel!!.receiveDirect(element, "image/jpeg", "external", "Q1", "Test", "Test", { _, _ -> }
-                , "")
+        uploadModel!!.receiveDirect(element, "image/jpeg", "external", mock(Place::class.java)) { _, _ -> }
         assertTrue(uploadModel!!.isNextAvailable)
     }
 
@@ -151,16 +151,14 @@ class UploadModelTest {
     @Test
     fun isSubmitAvailableForDirectUpload() {
         val element = mock(Uri::class.java)
-        uploadModel!!.receiveDirect(element, "image/jpeg", "external", "Q1", "Test", "Test", { _, _ -> }
-                , "")
+        uploadModel!!.receiveDirect(element, "image/jpeg", "external", mock(Place::class.java)) { _, _ -> }
         assertTrue(uploadModel!!.isNextAvailable)
     }
 
     @Test
     fun getCurrentStepForDirectUpload() {
         val element = mock(Uri::class.java)
-        uploadModel!!.receiveDirect(element, "image/jpeg", "external", "Q1", "Test", "Test", { _, _ -> }
-                , "")
+        uploadModel!!.receiveDirect(element, "image/jpeg", "external", mock(Place::class.java)) { _, _ -> }
         assertTrue(uploadModel!!.currentStep == 1)
     }
 
@@ -185,16 +183,14 @@ class UploadModelTest {
     @Test
     fun getStepCountForDirectUpload() {
         val element = mock(Uri::class.java)
-        uploadModel!!.receiveDirect(element, "image/jpeg", "external", "Q1", "Test", "Test", { _, _ -> }
-                , "")
+        uploadModel!!.receiveDirect(element, "image/jpeg", "external", mock(Place::class.java)) { _, _ -> }
         assertTrue(uploadModel!!.stepCount == 3)
     }
 
     @Test
     fun getDirectCount() {
         val element = mock(Uri::class.java)
-        uploadModel!!.receiveDirect(element, "image/jpeg", "external", "Q1", "Test", "Test", { _, _ -> }
-                , "")
+        uploadModel!!.receiveDirect(element, "image/jpeg", "external", mock(Place::class.java)) { _, _ -> }
         assertTrue(uploadModel!!.count == 1)
     }
 
@@ -219,8 +215,7 @@ class UploadModelTest {
     @Test
     fun getDirectUploads() {
         val element = mock(Uri::class.java)
-        uploadModel!!.receiveDirect(element, "image/jpeg", "external", "Q1", "Test", "Test", { _, _ -> }
-                , "")
+        uploadModel!!.receiveDirect(element, "image/jpeg", "external", mock(Place::class.java)) { _, _ -> }
         assertTrue(uploadModel!!.uploads.size == 1)
     }
 
@@ -236,8 +231,7 @@ class UploadModelTest {
     @Test
     fun isTopCardStateForDirectUpload() {
         val element = mock(Uri::class.java)
-        uploadModel!!.receiveDirect(element, "image/jpeg", "external", "Q1", "Test", "Test", { _, _ -> }
-                , "")
+        uploadModel!!.receiveDirect(element, "image/jpeg", "external", mock(Place::class.java)) { _, _ -> }
         assertTrue(uploadModel!!.isTopCardState)
     }
 

@@ -2,7 +2,6 @@ package fr.free.nrw.commons.nearby;
 
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -29,6 +28,8 @@ import dagger.android.support.AndroidSupportInjection;
 import dagger.android.support.DaggerFragment;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.contributions.ContributionController;
+import fr.free.nrw.commons.kvstore.BasicKvStore;
+import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.location.LatLng;
 import fr.free.nrw.commons.utils.ImageUtils;
 import fr.free.nrw.commons.utils.UriDeserializer;
@@ -51,8 +52,8 @@ public class NearbyListFragment extends DaggerFragment {
     private RecyclerView recyclerView;
 
     @Inject ContributionController controller;
-    @Inject @Named("direct_nearby_upload_prefs") SharedPreferences directPrefs;
-    @Inject @Named("default_preferences") SharedPreferences defaultPrefs;
+    @Inject @Named("direct_nearby_upload_prefs") JsonKvStore directKvStore;
+    @Inject @Named("default_preferences") BasicKvStore defaultKvStore;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {

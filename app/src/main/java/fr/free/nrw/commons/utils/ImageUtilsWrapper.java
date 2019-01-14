@@ -5,6 +5,8 @@ import android.graphics.BitmapRegionDecoder;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
+import fr.free.nrw.commons.location.LatLng;
+
 import static fr.free.nrw.commons.utils.ImageUtils.*;
 
 @Singleton
@@ -19,7 +21,7 @@ public class ImageUtilsWrapper {
         return ImageUtils.checkIfImageIsTooDark(bitmapRegionDecoder);
     }
 
-    public boolean checkImageGeolocationIsDifferent(String geolocationOfFileString, String wikidataItemLocationString) {
-        return ImageUtils.checkImageGeolocationIsDifferent(geolocationOfFileString, wikidataItemLocationString);
+    public boolean checkImageGeolocationIsDifferent(String geolocationOfFileString, LatLng latLng) {
+        return ImageUtils.checkImageGeolocationIsDifferent(geolocationOfFileString, latLng);
     }
 }

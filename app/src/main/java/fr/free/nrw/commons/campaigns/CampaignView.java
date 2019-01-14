@@ -8,15 +8,18 @@ import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.TextView;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.contributions.MainActivity;
+import fr.free.nrw.commons.kvstore.BasicKvStore;
 import fr.free.nrw.commons.utils.SwipableCardView;
 import fr.free.nrw.commons.utils.ViewUtil;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 /**
  * A view which represents a single campaign
@@ -24,20 +27,21 @@ import java.util.Date;
 public class CampaignView extends SwipableCardView {
     Campaign campaign = null;
     private ViewHolder viewHolder;
+    private BasicKvStore defaultKvStore;
 
     public CampaignView(@NonNull Context context) {
         super(context);
-        init();
+        init(context);
     }
 
     public CampaignView(@NonNull Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
-        init();
+        init(context);
     }
 
     public CampaignView(@NonNull Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-        init();
+        init(context);
     }
 
     public void setCampaign(Campaign campaign) {
@@ -52,16 +56,16 @@ public class CampaignView extends SwipableCardView {
 
     @Override public boolean onSwipe(View view) {
         view.setVisibility(View.GONE);
-        ((MainActivity) getContext()).prefs.edit()
-            .putBoolean("displayCampaignsCardView", false)
-            .apply();
+        ((MainActivity) getContext()).defaultKvStore
+                .putBoolean("displayCampaignsCardView", false);
         ViewUtil.showLongToast(getContext(),
             getResources().getString(R.string.nearby_campaign_dismiss_message));
         return true;
     }
 
-    private void init() {
+    private void init(Context context) {
         View rootView = inflate(getContext(), R.layout.layout_campagin, this);
+        defaultKvStore = new BasicKvStore(context, "default_preferences");
         viewHolder = new ViewHolder(rootView);
         setOnClickListener(view -> {
             if (campaign != null) {
