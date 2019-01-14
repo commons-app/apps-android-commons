@@ -3,13 +3,12 @@ package fr.free.nrw.commons.upload
 import android.net.Uri
 import fr.free.nrw.commons.mwapi.MediaWikiApi
 import fr.free.nrw.commons.nearby.Place
+import io.reactivex.Observable
 import org.junit.Before
 import org.junit.Test
-import org.mockito.InjectMocks
-import org.mockito.Mock
-import org.mockito.Mockito
+import org.mockito.*
+import org.mockito.Mockito.`when`
 import org.mockito.Mockito.mock
-import org.mockito.MockitoAnnotations
 
 class UploadPresenterTest {
 
@@ -27,6 +26,12 @@ class UploadPresenterTest {
     @Throws(Exception::class)
     fun setUp() {
         MockitoAnnotations.initMocks(this)
+        `when`(uploadModel!!.preProcessImages(ArgumentMatchers.anyListOf(Uri::class.java),
+                ArgumentMatchers.anyString(),
+                ArgumentMatchers.any(Place::class.java),
+                ArgumentMatchers.anyString(),
+                ArgumentMatchers.any(SimilarImageInterface::class.java)))
+                .thenReturn(Observable.just(mock(UploadModel.UploadItem::class.java)))
     }
 
     @Test
