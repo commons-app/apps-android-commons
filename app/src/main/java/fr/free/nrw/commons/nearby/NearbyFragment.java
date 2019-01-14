@@ -131,14 +131,16 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
     /**
      * Hide or expand bottom sheet according to states of all sheets
      */
-    public void listOptionMenuIteClicked() {
+    public boolean listOptionMenuIteClicked() {
         if(bottomSheetBehavior.getState()==BottomSheetBehavior.STATE_COLLAPSED || bottomSheetBehavior.getState()==BottomSheetBehavior.STATE_HIDDEN){
             bottomSheetBehaviorForDetails.setState(BottomSheetBehavior.STATE_HIDDEN);
             bottomSheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
+            return false;
         }else if(bottomSheetBehavior.getState()==BottomSheetBehavior.STATE_EXPANDED){
             bottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
+            return true ;
         }
-
+        return false;
     }
 
     /**
