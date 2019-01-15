@@ -36,6 +36,7 @@ import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
 import fr.free.nrw.commons.location.LatLng;
 import fr.free.nrw.commons.location.LocationServiceManager;
 import fr.free.nrw.commons.location.LocationUpdateListener;
+import fr.free.nrw.commons.utils.DialogUtil;
 import fr.free.nrw.commons.utils.FragmentUtils;
 import fr.free.nrw.commons.utils.NetworkUtils;
 import fr.free.nrw.commons.utils.UriSerializer;
@@ -653,22 +654,27 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
                                 startActivityForResult(callGPSSettingIntent, 1);
                             })
                     .setNegativeButton(R.string.menu_cancel_upload, (dialog, id) -> {
-                        new AlertDialog.Builder(getActivity())
-                                .setMessage("GPS needs to be enabled to use this feature")
-                                .setCancelable(false)
-                                .setPositiveButton(R.string.enable_gps,
-                                        (dialog2, id2) -> {
-                                            Intent callGPSSettingIntent = new Intent(
-                                                    android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS);
-                                            Timber.d("Loaded settings page");
-                                            startActivityForResult(callGPSSettingIntent, 1);
-                                })
-                                .setNegativeButton(R.string.cancel, (dialog2, which) -> {
-                                    dialog2.cancel();
-                                    ((MainActivity)getActivity()).viewPager.setCurrentItem(((MainActivity)getActivity()).CONTRIBUTIONS_TAB_POSITION);
-                                })
-                                .create()
-                                .show();
+                        DialogUtil.showAlertDialog(
+                                getActivity(),
+                                null,
+                                getString(R.string.nearby_needs_gps),
+                                getString(R.string.enable_gps),
+                                getString(R.string.cancel),
+                                new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        Intent callGPSSettingIntent = new Intent(
+                                                android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+                                        Timber.d("Loaded settings page");
+                                        startActivityForResult(callGPSSettingIntent, 1);
+                                    }
+                                },
+                                new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        ((MainActivity)getActivity()).viewPager.setCurrentItem(((MainActivity)getActivity()).CONTRIBUTIONS_TAB_POSITION);
+                                    }
+                                });
                         dialog.cancel();
                     })
                     .create()

@@ -230,6 +230,7 @@
   <string name="navigation_item_notification">Notifications</string>
   <string name="navigation_item_featured_images">Featured</string>
   <string name="nearby_needs_permissions">Nearby places cannot be displayed without location permissions</string>
+  <string name="nearby_needs_gps">GPS needs to be enabled to use this feature.</string>
   <string name="no_description_found">no description found</string>
   <string name="nearby_info_menu_commons_article">Commons file page</string>
   <string name="nearby_info_menu_wikidata_article">Wikidata item</string>
