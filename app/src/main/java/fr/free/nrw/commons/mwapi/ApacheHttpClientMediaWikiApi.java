@@ -82,7 +82,7 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
     private Gson gson;
     private final OkHttpClient okHttpClient;
     private final String WIKIMEDIA_CAMPAIGNS_BASE_URL =
-        "https://raw.githubusercontent.com/commons-app/campaigns/master/campaigns.json";
+            "https://raw.githubusercontent.com/commons-app/campaigns/master/campaigns.json";
 
     private final String ERROR_CODE_BAD_TOKEN = "badtoken";
 
@@ -591,6 +591,7 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
                     .param("meta", "notifications")
                     .param("notformat", "model")
                     .param("notwikis", "wikidatawiki|commonswiki|enwiki")
+                    .param("notfilter","!read")
                     .get()
                     .getNode("/api/query/notifications/list");
         } catch (IOException e) {
