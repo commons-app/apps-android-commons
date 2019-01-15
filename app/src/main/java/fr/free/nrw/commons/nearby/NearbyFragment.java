@@ -653,7 +653,22 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
                                 startActivityForResult(callGPSSettingIntent, 1);
                             })
                     .setNegativeButton(R.string.menu_cancel_upload, (dialog, id) -> {
-                        showLocationPermissionDeniedErrorDialog();
+                        new AlertDialog.Builder(getActivity())
+                                .setMessage("GPS needs to be enabled to use this feature")
+                                .setCancelable(false)
+                                .setPositiveButton(R.string.enable_gps,
+                                        (dialog2, id2) -> {
+                                            Intent callGPSSettingIntent = new Intent(
+                                                    android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+                                            Timber.d("Loaded settings page");
+                                            startActivityForResult(callGPSSettingIntent, 1);
+                                })
+                                .setNegativeButton(R.string.cancel, (dialog2, which) -> {
+                                    dialog2.cancel();
+                                    ((MainActivity)getActivity()).viewPager.setCurrentItem(((MainActivity)getActivity()).CONTRIBUTIONS_TAB_POSITION);
+                                })
+                                .create()
+                                .show();
                         dialog.cancel();
                     })
                     .create()
