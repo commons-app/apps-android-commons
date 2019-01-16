@@ -660,20 +660,14 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
                                 getString(R.string.nearby_needs_gps),
                                 getString(R.string.enable_gps),
                                 getString(R.string.cancel),
-                                new Runnable() {
-                                    @Override
-                                    public void run() {
-                                        Intent callGPSSettingIntent = new Intent(
-                                                android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS);
-                                        Timber.d("Loaded settings page");
-                                        startActivityForResult(callGPSSettingIntent, 1);
-                                    }
-                                },
-                                new Runnable() {
-                                    @Override
-                                    public void run() {
-                                        ((MainActivity)getActivity()).viewPager.setCurrentItem(((MainActivity)getActivity()).CONTRIBUTIONS_TAB_POSITION);
-                                    }
+                                () -> {
+                                    Intent callGPSSettingIntent = new Intent(
+                                    android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+                                    Timber.d("Loaded settings page");
+                                    startActivityForResult(callGPSSettingIntent, 1);
+                                    },
+                                () -> {
+                                    ((MainActivity)getActivity()).viewPager.setCurrentItem(((MainActivity)getActivity()).CONTRIBUTIONS_TAB_POSITION);
                                 });
                         dialog.cancel();
                     })
