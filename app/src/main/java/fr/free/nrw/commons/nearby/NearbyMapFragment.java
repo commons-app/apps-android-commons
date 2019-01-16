@@ -531,6 +531,9 @@ public class NearbyMapFragment extends DaggerFragment {
                 updateMapSignificantlyForCurrentLocation();
             });
             mapView.setStyleUrl("asset://mapstyle.json");
+            mapView.getMapAsync(mapboxMap -> {
+                mapboxMap.getUiSettings().setZoomControlsEnabled(true);
+            });
         }
     }
 
