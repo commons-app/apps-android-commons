@@ -10,8 +10,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.esafirm.imagepicker.features.ImagePicker;
-import com.esafirm.imagepicker.model.Image;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
@@ -31,11 +29,8 @@ import fr.free.nrw.commons.contributions.ContributionController;
 import fr.free.nrw.commons.kvstore.BasicKvStore;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.location.LatLng;
-import fr.free.nrw.commons.utils.ImageUtils;
 import fr.free.nrw.commons.utils.UriDeserializer;
 import timber.log.Timber;
-
-import static fr.free.nrw.commons.utils.IntentUtils.shouldNearbyHandle;
 
 public class NearbyListFragment extends DaggerFragment {
     private Bundle bundleForUpdates; // Carry information from activity about changed nearby places and current location
@@ -132,17 +127,6 @@ public class NearbyListFragment extends DaggerFragment {
         }
 
         return placeList;
-    }
-
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (shouldNearbyHandle(requestCode, resultCode, data)) {
-            List<Image> images = ImagePicker.getImages(data);
-            Intent shareIntent = controller.handleImagesPicked(ImageUtils.getUriListFromImages(images), requestCode);
-            startActivity(shareIntent);
-        } else {
-            super.onActivityResult(requestCode, resultCode, data);
-        }
     }
 
     /**

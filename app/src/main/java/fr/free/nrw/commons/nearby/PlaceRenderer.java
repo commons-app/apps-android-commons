@@ -144,7 +144,7 @@ public class PlaceRenderer extends Renderer<Place> {
             } else {
                 Timber.d("Camera button tapped. Image title: " + place.getName() + "Image desc: " + place.getLongDescription());
                 storeSharedPrefs();
-                controller.initiateCameraPick(fragment, NEARBY_CAMERA_UPLOAD_REQUEST_CODE);
+                controller.initiateCameraPick(fragment.getActivity(), NEARBY_CAMERA_UPLOAD_REQUEST_CODE);
             }
         });
 
@@ -164,7 +164,7 @@ public class PlaceRenderer extends Renderer<Place> {
             }else {
                 Timber.d("Gallery button tapped. Image title: " + place.getName() + "Image desc: " + place.getLongDescription());
                 storeSharedPrefs();
-                controller.initiateGalleryPick(fragment, NEARBY_UPLOAD_IMAGE_LIMIT, NEARBY_GALLERY_UPLOAD_REQUEST_CODE);
+                controller.initiateGalleryPick(fragment.getActivity(), NEARBY_UPLOAD_IMAGE_LIMIT, NEARBY_GALLERY_UPLOAD_REQUEST_CODE);
             }
         });
 
