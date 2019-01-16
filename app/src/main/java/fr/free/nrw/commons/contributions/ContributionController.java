@@ -16,6 +16,7 @@ import javax.inject.Named;
 import javax.inject.Singleton;
 
 import fr.free.nrw.commons.R;
+import fr.free.nrw.commons.media.FrescoImageLoader;
 import fr.free.nrw.commons.kvstore.BasicKvStore;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.nearby.Place;
@@ -95,6 +96,7 @@ public class ContributionController {
                 .showCamera(false)
                 .folderMode(true)
                 .includeVideo(false)
+                .imageLoader(new FrescoImageLoader())
                 .enableLog(true);
 
         if (imageLimit > 1) {
