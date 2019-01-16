@@ -591,7 +591,7 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
                     .param("meta", "notifications")
                     .param("notformat", "model")
                     .param("notwikis", "wikidatawiki|commonswiki|enwiki")
-                    .param("notfilter","!read")
+                    //.param("notfilter","!read")
                     .get()
                     .getNode("/api/query/notifications/list");
         } catch (IOException e) {
@@ -605,8 +605,26 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
             return new ArrayList<>();
         }
 
+        try {
+            getCentralAuthToken();
+            getEditToken();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         NodeList childNodes = notificationNode.getDocument().getChildNodes();
         return NotificationUtils.getNotificationsFromList(context, childNodes);
+    }
+
+    @NonNull
+    @Override
+    public String markNotificationAsRead(Notification notification) throws IOException {
+        /*return api.action("post")
+                .param("action","echomarkread")
+                .param("centralauthtoken", getCentralAuthToken())
+                .param("token", getEditToken())*/
+        getCentralAuthToken();
+        getEditToken();
+        return "post";
     }
 
     /**
