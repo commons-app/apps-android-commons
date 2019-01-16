@@ -19,7 +19,6 @@ import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.auth.SessionManager;
 import fr.free.nrw.commons.contributions.Contribution;
 import fr.free.nrw.commons.kvstore.BasicKvStore;
-import fr.free.nrw.commons.mwapi.MediaWikiApi;
 import fr.free.nrw.commons.nearby.Place;
 import fr.free.nrw.commons.settings.Prefs;
 import fr.free.nrw.commons.utils.ImageUtils;
@@ -32,7 +31,6 @@ import timber.log.Timber;
 
 public class UploadModel {
 
-    private MediaWikiApi mwApi;
     private static UploadItem DUMMY = new UploadItem(
             Uri.EMPTY,
             "",
@@ -53,7 +51,6 @@ public class UploadModel {
     private int currentStepIndex = 0;
     private Context context;
     private ContentResolver contentResolver;
-    private boolean useExtStorage;
     private Disposable badImageSubscription;
 
     private SessionManager sessionManager;
@@ -67,7 +64,6 @@ public class UploadModel {
                 @Named("default_preferences") BasicKvStore basicKvStore,
                 @Named("licenses_by_name") Map<String, String> licensesByName,
                 Context context,
-                MediaWikiApi mwApi,
                 SessionManager sessionManager,
                 FileUtilsWrapper fileUtilsWrapper,
                 FileProcessor fileProcessor, ImageProcessingService imageProcessingService) {
@@ -76,14 +72,11 @@ public class UploadModel {
         this.license = basicKvStore.getString(Prefs.DEFAULT_LICENSE, Prefs.Licenses.CC_BY_SA_3);
         this.licensesByName = licensesByName;
         this.context = context;
-        this.mwApi = mwApi;
         this.contentResolver = context.getContentResolver();
         this.sessionManager = sessionManager;
         this.fileUtilsWrapper = fileUtilsWrapper;
         this.fileProcessor = fileProcessor;
-        useExtStorage = this.basicKvStore.getBoolean("useExternalStorage", false);
         this.imageProcessingService = imageProcessingService;
-        useExtStorage = this.basicKvStore.getBoolean("useExternalStorage", false);
     }
 
     @SuppressLint("CheckResult")
@@ -100,13 +93,12 @@ public class UploadModel {
                         return null;
                     }
                     String filePath = mediaUri.getPath();
+                    fileProcessor.initFileDetails(filePath, context.getContentResolver());
                     long fileCreatedDate = getFileCreatedDate(currentMediaUri);
                     String fileExt = fileUtilsWrapper.getFileExt(filePath);
                     GPSExtractor gpsExtractor = fileProcessor.processFileCoordinates(similarImageInterface);
-
-                    fileProcessor.initFileDetails(filePath, context.getContentResolver());
                     UploadItem item = new UploadItem(mediaUri, mimeType, source, gpsExtractor,
-                            fileExt, place.getWikiDataEntityId(), fileCreatedDate);
+                            fileExt, place, fileCreatedDate);
                     imageProcessingService.checkImageQuality(place, filePath)
                             .subscribeOn(Schedulers.computation())
                             .subscribe(item.imageQuality::onNext, Timber::e);
@@ -314,7 +306,9 @@ public class UploadModel {
                     Description.formatList(item.descriptions), -1,
                     null, null, sessionManager.getAuthorName(),
                     CommonsApplication.DEFAULT_EDIT_SUMMARY, item.gpsCoords.getCoords());
-            contribution.setWikiDataEntityId(item.wikidataEntityId);
+            if (item.place != null) {
+                contribution.setWikiDataEntityId(item.place.getWikiDataEntityId());
+            }
             contribution.setCategories(categoryStringList);
             contribution.setTag("mimeType", item.mimeType);
             contribution.setSource(item.source);
@@ -358,17 +352,17 @@ public class UploadModel {
         public BehaviorSubject<Integer> imageQuality;
         Title title;
         List<Description> descriptions;
-        public String wikidataEntityId;
+        public Place place;
         public boolean visited;
         public boolean error;
         public long createdTimestamp;
 
         @SuppressLint("CheckResult")
-        UploadItem(Uri mediaUri, String mimeType, String source, GPSExtractor gpsCoords, String fileExt, @Nullable String wikidataEntityId, long createdTimestamp) {
+        UploadItem(Uri mediaUri, String mimeType, String source, GPSExtractor gpsCoords, String fileExt, @Nullable Place place, long createdTimestamp) {
             title = new Title();
             descriptions = new ArrayList<>();
             descriptions.add(new Description());
-            this.wikidataEntityId = wikidataEntityId;
+            this.place = place;
             this.mediaUri = mediaUri;
             this.mimeType = mimeType;
             this.source = source;
