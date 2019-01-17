@@ -591,7 +591,7 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
                     .param("meta", "notifications")
                     .param("notformat", "model")
                     .param("notwikis", "wikidatawiki|commonswiki|enwiki")
-                    //.param("notfilter","!read")
+                    .param("notfilter","!read")
                     .get()
                     .getNode("/api/query/notifications/list");
         } catch (IOException e) {
@@ -617,14 +617,12 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
 
     @NonNull
     @Override
-    public String markNotificationAsRead(Notification notification) throws IOException {
-        /*return api.action("post")
+    public CustomApiResult markNotificationAsRead(Notification notification) throws IOException {
+        return api.action("post")
                 .param("action","echomarkread")
                 .param("centralauthtoken", getCentralAuthToken())
-                .param("token", getEditToken())*/
-        getCentralAuthToken();
-        getEditToken();
-        return "post";
+                .param("token", getEditToken())
+                .get();
     }
 
     /**

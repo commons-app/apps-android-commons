@@ -22,6 +22,7 @@ import android.widget.Toast;
 
 import com.pedrogomez.renderers.RVRendererAdapter;
 
+import java.io.IOException;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
@@ -98,17 +99,31 @@ public class NotificationActivity extends NavigationBaseActivity {
 
                 if (direction == ItemTouchHelper.LEFT || direction == ItemTouchHelper.RIGHT) {
                     viewHolder.itemView.setBackgroundColor(R.color.swipe_red);
-                    //if swipe left
                     AlertDialog.Builder builder = new AlertDialog.Builder(NotificationActivity.this); //alert for confirm to delete
                     builder.setMessage("Are you sure to delete?");    //set message
-                    //when click on DELETE
-                    //not removing items if cancel is done
+
                     builder.setPositiveButton("REMOVE", (dialog, which) -> {
-                        Log.v("line96", String.valueOf(position));
-                        notificationList.remove(position);
-                        Toast.makeText(NotificationActivity.this, "Notification marked as Read", Toast.LENGTH_SHORT).show();
-                        setAdapter(notificationList);
-                        return;
+
+                        Observable.fromCallable(() -> {
+                             controller.markAsRead(notificationList.get(position));
+                             return true;
+                        })
+                                .subscribeOn(Schedulers.io())
+                                .observeOn(AndroidSchedulers.mainThread())
+                                .subscribe(result -> {
+                                    if (result){
+                                        notificationList.remove(position);
+                                        Toast.makeText(NotificationActivity.this, "Notification marked as Read", Toast.LENGTH_SHORT).show();
+                                        setAdapter(notificationList);
+                                    }
+                                    else {
+                                        Toast.makeText(NotificationActivity.this, "There was some error!", Toast.LENGTH_SHORT).show();
+                                    }
+                                }, throwable -> {
+                                    Timber.e(throwable, "Error occurred while loading notifications");
+                                    ViewUtil.showShortSnackbar(relativeLayout, R.string.error_notifications);
+                                    progressBar.setVisibility(View.GONE);
+                                });
                     }).setNegativeButton("CANCEL", (dialog, which) -> {
                         return;
                     }).show();
