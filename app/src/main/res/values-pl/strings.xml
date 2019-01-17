@@ -110,7 +110,9 @@
   <string name="no_uploads_yet">Nie przesłałeś jeszcze żadnych zdjęć.</string>
   <string name="menu_retry_upload">Ponów próbę</string>
   <string name="menu_cancel_upload">Anuluj</string>
-  <string name="share_license_summary">Ten obraz będzie udostępniany na licencji %1$s</string>
+  <plurals name="share_license_summary">
+    <item quantity="other">1=Ten obraz będzie udostępniany na licencji %1$s</item>
+  </plurals>
   <string name="menu_download">Pobieranie</string>
   <string name="preference_license">Domyślna licencja</string>
   <string name="use_previous">Użyj poprzedniego tytułu/opisu</string>
@@ -216,7 +218,6 @@
   <string name="nearby_info_menu_wikidata_article">Element Wikidanych</string>
   <string name="nearby_info_menu_wikipedia_article">Artykuł na Wikipedii</string>
   <string name="title_info">Podaj krótką, opisową i unikalną nazwę, która będzie służyła jako nazwa pliku. Możesz używać prostego języka i spacji. Nie dodawaj rozszerzenia pliku.</string>
-  <string name="upload_image_problem_duplicate">Ten plik już istnieje na Commons. Jesteś pewien, że chcesz kontynuować?</string>
   <string name="give_permission">Uzyskaj uprawnienie</string>
   <string name="login_to_your_account">Zaloguj się na swoje konto</string>
   <string name="null_url">Błąd! Nie znaleziono adresu URL</string>
@@ -251,6 +252,7 @@
   <string name="provider_searches">Ostatnio wyszukiwane zapytania</string>
   <string name="error_loading_categories">Wystąpił błąd podczas ładowania kategorii.</string>
   <string name="error_loading_subcategories">Wystąpił błąd podczas ładowania podkategorii.</string>
+  <string name="search_tab_title_categories">KATEGORIE</string>
   <string name="menu_set_wallpaper">Ustaw jako tapetę</string>
   <string name="wallpaper_set_successfully">Tapeta ustawiona pomyślnie!</string>
   <string name="quiz">Quiz</string>

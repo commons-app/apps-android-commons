@@ -21,12 +21,14 @@ import java.util.Date;
 import java.util.List;
 
 import javax.inject.Inject;
+import javax.inject.Named;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.Utils;
 import fr.free.nrw.commons.contributions.MainActivity;
+import fr.free.nrw.commons.kvstore.BasicKvStore;
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
 import fr.free.nrw.commons.theme.NavigationBaseActivity;
 import fr.free.nrw.commons.utils.NetworkUtils;
@@ -48,8 +50,8 @@ public class NotificationActivity extends NavigationBaseActivity {
     @BindView(R.id.container) RelativeLayout relativeLayout;
 
     @Inject NotificationController controller;
-    @Inject
-    MediaWikiApi mediaWikiApi;
+    @Inject MediaWikiApi mediaWikiApi;
+    @Inject @Named("last_read_notification_date") BasicKvStore kvStore;
 
     private static final String TAG_NOTIFICATION_WORKER_FRAGMENT = "NotificationWorkerFragment";
     private NotificationWorkerFragment mNotificationWorkerFragment;
@@ -89,7 +91,7 @@ public class NotificationActivity extends NavigationBaseActivity {
 
         // Store when add notification is called last
         long currentDate = new Date(System.currentTimeMillis()).getTime();
-        getSharedPreferences("prefs", MODE_PRIVATE).edit().putLong("last_read_notification_date", currentDate).apply();
+        kvStore.putLong("last_read_notification_date", currentDate);
         Timber.d("Set last notification read date to current date:"+ currentDate);
 
         if(mNotificationWorkerFragment == null){
@@ -106,7 +108,7 @@ public class NotificationActivity extends NavigationBaseActivity {
                         progressBar.setVisibility(View.GONE);
                     }, throwable -> {
                         Timber.e(throwable, "Error occurred while loading notifications");
-                        ViewUtil.showSnackbar(relativeLayout, R.string.error_notifications);
+                        ViewUtil.showShortSnackbar(relativeLayout, R.string.error_notifications);
                         progressBar.setVisibility(View.GONE);
                     });
         } else {
@@ -123,7 +125,7 @@ public class NotificationActivity extends NavigationBaseActivity {
 
     private void setAdapter(List<Notification> notificationList) {
         if (notificationList == null || notificationList.isEmpty()) {
-            ViewUtil.showSnackbar(relativeLayout, R.string.no_notifications);
+            ViewUtil.showShortSnackbar(relativeLayout, R.string.no_notifications);
             return;
         }
         notificationAdapterFactory = new NotificationAdapterFactory(notification -> {
@@ -136,7 +138,7 @@ public class NotificationActivity extends NavigationBaseActivity {
 
     public static void startYourself(Context context) {
         Intent intent = new Intent(context, NotificationActivity.class);
-        intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+        intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT | Intent.FLAG_ACTIVITY_SINGLE_TOP);
         context.startActivity(intent);
     }
 
@@ -147,10 +149,4 @@ public class NotificationActivity extends NavigationBaseActivity {
                 .commit();
         mNotificationWorkerFragment.setNotificationList(notificationList);
     }
-
-    @Override
-    public void onBackPressed() {
-        startActivityWithFlags(
-                this, MainActivity.class, Intent.FLAG_ACTIVITY_CLEAR_TOP,
-                Intent.FLAG_ACTIVITY_SINGLE_TOP);    }
 }

@@ -1,7 +1,6 @@
 package fr.free.nrw.commons.category;
 
 import android.annotation.SuppressLint;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
@@ -26,6 +25,7 @@ import butterknife.ButterKnife;
 import dagger.android.support.DaggerFragment;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.R;
+import fr.free.nrw.commons.kvstore.BasicKvStore;
 import fr.free.nrw.commons.utils.NetworkUtils;
 import fr.free.nrw.commons.utils.ViewUtil;
 import io.reactivex.Observable;
@@ -55,7 +55,9 @@ public class CategoryImagesListFragment extends DaggerFragment {
     private String categoryName = null;
 
     @Inject CategoryImageController controller;
-    @Inject @Named("category_prefs") SharedPreferences categoryPreferences;
+    @Inject
+    @Named("category_prefs")
+    BasicKvStore categoryKvStore;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -91,9 +93,7 @@ public class CategoryImagesListFragment extends DaggerFragment {
      * @param keyword
      */
     private void resetQueryContinueValues(String keyword) {
-        SharedPreferences.Editor editor = categoryPreferences.edit();
-        editor.remove(keyword);
-        editor.apply();
+        categoryKvStore.remove(keyword);
     }
 
     /**
@@ -124,7 +124,7 @@ public class CategoryImagesListFragment extends DaggerFragment {
             statusTextView.setVisibility(VISIBLE);
             statusTextView.setText(getString(R.string.no_internet));
         } else {
-            ViewUtil.showSnackbar(parentLayout, R.string.no_internet);
+            ViewUtil.showShortSnackbar(parentLayout, R.string.no_internet);
         }
     }
 
@@ -135,7 +135,7 @@ public class CategoryImagesListFragment extends DaggerFragment {
     private void handleError(Throwable throwable) {
         Timber.e(throwable, "Error occurred while loading images inside a category");
         try{
-            ViewUtil.showSnackbar(parentLayout, R.string.error_loading_images);
+            ViewUtil.showShortSnackbar(parentLayout, R.string.error_loading_images);
             initErrorView();
         }catch (Exception e){
             e.printStackTrace();
@@ -263,10 +263,7 @@ public class CategoryImagesListFragment extends DaggerFragment {
      * @return  GridView Adapter
      */
     public ListAdapter getAdapter() {
-        if(gridView == null) {
-            return null;
-        }
-        return gridView.getAdapter();
+        return gridAdapter;
     }
 
 }

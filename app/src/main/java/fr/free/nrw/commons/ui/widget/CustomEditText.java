@@ -34,16 +34,6 @@ public class CustomEditText extends EditText {
         super(context, attrs, defStyle);
     }
 
-    protected void onDraw(Canvas canvas) {
-        super.onDraw(canvas);
-
-    }
-
-    @Override
-    protected void onSizeChanged(int w, int h, int oldw, int oldh) {
-        super.onSizeChanged(w, h, oldw, oldh);
-    }
-
     @Override
     public void setCompoundDrawables(Drawable left, Drawable top,
                                      Drawable right, Drawable bottom) {
@@ -97,7 +87,7 @@ public class CustomEditText extends EditText {
                 y = actionY;
 
                 if (!bounds.contains(actionX, actionY)) {
-                    /** Gives the +20 area for tapping. */
+                    // Gives the +20 area for tapping.
                     x = (int) (actionX - extraTapArea);
                     y = (int) (actionY - extraTapArea);
 
@@ -106,7 +96,7 @@ public class CustomEditText extends EditText {
                     if (y <= 0)
                         y = actionY;
 
-                    /** Creates square from the smallest value */
+                    // Creates square from the smallest value
                     if (x < y) {
                         y = x;
                     }
@@ -129,18 +119,19 @@ public class CustomEditText extends EditText {
                 int x, y;
                 int extraTapArea = 13;
 
-                /**
-                 * IF USER CLICKS JUST OUT SIDE THE RECTANGLE OF THE DRAWABLE
-                 * THAN ADD X AND SUBTRACT THE Y WITH SOME VALUE SO THAT AFTER
-                 * CALCULATING X AND Y CO-ORDINATE LIES INTO THE DRAWBABLE
-                 * BOUND. - this process help to increase the tappable area of
-                 * the rectangle.
+                /*
+                  IF USER CLICKS JUST OUT SIDE THE RECTANGLE OF THE DRAWABLE
+                  THAN ADD X AND SUBTRACT THE Y WITH SOME VALUE SO THAT AFTER
+                  CALCULATING X AND Y CO-ORDINATE LIES INTO THE DRAWBABLE
+                  BOUND. - this process help to increase the tappable area of
+                  the rectangle.
                  */
                 x = (int) (actionX + extraTapArea);
                 y = (int) (actionY - extraTapArea);
 
-                /**Since this is right drawable subtract the value of x from the width
-                 * of view. so that width - tappedarea will result in x co-ordinate in drawable bound.
+                /*
+                  Since this is right drawable subtract the value of x from the width
+                  of view. so that width - tappedarea will result in x co-ordinate in drawable bound.
                  */
                 x = getWidth() - x;
 
@@ -156,13 +147,13 @@ public class CustomEditText extends EditText {
 
                 /* If result after calculating for extra tappable area is negative.
                  * assign the original value so that after subtracting
-                 * extratapping area value doesn't go into negative value.
+                 * extra tapping area value doesn't go into negative value.
                  */
 
                 if (y <= 0)
                     y = actionY;
 
-                /**If drawble bounds contains the x and y points then move ahead.*/
+                // If drawble bounds contains the x and y points then move ahead.
                 if (bounds.contains(x, y) && clickListener != null) {
                     clickListener
                             .onClick(DrawableClickListener.DrawablePosition.RIGHT);

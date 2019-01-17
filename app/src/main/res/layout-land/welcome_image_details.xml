@@ -8,21 +8,6 @@
     android:gravity="center"
     android:orientation="horizontal">
 
-    <TextView
-        android:id="@+id/welcomeYesButton"
-        android:layout_width="wrap_content"
-        android:layout_height="@dimen/overflow_button_dimen"
-        android:layout_marginEnd="@dimen/standard_gap"
-        android:layout_marginRight="@dimen/standard_gap"
-        android:layout_marginTop="@dimen/standard_gap"
-        android:text="@string/welcome_skip_button"
-        android:textColor="#fff"
-        android:textSize="@dimen/normal_text"
-        android:textStyle="bold"
-        android:visibility="gone"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <android.support.constraint.Guideline
         android:id="@+id/center_guideline"
         android:layout_width="wrap_content"

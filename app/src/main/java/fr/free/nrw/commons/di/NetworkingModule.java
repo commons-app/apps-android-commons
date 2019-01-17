@@ -1,13 +1,13 @@
 package fr.free.nrw.commons.di;
 
 import android.content.Context;
-import android.content.SharedPreferences;
 import android.support.annotation.NonNull;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 import java.io.File;
+import java.util.concurrent.TimeUnit;
 
 import javax.inject.Named;
 import javax.inject.Singleton;
@@ -15,6 +15,7 @@ import javax.inject.Singleton;
 import dagger.Module;
 import dagger.Provides;
 import fr.free.nrw.commons.BuildConfig;
+import fr.free.nrw.commons.kvstore.BasicKvStore;
 import fr.free.nrw.commons.mwapi.ApacheHttpClientMediaWikiApi;
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
 import okhttp3.Cache;
@@ -30,19 +31,21 @@ public class NetworkingModule {
     @Singleton
     public OkHttpClient provideOkHttpClient(Context context) {
         File dir = new File(context.getCacheDir(), "okHttpCache");
-        return new OkHttpClient.Builder()
-                .cache(new Cache(dir, OK_HTTP_CACHE_SIZE))
-                .build();
+        return new OkHttpClient.Builder().connectTimeout(60, TimeUnit.SECONDS)
+            .writeTimeout(60, TimeUnit.SECONDS)
+            .readTimeout(60, TimeUnit.SECONDS)
+            .cache(new Cache(dir, OK_HTTP_CACHE_SIZE))
+            .build();
     }
 
     @Provides
     @Singleton
     public MediaWikiApi provideMediaWikiApi(Context context,
-                                            @Named("default_preferences") SharedPreferences defaultPreferences,
-                                            @Named("category_prefs") SharedPreferences categoryPrefs,
+                                            @Named("default_preferences") BasicKvStore defaultKvStore,
+                                            @Named("category_prefs") BasicKvStore categoryKvStore,
                                             Gson gson,
                                             OkHttpClient okHttpClient) {
-        return new ApacheHttpClientMediaWikiApi(context, BuildConfig.WIKIMEDIA_API_HOST, BuildConfig.WIKIDATA_API_HOST, defaultPreferences, categoryPrefs, gson, okHttpClient);
+        return new ApacheHttpClientMediaWikiApi(context, BuildConfig.WIKIMEDIA_API_HOST, BuildConfig.WIKIDATA_API_HOST, defaultKvStore, categoryKvStore, gson, okHttpClient);
     }
 
     @Provides

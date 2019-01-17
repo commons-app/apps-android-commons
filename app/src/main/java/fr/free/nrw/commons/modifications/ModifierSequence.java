@@ -43,7 +43,7 @@ public class ModifierSequence {
     String getEditSummary() {
         StringBuilder editSummary = new StringBuilder();
         for (PageModifier modifier: modifiers) {
-            editSummary.append(modifier.getEditSumary()).append(" ");
+            editSummary.append(modifier.getEditSummary()).append(" ");
         }
         editSummary.append("Using [[COM:MOA|Commons Mobile App]]");
         return editSummary.toString();

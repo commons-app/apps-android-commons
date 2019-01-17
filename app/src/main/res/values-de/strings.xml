@@ -108,7 +108,10 @@
   <string name="no_uploads_yet">Du hast noch keine Fotos hochgeladen.</string>
   <string name="menu_retry_upload">Erneut versuchen</string>
   <string name="menu_cancel_upload">Abbrechen</string>
-  <string name="share_license_summary">Dieses Bild wird unter %1$s lizenziert</string>
+  <plurals name="share_license_summary">
+    <item quantity="one">Dieses Bild wird unter %1$s lizenziert</item>
+    <item quantity="other">Diese Bilder werden unter %1$s lizenziert</item>
+  </plurals>
   <string name="media_upload_policy">Durch das Hochladen dieses Bildes erkläre ich, dass dies mein eigenes Werk ist, das kein urheberrechtlich geschütztes Material oder Selfies enthält und das auch sonst die &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines/de\"&gt;Wikimedia-Commons-Richtlinien&lt;/a&gt; einhält.</string>
   <string name="menu_download">Herunterladen</string>
   <string name="preference_license">Standardlizenz</string>
@@ -167,6 +170,7 @@
   <string name="detail_description_empty">Keine Beschreibung</string>
   <string name="detail_license_empty">Unbekannte Lizenz</string>
   <string name="menu_refresh">Aktualisieren</string>
+  <string name="storage_permission_title">Anforderung einer Speicherberechtigung</string>
   <string name="read_storage_permission_rationale">Erforderliche Berechtigung: Externen Speicher lesen. Die App kann ohne diese Berechtigung nicht auf deine Galerie zugreifen.</string>
   <string name="write_storage_permission_rationale">Erforderliche Berechtigung: Externen Speicher beschreiben. Die App kann ohne diese Berechtigung nicht auf deine Kamera zugreifen.</string>
   <string name="location_permission_rationale">Optionale Berechtigung: Ruft den aktuellen Standort für Kategorievorschläge ab</string>
@@ -238,13 +242,12 @@
   <string name="description_info">Bitte beschreibe das Medium so gut wie möglich: Wo wurde es aufgenommen? Was zeigt es? Was ist der Kontext? Bitte beschreibe die Objekte oder Personen. Zeige Informationen auf, die nicht einfach erraten werden können, zum Beispiel die Tageszeit, falls es eine Landschaft ist. Falls das Medium etwas Ungewöhnliches zeigt, erkläre bitte, was es ungewöhnlich macht.</string>
   <string name="upload_image_too_dark">Dieses Bild ist zu dunkel. Bist du sicher, dass du es hochladen möchtest? Wikimedia Commons ist nur für Bilder mit enzyklopädischem Wert gedacht.</string>
   <string name="upload_image_blurry">Dieses Bild ist verschwommen. Bist du sicher, dass du es hochladen möchtest? Wikimedia Commons ist nur für Bilder mit enzyklopädischem Wert gedacht.</string>
-  <string name="upload_image_problem_duplicate">Diese Datei ist bereits auf Commons vorhanden. Bist du sicher, dass du fortfahren möchtest?</string>
-  <string name="upload_image_problem_dark">Dieses Bild ist zu dunkel. Bist du sicher, dass du es hochladen möchtest? Wikimedia Commons ist nur für Bilder mit enzyklopädischem Wert gedacht.</string>
-  <string name="upload_image_problem_blurry">Dieses Bild ist verschwommen. Bist du sicher, dass du es hochladen möchtest? Wikimedia Commons ist nur für Bilder mit enzyklopädischem Wert gedacht.</string>
-  <string name="upload_image_problem_dark_duplicate">Dieses Bild ist zu dunkel und bereits auf Commons vorhanden. Bist du sicher, dass du es hochladen möchtest? Lade bitte nur Bilder mit enzyklopädischem Wert hoch.</string>
-  <string name="upload_image_problem_blurry_duplicate">Dieses Bild ist unscharf und bereits auf Commons vorhanden. Bist du sicher, dass du es hochladen möchtest? Bitte lade nur Bilder mit enzyklopädischem Wert hoch.</string>
-  <string name="upload_image_problem_dark_blurry">Dieses Bild ist zu dunkel und unscharf. Bist du sicher, dass du es hochladen möchtest? Bitte lade nur Bilder mit enzyklopädischem Wert hoch.</string>
-  <string name="upload_image_problem_dark_blurry_duplicate">Dieses Bild ist zu dunkel, unscharf und bereits auf Commons vorhanden. Bist du sicher, dass du es hochladen möchtest? Lade bitte nur Bilder mit enzyklopädischem Wert hoch.</string>
+  <string name="upload_problem_exist">Potentielle Probleme mit diesem Bild:</string>
+  <string name="upload_problem_image_dark">Das Bild ist zu dunkel.</string>
+  <string name="upload_problem_image_blurry">Das Bild ist unscharf.</string>
+  <string name="upload_problem_image_duplicate">Das Bild ist bereits auf Commons.</string>
+  <string name="upload_problem_different_geolocation">Dieses Bild wurde an einem anderen Ort aufgenommen.</string>
+  <string name="upload_problem_do_you_continue">Möchtest du immer noch dieses Bild hochladen?</string>
   <string name="give_permission">Berechtigung geben</string>
   <string name="use_external_storage">Externen Speicher verwenden</string>
   <string name="use_external_storage_summary">Mit der In-App-Kamera aufgenommene Bilder auf deinem Gerät speichern</string>
@@ -260,7 +263,7 @@
   <string name="skip_login">Überspringen</string>
   <string name="navigation_item_login">Anmelden</string>
   <string name="skip_login_title">Möchtest du wirklich die Anmeldung überspringen?</string>
-  <string name="skip_login_message">Du wirst keine Bilder hochladen können.</string>
+  <string name="skip_login_message">Du wirst dich anmelden müssen, um in Zukunft Bilder hochladen zu können.</string>
   <string name="login_alert_message">Bitte melde dich an, um diese Funktion zu nutzen.</string>
   <string name="copy_wikicode">Den Wikitext in die Zwischenablage kopieren</string>
   <string name="wikicode_copied">Der Wikitext wurde in die Zwischenablage kopiert</string>
@@ -309,6 +312,8 @@
   <string name="provider_searches">Letzte Suchanfragen</string>
   <string name="error_loading_categories">Beim Laden der Kategorien ist ein Fehler aufgetreten.</string>
   <string name="error_loading_subcategories">Beim Laden der Unterkategorien ist ein Fehler aufgetreten.</string>
+  <string name="search_tab_title_media">MEDIEN</string>
+  <string name="search_tab_title_categories">KATEGORIEN</string>
   <string name="successful_wikidata_edit">Bild erfolgreich nach %1$s auf Wikidata hinzugefügt!</string>
   <string name="wikidata_edit_failure">Fehler bei der Aktualisierung des dazugehörigen Wikidata-Objekts!</string>
   <string name="menu_set_wallpaper">Als Hintergrundbild festlegen</string>
@@ -337,6 +342,7 @@
   <string name="share_coordinates_not_present">Während der Bildauswahl wurden keine Koordinaten angegeben</string>
   <string name="error_fetching_nearby_places">Fehler beim Abrufen der Orte in der Nähe.</string>
   <string name="add_description">+ Beschreibung hinzufügen</string>
+  <string name="no_recent_searches">Keine letzten Suchanfragen</string>
   <string name="delete_recent_searches_dialog">Bist du sicher, dass du deinen Suchverlauf löschen möchtest?</string>
   <string name="search_history_deleted">Suchverlauf gelöscht</string>
   <string name="nominate_delete">Zur Löschung vorschlagen</string>
@@ -356,6 +362,10 @@
   <string name="images_used_explanation">Die Anzahl der Bilder, die du auf Commons hochgeladen hast und in Wikimedia-Artikeln verwendet werden.</string>
   <string name="error_occurred">Fehler aufgetreten!</string>
   <string name="notifications_channel_name_all">Commons-Benachrichtigung</string>
+  <string name="preference_author_name_toggle">Benutzerdefinierten Namen des Autors verwenden</string>
+  <string name="preference_author_name_toggle_summary">Einen benutzerdefinierten Namen des Autors anstelle deines Benutzernamens beim Hochladen von Fotos verwenden</string>
+  <string name="preference_author_name">Benutzerdefinierter Name des Autors</string>
+  <string name="preference_author_name_summary">Der benutzerdefinierte Name des Autors, der anstelle deines Benutzernamens in den hochgeladenen Dateien erscheinen soll.</string>
   <string name="contributions_fragment">Beiträge</string>
   <string name="nearby_fragment">In der Nähe</string>
   <string name="notifications">Benachrichtigungen</string>
@@ -407,10 +417,26 @@
   <string name="yes_submit">Ja, einreichen</string>
   <string name="no_go_back">Nein, zurück gehen</string>
   <string name="upload_flow_all_images_in_set">(für alle Bilder im Satz)</string>
+  <string name="search_this_area">Diesen Bereich durchsuchen</string>
   <string name="nearby_card_permission_title">Berechtigungsanfrage</string>
   <string name="nearby_card_permission_explanation">Dürfen wir deinen aktuellen Standort verwenden, um den nächsten Ort anzuzeigen, der Bilder benötigt?</string>
   <string name="unable_to_display_nearest_place">Der nächste Ort, der Bilder benötigt, kann ohne Standortberechtigungen nicht angezeigt werden.</string>
   <string name="never_ask_again">Nicht erneut fragen</string>
   <string name="display_location_permission_title">Standortberechtigung anzeigen</string>
   <string name="display_location_permission_explanation">Anfrage für eine Standortberechtigung, die für die Nachbarbenachrichtigungskartenansichtsfunktion erforderlich ist.</string>
+  <string name="achievements_fetch_failed">Etwas ist schief gelaufen. Wir konnten deine Errungenschaften nicht abrufen.</string>
+  <string name="ends_on">Endet am:</string>
+  <string name="display_campaigns">Kampagnen anzeigen</string>
+  <string name="display_campaigns_explanation">Hier tippen, um die laufenden Kampagnen anzusehen.</string>
+  <string name="nearby_campaign_dismiss_message">Du wirst die Kampagnen nicht mehr sehen. Du kannst dennoch diese Benachrichtigung in den Einstellungen erneut aktivieren, falls du dies möchtest.</string>
+  <string name="this_function_needs_network_connection">Diese Funktion erfordert eine Netzwerkverbindung. Bitte überprüfe deine Verbindungseinstellungen.</string>
+  <string name="bad_token_error_proposed_solution">Das Hochladen ist aufgrund von Problemen mit dem Bearbeitungstoken fehlgeschlagen. Bitte versuche, dich ab- und anschließend wieder anzumelden.</string>
+  <string name="error_processing_image">Bei der Verarbeitung des Bildes ist ein Fehler aufgetreten. Bitte erneut versuchen!</string>
+  <plurals name="receiving_shared_content">
+    <item quantity="one">Der geteilte Inhalt wird abgerufen. Die Verarbeitung des Bildes kann einige Zeit in Anspruch nehmen, abhängig von der Größe des Bildes und deines Gerätes.</item>
+    <item quantity="other">Der geteilte Inhalt wird abgerufen. Die Verarbeitung der Bilder kann einige Zeit in Anspruch nehmen, abhängig von der Größe der Bilder und deines Gerätes.</item>
+  </plurals>
+  <string name="no_image">Keine Bilder verwendet</string>
+  <string name="no_image_reverted">Keine Bilder zurückgesetzt</string>
+  <string name="no_image_uploaded">Keine Bilder hochgeladen</string>
 </resources>

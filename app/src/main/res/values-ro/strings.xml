@@ -106,7 +106,7 @@
   <string name="no_uploads_yet">Încă nu ați încărcat nicio fotografie.</string>
   <string name="menu_retry_upload">Reîncercare</string>
   <string name="menu_cancel_upload">Revocare</string>
-  <string name="share_license_summary">Această imagine va fi licențiată sub %1$s</string>
+  <string name="share_license_summary" fuzzy="true">Această imagine va fi licențiată sub %1$s</string>
   <string name="menu_download">Descarcă</string>
   <string name="preference_license">Licență implicită</string>
   <string name="use_previous">Folosiți titlul/descrierea anterioară</string>

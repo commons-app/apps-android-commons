@@ -64,7 +64,7 @@ public class ReasonBuilder {
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe(
-                            jsonObject -> appendArticlesUsed(jsonObject),
+                            this::appendArticlesUsed,
                             t -> Timber.e(t, "Fetching achievements statistics failed")
                     ));
         }
