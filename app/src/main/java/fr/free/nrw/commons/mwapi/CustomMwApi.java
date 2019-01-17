@@ -175,7 +175,7 @@ public class CustomMwApi {
             builder = Http.get(apiURL);
         }
         builder.data(params);
-        return CustomApiResult.fromRequestBuilder(method, builder, client);
+        return CustomApiResult.fromRequestBuilder(apiURL, builder, client);
     }
 }
 ;
