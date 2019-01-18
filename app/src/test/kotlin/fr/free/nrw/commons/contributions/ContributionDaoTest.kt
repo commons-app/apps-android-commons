@@ -120,6 +120,15 @@ class ContributionDaoTest {
     }
 
     @Test
+    fun migrateTableVersionFrom_v8_to_v9() {
+        Table.onUpdate(database, 8, 9)
+        // Table changed in version 9
+        inOrder(database) {
+            verify<SQLiteDatabase>(database).execSQL(Table.ADD_WIKI_DATA_ENTITY_ID_FIELD)
+        }
+    }
+
+    @Test
     fun saveNewContribution_nonNullFields() {
         whenever(client.insert(isA(), isA())).thenReturn(contentUri)
         val contribution = createContribution(true, null, null, null, null)
@@ -328,19 +337,22 @@ class ContributionDaoTest {
             MatrixCursor(Table.ALL_FIELDS, 1).apply {
                 addRow(listOf("111", "file", localUri, "image",
                         created, STATE_QUEUED, 222L, uploaded, 88L, SOURCE_GALLERY, "desc",
-                        "create", if (multiple) 1 else 0, 640, 480, "007"))
+                        "create", if (multiple) 1 else 0, 640, 480, "007", "Q1"))
                 moveToFirst()
             }
 
-    private fun createContribution(isMultiple: Boolean, localUri: Uri?, imageUrl: String?, dateUploaded: Date?, filename: String?) =
-            Contribution(localUri, imageUrl, filename, "desc", 222L, Date(321L), dateUploaded,
-                    "create", "edit", "coords").apply {
-                state = STATE_COMPLETED
-                transferred = 333L
-                source = SOURCE_CAMERA
-                license = "007"
-                multiple = isMultiple
-                width = 640
-                height = 480  // VGA should be enough for anyone, right?
-            }
+    private fun createContribution(isMultiple: Boolean, localUri: Uri?, imageUrl: String?, dateUploaded: Date?, filename: String?): Contribution {
+        val contribution = Contribution(localUri, imageUrl, filename, "desc", 222L, Date(321L), dateUploaded,
+                "create", "edit", "coords").apply {
+            state = STATE_COMPLETED
+            transferred = 333L
+            source = SOURCE_CAMERA
+            license = "007"
+            multiple = isMultiple
+            width = 640
+            height = 480  // VGA should be enough for anyone, right?
+        }
+        contribution.wikiDataEntityId = "Q1"
+        return contribution
+    }
 }
