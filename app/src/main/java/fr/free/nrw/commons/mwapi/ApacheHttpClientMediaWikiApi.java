@@ -230,7 +230,6 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
     @Override
     public String getEditToken() throws IOException {
         String editToken = api.action("query")
-                .param("centralauthtoken", getCentralAuthToken())
                 .param("meta", "tokens")
                 .post()
                 .getString("/api/query/tokens/@csrftoken");
@@ -288,7 +287,6 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
         return api.action("edit")
                 .param("title", filename)
                 .param("token", getEditToken())
-                .param("centralauthtoken", getCentralAuthToken())
                 .param("text", processedPageContent)
                 .param("summary", summary)
                 .post()
@@ -302,7 +300,6 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
         return api.action("edit")
                 .param("title", filename)
                 .param("token", getEditToken())
-                .param("centralauthtoken", getCentralAuthToken())
                 .param("appendtext", processedPageContent)
                 .param("summary", summary)
                 .post()
@@ -315,7 +312,6 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
         return api.action("edit")
                 .param("title", filename)
                 .param("token", getEditToken())
-                .param("centralauthtoken", getCentralAuthToken())
                 .param("prependtext", processedPageContent)
                 .param("summary", summary)
                 .post()
@@ -895,7 +891,7 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
                                    Uri contentProviderUri,
                                    final ProgressListener progressListener) throws IOException {
 
-        CustomApiResult result = api.upload(filename, file, dataLength, pageContents, editSummary, getCentralAuthToken(), getEditToken(), progressListener::onProgress);
+        CustomApiResult result = api.upload(filename, file, dataLength, pageContents, editSummary, getEditToken(), progressListener::onProgress);
 
         Timber.d("Result: %s", result.toString());
 
