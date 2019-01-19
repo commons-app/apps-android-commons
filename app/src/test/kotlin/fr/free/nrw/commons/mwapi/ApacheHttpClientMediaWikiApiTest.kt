@@ -5,6 +5,7 @@ import com.google.gson.Gson
 import fr.free.nrw.commons.BuildConfig
 import fr.free.nrw.commons.TestCommonsApplication
 import fr.free.nrw.commons.kvstore.BasicKvStore
+import fr.free.nrw.commons.utils.ConfigUtils
 import okhttp3.OkHttpClient
 import okhttp3.mockwebserver.MockResponse
 import okhttp3.mockwebserver.MockWebServer
@@ -320,7 +321,7 @@ class ApacheHttpClientMediaWikiApiTest {
     private fun assertBasicRequestParameters(server: MockWebServer, method: String): RecordedRequest = server.takeRequest().let {
         assertEquals("/", it.requestUrl.encodedPath())
         assertEquals(method, it.method)
-        assertEquals("Commons/${BuildConfig.VERSION_NAME} (https://mediawiki.org/wiki/Apps/Commons) Android/${Build.VERSION.RELEASE}",
+        assertEquals("Commons/${ConfigUtils.getVersionNameWithSha(RuntimeEnvironment.application)} (https://mediawiki.org/wiki/Apps/Commons) Android/${Build.VERSION.RELEASE}",
                 it.getHeader("User-Agent"))
         if ("POST" == method) {
             assertEquals("application/x-www-form-urlencoded", it.getHeader("Content-Type"))
