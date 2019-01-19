@@ -5,12 +5,14 @@ import android.content.ContentResolver;
 import android.content.Context;
 import android.database.Cursor;
 import android.net.Uri;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -23,11 +25,13 @@ import fr.free.nrw.commons.nearby.Place;
 import fr.free.nrw.commons.settings.Prefs;
 import fr.free.nrw.commons.utils.ImageUtils;
 import io.reactivex.Observable;
+import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 import io.reactivex.subjects.BehaviorSubject;
 import timber.log.Timber;
+
 
 public class UploadModel {
 
@@ -54,7 +58,6 @@ public class UploadModel {
     private Disposable badImageSubscription;
 
     private SessionManager sessionManager;
-    private Uri currentMediaUri;
     private FileUtilsWrapper fileUtilsWrapper;
     private FileProcessor fileProcessor;
     private final ImageProcessingService imageProcessingService;
@@ -92,18 +95,27 @@ public class UploadModel {
                     if (mediaUri == null || mediaUri.getPath() == null) {
                         return null;
                     }
-                    String filePath = mediaUri.getPath();
-                    fileProcessor.initFileDetails(filePath, context.getContentResolver());
-                    long fileCreatedDate = getFileCreatedDate(currentMediaUri);
-                    String fileExt = fileUtilsWrapper.getFileExt(filePath);
-                    GPSExtractor gpsExtractor = fileProcessor.processFileCoordinates(similarImageInterface);
-                    UploadItem item = new UploadItem(mediaUri, mimeType, source, gpsExtractor,
-                            fileExt, place, fileCreatedDate);
-                    imageProcessingService.checkImageQuality(place, filePath)
+                    UploadItem item = getUploadItem(mimeType, place, source, similarImageInterface, mediaUri);
+                    imageProcessingService.checkImageQuality(place, mediaUri.getPath())
                             .subscribeOn(Schedulers.computation())
+                            .observeOn(AndroidSchedulers.mainThread())
                             .subscribe(item.imageQuality::onNext, Timber::e);
                     return item;
                 });
+    }
+
+    @NonNull
+    private UploadItem getUploadItem(String mimeType,
+                                     Place place,
+                                     String source,
+                                     SimilarImageInterface similarImageInterface,
+                                     Uri mediaUri) {
+        fileProcessor.initFileDetails(Objects.requireNonNull(mediaUri.getPath()), context.getContentResolver());
+        long fileCreatedDate = getFileCreatedDate(mediaUri);
+        String fileExt = fileUtilsWrapper.getFileExt(mediaUri.getPath());
+        GPSExtractor gpsExtractor = fileProcessor.processFileCoordinates(similarImageInterface);
+        return new UploadItem(mediaUri, mimeType, source, gpsExtractor,
+                fileExt, place, fileCreatedDate);
     }
 
     void onItemsProcessed(Place place, List<UploadItem> uploadItems) {
