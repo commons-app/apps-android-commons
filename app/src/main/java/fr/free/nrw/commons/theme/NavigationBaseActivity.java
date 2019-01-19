@@ -37,7 +37,6 @@ import fr.free.nrw.commons.bookmarks.BookmarksActivity;
 import fr.free.nrw.commons.category.CategoryImagesActivity;
 import fr.free.nrw.commons.contributions.MainActivity;
 import fr.free.nrw.commons.kvstore.BasicKvStore;
-import fr.free.nrw.commons.notification.NotificationActivity;
 import fr.free.nrw.commons.settings.SettingsActivity;
 import timber.log.Timber;
 
@@ -77,7 +76,6 @@ public abstract class NavigationBaseActivity extends BaseActivity
             userIcon.setVisibility(View.GONE);
             nav_Menu.findItem(R.id.action_login).setVisible(true);
             nav_Menu.findItem(R.id.action_home).setVisible(false);
-            nav_Menu.findItem(R.id.action_notifications).setVisible(false);
             nav_Menu.findItem(R.id.action_settings).setVisible(false);
             nav_Menu.findItem(R.id.action_logout).setVisible(false);
             nav_Menu.findItem(R.id.action_bookmarks).setVisible(true);
@@ -85,7 +83,6 @@ public abstract class NavigationBaseActivity extends BaseActivity
             userIcon.setVisibility(View.VISIBLE);
             nav_Menu.findItem(R.id.action_login).setVisible(false);
             nav_Menu.findItem(R.id.action_home).setVisible(true);
-            nav_Menu.findItem(R.id.action_notifications).setVisible(true);
             nav_Menu.findItem(R.id.action_settings).setVisible(true);
             nav_Menu.findItem(R.id.action_logout).setVisible(true);
             nav_Menu.findItem(R.id.action_bookmarks).setVisible(true);
@@ -213,10 +210,6 @@ public abstract class NavigationBaseActivity extends BaseActivity
                         })
                         .setNegativeButton(R.string.no, (dialog, which) -> dialog.cancel())
                         .show();
-                return true;
-            case R.id.action_notifications:
-                drawerLayout.closeDrawer(navigationView);
-                NotificationActivity.startYourself(this);
                 return true;
             case R.id.action_explore:
                 drawerLayout.closeDrawer(navigationView);
