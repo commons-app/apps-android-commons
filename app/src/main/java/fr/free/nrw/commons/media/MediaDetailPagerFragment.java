@@ -43,6 +43,7 @@ import fr.free.nrw.commons.explore.SearchActivity;
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
 import fr.free.nrw.commons.utils.DeviceInfoUtil;
 import fr.free.nrw.commons.utils.ImageUtils;
+import fr.free.nrw.commons.utils.NetworkUtils;
 import fr.free.nrw.commons.utils.ViewUtil;
 import fr.free.nrw.commons.utils.model.ConnectionType;
 import timber.log.Timber;
@@ -186,7 +187,7 @@ public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment imple
                 return true;
             case R.id.menu_download_current_image:
                 // Download
-                if (DeviceInfoUtil.getConnectionType(getActivity()) == ConnectionType.NO_INTERNET) {
+                if (!NetworkUtils.isInternetConnectionEstablished(getActivity())) {
                     ViewUtil.showShortSnackbar(getView(), R.string.no_internet);
                     return false;
                 }
