@@ -995,9 +995,9 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
                 if (json == null) {
                     return null;
                 }
-                Timber.d(json);
+                Timber.d("Response for achievements is %s", json);
                 try {
-                    return gson.fromJson(String.valueOf(response.body()), FeedbackResponse.class);
+                    return gson.fromJson(json, FeedbackResponse.class);
                 }
                 catch (Exception e){
                     return new FeedbackResponse("",0,0,0,new FeaturedImages(0,0),0,"",0);
