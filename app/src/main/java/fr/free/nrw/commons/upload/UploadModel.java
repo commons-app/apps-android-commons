@@ -92,9 +92,6 @@ public class UploadModel {
 
         return Observable.fromIterable(mediaUris)
                 .map(mediaUri -> {
-                    if (mediaUri == null || mediaUri.getPath() == null) {
-                        return null;
-                    }
                     UploadItem item = getUploadItem(mimeType, place, source, similarImageInterface, mediaUri);
                     imageProcessingService.checkImageQuality(place, mediaUri.getPath())
                             .subscribeOn(Schedulers.computation())
@@ -110,7 +107,8 @@ public class UploadModel {
                                      String source,
                                      SimilarImageInterface similarImageInterface,
                                      Uri mediaUri) {
-        fileProcessor.initFileDetails(Objects.requireNonNull(mediaUri.getPath()), context.getContentResolver());
+        fileProcessor
+                .initFileDetails(Objects.requireNonNull(mediaUri.getPath()), context.getContentResolver());
         long fileCreatedDate = getFileCreatedDate(mediaUri);
         String fileExt = fileUtilsWrapper.getFileExt(mediaUri.getPath());
         GPSExtractor gpsExtractor = fileProcessor.processFileCoordinates(similarImageInterface);
