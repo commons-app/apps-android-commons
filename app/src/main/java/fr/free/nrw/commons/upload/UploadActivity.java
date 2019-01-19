@@ -56,9 +56,11 @@ import fr.free.nrw.commons.category.CategoriesModel;
 import fr.free.nrw.commons.category.CategoryItem;
 import fr.free.nrw.commons.contributions.Contribution;
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
+import fr.free.nrw.commons.utils.DeviceInfoUtil;
 import fr.free.nrw.commons.utils.DialogUtil;
 import fr.free.nrw.commons.utils.StringUtils;
 import fr.free.nrw.commons.utils.ViewUtil;
+import fr.free.nrw.commons.utils.model.ConnectionType;
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
@@ -527,6 +529,10 @@ public class UploadActivity extends AuthenticatedActivity implements UploadView,
     private void configureNavigationButtons() {
         // Navigation next / previous for each image as we're collecting title + description
         next.setOnClickListener(v -> {
+            if (DeviceInfoUtil.getConnectionType(this) == ConnectionType.NO_INTERNET) {
+                ViewUtil.showShortSnackbar(cardLayout, R.string.no_internet);
+                return;
+            }
             setTitleAndDescriptions();
             presenter.handleNext(descriptionsAdapter.getTitle(),
                     descriptionsAdapter.getDescriptions());

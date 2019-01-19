@@ -41,7 +41,10 @@ import fr.free.nrw.commons.contributions.Contribution;
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
 import fr.free.nrw.commons.explore.SearchActivity;
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
+import fr.free.nrw.commons.utils.DeviceInfoUtil;
 import fr.free.nrw.commons.utils.ImageUtils;
+import fr.free.nrw.commons.utils.ViewUtil;
+import fr.free.nrw.commons.utils.model.ConnectionType;
 import timber.log.Timber;
 
 import static android.Manifest.permission.READ_EXTERNAL_STORAGE;
@@ -183,6 +186,10 @@ public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment imple
                 return true;
             case R.id.menu_download_current_image:
                 // Download
+                if (DeviceInfoUtil.getConnectionType(getActivity()) == ConnectionType.NO_INTERNET) {
+                    ViewUtil.showShortSnackbar(getView(), R.string.no_internet);
+                    return false;
+                }
                 downloadMedia(m);
                 return true;
             case R.id.menu_set_as_wallpaper:
