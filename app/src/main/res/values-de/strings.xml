@@ -263,7 +263,7 @@
   <string name="skip_login">Überspringen</string>
   <string name="navigation_item_login">Anmelden</string>
   <string name="skip_login_title">Möchtest du wirklich die Anmeldung überspringen?</string>
-  <string name="skip_login_message" fuzzy="true">Du wirst keine Bilder hochladen können.</string>
+  <string name="skip_login_message">Du wirst dich anmelden müssen, um in Zukunft Bilder hochladen zu können.</string>
   <string name="login_alert_message">Bitte melde dich an, um diese Funktion zu nutzen.</string>
   <string name="copy_wikicode">Den Wikitext in die Zwischenablage kopieren</string>
   <string name="wikicode_copied">Der Wikitext wurde in die Zwischenablage kopiert</string>
@@ -431,4 +431,12 @@
   <string name="nearby_campaign_dismiss_message">Du wirst die Kampagnen nicht mehr sehen. Du kannst dennoch diese Benachrichtigung in den Einstellungen erneut aktivieren, falls du dies möchtest.</string>
   <string name="this_function_needs_network_connection">Diese Funktion erfordert eine Netzwerkverbindung. Bitte überprüfe deine Verbindungseinstellungen.</string>
   <string name="bad_token_error_proposed_solution">Das Hochladen ist aufgrund von Problemen mit dem Bearbeitungstoken fehlgeschlagen. Bitte versuche, dich ab- und anschließend wieder anzumelden.</string>
+  <string name="error_processing_image">Bei der Verarbeitung des Bildes ist ein Fehler aufgetreten. Bitte erneut versuchen!</string>
+  <plurals name="receiving_shared_content">
+    <item quantity="one">Der geteilte Inhalt wird abgerufen. Die Verarbeitung des Bildes kann einige Zeit in Anspruch nehmen, abhängig von der Größe des Bildes und deines Gerätes.</item>
+    <item quantity="other">Der geteilte Inhalt wird abgerufen. Die Verarbeitung der Bilder kann einige Zeit in Anspruch nehmen, abhängig von der Größe der Bilder und deines Gerätes.</item>
+  </plurals>
+  <string name="no_image">Keine Bilder verwendet</string>
+  <string name="no_image_reverted">Keine Bilder zurückgesetzt</string>
+  <string name="no_image_uploaded">Keine Bilder hochgeladen</string>
 </resources>

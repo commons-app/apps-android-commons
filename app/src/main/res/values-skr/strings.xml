@@ -58,7 +58,7 @@
   <string name="title_activity_settings">ترتیباں</string>
   <string name="title_activity_signup">سائن اپ</string>
   <string name="title_activity_featured_images">خاص تصویراں</string>
-  <string name="title_activity_category_details">ون٘کی</string>
+  <string name="title_activity_category_details">ونکی</string>
   <string name="menu_about">تعارف</string>
   <string name="about_privacy_policy">&lt;u&gt;رازداری پالیسی&lt;/u&gt;</string>
   <string name="title_activity_about">تعارف</string>
@@ -145,7 +145,7 @@
   <string name="title_activity_search">ڳولو</string>
   <string name="search_recent_header">حالیہ ڳول:</string>
   <string name="search_tab_title_media">میݙیا</string>
-  <string name="search_tab_title_categories">ون٘کیاں</string>
+  <string name="search_tab_title_categories">ونکیاں</string>
   <string name="question">سوال</string>
   <string name="result">نتیجہ</string>
   <string name="continue_message">جاری رکھو</string>

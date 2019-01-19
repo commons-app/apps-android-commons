@@ -3,14 +3,10 @@ package fr.free.nrw.commons.upload;
 import android.annotation.SuppressLint;
 import android.content.ContentResolver;
 import android.content.Context;
-import android.content.SharedPreferences;
 import android.database.Cursor;
-import android.graphics.BitmapRegionDecoder;
 import android.net.Uri;
 import android.support.annotation.Nullable;
 
-import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -22,14 +18,12 @@ import javax.inject.Named;
 import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.auth.SessionManager;
 import fr.free.nrw.commons.contributions.Contribution;
+import fr.free.nrw.commons.kvstore.BasicKvStore;
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
+import fr.free.nrw.commons.nearby.Place;
 import fr.free.nrw.commons.settings.Prefs;
-import fr.free.nrw.commons.utils.BitmapRegionDecoderWrapper;
 import fr.free.nrw.commons.utils.ImageUtils;
-import fr.free.nrw.commons.utils.ImageUtilsWrapper;
-import fr.free.nrw.commons.utils.StringUtils;
 import io.reactivex.Observable;
-import io.reactivex.Single;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
@@ -48,7 +42,7 @@ public class UploadModel {
             null,
             -1L) {
     };
-    private final SharedPreferences prefs;
+    private final BasicKvStore basicKvStore;
     private final List<String> licenses;
     private String license;
     private final Map<String, String> licensesByName;
@@ -65,25 +59,21 @@ public class UploadModel {
     private SessionManager sessionManager;
     private Uri currentMediaUri;
     private FileUtilsWrapper fileUtilsWrapper;
-    private ImageUtilsWrapper imageUtilsWrapper;
-    private BitmapRegionDecoderWrapper bitmapRegionDecoderWrapper;
     private FileProcessor fileProcessor;
+    private final ImageProcessingService imageProcessingService;
 
     @Inject
     UploadModel(@Named("licenses") List<String> licenses,
-                @Named("default_preferences") SharedPreferences prefs,
+                @Named("default_preferences") BasicKvStore basicKvStore,
                 @Named("licenses_by_name") Map<String, String> licensesByName,
                 Context context,
                 MediaWikiApi mwApi,
                 SessionManager sessionManager,
                 FileUtilsWrapper fileUtilsWrapper,
-                ImageUtilsWrapper imageUtilsWrapper,
-                BitmapRegionDecoderWrapper bitmapRegionDecoderWrapper,
-                FileProcessor fileProcessor) {
+                FileProcessor fileProcessor, ImageProcessingService imageProcessingService) {
         this.licenses = licenses;
-        this.prefs = prefs;
-        this.license = prefs.getString(Prefs.DEFAULT_LICENSE, Prefs.Licenses.CC_BY_SA_3);
-        this.bitmapRegionDecoderWrapper = bitmapRegionDecoderWrapper;
+        this.basicKvStore = basicKvStore;
+        this.license = basicKvStore.getString(Prefs.DEFAULT_LICENSE, Prefs.Licenses.CC_BY_SA_3);
         this.licensesByName = licensesByName;
         this.context = context;
         this.mwApi = mwApi;
@@ -91,75 +81,53 @@ public class UploadModel {
         this.sessionManager = sessionManager;
         this.fileUtilsWrapper = fileUtilsWrapper;
         this.fileProcessor = fileProcessor;
-        this.imageUtilsWrapper = imageUtilsWrapper;
-        useExtStorage = this.prefs.getBoolean("useExternalStorage", false);
+        useExtStorage = this.basicKvStore.getBoolean("useExternalStorage", false);
+        this.imageProcessingService = imageProcessingService;
+        useExtStorage = this.basicKvStore.getBoolean("useExternalStorage", false);
     }
 
     @SuppressLint("CheckResult")
-    void receive(List<Uri> mediaUri, String mimeType, String source, SimilarImageInterface similarImageInterface) {
+    Observable<UploadItem> preProcessImages(List<Uri> mediaUris,
+                                            String mimeType,
+                                            Place place,
+                                            String source,
+                                            SimilarImageInterface similarImageInterface) {
         initDefaultValues();
-        Observable<UploadItem> itemObservable = Observable.fromIterable(mediaUri)
-                .map(media -> {
-                    currentMediaUri = media;
-                    return cacheFileUpload(media);
-                })
-                .map(filePath -> {
+
+        return Observable.fromIterable(mediaUris)
+                .map(mediaUri -> {
+                    if (mediaUri == null || mediaUri.getPath() == null) {
+                        return null;
+                    }
+                    String filePath = mediaUri.getPath();
                     long fileCreatedDate = getFileCreatedDate(currentMediaUri);
-                    Uri uri = Uri.fromFile(new File(filePath));
+                    String fileExt = fileUtilsWrapper.getFileExt(filePath);
+                    GPSExtractor gpsExtractor = fileProcessor.processFileCoordinates(similarImageInterface);
+
                     fileProcessor.initFileDetails(filePath, context.getContentResolver());
-                    UploadItem item = new UploadItem(uri, mimeType, source, fileProcessor.processFileCoordinates(similarImageInterface),
-                            fileUtilsWrapper.getFileExt(filePath), null, fileCreatedDate);
-                    Single.zip(
-                            Single.fromCallable(() ->
-                                    fileUtilsWrapper.getFileInputStream(filePath))
-                                    .map(fileUtilsWrapper::getSHA1)
-                                    .map(mwApi::existingFile)
-                                    .map(b -> b ? ImageUtils.IMAGE_DUPLICATE : ImageUtils.IMAGE_OK),
-                            Single.fromCallable(() ->
-                                    fileUtilsWrapper.getFileInputStream(filePath))
-                                    .map(file -> bitmapRegionDecoderWrapper.newInstance(file, false))
-                                    .map(imageUtilsWrapper::checkIfImageIsTooDark), //Returns IMAGE_DARK or IMAGE_OK
-                            (dupe, dark) -> dupe | dark)
-                            .observeOn(Schedulers.io())
+                    UploadItem item = new UploadItem(mediaUri, mimeType, source, gpsExtractor,
+                            fileExt, place.getWikiDataEntityId(), fileCreatedDate);
+                    imageProcessingService.checkImageQuality(place, filePath)
+                            .subscribeOn(Schedulers.computation())
                             .subscribe(item.imageQuality::onNext, Timber::e);
                     return item;
                 });
-        items = itemObservable.toList().blockingGet();
-        items.get(0).selected = true;
-        items.get(0).first = true;
     }
 
-    @SuppressLint("CheckResult")
-    void receiveDirect(Uri media, String mimeType, String source, String wikidataEntityIdPref, String title, String desc, SimilarImageInterface similarImageInterface, String wikidataItemLocation) {
-        initDefaultValues();
-        long fileCreatedDate = getFileCreatedDate(media);
-        String filePath = this.cacheFileUpload(media);
-        Uri uri = Uri.fromFile(new File(filePath));
-        fileProcessor.initFileDetails(filePath, context.getContentResolver());
-        UploadItem item = new UploadItem(uri, mimeType, source, fileProcessor.processFileCoordinates(similarImageInterface),
-                fileUtilsWrapper.getFileExt(filePath), wikidataEntityIdPref, fileCreatedDate);
-        item.title.setTitleText(title);
-        item.descriptions.get(0).setDescriptionText(desc);
-        //TODO figure out if default descriptions in other languages exist
-        item.descriptions.get(0).setLanguageCode("en");
-        Single.zip(
-                Single.fromCallable(() ->
-                        fileUtilsWrapper.getFileInputStream(filePath))
-                        .map(fileUtilsWrapper::getSHA1)
-                        .map(mwApi::existingFile)
-                        .map(b -> b ? ImageUtils.IMAGE_DUPLICATE : ImageUtils.IMAGE_OK),
-                Single.fromCallable(() -> filePath)
-                        .map(fileUtilsWrapper::getGeolocationOfFile)
-                        .map(geoLocation -> imageUtilsWrapper.checkImageGeolocationIsDifferent(geoLocation, wikidataItemLocation))
-                        .map(r -> r ? ImageUtils.IMAGE_GEOLOCATION_DIFFERENT : ImageUtils.IMAGE_OK),
-                Single.fromCallable(() ->
-                        fileUtilsWrapper.getFileInputStream(filePath))
-                        .map(file -> bitmapRegionDecoderWrapper.newInstance(file, false))
-                        .map(imageUtilsWrapper::checkIfImageIsTooDark), //Returns IMAGE_DARK or IMAGE_OK
-                (dupe, wrongGeo, dark) -> dupe | wrongGeo | dark).subscribe(item.imageQuality::onNext);
-        items.add(item);
-        items.get(0).selected = true;
-        items.get(0).first = true;
+    void onItemsProcessed(Place place, List<UploadItem> uploadItems) {
+        items = uploadItems;
+        if (items.isEmpty()) {
+            return;
+        }
+        UploadItem uploadItem = items.get(0);
+        uploadItem.selected = true;
+        uploadItem.first = true;
+        if (place != null) {
+            uploadItem.title.setTitleText(place.getName());
+            uploadItem.descriptions.get(0).setDescriptionText(place.getLongDescription());
+            //TODO figure out if default descriptions in other languages exist
+            uploadItem.descriptions.get(0).setLanguageCode("en");
+        }
     }
 
     private void initDefaultValues() {
@@ -257,8 +225,10 @@ public class UploadModel {
     }
 
     public void next() {
+        Timber.d("UploadModel:next; Handling next");
         if (badImageSubscription != null)
             badImageSubscription.dispose();
+        Timber.d("UploadModel:next; disposing badImageSubscription");
         markCurrentUploadVisited();
         if (currentStepIndex < items.size() + 1) {
             currentStepIndex++;
@@ -308,6 +278,7 @@ public class UploadModel {
     }
 
     private void updateItemState() {
+        Timber.d("Updating item state");
         int count = items.size();
         for (int i = 0; i < count; i++) {
             UploadItem item = items.get(i);
@@ -317,6 +288,7 @@ public class UploadModel {
     }
 
     private void markCurrentUploadVisited() {
+        Timber.d("Marking current upload visited");
         if (currentStepIndex < items.size() && currentStepIndex >= 0) {
             items.get(currentStepIndex).visited = true;
         }
@@ -332,7 +304,7 @@ public class UploadModel {
 
     void setSelectedLicense(String licenseName) {
         this.license = licensesByName.get(licenseName);
-        prefs.edit().putString(Prefs.DEFAULT_LICENSE, license).commit();
+        basicKvStore.putString(Prefs.DEFAULT_LICENSE, license);
     }
 
     Observable<Contribution> buildContributions(List<String> categoryStringList) {
@@ -353,29 +325,6 @@ public class UploadModel {
             }
             return contribution;
         });
-    }
-
-    /**
-     * Copy files into local storage and return file path
-     * If somehow copy fails, it returns the original path
-     * @param media Uri of the file
-     * @return path of the enw file
-     */
-    private String cacheFileUpload(Uri media) {
-        String finalFilePath;
-        try {
-            String copyFilePath = fileUtilsWrapper.createCopyPathAndCopy(useExtStorage, media, contentResolver, context);
-            Timber.i("Copied file path is %s", copyFilePath);
-            finalFilePath = copyFilePath;
-        } catch (Exception e) {
-            Timber.w(e, "Error in copying URI %s. Using original file path instead", media.getPath());
-            finalFilePath = media.getPath();
-        }
-
-        if (StringUtils.isNullOrWhiteSpace(finalFilePath)) {
-            finalFilePath = media.getPath();
-        }
-        return finalFilePath;
     }
 
     void keepPicture() {

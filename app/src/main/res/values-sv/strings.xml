@@ -263,7 +263,7 @@
   <string name="skip_login">Hoppa över</string>
   <string name="navigation_item_login">Logga in</string>
   <string name="skip_login_title">Vill du verkligen hoppa över inloggningen?</string>
-  <string name="skip_login_message" fuzzy="true">Du kommer inte kunna ladda upp bilder.</string>
+  <string name="skip_login_message">Du behöver logga ini för att ladda upp bilder i framtiden.</string>
   <string name="login_alert_message">Logga in för att använda denna funktion</string>
   <string name="copy_wikicode">Kopiera wikitexten till urklipp</string>
   <string name="wikicode_copied">Wikitexten kopierades till urklipp</string>
@@ -431,4 +431,12 @@
   <string name="nearby_campaign_dismiss_message">Du kommer inte längre se kampanjerna. Om du vill kan du återaktivera denna avisering i inställningarna.</string>
   <string name="this_function_needs_network_connection">Denna funktion kräver nätverksuppkoppling. Kontrollera dina anslutningsinställningar.</string>
   <string name="bad_token_error_proposed_solution">Uppladdningen misslyckades p.g.a. problem med redigeringsnyckeln. Försök logga ut och in igen.</string>
+  <string name="error_processing_image">Fel uppstod när bilden behandlades. Försök igen!</string>
+  <plurals name="receiving_shared_content">
+    <item quantity="one">Hämtar delat innehåll. Det kan ta en stund att behandla bilden beroende på bildens storlek och din enhet</item>
+    <item quantity="other">Hämtar delat innehåll. Det kan ta en stund att behandla bilderna beroende på bildens storlek och din enhet</item>
+  </plurals>
+  <string name="no_image">Inga bilder används</string>
+  <string name="no_image_reverted">Inga bilder återställdes</string>
+  <string name="no_image_uploaded">Inga bilder laddades upp</string>
 </resources>

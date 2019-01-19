@@ -3,11 +3,11 @@ package fr.free.nrw.commons.logging;
 import android.content.Context;
 
 import javax.inject.Inject;
-import javax.inject.Named;
 import javax.inject.Singleton;
 
 import fr.free.nrw.commons.BuildConfig;
 import fr.free.nrw.commons.auth.SessionManager;
+import fr.free.nrw.commons.utils.ConfigUtils;
 import fr.free.nrw.commons.utils.DeviceInfoUtil;
 
 /**
@@ -24,12 +24,12 @@ public class CommonsLogSender extends LogsSender {
 
     @Inject
     public CommonsLogSender(SessionManager sessionManager,
-                            Context context,
-                            @Named("isBeta") boolean isBeta) {
-        super(sessionManager, isBeta);
+                            Context context) {
+        super(sessionManager);
 
         this.sessionManager = sessionManager;
         this.context = context;
+        boolean isBeta = ConfigUtils.isBetaFlavour();
         this.logFileName = isBeta ? "CommonsBetaAppLogs.zip" : "CommonsAppLogs.zip";
         String emailSubjectFormat = isBeta ? BETA_LOGS_PRIVATE_EMAIL_SUBJECT : LOGS_PRIVATE_EMAIL_SUBJECT;
         this.emailSubject = String.format(emailSubjectFormat, sessionManager.getUserName());

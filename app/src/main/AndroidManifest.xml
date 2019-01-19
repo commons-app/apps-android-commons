@@ -117,8 +117,6 @@
             android:name=".bookmarks.BookmarksActivity"
             android:label="@string/title_activity_bookmarks" />
 
-        <activity android:name="com.github.pedrovgs.lynx.LynxActivity"/>
-
         <service android:name=".upload.UploadService" />
         <service
             android:name=".auth.WikiAccountAuthenticatorService"

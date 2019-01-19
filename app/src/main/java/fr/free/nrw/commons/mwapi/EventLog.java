@@ -1,9 +1,9 @@
 package fr.free.nrw.commons.mwapi;
 
-import android.content.SharedPreferences;
 import android.os.Build;
 
 import fr.free.nrw.commons.Utils;
+import fr.free.nrw.commons.kvstore.BasicKvStore;
 
 public class EventLog {
     static final String DEVICE;
@@ -16,11 +16,11 @@ public class EventLog {
         }
     }
 
-    private static LogBuilder schema(String schema, long revision, MediaWikiApi mwApi, SharedPreferences prefs) {
+    private static LogBuilder schema(String schema, long revision, MediaWikiApi mwApi, BasicKvStore prefs) {
         return new LogBuilder(schema, revision, mwApi, prefs);
     }
 
-    public static LogBuilder schema(Object[] scid, MediaWikiApi mwApi, SharedPreferences prefs) {
+    public static LogBuilder schema(Object[] scid, MediaWikiApi mwApi, BasicKvStore prefs) {
         if (scid.length != 2) {
             throw new IllegalArgumentException("Needs an object array with schema as first param and revision as second");
         }

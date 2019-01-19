@@ -16,6 +16,7 @@ import javax.inject.Named;
 import javax.inject.Provider;
 
 import fr.free.nrw.commons.location.LatLng;
+import fr.free.nrw.commons.nearby.Label;
 import fr.free.nrw.commons.nearby.Place;
 import fr.free.nrw.commons.nearby.Sitelinks;
 
@@ -154,7 +155,7 @@ public class BookmarkLocationsDao {
 
         return new Place(
                 cursor.getString(cursor.getColumnIndex(Table.COLUMN_NAME)),
-                Place.Label.fromText((cursor.getString(cursor.getColumnIndex(Table.COLUMN_LABEL_TEXT)))),
+                Label.fromText((cursor.getString(cursor.getColumnIndex(Table.COLUMN_LABEL_TEXT)))),
                 cursor.getString(cursor.getColumnIndex(Table.COLUMN_DESCRIPTION)),
                 uri,
                 location,

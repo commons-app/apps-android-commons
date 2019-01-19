@@ -1,7 +1,6 @@
 package fr.free.nrw.commons.nearby;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.net.Uri;
 import android.support.transition.TransitionManager;
 import android.support.v4.app.Fragment;
@@ -30,17 +29,22 @@ import fr.free.nrw.commons.auth.LoginActivity;
 import fr.free.nrw.commons.bookmarks.locations.BookmarkLocationsDao;
 import fr.free.nrw.commons.contributions.ContributionController;
 import fr.free.nrw.commons.di.ApplicationlessInjection;
+import fr.free.nrw.commons.kvstore.BasicKvStore;
+import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.utils.PlaceUtils;
 import timber.log.Timber;
 
+import static fr.free.nrw.commons.contributions.ContributionController.NEARBY_CAMERA_UPLOAD_REQUEST_CODE;
+import static fr.free.nrw.commons.contributions.ContributionController.NEARBY_GALLERY_UPLOAD_REQUEST_CODE;
+import static fr.free.nrw.commons.contributions.ContributionController.NEARBY_UPLOAD_IMAGE_LIMIT;
 import static fr.free.nrw.commons.theme.NavigationBaseActivity.startActivityWithFlags;
+import static fr.free.nrw.commons.wikidata.WikidataConstants.IS_DIRECT_UPLOAD;
+import static fr.free.nrw.commons.wikidata.WikidataConstants.PLACE_OBJECT;
 import static fr.free.nrw.commons.wikidata.WikidataConstants.WIKIDATA_ENTITY_ID_PREF;
 import static fr.free.nrw.commons.wikidata.WikidataConstants.WIKIDATA_ITEM_LOCATION;
 
 public class PlaceRenderer extends Renderer<Place> {
 
-    @Inject
-    @Named("application_preferences") SharedPreferences applicationPrefs;
     @BindView(R.id.tvName) TextView tvName;
     @BindView(R.id.tvDesc) TextView tvDesc;
     @BindView(R.id.distance) TextView distance;
@@ -68,13 +72,11 @@ public class PlaceRenderer extends Renderer<Place> {
     private ContributionController controller;
     private OnBookmarkClick onBookmarkClick;
 
-    @Inject
-    BookmarkLocationsDao bookmarkLocationDao;
-    @Inject @Named("prefs") SharedPreferences prefs;
-    @Inject @Named("direct_nearby_upload_prefs") SharedPreferences directPrefs;
-    @Inject
-    @Named("default_preferences")
-    SharedPreferences defaultPrefs;
+    @Inject BookmarkLocationsDao bookmarkLocationDao;
+    @Inject @Named("application_preferences") BasicKvStore applicationKvStore;
+    @Inject @Named("defaultKvStore") BasicKvStore prefs;
+    @Inject @Named("direct_nearby_upload_prefs") JsonKvStore directKvStore;
+    @Inject @Named("default_preferences") BasicKvStore defaultKvStore;
 
     public PlaceRenderer(){
         openedItems = new ArrayList<>();
@@ -128,53 +130,53 @@ public class PlaceRenderer extends Renderer<Place> {
         });
 
         cameraButton.setOnClickListener(view2 -> {
-            if (applicationPrefs.getBoolean("login_skipped", false)) {
+            if (applicationKvStore.getBoolean("login_skipped", false)) {
                 // prompt the user to login
                 new AlertDialog.Builder(getContext())
                         .setMessage(R.string.login_alert_message)
                         .setPositiveButton(R.string.login, (dialog, which) -> {
                             startActivityWithFlags( getContext(), LoginActivity.class, Intent.FLAG_ACTIVITY_CLEAR_TOP,
                                     Intent.FLAG_ACTIVITY_SINGLE_TOP);
-                            prefs.edit().putBoolean("login_skipped", false).apply();
+                            prefs.putBoolean("login_skipped", false);
                             fragment.getActivity().finish();
                         })
                         .show();
             } else {
                 Timber.d("Camera button tapped. Image title: " + place.getName() + "Image desc: " + place.getLongDescription());
                 storeSharedPrefs();
-                controller.initiateCameraPick(fragment.getActivity());
+                controller.initiateCameraPick(fragment.getActivity(), NEARBY_CAMERA_UPLOAD_REQUEST_CODE);
             }
         });
 
 
         galleryButton.setOnClickListener(view3 -> {
-            if (applicationPrefs.getBoolean("login_skipped", false)) {
+            if (applicationKvStore.getBoolean("login_skipped", false)) {
                 // prompt the user to login
                 new AlertDialog.Builder(getContext())
                         .setMessage(R.string.login_alert_message)
                         .setPositiveButton(R.string.login, (dialog, which) -> {
                             startActivityWithFlags( getContext(), LoginActivity.class, Intent.FLAG_ACTIVITY_CLEAR_TOP,
                                     Intent.FLAG_ACTIVITY_SINGLE_TOP);
-                            prefs.edit().putBoolean("login_skipped", false).apply();
+                            prefs.putBoolean("login_skipped", false);
                             fragment.getActivity().finish();
                         })
                         .show();
             }else {
                 Timber.d("Gallery button tapped. Image title: " + place.getName() + "Image desc: " + place.getLongDescription());
                 storeSharedPrefs();
-                controller.initiateGalleryPick(fragment.getActivity());
+                controller.initiateGalleryPick(fragment.getActivity(), NEARBY_UPLOAD_IMAGE_LIMIT, NEARBY_GALLERY_UPLOAD_REQUEST_CODE);
             }
         });
 
         bookmarkButton.setOnClickListener(view4 -> {
-            if (applicationPrefs.getBoolean("login_skipped", false)) {
+            if (applicationKvStore.getBoolean("login_skipped", false)) {
                 // prompt the user to login
                 new AlertDialog.Builder(getContext())
                         .setMessage(R.string.login_alert_message)
                         .setPositiveButton(R.string.login, (dialog, which) -> {
                             startActivityWithFlags( getContext(), LoginActivity.class, Intent.FLAG_ACTIVITY_CLEAR_TOP,
                                     Intent.FLAG_ACTIVITY_SINGLE_TOP);
-                            prefs.edit().putBoolean("login_skipped", false).apply();
+                            prefs.putBoolean("login_skipped", false);
                             fragment.getActivity().finish();
                         })
                         .show();
@@ -190,14 +192,8 @@ public class PlaceRenderer extends Renderer<Place> {
     }
 
     private void storeSharedPrefs() {
-        SharedPreferences.Editor editor = directPrefs.edit();
-        Timber.d("directPrefs stored");
-        editor.putString("Title", place.getName());
-        editor.putString("Desc", place.getLongDescription());
-        editor.putString("Category", place.getCategory());
-        editor.putString(WIKIDATA_ENTITY_ID_PREF, place.getWikiDataEntityId());
-        editor.putString(WIKIDATA_ITEM_LOCATION, PlaceUtils.latLangToString(place.location));
-        editor.apply();
+        Timber.d("Store place object %s", place.toString());
+        directKvStore.putJson(PLACE_OBJECT, place);
     }
 
     private void closeLayout(LinearLayout buttonLayout){

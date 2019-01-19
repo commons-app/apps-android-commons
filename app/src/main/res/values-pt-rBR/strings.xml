@@ -176,6 +176,7 @@
   <string name="detail_description_empty">Sem descrição</string>
   <string name="detail_license_empty">Licença desconhecida</string>
   <string name="menu_refresh">Atualizar</string>
+  <string name="storage_permission_title">Solicitando permissão de armazenamento</string>
   <string name="read_storage_permission_rationale">Permissão necessária: leia o armazenamento externo. App não pode acessar sua galeria sem isso.</string>
   <string name="write_storage_permission_rationale">Permissão necessária: escreva o armazenamento externo. App não pode acessar sua câmera sem isso.</string>
   <string name="location_permission_rationale">Permissão opcional: Obter a localização atual de sugestões de categoria</string>
@@ -268,7 +269,7 @@
   <string name="skip_login">Pular</string>
   <string name="navigation_item_login">Entrar</string>
   <string name="skip_login_title">Você realmente quer pular a entrada?</string>
-  <string name="skip_login_message" fuzzy="true">Você não poderá enviar fotos.</string>
+  <string name="skip_login_message">Você teria que entrar para enviar fotos no futuro.</string>
   <string name="login_alert_message">Entre para usar esta funcionalidade</string>
   <string name="copy_wikicode">Copie o wikitexto para a área de transferência</string>
   <string name="wikicode_copied">O wikitexto foi copiado para a área de transferência</string>
@@ -436,4 +437,8 @@
   <string name="nearby_campaign_dismiss_message">Você não verá mais as campanhas. No entanto, você pode reativar essa notificação em Configurações, se desejar.</string>
   <string name="this_function_needs_network_connection">Esta função requer conexão de rede, por favor, verifique suas configurações de conexão.</string>
   <string name="bad_token_error_proposed_solution">O carregamento falhou devido a problemas com o token de edição. Por favor, tente sair e entrar novamente.</string>
+  <plurals name="receiving_shared_content">
+    <item quantity="one">Recebendo conteúdo compartilhado. O processamento da imagem pode demorar algum tempo, dependendo do tamanho da imagem e do seu dispositivo</item>
+    <item quantity="other">Recebendo conteúdo compartilhado. O processamento das imagens pode levar algum tempo, dependendo do tamanho das imagens e do dispositivo</item>
+  </plurals>
 </resources>

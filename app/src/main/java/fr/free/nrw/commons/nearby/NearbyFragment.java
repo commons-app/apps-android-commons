@@ -4,7 +4,6 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -33,6 +32,7 @@ import butterknife.ButterKnife;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.contributions.MainActivity;
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
+import fr.free.nrw.commons.kvstore.BasicKvStore;
 import fr.free.nrw.commons.location.LatLng;
 import fr.free.nrw.commons.location.LocationServiceManager;
 import fr.free.nrw.commons.location.LocationUpdateListener;
@@ -73,7 +73,7 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
     WikidataEditListener wikidataEditListener;
     @Inject
     @Named("application_preferences")
-    SharedPreferences applicationPrefs;
+    BasicKvStore applicationKvStore;
 
     public NearbyMapFragment nearbyMapFragment;
     private NearbyListFragment nearbyListFragment;

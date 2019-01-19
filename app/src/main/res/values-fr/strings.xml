@@ -276,7 +276,7 @@
   <string name="skip_login">Plus tard</string>
   <string name="navigation_item_login">Se connecter</string>
   <string name="skip_login_title">Voulez-vous vraiment ne pas vous connecter ?</string>
-  <string name="skip_login_message" fuzzy="true">Vous ne pourrez pas téléverser d\'images.</string>
+  <string name="skip_login_message">Vous aurez à vous connecter à l\'avenir pour téléverser des images.</string>
   <string name="login_alert_message">Veuillez vous connecter pour utiliser cette fonctionnalité</string>
   <string name="copy_wikicode">Copier le texte wiki dans le presse-papiers</string>
   <string name="wikicode_copied">Texte wiki copié dans le presse-papiers</string>
@@ -444,4 +444,12 @@
   <string name="nearby_campaign_dismiss_message">Vous ne verrez plus les campagnes. Néanmoins, vous pouvez réactiver cette notification dans vos paramètres de configuration, si vous le souhaitez.</string>
   <string name="this_function_needs_network_connection">Cette fonction requiert une connexion réseau, veuillez consulter vos paramètres de connexion.</string>
   <string name="bad_token_error_proposed_solution">Le téléversement a échoué en raison d\'incidents liés au jeton d\'édition. Essayez de vous déconnecter puis de vous reconnecter.</string>
+  <string name="error_processing_image">Une erreur est survenue durant le traitement de l\'image. Veuillez recommencer !</string>
+  <plurals name="receiving_shared_content">
+    <item quantity="one">Réception de contenu partagé. Le traitement de l\'image peut prendre un certain temps en fonction de la taille de l\'image et de votre matériel</item>
+    <item quantity="other">Réception de contenu partagé. Le traitement des images peut prendre un certain temps en fonction de la taille des images et de votre matériel</item>
+  </plurals>
+  <string name="no_image">Aucune image utilisée</string>
+  <string name="no_image_reverted">Aucune image retournée</string>
+  <string name="no_image_uploaded">Aucune image téléversée</string>
 </resources>

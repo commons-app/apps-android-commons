@@ -228,6 +228,7 @@
   <string name="error_while_cache">Hiba a képek gyorsítótárazásakor</string>
   <string name="title_info">Egy egyedi, leíró cím a fájlnak, ami fájlnévként fog szolgálni. Egyszerű nyelvezetet használhatsz szóközökkel. Ne tedd bele a kiterjesztést.</string>
   <string name="description_info">Kérlek a lehető legteljesebb módon írd le a fájlt: hol készült, mit ábrázol, mi a kontextus? Kérlek add meg az objektumokat vagy személyeket a képen, valamint a nehezen kitalálható információkat (például a kép készítésének dátumát, ha az egy tájkép). Amennyiben a média valami szokatlant ábrázol, kérlek fejtsd ki, hogy mi teszi szokatlanná.</string>
+  <string name="upload_problem_do_you_continue">Biztosan fel akarod tölteni ezt a képet?</string>
   <string name="give_permission">Engedély adása</string>
   <string name="use_external_storage">Külső tárhely használata</string>
   <string name="use_external_storage_summary">Az alkalmazáson belüli kamerával készült képek mentése az eszközre</string>

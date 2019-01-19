@@ -261,7 +261,7 @@
   <string name="skip_login">Прескочи</string>
   <string name="navigation_item_login">Пријави ме</string>
   <string name="skip_login_title">Заиста желите да прескочите пријаву?</string>
-  <string name="skip_login_message" fuzzy="true">Нећете моћи да отпремате слике.</string>
+  <string name="skip_login_message">Мораћете да се пријавите да бисте отпремали слике у будућности.</string>
   <string name="login_alert_message">Пријавите се да бисте користили ову функцију</string>
   <string name="copy_wikicode">Копирај викитекст у оставу</string>
   <string name="wikicode_copied">Викитекст је копиран у оставу</string>
@@ -420,4 +420,7 @@
   <string name="display_campaigns_explanation">Додирните ове да бисте видели кампање у току</string>
   <string name="this_function_needs_network_connection">Ова функција захтева мрежну везу. Проверите подешавања везе.</string>
   <string name="bad_token_error_proposed_solution">Отпремање није успело због проблема са токеном за уређивање. Покушајте да се пријавите поново.</string>
+  <string name="no_image">Нема коришћених датотека</string>
+  <string name="no_image_reverted">Нема враћених слика</string>
+  <string name="no_image_uploaded">Нема отпремљених слика</string>
 </resources>

@@ -9,6 +9,7 @@
 * Jduranboger
 * Jelou
 * Johnny243
+* Juanman
 * Ktranz
 * Luisangelrg
 * Macofe
@@ -44,7 +45,7 @@
   <string name="upload_completed_notification_title">Se ha cargado %1$s.</string>
   <string name="upload_completed_notification_text">Pulsa para ver tu subida</string>
   <string name="upload_progress_notification_title_start">Empezando la subida de %1$s</string>
-  <string name="upload_progress_notification_title_in_progress">Cargando %1$s</string>
+  <string name="upload_progress_notification_title_in_progress">Subiendo %1$s</string>
   <string name="upload_progress_notification_title_finishing">Finalizando la subida de %1$s</string>
   <string name="upload_failed_notification_title">Falló la carga de %1$s</string>
   <string name="upload_failed_notification_subtitle">Toca para ver</string>
@@ -102,7 +103,7 @@
   <string name="categories_activity_title">Categorías</string>
   <string name="title_activity_settings">Ajustes</string>
   <string name="title_activity_signup">Regístrate</string>
-  <string name="title_activity_featured_images">Imágenes en destaque</string>
+  <string name="title_activity_featured_images">Imágenes destacadas</string>
   <string name="title_activity_category_details">Categoría</string>
   <string name="menu_about">Acerca de</string>
   <string name="about_license">La aplicación de código abierto Wikimedia Commons fue creada por, y recibe mantenimiento de, cesionarios y voluntarios de la comunidad de Wikimedia. La Fundación Wikimedia no está involucrada en la creación, el desarrollo ni el mantenimiento de la aplicación.</string>
@@ -179,6 +180,7 @@
   <string name="detail_description_empty">Sin descripción</string>
   <string name="detail_license_empty">Licencia desconocida</string>
   <string name="menu_refresh">Actualizar</string>
+  <string name="storage_permission_title">Pidiendo permiso de almacenamiento</string>
   <string name="read_storage_permission_rationale">Permiso obligatorio: lectura de almacenamiento externo. La aplicación no puede acceder a la galería sin él.</string>
   <string name="write_storage_permission_rationale">Permiso necesario: Escribir en almacenamiento externo. La aplicación no puede acceder a la cámara sin él.</string>
   <string name="location_permission_rationale">Permiso opcional: obtener la ubicación actual para sugerir categorías</string>
@@ -250,6 +252,12 @@
   <string name="description_info">Por favor, describa el elemento multimedia tanto como sea posible: ¿dónde fue tomado?, ¿qué muestra?, ¿cuál es el contexto? Por favor, describa los objetos o personas. Ofrezca la información que no puede ser inferida tan fácilmente, por ejemplo el momento del día si es un paisaje. Si el medio muestra algo inusual, explique qué lo hace insual.</string>
   <string name="upload_image_too_dark">La imagen está demasiado oscura, ¿seguro que quieres subirla? Wikimedia Commons solo acepta imágenes con valor enciclopédico.</string>
   <string name="upload_image_blurry">La imagen está borrosa, ¿seguro que quieres subirla? Sube solo imágenes con valor enciclopédico.</string>
+  <string name="upload_problem_exist">Problemas potenciales con esta imagen:</string>
+  <string name="upload_problem_image_dark">La imagen es demasiado oscura.</string>
+  <string name="upload_problem_image_blurry">La imagen está borrosa.</string>
+  <string name="upload_problem_image_duplicate">La imagen ya está en Commons.</string>
+  <string name="upload_problem_different_geolocation">Esta imagen fue tomada en una ubicación diferente.</string>
+  <string name="upload_problem_do_you_continue">¿Todavía quieres cargar esta imagen?</string>
   <string name="give_permission">Otorgar permiso</string>
   <string name="use_external_storage">Utilizar almacenamiento externo</string>
   <string name="use_external_storage_summary">Guardar en el dispositivo imágenes capturadas con la cámara de la aplicación</string>
@@ -265,7 +273,7 @@
   <string name="skip_login">Omitir</string>
   <string name="navigation_item_login">Acceder</string>
   <string name="skip_login_title">¿Realmente querés omitir el inicio de sesión?</string>
-  <string name="skip_login_message" fuzzy="true">No serás capaz de subir imágenes.</string>
+  <string name="skip_login_message">Deberías iniciar sesión para subir imágenes en el futuro.</string>
   <string name="login_alert_message">Por favor inicia sesion para usar esta característica</string>
   <string name="copy_wikicode">Copia el Wikicódigo al portapapeles</string>
   <string name="wikicode_copied">El Wikitexto fue copiado al portapapeles</string>
@@ -314,6 +322,8 @@
   <string name="provider_searches">Consultas recientemente buscadas</string>
   <string name="error_loading_categories">Se produjo un error al cargar las categorías.</string>
   <string name="error_loading_subcategories">Se produjo un error al cargar las subcategorías.</string>
+  <string name="search_tab_title_media">MULTIMEDIA</string>
+  <string name="search_tab_title_categories">CATEGORÍAS</string>
   <string name="successful_wikidata_edit">¡La imagen ha sido añadida exitosamente a %1$s en Wikidata!</string>
   <string name="wikidata_edit_failure">¡Fallo la actualización de la entrada de Wikidata correspondiente!</string>
   <string name="menu_set_wallpaper">Poner como papel tapiz</string>
@@ -342,6 +352,7 @@
   <string name="share_coordinates_not_present">No se especificaron las coordenadas al seleccionar la imagen</string>
   <string name="error_fetching_nearby_places">Error al recuperar los lugares cercanos.</string>
   <string name="add_description">+ Añadir descripción</string>
+  <string name="no_recent_searches">No hay búsquedas recientes</string>
   <string name="delete_recent_searches_dialog">¿Confirmas que quieres vaciar el historial de búsquedas?</string>
   <string name="search_history_deleted">Historial de búsqueda eliminado</string>
   <string name="nominate_delete">Nominar para borrado</string>
@@ -350,7 +361,7 @@
   <string name="statistics_thanks">Agradecimientos recibidos</string>
   <string name="statistics_featured">Imágenes destacadas</string>
   <string name="level">NIVEL</string>
-  <string name="images_uploaded">Las imágenes han sido subidas</string>
+  <string name="images_uploaded">Imágenes subidas</string>
   <string name="image_reverts">Imágenes no revertidas</string>
   <string name="images_used_by_wiki">Imágenes utilizadas</string>
   <string name="achievements_share_message">¡Comparte tus logros con tus amigos!</string>
@@ -361,6 +372,10 @@
   <string name="images_used_explanation">El número de imágenes que has subido a Commons que fueron utilizadas en artículos de Wikimedia</string>
   <string name="error_occurred">¡Ocurrió un error!</string>
   <string name="notifications_channel_name_all">Notificación de Commons</string>
+  <string name="preference_author_name_toggle">Usar nombre de autor personalizado</string>
+  <string name="preference_author_name_toggle_summary">Usar un nombre de autor personalizado en vez de tu nombre de usuario al subir fotos</string>
+  <string name="preference_author_name">Nombre de autor personalizado</string>
+  <string name="preference_author_name_summary">El nombre de autor personalizado para usar en las subidas en vez de tu nombre de usuario</string>
   <string name="contributions_fragment">Contribuciones</string>
   <string name="nearby_fragment">Cercanos</string>
   <string name="notifications">Notificaciones</string>
@@ -420,5 +435,8 @@
   <string name="display_location_permission_title">Mostrar permiso de ubicación</string>
   <string name="display_location_permission_explanation">Pida permiso de ubicación cuando sea necesario para ver la tarjeta de notificación cercana.</string>
   <string name="achievements_fetch_failed">Algo salió mal, no pudimos obtener sus logros</string>
+  <string name="ends_on">Finaliza el:</string>
+  <string name="display_campaigns">Mostrar campañas</string>
   <string name="this_function_needs_network_connection">Esta función requiere conexión de red, por favor verifique sus ajustes de conexión.</string>
+  <string name="error_processing_image">Se produjo un error al procesar la imagen. Inténtalo de nuevo.</string>
 </resources>

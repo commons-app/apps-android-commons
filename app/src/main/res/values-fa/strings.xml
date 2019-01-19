@@ -9,6 +9,7 @@
 * Omidh
 * Ommmmid
 * Reza1615
+* Vahedi
 * Yoosef Pooranvary
 * جواد
 -->
@@ -335,4 +336,5 @@
   <string name="yes_submit">بله، ارسال شود</string>
   <string name="no_go_back">نه، به قبل بازگرد</string>
   <string name="upload_flow_all_images_in_set">(برای همهٔ تصاویر موجود در مجموعه)</string>
+  <string name="error_processing_image">هنگام پردازش این تصویر خطایی رخ داد. لطفا دوباره سعی کنید!</string>
 </resources>

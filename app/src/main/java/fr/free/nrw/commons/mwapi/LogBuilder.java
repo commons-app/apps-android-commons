@@ -1,6 +1,5 @@
 package fr.free.nrw.commons.mwapi;
 
-import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Build;
 
@@ -12,6 +11,7 @@ import java.net.URL;
 
 import fr.free.nrw.commons.BuildConfig;
 import fr.free.nrw.commons.Utils;
+import fr.free.nrw.commons.kvstore.BasicKvStore;
 import fr.free.nrw.commons.settings.Prefs;
 
 @SuppressWarnings("WeakerAccess")
@@ -20,7 +20,7 @@ public class LogBuilder {
     private final JSONObject data;
     private final long rev;
     private final String schema;
-    private final SharedPreferences prefs;
+    private final BasicKvStore prefs;
 
     /**
      * Main constructor of LogBuilder
@@ -30,7 +30,7 @@ public class LogBuilder {
      * @param mwApi    Wiki media API instance
      * @param prefs    Instance of SharedPreferences
      */
-    LogBuilder(String schema, long revision, MediaWikiApi mwApi, SharedPreferences prefs) {
+    LogBuilder(String schema, long revision, MediaWikiApi mwApi, BasicKvStore prefs) {
         this.prefs = prefs;
         this.data = new JSONObject();
         this.schema = schema;

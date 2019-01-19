@@ -100,7 +100,10 @@
   <string name="no_uploads_yet">Dir hutt nach keng Fotoen eropgelueden.</string>
   <string name="menu_retry_upload">Nach eng Kéier probéieren</string>
   <string name="menu_cancel_upload">Ofbriechen</string>
-  <string name="share_license_summary" fuzzy="true">Dëst Bild gëtt ënner %1$s lizenzéiert</string>
+  <plurals name="share_license_summary">
+    <item quantity="one">Dëst Bild gëtt ënner %1$s lizenzéiert</item>
+    <item quantity="other">Dës Biller ginn ënner %1$s lizenzéiert</item>
+  </plurals>
   <string name="menu_download">Eroflueden</string>
   <string name="preference_license">Standardlizenz</string>
   <string name="use_previous">Viregen Titel/Beschreiwung benotzen</string>
@@ -314,4 +317,6 @@
   <string name="yes_submit">Jo, schécken</string>
   <string name="no_go_back">Neen, zréck goen</string>
   <string name="never_ask_again">Dëst ni méi froen</string>
+  <string name="no_image">Keng Biller benotzt</string>
+  <string name="no_image_uploaded">Keng Biller eropgelueden</string>
 </resources>

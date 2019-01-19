@@ -267,7 +267,7 @@
   <string name="skip_login">تخطي</string>
   <string name="navigation_item_login">تسجيل الدخول</string>
   <string name="skip_login_title">هل تريد حقا تخطي تسجيل الدخول؟</string>
-  <string name="skip_login_message" fuzzy="true">لن تتمكن من رفع الصور.</string>
+  <string name="skip_login_message">يجب عليك تسجيل الدخول لرفع الصور في المستقبل.</string>
   <string name="login_alert_message">الرجاء تسجيل الدخول لاستخدام هذه الميزة</string>
   <string name="copy_wikicode">انسخ نص الويكي إلى الكليب بورد</string>
   <string name="wikicode_copied">نص الويكي تم نسخه إلى الكليب بورد</string>
@@ -435,4 +435,12 @@
   <string name="nearby_campaign_dismiss_message">لن ترى الحملات بعد الآن، ومع ذلك، يمكنك إعادة تمكين هذا الإشعار في الإعدادات إذا كنت ترغب.</string>
   <string name="this_function_needs_network_connection">تتطلب هذه الوظيفة الاتصال بالشبكة; يُرجَى التحقق من إعدادات اتصالك.</string>
   <string name="bad_token_error_proposed_solution">فشل التحميل بسبب مشكلات في الرمز المميز للتعديل تُرجَى محاولة تسجيل الخروج والدخول مرة ​​أخرى.</string>
+  <string name="error_processing_image">حدث خطأ أثناء معالجة الصورة. رجاءً حاول مرة أخرى!</string>
+  <plurals name="receiving_shared_content">
+    <item quantity="one">جارٍ تلقي محتوى مشترك، قد تستغرق معالجة الصورة بعض الوقت بناءً على حجم الصور وجهازك</item>
+    <item quantity="other">جارٍ تلقي محتوى مشترك، قد تستغرق معالجة الصور بعض الوقت بناءً على حجم الصور وجهازك</item>
+  </plurals>
+  <string name="no_image">لا صور مستخدمة</string>
+  <string name="no_image_reverted">لم يتم إرجاع أية صور</string>
+  <string name="no_image_uploaded">لا توجد صور مرفوعة</string>
 </resources>

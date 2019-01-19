@@ -20,16 +20,6 @@ public class FileUtilsWrapper {
 
     }
 
-    public String createCopyPathAndCopy(boolean useExtStorage,
-                                        Uri uri,
-                                        ContentResolver contentResolver,
-                                        Context context) throws IOException {
-        return FileUtils.createCopyPathAndCopy(useExtStorage,
-                uri,
-                contentResolver,
-                context);
-    }
-
     public String getFileExt(String fileName) {
         return FileUtils.getFileExt(fileName);
     }

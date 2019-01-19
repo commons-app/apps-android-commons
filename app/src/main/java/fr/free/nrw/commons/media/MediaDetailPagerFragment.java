@@ -3,7 +3,6 @@ package fr.free.nrw.commons.media;
 import android.annotation.SuppressLint;
 import android.app.DownloadManager;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.database.DataSetObserver;
 import android.net.Uri;
 import android.os.Build;
@@ -40,6 +39,7 @@ import fr.free.nrw.commons.category.CategoryImagesActivity;
 import fr.free.nrw.commons.contributions.Contribution;
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
 import fr.free.nrw.commons.explore.SearchActivity;
+import fr.free.nrw.commons.kvstore.BasicKvStore;
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
 import fr.free.nrw.commons.utils.ImageUtils;
 import fr.free.nrw.commons.utils.NetworkUtils;
@@ -54,19 +54,12 @@ import static android.widget.Toast.LENGTH_SHORT;
 
 public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment implements ViewPager.OnPageChangeListener {
 
-    @Inject
-    MediaWikiApi mwApi;
-    @Inject
-    SessionManager sessionManager;
-    @Inject
-    @Named("default_preferences")
-    SharedPreferences prefs;
+    @Inject MediaWikiApi mwApi;
+    @Inject SessionManager sessionManager;
+    @Inject @Named("default_preferences") BasicKvStore basicKvStore;
+    @Inject BookmarkPicturesDao bookmarkDao;
 
-    @Inject
-    BookmarkPicturesDao bookmarkDao;
-
-    @BindView(R.id.mediaDetailsPager)
-    ViewPager pager;
+    @BindView(R.id.mediaDetailsPager) ViewPager pager;
     private Boolean editable;
     private boolean isFeaturedImage;
     MediaDetailAdapter adapter;

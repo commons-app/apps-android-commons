@@ -3,6 +3,7 @@
 * Anamdas
 * Anandra
 * Bhatakati aatma
+* Gopalindians
 * Nitin1485
 * Rajatkatiyar10
 * Rishi.Singh
@@ -237,4 +238,5 @@
   <string name="about_translate_proceed">आगे बढ़ें</string>
   <string name="about_translate_cancel">रद्द करें</string>
   <string name="retry">पुनः प्रयास करें</string>
+  <string name="error_processing_image">छवि संसाधित करते समय त्रुटि आई। कृपया पुन: प्रयास करें!</string>
 </resources>

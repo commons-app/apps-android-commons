@@ -20,6 +20,7 @@ import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
 import fr.free.nrw.commons.auth.SessionManager;
+import fr.free.nrw.commons.utils.ConfigUtils;
 import timber.log.Timber;
 
 /**
@@ -33,16 +34,14 @@ public abstract class LogsSender implements ReportSender {
     String emailBody;
 
     private final SessionManager sessionManager;
-    private final boolean isBeta;
 
-    LogsSender(SessionManager sessionManager,
-               boolean isBeta) {
+    LogsSender(SessionManager sessionManager) {
         this.sessionManager = sessionManager;
-        this.isBeta = isBeta;
     }
 
     /**
      * Overrides send method of ACRA's ReportSender to send logs
+     *
      * @param context
      * @param report
      */
@@ -53,6 +52,7 @@ public abstract class LogsSender implements ReportSender {
 
     /**
      * Gets zipped log files and sends it via email. Can be modified to change the send log mechanism
+     *
      * @param context
      * @param report
      */
@@ -73,6 +73,7 @@ public abstract class LogsSender implements ReportSender {
 
     /**
      * Fires an intent to send email with logs
+     *
      * @param context
      * @param logFileUri
      */
@@ -91,6 +92,7 @@ public abstract class LogsSender implements ReportSender {
 
     /**
      * Returns the URI for the zipped log file
+     *
      * @param context
      * @param report
      * @return
@@ -115,6 +117,7 @@ public abstract class LogsSender implements ReportSender {
 
     /**
      * Checks if there are any pending crash reports and attaches them to the logs
+     *
      * @param report
      * @param builder
      */
@@ -127,6 +130,7 @@ public abstract class LogsSender implements ReportSender {
 
     /**
      * Attaches username to the the meta_data file
+     *
      * @param builder
      */
     private void attachUserInfo(StringBuilder builder) {
@@ -135,6 +139,7 @@ public abstract class LogsSender implements ReportSender {
 
     /**
      * Gets any extra meta information to be attached with the log files
+     *
      * @param builder
      */
     private void attachExtraInfo(StringBuilder builder) {
@@ -145,6 +150,7 @@ public abstract class LogsSender implements ReportSender {
 
     /**
      * Zips the logs and meta information
+     *
      * @param metaData
      * @param zipFile
      * @throws IOException
@@ -153,12 +159,13 @@ public abstract class LogsSender implements ReportSender {
         FileOutputStream fos = new FileOutputStream(zipFile);
         BufferedOutputStream bos = new BufferedOutputStream(fos);
         ZipOutputStream zos = new ZipOutputStream(bos);
+        boolean isBeta = ConfigUtils.isBetaFlavour();
         File logDir = new File(LogUtils.getLogDirectory(isBeta));
 
         if (!logDir.exists() || logDir.listFiles().length == 0) {
             return;
         }
-        
+
         byte[] buffer = new byte[1024];
         for (File file : logDir.listFiles()) {
             FileInputStream fis = new FileInputStream(file);
