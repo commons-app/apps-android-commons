@@ -319,7 +319,7 @@ public class UploadService extends HandlerService<Contribution> {
     @SuppressLint("StringFormatInvalid")
     @SuppressWarnings("deprecation")
     private void showFailedNotification(Contribution contribution) {
-        Notification failureNotification = new NotificationCompat.Builder(this).setAutoCancel(true)
+        Notification failureNotification = new NotificationCompat.Builder(this, CommonsApplication.NOTIFICATION_CHANNEL_ID_ALL).setAutoCancel(true)
                 .setSmallIcon(R.drawable.ic_launcher)
                 .setAutoCancel(true)
                 .setContentIntent(PendingIntent.getActivity(this, 0, new Intent(this, MainActivity.class), 0))
