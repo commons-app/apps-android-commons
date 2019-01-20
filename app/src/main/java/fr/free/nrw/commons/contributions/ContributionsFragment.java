@@ -309,7 +309,7 @@ public class ContributionsFragment
                 ((CursorAdapter) contributionsListFragment.getAdapter()).swapCursor(cursor);
             }
 
-            contributionsListFragment.clearSyncMessage();
+            contributionsListFragment.maybeShowWelcomeTip(cursor.getCount() == 0);
             notifyAndMigrateDataSetObservers();
             ((ContributionsListAdapter)contributionsListFragment.getAdapter()).setUploadService(uploadService);
         }
