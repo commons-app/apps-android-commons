@@ -1,7 +1,6 @@
 package fr.free.nrw.commons.contributions;
 
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
@@ -41,8 +40,6 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment {
 
     @BindView(R.id.contributionsList)
     GridView contributionsList;
-    @BindView(R.id.waitingMessage)
-    TextView waitingMessage;
     @BindView(R.id.loadingContributionsProgressBar)
     ProgressBar progressBar;
     @BindView(R.id.fab_plus)
@@ -51,8 +48,8 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment {
     FloatingActionButton fabCamera;
     @BindView(R.id.fab_gallery)
     FloatingActionButton fabGallery;
-    @BindView(R.id.noDataYet)
-    TextView noDataYet;
+    @BindView(R.id.noContributionsYet)
+    TextView noContributionsYet;
 
     @Inject @Named("default_preferences") BasicKvStore basicKvStore;
     @Inject @Named("direct_nearby_upload_prefs") JsonKvStore directKvStore;
@@ -72,7 +69,6 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment {
 
         contributionsList.setOnItemClickListener((AdapterView.OnItemClickListener) getParentFragment());
 
-        changeEmptyScreen(true);
         changeProgressBarVisibility(true);
         return view;
     }
@@ -82,10 +78,6 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment {
         super.onViewCreated(view, savedInstanceState);
         initializeAnimations();
         setListeners();
-    }
-
-    public void changeEmptyScreen(boolean isEmpty){
-        this.noDataYet.setVisibility(isEmpty ? VISIBLE : GONE);
     }
 
     private void initializeAnimations() {
@@ -137,11 +129,10 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment {
     }
 
     /**
-     * Clears sync message displayed with progress bar before contributions list became visible
+     * Shows welcome message if user has no contributions yet i.e. new user.
      */
-    protected void clearSyncMessage() {
-        waitingMessage.setVisibility(GONE);
-        noDataYet.setVisibility(GONE);
+    protected void maybeShowWelcomeTip(boolean noContributions) {
+        noContributionsYet.setVisibility(noContributions ? VISIBLE : GONE);
     }
 
     public ListAdapter getAdapter() {
