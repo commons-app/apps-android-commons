@@ -85,7 +85,7 @@ public abstract class LogsSender implements ReportSender {
         String body = emailBody;
 
         Intent emailIntent = new Intent(Intent.ACTION_SEND);
-        emailIntent.setType(HTTP.PLAIN_TEXT_TYPE);
+        emailIntent.setType("message/rfc822");
         emailIntent.putExtra(Intent.EXTRA_EMAIL, new String[]{mailTo});
         emailIntent.putExtra(Intent.EXTRA_SUBJECT, subject);
         emailIntent.putExtra(Intent.EXTRA_TEXT, body);
