@@ -24,6 +24,7 @@
         android:layout_marginTop="@dimen/standard_gap"
         android:layout_marginEnd="@dimen/standard_gap"
         android:layout_marginRight="@dimen/standard_gap"
+        android:text="@string/recieving_content"
         android:gravity="center" />
 
 </LinearLayout>
