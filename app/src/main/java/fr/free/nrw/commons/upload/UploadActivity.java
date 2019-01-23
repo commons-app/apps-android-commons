@@ -320,6 +320,7 @@ public class UploadActivity extends AuthenticatedActivity implements UploadView,
 
     @Override
     public void setBottomCardVisibility(@UploadPage int page, int uploadCount) {
+        setContentView(R.layout.activity_upload_please_wait);
         if (page == TITLE_CARD) {
             viewFlipper.setDisplayedChild(0);
         } else if (page == CATEGORIES) {
@@ -328,8 +329,9 @@ public class UploadActivity extends AuthenticatedActivity implements UploadView,
             viewFlipper.setDisplayedChild(2);
             dismissKeyboard();
         } else if (page == PLEASE_WAIT) {
-            viewFlipper.setDisplayedChild(3);
-            pleaseWaitTextView.setText(getResources().getQuantityText(R.plurals.receiving_shared_content, uploadCount));
+            /*viewFlipper.setDisplayedChild(3);
+            pleaseWaitTextView.setText(getResources().getQuantityText(R.plurals.receiving_shared_content, uploadCount));*/
+            setContentView(R.layout.activity_upload_please_wait);
         }
     }
 
