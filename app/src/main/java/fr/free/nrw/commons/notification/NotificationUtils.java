@@ -154,7 +154,7 @@ public class NotificationUtils {
                 notificationText = getWelcomeMessage(context, document);
                 break;
         }
-        return new Notification(type, notificationText, getTimestamp(document), description, link, iconUrl, getTimestampWithYear(document));
+        return new Notification(type, notificationText, getTimestamp(document), description, link, iconUrl, getTimestampWithYear(document),getNotificationBody());
     }
 
     private static String getNotificationText(Node document) {

@@ -12,8 +12,9 @@ public class Notification {
     public String link;
     public String iconUrl;
     public String dateWithYear;
+    public String notificationId;
 
-    public Notification(NotificationType notificationType, String notificationText, String date, String description, String link, String iconUrl, String dateWithYear) {
+    public Notification(NotificationType notificationType, String notificationText, String date, String description, String link, String iconUrl, String dateWithYear, String notificationId) {
         this.notificationType = notificationType;
         this.notificationText = notificationText;
         this.date = date;
@@ -21,5 +22,6 @@ public class Notification {
         this.link = link;
         this.iconUrl = iconUrl;
         this.dateWithYear = dateWithYear;
+        this.notificationId=notificationId;
     }
 }

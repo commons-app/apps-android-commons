@@ -618,10 +618,10 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
     @NonNull
     @Override
     public CustomApiResult markNotificationAsRead(Notification notification) throws IOException {
-        return api.action("post")
-                .param("action","echomarkread")
+        return api.action("echomarkread")
                 .param("centralauthtoken", getCentralAuthToken())
                 .param("token", getEditToken())
+                .param("list",notification.notificationId)
                 .get();
     }
 
