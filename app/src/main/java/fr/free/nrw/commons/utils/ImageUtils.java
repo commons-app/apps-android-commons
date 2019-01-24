@@ -128,44 +128,42 @@ public class ImageUtils {
         int bitmapHeight = bitmap.getHeight();
 
         int allPixelsCount = bitmapWidth * bitmapHeight;
-        int[] bitmapPixels = new int[allPixelsCount];
         Timber.d("total %s", Integer.toString(allPixelsCount));
-
-        bitmap.getPixels(bitmapPixels,0,bitmapWidth,0,0,bitmapWidth,bitmapHeight);
         int numberOfBrightPixels = 0;
         int numberOfMediumBrightnessPixels = 0;
-        double brightPixelThreshold = 0.025*allPixelsCount;
-        double mediumBrightPixelThreshold = 0.3*allPixelsCount;
+        double brightPixelThreshold = 0.025 * allPixelsCount;
+        double mediumBrightPixelThreshold = 0.3 * allPixelsCount;
 
-        for (int pixel : bitmapPixels) {
-            int r = Color.red(pixel);
-            int g = Color.green(pixel);
-            int b = Color.blue(pixel);
+        for (int x = 0; x < bitmapWidth; x++) {
+            for (int y = 0; y < bitmapHeight; y++) {
+                int pixel = bitmap.getPixel(x, y);
+                int r = Color.red(pixel);
+                int g = Color.green(pixel);
+                int b = Color.blue(pixel);
 
-            int secondMax = r>g ? r:g;
-            double max = (secondMax>b ? secondMax:b)/255.0;
+                int secondMax = r > g ? r : g;
+                double max = (secondMax > b ? secondMax : b) / 255.0;
 
-            int secondMin = r<g ? r:g;
-            double min = (secondMin<b ? secondMin:b)/255.0;
+                int secondMin = r < g ? r : g;
+                double min = (secondMin < b ? secondMin : b) / 255.0;
 
-            double luminance = ((max+min)/2.0)*100;
+                double luminance = ((max + min) / 2.0) * 100;
 
-            int highBrightnessLuminance = 40;
-            int mediumBrightnessLuminance = 26;
+                int highBrightnessLuminance = 40;
+                int mediumBrightnessLuminance = 26;
 
-            if (luminance<highBrightnessLuminance){
-                if (luminance>mediumBrightnessLuminance){
-                    numberOfMediumBrightnessPixels++;
+                if (luminance < highBrightnessLuminance) {
+                    if (luminance > mediumBrightnessLuminance) {
+                        numberOfMediumBrightnessPixels++;
+                    }
+                } else {
+                    numberOfBrightPixels++;
+                }
+
+                if (numberOfBrightPixels >= brightPixelThreshold || numberOfMediumBrightnessPixels >= mediumBrightPixelThreshold) {
+                    return false;
                 }
             }
-            else {
-                numberOfBrightPixels++;
-            }
-
-            if (numberOfBrightPixels>=brightPixelThreshold || numberOfMediumBrightnessPixels>=mediumBrightPixelThreshold){
-                return false;
-            }
-
         }
         return true;
     }

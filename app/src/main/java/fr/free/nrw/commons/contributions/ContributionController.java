@@ -1,11 +1,11 @@
 package fr.free.nrw.commons.contributions;
 
 import android.Manifest;
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
-import android.support.v4.app.Fragment;
 
 import com.esafirm.imagepicker.features.ImagePicker;
 
@@ -16,6 +16,7 @@ import javax.inject.Named;
 import javax.inject.Singleton;
 
 import fr.free.nrw.commons.R;
+import fr.free.nrw.commons.media.FrescoImageLoader;
 import fr.free.nrw.commons.kvstore.BasicKvStore;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.nearby.Place;
@@ -58,43 +59,44 @@ public class ContributionController {
         this.directKvStore = directKvStore;
     }
 
-    public void initiateCameraPick(Fragment fragment,
+    public void initiateCameraPick(Activity activity,
                                    int requestCode) {
         boolean useExtStorage = defaultKvStore.getBoolean("useExternalStorage", true);
         if (!useExtStorage) {
-            initiateCameraUpload(fragment, requestCode);
+            initiateCameraUpload(activity, requestCode);
             return;
         }
 
-        PermissionUtils.checkPermissionsAndPerformAction(fragment.getActivity(),
+        PermissionUtils.checkPermissionsAndPerformAction(activity,
                 Manifest.permission.WRITE_EXTERNAL_STORAGE,
-                () -> initiateCameraUpload(fragment, requestCode),
+                () -> initiateCameraUpload(activity, requestCode),
                 R.string.storage_permission_title,
                 R.string.write_storage_permission_rationale);
     }
 
-    public void initiateGalleryPick(Fragment fragment,
+    public void initiateGalleryPick(Activity activity,
                                     int imageLimit,
                                     int requestCode) {
         if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.JELLY_BEAN) {
-            initiateGalleryUpload(fragment, imageLimit, requestCode);
+            initiateGalleryUpload(activity, imageLimit, requestCode);
         } else {
-            PermissionUtils.checkPermissionsAndPerformAction(fragment.getActivity(),
+            PermissionUtils.checkPermissionsAndPerformAction(activity,
                     Manifest.permission.READ_EXTERNAL_STORAGE,
-                    () -> initiateGalleryUpload(fragment, imageLimit, requestCode),
+                    () -> initiateGalleryUpload(activity, imageLimit, requestCode),
                     R.string.storage_permission_title,
                     R.string.read_storage_permission_rationale);
         }
     }
 
-    private void initiateGalleryUpload(Fragment fragment,
+    private void initiateGalleryUpload(Activity activity,
                                        int imageLimit,
                                        int requestCode) {
         ImagePicker imagePicker = ImagePicker.ImagePickerWithFragment
-                .create(fragment)
+                .create(activity)
                 .showCamera(false)
                 .folderMode(true)
                 .includeVideo(false)
+                .imageLoader(new FrescoImageLoader())
                 .enableLog(true);
 
         if (imageLimit > 1) {
@@ -104,9 +106,9 @@ public class ContributionController {
         }
     }
 
-    private void initiateCameraUpload(Fragment fragment, int requestCode) {
+    private void initiateCameraUpload(Activity activity, int requestCode) {
         ImagePicker.cameraOnly()
-                .start(fragment, requestCode);
+                .start(activity, requestCode);
     }
 
     public Intent handleImagesPicked(ArrayList<Uri> uriList, int requestCode) {

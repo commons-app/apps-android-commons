@@ -18,6 +18,11 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.esafirm.imagepicker.features.ImagePicker;
+import com.esafirm.imagepicker.model.Image;
+
+import java.util.List;
+
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -33,6 +38,8 @@ import fr.free.nrw.commons.nearby.NearbyFragment;
 import fr.free.nrw.commons.nearby.NearbyNotificationCardView;
 import fr.free.nrw.commons.notification.NotificationActivity;
 import fr.free.nrw.commons.upload.UploadService;
+import fr.free.nrw.commons.utils.ImageUtils;
+import fr.free.nrw.commons.utils.IntentUtils;
 import timber.log.Timber;
 
 import static android.content.ContentResolver.requestSync;
@@ -42,6 +49,7 @@ public class MainActivity extends AuthenticatedActivity implements FragmentManag
 
     @Inject
     SessionManager sessionManager;
+    @Inject ContributionController controller;
     @BindView(R.id.tab_layout)
     TabLayout tabLayout;
     @BindView(R.id.pager)
@@ -440,12 +448,13 @@ public class MainActivity extends AuthenticatedActivity implements FragmentManag
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        ContributionsListFragment contributionsListFragment =
-                (ContributionsListFragment) contributionsActivityPagerAdapter
-                        .getItem(0).getChildFragmentManager()
-                        .findFragmentByTag(ContributionsFragment.CONTRIBUTION_LIST_FRAGMENT_TAG);
-        contributionsListFragment.onActivityResult(requestCode, resultCode, data);
+        if (IntentUtils.shouldContributionsListHandle(requestCode, resultCode, data)) {
+            List<Image> images = ImagePicker.getImages(data);
+            Intent shareIntent = controller.handleImagesPicked(ImageUtils.getUriListFromImages(images), requestCode);
+            startActivity(shareIntent);
+        } else {
+            super.onActivityResult(requestCode, resultCode, data);
+        }
     }
 
     @Override
