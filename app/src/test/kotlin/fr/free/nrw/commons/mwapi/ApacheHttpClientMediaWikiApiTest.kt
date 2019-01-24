@@ -201,6 +201,31 @@ class ApacheHttpClientMediaWikiApiTest {
     }
 
     @Test
+    fun getWikidataEditToken() {
+        server.enqueue(MockResponse().setBody("<?xml version=\"1.0\"?><api><centralauthtoken centralauthtoken=\"abc\" /></api>"))
+        wikidataServer.enqueue(MockResponse().setBody("<?xml version=\"1.0\"?><api><query><tokens csrftoken=\"baz\" /></query></api>"))
+
+        val result = testObject.wikidataCsrfToken
+
+        assertBasicRequestParameters(server, "GET").let { centralAuthTokenRequest ->
+            parseQueryParams(centralAuthTokenRequest).let { params ->
+                assertEquals("xml", params["format"])
+                assertEquals("centralauthtoken", params["action"])
+            }
+        }
+
+        assertBasicRequestParameters(wikidataServer, "POST").let { editTokenRequest ->
+            parseBody(editTokenRequest.body.readUtf8()).let { body ->
+                assertEquals("query", body["action"])
+                assertEquals("abc", body["centralauthtoken"])
+                assertEquals("tokens", body["meta"])
+            }
+        }
+
+        assertEquals("baz", result)
+    }
+
+    @Test
     fun fileExistsWithName_FileNotFound() {
         server.enqueue(MockResponse().setBody("<?xml version=\"1.0\"?><api batchcomplete=\"\"><query> <normalized><n from=\"File:foo\" to=\"File:Foo\" /></normalized><pages><page _idx=\"-1\" ns=\"6\" title=\"File:Foo\" missing=\"\" imagerepository=\"\" /></pages></query></api>"))
 
