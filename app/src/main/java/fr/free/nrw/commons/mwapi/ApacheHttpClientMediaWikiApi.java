@@ -913,7 +913,7 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
 
         CustomApiResult result = api.upload(filename, file, dataLength, pageContents, editSummary, getCentralAuthToken(), getEditToken(), progressListener::onProgress);
 
-        Timber.wtf("Result: " + result.toString());
+        Timber.d("Result: %s", result.toString());
 
         String resultStatus = result.getString("/api/upload/@result");
 
@@ -1012,9 +1012,9 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
                 if (json == null) {
                     return null;
                 }
-                Timber.d(json);
+                Timber.d("Response for achievements is %s", json);
                 try {
-                    return gson.fromJson(String.valueOf(response.body()), FeedbackResponse.class);
+                    return gson.fromJson(json, FeedbackResponse.class);
                 }
                 catch (Exception e){
                     return new FeedbackResponse("",0,0,0,new FeaturedImages(0,0),0,"",0);

@@ -448,7 +448,7 @@ public class MainActivity extends AuthenticatedActivity implements FragmentManag
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (IntentUtils.shouldContributionsListHandle(requestCode, resultCode, data)) {
+        if (IntentUtils.shouldContributionsHandle(requestCode, resultCode, data)) {
             List<Image> images = ImagePicker.getImages(data);
             Intent shareIntent = controller.handleImagesPicked(ImageUtils.getUriListFromImages(images), requestCode);
             startActivity(shareIntent);

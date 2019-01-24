@@ -134,8 +134,8 @@ public class NearbyMapFragment extends DaggerFragment {
     @Inject @Named("direct_nearby_upload_prefs") JsonKvStore directKvStore;
     @Inject @Named("default_preferences") BasicKvStore defaultKvStore;
     @Inject BookmarkLocationsDao bookmarkLocationDao;
-    @Inject
-    ContributionController controller;
+    @Inject ContributionController controller;
+    @Inject Gson gson;
 
     private static final double ZOOM_LEVEL = 14f;
 
@@ -148,9 +148,6 @@ public class NearbyMapFragment extends DaggerFragment {
         Timber.d("Nearby map fragment created");
 
         Bundle bundle = this.getArguments();
-        Gson gson = new GsonBuilder()
-                .registerTypeAdapter(Uri.class, new UriDeserializer())
-                .create();
         if (bundle != null) {
             String gsonPlaceList = bundle.getString("PlaceList");
             String gsonLatLng = bundle.getString("CurLatLng");
@@ -220,9 +217,6 @@ public class NearbyMapFragment extends DaggerFragment {
     public void updateMapSlightly() {
         Timber.d("updateMapSlightly called, bundle is:"+ bundleForUpdates);
         if (mapboxMap != null) {
-            Gson gson = new GsonBuilder()
-                    .registerTypeAdapter(Uri.class, new UriDeserializer())
-                    .create();
             if (bundleForUpdates != null) {
                 String gsonLatLng = bundleForUpdates.getString("CurLatLng");
                 Type curLatLngType = new TypeToken<fr.free.nrw.commons.location.LatLng>() {}.getType();
@@ -242,10 +236,6 @@ public class NearbyMapFragment extends DaggerFragment {
         Timber.d("updateMapSignificantlyForCurrentLocation called, bundle is:"+ bundleForUpdates);
         if (mapboxMap != null) {
             if (bundleForUpdates != null) {
-                Gson gson = new GsonBuilder()
-                        .registerTypeAdapter(Uri.class, new UriDeserializer())
-                        .create();
-
                 String gsonPlaceList = bundleForUpdates.getString("PlaceList");
                 String gsonLatLng = bundleForUpdates.getString("CurLatLng");
                 String gsonBoundaryCoordinates = bundleForUpdates.getString("BoundaryCoord");

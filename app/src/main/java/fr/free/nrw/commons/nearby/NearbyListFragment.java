@@ -39,9 +39,6 @@ public class NearbyListFragment extends DaggerFragment {
     }.getType();
     private static final Type CUR_LAT_LNG_TYPE = new TypeToken<LatLng>() {
     }.getType();
-    private static final Gson gson = new GsonBuilder()
-            .registerTypeAdapter(Uri.class, new UriDeserializer())
-            .create();
 
     private NearbyAdapterFactory adapterFactory;
     private RecyclerView recyclerView;
@@ -49,6 +46,7 @@ public class NearbyListFragment extends DaggerFragment {
     @Inject ContributionController controller;
     @Inject @Named("direct_nearby_upload_prefs") JsonKvStore directKvStore;
     @Inject @Named("default_preferences") BasicKvStore defaultKvStore;
+    @Inject Gson gson;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {

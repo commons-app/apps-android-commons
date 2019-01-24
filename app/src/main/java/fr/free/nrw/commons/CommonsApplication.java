@@ -134,7 +134,7 @@ public class CommonsApplication extends Application {
     private void initTimber() {
         boolean isBeta = ConfigUtils.isBetaFlavour();
         String logFileName = isBeta ? "CommonsBetaAppLogs" : "CommonsAppLogs";
-        String logDirectory = LogUtils.getLogDirectory(isBeta);
+        String logDirectory = LogUtils.getLogDirectory();
         FileLoggingTree tree = new FileLoggingTree(
                 Log.DEBUG,
                 logFileName,
