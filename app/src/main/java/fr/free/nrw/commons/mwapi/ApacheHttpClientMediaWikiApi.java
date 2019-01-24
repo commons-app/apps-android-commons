@@ -52,7 +52,6 @@ import fr.free.nrw.commons.category.QueryContinue;
 import fr.free.nrw.commons.kvstore.BasicKvStore;
 import fr.free.nrw.commons.notification.Notification;
 import fr.free.nrw.commons.notification.NotificationUtils;
-import fr.free.nrw.commons.utils.ContributionUtils;
 import fr.free.nrw.commons.utils.DateUtils;
 import fr.free.nrw.commons.utils.ViewUtil;
 import in.yuvi.http.fluent.Http;
@@ -914,7 +913,7 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
 
         CustomApiResult result = api.upload(filename, file, dataLength, pageContents, editSummary, getCentralAuthToken(), getEditToken(), progressListener::onProgress);
 
-        Timber.wtf("Result: " + result.toString());
+        Timber.d("Result: %s", result.toString());
 
         String resultStatus = result.getString("/api/upload/@result");
 
@@ -927,8 +926,6 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
             }
             return new UploadResult(resultStatus, errorCode);
         } else {
-            // If success we have to remove file from temp directory
-            ContributionUtils.removeTemporaryFile(fileUri);
             Date dateUploaded = parseMWDate(result.getString("/api/upload/imageinfo/@timestamp"));
             String canonicalFilename = "File:" + result.getString("/api/upload/@filename").replace("_", " "); // Title vs Filename
             String imageUrl = result.getString("/api/upload/imageinfo/@url");
@@ -1015,9 +1012,9 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
                 if (json == null) {
                     return null;
                 }
-                Timber.d(json);
+                Timber.d("Response for achievements is %s", json);
                 try {
-                    return gson.fromJson(String.valueOf(response.body()), FeedbackResponse.class);
+                    return gson.fromJson(json, FeedbackResponse.class);
                 }
                 catch (Exception e){
                     return new FeedbackResponse("",0,0,0,new FeaturedImages(0,0),0,"",0);

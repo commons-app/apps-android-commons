@@ -26,8 +26,6 @@ import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import com.esafirm.imagepicker.features.ImagePicker;
-import com.esafirm.imagepicker.model.Image;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
@@ -136,8 +134,8 @@ public class NearbyMapFragment extends DaggerFragment {
     @Inject @Named("direct_nearby_upload_prefs") JsonKvStore directKvStore;
     @Inject @Named("default_preferences") BasicKvStore defaultKvStore;
     @Inject BookmarkLocationsDao bookmarkLocationDao;
-    @Inject
-    ContributionController controller;
+    @Inject ContributionController controller;
+    @Inject Gson gson;
 
     private static final double ZOOM_LEVEL = 14f;
 
@@ -150,9 +148,6 @@ public class NearbyMapFragment extends DaggerFragment {
         Timber.d("Nearby map fragment created");
 
         Bundle bundle = this.getArguments();
-        Gson gson = new GsonBuilder()
-                .registerTypeAdapter(Uri.class, new UriDeserializer())
-                .create();
         if (bundle != null) {
             String gsonPlaceList = bundle.getString("PlaceList");
             String gsonLatLng = bundle.getString("CurLatLng");
@@ -222,9 +217,6 @@ public class NearbyMapFragment extends DaggerFragment {
     public void updateMapSlightly() {
         Timber.d("updateMapSlightly called, bundle is:"+ bundleForUpdates);
         if (mapboxMap != null) {
-            Gson gson = new GsonBuilder()
-                    .registerTypeAdapter(Uri.class, new UriDeserializer())
-                    .create();
             if (bundleForUpdates != null) {
                 String gsonLatLng = bundleForUpdates.getString("CurLatLng");
                 Type curLatLngType = new TypeToken<fr.free.nrw.commons.location.LatLng>() {}.getType();
@@ -244,10 +236,6 @@ public class NearbyMapFragment extends DaggerFragment {
         Timber.d("updateMapSignificantlyForCurrentLocation called, bundle is:"+ bundleForUpdates);
         if (mapboxMap != null) {
             if (bundleForUpdates != null) {
-                Gson gson = new GsonBuilder()
-                        .registerTypeAdapter(Uri.class, new UriDeserializer())
-                        .create();
-
                 String gsonPlaceList = bundleForUpdates.getString("PlaceList");
                 String gsonLatLng = bundleForUpdates.getString("CurLatLng");
                 String gsonBoundaryCoordinates = bundleForUpdates.getString("BoundaryCoord");
@@ -868,7 +856,7 @@ public class NearbyMapFragment extends DaggerFragment {
             if (fabCamera.isShown()) {
                 Timber.d("Camera button tapped. Place: %s", place.toString());
                 storeSharedPrefs();
-                controller.initiateCameraPick(this, NEARBY_CAMERA_UPLOAD_REQUEST_CODE);
+                controller.initiateCameraPick(getActivity(), NEARBY_CAMERA_UPLOAD_REQUEST_CODE);
             }
         });
 
@@ -876,7 +864,7 @@ public class NearbyMapFragment extends DaggerFragment {
             if (fabGallery.isShown()) {
                 Timber.d("Gallery button tapped. Place: %s", place.toString());
                 storeSharedPrefs();
-                controller.initiateGalleryPick(this, NEARBY_UPLOAD_IMAGE_LIMIT, NEARBY_GALLERY_UPLOAD_REQUEST_CODE);
+                controller.initiateGalleryPick(getActivity(), NEARBY_UPLOAD_IMAGE_LIMIT, NEARBY_GALLERY_UPLOAD_REQUEST_CODE);
             }
         });
     }
@@ -884,17 +872,6 @@ public class NearbyMapFragment extends DaggerFragment {
     void storeSharedPrefs() {
         Timber.d("Store place object %s", place.toString());
         directKvStore.putJson(PLACE_OBJECT, place);
-    }
-
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (IntentUtils.shouldNearbyHandle(requestCode, resultCode, data)) {
-            List<Image> images = ImagePicker.getImages(data);
-            Intent shareIntent = controller.handleImagesPicked(ImageUtils.getUriListFromImages(images), requestCode);
-            startActivity(shareIntent);
-        } else {
-            super.onActivityResult(requestCode, resultCode, data);
-        }
     }
 
     private void openWebView(Uri link) {

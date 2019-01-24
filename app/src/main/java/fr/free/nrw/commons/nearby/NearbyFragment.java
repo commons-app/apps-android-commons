@@ -74,6 +74,7 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
     @Inject
     @Named("application_preferences")
     BasicKvStore applicationKvStore;
+    @Inject Gson gson;
 
     public NearbyMapFragment nearbyMapFragment;
     private NearbyListFragment nearbyListFragment;
@@ -293,9 +294,6 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
             progressBar.setVisibility(View.VISIBLE);
 
             //TODO: This hack inserts curLatLng before populatePlaces is called (see #1440). Ideally a proper fix should be found
-            Gson gson = new GsonBuilder()
-                    .registerTypeAdapter(Uri.class, new UriSerializer())
-                    .create();
             String gsonCurLatLng = gson.toJson(curLatLng);
             bundle.clear();
             bundle.putString("CurLatLng", gsonCurLatLng);
@@ -313,15 +311,12 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
 
         } else if (locationChangeType
                 .equals(LOCATION_SLIGHTLY_CHANGED)) {
-            Gson gson = new GsonBuilder()
-                    .registerTypeAdapter(Uri.class, new UriSerializer())
-                    .create();
             String gsonCurLatLng = gson.toJson(curLatLng);
             bundle.putString("CurLatLng", gsonCurLatLng);
             updateMapFragment(false,true, null, null);
         }
 
-        if (nearbyMapFragment != null) {
+        if (nearbyMapFragment != null && nearbyMapFragment.searchThisAreaButton != null) {
             nearbyMapFragment.searchThisAreaButton.setVisibility(View.GONE);
         }
     }
@@ -384,9 +379,6 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
         Timber.d("Populating nearby places");
         List<Place> placeList = nearbyPlacesInfo.placeList;
         LatLng[] boundaryCoordinates = nearbyPlacesInfo.boundaryCoordinates;
-        Gson gson = new GsonBuilder()
-                .registerTypeAdapter(Uri.class, new UriSerializer())
-                .create();
         String gsonPlaceList = gson.toJson(placeList);
         String gsonCurLatLng = gson.toJson(curLatLng);
         String gsonBoundaryCoordinates = gson.toJson(boundaryCoordinates);

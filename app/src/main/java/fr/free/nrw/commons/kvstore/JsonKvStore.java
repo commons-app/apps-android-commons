@@ -12,18 +12,21 @@ import java.util.Map;
 import javax.annotation.Nullable;
 
 public class JsonKvStore extends BasicKvStore {
-    private final Gson gson = new Gson();
+    private final Gson gson;
 
-    public JsonKvStore(Context context, String storeName) {
+    public JsonKvStore(Context context, String storeName, Gson gson) {
         super(context, storeName);
+        this.gson = gson;
     }
 
-    public JsonKvStore(Context context, String storeName, int version) {
+    public JsonKvStore(Context context, String storeName, int version, Gson gson) {
         super(context, storeName, version);
+        this.gson = gson;
     }
 
-    public JsonKvStore(Context context, String storeName, int version, boolean clearAllOnUpgrade) {
+    public JsonKvStore(Context context, String storeName, int version, boolean clearAllOnUpgrade, Gson gson) {
         super(context, storeName, version, clearAllOnUpgrade);
+        this.gson = gson;
     }
 
     public <T> void putAllJsons(Map<String, T> jsonMap) {
