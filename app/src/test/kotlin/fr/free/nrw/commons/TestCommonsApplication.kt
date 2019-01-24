@@ -59,7 +59,7 @@ class MockCommonsApplicationModule(appContext: Context) : CommonsApplicationModu
 
     override fun provideModificationContentProviderClient(context: Context?): ContentProviderClient = modificationClient
 
-    override fun providesDirectNearbyUploadKvStore(context: Context?): JsonKvStore = uploadPrefs
+    override fun providesDirectNearbyUploadKvStore(context: Context?, gson: Gson): JsonKvStore = uploadPrefs
 
     override fun providesAccountUtil(context: Context): AccountUtil = accountUtil
 

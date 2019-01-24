@@ -90,8 +90,7 @@ public class UploadPresenter {
         updateCards();
         updateLicenses();
         updateContent();
-        if (uploadModel.isShowingItem())
-            uploadModel.subscribeBadPicture(this::handleBadPicture);
+        uploadModel.subscribeBadPicture(this::handleBadPicture);
     }
 
     /**

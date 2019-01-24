@@ -896,7 +896,7 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
 
         CustomApiResult result = api.upload(filename, file, dataLength, pageContents, editSummary, getCentralAuthToken(), getEditToken(), progressListener::onProgress);
 
-        Timber.wtf("Result: " + result.toString());
+        Timber.d("Result: %s", result.toString());
 
         String resultStatus = result.getString("/api/upload/@result");
 

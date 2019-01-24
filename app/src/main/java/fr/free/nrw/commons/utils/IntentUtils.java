@@ -13,20 +13,12 @@ import static fr.free.nrw.commons.contributions.ContributionController.NEARBY_GA
 public class IntentUtils {
 
     /**
-     * Check if the intent should be handled by nearby list or map fragment
-     */
-    public static boolean shouldNearbyHandle(int requestCode, int resultCode, Intent data) {
-        return resultCode == Activity.RESULT_OK
-                && (requestCode == NEARBY_CAMERA_UPLOAD_REQUEST_CODE || requestCode == NEARBY_GALLERY_UPLOAD_REQUEST_CODE)
-                && data != null;
-    }
-
-    /**
      * Check if the intent should be handled by contributions list fragment
      */
-    public static boolean shouldContributionsListHandle(int requestCode, int resultCode, Intent data) {
+    public static boolean shouldContributionsHandle(int requestCode, int resultCode, Intent data) {
         return resultCode == Activity.RESULT_OK
-                && (requestCode == GALLERY_UPLOAD_REQUEST_CODE || requestCode == CAMERA_UPLOAD_REQUEST_CODE)
+                && (requestCode == GALLERY_UPLOAD_REQUEST_CODE || requestCode == CAMERA_UPLOAD_REQUEST_CODE
+                || requestCode == NEARBY_CAMERA_UPLOAD_REQUEST_CODE || requestCode == NEARBY_GALLERY_UPLOAD_REQUEST_CODE)
                 && data != null;
     }
 
