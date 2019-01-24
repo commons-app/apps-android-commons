@@ -39,6 +39,7 @@ import fr.free.nrw.commons.contributions.MainActivity;
 import fr.free.nrw.commons.kvstore.BasicKvStore;
 import fr.free.nrw.commons.notification.NotificationActivity;
 import fr.free.nrw.commons.settings.SettingsActivity;
+import fr.free.nrw.commons.utils.ConfigUtils;
 import timber.log.Timber;
 
 public abstract class NavigationBaseActivity extends BaseActivity
@@ -195,7 +196,7 @@ public abstract class NavigationBaseActivity extends BaseActivity
                         new String[]{CommonsApplication.FEEDBACK_EMAIL});
                 feedbackIntent.putExtra(Intent.EXTRA_SUBJECT,
                         String.format(CommonsApplication.FEEDBACK_EMAIL_SUBJECT,
-                                BuildConfig.VERSION_NAME));
+                                ConfigUtils.getVersionNameWithSha(getApplicationContext())));
                 try {
                     startActivity(feedbackIntent);
                 } catch (ActivityNotFoundException e) {
