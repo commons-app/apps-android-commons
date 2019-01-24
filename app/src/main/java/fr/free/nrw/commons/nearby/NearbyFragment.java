@@ -316,7 +316,7 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
             updateMapFragment(false,true, null, null);
         }
 
-        if (nearbyMapFragment != null) {
+        if (nearbyMapFragment != null && nearbyMapFragment.searchThisAreaButton != null) {
             nearbyMapFragment.searchThisAreaButton.setVisibility(View.GONE);
         }
     }
