@@ -18,9 +18,6 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.esafirm.imagepicker.features.ImagePicker;
-import com.esafirm.imagepicker.model.Image;
-
 import java.util.List;
 
 import javax.inject.Inject;
@@ -40,8 +37,6 @@ import fr.free.nrw.commons.notification.Notification;
 import fr.free.nrw.commons.notification.NotificationActivity;
 import fr.free.nrw.commons.notification.NotificationController;
 import fr.free.nrw.commons.upload.UploadService;
-import fr.free.nrw.commons.utils.ImageUtils;
-import fr.free.nrw.commons.utils.IntentUtils;
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
@@ -457,13 +452,8 @@ public class MainActivity extends AuthenticatedActivity implements FragmentManag
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (IntentUtils.shouldContributionsHandle(requestCode, resultCode, data)) {
-            List<Image> images = ImagePicker.getImages(data);
-            Intent shareIntent = controller.handleImagesPicked(ImageUtils.getUriListFromImages(images), requestCode);
-            startActivity(shareIntent);
-        } else {
-            super.onActivityResult(requestCode, resultCode, data);
-        }
+        super.onActivityResult(requestCode, resultCode, data);
+        controller.handleActivityResult(this, requestCode, resultCode, data);
     }
 
     @Override

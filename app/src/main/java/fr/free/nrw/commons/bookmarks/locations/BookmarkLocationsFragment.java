@@ -13,8 +13,6 @@ import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.esafirm.imagepicker.features.ImagePicker;
-import com.esafirm.imagepicker.model.Image;
 import com.pedrogomez.renderers.RVRendererAdapter;
 
 import java.util.ArrayList;
@@ -32,8 +30,6 @@ import fr.free.nrw.commons.kvstore.BasicKvStore;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.nearby.NearbyAdapterFactory;
 import fr.free.nrw.commons.nearby.Place;
-import fr.free.nrw.commons.utils.ImageUtils;
-import fr.free.nrw.commons.utils.IntentUtils;
 
 public class BookmarkLocationsFragment extends DaggerFragment {
 
@@ -99,12 +95,6 @@ public class BookmarkLocationsFragment extends DaggerFragment {
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (IntentUtils.shouldBookmarksHandle(requestCode, resultCode, data)) {
-            List<Image> images = ImagePicker.getImages(data);
-            Intent shareIntent = contributionController.handleImagesPicked(ImageUtils.getUriListFromImages(images), requestCode);
-            startActivity(shareIntent);
-        } else {
-            super.onActivityResult(requestCode, resultCode, data);
-        }
+        contributionController.handleActivityResult(getActivity(), requestCode, resultCode, data);
     }
 }
