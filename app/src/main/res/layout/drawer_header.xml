@@ -36,7 +36,7 @@
         android:textColor="@color/item_white_background"
         android:textSize="@dimen/subheading_text_size"
         android:layout_below="@+id/pictureOfTheDay"
-        android:layout_marginLeft="8dp"
-        android:layout_toRightOf="@+id/username" />
+        android:layout_marginRight="8dp"
+        android:layout_alignParentRight="true" />
 
 </RelativeLayout>
