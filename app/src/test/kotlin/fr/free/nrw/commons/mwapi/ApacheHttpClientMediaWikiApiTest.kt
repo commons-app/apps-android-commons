@@ -186,10 +186,26 @@ class ApacheHttpClientMediaWikiApiTest {
 
     @Test
     fun editToken() {
-        server.enqueue(MockResponse().setBody("<?xml version=\"1.0\"?><api><centralauthtoken centralauthtoken=\"abc\" /></api>"))
         server.enqueue(MockResponse().setBody("<?xml version=\"1.0\"?><api><query><tokens csrftoken=\"baz\" /></query></api>"))
 
         val result = testObject.editToken
+
+        assertBasicRequestParameters(server, "POST").let { editTokenRequest ->
+            parseBody(editTokenRequest.body.readUtf8()).let { body ->
+                assertEquals("query", body["action"])
+                assertEquals("tokens", body["meta"])
+            }
+        }
+
+        assertEquals("baz", result)
+    }
+
+    @Test
+    fun getWikidataEditToken() {
+        server.enqueue(MockResponse().setBody("<?xml version=\"1.0\"?><api><centralauthtoken centralauthtoken=\"abc\" /></api>"))
+        wikidataServer.enqueue(MockResponse().setBody("<?xml version=\"1.0\"?><api><query><tokens csrftoken=\"baz\" /></query></api>"))
+
+        val result = testObject.wikidataCsrfToken
 
         assertBasicRequestParameters(server, "GET").let { centralAuthTokenRequest ->
             parseQueryParams(centralAuthTokenRequest).let { params ->
@@ -198,7 +214,7 @@ class ApacheHttpClientMediaWikiApiTest {
             }
         }
 
-        assertBasicRequestParameters(server, "POST").let { editTokenRequest ->
+        assertBasicRequestParameters(wikidataServer, "POST").let { editTokenRequest ->
             parseBody(editTokenRequest.body.readUtf8()).let { body ->
                 assertEquals("query", body["action"])
                 assertEquals("abc", body["centralauthtoken"])
