@@ -27,8 +27,6 @@ import fr.free.nrw.commons.utils.ViewUtil;
 
 public class SettingsFragment extends PreferenceFragment {
 
-    private static final int REQUEST_CODE_WRITE_EXTERNAL_STORAGE = 100;
-
     @Inject
     @Named("default_preferences")
     BasicKvStore defaultKvStore;
