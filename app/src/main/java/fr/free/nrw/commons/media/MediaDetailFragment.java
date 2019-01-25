@@ -13,7 +13,6 @@ import android.support.annotation.Nullable;
 import android.text.Html;
 import android.text.TextUtils;
 import android.text.format.DateFormat;
-import android.text.format.DateUtils;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
