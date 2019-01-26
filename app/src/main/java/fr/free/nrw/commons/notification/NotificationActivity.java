@@ -104,10 +104,7 @@ public class NotificationActivity extends NavigationBaseActivity {
 
                     builder.setPositiveButton("REMOVE", (dialog, which) -> {
 
-                        Observable.fromCallable(() -> {
-                             controller.markAsRead(notificationList.get(position));
-                             return true;
-                        })
+                        Observable.fromCallable(() -> controller.markAsRead(notificationList.get(position)))
                                 .subscribeOn(Schedulers.io())
                                 .observeOn(AndroidSchedulers.mainThread())
                                 .subscribe(result -> {
