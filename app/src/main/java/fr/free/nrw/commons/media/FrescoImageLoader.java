@@ -20,6 +20,10 @@ import com.facebook.imagepipeline.request.ImageRequestBuilder;
 
 public class FrescoImageLoader implements ImageLoader {
 
+    public void FrescoImageLoader(){
+
+    }
+
     @Override
     public void loadImage(String path, ImageView imageView, ImageType imageType) {
         Drawable defaultDrawable = imageView.getDrawable();
