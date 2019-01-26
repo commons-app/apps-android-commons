@@ -460,10 +460,7 @@ Upload your first media by touching the camera or gallery icon above.</string>
   <string name="no_image">No images used</string>
   <string name="no_image_reverted">No images reverted</string>
   <string name="no_image_uploaded">No images uploaded</string>
-<<<<<<< HEAD
 
   <string name="no_notification">You have no unread Notification</string>
-=======
-    <string name="share_logs_using">Share logs using</string>
->>>>>>> ddc83f1f2257a32273473d79c089a86e5247825b
+  <string name="share_logs_using">Share logs using</string>
 </resources>
