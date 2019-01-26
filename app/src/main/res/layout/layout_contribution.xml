@@ -88,7 +88,7 @@
                 android:src="@drawable/ic_cancel_white"
                 android:text="@string/menu_cancel_upload"
                 android:background="@android:color/transparent"
-                android:layout_margin="8dp"
+                android:padding="8dp"
                 android:visibility="gone"
                 />
 
@@ -99,7 +99,7 @@
                 android:src="@drawable/ic_retry_white"
                 android:text="@string/menu_retry_upload"
                 android:background="@android:color/transparent"
-                android:layout_margin="8dp"
+                android:padding="8dp"
                 android:visibility="gone"
                 />
 
