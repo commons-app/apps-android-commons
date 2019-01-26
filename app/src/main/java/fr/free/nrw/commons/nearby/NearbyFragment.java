@@ -9,6 +9,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.constraint.ConstraintLayout;
 import android.support.design.widget.BottomSheetBehavior;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.FragmentTransaction;
@@ -16,6 +17,7 @@ import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 
@@ -64,6 +66,10 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
     LinearLayout bottomSheetDetails;
     @BindView(R.id.transparentView)
     View transparentView;
+    @BindView(R.id.container_sheet)
+    FrameLayout frameLayout;
+    @BindView(R.id.loading_nearby_list)
+    ConstraintLayout loading_nearby_layout;
 
     @Inject
     LocationServiceManager locationManager;
@@ -547,6 +553,8 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
      * Calls fragment for list view.
      */
     private void setListFragment() {
+        loading_nearby_layout.setVisibility(View.GONE);
+        frameLayout.setVisibility(View.VISIBLE);
         FragmentTransaction fragmentTransaction = getChildFragmentManager().beginTransaction();
         nearbyListFragment = new NearbyListFragment();
         nearbyListFragment.setArguments(bundle);
