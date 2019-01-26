@@ -162,7 +162,8 @@ public class NearbyMapFragment extends DaggerFragment {
             baseMarkerOptions = NearbyController
                     .loadAttractionsFromLocationToBaseMarkerOptions(curLatLng,
                             placeList,
-                            getActivity());
+                            getActivity(),
+                            bookmarkLocationDao.getAllBookmarksLocations());
             boundaryCoordinates = gson.fromJson(gsonBoundaryCoordinates, gsonBoundaryCoordinatesType);
         }
         if (curLatLng != null) {
@@ -247,7 +248,8 @@ public class NearbyMapFragment extends DaggerFragment {
                 baseMarkerOptions = NearbyController
                         .loadAttractionsFromLocationToBaseMarkerOptions(curLatLng,
                                 placeList,
-                                getActivity());
+                                getActivity(),
+                                bookmarkLocationDao.getAllBookmarksLocations());
                 boundaryCoordinates = gson.fromJson(gsonBoundaryCoordinates, gsonBoundaryCoordinatesType);
             }
             mapboxMap.clear();
@@ -269,7 +271,8 @@ public class NearbyMapFragment extends DaggerFragment {
         List<NearbyBaseMarker> customBaseMarkerOptions =  NearbyController
                 .loadAttractionsFromLocationToBaseMarkerOptions(curLatLng, // Curlatlang will be used to calculate distances
                         placeList,
-                        getActivity());
+                        getActivity(),
+                        bookmarkLocationDao.getAllBookmarksLocations());
         mapboxMap.clear();
         // We are trying to find nearby places around our custom searched area, thus custom parameter is nonnull
         addNearbyMarkersToMapBoxMap(customBaseMarkerOptions);
