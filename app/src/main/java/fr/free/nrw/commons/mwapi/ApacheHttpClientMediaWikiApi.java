@@ -82,7 +82,7 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
     private Gson gson;
     private final OkHttpClient okHttpClient;
     private final String WIKIMEDIA_CAMPAIGNS_BASE_URL =
-        "https://raw.githubusercontent.com/commons-app/campaigns/master/campaigns.json";
+            "https://raw.githubusercontent.com/commons-app/campaigns/master/campaigns.json";
 
     private final String ERROR_CODE_BAD_TOKEN = "badtoken";
 
@@ -587,6 +587,7 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
                     .param("meta", "notifications")
                     .param("notformat", "model")
                     .param("notwikis", "wikidatawiki|commonswiki|enwiki")
+                    .param("notfilter","!read")
                     .get()
                     .getNode("/api/query/notifications/list");
         } catch (IOException e) {
@@ -600,8 +601,24 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
             return new ArrayList<>();
         }
 
+        try {
+            getCentralAuthToken();
+            getEditToken();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         NodeList childNodes = notificationNode.getDocument().getChildNodes();
         return NotificationUtils.getNotificationsFromList(context, childNodes);
+    }
+
+    @NonNull
+    @Override
+    public CustomApiResult markNotificationAsRead(Notification notification) throws IOException {
+        return api.action("echomarkread")
+                .param("centralauthtoken", getCentralAuthToken())
+                .param("token", getEditToken())
+                .param("list",notification.notificationId)
+                .get();
     }
 
     /**

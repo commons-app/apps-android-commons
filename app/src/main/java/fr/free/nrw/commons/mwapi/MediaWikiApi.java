@@ -85,6 +85,9 @@ public interface MediaWikiApi {
     List<Notification> getNotifications() throws IOException;
 
     @NonNull
+    CustomApiResult markNotificationAsRead(Notification notification) throws IOException;
+
+    @NonNull
     Observable<String> searchTitles(String title, int searchCatsLimit);
 
     @Nullable

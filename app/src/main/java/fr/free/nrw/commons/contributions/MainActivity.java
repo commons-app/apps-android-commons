@@ -16,6 +16,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.esafirm.imagepicker.features.ImagePicker;
 import com.esafirm.imagepicker.model.Image;
@@ -72,7 +73,7 @@ public class MainActivity extends AuthenticatedActivity implements FragmentManag
     private boolean isThereUnreadNotifications = false;
 
     private boolean onOrientationChanged = false;
-
+    private TextView txtViewCount;
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_contributions);
@@ -81,6 +82,7 @@ public class MainActivity extends AuthenticatedActivity implements FragmentManag
         requestAuthToken();
         initDrawer();
         setTitle(getString(R.string.navigation_item_home)); // Should I create a new string variable with another name instead?
+
 
         if (savedInstanceState != null ) {
             onOrientationChanged = true; // Will be used in nearby fragment to determine significant update of map
@@ -126,13 +128,11 @@ public class MainActivity extends AuthenticatedActivity implements FragmentManag
         tabLayout.getTabAt(1).setCustomView(nearbyTabLinearLayout);
 
         nearbyInfo.setOnClickListener(view ->
-                new AlertDialog.Builder(MainActivity.this)
-                    .setTitle(R.string.title_activity_nearby)
-                    .setMessage(R.string.showcase_view_whole_nearby_activity)
-                    .setCancelable(true)
-                    .setPositiveButton(android.R.string.ok, (dialog, id) -> dialog.cancel())
-                    .create()
-                    .show()
+                new AlertDialog.Builder(MainActivity.this).setTitle(R.string.title_activity_nearby).setMessage(R.string.showcase_view_whole_nearby_activity)
+                        .setCancelable(true)
+                        .setPositiveButton(android.R.string.ok, (dialog, id) -> dialog.cancel())
+                        .create()
+                        .show()
         );
 
         if (uploadServiceIntent != null) {
@@ -282,7 +282,9 @@ public class MainActivity extends AuthenticatedActivity implements FragmentManag
             // TODO: used vectors are not compatible with API 19 and below, change them
             menu.findItem(R.id.notifications).setIcon(ContextCompat.getDrawable(this, R.drawable.ic_notification_white_clip_art));
         } else {
-            menu.findItem(R.id.notifications).setIcon(ContextCompat.getDrawable(this, R.drawable.ic_notification_white_clip_art_dot));
+            final View notification=menu.findItem(R.id.notifications).getActionView();
+            txtViewCount=notification.findViewById(R.id.notification_count_badge);
+            txtViewCount.setText(String.valueOf(1));
         }
 
         this.menu = menu;
@@ -471,7 +473,7 @@ public class MainActivity extends AuthenticatedActivity implements FragmentManag
                     if (!isContributionsFragmentVisible) {
                         viewPager.setCurrentItem(CONTRIBUTIONS_TAB_POSITION);
 
-                    // TODO: If contrib fragment is visible and location permission is not given, display permission request button
+                        // TODO: If contrib fragment is visible and location permission is not given, display permission request button
                     } else {
 
                     }
