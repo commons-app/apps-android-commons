@@ -230,7 +230,6 @@ public class AchievementsActivity extends NavigationBaseActivity {
 
     private void showSnackBarWithRetry() {
         progressBar.setVisibility(View.GONE);
-        item.setVisible(false);
         ViewUtil.showDismissibleSnackBar(findViewById(android.R.id.content),
                 R.string.achievements_fetch_failed, R.string.retry, view -> setAchievements());
     }
@@ -241,7 +240,6 @@ public class AchievementsActivity extends NavigationBaseActivity {
     private void onError() {
         ViewUtil.showLongToast(this, getResources().getString(R.string.error_occurred));
         progressBar.setVisibility(View.GONE);
-        item.setVisible(false);
     }
 
     /**
