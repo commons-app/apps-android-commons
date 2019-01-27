@@ -677,7 +677,10 @@ public class NearbyMapFragment extends DaggerFragment {
                     passInfoToSheet(place);
                     bottomSheetListBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
                     bottomSheetDetailsBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
-
+                    CameraPosition position = new CameraPosition.Builder()
+                            .target(marker.getPosition())
+                            .build();
+                    mapboxMap.animateCamera(CameraUpdateFactory.newCameraPosition(position));
                 }
                 return false;
             });
