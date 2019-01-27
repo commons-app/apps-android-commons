@@ -3,6 +3,7 @@ package fr.free.nrw.commons.contributions;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -17,6 +18,7 @@ class ContributionViewHolder {
     final ProgressBar progressView;
     final ImageButton retryButton;
     final ImageButton cancelButton;
+    final LinearLayout failedImageOptions;
     int position;
 
     ContributionViewHolder(View parent) {
@@ -27,6 +29,7 @@ class ContributionViewHolder {
         progressView = parent.findViewById(R.id.contributionProgress);
         retryButton = parent.findViewById(R.id.retryButton);
         cancelButton = parent.findViewById(R.id.cancelButton);
+        failedImageOptions=parent.findViewById(R.id.failed_image_options);
         position = 0;
     }
 }
