@@ -44,7 +44,7 @@
                         android:layout_gravity="center_horizontal"
                         android:text="@string/result"
                         style="?android:textAppearanceLarge"
-                        android:textSize="32dp"
+                        android:textSize="32sp"
                         android:layout_marginTop="@dimen/activity_margin_vertical" />
 
                     <com.dinuscxj.progressbar.CircleProgressBar
