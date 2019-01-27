@@ -25,21 +25,20 @@
         app:actualImageScaleType="fitCenter"
         />
 
-    <LinearLayout
+    <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:layout_gravity="center|bottom"
         android:background="#AA000000"
-        android:weightSum="4"
         >
 
         <LinearLayout
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="3"
             android:layout_gravity="center|bottom"
             android:orientation="vertical"
+            app:layout_constraintLeft_toLeftOf="parent"
             android:padding="@dimen/small_gap"
             >
             <ProgressBar
@@ -74,10 +73,10 @@
         </LinearLayout>
 
         <LinearLayout
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
             android:orientation="horizontal"
+            app:layout_constraintRight_toRightOf="parent"
             android:padding="@dimen/small_gap"
             >
 
@@ -105,6 +104,6 @@
 
         </LinearLayout>
 
-    </LinearLayout>
+    </android.support.constraint.ConstraintLayout>
 
 </FrameLayout>
