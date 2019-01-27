@@ -12,6 +12,7 @@ import android.widget.TextView;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Locale;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -98,8 +99,10 @@ public class CampaignView extends SwipableCardView {
             if (campaign != null) {
                 tvTitle.setText(campaign.getTitle());
                 tvDescription.setText(campaign.getDescription());
-                SimpleDateFormat inputDateFormat = new SimpleDateFormat("yyyy-MM-dd");
-                SimpleDateFormat outputDateFormat = new SimpleDateFormat("dd MMM");
+                SimpleDateFormat inputDateFormat = new SimpleDateFormat("yyyy-MM-dd",
+                        Locale.getDefault());
+                SimpleDateFormat outputDateFormat = new SimpleDateFormat("dd MMM",
+                        Locale.getDefault());
                 try {
                     Date startDate = inputDateFormat.parse(campaign.getStartDate());
                     Date endDate = inputDateFormat.parse(campaign.getEndDate());

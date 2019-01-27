@@ -43,6 +43,7 @@ public abstract class SwipableCardView extends CardView {
                     x1 = event.getX();
                     break;
                 case MotionEvent.ACTION_UP:
+                    v.performClick();
                     x2 = event.getX();
                     deltaX = x2 - x1;
                     if (deltaX < 0) {
