@@ -114,7 +114,7 @@ public class DeleteTask extends AsyncTask<Void, Integer, Boolean> {
             publishProgress(4);
 
             mwApi.appendEdit(editToken,userPageString+"\n",
-                    "User_Talk:"+ Objects.requireNonNull(sessionManager.getCurrentAccount()).name,summary);
+                    "User_Talk:"+ sessionManager.getCurrentAccount().name,summary);
             publishProgress(5);
         }
         catch (Exception e) {
