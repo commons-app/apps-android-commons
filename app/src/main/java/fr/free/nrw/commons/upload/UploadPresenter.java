@@ -278,6 +278,7 @@ public class UploadPresenter {
     void toggleTopCardState() {
         uploadModel.setTopCardState(!uploadModel.isTopCardState());
         view.setTopCardState(uploadModel.isTopCardState());
+        Timber.i("yyyyyyyyyya");
     }
 
     /**
@@ -286,6 +287,7 @@ public class UploadPresenter {
     void toggleBottomCardState() {
         uploadModel.setBottomCardState(!uploadModel.isBottomCardState());
         view.setBottomCardState(uploadModel.isBottomCardState());
+        Timber.i("yyyyyyyyyb");
     }
 
     /**
