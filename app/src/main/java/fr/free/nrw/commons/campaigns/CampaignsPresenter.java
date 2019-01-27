@@ -7,6 +7,7 @@ import java.text.SimpleDateFormat;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 import fr.free.nrw.commons.BasePresenter;
 import fr.free.nrw.commons.MvpView;
@@ -61,7 +62,7 @@ public class CampaignsPresenter implements BasePresenter {
 
                     @Override public void onSuccess(CampaignResponseDTO campaignResponseDTO) {
                         List<Campaign> campaigns = campaignResponseDTO.getCampaigns();
-                        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+                        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
                         if (campaigns == null || campaigns.isEmpty()) {
                             Log.e(TAG, "The campaigns list is empty");
                             view.showCampaigns(null);
