@@ -5,10 +5,15 @@ import android.app.FragmentManager;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.constraint.ConstraintLayout;
 import android.support.design.widget.Snackbar;
+import android.support.v4.view.ViewCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
@@ -92,6 +97,16 @@ public class NotificationActivity extends NavigationBaseActivity {
                 return false;
             }
 
+            @Override
+            public void onChildDraw(Canvas c, RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, float dX, float dY, int actionState, boolean isCurrentlyActive) {
+                /*final ColorDrawable background = new ColorDrawable(Color.RED);
+                background.setBounds(0, viewHolder.itemView.getTop(), (int) (viewHolder.itemView.getLeft() + dX), viewHolder.itemView.getBottom());
+                background.draw(c);*/
+                viewHolder.itemView.setTop(R.drawable.ic_delete_grey_700_24dp);
+                super.onChildDraw(c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive);
+
+            }
+
             @SuppressLint("ResourceAsColor")
             @Override
             public void onSwiped(final RecyclerView.ViewHolder viewHolder, int direction) {
@@ -111,9 +126,16 @@ public class NotificationActivity extends NavigationBaseActivity {
                                     if (result){
                                         notificationList.remove(position);
                                         Toast.makeText(NotificationActivity.this, "Notification marked as Read", Toast.LENGTH_SHORT).show();
+                                        if (notificationList.size()==0){
+                                            relativeLayout.setVisibility(View.GONE);
+                                            no_notification.setVisibility(View.VISIBLE);
+                                        }
+                                        adapter.notifyDataSetChanged();
                                         setAdapter(notificationList);
                                     }
                                     else {
+                                        adapter.notifyDataSetChanged();
+                                        setAdapter(notificationList);
                                         Toast.makeText(NotificationActivity.this, "There was some error!", Toast.LENGTH_SHORT).show();
                                     }
                                 }, throwable -> {
@@ -170,6 +192,10 @@ public class NotificationActivity extends NavigationBaseActivity {
                         Timber.d("Number of notifications is %d", notificationList.size());
                         this.notificationList = notificationList;
                         setAdapter(notificationList);
+                        if (notificationList.size()==0){
+                            relativeLayout.setVisibility(View.GONE);
+                            no_notification.setVisibility(View.VISIBLE);
+                        }
                         progressBar.setVisibility(View.GONE);
                     }, throwable -> {
                         Timber.e(throwable, "Error occurred while loading notifications");
