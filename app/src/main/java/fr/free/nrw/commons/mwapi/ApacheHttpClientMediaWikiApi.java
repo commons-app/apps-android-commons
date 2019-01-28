@@ -754,9 +754,9 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
     public List<Media> searchImages(String query, int offset) {
         List<CustomApiResult> imageNodes = null;
         List<CustomApiResult> authorNodes = null;
-        CustomApiResult customApiResult;
+        CustomApiResult apiResult=null;
         try {
-            customApiResult= api.action("query")
+            apiResult= api.action("query")
                     .param("format", "xml")
                     .param("generator", "search")
                     .param("gsrwhat", "text")
@@ -766,8 +766,8 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
                     .param("gsrsearch", query)
                     .param("prop", "imageinfo")
                     .get();
-            imageNodes= customApiResult.getNodes("/api/query/pages/page/@title");
-            authorNodes= customApiResult.getNodes("/api/query/pages/page/imageinfo/ii/@user");
+            imageNodes= apiResult.getNodes("/api/query/pages/page/@title");
+            authorNodes= apiResult.getNodes("/api/query/pages/page/imageinfo/ii/@user");
         } catch (IOException e) {
             Timber.e(e, "Failed to obtain searchImages");
         }
@@ -776,15 +776,23 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
             return new ArrayList<>();
         }
 
-        List<Media> images = new ArrayList<>();
-
-        for (int i=0; i< imageNodes.size();i++){
-            String imgName = imageNodes.get(i).getDocument().getTextContent();
-            Media media = new Media(imgName);
-            media.setCreator(authorNodes.get(i).getDocument().getTextContent());
-            images.add(media);
+        CustomApiResult categoryImagesNode = apiResult.getNode("/api/query/pages");
+        if (categoryImagesNode == null
+                || categoryImagesNode.getDocument() == null
+                || categoryImagesNode.getDocument().getChildNodes() == null
+                || categoryImagesNode.getDocument().getChildNodes().getLength() == 0) {
+            return new ArrayList<>();
         }
-        return images;
+
+        if (apiResult.getNode("/api/continue").getDocument()==null){
+            setQueryContinueValues(query, null);
+        }else {
+            QueryContinue queryContinue = getQueryContinue(apiResult.getNode("/api/continue").getDocument());
+            setQueryContinueValues(query, queryContinue);
+        }
+
+        NodeList childNodes = categoryImagesNode.getDocument().getChildNodes();
+        return CategoryImageUtils.getMediaList(childNodes);
     }
 
     /**
