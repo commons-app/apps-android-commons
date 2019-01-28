@@ -135,7 +135,7 @@ public class NotificationActivity extends NavigationBaseActivity {
                         .subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())
                         .subscribe(result -> {
-                            if (!result){
+                            if (result){
                                 notificationList.remove(position);
                                 setAdapter(notificationList);
                                 adapter.notifyDataSetChanged();
