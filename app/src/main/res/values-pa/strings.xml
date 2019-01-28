@@ -87,7 +87,7 @@
   <string name="no_uploads_yet">ਤੁਸੀਂ ਹਾਲੇ ਤੱਕ ਕੋਈ ਤਸਵੀਰਾਂ ਅੱਪਲੋਡ ਨਹੀਂ ਕੀਤੀਆਂ</string>
   <string name="menu_retry_upload">ਮੁੜ-ਕੋਸ਼ਿਸ਼ ਕਰੋ</string>
   <string name="menu_cancel_upload">ਰੱਦ ਕਰੋ</string>
-  <string name="share_license_summary">ਇਹ ਤਸਵੀਰ ਦਾ %1$s ਹੇਠ ਲਸੰਸ ਜਾਰੀ ਕੀਤੀ ਜਾਵੇਗਾ</string>
+  <string name="share_license_summary" fuzzy="true">ਇਹ ਤਸਵੀਰ ਦਾ %1$s ਹੇਠ ਲਸੰਸ ਜਾਰੀ ਕੀਤੀ ਜਾਵੇਗਾ</string>
   <string name="media_upload_policy">ਇਹ ਤਸਵੀਰ ਅੱਪਲੋਡ ਕਰਨ ਨਾਲ ਹੀ ਮੈਂ ਦਾਅਵਾ ਕਰਦਾ ਹਾਂ/ਕਰਦੀ ਹਾਂ ਕਿ ਇਹ ਮੇਰਾ ਆਪਣਾ ਕਾਰਜ ਹੈ, ਕਿ ਇਸ ਤਹਿਤ ਕੋਈ ਕਾਪੀਰਾਈਟ ਉਲੰਘਣਾ ਨਹੀਂ ਕੀਤੀ ਗਈ ਅਤੇ &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines\"&gt;ਵਿਕੀਮੀਡੀਆ ਕਾਮਨਜ਼ ਨੀਤੀਆਂ&lt;/a&gt; ਮੁਤਾਬਿਕ ਇਹ ਠੀਕ ਹੈ।</string>
   <string name="menu_download">ਡਾਊਨਲੋਡ</string>
   <string name="preference_license" fuzzy="true">ਲਸੰਸ</string>

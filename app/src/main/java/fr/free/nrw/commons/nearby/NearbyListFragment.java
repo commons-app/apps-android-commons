@@ -2,11 +2,8 @@ package fr.free.nrw.commons.nearby;
 
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -29,14 +26,11 @@ import dagger.android.support.AndroidSupportInjection;
 import dagger.android.support.DaggerFragment;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.contributions.ContributionController;
+import fr.free.nrw.commons.kvstore.BasicKvStore;
+import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.location.LatLng;
 import fr.free.nrw.commons.utils.UriDeserializer;
 import timber.log.Timber;
-
-import static android.app.Activity.RESULT_OK;
-import static android.content.pm.PackageManager.PERMISSION_GRANTED;
-import static fr.free.nrw.commons.wikidata.WikidataConstants.WIKIDATA_ENTITY_ID_PREF;
-import static fr.free.nrw.commons.wikidata.WikidataConstants.WIKIDATA_ITEM_LOCATION;
 
 public class NearbyListFragment extends DaggerFragment {
     private Bundle bundleForUpdates; // Carry information from activity about changed nearby places and current location
@@ -45,18 +39,14 @@ public class NearbyListFragment extends DaggerFragment {
     }.getType();
     private static final Type CUR_LAT_LNG_TYPE = new TypeToken<LatLng>() {
     }.getType();
-    private static final Gson gson = new GsonBuilder()
-            .registerTypeAdapter(Uri.class, new UriDeserializer())
-            .create();
 
     private NearbyAdapterFactory adapterFactory;
     private RecyclerView recyclerView;
-    private ContributionController controller;
 
-
-    @Inject
-    @Named("direct_nearby_upload_prefs")
-    SharedPreferences directPrefs;
+    @Inject ContributionController controller;
+    @Inject @Named("direct_nearby_upload_prefs") JsonKvStore directKvStore;
+    @Inject @Named("default_preferences") BasicKvStore defaultKvStore;
+    @Inject Gson gson;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -78,8 +68,6 @@ public class NearbyListFragment extends DaggerFragment {
         View view = inflater.inflate(R.layout.fragment_nearby_list, container, false);
         recyclerView = view.findViewById(R.id.listView);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-
-        controller = new ContributionController(this);
         adapterFactory = new NearbyAdapterFactory(this, controller);
         return view;
     }
@@ -137,53 +125,6 @@ public class NearbyListFragment extends DaggerFragment {
         }
 
         return placeList;
-    }
-
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        Timber.d("onRequestPermissionsResult: req code = " + " perm = " + permissions + " grant =" + grantResults);
-
-        switch (requestCode) {
-            // 4 = "Read external storage" allowed when gallery selected
-            case 4: {
-                if (grantResults.length > 0 && grantResults[0] == PERMISSION_GRANTED) {
-                    Timber.d("Call controller.startGalleryPick()");
-                    controller.startGalleryPick();
-                }
-            }
-            break;
-
-            // 5 = "Write external storage" allowed when camera selected
-            case 5: {
-                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    Timber.d("Call controller.startCameraCapture()");
-                    controller.startCameraCapture();
-                }
-            }
-        }
-    }
-
-
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-
-        if (resultCode == RESULT_OK) {
-            Timber.d("OnActivityResult() parameters: Req code: %d Result code: %d Data: %s",
-                    requestCode, resultCode, data);
-            String wikidataEntityId = directPrefs.getString(WIKIDATA_ENTITY_ID_PREF, null);
-            String wikidataItemLocation = directPrefs.getString(WIKIDATA_ITEM_LOCATION, null);
-            if (requestCode == ContributionController.SELECT_FROM_CAMERA) {
-                // If coming from camera, pass null as uri. Because camera photos get saved to a
-                // fixed directory
-                controller.handleImagePicked(requestCode, null, true, wikidataEntityId, wikidataItemLocation);
-            } else {
-                controller.handleImagePicked(requestCode, data.getData(), true, wikidataEntityId, wikidataItemLocation);
-            }
-        } else {
-            Timber.e("OnActivityResult() parameters: Req code: %d Result code: %d Data: %s",
-                    requestCode, resultCode, data);
-        }
     }
 
     /**

@@ -48,7 +48,7 @@ public class UnreadNotificationsCheckAsync extends AsyncTask<Void, Void, Notific
         }
 
         Date lastNotificationCheckDate = new Date(context.get()
-                .getSharedPreferences("prefs",0)
+                .getSharedPreferences("defaultKvStore",0)
                 .getLong("last_read_notification_date", 0));
         Timber.d("You may have unread notifications since"+lastNotificationCheckDate);
 

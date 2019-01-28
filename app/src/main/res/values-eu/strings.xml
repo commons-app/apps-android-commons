@@ -109,7 +109,7 @@
   <string name="no_uploads_yet">Oraindik ez duzu argazkirik igo.</string>
   <string name="menu_retry_upload">Berriz saiatu</string>
   <string name="menu_cancel_upload">Utzi</string>
-  <string name="share_license_summary">Irudi hau %1$s lizentziapean egongo da</string>
+  <string name="share_license_summary" fuzzy="true">Irudi hau %1$s lizentziapean egongo da</string>
   <string name="media_upload_policy">Irudi hau bidaltzen, nire lan propioa dela aitortzen dut, copyrighta duten materiala edo selfiak ez duela, eta beste motatakoak &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines\"&gt;Wikimedia Ohikoaren arauak&lt;/a&gt;</string>
   <string name="menu_download">Jaitsi</string>
   <string name="preference_license">Berezko lizentzia</string>
@@ -242,7 +242,7 @@
   <string name="skip_login">Jauzi</string>
   <string name="navigation_item_login">Hasi saioa</string>
   <string name="skip_login_title">Benetan saioa hastea jauzi nahi duzula?</string>
-  <string name="skip_login_message">Ezin izango duzu argazkirik igo.</string>
+  <string name="skip_login_message" fuzzy="true">Ezin izango duzu argazkirik igo.</string>
   <string name="login_alert_message">Mesedez, hasi saioa funtzio hau erabili ahal izateko</string>
   <string name="nearby_location_has_not_changed">Kokapena ez da aldatu.</string>
   <string name="nearby_location_not_available">Kokapena ez dago erabilgarri.</string>

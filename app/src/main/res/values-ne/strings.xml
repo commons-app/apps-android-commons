@@ -2,6 +2,7 @@
 <!-- Authors:
 * Drjpoudel
 * Nirajan pant
+* Parbat subedi
 * राम प्रसाद जोशी
 * सरोज कुमार ढकाल
 -->
@@ -73,7 +74,7 @@
   <string name="no_uploads_yet">तपाईंले हालसम्म कुनै पनि फोटो अपलोड गर्नुभएको छैन</string>
   <string name="menu_retry_upload">पुन: प्रयास गर्नुहोस्</string>
   <string name="menu_cancel_upload">रद्द गर्नुहोस्</string>
-  <string name="share_license_summary">यो तस्विर  %1$s अनुमतिपत्र अनुसार प्राप्त हुनेछ</string>
+  <string name="share_license_summary">यी तस्विरहरू  %1$s अनुमतिपत्र अनुसार प्राप्त हुनेछ</string>
   <string name="menu_download">डाउनलोड गर्ने</string>
   <string name="preference_license" fuzzy="true">इजाजतपत्र</string>
   <string name="license_name_cc_by_sa">एट्रिब्युसन- सेयरअलाइक ३.०</string>
@@ -125,7 +126,10 @@
   <string name="navigation_item_logout">निर्गमन (लग आउट)</string>
   <string name="navigation_item_info">प्रशिक्षण</string>
   <string name="navigation_item_notification">जानकारीहरू</string>
+  <string name="nearby_info_menu_wikidata_article">विकिडाटा आइटम</string>
   <string name="toggle_view_button">टगल दृश्य</string>
+  <string name="search_tab_title_media">मिडिया</string>
+  <string name="search_tab_title_categories">श्रेणीहरू</string>
   <string name="menu_set_wallpaper" fuzzy="true">भित्तेपत्र चयन गर्नुहोस्</string>
   <string name="wallpaper_set_successfully">भित्तेपत्र सफलतापूर्वक चयन भयो!</string>
   <string name="list_sheet">सूची</string>

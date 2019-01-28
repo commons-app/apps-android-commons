@@ -2,7 +2,6 @@ package fr.free.nrw.commons;
 
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.view.View;
@@ -15,15 +14,14 @@ import javax.inject.Named;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import butterknife.Optional;
+import fr.free.nrw.commons.kvstore.BasicKvStore;
 import fr.free.nrw.commons.quiz.QuizActivity;
 import fr.free.nrw.commons.theme.BaseActivity;
+import fr.free.nrw.commons.utils.ConfigUtils;
 
 public class WelcomeActivity extends BaseActivity {
 
-    @Inject
-    @Named("application_preferences")
-    SharedPreferences prefs;
+    @Inject @Named("application_preferences") BasicKvStore kvStore;
 
     @BindView(R.id.welcomePager)
     ViewPager pager;
@@ -56,7 +54,7 @@ public class WelcomeActivity extends BaseActivity {
         }
 
         // Enable skip button if beta flavor
-        if (BuildConfig.FLAVOR == "beta") {
+        if (ConfigUtils.isBetaFlavour()) {
             findViewById(R.id.finishTutorialButton).setVisibility(View.VISIBLE);
         }
 
@@ -104,7 +102,7 @@ public class WelcomeActivity extends BaseActivity {
 
     @OnClick(R.id.finishTutorialButton)
     public void finishTutorial() {
-        prefs.edit().putBoolean("firstrun", false).apply();
+        kvStore.putBoolean("firstrun", false);
         finish();
     }
 }

@@ -87,7 +87,7 @@
   <string name="no_uploads_yet">Ur tsuliḍ ara yakan tiwlafin.</string>
   <string name="menu_retry_upload">Ɛref̣ tikelt-nniḍen</string>
   <string name="menu_cancel_upload">Sefsex</string>
-  <string name="share_license_summary">Tugna-agi ad tili daw n turagt %1$s</string>
+  <string name="share_license_summary" fuzzy="true">Tugna-agi ad tili daw n turagt %1$s</string>
   <string name="media_upload_policy">S tuzna n tygna-agi, ad d-wekkdeɣ d akken d ayla-w, ur tegbir ara aferdis yettwaḥerzen s izerfan n umeskar, udiɣ tqudeṛ &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines\"&gt;Tisertiyin n Wikimedia Commons&lt;/a&gt;.</string>
   <string name="menu_download">Sider</string>
   <string name="preference_license" fuzzy="true">Turagt</string>

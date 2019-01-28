@@ -12,7 +12,9 @@
 * Orikrin1998
 * Patrick Star
 * Sherbrooke
+* Tektasc
 * Thibaut120094
+* Tomri5
 * Tpt
 * Urhixidur
 * VIGNERON
@@ -119,7 +121,10 @@
   <string name="no_uploads_yet">Vous n’avez pas encore téléchargé de photo.</string>
   <string name="menu_retry_upload">Réessayer</string>
   <string name="menu_cancel_upload">Annuler</string>
-  <string name="share_license_summary">Cette image sera sous licence %1$s</string>
+  <plurals name="share_license_summary">
+    <item quantity="one">Cette image sera sous licence %1$s</item>
+    <item quantity="other">Ces images seront sous licence %1$s</item>
+  </plurals>
   <string name="media_upload_policy">En soumettant cette image, je déclare qu\'elle est l\'oeuvre de mon travail, qu\'elle ne contient pas d\'élément protégé par les droits d\'auteurs ni de portraits, et qu\'elle est par ailleur conforme à  &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines\"&gt;la politique de Wikimedia Commons&lt;/a&gt;.</string>
   <string name="menu_download">Télécharger</string>
   <string name="preference_license">Licence par défaut</string>
@@ -178,6 +183,7 @@
   <string name="detail_description_empty">Aucune description</string>
   <string name="detail_license_empty">Licence inconnue</string>
   <string name="menu_refresh">Rafraîchir</string>
+  <string name="storage_permission_title">Demande d\'autorisation d\'accès au dépot</string>
   <string name="read_storage_permission_rationale">Autorisation nécessaire : Lire un stockage externe. L’application ne peut pas accéder à votre galerie sans cela.</string>
   <string name="write_storage_permission_rationale">Permission obligatoire : Écriture sur stockage externe. L’application ne peut pas accéder à votre appareil photo sans cela.</string>
   <string name="location_permission_rationale">Autorisation facultative : Obtenir l’emplacement actuel pour des suggestions de catégorie</string>
@@ -249,6 +255,12 @@
   <string name="description_info">Veuillez décrire le média autant que possible : Où a-t-il été enregistré ? Que montre-t-il ? Quel est le contexte ? Veuillez décrire les objets ou les personnes. Révélez les informations qui ne peuvent pas être devinées facilement, par exemple l’heure de la journée si c’est un paysage. Si le média montre quelque chose d’inhabituel, veuillez expliquer ce qui le rend exceptionnel.</string>
   <string name="upload_image_too_dark">Cette image est trop sombre, êtes-vous sûr de vouloir la téléverser ? Wikimedia Commons est réservé pour les images ayant une valeur encyclopédique.</string>
   <string name="upload_image_blurry">Cette image est floue, êtes-vous sûr de vouloir la télécharger ? Wikimédia Communs n’est destiné qu’à des images de valeur encyclopédique.</string>
+  <string name="upload_problem_exist">Problèmes potentiels avec cette image.</string>
+  <string name="upload_problem_image_dark">L\'image est trop sombre.</string>
+  <string name="upload_problem_image_blurry">L’image est floue.</string>
+  <string name="upload_problem_image_duplicate">L\'image est déjà sur Commons.</string>
+  <string name="upload_problem_different_geolocation">Cette image a été prise à un emplacement différent.</string>
+  <string name="upload_problem_do_you_continue">Voulez-vous tout de même téléverser cette image ?</string>
   <string name="give_permission">Accorder le droit</string>
   <string name="use_external_storage">Utiliser le stockage externe</string>
   <string name="use_external_storage_summary">Enregistrer les images prises avec l’appareil photo de votre appareil</string>
@@ -264,7 +276,7 @@
   <string name="skip_login">Plus tard</string>
   <string name="navigation_item_login">Se connecter</string>
   <string name="skip_login_title">Voulez-vous vraiment ne pas vous connecter ?</string>
-  <string name="skip_login_message">Vous ne pourrez pas téléverser d\'images.</string>
+  <string name="skip_login_message">Vous aurez à vous connecter à l\'avenir pour téléverser des images.</string>
   <string name="login_alert_message">Veuillez vous connecter pour utiliser cette fonctionnalité</string>
   <string name="copy_wikicode">Copier le texte wiki dans le presse-papiers</string>
   <string name="wikicode_copied">Texte wiki copié dans le presse-papiers</string>
@@ -313,6 +325,8 @@
   <string name="provider_searches">Dernières requêtes de recherche</string>
   <string name="error_loading_categories">Erreur durant le chargement des catégories.</string>
   <string name="error_loading_subcategories">Erreur durant le chargement des sous-catégories.</string>
+  <string name="search_tab_title_media">MEDIA</string>
+  <string name="search_tab_title_categories">CATÉGORIES</string>
   <string name="successful_wikidata_edit">Image bien ajoutée à %1$s sur Wikidata !</string>
   <string name="wikidata_edit_failure">Échec de la mise à jour de l\'entité Wikidata correspondante !</string>
   <string name="menu_set_wallpaper">Définir comme fond d\'écran</string>
@@ -361,6 +375,10 @@
   <string name="images_used_explanation">Le nombre d’images que vous avez téléchargé sur Communs qui sont utilisées dans des articles de Wikimédia</string>
   <string name="error_occurred">Une erreur s’est produite !</string>
   <string name="notifications_channel_name_all">Notification de Commons</string>
+  <string name="preference_author_name_toggle">Utilisez un nom d\'auteur personnalisé</string>
+  <string name="preference_author_name_toggle_summary">Utilisez un nom d\'auteur personnalisé au lieu de votre nom d\'utilisateur lorsque vous téléversez des photos</string>
+  <string name="preference_author_name">Nom d\'auteur personnalisé</string>
+  <string name="preference_author_name_summary">Le nom d\'auteur personnalisé à utiliser au lieu du nom d\'utilisateur dans vos téléversements</string>
   <string name="contributions_fragment">Contributions</string>
   <string name="nearby_fragment">Proche</string>
   <string name="notifications">Notifications</string>
@@ -419,8 +437,19 @@
   <string name="never_ask_again">Ne plus jamais demander cela</string>
   <string name="display_location_permission_title">Afficher l\'autorisation de géolocalisation</string>
   <string name="display_location_permission_explanation">Demander le droit de géolocaliser quand cela est nécessaire pour la fonction de visualisation de la carte des notifications de voisinage.</string>
+  <string name="achievements_fetch_failed">Un problème est survenu, nous n\'avons pas pu récupérer vos réalisations</string>
   <string name="ends_on">Se termine le:</string>
   <string name="display_campaigns">Campagnes d\'affichage</string>
   <string name="display_campaigns_explanation">Touchez ici pour voir les campagnes en cours</string>
   <string name="nearby_campaign_dismiss_message">Vous ne verrez plus les campagnes. Néanmoins, vous pouvez réactiver cette notification dans vos paramètres de configuration, si vous le souhaitez.</string>
+  <string name="this_function_needs_network_connection">Cette fonction requiert une connexion réseau, veuillez consulter vos paramètres de connexion.</string>
+  <string name="bad_token_error_proposed_solution">Le téléversement a échoué en raison d\'incidents liés au jeton d\'édition. Essayez de vous déconnecter puis de vous reconnecter.</string>
+  <string name="error_processing_image">Une erreur est survenue durant le traitement de l\'image. Veuillez recommencer !</string>
+  <plurals name="receiving_shared_content">
+    <item quantity="one">Réception de contenu partagé. Le traitement de l\'image peut prendre un certain temps en fonction de la taille de l\'image et de votre matériel</item>
+    <item quantity="other">Réception de contenu partagé. Le traitement des images peut prendre un certain temps en fonction de la taille des images et de votre matériel</item>
+  </plurals>
+  <string name="no_image">Aucune image utilisée</string>
+  <string name="no_image_reverted">Aucune image retournée</string>
+  <string name="no_image_uploaded">Aucune image téléversée</string>
 </resources>

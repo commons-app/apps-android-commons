@@ -36,15 +36,15 @@ public class CustomApiResult {
         this.evaluator = XPathFactory.newInstance().newXPath();
     }
 
-    static CustomApiResult fromRequestBuilder(Http.HttpRequestBuilder builder, HttpClient client) throws IOException {
-
+    static CustomApiResult fromRequestBuilder(String requestIdentifier, Http.HttpRequestBuilder builder, HttpClient client) throws IOException {
         try {
             DocumentBuilder docBuilder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
             Document doc = docBuilder.parse(builder.use(client).charset("utf-8").data("format", "xml").asResponse().getEntity().getContent());
-            printStringFromDocument(doc);
+            printStringFromDocument(requestIdentifier, doc);
             return new CustomApiResult(doc);
         } catch (ParserConfigurationException e) {
             // I don't know wtf I can do about this on...
+            Timber.e(e, "Error occurred while parsing the response for method %s", requestIdentifier);
             throw new RuntimeException(e);
         } catch (IllegalStateException e) {
             // So, this should never actually happen - since we assume MediaWiki always generates valid json
@@ -52,14 +52,16 @@ public class CustomApiResult {
             // Sooo... I can throw IOError
             // Thanks Java, for making me spend significant time on shit that happens once in a bluemoon
             // I surely am writing Nuclear Submarine controller code
+            Timber.e(e, "Error occurred while parsing the response for method %s", requestIdentifier);
             throw new IOError(e);
         } catch (SAXException e) {
             // See Rant above
+            Timber.e(e, "Error occurred while parsing the response for method %s", requestIdentifier);
             throw new IOError(e);
         }
     }
 
-    public static void printStringFromDocument(Document doc)
+    public static void printStringFromDocument(String requestIdentifier, Document doc)
     {
         try
         {
@@ -69,11 +71,11 @@ public class CustomApiResult {
             TransformerFactory tf = TransformerFactory.newInstance();
             Transformer transformer = tf.newTransformer();
             transformer.transform(domSource, result);
-            Timber.d("API response is\n %s", writer.toString());
+            Timber.d("API response for method %s is\n %s", requestIdentifier, writer.toString());
         }
         catch(TransformerException ex)
         {
-            Timber.d("Error occurred in transforming", ex);
+            Timber.e(ex, "Error occurred in transforming response for method %s", requestIdentifier);
         }
     }
 

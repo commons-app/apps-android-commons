@@ -2,7 +2,6 @@ package fr.free.nrw.commons.contributions;
 
 import android.app.AlertDialog;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
@@ -11,7 +10,6 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
-
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -19,6 +17,10 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 
+import com.esafirm.imagepicker.features.ImagePicker;
+import com.esafirm.imagepicker.model.Image;
+
+import java.util.List;
 
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -29,15 +31,14 @@ import fr.free.nrw.commons.BuildConfig;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.auth.AuthenticatedActivity;
 import fr.free.nrw.commons.auth.SessionManager;
+import fr.free.nrw.commons.kvstore.BasicKvStore;
 import fr.free.nrw.commons.location.LocationServiceManager;
 import fr.free.nrw.commons.nearby.NearbyFragment;
-import fr.free.nrw.commons.nearby.NearbyMapFragment;
 import fr.free.nrw.commons.nearby.NearbyNotificationCardView;
 import fr.free.nrw.commons.notification.NotificationActivity;
-import fr.free.nrw.commons.theme.NavigationBaseActivity;
 import fr.free.nrw.commons.upload.UploadService;
-import fr.free.nrw.commons.utils.PermissionUtils;
-import fr.free.nrw.commons.utils.ViewUtil;
+import fr.free.nrw.commons.utils.ImageUtils;
+import fr.free.nrw.commons.utils.IntentUtils;
 import timber.log.Timber;
 
 import static android.content.ContentResolver.requestSync;
@@ -47,6 +48,7 @@ public class MainActivity extends AuthenticatedActivity implements FragmentManag
 
     @Inject
     SessionManager sessionManager;
+    @Inject ContributionController controller;
     @BindView(R.id.tab_layout)
     TabLayout tabLayout;
     @BindView(R.id.pager)
@@ -55,7 +57,7 @@ public class MainActivity extends AuthenticatedActivity implements FragmentManag
     public LocationServiceManager locationManager;
     @Inject
     @Named("default_preferences")
-    public SharedPreferences prefs;
+    public BasicKvStore defaultKvStore;
 
 
     public Intent uploadServiceIntent;
@@ -128,7 +130,7 @@ public class MainActivity extends AuthenticatedActivity implements FragmentManag
                     .setTitle(R.string.title_activity_nearby)
                     .setMessage(R.string.showcase_view_whole_nearby_activity)
                     .setCancelable(true)
-                    .setNeutralButton(android.R.string.ok, (dialog, id) -> dialog.cancel())
+                    .setPositiveButton(android.R.string.ok, (dialog, id) -> dialog.cancel())
                     .create()
                     .show()
         );
@@ -247,7 +249,7 @@ public class MainActivity extends AuthenticatedActivity implements FragmentManag
                 // Tabs were invisible when Media Details Fragment is active, make them visible again on Contrib List Fragment active
                 showTabs();
                 // Nearby Notification Card View was invisible when Media Details Fragment is active, make it visible again on Contrib List Fragment active, according to preferences
-                if (prefs.getBoolean("displayNearbyCardView", true)) {
+                if (defaultKvStore.getBoolean("displayNearbyCardView", true)) {
                     if (contributionsFragment.nearbyNotificationCardView.cardViewVisibilityState == NearbyNotificationCardView.CardViewVisibilityState.READY) {
                         contributionsFragment.nearbyNotificationCardView.setVisibility(View.VISIBLE);
                     }
@@ -315,10 +317,8 @@ public class MainActivity extends AuthenticatedActivity implements FragmentManag
         switch (item.getItemId()) {
             case R.id.notifications:
                 // Starts notification activity on click to notification icon
-                NavigationBaseActivity.startActivityWithFlags(this, NotificationActivity.class, Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                finish();
+                NotificationActivity.startYourself(this);
                 return true;
-
             case R.id.list_sheet:
                 if (contributionsActivityPagerAdapter.getItem(1) != null) {
                     ((NearbyFragment)contributionsActivityPagerAdapter.getItem(1)).listOptionMenuIteClicked();
@@ -446,12 +446,13 @@ public class MainActivity extends AuthenticatedActivity implements FragmentManag
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        ContributionsListFragment contributionsListFragment =
-                        (ContributionsListFragment) contributionsActivityPagerAdapter
-                        .getItem(0).getChildFragmentManager()
-                        .findFragmentByTag(ContributionsFragment.CONTRIBUTION_LIST_FRAGMENT_TAG);
-        contributionsListFragment.onActivityResult(requestCode, resultCode, data);
+        if (IntentUtils.shouldContributionsHandle(requestCode, resultCode, data)) {
+            List<Image> images = ImagePicker.getImages(data);
+            Intent shareIntent = controller.handleImagesPicked(ImageUtils.getUriListFromImages(images), requestCode);
+            startActivity(shareIntent);
+        } else {
+            super.onActivityResult(requestCode, resultCode, data);
+        }
     }
 
     @Override
@@ -474,60 +475,6 @@ public class MainActivity extends AuthenticatedActivity implements FragmentManag
                     } else {
 
                     }
-                }
-                return;
-            }
-            // Storage permission for gallery
-            case PermissionUtils.GALLERY_PERMISSION_FROM_CONTRIBUTION_LIST: {
-                // If request is cancelled, the result arrays are empty.
-                if (grantResults.length > 0
-                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    // Storage permission given
-                    ContributionsListFragment contributionsListFragment =
-                            (ContributionsListFragment) contributionsActivityPagerAdapter
-                                    .getItem(0).getChildFragmentManager()
-                                    .findFragmentByTag(ContributionsFragment.CONTRIBUTION_LIST_FRAGMENT_TAG);
-                    contributionsListFragment.controller.startGalleryPick();
-                }
-                return;
-            }
-
-            case PermissionUtils.CAMERA_PERMISSION_FROM_CONTRIBUTION_LIST: {
-                // If request is cancelled, the result arrays are empty.
-                if (grantResults.length > 0
-                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    // Storage permission given
-                    ContributionsListFragment contributionsListFragment =
-                            (ContributionsListFragment) contributionsActivityPagerAdapter
-                                    .getItem(0).getChildFragmentManager()
-                                    .findFragmentByTag(ContributionsFragment.CONTRIBUTION_LIST_FRAGMENT_TAG);
-                    contributionsListFragment.controller.startCameraCapture();
-                }
-                return;
-            }
-
-            case PermissionUtils.CAMERA_PERMISSION_FROM_NEARBY_MAP: {
-                // If request is cancelled, the result arrays are empty.
-                if (grantResults.length > 0
-                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    // Storage permission given
-                    NearbyMapFragment nearbyMapFragment =
-                            ((NearbyFragment) contributionsActivityPagerAdapter
-                                    .getItem(1)).nearbyMapFragment;
-                    nearbyMapFragment.controller.startCameraCapture();
-                }
-                return;
-            }
-
-            case PermissionUtils.GALLERY_PERMISSION_FROM_NEARBY_MAP: {
-                // If request is cancelled, the result arrays are empty.
-                if (grantResults.length > 0
-                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    // Storage permission given
-                    NearbyMapFragment nearbyMapFragment =
-                            ((NearbyFragment) contributionsActivityPagerAdapter
-                                    .getItem(1)).nearbyMapFragment;
-                    nearbyMapFragment.controller.startGalleryPick();
                 }
                 return;
             }

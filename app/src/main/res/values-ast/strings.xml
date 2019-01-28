@@ -102,7 +102,7 @@
   <string name="no_uploads_yet">Inda nun xubió denguna foto.</string>
   <string name="menu_retry_upload">Reintentar</string>
   <string name="menu_cancel_upload">Encaboxar</string>
-  <string name="share_license_summary">Esta imaxe quedará baxo la llicencia %1$s</string>
+  <string name="share_license_summary" fuzzy="true">Esta imaxe quedará baxo la llicencia %1$s</string>
   <string name="media_upload_policy">El presentar esta imaxe, declaro que ye una obra propia, que nun contien material con derechu d\'autor o «selfies», y que s\'atien a les &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines\"&gt;polítiques de Wikimedia Commons&lt;/a&gt;.</string>
   <string name="menu_download">Descargar</string>
   <string name="preference_license">Llicencia predeterminada</string>
@@ -244,7 +244,7 @@
   <string name="skip_login">Saltar</string>
   <string name="navigation_item_login">Aniciar sesión</string>
   <string name="skip_login_title">¿Realmente quiés saltar l\'aniciu de sesión?</string>
-  <string name="skip_login_message">Nun vas poder xubir imaxes.</string>
+  <string name="skip_login_message" fuzzy="true">Nun vas poder xubir imaxes.</string>
   <string name="login_alert_message">Anicia sesión pa usar esta función</string>
   <string name="copy_wikicode">Copiar el testu wiki al cartafueyu</string>
   <string name="wikicode_copied">Copióse\'l testu wiki al cartafueyu</string>

@@ -4,8 +4,6 @@ import android.animation.ObjectAnimator;
 import android.animation.TypeEvaluator;
 import android.animation.ValueAnimator;
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
@@ -44,8 +42,6 @@ import com.mapbox.mapboxsdk.geometry.LatLng;
 import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.MapboxMapOptions;
-import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
-import com.mapbox.services.android.telemetry.MapboxTelemetry;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
@@ -61,21 +57,22 @@ import fr.free.nrw.commons.Utils;
 import fr.free.nrw.commons.auth.LoginActivity;
 import fr.free.nrw.commons.bookmarks.locations.BookmarkLocationsDao;
 import fr.free.nrw.commons.contributions.ContributionController;
+import fr.free.nrw.commons.kvstore.BasicKvStore;
+import fr.free.nrw.commons.kvstore.JsonKvStore;
+import fr.free.nrw.commons.utils.ImageUtils;
+import fr.free.nrw.commons.utils.IntentUtils;
 import fr.free.nrw.commons.utils.LocationUtils;
-import fr.free.nrw.commons.utils.PlaceUtils;
 import fr.free.nrw.commons.utils.UriDeserializer;
 import fr.free.nrw.commons.utils.ViewUtil;
 import timber.log.Timber;
 
-import static android.app.Activity.RESULT_OK;
-import static android.content.pm.PackageManager.PERMISSION_GRANTED;
-import static fr.free.nrw.commons.wikidata.WikidataConstants.WIKIDATA_ENTITY_ID_PREF;
-import static fr.free.nrw.commons.wikidata.WikidataConstants.WIKIDATA_ITEM_LOCATION;
+import static fr.free.nrw.commons.contributions.ContributionController.NEARBY_CAMERA_UPLOAD_REQUEST_CODE;
+import static fr.free.nrw.commons.contributions.ContributionController.NEARBY_GALLERY_UPLOAD_REQUEST_CODE;
+import static fr.free.nrw.commons.contributions.ContributionController.NEARBY_UPLOAD_IMAGE_LIMIT;
+import static fr.free.nrw.commons.wikidata.WikidataConstants.PLACE_OBJECT;
 
 public class NearbyMapFragment extends DaggerFragment {
 
-    @Inject
-    @Named("application_preferences") SharedPreferences applicationPrefs;
     public MapView mapView;
     private List<NearbyBaseMarker> baseMarkerOptions;
     private fr.free.nrw.commons.location.LatLng curLatLng;
@@ -112,8 +109,6 @@ public class NearbyMapFragment extends DaggerFragment {
     private Animation fab_close;
     private Animation fab_open;
     private Animation rotate_forward;
-    public ContributionController controller;
-    private DirectUpload directUpload;
 
     private Place place;
     private Marker selected;
@@ -134,14 +129,13 @@ public class NearbyMapFragment extends DaggerFragment {
     private Bundle bundleForUpdates;// Carry information from activity about changed nearby places and current location
     private boolean searchedAroundCurrentLocation = true;
 
-    @Inject
-    @Named("prefs")
-    SharedPreferences prefs;
-    @Inject
-    @Named("direct_nearby_upload_prefs")
-    SharedPreferences directPrefs;
-    @Inject
-    BookmarkLocationsDao bookmarkLocationDao;
+    @Inject @Named("application_preferences") BasicKvStore applicationKvStore;
+    @Inject @Named("defaultKvStore") BasicKvStore prefs;
+    @Inject @Named("direct_nearby_upload_prefs") JsonKvStore directKvStore;
+    @Inject @Named("default_preferences") BasicKvStore defaultKvStore;
+    @Inject BookmarkLocationsDao bookmarkLocationDao;
+    @Inject ContributionController controller;
+    @Inject Gson gson;
 
     private static final double ZOOM_LEVEL = 14f;
 
@@ -153,13 +147,7 @@ public class NearbyMapFragment extends DaggerFragment {
         super.onCreate(savedInstanceState);
         Timber.d("Nearby map fragment created");
 
-        controller = new ContributionController(this);
-        directUpload = new DirectUpload(this, controller);
-
         Bundle bundle = this.getArguments();
-        Gson gson = new GsonBuilder()
-                .registerTypeAdapter(Uri.class, new UriDeserializer())
-                .create();
         if (bundle != null) {
             String gsonPlaceList = bundle.getString("PlaceList");
             String gsonLatLng = bundle.getString("CurLatLng");
@@ -180,7 +168,7 @@ public class NearbyMapFragment extends DaggerFragment {
         if (curLatLng != null) {
             Mapbox.getInstance(getActivity(),
                     getString(R.string.mapbox_commons_app_token));
-            MapboxTelemetry.getInstance().setTelemetryEnabled(false);
+            Mapbox.getTelemetry().setUserTelemetryRequestState(false);
         }
         setRetainInstance(true);
     }
@@ -230,9 +218,6 @@ public class NearbyMapFragment extends DaggerFragment {
         Timber.d("updateMapSlightly called, bundle is:"+ bundleForUpdates);
         if (mapboxMap != null) {
             deselectAllMarkers();
-            Gson gson = new GsonBuilder()
-                    .registerTypeAdapter(Uri.class, new UriDeserializer())
-                    .create();
             if (bundleForUpdates != null) {
                 String gsonLatLng = bundleForUpdates.getString("CurLatLng");
                 Type curLatLngType = new TypeToken<fr.free.nrw.commons.location.LatLng>() {}.getType();
@@ -254,10 +239,6 @@ public class NearbyMapFragment extends DaggerFragment {
         if (mapboxMap != null) {
             if (bundleForUpdates != null) {
                 deselectAllMarkers();
-                Gson gson = new GsonBuilder()
-                        .registerTypeAdapter(Uri.class, new UriDeserializer())
-                        .create();
-
                 String gsonPlaceList = bundleForUpdates.getString("PlaceList");
                 String gsonLatLng = bundleForUpdates.getString("CurLatLng");
                 String gsonBoundaryCoordinates = bundleForUpdates.getString("BoundaryCoord");
@@ -434,7 +415,7 @@ public class NearbyMapFragment extends DaggerFragment {
      */
     private void setListeners() {
         fabPlus.setOnClickListener(view -> {
-            if (applicationPrefs.getBoolean("login_skipped", false)) {
+            if (applicationKvStore.getBoolean("login_skipped", false)) {
                 // prompt the user to login
                 new AlertDialog.Builder(getContext())
                         .setMessage(R.string.login_alert_message)
@@ -610,7 +591,7 @@ public class NearbyMapFragment extends DaggerFragment {
                             searchThisAreaModeOn = true;
                             // Lock map operations during search this area operation
                             mapboxMap.getUiSettings().setAllGesturesEnabled(false);
-                            searchThisAreaButtonProgressBar.setVisibility(View.VISIBLE);
+                            searchThisAreaButtonProgressBar.setVisibility(View.GONE);
                             fabRecenter.callOnClick();
                             searchThisAreaButton.setVisibility(View.GONE);
                             searchedAroundCurrentLocation = true;
@@ -674,6 +655,18 @@ public class NearbyMapFragment extends DaggerFragment {
                 .strokeColor(Color.parseColor("#55000000"))
                 .fillColor(Color.parseColor("#11000000"));
         mapboxMap.addPolygon(currentLocationPolygonOptions);
+    }
+
+    /**
+     * Checks whether current location marker is in visible region or not
+     * @return true if point is in region
+     */
+    public boolean isCurrentLocationMarkerVisible() {
+        if (currentLocationMarker != null) {
+            return mapboxMap.getProjection().getVisibleRegion().latLngBounds.contains(currentLocationMarker.getPosition());
+        } else {
+            return false;
+        }
     }
 
     /**
@@ -892,7 +885,7 @@ public class NearbyMapFragment extends DaggerFragment {
             if (fabCamera.isShown()) {
                 Timber.d("Camera button tapped. Place: %s", place.toString());
                 storeSharedPrefs();
-                directUpload.initiateCameraUpload();
+                controller.initiateCameraPick(getActivity(), NEARBY_CAMERA_UPLOAD_REQUEST_CODE);
             }
         });
 
@@ -900,67 +893,14 @@ public class NearbyMapFragment extends DaggerFragment {
             if (fabGallery.isShown()) {
                 Timber.d("Gallery button tapped. Place: %s", place.toString());
                 storeSharedPrefs();
-                directUpload.initiateGalleryUpload();
+                controller.initiateGalleryPick(getActivity(), NEARBY_UPLOAD_IMAGE_LIMIT, NEARBY_GALLERY_UPLOAD_REQUEST_CODE);
             }
         });
     }
 
     void storeSharedPrefs() {
-        SharedPreferences.Editor editor = directPrefs.edit();
-        editor.putString("Title", place.getName());
-        editor.putString("Desc", place.getLongDescription());
-        editor.putString("Category", place.getCategory());
-        editor.putString(WIKIDATA_ENTITY_ID_PREF, place.getWikiDataEntityId());
-        editor.putString(WIKIDATA_ITEM_LOCATION, PlaceUtils.latLangToString(place.location));
-        editor.apply();
-    }
-
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        Timber.d("onRequestPermissionsResult: req code = " + " perm = " + permissions + " grant =" + grantResults);
-
-        // Do not use requestCode 1 as it will conflict with NearbyFragment's requestCodes
-        switch (requestCode) {
-            // 4 = "Read external storage" allowed when gallery selected
-            case 4: {
-                if (grantResults.length > 0 && grantResults[0] == PERMISSION_GRANTED) {
-                    Timber.d("Call controller.startGalleryPick()");
-                    controller.startGalleryPick();
-                }
-            }
-            break;
-
-            // 5 = "Write external storage" allowed when camera selected
-            case 5: {
-                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    Timber.d("Call controller.startCameraCapture()");
-                    controller.startCameraCapture();
-                }
-            }
-        }
-    }
-
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-
-
-        if (resultCode == RESULT_OK) {
-            Timber.d("OnActivityResult() parameters: Req code: %d Result code: %d Data: %s",
-                    requestCode, resultCode, data);
-            String wikidataEntityId = directPrefs.getString(WIKIDATA_ENTITY_ID_PREF, null);
-            String wikidataItemLocation = directPrefs.getString(WIKIDATA_ITEM_LOCATION, null);
-            if (requestCode == ContributionController.SELECT_FROM_CAMERA) {
-                // If coming from camera, pass null as uri. Because camera photos get saved to a
-                // fixed directory
-                controller.handleImagePicked(requestCode, null, true, wikidataEntityId, wikidataItemLocation);
-            } else {
-                controller.handleImagePicked(requestCode, data.getData(), true, wikidataEntityId, wikidataItemLocation);
-            }
-        } else {
-            Timber.e("OnActivityResult() parameters: Req code: %d Result code: %d Data: %s",
-                    requestCode, resultCode, data);
-        }
+        Timber.d("Store place object %s", place.toString());
+        directKvStore.putJson(PLACE_OBJECT, place);
     }
 
     private void openWebView(Uri link) {

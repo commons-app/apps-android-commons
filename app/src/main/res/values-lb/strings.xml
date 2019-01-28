@@ -67,10 +67,10 @@
   <string name="gps_disabled">GPS ass op Ärem Apparat ausgeschalt. Wëllt Dir en aktivéieren?</string>
   <string name="enable_gps">GPS aktivéieren</string>
   <string name="contributions_subtitle_zero">Nach keng eropgeluede Fichieren</string>
-  <plurals name="contributions_subtitle" fuzzy="true">
+  <plurals name="contributions_subtitle">
     <item quantity="zero">N@string/contributions_subtitle_zero</item>
-    <item quantity="one">Ee Fichier eropgelueden</item>
-    <item quantity="other">%1$d Fichieren eropgelueden</item>
+    <item quantity="one">(%1$d)</item>
+    <item quantity="other">(%1$d)</item>
   </plurals>
   <plurals name="starting_multiple_uploads">
     <item quantity="one">Ugefaang 1 Fichier eropzelueden</item>
@@ -100,12 +100,15 @@
   <string name="no_uploads_yet">Dir hutt nach keng Fotoen eropgelueden.</string>
   <string name="menu_retry_upload">Nach eng Kéier probéieren</string>
   <string name="menu_cancel_upload">Ofbriechen</string>
-  <string name="share_license_summary">Dëst Bild gëtt ënner %1$s lizenzéiert</string>
+  <plurals name="share_license_summary">
+    <item quantity="one">Dëst Bild gëtt ënner %1$s lizenzéiert</item>
+    <item quantity="other">Dës Biller ginn ënner %1$s lizenzéiert</item>
+  </plurals>
   <string name="menu_download">Eroflueden</string>
   <string name="preference_license">Standardlizenz</string>
   <string name="use_previous">Viregen Titel/Beschreiwung benotzen</string>
   <string name="allow_gps">Automatesch déi aktuell Plaz kréien</string>
-  <string name="allow_gps_summary" fuzzy="true">Aktuell Plaz ofruffe fir Propose fir Kategorien ze erméigleche wann d\'Bild keng Geotaggen huet</string>
+  <string name="allow_gps_summary">Rifft déi aktuell Plaz of wann e Bild net georeferenzéiert ass a setzt Geotagge vun der aktueller Plaz. Opgepasst: Doduerch gëtt Är aktuell Plaz bekannt.</string>
   <string name="preference_theme">Nuetsmodus</string>
   <string name="preference_theme_summary">Donkele Layout benotzen</string>
   <string name="license_name_cc_by_sa_four">Attribution-ShareAlike 4.0</string>
@@ -212,12 +215,18 @@
   <string name="nearby_info_menu_commons_article">Commons-Fichierssäit</string>
   <string name="nearby_info_menu_wikidata_article">Wikidata-Element</string>
   <string name="nearby_info_menu_wikipedia_article">Wikipedia-Artikel</string>
+  <string name="upload_problem_exist">Potenziell Problemer mat dësem Bild:</string>
+  <string name="upload_problem_image_dark">Bild ass ze däischter.</string>
+  <string name="upload_problem_image_blurry">Bild ass verschwommen.</string>
+  <string name="upload_problem_image_duplicate">Bild ass schonn op Commons.</string>
+  <string name="upload_problem_different_geolocation">Dëst Bild gouf op enger anerer Plaz gemaach.</string>
+  <string name="upload_problem_do_you_continue">Wëllt Dir dëst Bild nach ëmmer eroplueden?</string>
   <string name="give_permission">Autorisatioun ginn</string>
   <string name="use_external_storage">Externe Späicher benotzen</string>
   <string name="use_external_storage_summary">Biller späicheren déi mat der in-app Kamera vun Ärem Apparat gemaach goufen</string>
   <string name="login_to_your_account">An Äre Benotzerkont aloggen</string>
   <string name="send_log_file">Log-Fichier schécken</string>
-  <string name="send_log_file_description" fuzzy="true">Log-Fichier per E-Mail un d\'Entwéckler schécken</string>
+  <string name="send_log_file_description">Log-Fichier per E-Mail un d\'Entwéckler schécke fir ze hëllefen fir Problemer mat der App z\'analyséieren. Notiz:A Logge kënne potenziell Informatiounen dra sinn déi Iech identifizéieren</string>
   <string name="null_url">Feeler! URL net fonnt</string>
   <string name="nominate_deletion">Nominéiere fir ze Läschen</string>
   <string name="nominated_for_deletion">Dëst Bild gouf virgeschloe fir geläscht ze ginn.</string>
@@ -256,6 +265,8 @@
   <string name="menu_search_button">Sichen</string>
   <string name="search_commons">Op Commons sichen</string>
   <string name="title_activity_search">Sichen</string>
+  <string name="search_tab_title_media">MEDIEN</string>
+  <string name="search_tab_title_categories">KATEGORIEN</string>
   <string name="wikidata_edit_failure">Déi entspriechend Wikidata-Entitéit konnt net aktualiséiert ginn!</string>
   <string name="menu_set_wallpaper">Als Hannergrondbild festleeën</string>
   <string name="wallpaper_set_successfully">Hannergrondbild festgeluecht</string>
@@ -306,4 +317,6 @@
   <string name="yes_submit">Jo, schécken</string>
   <string name="no_go_back">Neen, zréck goen</string>
   <string name="never_ask_again">Dëst ni méi froen</string>
+  <string name="no_image">Keng Biller benotzt</string>
+  <string name="no_image_uploaded">Keng Biller eropgelueden</string>
 </resources>

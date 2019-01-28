@@ -3,10 +3,12 @@ package fr.free.nrw.commons.di;
 import android.app.Activity;
 import android.content.ContentProviderClient;
 import android.content.Context;
-import android.content.SharedPreferences;
-import android.preference.PreferenceManager;
+import android.net.Uri;
 import android.support.v4.util.LruCache;
 import android.view.inputmethod.InputMethodManager;
+
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -23,15 +25,18 @@ import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.auth.AccountUtil;
 import fr.free.nrw.commons.auth.SessionManager;
 import fr.free.nrw.commons.data.DBOpenHelper;
+import fr.free.nrw.commons.kvstore.BasicKvStore;
+import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.location.LocationServiceManager;
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
 import fr.free.nrw.commons.nearby.NearbyPlaces;
 import fr.free.nrw.commons.settings.Prefs;
 import fr.free.nrw.commons.upload.UploadController;
+import fr.free.nrw.commons.utils.ConfigUtils;
+import fr.free.nrw.commons.utils.UriDeserializer;
+import fr.free.nrw.commons.utils.UriSerializer;
 import fr.free.nrw.commons.wikidata.WikidataEditListener;
 import fr.free.nrw.commons.wikidata.WikidataEditListenerImpl;
-
-import static android.content.Context.MODE_PRIVATE;
 
 @Module
 @SuppressWarnings({"WeakerAccess", "unused"})
@@ -125,20 +130,21 @@ public class CommonsApplicationModule {
 
     @Provides
     @Named("application_preferences")
-    public SharedPreferences providesApplicationSharedPreferences(Context context) {
-        return context.getSharedPreferences("fr.free.nrw.commons", MODE_PRIVATE);
+    public BasicKvStore providesApplicationKvStore(Context context) {
+        return new BasicKvStore(context, "fr.free.nrw.commons");
     }
 
     @Provides
     @Named("default_preferences")
-    public SharedPreferences providesDefaultSharedPreferences(Context context) {
-        return PreferenceManager.getDefaultSharedPreferences(context);
+    public BasicKvStore providesDefaultKvStore(Context context) {
+        String storeName = context.getPackageName() + "_preferences";
+        return new BasicKvStore(context, storeName);
     }
 
     @Provides
-    @Named("prefs")
-    public SharedPreferences providesOtherSharedPreferences(Context context) {
-        return context.getSharedPreferences("prefs", MODE_PRIVATE);
+    @Named("defaultKvStore")
+    public BasicKvStore providesOtherKvStore(Context context) {
+        return new BasicKvStore(context, "defaultKvStore");
     }
 
     /**
@@ -148,14 +154,14 @@ public class CommonsApplicationModule {
      */
     @Provides
     @Named("category_prefs")
-    public SharedPreferences providesCategorySharedPreferences(Context context) {
-        return context.getSharedPreferences("categoryPrefs", MODE_PRIVATE);
+    public BasicKvStore providesCategoryKvStore(Context context) {
+        return new BasicKvStore(context, "categoryPrefs");
     }
 
     @Provides
     @Named("direct_nearby_upload_prefs")
-    public SharedPreferences providesDirectNearbyUploadPreferences(Context context) {
-        return context.getSharedPreferences("direct_nearby_upload_prefs", MODE_PRIVATE);
+    public JsonKvStore providesDirectNearbyUploadKvStore(Context context, Gson gson) {
+        return new JsonKvStore(context, "direct_nearby_upload_prefs", gson);
     }
 
     /**
@@ -165,21 +171,23 @@ public class CommonsApplicationModule {
      */
     @Provides
     @Named("last_read_notification_date")
-    public SharedPreferences providesLastReadNotificationDatePreferences(Context context) {
-        return context.getSharedPreferences("last_read_notification_date", MODE_PRIVATE);
+    public BasicKvStore providesLastReadNotificationDateKvStore(Context context) {
+        return new BasicKvStore(context, "last_read_notification_date");
     }
 
     @Provides
-    public UploadController providesUploadController(SessionManager sessionManager, @Named("default_preferences") SharedPreferences sharedPreferences, Context context) {
-        return new UploadController(sessionManager, context, sharedPreferences);
+    public UploadController providesUploadController(SessionManager sessionManager,
+                                                     @Named("default_preferences") BasicKvStore kvStore,
+                                                     Context context) {
+        return new UploadController(sessionManager, context, kvStore);
     }
 
     @Provides
     @Singleton
     public SessionManager providesSessionManager(Context context,
                                                  MediaWikiApi mediaWikiApi,
-                                                 @Named("default_preferences") SharedPreferences sharedPreferences) {
-        return new SessionManager(context, mediaWikiApi, sharedPreferences);
+                                                 @Named("default_preferences") BasicKvStore defaultKvStore) {
+        return new SessionManager(context, mediaWikiApi, defaultKvStore);
     }
 
     @Provides
@@ -220,6 +228,6 @@ public class CommonsApplicationModule {
     @Provides
     @Singleton
     public boolean provideIsBetaVariant() {
-        return BuildConfig.FLAVOR.equals("beta");
+        return ConfigUtils.isBetaFlavour();
     }
 }

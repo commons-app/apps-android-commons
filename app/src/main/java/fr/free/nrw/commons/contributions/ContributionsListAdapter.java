@@ -55,22 +55,19 @@ class ContributionsListAdapter extends CursorAdapter {
             case Contribution.STATE_COMPLETED:
                 views.stateView.setVisibility(View.GONE);
                 views.progressView.setVisibility(View.GONE);
-                views.retryButton.setVisibility(View.GONE);
-                views.cancelButton.setVisibility(View.GONE);
+                views.failedImageOptions.setVisibility(View.GONE);
                 views.stateView.setText("");
                 break;
             case Contribution.STATE_QUEUED:
                 views.stateView.setVisibility(View.VISIBLE);
                 views.progressView.setVisibility(View.GONE);
                 views.stateView.setText(R.string.contribution_state_queued);
-                views.retryButton.setVisibility(View.GONE);
-                views.cancelButton.setVisibility(View.GONE);
+                views.failedImageOptions.setVisibility(View.GONE);
                 break;
             case Contribution.STATE_IN_PROGRESS:
                 views.stateView.setVisibility(View.GONE);
                 views.progressView.setVisibility(View.VISIBLE);
-                views.retryButton.setVisibility(View.GONE);
-                views.cancelButton.setVisibility(View.GONE);
+                views.failedImageOptions.setVisibility(View.GONE);
                 long total = contribution.getDataLength();
                 long transferred = contribution.getTransferred();
                 if (transferred == 0 || transferred >= total) {
@@ -83,8 +80,7 @@ class ContributionsListAdapter extends CursorAdapter {
                 views.stateView.setVisibility(View.VISIBLE);
                 views.stateView.setText(R.string.contribution_state_failed);
                 views.progressView.setVisibility(View.GONE);
-                views.retryButton.setVisibility(View.VISIBLE);
-                views.cancelButton.setVisibility(View.VISIBLE);
+                views.failedImageOptions.setVisibility(View.VISIBLE);
 
                 views.retryButton.setOnClickListener(new View.OnClickListener() {
                     @Override

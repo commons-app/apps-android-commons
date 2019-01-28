@@ -4,12 +4,12 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.constraint.ConstraintLayout;
 import android.support.design.widget.BottomSheetBehavior;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.FragmentTransaction;
@@ -17,6 +17,7 @@ import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 
@@ -33,6 +34,7 @@ import butterknife.ButterKnife;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.contributions.MainActivity;
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
+import fr.free.nrw.commons.kvstore.BasicKvStore;
 import fr.free.nrw.commons.location.LatLng;
 import fr.free.nrw.commons.location.LocationServiceManager;
 import fr.free.nrw.commons.location.LocationUpdateListener;
@@ -64,6 +66,10 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
     LinearLayout bottomSheetDetails;
     @BindView(R.id.transparentView)
     View transparentView;
+    @BindView(R.id.container_sheet)
+    FrameLayout frameLayout;
+    @BindView(R.id.loading_nearby_list)
+    ConstraintLayout loading_nearby_layout;
 
     @Inject
     LocationServiceManager locationManager;
@@ -73,7 +79,8 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
     WikidataEditListener wikidataEditListener;
     @Inject
     @Named("application_preferences")
-    SharedPreferences applicationPrefs;
+    BasicKvStore applicationKvStore;
+    @Inject Gson gson;
 
     public NearbyMapFragment nearbyMapFragment;
     private NearbyListFragment nearbyListFragment;
@@ -293,9 +300,6 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
             progressBar.setVisibility(View.VISIBLE);
 
             //TODO: This hack inserts curLatLng before populatePlaces is called (see #1440). Ideally a proper fix should be found
-            Gson gson = new GsonBuilder()
-                    .registerTypeAdapter(Uri.class, new UriSerializer())
-                    .create();
             String gsonCurLatLng = gson.toJson(curLatLng);
             bundle.clear();
             bundle.putString("CurLatLng", gsonCurLatLng);
@@ -313,15 +317,12 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
 
         } else if (locationChangeType
                 .equals(LOCATION_SLIGHTLY_CHANGED)) {
-            Gson gson = new GsonBuilder()
-                    .registerTypeAdapter(Uri.class, new UriSerializer())
-                    .create();
             String gsonCurLatLng = gson.toJson(curLatLng);
             bundle.putString("CurLatLng", gsonCurLatLng);
             updateMapFragment(false,true, null, null);
         }
 
-        if (nearbyMapFragment != null) {
+        if (nearbyMapFragment != null && nearbyMapFragment.searchThisAreaButton != null) {
             nearbyMapFragment.searchThisAreaButton.setVisibility(View.GONE);
         }
     }
@@ -384,9 +385,6 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
         Timber.d("Populating nearby places");
         List<Place> placeList = nearbyPlacesInfo.placeList;
         LatLng[] boundaryCoordinates = nearbyPlacesInfo.boundaryCoordinates;
-        Gson gson = new GsonBuilder()
-                .registerTypeAdapter(Uri.class, new UriSerializer())
-                .create();
         String gsonPlaceList = gson.toJson(placeList);
         String gsonCurLatLng = gson.toJson(curLatLng);
         String gsonBoundaryCoordinates = gson.toJson(boundaryCoordinates);
@@ -444,9 +442,6 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
      * @param nearbyPlacesInfo Includes nearby places list and boundary coordinates
      */
     private void updateMapFragment(boolean updateViaButton, boolean isSlightUpdate, @Nullable LatLng customLatLng, @Nullable NearbyController.NearbyPlacesInfo nearbyPlacesInfo) {
-        if (nearbyMapFragment.checkingAround) {
-            return;
-        }
         /*
         Significant update means updating nearby place markers. Slightly update means only
         updating current location marker and camera target.
@@ -455,6 +450,13 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
         our nearby markers, we update our map Significantly.
          */
         NearbyMapFragment nearbyMapFragment = getMapFragment();
+
+        if (nearbyMapFragment != null && !nearbyMapFragment.isCurrentLocationMarkerVisible()) {
+            Timber.d("Do not update the map, user is not seeing current location marker" +
+                    " means they are checking around and moving on map");
+            return;
+        }
+
 
         if (nearbyMapFragment != null && curLatLng != null) {
             hideProgressBar(); // In case it is visible (this happens, not an impossible case)
@@ -551,6 +553,8 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
      * Calls fragment for list view.
      */
     private void setListFragment() {
+        loading_nearby_layout.setVisibility(View.GONE);
+        frameLayout.setVisibility(View.VISIBLE);
         FragmentTransaction fragmentTransaction = getChildFragmentManager().beginTransaction();
         nearbyListFragment = new NearbyListFragment();
         nearbyListFragment.setArguments(bundle);

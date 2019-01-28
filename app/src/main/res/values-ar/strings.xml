@@ -112,7 +112,10 @@
   <string name="no_uploads_yet">لم ترفع بعد أية صور.</string>
   <string name="menu_retry_upload">إعادة المحاولة</string>
   <string name="menu_cancel_upload">إلغاء</string>
-  <string name="share_license_summary">ستُرخص الصورة برخصة %1$s.</string>
+  <plurals name="share_license_summary">
+    <item quantity="one">سيتم ترخيص هذه الصورة تحت %1$s</item>
+    <item quantity="other">سيتم ترخيص هذه الصور تحت %1$s</item>
+  </plurals>
   <string name="media_upload_policy">بتقديم هذه الصورة، أعلن أن هذا عملي الخاص، وأنه لا يحتوي على مواد محفوظة الحقوق أو صور شخصية، وغير ذلك يلتزم &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines\"&gt;بسياسات ويكيميديا ​​كومنز&lt;/a&gt;.</string>
   <string name="menu_download">نزّل</string>
   <string name="preference_license">الرخصة الافتراضية</string>
@@ -171,6 +174,7 @@
   <string name="detail_description_empty">لا وصف</string>
   <string name="detail_license_empty">ترخيص غير معلوم</string>
   <string name="menu_refresh">تحديث</string>
+  <string name="storage_permission_title">طلب إذن التخزين</string>
   <string name="read_storage_permission_rationale">صلاحية مطلوبة: قراءة وحدة التخزين الخارجية، لا يمكن للتطبيق الوصول إلى معرض الصور الخاص بك بدونها.</string>
   <string name="write_storage_permission_rationale">صلاحية مطلوبة: كتابة وحدة التخزين الخارجية، لا يمكن للتطبيق الوصول إلى معرض الصور الخاص بك بدونها.</string>
   <string name="location_permission_rationale">صلاحية اختيارية: احصل على الموقع الحالي لاقتراحات التصنيفات</string>
@@ -242,6 +246,12 @@
   <string name="description_info">يُرجَى وصف الوسائط قدر الإمكان: أين تم التقاطها؟ ما تظهر؟ ما هو السياق؟ يُرجَى وصف الأشياء أو الأشخاص، اكشف المعلومات التي لا يمكن تخمينها بسهولة، على سبيل المثال الوقت في اليوم إذا كان منظرا طبيعيا، إذا أظهرت الوسائط شيئا غير عادي، فيُرجَى توضيح ما يجعله غير عادي.</string>
   <string name="upload_image_too_dark">هذه الصورة مظلمة للغاية، هل أنت متأكد من رغبتك في رفعها؟ ويكيميديا ​​كومنز للصور ذات القيمة الموسوعية فقط.</string>
   <string name="upload_image_blurry">هذه الصورة ضبابية، هل أنت متأكد من رغبتك في رفعها؟ ويكيميديا ​​كومنز للصور ذات القيمة الموسوعية فقط.</string>
+  <string name="upload_problem_exist">مشاكل محتملة في هذه الصورة:</string>
+  <string name="upload_problem_image_dark">الصورة مظلمة للغاية.</string>
+  <string name="upload_problem_image_blurry">الصورة ضبابية.</string>
+  <string name="upload_problem_image_duplicate">الصورة موجودة بالفعل في كومنز.</string>
+  <string name="upload_problem_different_geolocation">تم التقاط هذه الصورة في موقع مختلف.</string>
+  <string name="upload_problem_do_you_continue">هل ما زلت تريد رفع هذه الصورة؟</string>
   <string name="give_permission">إعطاء السماح</string>
   <string name="use_external_storage">استخدم تخزينا خارجيا</string>
   <string name="use_external_storage_summary">احفظ الصور الملتقطة بالكاميرا داخل التطبيق على جهازك</string>
@@ -257,7 +267,7 @@
   <string name="skip_login">تخطي</string>
   <string name="navigation_item_login">تسجيل الدخول</string>
   <string name="skip_login_title">هل تريد حقا تخطي تسجيل الدخول؟</string>
-  <string name="skip_login_message">لن تتمكن من رفع الصور.</string>
+  <string name="skip_login_message">يجب عليك تسجيل الدخول لرفع الصور في المستقبل.</string>
   <string name="login_alert_message">الرجاء تسجيل الدخول لاستخدام هذه الميزة</string>
   <string name="copy_wikicode">انسخ نص الويكي إلى الكليب بورد</string>
   <string name="wikicode_copied">نص الويكي تم نسخه إلى الكليب بورد</string>
@@ -306,6 +316,8 @@
   <string name="provider_searches">طلبات البحث التي تم البحث عنها مؤخرا</string>
   <string name="error_loading_categories">حدث خطأ أثناء تحميل التصنيفات.</string>
   <string name="error_loading_subcategories">حدث خطأ أثناء تحميل التصنيفات الفرعية.</string>
+  <string name="search_tab_title_media">وسائط</string>
+  <string name="search_tab_title_categories">تصنيفات</string>
   <string name="successful_wikidata_edit">تمت إضافة الصورة بنجاح إلى %1$s في ويكي بيانات!</string>
   <string name="wikidata_edit_failure">فشل في تحديث كيان ويكي بيانات المقابل!</string>
   <string name="menu_set_wallpaper">تعيين كخلفية</string>
@@ -334,6 +346,7 @@
   <string name="share_coordinates_not_present">لم يتم تحديد الإحداثيات أثناء اختيار الصورة</string>
   <string name="error_fetching_nearby_places">خطأ في جلب الأماكن المجاورة.</string>
   <string name="add_description">+ إضافة الوصف</string>
+  <string name="no_recent_searches">لا توجد عمليات بحث حديثة</string>
   <string name="delete_recent_searches_dialog">هل أنت متأكد من أنك تريد مسح سجل بحثك؟</string>
   <string name="search_history_deleted">تم حذف سجل البحث</string>
   <string name="nominate_delete">ترشيح للحذف</string>
@@ -353,6 +366,10 @@
   <string name="images_used_explanation">عدد الصور التي قمت برفعها إلى كومنز والتي تم استخدامها في مقالات ويكيميديا</string>
   <string name="error_occurred">حدث خطأ!</string>
   <string name="notifications_channel_name_all">إشعار كومنز</string>
+  <string name="preference_author_name_toggle">استخدم اسم مؤلف مخصصا</string>
+  <string name="preference_author_name_toggle_summary">استخدم اسم مؤلف مخصصا بدلا من اسم المستخدم الخاص بك أثناء رفع الصور</string>
+  <string name="preference_author_name">اسم المؤلف المخصص</string>
+  <string name="preference_author_name_summary">اسم المؤلف المخصص لاستخدامه بدلا من اسم المستخدم الخاص بك في المرفوعات</string>
   <string name="contributions_fragment">مساهمات</string>
   <string name="nearby_fragment">مجاور</string>
   <string name="notifications">الإشعارات</string>
@@ -404,4 +421,26 @@
   <string name="yes_submit">نعم، ارسل</string>
   <string name="no_go_back">لا، العودة</string>
   <string name="upload_flow_all_images_in_set">(لجميع الصور في مجموعة)</string>
+  <string name="search_this_area">ابحث في هذا المجال</string>
+  <string name="nearby_card_permission_title">طلب إذن</string>
+  <string name="nearby_card_permission_explanation">هل تريد منا استخدام موقعك الحالي لعرض أقرب مكان يحتاج إلى صور؟</string>
+  <string name="unable_to_display_nearest_place">يتعذر عرض أقرب مكان يحتاج إلى صور بدون أذونات الموقع</string>
+  <string name="never_ask_again">لا تسأل هذا مرة أخرى</string>
+  <string name="display_location_permission_title">عرض إذن الموقع</string>
+  <string name="display_location_permission_explanation">اطلب إذن الموقع عند الحاجة إلى ميزة عرض بطاقة التنبيه القريبة.</string>
+  <string name="achievements_fetch_failed">حدث خطأ ما; لم نتمكن من جلب إنجازاتك</string>
+  <string name="ends_on">ينتهي في:</string>
+  <string name="display_campaigns">عرض الحملات</string>
+  <string name="display_campaigns_explanation">انقر هنا لمشاهدة الحملات الجارية</string>
+  <string name="nearby_campaign_dismiss_message">لن ترى الحملات بعد الآن، ومع ذلك، يمكنك إعادة تمكين هذا الإشعار في الإعدادات إذا كنت ترغب.</string>
+  <string name="this_function_needs_network_connection">تتطلب هذه الوظيفة الاتصال بالشبكة; يُرجَى التحقق من إعدادات اتصالك.</string>
+  <string name="bad_token_error_proposed_solution">فشل التحميل بسبب مشكلات في الرمز المميز للتعديل تُرجَى محاولة تسجيل الخروج والدخول مرة ​​أخرى.</string>
+  <string name="error_processing_image">حدث خطأ أثناء معالجة الصورة. رجاءً حاول مرة أخرى!</string>
+  <plurals name="receiving_shared_content">
+    <item quantity="one">جارٍ تلقي محتوى مشترك، قد تستغرق معالجة الصورة بعض الوقت بناءً على حجم الصور وجهازك</item>
+    <item quantity="other">جارٍ تلقي محتوى مشترك، قد تستغرق معالجة الصور بعض الوقت بناءً على حجم الصور وجهازك</item>
+  </plurals>
+  <string name="no_image">لا صور مستخدمة</string>
+  <string name="no_image_reverted">لم يتم إرجاع أية صور</string>
+  <string name="no_image_uploaded">لا توجد صور مرفوعة</string>
 </resources>

@@ -109,7 +109,7 @@
   <string name="no_uploads_yet">Aínda non cargou ningunha foto.</string>
   <string name="menu_retry_upload">Reintentar</string>
   <string name="menu_cancel_upload">Cancelar</string>
-  <string name="share_license_summary">Esta imaxe quedará baixo a licenza %1$s</string>
+  <string name="share_license_summary" fuzzy="true">Esta imaxe quedará baixo a licenza %1$s</string>
   <string name="media_upload_policy">Publicando esta imaxe, declaro que é da miña obra, que non contén material con dereitos de autor ou selfies e que se adhire ás &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines\"&gt;Políticas de Wikimedia Commons&lt;/a&gt;.</string>
   <string name="menu_download">Descargar</string>
   <string name="preference_license">Licenza por defecto</string>
@@ -239,6 +239,12 @@
   <string name="description_info">Por favor, describa o ficheiro todo o posibleː Onde se gravou? Cal é o contexto? Por favor, describa os obxectos ou persoas. Indique información que non pode ser adiviñada de forma doada, por exemplo, a hora do día se é unha paisaxe. Se o ficheiro amosa algo pouco habitual, por favor, explique que é o que o fai excepcional.</string>
   <string name="upload_image_too_dark">Esta imaxe está demasiado escura; está seguro de que desexa subila? Wikimedia Commons só acepta imaxes de valor enciclopédico.</string>
   <string name="upload_image_blurry">Esta imaxe está desenfocada, está seguro que quere subila? Wikimedia Commons só acepta imaxes con valor enciclopédico.</string>
+  <string name="upload_problem_exist">Potenciais problemas con esta imaxeː</string>
+  <string name="upload_problem_image_dark">A imaxe é demasiado escura.</string>
+  <string name="upload_problem_image_blurry">A imaxe está borrosa.</string>
+  <string name="upload_problem_image_duplicate">A imaxe xa está en Commons.</string>
+  <string name="upload_problem_different_geolocation">Esta imaxe foi realizada nunha localización diferente.</string>
+  <string name="upload_problem_do_you_continue">Aínda quere subir esta imaxe?</string>
   <string name="give_permission">Outorgar permiso</string>
   <string name="use_external_storage">Usar o almacenamento externo</string>
   <string name="use_external_storage_summary">Gardar as imaxes capturadas coa cámara do seu dispositivo</string>
@@ -254,7 +260,7 @@
   <string name="skip_login">Omitir</string>
   <string name="navigation_item_login">Acceder ao sistema</string>
   <string name="skip_login_title">Realmente quere saltar o inicio de sesión?</string>
-  <string name="skip_login_message">Non poderá subir imaxes.</string>
+  <string name="skip_login_message" fuzzy="true">Non poderá subir imaxes.</string>
   <string name="login_alert_message">Por favor, inicie a sesión para usar esta funcionalidade</string>
   <string name="copy_wikicode">Copiar o texto wiki ó portapapeis</string>
   <string name="wikicode_copied">Texto wiki copiado ó portapapeis</string>
@@ -303,6 +309,8 @@
   <string name="provider_searches">Consultas buscadas recentemente</string>
   <string name="error_loading_categories">Houbo un erro ó cargar categorías.</string>
   <string name="error_loading_subcategories">Houbo un erro ó cargar subcategorías.</string>
+  <string name="search_tab_title_media">MULTIMEDIA</string>
+  <string name="search_tab_title_categories">CATEGORÍAS</string>
   <string name="successful_wikidata_edit">A imaxe engadiuse con éxito a %1$s en Wikidata!</string>
   <string name="wikidata_edit_failure">Fallou a actualización da entidade do Wikidata correspondente!</string>
   <string name="menu_set_wallpaper">Poñer como imaxe de fondo</string>
@@ -331,8 +339,10 @@
   <string name="share_coordinates_not_present">Non se indicaron as coordenadas ó seleccionar a imaxe</string>
   <string name="error_fetching_nearby_places">Erro ó procurar os lugares próximos.</string>
   <string name="add_description">+ Engadir descrición</string>
+  <string name="no_recent_searches">Non hai procuras recentes</string>
   <string name="delete_recent_searches_dialog">Está seguro de querer borrar o seu historial de procuras?</string>
   <string name="search_history_deleted">Eliminouse o historial de procuras</string>
+  <string name="nominate_delete">Nomear para borrado</string>
   <string name="Achievements">Logros</string>
   <string name="statistics">ESTATÍSTICAS</string>
   <string name="statistics_thanks">Agradecementos recibidos</string>
@@ -349,19 +359,31 @@
   <string name="images_used_explanation">O número de imaxes que cargou en Commons e que foron utilizadas en artigos de Wikimedia</string>
   <string name="error_occurred">Ocorreu un erro!</string>
   <string name="notifications_channel_name_all">Notificación de Commons</string>
+  <string name="preference_author_name_toggle">Usar nome personalizado de autor</string>
+  <string name="preference_author_name_toggle_summary">Usar un nome personalizado de autor en lugar do seu nome de usuario á hora de cargar imaxes</string>
+  <string name="preference_author_name">Nome personalizado de autor</string>
+  <string name="preference_author_name_summary">O nome personalizado de autor a utilizar nas cargas en lugar do seu nome de usuario</string>
   <string name="contributions_fragment">Contribucións</string>
   <string name="nearby_fragment">Preto</string>
   <string name="notifications">Notificacións</string>
   <string name="display_nearby_notification">Amosar notificacións de proximidade</string>
   <string name="display_nearby_notification_summary">Prema aquí para ver o lugar máis preto que necesita fotos</string>
+  <string name="no_close_nearby">Non se atoparon lugares preto de ti</string>
   <string name="list_sheet">Lista</string>
   <string name="storage_permission">Permiso de almacenamento</string>
   <string name="write_storage_permission_rationale_for_image_share">Precisamos o seu permiso para acceder ó almacenamento externo do seu dispositivo para cargar imaxes.</string>
+  <string name="nearby_notification_dismiss_message">Xa non verá o lugar máis próximo que precisa fotos. Porén, podes volver habilitar esta notificación na configuración.</string>
   <string name="step_count">Paso %1$d de %2$d</string>
   <string name="image_in_set_label">Imaxe %1$d do conxunto</string>
   <string name="next">Seguinte</string>
   <string name="previous">Anterior</string>
   <string name="submit">Enviar</string>
+  <string name="upload_title_duplicate">Xa existe un ficheiro co nome %1$s. Está seguro que quere continuar?</string>
+  <string name="map_application_missing">Non se atopou ningunha aplicación de mapas compatible no seu dispositivo. Por favor, instale unha aplicación de mapas para usar esta funcionalidade.</string>
+  <plurals name="upload_count_title">
+    <item quantity="one">%1$d carga</item>
+    <item quantity="other">%1$d cargas</item>
+  </plurals>
   <string name="navigation_item_bookmarks">Favoritos</string>
   <string name="title_activity_bookmarks">Favoritos</string>
   <string name="title_page_bookmarks_pictures">Imaxes</string>
@@ -371,6 +393,13 @@
   <string name="bookmark_empty">Non engadiu ningún favorito</string>
   <string name="provider_bookmarks_location">Favoritos</string>
   <string name="log_collection_started">Comezou a gravación de rexistros. Por favor reinicie a aplicación, realice a acción que desexa rexistrar, e pulse \"Enviar ficheiro de rexistros\" de novo</string>
+  <string name="deletion_reason_uploaded_by_mistake">Cargueina por equivocación</string>
+  <string name="deletion_reason_publicly_visible">Non sabía que sería visible de forma pública</string>
+  <string name="deletion_reason_bad_for_my_privacy">Decateime de que prexudica a miña privacidade</string>
+  <string name="deletion_reason_no_longer_want_public">Cambiei de idea, non quero que siga sendo visible de forma pública</string>
+  <string name="deletion_reason_not_interesting">Desculpas, esta imaxe non é interesante para unha enciclopedia</string>
+  <string name="uploaded_by_myself">Cargada por min o</string>
+  <string name="used_by">, usada en</string>
   <string name="articles">artigos</string>
   <string name="no_uploads">Benvido a Commonsǃ\n\nCargue o seu primeiro ficheiro premendo na icona da cámara ou da galería enriba.</string>
   <string name="desc_language_Worldwide">Mundial</string>
@@ -381,7 +410,12 @@
   <string name="desc_language_Asia">Asia</string>
   <string name="desc_language_Pacific">Pacífico</string>
   <string name="no_categories_selected">Non hai categorías seleccionadas</string>
+  <string name="no_categories_selected_warning_desc">As imaxes sen categorías só son utilizables en contadas ocasións. Está seguro de que quere cargar sen seleccionar categorías?</string>
   <string name="yes_submit">Si, enviar</string>
   <string name="no_go_back">Non, voltar</string>
   <string name="upload_flow_all_images_in_set">(Para tódalas imaxes no conxunto)</string>
+  <string name="search_this_area">Procurar nesta área</string>
+  <string name="nearby_card_permission_title">Solicitude de permisos</string>
+  <string name="never_ask_again">Non volver a preguntar isto nunca</string>
+  <string name="ends_on">Finaliza o:</string>
 </resources>

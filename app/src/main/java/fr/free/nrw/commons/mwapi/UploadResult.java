@@ -34,6 +34,17 @@ public class UploadResult {
         this.imageUrl = imageUrl;
     }
 
+    @Override
+    public String toString() {
+        return "UploadResult{" +
+                "errorCode='" + errorCode + '\'' +
+                ", resultStatus='" + resultStatus + '\'' +
+                ", dateUploaded='" + dateUploaded.toString() + '\'' +
+                ", imageUrl='" + imageUrl + '\'' +
+                ", canonicalFilename='" + canonicalFilename + '\'' +
+                '}';
+    }
+
     /**
      * Gets uploaded date
      * @return Upload date

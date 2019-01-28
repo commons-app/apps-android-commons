@@ -112,7 +112,7 @@
   <string name="no_uploads_yet">আপনি এখনও কোনো ছবি আপলোড করেননি।</string>
   <string name="menu_retry_upload">পুনঃচেষ্টা করুন</string>
   <string name="menu_cancel_upload">বাতিল</string>
-  <string name="share_license_summary">এই ছবিটি %1$s এর অধীনে লাইসেন্স করা হবে</string>
+  <string name="share_license_summary" fuzzy="true">এই ছবিটি %1$s এর অধীনে লাইসেন্স করা হবে</string>
   <string name="media_upload_policy">এই চিত্র জমা দেয়ার দ্বারা, আমি ঘোষণা দিচ্ছি যে এটি আমার নিজস্ব কাজ, এতে কপিরাইটযুক্ত উপাদান নেই বা এটই সেলফি নয়, এবং &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines/bn\"&gt;উইকিমিডিয়া কমন্স নীতি&lt;/a&gt; অনুসরণ করে।</string>
   <string name="menu_download">ডাউনলোড</string>
   <string name="preference_license">পূর্বনির্ধারিত লাইসেন্স</string>

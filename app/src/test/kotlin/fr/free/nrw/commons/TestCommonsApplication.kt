@@ -2,7 +2,6 @@ package fr.free.nrw.commons
 
 import android.content.ContentProviderClient
 import android.content.Context
-import android.content.SharedPreferences
 import android.support.v4.util.LruCache
 import com.google.gson.Gson
 import com.nhaarman.mockito_kotlin.mock
@@ -13,6 +12,8 @@ import fr.free.nrw.commons.data.DBOpenHelper
 import fr.free.nrw.commons.di.CommonsApplicationComponent
 import fr.free.nrw.commons.di.CommonsApplicationModule
 import fr.free.nrw.commons.di.DaggerCommonsApplicationComponent
+import fr.free.nrw.commons.kvstore.BasicKvStore
+import fr.free.nrw.commons.kvstore.JsonKvStore
 import fr.free.nrw.commons.location.LocationServiceManager
 import fr.free.nrw.commons.mwapi.MediaWikiApi
 import fr.free.nrw.commons.nearby.NearbyPlaces
@@ -37,9 +38,9 @@ class TestCommonsApplication : CommonsApplication() {
 @Suppress("MemberVisibilityCanBePrivate")
 class MockCommonsApplicationModule(appContext: Context) : CommonsApplicationModule(appContext) {
     val accountUtil: AccountUtil = mock()
-    val appSharedPreferences: SharedPreferences = mock()
-    val defaultSharedPreferences: SharedPreferences = mock()
-    val otherSharedPreferences: SharedPreferences = mock()
+    val appSharedPreferences: BasicKvStore = mock()
+    val defaultSharedPreferences: BasicKvStore = mock()
+    val otherSharedPreferences: BasicKvStore = mock()
     val uploadController: UploadController = mock()
     val mockSessionManager: SessionManager = mock()
     val locationServiceManager: LocationServiceManager = mock()
@@ -50,7 +51,7 @@ class MockCommonsApplicationModule(appContext: Context) : CommonsApplicationModu
     val categoryClient: ContentProviderClient = mock()
     val contributionClient: ContentProviderClient = mock()
     val modificationClient: ContentProviderClient = mock()
-    val uploadPrefs: SharedPreferences = mock()
+    val uploadPrefs: JsonKvStore = mock()
 
     override fun provideCategoryContentProviderClient(context: Context?): ContentProviderClient = categoryClient
 
@@ -58,19 +59,19 @@ class MockCommonsApplicationModule(appContext: Context) : CommonsApplicationModu
 
     override fun provideModificationContentProviderClient(context: Context?): ContentProviderClient = modificationClient
 
-    override fun providesDirectNearbyUploadPreferences(context: Context?): SharedPreferences = uploadPrefs
+    override fun providesDirectNearbyUploadKvStore(context: Context?, gson: Gson): JsonKvStore = uploadPrefs
 
     override fun providesAccountUtil(context: Context): AccountUtil = accountUtil
 
-    override fun providesApplicationSharedPreferences(context: Context): SharedPreferences = appSharedPreferences
+    override fun providesApplicationKvStore(context: Context): BasicKvStore = appSharedPreferences
 
-    override fun providesDefaultSharedPreferences(context: Context): SharedPreferences = defaultSharedPreferences
+    override fun providesDefaultKvStore(context: Context): BasicKvStore = defaultSharedPreferences
 
-    override fun providesOtherSharedPreferences(context: Context): SharedPreferences = otherSharedPreferences
+    override fun providesOtherKvStore(context: Context): BasicKvStore = otherSharedPreferences
 
-    override fun providesUploadController(sessionManager: SessionManager, sharedPreferences: SharedPreferences, context: Context): UploadController = uploadController
+    override fun providesUploadController(sessionManager: SessionManager, sharedPreferences: BasicKvStore, context: Context): UploadController = uploadController
 
-    override fun providesSessionManager(context: Context, mediaWikiApi: MediaWikiApi, sharedPreferences: SharedPreferences): SessionManager = mockSessionManager
+    override fun providesSessionManager(context: Context, mediaWikiApi: MediaWikiApi, sharedPreferences: BasicKvStore): SessionManager = mockSessionManager
 
     override fun provideLocationServiceManager(context: Context): LocationServiceManager = locationServiceManager
 

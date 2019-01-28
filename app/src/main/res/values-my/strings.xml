@@ -81,7 +81,7 @@
   <string name="no_uploads_yet">သင် မည်သည့်ဓာတ်ပုံကိုမှ မတင်ရသေးပါ။</string>
   <string name="menu_retry_upload">ပြန်လုပ်</string>
   <string name="menu_cancel_upload">မလုပ်တော့</string>
-  <string name="share_license_summary">ဤရုပ်ပုံသည် %1$ အောက်တွင် လိုင်စင်သတ်မှတ်ထးပါမည်</string>
+  <string name="share_license_summary" fuzzy="true">ဤရုပ်ပုံသည် %1$ အောက်တွင် လိုင်စင်သတ်မှတ်ထးပါမည်</string>
   <string name="menu_download">ဒေါင်းလုပ်ယူရန်</string>
   <string name="preference_license">နဂို လိုင်စင်</string>
   <string name="use_previous">ယခင် ခေါင်းစဉ်/ဖော်ပြချက် သုံးမည်</string>
@@ -185,7 +185,7 @@
   <string name="skip_login">ကျော်ရန်</string>
   <string name="navigation_item_login">အကောင့်ဝင်ရန်</string>
   <string name="skip_login_title">အကောင့်ထဲဝင်ခြင်းကို အမှန်တကယ် ကျော်သွားလိုပါသလား</string>
-  <string name="skip_login_message">သင် ရုပ်ပုံများ တင်နိုင်လိမ့်မည်မဟုတ်ပါ။</string>
+  <string name="skip_login_message" fuzzy="true">သင် ရုပ်ပုံများ တင်နိုင်လိမ့်မည်မဟုတ်ပါ။</string>
   <string name="login_alert_message">ဤအင်္ဂါရပ်ကို အသုံးပြုရန် အကောင့်ထဲသို့ဝင်ပါ</string>
   <string name="nearby_location_has_not_changed">တည်နေရာ မပြောင်းလဲပါ</string>
   <string name="nearby_location_not_available">တည်နေရာ မရရှိနိုင်ပါ</string>
@@ -219,6 +219,8 @@
   <string name="search_recent_header">လတ်တလော ရှာဖွေမှုများ :</string>
   <string name="error_loading_categories">ကဏ္ဍများကို ဝန်ဆွဲတင်နေစဉ် အမှားဖြစ်ပွားခဲ့ပါသည်။</string>
   <string name="error_loading_subcategories">ကဏ္ဍခွဲများကို ဝန်ဆွဲတင်နေစဉ် အမှားဖြစ်ပွားခဲ့ပါသည်။</string>
+  <string name="search_tab_title_media">မီဒီယာ</string>
+  <string name="search_tab_title_categories">ကဏ္ဍများ</string>
   <string name="quiz">ထွက်</string>
   <string name="quiz_question_string">ဤရုပ်ပုံကို တင်ရန် အဆင်ပြေပါ့မလား?</string>
   <string name="question">မေးခွန်း</string>

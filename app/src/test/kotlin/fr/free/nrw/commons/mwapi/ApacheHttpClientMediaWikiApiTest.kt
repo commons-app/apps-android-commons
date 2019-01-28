@@ -1,12 +1,11 @@
 package fr.free.nrw.commons.mwapi
 
-import android.content.SharedPreferences
-import android.net.Uri
 import android.os.Build
-import android.preference.PreferenceManager
 import com.google.gson.Gson
 import fr.free.nrw.commons.BuildConfig
 import fr.free.nrw.commons.TestCommonsApplication
+import fr.free.nrw.commons.kvstore.BasicKvStore
+import fr.free.nrw.commons.utils.ConfigUtils
 import okhttp3.OkHttpClient
 import okhttp3.mockwebserver.MockResponse
 import okhttp3.mockwebserver.MockWebServer
@@ -20,8 +19,6 @@ import org.mockito.Mockito.mock
 import org.robolectric.RobolectricTestRunner
 import org.robolectric.RuntimeEnvironment
 import org.robolectric.annotation.Config
-import timber.log.Timber
-import java.io.InputStream
 import java.net.URLDecoder
 import java.text.SimpleDateFormat
 import java.util.*
@@ -33,8 +30,8 @@ class ApacheHttpClientMediaWikiApiTest {
     private lateinit var testObject: ApacheHttpClientMediaWikiApi
     private lateinit var server: MockWebServer
     private lateinit var wikidataServer: MockWebServer
-    private lateinit var sharedPreferences: SharedPreferences
-    private lateinit var categoryPreferences: SharedPreferences
+    private lateinit var sharedPreferences: BasicKvStore
+    private lateinit var categoryPreferences: BasicKvStore
     private lateinit var okHttpClient: OkHttpClient
 
     @Before
@@ -42,8 +39,8 @@ class ApacheHttpClientMediaWikiApiTest {
         server = MockWebServer()
         wikidataServer = MockWebServer()
         okHttpClient = OkHttpClient()
-        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(RuntimeEnvironment.application)
-        categoryPreferences = PreferenceManager.getDefaultSharedPreferences(RuntimeEnvironment.application)
+        sharedPreferences = mock(BasicKvStore::class.java)
+        categoryPreferences = mock(BasicKvStore::class.java)
         testObject = ApacheHttpClientMediaWikiApi(RuntimeEnvironment.application, "http://" + server.hostName + ":" + server.port + "/", "http://" + wikidataServer.hostName + ":" + wikidataServer.port + "/", sharedPreferences, categoryPreferences, Gson(), okHttpClient)
         testObject.setWikiMediaToolforgeUrl("http://" + server.hostName + ":" + server.port + "/")
     }
@@ -189,10 +186,26 @@ class ApacheHttpClientMediaWikiApiTest {
 
     @Test
     fun editToken() {
-        server.enqueue(MockResponse().setBody("<?xml version=\"1.0\"?><api><centralauthtoken centralauthtoken=\"abc\" /></api>"))
         server.enqueue(MockResponse().setBody("<?xml version=\"1.0\"?><api><query><tokens csrftoken=\"baz\" /></query></api>"))
 
         val result = testObject.editToken
+
+        assertBasicRequestParameters(server, "POST").let { editTokenRequest ->
+            parseBody(editTokenRequest.body.readUtf8()).let { body ->
+                assertEquals("query", body["action"])
+                assertEquals("tokens", body["meta"])
+            }
+        }
+
+        assertEquals("baz", result)
+    }
+
+    @Test
+    fun getWikidataEditToken() {
+        server.enqueue(MockResponse().setBody("<?xml version=\"1.0\"?><api><centralauthtoken centralauthtoken=\"abc\" /></api>"))
+        wikidataServer.enqueue(MockResponse().setBody("<?xml version=\"1.0\"?><api><query><tokens csrftoken=\"baz\" /></query></api>"))
+
+        val result = testObject.wikidataCsrfToken
 
         assertBasicRequestParameters(server, "GET").let { centralAuthTokenRequest ->
             parseQueryParams(centralAuthTokenRequest).let { params ->
@@ -201,7 +214,7 @@ class ApacheHttpClientMediaWikiApiTest {
             }
         }
 
-        assertBasicRequestParameters(server, "POST").let { editTokenRequest ->
+        assertBasicRequestParameters(wikidataServer, "POST").let { editTokenRequest ->
             parseBody(editTokenRequest.body.readUtf8()).let { body ->
                 assertEquals("query", body["action"])
                 assertEquals("abc", body["centralauthtoken"])
@@ -324,7 +337,7 @@ class ApacheHttpClientMediaWikiApiTest {
     private fun assertBasicRequestParameters(server: MockWebServer, method: String): RecordedRequest = server.takeRequest().let {
         assertEquals("/", it.requestUrl.encodedPath())
         assertEquals(method, it.method)
-        assertEquals("Commons/${BuildConfig.VERSION_NAME} (https://mediawiki.org/wiki/Apps/Commons) Android/${Build.VERSION.RELEASE}",
+        assertEquals("Commons/${ConfigUtils.getVersionNameWithSha(RuntimeEnvironment.application)} (https://mediawiki.org/wiki/Apps/Commons) Android/${Build.VERSION.RELEASE}",
                 it.getHeader("User-Agent"))
         if ("POST" == method) {
             assertEquals("application/x-www-form-urlencoded", it.getHeader("Content-Type"))

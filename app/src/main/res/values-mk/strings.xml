@@ -103,7 +103,7 @@
   <string name="no_uploads_yet">Сè уште немате подигнато ниедна слика.</string>
   <string name="menu_retry_upload">Пробај пак</string>
   <string name="menu_cancel_upload">Откажи</string>
-  <string name="share_license_summary">Сликава ќе се води под лиценцата %1$s</string>
+  <string name="share_license_summary" fuzzy="true">Сликава ќе се води под лиценцата %1$s</string>
   <string name="media_upload_policy">Поднесувајќи ја сликава, изјавувам дека истата е мое сопствено дело, дека не содржи никаков материјал заштитен со авторски права, не содржи самослици, и дека на секој друг начин е во склад со &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines/mk?uselang=mk\"&gt;правилата на Ризницата&lt;/a&gt;.</string>
   <string name="menu_download">Преземи</string>
   <string name="preference_license">Стандардна лиценца</string>
@@ -248,7 +248,7 @@
   <string name="skip_login">Прескокни</string>
   <string name="navigation_item_login">Најава</string>
   <string name="skip_login_title">Дали навистина сакате да ја прескокнете најавата?</string>
-  <string name="skip_login_message">Нема да можете да подигате слики.</string>
+  <string name="skip_login_message" fuzzy="true">Нема да можете да подигате слики.</string>
   <string name="login_alert_message">Најавете се за да ја користите оваа можност.</string>
   <string name="copy_wikicode">Прекопирај го викитекстот во меѓускладот</string>
   <string name="wikicode_copied">Викитекстот е прекопиран во меѓускладот</string>

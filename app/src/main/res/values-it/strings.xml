@@ -111,7 +111,10 @@
   <string name="no_uploads_yet">Non hai ancora caricato alcuna foto.</string>
   <string name="menu_retry_upload">Riprova</string>
   <string name="menu_cancel_upload">Annulla</string>
-  <string name="share_license_summary">Questa immagine sarà rilasciata in base alla licenza %1$s</string>
+  <plurals name="share_license_summary">
+    <item quantity="one">Questa immagine sarà rilasciata in base alla licenza %1$s</item>
+    <item quantity="other">Queste immagini saranno rilasciate in base alla licenza %1$s</item>
+  </plurals>
   <string name="media_upload_policy">Caricando questa immagine, dichiaro che questa è una mia opera, che non contiene materiale protetto da copyright o ritratti, e che comunque è conforme alle &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines\"&gt;Policy di Wikimedia Commons&lt;/a&gt;.</string>
   <string name="menu_download">Scarica</string>
   <string name="preference_license">Licenza predefinita</string>
@@ -214,6 +217,12 @@
   <string name="nearby_info_menu_commons_article">Pagina di Commons del file</string>
   <string name="nearby_info_menu_wikidata_article">Elemento Wikidata</string>
   <string name="nearby_info_menu_wikipedia_article">Voce Wikipedia</string>
+  <string name="upload_problem_exist">Potenziali problemi con questa immagine:</string>
+  <string name="upload_problem_image_dark">L\'immagine è troppo scura.</string>
+  <string name="upload_problem_image_blurry">L\'immagine è sfocata.</string>
+  <string name="upload_problem_image_duplicate">L\'immagine è già su Commons.</string>
+  <string name="upload_problem_different_geolocation">Questa foto è stata scattata in una posizione diversa.</string>
+  <string name="upload_problem_do_you_continue">Vuoi caricare lo stesso questa immagine?</string>
   <string name="give_permission">Dai autorizzazione</string>
   <string name="login_to_your_account">Accedi alla tua utenza</string>
   <string name="null_url">Errore! URL non trovato</string>
@@ -251,6 +260,7 @@
   <string name="search_recent_header">Ricerche recenti:</string>
   <string name="error_loading_categories">Si è verificato un errore durante il caricamento delle categorie.</string>
   <string name="error_loading_subcategories">Si è verificato un errore durante il caricamento delle sottocategorie.</string>
+  <string name="search_tab_title_categories">CATEGORIE</string>
   <string name="question">Domanda</string>
   <string name="result">Risultato</string>
   <string name="user_not_logged_in">Sessione di login scaduta, accedi nuovamente.</string>
@@ -305,4 +315,8 @@
   <string name="no_categories_selected">Nessuna categoria selezionata</string>
   <string name="yes_submit">Sì, invia</string>
   <string name="search_this_area">Cerca in questa area</string>
+  <string name="ends_on">Termina il:</string>
+  <string name="no_image">Nessuna immagine utilizzata</string>
+  <string name="no_image_reverted">Nessuna immagine ripristinata</string>
+  <string name="no_image_uploaded">Nessuna immagine caricata</string>
 </resources>

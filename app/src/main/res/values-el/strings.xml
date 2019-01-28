@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Authors:
 * Astralnet
+* Domdomegg
 * Evropi
 * Geraki
 * Glavkos
@@ -111,7 +112,7 @@
   <string name="no_uploads_yet">Ακόμα δεν έχετε ανεβάσει φωτογραφίες.</string>
   <string name="menu_retry_upload">Ξαναπροσπαθήστε</string>
   <string name="menu_cancel_upload">Ακύρωση</string>
-  <string name="share_license_summary">Αυτή η εικόνα θα έχει άδεια στα πλαίσια του %1$s</string>
+  <string name="share_license_summary" fuzzy="true">Αυτή η εικόνα θα έχει άδεια στα πλαίσια του %1$s</string>
   <string name="media_upload_policy">Αποστέλλοντας αυτήν την εικόνα, δηλώνω πως αυτή η εργασία είναι δική μου, και δεν περιέχει υλικό άλλου συγγραφέα, και εκτός αυτού πρόσκειται στο , thathref=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines\"&gt;Κοινές πολιτικές της Wikipedia&lt;/a&gt;.</string>
   <string name="menu_download">Λήψη</string>
   <string name="preference_license">Προεπιλεγμένη άδεια</string>
@@ -224,7 +225,7 @@
   <string name="navigation_item_home">Αρχική Σελίδα</string>
   <string name="navigation_item_upload">Φορτώστε</string>
   <string name="navigation_item_nearby">Εδώ Κοντά</string>
-  <string name="navigation_item_about">Γύρω από</string>
+  <string name="navigation_item_about">Σχετικά</string>
   <string name="navigation_item_settings">Ρυθμίσεις</string>
   <string name="navigation_item_feedback">Σχόλια</string>
   <string name="navigation_item_logout">Αποσύνδεση</string>
@@ -256,7 +257,7 @@
   <string name="skip_login">Παράβλεψη</string>
   <string name="navigation_item_login">Είσοδος</string>
   <string name="skip_login_title">Θέλετε πραγματικά να παραβλέψετε τη σύνδεση;</string>
-  <string name="skip_login_message">Δεν θα έχετε τη δυνατότητα να ανεβάζετε εικόνες.</string>
+  <string name="skip_login_message" fuzzy="true">Δεν θα έχετε τη δυνατότητα να ανεβάζετε εικόνες.</string>
   <string name="login_alert_message">Παρακαλούμε συνδεθείτε για να χρησιμοποιήσετε αυτό το χαρακτηριστικό</string>
   <string name="nearby_location_has_not_changed">Ο εντοπισμός δεν έχει αλλάξει.</string>
   <string name="nearby_location_not_available">Ο τόπος δεν είναι διαθέσιμος.</string>
@@ -303,6 +304,8 @@
   <string name="provider_searches">Πρόσφατα αναζητημένα ερωτήματα</string>
   <string name="error_loading_categories">Συνέβη σφάλμα κατά τη φόρτωση κατηγοριών.</string>
   <string name="error_loading_subcategories">Συνέβη σφάλμα κατά τη φόρτωση υποκατηγοριών.</string>
+  <string name="search_tab_title_media">Μέσα ενημέρωσης</string>
+  <string name="search_tab_title_categories">Κατηγορίες</string>
   <string name="successful_wikidata_edit">Η εικόνα προστέθηκε επιτυχώς στο %1$s στο Wikidata!</string>
   <string name="wikidata_edit_failure">Αποτυχία ενημέρωσης της αντιστοιχούσας οντότητας του Wikidata!</string>
   <string name="menu_set_wallpaper">Ρύθμιση ως ταπετσαρία</string>

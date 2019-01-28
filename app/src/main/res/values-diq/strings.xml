@@ -27,7 +27,7 @@
   <string name="upload_failed">Dosya nêvineya. Dosyê da bine bıcerebnê.</string>
   <string name="authentication_failed" fuzzy="true">Tesdiq kerdış nebı</string>
   <string name="uploading_started">Barkerdış sertera!</string>
-  <string name="upload_completed_notification_title">%1$s bıbar!</string>
+  <string name="upload_completed_notification_title">%1$s bar bi!</string>
   <string name="upload_completed_notification_text">Barkerdışê xo pıro bıde.</string>
   <string name="upload_progress_notification_title_start">Barkerdışe %1$s sertera</string>
   <string name="upload_progress_notification_title_in_progress">%1$s beno bar!</string>
@@ -41,7 +41,7 @@
   <string name="title_activity_contributions">Barkerdışê mınê peyêni</string>
   <string name="contribution_state_queued">Ratneya</string>
   <string name="contribution_state_failed">Ebe ser nêkewt</string>
-  <string name="contribution_state_in_progress">%1$d%% temamya</string>
+  <string name="contribution_state_in_progress">%1$d%% temam</string>
   <string name="contribution_state_starting">Bar beno</string>
   <string name="menu_from_gallery">Galeri ra</string>
   <string name="menu_from_camera">Resım bıgêre</string>
@@ -92,7 +92,7 @@
   <string name="provider_categories">Karıyaye Kategoriyê peyêni</string>
   <string name="menu_retry_upload">Anciya bıcerrebne</string>
   <string name="menu_cancel_upload">Bıtexelne</string>
-  <string name="menu_download">Ron</string>
+  <string name="menu_download">Biya war</string>
   <string name="preference_license">Lisanso hesebiyaye</string>
   <string name="license_name_cc_by_sa"> Attribution-ShareAlike 3.0</string>
   <string name="license_name_cc_by">Attribution 3.0</string>
@@ -146,6 +146,10 @@
   <string name="showcase_view_got_it_button">Mı fehm kerd!</string>
   <string name="menu_search_button">Cıgeyrayış</string>
   <string name="title_activity_search">Cıgeyrayış</string>
+  <string name="search_tab_title_media">MEDYA</string>
+  <string name="search_tab_title_categories">KATEGORİYİ</string>
+  <string name="preference_author_name_toggle">Nameyê nuştekariyo xısusiyi bıgurene</string>
+  <string name="preference_author_name">Nameyê nuştekariyo xısusi</string>
   <string name="contributions_fragment">İştıraki</string>
   <string name="list_sheet">Liste</string>
   <string name="previous">Verên</string>

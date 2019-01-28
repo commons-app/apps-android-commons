@@ -94,7 +94,7 @@
   <string name="no_uploads_yet">Әлегә бер фото ла тейәмәгәнһең</string>
   <string name="menu_retry_upload">Йәнә бер тапҡыр</string>
   <string name="menu_cancel_upload">Кәрәкмәй</string>
-  <string name="share_license_summary">Был рәсем %1$s аҫтында лицензия аласаҡ</string>
+  <string name="share_license_summary" fuzzy="true">Был рәсем %1$s аҫтында лицензия аласаҡ</string>
   <string name="media_upload_policy">Был рәсемде ебәргәндә шуны раҫлайым: был минең шәхси эшем, автор хоҡуҡтарын һаҡлаған материал йәки селфи түгел, шулай уҡ Викискладтың &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines/ru\"&gt;ҡағиҙәләренә тап килә&lt;/a&gt;.</string>
   <string name="menu_download">Тейәргә</string>
   <string name="preference_license">Нығытылған рөхсәтнамә</string>

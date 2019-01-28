@@ -4,6 +4,22 @@
     android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+    <LinearLayout
+        android:id="@+id/toolbarLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="?attr/actionBarSize">
+        <include
+            android:id="@+id/toolbar"
+            layout="@layout/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="?attr/actionBarSize"
+        android:layout_below="@id/toolbarLayout">
 
     <ScrollView
         android:layout_width="wrap_content"
@@ -14,11 +30,7 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
-            <include
-                android:id="@+id/toolbar"
-                layout="@layout/toolbar"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -312,6 +324,7 @@
             </LinearLayout>
         </LinearLayout>
     </ScrollView>
+    </LinearLayout>
 
     <android.support.design.widget.NavigationView
         android:id="@+id/navigation_view"

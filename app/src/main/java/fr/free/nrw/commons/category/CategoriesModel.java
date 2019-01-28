@@ -1,6 +1,5 @@
 package fr.free.nrw.commons.category;
 
-import android.content.SharedPreferences;
 import android.text.TextUtils;
 
 import java.util.ArrayList;
@@ -13,6 +12,7 @@ import java.util.List;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
 import fr.free.nrw.commons.upload.GpsCategoryModel;
 import fr.free.nrw.commons.utils.StringSortingUtils;
@@ -24,8 +24,7 @@ public class CategoriesModel implements CategoryClickedListener {
 
     private final MediaWikiApi mwApi;
     private final CategoryDao categoryDao;
-    private final SharedPreferences prefs;
-    private final SharedPreferences directPrefs;
+    private final JsonKvStore directKvStore;
 
     private HashMap<String, ArrayList<String>> categoriesCache;
     private List<CategoryItem> selectedCategories;
@@ -34,12 +33,10 @@ public class CategoriesModel implements CategoryClickedListener {
     @Inject
     public CategoriesModel(MediaWikiApi mwApi,
                            CategoryDao categoryDao,
-                           @Named("default_preferences") SharedPreferences prefs,
-                           @Named("direct_nearby_upload_prefs") SharedPreferences directPrefs) {
+                           @Named("direct_nearby_upload_prefs") JsonKvStore directKvStore) {
         this.mwApi = mwApi;
         this.categoryDao = categoryDao;
-        this.prefs = prefs;
-        this.directPrefs = directPrefs;
+        this.directKvStore = directKvStore;
         this.categoriesCache = new HashMap<>();
         this.selectedCategories = new ArrayList<>();
     }
@@ -152,11 +149,11 @@ public class CategoriesModel implements CategoryClickedListener {
     }
 
     private boolean hasDirectCategories() {
-        return !directPrefs.getString("Category", "").equals("");
+        return !directKvStore.getString("Category", "").equals("");
     }
 
     private Observable<CategoryItem> directCategories() {
-        String directCategory = directPrefs.getString("Category", "");
+        String directCategory = directKvStore.getString("Category", "");
         List<String> categoryList = new ArrayList<>();
         Timber.d("Direct category found: " + directCategory);
 
