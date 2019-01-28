@@ -20,6 +20,7 @@ import javax.inject.Named;
 import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.auth.SessionManager;
 import fr.free.nrw.commons.contributions.Contribution;
+import fr.free.nrw.commons.contributions.UploadableFile;
 import fr.free.nrw.commons.kvstore.BasicKvStore;
 import fr.free.nrw.commons.nearby.Place;
 import fr.free.nrw.commons.settings.Prefs;
@@ -83,17 +84,16 @@ public class UploadModel {
     }
 
     @SuppressLint("CheckResult")
-    Observable<UploadItem> preProcessImages(List<Uri> mediaUris,
-                                            String mimeType,
+    Observable<UploadItem> preProcessImages(List<UploadableFile> uploadableFiles,
                                             Place place,
                                             String source,
                                             SimilarImageInterface similarImageInterface) {
         initDefaultValues();
 
-        return Observable.fromIterable(mediaUris)
-                .map(mediaUri -> {
-                    UploadItem item = getUploadItem(mimeType, place, source, similarImageInterface, mediaUri);
-                    imageProcessingService.checkImageQuality(place, mediaUri.getPath())
+        return Observable.fromIterable(uploadableFiles)
+                .map(uploadableFile -> {
+                    UploadItem item = getUploadItem(uploadableFile, place, source, similarImageInterface);
+                    imageProcessingService.checkImageQuality(place, uploadableFile.getFilePath())
                             .subscribeOn(Schedulers.computation())
                             .observeOn(AndroidSchedulers.mainThread())
                             .subscribe(item.imageQuality::onNext, Timber::e);
@@ -102,18 +102,16 @@ public class UploadModel {
     }
 
     @NonNull
-    private UploadItem getUploadItem(String mimeType,
+    private UploadItem getUploadItem(UploadableFile uploadableFile,
                                      Place place,
                                      String source,
-                                     SimilarImageInterface similarImageInterface,
-                                     Uri mediaUri) {
+                                     SimilarImageInterface similarImageInterface) {
         fileProcessor
-                .initFileDetails(Objects.requireNonNull(mediaUri.getPath()), context.getContentResolver());
-        long fileCreatedDate = getFileCreatedDate(mediaUri);
-        String fileExt = fileUtilsWrapper.getFileExt(mediaUri.getPath());
+                .initFileDetails(Objects.requireNonNull(uploadableFile.getFilePath()), context.getContentResolver());
+        long fileCreatedDate = getFileCreatedDate(Uri.parse(uploadableFile.getFilePath()));
+        String fileExt = fileUtilsWrapper.getFileExt(uploadableFile.getFilePath());
         GPSExtractor gpsExtractor = fileProcessor.processFileCoordinates(similarImageInterface);
-        return new UploadItem(mediaUri, mimeType, source, gpsExtractor,
-                fileExt, place, fileCreatedDate);
+        return new UploadItem(Uri.parse(uploadableFile.getFilePath()), uploadableFile.getMimeType(), source, gpsExtractor, fileExt, place, fileCreatedDate);
     }
 
     void onItemsProcessed(Place place, List<UploadItem> uploadItems) {
@@ -141,7 +139,7 @@ public class UploadModel {
     }
 
     /**
-     * Get file creation date from uri from all possible content providers
+     * Get filePath creation date from uri from all possible content providers
      *
      * @param media
      * @return
@@ -312,7 +310,8 @@ public class UploadModel {
     Observable<Contribution> buildContributions(List<String> categoryStringList) {
         return Observable.fromIterable(items).map(item ->
         {
-            Contribution contribution = new Contribution(item.mediaUri, null, item.title + "." + item.fileExt,
+            Contribution contribution = new Contribution(item.mediaUri, null,
+                    item.title + "." + item.fileExt,
                     Description.formatList(item.descriptions), -1,
                     null, null, sessionManager.getAuthorName(),
                     CommonsApplication.DEFAULT_EDIT_SUMMARY, item.gpsCoords.getCoords());

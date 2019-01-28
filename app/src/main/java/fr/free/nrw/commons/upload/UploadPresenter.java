@@ -1,7 +1,6 @@
 package fr.free.nrw.commons.upload;
 
 import android.annotation.SuppressLint;
-import android.net.Uri;
 
 import java.lang.reflect.Proxy;
 import java.util.ArrayList;
@@ -14,6 +13,7 @@ import javax.inject.Singleton;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.category.CategoriesModel;
 import fr.free.nrw.commons.contributions.Contribution;
+import fr.free.nrw.commons.contributions.UploadableFile;
 import fr.free.nrw.commons.kvstore.BasicKvStore;
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
 import fr.free.nrw.commons.nearby.Place;
@@ -66,16 +66,14 @@ public class UploadPresenter {
      * Passes the items received to {@link #uploadModel} and displays the items.
      *
      * @param media    The Uri's of the media being uploaded.
-     * @param mimeType the mimeType of the files.
      * @param source   File source from {@link Contribution.FileSource}
      */
     @SuppressLint("CheckResult")
-    void receive(List<Uri> media,
-                 String mimeType,
+    void receive(List<UploadableFile> media,
                  @Contribution.FileSource String source,
                  Place place) {
         Observable<UploadItem> uploadItemObservable = uploadModel
-                .preProcessImages(media, mimeType, place, source, similarImageInterface);
+                .preProcessImages(media, place, source, similarImageInterface);
 
         uploadItemObservable
                 .toList()

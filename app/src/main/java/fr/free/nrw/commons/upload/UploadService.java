@@ -52,6 +52,7 @@ public class UploadService extends HandlerService<Contribution> {
 
     public static final String ACTION_START_SERVICE = EXTRA_PREFIX + ".upload";
     public static final String EXTRA_SOURCE = EXTRA_PREFIX + ".source";
+    public static final String EXTRA_FILES = EXTRA_PREFIX + ".files";
     public static final String EXTRA_CAMPAIGN = EXTRA_PREFIX + ".campaign";
 
     @Inject MediaWikiApi mwApi;
@@ -64,7 +65,7 @@ public class UploadService extends HandlerService<Contribution> {
     private int toUpload;
 
     /**
-     * The file names of unfinished uploads, used to prevent overwriting
+     * The filePath names of unfinished uploads, used to prevent overwriting
      */
     private Set<String> unfinishedUploads = new HashSet<>();
 
@@ -341,7 +342,7 @@ public class UploadService extends HandlerService<Contribution> {
                 sequenceFileName = fileName;
             } else {
                 if (fileName.indexOf('.') == -1) {
-                    // We really should have appended a file type suffix already.
+                    // We really should have appended a filePath type suffix already.
                     // But... we might not.
                     sequenceFileName = fileName + " " + sequenceNumber;
                 } else {

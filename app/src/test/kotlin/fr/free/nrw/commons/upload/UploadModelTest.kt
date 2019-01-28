@@ -2,8 +2,8 @@ package fr.free.nrw.commons.upload
 
 import android.app.Application
 import android.content.Context
-import android.net.Uri
 import fr.free.nrw.commons.auth.SessionManager
+import fr.free.nrw.commons.contributions.UploadableFile
 import fr.free.nrw.commons.kvstore.BasicKvStore
 import fr.free.nrw.commons.mwapi.MediaWikiApi
 import fr.free.nrw.commons.nearby.Place
@@ -84,10 +84,7 @@ class UploadModelTest {
 
     @Test
     fun receive() {
-        val element = getElement()
-        val element2 = getElement()
-        var uriList: List<Uri> = mutableListOf<Uri>(element, element2)
-        val preProcessImages = uploadModel!!.preProcessImages(uriList, "image/jpeg", mock(Place::class.java), "external") { _, _ -> }
+        val preProcessImages = uploadModel!!.preProcessImages(getMediaList(), mock(Place::class.java), "external") { _, _ -> }
         preProcessImages.doOnComplete {
             assertTrue(uploadModel!!.items.size == 2)
         }
@@ -95,46 +92,31 @@ class UploadModelTest {
 
     @Test
     fun verifyPreviousNotAvailable() {
-        val element = getElement()
-        val element2 = getElement()
-        var uriList: List<Uri> = mutableListOf<Uri>(element, element2)
-        uploadModel!!.preProcessImages(uriList, "image/jpeg", mock(Place::class.java), "external") { _, _ -> }
+        uploadModel!!.preProcessImages(getMediaList(), mock(Place::class.java), "external") { _, _ -> }
         assertFalse(uploadModel!!.isPreviousAvailable)
     }
 
     @Test
     fun verifyNextAvailable() {
-        val element = getElement()
-        val element2 = getElement()
-        var uriList: List<Uri> = mutableListOf<Uri>(element, element2)
-        uploadModel!!.preProcessImages(uriList, "image/jpeg", mock(Place::class.java), "external") { _, _ -> }
+        uploadModel!!.preProcessImages(getMediaList(), mock(Place::class.java), "external") { _, _ -> }
         assertTrue(uploadModel!!.isNextAvailable)
     }
 
     @Test
     fun isSubmitAvailable() {
-        val element = getElement()
-        val element2 = getElement()
-        var uriList: List<Uri> = mutableListOf<Uri>(element, element2)
-        uploadModel!!.preProcessImages(uriList, "image/jpeg", mock(Place::class.java), "external") { _, _ -> }
+        uploadModel!!.preProcessImages(getMediaList(), mock(Place::class.java), "external") { _, _ -> }
         assertTrue(uploadModel!!.isNextAvailable)
     }
 
     @Test
     fun getCurrentStep() {
-        val element = getElement()
-        val element2 = getElement()
-        var uriList: List<Uri> = mutableListOf<Uri>(element, element2)
-        uploadModel!!.preProcessImages(uriList, "image/jpeg", mock(Place::class.java), "external") { _, _ -> }
+        uploadModel!!.preProcessImages(getMediaList(), mock(Place::class.java), "external") { _, _ -> }
         assertTrue(uploadModel!!.currentStep == 1)
     }
 
     @Test
     fun getStepCount() {
-        val element = getElement()
-        val element2 = getElement()
-        var uriList: List<Uri> = mutableListOf<Uri>(element, element2)
-        val preProcessImages = uploadModel!!.preProcessImages(uriList, "image/jpeg", mock(Place::class.java), "external") { _, _ -> }
+        val preProcessImages = uploadModel!!.preProcessImages(getMediaList(), mock(Place::class.java), "external") { _, _ -> }
         preProcessImages.doOnComplete {
             assertTrue(uploadModel!!.stepCount == 4)
         }
@@ -142,10 +124,7 @@ class UploadModelTest {
 
     @Test
     fun getCount() {
-        val element = getElement()
-        val element2 = getElement()
-        var uriList: List<Uri> = mutableListOf<Uri>(element, element2)
-        val preProcessImages = uploadModel!!.preProcessImages(uriList, "image/jpeg", mock(Place::class.java), "external") { _, _ -> }
+        val preProcessImages = uploadModel!!.preProcessImages(getMediaList(), mock(Place::class.java), "external") { _, _ -> }
         preProcessImages.doOnComplete {
             assertTrue(uploadModel!!.count == 2)
         }
@@ -153,10 +132,7 @@ class UploadModelTest {
 
     @Test
     fun getUploads() {
-        val element = getElement()
-        val element2 = getElement()
-        var uriList: List<Uri> = mutableListOf<Uri>(element, element2)
-        val preProcessImages = uploadModel!!.preProcessImages(uriList, "image/jpeg", mock(Place::class.java), "external") { _, _ -> }
+        val preProcessImages = uploadModel!!.preProcessImages(getMediaList(), mock(Place::class.java), "external") { _, _ -> }
         preProcessImages.doOnComplete {
             assertTrue(uploadModel!!.uploads.size == 2)
         }
@@ -164,19 +140,13 @@ class UploadModelTest {
 
     @Test
     fun isTopCardState() {
-        val element = getElement()
-        val element2 = getElement()
-        var uriList: List<Uri> = mutableListOf<Uri>(element, element2)
-        uploadModel!!.preProcessImages(uriList, "image/jpeg", mock(Place::class.java), "external") { _, _ -> }
+        uploadModel!!.preProcessImages(getMediaList(), mock(Place::class.java), "external") { _, _ -> }
         assertTrue(uploadModel!!.isTopCardState)
     }
 
     @Test
     fun next() {
-        val element = getElement()
-        val element2 = getElement()
-        var uriList: List<Uri> = mutableListOf<Uri>(element, element2)
-        uploadModel!!.preProcessImages(uriList, "image/jpeg", mock(Place::class.java), "external") { _, _ -> }
+        uploadModel!!.preProcessImages(getMediaList(), mock(Place::class.java), "external") { _, _ -> }
         assertTrue(uploadModel!!.currentStep == 1)
         uploadModel!!.next()
         assertTrue(uploadModel!!.currentStep == 2)
@@ -184,10 +154,7 @@ class UploadModelTest {
 
     @Test
     fun previous() {
-        val element = getElement()
-        val element2 = getElement()
-        var uriList: List<Uri> = mutableListOf<Uri>(element, element2)
-        uploadModel!!.preProcessImages(uriList, "image/jpeg", mock(Place::class.java), "external") { _, _ -> }
+        uploadModel!!.preProcessImages(getMediaList(), mock(Place::class.java), "external") { _, _ -> }
         assertTrue(uploadModel!!.currentStep == 1)
         uploadModel!!.next()
         assertTrue(uploadModel!!.currentStep == 2)
@@ -197,18 +164,22 @@ class UploadModelTest {
 
     @Test
     fun isShowingItem() {
-        val element = getElement()
-        val element2 = getElement()
-        var uriList: List<Uri> = mutableListOf<Uri>(element, element2)
-        val preProcessImages = uploadModel!!.preProcessImages(uriList, "image/jpeg", mock(Place::class.java), "external") { _, _ -> }
+        val preProcessImages = uploadModel!!.preProcessImages(getMediaList(), mock(Place::class.java), "external") { _, _ -> }
         preProcessImages.doOnComplete {
             assertTrue(uploadModel!!.isShowingItem)
         }
     }
 
-    private fun getElement(): Uri {
-        val mock = mock(Uri::class.java)
-        `when`(mock.path).thenReturn(UUID.randomUUID().toString() + "/file.jpg")
+    private fun getMediaList(): List<UploadableFile> {
+        val element = getElement()
+        val element2 = getElement()
+        var uriList: List<UploadableFile> = mutableListOf(element, element2)
+        return uriList
+    }
+
+    private fun getElement(): UploadableFile {
+        val mock = mock(UploadableFile::class.java)
+        `when`(mock.filePath).thenReturn(UUID.randomUUID().toString() + "/filePath.jpg")
         return mock
     }
 

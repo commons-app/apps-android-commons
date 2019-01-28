@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
+import android.support.annotation.NonNull;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -19,6 +20,7 @@ import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.kvstore.BasicKvStore;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.nearby.Place;
+import fr.free.nrw.commons.upload.FileUtils;
 import fr.free.nrw.commons.upload.UploadActivity;
 import fr.free.nrw.commons.utils.PermissionUtils;
 import fr.free.nrw.commons.utils.ViewUtil;
@@ -26,8 +28,10 @@ import pl.aprilapps.easyphotopicker.DefaultCallback;
 import pl.aprilapps.easyphotopicker.EasyImage;
 
 import static android.content.Intent.ACTION_SEND_MULTIPLE;
-import static android.content.Intent.EXTRA_STREAM;
+import static fr.free.nrw.commons.contributions.Contribution.SOURCE_CAMERA;
 import static fr.free.nrw.commons.contributions.Contribution.SOURCE_EXTERNAL;
+import static fr.free.nrw.commons.contributions.Contribution.SOURCE_GALLERY;
+import static fr.free.nrw.commons.upload.UploadService.EXTRA_FILES;
 import static fr.free.nrw.commons.upload.UploadService.EXTRA_SOURCE;
 import static fr.free.nrw.commons.wikidata.WikidataConstants.PLACE_OBJECT;
 
@@ -98,23 +102,25 @@ public class ContributionController {
             }
 
             @Override
-            public void onImagesPicked(List<File> imagesFiles, EasyImage.ImageSource source, int type) {
-                Intent intent = handleImagesPicked(imagesFiles);
+            public void onImagesPicked(@NonNull List<File> imagesFiles, EasyImage.ImageSource source, int type) {
+                Intent intent = handleImagesPicked(activity, imagesFiles, getSourceFromRequestCode(source));
                 activity.startActivity(intent);
             }
         });
     }
 
-    private Intent handleImagesPicked(List<File> imagesFiles) {
-        ArrayList<Uri> uriList = new ArrayList<>();
+    private Intent handleImagesPicked(Context context,
+                                      List<File> imagesFiles,
+                                      String source) {
+        ArrayList<UploadableFile> uploadableFiles = new ArrayList<>();
         for (File file : imagesFiles) {
-            uriList.add(Uri.parse(file.getPath()));
+            Uri uri = Uri.parse(file.getPath());
+            uploadableFiles.add(new UploadableFile(file.getPath(), FileUtils.getMimeType(context, uri)));
         }
         Intent shareIntent = new Intent(context, UploadActivity.class);
         shareIntent.setAction(ACTION_SEND_MULTIPLE);
-        shareIntent.putExtra(EXTRA_SOURCE, getSourceFromRequestCode());
-        shareIntent.putExtra(EXTRA_STREAM, uriList);
-        shareIntent.setType("image/jpeg");
+        shareIntent.putExtra(EXTRA_SOURCE, source);
+        shareIntent.putParcelableArrayListExtra(EXTRA_FILES, uploadableFiles);
         Place place = directKvStore.getJson(PLACE_OBJECT, Place.class);
         if (place != null) {
             shareIntent.putExtra(PLACE_OBJECT, place);
@@ -123,7 +129,12 @@ public class ContributionController {
         return shareIntent;
     }
 
-    private String getSourceFromRequestCode() {
+    private String getSourceFromRequestCode(EasyImage.ImageSource source) {
+        if (source.equals(EasyImage.ImageSource.CAMERA_IMAGE)) {
+            return SOURCE_CAMERA;
+        } else if (source.equals(EasyImage.ImageSource.GALLERY)) {
+            return SOURCE_GALLERY;
+        }
         return SOURCE_EXTERNAL;
     }
 }

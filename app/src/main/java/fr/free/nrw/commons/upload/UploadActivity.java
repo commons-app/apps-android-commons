@@ -52,6 +52,7 @@ import fr.free.nrw.commons.auth.SessionManager;
 import fr.free.nrw.commons.category.CategoriesModel;
 import fr.free.nrw.commons.category.CategoryItem;
 import fr.free.nrw.commons.contributions.Contribution;
+import fr.free.nrw.commons.contributions.UploadableFile;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
 import fr.free.nrw.commons.nearby.Place;
@@ -67,6 +68,7 @@ import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.schedulers.Schedulers;
 import timber.log.Timber;
 
+import static fr.free.nrw.commons.upload.UploadService.EXTRA_FILES;
 import static fr.free.nrw.commons.utils.ImageUtils.Result;
 import static fr.free.nrw.commons.utils.ImageUtils.getErrorMessageForResult;
 import static fr.free.nrw.commons.wikidata.WikidataConstants.PLACE_OBJECT;
@@ -596,7 +598,6 @@ public class UploadActivity extends BaseActivity implements UploadView, SimilarI
 
     private void receiveSharedItems() {
         Intent intent = getIntent();
-        String mimeType = intent.getType();
         String source;
 
         if (intent.hasExtra(UploadService.EXTRA_SOURCE)) {
@@ -605,31 +606,30 @@ public class UploadActivity extends BaseActivity implements UploadView, SimilarI
             source = Contribution.SOURCE_EXTERNAL;
         }
 
-        Timber.d("Received intent %s with action %s and mimeType %s from source %s",
+        Timber.d("Received intent %s with action %s and from source %s",
                 intent.toString(),
                 intent.getAction(),
-                mimeType,
                 source);
 
-        ArrayList<Uri> urisList = new ArrayList<>();
+        ArrayList<UploadableFile> uploadableFiles = new ArrayList<>();
 
         if (Intent.ACTION_SEND.equals(intent.getAction())) {
-            Uri mediaUri = intent.getParcelableExtra(Intent.EXTRA_STREAM);
+            UploadableFile mediaUri = intent.getParcelableExtra(EXTRA_FILES);
             if (mediaUri != null) {
-                urisList.add(mediaUri);
+                uploadableFiles.add(mediaUri);
             }
         } else if (Intent.ACTION_SEND_MULTIPLE.equals(intent.getAction())) {
-            urisList = intent.getParcelableArrayListExtra(Intent.EXTRA_STREAM);
-            Timber.i("Received multiple upload %s", urisList.size());
+            uploadableFiles = intent.getParcelableArrayListExtra(EXTRA_FILES);
+            Timber.i("Received multiple upload %s", uploadableFiles.size());
         }
 
-        if (urisList.isEmpty()) {
+        if (uploadableFiles.isEmpty()) {
             handleNullMedia();
             return;
         }
 
         Place place = intent.getParcelableExtra(PLACE_OBJECT);
-        presenter.receive(urisList, mimeType, source, place);
+        presenter.receive(uploadableFiles, source, place);
 
         resetDirectPrefs();
     }
