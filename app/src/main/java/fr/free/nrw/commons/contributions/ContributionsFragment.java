@@ -726,6 +726,7 @@ public class ContributionsFragment
     @Override public void onDestroyView() {
         super.onDestroyView();
         presenter.onDetachView();
+        getActivity().unbindService(uploadServiceConnection);
     }
 }
 
