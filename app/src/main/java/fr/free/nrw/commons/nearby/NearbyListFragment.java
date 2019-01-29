@@ -1,5 +1,6 @@
 package fr.free.nrw.commons.nearby;
 
+import android.support.v4.app.FragmentManager;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
@@ -135,4 +136,8 @@ public class NearbyListFragment extends DaggerFragment {
         this.bundleForUpdates = bundleForUpdates;
     }
 
+    public void setMapCenter(Place place) {
+        NearbyFragment nearbyFragment = (NearbyFragment) getParentFragment();
+        nearbyFragment.setMapCenter(place);
+    }
 }

@@ -677,16 +677,6 @@ public class NearbyMapFragment extends DaggerFragment {
                     passInfoToSheet(place);
                     bottomSheetListBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
                     bottomSheetDetailsBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
-                    CameraPosition position = new CameraPosition.Builder()
-                            .target(isBottomListSheetExpanded ?
-                                    new LatLng(marker.getPosition().getLatitude()- CAMERA_TARGET_SHIFT_FACTOR_LANDSCAPE,
-                                            marker.getPosition().getLongitude())
-                                    : new LatLng(marker.getPosition().getLatitude(), marker.getPosition().getLongitude(), 0)) // Sets the new camera position
-                            .zoom(isBottomListSheetExpanded ?
-                                    ZOOM_LEVEL
-                                    :mapboxMap.getCameraPosition().zoom) // Same zoom level
-                            .build();
-                    mapboxMap.animateCamera(CameraUpdateFactory.newCameraPosition(position), 1000);
                 }
                 return false;
             });
@@ -999,5 +989,17 @@ public class NearbyMapFragment extends DaggerFragment {
                     + ((endValue.getLongitude() - startValue.getLongitude()) * fraction));
             return latLng;
         }
+    }
+    public void setMapCenter(Place place) {
+        CameraPosition position = new CameraPosition.Builder()
+                .target(isBottomListSheetExpanded ?
+                        new LatLng(place.location.getLatitude()- CAMERA_TARGET_SHIFT_FACTOR_LANDSCAPE,
+                                place.getLocation().getLongitude())
+                        : new LatLng(place.getLocation().getLatitude(), place.getLocation().getLongitude(), 0)) // Sets the new camera position
+                .zoom(isBottomListSheetExpanded ?
+                        ZOOM_LEVEL
+                        :mapboxMap.getCameraPosition().zoom) // Same zoom level
+                .build();
+        mapboxMap.animateCamera(CameraUpdateFactory.newCameraPosition(position), 1000);
     }
 }

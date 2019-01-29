@@ -107,27 +107,53 @@ public class PlaceRenderer extends Renderer<Place> {
 
     @Override
     protected void hookListeners(View view) {
+        if (onBookmarkClick != null) {
+            final View.OnClickListener listener = view12 -> {
+                Timber.d("Renderer clicked");
+                TransitionManager.beginDelayedTransition(buttonLayout);
 
-        final View.OnClickListener listener = view12 -> {
-            Timber.d("Renderer clicked");
-            TransitionManager.beginDelayedTransition(buttonLayout);
+                if (buttonLayout.isShown()) {
+                    closeLayout(buttonLayout);
+                } else {
+                    openLayout(buttonLayout);
+                }
 
-            if (buttonLayout.isShown()) {
-                closeLayout(buttonLayout);
-            } else {
-                openLayout(buttonLayout);
-            }
+            };
+            view.setOnClickListener(listener);
 
-        };
-        view.setOnClickListener(listener);
-        view.requestFocus();
-        view.setOnFocusChangeListener((view1, hasFocus) -> {
-            if (!hasFocus && buttonLayout.isShown()) {
-                closeLayout(buttonLayout);
-            } else if (hasFocus && !buttonLayout.isShown()) {
-                listener.onClick(view1);
-            }
-        });
+            view.requestFocus();
+            view.setOnFocusChangeListener((view1, hasFocus) -> {
+                if (!hasFocus && buttonLayout.isShown()) {
+                    closeLayout(buttonLayout);
+                } else if (hasFocus && !buttonLayout.isShown()) {
+                    listener.onClick(view1);
+                }
+            });
+        }else {
+            final View.OnClickListener listener = view12 -> {
+                Timber.d("Renderer clicked");
+                TransitionManager.beginDelayedTransition(buttonLayout);
+
+                if (buttonLayout.isShown()) {
+                    closeLayout(buttonLayout);
+                } else {
+                    openLayout(buttonLayout);
+                }
+                ((NearbyListFragment)fragment).setMapCenter(place);
+
+
+            };
+            view.setOnClickListener(listener);
+
+            view.requestFocus();
+            view.setOnFocusChangeListener((view1, hasFocus) -> {
+                if (!hasFocus && buttonLayout.isShown()) {
+                    closeLayout(buttonLayout);
+                } else if (hasFocus && !buttonLayout.isShown()) {
+                    listener.onClick(view1);
+                }
+            });
+        }
 
         cameraButton.setOnClickListener(view2 -> {
             if (applicationKvStore.getBoolean("login_skipped", false)) {
