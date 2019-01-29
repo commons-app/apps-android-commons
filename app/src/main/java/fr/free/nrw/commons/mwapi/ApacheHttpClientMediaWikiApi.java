@@ -765,6 +765,7 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
                     .param("gsroffset",offset)
                     .param("gsrsearch", query)
                     .param("prop", "imageinfo")
+                    .param("iiprop", "url|extmetadata")
                     .get();
             imageNodes= apiResult.getNodes("/api/query/pages/page/@title");
             authorNodes= apiResult.getNodes("/api/query/pages/page/imageinfo/ii/@user");
@@ -776,22 +777,15 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
             return new ArrayList<>();
         }
 
-        CustomApiResult categoryImagesNode = apiResult.getNode("/api/query/pages");
-        if (categoryImagesNode == null
-                || categoryImagesNode.getDocument() == null
-                || categoryImagesNode.getDocument().getChildNodes() == null
-                || categoryImagesNode.getDocument().getChildNodes().getLength() == 0) {
+        CustomApiResult searchImagesNode = apiResult.getNode("/api/query/pages");
+        if (searchImagesNode == null
+                || searchImagesNode.getDocument() == null
+                || searchImagesNode.getDocument().getChildNodes() == null
+                || searchImagesNode.getDocument().getChildNodes().getLength() == 0) {
             return new ArrayList<>();
         }
 
-        if (apiResult.getNode("/api/continue").getDocument()==null){
-            setQueryContinueValues(query, null);
-        }else {
-            QueryContinue queryContinue = getQueryContinue(apiResult.getNode("/api/continue").getDocument());
-            setQueryContinueValues(query, queryContinue);
-        }
-
-        NodeList childNodes = categoryImagesNode.getDocument().getChildNodes();
+        NodeList childNodes = searchImagesNode.getDocument().getChildNodes();
         return CategoryImageUtils.getMediaList(childNodes);
     }
 
