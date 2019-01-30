@@ -97,6 +97,7 @@ public class AchievementsActivity extends NavigationBaseActivity {
     SessionManager sessionManager;
     @Inject
     MediaWikiApi mediaWikiApi;
+    MenuItem item;
 
     private CompositeDisposable compositeDisposable = new CompositeDisposable();
 
@@ -129,6 +130,7 @@ public class AchievementsActivity extends NavigationBaseActivity {
 
         setSupportActionBar(toolbar);
         progressBar.setVisibility(View.VISIBLE);
+
         hideLayouts();
         setAchievements();
         initDrawer();
@@ -147,6 +149,8 @@ public class AchievementsActivity extends NavigationBaseActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_about, menu);
+        item=menu.getItem(0);
+        item.setVisible(false);
         return true;
     }
 
@@ -353,6 +357,7 @@ public class AchievementsActivity extends NavigationBaseActivity {
             setUploadProgress(achievements.getImagesUploaded());
             setImageRevertPercentage(achievements.getNotRevertPercentage());
             progressBar.setVisibility(View.GONE);
+            item.setVisible(true);
             layoutImageReverts.setVisibility(View.VISIBLE);
             layoutImageUploaded.setVisibility(View.VISIBLE);
             layoutImageUsedByWiki.setVisibility(View.VISIBLE);

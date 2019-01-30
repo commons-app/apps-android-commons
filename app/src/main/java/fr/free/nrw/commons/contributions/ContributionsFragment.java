@@ -84,31 +84,25 @@ public class ContributionsFragment
                     ContributionsListFragment.SourceRefresher,
                     LocationUpdateListener,ICampaignsView
                     {
-    @Inject
-    @Named("default_preferences")
-    BasicKvStore defaultKvStore;
-    @Inject
-    ContributionDao contributionDao;
-    @Inject
-    MediaWikiApi mediaWikiApi;
-    @Inject
-    NotificationController notificationController;
-    @Inject
-    NearbyController nearbyController;
+    @Inject @Named("default_preferences") BasicKvStore defaultKvStore;
+    @Inject ContributionDao contributionDao;
+    @Inject MediaWikiApi mediaWikiApi;
+    @Inject NotificationController notificationController;
+    @Inject NearbyController nearbyController;
 
     private ArrayList<DataSetObserver> observersWaitingForLoad = new ArrayList<>();
-    private Cursor allContributions;
     private UploadService uploadService;
     private boolean isUploadServiceConnected;
     private CompositeDisposable compositeDisposable = new CompositeDisposable();
-    CountDownLatch waitForContributionsListFragment = new CountDownLatch(1);
 
     private ContributionsListFragment contributionsListFragment;
     private MediaDetailPagerFragment mediaDetailPagerFragment;
     public static final String CONTRIBUTION_LIST_FRAGMENT_TAG = "ContributionListFragmentTag";
     public static final String MEDIA_DETAIL_PAGER_FRAGMENT_TAG = "MediaDetailFragmentTag";
 
-    public NearbyNotificationCardView nearbyNotificationCardView;
+    @BindView(R.id.card_view_nearby) public NearbyNotificationCardView nearbyNotificationCardView;
+    @BindView(R.id.campaigns_view) CampaignView campaignView;
+
     private Disposable placesDisposable;
     private LatLng curLatLng;
 
@@ -120,10 +114,7 @@ public class ContributionsFragment
     private CheckBox checkBox;
     private CampaignsPresenter presenter;
 
-
-    @BindView(R.id.campaigns_view) CampaignView campaignView;
-
-                        /**
+    /**
      * Since we will need to use parent activity on onAuthCookieAcquired, we have to wait
      * fragment to be attached. Latch will be responsible for this sync.
      */
@@ -159,7 +150,6 @@ public class ContributionsFragment
         presenter = new CampaignsPresenter();
         presenter.onAttachView(this);
         campaignView.setVisibility(View.GONE);
-        nearbyNotificationCardView = view.findViewById(R.id.card_view_nearby);
         checkBoxView = View.inflate(getActivity(), R.layout.nearby_permission_dialog, null);
         checkBox = (CheckBox) checkBoxView.findViewById(R.id.never_ask_again);
         checkBox.setOnCheckedChangeListener((buttonView, isChecked) -> {
@@ -359,7 +349,6 @@ public class ContributionsFragment
         if (getActivity() != null) { // If fragment is attached to parent activity
             getActivity().bindService(uploadServiceIntent, uploadServiceConnection, Context.BIND_AUTO_CREATE);
             isUploadServiceConnected = true;
-            allContributions = contributionDao.loadAllContributions();
             getActivity().getSupportLoaderManager().initLoader(0, null, ContributionsFragment.this);
         }
 
