@@ -1,4 +1,4 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.daimajia.swipe.SwipeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -48,10 +48,10 @@
         android:padding="12dp"
         />
     <TextView
-        android:id="@+id/swipe_bg"
-        android:layout_width="36dp"
-        android:layout_height="36dp"
-        android:visibility="gone"
-        android:text="UNDO"
-        android:background="#fff"/>
-</RelativeLayout>
+        android:id="@+id/mark_as_read"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:text="mark"
+        android:visibility="gone"/>
+
+</com.daimajia.swipe.SwipeLayout>

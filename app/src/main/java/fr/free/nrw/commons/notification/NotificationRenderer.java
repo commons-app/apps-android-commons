@@ -21,6 +21,7 @@ public class NotificationRenderer extends Renderer<Notification> {
     @BindView(R.id.title) TextView title;
     @BindView(R.id.time) TextView time;
     @BindView(R.id.icon) ImageView icon;
+    @BindView(R.id.mark_as_read) TextView markRead;
     private NotificationClicked listener;
 
 

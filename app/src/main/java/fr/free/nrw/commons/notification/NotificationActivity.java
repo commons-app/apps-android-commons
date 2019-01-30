@@ -171,9 +171,10 @@ public class NotificationActivity extends NavigationBaseActivity {
                 if (!initiated) {
                     init();
                 }
+
                 background.setBounds(itemView.getRight() + (int) dX, itemView.getTop(), itemView.getRight(), itemView.getBottom());
                 background.draw(c);
-                super.onChildDraw(c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive);
+                super.onChildDraw(c, recyclerView, viewHolder, dX/4, dY, actionState, isCurrentlyActive);
             }
 
         };
