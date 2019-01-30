@@ -21,6 +21,7 @@ import android.widget.TextView;
 import com.esafirm.imagepicker.features.ImagePicker;
 import com.esafirm.imagepicker.model.Image;
 
+import java.util.Collections;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -37,9 +38,14 @@ import fr.free.nrw.commons.location.LocationServiceManager;
 import fr.free.nrw.commons.nearby.NearbyFragment;
 import fr.free.nrw.commons.nearby.NearbyNotificationCardView;
 import fr.free.nrw.commons.notification.NotificationActivity;
+import fr.free.nrw.commons.notification.NotificationController;
 import fr.free.nrw.commons.upload.UploadService;
 import fr.free.nrw.commons.utils.ImageUtils;
 import fr.free.nrw.commons.utils.IntentUtils;
+import fr.free.nrw.commons.utils.ViewUtil;
+import io.reactivex.Observable;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.schedulers.Schedulers;
 import timber.log.Timber;
 
 import static android.content.ContentResolver.requestSync;
@@ -59,6 +65,8 @@ public class MainActivity extends AuthenticatedActivity implements FragmentManag
     @Inject
     @Named("default_preferences")
     public BasicKvStore defaultKvStore;
+    @Inject
+    NotificationController notificationController;
 
 
     public Intent uploadServiceIntent;
@@ -284,7 +292,7 @@ public class MainActivity extends AuthenticatedActivity implements FragmentManag
         } else {
             final View notification=menu.findItem(R.id.notifications).getActionView();
             txtViewCount=notification.findViewById(R.id.notification_count_badge);
-            txtViewCount.setText(String.valueOf(1));
+            txtViewCount.setText(getNotificationCount());
         }
 
         this.menu = menu;
@@ -292,6 +300,21 @@ public class MainActivity extends AuthenticatedActivity implements FragmentManag
         updateMenuItem();
 
         return true;
+    }
+
+    private int getNotificationCount() {
+        final int[] size = new int[1];
+        Observable.fromCallable(() -> notificationController.getNotifications())
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(notificationList -> {
+                    Collections.reverse(notificationList);
+                    size[0] =notificationList.size();
+                    Timber.d("Number of notifications is %d", notificationList.size());
+                }, throwable -> {
+                    Timber.e(throwable, "Error occurred while loading notifications");
+                });
+        return size[0];
     }
 
     /**

@@ -24,4 +24,18 @@ public class Notification {
         this.dateWithYear = dateWithYear;
         this.notificationId=notificationId;
     }
+
+    @Override
+    public String toString() {
+        return "Notification" +
+                "notificationType='" + notificationType + '\'' +
+                ", notificationText='" + notificationText + '\'' +
+                ", date='" + date + '\'' +
+                ", description='" + description + '\'' +
+                ", link='" + link + '\'' +
+                ", iconUrl='" + iconUrl + '\'' +
+                ", dateWithYear=" + dateWithYear +
+                ", notificationId='" + notificationId + '\'' +
+                '}';
+    }
 }

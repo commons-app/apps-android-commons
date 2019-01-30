@@ -47,4 +47,11 @@
         android:textAppearance="@style/TextAppearance.AppCompat.Body2"
         android:padding="12dp"
         />
+    <TextView
+        android:id="@+id/swipe_bg"
+        android:layout_width="36dp"
+        android:layout_height="36dp"
+        android:visibility="gone"
+        android:text="UNDO"
+        android:background="#fff"/>
 </RelativeLayout>

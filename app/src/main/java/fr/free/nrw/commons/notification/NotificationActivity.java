@@ -5,10 +5,22 @@ import android.app.FragmentManager;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Paint;
+import android.graphics.PorterDuff;
+import android.graphics.RectF;
+import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.constraint.ConstraintLayout;
+import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.Snackbar;
+import android.support.v4.content.ContextCompat;
+import android.support.v4.view.ViewCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
@@ -16,8 +28,10 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
 import android.util.Log;
 import android.view.View;
+import android.widget.FrameLayout;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.pedrogomez.renderers.RVRendererAdapter;
@@ -59,6 +73,8 @@ public class NotificationActivity extends NavigationBaseActivity {
     RelativeLayout relativeLayout;
     @BindView(R.id.no_notification_background)
     ConstraintLayout no_notification;
+   /* @BindView(R.id.swipe_bg)
+    TextView swipe_bg;*/
 
     @Inject
     NotificationController controller;
@@ -82,57 +98,91 @@ public class NotificationActivity extends NavigationBaseActivity {
                 .findFragmentByTag(TAG_NOTIFICATION_WORKER_FRAGMENT);
         initListView();
         initDrawer();
-        attachItemTouchHelper();
+        setUpItemTouchHelper();
     }
 
-    private void attachItemTouchHelper() {
-        ItemTouchHelper.SimpleCallback simpleCallback = new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
+    private void setUpItemTouchHelper() {
+
+        ItemTouchHelper.SimpleCallback simpleItemTouchCallback = new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
+
+            // we want to cache these and not allocate anything repeatedly in the onChildDraw method
+            Drawable background;
+            int xMarkMargin;
+            boolean initiated;
+
+            private void init() {
+                background = new ColorDrawable(Color.RED);
+                xMarkMargin=120;
+                initiated = true;
+            }
+
+            // not important, we don't want drag & drop
             @Override
             public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, RecyclerView.ViewHolder target) {
                 return false;
             }
 
-            @SuppressLint("ResourceAsColor")
+            /*@Override
+            public int getSwipeDirs(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder) {
+                int position = viewHolder.getAdapterPosition();
+                return super.getSwipeDirs(recyclerView, viewHolder);
+            }*/
+
             @Override
-            public void onSwiped(final RecyclerView.ViewHolder viewHolder, int direction) {
-                final int position = viewHolder.getAdapterPosition(); //get position which is swipe
+            public void onSwiped(RecyclerView.ViewHolder viewHolder, int swipeDir) {
+                int position = viewHolder.getAdapterPosition();
+                Observable.fromCallable(() -> controller.markAsRead(notificationList.get(position)))
+                        .subscribeOn(Schedulers.io())
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribe(result -> {
+                            if (result){
+                                notificationList.remove(position);
+                                setAdapter(notificationList);
+                                adapter.notifyDataSetChanged();
+                                Snackbar snackbar = Snackbar
+                                        .make(relativeLayout,"Notification marked as read", Snackbar.LENGTH_LONG);
 
-                if (direction == ItemTouchHelper.LEFT || direction == ItemTouchHelper.RIGHT) {
-                    viewHolder.itemView.setBackgroundColor(R.color.swipe_red);
-                    AlertDialog.Builder builder = new AlertDialog.Builder(NotificationActivity.this); //alert for confirm to delete
-                    builder.setMessage("Are you sure to delete?");    //set message
+                                snackbar.show();
+                                if (notificationList.size()==0){
+                                    relativeLayout.setVisibility(View.GONE);
+                                    no_notification.setVisibility(View.VISIBLE);
+                                }
+                            }
+                            else {
+                                adapter.notifyDataSetChanged();
+                                setAdapter(notificationList);
+                                Toast.makeText(NotificationActivity.this, "There was some error!", Toast.LENGTH_SHORT).show();
+                            }
+                        }, throwable -> {
+                            Timber.e(throwable, "Error occurred while loading notifications");
+                            ViewUtil.showShortSnackbar(relativeLayout, R.string.error_notifications);
+                            progressBar.setVisibility(View.GONE);
+                        });
 
-                    builder.setPositiveButton("REMOVE", (dialog, which) -> {
-
-                        Observable.fromCallable(() -> {
-                             controller.markAsRead(notificationList.get(position));
-                             return true;
-                        })
-                                .subscribeOn(Schedulers.io())
-                                .observeOn(AndroidSchedulers.mainThread())
-                                .subscribe(result -> {
-                                    if (result){
-                                        notificationList.remove(position);
-                                        Toast.makeText(NotificationActivity.this, "Notification marked as Read", Toast.LENGTH_SHORT).show();
-                                        setAdapter(notificationList);
-                                    }
-                                    else {
-                                        Toast.makeText(NotificationActivity.this, "There was some error!", Toast.LENGTH_SHORT).show();
-                                    }
-                                }, throwable -> {
-                                    Timber.e(throwable, "Error occurred while loading notifications");
-                                    ViewUtil.showShortSnackbar(relativeLayout, R.string.error_notifications);
-                                    progressBar.setVisibility(View.GONE);
-                                });
-                    }).setNegativeButton("CANCEL", (dialog, which) -> {
-                        return;
-                    }).show();
-                }
             }
+
+            @Override
+            public void onChildDraw(Canvas c, RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, float dX, float dY, int actionState, boolean isCurrentlyActive) {
+                View itemView = viewHolder.itemView;
+
+                if (viewHolder.getAdapterPosition() == -1) {
+                    return;
+                }
+                if (!initiated) {
+                    init();
+                }
+                background.setBounds(itemView.getRight() + (int) dX, itemView.getTop(), itemView.getRight(), itemView.getBottom());
+                background.draw(c);
+                super.onChildDraw(c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive);
+            }
+
         };
-        ItemTouchHelper itemTouchHelper = new ItemTouchHelper(simpleCallback);
-        itemTouchHelper.attachToRecyclerView(recyclerView);
+        ItemTouchHelper mItemTouchHelper = new ItemTouchHelper(simpleItemTouchCallback);
+        mItemTouchHelper.attachToRecyclerView(recyclerView);
     }
+
+
+
 
     private void initListView() {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -173,6 +223,10 @@ public class NotificationActivity extends NavigationBaseActivity {
                         Timber.d("Number of notifications is %d", notificationList.size());
                         this.notificationList = notificationList;
                         setAdapter(notificationList);
+                        if (notificationList.size()==0){
+                            relativeLayout.setVisibility(View.GONE);
+                            no_notification.setVisibility(View.VISIBLE);
+                        }
                         progressBar.setVisibility(View.GONE);
                     }, throwable -> {
                         Timber.e(throwable, "Error occurred while loading notifications");

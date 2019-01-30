@@ -37,10 +37,6 @@ public class NotificationController {
         return new ArrayList<>();
     }
     public boolean markAsRead(Notification notification) throws IOException{
-        /*if (mediaWikiApi.markNotificationAsRead(notification)=="success"){
-            return true;
-        } else return false;*/
-        mediaWikiApi.markNotificationAsRead(notification);
-        return true;
+        return mediaWikiApi.markNotificationAsRead(notification);
     }
 }
