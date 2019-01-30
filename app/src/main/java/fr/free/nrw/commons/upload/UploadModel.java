@@ -5,7 +5,6 @@ import android.content.Context;
 import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.webkit.MimeTypeMap;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -17,9 +16,11 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 import fr.free.nrw.commons.CommonsApplication;
+import fr.free.nrw.commons.Utils;
 import fr.free.nrw.commons.auth.SessionManager;
 import fr.free.nrw.commons.contributions.Contribution;
 import fr.free.nrw.commons.contributions.UploadableFile;
+import fr.free.nrw.commons.filepicker.MimeTypeMapWrapper;
 import fr.free.nrw.commons.kvstore.BasicKvStore;
 import fr.free.nrw.commons.nearby.Place;
 import fr.free.nrw.commons.settings.Prefs;
@@ -277,7 +278,7 @@ public class UploadModel {
         return Observable.fromIterable(items).map(item ->
         {
             Contribution contribution = new Contribution(item.mediaUri, null,
-                    item.title + "." + item.getFileExt(),
+                    item.getFileName(),
                     Description.formatList(item.descriptions), -1,
                     null, null, sessionManager.getAuthorName(),
                     CommonsApplication.DEFAULT_EDIT_SUMMARY, item.gpsCoords.getCoords());
@@ -323,7 +324,6 @@ public class UploadModel {
 
         public boolean selected = false;
         public boolean first = false;
-        private String fileExt;
         public BehaviorSubject<Integer> imageQuality;
         Title title;
         List<Description> descriptions;
@@ -347,7 +347,11 @@ public class UploadModel {
         }
 
         public String getFileExt() {
-            return MimeTypeMap.getSingleton().getExtensionFromMimeType(mimeType);
+            return MimeTypeMapWrapper.getExtensionFromMimeType(mimeType);
+        }
+
+        public String getFileName() {
+            return Utils.fixExtension(title.toString(), getFileExt());
         }
     }
 
