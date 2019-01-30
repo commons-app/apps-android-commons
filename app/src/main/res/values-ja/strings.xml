@@ -254,7 +254,7 @@
   <string name="notifications_welcome">ウィキメディアコモンズにようこそ、%1$さん！ このサイトへ来てくれてありがとうございます。</string>
   <string name="notifications_talk_page_message">%1$さんからアナタのとーくぺ^字にメッセージが届いています</string>
   <string name="notifications_thank_you_edit">編集をしてくれてありがとうございます</string>
-  <string name="notifications_mention">%1$さんが%2$であなたに言及しています。</string>
+  <string name="notifications_mention">%1$sさんが%2$sであなたに言及しています。</string>
   <string name="toggle_view_button">表示の切り替え</string>
   <string name="nearby_directions">道順</string>
   <string name="nearby_wikidata">ウィキデータ</string>

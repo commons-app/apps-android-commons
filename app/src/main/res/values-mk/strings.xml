@@ -103,7 +103,10 @@
   <string name="no_uploads_yet">Сè уште немате подигнато ниедна слика.</string>
   <string name="menu_retry_upload">Пробај пак</string>
   <string name="menu_cancel_upload">Откажи</string>
-  <string name="share_license_summary" fuzzy="true">Сликава ќе се води под лиценцата %1$s</string>
+  <plurals name="share_license_summary">
+    <item quantity="one">Сликава ќе се води под лиценцата %1$s</item>
+    <item quantity="other">Сликиве ќе се водат под лиценците %1$s</item>
+  </plurals>
   <string name="media_upload_policy">Поднесувајќи ја сликава, изјавувам дека истата е мое сопствено дело, дека не содржи никаков материјал заштитен со авторски права, не содржи самослици, и дека на секој друг начин е во склад со &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines/mk?uselang=mk\"&gt;правилата на Ризницата&lt;/a&gt;.</string>
   <string name="menu_download">Преземи</string>
   <string name="preference_license">Стандардна лиценца</string>
@@ -162,6 +165,7 @@
   <string name="detail_description_empty">Нема опис</string>
   <string name="detail_license_empty">Непозната лиценца</string>
   <string name="menu_refresh">Превчитај</string>
+  <string name="storage_permission_title">Се бара дозвола за складирање</string>
   <string name="read_storage_permission_rationale">Потребна дозвола: Треба да се прочита од надворешен склад. Прилогот без ова нема пристап до вашата галерија.</string>
   <string name="write_storage_permission_rationale">Потребна дозвола: Треба да се запише на надворешен склад. Прилогот без ова нема пристап до вашата камера.</string>
   <string name="location_permission_rationale">Дозвола по желба: Утврдување на тековната местоположба за предлагање категории</string>
@@ -233,6 +237,12 @@
   <string name="description_info">Објаснете ја податотеката што подобро можете: Каде е направена? Што е прикажано на неа? Кој е контекстот? Опишете ги предметите, објектите и личностите. Дајте сознанија што не можат лесно да се погодат, како на пр. време од денот ако се работи за природен предел. Ако на неа е претставено нешто необично, објаснете зошто прикажаното е необично.</string>
   <string name="upload_image_too_dark">Сликата ви е претемна. Дали сигурно сакате да ја подигнете? Ризницата е посветена само на слики со енциклопедиска вредност.</string>
   <string name="upload_image_blurry">Сликата ви е матна. Дали сигурно сакате да ја подигнете? Ризницата е посветена само на слики со енциклопедиска вредност.</string>
+  <string name="upload_problem_exist">Потенцијални проблеми со сликава:</string>
+  <string name="upload_problem_image_dark">Сликата е претемна.</string>
+  <string name="upload_problem_image_blurry">Сликата е матна.</string>
+  <string name="upload_problem_image_duplicate">Сликата веќе ја има на Ризницата.</string>
+  <string name="upload_problem_different_geolocation">Оваа слика е направена на друго место.</string>
+  <string name="upload_problem_do_you_continue">Дали сепак сакате да ја подигнете?</string>
   <string name="give_permission">Дај дозвола</string>
   <string name="use_external_storage">Користи надворешен склад</string>
   <string name="use_external_storage_summary">Зачувување на направените слики во прилогот со камерата на вашиот уред</string>
@@ -248,7 +258,7 @@
   <string name="skip_login">Прескокни</string>
   <string name="navigation_item_login">Најава</string>
   <string name="skip_login_title">Дали навистина сакате да ја прескокнете најавата?</string>
-  <string name="skip_login_message" fuzzy="true">Нема да можете да подигате слики.</string>
+  <string name="skip_login_message">Ќе морате да се најавите за да подигате слики во иднина.</string>
   <string name="login_alert_message">Најавете се за да ја користите оваа можност.</string>
   <string name="copy_wikicode">Прекопирај го викитекстот во меѓускладот</string>
   <string name="wikicode_copied">Викитекстот е прекопиран во меѓускладот</string>
@@ -297,6 +307,8 @@
   <string name="provider_searches">Скорешни пребарувања</string>
   <string name="error_loading_categories">Се јави грешка при вчитувањето на категориите.</string>
   <string name="error_loading_subcategories">Се јави грешка при вчитувањето на поткатегориите.</string>
+  <string name="search_tab_title_media">СЛИКИ/СНИМКИ</string>
+  <string name="search_tab_title_categories">КАТЕГОРИИ</string>
   <string name="successful_wikidata_edit">Сликата е успешно додадена кон %1$s на Википодатоците!</string>
   <string name="wikidata_edit_failure">Не успеав да ја изменам соодветната единица на Википодатоците!</string>
   <string name="menu_set_wallpaper">Задај како позадина</string>
@@ -325,6 +337,7 @@
   <string name="share_coordinates_not_present">Не беа укажани координати при изборот на сликата</string>
   <string name="error_fetching_nearby_places">Грешка при добивањето на околните места.</string>
   <string name="add_description">+ Додај опис</string>
+  <string name="no_recent_searches">Нема скорешни пребарувања</string>
   <string name="delete_recent_searches_dialog">Дали сте сигурни дека сакате да ја избришете историјата на пребарувања?</string>
   <string name="search_history_deleted">Историјата на пребарување е избришана</string>
   <string name="nominate_delete">Предложи за бришење</string>
@@ -344,6 +357,10 @@
   <string name="images_used_explanation">Бројот на слики што сте ги подигнале на Ризницата кои се користат во статии</string>
   <string name="error_occurred">Се појави грешка!</string>
   <string name="notifications_channel_name_all">Известување од Ризницата</string>
+  <string name="preference_author_name_toggle">Употреби прилагодено авторско име</string>
+  <string name="preference_author_name_toggle_summary">При подигањето користете прилагодено авторско име наместо вашето корисничко име</string>
+  <string name="preference_author_name">Прилагодено авторско име</string>
+  <string name="preference_author_name_summary">Прилагоденото авторско име што ќе се користи место вашето корисничко име при подигања</string>
   <string name="contributions_fragment">Придонеси</string>
   <string name="nearby_fragment">Во близина</string>
   <string name="notifications">Известувања</string>
@@ -395,4 +412,27 @@
   <string name="yes_submit">Да, поднеси</string>
   <string name="no_go_back">Не, врати се</string>
   <string name="upload_flow_all_images_in_set">(За сите слики во збирот)</string>
+  <string name="search_this_area">Пребарај на ова подрачје</string>
+  <string name="nearby_card_permission_title">Барање за дозвола</string>
+  <string name="nearby_card_permission_explanation">Дали би сакале да се користи вашата тековна местоположба за приказ на околните места на кои им требаат слики?</string>
+  <string name="unable_to_display_nearest_place">Не можам да го прикажам најблиското место на кое му требаат слики без да дадете дозвола за местоположба</string>
+  <string name="never_ask_again">Повеќе не прашувај</string>
+  <string name="display_location_permission_title">Дозвола за приказ на местоположба</string>
+  <string name="display_location_permission_explanation">Барај дозвола за местоположба кога ќе треба да се даде известување за околно место.</string>
+  <string name="achievements_fetch_failed">Нешто не е во ред. Не можев да ги добијам вашите достигнувања</string>
+  <string name="ends_on">Завршува:</string>
+  <string name="display_campaigns">Прикажи походи</string>
+  <string name="display_campaigns_explanation">Стиснете тука за да ги видите тековните походи</string>
+  <string name="nearby_campaign_dismiss_message">Повеќе нема да ви се прикажуваат походите. Доколку се премислите, таа поставка ќе ја најдете во Нагодувањата.</string>
+  <string name="this_function_needs_network_connection">Оваа можност бара да бидете поврзани со мрежата. Проверете ги поставките за поврзување.</string>
+  <string name="bad_token_error_proposed_solution">Подигањето не успеа поради проблеми со уредувачката шифра. Одјавете се и повторно најавете се.</string>
+  <string name="error_processing_image">Се појави грешка при обработката на сликата. Обидете се повторно!</string>
+  <plurals name="receiving_shared_content">
+    <item quantity="one">Добивам споделена содржина. Обработката може да потрае, зависно од големината на сликата и вашиот уред</item>
+    <item quantity="other">Добивам споделена содржина. Обработката може да потрае, зависно од големината на сликите и вашиот уред</item>
+  </plurals>
+  <string name="no_image">Нема искористени слики</string>
+  <string name="no_image_reverted">Нема вратени слики</string>
+  <string name="no_image_uploaded">Нема подигнати слики</string>
+  <string name="share_logs_using">Споделувај дневници користејќи</string>
 </resources>

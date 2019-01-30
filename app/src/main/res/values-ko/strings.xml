@@ -3,6 +3,7 @@
 * CYAN
 * Dlsrks1021
 * Doyoon1995
+* Freebiekr
 * Garam
 * Jerrykim306
 * Kwj2772
@@ -111,7 +112,10 @@
   <string name="no_uploads_yet">아직 사진을 올리지 않았습니다.</string>
   <string name="menu_retry_upload">다시 시도</string>
   <string name="menu_cancel_upload">취소</string>
-  <string name="share_license_summary" fuzzy="true">이 그림은 %1$s에 따라 사용이 허가됩니다</string>
+  <plurals name="share_license_summary">
+    <item quantity="one">이 그림은 %1$s에 따라 사용이 허가됩니다</item>
+    <item quantity="other">이 그림은 %1$s에 따라 사용이 허가됩니다</item>
+  </plurals>
   <string name="media_upload_policy">이 이미지에 대해서, 이것이 본인이 창작한 저작물이며, 저작권에 위배되는 것이 포함되지 않았으며, &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines\"&gt;위키미디어 공용 정책&lt;/a&gt;에 위배되지 않는다는 것에 동의합니다.</string>
   <string name="menu_download">다운로드</string>
   <string name="preference_license">기본 라이선스</string>

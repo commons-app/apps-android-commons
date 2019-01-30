@@ -102,7 +102,10 @@
   <string name="no_uploads_yet">A l\'ha ancor nen carià ëd fòto.</string>
   <string name="menu_retry_upload">Prové torna</string>
   <string name="menu_cancel_upload">Anulé</string>
-  <string name="share_license_summary" fuzzy="true">Costa plancia a sarà sota la licensa %1$s</string>
+  <plurals name="share_license_summary">
+    <item quantity="one">Costa plancia a sarà sota la licensa %1$s</item>
+    <item quantity="other">Coste plance a saran sota la licensa %1$s</item>
+  </plurals>
   <string name="media_upload_policy">An mandand costa plancia, i diciaro ch\'a l\'é euvra ëd mè travaj, ch\'a conten nen d\'element sota drit d\'autor o d\'àutoscat, e che comsëssìa a l\'é conforma a &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines\"&gt;le régole ëd Wikimedia Commons&lt;/a&gt;.</string>
   <string name="menu_download">Dëscarié</string>
   <string name="preference_license">Licensa dë stàndard</string>
@@ -161,6 +164,7 @@
   <string name="detail_description_empty">Gnun-a descrission</string>
   <string name="detail_license_empty">Licensa sconossùa</string>
   <string name="menu_refresh">Rinfrësché</string>
+  <string name="storage_permission_title">Arcesta dël përmess ëd deposité</string>
   <string name="read_storage_permission_rationale">Autorisassion necessaria: Lese n\'anmagasinament estern. L\'aplicassion a peul pa acede a soa galarìa sensa \'d lòn.</string>
   <string name="write_storage_permission_rationale">Autorisassion necessaria: Scrive an sn\'anmagasinament estern. L\'aplicassion a peul pa acede a soa màchina fòto sensa \'d lòn.</string>
   <string name="location_permission_rationale">Autorisassion facoltativa: Oten-e la posission atual për dij sugeriment ëd categorìa</string>
@@ -232,6 +236,12 @@
   <string name="description_info">Për piasì, ch\'a descriva ël mojen mej ch\'a peul: Andoa a l\'é stàit fàit? Për piasì, ch\'a descriva j\'oget o le përson-e. Ch\'a arvela j\'anformassion ch\'a l\'é nen belfé andviné, për esempi l\'ora dël dì, s\'a l\'é un panorama. Si ël mojen a smon cheicòs ëd foravìa, për piasì ch\'a spiega lòn ch\'a lo rend foravìa.</string>
   <string name="upload_image_too_dark">Sa plancia a l\'é tròp sombra, e-lo sigur ëd vorèj cariela? Wikipedia Commons a l\'é mach për plance con un valor enciclopédich.</string>
   <string name="upload_image_blurry">Sa plancia a l\'é tërbola, e-lo sigur ëd vorèj cariela? Wikipedia Comun a l\'é mach për plance con un valor enciclopédich.</string>
+  <string name="upload_problem_exist">Problema potensiaj con costa plancia:</string>
+  <string name="upload_problem_image_dark">La plancia a l\'é tròp sombra.</string>
+  <string name="upload_problem_image_blurry">La plancia a l\'é tërbola.</string>
+  <string name="upload_problem_image_duplicate">La plancia a l\'é già su Commons.</string>
+  <string name="upload_problem_different_geolocation">Sa fòto a l\'é stàita fàita ant un pòst diferent.</string>
+  <string name="upload_problem_do_you_continue">Veul-lo istess carié sta plancia?</string>
   <string name="give_permission">Dé ël përmess</string>
   <string name="use_external_storage">Dovré n\'anmagasinament estern</string>
   <string name="use_external_storage_summary">Argistré le plance pijà con la màchina fòto ëd sò angign</string>
@@ -247,7 +257,7 @@
   <string name="skip_login">Sauté</string>
   <string name="navigation_item_login">Intré ant ël sistema</string>
   <string name="skip_login_title">Veul-lo për da bon sauté la procedura d\'intrada ant ël sistema?</string>
-  <string name="skip_login_message" fuzzy="true">A podrà nen carié \'d fòto.</string>
+  <string name="skip_login_message">A l\'avnì a dovrà rintré ant ël sistema për carié \'d fòto.</string>
   <string name="login_alert_message">Për piasì, ch\'a rintra ant ël sistema për podèj dovré costa fonsionalità</string>
   <string name="copy_wikicode">Copié ël test wiki ant ël pògia-feuj</string>
   <string name="wikicode_copied">Ël test wiki a l\'é stàit copià ant ël pògia-feuj</string>
@@ -296,6 +306,8 @@
   <string name="provider_searches">Domande arsercà ëd recent</string>
   <string name="error_loading_categories">A l\'é ancapitaje n\'eror antramentre ch\'as cariavo le categorìe.</string>
   <string name="error_loading_subcategories">A l\'é ancapitaje n\'eror antrametre ch\'as cariavo le sot-categorìe.</string>
+  <string name="search_tab_title_media">MOJEN</string>
+  <string name="search_tab_title_categories">CATEGORÌE</string>
   <string name="successful_wikidata_edit">Plancia giontà për da bin a %1$s su Wikidata!</string>
   <string name="wikidata_edit_failure">Falì a agiorné l\'entità ëd Wikidata corëspondenta!</string>
   <string name="menu_set_wallpaper">Definì \'me tapissarìa</string>
@@ -324,6 +336,7 @@
   <string name="share_coordinates_not_present">Le coordinà a son nen ëstàite spessificà durant la selession ëd la plancia</string>
   <string name="error_fetching_nearby_places">Eror durant l\'esplorassion dj\'anviron.</string>
   <string name="add_description">Gionté na descrission</string>
+  <string name="no_recent_searches">Gnun-e arserche recente</string>
   <string name="delete_recent_searches_dialog">É-lo sigur ëd vorèj dëscancelé lë stòrich ëd soe arserche?</string>
   <string name="search_history_deleted">Lë stòrich ëd j\'arserche a l\'é stàit dëscancelà</string>
   <string name="nominate_delete">Propon-e për la scancelassion</string>
@@ -343,6 +356,10 @@
   <string name="images_used_explanation">Ël nùmer ëd plance che chiel a l\'ha carià su Comun e che a son ëstàite dovrà an dj\'artìcoj ëd Wikimedia</string>
   <string name="error_occurred">A-i é staje n\'eror!</string>
   <string name="notifications_channel_name_all">Notìfica ëd Commons</string>
+  <string name="preference_author_name_toggle">Ch\'a deuvra un nòm d\'autor përsonalisà</string>
+  <string name="preference_author_name_toggle_summary">Ch\'a deuvra un nòm d\'autor përsonalisà al pòst ëd sò stranòm cand a caria dle fòto</string>
+  <string name="preference_author_name">Nòm d\'autor përsonalisà</string>
+  <string name="preference_author_name_summary">Ël nòm d\'autor përsonalisà da dovré al pòst ëd sò stranòm për ij cariament</string>
   <string name="contributions_fragment">Contribussion</string>
   <string name="nearby_fragment">Davzin</string>
   <string name="notifications">Notìfiche</string>
@@ -394,4 +411,19 @@
   <string name="yes_submit">É, mandé</string>
   <string name="no_go_back">Nò, torné andré</string>
   <string name="upload_flow_all_images_in_set">(Për tute le plance dl\'ansem)</string>
+  <string name="search_this_area">Arserché an costa zòna</string>
+  <string name="nearby_card_permission_title">Arcesta d\'autorisassion</string>
+  <string name="nearby_card_permission_explanation">Veul-lo ch\'i dovroma soa localisassion atual pr\'ësmon-e ël pòst pi davzin ch\'a l\'ha da manca ëd fòto?</string>
+  <string name="unable_to_display_nearest_place">A l\'é impossìbil ësmon-e ij pòst ant j\'anviron ch\'a l\'han damanca ëd fòto sensa ij përmess ëd localisassion</string>
+  <string name="never_ask_again">Mai pi ciamé sòn</string>
+  <string name="display_location_permission_title">Smon-e l\'autorisassion ëd localisassion</string>
+  <string name="display_location_permission_explanation">Ciamé ël përmess ëd localisé cand a-i na j\'é da manca për la fonsion ëd visualisassion ëd la carta dle notìfiche dë vzinansa.</string>
+  <string name="achievements_fetch_failed">Cheicòs a l\'ha nen marcià, i l\'oma nen podù arcuperé soe realisassion</string>
+  <string name="ends_on">A finiss ai:</string>
+  <string name="display_campaigns">Campagne ëd visualisassion</string>
+  <string name="display_campaigns_explanation">Ch\'a toca ambelessì për vëdde le campagne an cors</string>
+  <string name="nearby_campaign_dismiss_message">A vëdrà pi nen le campagna. Comsëssìa, a peul torna abilité costa notìfica ant ij paràmeter, s\'a veul.</string>
+  <string name="this_function_needs_network_connection">Sa fonsion a l\'ha damanca ëd na conession ëd rej, për piasì ch\'a contròla ij sò paràmtere ëd conession.</string>
+  <string name="bad_token_error_proposed_solution">Ël cariament a l\'ha falì për dij problema con ël geton ëd modìfica. Ch\'a preuva a seurte e rintré torna ant ël sistema.</string>
+  <string name="error_processing_image">A-i è staje n\'eror durant ël tratament ëd la plancia. Ch\'a ancamin-a torna, për piasì!</string>
 </resources>

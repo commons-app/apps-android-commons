@@ -39,7 +39,7 @@
     <item quantity="other">%1$d dosyeyi bar benê</item>
   </plurals>
   <string name="title_activity_contributions">Barkerdışê mınê peyêni</string>
-  <string name="contribution_state_queued">Ratneya</string>
+  <string name="contribution_state_queued">Gêriyayo rêze</string>
   <string name="contribution_state_failed">Ebe ser nêkewt</string>
   <string name="contribution_state_in_progress">%1$d%% temam</string>
   <string name="contribution_state_starting">Bar beno</string>
@@ -115,7 +115,7 @@
   <string name="tutorial_3_text">Bar mekeri:</string>
   <string name="tutorial_4_text">Misal bar kerden:</string>
   <string name="welcome_final_text">Şıma fam kerdê?</string>
-  <string name="welcome_final_button_text">E!</string>
+  <string name="welcome_final_button_text">Eya!</string>
   <string name="detail_panel_cats_label">Kategoriyi</string>
   <string name="detail_panel_cats_loading">Bar beno…</string>
   <string name="detail_panel_cats_none">Theba nêweçineya</string>
@@ -125,7 +125,7 @@
   <string name="ok">TEMAM</string>
   <string name="title_activity_nearby">Cayê Nezdiy</string>
   <string name="warning">Tembe kem</string>
-  <string name="yes">E</string>
+  <string name="yes">Eya</string>
   <string name="no">Nê</string>
   <string name="media_detail_title">Sername</string>
   <string name="media_detail_description">Şınasnayış</string>
