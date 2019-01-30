@@ -10,6 +10,32 @@
     app:behavior_peekHeight="0dp"
     app:behavior_hideable="true"
     >
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/loading_nearby_list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="visible">
+
+    <ProgressBar
+        android:id="@+id/progress_bar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginTop="10dp"
+        android:textSize="20sp"
+        app:layout_constraintTop_toBottomOf="@+id/progress_bar"
+        android:text="Loading..."
+        />
+    </android.support.constraint.ConstraintLayout>
 
     <FrameLayout
         android:id="@+id/container_sheet"
@@ -20,6 +46,7 @@
         android:layout_marginRight="16dp"
         android:layout_marginBottom="8dp"
         android:layout_marginTop="8dp"
+        android:visibility="gone"
         ></FrameLayout>
 
 </LinearLayout>

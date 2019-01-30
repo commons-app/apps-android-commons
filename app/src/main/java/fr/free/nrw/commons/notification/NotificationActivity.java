@@ -269,12 +269,4 @@ public class NotificationActivity extends NavigationBaseActivity {
         intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT | Intent.FLAG_ACTIVITY_SINGLE_TOP);
         context.startActivity(intent);
     }
-
-    private void initializeAndSetNotificationList(List<Notification> notificationList) {
-        FragmentManager fm = getFragmentManager();
-        mNotificationWorkerFragment = new NotificationWorkerFragment();
-        fm.beginTransaction().add(mNotificationWorkerFragment, TAG_NOTIFICATION_WORKER_FRAGMENT)
-                .commit();
-        mNotificationWorkerFragment.setNotificationList(notificationList);
-    }
 }

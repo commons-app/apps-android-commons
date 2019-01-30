@@ -58,15 +58,15 @@ dependencies {
     kapt "com.google.dagger:dagger-compiler:$DAGGER_VERSION"
     
     // Unit testing
-    testImplementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-    testImplementation "org.jetbrains.kotlin:kotlin-reflect:$kotlin_version"
+    testImplementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$KOTLIN_VERSION"
+    testImplementation "org.jetbrains.kotlin:kotlin-reflect:$KOTLIN_VERSION"
     testImplementation 'junit:junit:4.12'
     testImplementation 'org.robolectric:robolectric:3.7.1'
     testImplementation 'com.nhaarman:mockito-kotlin:1.5.0'
     testImplementation 'com.squareup.okhttp3:mockwebserver:3.10.0'
 
     // Android testing
-    androidTestImplementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    androidTestImplementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$KOTLIN_VERSION"
     androidTestImplementation 'com.squareup.okhttp3:mockwebserver:3.10.0'
     androidTestImplementation 'com.android.support.test:rules:1.0.2'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
@@ -77,9 +77,9 @@ dependencies {
     // Debugging
     implementation 'com.tspoon.traceur:traceur:1.0.1'
     implementation 'com.facebook.stetho:stetho:1.5.0'
-    debugImplementation "com.squareup.leakcanary:leakcanary-android:$LEAK_CANARY"
-    releaseImplementation "com.squareup.leakcanary:leakcanary-android-no-op:$LEAK_CANARY"
-    testImplementation "com.squareup.leakcanary:leakcanary-android-no-op:$LEAK_CANARY"
+    debugImplementation "com.squareup.leakcanary:leakcanary-android:$LEAK_CANARY_VERSION"
+    releaseImplementation "com.squareup.leakcanary:leakcanary-android-no-op:$LEAK_CANARY_VERSION"
+    testImplementation "com.squareup.leakcanary:leakcanary-android-no-op:$LEAK_CANARY_VERSION"
 
     // Support libraries
     implementation "com.android.support:support-v4:$SUPPORT_LIB_VERSION"
@@ -143,7 +143,7 @@ android {
             testCoverageEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
             testProguardFile 'test-proguard-rules.txt'
-            versionNameSuffix "-debug-" + getBranchName() + "~" + getBuildVersion()
+            versionNameSuffix "-debug-" + getBranchName()
         }
     }
 	
@@ -182,6 +182,7 @@ android {
             buildConfigField "String", "RECENT_SEARCH_AUTHORITY", "\"fr.free.nrw.commons.explore.recentsearches.contentprovider\""
             buildConfigField "String", "BOOKMARK_AUTHORITY", "\"fr.free.nrw.commons.bookmarks.contentprovider\""
             buildConfigField "String", "BOOKMARK_LOCATIONS_AUTHORITY", "\"fr.free.nrw.commons.bookmarks.locations.contentprovider\""
+            buildConfigField "String", "COMMIT_SHA", "\"" + getBuildVersion().toString() + "\""
 
             dimension 'tier'
         }
@@ -211,6 +212,7 @@ android {
             buildConfigField "String", "RECENT_SEARCH_AUTHORITY", "\"fr.free.nrw.commons.beta.explore.recentsearches.contentprovider\""
             buildConfigField "String", "BOOKMARK_AUTHORITY", "\"fr.free.nrw.commons.beta.bookmarks.contentprovider\""
             buildConfigField "String", "BOOKMARK_LOCATIONS_AUTHORITY", "\"fr.free.nrw.commons.beta.bookmarks.locations.contentprovider\""
+            buildConfigField "String", "COMMIT_SHA", "\"" + getBuildVersion().toString() + "\""
 
             dimension 'tier'
         }
