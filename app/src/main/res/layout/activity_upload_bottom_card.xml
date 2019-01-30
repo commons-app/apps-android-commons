@@ -16,7 +16,6 @@
         android:layout_marginRight="8dp"
         android:layout_marginBottom="8dp"
         android:elevation="@dimen/cardview_default_elevation"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="UnusedAttribute"
@@ -118,7 +117,6 @@
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
         tools:ignore="UnusedAttribute"
         tools:showIn="@layout/activity_upload">
 
