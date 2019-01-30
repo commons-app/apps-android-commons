@@ -223,10 +223,11 @@ public class NotificationActivity extends NavigationBaseActivity {
                         Collections.reverse(notificationList);
                         Timber.d("Number of notifications is %d", notificationList.size());
                         this.notificationList = notificationList;
-                        setAdapter(notificationList);
                         if (notificationList.size()==0){
                             relativeLayout.setVisibility(View.GONE);
                             no_notification.setVisibility(View.VISIBLE);
+                        } else {
+                            setAdapter(notificationList);
                         }
                         progressBar.setVisibility(View.GONE);
                     }, throwable -> {

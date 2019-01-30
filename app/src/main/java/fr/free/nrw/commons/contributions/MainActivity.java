@@ -9,6 +9,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.view.MenuItemCompat;
 import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -51,7 +52,7 @@ import timber.log.Timber;
 import static android.content.ContentResolver.requestSync;
 import static fr.free.nrw.commons.location.LocationServiceManager.LOCATION_REQUEST;
 
-public class MainActivity extends AuthenticatedActivity implements FragmentManager.OnBackStackChangedListener {
+public class MainActivity extends AuthenticatedActivity implements FragmentManager.OnBackStackChangedListener  {
 
     @Inject
     SessionManager sessionManager;
@@ -285,13 +286,16 @@ public class MainActivity extends AuthenticatedActivity implements FragmentManag
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.contribution_activity_notification_menu, menu);
-
+        View actionView = menu.findItem(R.id.notification_item).getActionView();
         if (!isThereUnreadNotifications) {
             // TODO: used vectors are not compatible with API 19 and below, change them
-            menu.findItem(R.id.notifications).setIcon(ContextCompat.getDrawable(this, R.drawable.ic_notification_white_clip_art));
+            menu.findItem(R.id.notification_item).setIcon(ContextCompat.getDrawable(this, R.drawable.ic_notification_white_clip_art));
+            txtViewCount=actionView.findViewById(R.id.notification_count_badge);
+            txtViewCount.setVisibility(View.VISIBLE);
+            txtViewCount.setText(0);
+
         } else {
-            final View notification=menu.findItem(R.id.notifications).getActionView();
-            txtViewCount=notification.findViewById(R.id.notification_count_badge);
+            txtViewCount=actionView.findViewById(R.id.notification_count_badge);
             setNotificationCount();
         }
 
@@ -323,12 +327,12 @@ public class MainActivity extends AuthenticatedActivity implements FragmentManag
         if (menu != null) {
             if (isContributionsFragmentVisible) {
                 // Display notifications menu item
-                menu.findItem(R.id.notifications).setVisible(true);
+                menu.findItem(R.id.notification_item).setVisible(true);
                 menu.findItem(R.id.list_sheet).setVisible(false);
                 Timber.d("Contributions activity notifications menu item is visible");
             } else {
                 // Display bottom list menu item
-                menu.findItem(R.id.notifications).setVisible(false);
+                menu.findItem(R.id.notification_item).setVisible(false);
                 menu.findItem(R.id.list_sheet).setVisible(true);
                 Timber.d("Contributions activity list sheet menu item is visible");
             }
@@ -338,7 +342,7 @@ public class MainActivity extends AuthenticatedActivity implements FragmentManag
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.notifications:
+            case R.id.notification_item:
                 // Starts notification activity on click to notification icon
                 NotificationActivity.startYourself(this);
                 return true;
@@ -366,10 +370,10 @@ public class MainActivity extends AuthenticatedActivity implements FragmentManag
     public void updateNotificationIcon(boolean isThereUnreadNotifications) {
         if (!isThereUnreadNotifications) {
             this.isThereUnreadNotifications = false;
-            menu.findItem(R.id.notifications).setIcon(ContextCompat.getDrawable(this, R.drawable.ic_notification_white_clip_art));
+            menu.findItem(R.id.notification_item).setIcon(ContextCompat.getDrawable(this, R.drawable.ic_notification_white_clip_art));
         } else {
             this.isThereUnreadNotifications = true;
-            menu.findItem(R.id.notifications).setIcon(ContextCompat.getDrawable(this, R.drawable.ic_notification_white_clip_art_dot));
+            menu.findItem(R.id.notification_item).setIcon(ContextCompat.getDrawable(this, R.drawable.ic_notification_white_clip_art_dot));
         }
     }
 
