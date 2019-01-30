@@ -292,7 +292,7 @@ public class MainActivity extends AuthenticatedActivity implements FragmentManag
         } else {
             final View notification=menu.findItem(R.id.notifications).getActionView();
             txtViewCount=notification.findViewById(R.id.notification_count_badge);
-            txtViewCount.setText(getNotificationCount());
+            setNotificationCount();
         }
 
         this.menu = menu;
@@ -302,19 +302,17 @@ public class MainActivity extends AuthenticatedActivity implements FragmentManag
         return true;
     }
 
-    private int getNotificationCount() {
-        final int[] size = new int[1];
+    private void setNotificationCount() {
         Observable.fromCallable(() -> notificationController.getNotifications())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(notificationList -> {
                     Collections.reverse(notificationList);
-                    size[0] =notificationList.size();
+                    txtViewCount.setText(String.valueOf(notificationList.size()));
                     Timber.d("Number of notifications is %d", notificationList.size());
                 }, throwable -> {
                     Timber.e(throwable, "Error occurred while loading notifications");
                 });
-        return size[0];
     }
 
     /**
