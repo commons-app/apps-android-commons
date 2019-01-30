@@ -159,7 +159,7 @@ public class PlaceRenderer extends Renderer<Place> {
             }else {
                 Timber.d("Gallery button tapped. Image title: " + place.getName() + "Image desc: " + place.getLongDescription());
                 storeSharedPrefs();
-                controller.initiateGalleryPick(fragment.getActivity());
+                controller.initiateGalleryPick(fragment.getActivity(), true);
             }
         });
 

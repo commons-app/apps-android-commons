@@ -46,6 +46,9 @@ public class ContributionController {
         this.directKvStore = directKvStore;
     }
 
+    /**
+     * Check for permissions and initiate camera click
+     */
     public void initiateCameraPick(Activity activity) {
         boolean useExtStorage = defaultKvStore.getBoolean("useExternalStorage", true);
         if (!useExtStorage) {
@@ -60,50 +63,69 @@ public class ContributionController {
                 R.string.write_storage_permission_rationale);
     }
 
-    public void initiateGalleryPick(Activity activity) {
+    /**
+     * Check for permissions and initiate gallery picker
+     */
+    public void initiateGalleryPick(Activity activity, boolean allowMultipleUploads) {
         if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.JELLY_BEAN) {
-            initiateGalleryUpload(activity);
+            initiateGalleryUpload(activity, allowMultipleUploads);
         } else {
             PermissionUtils.checkPermissionsAndPerformAction(activity,
                     Manifest.permission.READ_EXTERNAL_STORAGE,
-                    () -> initiateGalleryUpload(activity),
+                    () -> initiateGalleryUpload(activity, allowMultipleUploads),
                     R.string.storage_permission_title,
                     R.string.read_storage_permission_rationale);
         }
     }
 
-    private void initiateGalleryUpload(Activity activity) {
-        setPickerConfiguration(activity);
-        FilePicker.openChooserWithGallery(activity, "Choose Images to upload", 0);
+    /**
+     * Open chooser for gallery uploads
+     */
+    private void initiateGalleryUpload(Activity activity, boolean allowMultipleUploads) {
+        setPickerConfiguration(activity, allowMultipleUploads);
+        FilePicker.openChooserWithGallery(activity, activity.getString(R.string.image_chooser_title), 0);
     }
 
-    private void setPickerConfiguration(Activity activity) {
+    /**
+     * Sets configuration for file picker
+     */
+    private void setPickerConfiguration(Activity activity, boolean allowMultipleUploads) {
         FilePicker.configuration(activity)
-                .setAllowMultiplePickInGallery(true)
                 .setCopyTakenPhotosToPublicGalleryAppFolder(true)
-                .setCopyPickedImagesToPublicGalleryAppFolder(true);
+                .setCopyPickedImagesToPublicGalleryAppFolder(true)
+                .setAllowMultiplePickInGallery(allowMultipleUploads);
     }
 
+    /**
+     * Initiate camera upload by opening camera
+     */
     private void initiateCameraUpload(Activity activity) {
-        setPickerConfiguration(activity);
+        setPickerConfiguration(activity, false);
         FilePicker.openCameraForImage(activity, 0);
     }
 
+    /**
+     * Attaches callback for file picker.
+     */
     public void handleActivityResult(Activity activity, int requestCode, int resultCode, Intent data) {
         FilePicker.handleActivityResult(requestCode, resultCode, data, activity, new DefaultCallback() {
             @Override
             public void onImagePickerError(Exception e, FilePicker.ImageSource source, int type) {
-                ViewUtil.showShortToast(activity, "Error occurred while picking images");
+                ViewUtil.showShortToast(activity, R.string.error_occurred_in_picking_images);
             }
 
             @Override
             public void onImagesPicked(@NonNull List<File> imagesFiles, FilePicker.ImageSource source, int type) {
-                Intent intent = handleImagesPicked(activity, imagesFiles, getSourceFromRequestCode(source));
+                Intent intent = handleImagesPicked(activity, imagesFiles, getSourceFromImageSource(source));
                 activity.startActivity(intent);
             }
         });
     }
 
+    /**
+     * Returns intent to be passed to upload activity
+     * Attaches place object for nearby uploads
+     */
     private Intent handleImagesPicked(Context context,
                                       List<File> imagesFiles,
                                       String source) {
@@ -123,7 +145,10 @@ public class ContributionController {
         return shareIntent;
     }
 
-    private String getSourceFromRequestCode(FilePicker.ImageSource source) {
+    /**
+     * Get image upload source
+     */
+    private String getSourceFromImageSource(FilePicker.ImageSource source) {
         if (source.equals(FilePicker.ImageSource.CAMERA_IMAGE)) {
             return SOURCE_CAMERA;
         } else if (source.equals(FilePicker.ImageSource.GALLERY)) {
