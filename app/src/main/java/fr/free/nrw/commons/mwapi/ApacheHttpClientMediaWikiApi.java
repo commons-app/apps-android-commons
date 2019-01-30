@@ -52,6 +52,7 @@ import fr.free.nrw.commons.category.QueryContinue;
 import fr.free.nrw.commons.kvstore.BasicKvStore;
 import fr.free.nrw.commons.notification.Notification;
 import fr.free.nrw.commons.notification.NotificationUtils;
+import fr.free.nrw.commons.utils.ConfigUtils;
 import fr.free.nrw.commons.utils.DateUtils;
 import fr.free.nrw.commons.utils.StringUtils;
 import fr.free.nrw.commons.utils.ViewUtil;
@@ -116,7 +117,7 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
     @Override
     @NonNull
     public String getUserAgent() {
-        return "Commons/" + BuildConfig.VERSION_NAME + " (https://mediawiki.org/wiki/Apps/Commons) Android/" + Build.VERSION.RELEASE;
+        return "Commons/" + ConfigUtils.getVersionNameWithSha(context) + " (https://mediawiki.org/wiki/Apps/Commons) Android/" + Build.VERSION.RELEASE;
     }
 
     @VisibleForTesting
@@ -230,7 +231,6 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
     @Override
     public String getEditToken() throws IOException {
         String editToken = api.action("query")
-                .param("centralauthtoken", getCentralAuthToken())
                 .param("meta", "tokens")
                 .post()
                 .getString("/api/query/tokens/@csrftoken");
@@ -288,7 +288,6 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
         return api.action("edit")
                 .param("title", filename)
                 .param("token", getEditToken())
-                .param("centralauthtoken", getCentralAuthToken())
                 .param("text", processedPageContent)
                 .param("summary", summary)
                 .post()
@@ -302,7 +301,6 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
         return api.action("edit")
                 .param("title", filename)
                 .param("token", getEditToken())
-                .param("centralauthtoken", getCentralAuthToken())
                 .param("appendtext", processedPageContent)
                 .param("summary", summary)
                 .post()
@@ -315,7 +313,6 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
         return api.action("edit")
                 .param("title", filename)
                 .param("token", getEditToken())
-                .param("centralauthtoken", getCentralAuthToken())
                 .param("prependtext", processedPageContent)
                 .param("summary", summary)
                 .post()
@@ -772,11 +769,9 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
     @Override
     @NonNull
     public List<Media> searchImages(String query, int offset) {
-        List<CustomApiResult> imageNodes = null;
-        List<CustomApiResult> authorNodes = null;
-        CustomApiResult customApiResult;
+        CustomApiResult apiResult=null;
         try {
-            customApiResult= api.action("query")
+            apiResult= api.action("query")
                     .param("format", "xml")
                     .param("generator", "search")
                     .param("gsrwhat", "text")
@@ -785,26 +780,22 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
                     .param("gsroffset",offset)
                     .param("gsrsearch", query)
                     .param("prop", "imageinfo")
+                    .param("iiprop", "url|extmetadata")
                     .get();
-            imageNodes= customApiResult.getNodes("/api/query/pages/page/@title");
-            authorNodes= customApiResult.getNodes("/api/query/pages/page/imageinfo/ii/@user");
         } catch (IOException e) {
             Timber.e(e, "Failed to obtain searchImages");
         }
 
-        if (imageNodes == null) {
+        CustomApiResult searchImagesNode = apiResult.getNode("/api/query/pages");
+        if (searchImagesNode == null
+                || searchImagesNode.getDocument() == null
+                || searchImagesNode.getDocument().getChildNodes() == null
+                || searchImagesNode.getDocument().getChildNodes().getLength() == 0) {
             return new ArrayList<>();
         }
 
-        List<Media> images = new ArrayList<>();
-
-        for (int i=0; i< imageNodes.size();i++){
-            String imgName = imageNodes.get(i).getDocument().getTextContent();
-            Media media = new Media(imgName);
-            media.setCreator(authorNodes.get(i).getDocument().getTextContent());
-            images.add(media);
-        }
-        return images;
+        NodeList childNodes = searchImagesNode.getDocument().getChildNodes();
+        return CategoryImageUtils.getMediaList(childNodes);
     }
 
     /**
@@ -911,7 +902,7 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
                                    Uri contentProviderUri,
                                    final ProgressListener progressListener) throws IOException {
 
-        CustomApiResult result = api.upload(filename, file, dataLength, pageContents, editSummary, getCentralAuthToken(), getEditToken(), progressListener::onProgress);
+        CustomApiResult result = api.upload(filename, file, dataLength, pageContents, editSummary, getEditToken(), progressListener::onProgress);
 
         Timber.d("Result: %s", result.toString());
 
