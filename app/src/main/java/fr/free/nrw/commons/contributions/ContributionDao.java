@@ -16,8 +16,10 @@ import javax.inject.Named;
 import javax.inject.Provider;
 
 import fr.free.nrw.commons.settings.Prefs;
+import fr.free.nrw.commons.utils.StringUtils;
 
 import static fr.free.nrw.commons.contributions.ContributionDao.Table.ALL_FIELDS;
+import static fr.free.nrw.commons.contributions.ContributionDao.Table.COLUMN_WIKI_DATA_ENTITY_ID;
 import static fr.free.nrw.commons.contributions.ContributionsContentProvider.BASE_URI;
 import static fr.free.nrw.commons.contributions.ContributionsContentProvider.uriForId;
 
@@ -109,6 +111,7 @@ public class ContributionDao {
         cv.put(Table.COLUMN_WIDTH, contribution.getWidth());
         cv.put(Table.COLUMN_HEIGHT, contribution.getHeight());
         cv.put(Table.COLUMN_LICENSE, contribution.getLicense());
+        cv.put(Table.COLUMN_WIKI_DATA_ENTITY_ID, contribution.getWikiDataEntityId());
         return cv;
     }
 
@@ -122,7 +125,7 @@ public class ContributionDao {
             } else {
                 index = cursor.getColumnIndex(Table.COLUMN_LICENSE);
             }
-            return new Contribution(
+            Contribution contribution = new Contribution(
                     uriForId(cursor.getInt(cursor.getColumnIndex(Table.COLUMN_ID))),
                     cursor.getString(cursor.getColumnIndex(Table.COLUMN_FILENAME)),
                     parseUri(cursor.getString(cursor.getColumnIndex(Table.COLUMN_LOCAL_URI))),
@@ -140,6 +143,13 @@ public class ContributionDao {
                     cursor.getInt(cursor.getColumnIndex(Table.COLUMN_HEIGHT)),
                     cursor.getString(index)
             );
+
+            String wikidataEntityId = cursor.getString(cursor.getColumnIndex(COLUMN_WIKI_DATA_ENTITY_ID));
+            if (!StringUtils.isNullOrWhiteSpace(wikidataEntityId)) {
+                contribution.setWikiDataEntityId(wikidataEntityId);
+            }
+
+            return contribution;
         }
 
         return null;
@@ -174,6 +184,7 @@ public class ContributionDao {
         public static final String COLUMN_WIDTH = "width";
         public static final String COLUMN_HEIGHT = "height";
         public static final String COLUMN_LICENSE = "license";
+        public static final String COLUMN_WIKI_DATA_ENTITY_ID = "wikidataEntityID";
 
         // NOTE! KEEP IN SAME ORDER AS THEY ARE DEFINED UP THERE. HELPS HARD CODE COLUMN INDICES.
         public static final String[] ALL_FIELDS = {
@@ -192,7 +203,8 @@ public class ContributionDao {
                 COLUMN_MULTIPLE,
                 COLUMN_WIDTH,
                 COLUMN_HEIGHT,
-                COLUMN_LICENSE
+                COLUMN_LICENSE,
+                COLUMN_WIKI_DATA_ENTITY_ID
         };
 
         public static final String DROP_TABLE_STATEMENT = "DROP TABLE IF EXISTS " + TABLE_NAME;
@@ -213,7 +225,8 @@ public class ContributionDao {
                 + "multiple INTEGER,"
                 + "width INTEGER,"
                 + "height INTEGER,"
-                + "LICENSE STRING"
+                + "LICENSE STRING,"
+                + "wikidataEntityID STRING"
                 + ");";
 
         // Upgrade from version 1 ->
@@ -231,6 +244,9 @@ public class ContributionDao {
         static final String SET_DEFAULT_HEIGHT = "UPDATE " + TABLE_NAME + " SET height = 0";
         static final String ADD_LICENSE_FIELD = "ALTER TABLE " + TABLE_NAME + " ADD COLUMN license STRING;";
         static final String SET_DEFAULT_LICENSE = "UPDATE " + TABLE_NAME + " SET license='" + Prefs.Licenses.CC_BY_SA_3 + "';";
+
+        // Upgrade from version 8 ->
+        static final String ADD_WIKI_DATA_ENTITY_ID_FIELD = "ALTER TABLE " + TABLE_NAME + " ADD COLUMN wikidataEntityID STRING;";
 
 
         public static void onCreate(SQLiteDatabase db) {
@@ -280,6 +296,13 @@ public class ContributionDao {
                 db.execSQL(SET_DEFAULT_HEIGHT);
                 db.execSQL(ADD_LICENSE_FIELD);
                 db.execSQL(SET_DEFAULT_LICENSE);
+                from++;
+                onUpdate(db, from, to);
+                return;
+            }
+            if (from == 8) {
+                // Added place field
+                db.execSQL(ADD_WIKI_DATA_ENTITY_ID_FIELD);
                 from++;
                 onUpdate(db, from, to);
                 return;
