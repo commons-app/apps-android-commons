@@ -4,7 +4,6 @@ import android.Manifest;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Build;
 import android.support.annotation.NonNull;
 
@@ -20,7 +19,6 @@ import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.kvstore.BasicKvStore;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.nearby.Place;
-import fr.free.nrw.commons.upload.FileUtils;
 import fr.free.nrw.commons.upload.UploadActivity;
 import fr.free.nrw.commons.utils.PermissionUtils;
 import fr.free.nrw.commons.utils.ViewUtil;
@@ -114,8 +112,7 @@ public class ContributionController {
                                       String source) {
         ArrayList<UploadableFile> uploadableFiles = new ArrayList<>();
         for (File file : imagesFiles) {
-            Uri uri = Uri.parse(file.getPath());
-            uploadableFiles.add(new UploadableFile(file.getPath(), FileUtils.getMimeType(context, uri)));
+            uploadableFiles.add(new UploadableFile(file));
         }
         Intent shareIntent = new Intent(context, UploadActivity.class);
         shareIntent.setAction(ACTION_SEND_MULTIPLE);

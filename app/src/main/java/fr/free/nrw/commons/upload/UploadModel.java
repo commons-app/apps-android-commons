@@ -1,12 +1,11 @@
 package fr.free.nrw.commons.upload;
 
 import android.annotation.SuppressLint;
-import android.content.ContentResolver;
 import android.content.Context;
-import android.database.Cursor;
 import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.webkit.MimeTypeMap;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -41,7 +40,6 @@ public class UploadModel {
             "",
             "",
             GPSExtractor.DUMMY,
-            "",
             null,
             -1L) {
     };
@@ -55,7 +53,6 @@ public class UploadModel {
     private boolean rightCardState = true;
     private int currentStepIndex = 0;
     private Context context;
-    private ContentResolver contentResolver;
     private Disposable badImageSubscription;
 
     private SessionManager sessionManager;
@@ -76,7 +73,6 @@ public class UploadModel {
         this.license = basicKvStore.getString(Prefs.DEFAULT_LICENSE, Prefs.Licenses.CC_BY_SA_3);
         this.licensesByName = licensesByName;
         this.context = context;
-        this.contentResolver = context.getContentResolver();
         this.sessionManager = sessionManager;
         this.fileUtilsWrapper = fileUtilsWrapper;
         this.fileProcessor = fileProcessor;
@@ -106,12 +102,10 @@ public class UploadModel {
                                      Place place,
                                      String source,
                                      SimilarImageInterface similarImageInterface) {
-        fileProcessor
-                .initFileDetails(Objects.requireNonNull(uploadableFile.getFilePath()), context.getContentResolver());
-        long fileCreatedDate = getFileCreatedDate(Uri.parse(uploadableFile.getFilePath()));
-        String fileExt = fileUtilsWrapper.getFileExt(uploadableFile.getFilePath());
+        fileProcessor.initFileDetails(Objects.requireNonNull(uploadableFile.getFilePath()), context.getContentResolver());
+        long fileCreatedDate = uploadableFile.getFileCreatedDate(context);
         GPSExtractor gpsExtractor = fileProcessor.processFileCoordinates(similarImageInterface);
-        return new UploadItem(Uri.parse(uploadableFile.getFilePath()), uploadableFile.getMimeType(), source, gpsExtractor, fileExt, place, fileCreatedDate);
+        return new UploadItem(Uri.parse(uploadableFile.getFilePath()), uploadableFile.getMimeType(context), source, gpsExtractor, place, fileCreatedDate);
     }
 
     void onItemsProcessed(Place place, List<UploadItem> uploadItems) {
@@ -136,34 +130,6 @@ public class UploadModel {
         bottomCardState = true;
         rightCardState = true;
         items = new ArrayList<>();
-    }
-
-    /**
-     * Get filePath creation date from uri from all possible content providers
-     *
-     * @param media
-     * @return
-     */
-    private long getFileCreatedDate(Uri media) {
-        try {
-            Cursor cursor = contentResolver.query(media, null, null, null, null);
-            if (cursor == null) {
-                return -1;//Could not fetch last_modified
-            }
-            //Content provider contracts for opening gallery from the app and that by sharing from gallery from outside are different and we need to handle both the cases
-            int lastModifiedColumnIndex = cursor.getColumnIndex("last_modified");//If gallery is opened from in app
-            if (lastModifiedColumnIndex == -1) {
-                lastModifiedColumnIndex = cursor.getColumnIndex("datetaken");
-            }
-            //If both the content providers do not give the data, lets leave it to Jesus
-            if (lastModifiedColumnIndex == -1) {
-                return -1L;
-            }
-            cursor.moveToFirst();
-            return cursor.getLong(lastModifiedColumnIndex);
-        } catch (Exception e) {
-            return -1;////Could not fetch last_modified
-        }
     }
 
     boolean isPreviousAvailable() {
@@ -311,7 +277,7 @@ public class UploadModel {
         return Observable.fromIterable(items).map(item ->
         {
             Contribution contribution = new Contribution(item.mediaUri, null,
-                    item.title + "." + item.fileExt,
+                    item.title + "." + item.getFileExt(),
                     Description.formatList(item.descriptions), -1,
                     null, null, sessionManager.getAuthorName(),
                     CommonsApplication.DEFAULT_EDIT_SUMMARY, item.gpsCoords.getCoords());
@@ -357,7 +323,7 @@ public class UploadModel {
 
         public boolean selected = false;
         public boolean first = false;
-        public String fileExt;
+        private String fileExt;
         public BehaviorSubject<Integer> imageQuality;
         Title title;
         List<Description> descriptions;
@@ -367,7 +333,7 @@ public class UploadModel {
         public long createdTimestamp;
 
         @SuppressLint("CheckResult")
-        UploadItem(Uri mediaUri, String mimeType, String source, GPSExtractor gpsCoords, String fileExt, @Nullable Place place, long createdTimestamp) {
+        UploadItem(Uri mediaUri, String mimeType, String source, GPSExtractor gpsCoords, @Nullable Place place, long createdTimestamp) {
             title = new Title();
             descriptions = new ArrayList<>();
             descriptions.add(new Description());
@@ -376,9 +342,12 @@ public class UploadModel {
             this.mimeType = mimeType;
             this.source = source;
             this.gpsCoords = gpsCoords;
-            this.fileExt = fileExt;
             imageQuality = BehaviorSubject.createDefault(ImageUtils.IMAGE_WAIT);
             this.createdTimestamp = createdTimestamp;
+        }
+
+        public String getFileExt() {
+            return MimeTypeMap.getSingleton().getExtensionFromMimeType(mimeType);
         }
     }
 

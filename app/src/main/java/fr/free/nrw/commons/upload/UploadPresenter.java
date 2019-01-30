@@ -177,7 +177,7 @@ public class UploadPresenter {
 
     String getCurrentImageFileName() {
         UploadItem currentItem = getCurrentItem();
-        return currentItem.title + "." + uploadModel.getCurrentItem().fileExt;
+        return currentItem.title + "." + uploadModel.getCurrentItem().getFileExt();
     }
 
     @SuppressLint("CheckResult")

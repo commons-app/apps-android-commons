@@ -130,7 +130,7 @@ public class FileUtils {
 
     public static String getMimeType(Context context, Uri uri) {
         String mimeType;
-        if (uri.getScheme().equals(ContentResolver.SCHEME_CONTENT)) {
+        if (uri.getScheme()!=null && uri.getScheme().equals(ContentResolver.SCHEME_CONTENT)) {
             ContentResolver cr = context.getContentResolver();
             mimeType = cr.getType(uri);
         } else {

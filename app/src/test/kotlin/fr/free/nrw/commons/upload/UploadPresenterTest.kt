@@ -1,6 +1,5 @@
 package fr.free.nrw.commons.upload
 
-import fr.free.nrw.commons.contributions.UploadableFile
 import fr.free.nrw.commons.mwapi.MediaWikiApi
 import fr.free.nrw.commons.nearby.Place
 import io.reactivex.Observable
