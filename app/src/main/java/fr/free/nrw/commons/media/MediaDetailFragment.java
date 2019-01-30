@@ -520,12 +520,7 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
         if (date == null || date.toString() == null || date.toString().isEmpty()) {
             return "Uploaded date not available";
         }
-<<<<<<<<< Temporary merge branch 1
-        SimpleDateFormat formatter = new SimpleDateFormat("dd MMM yyyy", Locale.ENGLISH);
-        return formatter.format(date);
-=========
         return DateUtils.dateInLocaleFormat(date);
->>>>>>>>> Temporary merge branch 2
     }
 
     /**
