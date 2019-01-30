@@ -139,7 +139,8 @@ public class PlaceRenderer extends Renderer<Place> {
                 } else {
                     openLayout(buttonLayout);
                 }
-                ((NearbyListFragment)fragment).setMapCenter(place);
+                ((NearbyMapFragment)((NearbyFragment)((NearbyListFragment)fragment).getParentFragment()).getChildFragmentManager().findFragmentByTag(NearbyMapFragment.class.getSimpleName())).setMapCenter(place);
+
 
 
             };

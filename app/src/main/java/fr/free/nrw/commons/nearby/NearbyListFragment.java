@@ -136,8 +136,4 @@ public class NearbyListFragment extends DaggerFragment {
         this.bundleForUpdates = bundleForUpdates;
     }
 
-    public void setMapCenter(Place place) {
-        NearbyFragment nearbyFragment = (NearbyFragment) getParentFragment();
-        nearbyFragment.setMapCenter(place);
-    }
 }

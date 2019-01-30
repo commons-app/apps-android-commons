@@ -821,9 +821,6 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
             locationManager.unregisterLocationManager();
         }
     }
-    public void setMapCenter(Place place) {
-        nearbyMapFragment.setMapCenter(place);
-    }
 }
 
 
