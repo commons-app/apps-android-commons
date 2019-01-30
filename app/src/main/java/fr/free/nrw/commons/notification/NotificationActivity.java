@@ -142,11 +142,4 @@ public class NotificationActivity extends NavigationBaseActivity {
         context.startActivity(intent);
     }
 
-    private void initializeAndSetNotificationList(List<Notification> notificationList){
-        FragmentManager fm = getFragmentManager();
-        mNotificationWorkerFragment = new NotificationWorkerFragment();
-        fm.beginTransaction().add(mNotificationWorkerFragment, TAG_NOTIFICATION_WORKER_FRAGMENT)
-                .commit();
-        mNotificationWorkerFragment.setNotificationList(notificationList);
-    }
 }
