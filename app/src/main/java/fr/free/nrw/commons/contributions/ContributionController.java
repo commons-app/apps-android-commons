@@ -16,14 +16,14 @@ import javax.inject.Named;
 import javax.inject.Singleton;
 
 import fr.free.nrw.commons.R;
+import fr.free.nrw.commons.filepicker.DefaultCallback;
+import fr.free.nrw.commons.filepicker.FilePicker;
 import fr.free.nrw.commons.kvstore.BasicKvStore;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.nearby.Place;
 import fr.free.nrw.commons.upload.UploadActivity;
 import fr.free.nrw.commons.utils.PermissionUtils;
 import fr.free.nrw.commons.utils.ViewUtil;
-import pl.aprilapps.easyphotopicker.DefaultCallback;
-import pl.aprilapps.easyphotopicker.EasyImage;
 
 import static android.content.Intent.ACTION_SEND_MULTIPLE;
 import static fr.free.nrw.commons.contributions.Contribution.SOURCE_CAMERA;
@@ -36,15 +36,12 @@ import static fr.free.nrw.commons.wikidata.WikidataConstants.PLACE_OBJECT;
 @Singleton
 public class ContributionController {
 
-    private final Context context;
     private final BasicKvStore defaultKvStore;
     private final JsonKvStore directKvStore;
 
     @Inject
-    public ContributionController(Context context,
-                                  @Named("default_preferences") BasicKvStore defaultKvStore,
+    public ContributionController(@Named("default_preferences") BasicKvStore defaultKvStore,
                                   @Named("direct_nearby_upload_prefs") JsonKvStore directKvStore) {
-        this.context = context;
         this.defaultKvStore = defaultKvStore;
         this.directKvStore = directKvStore;
     }
@@ -76,31 +73,31 @@ public class ContributionController {
     }
 
     private void initiateGalleryUpload(Activity activity) {
-        setEasyImageConfiguration(activity);
-        EasyImage.openChooserWithGallery(activity, "Choose Images to upload", 0);
+        setPickerConfiguration(activity);
+        FilePicker.openChooserWithGallery(activity, "Choose Images to upload", 0);
     }
 
-    private void setEasyImageConfiguration(Activity activity) {
-        EasyImage.configuration(activity)
+    private void setPickerConfiguration(Activity activity) {
+        FilePicker.configuration(activity)
                 .setAllowMultiplePickInGallery(true)
                 .setCopyTakenPhotosToPublicGalleryAppFolder(true)
                 .setCopyPickedImagesToPublicGalleryAppFolder(true);
     }
 
     private void initiateCameraUpload(Activity activity) {
-        setEasyImageConfiguration(activity);
-        EasyImage.openCameraForImage(activity, 0);
+        setPickerConfiguration(activity);
+        FilePicker.openCameraForImage(activity, 0);
     }
 
     public void handleActivityResult(Activity activity, int requestCode, int resultCode, Intent data) {
-        EasyImage.handleActivityResult(requestCode, resultCode, data, activity, new DefaultCallback() {
+        FilePicker.handleActivityResult(requestCode, resultCode, data, activity, new DefaultCallback() {
             @Override
-            public void onImagePickerError(Exception e, EasyImage.ImageSource source, int type) {
+            public void onImagePickerError(Exception e, FilePicker.ImageSource source, int type) {
                 ViewUtil.showShortToast(activity, "Error occurred while picking images");
             }
 
             @Override
-            public void onImagesPicked(@NonNull List<File> imagesFiles, EasyImage.ImageSource source, int type) {
+            public void onImagesPicked(@NonNull List<File> imagesFiles, FilePicker.ImageSource source, int type) {
                 Intent intent = handleImagesPicked(activity, imagesFiles, getSourceFromRequestCode(source));
                 activity.startActivity(intent);
             }
@@ -126,10 +123,10 @@ public class ContributionController {
         return shareIntent;
     }
 
-    private String getSourceFromRequestCode(EasyImage.ImageSource source) {
-        if (source.equals(EasyImage.ImageSource.CAMERA_IMAGE)) {
+    private String getSourceFromRequestCode(FilePicker.ImageSource source) {
+        if (source.equals(FilePicker.ImageSource.CAMERA_IMAGE)) {
             return SOURCE_CAMERA;
-        } else if (source.equals(EasyImage.ImageSource.GALLERY)) {
+        } else if (source.equals(FilePicker.ImageSource.GALLERY)) {
             return SOURCE_GALLERY;
         }
         return SOURCE_EXTERNAL;
