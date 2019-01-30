@@ -752,8 +752,6 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
     @Override
     @NonNull
     public List<Media> searchImages(String query, int offset) {
-        List<CustomApiResult> imageNodes = null;
-        List<CustomApiResult> authorNodes = null;
         CustomApiResult apiResult=null;
         try {
             apiResult= api.action("query")
@@ -767,14 +765,8 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
                     .param("prop", "imageinfo")
                     .param("iiprop", "url|extmetadata")
                     .get();
-            imageNodes= apiResult.getNodes("/api/query/pages/page/@title");
-            authorNodes= apiResult.getNodes("/api/query/pages/page/imageinfo/ii/@user");
         } catch (IOException e) {
             Timber.e(e, "Failed to obtain searchImages");
-        }
-
-        if (imageNodes == null) {
-            return new ArrayList<>();
         }
 
         CustomApiResult searchImagesNode = apiResult.getNode("/api/query/pages");
