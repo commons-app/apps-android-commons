@@ -164,17 +164,6 @@ public class CommonsApplicationModule {
         return new JsonKvStore(context, "direct_nearby_upload_prefs", gson);
     }
 
-    /**
-     * Is used to determine when user is viewed notifications activity last
-     * @param context
-     * @return date of lastReadNotificationDate
-     */
-    @Provides
-    @Named("last_read_notification_date")
-    public BasicKvStore providesLastReadNotificationDateKvStore(Context context) {
-        return new BasicKvStore(context, "last_read_notification_date");
-    }
-
     @Provides
     public UploadController providesUploadController(SessionManager sessionManager,
                                                      @Named("default_preferences") BasicKvStore kvStore,

@@ -1,55 +1,36 @@
 package fr.free.nrw.commons.notification;
 
 import android.annotation.SuppressLint;
-import android.app.FragmentManager;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
-import android.graphics.Paint;
-import android.graphics.PorterDuff;
-import android.graphics.RectF;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.constraint.ConstraintLayout;
-import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.Snackbar;
-import android.support.v4.content.ContextCompat;
-import android.support.v4.view.ViewCompat;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
-import android.util.Log;
 import android.view.View;
-import android.widget.FrameLayout;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.pedrogomez.renderers.RVRendererAdapter;
 
-import java.io.IOException;
 import java.util.Collections;
-import java.util.Date;
 import java.util.List;
 
 import javax.inject.Inject;
-import javax.inject.Named;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.Utils;
-import fr.free.nrw.commons.kvstore.BasicKvStore;
-import fr.free.nrw.commons.mwapi.MediaWikiApi;
 import fr.free.nrw.commons.theme.NavigationBaseActivity;
 import fr.free.nrw.commons.utils.NetworkUtils;
 import fr.free.nrw.commons.utils.ViewUtil;
@@ -78,11 +59,6 @@ public class NotificationActivity extends NavigationBaseActivity {
 
     @Inject
     NotificationController controller;
-    @Inject
-    MediaWikiApi mediaWikiApi;
-    @Inject
-    @Named("last_read_notification_date")
-    BasicKvStore kvStore;
 
     private static final String TAG_NOTIFICATION_WORKER_FRAGMENT = "NotificationWorkerFragment";
     private NotificationWorkerFragment mNotificationWorkerFragment;
@@ -206,12 +182,6 @@ public class NotificationActivity extends NavigationBaseActivity {
     @SuppressLint("CheckResult")
     private void addNotifications() {
         Timber.d("Add notifications");
-
-        // Store when add notification is called last
-        long currentDate = new Date(System.currentTimeMillis()).getTime();
-        kvStore.putLong("last_read_notification_date", currentDate);
-        Timber.d("Set last notification read date to current date:" + currentDate);
-
         if (mNotificationWorkerFragment == null) {
             Observable.fromCallable(() -> {
                 progressBar.setVisibility(View.VISIBLE);
