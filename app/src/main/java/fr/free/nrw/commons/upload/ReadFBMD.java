@@ -1,27 +1,40 @@
 package fr.free.nrw.commons.upload;
 
-import com.icafe4j.image.meta.Metadata;
-//import com.icafe4j.image.meta.MetadataEntry;
-import com.icafe4j.image.meta.MetadataType;
-import com.icafe4j.image.meta.iptc.IPTC;
-import com.icafe4j.string.StringUtils;
-
 import java.io.File;
 import java.io.IOException;
 import java.util.Arrays;
+import com.icafe4j.image.meta.*;
+import com.icafe4j.image.meta.Metadata;
+import com.icafe4j.image.meta.MetadataReader;
+import com.icafe4j.image.meta.iptc.IPTC;
+import com.icafe4j.string.StringUtils;
+import java.io.IOException;
+import java.util.List;
+import java.util.Map;
+import java.util.Iterator;
+
+import com.icafe4j.image.meta.Metadata;
+import com.icafe4j.image.meta.MetadataType;
+import com.icafe4j.image.meta.iptc.IPTC;
 
 import java.io.IOException;
+import java.util.Collection;
+import java.util.Iterator;
 import java.util.Map;
 
 import retrofit2.http.Url;
 
 public class ReadFBMD {
-    /*public static void main(String[] args) throws IOException {
-        Map<MetadataType, Metadata> metadataMap = Metadata.readMetadata(args[0]);
+    Url url;
+    ReadFBMD(Url url){
+        this.url=url;
+    }
+    public void processMetadata() throws IOException {
+        Map<MetadataType, Metadata> metadataMap = Metadata.readMetadata((File) url);
         IPTC iptc = (IPTC)metadataMap.get(MetadataType.IPTC);
 
         if(iptc != null) {
-            Map<String, > = iptc.getDataSets();
+            Iterator<MetadataEntry> iterator = (Iterator<MetadataEntry>) iptc.getDataSets();
 
             while(iterator.hasNext()) {
                 MetadataEntry item = iterator.next();
@@ -30,7 +43,7 @@ public class ReadFBMD {
         }
     }
     private void printMetadata(MetadataEntry entry, String indent, String increment) {
-        logger.info(indent + entry.getKey() (StringUtils.isNullOrEmpty(entry.getValue())? "" : ": " + entry.getValue()));
+        //logger.info(indent + entry.getKey() (StringUtils.isNullOrEmpty(entry.getValue())? "" : ": " + entry.getValue()));
         if(entry.isMetadataEntryGroup()) {
             indent += increment;
             Collection<MetadataEntry> entries = entry.getMetadataEntries();
@@ -38,7 +51,7 @@ public class ReadFBMD {
                 printMetadata(e, indent, increment);
             }
         }
-    }*/
+    }
 
 }
 
