@@ -1,13 +1,10 @@
 package fr.free.nrw.commons.upload;
 
 import android.Manifest;
-import android.animation.LayoutTransition;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
-import android.support.constraint.ConstraintLayout;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.CardView;
@@ -27,6 +24,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -49,14 +47,15 @@ import butterknife.ButterKnife;
 import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.Utils;
-import fr.free.nrw.commons.auth.AuthenticatedActivity;
 import fr.free.nrw.commons.auth.LoginActivity;
+import fr.free.nrw.commons.auth.SessionManager;
 import fr.free.nrw.commons.category.CategoriesModel;
 import fr.free.nrw.commons.category.CategoryItem;
 import fr.free.nrw.commons.contributions.Contribution;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
 import fr.free.nrw.commons.nearby.Place;
+import fr.free.nrw.commons.theme.BaseActivity;
 import fr.free.nrw.commons.utils.DialogUtil;
 import fr.free.nrw.commons.utils.NetworkUtils;
 import fr.free.nrw.commons.utils.PermissionUtils;
@@ -72,17 +71,17 @@ import static fr.free.nrw.commons.utils.ImageUtils.Result;
 import static fr.free.nrw.commons.utils.ImageUtils.getErrorMessageForResult;
 import static fr.free.nrw.commons.wikidata.WikidataConstants.PLACE_OBJECT;
 
-public class UploadActivity extends AuthenticatedActivity implements UploadView, SimilarImageInterface {
+public class UploadActivity extends BaseActivity implements UploadView, SimilarImageInterface {
     @Inject MediaWikiApi mwApi;
-    @Inject
-    @Named("direct_nearby_upload_prefs")
-    JsonKvStore directKvStore;
+    @Inject @Named("direct_nearby_upload_prefs") JsonKvStore directKvStore;
     @Inject UploadPresenter presenter;
     @Inject CategoriesModel categoriesModel;
+    @Inject SessionManager sessionManager;
 
     // Main GUI
     @BindView(R.id.backgroundImage) PhotoView background;
-    @BindView(R.id.activity_upload_cards) ConstraintLayout cardLayout;
+    @BindView(R.id.upload_root_layout)
+    RelativeLayout rootLayout;
     @BindView(R.id.view_flipper) ViewFlipper viewFlipper;
 
     // Top Card
@@ -427,24 +426,11 @@ public class UploadActivity extends AuthenticatedActivity implements UploadView,
     }
 
     @Override
-    protected void onAuthCookieAcquired(String authCookie) {
-        mwApi.setAuthCookie(authCookie);
-    }
-
-
-    @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == CommonsApplication.OPEN_APPLICATION_DETAIL_SETTINGS) {
             //TODO: Confirm if handling manual permission enabled is required
         }
-    }
-
-
-    @Override
-    protected void onAuthFailure() {
-        Toast.makeText(this, R.string.authentication_failed, Toast.LENGTH_LONG).show();
-        finish();
     }
 
     /**
@@ -504,9 +490,6 @@ public class UploadActivity extends AuthenticatedActivity implements UploadView,
     }
 
     private void configureLayout() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
-            cardLayout.getLayoutTransition().enableTransitionType(LayoutTransition.CHANGING);
-        }
         background.setScaleType(ImageView.ScaleType.CENTER_CROP);
         background.setOnScaleChangeListener((scaleFactor, x, y) -> presenter.closeAllCards());
     }
@@ -536,7 +519,7 @@ public class UploadActivity extends AuthenticatedActivity implements UploadView,
         // Navigation next / previous for each image as we're collecting title + description
         next.setOnClickListener(v -> {
             if (!NetworkUtils.isInternetConnectionEstablished(this)) {
-                ViewUtil.showShortSnackbar(cardLayout, R.string.no_internet);
+                ViewUtil.showShortSnackbar(rootLayout, R.string.no_internet);
                 return;
             }
             setTitleAndDescriptions();
