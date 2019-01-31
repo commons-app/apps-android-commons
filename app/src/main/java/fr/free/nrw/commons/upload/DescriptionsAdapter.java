@@ -147,8 +147,6 @@ class DescriptionsAdapter extends RecyclerView.Adapter<DescriptionsAdapter.ViewH
                 descItemEditText.setOnFocusChangeListener((v, hasFocus) -> {
                     if (!hasFocus) {
                         ViewUtil.hideKeyboard(v);
-                    } else {
-                        uploadView.setTopCardState(false);
                     }
                 });
 

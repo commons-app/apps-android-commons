@@ -769,11 +769,9 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
     @Override
     @NonNull
     public List<Media> searchImages(String query, int offset) {
-        List<CustomApiResult> imageNodes = null;
-        List<CustomApiResult> authorNodes = null;
-        CustomApiResult customApiResult;
+        CustomApiResult apiResult=null;
         try {
-            customApiResult= api.action("query")
+            apiResult= api.action("query")
                     .param("format", "xml")
                     .param("generator", "search")
                     .param("gsrwhat", "text")
@@ -782,26 +780,22 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
                     .param("gsroffset",offset)
                     .param("gsrsearch", query)
                     .param("prop", "imageinfo")
+                    .param("iiprop", "url|extmetadata")
                     .get();
-            imageNodes= customApiResult.getNodes("/api/query/pages/page/@title");
-            authorNodes= customApiResult.getNodes("/api/query/pages/page/imageinfo/ii/@user");
         } catch (IOException e) {
             Timber.e(e, "Failed to obtain searchImages");
         }
 
-        if (imageNodes == null) {
+        CustomApiResult searchImagesNode = apiResult.getNode("/api/query/pages");
+        if (searchImagesNode == null
+                || searchImagesNode.getDocument() == null
+                || searchImagesNode.getDocument().getChildNodes() == null
+                || searchImagesNode.getDocument().getChildNodes().getLength() == 0) {
             return new ArrayList<>();
         }
 
-        List<Media> images = new ArrayList<>();
-
-        for (int i=0; i< imageNodes.size();i++){
-            String imgName = imageNodes.get(i).getDocument().getTextContent();
-            Media media = new Media(imgName);
-            media.setCreator(authorNodes.get(i).getDocument().getTextContent());
-            images.add(media);
-        }
-        return images;
+        NodeList childNodes = searchImagesNode.getDocument().getChildNodes();
+        return CategoryImageUtils.getMediaList(childNodes);
     }
 
     /**

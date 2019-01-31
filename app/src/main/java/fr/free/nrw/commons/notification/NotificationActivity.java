@@ -171,9 +171,10 @@ public class NotificationActivity extends NavigationBaseActivity {
                 if (!initiated) {
                     init();
                 }
+
                 background.setBounds(itemView.getRight() + (int) dX, itemView.getTop(), itemView.getRight(), itemView.getBottom());
                 background.draw(c);
-                super.onChildDraw(c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive);
+                super.onChildDraw(c, recyclerView, viewHolder, dX/4, dY, actionState, isCurrentlyActive);
             }
 
         };
@@ -266,13 +267,5 @@ public class NotificationActivity extends NavigationBaseActivity {
         Intent intent = new Intent(context, NotificationActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT | Intent.FLAG_ACTIVITY_SINGLE_TOP);
         context.startActivity(intent);
-    }
-
-    private void initializeAndSetNotificationList(List<Notification> notificationList) {
-        FragmentManager fm = getFragmentManager();
-        mNotificationWorkerFragment = new NotificationWorkerFragment();
-        fm.beginTransaction().add(mNotificationWorkerFragment, TAG_NOTIFICATION_WORKER_FRAGMENT)
-                .commit();
-        mNotificationWorkerFragment.setNotificationList(notificationList);
     }
 }
