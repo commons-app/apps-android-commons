@@ -866,7 +866,7 @@ public class NearbyMapFragment extends DaggerFragment {
             if (fabGallery.isShown()) {
                 Timber.d("Gallery button tapped. Place: %s", place.toString());
                 storeSharedPrefs();
-                controller.initiateGalleryPick(getActivity(), true);
+                controller.initiateGalleryPick(getActivity(), false);
             }
         });
     }
