@@ -2,11 +2,9 @@ package fr.free.nrw.commons.settings;
 
 import android.Manifest;
 import android.app.AlertDialog;
-import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.preference.EditTextPreference;
-import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.PreferenceFragment;
 import android.preference.SwitchPreference;
@@ -22,12 +20,16 @@ import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.Utils;
 import fr.free.nrw.commons.contributions.ContributionsSyncAdapter;
 import fr.free.nrw.commons.di.ApplicationlessInjection;
+import fr.free.nrw.commons.kvstore.BasicKvStore;
 import fr.free.nrw.commons.logging.CommonsLogSender;
 import fr.free.nrw.commons.utils.PermissionUtils;
 import fr.free.nrw.commons.utils.ViewUtil;
 
 public class SettingsFragment extends PreferenceFragment {
-    @Inject @Named("default_preferences") SharedPreferences prefs;
+
+    @Inject
+    @Named("default_preferences")
+    BasicKvStore defaultKvStore;
     @Inject CommonsLogSender commonsLogSender;
 
     @Override
@@ -41,16 +43,6 @@ public class SettingsFragment extends PreferenceFragment {
         // Load the preferences from an XML resource
         addPreferencesFromResource(R.xml.preferences);
 
-        // Update spinner to show selected value as summary
-        ListPreference licensePreference = (ListPreference) findPreference(Prefs.DEFAULT_LICENSE);
-        licensePreference.setSummary(getString(Utils.licenseNameFor(licensePreference.getValue())));
-
-        // Keep summary updated when changing value
-        licensePreference.setOnPreferenceChangeListener((preference, newValue) -> {
-            preference.setSummary(getString(Utils.licenseNameFor((String) newValue)));
-            return true;
-        });
-
         SwitchPreference themePreference = (SwitchPreference) findPreference("theme");
         themePreference.setOnPreferenceChangeListener((preference, newValue) -> {
             getActivity().recreate();
@@ -60,14 +52,14 @@ public class SettingsFragment extends PreferenceFragment {
         //Check if the Author Name switch is enabled and appropriately handle the author name usage
         SwitchPreference useAuthorName = (SwitchPreference) findPreference("useAuthorName");
         EditTextPreference authorName = (EditTextPreference) findPreference("authorName");
-        authorName.setEnabled(prefs.getBoolean("useAuthorName", false));
+        authorName.setEnabled(defaultKvStore.getBoolean("useAuthorName", false));
         useAuthorName.setOnPreferenceChangeListener((preference, newValue) -> {
             authorName.setEnabled((Boolean) newValue);
             return true;
         });
 
         final EditTextPreference uploadLimit = (EditTextPreference) findPreference("uploads");
-        int currentUploadLimit = prefs.getInt(Prefs.UPLOADS_SHOWING, 100); // 100 is the default
+        int currentUploadLimit = defaultKvStore.getInt(Prefs.UPLOADS_SHOWING, 100); // 100 is the default
         uploadLimit.setText(Integer.toString(currentUploadLimit));
         uploadLimit.setSummary(Integer.toString(currentUploadLimit));
         uploadLimit.setOnPreferenceChangeListener((preference, newValue) -> {
@@ -78,8 +70,7 @@ public class SettingsFragment extends PreferenceFragment {
             } catch (NumberFormatException e) {
                 e.printStackTrace();
             }
-
-            final SharedPreferences.Editor editor = prefs.edit();
+          
             if (value > ContributionsSyncAdapter.ABSOLUTE_CONTRIBUTIONS_LOAD_LIMIT) {
                 value = ContributionsSyncAdapter.ABSOLUTE_CONTRIBUTIONS_LOAD_LIMIT;
                 new AlertDialog.Builder(getActivity())
@@ -89,12 +80,10 @@ public class SettingsFragment extends PreferenceFragment {
                         .show();
             }
 
-            editor.putInt(Prefs.UPLOADS_SHOWING, value);
-            editor.putBoolean(Prefs.IS_CONTRIBUTION_COUNT_CHANGED, true);
+            defaultKvStore.putInt(Prefs.UPLOADS_SHOWING, value);
+            defaultKvStore.putBoolean(Prefs.IS_CONTRIBUTION_COUNT_CHANGED, true);
             uploadLimit.setSummary(Integer.toString(value));
             uploadLimit.setText(Integer.toString(value));
-
-            editor.apply();
 
             // Return false as we handle setting the editText value
             return false;

@@ -94,7 +94,7 @@
   <string name="no_uploads_yet">Encara no heu carregat cap foto.</string>
   <string name="menu_retry_upload">Reintenta</string>
   <string name="menu_cancel_upload">Cancel·la</string>
-  <string name="share_license_summary">Aquesta imatge es llicenciarà sota %1$s</string>
+  <string name="share_license_summary" fuzzy="true">Aquesta imatge es llicenciarà sota %1$s</string>
   <string name="menu_download">Baixa</string>
   <string name="preference_license">Llicència per defecte</string>
   <string name="use_previous">Utilitza títol i descripció anteriors</string>
@@ -190,4 +190,7 @@
   <string name="notifications_mention" fuzzy="true">%1$s us ha mencionat a %2$s.</string>
   <string name="about_faq" fuzzy="true">Preguntes freqüents</string>
   <string name="no_images_found">No s’ha trobat cap imatge.</string>
+  <string name="search_tab_title_media">MULTIMÈDIA</string>
+  <string name="search_tab_title_categories">CATEGORIES</string>
+  <string name="no_recent_searches">No hi ha cap cerca recent</string>
 </resources>

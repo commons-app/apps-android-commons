@@ -83,7 +83,7 @@
   <string name="no_uploads_yet">Nie môsz jesz wladowónych òdjimków</string>
   <string name="menu_retry_upload">Próbùjë znowa</string>
   <string name="menu_cancel_upload">Òprzestóń</string>
-  <string name="share_license_summary">Nen òbrôzk bãdze ùprzistãpniony wedle licencëji %1$s</string>
+  <string name="share_license_summary" fuzzy="true">Nen òbrôzk bãdze ùprzistãpniony wedle licencëji %1$s</string>
   <string name="menu_download">Zladënk</string>
   <string name="preference_license" fuzzy="true">Licencëjô</string>
   <string name="use_previous">Ùżëjë slédnegò titla/òpisënka</string>

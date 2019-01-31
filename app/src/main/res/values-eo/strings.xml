@@ -93,7 +93,7 @@
   <string name="no_uploads_yet">Vi ankoraŭ ne alŝutis fotojn.</string>
   <string name="menu_retry_upload">Reprovi</string>
   <string name="menu_cancel_upload">Nuligi</string>
-  <string name="share_license_summary">Ĉi tiu bildo estos sub permesilo %1$s</string>
+  <string name="share_license_summary" fuzzy="true">Ĉi tiu bildo estos sub permesilo %1$s</string>
   <string name="menu_download">Elŝuti</string>
   <string name="preference_license">Defaŭlta permesilo</string>
   <string name="use_previous">Uzi la antaŭan titolon/priskribon</string>
@@ -179,7 +179,7 @@
   <string name="skip_login">Preterpasi</string>
   <string name="navigation_item_login">Ensaluti</string>
   <string name="skip_login_title">Ĉu vere vi volas transpasi la ensalutadon?</string>
-  <string name="skip_login_message">Vi tiam ne povos alŝuti bildojn.</string>
+  <string name="skip_login_message" fuzzy="true">Vi tiam ne povos alŝuti bildojn.</string>
   <string name="login_alert_message">Bonvolu ensaluti por uzi ĉi tiun eblon</string>
   <string name="nearby_location_has_not_changed">La pozicio ne ŝanĝiĝis.</string>
   <string name="nearby_location_not_available">Pozicio ne havebla.</string>

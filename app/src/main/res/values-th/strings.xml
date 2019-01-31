@@ -1,10 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Authors:
 * Aefgh39622
+* B20180
 * Horus
 * Octahedron80
 -->
 <resources>
+  <string name="title_activity_explore">สำรวจ</string>
+  <string name="navigation_item_explore">สำรวจ</string>
   <string name="preference_category_appearance">การแสดงผล</string>
   <string name="preference_category_general">ทั่วไป</string>
   <string name="preference_category_feedback">คำติชม</string>
@@ -12,6 +15,7 @@
   <string name="app_name">คอมมอนส์</string>
   <string name="bullet">•</string>
   <string name="menu_settings">การตั้งค่า</string>
+  <string name="intent_share_upload_label">อัปโหลดไปคอมมอนส์</string>
   <string name="username">ชื่อผู้ใช้</string>
   <string name="password">รหัสผ่าน</string>
   <string name="login_credential">ลงชื่อเข้าระบบบัญชีคอมมอนส์บีตาของคุณ</string>
@@ -23,7 +27,7 @@
   <string name="login_success">การเข้าสู่ระบบสำเร็จแล้ว!</string>
   <string name="login_failed">การเข้าสู่ระบบล้มเหลว!</string>
   <string name="upload_failed">ไม่พบไฟล์ กรุณาลองใช้ไฟล์อื่น</string>
-  <string name="authentication_failed" fuzzy="true">การตรวจสอบความถูกต้องล้มเหลว!</string>
+  <string name="authentication_failed">การตรวจสอบล้มเหลว โปรดเข้าสู่ระบบอีกครั้ง</string>
   <string name="uploading_started">เริ่มการอัปโหลดแล้ว!</string>
   <string name="upload_completed_notification_title">อัปโหลด %1$s แล้ว!</string>
   <string name="upload_completed_notification_text">แตะเพื่อดูการอัปโหลดของคุณ</string>
@@ -44,7 +48,7 @@
   <string name="provider_contributions">การอัปโหลดของฉัน</string>
   <string name="menu_share">แชร์</string>
   <string name="menu_open_in_browser">ดูในเบราว์เซอร์</string>
-  <string name="share_title_hint" fuzzy="true">ชื่อเรื่อง</string>
+  <string name="share_title_hint">ชื่อเรื่อง (จำเป็น)</string>
   <string name="add_title_toast">กรุณาระบุชืิ่อเรื่องของไฟล์นี้</string>
   <string name="share_description_hint">คำอธิบาย</string>
   <string name="login_failed_network">ไม่สามารถเข้าสู่ระบบได้ - ความล้มเหลวของเครือข่าย</string>
@@ -90,7 +94,7 @@
   <string name="no_uploads_yet">คุณยังไม่ได้อัปโหลดรูปภาพใดๆ</string>
   <string name="menu_retry_upload">ลองใหม่</string>
   <string name="menu_cancel_upload">ยกเลิก</string>
-  <string name="share_license_summary">รูปภาพนี้จะอนุญาตให้ใช้ได้ภายใต้สัญญาอนุญาต %1$s</string>
+  <string name="share_license_summary" fuzzy="true">รูปภาพนี้จะอนุญาตให้ใช้ได้ภายใต้สัญญาอนุญาต %1$s</string>
   <string name="media_upload_policy">โดยการส่งรูปภาพนี้ ฉันยืนยันว่านี่เป็นงานของฉันเอง ซึ่งไม่ประกอบด้วยเนื้อหาที่ละเมิดลิขสิทธิ์หรือภาพเซลฟี หรืออื่นๆ ตามที่ระบุใน&lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines\"&gt;นโยบายของ Wikimedia Commons&lt;/a&gt;</string>
   <string name="menu_download">ดาวน์โหลด</string>
   <string name="preference_license">สัญญาอนุญาตปริยาย</string>
@@ -148,6 +152,7 @@
   <string name="detail_description_empty">ไม่มีคำอธิบาย</string>
   <string name="detail_license_empty">สัญญาอนุญาตที่ไม่รู้จัก</string>
   <string name="menu_refresh">รีเฟรช</string>
+  <string name="storage_permission_title">การขอสิทธิ์ในการจัดเก็บข้อมูล</string>
   <string name="read_storage_permission_rationale">สิทธิที่ต้องการ: อ่านที่เก็บข้อมูลภายนอก แอปไม่สามารถเข้าถึงคลังภาพได้โดยไม่มีสิทธินี้</string>
   <string name="write_storage_permission_rationale">สิทธิที่ต้องการ: เขียนที่เก็บข้อมูลภายนอก แอปไม่สามารถเข้าถึงกล้องของคุณได้โดยไม่มีสิทธินี้</string>
   <string name="location_permission_rationale">สิทธิทางเลือก: รับข้อมูลตำแหน่งที่ตั้งปัจจุบันสำหรับข้อเสนอแนะหมวดหมู่</string>
@@ -250,4 +255,7 @@
   <string name="about_translate_proceed">ดำเนินการต่อ</string>
   <string name="about_translate_cancel">ยกเลิก</string>
   <string name="retry">ลองใหม่</string>
+  <string name="no_image">ไม่มีภาพที่ใช้</string>
+  <string name="no_image_reverted">ไม่มีภาพย้อนกลับ</string>
+  <string name="no_image_uploaded">ไม่มีภาพที่อัปโหลด</string>
 </resources>

@@ -102,7 +102,7 @@
   <string name="no_uploads_yet">Panjenengan durung tau ngunggah foto.</string>
   <string name="menu_retry_upload">Jajal manèh</string>
   <string name="menu_cancel_upload">Wurung</string>
-  <string name="share_license_summary">Gambar iki bakal dilisènsèkaké nganggo %1$s</string>
+  <string name="share_license_summary" fuzzy="true">Gambar iki bakal dilisènsèkaké nganggo %1$s</string>
   <string name="menu_download">Undhuh</string>
   <string name="preference_license" fuzzy="true">Lisènsi</string>
   <string name="use_previous">Anggo sesirah/wedharan sadurungé</string>

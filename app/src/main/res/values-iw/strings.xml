@@ -8,6 +8,7 @@
 * Guycn2
 * Inkbug
 * Nurick
+* Strayblues
 * Uziel302
 * YaronSh
 -->
@@ -111,7 +112,10 @@
   <string name="no_uploads_yet">עדיין לא העלית תמונות.</string>
   <string name="menu_retry_upload">לנסות שוב</string>
   <string name="menu_cancel_upload">ביטול</string>
-  <string name="share_license_summary">התמונה הזאת היא תחת רשיון %1$s</string>
+  <plurals name="share_license_summary">
+    <item quantity="one">התמונה הזאת תפורסם ברישיון %1$s</item>
+    <item quantity="other">התמונות האלה תפורסמנה ברישיון %1$s</item>
+  </plurals>
   <string name="media_upload_policy">שליחת התמונה הזאת מהווה את הצהרתי על כך שזאת יצירה שלי, שהיא לא מכילה חומר מוגבל בזכויות יוצרים או תמונות עצמיות (סלפי) ומתאימה בכל אופן ל&lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines\"&gt;מדיניות של אתר ויקישיתוף של ויקימדיה&lt;/a&gt;.</string>
   <string name="menu_download">הורדה</string>
   <string name="preference_license">רישיון ברירת מחדל</string>
@@ -241,6 +245,12 @@
   <string name="description_info">נא לתאר את המדיה כמה שיותר: איפה היא נוצרה? מה היא מראה? מה ההקשר? נא לתאר את העצמים או את האנשים. נא לחשוף מידע שאי־אפשר לנחש בקלות, למשל, הזמן ביום אם זאת תמונת נוף. אם המדיה מציגה משהו בלתי־רגיל, נא להסביר מה מיוחד בה.</string>
   <string name="upload_image_too_dark">התמונה הזאת חשוכה מדי, האם ברצונך באמת להעלות אותה? ויקישיתוף מיועד רק לתמונות בעלות ערך אנציקלופדי.</string>
   <string name="upload_image_blurry">התמונה הזאת מטושטשת, האם ברצונך באמת להעלות אותה? ויקישיתוף מיועד רק לתמונות בעלות ערך אנציקלופדי.</string>
+  <string name="upload_problem_exist">בעיות פוטנציאליות עם התמונה הזאת:</string>
+  <string name="upload_problem_image_dark">התמונה חשוכה מדי.</string>
+  <string name="upload_problem_image_blurry">התמונה מטושטשת.</string>
+  <string name="upload_problem_image_duplicate">התמונה כבר בוויקישיתוף.</string>
+  <string name="upload_problem_different_geolocation">התמונה צולמה במקום אחר.</string>
+  <string name="upload_problem_do_you_continue">האם ברצונך להעלות את התמונה הזאת עדיין?</string>
   <string name="give_permission">לתת הרשאה</string>
   <string name="use_external_storage">להשתמש באחסון חיצוני</string>
   <string name="use_external_storage_summary">שמירת תמונות שצולמו באמצעות מצלמה בתוך היישום במכשיר שלך</string>
@@ -256,7 +266,7 @@
   <string name="skip_login">לדלג</string>
   <string name="navigation_item_login">כניסה לחשבון</string>
   <string name="skip_login_title">האם באמת לדלג על הכניסה לחשבון?</string>
-  <string name="skip_login_message">לא תהיה לך אפשרות להעלות תמונות.</string>
+  <string name="skip_login_message" fuzzy="true">לא תהיה לך אפשרות להעלות תמונות.</string>
   <string name="login_alert_message">נא להיכנס לחשבון כדי להשתמש באפשרות הזאת</string>
   <string name="copy_wikicode">העתקת קוד ויקי ללוח</string>
   <string name="wikicode_copied">קוד הוויקי הועתק ללוח</string>
@@ -305,6 +315,8 @@
   <string name="provider_searches">דברים שחיפשת לאחרונה</string>
   <string name="error_loading_categories">אירעה שגיאה בעת טעינת קטגוריות.</string>
   <string name="error_loading_subcategories">אירעה שגיאה בעת טעינת תת־קטגוריות.</string>
+  <string name="search_tab_title_media">מדיה</string>
+  <string name="search_tab_title_categories">קטגוריות</string>
   <string name="successful_wikidata_edit">התמונה נוספה בהצלחה ל־%1$s בוויקינתונים!</string>
   <string name="wikidata_edit_failure">לא ניתן היה לעדכן הישות המתאימה בוויקינתונים!</string>
   <string name="menu_set_wallpaper">הגדרה בתור טפט</string>

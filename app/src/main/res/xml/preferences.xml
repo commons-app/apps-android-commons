@@ -16,13 +16,6 @@
     <fr.free.nrw.commons.ui.LongTitlePreferences.LongTitlePreferenceCategory
         android:title="@string/preference_category_general">
 
-        <fr.free.nrw.commons.ui.LongTitlePreferences.LongTitleListPreference
-            android:key="defaultLicense"
-            android:title="@string/preference_license"
-            android:entries="@array/pref_defaultLicense_entries"
-            android:entryValues="@array/pref_defaultLicense_values"
-            android:defaultValue="@string/license_pref_cc_by_sa_4_0" />
-
         <fr.free.nrw.commons.ui.LongTitlePreferences.LongTitleSwitchPreference
             android:key="useExternalStorage"
             android:title="@string/use_external_storage"

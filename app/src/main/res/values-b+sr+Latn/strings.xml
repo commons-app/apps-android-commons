@@ -104,7 +104,7 @@
   <string name="no_uploads_yet">Još uvek niste otpremili nijednu fotografiju.</string>
   <string name="menu_retry_upload">Pokušaj ponovo</string>
   <string name="menu_cancel_upload">Otkaži</string>
-  <string name="share_license_summary">Slika će se voditi pod licencom %1$s</string>
+  <string name="share_license_summary" fuzzy="true">Slika će se voditi pod licencom %1$s</string>
   <string name="media_upload_policy">Slanjem ove slike, ja tvrdim da je u pitanju moj rad, da ne sadrži materijal ili selfije zaštićene autorskim pravima, te da je na ostale načine u skladu sa &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines\"&gt;smernicama Vikimedijine ostave&lt;/a&gt;.</string>
   <string name="menu_download">Preuzmi</string>
   <string name="preference_license">Podrazumevana licenca</string>
@@ -246,7 +246,7 @@
   <string name="skip_login">Preskoči</string>
   <string name="navigation_item_login">Prijavi me</string>
   <string name="skip_login_title">Zaista želite da preskočite prijavu?</string>
-  <string name="skip_login_message">Nećete moći da otpremate slike.</string>
+  <string name="skip_login_message" fuzzy="true">Nećete moći da otpremate slike.</string>
   <string name="login_alert_message">Prijavite se da biste koristili ovu funkciju</string>
   <string name="copy_wikicode">Kopiraj vikitekst u ostavu</string>
   <string name="wikicode_copied">Vikitekst je kopiran u ostavu</string>

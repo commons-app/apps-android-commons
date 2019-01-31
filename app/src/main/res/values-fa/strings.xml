@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Authors:
+* Amirsara
 * Arash.pt
 * Ebraminio
 * Eshagh79
@@ -9,6 +10,7 @@
 * Omidh
 * Ommmmid
 * Reza1615
+* Vahedi
 * Yoosef Pooranvary
 * جواد
 -->
@@ -79,7 +81,7 @@
   <string name="gps_disabled">مکان‌یاب در دستگاه شما خاموش است. آیا دوست دارید فعال شود؟</string>
   <string name="enable_gps">فعال کردن مکان‌یاب</string>
   <string name="contributions_subtitle_zero">هنوز هیچ بارگذاری</string>
-  <string name="contributions_subtitle" fuzzy="true">{{%1$d|zero=@string/contributions_subtitle_zero|one=بارگذاری شد|%1$d بارگذاری شد}}</string>
+  <string name="contributions_subtitle">{{%1$d|zero=@string/contributions_subtitle_zero|one=(%1$d)|(%1$d)}}</string>
   <plurals name="starting_multiple_uploads">
     <item quantity="one">شروع %1$d بارگذاری پرونده</item>
     <item quantity="other">شروع بارگذاری %1$d پرونده</item>
@@ -108,7 +110,10 @@
   <string name="no_uploads_yet">شما هنوز نگاره‌ای بارگذاری نکرده‌اید.</string>
   <string name="menu_retry_upload">تلاش مجدد</string>
   <string name="menu_cancel_upload">لغو</string>
-  <string name="share_license_summary">این نگاره تحت مجوز %1$s است</string>
+  <plurals name="share_license_summary">
+    <item quantity="one">این نگاره تحت مجوز %1$s است</item>
+    <item quantity="other">این نگاره تحت مجوز %1$s است</item>
+  </plurals>
   <string name="media_upload_policy">با بارگذاری این تصویر، تأیید می‌کنم که این اثر کار خودم است و از محتوای دارای حق تکثیر یا سلفی برای ایجاد آن استفاده نکرده‌ام و شرایط ذکر شده در By submitting this picture, I declare that this is my own work, that it does not contain copyrighted material or selfies, and otherwise adheres to &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines\"&gt;سیاست‌های ویکی‌انبار&lt;/a&gt; را رعایت می‌کند.</string>
   <string name="menu_download">دریافت</string>
   <string name="preference_license">مجوز پیش‌فرض</string>
@@ -250,7 +255,7 @@
   <string name="skip_login">رها کردن</string>
   <string name="navigation_item_login">ورود به سامانه</string>
   <string name="skip_login_title">آیا واقعا میخواهید وارد شوید؟</string>
-  <string name="skip_login_message">شما نمیتوانید تصاویر را آپلود کنید.</string>
+  <string name="skip_login_message" fuzzy="true">شما نمیتوانید تصاویر را آپلود کنید.</string>
   <string name="login_alert_message">لطفا برای استفاده از این ویژگی وارد شوید</string>
   <string name="copy_wikicode">از ویکی واژه به کلیپ برد کپی کنید.</string>
   <string name="nearby_location_has_not_changed">مکان تغییر نکرده‌است.</string>
@@ -288,6 +293,8 @@
   <string name="search_commons">جستجوی ویکی‌انبار</string>
   <string name="title_activity_search">جستجو</string>
   <string name="search_recent_header">جستجوهای اخیر:</string>
+  <string name="search_tab_title_media">رسانه</string>
+  <string name="search_tab_title_categories">دسته بندی</string>
   <string name="menu_set_wallpaper">انتخاب به عنوان پس‌زمینه</string>
   <string name="quiz">امتحان</string>
   <string name="question">پرسش</string>
@@ -335,4 +342,5 @@
   <string name="yes_submit">بله، ارسال شود</string>
   <string name="no_go_back">نه، به قبل بازگرد</string>
   <string name="upload_flow_all_images_in_set">(برای همهٔ تصاویر موجود در مجموعه)</string>
+  <string name="error_processing_image">هنگام پردازش این تصویر خطایی رخ داد. لطفا دوباره سعی کنید!</string>
 </resources>

@@ -8,6 +8,7 @@
 * Joseph
 * McAang
 * Neslihan Turan
+* Okkerem
 * Rapsar
 * Sayginer
 * Sucsuzz
@@ -115,7 +116,7 @@
   <string name="no_uploads_yet">Henüz yüklenmiş hiç fotoğrafınız yok.</string>
   <string name="menu_retry_upload">Tekrar dene</string>
   <string name="menu_cancel_upload">İptal</string>
-  <string name="share_license_summary">Bu resmi %1$s lisansı altında olacak.</string>
+  <string name="share_license_summary" fuzzy="true">Bu resmi %1$s lisansı altında olacak.</string>
   <string name="media_upload_policy">Bu resmi göndererek bunun kendi eserim olduğumu, telif hakkıyla korunan materyal veya selfie içermediğini ve aksi takdirde &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines\"&gt;Wikimedia Commons politikalarına&lt;/a&gt; uyduğunu beyan ederim.</string>
   <string name="menu_download">İndir</string>
   <string name="preference_license">Varsayılan lisans</string>
@@ -260,7 +261,7 @@
   <string name="skip_login">Geç</string>
   <string name="navigation_item_login">Oturum aç</string>
   <string name="skip_login_title">Giriş işlemini gerçekten atlamak istiyor musunuz?</string>
-  <string name="skip_login_message">Resim yükleyemeyeceksiniz.</string>
+  <string name="skip_login_message" fuzzy="true">Resim yükleyemeyeceksiniz.</string>
   <string name="login_alert_message">Bu özelliği kullanmak için lütfen giriş yapın</string>
   <string name="copy_wikicode">Vikimetini panoya kopyala</string>
   <string name="wikicode_copied">Vikikod panoya kopyalandı</string>
@@ -309,6 +310,7 @@
   <string name="provider_searches">Son aranan sorgular</string>
   <string name="error_loading_categories">Kategoriler yüklenirken hata oluştu.</string>
   <string name="error_loading_subcategories">Alt kategoriler yüklenirken hata oluştu.</string>
+  <string name="search_tab_title_categories">KATEGORILER</string>
   <string name="successful_wikidata_edit">Resim, Vikiveri\'de %1$s içine başarıyla eklendi.</string>
   <string name="wikidata_edit_failure">Karşılık gelen Vikiveri varlığı güncellenemedi!</string>
   <string name="menu_set_wallpaper">Duvar kağıdı olarak ayarla</string>

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Authors:
 * Aue Nai
+* Htawmonzel
 -->
 <resources>
   <string name="title_activity_explore">စဳစောတ်</string>
@@ -52,7 +53,7 @@
   <string name="no_uploads_yet">မၞးမုရဲဗီုမွဲမှ ဟွံဂွံပတိုန်လဝ်ဏီပုဟ်</string>
   <string name="menu_retry_upload">ကလေင်ကၠောန်</string>
   <string name="menu_cancel_upload">တးပဲါ</string>
-  <string name="share_license_summary">ဗီုဏအ်ဂွံအခေါၚ်သၟတ်တၚ်ခတ် %1$s</string>
+  <string name="share_license_summary" fuzzy="true">ဗီုဏအ်ဂွံအခေါၚ်သၟတ်တၚ်ခတ် %1$s</string>
   <string name="menu_download">တံင်လုပ်ကေတ်</string>
   <string name="license_name_cc_by_four"> Attribution 4.0</string>
   <string name="license_name_cc0">CC0</string>
@@ -60,23 +61,23 @@
   <string name="license_name_cc_by_sa_3_0_at">CC BY-SA 3.0 (သြသတြဳယျ))</string>
   <string name="license_name_cc_by_sa_3_0_de">CC BY-SA 3.0 (ဂျာမနဳ)</string>
   <string name="license_name_cc_by_sa_3_0_nl">CC BY-SA 3.0 (နဒါလာန်)</string>
-  <string name="license_name_cc_by_sa_3_0_no">CC BY-SA 3.0 (နေဝ်ဝေ)</string>
-  <string name="license_name_cc_by_sa_3_0_pl">CC BY-SA 3.0 (ဗိုလာန်)</string>
+  <string name="license_name_cc_by_sa_3_0_no">CC BY-SA 3.0 (နဝ်ဝေ)</string>
+  <string name="license_name_cc_by_sa_3_0_pl">CC BY-SA 3.0 (ပဝ်လာန်)</string>
   <string name="license_name_cc_by_sa_3_0_ro">CC BY-SA 3.0 (ရိုမေနဳယာ)</string>
   <string name="license_name_cc_by_3_0">CC BY 3.0</string>
   <string name="license_name_cc_by_sa_4_0">CC BY-SA 4.0</string>
   <string name="license_name_cc_by_4_0">CC BY 4.0</string>
   <string name="license_name_cc_zero">CC Zero</string>
-  <string name="tutorial_3_text">သ္ပဂုဏ်တုဲ လ္ပပသ္ပကေတ် မတိုန်ညိ:</string>
+  <string name="tutorial_3_text">သ္ပဂုဏ်တုဲ လ္ပပတိုန်ညိ:</string>
   <string name="welcome_final_button_text">ယွံ!</string>
   <string name="welcome_help_button_text">&lt;u&gt;ပရိုၚ်တၚ်ဂၞၚ် မဂၠိုၚ်&lt;/u&gt;</string>
   <string name="detail_panel_cats_label">ကဏ္ဍဂမၠိုင်</string>
   <string name="detail_panel_cats_loading">ပတိုန်ဒၟံၚ်...</string>
   <string name="detail_panel_cats_none">ဟွံမွဲကဵု ပရေၚ်ရုဲစှ်</string>
   <string name="detail_description_empty">ဟွံ ဗၟံက်ပံက်ထ္ၜး</string>
-  <string name="detail_license_empty">လာၚ်ဇြေန် မတီကေတ်ဟွံမာန်</string>
+  <string name="detail_license_empty">လာၚ်ဇြေန် မတီကေတ် ဟွံမာန်</string>
   <string name="menu_refresh">ကလေင်မၚုဟ်</string>
-  <string name="ok">OK</string>
+  <string name="ok">ခိုဟ်</string>
   <string name="title_activity_nearby">ဒၞဲါ မဒှ်ဗ္ဒဲါဏအ်</string>
   <string name="warning">ကဵုသတိ</string>
   <string name="yes">ယွံ</string>
@@ -89,7 +90,7 @@
   <string name="_2fa_code">2FA Code</string>
   <string name="commons_logo">သၚ်္ကေတ Commons</string>
   <string name="commons_facebook">Commons Facebook Page</string>
-  <string name="no_subcategory_found">ဟွံဆဵုကေတ် သာပ်ကဏ္ဍဂမၠိုၚ်</string>
+  <string name="no_subcategory_found">ဟွံဆဵုကေတ် ကဏ္ဍလပါ်ဂမၠိုၚ်</string>
   <string name="upload_image">ပတိုန် ဗီုရုပ်</string>
   <string name="welcome_image_mount_zao">Mount Zao</string>
   <string name="welcome_image_llamas">Llamas</string>
@@ -109,14 +110,14 @@
   <string name="navigation_item_notification">တင်မကဵုသမ္တီဂမၠိုင်</string>
   <string name="nearby_info_menu_wikipedia_article">လိက်ပရေၚ် ဝဳကဳပဳဒဳယာ</string>
   <string name="login_to_your_account">လုပ်လံက်အေန် ပ္ဍဲအကံက်မၞး</string>
-  <string name="nominate_deletion">ရုဲပတိုန်လဝ် သ္ဂောံ ပလီု</string>
-  <string name="nominated_for_deletion">ဗီုရုပ်ဏအ် ဒးဒုၚ်ရုဲပတိုန်သမ္တီလတ် သ္ဂောံ ပလီုရ.</string>
+  <string name="nominate_deletion">ရုဲပတိုန်လဝ် သ္ဂောအ် ပလီု</string>
+  <string name="nominated_for_deletion">ဗီုရုပ်ဏအ် ဒးဒုၚ်ရုဲပတိုန်သမ္တီလတ် သ္ဂောအ် ပလီုရ.</string>
   <string name="skip_login">သလာ်</string>
   <string name="navigation_item_login">လုပ်လံက်အေန်</string>
   <string name="read_article">ဗှ် လိက်ပရေၚ်</string>
-  <string name="notifications_welcome">ဒုၚ်တၠုၚ်နူ ဝဳကဳမဳဒဳယာ Commons, %1$s! ပိုယ်တအ်မိပ်စိုပ် ဂွံဆဵုကေတ်မၞးအဏအ်.</string>
+  <string name="notifications_welcome">ဒုၚ်တၠုၚ်နူ ဝဳကဳမဳဒဳယာ Commons, %1$s! ပိုယ်တအ် မိပ်စိုပ် ဂွံဆဵုကေတ်မၞး ဒၞာဲဏအ်.</string>
   <string name="notifications_talk_page_message">%1$s စွံဏာ ပိုဒ်လိက် ပ္ဍဲမုက်လိက်ဓရီုကျာမၞး မွဲ</string>
-  <string name="notifications_thank_you_edit">တၚ်ဂုဏ်ကုမၞး မသ္ပကေတ်ပလေဝ်ဒါန်</string>
+  <string name="notifications_thank_you_edit">တၚ်ဂုဏ် ကုမၞး မသ္ပပလေဝ်ဒါန်</string>
   <string name="nearby_wikidata">ဝဳကဳဒေတ</string>
   <string name="nearby_wikipedia">ဝဳကဳပဳဒဳယာ</string>
   <string name="nearby_commons">COMMONS</string>
@@ -127,8 +128,8 @@
   <string name="retry">ကလေင်ကၠောန်</string>
   <string name="showcase_view_got_it_button">ကလိဂွံရ!</string>
   <string name="image_uploaded_by">ပတိုန်လဝ် နကဵု: %1$s</string>
-  <string name="appwidget_img">ဒဒှ်တ္ၚဲ ဗီု</string>
-  <string name="app_widget_heading">ဒဒှ် တ္ၚဲဗီု</string>
+  <string name="appwidget_img">ဗီုရုပ် တၟေင် သွက်တ္ၚဲဏအ်</string>
+  <string name="app_widget_heading">ဗီုရုပ်တၟေင် သွက်တ္ၚဲဏအ်</string>
   <string name="menu_search_button">ဂၠာဲ</string>
   <string name="search_commons">ဂၠာဲ Commons</string>
   <string name="title_activity_search">ဂၠာဲ</string>
@@ -136,7 +137,7 @@
   <string name="result">လဂွံ</string>
   <string name="continue_message">ဆက်</string>
   <string name="correct">သွဟ်မဍာံ</string>
-  <string name="wrong">သွဟ် မဗၠောတ်</string>
+  <string name="wrong">သွဟ် မဗၠေတ်</string>
   <string name="add_description">+ ထပ် မဗၟံက်ထ္ၜး</string>
   <string name="level">ကဆံၚ်</string>
   <string name="images_uploaded">ဗီုရုပ် မတိုန်လဝ်</string>

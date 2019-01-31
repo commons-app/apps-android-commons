@@ -99,7 +99,7 @@
   <string name="no_uploads_yet">Dar neįkėlėte jokių nuotraukų.</string>
   <string name="menu_retry_upload">Bandykite dar kartą</string>
   <string name="menu_cancel_upload">Atšaukti</string>
-  <string name="share_license_summary">Šio paveikslėlio licencija bus %1$s</string>
+  <string name="share_license_summary" fuzzy="true">Šio paveikslėlio licencija bus %1$s</string>
   <string name="menu_download">Parsisiųsti</string>
   <string name="preference_license">Numatytoji Licencija</string>
   <string name="use_previous">Naudoti ankstesnį pavadinimą/aprašymą</string>

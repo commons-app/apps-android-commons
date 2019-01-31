@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
@@ -33,15 +32,11 @@
             android:layout_below="@id/toolbar"
             android:gravity="bottom">
 
-            <include layout="@layout/activity_upload_top_card"/>
-
-            <include
-                layout="@layout/activity_upload_right_card" />
 
             <ViewFlipper
                 android:id="@+id/view_flipper"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:clipChildren="false"
                 android:measureAllChildren="false"
                 app:layout_constraintBottom_toBottomOf="parent"

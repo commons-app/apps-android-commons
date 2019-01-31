@@ -1,11 +1,14 @@
 package fr.free.nrw.commons.logging;
 
+import android.content.Context;
+
 import javax.inject.Inject;
-import javax.inject.Named;
 import javax.inject.Singleton;
 
 import fr.free.nrw.commons.BuildConfig;
 import fr.free.nrw.commons.auth.SessionManager;
+import fr.free.nrw.commons.utils.ConfigUtils;
+import fr.free.nrw.commons.utils.DeviceInfoUtil;
 
 /**
  * Class responsible for sending logs to developers
@@ -16,16 +19,21 @@ public class CommonsLogSender extends LogsSender {
     private static final String LOGS_PRIVATE_EMAIL_SUBJECT = "Commons Android App (%s) Logs";
     private static final String BETA_LOGS_PRIVATE_EMAIL_SUBJECT = "Commons Beta Android App (%s) Logs";
 
+    private SessionManager sessionManager;
+    private Context context;
+
     @Inject
     public CommonsLogSender(SessionManager sessionManager,
-                            @Named("isBeta") boolean isBeta) {
-        super(sessionManager, isBeta);
+                            Context context) {
+        super(sessionManager);
 
+        this.sessionManager = sessionManager;
+        this.context = context;
+        boolean isBeta = ConfigUtils.isBetaFlavour();
         this.logFileName = isBeta ? "CommonsBetaAppLogs.zip" : "CommonsAppLogs.zip";
         String emailSubjectFormat = isBeta ? BETA_LOGS_PRIVATE_EMAIL_SUBJECT : LOGS_PRIVATE_EMAIL_SUBJECT;
-        String message = String.format(emailSubjectFormat, sessionManager.getUserName());
-        this.emailSubject = message;
-        this.emailBody = message;
+        this.emailSubject = String.format(emailSubjectFormat, sessionManager.getUserName());
+        this.emailBody = getExtraInfo();
         this.mailTo = LOGS_PRIVATE_EMAIL;
     }
 
@@ -35,8 +43,31 @@ public class CommonsLogSender extends LogsSender {
      */
     @Override
     protected String getExtraInfo() {
-        return "App Version Name: " +
-                BuildConfig.VERSION_NAME +
-                "\n";
+        StringBuilder builder = new StringBuilder();
+        builder.append("App Version Name: ")
+                .append(ConfigUtils.getVersionNameWithSha(context))
+                .append("\n");
+
+        builder.append("User Name: ")
+                .append(sessionManager.getUserName())
+                .append("\n");
+
+        builder.append("Network Type: ")
+                .append(DeviceInfoUtil.getConnectionType(context))
+                .append("\n");
+
+        builder.append("Device manufacturer: ")
+                .append(DeviceInfoUtil.getDeviceManufacturer())
+                .append("\n");
+
+        builder.append("Device model: ")
+                .append(DeviceInfoUtil.getDeviceModel())
+                .append("\n");
+
+        builder.append("Android Version: ")
+                .append(DeviceInfoUtil.getAndroidVersion())
+                .append("\n");
+
+        return builder.toString();
     }
 }

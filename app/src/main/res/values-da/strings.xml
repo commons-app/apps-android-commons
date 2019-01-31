@@ -108,7 +108,7 @@
   <string name="no_uploads_yet">Du har endnu ikke uploadet nogen billeder.</string>
   <string name="menu_retry_upload">Forsøg igen</string>
   <string name="menu_cancel_upload">Annullér</string>
-  <string name="share_license_summary">Billedet vil blive licenseret under %1$s</string>
+  <string name="share_license_summary" fuzzy="true">Billedet vil blive licenseret under %1$s</string>
   <string name="media_upload_policy">Ved at indsende dette billeder erklærer jeg at det er mit eget arbejde, som ikke indeholder materialer med ophavsret eller selvportrætter og generelt overholder &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines\"&gt;Wikimedia Commons-politikkerne&lt;/a&gt;.</string>
   <string name="menu_download">Hent</string>
   <string name="preference_license">Standardlicens</string>
@@ -235,6 +235,12 @@
   <string name="error_while_cache">Fejl under mellemlagring af billeder</string>
   <string name="title_info">En unik beskrivelse for filen, som vil fungere som et filnavn. Du kan bruge normalt sprog med mellemrum. Udelad filendelsen.</string>
   <string name="description_info">Beskriv mediet så godt som muligt: Hvor blev det taget? Hvad viser det? Hvad er konteksten? Beskriv objekterne eller personerne. Giv information som ikke nemt kan gættes, for eksempel hvornår på dagen billedet blev taget, om det er et landskabsbillede. Om billedet viser noget usædvanligt, forklar hvad som gør det usædvanlig.</string>
+  <string name="upload_problem_exist">Mulige problemer med dette billede:</string>
+  <string name="upload_problem_image_dark">Billedet er for mørkt.</string>
+  <string name="upload_problem_image_blurry">Billedet er slørret.</string>
+  <string name="upload_problem_image_duplicate">Billedet er allerede på Commons.</string>
+  <string name="upload_problem_different_geolocation">Billedet blev taget et andet sted.</string>
+  <string name="upload_problem_do_you_continue">Ønsker du stadig at overføre dette billede?</string>
   <string name="give_permission">Giv tilladelse</string>
   <string name="use_external_storage">Brug eksternt lager</string>
   <string name="use_external_storage_summary">Gem billeder taget med din enheds program på kameraet</string>
@@ -287,6 +293,8 @@
   <string name="images_not_found">Ingen billeder der svarer til %1$s fundet</string>
   <string name="title_activity_search">Søg</string>
   <string name="search_recent_header">Seneste søgninger:</string>
+  <string name="search_tab_title_media">MEDIER</string>
+  <string name="search_tab_title_categories">KATEGORIER</string>
   <string name="quiz_question_string">Er det i orden at lægge dette billede op?</string>
   <string name="question">Spørgsmål</string>
   <string name="result">Resultat</string>
@@ -344,5 +352,8 @@
   <string name="search_this_area">Søg i dette område</string>
   <string name="never_ask_again">Spørg aldrig om dette igen</string>
   <string name="display_location_permission_title">Vis placeringstilladelse</string>
+  <string name="ends_on">Slutter den:</string>
   <string name="display_campaigns">Vis kampagner</string>
+  <string name="no_image">Ingen billeder brugt</string>
+  <string name="share_logs_using">Del logs ved hjælp af</string>
 </resources>

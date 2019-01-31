@@ -6,6 +6,7 @@ import android.content.SharedPreferences
 import fr.free.nrw.commons.HandlerService
 import fr.free.nrw.commons.auth.SessionManager
 import fr.free.nrw.commons.contributions.Contribution
+import fr.free.nrw.commons.kvstore.BasicKvStore
 import org.junit.Before
 import org.junit.Test
 import org.mockito.InjectMocks
@@ -21,7 +22,7 @@ class UploadControllerTest {
     @Mock
     internal var context: Context? = null
     @Mock
-    internal var prefs: SharedPreferences? = null
+    internal var prefs: BasicKvStore? = null
 
     @InjectMocks
     var uploadController: UploadController? = null

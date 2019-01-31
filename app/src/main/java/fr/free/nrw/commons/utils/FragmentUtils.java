@@ -9,26 +9,6 @@ import timber.log.Timber;
 
 public class FragmentUtils {
 
-    public static boolean addAndCommitFragmentWithImmediateExecution(
-            @NonNull FragmentManager fragmentManager,
-            @IdRes int containerViewId,
-            @NonNull Fragment fragment) {
-        if (fragment.isAdded()) {
-            Timber.w("Could not add fragment. The fragment is already added.");
-            return false;
-        }
-        try {
-            fragmentManager.beginTransaction()
-                    .add(containerViewId, fragment)
-                    .commitNow();
-            return true;
-        } catch (IllegalStateException e) {
-            Timber.e(e, "Could not add & commit fragment. "
-                    + "Did you mean to call commitAllowingStateLoss?");
-        }
-        return false;
-    }
-
     /**
      * Utility function to check whether the fragment UI is still active or not
      * @param fragment

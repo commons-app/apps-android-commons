@@ -5,10 +5,12 @@ import android.content.Intent;
 import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.content.FileProvider;
 
 import org.acra.collector.CrashReportData;
 import org.acra.sender.ReportSender;
 import org.apache.commons.codec.Charsets;
+import org.apache.http.protocol.HTTP;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
@@ -19,7 +21,9 @@ import java.io.IOException;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
+import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.auth.SessionManager;
+import fr.free.nrw.commons.utils.ConfigUtils;
 import timber.log.Timber;
 
 /**
@@ -33,16 +37,14 @@ public abstract class LogsSender implements ReportSender {
     String emailBody;
 
     private final SessionManager sessionManager;
-    private final boolean isBeta;
 
-    LogsSender(SessionManager sessionManager,
-               boolean isBeta) {
+    LogsSender(SessionManager sessionManager) {
         this.sessionManager = sessionManager;
-        this.isBeta = isBeta;
     }
 
     /**
      * Overrides send method of ACRA's ReportSender to send logs
+     *
      * @param context
      * @param report
      */
@@ -53,6 +55,7 @@ public abstract class LogsSender implements ReportSender {
 
     /**
      * Gets zipped log files and sends it via email. Can be modified to change the send log mechanism
+     *
      * @param context
      * @param report
      */
@@ -73,6 +76,7 @@ public abstract class LogsSender implements ReportSender {
 
     /**
      * Fires an intent to send email with logs
+     *
      * @param context
      * @param logFileUri
      */
@@ -80,18 +84,20 @@ public abstract class LogsSender implements ReportSender {
         String subject = emailSubject;
         String body = emailBody;
 
-        Intent emailIntent = new Intent(Intent.ACTION_SENDTO);
-        emailIntent.setData(Uri.fromParts("mailto", mailTo, null));
-        emailIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        Intent emailIntent = new Intent(Intent.ACTION_SEND);
+        emailIntent.setType("message/rfc822");
+        emailIntent.putExtra(Intent.EXTRA_EMAIL, new String[]{mailTo});
         emailIntent.putExtra(Intent.EXTRA_SUBJECT, subject);
         emailIntent.putExtra(Intent.EXTRA_TEXT, body);
         emailIntent.putExtra(Intent.EXTRA_STREAM, logFileUri);
-        context.startActivity(emailIntent);
+        emailIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        emailIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+        context.startActivity(Intent.createChooser(emailIntent, context.getString(R.string.share_logs_using)));
     }
 
     /**
      * Returns the URI for the zipped log file
-     * @param context
+     *
      * @param report
      * @return
      */
@@ -104,9 +110,11 @@ public abstract class LogsSender implements ReportSender {
             attachUserInfo(builder);
             attachExtraInfo(builder);
             byte[] metaData = builder.toString().getBytes(Charsets.UTF_8);
-            File zipFile = new File(context.getExternalFilesDir(null), logFileName);
+            File zipFile = new File(LogUtils.getLogZipDirectory(), logFileName);
             writeLogToZipFile(metaData, zipFile);
-            return Uri.fromFile(zipFile);
+            return FileProvider
+                    .getUriForFile(context,
+                            context.getApplicationContext().getPackageName() + ".provider", zipFile);
         } catch (IOException e) {
             Timber.w(e, "Error in generating log file");
         }
@@ -115,6 +123,7 @@ public abstract class LogsSender implements ReportSender {
 
     /**
      * Checks if there are any pending crash reports and attaches them to the logs
+     *
      * @param report
      * @param builder
      */
@@ -127,6 +136,7 @@ public abstract class LogsSender implements ReportSender {
 
     /**
      * Attaches username to the the meta_data file
+     *
      * @param builder
      */
     private void attachUserInfo(StringBuilder builder) {
@@ -135,6 +145,7 @@ public abstract class LogsSender implements ReportSender {
 
     /**
      * Gets any extra meta information to be attached with the log files
+     *
      * @param builder
      */
     private void attachExtraInfo(StringBuilder builder) {
@@ -145,6 +156,7 @@ public abstract class LogsSender implements ReportSender {
 
     /**
      * Zips the logs and meta information
+     *
      * @param metaData
      * @param zipFile
      * @throws IOException
@@ -153,14 +165,17 @@ public abstract class LogsSender implements ReportSender {
         FileOutputStream fos = new FileOutputStream(zipFile);
         BufferedOutputStream bos = new BufferedOutputStream(fos);
         ZipOutputStream zos = new ZipOutputStream(bos);
-        File logDir = new File(LogUtils.getLogDirectory(isBeta));
+        File logDir = new File(LogUtils.getLogDirectory());
 
         if (!logDir.exists() || logDir.listFiles().length == 0) {
             return;
         }
-        
+
         byte[] buffer = new byte[1024];
         for (File file : logDir.listFiles()) {
+            if (file.isDirectory()) {
+                continue;
+            }
             FileInputStream fis = new FileInputStream(file);
             BufferedInputStream bis = new BufferedInputStream(fis);
             zos.putNextEntry(new ZipEntry(file.getName()));

@@ -12,11 +12,12 @@
 * Mormegil
 * Patriccck
 * Spotter
+* Vlad5250
 * Vojtěch Dostál
 * Walter Klosse
 -->
 <resources>
-  <string name="title_activity_explore">Procházet</string>
+  <string name="title_activity_explore">Objevit</string>
   <string name="navigation_item_explore">Procházet</string>
   <string name="preference_category_appearance">Vzhled</string>
   <string name="preference_category_general">Obecné</string>
@@ -61,7 +62,7 @@
   <string name="provider_contributions">Moje obrázky</string>
   <string name="menu_share">Sdílet</string>
   <string name="menu_open_in_browser">Zobrazit v prohlížeči</string>
-  <string name="share_title_hint" fuzzy="true">Název</string>
+  <string name="share_title_hint">Název (povinný)</string>
   <string name="add_title_toast">Vložte prosím název tohoto souboru</string>
   <string name="share_description_hint">Popis</string>
   <string name="login_failed_network">Nelze se přihlásit - selhání sítě</string>
@@ -82,10 +83,10 @@
   <string name="gps_disabled">GPS ve vašem zařízení není povoleno. Chtěli byste ho spustit?</string>
   <string name="enable_gps">Spustit GPS</string>
   <string name="contributions_subtitle_zero">Žádné nahrané soubory</string>
-  <plurals name="contributions_subtitle" fuzzy="true">
+  <plurals name="contributions_subtitle">
     <item quantity="zero">\@string/contributions_subtitle_zero</item>
-    <item quantity="one">1 soubor</item>
-    <item quantity="other">%1$d souborů</item>
+    <item quantity="one">(%1$d)</item>
+    <item quantity="other">(%1$d)</item>
   </plurals>
   <plurals name="starting_multiple_uploads">
     <item quantity="one">Spouští se nahrávání %1$d souboru</item>
@@ -115,7 +116,10 @@
   <string name="no_uploads_yet">Zatím jste nenahrál žádné fotky.</string>
   <string name="menu_retry_upload">Opakovat</string>
   <string name="menu_cancel_upload">Zrušit</string>
-  <string name="share_license_summary">Tento obrázek bude zveřejněn pod licencí %1$s</string>
+  <plurals name="share_license_summary">
+    <item quantity="one">Tento obrázek bude zveřejněn pod licencí %1$s</item>
+    <item quantity="other">Tyto obrázky budou zveřejněny pod licencí %1$s</item>
+  </plurals>
   <string name="media_upload_policy">Odesláním tohoto souboru potvrzuji, že je mým vlastním dílem, neobsahuje autorskoprávně chráněný materiál a nejedná se o selfie a ani jinak neporušuje &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines\"&gt;pravidla a doporučení Wikimedia Commons&lt;/a&gt;.</string>
   <string name="menu_download">Stáhnout</string>
   <string name="preference_license">Výchozí licence</string>
@@ -181,6 +185,7 @@
   <string name="title_activity_nearby">Místa v okolí</string>
   <string name="no_nearby">Poblíž nebylo nic nalezeno</string>
   <string name="warning">Upozornění</string>
+  <string name="upload_image_duplicate">Tento soubor již na Commons existuje. Jste si jist, že chcete pokračovat?</string>
   <string name="yes">Ano</string>
   <string name="no">Ne</string>
   <string name="media_detail_title">Název</string>
@@ -242,6 +247,14 @@
   <string name="error_while_cache">Chyba při meziukládání obrázků</string>
   <string name="title_info">Unikátní a popisný název pro daný soubor, který bude sloužit jako název souboru. Můžete použít běžný psaný jazyk s mezerami; nezahrnujte koncovku souboru.</string>
   <string name="description_info">Popište prosím obrázek, jak jen to je možné: Kde byl pořízen? Co znázorňuje? Jaký je kontext obrázku? Popisujte prosím významné předměty nebo osoby na obrázku a nezapomeňte na informace, které není možné snadno odhadnout ze samotného obrázku, jako je například denní doba, pokud jde o krajinu. Pokud je na obrázku něco neobvyklého, popište, co to dělá neobvyklým.</string>
+  <string name="upload_image_too_dark">Tento obrázek je příliš tmavý, jste si jist/a, že ho chcete nahrát? Wikimedia Commons slouží jenom pro obrázky s encyklopedickou hodnotou.</string>
+  <string name="upload_image_blurry">Tento obrázek je rozmazaný, jste si jist/a, že ho chcete nahrát? Wikimedia Commons slouží jenom pro obrázky s encyklopedickou hodnotou.</string>
+  <string name="upload_problem_exist">Potenciální problémy s tímto obrázkem:</string>
+  <string name="upload_problem_image_dark">Obrázek je příliš tmavý.</string>
+  <string name="upload_problem_image_blurry">Obrázek je rozmazaný.</string>
+  <string name="upload_problem_image_duplicate">Obrázek je již v Commons.</string>
+  <string name="upload_problem_different_geolocation">Tento obrázek byl pořízen na jiném místě.</string>
+  <string name="upload_problem_do_you_continue">Pořád chcete tento obrázek nahrát?</string>
   <string name="give_permission">Dát povolení</string>
   <string name="use_external_storage">Použít externí úložiště</string>
   <string name="use_external_storage_summary">Uložit obrázky pořízené fotoaparátem, jenž je součástí této aplikace</string>
@@ -257,7 +270,7 @@
   <string name="skip_login">Přeskočit</string>
   <string name="navigation_item_login">Přihlásit se</string>
   <string name="skip_login_title">Opravdu chcete přeskočit přihlášení?</string>
-  <string name="skip_login_message">Nebude možné nahrávat obrázky.</string>
+  <string name="skip_login_message" fuzzy="true">Nebude možné nahrávat obrázky.</string>
   <string name="login_alert_message">K použití této funkce se musíte přihlásit</string>
   <string name="copy_wikicode">Zkopírovat wikitext do schránky</string>
   <string name="wikicode_copied">Wikitext byl zkopírován do schránky</string>
@@ -306,6 +319,8 @@
   <string name="provider_searches">Nedávno hledané dotazy</string>
   <string name="error_loading_categories">Chyba při načítání kategorií.</string>
   <string name="error_loading_subcategories">Chyba při načítání podkategorií.</string>
+  <string name="search_tab_title_media">MÉDIA</string>
+  <string name="search_tab_title_categories">KATEGORIE</string>
   <string name="successful_wikidata_edit">Obrázek byl úspěšně přidán do položky %1$s na Wikidatech!</string>
   <string name="wikidata_edit_failure">Nepodařilo se aktualizovat příslušnou položku na Wikidatech!</string>
   <string name="menu_set_wallpaper">Nastavit jako pozadí</string>
@@ -334,8 +349,10 @@
   <string name="share_coordinates_not_present">Při výběru obrázku nebyly zadány souřadnice</string>
   <string name="error_fetching_nearby_places">Chyba při hledání blízkých míst.</string>
   <string name="add_description">+ Přidat popisek</string>
+  <string name="no_recent_searches">Zatím žádné vyhledávání</string>
   <string name="delete_recent_searches_dialog">Opravdu chcete vyčistit historii vašeho hledání?</string>
   <string name="search_history_deleted">Historie hledání byla odstraněna</string>
+  <string name="nominate_delete">Navrhnout na smazání</string>
   <string name="Achievements">Dosažené úspěchy</string>
   <string name="statistics">STATISTIKA</string>
   <string name="statistics_thanks">Obdržená poděkování</string>
@@ -352,8 +369,31 @@
   <string name="images_used_explanation">Počet obrázků, které jste nahrál/a na Commons a jsou použity v projektech Wikimedia</string>
   <string name="error_occurred">Chyba!</string>
   <string name="notifications_channel_name_all">Notifikace z Commons</string>
+  <string name="preference_author_name_toggle">Použít vlastní název autora</string>
+  <string name="preference_author_name_toggle_summary">Při nahrávání fotografií používejte vlastní jméno autora namísto uživatelského jména</string>
+  <string name="preference_author_name">Vlastní název autora</string>
+  <string name="preference_author_name_summary">Vlastní název autora, který chcete používat místo uživatelského jména v nahrávání</string>
+  <string name="contributions_fragment">Příspěvky</string>
+  <string name="nearby_fragment">Poblíž</string>
+  <string name="notifications">Notifikace</string>
+  <string name="display_nearby_notification">Zobrazit notifikace v okolí</string>
+  <string name="display_nearby_notification_summary">Klepnutím sem zobrazíte nejbližší místo, které potřebuje obrázky</string>
+  <string name="no_close_nearby">Nebyla nalezena žádná blízká místa</string>
+  <string name="list_sheet">Seznam</string>
   <string name="storage_permission">Povolení k ukládání</string>
   <string name="write_storage_permission_rationale_for_image_share">Potřebujeme povolení k přístupu k externí paměti vašeho zařízení, abychom mohli nahrávat obrázky.</string>
+  <string name="nearby_notification_dismiss_message">Nevidíte nejbližší místo, které už potřebuje obrázky. Toto oznámení však můžete znovu povolit v nastavení.</string>
+  <string name="step_count">Krok %1$d z %2$d</string>
+  <string name="image_in_set_label">Obrázek %1$d v sadě</string>
+  <string name="next">Další</string>
+  <string name="previous">Předchozí</string>
+  <string name="submit">Odeslat</string>
+  <string name="upload_title_duplicate">Soubor s názvem %1$s již existuje. Opravdu chcete pokračovat?</string>
+  <string name="map_application_missing">Na vašem zařízení nebyla nalezena žádná kompatibilní aplikace poskytující mapy. Pro použití této funkce nainstalujte aplikaci poskytující mapy.</string>
+  <plurals name="upload_count_title">
+    <item quantity="one">%1$d nahrání</item>
+    <item quantity="other">%1$d nahrání</item>
+  </plurals>
   <string name="navigation_item_bookmarks">Záložky</string>
   <string name="title_activity_bookmarks">Záložky</string>
   <string name="title_page_bookmarks_pictures">Obrázky</string>
@@ -363,5 +403,39 @@
   <string name="bookmark_empty">Nemáte zatím žádné záložky</string>
   <string name="provider_bookmarks_location">Záložky</string>
   <string name="log_collection_started">Záznam logu započal. Prosím RESTARTUJTE aplikaci, proveďte akci, kterou si přejete zaznamenat, a potom znovu odešlete log.</string>
+  <string name="deletion_reason_uploaded_by_mistake">Náhrál/a jsem to omylem</string>
+  <string name="deletion_reason_publicly_visible">Nevěděl/a jsem, že by to bylo veřejně viditelné</string>
+  <string name="deletion_reason_bad_for_my_privacy">Uvědomil/a jsem si, že je to špatné pro mé soukromí</string>
+  <string name="deletion_reason_no_longer_want_public">Změnil/a jsem názor, nechci, aby to bylo veřejně viditelné</string>
+  <string name="deletion_reason_not_interesting">Omlouváme se, že tento obrázek není zajímavý pro encyklopedii</string>
+  <string name="uploaded_by_myself">Náhráno mnou</string>
+  <string name="used_by">,použito v</string>
+  <string name="articles">články</string>
   <string name="no_uploads">Vítejte na Commons!\n\nNahrajte svá první média pomocí tlačítek fotoaparátu nebo galerie nahoře.</string>
+  <string name="desc_language_Worldwide">Celosvětově</string>
+  <string name="desc_language_America">Amerika</string>
+  <string name="desc_language_Europe">Evropa</string>
+  <string name="desc_language_Middle_East">Blízký východ</string>
+  <string name="desc_language_Africa">Afrika</string>
+  <string name="desc_language_Asia">Asie</string>
+  <string name="desc_language_Pacific">Tichomoří (Pacifik)</string>
+  <string name="no_categories_selected">Nebyly vybrány žádné kategorie</string>
+  <string name="no_categories_selected_warning_desc">Obrázky bez kategorií jsou používány jen zřídka. Opravdu chcete nahrát obrázek bez výběru kategorií?</string>
+  <string name="yes_submit">Ano, nahrát</string>
+  <string name="no_go_back">Ne, vrátit se zpět</string>
+  <string name="upload_flow_all_images_in_set">(Pro všechny snímky v sadě)</string>
+  <string name="search_this_area">Prohledat tuto oblast</string>
+  <string name="nearby_card_permission_title">Je požadováno oprvánění</string>
+  <string name="nearby_card_permission_explanation">Chtěli byste, abychom pomocí aktuální polohy zobrazili nejbližší místo, které potřebuje obrázky?</string>
+  <string name="unable_to_display_nearest_place">Nelze zobrazit nejbližší místo, které potřebuje snímky bez oprávnění k umístění</string>
+  <string name="never_ask_again">Znovu nezobrazovat</string>
+  <string name="display_location_permission_title">Zobrazit oprávnění k umístění</string>
+  <string name="display_location_permission_explanation">Požádejte o oprávnění k umístění, pokud je zapotřebí pro funkci zobrazení pohledu v blízkosti.</string>
+  <string name="achievements_fetch_failed">Nastala neočekávaná chyba. Nemohli jsme dokončit akci</string>
+  <string name="ends_on">Končí:</string>
+  <string name="display_campaigns">Zobrazovat kampaně</string>
+  <string name="display_campaigns_explanation">Klepnutím sem zobrazíte probíhající kampaně</string>
+  <string name="nearby_campaign_dismiss_message">Kampaně již neuvidíte. Toto oznámení však můžete znovu zapnout v Nastavení.</string>
+  <string name="this_function_needs_network_connection">Tato funkce vyžaduje připojení k síti, zkontrolujte prosím nastavení připojení.</string>
+  <string name="bad_token_error_proposed_solution">Nahrávání se nezdařilo kvůli problémům s editačním tokenem. Zkuste se prosím odhlásit a zkuste to znovu.</string>
 </resources>

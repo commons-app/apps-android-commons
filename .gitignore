@@ -3,6 +3,7 @@
 *.iws
 *.ipr
 .idea
+app/src/main/gen/*
 
 # Gradle
 .gradle
