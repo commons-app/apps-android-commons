@@ -3,6 +3,7 @@ package fr.free.nrw.commons.nearby;
 import android.animation.ObjectAnimator;
 import android.animation.TypeEvaluator;
 import android.animation.ValueAnimator;
+import android.arch.lifecycle.Lifecycle;
 import android.content.Intent;
 import android.graphics.Color;
 import android.net.Uri;
@@ -111,6 +112,7 @@ public class NearbyMapFragment extends DaggerFragment {
     private Animation rotate_forward;
 
     private Place place;
+    public static Place nearbyplace;
     private Marker selected;
     private Marker currentLocationMarker;
     public MapboxMap mapboxMap;
@@ -181,7 +183,6 @@ public class NearbyMapFragment extends DaggerFragment {
             Timber.d("curLatLng found, setting up map view...");
             setupMapView(savedInstanceState);
         }
-
         setHasOptionsMenu(false);
 
         return mapView;
@@ -210,6 +211,7 @@ public class NearbyMapFragment extends DaggerFragment {
         });
     }
 
+
     /**
      * Updates map slightly means it doesn't updates all nearby markers around. It just updates
      * location tracker marker of user.
@@ -223,6 +225,9 @@ public class NearbyMapFragment extends DaggerFragment {
                 curLatLng = gson.fromJson(gsonLatLng, curLatLngType);
             }
             updateMapToTrackPosition();
+            if (nearbyplace != null){
+                setMapCenter(nearbyplace);
+            }
         }
 
     }
@@ -496,16 +501,18 @@ public class NearbyMapFragment extends DaggerFragment {
      */
     private void setupMapView(Bundle savedInstanceState) {
         Timber.d("setupMapView called");
+
         MapboxMapOptions options = new MapboxMapOptions()
-                .compassGravity(Gravity.BOTTOM | Gravity.LEFT)
-                .compassMargins(new int[]{12, 0, 0, 24})
-                .styleUrl(Style.OUTDOORS)
-                .logoEnabled(false)
-                .attributionEnabled(false)
-                .camera(new CameraPosition.Builder()
-                        .target(new LatLng(curLatLng.getLatitude(), curLatLng.getLongitude()))
-                        .zoom(ZOOM_LEVEL)
-                        .build());
+                    .compassGravity(Gravity.BOTTOM | Gravity.LEFT)
+                    .compassMargins(new int[]{12, 0, 0, 24})
+                    .styleUrl(Style.OUTDOORS)
+                    .logoEnabled(false)
+                    .attributionEnabled(false)
+                    .camera(new CameraPosition.Builder()
+                            .target(new LatLng(curLatLng.getLatitude(), curLatLng.getLongitude()))
+                            .zoom(ZOOM_LEVEL)
+                            .build());
+
 
         if (!getParentFragment().getActivity().isFinishing()) {
             mapView = new MapView(getParentFragment().getActivity(), options);
@@ -991,15 +998,21 @@ public class NearbyMapFragment extends DaggerFragment {
         }
     }
     public void setMapCenter(Place place) {
-        CameraPosition position = new CameraPosition.Builder()
-                .target(isBottomListSheetExpanded ?
-                        new LatLng(place.location.getLatitude()- CAMERA_TARGET_SHIFT_FACTOR_LANDSCAPE,
-                                place.getLocation().getLongitude())
-                        : new LatLng(place.getLocation().getLatitude(), place.getLocation().getLongitude(), 0)) // Sets the new camera position
-                .zoom(isBottomListSheetExpanded ?
-                        ZOOM_LEVEL
-                        :mapboxMap.getCameraPosition().zoom) // Same zoom level
-                .build();
-        mapboxMap.animateCamera(CameraUpdateFactory.newCameraPosition(position), 1000);
+        mapView.getMapAsync(mapboxMap1 -> {
+            CameraPosition position = new CameraPosition.Builder()
+                    .target(isBottomListSheetExpanded ?
+                            new LatLng(place.location.getLatitude()- CAMERA_TARGET_SHIFT_FACTOR_LANDSCAPE,
+                                    place.getLocation().getLongitude())
+                            : new LatLng(place.getLocation().getLatitude(), place.getLocation().getLongitude(), 0)) // Sets the new camera position
+                    .zoom(isBottomListSheetExpanded ?
+                            ZOOM_LEVEL
+                            :mapboxMap.getCameraPosition().zoom) // Same zoom level
+                    .build();
+            mapboxMap.animateCamera(CameraUpdateFactory.newCameraPosition(position), 1000);
+        });
+
+        if (nearbyplace != null) {
+            nearbyplace = null;
+        }
     }
 }
