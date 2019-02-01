@@ -11,15 +11,18 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.constraint.ConstraintLayout;
 import android.support.design.widget.Snackbar;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
+import com.daimajia.swipe.SwipeLayout;
 import com.pedrogomez.renderers.RVRendererAdapter;
 
 import java.util.Collections;
@@ -31,6 +34,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.Utils;
+import fr.free.nrw.commons.ViewHolder;
 import fr.free.nrw.commons.theme.NavigationBaseActivity;
 import fr.free.nrw.commons.utils.NetworkUtils;
 import fr.free.nrw.commons.utils.ViewUtil;
@@ -38,6 +42,7 @@ import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 import timber.log.Timber;
+import com.nineoldandroids.view.ViewHelper;
 
 /**
  * Created by root on 18.12.2017.
@@ -45,7 +50,6 @@ import timber.log.Timber;
 
 public class NotificationActivity extends NavigationBaseActivity {
     NotificationAdapterFactory notificationAdapterFactory;
-
     @BindView(R.id.listView)
     RecyclerView recyclerView;
     @BindView(R.id.progressBar)
@@ -56,7 +60,6 @@ public class NotificationActivity extends NavigationBaseActivity {
     ConstraintLayout no_notification;
    /* @BindView(R.id.swipe_bg)
     TextView swipe_bg;*/
-
     @Inject
     NotificationController controller;
 
@@ -74,90 +77,40 @@ public class NotificationActivity extends NavigationBaseActivity {
                 .findFragmentByTag(TAG_NOTIFICATION_WORKER_FRAGMENT);
         initListView();
         initDrawer();
-        setUpItemTouchHelper();
     }
 
-    private void setUpItemTouchHelper() {
+    @SuppressLint("CheckResult")
+    public void removeNotification(Notification notification) {
+        Observable.fromCallable(() -> controller.markAsRead(notification))
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(result -> {
+                    if (result){
+                        notificationList.remove(notification);
+                        setAdapter(notificationList);
+                        adapter.notifyDataSetChanged();
+                        Snackbar snackbar = Snackbar
+                                .make(relativeLayout,"Notification marked as read", Snackbar.LENGTH_LONG);
 
-        ItemTouchHelper.SimpleCallback simpleItemTouchCallback = new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
+                        snackbar.show();
+                        if (notificationList.size()==0){
+                            relativeLayout.setVisibility(View.GONE);
+                            no_notification.setVisibility(View.VISIBLE);
+                        }
+                    }
+                    else {
+                        adapter.notifyDataSetChanged();
+                        setAdapter(notificationList);
+                        Toast.makeText(NotificationActivity.this, "There was some error!", Toast.LENGTH_SHORT).show();
+                    }
+                }, throwable -> {
 
-            // we want to cache these and not allocate anything repeatedly in the onChildDraw method
-            Drawable background;
-            int xMarkMargin;
-            boolean initiated;
-
-            private void init() {
-                background = new ColorDrawable(Color.RED);
-                xMarkMargin=120;
-                initiated = true;
-            }
-
-            // not important, we don't want drag & drop
-            @Override
-            public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, RecyclerView.ViewHolder target) {
-                return false;
-            }
-
-            /*@Override
-            public int getSwipeDirs(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder) {
-                int position = viewHolder.getAdapterPosition();
-                return super.getSwipeDirs(recyclerView, viewHolder);
-            }*/
-
-            @Override
-            public void onSwiped(RecyclerView.ViewHolder viewHolder, int swipeDir) {
-                int position = viewHolder.getAdapterPosition();
-                Observable.fromCallable(() -> controller.markAsRead(notificationList.get(position)))
-                        .subscribeOn(Schedulers.io())
-                        .observeOn(AndroidSchedulers.mainThread())
-                        .subscribe(result -> {
-                            if (result){
-                                notificationList.remove(position);
-                                setAdapter(notificationList);
-                                adapter.notifyDataSetChanged();
-                                Snackbar snackbar = Snackbar
-                                        .make(relativeLayout,"Notification marked as read", Snackbar.LENGTH_LONG);
-
-                                snackbar.show();
-                                if (notificationList.size()==0){
-                                    relativeLayout.setVisibility(View.GONE);
-                                    no_notification.setVisibility(View.VISIBLE);
-                                }
-                            }
-                            else {
-                                adapter.notifyDataSetChanged();
-                                setAdapter(notificationList);
-                                Toast.makeText(NotificationActivity.this, "There was some error!", Toast.LENGTH_SHORT).show();
-                            }
-                        }, throwable -> {
-                            Timber.e(throwable, "Error occurred while loading notifications");
-                            ViewUtil.showShortSnackbar(relativeLayout, R.string.error_notifications);
-                            progressBar.setVisibility(View.GONE);
-                        });
-
-            }
-
-            @Override
-            public void onChildDraw(Canvas c, RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, float dX, float dY, int actionState, boolean isCurrentlyActive) {
-                View itemView = viewHolder.itemView;
-
-                if (viewHolder.getAdapterPosition() == -1) {
-                    return;
-                }
-                if (!initiated) {
-                    init();
-                }
-
-                background.setBounds(itemView.getRight() + (int) dX, itemView.getTop(), itemView.getRight(), itemView.getBottom());
-                background.draw(c);
-                super.onChildDraw(c, recyclerView, viewHolder, dX/4, dY, actionState, isCurrentlyActive);
-            }
-
-        };
-        ItemTouchHelper mItemTouchHelper = new ItemTouchHelper(simpleItemTouchCallback);
-        mItemTouchHelper.attachToRecyclerView(recyclerView);
+                    Timber.e(throwable, "Error occurred while loading notifications");
+                    throwable.printStackTrace();
+                    //ViewUtil.showShortSnackbar(relativeLayout, R.string.error_notifications);
+                    progressBar.setVisibility(View.GONE);
+                });
     }
-
 
 
 

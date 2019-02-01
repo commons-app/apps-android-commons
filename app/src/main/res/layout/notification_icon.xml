@@ -68,5 +68,7 @@ android:orientation="vertical">
     android:minWidth="15sp"
     android:text="0"
     android:textColor="#ffffffff"
-    android:textSize="12sp" />
+    android:textSize="12sp"
+    android:layout_alignParentRight="true"
+    android:layout_alignRight="@id/cart_icon_image_view" />
 </RelativeLayout>

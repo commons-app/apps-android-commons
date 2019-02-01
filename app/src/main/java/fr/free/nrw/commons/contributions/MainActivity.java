@@ -308,7 +308,8 @@ public class MainActivity extends AuthenticatedActivity implements FragmentManag
         final View notification = notificationsMenuItem.getActionView();
         TextView notificationCount = notification.findViewById(R.id.notification_count_badge);
         if (notificationList.isEmpty()) {
-            notificationCount.setVisibility(View.GONE);
+            notificationCount.setVisibility(View.VISIBLE);
+            notificationCount.setText(String.valueOf(notificationList.size()));
         } else {
             notificationCount.setVisibility(View.VISIBLE);
             notificationCount.setText(String.valueOf(notificationList.size()));
