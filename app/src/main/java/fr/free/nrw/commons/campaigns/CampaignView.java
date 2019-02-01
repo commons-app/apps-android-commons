@@ -56,7 +56,7 @@ public class CampaignView extends SwipableCardView {
         view.setVisibility(View.GONE);
         ((MainActivity) getContext()).defaultKvStore
                 .putBoolean("displayCampaignsCardView", false);
-        ViewUtil.showLongToast(getContext(),
+        ViewUtil.showLongSnackbar(getRootView(),
             getResources().getString(R.string.nearby_campaign_dismiss_message));
         return true;
     }

@@ -28,6 +28,14 @@ public class ViewUtil {
         ExecutorUtils.uiExecutor().execute(() -> Snackbar.make(view, messageResourceId, Snackbar.LENGTH_SHORT).show());
     }
 
+    public static void showLongSnackbar(View view, String message) {
+        if (view.getContext() == null) {
+            return;
+        }
+
+        ExecutorUtils.uiExecutor().execute(() -> Snackbar.make(view, message, Snackbar.LENGTH_LONG).show());
+    }
+
     public static void showLongToast(Context context, String text) {
         if (context == null) {
             return;

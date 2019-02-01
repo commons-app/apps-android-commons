@@ -138,7 +138,7 @@ public class SettingsFragment extends PreferenceFragment {
                 .withListener(new BasePermissionListener() {
                     @Override
                     public void onPermissionGranted(PermissionGrantedResponse response) {
-                        ViewUtil.showLongToast(getActivity(), getResources().getString(R.string.log_collection_started));
+                        ViewUtil.showLongSnackbar(getView(), getResources().getString(R.string.log_collection_started));
                     }
                 }).check();
     }

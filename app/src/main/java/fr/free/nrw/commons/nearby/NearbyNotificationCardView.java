@@ -95,7 +95,7 @@ public class NearbyNotificationCardView extends SwipableCardView {
         view.setVisibility(GONE);
         // Save shared preference for nearby card view accordingly
         ((MainActivity) context).defaultKvStore.putBoolean("displayNearbyCardView", false);
-        ViewUtil.showLongToast(context,
+        ViewUtil.showLongSnackbar(view,
             getResources().getString(R.string.nearby_notification_dismiss_message));
         return true;
     }

@@ -172,7 +172,7 @@ public class UploadActivity extends BaseActivity implements UploadView, SimilarI
     public boolean checkIfLoggedIn() {
         if (!sessionManager.isUserLoggedIn()) {
             Timber.d("Current account is null");
-            ViewUtil.showLongToast(this, getString(R.string.user_not_logged_in));
+            ViewUtil.showLongSnackbar(findViewById(R.layout.activity_upload), getString(R.string.user_not_logged_in));
             Intent loginIntent = new Intent(UploadActivity.this, LoginActivity.class);
             startActivity(loginIntent);
             return false;
@@ -672,7 +672,7 @@ public class UploadActivity extends BaseActivity implements UploadView, SimilarI
      * Current implementation will simply show a toast and finish the upload activity.
      */
     private void handleNullMedia() {
-        ViewUtil.showLongToast(this, R.string.error_processing_image);
+        ViewUtil.showLongSnackbar(findViewById(R.layout.activity_upload), getResources().getString(R.string.error_processing_image));
         finish();
     }
 
