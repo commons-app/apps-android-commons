@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<!--<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="48dp"
@@ -30,9 +30,43 @@
         android:background="@drawable/notification_badge"
         android:gravity="center"
         android:minWidth="15sp"
-        android:text="0"
+        tools:text="0"
         android:textColor="#ffffffff"
         android:textSize="12sp"
         android:layout_alignParentRight="true"
         android:layout_alignRight="@id/cart_icon_image_view" />
+</RelativeLayout>-->
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="48dp"
+android:layout_height="40dp"
+android:layout_marginRight="15dp"
+android:background="@android:color/transparent"
+android:clickable="true"
+android:orientation="vertical">
+
+<ImageView
+    android:id="@+id/cart_icon_image_view"
+    android:layout_marginRight="8dp"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:contentDescription="Notification Icon"
+    android:gravity="center"
+    app:srcCompat="@drawable/ic_notifications_white_24dp" />
+
+<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/notification_count_badge"
+    android:layout_marginRight="8dp"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_alignParentEnd="true"
+    android:layout_alignTop="@id/cart_icon_image_view"
+    android:layout_alignEnd="@id/cart_icon_image_view"
+    android:background="@drawable/notification_badge"
+    android:gravity="center"
+    android:minWidth="15sp"
+    android:text="0"
+    android:textColor="#ffffffff"
+    android:textSize="12sp" />
 </RelativeLayout>
