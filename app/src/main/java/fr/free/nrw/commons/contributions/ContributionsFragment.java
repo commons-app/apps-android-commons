@@ -31,7 +31,6 @@ import android.widget.CheckBox;
 import android.widget.Toast;
 
 import java.util.ArrayList;
-import java.util.concurrent.CountDownLatch;
 
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -56,7 +55,6 @@ import fr.free.nrw.commons.nearby.NearbyController;
 import fr.free.nrw.commons.nearby.NearbyNotificationCardView;
 import fr.free.nrw.commons.nearby.Place;
 import fr.free.nrw.commons.notification.NotificationController;
-import fr.free.nrw.commons.notification.UnreadNotificationsCheckAsync;
 import fr.free.nrw.commons.settings.Prefs;
 import fr.free.nrw.commons.upload.UploadService;
 import fr.free.nrw.commons.utils.ConfigUtils;
@@ -87,8 +85,7 @@ public class ContributionsFragment
     @Inject @Named("default_preferences") BasicKvStore defaultKvStore;
     @Inject ContributionDao contributionDao;
     @Inject MediaWikiApi mediaWikiApi;
-    @Inject NotificationController notificationController;
-    @Inject NearbyController nearbyController;
+                        @Inject NearbyController nearbyController;
 
     private ArrayList<DataSetObserver> observersWaitingForLoad = new ArrayList<>();
     private UploadService uploadService;
@@ -213,7 +210,6 @@ public class ContributionsFragment
         if (((MainActivity)getActivity()).isAuthCookieAcquired && !isFragmentAttachedBefore) {
             onAuthCookieAcquired(((MainActivity)getActivity()).uploadServiceIntent);
             isFragmentAttachedBefore = true;
-            new UnreadNotificationsCheckAsync((MainActivity) getActivity(), notificationController).execute();
 
         }
     }
@@ -476,14 +472,6 @@ public class ContributionsFragment
 
     public void betaSetUploadCount(int betaUploadCount) {
         displayUploadCount(betaUploadCount);
-    }
-
-    /**
-     * Updates notification indicator on toolbar to indicate there are unread notifications
-     * @param isThereUnreadNotifications true if user checked notifications before last notification date
-     */
-    public void updateNotificationsNotification(boolean isThereUnreadNotifications) {
-        ((MainActivity)getActivity()).updateNotificationIcon(isThereUnreadNotifications);
     }
 
     @Override

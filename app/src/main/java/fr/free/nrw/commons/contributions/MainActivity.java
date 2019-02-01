@@ -1,5 +1,6 @@
 package fr.free.nrw.commons.contributions;
 
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -21,7 +22,6 @@ import android.widget.TextView;
 import com.esafirm.imagepicker.features.ImagePicker;
 import com.esafirm.imagepicker.model.Image;
 
-import java.util.Collections;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -37,12 +37,12 @@ import fr.free.nrw.commons.kvstore.BasicKvStore;
 import fr.free.nrw.commons.location.LocationServiceManager;
 import fr.free.nrw.commons.nearby.NearbyFragment;
 import fr.free.nrw.commons.nearby.NearbyNotificationCardView;
+import fr.free.nrw.commons.notification.Notification;
 import fr.free.nrw.commons.notification.NotificationActivity;
 import fr.free.nrw.commons.notification.NotificationController;
 import fr.free.nrw.commons.upload.UploadService;
 import fr.free.nrw.commons.utils.ImageUtils;
 import fr.free.nrw.commons.utils.IntentUtils;
-import fr.free.nrw.commons.utils.ViewUtil;
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
@@ -78,10 +78,11 @@ public class MainActivity extends AuthenticatedActivity implements FragmentManag
 
     public boolean isContributionsFragmentVisible = true; // False means nearby fragment is visible
     private Menu menu;
-    private boolean isThereUnreadNotifications = false;
 
     private boolean onOrientationChanged = false;
-    private TextView txtViewCount;
+
+    private MenuItem notificationsMenuItem;
+
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_contributions);
@@ -286,33 +287,32 @@ public class MainActivity extends AuthenticatedActivity implements FragmentManag
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.contribution_activity_notification_menu, menu);
 
-        if (!isThereUnreadNotifications) {
-            // TODO: used vectors are not compatible with API 19 and below, change them
-            menu.findItem(R.id.notifications).setIcon(ContextCompat.getDrawable(this, R.drawable.ic_notification_white_clip_art));
-        } else {
-            final View notification=menu.findItem(R.id.notifications).getActionView();
-            txtViewCount=notification.findViewById(R.id.notification_count_badge);
-            setNotificationCount();
-        }
-
+        notificationsMenuItem = menu.findItem(R.id.notifications);
         this.menu = menu;
-
         updateMenuItem();
-
+        setNotificationCount();
         return true;
     }
 
+    @SuppressLint("CheckResult")
     private void setNotificationCount() {
         Observable.fromCallable(() -> notificationController.getNotifications())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(notificationList -> {
-                    Collections.reverse(notificationList);
-                    txtViewCount.setText(String.valueOf(notificationList.size()));
-                    Timber.d("Number of notifications is %d", notificationList.size());
-                }, throwable -> {
-                    Timber.e(throwable, "Error occurred while loading notifications");
-                });
+                .subscribe(this::initNotificationViews,
+                        throwable -> Timber.e(throwable, "Error occurred while loading notifications"));
+    }
+
+    private void initNotificationViews(List<Notification> notificationList) {
+        Timber.d("Number of notifications is %d", notificationList.size());
+        final View notification = notificationsMenuItem.getActionView();
+        TextView notificationCount = notification.findViewById(R.id.notification_count_badge);
+        if (notificationList.isEmpty()) {
+            notificationCount.setVisibility(View.GONE);
+        } else {
+            notificationCount.setVisibility(View.VISIBLE);
+            notificationCount.setText(String.valueOf(notificationList.size()));
+        }
     }
 
     /**
@@ -356,21 +356,6 @@ public class MainActivity extends AuthenticatedActivity implements FragmentManag
         PackageManager pm = getPackageManager();
         return pm.hasSystemFeature(PackageManager.FEATURE_CAMERA) ||
                 pm.hasSystemFeature(PackageManager.FEATURE_CAMERA_FRONT);
-    }
-
-    /**
-     * Update notification icon if there is an unread notification
-     * @param isThereUnreadNotifications true if user didn't visit notifications activity since
-     *                                   latest notification came to account
-     */
-    public void updateNotificationIcon(boolean isThereUnreadNotifications) {
-        if (!isThereUnreadNotifications) {
-            this.isThereUnreadNotifications = false;
-            menu.findItem(R.id.notifications).setIcon(ContextCompat.getDrawable(this, R.drawable.ic_notification_white_clip_art));
-        } else {
-            this.isThereUnreadNotifications = true;
-            menu.findItem(R.id.notifications).setIcon(ContextCompat.getDrawable(this, R.drawable.ic_notification_white_clip_art_dot));
-        }
     }
 
     public class ContributionsActivityPagerAdapter extends FragmentPagerAdapter {
