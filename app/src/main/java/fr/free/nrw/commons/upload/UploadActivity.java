@@ -519,6 +519,7 @@ public class UploadActivity extends AuthenticatedActivity implements UploadView,
 
     private void configureBottomCard() {
         bottomCardExpandButton.setOnClickListener(v -> presenter.toggleBottomCardState());
+        bottomCard.setOnClickListener(v -> presenter.toggleBottomCardState());
         bottomCardAddDescription.setOnClickListener(v -> addNewDescription());
     }
 
