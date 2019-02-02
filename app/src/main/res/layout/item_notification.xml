@@ -22,7 +22,7 @@
                 android:id="@+id/star"
                 android:layout_alignParentTop="true"
                 android:layout_centerHorizontal="true"
-                app:srcCompat="@drawable/ic_delete_black_24dp"
+                app:srcCompat="@drawable/ic_done_black_24dp"
                 android:layout_width="20dp"
                 android:layout_height="20dp" />
         </RelativeLayout>
