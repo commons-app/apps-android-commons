@@ -119,7 +119,6 @@ public class UploadPresenter {
         Timber.e("Inside handleNext");
         view.showProgressDialog();
         uploadModel.getImageQuality(uploadModel.getCurrentItem(), true)
-                .delay(30, TimeUnit.SECONDS)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(imageResult -> handleImage(title, descriptions, imageResult),
@@ -127,6 +126,7 @@ public class UploadPresenter {
     }
 
     private void handleImage(Title title, List<Description> descriptions, Integer imageResult) {
+        view.hideProgressDialog();
         if (imageResult == IMAGE_KEEP || imageResult == IMAGE_OK) {
             Timber.d("Set title and desc; Show next uploaded item");
             setTitleAndDescription(title, descriptions);
@@ -150,8 +150,7 @@ public class UploadPresenter {
     }
 
     private void handleBadImage(Integer errorCode) {
-        view.hideProgressDialog();
-
+        Timber.d("Handle bad picture with error code %d", errorCode);
         if (errorCode >= 8) { // If location of image and nearby does not match, then set shared preferences to disable wikidata edits
             directKvStore.putBoolean("Picture_Has_Correct_Location", false);
         }
@@ -189,7 +188,7 @@ public class UploadPresenter {
 
     String getCurrentImageFileName() {
         UploadItem currentItem = getCurrentItem();
-        return currentItem.title + "." + uploadModel.getCurrentItem().getFileExt();
+        return currentItem.getFileName();
     }
 
     /**

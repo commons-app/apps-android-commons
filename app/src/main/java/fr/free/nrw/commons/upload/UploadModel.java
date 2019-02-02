@@ -89,10 +89,7 @@ public class UploadModel {
                 .map(uploadableFile -> getUploadItem(uploadableFile, place, source, similarImageInterface));
     }
 
-    public Single<Integer> getImageQuality(UploadItem uploadItem, boolean checkTitle) {
-        if (uploadItem.getImageQuality() == ImageUtils.IMAGE_KEEP) {
-            return Single.just(ImageUtils.IMAGE_OK);
-        }
+    Single<Integer> getImageQuality(UploadItem uploadItem, boolean checkTitle) {
         return imageProcessingService.validateImage(uploadItem, checkTitle);
     }
 
