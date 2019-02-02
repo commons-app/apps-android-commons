@@ -135,6 +135,7 @@ public class SearchCategoryFragment extends CommonsDaggerSupportFragment {
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .timeout(TIMEOUT_SECONDS, TimeUnit.SECONDS)
+                .doOnSubscribe(disposable -> saveQuery(query))
                 .subscribe(this::handleSuccess, this::handleError);
     }
 
@@ -181,10 +182,6 @@ public class SearchCategoryFragment extends CommonsDaggerSupportFragment {
             progressBar.setVisibility(View.GONE);
             categoriesAdapter.addAll(mediaList);
             categoriesAdapter.notifyDataSetChanged();
-
-            // check if user is waiting for 5 seconds if yes then save search query to history.
-            Handler handler = new Handler();
-            handler.postDelayed(() -> saveQuery(query), 5000);
         }
     }
 

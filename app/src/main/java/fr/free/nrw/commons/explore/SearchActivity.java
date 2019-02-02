@@ -125,6 +125,7 @@ public class SearchActivity extends NavigationBaseActivity implements MediaDetai
                                 recentSearchesFragment.updateRecentSearches();
                                 viewPager.setVisibility(View.GONE);
                                 tabLayout.setVisibility(View.GONE);
+                                setSearchHistoryFragment();
                                 searchHistoryContainer.setVisibility(View.VISIBLE);
                             }
                         }
