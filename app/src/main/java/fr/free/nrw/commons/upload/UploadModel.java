@@ -315,20 +315,20 @@ public class UploadModel {
 
     @SuppressWarnings("WeakerAccess")
     static class UploadItem {
-        public final Uri mediaUri;
-        public final String mimeType;
-        public final String source;
-        public final GPSExtractor gpsCoords;
+        private final Uri mediaUri;
+        private final String mimeType;
+        private final String source;
+        private final GPSExtractor gpsCoords;
 
-        public boolean selected = false;
-        public boolean first = false;
-        Title title;
-        List<Description> descriptions;
-        public Place place;
-        public boolean visited;
-        public boolean error;
-        public long createdTimestamp;
-        public BehaviorSubject<Integer> imageQuality;
+        private boolean selected = false;
+        private boolean first = false;
+        private Title title;
+        private List<Description> descriptions;
+        private Place place;
+        private boolean visited;
+        private boolean error;
+        private long createdTimestamp;
+        private BehaviorSubject<Integer> imageQuality;
 
         @SuppressLint("CheckResult")
         UploadItem(Uri mediaUri, String mimeType, String source, GPSExtractor gpsCoords, @Nullable Place place, long createdTimestamp) {
@@ -342,6 +342,46 @@ public class UploadModel {
             this.gpsCoords = gpsCoords;
             this.createdTimestamp = createdTimestamp;
             imageQuality = BehaviorSubject.createDefault(ImageUtils.IMAGE_WAIT);
+        }
+
+        public String getMimeType() {
+            return mimeType;
+        }
+
+        public String getSource() {
+            return source;
+        }
+
+        public GPSExtractor getGpsCoords() {
+            return gpsCoords;
+        }
+
+        public boolean isSelected() {
+            return selected;
+        }
+
+        public boolean isFirst() {
+            return first;
+        }
+
+        public List<Description> getDescriptions() {
+            return descriptions;
+        }
+
+        public boolean isVisited() {
+            return visited;
+        }
+
+        public boolean isError() {
+            return error;
+        }
+
+        public long getCreatedTimestamp() {
+            return createdTimestamp;
+        }
+
+        public Title getTitle() {
+            return title;
         }
 
         public Uri getMediaUri() {

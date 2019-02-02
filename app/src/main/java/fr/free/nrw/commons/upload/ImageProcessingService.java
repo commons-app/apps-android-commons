@@ -53,7 +53,7 @@ public class ImageProcessingService {
         Timber.d("Checking the validity of image");
         String filePath = uploadItem.getMediaUri().getPath();
         Single<Integer> duplicateImage = checkDuplicateImage(filePath);
-        Single<Integer> wrongGeoLocation = checkImageGeoLocation(uploadItem.place, filePath);
+        Single<Integer> wrongGeoLocation = checkImageGeoLocation(uploadItem.getPlace(), filePath);
         Single<Integer> darkImage = checkDarkImage(filePath);
         Single<Integer> itemTitle = checkTitle ? validateItemTitle(uploadItem) : Single.just(ImageUtils.IMAGE_OK);
 
@@ -72,8 +72,8 @@ public class ImageProcessingService {
      * @return
      */
     private Single<Integer> validateItemTitle(UploadModel.UploadItem uploadItem) {
-        Timber.d("Checking for image title %s", uploadItem.title);
-        Title title = uploadItem.title;
+        Timber.d("Checking for image title %s", uploadItem.getTitle());
+        Title title = uploadItem.getTitle();
         if (title.isEmpty()) {
             return Single.just(EMPTY_TITLE);
         }

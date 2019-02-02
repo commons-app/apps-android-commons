@@ -250,7 +250,7 @@ public class UploadActivity extends BaseActivity implements UploadView, SimilarI
             dismissKeyboard();
         }
         if(isShowingItem) {
-            descriptionsAdapter.setItems(uploadItem.title, uploadItem.descriptions);
+            descriptionsAdapter.setItems(uploadItem.getTitle(), uploadItem.getDescriptions());
             rvDescriptions.setAdapter(descriptionsAdapter);
         }
     }

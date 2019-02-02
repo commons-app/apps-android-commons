@@ -224,7 +224,7 @@ public class UploadPresenter {
      * Called by the map button on the right card in {@link UploadActivity}
      */
     void openCoordinateMap() {
-        GPSExtractor gpsObj = uploadModel.getCurrentItem().gpsCoords;
+        GPSExtractor gpsObj = uploadModel.getCurrentItem().getGpsCoords();
         if (gpsObj != null && gpsObj.imageCoordsExists) {
             view.launchMapActivity(gpsObj.getDecLatitude() + "," + gpsObj.getDecLongitude());
         }
@@ -345,7 +345,7 @@ public class UploadPresenter {
         view.setPreviousEnabled(uploadModel.isPreviousAvailable());
         view.setSubmitEnabled(uploadModel.isSubmitAvailable());
 
-        view.setBackground(uploadModel.getCurrentItem().mediaUri);
+        view.setBackground(uploadModel.getCurrentItem().getMediaUri());
 
         view.updateBottomCardContent(uploadModel.getCurrentStep(),
                 uploadModel.getStepCount(),
@@ -354,7 +354,7 @@ public class UploadPresenter {
 
         view.updateTopCardContent();
 
-        GPSExtractor gpsObj = uploadModel.getCurrentItem().gpsCoords;
+        GPSExtractor gpsObj = uploadModel.getCurrentItem().getGpsCoords();
         view.updateRightCardContent(gpsObj != null && gpsObj.imageCoordsExists);
 
         view.updateSubtitleVisibility(uploadModel.getCount());
@@ -399,8 +399,8 @@ public class UploadPresenter {
     List<String> getImageTitleList() {
         List<String> titleList = new ArrayList<>();
         for (UploadItem item : uploadModel.getUploads()) {
-            if (item.title.isSet()) {
-                titleList.add(item.title.toString());
+            if (item.getTitle().isSet()) {
+                titleList.add(item.getTitle().toString());
             }
         }
         return titleList;
