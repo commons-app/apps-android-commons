@@ -30,6 +30,7 @@ import timber.log.Timber;
 class DescriptionsAdapter extends RecyclerView.Adapter<DescriptionsAdapter.ViewHolder> {
 
     private Title title;
+    private String text=null;
     private List<Description> descriptions;
     private Context context;
     private Callback callback;
@@ -81,6 +82,8 @@ class DescriptionsAdapter extends RecyclerView.Adapter<DescriptionsAdapter.ViewH
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         holder.init(position);
+        if (position==0 && text!=null)
+            holder.setDescItemEditText(text);
     }
 
     @Override
@@ -102,7 +105,7 @@ class DescriptionsAdapter extends RecyclerView.Adapter<DescriptionsAdapter.ViewH
     }
 
     public void setTitle(Title title) {
-        this.title = title;
+        text=title.toString();
         notifyItemInserted(0);
     }
 
@@ -251,6 +254,10 @@ class DescriptionsAdapter extends RecyclerView.Adapter<DescriptionsAdapter.ViewH
          */
         private Drawable getInfoIcon() {
             return context.getResources().getDrawable(R.drawable.mapbox_info_icon_default);
+        }
+
+        public void setDescItemEditText(String text){
+            descItemEditText.setText(text);
         }
     }
 

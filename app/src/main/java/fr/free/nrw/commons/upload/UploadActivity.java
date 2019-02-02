@@ -149,6 +149,18 @@ public class UploadActivity extends AuthenticatedActivity implements UploadView,
                 getString(R.string.write_storage_permission_rationale_for_image_share));
 
         dexterPermissionObtainer.confirmStoragePermissions().subscribe(this::receiveSharedItems);
+
+        if (savedInstanceState!=null){
+            Title title=new Title();
+            title.setTitleText(savedInstanceState.get("title").toString());
+            descriptionsAdapter.setTitle(title);
+        }
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putString("title",descriptionsAdapter.getTitle().toString());
     }
 
     @Override
