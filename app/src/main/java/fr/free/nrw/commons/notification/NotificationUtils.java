@@ -74,6 +74,11 @@ public class NotificationUtils {
         return NotificationType.handledValueOf(type);
     }
 
+    public static String getNotificationId(Node document) {
+        Element element = (Element) document;
+        return element.getAttribute("id");
+    }
+
     public static List<Notification> getNotificationsFromBundle(Context context, Node document) {
         Element bundledNotifications = getBundledNotifications(document);
         NodeList childNodes = bundledNotifications.getChildNodes();
@@ -154,7 +159,8 @@ public class NotificationUtils {
                 notificationText = getWelcomeMessage(context, document);
                 break;
         }
-        return new Notification(type, notificationText, getTimestamp(document), description, link, iconUrl, getTimestampWithYear(document));
+        return new Notification(type, notificationText, getTimestamp(document), description, link, iconUrl, getTimestampWithYear(document),
+                getNotificationId(document));
     }
 
     private static String getNotificationText(Node document) {

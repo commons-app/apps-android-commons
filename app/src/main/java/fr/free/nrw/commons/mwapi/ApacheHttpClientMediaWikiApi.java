@@ -54,6 +54,7 @@ import fr.free.nrw.commons.notification.Notification;
 import fr.free.nrw.commons.notification.NotificationUtils;
 import fr.free.nrw.commons.utils.ConfigUtils;
 import fr.free.nrw.commons.utils.DateUtils;
+import fr.free.nrw.commons.utils.StringUtils;
 import fr.free.nrw.commons.utils.ViewUtil;
 import in.yuvi.http.fluent.Http;
 import io.reactivex.Observable;
@@ -82,7 +83,7 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
     private Gson gson;
     private final OkHttpClient okHttpClient;
     private final String WIKIMEDIA_CAMPAIGNS_BASE_URL =
-        "https://raw.githubusercontent.com/commons-app/campaigns/master/campaigns.json";
+            "https://raw.githubusercontent.com/commons-app/campaigns/master/campaigns.json";
 
     private final String ERROR_CODE_BAD_TOKEN = "badtoken";
 
@@ -587,6 +588,7 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
                     .param("meta", "notifications")
                     .param("notformat", "model")
                     .param("notwikis", "wikidatawiki|commonswiki|enwiki")
+                    .param("notfilter","!read")
                     .get()
                     .getNode("/api/query/notifications/list");
         } catch (IOException e) {
@@ -599,9 +601,24 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
                 || notificationNode.getDocument().getChildNodes().getLength() == 0) {
             return new ArrayList<>();
         }
-
         NodeList childNodes = notificationNode.getDocument().getChildNodes();
         return NotificationUtils.getNotificationsFromList(context, childNodes);
+    }
+
+    @Override
+    public boolean markNotificationAsRead(Notification notification) throws IOException {
+        Timber.d("Trying to mark notification as read: %s", notification.toString());
+        String result = api.action("echomarkread")
+                .param("token", getEditToken())
+                .param("list", notification.notificationId)
+                .post()
+                .getString("/api/query/echomarkread/@result");
+
+        if (StringUtils.isNullOrWhiteSpace(result)) {
+            return false;
+        }
+
+        return result.equals("success");
     }
 
     /**
