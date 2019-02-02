@@ -3,26 +3,18 @@ package fr.free.nrw.commons.notification;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Canvas;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
-import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.constraint.ConstraintLayout;
 import android.support.design.widget.Snackbar;
-import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.helper.ItemTouchHelper;
-import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
-import com.daimajia.swipe.SwipeLayout;
 import com.pedrogomez.renderers.RVRendererAdapter;
 
 import java.util.Collections;
@@ -34,7 +26,6 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.Utils;
-import fr.free.nrw.commons.ViewHolder;
 import fr.free.nrw.commons.theme.NavigationBaseActivity;
 import fr.free.nrw.commons.utils.NetworkUtils;
 import fr.free.nrw.commons.utils.ViewUtil;
@@ -42,7 +33,6 @@ import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 import timber.log.Timber;
-import com.nineoldandroids.view.ViewHelper;
 
 /**
  * Created by root on 18.12.2017.
@@ -107,7 +97,7 @@ public class NotificationActivity extends NavigationBaseActivity {
 
                     Timber.e(throwable, "Error occurred while loading notifications");
                     throwable.printStackTrace();
-                    //ViewUtil.showShortSnackbar(relativeLayout, R.string.error_notifications);
+                    ViewUtil.showShortSnackbar(relativeLayout, R.string.error_notifications);
                     progressBar.setVisibility(View.GONE);
                 });
     }
@@ -180,9 +170,18 @@ public class NotificationActivity extends NavigationBaseActivity {
             no_notification.setVisibility(View.VISIBLE);
             return;
         }
-        notificationAdapterFactory = new NotificationAdapterFactory(notification -> {
-            Timber.d("Notification clicked %s", notification.link);
-            handleUrl(notification.link);
+        notificationAdapterFactory = new NotificationAdapterFactory(new NotificationRenderer.NotificationClicked() {
+            @Override
+            public void notificationClicked(Notification notification) {
+                Timber.d("Notification clicked %s", notification.link);
+                handleUrl(notification.link);
+            }
+
+            @Override
+            public void markNotificationAsRead(Notification notification) {
+                Timber.d("Notification to mark as read %s", notification.notificationId);
+                removeNotification(notification);
+            }
         });
         adapter = notificationAdapterFactory.create(notificationList);
         relativeLayout.setVisibility(View.VISIBLE);

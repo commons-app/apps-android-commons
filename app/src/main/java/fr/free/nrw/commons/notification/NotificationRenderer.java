@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.daimajia.swipe.SwipeLayout;
@@ -14,6 +15,7 @@ import com.pedrogomez.renderers.Renderer;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import fr.free.nrw.commons.R;
 import timber.log.Timber;
 
@@ -28,6 +30,11 @@ public class NotificationRenderer extends Renderer<Notification> {
     TextView time;
     @BindView(R.id.icon)
     ImageView icon;
+    @BindView(R.id.swipeLayout)
+    SwipeLayout swipeLayout;
+    @BindView(R.id.bottom)
+    LinearLayout bottomLayout;
+
     private NotificationClicked listener;
 
 
@@ -35,28 +42,16 @@ public class NotificationRenderer extends Renderer<Notification> {
         this.listener = listener;
     }
 
+    @OnClick(R.id.swipeLayout)
+    void onSwipeLayoutClicked() {
+        Notification notification = getContent();
+        Timber.d("NotificationID: %s", notification.notificationId);
+        listener.markNotificationAsRead(notification);
+    }
+
     @Override
-    protected void setUpView(View view) {
-        SwipeLayout swipeLayout = view.findViewById(R.id.swipeLayout);
-        swipeLayout.addDrag(SwipeLayout.DragEdge.Top, view.findViewById(R.id.bottom));
-        swipeLayout.addRevealListener(R.id.bottom_wrapper_child1, (child, edge, fraction, distance) -> {
-            View star = child.findViewById(R.id.star);
-            float d = child.getHeight() / 2 - star.getHeight() / 2;
-            ViewHelper.setTranslationY(star, d * fraction);
-            ViewHelper.setScaleX(star, fraction + 0.6f);
-            ViewHelper.setScaleY(star, fraction + 0.6f);
-            int c = (Integer) evaluate(fraction, Color.parseColor("#dddddd"), Color.parseColor("#90960a0a"));
-            child.setBackgroundColor(c);
-            int position = view.getVerticalScrollbarPosition();
-            swipeLayout.setOnClickListener(view1 -> {
-                Notification notification = getContent();
-                Timber.d(String.valueOf(position) + notification.notificationId);
-                NotificationActivity notificationActivity = new NotificationActivity();
-                notificationActivity.removeNotification(notification);
-            });
+    protected void setUpView(View rootView) {
 
-
-        });
     }
 
     @Override
@@ -69,6 +64,16 @@ public class NotificationRenderer extends Renderer<Notification> {
         View inflatedView = layoutInflater.inflate(R.layout.item_notification, viewGroup, false);
         ButterKnife.bind(this, inflatedView);
 
+        swipeLayout.addDrag(SwipeLayout.DragEdge.Top, bottomLayout);
+        swipeLayout.addRevealListener(R.id.bottom_wrapper_child1, (child, edge, fraction, distance) -> {
+            View star = child.findViewById(R.id.star);
+            float d = child.getHeight() / 2 - star.getHeight() / 2;
+            ViewHelper.setTranslationY(star, d * fraction);
+            ViewHelper.setScaleX(star, fraction + 0.6f);
+            ViewHelper.setScaleY(star, fraction + 0.6f);
+            int c = (Integer) evaluate(fraction, Color.parseColor("#dddddd"), Color.parseColor("#90960a0a"));
+            child.setBackgroundColor(c);
+        });
         return inflatedView;
     }
 
@@ -117,5 +122,6 @@ public class NotificationRenderer extends Renderer<Notification> {
 
     public interface NotificationClicked {
         void notificationClicked(Notification notification);
+        void markNotificationAsRead(Notification notification);
     }
 }
