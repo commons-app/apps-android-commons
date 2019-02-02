@@ -103,8 +103,6 @@ public interface MediaWikiApi {
 
     boolean isUserBlockedFromCommons();
 
-    Single<Media> getPictureOfTheDay();
-
     void logout();
 
     interface ProgressListener {

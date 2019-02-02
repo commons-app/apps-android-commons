@@ -19,6 +19,7 @@ import fr.free.nrw.commons.BuildConfig;
 import fr.free.nrw.commons.kvstore.BasicKvStore;
 import fr.free.nrw.commons.mwapi.ApacheHttpClientMediaWikiApi;
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
+import fr.free.nrw.commons.mwapi.OkHttpJsonApiClient;
 import fr.free.nrw.commons.utils.UriDeserializer;
 import fr.free.nrw.commons.utils.UriSerializer;
 import okhttp3.Cache;
@@ -62,6 +63,13 @@ public class NetworkingModule {
                                             @Named("category_prefs") BasicKvStore categoryKvStore,
                                             Gson gson) {
         return new ApacheHttpClientMediaWikiApi(context, BuildConfig.WIKIMEDIA_API_HOST, BuildConfig.WIKIDATA_API_HOST, defaultKvStore, categoryKvStore, gson);
+    }
+
+    @Provides
+    @Singleton
+    public OkHttpJsonApiClient provideOkHttpJsonApiClient(OkHttpClient okHttpClient,
+                                                          Gson gson) {
+        return new OkHttpJsonApiClient(okHttpClient, BuildConfig.WIKIMEDIA_API_HOST, gson);
     }
 
     @Provides
