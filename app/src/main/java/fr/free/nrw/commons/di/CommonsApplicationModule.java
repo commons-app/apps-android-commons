@@ -193,12 +193,6 @@ public class CommonsApplicationModule {
 
     @Provides
     @Singleton
-    public NearbyPlaces provideNearbyPlaces() {
-        return new NearbyPlaces();
-    }
-
-    @Provides
-    @Singleton
     public LruCache<String, String> provideLruCache() {
         return new LruCache<>(1024);
     }

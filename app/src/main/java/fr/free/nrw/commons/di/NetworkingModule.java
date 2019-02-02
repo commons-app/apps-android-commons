@@ -24,6 +24,8 @@ import fr.free.nrw.commons.utils.UriSerializer;
 import okhttp3.Cache;
 import okhttp3.HttpUrl;
 import okhttp3.OkHttpClient;
+import okhttp3.logging.HttpLoggingInterceptor;
+import timber.log.Timber;
 
 @Module
 @SuppressWarnings({"WeakerAccess", "unused"})
@@ -32,13 +34,25 @@ public class NetworkingModule {
 
     @Provides
     @Singleton
-    public OkHttpClient provideOkHttpClient(Context context) {
+    public OkHttpClient provideOkHttpClient(Context context,
+                                            HttpLoggingInterceptor httpLoggingInterceptor) {
         File dir = new File(context.getCacheDir(), "okHttpCache");
         return new OkHttpClient.Builder().connectTimeout(60, TimeUnit.SECONDS)
             .writeTimeout(60, TimeUnit.SECONDS)
+                .addInterceptor(httpLoggingInterceptor)
             .readTimeout(60, TimeUnit.SECONDS)
             .cache(new Cache(dir, OK_HTTP_CACHE_SIZE))
             .build();
+    }
+
+    @Provides
+    @Singleton
+    public HttpLoggingInterceptor provideHttpLoggingInterceptor() {
+        HttpLoggingInterceptor httpLoggingInterceptor = new HttpLoggingInterceptor(message -> {
+            Timber.tag("OkHttp").d(message);
+        });
+        httpLoggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
+        return httpLoggingInterceptor;
     }
 
     @Provides

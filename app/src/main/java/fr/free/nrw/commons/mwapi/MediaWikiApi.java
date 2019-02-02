@@ -11,6 +11,8 @@ import java.util.List;
 
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.achievements.FeedbackResponse;
+import fr.free.nrw.commons.location.LatLng;
+import fr.free.nrw.commons.nearby.Place;
 import fr.free.nrw.commons.notification.Notification;
 import io.reactivex.Observable;
 import io.reactivex.Single;
@@ -108,6 +110,8 @@ public interface MediaWikiApi {
     Single<Media> getPictureOfTheDay();
 
     void logout();
+
+    Observable<List<Place>> getNearbyPlaces(LatLng cur, String lang, double radius) throws IOException;
 
     Single<CampaignResponseDTO> getCampaigns();
 

@@ -7,6 +7,8 @@ import android.os.Parcelable;
 import android.support.annotation.Nullable;
 
 import fr.free.nrw.commons.location.LatLng;
+import fr.free.nrw.commons.nearby.model.NearbyResultItem;
+import fr.free.nrw.commons.utils.PlaceUtils;
 import timber.log.Timber;
 
 /**
@@ -46,6 +48,21 @@ public class Place implements Parcelable {
         this.location = in.readParcelable(LatLng.class.getClassLoader());
         this.category = in.readString();
         this.siteLinks = in.readParcelable(Sitelinks.class.getClassLoader());
+    }
+
+    public static Place from(NearbyResultItem item) {
+        return new Place(
+                item.getLabel().getValue(),
+                Label.fromText(item.getClassLabel().getValue()), // list
+                item.getClassName().getValue(), // details
+                Uri.parse(item.getIcon().getValue()),
+                PlaceUtils.latLngFromPointString(item.getLocation().getValue()),
+                item.getCommonsCategory().getValue(),
+                new Sitelinks.Builder()
+                        .setWikipediaLink(item.getWikipediaArticle().getValue())
+                        .setCommonsLink(item.getCommonsArticle().getValue())
+                        .setWikidataLink(item.getItem().getValue())
+                        .build());
     }
 
     /**

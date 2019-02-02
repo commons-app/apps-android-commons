@@ -50,8 +50,13 @@ import fr.free.nrw.commons.campaigns.CampaignResponseDTO;
 import fr.free.nrw.commons.category.CategoryImageUtils;
 import fr.free.nrw.commons.category.QueryContinue;
 import fr.free.nrw.commons.kvstore.BasicKvStore;
+import fr.free.nrw.commons.location.LatLng;
+import fr.free.nrw.commons.nearby.Place;
+import fr.free.nrw.commons.nearby.model.NearbyResponse;
+import fr.free.nrw.commons.nearby.model.NearbyResultItem;
 import fr.free.nrw.commons.notification.Notification;
 import fr.free.nrw.commons.notification.NotificationUtils;
+import fr.free.nrw.commons.upload.FileUtils;
 import fr.free.nrw.commons.utils.ConfigUtils;
 import fr.free.nrw.commons.utils.DateUtils;
 import fr.free.nrw.commons.utils.StringUtils;
@@ -83,7 +88,8 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
     private Gson gson;
     private final OkHttpClient okHttpClient;
     private final String WIKIMEDIA_CAMPAIGNS_BASE_URL =
-            "https://raw.githubusercontent.com/commons-app/campaigns/master/campaigns.json";
+        "https://raw.githubusercontent.com/commons-app/campaigns/master/campaigns.json";
+    private static final String WIKIDATA_SPARQL_QUERY_URL = "https://query.wikidata.org/sparql";
 
     private final String ERROR_CODE_BAD_TOKEN = "badtoken";
 
@@ -1077,9 +1083,48 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
         }
     }
 
+    @Override
+    public Observable<List<Place>> getNearbyPlaces(LatLng cur, String lang, double radius) throws IOException {
+        String wikidataQuery = FileUtils.readFromResource("/queries/nearby_query.rq");
+        String query = wikidataQuery
+                .replace("${RAD}", String.format(Locale.ROOT, "%.2f", radius))
+                .replace("${LAT}", String.format(Locale.ROOT, "%.4f", cur.getLatitude()))
+                .replace("${LONG}", String.format(Locale.ROOT, "%.4f", cur.getLongitude()))
+                .replace("${LANG}", lang);
+
+        HttpUrl.Builder urlBuilder = HttpUrl
+                .parse(WIKIDATA_SPARQL_QUERY_URL)
+                .newBuilder()
+                .addQueryParameter("query", query)
+                .addQueryParameter("format", "json");
+
+        Request request = new Request.Builder()
+                .url(urlBuilder.build())
+                .build();
+
+        return Observable.fromCallable(() -> {
+            Response response = okHttpClient.newCall(request).execute();
+            if (response != null && response.body() != null && response.isSuccessful()) {
+                String json = response.body().string();
+                if (json == null) {
+                    return new ArrayList<>();
+                }
+                NearbyResponse nearbyResponse = gson.fromJson(json, NearbyResponse.class);
+                List<NearbyResultItem> bindings = nearbyResponse.getResults().getBindings();
+                List<Place> places = new ArrayList<>();
+                for (NearbyResultItem item : bindings) {
+                    places.add(Place.from(item));
+                }
+                return places;
+            }
+            return new ArrayList<>();
+        });
+    }
+
     @Override public Single<CampaignResponseDTO> getCampaigns() {
         return Single.fromCallable(() -> {
-            Request request = new Request.Builder().url(WIKIMEDIA_CAMPAIGNS_BASE_URL).build();
+            Request request = new Request.Builder().url(WIKIMEDIA_CAMPAIGNS_BASE_URL)
+                    .build();
             Response response = okHttpClient.newCall(request).execute();
             if (response != null && response.body() != null && response.isSuccessful()) {
                 String json = response.body().string();
