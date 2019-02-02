@@ -26,10 +26,9 @@ import fr.free.nrw.commons.nearby.Place;
 import fr.free.nrw.commons.settings.Prefs;
 import fr.free.nrw.commons.utils.ImageUtils;
 import io.reactivex.Observable;
-import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.Single;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Consumer;
-import io.reactivex.schedulers.Schedulers;
 import io.reactivex.subjects.BehaviorSubject;
 import timber.log.Timber;
 
@@ -84,16 +83,15 @@ public class UploadModel {
                                             String source,
                                             SimilarImageInterface similarImageInterface) {
         initDefaultValues();
-
         return Observable.fromIterable(uploadableFiles)
-                .map(uploadableFile -> {
-                    UploadItem item = getUploadItem(uploadableFile, place, source, similarImageInterface);
-                    imageProcessingService.checkImageQuality(place, uploadableFile.getFilePath())
-                            .subscribeOn(Schedulers.computation())
-                            .observeOn(AndroidSchedulers.mainThread())
-                            .subscribe(item.imageQuality::onNext, Timber::e);
-                    return item;
-                });
+                .map(uploadableFile -> getUploadItem(uploadableFile, place, source, similarImageInterface));
+    }
+
+    private Single<Integer> getImageQuality(UploadItem uploadItem) {
+        if (uploadItem.getImageQuality() == ImageUtils.IMAGE_KEEP) {
+            return Single.just(ImageUtils.IMAGE_OK);
+        }
+        return imageProcessingService.checkImageQuality(uploadItem.getPlace(), uploadItem.getMediaUri().getPath());
     }
 
     @NonNull
@@ -112,9 +110,11 @@ public class UploadModel {
         if (items.isEmpty()) {
             return;
         }
+
         UploadItem uploadItem = items.get(0);
         uploadItem.selected = true;
         uploadItem.first = true;
+
         if (place != null) {
             uploadItem.title.setTitleText(place.getName());
             uploadItem.descriptions.get(0).setDescriptionText(place.getLongDescription());
@@ -189,16 +189,17 @@ public class UploadModel {
         this.bottomCardState = bottomCardState;
     }
 
+    @SuppressLint("CheckResult")
     public void next() {
         Timber.d("UploadModel:next; Handling next");
-        if (badImageSubscription != null)
-            badImageSubscription.dispose();
-        Timber.d("UploadModel:next; disposing badImageSubscription");
-        markCurrentUploadVisited();
-        if (currentStepIndex < items.size() + 1) {
-            currentStepIndex++;
-        }
-        updateItemState();
+        getCurrentItem().imageQuality.subscribe(integer -> {
+            Timber.d("Image quality is: %d", integer);
+            markCurrentUploadVisited();
+            if (currentStepIndex < items.size() + 1) {
+                currentStepIndex++;
+            }
+            updateItemState();
+        });
     }
 
     void setCurrentTitleAndDescriptions(Title title, List<Description> descriptions) {
@@ -296,17 +297,18 @@ public class UploadModel {
     }
 
     void keepPicture() {
-        items.get(currentStepIndex).imageQuality.onNext(ImageUtils.IMAGE_KEEP);
+        items.get(currentStepIndex).setImageQuality(ImageUtils.IMAGE_KEEP);
     }
 
     void deletePicture() {
         badImageSubscription.dispose();
-        items.remove(currentStepIndex).imageQuality.onComplete();
         updateItemState();
     }
 
     void subscribeBadPicture(Consumer<Integer> consumer) {
-        badImageSubscription = getCurrentItem().imageQuality.subscribe(consumer, Timber::e);
+        if (isShowingItem()) {
+            badImageSubscription = getImageQuality(getCurrentItem()).subscribe(consumer, Timber::e);
+        }
     }
 
     public List<UploadItem> getItems() {
@@ -322,13 +324,13 @@ public class UploadModel {
 
         public boolean selected = false;
         public boolean first = false;
-        public BehaviorSubject<Integer> imageQuality;
         Title title;
         List<Description> descriptions;
         public Place place;
         public boolean visited;
         public boolean error;
         public long createdTimestamp;
+        public BehaviorSubject<Integer> imageQuality;
 
         @SuppressLint("CheckResult")
         UploadItem(Uri mediaUri, String mimeType, String source, GPSExtractor gpsCoords, @Nullable Place place, long createdTimestamp) {
@@ -340,8 +342,20 @@ public class UploadModel {
             this.mimeType = mimeType;
             this.source = source;
             this.gpsCoords = gpsCoords;
-            imageQuality = BehaviorSubject.createDefault(ImageUtils.IMAGE_WAIT);
             this.createdTimestamp = createdTimestamp;
+            imageQuality = BehaviorSubject.createDefault(ImageUtils.IMAGE_WAIT);
+        }
+
+        public Uri getMediaUri() {
+            return mediaUri;
+        }
+
+        public int getImageQuality() {
+            return this.imageQuality.getValue();
+        }
+
+        public void setImageQuality(int imageQuality) {
+            this.imageQuality.onNext(imageQuality);
         }
 
         public String getFileExt() {
@@ -350,6 +364,10 @@ public class UploadModel {
 
         public String getFileName() {
             return Utils.fixExtension(title.toString(), getFileExt());
+        }
+
+        public Place getPlace() {
+            return place;
         }
     }
 

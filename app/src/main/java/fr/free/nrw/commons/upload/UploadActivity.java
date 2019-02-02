@@ -159,19 +159,9 @@ public class UploadActivity extends BaseActivity implements UploadView, SimilarI
 
         PermissionUtils.checkPermissionsAndPerformAction(this,
                 Manifest.permission.WRITE_EXTERNAL_STORAGE,
-                this::receiveExternalSharedItems,
+                this::receiveSharedItems,
                 R.string.storage_permission_title,
                 R.string.write_storage_permission_rationale_for_image_share);
-    }
-
-    private void receiveExternalSharedItems() {
-        List<UploadableFile> uploadableFiles = contributionController.handleExternalImagesPicked(this, getIntent());
-        if (uploadableFiles.isEmpty()) {
-            handleNullMedia();
-            return;
-        }
-
-        presenter.receive(uploadableFiles, SOURCE_EXTERNAL, null);
     }
 
     @Override
@@ -612,6 +602,25 @@ public class UploadActivity extends BaseActivity implements UploadView, SimilarI
 
     private void receiveSharedItems() {
         Intent intent = getIntent();
+        if (Intent.ACTION_SEND.equals(intent.getAction())) {
+            receiveExternalSharedItems();
+        } else if (Intent.ACTION_SEND_MULTIPLE.equals(intent.getAction())) {
+            receiveInternalSharedItems();
+        }
+    }
+
+    private void receiveExternalSharedItems() {
+        List<UploadableFile> uploadableFiles = contributionController.handleExternalImagesPicked(this, getIntent());
+        if (uploadableFiles.isEmpty()) {
+            handleNullMedia();
+            return;
+        }
+
+        presenter.receive(uploadableFiles, SOURCE_EXTERNAL, null);
+    }
+
+    private void receiveInternalSharedItems() {
+        Intent intent = getIntent();
         String source;
 
         if (intent.hasExtra(UploadService.EXTRA_SOURCE)) {
@@ -625,12 +634,8 @@ public class UploadActivity extends BaseActivity implements UploadView, SimilarI
                 intent.getAction(),
                 source);
 
-        ArrayList<UploadableFile> uploadableFiles = new ArrayList<>();
-
-        if (Intent.ACTION_SEND_MULTIPLE.equals(intent.getAction())) {
-            uploadableFiles = intent.getParcelableArrayListExtra(EXTRA_FILES);
-            Timber.i("Received multiple upload %s", uploadableFiles.size());
-        }
+        ArrayList<UploadableFile> uploadableFiles = intent.getParcelableArrayListExtra(EXTRA_FILES);
+        Timber.i("Received multiple upload %s", uploadableFiles.size());
 
         if (uploadableFiles.isEmpty()) {
             handleNullMedia();

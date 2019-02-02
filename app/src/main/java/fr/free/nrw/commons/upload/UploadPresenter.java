@@ -137,7 +137,7 @@ public class UploadPresenter {
                 view.showErrorMessage(R.string.add_title_toast);
                 break;
             case FILE_NAME_EXISTS:
-                if(getCurrentItem().imageQuality.getValue().equals(IMAGE_KEEP)) {
+                if (getCurrentItem().getImageQuality() == IMAGE_KEEP) {
                     Timber.d("Set title and desc; Show next uploaded item");
                     setTitleAndDescription(title, descriptions);
                     nextUploadedItem();
@@ -159,10 +159,7 @@ public class UploadPresenter {
         Timber.d("Trying to show next uploaded item");
         uploadModel.next();
         updateContent();
-        if (uploadModel.isShowingItem()) {
-            Timber.d("Is showing item is true");
-            uploadModel.subscribeBadPicture(this::handleBadPicture);
-        }
+        uploadModel.subscribeBadPicture(this::handleBadPicture);
         view.dismissKeyboard();
     }
 
@@ -204,9 +201,7 @@ public class UploadPresenter {
     void handlePrevious() {
         uploadModel.previous();
         updateContent();
-        if (uploadModel.isShowingItem()) {
-            uploadModel.subscribeBadPicture(this::handleBadPicture);
-        }
+        uploadModel.subscribeBadPicture(this::handleBadPicture);
         view.dismissKeyboard();
     }
 
@@ -246,6 +241,7 @@ public class UploadPresenter {
      * @param result the result returned by the image procesors.
      */
     private void handleBadPicture(@ImageUtils.Result int result) {
+        Timber.d("Image quality is (handleBadPicture) %d", result);
         view.showBadPicturePopup(result);
     }
 
@@ -260,8 +256,7 @@ public class UploadPresenter {
             uploadModel.deletePicture();
             updateCards();
             updateContent();
-            if (uploadModel.isShowingItem())
-                uploadModel.subscribeBadPicture(this::handleBadPicture);
+            uploadModel.subscribeBadPicture(this::handleBadPicture);
             view.dismissKeyboard();
         }
     }
