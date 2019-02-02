@@ -34,7 +34,7 @@ import timber.log.Timber;
 
 public class ImageUtils {
 
-    static final int IMAGE_DARK = 1;
+    public static final int IMAGE_DARK = 1;
     static final int IMAGE_BLURRY = 1 << 1;
     public static final int IMAGE_DUPLICATE = 1 << 2;
     public static final int IMAGE_GEOLOCATION_DIFFERENT = 1 << 3;

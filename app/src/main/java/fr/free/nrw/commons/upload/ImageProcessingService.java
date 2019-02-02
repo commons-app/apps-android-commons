@@ -11,6 +11,10 @@ import fr.free.nrw.commons.utils.ImageUtilsWrapper;
 import fr.free.nrw.commons.utils.StringUtils;
 import io.reactivex.Single;
 
+import static fr.free.nrw.commons.utils.ImageUtils.EMPTY_TITLE;
+import static fr.free.nrw.commons.utils.ImageUtils.FILE_NAME_EXISTS;
+import static fr.free.nrw.commons.utils.ImageUtils.IMAGE_OK;
+
 /**
  * Methods for pre-processing images to be uploaded
  */
@@ -33,13 +37,10 @@ public class ImageProcessingService {
         this.mwApi = mwApi;
     }
 
-    /**
-     * Check image quality before upload
-     * - checks duplicate image
-     * - checks dark image
-     */
-    public Single<Integer> checkImageQuality(String filePath) {
-        return checkImageQuality(null, filePath);
+    public Single<Integer> validateImage(UploadModel.UploadItem uploadItem, boolean checkTitle) {
+        Single<Integer> imageQuality = checkImageQuality(uploadItem.place, uploadItem.getMediaUri().getPath());
+        Single<Integer> itemTitle = checkTitle ? validateItemTitle(uploadItem) : Single.just(ImageUtils.IMAGE_OK);
+        return Single.zip(imageQuality, itemTitle, (quality, title) -> quality | title);
     }
 
     /**
@@ -48,12 +49,22 @@ public class ImageProcessingService {
      * - checks dark image
      * - checks geolocation for image
      */
-    public Single<Integer> checkImageQuality(Place place, String filePath) {
+    private Single<Integer> checkImageQuality(Place place, String filePath) {
         return Single.zip(
                 checkDuplicateImage(filePath),
                 checkImageGeoLocation(place, filePath),
                 checkDarkImage(filePath), //Returns IMAGE_DARK or IMAGE_OK
                 (dupe, wrongGeo, dark) -> dupe | wrongGeo | dark);
+    }
+
+    private Single<Integer> validateItemTitle(UploadModel.UploadItem uploadItem) {
+        Title title = uploadItem.title;
+        if (title.isEmpty()) {
+            return Single.just(EMPTY_TITLE);
+        }
+
+        return Single.fromCallable(() -> mwApi.fileExistsWithName(uploadItem.getFileName()))
+                .map(doesFileExist -> doesFileExist ? FILE_NAME_EXISTS : IMAGE_OK);
     }
 
     /**

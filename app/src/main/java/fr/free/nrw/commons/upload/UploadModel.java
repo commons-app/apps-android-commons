@@ -89,11 +89,11 @@ public class UploadModel {
                 .map(uploadableFile -> getUploadItem(uploadableFile, place, source, similarImageInterface));
     }
 
-    private Single<Integer> getImageQuality(UploadItem uploadItem) {
+    public Single<Integer> getImageQuality(UploadItem uploadItem, boolean checkTitle) {
         if (uploadItem.getImageQuality() == ImageUtils.IMAGE_KEEP) {
             return Single.just(ImageUtils.IMAGE_OK);
         }
-        return imageProcessingService.checkImageQuality(uploadItem.getPlace(), uploadItem.getMediaUri().getPath());
+        return imageProcessingService.validateImage(uploadItem, checkTitle);
     }
 
     @NonNull
@@ -193,18 +193,11 @@ public class UploadModel {
 
     @SuppressLint("CheckResult")
     public void next() {
-        Timber.d("UploadModel:next; Handling next");
-        getCurrentItem().imageQuality
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(integer -> {
-                    Timber.d("Image quality is: %d", integer);
-                    markCurrentUploadVisited();
-                    if (currentStepIndex < items.size() + 1) {
-                        currentStepIndex++;
-                    }
-                    updateItemState();
-                });
+        markCurrentUploadVisited();
+        if (currentStepIndex < items.size() + 1) {
+            currentStepIndex++;
+        }
+        updateItemState();
     }
 
     void setCurrentTitleAndDescriptions(Title title, List<Description> descriptions) {
@@ -310,9 +303,9 @@ public class UploadModel {
         updateItemState();
     }
 
-    void subscribeBadPicture(Consumer<Integer> consumer) {
+    void subscribeBadPicture(Consumer<Integer> consumer, boolean checkTitle) {
         if (isShowingItem()) {
-            badImageSubscription = getImageQuality(getCurrentItem())
+            badImageSubscription = getImageQuality(getCurrentItem(), checkTitle)
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe(consumer, Timber::e);

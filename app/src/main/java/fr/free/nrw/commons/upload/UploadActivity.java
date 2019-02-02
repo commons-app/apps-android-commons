@@ -2,6 +2,7 @@ package fr.free.nrw.commons.upload;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -135,6 +136,7 @@ public class UploadActivity extends BaseActivity implements UploadView, SimilarI
     private DescriptionsAdapter descriptionsAdapter;
     private RVRendererAdapter<CategoryItem> categoriesAdapter;
     private CompositeDisposable compositeDisposable;
+    private ProgressDialog progressDialog;
 
 
     @SuppressLint("CheckResult")
@@ -379,18 +381,10 @@ public class UploadActivity extends BaseActivity implements UploadView, SimilarI
     }
 
     @Override
-    public void showBadPicturePopup(@Result int result) {
-        if (result >= 8 ) { // If location of image and nearby does not match, then set shared preferences to disable wikidata edits
-            directKvStore.putBoolean("Picture_Has_Correct_Location", false);
-        }
-        String errorMessageForResult = getErrorMessageForResult(this, result);
-        if (StringUtils.isNullOrWhiteSpace(errorMessageForResult)) {
-            return;
-        }
-
+    public void showBadPicturePopup(String errorMessage) {
         DialogUtil.showAlertDialog(this,
                 getString(R.string.warning),
-                errorMessageForResult,
+                errorMessage,
                 () -> presenter.deletePicture(),
                 () -> presenter.keepPicture());
     }
@@ -415,6 +409,22 @@ public class UploadActivity extends BaseActivity implements UploadView, SimilarI
                 getString(R.string.yes_submit),
                 null,
                 () -> presenter.handleCategoryNext(categoriesModel, true));
+    }
+
+    @Override
+    public void showProgressDialog() {
+        if (progressDialog == null) {
+            progressDialog = new ProgressDialog(this);
+        }
+        progressDialog.setMessage(getString(R.string.please_wait));
+        progressDialog.show();
+    }
+
+    @Override
+    public void hideProgressDialog() {
+        if (progressDialog != null && !isFinishing()) {
+            progressDialog.dismiss();
+        }
     }
 
     @Override
