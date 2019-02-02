@@ -9,7 +9,6 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -82,6 +81,7 @@ public class MainActivity extends AuthenticatedActivity implements FragmentManag
     private boolean onOrientationChanged = false;
 
     private MenuItem notificationsMenuItem;
+    private TextView notificationCount;
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -288,6 +288,9 @@ public class MainActivity extends AuthenticatedActivity implements FragmentManag
         inflater.inflate(R.menu.contribution_activity_notification_menu, menu);
 
         notificationsMenuItem = menu.findItem(R.id.notifications);
+        final View notification = notificationsMenuItem.getActionView();
+        notificationCount = notification.findViewById(R.id.notification_count_badge);
+        notification.setOnClickListener(view -> NotificationActivity.startYourself(MainActivity.this));
         this.menu = menu;
         updateMenuItem();
         setNotificationCount();
@@ -305,11 +308,8 @@ public class MainActivity extends AuthenticatedActivity implements FragmentManag
 
     private void initNotificationViews(List<Notification> notificationList) {
         Timber.d("Number of notifications is %d", notificationList.size());
-        final View notification = notificationsMenuItem.getActionView();
-        TextView notificationCount = notification.findViewById(R.id.notification_count_badge);
         if (notificationList.isEmpty()) {
-            notificationCount.setVisibility(View.VISIBLE);
-            notificationCount.setText(String.valueOf(notificationList.size()));
+            notificationCount.setVisibility(View.GONE);
         } else {
             notificationCount.setVisibility(View.VISIBLE);
             notificationCount.setText(String.valueOf(notificationList.size()));
