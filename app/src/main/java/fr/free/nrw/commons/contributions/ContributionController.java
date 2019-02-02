@@ -83,16 +83,17 @@ public class ContributionController {
      */
     private void initiateGalleryUpload(Activity activity, boolean allowMultipleUploads) {
         setPickerConfiguration(activity, allowMultipleUploads);
-        FilePicker.openChooserWithGallery(activity, activity.getString(R.string.image_chooser_title), 0);
+        FilePicker.openGallery(activity, 0);
     }
 
     /**
      * Sets configuration for file picker
      */
-    private void setPickerConfiguration(Activity activity, boolean allowMultipleUploads) {
+    private void setPickerConfiguration(Activity activity,
+                                        boolean allowMultipleUploads) {
+        boolean copyToExternalStorage = defaultKvStore.getBoolean("useExternalStorage", true);
         FilePicker.configuration(activity)
-                .setCopyTakenPhotosToPublicGalleryAppFolder(true)
-                .setCopyPickedImagesToPublicGalleryAppFolder(true)
+                .setCopyTakenPhotosToPublicGalleryAppFolder(copyToExternalStorage)
                 .setAllowMultiplePickInGallery(allowMultipleUploads);
     }
 
