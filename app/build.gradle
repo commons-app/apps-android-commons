@@ -229,7 +229,7 @@ android {
         targetCompatibility JavaVersion.VERSION_1_8
     }
 
-    buildToolsVersion buildToolsVersion
+    buildToolsVersion '28.0.3'
 }
 
 if(isRunningOnTravisAndIsNotPRBuild) {
