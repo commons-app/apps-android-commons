@@ -443,4 +443,5 @@
   <string name="no_image">لا صور مستخدمة</string>
   <string name="no_image_reverted">لم يتم إرجاع أية صور</string>
   <string name="no_image_uploaded">لا توجد صور مرفوعة</string>
+  <string name="share_logs_using">مشاركة السجلات باستخدام</string>
 </resources>

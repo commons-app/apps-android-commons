@@ -439,4 +439,5 @@
   <string name="no_image">Inga bilder används</string>
   <string name="no_image_reverted">Inga bilder återställdes</string>
   <string name="no_image_uploaded">Inga bilder laddades upp</string>
+  <string name="share_logs_using">Dela loggar med</string>
 </resources>

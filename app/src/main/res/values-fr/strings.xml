@@ -452,4 +452,5 @@
   <string name="no_image">Aucune image utilisée</string>
   <string name="no_image_reverted">Aucune image retournée</string>
   <string name="no_image_uploaded">Aucune image téléversée</string>
+  <string name="share_logs_using">Partager les journaux en utilisant</string>
 </resources>

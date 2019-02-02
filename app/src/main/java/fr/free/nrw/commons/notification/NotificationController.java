@@ -36,4 +36,7 @@ public class NotificationController {
         }
         return new ArrayList<>();
     }
+    public boolean markAsRead(Notification notification) throws IOException{
+        return mediaWikiApi.markNotificationAsRead(notification);
+    }
 }

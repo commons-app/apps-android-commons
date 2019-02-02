@@ -443,4 +443,5 @@
   <string name="no_image">沒有圖片被使用到</string>
   <string name="no_image_reverted">沒有圖片被還原回復</string>
   <string name="no_image_uploaded">沒有圖片被上傳</string>
+  <string name="share_logs_using">分享日誌使用</string>
 </resources>

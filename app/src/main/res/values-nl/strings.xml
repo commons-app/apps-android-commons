@@ -237,4 +237,5 @@
   <string name="never_ask_again">Niet meer vragen</string>
   <string name="display_location_permission_title">Machtiging voor locatie weergeven</string>
   <string name="display_location_permission_explanation">Naar machtiging voor locatie vragen als dat nodig is voor de functie meldingskaart dichtbij weergeven.</string>
+  <string name="share_logs_using">Logboeken delen via</string>
 </resources>
