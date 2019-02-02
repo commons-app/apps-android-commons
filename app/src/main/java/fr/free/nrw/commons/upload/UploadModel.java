@@ -57,7 +57,6 @@ public class UploadModel {
     private Disposable badImageSubscription;
 
     private SessionManager sessionManager;
-    private FileUtilsWrapper fileUtilsWrapper;
     private FileProcessor fileProcessor;
     private final ImageProcessingService imageProcessingService;
 
@@ -67,15 +66,14 @@ public class UploadModel {
                 @Named("licenses_by_name") Map<String, String> licensesByName,
                 Context context,
                 SessionManager sessionManager,
-                FileUtilsWrapper fileUtilsWrapper,
-                FileProcessor fileProcessor, ImageProcessingService imageProcessingService) {
+                FileProcessor fileProcessor,
+                ImageProcessingService imageProcessingService) {
         this.licenses = licenses;
         this.basicKvStore = basicKvStore;
         this.license = basicKvStore.getString(Prefs.DEFAULT_LICENSE, Prefs.Licenses.CC_BY_SA_3);
         this.licensesByName = licensesByName;
         this.context = context;
         this.sessionManager = sessionManager;
-        this.fileUtilsWrapper = fileUtilsWrapper;
         this.fileProcessor = fileProcessor;
         this.imageProcessingService = imageProcessingService;
     }

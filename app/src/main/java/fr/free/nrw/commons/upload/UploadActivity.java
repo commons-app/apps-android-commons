@@ -52,6 +52,7 @@ import fr.free.nrw.commons.auth.SessionManager;
 import fr.free.nrw.commons.category.CategoriesModel;
 import fr.free.nrw.commons.category.CategoryItem;
 import fr.free.nrw.commons.contributions.Contribution;
+import fr.free.nrw.commons.contributions.ContributionController;
 import fr.free.nrw.commons.contributions.UploadableFile;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
@@ -68,6 +69,7 @@ import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.schedulers.Schedulers;
 import timber.log.Timber;
 
+import static fr.free.nrw.commons.contributions.Contribution.SOURCE_EXTERNAL;
 import static fr.free.nrw.commons.upload.UploadService.EXTRA_FILES;
 import static fr.free.nrw.commons.utils.ImageUtils.Result;
 import static fr.free.nrw.commons.utils.ImageUtils.getErrorMessageForResult;
@@ -75,6 +77,8 @@ import static fr.free.nrw.commons.wikidata.WikidataConstants.PLACE_OBJECT;
 
 public class UploadActivity extends BaseActivity implements UploadView, SimilarImageInterface {
     @Inject MediaWikiApi mwApi;
+    @Inject
+    ContributionController contributionController;
     @Inject @Named("direct_nearby_upload_prefs") JsonKvStore directKvStore;
     @Inject UploadPresenter presenter;
     @Inject CategoriesModel categoriesModel;
@@ -155,9 +159,19 @@ public class UploadActivity extends BaseActivity implements UploadView, SimilarI
 
         PermissionUtils.checkPermissionsAndPerformAction(this,
                 Manifest.permission.WRITE_EXTERNAL_STORAGE,
-                this::receiveSharedItems,
+                this::receiveExternalSharedItems,
                 R.string.storage_permission_title,
                 R.string.write_storage_permission_rationale_for_image_share);
+    }
+
+    private void receiveExternalSharedItems() {
+        List<UploadableFile> uploadableFiles = contributionController.handleExternalImagesPicked(this, getIntent());
+        if (uploadableFiles.isEmpty()) {
+            handleNullMedia();
+            return;
+        }
+
+        presenter.receive(uploadableFiles, SOURCE_EXTERNAL, null);
     }
 
     @Override
@@ -613,12 +627,7 @@ public class UploadActivity extends BaseActivity implements UploadView, SimilarI
 
         ArrayList<UploadableFile> uploadableFiles = new ArrayList<>();
 
-        if (Intent.ACTION_SEND.equals(intent.getAction())) {
-            UploadableFile mediaUri = intent.getParcelableExtra(EXTRA_FILES);
-            if (mediaUri != null) {
-                uploadableFiles.add(mediaUri);
-            }
-        } else if (Intent.ACTION_SEND_MULTIPLE.equals(intent.getAction())) {
+        if (Intent.ACTION_SEND_MULTIPLE.equals(intent.getAction())) {
             uploadableFiles = intent.getParcelableArrayListExtra(EXTRA_FILES);
             Timber.i("Received multiple upload %s", uploadableFiles.size());
         }

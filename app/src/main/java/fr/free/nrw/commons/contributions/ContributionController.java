@@ -122,6 +122,11 @@ public class ContributionController {
         });
     }
 
+    public List<UploadableFile> handleExternalImagesPicked(Activity activity,
+                                                            Intent data) {
+        return getUploadableFiles(FilePicker.handleExternalImagesPicked(data, activity));
+    }
+
     /**
      * Returns intent to be passed to upload activity
      * Attaches place object for nearby uploads
@@ -129,10 +134,7 @@ public class ContributionController {
     private Intent handleImagesPicked(Context context,
                                       List<File> imagesFiles,
                                       String source) {
-        ArrayList<UploadableFile> uploadableFiles = new ArrayList<>();
-        for (File file : imagesFiles) {
-            uploadableFiles.add(new UploadableFile(file));
-        }
+        ArrayList<UploadableFile> uploadableFiles = getUploadableFiles(imagesFiles);
         Intent shareIntent = new Intent(context, UploadActivity.class);
         shareIntent.setAction(ACTION_SEND_MULTIPLE);
         shareIntent.putExtra(EXTRA_SOURCE, source);
@@ -143,6 +145,15 @@ public class ContributionController {
         }
 
         return shareIntent;
+    }
+
+    @NonNull
+    private ArrayList<UploadableFile> getUploadableFiles(List<File> imagesFiles) {
+        ArrayList<UploadableFile> uploadableFiles = new ArrayList<>();
+        for (File file : imagesFiles) {
+            uploadableFiles.add(new UploadableFile(file));
+        }
+        return uploadableFiles;
     }
 
     /**

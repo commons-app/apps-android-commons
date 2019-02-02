@@ -343,6 +343,15 @@ public class FilePicker implements Constants {
         }
     }
 
+    public static List<File> handleExternalImagesPicked(Intent data, Activity activity) {
+        try {
+            return getFilesFromGalleryPictures(data, activity);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return new ArrayList<>();
+    }
+
     private static boolean isPhoto(Intent data) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
             return data == null || (data.getData() == null && data.getClipData() == null);
@@ -409,32 +418,37 @@ public class FilePicker implements Constants {
 
     private static void onPictureReturnedFromGallery(Intent data, Activity activity, @NonNull FilePicker.Callbacks callbacks) {
         try {
-            List<File> files = new ArrayList<>();
-            ClipData clipData = null;
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
-                clipData = data.getClipData();
-            }
-            if (clipData == null) {
-                Uri uri = data.getData();
-                File file = PickedFiles.pickedExistingPicture(activity, uri);
-                files.add(file);
-            } else {
-                for (int i = 0; i < clipData.getItemCount(); i++) {
-                    Uri uri = clipData.getItemAt(i).getUri();
-                    File file = PickedFiles.pickedExistingPicture(activity, uri);
-                    files.add(file);
-                }
-            }
-
-            if (configuration(activity).shouldCopyPickedImagesToPublicGalleryAppFolder()) {
-                PickedFiles.copyFilesInSeparateThread(activity, files);
-            }
-
+            List<File> files = getFilesFromGalleryPictures(data, activity);
             callbacks.onImagesPicked(files, FilePicker.ImageSource.GALLERY, restoreType(activity));
         } catch (Exception e) {
             e.printStackTrace();
             callbacks.onImagePickerError(e, FilePicker.ImageSource.GALLERY, restoreType(activity));
         }
+    }
+
+    private static List<File> getFilesFromGalleryPictures(Intent data, Activity activity) throws IOException {
+        List<File> files = new ArrayList<>();
+        ClipData clipData = null;
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+            clipData = data.getClipData();
+        }
+        if (clipData == null) {
+            Uri uri = data.getData();
+            File file = PickedFiles.pickedExistingPicture(activity, uri);
+            files.add(file);
+        } else {
+            for (int i = 0; i < clipData.getItemCount(); i++) {
+                Uri uri = clipData.getItemAt(i).getUri();
+                File file = PickedFiles.pickedExistingPicture(activity, uri);
+                files.add(file);
+            }
+        }
+
+        if (configuration(activity).shouldCopyPickedImagesToPublicGalleryAppFolder()) {
+            PickedFiles.copyFilesInSeparateThread(activity, files);
+        }
+
+        return files;
     }
 
     private static void onPictureReturnedFromCamera(Activity activity, @NonNull FilePicker.Callbacks callbacks) {
