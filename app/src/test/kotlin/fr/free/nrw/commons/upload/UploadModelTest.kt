@@ -14,8 +14,7 @@ import org.junit.Assert.assertFalse
 import org.junit.Assert.assertTrue
 import org.junit.Before
 import org.junit.Test
-import org.mockito.ArgumentMatchers.any
-import org.mockito.ArgumentMatchers.anyString
+import org.mockito.ArgumentMatchers.*
 import org.mockito.InjectMocks
 import org.mockito.Mock
 import org.mockito.Mockito.`when`
@@ -70,10 +69,8 @@ class UploadModelTest {
                 .thenReturn(mock(FileInputStream::class.java))
         `when`(fileUtilsWrapper!!.getGeolocationOfFile(anyString()))
                 .thenReturn("")
-        `when`(imageProcessingService!!.checkImageQuality(anyString()))
-                .thenReturn(Single.just(IMAGE_OK))
-        `when`(imageProcessingService!!.checkImageQuality(any(Place::class.java), anyString()))
-                .thenReturn(Single.just(IMAGE_OK))
+        `when`(imageProcessingService!!.validateImage(any(UploadModel.UploadItem::class.java), anyBoolean()))
+                .thenReturn(Single.just(IMAGE_OK));
 
     }
 
