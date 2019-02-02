@@ -628,6 +628,9 @@ public class ContributionsFragment
             String distance = formatDistanceBetween(curLatLng, closestNearbyPlace.location);
             closestNearbyPlace.setDistance(distance);
             nearbyNotificationCardView.updateContent (true, closestNearbyPlace);
+            if (mediaDetailPagerFragment != null && mediaDetailPagerFragment.isVisible()) {
+                nearbyNotificationCardView.setVisibility(View.GONE);
+            }
         } else {
             // Means that no close nearby place is found
             nearbyNotificationCardView.updateContent (false, null);

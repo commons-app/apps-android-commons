@@ -85,9 +85,9 @@
                     android:layout_height="@dimen/small_gap" />
 
                 <LinearLayout
+                    android:id="@+id/authorLinearLayout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/authorLinearLayout"
                     android:background="?attr/subBackground"
                     android:orientation="vertical"
                     android:padding="@dimen/standard_gap">
@@ -286,12 +286,13 @@
 
                 <LinearLayout
                     android:id="@+id/nominatedDeletionBanner"
-                    android:background="@color/deleteRed"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:background="@color/deleteRed"
                     android:orientation="vertical"
                     android:padding="@dimen/standard_gap"
                     android:visibility="gone">
+
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -299,7 +300,8 @@
                         android:text="@string/nominated_for_deletion"
                         android:textColor="@color/primaryTextColor"
                         android:textSize="@dimen/normal_text"
-                        android:textStyle="bold"/>
+                        android:textStyle="bold" />
+
                     <TextView
                         android:id="@+id/seeMore"
                         android:layout_width="match_parent"
@@ -308,7 +310,7 @@
                         android:paddingTop="@dimen/standard_gap"
                         android:textColor="@color/primaryTextColor"
                         android:textSize="@dimen/normal_text"
-                        android:textStyle="bold"/>
+                        android:textStyle="bold" />
                 </LinearLayout>
 
                 <Button
@@ -322,12 +324,12 @@
 
                 <Button
                     android:id="@+id/nominateDeletion"
-                    android:background="@drawable/bg_delete_button"
-                    android:textColor="@color/primaryTextColor"
-                    android:layout_margin="@dimen/standard_gap"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/nominate_deletion"/>
+                    android:layout_margin="@dimen/standard_gap"
+                    android:background="@drawable/bg_delete_button"
+                    android:text="@string/nominate_deletion"
+                    android:textColor="@color/primaryTextColor" />
             </LinearLayout>
         </LinearLayout>
     </ScrollView>
