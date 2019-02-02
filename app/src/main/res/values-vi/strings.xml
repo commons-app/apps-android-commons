@@ -2,6 +2,7 @@
 <!-- Authors:
 * Harriettruong3
 * Leducthn
+* Leduyquang753
 * Minh Nguyen
 * Nhatminh01
 * Thanhtai2009
@@ -99,7 +100,7 @@
   <string name="no_uploads_yet">Bạn chưa tải lên hình nào.</string>
   <string name="menu_retry_upload">Thử lại</string>
   <string name="menu_cancel_upload">Hủy bỏ</string>
-  <string name="share_license_summary">Hình này sẽ được phát hành theo giấy phép %1$s</string>
+  <string name="share_license_summary" fuzzy="true">Hình này sẽ được phát hành theo giấy phép %1$s</string>
   <string name="media_upload_policy">Với việc đăng hình này, tôi tuyên bố rằng nó là tác phẩm của chính mình, rằng nó không chứa nội dung có bản quyền hoặc ảnh tự chụp, và về mặt khác thì hoàn toàn tuân theo &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines?uselang=vi\"&gt;các quy định Wikimedia Commons&lt;/a&gt;.</string>
   <string name="menu_download">Tải về</string>
   <string name="preference_license">Giấy phép mặc định</string>
@@ -223,7 +224,6 @@
   <string name="error_while_cache">Xuất hiện lỗi khi đưa hình ảnh vào vùng nhớ đệm</string>
   <string name="title_info">Tên ngắn và duy nhất cho tập tin sẽ được dùng làm tên tập tin. Có thể dùng thuật ngữ bình thường với khoảng cách. Đừng bao gồm phần mở rộng tập tin.</string>
   <string name="description_info">Xin vui lòng miêu tả phương tiện càng đầy đủ càng tốt: Chụp ở đâu? Trong hình có gì? Bối cảnh làm sao? Xin vui lòng miêu tả các đối tượng và người trong hình. Cho biết những thông tin khó đoán ra, chẳng hạn giờ trong ngày nếu là phong cảnh. Nếu phương tiện có gì kỳ lạ, xin vui lòng giải thích tại sao nó kỳ lạ.</string>
-  <string name="upload_image_problem_duplicate">Tập tin này đã tồn tại ở Commons. Bạn có chắc chắn muốn tiếp tục?</string>
   <string name="give_permission">Cho phép</string>
   <string name="use_external_storage">Sử dụng thiết bị lưu trữ bên ngoài</string>
   <string name="use_external_storage_summary">Lưu các hình ảnh được chụp bằng máy chụp hình trong ứng dụng vào thiết bị của bạn</string>
@@ -271,4 +271,5 @@
   <string name="share_app_title">Chia sẻ Ứng dụng</string>
   <string name="share_coordinates_not_present">Tọa độ không được chỉ định khi chọn hình ảnh</string>
   <string name="error_fetching_nearby_places">Lỗi khi lấy các nơi lân cận.</string>
+  <string name="search_this_area">Tìm kiếm khu vực này</string>
 </resources>

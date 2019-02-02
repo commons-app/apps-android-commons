@@ -2,37 +2,31 @@ package fr.free.nrw.commons.upload;
 
 import android.annotation.SuppressLint;
 import android.content.ContentResolver;
-import android.content.Context;
-import android.content.SharedPreferences;
 import android.media.ExifInterface;
 import android.net.Uri;
 import android.os.Build;
-import android.os.Bundle;
 import android.os.ParcelFileDescriptor;
 import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.Date;
 import java.util.List;
 
 import javax.inject.Inject;
 import javax.inject.Named;
+import javax.inject.Singleton;
 
 import fr.free.nrw.commons.caching.CacheController;
-import fr.free.nrw.commons.di.ApplicationlessInjection;
+import fr.free.nrw.commons.kvstore.BasicKvStore;
 import fr.free.nrw.commons.mwapi.CategoryApi;
 import io.reactivex.schedulers.Schedulers;
 import timber.log.Timber;
 
-import static com.mapbox.mapboxsdk.Mapbox.getApplicationContext;
-
 /**
  * Processing of the image file that is about to be uploaded via ShareActivity is done here
  */
+@Singleton
 public class FileProcessor implements SimilarImageDialogFragment.onResponse {
 
     @Inject
@@ -43,28 +37,27 @@ public class FileProcessor implements SimilarImageDialogFragment.onResponse {
     CategoryApi apiCall;
     @Inject
     @Named("default_preferences")
-    SharedPreferences prefs;
+    BasicKvStore defaultKvStore;
     private String filePath;
     private ContentResolver contentResolver;
     private GPSExtractor imageObj;
-    private Context context;
     private String decimalCoords;
     private ExifInterface exifInterface;
-    private boolean useExtStorage;
     private boolean haveCheckedForOtherImages = false;
     private GPSExtractor tempImageObj;
 
-    FileProcessor(@NonNull String filePath, ContentResolver contentResolver, Context context) {
+    @Inject
+    FileProcessor() {
+    }
+
+    void initFileDetails(@NonNull String filePath, ContentResolver contentResolver) {
         this.filePath = filePath;
         this.contentResolver = contentResolver;
-        this.context = context;
-        ApplicationlessInjection.getInstance(context.getApplicationContext()).getCommonsApplicationComponent().inject(this);
         try {
-            exifInterface=new ExifInterface(filePath);
+            exifInterface = new ExifInterface(filePath);
         } catch (IOException e) {
             Timber.e(e);
         }
-        useExtStorage = prefs.getBoolean("useExternalStorage", true);
     }
 
     /**
@@ -83,10 +76,6 @@ public class FileProcessor implements SimilarImageDialogFragment.onResponse {
         }
 
         return imageObj;
-    }
-
-    String getDecimalCoords() {
-        return decimalCoords;
     }
 
     /**
@@ -142,7 +131,7 @@ public class FileProcessor implements SimilarImageDialogFragment.onResponse {
      * Then initiates the calls to MediaWiki API through an instance of CategoryApi.
      */
     @SuppressLint("CheckResult")
-    public void useImageCoords() {
+    private void useImageCoords() {
         if (decimalCoords != null) {
             Timber.d("Decimal coords of image: %s", decimalCoords);
             Timber.d("is EXIF data present:" + imageObj.imageCoordsExists + " from findOther image");

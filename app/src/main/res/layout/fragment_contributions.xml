@@ -5,18 +5,28 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
 
-  <fr.free.nrw.commons.nearby.NearbyNoificationCardView
+  <fr.free.nrw.commons.nearby.NearbyNotificationCardView
     android:id="@+id/card_view_nearby"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     app:cardBackgroundColor="?attr/mainCardBackground"
     />
 
+  <fr.free.nrw.commons.campaigns.CampaignView
+      android:id="@+id/campaigns_view"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="2dp"
+      app:cardBackgroundColor="?attr/mainCardBackground"
+      ></fr.free.nrw.commons.campaigns.CampaignView>
+
   <FrameLayout
-    android:id="@+id/root_frame"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="#000">
+      android:id="@+id/root_frame"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:layout_marginTop="2dp"
+      android:background="#000"
+      >
   </FrameLayout>
 
 </LinearLayout>

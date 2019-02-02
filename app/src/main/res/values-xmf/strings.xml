@@ -74,7 +74,7 @@
   <string name="menu_about">პროგრამაშ გეშა</string>
   <string name="menu_retry_upload">გომაჟირაფა</string>
   <string name="menu_cancel_upload">გოუქვაფა</string>
-  <string name="share_license_summary">თე სურათი გიბჟინუ %1$s ლიცენზიათ</string>
+  <string name="share_license_summary" fuzzy="true">თე სურათი გიბჟინუ %1$s ლიცენზიათ</string>
   <string name="menu_download">გინოჭარუა</string>
   <string name="preference_license" fuzzy="true">ლიცენზია</string>
   <string name="use_previous">წჷმი სათაურიშ/ეჭარუაშ გჷმორინაფა</string>

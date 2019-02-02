@@ -94,7 +94,7 @@
   <string name="no_uploads_yet">Әлегә бер фото ла тейәмәгәнһең</string>
   <string name="menu_retry_upload">Йәнә бер тапҡыр</string>
   <string name="menu_cancel_upload">Кәрәкмәй</string>
-  <string name="share_license_summary">Был рәсем %1$s аҫтында лицензия аласаҡ</string>
+  <string name="share_license_summary" fuzzy="true">Был рәсем %1$s аҫтында лицензия аласаҡ</string>
   <string name="media_upload_policy">Был рәсемде ебәргәндә шуны раҫлайым: был минең шәхси эшем, автор хоҡуҡтарын һаҡлаған материал йәки селфи түгел, шулай уҡ Викискладтың &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines/ru\"&gt;ҡағиҙәләренә тап килә&lt;/a&gt;.</string>
   <string name="menu_download">Тейәргә</string>
   <string name="preference_license">Нығытылған рөхсәтнамә</string>
@@ -203,9 +203,6 @@
   <string name="error_while_cache">Рәсемде кэшлағандағы хата</string>
   <string name="title_info">Файлдың исеме булараҡ һаҡланасаҡ үҙенсәлекле һәртәләү. Тәбиғи телегеҙҙе, һүҙҙәр араһын айырып, ҡулланырға була. Зинһар, файл киңәйтеүҙәрен күрһәтмәгеҙ.</string>
   <string name="description_info">Зинһар, тейәләсәк файлды тәфсирләп һүрәтлә:ҡайҙа төшөрөлгән? нимә һәрәтләнә? һүрәт нимәне аңлата? Рәсемдәге кешеләр йәки объекттарҙы ла һүрәтлә. Һүрәткә ҡарап ҡына белеп булмаған мәғлүмәттәрҙе өҫтә: мәҫәлән, тәүлектең ниндәй мәлендә, ҡасан төшөрөлгән был файл. Әгәр ғәҙәти булмаған әйбер төшөрөлһә, уның нимәһе шаҡ ҡатырғанын аңлат.</string>
-  <string name="upload_image_problem_duplicate">Был файл Викискладта бар. Дауам итергә ризаһыңмы?</string>
-  <string name="upload_image_problem_dark">Был рәсем бик ҡараңғы күренә. Тейәргәме? Викискладта энциклопедик йәһәттән ҡиммәте булған фоторәсемдәр генә ҡәҙерле.</string>
-  <string name="upload_image_problem_blurry">Был рәсем асыҡ түгел. Тейәргәме? Викискладта энциклопедик йәһәттән ҡиммәте булған фоторәсемдәр генә ҡәҙерле.</string>
   <string name="give_permission">Рөхсәт бирәм</string>
   <string name="use_external_storage">Тышҡы һаҡлағысты ҡуллан</string>
   <string name="use_external_storage_summary">Ҡулайламаның камераһы ярҙамында төшөрөлгән һүрәттәрҙе һаҡлау</string>

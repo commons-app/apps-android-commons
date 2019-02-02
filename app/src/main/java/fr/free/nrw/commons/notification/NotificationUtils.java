@@ -24,6 +24,11 @@ public class NotificationUtils {
     private static final String WIKIDATA_WIKI = "wikidatawiki";
     private static final String WIKIPEDIA_WIKI = "enwiki";
 
+    /**
+     * Returns true if the wiki attribute corresponds to commonswiki
+     * @param document
+     * @return boolean representing whether the wiki attribute corresponds to commonswiki
+     */
     public static boolean isCommonsNotification(Node document) {
         if (document == null || !document.hasAttributes()) {
             return false;
@@ -35,7 +40,7 @@ public class NotificationUtils {
     /**
      * Returns true if the wiki attribute corresponds to wikidatawiki
      * @param document
-     * @return
+     * @return boolean representing whether the wiki attribute corresponds to wikidatawiki
      */
     public static boolean isWikidataNotification(Node document) {
         if (document == null || !document.hasAttributes()) {
@@ -58,10 +63,20 @@ public class NotificationUtils {
         return WIKIPEDIA_WIKI.equals(element.getAttribute("wiki"));
     }
 
+    /**
+     * Returns document notification type
+     * @param document
+     * @return the document's NotificationType
+     */
     public static NotificationType getNotificationType(Node document) {
         Element element = (Element) document;
         String type = element.getAttribute("type");
         return NotificationType.handledValueOf(type);
+    }
+
+    public static String getNotificationId(Node document) {
+        Element element = (Element) document;
+        return element.getAttribute("id");
     }
 
     public static List<Notification> getNotificationsFromBundle(Context context, Node document) {
@@ -99,7 +114,7 @@ public class NotificationUtils {
      * Currently the app is interested in showing notifications just from the following three wikis: commons, wikidata, wikipedia
      * This function returns true only if the notification belongs to any of the above wikis and is of a known notification type
      * @param node
-     * @return
+     * @return whether a notification is from one of Commons, Wikidata or Wikipedia
      */
     private static boolean isUsefulNotification(Node node) {
         return (isCommonsNotification(node)
@@ -144,7 +159,8 @@ public class NotificationUtils {
                 notificationText = getWelcomeMessage(context, document);
                 break;
         }
-        return new Notification(type, notificationText, getTimestamp(document), description, link, iconUrl, getTimestampWithYear(document));
+        return new Notification(type, notificationText, getTimestamp(document), description, link, iconUrl, getTimestampWithYear(document),
+                getNotificationId(document));
     }
 
     private static String getNotificationText(Node document) {

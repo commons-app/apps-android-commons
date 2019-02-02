@@ -112,7 +112,10 @@
   <string name="no_uploads_yet">尚未上傳照片。</string>
   <string name="menu_retry_upload">重試</string>
   <string name="menu_cancel_upload">取消</string>
-  <string name="share_license_summary">此圖片會按 %1$s 協議授權上載</string>
+  <plurals name="share_license_summary">
+    <item quantity="one">此圖片會按 %1$s 協議授權上載</item>
+    <item quantity="other">這些圖片會按 %1$s 協議授權上載</item>
+  </plurals>
   <string name="media_upload_policy">透過提交此圖片，我宣佈這是我個人創作的成品，且不包含受版權保護或自拍內容，並除此之外遵守&lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines\"&gt;維基媒體共享資源方針&lt;/a&gt;。</string>
   <string name="menu_download">下載</string>
   <string name="preference_license">預設授權條款</string>
@@ -171,6 +174,7 @@
   <string name="detail_description_empty">無說明</string>
   <string name="detail_license_empty">不明授權</string>
   <string name="menu_refresh">重新整理</string>
+  <string name="storage_permission_title">請求存儲裝置權限</string>
   <string name="read_storage_permission_rationale">必要權限：讀取外部存儲裝置。否則應用程式無法存取您的圖庫。</string>
   <string name="write_storage_permission_rationale">必要權限：寫入外部存儲裝置。否則應用程式無法取用您的相機。</string>
   <string name="location_permission_rationale">可有可無的權限：獲取目前的地理位置，以用於分類建議</string>
@@ -242,13 +246,12 @@
   <string name="description_info">請盡可能說明媒體內容：拍攝於何處？是顯示什麼事物？有什麼脈絡？請描述對象或人物。透露出一些較不易猜測的訊息，例如是風景的話，可以是一天裡的時間。如果媒體顯示出一些不正常的事物，請說明出造成不正常原因。</string>
   <string name="upload_image_too_dark">此圖片太暗，您確定您要上傳它嗎？維基共享資源僅適用對於百科全書有價值的圖片。</string>
   <string name="upload_image_blurry">此圖片太模糊，您確定您要上傳它嗎？維基共享資源僅適用對於百科全書有價值的圖片。</string>
-  <string name="upload_image_problem_duplicate">維基共享資源已有此檔案。確定要繼續嗎？</string>
-  <string name="upload_image_problem_dark">此圖片太暗，您確定您要上傳它嗎？維基共享資源僅適用對於百科全書有價值的圖片。</string>
-  <string name="upload_image_problem_blurry">此圖片太模糊，您確定您要上傳它嗎？維基共享資源僅適用對於百科全書有價值的圖片。</string>
-  <string name="upload_image_problem_dark_duplicate">此圖片太暗且維基共享資源已有此檔案，您確定您要上傳它嗎？請僅上傳對於百科全書有價值的圖片。</string>
-  <string name="upload_image_problem_blurry_duplicate">此圖片太模糊且維基共享資源已有此檔案，您確定您要上傳它嗎？請僅上傳對於百科全書有價值的圖片。</string>
-  <string name="upload_image_problem_dark_blurry">此圖片太暗也太模糊，您確定您要上傳它嗎？請僅上傳對於百科全書有價值的圖片。</string>
-  <string name="upload_image_problem_dark_blurry_duplicate">此圖片太暗也太模糊，且維基共享資源已有此檔案，您確定您要上傳它嗎？請僅上傳對於百科全書有價值的圖片。</string>
+  <string name="upload_problem_exist">此圖片有以下潛在問題：</string>
+  <string name="upload_problem_image_dark">圖片太暗。</string>
+  <string name="upload_problem_image_blurry">圖片模糊。</string>
+  <string name="upload_problem_image_duplicate">圖片已存在維基共享資源上。</string>
+  <string name="upload_problem_different_geolocation">此圖片是在不同的地點拍攝。</string>
+  <string name="upload_problem_do_you_continue">您仍要上傳此圖片嗎？</string>
   <string name="give_permission">給予權限</string>
   <string name="use_external_storage">使用外部存儲裝置</string>
   <string name="use_external_storage_summary">在您的裝置上使用照相機應用程式來儲存照片</string>
@@ -264,7 +267,7 @@
   <string name="skip_login">略過</string>
   <string name="navigation_item_login">登入</string>
   <string name="skip_login_title">您確定要略過登入嗎？</string>
-  <string name="skip_login_message">您將無法上傳圖片。</string>
+  <string name="skip_login_message">在功能裡您需要登入來上傳圖片。</string>
   <string name="login_alert_message">請登入來使用此功能</string>
   <string name="copy_wikicode">複製 wiki 文字到剪貼簿</string>
   <string name="wikicode_copied">Wiki 文字已複製到剪貼簿</string>
@@ -313,6 +316,8 @@
   <string name="provider_searches">近期搜尋查詢</string>
   <string name="error_loading_categories">當載入分類時發生錯誤。</string>
   <string name="error_loading_subcategories">當載入子分類時發生錯誤。</string>
+  <string name="search_tab_title_media">媒體</string>
+  <string name="search_tab_title_categories">分類</string>
   <string name="successful_wikidata_edit">圖片已成功添加到維基數據上的 %1$s！</string>
   <string name="wikidata_edit_failure">更新所對應的維基數據項目失敗！</string>
   <string name="menu_set_wallpaper">設定為桌布</string>
@@ -341,6 +346,7 @@
   <string name="share_coordinates_not_present">當選擇圖片時未指定座標</string>
   <string name="error_fetching_nearby_places">索取附近地點時出錯。</string>
   <string name="add_description">+ 添加描述</string>
+  <string name="no_recent_searches">無近期搜尋</string>
   <string name="delete_recent_searches_dialog">確定要清除搜尋歷史嗎？</string>
   <string name="search_history_deleted">搜尋歷史已刪除</string>
   <string name="nominate_delete">提名刪除</string>
@@ -360,6 +366,10 @@
   <string name="images_used_explanation">您所上傳至維基共享資源且被使用在維基百科條目中的圖片數目</string>
   <string name="error_occurred">發生錯誤！</string>
   <string name="notifications_channel_name_all">共享資源通知</string>
+  <string name="preference_author_name_toggle">使用自定義作者名稱</string>
+  <string name="preference_author_name_toggle_summary">使用自定義作者名稱來取代在上傳照片時您的使用者名稱</string>
+  <string name="preference_author_name">自定義作者名稱</string>
+  <string name="preference_author_name_summary">自定義作者名稱用來取代在上傳時您的使用者名稱</string>
   <string name="contributions_fragment">貢獻</string>
   <string name="nearby_fragment">附近</string>
   <string name="notifications">通知</string>
@@ -411,10 +421,27 @@
   <string name="yes_submit">是的，提交</string>
   <string name="no_go_back">不，返回</string>
   <string name="upload_flow_all_images_in_set">（在集合的所有圖片）</string>
+  <string name="search_this_area">搜尋此區域</string>
   <string name="nearby_card_permission_title">權限請求</string>
   <string name="nearby_card_permission_explanation">您是否願意讓我們使用您的目前位置，來顯示出缺少圖片的最近地點？</string>
   <string name="unable_to_display_nearest_place">沒有位置權限會無法顯示缺少圖片的最近地點</string>
   <string name="never_ask_again">永遠不再詢問</string>
   <string name="display_location_permission_title">顯示位置權限</string>
   <string name="display_location_permission_explanation">當需要附近地點通知卡片的檢視功能時，要求位置權限。</string>
+  <string name="achievements_fetch_failed">發生了一些狀況，我們無法索取您的成果</string>
+  <string name="ends_on">結束於：</string>
+  <string name="display_campaigns">顯示活動</string>
+  <string name="display_campaigns_explanation">在此輕觸來查看進行中的活動</string>
+  <string name="nearby_campaign_dismiss_message">您不會再看到活動。然而，若您有意的話您可以在設定裡重新啟動此通知。</string>
+  <string name="this_function_needs_network_connection">此功能需要連接到網路，請檢查您的連接設定。</string>
+  <string name="bad_token_error_proposed_solution">出於編輯訊標問題導致上傳失敗。請重試登入後再登入。</string>
+  <string name="error_processing_image">處理圖片時出現錯誤。請重試！</string>
+  <plurals name="receiving_shared_content">
+    <item quantity="one">接收分享內容。處理圖片可能花費的時間依據圖片大小與您的裝置</item>
+    <item quantity="other">接收分享內容。處理圖片可能花費的時間依據圖片大小與您的裝置</item>
+  </plurals>
+  <string name="no_image">沒有圖片被使用到</string>
+  <string name="no_image_reverted">沒有圖片被還原回復</string>
+  <string name="no_image_uploaded">沒有圖片被上傳</string>
+  <string name="share_logs_using">分享日誌使用</string>
 </resources>

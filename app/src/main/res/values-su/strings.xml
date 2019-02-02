@@ -104,7 +104,7 @@
   <string name="no_uploads_yet">Anjeun can ngunjal foto hiji-hiji acan</string>
   <string name="menu_retry_upload">Cobaan deui</string>
   <string name="menu_cancel_upload">Bolay</string>
-  <string name="share_license_summary">Ieu gambar bakal ditangtayungan ku lisénsi %1$s</string>
+  <string name="share_license_summary" fuzzy="true">Ieu gambar bakal ditangtayungan ku lisénsi %1$s</string>
   <string name="media_upload_policy">Ku ngirimkeun ieu gambar, kami ngedalkeun yén ieu mangrupa karya kami sorangan, yén ieu karya teu ngandung matéri atawa hak pribadi nu ditangtayungan ku hak cipta, sarta mun teu nurut kana &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines\"&gt;Kawijakan Wikimedia Commons&lt;/a&gt;.</string>
   <string name="menu_download">Undeur</string>
   <string name="preference_license">Lisénsi buhun</string>
@@ -229,9 +229,6 @@
   <string name="error_while_cache">Kasalahan nalika muat gambar</string>
   <string name="title_info">Judul déskriptif anu unik pikeun berkas, anu bakal miboga fungsi minangka ngaran berkas. Anjeun bisa maké basa basajan kalawan spasi. Ulah ngawuwuhkeun éksténsi berkas</string>
   <string name="description_info">Pék émbarkeun wincikan média saloba-lobabana: Dimana éta dicokot? Naon nu titojokeunna? Naon kontéksna? Pék jéntrékeun obyék atawa jalmana. Ébré informasi anu teu gampang kajudi, kawas wayah mun éta mangrupa pamandangan. Ari média nu némbongkeun perkara nu teu guyub, pék jéntrékeun naon nu ngabalukarkeun éta téh teu guyub.</string>
-  <string name="upload_image_problem_duplicate">Ieu berkas geus aya di Commons. Rék diteruskeun baé ieu téh?</string>
-  <string name="upload_image_problem_dark">Ieu gambar poék teuing, rék diunggah waé? Wikimedia Commons téh ukur pikeun gambar anu boga ajén énsiklopédik.</string>
-  <string name="upload_image_problem_blurry">Potona teu cékas, rék diunggah waé? Wikimedia Commons mah ukur pikeun gambar anu boga ajén énsiklopédik.</string>
   <string name="give_permission">Béré idin</string>
   <string name="use_external_storage">Paké panyimpenan éksternal</string>
   <string name="use_external_storage_summary">Simpen gambar nu nyomotna ku aplikasi kaména na parangkat anjeun</string>
@@ -244,6 +241,6 @@
   <string name="skip_login">Liwatan</string>
   <string name="navigation_item_login">Asup log</string>
   <string name="skip_login_title">Anjeun yakin rék ngaliwatan asup log?</string>
-  <string name="skip_login_message">Anjeun moal bisa ngunjal gambar.</string>
+  <string name="skip_login_message" fuzzy="true">Anjeun moal bisa ngunjal gambar.</string>
   <string name="login_alert_message">Mangga asup log pikeun maké ieu fitur</string>
 </resources>

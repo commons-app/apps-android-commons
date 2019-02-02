@@ -2,7 +2,6 @@ package fr.free.nrw.commons;
 
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -23,6 +22,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import fr.free.nrw.commons.theme.NavigationBaseActivity;
 import fr.free.nrw.commons.ui.widget.HtmlTextView;
+import fr.free.nrw.commons.utils.ConfigUtils;
 
 /**
  * Represents about screen of this app
@@ -59,7 +59,7 @@ public class AboutActivity extends NavigationBaseActivity {
         SpannableString content = new SpannableString(getString(R.string.about_faq));
         content.setSpan(new UnderlineSpan(), 0, content.length(), 0);
         faqText.setText(content);
-        versionText.setText(BuildConfig.VERSION_NAME);
+        versionText.setText(ConfigUtils.getVersionNameWithSha(getApplicationContext()));
         TextView rate_us = findViewById(R.id.about_rate_us);
         TextView privacy_policy = findViewById(R.id.about_privacy_policy);
         TextView translate = findViewById(R.id.about_translate);
@@ -143,7 +143,7 @@ public class AboutActivity extends NavigationBaseActivity {
 
     @OnClick(R.id.about_translate)
     public void launchTranslate(View view) {
-        final ArrayAdapter<String> languageAdapter = new ArrayAdapter<String>(AboutActivity.this,
+        final ArrayAdapter<String> languageAdapter = new ArrayAdapter<>(AboutActivity.this,
                 android.R.layout.simple_spinner_dropdown_item, language);
         final Spinner spinner = new Spinner(AboutActivity.this);
         spinner.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT));

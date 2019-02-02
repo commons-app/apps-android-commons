@@ -8,14 +8,31 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import fr.free.nrw.commons.R;
+import fr.free.nrw.commons.contributions.model.DisplayableContribution;
+import fr.free.nrw.commons.upload.UploadService;
+import fr.free.nrw.commons.utils.NetworkUtils;
+import fr.free.nrw.commons.utils.ViewUtil;
+import timber.log.Timber;
+
+import static fr.free.nrw.commons.contributions.Contribution.STATE_FAILED;
 
 class ContributionsListAdapter extends CursorAdapter {
 
     private final ContributionDao contributionDao;
+    private UploadService uploadService;
+    private Context context;
 
-    public ContributionsListAdapter(Context context, Cursor c, int flags, ContributionDao contributionDao) {
+    public ContributionsListAdapter(Context context,
+                                    Cursor c,
+                                    int flags,
+                                    ContributionDao contributionDao) {
         super(context, c, flags);
+        this.context = context;
         this.contributionDao = contributionDao;
+    }
+
+    public void setUploadService(UploadService uploadService) {
+        this.uploadService = uploadService;
     }
 
     @Override
@@ -31,39 +48,56 @@ class ContributionsListAdapter extends CursorAdapter {
         final ContributionViewHolder views = (ContributionViewHolder)view.getTag();
         final Contribution contribution = contributionDao.fromCursor(cursor);
 
-        views.imageView.setMedia(contribution);
-        views.titleView.setText(contribution.getDisplayTitle());
+        DisplayableContribution displayableContribution = new DisplayableContribution(contribution,
+                cursor.getPosition(),
+                new DisplayableContribution.ContributionActions() {
+                    @Override
+                    public void retryUpload() {
+                        ContributionsListAdapter.this.retryUpload(contribution);
+                    }
 
-        views.seqNumView.setText(String.valueOf(cursor.getPosition() + 1));
-        views.seqNumView.setVisibility(View.VISIBLE);
+                    @Override
+                    public void deleteUpload() {
+                        ContributionsListAdapter.this.deleteUpload(contribution);
+                    }
+                });
+        views.bindModel(context, displayableContribution);
+    }
 
-        switch (contribution.getState()) {
-            case Contribution.STATE_COMPLETED:
-                views.stateView.setVisibility(View.GONE);
-                views.progressView.setVisibility(View.GONE);
-                views.stateView.setText("");
-                break;
-            case Contribution.STATE_QUEUED:
-                views.stateView.setVisibility(View.VISIBLE);
-                views.progressView.setVisibility(View.GONE);
-                views.stateView.setText(R.string.contribution_state_queued);
-                break;
-            case Contribution.STATE_IN_PROGRESS:
-                views.stateView.setVisibility(View.GONE);
-                views.progressView.setVisibility(View.VISIBLE);
-                long total = contribution.getDataLength();
-                long transferred = contribution.getTransferred();
-                if (transferred == 0 || transferred >= total) {
-                    views.progressView.setIndeterminate(true);
-                } else {
-                    views.progressView.setProgress((int)(((double)transferred / (double)total) * 100));
-                }
-                break;
-            case Contribution.STATE_FAILED:
-                views.stateView.setVisibility(View.VISIBLE);
-                views.stateView.setText(R.string.contribution_state_failed);
-                views.progressView.setVisibility(View.GONE);
-                break;
+    /**
+     * Retry upload when it is failed
+     * @param contribution contribution to be retried
+     */
+    private void retryUpload(Contribution contribution) {
+        if (NetworkUtils.isInternetConnectionEstablished(context)) {
+            if (contribution.getState() == STATE_FAILED
+                    && uploadService!= null) {
+                uploadService.queue(UploadService.ACTION_UPLOAD_FILE, contribution);
+                Timber.d("Restarting for %s", contribution.toString());
+            } else {
+                Timber.d("Skipping re-upload for non-failed %s", contribution.toString());
+            }
+        } else {
+            ViewUtil.showLongToast(context, R.string.this_function_needs_network_connection);
         }
+
+    }
+
+    /**
+     * Delete a failed upload attempt
+     * @param contribution contribution to be deleted
+     */
+    private void deleteUpload(Contribution contribution) {
+        if (NetworkUtils.isInternetConnectionEstablished(context)) {
+            if (contribution.getState() == STATE_FAILED) {
+                Timber.d("Deleting failed contrib %s", contribution.toString());
+                contributionDao.delete(contribution);
+            } else {
+                Timber.d("Skipping deletion for non-failed contrib %s", contribution.toString());
+            }
+        } else {
+            ViewUtil.showLongToast(context, R.string.this_function_needs_network_connection);
+        }
+
     }
 }

@@ -10,11 +10,9 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.text.Editable;
 import android.text.Html;
 import android.text.TextUtils;
-import android.text.TextWatcher;
-import android.util.Log;
+import android.text.format.DateFormat;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,7 +20,6 @@ import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.Spinner;
@@ -57,6 +54,7 @@ import fr.free.nrw.commons.location.LatLng;
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
 import fr.free.nrw.commons.ui.widget.CompatTextView;
 import timber.log.Timber;
+import fr.free.nrw.commons.utils.DateUtils;
 
 import static android.content.Context.CLIPBOARD_SERVICE;
 import static android.view.View.GONE;
@@ -236,7 +234,7 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
         if(getParentFragment()!=null && getParentFragment().getParentFragment()!=null) {
             //Added a check because, not necessarily, the parent fragment will have a parent fragment, say
             // in the case when MediaDetailPagerFragment is directly started by the CategoryImagesActivity
-            ((ContributionsFragment) (getParentFragment().getParentFragment())).nearbyNoificationCardView
+            ((ContributionsFragment) (getParentFragment().getParentFragment())).nearbyNotificationCardView
                 .setVisibility(View.GONE);
         }
         media = detailProvider.getMediaAtPosition(index);
@@ -397,7 +395,7 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
 
     @OnClick(R.id.nominateDeletion)
     public void onDeleteButtonClicked(){
-        final ArrayAdapter<String> languageAdapter = new ArrayAdapter<String>(getActivity(),
+        final ArrayAdapter<String> languageAdapter = new ArrayAdapter<>(getActivity(),
                 R.layout.simple_spinner_dropdown_list, reasonList);
         final Spinner spinner = new Spinner(getActivity());
         spinner.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT));
@@ -407,28 +405,20 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setView(spinner);
         builder.setTitle(R.string.nominate_delete)
-                .setPositiveButton(R.string.about_translate_proceed, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        String reason = spinner.getSelectedItem().toString();
-                        ReasonBuilder reasonBuilder = new ReasonBuilder(reason,
-                                getActivity(),
-                                media,
-                                sessionManager,
-                                mwApi);
-                        reason = reasonBuilder.getReason();
-                        DeleteTask deleteTask = new DeleteTask(getActivity(), media, reason);
-                        deleteTask.execute();
-                        isDeleted = true;
-                        enableDeleteButton(false);
-                    }
+                .setPositiveButton(R.string.about_translate_proceed, (dialog, which) -> {
+                    String reason = spinner.getSelectedItem().toString();
+                    ReasonBuilder reasonBuilder = new ReasonBuilder(reason,
+                            getActivity(),
+                            media,
+                            sessionManager,
+                            mwApi);
+                    reason = reasonBuilder.getReason();
+                    DeleteTask deleteTask = new DeleteTask(getActivity(), media, reason);
+                    deleteTask.execute();
+                    isDeleted = true;
+                    enableDeleteButton(false);
                 });
-        builder.setNegativeButton(R.string.about_translate_cancel, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                dialog.dismiss();
-            }
-        });
+        builder.setNegativeButton(R.string.about_translate_cancel, (dialog, which) -> dialog.dismiss());
         AlertDialog dialog = builder.create();
         dialog.show();
         if(isDeleted) {
@@ -530,8 +520,7 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
         if (date == null || date.toString() == null || date.toString().isEmpty()) {
             return "Uploaded date not available";
         }
-        SimpleDateFormat formatter = new SimpleDateFormat("dd MMM yyyy", Locale.getDefault());
-        return formatter.format(date);
+        return DateUtils.dateInLocaleFormat(date);
     }
 
     /**

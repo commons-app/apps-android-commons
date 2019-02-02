@@ -4,6 +4,22 @@
     android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+    <LinearLayout
+        android:id="@+id/toolbarLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="?attr/actionBarSize">
+        <include
+            android:id="@+id/toolbar"
+            layout="@layout/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="?attr/actionBarSize"
+        android:layout_below="@id/toolbarLayout">
 
     <ScrollView
         android:layout_width="wrap_content"
@@ -14,11 +30,7 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
-            <include
-                android:id="@+id/toolbar"
-                layout="@layout/toolbar"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -198,7 +210,7 @@
                         android:layout_marginRight="32dp"
                         android:progress="50"
                         app:progress_text_size="9dp"
-                        android:id="@+id/images_used_by_wiki_progressbar"
+                        android:id="@+id/images_used_by_wiki_progress_bar"
                         app:progress_end_color="#8C8B98"
                         app:progress_start_color="#3A3381"
                         app:progress_stroke_width="2.5dp"
@@ -312,6 +324,7 @@
             </LinearLayout>
         </LinearLayout>
     </ScrollView>
+    </LinearLayout>
 
     <android.support.design.widget.NavigationView
         android:id="@+id/navigation_view"

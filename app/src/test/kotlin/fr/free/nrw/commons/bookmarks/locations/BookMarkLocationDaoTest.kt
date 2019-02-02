@@ -13,6 +13,7 @@ import fr.free.nrw.commons.TestCommonsApplication
 import fr.free.nrw.commons.bookmarks.locations.BookmarkLocationsContentProvider.BASE_URI
 import fr.free.nrw.commons.bookmarks.locations.BookmarkLocationsDao.Table.*
 import fr.free.nrw.commons.location.LatLng
+import fr.free.nrw.commons.nearby.Label
 import fr.free.nrw.commons.nearby.Place
 import fr.free.nrw.commons.nearby.Sitelinks
 import junit.framework.Assert.*
@@ -42,14 +43,14 @@ class BookMarkLocationDaoTest {
 
     private lateinit var testObject: BookmarkLocationsDao
     private lateinit var examplePlaceBookmark: Place
-    private lateinit var exampleLabel: Place.Label
+    private lateinit var exampleLabel: Label
     private lateinit var exampleUri: Uri
     private lateinit var exampleLocation: LatLng
     private lateinit var builder: Sitelinks.Builder
 
     @Before
     fun setUp() {
-        exampleLabel = Place.Label.FOREST
+        exampleLabel = Label.FOREST
         exampleUri = Uri.parse("wikimedia/uri")
         exampleLocation = LatLng(40.0,51.4, 1f)
 
@@ -85,7 +86,7 @@ class BookMarkLocationDaoTest {
             cursor.moveToFirst()
             testObject.fromCursor(cursor).let {
                 assertEquals("placeName", it.name)
-                assertEquals(Place.Label.FOREST, it.label)
+                assertEquals(Label.FOREST, it.label)
                 assertEquals("placeDescription", it.longDescription)
                 assertEquals(exampleUri, it.secondaryImageUrl)
                 assertEquals(40.0, it.location.latitude)

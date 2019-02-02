@@ -2,12 +2,14 @@ package fr.free.nrw.commons.location;
 
 import android.location.Location;
 import android.net.Uri;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.support.annotation.NonNull;
 
 /**
  * a latitude and longitude point with accuracy information, often of a picture
  */
-public class LatLng {
+public class LatLng implements Parcelable {
 
     private final double latitude;
     private final double longitude;
@@ -34,6 +36,12 @@ public class LatLng {
         }
         this.latitude = Math.max(-90.0D, Math.min(90.0D, latitude));
         this.accuracy = accuracy;
+    }
+
+    public LatLng(Parcel in) {
+        latitude = in.readDouble();
+        longitude = in.readDouble();
+        accuracy = in.readFloat();
     }
 
     /**
@@ -158,5 +166,29 @@ public class LatLng {
     public Uri getGmmIntentUri() {
         return Uri.parse("geo:0,0?q=" + latitude + "," + longitude);
     }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeDouble(latitude);
+        dest.writeDouble(longitude);
+        dest.writeFloat(accuracy);
+    }
+
+    public static final Creator<LatLng> CREATOR = new Creator<LatLng>() {
+        @Override
+        public LatLng createFromParcel(Parcel in) {
+            return new LatLng(in);
+        }
+
+        @Override
+        public LatLng[] newArray(int size) {
+            return new LatLng[size];
+        }
+    };
 }
 

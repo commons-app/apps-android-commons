@@ -7,6 +7,6 @@
 <resources>
   <string name="crash_dialog_title">Остава је отказала</string>
   <string name="crash_dialog_text">Упс! Нешто није у реду.</string>
-  <string name="crash_dialog_comment_prompt">Реците нам шта сте радили па то сазнање поделите са нама, путем имејла. Тиме ћете нам помоћи да решимо проблем.</string>
+  <string name="crash_dialog_comment_prompt">Реците нам шта сте радили, па то сазнање поделите са нама путем е-поште. Тиме ћете нам помоћи да решимо проблем.</string>
   <string name="crash_dialog_ok_toast">Хвала вам!</string>
 </resources>

@@ -1,7 +1,6 @@
 package fr.free.nrw.commons.explore.categories;
 
 
-import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.os.Handler;
@@ -31,6 +30,7 @@ import fr.free.nrw.commons.category.CategoryDetailsActivity;
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
 import fr.free.nrw.commons.explore.recentsearches.RecentSearch;
 import fr.free.nrw.commons.explore.recentsearches.RecentSearchesDao;
+import fr.free.nrw.commons.kvstore.BasicKvStore;
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
 import fr.free.nrw.commons.utils.NetworkUtils;
 import fr.free.nrw.commons.utils.ViewUtil;
@@ -60,7 +60,7 @@ public class SearchCategoryFragment extends CommonsDaggerSupportFragment {
 
     @Inject RecentSearchesDao recentSearchesDao;
     @Inject MediaWikiApi mwApi;
-    @Inject @Named("default_preferences") SharedPreferences prefs;
+    @Inject @Named("default_preferences") BasicKvStore basicKvStore;
 
     private RVRendererAdapter<String> categoriesAdapter;
     private List<String> queryList = new ArrayList<>();
@@ -196,7 +196,7 @@ public class SearchCategoryFragment extends CommonsDaggerSupportFragment {
         Timber.e(throwable, "Error occurred while loading queried categories");
         try {
             initErrorView();
-            ViewUtil.showSnackbar(categoriesRecyclerView, R.string.error_loading_categories);
+            ViewUtil.showShortSnackbar(categoriesRecyclerView, R.string.error_loading_categories);
         }catch (Exception e){
             e.printStackTrace();
         }
@@ -217,6 +217,6 @@ public class SearchCategoryFragment extends CommonsDaggerSupportFragment {
      */
     private void handleNoInternet() {
         progressBar.setVisibility(GONE);
-        ViewUtil.showSnackbar(categoriesRecyclerView, R.string.no_internet);
+        ViewUtil.showShortSnackbar(categoriesRecyclerView, R.string.no_internet);
     }
 }

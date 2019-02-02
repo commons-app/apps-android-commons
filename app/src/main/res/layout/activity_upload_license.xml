@@ -38,7 +38,7 @@
         android:textSize="@dimen/subtitle_text"
         android:text="@string/upload_flow_all_images_in_set"
         android:layout_below="@+id/license_title"
-        tools:text="(For all images in set)" />
+        android:visibility="gone" />
 
     <Spinner
         android:id="@+id/license_list"
@@ -62,7 +62,7 @@
         android:layout_marginEnd="@dimen/standard_gap"
         android:layout_marginRight="@dimen/standard_gap"
         android:layout_below="@id/license_list"
-        android:text="@string/share_license_summary" />
+        android:text="@plurals/share_license_summary" />
 
     <fr.free.nrw.commons.ui.widget.HtmlTextView
         android:id="@+id/media_upload_policy"
