@@ -27,8 +27,10 @@ import fr.free.nrw.commons.settings.Prefs;
 import fr.free.nrw.commons.utils.ImageUtils;
 import io.reactivex.Observable;
 import io.reactivex.Single;
+import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Consumer;
+import io.reactivex.schedulers.Schedulers;
 import io.reactivex.subjects.BehaviorSubject;
 import timber.log.Timber;
 
@@ -192,14 +194,17 @@ public class UploadModel {
     @SuppressLint("CheckResult")
     public void next() {
         Timber.d("UploadModel:next; Handling next");
-        getCurrentItem().imageQuality.subscribe(integer -> {
-            Timber.d("Image quality is: %d", integer);
-            markCurrentUploadVisited();
-            if (currentStepIndex < items.size() + 1) {
-                currentStepIndex++;
-            }
-            updateItemState();
-        });
+        getCurrentItem().imageQuality
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(integer -> {
+                    Timber.d("Image quality is: %d", integer);
+                    markCurrentUploadVisited();
+                    if (currentStepIndex < items.size() + 1) {
+                        currentStepIndex++;
+                    }
+                    updateItemState();
+                });
     }
 
     void setCurrentTitleAndDescriptions(Title title, List<Description> descriptions) {
@@ -307,7 +312,10 @@ public class UploadModel {
 
     void subscribeBadPicture(Consumer<Integer> consumer) {
         if (isShowingItem()) {
-            badImageSubscription = getImageQuality(getCurrentItem()).subscribe(consumer, Timber::e);
+            badImageSubscription = getImageQuality(getCurrentItem())
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe(consumer, Timber::e);
         }
     }
 

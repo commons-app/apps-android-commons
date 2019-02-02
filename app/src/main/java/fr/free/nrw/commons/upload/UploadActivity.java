@@ -70,6 +70,7 @@ import io.reactivex.schedulers.Schedulers;
 import timber.log.Timber;
 
 import static fr.free.nrw.commons.contributions.Contribution.SOURCE_EXTERNAL;
+import static fr.free.nrw.commons.contributions.ContributionController.ACTION_INTERNAL_UPLOADS;
 import static fr.free.nrw.commons.upload.UploadService.EXTRA_FILES;
 import static fr.free.nrw.commons.utils.ImageUtils.Result;
 import static fr.free.nrw.commons.utils.ImageUtils.getErrorMessageForResult;
@@ -602,9 +603,10 @@ public class UploadActivity extends BaseActivity implements UploadView, SimilarI
 
     private void receiveSharedItems() {
         Intent intent = getIntent();
-        if (Intent.ACTION_SEND.equals(intent.getAction())) {
+        String action = intent.getAction();
+        if (Intent.ACTION_SEND.equals(action) || Intent.ACTION_SEND_MULTIPLE.equals(action)) {
             receiveExternalSharedItems();
-        } else if (Intent.ACTION_SEND_MULTIPLE.equals(intent.getAction())) {
+        } else if (ACTION_INTERNAL_UPLOADS.equals(action)) {
             receiveInternalSharedItems();
         }
     }

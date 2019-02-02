@@ -25,9 +25,7 @@ import fr.free.nrw.commons.upload.UploadActivity;
 import fr.free.nrw.commons.utils.PermissionUtils;
 import fr.free.nrw.commons.utils.ViewUtil;
 
-import static android.content.Intent.ACTION_SEND_MULTIPLE;
 import static fr.free.nrw.commons.contributions.Contribution.SOURCE_CAMERA;
-import static fr.free.nrw.commons.contributions.Contribution.SOURCE_EXTERNAL;
 import static fr.free.nrw.commons.contributions.Contribution.SOURCE_GALLERY;
 import static fr.free.nrw.commons.upload.UploadService.EXTRA_FILES;
 import static fr.free.nrw.commons.upload.UploadService.EXTRA_SOURCE;
@@ -35,6 +33,8 @@ import static fr.free.nrw.commons.wikidata.WikidataConstants.PLACE_OBJECT;
 
 @Singleton
 public class ContributionController {
+
+    public static final String ACTION_INTERNAL_UPLOADS = "internalImageUploads";
 
     private final BasicKvStore defaultKvStore;
     private final JsonKvStore directKvStore;
@@ -137,7 +137,7 @@ public class ContributionController {
                                       String source) {
         ArrayList<UploadableFile> uploadableFiles = getUploadableFiles(imagesFiles);
         Intent shareIntent = new Intent(context, UploadActivity.class);
-        shareIntent.setAction(ACTION_SEND_MULTIPLE);
+        shareIntent.setAction(ACTION_INTERNAL_UPLOADS);
         shareIntent.putExtra(EXTRA_SOURCE, source);
         shareIntent.putParcelableArrayListExtra(EXTRA_FILES, uploadableFiles);
         Place place = directKvStore.getJson(PLACE_OBJECT, Place.class);
@@ -163,9 +163,7 @@ public class ContributionController {
     private String getSourceFromImageSource(FilePicker.ImageSource source) {
         if (source.equals(FilePicker.ImageSource.CAMERA_IMAGE)) {
             return SOURCE_CAMERA;
-        } else if (source.equals(FilePicker.ImageSource.GALLERY)) {
-            return SOURCE_GALLERY;
         }
-        return SOURCE_EXTERNAL;
+        return SOURCE_GALLERY;
     }
 }
