@@ -51,6 +51,7 @@ import fr.free.nrw.commons.location.LocationServiceManager;
 import fr.free.nrw.commons.location.LocationUpdateListener;
 import fr.free.nrw.commons.media.MediaDetailPagerFragment;
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
+import fr.free.nrw.commons.mwapi.OkHttpJsonApiClient;
 import fr.free.nrw.commons.nearby.NearbyController;
 import fr.free.nrw.commons.nearby.NearbyNotificationCardView;
 import fr.free.nrw.commons.nearby.Place;
@@ -80,12 +81,14 @@ public class ContributionsFragment
                     MediaDetailPagerFragment.MediaDetailProvider,
                     FragmentManager.OnBackStackChangedListener,
                     ContributionsListFragment.SourceRefresher,
-                    LocationUpdateListener,ICampaignsView
-                    {
+                    LocationUpdateListener,
+                    ICampaignsView {
     @Inject @Named("default_preferences") BasicKvStore defaultKvStore;
     @Inject ContributionDao contributionDao;
     @Inject MediaWikiApi mediaWikiApi;
-                        @Inject NearbyController nearbyController;
+    @Inject NotificationController notificationController;
+    @Inject NearbyController nearbyController;
+    @Inject OkHttpJsonApiClient okHttpJsonApiClient;
 
     private ArrayList<DataSetObserver> observersWaitingForLoad = new ArrayList<>();
     private UploadService uploadService;
@@ -145,7 +148,7 @@ public class ContributionsFragment
         View view = inflater.inflate(R.layout.fragment_contributions, container, false);
         ButterKnife.bind(this, view);
         presenter = new CampaignsPresenter();
-        presenter.onAttachView(this);
+        presenter.onAttachView(getContext(),this);
         campaignView.setVisibility(View.GONE);
         checkBoxView = View.inflate(getActivity(), R.layout.nearby_permission_dialog, null);
         checkBox = (CheckBox) checkBoxView.findViewById(R.id.never_ask_again);
@@ -451,7 +454,7 @@ public class ContributionsFragment
     @SuppressWarnings("ConstantConditions")
     private void setUploadCount() {
 
-        compositeDisposable.add(mediaWikiApi
+        compositeDisposable.add(okHttpJsonApiClient
                 .getUploadCount(((MainActivity)getActivity()).sessionManager.getCurrentAccount().name)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -689,10 +692,6 @@ public class ContributionsFragment
 
     @Override public void showMessage(String message) {
         Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
-    }
-
-    @Override public MediaWikiApi getMediaWikiApi() {
-        return mediaWikiApi;
     }
 
     @Override public void showCampaigns(Campaign campaign) {

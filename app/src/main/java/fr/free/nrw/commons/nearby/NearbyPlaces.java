@@ -9,7 +9,7 @@ import javax.inject.Inject;
 import javax.inject.Singleton;
 
 import fr.free.nrw.commons.location.LatLng;
-import fr.free.nrw.commons.mwapi.MediaWikiApi;
+import fr.free.nrw.commons.mwapi.OkHttpJsonApiClient;
 import timber.log.Timber;
 
 /**
@@ -22,16 +22,16 @@ public class NearbyPlaces {
     private static final double RADIUS_MULTIPLIER = 1.618;
     public double radius = INITIAL_RADIUS;
 
-    private final MediaWikiApi mediaWikiApi;
+    private final OkHttpJsonApiClient okHttpJsonApiClient;
 
     /**
      * Reads Wikidata query to check nearby wikidata items which needs picture, with a circular
      * search. As a point is center of a circle with a radius will be set later.
-     * @param mediaWikiApi
+     * @param okHttpJsonApiClient
      */
     @Inject
-    public NearbyPlaces(MediaWikiApi mediaWikiApi) {
-        this.mediaWikiApi = mediaWikiApi;
+    public NearbyPlaces(OkHttpJsonApiClient okHttpJsonApiClient) {
+        this.okHttpJsonApiClient = okHttpJsonApiClient;
     }
 
     /**
@@ -92,6 +92,6 @@ public class NearbyPlaces {
      * @throws IOException if query fails
      */
     private List<Place> getFromWikidataQuery(LatLng cur, String lang, double radius) throws IOException {
-        return mediaWikiApi.getNearbyPlaces(cur, lang, radius).blockingSingle();
+        return okHttpJsonApiClient.getNearbyPlaces(cur, lang, radius).blockingSingle();
     }
 }

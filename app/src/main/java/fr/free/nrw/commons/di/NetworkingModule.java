@@ -60,9 +60,8 @@ public class NetworkingModule {
     public MediaWikiApi provideMediaWikiApi(Context context,
                                             @Named("default_preferences") BasicKvStore defaultKvStore,
                                             @Named("category_prefs") BasicKvStore categoryKvStore,
-                                            Gson gson,
-                                            OkHttpClient okHttpClient) {
-        return new ApacheHttpClientMediaWikiApi(context, BuildConfig.WIKIMEDIA_API_HOST, BuildConfig.WIKIDATA_API_HOST, defaultKvStore, categoryKvStore, gson, okHttpClient);
+                                            Gson gson) {
+        return new ApacheHttpClientMediaWikiApi(context, BuildConfig.WIKIMEDIA_API_HOST, BuildConfig.WIKIDATA_API_HOST, defaultKvStore, categoryKvStore, gson);
     }
 
     @Provides

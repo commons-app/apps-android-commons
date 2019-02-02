@@ -9,6 +9,7 @@ import android.support.annotation.Nullable;
 import fr.free.nrw.commons.location.LatLng;
 import fr.free.nrw.commons.nearby.model.NearbyResultItem;
 import fr.free.nrw.commons.utils.PlaceUtils;
+import fr.free.nrw.commons.utils.StringUtils;
 import timber.log.Timber;
 
 /**
@@ -51,10 +52,15 @@ public class Place implements Parcelable {
     }
 
     public static Place from(NearbyResultItem item) {
+        String itemClass = item.getClassName().getValue();
+        String classEntityId = "";
+        if(!StringUtils.isNullOrWhiteSpace(itemClass)) {
+            classEntityId = itemClass.replace("http://www.wikidata.org/entity/", "");
+        }
         return new Place(
                 item.getLabel().getValue(),
-                Label.fromText(item.getClassLabel().getValue()), // list
-                item.getClassName().getValue(), // details
+                Label.fromText(classEntityId), // list
+                item.getClassLabel().getValue(), // details
                 Uri.parse(item.getIcon().getValue()),
                 PlaceUtils.latLngFromPointString(item.getLocation().getValue()),
                 item.getCommonsCategory().getValue(),

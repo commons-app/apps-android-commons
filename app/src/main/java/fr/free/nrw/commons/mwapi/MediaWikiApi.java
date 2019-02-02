@@ -100,20 +100,12 @@ public interface MediaWikiApi {
     @NonNull
     LogEventResult logEvents(String user, String lastModified, String queryContinue, int limit) throws IOException;
 
-    @NonNull
-    Single<Integer> getUploadCount(String userName);
 
     boolean isUserBlockedFromCommons();
-
-    Single<FeedbackResponse> getAchievements(String userName);
 
     Single<Media> getPictureOfTheDay();
 
     void logout();
-
-    Observable<List<Place>> getNearbyPlaces(LatLng cur, String lang, double radius) throws IOException;
-
-    Single<CampaignResponseDTO> getCampaigns();
 
     interface ProgressListener {
         void onProgress(long transferred, long total);
