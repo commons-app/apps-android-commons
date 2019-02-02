@@ -627,7 +627,7 @@ public class ContributionsFragment
             Place closestNearbyPlace = nearbyPlacesInfo.placeList.get(0);
             String distance = formatDistanceBetween(curLatLng, closestNearbyPlace.location);
             closestNearbyPlace.setDistance(distance);
-            nearbyNotificationCardView.updateContent (true, closestNearbyPlace);
+            nearbyNotificationCardView.updateContent(closestNearbyPlace);
             nearbyNotificationCardView.setVisibility(View.VISIBLE);
         } else {
             // Means that no close nearby place is found
