@@ -739,44 +739,6 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
     }
 
     /**
-     * This method takes search keyword as input and returns a list of  Media objects filtered using search query
-     * It uses the generator query API to get the images searched using a query, 25 at a time.
-     * @param query keyword to search images on commons
-     * @return
-     */
-    @Override
-    @NonNull
-    public List<Media> searchImages(String query, int offset) {
-        CustomApiResult apiResult=null;
-        try {
-            apiResult= api.action("query")
-                    .param("format", "xml")
-                    .param("generator", "search")
-                    .param("gsrwhat", "text")
-                    .param("gsrnamespace", "6")
-                    .param("gsrlimit", "25")
-                    .param("gsroffset",offset)
-                    .param("gsrsearch", query)
-                    .param("prop", "imageinfo")
-                    .param("iiprop", "url|extmetadata")
-                    .get();
-        } catch (IOException e) {
-            Timber.e(e, "Failed to obtain searchImages");
-        }
-
-        CustomApiResult searchImagesNode = apiResult.getNode("/api/query/pages");
-        if (searchImagesNode == null
-                || searchImagesNode.getDocument() == null
-                || searchImagesNode.getDocument().getChildNodes() == null
-                || searchImagesNode.getDocument().getChildNodes().getLength() == 0) {
-            return new ArrayList<>();
-        }
-
-        NodeList childNodes = searchImagesNode.getDocument().getChildNodes();
-        return CategoryImageUtils.getMediaList(childNodes);
-    }
-
-    /**
      * This method takes search keyword as input and returns a list of categories objects filtered using search query
      * It uses the generator query API to get the categories searched using a query, 25 at a time.
      * @param query keyword to search categories on commons

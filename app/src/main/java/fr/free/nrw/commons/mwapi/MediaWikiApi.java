@@ -51,9 +51,6 @@ public interface MediaWikiApi {
     List<String> getParentCategoryList(String categoryName);
 
     @NonNull
-    List<Media> searchImages(String title, int offset);
-
-    @NonNull
     List<String> searchCategory(String title, int offset);
 
     @NonNull

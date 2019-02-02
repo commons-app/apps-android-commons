@@ -19,6 +19,7 @@ import fr.free.nrw.commons.achievements.FeaturedImages;
 import fr.free.nrw.commons.achievements.FeedbackResponse;
 import fr.free.nrw.commons.campaigns.CampaignResponseDTO;
 import fr.free.nrw.commons.location.LatLng;
+import fr.free.nrw.commons.media.model.MwQueryPage;
 import fr.free.nrw.commons.mwapi.model.MwQueryResponse;
 import fr.free.nrw.commons.nearby.Place;
 import fr.free.nrw.commons.nearby.model.NearbyResponse;
@@ -200,6 +201,50 @@ public class OkHttpJsonApiClient {
                 return Media.from(mwQueryPage.query().firstPage());
             }
             return null;
+        });
+    }
+
+    /**
+     * This method takes search keyword as input and returns a list of  Media objects filtered using search query
+     * It uses the generator query API to get the images searched using a query, 25 at a time.
+     * @param query keyword to search images on commons
+     * @return
+     */
+    @Nullable
+    public Single<List<Media>> searchImages(String query, int offset) {
+        HttpUrl.Builder urlBuilder = HttpUrl
+                .parse(commonsBaseUrl)
+                .newBuilder()
+                .addQueryParameter("action", "query")
+                .addQueryParameter("generator", "search")
+                .addQueryParameter("format", "json")
+                .addQueryParameter("gsrwhat", "text")
+                .addQueryParameter("gsrnamespace", "6")
+                .addQueryParameter("gsrlimit", "25")
+                .addQueryParameter("gsroffset", String.valueOf(offset))
+                .addQueryParameter("gsrsearch", query)
+                .addQueryParameter("prop", "imageinfo")
+                .addQueryParameter("iiprop", "url|extmetadata");
+
+        Request request = new Request.Builder()
+                .url(urlBuilder.build())
+                .build();
+
+        return Single.fromCallable(() -> {
+            Response response = okHttpClient.newCall(request).execute();
+            List<Media> mediaList = new ArrayList<>();
+            if (response != null && response.body() != null && response.isSuccessful()) {
+                String json = response.body().string();
+                if (json == null) {
+                    return mediaList;
+                }
+                MwQueryResponse mwQueryResponse = gson.fromJson(json, MwQueryResponse.class);
+                List<MwQueryPage> pages = mwQueryResponse.query().pages();
+                for (MwQueryPage page : pages) {
+                    mediaList.add(Media.from(page));
+                }
+            }
+            return mediaList;
         });
     }
 }

@@ -17,6 +17,7 @@ import fr.free.nrw.commons.location.LatLng;
 import fr.free.nrw.commons.media.model.ImageInfo;
 import fr.free.nrw.commons.media.model.MwQueryPage;
 import fr.free.nrw.commons.utils.DateUtils;
+import fr.free.nrw.commons.utils.StringUtils;
 
 public class Media implements Parcelable {
 
@@ -444,10 +445,10 @@ public class Media implements Parcelable {
                 0,
                 DateUtils.getDateFromString(imageInfo.getMetadata().getDateTimeOriginal().value()),
                 DateUtils.getDateFromString(imageInfo.getMetadata().getDateTime().value()),
-                imageInfo.getMetadata().getArtist().value()
+                StringUtils.getParsedStringFromHtml(imageInfo.getMetadata().getArtist().value())
         );
 
-        media.setLicense(imageInfo.getMetadata().getLicense().value());
+        media.setLicense(imageInfo.getMetadata().getLicenseShortName().value());
 
         return media;
     }
