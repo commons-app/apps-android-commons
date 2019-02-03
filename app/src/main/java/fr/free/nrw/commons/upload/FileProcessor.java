@@ -24,7 +24,7 @@ import io.reactivex.schedulers.Schedulers;
 import timber.log.Timber;
 
 /**
- * Processing of the image file that is about to be uploaded via ShareActivity is done here
+ * Processing of the image filePath that is about to be uploaded via ShareActivity is done here
  */
 @Singleton
 public class FileProcessor implements SimilarImageDialogFragment.onResponse {
@@ -61,7 +61,7 @@ public class FileProcessor implements SimilarImageDialogFragment.onResponse {
     }
 
     /**
-     * Processes file coordinates, either from EXIF data or user location
+     * Processes filePath coordinates, either from EXIF data or user location
      */
     GPSExtractor processFileCoordinates(SimilarImageInterface similarImageInterface) {
         Timber.d("Calling GPSExtractor");
@@ -116,7 +116,7 @@ public class FileProcessor implements SimilarImageDialogFragment.onResponse {
                     Timber.d("not null fild EXIF" + tempImageObj.imageCoordsExists + " coords" + tempImageObj.getCoords());
                     if (tempImageObj.getCoords() != null && tempImageObj.imageCoordsExists) {
                         // Current image has gps coordinates and it's not current gps locaiton
-                        Timber.d("This file has image coords:" + file.getAbsolutePath());
+                        Timber.d("This filePath has image coords:" + file.getAbsolutePath());
                         similarImageInterface.showSimilarImageFragment(filePath, file.getAbsolutePath());
                         break;
                     }
