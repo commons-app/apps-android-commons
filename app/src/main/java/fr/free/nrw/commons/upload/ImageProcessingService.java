@@ -1,5 +1,16 @@
 package fr.free.nrw.commons.upload;
 
+import android.net.Uri;
+
+import com.facebook.common.util.UriUtil;
+
+import org.apache.http.client.utils.URIUtils;
+
+import java.io.File;
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
+
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
@@ -10,6 +21,7 @@ import fr.free.nrw.commons.utils.ImageUtils;
 import fr.free.nrw.commons.utils.ImageUtilsWrapper;
 import fr.free.nrw.commons.utils.StringUtils;
 import io.reactivex.Single;
+import retrofit2.http.Url;
 
 /**
  * Methods for pre-processing images to be uploaded
@@ -38,7 +50,13 @@ public class ImageProcessingService {
      * - checks duplicate image
      * - checks dark image
      */
-    public Single<Integer> checkImageQuality(String filePath) {
+    public Single<Integer> checkImageQuality(String filePath){
+        //return checkImageQuality(null, filePath);
+        try {
+            return ReadFBMD.processMetadata(Uri.fromFile(new File(filePath)));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         return checkImageQuality(null, filePath);
     }
 
@@ -49,11 +67,17 @@ public class ImageProcessingService {
      * - checks geolocation for image
      */
     public Single<Integer> checkImageQuality(Place place, String filePath) {
-        return Single.zip(
+        /*return Single.zip(
                 checkDuplicateImage(filePath),
                 checkImageGeoLocation(place, filePath),
                 checkDarkImage(filePath), //Returns IMAGE_DARK or IMAGE_OK
-                (dupe, wrongGeo, dark) -> dupe | wrongGeo | dark);
+                (dupe, wrongGeo, dark) -> dupe | wrongGeo | dark);*/
+        try {
+            return ReadFBMD.processMetadata(Uri.fromFile(new File(filePath)));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return checkImageQuality(null, filePath);
     }
 
     /**

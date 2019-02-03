@@ -1,5 +1,7 @@
 package fr.free.nrw.commons.upload;
 
+import android.net.Uri;
+
 import java.io.File;
 import java.io.IOException;
 import java.util.Arrays;
@@ -21,16 +23,15 @@ import java.io.IOException;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.Map;
+import java.util.Objects;
 
+import io.reactivex.Single;
+import io.reactivex.SingleObserver;
 import retrofit2.http.Url;
 
 public class ReadFBMD {
-    Url url;
-    ReadFBMD(Url url){
-        this.url=url;
-    }
-    public void processMetadata() throws IOException {
-        Map<MetadataType, Metadata> metadataMap = Metadata.readMetadata((File) url);
+    public static Single<Integer> processMetadata(Uri uri) throws IOException {
+        Map<MetadataType, Metadata> metadataMap = Metadata.readMetadata(Objects.requireNonNull(uri.getPath()));
         IPTC iptc = (IPTC)metadataMap.get(MetadataType.IPTC);
 
         if(iptc != null) {
@@ -40,9 +41,9 @@ public class ReadFBMD {
                 MetadataEntry item = iterator.next();
                 printMetadata(item, "", "     ");
             }
-        }
+        } return Single.just(1);
     }
-    private void printMetadata(MetadataEntry entry, String indent, String increment) {
+    private static void printMetadata(MetadataEntry entry, String indent, String increment) {
         //logger.info(indent + entry.getKey() (StringUtils.isNullOrEmpty(entry.getValue())? "" : ": " + entry.getValue()));
         if(entry.isMetadataEntryGroup()) {
             indent += increment;
