@@ -5,6 +5,7 @@ import android.app.AlertDialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -17,6 +18,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.esafirm.imagepicker.features.ImagePicker;
 import com.esafirm.imagepicker.model.Image;
@@ -70,6 +72,7 @@ public class MainActivity extends AuthenticatedActivity implements FragmentManag
 
     public Intent uploadServiceIntent;
     public boolean isAuthCookieAcquired = false;
+    boolean doubleBackToExitPressedOnce = false;
 
     public ContributionsActivityPagerAdapter contributionsActivityPagerAdapter;
     public final int CONTRIBUTIONS_TAB_POSITION = 0;
@@ -266,7 +269,22 @@ public class MainActivity extends AuthenticatedActivity implements FragmentManag
                     contributionsFragment.nearbyNotificationCardView.setVisibility(View.GONE);
                 }
             } else {
-                finish();
+                if (doubleBackToExitPressedOnce) {
+                    super.onBackPressed();
+                    return;
+                }
+
+                this.doubleBackToExitPressedOnce = true;
+                Toast.makeText(this, "Please click BACK again to exit", Toast.LENGTH_SHORT).show();
+
+                new Handler().postDelayed(new Runnable() {
+
+                    @Override
+                    public void run() {
+                        doubleBackToExitPressedOnce=false;
+                    }
+                }, 2000);
+
             }
         } else if (getSupportFragmentManager().findFragmentByTag(nearbyFragmentTag) != null && !isContributionsFragmentVisible) {
             // Meas that nearby fragment is visible (not contributions fragment)
