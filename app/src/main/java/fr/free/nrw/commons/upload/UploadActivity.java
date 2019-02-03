@@ -163,7 +163,7 @@ public class UploadActivity extends BaseActivity implements UploadView, SimilarI
             descriptionsAdapter.setTitle(title);
             List<Description> descriptions= (List<Description>) savedInstanceState.get("description");
             for (Description d: descriptions){
-                descriptionsAdapter.addDescription(d);
+                descriptionsAdapter.addDescriptionList(d);
             }
         }
     }

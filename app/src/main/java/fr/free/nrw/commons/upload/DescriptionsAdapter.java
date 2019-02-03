@@ -87,6 +87,7 @@ class DescriptionsAdapter extends RecyclerView.Adapter<DescriptionsAdapter.ViewH
             holder.init(position,text);
         if (position>0 && position<=descriptionsList.size() && descriptionsList.get(position-1).getDescriptionText()!=null){
             holder.init(position,descriptionsList.get(position-1).getDescriptionText());
+            holder.initLanguageSpinner(position,descriptionsList.get(position-1));
         }
             //holder.setDescItemEditText(text);
     }
@@ -103,13 +104,17 @@ class DescriptionsAdapter extends RecyclerView.Adapter<DescriptionsAdapter.ViewH
     List<Description> getDescriptions() {
         return descriptions;
     }
-
-    void addDescription(Description description) {
+    void addDescriptionList(Description description){
         if (description.getDescriptionText()!=null){
             descriptionsList.add(description);
             notifyItemInserted(descriptionsList.size() + 1);
         }
     }
+
+    void addDescription(Description description) {
+            descriptions.add(description);
+            notifyItemInserted(descriptions.size() + 1);
+        }
 
     public Title getTitle() {
         return title;
