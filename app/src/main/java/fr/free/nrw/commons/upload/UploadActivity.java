@@ -161,6 +161,10 @@ public class UploadActivity extends BaseActivity implements UploadView, SimilarI
             Title title=new Title();
             title.setTitleText(savedInstanceState.get("title").toString());
             descriptionsAdapter.setTitle(title);
+            List<Description> descriptions= (List<Description>) savedInstanceState.get("description");
+            for (Description d: descriptions){
+                descriptionsAdapter.addDescription(d);
+            }
         }
     }
 
@@ -168,6 +172,7 @@ public class UploadActivity extends BaseActivity implements UploadView, SimilarI
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         outState.putString("title",descriptionsAdapter.getTitle().toString());
+        outState.putParcelableArrayList("description",(ArrayList) descriptionsAdapter.getDescriptions());
     }
 
     @Override
@@ -281,7 +286,7 @@ public class UploadActivity extends BaseActivity implements UploadView, SimilarI
         String licenseHyperLink = "<a href='" + Utils.licenseUrlFor(selectedLicense) + "'>" +
                 getString(Utils.licenseNameFor(selectedLicense)) + "</a><br>";
 
-          setTextViewHTML(licenseSummary, getResources().getQuantityString(R.plurals.share_license_summary, imageCount, licenseHyperLink));
+        setTextViewHTML(licenseSummary, getResources().getQuantityString(R.plurals.share_license_summary, imageCount, licenseHyperLink));
     }
 
     @Override

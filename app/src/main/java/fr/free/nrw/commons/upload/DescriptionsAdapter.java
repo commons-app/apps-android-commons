@@ -32,6 +32,7 @@ class DescriptionsAdapter extends RecyclerView.Adapter<DescriptionsAdapter.ViewH
     private Title title;
     private String text=null;
     private List<Description> descriptions;
+    private List<Description> descriptionsList=new ArrayList<>();
     private Context context;
     private Callback callback;
     private Subject<String> titleChangedSubject;
@@ -81,9 +82,13 @@ class DescriptionsAdapter extends RecyclerView.Adapter<DescriptionsAdapter.ViewH
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        holder.init(position);
+        holder.init(position,"");
         if (position==0 && text!=null)
-            holder.setDescItemEditText(text);
+            holder.init(position,text);
+        if (position>0 && position<=descriptionsList.size() && descriptionsList.get(position-1).getDescriptionText()!=null){
+            holder.init(position,descriptionsList.get(position-1).getDescriptionText());
+        }
+            //holder.setDescItemEditText(text);
     }
 
     @Override
@@ -100,8 +105,10 @@ class DescriptionsAdapter extends RecyclerView.Adapter<DescriptionsAdapter.ViewH
     }
 
     void addDescription(Description description) {
-        this.descriptions.add(description);
-        notifyItemInserted(descriptions.size() + 1);
+        if (description.getDescriptionText()!=null){
+            descriptionsList.add(description);
+            notifyItemInserted(descriptionsList.size() + 1);
+        }
     }
 
     public Title getTitle() {
@@ -131,11 +138,11 @@ class DescriptionsAdapter extends RecyclerView.Adapter<DescriptionsAdapter.ViewH
             Timber.i("descItemEditText:" + descItemEditText);
         }
 
-        public void init(int position) {
+        public void init(int position, String text) {
             if (position == 0) {
                 Timber.d("Title is " + title);
-                if (!title.isEmpty()) {
-                    descItemEditText.setText(title.toString());
+                if (text!=null) {
+                    descItemEditText.setText(text);
                 } else {
                     descItemEditText.setText("");
                 }
@@ -168,8 +175,8 @@ class DescriptionsAdapter extends RecyclerView.Adapter<DescriptionsAdapter.ViewH
             } else {
                 Description description = descriptions.get(position - 1);
                 Timber.d("Description is " + description);
-                if (!TextUtils.isEmpty(description.getDescriptionText())) {
-                    descItemEditText.setText(description.getDescriptionText());
+                if (text!=null) {
+                    descItemEditText.setText(text);
                 } else {
                     descItemEditText.setText("");
                 }
