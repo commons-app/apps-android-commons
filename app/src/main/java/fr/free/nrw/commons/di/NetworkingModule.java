@@ -31,6 +31,11 @@ import timber.log.Timber;
 @Module
 @SuppressWarnings({"WeakerAccess", "unused"})
 public class NetworkingModule {
+    private static final String WIKIDATA_SPARQL_QUERY_URL = "https://query.wikidata.org/sparql";
+    private final String WIKIMEDIA_CAMPAIGNS_BASE_URL =
+            "https://raw.githubusercontent.com/commons-app/campaigns/master/campaigns.json";
+    private static final String TOOLS_FORGE_URL = "https://tools.wmflabs.org/";
+
     public static final long OK_HTTP_CACHE_SIZE = 10 * 1024 * 1024;
 
     @Provides
@@ -68,8 +73,14 @@ public class NetworkingModule {
     @Provides
     @Singleton
     public OkHttpJsonApiClient provideOkHttpJsonApiClient(OkHttpClient okHttpClient,
+                                                          @Named("tools_force") HttpUrl toolsForgeUrl,
                                                           Gson gson) {
-        return new OkHttpJsonApiClient(okHttpClient, BuildConfig.WIKIMEDIA_API_HOST, gson);
+        return new OkHttpJsonApiClient(okHttpClient,
+                toolsForgeUrl,
+                WIKIDATA_SPARQL_QUERY_URL,
+                WIKIMEDIA_CAMPAIGNS_BASE_URL,
+                BuildConfig.WIKIMEDIA_API_HOST,
+                gson);
     }
 
     @Provides
@@ -78,6 +89,14 @@ public class NetworkingModule {
     @SuppressWarnings("ConstantConditions")
     public HttpUrl provideMwUrl() {
         return HttpUrl.parse(BuildConfig.COMMONS_URL);
+    }
+
+    @Provides
+    @Named("tools_force")
+    @NonNull
+    @SuppressWarnings("ConstantConditions")
+    public HttpUrl provideToolsForgeUrl() {
+        return HttpUrl.parse(TOOLS_FORGE_URL);
     }
 
     /**

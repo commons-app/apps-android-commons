@@ -36,32 +36,35 @@ import timber.log.Timber;
 
 @Singleton
 public class OkHttpJsonApiClient {
-    private static final String WIKIDATA_SPARQL_QUERY_URL = "https://query.wikidata.org/sparql";
-    private final String WIKIMEDIA_CAMPAIGNS_BASE_URL =
-            "https://raw.githubusercontent.com/commons-app/campaigns/master/campaigns.json";
-    private final String commonsBaseUrl;
-
     private final OkHttpClient okHttpClient;
-    private String wikiMediaToolforgeUrl = "https://tools.wmflabs.org/";
+    private final HttpUrl wikiMediaToolforgeUrl;
+    private final String sparqlQueryUrl;
+    private final String campaignsUrl;
+    private final String commonsBaseUrl;
     private Gson gson;
 
 
     @Inject
     public OkHttpJsonApiClient(OkHttpClient okHttpClient,
+                               HttpUrl wikiMediaToolforgeUrl,
+                               String sparqlQueryUrl,
+                               String campaignsUrl,
                                String commonsBaseUrl,
                                Gson gson) {
         this.okHttpClient = okHttpClient;
+        this.wikiMediaToolforgeUrl = wikiMediaToolforgeUrl;
+        this.sparqlQueryUrl = sparqlQueryUrl;
+        this.campaignsUrl = campaignsUrl;
         this.commonsBaseUrl = commonsBaseUrl;
         this.gson = gson;
     }
 
     @NonNull
     public Single<Integer> getUploadCount(String userName) {
-        final String uploadCountUrlTemplate =
-                wikiMediaToolforgeUrl + "urbanecmbot/commonsmisc/uploadsbyuser.py";
-
-        HttpUrl.Builder urlBuilder = HttpUrl.parse(uploadCountUrlTemplate).newBuilder();
-        urlBuilder.addQueryParameter("user", userName);
+        HttpUrl.Builder urlBuilder = wikiMediaToolforgeUrl.newBuilder();
+        urlBuilder
+                .addPathSegments("urbanecmbot/commonsmisc/uploadsbyuser.py")
+                .addQueryParameter("user", userName);
         Request request = new Request.Builder()
                 .url(urlBuilder.build())
                 .build();
@@ -124,7 +127,7 @@ public class OkHttpJsonApiClient {
                 .replace("${LANG}", lang);
 
         HttpUrl.Builder urlBuilder = HttpUrl
-                .parse(WIKIDATA_SPARQL_QUERY_URL)
+                .parse(sparqlQueryUrl)
                 .newBuilder()
                 .addQueryParameter("query", query)
                 .addQueryParameter("format", "json");
@@ -154,7 +157,7 @@ public class OkHttpJsonApiClient {
 
     public Single<CampaignResponseDTO> getCampaigns() {
         return Single.fromCallable(() -> {
-            Request request = new Request.Builder().url(WIKIMEDIA_CAMPAIGNS_BASE_URL)
+            Request request = new Request.Builder().url(campaignsUrl)
                     .build();
             Response response = okHttpClient.newCall(request).execute();
             if (response != null && response.body() != null && response.isSuccessful()) {
