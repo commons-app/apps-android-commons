@@ -368,7 +368,9 @@ public class FilePicker implements Constants {
     }
 
     private static Intent plainGalleryPickerIntent() {
-        return new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+        Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+        intent.setType("image/*");
+        return intent;
     }
 
     public static boolean canDeviceHandleGallery(@NonNull Context context) {
