@@ -7,10 +7,14 @@
 * Gırd
 * Marmase
 * Mirzali
+* Orbot707
 -->
 <resources>
+  <string name="title_activity_explore">Keşıf kerê</string>
+  <string name="navigation_item_explore">Keşf kerê</string>
   <string name="preference_category_appearance">Asayış</string>
   <string name="preference_category_general">Bıngeh</string>
+  <string name="preference_category_feedback">Peydrışten</string>
   <string name="preference_category_location">Lokasyon</string>
   <string name="app_name">Commons</string>
   <string name="bullet">•</string>
@@ -25,7 +29,7 @@
   <string name="login_success">Cıkewtış hewl bi.</string>
   <string name="login_failed">Nidekeweya de</string>
   <string name="upload_failed">Dosya nêvineya. Dosyê da bine bıcerebnê.</string>
-  <string name="authentication_failed" fuzzy="true">Tesdiq kerdış nebı</string>
+  <string name="authentication_failed">Araşt kerdışê kamiye de xırabe vıciyê, reyna cıkewe</string>
   <string name="uploading_started">Barkerdış sertera!</string>
   <string name="upload_completed_notification_title">%1$s bar bi!</string>
   <string name="upload_completed_notification_text">Barkerdışê xo pıro bıde.</string>
@@ -60,9 +64,11 @@
   <string name="provider_modifications">Modifikasyoni</string>
   <string name="menu_upload_single">Bar ke</string>
   <string name="categories_search_text_hint">Kategoriyan dı cı geyr</string>
-  <string name="menu_save_categories">Star ke</string>
+  <string name="menu_save_categories">Qeyd ke</string>
   <string name="refresh_button">Newe ke</string>
   <string name="display_list_button">Liste</string>
+  <string name="enable_gps">GPSi aktif kerê</string>
+  <string name="contributions_subtitle_zero">Hewna bar nêbiyo</string>
   <plurals name="contributions_subtitle" fuzzy="true">
     <item quantity="zero">\@string/contributions_subtitle_zero</item>
     <item quantity="one">Yew  barbiyayış</item>
@@ -94,6 +100,9 @@
   <string name="menu_cancel_upload">Bıtexelne</string>
   <string name="menu_download">Biya war</string>
   <string name="preference_license">Lisanso hesebiyaye</string>
+  <string name="preference_theme_summary">Mewzuyo tari bıgurene</string>
+  <string name="license_name_cc_by_sa_four">Attribution-ShareAlike 4.0</string>
+  <string name="license_name_cc_by_four"> Attribution 4.0</string>
   <string name="license_name_cc_by_sa"> Attribution-ShareAlike 3.0</string>
   <string name="license_name_cc_by">Attribution 3.0</string>
   <string name="license_name_cc0">CC0</string>
@@ -133,13 +142,46 @@
   <string name="media_detail_uploaded_date">Tarixê barkerdışi</string>
   <string name="media_detail_license">Lisans</string>
   <string name="media_detail_coordinates">Koordinati</string>
+  <string name="welcome_image_mount_zao">Koyê Zao</string>
+  <string name="welcome_image_llamas">Lamay</string>
+  <string name="welcome_image_rainbow_bridge">Pırdê rainbowi</string>
   <string name="welcome_image_tulip">Korbıze</string>
+  <string name="welcome_image_no_selfies">Selfiey çıniya</string>
+  <string name="welcome_image_proprietary">Resimo tescilın</string>
+  <string name="welcome_image_welcome_wikipedia">Xeyr amey Wikipedia</string>
+  <string name="welcome_image_welcome_copyright">Xeyr amey Heqa telifiye</string>
+  <string name="welcome_image_sydney_opera_house">Sydney Opera House</string>
   <string name="cancel">Bıtexelne</string>
   <string name="navigation_drawer_open">Ake</string>
+  <string name="navigation_drawer_close">Racın</string>
   <string name="navigation_item_home">Keye</string>
   <string name="navigation_item_upload">Bar ke</string>
+  <string name="navigation_item_nearby">Nezdıra</string>
+  <string name="navigation_item_about">Heqa</string>
+  <string name="navigation_item_settings">Eyari</string>
+  <string name="navigation_item_feedback">Peydrışten</string>
   <string name="navigation_item_logout">Veciyayış</string>
+  <string name="navigation_item_info">Musnayış</string>
+  <string name="navigation_item_notification">Tebliği</string>
+  <string name="navigation_item_featured_images">Weçinaye</string>
+  <string name="nearby_needs_permissions">Cayê nezdiy, bêicazetê lokasyoni nêmocneyêno</string>
+  <string name="nearby_info_menu_commons_article">Pela dosyay commonsi</string>
+  <string name="nearby_info_menu_wikidata_article">Pbcey Wikidata</string>
+  <string name="nearby_info_menu_wikipedia_article">Meqaley Wikipedia</string>
+  <string name="error_while_cache">Resima verhafıze gırotış de xeta vıciyê</string>
+  <string name="view_browser">Browser de bıvinê</string>
+  <string name="skip_login">Ser çek</string>
   <string name="navigation_item_login">Cı kewe</string>
+  <string name="nearby_directions">TARİFÊ RAYER</string>
+  <string name="nearby_wikidata">WIKIDATA</string>
+  <string name="nearby_wikipedia">WIKIPEDIA</string>
+  <string name="nearby_commons">COMMONS</string>
+  <string name="about_rate_us">&lt;u&gt;Rey bıdê &lt;/u&gt;</string>
+  <string name="about_faq">&lt;u&gt;PZP&lt;/u&gt;</string>
+  <string name="welcome_skip_button">Musnayoği ser çek</string>
+  <string name="no_internet">İnternet nêresêno</string>
+  <string name="internet_established">İnternet resiyeno</string>
+  <string name="about_translate">&lt;u&gt;Açarne&lt;/u&gt;</string>
   <string name="about_translate_title">Zıwani</string>
   <string name="about_translate_cancel">Bıtexelne</string>
   <string name="retry">Anciya bıcerrebne</string>
@@ -148,17 +190,34 @@
   <string name="title_activity_search">Cıgeyrayış</string>
   <string name="search_tab_title_media">MEDYA</string>
   <string name="search_tab_title_categories">KATEGORİYİ</string>
+  <string name="quiz">Quiz</string>
+  <string name="question">Pers</string>
+  <string name="result">Netice</string>
+  <string name="continue_message">Dewam kerê</string>
+  <string name="correct">Cewabo raşt</string>
+  <string name="wrong">Cewabo ğelet</string>
+  <string name="statistics">İSTATİSTİKİ</string>
+  <string name="statistics_thanks">Teşekurê gêriyayi</string>
   <string name="preference_author_name_toggle">Nameyê nuştekariyo xısusiyi bıgurene</string>
   <string name="preference_author_name">Nameyê nuştekariyo xısusi</string>
   <string name="contributions_fragment">İştıraki</string>
   <string name="list_sheet">Liste</string>
   <string name="previous">Verên</string>
   <string name="submit">Bırışe</string>
+  <string name="navigation_item_bookmarks">Nişan</string>
+  <string name="title_activity_bookmarks">Nişan</string>
+  <string name="title_page_bookmarks_pictures">Resımi</string>
+  <string name="title_page_bookmarks_locations">Lokasyoni</string>
+  <string name="menu_bookmark">Nişanan cı kerê/wedarê</string>
+  <string name="provider_bookmarks">Nişan</string>
   <string name="articles">meqaleyi</string>
   <string name="desc_language_America">Amerika</string>
   <string name="desc_language_Europe">Ewropa</string>
+  <string name="desc_language_Middle_East">Rocvetışê Miyani</string>
   <string name="desc_language_Africa">Afrika</string>
   <string name="desc_language_Asia">Asya</string>
   <string name="desc_language_Pacific">Pasifik</string>
+  <string name="no_categories_selected">Kategoriyê ke nêweçiniyê</string>
   <string name="yes_submit">Eya, bırışe</string>
+  <string name="no_go_back">Nê, Peyser Şo</string>
 </resources>
