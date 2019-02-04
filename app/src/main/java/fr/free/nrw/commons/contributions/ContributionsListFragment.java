@@ -1,7 +1,5 @@
 package fr.free.nrw.commons.contributions;
 
-import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
@@ -119,13 +117,6 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment {
             }
             this.isFabOpen=!isFabOpen;
         }
-    }
-
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        ContributionsFragment parentFragment = (ContributionsFragment)getParentFragment();
-        parentFragment.waitForContributionsListFragment.countDown();
     }
 
     /**

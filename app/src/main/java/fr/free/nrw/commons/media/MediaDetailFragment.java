@@ -12,6 +12,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.text.Html;
 import android.text.TextUtils;
+import android.text.format.DateFormat;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -53,6 +54,7 @@ import fr.free.nrw.commons.location.LatLng;
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
 import fr.free.nrw.commons.ui.widget.CompatTextView;
 import timber.log.Timber;
+import fr.free.nrw.commons.utils.DateUtils;
 
 import static android.content.Context.CLIPBOARD_SERVICE;
 import static android.view.View.GONE;
@@ -518,8 +520,7 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
         if (date == null || date.toString() == null || date.toString().isEmpty()) {
             return "Uploaded date not available";
         }
-        SimpleDateFormat formatter = new SimpleDateFormat("dd MMM yyyy", Locale.getDefault());
-        return formatter.format(date);
+        return DateUtils.dateInLocaleFormat(date);
     }
 
     /**

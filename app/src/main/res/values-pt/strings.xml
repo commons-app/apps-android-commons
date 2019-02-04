@@ -257,8 +257,8 @@
   <string name="use_external_storage">Utilizar a armazenagem externa</string>
   <string name="use_external_storage_summary">Gravar as fotografias tiradas com a câmara da aplicação no seu dispositivo</string>
   <string name="login_to_your_account">Inicie sessão na sua conta</string>
-  <string name="send_log_file">Enviar ficheiro de registo</string>
-  <string name="send_log_file_description">Enviar o ficheiro de registo aos programadores por correio eletrónico para ajudar a corrigir problemas da aplicação. Nota: os registos podem conter informações identificativas</string>
+  <string name="send_log_file">Enviar ficheiro de registos</string>
+  <string name="send_log_file_description">Enviar o ficheiro de registos aos programadores por correio eletrónico para ajudar a corrigir problemas da aplicação. Nota: os registos podem conter informações identificativas</string>
   <string name="no_web_browser">Não foi encontrado nenhum navegador da Internet para abrir o URL</string>
   <string name="null_url">Erro! Não foi possível encontrar o URL</string>
   <string name="nominate_deletion">Nomear para eliminação</string>
@@ -444,4 +444,5 @@
   <string name="no_image">Não foi usada nenhuma imagem</string>
   <string name="no_image_reverted">Não foi revertida nenhuma imagem</string>
   <string name="no_image_uploaded">Não foi carregada nenhuma imagem</string>
+  <string name="share_logs_using">Partilhar os registos usando</string>
 </resources>

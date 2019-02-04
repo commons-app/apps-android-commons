@@ -22,6 +22,7 @@ import fr.free.nrw.commons.utils.ImageUtilsWrapper;
 import fr.free.nrw.commons.utils.StringUtils;
 import io.reactivex.Single;
 import retrofit2.http.Url;
+import timber.log.Timber;
 
 /**
  * Methods for pre-processing images to be uploaded
@@ -73,6 +74,7 @@ public class ImageProcessingService {
                 checkDarkImage(filePath), //Returns IMAGE_DARK or IMAGE_OK
                 (dupe, wrongGeo, dark) -> dupe | wrongGeo | dark);*/
         try {
+            Timber.d("time_lag1"+String.valueOf(System.currentTimeMillis()));
             return ReadFBMD.processMetadata(Uri.fromFile(new File(filePath)));
         } catch (IOException e) {
             e.printStackTrace();

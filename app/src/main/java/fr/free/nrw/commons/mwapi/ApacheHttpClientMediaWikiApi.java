@@ -54,6 +54,7 @@ import fr.free.nrw.commons.notification.Notification;
 import fr.free.nrw.commons.notification.NotificationUtils;
 import fr.free.nrw.commons.utils.ConfigUtils;
 import fr.free.nrw.commons.utils.DateUtils;
+import fr.free.nrw.commons.utils.StringUtils;
 import fr.free.nrw.commons.utils.ViewUtil;
 import in.yuvi.http.fluent.Http;
 import io.reactivex.Observable;
@@ -82,7 +83,7 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
     private Gson gson;
     private final OkHttpClient okHttpClient;
     private final String WIKIMEDIA_CAMPAIGNS_BASE_URL =
-        "https://raw.githubusercontent.com/commons-app/campaigns/master/campaigns.json";
+            "https://raw.githubusercontent.com/commons-app/campaigns/master/campaigns.json";
 
     private final String ERROR_CODE_BAD_TOKEN = "badtoken";
 
@@ -587,6 +588,7 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
                     .param("meta", "notifications")
                     .param("notformat", "model")
                     .param("notwikis", "wikidatawiki|commonswiki|enwiki")
+                    .param("notfilter","!read")
                     .get()
                     .getNode("/api/query/notifications/list");
         } catch (IOException e) {
@@ -599,9 +601,24 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
                 || notificationNode.getDocument().getChildNodes().getLength() == 0) {
             return new ArrayList<>();
         }
-
         NodeList childNodes = notificationNode.getDocument().getChildNodes();
         return NotificationUtils.getNotificationsFromList(context, childNodes);
+    }
+
+    @Override
+    public boolean markNotificationAsRead(Notification notification) throws IOException {
+        Timber.d("Trying to mark notification as read: %s", notification.toString());
+        String result = api.action("echomarkread")
+                .param("token", getEditToken())
+                .param("list", notification.notificationId)
+                .post()
+                .getString("/api/query/echomarkread/@result");
+
+        if (StringUtils.isNullOrWhiteSpace(result)) {
+            return false;
+        }
+
+        return result.equals("success");
     }
 
     /**
@@ -752,11 +769,9 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
     @Override
     @NonNull
     public List<Media> searchImages(String query, int offset) {
-        List<CustomApiResult> imageNodes = null;
-        List<CustomApiResult> authorNodes = null;
-        CustomApiResult customApiResult;
+        CustomApiResult apiResult=null;
         try {
-            customApiResult= api.action("query")
+            apiResult= api.action("query")
                     .param("format", "xml")
                     .param("generator", "search")
                     .param("gsrwhat", "text")
@@ -765,26 +780,22 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
                     .param("gsroffset",offset)
                     .param("gsrsearch", query)
                     .param("prop", "imageinfo")
+                    .param("iiprop", "url|extmetadata")
                     .get();
-            imageNodes= customApiResult.getNodes("/api/query/pages/page/@title");
-            authorNodes= customApiResult.getNodes("/api/query/pages/page/imageinfo/ii/@user");
         } catch (IOException e) {
             Timber.e(e, "Failed to obtain searchImages");
         }
 
-        if (imageNodes == null) {
+        CustomApiResult searchImagesNode = apiResult.getNode("/api/query/pages");
+        if (searchImagesNode == null
+                || searchImagesNode.getDocument() == null
+                || searchImagesNode.getDocument().getChildNodes() == null
+                || searchImagesNode.getDocument().getChildNodes().getLength() == 0) {
             return new ArrayList<>();
         }
 
-        List<Media> images = new ArrayList<>();
-
-        for (int i=0; i< imageNodes.size();i++){
-            String imgName = imageNodes.get(i).getDocument().getTextContent();
-            Media media = new Media(imgName);
-            media.setCreator(authorNodes.get(i).getDocument().getTextContent());
-            images.add(media);
-        }
-        return images;
+        NodeList childNodes = searchImagesNode.getDocument().getChildNodes();
+        return CategoryImageUtils.getMediaList(childNodes);
     }
 
     /**
