@@ -37,15 +37,9 @@ public class ReadFBMD {
         Timber.d("time_lag_2"+String.valueOf(System.currentTimeMillis()));
 
         if(iptc != null) {
-            //Iterator<MetadataEntry> iterator = (Iterator<MetadataEntry>) iptc.getDataSets().entrySet().iterator();
             for (String key: iptc.getDataSets().keySet()){
-                printMetadata((MetadataEntry)iptc.getDataSets().get(key),"","");
+                //study the data
             }
-
-            /*while(iterator.hasNext()) {
-                MetadataEntry item = iterator.next();
-                printMetadata(item, "", "     ");
-            }*/
         }
         return Single.just(1);
     }
