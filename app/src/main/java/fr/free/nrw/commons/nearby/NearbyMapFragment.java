@@ -494,9 +494,7 @@ public class NearbyMapFragment extends DaggerFragment {
             directionsButtonText.setVisibility(View.GONE);
         }
         title.setOnLongClickListener(view -> {
-                    ClipboardManager clipboard = (ClipboardManager) getContext().getSystemService(Context.CLIPBOARD_SERVICE);
-                    ClipData clip = ClipData.newPlainText("place", title.getText());
-                    clipboard.setPrimaryClip(clip);
+                    Utils.copy("place",title.getText().toString(),getContext());
                     Toast.makeText(getContext(),"Text copied to clipboard",Toast.LENGTH_SHORT).show();
                     return true;
                 }
