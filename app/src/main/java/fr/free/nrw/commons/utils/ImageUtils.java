@@ -46,6 +46,7 @@ public class ImageUtils {
     public static final int IMAGE_WAIT = -2;
     public static final int EMPTY_TITLE = -3;
     public static final int FILE_NAME_EXISTS = -4;
+    public static final int FILE_FBMD = -5;
     static final int NO_CATEGORY_SELECTED = -5;
 
     @IntDef(

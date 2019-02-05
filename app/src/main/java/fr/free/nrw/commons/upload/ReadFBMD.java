@@ -1,6 +1,7 @@
 package fr.free.nrw.commons.upload;
 
 import android.net.Uri;
+import android.widget.Toast;
 
 import java.io.File;
 import java.io.IOException;
@@ -31,10 +32,21 @@ import retrofit2.http.Url;
 import timber.log.Timber;
 
 public class ReadFBMD {
-    public static Single<Integer> processMetadata(Uri uri) throws IOException {
-        Map<MetadataType, Metadata> metadataMap = Metadata.readMetadata("/sdcard/Collage/27540498_190811408178624_648539770233527927_n.jpg");
+    public static Single<Integer> processMetadata(String path) throws IOException {
+        Map<MetadataType, Metadata> metadataMap = Metadata.readMetadata("/sdcard/Collage/27545334_1958206197553540_299906293671232952_n.jpg");
         Metadata metadata = metadataMap.get(MetadataType.IPTC);
-        //metadata.data.toString();
+        byte [] b = new byte[0];
+        try {
+            b=((IPTC) metadata).getDataSets().get("SpecialInstructions").get(0).getData();
+        } catch (NullPointerException e){
+
+        }
+
+        for (int i=0;i<b.length;i++){
+            if (b[i]==70 && b[i+1]==66 && b[i+2]==77 && b[i+3]==68){
+                Timber.d("Contains FBMD");
+            }
+        }
         Timber.d("time_lag_2"+String.valueOf(System.currentTimeMillis()));
 
         /*if(iptc != null) {

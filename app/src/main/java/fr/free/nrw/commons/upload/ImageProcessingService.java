@@ -23,6 +23,9 @@ import fr.free.nrw.commons.utils.StringUtils;
 import io.reactivex.Single;
 import retrofit2.http.Url;
 import timber.log.Timber;
+import static fr.free.nrw.commons.utils.ImageUtils.EMPTY_TITLE;
+import static fr.free.nrw.commons.utils.ImageUtils.FILE_NAME_EXISTS;
+import static fr.free.nrw.commons.utils.ImageUtils.IMAGE_OK;
 
 /**
  * Methods for pre-processing images to be uploaded
@@ -50,15 +53,61 @@ public class ImageProcessingService {
      * Check image quality before upload
      * - checks duplicate image
      * - checks dark image
+     * - checks geolocation for image
+     * - check for valid title
      */
-    public Single<Integer> checkImageQuality(String filePath){
-        //return checkImageQuality(null, filePath);
-        try {
-            return ReadFBMD.processMetadata(Uri.fromFile(new File(filePath)));
-        } catch (IOException e) {
-            e.printStackTrace();
+    Single<Integer> validateImage(UploadModel.UploadItem uploadItem, boolean checkTitle) {
+        int currentImageQuality = uploadItem.getImageQuality();
+        Timber.d("Current image quality is %d", currentImageQuality);
+        if (currentImageQuality == ImageUtils.IMAGE_KEEP) {
+            return Single.just(ImageUtils.IMAGE_OK);
         }
-        return checkImageQuality(null, filePath);
+        Timber.d("Checking the validity of image");
+        String filePath = uploadItem.getMediaUri().getPath();
+        Single<Integer> duplicateImage = checkDuplicateImage(filePath);
+        Single<Integer> wrongGeoLocation = checkImageGeoLocation(uploadItem.getPlace(), filePath);
+        Single<Integer> darkImage = checkDarkImage(filePath);
+        Single<Integer> itemTitle = checkTitle ? validateItemTitle(uploadItem) : Single.just(ImageUtils.IMAGE_OK);
+        Single<Integer> checkFBMD = checkFBMD(filePath);
+
+        Single<Integer> zipResult = Single.zip(duplicateImage, wrongGeoLocation, darkImage, itemTitle,
+                (duplicate, wrongGeo, dark, title) -> {
+                    Timber.d("Result for duplicate: %d, geo: %d, dark: %d, title: %d", duplicate, wrongGeo, dark, title);
+                    return duplicate | wrongGeo | dark | title;
+                });
+
+        return Single.zip(zipResult, checkFBMD, (zip, fbmd) -> {
+            return zip | fbmd;
+        });
+    }
+
+    public Single<Integer> checkFBMD(String filePath) {
+        try {
+            return ReadFBMD.processMetadata(filePath);
+        } catch (IOException e) {
+            return Single.just(ImageUtils.FILE_FBMD);
+        }
+    }
+
+    /**
+     * Checks item title
+     * - empty title
+     * - existing title
+     * @param uploadItem
+     * @return
+     */
+    private Single<Integer> validateItemTitle(UploadModel.UploadItem uploadItem) {
+        Timber.d("Checking for image title %s", uploadItem.getTitle());
+        Title title = uploadItem.getTitle();
+        if (title.isEmpty()) {
+            return Single.just(EMPTY_TITLE);
+        }
+
+        return Single.fromCallable(() -> mwApi.fileExistsWithName(uploadItem.getFileName()))
+                .map(doesFileExist -> {
+                    Timber.d("Result for valid title is %s", doesFileExist);
+                    return doesFileExist ? FILE_NAME_EXISTS : IMAGE_OK;
+                });
     }
 
     /**
@@ -68,18 +117,12 @@ public class ImageProcessingService {
      * - checks geolocation for image
      */
     public Single<Integer> checkImageQuality(Place place, String filePath) {
-        /*return Single.zip(
+        return Single.zip(
                 checkDuplicateImage(filePath),
                 checkImageGeoLocation(place, filePath),
                 checkDarkImage(filePath), //Returns IMAGE_DARK or IMAGE_OK
-                (dupe, wrongGeo, dark) -> dupe | wrongGeo | dark);*/
-        try {
-            Timber.d("time_lag1"+String.valueOf(System.currentTimeMillis()));
-            return ReadFBMD.processMetadata(Uri.fromFile(new File(filePath)));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return checkImageQuality(null, filePath);
+                (dupe, wrongGeo, dark) -> dupe | wrongGeo | dark);
+
     }
 
     /**
