@@ -33,14 +33,15 @@ import timber.log.Timber;
 public class ReadFBMD {
     public static Single<Integer> processMetadata(Uri uri) throws IOException {
         Map<MetadataType, Metadata> metadataMap = Metadata.readMetadata("/sdcard/Collage/27540498_190811408178624_648539770233527927_n.jpg");
-        IPTC iptc = (IPTC)metadataMap.get(MetadataType.IPTC);
+        Metadata metadata = metadataMap.get(MetadataType.IPTC);
+        //metadata.data.toString();
         Timber.d("time_lag_2"+String.valueOf(System.currentTimeMillis()));
 
-        if(iptc != null) {
+        /*if(iptc != null) {
             for (String key: iptc.getDataSets().keySet()){
                 //study the data
             }
-        }
+        }*/
         return Single.just(1);
     }
     private static void printMetadata(MetadataEntry entry, String indent, String increment) {
