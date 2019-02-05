@@ -43,11 +43,11 @@ class UploadThumbnailRenderer extends Renderer<UploadModel.UploadItem> {
     @Override
     public void render() {
         UploadModel.UploadItem content = getContent();
-        Uri uri = Uri.parse(content.mediaUri.toString());
+        Uri uri = Uri.parse(content.getMediaUri().toString());
         background.setImageURI(Uri.fromFile(new File(String.valueOf(uri))));
-        background.setAlpha(content.selected ? 1.0f : 0.5f);
-        space.setVisibility(content.first ? View.VISIBLE : View.GONE);
-        error.setVisibility(content.visited && content.error ? View.VISIBLE : View.GONE);
+        background.setAlpha(content.isSelected() ? 1.0f : 0.5f);
+        space.setVisibility(content.isFirst() ? View.VISIBLE : View.GONE);
+        error.setVisibility(content.isVisited() && content.isError() ? View.VISIBLE : View.GONE);
     }
 
 }

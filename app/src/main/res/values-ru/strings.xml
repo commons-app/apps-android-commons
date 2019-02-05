@@ -453,5 +453,6 @@
   <string name="no_image">Нет использованных изображений</string>
   <string name="no_image_reverted">Нет откаченых изображений</string>
   <string name="no_image_uploaded">Нет загруженных изображений</string>
+  <string name="no_notification">У вас нет непрочитанных уведомлений</string>
   <string name="share_logs_using">Поделиться лог-файлами</string>
 </resources>

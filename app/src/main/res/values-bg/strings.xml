@@ -145,5 +145,9 @@
   <string name="no_image">Няма използвани изображения</string>
   <string name="no_image_reverted">Няма върнати изображения</string>
   <string name="no_image_uploaded">Няма качени изображения</string>
+  <string name="no_notification">Нямате непрочетени известия</string>
   <string name="share_logs_using">Споделяне на дневници, използвайки</string>
+  <string name="error_occurred_in_picking_images">Възникна грешка при избирането на изображенията</string>
+  <string name="image_chooser_title">Изберете изображения за качване</string>
+  <string name="please_wait">Моля, изчакайте...</string>
 </resources>

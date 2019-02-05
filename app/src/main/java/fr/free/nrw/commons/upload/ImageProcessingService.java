@@ -44,7 +44,6 @@ public class ImageProcessingService {
                                   MediaWikiApi mwApi) {
         this.fileUtilsWrapper = fileUtilsWrapper;
         this.bitmapRegionDecoderWrapper = bitmapRegionDecoderWrapper;
-
         this.imageUtilsWrapper = imageUtilsWrapper;
         this.mwApi = mwApi;
     }
@@ -81,86 +80,80 @@ public class ImageProcessingService {
         });
     }
 
-    public Single<Integer> checkFBMD(String filePath) {
-        try {
-            return ReadFBMD.processMetadata(filePath);
-        } catch (IOException e) {
-            return Single.just(ImageUtils.FILE_FBMD);
+        public Single<Integer> checkFBMD (String filePath){
+            try {
+                return ReadFBMD.processMetadata(filePath);
+            } catch (IOException e) {
+                return Single.just(ImageUtils.FILE_FBMD);
+            }
+        }
+
+
+        /**
+         * Checks item title
+         * - empty title
+         * - existing title
+         * @param uploadItem
+         * @return
+         */
+        private Single<Integer> validateItemTitle (UploadModel.UploadItem uploadItem){
+            Timber.d("Checking for image title %s", uploadItem.getTitle());
+            Title title = uploadItem.getTitle();
+            if (title.isEmpty()) {
+                return Single.just(EMPTY_TITLE);
+            }
+
+            return Single.fromCallable(() -> mwApi.fileExistsWithName(uploadItem.getFileName()))
+                    .map(doesFileExist -> {
+                        Timber.d("Result for valid title is %s", doesFileExist);
+                        return doesFileExist ? FILE_NAME_EXISTS : IMAGE_OK;
+                    });
+        }
+
+
+        /**
+         * Checks for duplicate image
+         * @param filePath file to be checked
+         * @return IMAGE_DUPLICATE or IMAGE_OK
+         */
+        private Single<Integer> checkDuplicateImage (String filePath){
+            Timber.d("Checking for duplicate image %s", filePath);
+            return Single.fromCallable(() ->
+                    fileUtilsWrapper.getFileInputStream(filePath))
+                    .map(fileUtilsWrapper::getSHA1)
+                    .map(mwApi::existingFile)
+                    .map(b -> {
+                        Timber.d("Result for duplicate image %s", b);
+                        return b ? ImageUtils.IMAGE_DUPLICATE : ImageUtils.IMAGE_OK;
+                    });
+        }
+
+        /**
+         * Checks for dark image
+         * @param filePath file to be checked
+         * @return IMAGE_DARK or IMAGE_OK
+         */
+        private Single<Integer> checkDarkImage (String filePath){
+            Timber.d("Checking for dark image %s", filePath);
+            return Single.fromCallable(() ->
+                    fileUtilsWrapper.getFileInputStream(filePath))
+                    .map(file -> bitmapRegionDecoderWrapper.newInstance(file, false))
+                    .flatMap(imageUtilsWrapper::checkIfImageIsTooDark);
+        }
+
+        /**
+         * Checks for image geolocation
+         * @param filePath file to be checked
+         * @return IMAGE_GEOLOCATION_DIFFERENT or IMAGE_OK
+         */
+        private Single<Integer> checkImageGeoLocation (Place place, String filePath){
+            Timber.d("Checking for image geolocation %s", filePath);
+            if (place == null || StringUtils.isNullOrWhiteSpace(place.getWikiDataEntityId())) {
+                return Single.just(ImageUtils.IMAGE_OK);
+            }
+            return Single.fromCallable(() -> filePath)
+                    .map(fileUtilsWrapper::getGeolocationOfFile)
+                    .flatMap(geoLocation -> imageUtilsWrapper.checkImageGeolocationIsDifferent(geoLocation, place.getLocation()));
         }
     }
 
-    /**
-     * Checks item title
-     * - empty title
-     * - existing title
-     * @param uploadItem
-     * @return
-     */
-    private Single<Integer> validateItemTitle(UploadModel.UploadItem uploadItem) {
-        Timber.d("Checking for image title %s", uploadItem.getTitle());
-        Title title = uploadItem.getTitle();
-        if (title.isEmpty()) {
-            return Single.just(EMPTY_TITLE);
-        }
-
-        return Single.fromCallable(() -> mwApi.fileExistsWithName(uploadItem.getFileName()))
-                .map(doesFileExist -> {
-                    Timber.d("Result for valid title is %s", doesFileExist);
-                    return doesFileExist ? FILE_NAME_EXISTS : IMAGE_OK;
-                });
-    }
-
-    /**
-     * Check image quality before upload
-     * - checks duplicate image
-     * - checks dark image
-     * - checks geolocation for image
-     */
-    public Single<Integer> checkImageQuality(Place place, String filePath) {
-        return Single.zip(
-                checkDuplicateImage(filePath),
-                checkImageGeoLocation(place, filePath),
-                checkDarkImage(filePath), //Returns IMAGE_DARK or IMAGE_OK
-                (dupe, wrongGeo, dark) -> dupe | wrongGeo | dark);
-
-    }
-
-    /**
-     * Checks for duplicate image
-     * @param filePath file to be checked
-     * @return IMAGE_DUPLICATE or IMAGE_OK
-     */
-    private Single<Integer> checkDuplicateImage(String filePath) {
-        return Single.fromCallable(() ->
-                fileUtilsWrapper.getFileInputStream(filePath))
-                .map(fileUtilsWrapper::getSHA1)
-                .map(mwApi::existingFile)
-                .map(b -> b ? ImageUtils.IMAGE_DUPLICATE : ImageUtils.IMAGE_OK);
-    }
-
-    /**
-     * Checks for dark image
-     * @param filePath file to be checked
-     * @return IMAGE_DARK or IMAGE_OK
-     */
-    private Single<Integer> checkDarkImage(String filePath) {
-        return Single.fromCallable(() ->
-                fileUtilsWrapper.getFileInputStream(filePath))
-                .map(file -> bitmapRegionDecoderWrapper.newInstance(file, false))
-                .flatMap(imageUtilsWrapper::checkIfImageIsTooDark);
-    }
-
-    /**
-     * Checks for image geolocation
-     * @param filePath file to be checked
-     * @return IMAGE_GEOLOCATION_DIFFERENT or IMAGE_OK
-     */
-    private Single<Integer> checkImageGeoLocation(Place place, String filePath) {
-        if (place == null || StringUtils.isNullOrWhiteSpace(place.getWikiDataEntityId())) {
-            return Single.just(ImageUtils.IMAGE_OK);
-        }
-        return Single.fromCallable(() -> filePath)
-                .map(fileUtilsWrapper::getGeolocationOfFile)
-                .flatMap(geoLocation -> imageUtilsWrapper.checkImageGeolocationIsDifferent(geoLocation, place.getLocation()));
-    }
-}
