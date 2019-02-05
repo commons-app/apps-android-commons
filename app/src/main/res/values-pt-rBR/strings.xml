@@ -445,5 +445,6 @@
   <string name="no_image">Nenhuma imagem usada</string>
   <string name="no_image_reverted">Nenhuma imagem revertida</string>
   <string name="no_image_uploaded">Nenhuma imagem enviada</string>
+  <string name="no_notification">Você não tem notificações não lidas</string>
   <string name="share_logs_using">Compartilhar registros usando</string>
 </resources>

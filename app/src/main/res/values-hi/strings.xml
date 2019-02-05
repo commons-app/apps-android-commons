@@ -16,6 +16,7 @@
 * Smtchahal
 * Swapnil.Karambelkar
 * चक्रपाणी
+* संजीव कुमार
 -->
 <resources>
   <string name="title_activity_explore">खोजें</string>
@@ -396,4 +397,5 @@
   <string name="no_image">कोई चित्र उपयोग नहीं हुआ</string>
   <string name="no_image_reverted">कोई चित्र वापस नहीं लाया</string>
   <string name="no_image_uploaded">कोई चित्र अपलोड नहीं किया</string>
+  <string name="no_notification">आपके पास कोई अपठित सूचना नहीं है</string>
 </resources>

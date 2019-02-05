@@ -44,6 +44,7 @@ import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.MediaDataExtractor;
 import fr.free.nrw.commons.MediaWikiImageView;
 import fr.free.nrw.commons.R;
+import fr.free.nrw.commons.Utils;
 import fr.free.nrw.commons.auth.SessionManager;
 import fr.free.nrw.commons.category.CategoryDetailsActivity;
 import fr.free.nrw.commons.contributions.ContributionsFragment;
@@ -385,9 +386,7 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
     @OnClick(R.id.copyWikicode)
     public void onCopyWikicodeClicked(){
         String data = "[[" + media.getFilename() + "|thumb|" + media.getDescription() + "]]";
-        ClipboardManager clipboard = (ClipboardManager) getContext().getApplicationContext().getSystemService(CLIPBOARD_SERVICE);
-        clipboard.setPrimaryClip(ClipData.newPlainText("wikiCode", data));
-
+        Utils.copy("wikiCode",data,getContext());
         Timber.d("Generated wikidata copy code: %s", data);
 
         Toast.makeText(getContext(), getString(R.string.wikicode_copied), Toast.LENGTH_SHORT).show();
