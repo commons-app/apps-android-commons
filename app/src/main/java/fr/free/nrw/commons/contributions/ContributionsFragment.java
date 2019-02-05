@@ -31,7 +31,6 @@ import android.widget.CheckBox;
 import android.widget.Toast;
 
 import java.util.ArrayList;
-import java.util.concurrent.CountDownLatch;
 
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -56,7 +55,6 @@ import fr.free.nrw.commons.nearby.NearbyController;
 import fr.free.nrw.commons.nearby.NearbyNotificationCardView;
 import fr.free.nrw.commons.nearby.Place;
 import fr.free.nrw.commons.notification.NotificationController;
-import fr.free.nrw.commons.notification.UnreadNotificationsCheckAsync;
 import fr.free.nrw.commons.settings.Prefs;
 import fr.free.nrw.commons.upload.UploadService;
 import fr.free.nrw.commons.utils.ConfigUtils;
@@ -84,31 +82,24 @@ public class ContributionsFragment
                     ContributionsListFragment.SourceRefresher,
                     LocationUpdateListener,ICampaignsView
                     {
-    @Inject
-    @Named("default_preferences")
-    BasicKvStore defaultKvStore;
-    @Inject
-    ContributionDao contributionDao;
-    @Inject
-    MediaWikiApi mediaWikiApi;
-    @Inject
-    NotificationController notificationController;
-    @Inject
-    NearbyController nearbyController;
+    @Inject @Named("default_preferences") BasicKvStore defaultKvStore;
+    @Inject ContributionDao contributionDao;
+    @Inject MediaWikiApi mediaWikiApi;
+                        @Inject NearbyController nearbyController;
 
     private ArrayList<DataSetObserver> observersWaitingForLoad = new ArrayList<>();
-    private Cursor allContributions;
     private UploadService uploadService;
     private boolean isUploadServiceConnected;
     private CompositeDisposable compositeDisposable = new CompositeDisposable();
-    CountDownLatch waitForContributionsListFragment = new CountDownLatch(1);
 
     private ContributionsListFragment contributionsListFragment;
     private MediaDetailPagerFragment mediaDetailPagerFragment;
     public static final String CONTRIBUTION_LIST_FRAGMENT_TAG = "ContributionListFragmentTag";
     public static final String MEDIA_DETAIL_PAGER_FRAGMENT_TAG = "MediaDetailFragmentTag";
 
-    public NearbyNotificationCardView nearbyNotificationCardView;
+    @BindView(R.id.card_view_nearby) public NearbyNotificationCardView nearbyNotificationCardView;
+    @BindView(R.id.campaigns_view) CampaignView campaignView;
+
     private Disposable placesDisposable;
     private LatLng curLatLng;
 
@@ -120,10 +111,7 @@ public class ContributionsFragment
     private CheckBox checkBox;
     private CampaignsPresenter presenter;
 
-
-    @BindView(R.id.campaigns_view) CampaignView campaignView;
-
-                        /**
+    /**
      * Since we will need to use parent activity on onAuthCookieAcquired, we have to wait
      * fragment to be attached. Latch will be responsible for this sync.
      */
@@ -133,6 +121,9 @@ public class ContributionsFragment
             uploadService = (UploadService) ((HandlerService.HandlerServiceLocalBinder) binder)
                     .getService();
             isUploadServiceConnected = true;
+            if (contributionsListFragment.getAdapter() != null) {
+                ((ContributionsListAdapter)contributionsListFragment.getAdapter()).setUploadService(uploadService);
+            }
         }
 
         @Override
@@ -156,7 +147,6 @@ public class ContributionsFragment
         presenter = new CampaignsPresenter();
         presenter.onAttachView(this);
         campaignView.setVisibility(View.GONE);
-        nearbyNotificationCardView = view.findViewById(R.id.card_view_nearby);
         checkBoxView = View.inflate(getActivity(), R.layout.nearby_permission_dialog, null);
         checkBox = (CheckBox) checkBoxView.findViewById(R.id.never_ask_again);
         checkBox.setOnCheckedChangeListener((buttonView, isChecked) -> {
@@ -220,7 +210,6 @@ public class ContributionsFragment
         if (((MainActivity)getActivity()).isAuthCookieAcquired && !isFragmentAttachedBefore) {
             onAuthCookieAcquired(((MainActivity)getActivity()).uploadServiceIntent);
             isFragmentAttachedBefore = true;
-            new UnreadNotificationsCheckAsync((MainActivity) getActivity(), notificationController).execute();
 
         }
     }
@@ -322,7 +311,6 @@ public class ContributionsFragment
 
             contributionsListFragment.clearSyncMessage();
             notifyAndMigrateDataSetObservers();
-
             ((ContributionsListAdapter)contributionsListFragment.getAdapter()).setUploadService(uploadService);
         }
     }
@@ -357,7 +345,6 @@ public class ContributionsFragment
         if (getActivity() != null) { // If fragment is attached to parent activity
             getActivity().bindService(uploadServiceIntent, uploadServiceConnection, Context.BIND_AUTO_CREATE);
             isUploadServiceConnected = true;
-            allContributions = contributionDao.loadAllContributions();
             getActivity().getSupportLoaderManager().initLoader(0, null, ContributionsFragment.this);
         }
 
@@ -485,14 +472,6 @@ public class ContributionsFragment
 
     public void betaSetUploadCount(int betaUploadCount) {
         displayUploadCount(betaUploadCount);
-    }
-
-    /**
-     * Updates notification indicator on toolbar to indicate there are unread notifications
-     * @param isThereUnreadNotifications true if user checked notifications before last notification date
-     */
-    public void updateNotificationsNotification(boolean isThereUnreadNotifications) {
-        ((MainActivity)getActivity()).updateNotificationIcon(isThereUnreadNotifications);
     }
 
     @Override
@@ -636,10 +615,11 @@ public class ContributionsFragment
             Place closestNearbyPlace = nearbyPlacesInfo.placeList.get(0);
             String distance = formatDistanceBetween(curLatLng, closestNearbyPlace.location);
             closestNearbyPlace.setDistance(distance);
-            nearbyNotificationCardView.updateContent (true, closestNearbyPlace);
+            nearbyNotificationCardView.updateContent(closestNearbyPlace);
+            nearbyNotificationCardView.setVisibility(View.VISIBLE);
         } else {
             // Means that no close nearby place is found
-            nearbyNotificationCardView.updateContent (false, null);
+            nearbyNotificationCardView.setVisibility(View.GONE);
         }
     }
 

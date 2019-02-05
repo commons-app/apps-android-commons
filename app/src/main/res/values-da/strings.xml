@@ -355,4 +355,6 @@
   <string name="ends_on">Slutter den:</string>
   <string name="display_campaigns">Vis kampagner</string>
   <string name="no_image">Ingen billeder brugt</string>
+  <string name="share_logs_using">Del logs ved hjælp af</string>
+  <string name="please_wait">Vent venligst…</string>
 </resources>

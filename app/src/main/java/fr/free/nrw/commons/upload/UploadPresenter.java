@@ -1,12 +1,12 @@
 package fr.free.nrw.commons.upload;
 
 import android.annotation.SuppressLint;
-import android.net.Uri;
+import android.content.Context;
 
 import java.lang.reflect.Proxy;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -15,12 +15,12 @@ import javax.inject.Singleton;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.category.CategoriesModel;
 import fr.free.nrw.commons.contributions.Contribution;
+import fr.free.nrw.commons.contributions.UploadableFile;
 import fr.free.nrw.commons.kvstore.BasicKvStore;
-import fr.free.nrw.commons.mwapi.MediaWikiApi;
+import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.nearby.Place;
 import fr.free.nrw.commons.settings.Prefs;
-import fr.free.nrw.commons.utils.ImageUtils;
-import io.reactivex.Completable;
+import fr.free.nrw.commons.utils.StringUtils;
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
@@ -31,16 +31,13 @@ import static fr.free.nrw.commons.utils.ImageUtils.EMPTY_TITLE;
 import static fr.free.nrw.commons.utils.ImageUtils.FILE_NAME_EXISTS;
 import static fr.free.nrw.commons.utils.ImageUtils.IMAGE_KEEP;
 import static fr.free.nrw.commons.utils.ImageUtils.IMAGE_OK;
+import static fr.free.nrw.commons.utils.ImageUtils.getErrorMessageForResult;
 
 /**
  * The MVP pattern presenter of Upload GUI
  */
 @Singleton
 public class UploadPresenter {
-
-    private final UploadModel uploadModel;
-    private final UploadController uploadController;
-    private final MediaWikiApi mediaWikiApi;
 
     private static final UploadView DUMMY = (UploadView) Proxy.newProxyInstance(UploadView.class.getClassLoader(),
             new Class[]{UploadView.class}, (proxy, method, methodArgs) -> null);
@@ -53,64 +50,54 @@ public class UploadPresenter {
     @UploadView.UploadPage
     private int currentPage = UploadView.PLEASE_WAIT;
 
-    @Inject @Named("default_preferences") BasicKvStore defaultKvStore;
+    private final UploadModel uploadModel;
+    private final UploadController uploadController;
+    private final Context context;
+    private final BasicKvStore defaultKvStore;
+    private final JsonKvStore directKvStore;
 
     @Inject
     UploadPresenter(UploadModel uploadModel,
                     UploadController uploadController,
-                    MediaWikiApi mediaWikiApi) {
+                    Context context,
+                    @Named("default_preferences") BasicKvStore defaultKvStore,
+                    @Named("direct_nearby_upload_prefs") JsonKvStore directKvStore) {
         this.uploadModel = uploadModel;
         this.uploadController = uploadController;
-        this.mediaWikiApi = mediaWikiApi;
+        this.context = context;
+        this.defaultKvStore = defaultKvStore;
+        this.directKvStore = directKvStore;
     }
 
-    void receive(Uri mediaUri, String mimeType, String source) {
-        receive(Collections.singletonList(mediaUri), mimeType, source);
-    }
-
-    /**
+   /**
      * Passes the items received to {@link #uploadModel} and displays the items.
      *
      * @param media    The Uri's of the media being uploaded.
-     * @param mimeType the mimeType of the files.
      * @param source   File source from {@link Contribution.FileSource}
      */
     @SuppressLint("CheckResult")
-    void receive(List<Uri> media, String mimeType, @Contribution.FileSource String source) {
-        Completable.fromRunnable(() -> uploadModel.receive(media, mimeType, source, similarImageInterface))
+    void receive(List<UploadableFile> media,
+                 @Contribution.FileSource String source,
+                 Place place) {
+        Observable<UploadItem> uploadItemObservable = uploadModel
+                .preProcessImages(media, place, source, similarImageInterface);
+
+        uploadItemObservable
+                .toList()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(() -> {
-                    updateCards();
-                    updateLicenses();
-                    updateContent();
-                    if (uploadModel.isShowingItem())
-                        uploadModel.subscribeBadPicture(this::handleBadPicture);
-                }, Timber::e);
+                .subscribe(uploadItems -> onImagesProcessed(uploadItems, place),
+                        throwable -> Timber.e(throwable, "Error occurred in processing images"));
     }
 
-    /**
-     * Passes the direct upload item received to {@link #uploadModel} and displays the items.
-     *
-     * @param media The Uri's of the media being uploaded.
-     * @param mimeType the mimeType of the files.
-     * @param source File source from {@link Contribution.FileSource}
-     */
-    @SuppressLint("CheckResult")
-    void receiveDirect(Uri media, String mimeType,
-                       @Contribution.FileSource String source,
-                       Place place) {
-        Completable.fromRunnable(() -> uploadModel.receiveDirect(media, mimeType, source, place, similarImageInterface))
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(() -> {
-                    updateCards();
-                    updateLicenses();
-                    updateContent();
-                    if (uploadModel.isShowingItem())
-                        uploadModel.subscribeBadPicture(this::handleBadPicture);
-                }, Timber::e);
+    private void onImagesProcessed(List<UploadItem> uploadItems, Place place) {
+        uploadModel.onItemsProcessed(place, uploadItems);
+        updateCards();
+        updateLicenses();
+        updateContent();
+        uploadModel.subscribeBadPicture(this::handleBadImage, false);
     }
+
     /**
      * Sets the license to parameter and updates {@link UploadActivity}
      *
@@ -129,10 +116,24 @@ public class UploadPresenter {
     @SuppressLint("CheckResult")
     void handleNext(Title title,
                     List<Description> descriptions) {
-        validateCurrentItemTitle()
+        Timber.e("Inside handleNext");
+        view.showProgressDialog();
+        uploadModel.getImageQuality(uploadModel.getCurrentItem(), true)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(errorCode -> handleImage(errorCode, title, descriptions));
+                .subscribe(imageResult -> handleImage(title, descriptions, imageResult),
+                        throwable -> Timber.e(throwable, "Error occurred while handling image"));
+    }
+
+    private void handleImage(Title title, List<Description> descriptions, Integer imageResult) {
+        view.hideProgressDialog();
+        if (imageResult == IMAGE_KEEP || imageResult == IMAGE_OK) {
+            Timber.d("Set title and desc; Show next uploaded item");
+            setTitleAndDescription(title, descriptions);
+            nextUploadedItem();
+        } else {
+            handleBadImage(imageResult);
+        }
     }
 
     /**
@@ -148,64 +149,46 @@ public class UploadPresenter {
         }
     }
 
-    private void handleImage(Integer errorCode, Title title, List<Description> descriptions) {
+    private void handleBadImage(Integer errorCode) {
+        Timber.d("Handle bad picture with error code %d", errorCode);
+        if (errorCode >= 8) { // If location of image and nearby does not match, then set shared preferences to disable wikidata edits
+            directKvStore.putBoolean("Picture_Has_Correct_Location", false);
+        }
+
         switch (errorCode) {
             case EMPTY_TITLE:
+                Timber.d("Title is empty. Showing toast");
                 view.showErrorMessage(R.string.add_title_toast);
                 break;
             case FILE_NAME_EXISTS:
-                if(getCurrentItem().imageQuality.getValue().equals(IMAGE_KEEP)) {
-                    setTitleAndDescription(title, descriptions);
-                    nextUploadedItem();
-                } else {
-                    view.showDuplicatePicturePopup();
-                }
+                Timber.d("Trying to show duplicate picture popup");
+                view.showDuplicatePicturePopup();
                 break;
-            case IMAGE_OK:
             default:
-                setTitleAndDescription(title, descriptions);
-                nextUploadedItem();
+                String errorMessageForResult = getErrorMessageForResult(context, errorCode);
+                if (StringUtils.isNullOrWhiteSpace(errorMessageForResult)) {
+                    return;
+                }
+                view.showBadPicturePopup(errorMessageForResult);
         }
     }
 
     private void nextUploadedItem() {
+        Timber.d("Trying to show next uploaded item");
         uploadModel.next();
         updateContent();
-        if (uploadModel.isShowingItem()) {
-            uploadModel.subscribeBadPicture(this::handleBadPicture);
-        }
+        uploadModel.subscribeBadPicture(this::handleBadImage, false);
         view.dismissKeyboard();
     }
 
     private void setTitleAndDescription(Title title, List<Description> descriptions) {
+        Timber.d("setTitleAndDescription: Setting title and desc");
         uploadModel.setCurrentTitleAndDescriptions(title, descriptions);
-    }
-
-    private Title getCurrentImageTitle() {
-        return getCurrentItem().title;
     }
 
     String getCurrentImageFileName() {
         UploadItem currentItem = getCurrentItem();
-        return currentItem.title + "." + uploadModel.getCurrentItem().fileExt;
-    }
-
-    @SuppressLint("CheckResult")
-    private Observable<Integer> validateCurrentItemTitle() {
-        Title title = getCurrentImageTitle();
-        if (title.isEmpty()) {
-            view.showErrorMessage(R.string.add_title_toast);
-            return Observable.just(EMPTY_TITLE);
-        }
-
-        return Observable.fromCallable(() -> mediaWikiApi.fileExistsWithName(getCurrentImageFileName()))
-                .subscribeOn(Schedulers.io())
-                .map(doesFileExist -> {
-                    if (doesFileExist) {
-                        return FILE_NAME_EXISTS;
-                    }
-                    return IMAGE_OK;
-                });
+        return currentItem.getFileName();
     }
 
     /**
@@ -214,9 +197,7 @@ public class UploadPresenter {
     void handlePrevious() {
         uploadModel.previous();
         updateContent();
-        if (uploadModel.isShowingItem()) {
-            uploadModel.subscribeBadPicture(this::handleBadPicture);
-        }
+        uploadModel.subscribeBadPicture(this::handleBadImage, false);
         view.dismissKeyboard();
     }
 
@@ -243,20 +224,10 @@ public class UploadPresenter {
      * Called by the map button on the right card in {@link UploadActivity}
      */
     void openCoordinateMap() {
-        GPSExtractor gpsObj = uploadModel.getCurrentItem().gpsCoords;
+        GPSExtractor gpsObj = uploadModel.getCurrentItem().getGpsCoords();
         if (gpsObj != null && gpsObj.imageCoordsExists) {
             view.launchMapActivity(gpsObj.getDecLatitude() + "," + gpsObj.getDecLongitude());
         }
-    }
-
-
-    /**
-     * Called by the image processors when a result is obtained.
-     *
-     * @param result the result returned by the image procesors.
-     */
-    private void handleBadPicture(@ImageUtils.Result int result) {
-        view.showBadPicturePopup(result);
     }
 
     void keepPicture() {
@@ -270,8 +241,7 @@ public class UploadPresenter {
             uploadModel.deletePicture();
             updateCards();
             updateContent();
-            if (uploadModel.isShowingItem())
-                uploadModel.subscribeBadPicture(this::handleBadPicture);
+            uploadModel.subscribeBadPicture(this::handleBadImage, false);
             view.dismissKeyboard();
         }
     }
@@ -375,7 +345,7 @@ public class UploadPresenter {
         view.setPreviousEnabled(uploadModel.isPreviousAvailable());
         view.setSubmitEnabled(uploadModel.isSubmitAvailable());
 
-        view.setBackground(uploadModel.getCurrentItem().mediaUri);
+        view.setBackground(uploadModel.getCurrentItem().getMediaUri());
 
         view.updateBottomCardContent(uploadModel.getCurrentStep(),
                 uploadModel.getStepCount(),
@@ -384,7 +354,7 @@ public class UploadPresenter {
 
         view.updateTopCardContent();
 
-        GPSExtractor gpsObj = uploadModel.getCurrentItem().gpsCoords;
+        GPSExtractor gpsObj = uploadModel.getCurrentItem().getGpsCoords();
         view.updateRightCardContent(gpsObj != null && gpsObj.imageCoordsExists);
 
         view.updateSubtitleVisibility(uploadModel.getCount());
@@ -429,8 +399,8 @@ public class UploadPresenter {
     List<String> getImageTitleList() {
         List<String> titleList = new ArrayList<>();
         for (UploadItem item : uploadModel.getUploads()) {
-            if (item.title.isSet()) {
-                titleList.add(item.title.toString());
+            if (item.getTitle().isSet()) {
+                titleList.add(item.getTitle().toString());
             }
         }
         return titleList;

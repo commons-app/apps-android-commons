@@ -12,6 +12,7 @@
 * Mormegil
 * Patriccck
 * Spotter
+* Vlad5250
 * Vojtěch Dostál
 * Walter Klosse
 -->
@@ -116,8 +117,8 @@
   <string name="menu_retry_upload">Opakovat</string>
   <string name="menu_cancel_upload">Zrušit</string>
   <plurals name="share_license_summary">
-    <item quantity="one">Tento obrázek bude zveřejněn pod licencí %1$s\nTento obrázek bude zveřejněn pod licencí %1$s</item>
-    <item quantity="other">Tento obrázek bude zveřejněn pod licencí %1$s\nTyto obrázky budou zveřejněny pod licencí %1$s</item>
+    <item quantity="one">Tento obrázek bude zveřejněn pod licencí %1$s</item>
+    <item quantity="other">Tyto obrázky budou zveřejněny pod licencí %1$s</item>
   </plurals>
   <string name="media_upload_policy">Odesláním tohoto souboru potvrzuji, že je mým vlastním dílem, neobsahuje autorskoprávně chráněný materiál a nejedná se o selfie a ani jinak neporušuje &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines\"&gt;pravidla a doporučení Wikimedia Commons&lt;/a&gt;.</string>
   <string name="menu_download">Stáhnout</string>

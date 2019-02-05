@@ -443,4 +443,9 @@
   <string name="no_image">沒有圖片被使用到</string>
   <string name="no_image_reverted">沒有圖片被還原回復</string>
   <string name="no_image_uploaded">沒有圖片被上傳</string>
+  <string name="no_notification">您有尚未讀取的通知</string>
+  <string name="share_logs_using">分享日誌使用</string>
+  <string name="error_occurred_in_picking_images">當挑選圖片時發生錯誤</string>
+  <string name="image_chooser_title">選擇要上傳的圖片</string>
+  <string name="please_wait">請稍待…</string>
 </resources>

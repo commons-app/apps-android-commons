@@ -59,6 +59,8 @@ public class SearchImageFragment extends CommonsDaggerSupportFragment {
     @BindView(R.id.imagesNotFound)
     TextView imagesNotFoundView;
     String query;
+    @BindView(R.id.bottomProgressBar)
+    ProgressBar bottomProgressBar;
 
     @Inject RecentSearchesDao recentSearchesDao;
     @Inject MediaWikiApi mwApi;
@@ -135,6 +137,7 @@ public class SearchImageFragment extends CommonsDaggerSupportFragment {
             return;
         }
         progressBar.setVisibility(View.VISIBLE);
+        bottomProgressBar.setVisibility(GONE);
         queryList.clear();
         imagesAdapter.clear();
         Observable.fromCallable(() -> mwApi.searchImages(query,queryList.size()))
@@ -151,7 +154,8 @@ public class SearchImageFragment extends CommonsDaggerSupportFragment {
     @SuppressLint("CheckResult")
     public void addImagesToList(String query) {
         this.query = query;
-        progressBar.setVisibility(View.VISIBLE);
+        bottomProgressBar.setVisibility(View.VISIBLE);
+        progressBar.setVisibility(GONE);
         Observable.fromCallable(() -> mwApi.searchImages(query,queryList.size()))
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -166,6 +170,7 @@ public class SearchImageFragment extends CommonsDaggerSupportFragment {
      */
     private void handlePaginationSuccess(List<Media> mediaList) {
         progressBar.setVisibility(View.GONE);
+        bottomProgressBar.setVisibility(GONE);
         if (mediaList.size() != 0 || !queryList.get(queryList.size() - 1).getFilename().equals(mediaList.get(mediaList.size() - 1).getFilename())) {
             queryList.addAll(mediaList);
             imagesAdapter.addAll(mediaList);
@@ -187,8 +192,8 @@ public class SearchImageFragment extends CommonsDaggerSupportFragment {
             initErrorView();
         }
         else {
-
-            progressBar.setVisibility(View.GONE);
+            bottomProgressBar.setVisibility(View.GONE);
+            progressBar.setVisibility(GONE);
             imagesAdapter.addAll(mediaList);
             imagesAdapter.notifyDataSetChanged();
             ((SearchActivity)getContext()).viewPagerNotifyDataSetChanged();

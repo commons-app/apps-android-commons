@@ -1,7 +1,5 @@
 package fr.free.nrw.commons.contributions;
 
-import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
@@ -16,11 +14,6 @@ import android.widget.ListAdapter;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import com.esafirm.imagepicker.features.ImagePicker;
-import com.esafirm.imagepicker.model.Image;
-
-import java.util.List;
-
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -31,14 +24,9 @@ import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
 import fr.free.nrw.commons.kvstore.BasicKvStore;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.utils.ConfigUtils;
-import fr.free.nrw.commons.utils.ImageUtils;
-import fr.free.nrw.commons.utils.IntentUtils;
 
 import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
-import static fr.free.nrw.commons.contributions.ContributionController.CAMERA_UPLOAD_REQUEST_CODE;
-import static fr.free.nrw.commons.contributions.ContributionController.GALLERY_UPLOAD_REQUEST_CODE;
-import static fr.free.nrw.commons.contributions.ContributionController.MULTIPLE_UPLOAD_IMAGE_LIMIT;
 
 /**
  * Created by root on 01.06.2018.
@@ -104,8 +92,8 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment {
 
     private void setListeners() {
         fabPlus.setOnClickListener(view -> animateFAB(isFabOpen));
-        fabCamera.setOnClickListener(view -> controller.initiateCameraPick(this, CAMERA_UPLOAD_REQUEST_CODE));
-        fabGallery.setOnClickListener(view -> controller.initiateGalleryPick(this, MULTIPLE_UPLOAD_IMAGE_LIMIT, GALLERY_UPLOAD_REQUEST_CODE));
+        fabCamera.setOnClickListener(view -> controller.initiateCameraPick(getActivity()));
+        fabGallery.setOnClickListener(view -> controller.initiateGalleryPick(getActivity(), true));
     }
 
     private void animateFAB(boolean isFabOpen) {
@@ -127,25 +115,6 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment {
             this.isFabOpen=!isFabOpen;
         }
     }
-
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        ContributionsFragment parentFragment = (ContributionsFragment)getParentFragment();
-        parentFragment.waitForContributionsListFragment.countDown();
-    }
-
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (IntentUtils.shouldContributionsListHandle(requestCode, resultCode, data)) {
-            List<Image> images = ImagePicker.getImages(data);
-            Intent shareIntent = controller.handleImagesPicked(ImageUtils.getUriListFromImages(images), requestCode);
-            startActivity(shareIntent);
-        } else {
-            super.onActivityResult(requestCode, resultCode, data);
-        }
-    }
-
 
     /**
      * Responsible to set progress bar invisible and visible

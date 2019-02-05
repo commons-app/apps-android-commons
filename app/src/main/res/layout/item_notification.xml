@@ -1,10 +1,36 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:foreground="?selectableItemBackground"
     android:minHeight="72dp">
+    <com.daimajia.swipe.SwipeLayout android:layout_height="match_parent"
+        android:layout_width="match_parent"
+        android:id="@+id/swipeLayout"
+        >
+
+    <LinearLayout
+        android:id="@+id/bottom"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <RelativeLayout
+            android:id="@+id/bottom_wrapper_child1"
+            android:background="@color/deleteRed"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <ImageView
+                android:id="@+id/star"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                app:srcCompat="@drawable/ic_done_black_24dp"
+                android:layout_width="20dp"
+                android:layout_height="20dp" />
+        </RelativeLayout>
+    </LinearLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
 
     <android.support.v7.widget.AppCompatImageView
         android:id="@+id/icon"
@@ -16,9 +42,9 @@
         android:background="@android:color/white"
         android:scaleType="centerCrop"
         app:srcCompat="@drawable/ic_message_black_24dp"
-        app:tint="@color/primaryDarkColor"
-        />
 
+        />
+<!--app:tint="@color/primaryDarkColor"-->
     <TextView
         android:id="@+id/time"
         android:layout_width="wrap_content"
@@ -47,4 +73,6 @@
         android:textAppearance="@style/TextAppearance.AppCompat.Body2"
         android:padding="12dp"
         />
+        </RelativeLayout>
+    </com.daimajia.swipe.SwipeLayout>
 </RelativeLayout>

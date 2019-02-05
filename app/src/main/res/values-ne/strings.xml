@@ -126,6 +126,7 @@
   <string name="navigation_item_logout">निर्गमन (लग आउट)</string>
   <string name="navigation_item_info">प्रशिक्षण</string>
   <string name="navigation_item_notification">जानकारीहरू</string>
+  <string name="nearby_info_menu_wikidata_article">विकिडाटा आइटम</string>
   <string name="toggle_view_button">टगल दृश्य</string>
   <string name="search_tab_title_media">मिडिया</string>
   <string name="search_tab_title_categories">श्रेणीहरू</string>

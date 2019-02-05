@@ -76,7 +76,7 @@
   <string name="provider_modifications">تعديلات</string>
   <string name="menu_upload_single">ارفع</string>
   <string name="categories_search_text_hint">تصنيفات البحث</string>
-  <string name="menu_save_categories">احفظ</string>
+  <string name="menu_save_categories">حفظ</string>
   <string name="refresh_button">أنعش</string>
   <string name="display_list_button">القائمة</string>
   <string name="gps_disabled">عطل نظام الملاحة العالمي GPS بجهازك. أترغب في التنشيط؟</string>
@@ -254,7 +254,7 @@
   <string name="upload_problem_do_you_continue">هل ما زلت تريد رفع هذه الصورة؟</string>
   <string name="give_permission">إعطاء السماح</string>
   <string name="use_external_storage">استخدم تخزينا خارجيا</string>
-  <string name="use_external_storage_summary">احفظ الصور الملتقطة بالكاميرا داخل التطبيق على جهازك</string>
+  <string name="use_external_storage_summary">حفظ الصور الملتقطة بالكاميرا داخل التطبيق على جهازك</string>
   <string name="login_to_your_account">تسجيل الدخول إلى حسابك</string>
   <string name="send_log_file">إرسال ملف السجل</string>
   <string name="send_log_file_description">إرسال ملف السجل للمطورين عبر البريد الإلكتروني للمساعدة في تصحيح مشكلات التطبيق. ملاحظة: من المحتمل أن تحتوي السجلات على معلومات تعريف</string>
@@ -443,4 +443,9 @@
   <string name="no_image">لا صور مستخدمة</string>
   <string name="no_image_reverted">لم يتم إرجاع أية صور</string>
   <string name="no_image_uploaded">لا توجد صور مرفوعة</string>
+  <string name="no_notification">ليس لديك إشعار غير مقروء</string>
+  <string name="share_logs_using">مشاركة السجلات باستخدام</string>
+  <string name="error_occurred_in_picking_images">حدث خطأ أثناء التقاط الصور</string>
+  <string name="image_chooser_title">اختيار الصور للرفع</string>
+  <string name="please_wait">الرجاء الانتظار...</string>
 </resources>

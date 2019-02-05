@@ -1,13 +1,11 @@
 package fr.free.nrw.commons.upload;
 
 import android.Manifest;
-import android.animation.LayoutTransition;
 import android.annotation.SuppressLint;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
-import android.support.constraint.ConstraintLayout;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.CardView;
@@ -27,6 +25,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -49,15 +48,19 @@ import butterknife.ButterKnife;
 import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.Utils;
-import fr.free.nrw.commons.auth.AuthenticatedActivity;
 import fr.free.nrw.commons.auth.LoginActivity;
+import fr.free.nrw.commons.auth.SessionManager;
 import fr.free.nrw.commons.category.CategoriesModel;
 import fr.free.nrw.commons.category.CategoryItem;
 import fr.free.nrw.commons.contributions.Contribution;
+import fr.free.nrw.commons.contributions.ContributionController;
+import fr.free.nrw.commons.contributions.UploadableFile;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
 import fr.free.nrw.commons.nearby.Place;
+import fr.free.nrw.commons.theme.BaseActivity;
 import fr.free.nrw.commons.utils.DialogUtil;
+import fr.free.nrw.commons.utils.NetworkUtils;
 import fr.free.nrw.commons.utils.PermissionUtils;
 import fr.free.nrw.commons.utils.StringUtils;
 import fr.free.nrw.commons.utils.ViewUtil;
@@ -67,24 +70,26 @@ import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.schedulers.Schedulers;
 import timber.log.Timber;
 
+import static fr.free.nrw.commons.contributions.Contribution.SOURCE_EXTERNAL;
+import static fr.free.nrw.commons.contributions.ContributionController.ACTION_INTERNAL_UPLOADS;
+import static fr.free.nrw.commons.upload.UploadService.EXTRA_FILES;
 import static fr.free.nrw.commons.utils.ImageUtils.Result;
 import static fr.free.nrw.commons.utils.ImageUtils.getErrorMessageForResult;
-import static fr.free.nrw.commons.wikidata.WikidataConstants.IS_DIRECT_UPLOAD;
 import static fr.free.nrw.commons.wikidata.WikidataConstants.PLACE_OBJECT;
-import static fr.free.nrw.commons.wikidata.WikidataConstants.WIKIDATA_ENTITY_ID_PREF;
-import static fr.free.nrw.commons.wikidata.WikidataConstants.WIKIDATA_ITEM_LOCATION;
 
-public class UploadActivity extends AuthenticatedActivity implements UploadView, SimilarImageInterface {
+public class UploadActivity extends BaseActivity implements UploadView, SimilarImageInterface {
     @Inject MediaWikiApi mwApi;
     @Inject
-    @Named("direct_nearby_upload_prefs")
-    JsonKvStore directKvStore;
+    ContributionController contributionController;
+    @Inject @Named("direct_nearby_upload_prefs") JsonKvStore directKvStore;
     @Inject UploadPresenter presenter;
     @Inject CategoriesModel categoriesModel;
+    @Inject SessionManager sessionManager;
 
     // Main GUI
     @BindView(R.id.backgroundImage) PhotoView background;
-    @BindView(R.id.activity_upload_cards) ConstraintLayout cardLayout;
+    @BindView(R.id.upload_root_layout)
+    RelativeLayout rootLayout;
     @BindView(R.id.view_flipper) ViewFlipper viewFlipper;
 
     // Top Card
@@ -131,6 +136,7 @@ public class UploadActivity extends AuthenticatedActivity implements UploadView,
     private DescriptionsAdapter descriptionsAdapter;
     private RVRendererAdapter<CategoryItem> categoriesAdapter;
     private CompositeDisposable compositeDisposable;
+    private ProgressDialog progressDialog;
 
 
     @SuppressLint("CheckResult")
@@ -244,7 +250,7 @@ public class UploadActivity extends AuthenticatedActivity implements UploadView,
             dismissKeyboard();
         }
         if(isShowingItem) {
-            descriptionsAdapter.setItems(uploadItem.title, uploadItem.descriptions);
+            descriptionsAdapter.setItems(uploadItem.getTitle(), uploadItem.getDescriptions());
             rvDescriptions.setAdapter(descriptionsAdapter);
         }
     }
@@ -375,18 +381,10 @@ public class UploadActivity extends AuthenticatedActivity implements UploadView,
     }
 
     @Override
-    public void showBadPicturePopup(@Result int result) {
-        if (result >= 8 ) { // If location of image and nearby does not match, then set shared preferences to disable wikidata edits
-            directKvStore.putBoolean("Picture_Has_Correct_Location", false);
-        }
-        String errorMessageForResult = getErrorMessageForResult(this, result);
-        if (StringUtils.isNullOrWhiteSpace(errorMessageForResult)) {
-            return;
-        }
-
+    public void showBadPicturePopup(String errorMessage) {
         DialogUtil.showAlertDialog(this,
                 getString(R.string.warning),
-                errorMessageForResult,
+                errorMessage,
                 () -> presenter.deletePicture(),
                 () -> presenter.keepPicture());
     }
@@ -414,6 +412,22 @@ public class UploadActivity extends AuthenticatedActivity implements UploadView,
     }
 
     @Override
+    public void showProgressDialog() {
+        if (progressDialog == null) {
+            progressDialog = new ProgressDialog(this);
+        }
+        progressDialog.setMessage(getString(R.string.please_wait));
+        progressDialog.show();
+    }
+
+    @Override
+    public void hideProgressDialog() {
+        if (progressDialog != null && !isFinishing()) {
+            progressDialog.dismiss();
+        }
+    }
+
+    @Override
     public void launchMapActivity(String decCoords) {
         Utils.handleGeoCoordinates(this, decCoords);
     }
@@ -429,24 +443,11 @@ public class UploadActivity extends AuthenticatedActivity implements UploadView,
     }
 
     @Override
-    protected void onAuthCookieAcquired(String authCookie) {
-        mwApi.setAuthCookie(authCookie);
-    }
-
-
-    @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == CommonsApplication.OPEN_APPLICATION_DETAIL_SETTINGS) {
             //TODO: Confirm if handling manual permission enabled is required
         }
-    }
-
-
-    @Override
-    protected void onAuthFailure() {
-        Toast.makeText(this, R.string.authentication_failed, Toast.LENGTH_LONG).show();
-        finish();
     }
 
     /**
@@ -506,9 +507,6 @@ public class UploadActivity extends AuthenticatedActivity implements UploadView,
     }
 
     private void configureLayout() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
-            cardLayout.getLayoutTransition().enableTransitionType(LayoutTransition.CHANGING);
-        }
         background.setScaleType(ImageView.ScaleType.CENTER_CROP);
         background.setOnScaleChangeListener((scaleFactor, x, y) -> presenter.closeAllCards());
     }
@@ -537,6 +535,10 @@ public class UploadActivity extends AuthenticatedActivity implements UploadView,
     private void configureNavigationButtons() {
         // Navigation next / previous for each image as we're collecting title + description
         next.setOnClickListener(v -> {
+            if (!NetworkUtils.isInternetConnectionEstablished(this)) {
+                ViewUtil.showShortSnackbar(rootLayout, R.string.no_internet);
+                return;
+            }
             setTitleAndDescriptions();
             presenter.handleNext(descriptionsAdapter.getTitle(),
                     descriptionsAdapter.getDescriptions());
@@ -611,7 +613,26 @@ public class UploadActivity extends AuthenticatedActivity implements UploadView,
 
     private void receiveSharedItems() {
         Intent intent = getIntent();
-        String mimeType = intent.getType();
+        String action = intent.getAction();
+        if (Intent.ACTION_SEND.equals(action) || Intent.ACTION_SEND_MULTIPLE.equals(action)) {
+            receiveExternalSharedItems();
+        } else if (ACTION_INTERNAL_UPLOADS.equals(action)) {
+            receiveInternalSharedItems();
+        }
+    }
+
+    private void receiveExternalSharedItems() {
+        List<UploadableFile> uploadableFiles = contributionController.handleExternalImagesPicked(this, getIntent());
+        if (uploadableFiles.isEmpty()) {
+            handleNullMedia();
+            return;
+        }
+
+        presenter.receive(uploadableFiles, SOURCE_EXTERNAL, null);
+    }
+
+    private void receiveInternalSharedItems() {
+        Intent intent = getIntent();
         String source;
 
         if (intent.hasExtra(UploadService.EXTRA_SOURCE)) {
@@ -620,35 +641,21 @@ public class UploadActivity extends AuthenticatedActivity implements UploadView,
             source = Contribution.SOURCE_EXTERNAL;
         }
 
-        Timber.d("Received intent %s with action %s and mimeType %s from source %s",
+        Timber.d("Received intent %s with action %s and from source %s",
                 intent.toString(),
                 intent.getAction(),
-                mimeType,
                 source);
 
-        ArrayList<Uri> urisList = new ArrayList<>();
+        ArrayList<UploadableFile> uploadableFiles = intent.getParcelableArrayListExtra(EXTRA_FILES);
+        Timber.i("Received multiple upload %s", uploadableFiles.size());
 
-        if (Intent.ACTION_SEND.equals(intent.getAction())) {
-            Uri mediaUri = intent.getParcelableExtra(Intent.EXTRA_STREAM);
-            if (mediaUri != null) {
-                urisList.add(mediaUri);
-            }
-        } else if (Intent.ACTION_SEND_MULTIPLE.equals(intent.getAction())) {
-            urisList = intent.getParcelableArrayListExtra(Intent.EXTRA_STREAM);
-            Timber.i("Received multiple upload %s", urisList.size());
-        }
-
-        if (urisList.isEmpty()) {
+        if (uploadableFiles.isEmpty()) {
             handleNullMedia();
             return;
         }
 
-        if (intent.hasExtra(PLACE_OBJECT)) {
-            Place place = intent.getParcelableExtra(PLACE_OBJECT);
-            presenter.receiveDirect(urisList.get(0), mimeType, source, place);
-        } else {
-            presenter.receive(urisList, mimeType, source);
-        }
+        Place place = intent.getParcelableExtra(PLACE_OBJECT);
+        presenter.receive(uploadableFiles, source, place);
 
         resetDirectPrefs();
     }

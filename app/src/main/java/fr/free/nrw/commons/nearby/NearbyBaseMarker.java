@@ -12,7 +12,6 @@ import com.mapbox.mapboxsdk.annotations.Icon;
 import com.mapbox.mapboxsdk.annotations.IconFactory;
 import com.mapbox.mapboxsdk.geometry.LatLng;
 
-import fr.free.nrw.commons.utils.UriDeserializer;
 import fr.free.nrw.commons.utils.UriSerializer;
 
 public class NearbyBaseMarker extends BaseMarkerOptions<NearbyMarker, NearbyBaseMarker> {
@@ -33,10 +32,6 @@ public class NearbyBaseMarker extends BaseMarkerOptions<NearbyMarker, NearbyBase
     }
 
     private NearbyBaseMarker(Parcel in) {
-        Gson gson = new GsonBuilder()
-                .registerTypeAdapter(Uri.class, new UriDeserializer())
-                .create();
-
         position(in.readParcelable(LatLng.class.getClassLoader()));
         snippet(in.readString());
         String iconId = in.readString();
@@ -44,8 +39,7 @@ public class NearbyBaseMarker extends BaseMarkerOptions<NearbyMarker, NearbyBase
         Icon icon = IconFactory.recreate(iconId, iconBitmap);
         icon(icon);
         title(in.readString());
-        String gsonString = in.readString();
-        place(gson.fromJson(gsonString, Place.class));
+        place(in.readParcelable(Place.class.getClassLoader()));
     }
 
     public NearbyBaseMarker place(Place place) {
@@ -74,15 +68,11 @@ public class NearbyBaseMarker extends BaseMarkerOptions<NearbyMarker, NearbyBase
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        Gson gson = new GsonBuilder()
-                .registerTypeAdapter(Uri.class, new UriSerializer())
-                .create();
-
         dest.writeParcelable(position, flags);
         dest.writeString(snippet);
         dest.writeString(icon.getId());
         dest.writeParcelable(icon.getBitmap(), flags);
         dest.writeString(title);
-        dest.writeString(gson.toJson(place));
+        dest.writeParcelable(place, 0);
     }
 }

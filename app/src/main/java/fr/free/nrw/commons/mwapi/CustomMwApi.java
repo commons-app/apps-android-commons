@@ -131,19 +131,19 @@ public class CustomMwApi {
         }
     }
 
-    public CustomApiResult upload(String filename, InputStream file, long length, String text, String comment, String centralAuthToken, String token) throws IOException {
-        return this.upload(filename, file, length, text, comment,centralAuthToken, token, null);
+    public CustomApiResult upload(String filename, InputStream file, long length, String text, String comment, String token) throws IOException {
+        return this.upload(filename, file, length, text, comment, token, null);
     }
 
-    public CustomApiResult upload(String filename, InputStream file, String text, String comment, String centralAuthToken, String token) throws IOException {
-        return this.upload(filename, file, -1, text, comment,centralAuthToken, token, null);
+    public CustomApiResult upload(String filename, InputStream file, String text, String comment, String token) throws IOException {
+        return this.upload(filename, file, -1, text, comment, token, null);
     }
 
-    public CustomApiResult upload(String filename, InputStream file, long length, String text, String comment, String centralAuthToken, String token, ProgressListener uploadProgressListener) throws IOException {
+    public CustomApiResult upload(String filename, InputStream file, long length, String text, String comment, String token, ProgressListener uploadProgressListener) throws IOException {
+        Timber.d("Initiating upload for file %s", filename);
         Http.HttpRequestBuilder builder = Http.multipart(apiURL)
                 .data("action", "upload")
                 .data("token", token)
-                .data("centralauthtoken", centralAuthToken)
                 .data("text", text)
                 .data("ignorewarnings", "1")
                 .data("comment", comment)
@@ -155,7 +155,7 @@ public class CustomMwApi {
             builder.file("file", filename, file);
         }
 
-        return CustomApiResult.fromRequestBuilder(builder, client);
+        return CustomApiResult.fromRequestBuilder("uploadFile", builder, client);
     }
 
     public void logout() throws IOException {
@@ -174,7 +174,7 @@ public class CustomMwApi {
             builder = Http.get(apiURL);
         }
         builder.data(params);
-        return CustomApiResult.fromRequestBuilder(builder, client);
+        return CustomApiResult.fromRequestBuilder(apiURL, builder, client);
     }
 }
 ;

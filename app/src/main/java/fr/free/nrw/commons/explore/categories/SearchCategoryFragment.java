@@ -57,6 +57,8 @@ public class SearchCategoryFragment extends CommonsDaggerSupportFragment {
     @BindView(R.id.imagesNotFound)
     TextView categoriesNotFoundView;
     String query;
+    @BindView(R.id.bottomProgressBar)
+    ProgressBar bottomProgressBar;
 
     @Inject RecentSearchesDao recentSearchesDao;
     @Inject MediaWikiApi mwApi;
@@ -128,7 +130,8 @@ public class SearchCategoryFragment extends CommonsDaggerSupportFragment {
             handleNoInternet();
             return;
         }
-        progressBar.setVisibility(View.VISIBLE);
+        bottomProgressBar.setVisibility(View.VISIBLE);
+        progressBar.setVisibility(GONE);
         queryList.clear();
         categoriesAdapter.clear();
         Observable.fromCallable(() -> mwApi.searchCategory(query,queryList.size()))
@@ -144,7 +147,8 @@ public class SearchCategoryFragment extends CommonsDaggerSupportFragment {
      */
     public void addCategoriesToList(String query) {
         this.query = query;
-        progressBar.setVisibility(View.VISIBLE);
+        bottomProgressBar.setVisibility(View.VISIBLE);
+        progressBar.setVisibility(GONE);
         Observable.fromCallable(() -> mwApi.searchCategory(query,queryList.size()))
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -160,6 +164,7 @@ public class SearchCategoryFragment extends CommonsDaggerSupportFragment {
     private void handlePaginationSuccess(List<String> mediaList) {
         queryList.addAll(mediaList);
         progressBar.setVisibility(View.GONE);
+        bottomProgressBar.setVisibility(GONE);
         categoriesAdapter.addAll(mediaList);
         categoriesAdapter.notifyDataSetChanged();
     }
@@ -178,7 +183,8 @@ public class SearchCategoryFragment extends CommonsDaggerSupportFragment {
         }
         else {
 
-            progressBar.setVisibility(View.GONE);
+            bottomProgressBar.setVisibility(View.GONE);
+            progressBar.setVisibility(GONE);
             categoriesAdapter.addAll(mediaList);
             categoriesAdapter.notifyDataSetChanged();
 
