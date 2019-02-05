@@ -82,7 +82,7 @@ public interface MediaWikiApi {
     Observable<String> allCategories(String filter, int searchCatsLimit);
 
     @NonNull
-    List<Notification> getNotifications() throws IOException;
+    List<Notification> getNotifications(boolean archived) throws IOException;
 
     @NonNull
     boolean markNotificationAsRead(Notification notification) throws IOException;

@@ -10,6 +10,9 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
@@ -47,7 +50,7 @@ public class NotificationActivity extends NavigationBaseActivity {
     @BindView(R.id.container)
     RelativeLayout relativeLayout;
     @BindView(R.id.no_notification_background)
-    ConstraintLayout no_notification;
+    RelativeLayout no_notification;
    /* @BindView(R.id.swipe_bg)
     TextView swipe_bg;*/
     @Inject
@@ -108,27 +111,27 @@ public class NotificationActivity extends NavigationBaseActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         DividerItemDecoration itemDecor = new DividerItemDecoration(recyclerView.getContext(), DividerItemDecoration.VERTICAL);
         recyclerView.addItemDecoration(itemDecor);
-        refresh();
+        refresh(false);
     }
 
-    private void refresh() {
+    private void refresh(boolean archived) {
         if (!NetworkUtils.isInternetConnectionEstablished(this)) {
             progressBar.setVisibility(View.GONE);
             Snackbar.make(relativeLayout, R.string.no_internet, Snackbar.LENGTH_INDEFINITE)
-                    .setAction(R.string.retry, view -> refresh()).show();
+                    .setAction(R.string.retry, view -> refresh(archived)).show();
         } else {
             progressBar.setVisibility(View.VISIBLE);
-            addNotifications();
+            addNotifications(archived);
         }
     }
 
     @SuppressLint("CheckResult")
-    private void addNotifications() {
+    private void addNotifications(boolean archived) {
         Timber.d("Add notifications");
         if (mNotificationWorkerFragment == null) {
             Observable.fromCallable(() -> {
                 progressBar.setVisibility(View.VISIBLE);
-                return controller.getNotifications();
+                return controller.getNotifications(archived);
             })
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
@@ -151,6 +154,32 @@ public class NotificationActivity extends NavigationBaseActivity {
         } else {
             notificationList = mNotificationWorkerFragment.getNotificationList();
             setAdapter(notificationList);
+        }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_notifications, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle item selection
+        switch (item.getItemId()) {
+            case R.id.archived:
+                if (item.getTitle().equals("View archived")) {
+                    refresh(true);
+                    item.setTitle("View unread");
+                    //TODO:SET TITLE,TOOLBAR TEXT AND you have no archived notifications..handle on back pressed
+                }else if (item.getTitle().equals("View unread")) {
+                    refresh(false);
+                    item.setTitle("View archived");
+                }
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
         }
     }
 

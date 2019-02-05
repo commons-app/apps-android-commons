@@ -301,7 +301,7 @@ public class MainActivity extends AuthenticatedActivity implements FragmentManag
 
     @SuppressLint("CheckResult")
     private void setNotificationCount() {
-        Observable.fromCallable(() -> notificationController.getNotifications())
+        Observable.fromCallable(() -> notificationController.getNotifications(false))
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(this::initNotificationViews,
