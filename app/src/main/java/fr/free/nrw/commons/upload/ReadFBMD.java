@@ -50,16 +50,5 @@ public class ReadFBMD {
         }
         return Single.just(ImageUtils.IMAGE_OK);
     }
-    private static void printMetadata(MetadataEntry entry, String indent, String increment) {
-        //logger.info(indent + entry.getKey() (StringUtils.isNullOrEmpty(entry.getValue())? "" : ": " + entry.getValue()));
-        if(entry.isMetadataEntryGroup()) {
-            indent += increment;
-            Collection<MetadataEntry> entries = entry.getMetadataEntries();
-            for(MetadataEntry e : entries) {
-                printMetadata(e, indent, increment);
-            }
-        }
-    }
-
 }
 
