@@ -62,7 +62,7 @@ public class NotificationActivity extends NavigationBaseActivity {
     private NotificationWorkerFragment mNotificationWorkerFragment;
     private RVRendererAdapter<Notification> adapter;
     private List<Notification> notificationList;
-    private boolean isarchivedvisible = false;
+    public static boolean isarchivedvisible = false;
     MenuItem notificationmenuitem;
     Toolbar toolbar;
     TextView nonotificationtext;
@@ -203,7 +203,7 @@ public class NotificationActivity extends NavigationBaseActivity {
                 if (item.getTitle().equals("View archived")) {
                     refresh(true);
                     isarchivedvisible = true;
-                    //TODO:handle on back pressed,disable swipe, strings.xml
+                    //TODO:handle on back pressed,disable swipe, strings.xml,navigation on notification activity
                 }else if (item.getTitle().equals("View unread")) {
                     isarchivedvisible = false;
                     refresh(false);
