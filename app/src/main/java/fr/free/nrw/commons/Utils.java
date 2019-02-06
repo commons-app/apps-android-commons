@@ -1,6 +1,8 @@
 package fr.free.nrw.commons;
 
 import android.content.ActivityNotFoundException;
+import android.content.ClipData;
+import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -236,6 +238,15 @@ public class Utils {
             map.put(kArray[i], vArray[i]);
         }
         return map;
+    }
+    /*
+    *Copies the content to the clipboard
+    *
+    */
+    public static void copy(String label,String text, Context context){
+        ClipboardManager clipboard = (ClipboardManager) context.getSystemService(Context.CLIPBOARD_SERVICE);
+        ClipData clip = ClipData.newPlainText(label, text);
+        clipboard.setPrimaryClip(clip);
     }
 
 }

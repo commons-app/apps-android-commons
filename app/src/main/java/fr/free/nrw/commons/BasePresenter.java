@@ -1,5 +1,7 @@
 package fr.free.nrw.commons;
 
+import android.content.Context;
+
 /**
  * Base presenter, enforcing contracts to atach and detach view
  */

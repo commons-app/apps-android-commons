@@ -116,10 +116,9 @@ public class NearbyNotificationCardView extends SwipableCardView {
 
     /**
      * Pass place information to views.
-     * @param isClosestNearbyPlaceFound false if there are no close place
      * @param place Closes place where we will get information from
      */
-    public void updateContent(boolean isClosestNearbyPlaceFound, Place place) {
+    public void updateContent(Place place) {
         Timber.d("Update nearby card notification content");
         this.setVisibility(VISIBLE);
         cardViewVisibilityState = CardViewVisibilityState.READY;
@@ -131,14 +130,9 @@ public class NearbyNotificationCardView extends SwipableCardView {
         notificationTitle.setVisibility(VISIBLE);
         notificationDistance.setVisibility(VISIBLE);
         notificationIcon.setVisibility(VISIBLE);
+        notificationTitle.setText(place.name);
+        notificationDistance.setText(place.distance);
 
-        if (isClosestNearbyPlaceFound) {
-            notificationTitle.setText(place.name);
-            notificationDistance.setText(place.distance);
-        } else {
-            notificationDistance.setText("");
-            notificationTitle.setText(R.string.no_close_nearby);
-        }
     }
 
     @Override

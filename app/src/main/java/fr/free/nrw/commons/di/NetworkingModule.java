@@ -19,23 +19,33 @@ import fr.free.nrw.commons.BuildConfig;
 import fr.free.nrw.commons.kvstore.BasicKvStore;
 import fr.free.nrw.commons.mwapi.ApacheHttpClientMediaWikiApi;
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
+import fr.free.nrw.commons.mwapi.OkHttpJsonApiClient;
 import fr.free.nrw.commons.utils.UriDeserializer;
 import fr.free.nrw.commons.utils.UriSerializer;
 import okhttp3.Cache;
 import okhttp3.HttpUrl;
 import okhttp3.OkHttpClient;
+import okhttp3.logging.HttpLoggingInterceptor;
+import timber.log.Timber;
 
 @Module
 @SuppressWarnings({"WeakerAccess", "unused"})
 public class NetworkingModule {
+    private static final String WIKIDATA_SPARQL_QUERY_URL = "https://query.wikidata.org/sparql";
+    private final String WIKIMEDIA_CAMPAIGNS_BASE_URL =
+            "https://raw.githubusercontent.com/commons-app/campaigns/master/campaigns.json";
+    private static final String TOOLS_FORGE_URL = "https://tools.wmflabs.org/";
+
     public static final long OK_HTTP_CACHE_SIZE = 10 * 1024 * 1024;
 
     @Provides
     @Singleton
-    public OkHttpClient provideOkHttpClient(Context context) {
+    public OkHttpClient provideOkHttpClient(Context context,
+                                            HttpLoggingInterceptor httpLoggingInterceptor) {
         File dir = new File(context.getCacheDir(), "okHttpCache");
         return new OkHttpClient.Builder().connectTimeout(60, TimeUnit.SECONDS)
             .writeTimeout(60, TimeUnit.SECONDS)
+                .addInterceptor(httpLoggingInterceptor)
             .readTimeout(60, TimeUnit.SECONDS)
             .cache(new Cache(dir, OK_HTTP_CACHE_SIZE))
             .build();
@@ -43,12 +53,34 @@ public class NetworkingModule {
 
     @Provides
     @Singleton
+    public HttpLoggingInterceptor provideHttpLoggingInterceptor() {
+        HttpLoggingInterceptor httpLoggingInterceptor = new HttpLoggingInterceptor(message -> {
+            Timber.tag("OkHttp").d(message);
+        });
+        httpLoggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
+        return httpLoggingInterceptor;
+    }
+
+    @Provides
+    @Singleton
     public MediaWikiApi provideMediaWikiApi(Context context,
                                             @Named("default_preferences") BasicKvStore defaultKvStore,
                                             @Named("category_prefs") BasicKvStore categoryKvStore,
-                                            Gson gson,
-                                            OkHttpClient okHttpClient) {
-        return new ApacheHttpClientMediaWikiApi(context, BuildConfig.WIKIMEDIA_API_HOST, BuildConfig.WIKIDATA_API_HOST, defaultKvStore, categoryKvStore, gson, okHttpClient);
+                                            Gson gson) {
+        return new ApacheHttpClientMediaWikiApi(context, BuildConfig.WIKIMEDIA_API_HOST, BuildConfig.WIKIDATA_API_HOST, defaultKvStore, categoryKvStore, gson);
+    }
+
+    @Provides
+    @Singleton
+    public OkHttpJsonApiClient provideOkHttpJsonApiClient(OkHttpClient okHttpClient,
+                                                          @Named("tools_force") HttpUrl toolsForgeUrl,
+                                                          Gson gson) {
+        return new OkHttpJsonApiClient(okHttpClient,
+                toolsForgeUrl,
+                WIKIDATA_SPARQL_QUERY_URL,
+                WIKIMEDIA_CAMPAIGNS_BASE_URL,
+                BuildConfig.WIKIMEDIA_API_HOST,
+                gson);
     }
 
     @Provides
@@ -57,6 +89,14 @@ public class NetworkingModule {
     @SuppressWarnings("ConstantConditions")
     public HttpUrl provideMwUrl() {
         return HttpUrl.parse(BuildConfig.COMMONS_URL);
+    }
+
+    @Provides
+    @Named("tools_force")
+    @NonNull
+    @SuppressWarnings("ConstantConditions")
+    public HttpUrl provideToolsForgeUrl() {
+        return HttpUrl.parse(TOOLS_FORGE_URL);
     }
 
     /**

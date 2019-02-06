@@ -448,7 +448,7 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
          */
         NearbyMapFragment nearbyMapFragment = getMapFragment();
 
-        if (nearbyMapFragment != null && !nearbyMapFragment.isCurrentLocationMarkerVisible()) {
+        if (nearbyMapFragment != null && !nearbyMapFragment.isCurrentLocationMarkerVisible() && !onOrientationChanged) {
             Timber.d("Do not update the map, user is not seeing current location marker" +
                     " means they are checking around and moving on map");
             return;
