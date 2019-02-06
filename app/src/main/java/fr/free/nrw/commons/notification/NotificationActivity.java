@@ -98,7 +98,7 @@ public class NotificationActivity extends NavigationBaseActivity {
                         snackbar.show();
                         if (notificationList.size()==0){
                             if (isarchivedvisible) {
-                                nonotificationtext.setText("You have no archived notification");
+                                nonotificationtext.setText(R.string.no_archived_notification);
                             }else {
                                 nonotificationtext.setText(R.string.no_notification);
                             }
@@ -157,7 +157,7 @@ public class NotificationActivity extends NavigationBaseActivity {
                         this.notificationList = notificationList;
                         if (notificationList.size()==0){
                             if (archived) {
-                                nonotificationtext.setText("You have no archived notification");
+                                nonotificationtext.setText(R.string.no_archived_notification);
                                 isarchivedvisible = true;
                             }else {
                                 nonotificationtext.setText(R.string.no_notification);
@@ -169,11 +169,11 @@ public class NotificationActivity extends NavigationBaseActivity {
                             setAdapter(notificationList);
                         } if (notificationmenuitem != null) {
                             if (archived) {
-                                notificationmenuitem.setTitle("View unread");
-                                getSupportActionBar().setTitle("Notification(archived)");
+                                notificationmenuitem.setTitle(R.string.menu_option_unread);
+                                getSupportActionBar().setTitle(R.string.archived_notifications);
 
                             }else {
-                                notificationmenuitem.setTitle("View archived");
+                                notificationmenuitem.setTitle(R.string.menu_option_archived);
                                 getSupportActionBar().setTitle(R.string.notifications);
 
                             }
@@ -203,11 +203,11 @@ public class NotificationActivity extends NavigationBaseActivity {
         // Handle item selection
         switch (item.getItemId()) {
             case R.id.archived:
-                if (item.getTitle().equals("View archived")) {
+                if (item.getTitle().equals(R.string.menu_option_archived)) {
                     refresh(true);
                     isarchivedvisible = true;
                     //TODO:strings.xml
-                }else if (item.getTitle().equals("View unread")) {
+                }else if (item.getTitle().equals(R.string.menu_option_unread)) {
                     isarchivedvisible = false;
                     refresh(false);
                 }
@@ -231,7 +231,7 @@ public class NotificationActivity extends NavigationBaseActivity {
             recyclerView.setVisibility(View.GONE);*/
             relativeLayout.setVisibility(View.GONE);
             if (isarchivedvisible) {
-                nonotificationtext.setText("You have no archived notification");
+                nonotificationtext.setText(R.string.no_archived_notification);
             }else {
                 nonotificationtext.setText(R.string.no_notification);
             }
