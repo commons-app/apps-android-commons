@@ -203,10 +203,10 @@ public class NotificationActivity extends NavigationBaseActivity {
         // Handle item selection
         switch (item.getItemId()) {
             case R.id.archived:
-                if (item.getTitle().equals(R.string.menu_option_archived)) {
+                if (item.getTitle().equals(getString(R.string.menu_option_archived))) {
                     refresh(true);
                     isarchivedvisible = true;
-                }else if (item.getTitle().equals(R.string.menu_option_unread)) {
+                }else if (item.getTitle().equals(getString(R.string.menu_option_unread))) {
                     isarchivedvisible = false;
                     refresh(false);
                 }
