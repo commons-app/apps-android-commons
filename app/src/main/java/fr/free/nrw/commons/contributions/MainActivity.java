@@ -492,6 +492,12 @@ public class MainActivity extends AuthenticatedActivity implements FragmentManag
     }
 
     @Override
+    protected void onResume() {
+        super.onResume();
+        setNotificationCount();
+    }
+
+    @Override
     protected void onDestroy() {
         locationManager.unregisterLocationManager();
         // Remove ourself from hashmap to prevent memory leaks
