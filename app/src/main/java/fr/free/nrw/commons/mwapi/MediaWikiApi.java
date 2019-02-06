@@ -97,10 +97,6 @@ public interface MediaWikiApi {
     @NonNull
     LogEventResult logEvents(String user, String lastModified, String queryContinue, int limit) throws IOException;
 
-    @NonNull
-    Single<Media> getMediaOfTheDay();
-
-
     boolean isUserBlockedFromCommons();
 
     void logout();
