@@ -43,6 +43,7 @@ import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.Utils;
 import fr.free.nrw.commons.auth.SessionManager;
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
+import fr.free.nrw.commons.mwapi.OkHttpJsonApiClient;
 import fr.free.nrw.commons.theme.NavigationBaseActivity;
 import fr.free.nrw.commons.utils.ViewUtil;
 import io.reactivex.Single;
@@ -100,7 +101,7 @@ public class AchievementsActivity extends NavigationBaseActivity {
     @Inject
     SessionManager sessionManager;
     @Inject
-    MediaWikiApi mediaWikiApi;
+    OkHttpJsonApiClient okHttpJsonApiClient;
     MenuItem item;
 
     private CompositeDisposable compositeDisposable = new CompositeDisposable();
@@ -201,7 +202,7 @@ public class AchievementsActivity extends NavigationBaseActivity {
         if (checkAccount()) {
             try{
 
-                compositeDisposable.add(mediaWikiApi
+                compositeDisposable.add(okHttpJsonApiClient
                         .getAchievements(Objects.requireNonNull(sessionManager.getCurrentAccount()).name)
                         .subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())
@@ -247,7 +248,7 @@ public class AchievementsActivity extends NavigationBaseActivity {
      */
     private void setUploadCount(Achievements achievements) {
         if (checkAccount()) {
-            compositeDisposable.add(mediaWikiApi
+            compositeDisposable.add(okHttpJsonApiClient
                     .getUploadCount(Objects.requireNonNull(sessionManager.getCurrentAccount()).name)
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())

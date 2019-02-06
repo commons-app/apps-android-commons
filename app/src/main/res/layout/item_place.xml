@@ -6,7 +6,7 @@
     android:focusableInTouchMode="true"
     android:minHeight="72dp">
 
-    <ImageView
+    <com.facebook.drawee.view.SimpleDraweeView
         android:id="@+id/icon"
         android:layout_width="40dp"
         android:layout_height="40dp"
@@ -15,7 +15,7 @@
         android:layout_marginTop="@dimen/standard_gap"
         android:background="@android:color/white"
         android:scaleType="centerCrop"
-        android:src="@drawable/empty_photo"
+        tools:src="@drawable/empty_photo"
         />
 
     <TextView
@@ -27,6 +27,7 @@
         android:layout_marginLeft="@dimen/standard_gap"
         android:layout_marginRight="@dimen/standard_gap"
         android:layout_marginTop="@dimen/standard_gap"
+        tools:text="900m"
         android:textAppearance="@style/TextAppearance.AppCompat.Caption"
         />
 
@@ -54,6 +55,7 @@
         android:layout_toStartOf="@id/distance"
         android:ellipsize="end"
         android:maxLines="2"
+        tools:text="St. Paul's School"
         android:textAppearance="@style/TextAppearance.AppCompat.Body2"
         />
 
@@ -69,6 +71,7 @@
         android:layout_marginBottom="@dimen/standard_gap"
         android:ellipsize="end"
         android:maxLines="4"
+        tools:text="school"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
         />
 
