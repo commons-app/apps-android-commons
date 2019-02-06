@@ -39,8 +39,6 @@ public interface CommonsApplicationComponent extends AndroidInjector<Application
 
     void inject(MediaWikiImageView mediaWikiImageView);
 
-    void inject(CampaignsPresenter campaignsPresenter);
-
     void inject(LoginActivity activity);
 
     void inject(DeleteTask deleteTask);

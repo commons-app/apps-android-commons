@@ -9,7 +9,7 @@ public interface BasePresenter {
     /**
      * Until a view is attached, it is open to listen events from the presenter
      */
-    void onAttachView(Context context, MvpView view);
+    void onAttachView(MvpView view);
 
     /**
      * Detaching a view makes sure that the view no more receives events from the presenter

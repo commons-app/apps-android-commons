@@ -11,6 +11,7 @@ import java.util.Date;
 import java.util.List;
 
 import javax.inject.Inject;
+import javax.inject.Singleton;
 
 import fr.free.nrw.commons.BasePresenter;
 import fr.free.nrw.commons.MvpView;
@@ -26,20 +27,22 @@ import io.reactivex.schedulers.Schedulers;
  * The presenter for the campaigns view, fetches the campaigns from the api and informs the view on
  * success and error
  */
+@Singleton
 public class CampaignsPresenter implements BasePresenter {
+    private final OkHttpJsonApiClient okHttpJsonApiClient;
+
     private final String TAG = "#CampaignsPresenter#";
     private ICampaignsView view;
-    @Inject
-    OkHttpJsonApiClient okHttpJsonApiClient;
     private Disposable disposable;
     private Campaign campaign;
 
-    @Override public void onAttachView(Context context, MvpView view) {
+    @Inject
+    public CampaignsPresenter(OkHttpJsonApiClient okHttpJsonApiClient) {
+        this.okHttpJsonApiClient = okHttpJsonApiClient;
+    }
+
+    @Override public void onAttachView(MvpView view) {
         this.view = (ICampaignsView) view;
-        ApplicationlessInjection
-                .getInstance(context.getApplicationContext())
-                .getCommonsApplicationComponent()
-                .inject(this);
     }
 
     @Override public void onDetachView() {

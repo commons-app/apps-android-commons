@@ -55,7 +55,6 @@ import fr.free.nrw.commons.mwapi.OkHttpJsonApiClient;
 import fr.free.nrw.commons.nearby.NearbyController;
 import fr.free.nrw.commons.nearby.NearbyNotificationCardView;
 import fr.free.nrw.commons.nearby.Place;
-import fr.free.nrw.commons.notification.NotificationController;
 import fr.free.nrw.commons.settings.Prefs;
 import fr.free.nrw.commons.upload.UploadService;
 import fr.free.nrw.commons.utils.ConfigUtils;
@@ -86,9 +85,9 @@ public class ContributionsFragment
     @Inject @Named("default_preferences") BasicKvStore defaultKvStore;
     @Inject ContributionDao contributionDao;
     @Inject MediaWikiApi mediaWikiApi;
-    @Inject NotificationController notificationController;
     @Inject NearbyController nearbyController;
     @Inject OkHttpJsonApiClient okHttpJsonApiClient;
+    @Inject CampaignsPresenter presenter;
 
     private ArrayList<DataSetObserver> observersWaitingForLoad = new ArrayList<>();
     private UploadService uploadService;
@@ -112,7 +111,6 @@ public class ContributionsFragment
     private boolean isFragmentAttachedBefore = false;
     private View checkBoxView;
     private CheckBox checkBox;
-    private CampaignsPresenter presenter;
 
     /**
      * Since we will need to use parent activity on onAuthCookieAcquired, we have to wait
@@ -147,8 +145,7 @@ public class ContributionsFragment
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_contributions, container, false);
         ButterKnife.bind(this, view);
-        presenter = new CampaignsPresenter();
-        presenter.onAttachView(getContext(),this);
+        presenter.onAttachView(this);
         campaignView.setVisibility(View.GONE);
         checkBoxView = View.inflate(getActivity(), R.layout.nearby_permission_dialog, null);
         checkBox = (CheckBox) checkBoxView.findViewById(R.id.never_ask_again);
