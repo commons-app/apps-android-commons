@@ -36,16 +36,17 @@ public class ImageProcessingService {
     private final BitmapRegionDecoderWrapper bitmapRegionDecoderWrapper;
     private final ImageUtilsWrapper imageUtilsWrapper;
     private final MediaWikiApi mwApi;
-
+    private final ReadFBMD readFBMD;
     @Inject
     public ImageProcessingService(FileUtilsWrapper fileUtilsWrapper,
                                   BitmapRegionDecoderWrapper bitmapRegionDecoderWrapper,
                                   ImageUtilsWrapper imageUtilsWrapper,
-                                  MediaWikiApi mwApi) {
+                                  MediaWikiApi mwApi, ReadFBMD readFBMD) {
         this.fileUtilsWrapper = fileUtilsWrapper;
         this.bitmapRegionDecoderWrapper = bitmapRegionDecoderWrapper;
         this.imageUtilsWrapper = imageUtilsWrapper;
         this.mwApi = mwApi;
+        this.readFBMD = readFBMD;
     }
 
     /**
@@ -83,7 +84,7 @@ public class ImageProcessingService {
 
         public Single<Integer> checkFBMD(String filePath){
             try {
-                return ReadFBMD.getInstance().processMetadata(filePath);
+                return readFBMD.processMetadata(filePath);
             } catch (IOException e) {
                 return Single.just(ImageUtils.FILE_FBMD);
             }

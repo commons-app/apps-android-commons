@@ -16,7 +16,6 @@ import timber.log.Timber;
 
 @Singleton
 public class ReadFBMD {
-    public static ReadFBMD readFBMDInstance;
 
     @Inject
     public ReadFBMD(){
@@ -36,12 +35,6 @@ public class ReadFBMD {
                 return Single.just(ImageUtils.FILE_FBMD);
             }
         return Single.just(ImageUtils.IMAGE_OK);
-    }
-
-    public static ReadFBMD getInstance(){
-        if (readFBMDInstance==null)
-            return new ReadFBMD();
-        else return readFBMDInstance;
     }
 }
 

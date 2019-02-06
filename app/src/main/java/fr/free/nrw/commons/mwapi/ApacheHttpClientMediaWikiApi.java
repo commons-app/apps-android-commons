@@ -508,6 +508,39 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
     }
 
     @Override
+    @Nullable
+    public Single<Media> getMediaOfTheDay() {
+        return Single.fromCallable(() -> {
+            CustomApiResult apiResult = null;
+            try {
+                String template = "Template:motd/" + DateUtils.getCurrentDate();
+                CustomMwApi.RequestBuilder requestBuilder = api.action("query")
+                        .param("generator", "images")
+                        .param("format", "xml")
+                        .param("titles", template)
+                        .param("prop", "imageinfo")
+                        .param("iiprop", "url|extmetadata");
+
+                apiResult = requestBuilder.get();
+            } catch (IOException e) {
+                Timber.e(e, "Failed to obtain searchCategories");
+            }
+
+            if (apiResult == null) {
+                return null;
+            }
+
+            CustomApiResult imageNode = apiResult.getNode("/api/query/pages/page");
+            if (imageNode == null
+                    || imageNode.getDocument() == null) {
+                return null;
+            }
+
+            return CategoryImageUtils.getMediaFromPage(imageNode.getDocument());
+        });
+    }
+
+    @Override
     @NonNull
     public LogEventResult logEvents(String user, String lastModified, String queryContinue, int limit) throws IOException {
         CustomMwApi.RequestBuilder builder = api.action("query")
