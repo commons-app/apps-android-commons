@@ -41,8 +41,7 @@ class ApacheHttpClientMediaWikiApiTest {
         okHttpClient = OkHttpClient()
         sharedPreferences = mock(BasicKvStore::class.java)
         categoryPreferences = mock(BasicKvStore::class.java)
-        testObject = ApacheHttpClientMediaWikiApi(RuntimeEnvironment.application, "http://" + server.hostName + ":" + server.port + "/", "http://" + wikidataServer.hostName + ":" + wikidataServer.port + "/", sharedPreferences, categoryPreferences, Gson(), okHttpClient)
-        testObject.setWikiMediaToolforgeUrl("http://" + server.hostName + ":" + server.port + "/")
+        testObject = ApacheHttpClientMediaWikiApi(RuntimeEnvironment.application, "http://" + server.hostName + ":" + server.port + "/", "http://" + wikidataServer.hostName + ":" + wikidataServer.port + "/", sharedPreferences, categoryPreferences, Gson())
     }
 
     @After
@@ -241,17 +240,6 @@ class ApacheHttpClientMediaWikiApiTest {
         }
 
         assertFalse(result)
-    }
-
-    @Test
-    fun getUploadCount() {
-        server.enqueue(MockResponse().setBody("23\n"))
-
-        val testObserver = testObject.getUploadCount("testUsername").test()
-
-        assertEquals("testUsername", parseQueryParams(server.takeRequest())["user"])
-        assertEquals(1, testObserver.valueCount())
-        assertEquals(23, testObserver.values()[0])
     }
 
     @Test

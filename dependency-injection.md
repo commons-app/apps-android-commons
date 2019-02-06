@@ -25,8 +25,8 @@ Dagger will resolve the method arguments on provider methods in a module (or the
 ```java
 @Provides
 @Singleton
-public SessionManager providesSessionManager(MediaWikiApi mediaWikiApi) {
-    return new SessionManager(application, mediaWikiApi);
+public SessionManager providesSessionManager(MediaWikiApi okHttpJsonApiClient) {
+    return new SessionManager(application, okHttpJsonApiClient);
 }
 ```
 

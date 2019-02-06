@@ -33,10 +33,9 @@ import fr.free.nrw.commons.explore.SearchActivity;
 import fr.free.nrw.commons.explore.recentsearches.RecentSearch;
 import fr.free.nrw.commons.explore.recentsearches.RecentSearchesDao;
 import fr.free.nrw.commons.kvstore.BasicKvStore;
-import fr.free.nrw.commons.mwapi.MediaWikiApi;
+import fr.free.nrw.commons.mwapi.OkHttpJsonApiClient;
 import fr.free.nrw.commons.utils.NetworkUtils;
 import fr.free.nrw.commons.utils.ViewUtil;
-import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 import timber.log.Timber;
@@ -63,7 +62,8 @@ public class SearchImageFragment extends CommonsDaggerSupportFragment {
     ProgressBar bottomProgressBar;
 
     @Inject RecentSearchesDao recentSearchesDao;
-    @Inject MediaWikiApi mwApi;
+    @Inject
+    OkHttpJsonApiClient okHttpJsonApiClient;
     @Inject @Named("default_preferences") BasicKvStore defaultKvStore;
 
     private RVRendererAdapter<Media> imagesAdapter;
@@ -140,7 +140,7 @@ public class SearchImageFragment extends CommonsDaggerSupportFragment {
         bottomProgressBar.setVisibility(GONE);
         queryList.clear();
         imagesAdapter.clear();
-        Observable.fromCallable(() -> mwApi.searchImages(query,queryList.size()))
+        okHttpJsonApiClient.searchImages(query, queryList.size())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .timeout(TIMEOUT_SECONDS, TimeUnit.SECONDS)
@@ -156,7 +156,7 @@ public class SearchImageFragment extends CommonsDaggerSupportFragment {
         this.query = query;
         bottomProgressBar.setVisibility(View.VISIBLE);
         progressBar.setVisibility(GONE);
-        Observable.fromCallable(() -> mwApi.searchImages(query,queryList.size()))
+        okHttpJsonApiClient.searchImages(query, queryList.size())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .timeout(TIMEOUT_SECONDS, TimeUnit.SECONDS)

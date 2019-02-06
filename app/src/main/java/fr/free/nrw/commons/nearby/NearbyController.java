@@ -112,7 +112,7 @@ public class NearbyController {
      * @param placeList list of nearby places in Place data type
      * @return Place list that holds nearby places
      */
-    public static List<Place> loadAttractionsFromLocationToPlaces(
+    static List<Place> loadAttractionsFromLocationToPlaces(
             LatLng curLatLng,
             List<Place> placeList) {
         placeList = placeList.subList(0, Math.min(placeList.size(), MAX_RESULTS));
