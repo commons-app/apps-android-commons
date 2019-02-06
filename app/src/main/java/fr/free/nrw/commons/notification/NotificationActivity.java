@@ -7,6 +7,8 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.constraint.ConstraintLayout;
 import android.support.design.widget.Snackbar;
+import android.support.v4.view.GravityCompat;
+import android.support.v4.widget.DrawerLayout;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -156,8 +158,10 @@ public class NotificationActivity extends NavigationBaseActivity {
                         if (notificationList.size()==0){
                             if (archived) {
                                 nonotificationtext.setText("You have no archived notification");
+                                isarchivedvisible = true;
                             }else {
                                 nonotificationtext.setText(R.string.no_notification);
+                                isarchivedvisible = false;
                             }
                             relativeLayout.setVisibility(View.GONE);
                             no_notification.setVisibility(View.VISIBLE);
@@ -202,7 +206,7 @@ public class NotificationActivity extends NavigationBaseActivity {
                 if (item.getTitle().equals("View archived")) {
                     refresh(true);
                     isarchivedvisible = true;
-                    //TODO:handle on back pressed, strings.xml
+                    //TODO:strings.xml
                 }else if (item.getTitle().equals("View unread")) {
                     isarchivedvisible = false;
                     refresh(false);
@@ -258,5 +262,18 @@ public class NotificationActivity extends NavigationBaseActivity {
         intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT | Intent.FLAG_ACTIVITY_SINGLE_TOP);
         intent.putExtra("title", title);
         context.startActivity(intent);
+    }
+
+    @Override
+    public void onBackPressed() {
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        if (drawer.isDrawerOpen(GravityCompat.START)) {
+            drawer.closeDrawer(GravityCompat.START);
+        }
+        else if (isarchivedvisible) {
+            refresh(false);
+        }else {
+            finish();
+        }
     }
 }
