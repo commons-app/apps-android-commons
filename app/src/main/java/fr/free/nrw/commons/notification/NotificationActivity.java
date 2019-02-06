@@ -135,9 +135,17 @@ public class NotificationActivity extends NavigationBaseActivity {
             Snackbar.make(relativeLayout, R.string.no_internet, Snackbar.LENGTH_INDEFINITE)
                     .setAction(R.string.retry, view -> refresh(archived)).show();
         } else {
-            progressBar.setVisibility(View.VISIBLE);
+            if (getSupportActionBar() != null) {
+                if (archived) {
+                    getSupportActionBar().setTitle(R.string.archived_notifications);
+                } else {
+                    getSupportActionBar().setTitle(R.string.notifications);
+                }
+            }
             addNotifications(archived);
-        }
+        }progressBar.setVisibility(View.VISIBLE);
+        no_notification.setVisibility(View.GONE);
+        relativeLayout.setVisibility(View.VISIBLE);
     }
 
     @SuppressLint("CheckResult")
@@ -170,11 +178,9 @@ public class NotificationActivity extends NavigationBaseActivity {
                         } if (notificationmenuitem != null) {
                             if (archived) {
                                 notificationmenuitem.setTitle(R.string.menu_option_unread);
-                                getSupportActionBar().setTitle(R.string.archived_notifications);
 
                             }else {
                                 notificationmenuitem.setTitle(R.string.menu_option_archived);
-                                getSupportActionBar().setTitle(R.string.notifications);
 
                             }
                         }
