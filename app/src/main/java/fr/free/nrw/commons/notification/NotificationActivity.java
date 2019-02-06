@@ -16,7 +16,9 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
+import android.support.v7.widget.Toolbar;
 
 import com.pedrogomez.renderers.RVRendererAdapter;
 
@@ -60,6 +62,10 @@ public class NotificationActivity extends NavigationBaseActivity {
     private NotificationWorkerFragment mNotificationWorkerFragment;
     private RVRendererAdapter<Notification> adapter;
     private List<Notification> notificationList;
+    private boolean isarchivedvisible = false;
+    MenuItem notificationmenuitem;
+    Toolbar toolbar;
+    TextView nonotificationtext;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,6 +76,9 @@ public class NotificationActivity extends NavigationBaseActivity {
                 .findFragmentByTag(TAG_NOTIFICATION_WORKER_FRAGMENT);
         initListView();
         initDrawer();
+        toolbar = findViewById(R.id.toolbar);
+        nonotificationtext = (TextView)this.findViewById(R.id.no_notification_text);
+        setSupportActionBar(toolbar);
     }
 
     @SuppressLint("CheckResult")
@@ -87,6 +96,11 @@ public class NotificationActivity extends NavigationBaseActivity {
 
                         snackbar.show();
                         if (notificationList.size()==0){
+                            if (isarchivedvisible) {
+                                nonotificationtext.setText("You have no archived notification");
+                            }else {
+                                nonotificationtext.setText(R.string.no_notification);
+                            }
                             relativeLayout.setVisibility(View.GONE);
                             no_notification.setVisibility(View.VISIBLE);
                         }
@@ -132,6 +146,7 @@ public class NotificationActivity extends NavigationBaseActivity {
             Observable.fromCallable(() -> {
                 progressBar.setVisibility(View.VISIBLE);
                 return controller.getNotifications(archived);
+
             })
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
@@ -140,10 +155,25 @@ public class NotificationActivity extends NavigationBaseActivity {
                         Timber.d("Number of notifications is %d", notificationList.size());
                         this.notificationList = notificationList;
                         if (notificationList.size()==0){
+                            if (archived) {
+                                nonotificationtext.setText("You have no archived notification");
+                            }else {
+                                nonotificationtext.setText(R.string.no_notification);
+                            }
                             relativeLayout.setVisibility(View.GONE);
                             no_notification.setVisibility(View.VISIBLE);
                         } else {
                             setAdapter(notificationList);
+                        } if (notificationmenuitem != null) {
+                            if (archived) {
+                                notificationmenuitem.setTitle("View unread");
+                                getSupportActionBar().setTitle("Notification(archived)");
+
+                            }else {
+                                notificationmenuitem.setTitle("View archived");
+                                getSupportActionBar().setTitle(R.string.notifications);
+
+                            }
                         }
                         progressBar.setVisibility(View.GONE);
                     }, throwable -> {
@@ -161,6 +191,7 @@ public class NotificationActivity extends NavigationBaseActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.menu_notifications, menu);
+        notificationmenuitem = menu.findItem(R.id.archived);
         return true;
     }
 
@@ -171,11 +202,11 @@ public class NotificationActivity extends NavigationBaseActivity {
             case R.id.archived:
                 if (item.getTitle().equals("View archived")) {
                     refresh(true);
-                    item.setTitle("View unread");
-                    //TODO:SET TITLE,TOOLBAR TEXT AND you have no archived notifications..handle on back pressed
+                    isarchivedvisible = true;
+                    //TODO:handle on back pressed,disable swipe, strings.xml
                 }else if (item.getTitle().equals("View unread")) {
+                    isarchivedvisible = false;
                     refresh(false);
-                    item.setTitle("View archived");
                 }
                 return true;
             default:
@@ -196,6 +227,11 @@ public class NotificationActivity extends NavigationBaseActivity {
             /*progressBar.setVisibility(View.GONE);
             recyclerView.setVisibility(View.GONE);*/
             relativeLayout.setVisibility(View.GONE);
+            if (isarchivedvisible) {
+                nonotificationtext.setText("You have no archived notification");
+            }else {
+                nonotificationtext.setText(R.string.no_notification);
+            }
             no_notification.setVisibility(View.VISIBLE);
             return;
         }
