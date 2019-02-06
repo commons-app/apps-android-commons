@@ -10,6 +10,7 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.v4.content.FileProvider;
 import android.support.v4.content.res.ResourcesCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.Toolbar;
@@ -178,13 +179,15 @@ public class AchievementsActivity extends NavigationBaseActivity {
         try {
             File file = new File(this.getExternalCacheDir(), "screen.png");
             FileOutputStream fOut = new FileOutputStream(file);
-            bitmap.compress(Bitmap.CompressFormat.PNG, 100, fOut);
+            bitmap.compress(Bitmap.CompressFormat.  PNG, 100, fOut);
             fOut.flush();
             fOut.close();
             file.setReadable(true, false);
+            Uri photoURI = FileProvider.getUriForFile(this, this.getApplicationContext().getPackageName() + ".my.package.name.provider", file);
             final Intent intent = new Intent(android.content.Intent.ACTION_SEND);
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            intent.putExtra(Intent.EXTRA_STREAM, Uri.fromFile(file));
+            intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+            intent.putExtra(Intent.EXTRA_STREAM, photoURI);
             intent.setType("image/png");
             startActivity(Intent.createChooser(intent, "Share image via"));
         } catch (IOException e) {

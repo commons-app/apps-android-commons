@@ -27,7 +27,7 @@ import timber.log.Timber;
 
 import static android.widget.Toast.LENGTH_SHORT;
 
-public class Utils {
+public class    Utils {
 
     /**
      * Strips localization symbols from a string.

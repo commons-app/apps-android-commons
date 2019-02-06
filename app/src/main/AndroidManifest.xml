@@ -206,6 +206,16 @@
             android:label="@string/provider_bookmarks_location"
             android:syncable="false" />
 
+        <provider
+            android:name=".GenericFileProvider"
+            android:authorities="${applicationId}.my.package.name.provider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/provider_paths"/>
+        </provider>
+
         <receiver android:name=".widget.PicOfDayAppWidget">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
