@@ -203,7 +203,7 @@ public class NotificationActivity extends NavigationBaseActivity {
                 if (item.getTitle().equals("View archived")) {
                     refresh(true);
                     isarchivedvisible = true;
-                    //TODO:handle on back pressed,disable swipe, strings.xml,navigation on notification activity
+                    //TODO:handle on back pressed, strings.xml,navigation on notification activity
                 }else if (item.getTitle().equals("View unread")) {
                     isarchivedvisible = false;
                     refresh(false);
