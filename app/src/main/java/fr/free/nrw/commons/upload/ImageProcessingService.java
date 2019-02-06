@@ -76,13 +76,14 @@ public class ImageProcessingService {
                 });
 
         return Single.zip(zipResult, checkFBMD, (zip, fbmd) -> {
+            Timber.d("zip:"+zip+ "fbmd:"+zip);
             return zip | fbmd;
         });
     }
 
-        public Single<Integer> checkFBMD (String filePath){
+        public Single<Integer> checkFBMD(String filePath){
             try {
-                return ReadFBMD.processMetadata(filePath);
+                return ReadFBMD.getInstance().processMetadata(filePath);
             } catch (IOException e) {
                 return Single.just(ImageUtils.FILE_FBMD);
             }
