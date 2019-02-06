@@ -206,7 +206,6 @@ public class NotificationActivity extends NavigationBaseActivity {
                 if (item.getTitle().equals(R.string.menu_option_archived)) {
                     refresh(true);
                     isarchivedvisible = true;
-                    //TODO:strings.xml
                 }else if (item.getTitle().equals(R.string.menu_option_unread)) {
                     isarchivedvisible = false;
                     refresh(false);
