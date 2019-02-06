@@ -78,7 +78,6 @@ public class NotificationActivity extends NavigationBaseActivity {
         initDrawer();
         toolbar = findViewById(R.id.toolbar);
         nonotificationtext = (TextView)this.findViewById(R.id.no_notification_text);
-        setSupportActionBar(toolbar);
     }
 
     @SuppressLint("CheckResult")
@@ -203,7 +202,7 @@ public class NotificationActivity extends NavigationBaseActivity {
                 if (item.getTitle().equals("View archived")) {
                     refresh(true);
                     isarchivedvisible = true;
-                    //TODO:handle on back pressed, strings.xml,navigation on notification activity
+                    //TODO:handle on back pressed, strings.xml
                 }else if (item.getTitle().equals("View unread")) {
                     isarchivedvisible = false;
                     refresh(false);
