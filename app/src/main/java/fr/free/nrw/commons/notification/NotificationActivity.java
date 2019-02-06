@@ -254,9 +254,10 @@ public class NotificationActivity extends NavigationBaseActivity {
         recyclerView.setAdapter(adapter);
     }
 
-    public static void startYourself(Context context) {
+    public static void startYourself(Context context, String title) {
         Intent intent = new Intent(context, NotificationActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+        intent.putExtra("title", title);
         context.startActivity(intent);
     }
 }

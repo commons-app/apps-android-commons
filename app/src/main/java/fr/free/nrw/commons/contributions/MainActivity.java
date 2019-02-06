@@ -291,7 +291,7 @@ public class MainActivity extends AuthenticatedActivity implements FragmentManag
         final View notification = notificationsMenuItem.getActionView();
         notificationCount = notification.findViewById(R.id.notification_count_badge);
         notification.setOnClickListener(view -> {
-            NotificationActivity.startYourself(MainActivity.this);
+            NotificationActivity.startYourself(MainActivity.this, "read/unread");
         });
         this.menu = menu;
         updateMenuItem();
@@ -343,7 +343,7 @@ public class MainActivity extends AuthenticatedActivity implements FragmentManag
         switch (item.getItemId()) {
             case R.id.notifications:
                 // Starts notification activity on click to notification icon
-                NotificationActivity.startYourself(this);
+                NotificationActivity.startYourself(this, "read/unread");
                 return true;
             case R.id.list_sheet:
                 if (contributionsActivityPagerAdapter.getItem(1) != null) {
