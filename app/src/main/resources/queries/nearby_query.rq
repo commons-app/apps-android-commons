@@ -32,10 +32,6 @@ SELECT
        OPTIONAL {?classId rdfs:label ?class_label_preferred_language. FILTER (lang(?class_label_preferred_language) = "${LANG}")}
        OPTIONAL {?classId rdfs:label ?class_label_any_language}
 
-       # Get icon
-       OPTIONAL { ?classId wdt:P2910 ?icon0. }
-       OPTIONAL { ?classId wdt:P279*/wdt:P2910 ?icon1. }
-
        OPTIONAL {
            ?wikipediaArticle   schema:about ?item ;
                                schema:isPartOf <https://${LANG}.wikipedia.org/> .
