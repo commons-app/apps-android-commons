@@ -33,8 +33,7 @@
         android:theme="@style/LightAppTheme"
         android:largeHeap="true"
         android:hardwareAccelerated="false"
-        android:supportsRtl="true">
-
+        android:supportsRtl="true" >
         <activity android:name="org.acra.CrashReportDialog"
             android:theme="@android:style/Theme.Dialog"
             android:launchMode="singleInstance"
