@@ -91,6 +91,9 @@ dependencies {
     //swipe_layout
     implementation 'com.daimajia.swipelayout:library:1.2.0@aar'
     implementation 'com.nineoldandroids:library:2.4.0'
+
+    //Zoomy
+    implementation 'com.ablanco.zoomy:zoomy:1.1.0'
 }
 
 android {
