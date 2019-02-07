@@ -453,5 +453,9 @@
   <string name="no_image">Використаних зображень немає</string>
   <string name="no_image_reverted">Відхилених зображень немає</string>
   <string name="no_image_uploaded">Завантажених зображень немає</string>
+  <string name="no_notification">У вас немає непрочитаних сповіщень</string>
   <string name="share_logs_using">Поширення журналів</string>
+  <string name="error_occurred_in_picking_images">Сталася помилка при завантаженні зображень</string>
+  <string name="image_chooser_title">Оберіть зображення для завантаження</string>
+  <string name="please_wait">Будь ласка, зачекайте…</string>
 </resources>
