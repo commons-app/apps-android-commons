@@ -19,7 +19,7 @@ import org.mockito.Mockito.*
 import org.mockito.MockitoAnnotations
 import java.io.FileInputStream
 
-class ImageProcessingServiceTest {
+class u {
     @Mock
     internal var fileUtilsWrapper: FileUtilsWrapper? = null
     @Mock
