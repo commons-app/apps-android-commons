@@ -55,6 +55,8 @@ public class NotificationActivity extends NavigationBaseActivity {
     RelativeLayout relativeLayout;
     @BindView(R.id.no_notification_background)
     RelativeLayout no_notification;
+    @BindView(R.id.toolbar)
+    Toolbar toolbar;
    /* @BindView(R.id.swipe_bg)
     TextView swipe_bg;*/
     @Inject
@@ -64,9 +66,8 @@ public class NotificationActivity extends NavigationBaseActivity {
     private NotificationWorkerFragment mNotificationWorkerFragment;
     private RVRendererAdapter<Notification> adapter;
     private List<Notification> notificationList;
-    public static boolean isarchivedvisible = false;
+    private boolean isarchivedvisible = false;
     MenuItem notificationmenuitem;
-    Toolbar toolbar;
     TextView nonotificationtext;
 
     @Override
@@ -78,7 +79,6 @@ public class NotificationActivity extends NavigationBaseActivity {
                 .findFragmentByTag(TAG_NOTIFICATION_WORKER_FRAGMENT);
         initListView();
         initDrawer();
-        toolbar = findViewById(R.id.toolbar);
         nonotificationtext = (TextView)this.findViewById(R.id.no_notification_text);
     }
 
@@ -97,11 +97,7 @@ public class NotificationActivity extends NavigationBaseActivity {
 
                         snackbar.show();
                         if (notificationList.size()==0){
-                            if (isarchivedvisible) {
-                                nonotificationtext.setText(R.string.no_archived_notification);
-                            }else {
-                                nonotificationtext.setText(R.string.no_notification);
-                            }
+                            setEmptyView(isarchivedvisible);
                             relativeLayout.setVisibility(View.GONE);
                             no_notification.setVisibility(View.VISIBLE);
                         }
@@ -135,15 +131,10 @@ public class NotificationActivity extends NavigationBaseActivity {
             Snackbar.make(relativeLayout, R.string.no_internet, Snackbar.LENGTH_INDEFINITE)
                     .setAction(R.string.retry, view -> refresh(archived)).show();
         } else {
-            if (getSupportActionBar() != null) {
-                if (archived) {
-                    getSupportActionBar().setTitle(R.string.archived_notifications);
-                } else {
-                    getSupportActionBar().setTitle(R.string.notifications);
-                }
-            }
+            setPageTitle(archived);
             addNotifications(archived);
-        }progressBar.setVisibility(View.VISIBLE);
+        }
+        progressBar.setVisibility(View.VISIBLE);
         no_notification.setVisibility(View.GONE);
         relativeLayout.setVisibility(View.VISIBLE);
     }
@@ -164,25 +155,13 @@ public class NotificationActivity extends NavigationBaseActivity {
                         Timber.d("Number of notifications is %d", notificationList.size());
                         this.notificationList = notificationList;
                         if (notificationList.size()==0){
-                            if (archived) {
-                                nonotificationtext.setText(R.string.no_archived_notification);
-                                isarchivedvisible = true;
-                            }else {
-                                nonotificationtext.setText(R.string.no_notification);
-                                isarchivedvisible = false;
-                            }
+                            setEmptyView(archived);
                             relativeLayout.setVisibility(View.GONE);
                             no_notification.setVisibility(View.VISIBLE);
                         } else {
                             setAdapter(notificationList);
                         } if (notificationmenuitem != null) {
-                            if (archived) {
-                                notificationmenuitem.setTitle(R.string.menu_option_unread);
-
-                            }else {
-                                notificationmenuitem.setTitle(R.string.menu_option_archived);
-
-                            }
+                            setMenuItemTitle(archived);
                         }
                         progressBar.setVisibility(View.GONE);
                     }, throwable -> {
@@ -210,6 +189,7 @@ public class NotificationActivity extends NavigationBaseActivity {
         switch (item.getItemId()) {
             case R.id.archived:
                 if (item.getTitle().equals(getString(R.string.menu_option_archived))) {
+                    NotificationActivity.startYourself(NotificationActivity.this, "read");
                     refresh(true);
                     isarchivedvisible = true;
                 }else if (item.getTitle().equals(getString(R.string.menu_option_unread))) {
@@ -235,11 +215,7 @@ public class NotificationActivity extends NavigationBaseActivity {
             /*progressBar.setVisibility(View.GONE);
             recyclerView.setVisibility(View.GONE);*/
             relativeLayout.setVisibility(View.GONE);
-            if (isarchivedvisible) {
-                nonotificationtext.setText(R.string.no_archived_notification);
-            }else {
-                nonotificationtext.setText(R.string.no_notification);
-            }
+            setEmptyView(isarchivedvisible);
             no_notification.setVisibility(View.VISIBLE);
             return;
         }
@@ -255,7 +231,7 @@ public class NotificationActivity extends NavigationBaseActivity {
                 Timber.d("Notification to mark as read %s", notification.notificationId);
                 removeNotification(notification);
             }
-        });
+        }, isarchivedvisible);
         adapter = notificationAdapterFactory.create(notificationList);
         relativeLayout.setVisibility(View.VISIBLE);
         no_notification.setVisibility(View.GONE);
@@ -264,12 +240,43 @@ public class NotificationActivity extends NavigationBaseActivity {
 
     public static void startYourself(Context context, String title) {
         Intent intent = new Intent(context, NotificationActivity.class);
-        intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT | Intent.FLAG_ACTIVITY_SINGLE_TOP);
         intent.putExtra("title", title);
+        intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+
         context.startActivity(intent);
     }
 
-    @Override
+    private void setPageTitle(boolean archived) {
+        if (getSupportActionBar() != null) {
+            if (archived) {
+                getSupportActionBar().setTitle(R.string.archived_notifications);
+            } else {
+                getSupportActionBar().setTitle(R.string.notifications);
+            }
+        }
+    }
+
+    private void setEmptyView(boolean archived) {
+        if (archived) {
+            nonotificationtext.setText(R.string.no_archived_notification);
+            isarchivedvisible = true;
+        }else {
+            nonotificationtext.setText(R.string.no_notification);
+            isarchivedvisible = false;
+        }
+    }
+
+    private void setMenuItemTitle(boolean archived) {
+        if (archived) {
+            notificationmenuitem.setTitle(R.string.menu_option_unread);
+
+        }else {
+            notificationmenuitem.setTitle(R.string.menu_option_archived);
+
+        }
+    }
+
+   /* @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
@@ -280,5 +287,5 @@ public class NotificationActivity extends NavigationBaseActivity {
         }else {
             finish();
         }
-    }
+    }*/
 }

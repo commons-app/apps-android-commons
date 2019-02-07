@@ -35,10 +35,12 @@ public class NotificationRenderer extends Renderer<Notification> {
     LinearLayout bottomLayout;
 
     private NotificationClicked listener;
+    private boolean isarchivedvisible = false;
 
 
-    NotificationRenderer(NotificationClicked listener) {
+    NotificationRenderer(NotificationClicked listener, boolean isarchivedvisible) {
         this.listener = listener;
+        this.isarchivedvisible = isarchivedvisible;
     }
     @OnClick(R.id.bottom)
     void onBottomLayoutClicked(){
@@ -59,7 +61,7 @@ public class NotificationRenderer extends Renderer<Notification> {
     protected View inflate(LayoutInflater layoutInflater, ViewGroup viewGroup) {
         View inflatedView = layoutInflater.inflate(R.layout.item_notification, viewGroup, false);
         ButterKnife.bind(this, inflatedView);
-        if (NotificationActivity.isarchivedvisible) {
+        if (isarchivedvisible) {
             swipeLayout.setSwipeEnabled(false);
         }else {
             swipeLayout.setSwipeEnabled(true);
