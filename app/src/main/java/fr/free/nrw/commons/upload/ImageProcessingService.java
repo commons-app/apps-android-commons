@@ -81,6 +81,15 @@ public class ImageProcessingService {
             return zip | fbmd;
         });
     }
+    /*
+    * Other than the Image quality we need to check that using this Image doesn't violate's facebook's copyright's.
+    * Whenever a user tries to upload an image that was downloaded from Facebook then we warn the user with a message to stop the upload
+    * To know whether the Image is downloaded from facebook:
+    * -We read the metadata of any Image and check for FBMD
+    * -Facebook downloaded image's contains metadata of the type IPTC
+    * - From this IPTC metadata we extract a byte array that contains FBMD as it's initials. If the image was downloaded from facebook
+    * Thus we successfully protect common's from Facebook's copyright violation
+    * */
 
         public Single<Integer> checkFBMD(String filePath){
             try {
