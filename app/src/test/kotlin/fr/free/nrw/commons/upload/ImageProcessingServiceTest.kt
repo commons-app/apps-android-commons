@@ -28,6 +28,8 @@ class ImageProcessingServiceTest {
     internal var imageUtilsWrapper: ImageUtilsWrapper? = null
     @Mock
     internal var mwApi: MediaWikiApi? = null
+    @Mock
+    internal var readFBMD: ReadFBMD?=null
 
     @InjectMocks
     var imageProcessingService: ImageProcessingService? = null
@@ -80,6 +82,8 @@ class ImageProcessingServiceTest {
                 .thenReturn(false)
         `when`(mwApi!!.fileExistsWithName(ArgumentMatchers.anyString()))
                 .thenReturn(false)
+        `when`(readFBMD!!.processMetadata(ArgumentMatchers.anyString()))
+                .thenReturn(Single.just(ImageUtils.IMAGE_OK))
     }
 
     @Test
