@@ -18,6 +18,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
+import android.view.animation.OvershootInterpolator;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.LinearLayout;
@@ -26,8 +27,9 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.ablanco.zoomy.Zoomy;
+
 import java.io.IOException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
@@ -195,6 +197,9 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
 
         licenseList = new LicenseList(getActivity());
 
+        Zoomy.Builder builder = new Zoomy.Builder(getActivity()).target(image);
+        builder.register();
+
         // Progressively darken the image in the background when we scroll detail pane up
         scrollListener = this::updateTheDarkness;
         view.getViewTreeObserver().addOnScrollChangedListener(scrollListener);
@@ -359,6 +364,11 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
         }
 
         checkDeletion(media);
+    }
+
+    @OnClick(R.id.mediaDetailLinearLayout)
+    public void onMediaDetailImageClicked() {
+        image.bringToFront();
     }
 
     @OnClick(R.id.mediaDetailLicense)
