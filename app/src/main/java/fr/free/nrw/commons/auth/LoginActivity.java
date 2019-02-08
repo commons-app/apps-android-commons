@@ -387,12 +387,12 @@ public class LoginActivity extends AccountAuthenticatorActivity {
         super.onRestoreInstanceState(savedInstanceState);
         loginCurrentlyInProgress = savedInstanceState.getBoolean(LOGGING_IN, false);
         errorMessageShown = savedInstanceState.getBoolean(ERROR_MESSAGE_SHOWN, false);
-        if (loginCurrentlyInProgress){
+        if (loginCurrentlyInProgress) {
             performLogin();
         }
-        if (errorMessageShown){
+        if (errorMessageShown) {
             resultantError = savedInstanceState.getString(RESULTANT_ERROR);
-            handleOtherResults(Objects.requireNonNull(resultantError));
+            handleOtherResults(resultantError);
         }
     }
 
