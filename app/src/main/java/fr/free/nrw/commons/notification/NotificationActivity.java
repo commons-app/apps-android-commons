@@ -66,7 +66,6 @@ public class NotificationActivity extends NavigationBaseActivity {
     private NotificationWorkerFragment mNotificationWorkerFragment;
     private RVRendererAdapter<Notification> adapter;
     private List<Notification> notificationList;
-    private boolean isarchivedvisible = false;
     MenuItem notificationmenuitem;
     TextView nonotificationtext;
 
@@ -80,6 +79,7 @@ public class NotificationActivity extends NavigationBaseActivity {
         initListView();
         initDrawer();
         nonotificationtext = (TextView)this.findViewById(R.id.no_notification_text);
+        setPageTitle();
     }
 
     @SuppressLint("CheckResult")
@@ -97,7 +97,7 @@ public class NotificationActivity extends NavigationBaseActivity {
 
                         snackbar.show();
                         if (notificationList.size()==0){
-                            setEmptyView(isarchivedvisible);
+                            setEmptyView();
                             relativeLayout.setVisibility(View.GONE);
                             no_notification.setVisibility(View.VISIBLE);
                         }
@@ -122,7 +122,11 @@ public class NotificationActivity extends NavigationBaseActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         DividerItemDecoration itemDecor = new DividerItemDecoration(recyclerView.getContext(), DividerItemDecoration.VERTICAL);
         recyclerView.addItemDecoration(itemDecor);
-        refresh(false);
+        if (getIntent().getStringExtra("title").equals("read")) {
+            refresh(true);
+        } else {
+            refresh(false);
+        }
     }
 
     private void refresh(boolean archived) {
@@ -131,7 +135,6 @@ public class NotificationActivity extends NavigationBaseActivity {
             Snackbar.make(relativeLayout, R.string.no_internet, Snackbar.LENGTH_INDEFINITE)
                     .setAction(R.string.retry, view -> refresh(archived)).show();
         } else {
-            setPageTitle(archived);
             addNotifications(archived);
         }
         progressBar.setVisibility(View.VISIBLE);
@@ -155,13 +158,12 @@ public class NotificationActivity extends NavigationBaseActivity {
                         Timber.d("Number of notifications is %d", notificationList.size());
                         this.notificationList = notificationList;
                         if (notificationList.size()==0){
-                            setEmptyView(archived);
+                            setEmptyView();
                             relativeLayout.setVisibility(View.GONE);
                             no_notification.setVisibility(View.VISIBLE);
                         } else {
                             setAdapter(notificationList);
                         } if (notificationmenuitem != null) {
-                            setMenuItemTitle(archived);
                         }
                         progressBar.setVisibility(View.GONE);
                     }, throwable -> {
@@ -180,6 +182,7 @@ public class NotificationActivity extends NavigationBaseActivity {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.menu_notifications, menu);
         notificationmenuitem = menu.findItem(R.id.archived);
+        setMenuItemTitle();
         return true;
     }
 
@@ -190,11 +193,8 @@ public class NotificationActivity extends NavigationBaseActivity {
             case R.id.archived:
                 if (item.getTitle().equals(getString(R.string.menu_option_archived))) {
                     NotificationActivity.startYourself(NotificationActivity.this, "read");
-                    refresh(true);
-                    isarchivedvisible = true;
                 }else if (item.getTitle().equals(getString(R.string.menu_option_unread))) {
-                    isarchivedvisible = false;
-                    refresh(false);
+                    onBackPressed();
                 }
                 return true;
             default:
@@ -215,10 +215,18 @@ public class NotificationActivity extends NavigationBaseActivity {
             /*progressBar.setVisibility(View.GONE);
             recyclerView.setVisibility(View.GONE);*/
             relativeLayout.setVisibility(View.GONE);
-            setEmptyView(isarchivedvisible);
+            setEmptyView();
             no_notification.setVisibility(View.VISIBLE);
             return;
         }
+
+        boolean isarchivedvisible;
+        if (getIntent().getStringExtra("title").equals("read")) {
+            isarchivedvisible = true;
+        } else {
+            isarchivedvisible = false;
+        }
+
         notificationAdapterFactory = new NotificationAdapterFactory(new NotificationRenderer.NotificationClicked() {
             @Override
             public void notificationClicked(Notification notification) {
@@ -245,9 +253,9 @@ public class NotificationActivity extends NavigationBaseActivity {
         context.startActivity(intent);
     }
 
-    private void setPageTitle(boolean archived) {
+    private void setPageTitle() {
         if (getSupportActionBar() != null) {
-            if (archived) {
+            if (getIntent().getStringExtra("title").equals("read")) {
                 getSupportActionBar().setTitle(R.string.archived_notifications);
             } else {
                 getSupportActionBar().setTitle(R.string.notifications);
@@ -255,18 +263,16 @@ public class NotificationActivity extends NavigationBaseActivity {
         }
     }
 
-    private void setEmptyView(boolean archived) {
-        if (archived) {
+    private void setEmptyView() {
+        if (getIntent().getStringExtra("title").equals("read")) {
             nonotificationtext.setText(R.string.no_archived_notification);
-            isarchivedvisible = true;
         }else {
             nonotificationtext.setText(R.string.no_notification);
-            isarchivedvisible = false;
         }
     }
 
-    private void setMenuItemTitle(boolean archived) {
-        if (archived) {
+    private void setMenuItemTitle() {
+        if (getIntent().getStringExtra("title").equals("read")) {
             notificationmenuitem.setTitle(R.string.menu_option_unread);
 
         }else {
@@ -274,17 +280,4 @@ public class NotificationActivity extends NavigationBaseActivity {
 
         }
     }
-
-   /* @Override
-    public void onBackPressed() {
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        if (drawer.isDrawerOpen(GravityCompat.START)) {
-            drawer.closeDrawer(GravityCompat.START);
-        }
-        else if (isarchivedvisible) {
-            refresh(false);
-        }else {
-            finish();
-        }
-    }*/
 }
