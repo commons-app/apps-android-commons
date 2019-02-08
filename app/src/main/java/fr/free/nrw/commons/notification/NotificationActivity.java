@@ -241,7 +241,6 @@ public class NotificationActivity extends NavigationBaseActivity {
     public static void startYourself(Context context, String title) {
         Intent intent = new Intent(context, NotificationActivity.class);
         intent.putExtra("title", title);
-        intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT | Intent.FLAG_ACTIVITY_SINGLE_TOP);
 
         context.startActivity(intent);
     }
