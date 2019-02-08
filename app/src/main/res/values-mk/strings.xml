@@ -434,5 +434,9 @@
   <string name="no_image">Нема искористени слики</string>
   <string name="no_image_reverted">Нема вратени слики</string>
   <string name="no_image_uploaded">Нема подигнати слики</string>
+  <string name="no_notification">Немате непрочитани известувања</string>
   <string name="share_logs_using">Споделувај дневници користејќи</string>
+  <string name="error_occurred_in_picking_images">Се јави грешка при избирањето на сликите</string>
+  <string name="image_chooser_title">Изберете слики за подигање</string>
+  <string name="please_wait">Почекајте...</string>
 </resources>

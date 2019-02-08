@@ -468,4 +468,8 @@ Upload your first media by touching the camera or gallery icon above.</string>
   <string name="menu_option_archived">View archived</string>
   <string name="menu_option_unread">View unread</string>
 
+  <string name="error_occurred_in_picking_images">Error occurred while picking images</string>
+  <string name="image_chooser_title">Choose Images to upload</string>
+
+  <string name="please_wait">Please wait…</string>
 </resources>

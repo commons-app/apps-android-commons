@@ -10,7 +10,6 @@ import android.net.Uri;
 import android.support.annotation.IntDef;
 import android.support.annotation.Nullable;
 
-import com.esafirm.imagepicker.model.Image;
 import com.facebook.common.executors.CallerThreadExecutor;
 import com.facebook.common.references.CloseableReference;
 import com.facebook.datasource.DataSource;
@@ -24,8 +23,6 @@ import com.facebook.imagepipeline.request.ImageRequestBuilder;
 import java.io.IOException;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
-import java.util.ArrayList;
-import java.util.List;
 
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.location.LatLng;
@@ -37,9 +34,9 @@ import timber.log.Timber;
 
 public class ImageUtils {
 
-    static final int IMAGE_DARK = 1;
+    public static final int IMAGE_DARK = 1;
     static final int IMAGE_BLURRY = 1 << 1;
-    public static final int IMAGE_DUPLICATE = 1 << 2;
+    public static final int IMAGE_DUPLICATE = 1 << 2; //4
     public static final int IMAGE_GEOLOCATION_DIFFERENT = 1 << 3;
     public static final int IMAGE_OK = 0;
     public static final int IMAGE_KEEP = -1;
@@ -250,16 +247,5 @@ public class ImageUtils {
         }
 
         return errorMessage.toString();
-    }
-
-    public static ArrayList<Uri> getUriListFromImages(List<Image> imageList) {
-        ArrayList<Uri> uriList = new ArrayList<>();
-        for (Image imagePath : imageList) {
-            if (!StringUtils.isNullOrWhiteSpace(imagePath.getPath())) {
-                uriList.add(Uri.parse(imagePath.getPath()));
-            }
-        }
-
-        return uriList;
     }
 }

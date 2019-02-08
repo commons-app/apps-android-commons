@@ -439,5 +439,6 @@
   <string name="no_image">Keine Bilder verwendet</string>
   <string name="no_image_reverted">Keine Bilder zurückgesetzt</string>
   <string name="no_image_uploaded">Keine Bilder hochgeladen</string>
+  <string name="no_notification">Du hast keine ungelesenen Benachrichtigungen</string>
   <string name="share_logs_using">Lognutzung teilen</string>
 </resources>

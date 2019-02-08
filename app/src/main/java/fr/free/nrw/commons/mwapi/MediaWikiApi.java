@@ -11,6 +11,8 @@ import java.util.List;
 
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.achievements.FeedbackResponse;
+import fr.free.nrw.commons.location.LatLng;
+import fr.free.nrw.commons.nearby.Place;
 import fr.free.nrw.commons.notification.Notification;
 import io.reactivex.Observable;
 import io.reactivex.Single;
@@ -47,9 +49,6 @@ public interface MediaWikiApi {
     List<String> getSubCategoryList(String categoryName);
 
     List<String> getParentCategoryList(String categoryName);
-
-    @NonNull
-    List<Media> searchImages(String title, int offset);
 
     @NonNull
     List<String> searchCategory(String title, int offset);
@@ -98,18 +97,10 @@ public interface MediaWikiApi {
     @NonNull
     LogEventResult logEvents(String user, String lastModified, String queryContinue, int limit) throws IOException;
 
-    @NonNull
-    Single<Integer> getUploadCount(String userName);
 
     boolean isUserBlockedFromCommons();
 
-    Single<FeedbackResponse> getAchievements(String userName);
-
-    Single<Media> getPictureOfTheDay();
-
     void logout();
-
-    Single<CampaignResponseDTO> getCampaigns();
 
     interface ProgressListener {
         void onProgress(long transferred, long total);

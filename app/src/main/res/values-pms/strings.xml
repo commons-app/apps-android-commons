@@ -426,4 +426,13 @@
   <string name="this_function_needs_network_connection">Sa fonsion a l\'ha damanca ëd na conession ëd rej, për piasì ch\'a contròla ij sò paràmtere ëd conession.</string>
   <string name="bad_token_error_proposed_solution">Ël cariament a l\'ha falì për dij problema con ël geton ëd modìfica. Ch\'a preuva a seurte e rintré torna ant ël sistema.</string>
   <string name="error_processing_image">A-i è staje n\'eror durant ël tratament ëd la plancia. Ch\'a ancamin-a torna, për piasì!</string>
+  <plurals name="receiving_shared_content">
+    <item quantity="one">Arseiviment ëd contnù partagià. Ël tratament ëd la plancia a peul pijé un pò \'d temp an fonsion ëd la taja dla plancia e ëd sò material</item>
+    <item quantity="other">Arseiviment ëd contnù partagià. Ël tratament ëd le plance a peul pijé un pò \'d temp an fonsion ëd la taja dla plancia e ëd sò material</item>
+  </plurals>
+  <string name="no_image">Gnun-e plance dovrà</string>
+  <string name="no_image_reverted">Gnun-e plance anvertìe</string>
+  <string name="no_image_uploaded">Gnun-e plance carià</string>
+  <string name="no_notification">A l\'ha gnun-e notìfiche nen lesùe</string>
+  <string name="share_logs_using">Partagé j\'argistr dovrand</string>
 </resources>

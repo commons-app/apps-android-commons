@@ -1,5 +1,7 @@
 package fr.free.nrw.commons.campaigns;
 
+import android.annotation.SuppressLint;
+import android.content.Context;
 import android.util.Log;
 
 import java.text.ParseException;
@@ -8,9 +10,13 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
+import javax.inject.Inject;
+import javax.inject.Singleton;
+
 import fr.free.nrw.commons.BasePresenter;
 import fr.free.nrw.commons.MvpView;
-import fr.free.nrw.commons.mwapi.MediaWikiApi;
+import fr.free.nrw.commons.di.ApplicationlessInjection;
+import fr.free.nrw.commons.mwapi.OkHttpJsonApiClient;
 import io.reactivex.Single;
 import io.reactivex.SingleObserver;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -21,16 +27,22 @@ import io.reactivex.schedulers.Schedulers;
  * The presenter for the campaigns view, fetches the campaigns from the api and informs the view on
  * success and error
  */
+@Singleton
 public class CampaignsPresenter implements BasePresenter {
+    private final OkHttpJsonApiClient okHttpJsonApiClient;
+
     private final String TAG = "#CampaignsPresenter#";
     private ICampaignsView view;
-    private MediaWikiApi mediaWikiApi;
     private Disposable disposable;
     private Campaign campaign;
 
+    @Inject
+    public CampaignsPresenter(OkHttpJsonApiClient okHttpJsonApiClient) {
+        this.okHttpJsonApiClient = okHttpJsonApiClient;
+    }
+
     @Override public void onAttachView(MvpView view) {
         this.view = (ICampaignsView) view;
-        this.mediaWikiApi = ((ICampaignsView) view).getMediaWikiApi();
     }
 
     @Override public void onDetachView() {
@@ -43,14 +55,15 @@ public class CampaignsPresenter implements BasePresenter {
     /**
      * make the api call to fetch the campaigns
      */
+    @SuppressLint("CheckResult")
     public void getCampaigns() {
-        if (view != null && mediaWikiApi != null) {
+        if (view != null && okHttpJsonApiClient != null) {
             //If we already have a campaign, lets not make another call
             if (this.campaign != null) {
                 view.showCampaigns(campaign);
                 return;
             }
-            Single<CampaignResponseDTO> campaigns = mediaWikiApi.getCampaigns();
+            Single<CampaignResponseDTO> campaigns = okHttpJsonApiClient.getCampaigns();
             campaigns.observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
                 .subscribeWith(new SingleObserver<CampaignResponseDTO>() {
