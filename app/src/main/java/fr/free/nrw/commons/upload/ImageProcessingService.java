@@ -81,7 +81,7 @@ public class ImageProcessingService {
             return zip | fbmd;
         });
     }
-    /*
+    /**
     * Other than the Image quality we need to check that using this Image doesn't violate's facebook's copyright's.
     * Whenever a user tries to upload an image that was downloaded from Facebook then we warn the user with a message to stop the upload
     * To know whether the Image is downloaded from facebook:

@@ -30,7 +30,7 @@ public class ReadFBMD {
         } catch (NullPointerException e) {
             return Single.just(ImageUtils.IMAGE_OK);
         }
-        /*
+        /**
         * The byte array so obtained is used is tested to contain FBMD data
         * Note: Any image downloaded from Facebook contains the ASCII code of the letters 'FBMD' in this bytecode extracted from it's IPTC metadata
         * */
