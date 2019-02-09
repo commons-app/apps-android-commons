@@ -82,7 +82,7 @@ class u {
                 .thenReturn(false)
         `when`(mwApi!!.fileExistsWithName(ArgumentMatchers.anyString()))
                 .thenReturn(false)
-        `when`(readFBMD!!.processMetadata(ArgumentMatchers.anyString()))
+        `when`(readFBMD?.processMetadata(ArgumentMatchers.anyString()))
                 .thenReturn(Single.just(ImageUtils.IMAGE_OK))
     }
 
