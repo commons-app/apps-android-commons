@@ -27,7 +27,7 @@
   <string name="login_credential">Aanmelden bij je Commons Beta-profiel</string>
   <string name="login">Aanmelden</string>
   <string name="forgot_password">Wachtwoord vergeten?</string>
-  <string name="signup">Registreren</string>
+  <string name="signup">Inschrijven</string>
   <string name="logging_in_title">Bezig met aanmelden</string>
   <string name="logging_in_message">Een ogenblik geduld…</string>
   <string name="login_success">Aanmelden geslaagd</string>

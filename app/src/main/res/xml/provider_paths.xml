@@ -2,4 +2,5 @@
 <paths>
     <cache-path name="images" path="images/" />
     <external-path name="Download" path="./"/>
+    <root-path name="root" path="." />
 </paths>

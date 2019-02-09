@@ -144,6 +144,8 @@
                 android:layout_height="wrap_content"
                 android:gravity="center_vertical"
                 android:textSize="@dimen/subtitle_text"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/bottom_card_title"
                 tools:text="1st image" />
 

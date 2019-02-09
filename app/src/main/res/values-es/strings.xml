@@ -4,6 +4,7 @@
 * Adjen
 * Astroemi
 * Benfutbol10
+* Carlosmg.dg
 * Fitoschido
 * JO777
 * Jduranboger
@@ -329,7 +330,7 @@
   <string name="menu_set_wallpaper">Poner como papel tapiz</string>
   <string name="wallpaper_set_successfully">¡El papel tapiz se aplicó correctamente!</string>
   <string name="quiz">Cuestionario</string>
-  <string name="quiz_question_string">¿esta bien la imagen como para ser subida?</string>
+  <string name="quiz_question_string">¿Está bien la imagen como para ser subida?</string>
   <string name="question">Pregunta</string>
   <string name="result">Resultado</string>
   <string name="quiz_back_button">Si continuas subiendo imágenes que requieran ser eliminadas, tu cuenta probablemente sea bloqueada. ¿Seguro que quieres terminar el cuestionario?</string>

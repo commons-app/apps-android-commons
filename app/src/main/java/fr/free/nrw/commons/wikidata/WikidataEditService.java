@@ -92,7 +92,9 @@ public class WikidataEditService {
 
     private void handleClaimResult(String wikidataEntityId, String revisionId) {
         if (revisionId != null) {
-            wikidataEditListener.onSuccessfulWikidataEdit();
+            if (wikidataEditListener != null) {
+                wikidataEditListener.onSuccessfulWikidataEdit();
+            }
             showSuccessToast();
             logEdit(revisionId);
         } else {
