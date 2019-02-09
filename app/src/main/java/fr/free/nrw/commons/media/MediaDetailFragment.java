@@ -1,10 +1,17 @@
 package fr.free.nrw.commons.media;
 
 import android.app.AlertDialog;
+import android.appwidget.AppWidgetManager;
 import android.content.ClipData;
 import android.content.ClipboardManager;
+import android.content.Context;
 import android.content.Intent;
 import android.database.DataSetObserver;
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
+import android.graphics.Paint;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -18,14 +25,26 @@ import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RemoteViews;
 import android.widget.ScrollView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.ablanco.zoomy.Zoomy;
+import com.facebook.common.executors.CallerThreadExecutor;
+import com.facebook.common.references.CloseableReference;
+import com.facebook.datasource.DataSource;
+import com.facebook.drawee.backends.pipeline.Fresco;
+import com.facebook.imagepipeline.core.ImagePipeline;
+import com.facebook.imagepipeline.datasource.BaseBitmapDataSubscriber;
+import com.facebook.imagepipeline.image.CloseableImage;
+import com.facebook.imagepipeline.request.ImageRequest;
+import com.facebook.imagepipeline.request.ImageRequestBuilder;
+import com.github.chrisbanes.photoview.PhotoView;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
@@ -122,6 +141,8 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
     Button delete;
     @BindView(R.id.mediaDetailScrollView)
     ScrollView scrollView;
+    @BindView(R.id.imagePhotoView)
+    PhotoView photoView;
 
     private ArrayList<String> categoryNames;
     private boolean categoriesLoaded = false;
@@ -194,9 +215,6 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
 
         licenseList = new LicenseList(getActivity());
 
-        Zoomy.Builder builder = new Zoomy.Builder(getActivity()).target(image);
-        builder.register();
-
         // Progressively darken the image in the background when we scroll detail pane up
         scrollListener = this::updateTheDarkness;
         view.getViewTreeObserver().addOnScrollChangedListener(scrollListener);
@@ -266,6 +284,7 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
     private void displayMediaDetails() {
         //Always load image from Internet to allow viewing the desc, license, and cats
         image.setMedia(media);
+        loadImageFromUrl(media.getImageUrl(), getContext());
 
         // FIXME: For transparent images
         // FIXME: keep the spinner going while we load data
@@ -316,6 +335,40 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
         license.setText(""); // fill in from network...
     }
 
+    /**
+     * Uses Fresco to load an image from Url
+     * @param imageUrl
+     * @param context
+     */
+    private void loadImageFromUrl(String imageUrl,
+                                  Context context) {
+        ImageRequest request = ImageRequestBuilder.newBuilderWithSource(Uri.parse(imageUrl)).build();
+        ImagePipeline imagePipeline = Fresco.getImagePipeline();
+        DataSource<CloseableReference<CloseableImage>> dataSource
+                = imagePipeline.fetchDecodedImage(request, context);
+        final Drawable[] drawable = new Drawable[1];
+        dataSource.subscribe(new BaseBitmapDataSubscriber() {
+            @Override
+            protected void onNewResultImpl(@Nullable Bitmap tempBitmap) {
+                Bitmap bitmap = null;
+                if (tempBitmap != null) {
+                    bitmap = Bitmap.createBitmap(tempBitmap.getWidth(), tempBitmap.getHeight(), Bitmap.Config.ARGB_8888);
+                    Canvas canvas = new Canvas(bitmap);
+                    canvas.drawBitmap(tempBitmap, 0f, 0f, new Paint());
+                    drawable[0] = new BitmapDrawable(getResources(), bitmap);
+                }
+                photoView.setImageDrawable(drawable[0]);
+                photoView.setScaleType(ImageView.ScaleType.CENTER_CROP);
+            }
+
+            @Override
+            protected void onFailureImpl(DataSource<CloseableReference<CloseableImage>> dataSource) {
+                // Ignore failure for now.
+            }
+        }, CallerThreadExecutor.getInstance());
+    }
+
+
     @Override
     public void onDestroyView() {
         if (detailFetchTask != null) {
@@ -333,6 +386,10 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
         if (dataObserver != null) {
             detailProvider.unregisterDataSetObserver(dataObserver);
             dataObserver = null;
+        }
+
+        if(photoView.getVisibility() == View.VISIBLE) {
+            photoView.setVisibility(GONE);
         }
         super.onDestroyView();
     }
@@ -365,7 +422,8 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
 
     @OnClick(R.id.mediaDetailLinearLayout)
     public void onMediaDetailImageClicked() {
-        image.bringToFront();
+        photoView.setVisibility(VISIBLE);
+        photoView.setZoomable(true);
     }
 
     @OnClick(R.id.mediaDetailLicense)

@@ -2,28 +2,25 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="?attr/mainBackground"
-    >
+    android:orientation="vertical">
 
     <ImageView
         android:id="@+id/mediaDetailImageFailed"
-        android:layout_height="wrap_content"
         android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:src="@android:drawable/ic_menu_close_clear_cancel"
-        android:visibility="gone"
         android:contentDescription="@string/mediaimage_failed"
-        />
+        android:src="@android:drawable/ic_menu_close_clear_cancel"
+        android:visibility="gone" />
 
     <fr.free.nrw.commons.MediaWikiImageView
         android:id="@+id/mediaDetailImage"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:actualImageScaleType="fitCenter"
-        />
+        app:actualImageScaleType="fitCenter" />
 
     <ScrollView
         android:id="@+id/mediaDetailScrollView"
@@ -86,9 +83,9 @@
                     android:layout_height="@dimen/small_gap" />
 
                 <LinearLayout
+                    android:id="@+id/authorLinearLayout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/authorLinearLayout"
                     android:background="?attr/subBackground"
                     android:orientation="vertical"
                     android:padding="@dimen/standard_gap">
@@ -287,12 +284,13 @@
 
                 <LinearLayout
                     android:id="@+id/nominatedDeletionBanner"
-                    android:background="@color/deleteRed"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:background="@color/deleteRed"
                     android:orientation="vertical"
                     android:padding="@dimen/standard_gap"
                     android:visibility="gone">
+
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -300,7 +298,8 @@
                         android:text="@string/nominated_for_deletion"
                         android:textColor="@color/primaryTextColor"
                         android:textSize="@dimen/normal_text"
-                        android:textStyle="bold"/>
+                        android:textStyle="bold" />
+
                     <TextView
                         android:id="@+id/seeMore"
                         android:layout_width="match_parent"
@@ -309,7 +308,7 @@
                         android:paddingTop="@dimen/standard_gap"
                         android:textColor="@color/primaryTextColor"
                         android:textSize="@dimen/normal_text"
-                        android:textStyle="bold"/>
+                        android:textStyle="bold" />
                 </LinearLayout>
 
                 <Button
@@ -323,14 +322,19 @@
 
                 <Button
                     android:id="@+id/nominateDeletion"
-                    android:background="@drawable/bg_delete_button"
-                    android:textColor="@color/primaryTextColor"
-                    android:layout_margin="@dimen/standard_gap"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/nominate_deletion"/>
+                    android:layout_margin="@dimen/standard_gap"
+                    android:background="@drawable/bg_delete_button"
+                    android:text="@string/nominate_deletion"
+                    android:textColor="@color/primaryTextColor" />
             </LinearLayout>
         </LinearLayout>
     </ScrollView>
 
+    <com.github.chrisbanes.photoview.PhotoView
+        android:id="@+id/imagePhotoView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone" />
 </FrameLayout>
