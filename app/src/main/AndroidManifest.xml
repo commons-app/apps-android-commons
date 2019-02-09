@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     package="fr.free.nrw.commons">
 
     <uses-permission android:name="android.permission.INTERNET" />
@@ -23,8 +22,6 @@
 
     <!-- Needed only if your app targets Android 5.0 (API level 21) or higher. -->
     <uses-feature android:name="android.hardware.location.gps" />
-
-    <uses-sdk tools:overrideLibrary="com.ablanco.zoomy"/>
 
     <application
         android:name=".CommonsApplication"
