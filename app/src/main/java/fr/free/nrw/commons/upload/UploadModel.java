@@ -19,8 +19,8 @@ import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.Utils;
 import fr.free.nrw.commons.auth.SessionManager;
 import fr.free.nrw.commons.contributions.Contribution;
-import fr.free.nrw.commons.contributions.UploadableFile;
 import fr.free.nrw.commons.filepicker.MimeTypeMapWrapper;
+import fr.free.nrw.commons.filepicker.UploadableFile;
 import fr.free.nrw.commons.kvstore.BasicKvStore;
 import fr.free.nrw.commons.nearby.Place;
 import fr.free.nrw.commons.settings.Prefs;
@@ -100,6 +100,7 @@ public class UploadModel {
                                      SimilarImageInterface similarImageInterface) {
         fileProcessor.initFileDetails(Objects.requireNonNull(uploadableFile.getFilePath()), context.getContentResolver());
         long fileCreatedDate = uploadableFile.getFileCreatedDate(context);
+        Timber.d("File created date is %d", fileCreatedDate);
         GPSExtractor gpsExtractor = fileProcessor.processFileCoordinates(similarImageInterface);
         return new UploadItem(Uri.parse(uploadableFile.getFilePath()), uploadableFile.getMimeType(context), source, gpsExtractor, place, fileCreatedDate);
     }
@@ -283,8 +284,11 @@ public class UploadModel {
             contribution.setTag("mimeType", item.mimeType);
             contribution.setSource(item.source);
             contribution.setContentProviderUri(item.mediaUri);
+            Timber.d("Created timestamp while building contribution is %s, %s",
+                    item.getCreatedTimestamp(),
+                    new Date(item.getCreatedTimestamp()));
             if (item.createdTimestamp != -1L) {
-                contribution.setDateCreated(new Date(item.createdTimestamp));
+                contribution.setDateCreated(new Date(item.getCreatedTimestamp()));
                 //Set the date only if you have it, else the upload service is gonna try it the other way
             }
             return contribution;

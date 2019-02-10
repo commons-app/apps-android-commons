@@ -7,7 +7,6 @@ import android.content.Intent;
 import android.os.Build;
 import android.support.annotation.NonNull;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,6 +17,7 @@ import javax.inject.Singleton;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.filepicker.DefaultCallback;
 import fr.free.nrw.commons.filepicker.FilePicker;
+import fr.free.nrw.commons.filepicker.UploadableFile;
 import fr.free.nrw.commons.kvstore.BasicKvStore;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.nearby.Place;
@@ -116,7 +116,7 @@ public class ContributionController {
             }
 
             @Override
-            public void onImagesPicked(@NonNull List<File> imagesFiles, FilePicker.ImageSource source, int type) {
+            public void onImagesPicked(@NonNull List<UploadableFile> imagesFiles, FilePicker.ImageSource source, int type) {
                 Intent intent = handleImagesPicked(activity, imagesFiles, getSourceFromImageSource(source));
                 activity.startActivity(intent);
             }
@@ -124,8 +124,8 @@ public class ContributionController {
     }
 
     public List<UploadableFile> handleExternalImagesPicked(Activity activity,
-                                                            Intent data) {
-        return getUploadableFiles(FilePicker.handleExternalImagesPicked(data, activity));
+                                                           Intent data) {
+        return FilePicker.handleExternalImagesPicked(data, activity);
     }
 
     /**
@@ -133,28 +133,18 @@ public class ContributionController {
      * Attaches place object for nearby uploads
      */
     private Intent handleImagesPicked(Context context,
-                                      List<File> imagesFiles,
+                                      List<UploadableFile> imagesFiles,
                                       String source) {
-        ArrayList<UploadableFile> uploadableFiles = getUploadableFiles(imagesFiles);
         Intent shareIntent = new Intent(context, UploadActivity.class);
         shareIntent.setAction(ACTION_INTERNAL_UPLOADS);
         shareIntent.putExtra(EXTRA_SOURCE, source);
-        shareIntent.putParcelableArrayListExtra(EXTRA_FILES, uploadableFiles);
+        shareIntent.putParcelableArrayListExtra(EXTRA_FILES, new ArrayList<>(imagesFiles));
         Place place = directKvStore.getJson(PLACE_OBJECT, Place.class);
         if (place != null) {
             shareIntent.putExtra(PLACE_OBJECT, place);
         }
 
         return shareIntent;
-    }
-
-    @NonNull
-    private ArrayList<UploadableFile> getUploadableFiles(List<File> imagesFiles) {
-        ArrayList<UploadableFile> uploadableFiles = new ArrayList<>();
-        for (File file : imagesFiles) {
-            uploadableFiles.add(new UploadableFile(file));
-        }
-        return uploadableFiles;
     }
 
     /**

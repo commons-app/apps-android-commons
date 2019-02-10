@@ -38,6 +38,32 @@ public class DateUtils {
         }
     }
 
+    /**
+     * https://www.w3.org/2003/12/exif/
+     *
+     * @param dateString
+     * @return
+     */
+    public static Date getDateFromExifString(String dateString) {
+        if (StringUtils.isNullOrWhiteSpace(dateString)) {
+            return null;
+        }
+        String[] dateTimeSplit = dateString.split(" ");
+        String date = dateTimeSplit[0];
+        String time = dateTimeSplit[1];
+
+        String[] dateSplit = date.split(":");
+        String[] timeSplit = time.split(":");
+        Calendar instance = Calendar.getInstance();
+        instance.set(Integer.parseInt(dateSplit[0]),
+                Integer.parseInt(dateSplit[1]),
+                Integer.parseInt(dateSplit[2]),
+                Integer.parseInt(timeSplit[0]),
+                Integer.parseInt(timeSplit[1]),
+                Integer.parseInt(timeSplit[2]));
+        return instance.getTime();
+    }
+
     public static String getCurrentDate() {
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.US);
         Date date = new Date();
