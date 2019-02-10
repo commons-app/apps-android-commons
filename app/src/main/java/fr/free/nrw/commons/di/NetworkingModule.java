@@ -34,7 +34,9 @@ public class NetworkingModule {
     private static final String WIKIDATA_SPARQL_QUERY_URL = "https://query.wikidata.org/sparql";
     private final String WIKIMEDIA_CAMPAIGNS_BASE_URL =
             "https://raw.githubusercontent.com/commons-app/campaigns/master/campaigns.json";
-    private static final String TOOLS_FORGE_URL = "https://tools.wmflabs.org/";
+    private static final String TOOLS_FORGE_URL = "https://tools.wmflabs.org/urbanecmbot/commonsmisc";
+
+    private static final String TEST_TOOLS_FORGE_URL = "https://tools.wmflabs.org/commons-android-app/tool-commons-android-app";
 
     public static final long OK_HTTP_CACHE_SIZE = 10 * 1024 * 1024;
 
@@ -96,7 +98,7 @@ public class NetworkingModule {
     @NonNull
     @SuppressWarnings("ConstantConditions")
     public HttpUrl provideToolsForgeUrl() {
-        return HttpUrl.parse(TOOLS_FORGE_URL);
+        return HttpUrl.parse(TEST_TOOLS_FORGE_URL);
     }
 
     /**
