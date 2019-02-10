@@ -273,6 +273,7 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
     }
 
 
+
     @Override
     @Nullable
     public String appendEdit(String editToken, String processedPageContent, String filename, String summary) throws IOException {
@@ -557,16 +558,22 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
 
     @Override
     @NonNull
-    public List<Notification> getNotifications() {
+    public List<Notification> getNotifications(boolean archived) {
         CustomApiResult notificationNode = null;
+        String notfilter;
         try {
+            if (archived) {
+                notfilter = "read";
+            }else {
+                notfilter = "!read";
+            }
             notificationNode = api.action("query")
                     .param("notprop", "list")
                     .param("format", "xml")
                     .param("meta", "notifications")
                     .param("notformat", "model")
                     .param("notwikis", "wikidatawiki|commonswiki|enwiki")
-                    .param("notfilter","!read")
+                    .param("notfilter", notfilter)
                     .get()
                     .getNode("/api/query/notifications/list");
         } catch (IOException e) {
