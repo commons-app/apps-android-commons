@@ -98,7 +98,7 @@ public class NetworkingModule {
     @NonNull
     @SuppressWarnings("ConstantConditions")
     public HttpUrl provideToolsForgeUrl() {
-        return HttpUrl.parse(TEST_TOOLS_FORGE_URL);
+        return HttpUrl.parse(TOOLS_FORGE_URL);
     }
 
     /**

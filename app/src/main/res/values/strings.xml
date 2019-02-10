@@ -357,7 +357,7 @@
   <string name="statistics">STATISTICS</string>
   <string name="statistics_thanks">Thanks Received</string>
   <string name="statistics_featured">Featured Images</string>
-  <string name="statistics_wikidata_edits">Wikidata edits through app</string>
+  <string name="statistics_wikidata_edits">Images via \"Nearby Places\"</string>
   <string name="level">LEVEL</string>
   <string name="images_uploaded">Images Uploaded</string>
   <string name="image_reverts">Images Not Reverted</string>
