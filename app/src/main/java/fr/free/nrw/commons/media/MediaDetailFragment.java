@@ -2,14 +2,9 @@ package fr.free.nrw.commons.media;
 
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
-import android.content.ClipData;
-import android.content.ClipboardManager;
-import android.content.Context;
 import android.content.Intent;
 import android.database.DataSetObserver;
 import android.graphics.Bitmap;
-import android.graphics.Canvas;
-import android.graphics.Paint;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
@@ -32,15 +27,6 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.facebook.common.executors.CallerThreadExecutor;
-import com.facebook.common.references.CloseableReference;
-import com.facebook.datasource.DataSource;
-import com.facebook.drawee.backends.pipeline.Fresco;
-import com.facebook.imagepipeline.core.ImagePipeline;
-import com.facebook.imagepipeline.datasource.BaseBitmapDataSubscriber;
-import com.facebook.imagepipeline.image.CloseableImage;
-import com.facebook.imagepipeline.request.ImageRequest;
-import com.facebook.imagepipeline.request.ImageRequestBuilder;
 import com.github.chrisbanes.photoview.PhotoView;
 
 import java.io.IOException;
@@ -54,6 +40,7 @@ import javax.inject.Provider;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import fr.free.nrw.commons.FrescoImageLoader;
 import fr.free.nrw.commons.License;
 import fr.free.nrw.commons.LicenseList;
 import fr.free.nrw.commons.Media;
@@ -76,7 +63,6 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 import timber.log.Timber;
 
-import static android.content.Context.CLIPBOARD_SERVICE;
 import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
 import static android.widget.Toast.LENGTH_SHORT;
@@ -288,7 +274,14 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
     private void displayMediaDetails() {
         //Always load image from Internet to allow viewing the desc, license, and cats
         image.setMedia(media);
-        loadImageFromUrl(media.getImageUrl(), getContext());
+        Bitmap bitmap = FrescoImageLoader.loadImageFromUrl(media.getImageUrl(), getContext());
+        Drawable drawable = new BitmapDrawable(getResources(), bitmap);
+
+        if(drawable != null) {
+            photoView.setImageDrawable(drawable);
+            photoView.setScaleType(ImageView.ScaleType.CENTER_CROP);
+        }
+
 
         // FIXME: For transparent images
         // FIXME: keep the spinner going while we load data
@@ -338,40 +331,6 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
         desc.setText(""); // fill in from network...
         license.setText(""); // fill in from network...
     }
-
-    /**
-     * Uses Fresco to load an image from Url
-     * @param imageUrl
-     * @param context
-     */
-    private void loadImageFromUrl(String imageUrl,
-                                  Context context) {
-        ImageRequest request = ImageRequestBuilder.newBuilderWithSource(Uri.parse(imageUrl)).build();
-        ImagePipeline imagePipeline = Fresco.getImagePipeline();
-        DataSource<CloseableReference<CloseableImage>> dataSource
-                = imagePipeline.fetchDecodedImage(request, context);
-        final Drawable[] drawable = new Drawable[1];
-        dataSource.subscribe(new BaseBitmapDataSubscriber() {
-            @Override
-            protected void onNewResultImpl(@Nullable Bitmap tempBitmap) {
-                Bitmap bitmap = null;
-                if (tempBitmap != null) {
-                    bitmap = Bitmap.createBitmap(tempBitmap.getWidth(), tempBitmap.getHeight(), Bitmap.Config.ARGB_8888);
-                    Canvas canvas = new Canvas(bitmap);
-                    canvas.drawBitmap(tempBitmap, 0f, 0f, new Paint());
-                    drawable[0] = new BitmapDrawable(getResources(), bitmap);
-                }
-                photoView.setImageDrawable(drawable[0]);
-                photoView.setScaleType(ImageView.ScaleType.CENTER_CROP);
-            }
-
-            @Override
-            protected void onFailureImpl(DataSource<CloseableReference<CloseableImage>> dataSource) {
-                // Ignore failure for now.
-            }
-        }, CallerThreadExecutor.getInstance());
-    }
-
 
     @Override
     public void onDestroyView() {
