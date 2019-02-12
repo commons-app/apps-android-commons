@@ -1,15 +1,6 @@
 package fr.free.nrw.commons.upload;
 
-import android.net.Uri;
-
-import com.facebook.common.util.UriUtil;
-
-import org.apache.http.client.utils.URIUtils;
-
-import java.io.File;
 import java.io.IOException;
-import java.net.MalformedURLException;
-import java.net.URL;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
@@ -21,8 +12,8 @@ import fr.free.nrw.commons.utils.ImageUtils;
 import fr.free.nrw.commons.utils.ImageUtilsWrapper;
 import fr.free.nrw.commons.utils.StringUtils;
 import io.reactivex.Single;
-import retrofit2.http.Url;
 import timber.log.Timber;
+
 import static fr.free.nrw.commons.utils.ImageUtils.EMPTY_TITLE;
 import static fr.free.nrw.commons.utils.ImageUtils.FILE_NAME_EXISTS;
 import static fr.free.nrw.commons.utils.ImageUtils.IMAGE_OK;
@@ -77,7 +68,7 @@ public class ImageProcessingService {
                 });
 
         return Single.zip(zipResult, checkFBMD, (zip, fbmd) -> {
-            Timber.d("zip:"+zip+ "fbmd:"+zip);
+            Timber.d("zip:" + zip + "fbmd:" + fbmd);
             return zip | fbmd;
         });
     }
