@@ -9,7 +9,10 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.content.ContextCompat;
+import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewPager;
+import android.support.v4.widget.DrawerLayout;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -240,9 +243,12 @@ public class MainActivity extends AuthenticatedActivity implements FragmentManag
 
     @Override
     public void onBackPressed() {
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         String contributionsFragmentTag = ((ContributionsActivityPagerAdapter) viewPager.getAdapter()).makeFragmentName(R.id.pager, 0);
         String nearbyFragmentTag = ((ContributionsActivityPagerAdapter) viewPager.getAdapter()).makeFragmentName(R.id.pager, 1);
-        if (getSupportFragmentManager().findFragmentByTag(contributionsFragmentTag) != null && isContributionsFragmentVisible) {
+        if (drawer.isDrawerOpen(GravityCompat.START)) {
+            drawer.closeDrawer(GravityCompat.START);
+        } else if (getSupportFragmentManager().findFragmentByTag(contributionsFragmentTag) != null && isContributionsFragmentVisible) {
             // Meas that contribution fragment is visible (not nearby fragment)
             ContributionsFragment contributionsFragment = (ContributionsFragment) getSupportFragmentManager().findFragmentByTag(contributionsFragmentTag);
 
@@ -286,7 +292,7 @@ public class MainActivity extends AuthenticatedActivity implements FragmentManag
         final View notification = notificationsMenuItem.getActionView();
         notificationCount = notification.findViewById(R.id.notification_count_badge);
         notification.setOnClickListener(view -> {
-            NotificationActivity.startYourself(MainActivity.this);
+            NotificationActivity.startYourself(MainActivity.this, "unread");
         });
         this.menu = menu;
         updateMenuItem();
@@ -296,7 +302,7 @@ public class MainActivity extends AuthenticatedActivity implements FragmentManag
 
     @SuppressLint("CheckResult")
     private void setNotificationCount() {
-        Observable.fromCallable(() -> notificationController.getNotifications())
+        Observable.fromCallable(() -> notificationController.getNotifications(false))
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(this::initNotificationViews,
@@ -338,7 +344,7 @@ public class MainActivity extends AuthenticatedActivity implements FragmentManag
         switch (item.getItemId()) {
             case R.id.notifications:
                 // Starts notification activity on click to notification icon
-                NotificationActivity.startYourself(this);
+                NotificationActivity.startYourself(this, "unread");
                 return true;
             case R.id.list_sheet:
                 if (contributionsActivityPagerAdapter.getItem(1) != null) {
@@ -483,6 +489,12 @@ public class MainActivity extends AuthenticatedActivity implements FragmentManag
             default:
                 return;
         }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        setNotificationCount();
     }
 
     @Override

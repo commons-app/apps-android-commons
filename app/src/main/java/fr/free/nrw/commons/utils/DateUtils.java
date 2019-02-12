@@ -2,6 +2,7 @@ package fr.free.nrw.commons.utils;
 
 import android.text.format.DateFormat;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -38,30 +39,13 @@ public class DateUtils {
         }
     }
 
-    /**
-     * https://www.w3.org/2003/12/exif/
-     *
-     * @param dateString
-     * @return
-     */
-    public static Date getDateFromExifString(String dateString) {
-        if (StringUtils.isNullOrWhiteSpace(dateString)) {
+    public static Date getDateFromString(String dateString) {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.US);
+        try {
+            return dateFormat.parse(dateString);
+        } catch (ParseException e) {
             return null;
         }
-        String[] dateTimeSplit = dateString.split(" ");
-        String date = dateTimeSplit[0];
-        String time = dateTimeSplit[1];
-
-        String[] dateSplit = date.split(":");
-        String[] timeSplit = time.split(":");
-        Calendar instance = Calendar.getInstance();
-        instance.set(Integer.parseInt(dateSplit[0]),
-                Integer.parseInt(dateSplit[1]),
-                Integer.parseInt(dateSplit[2]),
-                Integer.parseInt(timeSplit[0]),
-                Integer.parseInt(timeSplit[1]),
-                Integer.parseInt(timeSplit[2]));
-        return instance.getTime();
     }
 
     public static String getCurrentDate() {
@@ -69,6 +53,7 @@ public class DateUtils {
         Date date = new Date();
         return dateFormat.format(date);
     }
+
     public static String dateInLocaleFormat(Date date){
         String formatter;
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.JELLY_BEAN_MR2) {

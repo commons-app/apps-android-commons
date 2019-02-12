@@ -8,20 +8,21 @@ import javax.inject.Singleton;
 
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.bookmarks.Bookmark;
-import fr.free.nrw.commons.mwapi.MediaWikiApi;
+import fr.free.nrw.commons.mwapi.OkHttpJsonApiClient;
 
 @Singleton
 public class BookmarkPicturesController {
 
-    private MediaWikiApi mediaWikiApi;
-
-    @Inject
-    BookmarkPicturesDao bookmarkDao;
+    private final OkHttpJsonApiClient okHttpJsonApiClient;
+    private final BookmarkPicturesDao bookmarkDao;
 
     private List<Bookmark> currentBookmarks;
 
-    @Inject public BookmarkPicturesController(MediaWikiApi mediaWikiApi) {
-        this.mediaWikiApi = mediaWikiApi;
+    @Inject
+    public BookmarkPicturesController(OkHttpJsonApiClient okHttpJsonApiClient,
+                                      BookmarkPicturesDao bookmarkDao) {
+        this.okHttpJsonApiClient = okHttpJsonApiClient;
+        this.bookmarkDao = bookmarkDao;
         currentBookmarks = new ArrayList<>();
     }
 
@@ -34,7 +35,9 @@ public class BookmarkPicturesController {
         currentBookmarks = bookmarks;
         ArrayList<Media> medias = new ArrayList<>();
         for (Bookmark bookmark : bookmarks) {
-            List<Media> tmpMedias = mediaWikiApi.searchImages(bookmark.getMediaName(), 0);
+            List<Media> tmpMedias = okHttpJsonApiClient
+                    .searchImages(bookmark.getMediaName(), 0)
+                    .blockingGet();
             for (Media m : tmpMedias) {
                 if (m.getCreator().trim().equals(bookmark.getMediaCreator().trim())) {
                     medias.add(m);

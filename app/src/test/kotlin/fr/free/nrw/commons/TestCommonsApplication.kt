@@ -45,7 +45,6 @@ class MockCommonsApplicationModule(appContext: Context) : CommonsApplicationModu
     val mockSessionManager: SessionManager = mock()
     val locationServiceManager: LocationServiceManager = mock()
     val mockDbOpenHelper: DBOpenHelper = mock()
-    val nearbyPlaces: NearbyPlaces = mock()
     val lruCache: LruCache<String, String> = mock()
     val gson: Gson = Gson()
     val categoryClient: ContentProviderClient = mock()
@@ -76,8 +75,6 @@ class MockCommonsApplicationModule(appContext: Context) : CommonsApplicationModu
     override fun provideLocationServiceManager(context: Context): LocationServiceManager = locationServiceManager
 
     override fun provideDBOpenHelper(context: Context): DBOpenHelper = mockDbOpenHelper
-
-    override fun provideNearbyPlaces(): NearbyPlaces = nearbyPlaces
 
     override fun provideLruCache(): LruCache<String, String> = lruCache
 }

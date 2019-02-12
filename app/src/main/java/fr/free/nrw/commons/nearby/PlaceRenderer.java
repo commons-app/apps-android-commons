@@ -15,6 +15,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.facebook.drawee.view.SimpleDraweeView;
 import com.pedrogomez.renderers.Renderer;
 
 import java.util.ArrayList;
@@ -43,7 +44,7 @@ public class PlaceRenderer extends Renderer<Place> {
     @BindView(R.id.tvName) TextView tvName;
     @BindView(R.id.tvDesc) TextView tvDesc;
     @BindView(R.id.distance) TextView distance;
-    @BindView(R.id.icon) ImageView icon;
+    @BindView(R.id.icon) SimpleDraweeView icon;
     @BindView(R.id.buttonLayout) LinearLayout buttonLayout;
     @BindView(R.id.cameraButton) LinearLayout cameraButton;
 
@@ -215,6 +216,8 @@ public class PlaceRenderer extends Renderer<Place> {
         }
         tvDesc.setText(descriptionText);
         distance.setText(place.distance);
+
+
         icon.setImageResource(place.getLabel().getIcon());
 
         directionsButton.setOnClickListener(view -> {

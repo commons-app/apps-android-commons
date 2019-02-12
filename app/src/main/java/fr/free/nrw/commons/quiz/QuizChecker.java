@@ -7,7 +7,7 @@ import android.support.v7.app.AlertDialog.Builder;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.WelcomeActivity;
 import fr.free.nrw.commons.kvstore.BasicKvStore;
-import fr.free.nrw.commons.mwapi.MediaWikiApi;
+import fr.free.nrw.commons.mwapi.OkHttpJsonApiClient;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.schedulers.Schedulers;
@@ -28,7 +28,7 @@ public class QuizChecker {
     private CompositeDisposable compositeDisposable = new CompositeDisposable();
     public Context context;
     private String userName;
-    private MediaWikiApi mediaWikiApi;
+    private OkHttpJsonApiClient okHttpJsonApiClient;
     private BasicKvStore revertKvStore;
     private BasicKvStore countKvStore;
 
@@ -41,16 +41,16 @@ public class QuizChecker {
      * constructor to set the parameters for quiz
      * @param context context
      * @param userName Commons user name
-     * @param mediaWikiApi instance of MediaWikiApi
+     * @param okHttpJsonApiClient instance of MediaWikiApi
      */
     public QuizChecker(Context context,
                        String userName,
-                       MediaWikiApi mediaWikiApi,
+                       OkHttpJsonApiClient okHttpJsonApiClient,
                        BasicKvStore revertKvStore,
                        BasicKvStore countKvStore) {
         this.context = context;
         this.userName = userName;
-        this.mediaWikiApi = mediaWikiApi;
+        this.okHttpJsonApiClient = okHttpJsonApiClient;
         this.revertKvStore = revertKvStore;
         this.countKvStore = countKvStore;
         setUploadCount();
@@ -61,7 +61,7 @@ public class QuizChecker {
      * to fet the total number of images uploaded
      */
     private void setUploadCount() {
-            compositeDisposable.add(mediaWikiApi
+        compositeDisposable.add(okHttpJsonApiClient
                     .getUploadCount(userName)
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
@@ -89,7 +89,7 @@ public class QuizChecker {
      * To call the API to get reverts count in form of JSONObject
      */
     private void setRevertCount() {
-            compositeDisposable.add(mediaWikiApi
+        compositeDisposable.add(okHttpJsonApiClient
                     .getAchievements(userName)
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())

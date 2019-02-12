@@ -362,4 +362,7 @@
   <string name="no_image">Nessuna immagine utilizzata</string>
   <string name="no_image_reverted">Nessuna immagine ripristinata</string>
   <string name="no_image_uploaded">Nessuna immagine caricata</string>
+  <string name="error_occurred_in_picking_images">Si è verificato un errore durante la selezione delle immagini</string>
+  <string name="image_chooser_title">Scegli le immagini da caricare</string>
+  <string name="please_wait">Attendi per favore…</string>
 </resources>

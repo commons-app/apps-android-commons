@@ -102,7 +102,10 @@
   <string name="no_uploads_yet">Þú ert ekki ennþá búin(n) að senda inn neinar myndir.</string>
   <string name="menu_retry_upload">Reyna aftur</string>
   <string name="menu_cancel_upload">Hætta við</string>
-  <string name="share_license_summary" fuzzy="true">Þessi mynd verður birt með %1$s notkunarleyfi</string>
+  <plurals name="share_license_summary">
+    <item quantity="one">Þessi mynd verður birt með %1$s notkunarleyfi</item>
+    <item quantity="other">Þessar myndir verða birtar með %1$s notkunarleyfi</item>
+  </plurals>
   <string name="media_upload_policy">Með því að senda inn þessa mynd, lýsi ég því hér með yfir að þetta er mitt eigið verk, það inniheldur ekkert höfundarréttarvarið efni eða sjálfsmyndir, og að það samræmist á allan hátt við &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines\"&gt;stefnu Wikimedia Commons varðandi notkun efnis&lt;/a&gt;.</string>
   <string name="menu_download">Sækja</string>
   <string name="preference_license">Sjálfgefið notkunarleyfi</string>
@@ -161,6 +164,7 @@
   <string name="detail_description_empty">Engin lýsing</string>
   <string name="detail_license_empty">Óþekkt notkunarleyfi</string>
   <string name="menu_refresh">Endurlesa</string>
+  <string name="storage_permission_title">Biður um aðgang að geymslurými</string>
   <string name="read_storage_permission_rationale">Nauðsynlegar heimildir: Lesa ytri gagnageymslu. Forritið fær ekki aðgang að myndasafni ekki án þessa.</string>
   <string name="write_storage_permission_rationale">Nauðsynlegar heimildir: Skrifa í ytri gagnageymslu. Forritið nær ekki sambandi við myndavél ekki án þessa.</string>
   <string name="location_permission_rationale">Nauðsynlegar heimildir: Lesa núverandi staðsetningu til að geta stungið upp á flokkum</string>
@@ -232,6 +236,12 @@
   <string name="description_info">Lýstu gögnunum eins vel og auðið er: Hvar er myndin tekin? Hvað sýnir hún? Hvert er samhengið? Lýstu fólki og fyrirbærum. Gefðu upp þær upplýsingar sem ekki er auðvelt að giska á, til dæmis á hvaða tíma dags myndin er tekin ef hún sýnir landslag. Ef gögnin sýna eitthvað óvenjulegt, útskýrðu þá hvað það er sem sé sérstakt.</string>
   <string name="upload_image_too_dark">Þessi mynd er of dökk, ertu viss um að þú viljir senda hana inn? Wikimedia Commons er aðeins fyrir myndir sem hafa eitthvað fræðslugildi.</string>
   <string name="upload_image_blurry">Þessi mynd er ekki skörp, ertu viss um að þú viljir senda hana inn? Wikimedia Commons er aðeins fyrir myndir sem hafa eitthvað fræðslugildi.</string>
+  <string name="upload_problem_exist">Möguleg vandamál með þessa mynd:</string>
+  <string name="upload_problem_image_dark">Myndin er of dökk.</string>
+  <string name="upload_problem_image_blurry">Myndin er of móskuleg.</string>
+  <string name="upload_problem_image_duplicate">Myndin er þegar í Commons-almenningi.</string>
+  <string name="upload_problem_different_geolocation">Myndin var tekin á öðrum stað.</string>
+  <string name="upload_problem_do_you_continue">Viltu samt senda inn þessa mynd?</string>
   <string name="give_permission">Gefa heimild</string>
   <string name="use_external_storage">Nota ytri gagnageymslu</string>
   <string name="use_external_storage_summary">Vistaðu myndir sem teknar hafa verið með innbyggðu myndavélinni í tækinu þínu</string>
@@ -247,7 +257,7 @@
   <string name="skip_login">Sleppa</string>
   <string name="navigation_item_login">Skrá inn</string>
   <string name="skip_login_title">Viltu í alvörunni sleppa innskráningu?</string>
-  <string name="skip_login_message" fuzzy="true">Þú munt ekki geta sent inn myndir</string>
+  <string name="skip_login_message">Þú munt í framtíðinni þurfa að skrá þig inn til geta sent inn myndir.</string>
   <string name="login_alert_message">Skráðu þig inn til að nota þennan eiginleika</string>
   <string name="copy_wikicode">Afrita wiki-textann á klippispjaldið</string>
   <string name="wikicode_copied">Wiki-textinn var afritaður á klippispjaldið</string>
@@ -296,6 +306,8 @@
   <string name="provider_searches">Nýlegar leitarbeiðnir</string>
   <string name="error_loading_categories">Villa kom upp við að hlaða inn flokkum.</string>
   <string name="error_loading_subcategories">Villa kom upp við að hlaða inn undirflokkum.</string>
+  <string name="search_tab_title_media">MIÐILL</string>
+  <string name="search_tab_title_categories">FLOKKAR</string>
   <string name="successful_wikidata_edit">Tókst að hlaða mynd inn í %1$s á Wikidata!</string>
   <string name="wikidata_edit_failure">Mistókst að uppfæra samsvarandi Wikidata-einindi!</string>
   <string name="menu_set_wallpaper">Setja sem bakgrunnsmynd</string>
@@ -324,6 +336,7 @@
   <string name="share_coordinates_not_present">Hnit voru ekki tilgreind við val myndar</string>
   <string name="error_fetching_nearby_places">Villa við að sækja nálæga staði.</string>
   <string name="add_description">+ Bæta við lýsingu</string>
+  <string name="no_recent_searches">Engar nýlegar leitir</string>
   <string name="delete_recent_searches_dialog">Ertu viss um að þú viljir eyða leitarferlinum þínum?</string>
   <string name="search_history_deleted">Leitarferli eytt</string>
   <string name="nominate_delete">Tilnefna til eyðingar</string>
@@ -343,6 +356,10 @@
   <string name="images_used_explanation">Heildarfjöldi mynda sem þú hefur sent inn á Commons sem hafa verið notaðar með Wikimedia-greinum</string>
   <string name="error_occurred">Villa kom upp!</string>
   <string name="notifications_channel_name_all">Tilkynning frá Commons</string>
+  <string name="preference_author_name_toggle">Nota sérsniðið nafn höfundar</string>
+  <string name="preference_author_name_toggle_summary">Nota sérsniðið nafn höfundar í stað notandanafnsins þíns þegar ljósmyndir eru sendar inn</string>
+  <string name="preference_author_name">Sérsniðið nafn höfundar</string>
+  <string name="preference_author_name_summary">Sérsniðið nafn höfundar sem nota á í stað notandanafnsins þíns þegar myndir eru sendar inn</string>
   <string name="contributions_fragment">Framlög</string>
   <string name="nearby_fragment">Nálægt</string>
   <string name="notifications">Tilkynningar</string>
@@ -394,10 +411,18 @@
   <string name="yes_submit">Já, senda inn</string>
   <string name="no_go_back">Nei, fara til baka</string>
   <string name="upload_flow_all_images_in_set">(fyrir allar myndir í setti)</string>
+  <string name="search_this_area">Leita á þessu svæði</string>
   <string name="nearby_card_permission_title">Beiðni um heimild</string>
   <string name="nearby_card_permission_explanation">Viltu að við notum núverandi staðsetningu þína til að sjá nálægasta staðinn sem þarfnast mynda?</string>
   <string name="unable_to_display_nearest_place">Get ekki birt nálægasta staðinn sem þarfnast mynda án þess að fá heimild til að sjá staðsetningu þína</string>
   <string name="never_ask_again">Ekki spyrja þessa aftur</string>
   <string name="display_location_permission_title">Birta heimild um staðsetningu</string>
   <string name="display_location_permission_explanation">Biðja um heimild til að sjá staðsetningu þegar þess er þörf fyrir tilkynningaspjald um næsta nágrenni.</string>
+  <string name="ends_on">Endar þann:</string>
+  <string name="no_image">Enagar myndir notaðar</string>
+  <string name="no_image_uploaded">Engar myndir sendar inn</string>
+  <string name="no_notification">Þú ert ekki með neinar ólesnar tilkynningar</string>
+  <string name="error_occurred_in_picking_images">Villa kom upp við að velja myndir</string>
+  <string name="image_chooser_title">Veldu myndir til að senda inn</string>
+  <string name="please_wait">Bíddu aðeins…</string>
 </resources>
