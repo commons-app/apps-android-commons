@@ -1,6 +1,5 @@
-package fr.free.nrw.commons.contributions;
+package fr.free.nrw.commons.filepicker;
 
-import android.content.ContentResolver;
 import android.content.Context;
 import android.database.Cursor;
 import android.net.Uri;
@@ -23,14 +22,27 @@ public class UploadableFile implements Parcelable {
             return new UploadableFile[size];
         }
     };
+
+    private final Uri contentUri;
     private final File file;
 
-    public UploadableFile(File file) {
+    public UploadableFile(Uri contentUri, File file) {
+        this.contentUri = contentUri;
         this.file = file;
     }
 
+    public UploadableFile(File file) {
+        this.file = file;
+        this.contentUri = Uri.parse(file.getAbsolutePath());
+    }
+
     public UploadableFile(Parcel in) {
+        this.contentUri = in.readParcelable(Uri.class.getClassLoader());
         file = (File) in.readSerializable();
+    }
+
+    public File getFile() {
+        return file;
     }
 
     public String getFilePath() {
@@ -50,11 +62,6 @@ public class UploadableFile implements Parcelable {
         return 0;
     }
 
-    @Override
-    public void writeToParcel(Parcel parcel, int i) {
-        parcel.writeSerializable(file);
-    }
-
     /**
      * Get filePath creation date from uri from all possible content providers
      *
@@ -62,8 +69,7 @@ public class UploadableFile implements Parcelable {
      */
     public long getFileCreatedDate(Context context) {
         try {
-            ContentResolver contentResolver = context.getContentResolver();
-            Cursor cursor = contentResolver.query(getMediaUri(), null, null, null, null);
+            Cursor cursor = context.getContentResolver().query(contentUri, null, null, null, null);
             if (cursor == null) {
                 return -1;//Could not fetch last_modified
             }
@@ -74,12 +80,18 @@ public class UploadableFile implements Parcelable {
             }
             //If both the content providers do not give the data, lets leave it to Jesus
             if (lastModifiedColumnIndex == -1) {
-                return -1L;
+                return -1l;
             }
             cursor.moveToFirst();
             return cursor.getLong(lastModifiedColumnIndex);
         } catch (Exception e) {
             return -1;////Could not fetch last_modified
         }
+    }
+
+    @Override
+    public void writeToParcel(Parcel parcel, int i) {
+        parcel.writeParcelable(contentUri, 0);
+        parcel.writeSerializable(file);
     }
 }

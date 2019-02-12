@@ -55,13 +55,14 @@ class PickedFiles implements Constants {
         writeToFile(in, dst);
     }
 
-    static void copyFilesInSeparateThread(final Context context, final List<File> filesToCopy) {
+    static void copyFilesInSeparateThread(final Context context, final List<UploadableFile> filesToCopy) {
         new Thread(new Runnable() {
             @Override
             public void run() {
                 List<File> copiedFiles = new ArrayList<>();
                 int i = 1;
-                for (File fileToCopy : filesToCopy) {
+                for (UploadableFile uploadableFile : filesToCopy) {
+                    File fileToCopy = uploadableFile.getFile();
                     File dstDir = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES), getFolderName(context));
                     if (!dstDir.exists()) dstDir.mkdirs();
 
@@ -84,8 +85,8 @@ class PickedFiles implements Constants {
         }).run();
     }
 
-    static List<File> singleFileList(File file) {
-        List<File> list = new ArrayList<>();
+    static List<UploadableFile> singleFileList(UploadableFile file) {
+        List<UploadableFile> list = new ArrayList<>();
         list.add(file);
         return list;
     }
@@ -106,13 +107,13 @@ class PickedFiles implements Constants {
                 });
     }
 
-    static File pickedExistingPicture(@NonNull Context context, Uri photoUri) throws IOException {
+    static UploadableFile pickedExistingPicture(@NonNull Context context, Uri photoUri) throws IOException {
         InputStream pictureInputStream = context.getContentResolver().openInputStream(photoUri);
         File directory = tempImageDirectory(context);
         File photoFile = new File(directory, UUID.randomUUID().toString() + "." + getMimeType(context, photoUri));
         photoFile.createNewFile();
         writeToFile(pictureInputStream, photoFile);
-        return photoFile;
+        return new UploadableFile(photoUri, photoFile);
     }
 
     static File getCameraPicturesLocation(@NonNull Context context) throws IOException {
