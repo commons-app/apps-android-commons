@@ -1,5 +1,6 @@
 package fr.free.nrw.commons.contributions;
 
+import android.content.Context;
 import android.net.Uri;
 import android.os.Parcel;
 import android.support.annotation.IntDef;
@@ -15,6 +16,7 @@ import fr.free.nrw.commons.BuildConfig;
 import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.settings.Prefs;
+import fr.free.nrw.commons.utils.ConfigUtils;
 
 import static java.lang.annotation.RetentionPolicy.SOURCE;
 
@@ -139,7 +141,7 @@ public class  Contribution extends Media {
         this.dateUploaded = date;
     }
 
-    public String getPageContents() {
+    public String getPageContents(Context applicationContext) {
         StringBuilder buffer = new StringBuilder();
         SimpleDateFormat isoFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
 
@@ -163,7 +165,8 @@ public class  Contribution extends Media {
 
         buffer.append("== {{int:license-header}} ==\n")
                 .append(licenseTemplateFor(getLicense())).append("\n\n")
-                .append("{{Uploaded from Mobile|platform=Android|version=").append(BuildConfig.VERSION_NAME).append("}}\n");
+                .append("{{Uploaded from Mobile|platform=Android|version=")
+                .append(ConfigUtils.getVersionNameWithSha(applicationContext)).append("}}\n");
         if(categories!=null&&categories.size()!=0) {
             for (int i = 0; i < categories.size(); i++) {
                 String category = categories.get(i);

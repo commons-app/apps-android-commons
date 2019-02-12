@@ -15,7 +15,7 @@
   <string name="app_name">คอมมอนส์</string>
   <string name="bullet">•</string>
   <string name="menu_settings">การตั้งค่า</string>
-  <string name="intent_share_upload_label">อัปโหลดไปยังคอมมอนส์</string>
+  <string name="intent_share_upload_label">อัปโหลดไปคอมมอนส์</string>
   <string name="username">ชื่อผู้ใช้</string>
   <string name="password">รหัสผ่าน</string>
   <string name="login_credential">ลงชื่อเข้าระบบบัญชีคอมมอนส์บีตาของคุณ</string>
@@ -258,4 +258,7 @@
   <string name="no_image">ไม่มีภาพที่ใช้</string>
   <string name="no_image_reverted">ไม่มีภาพย้อนกลับ</string>
   <string name="no_image_uploaded">ไม่มีภาพที่อัปโหลด</string>
+  <string name="error_occurred_in_picking_images">เกิดข้อผิดพลาดขณะเลือกภาพ</string>
+  <string name="image_chooser_title">เลือกรูปภาพที่จะอัปโหลด</string>
+  <string name="please_wait">โปรดรอ…</string>
 </resources>

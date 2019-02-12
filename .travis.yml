@@ -15,11 +15,11 @@ android:
   components:
   - tools
   - platform-tools
-  - build-tools-27.0.3
+  - build-tools-28.0.3
   - extra-google-m2repository
   - extra-android-m2repository
   - android-22
-  - android-27
+  - android-28
   - sys-img-${ANDROID_ABI}-${ANDROID_TARGET}
   licenses:
   - android-sdk-license-.+

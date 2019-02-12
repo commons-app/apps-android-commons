@@ -1,20 +1,10 @@
 package fr.free.nrw.commons.upload;
 
-import android.annotation.SuppressLint;
 import android.content.ContentResolver;
-import android.content.ContentUris;
 import android.content.Context;
-import android.database.Cursor;
 import android.media.ExifInterface;
 import android.net.Uri;
-import android.os.Build;
-import android.os.Environment;
-import android.os.ParcelFileDescriptor;
-import android.provider.DocumentsContract;
-import android.provider.MediaStore;
-import android.provider.OpenableColumns;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
+import android.webkit.MimeTypeMap;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -32,7 +22,7 @@ import timber.log.Timber;
 public class FileUtils {
 
     /**
-     * Get SHA1 of file from input stream
+     * Get SHA1 of filePath from input stream
      */
     static String getSHA1(InputStream is) {
 
@@ -71,7 +61,7 @@ public class FileUtils {
     }
 
     /**
-     * Get Geolocation of file from input file path
+     * Get Geolocation of filePath from input filePath path
      */
     static String getGeolocationOfFile(String filePath) {
 
@@ -91,10 +81,10 @@ public class FileUtils {
 
 
     /**
-     * Read and return the content of a resource file as string.
+     * Read and return the content of a resource filePath as string.
      *
-     * @param fileName asset file's path (e.g. "/queries/nearby_query.rq")
-     * @return the content of the file
+     * @param fileName asset filePath's path (e.g. "/queries/nearby_query.rq")
+     * @return the content of the filePath
      */
     public static String readFromResource(String fileName) throws IOException {
         StringBuilder buffer = new StringBuilder();
@@ -138,8 +128,22 @@ public class FileUtils {
         return deletedAll;
     }
 
-    static String getFileExt(String fileName) {
-        //Default file extension
+    public static String getMimeType(Context context, Uri uri) {
+        String mimeType;
+        if (uri.getScheme()!=null && uri.getScheme().equals(ContentResolver.SCHEME_CONTENT)) {
+            ContentResolver cr = context.getContentResolver();
+            mimeType = cr.getType(uri);
+        } else {
+            String fileExtension = MimeTypeMap.getFileExtensionFromUrl(uri
+                    .toString());
+            mimeType = MimeTypeMap.getSingleton().getMimeTypeFromExtension(
+                    fileExtension.toLowerCase());
+        }
+        return mimeType;
+    }
+
+    public static String getFileExt(String fileName) {
+        //Default filePath extension
         String extension = ".jpg";
 
         int i = fileName.lastIndexOf('.');
@@ -151,5 +155,13 @@ public class FileUtils {
 
     public static FileInputStream getFileInputStream(String filePath) throws FileNotFoundException {
         return new FileInputStream(filePath);
+    }
+
+    public static boolean recursivelyCreateDirs(String dirPath) {
+        File fileDir = new File(dirPath);
+        if (!fileDir.exists()) {
+            return fileDir.mkdirs();
+        }
+        return true;
     }
 }

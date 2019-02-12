@@ -14,7 +14,7 @@ import fr.free.nrw.commons.modifications.ModifierSequenceDao;
 public class DBOpenHelper  extends SQLiteOpenHelper {
 
     private static final String DATABASE_NAME = "commons.db";
-    private static final int DATABASE_VERSION = 8;
+    private static final int DATABASE_VERSION = 9;
 
     /**
      * Do not use directly - @Inject an instance where it's needed and let

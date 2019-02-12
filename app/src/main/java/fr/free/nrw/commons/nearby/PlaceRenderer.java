@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.support.transition.TransitionManager;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.PopupMenu;
 import android.view.LayoutInflater;
@@ -14,6 +15,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.facebook.drawee.view.SimpleDraweeView;
 import com.pedrogomez.renderers.Renderer;
 
 import java.util.ArrayList;
@@ -28,27 +30,21 @@ import fr.free.nrw.commons.Utils;
 import fr.free.nrw.commons.auth.LoginActivity;
 import fr.free.nrw.commons.bookmarks.locations.BookmarkLocationsDao;
 import fr.free.nrw.commons.contributions.ContributionController;
+import fr.free.nrw.commons.contributions.MainActivity;
 import fr.free.nrw.commons.di.ApplicationlessInjection;
 import fr.free.nrw.commons.kvstore.BasicKvStore;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
-import fr.free.nrw.commons.utils.PlaceUtils;
 import timber.log.Timber;
 
-import static fr.free.nrw.commons.contributions.ContributionController.NEARBY_CAMERA_UPLOAD_REQUEST_CODE;
-import static fr.free.nrw.commons.contributions.ContributionController.NEARBY_GALLERY_UPLOAD_REQUEST_CODE;
-import static fr.free.nrw.commons.contributions.ContributionController.NEARBY_UPLOAD_IMAGE_LIMIT;
 import static fr.free.nrw.commons.theme.NavigationBaseActivity.startActivityWithFlags;
-import static fr.free.nrw.commons.wikidata.WikidataConstants.IS_DIRECT_UPLOAD;
 import static fr.free.nrw.commons.wikidata.WikidataConstants.PLACE_OBJECT;
-import static fr.free.nrw.commons.wikidata.WikidataConstants.WIKIDATA_ENTITY_ID_PREF;
-import static fr.free.nrw.commons.wikidata.WikidataConstants.WIKIDATA_ITEM_LOCATION;
 
 public class PlaceRenderer extends Renderer<Place> {
 
     @BindView(R.id.tvName) TextView tvName;
     @BindView(R.id.tvDesc) TextView tvDesc;
     @BindView(R.id.distance) TextView distance;
-    @BindView(R.id.icon) ImageView icon;
+    @BindView(R.id.icon) SimpleDraweeView icon;
     @BindView(R.id.buttonLayout) LinearLayout buttonLayout;
     @BindView(R.id.cameraButton) LinearLayout cameraButton;
 
@@ -144,7 +140,7 @@ public class PlaceRenderer extends Renderer<Place> {
             } else {
                 Timber.d("Camera button tapped. Image title: " + place.getName() + "Image desc: " + place.getLongDescription());
                 storeSharedPrefs();
-                controller.initiateCameraPick(fragment.getActivity(), NEARBY_CAMERA_UPLOAD_REQUEST_CODE);
+                controller.initiateCameraPick(fragment.getActivity());
             }
         });
 
@@ -164,7 +160,7 @@ public class PlaceRenderer extends Renderer<Place> {
             }else {
                 Timber.d("Gallery button tapped. Image title: " + place.getName() + "Image desc: " + place.getLongDescription());
                 storeSharedPrefs();
-                controller.initiateGalleryPick(fragment.getActivity(), NEARBY_UPLOAD_IMAGE_LIMIT, NEARBY_GALLERY_UPLOAD_REQUEST_CODE);
+                controller.initiateGalleryPick(fragment.getActivity(), false);
             }
         });
 
@@ -186,6 +182,9 @@ public class PlaceRenderer extends Renderer<Place> {
                 bookmarkButtonImage.setImageResource(icon);
                 if (onBookmarkClick != null) {
                     onBookmarkClick.onClick();
+                }
+                else {
+                    ((NearbyMapFragment)((NearbyFragment)((NearbyListFragment)fragment).getParentFragment()).getChildFragmentManager().findFragmentByTag(NearbyMapFragment.class.getSimpleName())).updateMarker(isBookmarked, place);
                 }
             }
         });
@@ -217,6 +216,8 @@ public class PlaceRenderer extends Renderer<Place> {
         }
         tvDesc.setText(descriptionText);
         distance.setText(place.distance);
+
+
         icon.setImageResource(place.getLabel().getIcon());
 
         directionsButton.setOnClickListener(view -> {

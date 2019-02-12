@@ -31,7 +31,6 @@ import android.widget.CheckBox;
 import android.widget.Toast;
 
 import java.util.ArrayList;
-import java.util.concurrent.CountDownLatch;
 
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -52,11 +51,10 @@ import fr.free.nrw.commons.location.LocationServiceManager;
 import fr.free.nrw.commons.location.LocationUpdateListener;
 import fr.free.nrw.commons.media.MediaDetailPagerFragment;
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
+import fr.free.nrw.commons.mwapi.OkHttpJsonApiClient;
 import fr.free.nrw.commons.nearby.NearbyController;
 import fr.free.nrw.commons.nearby.NearbyNotificationCardView;
 import fr.free.nrw.commons.nearby.Place;
-import fr.free.nrw.commons.notification.NotificationController;
-import fr.free.nrw.commons.notification.UnreadNotificationsCheckAsync;
 import fr.free.nrw.commons.settings.Prefs;
 import fr.free.nrw.commons.upload.UploadService;
 import fr.free.nrw.commons.utils.ConfigUtils;
@@ -82,33 +80,28 @@ public class ContributionsFragment
                     MediaDetailPagerFragment.MediaDetailProvider,
                     FragmentManager.OnBackStackChangedListener,
                     ContributionsListFragment.SourceRefresher,
-                    LocationUpdateListener,ICampaignsView
-                    {
-    @Inject
-    @Named("default_preferences")
-    BasicKvStore defaultKvStore;
-    @Inject
-    ContributionDao contributionDao;
-    @Inject
-    MediaWikiApi mediaWikiApi;
-    @Inject
-    NotificationController notificationController;
-    @Inject
-    NearbyController nearbyController;
+                    LocationUpdateListener,
+                    ICampaignsView {
+    @Inject @Named("default_preferences") BasicKvStore defaultKvStore;
+    @Inject ContributionDao contributionDao;
+    @Inject MediaWikiApi mediaWikiApi;
+    @Inject NearbyController nearbyController;
+    @Inject OkHttpJsonApiClient okHttpJsonApiClient;
+    @Inject CampaignsPresenter presenter;
 
     private ArrayList<DataSetObserver> observersWaitingForLoad = new ArrayList<>();
-    private Cursor allContributions;
     private UploadService uploadService;
     private boolean isUploadServiceConnected;
     private CompositeDisposable compositeDisposable = new CompositeDisposable();
-    CountDownLatch waitForContributionsListFragment = new CountDownLatch(1);
 
     private ContributionsListFragment contributionsListFragment;
     private MediaDetailPagerFragment mediaDetailPagerFragment;
     public static final String CONTRIBUTION_LIST_FRAGMENT_TAG = "ContributionListFragmentTag";
     public static final String MEDIA_DETAIL_PAGER_FRAGMENT_TAG = "MediaDetailFragmentTag";
 
-    public NearbyNotificationCardView nearbyNotificationCardView;
+    @BindView(R.id.card_view_nearby) public NearbyNotificationCardView nearbyNotificationCardView;
+    @BindView(R.id.campaigns_view) CampaignView campaignView;
+
     private Disposable placesDisposable;
     private LatLng curLatLng;
 
@@ -118,12 +111,8 @@ public class ContributionsFragment
     private boolean isFragmentAttachedBefore = false;
     private View checkBoxView;
     private CheckBox checkBox;
-    private CampaignsPresenter presenter;
 
-
-    @BindView(R.id.campaigns_view) CampaignView campaignView;
-
-                        /**
+    /**
      * Since we will need to use parent activity on onAuthCookieAcquired, we have to wait
      * fragment to be attached. Latch will be responsible for this sync.
      */
@@ -156,10 +145,8 @@ public class ContributionsFragment
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_contributions, container, false);
         ButterKnife.bind(this, view);
-        presenter = new CampaignsPresenter();
         presenter.onAttachView(this);
         campaignView.setVisibility(View.GONE);
-        nearbyNotificationCardView = view.findViewById(R.id.card_view_nearby);
         checkBoxView = View.inflate(getActivity(), R.layout.nearby_permission_dialog, null);
         checkBox = (CheckBox) checkBoxView.findViewById(R.id.never_ask_again);
         checkBox.setOnCheckedChangeListener((buttonView, isChecked) -> {
@@ -223,7 +210,6 @@ public class ContributionsFragment
         if (((MainActivity)getActivity()).isAuthCookieAcquired && !isFragmentAttachedBefore) {
             onAuthCookieAcquired(((MainActivity)getActivity()).uploadServiceIntent);
             isFragmentAttachedBefore = true;
-            new UnreadNotificationsCheckAsync((MainActivity) getActivity(), notificationController).execute();
 
         }
     }
@@ -359,7 +345,6 @@ public class ContributionsFragment
         if (getActivity() != null) { // If fragment is attached to parent activity
             getActivity().bindService(uploadServiceIntent, uploadServiceConnection, Context.BIND_AUTO_CREATE);
             isUploadServiceConnected = true;
-            allContributions = contributionDao.loadAllContributions();
             getActivity().getSupportLoaderManager().initLoader(0, null, ContributionsFragment.this);
         }
 
@@ -466,7 +451,7 @@ public class ContributionsFragment
     @SuppressWarnings("ConstantConditions")
     private void setUploadCount() {
 
-        compositeDisposable.add(mediaWikiApi
+        compositeDisposable.add(okHttpJsonApiClient
                 .getUploadCount(((MainActivity)getActivity()).sessionManager.getCurrentAccount().name)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -487,14 +472,6 @@ public class ContributionsFragment
 
     public void betaSetUploadCount(int betaUploadCount) {
         displayUploadCount(betaUploadCount);
-    }
-
-    /**
-     * Updates notification indicator on toolbar to indicate there are unread notifications
-     * @param isThereUnreadNotifications true if user checked notifications before last notification date
-     */
-    public void updateNotificationsNotification(boolean isThereUnreadNotifications) {
-        ((MainActivity)getActivity()).updateNotificationIcon(isThereUnreadNotifications);
     }
 
     @Override
@@ -638,10 +615,15 @@ public class ContributionsFragment
             Place closestNearbyPlace = nearbyPlacesInfo.placeList.get(0);
             String distance = formatDistanceBetween(curLatLng, closestNearbyPlace.location);
             closestNearbyPlace.setDistance(distance);
-            nearbyNotificationCardView.updateContent (true, closestNearbyPlace);
+            nearbyNotificationCardView.updateContent(closestNearbyPlace);
+            if (mediaDetailPagerFragment != null && mediaDetailPagerFragment.isVisible()) {
+                nearbyNotificationCardView.setVisibility(View.GONE);
+            }else {
+                nearbyNotificationCardView.setVisibility(View.VISIBLE);
+            }
         } else {
             // Means that no close nearby place is found
-            nearbyNotificationCardView.updateContent (false, null);
+            nearbyNotificationCardView.setVisibility(View.GONE);
         }
     }
 
@@ -711,10 +693,6 @@ public class ContributionsFragment
 
     @Override public void showMessage(String message) {
         Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
-    }
-
-    @Override public MediaWikiApi getMediaWikiApi() {
-        return mediaWikiApi;
     }
 
     @Override public void showCampaigns(Campaign campaign) {

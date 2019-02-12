@@ -57,7 +57,7 @@
   <string name="menu_from_camera">Оберіть фото</string>
   <string name="menu_nearby">Поблизу</string>
   <string name="provider_contributions">Мої завантаження</string>
-  <string name="menu_share">Поділитися</string>
+  <string name="menu_share">Поширити</string>
   <string name="menu_open_in_browser">Відкрити у браузері</string>
   <string name="share_title_hint">Назва (обов\'язково)</string>
   <string name="add_title_toast">Будь ласка, вкажіть назву цього файлу</string>
@@ -345,12 +345,12 @@
   <string name="congratulatory_message_quiz">Ви дали %1$s правильних відповідей. Вітаємо!</string>
   <string name="warning_for_no_answer">Оберіть один з двох варіантів відповіді на запитання</string>
   <string name="user_not_logged_in">Сесія авторизації спливла. Будь ласка, авторизуйтесь знову.</string>
-  <string name="quiz_result_share_message">Поділіться своїм результатом із друзями!</string>
+  <string name="quiz_result_share_message">Поширити свій результат тесту із друзями!</string>
   <string name="continue_message">Продовжити</string>
   <string name="correct">Правильна відповідь</string>
   <string name="wrong">Хибна відповідь</string>
   <string name="quiz_screenshot_question">Чи можна завантажувати цей скріншот?</string>
-  <string name="share_app_title">Поділитися програмою</string>
+  <string name="share_app_title">Поширити програму</string>
   <string name="share_coordinates_not_present">Під час вибору зображення не були вказані координати</string>
   <string name="error_fetching_nearby_places">Помилка отримання місць поблизу.</string>
   <string name="add_description">+ Додати опис</string>
@@ -366,7 +366,7 @@
   <string name="images_uploaded">Завантажені зображення</string>
   <string name="image_reverts">Не відхилені зображення</string>
   <string name="images_used_by_wiki">Використані зображення</string>
-  <string name="achievements_share_message">Поділіться своїми досягненнями з друзями!</string>
+  <string name="achievements_share_message">Поширити свої досягнення з друзями!</string>
   <string name="achievements_info_message">Ваш рівень зростає, коли ви відповідаєте вимогам. Елементи в розділі «статистика» не впливають на ваш рівень.</string>
   <string name="achievements_revert_limit_message">необхідний мінімум:</string>
   <string name="images_uploaded_explanation">Кількість зображень, які ви завантажили у Вікісховище будь-яким методом</string>
@@ -453,4 +453,9 @@
   <string name="no_image">Використаних зображень немає</string>
   <string name="no_image_reverted">Відхилених зображень немає</string>
   <string name="no_image_uploaded">Завантажених зображень немає</string>
+  <string name="no_notification">У вас немає непрочитаних сповіщень</string>
+  <string name="share_logs_using">Поширення журналів</string>
+  <string name="error_occurred_in_picking_images">Сталася помилка при завантаженні зображень</string>
+  <string name="image_chooser_title">Оберіть зображення для завантаження</string>
+  <string name="please_wait">Будь ласка, зачекайте…</string>
 </resources>

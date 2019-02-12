@@ -3,8 +3,12 @@ package fr.free.nrw.commons.di;
 import android.app.Activity;
 import android.content.ContentProviderClient;
 import android.content.Context;
+import android.net.Uri;
 import android.support.v4.util.LruCache;
 import android.view.inputmethod.InputMethodManager;
+
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -29,6 +33,8 @@ import fr.free.nrw.commons.nearby.NearbyPlaces;
 import fr.free.nrw.commons.settings.Prefs;
 import fr.free.nrw.commons.upload.UploadController;
 import fr.free.nrw.commons.utils.ConfigUtils;
+import fr.free.nrw.commons.utils.UriDeserializer;
+import fr.free.nrw.commons.utils.UriSerializer;
 import fr.free.nrw.commons.wikidata.WikidataEditListener;
 import fr.free.nrw.commons.wikidata.WikidataEditListenerImpl;
 
@@ -154,19 +160,8 @@ public class CommonsApplicationModule {
 
     @Provides
     @Named("direct_nearby_upload_prefs")
-    public JsonKvStore providesDirectNearbyUploadKvStore(Context context) {
-        return new JsonKvStore(context, "direct_nearby_upload_prefs");
-    }
-
-    /**
-     * Is used to determine when user is viewed notifications activity last
-     * @param context
-     * @return date of lastReadNotificationDate
-     */
-    @Provides
-    @Named("last_read_notification_date")
-    public BasicKvStore providesLastReadNotificationDateKvStore(Context context) {
-        return new BasicKvStore(context, "last_read_notification_date");
+    public JsonKvStore providesDirectNearbyUploadKvStore(Context context, Gson gson) {
+        return new JsonKvStore(context, "direct_nearby_upload_prefs", gson);
     }
 
     @Provides
@@ -194,12 +189,6 @@ public class CommonsApplicationModule {
     @Singleton
     public DBOpenHelper provideDBOpenHelper(Context context) {
         return new DBOpenHelper(context);
-    }
-
-    @Provides
-    @Singleton
-    public NearbyPlaces provideNearbyPlaces() {
-        return new NearbyPlaces();
     }
 
     @Provides

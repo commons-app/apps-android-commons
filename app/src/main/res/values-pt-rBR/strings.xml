@@ -437,8 +437,14 @@
   <string name="nearby_campaign_dismiss_message">Você não verá mais as campanhas. No entanto, você pode reativar essa notificação em Configurações, se desejar.</string>
   <string name="this_function_needs_network_connection">Esta função requer conexão de rede, por favor, verifique suas configurações de conexão.</string>
   <string name="bad_token_error_proposed_solution">O carregamento falhou devido a problemas com o token de edição. Por favor, tente sair e entrar novamente.</string>
+  <string name="error_processing_image">Ocorreu um erro ao processar a imagem. Tente novamente, por favor!</string>
   <plurals name="receiving_shared_content">
     <item quantity="one">Recebendo conteúdo compartilhado. O processamento da imagem pode demorar algum tempo, dependendo do tamanho da imagem e do seu dispositivo</item>
     <item quantity="other">Recebendo conteúdo compartilhado. O processamento das imagens pode levar algum tempo, dependendo do tamanho das imagens e do dispositivo</item>
   </plurals>
+  <string name="no_image">Nenhuma imagem usada</string>
+  <string name="no_image_reverted">Nenhuma imagem revertida</string>
+  <string name="no_image_uploaded">Nenhuma imagem enviada</string>
+  <string name="no_notification">Você não tem notificações não lidas</string>
+  <string name="share_logs_using">Compartilhar registros usando</string>
 </resources>

@@ -45,7 +45,7 @@ public class CommonsLogSender extends LogsSender {
     protected String getExtraInfo() {
         StringBuilder builder = new StringBuilder();
         builder.append("App Version Name: ")
-                .append(BuildConfig.VERSION_NAME)
+                .append(ConfigUtils.getVersionNameWithSha(context))
                 .append("\n");
 
         builder.append("User Name: ")

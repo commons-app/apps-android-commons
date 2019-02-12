@@ -5,7 +5,7 @@ import android.text.TextUtils;
 import io.reactivex.subjects.BehaviorSubject;
 import timber.log.Timber;
 
-class Title{
+public class Title{
 
     private String titleText;
     private boolean set;

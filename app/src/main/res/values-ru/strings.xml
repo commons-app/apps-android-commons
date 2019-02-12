@@ -453,4 +453,9 @@
   <string name="no_image">Нет использованных изображений</string>
   <string name="no_image_reverted">Нет откаченых изображений</string>
   <string name="no_image_uploaded">Нет загруженных изображений</string>
+  <string name="no_notification">У вас нет непрочитанных уведомлений</string>
+  <string name="share_logs_using">Поделиться лог-файлами</string>
+  <string name="error_occurred_in_picking_images">Произошла ошибка при загрузке изображений</string>
+  <string name="image_chooser_title">Выберите изображения для загрузки</string>
+  <string name="please_wait">Пожалуйста, подождите…</string>
 </resources>

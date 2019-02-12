@@ -439,4 +439,9 @@
   <string name="no_image">Inga bilder används</string>
   <string name="no_image_reverted">Inga bilder återställdes</string>
   <string name="no_image_uploaded">Inga bilder laddades upp</string>
+  <string name="no_notification">Du har inga olästa aviseringar</string>
+  <string name="share_logs_using">Dela loggar med</string>
+  <string name="error_occurred_in_picking_images">Fel uppstod när bilder valdes ut</string>
+  <string name="image_chooser_title">Välj bilder att ladda upp</string>
+  <string name="please_wait">Var god vänta…</string>
 </resources>
