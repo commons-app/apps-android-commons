@@ -9,6 +9,8 @@ import android.preference.EditTextPreference;
 import android.preference.Preference;
 import android.preference.PreferenceFragment;
 import android.preference.SwitchPreference;
+import android.text.Editable;
+import android.text.TextWatcher;
 
 import com.karumi.dexter.Dexter;
 import com.karumi.dexter.listener.PermissionGrantedResponse;
@@ -24,6 +26,8 @@ import fr.free.nrw.commons.kvstore.BasicKvStore;
 import fr.free.nrw.commons.logging.CommonsLogSender;
 import fr.free.nrw.commons.utils.PermissionUtils;
 import fr.free.nrw.commons.utils.ViewUtil;
+
+import static android.R.*;
 
 public class SettingsFragment extends PreferenceFragment {
 
@@ -63,7 +67,49 @@ public class SettingsFragment extends PreferenceFragment {
         int uploads = defaultKvStore.getInt(Prefs.UPLOADS_SHOWING, 100);
         uploadLimit.setText(uploads + "");
         uploadLimit.setSummary(uploads + "");
-        uploadLimit.setOnPreferenceChangeListener((preference, newValue) -> {
+        uploadLimit.getEditText().addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                int value;
+                if (s.length()>0)
+                try {
+                    value = Integer.parseInt(s.toString());
+                    if (value > 500) {
+                        uploadLimit.getEditText().setError(getString((R.string.maximum_limit_alert)));
+                        defaultKvStore.putInt(Prefs.UPLOADS_SHOWING, 500);
+                        defaultKvStore.putBoolean(Prefs.IS_CONTRIBUTION_COU NT_CHANGED, true);
+                        uploadLimit.setSummary(500 + "");
+                        uploadLimit.setText(500 + "");
+                    } else if (value == 0) {
+                        uploadLimit.getEditText().setError(getString(R.string.cannot_be_zero));
+                        defaultKvStore.putInt(Prefs.UPLOADS_SHOWING, 100);
+                        defaultKvStore.putBoolean(Prefs.IS_CONTRIBUTION_COUNT_CHANGED, true);
+                        uploadLimit.setSummary(100 + "");
+                        uploadLimit.setText(100 + "");
+                    } else {
+                        defaultKvStore.putInt(Prefs.UPLOADS_SHOWING, value);
+                        defaultKvStore.putBoolean(Prefs.IS_CONTRIBUTION_COUNT_CHANGED, true);
+                        uploadLimit.setSummary(String.valueOf(value));
+                    }
+                } catch (Exception e) {
+                    uploadLimit.getEditText().setError(getString(R.string.enter_valid));
+                    defaultKvStore.putInt(Prefs.UPLOADS_SHOWING, 100);
+                    defaultKvStore.putBoolean(Prefs.IS_CONTRIBUTION_COUNT_CHANGED, true);
+                    uploadLimit.setSummary(100 + "");
+                    uploadLimit.setText(100 + "");
+                }
+            }
+        });
+        /*uploadLimit.setOnPreferenceChangeListener((preference, newValue) -> {
             int value;
             try {
                 value = Integer.parseInt(newValue.toString());
@@ -71,47 +117,50 @@ public class SettingsFragment extends PreferenceFragment {
                     new AlertDialog.Builder(getActivity())
                             .setTitle(R.string.maximum_limit)
                             .setMessage(R.string.maximum_limit_alert)
-                            .setPositiveButton(android.R.string.yes, (dialog, which) -> {
+                            .setPositiveButton(string.yes, (dialog, which) -> {
                             })
-                            .setIcon(android.R.drawable.ic_dialog_alert)
+                            .setIcon(drawable.ic_dialog_alert)
                             .show();
                     defaultKvStore.putInt(Prefs.UPLOADS_SHOWING, 500);
                     defaultKvStore.putBoolean(Prefs.IS_CONTRIBUTION_COUNT_CHANGED, true);
                     uploadLimit.setSummary(500 + "");
                     uploadLimit.setText(500 + "");
                 } else if (value == 0) {
-                    new AlertDialog.Builder(getActivity())
+                    uploadLimit.getEditText().setError(getString(R.string.cannot_be_zero));
+                    *//*new AlertDialog.Builder(getActivity())
                             .setTitle(R.string.invalid_zero)
                             .setMessage(R.string.cannot_be_zero)
-                            .setPositiveButton(android.R.string.yes, (dialog, which) -> {
+                            .setPositiveButton(string.yes, (dialog, which) -> {
                             })
-                            .setIcon(android.R.drawable.ic_dialog_alert)
-                            .show();
-                    defaultKvStore.putInt(Prefs.UPLOADS_SHOWING, 100);
+                            .setIcon(drawable.ic_dialog_alert)
+                            .show();*//*
+                    *//*defaultKvStore.putInt(Prefs.UPLOADS_SHOWING, 100);
                     defaultKvStore.putBoolean(Prefs.IS_CONTRIBUTION_COUNT_CHANGED, true);
                     uploadLimit.setSummary(100 + "");
-                    uploadLimit.setText(100 + "");
+                    uploadLimit.setText(100 + "");*//*
+                    return false;
                 } else {
                     defaultKvStore.putInt(Prefs.UPLOADS_SHOWING, value);
                     defaultKvStore.putBoolean(Prefs.IS_CONTRIBUTION_COUNT_CHANGED, true);
                     uploadLimit.setSummary(String.valueOf(value));
                 }
             } catch (Exception e) {
-                new AlertDialog.Builder(getActivity())
+                uploadLimit.getEditText().setError(getString(R.string.enter_valid));
+                *//*new AlertDialog.Builder(getActivity())
                         .setTitle(R.string.invalid_input)
                         .setMessage(R.string.enter_valid)
-                        .setPositiveButton(android.R.string.yes, (dialog, which) -> {
+                        .setPositiveButton(string.yes, (dialog, which) -> {
                         })
-                        .setIcon(android.R.drawable.ic_dialog_alert)
-                        .show();
+                        .setIcon(drawable.ic_dialog_alert)
+                        .show();*//*
                 defaultKvStore.putInt(Prefs.UPLOADS_SHOWING, 100);
                 defaultKvStore.putBoolean(Prefs.IS_CONTRIBUTION_COUNT_CHANGED, true);
                 uploadLimit.setSummary(100 + "");
                 uploadLimit.setText(100 + "");
             }
-            return true;
+            return false;
         });
-
+*/
         Preference betaTesterPreference = findPreference("becomeBetaTester");
         betaTesterPreference.setOnPreferenceClickListener(preference -> {
             Utils.handleWebUrl(getActivity(), Uri.parse(getResources().getString(R.string.beta_opt_in_link)));
