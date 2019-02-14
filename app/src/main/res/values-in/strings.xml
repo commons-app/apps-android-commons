@@ -125,4 +125,6 @@
   <string name="title_activity_nearby">Tempat disekitar</string>
   <string name="yes">Ya</string>
   <string name="no">Tidak</string>
+    <string name="tutorial_2_subtext_2">Benda yang berguna (sepeda, stasiun kereta api)</string>
+  <string name="tutorial_2_subtext_3">Orang-orang terkenal (walikota Anda, atlet Olimpiade yang Anda temui)</string>
 </resources>

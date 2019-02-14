@@ -193,4 +193,6 @@
   <string name="search_tab_title_media">MULTIMÈDIA</string>
   <string name="search_tab_title_categories">CATEGORIES</string>
   <string name="no_recent_searches">No hi ha cap cerca recent</string>
+    <string name="tutorial_2_subtext_2">" Objectes útils (bicicletes, estacions de tren)"</string>
+  <string name="tutorial_2_subtext_3">Persones famoses (el vostre alcalde, atletes olímpics que coneixes)</string>
 </resources>

@@ -187,4 +187,6 @@
   <string name="no_description_found">nema opisa</string>
   <string name="nearby_info_menu_commons_article" fuzzy="true">Članak na Commonsu</string>
   <string name="nearby_info_menu_wikidata_article">Stavka na Wikipodacima</string>
+    <string name="tutorial_2_subtext_2">Korisni objekti (bicikli, željezničke stanice)</string>
+  <string name="tutorial_2_subtext_3">" Poznati ljudi (vaš gradonačelnik, olimpijski sportisti koje ste upoznali)"</string>
 </resources>
