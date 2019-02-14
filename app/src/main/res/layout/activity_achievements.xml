@@ -344,7 +344,7 @@
                         android:layout_height="@dimen/overflow_icon_dimen"
                         android:id="@+id/wikidata_edits_icon"
                         android:layout_centerVertical="true"
-                        app:srcCompat="@drawable/edit_ascent_color" />
+                        app:srcCompat="@drawable/ic_custom_map_marker" />
 
                     <TextView
                         android:layout_width="wrap_content"
