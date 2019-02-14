@@ -36,13 +36,17 @@ public class UploadResult {
 
     @Override
     public String toString() {
-        return "UploadResult{" +
-                "errorCode='" + errorCode + '\'' +
-                ", resultStatus='" + resultStatus + '\'' +
-                ", dateUploaded='" + dateUploaded.toString() + '\'' +
-                ", imageUrl='" + imageUrl + '\'' +
-                ", canonicalFilename='" + canonicalFilename + '\'' +
-                '}';
+        if (dateUploaded != null) {
+            return "UploadResult{" +
+                    "errorCode='" + errorCode + '\'' +
+                    ", resultStatus='" + resultStatus + '\'' +
+                    ", dateUploaded='" + dateUploaded.toString() + '\'' +
+                    ", imageUrl='" + imageUrl + '\'' +
+                    ", canonicalFilename='" + canonicalFilename + '\'' +
+                    '}';
+        }
+
+        return "Server is in read only mode";
     }
 
     /**
