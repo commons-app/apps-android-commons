@@ -1,5 +1,7 @@
 package fr.free.nrw.commons.mwapi;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.Date;
 
 public class UploadResult {
@@ -36,13 +38,16 @@ public class UploadResult {
 
     @Override
     public String toString() {
-        return "UploadResult{" +
-                "errorCode='" + errorCode + '\'' +
-                ", resultStatus='" + resultStatus + '\'' +
-                ", dateUploaded='" + dateUploaded.toString() + '\'' +
-                ", imageUrl='" + imageUrl + '\'' +
-                ", canonicalFilename='" + canonicalFilename + '\'' +
-                '}';
+        if (dateUploaded != null) {
+            return "UploadResult{" +
+                    "errorCode='" + errorCode + '\'' +
+                    ", resultStatus='" + resultStatus + '\'' +
+                    ", dateUploaded='" + dateUploaded.toString() + '\'' +
+                    ", imageUrl='" + imageUrl + '\'' +
+                    ", canonicalFilename='" + canonicalFilename + '\'' +
+                    '}';
+        }
+        return "Server is in read only mode";
     }
 
     /**
