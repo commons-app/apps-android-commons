@@ -273,9 +273,7 @@ public class MainActivity extends AuthenticatedActivity implements FragmentManag
             // Meas that nearby fragment is visible (not contributions fragment)
             // Set current item to contributions activity instead of closing the activity
 
-            if (!((NearbyFragment) contributionsActivityPagerAdapter.getItem(1)).listOptionMenuIteClicked()) {
-                viewPager.setCurrentItem(0);
-            }
+            viewPager.setCurrentItem(0);
 
         } else {
             super.onBackPressed();
