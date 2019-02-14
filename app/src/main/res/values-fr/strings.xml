@@ -9,6 +9,7 @@
 * KATRINE1992
 * Melissadeba95
 * Metroitendo
+* Mirzali
 * Nicolas Raoul
 * Orikrin1998
 * Patrick Star
@@ -126,7 +127,7 @@
     <item quantity="one">Cette image sera sous licence %1$s</item>
     <item quantity="other">Ces images seront sous licence %1$s</item>
   </plurals>
-  <string name="media_upload_policy">En soumettant cette image, je déclare qu\'elle est l\'oeuvre de mon travail, qu\'elle ne contient pas d\'élément protégé par les droits d\'auteurs ni de portraits, et qu\'elle est par ailleur conforme à  &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines\"&gt;la politique de Wikimedia Commons&lt;/a&gt;.</string>
+  <string name="media_upload_policy">En soumettant cette image, je déclare qu\'elle est l\'oeuvre de mon travail, qu\'elle ne contient pas d\'élément protégé par les droits d\'auteurs ni de portraits, et qu\'elle est par ailleurs conforme à  &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines\"&gt;la politique de Wikimedia Commons&lt;/a&gt;.</string>
   <string name="menu_download">Télécharger</string>
   <string name="preference_license">Licence par défaut</string>
   <string name="use_previous">Utiliser le titre ou la description précédent</string>
@@ -167,9 +168,9 @@
   <string name="tutorial_3_subtext_2">Images que vous avez téléchargées d\'Internet</string>
   <string name="tutorial_3_subtext_3">Captures d\'écran d\'applications propriétaires</string>
   <string name="tutorial_4_text">Exemple de téléversement :</string>
-  <string name="tutorial_4_subtext">- Titre : Opéra de Sydney\n- Description : L’opéra de Sydney vu à travers la baie\n- Catégories : Opéra de Sydney depuis l’ouest, vues à distance de l’Opéra de Sydney</string>
-  <string name="tutorial_4_subtext_1">Titre : Opéra Sidney</string>
-  <string name="tutorial_4_subtext_2">Description: Opéra de Sydney tel que vu de l\'autre coté de la baie</string>
+  <string name="tutorial_4_subtext">- Titre : Opéra de Sydney\n- Description : L’opéra de Sydney vu depuis la baie\n- Catégories : Opéra de Sydney depuis l’ouest, vues à distance de l’Opéra de Sydney</string>
+  <string name="tutorial_4_subtext_1">Titre : Opéra de Sydney</string>
+  <string name="tutorial_4_subtext_2">Description: L\'Opéra de Sydney depuis la baie</string>
   <string name="tutorial_4_subtext_3">Catégories: Opéra de Sydney de l\'ouest,  Opéra de Sydney vues éloignées</string>
   <string name="welcome_wikipedia_text">Contribuez avec vos images. Aidez les articles de Wikipédia à prendre vie !</string>
   <string name="welcome_wikipedia_subtext">Les images sur Wikipédia viennent de Wikimedia Commons.</string>
@@ -184,7 +185,7 @@
   <string name="detail_description_empty">Aucune description</string>
   <string name="detail_license_empty">Licence inconnue</string>
   <string name="menu_refresh">Rafraîchir</string>
-  <string name="storage_permission_title">Demande d\'autorisation d\'accès au dépot</string>
+  <string name="storage_permission_title">Demande d\'autorisation d\'accès au stockage</string>
   <string name="read_storage_permission_rationale">Autorisation nécessaire : Lire un stockage externe. L’application ne peut pas accéder à votre galerie sans cela.</string>
   <string name="write_storage_permission_rationale">Permission obligatoire : Écriture sur stockage externe. L’application ne peut pas accéder à votre appareil photo sans cela.</string>
   <string name="location_permission_rationale">Autorisation facultative : Obtenir l’emplacement actuel pour des suggestions de catégorie</string>
@@ -210,7 +211,11 @@
   <string name="_2fa_code">Code 2FA</string>
   <string name="number_of_uploads">Ma limite de téléversements récents</string>
   <string name="maximum_limit">Limite maximale</string>
+  <string name="invalid_zero">Zéro n\'est pas une valeur valide</string>
+  <string name="invalid_input">Entrée invalide</string>
   <string name="maximum_limit_alert">Impossible d’afficher plus de 500</string>
+  <string name="enter_valid">Entrez un nombre valide</string>
+  <string name="cannot_be_zero">La limite ne peut pas être zéro</string>
   <string name="set_limit">Fixer la limite de téléversement récent</string>
   <string name="login_failed_2fa_not_supported">L’authentification à deux facteurs n’est pas prise en charge pour le moment.</string>
   <string name="logout_verification">Voulez-vous vraiment vous déconnecter ?</string>
@@ -222,7 +227,7 @@
   <string name="mediaimage_failed">Échec sur l’image du média</string>
   <string name="no_image_found">Aucune image trouvée</string>
   <string name="no_subcategory_found">Aucune sous-catégorie trouvée</string>
-  <string name="no_parentcategory_found">Aucune catégorie parent trouvée</string>
+  <string name="no_parentcategory_found">Aucune catégorie parente trouvée</string>
   <string name="upload_image">Téléverser une image</string>
   <string name="welcome_image_mount_zao">Mont Zao</string>
   <string name="welcome_image_llamas">Lamas</string>
@@ -255,7 +260,7 @@
   <string name="title_info">Un titre descriptif unique pour le fichier, qui servira de nom de fichier. Vous pouvez utiliser un langage simple avec des espaces. N’incluez pas l’extension du fichier</string>
   <string name="description_info">Veuillez décrire le média autant que possible : Où a-t-il été enregistré ? Que montre-t-il ? Quel est le contexte ? Veuillez décrire les objets ou les personnes. Révélez les informations qui ne peuvent pas être devinées facilement, par exemple l’heure de la journée si c’est un paysage. Si le média montre quelque chose d’inhabituel, veuillez expliquer ce qui le rend exceptionnel.</string>
   <string name="upload_image_too_dark">Cette image est trop sombre, êtes-vous sûr de vouloir la téléverser ? Wikimedia Commons est réservé pour les images ayant une valeur encyclopédique.</string>
-  <string name="upload_image_blurry">Cette image est floue, êtes-vous sûr de vouloir la télécharger ? Wikimédia Communs n’est destiné qu’à des images de valeur encyclopédique.</string>
+  <string name="upload_image_blurry">Cette image est floue, êtes-vous sûr de vouloir la télécharger ? Wikimedia Commons est réservé pour les images ayant une valeur encyclopédique.</string>
   <string name="upload_problem_exist">Problèmes potentiels avec cette image.</string>
   <string name="upload_problem_image_dark">L\'image est trop sombre.</string>
   <string name="upload_problem_image_blurry">L’image est floue.</string>
@@ -364,6 +369,7 @@
   <string name="statistics">STATISTIQUES</string>
   <string name="statistics_thanks">Remerciements reçus</string>
   <string name="statistics_featured">Images mises en avant</string>
+  <string name="statistics_wikidata_edits">Images par \"Lieux du voisinage\"</string>
   <string name="level">NIVEAU</string>
   <string name="images_uploaded">Images téléchargées</string>
   <string name="image_reverts">Images non annulées</string>
@@ -383,6 +389,7 @@
   <string name="contributions_fragment">Contributions</string>
   <string name="nearby_fragment">Proche</string>
   <string name="notifications">Notifications</string>
+  <string name="archived_notifications">Notifications (archivées)</string>
   <string name="display_nearby_notification">Afficher la notification de proximité</string>
   <string name="display_nearby_notification_summary">Taper ici pour voir l’endroit le plus proche qui a besoin d’images</string>
   <string name="no_close_nearby">Aucun endroit à proximité trouvé près de chez vous</string>
@@ -454,7 +461,10 @@
   <string name="no_image_reverted">Aucune image retournée</string>
   <string name="no_image_uploaded">Aucune image téléversée</string>
   <string name="no_notification">Vous n\'avez aucune notification non lue</string>
+  <string name="no_archived_notification">Vous n’avez pas de notification archivée</string>
   <string name="share_logs_using">Partager les journaux en utilisant</string>
+  <string name="menu_option_archived">Afficher les archivés</string>
+  <string name="menu_option_unread">Afficher les non lus</string>
   <string name="error_occurred_in_picking_images">Erreur lors de la sélection des images</string>
   <string name="image_chooser_title">Choisir les images à téléverser</string>
   <string name="please_wait">Veuillez patienter…</string>

@@ -16,6 +16,7 @@
 * Macofe
 * MarionaDSR
 * Miguel2706
+* Mirzali
 * Tiberius1701
 * Vivaelcelta
 -->
@@ -380,6 +381,7 @@
   <string name="contributions_fragment">Contribuciones</string>
   <string name="nearby_fragment">Cercanos</string>
   <string name="notifications">Notificaciones</string>
+  <string name="archived_notifications">Notificaciones (archivadas)</string>
   <string name="display_nearby_notification">Mostrar notificaciones de cercanía</string>
   <string name="display_nearby_notification_summary">Toca aquí para ver el lugar más cercano que necesita fotos</string>
   <string name="no_close_nearby">No se encontraron lugares cercanos cerca de ti</string>

@@ -200,7 +200,11 @@
   <string name="_2fa_code">2FA 코드</string>
   <string name="number_of_uploads">내 최근 업로드 제한</string>
   <string name="maximum_limit">최대 제한</string>
+  <string name="invalid_zero">0은 유효하지 않습니다</string>
+  <string name="invalid_input">유효하지 않은 입력</string>
   <string name="maximum_limit_alert">500개를 초과하여 표시할 수 없습니다</string>
+  <string name="enter_valid">유효한 번호를 입력하십시오</string>
+  <string name="cannot_be_zero">업로드 제한은 0으로 둘 수 없습니다</string>
   <string name="set_limit">최근 업로드 제한 설정</string>
   <string name="login_failed_2fa_not_supported">2요소 인증은 현재 지원하지 않습니다.</string>
   <string name="logout_verification">정말 로그아웃하시겠습니까?</string>
@@ -365,6 +369,7 @@
   <string name="contributions_fragment">기여</string>
   <string name="nearby_fragment">근처</string>
   <string name="notifications">알림</string>
+  <string name="archived_notifications">알림(보관됨)</string>
   <string name="display_nearby_notification">주변 알림 표시</string>
   <string name="display_nearby_notification_summary">사진이 필요한 주변 장소를 보려면 여기를 탭하세요</string>
   <string name="no_close_nearby">당신에게 가까운 주변 장소를 찾지 못했습니다</string>
@@ -418,6 +423,9 @@
   <string name="bad_token_error_proposed_solution">편집 토큰에 문제가 있어서 업로드를 실패했습니다. 로그아웃한 다음 다시 로그인해 보십시오.</string>
   <string name="error_processing_image">이미지를 처리하는 동안 오류가 발생했습니다. 다시 시도해 주십시오!</string>
   <string name="no_notification">읽지 않은 알림이 없습니다</string>
+  <string name="no_archived_notification">보관된 알림이 없습니다</string>
+  <string name="menu_option_archived">보관한 항목 보기</string>
+  <string name="menu_option_unread">읽지 않은 항목 보기</string>
   <string name="error_occurred_in_picking_images">이미지 선택 도중 오류가 발생했습니다</string>
   <string name="image_chooser_title">업로드할 이미지 선택</string>
   <string name="please_wait">기다려 주십시오...</string>

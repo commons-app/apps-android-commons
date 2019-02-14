@@ -7,6 +7,7 @@
 * Incelemeelemani
 * Joseph
 * McAang
+* Mirzali
 * Neslihan Turan
 * Okkerem
 * Rapsar
@@ -362,6 +363,7 @@
   <string name="contributions_fragment">Katkılar</string>
   <string name="nearby_fragment">Yakınındakiler</string>
   <string name="notifications">Bildirimler</string>
+  <string name="archived_notifications">Bildirimler (arşivlenmiş)</string>
   <string name="display_nearby_notification">Yakındaki bildirimi görüntüle</string>
   <string name="display_nearby_notification_summary">Resimlere en yakın yeri görmek için buraya dokunun</string>
   <string name="no_close_nearby">Size yakın bir yer bulunamadı</string>
@@ -421,4 +423,8 @@
   <string name="display_campaigns">Kampanyaları göster</string>
   <string name="display_campaigns_explanation">Devam eden kampanyaları görmek için buraya dokunun</string>
   <string name="nearby_campaign_dismiss_message">Artık kampanyaları görmeyeceksiniz. Ancak isterseniz bu bildirimi Ayarlar\'da yeniden etkinleştirebilirsiniz.</string>
+  <string name="no_archived_notification">Arşivlenmiş bildiriminiz yok</string>
+  <string name="menu_option_archived">Arşivlenmişleri görüntüle</string>
+  <string name="menu_option_unread">Okunmamışları görüntüle</string>
+  <string name="please_wait">Lütfen bekleyin…</string>
 </resources>

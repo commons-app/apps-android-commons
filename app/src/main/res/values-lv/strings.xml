@@ -126,4 +126,6 @@
   <string name="yes_submit">Jā, iesniegt</string>
   <string name="nearby_card_permission_title">Atļaujas pieprasījums</string>
   <string name="never_ask_again">Nekad vairs šo nejautāt</string>
+  <string name="menu_option_archived">Skatīt arhivētos</string>
+  <string name="menu_option_unread">Skatīt nelasītos</string>
 </resources>
