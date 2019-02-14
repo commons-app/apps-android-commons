@@ -356,5 +356,8 @@
   <string name="display_campaigns">Vis kampagner</string>
   <string name="no_image">Ingen billeder brugt</string>
   <string name="share_logs_using">Del logs ved hjælp af</string>
+  <string name="menu_option_archived">Vis arkiverede</string>
+  <string name="menu_option_unread">Vis ulæste</string>
+  <string name="error_occurred_in_picking_images">Der opstod en fejl under udvælgelse af billeder</string>
   <string name="please_wait">Vent venligst…</string>
 </resources>

@@ -18,7 +18,7 @@
 -->
 <resources>
   <string name="title_activity_explore">Objevit</string>
-  <string name="navigation_item_explore">Procházet</string>
+  <string name="navigation_item_explore">Objevit</string>
   <string name="preference_category_appearance">Vzhled</string>
   <string name="preference_category_general">Obecné</string>
   <string name="preference_category_feedback">Zpětná vazba</string>
@@ -178,6 +178,7 @@
   <string name="detail_description_empty">Bez popisu</string>
   <string name="detail_license_empty">Neznámá licence</string>
   <string name="menu_refresh">Obnovit</string>
+  <string name="storage_permission_title">Požadavek na oprávnění k úložišti</string>
   <string name="read_storage_permission_rationale">Požadované oprávnění: Čtení externího úložiště. Bez něj nemůže aplikace číst vaši galerii.</string>
   <string name="write_storage_permission_rationale">Požadované oprávnění: Zapisování do externího úložiště. Bez něj nemůže aplikace používat vaši kameru.</string>
   <string name="location_permission_rationale">Volitelně: Umožněte aplikaci, aby získávala aktuální polohu a nabízela na jejím základě kategorie</string>
@@ -203,7 +204,11 @@
   <string name="_2fa_code">Kód pro dvoufázové ověření (2FA)</string>
   <string name="number_of_uploads">Můj limit zobrazených souborů</string>
   <string name="maximum_limit">Maximum</string>
+  <string name="invalid_zero">Nula není platná</string>
+  <string name="invalid_input">Neplatný vstup</string>
   <string name="maximum_limit_alert">Není možné zobrazit více než 500</string>
+  <string name="enter_valid">Zadejte platné číslo</string>
+  <string name="cannot_be_zero">Limit nahrávání nemůže být 0</string>
   <string name="set_limit">Počet nahraných souborů, které se zobrazí</string>
   <string name="login_failed_2fa_not_supported">Tato aplikace zatím nepodporuje tzv. dvoufázové ověření.</string>
   <string name="logout_verification">Opravdu se chcete odhlásit?</string>
@@ -239,7 +244,7 @@
   <string name="navigation_item_info">Průvodce</string>
   <string name="navigation_item_notification">Upozornění</string>
   <string name="navigation_item_featured_images">Nejlepší</string>
-  <string name="nearby_needs_permissions">Místa poblíž nebude možné zobrazit, neuvedete-li svojí polohu.</string>
+  <string name="nearby_needs_permissions">Místa v okolí nebude možné zobrazit, neuvedete-li svojí polohu.</string>
   <string name="no_description_found">nebyl nalezen žádný popisek</string>
   <string name="nearby_info_menu_commons_article">Stránka souboru na Commons</string>
   <string name="nearby_info_menu_wikidata_article">Položka Wikidat</string>
@@ -270,13 +275,13 @@
   <string name="skip_login">Přeskočit</string>
   <string name="navigation_item_login">Přihlásit se</string>
   <string name="skip_login_title">Opravdu chcete přeskočit přihlášení?</string>
-  <string name="skip_login_message" fuzzy="true">Nebude možné nahrávat obrázky.</string>
+  <string name="skip_login_message">Budete-li chtít nahrát obrázky v budoucnu, musíte se přihlásit.</string>
   <string name="login_alert_message">K použití této funkce se musíte přihlásit</string>
   <string name="copy_wikicode">Zkopírovat wikitext do schránky</string>
   <string name="wikicode_copied">Wikitext byl zkopírován do schránky</string>
   <string name="nearby_location_has_not_changed">Vaše umístění se nezměnilo.</string>
   <string name="nearby_location_not_available">Umístění není dostupné.</string>
-  <string name="location_permission_rationale_nearby">Vyžadováno povolení k zobrazení seznamu blízkých míst</string>
+  <string name="location_permission_rationale_nearby">Vyžadováno povolení k zobrazení seznamu míst v okolí</string>
   <string name="get_directions">NAVIGOVAT</string>
   <string name="read_article">PŘEČÍST ČLÁNEK</string>
   <string name="notifications_welcome">Vítejte na Wikimedia Commons, %1$s! Jsme rádi, že jste zde.</string>
@@ -288,12 +293,12 @@
   <string name="nearby_wikidata">WIKIDATA</string>
   <string name="nearby_wikipedia">WIKIPEDIE</string>
   <string name="nearby_commons">COMMONS</string>
-  <string name="about_rate_us">&lt;u&gt;Ohodnoť nás&lt;/u&gt;</string>
+  <string name="about_rate_us">&lt;u&gt;Ohodnoťte nás&lt;/u&gt;</string>
   <string name="about_faq">&lt;u&gt;Často kladené otázky&lt;/u&gt;</string>
   <string name="welcome_skip_button">Přeskočit úvod</string>
   <string name="no_internet">Internet je nedostupný</string>
   <string name="internet_established">Internet je dostupný</string>
-  <string name="error_notifications">Při načítání oznámení došlo k chybě</string>
+  <string name="error_notifications">Při načítání upozornění došlo k chybě</string>
   <string name="no_notifications">Nebyla nalezena žádné oznámení</string>
   <string name="about_translate">&lt;u&gt;Přeložit&lt;/u&gt;</string>
   <string name="about_translate_title">Jazyky</string>
@@ -347,7 +352,7 @@
   <string name="quiz_screenshot_question">Je v pořádku nahrát tento snímek obrazovky?</string>
   <string name="share_app_title">Sdílet aplikaci</string>
   <string name="share_coordinates_not_present">Při výběru obrázku nebyly zadány souřadnice</string>
-  <string name="error_fetching_nearby_places">Chyba při hledání blízkých míst.</string>
+  <string name="error_fetching_nearby_places">Nastala chyba při hledání míst v okolí.</string>
   <string name="add_description">+ Přidat popisek</string>
   <string name="no_recent_searches">Zatím žádné vyhledávání</string>
   <string name="delete_recent_searches_dialog">Opravdu chcete vyčistit historii vašeho hledání?</string>
@@ -357,6 +362,7 @@
   <string name="statistics">STATISTIKA</string>
   <string name="statistics_thanks">Obdržená poděkování</string>
   <string name="statistics_featured">Nejlepší obrázky</string>
+  <string name="statistics_wikidata_edits">Obrázky přes „Místa v okolí“</string>
   <string name="level">ÚROVEŇ</string>
   <string name="images_uploaded">Nahrané obrázky</string>
   <string name="image_reverts">Nerevertované obrázky</string>
@@ -368,17 +374,18 @@
   <string name="images_reverted_explanation">Procentuální množství obrázků, které jste nahrál/a na Commons a nebyly smazány</string>
   <string name="images_used_explanation">Počet obrázků, které jste nahrál/a na Commons a jsou použity v projektech Wikimedia</string>
   <string name="error_occurred">Chyba!</string>
-  <string name="notifications_channel_name_all">Notifikace z Commons</string>
+  <string name="notifications_channel_name_all">Upozornění z Commons</string>
   <string name="preference_author_name_toggle">Použít vlastní název autora</string>
   <string name="preference_author_name_toggle_summary">Při nahrávání fotografií používejte vlastní jméno autora namísto uživatelského jména</string>
   <string name="preference_author_name">Vlastní název autora</string>
   <string name="preference_author_name_summary">Vlastní název autora, který chcete používat místo uživatelského jména v nahrávání</string>
   <string name="contributions_fragment">Příspěvky</string>
   <string name="nearby_fragment">Poblíž</string>
-  <string name="notifications">Notifikace</string>
-  <string name="display_nearby_notification">Zobrazit notifikace v okolí</string>
+  <string name="notifications">Upozornění</string>
+  <string name="archived_notifications">Upozornění (přečtená)</string>
+  <string name="display_nearby_notification">Zobrazit upozornění v okolí</string>
   <string name="display_nearby_notification_summary">Klepnutím sem zobrazíte nejbližší místo, které potřebuje obrázky</string>
-  <string name="no_close_nearby">Nebyla nalezena žádná blízká místa</string>
+  <string name="no_close_nearby">Nebyla nalezena žádná místa v okolí</string>
   <string name="list_sheet">Seznam</string>
   <string name="storage_permission">Povolení k ukládání</string>
   <string name="write_storage_permission_rationale_for_image_share">Potřebujeme povolení k přístupu k externí paměti vašeho zařízení, abychom mohli nahrávat obrázky.</string>
@@ -438,4 +445,20 @@
   <string name="nearby_campaign_dismiss_message">Kampaně již neuvidíte. Toto oznámení však můžete znovu zapnout v Nastavení.</string>
   <string name="this_function_needs_network_connection">Tato funkce vyžaduje připojení k síti, zkontrolujte prosím nastavení připojení.</string>
   <string name="bad_token_error_proposed_solution">Nahrávání se nezdařilo kvůli problémům s editačním tokenem. Zkuste se prosím odhlásit a zkuste to znovu.</string>
+  <string name="error_processing_image">Během zpracování obrázku došlo k chybě. Prosím zkuste to znovu!</string>
+  <plurals name="receiving_shared_content">
+    <item quantity="one">Probíhá příjem sdíleného obsahu. Zpracování obrázku může chvíli trvat v závislosti na velikosti obrázku a vašem zařízení</item>
+    <item quantity="other">Probíhá příjem sdíleného obsahu. Zpracování obrázků může chvíli trvat v závislosti na velikosti obrázků a vašem zařízení</item>
+  </plurals>
+  <string name="no_image">Nejsou použity žádné obrázky</string>
+  <string name="no_image_reverted">Žádné revertované obrázky</string>
+  <string name="no_image_uploaded">Žádné nahrané obrázky</string>
+  <string name="no_notification">Nemáte žádné nepřečtené upozornění</string>
+  <string name="no_archived_notification">Nemáte nepřečtené upozornění</string>
+  <string name="share_logs_using">Sdílet logy pomocí</string>
+  <string name="menu_option_archived">Zobrazit přečtené</string>
+  <string name="menu_option_unread">Zobrazit nepřečtené</string>
+  <string name="error_occurred_in_picking_images">Nastala chyba při vybírání obrázků</string>
+  <string name="image_chooser_title">Vyberte obrázky, které chcete nahrát</string>
+  <string name="please_wait">Čekejte prosím…</string>
 </resources>

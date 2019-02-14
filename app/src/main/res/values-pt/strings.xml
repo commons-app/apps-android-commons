@@ -10,6 +10,7 @@
 * Luckas
 * Malafaya
 * Mansil alfalb
+* Mirzali
 * Sarilho1
 * Vitorvicentevalente
 -->
@@ -355,6 +356,7 @@
   <string name="statistics">ESTATÍSTICAS</string>
   <string name="statistics_thanks">Agradecimentos recebidos</string>
   <string name="statistics_featured">Imagens destacadas</string>
+  <string name="statistics_wikidata_edits">Imagens via \"Locais próximos\"</string>
   <string name="level">NÍVEL</string>
   <string name="images_uploaded">Imagens carregadas</string>
   <string name="image_reverts">Imagens não revertidas</string>
@@ -374,6 +376,7 @@
   <string name="contributions_fragment">Contribuições</string>
   <string name="nearby_fragment">Aqui perto</string>
   <string name="notifications">Notificações</string>
+  <string name="archived_notifications">Notificações (arquivadas)</string>
   <string name="display_nearby_notification">Apresentar notificação de proximidade</string>
   <string name="display_nearby_notification_summary">Toque aqui para ver o local mais próximo que precisa de fotos</string>
   <string name="no_close_nearby">Não foi encontrado nenhum lugar próximo</string>
@@ -444,5 +447,12 @@
   <string name="no_image">Não foi usada nenhuma imagem</string>
   <string name="no_image_reverted">Não foi revertida nenhuma imagem</string>
   <string name="no_image_uploaded">Não foi carregada nenhuma imagem</string>
+  <string name="no_notification">Não tem nenhuma notificação por ler</string>
+  <string name="no_archived_notification">Não tem nenhuma notificação arquivada</string>
   <string name="share_logs_using">Partilhar os registos usando</string>
+  <string name="menu_option_archived">Ver arquivadas</string>
+  <string name="menu_option_unread">Ver não lidas</string>
+  <string name="error_occurred_in_picking_images">Ocorreu um erro ao escolher imagens</string>
+  <string name="image_chooser_title">Escolher imagens a carregar</string>
+  <string name="please_wait">Aguarde, por favor...</string>
 </resources>

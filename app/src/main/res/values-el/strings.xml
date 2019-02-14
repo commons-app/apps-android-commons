@@ -112,7 +112,10 @@
   <string name="no_uploads_yet">Ακόμα δεν έχετε ανεβάσει φωτογραφίες.</string>
   <string name="menu_retry_upload">Ξαναπροσπαθήστε</string>
   <string name="menu_cancel_upload">Ακύρωση</string>
-  <string name="share_license_summary" fuzzy="true">Αυτή η εικόνα θα έχει άδεια στα πλαίσια του %1$s</string>
+  <plurals name="share_license_summary">
+    <item quantity="one">Αυτή η εικόνα θα αδειοδοτηθεί υπό την %1$s</item>
+    <item quantity="other">Αυτές οι εικόνες θα αδειοδοτηθούν υπό την %1$s</item>
+  </plurals>
   <string name="media_upload_policy">Αποστέλλοντας αυτήν την εικόνα, δηλώνω πως αυτή η εργασία είναι δική μου, και δεν περιέχει υλικό άλλου συγγραφέα, και εκτός αυτού πρόσκειται στο , thathref=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines\"&gt;Κοινές πολιτικές της Wikipedia&lt;/a&gt;.</string>
   <string name="menu_download">Λήψη</string>
   <string name="preference_license">Προεπιλεγμένη άδεια</string>
@@ -171,6 +174,7 @@
   <string name="detail_description_empty">Καμία περιγραφή</string>
   <string name="detail_license_empty">Άγνωστη άδεια</string>
   <string name="menu_refresh">Ανανέωση</string>
+  <string name="storage_permission_title">Αιτείται Άδεια Αποθήκευσης</string>
   <string name="read_storage_permission_rationale">Απαιτούμενη άδεια: Ανάγνωση εξωτερικής αποθήκευσης. Η εφαρμογή δεν μπορεί να έχει πρόσβαση στην συλλογή σας χωρίς αυτή.</string>
   <string name="write_storage_permission_rationale">Απαιτούμενη άδεια: Με εξωτερική αποθήκευση. Το πρόγραμμα δεν μπορεί να έχει πρόσβαση στην κάμερα σας χωρίς αυτήν.</string>
   <string name="location_permission_rationale">Προαιρετική άδεια: Ανάκτηση τρέχουσας θέσης σας για προτάσεις κατηγοριών</string>
@@ -197,6 +201,7 @@
   <string name="number_of_uploads">To Όριο του Πρόσφατα Φορτωμένου Αρχείου μου</string>
   <string name="maximum_limit">Μέγιστο Όριο</string>
   <string name="maximum_limit_alert">Δεν μπορεί να προβάλλει περισσότερα από 500 αρχεία</string>
+  <string name="enter_valid">Εισαγάγετε έγκυρο αριθμό</string>
   <string name="set_limit">Ορίσετε το Όριο της Πρόσφατης Επιφόρτωσης</string>
   <string name="login_failed_2fa_not_supported">Πιστοποίηση με δύο παράγοντες δεν υποστηρίζεται προς το παρόν.</string>
   <string name="logout_verification">Θέλετε πράγματι να αποσυνδεθείτε;</string>
@@ -242,12 +247,17 @@
   <string name="description_info">\nΠαρακαλώ περιγράψετε τα μέσα το δυνατό περισσότερο : Πού οδηγήθηκε αυτό; Τι δείχνει; Ποιο είναι το περιεχόμενο του; Παρακαλώ περιγράψετε τα αντικείμενα ή τα πρόσωπα. Αποκαλύψετε πληροφορίες που δεν μπορούν εύκολο να μαντέψει κανείς, για παράδειγμα την ώρα εντός της ημέρας αν πρόκειται για τοπίο. Αν τα μέσα δείξουν κάτι ασύνηθες, παρακαλώ εξηγήστε τι το καθιστά μη συνηθισμένα.</string>
   <string name="upload_image_too_dark">Αυτή η εικόνα είναι πολύ σκούρα, θέλετε πράγματι να την φορτώσετε? Το Wikipedia Commons είναι μόνο για εικόνες με εγκυκλοπαιδική αξία.</string>
   <string name="upload_image_blurry">Αυτή η εικόνα είναι θολή , θέλετε όντως να την ανεβάσετε? \n Το Wikimedia Commons είναι μόνο για εικόνες εγκυκλοπαίδειας.</string>
+  <string name="upload_problem_image_dark">Η εικόνα είναι πολύ σκοτεινή.</string>
+  <string name="upload_problem_image_blurry">Η εικόνα είναι θολή.</string>
+  <string name="upload_problem_image_duplicate">Η εικόνα βρίσκεται ήδη στα Commons.</string>
+  <string name="upload_problem_different_geolocation">Η εικόνα λήφθηκε σε διαφορετική τοποθεσία.</string>
+  <string name="upload_problem_do_you_continue">Θέλετε ακόμη να ανεβάσετε αυτή την εικόνα;</string>
   <string name="give_permission">Χορηγήστε άδεια</string>
   <string name="use_external_storage">Χρησιμοποιήσετε την εξωτερική αποθήκευση</string>
   <string name="use_external_storage_summary">Αποθηκεύσετε εικόνες που παίρνονται στην κάμερα εφαρμογής στην συσκευή σας</string>
   <string name="login_to_your_account">Συνδεθείτε στο λογαριασμό σας.</string>
   <string name="send_log_file">Αποστείλατε τον φάκελλο σύνδεσης</string>
-  <string name="send_log_file_description" fuzzy="true">Στείλατε τον φάκελλο σύνδεσης στους δημιουργούς μέσω email</string>
+  <string name="send_log_file_description">Στείλτε το αρχείο καταγραφής στους προγραμματιστές μέσω email για να βοηθήσετε τη διόρθωση σφαλμάτων της εφαρμογής. Σημείωση: οι καταγραφές ενδέχεται να περιλαμβάνουν αναγνωριστικές πληροφορίες</string>
   <string name="no_web_browser">Δεν βρέθηκε φυλλομετρητής για το άνοιγμα της διευθύνσεως URL</string>
   <string name="null_url">Σφάλμα! Η διεύθυνση URL δεν βρέθηκε</string>
   <string name="nominate_deletion">Προτείνετε για διαγραφή</string>
@@ -257,7 +267,7 @@
   <string name="skip_login">Παράβλεψη</string>
   <string name="navigation_item_login">Είσοδος</string>
   <string name="skip_login_title">Θέλετε πραγματικά να παραβλέψετε τη σύνδεση;</string>
-  <string name="skip_login_message" fuzzy="true">Δεν θα έχετε τη δυνατότητα να ανεβάζετε εικόνες.</string>
+  <string name="skip_login_message">Θα χρειάζεται να συνδεθείτε για να ανεβάζετε εικόνες στο μέλλον.</string>
   <string name="login_alert_message">Παρακαλούμε συνδεθείτε για να χρησιμοποιήσετε αυτό το χαρακτηριστικό</string>
   <string name="nearby_location_has_not_changed">Ο εντοπισμός δεν έχει αλλάξει.</string>
   <string name="nearby_location_not_available">Ο τόπος δεν είναι διαθέσιμος.</string>
@@ -394,4 +404,9 @@
   <string name="no_categories_selected_warning_desc">Εικόνες χωρίς κατηγορίες χρησιμοποιούνται σπάνια. Θέλετε πράγματι να στείλετε δίχως να επιλέξετε κατηγορίες?</string>
   <string name="yes_submit">Ναι, υποβολή</string>
   <string name="no_go_back">Όχι, Επιστροφή</string>
+  <string name="no_image">Δεν χρησιμοποιούνται εικόνες</string>
+  <string name="no_image_uploaded">Δεν έχουν ανεβεί εικόνες</string>
+  <string name="no_notification">Δεν έχετε αδιάβαστες Ενημερώσεις.</string>
+  <string name="no_archived_notification">Δεν έχετε αρχειοθετημένες Ενημερώσεις.</string>
+  <string name="please_wait">Παρακαλούμε περιμένετε…</string>
 </resources>

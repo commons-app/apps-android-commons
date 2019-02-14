@@ -200,7 +200,11 @@
   <string name="_2fa_code">雙重因素身分核對代碼</string>
   <string name="number_of_uploads">我的最近上傳限制</string>
   <string name="maximum_limit">最大限制</string>
+  <string name="invalid_zero">0 為無效</string>
+  <string name="invalid_input">無效的輸入</string>
   <string name="maximum_limit_alert">無法顯示超過 500 項</string>
+  <string name="enter_valid">輸入有效數字</string>
+  <string name="cannot_be_zero">上傳限制不能為 0</string>
   <string name="set_limit">設定最近上傳限制</string>
   <string name="login_failed_2fa_not_supported">目前不支援雙重因素身分核對。</string>
   <string name="logout_verification">您確定要登出嗎？</string>
@@ -354,6 +358,7 @@
   <string name="statistics">統計內容</string>
   <string name="statistics_thanks">已收到的感謝</string>
   <string name="statistics_featured">特色圖片</string>
+  <string name="statistics_wikidata_edits">透過「附近地點」的圖片</string>
   <string name="level">等級</string>
   <string name="images_uploaded">已上傳的圖片</string>
   <string name="image_reverts">沒有被還原回復的圖片</string>
@@ -373,6 +378,7 @@
   <string name="contributions_fragment">貢獻</string>
   <string name="nearby_fragment">附近</string>
   <string name="notifications">通知</string>
+  <string name="archived_notifications">通知（已存檔）</string>
   <string name="display_nearby_notification">顯示附近地點通知</string>
   <string name="display_nearby_notification_summary">在此輕觸來查看缺少圖片的最近地點</string>
   <string name="no_close_nearby">查無靠近您的附近地點</string>
@@ -444,7 +450,10 @@
   <string name="no_image_reverted">沒有圖片被還原回復</string>
   <string name="no_image_uploaded">沒有圖片被上傳</string>
   <string name="no_notification">您有尚未讀取的通知</string>
+  <string name="no_archived_notification">您沒有已存檔通知</string>
   <string name="share_logs_using">分享日誌使用</string>
+  <string name="menu_option_archived">檢視已存檔</string>
+  <string name="menu_option_unread">檢視未讀</string>
   <string name="error_occurred_in_picking_images">當挑選圖片時發生錯誤</string>
   <string name="image_chooser_title">選擇要上傳的圖片</string>
   <string name="please_wait">請稍待…</string>
