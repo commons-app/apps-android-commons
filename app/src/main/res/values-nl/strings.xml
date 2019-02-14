@@ -238,4 +238,6 @@
   <string name="display_location_permission_title">Machtiging voor locatie weergeven</string>
   <string name="display_location_permission_explanation">Naar machtiging voor locatie vragen als dat nodig is voor de functie meldingskaart dichtbij weergeven.</string>
   <string name="share_logs_using">Logboeken delen via</string>
+    <string name="tutorial_2_subtext_2">" Nuttige objecten (fietsen, treinstations)"</string>
+  <string name="tutorial_2_subtext_3">Beroemde mensen (je burgemeester, Olympische atleten die je hebt ontmoet)</string>
 </resources>

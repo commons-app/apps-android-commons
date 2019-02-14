@@ -211,4 +211,6 @@
   <string name="navigation_item_login">Mlebu log</string>
   <string name="skip_login_title">Apa panjenengan temen ora péngin mlebu log?</string>
   <string name="question">Pitakon</string>
+    <string name="tutorial_2_subtext_2">Objek kasebut (pit, stasiun sepur)</string>
+  <string name="tutorial_2_subtext_3">Wong sing kondhang (walikota panjenengan, atlit Olimpiade panjenengan ketemu)</string>
 </resources>

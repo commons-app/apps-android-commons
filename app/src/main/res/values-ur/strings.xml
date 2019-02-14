@@ -160,4 +160,6 @@
   <string name="list_sheet">فہرست</string>
   <string name="desc_language_Middle_East">مشرق وسطی</string>
   <string name="desc_language_Africa">افریقا</string>
+    <string name="tutorial_2_subtext_2">مفید اشیاء (سائیکلوں، ٹرین سٹیشنوں)</string>
+    <string name="tutorial_2_subtext_3">مشہور افراد (آپ کے میئر، اولمپک کھلاڑیوں نے آپ سے ملاقات کی)</string>
 </resources>

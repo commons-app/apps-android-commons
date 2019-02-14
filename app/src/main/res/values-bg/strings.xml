@@ -150,4 +150,6 @@
   <string name="error_occurred_in_picking_images">Възникна грешка при избирането на изображенията</string>
   <string name="image_chooser_title">Изберете изображения за качване</string>
   <string name="please_wait">Моля, изчакайте...</string>
+  <string name="tutorial_2_subtext_2">" Полезни обекти (велосипеди, гари)"</string>
+  <string name="tutorial_2_subtext_3">Известни хора (вашият кмет, олимпийски атлети, които срещнахте)</string>
 </resources>
