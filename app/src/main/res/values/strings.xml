@@ -193,7 +193,11 @@
   <string name="_2fa_code">2FA Code</string>
   <string name="number_of_uploads">My Recent Upload Limit</string>
   <string name="maximum_limit">Maximum Limit</string>
+  <string name="invalid_zero">Zero is not valid</string>
+  <string name="invalid_input">Invalid Input</string>
   <string name="maximum_limit_alert">Unable to display more than 500</string>
+  <string name="enter_valid">Enter a valid number</string>
+  <string name="cannot_be_zero">Upload limit cannot be 0</string>
   <string name="set_limit">Set Recent Upload Limit</string>
   <string name="login_failed_2fa_not_supported">Two factor authentication is currently not supported.</string>
   <string name="logout_verification">Do you really want to logout?</string>
