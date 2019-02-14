@@ -37,7 +37,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/toolbar"
-                android:background="@color/layout_light_grey"
+                android:background="@color/opak_middle_grey"
                 android:orientation="vertical">
 
                 <TextView
@@ -48,7 +48,7 @@
                     android:layout_marginStart="@dimen/activity_margin_horizontal"
                     android:layout_marginTop="@dimen/activity_margin_horizontal"
                     android:text="@string/level"
-                    android:textColor="@color/black"
+                    android:textColor="@color/white"
                     android:id="@+id/achievement_level" />
 
                 <ImageView
@@ -87,7 +87,7 @@
                         android:layout_marginStart="@dimen/activity_margin_horizontal"
                         android:id="@+id/images_upload_text_param"
                         android:layout_marginTop="@dimen/achievements_activity_margin_vertical"
-                        android:textColor="@color/opak_middle_grey"
+                        android:textColor="@color/layout_light_grey"
                         android:text="@string/images_uploaded" />
 
                     <ImageView
@@ -132,7 +132,7 @@
                         style="?android:textAppearanceMedium"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textColor="@color/opak_middle_grey"
+                        android:textColor="@color/layout_light_grey"
                         android:layout_marginLeft="@dimen/activity_margin_horizontal"
                         android:id="@+id/images_reverted_text"
                         android:layout_marginStart="@dimen/activity_margin_horizontal"
@@ -153,7 +153,7 @@
                         android:layout_height="wrap_content"
                         android:text="@string/achievements_revert_limit_message"
                         android:textSize="10dp"
-                        android:textColor="@color/opak_middle_grey"
+                        android:textColor="@color/layout_light_grey"
                         android:id="@+id/images_revert_limit_text"
                         android:layout_marginLeft="@dimen/activity_margin_horizontal"
                         android:layout_marginStart="@dimen/activity_margin_horizontal"
@@ -196,7 +196,7 @@
                         android:layout_marginLeft="@dimen/activity_margin_horizontal"
                         android:layout_marginStart="@dimen/activity_margin_horizontal"
                         android:layout_marginTop="@dimen/achievements_activity_margin_vertical"
-                        android:textColor="@color/opak_middle_grey"
+                        android:textColor="@color/layout_light_grey"
                         android:text="@string/images_used_by_wiki" />
 
                     <ImageView
