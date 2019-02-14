@@ -9,7 +9,6 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.content.ContextCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
@@ -52,7 +51,8 @@ public class MainActivity extends AuthenticatedActivity implements FragmentManag
 
     @Inject
     SessionManager sessionManager;
-    @Inject ContributionController controller;
+    @Inject
+    ContributionController controller;
     @BindView(R.id.tab_layout)
     TabLayout tabLayout;
     @BindView(R.id.pager)
@@ -90,8 +90,7 @@ public class MainActivity extends AuthenticatedActivity implements FragmentManag
         initDrawer();
         setTitle(getString(R.string.navigation_item_home)); // Should I create a new string variable with another name instead?
 
-
-        if (savedInstanceState != null ) {
+        if (savedInstanceState != null) {
             onOrientationChanged = true; // Will be used in nearby fragment to determine significant update of map
 
             //If nearby map was visible, call on Tab Selected to call all nearby operations
@@ -118,7 +117,7 @@ public class MainActivity extends AuthenticatedActivity implements FragmentManag
         addTabsAndFragments();
         isAuthCookieAcquired = true;
         if (contributionsActivityPagerAdapter.getItem(0) != null) {
-            ((ContributionsFragment)contributionsActivityPagerAdapter.getItem(0)).onAuthCookieAcquired(uploadServiceIntent);
+            ((ContributionsFragment) contributionsActivityPagerAdapter.getItem(0)).onAuthCookieAcquired(uploadServiceIntent);
         }
     }
 
@@ -144,7 +143,7 @@ public class MainActivity extends AuthenticatedActivity implements FragmentManag
 
         if (uploadServiceIntent != null) {
             // If auth cookie already acquired notify contrib fragment so that it san operate auth required actions
-            ((ContributionsFragment)contributionsActivityPagerAdapter.getItem(CONTRIBUTIONS_TAB_POSITION)).onAuthCookieAcquired(uploadServiceIntent);
+            ((ContributionsFragment) contributionsActivityPagerAdapter.getItem(CONTRIBUTIONS_TAB_POSITION)).onAuthCookieAcquired(uploadServiceIntent);
         }
         setTabAndViewPagerSynchronisation();
     }
@@ -152,10 +151,11 @@ public class MainActivity extends AuthenticatedActivity implements FragmentManag
     /**
      * Adds number of uploads next to tab text "Contributions" then it will look like
      * "Contributions (NUMBER)"
+     *
      * @param uploadCount
      */
     public void setNumOfUploads(int uploadCount) {
-        tabLayout.getTabAt(0).setText(getResources().getString(R.string.contributions_fragment) +" "+ getResources()
+        tabLayout.getTabAt(0).setText(getResources().getString(R.string.contributions_fragment) + " " + getResources()
                 .getQuantityString(R.plurals.contributions_subtitle,
                         uploadCount, uploadCount));
     }
@@ -190,7 +190,7 @@ public class MainActivity extends AuthenticatedActivity implements FragmentManag
                         isContributionsFragmentVisible = false;
                         updateMenuItem();
                         // Do all permission and GPS related tasks on tab selected, not on create
-                        ((NearbyFragment)contributionsActivityPagerAdapter.getItem(1)).onTabSelected(onOrientationChanged);
+                        ((NearbyFragment) contributionsActivityPagerAdapter.getItem(1)).onTabSelected(onOrientationChanged);
                         break;
                     default:
                         tabLayout.getTabAt(CONTRIBUTIONS_TAB_POSITION).select();
@@ -272,7 +272,11 @@ public class MainActivity extends AuthenticatedActivity implements FragmentManag
         } else if (getSupportFragmentManager().findFragmentByTag(nearbyFragmentTag) != null && !isContributionsFragmentVisible) {
             // Meas that nearby fragment is visible (not contributions fragment)
             // Set current item to contributions activity instead of closing the activity
-            viewPager.setCurrentItem(0);
+
+            if (!((NearbyFragment) contributionsActivityPagerAdapter.getItem(1)).listOptionMenuIteClicked()) {
+                viewPager.setCurrentItem(0);
+            }
+
         } else {
             super.onBackPressed();
         }
@@ -347,8 +351,9 @@ public class MainActivity extends AuthenticatedActivity implements FragmentManag
                 NotificationActivity.startYourself(this, "unread");
                 return true;
             case R.id.list_sheet:
+                Timber.d("list sheet");
                 if (contributionsActivityPagerAdapter.getItem(1) != null) {
-                    ((NearbyFragment)contributionsActivityPagerAdapter.getItem(1)).listOptionMenuIteClicked();
+                    ((NearbyFragment) contributionsActivityPagerAdapter.getItem(1)).listOptionMenuIteClicked();
                 }
                 return true;
             default:
@@ -383,7 +388,7 @@ public class MainActivity extends AuthenticatedActivity implements FragmentManag
          * */
         @Override
         public Fragment getItem(int position) {
-            switch (position){
+            switch (position) {
                 case 0:
                     ContributionsFragment retainedContributionsFragment = getContributionsFragment(0);
                     if (retainedContributionsFragment != null) {
@@ -416,29 +421,32 @@ public class MainActivity extends AuthenticatedActivity implements FragmentManag
 
         /**
          * Generates fragment tag with makeFragmentName method to get retained contributions fragment
+         *
          * @param position index of tabs, in our case 0 or 1
          * @return
          */
         private ContributionsFragment getContributionsFragment(int position) {
             String tag = makeFragmentName(R.id.pager, position);
-            return (ContributionsFragment)fragmentManager.findFragmentByTag(tag);
+            return (ContributionsFragment) fragmentManager.findFragmentByTag(tag);
         }
 
         /**
          * Generates fragment tag with makeFragmentName method to get retained nearby fragment
+         *
          * @param position index of tabs, in our case 0 or 1
          * @return
          */
         private NearbyFragment getNearbyFragment(int position) {
             String tag = makeFragmentName(R.id.pager, position);
-            return (NearbyFragment)fragmentManager.findFragmentByTag(tag);
+            return (NearbyFragment) fragmentManager.findFragmentByTag(tag);
         }
 
         /**
          * A simple hack to use retained fragment when getID is called explicitly, if we don't use
          * this method, a new fragment will be initialized on each explicit calls of getID
+         *
          * @param viewId id of view pager
-         * @param index index of tabs, in our case 0 or 1
+         * @param index  index of tabs, in our case 0 or 1
          * @return
          */
         public String makeFragmentName(int viewId, int index) {
@@ -448,8 +456,9 @@ public class MainActivity extends AuthenticatedActivity implements FragmentManag
         /**
          * In first tab we can have ContributionsFragment or Media details fragment. This method
          * is responsible to update related boolean
+         *
          * @param isContributionsListFragment true when contribution fragment should be visible, false
-         *                                means user clicked to MediaDetails
+         *                                    means user clicked to MediaDetails
          */
         private void updateContributionFragmentTabContent(boolean isContributionsListFragment) {
             this.isContributionsListFragment = isContributionsListFragment;
@@ -471,7 +480,7 @@ public class MainActivity extends AuthenticatedActivity implements FragmentManag
                 if (grantResults.length > 0
                         && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     Timber.d("Location permission given");
-                    ((ContributionsFragment)contributionsActivityPagerAdapter
+                    ((ContributionsFragment) contributionsActivityPagerAdapter
                             .getItem(0)).locationManager.registerLocationManager();
                 } else {
                     // If nearby fragment is visible and location permission is not given, send user back to contrib fragment

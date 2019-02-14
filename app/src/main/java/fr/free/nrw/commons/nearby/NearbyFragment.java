@@ -53,7 +53,7 @@ import static fr.free.nrw.commons.location.LocationServiceManager.LocationChange
 
 public class NearbyFragment extends CommonsDaggerSupportFragment
         implements LocationUpdateListener,
-                    WikidataEditListener.WikidataP18EditListener {
+        WikidataEditListener.WikidataP18EditListener {
 
     @BindView(R.id.progressBar)
     ProgressBar progressBar;
@@ -77,7 +77,8 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
     @Inject
     @Named("application_preferences")
     BasicKvStore applicationKvStore;
-    @Inject Gson gson;
+    @Inject
+    Gson gson;
 
     public NearbyMapFragment nearbyMapFragment;
     private NearbyListFragment nearbyListFragment;
@@ -135,14 +136,16 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
     /**
      * Hide or expand bottom sheet according to states of all sheets
      */
-    public void listOptionMenuIteClicked() {
-        if(bottomSheetBehavior.getState()==BottomSheetBehavior.STATE_COLLAPSED || bottomSheetBehavior.getState()==BottomSheetBehavior.STATE_HIDDEN){
+    public boolean listOptionMenuIteClicked() {
+        if (bottomSheetBehavior.getState() == BottomSheetBehavior.STATE_COLLAPSED || bottomSheetBehavior.getState() == BottomSheetBehavior.STATE_HIDDEN) {
             bottomSheetBehaviorForDetails.setState(BottomSheetBehavior.STATE_HIDDEN);
             bottomSheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
-        }else if(bottomSheetBehavior.getState()==BottomSheetBehavior.STATE_EXPANDED){
+            return false;
+        } else if (bottomSheetBehavior.getState() == BottomSheetBehavior.STATE_EXPANDED) {
             bottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
+            return true;
         }
-
+        return false;
     }
 
     /**
@@ -161,7 +164,7 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
         return (NearbyMapFragment) getChildFragmentManager().findFragmentByTag(TAG_RETAINED_MAP_FRAGMENT);
     }
 
-    private void removeMapFragment() {
+    public void removeMapFragment() {
         if (nearbyMapFragment != null) {
             android.support.v4.app.FragmentManager fm = getFragmentManager();
             fm.beginTransaction().remove(nearbyMapFragment).commit();
@@ -177,7 +180,8 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
         return (NearbyListFragment) getChildFragmentManager().findFragmentByTag(TAG_RETAINED_LIST_FRAGMENT);
     }
 
-    private void removeListFragment() {
+
+    public void removeListFragment() {
         if (nearbyListFragment != null) {
             android.support.v4.app.FragmentManager fm = getFragmentManager();
             fm.beginTransaction().remove(nearbyListFragment).commit();
@@ -216,6 +220,7 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
 
     /**
      * Sets camera position, zoom level according to sheet positions
+     *
      * @param bottomSheetState expanded, collapsed or hidden
      */
     public void prepareViewsForSheetPosition(int bottomSheetState) {
@@ -224,7 +229,7 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
 
     @Override
     public void onLocationChangedSignificantly(LatLng latLng) {
-            refreshView(LOCATION_SIGNIFICANTLY_CHANGED);
+        refreshView(LOCATION_SIGNIFICANTLY_CHANGED);
     }
 
     @Override
@@ -236,7 +241,7 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
     @Override
     public void onLocationChangedMedium(LatLng latLng) {
         // For nearby map actions, there are no differences between 500 meter location change (aka medium change) and slight change
-            refreshView(LOCATION_SLIGHTLY_CHANGED);
+        refreshView(LOCATION_SLIGHTLY_CHANGED);
     }
 
     @Override
@@ -316,7 +321,7 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
                 .equals(LOCATION_SLIGHTLY_CHANGED)) {
             String gsonCurLatLng = gson.toJson(curLatLng);
             bundle.putString("CurLatLng", gsonCurLatLng);
-            updateMapFragment(false,true, null, null);
+            updateMapFragment(false, true, null, null);
         }
 
         if (nearbyMapFragment != null && nearbyMapFragment.searchThisAreaButton != null) {
@@ -328,6 +333,7 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
      * This method should be used with "Search this are button". This method will search nearby
      * points around any custom location (target location when user clicked on search this area)
      * button. It populates places for custom location.
+     *
      * @param customLatLng Custom area which we will search around
      */
     public void refreshViewForCustomLocation(LatLng customLatLng, boolean refreshForCurrentLocation) {
@@ -356,6 +362,7 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
     /**
      * Populates places for custom location, should be used for finding nearby places around a
      * location where you are not at.
+     *
      * @param nearbyPlacesInfo This variable has place list information and distances.
      */
     private void populatePlacesFromCustomLocation(NearbyController.NearbyPlacesInfo nearbyPlacesInfo) {
@@ -367,7 +374,7 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
             if (!populateForCurrentLocation) {
                 nearbyMapFragment.updateMapSignificantlyForCustomLocation(customLatLng, nearbyPlacesInfo.placeList);
             } else {
-                updateMapFragment(true,true, customLatLng, nearbyPlacesInfo);
+                updateMapFragment(true, true, customLatLng, nearbyPlacesInfo);
             }
             updateListFragmentForCustomLocation(nearbyPlacesInfo.placeList);
         }
@@ -376,6 +383,7 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
     /**
      * Turns nearby place lists and boundary coordinates into gson and update map and list fragments
      * accordingly
+     *
      * @param nearbyPlacesInfo a variable holds both nearby place list and boundary coordinates
      */
     private void populatePlaces(NearbyController.NearbyPlacesInfo nearbyPlacesInfo) {
@@ -404,7 +412,7 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
         } else {
             // There are fragments, just update the map and list
             Timber.d("Map fragment already exists, just update the map and list");
-            updateMapFragment(false,false, null, null);
+            updateMapFragment(false, false, null, null);
             updateListFragment();
         }
     }
@@ -412,6 +420,7 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
     /**
      * Lock nearby view updates while updating map or list. Because we don't want new update calls
      * when we already updating for old location update.
+     *
      * @param lock true if we should lock nearby map
      */
     private void lockNearbyView(boolean lock) {
@@ -432,10 +441,10 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
      * For significant update: nearby markers are removed and new markers added again
      * Slight updates stop if user is checking another area of map
      *
-     * @param updateViaButton search this area button is clicked
-     * @param isSlightUpdate Means no need to update markers, just follow user location with camera
-     * @param customLatLng Will be used for updates for other locations than users current location.
-     *                     Ie. when we use search this area feature
+     * @param updateViaButton  search this area button is clicked
+     * @param isSlightUpdate   Means no need to update markers, just follow user location with camera
+     * @param customLatLng     Will be used for updates for other locations than users current location.
+     *                         Ie. when we use search this area feature
      * @param nearbyPlacesInfo Includes nearby places list and boundary coordinates
      */
     private void updateMapFragment(boolean updateViaButton, boolean isSlightUpdate, @Nullable LatLng customLatLng, @Nullable NearbyController.NearbyPlacesInfo nearbyPlacesInfo) {
@@ -529,6 +538,7 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
     /**
      * Updates nearby list for custom location, will be used with search this area method. When you
      * want to search for a place where you are not at.
+     *
      * @param placeList List of places around your manually chosen target location from map.
      */
     private void updateListFragmentForCustomLocation(List<Place> placeList) {
@@ -626,7 +636,7 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
                 .setNegativeButton(R.string.cancel, (dialog, which) -> {
                     //dismiss dialog and send user to contributions tab instead
                     dialog.cancel();
-                    ((MainActivity)getActivity()).viewPager.setCurrentItem(((MainActivity)getActivity()).CONTRIBUTIONS_TAB_POSITION);
+                    ((MainActivity) getActivity()).viewPager.setCurrentItem(((MainActivity) getActivity()).CONTRIBUTIONS_TAB_POSITION);
                 })
                 .create()
                 .show();
@@ -711,7 +721,7 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
         if (!FragmentUtils.isFragmentUIActive(this)) {
             return;
         }
-        
+
         IntentFilter intentFilter = new IntentFilter(NETWORK_INTENT_ACTION);
         snackbar = Snackbar.make(transparentView, R.string.no_internet, Snackbar.LENGTH_INDEFINITE);
 
@@ -746,10 +756,11 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
         super.onResume();
         // Resume the fragment if exist
         resumeFragment();
-        }
+    }
 
     /**
      * Perform nearby operations on nearby tab selected
+     *
      * @param onOrientationChanged pass orientation changed info to fragment
      */
     public void onTabSelected(boolean onOrientationChanged) {
@@ -801,7 +812,7 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
         super.onPause();
         // this means that this activity will not be recreated now, user is leaving it
         // or the activity is otherwise finishing
-        if(getActivity().isFinishing()) {
+        if (getActivity().isFinishing()) {
             // we will not need this fragment anymore, this may also be a good place to signal
             // to the retained fragment object to perform its own cleanup.
             //removeMapFragment();
@@ -818,6 +829,8 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
             locationManager.unregisterLocationManager();
         }
     }
+
+
 }
 
 

@@ -3,9 +3,6 @@ package fr.free.nrw.commons.nearby;
 import android.animation.ObjectAnimator;
 import android.animation.TypeEvaluator;
 import android.animation.ValueAnimator;
-import android.content.ClipData;
-import android.content.ClipboardManager;
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Color;
@@ -131,13 +128,24 @@ public class NearbyMapFragment extends DaggerFragment {
     private Bundle bundleForUpdates;// Carry information from activity about changed nearby places and current location
     private boolean searchedAroundCurrentLocation = true;
 
-    @Inject @Named("application_preferences") BasicKvStore applicationKvStore;
-    @Inject @Named("defaultKvStore") BasicKvStore prefs;
-    @Inject @Named("direct_nearby_upload_prefs") JsonKvStore directKvStore;
-    @Inject @Named("default_preferences") BasicKvStore defaultKvStore;
-    @Inject BookmarkLocationsDao bookmarkLocationDao;
-    @Inject ContributionController controller;
-    @Inject Gson gson;
+    @Inject
+    @Named("application_preferences")
+    BasicKvStore applicationKvStore;
+    @Inject
+    @Named("defaultKvStore")
+    BasicKvStore prefs;
+    @Inject
+    @Named("direct_nearby_upload_prefs")
+    JsonKvStore directKvStore;
+    @Inject
+    @Named("default_preferences")
+    BasicKvStore defaultKvStore;
+    @Inject
+    BookmarkLocationsDao bookmarkLocationDao;
+    @Inject
+    ContributionController controller;
+    @Inject
+    Gson gson;
 
     private static final double ZOOM_LEVEL = 14f;
 
@@ -159,7 +167,8 @@ public class NearbyMapFragment extends DaggerFragment {
             List<Place> placeList = gson.fromJson(gsonPlaceList, listType);
             Type curLatLngType = new TypeToken<fr.free.nrw.commons.location.LatLng>() {
             }.getType();
-            Type gsonBoundaryCoordinatesType = new TypeToken<fr.free.nrw.commons.location.LatLng[]>() {}.getType();
+            Type gsonBoundaryCoordinatesType = new TypeToken<fr.free.nrw.commons.location.LatLng[]>() {
+            }.getType();
             curLatLng = gson.fromJson(gsonLatLng, curLatLngType);
             baseMarkerOptions = NearbyController
                     .loadAttractionsFromLocationToBaseMarkerOptions(curLatLng,
@@ -218,11 +227,12 @@ public class NearbyMapFragment extends DaggerFragment {
      * location tracker marker of user.
      */
     public void updateMapSlightly() {
-        Timber.d("updateMapSlightly called, bundle is:"+ bundleForUpdates);
+        Timber.d("updateMapSlightly called, bundle is:" + bundleForUpdates);
         if (mapboxMap != null) {
             if (bundleForUpdates != null) {
                 String gsonLatLng = bundleForUpdates.getString("CurLatLng");
-                Type curLatLngType = new TypeToken<fr.free.nrw.commons.location.LatLng>() {}.getType();
+                Type curLatLngType = new TypeToken<fr.free.nrw.commons.location.LatLng>() {
+                }.getType();
                 curLatLng = gson.fromJson(gsonLatLng, curLatLngType);
             }
             updateMapToTrackPosition();
@@ -236,16 +246,19 @@ public class NearbyMapFragment extends DaggerFragment {
      * previous nearby call.
      */
     public void updateMapSignificantlyForCurrentLocation() {
-        Timber.d("updateMapSignificantlyForCurrentLocation called, bundle is:"+ bundleForUpdates);
+        Timber.d("updateMapSignificantlyForCurrentLocation called, bundle is:" + bundleForUpdates);
         if (mapboxMap != null) {
             if (bundleForUpdates != null) {
                 String gsonPlaceList = bundleForUpdates.getString("PlaceList");
                 String gsonLatLng = bundleForUpdates.getString("CurLatLng");
                 String gsonBoundaryCoordinates = bundleForUpdates.getString("BoundaryCoord");
-                Type listType = new TypeToken<List<Place>>() {}.getType();
+                Type listType = new TypeToken<List<Place>>() {
+                }.getType();
                 List<Place> placeList = gson.fromJson(gsonPlaceList, listType);
-                Type curLatLngType = new TypeToken<fr.free.nrw.commons.location.LatLng>() {}.getType();
-                Type gsonBoundaryCoordinatesType = new TypeToken<fr.free.nrw.commons.location.LatLng[]>() {}.getType();
+                Type curLatLngType = new TypeToken<fr.free.nrw.commons.location.LatLng>() {
+                }.getType();
+                Type gsonBoundaryCoordinatesType = new TypeToken<fr.free.nrw.commons.location.LatLng[]>() {
+                }.getType();
                 curLatLng = gson.fromJson(gsonLatLng, curLatLngType);
                 baseMarkerOptions = NearbyController
                         .loadAttractionsFromLocationToBaseMarkerOptions(curLatLng,
@@ -266,11 +279,12 @@ public class NearbyMapFragment extends DaggerFragment {
      * Will be used for map vew updates for custom locations (ie. with search this area method).
      * Clears the map, adds current location marker, adds nearby markers around custom location,
      * re-enables map gestures which was locked during place load, remove progress bar.
+     *
      * @param customLatLng custom location that we will search around
-     * @param placeList places around of custom location
+     * @param placeList    places around of custom location
      */
     public void updateMapSignificantlyForCustomLocation(fr.free.nrw.commons.location.LatLng customLatLng, List<Place> placeList) {
-        List<NearbyBaseMarker> customBaseMarkerOptions =  NearbyController
+        List<NearbyBaseMarker> customBaseMarkerOptions = NearbyController
                 .loadAttractionsFromLocationToBaseMarkerOptions(curLatLng, // Curlatlang will be used to calculate distances
                         placeList,
                         getActivity(),
@@ -288,7 +302,7 @@ public class NearbyMapFragment extends DaggerFragment {
     private void updateMapToTrackPosition() {
 
         if (currentLocationMarker != null) {
-            LatLng curMapBoxLatLng = new LatLng(curLatLng.getLatitude(),curLatLng.getLongitude());
+            LatLng curMapBoxLatLng = new LatLng(curLatLng.getLatitude(), curLatLng.getLongitude());
             ValueAnimator markerAnimator = ObjectAnimator.ofObject(currentLocationMarker, "position",
                     new LatLngEvaluator(), currentLocationMarker.getPosition(),
                     curMapBoxLatLng);
@@ -297,39 +311,40 @@ public class NearbyMapFragment extends DaggerFragment {
 
             List<LatLng> circle = createCircleArray(curLatLng.getLatitude(), curLatLng.getLongitude(),
                     curLatLng.getAccuracy() * 2, 100);
-            if (currentLocationPolygonOptions != null){
+            if (currentLocationPolygonOptions != null) {
                 mapboxMap.removePolygon(currentLocationPolygonOptions.getPolygon());
                 currentLocationPolygonOptions = new PolygonOptions()
                         .addAll(circle)
                         .strokeColor(Color.parseColor("#55000000"))
                         .fillColor(Color.parseColor("#11000000"));
                 mapboxMap.addPolygon(currentLocationPolygonOptions);
+
             }
 
             // Make camera to follow user on location change
-            CameraPosition position ;
+            CameraPosition position;
 
             // Do not update camera position is search this area mode on
             if (!searchThisAreaModeOn) {
-                if (ViewUtil.isPortrait(getActivity())){
+                if (ViewUtil.isPortrait(getActivity())) {
                     position = new CameraPosition.Builder()
                             .target(isBottomListSheetExpanded ?
-                                    new LatLng(curMapBoxLatLng.getLatitude()- CAMERA_TARGET_SHIFT_FACTOR_PORTRAIT,
+                                    new LatLng(curMapBoxLatLng.getLatitude() - CAMERA_TARGET_SHIFT_FACTOR_PORTRAIT,
                                             curMapBoxLatLng.getLongitude())
-                                    : curMapBoxLatLng ) // Sets the new camera position
+                                    : curMapBoxLatLng) // Sets the new camera position
                             .zoom(isBottomListSheetExpanded ?
                                     ZOOM_LEVEL // zoom level is fixed when bottom sheet is expanded
-                                    :mapboxMap.getCameraPosition().zoom) // Same zoom level
+                                    : mapboxMap.getCameraPosition().zoom) // Same zoom level
                             .build();
-                }else {
+                } else {
                     position = new CameraPosition.Builder()
                             .target(isBottomListSheetExpanded ?
-                                    new LatLng(curMapBoxLatLng.getLatitude()- CAMERA_TARGET_SHIFT_FACTOR_LANDSCAPE,
+                                    new LatLng(curMapBoxLatLng.getLatitude() - CAMERA_TARGET_SHIFT_FACTOR_LANDSCAPE,
                                             curMapBoxLatLng.getLongitude())
-                                    : curMapBoxLatLng ) // Sets the new camera position
+                                    : curMapBoxLatLng) // Sets the new camera position
                             .zoom(isBottomListSheetExpanded ?
                                     ZOOM_LEVEL // zoom level is fixed when bottom sheet is expanded
-                                    :mapboxMap.getCameraPosition().zoom) // Same zoom level
+                                    : mapboxMap.getCameraPosition().zoom) // Same zoom level
                             .build();
                 }
 
@@ -344,45 +359,45 @@ public class NearbyMapFragment extends DaggerFragment {
      */
     private void initViews() {
         Timber.d("initViews called");
-        bottomSheetList = ((NearbyFragment)getParentFragment()).view.findViewById(R.id.bottom_sheet);
+        bottomSheetList = ((NearbyFragment) getParentFragment()).view.findViewById(R.id.bottom_sheet);
         bottomSheetListBehavior = BottomSheetBehavior.from(bottomSheetList);
-        bottomSheetDetails = ((NearbyFragment)getParentFragment()).view.findViewById(R.id.bottom_sheet_details);
+        bottomSheetDetails = ((NearbyFragment) getParentFragment()).view.findViewById(R.id.bottom_sheet_details);
         bottomSheetDetailsBehavior = BottomSheetBehavior.from(bottomSheetDetails);
         bottomSheetDetailsBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
         bottomSheetDetails.setVisibility(View.VISIBLE);
 
-        fabPlus = ((NearbyFragment)getParentFragment()).view.findViewById(R.id.fab_plus);
-        fabCamera = ((NearbyFragment)getParentFragment()).view.findViewById(R.id.fab_camera);
-        fabGallery = ((NearbyFragment)getParentFragment()).view.findViewById(R.id.fab_gallery);
-        fabRecenter = ((NearbyFragment)getParentFragment()).view.findViewById(R.id.fab_recenter);
+        fabPlus = ((NearbyFragment) getParentFragment()).view.findViewById(R.id.fab_plus);
+        fabCamera = ((NearbyFragment) getParentFragment()).view.findViewById(R.id.fab_camera);
+        fabGallery = ((NearbyFragment) getParentFragment()).view.findViewById(R.id.fab_gallery);
+        fabRecenter = ((NearbyFragment) getParentFragment()).view.findViewById(R.id.fab_recenter);
 
         fab_open = AnimationUtils.loadAnimation(getParentFragment().getActivity(), R.anim.fab_open);
         fab_close = AnimationUtils.loadAnimation(getParentFragment().getActivity(), R.anim.fab_close);
         rotate_forward = AnimationUtils.loadAnimation(getParentFragment().getActivity(), R.anim.rotate_forward);
         rotate_backward = AnimationUtils.loadAnimation(getParentFragment().getActivity(), R.anim.rotate_backward);
 
-        transparentView = ((NearbyFragment)getParentFragment()).view.findViewById(R.id.transparentView);
+        transparentView = ((NearbyFragment) getParentFragment()).view.findViewById(R.id.transparentView);
 
-        description = ((NearbyFragment)getParentFragment()).view.findViewById(R.id.description);
-        title = ((NearbyFragment)getParentFragment()).view.findViewById(R.id.title);
-        distance = ((NearbyFragment)getParentFragment()).view.findViewById(R.id.category);
-        icon = ((NearbyFragment)getParentFragment()).view.findViewById(R.id.icon);
+        description = ((NearbyFragment) getParentFragment()).view.findViewById(R.id.description);
+        title = ((NearbyFragment) getParentFragment()).view.findViewById(R.id.title);
+        distance = ((NearbyFragment) getParentFragment()).view.findViewById(R.id.category);
+        icon = ((NearbyFragment) getParentFragment()).view.findViewById(R.id.icon);
 
-        wikidataButton = ((NearbyFragment)getParentFragment()).view.findViewById(R.id.wikidataButton);
-        wikipediaButton = ((NearbyFragment)getParentFragment()).view.findViewById(R.id.wikipediaButton);
-        directionsButton = ((NearbyFragment)getParentFragment()).view.findViewById(R.id.directionsButton);
-        commonsButton = ((NearbyFragment)getParentFragment()).view.findViewById(R.id.commonsButton);
+        wikidataButton = ((NearbyFragment) getParentFragment()).view.findViewById(R.id.wikidataButton);
+        wikipediaButton = ((NearbyFragment) getParentFragment()).view.findViewById(R.id.wikipediaButton);
+        directionsButton = ((NearbyFragment) getParentFragment()).view.findViewById(R.id.directionsButton);
+        commonsButton = ((NearbyFragment) getParentFragment()).view.findViewById(R.id.commonsButton);
 
-        wikidataButtonText = ((NearbyFragment)getParentFragment()).view.findViewById(R.id.wikidataButtonText);
-        wikipediaButtonText = ((NearbyFragment)getParentFragment()).view.findViewById(R.id.wikipediaButtonText);
-        directionsButtonText = ((NearbyFragment)getParentFragment()).view.findViewById(R.id.directionsButtonText);
-        commonsButtonText = ((NearbyFragment)getParentFragment()).view.findViewById(R.id.commonsButtonText);
+        wikidataButtonText = ((NearbyFragment) getParentFragment()).view.findViewById(R.id.wikidataButtonText);
+        wikipediaButtonText = ((NearbyFragment) getParentFragment()).view.findViewById(R.id.wikipediaButtonText);
+        directionsButtonText = ((NearbyFragment) getParentFragment()).view.findViewById(R.id.directionsButtonText);
+        commonsButtonText = ((NearbyFragment) getParentFragment()).view.findViewById(R.id.commonsButtonText);
 
         bookmarkButton = getActivity().findViewById(R.id.bookmarkButton);
         bookmarkButtonImage = getActivity().findViewById(R.id.bookmarkButtonImage);
 
-        searchThisAreaButton = ((NearbyFragment)getParentFragment()).view.findViewById(R.id.search_this_area_button);
-        searchThisAreaButtonProgressBar = ((NearbyFragment)getParentFragment()).view.findViewById(R.id.search_this_area_button_progress_bar);
+        searchThisAreaButton = ((NearbyFragment) getParentFragment()).view.findViewById(R.id.search_this_area_button);
+        searchThisAreaButtonProgressBar = ((NearbyFragment) getParentFragment()).view.findViewById(R.id.search_this_area_button_progress_bar);
 
     }
 
@@ -403,7 +418,7 @@ public class NearbyMapFragment extends DaggerFragment {
 
                         })
                         .show();
-            }else {
+            } else {
                 animateFAB(isFabOpen);
             }
         });
@@ -421,25 +436,25 @@ public class NearbyMapFragment extends DaggerFragment {
                 mapView.getMapAsync(mapboxMap -> {
                     CameraPosition position;
 
-                    if (ViewUtil.isPortrait(getActivity())){
+                    if (ViewUtil.isPortrait(getActivity())) {
                         position = new CameraPosition.Builder()
                                 .target(isBottomListSheetExpanded ?
-                                        new LatLng(curLatLng.getLatitude()- CAMERA_TARGET_SHIFT_FACTOR_PORTRAIT,
+                                        new LatLng(curLatLng.getLatitude() - CAMERA_TARGET_SHIFT_FACTOR_PORTRAIT,
                                                 curLatLng.getLongitude())
                                         : new LatLng(curLatLng.getLatitude(), curLatLng.getLongitude(), 0)) // Sets the new camera position
                                 .zoom(isBottomListSheetExpanded ?
                                         ZOOM_LEVEL
-                                        :mapboxMap.getCameraPosition().zoom) // Same zoom level
+                                        : mapboxMap.getCameraPosition().zoom) // Same zoom level
                                 .build();
-                    }else {
+                    } else {
                         position = new CameraPosition.Builder()
                                 .target(isBottomListSheetExpanded ?
-                                        new LatLng(curLatLng.getLatitude()- CAMERA_TARGET_SHIFT_FACTOR_LANDSCAPE,
+                                        new LatLng(curLatLng.getLatitude() - CAMERA_TARGET_SHIFT_FACTOR_LANDSCAPE,
                                                 curLatLng.getLongitude())
                                         : new LatLng(curLatLng.getLatitude(), curLatLng.getLongitude(), 0)) // Sets the new camera position
                                 .zoom(isBottomListSheetExpanded ?
                                         ZOOM_LEVEL
-                                        :mapboxMap.getCameraPosition().zoom) // Same zoom level
+                                        : mapboxMap.getCameraPosition().zoom) // Same zoom level
                                 .build();
                     }
 
@@ -494,8 +509,8 @@ public class NearbyMapFragment extends DaggerFragment {
             directionsButtonText.setVisibility(View.GONE);
         }
         title.setOnLongClickListener(view -> {
-                    Utils.copy("place",title.getText().toString(),getContext());
-                    Toast.makeText(getContext(),"Text copied to clipboard",Toast.LENGTH_SHORT).show();
+                    Utils.copy("place", title.getText().toString(), getContext());
+                    Toast.makeText(getContext(), "Text copied to clipboard", Toast.LENGTH_SHORT).show();
                     return true;
                 }
         );
@@ -510,6 +525,7 @@ public class NearbyMapFragment extends DaggerFragment {
 
     /**
      * Sets up map view of first time it created, it passes MapBoxMap options and style assets.
+     *
      * @param savedInstanceState bundle coming from Nearby Fragment
      */
     private void setupMapView(Bundle savedInstanceState) {
@@ -555,7 +571,7 @@ public class NearbyMapFragment extends DaggerFragment {
                         .distanceTo(new LatLng(NearbyController.currentLocation.getLatitude()
                                 , NearbyController.currentLocation.getLongitude()));
 
-                if (distance > NearbyController.searchedRadius*1000*3/4) { //Convert to meter, and compare if our distance is bigger than 3/4 or our searched area
+                if (distance > NearbyController.searchedRadius * 1000 * 3 / 4) { //Convert to meter, and compare if our distance is bigger than 3/4 or our searched area
                     checkingAround = true;
                     if (!searchThisAreaModeOn) { // If we are changing mode, then change click action
                         searchThisAreaModeOn = true;
@@ -566,7 +582,7 @@ public class NearbyMapFragment extends DaggerFragment {
                             searchThisAreaButtonProgressBar.setVisibility(View.VISIBLE);
                             searchThisAreaButton.setVisibility(View.GONE);
                             searchedAroundCurrentLocation = false;
-                            ((NearbyFragment)getParentFragment())
+                            ((NearbyFragment) getParentFragment())
                                     .refreshViewForCustomLocation(LocationUtils
                                             .mapBoxLatLngToCommonsLatLng(mapboxMap.getCameraPosition().target), false);
                         });
@@ -584,7 +600,7 @@ public class NearbyMapFragment extends DaggerFragment {
                             fabRecenter.callOnClick();
                             searchThisAreaButton.setVisibility(View.GONE);
                             searchedAroundCurrentLocation = true;
-                            ((NearbyFragment)getParentFragment())
+                            ((NearbyFragment) getParentFragment())
                                     .refreshViewForCustomLocation(LocationUtils
                                             .mapBoxLatLngToCommonsLatLng(mapboxMap.getCameraPosition().target), true);
                         });
@@ -604,7 +620,7 @@ public class NearbyMapFragment extends DaggerFragment {
         @Override
         public void onLogoutComplete() {
             Timber.d("Logout complete callback received.");
-            Intent nearbyIntent = new Intent( getActivity(), LoginActivity.class);
+            Intent nearbyIntent = new Intent(getActivity(), LoginActivity.class);
             nearbyIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
             nearbyIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(nearbyIntent);
@@ -617,7 +633,7 @@ public class NearbyMapFragment extends DaggerFragment {
      * circle which uses the accuracy * 2, to draw a circle
      * which represents the user's position with an accuracy
      * of 95%.
-     *
+     * <p>
      * Should be called only on creation of mapboxMap, there
      * is other method to update markers location with users
      * move.
@@ -635,19 +651,11 @@ public class NearbyMapFragment extends DaggerFragment {
         currentLocationMarkerOptions.setIcon(icon); // Set custom icon
 
         currentLocationMarker = mapboxMap.addMarker(currentLocationMarkerOptions);
-
-        List<LatLng> circle = createCircleArray(curLatLng.getLatitude(), curLatLng.getLongitude(),
-                curLatLng.getAccuracy() * 2, 100);
-
-        currentLocationPolygonOptions = new PolygonOptions()
-                .addAll(circle)
-                .strokeColor(Color.parseColor("#55000000"))
-                .fillColor(Color.parseColor("#11000000"));
-        mapboxMap.addPolygon(currentLocationPolygonOptions);
     }
 
     /**
      * Checks whether current location marker is in visible region or not
+     *
      * @return true if point is in region
      */
     public boolean isCurrentLocationMarkerVisible() {
@@ -732,6 +740,7 @@ public class NearbyMapFragment extends DaggerFragment {
      * If nearby details bottom sheet state is collapsed: show fab plus
      * If nearby details bottom sheet state is expanded: show fab plus
      * If nearby details bottom sheet state is hidden: hide all fabs
+     *
      * @param bottomSheetState
      */
     public void prepareViewsForSheetPosition(int bottomSheetState) {
@@ -792,12 +801,12 @@ public class NearbyMapFragment extends DaggerFragment {
 
     private void showFAB() {
 
-        addAnchorToBigFABs(fabPlus, ((NearbyFragment)getParentFragment()).view.findViewById(R.id.bottom_sheet_details).getId());
+        addAnchorToBigFABs(fabPlus, ((NearbyFragment) getParentFragment()).view.findViewById(R.id.bottom_sheet_details).getId());
         fabPlus.show();
 
-        addAnchorToSmallFABs(fabGallery, ((NearbyFragment)getParentFragment()).view.findViewById(R.id.empty_view).getId());
+        addAnchorToSmallFABs(fabGallery, ((NearbyFragment) getParentFragment()).view.findViewById(R.id.empty_view).getId());
 
-        addAnchorToSmallFABs(fabCamera, ((NearbyFragment)getParentFragment()).view.findViewById(R.id.empty_view1).getId());
+        addAnchorToSmallFABs(fabCamera, ((NearbyFragment) getParentFragment()).view.findViewById(R.id.empty_view1).getId());
     }
 
 
@@ -806,9 +815,9 @@ public class NearbyMapFragment extends DaggerFragment {
      * */
     private void addAnchorToBigFABs(FloatingActionButton floatingActionButton, int anchorID) {
         CoordinatorLayout.LayoutParams params = new CoordinatorLayout.LayoutParams
-                (ViewGroup.LayoutParams.WRAP_CONTENT,ViewGroup.LayoutParams.WRAP_CONTENT);
+                (ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         params.setAnchorId(anchorID);
-        params.anchorGravity = Gravity.TOP|Gravity.RIGHT|Gravity.END;
+        params.anchorGravity = Gravity.TOP | Gravity.RIGHT | Gravity.END;
         floatingActionButton.setLayoutParams(params);
     }
 
@@ -818,7 +827,7 @@ public class NearbyMapFragment extends DaggerFragment {
      * */
     private void addAnchorToSmallFABs(FloatingActionButton floatingActionButton, int anchorID) {
         CoordinatorLayout.LayoutParams params = new CoordinatorLayout.LayoutParams
-                (ViewGroup.LayoutParams.WRAP_CONTENT,ViewGroup.LayoutParams.WRAP_CONTENT);
+                (ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         params.setAnchorId(anchorID);
         params.anchorGravity = Gravity.CENTER_HORIZONTAL;
         floatingActionButton.setLayoutParams(params);
@@ -827,6 +836,7 @@ public class NearbyMapFragment extends DaggerFragment {
     /**
      * Same botom sheet carries information for all nearby places, so we need to pass information
      * (title, description, distance and links) to view on nearby marker click
+     *
      * @param place Place of clicked nearby marker
      */
     private void passInfoToSheet(Place place) {
@@ -899,11 +909,12 @@ public class NearbyMapFragment extends DaggerFragment {
 
     /**
      * Starts animation of fab plus (turning on opening) and other FABs
+     *
      * @param isFabOpen state of FAB buttons, open when clicked on fab button, closed on other click
      */
     private void animateFAB(boolean isFabOpen) {
         this.isFabOpen = !isFabOpen;
-        if (fabPlus.isShown()){
+        if (fabPlus.isShown()) {
             if (isFabOpen) {
                 fabPlus.startAnimation(rotate_backward);
                 fabCamera.startAnimation(fab_close);
@@ -917,15 +928,16 @@ public class NearbyMapFragment extends DaggerFragment {
                 fabCamera.show();
                 fabGallery.show();
             }
-            this.isFabOpen=!isFabOpen;
+            this.isFabOpen = !isFabOpen;
         }
     }
 
     /**
      * Hides camera and gallery FABs, turn back plus FAB
+     *
      * @param isFabOpen
      */
-    private void closeFabs ( boolean isFabOpen){
+    private void closeFabs(boolean isFabOpen) {
         if (isFabOpen) {
             fabPlus.startAnimation(rotate_backward);
             fabCamera.startAnimation(fab_close);
@@ -1027,14 +1039,13 @@ public class NearbyMapFragment extends DaggerFragment {
             vectorDrawable = VectorDrawableCompat.create(
                     getContext().getResources(), R.drawable.ic_custom_bookmark_marker, getContext().getTheme()
             );
-        }
-        else {
+        } else {
             vectorDrawable = VectorDrawableCompat.create(
                     getContext().getResources(), R.drawable.ic_custom_map_marker, getContext().getTheme()
             );
         }
-      for(Marker marker: mapboxMap.getMarkers()){
-            if(marker.getTitle()!=null && marker.getTitle().equals(place.getName())){
+        for (Marker marker : mapboxMap.getMarkers()) {
+            if (marker.getTitle() != null && marker.getTitle().equals(place.getName())) {
 
                 Bitmap icon = UiUtils.getBitmap(vectorDrawable);
 
