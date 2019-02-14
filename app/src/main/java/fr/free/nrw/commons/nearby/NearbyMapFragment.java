@@ -635,15 +635,6 @@ public class NearbyMapFragment extends DaggerFragment {
         currentLocationMarkerOptions.setIcon(icon); // Set custom icon
 
         currentLocationMarker = mapboxMap.addMarker(currentLocationMarkerOptions);
-
-        List<LatLng> circle = createCircleArray(curLatLng.getLatitude(), curLatLng.getLongitude(),
-                curLatLng.getAccuracy() * 2, 100);
-
-        currentLocationPolygonOptions = new PolygonOptions()
-                .addAll(circle)
-                .strokeColor(Color.parseColor("#55000000"))
-                .fillColor(Color.parseColor("#11000000"));
-        mapboxMap.addPolygon(currentLocationPolygonOptions);
     }
 
     /**
