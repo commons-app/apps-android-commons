@@ -36,7 +36,9 @@ public class UploadResult {
 
     @Override
     public String toString() {
-        if (dateUploaded != null) {
+        if (dateUploaded == null) {
+            return "Server is in read only mode";
+        }
             return "UploadResult{" +
                     "errorCode='" + errorCode + '\'' +
                     ", resultStatus='" + resultStatus + '\'' +
@@ -44,9 +46,6 @@ public class UploadResult {
                     ", imageUrl='" + imageUrl + '\'' +
                     ", canonicalFilename='" + canonicalFilename + '\'' +
                     '}';
-        }
-
-        return "Server is in read only mode";
     }
 
     /**
