@@ -117,7 +117,6 @@ public class ImageProcessingService {
 
     /**
      * Checks for image geolocation
-     * returns IMAGE_OK if the place is null or if the file doesn't contain a geolocation
      * @param filePath file to be checked
      * @return IMAGE_GEOLOCATION_DIFFERENT or IMAGE_OK
      */
@@ -128,11 +127,6 @@ public class ImageProcessingService {
         }
         return Single.fromCallable(() -> filePath)
                 .map(fileUtilsWrapper::getGeolocationOfFile)
-                .flatMap(geoLocation -> {
-                    if (StringUtils.isNullOrWhiteSpace(geoLocation)) {
-                        return Single.just(ImageUtils.IMAGE_OK);
-                    }
-                    return imageUtilsWrapper.checkImageGeolocationIsDifferent(geoLocation, place.getLocation());
-                });
+                .flatMap(geoLocation -> imageUtilsWrapper.checkImageGeolocationIsDifferent(geoLocation, place.getLocation()));
     }
 }
