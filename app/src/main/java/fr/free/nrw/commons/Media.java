@@ -435,21 +435,56 @@ public class Media implements Parcelable {
 
     public static Media from(MwQueryPage page) {
         ImageInfo imageInfo = page.imageInfo();
-        if(imageInfo == null) {
+        if (imageInfo == null) {
             return null;
         }
+
+        String imagedescription;
+        try {
+            imagedescription = imageInfo.getMetadata().imageDescription().value();
+        } catch (NullPointerException e) {
+            imagedescription = "null";
+        }
+
+        Date dateCreated;
+        try {
+            dateCreated = DateUtils.getDateFromString(imageInfo.getMetadata().getDateTimeOriginal().value());
+        } catch (NullPointerException e) {
+            dateCreated = new Date();
+        }
+
+        Date dateUploaded;
+        try {
+            dateUploaded = DateUtils.getDateFromString(imageInfo.getMetadata().getDateTime().value());
+        } catch (NullPointerException e) {
+            dateUploaded = new Date();
+        }
+
+        String creator;
+        try {
+            creator = StringUtils.getParsedStringFromHtml(imageInfo.getMetadata().getArtist().value());
+        } catch (NullPointerException e) {
+            creator = "null";
+        }
+
         Media media = new Media(null,
                 imageInfo.getOriginalUrl(),
                 page.title(),
-                imageInfo.getMetadata().imageDescription().value(),
+                imagedescription,
                 0,
-                DateUtils.getDateFromString(imageInfo.getMetadata().getDateTimeOriginal().value()),
-                DateUtils.getDateFromString(imageInfo.getMetadata().getDateTime().value()),
-                StringUtils.getParsedStringFromHtml(imageInfo.getMetadata().getArtist().value())
+                dateCreated,
+                dateUploaded,
+                creator
         );
 
-        media.setLicense(imageInfo.getMetadata().getLicenseShortName().value());
+        String license;
+        try {
+            license = imageInfo.getMetadata().getLicenseShortName().value();
+        } catch (NullPointerException e) {
+            license = "null";
+        }
 
+        media.setLicense(license);
         return media;
     }
 }
