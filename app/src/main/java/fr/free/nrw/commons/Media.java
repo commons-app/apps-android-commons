@@ -443,7 +443,7 @@ public class Media implements Parcelable {
         try {
             imagedescription = imageInfo.getMetadata().imageDescription().value();
         } catch (NullPointerException e) {
-            imagedescription = "null";
+            imagedescription = "";
         }
 
         Date dateCreated;
@@ -464,7 +464,7 @@ public class Media implements Parcelable {
         try {
             creator = StringUtils.getParsedStringFromHtml(imageInfo.getMetadata().getArtist().value());
         } catch (NullPointerException e) {
-            creator = "null";
+            creator = "";
         }
 
         Media media = new Media(null,
@@ -481,7 +481,7 @@ public class Media implements Parcelable {
         try {
             license = imageInfo.getMetadata().getLicenseShortName().value();
         } catch (NullPointerException e) {
-            license = "null";
+            license = "";
         }
 
         media.setLicense(license);
