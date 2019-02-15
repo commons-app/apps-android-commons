@@ -9,6 +9,7 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.v4.content.FileProvider;
 import android.support.v4.content.res.ResourcesCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.Toolbar;
@@ -184,13 +185,15 @@ public class AchievementsActivity extends NavigationBaseActivity {
             fOut.flush();
             fOut.close();
             file.setReadable(true, false);
+            Uri fileUri = FileProvider.getUriForFile(getApplicationContext(), getPackageName()+".provider", file);
+            grantUriPermission(getPackageName(), fileUri, Intent.FLAG_GRANT_READ_URI_PERMISSION);
             final Intent intent = new Intent(android.content.Intent.ACTION_SEND);
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            intent.putExtra(Intent.EXTRA_STREAM, Uri.fromFile(file));
+            intent.putExtra(Intent.EXTRA_STREAM, fileUri);
             intent.setType("image/png");
             startActivity(Intent.createChooser(intent, "Share image via"));
         } catch (IOException e) {
-            //Do Nothing
+            e.printStackTrace();
         }
     }
 
