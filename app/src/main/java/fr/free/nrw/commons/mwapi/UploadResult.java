@@ -1,5 +1,7 @@
 package fr.free.nrw.commons.mwapi;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.Date;
 
 public class UploadResult {
@@ -22,10 +24,11 @@ public class UploadResult {
 
     /**
      * Full-fledged constructor
-     * @param resultStatus Upload result status
-     * @param dateUploaded Uploaded date
+     *
+     * @param resultStatus      Upload result status
+     * @param dateUploaded      Uploaded date
      * @param canonicalFilename Uploaded file name
-     * @param imageUrl Uploaded image file name
+     * @param imageUrl          Uploaded image file name
      */
     UploadResult(String resultStatus, Date dateUploaded, String canonicalFilename, String imageUrl) {
         this.resultStatus = resultStatus;
@@ -34,22 +37,21 @@ public class UploadResult {
         this.imageUrl = imageUrl;
     }
 
+    @NotNull
     @Override
     public String toString() {
-        if (dateUploaded == null) {
-            return "Server is in read only mode";
-        }
-            return "UploadResult{" +
-                    "errorCode='" + errorCode + '\'' +
-                    ", resultStatus='" + resultStatus + '\'' +
-                    ", dateUploaded='" + dateUploaded.toString() + '\'' +
-                    ", imageUrl='" + imageUrl + '\'' +
-                    ", canonicalFilename='" + canonicalFilename + '\'' +
-                    '}';
+        return "UploadResult{" +
+                "errorCode='" + errorCode + '\'' +
+                ", resultStatus='" + resultStatus + '\'' +
+                ", dateUploaded='" + (dateUploaded != null ? dateUploaded.toString() : "") + '\'' +
+                ", imageUrl='" + imageUrl + '\'' +
+                ", canonicalFilename='" + canonicalFilename + '\'' +
+                '}';
     }
 
     /**
      * Gets uploaded date
+     *
      * @return Upload date
      */
     public Date getDateUploaded() {
@@ -58,6 +60,7 @@ public class UploadResult {
 
     /**
      * Gets image url
+     *
      * @return Uploaded image url
      */
     public String getImageUrl() {
@@ -66,6 +69,7 @@ public class UploadResult {
 
     /**
      * Gets canonical file name
+     *
      * @return Uploaded file name
      */
     public String getCanonicalFilename() {
@@ -74,6 +78,7 @@ public class UploadResult {
 
     /**
      * Gets upload error code
+     *
      * @return Error code
      */
     public String getErrorCode() {
@@ -82,6 +87,7 @@ public class UploadResult {
 
     /**
      * Gets upload result status
+     *
      * @return Upload result status
      */
     public String getResultStatus() {
