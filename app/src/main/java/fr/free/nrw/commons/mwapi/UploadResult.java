@@ -36,10 +36,11 @@ public class UploadResult {
 
     @Override
     public String toString() {
+        String dateString = dateUploaded == null ? null : dateUploaded.toString();
         return "UploadResult{" +
                 "errorCode='" + errorCode + '\'' +
                 ", resultStatus='" + resultStatus + '\'' +
-                ", dateUploaded='" + dateUploaded.toString() + '\'' +
+                ", dateUploaded='" + dateString + '\'' +
                 ", imageUrl='" + imageUrl + '\'' +
                 ", canonicalFilename='" + canonicalFilename + '\'' +
                 '}';
