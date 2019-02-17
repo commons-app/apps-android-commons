@@ -56,12 +56,18 @@ public class ImageProcessingService {
      * - check for valid title
      */
     Single<Integer> validateImage(UploadModel.UploadItem uploadItem, boolean checkTitle) {
+        if (uploadItem.isChecking()) {
+            Timber.d("try to validate image while another validation is running");
+            return Single.just(ImageUtils.IMAGE_WAIT);
+        }
+
         int currentImageQuality = uploadItem.getImageQuality();
         Timber.d("Current image quality is %d", currentImageQuality);
         if (currentImageQuality == ImageUtils.IMAGE_KEEP) {
             return Single.just(ImageUtils.IMAGE_OK);
         }
         Timber.d("Checking the validity of image");
+        uploadItem.setChecking();
         String filePath = uploadItem.getMediaUri().getPath();
         Uri contentUri=uploadItem.getContentUri();
         Single<Integer> duplicateImage = checkDuplicateImage(filePath);

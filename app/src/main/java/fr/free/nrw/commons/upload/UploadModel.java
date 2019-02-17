@@ -344,6 +344,7 @@ public class UploadModel {
         private long createdTimestamp;
         private String createdTimestampSource;
         private BehaviorSubject<Integer> imageQuality;
+        private boolean checking = false;
 
         @SuppressLint("CheckResult")
         UploadItem(Uri originalContentUri,
@@ -436,6 +437,17 @@ public class UploadModel {
         public Uri getContentUri() {
             return originalContentUri;
         }
-    }
 
+        public boolean isChecking() {
+            return checking;
+        }
+
+        public void setChecking() {
+            checking = true;
+        }
+
+        public void clearChecking() {
+            checking = false;
+        }
+    }
 }

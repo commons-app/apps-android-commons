@@ -30,6 +30,7 @@ import static fr.free.nrw.commons.utils.ImageUtils.EMPTY_TITLE;
 import static fr.free.nrw.commons.utils.ImageUtils.FILE_NAME_EXISTS;
 import static fr.free.nrw.commons.utils.ImageUtils.IMAGE_KEEP;
 import static fr.free.nrw.commons.utils.ImageUtils.IMAGE_OK;
+import static fr.free.nrw.commons.utils.ImageUtils.IMAGE_WAIT;
 import static fr.free.nrw.commons.utils.ImageUtils.getErrorMessageForResult;
 
 /**
@@ -115,23 +116,38 @@ public class UploadPresenter {
                     List<Description> descriptions) {
         Timber.e("Inside handleNext");
         view.showProgressDialog();
+        if (uploadModel.getCurrentItem().isChecking()) {
+            // the current item is being checked, no need to start another check
+            return;
+        }
+
         uploadModel.getImageQuality(uploadModel.getCurrentItem(), true)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(imageResult -> handleImage(title, descriptions, imageResult),
-                        throwable -> Timber.e(throwable, "Error occurred while handling image"));
+            .subscribe(imageResult -> handleImage(title, descriptions, imageResult),
+                        throwable -> handleError(throwable));
     }
 
     private void handleImage(Title title, List<Description> descriptions, Integer imageResult) {
+        uploadModel.getCurrentItem().clearChecking();
         view.hideProgressDialog();
         if (imageResult == IMAGE_KEEP || imageResult == IMAGE_OK) {
             Timber.d("Set title and desc; Show next uploaded item");
             setTitleAndDescription(title, descriptions);
             directKvStore.putBoolean("Picture_Has_Correct_Location", true);
             nextUploadedItem();
+        } else if (imageResult == IMAGE_WAIT) {
+            // normally should not go here, another checking will handle current item
+            return;
         } else {
             handleBadImage(imageResult);
         }
+    }
+
+    private void handleError(Throwable e) {
+        uploadModel.getCurrentItem().clearChecking();
+        view.hideProgressDialog();
+        Timber.e(e, "Error occurred while handling image");
     }
 
     /**
@@ -148,6 +164,8 @@ public class UploadPresenter {
     }
 
     private void handleBadImage(Integer errorCode) {
+        uploadModel.getCurrentItem().clearChecking();
+        view.hideProgressDialog();
         Timber.d("Handle bad picture with error code %d", errorCode);
         if (errorCode >= 8) { // If location of image and nearby does not match, then set shared preferences to disable wikidata edits
             directKvStore.putBoolean("Picture_Has_Correct_Location", false);
