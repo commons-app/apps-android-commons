@@ -17,7 +17,6 @@ import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.support.v7.widget.Toolbar;
 
 import com.pedrogomez.renderers.RVRendererAdapter;
 
@@ -52,10 +51,9 @@ public class NotificationActivity extends NavigationBaseActivity {
     RelativeLayout relativeLayout;
     @BindView(R.id.no_notification_background)
     RelativeLayout no_notification;
-    @BindView(R.id.toolbar)
-    Toolbar toolbar;
-   /* @BindView(R.id.swipe_bg)
-    TextView swipe_bg;*/
+    @BindView(R.id.no_notification_text)
+    TextView noNotificationText;
+
     @Inject
     NotificationController controller;
 
@@ -63,8 +61,7 @@ public class NotificationActivity extends NavigationBaseActivity {
     private NotificationWorkerFragment mNotificationWorkerFragment;
     private RVRendererAdapter<Notification> adapter;
     private List<Notification> notificationList;
-    MenuItem notificationmenuitem;
-    TextView nonotificationtext;
+    MenuItem notificationMenuItem;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,7 +72,6 @@ public class NotificationActivity extends NavigationBaseActivity {
                 .findFragmentByTag(TAG_NOTIFICATION_WORKER_FRAGMENT);
         initListView();
         initDrawer();
-        nonotificationtext = (TextView)this.findViewById(R.id.no_notification_text);
         setPageTitle();
     }
 
@@ -160,7 +156,7 @@ public class NotificationActivity extends NavigationBaseActivity {
                             no_notification.setVisibility(View.VISIBLE);
                         } else {
                             setAdapter(notificationList);
-                        } if (notificationmenuitem != null) {
+                        } if (notificationMenuItem != null) {
                         }
                         progressBar.setVisibility(View.GONE);
                     }, throwable -> {
@@ -178,7 +174,7 @@ public class NotificationActivity extends NavigationBaseActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.menu_notifications, menu);
-        notificationmenuitem = menu.findItem(R.id.archived);
+        notificationMenuItem = menu.findItem(R.id.archived);
         setMenuItemTitle();
         return true;
     }
@@ -262,18 +258,18 @@ public class NotificationActivity extends NavigationBaseActivity {
 
     private void setEmptyView() {
         if (getIntent().getStringExtra("title").equals("read")) {
-            nonotificationtext.setText(R.string.no_archived_notification);
+            noNotificationText.setText(R.string.no_archived_notification);
         }else {
-            nonotificationtext.setText(R.string.no_notification);
+            noNotificationText.setText(R.string.no_notification);
         }
     }
 
     private void setMenuItemTitle() {
         if (getIntent().getStringExtra("title").equals("read")) {
-            notificationmenuitem.setTitle(R.string.menu_option_unread);
+            notificationMenuItem.setTitle(R.string.menu_option_unread);
 
         }else {
-            notificationmenuitem.setTitle(R.string.menu_option_archived);
+            notificationMenuItem.setTitle(R.string.menu_option_archived);
 
         }
     }

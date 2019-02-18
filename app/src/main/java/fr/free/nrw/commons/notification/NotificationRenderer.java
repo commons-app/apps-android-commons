@@ -7,11 +7,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.daimajia.swipe.SwipeLayout;
 import com.nineoldandroids.view.ViewHelper;
 import com.pedrogomez.renderers.Renderer;
-import com.daimajia.swipe.SwipeLayout;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -33,6 +35,8 @@ public class NotificationRenderer extends Renderer<Notification> {
     SwipeLayout swipeLayout;
     @BindView(R.id.bottom)
     LinearLayout bottomLayout;
+    @BindView(R.id.notification_view)
+    RelativeLayout notificationView;
 
     private NotificationClicked listener;
     private boolean isarchivedvisible = false;
@@ -42,19 +46,27 @@ public class NotificationRenderer extends Renderer<Notification> {
         this.listener = listener;
         this.isarchivedvisible = isarchivedvisible;
     }
+
+    @OnClick(R.id.notification_view)
+    void onNotificationClicked() {
+        listener.notificationClicked(getContent());
+    }
+
     @OnClick(R.id.bottom)
     void onBottomLayoutClicked(){
         Notification notification = getContent();
         Timber.d("NotificationID: %s", notification.notificationId);
         listener.markNotificationAsRead(notification);
     }
+
     @Override
     protected void setUpView(View rootView) {
 
     }
+
     @Override
     protected void hookListeners(View rootView) {
-        rootView.setOnClickListener(v -> listener.notificationClicked(getContent()));
+
     }
 
     @Override
