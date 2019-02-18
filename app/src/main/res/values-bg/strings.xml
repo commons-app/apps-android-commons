@@ -64,7 +64,7 @@
   <string name="menu_save_categories">Съхраняване</string>
   <string name="refresh_button">Обновяване</string>
   <string name="display_list_button">Списък</string>
-  <string name="gps_disabled">GPS е изключен на устройството Ви. Дали искате да го включите?</string>
+  <string name="gps_disabled">GPS е изключен на устройството Ви. Желаете ли да го включите?</string>
   <string name="enable_gps">Включи GPS</string>
   <string name="contributions_subtitle_zero">Все още няма качени файлове</string>
   <plurals name="starting_multiple_uploads">
@@ -87,7 +87,7 @@
   <string name="about_improve">Създайте нов &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;проблем на GitHub&lt;/a&gt; за заявяване на грешки и даване предложения.</string>
   <string name="title_activity_about">За приложението</string>
   <string name="no_email_client">Не е инсталирана програма за електронна поща</string>
-  <string name="provider_categories">Неотдавна използвани категории</string>
+  <string name="provider_categories">Последно използвани категории</string>
   <string name="menu_retry_upload">Повторен опит</string>
   <string name="menu_cancel_upload">Отказ</string>
   <plurals name="share_license_summary">
@@ -97,9 +97,9 @@
   <string name="menu_download">Изтегляне</string>
   <string name="preference_license">Лиценз по подразбиране</string>
   <string name="preference_theme">Нощен режим</string>
-  <string name="preference_theme_summary">Използвай темен изглед</string>
-  <string name="license_name_cc_by_sa_four">Признание-СподелянеСподеленото 4.0</string>
-  <string name="license_name_cc_by_sa">Признание-СподелянеСподеленото 3.0</string>
+  <string name="preference_theme_summary">Използвайте тъмен изглед</string>
+  <string name="license_name_cc_by_sa_four">Признание-Споделяне на Споделеното 4.0</string>
+  <string name="license_name_cc_by_sa">Признание-Споделяне на Споделеното 3.0</string>
   <string name="license_name_cc0">CC0</string>
   <string name="license_name_cc_by_sa_3_0">CC BY-SA 3.0</string>
   <string name="license_name_cc_by_sa_3_0_at">CC BY-SA 3.0 (Австрия)</string>
@@ -108,7 +108,7 @@
   <string name="license_name_cc_by_sa_3_0_es">CC BY-SA 3.0 (Испания)</string>
   <string name="license_name_cc_by_sa_3_0_hr">CC BY-SA 3.0 (Хърватия)</string>
   <string name="license_name_cc_by_sa_3_0_lu">CC BY-SA 3.0 (Люксембург)</string>
-  <string name="license_name_cc_by_sa_3_0_nl">CC BY-SA 3.0 (Холандия)</string>
+  <string name="license_name_cc_by_sa_3_0_nl">CC BY-SA 3.0 (Нидерландия)</string>
   <string name="license_name_cc_by_sa_3_0_no">CC BY-SA 3.0 (Норвегия)</string>
   <string name="license_name_cc_by_sa_3_0_pl">CC BY-SA 3.0 (Полша)</string>
   <string name="license_name_cc_by_sa_3_0_ro">CC BY-SA 3.0 (Румъния)</string>
@@ -144,8 +144,12 @@
   <string name="media_detail_coordinates">Координати</string>
   <string name="media_detail_coordinates_empty">не са посочени</string>
   <string name="number_of_uploads">Мое ограничение на последните качвания</string>
-  <string name="maximum_limit">Крайна граница</string>
-  <string name="set_limit">Задай ограничение на последните качвания</string>
+  <string name="maximum_limit">Максимален лимит</string>
+  <string name="invalid_zero">Нулата не е валидна</string>
+  <string name="invalid_input">Недопустим вход</string>
+  <string name="enter_valid">Внесете валиден брой</string>
+  <string name="cannot_be_zero">Границата на качвания не може да е 0</string>
+  <string name="set_limit">Задайте ограничение на последните качвания</string>
   <string name="commons_logo">Лого на Общомедия</string>
   <string name="commons_website">Общомедия</string>
   <string name="commons_facebook">Общомедия на Facebook</string>
@@ -171,8 +175,8 @@
   <string name="navigation_item_notification">Известия</string>
   <string name="navigation_item_featured_images">Избрана</string>
   <string name="no_description_found">не са намерени описания</string>
-  <string name="nearby_info_menu_commons_article">Файлова страница</string>
-  <string name="nearby_info_menu_wikidata_article">Обект в Уикиданните</string>
+  <string name="nearby_info_menu_commons_article">Страница на файла в Общомедия</string>
+  <string name="nearby_info_menu_wikidata_article">Обект в Уикиданни</string>
   <string name="nearby_info_menu_wikipedia_article">Статия на Уикипедия</string>
   <string name="error_while_cache">Грешка при кеширане на изображенията</string>
   <string name="upload_problem_exist">Потенциални проблеми с изображението:</string>
@@ -189,9 +193,9 @@
   <string name="skip_login">Пропускане</string>
   <string name="navigation_item_login">Влизане</string>
   <string name="skip_login_message">Ще трябва да влезете, за да качвате картини в бъдеще.</string>
-  <string name="login_alert_message">Влезете, за да използвате тази възможност.</string>
-  <string name="copy_wikicode">Прекопиране на уики-текста в кеша</string>
-  <string name="wikicode_copied">Уики-текстът е прекопиран в кеша</string>
+  <string name="login_alert_message">Влезте в сметката си, за да използвате тази възможност.</string>
+  <string name="copy_wikicode">Копиране на уикитекста в кеша</string>
+  <string name="wikicode_copied">Уикитекстът е копиран в кеша</string>
   <string name="nearby_location_has_not_changed">Местоположението не е променено.</string>
   <string name="nearby_location_not_available">Местоположението не е налично.</string>
   <string name="toggle_view_button">Превключване на изгледа</string>

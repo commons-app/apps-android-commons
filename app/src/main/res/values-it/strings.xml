@@ -201,7 +201,11 @@
   <string name="_2fa_code">Codice 2FA</string>
   <string name="number_of_uploads">Il mio limite di caricamento recente</string>
   <string name="maximum_limit">Limite massimo</string>
+  <string name="invalid_zero">Zero non è valido</string>
+  <string name="invalid_input">Dato non valido</string>
   <string name="maximum_limit_alert">Non è possibile mostrarne più di 500</string>
+  <string name="enter_valid">Inserisci un numero valido</string>
+  <string name="cannot_be_zero">Il limite di caricamento non può essere 0</string>
   <string name="set_limit">Imposta limite caricamento recente</string>
   <string name="login_failed_2fa_not_supported">L\'autenticazione a due fattori non è attualmente supportata.</string>
   <string name="logout_verification">Vuoi veramente uscire?</string>
@@ -216,6 +220,7 @@
   <string name="no_parentcategory_found">Nessuna categoria superiore trovata</string>
   <string name="upload_image">Carica immagine</string>
   <string name="welcome_image_mount_zao">Monte Zao</string>
+  <string name="welcome_image_llamas">Lama</string>
   <string name="welcome_image_rainbow_bridge">Arcobaleno</string>
   <string name="welcome_image_tulip">Tulipano</string>
   <string name="welcome_image_no_selfies">No autoscatti (selfie)</string>
@@ -447,6 +452,7 @@
   <string name="no_image_uploaded">Nessuna immagine caricata</string>
   <string name="no_notification">Non hai alcuna notifica non letta</string>
   <string name="no_archived_notification">Non hai notifiche archiviate</string>
+  <string name="share_logs_using">Condividi i registri usando</string>
   <string name="menu_option_archived">Vedi archiviate</string>
   <string name="menu_option_unread">Vedi non lette</string>
   <string name="error_occurred_in_picking_images">Si è verificato un errore durante la selezione delle immagini</string>

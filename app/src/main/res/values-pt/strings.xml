@@ -202,7 +202,11 @@
   <string name="_2fa_code">Código de autenticação de dois fatores</string>
   <string name="number_of_uploads">O meu limite de carregamentos recentes</string>
   <string name="maximum_limit">Limite máximo</string>
+  <string name="invalid_zero">Zero não é válido</string>
+  <string name="invalid_input">Entrada inválida</string>
   <string name="maximum_limit_alert">Não é possível apresentar mais de 500</string>
+  <string name="enter_valid">Introduza um número válido</string>
+  <string name="cannot_be_zero">O limite de carregamentos não pode ser 0</string>
   <string name="set_limit">Definir o limite de carregamentos recentes</string>
   <string name="login_failed_2fa_not_supported">Atualmente, a autenticação de dois fatores não é suportada.</string>
   <string name="logout_verification">Deseja realmente sair?</string>

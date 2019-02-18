@@ -142,6 +142,7 @@
   <string name="media_detail_uploaded_date">Tarixê barkerdışi</string>
   <string name="media_detail_license">Lisans</string>
   <string name="media_detail_coordinates">Koordinati</string>
+  <string name="invalid_input">Cıkerdışo nêvêrde</string>
   <string name="welcome_image_mount_zao">Koyê Zao</string>
   <string name="welcome_image_llamas">Lamay</string>
   <string name="welcome_image_rainbow_bridge">Pırdê rainbowi</string>

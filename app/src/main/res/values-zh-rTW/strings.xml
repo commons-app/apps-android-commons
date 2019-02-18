@@ -9,6 +9,7 @@
 * Simon Shek
 * StephDC
 * Wwycheuk
+* ZhaoGang
 * 和平奮鬥救地球
 * 烈羽
 -->
@@ -167,7 +168,7 @@
   <string name="welcome_copyright_subtext">避免使用受版權保護的材料，例如從網際網路找來的圖片、海報、書籍封面等</string>
   <string name="welcome_final_text">以上您明白了嗎？</string>
   <string name="welcome_final_button_text">是的！</string>
-  <string name="welcome_help_button_text">此提示為空，可能無效。請見錯誤報告： https://github.com/commons-app/apps-android-commons/issues/1333 。</string>
+  <string name="welcome_help_button_text">&lt;u&gt;更多信息&lt;/u&gt;</string>
   <string name="detail_panel_cats_label">分類</string>
   <string name="detail_panel_cats_loading">載入中…</string>
   <string name="detail_panel_cats_none">未選擇</string>

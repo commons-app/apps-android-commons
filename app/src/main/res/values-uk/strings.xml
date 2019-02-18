@@ -208,7 +208,11 @@
   <string name="_2fa_code">Код 2FA</string>
   <string name="number_of_uploads">Ліміт моїх останніх завантажень</string>
   <string name="maximum_limit">Максимальний ліміт</string>
+  <string name="invalid_zero">Нуль не є коректним значенням</string>
+  <string name="invalid_input">Некоректне значення</string>
   <string name="maximum_limit_alert">Неможливо показати понад 500</string>
+  <string name="enter_valid">Вкажіть коректне значення</string>
+  <string name="cannot_be_zero">Ліміт завантажень не може бути нульовим</string>
   <string name="set_limit">Встановити ліміт останніх завантажень</string>
   <string name="login_failed_2fa_not_supported">Двофакторна автентифікація наразі не підтримується.</string>
   <string name="logout_verification">Ви справді хочете вийти із системи?</string>

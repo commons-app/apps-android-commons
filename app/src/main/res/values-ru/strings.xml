@@ -209,7 +209,11 @@
   <string name="_2fa_code">Код 2ФА</string>
   <string name="number_of_uploads">Лимит моих недавних загрузок</string>
   <string name="maximum_limit">Максимальный лимит</string>
+  <string name="invalid_zero">Ноль не является корректным значением</string>
+  <string name="invalid_input">Некорректное значение</string>
   <string name="maximum_limit_alert">Невозможно отобразить более 500</string>
+  <string name="enter_valid">Укажите корректное значение</string>
+  <string name="cannot_be_zero">Лимит загрузок не может быть нулевым</string>
   <string name="set_limit">Установить лимит недавних загрузок</string>
   <string name="login_failed_2fa_not_supported">Двухфакторная аутентификация в настоящее время не поддерживается.</string>
   <string name="logout_verification">Вы действительно хотите выйти?</string>

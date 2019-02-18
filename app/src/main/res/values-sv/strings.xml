@@ -196,7 +196,11 @@
   <string name="_2fa_code">2-stegsverif.kod</string>
   <string name="number_of_uploads">Gräns för mina senaste uppladdningar</string>
   <string name="maximum_limit">Maxgräns</string>
+  <string name="invalid_zero">Noll är inte giltigt</string>
+  <string name="invalid_input">Ogiltig inmatning</string>
   <string name="maximum_limit_alert">Kan inte visa fler än 500</string>
+  <string name="enter_valid">Ange en giltig siffra</string>
+  <string name="cannot_be_zero">Uppladdningsgränsen kan inte vara 0</string>
   <string name="set_limit">Ändra gräns för senaste uppladdningar</string>
   <string name="login_failed_2fa_not_supported">Tvåstegsverifiering stöds för tillfället inte.</string>
   <string name="logout_verification">Vill du verkligen logga ut?</string>
@@ -350,6 +354,7 @@
   <string name="statistics">STATISTIK</string>
   <string name="statistics_thanks">Mottagna tack</string>
   <string name="statistics_featured">Utvalda bilder</string>
+  <string name="statistics_wikidata_edits">Bilder via \"Platser i närheten\"</string>
   <string name="level">NIVÅ</string>
   <string name="images_uploaded">Uppladdade bilder</string>
   <string name="image_reverts">Bilder som inte har återställts</string>
@@ -369,6 +374,7 @@
   <string name="contributions_fragment">Bidrag</string>
   <string name="nearby_fragment">I närheten</string>
   <string name="notifications">Aviseringar</string>
+  <string name="archived_notifications">Aviseringar (arkiverade)</string>
   <string name="display_nearby_notification">Visa avisering för i närheten</string>
   <string name="display_nearby_notification_summary">Tryck här för att se den närmaste platsen som behöver bilder</string>
   <string name="no_close_nearby">Inga platser i närheten hittades som är nära dig</string>
@@ -440,7 +446,10 @@
   <string name="no_image_reverted">Inga bilder återställdes</string>
   <string name="no_image_uploaded">Inga bilder laddades upp</string>
   <string name="no_notification">Du har inga olästa aviseringar</string>
+  <string name="no_archived_notification">Du har inga arkiverade aviseringar</string>
   <string name="share_logs_using">Dela loggar med</string>
+  <string name="menu_option_archived">Visa arkiverade</string>
+  <string name="menu_option_unread">Visa olästa</string>
   <string name="error_occurred_in_picking_images">Fel uppstod när bilder valdes ut</string>
   <string name="image_chooser_title">Välj bilder att ladda upp</string>
   <string name="please_wait">Var god vänta…</string>

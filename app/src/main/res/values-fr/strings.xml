@@ -108,7 +108,7 @@
   <string name="categories_activity_title">Catégories</string>
   <string name="title_activity_settings">Paramètres</string>
   <string name="title_activity_signup">S’inscrire</string>
-  <string name="title_activity_featured_images">Images en vedette</string>
+  <string name="title_activity_featured_images">Images remarquables</string>
   <string name="title_activity_category_details">Catégorie</string>
   <string name="menu_about">À propos</string>
   <string name="about_license">L’application Wikimedia Commons est une application open source créée et tenue à jour par les bénéficiaires et volontaires de la communauté Wikimedia. La fondation Wikimedia n’est pas associée à la création, le développement ou l’entretien de l’application.</string>
@@ -127,7 +127,7 @@
     <item quantity="one">Cette image sera sous licence %1$s</item>
     <item quantity="other">Ces images seront sous licence %1$s</item>
   </plurals>
-  <string name="media_upload_policy">En soumettant cette image, je déclare qu\'elle est l\'oeuvre de mon travail, qu\'elle ne contient pas d\'élément protégé par les droits d\'auteurs ni de portraits, et qu\'elle est par ailleurs conforme à  &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines\"&gt;la politique de Wikimedia Commons&lt;/a&gt;.</string>
+  <string name="media_upload_policy">En soumettant cette image, je déclare qu\'elle est l\'oeuvre de mon travail, qu\'elle ne contient pas d\'élément protégé par les droits d\'auteurs ni d\'auto-portraits, et qu\'elle est par ailleurs conforme aux &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines/fr\"&gt;règles de Wikimedia Commons&lt;/a&gt;.</string>
   <string name="menu_download">Télécharger</string>
   <string name="preference_license">Licence par défaut</string>
   <string name="use_previous">Utiliser le titre ou la description précédent</string>
@@ -201,7 +201,7 @@
   <string name="media_detail_description">Description</string>
   <string name="media_detail_description_explanation">La description du média vient ici. Cela peut être potentiellement assez long, et devra être réparti sur plusieurs lignes. Nous espérons que cela restera joli néanmoins.</string>
   <string name="media_detail_author">Auteur</string>
-  <string name="media_detail_author_explanation">Le nom de l’utilisateur auteur d’une image en vedette va ici.</string>
+  <string name="media_detail_author_explanation">Le nom de l’auteur d’une image remarquable va ici.</string>
   <string name="media_detail_uploaded_date">Date de téléversement</string>
   <string name="media_detail_license">Licence</string>
   <string name="media_detail_coordinates">Coordonnées</string>
@@ -215,7 +215,7 @@
   <string name="invalid_input">Entrée invalide</string>
   <string name="maximum_limit_alert">Impossible d’afficher plus de 500</string>
   <string name="enter_valid">Entrez un nombre valide</string>
-  <string name="cannot_be_zero">La limite ne peut pas être zéro</string>
+  <string name="cannot_be_zero">La limite de téléversement ne peut pas être zéro</string>
   <string name="set_limit">Fixer la limite de téléversement récent</string>
   <string name="login_failed_2fa_not_supported">L’authentification à deux facteurs n’est pas prise en charge pour le moment.</string>
   <string name="logout_verification">Voulez-vous vraiment vous déconnecter ?</string>
@@ -250,7 +250,7 @@
   <string name="navigation_item_logout">Déconnexion</string>
   <string name="navigation_item_info">Tutoriel</string>
   <string name="navigation_item_notification">Notifications</string>
-  <string name="navigation_item_featured_images">Mis en vedette</string>
+  <string name="navigation_item_featured_images">Remarquable</string>
   <string name="nearby_needs_permissions">Les endroits proches ne peuvent pas être affichés si vous ne partagez pas votre position géographique.</string>
   <string name="no_description_found">aucune description trouvée</string>
   <string name="nearby_info_menu_commons_article">Page des fichiers de Commons</string>
@@ -260,7 +260,7 @@
   <string name="title_info">Un titre descriptif unique pour le fichier, qui servira de nom de fichier. Vous pouvez utiliser un langage simple avec des espaces. N’incluez pas l’extension du fichier</string>
   <string name="description_info">Veuillez décrire le média autant que possible : Où a-t-il été enregistré ? Que montre-t-il ? Quel est le contexte ? Veuillez décrire les objets ou les personnes. Révélez les informations qui ne peuvent pas être devinées facilement, par exemple l’heure de la journée si c’est un paysage. Si le média montre quelque chose d’inhabituel, veuillez expliquer ce qui le rend exceptionnel.</string>
   <string name="upload_image_too_dark">Cette image est trop sombre, êtes-vous sûr de vouloir la téléverser ? Wikimedia Commons est réservé pour les images ayant une valeur encyclopédique.</string>
-  <string name="upload_image_blurry">Cette image est floue, êtes-vous sûr de vouloir la télécharger ? Wikimedia Commons est réservé pour les images ayant une valeur encyclopédique.</string>
+  <string name="upload_image_blurry">Cette image est floue, êtes-vous sûr de vouloir la téléverser ? Wikimedia Commons est réservé aux images ayant une valeur encyclopédique.</string>
   <string name="upload_problem_exist">Problèmes potentiels avec cette image.</string>
   <string name="upload_problem_image_dark">L\'image est trop sombre.</string>
   <string name="upload_problem_image_blurry">L’image est floue.</string>
@@ -365,16 +365,16 @@
   <string name="delete_recent_searches_dialog">Êtes-vous sûr de vouloir effacer votre historique de recherche ?</string>
   <string name="search_history_deleted">Historique de recherche effacée</string>
   <string name="nominate_delete">Proposé à la suppression</string>
-  <string name="Achievements">Réalisations</string>
+  <string name="Achievements">Accomplissements</string>
   <string name="statistics">STATISTIQUES</string>
   <string name="statistics_thanks">Remerciements reçus</string>
-  <string name="statistics_featured">Images mises en avant</string>
+  <string name="statistics_featured">Images remarquables</string>
   <string name="statistics_wikidata_edits">Images par \"Lieux du voisinage\"</string>
   <string name="level">NIVEAU</string>
   <string name="images_uploaded">Images téléchargées</string>
   <string name="image_reverts">Images non annulées</string>
   <string name="images_used_by_wiki">Images utilisées</string>
-  <string name="achievements_share_message">Partager vos réussites avec vos amis !</string>
+  <string name="achievements_share_message">Partager vos accomplissements avec vos amis !</string>
   <string name="achievements_info_message">Votre niveau augmente à mesure que vous atteignez ces réussites. Les éléments dans la section « statistiques » ne comptent pas pour votre niveau.</string>
   <string name="achievements_revert_limit_message">minimum requis :</string>
   <string name="images_uploaded_explanation">Le nombre d’images que vous avez téléchargé de Communs, via un logiciel de téléchargement quelconque</string>
@@ -445,7 +445,7 @@
   <string name="never_ask_again">Ne plus jamais demander cela</string>
   <string name="display_location_permission_title">Afficher l\'autorisation de géolocalisation</string>
   <string name="display_location_permission_explanation">Demander le droit de géolocaliser quand cela est nécessaire pour la fonction de visualisation de la carte des notifications de voisinage.</string>
-  <string name="achievements_fetch_failed">Un problème est survenu, nous n\'avons pas pu récupérer vos réalisations</string>
+  <string name="achievements_fetch_failed">Un problème est survenu, nous n\'avons pas pu récupérer vos accomplissements</string>
   <string name="ends_on">Se termine le:</string>
   <string name="display_campaigns">Campagnes d\'affichage</string>
   <string name="display_campaigns_explanation">Touchez ici pour voir les campagnes en cours</string>
