@@ -194,6 +194,10 @@ public class  Contribution extends Media {
         return buffer.toString();
     }
 
+    /**
+     * Returns upload date in either TEMPLATE_DATE_ACC_TO_EXIF or TEMPLATE_DATA_OTHER_SOURCE
+     * @return
+     */
     private String getTemplatizedCreatedDate() {
         if (dateCreated != null) {
             if (UploadableFile.DateTimeWithSource.EXIF_SOURCE.equals(dateCreatedSource)) {
