@@ -106,6 +106,7 @@
         <activity
             android:name=".explore.SearchActivity"
             android:label="@string/title_activity_search"
+            android:launchMode="singleTop"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:parentActivityName=".contributions.MainActivity"
             />
