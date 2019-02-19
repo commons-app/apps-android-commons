@@ -378,8 +378,8 @@ public class NearbyMapFragment extends DaggerFragment {
         directionsButtonText = ((NearbyFragment)getParentFragment()).view.findViewById(R.id.directionsButtonText);
         commonsButtonText = ((NearbyFragment)getParentFragment()).view.findViewById(R.id.commonsButtonText);
 
-        bookmarkButton = getActivity().findViewById(R.id.bookmarkButton);
-        bookmarkButtonImage = getActivity().findViewById(R.id.bookmarkButtonImage);
+        bookmarkButton = ((NearbyFragment)getParentFragment()).view.findViewById(R.id.bookmarkButton);
+        bookmarkButtonImage = ((NearbyFragment)getParentFragment()).view.findViewById(R.id.bookmarkButtonImage);
 
         searchThisAreaButton = ((NearbyFragment)getParentFragment()).view.findViewById(R.id.search_this_area_button);
         searchThisAreaButtonProgressBar = ((NearbyFragment)getParentFragment()).view.findViewById(R.id.search_this_area_button_progress_bar);
@@ -825,32 +825,25 @@ public class NearbyMapFragment extends DaggerFragment {
     }
 
     /**
-     * Same botom sheet carries information for all nearby places, so we need to pass information
+     * Same bottom sheet carries information for all nearby places, so we need to pass information
      * (title, description, distance and links) to view on nearby marker click
      * @param place Place of clicked nearby marker
      */
     private void passInfoToSheet(Place place) {
         this.place = place;
+        updateBookmarkButtonImage(this.place);
 
-        int bookmarkIcon;
-        if (bookmarkLocationDao.findBookmarkLocation(place)) {
-            bookmarkIcon = R.drawable.ic_round_star_filled_24px;
-        } else {
-            bookmarkIcon = R.drawable.ic_round_star_border_24px;
-        }
-        bookmarkButtonImage.setImageResource(bookmarkIcon);
         bookmarkButton.setOnClickListener(view -> {
-            boolean isBookmarked = bookmarkLocationDao.updateBookmarkLocation(place);
-            int updatedIcon = isBookmarked ? R.drawable.ic_round_star_filled_24px : R.drawable.ic_round_star_border_24px;
-            bookmarkButtonImage.setImageResource(updatedIcon);
-            updateMarker(isBookmarked, place);
+            boolean isBookmarked = bookmarkLocationDao.updateBookmarkLocation(this.place);
+            updateBookmarkButtonImage(this.place);
+            updateMarker(isBookmarked, this.place);
         });
 
         wikipediaButton.setEnabled(place.hasWikipediaLink());
-        wikipediaButton.setOnClickListener(view -> openWebView(place.siteLinks.getWikipediaLink()));
+        wikipediaButton.setOnClickListener(view -> openWebView(this.place.siteLinks.getWikipediaLink()));
 
         wikidataButton.setEnabled(place.hasWikidataLink());
-        wikidataButton.setOnClickListener(view -> openWebView(place.siteLinks.getWikidataLink()));
+        wikidataButton.setOnClickListener(view -> openWebView(this.place.siteLinks.getWikidataLink()));
 
         directionsButton.setOnClickListener(view -> {
             //Open map app at given position
@@ -860,20 +853,18 @@ public class NearbyMapFragment extends DaggerFragment {
             }
         });
 
-        commonsButton.setEnabled(place.hasCommonsLink());
-        commonsButton.setOnClickListener(view -> openWebView(place.siteLinks.getCommonsLink()));
+        commonsButton.setEnabled(this.place.hasCommonsLink());
+        commonsButton.setOnClickListener(view -> openWebView(this.place.siteLinks.getCommonsLink()));
 
-        icon.setImageResource(place.getLabel().getIcon());
+        icon.setImageResource(this.place.getLabel().getIcon());
 
-        title.setText(place.name);
-        distance.setText(place.distance);
-        description.setText(place.getLongDescription());
-        title.setText(place.name.toString());
-        distance.setText(place.distance.toString());
+        title.setText(this.place.name);
+        distance.setText(this.place.distance);
+        description.setText(this.place.getLongDescription());
 
         fabCamera.setOnClickListener(view -> {
             if (fabCamera.isShown()) {
-                Timber.d("Camera button tapped. Place: %s", place.toString());
+                Timber.d("Camera button tapped. Place: %s", this.place.toString());
                 storeSharedPrefs();
                 controller.initiateCameraPick(getActivity());
             }
@@ -881,11 +872,23 @@ public class NearbyMapFragment extends DaggerFragment {
 
         fabGallery.setOnClickListener(view -> {
             if (fabGallery.isShown()) {
-                Timber.d("Gallery button tapped. Place: %s", place.toString());
+                Timber.d("Gallery button tapped. Place: %s", this.place.toString());
                 storeSharedPrefs();
                 controller.initiateGalleryPick(getActivity(), false);
             }
         });
+    }
+
+    public void updateBookmarkButtonImage(Place place) {
+        int bookmarkIcon;
+        if (bookmarkLocationDao.findBookmarkLocation(place)) {
+            bookmarkIcon = R.drawable.ic_round_star_filled_24px;
+        } else {
+            bookmarkIcon = R.drawable.ic_round_star_border_24px;
+        }
+        if (bookmarkButtonImage != null) {
+            bookmarkButtonImage.setImageResource(bookmarkIcon);
+        }
     }
 
     void storeSharedPrefs() {
@@ -1033,7 +1036,7 @@ public class NearbyMapFragment extends DaggerFragment {
                     getContext().getResources(), R.drawable.ic_custom_map_marker, getContext().getTheme()
             );
         }
-      for(Marker marker: mapboxMap.getMarkers()){
+        for(Marker marker: mapboxMap.getMarkers()){
             if(marker.getTitle()!=null && marker.getTitle().equals(place.getName())){
 
                 Bitmap icon = UiUtils.getBitmap(vectorDrawable);
