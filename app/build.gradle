@@ -27,7 +27,8 @@ dependencies {
     implementation 'com.jakewharton.rxbinding2:rxbinding-appcompat-v7:2.1.1'
     implementation 'com.jakewharton.rxbinding2:rxbinding-design:2.1.1'
     implementation 'com.facebook.fresco:fresco:1.10.0'
-    
+    implementation 'com.drewnoakes:metadata-extractor:2.11.0'
+
     // UI
     implementation 'fr.avianey.com.viewpagerindicator:library:2.4.1.1@aar'
     implementation 'com.github.chrisbanes:PhotoView:2.0.0'
