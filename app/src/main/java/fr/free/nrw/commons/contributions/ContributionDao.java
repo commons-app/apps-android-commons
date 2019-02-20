@@ -300,7 +300,7 @@ public class ContributionDao {
                 onUpdate(db, from, to);
                 return;
             }
-            if (from == 8) {
+            if (from > 5) {
                 // Added place field
                 db.execSQL(ADD_WIKI_DATA_ENTITY_ID_FIELD);
                 from++;
