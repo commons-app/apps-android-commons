@@ -111,6 +111,7 @@ class ContributionDaoTest {
         // Table has changed in version 7
         inOrder(database) {
             verify<SQLiteDatabase>(database).execSQL(Table.ADD_WIKI_DATA_ENTITY_ID_FIELD)
+        }
     }
 
     @Test
@@ -119,6 +120,7 @@ class ContributionDaoTest {
         // Table has changed in version 8
         inOrder(database) {
             verify<SQLiteDatabase>(database).execSQL(Table.ADD_WIKI_DATA_ENTITY_ID_FIELD)
+        }
     }
 
     @Test
