@@ -477,4 +477,9 @@ Upload your first media by touching the camera or gallery icon above.</string>
   <string name="image_chooser_title">Choose Images to upload</string>
 
   <string name="please_wait">Please wait…</string>
+  <string name="support_info_api_level">API Level:</string>
+  <string name="support_info_manufacturer">Manufacturer:</string>
+  <string name="support_info_model">Model:</string>
+  <string name="support_info_device">Device:</string>
+  <string name="support_info_app_version">App Version:</string>
 </resources>

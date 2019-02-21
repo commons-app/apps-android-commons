@@ -187,14 +187,28 @@ public abstract class NavigationBaseActivity extends BaseActivity
                 return true;
             case R.id.action_feedback:
                 drawerLayout.closeDrawer(navigationView);
+
+                String apiLevel = android.os.Build.VERSION.SDK; // Getting API Level
+                String manufacturer = Build.MANUFACTURER; // Getting Device Manufacturer
+                String model = android.os.Build.MODEL; // Getting Model
+                String device = android.os.Build.DEVICE; // Getting Device
+                String appVersion = ConfigUtils.getVersionNameWithSha(getApplicationContext()); //Getting App Version
+
+                String supportInfo = String.format("%s %s\n%s %s\n%s %s\n%s %s",
+                        getResources().getString(R.string.support_info_api_level), apiLevel,
+                        getResources().getString(R.string.support_info_manufacturer), manufacturer,
+                        getResources().getString(R.string.support_info_model), model,
+                        getResources().getString(R.string.support_info_device), device);
+
                 Intent feedbackIntent = new Intent(Intent.ACTION_SENDTO);
                 feedbackIntent.setType("message/rfc822");
                 feedbackIntent.setData(Uri.parse("mailto:"));
                 feedbackIntent.putExtra(Intent.EXTRA_EMAIL,
                         new String[]{CommonsApplication.FEEDBACK_EMAIL});
                 feedbackIntent.putExtra(Intent.EXTRA_SUBJECT,
-                        String.format(CommonsApplication.FEEDBACK_EMAIL_SUBJECT,
-                                ConfigUtils.getVersionNameWithSha(getApplicationContext())));
+                        String.format(CommonsApplication.FEEDBACK_EMAIL_SUBJECT, appVersion));
+                feedbackIntent.putExtra(Intent.EXTRA_TEXT, String.format(
+                        "\n\n%s\n%s", CommonsApplication.FEEDBACK_EMAIL_TEMPLATE_HEADER, supportInfo));
                 try {
                     startActivity(feedbackIntent);
                 } catch (ActivityNotFoundException e) {
