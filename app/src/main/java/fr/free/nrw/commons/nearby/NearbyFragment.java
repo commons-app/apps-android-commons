@@ -152,6 +152,7 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
         // Find the retained fragment on activity restarts
         nearbyMapFragment = getMapFragment();
         nearbyListFragment = getListFragment();
+        addNetworkBroadcastReceiver();
     }
 
     /**
@@ -711,21 +712,32 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
         if (!FragmentUtils.isFragmentUIActive(this)) {
             return;
         }
+
+        if (broadcastReceiver != null) {
+            return;
+        }
         
         IntentFilter intentFilter = new IntentFilter(NETWORK_INTENT_ACTION);
-        snackbar = Snackbar.make(transparentView, R.string.no_internet, Snackbar.LENGTH_INDEFINITE);
 
         broadcastReceiver = new BroadcastReceiver() {
             @Override
             public void onReceive(Context context, Intent intent) {
-                if (snackbar != null && getActivity() != null) {
+                if (getActivity() != null) {
                     if (NetworkUtils.isInternetConnectionEstablished(getActivity())) {
                         if (isNetworkErrorOccured) {
                             refreshView(LOCATION_SIGNIFICANTLY_CHANGED);
                             isNetworkErrorOccured = false;
                         }
-                        snackbar.dismiss();
+
+                        if (snackbar != null) {
+                            snackbar.dismiss();
+                            snackbar = null;
+                        }
                     } else {
+                        if (snackbar == null) {
+                            snackbar = Snackbar.make(view, R.string.no_internet, Snackbar.LENGTH_INDEFINITE);
+                        }
+
                         isNetworkErrorOccured = true;
                         snackbar.show();
                     }
@@ -733,12 +745,7 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
             }
         };
 
-        if (getActivity() == null) {
-            return;
-        }
-
         getActivity().registerReceiver(broadcastReceiver, intentFilter);
-
     }
 
     @Override
