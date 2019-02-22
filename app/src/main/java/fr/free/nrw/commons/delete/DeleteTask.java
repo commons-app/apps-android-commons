@@ -30,7 +30,7 @@ public class DeleteTask extends AsyncTask<Void, Integer, Boolean> {
     @Inject MediaWikiApi mwApi;
     @Inject SessionManager sessionManager;
 
-    public static final int NOTIFICATION_DELETE = 1;
+    private static final int NOTIFICATION_DELETE = 1;
 
     private NotificationManager notificationManager;
     private Builder notificationBuilder;
@@ -113,11 +113,11 @@ public class DeleteTask extends AsyncTask<Void, Integer, Boolean> {
             publishProgress(4);
 
             mwApi.appendEdit(editToken,userPageString+"\n",
-                    "User_Talk:"+sessionManager.getCurrentAccount().name,summary);
+                    "User_Talk:"+ sessionManager.getCurrentAccount().name,summary);
             publishProgress(5);
         }
         catch (Exception e) {
-            Timber.d(e.getMessage());
+            Timber.e(e);
             return false;
         }
         return true;
@@ -160,7 +160,7 @@ public class DeleteTask extends AsyncTask<Void, Integer, Boolean> {
 
     @Override
     protected void onPostExecute(Boolean result) {
-        String message = "";
+        String message;
         String title = "Nominating for Deletion";
 
         if (result){

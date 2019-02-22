@@ -149,7 +149,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/achievements_revert_limit_message"
-                        android:textSize="10dp"
+                        android:textSize="10sp"
                         android:id="@+id/images_revert_limit_text"
                         android:layout_marginLeft="@dimen/activity_margin_horizontal"
                         android:layout_marginStart="@dimen/activity_margin_horizontal"
