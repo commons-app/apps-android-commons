@@ -117,7 +117,7 @@ public class DeleteTask extends AsyncTask<Void, Integer, Boolean> {
             publishProgress(5);
         }
         catch (Exception e) {
-            Timber.d(e);
+            Timber.e(e);
             return false;
         }
         return true;

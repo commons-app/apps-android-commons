@@ -62,7 +62,7 @@ public class CampaignsPresenter implements BasePresenter {
 
                     @Override public void onSuccess(CampaignResponseDTO campaignResponseDTO) {
                         List<Campaign> campaigns = campaignResponseDTO.getCampaigns();
-                        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
+                        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
                         if (campaigns == null || campaigns.isEmpty()) {
                             Log.e(TAG, "The campaigns list is empty");
                             view.showCampaigns(null);

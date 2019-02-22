@@ -99,10 +99,8 @@ public class CampaignView extends SwipableCardView {
             if (campaign != null) {
                 tvTitle.setText(campaign.getTitle());
                 tvDescription.setText(campaign.getDescription());
-                SimpleDateFormat inputDateFormat = new SimpleDateFormat("yyyy-MM-dd",
-                        Locale.getDefault());
-                SimpleDateFormat outputDateFormat = new SimpleDateFormat("dd MMM",
-                        Locale.getDefault());
+                SimpleDateFormat inputDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+                SimpleDateFormat outputDateFormat = new SimpleDateFormat("dd MMM");
                 try {
                     Date startDate = inputDateFormat.parse(campaign.getStartDate());
                     Date endDate = inputDateFormat.parse(campaign.getEndDate());
