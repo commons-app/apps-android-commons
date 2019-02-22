@@ -45,9 +45,13 @@ import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.MapboxMapOptions;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -505,16 +509,44 @@ public class NearbyMapFragment extends DaggerFragment {
         });
     }
 
+    private String getLocaleMapStyleJson() {
+        String styleFileName = "mapstyle.json";
+        String suffix = "png\"";
+        StringBuilder styleJson = new StringBuilder(4096);
+        String language = Locale.getDefault().getLanguage();
+
+        try {
+            BufferedReader reader = new BufferedReader(new InputStreamReader(getActivity().getAssets().open(styleFileName)));
+            String line = reader.readLine();
+            while (line != null) {
+                if (line.endsWith(suffix)) {
+                    String newSuffix = suffix.replace("\"", String.format("?lang=%s\"", language));
+                    styleJson.append(line.replace(suffix, newSuffix));
+                    Timber.d("Localized tiles url: %s", line.replace(suffix, newSuffix));
+                } else {
+                     styleJson.append(line);
+                }
+
+                line = reader.readLine();
+            }
+        } catch (IOException e){
+            Timber.e(e, "failed to read file: %s", styleFileName);
+        }
+
+        return styleJson.toString();
+    }
+
     /**
      * Sets up map view of first time it created, it passes MapBoxMap options and style assets.
      * @param savedInstanceState bundle coming from Nearby Fragment
      */
     private void setupMapView(Bundle savedInstanceState) {
         Timber.d("setupMapView called");
+        String styleJson = getLocaleMapStyleJson();
         MapboxMapOptions options = new MapboxMapOptions()
                 .compassGravity(Gravity.BOTTOM | Gravity.LEFT)
                 .compassMargins(new int[]{12, 0, 0, 24})
-                .styleUrl(Style.OUTDOORS)
+                .styleJson(styleJson)
                 .logoEnabled(false)
                 .attributionEnabled(false)
                 .camera(new CameraPosition.Builder()
@@ -531,7 +563,6 @@ public class NearbyMapFragment extends DaggerFragment {
                 addMapMovementListeners();
                 updateMapSignificantlyForCurrentLocation();
             });
-            mapView.setStyleUrl("asset://mapstyle.json");
         }
     }
 
