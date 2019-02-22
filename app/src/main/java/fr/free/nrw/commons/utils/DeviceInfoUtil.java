@@ -72,4 +72,20 @@ public class DeviceInfoUtil {
     public static String getAndroidVersion() {
         return Build.VERSION.RELEASE;
     }
+
+    /**
+     * Get API Level. Eg. 26
+     * @return
+     */
+    public static String getAPILevel() {
+        return Build.VERSION.SDK;
+    }
+
+    /**
+     * Get Device Name.
+     * @return
+     */
+    public static String getDevice() {
+        return Build.DEVICE;
+    }
 }

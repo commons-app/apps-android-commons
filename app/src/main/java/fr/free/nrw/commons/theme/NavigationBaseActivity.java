@@ -40,6 +40,7 @@ import fr.free.nrw.commons.contributions.MainActivity;
 import fr.free.nrw.commons.kvstore.BasicKvStore;
 import fr.free.nrw.commons.settings.SettingsActivity;
 import fr.free.nrw.commons.utils.ConfigUtils;
+import fr.free.nrw.commons.utils.DeviceInfoUtil;
 import timber.log.Timber;
 
 public abstract class NavigationBaseActivity extends BaseActivity
@@ -188,17 +189,7 @@ public abstract class NavigationBaseActivity extends BaseActivity
             case R.id.action_feedback:
                 drawerLayout.closeDrawer(navigationView);
 
-                String apiLevel = android.os.Build.VERSION.SDK; // Getting API Level
-                String manufacturer = Build.MANUFACTURER; // Getting Device Manufacturer
-                String model = android.os.Build.MODEL; // Getting Model
-                String device = android.os.Build.DEVICE; // Getting Device
-                String appVersion = ConfigUtils.getVersionNameWithSha(getApplicationContext()); //Getting App Version
-
-                String supportInfo = String.format("%s %s\n%s %s\n%s %s\n%s %s",
-                        getResources().getString(R.string.support_info_api_level), apiLevel,
-                        getResources().getString(R.string.support_info_manufacturer), manufacturer,
-                        getResources().getString(R.string.support_info_model), model,
-                        getResources().getString(R.string.support_info_device), device);
+                String technicalInfo = getTechnicalInfo();
 
                 Intent feedbackIntent = new Intent(Intent.ACTION_SENDTO);
                 feedbackIntent.setType("message/rfc822");
@@ -206,9 +197,9 @@ public abstract class NavigationBaseActivity extends BaseActivity
                 feedbackIntent.putExtra(Intent.EXTRA_EMAIL,
                         new String[]{CommonsApplication.FEEDBACK_EMAIL});
                 feedbackIntent.putExtra(Intent.EXTRA_SUBJECT,
-                        String.format(CommonsApplication.FEEDBACK_EMAIL_SUBJECT, appVersion));
+                        CommonsApplication.FEEDBACK_EMAIL_SUBJECT);
                 feedbackIntent.putExtra(Intent.EXTRA_TEXT, String.format(
-                        "\n\n%s\n%s", CommonsApplication.FEEDBACK_EMAIL_TEMPLATE_HEADER, supportInfo));
+                        "\n\n%s\n%s", CommonsApplication.FEEDBACK_EMAIL_TEMPLATE_HEADER, technicalInfo));
                 try {
                     startActivity(feedbackIntent);
                 } catch (ActivityNotFoundException e) {
@@ -239,6 +230,48 @@ public abstract class NavigationBaseActivity extends BaseActivity
                 Timber.e("Unknown option [%s] selected from the navigation menu", itemId);
                 return false;
         }
+    }
+
+    private String getTechnicalInfo() {
+        StringBuilder builder = new StringBuilder();
+
+        // Getting API Level
+        builder.append("API Level: ")
+                .append(DeviceInfoUtil.getAPILevel())
+                .append("\n");
+
+        // Getting Android Version
+        builder.append("Android Version: ")
+                .append(DeviceInfoUtil.getAndroidVersion())
+                .append("\n");
+
+        // Getting Device Manufacturer
+        builder.append("Device Manufacturer: ")
+                .append(DeviceInfoUtil.getDeviceManufacturer())
+                .append("\n");
+
+        // Getting Device Model
+        builder.append("Device Model: ")
+                .append(DeviceInfoUtil.getDeviceModel())
+                .append("\n");
+
+        // Getting Device Name
+        builder.append("Device: ")
+                .append(DeviceInfoUtil.getDevice())
+                .append("\n");
+
+        // Getting Network Type
+        builder.append("Network Type: ")
+                .append(DeviceInfoUtil.getConnectionType(getApplicationContext()).toString())
+                .append("\n");
+
+        //Getting App Version
+        builder.append("Device model: ")
+                .append(ConfigUtils.getVersionNameWithSha(getApplicationContext()))
+                .append("\n");
+
+
+        return builder.toString();
     }
 
     private class BaseLogoutListener implements CommonsApplication.LogoutListener {
