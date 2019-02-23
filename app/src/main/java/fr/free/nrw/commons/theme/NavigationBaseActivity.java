@@ -56,7 +56,7 @@ public abstract class NavigationBaseActivity extends BaseActivity
     @BindView(R.id.drawer_layout)
     DrawerLayout drawerLayout;
     @Inject @Named("application_preferences") BasicKvStore applicationKvStore;
-    @Inject SessionManager sessionManager;
+    @Inject CommonsLogSender commonsLogSender;
 
 
     private ActionBarDrawerToggle toggle;
@@ -190,8 +190,7 @@ public abstract class NavigationBaseActivity extends BaseActivity
             case R.id.action_feedback:
                 drawerLayout.closeDrawer(navigationView);
 
-                String technicalInfo = new CommonsLogSender(sessionManager,
-                        getApplicationContext()).getExtraInfo();
+                String technicalInfo = commonsLogSender.getExtraInfo();
 
                 Intent feedbackIntent = new Intent(Intent.ACTION_SENDTO);
                 feedbackIntent.setType("message/rfc822");
