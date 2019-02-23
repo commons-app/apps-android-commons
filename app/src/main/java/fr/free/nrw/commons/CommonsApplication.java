@@ -74,7 +74,7 @@ public class CommonsApplication extends Application {
 
     public static final String NOTIFICATION_CHANNEL_ID_ALL = "CommonsNotificationAll";
 
-    public static final String FEEDBACK_EMAIL_TEMPLATE_HEADER = "--Technical-Info--";
+    public static final String FEEDBACK_EMAIL_TEMPLATE_HEADER = "-- Technical information --";
 
     /**
      * Constants End

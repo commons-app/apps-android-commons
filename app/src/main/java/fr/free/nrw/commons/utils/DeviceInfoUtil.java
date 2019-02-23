@@ -62,7 +62,7 @@ public class DeviceInfoUtil {
      * @return
      */
     public static String getDeviceModel() {
-        return Build.DEVICE;
+        return Build.MODEL;
     }
 
     /**
@@ -82,7 +82,7 @@ public class DeviceInfoUtil {
     }
 
     /**
-     * Get Device Name.
+     * Get Device.
      * @return
      */
     public static String getDevice() {

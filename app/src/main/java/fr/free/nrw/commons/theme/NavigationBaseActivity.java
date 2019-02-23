@@ -34,13 +34,13 @@ import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.WelcomeActivity;
 import fr.free.nrw.commons.achievements.AchievementsActivity;
 import fr.free.nrw.commons.auth.LoginActivity;
+import fr.free.nrw.commons.auth.SessionManager;
 import fr.free.nrw.commons.bookmarks.BookmarksActivity;
 import fr.free.nrw.commons.category.CategoryImagesActivity;
 import fr.free.nrw.commons.contributions.MainActivity;
 import fr.free.nrw.commons.kvstore.BasicKvStore;
+import fr.free.nrw.commons.logging.CommonsLogSender;
 import fr.free.nrw.commons.settings.SettingsActivity;
-import fr.free.nrw.commons.utils.ConfigUtils;
-import fr.free.nrw.commons.utils.DeviceInfoUtil;
 import timber.log.Timber;
 
 public abstract class NavigationBaseActivity extends BaseActivity
@@ -56,6 +56,7 @@ public abstract class NavigationBaseActivity extends BaseActivity
     @BindView(R.id.drawer_layout)
     DrawerLayout drawerLayout;
     @Inject @Named("application_preferences") BasicKvStore applicationKvStore;
+    @Inject SessionManager sessionManager;
 
 
     private ActionBarDrawerToggle toggle;
@@ -189,7 +190,8 @@ public abstract class NavigationBaseActivity extends BaseActivity
             case R.id.action_feedback:
                 drawerLayout.closeDrawer(navigationView);
 
-                String technicalInfo = getTechnicalInfo();
+                String technicalInfo = new CommonsLogSender(sessionManager,
+                        getApplicationContext()).getExtraInfo();
 
                 Intent feedbackIntent = new Intent(Intent.ACTION_SENDTO);
                 feedbackIntent.setType("message/rfc822");
@@ -230,48 +232,6 @@ public abstract class NavigationBaseActivity extends BaseActivity
                 Timber.e("Unknown option [%s] selected from the navigation menu", itemId);
                 return false;
         }
-    }
-
-    private String getTechnicalInfo() {
-        StringBuilder builder = new StringBuilder();
-
-        // Getting API Level
-        builder.append("API Level: ")
-                .append(DeviceInfoUtil.getAPILevel())
-                .append("\n");
-
-        // Getting Android Version
-        builder.append("Android Version: ")
-                .append(DeviceInfoUtil.getAndroidVersion())
-                .append("\n");
-
-        // Getting Device Manufacturer
-        builder.append("Device Manufacturer: ")
-                .append(DeviceInfoUtil.getDeviceManufacturer())
-                .append("\n");
-
-        // Getting Device Model
-        builder.append("Device Model: ")
-                .append(DeviceInfoUtil.getDeviceModel())
-                .append("\n");
-
-        // Getting Device Name
-        builder.append("Device: ")
-                .append(DeviceInfoUtil.getDevice())
-                .append("\n");
-
-        // Getting Network Type
-        builder.append("Network Type: ")
-                .append(DeviceInfoUtil.getConnectionType(getApplicationContext()).toString())
-                .append("\n");
-
-        //Getting App Version
-        builder.append("Device model: ")
-                .append(ConfigUtils.getVersionNameWithSha(getApplicationContext()))
-                .append("\n");
-
-
-        return builder.toString();
     }
 
     private class BaseLogoutListener implements CommonsApplication.LogoutListener {
