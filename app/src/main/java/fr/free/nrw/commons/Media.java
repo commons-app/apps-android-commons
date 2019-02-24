@@ -14,6 +14,10 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import fr.free.nrw.commons.location.LatLng;
+import fr.free.nrw.commons.media.model.ImageInfo;
+import fr.free.nrw.commons.media.model.MwQueryPage;
+import fr.free.nrw.commons.utils.DateUtils;
+import fr.free.nrw.commons.utils.StringUtils;
 
 public class Media implements Parcelable {
 
@@ -427,5 +431,25 @@ public class Media implements Parcelable {
      */
     public boolean getRequestedDeletion(){
         return requestedDeletion;
+    }
+
+    public static Media from(MwQueryPage page) {
+        ImageInfo imageInfo = page.imageInfo();
+        if(imageInfo == null) {
+            return null;
+        }
+        Media media = new Media(null,
+                imageInfo.getOriginalUrl(),
+                page.title(),
+                imageInfo.getMetadata().imageDescription().value(),
+                0,
+                DateUtils.getDateFromString(imageInfo.getMetadata().getDateTimeOriginal().value()),
+                DateUtils.getDateFromString(imageInfo.getMetadata().getDateTime().value()),
+                StringUtils.getParsedStringFromHtml(imageInfo.getMetadata().getArtist().value())
+        );
+
+        media.setLicense(imageInfo.getMetadata().getLicenseShortName().value());
+
+        return media;
     }
 }

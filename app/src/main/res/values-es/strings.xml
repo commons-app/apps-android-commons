@@ -4,6 +4,7 @@
 * Adjen
 * Astroemi
 * Benfutbol10
+* Carlosmg.dg
 * Fitoschido
 * JO777
 * Jduranboger
@@ -15,6 +16,7 @@
 * Macofe
 * MarionaDSR
 * Miguel2706
+* Mirzali
 * Tiberius1701
 * Vivaelcelta
 -->
@@ -329,7 +331,7 @@
   <string name="menu_set_wallpaper">Poner como papel tapiz</string>
   <string name="wallpaper_set_successfully">¡El papel tapiz se aplicó correctamente!</string>
   <string name="quiz">Cuestionario</string>
-  <string name="quiz_question_string">¿esta bien la imagen como para ser subida?</string>
+  <string name="quiz_question_string">¿Está bien la imagen como para ser subida?</string>
   <string name="question">Pregunta</string>
   <string name="result">Resultado</string>
   <string name="quiz_back_button">Si continuas subiendo imágenes que requieran ser eliminadas, tu cuenta probablemente sea bloqueada. ¿Seguro que quieres terminar el cuestionario?</string>
@@ -379,6 +381,7 @@
   <string name="contributions_fragment">Contribuciones</string>
   <string name="nearby_fragment">Cercanos</string>
   <string name="notifications">Notificaciones</string>
+  <string name="archived_notifications">Notificaciones (archivadas)</string>
   <string name="display_nearby_notification">Mostrar notificaciones de cercanía</string>
   <string name="display_nearby_notification_summary">Toca aquí para ver el lugar más cercano que necesita fotos</string>
   <string name="no_close_nearby">No se encontraron lugares cercanos cerca de ti</string>

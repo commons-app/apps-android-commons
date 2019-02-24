@@ -68,7 +68,7 @@ public interface UploadView {
 
     void dismissKeyboard();
 
-    void showBadPicturePopup(@ImageUtils.Result int errorMessage);
+    void showBadPicturePopup(String errorMessage);
 
     void showDuplicatePicturePopup();
 
@@ -81,4 +81,8 @@ public interface UploadView {
     void initDefaultCategories();
 
     void showNoCategorySelectedWarning();
+
+    void showProgressDialog();
+
+    void hideProgressDialog();
 }

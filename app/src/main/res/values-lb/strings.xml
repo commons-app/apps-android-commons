@@ -179,6 +179,7 @@
   <string name="become_a_tester_description">Schreift Iech op GooglePlay a fir eise Beta-Kanal a kritt fréi Zougang zu neie Funktiounen a Verbesserunge vu Feeler</string>
   <string name="_2fa_code">2FA-Code</string>
   <string name="maximum_limit">Maximal Limite</string>
+  <string name="invalid_zero">Null ass net valabel</string>
   <string name="maximum_limit_alert">Et kënnen der net méi wéi 500 gewise ginn</string>
   <string name="logout_verification">Wëllt dir Iech wierklech ausloggen?</string>
   <string name="commons_logo">Commons-Logo</string>
@@ -319,4 +320,7 @@
   <string name="never_ask_again">Dëst ni méi froen</string>
   <string name="no_image">Keng Biller benotzt</string>
   <string name="no_image_uploaded">Keng Biller eropgelueden</string>
+  <string name="error_occurred_in_picking_images">Feeler beim Eraussiche vun de Biller</string>
+  <string name="image_chooser_title">Sicht Biller eraus fir eropzelueden</string>
+  <string name="please_wait">Waart w.e.g. ...</string>
 </resources>

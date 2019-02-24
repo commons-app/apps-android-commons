@@ -2,6 +2,7 @@ package fr.free.nrw.commons.upload;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -52,6 +53,8 @@ import fr.free.nrw.commons.auth.SessionManager;
 import fr.free.nrw.commons.category.CategoriesModel;
 import fr.free.nrw.commons.category.CategoryItem;
 import fr.free.nrw.commons.contributions.Contribution;
+import fr.free.nrw.commons.contributions.ContributionController;
+import fr.free.nrw.commons.filepicker.UploadableFile;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
 import fr.free.nrw.commons.nearby.Place;
@@ -59,7 +62,6 @@ import fr.free.nrw.commons.theme.BaseActivity;
 import fr.free.nrw.commons.utils.DialogUtil;
 import fr.free.nrw.commons.utils.NetworkUtils;
 import fr.free.nrw.commons.utils.PermissionUtils;
-import fr.free.nrw.commons.utils.StringUtils;
 import fr.free.nrw.commons.utils.ViewUtil;
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -67,12 +69,15 @@ import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.schedulers.Schedulers;
 import timber.log.Timber;
 
-import static fr.free.nrw.commons.utils.ImageUtils.Result;
-import static fr.free.nrw.commons.utils.ImageUtils.getErrorMessageForResult;
+import static fr.free.nrw.commons.contributions.Contribution.SOURCE_EXTERNAL;
+import static fr.free.nrw.commons.contributions.ContributionController.ACTION_INTERNAL_UPLOADS;
+import static fr.free.nrw.commons.upload.UploadService.EXTRA_FILES;
 import static fr.free.nrw.commons.wikidata.WikidataConstants.PLACE_OBJECT;
 
 public class UploadActivity extends BaseActivity implements UploadView, SimilarImageInterface {
     @Inject MediaWikiApi mwApi;
+    @Inject
+    ContributionController contributionController;
     @Inject @Named("direct_nearby_upload_prefs") JsonKvStore directKvStore;
     @Inject UploadPresenter presenter;
     @Inject CategoriesModel categoriesModel;
@@ -128,6 +133,7 @@ public class UploadActivity extends BaseActivity implements UploadView, SimilarI
     private DescriptionsAdapter descriptionsAdapter;
     private RVRendererAdapter<CategoryItem> categoriesAdapter;
     private CompositeDisposable compositeDisposable;
+    private ProgressDialog progressDialog;
 
 
     @SuppressLint("CheckResult")
@@ -241,7 +247,7 @@ public class UploadActivity extends BaseActivity implements UploadView, SimilarI
             dismissKeyboard();
         }
         if(isShowingItem) {
-            descriptionsAdapter.setItems(uploadItem.title, uploadItem.descriptions);
+            descriptionsAdapter.setItems(uploadItem.getTitle(), uploadItem.getDescriptions());
             rvDescriptions.setAdapter(descriptionsAdapter);
         }
     }
@@ -372,18 +378,10 @@ public class UploadActivity extends BaseActivity implements UploadView, SimilarI
     }
 
     @Override
-    public void showBadPicturePopup(@Result int result) {
-        if (result >= 8 ) { // If location of image and nearby does not match, then set shared preferences to disable wikidata edits
-            directKvStore.putBoolean("Picture_Has_Correct_Location", false);
-        }
-        String errorMessageForResult = getErrorMessageForResult(this, result);
-        if (StringUtils.isNullOrWhiteSpace(errorMessageForResult)) {
-            return;
-        }
-
+    public void showBadPicturePopup(String errorMessage) {
         DialogUtil.showAlertDialog(this,
                 getString(R.string.warning),
-                errorMessageForResult,
+                errorMessage,
                 () -> presenter.deletePicture(),
                 () -> presenter.keepPicture());
     }
@@ -408,6 +406,22 @@ public class UploadActivity extends BaseActivity implements UploadView, SimilarI
                 getString(R.string.yes_submit),
                 null,
                 () -> presenter.handleCategoryNext(categoriesModel, true));
+    }
+
+    @Override
+    public void showProgressDialog() {
+        if (progressDialog == null) {
+            progressDialog = new ProgressDialog(this);
+        }
+        progressDialog.setMessage(getString(R.string.please_wait));
+        progressDialog.show();
+    }
+
+    @Override
+    public void hideProgressDialog() {
+        if (progressDialog != null && !isFinishing()) {
+            progressDialog.dismiss();
+        }
     }
 
     @Override
@@ -596,7 +610,26 @@ public class UploadActivity extends BaseActivity implements UploadView, SimilarI
 
     private void receiveSharedItems() {
         Intent intent = getIntent();
-        String mimeType = intent.getType();
+        String action = intent.getAction();
+        if (Intent.ACTION_SEND.equals(action) || Intent.ACTION_SEND_MULTIPLE.equals(action)) {
+            receiveExternalSharedItems();
+        } else if (ACTION_INTERNAL_UPLOADS.equals(action)) {
+            receiveInternalSharedItems();
+        }
+    }
+
+    private void receiveExternalSharedItems() {
+        List<UploadableFile> uploadableFiles = contributionController.handleExternalImagesPicked(this, getIntent());
+        if (uploadableFiles.isEmpty()) {
+            handleNullMedia();
+            return;
+        }
+
+        presenter.receive(uploadableFiles, SOURCE_EXTERNAL, null);
+    }
+
+    private void receiveInternalSharedItems() {
+        Intent intent = getIntent();
         String source;
 
         if (intent.hasExtra(UploadService.EXTRA_SOURCE)) {
@@ -605,31 +638,21 @@ public class UploadActivity extends BaseActivity implements UploadView, SimilarI
             source = Contribution.SOURCE_EXTERNAL;
         }
 
-        Timber.d("Received intent %s with action %s and mimeType %s from source %s",
+        Timber.d("Received intent %s with action %s and from source %s",
                 intent.toString(),
                 intent.getAction(),
-                mimeType,
                 source);
 
-        ArrayList<Uri> urisList = new ArrayList<>();
+        ArrayList<UploadableFile> uploadableFiles = intent.getParcelableArrayListExtra(EXTRA_FILES);
+        Timber.i("Received multiple upload %s", uploadableFiles.size());
 
-        if (Intent.ACTION_SEND.equals(intent.getAction())) {
-            Uri mediaUri = intent.getParcelableExtra(Intent.EXTRA_STREAM);
-            if (mediaUri != null) {
-                urisList.add(mediaUri);
-            }
-        } else if (Intent.ACTION_SEND_MULTIPLE.equals(intent.getAction())) {
-            urisList = intent.getParcelableArrayListExtra(Intent.EXTRA_STREAM);
-            Timber.i("Received multiple upload %s", urisList.size());
-        }
-
-        if (urisList.isEmpty()) {
+        if (uploadableFiles.isEmpty()) {
             handleNullMedia();
             return;
         }
 
         Place place = intent.getParcelableExtra(PLACE_OBJECT);
-        presenter.receive(urisList, mimeType, source, place);
+        presenter.receive(uploadableFiles, source, place);
 
         resetDirectPrefs();
     }

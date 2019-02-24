@@ -4,7 +4,6 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -22,7 +21,6 @@ import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 
 import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 
 import java.util.List;
 
@@ -40,7 +38,6 @@ import fr.free.nrw.commons.location.LocationServiceManager;
 import fr.free.nrw.commons.location.LocationUpdateListener;
 import fr.free.nrw.commons.utils.FragmentUtils;
 import fr.free.nrw.commons.utils.NetworkUtils;
-import fr.free.nrw.commons.utils.UriSerializer;
 import fr.free.nrw.commons.utils.ViewUtil;
 import fr.free.nrw.commons.wikidata.WikidataEditListener;
 import io.reactivex.Observable;
@@ -245,7 +242,7 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
     @Override
     public void onWikidataEditSuccessful() {
         // Do not refresh nearby map if we are checking other areas with search this area button
-        if (!nearbyMapFragment.searchThisAreaModeOn) {
+        if (nearbyMapFragment != null && !nearbyMapFragment.searchThisAreaModeOn) {
             refreshView(MAP_UPDATED);
         }
     }
@@ -452,7 +449,7 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
          */
         NearbyMapFragment nearbyMapFragment = getMapFragment();
 
-        if (nearbyMapFragment != null && !nearbyMapFragment.isCurrentLocationMarkerVisible()) {
+        if (nearbyMapFragment != null && !nearbyMapFragment.isCurrentLocationMarkerVisible() && !onOrientationChanged) {
             Timber.d("Do not update the map, user is not seeing current location marker" +
                     " means they are checking around and moving on map");
             return;

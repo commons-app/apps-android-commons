@@ -1,6 +1,6 @@
 package fr.free.nrw.commons.upload
 
-import android.net.Uri
+import fr.free.nrw.commons.filepicker.UploadableFile
 import fr.free.nrw.commons.mwapi.MediaWikiApi
 import fr.free.nrw.commons.nearby.Place
 import io.reactivex.Observable
@@ -26,8 +26,7 @@ class UploadPresenterTest {
     @Throws(Exception::class)
     fun setUp() {
         MockitoAnnotations.initMocks(this)
-        `when`(uploadModel!!.preProcessImages(ArgumentMatchers.anyListOf(Uri::class.java),
-                ArgumentMatchers.anyString(),
+        `when`(uploadModel!!.preProcessImages(ArgumentMatchers.anyListOf(UploadableFile::class.java),
                 ArgumentMatchers.any(Place::class.java),
                 ArgumentMatchers.anyString(),
                 ArgumentMatchers.any(SimilarImageInterface::class.java)))
@@ -36,9 +35,9 @@ class UploadPresenterTest {
 
     @Test
     fun receiveMultipleItems() {
-        val element = Mockito.mock(Uri::class.java)
-        val element2 = Mockito.mock(Uri::class.java)
-        var uriList: List<Uri> = mutableListOf<Uri>(element, element2)
-        uploadPresenter!!.receive(uriList, "image/jpeg", "external", mock(Place::class.java))
+        val element = Mockito.mock(UploadableFile::class.java)
+        val element2 = Mockito.mock(UploadableFile::class.java)
+        var uriList: List<UploadableFile> = mutableListOf<UploadableFile>(element, element2)
+        uploadPresenter!!.receive(uriList, "external", mock(Place::class.java))
     }
 }

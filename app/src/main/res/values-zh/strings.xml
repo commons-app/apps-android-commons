@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Authors:
+* 94rain
 * A Chinese Wikipedian
 * Aefgh39622
+* Angrydog001
 * Deathkon
 * Hydra
 * Kuailong
@@ -27,7 +29,7 @@
   <string name="intent_share_upload_label">上传到共享资源</string>
   <string name="username">用户名</string>
   <string name="password">密码</string>
-  <string name="login_credential">登录至您的共享资源测试账户</string>
+  <string name="login_credential">登录至您的 Commons 测试账户</string>
   <string name="login">登录</string>
   <string name="forgot_password">忘记密码？</string>
   <string name="signup">注册</string>
@@ -202,7 +204,11 @@
   <string name="_2fa_code">2FA代码</string>
   <string name="number_of_uploads">我的最近上传限制</string>
   <string name="maximum_limit">最大限制</string>
+  <string name="invalid_zero">不能为0</string>
+  <string name="invalid_input">输入错误</string>
   <string name="maximum_limit_alert">无法显示超过500张</string>
+  <string name="enter_valid">输入有效数字</string>
+  <string name="cannot_be_zero">上传数量限制不能是 0</string>
   <string name="set_limit">设置最近上传限制</string>
   <string name="login_failed_2fa_not_supported">目前不支持双因素验证。</string>
   <string name="logout_verification">您真的想要退出么？</string>
@@ -269,7 +275,7 @@
   <string name="skip_login">忽略</string>
   <string name="navigation_item_login">登录</string>
   <string name="skip_login_title">你真的不要登录吗？</string>
-  <string name="skip_login_message" fuzzy="true">你将不能上传图片。</string>
+  <string name="skip_login_message">您在未来将需要登陆才能上传图片。</string>
   <string name="login_alert_message">请登录后使用这个功能</string>
   <string name="copy_wikicode">复制维基文本到剪贴板</string>
   <string name="wikicode_copied">维基文本已经复制到剪贴板</string>
@@ -356,6 +362,7 @@
   <string name="statistics">统计</string>
   <string name="statistics_thanks">已收到感谢</string>
   <string name="statistics_featured">特色图片</string>
+  <string name="statistics_wikidata_edits">来自“附近地点”的图片</string>
   <string name="level">等级</string>
   <string name="images_uploaded">已上传图片</string>
   <string name="image_reverts">未还原图片</string>
@@ -375,6 +382,7 @@
   <string name="contributions_fragment">贡献</string>
   <string name="nearby_fragment">附近</string>
   <string name="notifications">通知</string>
+  <string name="archived_notifications">通知（已存档）</string>
   <string name="display_nearby_notification">显示附近通知</string>
   <string name="display_nearby_notification_summary">点击此处查看最近需要图片的地方</string>
   <string name="no_close_nearby">附近找不到靠近您的地方</string>
@@ -437,4 +445,19 @@
   <string name="nearby_campaign_dismiss_message">你不会再看到这个活动。如果需要可以在设置里重新启用此通知。</string>
   <string name="this_function_needs_network_connection">这个功能需要网络连接，请检查你的网络设置。</string>
   <string name="bad_token_error_proposed_solution">因为编辑令牌失效上传失败。请尝试登出后重新登录。</string>
+  <string name="error_processing_image">处理图像时出错。请再试一次！</string>
+  <plurals name="receiving_shared_content">
+    <item quantity="other">正在处理数据。处理时间取决于图片的尺寸和您的设备</item>
+  </plurals>
+  <string name="no_image">没有被使用的图片</string>
+  <string name="no_image_reverted">没有被撤回的图片</string>
+  <string name="no_image_uploaded">还没有上传图片</string>
+  <string name="no_notification">您没有未读通知</string>
+  <string name="no_archived_notification">您没有已存档的通知</string>
+  <string name="share_logs_using">分享日志于</string>
+  <string name="menu_option_archived">查看已存档</string>
+  <string name="menu_option_unread">查看未读</string>
+  <string name="error_occurred_in_picking_images">选择图片时出错</string>
+  <string name="image_chooser_title">选择要上传的图片</string>
+  <string name="please_wait">请稍候……</string>
 </resources>

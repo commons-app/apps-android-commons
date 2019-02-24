@@ -363,6 +363,7 @@
   <string name="images_used_explanation">מספר התמונות שהעלית לוויקישיתוף ושמשמשות בערכים בוויקיפדיה</string>
   <string name="error_occurred">אירעה שגיאה!</string>
   <string name="notifications_channel_name_all">התראה מוויקישיתוף</string>
+  <string name="archived_notifications">התראות (בארכיון)</string>
   <string name="storage_permission">הרשאת אחסון</string>
   <string name="write_storage_permission_rationale_for_image_share">אנחנו זקוקים להרשאה שלך לגשת לאחסון חיצוני במכשיר שלך כדי להעלות תמונות.</string>
   <string name="navigation_item_bookmarks">סימניות</string>
@@ -375,4 +376,12 @@
   <string name="provider_bookmarks_location">סימניות</string>
   <string name="log_collection_started">איסוף היומן התחיל. נא לאתחל את היישום, לבצע את הפעולה שברצונכם לרשום ביומן ואז ללחוץ שוב על \"שליחת קובץ יומן\"</string>
   <string name="no_uploads">ברוך בואך לוויקישיתוף!\n\nכדי להעלות את המדיה הראשונה שלך, נא לגעת בסמל המצלמה או הגלריה למעלה.</string>
+  <string name="no_notification">אין לך התראות שלא נקראו</string>
+  <string name="no_archived_notification">יש לך התראות בארכיון</string>
+  <string name="share_logs_using">שיתוף יומנים בעזרת</string>
+  <string name="menu_option_archived">הצגת ארכיון</string>
+  <string name="menu_option_unread">הצגת הודעות שלא נקראו</string>
+  <string name="error_occurred_in_picking_images">אירעה שגיאה בעת בחירת תמונות</string>
+  <string name="image_chooser_title">נא לבחור תמונות להעלאה</string>
+  <string name="please_wait">נא להמתין…</string>
 </resources>

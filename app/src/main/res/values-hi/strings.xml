@@ -16,6 +16,7 @@
 * Smtchahal
 * Swapnil.Karambelkar
 * चक्रपाणी
+* संजीव कुमार
 -->
 <resources>
   <string name="title_activity_explore">खोजें</string>
@@ -353,6 +354,7 @@
   <string name="contributions_fragment">योगदान</string>
   <string name="nearby_fragment">निकट</string>
   <string name="notifications">सूचनायें</string>
+  <string name="archived_notifications">सूचनाएँ(पुरालेखित)</string>
   <string name="list_sheet">सूची</string>
   <string name="storage_permission">स्टोरेज अनुमति</string>
   <string name="next">अगला</string>
@@ -396,4 +398,8 @@
   <string name="no_image">कोई चित्र उपयोग नहीं हुआ</string>
   <string name="no_image_reverted">कोई चित्र वापस नहीं लाया</string>
   <string name="no_image_uploaded">कोई चित्र अपलोड नहीं किया</string>
+  <string name="no_notification">आपके पास कोई अपठित सूचना नहीं है</string>
+  <string name="no_archived_notification">आपकी कोई सूचना पुरालेखित नहीं है</string>
+  <string name="menu_option_archived">पुरालेखित देखें</string>
+  <string name="menu_option_unread">अपठित देखें</string>
 </resources>

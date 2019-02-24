@@ -108,15 +108,19 @@ class ContributionDaoTest {
     @Test
     fun migrateTableVersionFrom_v6_to_v7() {
         Table.onUpdate(database, 6, 7)
-        // Table didn't change in version 7
-        verifyZeroInteractions(database)
+        // Table has changed in version 7
+        inOrder(database) {
+            verify<SQLiteDatabase>(database).execSQL(Table.ADD_WIKI_DATA_ENTITY_ID_FIELD)
+        }
     }
 
     @Test
     fun migrateTableVersionFrom_v7_to_v8() {
         Table.onUpdate(database, 7, 8)
-        // Table didn't change in version 8
-        verifyZeroInteractions(database)
+        // Table has changed in version 8
+        inOrder(database) {
+            verify<SQLiteDatabase>(database).execSQL(Table.ADD_WIKI_DATA_ENTITY_ID_FIELD)
+        }
     }
 
     @Test
@@ -176,7 +180,7 @@ class ContributionDaoTest {
     @Test
     fun saveNewContribution_nullableImageUrlUsesFileAsBackup() {
         whenever(client.insert(isA(), isA())).thenReturn(contentUri)
-        val contribution = createContribution(true, null, null, null, "file")
+        val contribution = createContribution(true, null, null, null, "filePath")
 
         testObject.save(contribution)
 
@@ -186,7 +190,7 @@ class ContributionDaoTest {
             // Nullable fields are absent if null
             assertFalse(it.containsKey(Table.COLUMN_LOCAL_URI))
             assertFalse(it.containsKey(Table.COLUMN_UPLOADED))
-            assertEquals(Utils.makeThumbBaseUrl("file"), it.getAsString(Table.COLUMN_IMAGE_URL))
+            assertEquals(Utils.makeThumbBaseUrl("filePath"), it.getAsString(Table.COLUMN_IMAGE_URL))
         }
     }
 
@@ -285,7 +289,7 @@ class ContributionDaoTest {
         createCursor(created, uploaded, false, localUri).let { mc ->
             testObject.fromCursor(mc).let {
                 assertEquals(uriForId(111), it.contentUri)
-                assertEquals("file", it.filename)
+                assertEquals("filePath", it.filename)
                 assertEquals(localUri, it.localUri.toString())
                 assertEquals("image", it.imageUrl)
                 assertEquals(created, it.dateCreated.time)
@@ -335,7 +339,7 @@ class ContributionDaoTest {
 
     private fun createCursor(created: Long, uploaded: Long, multiple: Boolean, localUri: String) =
             MatrixCursor(Table.ALL_FIELDS, 1).apply {
-                addRow(listOf("111", "file", localUri, "image",
+                addRow(listOf("111", "filePath", localUri, "image",
                         created, STATE_QUEUED, 222L, uploaded, 88L, SOURCE_GALLERY, "desc",
                         "create", if (multiple) 1 else 0, 640, 480, "007", "Q1"))
                 moveToFirst()

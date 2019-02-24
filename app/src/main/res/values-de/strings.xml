@@ -196,7 +196,11 @@
   <string name="_2fa_code">2FA-Code</string>
   <string name="number_of_uploads">Meine Grenze für kürzlich hochgeladene Dateien</string>
   <string name="maximum_limit">Maximale Grenze</string>
+  <string name="invalid_zero">Null ist nicht gültig</string>
+  <string name="invalid_input">Ungültige Eingabe</string>
   <string name="maximum_limit_alert">Mehr als 500 Einträge können nicht angezeigt werden</string>
+  <string name="enter_valid">Eine gültige Zahl eingeben</string>
+  <string name="cannot_be_zero">Das Hochladelimit kann nicht 0 sein</string>
   <string name="set_limit">Grenze für kürzlich hochgeladene Dateien festlegen</string>
   <string name="login_failed_2fa_not_supported">Die Zwei-Faktor-Authentifikation wird derzeit nicht unterstützt.</string>
   <string name="logout_verification">Möchtest du dich wirklich abmelden?</string>
@@ -350,6 +354,7 @@
   <string name="statistics">STATISTIKEN</string>
   <string name="statistics_thanks">Erhaltene Dankeschöns</string>
   <string name="statistics_featured">Vorgestellte Bilder</string>
+  <string name="statistics_wikidata_edits">Bilder über „Orte in der Nähe“</string>
   <string name="level">NIVEAU</string>
   <string name="images_uploaded">Hochgeladene Bilder</string>
   <string name="image_reverts">Bilder nicht zurückgesetzt</string>
@@ -369,6 +374,7 @@
   <string name="contributions_fragment">Beiträge</string>
   <string name="nearby_fragment">In der Nähe</string>
   <string name="notifications">Benachrichtigungen</string>
+  <string name="archived_notifications">Benachrichtigungen (archiviert)</string>
   <string name="display_nearby_notification">Benachrichtigungen in der Nähe anzeigen</string>
   <string name="display_nearby_notification_summary">Hier tippen, um Orte in der Nähe anzusehen, die Bilder benötigen.</string>
   <string name="no_close_nearby">Keine Orte in deiner Umgebung gefunden.</string>
@@ -439,5 +445,12 @@
   <string name="no_image">Keine Bilder verwendet</string>
   <string name="no_image_reverted">Keine Bilder zurückgesetzt</string>
   <string name="no_image_uploaded">Keine Bilder hochgeladen</string>
+  <string name="no_notification">Du hast keine ungelesenen Benachrichtigungen</string>
+  <string name="no_archived_notification">Du hast keine archivierten Benachrichtigungen</string>
   <string name="share_logs_using">Lognutzung teilen</string>
+  <string name="menu_option_archived">Archivierte ansehen</string>
+  <string name="menu_option_unread">Ungelesene ansehen</string>
+  <string name="error_occurred_in_picking_images">Beim Auswählen der Bilder ist ein Fehler aufgetreten</string>
+  <string name="image_chooser_title">Hochzuladende Bilder auswählen</string>
+  <string name="please_wait">Bitte warten …</string>
 </resources>

@@ -10,7 +10,6 @@ import android.net.Uri;
 import android.support.annotation.IntDef;
 import android.support.annotation.Nullable;
 
-import com.esafirm.imagepicker.model.Image;
 import com.facebook.common.executors.CallerThreadExecutor;
 import com.facebook.common.references.CloseableReference;
 import com.facebook.datasource.DataSource;
@@ -24,8 +23,6 @@ import com.facebook.imagepipeline.request.ImageRequestBuilder;
 import java.io.IOException;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
-import java.util.ArrayList;
-import java.util.List;
 
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.location.LatLng;
@@ -37,10 +34,28 @@ import timber.log.Timber;
 
 public class ImageUtils {
 
-    static final int IMAGE_DARK = 1;
-    static final int IMAGE_BLURRY = 1 << 1;
-    public static final int IMAGE_DUPLICATE = 1 << 2;
-    public static final int IMAGE_GEOLOCATION_DIFFERENT = 1 << 3;
+    /**
+     * Set 0th bit as 1 for dark image ie. 0001
+     */
+    public static final int IMAGE_DARK = 1 << 0; // 1
+    /**
+     * Set 1st bit as 1 for blurry image ie. 0010
+     */
+    static final int IMAGE_BLURRY = 1 << 1; // 2
+    /**
+     * Set 2nd bit as 1 for duplicate image ie. 0100
+     */
+    public static final int IMAGE_DUPLICATE = 1 << 2; //4
+    /**
+     * Set 3rd bit as 1 for image with different geo location ie. 1000
+     */
+    public static final int IMAGE_GEOLOCATION_DIFFERENT = 1 << 3; //8
+    /**
+     * The parameter FILE_FBMD is returned from the class ReadFBMD if the uploaded image contains FBMD data else returns IMAGE_OK
+     * ie. 10000
+     */
+    public static final int FILE_FBMD = 1 << 4;
+
     public static final int IMAGE_OK = 0;
     public static final int IMAGE_KEEP = -1;
     public static final int IMAGE_WAIT = -2;
@@ -217,11 +232,12 @@ public class ImageUtils {
         }
     }
 
+    /**
+     * Result variable is a result of an or operation of all possible problems. Ie. if result
+     * is 0001 means IMAGE_DARK
+     * if result is 1100 IMAGE_DUPLICATE and IMAGE_GEOLOCATION_DIFFERENT
+     */
     public static String getErrorMessageForResult(Context context, @Result int result) {
-        /**
-         * Result variable is a result of an or operation of all possible problems. Ie. if result
-         * is 0001 means IMAGE_DARK, if result is 1100 IMAGE_DUPLICATE and IMAGE_GEOLOCATION_DIFFERENT
-         */
         StringBuilder errorMessage = new StringBuilder();
         if (result <= 0 ) {
             Timber.d("No issues to warn user is found");
@@ -246,20 +262,13 @@ public class ImageUtils {
                 errorMessage.append("\n - ").append(context.getResources().getString(R.string.upload_problem_different_geolocation));
             }
 
+            if ((FILE_FBMD & result) != 0) {
+                errorMessage.append("\n - ").append(context.getResources().getString(R.string.upload_problem_fbmd));
+            }
+
             errorMessage.append("\n\n").append(context.getResources().getString(R.string.upload_problem_do_you_continue));
         }
 
         return errorMessage.toString();
-    }
-
-    public static ArrayList<Uri> getUriListFromImages(List<Image> imageList) {
-        ArrayList<Uri> uriList = new ArrayList<>();
-        for (Image imagePath : imageList) {
-            if (!StringUtils.isNullOrWhiteSpace(imagePath.getPath())) {
-                uriList.add(Uri.parse(imagePath.getPath()));
-            }
-        }
-
-        return uriList;
     }
 }

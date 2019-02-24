@@ -3,7 +3,6 @@ package fr.free.nrw.commons.achievements;
 import android.accounts.Account;
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
@@ -27,8 +26,6 @@ import android.widget.TextView;
 
 import com.dinuscxj.progressbar.CircleProgressBar;
 
-import org.w3c.dom.Text;
-
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -42,10 +39,10 @@ import butterknife.OnClick;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.Utils;
 import fr.free.nrw.commons.auth.SessionManager;
-import fr.free.nrw.commons.mwapi.MediaWikiApi;
+import fr.free.nrw.commons.mwapi.OkHttpJsonApiClient;
 import fr.free.nrw.commons.theme.NavigationBaseActivity;
+import fr.free.nrw.commons.utils.StringUtils;
 import fr.free.nrw.commons.utils.ViewUtil;
-import io.reactivex.Single;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.schedulers.Schedulers;
@@ -97,10 +94,14 @@ public class AchievementsActivity extends NavigationBaseActivity {
     TextView imageRevertedText;
     @BindView(R.id.images_upload_text_param)
     TextView imageUploadedText;
+    @BindView(R.id.wikidata_edits)
+    TextView wikidataEditsText;
+
+
     @Inject
     SessionManager sessionManager;
     @Inject
-    MediaWikiApi mediaWikiApi;
+    OkHttpJsonApiClient okHttpJsonApiClient;
     MenuItem item;
 
     private CompositeDisposable compositeDisposable = new CompositeDisposable();
@@ -137,6 +138,7 @@ public class AchievementsActivity extends NavigationBaseActivity {
 
         hideLayouts();
         setAchievements();
+        setWikidataEditCount();
         initDrawer();
     }
 
@@ -201,7 +203,7 @@ public class AchievementsActivity extends NavigationBaseActivity {
         if (checkAccount()) {
             try{
 
-                compositeDisposable.add(mediaWikiApi
+                compositeDisposable.add(okHttpJsonApiClient
                         .getAchievements(Objects.requireNonNull(sessionManager.getCurrentAccount()).name)
                         .subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())
@@ -228,6 +230,18 @@ public class AchievementsActivity extends NavigationBaseActivity {
         }
     }
 
+    @SuppressLint("CheckResult")
+    private void setWikidataEditCount() {
+        String userName = sessionManager.getUserName();
+        if (StringUtils.isNullOrWhiteSpace(userName)) {
+            return;
+        }
+        okHttpJsonApiClient.getWikidataEdits(userName)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(edits -> wikidataEditsText.setText(String.valueOf(edits)));
+    }
+
     private void showSnackBarWithRetry() {
         progressBar.setVisibility(View.GONE);
         ViewUtil.showDismissibleSnackBar(findViewById(android.R.id.content),
@@ -247,7 +261,7 @@ public class AchievementsActivity extends NavigationBaseActivity {
      */
     private void setUploadCount(Achievements achievements) {
         if (checkAccount()) {
-            compositeDisposable.add(mediaWikiApi
+            compositeDisposable.add(okHttpJsonApiClient
                     .getUploadCount(Objects.requireNonNull(sessionManager.getCurrentAccount()).name)
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())

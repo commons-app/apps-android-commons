@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Authors:
+* Bouman4
 * Elroy
 * Festina90
 * KlaasZ4usV
@@ -10,6 +11,7 @@
 * Siebrand
 * Sjoerddebruin
 * Smile4ever
+* Xbaked potatox
 -->
 <resources>
   <string name="title_activity_explore">Verkennen</string>
@@ -27,7 +29,7 @@
   <string name="login_credential">Aanmelden bij je Commons Beta-profiel</string>
   <string name="login">Aanmelden</string>
   <string name="forgot_password">Wachtwoord vergeten?</string>
-  <string name="signup">Registreren</string>
+  <string name="signup">Inschrijven</string>
   <string name="logging_in_title">Bezig met aanmelden</string>
   <string name="logging_in_message">Een ogenblik geduld…</string>
   <string name="login_success">Aanmelden geslaagd</string>
@@ -237,5 +239,9 @@
   <string name="never_ask_again">Niet meer vragen</string>
   <string name="display_location_permission_title">Machtiging voor locatie weergeven</string>
   <string name="display_location_permission_explanation">Naar machtiging voor locatie vragen als dat nodig is voor de functie meldingskaart dichtbij weergeven.</string>
+  <string name="no_archived_notification">U hebt geen gearchiveerde melding</string>
   <string name="share_logs_using">Logboeken delen via</string>
+  <string name="menu_option_archived">Gearchiveerd bekijken</string>
+  <string name="menu_option_unread">Ongelezen bekijken</string>
+  <string name="please_wait">Een ogenblik geduld…</string>
 </resources>

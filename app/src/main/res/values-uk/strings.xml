@@ -208,7 +208,11 @@
   <string name="_2fa_code">Код 2FA</string>
   <string name="number_of_uploads">Ліміт моїх останніх завантажень</string>
   <string name="maximum_limit">Максимальний ліміт</string>
+  <string name="invalid_zero">Нуль не є коректним значенням</string>
+  <string name="invalid_input">Некоректне значення</string>
   <string name="maximum_limit_alert">Неможливо показати понад 500</string>
+  <string name="enter_valid">Вкажіть коректне значення</string>
+  <string name="cannot_be_zero">Ліміт завантажень не може бути нульовим</string>
   <string name="set_limit">Встановити ліміт останніх завантажень</string>
   <string name="login_failed_2fa_not_supported">Двофакторна автентифікація наразі не підтримується.</string>
   <string name="logout_verification">Ви справді хочете вийти із системи?</string>
@@ -362,6 +366,7 @@
   <string name="statistics">СТАТИСТИКА</string>
   <string name="statistics_thanks">Отримані подяки</string>
   <string name="statistics_featured">Вибрані зображення</string>
+  <string name="statistics_wikidata_edits">Зображення місць поблизу</string>
   <string name="level">РІВЕНЬ</string>
   <string name="images_uploaded">Завантажені зображення</string>
   <string name="image_reverts">Не відхилені зображення</string>
@@ -381,6 +386,7 @@
   <string name="contributions_fragment">Внесок</string>
   <string name="nearby_fragment">Поблизу</string>
   <string name="notifications">Сповіщення</string>
+  <string name="archived_notifications">Сповіщення (архівовані)</string>
   <string name="display_nearby_notification">Повідомляти мене про місця поблизу</string>
   <string name="display_nearby_notification_summary">Торкніться тут, щоб побачити найближчі місця, які ще не мають зображень</string>
   <string name="no_close_nearby">Не знайдено місць поблизу Вас</string>
@@ -453,5 +459,12 @@
   <string name="no_image">Використаних зображень немає</string>
   <string name="no_image_reverted">Відхилених зображень немає</string>
   <string name="no_image_uploaded">Завантажених зображень немає</string>
+  <string name="no_notification">У вас немає непрочитаних сповіщень</string>
+  <string name="no_archived_notification">Немає архівованих сповіщень</string>
   <string name="share_logs_using">Поширення журналів</string>
+  <string name="menu_option_archived">Перегляд архівованих</string>
+  <string name="menu_option_unread">Перегляд непрочитаних</string>
+  <string name="error_occurred_in_picking_images">Сталася помилка при завантаженні зображень</string>
+  <string name="image_chooser_title">Оберіть зображення для завантаження</string>
+  <string name="please_wait">Будь ласка, зачекайте…</string>
 </resources>
