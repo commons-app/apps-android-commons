@@ -12,6 +12,7 @@
 * Maxan
 * TheEduGobi
 * TheGabrielZaum
+* Tks4Fish
 * Tuliouel
 -->
 <resources>
@@ -202,7 +203,11 @@
   <string name="_2fa_code">Código 2FA</string>
   <string name="number_of_uploads">Meu limite de upload recente</string>
   <string name="maximum_limit">Limite máximo</string>
+  <string name="invalid_zero">Zero não é válido</string>
+  <string name="invalid_input">Entrada inválida</string>
   <string name="maximum_limit_alert">Incapaz de exibir mais de 500.</string>
+  <string name="enter_valid">Digite um número válido</string>
+  <string name="cannot_be_zero">O limite de upload não pode ser 0</string>
   <string name="set_limit">Definir o limite de carregamento recente</string>
   <string name="login_failed_2fa_not_supported">Dois fatores de autenticação não são suportados.</string>
   <string name="logout_verification">Quer realmente sair ?</string>
@@ -356,6 +361,7 @@
   <string name="statistics">ESTATÍSTICAS</string>
   <string name="statistics_thanks">Agradecimentos recebidos</string>
   <string name="statistics_featured">Imagens destacadas</string>
+  <string name="statistics_wikidata_edits">Imagens via \"Locais próximos\"</string>
   <string name="level">NÍVEL</string>
   <string name="images_uploaded">Imagens carregadas</string>
   <string name="image_reverts">Imagens não revertidas</string>
@@ -375,6 +381,7 @@
   <string name="contributions_fragment">Contribuições</string>
   <string name="nearby_fragment">Próximo</string>
   <string name="notifications">Notificações</string>
+  <string name="archived_notifications">Notificações (arquivadas)</string>
   <string name="display_nearby_notification">Exibir notificação próxima</string>
   <string name="display_nearby_notification_summary">Toque aqui para ver o local mais próximo que precisa de fotos</string>
   <string name="no_close_nearby">Nenhum lugar próximo encontrado perto de você</string>
@@ -446,5 +453,11 @@
   <string name="no_image_reverted">Nenhuma imagem revertida</string>
   <string name="no_image_uploaded">Nenhuma imagem enviada</string>
   <string name="no_notification">Você não tem notificações não lidas</string>
+  <string name="no_archived_notification">Você não tem nenhuma notificação arquivada</string>
   <string name="share_logs_using">Compartilhar registros usando</string>
+  <string name="menu_option_archived">Ver arquivadas</string>
+  <string name="menu_option_unread">Ver não lidas</string>
+  <string name="error_occurred_in_picking_images">Ocorreu um erro ao escolher imagens</string>
+  <string name="image_chooser_title">Escolha imagens para fazer o carregamento</string>
+  <string name="please_wait">Aguarde…</string>
 </resources>

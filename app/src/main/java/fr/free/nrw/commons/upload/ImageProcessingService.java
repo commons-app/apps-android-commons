@@ -28,6 +28,7 @@ public class ImageProcessingService {
     private final ImageUtilsWrapper imageUtilsWrapper;
     private final MediaWikiApi mwApi;
     private final ReadFBMD readFBMD;
+
     @Inject
     public ImageProcessingService(FileUtilsWrapper fileUtilsWrapper,
                                   BitmapRegionDecoderWrapper bitmapRegionDecoderWrapper,
@@ -72,90 +73,100 @@ public class ImageProcessingService {
             return zip | fbmd;
         });
     }
+
     /**
-    * Other than the Image quality we need to check that using this Image doesn't violate's facebook's copyright's.
-    * Whenever a user tries to upload an image that was downloaded from Facebook then we warn the user with a message to stop the upload
-    * To know whether the Image is downloaded from facebook:
-    * -We read the metadata of any Image and check for FBMD
-    * -Facebook downloaded image's contains metadata of the type IPTC
-    * - From this IPTC metadata we extract a byte array that contains FBMD as it's initials. If the image was downloaded from facebook
-    * Thus we successfully protect common's from Facebook's copyright violation
-    * */
+     * Other than the Image quality we need to check that using this Image doesn't violate's facebook's copyright's.
+     * Whenever a user tries to upload an image that was downloaded from Facebook then we warn the user with a message to stop the upload
+     * To know whether the Image is downloaded from facebook:
+     * -We read the metadata of any Image and check for FBMD
+     * -Facebook downloaded image's contains metadata of the type IPTC
+     * - From this IPTC metadata we extract a byte array that contains FBMD as it's initials. If the image was downloaded from facebook
+     * Thus we successfully protect common's from Facebook's copyright violation
+     */
 
-        public Single<Integer> checkFBMD(String filePath){
-            try {
-                return readFBMD.processMetadata(filePath);
-            } catch (IOException e) {
-                return Single.just(ImageUtils.FILE_FBMD);
-            }
-        }
-
-
-        /**
-         * Checks item title
-         * - empty title
-         * - existing title
-         * @param uploadItem
-         * @return
-         */
-        private Single<Integer> validateItemTitle (UploadModel.UploadItem uploadItem){
-            Timber.d("Checking for image title %s", uploadItem.getTitle());
-            Title title = uploadItem.getTitle();
-            if (title.isEmpty()) {
-                return Single.just(EMPTY_TITLE);
-            }
-
-            return Single.fromCallable(() -> mwApi.fileExistsWithName(uploadItem.getFileName()))
-                    .map(doesFileExist -> {
-                        Timber.d("Result for valid title is %s", doesFileExist);
-                        return doesFileExist ? FILE_NAME_EXISTS : IMAGE_OK;
-                    });
-        }
-
-
-        /**
-         * Checks for duplicate image
-         * @param filePath file to be checked
-         * @return IMAGE_DUPLICATE or IMAGE_OK
-         */
-        private Single<Integer> checkDuplicateImage (String filePath){
-            Timber.d("Checking for duplicate image %s", filePath);
-            return Single.fromCallable(() ->
-                    fileUtilsWrapper.getFileInputStream(filePath))
-                    .map(fileUtilsWrapper::getSHA1)
-                    .map(mwApi::existingFile)
-                    .map(b -> {
-                        Timber.d("Result for duplicate image %s", b);
-                        return b ? ImageUtils.IMAGE_DUPLICATE : ImageUtils.IMAGE_OK;
-                    });
-        }
-
-        /**
-         * Checks for dark image
-         * @param filePath file to be checked
-         * @return IMAGE_DARK or IMAGE_OK
-         */
-        private Single<Integer> checkDarkImage (String filePath){
-            Timber.d("Checking for dark image %s", filePath);
-            return Single.fromCallable(() ->
-                    fileUtilsWrapper.getFileInputStream(filePath))
-                    .map(file -> bitmapRegionDecoderWrapper.newInstance(file, false))
-                    .flatMap(imageUtilsWrapper::checkIfImageIsTooDark);
-        }
-
-        /**
-         * Checks for image geolocation
-         * @param filePath file to be checked
-         * @return IMAGE_GEOLOCATION_DIFFERENT or IMAGE_OK
-         */
-        private Single<Integer> checkImageGeoLocation (Place place, String filePath){
-            Timber.d("Checking for image geolocation %s", filePath);
-            if (place == null || StringUtils.isNullOrWhiteSpace(place.getWikiDataEntityId())) {
-                return Single.just(ImageUtils.IMAGE_OK);
-            }
-            return Single.fromCallable(() -> filePath)
-                    .map(fileUtilsWrapper::getGeolocationOfFile)
-                    .flatMap(geoLocation -> imageUtilsWrapper.checkImageGeolocationIsDifferent(geoLocation, place.getLocation()));
+    public Single<Integer> checkFBMD(String filePath) {
+        try {
+            return readFBMD.processMetadata(filePath);
+        } catch (IOException e) {
+            return Single.just(ImageUtils.FILE_FBMD);
         }
     }
+
+
+    /**
+     * Checks item title
+     * - empty title
+     * - existing title
+     *
+     * @param uploadItem
+     * @return
+     */
+    private Single<Integer> validateItemTitle(UploadModel.UploadItem uploadItem) {
+        Timber.d("Checking for image title %s", uploadItem.getTitle());
+        Title title = uploadItem.getTitle();
+        if (title.isEmpty()) {
+            return Single.just(EMPTY_TITLE);
+        }
+
+        return Single.fromCallable(() -> mwApi.fileExistsWithName(uploadItem.getFileName()))
+                .map(doesFileExist -> {
+                    Timber.d("Result for valid title is %s", doesFileExist);
+                    return doesFileExist ? FILE_NAME_EXISTS : IMAGE_OK;
+                });
+    }
+
+    /**
+     * Checks for duplicate image
+     *
+     * @param filePath file to be checked
+     * @return IMAGE_DUPLICATE or IMAGE_OK
+     */
+    private Single<Integer> checkDuplicateImage(String filePath) {
+        Timber.d("Checking for duplicate image %s", filePath);
+        return Single.fromCallable(() ->
+                fileUtilsWrapper.getFileInputStream(filePath))
+                .map(fileUtilsWrapper::getSHA1)
+                .map(mwApi::existingFile)
+                .map(b -> {
+                    Timber.d("Result for duplicate image %s", b);
+                    return b ? ImageUtils.IMAGE_DUPLICATE : ImageUtils.IMAGE_OK;
+                });
+    }
+
+    /**
+     * Checks for dark image
+     *
+     * @param filePath file to be checked
+     * @return IMAGE_DARK or IMAGE_OK
+     */
+    private Single<Integer> checkDarkImage(String filePath) {
+        Timber.d("Checking for dark image %s", filePath);
+        return Single.fromCallable(() ->
+                fileUtilsWrapper.getFileInputStream(filePath))
+                .map(file -> bitmapRegionDecoderWrapper.newInstance(file, false))
+                .flatMap(imageUtilsWrapper::checkIfImageIsTooDark);
+    }
+
+    /**
+     * Checks for image geolocation
+     * returns IMAGE_OK if the place is null or if the file doesn't contain a geolocation
+     *
+     * @param filePath file to be checked
+     * @return IMAGE_GEOLOCATION_DIFFERENT or IMAGE_OK
+     */
+    private Single<Integer> checkImageGeoLocation(Place place, String filePath) {
+        Timber.d("Checking for image geolocation %s", filePath);
+        if (place == null || StringUtils.isNullOrWhiteSpace(place.getWikiDataEntityId())) {
+            return Single.just(ImageUtils.IMAGE_OK);
+        }
+        return Single.fromCallable(() -> filePath)
+                .map(fileUtilsWrapper::getGeolocationOfFile)
+                .flatMap(geoLocation -> {
+                    if (StringUtils.isNullOrWhiteSpace(geoLocation)) {
+                        return Single.just(ImageUtils.IMAGE_OK);
+                    }
+                    return imageUtilsWrapper.checkImageGeolocationIsDifferent(geoLocation, place.getLocation());
+                });
+    }
+}
 

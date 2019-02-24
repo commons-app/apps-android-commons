@@ -29,6 +29,7 @@ import android.widget.TextView;
 
 import java.io.IOException;
 import java.util.Locale;
+import java.util.Objects;
 
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -62,7 +63,6 @@ import static fr.free.nrw.commons.auth.AccountUtil.AUTH_TOKEN_TYPE;
 
 public class LoginActivity extends AccountAuthenticatorActivity {
 
-    public static final String PARAM_USERNAME = "fr.free.nrw.commons.login.username";
     private static final String FEATURED_IMAGES_CATEGORY = "Category:Featured_pictures_on_Wikimedia_Commons";
 
     @Inject MediaWikiApi mwApi;
@@ -387,10 +387,10 @@ public class LoginActivity extends AccountAuthenticatorActivity {
         super.onRestoreInstanceState(savedInstanceState);
         loginCurrentlyInProgress = savedInstanceState.getBoolean(LOGGING_IN, false);
         errorMessageShown = savedInstanceState.getBoolean(ERROR_MESSAGE_SHOWN, false);
-        if (loginCurrentlyInProgress){
+        if (loginCurrentlyInProgress) {
             performLogin();
         }
-        if (errorMessageShown){
+        if (errorMessageShown) {
             resultantError = savedInstanceState.getString(RESULTANT_ERROR);
             handleOtherResults(resultantError);
         }

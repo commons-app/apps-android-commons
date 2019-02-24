@@ -196,6 +196,7 @@
   <string name="_2fa_code">کد 2FA</string>
   <string name="number_of_uploads">محدودیت بارگذاری اخیر من</string>
   <string name="maximum_limit">حداکثر محدودیت</string>
+  <string name="invalid_input">ورودی نامعتبر</string>
   <string name="maximum_limit_alert">عدم توانایی در نمایش بیش از ۵۰۰ مورد</string>
   <string name="set_limit">تنظیم محدودیت بارگذاری‌های اخیر</string>
   <string name="login_failed_2fa_not_supported">تأیید دومرحله‌ای الان پشتیبانی نمی‌شود.</string>
@@ -255,7 +256,7 @@
   <string name="skip_login">رها کردن</string>
   <string name="navigation_item_login">ورود به سامانه</string>
   <string name="skip_login_title">آیا واقعا میخواهید وارد شوید؟</string>
-  <string name="skip_login_message" fuzzy="true">شما نمیتوانید تصاویر را آپلود کنید.</string>
+  <string name="skip_login_message">برای بارگذاری تصاویر در آینده شما باید وارد حساب کاربری خود شوید.</string>
   <string name="login_alert_message">لطفا برای استفاده از این ویژگی وارد شوید</string>
   <string name="copy_wikicode">از ویکی واژه به کلیپ برد کپی کنید.</string>
   <string name="nearby_location_has_not_changed">مکان تغییر نکرده‌است.</string>
@@ -342,5 +343,8 @@
   <string name="yes_submit">بله، ارسال شود</string>
   <string name="no_go_back">نه، به قبل بازگرد</string>
   <string name="upload_flow_all_images_in_set">(برای همهٔ تصاویر موجود در مجموعه)</string>
+  <string name="search_this_area">جستجوی این محدوده</string>
   <string name="error_processing_image">هنگام پردازش این تصویر خطایی رخ داد. لطفا دوباره سعی کنید!</string>
+  <string name="menu_option_unread">مشاهده خوانده نشده ها</string>
+  <string name="please_wait">لطفاً صبر کنید...</string>
 </resources>

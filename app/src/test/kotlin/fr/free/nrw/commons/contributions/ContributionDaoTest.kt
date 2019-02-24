@@ -108,15 +108,19 @@ class ContributionDaoTest {
     @Test
     fun migrateTableVersionFrom_v6_to_v7() {
         Table.onUpdate(database, 6, 7)
-        // Table didn't change in version 7
-        verifyZeroInteractions(database)
+        // Table has changed in version 7
+        inOrder(database) {
+            verify<SQLiteDatabase>(database).execSQL(Table.ADD_WIKI_DATA_ENTITY_ID_FIELD)
+        }
     }
 
     @Test
     fun migrateTableVersionFrom_v7_to_v8() {
         Table.onUpdate(database, 7, 8)
-        // Table didn't change in version 8
-        verifyZeroInteractions(database)
+        // Table has changed in version 8
+        inOrder(database) {
+            verify<SQLiteDatabase>(database).execSQL(Table.ADD_WIKI_DATA_ENTITY_ID_FIELD)
+        }
     }
 
     @Test

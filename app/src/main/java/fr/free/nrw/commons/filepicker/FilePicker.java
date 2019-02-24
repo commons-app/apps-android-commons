@@ -289,20 +289,20 @@ public class FilePicker implements Constants {
     }
 
     @Nullable
-    private static File takenCameraPicture(Context context) throws IOException, URISyntaxException {
+    private static UploadableFile takenCameraPicture(Context context) throws IOException, URISyntaxException {
         String lastCameraPhoto = PreferenceManager.getDefaultSharedPreferences(context).getString(KEY_LAST_CAMERA_PHOTO, null);
         if (lastCameraPhoto != null) {
-            return new File(lastCameraPhoto);
+            return new UploadableFile(new File(lastCameraPhoto));
         } else {
             return null;
         }
     }
 
     @Nullable
-    private static File takenCameraVideo(Context context) throws IOException, URISyntaxException {
+    private static UploadableFile takenCameraVideo(Context context) throws IOException, URISyntaxException {
         String lastCameraPhoto = PreferenceManager.getDefaultSharedPreferences(context).getString(KEY_LAST_CAMERA_VIDEO, null);
         if (lastCameraPhoto != null) {
-            return new File(lastCameraPhoto);
+            return new UploadableFile(new File(lastCameraPhoto));
         } else {
             return null;
         }
@@ -343,7 +343,7 @@ public class FilePicker implements Constants {
         }
     }
 
-    public static List<File> handleExternalImagesPicked(Intent data, Activity activity) {
+    public static List<UploadableFile> handleExternalImagesPicked(Intent data, Activity activity) {
         try {
             return getFilesFromGalleryPictures(data, activity);
         } catch (IOException e) {
@@ -406,7 +406,7 @@ public class FilePicker implements Constants {
     private static void onPictureReturnedFromDocuments(Intent data, Activity activity, @NonNull FilePicker.Callbacks callbacks) {
         try {
             Uri photoPath = data.getData();
-            File photoFile = PickedFiles.pickedExistingPicture(activity, photoPath);
+            UploadableFile photoFile = PickedFiles.pickedExistingPicture(activity, photoPath);
             callbacks.onImagesPicked(singleFileList(photoFile), FilePicker.ImageSource.DOCUMENTS, restoreType(activity));
 
             if (configuration(activity).shouldCopyPickedImagesToPublicGalleryAppFolder()) {
@@ -420,7 +420,7 @@ public class FilePicker implements Constants {
 
     private static void onPictureReturnedFromGallery(Intent data, Activity activity, @NonNull FilePicker.Callbacks callbacks) {
         try {
-            List<File> files = getFilesFromGalleryPictures(data, activity);
+            List<UploadableFile> files = getFilesFromGalleryPictures(data, activity);
             callbacks.onImagesPicked(files, FilePicker.ImageSource.GALLERY, restoreType(activity));
         } catch (Exception e) {
             e.printStackTrace();
@@ -428,20 +428,20 @@ public class FilePicker implements Constants {
         }
     }
 
-    private static List<File> getFilesFromGalleryPictures(Intent data, Activity activity) throws IOException {
-        List<File> files = new ArrayList<>();
+    private static List<UploadableFile> getFilesFromGalleryPictures(Intent data, Activity activity) throws IOException {
+        List<UploadableFile> files = new ArrayList<>();
         ClipData clipData = null;
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
             clipData = data.getClipData();
         }
         if (clipData == null) {
             Uri uri = data.getData();
-            File file = PickedFiles.pickedExistingPicture(activity, uri);
+            UploadableFile file = PickedFiles.pickedExistingPicture(activity, uri);
             files.add(file);
         } else {
             for (int i = 0; i < clipData.getItemCount(); i++) {
                 Uri uri = clipData.getItemAt(i).getUri();
-                File file = PickedFiles.pickedExistingPicture(activity, uri);
+                UploadableFile file = PickedFiles.pickedExistingPicture(activity, uri);
                 files.add(file);
             }
         }
@@ -460,8 +460,8 @@ public class FilePicker implements Constants {
                 revokeWritePermission(activity, Uri.parse(lastImageUri));
             }
 
-            File photoFile = FilePicker.takenCameraPicture(activity);
-            List<File> files = new ArrayList<>();
+            UploadableFile photoFile = FilePicker.takenCameraPicture(activity);
+            List<UploadableFile> files = new ArrayList<>();
             files.add(photoFile);
 
             if (photoFile == null) {
@@ -493,8 +493,8 @@ public class FilePicker implements Constants {
                 revokeWritePermission(activity, Uri.parse(lastVideoUri));
             }
 
-            File photoFile = FilePicker.takenCameraVideo(activity);
-            List<File> files = new ArrayList<>();
+            UploadableFile photoFile = FilePicker.takenCameraVideo(activity);
+            List<UploadableFile> files = new ArrayList<>();
             files.add(photoFile);
 
             if (photoFile == null) {
@@ -545,7 +545,7 @@ public class FilePicker implements Constants {
     public interface Callbacks {
         void onImagePickerError(Exception e, FilePicker.ImageSource source, int type);
 
-        void onImagesPicked(@NonNull List<File> imageFiles, FilePicker.ImageSource source, int type);
+        void onImagesPicked(@NonNull List<UploadableFile> imageFiles, FilePicker.ImageSource source, int type);
 
         void onCanceled(FilePicker.ImageSource source, int type);
     }

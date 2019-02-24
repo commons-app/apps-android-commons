@@ -191,7 +191,10 @@
   <string name="_2fa_code">2FA-kode</string>
   <string name="number_of_uploads">Grænse for mine seneste overførelser</string>
   <string name="maximum_limit">Maksimumgrænse</string>
+  <string name="invalid_zero">Nul er ikke gyldigt</string>
+  <string name="invalid_input">Ugyldig indtastning</string>
   <string name="maximum_limit_alert">Kan ikke vise mere end 500</string>
+  <string name="enter_valid">Angiv et gyldigt tal</string>
   <string name="set_limit">Angiv grænse for seneste overførelser</string>
   <string name="login_failed_2fa_not_supported">Tofaktorgodkendelse er ikke understøttet i øjeblikket.</string>
   <string name="logout_verification">Ønsker du at logge ud?</string>
@@ -311,6 +314,7 @@
   <string name="statistics">STATISTIKKER</string>
   <string name="statistics_thanks">Tak modtaget</string>
   <string name="statistics_featured">Udvalgte billeder</string>
+  <string name="statistics_wikidata_edits">Billeder via \"Steder i nærheden\"</string>
   <string name="level">NIVEAU</string>
   <string name="images_uploaded">Oplagte billeder</string>
   <string name="images_used_by_wiki">Billeder brugt</string>
@@ -356,5 +360,8 @@
   <string name="display_campaigns">Vis kampagner</string>
   <string name="no_image">Ingen billeder brugt</string>
   <string name="share_logs_using">Del logs ved hjælp af</string>
+  <string name="menu_option_archived">Vis arkiverede</string>
+  <string name="menu_option_unread">Vis ulæste</string>
+  <string name="error_occurred_in_picking_images">Der opstod en fejl under udvælgelse af billeder</string>
   <string name="please_wait">Vent venligst…</string>
 </resources>

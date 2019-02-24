@@ -1,5 +1,24 @@
 # Wikimedia Commons for Android
 
+## v2.10.1
+- Fixed "stuck before category selection screen" bug
+- Fixed notification taps
+- Fixed crash while uploading images
+- Fixed crash while loading contributions
+- Fixed sporadic issue with date image was taken
+
+## v2.10.0
+- Added option to search for places that need pictures in any location
+- Added coordinate check for images submitted via Nearby
+- Added news about ongoing campaigns
+- Easy retry for failed uploads
+- Javadocs for Nearby package
+- Optimized Nearby query for faster loading
+- Allow users to dismiss notifications
+- Various bugfixes for Explore, Notifications and Nearby
+- Fixed uploads getting stuck in "receiving shared content" phase
+- Fixed empty notifications bell icon in main screen
+
 ## v2.9.0
 - New main screen UI with Nearby tab
 - New upload UI and flow
