@@ -218,7 +218,7 @@ public class PlaceRenderer extends Renderer<Place> {
         distance.setText(place.distance);
 
 
-        icon.setImageURI(place.getSecondaryImageUrl());
+        icon.setImageResource(place.getLabel().getIcon());
 
         directionsButton.setOnClickListener(view -> {
             //Open map app at given position

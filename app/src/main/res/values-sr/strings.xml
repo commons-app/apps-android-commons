@@ -423,4 +423,7 @@
   <string name="no_image">Нема коришћених датотека</string>
   <string name="no_image_reverted">Нема враћених слика</string>
   <string name="no_image_uploaded">Нема отпремљених слика</string>
+  <string name="error_occurred_in_picking_images">Дошло је до грешке при избору слика</string>
+  <string name="image_chooser_title">Одабир слика за отпремање</string>
+  <string name="please_wait">Сачекајте…</string>
 </resources>

@@ -1,5 +1,7 @@
 package fr.free.nrw.commons.category;
 
+import android.support.annotation.NonNull;
+
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
@@ -109,8 +111,13 @@ public class CategoryImageUtils {
      * @param document
      * @return
      */
+    @NonNull
     private static String getCreator(Node document) {
-        return StringUtils.getParsedStringFromHtml(getMetaDataValue(document, "Artist"));
+        String artist = getMetaDataValue(document, "Artist");
+        if (StringUtils.isNullOrWhiteSpace(artist)) {
+            return "";
+        }
+        return StringUtils.getParsedStringFromHtml(artist);
     }
 
     /**
