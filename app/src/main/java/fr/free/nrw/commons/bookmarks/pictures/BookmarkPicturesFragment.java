@@ -173,12 +173,8 @@ public class BookmarkPicturesFragment extends DaggerFragment {
         }
     }
 
-    /**
-     * Handles the success scenario
-     * On first load, it initializes the grid view. On subsequent loads, it adds items to the adapter
-     * @param collection List of new Media to be displayed
-     */
-    private void handleSuccess(List<Media> collection) {
+    // Helper function for HandleSuccess
+    private void checkCollection(List<Media> collection){
         if (collection == null) {
             initErrorView();
             return;
@@ -188,6 +184,14 @@ public class BookmarkPicturesFragment extends DaggerFragment {
             return;
         }
 
+    }
+    /**
+     * Handles the success scenario
+     * On first load, it initializes the grid view. On subsequent loads, it adds items to the adapter
+     * @param collection List of new Media to be displayed
+     */
+    private void handleSuccess(List<Media> collection) {
+        checkCollection(collection);
         if (gridAdapter == null) {
             setAdapter(collection);
         } else {
