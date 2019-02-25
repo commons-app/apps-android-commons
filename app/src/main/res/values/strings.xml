@@ -238,7 +238,7 @@
   <string name="upload_image_too_dark">This picture is too dark, are you sure you want to upload it? Wikimedia Commons is only for pictures with encyclopedic value.</string>
   <string name="upload_image_blurry">This picture is blurry, are you sure you want to upload it? Wikimedia Commons is only for pictures with encyclopedic value.</string>
 
-  <string name="upload_problem_exist">Potential problems with this image :\n\n</string>
+  <string name="upload_problem_exist">Potential problems with this image :</string>
   <string name="upload_problem_image_dark">Image is too dark.</string>
   <string name="upload_problem_image_blurry">Image is blurry.</string>
   <string name="upload_problem_image_duplicate">Image is already on Commons.</string>
