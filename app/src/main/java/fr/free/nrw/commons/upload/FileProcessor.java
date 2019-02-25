@@ -82,6 +82,7 @@ public class FileProcessor implements SimilarImageDialogFragment.onResponse {
      * Find other images around the same location that were taken within the last 20 sec
      * @param similarImageInterface
      */
+    /*
     private void findOtherImages(SimilarImageInterface similarImageInterface) {
         Timber.d("filePath" + filePath);
 
@@ -124,7 +125,56 @@ public class FileProcessor implements SimilarImageDialogFragment.onResponse {
             }
         }
         haveCheckedForOtherImages = true; //Finished checking for other images
+    }*/
+
+    private void findOtherImages(SimilarImageInterface similarImageInterface) {
+        Timber.d("filePath" + filePath);
+
+        long timeOfCreation = new File(filePath).lastModified();//Time when the original image was created
+        File folder = new File(filePath.substring(0, filePath.lastIndexOf('/')));
+        File[] files = folder.listFiles();
+        Timber.d("folderTime Number:" + files.length);
+
+
+        for (File file : files) {
+            if (file.lastModified() - timeOfCreation <= (120 * 1000) && file.lastModified() - timeOfCreation >= -(120 * 1000)) {
+                //Make sure the photos were taken within 20seconds
+                Timber.d("fild date:" + file.lastModified() + " time of creation" + timeOfCreation);
+                tempImageObj = null;//Temporary GPSExtractor to extract coords from these photos
+                ParcelFileDescriptor descriptor = null;
+                try {
+                    descriptor = contentResolver.openFileDescriptor(Uri.fromFile(file), "r");
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                }
+                buildVersionChecker(descriptor, file);
+
+                if (tempImageObj != null) {
+                    Timber.d("not null fild EXIF" + tempImageObj.imageCoordsExists + " coords" + tempImageObj.getCoords());
+                    if (tempImageObj.getCoords() != null && tempImageObj.imageCoordsExists) {
+                        // Current image has gps coordinates and it's not current gps locaiton
+                        Timber.d("This filePath has image coords:" + file.getAbsolutePath());
+                        similarImageInterface.showSimilarImageFragment(filePath, file.getAbsolutePath());
+                        break;
+                    }
+                }
+            }
+        }
+        haveCheckedForOtherImages = true; //Finished checking for other images
     }
+
+    private void buildVersionChecker(ParcelFileDescriptor descriptor, File file) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            if (descriptor != null) {
+                tempImageObj = new GPSExtractor(descriptor.getFileDescriptor());
+            }
+        } else {
+            if (filePath != null) {
+                tempImageObj = new GPSExtractor(file.getAbsolutePath());
+            }
+        }
+    }
+
 
     /**
      * Initiates retrieval of image coordinates or user coordinates, and caching of coordinates.
