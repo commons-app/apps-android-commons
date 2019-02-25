@@ -149,17 +149,14 @@
   <string name="tutorial_1_text">Wikimedia Commons, Vikipedi\'de kullanılan resimlerin çoğunu barındırır.</string>
   <string name="tutorial_1_subtext">Resimleriniz dünyanın dört bir yanındaki insanlara eğitim vermeye yardımcı olur!</string>
   <string name="tutorial_2_text">Lütfen tamamen kendiniz çektiğiniz veya oluşturduğunuz resimleri yükleyin:</string>
-  <string name="tutorial_2_subtext">Doğal nesneler (çiçekler, hayvanlar, dağlar)\n- Faydalı nesneler (bisiklet, tren istasyonları)\n- Ünlü insanlar (belediye başkanınız, tanıştığınız Olimpik atletler)</string>
   <string name="tutorial_2_subtext_1">Doğal objeler (çiçekler, hayvanlar, dağlar)</string>
   <string name="tutorial_2_subtext_2">Kullanışlı objeler (bisikletler, tren istasyonları)</string>
   <string name="tutorial_2_subtext_3">Ünlü kişiler (belediye başkanınız, tanıştığınız Olimpik atletler)</string>
   <string name="tutorial_3_text">Lütfen şunları YÜKLEMEYİN:</string>
-  <string name="tutorial_3_subtext">- Öz çekimlerinizi ya da arkadaşlarınızın fotoğraflarını\n- İnternetten indirdiğiniz resimleri\n- Tescilli uygulamaların ekran görüntülerini</string>
   <string name="tutorial_3_subtext_1">Selfiler veya arkadaşlarınızın fotoğrafları</string>
   <string name="tutorial_3_subtext_2">İnternet\'ten indirdiğiniz fotoğraflar</string>
   <string name="tutorial_3_subtext_3">Özel mülk uygulamaların ekran görüntüleri</string>
   <string name="tutorial_4_text">Yüklenebileceklere örnekler:</string>
-  <string name="tutorial_4_subtext">- Başlık: Sydney Opera Binası\n- Tanım: Körfezin genelinden bakıldığında Sydney Opera Binası\n- Kategoriler: Sydney Opera Binası, batıdan Sydney Opera Binası</string>
   <string name="tutorial_4_subtext_1">Başlık: Sidney Opera Binası</string>
   <string name="tutorial_4_subtext_2">Açıklama: Sidney Opera Binası\'nın körfezin karşısından görünümü</string>
   <string name="tutorial_4_subtext_3">Kategoriler: Batıdan Sidney Opera Binası, Sidney Opera Binası uzaktan manzaraları</string>
@@ -187,11 +184,8 @@
   <string name="yes">Evet</string>
   <string name="no">Hayır</string>
   <string name="media_detail_title">Başlık</string>
-  <string name="media_detail_media_title">Medyanın başlığı</string>
   <string name="media_detail_description">Açıklama</string>
-  <string name="media_detail_description_explanation">Medya için yapılan tanımı/açıklamayı buraya yazınız. Açıklamanız uzun olabilir ve birden fazla satıra sığabilir. Umuyoruz ki güzel ve bilgilendirici olacaktır.</string>
   <string name="media_detail_author">Yazar</string>
-  <string name="media_detail_author_explanation">Seçkin resim yazarının kullanıcı adı buraya eklenir.</string>
   <string name="media_detail_uploaded_date">Yükleme tarihi</string>
   <string name="media_detail_license">Lisans</string>
   <string name="media_detail_coordinates">Koordinatlar</string>
@@ -363,7 +357,7 @@
   <string name="contributions_fragment">Katkılar</string>
   <string name="nearby_fragment">Yakınındakiler</string>
   <string name="notifications">Bildirimler</string>
-  <string name="archived_notifications">Bildirimler (arşivlenmiş)</string>
+  <string name="archived_notifications" fuzzy="true">Bildirimler (arşivlenmiş)</string>
   <string name="display_nearby_notification">Yakındaki bildirimi görüntüle</string>
   <string name="display_nearby_notification_summary">Resimlere en yakın yeri görmek için buraya dokunun</string>
   <string name="no_close_nearby">Size yakın bir yer bulunamadı</string>

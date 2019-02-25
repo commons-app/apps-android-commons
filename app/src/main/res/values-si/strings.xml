@@ -134,7 +134,6 @@
   <string name="yes">ඔව්</string>
   <string name="no">නැත</string>
   <string name="media_detail_title">මාතෘකාව</string>
-  <string name="media_detail_media_title">මෙම මාධ්‍ය අන්ගයේ මාතෘකාව</string>
   <string name="media_detail_description">විස්තරය</string>
   <string name="media_detail_uploaded_date">උඩුගත කර දිනය</string>
   <string name="media_detail_license">බලපත්‍රය</string>

@@ -141,17 +141,14 @@
   <string name="tutorial_1_text">ವಿಕಿಮೀಡಿಯಾ ಕಾಮನ್ಸ್ ವಿಕಿಪೀಡಿಯಟ್ ಬಲಕೆ ಮಾಲ್ಪೊಲಿ, ಮಸ್ತ್ ಪಟೊನ್ ಹೋಸ್ಟ್ ಮಾಲ್ಪೊಲಿ.</string>
   <string name="tutorial_1_subtext">ಜಗತ್ತಿನಾದ್ಯಂತೊ ಜನಕ್ಕುಲೆಗ್ ಶಿಕ್ಷಣ ಕೊರ್ಯರ ಇರೆನ ಚಿತ್ರೊ ಸಹಾಯ ಅಪುಂಡು!</string>
   <string name="tutorial_2_text">ಇರ್ ಸಂಪೂರ್ಣವಾತ್ ದೆತೊಂಡು ಅತ್ತಂದೆ ರಚನೆ ಅಯಿನ ಚಿತ್ರೊನ್ ಅಪ್ಲೋಡ್ ಮಾಲ್ಪುಲೆ:</string>
-  <string name="tutorial_2_subtext">ನೈಸರ್ಗಿಕ ವಸ್ತುಲು (ಪೂ, ಪ್ರಾಣಿಲು, ಪರ್ವತೊ).\n• ಉಪಯುಕ್ತ ವಸ್ತುಲು (ಸೈಕಲ್, ರೈಲು ನಿಲ್ದಾಣ).\n• ಪ್ರಸಿದ್ಧ ಜನಕ್ಕುಲು (ಇರೆನ ಮೇಯರ್, ಇರ್ ಭೇಟಿ ಮಾಲ್ತಿನ ಒಲಿಂಪಿಕ್ ಕ್ರೀಡಾಪಟುಲು).</string>
   <string name="tutorial_2_subtext_1">ನೈಸರ್ಗಿಕ ವಸ್ತುಲು (ಪೂ, ಪ್ರಾಣಿಲು, ಪರ್ವತೊ).</string>
   <string name="tutorial_2_subtext_2">ಉಪಯುಕ್ತ ವಸ್ತುಲು (ಸೈಕಲ್, ರೈಲು ನಿಲ್ದಾಣೊ).</string>
   <string name="tutorial_2_subtext_3">ಪ್ರಸಿದ್ಧ ಜನಕ್ಕುಲು (ಇರ್ ಮೇಯರ್, ಇರ್ ಭೇಟಿಯಾಯಿನ ಒಲಿಂಪಿಕ್ ಕ್ರೀಡಾಪಟುಲು).</string>
   <string name="tutorial_3_text">ದಯಮಾಲ್ತ್ ಅಪ್ಲೋಡ್ ಮಾಲ್ಪುನ ಬೊಡ್ಚಿ.</string>
-  <string name="tutorial_3_subtext">- ಇರೆನ ಜೋಸ್ತಿಲೆನ ಸ್ವಂತಿ ಚಿತ್ರೊ ಅತ್ತಂದೆ ಚಿತ್ರೊಲು.\n- ಇರೆನ ಇಂಟರ್ನೆಟ್ನ್‌ಡ್ತ್ ಡೌನ್ಲೋಡ್ ಮಾಲ್ತಿನ ಚಿತ್ರೊಲು.\n- ಸ್ವಾಮ್ಯತ ಅಪ್ಲಿಕೇಶನ್ ಪರದೆ.</string>
   <string name="tutorial_3_subtext_1">ಸ್ವಂತಿ ಚಿತ್ರೊ ಅತ್ತಂದೆ ಇರೆನ ಸ್ನೇಹಿತೆರೆನ ಚಿತ್ರೊ.</string>
   <string name="tutorial_3_subtext_2">ಇರ್ ಇಂಟರ್ನೆಟ್ನ್‌ಡ್ತ್ ಡೌನ್ಲೋಡ್ ಮಾಲ್ತಿನ ಚಿತ್ರೊಲು.</string>
   <string name="tutorial_3_subtext_3">ಸ್ಕ್ರೀನ್ ಶೋಟ್ ಮಾಲ್ಪುನ ಆಪ್ಯ್.</string>
   <string name="tutorial_4_text">ಮಾದರಿ ಅಪ್ಲೋಡ್:</string>
-  <string name="tutorial_4_subtext">- ಶೀರ್ಷಿಕೆ: ಸಿಡ್ನಿ ಒಪೇರಾ ಹೌಸ್\n- ವಿವರಣೆ: ಕೊಲ್ಲಿಟ್ ತೂಯಿನ ಸಿಡ್ನಿ ಒಪೇರಾ ಹೌಸ್\n- ವರ್ಗೊಲು: ಪಡ್ಡಾಯಿಡ್ತ್ ಸಿಡ್ನಿ ಒಪೆರಾ ಹೌಸ್, ಸಿಡ್ನಿ ಒಪೇರಾ ಹೌಸ್ ದೂರತ ವೀಕ್ಷಣೆ.</string>
   <string name="tutorial_4_subtext_1">ಶೀರ್ಷಿಕೆ: Sydney Opera House.</string>
   <string name="tutorial_4_subtext_2">ವಿವರಣೆ: Sydney Opera House as viewed from across the bay.</string>
   <string name="tutorial_4_subtext_3">ವರ್ಗೊಲು: Sydney Opera House from the west, Sydney Opera House remote views.</string>
@@ -180,11 +177,8 @@
   <string name="yes">ಅಂದ್</string>
   <string name="no">ಅತ್ತ್</string>
   <string name="media_detail_title">ತರೆಬರವು</string>
-  <string name="media_detail_media_title">ಮಾಧ್ಯಮೊತ ಪುದಾರ್.</string>
   <string name="media_detail_description">ವಿವರಣೆ</string>
-  <string name="media_detail_description_explanation">ಮಾಧ್ಯಮತ ವಿವರಣೆಗ್ ಮುಲ್ಪ ಪೊವೊಲಿ.  ಸಂಭವನೀಯವಾತ್ ಮಸ್ತ್ ಉದ್ದ ಉಂಡು, ಬುಕ್ಕ ಹೆಚ್ಚಿನ ಸಾಲುನ್  ಅಗತ್ಯ ಉಂಡು. ಉಂದು ಸೊಕ್ ತೊಜಿಯರ  ಸಹಾಯ ಅಪುಂಡು.</string>
   <string name="media_detail_author">ಬರೆತಿನಾರ್</string>
-  <string name="media_detail_author_explanation">ಭವಿಷ್ಯತ ಪಟೊ ಬುಕ್ಕೊ ಬರೆತಿನಾರ್, ಬಳಕೆದಾರೆರ್ ಉಪ್ಪುವೇರ್.</string>
   <string name="media_detail_uploaded_date">ಅಪ್ಲೋಡ್ ಮಾಲ್ತಿನ ತಾರೀಕ್.</string>
   <string name="media_detail_license">ಪರವಾನಿಗೆ</string>
   <string name="media_detail_coordinates">ಕಕ್ಷೆಲು</string>
@@ -372,7 +366,7 @@
   <string name="contributions_fragment">ಕಾಣಿಕೆಲು</string>
   <string name="nearby_fragment">ಕೈತಲ್‍ದ</string>
   <string name="notifications">ಅಧಿಸೂಚನೆಲು</string>
-  <string name="archived_notifications">ಅಧಿಸೂಚನೆಲು(ಅನುರಕ್ಷಿತ)</string>
+  <string name="archived_notifications" fuzzy="true">ಅಧಿಸೂಚನೆಲು(ಅನುರಕ್ಷಿತ)</string>
   <string name="display_nearby_notification">ಕೈತಲ್ದ ಅಧಿಸೂಚನೆ ತೋಜಾಲೆ</string>
   <string name="display_nearby_notification_summary">ಚಿತ್ರ ಬೋಡಾಯಿನ ಕೈತಲ್ದ ಜಾಗ ತೂವರೆ ಮುಲ್ಪ ತಟ್ಟ್\'ಲೆ</string>
   <string name="no_close_nearby">ಇರೆನ ಮುಟ್ಟೊಡು ಕೈತಲ್ದ ಜಾಗೊಲು ತಿಕ್ಕುಜಾ.</string>

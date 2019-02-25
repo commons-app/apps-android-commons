@@ -105,9 +105,7 @@
   <string name="yes">ھەئە</string>
   <string name="no">ياق</string>
   <string name="media_detail_title">ماۋزۇ</string>
-  <string name="media_detail_media_title">ۋاستە ماۋزۇسى</string>
   <string name="media_detail_description">چۈشەندۈرۈش</string>
-  <string name="media_detail_description_explanation">بۇ يەردە تولدۇرۇپ ، ئاخبارات ۋاستىلىرى توغرىسىدا ئىزاھات بەردى . بۇ بەلكىم خېلى ئۇزۇن ، ھەم كۆپ يۈككە مۇھتاج بولىدۇ . بىز ئۇ قارىماققا بەك ئۈمىد قىلىمەن .</string>
   <string name="media_detail_uploaded_date">ئۈستىگە يەتكۈزۈش چىسلاسى</string>
   <string name="media_detail_license">ئىجازەتنامە</string>
   <string name="media_detail_coordinates">كوئوردىناتلار</string>

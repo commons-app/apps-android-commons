@@ -136,7 +136,6 @@
   <string name="yes">Да</string>
   <string name="no">Не</string>
   <string name="media_detail_title">Заглавие</string>
-  <string name="media_detail_media_title">Заглавие на файла</string>
   <string name="media_detail_description">Описание</string>
   <string name="media_detail_author">Автор</string>
   <string name="media_detail_uploaded_date">Дата на качване</string>

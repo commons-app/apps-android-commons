@@ -135,12 +135,9 @@
   <string name="tutorial_1_text">Op Wikimedia Commons staan de meeste afbeeldingen die worden gebruikt in Wikipedia.</string>
   <string name="tutorial_1_subtext">Uw afbeeldingen helpen mensen over de hele wereld met kennis opdoen!</string>
   <string name="tutorial_2_text">Upload alstublieft alleen afbeeldingen die volledig door uzelf gemaakt zijn:</string>
-  <string name="tutorial_2_subtext" fuzzy="true">- Natuurlijke objecten (bloemen, dieren, bergen)\n- Nuttige objecten (fietsen, treinstations)\n- Beroemde mensen (uw burgemeester, Olympische atleten u hebt ontmoet)</string>
   <string name="tutorial_3_text">Gelieve NIET te uploaden:</string>
-  <string name="tutorial_3_subtext">- Selfies of foto\'s van uw vrienden\n- Foto\'s die u hebt gedownload van het Internet\n- Screenshots van eigen apps</string>
   <string name="tutorial_3_subtext_3">Schermfoto\'s van oorspronkelijke toepassingen</string>
   <string name="tutorial_4_text">Voorbeeld van een upload:</string>
-  <string name="tutorial_4_subtext" fuzzy="true">- Titel: Sydney Opera House\n- Beschrijving: het Sydney Opera House gezien vanaf de overkant van de baai\n- Categorieën: Sydney Opera House, Sydney Opera House from the west, Sydney Opera House remote views</string>
   <string name="welcome_wikipedia_text">Draag uw afbeelding bij. Help pagina\'s in Wikipedia tot leven te laten komen!</string>
   <string name="welcome_wikipedia_subtext">Afbeeldingen op Wikipedia komen van Wikimedia Commons.</string>
   <string name="welcome_copyright_text">Uw afbeeldingen helpen mensen van over de hele wereld te leren.</string>
@@ -161,11 +158,13 @@
   <string name="yes">Ja</string>
   <string name="no">Nee</string>
   <string name="media_detail_title">Titel</string>
-  <string name="media_detail_media_title">Titel van het bestand</string>
   <string name="media_detail_description">Beschrijving</string>
   <string name="media_detail_author">Auteur</string>
   <string name="media_detail_uploaded_date">Uploaddatum</string>
   <string name="_2fa_code">2FA-code</string>
+  <string name="invalid_zero">Kan niet nul zijn</string>
+  <string name="invalid_input">Ongeldige invoer</string>
+  <string name="enter_valid">Geldig cijfer invoeren</string>
   <string name="upload_image">Afbeelding plaatsen</string>
   <string name="welcome_image_no_selfies">Geen selfies</string>
   <string name="cancel">Annuleren</string>
@@ -243,5 +242,6 @@
   <string name="share_logs_using">Logboeken delen via</string>
   <string name="menu_option_archived">Gearchiveerd bekijken</string>
   <string name="menu_option_unread">Ongelezen bekijken</string>
+  <string name="image_chooser_title">Kies de afbeeldingen die u wilt plaatsen</string>
   <string name="please_wait">Een ogenblik geduld…</string>
 </resources>

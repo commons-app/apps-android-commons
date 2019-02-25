@@ -135,17 +135,14 @@
   <string name="tutorial_1_text">ვიკისაწყობი შეიცავს ვიკიპედიაში გამოყენებული სურათების უმრავლესობას.</string>
   <string name="tutorial_1_subtext">თქვენი სურათი დაეხმარება მოსახლეობის განათლებას მსოფლიოს ირგვლივ!</string>
   <string name="tutorial_2_text">გთხოვთ ატვირთოთ, მხოლოდ თქვენ მიერ გადაღებული ან შექმნილი სურათები:</string>
-  <string name="tutorial_2_subtext">- ბუნებრივი ობიექტები (ყვავილები, ცხოველები, მთები)\n- სასარგებლო ობიექტები (ველოსიპედები, მატარებლის სადგურები)\n- ცნობილი ადამიანები (თქვენი მერი, ოლიმპიელი სპორტსმენები რომელთაც შეხვედრიხართ)</string>
   <string name="tutorial_2_subtext_1">ბუნებრივი ობიექტები (ყვავილები, ცხოველები, მთები)</string>
   <string name="tutorial_2_subtext_2">სასარგებლო ობიექტები (ველოსიპედები, მატარებლის სადგურები)</string>
   <string name="tutorial_2_subtext_3">ცნობილი ადამიანები (თქვენი მერი, ოლიმპიელი ატლეტები რომლებსაც შეხვედრიხართ)</string>
   <string name="tutorial_3_text">გთხოვთ არ ატვირთოთ:</string>
-  <string name="tutorial_3_subtext">- სელფი ან მეგობრების სურათები\n- ინტერნეტიდან ჩამოტვირთული ფოტოები\n- არათავისუფალი აპლიკაციების სკრინშოტები</string>
   <string name="tutorial_3_subtext_1">სელფები ან თქვენი მეგობრების სურათები</string>
   <string name="tutorial_3_subtext_2">სურათები, რომლებიც თქვენ გადმოიწერეთ ინტერნეტიდან</string>
   <string name="tutorial_3_subtext_3">საკუთარი აპლიკაციის სკრინშოტი</string>
   <string name="tutorial_4_text">ატვირთვის ნიმუში:</string>
-  <string name="tutorial_4_subtext">- სათაური: სიდნეის ოპერის თეატრი\n- აღწერა: სიდნეის ოპერის თეატრის ხედი უბიდან\n- კატეგორიები: Sydney Opera House, Sydney Opera House from the west, Sydney Opera House remote views</string>
   <string name="tutorial_4_subtext_1">სათაური: სიდნეის ოპერის სახლი</string>
   <string name="tutorial_4_subtext_2">აღწერა: სიდნეის ოპერის სახლის ხედი ყურიდან</string>
   <string name="tutorial_4_subtext_3">კატეგორიები: Sydney Opera House from the west, Sydney Opera House remote views</string>
@@ -172,7 +169,6 @@
   <string name="yes">დიახ</string>
   <string name="no">არა</string>
   <string name="media_detail_title">სათაური</string>
-  <string name="media_detail_media_title">მედიაფაილის სათაური</string>
   <string name="media_detail_description">აღწერა</string>
   <string name="media_detail_author">ავტორი</string>
   <string name="media_detail_uploaded_date">ატვირთვის თარიღი</string>

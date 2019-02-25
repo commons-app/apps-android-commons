@@ -158,17 +158,14 @@
   <string name="tutorial_1_text">Wikimedia Commons héberge la plupart des images qui sont utilisées dans Wikipédia.</string>
   <string name="tutorial_1_subtext">Vos images aident à éduquer les gens dans le monde entier !</string>
   <string name="tutorial_2_text">Veuillez téléverser des images qui sont prises ou créées entièrement par vous :</string>
-  <string name="tutorial_2_subtext">Objets naturels (fleurs, animaux, montagnes) \n• Objets utiles (bicyclettes, gares ferroviaires) \n• Personnes célèbres (votre maire, les athlètes olympiques que vous avez rencontrés)</string>
   <string name="tutorial_2_subtext_1">Objets naturels (fleurs, animaux, montagnes)</string>
   <string name="tutorial_2_subtext_2">Objets utiles (vélos, gares)</string>
   <string name="tutorial_2_subtext_3">Personnes célèbres (votre maire, les athlètes olympiques que vous avez rencontrés)</string>
   <string name="tutorial_3_text">Veuillez ne PAS téléverser :</string>
-  <string name="tutorial_3_subtext">- des selfies ou des images de vos amis \n- des images téléchargées sur Internet\n- des copies d’écran d’applications propriétaires</string>
   <string name="tutorial_3_subtext_1">Auto-portraits ou photos de vos amis</string>
   <string name="tutorial_3_subtext_2">Images que vous avez téléchargées d\'Internet</string>
   <string name="tutorial_3_subtext_3">Captures d\'écran d\'applications propriétaires</string>
   <string name="tutorial_4_text">Exemple de téléversement :</string>
-  <string name="tutorial_4_subtext">- Titre : Opéra de Sydney\n- Description : L’opéra de Sydney vu depuis la baie\n- Catégories : Opéra de Sydney depuis l’ouest, vues à distance de l’Opéra de Sydney</string>
   <string name="tutorial_4_subtext_1">Titre : Opéra de Sydney</string>
   <string name="tutorial_4_subtext_2">Description: L\'Opéra de Sydney depuis la baie</string>
   <string name="tutorial_4_subtext_3">Catégories: Opéra de Sydney de l\'ouest,  Opéra de Sydney vues éloignées</string>
@@ -197,11 +194,8 @@
   <string name="yes">Oui</string>
   <string name="no">Non</string>
   <string name="media_detail_title">Titre</string>
-  <string name="media_detail_media_title">Titre du média</string>
   <string name="media_detail_description">Description</string>
-  <string name="media_detail_description_explanation">La description du média vient ici. Cela peut être potentiellement assez long, et devra être réparti sur plusieurs lignes. Nous espérons que cela restera joli néanmoins.</string>
   <string name="media_detail_author">Auteur</string>
-  <string name="media_detail_author_explanation">Le nom de l’auteur d’une image remarquable va ici.</string>
   <string name="media_detail_uploaded_date">Date de téléversement</string>
   <string name="media_detail_license">Licence</string>
   <string name="media_detail_coordinates">Coordonnées</string>
@@ -266,6 +260,7 @@
   <string name="upload_problem_image_blurry">L’image est floue.</string>
   <string name="upload_problem_image_duplicate">L\'image est déjà sur Commons.</string>
   <string name="upload_problem_different_geolocation">Cette image a été prise à un emplacement différent.</string>
+  <string name="upload_problem_fbmd">Veuillez ne téléverser que des images que vous avez prises vous-même. Ne téléversez pas d\'images prises sur les comptes Facebook d\'autres personnes.</string>
   <string name="upload_problem_do_you_continue">Voulez-vous tout de même téléverser cette image ?</string>
   <string name="give_permission">Accorder le droit</string>
   <string name="use_external_storage">Utiliser le stockage externe</string>

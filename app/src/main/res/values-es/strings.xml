@@ -155,17 +155,14 @@
   <string name="tutorial_1_text">Wikimedia Commons aloja la mayoría de las imágenes utilizadas en Wikipedia.</string>
   <string name="tutorial_1_subtext">¡Tus imágenes ayudan a instruir a personas de todo el mundo!</string>
   <string name="tutorial_2_text">Carga únicamente imágenes capturadas o creadas por ti.</string>
-  <string name="tutorial_2_subtext">Objetos naturales (flores, animales, montañas)\n• Objetos útiles (bicicletas, estaciones de tren)\n• Personas famosas (tu alcalde, algún atleta olímpico que conociste)</string>
   <string name="tutorial_2_subtext_1">Naturaleza (flores, animales, montañas)</string>
   <string name="tutorial_2_subtext_2">Objetos utilitarios (bicicletas, estaciones de tren)</string>
   <string name="tutorial_2_subtext_3">Gente famosa (tu regente, algún atleta que hayas conocido…)</string>
   <string name="tutorial_3_text">NO cargues:</string>
-  <string name="tutorial_3_subtext">- Autorretratos o fotos de tus amigos\n- Imágenes que hayas descargado de Internet\n- Capturas de pantalla de aplicaciones privativas</string>
   <string name="tutorial_3_subtext_1">Autorretratos o fotos de tus amigos</string>
   <string name="tutorial_3_subtext_2">Imágenes descargadas de Internet</string>
   <string name="tutorial_3_subtext_3">Capturas de pantalla de aplicaciones privativas</string>
   <string name="tutorial_4_text">Ejemplo de carga:</string>
-  <string name="tutorial_4_subtext">- Título: Casa de la Ópera de Sídney\n- Descripción: Casa de la Ópera de Sídney vista desde el otro lado de la bahía\n- Categorías: Casa de la Ópera de Sídney desde el oeste, Vistas a distancia de la Casa de la Ópera de Sídney</string>
   <string name="tutorial_4_subtext_1">Título: Ópera de Sídney</string>
   <string name="tutorial_4_subtext_2">Descripción: La Ópera de Sídney, vista desde el otro lado de la bahía</string>
   <string name="tutorial_4_subtext_3">Categorías: Ópera de Sídney desde el oeste, Vistas a distancia de la Ópera de Sídney</string>
@@ -194,11 +191,8 @@
   <string name="yes">Sí</string>
   <string name="no">No</string>
   <string name="media_detail_title">Título</string>
-  <string name="media_detail_media_title">Título del multimedia</string>
   <string name="media_detail_description">Descripción</string>
-  <string name="media_detail_description_explanation">Aquí va la descripción del archivo multimedia. Esta puede ser muy extensa, en cuyo caso deberá ajustarse en varios renglones. No obstante, esperamos que se vea bien.</string>
   <string name="media_detail_author">Autor</string>
-  <string name="media_detail_author_explanation">El usuario del autor de la imagen mencionada va aquí.</string>
   <string name="media_detail_uploaded_date">Fecha de subida</string>
   <string name="media_detail_license">Licencia</string>
   <string name="media_detail_coordinates">Coordenadas</string>
@@ -381,7 +375,7 @@
   <string name="contributions_fragment">Contribuciones</string>
   <string name="nearby_fragment">Cercanos</string>
   <string name="notifications">Notificaciones</string>
-  <string name="archived_notifications">Notificaciones (archivadas)</string>
+  <string name="archived_notifications" fuzzy="true">Notificaciones (archivadas)</string>
   <string name="display_nearby_notification">Mostrar notificaciones de cercanía</string>
   <string name="display_nearby_notification_summary">Toca aquí para ver el lugar más cercano que necesita fotos</string>
   <string name="no_close_nearby">No se encontraron lugares cercanos cerca de ti</string>

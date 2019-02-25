@@ -148,10 +148,8 @@
   <string name="yes">Iya</string>
   <string name="no">Ora</string>
   <string name="media_detail_title">Sesirah</string>
-  <string name="media_detail_media_title">Sesirahé médhia</string>
   <string name="media_detail_description">Wedharan</string>
   <string name="media_detail_author">Kang ngripta</string>
-  <string name="media_detail_author_explanation">Jeneng kang ngripta gambar pilihan kapacak ing kéné.</string>
   <string name="media_detail_uploaded_date">Tanggal ngunggah</string>
   <string name="media_detail_license">Lisènsi</string>
   <string name="media_detail_coordinates">Koordhinat</string>

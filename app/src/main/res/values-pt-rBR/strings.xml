@@ -150,17 +150,14 @@
   <string name="tutorial_1_text">Wikimedia Commons hospeda a maioria das imagens que são usadas na Wikipedia</string>
   <string name="tutorial_1_subtext">Suas imagens ajudam a educar as pessoas ao redor do mundo!</string>
   <string name="tutorial_2_text">Carregue as fotografias tiradas ou criadas inteiramente por você:</string>
-  <string name="tutorial_2_subtext">• Objetos naturais (flores, animais, montanhas)\n• Objetos úteis (bicicletas, estações de trem)\n• Pessoas famosas (seu prefeito, atletas olímpicos que você conheceu)</string>
   <string name="tutorial_2_subtext_1">Objetos naturais (flores, animais, montanhas)</string>
   <string name="tutorial_2_subtext_2">Objetos úteis (bicicletas, estações de trem)</string>
   <string name="tutorial_2_subtext_3">Pessoas famosas (seu prefeito, atletas olímpicos que conheceu)</string>
   <string name="tutorial_3_text">Por favor NÃO carregue:</string>
-  <string name="tutorial_3_subtext">- Selfies ou fotos de seus amigos\n- Imagens que você baixou da Internet\n- Imagens de aplicativos proprietários</string>
   <string name="tutorial_3_subtext_1">Autorretratos ou fotos de seus amigos</string>
   <string name="tutorial_3_subtext_2">Imagens que você baixou da Internet</string>
   <string name="tutorial_3_subtext_3">Capturas de tela de aplicativos proprietários</string>
   <string name="tutorial_4_text">Exemplo de upload:</string>
-  <string name="tutorial_4_subtext">- Título: Ópera de Sydney\n- Descrição: Ópera de Sydney como visto de toda a baía\n- =Categorias: =Ópera de Sydney, =Ópera de Sydney a partir do oeste, Ópera de Sydney vistas remotas</string>
   <string name="tutorial_4_subtext_1">Título: Ópera de Sydney</string>
   <string name="tutorial_4_subtext_2">Descrição: Ópera de Sydney como visto do outro lado da baía</string>
   <string name="tutorial_4_subtext_3">Categorias: Teatro da Ópera de Sydney a partir do oeste, visões remotas da Ópera de Sydney</string>
@@ -189,11 +186,8 @@
   <string name="yes">Sim</string>
   <string name="no">Não</string>
   <string name="media_detail_title">Título</string>
-  <string name="media_detail_media_title">Título da mídia</string>
   <string name="media_detail_description">Descrição</string>
-  <string name="media_detail_description_explanation">Descrição da mídia aqui. Isso pode ser potencialmente longo e precisará envolver múltiplas linhas. Esperamos que seja agradável.</string>
   <string name="media_detail_author">Autor</string>
-  <string name="media_detail_author_explanation">O nome de usuário do autor da imagem destacada fica aqui.</string>
   <string name="media_detail_uploaded_date">Data de envio.</string>
   <string name="media_detail_license">Licença</string>
   <string name="media_detail_coordinates">Coordenadas</string>

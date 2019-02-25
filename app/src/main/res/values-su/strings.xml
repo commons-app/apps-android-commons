@@ -139,17 +139,14 @@
   <string name="tutorial_1_text">Wikimedia Commons ngimahan ampir sakabéh gambar anu dipaké di Wikipédia.</string>
   <string name="tutorial_1_subtext">Gambar-gambar anjeun ngabantu ngatik jalma di sakuliah dunya!</string>
   <string name="tutorial_2_text">Mangga unjalkeun gambar-gambar jieunan anjeun:</string>
-  <string name="tutorial_2_subtext">Obyék alam (kekembangan, sasatoan, gunung)\n• Obyék anu mangpaat (sapédah, stasiun karéta)\n• Jalma sohor/inohong (bupati di kabupatén anjeun, atlét Olimpiade anu kungsi tepung)</string>
   <string name="tutorial_2_subtext_1">Obyék alam (kekembangan, sasatoan, gugunungan)</string>
   <string name="tutorial_2_subtext_2">Obyék anu mangpaat (sapédah, stasiun karéta)</string>
   <string name="tutorial_2_subtext_3">Jalma sohor/inohong (bupati di kabupatén anjeun, atlét Olimpiade anu kungsi tepung)</string>
   <string name="tutorial_3_text">Wayahna ULAH ngunjal:</string>
-  <string name="tutorial_3_subtext">- Sélpi atawa poto sobat anjeun\n- Poto anu diundeur ti Internét\n- Poto layar aplikasi</string>
   <string name="tutorial_3_subtext_1">Swapoto atawa poto babaturan</string>
   <string name="tutorial_3_subtext_2">Poto unduhan ti Internét</string>
   <string name="tutorial_3_subtext_3">Téwakan layar aplikasi</string>
   <string name="tutorial_4_text">Conto unjalan:</string>
-  <string name="tutorial_4_subtext">- Judul: Gedong Opera Sydney\n- Pedaran: Gedong Opera Sydney (Sydney Opera House) ditempo ti basisir peuntas\n- Kategori: Sydney Opera House from the west, Sydney Opera House remote views</string>
   <string name="tutorial_4_subtext_1">Judul: Rumah Opera Sydney</string>
   <string name="tutorial_4_subtext_2">Pedaran: Gedong Opera Sydney (Sydney Opera House) ditempo ti basisir peuntas</string>
   <string name="tutorial_4_subtext_3">Kategori: Sydney Opera House from the west, Sydney Opera House remote views</string>
@@ -175,9 +172,7 @@
   <string name="yes">Nya</string>
   <string name="no">Henteu</string>
   <string name="media_detail_title">Judul</string>
-  <string name="media_detail_media_title">Judul berkas</string>
   <string name="media_detail_description">Déskripsi</string>
-  <string name="media_detail_description_explanation">Pedaran berkas nyangkaruk didieu. Bisa jadi matak ngalikakeun, sarta ngempladkeun kana sawatara baris. Sanajan kitu, muga bisa katémbong écés.</string>
   <string name="media_detail_author">Pangarang</string>
   <string name="media_detail_uploaded_date">Tanggal ngunjal</string>
   <string name="media_detail_license">Lisénsi</string>

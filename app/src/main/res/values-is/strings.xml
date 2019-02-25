@@ -137,17 +137,14 @@
   <string name="tutorial_1_text">Wikimedia Commons hýsir mest af því myndefni sem notað er á Wikipedia.</string>
   <string name="tutorial_1_subtext">Myndirnar þínar hjálpa fólki um allan heim að læra!</string>
   <string name="tutorial_2_text">Sendu inn myndir sem þú hefur tekið eða sem eru algerlega eftir þig sjálfa(n):</string>
-  <string name="tutorial_2_subtext">- Náttúruleg fyrirbæri (blóm, dýr, fjöll)\n• Notadrjúgir hlutir (reiðhjól, lestarstöðvar)\n• Frægt fólk (sveitarstjórinn þinn, ólympíufarar sem þú hefur hitt)</string>
   <string name="tutorial_2_subtext_1">Náttúruleg fyrirbæri (blóm, dýr, fjöll)</string>
   <string name="tutorial_2_subtext_2">Notadrjúgir hlutir (reiðhjól, lestarstöðvar)</string>
   <string name="tutorial_2_subtext_3">Frægt fólk (sveitarstjórinn þinn, ólympíufarar sem þú hefur hitt)</string>
   <string name="tutorial_3_text">EKKI senda inn:</string>
-  <string name="tutorial_3_subtext">- Sjálfsmyndir eða myndir af vinum þínum\n- Myndir sem þú náðir í á Internetinu\n- Skjámyndir af séreignahugbúnaði</string>
   <string name="tutorial_3_subtext_1">Sjálfsmyndir eða myndir af vinum þínum</string>
   <string name="tutorial_3_subtext_2">Myndir sem þú náðir í á Internetinu</string>
   <string name="tutorial_3_subtext_3">Skjámyndir af séreignahugbúnaði</string>
   <string name="tutorial_4_text">Dæmi um innsent efni:</string>
-  <string name="tutorial_4_subtext">- Titill: Óperuhúsið í Sydney\n- Lýsing: Óperuhúsið í Sydney séð að handan yfir flóann\n- Flokkar: Óperuhúsið í Sydney séð úr vestri, Óperuhúsið í Sydney séð úr fjarlægð</string>
   <string name="tutorial_4_subtext_1">Titill: Óperuhúsið í Sydney</string>
   <string name="tutorial_4_subtext_2">Lýsing: Óperuhúsið í Sydney séð að handan yfir flóann</string>
   <string name="tutorial_4_subtext_3">Flokkar: Óperuhúsið í Sydney séð úr vestri, Óperuhúsið í Sydney séð úr fjarlægð</string>
@@ -176,11 +173,8 @@
   <string name="yes">Já</string>
   <string name="no">Nei</string>
   <string name="media_detail_title">Titill</string>
-  <string name="media_detail_media_title">Titill þessa gagnamiðils</string>
   <string name="media_detail_description">Lýsing</string>
-  <string name="media_detail_description_explanation">Lýsing á gagnamiðlinum kemur hér. Þetta má vera nokkuð langt og mun þurfa að skríða yfir nokkrar línur. Við vonum að þetta líti samt þokkalega út.</string>
   <string name="media_detail_author">Höfundur</string>
-  <string name="media_detail_author_explanation">Nafn höfundar myndarinnar kemur hér.</string>
   <string name="media_detail_uploaded_date">Sent inn þann</string>
   <string name="media_detail_license">Notkunarleyfi</string>
   <string name="media_detail_coordinates">Hnit</string>
@@ -190,7 +184,11 @@
   <string name="_2fa_code">2FA-kóði</string>
   <string name="number_of_uploads">Nýleg sendingartakmörk mín</string>
   <string name="maximum_limit">Hámark</string>
+  <string name="invalid_zero">Núll er ekki gjaldgengt</string>
+  <string name="invalid_input">Ógilt inntak</string>
   <string name="maximum_limit_alert">Get ekki birt fleiri en 500</string>
+  <string name="enter_valid">Settu inn gilda tölu</string>
+  <string name="cannot_be_zero">Mork innsendinga geta ekki verið 0</string>
   <string name="set_limit">Setja nýleg sendingartakmörk mín</string>
   <string name="login_failed_2fa_not_supported">Tveggja-þrepa auðkenning er ekki studd í augnablikinu.</string>
   <string name="logout_verification">Viltu í alvörunni skrá þig út?</string>
@@ -344,6 +342,7 @@
   <string name="statistics">TÖLFRÆÐI</string>
   <string name="statistics_thanks">Mótteknar þakkir</string>
   <string name="statistics_featured">Áberandi myndir</string>
+  <string name="statistics_wikidata_edits">Myndir gegnum \"Nálægir staðir\"</string>
   <string name="level">STIG</string>
   <string name="images_uploaded">Myndir sendar inn</string>
   <string name="image_reverts">Myndir ekki hafnað</string>
@@ -363,6 +362,7 @@
   <string name="contributions_fragment">Framlög</string>
   <string name="nearby_fragment">Nálægt</string>
   <string name="notifications">Tilkynningar</string>
+  <string name="archived_notifications" fuzzy="true">Tilkynningar (í geymslu)</string>
   <string name="display_nearby_notification">Birta tilkynningu um nágrenni</string>
   <string name="display_nearby_notification_summary">Ýttu hér til að sjá nálægasta staðinn sem þarfnast mynda</string>
   <string name="no_close_nearby">Engir staðir fundust í nágrenninu</string>
@@ -419,9 +419,14 @@
   <string name="display_location_permission_title">Birta heimild um staðsetningu</string>
   <string name="display_location_permission_explanation">Biðja um heimild til að sjá staðsetningu þegar þess er þörf fyrir tilkynningaspjald um næsta nágrenni.</string>
   <string name="ends_on">Endar þann:</string>
+  <string name="display_campaigns">Birta herferðir</string>
+  <string name="display_campaigns_explanation">Ýttu hér til að sjá yfirstandandi herferðir</string>
   <string name="no_image">Enagar myndir notaðar</string>
+  <string name="no_image_reverted">Engar myndir endurstilltar</string>
   <string name="no_image_uploaded">Engar myndir sendar inn</string>
   <string name="no_notification">Þú ert ekki með neinar ólesnar tilkynningar</string>
+  <string name="menu_option_archived">Skoða í geymslu</string>
+  <string name="menu_option_unread">Skoða ólesið</string>
   <string name="error_occurred_in_picking_images">Villa kom upp við að velja myndir</string>
   <string name="image_chooser_title">Veldu myndir til að senda inn</string>
   <string name="please_wait">Bíddu aðeins…</string>

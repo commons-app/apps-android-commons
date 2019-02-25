@@ -143,15 +143,12 @@
   <string name="tutorial_1_text">A Wikimédia Commons tárolja a Wikipédián használt képek többségét.</string>
   <string name="tutorial_1_subtext">A képeid segítik az ismeretterjesztést az egész világon!</string>
   <string name="tutorial_2_text">Kérjük, tölts fel képeket, amelyeket teljes mértékben te fotóztál vagy készítettél:</string>
-  <string name="tutorial_2_subtext">Természeti tárgyak (virágok, állatok, hegyek)\n• Hasznos tárgyak (kerékpárok, vasútállomások)\n• Híres emberek (a polgármestered, olimpikonok, akikkel találkoztál)</string>
   <string name="tutorial_2_subtext_1">Természeti tárgyak (virágok, állatok, hegyek)</string>
   <string name="tutorial_2_subtext_2">Hasznos tárgyak (kerékpárok, vasútállomások)</string>
   <string name="tutorial_2_subtext_3">Híres emberek (a polgármestered, olimpikonok, akikkel találkoztál)</string>
   <string name="tutorial_3_text">Kérjük, NE tölts fel:</string>
-  <string name="tutorial_3_subtext">- Szelfiket vagy képeket a barátaidról\n- Internetröl letöltött képeket\n- Kereskedelmi alkalmazások képernyőképeit</string>
   <string name="tutorial_3_subtext_2">Az Internetről letöltött képek</string>
   <string name="tutorial_4_text">Példa feltöltés:</string>
-  <string name="tutorial_4_subtext">- Cím: Sydney-i Operaház\n- Leírás: A Sydney-i Operaház az öböl túlpartjáról\n- Kategóriák: Sydney Opera House from the west, Sydney Opera House remote views</string>
   <string name="tutorial_4_subtext_1">Cím: Sydney-i Operaház</string>
   <string name="welcome_wikipedia_text">Tedd közzé a képeidet! Segíts életre kelteni a Wikipédia-szócikkeket!</string>
   <string name="welcome_wikipedia_subtext">A Wikipédián található képek a Wikimédia Commonsből származnak.</string>
@@ -175,9 +172,7 @@
   <string name="yes">Igen</string>
   <string name="no">Nem</string>
   <string name="media_detail_title">Cím</string>
-  <string name="media_detail_media_title">Média címe</string>
   <string name="media_detail_description">Leírás</string>
-  <string name="media_detail_description_explanation">A média leírása kerül ide. Ez akár egészen hosszú is lehet, és több sorba fog kerülni. Azért reméljük, jól néz majd ki.</string>
   <string name="media_detail_author">Szerző</string>
   <string name="media_detail_uploaded_date">Feltöltési dátum</string>
   <string name="media_detail_license">Licenc</string>
