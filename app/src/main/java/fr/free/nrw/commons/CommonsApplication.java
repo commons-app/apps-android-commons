@@ -70,9 +70,11 @@ public class CommonsApplication extends Application {
 
     public static final String FEEDBACK_EMAIL = "commons-app-android@googlegroups.com";
 
-    public static final String FEEDBACK_EMAIL_SUBJECT = "Commons Android App (%s) Feedback";
+    public static final String FEEDBACK_EMAIL_SUBJECT = "Commons Android App Feedback";
 
     public static final String NOTIFICATION_CHANNEL_ID_ALL = "CommonsNotificationAll";
+
+    public static final String FEEDBACK_EMAIL_TEMPLATE_HEADER = "-- Technical information --";
 
     /**
      * Constants End
