@@ -183,6 +183,7 @@ public class PlaceRenderer extends Renderer<Place> {
             }
         });
     }
+
     @Override
     protected void hookListeners(View view) {
 
@@ -205,95 +206,7 @@ public class PlaceRenderer extends Renderer<Place> {
         hookListenersHandleBookmarkButton();
 
     }
-    /*
-    @Override
-    protected void hookListeners(View view) {
 
-        final View.OnClickListener listener = view12 -> {
-            Timber.d("Renderer clicked");
-            TransitionManager.beginDelayedTransition(buttonLayout);
-
-            if (buttonLayout.isShown()) {
-                closeLayout(buttonLayout);
-            } else {
-                openLayout(buttonLayout);
-            }
-
-        };
-        view.setOnClickListener(listener);
-        view.requestFocus();
-        view.setOnFocusChangeListener((view1, hasFocus) -> {
-            if (!hasFocus && buttonLayout.isShown()) {
-                closeLayout(buttonLayout);
-            } else if (hasFocus && !buttonLayout.isShown()) {
-                listener.onClick(view1);
-            }
-        });
-
-        cameraButton.setOnClickListener(view2 -> {
-            if (applicationKvStore.getBoolean("login_skipped", false)) {
-                // prompt the user to login
-                new AlertDialog.Builder(getContext())
-                        .setMessage(R.string.login_alert_message)
-                        .setPositiveButton(R.string.login, (dialog, which) -> {
-                            startActivityWithFlags( getContext(), LoginActivity.class, Intent.FLAG_ACTIVITY_CLEAR_TOP,
-                                    Intent.FLAG_ACTIVITY_SINGLE_TOP);
-                            prefs.putBoolean("login_skipped", false);
-                            fragment.getActivity().finish();
-                        })
-                        .show();
-            } else {
-                Timber.d("Camera button tapped. Image title: " + place.getName() + "Image desc: " + place.getLongDescription());
-                storeSharedPrefs();
-                controller.initiateCameraPick(fragment.getActivity());
-            }
-        });
-
-
-        galleryButton.setOnClickListener(view3 -> {
-            if (applicationKvStore.getBoolean("login_skipped", false)) {
-                // prompt the user to login
-                new AlertDialog.Builder(getContext())
-                        .setMessage(R.string.login_alert_message)
-                        .setPositiveButton(R.string.login, (dialog, which) -> {
-                            startActivityWithFlags( getContext(), LoginActivity.class, Intent.FLAG_ACTIVITY_CLEAR_TOP,
-                                    Intent.FLAG_ACTIVITY_SINGLE_TOP);
-                            prefs.putBoolean("login_skipped", false);
-                            fragment.getActivity().finish();
-                        })
-                        .show();
-            }else {
-                Timber.d("Gallery button tapped. Image title: " + place.getName() + "Image desc: " + place.getLongDescription());
-                storeSharedPrefs();
-                controller.initiateGalleryPick(fragment.getActivity(), false);
-            }
-        });
-
-        bookmarkButton.setOnClickListener(view4 -> {
-            if (applicationKvStore.getBoolean("login_skipped", false)) {
-                // prompt the user to login
-                new AlertDialog.Builder(getContext())
-                        .setMessage(R.string.login_alert_message)
-                        .setPositiveButton(R.string.login, (dialog, which) -> {
-                            startActivityWithFlags( getContext(), LoginActivity.class, Intent.FLAG_ACTIVITY_CLEAR_TOP,
-                                    Intent.FLAG_ACTIVITY_SINGLE_TOP);
-                            prefs.putBoolean("login_skipped", false);
-                            fragment.getActivity().finish();
-                        })
-                        .show();
-            } else {
-                boolean isBookmarked = bookmarkLocationDao.updateBookmarkLocation(place);
-                int icon = isBookmarked ? R.drawable.ic_round_star_filled_24px : R.drawable.ic_round_star_border_24px;
-                bookmarkButtonImage.setImageResource(icon);
-                if (onBookmarkClick != null) {
-                    onBookmarkClick.onClick();
-                }
-                else {
-                    ((NearbyMapFragment)((NearbyFragment)((NearbyListFragment)fragment).getParentFragment()).getChildFragmentManager().findFragmentByTag(NearbyMapFragment.class.getSimpleName())).updateMarker(isBookmarked, place);
-                }
-            }
-        });
-    }*/
 
     private void storeSharedPrefs() {
         Timber.d("Store place object %s", place.toString());
