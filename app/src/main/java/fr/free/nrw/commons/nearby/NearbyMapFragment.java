@@ -490,7 +490,9 @@ public class NearbyMapFragment extends DaggerFragment {
             }
         });
     }
-
+    /*
+     * Sets click listeners of FABs, and 2 bottom sheets
+     */
     private void setListeners() {
 
         setListenersHandleFabPlus();
@@ -527,128 +529,8 @@ public class NearbyMapFragment extends DaggerFragment {
         });
     }
 
-    /**
-     * Sets click listeners of FABs, and 2 bottom sheets
-     */
-    /*
-    private void setListeners() {
-        fabPlus.setOnClickListener(view -> {
-            if (applicationKvStore.getBoolean("login_skipped", false)) {
-                // prompt the user to login
-                new AlertDialog.Builder(getContext())
-                        .setMessage(R.string.login_alert_message)
-                        .setPositiveButton(R.string.login, (dialog, which) -> {
-                            // logout of the app
-                            BaseLogoutListener logoutListener = new BaseLogoutListener();
-                            CommonsApplication app = (CommonsApplication) getActivity().getApplication();
-                            app.clearApplicationData(getContext(), logoutListener);
 
-                        })
-                        .show();
-            }else {
-                animateFAB(isFabOpen);
-            }
-        });
 
-        bottomSheetDetails.setOnClickListener(view -> {
-            if (bottomSheetDetailsBehavior.getState() == BottomSheetBehavior.STATE_COLLAPSED) {
-                bottomSheetDetailsBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
-            } else {
-                bottomSheetDetailsBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
-            }
-        });
-
-        fabRecenter.setOnClickListener(view -> {
-            if (curLatLng != null) {
-                mapView.getMapAsync(mapboxMap -> {
-                    CameraPosition position;
-
-                    if (ViewUtil.isPortrait(getActivity())){
-                        position = new CameraPosition.Builder()
-                                .target(isBottomListSheetExpanded ?
-                                        new LatLng(curLatLng.getLatitude()- CAMERA_TARGET_SHIFT_FACTOR_PORTRAIT,
-                                                curLatLng.getLongitude())
-                                        : new LatLng(curLatLng.getLatitude(), curLatLng.getLongitude(), 0)) // Sets the new camera position
-                                .zoom(isBottomListSheetExpanded ?
-                                        ZOOM_LEVEL
-                                        :mapboxMap.getCameraPosition().zoom) // Same zoom level
-                                .build();
-                    }else {
-                        position = new CameraPosition.Builder()
-                                .target(isBottomListSheetExpanded ?
-                                        new LatLng(curLatLng.getLatitude()- CAMERA_TARGET_SHIFT_FACTOR_LANDSCAPE,
-                                                curLatLng.getLongitude())
-                                        : new LatLng(curLatLng.getLatitude(), curLatLng.getLongitude(), 0)) // Sets the new camera position
-                                .zoom(isBottomListSheetExpanded ?
-                                        ZOOM_LEVEL
-                                        :mapboxMap.getCameraPosition().zoom) // Same zoom level
-                                .build();
-                    }
-
-                    mapboxMap.animateCamera(CameraUpdateFactory
-                            .newCameraPosition(position), 1000);
-
-                });
-            }
-        });
-
-        bottomSheetDetailsBehavior.setBottomSheetCallback(new BottomSheetBehavior
-                .BottomSheetCallback() {
-            @Override
-            public void onStateChanged(@NonNull View bottomSheet, int newState) {
-                prepareViewsForSheetPosition(newState);
-            }
-
-            @Override
-            public void onSlide(@NonNull View bottomSheet, float slideOffset) {
-                if (slideOffset >= 0) {
-                    transparentView.setAlpha(slideOffset);
-                    if (slideOffset == 1) {
-                        transparentView.setClickable(true);
-                    } else if (slideOffset == 0) {
-                        transparentView.setClickable(false);
-                    }
-                }
-            }
-        });
-
-        bottomSheetListBehavior.setBottomSheetCallback(new BottomSheetBehavior
-                .BottomSheetCallback() {
-            @Override
-            public void onStateChanged(@NonNull View bottomSheet, int newState) {
-                if (newState == BottomSheetBehavior.STATE_EXPANDED) {
-                    bottomSheetDetailsBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
-                }
-            }
-
-            @Override
-            public void onSlide(@NonNull View bottomSheet, float slideOffset) {
-
-            }
-        });
-
-        // Remove button text if they exceed 1 line or if internal layout has not been built
-        // Only need to check for directions button because it is the longest
-        if (directionsButtonText.getLineCount() > 1 || directionsButtonText.getLineCount() == 0) {
-            wikipediaButtonText.setVisibility(View.GONE);
-            wikidataButtonText.setVisibility(View.GONE);
-            commonsButtonText.setVisibility(View.GONE);
-            directionsButtonText.setVisibility(View.GONE);
-        }
-        title.setOnLongClickListener(view -> {
-                    Utils.copy("place",title.getText().toString(),getContext());
-                    Toast.makeText(getContext(),"Text copied to clipboard",Toast.LENGTH_SHORT).show();
-                    return true;
-                }
-        );
-        title.setOnClickListener(view -> {
-            if (bottomSheetDetailsBehavior.getState() == BottomSheetBehavior.STATE_COLLAPSED) {
-                bottomSheetDetailsBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
-            } else {
-                bottomSheetDetailsBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
-            }
-        });
-    }*/
 
     /**
      * Sets up map view of first time it created, it passes MapBoxMap options and style assets.
