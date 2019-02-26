@@ -386,10 +386,7 @@ public class NearbyMapFragment extends DaggerFragment {
 
     }
 
-    /**
-     * Sets click listeners of FABs, and 2 bottom sheets
-     */
-    private void setListeners() {
+    private void setListenersHandleFabPlus() {
         fabPlus.setOnClickListener(view -> {
             if (applicationKvStore.getBoolean("login_skipped", false)) {
                 // prompt the user to login
@@ -407,7 +404,9 @@ public class NearbyMapFragment extends DaggerFragment {
                 animateFAB(isFabOpen);
             }
         });
+    }
 
+    private void setListenersHandleBottomSheetDetails() {
         bottomSheetDetails.setOnClickListener(view -> {
             if (bottomSheetDetailsBehavior.getState() == BottomSheetBehavior.STATE_COLLAPSED) {
                 bottomSheetDetailsBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
@@ -415,7 +414,9 @@ public class NearbyMapFragment extends DaggerFragment {
                 bottomSheetDetailsBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
             }
         });
+    }
 
+    private void setListenersHandleFabRecenter() {
         fabRecenter.setOnClickListener(view -> {
             if (curLatLng != null) {
                 mapView.getMapAsync(mapboxMap -> {
@@ -449,7 +450,9 @@ public class NearbyMapFragment extends DaggerFragment {
                 });
             }
         });
+    }
 
+    private void setListenersHandleBottomSheetDetailsBehavior() {
         bottomSheetDetailsBehavior.setBottomSheetCallback(new BottomSheetBehavior
                 .BottomSheetCallback() {
             @Override
@@ -469,7 +472,9 @@ public class NearbyMapFragment extends DaggerFragment {
                 }
             }
         });
+    }
 
+    private void setListenersHandleBottomSheetListBehavior() {
         bottomSheetListBehavior.setBottomSheetCallback(new BottomSheetBehavior
                 .BottomSheetCallback() {
             @Override
@@ -484,6 +489,22 @@ public class NearbyMapFragment extends DaggerFragment {
 
             }
         });
+    }
+    /*
+     * Sets click listeners of FABs, and 2 bottom sheets
+     */
+    private void setListeners() {
+
+        setListenersHandleFabPlus();
+
+        setListenersHandleBottomSheetDetails();
+
+        setListenersHandleFabRecenter();
+
+        setListenersHandleBottomSheetDetailsBehavior();
+
+        setListenersHandleBottomSheetListBehavior();
+
 
         // Remove button text if they exceed 1 line or if internal layout has not been built
         // Only need to check for directions button because it is the longest
@@ -507,6 +528,9 @@ public class NearbyMapFragment extends DaggerFragment {
             }
         });
     }
+
+
+
 
     /**
      * Sets up map view of first time it created, it passes MapBoxMap options and style assets.
