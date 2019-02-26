@@ -102,15 +102,7 @@ public class FileProcessor implements SimilarImageDialogFragment.onResponse {
                 } catch (FileNotFoundException e) {
                     e.printStackTrace();
                 }
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-                    if (descriptor != null) {
-                        tempImageObj = new GPSExtractor(descriptor.getFileDescriptor());
-                    }
-                } else {
-                    if (filePath != null) {
-                        tempImageObj = new GPSExtractor(file.getAbsolutePath());
-                    }
-                }
+                buildVersionChecker(descriptor, file);
 
                 if (tempImageObj != null) {
                     Timber.d("not null fild EXIF" + tempImageObj.imageCoordsExists + " coords" + tempImageObj.getCoords());
@@ -125,6 +117,19 @@ public class FileProcessor implements SimilarImageDialogFragment.onResponse {
         }
         haveCheckedForOtherImages = true; //Finished checking for other images
     }
+
+    private void buildVersionChecker(ParcelFileDescriptor descriptor, File file) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            if (descriptor != null) {
+                tempImageObj = new GPSExtractor(descriptor.getFileDescriptor());
+            }
+        } else {
+            if (filePath != null) {
+                tempImageObj = new GPSExtractor(file.getAbsolutePath());
+            }
+        }
+    }
+
 
     /**
      * Initiates retrieval of image coordinates or user coordinates, and caching of coordinates.
