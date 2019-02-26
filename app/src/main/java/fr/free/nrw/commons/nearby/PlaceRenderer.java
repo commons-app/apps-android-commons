@@ -6,7 +6,9 @@ import android.support.transition.TransitionManager;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AlertDialog;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.PopupMenu;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -112,6 +114,11 @@ public class PlaceRenderer extends Renderer<Place> {
                 closeLayout(buttonLayout);
             } else {
                 openLayout(buttonLayout);
+                RecyclerView recyclerView = (RecyclerView) view.getParent();
+                int lastPosition = recyclerView.getAdapter().getItemCount() - 1;
+                if (recyclerView.getChildLayoutPosition(view) == lastPosition) {
+                    ((LinearLayoutManager) recyclerView.getLayoutManager()).scrollToPositionWithOffset(lastPosition, buttonLayout.getHeight());
+                }
             }
 
         };
