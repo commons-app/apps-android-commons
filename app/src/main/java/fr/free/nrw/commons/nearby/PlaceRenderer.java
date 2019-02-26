@@ -55,9 +55,9 @@ public class PlaceRenderer extends Renderer<Place> {
     @BindView(R.id.iconOverflow) LinearLayout iconOverflow;
     @BindView(R.id.cameraButtonText) TextView cameraButtonText;
     @BindView(R.id.galleryButtonText) TextView galleryButtonText;
-    @BindView(R.id.bookmarkButton) LinearLayout bookmarkButton;
+    @BindView(R.id.bookmarkRowButton) LinearLayout bookmarkButton;
     @BindView(R.id.bookmarkButtonText) TextView bookmarkButtonText;
-    @BindView(R.id.bookmarkButtonImage) ImageView bookmarkButtonImage;
+    @BindView(R.id.bookmarkRowButtonImage) ImageView bookmarkButtonImage;
 
     @BindView(R.id.directionsButtonText) TextView directionsButtonText;
     @BindView(R.id.iconOverflowText) TextView iconOverflowText;
