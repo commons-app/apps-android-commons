@@ -101,9 +101,8 @@ public class PlaceRenderer extends Renderer<Place> {
         closeLayout(buttonLayout);
     }
 
-    @Override
-    protected void hookListeners(View view) {
 
+    protected View.OnClickListener hookListenersGetListener() {
         final View.OnClickListener listener = view12 -> {
             Timber.d("Renderer clicked");
             TransitionManager.beginDelayedTransition(buttonLayout);
@@ -115,16 +114,9 @@ public class PlaceRenderer extends Renderer<Place> {
             }
 
         };
-        view.setOnClickListener(listener);
-        view.requestFocus();
-        view.setOnFocusChangeListener((view1, hasFocus) -> {
-            if (!hasFocus && buttonLayout.isShown()) {
-                closeLayout(buttonLayout);
-            } else if (hasFocus && !buttonLayout.isShown()) {
-                listener.onClick(view1);
-            }
-        });
-
+        return listener;
+    }
+    protected void hookListenersHandleCameraButton() {
         cameraButton.setOnClickListener(view2 -> {
             if (applicationKvStore.getBoolean("login_skipped", false)) {
                 // prompt the user to login
@@ -143,8 +135,8 @@ public class PlaceRenderer extends Renderer<Place> {
                 controller.initiateCameraPick(fragment.getActivity());
             }
         });
-
-
+    }
+    protected void hookListenersHandleGalleryButton() {
         galleryButton.setOnClickListener(view3 -> {
             if (applicationKvStore.getBoolean("login_skipped", false)) {
                 // prompt the user to login
@@ -163,7 +155,9 @@ public class PlaceRenderer extends Renderer<Place> {
                 controller.initiateGalleryPick(fragment.getActivity(), false);
             }
         });
+    }
 
+    protected void hookListenersHandleBookmarkButton() {
         bookmarkButton.setOnClickListener(view4 -> {
             if (applicationKvStore.getBoolean("login_skipped", false)) {
                 // prompt the user to login
@@ -189,6 +183,30 @@ public class PlaceRenderer extends Renderer<Place> {
             }
         });
     }
+
+    @Override
+    protected void hookListeners(View view) {
+
+        final View.OnClickListener listener = hookListenersGetListener();
+
+        view.setOnClickListener(listener);
+        view.requestFocus();
+        view.setOnFocusChangeListener((view1, hasFocus) -> {
+            if (!hasFocus && buttonLayout.isShown()) {
+                closeLayout(buttonLayout);
+            } else if (hasFocus && !buttonLayout.isShown()) {
+                listener.onClick(view1);
+            }
+        });
+
+        hookListenersHandleCameraButton();
+
+        hookListenersHandleGalleryButton();
+
+        hookListenersHandleBookmarkButton();
+
+    }
+
 
     private void storeSharedPrefs() {
         Timber.d("Store place object %s", place.toString());
