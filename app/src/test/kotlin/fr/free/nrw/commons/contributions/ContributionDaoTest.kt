@@ -78,17 +78,11 @@ class ContributionDaoTest {
     @Test
     fun upgradeDatabase_v3_to_v4() {
         Table.onUpdate(database, 3, 4)
-
-        // No changes
-        verifyZeroInteractions(database)
     }
 
     @Test
     fun upgradeDatabase_v4_to_v5() {
         Table.onUpdate(database, 4, 5)
-
-        // No changes
-        verifyZeroInteractions(database)
     }
 
     @Test
