@@ -105,6 +105,7 @@ public class UploadableFile implements Parcelable {
             }
             //If both the content providers do not give the data, lets leave it to Jesus
             if (lastModifiedColumnIndex == -1) {
+                cursor.close();
                 return null;
             }
             cursor.moveToFirst();
