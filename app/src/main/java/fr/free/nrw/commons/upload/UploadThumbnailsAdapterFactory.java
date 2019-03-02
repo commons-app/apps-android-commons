@@ -7,8 +7,6 @@ import com.pedrogomez.renderers.RendererBuilder;
 import java.util.Collections;
 import java.util.List;
 
-import javax.inject.Inject;
-
 public class UploadThumbnailsAdapterFactory {
     private ThumbnailClickedListener listener;
 

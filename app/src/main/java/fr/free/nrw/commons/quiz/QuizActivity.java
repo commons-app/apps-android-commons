@@ -1,6 +1,5 @@
 package fr.free.nrw.commons.quiz;
 
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.graphics.drawable.VectorDrawableCompat;

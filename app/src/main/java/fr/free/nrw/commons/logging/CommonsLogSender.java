@@ -5,7 +5,6 @@ import android.content.Context;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
-import fr.free.nrw.commons.BuildConfig;
 import fr.free.nrw.commons.auth.SessionManager;
 import fr.free.nrw.commons.utils.ConfigUtils;
 import fr.free.nrw.commons.utils.DeviceInfoUtil;
