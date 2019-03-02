@@ -10,7 +10,6 @@ import android.support.v4.content.FileProvider;
 import org.acra.collector.CrashReportData;
 import org.acra.sender.ReportSender;
 import org.apache.commons.codec.Charsets;
-import org.apache.http.protocol.HTTP;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
@@ -23,7 +22,6 @@ import java.util.zip.ZipOutputStream;
 
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.auth.SessionManager;
-import fr.free.nrw.commons.utils.ConfigUtils;
 import timber.log.Timber;
 
 /**

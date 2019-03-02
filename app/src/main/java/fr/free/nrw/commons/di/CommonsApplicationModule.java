@@ -3,12 +3,10 @@ package fr.free.nrw.commons.di;
 import android.app.Activity;
 import android.content.ContentProviderClient;
 import android.content.Context;
-import android.net.Uri;
 import android.support.v4.util.LruCache;
 import android.view.inputmethod.InputMethodManager;
 
 import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -29,12 +27,9 @@ import fr.free.nrw.commons.kvstore.BasicKvStore;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.location.LocationServiceManager;
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
-import fr.free.nrw.commons.nearby.NearbyPlaces;
 import fr.free.nrw.commons.settings.Prefs;
 import fr.free.nrw.commons.upload.UploadController;
 import fr.free.nrw.commons.utils.ConfigUtils;
-import fr.free.nrw.commons.utils.UriDeserializer;
-import fr.free.nrw.commons.utils.UriSerializer;
 import fr.free.nrw.commons.wikidata.WikidataEditListener;
 import fr.free.nrw.commons.wikidata.WikidataEditListenerImpl;
 

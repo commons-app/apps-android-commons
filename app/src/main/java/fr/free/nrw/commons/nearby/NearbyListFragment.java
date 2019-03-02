@@ -1,8 +1,6 @@
 package fr.free.nrw.commons.nearby;
 
 import android.content.Context;
-import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -11,7 +9,6 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 import com.pedrogomez.renderers.RVRendererAdapter;
 
@@ -29,7 +26,6 @@ import fr.free.nrw.commons.contributions.ContributionController;
 import fr.free.nrw.commons.kvstore.BasicKvStore;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.location.LatLng;
-import fr.free.nrw.commons.utils.UriDeserializer;
 import timber.log.Timber;
 
 public class NearbyListFragment extends DaggerFragment {

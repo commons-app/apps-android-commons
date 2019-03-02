@@ -6,8 +6,6 @@ import android.support.annotation.IntDef;
 import java.lang.annotation.Retention;
 import java.util.List;
 
-import fr.free.nrw.commons.utils.ImageUtils;
-
 import static java.lang.annotation.RetentionPolicy.SOURCE;
 
 public interface UploadView {
