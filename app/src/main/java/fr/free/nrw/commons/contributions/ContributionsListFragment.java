@@ -120,7 +120,7 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment {
     /**
      * Shows welcome message if user has no contributions yet i.e. new user.
      */
-    protected void maybeShowWelcomeTip(boolean noContributions) {
+    protected void showWelcomeTip(boolean noContributions) {
         noContributionsYet.setVisibility(noContributions ? VISIBLE : GONE);
     }
 
