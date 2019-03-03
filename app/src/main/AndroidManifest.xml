@@ -119,6 +119,8 @@
         <activity
             android:name=".bookmarks.BookmarksActivity"
             android:label="@string/title_activity_bookmarks" />
+        <activity android:name="com.theartofdev.edmodo.cropper.CropImageActivity"
+            android:theme="@style/Base.Theme.AppCompat"/>
 
         <service android:name=".upload.UploadService" />
         <service

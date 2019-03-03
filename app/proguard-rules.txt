@@ -70,3 +70,4 @@
 -keep class org.acra.** { *; }
 -keepattributes SourceFile,LineNumberTable
 -keepattributes *Annotation*
+-keep class android.support.v7.widget.** { *; }

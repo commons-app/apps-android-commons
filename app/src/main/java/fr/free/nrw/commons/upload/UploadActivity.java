@@ -35,6 +35,7 @@ import com.github.chrisbanes.photoview.PhotoView;
 import com.jakewharton.rxbinding2.view.RxView;
 import com.jakewharton.rxbinding2.widget.RxTextView;
 import com.pedrogomez.renderers.RVRendererAdapter;
+import com.theartofdev.edmodo.cropper.CropImage;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -129,6 +130,7 @@ public class UploadActivity extends BaseActivity implements UploadView, SimilarI
     @BindView(R.id.submit) Button submit;
     @BindView(R.id.license_previous) Button licensePrevious;
     @BindView(R.id.rv_descriptions) RecyclerView rvDescriptions;
+    @BindView(R.id.editImage) ImageView editImages;
 
     private DescriptionsAdapter descriptionsAdapter;
     private RVRendererAdapter<CategoryItem> categoriesAdapter;
@@ -154,6 +156,7 @@ public class UploadActivity extends BaseActivity implements UploadView, SimilarI
         configureCategories();
         configureLicenses();
         configurePolicy();
+        configureEditImage();
 
         presenter.init();
 
@@ -425,6 +428,12 @@ public class UploadActivity extends BaseActivity implements UploadView, SimilarI
     }
 
     @Override
+    public void openCropImage(Uri uri) {
+        CropImage.activity(uri)
+                .start(this);
+    }
+
+    @Override
     public void launchMapActivity(String decCoords) {
         Utils.handleGeoCoordinates(this, decCoords);
     }
@@ -506,6 +515,11 @@ public class UploadActivity extends BaseActivity implements UploadView, SimilarI
     private void configureLayout() {
         background.setScaleType(ImageView.ScaleType.CENTER_CROP);
         background.setOnScaleChangeListener((scaleFactor, x, y) -> presenter.closeAllCards());
+    }
+
+    private void configureEditImage() {
+        editImages.setOnClickListener(v -> { presenter.editImages();
+        });
     }
 
     private void configureTopCard() {

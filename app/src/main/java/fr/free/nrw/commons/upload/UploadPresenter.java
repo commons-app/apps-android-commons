@@ -2,6 +2,7 @@ package fr.free.nrw.commons.upload;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.net.Uri;
 
 import java.lang.reflect.Proxy;
 import java.util.ArrayList;
@@ -133,6 +134,10 @@ public class UploadPresenter {
         } else {
             handleBadImage(imageResult);
         }
+    }
+
+    void editImages(ArrayList<Uri> uri){
+        view.openCropImage(uri.get(0));
     }
 
     /**

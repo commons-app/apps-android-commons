@@ -91,6 +91,8 @@ dependencies {
     implementation 'com.daimajia.swipelayout:library:1.2.0@aar'
     implementation 'com.nineoldandroids:library:2.4.0'
     implementation files('libs/icafe-1.1-SNAPSHOT.jar')
+    //image crop
+    implementation 'com.theartofdev.edmodo:android-image-cropper:2.7.+'
 }
 
 android {

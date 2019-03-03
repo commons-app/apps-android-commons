@@ -85,4 +85,6 @@ public interface UploadView {
     void showProgressDialog();
 
     void hideProgressDialog();
+
+    void openCropImage(Uri uri);
 }
