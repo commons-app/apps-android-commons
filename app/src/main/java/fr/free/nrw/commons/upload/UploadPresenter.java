@@ -3,6 +3,7 @@ package fr.free.nrw.commons.upload;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.net.Uri;
+import android.os.Parcelable;
 
 import java.lang.reflect.Proxy;
 import java.util.ArrayList;
@@ -136,8 +137,9 @@ public class UploadPresenter {
         }
     }
 
-    void editImages(ArrayList<Uri> uri){
-        view.openCropImage(uri.get(0));
+    void editImages(Uri uri){
+        String path="data/user/0/fr.free.nrw.commons/cache/CommonsContributions/8b1e3cd5-7fb9-489f-a2f5-ad1ccf6368e5.jpg";
+        view.openCropImage(uri);
     }
 
     /**

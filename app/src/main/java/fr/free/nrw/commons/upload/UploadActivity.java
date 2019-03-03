@@ -6,6 +6,7 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.CardView;
@@ -101,7 +102,7 @@ public class UploadActivity extends BaseActivity implements UploadView, SimilarI
     @BindView(R.id.bottom_card_expand_button) ImageView bottomCardExpandButton;
     @BindView(R.id.bottom_card_title) TextView bottomCardTitle;
     @BindView(R.id.bottom_card_subtitle) TextView bottomCardSubtitle;
-    @BindView(R.id.bottom_card_next) Button next;
+    @BindView(R.id.editImage) Button next;
     @BindView(R.id.bottom_card_previous) Button previous;
     @BindView(R.id.bottom_card_add_desc) Button bottomCardAddDescription;
     @BindView(R.id.categories_subtitle) TextView categoriesSubtitle;
@@ -130,7 +131,7 @@ public class UploadActivity extends BaseActivity implements UploadView, SimilarI
     @BindView(R.id.submit) Button submit;
     @BindView(R.id.license_previous) Button licensePrevious;
     @BindView(R.id.rv_descriptions) RecyclerView rvDescriptions;
-    @BindView(R.id.editImage) ImageView editImages;
+    @BindView(R.id.bottom_card_next) ImageView editImages;
 
     private DescriptionsAdapter descriptionsAdapter;
     private RVRendererAdapter<CategoryItem> categoriesAdapter;
@@ -147,6 +148,8 @@ public class UploadActivity extends BaseActivity implements UploadView, SimilarI
         ButterKnife.bind(this);
         compositeDisposable = new CompositeDisposable();
 
+        ArrayList<UploadableFile> files= getIntent().getParcelableArrayListExtra(EXTRA_FILES);
+
         configureLayout();
         configureTopCard();
         configureBottomCard();
@@ -156,7 +159,7 @@ public class UploadActivity extends BaseActivity implements UploadView, SimilarI
         configureCategories();
         configureLicenses();
         configurePolicy();
-        configureEditImage();
+        configureEditImage(files);
 
         presenter.init();
 
@@ -429,6 +432,7 @@ public class UploadActivity extends BaseActivity implements UploadView, SimilarI
 
     @Override
     public void openCropImage(Uri uri) {
+        Timber.d(uri.toString());
         CropImage.activity(uri)
                 .start(this);
     }
@@ -453,6 +457,14 @@ public class UploadActivity extends BaseActivity implements UploadView, SimilarI
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == CommonsApplication.OPEN_APPLICATION_DETAIL_SETTINGS) {
             //TODO: Confirm if handling manual permission enabled is required
+        }
+        if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE) {
+            CropImage.ActivityResult result = CropImage.getActivityResult(data);
+            if (resultCode == RESULT_OK) {
+                Uri resultUri = result.getUri();
+            } else if (resultCode == CropImage.CROP_IMAGE_ACTIVITY_RESULT_ERROR_CODE) {
+                Exception error = result.getError();
+            }
         }
     }
 
@@ -517,9 +529,10 @@ public class UploadActivity extends BaseActivity implements UploadView, SimilarI
         background.setOnScaleChangeListener((scaleFactor, x, y) -> presenter.closeAllCards());
     }
 
-    private void configureEditImage() {
-        editImages.setOnClickListener(v -> { presenter.editImages();
+    private void configureEditImage(ArrayList<UploadableFile> uri) {
+        editImages.setOnClickListener(v -> {presenter.editImages(Uri.fromFile(uri.get(0).getFile()));
         });
+        //openCropImage(Uri.fromFile(uri.get(0).getFile()));
     }
 
     private void configureTopCard() {
