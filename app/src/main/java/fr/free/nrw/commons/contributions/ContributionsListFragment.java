@@ -1,9 +1,5 @@
 package fr.free.nrw.commons.contributions;
 
-<<<<<<< HEAD
-=======
-import android.content.Context;
->>>>>>> 8e25fdc6ecaa6980d25feaef90f00373b9fee612
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
