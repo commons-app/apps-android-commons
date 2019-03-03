@@ -55,8 +55,7 @@ public class UploadService extends HandlerService<Contribution> {
     @Inject ContributionDao contributionDao;
 
     private NotificationManager notificationManager;
-    private NotificationCompat.Builder curProgressNotification;
-    private NotificationCompat.Builder curFailedNotification;
+    private NotificationCompat.Builder curNotification;
     private int toUpload;
 
     /**
@@ -95,19 +94,19 @@ public class UploadService extends HandlerService<Contribution> {
         public void onProgress(long transferred, long total) {
             Timber.d("Uploaded %d of %d", transferred, total);
             if (!notificationTitleChanged) {
-                curProgressNotification.setContentTitle(notificationProgressTitle);
+                curNotification.setContentTitle(notificationProgressTitle);
                 notificationTitleChanged = true;
                 contribution.setState(Contribution.STATE_IN_PROGRESS);
             }
             if (transferred == total) {
                 // Completed!
-                curProgressNotification.setContentTitle(notificationFinishingTitle)
+                curNotification.setContentTitle(notificationFinishingTitle)
                         .setTicker(notificationFinishingTitle)
                         .setProgress(0, 100, true);
             } else {
-                curProgressNotification.setProgress(100, (int) (((double) transferred / (double) total) * 100), false);
+                curNotification.setProgress(100, (int) (((double) transferred / (double) total) * 100), false);
             }
-            notificationManager.notify(NOTIFICATION_UPLOAD_IN_PROGRESS, curProgressNotification.build());
+            notificationManager.notify(NOTIFICATION_UPLOAD_IN_PROGRESS, curNotification.build());
 
             contribution.setTransferred(transferred);
             contributionDao.save(contribution);
@@ -126,8 +125,7 @@ public class UploadService extends HandlerService<Contribution> {
         super.onCreate();
         CommonsApplication.createNotificationChannel(getApplicationContext());
         notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
-        curProgressNotification = getProgressNotificationBuilder(CommonsApplication.NOTIFICATION_CHANNEL_ID_ALL);
-        curFailedNotification = getFailedNotificationBuilder(CommonsApplication.NOTIFICATION_CHANNEL_ID_ALL);
+        curNotification = getNotificationBuilder(CommonsApplication.NOTIFICATION_CHANNEL_ID_ALL);
     }
 
     @Override
@@ -151,10 +149,10 @@ public class UploadService extends HandlerService<Contribution> {
                 contribution.setTransferred(0);
                 contributionDao.save(contribution);
                 toUpload++;
-                if (curProgressNotification != null && toUpload != 1) {
-                    curProgressNotification.setContentText(getResources().getQuantityString(R.plurals.uploads_pending_notification_indicator, toUpload, toUpload));
+                if (curNotification != null && toUpload != 1) {
+                    curNotification.setContentText(getResources().getQuantityString(R.plurals.uploads_pending_notification_indicator, toUpload, toUpload));
                     Timber.d("%d uploads left", toUpload);
-                    notificationManager.notify(NOTIFICATION_UPLOAD_IN_PROGRESS, curProgressNotification.build());
+                    notificationManager.notify(NOTIFICATION_UPLOAD_IN_PROGRESS, curNotification.build());
                 }
 
                 super.queue(what, contribution);
@@ -184,16 +182,6 @@ public class UploadService extends HandlerService<Contribution> {
         return START_REDELIVER_INTENT;
     }
 
-    private NotificationCompat.Builder getProgressNotificationBuilder(String channelId) {
-        return getNotificationBuilder(channelId)
-                .setProgress(100, 0, true)
-                .setOngoing(true);
-    }
-
-    private NotificationCompat.Builder getFailedNotificationBuilder(String channelId) {
-        return getNotificationBuilder(channelId);
-    }
-
     @SuppressLint("StringFormatInvalid")
     private NotificationCompat.Builder getNotificationBuilder(String channelId) {
         return new NotificationCompat.Builder(this, channelId).setAutoCancel(true)
@@ -201,8 +189,9 @@ public class UploadService extends HandlerService<Contribution> {
                 .setLargeIcon(BitmapFactory.decodeResource(getResources(), R.drawable.ic_launcher))
                 .setAutoCancel(true)
                 .setOnlyAlertOnce(true)
+                .setProgress(100, 0, true)
+                .setOngoing(true)
                 .setContentIntent(PendingIntent.getActivity(this, 0, new Intent(this, MainActivity.class), 0));
-
     }
 
     private void uploadContribution(Contribution contribution) {
@@ -225,10 +214,10 @@ public class UploadService extends HandlerService<Contribution> {
         }
 
         Timber.d("Before execution!");
-        curProgressNotification.setContentTitle(getString(R.string.upload_progress_notification_title_start, contribution.getDisplayTitle()))
+        curNotification.setContentTitle(getString(R.string.upload_progress_notification_title_start, contribution.getDisplayTitle()))
                 .setContentText(getResources().getQuantityString(R.plurals.uploads_pending_notification_indicator, toUpload, toUpload))
                 .setTicker(getString(R.string.upload_progress_notification_title_in_progress, contribution.getDisplayTitle()));
-        startForeground(NOTIFICATION_UPLOAD_IN_PROGRESS, curProgressNotification.build());
+        startForeground(NOTIFICATION_UPLOAD_IN_PROGRESS, curNotification.build());
 
         String filename = contribution.getFilename();
         try {
@@ -294,10 +283,11 @@ public class UploadService extends HandlerService<Contribution> {
     @SuppressLint("StringFormatInvalid")
     @SuppressWarnings("deprecation")
     private void showFailedNotification(Contribution contribution) {
-        curFailedNotification.setTicker(getString(R.string.upload_failed_notification_title, contribution.getDisplayTitle()))
+        curNotification.setTicker(getString(R.string.upload_failed_notification_title, contribution.getDisplayTitle()))
                 .setContentTitle(getString(R.string.upload_failed_notification_title, contribution.getDisplayTitle()))
-                .setContentText(getString(R.string.upload_failed_notification_subtitle));
-        notificationManager.notify(NOTIFICATION_UPLOAD_FAILED, curFailedNotification.build());
+                .setContentText(getString(R.string.upload_failed_notification_subtitle))
+                .setProgress(0, 0, false);
+        notificationManager.notify(NOTIFICATION_UPLOAD_FAILED, curNotification.build());
 
         contribution.setState(Contribution.STATE_FAILED);
         contributionDao.save(contribution);
