@@ -9,9 +9,15 @@ import android.net.Uri;
 import android.os.RemoteException;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
+
+import com.google.gson.Gson;
+
 import fr.free.nrw.commons.settings.Prefs;
 import fr.free.nrw.commons.utils.StringUtils;
+
+import java.util.ArrayList;
 import java.util.Date;
+
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.inject.Provider;
@@ -19,6 +25,9 @@ import timber.log.Timber;
 
 import static fr.free.nrw.commons.contributions.ContributionDao.Table.ALL_FIELDS;
 import static fr.free.nrw.commons.contributions.ContributionDao.Table.COLUMN_WIKI_DATA_ENTITY_ID;
+import static fr.free.nrw.commons.contributions.ContributionDao.Table.COLUMN_DATE_CREATED_SOURCE;
+import static fr.free.nrw.commons.contributions.ContributionDao.Table.COLUMN_DECIMAL_COORDS;
+import static fr.free.nrw.commons.contributions.ContributionDao.Table.COLUMN_CATEGORIES;
 import static fr.free.nrw.commons.contributions.ContributionsContentProvider.BASE_URI;
 import static fr.free.nrw.commons.contributions.ContributionsContentProvider.uriForId;
 
@@ -38,6 +47,7 @@ public class ContributionDao {
             + Table.COLUMN_STATE + ")";
 
     private final Provider<ContentProviderClient> clientProvider;
+    @Inject Gson gson;
 
     @Inject
     public ContributionDao(@Named("contribution") Provider<ContentProviderClient> clientProvider) {
@@ -111,6 +121,21 @@ public class ContributionDao {
         cv.put(Table.COLUMN_HEIGHT, contribution.getHeight());
         cv.put(Table.COLUMN_LICENSE, contribution.getLicense());
         cv.put(Table.COLUMN_WIKI_DATA_ENTITY_ID, contribution.getWikiDataEntityId());
+
+        if (contribution.getDateCreatedSource() != null) {
+            cv.put(Table.COLUMN_DATE_CREATED_SOURCE, contribution.getDateCreatedSource());
+        }
+
+        if (contribution.getDecimalCoords() != null) {
+            cv.put(Table.COLUMN_DECIMAL_COORDS, contribution.getDecimalCoords());
+        }
+
+        ArrayList<String> categories = contribution.getCategories();
+        if (categories != null && categories.size() != 0) {
+            String categoriesJson = gson.toJson(categories);
+            cv.put(Table.COLUMN_CATEGORIES, categoriesJson);
+        }
+
         return cv;
     }
 
@@ -146,6 +171,22 @@ public class ContributionDao {
             String wikidataEntityId = cursor.getString(cursor.getColumnIndex(COLUMN_WIKI_DATA_ENTITY_ID));
             if (!StringUtils.isNullOrWhiteSpace(wikidataEntityId)) {
                 contribution.setWikiDataEntityId(wikidataEntityId);
+            }
+
+            String dateCreatedSource = cursor.getString(cursor.getColumnIndex(COLUMN_DATE_CREATED_SOURCE));
+            if (!StringUtils.isNullOrWhiteSpace(dateCreatedSource)) {
+                contribution.setDateCreatedSource(dateCreatedSource);
+            }
+
+            String decimalCoords = cursor.getString(cursor.getColumnIndex(COLUMN_DECIMAL_COORDS));
+            if (!StringUtils.isNullOrWhiteSpace(decimalCoords)) {
+                contribution.setDecimalCoords(decimalCoords);
+            }
+
+            String categoriesJson = cursor.getString(cursor.getColumnIndex(COLUMN_CATEGORIES));
+            if (!StringUtils.isNullOrWhiteSpace(categoriesJson)) {
+                ArrayList<String> categories = gson.fromJson(categoriesJson, ArrayList.class);
+                contribution.setCategories(categories);
             }
 
             return contribution;
@@ -184,6 +225,9 @@ public class ContributionDao {
         public static final String COLUMN_HEIGHT = "height";
         public static final String COLUMN_LICENSE = "license";
         public static final String COLUMN_WIKI_DATA_ENTITY_ID = "wikidataEntityID";
+        public static final String COLUMN_DATE_CREATED_SOURCE = "dateCreatedSource";
+        public static final String COLUMN_DECIMAL_COORDS = "decimalCoords";
+        public static final String COLUMN_CATEGORIES = "categories";
 
         // NOTE! KEEP IN SAME ORDER AS THEY ARE DEFINED UP THERE. HELPS HARD CODE COLUMN INDICES.
         public static final String[] ALL_FIELDS = {
@@ -203,7 +247,10 @@ public class ContributionDao {
                 COLUMN_WIDTH,
                 COLUMN_HEIGHT,
                 COLUMN_LICENSE,
-                COLUMN_WIKI_DATA_ENTITY_ID
+                COLUMN_WIKI_DATA_ENTITY_ID,
+                COLUMN_DATE_CREATED_SOURCE,
+                COLUMN_DECIMAL_COORDS,
+                COLUMN_CATEGORIES
         };
 
         public static final String DROP_TABLE_STATEMENT = "DROP TABLE IF EXISTS " + TABLE_NAME;
@@ -225,7 +272,10 @@ public class ContributionDao {
                 + "width INTEGER,"
                 + "height INTEGER,"
                 + "LICENSE STRING,"
-                + "wikidataEntityID STRING"
+                + "wikidataEntityID STRING,"
+                + "dateCreatedSource STRING,"
+                + "decimalCoords STRING,"
+                + "categories STRING"
                 + ");";
 
         // Upgrade from version 1 ->
@@ -247,6 +297,10 @@ public class ContributionDao {
         // Upgrade from version 8 ->
         static final String ADD_WIKI_DATA_ENTITY_ID_FIELD = "ALTER TABLE " + TABLE_NAME + " ADD COLUMN wikidataEntityID STRING;";
 
+        // Upgrade from version 10 ->
+        static final String ADD_DATE_CREATED_SOURCE_FIELD = "ALTER TABLE " + TABLE_NAME + " ADD COLUMN dateCreatedSource STRING;";
+        static final String ADD_DECIMAL_COORDS_FIELD = "ALTER TABLE " + TABLE_NAME + " ADD COLUMN decimalCoords STRING;";
+        static final String ADD_CATEGORIES_FIELD = "ALTER TABLE " + TABLE_NAME + " ADD COLUMN categories STRING;";
 
         public static void onCreate(SQLiteDatabase db) {
             db.execSQL(CREATE_TABLE_STATEMENT);
@@ -264,6 +318,10 @@ public class ContributionDao {
 
             //Considering the crashes we have been facing recently, lets blindly add this column to any table which has ever existed
             runQuery(db,ADD_WIKI_DATA_ENTITY_ID_FIELD);
+            // Blindly add dateCreatedSource decimalCoords and categories
+            runQuery(db, ADD_DATE_CREATED_SOURCE_FIELD);
+            runQuery(db, ADD_DECIMAL_COORDS_FIELD);
+            runQuery(db, ADD_CATEGORIES_FIELD);
 
             if (from == 1) {
                 runQuery(db,ADD_DESCRIPTION_FIELD);

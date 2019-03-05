@@ -6,6 +6,7 @@ import android.database.MatrixCursor
 import android.database.sqlite.SQLiteDatabase
 import android.net.Uri
 import android.os.RemoteException
+import com.google.gson.Gson
 import com.nhaarman.mockito_kotlin.*
 import fr.free.nrw.commons.BuildConfig
 import fr.free.nrw.commons.TestCommonsApplication
@@ -14,6 +15,7 @@ import fr.free.nrw.commons.contributions.Contribution.*
 import fr.free.nrw.commons.contributions.ContributionDao.Table
 import fr.free.nrw.commons.contributions.ContributionsContentProvider.BASE_URI
 import fr.free.nrw.commons.contributions.ContributionsContentProvider.uriForId
+import fr.free.nrw.commons.filepicker.UploadableFile
 import org.junit.Assert.*
 import org.junit.Before
 import org.junit.Test
@@ -37,6 +39,7 @@ class ContributionDaoTest {
     fun setUp() {
         contentUri = uriForId(111)
         testObject = ContributionDao { client }
+        testObject.gson = Gson()
     }
 
     @Test
@@ -132,6 +135,17 @@ class ContributionDaoTest {
         // Table changed in version 9
         inOrder(database) {
             verify<SQLiteDatabase>(database).execSQL(Table.ADD_WIKI_DATA_ENTITY_ID_FIELD)
+        }
+    }
+
+    @Test
+    fun migrateTableVersionFrom_v10_to_v11() {
+        Table.onUpdate(database, 10, 11)
+        // Table changed in version 9
+        inOrder(database) {
+            verify<SQLiteDatabase>(database).execSQL(Table.ADD_DATE_CREATED_SOURCE_FIELD)
+            verify<SQLiteDatabase>(database).execSQL(Table.ADD_DECIMAL_COORDS_FIELD)
+            verify<SQLiteDatabase>(database).execSQL(Table.ADD_CATEGORIES_FIELD)
         }
     }
 
@@ -340,13 +354,18 @@ class ContributionDaoTest {
         assertTrue(testObject.fromCursor(mcHammer).multiple)
     }
 
-    private fun createCursor(created: Long, uploaded: Long, multiple: Boolean, localUri: String) =
-            MatrixCursor(Table.ALL_FIELDS, 1).apply {
-                addRow(listOf("111", "filePath", localUri, "image",
-                        created, STATE_QUEUED, 222L, uploaded, 88L, SOURCE_GALLERY, "desc",
-                        "create", if (multiple) 1 else 0, 640, 480, "007", "Q1"))
-                moveToFirst()
-            }
+    private fun createCursor(created: Long, uploaded: Long, multiple: Boolean, localUri: String): MatrixCursor {
+        val dateTimeWithSource = UploadableFile.DateTimeWithSource.EXIF_SOURCE
+        val decimalCoords = "37.789222|-122.40341"
+        val categoriesJson = testObject.gson.toJson(listOf("Universe", "World"))
+        return MatrixCursor(Table.ALL_FIELDS, 1).apply {
+            addRow(listOf("111", "filePath", localUri, "image",
+                    created, STATE_QUEUED, 222L, uploaded, 88L, SOURCE_GALLERY, "desc",
+                    "create", if (multiple) 1 else 0, 640, 480, "007", "Q1",
+                    dateTimeWithSource, decimalCoords, categoriesJson))
+            moveToFirst()
+        }
+    }
 
     private fun createContribution(isMultiple: Boolean, localUri: Uri?, imageUrl: String?, dateUploaded: Date?, filename: String?): Contribution {
         val contribution = Contribution(localUri, imageUrl, filename, "desc", 222L, Date(321L), dateUploaded,
@@ -360,6 +379,9 @@ class ContributionDaoTest {
             height = 480  // VGA should be enough for anyone, right?
         }
         contribution.wikiDataEntityId = "Q1"
+        contribution.dateCreatedSource = UploadableFile.DateTimeWithSource.EXIF_SOURCE
+        contribution.decimalCoords = "37.789222|-122.40341"
+        contribution.setCategories(listOf("Universe", "World"))
         return contribution
     }
 }

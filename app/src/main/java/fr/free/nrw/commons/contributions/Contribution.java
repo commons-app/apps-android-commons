@@ -245,6 +245,10 @@ public class  Contribution extends Media {
         this.decimalCoords = decimalCoords;
     }
 
+    public String getDecimalCoords() {
+        return decimalCoords;
+    }
+
     @NonNull
     private String licenseTemplateFor(String license) {
         switch (license) {
