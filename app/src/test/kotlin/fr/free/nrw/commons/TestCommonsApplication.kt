@@ -16,7 +16,6 @@ import fr.free.nrw.commons.kvstore.BasicKvStore
 import fr.free.nrw.commons.kvstore.JsonKvStore
 import fr.free.nrw.commons.location.LocationServiceManager
 import fr.free.nrw.commons.mwapi.MediaWikiApi
-import fr.free.nrw.commons.nearby.NearbyPlaces
 import fr.free.nrw.commons.upload.UploadController
 
 class TestCommonsApplication : CommonsApplication() {
