@@ -137,9 +137,8 @@ public class UploadPresenter {
         }
     }
 
-    void editImages(Uri uri){
-        String path="data/user/0/fr.free.nrw.commons/cache/CommonsContributions/8b1e3cd5-7fb9-489f-a2f5-ad1ccf6368e5.jpg";
-        view.openCropImage(uri);
+    void editImages(ArrayList<UploadableFile> uri){
+        view.openCropImage(Uri.fromFile(uri.get(0).getFile()));
     }
 
     /**

@@ -137,6 +137,7 @@ public class UploadActivity extends BaseActivity implements UploadView, SimilarI
     private RVRendererAdapter<CategoryItem> categoriesAdapter;
     private CompositeDisposable compositeDisposable;
     private ProgressDialog progressDialog;
+    private static boolean updatedImage =false;
 
 
     @SuppressLint("CheckResult")
@@ -369,6 +370,7 @@ public class UploadActivity extends BaseActivity implements UploadView, SimilarI
 
     @Override
     public void setBackground(Uri mediaUri) {
+        if (!updatedImage)
         background.setImageURI(mediaUri);
     }
 
@@ -458,10 +460,14 @@ public class UploadActivity extends BaseActivity implements UploadView, SimilarI
         if (requestCode == CommonsApplication.OPEN_APPLICATION_DETAIL_SETTINGS) {
             //TODO: Confirm if handling manual permission enabled is required
         }
+        Uri resultUri;
         if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE) {
             CropImage.ActivityResult result = CropImage.getActivityResult(data);
             if (resultCode == RESULT_OK) {
-                Uri resultUri = result.getUri();
+                resultUri = result.getUri();
+                updatedImage=true;
+                background.setImageURI(resultUri);
+                background.setScaleType(ImageView.ScaleType.CENTER_CROP);
             } else if (resultCode == CropImage.CROP_IMAGE_ACTIVITY_RESULT_ERROR_CODE) {
                 Exception error = result.getError();
             }
@@ -530,7 +536,7 @@ public class UploadActivity extends BaseActivity implements UploadView, SimilarI
     }
 
     private void configureEditImage(ArrayList<UploadableFile> uri) {
-        editImages.setOnClickListener(v -> {presenter.editImages(Uri.fromFile(uri.get(0).getFile()));
+        editImages.setOnClickListener(v -> {presenter.editImages(uri);
         });
         //openCropImage(Uri.fromFile(uri.get(0).getFile()));
     }
