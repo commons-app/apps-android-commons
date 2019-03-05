@@ -25,6 +25,7 @@ import butterknife.ButterKnife;
 import dagger.android.support.DaggerFragment;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.R;
+import fr.free.nrw.commons.explore.categories.ExploreActivity;
 import fr.free.nrw.commons.kvstore.BasicKvStore;
 import fr.free.nrw.commons.utils.NetworkUtils;
 import fr.free.nrw.commons.utils.ViewUtil;
@@ -248,6 +249,11 @@ public class CategoryImagesListFragment extends DaggerFragment {
             }
             try {
                 ((CategoryDetailsActivity) getContext()).viewPagerNotifyDataSetChanged();
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+            try {
+                ((ExploreActivity) getContext()).viewPagerNotifyDataSetChanged();
             }catch (Exception e){
                 e.printStackTrace();
             }
