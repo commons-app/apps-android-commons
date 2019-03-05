@@ -566,6 +566,7 @@ public class UploadActivity extends BaseActivity implements UploadView, SimilarI
 
     private void configureBottomCard() {
         bottomCardExpandButton.setOnClickListener(v -> presenter.toggleBottomCardState());
+        bottomCard.setOnClickListener(v -> presenter.toggleBottomCardState());
         bottomCardAddDescription.setOnClickListener(v -> addNewDescription());
     }
 

@@ -38,8 +38,8 @@ import fr.free.nrw.commons.bookmarks.BookmarksActivity;
 import fr.free.nrw.commons.category.CategoryImagesActivity;
 import fr.free.nrw.commons.contributions.MainActivity;
 import fr.free.nrw.commons.kvstore.BasicKvStore;
+import fr.free.nrw.commons.logging.CommonsLogSender;
 import fr.free.nrw.commons.settings.SettingsActivity;
-import fr.free.nrw.commons.utils.ConfigUtils;
 import timber.log.Timber;
 
 public abstract class NavigationBaseActivity extends BaseActivity
@@ -55,6 +55,7 @@ public abstract class NavigationBaseActivity extends BaseActivity
     @BindView(R.id.drawer_layout)
     DrawerLayout drawerLayout;
     @Inject @Named("application_preferences") BasicKvStore applicationKvStore;
+    @Inject CommonsLogSender commonsLogSender;
 
 
     private ActionBarDrawerToggle toggle;
@@ -187,14 +188,18 @@ public abstract class NavigationBaseActivity extends BaseActivity
                 return true;
             case R.id.action_feedback:
                 drawerLayout.closeDrawer(navigationView);
+
+                String technicalInfo = commonsLogSender.getExtraInfo();
+
                 Intent feedbackIntent = new Intent(Intent.ACTION_SENDTO);
                 feedbackIntent.setType("message/rfc822");
                 feedbackIntent.setData(Uri.parse("mailto:"));
                 feedbackIntent.putExtra(Intent.EXTRA_EMAIL,
                         new String[]{CommonsApplication.FEEDBACK_EMAIL});
                 feedbackIntent.putExtra(Intent.EXTRA_SUBJECT,
-                        String.format(CommonsApplication.FEEDBACK_EMAIL_SUBJECT,
-                                ConfigUtils.getVersionNameWithSha(getApplicationContext())));
+                        CommonsApplication.FEEDBACK_EMAIL_SUBJECT);
+                feedbackIntent.putExtra(Intent.EXTRA_TEXT, String.format(
+                        "\n\n%s\n%s", CommonsApplication.FEEDBACK_EMAIL_TEMPLATE_HEADER, technicalInfo));
                 try {
                     startActivity(feedbackIntent);
                 } catch (ActivityNotFoundException e) {

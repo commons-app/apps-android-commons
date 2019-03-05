@@ -26,15 +26,15 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:largeHeap="true"
-        android:supportsRtl="true"
-        android:theme="@style/LightAppTheme">
-        <activity android:name=".upload.EditUploadActivity"></activity>
-        <activity
-            android:name="org.acra.CrashReportDialog"
+        android:supportsRtl="true" >
+
+        <activity android:name="org.acra.CrashReportDialog"
+            android:theme="@android:style/Theme.Dialog"
+            android:launchMode="singleInstance"
             android:excludeFromRecents="true"
             android:finishOnTaskLaunch="true"
-            android:launchMode="singleInstance"
-            android:theme="@android:style/Theme.Dialog" />
+            />
+        <activity android:name=".upload.EditUploadActivity"></activity>
         <activity android:name=".auth.LoginActivity">
             <intent-filter>
                 <category android:name="android.intent.category.LAUNCHER" />

@@ -8,8 +8,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import fr.free.nrw.commons.filepicker.UploadableFile;
-import fr.free.nrw.commons.utils.ImageUtils;
-
 import static java.lang.annotation.RetentionPolicy.SOURCE;
 
 public interface UploadView {

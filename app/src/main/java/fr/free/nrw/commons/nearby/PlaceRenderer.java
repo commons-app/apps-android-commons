@@ -4,9 +4,10 @@ import android.content.Intent;
 import android.net.Uri;
 import android.support.transition.TransitionManager;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AlertDialog;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.PopupMenu;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -30,7 +31,6 @@ import fr.free.nrw.commons.Utils;
 import fr.free.nrw.commons.auth.LoginActivity;
 import fr.free.nrw.commons.bookmarks.locations.BookmarkLocationsDao;
 import fr.free.nrw.commons.contributions.ContributionController;
-import fr.free.nrw.commons.contributions.MainActivity;
 import fr.free.nrw.commons.di.ApplicationlessInjection;
 import fr.free.nrw.commons.kvstore.BasicKvStore;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
@@ -53,9 +53,9 @@ public class PlaceRenderer extends Renderer<Place> {
     @BindView(R.id.iconOverflow) LinearLayout iconOverflow;
     @BindView(R.id.cameraButtonText) TextView cameraButtonText;
     @BindView(R.id.galleryButtonText) TextView galleryButtonText;
-    @BindView(R.id.bookmarkButton) LinearLayout bookmarkButton;
+    @BindView(R.id.bookmarkRowButton) LinearLayout bookmarkButton;
     @BindView(R.id.bookmarkButtonText) TextView bookmarkButtonText;
-    @BindView(R.id.bookmarkButtonImage) ImageView bookmarkButtonImage;
+    @BindView(R.id.bookmarkRowButtonImage) ImageView bookmarkButtonImage;
 
     @BindView(R.id.directionsButtonText) TextView directionsButtonText;
     @BindView(R.id.iconOverflowText) TextView iconOverflowText;
@@ -112,6 +112,11 @@ public class PlaceRenderer extends Renderer<Place> {
                 closeLayout(buttonLayout);
             } else {
                 openLayout(buttonLayout);
+                RecyclerView recyclerView = (RecyclerView) view.getParent();
+                int lastPosition = recyclerView.getAdapter().getItemCount() - 1;
+                if (recyclerView.getChildLayoutPosition(view) == lastPosition) {
+                    ((LinearLayoutManager) recyclerView.getLayoutManager()).scrollToPositionWithOffset(lastPosition, buttonLayout.getHeight());
+                }
             }
 
         };

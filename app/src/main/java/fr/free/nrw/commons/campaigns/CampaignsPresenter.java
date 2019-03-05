@@ -1,7 +1,6 @@
 package fr.free.nrw.commons.campaigns;
 
 import android.annotation.SuppressLint;
-import android.content.Context;
 import android.util.Log;
 
 import java.text.ParseException;
@@ -9,14 +8,12 @@ import java.text.SimpleDateFormat;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
-import java.util.Locale;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
 import fr.free.nrw.commons.BasePresenter;
 import fr.free.nrw.commons.MvpView;
-import fr.free.nrw.commons.di.ApplicationlessInjection;
 import fr.free.nrw.commons.mwapi.OkHttpJsonApiClient;
 import io.reactivex.Single;
 import io.reactivex.SingleObserver;

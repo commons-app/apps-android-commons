@@ -29,7 +29,6 @@ import android.widget.TextView;
 
 import java.io.IOException;
 import java.util.Locale;
-import java.util.Objects;
 
 import javax.inject.Inject;
 import javax.inject.Named;
