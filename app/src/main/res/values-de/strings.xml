@@ -401,9 +401,7 @@
   <string name="deletion_reason_bad_for_my_privacy">Ich habe erkannt, dass es schlecht für meine Privatsphäre ist.</string>
   <string name="deletion_reason_no_longer_want_public">Ich habe meine Meinung geändert. Ich möchte nicht mehr, dass es öffentlich sichtbar ist.</string>
   <string name="deletion_reason_not_interesting">Entschuldigung, aber dieses Bild ist nicht für eine Enzyklopädie relevant.</string>
-  <string name="uploaded_by_myself">Von mir hochgeladen am</string>
-  <string name="used_by">, verwendet in</string>
-  <string name="articles">Artikel</string>
+  <string name="uploaded_by_myself">Von mir hochgeladen am %1$s, verwendet in %2$d Artikel(n).</string>
   <string name="no_uploads">Willkommen bei Commons!\n\nLade deine erste Datei hoch, indem du oben auf das Kamera- oder Galeriesymbol tippst.</string>
   <string name="desc_language_Worldwide">Weltweit</string>
   <string name="desc_language_America">Amerika</string>

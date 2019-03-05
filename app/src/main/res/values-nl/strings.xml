@@ -244,4 +244,5 @@
   <string name="menu_option_unread">Ongelezen bekijken</string>
   <string name="image_chooser_title">Kies de afbeeldingen die u wilt plaatsen</string>
   <string name="please_wait">Een ogenblik geduld…</string>
+    <string name="uploaded_by_myself">Geüpload van mij op %1$s, gebruikt in %2$d artikel(s).</string>
 </resources>

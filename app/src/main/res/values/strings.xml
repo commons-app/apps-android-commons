@@ -414,9 +414,7 @@
   <string name="deletion_reason_bad_for_my_privacy">I realized it is bad for my privacy</string>
   <string name="deletion_reason_no_longer_want_public">I changed my mind, I don\'t want it to be publicly visible anymore</string>
   <string name="deletion_reason_not_interesting">Sorry this picture is not interesting for an encyclopedia</string>
-  <string name="uploaded_by_myself">Uploaded by myself on</string>
-  <string name="used_by">,used in</string>
-  <string name="articles">articles</string>
+  <string name="uploaded_by_myself">Uploaded by myself on %1$s, used in %2$d article(s).</string>
 
   <string name="no_uploads">Welcome to Commons!\n
 Upload your first media by touching the camera or gallery icon above.</string>
