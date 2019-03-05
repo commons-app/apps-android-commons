@@ -2,6 +2,7 @@ package fr.free.nrw.commons.upload;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Parcelable;
 
@@ -28,6 +29,7 @@ import io.reactivex.schedulers.Schedulers;
 import timber.log.Timber;
 
 import static fr.free.nrw.commons.upload.UploadModel.UploadItem;
+import static fr.free.nrw.commons.upload.UploadService.EXTRA_FILES;
 import static fr.free.nrw.commons.utils.ImageUtils.EMPTY_TITLE;
 import static fr.free.nrw.commons.utils.ImageUtils.FILE_NAME_EXISTS;
 import static fr.free.nrw.commons.utils.ImageUtils.IMAGE_KEEP;
@@ -138,7 +140,21 @@ public class UploadPresenter {
     }
 
     void editImages(ArrayList<UploadableFile> uri){
-        view.openCropImage(Uri.fromFile(uri.get(0).getFile()));
+        if (uri!=null){
+            if (uri.size()==1)
+                view.openCropImage(Uri.fromFile(uri.get(0).getFile()));
+            else if (uri.size()>1){
+                view.openEditImageActivity(EXTRA_FILES, new ArrayList<>(uri));
+
+            }
+        }
+    }
+
+    void updateImageUri(int position, Uri uri){
+        UploadItem uploadItem=uploadModel.getCurrentItem();
+        uploadItem.setImageUri(uri);
+        uploadModel.modifyCurrentItem(position,uploadItem);
+        view.setBackground(uploadModel.getCurrentItem().getMediaUri());
     }
 
     /**

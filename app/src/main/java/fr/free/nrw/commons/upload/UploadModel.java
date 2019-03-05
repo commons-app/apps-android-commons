@@ -240,6 +240,9 @@ public class UploadModel {
     UploadItem getCurrentItem() {
         return isShowingItem() ? items.get(currentStepIndex) : DUMMY;
     }
+    void modifyCurrentItem(int position,UploadItem uploadItem){
+        items.set(position,uploadItem);
+    }
 
     boolean isShowingItem() {
         return currentStepIndex < items.size();
@@ -327,7 +330,7 @@ public class UploadModel {
 
     @SuppressWarnings("WeakerAccess")
     static class UploadItem {
-        private final Uri mediaUri;
+        private Uri mediaUri;
         private final String mimeType;
         private final String source;
         private final GPSExtractor gpsCoords;
@@ -407,6 +410,9 @@ public class UploadModel {
 
         public Uri getMediaUri() {
             return mediaUri;
+        }
+        public void setImageUri(Uri uri){
+            mediaUri=uri;
         }
 
         public int getImageQuality() {

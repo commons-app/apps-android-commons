@@ -39,7 +39,9 @@ import com.pedrogomez.renderers.RVRendererAdapter;
 import com.theartofdev.edmodo.cropper.CropImage;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 import javax.inject.Inject;
@@ -102,7 +104,7 @@ public class UploadActivity extends BaseActivity implements UploadView, SimilarI
     @BindView(R.id.bottom_card_expand_button) ImageView bottomCardExpandButton;
     @BindView(R.id.bottom_card_title) TextView bottomCardTitle;
     @BindView(R.id.bottom_card_subtitle) TextView bottomCardSubtitle;
-    @BindView(R.id.editImage) Button next;
+    @BindView(R.id.bottom_card_next) Button next;
     @BindView(R.id.bottom_card_previous) Button previous;
     @BindView(R.id.bottom_card_add_desc) Button bottomCardAddDescription;
     @BindView(R.id.categories_subtitle) TextView categoriesSubtitle;
@@ -131,7 +133,7 @@ public class UploadActivity extends BaseActivity implements UploadView, SimilarI
     @BindView(R.id.submit) Button submit;
     @BindView(R.id.license_previous) Button licensePrevious;
     @BindView(R.id.rv_descriptions) RecyclerView rvDescriptions;
-    @BindView(R.id.bottom_card_next) ImageView editImages;
+    @BindView(R.id.editImage) ImageView editImages;
 
     private DescriptionsAdapter descriptionsAdapter;
     private RVRendererAdapter<CategoryItem> categoriesAdapter;
@@ -150,6 +152,16 @@ public class UploadActivity extends BaseActivity implements UploadView, SimilarI
         compositeDisposable = new CompositeDisposable();
 
         ArrayList<UploadableFile> files= getIntent().getParcelableArrayListExtra(EXTRA_FILES);
+
+        Intent intent = getIntent();
+        HashMap<Integer, Uri> hashMap = (HashMap<Integer, Uri>) intent.getSerializableExtra("hashMap");
+        if (hashMap!=null){
+            for (Map.Entry<Integer, Uri> entry : hashMap.entrySet()) {
+                int key = entry.getKey();
+                Uri value = entry.getValue();
+                presenter.updateImageUri(key,value);
+            }
+        }
 
         configureLayout();
         configureTopCard();
@@ -370,7 +382,7 @@ public class UploadActivity extends BaseActivity implements UploadView, SimilarI
 
     @Override
     public void setBackground(Uri mediaUri) {
-        if (!updatedImage)
+        //if (!updatedImage)
         background.setImageURI(mediaUri);
     }
 
@@ -440,6 +452,13 @@ public class UploadActivity extends BaseActivity implements UploadView, SimilarI
     }
 
     @Override
+    public void openEditImageActivity(String extraFiles, ArrayList<UploadableFile> uri) {
+        Intent intent=new Intent(this,EditUploadActivity.class);
+        intent.putParcelableArrayListExtra(extraFiles, new ArrayList<>(uri));
+        startActivity(intent);
+    }
+
+    @Override
     public void launchMapActivity(String decCoords) {
         Utils.handleGeoCoordinates(this, decCoords);
     }
@@ -466,8 +485,7 @@ public class UploadActivity extends BaseActivity implements UploadView, SimilarI
             if (resultCode == RESULT_OK) {
                 resultUri = result.getUri();
                 updatedImage=true;
-                background.setImageURI(resultUri);
-                background.setScaleType(ImageView.ScaleType.CENTER_CROP);
+                presenter.updateImageUri(0,resultUri);
             } else if (resultCode == CropImage.CROP_IMAGE_ACTIVITY_RESULT_ERROR_CODE) {
                 Exception error = result.getError();
             }
@@ -538,7 +556,6 @@ public class UploadActivity extends BaseActivity implements UploadView, SimilarI
     private void configureEditImage(ArrayList<UploadableFile> uri) {
         editImages.setOnClickListener(v -> {presenter.editImages(uri);
         });
-        //openCropImage(Uri.fromFile(uri.get(0).getFile()));
     }
 
     private void configureTopCard() {
