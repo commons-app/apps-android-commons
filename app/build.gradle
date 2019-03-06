@@ -92,7 +92,6 @@ dependencies {
     implementation 'com.nineoldandroids:library:2.4.0'
     //metadata extractor
     implementation 'com.drewnoakes:metadata-extractor:2.11.0'
-    implementation files('libs/icafe-1.1-SNAPSHOT.jar')
 }
 
 android {
