@@ -408,10 +408,8 @@
   <string name="deletion_reason_bad_for_my_privacy">Me di cuenta que es malo para mi privacidad</string>
   <string name="deletion_reason_no_longer_want_public">Cambié de opinión, no quiero que siga siendo visible públicamente</string>
   <string name="deletion_reason_not_interesting">Lo sentimos, esta imagen no es interesante para una enciclopedia</string>
-  <string name="uploaded_by_myself">Subida por mí mismo el</string>
-  <string name="used_by">, usado en</string>
-  <string name="articles">artículos</string>
-  <string name="no_uploads">¡Bienvenido a Commons!\n\nSube tu primer archivo tocando el icono de la cámara o galería arriba.</string>
+  <string name="uploaded_by_myself">Subida por mí mismo el %1$s, usado en %2$d artículo(s).</string>
+    <string name="no_uploads">¡Bienvenido a Commons!\n\nSube tu primer archivo tocando el icono de la cámara o galería arriba.</string>
   <string name="desc_language_Worldwide">Mundial</string>
   <string name="desc_language_America">América</string>
   <string name="desc_language_Europe">Europa</string>
