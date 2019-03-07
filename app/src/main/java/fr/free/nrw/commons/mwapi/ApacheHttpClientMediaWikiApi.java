@@ -309,6 +309,15 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
                 .getString("/api/query/pages/page/imageinfo/ii/@thumburl");
     }
 
+    public String parseWikicode(String source) {
+        return api.action("flow-parsoid-utils")
+                .param("from", "wikitext")
+                .param("to", "html")
+                .param("content", source)
+                .param("title", "Main_page")
+                .get();
+    }
+
     @Override
     @NonNull
     public MediaResult fetchMediaByFilename(String filename) throws IOException {
