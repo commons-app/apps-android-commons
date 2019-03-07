@@ -109,7 +109,10 @@
   <string name="no_uploads_yet">Aínda non cargou ningunha foto.</string>
   <string name="menu_retry_upload">Reintentar</string>
   <string name="menu_cancel_upload">Cancelar</string>
-  <string name="share_license_summary" fuzzy="true">Esta imaxe quedará baixo a licenza %1$s</string>
+  <plurals name="share_license_summary">
+    <item quantity="one">Esta imaxe quedará baixo a licenza %1$s</item>
+    <item quantity="other">Estas imaxes quedarán baixo a licenza %1$s</item>
+  </plurals>
   <string name="media_upload_policy">Publicando esta imaxe, declaro que é da miña obra, que non contén material con dereitos de autor ou selfies e que se adhire ás &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines\"&gt;Políticas de Wikimedia Commons&lt;/a&gt;.</string>
   <string name="menu_download">Descargar</string>
   <string name="preference_license">Licenza por defecto</string>
@@ -165,6 +168,7 @@
   <string name="detail_description_empty">Sen descrición</string>
   <string name="detail_license_empty">Licenza descoñecida</string>
   <string name="menu_refresh">Refrescar</string>
+  <string name="storage_permission_title">Pedindo permiso de almacenamento</string>
   <string name="read_storage_permission_rationale">Permiso necesarioː ler un almacenamento externo. A aplicación non pode acceder á súa galería sen isto.</string>
   <string name="write_storage_permission_rationale">Permiso necesario: Escribir en almacenamento externo. A aplicación non pode acceder á súa cámara sen el.</string>
   <string name="location_permission_rationale">Permiso opcionalː obter a localización actual para suxerir categorías</string>
@@ -187,7 +191,11 @@
   <string name="_2fa_code">Código de autenticación de dous pasos</string>
   <string name="number_of_uploads">O meu límite de subas recentes</string>
   <string name="maximum_limit">Límite máximo</string>
+  <string name="invalid_zero">Zero non é válido</string>
+  <string name="invalid_input">Entrada non válida</string>
   <string name="maximum_limit_alert">Non se poden amosar máis de 500</string>
+  <string name="enter_valid">Indique un número válido</string>
+  <string name="cannot_be_zero">O límite de subas non pode ser 0</string>
   <string name="set_limit">Establecer o límite de subas recentes</string>
   <string name="login_failed_2fa_not_supported">Actualmente non se permite a autenticación de dous factores.</string>
   <string name="logout_verification">Está seguro de querer saír?</string>
@@ -254,7 +262,7 @@
   <string name="skip_login">Omitir</string>
   <string name="navigation_item_login">Acceder ao sistema</string>
   <string name="skip_login_title">Realmente quere saltar o inicio de sesión?</string>
-  <string name="skip_login_message" fuzzy="true">Non poderá subir imaxes.</string>
+  <string name="skip_login_message">Terá que iniciar sesión para subir imaxes no futuro.</string>
   <string name="login_alert_message">Por favor, inicie a sesión para usar esta funcionalidade</string>
   <string name="copy_wikicode">Copiar o texto wiki ó portapapeis</string>
   <string name="wikicode_copied">Texto wiki copiado ó portapapeis</string>
@@ -341,6 +349,7 @@
   <string name="statistics">ESTATÍSTICAS</string>
   <string name="statistics_thanks">Agradecementos recibidos</string>
   <string name="statistics_featured">Imaxes destacadas</string>
+  <string name="statistics_wikidata_edits">Imaxes vía \"Lugares próximos\"</string>
   <string name="level">NIVEL</string>
   <string name="images_uploaded">Imaxes cargadas</string>
   <string name="image_reverts">Imaxes non revertidas</string>
@@ -360,6 +369,7 @@
   <string name="contributions_fragment">Contribucións</string>
   <string name="nearby_fragment">Preto</string>
   <string name="notifications">Notificacións</string>
+  <string name="archived_notifications">Notificacións (arquivadas)</string>
   <string name="display_nearby_notification">Amosar notificacións de proximidade</string>
   <string name="display_nearby_notification_summary">Prema aquí para ver o lugar máis preto que necesita fotos</string>
   <string name="no_close_nearby">Non se atoparon lugares preto de ti</string>
@@ -392,10 +402,8 @@
   <string name="deletion_reason_bad_for_my_privacy">Decateime de que prexudica a miña privacidade</string>
   <string name="deletion_reason_no_longer_want_public">Cambiei de idea, non quero que siga sendo visible de forma pública</string>
   <string name="deletion_reason_not_interesting">Desculpas, esta imaxe non é interesante para unha enciclopedia</string>
-  <string name="uploaded_by_myself">Cargada por min o</string>
-  <string name="used_by">, usada en</string>
-  <string name="articles">artigos</string>
-  <string name="no_uploads">Benvido a Commonsǃ\n\nCargue o seu primeiro ficheiro premendo na icona da cámara ou da galería enriba.</string>
+  <string name="uploaded_by_myself" fuzzy="true">Cargada por min o</string>
+  <string name="no_uploads" fuzzy="true">Benvido a Commonsǃ\n\nCargue o seu primeiro ficheiro premendo na icona da cámara ou da galería enriba.</string>
   <string name="desc_language_Worldwide">Mundial</string>
   <string name="desc_language_America">América</string>
   <string name="desc_language_Europe">Europa</string>
@@ -410,6 +418,29 @@
   <string name="upload_flow_all_images_in_set">(Para tódalas imaxes no conxunto)</string>
   <string name="search_this_area">Procurar nesta área</string>
   <string name="nearby_card_permission_title">Solicitude de permisos</string>
+  <string name="nearby_card_permission_explanation">Desexa que usemos a súa localizacións actual para amosarlle o lugar máis preto que precisa imaxes?</string>
   <string name="never_ask_again">Non volver a preguntar isto nunca</string>
+  <string name="display_location_permission_title">Amosar permiso de localización</string>
   <string name="ends_on">Finaliza o:</string>
+  <string name="display_campaigns">Amosar campañas</string>
+  <string name="display_campaigns_explanation">Preme aquí para ver as campañas en curso</string>
+  <string name="nearby_campaign_dismiss_message">Xa non verá as campañas. Porén, pode volver habilitar esta notificación na configuración.</string>
+  <string name="this_function_needs_network_connection">Esta función require conexión de rede, verifique a súa configuración de conexión.</string>
+  <string name="bad_token_error_proposed_solution">Erro na suba debido a problemas co identificador de edición. Peche a sesión e volva a entrar.</string>
+  <string name="error_processing_image">Houbo un erro ó procesar a imaxe. Por favor, ténteo de novoǃ</string>
+  <plurals name="receiving_shared_content">
+    <item quantity="one">Recepción de contido compartido. O procesamento da imaxe pode tardar certo tempo, dependendo do tamaño da imaxe e do seu dispositivo</item>
+    <item quantity="other">Recepción de contido compartido. O procesamento das imaxes pode tardar certo tempo, dependendo do tamaño das imaxes e do seu dispositivo</item>
+  </plurals>
+  <string name="no_image">Ningunha imaxe usada</string>
+  <string name="no_image_reverted">Ningunha imaxe revertida</string>
+  <string name="no_image_uploaded">Ningunha imaxe subida</string>
+  <string name="no_notification">Non ten ningunha notificación sen ler</string>
+  <string name="no_archived_notification">Non ten notificacións arquivadas</string>
+  <string name="share_logs_using">Compartir os rexistros usando</string>
+  <string name="menu_option_archived">Ver arquivadas</string>
+  <string name="menu_option_unread">Ver as non lidas</string>
+  <string name="error_occurred_in_picking_images">Houbo un erro ó escoller as imaxes</string>
+  <string name="image_chooser_title">Escoller imaxes a subir</string>
+  <string name="please_wait">Por favor, agarde…</string>
 </resources>

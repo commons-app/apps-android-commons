@@ -406,10 +406,8 @@
   <string name="deletion_reason_bad_for_my_privacy">أدركت أنه سيئ لخصوصيتي</string>
   <string name="deletion_reason_no_longer_want_public">لقد غيرت رأيي، ولا أريد أن يكون مرئيا للجميع بعد الآن</string>
   <string name="deletion_reason_not_interesting">آسف هذه الصورة ليست مثيرة للاهتمام لموسوعة</string>
-  <string name="uploaded_by_myself">رفعته بنفسي على</string>
-  <string name="used_by">،مستعمل في</string>
-  <string name="articles">مقالات</string>
-  <string name="no_uploads">مرحبا بك في كومنز! \n\nارفع الوسائط الأولى عن طريق لمس أيقونة الكاميرا أو المعرض أعلاه.</string>
+  <string name="uploaded_by_myself" fuzzy="true">رفعته بنفسي على</string>
+  <string name="no_uploads" fuzzy="true">مرحبا بك في كومنز! \n\nارفع الوسائط الأولى عن طريق لمس أيقونة الكاميرا أو المعرض أعلاه.</string>
   <string name="desc_language_Worldwide">في جميع أنحاء العالم</string>
   <string name="desc_language_America">أمريكا</string>
   <string name="desc_language_Europe">أوروبا</string>
