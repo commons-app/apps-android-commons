@@ -347,7 +347,7 @@
   <string name="bookmark_empty">Et ole lisännyt yhtään kirjanmerkkejä</string>
   <string name="provider_bookmarks_location">Kirjanmerkit</string>
   <string name="deletion_reason_uploaded_by_mistake">Tallensin sen vahingossa</string>
-  <string name="no_uploads">Tervetuloa Commonsiin!\n\nTallenna ensimmäinen mediasi koskettamalla kamera tai galleriakuvaketta yllä.</string>
+  <string name="no_uploads" fuzzy="true">Tervetuloa Commonsiin!\n\nTallenna ensimmäinen mediasi koskettamalla kamera tai galleriakuvaketta yllä.</string>
   <string name="desc_language_America">Amerikka</string>
   <string name="desc_language_Europe">Eurooppa</string>
   <string name="desc_language_Middle_East">Lähi-itä</string>

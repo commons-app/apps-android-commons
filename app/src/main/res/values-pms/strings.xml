@@ -396,10 +396,8 @@
   <string name="deletion_reason_bad_for_my_privacy">I l\'hai pensa ch\'a l\'era nen bon për mia arservatëssa</string>
   <string name="deletion_reason_no_longer_want_public">I l\'hai cangià d\'idèja, i veui pi nen ch\'a sia visìbil ëd fasson pùblica</string>
   <string name="deletion_reason_not_interesting">Am dëspias, ma costa plancia a l\'é nen anteressanta për n\'enciclopedìa</string>
-  <string name="uploaded_by_myself">Carià da mi ai</string>
-  <string name="used_by">dovrà an</string>
-  <string name="articles">artìcoj</string>
-  <string name="no_uploads">Bin-ëvnù su Commons!\n\nCh\'a caria sò prim archivi multimedial an sgnacand an sla plancia dla màchina fòto o an sla galarìa sì-dzora.</string>
+  <string name="uploaded_by_myself" fuzzy="true">Carià da mi ai</string>
+  <string name="no_uploads" fuzzy="true">Bin-ëvnù su Commons!\n\nCh\'a caria sò prim archivi multimedial an sgnacand an sla plancia dla màchina fòto o an sla galarìa sì-dzora.</string>
   <string name="desc_language_Worldwide">Mondial</string>
   <string name="desc_language_America">Mérica</string>
   <string name="desc_language_Europe">Euròpa</string>

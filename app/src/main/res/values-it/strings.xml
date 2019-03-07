@@ -406,10 +406,8 @@
   <string name="deletion_reason_bad_for_my_privacy">Mi sono reso conto che è un male per la mia privacy</string>
   <string name="deletion_reason_no_longer_want_public">Ho cambiato idea, non voglio più che sia pubblicamente visibile</string>
   <string name="deletion_reason_not_interesting">Spiacente, questa immagine non è interessante per un\'enciclopedia</string>
-  <string name="uploaded_by_myself">Caricato da me stesso il</string>
-  <string name="used_by">, usato in</string>
-  <string name="articles">voci</string>
-  <string name="no_uploads">Benvenuto su Commons!\n\nCarica il tuo primo file multimediale toccando l\'icona della fotocamera o della galleria sopra.</string>
+  <string name="uploaded_by_myself">Caricato da me stesso il %1$s, utilizzato in %2$d voce/i.</string>
+  <string name="no_uploads">Benvenuto su Commons!\n\nCarica il tuo primo file multimediale toccando il pulsante aggiungi.</string>
   <string name="desc_language_Worldwide">Tutto il mondo</string>
   <string name="desc_language_America">America</string>
   <string name="desc_language_Europe">Europa</string>

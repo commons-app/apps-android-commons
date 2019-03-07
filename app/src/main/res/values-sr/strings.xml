@@ -390,10 +390,8 @@
   <string name="deletion_reason_bad_for_my_privacy">Схватио/ла сам да је лоша за моју приватност</string>
   <string name="deletion_reason_no_longer_want_public">Променио/ла сам мишљење, не желим да више јавно буду видљиве</string>
   <string name="deletion_reason_not_interesting">Ова слика није занимљива за енциклопедију</string>
-  <string name="uploaded_by_myself">Отпремио/ла сам на</string>
-  <string name="used_by">, користи се у</string>
-  <string name="articles">чланци</string>
-  <string name="no_uploads">Добро дошли на Оставу!\n\nОтпремите прве медије додиром горенаведене иконице камере или галерије.</string>
+  <string name="uploaded_by_myself" fuzzy="true">Отпремио/ла сам на</string>
+  <string name="no_uploads" fuzzy="true">Добро дошли на Оставу!\n\nОтпремите прве медије додиром горенаведене иконице камере или галерије.</string>
   <string name="desc_language_Worldwide">Светски</string>
   <string name="desc_language_America">Америка</string>
   <string name="desc_language_Europe">Европа</string>

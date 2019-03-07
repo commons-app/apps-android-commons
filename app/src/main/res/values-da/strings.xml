@@ -335,9 +335,7 @@
   <string name="deletion_reason_uploaded_by_mistake">Jeg lagde dette op ved en fejl</string>
   <string name="deletion_reason_publicly_visible">Jeg vidste ikke, det ville være til offentligt skue</string>
   <string name="deletion_reason_bad_for_my_privacy">Jeg indså, det var skidt for mit privatliv</string>
-  <string name="used_by">,brugt i</string>
-  <string name="articles">artikler</string>
-  <string name="no_uploads">Velkommen til Commons!\n\nOplæg dit første medie ved at trykke på kamera eller galleri ikonet foroven.</string>
+  <string name="no_uploads" fuzzy="true">Velkommen til Commons!\n\nOplæg dit første medie ved at trykke på kamera eller galleri ikonet foroven.</string>
   <string name="desc_language_Worldwide">Verdensomspændende</string>
   <string name="desc_language_America">Amerika</string>
   <string name="desc_language_Europe">Europa</string>
