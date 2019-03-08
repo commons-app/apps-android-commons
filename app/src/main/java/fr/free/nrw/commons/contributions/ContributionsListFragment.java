@@ -91,7 +91,6 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment {
         }
     }
 
-
     private void initializeAnimations() {
         fab_open = AnimationUtils.loadAnimation(getActivity(), R.anim.fab_open);
         fab_close = AnimationUtils.loadAnimation(getActivity(), R.anim.fab_close);
