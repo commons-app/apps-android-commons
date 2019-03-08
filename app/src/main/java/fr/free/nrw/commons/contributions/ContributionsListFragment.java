@@ -13,6 +13,8 @@ import android.widget.GridView;
 import android.widget.ListAdapter;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.content.res.Configuration;
+import android.widget.LinearLayout;
 
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -46,6 +48,8 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment {
     FloatingActionButton fabGallery;
     @BindView(R.id.noContributionsYet)
     TextView noContributionsYet;
+    @BindView(R.id.fab_layout)
+    LinearLayout fab_layout;
 
     @Inject @Named("default_preferences") BasicKvStore basicKvStore;
     @Inject @Named("direct_nearby_upload_prefs") JsonKvStore directKvStore;
@@ -75,6 +79,18 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment {
         initializeAnimations();
         setListeners();
     }
+
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+        // check orientation
+        if (newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE) {
+            fab_layout.setOrientation(LinearLayout.HORIZONTAL);
+        } else if (newConfig.orientation == Configuration.ORIENTATION_PORTRAIT) {
+            fab_layout.setOrientation(LinearLayout.VERTICAL);
+        }
+    }
+
 
     private void initializeAnimations() {
         fab_open = AnimationUtils.loadAnimation(getActivity(), R.anim.fab_open);
