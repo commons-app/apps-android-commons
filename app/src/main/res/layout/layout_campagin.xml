@@ -1,36 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:paddingBottom="16dp"
-    android:paddingEnd="10dp"
-    android:paddingRight="10dp"
-    android:paddingTop="16dp"
+    android:layout_centerVertical="true"
+    android:minHeight="72dp"
     >
+  <LinearLayout
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_centerInParent="true">
 
   <ImageView
       android:id="@+id/iv_campaign"
       android:layout_width="40dp"
       android:layout_height="40dp"
       android:layout_marginLeft="16dp"
+      android:layout_marginStart="16dp"
       android:scaleType="centerCrop"
-      app:layout_constraintBottom_toBottomOf="parent"
-      app:layout_constraintLeft_toLeftOf="parent"
-      app:layout_constraintTop_toTopOf="parent"
       app:srcCompat="@drawable/ic_campaign"
       />
+  <LinearLayout
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_centerInParent="true"
+      android:orientation="horizontal"
+      android:layout_gravity="center_vertical"
+      android:gravity="center_vertical"
+      android:weightSum="4">
 
   <android.support.constraint.ConstraintLayout
-      android:layout_width="wrap_content"
+      android:layout_width="match_parent"
       android:layout_height="wrap_content"
       android:layout_marginLeft="16dp"
       android:layout_marginRight="4dp"
-      app:layout_constraintBottom_toBottomOf="parent"
-      app:layout_constraintLeft_toRightOf="@id/iv_campaign"
-      app:layout_constraintTop_toTopOf="parent"
+      android:layout_centerInParent="true"
       >
     <TextView
         android:id="@+id/tv_title"
@@ -40,7 +46,7 @@
         android:textColor="@android:color/white"
         android:textStyle="bold"
         tools:text="Campaign Title"
-        />
+        tools:ignore="MissingConstraints" />
 
     <TextView
         android:id="@+id/tv_description"
@@ -54,7 +60,7 @@
         android:visibility="gone"
         app:layout_constraintTop_toBottomOf="@id/tv_title"
         tools:text="Campaign Description"
-        />
+        tools:ignore="MissingConstraints" />
 
     <TextView
         android:id="@+id/tv_dates"
@@ -66,6 +72,8 @@
         android:text="@string/ends_on"
         android:textColor="@android:color/white"
         app:layout_constraintTop_toBottomOf="@id/tv_description"
-        />
+        tools:ignore="MissingConstraints" />
   </android.support.constraint.ConstraintLayout>
-</android.support.constraint.ConstraintLayout>
+  </LinearLayout>
+  </LinearLayout>
+</RelativeLayout>
