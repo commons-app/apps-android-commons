@@ -409,10 +409,8 @@
   <string name="deletion_reason_bad_for_my_privacy">Uvědomil/a jsem si, že je to špatné pro mé soukromí</string>
   <string name="deletion_reason_no_longer_want_public">Změnil/a jsem názor, nechci, aby to bylo veřejně viditelné</string>
   <string name="deletion_reason_not_interesting">Omlouváme se, že tento obrázek není zajímavý pro encyklopedii</string>
-  <string name="uploaded_by_myself">Náhráno mnou</string>
-  <string name="used_by">,použito v</string>
-  <string name="articles">články</string>
-  <string name="no_uploads">Vítejte na Commons!\n\nNahrajte svá první média pomocí tlačítek fotoaparátu nebo galerie nahoře.</string>
+  <string name="uploaded_by_myself" fuzzy="true">Náhráno mnou</string>
+  <string name="no_uploads" fuzzy="true">Vítejte na Commons!\n\nNahrajte svá první média pomocí tlačítek fotoaparátu nebo galerie nahoře.</string>
   <string name="desc_language_Worldwide">Celosvětově</string>
   <string name="desc_language_America">Amerika</string>
   <string name="desc_language_Europe">Evropa</string>

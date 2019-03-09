@@ -202,6 +202,7 @@
   <string name="_2fa_code">Código de autenticación de 2 pasos</string>
   <string name="number_of_uploads">Mi límite de subidas recientes</string>
   <string name="maximum_limit">Límite máximo</string>
+  <string name="invalid_input">Entrada no válida</string>
   <string name="maximum_limit_alert">No se pueden mostrar más de 500</string>
   <string name="set_limit">Establecer el límite de subidas recientes</string>
   <string name="login_failed_2fa_not_supported">Por el momento no se admite la autenticación de dos factores.</string>
@@ -375,7 +376,7 @@
   <string name="contributions_fragment">Contribuciones</string>
   <string name="nearby_fragment">Cercanos</string>
   <string name="notifications">Notificaciones</string>
-  <string name="archived_notifications" fuzzy="true">Notificaciones (archivadas)</string>
+  <string name="archived_notifications">Notificaciones (archivadas)</string>
   <string name="display_nearby_notification">Mostrar notificaciones de cercanía</string>
   <string name="display_nearby_notification_summary">Toca aquí para ver el lugar más cercano que necesita fotos</string>
   <string name="no_close_nearby">No se encontraron lugares cercanos cerca de ti</string>
@@ -408,8 +409,8 @@
   <string name="deletion_reason_bad_for_my_privacy">Me di cuenta que es malo para mi privacidad</string>
   <string name="deletion_reason_no_longer_want_public">Cambié de opinión, no quiero que siga siendo visible públicamente</string>
   <string name="deletion_reason_not_interesting">Lo sentimos, esta imagen no es interesante para una enciclopedia</string>
-  <string name="uploaded_by_myself">Subida por mí mismo el %1$s, usado en %2$d artículo(s).</string>
-    <string name="no_uploads">¡Bienvenido a Commons!\n\nSube tu primer archivo tocando el icono de la cámara o galería arriba.</string>
+  <string name="uploaded_by_myself" fuzzy="true">Subida por mí mismo el %1$s, usado en %2$d artículo(s).</string>
+  <string name="no_uploads" fuzzy="true">¡Bienvenido a Commons!\n\nSube tu primer archivo tocando el icono de la cámara o galería arriba.</string>
   <string name="desc_language_Worldwide">Mundial</string>
   <string name="desc_language_America">América</string>
   <string name="desc_language_Europe">Europa</string>
@@ -444,4 +445,5 @@
   <string name="no_image">Ninguna imagen usada</string>
   <string name="no_image_reverted">Ninguna imagen revertida</string>
   <string name="no_image_uploaded">Ninguna imagen subida</string>
+  <string name="please_wait">Un momento…</string>
 </resources>

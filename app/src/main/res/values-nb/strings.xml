@@ -402,10 +402,8 @@
   <string name="deletion_reason_bad_for_my_privacy">Jeg innså at det er dårlig for mitt personvern</string>
   <string name="deletion_reason_no_longer_want_public">Jeg ombestemte meg, jeg ønsker ikke at det skal være offentlig synlig lenger</string>
   <string name="deletion_reason_not_interesting">Beklager, dette bildet har ingen ensyklopedisk interesse</string>
-  <string name="uploaded_by_myself">Lastet opp av meg selv</string>
-  <string name="used_by">, brukt i</string>
-  <string name="articles">artikler</string>
-  <string name="no_uploads">Velkommen til Commons!\n\nLast opp din første mediefil ved å trykke på kamera- eller galleriikonet ovenfor.</string>
+  <string name="uploaded_by_myself" fuzzy="true">Lastet opp av meg selv</string>
+  <string name="no_uploads" fuzzy="true">Velkommen til Commons!\n\nLast opp din første mediefil ved å trykke på kamera- eller galleriikonet ovenfor.</string>
   <string name="desc_language_Worldwide">Verdensomspennende</string>
   <string name="desc_language_America">Amerika</string>
   <string name="desc_language_Europe">Europa</string>

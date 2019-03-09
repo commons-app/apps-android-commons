@@ -396,10 +396,8 @@
   <string name="deletion_reason_bad_for_my_privacy">Mi-am dat seama că este rău pentru intimitatea mea</string>
   <string name="deletion_reason_no_longer_want_public">M-am răzgândit, nu mai vreau să fie publică</string>
   <string name="deletion_reason_not_interesting">Ne pare rău că această imagine nu este interesantă pentru o enciclopedie</string>
-  <string name="uploaded_by_myself">Încărcat de mine însumi</string>
-  <string name="used_by">,folosită în</string>
-  <string name="articles">articole</string>
-  <string name="no_uploads">Bun venit la Commons!\n\nÎncărcați primul dvs. suport media atingând pictograma camerei sau galeria de mai sus.</string>
+  <string name="uploaded_by_myself" fuzzy="true">Încărcat de mine însumi</string>
+  <string name="no_uploads" fuzzy="true">Bun venit la Commons!\n\nÎncărcați primul dvs. suport media atingând pictograma camerei sau galeria de mai sus.</string>
   <string name="desc_language_Worldwide">La nivel mondial</string>
   <string name="desc_language_America">America</string>
   <string name="desc_language_Europe">Europa</string>
