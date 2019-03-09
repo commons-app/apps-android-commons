@@ -566,6 +566,11 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
             }else {
                 notfilter = "!read";
             }
+            String language=Locale.getDefault().getLanguage();
+            if(StringUtils.isNullOrWhiteSpace(language)){
+                //if no language is set we use the default user language defined on wikipedia
+                language="user";
+            }
             notificationNode = api.action("query")
                     .param("notprop", "list")
                     .param("format", "xml")
@@ -573,6 +578,7 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
                     .param("notformat", "model")
                     .param("notwikis", "wikidatawiki|commonswiki|enwiki")
                     .param("notfilter", notfilter)
+                    .param("uselang", language)
                     .get()
                     .getNode("/api/query/notifications/list");
         } catch (IOException e) {
