@@ -836,10 +836,10 @@ public class NearbyMapFragment extends DaggerFragment {
             updateMarker(isBookmarked, this.place);
         });
 
-        wikipediaButton.setEnabled(place.hasWikipediaLink());
+        wikipediaButton.setVisibility(place.hasWikipediaLink()?View.VISIBLE:View.GONE);
         wikipediaButton.setOnClickListener(view -> openWebView(this.place.siteLinks.getWikipediaLink()));
 
-        wikidataButton.setEnabled(place.hasWikidataLink());
+        wikidataButton.setVisibility(place.hasWikidataLink()?View.VISIBLE:View.GONE);
         wikidataButton.setOnClickListener(view -> openWebView(this.place.siteLinks.getWikidataLink()));
 
         directionsButton.setOnClickListener(view -> {
@@ -850,7 +850,7 @@ public class NearbyMapFragment extends DaggerFragment {
             }
         });
 
-        commonsButton.setEnabled(this.place.hasCommonsLink());
+        commonsButton.setVisibility(this.place.hasCommonsLink()?View.VISIBLE:View.GONE);
         commonsButton.setOnClickListener(view -> openWebView(this.place.siteLinks.getCommonsLink()));
 
         icon.setImageResource(this.place.getLabel().getIcon());
