@@ -1,6 +1,7 @@
 package fr.free.nrw.commons;
 
 import android.support.annotation.Nullable;
+import android.text.Html;
 import android.text.TextUtils;
 
 import org.w3c.dom.Document;
@@ -100,7 +101,11 @@ public class MediaDataExtractor {
     }
 
     private void setDiscussion(String source) {
-        discussion = source;
+        try {
+            discussion = Html.fromHtml(mediaWikiApi.parseWikicode(source)).toString();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     private void processWikiParseTree(String source, LicenseList licenseList) throws IOException {
