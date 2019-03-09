@@ -1,5 +1,7 @@
 package fr.free.nrw.commons.upload;
 
+import android.content.res.Configuration;
+import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -36,6 +38,12 @@ public class UploadCategoriesRenderer extends Renderer<CategoryItem> {
         view.setOnClickListener(v -> {
             CategoryItem item = getContent();
             item.setSelected(!item.isSelected());
+            Configuration config = getContext().getResources().getConfiguration();
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
+                if(config.getLayoutDirection() == View.LAYOUT_DIRECTION_RTL) {
+                    checkedView.setLayoutDirection(View.LAYOUT_DIRECTION_RTL);
+                }
+            }
             checkedView.setChecked(item.isSelected());
             if (listener != null) {
                 listener.categoryClicked(item);
