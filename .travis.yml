@@ -33,7 +33,7 @@ script:
   mkdir -p app/src/prodRelease/play/release-notes/en-US;
   fi
 - if [ "$TRAVIS_PULL_REQUEST" == "false" ] && [ "$TRAVIS_BRANCH" == "master" ]; then
-  git log --pretty=format:"%s" HEAD^..HEAD > app/src/prodRelease/play/release-notes/en-US/default.txt
+  git log --pretty=format:"%s" HEAD^..HEAD > app/src/prodRelease/play/release-notes/en-US/default.txt;
   fi
 - if [ "$TRAVIS_PULL_REQUEST" == "false" ] && [ "$TRAVIS_BRANCH" == "master" ]; then
   ./gradlew publishProdReleaseApk;
