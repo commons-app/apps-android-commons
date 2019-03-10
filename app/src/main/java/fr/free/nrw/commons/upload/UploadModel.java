@@ -41,7 +41,7 @@ import timber.log.Timber;
 public class UploadModel {
 
     private static UploadItem DUMMY = new UploadItem(
-            Uri.EMPTY,
+            originalContentUri, Uri.EMPTY,
             "",
             "",
             GPSExtractor.DUMMY,
@@ -111,7 +111,7 @@ public class UploadModel {
         }
         Timber.d("File created date is %d", fileCreatedDate);
         GPSExtractor gpsExtractor = fileProcessor.processFileCoordinates(similarImageInterface);
-        return new UploadItem(Uri.parse(uploadableFile.getFilePath()), uploadableFile.getMimeType(context), source, gpsExtractor, place, fileCreatedDate, createdTimestampSource);
+        return new UploadItem(uploadableFile.getContentUri(), Uri.parse(uploadableFile.getFilePath()), uploadableFile.getMimeType(context), source, gpsExtractor, place, fileCreatedDate, createdTimestampSource);
     }
 
     void onItemsProcessed(Place place, List<UploadItem> uploadItems) {
@@ -330,6 +330,7 @@ public class UploadModel {
 
     @SuppressWarnings("WeakerAccess")
     static class UploadItem {
+        private final Uri originalContentUri;
         private final Uri mediaUri;
         private final String mimeType;
         private final String source;
@@ -347,10 +348,12 @@ public class UploadModel {
         private BehaviorSubject<Integer> imageQuality;
 
         @SuppressLint("CheckResult")
-        UploadItem(Uri mediaUri, String mimeType, String source, GPSExtractor gpsCoords,
+        UploadItem(Uri originalContentUri,
+                   Uri mediaUri, String mimeType, String source, GPSExtractor gpsCoords,
                    @Nullable Place place,
                    long createdTimestamp,
                    String createdTimestampSource) {
+            this.originalContentUri = originalContentUri;
             this.createdTimestampSource = createdTimestampSource;
             title = new Title();
             descriptions = new ArrayList<>();
@@ -433,27 +436,7 @@ public class UploadModel {
         }
 
         public Uri getContentUri() {
-            return generateContentUri(UploadModel.context,getMediaUri().getPath());
-        }
-        private Uri generateContentUri(Context context,String path){
-            Cursor cursor = context.getContentResolver().query(
-                    MediaStore.Images.Media.EXTERNAL_CONTENT_URI
-                    , new String[] { MediaStore.Images.Media._ID }
-                    , MediaStore.Images.Media.DATA + "=? "
-                    , new String[] { path }, null);
-
-            if (cursor != null && cursor.moveToFirst()) {
-                int id = cursor.getInt(cursor.getColumnIndex(MediaStore.MediaColumns._ID));
-                return Uri.withAppendedPath(MediaStore.Images.Media.EXTERNAL_CONTENT_URI , Integer.toString(id));
-
-            } else if (!path.isEmpty()) {
-                ContentValues values = new ContentValues();
-                values.put(MediaStore.Images.Media.DATA, path);
-                return context.getContentResolver().insert(
-                        MediaStore.Images.Media.EXTERNAL_CONTENT_URI, values);
-            } else {
-                return null;
-            }
+            return originalContentUri;
         }
 
         public Context getContext(){
