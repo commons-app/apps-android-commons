@@ -60,6 +60,7 @@
                     android:layout_alignParentRight="true"
                     android:layout_alignParentEnd="true"
                     app:srcCompat="@drawable/ic_info_outline_black_24dp"
+                    android:tint="?attr/icon"
                     android:layout_marginVertical="@dimen/activity_margin_vertical" />
 
                 <ImageView
@@ -100,6 +101,7 @@
                         android:layout_toRightOf="@+id/images_upload_text_param"
                         android:layout_toEndOf="@+id/images_upload_text_param"
                         app:srcCompat="@drawable/ic_info_outline_blue_24dp"
+                        android:tint="?attr/icon"
                         android:layout_marginLeft="8dp"
                         android:layout_marginStart="8dp"/>
 
@@ -152,6 +154,7 @@
                         android:layout_toRightOf="@+id/images_reverted_text"
                         android:layout_toEndOf="@+id/images_reverted_text"
                         app:srcCompat="@drawable/ic_info_outline_blue_24dp"
+                        android:tint="?attr/icon"
                         android:layout_marginLeft="8dp"
                         android:layout_marginStart="8dp"/>
 
@@ -216,6 +219,7 @@
                         android:layout_toRightOf="@+id/images_used_by_wiki_text"
                         android:layout_toEndOf="@+id/images_used_by_wiki_text"
                         app:srcCompat="@drawable/ic_info_outline_blue_24dp"
+                        android:tint="?attr/icon"
                         android:layout_marginLeft="8dp"
                         android:layout_marginStart="8dp"/>
 

@@ -18,9 +18,12 @@
 
     <attr name="contributionsListBackground" format="reference"/>
     <attr name="achievementBackground" format="reference"/>
+    <attr name="drawerheaderBackground" format="reference"/>
+    <attr name="tutorialBackground" format="reference"/>
     <attr name="mainTabBackground" format="reference"/>
     <attr name="mainCardBackground" format="reference"/>
     <attr name="mainScreenNearbyPermissionbutton" format="reference"/>
+    <attr name="icon" format="reference"/>
 
 
     <declare-styleable name="CompatTextView">
