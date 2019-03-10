@@ -1,5 +1,8 @@
 package fr.free.nrw.commons.upload;
 
+import android.content.Context;
+import android.net.Uri;
+
 import java.io.IOException;
 
 import javax.inject.Inject;
@@ -20,7 +23,10 @@ import static fr.free.nrw.commons.utils.ImageUtils.IMAGE_OK;
 
 /**
  * Methods for pre-processing images to be uploaded
- */
+ *//*if (dataInBytes[0] == 70 && dataInBytes[1] == 66 && dataInBytes[2] == 77 && dataInBytes[3] == 68) {
+                Timber.d("Contains FBMD");
+                return Single.just(ImageUtils.FILE_FBMD);
+            }*/
 @Singleton
 public class ImageProcessingService {
     private final FileUtilsWrapper fileUtilsWrapper;
@@ -56,11 +62,13 @@ public class ImageProcessingService {
         }
         Timber.d("Checking the validity of image");
         String filePath = uploadItem.getMediaUri().getPath();
+        Uri contentUri=uploadItem.getContentUri();
+        Context context=uploadItem.getContext();
         Single<Integer> duplicateImage = checkDuplicateImage(filePath);
         Single<Integer> wrongGeoLocation = checkImageGeoLocation(uploadItem.getPlace(), filePath);
         Single<Integer> darkImage = checkDarkImage(filePath);
         Single<Integer> itemTitle = checkTitle ? validateItemTitle(uploadItem) : Single.just(ImageUtils.IMAGE_OK);
-        Single<Integer> checkFBMD = checkFBMD(filePath);
+        Single<Integer> checkFBMD = checkFBMD(context,contentUri);
 
         Single<Integer> zipResult = Single.zip(duplicateImage, wrongGeoLocation, darkImage, itemTitle,
                 (duplicate, wrongGeo, dark, title) -> {
@@ -84,9 +92,9 @@ public class ImageProcessingService {
      * Thus we successfully protect common's from Facebook's copyright violation
      */
 
-    public Single<Integer> checkFBMD(String filePath) {
+    public Single<Integer> checkFBMD(Context context,Uri contentUri) {
         try {
-            return readFBMD.processMetadata(filePath);
+            return readFBMD.processMetadata(context,contentUri);
         } catch (IOException e) {
             return Single.just(ImageUtils.FILE_FBMD);
         }

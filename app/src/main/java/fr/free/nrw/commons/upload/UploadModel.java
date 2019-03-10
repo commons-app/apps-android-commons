@@ -1,8 +1,11 @@
 package fr.free.nrw.commons.upload;
 
 import android.annotation.SuppressLint;
+import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.net.Uri;
+import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
@@ -54,7 +57,7 @@ public class UploadModel {
     private boolean bottomCardState = true;
     private boolean rightCardState = true;
     private int currentStepIndex = 0;
-    private Context context;
+    public static Context context;
     private Disposable badImageSubscription;
 
     private SessionManager sessionManager;
@@ -427,6 +430,34 @@ public class UploadModel {
 
         public Place getPlace() {
             return place;
+        }
+
+        public Uri getContentUri() {
+            return generateContentUri(UploadModel.context,getMediaUri().getPath());
+        }
+        private Uri generateContentUri(Context context,String path){
+            Cursor cursor = context.getContentResolver().query(
+                    MediaStore.Images.Media.EXTERNAL_CONTENT_URI
+                    , new String[] { MediaStore.Images.Media._ID }
+                    , MediaStore.Images.Media.DATA + "=? "
+                    , new String[] { path }, null);
+
+            if (cursor != null && cursor.moveToFirst()) {
+                int id = cursor.getInt(cursor.getColumnIndex(MediaStore.MediaColumns._ID));
+                return Uri.withAppendedPath(MediaStore.Images.Media.EXTERNAL_CONTENT_URI , Integer.toString(id));
+
+            } else if (!path.isEmpty()) {
+                ContentValues values = new ContentValues();
+                values.put(MediaStore.Images.Media.DATA, path);
+                return context.getContentResolver().insert(
+                        MediaStore.Images.Media.EXTERNAL_CONTENT_URI, values);
+            } else {
+                return null;
+            }
+        }
+
+        public Context getContext(){
+            return UploadModel.context;
         }
     }
 
