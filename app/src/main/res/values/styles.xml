@@ -4,6 +4,7 @@
         <item name="contributionsListBackground">@color/contributionListDarkBackground</item>
         <item name="mainTabBackground">@color/contributionListDarkBackground</item>
         <item name="mainBackground">@color/main_background_dark</item>
+        <item name="achievementBackground">@color/achievement_background_dark</item>
         <item name="colorPrimary">@color/primaryColor</item>
         <item name="colorPrimaryDark">@color/primaryDarkColor</item>
         <item name="colorAccent">@color/white</item>
@@ -29,6 +30,7 @@
         <item name="contributionsListBackground">@color/white</item>
         <item name="mainTabBackground">@color/primaryColor</item>
         <item name="mainBackground">@color/main_background_light</item>
+        <item name="achievementBackground">@color/achievement_background_light</item>
         <item name="colorPrimaryDark">@color/primaryDarkColor</item>
         <item name="colorAccent">@color/primaryColor</item>
         <item name="colorButtonNormal">@color/primaryColor</item>

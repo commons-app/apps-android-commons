@@ -17,6 +17,7 @@
     <attr name="textEnabled" format="reference"/>
 
     <attr name="contributionsListBackground" format="reference"/>
+    <attr name="achievementBackground" format="reference"/>
     <attr name="mainTabBackground" format="reference"/>
     <attr name="mainCardBackground" format="reference"/>
     <attr name="mainScreenNearbyPermissionbutton" format="reference"/>

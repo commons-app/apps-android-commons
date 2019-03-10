@@ -37,7 +37,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/toolbar"
-                android:background="@color/layout_light_grey"
+                android:background="?attr/achievementBackground"
                 android:orientation="vertical">
 
                 <TextView
