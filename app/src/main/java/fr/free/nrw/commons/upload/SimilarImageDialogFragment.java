@@ -47,9 +47,9 @@ public class SimilarImageDialogFragment extends DialogFragment {
     public SimilarImageDialogFragment() {
     }
     public interface onResponse{
-        public void onPositiveResponse();
+        void onPositiveResponse();
 
-        public void onNegativeResponse();
+        void onNegativeResponse();
     }
 
     @Override

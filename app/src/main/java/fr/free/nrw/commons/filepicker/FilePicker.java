@@ -152,7 +152,7 @@ public class FilePicker implements Constants {
     }
 
     private static void storeType(@NonNull Context context, int type) {
-        PreferenceManager.getDefaultSharedPreferences(context).edit().putInt(KEY_TYPE, type).commit();
+        PreferenceManager.getDefaultSharedPreferences(context).edit().putInt(KEY_TYPE, type).apply();
     }
 
     private static int restoreType(@NonNull Context context) {

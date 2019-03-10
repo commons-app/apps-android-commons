@@ -2,7 +2,6 @@ package fr.free.nrw.commons.upload
 
 import android.content.ComponentName
 import android.content.Context
-import android.content.SharedPreferences
 import fr.free.nrw.commons.HandlerService
 import fr.free.nrw.commons.auth.SessionManager
 import fr.free.nrw.commons.contributions.Contribution
