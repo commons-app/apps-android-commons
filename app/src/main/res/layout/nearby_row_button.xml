@@ -26,7 +26,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             app:srcCompat="@drawable/ic_round_star_border_24px"
-            android:tint="@color/button_blue"/>
+            android:tint="@color/button_blue_dark"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -53,7 +53,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             app:srcCompat="@drawable/ic_photo_camera_white_24dp"
-            android:tint="@color/button_blue"/>
+            android:tint="@color/button_blue_dark"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -79,7 +79,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             app:srcCompat="@drawable/ic_photo_white_24dp"
-            android:tint="@color/button_blue"
+            android:tint="@color/button_blue_dark"
             android:duplicateParentState="true"/>
         <TextView
             android:layout_width="wrap_content"
@@ -108,6 +108,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             app:srcCompat="@drawable/ic_directions_black_24dp"
+            android:tint="@color/button_blue_dark"
             android:duplicateParentState="true"/>
         <TextView
             android:layout_width="wrap_content"
@@ -135,6 +136,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             app:srcCompat="@drawable/ic_overflow"
+            android:tint="@color/button_blue_dark"
             android:duplicateParentState="true"/>
         <TextView
             android:layout_width="wrap_content"

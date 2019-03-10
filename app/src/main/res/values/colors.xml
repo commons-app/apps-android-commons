@@ -49,6 +49,7 @@
     <color name="enabled_button_text_color_dark">#FFFFFF</color>
 
     <color name="button_blue">#0c609c</color>
+    <color name="button_blue_dark">#116aaa</color>
 
     <color name="bottom_bar_light">#E0E0E0</color>
     <color name="bottom_bar_dark">#424242</color>
