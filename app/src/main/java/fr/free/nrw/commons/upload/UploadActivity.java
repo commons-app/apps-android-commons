@@ -5,6 +5,7 @@ import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AlertDialog;
@@ -23,6 +24,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
@@ -120,6 +122,8 @@ public class UploadActivity extends BaseActivity implements UploadView, SimilarI
     @BindView(R.id.category_search) EditText categoriesSearch;
     @BindView(R.id.category_search_container) TextInputLayout categoriesSearchContainer;
     @BindView(R.id.categories) RecyclerView categoriesList;
+    @BindView(R.id.category_search_layout)
+    FrameLayout categoryFrameLayout;
 
     // Final Submission
     @BindView(R.id.license_title) TextView licenseTitle;
@@ -563,6 +567,9 @@ public class UploadActivity extends BaseActivity implements UploadView, SimilarI
     }
 
     private void configureCategories() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
+            categoryFrameLayout.setLayoutDirection(View.LAYOUT_DIRECTION_LTR);
+        }
         categoriesAdapter = new UploadCategoriesAdapterFactory(categoriesModel).create(new ArrayList<>());
         categoriesList.setLayoutManager(new LinearLayoutManager(this));
         categoriesList.setAdapter(categoriesAdapter);
