@@ -21,7 +21,6 @@ import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
 import android.support.v4.widget.CursorAdapter;
 import android.support.v7.app.AlertDialog;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -178,7 +177,7 @@ public class ContributionsFragment
                 @Override public void onFragmentResumed(FragmentManager fm, Fragment f) {
                     super.onFragmentResumed(fm, f);
                     //If media detail pager fragment is visible, hide the campaigns view [might not be the best way to do, this but yeah, this proves to work for now]
-                    Log.e("#CF#", "onFragmentResumed" + f.getClass().getName());
+                    Timber.e("onFragmentResumed %s", f.getClass().getName());
                     if (f instanceof MediaDetailPagerFragment) {
                         campaignView.setVisibility(View.GONE);
                     }
@@ -186,7 +185,7 @@ public class ContributionsFragment
 
                 @Override public void onFragmentDetached(FragmentManager fm, Fragment f) {
                     super.onFragmentDetached(fm, f);
-                    Log.e("#CF#", "onFragmentDetached" + f.getClass().getName());
+                    Timber.e("onFragmentDetached %s", f.getClass().getName());
                     //If media detail pager fragment is detached, ContributionsList fragment is gonna be visible, [becomes tightly coupled though]
                     if (f instanceof MediaDetailPagerFragment) {
                         fetchCampaigns();

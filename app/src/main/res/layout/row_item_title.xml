@@ -13,7 +13,6 @@
         android:layout_height="wrap_content"
         android:hint="@string/share_title_hint"
         android:imeOptions="actionNext"
-        android:inputType="text"
-        android:maxLines="1"
+        android:inputType="textMultiLine"
         android:nextFocusForward="@+id/image_description" />
 </android.support.design.widget.TextInputLayout>

@@ -70,7 +70,7 @@ class UploadModelTest {
         `when`(fileUtilsWrapper!!.getGeolocationOfFile(anyString()))
                 .thenReturn("")
         `when`(imageProcessingService!!.validateImage(any(UploadModel.UploadItem::class.java), anyBoolean()))
-                .thenReturn(Single.just(IMAGE_OK));
+                .thenReturn(Single.just(IMAGE_OK))
 
     }
 

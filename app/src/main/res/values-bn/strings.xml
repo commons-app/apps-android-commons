@@ -234,7 +234,7 @@
   <string name="error_while_cache">ছবি আনার সময় ত্রুটি</string>
   <string name="title_info">ফাইলের একটি স্বতন্ত্র বর্ণনামূলক নাম যা ফাইলের নাম হিসাবে কাজ করবে। অাপনি সাধারণ ভাষা ব্যবহার করতে পারেন শূন্যস্থানসহ। ফাইলের এক্সটেনশন যুক্ত করবেন না।</string>
   <string name="description_info">যতটা সম্ভব মিডিয়াটি বর্ণনা করুন: এটি কোথায় ধারণ করা হয়েছিল? এটি কি প্রদর্শন করে? এটির প্রসঙ্গ কি? ধারণকৃত বস্তু অথবা ব্যক্তির বর্ণনা করুন। সহজে অনুমান করা যায়না সেরকম তথ্য উদঘাটন করুন, উদাহরণস্বরূপ, যদি ল্যান্ডস্কেপ হয় তাহলে দিবসকালের সময় দিন।</string>
-  <string name="upload_problem_image_duplicate">চিত্রটি ইতিমধ্যে কমন্স-এ রয়েছে।</string>
+  <string name="upload_problem_image_duplicate">চিত্রটি ইতিমধ্যে কমন্সে রয়েছে।</string>
   <string name="upload_problem_different_geolocation">এই ছবিটি ভিন্ন একটি স্থানে তোলা হয়েছিল।</string>
   <string name="upload_problem_do_you_continue">আপনি কি এখনও এই ছবিটি আপলোড করতে চান?</string>
   <string name="give_permission">অনুমতি দিন</string>
@@ -243,7 +243,7 @@
   <string name="login_to_your_account">আপনার অ্যাকাউন্টে প্রবেশ করুন</string>
   <string name="send_log_file">লগ ফাইল পাঠান</string>
   <string name="send_log_file_description" fuzzy="true">ইমেইলের মাধ্যমে উন্নয়নকারীর কাছে লগ ফাইল পাঠান</string>
-  <string name="no_web_browser">ইউঅারএল খোলার জন্য কোনো ওয়েব ব্রাউজার পাওয়া যায়নি</string>
+  <string name="no_web_browser">ইউআরএল খোলার জন্য কোনো ওয়েব ব্রাউজার পাওয়া যায়নি</string>
   <string name="null_url">ত্রুটি! ইউআরএল পাওয়া যায়নি</string>
   <string name="nominate_deletion">অপসারণের জন্য মনোনীত</string>
   <string name="view_browser">ব্রাউজারে দেখুন</string>

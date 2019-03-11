@@ -4,11 +4,16 @@
         <item name="contributionsListBackground">@color/contributionListDarkBackground</item>
         <item name="mainTabBackground">@color/contributionListDarkBackground</item>
         <item name="mainBackground">@color/main_background_dark</item>
+        <item name="achievementBackground">@color/achievement_background_dark</item>
+        <item name="drawerHeaderBackground">@color/drawerHeader_background_dark</item>
+        <item name="tutorialBackground">@color/tutorial_background_dark</item>
+        <item name="icon">@color/primaryTextColor</item>
         <item name="colorPrimary">@color/primaryColor</item>
         <item name="colorPrimaryDark">@color/primaryDarkColor</item>
         <item name="colorAccent">@color/white</item>
         <item name="colorButtonNormal">@color/primaryColor</item>
         <item name="bookmarkButtonColor">@color/button_blue_dark</item>
+        <item name="rowButtonColor">@color/button_blue_dark</item>
 
         <item name="semitransparentText">@color/commons_app_blue_dark</item>
         <item name="subBackground">@color/sub_background_dark</item>
@@ -30,10 +35,18 @@
         <item name="contributionsListBackground">@color/white</item>
         <item name="mainTabBackground">@color/primaryColor</item>
         <item name="mainBackground">@color/main_background_light</item>
+        <item name="achievementBackground">@color/achievement_background_light</item>
+        <item name="drawerHeaderBackground">@color/drawerHeader_background_light</item>
+        <item name="tutorialBackground">@color/tutorial_background_light</item>
+        <item name="icon">@color/secondaryTextColor</item>
         <item name="colorPrimaryDark">@color/primaryDarkColor</item>
         <item name="colorAccent">@color/primaryColor</item>
         <item name="colorButtonNormal">@color/primaryColor</item>
+<<<<<<< HEAD
         <item name="bookmarkButtonColor">@color/button_blue</item>
+=======
+        <item name="rowButtonColor">@color/button_blue</item>
+>>>>>>> 6389b35b49232bf5864dce7cbdcb5e917f783416
 
         <item name="semitransparentText">@color/commons_app_blue_light</item>
         <item name="subBackground">@color/sub_background_light</item>

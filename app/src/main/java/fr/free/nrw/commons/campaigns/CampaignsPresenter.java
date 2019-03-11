@@ -1,7 +1,6 @@
 package fr.free.nrw.commons.campaigns;
 
 import android.annotation.SuppressLint;
-import android.util.Log;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -20,6 +19,7 @@ import io.reactivex.SingleObserver;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
+import timber.log.Timber;
 
 /**
  * The presenter for the campaigns view, fetches the campaigns from the api and informs the view on
@@ -29,7 +29,6 @@ import io.reactivex.schedulers.Schedulers;
 public class CampaignsPresenter implements BasePresenter {
     private final OkHttpJsonApiClient okHttpJsonApiClient;
 
-    private final String TAG = "#CampaignsPresenter#";
     private ICampaignsView view;
     private Disposable disposable;
     private Campaign campaign;
@@ -74,7 +73,7 @@ public class CampaignsPresenter implements BasePresenter {
                         List<Campaign> campaigns = campaignResponseDTO.getCampaigns();
                         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
                         if (campaigns == null || campaigns.isEmpty()) {
-                            Log.e(TAG, "The campaigns list is empty");
+                            Timber.e("The campaigns list is empty");
                             view.showCampaigns(null);
                         }
                         Collections.sort(campaigns, (campaign, t1) -> {
@@ -108,7 +107,7 @@ public class CampaignsPresenter implements BasePresenter {
                     }
 
                     @Override public void onError(Throwable e) {
-                        Log.e(TAG, "could not fetch campaigns: " + e.getMessage());
+                        Timber.e(e.getMessage(), "could not fetch campaigns");
                     }
                 });
         }

@@ -246,7 +246,7 @@ class ApacheHttpClientMediaWikiApiTest {
     fun isUserBlockedFromCommonsForInfinitelyBlockedUser() {
         server.enqueue(MockResponse().setBody("<?xml version=\"1.0\"?><api><query><userinfo id=\"1000\" name=\"testusername\" blockid=\"3000\" blockedby=\"blockerusername\" blockedbyid=\"1001\" blockreason=\"testing\" blockedtimestamp=\"2018-05-24T15:32:09Z\" blockexpiry=\"infinite\"></userinfo></query></api>"))
 
-        val result = testObject.isUserBlockedFromCommons();
+        val result = testObject.isUserBlockedFromCommons()
 
         assertBasicRequestParameters(server, "GET").let { userBlockedRequest ->
             parseQueryParams(userBlockedRequest).let { body ->
@@ -268,7 +268,7 @@ class ApacheHttpClientMediaWikiApiTest {
         dateFormat.setTimeZone(TimeZone.getTimeZone("UTC"))
         server.enqueue(MockResponse().setBody("<?xml version=\"1.0\"?><api><query><userinfo id=\"1000\" name=\"testusername\" blockid=\"3000\" blockedby=\"blockerusername\" blockedbyid=\"1001\" blockreason=\"testing\" blockedtimestamp=\"2018-05-24T15:32:09Z\" blockexpiry=\"" + dateFormat.format(expiredDate) + "\"></userinfo></query></api>"))
 
-        val result = testObject.isUserBlockedFromCommons();
+        val result = testObject.isUserBlockedFromCommons()
 
         assertBasicRequestParameters(server, "GET").let { userBlockedRequest ->
             parseQueryParams(userBlockedRequest).let { body ->
@@ -290,7 +290,7 @@ class ApacheHttpClientMediaWikiApiTest {
         dateFormat.setTimeZone(TimeZone.getTimeZone("UTC"))
         server.enqueue(MockResponse().setBody("<?xml version=\"1.0\"?><api><query><userinfo id=\"1000\" name=\"testusername\" blockid=\"3000\" blockedby=\"blockerusername\" blockedbyid=\"1001\" blockreason=\"testing\" blockedtimestamp=\"2018-05-24T15:32:09Z\" blockexpiry=\"" + dateFormat.format(expiredDate) + "\"></userinfo></query></api>"))
 
-        val result = testObject.isUserBlockedFromCommons();
+        val result = testObject.isUserBlockedFromCommons()
 
         assertBasicRequestParameters(server, "GET").let { userBlockedRequest ->
             parseQueryParams(userBlockedRequest).let { body ->
@@ -308,7 +308,7 @@ class ApacheHttpClientMediaWikiApiTest {
     fun isUserBlockedFromCommonsForNotBlockedUser() {
         server.enqueue(MockResponse().setBody("<?xml version=\"1.0\"?><api><query><userinfo id=\"1000\" name=\"testusername\"></userinfo></query></api>"))
 
-        val result = testObject.isUserBlockedFromCommons();
+        val result = testObject.isUserBlockedFromCommons()
 
         assertBasicRequestParameters(server, "GET").let { userBlockedRequest ->
             parseQueryParams(userBlockedRequest).let { body ->

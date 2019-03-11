@@ -3,6 +3,12 @@
     <!-- Main application background color -->
     <color name="main_background_dark">#303030</color>
     <color name="main_background_light">#fafafa</color>
+    <color name="achievement_background_dark">#494949</color>
+    <color name="achievement_background_light">#D6DCE0</color>
+    <color name="drawerHeader_background_dark">#494949</color>
+    <color name="drawerHeader_background_light">#aaaaaa</color>
+    <color name="tutorial_background_dark">#303030</color>
+    <color name="tutorial_background_light">#0c609c</color>
     <color name="divider_grey">#eaeaea</color>
     <color name="contributionListDarkBackground">#1a1a1a</color>
 

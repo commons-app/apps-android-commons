@@ -3,7 +3,7 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#0c609c"
+    android:background="?attr/tutorialBackground"
     android:gravity="center"
     android:weightSum="1"
     android:layout_centerHorizontal="true">
@@ -11,7 +11,7 @@
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#0c609c"
+        android:background="?attr/tutorialBackground"
         android:gravity="center_vertical"
         >
 
