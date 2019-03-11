@@ -8,6 +8,7 @@
         <item name="colorPrimaryDark">@color/primaryDarkColor</item>
         <item name="colorAccent">@color/white</item>
         <item name="colorButtonNormal">@color/primaryColor</item>
+        <item name="bookmarkButtonColor">@color/button_blue_dark</item>
 
         <item name="semitransparentText">@color/commons_app_blue_dark</item>
         <item name="subBackground">@color/sub_background_dark</item>
@@ -32,6 +33,7 @@
         <item name="colorPrimaryDark">@color/primaryDarkColor</item>
         <item name="colorAccent">@color/primaryColor</item>
         <item name="colorButtonNormal">@color/primaryColor</item>
+        <item name="bookmarkButtonColor">@color/button_blue</item>
 
         <item name="semitransparentText">@color/commons_app_blue_light</item>
         <item name="subBackground">@color/sub_background_light</item>
