@@ -42,11 +42,8 @@
         <item name="colorPrimaryDark">@color/primaryDarkColor</item>
         <item name="colorAccent">@color/primaryColor</item>
         <item name="colorButtonNormal">@color/primaryColor</item>
-<<<<<<< HEAD
         <item name="bookmarkButtonColor">@color/button_blue</item>
-=======
         <item name="rowButtonColor">@color/button_blue</item>
->>>>>>> 6389b35b49232bf5864dce7cbdcb5e917f783416
 
         <item name="semitransparentText">@color/commons_app_blue_light</item>
         <item name="subBackground">@color/sub_background_light</item>
