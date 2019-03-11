@@ -15,10 +15,11 @@
     <attr name="buttonPressed" format="reference"/>
     <attr name="textDisabled" format="reference"/>
     <attr name="textEnabled" format="reference"/>
+    <attr name="rowButtonColor" format="reference"/>
 
     <attr name="contributionsListBackground" format="reference"/>
     <attr name="achievementBackground" format="reference"/>
-    <attr name="drawerheaderBackground" format="reference"/>
+    <attr name="drawerHeaderBackground" format="reference"/>
     <attr name="tutorialBackground" format="reference"/>
     <attr name="mainTabBackground" format="reference"/>
     <attr name="mainCardBackground" format="reference"/>
