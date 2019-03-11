@@ -1,8 +1,11 @@
 package fr.free.nrw.commons.upload;
 
 import android.annotation.SuppressLint;
+import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.net.Uri;
+import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
@@ -38,7 +41,7 @@ import timber.log.Timber;
 public class UploadModel {
 
     private static UploadItem DUMMY = new UploadItem(
-            Uri.EMPTY,
+            Uri.EMPTY, Uri.EMPTY,
             "",
             "",
             GPSExtractor.DUMMY,
@@ -54,7 +57,7 @@ public class UploadModel {
     private boolean bottomCardState = true;
     private boolean rightCardState = true;
     private int currentStepIndex = 0;
-    private Context context;
+    public static Context context;
     private Disposable badImageSubscription;
 
     private SessionManager sessionManager;
@@ -108,7 +111,7 @@ public class UploadModel {
         }
         Timber.d("File created date is %d", fileCreatedDate);
         GPSExtractor gpsExtractor = fileProcessor.processFileCoordinates(similarImageInterface);
-        return new UploadItem(Uri.parse(uploadableFile.getFilePath()), uploadableFile.getMimeType(context), source, gpsExtractor, place, fileCreatedDate, createdTimestampSource);
+        return new UploadItem(uploadableFile.getContentUri(), Uri.parse(uploadableFile.getFilePath()), uploadableFile.getMimeType(context), source, gpsExtractor, place, fileCreatedDate, createdTimestampSource);
     }
 
     void onItemsProcessed(Place place, List<UploadItem> uploadItems) {
@@ -327,6 +330,7 @@ public class UploadModel {
 
     @SuppressWarnings("WeakerAccess")
     static class UploadItem {
+        private final Uri originalContentUri;
         private final Uri mediaUri;
         private final String mimeType;
         private final String source;
@@ -344,10 +348,12 @@ public class UploadModel {
         private BehaviorSubject<Integer> imageQuality;
 
         @SuppressLint("CheckResult")
-        UploadItem(Uri mediaUri, String mimeType, String source, GPSExtractor gpsCoords,
+        UploadItem(Uri originalContentUri,
+                   Uri mediaUri, String mimeType, String source, GPSExtractor gpsCoords,
                    @Nullable Place place,
                    long createdTimestamp,
                    String createdTimestampSource) {
+            this.originalContentUri = originalContentUri;
             this.createdTimestampSource = createdTimestampSource;
             title = new Title();
             descriptions = new ArrayList<>();
@@ -427,6 +433,14 @@ public class UploadModel {
 
         public Place getPlace() {
             return place;
+        }
+
+        public Uri getContentUri() {
+            return originalContentUri;
+        }
+
+        public Context getContext(){
+            return UploadModel.context;
         }
     }
 
