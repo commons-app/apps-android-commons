@@ -41,7 +41,7 @@ import timber.log.Timber;
 public class UploadModel {
 
     private static UploadItem DUMMY = new UploadItem(
-            originalContentUri, Uri.EMPTY,
+            Uri.EMPTY, Uri.EMPTY,
             "",
             "",
             GPSExtractor.DUMMY,
