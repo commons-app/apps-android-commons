@@ -385,9 +385,7 @@
   <string name="deletion_reason_bad_for_my_privacy">Κατάλαβα πως δεν προστατεύονται τα ατομικά μου στοιχεία</string>
   <string name="deletion_reason_no_longer_want_public">Άλλαξα γνώμη, δεν θέλω να προβάλλεται πλέον δημόσια</string>
   <string name="deletion_reason_not_interesting">Λυπάμαι αυτή η εικόνα δεν έχει ενδιαφέρον για εγκυκλοπαίδεια</string>
-  <string name="uploaded_by_myself">Φορτώθηκε από μένα σε</string>
-  <string name="used_by">χρησιμοποιήθηκε στο</string>
-  <string name="articles">άρθρα</string>
+  <string name="uploaded_by_myself" fuzzy="true">Φορτώθηκε από μένα σε</string>
   <string name="desc_language_Worldwide">Παγκόσμιες</string>
   <string name="desc_language_America">Αμερική</string>
   <string name="desc_language_Europe">Ευρώπη</string>

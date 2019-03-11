@@ -36,7 +36,7 @@
 
         </RelativeLayout>
 
-        <RelativeLayout
+        <android.support.constraint.ConstraintLayout
             android:id="@+id/no_notification_background"
             android:visibility="gone"
             android:layout_width="match_parent"
@@ -47,19 +47,23 @@
                 android:id="@+id/imageView"
                 android:layout_width="110dp"
                 android:layout_height="160dp"
-                android:layout_centerVertical="true"
-                android:layout_centerHorizontal="true"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:srcCompat="@drawable/ic_notifications_off_black_24dp" />
 
             <TextView
                 android:id="@+id/no_notification_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/imageView"
-                android:layout_centerHorizontal="true"
+                app:layout_constraintTop_toBottomOf="@+id/imageView"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                android:gravity="center"
                 android:text="@string/no_notification"
                 android:textSize="20sp" />
-        </RelativeLayout>
+        </android.support.constraint.ConstraintLayout>
 
     </RelativeLayout>
 

@@ -245,6 +245,7 @@
   <string name="upload_problem_image_blurry">Bilden är för suddig.</string>
   <string name="upload_problem_image_duplicate">Bilden finns redan på Commons.</string>
   <string name="upload_problem_different_geolocation">Bilden togs på en annan plats.</string>
+  <string name="upload_problem_fbmd">Var god ladda bara upp bilder som du själv har tagit. Ladda inte upp bilder som du har hittat på andra personers Facebook-konton.</string>
   <string name="upload_problem_do_you_continue">Vill du fortfarande ladda upp denna bild?</string>
   <string name="give_permission">Ge behörighet</string>
   <string name="use_external_storage">Använd extern lagring</string>
@@ -401,10 +402,8 @@
   <string name="deletion_reason_bad_for_my_privacy">Jag insåg att den är dålig för mitt privatliv</string>
   <string name="deletion_reason_no_longer_want_public">Jag ändrade mig, jag vill inte längre att den ska vara synlig offentligt</string>
   <string name="deletion_reason_not_interesting">Tyvärr, denna bild är inte intressant för en encyklopedi</string>
-  <string name="uploaded_by_myself">Laddades upp av mig den</string>
-  <string name="used_by">, används i</string>
-  <string name="articles">artiklar</string>
-  <string name="no_uploads">Välkommen till Commons!\n\nLadda upp din första mediafil genom att trycka på kameran eller galleriikonen ovan.</string>
+  <string name="uploaded_by_myself" fuzzy="true">Laddades upp av mig den</string>
+  <string name="no_uploads" fuzzy="true">Välkommen till Commons!\n\nLadda upp din första mediafil genom att trycka på kameran eller galleriikonen ovan.</string>
   <string name="desc_language_Worldwide">Världsomfattande</string>
   <string name="desc_language_America">Amerika</string>
   <string name="desc_language_Europe">Europa</string>

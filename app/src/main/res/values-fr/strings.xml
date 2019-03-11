@@ -314,7 +314,7 @@
   <string name="showcase_view_plus_fab">Vous pouvez téléverser une photo de n\'importe quel endroit de votre gallerie ou de votre appareil photo</string>
   <string name="no_images_found">Aucune images trouvée.</string>
   <string name="error_loading_images">Une erreur s\'est produite pendant le chargement des images.</string>
-  <string name="image_uploaded_by">Importé par:%1$s</string>
+  <string name="image_uploaded_by">Importé par: %1$s</string>
   <string name="block_notification">Vous avez été bloqué et ne pouvez plus modifier sur  Commons</string>
   <string name="appwidget_img">Image du jour</string>
   <string name="app_widget_heading">Image du jour</string>
@@ -418,7 +418,7 @@
   <string name="deletion_reason_no_longer_want_public">J\'ai changé d\'avis, je ne désire plus qu\'il soit visible publiquement</string>
   <string name="deletion_reason_not_interesting">Désolé mais cette image n\'est pas intéressante pour une encyclopédie</string>
   <string name="uploaded_by_myself">Téléversé par moi-même le %1$s, utilisé dans %2$d article(s).</string>
-    <string name="no_uploads">Bienvenue sur Commons !\n\nTéléversez votre premier média en cliquant sur l’icône de l’appareil photo ou sur la galerie ci-dessus.</string>
+  <string name="no_uploads">Bienvenue sur Commons !\n\nTéléchargez votre premier média en tapant sur le bouton Ajouter.</string>
   <string name="desc_language_Worldwide">Mondial</string>
   <string name="desc_language_America">Amérique</string>
   <string name="desc_language_Europe">Europe</string>

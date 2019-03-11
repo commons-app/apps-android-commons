@@ -251,6 +251,7 @@
   <string name="upload_problem_image_blurry">A imagem está desfocada.</string>
   <string name="upload_problem_image_duplicate">A imagem já está na wiki Commons.</string>
   <string name="upload_problem_different_geolocation">Esta fotografia foi tirada num local diferente.</string>
+  <string name="upload_problem_fbmd">Carregue só fotografias tiradas por si, por favor. Não carregue fotografias que encontrou na conta do Facebook de outra pessoa.</string>
   <string name="upload_problem_do_you_continue">Quer, mesmo assim, carregar esta fotografia?</string>
   <string name="give_permission">Permitir</string>
   <string name="use_external_storage">Utilizar a armazenagem externa</string>
@@ -407,10 +408,8 @@
   <string name="deletion_reason_bad_for_my_privacy">Apercebi-me de que prejudica a minha privacidade</string>
   <string name="deletion_reason_no_longer_want_public">Mudei de ideias, já não quero possa ser vista pelo público</string>
   <string name="deletion_reason_not_interesting">Desculpe, esta fotografia não tem interesse para uma enciclopédia</string>
-  <string name="uploaded_by_myself">Carregada por mim em</string>
-  <string name="used_by">, usada em</string>
-  <string name="articles">artigos</string>
-  <string name="no_uploads">Bem-vindo(a) à wiki Commons!\n\nCarregue o seu primeiro ficheiro multimédia tocando no ícone da câmara ou da galeria acima.</string>
+  <string name="uploaded_by_myself" fuzzy="true">Carregada por mim em</string>
+  <string name="no_uploads" fuzzy="true">Bem-vindo(a) à wiki Commons!\n\nCarregue o seu primeiro ficheiro multimédia tocando no ícone da câmara ou da galeria acima.</string>
   <string name="desc_language_Worldwide">Global</string>
   <string name="desc_language_America">América</string>
   <string name="desc_language_Europe">Europa</string>

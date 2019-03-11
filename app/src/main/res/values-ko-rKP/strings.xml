@@ -342,8 +342,7 @@
   <string name="deletion_reason_publicly_visible">공개가 되는줄 몰랐습니다</string>
   <string name="deletion_reason_no_longer_want_public">생각이 바뀌여서 더이상 공개하고싶지 않습니다</string>
   <string name="deletion_reason_not_interesting">죄송합니다. 이 화상은 백과사전의 관심 대상이 아닙니다</string>
-  <string name="uploaded_by_myself">나자신이 올리적재하였음</string>
-  <string name="articles">문서</string>
+  <string name="uploaded_by_myself" fuzzy="true">나자신이 올리적재하였음</string>
   <string name="desc_language_Worldwide">전세계</string>
   <string name="desc_language_Europe">구주</string>
   <string name="desc_language_Asia">아시아</string>
