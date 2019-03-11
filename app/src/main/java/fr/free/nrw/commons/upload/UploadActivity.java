@@ -142,6 +142,7 @@ public class UploadActivity extends BaseActivity implements UploadView, SimilarI
     private ProgressDialog progressDialog;
     private static boolean updatedImage =false;
     private String source;
+    private static int currentItem=0;
 
 
     @SuppressLint("CheckResult")
@@ -455,11 +456,8 @@ public class UploadActivity extends BaseActivity implements UploadView, SimilarI
     }
 
     @Override
-    public void openEditImageActivity(String extraFiles, ArrayList<UploadableFile> uri) {
-        Intent intent=new Intent(this,EditUploadActivity.class);
-        intent.putParcelableArrayListExtra(extraFiles, new ArrayList<>(uri));
-        intent.putExtra(EXTRA_SOURCE,source);
-        startActivity(intent);
+    public void setCurrentItem(int position) {
+            currentItem=position;
     }
 
     @Override
@@ -489,7 +487,7 @@ public class UploadActivity extends BaseActivity implements UploadView, SimilarI
             if (resultCode == RESULT_OK) {
                 resultUri = result.getUri();
                 updatedImage=true;
-                presenter.updateImageUri(0,resultUri);
+                presenter.updateImageUri(currentItem,resultUri);
             } else if (resultCode == CropImage.CROP_IMAGE_ACTIVITY_RESULT_ERROR_CODE) {
                 Exception error = result.getError();
             }

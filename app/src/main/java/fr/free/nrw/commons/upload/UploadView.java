@@ -88,6 +88,7 @@ public interface UploadView {
 
     void openCropImage(Uri uri);
 
-   void openEditImageActivity(String extraFiles, ArrayList<UploadableFile> es);
+    void setCurrentItem(int position);
+
 
 }

@@ -5,6 +5,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Parcelable;
+import android.util.Log;
+import android.widget.Toast;
 
 import java.lang.reflect.Proxy;
 import java.util.ArrayList;
@@ -143,9 +145,15 @@ public class UploadPresenter {
         if (uri!=null){
             if (uri.size()==1)
                 view.openCropImage(Uri.fromFile(uri.get(0).getFile()));
-            else if (uri.size()>1){
-                view.openEditImageActivity(EXTRA_FILES, new ArrayList<>(uri));
+            else if (uri.size()>1){int c=0;
+                for (UploadableFile u:uri){
+                    if (u.getMediaUri().equals(uploadModel.getCurrentItem().getMediaUri())){
+                        view.openCropImage(Uri.fromFile(uri.get(c).getFile()));
+                        view.setCurrentItem(c);
+                    }
 
+                    c++;
+                }
             }
         }
     }
