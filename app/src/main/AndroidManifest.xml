@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="fr.free.nrw.commons">
 
     <uses-permission android:name="android.permission.INTERNET" />
@@ -34,7 +35,8 @@
             android:excludeFromRecents="true"
             android:finishOnTaskLaunch="true"
             />
-        <activity android:name=".upload.EditUploadActivity"></activity>
+        <activity android:name=".upload.EditUploadActivity"
+            android:theme="@style/Base.Theme.AppCompat"></activity>
         <activity android:name=".auth.LoginActivity">
             <intent-filter>
                 <category android:name="android.intent.category.LAUNCHER" />

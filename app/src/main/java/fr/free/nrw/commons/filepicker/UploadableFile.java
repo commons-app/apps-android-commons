@@ -13,6 +13,8 @@ import com.drew.metadata.exif.ExifSubIFDDirectory;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.Date;
 
 import javax.annotation.Nullable;
@@ -33,7 +35,7 @@ public class UploadableFile implements Parcelable {
     };
 
     private final Uri contentUri;
-    private final File file;
+    private File file;
 
     public UploadableFile(Uri contentUri, File file) {
         this.contentUri = contentUri;
@@ -60,6 +62,15 @@ public class UploadableFile implements Parcelable {
 
     public Uri getMediaUri() {
         return Uri.parse(getFilePath());
+    }
+
+    public void updateFilePath(Uri uri){
+        String path = uri.toString();
+        try {
+            file=new File(new URI(path));
+        } catch (URISyntaxException e) {
+            e.printStackTrace();
+        }
     }
 
     public String getMimeType(Context context) {

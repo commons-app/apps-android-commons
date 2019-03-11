@@ -76,6 +76,7 @@ import timber.log.Timber;
 import static fr.free.nrw.commons.contributions.Contribution.SOURCE_EXTERNAL;
 import static fr.free.nrw.commons.contributions.ContributionController.ACTION_INTERNAL_UPLOADS;
 import static fr.free.nrw.commons.upload.UploadService.EXTRA_FILES;
+import static fr.free.nrw.commons.upload.UploadService.EXTRA_SOURCE;
 import static fr.free.nrw.commons.wikidata.WikidataConstants.PLACE_OBJECT;
 
 public class UploadActivity extends BaseActivity implements UploadView, SimilarImageInterface {
@@ -140,6 +141,7 @@ public class UploadActivity extends BaseActivity implements UploadView, SimilarI
     private CompositeDisposable compositeDisposable;
     private ProgressDialog progressDialog;
     private static boolean updatedImage =false;
+    private String source;
 
 
     @SuppressLint("CheckResult")
@@ -152,6 +154,7 @@ public class UploadActivity extends BaseActivity implements UploadView, SimilarI
         compositeDisposable = new CompositeDisposable();
 
         ArrayList<UploadableFile> files= getIntent().getParcelableArrayListExtra(EXTRA_FILES);
+        source=getIntent().getStringExtra(EXTRA_SOURCE);
 
         Intent intent = getIntent();
         HashMap<Integer, Uri> hashMap = (HashMap<Integer, Uri>) intent.getSerializableExtra("hashMap");
@@ -455,6 +458,7 @@ public class UploadActivity extends BaseActivity implements UploadView, SimilarI
     public void openEditImageActivity(String extraFiles, ArrayList<UploadableFile> uri) {
         Intent intent=new Intent(this,EditUploadActivity.class);
         intent.putParcelableArrayListExtra(extraFiles, new ArrayList<>(uri));
+        intent.putExtra(EXTRA_SOURCE,source);
         startActivity(intent);
     }
 
