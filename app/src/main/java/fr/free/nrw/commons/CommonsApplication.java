@@ -42,7 +42,6 @@ import fr.free.nrw.commons.logging.LogUtils;
 import fr.free.nrw.commons.modifications.ModifierSequenceDao;
 import fr.free.nrw.commons.upload.FileUtils;
 import fr.free.nrw.commons.utils.ConfigUtils;
-import fr.free.nrw.commons.utils.ContributionUtils;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 import timber.log.Timber;
@@ -71,9 +70,11 @@ public class CommonsApplication extends Application {
 
     public static final String FEEDBACK_EMAIL = "commons-app-android@googlegroups.com";
 
-    public static final String FEEDBACK_EMAIL_SUBJECT = "Commons Android App (%s) Feedback";
+    public static final String FEEDBACK_EMAIL_SUBJECT = "Commons Android App Feedback";
 
     public static final String NOTIFICATION_CHANNEL_ID_ALL = "CommonsNotificationAll";
+
+    public static final String FEEDBACK_EMAIL_TEMPLATE_HEADER = "-- Technical information --";
 
     /**
      * Constants End
@@ -113,9 +114,6 @@ public class CommonsApplication extends Application {
             // TODO: Remove when we're able to initialize Fresco in test builds.
         }
 
-        // Empty temp directory in case some temp files are created and never removed.
-        ContributionUtils.emptyTemporaryDirectory();
-
         if (BuildConfig.DEBUG && !isRoboUnitTest()) {
             Stetho.initializeWithDefaults(this);
         }
@@ -138,7 +136,7 @@ public class CommonsApplication extends Application {
     private void initTimber() {
         boolean isBeta = ConfigUtils.isBetaFlavour();
         String logFileName = isBeta ? "CommonsBetaAppLogs" : "CommonsAppLogs";
-        String logDirectory = LogUtils.getLogDirectory(isBeta);
+        String logDirectory = LogUtils.getLogDirectory();
         FileLoggingTree tree = new FileLoggingTree(
                 Log.DEBUG,
                 logFileName,

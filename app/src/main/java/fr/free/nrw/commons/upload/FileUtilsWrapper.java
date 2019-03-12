@@ -1,12 +1,7 @@
 package fr.free.nrw.commons.upload;
 
-import android.content.ContentResolver;
-import android.content.Context;
-import android.net.Uri;
-
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.io.InputStream;
 
 import javax.inject.Inject;
@@ -18,16 +13,6 @@ public class FileUtilsWrapper {
     @Inject
     public FileUtilsWrapper() {
 
-    }
-
-    public String createCopyPathAndCopy(boolean useExtStorage,
-                                        Uri uri,
-                                        ContentResolver contentResolver,
-                                        Context context) throws IOException {
-        return FileUtils.createCopyPathAndCopy(useExtStorage,
-                uri,
-                contentResolver,
-                context);
     }
 
     public String getFileExt(String fileName) {

@@ -1,5 +1,6 @@
 package fr.free.nrw.commons.contributions;
 
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -8,14 +9,18 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.content.ContextCompat;
+import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewPager;
+import android.support.v4.widget.DrawerLayout;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
+
+import java.util.List;
 
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -30,8 +35,13 @@ import fr.free.nrw.commons.kvstore.BasicKvStore;
 import fr.free.nrw.commons.location.LocationServiceManager;
 import fr.free.nrw.commons.nearby.NearbyFragment;
 import fr.free.nrw.commons.nearby.NearbyNotificationCardView;
+import fr.free.nrw.commons.notification.Notification;
 import fr.free.nrw.commons.notification.NotificationActivity;
+import fr.free.nrw.commons.notification.NotificationController;
 import fr.free.nrw.commons.upload.UploadService;
+import io.reactivex.Observable;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.schedulers.Schedulers;
 import timber.log.Timber;
 
 import static android.content.ContentResolver.requestSync;
@@ -41,6 +51,7 @@ public class MainActivity extends AuthenticatedActivity implements FragmentManag
 
     @Inject
     SessionManager sessionManager;
+    @Inject ContributionController controller;
     @BindView(R.id.tab_layout)
     TabLayout tabLayout;
     @BindView(R.id.pager)
@@ -50,6 +61,8 @@ public class MainActivity extends AuthenticatedActivity implements FragmentManag
     @Inject
     @Named("default_preferences")
     public BasicKvStore defaultKvStore;
+    @Inject
+    NotificationController notificationController;
 
 
     public Intent uploadServiceIntent;
@@ -61,9 +74,11 @@ public class MainActivity extends AuthenticatedActivity implements FragmentManag
 
     public boolean isContributionsFragmentVisible = true; // False means nearby fragment is visible
     private Menu menu;
-    private boolean isThereUnreadNotifications = false;
 
     private boolean onOrientationChanged = false;
+
+    private MenuItem notificationsMenuItem;
+    private TextView notificationCount;
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -73,6 +88,7 @@ public class MainActivity extends AuthenticatedActivity implements FragmentManag
         requestAuthToken();
         initDrawer();
         setTitle(getString(R.string.navigation_item_home)); // Should I create a new string variable with another name instead?
+
 
         if (savedInstanceState != null ) {
             onOrientationChanged = true; // Will be used in nearby fragment to determine significant update of map
@@ -118,13 +134,11 @@ public class MainActivity extends AuthenticatedActivity implements FragmentManag
         tabLayout.getTabAt(1).setCustomView(nearbyTabLinearLayout);
 
         nearbyInfo.setOnClickListener(view ->
-                new AlertDialog.Builder(MainActivity.this)
-                    .setTitle(R.string.title_activity_nearby)
-                    .setMessage(R.string.showcase_view_whole_nearby_activity)
-                    .setCancelable(true)
-                    .setPositiveButton(android.R.string.ok, (dialog, id) -> dialog.cancel())
-                    .create()
-                    .show()
+                new AlertDialog.Builder(MainActivity.this).setTitle(R.string.title_activity_nearby).setMessage(R.string.showcase_view_whole_nearby_activity)
+                        .setCancelable(true)
+                        .setPositiveButton(android.R.string.ok, (dialog, id) -> dialog.cancel())
+                        .create()
+                        .show()
         );
 
         if (uploadServiceIntent != null) {
@@ -228,9 +242,12 @@ public class MainActivity extends AuthenticatedActivity implements FragmentManag
 
     @Override
     public void onBackPressed() {
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         String contributionsFragmentTag = ((ContributionsActivityPagerAdapter) viewPager.getAdapter()).makeFragmentName(R.id.pager, 0);
         String nearbyFragmentTag = ((ContributionsActivityPagerAdapter) viewPager.getAdapter()).makeFragmentName(R.id.pager, 1);
-        if (getSupportFragmentManager().findFragmentByTag(contributionsFragmentTag) != null && isContributionsFragmentVisible) {
+        if (drawer.isDrawerOpen(GravityCompat.START)) {
+            drawer.closeDrawer(GravityCompat.START);
+        } else if (getSupportFragmentManager().findFragmentByTag(contributionsFragmentTag) != null && isContributionsFragmentVisible) {
             // Meas that contribution fragment is visible (not nearby fragment)
             ContributionsFragment contributionsFragment = (ContributionsFragment) getSupportFragmentManager().findFragmentByTag(contributionsFragmentTag);
 
@@ -273,18 +290,35 @@ public class MainActivity extends AuthenticatedActivity implements FragmentManag
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.contribution_activity_notification_menu, menu);
 
-        if (!isThereUnreadNotifications) {
-            // TODO: used vectors are not compatible with API 19 and below, change them
-            menu.findItem(R.id.notifications).setIcon(ContextCompat.getDrawable(this, R.drawable.ic_notification_white_clip_art));
-        } else {
-            menu.findItem(R.id.notifications).setIcon(ContextCompat.getDrawable(this, R.drawable.ic_notification_white_clip_art_dot));
-        }
-
+        notificationsMenuItem = menu.findItem(R.id.notifications);
+        final View notification = notificationsMenuItem.getActionView();
+        notificationCount = notification.findViewById(R.id.notification_count_badge);
+        notification.setOnClickListener(view -> {
+            NotificationActivity.startYourself(MainActivity.this, "unread");
+        });
         this.menu = menu;
-
         updateMenuItem();
-
+        setNotificationCount();
         return true;
+    }
+
+    @SuppressLint("CheckResult")
+    private void setNotificationCount() {
+        Observable.fromCallable(() -> notificationController.getNotifications(false))
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(this::initNotificationViews,
+                        throwable -> Timber.e(throwable, "Error occurred while loading notifications"));
+    }
+
+    private void initNotificationViews(List<Notification> notificationList) {
+        Timber.d("Number of notifications is %d", notificationList.size());
+        if (notificationList.isEmpty()) {
+            notificationCount.setVisibility(View.GONE);
+        } else {
+            notificationCount.setVisibility(View.VISIBLE);
+            notificationCount.setText(String.valueOf(notificationList.size()));
+        }
     }
 
     /**
@@ -312,7 +346,7 @@ public class MainActivity extends AuthenticatedActivity implements FragmentManag
         switch (item.getItemId()) {
             case R.id.notifications:
                 // Starts notification activity on click to notification icon
-                NotificationActivity.startYourself(this);
+                NotificationActivity.startYourself(this, "unread");
                 return true;
             case R.id.list_sheet:
                 if (contributionsActivityPagerAdapter.getItem(1) != null) {
@@ -328,21 +362,6 @@ public class MainActivity extends AuthenticatedActivity implements FragmentManag
         PackageManager pm = getPackageManager();
         return pm.hasSystemFeature(PackageManager.FEATURE_CAMERA) ||
                 pm.hasSystemFeature(PackageManager.FEATURE_CAMERA_FRONT);
-    }
-
-    /**
-     * Update notification icon if there is an unread notification
-     * @param isThereUnreadNotifications true if user didn't visit notifications activity since
-     *                                   latest notification came to account
-     */
-    public void updateNotificationIcon(boolean isThereUnreadNotifications) {
-        if (!isThereUnreadNotifications) {
-            this.isThereUnreadNotifications = false;
-            menu.findItem(R.id.notifications).setIcon(ContextCompat.getDrawable(this, R.drawable.ic_notification_white_clip_art));
-        } else {
-            this.isThereUnreadNotifications = true;
-            menu.findItem(R.id.notifications).setIcon(ContextCompat.getDrawable(this, R.drawable.ic_notification_white_clip_art_dot));
-        }
     }
 
     public class ContributionsActivityPagerAdapter extends FragmentPagerAdapter {
@@ -442,11 +461,7 @@ public class MainActivity extends AuthenticatedActivity implements FragmentManag
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        ContributionsListFragment contributionsListFragment =
-                        (ContributionsListFragment) contributionsActivityPagerAdapter
-                        .getItem(0).getChildFragmentManager()
-                        .findFragmentByTag(ContributionsFragment.CONTRIBUTION_LIST_FRAGMENT_TAG);
-        contributionsListFragment.onActivityResult(requestCode, resultCode, data);
+        controller.handleActivityResult(this, requestCode, resultCode, data);
     }
 
     @Override
@@ -465,7 +480,7 @@ public class MainActivity extends AuthenticatedActivity implements FragmentManag
                     if (!isContributionsFragmentVisible) {
                         viewPager.setCurrentItem(CONTRIBUTIONS_TAB_POSITION);
 
-                    // TODO: If contrib fragment is visible and location permission is not given, display permission request button
+                        // TODO: If contrib fragment is visible and location permission is not given, display permission request button
                     } else {
 
                     }
@@ -476,6 +491,12 @@ public class MainActivity extends AuthenticatedActivity implements FragmentManag
             default:
                 return;
         }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        setNotificationCount();
     }
 
     @Override

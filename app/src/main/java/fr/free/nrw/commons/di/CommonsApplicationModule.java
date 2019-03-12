@@ -6,6 +6,8 @@ import android.content.Context;
 import android.support.v4.util.LruCache;
 import android.view.inputmethod.InputMethodManager;
 
+import com.google.gson.Gson;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -25,7 +27,6 @@ import fr.free.nrw.commons.kvstore.BasicKvStore;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.location.LocationServiceManager;
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
-import fr.free.nrw.commons.nearby.NearbyPlaces;
 import fr.free.nrw.commons.settings.Prefs;
 import fr.free.nrw.commons.upload.UploadController;
 import fr.free.nrw.commons.utils.ConfigUtils;
@@ -154,19 +155,8 @@ public class CommonsApplicationModule {
 
     @Provides
     @Named("direct_nearby_upload_prefs")
-    public JsonKvStore providesDirectNearbyUploadKvStore(Context context) {
-        return new JsonKvStore(context, "direct_nearby_upload_prefs");
-    }
-
-    /**
-     * Is used to determine when user is viewed notifications activity last
-     * @param context
-     * @return date of lastReadNotificationDate
-     */
-    @Provides
-    @Named("last_read_notification_date")
-    public BasicKvStore providesLastReadNotificationDateKvStore(Context context) {
-        return new BasicKvStore(context, "last_read_notification_date");
+    public JsonKvStore providesDirectNearbyUploadKvStore(Context context, Gson gson) {
+        return new JsonKvStore(context, "direct_nearby_upload_prefs", gson);
     }
 
     @Provides
@@ -194,12 +184,6 @@ public class CommonsApplicationModule {
     @Singleton
     public DBOpenHelper provideDBOpenHelper(Context context) {
         return new DBOpenHelper(context);
-    }
-
-    @Provides
-    @Singleton
-    public NearbyPlaces provideNearbyPlaces() {
-        return new NearbyPlaces();
     }
 
     @Provides

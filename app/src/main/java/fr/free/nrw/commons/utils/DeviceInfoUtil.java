@@ -62,7 +62,7 @@ public class DeviceInfoUtil {
      * @return
      */
     public static String getDeviceModel() {
-        return Build.DEVICE;
+        return Build.MODEL;
     }
 
     /**
@@ -71,5 +71,21 @@ public class DeviceInfoUtil {
      */
     public static String getAndroidVersion() {
         return Build.VERSION.RELEASE;
+    }
+
+    /**
+     * Get API Level. Eg. 26
+     * @return
+     */
+    public static String getAPILevel() {
+        return Build.VERSION.SDK;
+    }
+
+    /**
+     * Get Device.
+     * @return
+     */
+    public static String getDevice() {
+        return Build.DEVICE;
     }
 }

@@ -1,25 +1,20 @@
 package fr.free.nrw.commons.upload;
 
 import android.annotation.SuppressLint;
-import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.ContentResolver;
 import android.content.ContentValues;
 import android.content.Intent;
 import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.NotificationCompat;
-import android.util.Log;
-import android.webkit.MimeTypeMap;
 import android.widget.Toast;
 
-import com.j256.simplemagic.ContentInfo;
-import com.j256.simplemagic.ContentInfoUtil;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.FilterInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.HashSet;
@@ -33,12 +28,11 @@ import fr.free.nrw.commons.BuildConfig;
 import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.HandlerService;
 import fr.free.nrw.commons.R;
-import fr.free.nrw.commons.Utils;
 import fr.free.nrw.commons.auth.SessionManager;
 import fr.free.nrw.commons.contributions.Contribution;
 import fr.free.nrw.commons.contributions.ContributionDao;
-import fr.free.nrw.commons.contributions.MainActivity;
 import fr.free.nrw.commons.contributions.ContributionsContentProvider;
+import fr.free.nrw.commons.contributions.MainActivity;
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
 import fr.free.nrw.commons.mwapi.UploadResult;
 import fr.free.nrw.commons.wikidata.WikidataEditService;
@@ -52,6 +46,7 @@ public class UploadService extends HandlerService<Contribution> {
 
     public static final String ACTION_START_SERVICE = EXTRA_PREFIX + ".upload";
     public static final String EXTRA_SOURCE = EXTRA_PREFIX + ".source";
+    public static final String EXTRA_FILES = EXTRA_PREFIX + ".files";
     public static final String EXTRA_CAMPAIGN = EXTRA_PREFIX + ".campaign";
 
     @Inject MediaWikiApi mwApi;
@@ -61,10 +56,11 @@ public class UploadService extends HandlerService<Contribution> {
 
     private NotificationManager notificationManager;
     private NotificationCompat.Builder curProgressNotification;
+    private NotificationCompat.Builder curFailedNotification;
     private int toUpload;
 
     /**
-     * The file names of unfinished uploads, used to prevent overwriting
+     * The filePath names of unfinished uploads, used to prevent overwriting
      */
     private Set<String> unfinishedUploads = new HashSet<>();
 
@@ -74,7 +70,6 @@ public class UploadService extends HandlerService<Contribution> {
     public static final int NOTIFICATION_UPLOAD_IN_PROGRESS = 1;
     public static final int NOTIFICATION_UPLOAD_COMPLETE = 2;
     public static final int NOTIFICATION_UPLOAD_FAILED = 3;
-    private ContentInfoUtil contentInfoUtil;
 
     public UploadService() {
         super("UploadService");
@@ -106,12 +101,13 @@ public class UploadService extends HandlerService<Contribution> {
             }
             if (transferred == total) {
                 // Completed!
-                curProgressNotification.setContentTitle(notificationFinishingTitle);
-                curProgressNotification.setProgress(0, 100, true);
+                curProgressNotification.setContentTitle(notificationFinishingTitle)
+                        .setTicker(notificationFinishingTitle)
+                        .setProgress(0, 100, true);
             } else {
                 curProgressNotification.setProgress(100, (int) (((double) transferred / (double) total) * 100), false);
             }
-            startForeground(NOTIFICATION_UPLOAD_IN_PROGRESS, curProgressNotification.build());
+            notificationManager.notify(NOTIFICATION_UPLOAD_IN_PROGRESS, curProgressNotification.build());
 
             contribution.setTransferred(transferred);
             contributionDao.save(contribution);
@@ -130,6 +126,8 @@ public class UploadService extends HandlerService<Contribution> {
         super.onCreate();
         CommonsApplication.createNotificationChannel(getApplicationContext());
         notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+        curProgressNotification = getProgressNotificationBuilder(CommonsApplication.NOTIFICATION_CHANNEL_ID_ALL);
+        curFailedNotification = getFailedNotificationBuilder(CommonsApplication.NOTIFICATION_CHANNEL_ID_ALL);
     }
 
     @Override
@@ -156,7 +154,7 @@ public class UploadService extends HandlerService<Contribution> {
                 if (curProgressNotification != null && toUpload != 1) {
                     curProgressNotification.setContentText(getResources().getQuantityString(R.plurals.uploads_pending_notification_indicator, toUpload, toUpload));
                     Timber.d("%d uploads left", toUpload);
-                    this.startForeground(NOTIFICATION_UPLOAD_IN_PROGRESS, curProgressNotification.build());
+                    notificationManager.notify(NOTIFICATION_UPLOAD_IN_PROGRESS, curProgressNotification.build());
                 }
 
                 super.queue(what, contribution);
@@ -186,78 +184,54 @@ public class UploadService extends HandlerService<Contribution> {
         return START_REDELIVER_INTENT;
     }
 
+    private NotificationCompat.Builder getProgressNotificationBuilder(String channelId) {
+        return getNotificationBuilder(channelId)
+                .setProgress(100, 0, true)
+                .setOngoing(true);
+    }
+
+    private NotificationCompat.Builder getFailedNotificationBuilder(String channelId) {
+        return getNotificationBuilder(channelId);
+    }
+
     @SuppressLint("StringFormatInvalid")
-    private NotificationCompat.Builder getNotificationBuilder(Contribution contribution, String channelId) {
+    private NotificationCompat.Builder getNotificationBuilder(String channelId) {
         return new NotificationCompat.Builder(this, channelId).setAutoCancel(true)
                 .setSmallIcon(R.drawable.ic_launcher)
                 .setLargeIcon(BitmapFactory.decodeResource(getResources(), R.drawable.ic_launcher))
                 .setAutoCancel(true)
-                .setContentTitle(getString(R.string.upload_progress_notification_title_start, contribution.getDisplayTitle()))
-                .setContentText(getResources().getQuantityString(R.plurals.uploads_pending_notification_indicator, toUpload, toUpload))
-                .setOngoing(true)
-                .setProgress(100, 0, true)
-                .setContentIntent(PendingIntent.getActivity(this, 0, new Intent(this, MainActivity.class), 0))
-                .setTicker(getString(R.string.upload_progress_notification_title_in_progress, contribution.getDisplayTitle()));
+                .setOnlyAlertOnce(true)
+                .setContentIntent(PendingIntent.getActivity(this, 0, new Intent(this, MainActivity.class), 0));
+
     }
 
     private void uploadContribution(Contribution contribution) {
-        InputStream fileInputStream = null;
-        InputStream tempFileInputStream = null;
-        ContentInfo contentInfo = null;
-        String notificationTag = contribution.getLocalUri().toString();
+        InputStream fileInputStream;
+        Uri localUri = contribution.getLocalUri();
+        if (localUri == null || localUri.getPath() == null) {
+            Timber.d("localUri/path is null");
+            return;
+        }
+        String notificationTag = localUri.toString();
 
         try {
-            File file1 = new File(contribution.getLocalUri().getPath());
+            File file1 = new File(localUri.getPath());
             fileInputStream = new FileInputStream(file1);
-            tempFileInputStream = new FileInputStream(file1);
-            if (contentInfoUtil == null) {
-                contentInfoUtil = new ContentInfoUtil();
-            }
-            contentInfo = contentInfoUtil.findMatch(tempFileInputStream);
         } catch (FileNotFoundException e) {
             Timber.d("File not found");
             Toast fileNotFound = Toast.makeText(this, R.string.upload_failed, Toast.LENGTH_LONG);
             fileNotFound.show();
             return;
-        } catch (IOException e) {
-            Timber.d("exception while fetching MIME type: "+e);
-        } finally {
-            try {
-                if (null != tempFileInputStream) {
-                    tempFileInputStream.close();
-                }
-            } catch (IOException e) {
-                Timber.d("File not found");
-            }
-        }
-
-        //As the fileInputStream is null there's no point in continuing the upload process
-        //mwapi.upload accepts a NonNull input stream
-        if (fileInputStream == null) {
-            Timber.d("File not found");
-            return;
         }
 
         Timber.d("Before execution!");
-        curProgressNotification = getNotificationBuilder(
-                contribution,
-                CommonsApplication.NOTIFICATION_CHANNEL_ID_ALL);
-        this.startForeground(NOTIFICATION_UPLOAD_IN_PROGRESS, curProgressNotification.build());
+        curProgressNotification.setContentTitle(getString(R.string.upload_progress_notification_title_start, contribution.getDisplayTitle()))
+                .setContentText(getResources().getQuantityString(R.plurals.uploads_pending_notification_indicator, toUpload, toUpload))
+                .setTicker(getString(R.string.upload_progress_notification_title_in_progress, contribution.getDisplayTitle()));
+        startForeground(NOTIFICATION_UPLOAD_IN_PROGRESS, curProgressNotification.build());
 
-        String filename = null;
+        String filename = contribution.getFilename();
         try {
-            //try to fetch the MIME type from contentInfo first and then use the tag to do it
-            //Note : the tag has not proven trustworthy in the past
-            String mimeType;
-            if (contentInfo == null || contentInfo.getMimeType() == null) {
-                mimeType = (String) contribution.getTag("mimeType");
-            } else {
-                mimeType = contentInfo.getMimeType();
-            }
-            filename = Utils.fixExtension(
-                    contribution.getFilename(),
-                    MimeTypeMap.getSingleton().getExtensionFromMimeType(mimeType));
-
             synchronized (unfinishedUploads) {
                 Timber.d("making sure of uniqueness of name: %s", filename);
                 filename = findUniqueFilename(filename);
@@ -281,11 +255,11 @@ public class UploadService extends HandlerService<Contribution> {
                     getString(R.string.upload_progress_notification_title_finishing, contribution.getDisplayTitle()),
                     contribution
             );
-            UploadResult uploadResult = mwApi.uploadFile(filename, fileInputStream, contribution.getDataLength(), contribution.getPageContents(), contribution.getEditSummary(), contribution.getLocalUri(), contribution.getContentProviderUri(), notificationUpdater);
+            UploadResult uploadResult = mwApi.uploadFile(filename, fileInputStream, contribution.getDataLength(),
+                    contribution.getPageContents(getApplicationContext()), contribution.getEditSummary(), localUri, contribution.getContentProviderUri(), notificationUpdater);
 
+            notificationManager.cancel(NOTIFICATION_UPLOAD_IN_PROGRESS);
             Timber.d("Response is %s", uploadResult.toString());
-
-            curProgressNotification = null;
 
             String resultStatus = uploadResult.getResultStatus();
             if (!resultStatus.equals("Success")) {
@@ -302,6 +276,7 @@ public class UploadService extends HandlerService<Contribution> {
             }
         } catch (IOException e) {
             Timber.d("I have a network fuckup");
+            notificationManager.cancel(NOTIFICATION_UPLOAD_IN_PROGRESS);
             showFailedNotification(contribution);
         } finally {
             if (filename != null) {
@@ -319,15 +294,10 @@ public class UploadService extends HandlerService<Contribution> {
     @SuppressLint("StringFormatInvalid")
     @SuppressWarnings("deprecation")
     private void showFailedNotification(Contribution contribution) {
-        Notification failureNotification = new NotificationCompat.Builder(this).setAutoCancel(true)
-                .setSmallIcon(R.drawable.ic_launcher)
-                .setAutoCancel(true)
-                .setContentIntent(PendingIntent.getActivity(this, 0, new Intent(this, MainActivity.class), 0))
-                .setTicker(getString(R.string.upload_failed_notification_title, contribution.getDisplayTitle()))
+        curFailedNotification.setTicker(getString(R.string.upload_failed_notification_title, contribution.getDisplayTitle()))
                 .setContentTitle(getString(R.string.upload_failed_notification_title, contribution.getDisplayTitle()))
-                .setContentText(getString(R.string.upload_failed_notification_subtitle))
-                .build();
-        notificationManager.notify(NOTIFICATION_UPLOAD_FAILED, failureNotification);
+                .setContentText(getString(R.string.upload_failed_notification_subtitle));
+        notificationManager.notify(NOTIFICATION_UPLOAD_FAILED, curFailedNotification.build());
 
         contribution.setState(Contribution.STATE_FAILED);
         contributionDao.save(contribution);
@@ -340,7 +310,7 @@ public class UploadService extends HandlerService<Contribution> {
                 sequenceFileName = fileName;
             } else {
                 if (fileName.indexOf('.') == -1) {
-                    // We really should have appended a file type suffix already.
+                    // We really should have appended a filePath type suffix already.
                     // But... we might not.
                     sequenceFileName = fileName + " " + sequenceNumber;
                 } else {

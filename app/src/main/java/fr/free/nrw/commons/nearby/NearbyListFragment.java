@@ -1,8 +1,6 @@
 package fr.free.nrw.commons.nearby;
 
 import android.content.Context;
-import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -10,10 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.esafirm.imagepicker.features.ImagePicker;
-import com.esafirm.imagepicker.model.Image;
 import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 import com.pedrogomez.renderers.RVRendererAdapter;
 
@@ -31,11 +26,7 @@ import fr.free.nrw.commons.contributions.ContributionController;
 import fr.free.nrw.commons.kvstore.BasicKvStore;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.location.LatLng;
-import fr.free.nrw.commons.utils.ImageUtils;
-import fr.free.nrw.commons.utils.UriDeserializer;
 import timber.log.Timber;
-
-import static fr.free.nrw.commons.utils.IntentUtils.shouldNearbyHandle;
 
 public class NearbyListFragment extends DaggerFragment {
     private Bundle bundleForUpdates; // Carry information from activity about changed nearby places and current location
@@ -44,9 +35,6 @@ public class NearbyListFragment extends DaggerFragment {
     }.getType();
     private static final Type CUR_LAT_LNG_TYPE = new TypeToken<LatLng>() {
     }.getType();
-    private static final Gson gson = new GsonBuilder()
-            .registerTypeAdapter(Uri.class, new UriDeserializer())
-            .create();
 
     private NearbyAdapterFactory adapterFactory;
     private RecyclerView recyclerView;
@@ -54,6 +42,7 @@ public class NearbyListFragment extends DaggerFragment {
     @Inject ContributionController controller;
     @Inject @Named("direct_nearby_upload_prefs") JsonKvStore directKvStore;
     @Inject @Named("default_preferences") BasicKvStore defaultKvStore;
+    @Inject Gson gson;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -132,17 +121,6 @@ public class NearbyListFragment extends DaggerFragment {
         }
 
         return placeList;
-    }
-
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (shouldNearbyHandle(requestCode, resultCode, data)) {
-            List<Image> images = ImagePicker.getImages(data);
-            Intent shareIntent = controller.handleImagesPicked(ImageUtils.getUriListFromImages(images), requestCode);
-            startActivity(shareIntent);
-        } else {
-            super.onActivityResult(requestCode, resultCode, data);
-        }
     }
 
     /**

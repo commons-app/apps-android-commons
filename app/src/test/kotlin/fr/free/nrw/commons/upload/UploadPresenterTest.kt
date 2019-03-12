@@ -1,14 +1,14 @@
 package fr.free.nrw.commons.upload
 
-import android.net.Uri
+import fr.free.nrw.commons.filepicker.UploadableFile
 import fr.free.nrw.commons.mwapi.MediaWikiApi
 import fr.free.nrw.commons.nearby.Place
+import io.reactivex.Observable
 import org.junit.Before
 import org.junit.Test
-import org.mockito.InjectMocks
-import org.mockito.Mock
-import org.mockito.Mockito
-import org.mockito.MockitoAnnotations
+import org.mockito.*
+import org.mockito.Mockito.`when`
+import org.mockito.Mockito.mock
 
 class UploadPresenterTest {
 
@@ -26,25 +26,18 @@ class UploadPresenterTest {
     @Throws(Exception::class)
     fun setUp() {
         MockitoAnnotations.initMocks(this)
+        `when`(uploadModel!!.preProcessImages(ArgumentMatchers.anyListOf(UploadableFile::class.java),
+                ArgumentMatchers.any(Place::class.java),
+                ArgumentMatchers.anyString(),
+                ArgumentMatchers.any(SimilarImageInterface::class.java)))
+                .thenReturn(Observable.just(mock(UploadModel.UploadItem::class.java)))
     }
 
     @Test
     fun receiveMultipleItems() {
-        val element = Mockito.mock(Uri::class.java)
-        val element2 = Mockito.mock(Uri::class.java)
-        var uriList: List<Uri> = mutableListOf<Uri>(element, element2)
-        uploadPresenter!!.receive(uriList, "image/jpeg", "external")
-    }
-
-    @Test
-    fun receiveSingleItem() {
-        val element = Mockito.mock(Uri::class.java)
-        uploadPresenter!!.receive(element, "image/jpeg", "external")
-    }
-
-    @Test
-    fun receiveDirect() {
-        val element = Mockito.mock(Uri::class.java)
-        uploadModel!!.receiveDirect(element, "image/jpeg", "external", Mockito.mock(Place::class.java)) { _, _ -> }
+        val element = Mockito.mock(UploadableFile::class.java)
+        val element2 = Mockito.mock(UploadableFile::class.java)
+        var uriList: List<UploadableFile> = mutableListOf<UploadableFile>(element, element2)
+        uploadPresenter!!.receive(uriList, "external", mock(Place::class.java))
     }
 }

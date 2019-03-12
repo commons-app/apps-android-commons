@@ -60,8 +60,8 @@ class BookMarkLocationDaoTest {
         builder.setCommonsLink("commonsLink")
 
 
-        examplePlaceBookmark = Place("placeName", exampleLabel, "placeDescription",
-                exampleUri, exampleLocation, "placeCategory", builder.build())
+        examplePlaceBookmark = Place("placeName", exampleLabel, "placeDescription"
+                , exampleLocation, "placeCategory", builder.build())
         testObject = BookmarkLocationsDao { client }
     }
 
@@ -88,7 +88,6 @@ class BookMarkLocationDaoTest {
                 assertEquals("placeName", it.name)
                 assertEquals(Label.FOREST, it.label)
                 assertEquals("placeDescription", it.longDescription)
-                assertEquals(exampleUri, it.secondaryImageUrl)
                 assertEquals(40.0, it.location.latitude)
                 assertEquals(51.4, it.location.longitude)
                 assertEquals("placeCategory", it.category)
@@ -147,7 +146,7 @@ class BookMarkLocationDaoTest {
         assertTrue(testObject.updateBookmarkLocation(examplePlaceBookmark))
         verify(client).insert(eq(BASE_URI), captor.capture())
         captor.firstValue.let { cv ->
-            assertEquals(11, cv.size())
+            assertEquals(10, cv.size())
             assertEquals(examplePlaceBookmark.name, cv.getAsString(COLUMN_NAME))
             assertEquals(examplePlaceBookmark.longDescription, cv.getAsString(COLUMN_DESCRIPTION))
             assertEquals(examplePlaceBookmark.label.text, cv.getAsString(COLUMN_LABEL_TEXT))

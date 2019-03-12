@@ -143,17 +143,14 @@
   <string name="tutorial_1_text">Wikimedia Commons lagrar de flesta bilderna som används på Wikipedia.</string>
   <string name="tutorial_1_subtext">Dina bilder hjälper till att utbilda\nmänniskor runt hela världen!</string>
   <string name="tutorial_2_text">Ladda endast upp bilder som du har tagit eller skapat själv:</string>
-  <string name="tutorial_2_subtext">Naturliga föremål (blommor, djur, berg)\n• Användbara föremål (cyklar, tågstationer)\n• Berömda personer (din borgmästare, olympiska atleter du har träffat)</string>
   <string name="tutorial_2_subtext_1">Naturliga föremål (blommor, djur, berg)</string>
   <string name="tutorial_2_subtext_2">Användbar föremål (cyklar, tågstationer)</string>
   <string name="tutorial_2_subtext_3">Berömda personer (din borgmästare, olympiska atleter du har träffat)</string>
   <string name="tutorial_3_text">Ladda INTE upp:</string>
-  <string name="tutorial_3_subtext">- Selfies eller bilder på dina vänner\n- Bilder som du har laddat ned från Internet\n- Skärmdumpar på proprietära appar</string>
   <string name="tutorial_3_subtext_1">Självporträtt eller bilder av dina vänner</string>
   <string name="tutorial_3_subtext_2">Bilder du har laddat ned från Internet</string>
   <string name="tutorial_3_subtext_3">Skärmdumpar av proprietära programvaror</string>
   <string name="tutorial_4_text">Uppladdningsexempel:</string>
-  <string name="tutorial_4_subtext">- Titel: Sydneys operahus\n- Beskrivning: Sydneys operahus sedd från andra sidan bukten\n- Kategorier: Sydneys operahus från väst, Sydneys operahus utifrån</string>
   <string name="tutorial_4_subtext_1">Titel: Operahuset i Sydney</string>
   <string name="tutorial_4_subtext_2">Beskrivning: Operahuset i Sydneys sett från andra sidan bukten</string>
   <string name="tutorial_4_subtext_3">Kategorier: Operahuset i Sydney från väst, avlägsna vyer av Operahuset i Sydney</string>
@@ -182,11 +179,8 @@
   <string name="yes">Ja</string>
   <string name="no">Nej</string>
   <string name="media_detail_title">Titel</string>
-  <string name="media_detail_media_title">Mediatitel</string>
   <string name="media_detail_description">Beskrivning</string>
-  <string name="media_detail_description_explanation">Beskrivningen för mediafilen ska vara här. Den kan vara riktig lång och kommer att behöva sträcka sig över flera rader. Vi hoppas i alla fall att det kommer se bra ut.</string>
   <string name="media_detail_author">Skapare</string>
-  <string name="media_detail_author_explanation">Användarnamnet för den utvalda bildens skapare ska stå här.</string>
   <string name="media_detail_uploaded_date">Uppladdningsdatum</string>
   <string name="media_detail_license">Licens</string>
   <string name="media_detail_coordinates">Koordinater</string>
@@ -196,7 +190,11 @@
   <string name="_2fa_code">2-stegsverif.kod</string>
   <string name="number_of_uploads">Gräns för mina senaste uppladdningar</string>
   <string name="maximum_limit">Maxgräns</string>
+  <string name="invalid_zero">Noll är inte giltigt</string>
+  <string name="invalid_input">Ogiltig inmatning</string>
   <string name="maximum_limit_alert">Kan inte visa fler än 500</string>
+  <string name="enter_valid">Ange en giltig siffra</string>
+  <string name="cannot_be_zero">Uppladdningsgränsen kan inte vara 0</string>
   <string name="set_limit">Ändra gräns för senaste uppladdningar</string>
   <string name="login_failed_2fa_not_supported">Tvåstegsverifiering stöds för tillfället inte.</string>
   <string name="logout_verification">Vill du verkligen logga ut?</string>
@@ -247,6 +245,7 @@
   <string name="upload_problem_image_blurry">Bilden är för suddig.</string>
   <string name="upload_problem_image_duplicate">Bilden finns redan på Commons.</string>
   <string name="upload_problem_different_geolocation">Bilden togs på en annan plats.</string>
+  <string name="upload_problem_fbmd">Var god ladda bara upp bilder som du själv har tagit. Ladda inte upp bilder som du har hittat på andra personers Facebook-konton.</string>
   <string name="upload_problem_do_you_continue">Vill du fortfarande ladda upp denna bild?</string>
   <string name="give_permission">Ge behörighet</string>
   <string name="use_external_storage">Använd extern lagring</string>
@@ -350,6 +349,7 @@
   <string name="statistics">STATISTIK</string>
   <string name="statistics_thanks">Mottagna tack</string>
   <string name="statistics_featured">Utvalda bilder</string>
+  <string name="statistics_wikidata_edits">Bilder via \"Platser i närheten\"</string>
   <string name="level">NIVÅ</string>
   <string name="images_uploaded">Uppladdade bilder</string>
   <string name="image_reverts">Bilder som inte har återställts</string>
@@ -369,6 +369,7 @@
   <string name="contributions_fragment">Bidrag</string>
   <string name="nearby_fragment">I närheten</string>
   <string name="notifications">Aviseringar</string>
+  <string name="archived_notifications">Aviseringar (arkiverade)</string>
   <string name="display_nearby_notification">Visa avisering för i närheten</string>
   <string name="display_nearby_notification_summary">Tryck här för att se den närmaste platsen som behöver bilder</string>
   <string name="no_close_nearby">Inga platser i närheten hittades som är nära dig</string>
@@ -401,10 +402,8 @@
   <string name="deletion_reason_bad_for_my_privacy">Jag insåg att den är dålig för mitt privatliv</string>
   <string name="deletion_reason_no_longer_want_public">Jag ändrade mig, jag vill inte längre att den ska vara synlig offentligt</string>
   <string name="deletion_reason_not_interesting">Tyvärr, denna bild är inte intressant för en encyklopedi</string>
-  <string name="uploaded_by_myself">Laddades upp av mig den</string>
-  <string name="used_by">, används i</string>
-  <string name="articles">artiklar</string>
-  <string name="no_uploads">Välkommen till Commons!\n\nLadda upp din första mediafil genom att trycka på kameran eller galleriikonen ovan.</string>
+  <string name="uploaded_by_myself" fuzzy="true">Laddades upp av mig den</string>
+  <string name="no_uploads" fuzzy="true">Välkommen till Commons!\n\nLadda upp din första mediafil genom att trycka på kameran eller galleriikonen ovan.</string>
   <string name="desc_language_Worldwide">Världsomfattande</string>
   <string name="desc_language_America">Amerika</string>
   <string name="desc_language_Europe">Europa</string>
@@ -439,4 +438,12 @@
   <string name="no_image">Inga bilder används</string>
   <string name="no_image_reverted">Inga bilder återställdes</string>
   <string name="no_image_uploaded">Inga bilder laddades upp</string>
+  <string name="no_notification">Du har inga olästa aviseringar</string>
+  <string name="no_archived_notification">Du har inga arkiverade aviseringar</string>
+  <string name="share_logs_using">Dela loggar med</string>
+  <string name="menu_option_archived">Visa arkiverade</string>
+  <string name="menu_option_unread">Visa olästa</string>
+  <string name="error_occurred_in_picking_images">Fel uppstod när bilder valdes ut</string>
+  <string name="image_chooser_title">Välj bilder att ladda upp</string>
+  <string name="please_wait">Var god vänta…</string>
 </resources>

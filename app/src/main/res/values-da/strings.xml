@@ -140,17 +140,14 @@
   <string name="tutorial_1_text">Wikimedia Commons lagrer de fleste billeder, som bruges på Wikipedia.</string>
   <string name="tutorial_1_subtext">Dine billeder hjælper med til at uddanne folk rundt om i verden!</string>
   <string name="tutorial_2_text">Læg venligst kun billeder op som er taget af dig selv:</string>
-  <string name="tutorial_2_subtext">Naturlige objekter (blomster, dyr, bjerge)\n• Nyttige objekter (cykler, togstationer)\n• Berømte personer (din borgmester, olympiske atleter)</string>
   <string name="tutorial_2_subtext_1">Naturlige objekter (blomster, dyr, bjerge)</string>
   <string name="tutorial_2_subtext_2">Nyttige objekter (cykler, togstationer)</string>
   <string name="tutorial_2_subtext_3">Berømte personer (din borgmester, olympiske atleter)</string>
   <string name="tutorial_3_text">Overfør venligst IKKE:</string>
-  <string name="tutorial_3_subtext">- Selvportrætter eller billeder af dine venner\n- Billeder du har hentet fra internettet\n- Skærmbilleder af dine proprietære programmer</string>
   <string name="tutorial_3_subtext_1">Selvportrætter eller billeder af dine venner</string>
   <string name="tutorial_3_subtext_2">Billeder du har hentet fra internettet</string>
   <string name="tutorial_3_subtext_3">Skærmbilleder af proprietære programmer</string>
   <string name="tutorial_4_text">Eksempel på overførsel:</string>
-  <string name="tutorial_4_subtext">- Titel: Sydneys Operahus\n- Beskrivelse: Operahuset i Sydney set fra den anden siden af\n  bugten\n- Kategorier: Operahuset i Sydney fra vest, Operahuset i Sydney\n  udefra</string>
   <string name="tutorial_4_subtext_1">Titel: Sydneys operahus</string>
   <string name="tutorial_4_subtext_2">Beskrivelse: Sydneys operahus set fra den anden side af bugten</string>
   <string name="tutorial_4_subtext_3">Kategorier: Sydneys operahus fra vest, Sydneys operahus eksterne visninger</string>
@@ -178,9 +175,7 @@
   <string name="yes">Ja</string>
   <string name="no">Nej</string>
   <string name="media_detail_title">Titel</string>
-  <string name="media_detail_media_title">Medietitel</string>
   <string name="media_detail_description">Beskrivelse</string>
-  <string name="media_detail_description_explanation">Beskrivelse af mediet skal være her. Denne kan potentielt være ganske lang, og vil behøve at strække sig over flere linjer. Vi håber dog, at det ser godt nok ud.</string>
   <string name="media_detail_author">Forfatter</string>
   <string name="media_detail_uploaded_date">Overførselsdato</string>
   <string name="media_detail_license">Licens</string>
@@ -191,7 +186,10 @@
   <string name="_2fa_code">2FA-kode</string>
   <string name="number_of_uploads">Grænse for mine seneste overførelser</string>
   <string name="maximum_limit">Maksimumgrænse</string>
+  <string name="invalid_zero">Nul er ikke gyldigt</string>
+  <string name="invalid_input">Ugyldig indtastning</string>
   <string name="maximum_limit_alert">Kan ikke vise mere end 500</string>
+  <string name="enter_valid">Angiv et gyldigt tal</string>
   <string name="set_limit">Angiv grænse for seneste overførelser</string>
   <string name="login_failed_2fa_not_supported">Tofaktorgodkendelse er ikke understøttet i øjeblikket.</string>
   <string name="logout_verification">Ønsker du at logge ud?</string>
@@ -311,6 +309,7 @@
   <string name="statistics">STATISTIKKER</string>
   <string name="statistics_thanks">Tak modtaget</string>
   <string name="statistics_featured">Udvalgte billeder</string>
+  <string name="statistics_wikidata_edits">Billeder via \"Steder i nærheden\"</string>
   <string name="level">NIVEAU</string>
   <string name="images_uploaded">Oplagte billeder</string>
   <string name="images_used_by_wiki">Billeder brugt</string>
@@ -336,9 +335,7 @@
   <string name="deletion_reason_uploaded_by_mistake">Jeg lagde dette op ved en fejl</string>
   <string name="deletion_reason_publicly_visible">Jeg vidste ikke, det ville være til offentligt skue</string>
   <string name="deletion_reason_bad_for_my_privacy">Jeg indså, det var skidt for mit privatliv</string>
-  <string name="used_by">,brugt i</string>
-  <string name="articles">artikler</string>
-  <string name="no_uploads">Velkommen til Commons!\n\nOplæg dit første medie ved at trykke på kamera eller galleri ikonet foroven.</string>
+  <string name="no_uploads" fuzzy="true">Velkommen til Commons!\n\nOplæg dit første medie ved at trykke på kamera eller galleri ikonet foroven.</string>
   <string name="desc_language_Worldwide">Verdensomspændende</string>
   <string name="desc_language_America">Amerika</string>
   <string name="desc_language_Europe">Europa</string>
@@ -355,4 +352,9 @@
   <string name="ends_on">Slutter den:</string>
   <string name="display_campaigns">Vis kampagner</string>
   <string name="no_image">Ingen billeder brugt</string>
+  <string name="share_logs_using">Del logs ved hjælp af</string>
+  <string name="menu_option_archived">Vis arkiverede</string>
+  <string name="menu_option_unread">Vis ulæste</string>
+  <string name="error_occurred_in_picking_images">Der opstod en fejl under udvælgelse af billeder</string>
+  <string name="please_wait">Vent venligst…</string>
 </resources>

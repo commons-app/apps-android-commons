@@ -112,7 +112,7 @@ public class NearbyController {
      * @param placeList list of nearby places in Place data type
      * @return Place list that holds nearby places
      */
-    public static List<Place> loadAttractionsFromLocationToPlaces(
+    static List<Place> loadAttractionsFromLocationToPlaces(
             LatLng curLatLng,
             List<Place> placeList) {
         placeList = placeList.subList(0, Math.min(placeList.size(), MAX_RESULTS));
@@ -133,7 +133,8 @@ public class NearbyController {
     public static List<NearbyBaseMarker> loadAttractionsFromLocationToBaseMarkerOptions(
             LatLng curLatLng,
             List<Place> placeList,
-            Context context) {
+            Context context,
+            List<Place> bookmarkplacelist) {
         List<NearbyBaseMarker> baseMarkerOptions = new ArrayList<>();
 
         if (placeList == null) {
@@ -143,6 +144,37 @@ public class NearbyController {
         placeList = placeList.subList(0, Math.min(placeList.size(), MAX_RESULTS));
 
         VectorDrawableCompat vectorDrawable = null;
+        try {
+            vectorDrawable = VectorDrawableCompat.create(
+                    context.getResources(), R.drawable.ic_custom_bookmark_marker, context.getTheme()
+            );
+        } catch (Resources.NotFoundException e) {
+            // ignore when running tests.
+        }
+        if (vectorDrawable != null) {
+            Bitmap icon = UiUtils.getBitmap(vectorDrawable);
+
+            for (Place place : bookmarkplacelist) {
+
+                String distance = formatDistanceBetween(curLatLng, place.location);
+                place.setDistance(distance);
+
+                NearbyBaseMarker nearbyBaseMarker = new NearbyBaseMarker();
+                nearbyBaseMarker.title(place.name);
+                nearbyBaseMarker.position(
+                        new com.mapbox.mapboxsdk.geometry.LatLng(
+                                place.location.getLatitude(),
+                                place.location.getLongitude()));
+                nearbyBaseMarker.place(place);
+                nearbyBaseMarker.icon(IconFactory.getInstance(context)
+                        .fromBitmap(icon));
+                placeList.remove(place);
+
+                baseMarkerOptions.add(nearbyBaseMarker);
+            }
+        }
+
+        vectorDrawable = null;
         try {
             vectorDrawable = VectorDrawableCompat.create(
                     context.getResources(), R.drawable.ic_custom_map_marker, context.getTheme()
@@ -170,6 +202,7 @@ public class NearbyController {
                 baseMarkerOptions.add(nearbyBaseMarker);
             }
         }
+
         return baseMarkerOptions;
     }
 

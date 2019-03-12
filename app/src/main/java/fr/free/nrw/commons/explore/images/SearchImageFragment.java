@@ -33,10 +33,9 @@ import fr.free.nrw.commons.explore.SearchActivity;
 import fr.free.nrw.commons.explore.recentsearches.RecentSearch;
 import fr.free.nrw.commons.explore.recentsearches.RecentSearchesDao;
 import fr.free.nrw.commons.kvstore.BasicKvStore;
-import fr.free.nrw.commons.mwapi.MediaWikiApi;
+import fr.free.nrw.commons.mwapi.OkHttpJsonApiClient;
 import fr.free.nrw.commons.utils.NetworkUtils;
 import fr.free.nrw.commons.utils.ViewUtil;
-import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 import timber.log.Timber;
@@ -59,9 +58,12 @@ public class SearchImageFragment extends CommonsDaggerSupportFragment {
     @BindView(R.id.imagesNotFound)
     TextView imagesNotFoundView;
     String query;
+    @BindView(R.id.bottomProgressBar)
+    ProgressBar bottomProgressBar;
 
     @Inject RecentSearchesDao recentSearchesDao;
-    @Inject MediaWikiApi mwApi;
+    @Inject
+    OkHttpJsonApiClient okHttpJsonApiClient;
     @Inject @Named("default_preferences") BasicKvStore defaultKvStore;
 
     private RVRendererAdapter<Media> imagesAdapter;
@@ -135,9 +137,10 @@ public class SearchImageFragment extends CommonsDaggerSupportFragment {
             return;
         }
         progressBar.setVisibility(View.VISIBLE);
+        bottomProgressBar.setVisibility(GONE);
         queryList.clear();
         imagesAdapter.clear();
-        Observable.fromCallable(() -> mwApi.searchImages(query,queryList.size()))
+        okHttpJsonApiClient.searchImages(query, queryList.size())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .timeout(TIMEOUT_SECONDS, TimeUnit.SECONDS)
@@ -151,8 +154,9 @@ public class SearchImageFragment extends CommonsDaggerSupportFragment {
     @SuppressLint("CheckResult")
     public void addImagesToList(String query) {
         this.query = query;
-        progressBar.setVisibility(View.VISIBLE);
-        Observable.fromCallable(() -> mwApi.searchImages(query,queryList.size()))
+        bottomProgressBar.setVisibility(View.VISIBLE);
+        progressBar.setVisibility(GONE);
+        okHttpJsonApiClient.searchImages(query, queryList.size())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .timeout(TIMEOUT_SECONDS, TimeUnit.SECONDS)
@@ -166,6 +170,7 @@ public class SearchImageFragment extends CommonsDaggerSupportFragment {
      */
     private void handlePaginationSuccess(List<Media> mediaList) {
         progressBar.setVisibility(View.GONE);
+        bottomProgressBar.setVisibility(GONE);
         if (mediaList.size() != 0 || !queryList.get(queryList.size() - 1).getFilename().equals(mediaList.get(mediaList.size() - 1).getFilename())) {
             queryList.addAll(mediaList);
             imagesAdapter.addAll(mediaList);
@@ -187,8 +192,8 @@ public class SearchImageFragment extends CommonsDaggerSupportFragment {
             initErrorView();
         }
         else {
-
-            progressBar.setVisibility(View.GONE);
+            bottomProgressBar.setVisibility(View.GONE);
+            progressBar.setVisibility(GONE);
             imagesAdapter.addAll(mediaList);
             imagesAdapter.notifyDataSetChanged();
             ((SearchActivity)getContext()).viewPagerNotifyDataSetChanged();

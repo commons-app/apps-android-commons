@@ -1,7 +1,5 @@
 package fr.free.nrw.commons.contributions;
 
-import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
@@ -15,11 +13,8 @@ import android.widget.GridView;
 import android.widget.ListAdapter;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-
-import com.esafirm.imagepicker.features.ImagePicker;
-import com.esafirm.imagepicker.model.Image;
-
-import java.util.List;
+import android.content.res.Configuration;
+import android.widget.LinearLayout;
 
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -31,14 +26,9 @@ import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
 import fr.free.nrw.commons.kvstore.BasicKvStore;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.utils.ConfigUtils;
-import fr.free.nrw.commons.utils.ImageUtils;
-import fr.free.nrw.commons.utils.IntentUtils;
 
 import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
-import static fr.free.nrw.commons.contributions.ContributionController.CAMERA_UPLOAD_REQUEST_CODE;
-import static fr.free.nrw.commons.contributions.ContributionController.GALLERY_UPLOAD_REQUEST_CODE;
-import static fr.free.nrw.commons.contributions.ContributionController.MULTIPLE_UPLOAD_IMAGE_LIMIT;
 
 /**
  * Created by root on 01.06.2018.
@@ -48,8 +38,6 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment {
 
     @BindView(R.id.contributionsList)
     GridView contributionsList;
-    @BindView(R.id.waitingMessage)
-    TextView waitingMessage;
     @BindView(R.id.loadingContributionsProgressBar)
     ProgressBar progressBar;
     @BindView(R.id.fab_plus)
@@ -58,8 +46,10 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment {
     FloatingActionButton fabCamera;
     @BindView(R.id.fab_gallery)
     FloatingActionButton fabGallery;
-    @BindView(R.id.noDataYet)
-    TextView noDataYet;
+    @BindView(R.id.noContributionsYet)
+    TextView noContributionsYet;
+    @BindView(R.id.fab_layout)
+    LinearLayout fab_layout;
 
     @Inject @Named("default_preferences") BasicKvStore basicKvStore;
     @Inject @Named("direct_nearby_upload_prefs") JsonKvStore directKvStore;
@@ -79,7 +69,6 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment {
 
         contributionsList.setOnItemClickListener((AdapterView.OnItemClickListener) getParentFragment());
 
-        changeEmptyScreen(true);
         changeProgressBarVisibility(true);
         return view;
     }
@@ -91,8 +80,15 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment {
         setListeners();
     }
 
-    public void changeEmptyScreen(boolean isEmpty){
-        this.noDataYet.setVisibility(isEmpty ? VISIBLE : GONE);
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+        // check orientation
+        if (newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE) {
+            fab_layout.setOrientation(LinearLayout.HORIZONTAL);
+        } else if (newConfig.orientation == Configuration.ORIENTATION_PORTRAIT) {
+            fab_layout.setOrientation(LinearLayout.VERTICAL);
+        }
     }
 
     private void initializeAnimations() {
@@ -104,8 +100,8 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment {
 
     private void setListeners() {
         fabPlus.setOnClickListener(view -> animateFAB(isFabOpen));
-        fabCamera.setOnClickListener(view -> controller.initiateCameraPick(this, CAMERA_UPLOAD_REQUEST_CODE));
-        fabGallery.setOnClickListener(view -> controller.initiateGalleryPick(this, MULTIPLE_UPLOAD_IMAGE_LIMIT, GALLERY_UPLOAD_REQUEST_CODE));
+        fabCamera.setOnClickListener(view -> controller.initiateCameraPick(getActivity()));
+        fabGallery.setOnClickListener(view -> controller.initiateGalleryPick(getActivity(), true));
     }
 
     private void animateFAB(boolean isFabOpen) {
@@ -128,25 +124,6 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment {
         }
     }
 
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        ContributionsFragment parentFragment = (ContributionsFragment)getParentFragment();
-        parentFragment.waitForContributionsListFragment.countDown();
-    }
-
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (IntentUtils.shouldContributionsListHandle(requestCode, resultCode, data)) {
-            List<Image> images = ImagePicker.getImages(data);
-            Intent shareIntent = controller.handleImagesPicked(ImageUtils.getUriListFromImages(images), requestCode);
-            startActivity(shareIntent);
-        } else {
-            super.onActivityResult(requestCode, resultCode, data);
-        }
-    }
-
-
     /**
      * Responsible to set progress bar invisible and visible
      * @param isVisible True when contributions list should be hidden.
@@ -156,11 +133,10 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment {
     }
 
     /**
-     * Clears sync message displayed with progress bar before contributions list became visible
+     * Shows welcome message if user has no contributions yet i.e. new user.
      */
-    protected void clearSyncMessage() {
-        waitingMessage.setVisibility(GONE);
-        noDataYet.setVisibility(GONE);
+    protected void showWelcomeTip(boolean noContributions) {
+        noContributionsYet.setVisibility(noContributions ? VISIBLE : GONE);
     }
 
     public ListAdapter getAdapter() {

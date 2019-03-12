@@ -31,15 +31,14 @@
         android:orientation="horizontal"
         android:layout_gravity="center|bottom"
         android:background="#AA000000"
-        android:weightSum="4"
         >
 
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="3"
             android:layout_gravity="center|bottom"
             android:orientation="vertical"
+            android:layout_weight="3"
             android:padding="@dimen/small_gap"
             >
             <ProgressBar
@@ -74,10 +73,12 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/failed_image_options"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
             android:orientation="horizontal"
+            android:layout_weight="1"
+            android:visibility="gone"
             android:padding="@dimen/small_gap"
             >
 
@@ -88,8 +89,7 @@
                 android:src="@drawable/ic_cancel_white"
                 android:text="@string/menu_cancel_upload"
                 android:background="@android:color/transparent"
-                android:layout_margin="8dp"
-                android:visibility="gone"
+                android:padding="8dp"
                 />
 
             <ImageButton
@@ -99,8 +99,7 @@
                 android:src="@drawable/ic_retry_white"
                 android:text="@string/menu_retry_upload"
                 android:background="@android:color/transparent"
-                android:layout_margin="8dp"
-                android:visibility="gone"
+                android:padding="8dp"
                 />
 
         </LinearLayout>

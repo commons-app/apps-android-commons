@@ -9,10 +9,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import butterknife.ButterKnife;
-import butterknife.OnClick;
-import butterknife.Optional;
-
 public class WelcomePagerAdapter extends PagerAdapter {
     private static final int[] PAGE_LAYOUTS = new int[]{
             R.layout.welcome_wikipedia,

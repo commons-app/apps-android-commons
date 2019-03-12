@@ -5,6 +5,7 @@ import com.google.gson.Gson
 import fr.free.nrw.commons.BuildConfig
 import fr.free.nrw.commons.TestCommonsApplication
 import fr.free.nrw.commons.kvstore.BasicKvStore
+import fr.free.nrw.commons.utils.ConfigUtils
 import okhttp3.OkHttpClient
 import okhttp3.mockwebserver.MockResponse
 import okhttp3.mockwebserver.MockWebServer
@@ -40,8 +41,7 @@ class ApacheHttpClientMediaWikiApiTest {
         okHttpClient = OkHttpClient()
         sharedPreferences = mock(BasicKvStore::class.java)
         categoryPreferences = mock(BasicKvStore::class.java)
-        testObject = ApacheHttpClientMediaWikiApi(RuntimeEnvironment.application, "http://" + server.hostName + ":" + server.port + "/", "http://" + wikidataServer.hostName + ":" + wikidataServer.port + "/", sharedPreferences, categoryPreferences, Gson(), okHttpClient)
-        testObject.setWikiMediaToolforgeUrl("http://" + server.hostName + ":" + server.port + "/")
+        testObject = ApacheHttpClientMediaWikiApi(RuntimeEnvironment.application, "http://" + server.hostName + ":" + server.port + "/", "http://" + wikidataServer.hostName + ":" + wikidataServer.port + "/", sharedPreferences, categoryPreferences, Gson())
     }
 
     @After
@@ -185,10 +185,26 @@ class ApacheHttpClientMediaWikiApiTest {
 
     @Test
     fun editToken() {
-        server.enqueue(MockResponse().setBody("<?xml version=\"1.0\"?><api><centralauthtoken centralauthtoken=\"abc\" /></api>"))
         server.enqueue(MockResponse().setBody("<?xml version=\"1.0\"?><api><query><tokens csrftoken=\"baz\" /></query></api>"))
 
         val result = testObject.editToken
+
+        assertBasicRequestParameters(server, "POST").let { editTokenRequest ->
+            parseBody(editTokenRequest.body.readUtf8()).let { body ->
+                assertEquals("query", body["action"])
+                assertEquals("tokens", body["meta"])
+            }
+        }
+
+        assertEquals("baz", result)
+    }
+
+    @Test
+    fun getWikidataEditToken() {
+        server.enqueue(MockResponse().setBody("<?xml version=\"1.0\"?><api><centralauthtoken centralauthtoken=\"abc\" /></api>"))
+        wikidataServer.enqueue(MockResponse().setBody("<?xml version=\"1.0\"?><api><query><tokens csrftoken=\"baz\" /></query></api>"))
+
+        val result = testObject.wikidataCsrfToken
 
         assertBasicRequestParameters(server, "GET").let { centralAuthTokenRequest ->
             parseQueryParams(centralAuthTokenRequest).let { params ->
@@ -197,7 +213,7 @@ class ApacheHttpClientMediaWikiApiTest {
             }
         }
 
-        assertBasicRequestParameters(server, "POST").let { editTokenRequest ->
+        assertBasicRequestParameters(wikidataServer, "POST").let { editTokenRequest ->
             parseBody(editTokenRequest.body.readUtf8()).let { body ->
                 assertEquals("query", body["action"])
                 assertEquals("abc", body["centralauthtoken"])
@@ -227,21 +243,10 @@ class ApacheHttpClientMediaWikiApiTest {
     }
 
     @Test
-    fun getUploadCount() {
-        server.enqueue(MockResponse().setBody("23\n"))
-
-        val testObserver = testObject.getUploadCount("testUsername").test()
-
-        assertEquals("testUsername", parseQueryParams(server.takeRequest())["user"])
-        assertEquals(1, testObserver.valueCount())
-        assertEquals(23, testObserver.values()[0])
-    }
-
-    @Test
     fun isUserBlockedFromCommonsForInfinitelyBlockedUser() {
         server.enqueue(MockResponse().setBody("<?xml version=\"1.0\"?><api><query><userinfo id=\"1000\" name=\"testusername\" blockid=\"3000\" blockedby=\"blockerusername\" blockedbyid=\"1001\" blockreason=\"testing\" blockedtimestamp=\"2018-05-24T15:32:09Z\" blockexpiry=\"infinite\"></userinfo></query></api>"))
 
-        val result = testObject.isUserBlockedFromCommons();
+        val result = testObject.isUserBlockedFromCommons()
 
         assertBasicRequestParameters(server, "GET").let { userBlockedRequest ->
             parseQueryParams(userBlockedRequest).let { body ->
@@ -263,7 +268,7 @@ class ApacheHttpClientMediaWikiApiTest {
         dateFormat.setTimeZone(TimeZone.getTimeZone("UTC"))
         server.enqueue(MockResponse().setBody("<?xml version=\"1.0\"?><api><query><userinfo id=\"1000\" name=\"testusername\" blockid=\"3000\" blockedby=\"blockerusername\" blockedbyid=\"1001\" blockreason=\"testing\" blockedtimestamp=\"2018-05-24T15:32:09Z\" blockexpiry=\"" + dateFormat.format(expiredDate) + "\"></userinfo></query></api>"))
 
-        val result = testObject.isUserBlockedFromCommons();
+        val result = testObject.isUserBlockedFromCommons()
 
         assertBasicRequestParameters(server, "GET").let { userBlockedRequest ->
             parseQueryParams(userBlockedRequest).let { body ->
@@ -285,7 +290,7 @@ class ApacheHttpClientMediaWikiApiTest {
         dateFormat.setTimeZone(TimeZone.getTimeZone("UTC"))
         server.enqueue(MockResponse().setBody("<?xml version=\"1.0\"?><api><query><userinfo id=\"1000\" name=\"testusername\" blockid=\"3000\" blockedby=\"blockerusername\" blockedbyid=\"1001\" blockreason=\"testing\" blockedtimestamp=\"2018-05-24T15:32:09Z\" blockexpiry=\"" + dateFormat.format(expiredDate) + "\"></userinfo></query></api>"))
 
-        val result = testObject.isUserBlockedFromCommons();
+        val result = testObject.isUserBlockedFromCommons()
 
         assertBasicRequestParameters(server, "GET").let { userBlockedRequest ->
             parseQueryParams(userBlockedRequest).let { body ->
@@ -303,7 +308,7 @@ class ApacheHttpClientMediaWikiApiTest {
     fun isUserBlockedFromCommonsForNotBlockedUser() {
         server.enqueue(MockResponse().setBody("<?xml version=\"1.0\"?><api><query><userinfo id=\"1000\" name=\"testusername\"></userinfo></query></api>"))
 
-        val result = testObject.isUserBlockedFromCommons();
+        val result = testObject.isUserBlockedFromCommons()
 
         assertBasicRequestParameters(server, "GET").let { userBlockedRequest ->
             parseQueryParams(userBlockedRequest).let { body ->
@@ -320,7 +325,7 @@ class ApacheHttpClientMediaWikiApiTest {
     private fun assertBasicRequestParameters(server: MockWebServer, method: String): RecordedRequest = server.takeRequest().let {
         assertEquals("/", it.requestUrl.encodedPath())
         assertEquals(method, it.method)
-        assertEquals("Commons/${BuildConfig.VERSION_NAME} (https://mediawiki.org/wiki/Apps/Commons) Android/${Build.VERSION.RELEASE}",
+        assertEquals("Commons/${ConfigUtils.getVersionNameWithSha(RuntimeEnvironment.application)} (https://mediawiki.org/wiki/Apps/Commons) Android/${Build.VERSION.RELEASE}",
                 it.getHeader("User-Agent"))
         if ("POST" == method) {
             assertEquals("application/x-www-form-urlencoded", it.getHeader("Content-Type"))

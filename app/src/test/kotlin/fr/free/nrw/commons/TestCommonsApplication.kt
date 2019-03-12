@@ -16,7 +16,6 @@ import fr.free.nrw.commons.kvstore.BasicKvStore
 import fr.free.nrw.commons.kvstore.JsonKvStore
 import fr.free.nrw.commons.location.LocationServiceManager
 import fr.free.nrw.commons.mwapi.MediaWikiApi
-import fr.free.nrw.commons.nearby.NearbyPlaces
 import fr.free.nrw.commons.upload.UploadController
 
 class TestCommonsApplication : CommonsApplication() {
@@ -45,7 +44,6 @@ class MockCommonsApplicationModule(appContext: Context) : CommonsApplicationModu
     val mockSessionManager: SessionManager = mock()
     val locationServiceManager: LocationServiceManager = mock()
     val mockDbOpenHelper: DBOpenHelper = mock()
-    val nearbyPlaces: NearbyPlaces = mock()
     val lruCache: LruCache<String, String> = mock()
     val gson: Gson = Gson()
     val categoryClient: ContentProviderClient = mock()
@@ -59,7 +57,7 @@ class MockCommonsApplicationModule(appContext: Context) : CommonsApplicationModu
 
     override fun provideModificationContentProviderClient(context: Context?): ContentProviderClient = modificationClient
 
-    override fun providesDirectNearbyUploadKvStore(context: Context?): JsonKvStore = uploadPrefs
+    override fun providesDirectNearbyUploadKvStore(context: Context?, gson: Gson): JsonKvStore = uploadPrefs
 
     override fun providesAccountUtil(context: Context): AccountUtil = accountUtil
 
@@ -76,8 +74,6 @@ class MockCommonsApplicationModule(appContext: Context) : CommonsApplicationModu
     override fun provideLocationServiceManager(context: Context): LocationServiceManager = locationServiceManager
 
     override fun provideDBOpenHelper(context: Context): DBOpenHelper = mockDbOpenHelper
-
-    override fun provideNearbyPlaces(): NearbyPlaces = nearbyPlaces
 
     override fun provideLruCache(): LruCache<String, String> = lruCache
 }

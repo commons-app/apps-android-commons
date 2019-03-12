@@ -1,5 +1,8 @@
 package fr.free.nrw.commons.utils;
 
+import android.text.format.DateFormat;
+
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -36,9 +39,29 @@ public class DateUtils {
         }
     }
 
+    public static Date getDateFromString(String dateString) {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.US);
+        try {
+            return dateFormat.parse(dateString);
+        } catch (ParseException e) {
+            return null;
+        }
+    }
+
     public static String getCurrentDate() {
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.US);
         Date date = new Date();
         return dateFormat.format(date);
+    }
+
+    public static String dateInLocaleFormat(Date date){
+        String formatter;
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.JELLY_BEAN_MR2) {
+            formatter = new SimpleDateFormat(DateFormat.getBestDateTimePattern(Locale.getDefault(), "dd MMM yyyy"), Locale.getDefault()).format(date);
+        }
+        else {
+            formatter = String.valueOf(new SimpleDateFormat("dd MMM yyyy", Locale.getDefault()));
+        }
+        return formatter;
     }
 }

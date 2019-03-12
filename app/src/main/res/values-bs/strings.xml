@@ -119,11 +119,8 @@
   <string name="tutorial_1_text">Wikimedia Commons skladišti većinu slika koje se koriste na Wikipediji.</string>
   <string name="tutorial_1_subtext">Vaše slike pomažu u obrazovanju ljudi širom svijeta!</string>
   <string name="tutorial_2_text">Postavljajte slike koje su u potpunosti Vaše djelo:</string>
-  <string name="tutorial_2_subtext" fuzzy="true">– Stvari iz prirode (cvijeće, životinje, planine)\n– Korisne stvari (bicikli, željezničke stanice)\n– Poznate osobe (Vaš gradonačelnik, olimpijski sportisti koje sretnete)</string>
   <string name="tutorial_3_text">NE postavljajte:</string>
-  <string name="tutorial_3_subtext">– Vlastite slike ili slike svojih prijatelja\n– Slike koje ste preuzeli s interneta\n– Slike ekrana neslobodnih aplikacija</string>
   <string name="tutorial_4_text">Primjer postavljanja:</string>
-  <string name="tutorial_4_subtext" fuzzy="true">– Naziv: Sidnejska opera\n– Opis: Pogled na Sidnejsku operu sa zaliva\n– Kategorije: Sidnejska opera, Sidnejska opera sa zapada, Sidnejska opera iz daleka</string>
   <string name="welcome_wikipedia_text">Podijelite vaše slike. Pomozite člancima na Wikipediji da zažive!</string>
   <string name="welcome_wikipedia_subtext">Slike na Wikipediji se uzimaju sa Wikimedia Commonsa.</string>
   <string name="welcome_copyright_text">Vaše slike pomažu u obrazovanju ljudi širom svijeta.</string>
@@ -145,9 +142,7 @@
   <string name="yes">Da</string>
   <string name="no">Ne</string>
   <string name="media_detail_title">Naslov</string>
-  <string name="media_detail_media_title">Naslov datoteke</string>
   <string name="media_detail_description">Opis</string>
-  <string name="media_detail_description_explanation">Ovdje ide opis datoteke. Mogao bi biti poprilično dug i trebat će se prelomiti u nekoliko redova. Nadamo se da će fino izgledati.</string>
   <string name="media_detail_uploaded_date">Datum postavljanja</string>
   <string name="become_a_tester_title">Postanite beta-tester</string>
   <string name="become_a_tester_description">Prijavite se na naš beta-kanal na Google Playu i dobijte raniji pristup novim mogućnostima i ispravkama grešaka</string>

@@ -7,8 +7,8 @@ import android.util.AttributeSet;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import fr.free.nrw.commons.R;
@@ -25,7 +25,7 @@ public class NearbyNotificationCardView extends SwipableCardView {
     private Context context;
 
     private Button permissionRequestButton;
-    private RelativeLayout contentLayout;
+    private LinearLayout contentLayout;
     private TextView notificationTitle;
     private TextView notificationDistance;
     private ImageView notificationIcon;
@@ -116,10 +116,9 @@ public class NearbyNotificationCardView extends SwipableCardView {
 
     /**
      * Pass place information to views.
-     * @param isClosestNearbyPlaceFound false if there are no close place
      * @param place Closes place where we will get information from
      */
-    public void updateContent(boolean isClosestNearbyPlaceFound, Place place) {
+    public void updateContent(Place place) {
         Timber.d("Update nearby card notification content");
         this.setVisibility(VISIBLE);
         cardViewVisibilityState = CardViewVisibilityState.READY;
@@ -131,14 +130,9 @@ public class NearbyNotificationCardView extends SwipableCardView {
         notificationTitle.setVisibility(VISIBLE);
         notificationDistance.setVisibility(VISIBLE);
         notificationIcon.setVisibility(VISIBLE);
+        notificationTitle.setText(place.name);
+        notificationDistance.setText(place.distance);
 
-        if (isClosestNearbyPlaceFound) {
-            notificationTitle.setText(place.name);
-            notificationDistance.setText(place.distance);
-        } else {
-            notificationDistance.setText("");
-            notificationTitle.setText(R.string.no_close_nearby);
-        }
     }
 
     @Override

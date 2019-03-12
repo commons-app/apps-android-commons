@@ -1,99 +1,213 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/bottom_card"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:elevation="@dimen/cardview_default_elevation"
-    android:orientation="vertical"
-    tools:ignore="UnusedAttribute"
-    tools:showIn="@layout/activity_upload">
+    android:layout_height="match_parent">
 
-    <android.support.constraint.ConstraintLayout
-        android:id="@+id/relativeLayout"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:padding="@dimen/small_gap">
+    <android.support.v7.widget.CardView
+        android:id="@+id/top_card"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginBottom="8dp"
+        android:elevation="@dimen/cardview_default_elevation"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="UnusedAttribute"
+        tools:showIn="@layout/activity_upload">
 
-        <TextView
-            android:id="@+id/bottom_card_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="center_vertical"
-            android:textSize="@dimen/normal_text"
-            android:textStyle="bold"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:text="Step 1 of 15" />
-
-        <TextView
-            android:id="@+id/bottom_card_subtitle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="center_vertical"
-            android:textSize="@dimen/subtitle_text"
-            app:layout_constraintTop_toBottomOf="@id/bottom_card_title"
-            tools:text="1st image" />
-
-        <ImageButton
-            android:id="@+id/bottom_card_expand_button"
-            style="@style/Widget.AppCompat.Button.Borderless"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:padding="0dp"
-            android:rotation="180"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/ic_expand_less_black_24dp" />
-
-        <fr.free.nrw.commons.widget.HeightLimitedRecyclerView
-            android:id="@+id/rv_descriptions"
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
-            android:layout_marginTop="8dp"
-            app:layout_constraintBottom_toTopOf="@+id/bottom_card_previous"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/bottom_card_subtitle"
-            tools:visibility="gone"/>
+            android:layout_height="wrap_content">
 
-        <Button
-            android:id="@+id/bottom_card_next"
-            style="@style/Widget.AppCompat.Button.Borderless"
+            <TextView
+                android:id="@+id/top_card_title"
+                android:layout_width="wrap_content"
+                android:layout_height="24dp"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginStart="@dimen/small_gap"
+                android:layout_marginTop="@dimen/small_gap"
+                android:layout_marginEnd="@dimen/small_gap"
+                android:layout_marginBottom="@dimen/small_gap"
+                android:gravity="center_vertical"
+                android:textSize="@dimen/normal_text"
+                android:textStyle="bold"
+                tools:text="4 Uploads" />
+
+            <ImageButton
+                android:id="@+id/top_card_expand_button"
+                style="@style/Widget.AppCompat.Button.Borderless"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginStart="@dimen/small_gap"
+                android:layout_marginTop="@dimen/small_gap"
+                android:layout_marginEnd="@dimen/small_gap"
+                android:layout_marginBottom="@dimen/small_gap"
+                android:padding="0dp"
+                app:srcCompat="@drawable/ic_expand_less_black_24dp" />
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/top_card_thumbnails"
+                android:layout_width="match_parent"
+                android:layout_height="90dp"
+                android:layout_below="@id/top_card_title"
+                android:layout_marginBottom="@dimen/small_gap" />
+
+        </RelativeLayout>
+    </android.support.v7.widget.CardView>
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/right_card"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/bottom_card"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/top_card"
+        tools:ignore="UnusedAttribute"
+        tools:showIn="@layout/activity_upload">
+
+        <LinearLayout
+            android:id="@+id/right_card_content"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/next"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintRight_toRightOf="parent" />
+            android:layout_centerVertical="true"
+            android:orientation="vertical">
 
-        <Button
-            android:id="@+id/bottom_card_previous"
-            style="@style/Widget.AppCompat.Button.Borderless"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="@dimen/standard_gap"
-            android:layout_marginRight="@dimen/standard_gap"
-            android:text="@string/previous"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/bottom_card_next"
-            app:layout_constraintRight_toLeftOf="@id/bottom_card_next" />
+            <ImageButton
+                android:id="@+id/right_card_expand_button"
+                style="@style/Widget.AppCompat.Button.Borderless"
+                android:layout_width="16dp"
+                android:layout_height="16dp"
+                android:layout_margin="8dp"
+                android:rotation="90"
+                app:srcCompat="@drawable/ic_expand_less_black_24dp" />
 
-        <Button
-            android:id="@+id/bottom_card_add_desc"
-            style="@style/Widget.AppCompat.Button.Borderless"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:minWidth="48dp"
-            android:text="+"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            <ImageButton
+                android:id="@+id/right_card_map_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_marginBottom="8dp"
+                android:visibility="visible"
+                app:srcCompat="@drawable/ic_map_white_24dp" />
 
-    </android.support.constraint.ConstraintLayout>
-</android.support.v7.widget.CardView>
+        </LinearLayout>
+    </android.support.v7.widget.CardView>
+
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/bottom_card"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:elevation="@dimen/cardview_default_elevation"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        tools:ignore="UnusedAttribute"
+        tools:showIn="@layout/activity_upload">
+
+        <android.support.constraint.ConstraintLayout
+            android:id="@+id/relativeLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="@dimen/small_gap">
+
+            <TextView
+                android:id="@+id/bottom_card_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:textSize="@dimen/normal_text"
+                android:textStyle="bold"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="Step 1 of 15" />
+
+            <TextView
+                android:id="@+id/bottom_card_subtitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:textSize="@dimen/subtitle_text"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/bottom_card_title"
+                tools:text="1st image" />
+
+            <ImageButton
+                android:id="@+id/bottom_card_expand_button"
+                style="@style/Widget.AppCompat.Button.Borderless"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:padding="0dp"
+                android:rotation="180"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/ic_expand_less_black_24dp" />
+
+            <fr.free.nrw.commons.widget.HeightLimitedRecyclerView
+                android:id="@+id/rv_descriptions"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
+                app:layout_constraintBottom_toTopOf="@+id/bottom_card_previous"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/bottom_card_subtitle"
+                tools:visibility="gone" />
+
+            <Button
+                android:id="@+id/bottom_card_next"
+                style="@style/Widget.AppCompat.Button.Borderless"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/next"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintRight_toRightOf="parent" />
+
+            <Button
+                android:id="@+id/bottom_card_previous"
+                style="@style/Widget.AppCompat.Button.Borderless"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/standard_gap"
+                android:layout_marginRight="@dimen/standard_gap"
+                android:text="@string/previous"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/bottom_card_next"
+                app:layout_constraintRight_toLeftOf="@id/bottom_card_next" />
+
+            <Button
+                android:id="@+id/bottom_card_add_desc"
+                style="@style/Widget.AppCompat.Button.Borderless"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:minWidth="48dp"
+                android:text="+"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
+        </android.support.constraint.ConstraintLayout>
+    </android.support.v7.widget.CardView>
+</android.support.constraint.ConstraintLayout>
+
 
                 
