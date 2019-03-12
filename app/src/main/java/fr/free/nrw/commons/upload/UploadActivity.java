@@ -140,8 +140,6 @@ public class UploadActivity extends BaseActivity implements UploadView, SimilarI
     private RVRendererAdapter<CategoryItem> categoriesAdapter;
     private CompositeDisposable compositeDisposable;
     private ProgressDialog progressDialog;
-    private static boolean updatedImage =false;
-    private String source;
     private static int currentItem=0;
 
 
@@ -489,7 +487,7 @@ public class UploadActivity extends BaseActivity implements UploadView, SimilarI
                 updatedImage=true;
                 presenter.updateImageUri(currentItem,resultUri);
             } else if (resultCode == CropImage.CROP_IMAGE_ACTIVITY_RESULT_ERROR_CODE) {
-                Exception error = result.getError();
+                Toast.makeText(this, "Sorry there was an error in editing the image", Toast.LENGTH_SHORT).show();
             }
         }
     }
