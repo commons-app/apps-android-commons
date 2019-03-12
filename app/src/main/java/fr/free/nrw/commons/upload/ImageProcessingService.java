@@ -34,17 +34,19 @@ public class ImageProcessingService {
     private final ImageUtilsWrapper imageUtilsWrapper;
     private final MediaWikiApi mwApi;
     private final ReadFBMD readFBMD;
+    private final ReadEXIF readEXIF;
 
     @Inject
     public ImageProcessingService(FileUtilsWrapper fileUtilsWrapper,
                                   BitmapRegionDecoderWrapper bitmapRegionDecoderWrapper,
                                   ImageUtilsWrapper imageUtilsWrapper,
-                                  MediaWikiApi mwApi, ReadFBMD readFBMD) {
+                                  MediaWikiApi mwApi, ReadFBMD readFBMD, ReadEXIF readEXIF) {
         this.fileUtilsWrapper = fileUtilsWrapper;
         this.bitmapRegionDecoderWrapper = bitmapRegionDecoderWrapper;
         this.imageUtilsWrapper = imageUtilsWrapper;
         this.mwApi = mwApi;
         this.readFBMD = readFBMD;
+        this.readEXIF=readEXIF;
     }
 
     /**
@@ -100,9 +102,12 @@ public class ImageProcessingService {
         }
     }
 
-    public Single<Integer> checkForEXIF(String filepath){
-
-    }
+    /*public Single<Integer> checkForEXIF(String filepath){
+        try {
+            return readEXIF.processMetadata(context,)
+        }
+        return Single.just(ImageUtils.IMAGE_OK);
+    }*/
 
 
     /**
@@ -133,7 +138,7 @@ public class ImageProcessingService {
      * @param filePath file to be checked
      * @return IMAGE_DUPLICATE or IMAGE_OK
      */
-    private Single<Integer> checkDuplicateImage(String filePath) {
+    /*private Single<Integer> checkDuplicateImage(String filePath) {
         Timber.d("Checking for duplicate image %s", filePath);
         return Single.fromCallable(() ->
                 fileUtilsWrapper.getFileInputStream(filePath))
@@ -143,6 +148,13 @@ public class ImageProcessingService {
                     Timber.d("Result for duplicate image %s", b);
                     return b ? ImageUtils.IMAGE_DUPLICATE : ImageUtils.IMAGE_OK;
                 });
+    }*/
+    private Single<Integer> checkDuplicateImage(String filePath){
+        try {
+            return readEXIF.processMetadata(filePath);
+        } catch (IOException e) {
+            return Single.just(ImageUtils.FILE_FBMD);
+        }
     }
 
     /**
