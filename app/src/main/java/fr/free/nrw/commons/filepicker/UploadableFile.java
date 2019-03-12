@@ -52,6 +52,10 @@ public class UploadableFile implements Parcelable {
         file = (File) in.readSerializable();
     }
 
+    public Uri getContentUri() {
+        return contentUri;
+    }
+
     public File getFile() {
         return file;
     }

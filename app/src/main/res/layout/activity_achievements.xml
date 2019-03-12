@@ -37,7 +37,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/toolbar"
-                android:background="@color/layout_light_grey"
+                android:background="?attr/achievementBackground"
                 android:orientation="vertical">
 
                 <TextView
@@ -56,8 +56,11 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/activity_margin_vertical"
                     android:layout_marginRight="@dimen/activity_margin_horizontal"
+                    android:layout_marginEnd="@dimen/activity_margin_horizontal"
                     android:layout_alignParentRight="true"
+                    android:layout_alignParentEnd="true"
                     app:srcCompat="@drawable/ic_info_outline_black_24dp"
+                    android:tint="?attr/icon"
                     android:layout_marginVertical="@dimen/activity_margin_vertical" />
 
                 <ImageView
@@ -94,14 +97,20 @@
                         android:id="@+id/images_upload_info"
                         android:layout_marginTop="8dp"
                         android:layout_marginRight="@dimen/activity_margin_horizontal"
+                        android:layout_marginEnd="@dimen/activity_margin_horizontal"
                         android:layout_toRightOf="@+id/images_upload_text_param"
+                        android:layout_toEndOf="@+id/images_upload_text_param"
                         app:srcCompat="@drawable/ic_info_outline_blue_24dp"
-                        android:layout_marginLeft="8dp" />
+                        android:tint="?attr/icon"
+                        android:layout_marginLeft="8dp"
+                        android:layout_marginStart="8dp"/>
 
                     <com.dinuscxj.progressbar.CircleProgressBar
                         android:layout_width="40dp"
                         android:layout_height="40dp"
                         android:layout_alignParentRight="true"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginEnd="32dp"
                         android:layout_marginRight="32dp"
                         android:id="@+id/images_uploaded_progressbar"
                         android:progress="50"
@@ -140,10 +149,14 @@
                         android:layout_height="12dp"
                         android:layout_marginTop="8dp"
                         android:layout_marginRight="@dimen/activity_margin_horizontal"
+                        android:layout_marginEnd="@dimen/activity_margin_horizontal"
                         android:id="@+id/images_reverted_info"
                         android:layout_toRightOf="@+id/images_reverted_text"
+                        android:layout_toEndOf="@+id/images_reverted_text"
                         app:srcCompat="@drawable/ic_info_outline_blue_24dp"
-                        android:layout_marginLeft="8dp" />
+                        android:tint="?attr/icon"
+                        android:layout_marginLeft="8dp"
+                        android:layout_marginStart="8dp"/>
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -159,7 +172,9 @@
                         android:layout_width="40dp"
                         android:layout_height="40dp"
                         android:layout_alignParentRight="true"
+                        android:layout_alignParentEnd="true"
                         android:layout_marginRight="32dp"
+                        android:layout_marginEnd="32dp"
                         android:progress="50"
                         android:id="@+id/image_reverts_progressbar"
                         app:progress_end_color="#8C8B98"
@@ -200,15 +215,21 @@
                         android:id="@+id/images_used_by_wiki_info"
                         android:layout_marginTop="8dp"
                         android:layout_marginRight="@dimen/activity_margin_horizontal"
+                        android:layout_marginEnd="@dimen/activity_margin_horizontal"
                         android:layout_toRightOf="@+id/images_used_by_wiki_text"
+                        android:layout_toEndOf="@+id/images_used_by_wiki_text"
                         app:srcCompat="@drawable/ic_info_outline_blue_24dp"
-                        android:layout_marginLeft="8dp" />
+                        android:tint="?attr/icon"
+                        android:layout_marginLeft="8dp"
+                        android:layout_marginStart="8dp"/>
 
                     <com.dinuscxj.progressbar.CircleProgressBar
                         android:layout_width="40dp"
                         android:layout_height="40dp"
                         android:layout_alignParentRight="true"
+                        android:layout_alignParentEnd="true"
                         android:layout_marginRight="32dp"
+                        android:layout_marginEnd="32dp"
                         android:progress="50"
                         app:progress_text_size="9dp"
                         android:id="@+id/images_used_by_wiki_progress_bar"
@@ -241,6 +262,7 @@
                     android:text="@string/statistics"
                     style="?android:textAppearanceLarge"
                     android:layout_marginLeft="@dimen/activity_margin_horizontal"
+                    android:layout_marginStart="@dimen/activity_margin_horizontal"
                     android:layout_marginTop="@dimen/activity_margin_vertical" />
 
                 <RelativeLayout
@@ -264,6 +286,7 @@
                         android:layout_height="wrap_content"
                         style="?android:textAppearanceMedium"
                         android:layout_toRightOf="@+id/featured_image_icon"
+                        android:layout_toEndOf="@+id/featured_image_icon"
                         android:layout_marginTop="@dimen/activity_margin_horizontal"
                         android:layout_marginStart="@dimen/activity_margin_horizontal"
                         android:layout_centerVertical="true"
@@ -275,6 +298,7 @@
                         android:layout_height="wrap_content"
                         style="?android:textAppearanceMedium"
                         android:layout_alignParentRight="true"
+                        android:layout_alignParentEnd="true"
                         android:layout_marginTop="@dimen/activity_margin_horizontal"
                         android:layout_marginStart="@dimen/activity_margin_horizontal"
                         android:layout_centerVertical="true"
@@ -309,6 +333,7 @@
                         style="?android:textAppearanceMedium"
                         android:layout_marginTop="@dimen/activity_margin_horizontal"
                         android:layout_toRightOf="@+id/thanks_image_icon"
+                        android:layout_toEndOf="@+id/thanks_image_icon"
                         android:layout_marginStart="@dimen/activity_margin_horizontal"
                         android:layout_centerVertical="true"
                         android:layout_marginLeft="@dimen/activity_margin_horizontal"
@@ -319,6 +344,7 @@
                         android:layout_height="wrap_content"
                         style="?android:textAppearanceMedium"
                         android:layout_alignParentRight="true"
+                        android:layout_alignParentEnd="true"
                         android:layout_marginTop="@dimen/activity_margin_horizontal"
                         android:layout_marginStart="@dimen/activity_margin_horizontal"
                         android:layout_marginLeft="@dimen/activity_margin_horizontal"
@@ -351,6 +377,7 @@
                         android:layout_height="wrap_content"
                         style="?android:textAppearanceMedium"
                         android:layout_toRightOf="@+id/wikidata_edits_icon"
+                        android:layout_toEndOf="@+id/wikidata_edits_icon"
                         android:layout_marginTop="@dimen/activity_margin_horizontal"
                         android:layout_marginStart="@dimen/activity_margin_horizontal"
                         android:layout_marginLeft="@dimen/activity_margin_horizontal"
@@ -362,6 +389,7 @@
                         android:layout_height="wrap_content"
                         style="?android:textAppearanceMedium"
                         android:layout_alignParentRight="true"
+                        android:layout_alignParentEnd="true"
                         android:layout_marginLeft="@dimen/activity_margin_horizontal"
                         android:layout_marginEnd="24dp"
                         android:layout_marginTop="@dimen/activity_margin_horizontal"

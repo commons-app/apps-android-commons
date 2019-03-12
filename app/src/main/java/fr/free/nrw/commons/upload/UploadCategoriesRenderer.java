@@ -1,5 +1,8 @@
 package fr.free.nrw.commons.upload;
 
+import android.annotation.SuppressLint;
+import android.content.res.Configuration;
+import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,8 +32,13 @@ public class UploadCategoriesRenderer extends Renderer<CategoryItem> {
     @Override
     protected void setUpView(View view) {
         ButterKnife.bind(this, view);
+        Configuration config = getContext().getResources().getConfiguration();
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1 && config.getLayoutDirection() == View.LAYOUT_DIRECTION_RTL) {
+            checkedView.setLayoutDirection(View.LAYOUT_DIRECTION_LTR);
+        }
     }
 
+    @SuppressLint("WrongConstant")
     @Override
     protected void hookListeners(View view) {
         view.setOnClickListener(v -> {

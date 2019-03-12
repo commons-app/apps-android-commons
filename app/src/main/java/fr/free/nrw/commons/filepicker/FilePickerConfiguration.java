@@ -14,28 +14,28 @@ public class FilePickerConfiguration implements Constants {
     public FilePickerConfiguration setImagesFolderName(String folderName) {
         PreferenceManager.getDefaultSharedPreferences(context)
                 .edit().putString(BundleKeys.FOLDER_NAME, folderName)
-                .commit();
+                .apply();
         return this;
     }
 
     public FilePickerConfiguration setAllowMultiplePickInGallery(boolean allowMultiple) {
         PreferenceManager.getDefaultSharedPreferences(context).edit()
                 .putBoolean(BundleKeys.ALLOW_MULTIPLE, allowMultiple)
-                .commit();
+                .apply();
         return this;
     }
 
     public FilePickerConfiguration setCopyTakenPhotosToPublicGalleryAppFolder(boolean copy) {
         PreferenceManager.getDefaultSharedPreferences(context).edit()
                 .putBoolean(BundleKeys.COPY_TAKEN_PHOTOS, copy)
-                .commit();
+                .apply();
         return this;
     }
 
     public FilePickerConfiguration setCopyPickedImagesToPublicGalleryAppFolder(boolean copy) {
         PreferenceManager.getDefaultSharedPreferences(context).edit()
                 .putBoolean(BundleKeys.COPY_PICKED_IMAGES, copy)
-                .commit();
+                .apply();
         return this;
     }
 

@@ -135,6 +135,7 @@ public class UploadPresenter {
         if (imageResult == IMAGE_KEEP || imageResult == IMAGE_OK) {
             Timber.d("Set title and desc; Show next uploaded item");
             setTitleAndDescription(title, descriptions);
+            directKvStore.putBoolean("Picture_Has_Correct_Location", true);
             nextUploadedItem();
         } else {
             handleBadImage(imageResult);

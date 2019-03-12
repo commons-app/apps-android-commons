@@ -368,9 +368,8 @@
   <string name="deletion_reason_bad_for_my_privacy">मुझे ज्ञात हुआ कि यह मेरी गोपनीयता के लिये सही नहीं है</string>
   <string name="deletion_reason_no_longer_want_public">मैंने अपना मन बदल लिया है, मैं इसे और अधिक सार्वजनिक रूप से दृश्य नहीं रखना चाहता</string>
   <string name="deletion_reason_not_interesting">क्षमा करें, यह चित्र ज्ञानकोष के लिये दिलचस्प नहीं है</string>
-  <string name="uploaded_by_myself">मेरे द्वारा अपलोड किया गया</string>
-  <string name="articles">लेख</string>
-  <string name="no_uploads">कॉमन्स पर आपका स्वागत है!</string>
+  <string name="uploaded_by_myself" fuzzy="true">मेरे द्वारा अपलोड किया गया</string>
+  <string name="no_uploads" fuzzy="true">कॉमन्स पर आपका स्वागत है!</string>
   <string name="desc_language_Worldwide">वैश्विक</string>
   <string name="desc_language_America">अमेरिका</string>
   <string name="desc_language_Europe">यूरोप</string>

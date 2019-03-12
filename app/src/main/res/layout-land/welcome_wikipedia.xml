@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#0c609c">
+    android:background="?attr/tutorialBackground">
 
     <android.support.constraint.Guideline
         android:id="@+id/center_guideline"

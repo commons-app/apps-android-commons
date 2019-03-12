@@ -362,7 +362,7 @@
   <string name="contributions_fragment">Framlög</string>
   <string name="nearby_fragment">Nálægt</string>
   <string name="notifications">Tilkynningar</string>
-  <string name="archived_notifications" fuzzy="true">Tilkynningar (í geymslu)</string>
+  <string name="archived_notifications">Tilkynningar (í geymslu)</string>
   <string name="display_nearby_notification">Birta tilkynningu um nágrenni</string>
   <string name="display_nearby_notification_summary">Ýttu hér til að sjá nálægasta staðinn sem þarfnast mynda</string>
   <string name="no_close_nearby">Engir staðir fundust í nágrenninu</string>
@@ -395,10 +395,8 @@
   <string name="deletion_reason_bad_for_my_privacy">Ég áttaði mig á að þetta væri slæmt fyrir gagnaleynd mína</string>
   <string name="deletion_reason_no_longer_want_public">Ég skipti um skoðun, ég vil ekki að hún sé lengur öllum sýnileg</string>
   <string name="deletion_reason_not_interesting">Afsakið, þessi mynd hefur ekkert gildi fyrir alfræðirit</string>
-  <string name="uploaded_by_myself">Sent inn af mér sjálfum</string>
-  <string name="used_by">, notað í</string>
-  <string name="articles">greinum</string>
-  <string name="no_uploads">Velkomin í Commons!\n\nSendu inn fyrstu margmiðlunargögnin þín með því að ýta á myndavélina eða myndasafnstáknið hér fyrir ofan.</string>
+  <string name="uploaded_by_myself" fuzzy="true">Sent inn af mér sjálfum</string>
+  <string name="no_uploads" fuzzy="true">Velkomin í Commons!\n\nSendu inn fyrstu margmiðlunargögnin þín með því að ýta á myndavélina eða myndasafnstáknið hér fyrir ofan.</string>
   <string name="desc_language_Worldwide">Á heimsvísu</string>
   <string name="desc_language_America">Ameríka</string>
   <string name="desc_language_Europe">Evrópa</string>
