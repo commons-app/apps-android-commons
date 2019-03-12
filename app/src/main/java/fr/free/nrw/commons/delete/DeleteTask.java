@@ -55,7 +55,8 @@ public class DeleteTask extends AsyncTask<Void, Integer, Boolean> {
                 (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
         notificationBuilder = new NotificationCompat.Builder(
                 context,
-                CommonsApplication.NOTIFICATION_CHANNEL_ID_ALL);
+                CommonsApplication.NOTIFICATION_CHANNEL_ID_ALL)
+                .setOnlyAlertOnce(true);
         Toast toast = new Toast(context);
         toast.setGravity(Gravity.CENTER,0,0);
         toast = Toast.makeText(context,"Trying to nominate "+media.getDisplayTitle()+ " for deletion",Toast.LENGTH_SHORT);
