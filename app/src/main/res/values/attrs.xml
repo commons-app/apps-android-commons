@@ -15,6 +15,7 @@
     <attr name="buttonPressed" format="reference"/>
     <attr name="textDisabled" format="reference"/>
     <attr name="textEnabled" format="reference"/>
+    <attr name="bookmarkButtonColor" format="reference"/>
     <attr name="rowButtonColor" format="reference"/>
 
     <attr name="contributionsListBackground" format="reference"/>

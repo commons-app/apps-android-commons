@@ -28,7 +28,7 @@ before_script:
 - emulator -avd test -no-audio -no-window -no-boot-anim &
 - android-wait-for-emulator
 script:
-#- "./gradlew clean check connectedCheck jacocoTestReport"
+- "./gradlew clean check connectedCheck jacocoTestReport"
 - if [ "$TRAVIS_PULL_REQUEST" == "false" ] && [ "$TRAVIS_BRANCH" == "master" ]; then
   mkdir -p app/src/prodRelease/play/release-notes/en-US;
   fi
