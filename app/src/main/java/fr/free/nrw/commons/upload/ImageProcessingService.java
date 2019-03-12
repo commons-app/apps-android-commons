@@ -92,6 +92,10 @@ public class ImageProcessingService {
         }
     }
 
+    public Single<Integer> checkForEXIF(String filepath){
+
+    }
+
 
     /**
      * Checks item title
