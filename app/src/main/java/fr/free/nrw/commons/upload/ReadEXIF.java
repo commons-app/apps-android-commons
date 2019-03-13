@@ -35,11 +35,11 @@ public class ReadEXIF {
             for (Directory directory : readMetadata.getDirectories()) {
                 if (directory.getName().equals("Exif IFD0") || directory.getName().equals("Exif SubIFD") || directory.getName().equals("Exif Thumbnail")) {
                     Timber.d(directory.getName() + " Contains metadata");
-                    return Single.just(ImageUtils.FILE_EXIF);
+                    return Single.just(ImageUtils.IMAGE_OK);
                 }
             }
         }
-        return Single.just(ImageUtils.IMAGE_OK);
+        return Single.just(ImageUtils.FILE_NO_EXIF);
     }
 
 }

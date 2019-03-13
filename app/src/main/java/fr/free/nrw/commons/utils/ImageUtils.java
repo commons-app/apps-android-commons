@@ -59,7 +59,7 @@ public class ImageUtils {
     * The parameter FILE_NO_EXIF is returned from the class ReadEXIF if the uploaded image does not contains EXIF data else returns IMAGE_OK
     * ie. 100000
     */
-    public static final int FILE_EXIF = 1 << 5;
+    public static final int FILE_NO_EXIF = 1 << 5;
     public static final int IMAGE_OK = 0;
     public static final int IMAGE_KEEP = -1;
     public static final int IMAGE_WAIT = -2;
