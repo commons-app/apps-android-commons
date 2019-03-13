@@ -274,24 +274,35 @@
                     android:layout_marginStart="@dimen/activity_margin_horizontal"
                     android:layout_marginTop="@dimen/activity_margin_horizontal">
 
-                    <ImageView
-                        android:layout_width="@dimen/overflow_icon_dimen"
-                        android:layout_height="@dimen/overflow_icon_dimen"
-                        android:layout_centerVertical="true"
-                        android:id="@+id/featured_image_icon"
-                        app:srcCompat="@drawable/featured" />
-
-                    <TextView
+                    <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        style="?android:textAppearanceMedium"
-                        android:layout_toRightOf="@+id/featured_image_icon"
-                        android:layout_toEndOf="@+id/featured_image_icon"
-                        android:layout_marginTop="@dimen/activity_margin_horizontal"
-                        android:layout_marginStart="@dimen/activity_margin_horizontal"
                         android:layout_centerVertical="true"
-                        android:layout_marginLeft="@dimen/activity_margin_horizontal"
-                        android:text="@string/statistics_featured" />
+                        android:layout_alignParentStart="true"
+                        android:layout_alignParentLeft="true"
+                        android:layout_toStartOf="@+id/image_featured"
+                        android:layout_toLeftOf="@+id/image_featured"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical">
+
+                        <ImageView
+                            android:layout_width="@dimen/overflow_icon_dimen"
+                            android:layout_height="@dimen/overflow_icon_dimen"
+                            android:id="@+id/featured_image_icon"
+                            app:srcCompat="@drawable/featured"
+                            android:scaleType="centerCrop" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            style="?android:textAppearanceMedium"
+                            android:layout_marginStart="@dimen/activity_margin_horizontal"
+                            android:layout_marginLeft="@dimen/activity_margin_horizontal"
+                            android:layout_marginEnd="@dimen/activity_margin_horizontal"
+                            android:layout_marginRight="@dimen/activity_margin_horizontal"
+                            android:text="@string/statistics_featured"  />
+
+                    </LinearLayout>
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -319,25 +330,35 @@
                     android:layout_marginTop="@dimen/activity_margin_horizontal"
                     android:layout_marginEnd="@dimen/activity_margin_horizontal">
 
-                    <ImageView
-                        android:layout_width="@dimen/overflow_icon_dimen"
-                        android:layout_height="@dimen/overflow_icon_dimen"
-                        app:srcCompat="@drawable/ic_thanks"
-                        android:layout_centerVertical="true"
-                        android:id="@+id/thanks_image_icon"
-                        android:scaleType="centerCrop" />
-
-                    <TextView
+                    <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        style="?android:textAppearanceMedium"
-                        android:layout_marginTop="@dimen/activity_margin_horizontal"
-                        android:layout_toRightOf="@+id/thanks_image_icon"
-                        android:layout_toEndOf="@+id/thanks_image_icon"
-                        android:layout_marginStart="@dimen/activity_margin_horizontal"
                         android:layout_centerVertical="true"
-                        android:layout_marginLeft="@dimen/activity_margin_horizontal"
-                        android:text="@string/statistics_thanks" />
+                        android:layout_alignParentStart="true"
+                        android:layout_alignParentLeft="true"
+                        android:layout_toStartOf="@+id/thanks_received"
+                        android:layout_toLeftOf="@+id/thanks_received"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical">
+
+                        <ImageView
+                            android:layout_width="@dimen/overflow_icon_dimen"
+                            android:layout_height="@dimen/overflow_icon_dimen"
+                            android:id="@+id/thanks_image_icon"
+                            app:srcCompat="@drawable/ic_thanks"
+                            android:scaleType="centerCrop" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            style="?android:textAppearanceMedium"
+                            android:layout_marginStart="@dimen/activity_margin_horizontal"
+                            android:layout_marginLeft="@dimen/activity_margin_horizontal"
+                            android:layout_marginEnd="@dimen/activity_margin_horizontal"
+                            android:layout_marginRight="@dimen/activity_margin_horizontal"
+                            android:text="@string/statistics_thanks"  />
+
+                    </LinearLayout>
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -365,26 +386,35 @@
                     android:layout_marginStart="@dimen/activity_margin_horizontal"
                     android:layout_marginTop="@dimen/activity_margin_horizontal">
 
-                    <ImageView
-                        android:layout_width="@dimen/overflow_icon_dimen"
-                        android:layout_height="@dimen/overflow_icon_dimen"
-                        android:id="@+id/wikidata_edits_icon"
-                        android:layout_centerVertical="true"
-                        app:srcCompat="@drawable/ic_custom_map_marker" />
-
-                    <TextView
+                    <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        style="?android:textAppearanceMedium"
-                        android:layout_toRightOf="@+id/wikidata_edits_icon"
-                        android:layout_toEndOf="@+id/wikidata_edits_icon"
+                        android:layout_centerVertical="true"
+                        android:layout_alignParentStart="true"
+                        android:layout_alignParentLeft="true"
                         android:layout_toStartOf="@+id/wikidata_edits"
                         android:layout_toLeftOf="@+id/wikidata_edits"
-                        android:layout_marginTop="@dimen/activity_margin_horizontal"
-                        android:layout_marginStart="@dimen/activity_margin_horizontal"
-                        android:layout_marginLeft="@dimen/activity_margin_horizontal"
-                        android:layout_centerVertical="true"
-                        android:text="@string/statistics_wikidata_edits" />
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical">
+
+                        <ImageView
+                            android:layout_width="@dimen/overflow_icon_dimen"
+                            android:layout_height="@dimen/overflow_icon_dimen"
+                            android:id="@+id/wikidata_edits_icon"
+                            app:srcCompat="@drawable/ic_custom_map_marker" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            style="?android:textAppearanceMedium"
+                            android:layout_marginStart="@dimen/activity_margin_horizontal"
+                            android:layout_marginLeft="@dimen/activity_margin_horizontal"
+                            android:layout_marginEnd="@dimen/activity_margin_horizontal"
+                            android:layout_marginRight="@dimen/activity_margin_horizontal"
+                            android:text="@string/statistics_wikidata_edits"  />
+
+                    </LinearLayout>
+
 
                     <TextView
                         android:layout_width="wrap_content"
