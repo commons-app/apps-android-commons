@@ -30,6 +30,8 @@ class u {
     internal var mwApi: MediaWikiApi? = null
     @Mock
     internal var readFBMD: ReadFBMD?=null
+    @Mock
+    internal var readEXIF: ReadEXIF?=null
 
     @InjectMocks
     var imageProcessingService: ImageProcessingService? = null
@@ -83,6 +85,8 @@ class u {
         `when`(mwApi!!.fileExistsWithName(ArgumentMatchers.anyString()))
                 .thenReturn(false)
         `when`(readFBMD?.processMetadata(ArgumentMatchers.any(),ArgumentMatchers.any()))
+                .thenReturn(Single.just(ImageUtils.IMAGE_OK))
+        `when`(readEXIF?.processMetadata(ArgumentMatchers.anyString()))
                 .thenReturn(Single.just(ImageUtils.IMAGE_OK))
     }
 
