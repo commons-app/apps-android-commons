@@ -71,17 +71,16 @@ public class ImageProcessingService {
         Single<Integer> darkImage = checkDarkImage(filePath);
         Single<Integer> itemTitle = checkTitle ? validateItemTitle(uploadItem) : Single.just(ImageUtils.IMAGE_OK);
         Single<Integer> checkFBMD = checkFBMD(context,contentUri);
-
+        Single<Integer> checkEXIF = checkEXIF(filePath);
         Single<Integer> zipResult = Single.zip(duplicateImage, wrongGeoLocation, darkImage, itemTitle,
                 (duplicate, wrongGeo, dark, title) -> {
                     Timber.d("Result for duplicate: %d, geo: %d, dark: %d, title: %d", duplicate, wrongGeo, dark, title);
                     return duplicate | wrongGeo | dark | title;
                 });
-
-        return Single.zip(zipResult, checkFBMD, (zip, fbmd) -> {
-            Timber.d("zip:" + zip + "fbmd:" + fbmd);
-            return zip | fbmd;
-        });
+        return Single.zip(zipResult,checkFBMD,checkEXIF, (zip,fbmd,exif)->{
+            Timber.d("zip:"+zip+"fbmd:"+fbmd+"exif:"+exif);
+            return zip| fbmd| exif;
+                });
     }
 
     /**
@@ -102,12 +101,20 @@ public class ImageProcessingService {
         }
     }
 
-    /*public Single<Integer> checkForEXIF(String filepath){
+    /**
+    * To avoid copyright we check for EXIF data in any image.
+     * Images that are downloaded from internet generally don't have any EXIF data in them
+     * while images taken via camera or screenshots in phone have EXIF data with them.
+     * So we check if the image has no EXIF data then we display a warning to the user
+     * * */
+
+    public Single<Integer> checkEXIF(String filepath){
         try {
-            return readEXIF.processMetadata(context,)
+            return readEXIF.processMetadata(filepath);
+        } catch (IOException e) {
+            return Single.just(ImageUtils.IMAGE_OK);
         }
-        return Single.just(ImageUtils.IMAGE_OK);
-    }*/
+    }
 
 
     /**
@@ -138,7 +145,7 @@ public class ImageProcessingService {
      * @param filePath file to be checked
      * @return IMAGE_DUPLICATE or IMAGE_OK
      */
-    /*private Single<Integer> checkDuplicateImage(String filePath) {
+    private Single<Integer> checkDuplicateImage(String filePath) {
         Timber.d("Checking for duplicate image %s", filePath);
         return Single.fromCallable(() ->
                 fileUtilsWrapper.getFileInputStream(filePath))
@@ -148,13 +155,6 @@ public class ImageProcessingService {
                     Timber.d("Result for duplicate image %s", b);
                     return b ? ImageUtils.IMAGE_DUPLICATE : ImageUtils.IMAGE_OK;
                 });
-    }*/
-    private Single<Integer> checkDuplicateImage(String filePath){
-        try {
-            return readEXIF.processMetadata(filePath);
-        } catch (IOException e) {
-            return Single.just(ImageUtils.FILE_FBMD);
-        }
     }
 
     /**
