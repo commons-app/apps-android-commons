@@ -66,7 +66,7 @@ public class MediaDataExtractor {
             Timber.d("Nominated for deletion: " + deletionStatus);
         }
         catch (Exception e){
-            Timber.d(e.getMessage());
+            Timber.d(e, "Exception during fetching");
         }
 
         MediaResult result = mediaWikiApi.fetchMediaByFilename(filename);
