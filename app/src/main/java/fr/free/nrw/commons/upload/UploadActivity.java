@@ -157,7 +157,6 @@ public class UploadActivity extends BaseActivity implements UploadView, SimilarI
         compositeDisposable = new CompositeDisposable();
 
         ArrayList<UploadableFile> files= getIntent().getParcelableArrayListExtra(EXTRA_FILES);
-        source=getIntent().getStringExtra(EXTRA_SOURCE);
 
         Intent intent = getIntent();
         HashMap<Integer, Uri> hashMap = (HashMap<Integer, Uri>) intent.getSerializableExtra("hashMap");
@@ -488,7 +487,6 @@ public class UploadActivity extends BaseActivity implements UploadView, SimilarI
             CropImage.ActivityResult result = CropImage.getActivityResult(data);
             if (resultCode == RESULT_OK) {
                 resultUri = result.getUri();
-                updatedImage=true;
                 presenter.updateImageUri(currentItem,resultUri);
             } else if (resultCode == CropImage.CROP_IMAGE_ACTIVITY_RESULT_ERROR_CODE) {
                 Toast.makeText(this, "Sorry there was an error in editing the image", Toast.LENGTH_SHORT).show();
