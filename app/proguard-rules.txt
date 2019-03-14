@@ -1,6 +1,13 @@
 -dontobfuscate
 -ignorewarnings
 
+-dontnote android.support.test.**
+-dontnote net.bytebuddy.**
+-dontwarn net.bytebuddy.**
+-dontnote org.mockito.**
+-dontwarn org.mockito.**
+-dontnote org.objenesis.**
+
 -keep class org.apache.http.** { *; }
 -dontwarn org.apache.http.**
 -keep class android.support.v7.widget.ShareActionProvider { *; }
