@@ -13,6 +13,7 @@ import fr.free.nrw.commons.contributions.MainActivity;
 import fr.free.nrw.commons.category.CategoryImagesActivity;
 import fr.free.nrw.commons.explore.SearchActivity;
 
+import fr.free.nrw.commons.nearby.WikiFeedback;
 import fr.free.nrw.commons.notification.NotificationActivity;
 import fr.free.nrw.commons.settings.SettingsActivity;
 import fr.free.nrw.commons.upload.UploadActivity;
@@ -59,5 +60,8 @@ public abstract class ActivityBuilderModule {
 
     @ContributesAndroidInjector
     abstract BookmarksActivity bindBookmarksActivity();
+
+    @ContributesAndroidInjector
+    abstract WikiFeedback bindWikiFeedback();
 
 }

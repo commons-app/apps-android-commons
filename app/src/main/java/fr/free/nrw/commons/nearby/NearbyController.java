@@ -19,6 +19,7 @@ import javax.inject.Inject;
 
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.location.LatLng;
+import fr.free.nrw.commons.mwapi.MediaWikiApi;
 import fr.free.nrw.commons.utils.UiUtils;
 import timber.log.Timber;
 
@@ -30,10 +31,12 @@ public class NearbyController {
     private final NearbyPlaces nearbyPlaces;
     public static double searchedRadius = 10.0; //in kilometers
     public static LatLng currentLocation;
+    public final MediaWikiApi mediaWikiApi;
 
     @Inject
-    public NearbyController(NearbyPlaces nearbyPlaces) {
+    public NearbyController(NearbyPlaces nearbyPlaces, MediaWikiApi mediaWikiApi) {
         this.nearbyPlaces = nearbyPlaces;
+        this.mediaWikiApi=mediaWikiApi;
     }
 
 
@@ -206,6 +209,9 @@ public class NearbyController {
         return baseMarkerOptions;
     }
 
+    public  String getFeedback(String place) throws IOException {
+        return mediaWikiApi.readFeedback(place);
+    }
     /**
      * We pass this variable as a group of placeList and boundaryCoordinates
      */

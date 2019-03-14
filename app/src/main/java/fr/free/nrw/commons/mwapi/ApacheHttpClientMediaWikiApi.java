@@ -310,6 +310,17 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
     }
 
     @Override
+    public String readFeedback(String source) throws IOException {
+        return api.action("flow-parsoid-utils")
+                .param("from", "html")
+                .param("to", "wikitext")
+                .param("content", source)
+                .param("title", "Talk")
+                .get()
+                .getString("/api/flow-parsoid-utils/@content");
+    }
+
+    @Override
     @NonNull
     public MediaResult fetchMediaByFilename(String filename) throws IOException {
         CustomApiResult apiResult = api.action("query")

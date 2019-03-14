@@ -13,6 +13,7 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.BottomSheetBehavior;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.support.graphics.drawable.VectorDrawableCompat;
 import android.support.v7.app.AlertDialog;
 import android.view.Gravity;
@@ -61,9 +62,13 @@ import fr.free.nrw.commons.bookmarks.locations.BookmarkLocationsDao;
 import fr.free.nrw.commons.contributions.ContributionController;
 import fr.free.nrw.commons.kvstore.BasicKvStore;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
+import fr.free.nrw.commons.notification.NotificationActivity;
 import fr.free.nrw.commons.utils.LocationUtils;
 import fr.free.nrw.commons.utils.UiUtils;
 import fr.free.nrw.commons.utils.ViewUtil;
+import io.reactivex.Observable;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.schedulers.Schedulers;
 import timber.log.Timber;
 
 import static fr.free.nrw.commons.utils.LengthUtils.formatDistanceBetween;
@@ -87,6 +92,7 @@ public class NearbyMapFragment extends DaggerFragment {
     private LinearLayout directionsButton;
     private LinearLayout commonsButton;
     private LinearLayout bookmarkButton;
+    private LinearLayout discussionButton;
     private FloatingActionButton fabPlus;
     private FloatingActionButton fabCamera;
     private FloatingActionButton fabGallery;
@@ -135,6 +141,7 @@ public class NearbyMapFragment extends DaggerFragment {
     @Inject BookmarkLocationsDao bookmarkLocationDao;
     @Inject ContributionController controller;
     @Inject Gson gson;
+    @Inject NearbyController nearbyController;
 
     private static final double ZOOM_LEVEL = 14f;
 
@@ -369,6 +376,7 @@ public class NearbyMapFragment extends DaggerFragment {
         wikipediaButton = ((NearbyFragment)getParentFragment()).view.findViewById(R.id.wikipediaButton);
         directionsButton = ((NearbyFragment)getParentFragment()).view.findViewById(R.id.directionsButton);
         commonsButton = ((NearbyFragment)getParentFragment()).view.findViewById(R.id.commonsButton);
+        discussionButton = ((NearbyFragment)getParentFragment()).view.findViewById(R.id.discussionButton);
 
         wikidataButtonText = ((NearbyFragment)getParentFragment()).view.findViewById(R.id.wikidataButtonText);
         wikipediaButtonText = ((NearbyFragment)getParentFragment()).view.findViewById(R.id.wikipediaButtonText);
@@ -852,6 +860,34 @@ public class NearbyMapFragment extends DaggerFragment {
 
         commonsButton.setVisibility(this.place.hasCommonsLink()?View.VISIBLE:View.GONE);
         commonsButton.setOnClickListener(view -> openWebView(this.place.siteLinks.getCommonsLink()));
+
+        discussionButton.setOnClickListener(v -> {
+            Intent intent=new Intent(this.getActivity(), WikiFeedback.class);
+            Timber.d("line866"+ this.place.name);
+            Observable.fromCallable(() -> nearbyController.getFeedback(this.place.name))
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe(result -> {
+                        if (result!=null){
+                            Timber.d("line871"+result);
+                            intent.putExtra("wikidataEntry",result);
+                            startActivity(intent);
+                        }
+                        else {Toast.makeText(this.getActivity(),"Failed",Toast.LENGTH_SHORT).show();
+                                                    }
+                    }, throwable -> {
+
+                        Timber.e(throwable, "Error occurred while loading notifications");
+                        throwable.printStackTrace();
+                    });
+            /*try {
+                intent.putExtra("wikidataEntry",this.place.name);
+                startActivity(intent);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }*/
+
+        });
 
         icon.setImageResource(this.place.getLabel().getIcon());
 
