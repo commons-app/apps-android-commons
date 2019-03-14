@@ -6,13 +6,15 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.constraint.ConstraintLayout;
-import android.support.design.widget.BottomSheetBehavior;
-import android.support.design.widget.Snackbar;
-import android.support.v4.app.FragmentTransaction;
-import android.support.v7.app.AlertDialog;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.constraintlayout.widget.ConstraintLayout;
+import com.google.android.material.bottomsheet.BottomSheetBehavior;
+import com.google.android.material.snackbar.Snackbar;
+
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
+import androidx.appcompat.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -163,7 +165,7 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
 
     private void removeMapFragment() {
         if (nearbyMapFragment != null) {
-            android.support.v4.app.FragmentManager fm = getFragmentManager();
+            FragmentManager fm = getFragmentManager();
             fm.beginTransaction().remove(nearbyMapFragment).commit();
             nearbyMapFragment = null;
         }
@@ -179,7 +181,7 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
 
     private void removeListFragment() {
         if (nearbyListFragment != null) {
-            android.support.v4.app.FragmentManager fm = getFragmentManager();
+            FragmentManager fm = getFragmentManager();
             fm.beginTransaction().remove(nearbyListFragment).commit();
             nearbyListFragment = null;
         }
