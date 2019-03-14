@@ -145,8 +145,7 @@ public class UploadActivity extends BaseActivity implements UploadView, SimilarI
     private CompositeDisposable compositeDisposable;
     private ProgressDialog progressDialog;
     private static int currentItem=0;
-    private static String source;
-    private static Place place;
+    private String source;
     private ArrayList<UploadableFile> files;
 
 
@@ -161,17 +160,6 @@ public class UploadActivity extends BaseActivity implements UploadView, SimilarI
 
         files = getIntent().getParcelableArrayListExtra(EXTRA_FILES);
         source=getIntent().getStringExtra(EXTRA_SOURCE);
-        place=getIntent().getParcelableExtra(PLACE_OBJECT);
-
-        Intent intent = getIntent();
-        HashMap<Integer, Uri> hashMap = (HashMap<Integer, Uri>) intent.getSerializableExtra("hashMap");
-        if (hashMap!=null){
-            for (Map.Entry<Integer, Uri> entry : hashMap.entrySet()) {
-                int key = entry.getKey();
-                Uri value = entry.getValue();
-                presenter.updateImageUri(key,value);
-            }
-        }
 
         configureLayout();
         configureTopCard();
@@ -492,7 +480,7 @@ public class UploadActivity extends BaseActivity implements UploadView, SimilarI
             CropImage.ActivityResult result = CropImage.getActivityResult(data);
             if (resultCode == RESULT_OK) {
                 resultUri = result.getUri();
-                presenter.updateImageUri(currentItem,resultUri);
+                //presenter.updateImageUri(currentItem,resultUri);
                 files.get(currentItem).updateFilePath(resultUri);
                 Intent shareIntent = new Intent(this, UploadActivity.class);
                 shareIntent.setAction(ACTION_INTERNAL_UPLOADS);
