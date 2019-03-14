@@ -1,11 +1,17 @@
 package fr.free.nrw.commons.delete;
 
+import android.app.AlertDialog;
 import android.app.NotificationManager;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.os.AsyncTask;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.NotificationCompat.Builder;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.Gravity;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import java.text.SimpleDateFormat;
@@ -14,12 +20,14 @@ import java.util.Locale;
 
 import javax.inject.Inject;
 
+import butterknife.OnClick;
 import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.auth.SessionManager;
 import fr.free.nrw.commons.di.ApplicationlessInjection;
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
+import fr.free.nrw.commons.review.ReviewActivity;
 import timber.log.Timber;
 
 import static android.support.v4.app.NotificationCompat.DEFAULT_ALL;
@@ -59,7 +67,7 @@ public class DeleteTask extends AsyncTask<Void, Integer, Boolean> {
                 .setOnlyAlertOnce(true);
         Toast toast = new Toast(context);
         toast.setGravity(Gravity.CENTER,0,0);
-        toast = Toast.makeText(context,"Trying to nominate "+media.getDisplayTitle()+ " for deletion",Toast.LENGTH_SHORT);
+        toast = Toast.makeText(context,"Trying to nominate "+media.getDisplayTitle()+ " for deletion", Toast.LENGTH_SHORT);
         toast.show();
     }
 
@@ -69,7 +77,7 @@ public class DeleteTask extends AsyncTask<Void, Integer, Boolean> {
 
         String editToken;
         String authCookie;
-        String summary = "Nominating " + media.getFilename() +" for deletion.";
+        String summary = context.getString(R.string.nominating_file_for_deletion, media.getFilename());
 
         authCookie = sessionManager.getAuthCookie();
         mwApi.setAuthCookie(authCookie);
@@ -102,15 +110,15 @@ public class DeleteTask extends AsyncTask<Void, Integer, Boolean> {
             publishProgress(1);
 
             mwApi.prependEdit(editToken,fileDeleteString+"\n",
-                    media.getFilename(),summary);
+                    media.getFilename(), summary);
             publishProgress(2);
 
             mwApi.edit(editToken,subpageString+"\n",
-                    "Commons:Deletion_requests/"+media.getFilename(),summary);
+                    "Commons:Deletion_requests/"+media.getFilename(), summary);
             publishProgress(3);
 
             mwApi.appendEdit(editToken,logPageString+"\n",
-                    "Commons:Deletion_requests/"+date,summary);
+                    "Commons:Deletion_requests/"+date, summary);
             publishProgress(4);
 
             mwApi.appendEdit(editToken,userPageString+"\n",
@@ -128,29 +136,21 @@ public class DeleteTask extends AsyncTask<Void, Integer, Boolean> {
     protected void onProgressUpdate (Integer... values){
         super.onProgressUpdate(values);
 
+        int[] messages = new int[]{
+                R.string.getting_edit_token,
+                R.string.nominate_for_deletion_edit_file_page,
+                R.string.nominate_for_deletion_create_deletion_request,
+                R.string.nominate_for_deletion_edit_deletion_request_log,
+                R.string.nominate_for_deletion_notify_user,
+                R.string.nominate_for_deletion_done
+        };
+
         String message = "";
-        switch (values[0]){
-            case 0:
-                message = "Getting token";
-                break;
-            case 1:
-                message = "Adding delete message to file";
-                break;
-            case 2:
-                message = "Creating Delete requests sub-page";
-                break;
-            case 3:
-                message = "Adding file to Delete requests log";
-                break;
-            case 4:
-                message = "Notifying User on Talk page";
-                break;
-            case 5:
-                message = "Done";
-                break;
+        if (0 < values[0] && values[0] < messages.length) {
+            message = context.getString(messages[values[0]]);
         }
 
-        notificationBuilder.setContentTitle("Nominating "+media.getDisplayTitle()+" for deletion")
+        notificationBuilder.setContentTitle(context.getString(R.string.nominating_file_for_deletion, media.getFilename()))
                 .setStyle(new NotificationCompat.BigTextStyle()
                         .bigText(message))
                 .setSmallIcon(R.drawable.ic_launcher)
@@ -166,7 +166,7 @@ public class DeleteTask extends AsyncTask<Void, Integer, Boolean> {
 
         if (result){
             title += ": Success";
-            message = "Successfully nominated " + media.getDisplayTitle() + " deletion.";
+            message = "Successfully nominated " + media.getDisplayTitle() + " for deletion.";
         }
         else {
             title += ": Failed";
@@ -182,5 +182,53 @@ public class DeleteTask extends AsyncTask<Void, Integer, Boolean> {
                 .setOngoing(false)
                 .setPriority(PRIORITY_HIGH);
         notificationManager.notify(NOTIFICATION_DELETE, notificationBuilder.build());
+    }
+
+    // TODO: refactor; see MediaDetailsFragment.onDeleteButtonClicked
+    // ReviewActivity will use this
+    public static void askReasonAndExecute(Media media, Context context, String question, String defaultValue) {
+        AlertDialog.Builder alert = new AlertDialog.Builder(context);
+        alert.setMessage(question);
+        final EditText input = new EditText(context);
+        input.setText(defaultValue);
+        alert.setView(input);
+        input.requestFocus();
+        alert.setPositiveButton(R.string.ok, (dialog, whichButton) -> {
+            String reason = input.getText().toString();
+
+            ((ReviewActivity)context).reviewController.swipeToNext();
+            ((ReviewActivity)context).runRandomizer();
+
+            DeleteTask deleteTask = new DeleteTask(context, media, reason);
+            deleteTask.execute();
+        });
+        alert.setNegativeButton(R.string.cancel, (dialog, whichButton) -> {
+        });
+        AlertDialog d = alert.create();
+        input.addTextChangedListener(new TextWatcher() {
+            private void handleText() {
+                final Button okButton = d.getButton(AlertDialog.BUTTON_POSITIVE);
+                if (input.getText().length() == 0) {
+                    okButton.setEnabled(false);
+                } else {
+                    okButton.setEnabled(true);
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable arg0) {
+                handleText();
+            }
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+            }
+        });
+        d.show();
+        d.getButton(AlertDialog.BUTTON_POSITIVE).setEnabled(defaultValue.length() > 0);
     }
 }
