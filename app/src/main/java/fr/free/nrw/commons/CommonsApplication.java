@@ -16,7 +16,6 @@ import com.facebook.imagepipeline.core.ImagePipelineConfig;
 import com.facebook.stetho.Stetho;
 import com.squareup.leakcanary.LeakCanary;
 import com.squareup.leakcanary.RefWatcher;
-import com.tspoon.traceur.Traceur;
 
 import org.acra.ACRA;
 import org.acra.ReportingInteractionMode;
@@ -90,11 +89,6 @@ public class CommonsApplication extends Application {
     public void onCreate() {
         super.onCreate();
         ACRA.init(this);
-        if (BuildConfig.DEBUG) {
-            //FIXME: Traceur should be disabled for release builds until error fixed
-            //See https://github.com/commons-app/apps-android-commons/issues/1877
-            Traceur.enableLogging();
-        }
 
         ApplicationlessInjection
                 .getInstance(this)

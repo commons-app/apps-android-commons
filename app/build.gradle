@@ -72,7 +72,6 @@ dependencies {
     androidTestImplementation 'org.mockito:mockito-core:2.10.0'
 
     // Debugging
-    implementation 'com.tspoon.traceur:traceur:1.0.1'
     implementation 'com.facebook.stetho:stetho:1.5.0'
     debugImplementation "com.squareup.leakcanary:leakcanary-android:$LEAK_CANARY_VERSION"
     releaseImplementation "com.squareup.leakcanary:leakcanary-android-no-op:$LEAK_CANARY_VERSION"
