@@ -145,6 +145,9 @@ public class UploadActivity extends BaseActivity implements UploadView, SimilarI
     private CompositeDisposable compositeDisposable;
     private ProgressDialog progressDialog;
     private static int currentItem=0;
+    private static String source;
+    private static Place place;
+    private ArrayList<UploadableFile> files;
 
 
     @SuppressLint("CheckResult")
@@ -156,7 +159,9 @@ public class UploadActivity extends BaseActivity implements UploadView, SimilarI
         ButterKnife.bind(this);
         compositeDisposable = new CompositeDisposable();
 
-        ArrayList<UploadableFile> files= getIntent().getParcelableArrayListExtra(EXTRA_FILES);
+        files = getIntent().getParcelableArrayListExtra(EXTRA_FILES);
+        source=getIntent().getStringExtra(EXTRA_SOURCE);
+        place=getIntent().getParcelableExtra(PLACE_OBJECT);
 
         Intent intent = getIntent();
         HashMap<Integer, Uri> hashMap = (HashMap<Integer, Uri>) intent.getSerializableExtra("hashMap");
@@ -488,6 +493,17 @@ public class UploadActivity extends BaseActivity implements UploadView, SimilarI
             if (resultCode == RESULT_OK) {
                 resultUri = result.getUri();
                 presenter.updateImageUri(currentItem,resultUri);
+                files.get(currentItem).updateFilePath(resultUri);
+                Intent shareIntent = new Intent(this, UploadActivity.class);
+                shareIntent.setAction(ACTION_INTERNAL_UPLOADS);
+                shareIntent.putExtra(EXTRA_SOURCE, source);
+                shareIntent.putParcelableArrayListExtra(EXTRA_FILES, new ArrayList<>(files));
+                Place place = directKvStore.getJson(PLACE_OBJECT, Place.class);
+                if (place != null) {
+                    shareIntent.putExtra(PLACE_OBJECT, place);
+                }
+                startActivity(shareIntent);
+                finish();
             } else if (resultCode == CropImage.CROP_IMAGE_ACTIVITY_RESULT_ERROR_CODE) {
                 Toast.makeText(this, "Sorry there was an error in editing the image", Toast.LENGTH_SHORT).show();
             }
