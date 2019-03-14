@@ -332,6 +332,12 @@ public class ContributionsFragment
         for (DataSetObserver observer : observersWaitingForLoad) {
             observer.onChanged();
         }
+
+        if (!ConfigUtils.isBetaFlavour()) {
+            setUploadCount();
+        } else {
+            betaSetUploadCount(getTotalMediaCount());
+        }
     }
 
     /**
