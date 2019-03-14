@@ -38,7 +38,6 @@ dependencies {
     implementation 'com.github.deano2390:MaterialShowcaseView:1.2.0'
     implementation 'com.dinuscxj:circleprogressbar:1.1.1'
     implementation 'com.karumi:dexter:5.0.0'
-    implementation files('libs/simplemagic-1.9.jar')
     implementation "com.jakewharton:butterknife:$BUTTERKNIFE_VERSION"
     kapt "com.jakewharton:butterknife-compiler:$BUTTERKNIFE_VERSION"
     // Logging
