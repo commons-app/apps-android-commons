@@ -21,13 +21,14 @@
                 android:layout_height="wrap_content" />
 
             <android.support.design.widget.TabLayout
-                android:id="@+id/tabLayout"
+                android:id="@+id/tab_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:tabTextAppearance="@android:style/TextAppearance.Widget.TabWidget"
+                android:background="?attr/tabBackground"
+                app:tabIndicatorColor="?attr/tabIndicatorColor"
+                app:tabSelectedTextColor="?attr/tabSelectedTextColor"
+                app:tabTextColor="?attr/tabTextColor"
                 app:tabMode="scrollable"
-                app:tabSelectedTextColor="@color/white"
-                app:tabTextColor="@color/opak_middle_grey"
                 android:layout_below="@id/toolbar"
                 />
         </android.support.design.widget.AppBarLayout>

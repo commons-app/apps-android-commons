@@ -2,7 +2,10 @@
 
     <style name="DarkAppTheme" parent="Theme.AppCompat.NoActionBar">
         <item name="contributionsListBackground">@color/contributionListDarkBackground</item>
-        <item name="mainTabBackground">@color/contributionListDarkBackground</item>
+        <item name="tabBackground">@color/contributionListDarkBackground</item>
+        <item name="tabIndicatorColor">@color/white</item>
+        <item name="tabSelectedTextColor">@color/white</item>
+        <item name="tabTextColor">@color/white</item>
         <item name="mainBackground">@color/main_background_dark</item>
         <item name="achievementBackground">@color/achievement_background_dark</item>
         <item name="drawerHeaderBackground">@color/drawerHeader_background_dark</item>
@@ -33,7 +36,10 @@
 
     <style name="LightAppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="contributionsListBackground">@color/white</item>
-        <item name="mainTabBackground">@color/primaryColor</item>
+        <item name="tabBackground">@color/primaryColor</item>
+        <item name="tabIndicatorColor">@color/white</item>
+        <item name="tabSelectedTextColor">@color/white</item>
+        <item name="tabTextColor">@color/white</item>
         <item name="mainBackground">@color/main_background_light</item>
         <item name="achievementBackground">@color/achievement_background_light</item>
         <item name="drawerHeaderBackground">@color/drawerHeader_background_light</item>
