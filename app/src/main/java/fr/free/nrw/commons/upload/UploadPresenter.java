@@ -267,14 +267,6 @@ public class UploadPresenter {
     }
 
     /**
-     * Toggles the right card's state between open and closed.
-     */
-    void toggleRightCardState() {
-        uploadModel.setRightCardState(!uploadModel.isRightCardState());
-        view.setRightCardState(uploadModel.isRightCardState());
-    }
-
-    /**
      * Sets all the cards' states to closed.
      */
     void closeAllCards() {
@@ -284,7 +276,6 @@ public class UploadPresenter {
         }
         if (uploadModel.isRightCardState()) {
             uploadModel.setRightCardState(false);
-            view.setRightCardState(false);
         }
         if (uploadModel.isBottomCardState()) {
             uploadModel.setBottomCardState(false);

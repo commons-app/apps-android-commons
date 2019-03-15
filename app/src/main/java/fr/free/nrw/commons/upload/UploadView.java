@@ -42,8 +42,6 @@ public interface UploadView {
 
     void setBottomCardState(boolean state);
 
-    void setRightCardState(boolean bottomCardState);
-
     void setBackground(Uri mediaUri);
 
     void setTopCardVisibility(boolean visible);
