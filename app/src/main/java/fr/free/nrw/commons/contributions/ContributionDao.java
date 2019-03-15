@@ -318,7 +318,7 @@ public class ContributionDao {
             try {
                 db.execSQL(query);
             } catch (SQLiteException e) {
-                Timber.e("Exception performing query: " + query + " message: " + e.getMessage());
+                Timber.e(e, "Exception performing query: " + query);
             }
         }
 
