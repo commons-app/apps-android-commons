@@ -499,7 +499,7 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
     private String prettyDescription(Media media) {
         // @todo use UI language when multilingual descs are available
         String desc = media.getDescription(locale.getLanguage()).trim();
-        if (desc.equals("") || desc == null) {
+        if (desc.equals("")) {
             return getString(R.string.detail_description_empty);
         } else {
             return desc;
@@ -507,7 +507,7 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
     }
     private String prettyDiscussion(Media media) {
         String disc = media.getDiscussion().trim();
-        if (disc.equals("") || disc == null) {
+        if (disc.equals("")) {
             return getString(R.string.detail_discussion_empty);
         } else {
             return disc;
