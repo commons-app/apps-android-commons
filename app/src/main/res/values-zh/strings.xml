@@ -307,7 +307,7 @@
   <string name="showcase_view_plus_fab">您可以从您的图库或照相机中上传任意地点的图片</string>
   <string name="no_images_found">找不到图片！</string>
   <string name="error_loading_images">加载图片时出错。</string>
-  <string name="image_uploaded_by">由%1$s上传</string>
+  <string name="image_uploaded_by">由%1$s上传: %1$s</string>
   <string name="block_notification">你被禁止编辑共享资源</string>
   <string name="appwidget_img">每日图片</string>
   <string name="app_widget_heading">每日图片</string>

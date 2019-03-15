@@ -304,7 +304,7 @@
   <string name="showcase_view_plus_fab">يمكنك رفع صورة لأي مكان من معرضك أو كاميرتك</string>
   <string name="no_images_found">لم يتم العثور على صور!</string>
   <string name="error_loading_images">حدث خطأ أثناء تحميل الصور.</string>
-  <string name="image_uploaded_by">تم الرفع بواسطة: %1$s</string>
+  <string name="image_uploaded_by">%1$s :تم الرفع بواسطة</string>
   <string name="block_notification">أنت ممنوع من تحرير كومنز</string>
   <string name="appwidget_img">صورة اليوم</string>
   <string name="app_widget_heading">صورة اليوم</string>
