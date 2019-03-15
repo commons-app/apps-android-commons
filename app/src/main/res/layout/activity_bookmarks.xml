@@ -17,9 +17,6 @@
             app:layout_scrollFlags="scroll" />
 
         <com.google.android.material.tabs.TabLayout
-            android:id="@+id/tabLayoutBookmarks"
-            android:layout_width="0dp"
-        <com.google.android.material.tabs.TabLayout
             android:id="@+id/tab_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
