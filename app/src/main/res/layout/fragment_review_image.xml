@@ -5,19 +5,20 @@
     android:layout_height="match_parent"
     android:weightSum="6"
     android:orientation="vertical"
-    android:gravity="center_horizontal|bottom"
-    >
+    android:gravity="center_horizontal|bottom">
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="3">
+        android:layout_weight="3.4">
+
         <com.facebook.drawee.view.SimpleDraweeView
             android:id="@+id/imageView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:src="@drawable/commons_logo_large"
-            />
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="0dp"
+            android:src="@drawable/commons_logo_large" />
 
         <RelativeLayout
             android:id="@+id/uploadOverlay"
@@ -55,7 +56,7 @@
         android:layout_width="match_parent"
         android:textColor="@android:color/black"
         android:layout_height="0dp"
-        android:layout_weight="1.1"
+        android:layout_weight="0.7"
         android:textAlignment="center"
         android:textSize="32sp"
         android:gravity="center_vertical"
@@ -65,9 +66,9 @@
         android:id="@+id/reviewQuestionContext"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="0.7"
+        android:layout_weight="1.1"
         android:textAlignment="center"
-        android:textSize="24sp"
+        android:textSize="22sp"
         android:layout_marginBottom="15dp"
         android:gravity="center_vertical"
         android:text="testing2"
@@ -85,10 +86,12 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:layout_margin="@dimen/activity_margin_horizontal"
             android:background="@android:color/transparent"
             android:text="@string/yes"
-            android:textSize="20sp"
-            android:textColor="?attr/colorPrimaryDark"
+            android:textSize="18sp"
+            android:textColor="@color/yes_button_color"
+            android:textAlignment="center"
             />
 
         <Button
@@ -97,16 +100,18 @@
             android:layout_height="wrap_content"
             android:background="@android:color/transparent"
             android:layout_weight="1"
+            android:layout_margin="@dimen/activity_margin_horizontal"
             android:text="@string/no"
-            android:textSize="20sp"
-            android:textColor="?attr/colorPrimaryDark"
+            android:textSize="18sp"
+            android:textColor="@color/no_button_color"
+            android:textAlignment="center"
             />
 
     </LinearLayout>
     <View
         android:layout_width="wrap_content"
         android:layout_height="0dp"
-        android:layout_weight="0.6"
+        android:layout_weight="0.2"
         android:background="?attr/colorPrimaryDark"
         ></View>
 

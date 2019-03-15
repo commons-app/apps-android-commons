@@ -483,15 +483,23 @@ Upload your first media by tapping on the add button.</string>
   <string name="review_category">Is this mis-categorized?</string>
   <string name="review_spam">Is this out of scope?</string>
   <string name="review_thanks">Would you like to thank to contributor?</string>
-  <string name="review_spam_explanation">Please report if doesn\'t look useful.</string>
-  <string name="review_copyright_explanation">A random photo from internet, a famous brand logo etc.</string>
+  <string name="review_spam_explanation">Click yes to nominate this image for deletion if it doesn\'t look useful.</string>
+  <string name="review_copyright_explanation">A random photo from internet, a famous brand logo etc.\n Click yes to nominate this image for deletion</string>
   <string name="review_thanks_explanation">%1$s will be happy with your thanks</string>
-  <string name="review_no_category">Oh, this is not evet categorized! Do you want to set some?</string>
+  <string name="review_no_category">Oh, this is not even categorized! Do you want to set some?</string>
   <string name="review_category_explanation">This image is under %1$s categories.</string>
   <string name="review_spam_report_question">Why do you think this is out of scope?</string>
   <string name="review_spam_report_default_answer">Because it is a selfie, very blurry or has nonsense etc.</string>
   <string name="review_c_violation_report_question">Why do you think this is copyright violation?</string>
   <string name="review_c_violation_report_default_answer">Because it looks like a press photo, a random photo from internet, a famous brand logo etc.</string>
+    <string name="review_category_yes_button_text">YES, SET CATEGORY</string>
+    <string name="review_category_no_button_text">SEEMS FINE</string>
+    <string name="review_spam_yes_button_text">YES, OUT OF SCOPE</string>
+    <string name="review_spam_no_button_text">SEEMS FINE</string>
+    <string name="review_copyright_yes_button_text">YES, COPYRIGHT VIOLATION</string>
+    <string name="review_copyright_no_button_text">SEEMS FINE</string>
+    <string name="review_thanks_yes_button_text">YES, WHY NOT</string>
+    <string name="review_thanks_no_button_text">NEXT IMAGE</string>
 
   <plurals name="receiving_shared_content">
     <item quantity="one">Receiving shared content. Processing the image might take some time depending on the size of the image and your device</item>

@@ -11,6 +11,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ProgressBar;
 
 import com.viewpagerindicator.CirclePageIndicator;
@@ -50,6 +51,9 @@ public class ReviewActivity extends AuthenticatedActivity {
     @BindView(R.id.reviewPager)
     ReviewViewPager reviewPager;
 
+    @BindView(R.id.skip_image)
+    Button skip_image_button;
+
     @Inject MediaWikiApi mwApi;
 
     public ReviewPagerAdapter reviewPagerAdapter;
@@ -59,6 +63,7 @@ public class ReviewActivity extends AuthenticatedActivity {
 
     @BindView(R.id.reviewPagerIndicator)
     public CirclePageIndicator pagerIndicator;
+
 
     @Override
     protected void onAuthCookieAcquired(String authCookie) {
@@ -84,24 +89,16 @@ public class ReviewActivity extends AuthenticatedActivity {
         pagerIndicator.setViewPager(reviewPager);
 
         runRandomizer(); //Run randomizer whenever everything is ready so that a first random image will be added
+
+        skip_image_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                runRandomizer();
+            }
+        });
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.review_randomizer_menu, menu);
-        return true;
-    }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
-
-        if (id == R.id.action_review_randomizer) {
-            return runRandomizer();
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
 
     public boolean runRandomizer() {
         ProgressBar progressBar = reviewPagerAdapter.reviewImageFragments[reviewPager.getCurrentItem()].progressBar;

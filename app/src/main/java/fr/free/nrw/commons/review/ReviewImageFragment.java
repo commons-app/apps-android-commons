@@ -1,5 +1,6 @@
 package fr.free.nrw.commons.review;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.text.Html;
 import android.text.TextUtils;
@@ -90,11 +91,13 @@ public class ReviewImageFragment extends CommonsDaggerSupportFragment {
 
         fillImageCaption();
 
-        String question, explanation;
+        String question, explanation, yesButtonText, noButtonText;
         switch (position) {
             case COPYRIGHT:
                 question = getString(R.string.review_copyright);
                 explanation = getString(R.string.review_copyright_explanation);
+                yesButtonText = getString(R.string.review_copyright_yes_button_text);
+                noButtonText = getString(R.string.review_copyright_no_button_text);
                 yesButton.setOnClickListener(view -> {
                     ((ReviewActivity) getActivity()).reviewController.reportPossibleCopyRightViolation();
                 });
@@ -102,7 +105,8 @@ public class ReviewImageFragment extends CommonsDaggerSupportFragment {
             case CATEGORY:
                 question = getString(R.string.review_category);
                 explanation = getString(R.string.review_no_category);
-                updateCategories(ReviewController.categories);
+                yesButtonText = getString(R.string.review_category_yes_button_text);
+                noButtonText = getString(R.string.review_category_no_button_text);
                 yesButton.setOnClickListener(view -> {
                     ((ReviewActivity) getActivity()).reviewController.reportWrongCategory();
                 });
@@ -110,6 +114,8 @@ public class ReviewImageFragment extends CommonsDaggerSupportFragment {
             case SPAM:
                 question = getString(R.string.review_spam);
                 explanation = getString(R.string.review_spam_explanation);
+                yesButtonText = getString(R.string.review_spam_yes_button_text);
+                noButtonText = getString(R.string.review_spam_no_button_text);
                 yesButton.setOnClickListener(view -> {
                     ((ReviewActivity) getActivity()).reviewController.reportSpam();
                 });
@@ -117,13 +123,19 @@ public class ReviewImageFragment extends CommonsDaggerSupportFragment {
             case THANKS:
                 question = getString(R.string.review_thanks);
                 explanation = getString(R.string.review_thanks_explanation, ((ReviewActivity) getActivity()).reviewController.firstRevision.username);
+                yesButtonText = getString(R.string.review_thanks_yes_button_text);
+                noButtonText = getString(R.string.review_thanks_no_button_text);
+                yesButton.setTextColor(Color.parseColor("#228b22"));
+                noButton.setTextColor(Color.parseColor("#00376d"));
                 yesButton.setOnClickListener(view -> {
                     ((ReviewActivity) getActivity()).reviewController.sendThanks();
                 });
                 break;
-            default:
+            default :
                 question = "How did we get here?";
                 explanation = "No idea.";
+                yesButtonText = "yes";
+                noButtonText = "no";
         }
 
         noButton.setOnClickListener(view -> {
@@ -132,6 +144,12 @@ public class ReviewImageFragment extends CommonsDaggerSupportFragment {
 
         ((TextView) textViewQuestion).setText(question);
         ((TextView) textViewQuestionContext).setText(explanation);
+        yesButton.setText(yesButtonText);
+        noButton.setText(noButtonText);
+
+        if(position==CATEGORY){
+            updateCategories(ReviewController.categories);
+        }
 
         simpleDraweeView = layoutView.findViewById(R.id.imageView);
 

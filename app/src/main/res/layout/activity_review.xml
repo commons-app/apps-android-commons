@@ -23,29 +23,44 @@
 
             </include>
 
-            <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_below="@id/toolbar">
+                android:layout_below="@id/toolbar"
+                android:orientation="vertical"
+                android:weightSum="15">
+
+                <Button
+                    android:id="@+id/skip_image"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:text="SKIP THIS IMAGE"
+                    android:textColor="@color/primaryDarkColor"
+                    android:background="@color/white"
+                    android:layout_weight="1"
+                    android:textStyle="bold"/>
+
 
                 <fr.free.nrw.commons.review.ReviewViewPager
                     android:id="@+id/reviewPager"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:fadingEdge="none" />
+                    android:layout_height="0dp"
+                    android:fadingEdge="none"
+                    android:layout_weight="13.5"/>
 
 
                 <com.viewpagerindicator.CirclePageIndicator
                     android:id="@+id/reviewPagerIndicator"
-                    android:layout_height="@dimen/half_standard_height"
+                    android:layout_height="0dp"
                     android:layout_width="match_parent"
-                    android:layout_below="@id/reviewPager"
-                    android:layout_gravity="bottom"
-                    android:elevation="3dp"
+                    android:layout_gravity="center"
+                    android:foregroundGravity="center_vertical"
+                    android:elevation="1dp"
                     android:background="?attr/colorPrimaryDark"
+                    android:layout_weight="0.5"
                 />
 
-            </FrameLayout>
+            </LinearLayout>
 
         </RelativeLayout>
 
