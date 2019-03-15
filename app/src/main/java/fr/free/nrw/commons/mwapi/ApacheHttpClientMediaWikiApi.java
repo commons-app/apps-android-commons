@@ -311,11 +311,10 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
 
     @Override
     public String readFeedback(String source) throws IOException {
-        return api.action("flow-parsoid-utils")
-                .param("from", "html")
-                .param("to", "wikitext")
-                .param("content", source)
-                .param("title", "Talk")
+        return api.action("query")
+                .param("prop", "revisions")
+                .param("rvprop", "content")
+                .param("titles", "Talk:Q11311478")
                 .get()
                 .getString("/api/flow-parsoid-utils/@content");
     }
