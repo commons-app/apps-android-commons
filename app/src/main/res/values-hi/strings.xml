@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Authors:
+* 1997kB
 * Anamdas
 * Anandra
 * Bhatakati aatma
+* Gopalindians
 * Nitin1485
+* Prong$31
 * Rajatkatiyar10
 * Rishi.Singh
 * Sachinkatiyar
@@ -13,20 +16,31 @@
 * Smtchahal
 * Swapnil.Karambelkar
 * चक्रपाणी
+* संजीव कुमार
 -->
 <resources>
+  <string name="title_activity_explore">खोजें</string>
+  <string name="navigation_item_explore">खोजें</string>
+  <string name="preference_category_appearance">स्वरूप</string>
+  <string name="preference_category_general">सामान्य</string>
+  <string name="preference_category_feedback">आपके सुझाव</string>
+  <string name="preference_category_location">अवस्थिति</string>
   <string name="app_name">कॉमन्स</string>
+  <string name="bullet">•</string>
   <string name="menu_settings">सेटिंग्स</string>
+  <string name="intent_share_upload_label">कॉमन्स पर अपलोड करें</string>
   <string name="username">सदस्य नाम</string>
   <string name="password">पासवर्ड</string>
+  <string name="login_credential">अपने कॉमन्स बीटा खातें पर लॉग इन करें</string>
   <string name="login">प्रवेश</string>
+  <string name="forgot_password">पासवर्ड भूल गये?</string>
   <string name="signup">खाता बनायें</string>
   <string name="logging_in_title">प्रवेश हो रहा</string>
   <string name="logging_in_message">प्रतीक्षा करें…</string>
   <string name="login_success">प्रवेश में सफल हुआ!</string>
   <string name="login_failed">प्रवेश विफल हुआ!</string>
   <string name="upload_failed">फ़ाइल नहीं मिली, कृपया अन्य फ़ाइल से प्रयास करें।</string>
-  <string name="authentication_failed" fuzzy="true">प्रमाणीकरण विफल!</string>
+  <string name="authentication_failed">प्रमाणीकरण विफल, पुनः लॉगिन करें</string>
   <string name="uploading_started">अपलोड आरंभ!</string>
   <string name="upload_completed_notification_title">%1$s अपलोड हुआ!</string>
   <string name="upload_completed_notification_text">अपना अपलोड देखने के लिए टैप करें</string>
@@ -35,9 +49,9 @@
   <string name="upload_progress_notification_title_finishing">%1$s का अपलोड पूरा हुआ</string>
   <string name="upload_failed_notification_title">%1$s का अपलोड विफल हुआ</string>
   <string name="upload_failed_notification_subtitle">देखने हेतु टैप करें</string>
-  <plurals name="uploads_pending_notification_indicator" fuzzy="true">
-    <item quantity="one">%d फ़ाइल अपलोड हो रहा</item>
-    <item quantity="other">%d फ़ाइलें अपलोड हो रहीं</item>
+  <plurals name="uploads_pending_notification_indicator">
+    <item quantity="one">%1$d फ़ाइल अपलोड हो रही</item>
+    <item quantity="other">%1$d फ़ाइलें अपलोड हो रहीं</item>
   </plurals>
   <string name="title_activity_contributions">मेरे ताज़ा अपलोड</string>
   <string name="contribution_state_queued">प्रतीक्षा में</string>
@@ -50,15 +64,18 @@
   <string name="provider_contributions">मेरे अपलोड</string>
   <string name="menu_share">साझा करें</string>
   <string name="menu_open_in_browser">ब्राउज़र में देखें</string>
-  <string name="share_title_hint" fuzzy="true">शीर्षक</string>
+  <string name="share_title_hint">शीर्षक (आवश्यक)</string>
+  <string name="add_title_toast">कृपया उचित शीर्षक प्रदान करें</string>
   <string name="share_description_hint">विवरण</string>
   <string name="login_failed_network">प्रवेश नहीं हो रहा - नेटवर्क विफल</string>
+  <string name="login_failed_wrong_credentials">लॉगिन विफल - कृपया अपना यूज़रनेम व पासवर्ड की जाँच करें</string>
   <string name="login_failed_throttled">ढेर सारे असफल प्रयास होने के कारण कुछ मिनटों के बाद प्रयास करें।</string>
   <string name="login_failed_blocked">क्षमा करें, यह सदस्य कॉमन्स में अवरोधित है</string>
   <string name="login_failed_2fa_needed">आपको अपना दो कारक प्रमाणन कोड प्रदान करना होगा।</string>
   <string name="login_failed_generic">प्रवेश विफल</string>
   <string name="share_upload_button">अपलोड</string>
   <string name="multiple_share_base_title">सूचियों को नाम दें</string>
+  <string name="add_set_name_toast">इस सेट के लिये उचित नाम प्रदान करें</string>
   <string name="provider_modifications">बदलाव</string>
   <string name="menu_upload_single">अपलोड</string>
   <string name="categories_search_text_hint">श्रेणियाँ खोजें</string>
@@ -68,15 +85,16 @@
   <string name="gps_disabled">आपके डिवाइस में जीपीएस अक्षम है। क्या आप इसे सक्षम करना चाहेंगे?</string>
   <string name="enable_gps">जीपीएस सक्षम करें</string>
   <string name="contributions_subtitle_zero">अभी तक कोई अपलोड नहीं</string>
-  <plurals name="contributions_subtitle" fuzzy="true">
-    <item quantity="one">%1$d अपलोड</item>
-    <item quantity="other">%1$d अपलोड्स</item>
+  <plurals name="contributions_subtitle">
+    <item quantity="zero">\@string/contributions_subtitle_zero</item>
+    <item quantity="one">(%1$d)</item>
+    <item quantity="other">(%1$d)</item>
   </plurals>
   <plurals name="starting_multiple_uploads">
     <item quantity="one">%1$d अपलोड शुरू</item>
     <item quantity="other">%1$d अपलोड शुरू</item>
   </plurals>
-  <plurals name="multiple_uploads_title" fuzzy="true">
+  <plurals name="multiple_uploads_title">
     <item quantity="one">%1$d अपलोड</item>
     <item quantity="other">%1$d अपलोड</item>
   </plurals>
@@ -85,11 +103,13 @@
   <string name="categories_activity_title">श्रेणियाँ</string>
   <string name="title_activity_settings">पसंद</string>
   <string name="title_activity_signup">खाता खोलें</string>
+  <string name="title_activity_featured_images">निर्वाचित चित्र</string>
+  <string name="title_activity_category_details">श्रेणी</string>
   <string name="menu_about">परिचय</string>
   <string name="about_license">विकिमीडिया कॉमन्स एप्प एक मुक्त स्रोत एप्प है जो कि विकिमीडिया समुदाय के अनुदानप्राप्तकर्ताओं व स्वयंसेवकों द्वारा निर्मित एवं प्रबंधित है। विकिमीडिया फॉऊण्डेशन इस एप्प के निर्माण, विकास व प्रबंधन में किसी प्रकार से भी संलग्न नहीं है।</string>
   <string name="about_improve">त्रुटि की सूचना और सुझावों के लिए &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt; GitHub समस्या &lt;/a&gt; बनाएं</string>
-  <string name="about_privacy_policy" fuzzy="true">&lt;a href=\"https://wikimediafoundation.org/wiki/Privacy_policy\"&gt;गोपनीयता नीति&lt;/a&gt;</string>
-  <string name="about_credits" fuzzy="true">&lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/CREDITS\"&gt;श्रेय&lt;/a&gt;</string>
+  <string name="about_privacy_policy">&lt;u&gt;गोपनीयता नीति&lt;/u&gt;</string>
+  <string name="about_credits">&lt;u&gt;श्रेय&lt;/u&gt;</string>
   <string name="title_activity_about">परिचय</string>
   <string name="menu_feedback">प्रतिक्रिया दें (ईमेल द्वारा)</string>
   <string name="no_email_client">कोई ईमेल साधन स्थापित नहीं</string>
@@ -98,10 +118,13 @@
   <string name="no_uploads_yet">आपने अब तक कोई फोटो अपलोड नहीं किया है।</string>
   <string name="menu_retry_upload">फिर प्रयास करें</string>
   <string name="menu_cancel_upload">रद्द करें</string>
-  <string name="share_license_summary">इस छवि का लाइसेन्स %1$s के अंतर्गत होगा।</string>
+  <plurals name="share_license_summary">
+    <item quantity="one">इस चित्र का प्रयोग %1$s लाइसेंस के अन्तर्गत होगा</item>
+    <item quantity="other">इन चित्रों का प्रयोग %1$s लाइसेंस के अन्तर्गत होगा</item>
+  </plurals>
   <string name="media_upload_policy">इस तस्वीर को सबमिट करके, मैं घोषणा करता हूं कि यह मेरा अपना काम है, इसमें कॉपीराइट सामग्री या सेल्फी नहीं है, और अन्यथा &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines\"&gt;विकीमीडिया कॉमन्स नीतियां का पालन करता हूँ &lt;/a&gt;</string>
   <string name="menu_download">डाउनलोड</string>
-  <string name="preference_license" fuzzy="true">लाइसेन्स</string>
+  <string name="preference_license">डिफॉल्ट लाइसेन्स</string>
   <string name="use_previous">पिछले शीर्षक/विवरण का उपयोग करें</string>
   <string name="allow_gps">वर्तमान स्थान स्वतः ज्ञात करें</string>
   <string name="allow_gps_summary" fuzzy="true">यदि छवि पर जियोटैग नहीं है तो श्रेणियों के सुझाव हेतु वर्तमान स्थान ज्ञात करें।</string>
@@ -130,17 +153,23 @@
   <string name="tutorial_1_text">विकिपीडिया में उपयोग होने वाले अधिकतर चित्र विकिमीडिया कॉमन्स पर रखे जाते है।</string>
   <string name="tutorial_1_subtext">आपके लिए चित्र पूरे विश्व के लोगों को शिक्षित करने में सहायता करेंगे!</string>
   <string name="tutorial_2_text">कृपया उन तस्वीरों को डालें, जो केवल आपके द्वारा ली गई या बनाई गई है:</string>
-  <string name="tutorial_2_subtext" fuzzy="true">- प्राकृतिक वस्तुएँ (फूल, पशु, पहाड़)\n- उपयोगी वस्तुएँ (साइकिल, रेलवे स्टेशन)\n- प्रसिद्ध लोग (आपके महापौर, ओलंपिक एथलीट जिनसे आप मिले हों)</string>
+  <string name="tutorial_2_subtext_1">प्राकृतिक वस्तु (फूल, पशु, पर्वत)</string>
+  <string name="tutorial_2_subtext_2">उपयोगी वस्तु (साइकिल, रेलवे स्टेशन)</string>
+  <string name="tutorial_2_subtext_3">प्रसिद्ध लोग (आपके महापौर, ओलम्पिक खिलाड़ी जिससे आप मिले हैं)</string>
   <string name="tutorial_3_text">कृपया अपलोड न करें:</string>
-  <string name="tutorial_3_subtext">- सेल्फी या अपने दोस्तों की तस्वीरें\n- इंटरनेट से डाउनलोड की गई तस्वीरें\n- किसी निजी एप का स्क्रीनशॉट</string>
+  <string name="tutorial_3_subtext_1">आपके मित्र की सेल्फी अथवा चित्र</string>
+  <string name="tutorial_3_subtext_2">चित्र जो आपने इंटरनेट से डाऊनलोड किया है</string>
   <string name="tutorial_4_text">अपलोड का उदाहरण:</string>
-  <string name="tutorial_4_subtext">- शीर्षक: सिडनी ओपेरा हाउस\n- विवरण: सिडनी ओपेरा हाउस का खाड़ी के पार से दृश्य\n- श्रेणियाँ: सिडनी ओपेरा हाउस, पश्चिम से सिडनी ओपेरा हाउस, सिडनी ओपेरा हाउस दूर से</string>
+  <string name="tutorial_4_subtext_1">शीर्षक:सिडनी ओपरा हाउस</string>
+  <string name="tutorial_4_subtext_2">विवरण: खाड़ी से सिडनी ओपरा हाउस का एक दृश्य</string>
+  <string name="tutorial_4_subtext_3">श्रेणियाँ: पश्चिम से सिडनी ओपरा हाउस का दृश्य, सिडनी ओपरा हाउस के सुदुर दृश्य</string>
   <string name="welcome_wikipedia_text">अपने लिए चित्रों का योगदान करें। विकिपीडिया के लेखों में जान फूँकने में सहायता करें।</string>
   <string name="welcome_wikipedia_subtext">विकिपीडिया में छवि विकिमीडिया कॉमन्स से आती है।</string>
   <string name="welcome_copyright_text">आपके चित्र पूरे विश्व के लोगों को शिक्षित करने में सहायता करते हैं।</string>
   <string name="welcome_copyright_subtext">इंटरनेट से मिली कोई कॉपीराइट सामग्री के साथ साथ पोस्टर, पुस्तक के खड्डे आदि को भी अपलोड करने से बचें।</string>
   <string name="welcome_final_text">क्या आपको लगता है कि आप समझ गए?</string>
   <string name="welcome_final_button_text">हाँ!</string>
+  <string name="welcome_help_button_text">&lt;u&gt;अधिक जानकारी&lt;/u&gt;</string>
   <string name="detail_panel_cats_label">श्रेणियाँ</string>
   <string name="detail_panel_cats_loading">लोड हो रहा है…</string>
   <string name="detail_panel_cats_none">कुछ चयनित नहीं</string>
@@ -157,9 +186,8 @@
   <string name="yes">हाँ</string>
   <string name="no">नहीं</string>
   <string name="media_detail_title">शीर्षक</string>
-  <string name="media_detail_media_title">मीडिया का शीर्षक</string>
   <string name="media_detail_description">विवरण</string>
-  <string name="media_detail_description_explanation">मीडिया का विवरण यहाँ किया जाता है यह संभवतः काफी लंबा हो सकता है, और कई पंक्तियों में लपेटने की आवश्यकता होगी हालांकि हमें उम्मीद है कि यह अच्छा लग रहा है।</string>
+  <string name="media_detail_author">लेखक</string>
   <string name="media_detail_uploaded_date">अपलोड की गई दिनांक</string>
   <string name="media_detail_license">लाइसेंस</string>
   <string name="media_detail_coordinates">निर्देशांक</string>
@@ -180,6 +208,8 @@
   <string name="background_image">पृष्ठभूमि छवि</string>
   <string name="mediaimage_failed">मीडिया छवि विफल</string>
   <string name="no_image_found">कोई छवि नहीं मिली</string>
+  <string name="no_subcategory_found">कोई उपश्रेणी नहीं मिली</string>
+  <string name="no_parentcategory_found">कोई मूल श्रेणी नहीं मिली</string>
   <string name="upload_image">तस्वीर डालिये</string>
   <string name="welcome_image_mount_zao">माउंट ज़ाओ</string>
   <string name="welcome_image_llamas">ल्लामस</string>
@@ -202,6 +232,7 @@
   <string name="navigation_item_logout">प्रस्थान करें</string>
   <string name="navigation_item_info">अनुशिक्षण</string>
   <string name="navigation_item_notification">सूचनायें</string>
+  <string name="navigation_item_featured_images">निर्वाचित</string>
   <string name="nearby_needs_permissions">आस-पास के स्थान बिना स्थान अनुमतियों के प्रदर्शित नहीं किए जा सकते हैं</string>
   <string name="no_description_found">कोई विवरण नहीं मिला</string>
   <string name="nearby_info_menu_commons_article">कॉमन्स फाइल पृष्ठ</string>
@@ -210,31 +241,159 @@
   <string name="error_while_cache">चित्र कैशिंग करते समय त्रुटि</string>
   <string name="title_info">फ़ाइल के लिए एक अद्वितीय वर्णनात्मक शीर्षक, जो एक फ़ाइल नाम के रूप में काम करेगा। आप रिक्त स्थान के साथ सादे भाषा का उपयोग कर सकते हैं। फ़ाइल विस्तार शामिल न करें</string>
   <string name="description_info">कृपया मीडिया जितना संभव हो उतना बताएं: यह कहां लिया गया? यह क्या दिखाता है? संदर्भ क्या है? कृपया वस्तुओं या व्यक्तियों का वर्णन करें। ऐसी जानकारी का खुलासा करें जिसे आसानी से अनुमानित नहीं किया जा सकता, उदाहरण के लिए दिन का समय यदि यह परिदृश्य है। अगर मीडिया कुछ असामान्य दिखाता है, तो कृपया बताएं कि इसे क्या असामान्य बनाता है।</string>
+  <string name="upload_image_too_dark">यह चित्र अंधकारमय है, क्या आप इसे सचमुच अपलोड करना चाहते हैं? विकिपीडिया कॉमन्स केवल ज्ञानकोशीय महत्त्व के चित्रों के लिये ही है।</string>
+  <string name="upload_image_blurry">यह चित्र अस्पष्ट है, क्या आप इसे सचमुच अपलोड करना चाहते हैं? विकिपीडिया कॉमन्स केवल ज्ञानकोशीय महत्त्व के चित्रों के लिये ही है।</string>
+  <string name="upload_problem_exist">इस चित्र के साथ सम्भावित समस्या:</string>
+  <string name="upload_problem_image_dark">चित्र बहुत अंधकारमय है।</string>
+  <string name="upload_problem_image_blurry">चित्र अस्पष्ट है</string>
+  <string name="upload_problem_image_duplicate">चित्र पहले से कॉमन्स पर है</string>
+  <string name="upload_problem_different_geolocation">यह चित्र किसी अलग स्थान पर लिया गया है।</string>
+  <string name="upload_problem_do_you_continue">क्या आप अब भी इस चित्र को अपलोड करना चाहते हैं?</string>
   <string name="give_permission">अनुमति दें</string>
   <string name="use_external_storage">बाहरी स्टॉरज का पृयोग करे।</string>
   <string name="use_external_storage_summary">आप अपने डिवाइस के इन-ऐप कैमरा से ली गई तस्वीरों को सहेजें।</string>
   <string name="login_to_your_account">अपने खाते में प्रवेश करें</string>
   <string name="send_log_file">लॉग फाइल भेजें</string>
   <string name="send_log_file_description" fuzzy="true">डेवेलपर्स को लॉग फाइल ई-मेल से भेजें</string>
+  <string name="no_web_browser">यूआरएल खोलने के लिये कोई वेब ब्राउज़र नहीं मिला</string>
+  <string name="null_url">त्रुटि! यूआरएल नहीं मिला</string>
+  <string name="nominate_deletion">हटाने के लिये नामांकन करें</string>
+  <string name="nominated_for_deletion">यह चित्र हटाने के लिये नामांकित किया गया है।</string>
+  <string name="nominated_see_more">&lt;u&gt;विवरण के लिये वेबपेज खोलें&lt;/u&gt;</string>
+  <string name="view_browser">ब्राउज़र में देखें</string>
+  <string name="skip_login">छोड़ें</string>
+  <string name="navigation_item_login">लॉगिन</string>
+  <string name="skip_login_title">क्या आप वास्तव में लॉगिन नहीं करना चाहते?</string>
+  <string name="skip_login_message">भविष्य में चित्र अपलोड करने के लिये आपको लॉग इन कर लेना चाहिये।</string>
+  <string name="login_alert_message">इस सुविधा का उपयोग करने के लिये लॉग इन करें</string>
+  <string name="copy_wikicode">विकिटेक्स्ट को क्लिपबोर्ड पर कॉपी करें</string>
+  <string name="wikicode_copied">विकिटेक्सट क्लिपबोर्ड पर कॉपी किया जा चुका है</string>
   <string name="nearby_location_has_not_changed">स्थान परिवर्तन नहीं हुआ।</string>
   <string name="nearby_location_not_available">स्थान उपलब्ध नहीं।</string>
   <string name="location_permission_rationale_nearby">आसपास के स्थान दिखाने के लिए अनुमति चाहिए</string>
   <string name="get_directions">दिशा - निर्देश प्राप्त करें</string>
   <string name="read_article">लेख पढ़ें</string>
-  <string name="notifications_welcome" fuzzy="true">विकिमीडिया कॉमन्स पर आपका स्वागत है, %1$s! हमें हर्ष है कि आप यहाँ हैं।</string>
-  <string name="notifications_talk_page_message" fuzzy="true">%1$s ने आपके वार्ता पृष्ठ पर सन्देश छोड़ा है</string>
+  <string name="notifications_welcome">विकिमीडिया कॉमन्स पर आपका स्वागत है, %1$s! हमें हर्ष है कि आप यहाँ हैं।</string>
+  <string name="notifications_talk_page_message">%1$s ने आपके वार्ता पृष्ठ पर सन्देश छोड़ा है</string>
   <string name="notifications_thank_you_edit">सम्पादन करने के लिए धन्यवाद</string>
-  <string name="notifications_mention" fuzzy="true">%1$s ने %2$s में आपका उल्लेख किया है</string>
+  <string name="notifications_mention">%1$s ने %2$s में आपका उल्लेख किया है</string>
+  <string name="toggle_view_button">टूगल दृश्य</string>
   <string name="nearby_directions">दिशा-निर्देश</string>
   <string name="nearby_wikidata">विकीडाटा</string>
   <string name="nearby_wikipedia">विकीपीडिया</string>
   <string name="nearby_commons">कॉमन्स</string>
+  <string name="about_rate_us">&lt;u&gt;हमें रेट करें&lt;/u&gt;</string>
+  <string name="about_faq">&lt;u&gt;अक्सर पूछे जाने वाले प्रश्न&lt;/u&gt;</string>
+  <string name="welcome_skip_button">प्रशिक्षण छोड़ें</string>
   <string name="no_internet">इंटरनेट उपलब्ध नहीं</string>
   <string name="internet_established">इंटरनेट उपलब्ध</string>
   <string name="error_notifications">सूचनाएं लाने में त्रुटि</string>
   <string name="no_notifications">कोई सूचनाएँ नहीं मिलीं</string>
+  <string name="about_translate">&lt;u&gt;अनुवाद&lt;/u&gt;</string>
   <string name="about_translate_title">भाषाएँ</string>
   <string name="about_translate_proceed">आगे बढ़ें</string>
   <string name="about_translate_cancel">रद्द करें</string>
   <string name="retry">पुनः प्रयास करें</string>
+  <string name="showcase_view_got_it_button">समझ गया!</string>
+  <string name="showcase_view_plus_fab">आप अपनी गैलरी या कैमरे से किसी भी स्थान के चित्र को अपलोड कर सकते हैं।</string>
+  <string name="no_images_found">कोई चित्र नहीं मिला!</string>
+  <string name="error_loading_images">चित्र अपलोड करते समय त्रुटि उत्पन्न हुई।</string>
+  <string name="image_uploaded_by">अपलोड: %1$s</string>
+  <string name="block_notification">कॉमन्स पर सम्पादन से आप अवरोधित हो चुके हैं</string>
+  <string name="appwidget_img">आज का चित्र</string>
+  <string name="app_widget_heading">आज का चित्र</string>
+  <string name="menu_search_button">खोजें</string>
+  <string name="search_commons">कॉमन्स में खोजें</string>
+  <string name="images_not_found">%1$s के नाम से कोई चित्र नहीं मिले</string>
+  <string name="title_activity_search">खोजें</string>
+  <string name="search_recent_header">हाल की खोजें</string>
+  <string name="provider_searches">हाल में खोजे गये प्रश्न</string>
+  <string name="error_loading_categories">श्रेणी लोड करते समय त्रुटि उत्पन्न हुई।</string>
+  <string name="error_loading_subcategories">उपश्रेणी लोड करते समय त्रुटि उत्पन्न हुई।</string>
+  <string name="search_tab_title_media">मीडिया</string>
+  <string name="search_tab_title_categories">श्रेणियाँ</string>
+  <string name="successful_wikidata_edit">चित्र सफ़लतापूर्वक विकिडाटा के %1$s पर सफलतापूर्वक जोड़ दिया गया है।</string>
+  <string name="menu_set_wallpaper">वॉलपेपर के रूप में लगायें</string>
+  <string name="wallpaper_set_successfully">वॉलपेपर सफलतापूर्वक लग गया!</string>
+  <string name="quiz">प्रश्नोत्तरी</string>
+  <string name="quiz_question_string">क्या यह चित्र अपलोड होने के लिये तैयार है?</string>
+  <string name="question">प्रश्न</string>
+  <string name="result">परिणाम</string>
+  <string name="selfie_answer">सेल्फी की ज्ञानकोषीय महत्ता बहुत अधिक नहीं है। कृपया अपना चित्र तब तक अपलोड न करें जबतक आपके बारे में कोई विकिपीडिया लेख पहले से उपलब्ध नहीं है।</string>
+  <string name="warning_for_no_answer">उत्तर हेतु प्रश्न के दो विकल्प में से कोई एक चुने</string>
+  <string name="user_not_logged_in">लॉग इन सत्र समाप्त हो गया, कृपया पुनः लॉग इन करें।</string>
+  <string name="quiz_result_share_message">अपनी प्रश्नोत्तरी अपने मित्रों के साथ साझा करें!</string>
+  <string name="continue_message">जारी रखें</string>
+  <string name="correct">सही उत्तर</string>
+  <string name="wrong">गलत उत्तर</string>
+  <string name="quiz_screenshot_question">क्या यह स्क्रीनशॉट अपलोड होने के लिये तैयार है?</string>
+  <string name="share_app_title">एप साझा करें</string>
+  <string name="share_coordinates_not_present">चित्र चुनने के दौरान निर्देशांक निर्दिष्ट नहीं किये जा सके</string>
+  <string name="error_fetching_nearby_places">निकट के स्थान लाने में त्रुटि हुई।</string>
+  <string name="add_description">+विवरण जोड़ें</string>
+  <string name="no_recent_searches">हाल में कोई खोज नहीं</string>
+  <string name="delete_recent_searches_dialog">क्या आप सचमुच अपना खोज इतिहास मिटाना चाहते हैं?</string>
+  <string name="search_history_deleted">खोज इतिहास मिट गया</string>
+  <string name="nominate_delete">हटाने के लिये नामांकन करें</string>
+  <string name="Achievements">उपलब्धियाँ</string>
+  <string name="statistics">सांख्यिकी</string>
+  <string name="statistics_thanks">धन्यवाद प्राप्त किया</string>
+  <string name="statistics_featured">निर्वाचित चित्र</string>
+  <string name="level">स्तर</string>
+  <string name="images_uploaded">चित्र अपलोड हुआ</string>
+  <string name="image_reverts">चित्रों को वापस नहीं किया गया</string>
+  <string name="images_used_by_wiki">उपयोग हुए चित्र</string>
+  <string name="achievements_share_message">अपनी उपलब्धियाँ अपने मित्रों के साथ साझा करें!</string>
+  <string name="error_occurred">त्रुटि उत्पन्न हुई!</string>
+  <string name="notifications_channel_name_all">कॉमन्स सूचना</string>
+  <string name="contributions_fragment">योगदान</string>
+  <string name="nearby_fragment">निकट</string>
+  <string name="notifications">सूचनायें</string>
+  <string name="archived_notifications">सूचनाएँ (पुरालेखित)</string>
+  <string name="list_sheet">सूची</string>
+  <string name="storage_permission">स्टोरेज अनुमति</string>
+  <string name="next">अगला</string>
+  <string name="previous">पिछला</string>
+  <string name="submit">जमा करें</string>
+  <string name="navigation_item_bookmarks">बुकमार्क</string>
+  <string name="title_activity_bookmarks">बुकमार्क</string>
+  <string name="title_page_bookmarks_pictures">चित्र</string>
+  <string name="title_page_bookmarks_locations">स्थान</string>
+  <string name="menu_bookmark">बुकमार्क से जोड़ें/हटायें</string>
+  <string name="provider_bookmarks">बुकमार्क</string>
+  <string name="bookmark_empty">आपने कोई बुकमार्क नहीं जोड़ा है</string>
+  <string name="provider_bookmarks_location">बुकमार्क</string>
+  <string name="deletion_reason_uploaded_by_mistake">मैंने इसे गलती से अपलोड कर दिया है</string>
+  <string name="deletion_reason_publicly_visible">मैं नहीं जानता था कि यह सार्वजनिक रूप से दृश्य है</string>
+  <string name="deletion_reason_bad_for_my_privacy">मुझे ज्ञात हुआ कि यह मेरी गोपनीयता के लिये सही नहीं है</string>
+  <string name="deletion_reason_no_longer_want_public">मैंने अपना मन बदल लिया है, मैं इसे और अधिक सार्वजनिक रूप से दृश्य नहीं रखना चाहता</string>
+  <string name="deletion_reason_not_interesting">क्षमा करें, यह चित्र ज्ञानकोष के लिये दिलचस्प नहीं है</string>
+  <string name="uploaded_by_myself" fuzzy="true">मेरे द्वारा अपलोड किया गया</string>
+  <string name="no_uploads" fuzzy="true">कॉमन्स पर आपका स्वागत है!</string>
+  <string name="desc_language_Worldwide">वैश्विक</string>
+  <string name="desc_language_America">अमेरिका</string>
+  <string name="desc_language_Europe">यूरोप</string>
+  <string name="desc_language_Middle_East">मध्य पूर्व</string>
+  <string name="desc_language_Africa">अफ्रीका</string>
+  <string name="desc_language_Asia">एशिया</string>
+  <string name="desc_language_Pacific">प्रशांत</string>
+  <string name="no_categories_selected">कोई श्रेणी नहीं चुनी</string>
+  <string name="no_categories_selected_warning_desc">बिना श्रेणियों के चित्र बहुत कम उपयोगी होते हैं। क्या आप सचमुच बिना श्रेणी चुने चित्र जमा करना चाहते हैं?</string>
+  <string name="yes_submit">हाँ, जमा करें</string>
+  <string name="no_go_back">नहीं, पीछे जाएँ</string>
+  <string name="upload_flow_all_images_in_set">(सेट के सभी चित्रों के लिये)</string>
+  <string name="search_this_area">इस क्षेत्र में ढूंढें</string>
+  <string name="nearby_card_permission_title">स्वीकृति अनुरोध</string>
+  <string name="never_ask_again">फिर कभी न पूछें</string>
+  <string name="ends_on">खत्म होगा:</string>
+  <string name="display_campaigns">दृश्य अभियान</string>
+  <string name="display_campaigns_explanation">वर्तमान में चल रहे अभियानों को जानने के लिये यहाँ दबायें</string>
+  <string name="error_processing_image">छवि संसाधित करते समय त्रुटि आई। कृपया पुन: प्रयास करें!</string>
+  <string name="no_image">कोई चित्र उपयोग नहीं हुआ</string>
+  <string name="no_image_reverted">कोई चित्र वापस नहीं लाया</string>
+  <string name="no_image_uploaded">कोई चित्र अपलोड नहीं किया</string>
+  <string name="no_notification">आपके पास कोई अपठित सूचना नहीं है</string>
+  <string name="no_archived_notification">आपकी कोई सूचना पुरालेखित नहीं है</string>
+  <string name="menu_option_archived">पुरालेखित देखें</string>
+  <string name="menu_option_unread">अपठित देखें</string>
 </resources>

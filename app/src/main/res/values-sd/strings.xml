@@ -101,7 +101,7 @@
   <string name="no_uploads_yet">توھان اڃان تائين ڪي بہ فوٽو انہ چاڙھيا آھن.</string>
   <string name="menu_retry_upload">ٻيھر ڪوشش ڪريو</string>
   <string name="menu_cancel_upload">رد</string>
-  <string name="share_license_summary">ھن عڪس کي %1$s جي تحت لائسنس ٿيندو</string>
+  <string name="share_license_summary" fuzzy="true">ھن عڪس کي %1$s جي تحت لائسنس ٿيندو</string>
   <string name="menu_download">لاھيو</string>
   <string name="preference_license">رٿيل لائسنس</string>
   <string name="use_previous">گذريل عنوان/تشريح استعمال ڪريو</string>
@@ -132,16 +132,13 @@
   <string name="tutorial_1_text">وڪيپيڊيا تي استعمال ٿيندڙ گھڻن عڪسن جي وڪيميڊيا العام ميزباني ڪري ٿو.</string>
   <string name="tutorial_1_subtext">توھان جا عڪس سڄي دنيا جي ماڻھن کي تعليم يافتا ڪرڻ ۾ مدد ڪن ٿا</string>
   <string name="tutorial_2_text">براءِ مھرباني اھي تصويرون چاڙھيو مڪمل طور تي توھان پاران ڪڍيل يا تخليقيل آھن:</string>
-  <string name="tutorial_2_subtext">قدرتي شيون (گل، جانور، جبل) \nاستعمال جوڳيون شيون (سائيڪلون، ريل اسٽيشنون) \nمشھور شخصيتون (توھان جو ناظم، اولمپڪ رانديگر جنھن سان توھان مليو)</string>
   <string name="tutorial_2_subtext_1">قدرتي شيون (گل، جانور، جبل)</string>
   <string name="tutorial_2_subtext_2">استعمال جوڳيون شيون (سائيڪلون، ريل اسٽيشنون)</string>
   <string name="tutorial_2_subtext_3">مشھور شخصيتون (توھان جو ناظم، اولمپڪ رانديگر جنھن سان توھان مليو)</string>
   <string name="tutorial_3_text">براءِ مھرباني نہ چاڙھيو:</string>
-  <string name="tutorial_3_subtext">u2022 سيلفيون يا پنھنجي دوستن جو تصويرون \nu2022 اھي تصويرون جيڪي توھان انٽرنيٽ تان ڊائونلوڊ ڪيون \nu2022 پروپرائيٽري ايپس جا اسڪرين شاٽ</string>
   <string name="tutorial_3_subtext_1">پاڻفي يا اوهان جي دوستن جون تصويرون</string>
   <string name="tutorial_3_subtext_2">انٽرنيٽ تان کنيل تصويرون</string>
   <string name="tutorial_4_text">مثال چاڙھ:</string>
-  <string name="tutorial_4_subtext">- عنوان: سڊني اوپيرا گھر \n- تشريح: سڊني اوپيرا گھر نھر جي پاسي کان ڏيک \n- زمرا: سڊني اوپيرا گھر، سڊني اوپيرا گھر اولھ کان، سڊني اوپيرا گھر ڏورانھان ڏيک</string>
   <string name="tutorial_4_subtext_1">سُرخي: سڊني اوپيرا گھر</string>
   <string name="welcome_wikipedia_text">پنھنجي عڪسن جي ڀاڱيداري ڪريو. وڪيپيڊيا ڪي مضمونن ۾ زندگي آڻيو!</string>
   <string name="welcome_wikipedia_subtext">وڪيپيڊيا تي عڪس وڪيميڊيا العام تان اچن ٿا.</string>
@@ -164,7 +161,6 @@
   <string name="yes">ها</string>
   <string name="no">نہ</string>
   <string name="media_detail_title">عنوان</string>
-  <string name="media_detail_media_title">ابلاغ جو عنوان</string>
   <string name="media_detail_description">تشريح</string>
   <string name="media_detail_author">ليکڪ</string>
   <string name="media_detail_uploaded_date">چاڙھيل تاريخ</string>

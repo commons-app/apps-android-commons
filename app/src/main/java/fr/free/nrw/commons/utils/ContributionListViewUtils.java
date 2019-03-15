@@ -1,6 +1,5 @@
 package fr.free.nrw.commons.utils;
 
-import android.util.Log;
 import android.view.View;
 
 /**

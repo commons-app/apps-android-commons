@@ -38,7 +38,7 @@
         android:textSize="@dimen/subtitle_text"
         android:text="@string/upload_flow_all_images_in_set"
         android:layout_below="@+id/license_title"
-        tools:text="(For all images in set)" />
+        android:visibility="gone" />
 
     <Spinner
         android:id="@+id/license_list"

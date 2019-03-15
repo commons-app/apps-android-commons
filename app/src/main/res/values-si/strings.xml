@@ -85,7 +85,7 @@
   <string name="no_uploads_yet">ඔබ තවමත් කිසිදු ඡායාරුපයක් උඩුගත කර නැත.</string>
   <string name="menu_retry_upload">නැවත උත්සහ කරන්න</string>
   <string name="menu_cancel_upload">අවලංගු කරන්න</string>
-  <string name="share_license_summary">මෙම පින්තූරය %1$s යටතේ වලංගු වනු ඇත</string>
+  <string name="share_license_summary" fuzzy="true">මෙම පින්තූරය %1$s යටතේ වලංගු වනු ඇත</string>
   <string name="menu_download">බාගන්න</string>
   <string name="preference_license" fuzzy="true">බලපත්‍රය</string>
   <string name="use_previous">පෙර මාතෘකාව/විස්තරය භාවිතා කරන්න</string>
@@ -134,7 +134,6 @@
   <string name="yes">ඔව්</string>
   <string name="no">නැත</string>
   <string name="media_detail_title">මාතෘකාව</string>
-  <string name="media_detail_media_title">මෙම මාධ්‍ය අන්ගයේ මාතෘකාව</string>
   <string name="media_detail_description">විස්තරය</string>
   <string name="media_detail_uploaded_date">උඩුගත කර දිනය</string>
   <string name="media_detail_license">බලපත්‍රය</string>

@@ -8,17 +8,6 @@ import java.io.*
 
 class FileUtilsTest {
     @Test
-    fun copiedFileIsIdenticalToSource() {
-        val source = File.createTempFile("temp", "")
-        val dest = File.createTempFile("temp", "")
-        writeToFile(source, "Hello, World")
-
-        FileUtils.copy(FileInputStream(source), FileOutputStream(dest))
-
-        assertEquals(getString(source), getString(dest))
-    }
-
-    @Test
     fun deleteFile() {
         val file = File.createTempFile("testfile", "")
         writeToFile(file, "Hello, World")

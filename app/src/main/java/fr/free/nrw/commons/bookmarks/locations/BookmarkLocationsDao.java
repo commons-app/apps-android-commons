@@ -4,7 +4,6 @@ import android.content.ContentProviderClient;
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.net.Uri;
 import android.os.RemoteException;
 import android.support.annotation.NonNull;
 
@@ -16,6 +15,7 @@ import javax.inject.Named;
 import javax.inject.Provider;
 
 import fr.free.nrw.commons.location.LatLng;
+import fr.free.nrw.commons.nearby.Label;
 import fr.free.nrw.commons.nearby.Place;
 import fr.free.nrw.commons.nearby.Sitelinks;
 
@@ -150,13 +150,10 @@ public class BookmarkLocationsDao {
         builder.setWikidataLink(cursor.getString(cursor.getColumnIndex(Table.COLUMN_WIKIDATA_LINK)));
         builder.setCommonsLink(cursor.getString(cursor.getColumnIndex(Table.COLUMN_COMMONS_LINK)));
 
-        Uri uri = Uri.parse(cursor.getString(cursor.getColumnIndex(Table.COLUMN_IMAGE_URL)));
-
         return new Place(
                 cursor.getString(cursor.getColumnIndex(Table.COLUMN_NAME)),
-                Place.Label.fromText((cursor.getString(cursor.getColumnIndex(Table.COLUMN_LABEL_TEXT)))),
+                Label.fromText((cursor.getString(cursor.getColumnIndex(Table.COLUMN_LABEL_TEXT)))),
                 cursor.getString(cursor.getColumnIndex(Table.COLUMN_DESCRIPTION)),
-                uri,
                 location,
                 cursor.getString(cursor.getColumnIndex(Table.COLUMN_CATEGORY)),
                 builder.build()
@@ -170,7 +167,6 @@ public class BookmarkLocationsDao {
         cv.put(BookmarkLocationsDao.Table.COLUMN_CATEGORY, bookmarkLocation.getCategory());
         cv.put(BookmarkLocationsDao.Table.COLUMN_LABEL_TEXT, bookmarkLocation.getLabel().getText());
         cv.put(BookmarkLocationsDao.Table.COLUMN_LABEL_ICON, bookmarkLocation.getLabel().getIcon());
-        cv.put(BookmarkLocationsDao.Table.COLUMN_IMAGE_URL, bookmarkLocation.getSecondaryImageUrl().toString());
         cv.put(BookmarkLocationsDao.Table.COLUMN_WIKIPEDIA_LINK, bookmarkLocation.siteLinks.getWikipediaLink().toString());
         cv.put(BookmarkLocationsDao.Table.COLUMN_WIKIDATA_LINK, bookmarkLocation.siteLinks.getWikidataLink().toString());
         cv.put(BookmarkLocationsDao.Table.COLUMN_COMMONS_LINK, bookmarkLocation.siteLinks.getCommonsLink().toString());

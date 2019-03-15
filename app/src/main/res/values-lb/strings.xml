@@ -67,10 +67,10 @@
   <string name="gps_disabled">GPS ass op Ärem Apparat ausgeschalt. Wëllt Dir en aktivéieren?</string>
   <string name="enable_gps">GPS aktivéieren</string>
   <string name="contributions_subtitle_zero">Nach keng eropgeluede Fichieren</string>
-  <plurals name="contributions_subtitle" fuzzy="true">
+  <plurals name="contributions_subtitle">
     <item quantity="zero">N@string/contributions_subtitle_zero</item>
-    <item quantity="one">Ee Fichier eropgelueden</item>
-    <item quantity="other">%1$d Fichieren eropgelueden</item>
+    <item quantity="one">(%1$d)</item>
+    <item quantity="other">(%1$d)</item>
   </plurals>
   <plurals name="starting_multiple_uploads">
     <item quantity="one">Ugefaang 1 Fichier eropzelueden</item>
@@ -100,12 +100,15 @@
   <string name="no_uploads_yet">Dir hutt nach keng Fotoen eropgelueden.</string>
   <string name="menu_retry_upload">Nach eng Kéier probéieren</string>
   <string name="menu_cancel_upload">Ofbriechen</string>
-  <string name="share_license_summary">Dëst Bild gëtt ënner %1$s lizenzéiert</string>
+  <plurals name="share_license_summary">
+    <item quantity="one">Dëst Bild gëtt ënner %1$s lizenzéiert</item>
+    <item quantity="other">Dës Biller ginn ënner %1$s lizenzéiert</item>
+  </plurals>
   <string name="menu_download">Eroflueden</string>
   <string name="preference_license">Standardlizenz</string>
   <string name="use_previous">Viregen Titel/Beschreiwung benotzen</string>
   <string name="allow_gps">Automatesch déi aktuell Plaz kréien</string>
-  <string name="allow_gps_summary" fuzzy="true">Aktuell Plaz ofruffe fir Propose fir Kategorien ze erméigleche wann d\'Bild keng Geotaggen huet</string>
+  <string name="allow_gps_summary">Rifft déi aktuell Plaz of wann e Bild net georeferenzéiert ass a setzt Geotagge vun der aktueller Plaz. Opgepasst: Doduerch gëtt Är aktuell Plaz bekannt.</string>
   <string name="preference_theme">Nuetsmodus</string>
   <string name="preference_theme_summary">Donkele Layout benotzen</string>
   <string name="license_name_cc_by_sa_four">Attribution-ShareAlike 4.0</string>
@@ -131,16 +134,13 @@
   <string name="tutorial_1_text">Wikimedia Commons späichert déi meescht Biller, déi op Wikipedia benotzt ginn.</string>
   <string name="tutorial_1_subtext">Är Biller hëllefe Leit op der ganzer Welt ze forméieren!</string>
   <string name="tutorial_2_text">Lued w.e.g. Biller erop déi komplett vun Iech opgeholl oder gemaacht goufen:</string>
-  <string name="tutorial_2_subtext">Natierlech Objeten (Blummen, Déieren, Bierger)\n• Nëtzlech Objeten (Vëloen, Garen)\n• Berühmt Persounen (Äre Buergermeeschter, olympesch Athleten, déi Dir begéint hutt)</string>
   <string name="tutorial_2_subtext_1">Natierlech Objeten (Blummen, Déieren, Bierger)</string>
   <string name="tutorial_2_subtext_2">Nëtzlech Objeten (Vëloen, Garen)</string>
   <string name="tutorial_2_subtext_3">Berühmt Leit (Äre Buergermeeschter, Olympioniken deenen Dir begéint sidd)</string>
   <string name="tutorial_3_text">W.e.g. NET eroplueden:</string>
-  <string name="tutorial_3_subtext">- Selfien oder Biller vun Äre Frënn\n- Biller déi Dir aus dem Internet erofgelueden hutt\n- Screenshots vu proprietäre Programmer</string>
   <string name="tutorial_3_subtext_1">Selfien oder Biller vun Äre Frënn</string>
   <string name="tutorial_3_subtext_2">Biller déi Dir aus dem Internet erofgelueden hutt</string>
   <string name="tutorial_4_text">Beispill-Upload:</string>
-  <string name="tutorial_4_subtext">- Titel: Sydney Opera House\n- Beschreiwung: Sydney Opera House vun der Bay aus gesinn\n- Kategorien: Sydney Opera House, Sydney Opera House vu Westen, Sydney Opera House vu wäitem</string>
   <string name="tutorial_4_subtext_1">Titel: Oper vu Sydney</string>
   <string name="tutorial_4_subtext_2">Beschreiwung:Oper vu Sydney esou wéi ee se vun der Bucht aus gesäit</string>
   <string name="welcome_wikipedia_text">Maacht mat mat Äre Biller. Hëlleft Wikipedia-Artikele méi lieweg ze maachen!</string>
@@ -164,9 +164,7 @@
   <string name="yes">Jo</string>
   <string name="no">Neen</string>
   <string name="media_detail_title">Titel</string>
-  <string name="media_detail_media_title">Titel vum Medium</string>
   <string name="media_detail_description">Beschreiwung</string>
-  <string name="media_detail_description_explanation">D\' Beschreiwung vum Medium kënnt hei. Dëst ka méiglecherweis laang sinn a gëtt eventuell op méi Zeile verdeelt. Mir hoffen et gesäit trotzdeem gutt aus.</string>
   <string name="media_detail_author">Auteur</string>
   <string name="media_detail_uploaded_date">Datum vum Eroplueden</string>
   <string name="media_detail_license">Lizenz</string>
@@ -176,6 +174,7 @@
   <string name="become_a_tester_description">Schreift Iech op GooglePlay a fir eise Beta-Kanal a kritt fréi Zougang zu neie Funktiounen a Verbesserunge vu Feeler</string>
   <string name="_2fa_code">2FA-Code</string>
   <string name="maximum_limit">Maximal Limite</string>
+  <string name="invalid_zero">Null ass net valabel</string>
   <string name="maximum_limit_alert">Et kënnen der net méi wéi 500 gewise ginn</string>
   <string name="logout_verification">Wëllt dir Iech wierklech ausloggen?</string>
   <string name="commons_logo">Commons-Logo</string>
@@ -212,12 +211,18 @@
   <string name="nearby_info_menu_commons_article">Commons-Fichierssäit</string>
   <string name="nearby_info_menu_wikidata_article">Wikidata-Element</string>
   <string name="nearby_info_menu_wikipedia_article">Wikipedia-Artikel</string>
+  <string name="upload_problem_exist">Potenziell Problemer mat dësem Bild:</string>
+  <string name="upload_problem_image_dark">Bild ass ze däischter.</string>
+  <string name="upload_problem_image_blurry">Bild ass verschwommen.</string>
+  <string name="upload_problem_image_duplicate">Bild ass schonn op Commons.</string>
+  <string name="upload_problem_different_geolocation">Dëst Bild gouf op enger anerer Plaz gemaach.</string>
+  <string name="upload_problem_do_you_continue">Wëllt Dir dëst Bild nach ëmmer eroplueden?</string>
   <string name="give_permission">Autorisatioun ginn</string>
   <string name="use_external_storage">Externe Späicher benotzen</string>
   <string name="use_external_storage_summary">Biller späicheren déi mat der in-app Kamera vun Ärem Apparat gemaach goufen</string>
   <string name="login_to_your_account">An Äre Benotzerkont aloggen</string>
   <string name="send_log_file">Log-Fichier schécken</string>
-  <string name="send_log_file_description" fuzzy="true">Log-Fichier per E-Mail un d\'Entwéckler schécken</string>
+  <string name="send_log_file_description">Log-Fichier per E-Mail un d\'Entwéckler schécke fir ze hëllefen fir Problemer mat der App z\'analyséieren. Notiz:A Logge kënne potenziell Informatiounen dra sinn déi Iech identifizéieren</string>
   <string name="null_url">Feeler! URL net fonnt</string>
   <string name="nominate_deletion">Nominéiere fir ze Läschen</string>
   <string name="nominated_for_deletion">Dëst Bild gouf virgeschloe fir geläscht ze ginn.</string>
@@ -256,6 +261,8 @@
   <string name="menu_search_button">Sichen</string>
   <string name="search_commons">Op Commons sichen</string>
   <string name="title_activity_search">Sichen</string>
+  <string name="search_tab_title_media">MEDIEN</string>
+  <string name="search_tab_title_categories">KATEGORIEN</string>
   <string name="wikidata_edit_failure">Déi entspriechend Wikidata-Entitéit konnt net aktualiséiert ginn!</string>
   <string name="menu_set_wallpaper">Als Hannergrondbild festleeën</string>
   <string name="wallpaper_set_successfully">Hannergrondbild festgeluecht</string>
@@ -294,7 +301,6 @@
   <string name="deletion_reason_uploaded_by_mistake">Ech hunn et iertemlech eropgelueden</string>
   <string name="deletion_reason_publicly_visible">Ech wousst net datt et ëffentlech visibel wier</string>
   <string name="deletion_reason_not_interesting">Pardon, dëst Bild ass net interessant fir eng Enzyklopedie</string>
-  <string name="articles">Artikelen</string>
   <string name="desc_language_Worldwide">Weltwäit</string>
   <string name="desc_language_America">Amerika</string>
   <string name="desc_language_Europe">Europa</string>
@@ -306,4 +312,9 @@
   <string name="yes_submit">Jo, schécken</string>
   <string name="no_go_back">Neen, zréck goen</string>
   <string name="never_ask_again">Dëst ni méi froen</string>
+  <string name="no_image">Keng Biller benotzt</string>
+  <string name="no_image_uploaded">Keng Biller eropgelueden</string>
+  <string name="error_occurred_in_picking_images">Feeler beim Eraussiche vun de Biller</string>
+  <string name="image_chooser_title">Sicht Biller eraus fir eropzelueden</string>
+  <string name="please_wait">Waart w.e.g. ...</string>
 </resources>

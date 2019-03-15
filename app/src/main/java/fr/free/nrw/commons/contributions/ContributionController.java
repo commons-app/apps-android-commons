@@ -1,189 +1,159 @@
 package fr.free.nrw.commons.contributions;
 
+import android.Manifest;
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.content.pm.ResolveInfo;
-import android.net.Uri;
 import android.os.Build;
-import android.os.Bundle;
-import android.provider.MediaStore;
-import android.support.annotation.Nullable;
-import android.support.annotation.RequiresApi;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
-import android.support.v4.content.FileProvider;
+import android.support.annotation.NonNull;
 
-import java.io.File;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
-import fr.free.nrw.commons.upload.UploadActivity;
-import timber.log.Timber;
+import javax.inject.Inject;
+import javax.inject.Named;
+import javax.inject.Singleton;
 
-import static android.content.Intent.ACTION_GET_CONTENT;
-import static android.content.Intent.ACTION_SEND;
-import static android.content.Intent.ACTION_SEND_MULTIPLE;
-import static android.content.Intent.EXTRA_STREAM;
+import fr.free.nrw.commons.R;
+import fr.free.nrw.commons.filepicker.DefaultCallback;
+import fr.free.nrw.commons.filepicker.FilePicker;
+import fr.free.nrw.commons.filepicker.UploadableFile;
+import fr.free.nrw.commons.kvstore.BasicKvStore;
+import fr.free.nrw.commons.kvstore.JsonKvStore;
+import fr.free.nrw.commons.nearby.Place;
+import fr.free.nrw.commons.upload.UploadActivity;
+import fr.free.nrw.commons.utils.PermissionUtils;
+import fr.free.nrw.commons.utils.ViewUtil;
+
 import static fr.free.nrw.commons.contributions.Contribution.SOURCE_CAMERA;
 import static fr.free.nrw.commons.contributions.Contribution.SOURCE_GALLERY;
+import static fr.free.nrw.commons.upload.UploadService.EXTRA_FILES;
 import static fr.free.nrw.commons.upload.UploadService.EXTRA_SOURCE;
-import static fr.free.nrw.commons.wikidata.WikidataConstants.WIKIDATA_ENTITY_ID_PREF;
-import static fr.free.nrw.commons.wikidata.WikidataConstants.WIKIDATA_ITEM_LOCATION;
+import static fr.free.nrw.commons.wikidata.WikidataConstants.PLACE_OBJECT;
 
+@Singleton
 public class ContributionController {
 
-    public static final int SELECT_FROM_GALLERY = 1;
-    public static final int SELECT_FROM_CAMERA = 2;
-    public static final int PICK_IMAGE_MULTIPLE = 3;
+    public static final String ACTION_INTERNAL_UPLOADS = "internalImageUploads";
 
-    private Fragment fragment;
+    private final BasicKvStore defaultKvStore;
+    private final JsonKvStore directKvStore;
 
-    public ContributionController(Fragment fragment) {
-        this.fragment = fragment;
+    @Inject
+    public ContributionController(@Named("default_preferences") BasicKvStore defaultKvStore,
+                                  @Named("direct_nearby_upload_prefs") JsonKvStore directKvStore) {
+        this.defaultKvStore = defaultKvStore;
+        this.directKvStore = directKvStore;
     }
 
-    // See http://stackoverflow.com/a/5054673/17865 for why this is done
-    private Uri lastGeneratedCaptureUri;
-
-    private Uri reGenerateImageCaptureUriInCache() {
-        File photoFile = new File(fragment.getContext().getCacheDir() + "/images",
-                new Date().getTime() + ".jpg");
-        photoFile.getParentFile().mkdirs();
-        Context applicationContext = fragment.getActivity().getApplicationContext();
-        return FileProvider.getUriForFile(
-                fragment.getContext(),
-                applicationContext.getPackageName() + ".provider",
-                photoFile);
-    }
-
-    private static void requestWritePermission(Context context, Intent intent, Uri uri) {
-
-        List<ResolveInfo> resInfoList = context.getPackageManager().queryIntentActivities(intent,
-                PackageManager.MATCH_DEFAULT_ONLY);
-        for (ResolveInfo resolveInfo : resInfoList) {
-            String packageName = resolveInfo.activityInfo.packageName;
-            context.grantUriPermission(packageName, uri, Intent.FLAG_GRANT_WRITE_URI_PERMISSION
-                    | Intent.FLAG_GRANT_READ_URI_PERMISSION);
-        }
-    }
-
-    public void startCameraCapture() {
-
-        Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        lastGeneratedCaptureUri = reGenerateImageCaptureUriInCache();
-
-        // Intent.setFlags doesn't work for API level <20
-        requestWritePermission(fragment.getContext(), takePictureIntent, lastGeneratedCaptureUri);
-
-        takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, lastGeneratedCaptureUri);
-        if (!fragment.isAdded()) {
+    /**
+     * Check for permissions and initiate camera click
+     */
+    public void initiateCameraPick(Activity activity) {
+        boolean useExtStorage = defaultKvStore.getBoolean("useExternalStorage", true);
+        if (!useExtStorage) {
+            initiateCameraUpload(activity);
             return;
         }
-        fragment.startActivityForResult(takePictureIntent, SELECT_FROM_CAMERA);
+
+        PermissionUtils.checkPermissionsAndPerformAction(activity,
+                Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                () -> initiateCameraUpload(activity),
+                R.string.storage_permission_title,
+                R.string.write_storage_permission_rationale);
     }
 
-    public void startGalleryPick() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR2) {
-            startMultipleGalleryPick();
+    /**
+     * Check for permissions and initiate gallery picker
+     */
+    public void initiateGalleryPick(Activity activity, boolean allowMultipleUploads) {
+        if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.JELLY_BEAN) {
+            initiateGalleryUpload(activity, allowMultipleUploads);
         } else {
-            startSingleGalleryPick();
+            PermissionUtils.checkPermissionsAndPerformAction(activity,
+                    Manifest.permission.READ_EXTERNAL_STORAGE,
+                    () -> initiateGalleryUpload(activity, allowMultipleUploads),
+                    R.string.storage_permission_title,
+                    R.string.read_storage_permission_rationale);
         }
     }
 
-    public void startSingleGalleryPick() {
-        //FIXME: Starts gallery (opens Google Photos)
-        Intent pickImageIntent = new Intent(ACTION_GET_CONTENT);
-        pickImageIntent.setType("image/*");
-        // See https://stackoverflow.com/questions/22366596/android-illegalstateexception-fragment-not-attached-to-activity-webview
-        if (!fragment.isAdded()) {
-            Timber.d("Fragment is not added, startActivityForResult cannot be called");
-            return;
-        }
-        Timber.d("startSingleGalleryPick() called with pickImageIntent");
-
-        fragment.startActivityForResult(pickImageIntent, SELECT_FROM_GALLERY);
+    /**
+     * Open chooser for gallery uploads
+     */
+    private void initiateGalleryUpload(Activity activity, boolean allowMultipleUploads) {
+        setPickerConfiguration(activity, allowMultipleUploads);
+        FilePicker.openGallery(activity, 0);
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR2)
-    public void startMultipleGalleryPick() {
-        Intent pickImageIntent = new Intent(ACTION_GET_CONTENT);
-        pickImageIntent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
-        pickImageIntent.setType("image/*");
-        if (!fragment.isAdded()) {
-            Timber.d("Fragment is not added, startActivityForResult cannot be called");
-            return;
-        }
-        Timber.d("startMultipleGalleryPick() called with pickImageIntent");
-
-        fragment.startActivityForResult(pickImageIntent, PICK_IMAGE_MULTIPLE);
+    /**
+     * Sets configuration for file picker
+     */
+    private void setPickerConfiguration(Activity activity,
+                                        boolean allowMultipleUploads) {
+        boolean copyToExternalStorage = defaultKvStore.getBoolean("useExternalStorage", true);
+        FilePicker.configuration(activity)
+                .setCopyTakenPhotosToPublicGalleryAppFolder(copyToExternalStorage)
+                .setAllowMultiplePickInGallery(allowMultipleUploads);
     }
 
-    public void handleImagesPicked(int requestCode, @Nullable ArrayList<Uri> uri) {
-        FragmentActivity activity = fragment.getActivity();
-        Intent shareIntent = new Intent(activity, UploadActivity.class);
-        shareIntent.setAction(ACTION_SEND_MULTIPLE);
-        shareIntent.putExtra(EXTRA_SOURCE, SOURCE_GALLERY);
-        shareIntent.putExtra(EXTRA_STREAM, uri);
-        shareIntent.setType("image/jpeg");
-        if (activity != null) {
-            activity.startActivity(shareIntent);
-        }
+    /**
+     * Initiate camera upload by opening camera
+     */
+    private void initiateCameraUpload(Activity activity) {
+        setPickerConfiguration(activity, false);
+        FilePicker.openCameraForImage(activity, 0);
     }
 
-    public void handleImagePicked(int requestCode, @Nullable Uri uri, boolean isDirectUpload, String wikiDataEntityId, String wikidateItemLocation) {
-        FragmentActivity activity = fragment.getActivity();
-        Timber.d("handleImagePicked() called with onActivityResult(). Boolean isDirectUpload: " + isDirectUpload + "String wikiDataEntityId: " + wikiDataEntityId);
-        Intent shareIntent = new Intent(activity, UploadActivity.class);
-        shareIntent.setAction(ACTION_SEND);
-        switch (requestCode) {
-            case SELECT_FROM_GALLERY:
-                //Handles image picked from gallery
-                Uri imageData = uri;
-                shareIntent.setType(activity.getContentResolver().getType(imageData));
-                shareIntent.putExtra(EXTRA_STREAM, imageData);
-                shareIntent.putExtra(EXTRA_SOURCE, SOURCE_GALLERY);
-                break;
-            case SELECT_FROM_CAMERA:
-                //FIXME: Find out appropriate mime type
-                // AFAIK this is the right type for a JPEG image
-                // https://developer.android.com/training/sharing/send.html#send-binary-content
-                shareIntent.setType("image/jpeg");
-                shareIntent.putExtra(EXTRA_STREAM, lastGeneratedCaptureUri);
-                shareIntent.putExtra(EXTRA_SOURCE, SOURCE_CAMERA);
-                break;
-            default:
-                break;
-        }
-
-        Timber.i("Image selected");
-        shareIntent.putExtra("isDirectUpload", isDirectUpload);
-        Timber.d("Put extras into image intent, isDirectUpload is " + isDirectUpload);
-
-        try {
-            if (wikiDataEntityId != null && !wikiDataEntityId.equals("")) {
-                shareIntent.putExtra(WIKIDATA_ENTITY_ID_PREF, wikiDataEntityId);
-                shareIntent.putExtra(WIKIDATA_ITEM_LOCATION, wikidateItemLocation);
+    /**
+     * Attaches callback for file picker.
+     */
+    public void handleActivityResult(Activity activity, int requestCode, int resultCode, Intent data) {
+        FilePicker.handleActivityResult(requestCode, resultCode, data, activity, new DefaultCallback() {
+            @Override
+            public void onImagePickerError(Exception e, FilePicker.ImageSource source, int type) {
+                ViewUtil.showShortToast(activity, R.string.error_occurred_in_picking_images);
             }
-        } catch (SecurityException e) {
-            Timber.e(e, "Security Exception");
-        }
 
-        if (activity != null) {
-            activity.startActivity(shareIntent);
-        }
+            @Override
+            public void onImagesPicked(@NonNull List<UploadableFile> imagesFiles, FilePicker.ImageSource source, int type) {
+                Intent intent = handleImagesPicked(activity, imagesFiles, getSourceFromImageSource(source));
+                activity.startActivity(intent);
+            }
+        });
     }
 
-    void saveState(Bundle outState) {
-        if (outState != null) {
-            outState.putParcelable("lastGeneratedCaptureURI", lastGeneratedCaptureUri);
-        }
+    public List<UploadableFile> handleExternalImagesPicked(Activity activity,
+                                                           Intent data) {
+        return FilePicker.handleExternalImagesPicked(data, activity);
     }
 
-    void loadState(Bundle savedInstanceState) {
-        if (savedInstanceState != null) {
-            lastGeneratedCaptureUri = savedInstanceState.getParcelable("lastGeneratedCaptureURI");
+    /**
+     * Returns intent to be passed to upload activity
+     * Attaches place object for nearby uploads
+     */
+    private Intent handleImagesPicked(Context context,
+                                      List<UploadableFile> imagesFiles,
+                                      String source) {
+        Intent shareIntent = new Intent(context, UploadActivity.class);
+        shareIntent.setAction(ACTION_INTERNAL_UPLOADS);
+        shareIntent.putExtra(EXTRA_SOURCE, source);
+        shareIntent.putParcelableArrayListExtra(EXTRA_FILES, new ArrayList<>(imagesFiles));
+        Place place = directKvStore.getJson(PLACE_OBJECT, Place.class);
+        if (place != null) {
+            shareIntent.putExtra(PLACE_OBJECT, place);
         }
+
+        return shareIntent;
+    }
+
+    /**
+     * Get image upload source
+     */
+    private String getSourceFromImageSource(FilePicker.ImageSource source) {
+        if (source.equals(FilePicker.ImageSource.CAMERA_IMAGE)) {
+            return SOURCE_CAMERA;
+        }
+        return SOURCE_GALLERY;
     }
 }

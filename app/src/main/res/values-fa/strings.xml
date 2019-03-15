@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Authors:
+* Amirsara
 * Arash.pt
 * Ebraminio
 * Eshagh79
@@ -9,6 +10,7 @@
 * Omidh
 * Ommmmid
 * Reza1615
+* Vahedi
 * Yoosef Pooranvary
 * جواد
 -->
@@ -79,7 +81,7 @@
   <string name="gps_disabled">مکان‌یاب در دستگاه شما خاموش است. آیا دوست دارید فعال شود؟</string>
   <string name="enable_gps">فعال کردن مکان‌یاب</string>
   <string name="contributions_subtitle_zero">هنوز هیچ بارگذاری</string>
-  <string name="contributions_subtitle" fuzzy="true">{{%1$d|zero=@string/contributions_subtitle_zero|one=بارگذاری شد|%1$d بارگذاری شد}}</string>
+  <string name="contributions_subtitle">{{%1$d|zero=@string/contributions_subtitle_zero|one=(%1$d)|(%1$d)}}</string>
   <plurals name="starting_multiple_uploads">
     <item quantity="one">شروع %1$d بارگذاری پرونده</item>
     <item quantity="other">شروع بارگذاری %1$d پرونده</item>
@@ -108,7 +110,10 @@
   <string name="no_uploads_yet">شما هنوز نگاره‌ای بارگذاری نکرده‌اید.</string>
   <string name="menu_retry_upload">تلاش مجدد</string>
   <string name="menu_cancel_upload">لغو</string>
-  <string name="share_license_summary">این نگاره تحت مجوز %1$s است</string>
+  <plurals name="share_license_summary">
+    <item quantity="one">این نگاره تحت مجوز %1$s است</item>
+    <item quantity="other">این نگاره تحت مجوز %1$s است</item>
+  </plurals>
   <string name="media_upload_policy">با بارگذاری این تصویر، تأیید می‌کنم که این اثر کار خودم است و از محتوای دارای حق تکثیر یا سلفی برای ایجاد آن استفاده نکرده‌ام و شرایط ذکر شده در By submitting this picture, I declare that this is my own work, that it does not contain copyrighted material or selfies, and otherwise adheres to &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines\"&gt;سیاست‌های ویکی‌انبار&lt;/a&gt; را رعایت می‌کند.</string>
   <string name="menu_download">دریافت</string>
   <string name="preference_license">مجوز پیش‌فرض</string>
@@ -140,17 +145,14 @@
   <string name="tutorial_1_text">ویکی‌انبار اکثر پرونده‌هایی که در ویکی‌پدیا استفاده می‌شوند را در خود نگه می‌دارد.</string>
   <string name="tutorial_1_subtext">تصاویر شما به مردم در اقصی نقاط دنیا کمک می‌کند!</string>
   <string name="tutorial_2_text">لطفاً تصاویری که توسط خودتان گرفته شده‌اند یا ایجاد شده‌اند را بارگذاری کنید:</string>
-  <string name="tutorial_2_subtext">•اجسام طبیعی (گیاه، جانور، کوه)\n•اجسام کاربردی (دوچرخه، ایستگاه قطار)\n•افراد مشهور (شهردار، قهرمانان المپیک)</string>
   <string name="tutorial_2_subtext_1">اشیاء طبیعی (گل ها، حیوانات، کوه ها)</string>
   <string name="tutorial_2_subtext_2">اشیاء مفید (دوچرخه، ایستگاه قطار)</string>
   <string name="tutorial_2_subtext_3">افراد معروف (شهردار، ورزشکاران المپیک که ملاقات کرده اید)</string>
   <string name="tutorial_3_text">لطفاً بارگذاری نکنید:</string>
-  <string name="tutorial_3_subtext">-سلفی خودتان یا تصویر دوستانتان\n-تصاویری که از اینترنت دانلود کردید\n-نماگرفت از دیگر اپلیکیشن‌‌ها</string>
   <string name="tutorial_3_subtext_1">سلفی یا تصویر از دوستانتان</string>
   <string name="tutorial_3_subtext_2">تصاویری که از اینترنت دانلود کرده اید</string>
   <string name="tutorial_3_subtext_3">عکس از صفحه از برنامه های اختصاصی</string>
   <string name="tutorial_4_text">نمونه بارگذاری:</string>
-  <string name="tutorial_4_subtext">-عنوان: خانهٔ اپرای سیدنی\n-توضیحات: خانهٔ اپرای سیدنی از آن طرف خلیج\n-رده‌ها: Sydney Opera House from the west, Sydney Opera House remote views</string>
   <string name="tutorial_4_subtext_1">عنوان: اپرای سیدنی</string>
   <string name="tutorial_4_subtext_2">توضیحات: خانه اپرای سیدنی از سراسر خلیج دیده شده است</string>
   <string name="tutorial_4_subtext_3">دسته بندی: خانه اپرای سیدنی از غرب، منظره دیدنی اپرای سیدنی</string>
@@ -177,11 +179,8 @@
   <string name="yes">بله</string>
   <string name="no">خیر</string>
   <string name="media_detail_title">عنوان</string>
-  <string name="media_detail_media_title">عنوان رسانه</string>
   <string name="media_detail_description">توضیح</string>
-  <string name="media_detail_description_explanation">توضیحات رسانه اینجا می‌روند. امکان دارد طولانی باشد و نیاز به چند خط شدن داشته باشد. امیدواریم خوب دیده شود.</string>
   <string name="media_detail_author">نویسنده</string>
-  <string name="media_detail_author_explanation">تصویر نویسنده و نام کاربری در اینجا نمایش داده میشود.</string>
   <string name="media_detail_uploaded_date">تاریخ بارگذاری</string>
   <string name="media_detail_license">مجوز</string>
   <string name="media_detail_coordinates">مختصات‌ها</string>
@@ -191,6 +190,7 @@
   <string name="_2fa_code">کد 2FA</string>
   <string name="number_of_uploads">محدودیت بارگذاری اخیر من</string>
   <string name="maximum_limit">حداکثر محدودیت</string>
+  <string name="invalid_input">ورودی نامعتبر</string>
   <string name="maximum_limit_alert">عدم توانایی در نمایش بیش از ۵۰۰ مورد</string>
   <string name="set_limit">تنظیم محدودیت بارگذاری‌های اخیر</string>
   <string name="login_failed_2fa_not_supported">تأیید دومرحله‌ای الان پشتیبانی نمی‌شود.</string>
@@ -250,7 +250,7 @@
   <string name="skip_login">رها کردن</string>
   <string name="navigation_item_login">ورود به سامانه</string>
   <string name="skip_login_title">آیا واقعا میخواهید وارد شوید؟</string>
-  <string name="skip_login_message">شما نمیتوانید تصاویر را آپلود کنید.</string>
+  <string name="skip_login_message">برای بارگذاری تصاویر در آینده شما باید وارد حساب کاربری خود شوید.</string>
   <string name="login_alert_message">لطفا برای استفاده از این ویژگی وارد شوید</string>
   <string name="copy_wikicode">از ویکی واژه به کلیپ برد کپی کنید.</string>
   <string name="nearby_location_has_not_changed">مکان تغییر نکرده‌است.</string>
@@ -288,6 +288,8 @@
   <string name="search_commons">جستجوی ویکی‌انبار</string>
   <string name="title_activity_search">جستجو</string>
   <string name="search_recent_header">جستجوهای اخیر:</string>
+  <string name="search_tab_title_media">رسانه</string>
+  <string name="search_tab_title_categories">دسته بندی</string>
   <string name="menu_set_wallpaper">انتخاب به عنوان پس‌زمینه</string>
   <string name="quiz">امتحان</string>
   <string name="question">پرسش</string>
@@ -335,4 +337,8 @@
   <string name="yes_submit">بله، ارسال شود</string>
   <string name="no_go_back">نه، به قبل بازگرد</string>
   <string name="upload_flow_all_images_in_set">(برای همهٔ تصاویر موجود در مجموعه)</string>
+  <string name="search_this_area">جستجوی این محدوده</string>
+  <string name="error_processing_image">هنگام پردازش این تصویر خطایی رخ داد. لطفا دوباره سعی کنید!</string>
+  <string name="menu_option_unread">مشاهده خوانده نشده ها</string>
+  <string name="please_wait">لطفاً صبر کنید...</string>
 </resources>

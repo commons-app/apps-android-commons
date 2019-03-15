@@ -11,7 +11,8 @@
         android:layout_height="wrap_content"
         android:textAlignment="center"
         android:textColor="@android:color/white"
-        android:text="NEARBY"
+        android:text="@string/nearby_fragment"
+        android:textAllCaps="true"
         android:gravity="center"/>
     <ImageView
         android:layout_width="18dp"

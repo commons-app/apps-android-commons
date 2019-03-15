@@ -15,20 +15,21 @@ android:
   components:
   - tools
   - platform-tools
-  - build-tools-27.0.3
+  - build-tools-28.0.3
   - extra-google-m2repository
   - extra-android-m2repository
   - android-22
-  - android-27
-  - sys-img-${ANDROID_ABI}-${ANDROID_TARGET}
+  - android-28
   licenses:
   - android-sdk-license-.+
-before_script:
-- echo no | android create avd --force -n test -t $ANDROID_TARGET --abi $ANDROID_ABI
-- emulator -avd test -no-audio -no-window -no-boot-anim &
-- android-wait-for-emulator
 script:
-- "./gradlew clean check connectedCheck jacocoTestReport"
+- "./gradlew -Pcoverage clean check jacocoTestReport"
+- if [ "$TRAVIS_PULL_REQUEST" == "false" ] && [ "$TRAVIS_BRANCH" == "master" ]; then
+  mkdir -p app/src/prodRelease/play/release-notes/en-US;
+  fi
+- if [ "$TRAVIS_PULL_REQUEST" == "false" ] && [ "$TRAVIS_BRANCH" == "master" ]; then
+  git log --pretty=format:"%s" HEAD^..HEAD > app/src/prodRelease/play/release-notes/en-US/default.txt;
+  fi
 - if [ "$TRAVIS_PULL_REQUEST" == "false" ] && [ "$TRAVIS_BRANCH" == "master" ]; then
   ./gradlew publishProdReleaseApk;
   fi

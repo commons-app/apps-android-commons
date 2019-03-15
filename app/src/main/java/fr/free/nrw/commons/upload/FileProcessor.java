@@ -2,7 +2,6 @@ package fr.free.nrw.commons.upload;
 
 import android.annotation.SuppressLint;
 import android.content.ContentResolver;
-import android.content.SharedPreferences;
 import android.media.ExifInterface;
 import android.net.Uri;
 import android.os.Build;
@@ -19,12 +18,13 @@ import javax.inject.Named;
 import javax.inject.Singleton;
 
 import fr.free.nrw.commons.caching.CacheController;
+import fr.free.nrw.commons.kvstore.BasicKvStore;
 import fr.free.nrw.commons.mwapi.CategoryApi;
 import io.reactivex.schedulers.Schedulers;
 import timber.log.Timber;
 
 /**
- * Processing of the image file that is about to be uploaded via ShareActivity is done here
+ * Processing of the image filePath that is about to be uploaded via ShareActivity is done here
  */
 @Singleton
 public class FileProcessor implements SimilarImageDialogFragment.onResponse {
@@ -37,7 +37,7 @@ public class FileProcessor implements SimilarImageDialogFragment.onResponse {
     CategoryApi apiCall;
     @Inject
     @Named("default_preferences")
-    SharedPreferences prefs;
+    BasicKvStore defaultKvStore;
     private String filePath;
     private ContentResolver contentResolver;
     private GPSExtractor imageObj;
@@ -61,7 +61,7 @@ public class FileProcessor implements SimilarImageDialogFragment.onResponse {
     }
 
     /**
-     * Processes file coordinates, either from EXIF data or user location
+     * Processes filePath coordinates, either from EXIF data or user location
      */
     GPSExtractor processFileCoordinates(SimilarImageInterface similarImageInterface) {
         Timber.d("Calling GPSExtractor");
@@ -116,7 +116,7 @@ public class FileProcessor implements SimilarImageDialogFragment.onResponse {
                     Timber.d("not null fild EXIF" + tempImageObj.imageCoordsExists + " coords" + tempImageObj.getCoords());
                     if (tempImageObj.getCoords() != null && tempImageObj.imageCoordsExists) {
                         // Current image has gps coordinates and it's not current gps locaiton
-                        Timber.d("This file has image coords:" + file.getAbsolutePath());
+                        Timber.d("This filePath has image coords:" + file.getAbsolutePath());
                         similarImageInterface.showSimilarImageFragment(filePath, file.getAbsolutePath());
                         break;
                     }

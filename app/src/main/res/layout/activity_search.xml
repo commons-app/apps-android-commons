@@ -35,6 +35,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:focusable="true"
+                app:theme="@style/WhiteSearchBarTheme"
                 android:queryBackground="@android:color/transparent"
                 android:searchIcon="@null"
                 android:paddingLeft="-16dp"
@@ -49,16 +50,16 @@
                 />
         </android.support.v7.widget.Toolbar>
         <android.support.design.widget.TabLayout
-            android:id="@+id/tabLayout"
-            android:visibility="gone"
+            android:id="@+id/tab_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:tabTextAppearance="@android:style/TextAppearance.Widget.TabWidget"
-            android:background="@color/item_white_background"
+            android:background="?attr/tabBackground"
+            app:tabIndicatorColor="?attr/tabIndicatorColor"
+            app:tabSelectedTextColor="?attr/tabSelectedTextColor"
+            app:tabTextColor="?attr/tabTextColor"
             app:tabMode="scrollable"
-            app:tabSelectedTextColor="@color/primaryColor"
-            app:tabTextColor="@color/button_background_dark"
             android:layout_below="@id/toolbar_search"
+            android:visibility="gone"
             />
         </android.support.design.widget.AppBarLayout>
         <FrameLayout

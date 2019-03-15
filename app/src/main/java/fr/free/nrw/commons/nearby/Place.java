@@ -1,44 +1,66 @@
 package fr.free.nrw.commons.nearby;
 
-import android.graphics.Bitmap;
 import android.net.Uri;
-import android.support.annotation.DrawableRes;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.support.annotation.Nullable;
 
-import java.util.HashMap;
-import java.util.Map;
-
-import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.location.LatLng;
+import fr.free.nrw.commons.nearby.model.NearbyResultItem;
+import fr.free.nrw.commons.utils.PlaceUtils;
+import fr.free.nrw.commons.utils.StringUtils;
 import timber.log.Timber;
 
 /**
  * A single geolocated Wikidata item
  */
-public class Place {
+public class Place implements Parcelable {
 
     public final String name;
     private final Label label;
     private final String longDescription;
-    private final Uri secondaryImageUrl;
     public final LatLng location;
     private final String category;
 
-    public Bitmap image;
-    private Bitmap secondaryImage;
     public String distance;
     public final Sitelinks siteLinks;
 
 
-    public Place(String name, Label label, String longDescription,
-                 Uri secondaryImageUrl, LatLng location, String category, Sitelinks siteLinks) {
+    public Place(String name, Label label, String longDescription, LatLng location, String category, Sitelinks siteLinks) {
         this.name = name;
         this.label = label;
         this.longDescription = longDescription;
-        this.secondaryImageUrl = secondaryImageUrl;
         this.location = location;
         this.category = category;
         this.siteLinks = siteLinks;
+    }
+
+    public Place(Parcel in) {
+        this.name = in.readString();
+        this.label = (Label) in.readSerializable();
+        this.longDescription = in.readString();
+        this.location = in.readParcelable(LatLng.class.getClassLoader());
+        this.category = in.readString();
+        this.siteLinks = in.readParcelable(Sitelinks.class.getClassLoader());
+    }
+
+    public static Place from(NearbyResultItem item) {
+        String itemClass = item.getClassName().getValue();
+        String classEntityId = "";
+        if(!StringUtils.isNullOrWhiteSpace(itemClass)) {
+            classEntityId = itemClass.replace("http://www.wikidata.org/entity/", "");
+        }
+        return new Place(
+                item.getLabel().getValue(),
+                Label.fromText(classEntityId), // list
+                item.getClassLabel().getValue(), // details
+                PlaceUtils.latLngFromPointString(item.getLocation().getValue()),
+                item.getCommonsCategory().getValue(),
+                new Sitelinks.Builder()
+                        .setWikipediaLink(item.getWikipediaArticle().getValue())
+                        .setCommonsLink(item.getCommonsArticle().getValue())
+                        .setWikidataLink(item.getItem().getValue())
+                        .build());
     }
 
     /**
@@ -53,6 +75,10 @@ public class Place {
      */
     public Label getLabel() {
         return label;
+    }
+
+    public LatLng getLocation() {
+        return location;
     }
 
     /**
@@ -76,17 +102,11 @@ public class Place {
     }
 
     /**
-     * Gets the secondary image url for bookmarks
-     * @return secondary image url
-     */
-    public Uri getSecondaryImageUrl() { return this.secondaryImageUrl; }
-
-    /**
      * Extracts the entity id from the wikidata link
      * @return returns the entity id if wikidata link exists
      */
     @Nullable
-    String getWikiDataEntityId() {
+    public String getWikiDataEntityId() {
         if (!hasWikidataLink()) {
             Timber.d("Wikidata entity ID is null for place with sitelink %s", siteLinks.toString());
             return null;
@@ -147,79 +167,37 @@ public class Place {
                 "name='" + name + '\'' +
                 ", label='" + label + '\'' +
                 ", longDescription='" + longDescription + '\'' +
-                ", secondaryImageUrl='" + secondaryImageUrl + '\'' +
                 ", location='" + location + '\'' +
                 ", category='" + category + '\'' +
-                ", image='" + image + '\'' +
-                ", secondaryImage=" + secondaryImage +
                 ", distance='" + distance + '\'' +
                 ", siteLinks='" + siteLinks.toString() + '\'' +
                 '}';
     }
 
-    /**
-     * See https://github.com/commons-app/apps-android-commons/issues/250
-     * Most common types of desc: building, house, cottage, farmhouse,
-     * village, civil parish, church, railway station,
-     * gatehouse, milestone, inn, secondary school, hotel
-     */
-    public enum Label {
-
-        BUILDING("Q41176", R.drawable.round_icon_generic_building),
-        HOUSE("Q3947", R.drawable.round_icon_house),
-        COTTAGE("Q5783996", R.drawable.round_icon_house),
-        FARMHOUSE("Q489357", R.drawable.round_icon_house),
-        CHURCH("Q16970", R.drawable.round_icon_church), //changed from church to church building
-        RAILWAY_STATION("Q55488", R.drawable.round_icon_railway_station),
-        GATEHOUSE("Q277760", R.drawable.round_icon_gatehouse),
-        MILESTONE("Q10145", R.drawable.round_icon_milestone),
-        INN("Q256020", R.drawable.round_icon_house), //Q27686
-        HOTEL("Q27686", R.drawable.round_icon_house),
-        CITY("Q515", R.drawable.round_icon_city),
-        UNIVERSITY("Q3918",R.drawable.round_icon_school), //added university
-        SCHOOL("Q3914", R.drawable.round_icon_school), //changed from "secondary school" to school
-        EDUCATION("Q8434", R.drawable.round_icon_school), //changed from edu to education, there is no id for "edu"
-        ISLE("Q23442", R.drawable.round_icon_island),
-        MOUNTAIN("Q8502", R.drawable.round_icon_mountain),
-        AIRPORT("Q1248784", R.drawable.round_icon_airport),
-        BRIDGE("Q12280", R.drawable.round_icon_bridge),
-        ROAD("Q34442", R.drawable.round_icon_road),
-        FOREST("Q4421", R.drawable.round_icon_forest),
-        PARK("Q22698", R.drawable.round_icon_park),
-        RIVER("Q4022", R.drawable.round_icon_river),
-        WATERFALL("Q34038", R.drawable.round_icon_waterfall),
-        TEMPLE("Q44539",R.drawable.round_icon_church),
-        UNKNOWN("?", R.drawable.round_icon_unknown);
-
-        private static final Map<String, Label> TEXT_TO_DESCRIPTION
-                = new HashMap<>(Label.values().length);
-
-        static {
-            for (Label label : values()) {
-                TEXT_TO_DESCRIPTION.put(label.text, label);
-            }
-        }
-
-        private final String text;
-        @DrawableRes private final int icon;
-
-        Label(String text, @DrawableRes int icon) {
-            this.text = text;
-            this.icon = icon;
-        }
-
-        public String getText() {
-            return text;
-        }
-
-        @DrawableRes
-        public int getIcon() {
-            return icon;
-        }
-
-        public static Label fromText(String text) {
-            Label label = TEXT_TO_DESCRIPTION.get(text);
-            return label == null ? UNKNOWN : label;
-        }
+    @Override
+    public int describeContents() {
+        return 0;
     }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(name);
+        dest.writeSerializable(label);
+        dest.writeString(longDescription);
+        dest.writeParcelable(location, 0);
+        dest.writeString(category);
+        dest.writeParcelable(siteLinks, 0);
+    }
+
+    public static final Creator<Place> CREATOR = new Creator<Place>() {
+        @Override
+        public Place createFromParcel(Parcel in) {
+            return new Place(in);
+        }
+
+        @Override
+        public Place[] newArray(int size) {
+            return new Place[size];
+        }
+    };
 }

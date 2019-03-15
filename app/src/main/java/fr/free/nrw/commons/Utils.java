@@ -1,11 +1,12 @@
 package fr.free.nrw.commons;
 
 import android.content.ActivityNotFoundException;
+import android.content.ClipData;
+import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
-import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.customtabs.CustomTabsIntent;
 import android.support.v4.content.ContextCompat;
@@ -165,15 +166,6 @@ public class Utils {
     }
 
     /**
-     * Tells whether dark theme is active or not
-     * @param context Activity context
-     * @return The state of dark theme
-     */
-    public static boolean isDarkTheme(Context context) {
-        return PreferenceManager.getDefaultSharedPreferences(context).getBoolean("theme", false);
-    }
-
-    /**
      * Launches intent to rate app
      * @param context
      */
@@ -188,6 +180,7 @@ public class Utils {
     }
 
     /**
+     * Opens Custom Tab Activity with in-app browser for the specified URL.
      * Launches intent for web URL
      * @param context
      * @param url
@@ -206,7 +199,8 @@ public class Utils {
         builder.setSecondaryToolbarColor(ContextCompat.getColor(context, R.color.primaryDarkColor));
         builder.setExitAnimations(context, android.R.anim.slide_in_left, android.R.anim.slide_out_right);
         CustomTabsIntent customTabsIntent = builder.build();
-        customTabsIntent.intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        // Clear previous browser tasks, so that back/exit buttons work as intended.
+        customTabsIntent.intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         customTabsIntent.launchUrl(context, url);
     }
 
@@ -244,6 +238,15 @@ public class Utils {
             map.put(kArray[i], vArray[i]);
         }
         return map;
+    }
+    /*
+    *Copies the content to the clipboard
+    *
+    */
+    public static void copy(String label,String text, Context context){
+        ClipboardManager clipboard = (ClipboardManager) context.getSystemService(Context.CLIPBOARD_SERVICE);
+        ClipData clip = ClipData.newPlainText(label, text);
+        clipboard.setPrimaryClip(clip);
     }
 
 }

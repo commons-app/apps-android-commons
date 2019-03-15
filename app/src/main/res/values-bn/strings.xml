@@ -9,6 +9,7 @@
 * NahidHossain
 * Rasal Lia
 * Sankarshan
+* Tahmid02016
 * Tauhid16
 * আফতাবুজ্জামান
 -->
@@ -112,7 +113,7 @@
   <string name="no_uploads_yet">আপনি এখনও কোনো ছবি আপলোড করেননি।</string>
   <string name="menu_retry_upload">পুনঃচেষ্টা করুন</string>
   <string name="menu_cancel_upload">বাতিল</string>
-  <string name="share_license_summary">এই ছবিটি %1$s এর অধীনে লাইসেন্স করা হবে</string>
+  <string name="share_license_summary" fuzzy="true">এই ছবিটি %1$s এর অধীনে লাইসেন্স করা হবে</string>
   <string name="media_upload_policy">এই চিত্র জমা দেয়ার দ্বারা, আমি ঘোষণা দিচ্ছি যে এটি আমার নিজস্ব কাজ, এতে কপিরাইটযুক্ত উপাদান নেই বা এটই সেলফি নয়, এবং &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines/bn\"&gt;উইকিমিডিয়া কমন্স নীতি&lt;/a&gt; অনুসরণ করে।</string>
   <string name="menu_download">ডাউনলোড</string>
   <string name="preference_license">পূর্বনির্ধারিত লাইসেন্স</string>
@@ -144,17 +145,14 @@
   <string name="tutorial_1_text">উইকিমিডিয়া কমন্স উইকিপিডিয়ায় ব্যবহৃত প্রায় সব ছবি হোস্ট করে।</string>
   <string name="tutorial_1_subtext">আপনার ছবি সারা বিশ্বের মানুষকে শিক্ষিত করতে সাহায্য করবে!</string>
   <string name="tutorial_2_text">দয়া করে যে ছবিটি আপনি নিজে তুলেছেন বা সম্পূর্ণভাবে নিজে তৈরি করেছে সে ছবি আপলোড করুন:</string>
-  <string name="tutorial_2_subtext">প্রাকৃতিক বস্তু (ফুল, প্রাণী, পর্বত)\n• দরকারী বস্তু (সাইকেল, রেল স্টেশন)\n• বিখ্যাত ব্যক্তি (আপনার মেয়র, আপনার সাথে দেখা হওয়া অলিম্পিক ক্রীড়াবিদ)</string>
   <string name="tutorial_2_subtext_1">প্রাকৃতিক বস্তু (ফুল, প্রাণী, পাহাড়)</string>
   <string name="tutorial_2_subtext_2">দরকারী বস্তু (বাইসাইকেল, রেল স্টেশন)</string>
   <string name="tutorial_2_subtext_3">বিখ্যাত ব্যক্তি (আপনার মেয়র, আপনার সাথে দেখা হওয়া অলিম্পিক ক্রীড়াবিদ)</string>
   <string name="tutorial_3_text">দয়া করে আপলোড করবেন না:</string>
-  <string name="tutorial_3_subtext">u2022 আপনার বন্ধুর সেলফি বা ছবি \nu2022 ইন্টারনেট থেকে ডাউনলোড করা ছবি \nu2022 মালিকানাযুক্ত অ্যাপসমূহের স্ক্রীনশট</string>
   <string name="tutorial_3_subtext_1">সেলফি বা আপনার বন্ধুদের ছবি</string>
   <string name="tutorial_3_subtext_2">ছবি যা আপনি ইন্টারনেট থেকে ডাউনলোড করেছেন</string>
   <string name="tutorial_3_subtext_3">মালিকানাযুক্ত অ্যাপের স্ক্রীনশট</string>
   <string name="tutorial_4_text">আপলোডের উদাহরণ:</string>
-  <string name="tutorial_4_subtext">- শিরোনাম: সিডনি অপেরা হাউস \n- বিবরণ: উপসাগর থেকে দেখা সিডনি অপেরা হাউস\n- বিষয়শ্রেণী: সিডনি অপেরা হাউস, পশ্চিম দিক থেকে সিডনি অপেরা হাউস, সিডনি অপেরা হাউসের দূরবর্তী দৃশ্য</string>
   <string name="tutorial_4_subtext_1">শিরোনাম: সিডনি অপেরা হাউস</string>
   <string name="tutorial_4_subtext_2">বিবরণ: উপসাগর থেকে দেখা সিডনি অপেরা হাউস</string>
   <string name="tutorial_4_subtext_3">বিষয়শ্রেনী: সিডনি অপেরা হাউস পশ্চিমে, সিডনি অপেরা হাউস দূরবর্তী দৃশ্য</string>
@@ -181,11 +179,8 @@
   <string name="yes">হ্যাঁ</string>
   <string name="no">না</string>
   <string name="media_detail_title">শিরোনাম</string>
-  <string name="media_detail_media_title">মিডিয়ার শিরোনাম</string>
   <string name="media_detail_description">বিবরণ</string>
-  <string name="media_detail_description_explanation">মিডিয়ার বিবরণ এখানে যাবে। এই মোটামুটি দীর্ঘ হতে পারে এবং একাধিক লাইনে লিখতে হতে পারে। আমরা আশা করি এটি দেখতে সুন্দর হবে।</string>
   <string name="media_detail_author">স্রষ্টা</string>
-  <string name="media_detail_author_explanation">নির্বাচিত ছবির মালিকের ব্যবহারকারী নাম এখানে থাকবে।</string>
   <string name="media_detail_uploaded_date">আপলোডের তারিখ</string>
   <string name="media_detail_license">লাইসেন্স</string>
   <string name="media_detail_coordinates">স্থানাঙ্কসমূহ</string>
@@ -195,6 +190,7 @@
   <string name="_2fa_code">2FA কোড</string>
   <string name="number_of_uploads">আমার সাম্প্রতিক আপলোড সীমা</string>
   <string name="maximum_limit">সর্বোচ্চ সীমা</string>
+  <string name="invalid_zero">শুন্য বৈধ নয়</string>
   <string name="maximum_limit_alert">৫০০টির বেশি প্রদর্শন করা সম্ভব নয়</string>
   <string name="set_limit">সাম্প্রতিক আপলোড সীমা নির্ধারন করুন</string>
   <string name="login_failed_2fa_not_supported">দুটি স্তরের প্রমাণীকরণ বর্তমানে সমর্থিত নয়।</string>
@@ -238,17 +234,22 @@
   <string name="error_while_cache">ছবি আনার সময় ত্রুটি</string>
   <string name="title_info">ফাইলের একটি স্বতন্ত্র বর্ণনামূলক নাম যা ফাইলের নাম হিসাবে কাজ করবে। অাপনি সাধারণ ভাষা ব্যবহার করতে পারেন শূন্যস্থানসহ। ফাইলের এক্সটেনশন যুক্ত করবেন না।</string>
   <string name="description_info">যতটা সম্ভব মিডিয়াটি বর্ণনা করুন: এটি কোথায় ধারণ করা হয়েছিল? এটি কি প্রদর্শন করে? এটির প্রসঙ্গ কি? ধারণকৃত বস্তু অথবা ব্যক্তির বর্ণনা করুন। সহজে অনুমান করা যায়না সেরকম তথ্য উদঘাটন করুন, উদাহরণস্বরূপ, যদি ল্যান্ডস্কেপ হয় তাহলে দিবসকালের সময় দিন।</string>
+  <string name="upload_problem_image_duplicate">চিত্রটি ইতিমধ্যে কমন্সে রয়েছে।</string>
+  <string name="upload_problem_different_geolocation">এই ছবিটি ভিন্ন একটি স্থানে তোলা হয়েছিল।</string>
+  <string name="upload_problem_do_you_continue">আপনি কি এখনও এই ছবিটি আপলোড করতে চান?</string>
   <string name="give_permission">অনুমতি দিন</string>
   <string name="use_external_storage">বাহ্যিক সঞ্চয়স্থান ব্যবহার করুন</string>
   <string name="use_external_storage_summary">অাপনার ডিভাইসের নিজস্ব ক্যামেরায় ধারণকৃত ছবি সংরক্ষণ করুন</string>
   <string name="login_to_your_account">আপনার অ্যাকাউন্টে প্রবেশ করুন</string>
   <string name="send_log_file">লগ ফাইল পাঠান</string>
   <string name="send_log_file_description" fuzzy="true">ইমেইলের মাধ্যমে উন্নয়নকারীর কাছে লগ ফাইল পাঠান</string>
+  <string name="no_web_browser">ইউআরএল খোলার জন্য কোনো ওয়েব ব্রাউজার পাওয়া যায়নি</string>
   <string name="null_url">ত্রুটি! ইউআরএল পাওয়া যায়নি</string>
   <string name="nominate_deletion">অপসারণের জন্য মনোনীত</string>
   <string name="view_browser">ব্রাউজারে দেখুন</string>
   <string name="skip_login">এড়ান</string>
   <string name="navigation_item_login">প্রবেশ করুন</string>
+  <string name="login_alert_message">এই সুবিধাটি ব্যাবহার করতে প্রবেশ করুন</string>
   <string name="nearby_location_has_not_changed">অবস্থান পরিবর্তন হয়নি।</string>
   <string name="nearby_location_not_available">অবস্থান উপলব্ধ নয়।</string>
   <string name="location_permission_rationale_nearby">কাছাকাছি স্থানসমূহের একটি তালিকা প্রদর্শন করতে অনুমতি প্রয়োজন</string>
@@ -310,7 +311,6 @@
   <string name="title_page_bookmarks_locations">অবস্থান</string>
   <string name="provider_bookmarks">বুকমার্ক</string>
   <string name="provider_bookmarks_location">বুকমার্ক</string>
-  <string name="articles">টি নিবন্ধ</string>
   <string name="desc_language_Worldwide">বিশ্বব্যাপী</string>
   <string name="desc_language_America">আমেরিকা</string>
   <string name="desc_language_Europe">ইউরোপ</string>
@@ -320,4 +320,5 @@
   <string name="desc_language_Pacific">প্রশান্ত মহাসাগরীয়</string>
   <string name="yes_submit">হ্যাঁ, জমা দিন</string>
   <string name="no_go_back">না, ফিরে যান</string>
+  <string name="please_wait">অনুগ্রহ করে অপেক্ষা করুন...</string>
 </resources>

@@ -99,7 +99,7 @@
   <string name="no_uploads_yet">آپ نے ابھی تک کوئی تصاویر اپلوڈ نہیں کی ہے۔</string>
   <string name="menu_retry_upload">دوبارہ کوشش کریں</string>
   <string name="menu_cancel_upload">منسوخ</string>
-  <string name="share_license_summary">%1$s تلے یہ تصویر لائسنس یافتہ ہو گی</string>
+  <string name="share_license_summary" fuzzy="true">%1$s تلے یہ تصویر لائسنس یافتہ ہو گی</string>
   <string name="media_upload_policy">اس تصویر کو درج کر کے، میں اقرار کرتا ہوں کہ یہ میرا اپنا کام ہے، اس ميں کاپی رائٹ مواد یا سیلفیاں نہیں ہیں، اور بصورت دیگر میں &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines\"&gt;ویکیمیڈیا کامنز پالیسیوں&lt;/a&gt; کا پابند ہوں۔</string>
   <string name="menu_download">ڈاؤنلوڈ</string>
   <string name="preference_license" fuzzy="true">اجازت نامہ</string>

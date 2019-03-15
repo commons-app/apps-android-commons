@@ -2,7 +2,6 @@ package fr.free.nrw.commons.wikidata;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.content.SharedPreferences;
 
 import java.util.Locale;
 
@@ -11,6 +10,8 @@ import javax.inject.Named;
 import javax.inject.Singleton;
 
 import fr.free.nrw.commons.R;
+import fr.free.nrw.commons.kvstore.BasicKvStore;
+import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
 import fr.free.nrw.commons.utils.ViewUtil;
 import io.reactivex.Observable;
@@ -29,17 +30,17 @@ public class WikidataEditService {
     private final Context context;
     private final MediaWikiApi mediaWikiApi;
     private final WikidataEditListener wikidataEditListener;
-    private final SharedPreferences directPrefs;
+    private final BasicKvStore directKvStore;
 
     @Inject
     public WikidataEditService(Context context,
                                MediaWikiApi mediaWikiApi,
                                WikidataEditListener wikidataEditListener,
-                               @Named("direct_nearby_upload_prefs") SharedPreferences directPrefs) {
+                               @Named("direct_nearby_upload_prefs") JsonKvStore directKvStore) {
         this.context = context;
         this.mediaWikiApi = mediaWikiApi;
         this.wikidataEditListener = wikidataEditListener;
-        this.directPrefs = directPrefs;
+        this.directKvStore = directKvStore;
     }
 
     /**
@@ -58,7 +59,7 @@ public class WikidataEditService {
             return;
         }
 
-        if (!(directPrefs.getBoolean("Picture_Has_Correct_Location",true))) {
+        if (!(directKvStore.getBoolean("Picture_Has_Correct_Location", true))) {
             Timber.d("Image location and nearby place location mismatched, so Wikidata item won't be edited");
             return;
         }
@@ -91,7 +92,9 @@ public class WikidataEditService {
 
     private void handleClaimResult(String wikidataEntityId, String revisionId) {
         if (revisionId != null) {
-            wikidataEditListener.onSuccessfulWikidataEdit();
+            if (wikidataEditListener != null) {
+                wikidataEditListener.onSuccessfulWikidataEdit();
+            }
             showSuccessToast();
             logEdit(revisionId);
         } else {
@@ -122,7 +125,7 @@ public class WikidataEditService {
      * Show a success toast when the edit is made successfully
      */
     private void showSuccessToast() {
-        String title = directPrefs.getString("Title", "");
+        String title = directKvStore.getString("Title", "");
         String successStringTemplate = context.getString(R.string.successful_wikidata_edit);
         String successMessage = String.format(Locale.getDefault(), successStringTemplate, title);
         ViewUtil.showLongToast(context, successMessage);

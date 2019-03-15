@@ -7,7 +7,6 @@ import android.accounts.AccountManager;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.ColorRes;
@@ -45,9 +44,11 @@ import fr.free.nrw.commons.WelcomeActivity;
 import fr.free.nrw.commons.category.CategoryImagesActivity;
 import fr.free.nrw.commons.contributions.MainActivity;
 import fr.free.nrw.commons.di.ApplicationlessInjection;
+import fr.free.nrw.commons.kvstore.BasicKvStore;
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
 import fr.free.nrw.commons.theme.NavigationBaseActivity;
 import fr.free.nrw.commons.ui.widget.HtmlTextView;
+import fr.free.nrw.commons.utils.ConfigUtils;
 import fr.free.nrw.commons.utils.ViewUtil;
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -61,13 +62,16 @@ import static fr.free.nrw.commons.auth.AccountUtil.AUTH_TOKEN_TYPE;
 
 public class LoginActivity extends AccountAuthenticatorActivity {
 
-    public static final String PARAM_USERNAME = "fr.free.nrw.commons.login.username";
     private static final String FEATURED_IMAGES_CATEGORY = "Category:Featured_pictures_on_Wikimedia_Commons";
 
     @Inject MediaWikiApi mwApi;
     @Inject SessionManager sessionManager;
-    @Inject @Named("application_preferences") SharedPreferences prefs;
-    @Inject @Named("default_preferences") SharedPreferences defaultPrefs;
+    @Inject
+    @Named("application_preferences")
+    BasicKvStore applicationKvStore;
+    @Inject
+    @Named("default_preferences")
+    BasicKvStore defaultKvStore;
 
     @BindView(R.id.loginButton) Button loginButton;
     @BindView(R.id.signupButton) Button signupButton;
@@ -94,15 +98,16 @@ public class LoginActivity extends AccountAuthenticatorActivity {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
-        setTheme(Utils.isDarkTheme(this) ? R.style.DarkAppTheme : R.style.LightAppTheme);
-        getDelegate().installViewFactory();
-        getDelegate().onCreate(savedInstanceState);
-
         super.onCreate(savedInstanceState);
         ApplicationlessInjection
                 .getInstance(this.getApplicationContext())
                 .getCommonsApplicationComponent()
                 .inject(this);
+
+        boolean isDarkTheme = defaultKvStore.getBoolean("theme", false);
+        setTheme(isDarkTheme ? R.style.DarkAppTheme : R.style.LightAppTheme);
+        getDelegate().installViewFactory();
+        getDelegate().onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_login);
 
@@ -139,7 +144,7 @@ public class LoginActivity extends AccountAuthenticatorActivity {
                 .setNegativeButton(R.string.no, (dialog, which) -> dialog.cancel())
                 .show());
 
-        if (BuildConfig.FLAVOR.equals("beta")){
+        if (ConfigUtils.isBetaFlavour()) {
             loginCredentials.setText(getString(R.string.login_credential));
         } else {
             loginCredentials.setVisibility(View.GONE);
@@ -151,7 +156,7 @@ public class LoginActivity extends AccountAuthenticatorActivity {
      * It redirects the user to Explore Activity.
      */
     private void skipLogin() {
-        prefs.edit().putBoolean("login_skipped", true).apply();
+        applicationKvStore.putBoolean("login_skipped", true);
         CategoryImagesActivity.startYourself(this, getString(R.string.title_activity_explore), FEATURED_IMAGES_CATEGORY);
         finish();
 
@@ -175,19 +180,19 @@ public class LoginActivity extends AccountAuthenticatorActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        if (prefs.getBoolean("firstrun", true)) {
+        if (applicationKvStore.getBoolean("firstrun", true)) {
             WelcomeActivity.startYourself(this);
         }
 
         if (sessionManager.getCurrentAccount() != null
                 && sessionManager.isUserLoggedIn()
                 && sessionManager.getCachedAuthCookie() != null) {
-            prefs.edit().putBoolean("login_skipped", false).apply();
+            applicationKvStore.putBoolean("login_skipped", false);
             sessionManager.revalidateAuthToken();
             startMainActivity();
         }
 
-        if (prefs.getBoolean("login_skipped", false)){
+        if (applicationKvStore.getBoolean("login_skipped", false)) {
             skipLogin();
         }
 
@@ -381,10 +386,10 @@ public class LoginActivity extends AccountAuthenticatorActivity {
         super.onRestoreInstanceState(savedInstanceState);
         loginCurrentlyInProgress = savedInstanceState.getBoolean(LOGGING_IN, false);
         errorMessageShown = savedInstanceState.getBoolean(ERROR_MESSAGE_SHOWN, false);
-        if (loginCurrentlyInProgress){
+        if (loginCurrentlyInProgress) {
             performLogin();
         }
-        if (errorMessageShown){
+        if (errorMessageShown) {
             resultantError = savedInstanceState.getString(RESULTANT_ERROR);
             handleOtherResults(resultantError);
         }
@@ -415,7 +420,7 @@ public class LoginActivity extends AccountAuthenticatorActivity {
     }
 
     public void startMainActivity() {
-        NavigationBaseActivity.startActivityWithFlags(this, MainActivity.class, Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        NavigationBaseActivity.startActivityWithFlags(this, MainActivity.class, Intent.FLAG_ACTIVITY_SINGLE_TOP);
         finish();
     }
 
