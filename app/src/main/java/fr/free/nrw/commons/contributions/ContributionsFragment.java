@@ -333,10 +333,10 @@ public class ContributionsFragment
             observer.onChanged();
         }
 
-        if (!ConfigUtils.isBetaFlavour()) {
-            setUploadCount();
-        } else {
+        if (ConfigUtils.isBetaFlavour()) {
             betaSetUploadCount(getTotalMediaCount());
+        } else {
+            setUploadCount();
         }
     }
 
