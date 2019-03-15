@@ -30,7 +30,7 @@ public class BookmarksActivity extends NavigationBaseActivity
     private MediaDetailPagerFragment mediaDetails;
     @BindView(R.id.viewPagerBookmarks)
     ViewPager viewPager;
-    @BindView(R.id.tabLayoutBookmarks)
+    @BindView(R.id.tab_layout)
     TabLayout tabLayout;
 
     @Inject

@@ -22,15 +22,12 @@
             android:id="@+id/tab_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:tabMaxWidth="0dp"
-            app:tabGravity="fill"
-            app:tabMode="fixed"
-            android:layout_below="@+id/toolbar"
-            android:elevation="6dp"
-            android:minHeight="?attr/actionBarSize"
-            app:tabIndicatorColor="@android:color/white"
-            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-            android:background="?attr/mainTabBackground"/>
+            android:background="?attr/tabBackground"
+            app:tabIndicatorColor="?attr/tabIndicatorColor"
+            app:tabSelectedTextColor="?attr/tabSelectedTextColor"
+            app:tabTextColor="?attr/tabTextColor"
+            android:layout_below="@id/toolbar"
+            app:tabMode="fixed" />
 
         <FrameLayout android:layout_width="match_parent"
             android:layout_height="match_parent"

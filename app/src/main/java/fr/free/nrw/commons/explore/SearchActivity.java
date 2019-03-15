@@ -42,7 +42,7 @@ public class SearchActivity extends NavigationBaseActivity implements MediaDetai
     @BindView(R.id.searchHistoryContainer) FrameLayout searchHistoryContainer;
     @BindView(R.id.mediaContainer) FrameLayout mediaContainer;
     @BindView(R.id.searchBox) SearchView searchView;
-    @BindView(R.id.tabLayout) TabLayout tabLayout;
+    @BindView(R.id.tab_layout) TabLayout tabLayout;
     @BindView(R.id.viewPager) ViewPager viewPager;
 
     private SearchImageFragment searchImageFragment;

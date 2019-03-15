@@ -46,7 +46,7 @@ public class CategoryDetailsActivity extends NavigationBaseActivity
     private MediaDetailPagerFragment mediaDetails;
     private String categoryName;
     @BindView(R.id.mediaContainer) FrameLayout mediaContainer;
-    @BindView(R.id.tabLayout) TabLayout tabLayout;
+    @BindView(R.id.tab_layout) TabLayout tabLayout;
     @BindView(R.id.viewPager) ViewPager viewPager;
 
     ViewPagerAdapter viewPagerAdapter;
