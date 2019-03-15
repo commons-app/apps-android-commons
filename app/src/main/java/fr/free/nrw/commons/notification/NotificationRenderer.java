@@ -1,6 +1,7 @@
 package fr.free.nrw.commons.notification;
 
 import android.graphics.Color;
+import android.support.design.animation.ArgbEvaluatorCompat;
 import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,7 +12,6 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.daimajia.swipe.SwipeLayout;
-import com.nineoldandroids.view.ViewHelper;
 import com.pedrogomez.renderers.Renderer;
 
 import butterknife.BindView;
@@ -82,32 +82,13 @@ public class NotificationRenderer extends Renderer<Notification> {
         swipeLayout.addRevealListener(R.id.bottom_wrapper_child1, (child, edge, fraction, distance) -> {
             View star = child.findViewById(R.id.star);
             float d = child.getHeight() / 2 - star.getHeight() / 2;
-            ViewHelper.setTranslationY(star, d * fraction);
-            ViewHelper.setScaleX(star, fraction + 0.6f);
-            ViewHelper.setScaleY(star, fraction + 0.6f);
-            int c = (Integer) evaluate(fraction, Color.parseColor("#dddddd"), Color.parseColor("#90960a0a"));
+            star.setTranslationY(d * fraction);
+            star.setScaleX(fraction + 0.6f);
+            star.setScaleY(fraction + 0.6f);
+            int c = ArgbEvaluatorCompat.getInstance().evaluate(fraction, Color.parseColor("#dddddd"), Color.parseColor("#90960a0a"));
             child.setBackgroundColor(c);
         });
         return inflatedView;
-    }
-
-    public Object evaluate(float fraction, Object startValue, Object endValue) {
-        int startInt = (Integer) startValue;
-        int startA = (startInt >> 24) & 0xff;
-        int startR = (startInt >> 16) & 0xff;
-        int startG = (startInt >> 8) & 0xff;
-        int startB = startInt & 0xff;
-
-        int endInt = (Integer) endValue;
-        int endA = (endInt >> 24) & 0xff;
-        int endR = (endInt >> 16) & 0xff;
-        int endG = (endInt >> 8) & 0xff;
-        int endB = endInt & 0xff;
-
-        return (int) ((startA + (int) (fraction * (endA - startA))) << 24) |
-                (int) ((startR + (int) (fraction * (endR - startR))) << 16) |
-                (int) ((startG + (int) (fraction * (endG - startG))) << 8) |
-                (int) ((startB + (int) (fraction * (endB - startB))));
     }
 
     @Override
