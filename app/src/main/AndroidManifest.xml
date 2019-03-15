@@ -220,6 +220,8 @@
                 android:resource="@xml/pic_of_day_app_widget_info" />
         </receiver>
 
+        <uses-library android:name="org.apache.http.legacy" android:required="false" />
+
     </application>
 
 </manifest>
