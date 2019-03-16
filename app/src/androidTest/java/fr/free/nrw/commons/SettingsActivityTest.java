@@ -35,8 +35,7 @@ public class SettingsActivityTest {
     JsonKvStore defaultKvStore;
 
     @Rule
-    public ActivityTestRule<SettingsActivity> activityRule =
-            new ActivityTestRule<>(SettingsActivity.class, false, true);
+    public ActivityTestRule activityRule = new ActivityTestRule<>(SettingsActivity.class);
 
     @Before
     public void setup() {
