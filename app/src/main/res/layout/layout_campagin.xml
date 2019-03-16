@@ -31,7 +31,7 @@
       android:gravity="center_vertical"
       android:weightSum="4">
 
-  <android.support.constraint.ConstraintLayout
+  <androidx.constraintlayout.widget.ConstraintLayout
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
       android:layout_marginLeft="16dp"
@@ -73,7 +73,7 @@
         android:textColor="@android:color/white"
         app:layout_constraintTop_toBottomOf="@id/tv_description"
         tools:ignore="MissingConstraints" />
-  </android.support.constraint.ConstraintLayout>
+  </androidx.constraintlayout.widget.ConstraintLayout>
   </LinearLayout>
   </LinearLayout>
 </RelativeLayout>

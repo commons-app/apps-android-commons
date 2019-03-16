@@ -2,7 +2,7 @@ package fr.free.nrw.commons.quiz;
 
 import android.content.Context;
 import android.content.Intent;
-import android.support.v7.app.AlertDialog.Builder;
+import androidx.appcompat.app.AlertDialog.Builder;
 
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.WelcomeActivity;
@@ -151,7 +151,7 @@ public class QuizChecker {
             context.startActivity(i);
         });
         alert.setNegativeButton(android.R.string.cancel, (dialogInterface, i) -> dialogInterface.cancel());
-        android.support.v7.app.AlertDialog dialog = alert.create();
+        androidx.appcompat.app.AlertDialog dialog = alert.create();
         dialog.show();
     }
 }

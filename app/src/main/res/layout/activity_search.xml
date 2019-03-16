@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v4.widget.DrawerLayout
+<androidx.drawerlayout.widget.DrawerLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/drawer_layout"
@@ -9,7 +9,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-        <android.support.design.widget.AppBarLayout
+        <com.google.android.material.appbar.AppBarLayout
             android:id="@+id/toolbar_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
@@ -23,7 +23,7 @@
             android:layout_height="wrap_content" />
 
         <!--Toolbar containing search bar -->
-        <android.support.v7.widget.Toolbar
+        <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar_search"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -48,8 +48,8 @@
                 android:textSize="@dimen/normal_text"
                 android:voiceSearchMode="showVoiceSearchButton|launchRecognizer"
                 />
-        </android.support.v7.widget.Toolbar>
-        <android.support.design.widget.TabLayout
+        </androidx.appcompat.widget.Toolbar>
+        <com.google.android.material.tabs.TabLayout
             android:id="@+id/tab_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -61,7 +61,7 @@
             android:layout_below="@id/toolbar_search"
             android:visibility="gone"
             />
-        </android.support.design.widget.AppBarLayout>
+        </com.google.android.material.appbar.AppBarLayout>
         <FrameLayout
             android:visibility="gone"
             xmlns:android="http://schemas.android.com/apk/res/android"
@@ -72,7 +72,7 @@
             android:layout_below="@id/toolbar_layout"
             />
 
-        <android.support.v4.view.ViewPager
+        <androidx.viewpager.widget.ViewPager
             android:id="@+id/viewPager"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -89,7 +89,7 @@
             />
     </RelativeLayout>
 
-    <android.support.design.widget.NavigationView
+    <com.google.android.material.navigation.NavigationView
         android:id="@+id/navigation_view"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
@@ -97,4 +97,4 @@
         app:headerLayout="@layout/drawer_header"
         app:menu="@menu/drawer"/>
 
-</android.support.v4.widget.DrawerLayout>
+</androidx.drawerlayout.widget.DrawerLayout>

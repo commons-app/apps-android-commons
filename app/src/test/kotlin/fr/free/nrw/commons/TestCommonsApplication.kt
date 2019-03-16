@@ -2,7 +2,7 @@ package fr.free.nrw.commons
 
 import android.content.ContentProviderClient
 import android.content.Context
-import android.support.v4.util.LruCache
+import androidx.collection.LruCache
 import com.google.gson.Gson
 import com.nhaarman.mockito_kotlin.mock
 import com.squareup.leakcanary.RefWatcher

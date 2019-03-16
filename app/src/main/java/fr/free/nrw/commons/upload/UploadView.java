@@ -1,7 +1,7 @@
 package fr.free.nrw.commons.upload;
 
 import android.net.Uri;
-import android.support.annotation.IntDef;
+import androidx.annotation.IntDef;
 
 import java.lang.annotation.Retention;
 import java.util.List;
