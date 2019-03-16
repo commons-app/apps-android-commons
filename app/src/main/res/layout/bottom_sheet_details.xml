@@ -232,7 +232,7 @@
                 android:duplicateParentState="true"
                 android:textColor="@color/text_color_selector"
                 android:layout_gravity="center_horizontal"
-                android:text="@string/nearby_commons"
+                android:text="@string/nearby_feedback"
 
                 />
         </LinearLayout>

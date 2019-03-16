@@ -107,6 +107,7 @@ public class NearbyMapFragment extends DaggerFragment {
     private TextView wikipediaButtonText;
     private TextView wikidataButtonText;
     private TextView commonsButtonText;
+    private TextView discusButtonText;
     private TextView directionsButtonText;
 
     private boolean isFabOpen = false;
@@ -382,6 +383,7 @@ public class NearbyMapFragment extends DaggerFragment {
         wikipediaButtonText = ((NearbyFragment)getParentFragment()).view.findViewById(R.id.wikipediaButtonText);
         directionsButtonText = ((NearbyFragment)getParentFragment()).view.findViewById(R.id.directionsButtonText);
         commonsButtonText = ((NearbyFragment)getParentFragment()).view.findViewById(R.id.commonsButtonText);
+        discusButtonText= ((NearbyFragment)getParentFragment()).view.findViewById(R.id.discusButtonText);
 
         bookmarkButton = ((NearbyFragment)getParentFragment()).view.findViewById(R.id.bookmarkButton);
         bookmarkButtonImage = ((NearbyFragment)getParentFragment()).view.findViewById(R.id.bookmarkButtonImage);
@@ -497,6 +499,7 @@ public class NearbyMapFragment extends DaggerFragment {
             wikidataButtonText.setVisibility(View.GONE);
             commonsButtonText.setVisibility(View.GONE);
             directionsButtonText.setVisibility(View.GONE);
+            discusButtonText.setVisibility(View.GONE);
         }
         title.setOnLongClickListener(view -> {
                     Utils.copy("place",title.getText().toString(),getContext());
