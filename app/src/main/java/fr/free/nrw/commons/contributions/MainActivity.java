@@ -273,13 +273,12 @@ public class MainActivity extends AuthenticatedActivity implements FragmentManag
             NearbyFragment nearbyFragment = (NearbyFragment) contributionsActivityPagerAdapter.getItem(1);
 
             if(nearbyFragment.isBottomSheetExpanded()) {
+                // Back should first hide the bottom sheet if it is expanded
                 nearbyFragment.listOptionMenuItemClicked();
             } else {
+                // Otherwise go back to contributions fragment
                 viewPager.setCurrentItem(0);
             }
-                //If the nearby
-
-            // Set current item to contributions activity instead of closing the activity
         } else {
             super.onBackPressed();
         }

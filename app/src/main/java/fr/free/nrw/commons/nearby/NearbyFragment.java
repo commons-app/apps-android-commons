@@ -145,7 +145,7 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
     }
 
     /**
-     * Resume fragments if they exist// Meas that nearby fragment is visible (not contributions fragment)s
+     * Resume fragments if they exists
      */
     private void resumeFragment() {
         // Find the retained fragment on activity restarts
