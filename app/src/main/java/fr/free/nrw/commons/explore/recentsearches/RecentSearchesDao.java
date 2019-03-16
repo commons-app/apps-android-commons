@@ -92,6 +92,26 @@ public class RecentSearchesDao {
     }
 
     /**
+     * Deletes a recent search from the database
+     */
+    public void delete(RecentSearch recentSearch) {
+
+        ContentProviderClient db = clientProvider.get();
+        try {
+            if (recentSearch.getContentUri() == null) {
+                throw new RuntimeException("tried to delete item with no content URI");
+            } else {
+                db.delete(recentSearch.getContentUri(), null, null);
+            }
+        } catch (RemoteException e) {
+            throw new RuntimeException(e);
+        } finally {
+            db.release();
+        }
+    }
+
+
+    /**
      * Find persisted search query in database, based on its name.
      * @param name Search query  Ex- "butterfly"
      * @return recently searched query from database, or null if not found

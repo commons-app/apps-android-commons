@@ -50,16 +50,16 @@
                 />
         </androidx.appcompat.widget.Toolbar>
         <com.google.android.material.tabs.TabLayout
-            android:id="@+id/tabLayout"
-            android:visibility="gone"
+            android:id="@+id/tab_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:tabTextAppearance="@android:style/TextAppearance.Widget.TabWidget"
-            android:background="@color/item_white_background"
+            android:background="?attr/tabBackground"
+            app:tabIndicatorColor="?attr/tabIndicatorColor"
+            app:tabSelectedTextColor="?attr/tabSelectedTextColor"
+            app:tabTextColor="?attr/tabTextColor"
             app:tabMode="scrollable"
-            app:tabSelectedTextColor="@color/primaryColor"
-            app:tabTextColor="@color/button_background_dark"
             android:layout_below="@id/toolbar_search"
+            android:visibility="gone"
             />
         </com.google.android.material.appbar.AppBarLayout>
         <FrameLayout
