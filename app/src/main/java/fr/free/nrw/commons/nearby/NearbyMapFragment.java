@@ -44,6 +44,7 @@ import com.mapbox.mapboxsdk.geometry.LatLng;
 import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.MapboxMapOptions;
+import com.mapbox.mapboxsdk.plugins.localization.LocalizationPlugin;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
@@ -528,6 +529,14 @@ public class NearbyMapFragment extends DaggerFragment {
             // create map
             mapView.onCreate(savedInstanceState);
             mapView.getMapAsync(mapboxMap -> {
+                LocalizationPlugin localizationPlugin = new LocalizationPlugin(mapView, mapboxMap);
+
+                try {
+                    localizationPlugin.matchMapLanguageWithDeviceDefault();
+                } catch (RuntimeException exception) {
+                    Timber.d(exception.toString());
+                }
+
                 NearbyMapFragment.this.mapboxMap = mapboxMap;
                 addMapMovementListeners();
                 updateMapSignificantlyForCurrentLocation();
