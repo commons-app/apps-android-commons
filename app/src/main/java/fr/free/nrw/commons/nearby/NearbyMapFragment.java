@@ -8,13 +8,6 @@ import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import com.google.android.material.bottomsheet.BottomSheetBehavior;
-import androidx.coordinatorlayout.widget.CoordinatorLayout;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import androidx.vectordrawable.graphics.drawable.VectorDrawableCompat;
-import androidx.appcompat.app.AlertDialog;
 import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -29,6 +22,8 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.material.bottomsheet.BottomSheetBehavior;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.mapbox.mapboxsdk.Mapbox;
@@ -52,6 +47,11 @@ import java.util.List;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
+import androidx.coordinatorlayout.widget.CoordinatorLayout;
+import androidx.vectordrawable.graphics.drawable.VectorDrawableCompat;
 import dagger.android.support.DaggerFragment;
 import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.R;
@@ -59,7 +59,6 @@ import fr.free.nrw.commons.Utils;
 import fr.free.nrw.commons.auth.LoginActivity;
 import fr.free.nrw.commons.bookmarks.locations.BookmarkLocationsDao;
 import fr.free.nrw.commons.contributions.ContributionController;
-import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.utils.LocationUtils;
 import fr.free.nrw.commons.utils.UiUtils;
@@ -508,7 +507,7 @@ public class NearbyMapFragment extends DaggerFragment {
      */
     private void setupMapView(Bundle savedInstanceState) {
         Timber.d("setupMapView called");
-        boolean isDarkTheme = defaultKvStore.getBoolean("theme", false);
+        boolean isDarkTheme = applicationKvStore.getBoolean("theme", false);
         MapboxMapOptions options = new MapboxMapOptions()
                 .compassGravity(Gravity.BOTTOM | Gravity.LEFT)
                 .compassMargins(new int[]{12, 0, 0, 24})
