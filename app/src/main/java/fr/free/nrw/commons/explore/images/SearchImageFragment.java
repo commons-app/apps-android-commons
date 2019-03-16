@@ -32,7 +32,7 @@ import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
 import fr.free.nrw.commons.explore.SearchActivity;
 import fr.free.nrw.commons.explore.recentsearches.RecentSearch;
 import fr.free.nrw.commons.explore.recentsearches.RecentSearchesDao;
-import fr.free.nrw.commons.kvstore.BasicKvStore;
+import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.mwapi.OkHttpJsonApiClient;
 import fr.free.nrw.commons.utils.NetworkUtils;
 import fr.free.nrw.commons.utils.ViewUtil;
@@ -64,7 +64,9 @@ public class SearchImageFragment extends CommonsDaggerSupportFragment {
     @Inject RecentSearchesDao recentSearchesDao;
     @Inject
     OkHttpJsonApiClient okHttpJsonApiClient;
-    @Inject @Named("default_preferences") BasicKvStore defaultKvStore;
+    @Inject
+    @Named("default_preferences")
+    JsonKvStore defaultKvStore;
 
     private RVRendererAdapter<Media> imagesAdapter;
     private List<Media> queryList = new ArrayList<>();

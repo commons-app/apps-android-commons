@@ -18,7 +18,6 @@ import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.filepicker.DefaultCallback;
 import fr.free.nrw.commons.filepicker.FilePicker;
 import fr.free.nrw.commons.filepicker.UploadableFile;
-import fr.free.nrw.commons.kvstore.BasicKvStore;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.nearby.Place;
 import fr.free.nrw.commons.upload.UploadActivity;
@@ -36,14 +35,11 @@ public class ContributionController {
 
     public static final String ACTION_INTERNAL_UPLOADS = "internalImageUploads";
 
-    private final BasicKvStore defaultKvStore;
-    private final JsonKvStore directKvStore;
+    private final JsonKvStore defaultKvStore;
 
     @Inject
-    public ContributionController(@Named("default_preferences") BasicKvStore defaultKvStore,
-                                  @Named("direct_nearby_upload_prefs") JsonKvStore directKvStore) {
+    public ContributionController(@Named("default_preferences") JsonKvStore defaultKvStore) {
         this.defaultKvStore = defaultKvStore;
-        this.directKvStore = directKvStore;
     }
 
     /**
@@ -139,7 +135,7 @@ public class ContributionController {
         shareIntent.setAction(ACTION_INTERNAL_UPLOADS);
         shareIntent.putExtra(EXTRA_SOURCE, source);
         shareIntent.putParcelableArrayListExtra(EXTRA_FILES, new ArrayList<>(imagesFiles));
-        Place place = directKvStore.getJson(PLACE_OBJECT, Place.class);
+        Place place = defaultKvStore.getJson(PLACE_OBJECT, Place.class);
         if (place != null) {
             shareIntent.putExtra(PLACE_OBJECT, place);
         }

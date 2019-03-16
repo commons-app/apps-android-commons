@@ -17,7 +17,6 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.contributions.MainActivity;
-import fr.free.nrw.commons.kvstore.BasicKvStore;
 import fr.free.nrw.commons.utils.SwipableCardView;
 import fr.free.nrw.commons.utils.ViewUtil;
 
@@ -27,21 +26,20 @@ import fr.free.nrw.commons.utils.ViewUtil;
 public class CampaignView extends SwipableCardView {
     Campaign campaign = null;
     private ViewHolder viewHolder;
-    private BasicKvStore defaultKvStore;
 
     public CampaignView(@NonNull Context context) {
         super(context);
-        init(context);
+        init();
     }
 
     public CampaignView(@NonNull Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
-        init(context);
+        init();
     }
 
     public CampaignView(@NonNull Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-        init(context);
+        init();
     }
 
     public void setCampaign(Campaign campaign) {
@@ -63,9 +61,8 @@ public class CampaignView extends SwipableCardView {
         return true;
     }
 
-    private void init(Context context) {
+    private void init() {
         View rootView = inflate(getContext(), R.layout.layout_campagin, this);
-        defaultKvStore = new BasicKvStore(context, "default_preferences");
         viewHolder = new ViewHolder(rootView);
         setOnClickListener(view -> {
             if (campaign != null) {

@@ -59,7 +59,7 @@ import fr.free.nrw.commons.Utils;
 import fr.free.nrw.commons.auth.LoginActivity;
 import fr.free.nrw.commons.bookmarks.locations.BookmarkLocationsDao;
 import fr.free.nrw.commons.contributions.ContributionController;
-import fr.free.nrw.commons.kvstore.BasicKvStore;
+import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.utils.LocationUtils;
 import fr.free.nrw.commons.utils.UiUtils;
@@ -128,10 +128,7 @@ public class NearbyMapFragment extends DaggerFragment {
     private Bundle bundleForUpdates;// Carry information from activity about changed nearby places and current location
     private boolean searchedAroundCurrentLocation = true;
 
-    @Inject @Named("application_preferences") BasicKvStore applicationKvStore;
-    @Inject @Named("defaultKvStore") BasicKvStore prefs;
-    @Inject @Named("direct_nearby_upload_prefs") JsonKvStore directKvStore;
-    @Inject @Named("default_preferences") BasicKvStore defaultKvStore;
+    @Inject @Named("default_preferences") JsonKvStore applicationKvStore;
     @Inject BookmarkLocationsDao bookmarkLocationDao;
     @Inject ContributionController controller;
     @Inject Gson gson;
@@ -890,7 +887,7 @@ public class NearbyMapFragment extends DaggerFragment {
 
     void storeSharedPrefs() {
         Timber.d("Store place object %s", place.toString());
-        directKvStore.putJson(PLACE_OBJECT, place);
+        applicationKvStore.putJson(PLACE_OBJECT, place);
     }
 
     private void openWebView(Uri link) {

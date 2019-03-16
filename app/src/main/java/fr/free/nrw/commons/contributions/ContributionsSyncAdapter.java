@@ -24,7 +24,8 @@ import javax.inject.Named;
 
 import fr.free.nrw.commons.Utils;
 import fr.free.nrw.commons.di.ApplicationlessInjection;
-import fr.free.nrw.commons.kvstore.BasicKvStore;
+import fr.free.nrw.commons.kvstore.JsonKvStore;
+import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.mwapi.LogEventResult;
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
 import timber.log.Timber;
@@ -44,8 +45,8 @@ public class ContributionsSyncAdapter extends AbstractThreadedSyncAdapter {
     @SuppressWarnings("WeakerAccess")
     @Inject MediaWikiApi mwApi;
     @Inject
-    @Named("defaultKvStore")
-    BasicKvStore defaultKvStore;
+    @Named("default_preferences")
+    JsonKvStore defaultKvStore;
 
     public ContributionsSyncAdapter(Context context, boolean autoInitialize) {
         super(context, autoInitialize);

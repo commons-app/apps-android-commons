@@ -37,7 +37,7 @@ import fr.free.nrw.commons.auth.LoginActivity;
 import fr.free.nrw.commons.bookmarks.BookmarksActivity;
 import fr.free.nrw.commons.category.CategoryImagesActivity;
 import fr.free.nrw.commons.contributions.MainActivity;
-import fr.free.nrw.commons.kvstore.BasicKvStore;
+import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.logging.CommonsLogSender;
 import fr.free.nrw.commons.settings.SettingsActivity;
 import timber.log.Timber;
@@ -54,7 +54,9 @@ public abstract class NavigationBaseActivity extends BaseActivity
     NavigationView navigationView;
     @BindView(R.id.drawer_layout)
     DrawerLayout drawerLayout;
-    @Inject @Named("application_preferences") BasicKvStore applicationKvStore;
+    @Inject
+    @Named("default_preferences")
+    JsonKvStore applicationKvStore;
     @Inject CommonsLogSender commonsLogSender;
 
 
@@ -292,7 +294,7 @@ public abstract class NavigationBaseActivity extends BaseActivity
 
     @Override
     public void onBackPressed() {
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {

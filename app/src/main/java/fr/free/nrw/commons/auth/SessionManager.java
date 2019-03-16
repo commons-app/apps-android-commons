@@ -8,9 +8,13 @@ import android.content.Context;
 import android.os.Bundle;
 
 import javax.annotation.Nullable;
+import javax.inject.Inject;
+import javax.inject.Named;
+import javax.inject.Singleton;
 
 import fr.free.nrw.commons.BuildConfig;
-import fr.free.nrw.commons.kvstore.BasicKvStore;
+import fr.free.nrw.commons.kvstore.JsonKvStore;
+import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
 import io.reactivex.Completable;
 import io.reactivex.Observable;
@@ -23,17 +27,19 @@ import static android.accounts.AccountManager.KEY_ACCOUNT_TYPE;
 /**
  * Manage the current logged in user session.
  */
+@Singleton
 public class SessionManager {
     private final Context context;
     private final MediaWikiApi mediaWikiApi;
     private Account currentAccount; // Unlike a savings account...  ;-)
-    private BasicKvStore defaultKvStore;
+    private JsonKvStore defaultKvStore;
     private static final String KEY_RAWUSERNAME = "rawusername";
     private Bundle userdata = new Bundle();
 
+    @Inject
     public SessionManager(Context context,
                           MediaWikiApi mediaWikiApi,
-                          BasicKvStore defaultKvStore) {
+                          @Named("default_preferences") JsonKvStore defaultKvStore) {
         this.context = context;
         this.mediaWikiApi = mediaWikiApi;
         this.currentAccount = null;

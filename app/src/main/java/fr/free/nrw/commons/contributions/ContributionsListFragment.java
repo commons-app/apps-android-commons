@@ -23,7 +23,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
-import fr.free.nrw.commons.kvstore.BasicKvStore;
+import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.utils.ConfigUtils;
 
@@ -51,8 +51,7 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment {
     @BindView(R.id.fab_layout)
     LinearLayout fab_layout;
 
-    @Inject @Named("default_preferences") BasicKvStore basicKvStore;
-    @Inject @Named("direct_nearby_upload_prefs") JsonKvStore directKvStore;
+    @Inject @Named("default_preferences") JsonKvStore kvStore;
     @Inject ContributionController controller;
 
     private Animation fab_close;
