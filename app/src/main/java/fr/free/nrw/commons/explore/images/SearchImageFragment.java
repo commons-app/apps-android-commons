@@ -146,6 +146,7 @@ public class SearchImageFragment extends CommonsDaggerSupportFragment {
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .timeout(TIMEOUT_SECONDS, TimeUnit.SECONDS)
+                .doOnSubscribe(disposable -> saveQuery(query))
                 .subscribe(this::handleSuccess, this::handleError);
     }
 
@@ -199,10 +200,6 @@ public class SearchImageFragment extends CommonsDaggerSupportFragment {
             imagesAdapter.addAll(mediaList);
             imagesAdapter.notifyDataSetChanged();
             ((SearchActivity)getContext()).viewPagerNotifyDataSetChanged();
-
-            // check if user is waiting for 5 seconds if yes then save search query to history.
-            Handler handler = new Handler();
-            handler.postDelayed(() -> saveQuery(query), 5000);
         }
     }
 

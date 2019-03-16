@@ -112,11 +112,12 @@ public class SearchActivity extends NavigationBaseActivity implements MediaDetai
                                 searchImageFragment.updateImageList(query.toString());
                                 searchCategoryFragment.updateCategoryList(query.toString());
                             }else {
+                                //Open RecentSearchesFragment
+                                recentSearchesFragment.updateRecentSearches();
                                 viewPager.setVisibility(View.GONE);
                                 tabLayout.setVisibility(View.GONE);
+                                setSearchHistoryFragment();
                                 searchHistoryContainer.setVisibility(View.VISIBLE);
-                                recentSearchesFragment.updateRecentSearches();
-                                // open search history fragment
                             }
                         }
                 );
