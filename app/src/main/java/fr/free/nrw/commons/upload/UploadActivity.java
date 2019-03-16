@@ -110,7 +110,6 @@ public class UploadActivity extends BaseActivity implements UploadView, SimilarI
     @BindView(R.id.please_wait_text_view) TextView pleaseWaitTextView;
 
 
-    //@BindView(R.id.right_card_expand_button) ImageView rightCardExpandButton;
     @BindView(R.id.right_card_map_button) View rightCardMapButton;
 
     // Category Search
