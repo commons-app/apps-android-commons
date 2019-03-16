@@ -242,7 +242,9 @@ public class AchievementsActivity extends NavigationBaseActivity {
         okHttpJsonApiClient.getWikidataEdits(userName)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(edits -> wikidataEditsText.setText(String.valueOf(edits)));
+                .subscribe(edits -> wikidataEditsText.setText(String.valueOf(edits)), e -> {
+                    Timber.e("Error:" + e);
+                });
     }
 
     private void showSnackBarWithRetry() {
