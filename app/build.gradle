@@ -102,7 +102,7 @@ android {
         versionName '2.10.1'
         setProperty("archivesBaseName", "app-commons-v$versionName-" + getBranchName())
 
-        minSdkVersion 15
+        minSdkVersion 19
         targetSdkVersion 28
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary = true
