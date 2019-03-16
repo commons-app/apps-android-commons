@@ -269,10 +269,11 @@ public class MainActivity extends AuthenticatedActivity implements FragmentManag
                 finish();
             }
         } else if (getSupportFragmentManager().findFragmentByTag(nearbyFragmentTag) != null && !isContributionsFragmentVisible) {
-           if (!((NearbyFragment)contributionsActivityPagerAdapter.getItem(1)).listOptionMenuIteClicked()){
+            // Means that nearby fragment is visible (not contributions fragment)
+           if (!((NearbyFragment)contributionsActivityPagerAdapter.getItem(1)).listOptionMenuItemClicked()){
                viewPager.setCurrentItem(0);
            }
-                //
+                //If the nearby
 
             // Set current item to contributions activity instead of closing the activity
         } else {
@@ -350,7 +351,7 @@ public class MainActivity extends AuthenticatedActivity implements FragmentManag
                 return true;
             case R.id.list_sheet:
                 if (contributionsActivityPagerAdapter.getItem(1) != null) {
-                    ((NearbyFragment)contributionsActivityPagerAdapter.getItem(1)).listOptionMenuIteClicked();
+                    ((NearbyFragment)contributionsActivityPagerAdapter.getItem(1)).listOptionMenuItemClicked();
                 }
                 return true;
             default:

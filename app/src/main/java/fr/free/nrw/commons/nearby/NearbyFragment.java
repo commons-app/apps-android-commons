@@ -135,7 +135,7 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
     /**
      * Hide or expand bottom sheet according to states of all sheets
      */
-    public boolean listOptionMenuIteClicked() {
+    public boolean listOptionMenuItemClicked() {
         if(bottomSheetBehavior.getState()==BottomSheetBehavior.STATE_COLLAPSED || bottomSheetBehavior.getState()==BottomSheetBehavior.STATE_HIDDEN){
             bottomSheetBehaviorForDetails.setState(BottomSheetBehavior.STATE_HIDDEN);
             bottomSheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
@@ -147,7 +147,7 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
     }
 
     /**
-     * Resume fragments if they exists
+     * Resume fragments if they exist// Meas that nearby fragment is visible (not contributions fragment)s
      */
     private void resumeFragment() {
         // Find the retained fragment on activity restarts
