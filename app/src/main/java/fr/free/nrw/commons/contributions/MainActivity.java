@@ -269,9 +269,16 @@ public class MainActivity extends AuthenticatedActivity implements FragmentManag
                 finish();
             }
         } else if (getSupportFragmentManager().findFragmentByTag(nearbyFragmentTag) != null && !isContributionsFragmentVisible) {
-            // Meas that nearby fragment is visible (not contributions fragment)
-            // Set current item to contributions activity instead of closing the activity
-            viewPager.setCurrentItem(0);
+            // Means that nearby fragment is visible (not contributions fragment)
+            NearbyFragment nearbyFragment = (NearbyFragment) contributionsActivityPagerAdapter.getItem(1);
+
+            if(nearbyFragment.isBottomSheetExpanded()) {
+                // Back should first hide the bottom sheet if it is expanded
+                nearbyFragment.listOptionMenuItemClicked();
+            } else {
+                // Otherwise go back to contributions fragment
+                viewPager.setCurrentItem(0);
+            }
         } else {
             super.onBackPressed();
         }
@@ -347,7 +354,7 @@ public class MainActivity extends AuthenticatedActivity implements FragmentManag
                 return true;
             case R.id.list_sheet:
                 if (contributionsActivityPagerAdapter.getItem(1) != null) {
-                    ((NearbyFragment)contributionsActivityPagerAdapter.getItem(1)).listOptionMenuIteClicked();
+                    ((NearbyFragment)contributionsActivityPagerAdapter.getItem(1)).listOptionMenuItemClicked();
                 }
                 return true;
             default:
