@@ -70,4 +70,32 @@ public class SettingsActivityTest {
                 .onChildView(withId(android.R.id.summary))
                 .check(matches(withText("123")));
     }
+
+    @Test
+    public void setRecentUploadLimitTo0() {
+        // Open "Use external storage" preference
+        Espresso.onData(PreferenceMatchers.withKey("uploads"))
+                .inAdapterView(withId(android.R.id.list))
+                .perform(click());
+
+        // Try setting it to 100
+        Espresso.onView(withId(android.R.id.edit))
+                .perform(replaceText("0"));
+
+        // Click "OK"
+        Espresso.onView(allOf(withId(android.R.id.button1), withText("OK")))
+                .perform(click());
+
+        // Check setting set to 100 in SharedPreferences
+        assertEquals(
+                100,
+                defaultKvStore.getInt(Prefs.UPLOADS_SHOWING, 0)
+        );
+
+        // Check displaying 100 in summary text
+        Espresso.onData(PreferenceMatchers.withKey("uploads"))
+                .inAdapterView(withId(android.R.id.list))
+                .onChildView(withId(android.R.id.summary))
+                .check(matches(withText("100")));
+    }
 }
