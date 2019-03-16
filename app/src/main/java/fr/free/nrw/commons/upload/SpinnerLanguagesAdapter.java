@@ -127,9 +127,7 @@ public class SpinnerLanguagesAdapter extends ArrayAdapter {
                 if (languageCodesList.get(position).isEmpty()) {
                     tvLanguage.setText(languageNamesList.get(position));
                     tvLanguage.setTextColor(Color.GRAY);
-                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
-                        tvLanguage.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
-                    }
+                    tvLanguage.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
                 } else {
                     tvLanguage.setText(
                             String.format("%s [%s]", languageNamesList.get(position), languageCodesList.get(position)));

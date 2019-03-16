@@ -30,9 +30,7 @@ public class DialogUtil {
             return;
         }
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
-            isActivityDestroyed = activity.isDestroyed();
-        }
+        isActivityDestroyed = activity.isDestroyed();
         if (activity.isFinishing() || isActivityDestroyed) {
             return;
         }
@@ -55,10 +53,7 @@ public class DialogUtil {
             return;
         }
 
-        boolean isActivityDestroyed = false;
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
-            isActivityDestroyed = activity.isDestroyed();
-        }
+        boolean isActivityDestroyed = activity.isDestroyed();
         if (activity.isFinishing() || isActivityDestroyed) {
             Timber.e("Activity is not running. Could not show dialog. ");
             return;
@@ -83,9 +78,7 @@ public class DialogUtil {
             return;
         }
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
-            isActivityDestroyed = activity.isDestroyed();
-        }
+        isActivityDestroyed = activity.isDestroyed();
         if (activity.isFinishing() || isActivityDestroyed) {
             return;
         }
