@@ -567,9 +567,7 @@ public class UploadActivity extends BaseActivity implements UploadView, SimilarI
     }
 
     private void configureCategories() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
-            categoryFrameLayout.setLayoutDirection(View.LAYOUT_DIRECTION_LTR);
-        }
+        categoryFrameLayout.setLayoutDirection(View.LAYOUT_DIRECTION_LTR);
         categoriesAdapter = new UploadCategoriesAdapterFactory(categoriesModel).create(new ArrayList<>());
         categoriesList.setLayoutManager(new LinearLayoutManager(this));
         categoriesList.setAdapter(categoriesAdapter);

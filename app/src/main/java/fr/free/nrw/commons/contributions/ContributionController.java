@@ -4,7 +4,6 @@ import android.Manifest;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.os.Build;
 import androidx.annotation.NonNull;
 
 import java.util.ArrayList;
@@ -63,15 +62,11 @@ public class ContributionController {
      * Check for permissions and initiate gallery picker
      */
     public void initiateGalleryPick(Activity activity, boolean allowMultipleUploads) {
-        if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.JELLY_BEAN) {
-            initiateGalleryUpload(activity, allowMultipleUploads);
-        } else {
-            PermissionUtils.checkPermissionsAndPerformAction(activity,
-                    Manifest.permission.READ_EXTERNAL_STORAGE,
-                    () -> initiateGalleryUpload(activity, allowMultipleUploads),
-                    R.string.storage_permission_title,
-                    R.string.read_storage_permission_rationale);
-        }
+        PermissionUtils.checkPermissionsAndPerformAction(activity,
+                Manifest.permission.READ_EXTERNAL_STORAGE,
+                () -> initiateGalleryUpload(activity, allowMultipleUploads),
+                R.string.storage_permission_title,
+                R.string.read_storage_permission_rationale);
     }
 
     /**

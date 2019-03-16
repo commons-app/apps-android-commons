@@ -55,13 +55,6 @@ public class DateUtils {
     }
 
     public static String dateInLocaleFormat(Date date){
-        String formatter;
-        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.JELLY_BEAN_MR2) {
-            formatter = new SimpleDateFormat(DateFormat.getBestDateTimePattern(Locale.getDefault(), "dd MMM yyyy"), Locale.getDefault()).format(date);
-        }
-        else {
-            formatter = String.valueOf(new SimpleDateFormat("dd MMM yyyy", Locale.getDefault()));
-        }
-        return formatter;
+        return new SimpleDateFormat(DateFormat.getBestDateTimePattern(Locale.getDefault(), "dd MMM yyyy"), Locale.getDefault()).format(date);
     }
 }
