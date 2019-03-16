@@ -94,4 +94,34 @@ class StringSortingUtilsTest {
 
         assertEquals(expectedList, actualList)
     }
+
+    @Test
+    fun testSortingWithEmptyStrings() {
+        val actualList = listOf(
+                "brown fox",
+                "",
+                "quick brown fox",
+                "the",
+                "",
+                "the fox",
+                "fox",
+                "",
+                ""
+        )
+        val expectedList = listOf(
+                "the fox",
+                "brown fox",
+                "the",
+                "fox",
+                "quick brown fox",
+                "",
+                "",
+                "",
+                ""
+        )
+
+        sort(actualList, sortBySimilarity("the fox"))
+
+        assertEquals(expectedList, actualList)
+    }
 }
