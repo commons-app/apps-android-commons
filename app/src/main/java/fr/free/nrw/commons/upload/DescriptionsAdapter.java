@@ -165,7 +165,7 @@ class DescriptionsAdapter extends RecyclerView.Adapter<DescriptionsAdapter.ViewH
             } else {
                 Description description = descriptions.get(position - 1);
                 Timber.d("Description is " + description);
-                if (!TextUtils.isEmpty(description.getDescriptionText()) && !description.getDescriptionText().equals("?")) {
+                if (!TextUtils.isEmpty(description.getDescriptionText())) {
                     descItemEditText.setText(description.getDescriptionText());
                 } else {
                     descItemEditText.setText("");
