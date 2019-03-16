@@ -270,9 +270,13 @@ public class MainActivity extends AuthenticatedActivity implements FragmentManag
             }
         } else if (getSupportFragmentManager().findFragmentByTag(nearbyFragmentTag) != null && !isContributionsFragmentVisible) {
             // Means that nearby fragment is visible (not contributions fragment)
-           if (!((NearbyFragment)contributionsActivityPagerAdapter.getItem(1)).listOptionMenuItemClicked()){
-               viewPager.setCurrentItem(0);
-           }
+            NearbyFragment nearbyFragment = (NearbyFragment) contributionsActivityPagerAdapter.getItem(1);
+
+            if(nearbyFragment.isBottomSheetExpanded()) {
+                nearbyFragment.listOptionMenuItemClicked();
+            } else {
+                viewPager.setCurrentItem(0);
+            }
                 //If the nearby
 
             // Set current item to contributions activity instead of closing the activity
