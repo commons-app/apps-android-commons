@@ -99,7 +99,7 @@
   <string name="no_uploads_yet">Dar neįkėlėte jokių nuotraukų.</string>
   <string name="menu_retry_upload">Bandykite dar kartą</string>
   <string name="menu_cancel_upload">Atšaukti</string>
-  <string name="share_license_summary">Šio paveikslėlio licencija bus %1$s</string>
+  <string name="share_license_summary" fuzzy="true">Šio paveikslėlio licencija bus %1$s</string>
   <string name="menu_download">Parsisiųsti</string>
   <string name="preference_license">Numatytoji Licencija</string>
   <string name="use_previous">Naudoti ankstesnį pavadinimą/aprašymą</string>
@@ -112,12 +112,10 @@
   <string name="tutorial_1_text">Vikimedija Commons talpina daugumą paveikslėlių, kurie yra naudojami Vikipedijoje.</string>
   <string name="tutorial_1_subtext">Jūsų paveikslėliai padeda šviesti žmones visame pasaulyje!</string>
   <string name="tutorial_2_text">Prašome kelti nuotraukos, kurios yra padarytos ar sukurtos tik jūsų:</string>
-  <string name="tutorial_2_subtext">Gamtos objektai (gėlės, gyvūnai, kalnai)\n• Naudingi objektai (dviračiai, traukinių stotys)\n• Įžymūs žmonės (jūsų meras, Olimpiniai atletai, kurios sutikote)</string>
   <string name="tutorial_2_subtext_1">Gamtos objektai (gėlės, gyvūnai, kalnai)</string>
   <string name="tutorial_2_subtext_2">Naudingi objektai (dviračiai, traukinių stotys)</string>
   <string name="tutorial_2_subtext_3">Įžymūs žmonės (jūsų meras, Olimpiniai atletai, kurios sutikote)</string>
   <string name="tutorial_3_text">Prašome NEkelti:</string>
-  <string name="tutorial_3_subtext">- Asmenukės ar jūsų draugų nuotraukos\n- Nuotraukos, kurias atsisiuntėte iš interneto\n- Patentuotų programėlių nuotraukos</string>
   <string name="tutorial_3_subtext_1">Asmenukės ar jūsų draugų nuotraukos</string>
   <string name="tutorial_3_subtext_2">Nuotraukos, kurias atsisiuntėte iš interneto</string>
   <string name="tutorial_3_subtext_3">Patentuotų programėlių nuotraukos</string>

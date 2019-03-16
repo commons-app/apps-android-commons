@@ -1,5 +1,7 @@
 package fr.free.nrw.commons.mwapi;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.Date;
 
 public class UploadResult {
@@ -32,6 +34,18 @@ public class UploadResult {
         this.dateUploaded = dateUploaded;
         this.canonicalFilename = canonicalFilename;
         this.imageUrl = imageUrl;
+    }
+
+    @NotNull
+    @Override
+    public String toString() {
+        return "UploadResult{" +
+                "errorCode='" + errorCode + '\'' +
+                ", resultStatus='" + resultStatus + '\'' +
+                ", dateUploaded='" + (dateUploaded == null ? "" : dateUploaded.toString()) + '\'' +
+                ", imageUrl='" + imageUrl + '\'' +
+                ", canonicalFilename='" + canonicalFilename + '\'' +
+                '}';
     }
 
     /**

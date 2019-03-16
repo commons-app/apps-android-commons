@@ -4,10 +4,10 @@ import android.content.Context;
 import android.content.Intent;
 import android.database.DataSetObserver;
 import android.os.Bundle;
-import android.support.design.widget.TabLayout;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.view.ViewPager;
+import com.google.android.material.tabs.TabLayout;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.viewpager.widget.ViewPager;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -46,7 +46,7 @@ public class CategoryDetailsActivity extends NavigationBaseActivity
     private MediaDetailPagerFragment mediaDetails;
     private String categoryName;
     @BindView(R.id.mediaContainer) FrameLayout mediaContainer;
-    @BindView(R.id.tabLayout) TabLayout tabLayout;
+    @BindView(R.id.tab_layout) TabLayout tabLayout;
     @BindView(R.id.viewPager) ViewPager viewPager;
 
     ViewPagerAdapter viewPagerAdapter;
@@ -140,7 +140,7 @@ public class CategoryDetailsActivity extends NavigationBaseActivity
      */
     public static void startYourself(Context context, String categoryName) {
         Intent intent = new Intent(context, CategoryDetailsActivity.class);
-        intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+        intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT | Intent.FLAG_ACTIVITY_SINGLE_TOP);
         intent.putExtra("categoryName", categoryName);
         context.startActivity(intent);
     }

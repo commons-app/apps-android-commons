@@ -99,7 +99,7 @@
   <string name="no_uploads_yet">आपण अद्याप काहीच चित्रे अपभारीत केली नाहीत.</string>
   <string name="menu_retry_upload">पुन्हा प्रयत्न करा</string>
   <string name="menu_cancel_upload">रद्द करा</string>
-  <string name="share_license_summary">ही संचिका %1$s या परवान्यांतर्गत राहील</string>
+  <string name="share_license_summary" fuzzy="true">ही संचिका %1$s या परवान्यांतर्गत राहील</string>
   <string name="media_upload_policy">हे चित्र इथे चढवत असताना, मी हे घोषीत करतो की हे माझेच काम आहे आणि ह्या कामावर इतर कुणाचाही प्रताधिकार नाही तसेच हे सेल्फ़ी नाहीये, म्हणून हे काम ह्या संकेतांचे पालन करेल &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines\"&gt;Wikimedia Commons policies&lt;/a&gt;.</string>
   <string name="menu_download">अधिभारण करा</string>
   <string name="preference_license">डिफॉल्ट परवाना</string>
@@ -131,17 +131,14 @@
   <string name="tutorial_1_text">विकिपीडियात वापरल्या जाणाऱ्या बहुतेक चित्रांचे यजमानत्व विकिमिडिया कॉमन्स स्वीकारते.</string>
   <string name="tutorial_1_subtext">जगातल्या अनेक लोकांना आपल्या चित्राद्वारे शिकता येते!</string>
   <string name="tutorial_2_text">कृपया निव्वळ आपण घेतलेल्या किंवा तयार केलेल्या चित्रांचेच अपभारण करा:</string>
-  <string name="tutorial_2_subtext">नैसर्गिक गोष्टी (फुले, प्राणी, पर्वत)\n• नित्योपयोगी गोष्टी (दुचाकी, रेल्वे स्थानके)\n• प्रसिद्ध व्यक्ति (आपले महापौर, आपणास भेटलेले ऑलिंपिक खेळाडू)</string>
   <string name="tutorial_2_subtext_1">नैसर्गिक वस्तू (फुले, प्राणी, पर्वत)</string>
   <string name="tutorial_2_subtext_2">उपयुक्त वस्तू (सायकली, रेल्वे स्टेशन)</string>
   <string name="tutorial_2_subtext_3">प्रसिद्ध लोक (आपले महापौर, आपण भेटलेले ऑलिम्पिक खेळाडू)</string>
   <string name="tutorial_3_text">कृपया अपभारण करू \'\'\'नका\'\'\':</string>
-  <string name="tutorial_3_subtext">-आपल्या किंवा मित्रांच्या सेल्फी\n-आपण आंतरजाल (इंटरनेट) वरुन अधिभारण केलेली चित्रे\n-प्रोप्रायटरी अॅप्सचे स्क्रिनशॉट</string>
   <string name="tutorial_3_subtext_1">सेल्फी किंवा आपल्या मित्रांच्या चित्रे</string>
   <string name="tutorial_3_subtext_2">आपण इंटरनेटवरून डाउनलोड केलेली चित्रे</string>
   <string name="tutorial_3_subtext_3">प्रोप्रायटरी अॅप्सचे स्क्रीनशॉट्स</string>
   <string name="tutorial_4_text">उदाहरणादाखल अपभारण:</string>
-  <string name="tutorial_4_subtext">- शीर्षक: Sydney Opera House\n- वर्णन: Sydney Opera House as viewed from across the bay\n- वर्ग: Sydney Opera House, Sydney Opera House from the west, Sydney Opera House remote views</string>
   <string name="tutorial_4_subtext_1">Title: सिडनी ओपेरा हाऊस</string>
   <string name="tutorial_4_subtext_2">Description: सिडनी ऑपेरा हाऊस उपसागरातून दिसत आहे</string>
   <string name="tutorial_4_subtext_3">Categories: पश्चिमेकडून सिडनी ओपेरा हाऊस, सिडनी ऑपेरा हाऊस दुर्गम दृश्य</string>
@@ -167,9 +164,7 @@
   <string name="yes">होय</string>
   <string name="no">नाही</string>
   <string name="media_detail_title">शीर्षक</string>
-  <string name="media_detail_media_title">माध्यमाचे शिर्षक</string>
   <string name="media_detail_description">वर्णन</string>
-  <string name="media_detail_description_explanation">माध्यमाची माहिती इथे दिली आहे. ती बरीच मोठी असू शकते, तरीही आम्हांला वाटते ती आपल्या उपयोगाची असावी.</string>
   <string name="media_detail_uploaded_date">चढवल्याची तारिख</string>
   <string name="media_detail_license">परवाना</string>
   <string name="media_detail_coordinates">अक्षांश-रेखांश</string>

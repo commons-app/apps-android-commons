@@ -1,19 +1,16 @@
 package fr.free.nrw.commons.mwapi;
 
 import android.net.Uri;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
-import fr.free.nrw.commons.campaigns.CampaignResponseDTO;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
 
 import fr.free.nrw.commons.Media;
-import fr.free.nrw.commons.achievements.FeedbackResponse;
 import fr.free.nrw.commons.notification.Notification;
 import io.reactivex.Observable;
-import io.reactivex.Single;
 
 public interface MediaWikiApi {
     String getUserAgent();
@@ -49,9 +46,6 @@ public interface MediaWikiApi {
     List<String> getParentCategoryList(String categoryName);
 
     @NonNull
-    List<Media> searchImages(String title, int offset);
-
-    @NonNull
     List<String> searchCategory(String title, int offset);
 
     @NonNull
@@ -82,7 +76,10 @@ public interface MediaWikiApi {
     Observable<String> allCategories(String filter, int searchCatsLimit);
 
     @NonNull
-    List<Notification> getNotifications() throws IOException;
+    List<Notification> getNotifications(boolean archived) throws IOException;
+
+    @NonNull
+    boolean markNotificationAsRead(Notification notification) throws IOException;
 
     @NonNull
     Observable<String> searchTitles(String title, int searchCatsLimit);
@@ -95,18 +92,9 @@ public interface MediaWikiApi {
     @NonNull
     LogEventResult logEvents(String user, String lastModified, String queryContinue, int limit) throws IOException;
 
-    @NonNull
-    Single<Integer> getUploadCount(String userName);
-
     boolean isUserBlockedFromCommons();
 
-    Single<FeedbackResponse> getAchievements(String userName);
-
-    Single<Media> getPictureOfTheDay();
-
     void logout();
-
-    Single<CampaignResponseDTO> getCampaigns();
 
     interface ProgressListener {
         void onProgress(long transferred, long total);

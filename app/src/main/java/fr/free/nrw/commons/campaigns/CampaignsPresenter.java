@@ -1,52 +1,66 @@
 package fr.free.nrw.commons.campaigns;
 
-import android.util.Log;
-import fr.free.nrw.commons.BasePresenter;
-import fr.free.nrw.commons.MvpView;
-import fr.free.nrw.commons.mwapi.MediaWikiApi;
-import io.reactivex.Single;
-import io.reactivex.SingleObserver;
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.disposables.Disposable;
-import io.reactivex.schedulers.Schedulers;
+import android.annotation.SuppressLint;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
+import javax.inject.Inject;
+import javax.inject.Singleton;
+
+import fr.free.nrw.commons.BasePresenter;
+import fr.free.nrw.commons.MvpView;
+import fr.free.nrw.commons.mwapi.OkHttpJsonApiClient;
+import io.reactivex.Single;
+import io.reactivex.SingleObserver;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.schedulers.Schedulers;
+import timber.log.Timber;
+
 /**
  * The presenter for the campaigns view, fetches the campaigns from the api and informs the view on
  * success and error
  */
+@Singleton
 public class CampaignsPresenter implements BasePresenter {
-    private final String TAG = "#CampaignsPresenter#";
+    private final OkHttpJsonApiClient okHttpJsonApiClient;
+
     private ICampaignsView view;
-    private MediaWikiApi mediaWikiApi;
     private Disposable disposable;
     private Campaign campaign;
 
+    @Inject
+    public CampaignsPresenter(OkHttpJsonApiClient okHttpJsonApiClient) {
+        this.okHttpJsonApiClient = okHttpJsonApiClient;
+    }
+
     @Override public void onAttachView(MvpView view) {
         this.view = (ICampaignsView) view;
-        this.mediaWikiApi = ((ICampaignsView) view).getMediaWikiApi();
     }
 
     @Override public void onDetachView() {
         this.view = null;
-        disposable.dispose();
+        if (disposable != null) {
+            disposable.dispose();
+        }
     }
 
     /**
      * make the api call to fetch the campaigns
      */
+    @SuppressLint("CheckResult")
     public void getCampaigns() {
-        if (view != null && mediaWikiApi != null) {
+        if (view != null && okHttpJsonApiClient != null) {
             //If we already have a campaign, lets not make another call
             if (this.campaign != null) {
                 view.showCampaigns(campaign);
                 return;
             }
-            Single<CampaignResponseDTO> campaigns = mediaWikiApi.getCampaigns();
+            Single<CampaignResponseDTO> campaigns = okHttpJsonApiClient.getCampaigns();
             campaigns.observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
                 .subscribeWith(new SingleObserver<CampaignResponseDTO>() {
@@ -59,7 +73,7 @@ public class CampaignsPresenter implements BasePresenter {
                         List<Campaign> campaigns = campaignResponseDTO.getCampaigns();
                         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
                         if (campaigns == null || campaigns.isEmpty()) {
-                            Log.e(TAG, "The campaigns list is empty");
+                            Timber.e("The campaigns list is empty");
                             view.showCampaigns(null);
                         }
                         Collections.sort(campaigns, (campaign, t1) -> {
@@ -93,7 +107,7 @@ public class CampaignsPresenter implements BasePresenter {
                     }
 
                     @Override public void onError(Throwable e) {
-                        Log.e(TAG, "could not fetch campaigns: " + e.getMessage());
+                        Timber.e(e, "could not fetch campaigns");
                     }
                 });
         }

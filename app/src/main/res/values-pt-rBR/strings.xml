@@ -12,6 +12,7 @@
 * Maxan
 * TheEduGobi
 * TheGabrielZaum
+* Tks4Fish
 * Tuliouel
 -->
 <resources>
@@ -114,7 +115,10 @@
   <string name="no_uploads_yet">Você ainda não carregou nenhuma foto.</string>
   <string name="menu_retry_upload">Repetir</string>
   <string name="menu_cancel_upload">Cancelar</string>
-  <string name="share_license_summary">Essa imagem será licenciada sob %1$s</string>
+  <plurals name="share_license_summary">
+    <item quantity="one">Esta imagem será licenciada sob %1$s</item>
+    <item quantity="other">Estas imagens serão licenciadas sob %1$s</item>
+  </plurals>
   <string name="media_upload_policy">Ao enviar esta imagem, declaro que este é o meu próprio trabalho, que não contém material protegido ou selfies, e, de outra forma, adere a &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines\"&gt;Políticas do Wikimedia Commons&lt;/a&gt;.</string>
   <string name="menu_download">Download</string>
   <string name="preference_license">Licença padrão</string>
@@ -146,17 +150,14 @@
   <string name="tutorial_1_text">Wikimedia Commons hospeda a maioria das imagens que são usadas na Wikipedia</string>
   <string name="tutorial_1_subtext">Suas imagens ajudam a educar as pessoas ao redor do mundo!</string>
   <string name="tutorial_2_text">Carregue as fotografias tiradas ou criadas inteiramente por você:</string>
-  <string name="tutorial_2_subtext">• Objetos naturais (flores, animais, montanhas)\n• Objetos úteis (bicicletas, estações de trem)\n• Pessoas famosas (seu prefeito, atletas olímpicos que você conheceu)</string>
   <string name="tutorial_2_subtext_1">Objetos naturais (flores, animais, montanhas)</string>
   <string name="tutorial_2_subtext_2">Objetos úteis (bicicletas, estações de trem)</string>
   <string name="tutorial_2_subtext_3">Pessoas famosas (seu prefeito, atletas olímpicos que conheceu)</string>
   <string name="tutorial_3_text">Por favor NÃO carregue:</string>
-  <string name="tutorial_3_subtext">- Selfies ou fotos de seus amigos\n- Imagens que você baixou da Internet\n- Imagens de aplicativos proprietários</string>
   <string name="tutorial_3_subtext_1">Autorretratos ou fotos de seus amigos</string>
   <string name="tutorial_3_subtext_2">Imagens que você baixou da Internet</string>
   <string name="tutorial_3_subtext_3">Capturas de tela de aplicativos proprietários</string>
   <string name="tutorial_4_text">Exemplo de upload:</string>
-  <string name="tutorial_4_subtext">- Título: Ópera de Sydney\n- Descrição: Ópera de Sydney como visto de toda a baía\n- =Categorias: =Ópera de Sydney, =Ópera de Sydney a partir do oeste, Ópera de Sydney vistas remotas</string>
   <string name="tutorial_4_subtext_1">Título: Ópera de Sydney</string>
   <string name="tutorial_4_subtext_2">Descrição: Ópera de Sydney como visto do outro lado da baía</string>
   <string name="tutorial_4_subtext_3">Categorias: Teatro da Ópera de Sydney a partir do oeste, visões remotas da Ópera de Sydney</string>
@@ -173,6 +174,7 @@
   <string name="detail_description_empty">Sem descrição</string>
   <string name="detail_license_empty">Licença desconhecida</string>
   <string name="menu_refresh">Atualizar</string>
+  <string name="storage_permission_title">Solicitando permissão de armazenamento</string>
   <string name="read_storage_permission_rationale">Permissão necessária: leia o armazenamento externo. App não pode acessar sua galeria sem isso.</string>
   <string name="write_storage_permission_rationale">Permissão necessária: escreva o armazenamento externo. App não pode acessar sua câmera sem isso.</string>
   <string name="location_permission_rationale">Permissão opcional: Obter a localização atual de sugestões de categoria</string>
@@ -184,11 +186,8 @@
   <string name="yes">Sim</string>
   <string name="no">Não</string>
   <string name="media_detail_title">Título</string>
-  <string name="media_detail_media_title">Título da mídia</string>
   <string name="media_detail_description">Descrição</string>
-  <string name="media_detail_description_explanation">Descrição da mídia aqui. Isso pode ser potencialmente longo e precisará envolver múltiplas linhas. Esperamos que seja agradável.</string>
   <string name="media_detail_author">Autor</string>
-  <string name="media_detail_author_explanation">O nome de usuário do autor da imagem destacada fica aqui.</string>
   <string name="media_detail_uploaded_date">Data de envio.</string>
   <string name="media_detail_license">Licença</string>
   <string name="media_detail_coordinates">Coordenadas</string>
@@ -198,7 +197,11 @@
   <string name="_2fa_code">Código 2FA</string>
   <string name="number_of_uploads">Meu limite de upload recente</string>
   <string name="maximum_limit">Limite máximo</string>
+  <string name="invalid_zero">Zero não é válido</string>
+  <string name="invalid_input">Entrada inválida</string>
   <string name="maximum_limit_alert">Incapaz de exibir mais de 500.</string>
+  <string name="enter_valid">Digite um número válido</string>
+  <string name="cannot_be_zero">O limite de upload não pode ser 0</string>
   <string name="set_limit">Definir o limite de carregamento recente</string>
   <string name="login_failed_2fa_not_supported">Dois fatores de autenticação não são suportados.</string>
   <string name="logout_verification">Quer realmente sair ?</string>
@@ -244,6 +247,13 @@
   <string name="description_info">Por favor, descreva a mídia tanto quanto possível: onde foi tomada? O que isso mostra? Qual é o contexto? Descreva os objetos ou pessoas. Revelar informações que não podem ser facilmente adivinhadas, por exemplo, a hora do dia, se for uma paisagem. Se a mídia mostrar algo incomum, explique o que torna incomum.</string>
   <string name="upload_image_too_dark">Esta foto está muito escura, você tem certeza de que deseja enviá-la? O Wikimedia Commons é apenas para imagens com valor enciclopédico.</string>
   <string name="upload_image_blurry">Esta foto está embaçada, tem certeza de que deseja enviá-la? O Wikimedia Commons é apenas para imagens com valor enciclopédico.</string>
+  <string name="upload_problem_exist">Problemas potenciais com esta imagem:</string>
+  <string name="upload_problem_image_dark">A imagem está muito escura.</string>
+  <string name="upload_problem_image_blurry">A imagem está embaçada.</string>
+  <string name="upload_problem_image_duplicate">A imagem já está no Commons.</string>
+  <string name="upload_problem_different_geolocation">Esta foto foi tirada em um local diferente.</string>
+  <string name="upload_problem_fbmd">Por favor, apenas envie fotos que você tirou sozinho. Não faça upload de fotos que você encontrou nas contas do Facebook de outras pessoas.</string>
+  <string name="upload_problem_do_you_continue">Você ainda quer enviar esta foto?</string>
   <string name="give_permission">Dar permissão</string>
   <string name="use_external_storage">Usar o armazenamento externo</string>
   <string name="use_external_storage_summary">Salvar as fotos tiradas com a câmera no aplicativo no seu dispositivo</string>
@@ -259,7 +269,7 @@
   <string name="skip_login">Pular</string>
   <string name="navigation_item_login">Entrar</string>
   <string name="skip_login_title">Você realmente quer pular a entrada?</string>
-  <string name="skip_login_message">Você não poderá enviar fotos.</string>
+  <string name="skip_login_message">Você teria que entrar para enviar fotos no futuro.</string>
   <string name="login_alert_message">Entre para usar esta funcionalidade</string>
   <string name="copy_wikicode">Copie o wikitexto para a área de transferência</string>
   <string name="wikicode_copied">O wikitexto foi copiado para a área de transferência</string>
@@ -308,6 +318,8 @@
   <string name="provider_searches">Consultas recentemente pesquisadas</string>
   <string name="error_loading_categories">Ocorreu um erro ao carregar categorias.</string>
   <string name="error_loading_subcategories">Ocorreu um erro ao carregar subcategorias.</string>
+  <string name="search_tab_title_media">MÍDIA</string>
+  <string name="search_tab_title_categories">CATEGORIAS</string>
   <string name="successful_wikidata_edit">Imagem adicionada a %1$s na wiki Wikidata!</string>
   <string name="wikidata_edit_failure">Falha ao atualizar a entidade Wikidata correspondente!</string>
   <string name="menu_set_wallpaper">Definir como imagem de fundo</string>
@@ -344,6 +356,7 @@
   <string name="statistics">ESTATÍSTICAS</string>
   <string name="statistics_thanks">Agradecimentos recebidos</string>
   <string name="statistics_featured">Imagens destacadas</string>
+  <string name="statistics_wikidata_edits">Imagens via \"Locais próximos\"</string>
   <string name="level">NÍVEL</string>
   <string name="images_uploaded">Imagens carregadas</string>
   <string name="image_reverts">Imagens não revertidas</string>
@@ -356,9 +369,14 @@
   <string name="images_used_explanation">O número de imagens que carregou na wiki Commons que foram usadas em artigos na Wikimedia</string>
   <string name="error_occurred">Erro ocorrido!</string>
   <string name="notifications_channel_name_all">Notificação da wiki Commons</string>
+  <string name="preference_author_name_toggle">Usar o nome do autor personalizado</string>
+  <string name="preference_author_name_toggle_summary">Usar um nome de autor personalizado em vez de seu nome de usuário ao carregar as fotos</string>
+  <string name="preference_author_name">Nome do autor personalizado</string>
+  <string name="preference_author_name_summary">O nome do autor personalizado a usar em vez do seu nome de usuário nos carregamentos</string>
   <string name="contributions_fragment">Contribuições</string>
   <string name="nearby_fragment">Próximo</string>
   <string name="notifications">Notificações</string>
+  <string name="archived_notifications">Notificações (arquivadas)</string>
   <string name="display_nearby_notification">Exibir notificação próxima</string>
   <string name="display_nearby_notification_summary">Toque aqui para ver o local mais próximo que precisa de fotos</string>
   <string name="no_close_nearby">Nenhum lugar próximo encontrado perto de você</string>
@@ -391,10 +409,8 @@
   <string name="deletion_reason_bad_for_my_privacy">Eu percebi que é ruim para minha privacidade</string>
   <string name="deletion_reason_no_longer_want_public">Eu mudei de ideia, eu não quero mais que seja publicamente visível</string>
   <string name="deletion_reason_not_interesting">Desculpe, esta foto não é interessante para uma enciclopédia</string>
-  <string name="uploaded_by_myself">Enviado por mim mesmo em</string>
-  <string name="used_by">,usado em</string>
-  <string name="articles">artigos</string>
-  <string name="no_uploads">Bem-vindo ao Commons!\n\nCarregue a sua primeira mídia tocando no ícone da câmera ou galeria acima.</string>
+  <string name="uploaded_by_myself" fuzzy="true">Enviado por mim mesmo em</string>
+  <string name="no_uploads" fuzzy="true">Bem-vindo ao Commons!\n\nCarregue a sua primeira mídia tocando no ícone da câmera ou galeria acima.</string>
   <string name="desc_language_Worldwide">Global</string>
   <string name="desc_language_America">América</string>
   <string name="desc_language_Europe">Europa</string>
@@ -414,8 +430,27 @@
   <string name="never_ask_again">Nunca mais pergunte isso</string>
   <string name="display_location_permission_title">Exibir permissão de local</string>
   <string name="display_location_permission_explanation">Peça permissão de localização quando necessário para o recurso de exibição de cartão de notificação nas proximidades.</string>
+  <string name="achievements_fetch_failed">Algo deu errado, não conseguimos buscar suas conquistas</string>
   <string name="ends_on">Termina em:</string>
   <string name="display_campaigns">Exibir campanhas</string>
   <string name="display_campaigns_explanation">Toque aqui para ver as campanhas em andamento</string>
   <string name="nearby_campaign_dismiss_message">Você não verá mais as campanhas. No entanto, você pode reativar essa notificação em Configurações, se desejar.</string>
+  <string name="this_function_needs_network_connection">Esta função requer conexão de rede, por favor, verifique suas configurações de conexão.</string>
+  <string name="bad_token_error_proposed_solution">O carregamento falhou devido a problemas com o token de edição. Por favor, tente sair e entrar novamente.</string>
+  <string name="error_processing_image">Ocorreu um erro ao processar a imagem. Tente novamente, por favor!</string>
+  <plurals name="receiving_shared_content">
+    <item quantity="one">Recebendo conteúdo compartilhado. O processamento da imagem pode demorar algum tempo, dependendo do tamanho da imagem e do seu dispositivo</item>
+    <item quantity="other">Recebendo conteúdo compartilhado. O processamento das imagens pode levar algum tempo, dependendo do tamanho das imagens e do dispositivo</item>
+  </plurals>
+  <string name="no_image">Nenhuma imagem usada</string>
+  <string name="no_image_reverted">Nenhuma imagem revertida</string>
+  <string name="no_image_uploaded">Nenhuma imagem enviada</string>
+  <string name="no_notification">Você não tem notificações não lidas</string>
+  <string name="no_archived_notification">Você não tem nenhuma notificação arquivada</string>
+  <string name="share_logs_using">Compartilhar registros usando</string>
+  <string name="menu_option_archived">Ver arquivadas</string>
+  <string name="menu_option_unread">Ver não lidas</string>
+  <string name="error_occurred_in_picking_images">Ocorreu um erro ao escolher imagens</string>
+  <string name="image_chooser_title">Escolha imagens para fazer o carregamento</string>
+  <string name="please_wait">Aguarde…</string>
 </resources>

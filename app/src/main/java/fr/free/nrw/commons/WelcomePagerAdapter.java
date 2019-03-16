@@ -1,17 +1,13 @@
 package fr.free.nrw.commons;
 
 import android.net.Uri;
-import android.support.annotation.Nullable;
-import android.support.v4.view.PagerAdapter;
+import androidx.annotation.Nullable;
+import androidx.viewpager.widget.PagerAdapter;
 import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-
-import butterknife.ButterKnife;
-import butterknife.OnClick;
-import butterknife.Optional;
 
 public class WelcomePagerAdapter extends PagerAdapter {
     private static final int[] PAGE_LAYOUTS = new int[]{

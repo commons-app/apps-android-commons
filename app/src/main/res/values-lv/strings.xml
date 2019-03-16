@@ -101,6 +101,7 @@
   <string name="navigation_item_logout">Iziet</string>
   <string name="navigation_item_info">Apmācība</string>
   <string name="no_description_found">apraksts nav atrasts</string>
+  <string name="upload_problem_image_dark">Attēls ir pārāk tumšs.</string>
   <string name="give_permission">Atļaut</string>
   <string name="use_external_storage">Izmantot ārējo krātuvi</string>
   <string name="skip_login">Izlaist</string>
@@ -118,11 +119,12 @@
   <string name="title_activity_bookmarks">Grāmatzīmes</string>
   <string name="provider_bookmarks">Grāmatzīmes</string>
   <string name="provider_bookmarks_location">Grāmatzīmes</string>
-  <string name="articles">raksti</string>
   <string name="desc_language_America">Amerika</string>
   <string name="desc_language_Middle_East">Vidējie Austrumi</string>
   <string name="desc_language_Asia">Āzija</string>
   <string name="yes_submit">Jā, iesniegt</string>
   <string name="nearby_card_permission_title">Atļaujas pieprasījums</string>
   <string name="never_ask_again">Nekad vairs šo nejautāt</string>
+  <string name="menu_option_archived">Skatīt arhivētos</string>
+  <string name="menu_option_unread">Skatīt nelasītos</string>
 </resources>

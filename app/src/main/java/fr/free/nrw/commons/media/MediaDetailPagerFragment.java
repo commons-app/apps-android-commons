@@ -3,20 +3,19 @@ package fr.free.nrw.commons.media;
 import android.annotation.SuppressLint;
 import android.app.DownloadManager;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.database.DataSetObserver;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
-import android.support.design.widget.Snackbar;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentStatePagerAdapter;
-import android.support.v4.content.ContextCompat;
-import android.support.v4.view.ViewPager;
+import com.google.android.material.snackbar.Snackbar;
+import androidx.core.app.ActivityCompat;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentStatePagerAdapter;
+import androidx.core.content.ContextCompat;
+import androidx.viewpager.widget.ViewPager;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -40,8 +39,11 @@ import fr.free.nrw.commons.category.CategoryImagesActivity;
 import fr.free.nrw.commons.contributions.Contribution;
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
 import fr.free.nrw.commons.explore.SearchActivity;
+import fr.free.nrw.commons.kvstore.BasicKvStore;
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
 import fr.free.nrw.commons.utils.ImageUtils;
+import fr.free.nrw.commons.utils.NetworkUtils;
+import fr.free.nrw.commons.utils.ViewUtil;
 import timber.log.Timber;
 
 import static android.Manifest.permission.READ_EXTERNAL_STORAGE;
@@ -52,19 +54,12 @@ import static android.widget.Toast.LENGTH_SHORT;
 
 public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment implements ViewPager.OnPageChangeListener {
 
-    @Inject
-    MediaWikiApi mwApi;
-    @Inject
-    SessionManager sessionManager;
-    @Inject
-    @Named("default_preferences")
-    SharedPreferences prefs;
+    @Inject MediaWikiApi mwApi;
+    @Inject SessionManager sessionManager;
+    @Inject @Named("default_preferences") BasicKvStore basicKvStore;
+    @Inject BookmarkPicturesDao bookmarkDao;
 
-    @Inject
-    BookmarkPicturesDao bookmarkDao;
-
-    @BindView(R.id.mediaDetailsPager)
-    ViewPager pager;
+    @BindView(R.id.mediaDetailsPager) ViewPager pager;
     private Boolean editable;
     private boolean isFeaturedImage;
     MediaDetailAdapter adapter;
@@ -183,6 +178,10 @@ public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment imple
                 return true;
             case R.id.menu_download_current_image:
                 // Download
+                if (!NetworkUtils.isInternetConnectionEstablished(getActivity())) {
+                    ViewUtil.showShortSnackbar(getView(), R.string.no_internet);
+                    return false;
+                }
                 downloadMedia(m);
                 return true;
             case R.id.menu_set_as_wallpaper:

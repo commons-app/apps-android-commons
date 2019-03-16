@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Authors:
+* Hamilton Abreu
 * Sarilho1
 -->
 <resources>
-  <string name="crash_dialog_title">O Commons falhou</string>
+  <string name="crash_dialog_title">A aplicação Commons falhou</string>
   <string name="crash_dialog_text">Ups! Algo correu mal.</string>
-  <string name="crash_dialog_comment_prompt">Envia-nos um e-mail, reportando o que estava a fazer. Isso nos ajudará a corrigi-lo.</string>
+  <string name="crash_dialog_comment_prompt">Diga-nos o que estava a fazer e depois notifique-nos por correio eletrónico. Isto ajuda-nos a corrigir o problema.</string>
   <string name="crash_dialog_ok_toast">Obrigado!</string>
 </resources>

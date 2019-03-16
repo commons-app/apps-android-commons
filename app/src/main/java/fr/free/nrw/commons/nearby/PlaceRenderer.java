@@ -1,12 +1,13 @@
 package fr.free.nrw.commons.nearby;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.net.Uri;
-import android.support.transition.TransitionManager;
-import android.support.v4.app.Fragment;
-import android.support.v7.app.AlertDialog;
-import android.support.v7.widget.PopupMenu;
+import androidx.transition.TransitionManager;
+import androidx.fragment.app.Fragment;
+import androidx.appcompat.app.AlertDialog;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.appcompat.widget.PopupMenu;
+import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -15,6 +16,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.facebook.drawee.view.SimpleDraweeView;
 import com.pedrogomez.renderers.Renderer;
 
 import java.util.ArrayList;
@@ -30,21 +32,19 @@ import fr.free.nrw.commons.auth.LoginActivity;
 import fr.free.nrw.commons.bookmarks.locations.BookmarkLocationsDao;
 import fr.free.nrw.commons.contributions.ContributionController;
 import fr.free.nrw.commons.di.ApplicationlessInjection;
-import fr.free.nrw.commons.utils.PlaceUtils;
+import fr.free.nrw.commons.kvstore.BasicKvStore;
+import fr.free.nrw.commons.kvstore.JsonKvStore;
 import timber.log.Timber;
 
 import static fr.free.nrw.commons.theme.NavigationBaseActivity.startActivityWithFlags;
-import static fr.free.nrw.commons.wikidata.WikidataConstants.WIKIDATA_ENTITY_ID_PREF;
-import static fr.free.nrw.commons.wikidata.WikidataConstants.WIKIDATA_ITEM_LOCATION;
+import static fr.free.nrw.commons.wikidata.WikidataConstants.PLACE_OBJECT;
 
 public class PlaceRenderer extends Renderer<Place> {
 
-    @Inject
-    @Named("application_preferences") SharedPreferences applicationPrefs;
     @BindView(R.id.tvName) TextView tvName;
     @BindView(R.id.tvDesc) TextView tvDesc;
     @BindView(R.id.distance) TextView distance;
-    @BindView(R.id.icon) ImageView icon;
+    @BindView(R.id.icon) SimpleDraweeView icon;
     @BindView(R.id.buttonLayout) LinearLayout buttonLayout;
     @BindView(R.id.cameraButton) LinearLayout cameraButton;
 
@@ -53,9 +53,9 @@ public class PlaceRenderer extends Renderer<Place> {
     @BindView(R.id.iconOverflow) LinearLayout iconOverflow;
     @BindView(R.id.cameraButtonText) TextView cameraButtonText;
     @BindView(R.id.galleryButtonText) TextView galleryButtonText;
-    @BindView(R.id.bookmarkButton) LinearLayout bookmarkButton;
+    @BindView(R.id.bookmarkRowButton) LinearLayout bookmarkButton;
     @BindView(R.id.bookmarkButtonText) TextView bookmarkButtonText;
-    @BindView(R.id.bookmarkButtonImage) ImageView bookmarkButtonImage;
+    @BindView(R.id.bookmarkRowButtonImage) ImageView bookmarkButtonImage;
 
     @BindView(R.id.directionsButtonText) TextView directionsButtonText;
     @BindView(R.id.iconOverflowText) TextView iconOverflowText;
@@ -68,10 +68,11 @@ public class PlaceRenderer extends Renderer<Place> {
     private ContributionController controller;
     private OnBookmarkClick onBookmarkClick;
 
-    @Inject
-    BookmarkLocationsDao bookmarkLocationDao;
-    @Inject @Named("prefs") SharedPreferences prefs;
-    @Inject @Named("direct_nearby_upload_prefs") SharedPreferences directPrefs;
+    @Inject BookmarkLocationsDao bookmarkLocationDao;
+    @Inject @Named("application_preferences") BasicKvStore applicationKvStore;
+    @Inject @Named("defaultKvStore") BasicKvStore prefs;
+    @Inject @Named("direct_nearby_upload_prefs") JsonKvStore directKvStore;
+    @Inject @Named("default_preferences") BasicKvStore defaultKvStore;
 
     public PlaceRenderer(){
         openedItems = new ArrayList<>();
@@ -111,6 +112,11 @@ public class PlaceRenderer extends Renderer<Place> {
                 closeLayout(buttonLayout);
             } else {
                 openLayout(buttonLayout);
+                RecyclerView recyclerView = (RecyclerView) view.getParent();
+                int lastPosition = recyclerView.getAdapter().getItemCount() - 1;
+                if (recyclerView.getChildLayoutPosition(view) == lastPosition) {
+                    ((LinearLayoutManager) recyclerView.getLayoutManager()).scrollToPositionWithOffset(lastPosition, buttonLayout.getHeight());
+                }
             }
 
         };
@@ -125,55 +131,53 @@ public class PlaceRenderer extends Renderer<Place> {
         });
 
         cameraButton.setOnClickListener(view2 -> {
-            if (applicationPrefs.getBoolean("login_skipped", false)) {
+            if (applicationKvStore.getBoolean("login_skipped", false)) {
                 // prompt the user to login
                 new AlertDialog.Builder(getContext())
                         .setMessage(R.string.login_alert_message)
                         .setPositiveButton(R.string.login, (dialog, which) -> {
                             startActivityWithFlags( getContext(), LoginActivity.class, Intent.FLAG_ACTIVITY_CLEAR_TOP,
                                     Intent.FLAG_ACTIVITY_SINGLE_TOP);
-                            prefs.edit().putBoolean("login_skipped", false).apply();
+                            prefs.putBoolean("login_skipped", false);
                             fragment.getActivity().finish();
                         })
                         .show();
             } else {
                 Timber.d("Camera button tapped. Image title: " + place.getName() + "Image desc: " + place.getLongDescription());
-                DirectUpload directUpload = new DirectUpload(fragment, controller);
                 storeSharedPrefs();
-                directUpload.initiateCameraUpload();
+                controller.initiateCameraPick(fragment.getActivity());
             }
         });
 
 
         galleryButton.setOnClickListener(view3 -> {
-            if (applicationPrefs.getBoolean("login_skipped", false)) {
+            if (applicationKvStore.getBoolean("login_skipped", false)) {
                 // prompt the user to login
                 new AlertDialog.Builder(getContext())
                         .setMessage(R.string.login_alert_message)
                         .setPositiveButton(R.string.login, (dialog, which) -> {
                             startActivityWithFlags( getContext(), LoginActivity.class, Intent.FLAG_ACTIVITY_CLEAR_TOP,
                                     Intent.FLAG_ACTIVITY_SINGLE_TOP);
-                            prefs.edit().putBoolean("login_skipped", false).apply();
+                            prefs.putBoolean("login_skipped", false);
                             fragment.getActivity().finish();
                         })
                         .show();
             }else {
                 Timber.d("Gallery button tapped. Image title: " + place.getName() + "Image desc: " + place.getLongDescription());
-                DirectUpload directUpload = new DirectUpload(fragment, controller);
                 storeSharedPrefs();
-                directUpload.initiateGalleryUpload();
+                controller.initiateGalleryPick(fragment.getActivity(), false);
             }
         });
 
         bookmarkButton.setOnClickListener(view4 -> {
-            if (applicationPrefs.getBoolean("login_skipped", false)) {
+            if (applicationKvStore.getBoolean("login_skipped", false)) {
                 // prompt the user to login
                 new AlertDialog.Builder(getContext())
                         .setMessage(R.string.login_alert_message)
                         .setPositiveButton(R.string.login, (dialog, which) -> {
                             startActivityWithFlags( getContext(), LoginActivity.class, Intent.FLAG_ACTIVITY_CLEAR_TOP,
                                     Intent.FLAG_ACTIVITY_SINGLE_TOP);
-                            prefs.edit().putBoolean("login_skipped", false).apply();
+                            prefs.putBoolean("login_skipped", false);
                             fragment.getActivity().finish();
                         })
                         .show();
@@ -184,19 +188,16 @@ public class PlaceRenderer extends Renderer<Place> {
                 if (onBookmarkClick != null) {
                     onBookmarkClick.onClick();
                 }
+                else {
+                    ((NearbyMapFragment)((NearbyFragment)((NearbyListFragment)fragment).getParentFragment()).getChildFragmentManager().findFragmentByTag(NearbyMapFragment.class.getSimpleName())).updateMarker(isBookmarked, place);
+                }
             }
         });
     }
 
     private void storeSharedPrefs() {
-        SharedPreferences.Editor editor = directPrefs.edit();
-        Timber.d("directPrefs stored");
-        editor.putString("Title", place.getName());
-        editor.putString("Desc", place.getLongDescription());
-        editor.putString("Category", place.getCategory());
-        editor.putString(WIKIDATA_ENTITY_ID_PREF, place.getWikiDataEntityId());
-        editor.putString(WIKIDATA_ITEM_LOCATION, PlaceUtils.latLangToString(place.location));
-        editor.apply();
+        Timber.d("Store place object %s", place.toString());
+        directKvStore.putJson(PLACE_OBJECT, place);
     }
 
     private void closeLayout(LinearLayout buttonLayout){
@@ -220,6 +221,8 @@ public class PlaceRenderer extends Renderer<Place> {
         }
         tvDesc.setText(descriptionText);
         distance.setText(place.distance);
+
+
         icon.setImageResource(place.getLabel().getIcon());
 
         directionsButton.setOnClickListener(view -> {

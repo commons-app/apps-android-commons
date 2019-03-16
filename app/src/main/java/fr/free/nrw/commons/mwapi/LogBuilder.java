@@ -1,6 +1,6 @@
 package fr.free.nrw.commons.mwapi;
 
-import android.content.SharedPreferences;
+import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Build;
 
@@ -12,7 +12,9 @@ import java.net.URL;
 
 import fr.free.nrw.commons.BuildConfig;
 import fr.free.nrw.commons.Utils;
+import fr.free.nrw.commons.kvstore.BasicKvStore;
 import fr.free.nrw.commons.settings.Prefs;
+import fr.free.nrw.commons.utils.ConfigUtils;
 
 @SuppressWarnings("WeakerAccess")
 public class LogBuilder {
@@ -20,7 +22,8 @@ public class LogBuilder {
     private final JSONObject data;
     private final long rev;
     private final String schema;
-    private final SharedPreferences prefs;
+    private final BasicKvStore prefs;
+    private final Context context;
 
     /**
      * Main constructor of LogBuilder
@@ -30,12 +33,17 @@ public class LogBuilder {
      * @param mwApi    Wiki media API instance
      * @param prefs    Instance of SharedPreferences
      */
-    LogBuilder(String schema, long revision, MediaWikiApi mwApi, SharedPreferences prefs) {
+    LogBuilder(String schema,
+               long revision,
+               MediaWikiApi mwApi,
+               BasicKvStore prefs,
+               Context context) {
         this.prefs = prefs;
         this.data = new JSONObject();
         this.schema = schema;
         this.rev = revision;
         this.mwApi = mwApi;
+        this.context = context;
     }
 
     /**
@@ -65,7 +73,7 @@ public class LogBuilder {
             fullData.put("wiki", BuildConfig.EVENTLOG_WIKI);
             data.put("device", EventLog.DEVICE);
             data.put("platform", "Android/" + Build.VERSION.RELEASE);
-            data.put("appversion", "Android/" + BuildConfig.VERSION_NAME);
+            data.put("appversion", "Android/" + ConfigUtils.getVersionNameWithSha(context));
             fullData.put("event", data);
             return new URL(BuildConfig.EVENTLOG_URL + "?" + Utils.urlEncode(fullData.toString()) + ";");
         } catch (MalformedURLException | JSONException e) {

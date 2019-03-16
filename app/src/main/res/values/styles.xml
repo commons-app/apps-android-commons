@@ -2,12 +2,21 @@
 
     <style name="DarkAppTheme" parent="Theme.AppCompat.NoActionBar">
         <item name="contributionsListBackground">@color/contributionListDarkBackground</item>
-        <item name="mainTabBackground">@color/contributionListDarkBackground</item>
+        <item name="tabBackground">@color/contributionListDarkBackground</item>
+        <item name="tabIndicatorColor">@color/white</item>
+        <item name="tabSelectedTextColor">@color/white</item>
+        <item name="tabTextColor">@color/white</item>
         <item name="mainBackground">@color/main_background_dark</item>
+        <item name="achievementBackground">@color/achievement_background_dark</item>
+        <item name="drawerHeaderBackground">@color/drawerHeader_background_dark</item>
+        <item name="tutorialBackground">@color/tutorial_background_dark</item>
+        <item name="icon">@color/primaryTextColor</item>
         <item name="colorPrimary">@color/primaryColor</item>
         <item name="colorPrimaryDark">@color/primaryDarkColor</item>
         <item name="colorAccent">@color/white</item>
         <item name="colorButtonNormal">@color/primaryColor</item>
+        <item name="bookmarkButtonColor">@color/button_blue_dark</item>
+        <item name="rowButtonColor">@color/button_blue_dark</item>
 
         <item name="semitransparentText">@color/commons_app_blue_dark</item>
         <item name="subBackground">@color/sub_background_dark</item>
@@ -23,18 +32,24 @@
         <item name="textEnabled">@color/enabled_button_text_color_dark</item>
         <item name="mainCardBackground">@color/main_background_dark</item>
         <item name="mainScreenNearbyPermissionbutton">@style/DarkFlatNearbyPermissionButton</item>
-
-        <!-- SearchView cursor color -->
-        <item name="colorControlActivated">@android:color/white</item>
     </style>
 
     <style name="LightAppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="contributionsListBackground">@color/white</item>
-        <item name="mainTabBackground">@color/primaryColor</item>
+        <item name="tabBackground">@color/primaryColor</item>
+        <item name="tabIndicatorColor">@color/white</item>
+        <item name="tabSelectedTextColor">@color/white</item>
+        <item name="tabTextColor">@color/white</item>
         <item name="mainBackground">@color/main_background_light</item>
+        <item name="achievementBackground">@color/achievement_background_light</item>
+        <item name="drawerHeaderBackground">@color/drawerHeader_background_light</item>
+        <item name="tutorialBackground">@color/tutorial_background_light</item>
+        <item name="icon">@color/secondaryTextColor</item>
         <item name="colorPrimaryDark">@color/primaryDarkColor</item>
         <item name="colorAccent">@color/primaryColor</item>
         <item name="colorButtonNormal">@color/primaryColor</item>
+        <item name="bookmarkButtonColor">@color/button_blue</item>
+        <item name="rowButtonColor">@color/button_blue</item>
 
         <item name="semitransparentText">@color/commons_app_blue_light</item>
         <item name="subBackground">@color/sub_background_light</item>
@@ -50,8 +65,9 @@
         <item name="textEnabled">@color/enabled_button_text_color_light</item>
         <item name="mainCardBackground">@color/primaryDarkColor</item>
         <item name="mainScreenNearbyPermissionbutton">@style/LightFlatNearbyPermissionButton</item>
+    </style>
 
-        <!-- SearchView cursor color -->
+    <style name="WhiteSearchBarTheme" parent="DarkAppTheme">
         <item name="colorControlActivated">@android:color/white</item>
     </style>
 

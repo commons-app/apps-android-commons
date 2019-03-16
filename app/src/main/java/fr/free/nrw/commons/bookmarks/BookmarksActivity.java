@@ -4,17 +4,19 @@ import android.content.Context;
 import android.content.Intent;
 import android.database.DataSetObserver;
 import android.os.Bundle;
-import android.support.design.widget.TabLayout;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.view.ViewPager;
+import com.google.android.material.tabs.TabLayout;
+import androidx.fragment.app.FragmentManager;
+import androidx.viewpager.widget.ViewPager;
 import android.view.View;
 import android.widget.AdapterView;
+
+import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.R;
-import fr.free.nrw.commons.auth.AuthenticatedActivity;
+import fr.free.nrw.commons.contributions.ContributionController;
 import fr.free.nrw.commons.media.MediaDetailPagerFragment;
 import fr.free.nrw.commons.theme.NavigationBaseActivity;
 
@@ -28,8 +30,11 @@ public class BookmarksActivity extends NavigationBaseActivity
     private MediaDetailPagerFragment mediaDetails;
     @BindView(R.id.viewPagerBookmarks)
     ViewPager viewPager;
-    @BindView(R.id.tabLayoutBookmarks)
+    @BindView(R.id.tab_layout)
     TabLayout tabLayout;
+
+    @Inject
+    ContributionController controller;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,7 +59,7 @@ public class BookmarksActivity extends NavigationBaseActivity
      */
     public static void startYourself(Context context) {
         Intent intent = new Intent(context, BookmarksActivity.class);
-        intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+        intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT | Intent.FLAG_ACTIVITY_SINGLE_TOP);
         context.startActivity(intent);
     }
 
@@ -65,6 +70,12 @@ public class BookmarksActivity extends NavigationBaseActivity
             adapter.requestPictureListUpdate();
             initDrawer();
         }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        controller.handleActivityResult(this, requestCode, resultCode, data);
     }
 
     /**

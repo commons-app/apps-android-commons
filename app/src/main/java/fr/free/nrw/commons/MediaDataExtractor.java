@@ -1,6 +1,6 @@
 package fr.free.nrw.commons;
 
-import android.support.annotation.Nullable;
+import androidx.annotation.Nullable;
 import android.text.TextUtils;
 
 import org.w3c.dom.Document;
@@ -66,7 +66,7 @@ public class MediaDataExtractor {
             Timber.d("Nominated for deletion: " + deletionStatus);
         }
         catch (Exception e){
-            Timber.d(e.getMessage());
+            Timber.d(e, "Exception during fetching");
         }
 
         MediaResult result = mediaWikiApi.fetchMediaByFilename(filename);

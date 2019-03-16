@@ -1,6 +1,5 @@
 package fr.free.nrw.commons.upload
 
-import android.content.ContentResolver
 import android.content.SharedPreferences
 import fr.free.nrw.commons.caching.CacheController
 import fr.free.nrw.commons.mwapi.CategoryApi
@@ -8,8 +7,6 @@ import org.junit.Before
 import org.junit.Test
 import org.mockito.InjectMocks
 import org.mockito.Mock
-import org.mockito.Mockito.anyString
-import org.mockito.Mockito.mock
 import org.mockito.MockitoAnnotations
 import javax.inject.Inject
 import javax.inject.Named

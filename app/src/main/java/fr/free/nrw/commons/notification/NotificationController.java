@@ -25,15 +25,18 @@ public class NotificationController {
         this.sessionManager = sessionManager;
     }
 
-    public List<Notification> getNotifications() throws IOException {
+    public List<Notification> getNotifications(boolean archived) throws IOException {
         if (mediaWikiApi.validateLogin()) {
-            return mediaWikiApi.getNotifications();
+            return mediaWikiApi.getNotifications(archived);
         } else {
             Boolean authTokenValidated = sessionManager.revalidateAuthToken();
             if (authTokenValidated != null && authTokenValidated) {
-                return mediaWikiApi.getNotifications();
+                return mediaWikiApi.getNotifications(archived);
             }
         }
         return new ArrayList<>();
+    }
+    public boolean markAsRead(Notification notification) throws IOException{
+        return mediaWikiApi.markNotificationAsRead(notification);
     }
 }

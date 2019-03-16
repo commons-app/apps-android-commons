@@ -3,7 +3,7 @@ package fr.free.nrw.commons.utils;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
-import android.support.graphics.drawable.VectorDrawableCompat;
+import androidx.vectordrawable.graphics.drawable.VectorDrawableCompat;
 import android.util.DisplayMetrics;
 
 public class UiUtils {
