@@ -19,15 +19,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
-import javax.inject.Named;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import dagger.android.support.DaggerFragment;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.contributions.ContributionController;
-import fr.free.nrw.commons.kvstore.BasicKvStore;
-import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.nearby.NearbyAdapterFactory;
 import fr.free.nrw.commons.nearby.Place;
 
@@ -39,8 +36,6 @@ public class BookmarkLocationsFragment extends DaggerFragment {
     @BindView(R.id.parentLayout) RelativeLayout parentLayout;
 
     @Inject BookmarkLocationsController controller;
-    @Inject @Named("direct_nearby_upload_prefs") JsonKvStore directKvStore;
-    @Inject @Named("default_preferences") BasicKvStore defaultKvStore;
     private NearbyAdapterFactory adapterFactory;
     @Inject ContributionController contributionController;
 

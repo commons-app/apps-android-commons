@@ -80,7 +80,7 @@ public class UploadActivity extends BaseActivity implements UploadView, SimilarI
     @Inject MediaWikiApi mwApi;
     @Inject
     ContributionController contributionController;
-    @Inject @Named("direct_nearby_upload_prefs") JsonKvStore directKvStore;
+    @Inject @Named("default_preferences") JsonKvStore directKvStore;
     @Inject UploadPresenter presenter;
     @Inject CategoriesModel categoriesModel;
     @Inject SessionManager sessionManager;

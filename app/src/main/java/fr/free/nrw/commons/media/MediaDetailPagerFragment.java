@@ -39,7 +39,8 @@ import fr.free.nrw.commons.category.CategoryImagesActivity;
 import fr.free.nrw.commons.contributions.Contribution;
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
 import fr.free.nrw.commons.explore.SearchActivity;
-import fr.free.nrw.commons.kvstore.BasicKvStore;
+import fr.free.nrw.commons.kvstore.JsonKvStore;
+import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
 import fr.free.nrw.commons.utils.ImageUtils;
 import fr.free.nrw.commons.utils.NetworkUtils;
@@ -56,7 +57,7 @@ public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment imple
 
     @Inject MediaWikiApi mwApi;
     @Inject SessionManager sessionManager;
-    @Inject @Named("default_preferences") BasicKvStore basicKvStore;
+    @Inject @Named("default_preferences") JsonKvStore store;
     @Inject BookmarkPicturesDao bookmarkDao;
 
     @BindView(R.id.mediaDetailsPager) ViewPager pager;

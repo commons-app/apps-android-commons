@@ -15,15 +15,12 @@ import java.util.Collections;
 import java.util.List;
 
 import javax.inject.Inject;
-import javax.inject.Named;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.contributions.ContributionController;
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
-import fr.free.nrw.commons.kvstore.BasicKvStore;
-import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.location.LatLng;
 import timber.log.Timber;
 
@@ -39,8 +36,6 @@ public class NearbyListFragment extends CommonsDaggerSupportFragment {
     private RecyclerView recyclerView;
 
     @Inject ContributionController controller;
-    @Inject @Named("direct_nearby_upload_prefs") JsonKvStore directKvStore;
-    @Inject @Named("default_preferences") BasicKvStore defaultKvStore;
     @Inject Gson gson;
 
     @Override

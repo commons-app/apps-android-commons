@@ -31,13 +31,14 @@ import fr.free.nrw.commons.BuildConfig;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.auth.AuthenticatedActivity;
 import fr.free.nrw.commons.auth.SessionManager;
-import fr.free.nrw.commons.kvstore.BasicKvStore;
+import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.location.LocationServiceManager;
 import fr.free.nrw.commons.nearby.NearbyFragment;
 import fr.free.nrw.commons.nearby.NearbyNotificationCardView;
 import fr.free.nrw.commons.notification.Notification;
 import fr.free.nrw.commons.notification.NotificationActivity;
 import fr.free.nrw.commons.notification.NotificationController;
+import fr.free.nrw.commons.quiz.QuizChecker;
 import fr.free.nrw.commons.upload.UploadService;
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -59,10 +60,9 @@ public class MainActivity extends AuthenticatedActivity implements FragmentManag
     @Inject
     public LocationServiceManager locationManager;
     @Inject
-    @Named("default_preferences")
-    public BasicKvStore defaultKvStore;
-    @Inject
     NotificationController notificationController;
+    @Inject
+    QuizChecker quizChecker;
 
 
     public Intent uploadServiceIntent;
@@ -494,6 +494,7 @@ public class MainActivity extends AuthenticatedActivity implements FragmentManag
     protected void onResume() {
         super.onResume();
         setNotificationCount();
+        quizChecker.initQuizCheck(this);
     }
 
     @Override

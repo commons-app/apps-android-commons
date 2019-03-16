@@ -29,7 +29,7 @@ import fr.free.nrw.commons.HandlerService;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.auth.SessionManager;
 import fr.free.nrw.commons.contributions.Contribution;
-import fr.free.nrw.commons.kvstore.BasicKvStore;
+import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.settings.Prefs;
 import fr.free.nrw.commons.utils.ViewUtil;
 import timber.log.Timber;
@@ -39,7 +39,7 @@ public class UploadController {
     private UploadService uploadService;
     private SessionManager sessionManager;
     private Context context;
-    private BasicKvStore defaultKvStore;
+    private JsonKvStore store;
 
     public interface ContributionUploadProgress {
         void onUploadStarted(Contribution contribution);
@@ -49,10 +49,10 @@ public class UploadController {
     @Inject
     public UploadController(SessionManager sessionManager,
                             Context context,
-                            BasicKvStore store) {
+                            JsonKvStore store) {
         this.sessionManager = sessionManager;
         this.context = context;
-        this.defaultKvStore = store;
+        this.store = store;
     }
 
     private boolean isUploadServiceConnected;
@@ -110,8 +110,8 @@ public class UploadController {
         //Set creator, desc, and license
 
         // If author name is enabled and set, use it
-        if (defaultKvStore.getBoolean("useAuthorName", false)) {
-            String authorName = defaultKvStore.getString("authorName", "");
+        if (store.getBoolean("useAuthorName", false)) {
+            String authorName = store.getString("authorName", "");
             contribution.setCreator(authorName);
         }
 
@@ -130,7 +130,7 @@ public class UploadController {
             contribution.setDescription("");
         }
 
-        String license = defaultKvStore.getString(Prefs.DEFAULT_LICENSE, Prefs.Licenses.CC_BY_SA_3);
+        String license = store.getString(Prefs.DEFAULT_LICENSE, Prefs.Licenses.CC_BY_SA_3);
         contribution.setLicense(license);
 
         //FIXME: Add permission request here. Only executeAsyncTask if permission has been granted
