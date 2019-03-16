@@ -124,7 +124,7 @@ public class UploadModel {
 
         if (place != null) {
             uploadItem.title.setTitleText(place.getName());
-            uploadItem.descriptions.get(0).setDescriptionText(place.getLongDescription());
+            uploadItem.descriptions.get(0).setDescriptionText(place.getLongDescription().equals("?")?"":place.getLongDescription());
             //TODO figure out if default descriptions in other languages exist
             uploadItem.descriptions.get(0).setLanguageCode("en");
         }
